@@ -52,8 +52,8 @@
 			 		<td style="text-align: center;">未到账</td>
 			 		<td style="text-align: center;" name="operate">
 			 			<sec:authorize ifAnyGranted="TMS_F_SC_VERIFY" >
-				 			<a href="javascript:void(0);" class="btnsearch" id="checkok-${item.id }" onclick="checkApplys(${item.id},${item.guideType},3)">审核通过</a>
-				 			<a href="javascript:void(0);" class="btnsearch" id="checkok-${item.id }" onclick="checkUnpass(${item.id},${item.guideType});">审核不通过</a>
+				 			<a href="javascript:void(0);" class="btnsearch" id="checkok-${item.id }" onclick="checkApplys(${item.id},${item.guideType==null?0:item.guideType},3)">审核通过</a>
+				 			<a href="javascript:void(0);" class="btnsearch" id="checkok-${item.id }" onclick="checkUnpass(${item.id},${item.guideType==null?0:item.guideType});">审核不通过</a>
 			 			</sec:authorize>
 			 		</td>
 					</tr>
