@@ -235,12 +235,12 @@
 			<scope>provided</scope>
 		</dependency>
 
-			<dependency>
+		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 
 		<dependency>
 			<groupId>net.sf.json-lib</groupId>
@@ -461,9 +461,9 @@
 			</resource>
 		</resources>
 	</build>
-	
+
 	<properties>
-	  <excludePropertyFiles></excludePropertyFiles>
+		<excludePropertyFiles></excludePropertyFiles>
 	</properties>
 
 	<profiles>

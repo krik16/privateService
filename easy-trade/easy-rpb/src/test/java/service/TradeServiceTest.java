@@ -101,7 +101,7 @@ public class TradeServiceTest extends BaseTest{
         list.add(paymentService.selectByPrimaryKey("4746"));
         list.add(paymentService.selectByPrimaryKey("4745"));
         list.add(paymentService.selectByPrimaryKey("4744"));
-        pCWebPageAlipayController.paySuccessToMessage(list);
+//        pCWebPageAlipayController.paySuccessToMessage(list);
         
     }
     

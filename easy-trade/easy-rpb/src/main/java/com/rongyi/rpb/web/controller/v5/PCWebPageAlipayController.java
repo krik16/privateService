@@ -69,8 +69,8 @@ public class PCWebPageAlipayController extends BaseController {
 			if (Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE2 == paymentEntity.getTradeType()) {// 打款给卖家
 				map = pcWebPageAlipayService.getOnePayInfo(paymentEntity.getPayNo(), paymentEntity.getAmountMoney().toString(), "13564452580", "柯军", "test");
 			} else {// 退款给客户
-				PaymentEntity hisPayEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,null);// 根据退款单记录中的订单号找到对应的历史付款单记录（用来查找付款交易流水号）
-				PaymentLogInfo paymentLogInfo = paymentLogInfoService.selectByOutTradeNo(hisPayEntity.getPayNo(),hisPayEntity.getTradeType());
+				PaymentEntity hisPayEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, null);// 根据退款单记录中的订单号找到对应的历史付款单记录（用来查找付款交易流水号）
+				PaymentLogInfo paymentLogInfo = paymentLogInfoService.selectByOutTradeNo(hisPayEntity.getPayNo(), hisPayEntity.getTradeType());
 				if (paymentLogInfo != null)
 					map = pcWebPageAlipayService.getRefunInfo(paymentEntity, "1", paymentEntity.getAmountMoney().toString(), paymentLogInfo.getTrade_no(), "协商退款");
 				else
@@ -159,8 +159,8 @@ public class PCWebPageAlipayController extends BaseController {
 					allList.add(paymentList.get(0));
 			}
 		}
-		if (!allList.isEmpty() && allList.get(0).getTradeType().equals(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE3)) {
-			paySuccessToMessage(allList);
+		if (!allList.isEmpty()) {
+			paySuccessToMessage(allList, allList.get(0).getTradeType());
 		}
 		LOGGER.info("<--支付宝打款成功异步通知结束");
 		return "payManager/notify";
@@ -173,7 +173,7 @@ public class PCWebPageAlipayController extends BaseController {
 	 * @Author: 柯军
 	 * @datetime:2015年5月21日上午11:53:11
 	 **/
-	public void paySuccessToMessage(List<PaymentEntity> list) {
+	public void paySuccessToMessage(List<PaymentEntity> list, Integer tradeType) {
 		List<PayNotifyVO> payNotifylist = new ArrayList<PayNotifyVO>();
 		Map<String, Object> bodyMap = new HashMap<String, Object>();
 		for (PaymentEntity paymentEntity : list) {
@@ -182,14 +182,20 @@ public class PCWebPageAlipayController extends BaseController {
 			payNotifyVO.setTradeNo(paymentEntity.getPayNo());
 			payNotifylist.add(payNotifyVO);
 		}
-		bodyMap.put("drawApplyList", payNotifylist);
 		MessageEvent event = new MessageEvent();
 		event.setSource(Constants.SOURCETYPE.RPB);
 		event.setTarget(Constants.SOURCETYPE.TMS);
 		event.setTimestamp(DateUtil.getCurrDateTime().getTime());
-		event.setType(PaymentEventType.PAY_NOTIFY);
 		event.setBody(bodyMap);
-		sender.convertAndSend(event);
+		if (tradeType.equals(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE3)) {// 提现通知
+			event.setType(PaymentEventType.PAY_NOTIFY);
+			bodyMap.put("drawApplyList", payNotifylist);
+		} else if (tradeType.equals(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE7)) {// 结算付款单更新
+			event.setType(PaymentEventType.STATEMENT_PAY_NOTIFY);
+			bodyMap.put("statementList", payNotifylist);
+		}
+		if (!bodyMap.isEmpty())
+			sender.convertAndSend(event);
 	}
 
 	private PaymentLogInfo parsPayDetail(PaymentLogInfo paymentLogInfo, String details) {
@@ -227,7 +233,7 @@ public class PCWebPageAlipayController extends BaseController {
 		PaymentLogInfo result = paymentLogInfoService.selectByNotifyId(notify_id);
 		if (result != null)
 			return "payManager/notify";
-		LOGGER.info("返回结果：" + result_details+",批量单号-->"+batch_no);
+		LOGGER.info("返回结果：" + result_details + ",批量单号-->" + batch_no);
 		if (!validateTradeStatus(result_details)) {
 			LOGGER.info("该订单状态支付宝不允许退款，退款状态未变更，退款事件记录未生成！");
 			return "payManager/notify";
@@ -254,7 +260,7 @@ public class PCWebPageAlipayController extends BaseController {
 						paymentLogInfo.setTimeEnd(DateUtil.getCurrDateTime());
 						paymentLogInfo.setBuyer_type(0);// 买家账号
 						paymentLogInfo.setEventType(3);
-						PaymentEntity refundPaymentEntity =  getPaymentByPayTradeNo(paymentLogInfo.getTrade_no(),batch_no);
+						PaymentEntity refundPaymentEntity = getPaymentByPayTradeNo(paymentLogInfo.getTrade_no(), batch_no);
 						if (refundPaymentEntity != null) {
 							paymentLogInfo.setTradeType(refundPaymentEntity.getTradeType());
 							paymentLogInfo.setOutTradeNo(refundPaymentEntity.getPayNo());
@@ -262,8 +268,8 @@ public class PCWebPageAlipayController extends BaseController {
 							LOGGER.info("更改退款项状态 0--->2,退款单号=" + refundPaymentEntity.getPayNo());
 							paymentService.updateListStatusBypayNo(refundPaymentEntity.getPayNo(), refundPaymentEntity.getTradeType(), Constants.PAYMENT_STATUS.STAUS2);// 修改打款状态
 							refundNotifyMq(refundPaymentEntity);
-						}else{
-							LOGGER.info("订单不存在，退款状态更新失败.交易流水号-->"+paymentLogInfo.getTrade_no()+",批量单号-->"+batch_no);
+						} else {
+							LOGGER.info("订单不存在，退款状态更新失败.交易流水号-->" + paymentLogInfo.getTrade_no() + ",批量单号-->" + batch_no);
 						}
 					}
 				}
@@ -310,15 +316,15 @@ public class PCWebPageAlipayController extends BaseController {
 	 * @Author: 柯军
 	 * @datetime:2015年5月26日下午5:45:59
 	 **/
-	private PaymentEntity getPaymentByPayTradeNo(String tradeNo,String batchNo) {
-	PaymentEntity refundPaymentEntity = null;
-	PaymentLogInfo oldPaymentLogInfo = paymentLogInfoService.selectByPayTradeNo(tradeNo);
-	List<PaymentEntity> paymentEntityList = paymentService.selectByPayNoAndTradeType(oldPaymentLogInfo.getOutTradeNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
-	if (paymentEntityList != null && !paymentEntityList.isEmpty()) {
-		refundPaymentEntity = paymentService.selectByOrderNumAndBatchNo(paymentEntityList.get(0).getOrderNum(), batchNo);
+	private PaymentEntity getPaymentByPayTradeNo(String tradeNo, String batchNo) {
+		PaymentEntity refundPaymentEntity = null;
+		PaymentLogInfo oldPaymentLogInfo = paymentLogInfoService.selectByPayTradeNo(tradeNo);
+		List<PaymentEntity> paymentEntityList = paymentService.selectByPayNoAndTradeType(oldPaymentLogInfo.getOutTradeNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
+		if (paymentEntityList != null && !paymentEntityList.isEmpty()) {
+			refundPaymentEntity = paymentService.selectByOrderNumAndBatchNo(paymentEntityList.get(0).getOrderNum(), batchNo);
+		}
+		return refundPaymentEntity;
 	}
-	return refundPaymentEntity;
-}
 
 	/**
 	 * 支付失败时支付宝端回调接口

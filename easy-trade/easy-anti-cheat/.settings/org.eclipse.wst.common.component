@@ -13,6 +13,7 @@
         <dependent-module archiveName="easy-rss-2.1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/easy-rss/easy-rss">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+
         <property name="context-root" value="easy-anti-cheat"/>
         <property name="java-output-path" value="/easy-anti-cheat/src/main/webapp/WEB-INF/classes"/>
     </wb-module>

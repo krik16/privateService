@@ -171,6 +171,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 				if (ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getCodeStr().equals(refundQueryResData.getRefund_status_0())
 						|| ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr().equals(refundQueryResData.getRefund_status_0())) {// 退款成功
 					LOGGER.info(ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getValueStr() + ",退款状态-->" + refundQueryResData.getRefund_status_0());
+					savePaymentLogInfo(refundResData, tradeType);
 					map.put("message", ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getValueStr());
 				} else if (ConstantEnum.WEIXIN_REFUND_RESULT_NOTSURE.getCodeStr().equals(refundQueryResData.getRefund_status_0())) {
 					LOGGER.info(ConstantEnum.WEIXIN_REFUND_RESULT_NOTSURE.getValueStr() + ",退款状态-->" + refundQueryResData.getRefund_status_0());
@@ -197,6 +198,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 
 	@Override
 	public void savePaymentLogInfo(RefundResData refundResData, Integer tradeType) {
+		LOGGER.info("refundResData"+refundResData.toString()+",tradeType="+tradeType);
 		PaymentLogInfo paymentLogInfo = new PaymentLogInfo();
 		paymentLogInfo.setNotifyTime(DateUtil.getCurrDateTime());
 		paymentLogInfo.setTimeEnd(DateUtil.getCurrDateTime());
