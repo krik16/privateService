@@ -63,6 +63,10 @@ public enum CodeEnum {
     ERROR_EXCLUSIVE_GUIDE("-1126","设置专属导购出错"),
     ERROR_CANCEL_EXCLUSIVE_GUIDE("-1127","取消专属导购出错"),
     ERROR_EXCLUSIVE_GUIDE_LIST("-1128","专属导购列表当前页无数据"),
+    ERROR_CREATE_BRAND_MALL("-1129","创建品牌商场关联表出错"),
+    ERROR_INSERT_BRAND("-1130","插入品牌信息出错"),
+    ERROR_INSERT_MALL("-1131","插入商场信息出错"),
+    ERROR_INSERT_SHOP("-1132","插入店铺信息出错"),
     /** 密码修改 */
     ERROR_ORIGINAL_PASSOWRD("-1212", "原密码不正确"),
     ERROR_NEW_INVALID("-1213", "新密码无效"),
