@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -378,8 +379,8 @@ public class BonusController extends BaseController {
 		try {
 			if (StringUtils.isNotBlank(account)) {
 				List<RmmmUserInfoEntity> userInfoVOList = userService.getUserListByPhone(account);
-				for (RmmmUserInfoEntity userInfoVO : userInfoVOList) {
-					if (userInfoVO != null) {
+				if(CollectionUtils.isNotEmpty(userInfoVOList)){
+					for (RmmmUserInfoEntity userInfoVO : userInfoVOList) {
 						// 账号是否被停用
 						if (userInfoVO.getIsDisabled() == 1) {
 							// 账号被停用
@@ -393,18 +394,19 @@ public class BonusController extends BaseController {
 							} else if (vaVO.getIsSuspended()) {
 								// 账号被冻结
 								resultMap.put("code", CodeEnum.ERROR_ACCOUNT_DONGJIE.getActionCode());
-							} else {
+							} else if (guideType.intValue() != userInfoVO.getType()){
+								// 渠道不正确
+								resultMap.put("code", CodeEnum.ERROR_ACCOUNT_DONGJIE.getActionCode());
+							}else {
 								resultMap.put("code", CodeEnum.SUCCESS.getActionCode());
-								if (guideType == userInfoVO.getType()) {
-									resultMap.put("userId", userInfoVO.getId());
-									break;
-								}
+								resultMap.put("userId", userInfoVO.getId());
+								break;
 							}
 						}
-					} else {
-						// 您输入的账号有误，请重新输入
-						resultMap.put("code", CodeEnum.ERROR_ACCOUNT.getActionCode());
 					}
+				}else {
+					// 您输入的账号有误，请重新输入
+					resultMap.put("code", CodeEnum.ERROR_ACCOUNT.getActionCode());
 				}
 
 			} else {
@@ -465,9 +467,9 @@ public class BonusController extends BaseController {
 					}
 					bonusVO.setSellerAccount(accountString);
 					Integer guideType = 0;
-					if ("商家".equals(hssfRow.getCell(4).getRawValue().trim())){
+					if ("商家".equals(hssfRow.getCell(4).getStringCellValue().trim())){
 						guideType = 1;
-					}else if ("买手".equals(hssfRow.getCell(4).getRawValue().trim())){
+					}else if ("买手".equals(hssfRow.getCell(4).getStringCellValue().trim())){
 						guideType = 2;
 					}
 					Map<String, Object> verifuResultMap = this.verifyAccount(accountString,guideType);
