@@ -64,7 +64,7 @@ public class Sender {
 	private void toConvertAndSend(Object messageBody, String routingKey) {
 		String message = JSONObject.fromObject(messageBody).toString();
 		LOGGER.info("发送消息到" + routingKey + ",消息内容：" + message);
-		template.convertAndSend(routingKey, (Object) message.getBytes());
+		template.convertAndSend(routingKey,  message.getBytes());
 	}
 
 	/**

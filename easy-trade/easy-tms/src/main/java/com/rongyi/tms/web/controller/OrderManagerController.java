@@ -305,7 +305,6 @@ public class OrderManagerController extends BaseController {
 			}
 			if (!CollectionUtils.isEmpty(orderFormList)) {
 				logger.info(">>>>>>>>>>>>> 得到 " + orderFormList.size() + " 个订单信息");
-				logger.info(orderFormList.toString());
 			}
 			int totalPage = pagingVO.getTotalPage();
 			int currentPage = pagingVO.getCurrentPage();
