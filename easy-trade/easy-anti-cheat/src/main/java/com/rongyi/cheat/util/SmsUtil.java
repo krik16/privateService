@@ -37,12 +37,13 @@ public class SmsUtil {
      * @param payType 账号类型
      * @param startTime 刷单数量统计开始时间
      * @param endTime	刷单数量统计结束时间
+     * @param otherMessage	额外消息
      * @Author:  柯军
      * @datetime:2015年10月23日下午4:43:43
      **/
-    public static void sendMoreMsMessage(String[] sendPhoneList, Integer count,String payAccount,String payType,Date startTime,Date endTime){
+    public static void sendMoreMsMessage(String[] sendPhoneList, Integer count,String payAccount,String payType,Date startTime,Date endTime,String otherMessage){
     	for (String phone : sendPhoneList) {
-    		sendMsMessage(phone, count, payAccount, payType, startTime, endTime);
+    		sendMsMessage(phone, count, payAccount, payType, startTime, endTime,otherMessage);
 		}
     }
 	
@@ -54,10 +55,11 @@ public class SmsUtil {
      * @param payType 账号类型
      * @param startTime 刷单数量统计开始时间
      * @param endTime	刷单数量统计结束时间
+     * @param  otherMessage	额外消息
      * @Author:  柯军
      * @datetime:2015年10月23日下午4:43:43
      **/
-    public static void sendMsMessage(String sendPhone, Integer count,String payAccount,String payType,Date startTime,Date endTime) {
+    public static void sendMsMessage(String sendPhone, Integer count,String payAccount,String payType,Date startTime,Date endTime,String otherMessage) {
 		try {
 
 			//组织短信明文
@@ -77,7 +79,8 @@ public class SmsUtil {
 			sb.append("一共支付");
 			sb.append(count);
 			sb.append("笔订单");
-			sb.append(",请注意检查该账号是否存在刷单行为");
+			sb.append(",请注意检查该账号是否存在刷单行为;");
+			sb.append(otherMessage);
 			LOGGER.info("手机号为：" + sendPhone+",短信内容为:"+sb.toString());
 			//短信发送
 			if (StringUtils.isBlank(sendPhone) || !SystemConfig.isMobileNO(sendPhone)){
