@@ -156,6 +156,8 @@ public class OrderManagerController extends BaseController {
 			BigDecimal discountTotal = new BigDecimal("0.00");//总红包（抵扣）
 			BigDecimal commidityTotalPice = new BigDecimal("0.00");//商品总价
 			if (!CollectionUtils.isEmpty(sonOrderList)) {
+				//目前一个订单只会有一种商品，直播也是一个
+				orderDetailVo.setLiveName(sonOrderList.get(0).getLiveName());
 				for (SonOrderVO sonOrderVo : sonOrderList) {
 					commidityTotalPice = commidityTotalPice.add(new BigDecimal(sonOrderVo.getNum())
 							.multiply(new BigDecimal(sonOrderVo.getCommodityCurrentPrice()))).setScale(2, BigDecimal.ROUND_HALF_UP);
