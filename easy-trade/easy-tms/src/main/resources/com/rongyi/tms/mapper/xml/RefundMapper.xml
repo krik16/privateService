@@ -26,6 +26,8 @@
 			jdbcType="VARCHAR" />
 		<result column="refund_rejected" property="refundRejected"
 			jdbcType="VARCHAR" />
+        <result column="guide_type" property="guideType"
+			jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
 		id, order_time, `status`, draw_user_id, order_price,
@@ -103,6 +105,10 @@
 		<if test="maxTotalPrice != null and maxTotalPrice != ''">
 			AND #{maxTotalPrice} >= order_price
 		</if>
+        <!-- 渠道 -->
+        <if test="guideType != null and guideType != ''">
+            AND guide_type = #{guideType}
+        </if>
 
 	</sql>
 	<select id="selectPayPageList" resultMap="BaseResultMap"

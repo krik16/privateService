@@ -149,6 +149,7 @@ function getParamsJson(){
 	  var tradeEndTime = $('#payEndTime').val();
 	  var minTotalPrice = $('#minTotalPrice').val();
 	  var maxTotalPrice = $('#maxTotalPrice').val();
+	  var guideType = $('#guideType').val();
 	  if(defalutCheck == 1){
 		  orderNo = $('#orderNo').val();
 	  }
@@ -165,7 +166,8 @@ function getParamsJson(){
 		        'tradeStartTime':tradeStartTime,
 		        'tradeEndTime':tradeEndTime,
 		        'minTotalPrice':minTotalPrice,
-		        'maxTotalPrice':maxTotalPrice
+		        'maxTotalPrice':maxTotalPrice,
+		 		'guideType':guideType
 		    };
 	 return paramsJson_;
 }
@@ -252,7 +254,7 @@ function switchCheck(check) {
 	url_ = "../pay/drawApplyList";
 	defalutCheck = check;
 	$("#currpage").val(1);
-	if (check == 0) {//交易付款
+	if (check == 0) {//提现付款
 		$("#morePay").val(1);
 		$("#drawApply").addClass("change-color");
 		$("#drawApply").removeClass("now");
@@ -270,6 +272,8 @@ function switchCheck(check) {
 		$("#search-sellerName").css("display","block");
 		$("#search-buyerName").css("display","none");
 		$("#search-buyerAccount").css("display","none");
+		$("#search-guideType").css("display","block");
+
 		
 		$("#search-price").html('提现金额：');
 		$("#search-time").html('提现申请时间段：');
@@ -293,6 +297,7 @@ function switchCheck(check) {
 		$("#search-sellerName").css("display","none");
 		$("#search-buyerName").css("display","block");
 		$("#search-buyerAccount").css("display","block");
+		$("#search-guideType").css("display","block");
 		$("#search-price").html('退款金额：');
 		$("#search-time").html('退款申请时间段：');
 		$("#search-price").width(60);
@@ -313,6 +318,7 @@ function switchCheck(check) {
 		$("#search-orderNo").css("display","block");
 		$("#search-sellerName").css("display","none");
 		$("#search-buyerName").css("display","block");
+		$("#search-guideType").css("display","none");
 		$("#search-time").html('异常交易时间段：');
 		$("#search-price").html('异常付款金额：');
 		$("#search-price").width(86);
@@ -334,6 +340,7 @@ function switchCheck(check) {
 		$("#search-orderNo").css("display","none");
 		$("#search-sellerName").css("display","block");
 		$("#search-buyerName").css("display","none");
+		$("#search-guideType").css("display","none");
 		
 		$("#search-drawNo-label").html('付款流水号:');
 		$("#search-price").html('付款金额：');

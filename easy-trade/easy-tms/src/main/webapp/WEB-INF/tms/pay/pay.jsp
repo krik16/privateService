@@ -82,6 +82,16 @@ pageEncoding="UTF-8"%>
 							<input id="orderNo"  class="orderNo" type="text" maxlength="50" style="width: 120px"/></input>
 						</li>
 						</div>
+						<div style="display: block;" id="search-guideType">
+							<li>
+								<span id="search-guideType-label">渠道:</span>
+								<select id="guideType" style="width: 100px">
+									<option value="">--全部--</option>
+									<option value="1">商家</option>
+									<option value="2">买手</option>
+								</select>
+							</li>
+						</div>
 						<li class="xiala">商场：
 							<input type="text" name="mallId" style="width: 110px"></input>
 						</li>
