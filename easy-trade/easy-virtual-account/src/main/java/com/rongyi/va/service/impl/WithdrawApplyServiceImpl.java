@@ -74,7 +74,12 @@ public class WithdrawApplyServiceImpl implements WithdrawApplyService {
 
 		ResponseResult result = new ResponseResult();
 		try {
-			int permission = virtualAccountService.checkWithdrawPermission(userId, drawAmount, drawApplyRules.getDrawApplyTimesLimit());
+			int permission = 0;
+			if (guideType==1) {
+				permission = virtualAccountService.checkWithdrawPermission(userId, drawAmount, drawApplyRules.getDrawApplyTimesLimit());
+			}else {
+				permission = virtualAccountService.checkWithdrawPermission(userId, drawAmount, drawApplyRules.getMaiShouDrawTimesLimit());
+			}
 			if (permission == 0) {
 				// 首先，向tms发送提现请求mq事件
 				Map<String, Object> body = new HashMap<String, Object>();

@@ -615,10 +615,10 @@
 		FROM sales_commission
 		WHERE guide_id = #{userId};
 	</select>
-	<select id="commissionAmountTotal" resultMap="CommissionAmountTotal">
+	<select id="commissionAmountTotal" parameterType="map" resultMap="CommissionAmountTotal">
 		select
 		guide_id,version ,SUM(commission_amount) as amount_total FROM
-		sales_commission where status=3 GROUP BY guide_id;
+		sales_commission where status=3 and guide_type=#{guideType,jdbcType=INTEGER} GROUP BY guide_id;
 	</select>
 	<select id="commissionAmountTotalByVersion" resultMap="CommissionAmountTotal"
 		parameterType="long">

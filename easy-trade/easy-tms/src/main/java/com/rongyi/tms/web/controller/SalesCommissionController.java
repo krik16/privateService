@@ -182,7 +182,7 @@ public class SalesCommissionController extends BaseController {
 	public ResponseResult payingToSellerNow() {
 		ResponseResult result = new ResponseResult();
 		try {
-			commissionService.statisticsCommissionAmountTrigger();
+			commissionService.statisticsCommissionAmountTrigger(1);
 		} catch (Exception e) {
 			e.printStackTrace();
 			result.setSuccess(false);
