@@ -166,6 +166,11 @@ public class TCCouponVO implements Serializable {
      */
     private CouponGroup couponGroup;
 
+    /**
+     * 是否是第三方券 否[0], 是[1], 默认不是第三方券
+     */
+    private Boolean  isThird;
+
     private Long version; // 乐观锁
 
 
@@ -175,6 +180,14 @@ public class TCCouponVO implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Boolean getIsThird() {
+        return isThird;
+    }
+
+    public void setIsThird(Boolean isThird) {
+        this.isThird = isThird;
     }
 
     public Integer getRelatedType() {
