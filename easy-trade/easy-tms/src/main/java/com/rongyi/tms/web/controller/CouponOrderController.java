@@ -16,6 +16,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.rongyi.easy.coupon.vo.TCCouponVO;
+import com.rongyi.rss.coupon.RoaUserRedenvelopeService;
+import com.rongyi.rss.tradecenter.ProxyUserCouponService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -66,13 +66,20 @@
 				<input type="hidden" value="1" name="pageNo" id="currpage">
 					<input type="hidden" value="1" id="isChecked" />
 				<ur>
-				<li>返佣流水号:<input type="text" id="liushui-no"  class="detail"></input>
+				<li>返佣流水号:<input type="text" id="liushui-no"  class="detail"/>
 				</li>
-				<li class="xiala">商场：<input type="text" name='mallid'  style="width:120px"></input>
+				<li>渠道:
+					<select id="guideType"  style="width: 90px">
+						<option value="">--全部--</option>
+						<option value="1">商家</option>
+						<option value="2">买手</option>
+					</select>
 				</li>
-				<li class="xiala">店铺：<input type="text" name="shopid"  style="width:120px"></input>
+				<li class="xiala">商场：<input type="text" name='mallid'  style="width:120px"/>
 				</li>
-				<li>卖家账号：<input id="name" type="text"  style="width:120px"></input>
+				<li class="xiala">店铺：<input type="text" name="shopid"  style="width:120px"/>
+				</li>
+				<li>卖家账号：<input id="name" type="text"  style="width:120px"/>
 				</li>
 				</li>
 				<li id="checkLi" style="display:none;">审核：
@@ -111,8 +118,8 @@
 			</div>
 		</div>
 		<div id="resultList" class="memSuper-list member-search-list">
-			<input id="currpage" type="hidden" name="currpage"
-				value="<c:out value='${currpage}'/>" />
+			<%--<input id="currpage" type="hidden" name="currpage"
+				value="<c:out value='${currpage}'/>" />--%>
 		</div>
 
 	</div>

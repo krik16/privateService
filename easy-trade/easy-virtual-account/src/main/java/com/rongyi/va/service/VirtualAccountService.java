@@ -84,11 +84,12 @@ public class VirtualAccountService extends BaseServiceImpl {
 	}
 
 	/**
-	 * 验证用户是否可以提现
+	 * 验证用户是否可以提现(废弃)
 	 * 
 	 * @param userId
 	 * @return
 	 */
+	@Deprecated
 	public int checkWithdrawPermission(String userId, BigDecimal amount, int drawTimeLimit) {
 		Map<String, Object> parms = new HashMap<String, Object>();
 		parms.put("p_user_id", userId);
@@ -97,6 +98,23 @@ public class VirtualAccountService extends BaseServiceImpl {
 		this.getBaseDao().updateBySql(MAPPER_NAMESPACE + ".checkWithdrawPermission", parms);
 		int result = (int) parms.get("result");
 		return result;
+	}
+	
+	/**	
+	 * @Description: 验证用户是否可以提现 
+	 * @param userId
+	 * @param amount
+	 * @param drawTimeLimit
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年11月5日下午7:24:55
+	 **/
+	public int validateWithdrawPermission(String userId, BigDecimal amount, int drawTimeLimit) {
+		Map<String, Object> parms = new HashMap<String, Object>();
+		parms.put("userId", userId);
+		parms.put("amount", amount);
+		parms.put("drawTimeLimit", drawTimeLimit);
+		return this.getBaseDao().selectOneBySql(MAPPER_NAMESPACE + ".validateWithdrawPermission", parms);
 	}
 
 	/**

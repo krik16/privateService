@@ -35,7 +35,7 @@ import com.rongyi.tms.service.SalesCommissionService;
 
 /**
  * @author 袁波
- * @Description 提现申请 controller
+ * @Description 佣金 controller
  * @date 2015年5月25日 下午9:57:57
  */
 @Controller
@@ -59,7 +59,7 @@ public class SalesCommissionController extends BaseController {
 
 	@RequestMapping(value = "/list")
 	public String findByPage(@ModelAttribute("param") SalesCommissionParam params, String module, ModelMap modelMap, HttpServletRequest request) {
-		LOGGER.info("SalesCommissionController list param={}", params);
+		LOGGER.info("SalesCommissionController list param={}", params.toString());
 		try {
 			PagingVO<SalesCommissionVO> pagingvos = commissionService.findByPage(params);
 			request.setAttribute("list", pagingvos.getDataList());
@@ -104,7 +104,7 @@ public class SalesCommissionController extends BaseController {
 					if (updateResult > 0) {
 						if (params.getStatus() < 0) {
 							// 审核不通过时 向用户推送消息 add by ZhengYl 2015-06-03
-							Map<String, String> map = new HashMap<String, String>();
+							Map<String, String> map = new HashMap<>();
 							SalesCommissionVO salesCommissionVO = commissionService.selectOneById(Integer.parseInt(params.getIds()));
 							map.put("orderNumber", salesCommissionVO.getOrderNo());
 							map.put("commission", salesCommissionVO.getCommissionAmount().toString());
@@ -139,7 +139,7 @@ public class SalesCommissionController extends BaseController {
 	@RequestMapping(value = "/detail")
 	public String checkDrawApply(int id, String module, HttpServletRequest request, ModelMap modelMap) {
 		LOGGER.info("SalesCommissionController detail module={},id={}", module, id);
-		String returnView = "";
+		String returnView;
 		try {
 			if (id == 0) {
 				request.setAttribute("msg", "参数传递有误！");
@@ -166,7 +166,7 @@ public class SalesCommissionController extends BaseController {
 	@RequestMapping(value = "getReason")
 	public void getUnPassReason(Integer id, Integer operate, HttpServletResponse response) {
 		LOGGER.info("SalesCommissionController detail operate={},id={}", operate, id);
-		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<>();
 		if (id == 0) {
 			resultMap.put("msg", "");
 		} else {
@@ -182,7 +182,7 @@ public class SalesCommissionController extends BaseController {
 	public ResponseResult payingToSellerNow() {
 		ResponseResult result = new ResponseResult();
 		try {
-			commissionService.statisticsCommissionAmountTrigger();
+			commissionService.statisticsCommissionAmountTrigger(1);
 		} catch (Exception e) {
 			e.printStackTrace();
 			result.setSuccess(false);

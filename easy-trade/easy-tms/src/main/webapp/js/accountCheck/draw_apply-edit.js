@@ -12,6 +12,7 @@ $(document).ready(function() {
 	var output;
 	$("#search").click(function(event) {
 		var drawNo = $("#liushui-no").val();
+		var guideType = $("#guideType").val();
 		var name = $('#name').val();
 		var mall = $("input[name='mallid']").val();
 		var shop = $("input[name='shopid']").val();
@@ -24,11 +25,11 @@ $(document).ready(function() {
 			_util.cmsTip("请先选择店铺！");
 			return;
 		}
-		ajaxloadApplys(null,drawNo,name,mall,shop,tradeNo,amountStart,amountEnd,payType);
+		ajaxloadApplys(null,drawNo,guideType,name,mall,shop,tradeNo,amountStart,amountEnd,payType);
 	});
 	
 });
-function ajaxloadApplys(page,drawNo,name,mall,shop,tradeNo,amountStart,amountEnd,payType) {
+function ajaxloadApplys(page,drawNo,guideType,name,mall,shop,tradeNo,amountStart,amountEnd,payType) {
 	var url_ = "../drawDetail/list";
 	var tradeStart = $("input[name='start']").val();
 	var tradeEnd = $("input[name='end']").val();
@@ -43,6 +44,7 @@ function ajaxloadApplys(page,drawNo,name,mall,shop,tradeNo,amountStart,amountEnd
 		type : 'get',
 		data : {
 			"drawNo" : drawNo,
+			"guideType" : guideType,
 			"tradeNo":tradeNo,
 			"mall" : mall,
 			"shop" : shop,

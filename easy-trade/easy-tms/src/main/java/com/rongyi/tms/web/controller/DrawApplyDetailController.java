@@ -34,6 +34,8 @@ import base.util.excel.ExcelWriter;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.malllife.common.util.DateTool;
 import com.rongyi.easy.tms.entity.DrawApply;
+import com.rongyi.easy.va.entity.VirtualAccountEntity;
+import com.rongyi.rss.roa.ROAVirtualAccountGeneralService;
 import com.rongyi.tms.constants.Constant;
 import com.rongyi.tms.moudle.vo.DrawApplyPageParam;
 import com.rongyi.tms.service.DrawApplyService;
@@ -53,6 +55,9 @@ public class DrawApplyDetailController extends BaseController {
     
     @Autowired
     private DrawVerifyLogService drawVerifyLogService;
+    
+    @Autowired
+    ROAVirtualAccountGeneralService rOAVirtualAccountGeneralService;
     
     @RequestMapping("/search")
     public String searchIntegralComm() {
@@ -130,7 +135,9 @@ public class DrawApplyDetailController extends BaseController {
                 return Constant.VIEW_MSG.ERROR;
             }else{
                 DrawApply drawApply=drawService.getOneById(id);
+                VirtualAccountEntity vaEntity = rOAVirtualAccountGeneralService.selectByUserId(drawApply.getDrawUserId());
                 LOGGER.info(drawApply.getCreateAt());
+                modelMap.addAttribute("balance",vaEntity.getBalance());
                 modelMap.addAttribute("apply", drawApply);
             }
             return "accountCheck/draw_apply-detail";

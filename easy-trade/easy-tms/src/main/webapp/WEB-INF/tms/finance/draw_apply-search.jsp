@@ -53,7 +53,14 @@
 				<input type="hidden" value="1" name="pageNo" id="currpage">
 					<input type="hidden" value="1" id="isChecked" />
 				<ur>
-				<li>提现流水号:<input type="text" id="liushui-no" style="width: 120px"></input>
+				<li>提现流水号:<input type="text" id="liushui-no" style="width: 120px"/>
+				</li>
+				<li>渠道:
+					<select id="guideType"  style="width: 90px">
+						<option value="" selected>--全部--</option>
+						<option value="1">商家</option>
+						<option value="2">买手</option>
+					</select>
 				</li>
 				
 				<li class="xiala">商场：<input type="text" name='mallid'  style="width: 120px"/>
@@ -68,7 +75,6 @@
 						<option value="">--全部--</option>
 						<option value="0">支付宝</option>
 						<option value="1">银行卡</option>
-
 					</select>
 				</li>
 				

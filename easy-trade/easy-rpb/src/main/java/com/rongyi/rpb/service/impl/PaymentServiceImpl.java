@@ -616,6 +616,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 							payNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE6);
 					if (Constants.RESULT.SUCCESS.equals(resultMap.get("result")) || ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr().equals(resultMap.get("result")))
 						refundPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
+					refundPaymentEntity.setFinishTime(DateUtil.getCurrDateTime());
 				}
 				insert(refundPaymentEntity);
 				return true;

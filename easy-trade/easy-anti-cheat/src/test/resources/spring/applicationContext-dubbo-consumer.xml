@@ -51,5 +51,5 @@
 	<!-- 根据订单号查询优惠券信息 -->
 	<dubbo:reference interface="com.rongyi.rss.coupon.RoaCouponOrderService" id="roaCouponOrderService"  version="${dubbo.version}" check="false"/>
 	<!-- 获取用户订单使用优惠券记录 -->
-	<dubbo:reference interface="com.rongyi.rss.coupon.MMUserCouponService" id="mmUserCouponService"  version="${dubbo.version}" check="false"/>
-</beans>  
+	<dubbo:reference interface="com.rongyi.rss.coupon.mall.life.MLCouponService" id="mmUserCouponService"  version="${dubbo.version}" check="false"/>
+</beans>

@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.rss.coupon.mall.shop.MSUserCouponService;
 import com.rongyi.rss.tradecenter.RoaProxyCouponOrderService;
 import net.sf.json.JSONObject;
 
@@ -29,7 +30,6 @@ import com.rongyi.easy.entity.MallLifeUserEntity;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
 import com.rongyi.easy.osm.entity.OrderFormEntity;
 import com.rongyi.easy.tms.vo.TradeVO;
-import com.rongyi.rss.coupon.mall.shop.MSUserCouponService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.rss.mallshop.order.ROAOrderFormService;
 import com.rongyi.tms.constants.ConstantEnum;
@@ -75,7 +75,6 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 		List<String> buyerIds = new ArrayList<String>();
 		if (map.get("buyerName") != null && StringUtils.isNotBlank(map.get("buyerName").toString())) {
 			try {
-				LOGGER.info("dubbo service rOAMallLifeUserService.getUserDetailByName(),服务请求时间-->"+DateUtil.getCurrentDateYYYYMMDDHHMMSSsss());
 				List<UserInfoVO> userVoList = rOAMallLifeUserService.getUserDetailByName(map.get("buyerName").toString());
 				for (UserInfoVO userVO : userVoList) {
 					buyerIds.add(userVO.getUserId());
@@ -87,7 +86,6 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 		}
 		if (map.get("buyerAccount") != null && StringUtils.isNotBlank(map.get("buyerAccount").toString())) {
 			try {
-				LOGGER.info("dubbo service rOAMallLifeUserService.getByPhone(),服务请求时间-->"+DateUtil.getCurrentDateYYYYMMDDHHMMSSsss());
 				UserInfoVO userInfoVO = rOAMallLifeUserService.getByPhone(map.get("buyerAccount").toString());
 				if (userInfoVO != null)
 					buyerIds.add(userInfoVO.getUserId());
@@ -101,7 +99,7 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 			map.put("buyerIds", buyerIds);
 
 		List<TradeVO> list = this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectTradePageList", map);
-		String buyerId = null;
+		String buyerId;
 		for (TradeVO tradeVO : list) {
 			try {
 				buyerId = tradeVO.getBuyerId();

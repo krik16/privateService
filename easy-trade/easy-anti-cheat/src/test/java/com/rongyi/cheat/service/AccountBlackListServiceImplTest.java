@@ -4,11 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.testng.annotations.Test;
 
 import com.rongyi.cheat.BaseTest;
-import com.rongyi.cheat.service.AccountBlacklistService;
 import com.rongyi.easy.cheat.AccountBlacklist;
 import com.rongyi.rss.cheat.IAntiCheatService;
 
@@ -21,7 +19,7 @@ public class AccountBlackListServiceImplTest extends BaseTest {
 	IAntiCheatService iAntiCheatService;
 
 	 @Test
-	@Rollback(false)
+//	@Rollback(false)
 	public void testValadatePayAccount() {
 		blackRollService.valadatePayAccount(new HashMap<String, Object>());
 	}

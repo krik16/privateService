@@ -2,14 +2,13 @@
  * @Title: SalesCommissionServiceImpl.java 
  * @Package com.rongyi.tms.service.impl 
  * @Description: TODO
- * @author 郑亦梁  zhengyiliang@rongyi.com
- * @date 2015年5月22日 下午3:48:12 
+ * @author 郑亦�?  zhengyiliang@rongyi.com
+ * @date 2015�?5�?22�? 下午3:48:12 
  * @version V1.0   
- * Copyright (C),上海容易网电子商务有限公司
+ * Copyright (C),上海容易网电子商务有限公�?
  */
 package com.rongyi.tms.service.impl;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -19,12 +18,14 @@ import java.util.UUID;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.common.util.JsonUtil;
+import com.rongyi.core.constant.Constants;
 import com.rongyi.core.constant.VirtualAccountEventTypeEnum;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.gcc.TransConfigurations;
@@ -35,6 +36,7 @@ import com.rongyi.easy.tms.entity.SalesCommissionAuditLog;
 import com.rongyi.easy.tms.vo.SalesCommissionParam;
 import com.rongyi.easy.tms.vo.SalesCommissionVO;
 import com.rongyi.rss.gcc.RmmmSettingsService;
+import com.rongyi.rss.malllife.roa.ROARedisService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.tms.constants.Constant;
 import com.rongyi.tms.moudle.vo.BonusPageParam;
@@ -65,6 +67,9 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 
 	@Autowired
 	private RmmmSettingsService rmmmSettingsService;
+
+	@Autowired
+	private ROARedisService roaRedisService;
 
 	@Autowired
 	Sender sender;
@@ -138,16 +143,16 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 			if (bodyMap != null) {
 				MQCommissionParam mqCommissionParam = MQCommissionParam.mapToEntity(bodyMap);
 
-				// 检查数据库中是否有此订单的记录（因小票上传而产生）
+				// �?查数据库中是否有此订单的记录（因小票上传而产生）
 				SalesCommission salesCommission = selectByOrderNo(mqCommissionParam.getOrderNo());
 				if (salesCommission == null)
 					salesCommission = new SalesCommission();
 
-				// 传入的佣金数据
+				// 传入的佣金数�?
 				salesCommission.setCommissionAmount(mqCommissionParam.getCommissionAmount());
 				salesCommission.setGuideId(mqCommissionParam.getGuideId());
 				salesCommission.setOrderNo(mqCommissionParam.getOrderNo());
-//				salesCommission.setGuideType(mqCommissionParam.getGuideType());
+				salesCommission.setGuideType(mqCommissionParam.getGuideType());
 				String buyerId = mqCommissionParam.getBuyerId();
 				LOGGER.debug("[Commission Add] buyerId: " + buyerId);
 				if (buyerId != null) {
@@ -197,7 +202,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 	 * 
 	 * @param id
 	 * @return
-	 * @see com.rongyi.tms.service.SalesCommissionService#selectOneById(int)
+	 * @see SalesCommissionService#selectOneById(int)
 	 */
 
 	@Override
@@ -216,12 +221,45 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 
 	@Override
 	public int updateBatch(CheckParam param, String user) {
-		Map<String, Object> paramsMap = param.paramToMap();
-		TransConfigurations transConf = rmmmSettingsService.getLatestTransConfigurations();
-		LOGGER.info("读取的参数为：" + transConf.getCommissionCountMax());
-		paramsMap.put("max_commission_times", transConf.getCommissionCountMax() == 0 ? 5 : transConf.getCommissionCountMax());
-		LOGGER.info("MAP:" + paramsMap);
-		int result = this.getBaseDao().updateBySql(NAMESPACE_SALESCOMMISSION + ".batchUpdate", paramsMap);
+		TransConfigurations transConf;
+		if (param.getGuideType()!=null&&param.getGuideType()==2) {
+			//买手
+			transConf = roaRedisService.get(Constants.ConfigType.BUYER_TRANS_CONFIGURATIONS,TransConfigurations.class);
+		}else {
+			//前端传0表表示无渠道类型，默认查商家类型
+			if (param.getGuideType()!=null && param.getGuideType()==0)
+				param.setGuideType(1);
+			transConf = roaRedisService.get(Constants.ConfigType.TRANS_CONFIGURATIONS,TransConfigurations.class);
+		}
+		if (transConf==null) {
+			transConf = new TransConfigurations();
+		}
+		LOGGER.info("读取的参数为:" + transConf.getCommissionCountMax());
+		Map<String, Object> searchMap = new HashMap<>();
+		String[] ids = param.getIds().trim().split(",");
+		searchMap.put("ids",ids);
+		List<SalesCommissionVO> salesCommissionVOs = this.getBaseDao().selectListBySql(NAMESPACE_SALESCOMMISSION + ".selectOneById", searchMap);
+		int result = 0;
+		if (CollectionUtils.isNotEmpty(salesCommissionVOs)){
+			for (SalesCommissionVO vo : salesCommissionVOs){
+				Map<String, Object> paramsMap = param.paramToMap();
+				paramsMap.put("guideId",vo.getGuideId());
+				paramsMap.put("buyerId",vo.getBuyerId());
+				Integer dailyCount = this.getBaseDao().selectOneBySql(NAMESPACE_SALESCOMMISSION + ".selectDailyCount", paramsMap);
+				if (dailyCount==null)
+					dailyCount=0;
+				searchMap.put("id", vo.getId());
+				if (dailyCount<=transConf.getCommissionCountMax()){
+					searchMap.put("status", param.getStatus());
+				}else {
+					searchMap.put("status", 5);
+				}
+				LOGGER.info("searchMap: "+searchMap.toString());
+				int updateResult =  this.getBaseDao().updateBySql(NAMESPACE_SALESCOMMISSION + ".updateStatus", searchMap);
+				if (updateResult>0)
+					result++;
+			}
+		}
 		if (result > 0) {
 			for (Integer id : (ValidateUtil.StringToIntList(param.getIds()))) {
 				SalesCommissionAuditLog auditLog = new SalesCommissionAuditLog();
@@ -258,24 +296,26 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 		return this.getBaseDao().selectOneBySql(NAMESPACE_SALESCOMMISSION + ".selectCommissionInfoByUserId", map);
 	}
 
-	/**
-	 * Description
-	 * 
-	 * @see com.rongyi.tms.service.SalesCommissionService#statisticsCommissionAmountTrigger()
-	 */
 
+	/**
+	 *
+	 * @param guideType: 渠道：买手-2\商家-1
+	 * @see SalesCommissionService#statisticsCommissionAmountTrigger(Integer guideType)
+	 */
 	@Override
-	public void statisticsCommissionAmountTrigger() {
-		List<CommissionAmountTotalVO> vos = this.getBaseDao().selectListBySql(NAMESPACE_SALESCOMMISSION + ".commissionAmountTotal");
-		LOGGER.info("查询到需要发送到  VA 的记录数为：" + vos.size());
+	public void statisticsCommissionAmountTrigger(Integer guideType) {
+		Map<String,Object> paramsMap = new HashMap<>();
+		paramsMap.put("guideType", guideType);
+		List<CommissionAmountTotalVO> vos = this.getBaseDao().selectListBySql(NAMESPACE_SALESCOMMISSION + ".commissionAmountTotal", paramsMap);
+		LOGGER.info("查询到需要发送到  VA 的记录数为：" + vos.size()+",guideType="+guideType);
 		if (!vos.isEmpty()) {
-			// 每次MQ 消息最多发送50条记录，超过50的话，分次发送
+			// 每次MQ 消息发送多发，每次50条记录，超过50的话，分次发送
 			int times = vos.size() % Constant.SENDSIZE.SIZE == 0 ? vos.size() / Constant.SENDSIZE.SIZE : (vos.size() / Constant.SENDSIZE.SIZE + 1);
 			LOGGER.info("times:" + times);
 			for (int i = 0; i < times; i++) {
 				long version = UUID.randomUUID().getMostSignificantBits();
 				LOGGER.info("version:" + version);
-				List<CommissionAmountTotalVO> newList = new ArrayList<CommissionAmountTotalVO>();
+				List<CommissionAmountTotalVO> newList;
 				if ((vos.size() - i * Constant.SENDSIZE.SIZE) > Constant.SENDSIZE.SIZE) {
 					newList = vos.subList(i * Constant.SENDSIZE.SIZE, (i + 1) * Constant.SENDSIZE.SIZE);
 				} else {
@@ -285,8 +325,8 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 				LOGGER.info(updateResult);
 				if (updateResult > 0) {
 					LOGGER.info("更新成功，发送消息到 va");
-					Map<String, Object> paramMap = new HashMap<String, Object>();
-					Map<String, Object> bodyMap = new HashMap<String, Object>();
+					Map<String, Object> paramMap = new HashMap<>();
+					Map<String, Object> bodyMap = new HashMap<>();
 					paramMap.put("version", version);
 					JSONArray array = new JSONArray();
 					List<CommissionAmountTotalVO> commissions = this.getBaseDao().selectListBySql(NAMESPACE_SALESCOMMISSION + ".commissionAmountTotalByVersion", paramMap);
@@ -299,11 +339,11 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 					MessageEvent event = MessageEvent.getMessageEvent(bodyMap, "tms", "va", VirtualAccountEventTypeEnum.COMMISSION_BATCH_POST.getCode());
 					sender.convertAndSend(event);
 				} else {
-					LOGGER.info("更新失败！");
+					LOGGER.info("更新失败�?");
 				}
 			}
 		} else {
-			LOGGER.info("定时查询总金额没有查询到数据！");
+			LOGGER.info("定时查询总金额没有查询到数据");
 		}
 
 	}
@@ -313,7 +353,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 	 * 
 	 * @param param
 	 * @return
-	 * @see com.rongyi.tms.service.SalesCommissionService#findBonusByPage(com.rongyi.tms.moudle.vo.BonusPageParam)
+	 * @see SalesCommissionService#findBonusByPage(BonusPageParam)
 	 */
 
 	@Override
@@ -327,7 +367,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 	 * 
 	 * @param id
 	 * @return
-	 * @see com.rongyi.tms.service.SalesCommissionService#getUserAccountById(java.lang.Integer)
+	 * @see SalesCommissionService#getUserAccountById(Integer)
 	 */
 
 	@Override
@@ -340,9 +380,13 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 	/**
 	 * Description
 	 * 
+<<<<<<< HEAD
+	 * @param account
+=======
 	 * @param
+>>>>>>> refs/remotes/origin/develop
 	 * @return
-	 * @see com.rongyi.tms.service.SalesCommissionService#getUserIdByUserAccount(java.lang.String)
+	 * @see SalesCommissionService#getUserIdByUserAccount(String)
 	 */
 
 	@Override
@@ -358,7 +402,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 	 * 
 	 * @param commission
 	 * @return
-	 * @see com.rongyi.tms.service.SalesCommissionService#updateBonus(com.rongyi.easy.tms.entity.SalesCommission)
+	 * @see SalesCommissionService#updateBonus(SalesCommission)
 	 */
 
 	@Override

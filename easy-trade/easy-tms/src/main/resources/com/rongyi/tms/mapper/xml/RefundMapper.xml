@@ -1,134 +1,160 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="com.rongyi.tms.mapper.xml.RefundMapper">
-	<resultMap id="BaseResultMap" type="com.rongyi.easy.tms.vo.TradeVO">
-		<id column="id" property="id" jdbcType="INTEGER" />
-		<result column="order_time" property="orderTime" jdbcType="TIMESTAMP" />
-		<result column="status" property="status" jdbcType="INTEGER" />
-		<result column="draw_user_id" property="drawUserId" jdbcType="VARCHAR" />
-		<result column="order_price" property="orderPrice" jdbcType="DECIMAL" />
-		<result column="order_no" property="orderNo" jdbcType="VARCHAR" />
-		<result column="pay_no" property="payNo" jdbcType="VARCHAR" />
-		<result column="shop_id" property="shopId" jdbcType="VARCHAR" />
-		<result column="shop_name" property="shopName" jdbcType="VARCHAR" />
-		<result column="mall_id" property="mallId" jdbcType="VARCHAR" />
-		<result column="mall_name" property="mallName" jdbcType="VARCHAR" />
-		<result column="buyer_id" property="buyerId" jdbcType="VARCHAR" />
-		<result column="seller_account" property="sellerAccount"
-			jdbcType="VARCHAR" />
-		<result column="seller_name" property="sellerName" jdbcType="VARCHAR" />
-		<result column="trade_type" property="tradeType" jdbcType="VARCHAR" />
-		<result column="pay_channel" property="payChannel" jdbcType="INTEGER" />
-		<result column="order_type" property="orderType" jdbcType="INTEGER" />
-		<result column="coupon_buyer_id" property="couponBuyerId"
-			jdbcType="VARCHAR" />
-		<result column="coupon_buyer_account" property="couponBuyerAccount"
-			jdbcType="VARCHAR" />
-		<result column="refund_rejected" property="refundRejected"
-			jdbcType="VARCHAR" />
-	</resultMap>
-	<sql id="Base_Column_List">
-		id, order_time, `status`, draw_user_id, order_price,
-		order_no, pay_no,
-		shop_id,
-		shop_name, mail_id, mall_name, buyer_id,
-		seller_account,trade_type,
-		seller_name,pay_channel,order_type,coupon_buyer_id,coupon_buyer_account,refund_rejected
-	</sql>
-	<sql id="trade_list_where_clause">
-		<!-- 付款单号 -->
-		<if test="payNo != null and payNo != ''">
-			AND pay_no = #{payNo}
-		</if>
-		<!-- 订单号 -->
-		<if test="orderNo != null and orderNo != ''">
-			AND order_no = #{orderNo}
-		</if>
-		<!-- 商场名称 -->
-		<if test="mallName != null and mallName != ''">
-			AND mall_name like
-			concat('%',#{mallName,jdbcType=VARCHAR},'%')
-		</if>
-		<!-- 店铺名称 -->
-		<if test="shopName != null and shopName != ''">
-			AND shop_name like
-			concat('%',#{shopName,jdbcType=VARCHAR},'%')
-		</if>
-		<!-- 买家id集合 -->
-		<if test="buyerAccount != null and buyerAccount != ''">
-			AND (coupon_buyer_account=#{buyerAccount}
-			<if test="buyerIds != null and buyerIds != ''">
-				OR buyer_id in
-				<foreach collection="buyerIds" index="index" item="item"
-					open="(" separator="," close=")">
-					#{item}
-				</foreach>
-			</if>
-			)
-		</if>
+    <resultMap id="BaseResultMap" type="com.rongyi.easy.tms.vo.TradeVO">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="order_time" property="orderTime" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="draw_user_id" property="drawUserId" jdbcType="VARCHAR"/>
+        <result column="order_price" property="orderPrice" jdbcType="DECIMAL"/>
+        <result column="order_no" property="orderNo" jdbcType="VARCHAR"/>
+        <result column="pay_no" property="payNo" jdbcType="VARCHAR"/>
+        <result column="shop_id" property="shopId" jdbcType="VARCHAR"/>
+        <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
+        <result column="mall_id" property="mallId" jdbcType="VARCHAR"/>
+        <result column="mall_name" property="mallName" jdbcType="VARCHAR"/>
+        <result column="buyer_id" property="buyerId" jdbcType="VARCHAR"/>
+        <result column="seller_account" property="sellerAccount"
+                jdbcType="VARCHAR"/>
+        <result column="seller_name" property="sellerName" jdbcType="VARCHAR"/>
+        <result column="trade_type" property="tradeType" jdbcType="VARCHAR"/>
+        <result column="pay_channel" property="payChannel" jdbcType="INTEGER"/>
+        <result column="order_type" property="orderType" jdbcType="INTEGER"/>
+        <result column="coupon_buyer_id" property="couponBuyerId"
+                jdbcType="VARCHAR"/>
+        <result column="coupon_buyer_account" property="couponBuyerAccount"
+                jdbcType="VARCHAR"/>
+        <result column="refund_rejected" property="refundRejected"
+                jdbcType="VARCHAR"/>
+        <result column="guide_type" property="guideType" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        `ry_rpb`.`payment_order`.`id` AS `id`,`ry_rpb`.`payment_order`.`create_at` AS
+        `order_time`,`ry_rpb`.`payment_order`.`status` AS `status`,`ry_rpb`.`payment_order`.`draw_user_id` AS
+        `draw_user_id`,`ry_rpb`.`payment_order`.`pay_amount` AS `order_price`,`ry_rpb`.`payment_order`.`order_no` AS
+        `order_no`,`ry_rpb`.`payment_order`.`order_type` AS `order_type`,`ry_rpb`.`payment_order`.`pay_no` AS
+        `pay_no`,`ry_rpb`.`payment_order`.`trade_type` AS `trade_type`,`ry_rpb`.`payment_order`.`pay_channel` AS
+        `pay_channel`,`ry_rpb`.`payment_order`.`refund_rejected` AS `refund_rejected`,`ry_rmmm`.`shop_info`.`id` AS
+        `shop_id`,`ry_rmmm`.`shop_info`.`shop_name` AS `shop_name`,`ry_rmmm`.`mall_cooperate`.`id` AS
+        `mail_id`,`ry_rmmm`.`mall_cooperate`.`mall_name` AS `mall_name`,`ry_osm`.`order_form`.`buyer_id` AS
+        `buyer_id`,`ry_rmmm`.`rmmm_user_info`.`user_phone` AS `seller_account`,`ry_rmmm`.`rmmm_user_info`.`user_name` AS
+        `seller_name`,`ry_trade`.`trade_order`.`user_id` AS `coupon_buyer_id`,`ry_trade`.`trade_order`.`user_phone` AS
+        `coupon_buyer_account`,`ry_osm`.`order_form`.`guide_type` AS `guide_type`
+    </sql>
+    <sql id="Base_From">
+        (((((`ry_rpb`.`payment_order` left join `ry_osm`.`order_form` on((`ry_osm`.`order_form`.`order_no` =
+        `ry_rpb`.`payment_order`.`order_no`))) left join `ry_rmmm`.`shop_info` on((`ry_rmmm`.`shop_info`.`id` =
+        `ry_osm`.`order_form`.`weidian_id`))) left join `ry_rmmm`.`mall_cooperate` on((`ry_rmmm`.`mall_cooperate`.`id` =
+        `ry_rmmm`.`shop_info`.`mall_id`))) left join `ry_rmmm`.`rmmm_user_info` on((`ry_rmmm`.`rmmm_user_info`.`id` =
+        `ry_rpb`.`payment_order`.`draw_user_id`))) left join `ry_trade`.`trade_order`
+        on((`ry_rpb`.`payment_order`.`order_no` = `ry_trade`.`trade_order`.`order_no`)))
+    </sql>
+    <sql id="trade_list_where_clause">
+        
+        ((`ry_rpb`.`payment_order`.`status` = 0) and ((`ry_rpb`.`payment_order`.`trade_type` = 1) or
+        (`ry_rpb`.`payment_order`.`trade_type` = 4) or (`ry_rpb`.`payment_order`.`trade_type` = 6)))
+        <!-- 付款单号 -->
+        <if test="payNo != null and payNo != ''">
+            AND payment_order.pay_no = #{payNo}
+        </if>
+        <!-- 订单号 -->
+        <if test="orderNo != null and orderNo != ''">
+            AND payment_order.order_no = #{orderNo}
+        </if>
+        <!-- 商场名称 -->
+        <if test="mallName != null and mallName != ''">
+            AND mall_cooperate.mall_name like
+            concat('%',#{mallName,jdbcType=VARCHAR},'%')
+        </if>
+        <!-- 店铺名称 -->
+        <if test="shopName != null and shopName != ''">
+            AND shop_info.shop_name like
+            concat('%',#{shopName,jdbcType=VARCHAR},'%')
+        </if>
+        <!-- 买家id集合 -->
+        <if test="buyerAccount != null and buyerAccount != ''">
+            AND (trade_order.user_phone=#{buyerAccount}
+            <if test="buyerIds != null and buyerIds != ''">
+                OR buyer_id in
+                <foreach collection="buyerIds" index="index" item="item"
+                         open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            )
+        </if>
 
-		<!-- 卖家姓名 -->
-		<if test="sellerName != null and sellerName != ''">
-			AND seller_name like
-			concat('%',#{sellerName,jdbcType=VARCHAR},'%')
-		</if>
-		<!-- 状态 -->
-		<if test="status != null and status != ''">
-			AND status = #{status}
-		</if>
+        <!-- 卖家姓名 -->
+        <if test="sellerName != null and sellerName != ''">
+            AND rmmm_user_info.user_name like
+            concat('%',#{sellerName,jdbcType=VARCHAR},'%')
+        </if>
+        <!-- 状态 -->
+        <if test="status != null and status != ''">
+            AND payment_order.status = #{status}
+        </if>
 
-		<!-- 交易类型 -->
-		<if test="tradeType != null and tradeType == 1">
-			AND (trade_type = 1 OR trade_type = 6)
-		</if>
-		<if test="tradeType != null and tradeType != 1">
-			AND trade_type = #{tradeType}
-		</if>
-		<!-- 付款方式 -->
-		<if test="payChannel != null and payChannel != ''">
-			AND pay_channel = #{payChannel}
-		</if>
+        <!-- 交易类型 -->
+        <if test="tradeType != null and tradeType == 1">
+            AND (payment_order.trade_type = 1 OR payment_order.trade_type = 6)
+        </if>
+        <if test="tradeType != null and tradeType != 1">
+            AND payment_order.trade_type = #{tradeType}
+        </if>
+        <!-- 付款方式 -->
+        <if test="payChannel != null and payChannel != ''">
+            AND payment_order.pay_channel = #{payChannel}
+        </if>
 
-		<!-- 提现申请时间 -->
-		<if test="tradeStartTime != null and tradeStartTime != ''">
-			AND order_time >= #{tradeStartTime}
-		</if>
-		<if test="tradeEndTime != null and tradeEndTime != ''">
-			AND #{tradeEndTime} >= order_time
-		</if>
-		<!-- 交易金额 -->
-		<if test="minTotalPrice != null and minTotalPrice != ''">
-			AND order_price >= #{minTotalPrice}
-		</if>
-		<if test="maxTotalPrice != null and maxTotalPrice != ''">
-			AND #{maxTotalPrice} >= order_price
-		</if>
+        <!-- 提现申请时间 -->
+        <if test="tradeStartTime != null and tradeStartTime != ''">
+            AND payment_order.create_at >= #{tradeStartTime}
+        </if>
+        <if test="tradeEndTime != null and tradeEndTime != ''">
+            AND #{tradeEndTime} >= payment_order.create_at
+        </if>
+        <!-- 交易金额 -->
+        <if test="minTotalPrice != null and minTotalPrice != ''">
+            AND payment_order.pay_amount >= #{minTotalPrice}
+        </if>
+        <if test="maxTotalPrice != null and maxTotalPrice != ''">
+            AND #{maxTotalPrice} >= payment_order.pay_amount
+        </if>
+        <!-- 渠道 -->
+        <if test="guideType != null and guideType != ''">
+            AND order_form.guide_type = #{guideType}
+        </if>
 
-	</sql>
-	<select id="selectPayPageList" resultMap="BaseResultMap"
-		parameterType="java.lang.Integer">
-		select
-		<include refid="Base_Column_List" />
-		from refund_view
-		<where>
-			<include refid="trade_list_where_clause" />
-		</where>
-		<if test="orderby != null">
-			order by ${orderby} ${orderVa}
-		</if>
+    </sql>
+    <select id="selectPayPageList" resultMap="BaseResultMap"
+            parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Base_From"/>
+        <where>
+            <include refid="trade_list_where_clause"/>
+        </where>
+        group by payment_order.id
+        <if test="orderby != null">
+            order by ${orderby} ${orderVa}
+        </if>
 
-		<if test="orderby == null">
-			order by order_time desc
-		</if>
+        <if test="orderby == null">
+            order by order_time desc
+        </if>
 
-		limit #{currentPage,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
-	</select>
-	<select id="selectPayPageListCount" parameterType="java.util.Map"
-		resultType="java.lang.Integer">
-		select count(id) from refund_view
-		<where>
-			<include refid="trade_list_where_clause" />
-		</where>
-	</select>
+        limit #{currentPage,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+    </select>
+    <select id="selectPayPageListCount" parameterType="java.util.Map"
+            resultType="java.lang.Integer">
+        select count(total.id) from (select payment_order.id from
+        <include refid="Base_From"/>
+        <where>
+            <include refid="trade_list_where_clause"/>
+        </where>
+        group by payment_order.id
+        ) as total
+    </select>
 
 </mapper>

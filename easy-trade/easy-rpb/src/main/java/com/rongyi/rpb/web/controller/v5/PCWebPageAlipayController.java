@@ -5,12 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.constant.PaymentEventType;
@@ -36,7 +36,7 @@ import com.rongyi.rpb.web.controller.BaseController;
 @RequestMapping(value = "/v5/PCWebPageAlipay")
 public class PCWebPageAlipayController extends BaseController {
 
-	private static final Logger LOGGER = Logger.getLogger(PCWebPageAlipayController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(PCWebPageAlipayController.class);
 
 	@Autowired
 	private PCWebPageAlipayService pcWebPageAlipayService;
@@ -55,68 +55,6 @@ public class PCWebPageAlipayController extends BaseController {
 
 	@Autowired
 	Sender sender;
-
-	/**
-	 * 单条操作
-	 * 
-	 * @author kejun 2015年3月24日
-	 * @param paymentId
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("/zhifubaoRepay.htm")
-	public String webPageAlipay(@RequestParam String paymentId, Model model) {
-
-		LOGGER.info("pc端单条支付开始-->");
-		try {
-			PaymentEntity paymentEntity = paymentService.selectByPrimaryKey(paymentId);
-			Map<String, Object> map = new HashMap<String, Object>();
-			if (Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE2 == paymentEntity.getTradeType()) {// 打款给卖家
-				map = pcWebPageAlipayService.getOnePayInfo(paymentEntity.getPayNo(), paymentEntity.getAmountMoney().toString(), "13564452580", "柯军", "test");
-			} else {// 退款给客户
-				PaymentEntity hisPayEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, null);// 根据退款单记录中的订单号找到对应的历史付款单记录（用来查找付款交易流水号）
-				PaymentLogInfo paymentLogInfo = paymentLogInfoService.selectByOutTradeNo(hisPayEntity.getPayNo(), hisPayEntity.getTradeType());
-				if (paymentLogInfo != null)
-					map = pcWebPageAlipayService.getRefunInfo(paymentEntity, "1", paymentEntity.getAmountMoney().toString(), paymentLogInfo.getTrade_no(), "协商退款");
-				else
-					LOGGER.info("退款失败，历史付款单记录查找不存，请确认订单号:" + paymentEntity.getOrderNum() + "付款记录是否存在！");
-			}
-			model.addAttribute("content", map.get("sHtmlText"));
-		} catch (Exception e) {
-			LOGGER.error(e);
-		}
-		LOGGER.info("<--pc端单条支付开始");
-		return "payManager/zhifu";
-	}
-
-	/**
-	 * 批量操作
-	 * 
-	 * @author kejun 2015年4月1日
-	 * @param ids
-	 * @param type
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("/zhifubaoBatchPay.htm")
-	public String zhifubaoBatchPay(@RequestParam String ids, @RequestParam Integer type, Model model) {
-		try {
-			Map<String, Object> map = new HashMap<String, Object>();
-			List<Map<String, Object>> buyerList = null;
-			String[] idArray = ids.substring(1).split(",");
-			if (Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE2 == type) {
-				buyerList = pcWebPageAlipayService.getBatchPayBuyerMessage(idArray, "test");
-				map = pcWebPageAlipayService.getBatchPayInfo(buyerList);
-			} else {
-				buyerList = pcWebPageAlipayService.getBatchRefundBuyerMessage(idArray, "test");
-				map = pcWebPageAlipayService.getBatchRefunInfo(buyerList);
-			}
-			model.addAttribute("content", map.get("sHtmlText"));
-		} catch (Exception e) {
-			LOGGER.error(e);
-		}
-		return "payManager/zhifu";
-	}
 
 	/**
 	 * 支付宝打款成功通知
@@ -139,8 +77,7 @@ public class PCWebPageAlipayController extends BaseController {
 		PaymentLogInfo result = paymentLogInfoService.selectByNotifyId(notify_id);
 		if (result != null)
 			return null;
-		LOGGER.info("支付宝打款成功异步通知开始-->");
-		LOGGER.info("返回结果:" + success_details);
+		LOGGER.info("支付宝打款成功异步通知开始,success_details={}",success_details);
 		List<PaymentEntity> allList = new ArrayList<PaymentEntity>();
 		String[] detailList = success_details.split("\\|");
 		if (detailList != null && detailList.length > 0) {
@@ -167,7 +104,7 @@ public class PCWebPageAlipayController extends BaseController {
 		if (!allList.isEmpty()) {
 			paySuccessToMessage(allList, allList.get(0).getTradeType());
 		}
-		LOGGER.info("<--支付宝打款成功异步通知结束");
+		LOGGER.info("支付宝打款成功异步通知结束");
 		return "payManager/notify";
 	}
 
@@ -238,12 +175,12 @@ public class PCWebPageAlipayController extends BaseController {
 		PaymentLogInfo result = paymentLogInfoService.selectByNotifyId(notify_id);
 		if (result != null)
 			return "payManager/notify";
-		LOGGER.info("返回结果：" + result_details + ",批量单号-->" + batch_no);
+		LOGGER.info("返回结果：result_details={},batch_no={}",result_details, batch_no);
 		if (!validateTradeStatus(result_details)) {
 			LOGGER.info("该订单状态支付宝不允许退款，退款状态未变更，退款事件记录未生成！");
 			return "payManager/notify";
 		}
-		LOGGER.info("支付宝退款成功异步通知开始-->");
+		LOGGER.info("支付宝退款成功异步通知开始");
 		String[] batchDetail = result_details.split("#");
 		if (batchDetail != null) {
 			try {
@@ -270,11 +207,11 @@ public class PCWebPageAlipayController extends BaseController {
 							paymentLogInfo.setTradeType(refundPaymentEntity.getTradeType());
 							paymentLogInfo.setOutTradeNo(refundPaymentEntity.getPayNo());
 							paymentLogInfoService.insertGetId(paymentLogInfo);
-							LOGGER.info("更改退款项状态 0--->2,退款单号=" + refundPaymentEntity.getPayNo());
+							LOGGER.info("更改退款项状态 0--->2,退款单号={}", refundPaymentEntity.getPayNo());
 							paymentService.updateListStatusBypayNo(refundPaymentEntity.getPayNo(), refundPaymentEntity.getTradeType(), Constants.PAYMENT_STATUS.STAUS2);// 修改打款状态
 							refundNotifyMq(refundPaymentEntity);
 						} else {
-							LOGGER.info("订单不存在，退款状态更新失败.交易流水号-->" + paymentLogInfo.getTrade_no() + ",批量单号-->" + batch_no);
+							LOGGER.info("订单不存在，退款状态更新失败,tradeNo={},batchNo={}",paymentLogInfo.getTrade_no(), batch_no);
 						}
 					}
 				}
@@ -283,7 +220,7 @@ public class PCWebPageAlipayController extends BaseController {
 				e.printStackTrace();
 			}
 		}
-		LOGGER.info("<--支付宝退款成功异步通知结束");
+		LOGGER.info("支付宝退款成功异步通知结束");
 		return "payManager/notify";
 	}
 

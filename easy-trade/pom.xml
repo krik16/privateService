@@ -7,8 +7,6 @@
 	<version>2.1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
-
-		<module>easy-osm</module>
 		<module>easy-rpb</module>
 		<module>easy-tms</module>
 		<module>easy-virtual-account</module>
@@ -642,9 +640,9 @@
 							<goals>
 								<goal>clean</goal>
 							</goals>
-							<configuration>
-								<directory>src/main/webapp/WEB-INF/lib</directory>
-							</configuration>
+							<!--<configuration>-->
+								<!--<directory>src/main/webapp/WEB-INF/lib</directory>-->
+							<!--</configuration>-->
 						</execution>
 					</executions>
 				</plugin>
@@ -667,11 +665,11 @@
 							<version>5.1.26</version>
 						</dependency>
 
-						<dependency>
-							<groupId>com.rongyi</groupId>
-							<artifactId>easy-mybatis-generator</artifactId>
-							<version>${project.version}</version>
-						</dependency>
+						<!--<dependency>-->
+							<!--<groupId>com.rongyi</groupId>-->
+							<!--<artifactId>easy-mybatis-generator</artifactId>-->
+							<!--<version>${project.version}</version>-->
+						<!--</dependency>-->
 					</dependencies>
 				</plugin>
 

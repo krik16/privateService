@@ -41,6 +41,6 @@ public interface PayService {
      * @datetime:2015年5月19日上午10:18:21
      **/
     public Integer selectPayPageListCount(Map<String,Object> map);
-    
-    
+
+
 }

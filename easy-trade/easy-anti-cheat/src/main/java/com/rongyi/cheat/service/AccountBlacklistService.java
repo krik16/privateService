@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.rongyi.easy.cheat.AccountBlacklist;
+import com.rongyi.easy.rpb.vo.PayAccountUseTotal;
 
 /**
  * @Author: 柯军
@@ -88,5 +89,13 @@ public interface AccountBlacklistService {
 	 * @datetime:2015年8月14日上午11:19:23
 	 **/
 	public abstract Map<String,Object> updateFrozenAccount(String[] ids,Byte status);
+
+	/**
+	 * 查询支付账号购买总数
+	 * @param map
+	 * @return
+	 */
+
+	public List<PayAccountUseTotal> getPayAccountUserTotalList(Map<String,Object> map);
 	
 }

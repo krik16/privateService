@@ -41,6 +41,7 @@ public class DrawApplyPageParam {
     private String channel;
     private String check;
     private String drawNo;//提现流水号
+    private String guideType;//渠道：1-导购，2-买手
     private String tradeNo;//交易流水号
     private String tradeStart;//交易开始时间
     private String tradeEnd;//交易结束时间
@@ -123,7 +124,12 @@ public class DrawApplyPageParam {
     public void setAmountMax(String amountMax) {
         this.amountMax = amountMax;
     }
-    
+    public String getGuideType() {
+        return guideType;
+    }
+    public void setGuideType(String guideType) {
+        this.guideType = guideType;
+    }
     public String getChannel() {
         return channel;
     }
@@ -146,6 +152,9 @@ public class DrawApplyPageParam {
         }
         if(StringUtils.isNotBlank(this.getShop())){
             params.put("shop",this.getShop());
+        }
+        if (StringUtils.isNotBlank(this.guideType)){
+            params.put("guideType", Integer.valueOf(this.guideType));
         }
         if(StringUtils.isNotBlank(this.getDrawNo())){
             params.put("drawNO",this.getDrawNo());

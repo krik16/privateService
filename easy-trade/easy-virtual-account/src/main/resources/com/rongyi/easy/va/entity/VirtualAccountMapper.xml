@@ -40,7 +40,8 @@
 		#{alipayAccount,jdbcType=VARCHAR},
 		#{isAuthenticated,jdbcType=BIT}
 		FROM dual
-		WHERE NOT EXISTS (SELECT * FROM virtual_account
+		WHERE NOT EXISTS (SELECT *
+		FROM virtual_account
 		WHERE virtual_account.user_id = #{userId});
 	</insert>
 
@@ -50,7 +51,8 @@
 		set
 		user_id = #{userId},
 		user_name = #{userName},
-		shop_id = #{shopId},
+		shop_id
+		= #{shopId},
 		shop_name = #{shopName},
 		alipay_account = #{alipayAccount},
 		is_authenticated = #{isAuthenticated}
@@ -82,7 +84,8 @@
 		virtual_account
 		set
 		is_suspended = #{isSuspended},
-		stop_reason = #{stopReason,jdbcType=VARCHAR},
+		stop_reason =
+		#{stopReason,jdbcType=VARCHAR},
 		stop_at = #{stopAt, jdbcType=TIMESTAMP}
 		where user_id = #{userId};
 	</update>
@@ -91,4 +94,22 @@
 		ry_rpb.draw_apply
 		where draw_no = #{drawNo};
 	</delete>
+
+	<select id="validateWithdrawPermission"  parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		SELECT
+		(CASE
+		WHEN
+		(SELECT -SUM(sign) FROM virtual_account_detail WHERE user_id = #{userId}
+		AND DATEDIFF(create_at, NOW()) = 0 	AND item_type = 5 AND 	sign &lt; 0) >= #{drawTimeLimit}
+		THEN 1
+		WHEN (SELECT balance FROM virtual_account	WHERE user_id = #{userId}) &lt; #{amount}
+		THEN 2
+		WHEN NOT EXISTS(SELECT * FROM virtual_account WHERE user_id = #{userId} AND 	is_authenticated = 1 AND is_suspended = 0)
+		THEN 3
+		ELSE 0
+		END)
+		as result
+	</select>
+
 </mapper>

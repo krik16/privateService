@@ -38,7 +38,14 @@ public class BonusVO implements Serializable{
     private String updateUser;
     private int status;
     private String marks;
-    public int getId() {
+    private Integer guideType;
+    public Integer getGuideType() {
+		return guideType;
+	}
+	public void setGuideType(Integer guideType) {
+		this.guideType = guideType;
+	}
+	public int getId() {
         return id;
     }
     public void setId(int id) {

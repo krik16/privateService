@@ -120,7 +120,7 @@ public interface SalesCommissionService {
      * @Description 统计用户佣金金额并通过MQ 发送到虚拟账户
      * @author 袁波
      */
-    public void statisticsCommissionAmountTrigger();
+    public void statisticsCommissionAmountTrigger(Integer guideType);
     /**
      * 
      * @Description 查询考核奖金

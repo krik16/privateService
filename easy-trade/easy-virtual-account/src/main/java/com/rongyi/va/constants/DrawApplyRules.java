@@ -22,8 +22,16 @@ import com.rongyi.rss.gcc.RmmmSettingsService;
 public class DrawApplyRules {
 	private int drawApplyTimesLimit = 2;//default draw times limit
 
-	@Autowired
-	private RmmmSettingsService rmmmSettingsService;
+	/** 买手每天最多提现次数（默认两次） */
+	private int maiShouDrawTimesLimit = 2;
+
+	public int getMaiShouDrawTimesLimit() {
+		return maiShouDrawTimesLimit;
+	}
+
+	public void setMaiShouDrawTimesLimit(int maiShouDrawTimesLimit) {
+		this.maiShouDrawTimesLimit = maiShouDrawTimesLimit;
+	}
 
 	public int getDrawApplyTimesLimit() {
 		return drawApplyTimesLimit;

@@ -40,14 +40,15 @@
 								<li class="li1">商场：</li>
 								<li class="li2">${apply.mallName }</li>
 								<li class="li1">卖家账号：</li>
-								<li class="li2">${apply.sellerAccount }</li>
+								<li class="li2">${apply.sellerAccount }
+									（<span style="color:red">余额：${balance }</span>）</li>
 								<li class="li1">
 									<c:if test="${apply.payType==0 }">卖家支付宝账号：</c:if>
 									<c:if test="${apply.payType==1 }">卖家银行卡账号：</c:if>
 								</li>
 								<li class="li2">${apply.payAccount }</li>
 								<li class="li1">提现金额：</li>
-								<li class="li2">${apply.drawAmount}</li>
+								<li class="li2" style="color:red">${apply.drawAmount}</li>
 
 							</ul>
 							<ul>
@@ -69,6 +70,11 @@
 									<c:if test="${apply.payType==1 }">卖家银行卡姓名：</c:if>
 								</li>
 								<li class="li2">${apply.payName }</li>
+								<li class="li1">渠道：</li>
+								<li class="li2">
+									<c:if test="${apply.guideType==1 }">商家</c:if>
+									<c:if test="${apply.guideType==2 }">买手</c:if>
+								</li>
 							</ul>
 						</div>
 					</div>

@@ -7,6 +7,7 @@
 		<tr>
 		  <td style="text-align: center;"><input type="checkbox" id="select-all" onclick="selectAll()"/></td>
 			<td>提现流水号</td>
+			<td>渠道</td>
 			<td>提现申请时间</td>
 			<td>打款方式</td>
 			<td>商场</td>
@@ -22,6 +23,15 @@
 					<tr>
 						<td style="text-align: center;"><input type="checkbox" name="subBox" class="subBox" id="${item.id}" payChannel="${item.payChannel}"></td>
 						<td><a href="${ctx}/bs/detail?id=${item.drawApplyId}&module=merchant" target="_blank" style="text-decoration: underline;">${item.orderNo}</a></td>
+						<c:choose>
+							<c:when test="${item.guideType eq 1}">
+								<td>商家</td>
+							</c:when>
+							<c:when test="${item.guideType eq 2}">
+								<td>买手</td>
+							</c:when>
+							<c:otherwise><td></td></c:otherwise>
+						</c:choose>
 						<td><fmt:formatDate value="${item.orderTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 						<c:choose>
 						<c:when test="${item.payChannel eq 0}">

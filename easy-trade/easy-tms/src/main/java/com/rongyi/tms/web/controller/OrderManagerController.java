@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
@@ -141,7 +142,7 @@ public class OrderManagerController extends BaseController {
 
 
 	@RequestMapping("/infoDetails")
-	public String orderInfoDetail(String orderId, String module, String type, ModelMap model) {
+	public String orderInfoDetail(String orderId, String module, String type, HttpServletRequest request, ModelMap model) {
 		logger.info("==================== infoDetails ====================");
 		logger.info("orderId={}, module={}, type={}", orderId, module, type);
 
@@ -155,6 +156,8 @@ public class OrderManagerController extends BaseController {
 			BigDecimal discountTotal = new BigDecimal("0.00");//总红包（抵扣）
 			BigDecimal commidityTotalPice = new BigDecimal("0.00");//商品总价
 			if (!CollectionUtils.isEmpty(sonOrderList)) {
+				//目前一个订单只会有一种商品，直播也是一个
+				orderDetailVo.setLiveName(sonOrderList.get(0).getLiveName());
 				for (SonOrderVO sonOrderVo : sonOrderList) {
 					commidityTotalPice = commidityTotalPice.add(new BigDecimal(sonOrderVo.getNum())
 							.multiply(new BigDecimal(sonOrderVo.getCommodityCurrentPrice()))).setScale(2, BigDecimal.ROUND_HALF_UP);
@@ -212,7 +215,7 @@ public class OrderManagerController extends BaseController {
 	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/ajaxSearchOrderList")
-	public String ajaxSearchOrderList(HttpServletRequest request,ModelMap model, String paramsJson) {
+	public String ajaxSearchOrderList(HttpServletRequest request, ModelMap model, String paramsJson) {
 		try {
 			Map<String, Object> paramsMap;
 			Map<String, Object> searchMap = new HashMap<>();
@@ -295,7 +298,6 @@ public class OrderManagerController extends BaseController {
 			}
 			if (!CollectionUtils.isEmpty(orderFormList)) {
 				logger.info(">>>>>>>>>>>>> 得到 " + orderFormList.size() + " 个订单信息");
-				logger.info(orderFormList.toString());
 			}
 			int totalPage = pagingVO.getTotalPage();
 			int currentPage = pagingVO.getCurrentPage();
@@ -319,8 +321,8 @@ public class OrderManagerController extends BaseController {
 			}
 		}
 		orderManagerVO.setOrderTotalAmount(orderTotalAmount);
-		if (StringUtils.isNotBlank(orderManagerVO.getStatus()) &&
-				("6".equals(orderManagerVO.getStatus()) || "7".equals(orderManagerVO.getStatus()))){
+		if (StringUtils.isNotBlank(orderManagerVO.getStatus())&&
+				("6".equals(orderManagerVO.getStatus())||"7".equals(orderManagerVO.getStatus()))){
 			orderManagerVO.setStatus("5");
 		}
 		//包含（">|<4,"）就是正常关闭
@@ -332,7 +334,7 @@ public class OrderManagerController extends BaseController {
 	}
 
 	private List<String> getIdFromUser(List<UserInfoVO> users) {
-		List<String> list = new ArrayList<>();
+		List<String> list = new ArrayList<String>();
 		for (UserInfoVO user : users) {
 			String userId;
 			if (user.getUserId() != null) {
@@ -390,7 +392,7 @@ public class OrderManagerController extends BaseController {
 	@RequestMapping("/ajaxGetShops")
 	public String ajaxGetShops(HttpServletRequest request, HttpServletResponse response, String paramsJson)
 			{
-		Map<String, Object> paramsMap;
+		Map<String, Object> paramsMap ;
 		Map<String, Object> result = new HashMap<>();
 		try {
 			request.setCharacterEncoding("utf-8");
@@ -409,6 +411,9 @@ public class OrderManagerController extends BaseController {
 			}
 			name = URLDecoder.decode(name, "utf-8");
 			mallId = URLDecoder.decode(mallId, "utf-8");
+			Map<String, Object> searchMap = new HashMap<>();
+			searchMap.put("mallId", mallId);
+			searchMap.put("name", name);
 			List<ShopInfoEntity> reList = roaShopService.getShopListByShopName(name, Integer.valueOf(mallId));
 			result.put("msg", reList);
 			result.put("status", 1);
@@ -467,6 +472,9 @@ public class OrderManagerController extends BaseController {
 
 	/**
 	 * 商品详情(暂时在这)
+	 * @param request
+	 * @param response
+	 * @param session
 	 * @param model
 	 * @param commodityId
 	 * @param shopId
@@ -474,11 +482,13 @@ public class OrderManagerController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/commodityDetail")
-	public String commodityDetail(ModelMap model, String commodityId, String shopId, String currpage) {
+	public String commodityDetail(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			ModelMap model, String commodityId, String shopId, String currpage) {
 		logger.info(">>>commodity detail");
 		try {
 			List<String> picList = commodityService.getCommodityPicList(commodityId);
 			List<String> picListForEight = new ArrayList<>();
+
 			if (picList != null && picList.size() > 8) {
 				for (int i = 0; i < 8; i++) {
 					picListForEight.add(picList.get(i));

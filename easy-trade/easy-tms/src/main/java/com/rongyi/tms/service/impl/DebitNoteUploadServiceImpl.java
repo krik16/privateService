@@ -12,7 +12,8 @@ package com.rongyi.tms.service.impl;
 import java.util.Arrays;
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,7 @@ import com.rongyi.tms.service.SalesCommissionService;
  */
 @Service
 public class DebitNoteUploadServiceImpl implements DebitNoteUploadService {
-	private Logger logger = Logger.getLogger(getClass());
+	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Autowired
 	private SalesCommissionService salesCommissionService;
@@ -48,7 +49,7 @@ public class DebitNoteUploadServiceImpl implements DebitNoteUploadService {
 	*/
 	@Override
 	public ResponseResult uploadDebitNote(String pic_urls, String orderNo, String userId) {
-		logger.info(">>>>>>>>>小票上传开始");
+		logger.info(">>>>>>>>>小票上传开始,pic_urls={},orderNo={},userId={}",pic_urls,pic_urls,userId);
 		ResponseResult result = new ResponseResult();
 		
 		try {
@@ -88,7 +89,7 @@ public class DebitNoteUploadServiceImpl implements DebitNoteUploadService {
 			result.setSuccess(false);
 			result.setInfo(null);
 			e.printStackTrace();
-			logger.error(e, e);
+			logger.error(e.getMessage());
 		}
 
 		logger.debug(">>>>>>>>>小票上传结束");
@@ -152,7 +153,7 @@ public class DebitNoteUploadServiceImpl implements DebitNoteUploadService {
 			result.setSuccess(false);
 			result.setInfo(null);
 			e.printStackTrace();
-			logger.error(e, e);
+			logger.error(e.getMessage());
 			return result;
 		}
 		return result;

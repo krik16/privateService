@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.core.constant.PayEnum;
@@ -34,7 +35,6 @@ import com.rongyi.rss.mallshop.order.ROAOrderFormService;
 import com.rongyi.rss.rpb.IRpbService;
 import com.rongyi.tms.constants.Constant;
 import com.rongyi.tms.constants.ConstantEnum;
-import com.rongyi.tms.moudle.vo.ResponseResult;
 import com.rongyi.tms.mq.Sender;
 import com.rongyi.tms.service.PayService;
 import com.rongyi.tms.service.PaymentStatementService;
@@ -90,9 +90,10 @@ public class PayController extends BaseController {
 	@RequestMapping(value = "/drawApplyList", method = RequestMethod.POST)
 	public String list(ModelMap model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		try {
-			LOGGER.info("----pay list ------");
 			Map<String, Object> map = getJsonMap(request);
+			LOGGER.info("----drawApply list ------map="+map);
 			String currpage = (String) map.get("currpage");
+			map.put("status", ConstantEnum.TRADE_STATUS_PAY_NO.getCodeInt());
 			List<TradeVO> list = payService.selectPayPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE);
 			double pageTotle = payService.selectPayPageListCount(map);
 			Integer rowContNum = (int) Math.ceil(pageTotle / Constant.PAGE.PAGESIZE);
@@ -118,26 +119,25 @@ public class PayController extends BaseController {
 	@RequestMapping(value = "/refundList", method = RequestMethod.POST)
 	public String refundList(ModelMap model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		try {
-			LOGGER.info("----refund list ------");
 			Map<String, Object> map = getJsonMap(request);
+  LOGGER.info("----refund list ------ map="+map);
 			String currpage = (String) map.get("currpage");
 			// map.put("status", ConstantEnum.TRADE_STATUS_PAY_NO.getCodeInt());
 			map.put("tradeType", ConstantEnum.TRADE_TYPE_REFUND.getCodeInt());
 			List<TradeVO> list = buildList(refundService.selectRefundPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE));
 			OrderFormEntity orderFormEntity = null;
-			for (TradeVO tradeVO : list) {
-				try {
-					orderFormEntity = rOAOrderFormService.getOrderFormByOrderNum(tradeVO.getOrderNo());
-					if (orderFormEntity != null) {
-						tradeVO.setOrderId(orderFormEntity.getId().toString());
-						tradeVO.setOrderUserId(orderFormEntity.getBuyerId());
-					}
-				} catch (Exception e) {
-					LOGGER.error("roa接口未提供");
-					e.printStackTrace();
-				}
-
-			}
+		     try {
+                for (TradeVO tradeVO : list) {
+                    orderFormEntity = rOAOrderFormService.getOrderFormByOrderNum(tradeVO.getOrderNo());
+                    if (orderFormEntity != null) {
+                        tradeVO.setOrderId(orderFormEntity.getId().toString());
+                        tradeVO.setOrderUserId(orderFormEntity.getBuyerId());
+                    }
+                }
+            } catch (Exception e) {
+                LOGGER.error("roa接口未提供");
+                e.printStackTrace();
+            }
 			double pageTotle = refundService.selectRefundPageListCount(map);
 			Integer rowContNum = (int) Math.ceil(pageTotle / Constant.PAGE.PAGESIZE);
 			model.addAttribute("rowCont", rowContNum);
@@ -162,13 +162,13 @@ public class PayController extends BaseController {
 	@RequestMapping(value = "/exceList", method = RequestMethod.POST)
 	public String exceList(ModelMap model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		try {
-			LOGGER.info("----exce list ------");
 			Map<String, Object> map = getJsonMap(request);
+  LOGGER.info("----exce list ------map="+map);
 			String currpage = (String) map.get("currpage");
 			map.put("status", ConstantEnum.TRADE_STATUS_PAY_NO.getCodeInt());
 			map.put("tradeType", ConstantEnum.TRADE_TYPE_EXCE_PAY.getCodeInt());
 			List<TradeVO> list = buildList(refundService.selectRefundPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE));
-			OrderFormEntity orderFormEntity = null;
+				OrderFormEntity orderFormEntity = null;
 			for (TradeVO tradeVO : list) {
 				orderFormEntity = rOAOrderFormService.getOrderFormByOrderNum(tradeVO.getOrderNo());
 				if (orderFormEntity != null) {
@@ -228,8 +228,9 @@ public class PayController extends BaseController {
 	@RequestMapping(value = "/paySellerList", method = RequestMethod.POST)
 	public String paySellerList(ModelMap model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		try {
-			LOGGER.info("----paySeller list ------");
+		
 			Map<String, Object> map = getJsonMap(request);
+ LOGGER.info("----paySeller list ------map="+map);
 			map.put("tradeType", 2);
 			String currpage = (String) map.get("currpage");
 			List<TradeVO> list = payService.selectPayPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE);
@@ -246,7 +247,6 @@ public class PayController extends BaseController {
 
 	/**
 	 * @Description: 操作退款/付款前验证是否符合条件
-	 * @param paymentId
 	 * @param model
 	 * @return
 	 * @Author: 柯军
@@ -255,8 +255,8 @@ public class PayController extends BaseController {
 	@RequestMapping("/validatePay")
 	@ResponseBody
 	public ResponseResult validatePay(@RequestParam String ids[], @RequestParam Integer operateType, Model model) {
-		LOGGER.info("================操作退款/付款前验证是否符合条件 ====================");
-		ResponseResult result = new ResponseResult();
+	 LOGGER.info("================操作退款/付款前验证是否符合条件 ====================ids="+ids.toString()+"operateType="+operateType);
+       		ResponseResult result = new ResponseResult();
 		try {
 			Map<String, Object> resultMap = new HashMap<String, Object>();
 			if (PayEnum.STATEMENT_ONE.getCode().equals(operateType) || PayEnum.STATEMENT_MORE.getCode().equals(operateType)) {
@@ -302,8 +302,6 @@ public class PayController extends BaseController {
 	/**
 	 * @Description: 微信手动退款操作
 	 * @param paymentId
-	 * @param type
-	 * @param payChannel
 	 * @param model
 	 * @return
 	 * @Author: 柯军
@@ -312,7 +310,7 @@ public class PayController extends BaseController {
 	@RequestMapping("/weixinRefund")
 	@ResponseBody
 	public ResponseResult weixinRefund(@RequestParam Integer paymentId, Model model) {
-		LOGGER.info("================微信手动操作退款====================");
+		 LOGGER.info("================微信手动操作退款====================paymentId="+paymentId);
 		ResponseResult result = new ResponseResult();
 		try {
 			Map<String, Object> resultMap = rpbService.operateWeixinRefund(paymentId);
@@ -376,7 +374,6 @@ public class PayController extends BaseController {
 
 	/**
 	 * @Description: 验证用户账号合法性
-	 * @param paymentId
 	 * @param session
 	 * @param request
 	 * @return
@@ -460,7 +457,6 @@ public class PayController extends BaseController {
 	 * @Description: 线下付款更新状态
 	 * @param paymentIds 付款单id
 	 * @param statementIds  对账单id
-	 * @param payMemo
 	 * @return
 	 * @Author: 柯军
 	 * @datetime:2015年9月30日下午4:31:25
@@ -486,7 +482,6 @@ public class PayController extends BaseController {
 
 	/**
 	 * @Description: 冻结/解冻付款
-	 * @param id
 	 * @param status
 	 * @return
 	 * @Author: 柯军

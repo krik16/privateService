@@ -39,6 +39,11 @@
 								<li class="li1">卖家账号：</li>
 								<li class="li2"><span class="msg">${bonus.sellerAccount}</span>
 								</li>
+								<li class="li1">渠道：</li>
+								<li class="li2">
+									<c:if test="${bonus.guideType==1 }">商家</c:if>
+									<c:if test="${bonus.guideType==2 }">买手</c:if>
+								</li>
 								<li class="li1">金额：</li>
 								<li class="li2">${bonus.amount}</li>
 								<li class="li1" >备注：</li>

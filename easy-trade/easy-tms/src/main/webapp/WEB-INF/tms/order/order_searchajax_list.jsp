@@ -8,6 +8,7 @@
 		<tbody>
 		<tr>
 			<td>订单号</td>
+			<td>渠道</td>
 			<td>昵称</td>
 			<td>账号</td>
 			<td>商场</td>
@@ -21,6 +22,10 @@
 				<c:forEach var="orderForm" items="${orderForms}" varStatus="status">
 			  		<tr>
 						<td><a href="${ctx}/orderManager/orderInfo?orderId=${orderForm.orderId}&module=order" style="text-decoration:underline" target="_blank">${orderForm.orderNo}</a></td>
+						<td>
+							<c:if test="${orderForm.guideType==1}">商家</c:if>
+							<c:if test="${orderForm.guideType==2}">买手</c:if>
+						</td>
 						<td>${orderForm.nickname}</td>
 						<td>${orderForm.username}</td>
 						<td>${orderForm.mallName}</td>

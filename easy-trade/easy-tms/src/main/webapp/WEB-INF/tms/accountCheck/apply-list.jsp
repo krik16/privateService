@@ -15,6 +15,7 @@
         <tr>
 
             <td style="text-align: center;">交易流水号</td>
+            <td style="text-align: center;">渠道</td>
             <td style="text-align: center;">交易时间</td>
             <td style="text-align: center;">打款方式</td>
             <td style="text-align: center;">商场</td>
@@ -30,6 +31,10 @@
                     <tr>
 
                         <td style="text-align: center;"><a href="${ctx}/drawDetail/detail?id=${item.id}" target="mainFrame" style="text-decoration: underline;">${item.tradeNo}</a></td>
+                       	<td>
+							<c:if test="${item.guideType==1}">商家</c:if>
+							<c:if test="${item.guideType==2}">买手</c:if>
+						</td>
                         <td style="text-align: center;"><fmt:formatDate value="${item.tradeAt}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                         <td style="text-align: center;">
 						 			<c:choose>

@@ -9,6 +9,7 @@
 		 <tr>
             <td style="text-align: center;">全选<input type="checkbox" id="select-all"/></td>
             <td style="text-align: center;">提现流水号</td>
+            <td style="text-align: center;">渠道</td>
             <td style="text-align: center;">申请提现时间</td>
             <td style="text-align: center;">打款方式</td>
             <td style="text-align: center;">商场</td>
@@ -24,6 +25,10 @@
 			 		<tr>
 			 		<td style="text-align: center;"><input type="checkbox" name="subBox" id="${item.id }"></td>
 			 		<td style="text-align: center;"><a href="${ctx}/bs/detail?id=${item.id}&module=merchant" target="_blank" style="text-decoration: underline;">${item.drawNo}</a></td>
+			 		<td>
+						<c:if test="${item.guideType==1}">商家</c:if>
+						<c:if test="${item.guideType==2}">买手</c:if>
+					</td>
 			 		<td style="text-align: center;"><fmt:formatDate value="${item.createAt}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 			 		<td style="text-align: center;">
 			 			<c:choose>

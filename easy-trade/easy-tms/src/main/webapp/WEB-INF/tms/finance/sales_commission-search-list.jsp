@@ -10,6 +10,7 @@
             <td style="text-align: center;">全选<input type="checkbox" id="select-all"/></td>
             <td style="text-align: center;">票据</td>
             <td style="text-align: center;">返佣流水号</td>
+		 	<td style="text-align: center;">渠道</td>
             <td style="text-align: center;">商场</td>
             <td style="text-align: center;">店铺</td>
             <td style="text-align: center;">小票上传时间</td>
@@ -35,7 +36,11 @@
 			 			</c:forEach>
 			 		</td>
 			 		<td style="text-align: center;"><a href="${ctx}/sc/detail?id=${item.id}&module=finance" target="_blank" style="text-decoration: underline;">${item.id+100000000}</a></td>
-			 		<td style="text-align: center;">${item.mallName }</td>
+					<td>
+						<c:if test="${item.guideType==1}">商家</c:if>
+						<c:if test="${item.guideType==2}">买手</c:if>
+					</td>
+					<td style="text-align: center;">${item.mallName }</td>
 			 		<td style="text-align: center;">${item.shopName }</td>
 			 		<td style="text-align: center;"><fmt:formatDate value="${item.picUploadAt}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 			 		<td style="text-align: center;"><a href="${ctx}/orderManager/OrderInfoByOrderNo?orderNo=${item.orderNo}" target="_blank">${item.orderNo }</a></td>
@@ -47,8 +52,8 @@
 			 		<td style="text-align: center;">未到账</td>
 			 		<td style="text-align: center;" name="operate">
 			 			<sec:authorize ifAnyGranted="TMS_F_SC_VERIFY" >
-				 			<a href="javascript:void(0);" class="btnsearch" id="checkok-${item.id }" onclick="checkApplys(${item.id},3)">审核通过</a>
-				 			<a href="javascript:void(0);" class="btnsearch" id="checkok-${item.id }" onclick="checkUnpass(${item.id });">审核不通过</a>
+				 			<a href="javascript:void(0);" class="btnsearch" id="checkok-${item.id }" onclick="checkApplys(${item.id},${item.guideType==null?0:item.guideType},3)">审核通过</a>
+				 			<a href="javascript:void(0);" class="btnsearch" id="checkok-${item.id }" onclick="checkUnpass(${item.id},${item.guideType==null?0:item.guideType});">审核不通过</a>
 			 			</sec:authorize>
 			 		</td>
 					</tr>
