@@ -43,7 +43,8 @@
 			 		<td style="text-align: center;">${item.shopName }</td>
 			 		<td style="text-align: center;"><fmt:formatDate value="${item.picUploadAt}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 			 		<td style="text-align: center;">
-			 			<c:if test="${item.status>0}">通过</c:if>
+			 			<c:if test="${item.status==5}">返佣超限</c:if>
+			 			<c:if test="${item.status>0 && item.status != 5}">已通过</c:if>
 			 			<c:if test="${item.status<0}"><a name="remote" id="${item.id }" href="#">未通过</a></c:if>
 			 		</td>
 			 		<td style="text-align: center;"><a href="${ctx}/orderManager/OrderInfoByOrderNo?orderNo=${item.orderNo}" target="_blank">${item.orderNo }</td>

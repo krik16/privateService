@@ -73,7 +73,7 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("outTradeNo", outTradeNo);
 		resultMap.put("tradeType", tradeType);
-		return this.getBaseDao().selectOneBySql(LOG_NAMESPACE + ".selectByOrderNum", resultMap);
+		return this.getBaseDao().selectOneBySql(LOG_NAMESPACE + ".selectByPayNoAndTradeType", resultMap);
 	}
 
 	@Override

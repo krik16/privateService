@@ -164,7 +164,7 @@ public class WebPageAlipayController extends BaseController {
 				paymentLogInfo.setReplayFlag(2);
 				paymentLogInfo.setRequest_time(DateUtil.getCurrDateTime());
 				paymentLogInfo.setBuyer_type(0);// 买家
-				paymentLogInfo.setEventType(1);
+				paymentLogInfo.setEventType(Constants.EVENT_TYPE.EVENT_TYPE1);
 				paymentLogInfo.setResult(map.get("trade_status").toString());
 				paymentLogInfo.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
 				if (validateRepeatPay(map.get("out_trade_no").toString(), paymentLogInfo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0)) // 重复支付
@@ -217,7 +217,7 @@ public class WebPageAlipayController extends BaseController {
 			return "appwebpage/notify";
 		}
 		LOGGER.info("支付宝手机APP支付异步通知开始,交易流水号,trade_no={}",trade_no);
-		PaymentLogInfo paymentLogInfo = getPaymentLogInfo(trade_no, out_trade_no, notify_id, notify_type, DateUtil.getCurrDateTime(), sign, sign_type, 0, 0, total_fee, buyer_email, buyer_id,
+		PaymentLogInfo paymentLogInfo = getPaymentLogInfo(trade_no, out_trade_no, notify_id, notify_type, DateUtil.getCurrDateTime(), sign, sign_type, 0, Constants.EVENT_TYPE.EVENT_TYPE0, total_fee, buyer_email, buyer_id,
 				Constants.REPLAY_FLAG.REPLAY_FLAG0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
 		if (validateRepeatPay(out_trade_no, paymentLogInfo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0)) // 验证是否是重复支付
 			return "appwebpage/notify";

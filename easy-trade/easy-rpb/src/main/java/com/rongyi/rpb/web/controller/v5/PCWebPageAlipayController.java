@@ -93,12 +93,20 @@ public class PCWebPageAlipayController extends BaseController {
 				paymentLogInfo.setTradeMode("1");
 				paymentLogInfo.setSignType(sign_type);
 				paymentLogInfo.setTimeEnd(DateUtil.getCurrDateTime());
-				paymentLogInfo.setEventType(2);
 				paymentLogInfo.setBuyer_type(1);
-				paymentLogInfoService.insertGetId(paymentLogInfo);
 				List<PaymentEntity> paymentList = paymentService.updateListStatusBypayNo(paymentLogInfo.getOutTradeNo(), null, Constants.PAYMENT_STATUS.STAUS2);// 修改打款状态(提现或打款给卖家)
-				if (paymentList != null && !paymentList.isEmpty())
+				if (paymentList != null && !paymentList.isEmpty()){
 					allList.add(paymentList.get(0));
+					paymentLogInfo.setTradeType( paymentList.get(0).getTradeType());
+					if(paymentList.get(0).getTradeType() == Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE3){
+						paymentLogInfo.setEventType(Constants.EVENT_TYPE.EVENT_TYPE8);
+					}else if(paymentList.get(0).getTradeType() == Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE7){
+						paymentLogInfo.setEventType(Constants.EVENT_TYPE.EVENT_TYPE9);
+					}
+				}
+				
+				
+				paymentLogInfoService.insertGetId(paymentLogInfo);
 			}
 		}
 		if (!allList.isEmpty()) {
@@ -201,7 +209,7 @@ public class PCWebPageAlipayController extends BaseController {
 						paymentLogInfo.setSignType(sign_type);
 						paymentLogInfo.setTimeEnd(DateUtil.getCurrDateTime());
 						paymentLogInfo.setBuyer_type(0);// 买家账号
-						paymentLogInfo.setEventType(3);
+						paymentLogInfo.setEventType(Constants.EVENT_TYPE.EVENT_TYPE4);
 						PaymentEntity refundPaymentEntity = getPaymentByPayTradeNo(paymentLogInfo.getTrade_no(), batch_no);
 						if (refundPaymentEntity != null) {
 							paymentLogInfo.setTradeType(refundPaymentEntity.getTradeType());

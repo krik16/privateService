@@ -137,7 +137,8 @@ public interface Constants {
 
 	/**	
 	 * @Author:  柯军
-	 * @Description: 0:手机支付宝APP支付,1:手机支付宝网页支付,2:手机微信支付，3:手机银联支付,4:支付宝退款，5：微信退款，6：银联退款，7:异常支付打款给用户，8：打款给用户； 
+	 * @Description: 0:手机支付宝APP支付,1:手机支付宝网页支付,2:手机微信支付，3:手机银联支付,4:支付宝退款，
+	 * 5：微信退款，6：银联退款，7:异常支付打款给用户，8：提现打款，9：结算打款； 
 	 * @datetime:2015年9月2日下午4:37:31
 	 *
 	 **/
@@ -151,6 +152,7 @@ public interface Constants {
 		int EVENT_TYPE6 = 6;
 		int EVENT_TYPE7 = 7;
 		int EVENT_TYPE8 = 8;
+		int EVENT_TYPE9 = 9;
 		
 	}
 	
