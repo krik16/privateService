@@ -1,9 +1,9 @@
 package com.rongyi.easy.mcmc.vo;
 
-import com.rongyi.easy.mcmc.Commodity;
-
 import java.io.Serializable;
 import java.util.List;
+
+import com.rongyi.easy.mcmc.Commodity;
 
 public class CommodityBuyerVO implements Serializable{
 
@@ -17,9 +17,18 @@ public class CommodityBuyerVO implements Serializable{
 	private String commodityCode;
 	private String commodityStock;
 	private int commodityStatus;
+	private int commodityType;//渠道  1商家，2买手
 
 	private List<String> shopIM;// 店铺可用IM账号
 
+
+	public int getCommodityType() {
+		return commodityType;
+	}
+
+	public void setCommodityType(int commodityType) {
+		this.commodityType = commodityType;
+	}
 
 	public String getCommodityStock() {
 		return commodityStock;
@@ -124,6 +133,9 @@ public class CommodityBuyerVO implements Serializable{
 		if(commodity.getBrandName() != null){
 			this.commodityBrandName = commodity.getBrandName();
 		}
+		
+		// 买手版渠道  1商家，2买手
+		this.commodityType = commodity.getType();
 	}
 	
 	public List<String> getCommodityPicList() {
