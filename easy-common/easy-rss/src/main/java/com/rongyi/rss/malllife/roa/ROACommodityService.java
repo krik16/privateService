@@ -21,6 +21,7 @@ import com.rongyi.easy.mcmc.vo.CommodityPageBuyerVO;
 import com.rongyi.easy.mcmc.vo.CommoditySpecVO;
 import com.rongyi.easy.mcmc.vo.CommodityVO;
 import com.rongyi.easy.mcmc.vo.CommodityWebVO;
+import com.rongyi.easy.solr.param.CommodityBrandSearchParam;
 import com.rongyi.easy.solr.param.CommoditySearchParam;
 
 /** 
@@ -104,4 +105,10 @@ public interface ROACommodityService {
 	public List<String[]> listSpecColumnValues(String commodityId);
 
 	public Commodity selectById(String id);
+	/**
+	 * 帮别人加的
+	 * @param param
+	 * @return
+	 */
+	public ResponseResult searchCommodityBrand(CommodityBrandSearchParam param);
 }
