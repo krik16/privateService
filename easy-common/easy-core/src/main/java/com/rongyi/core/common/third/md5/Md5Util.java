@@ -11,7 +11,7 @@ package com.rongyi.core.common.third.md5;/*
 
     import java.security.MessageDigest;
     import java.security.NoSuchAlgorithmException;
-    /*
+/*
      * MD5 算法
     */
     public class Md5Util {
@@ -55,9 +55,11 @@ package com.rongyi.core.common.third.md5;/*
                 resultString = new String(strObj);
                 MessageDigest md = MessageDigest.getInstance("MD5");
                 // md.digest() 该函数返回值为存放哈希值结果的byte数组
-                resultString = byteToString(md.digest(strObj.getBytes()));
+                resultString = byteToString(md.digest(strObj.getBytes("UTF-8")));
             } catch (NoSuchAlgorithmException ex) {
                 ex.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             return resultString;
         }

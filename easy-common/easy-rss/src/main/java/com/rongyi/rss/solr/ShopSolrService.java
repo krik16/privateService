@@ -10,6 +10,7 @@
 package com.rongyi.rss.solr;
 
 import com.rongyi.easy.solr.param.ShopSearchParam;
+import com.rongyi.easy.solr.result.ShopSearchIdsResult;
 import com.rongyi.easy.solr.result.ShopSearchResult;
 
 /**
@@ -18,7 +19,35 @@ import com.rongyi.easy.solr.result.ShopSearchResult;
  */
 public interface ShopSolrService {
 	
+	/**
+	 * C端店铺商场搜索主入口
+	 * 
+	 * @author ZhengYl
+	 * @date 2015年10月17日 下午2:37:10 
+	 * @param input
+	 * @return
+	 */
 	public ShopSearchResult poiSearch(ShopSearchParam input);
 
+	/**
+	 * poi更新
+	 * 
+	 * @author ZhengYl
+	 * @date 2015年10月17日 下午2:37:12 
+	 * @param id
+	 * @param mid
+	 * @param status
+	 * @return
+	 */
 	public boolean updatePoiStatus(String id, String mid, int status);
+	
+	/**
+	 * B端店铺关键词检索
+	 * 
+	 * @author ZhengYl
+	 * @date 2015年10月17日 下午2:37:15 
+	 * @param input
+	 * @return
+	 */
+	public ShopSearchIdsResult selectShopIndexByName(ShopSearchParam input);
 }
