@@ -188,6 +188,11 @@ public class CommodityVO  implements  Serializable {
 		this.commodityDescription = commodity.getDescription();
 		this.brandMid = commodity.getBrandMid();//品牌mongoId
 		this.mallMid = commodity.getMallMid();//商场mongoId
+		if(commodity.isSpot()){
+			this.isSpot = 1;//现货
+		}else{
+			this.isSpot = 0;//非现货
+		}
 		
 
 		if(commodity.getPostage() != null && !commodity.getPostage().isEmpty()){
