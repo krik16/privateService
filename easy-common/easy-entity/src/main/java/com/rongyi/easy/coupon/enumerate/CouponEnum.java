@@ -45,7 +45,7 @@ public enum CouponEnum {
 	/** VoucherCouponParam end */
 	
 	/** tab */
-	TAB_ALL("all","全部"), TAB_STICKED("sticked","已置顶"),
+	TAB_ALL("all","全部"), TAB_STICKED("sticked","已置顶"), TAB_UNCHECK("uncheck","待审核"), TAB_PASS("PASS","已审核"), TAB_PROCEEING("proceeing","进行中"),
 	
 	SUCCESS(1,"正常"), ERROR(0,"系统错误"), ERROR_PARAM(0,"参数不合法");
 	

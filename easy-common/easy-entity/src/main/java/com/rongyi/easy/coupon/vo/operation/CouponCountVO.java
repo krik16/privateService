@@ -1,11 +1,15 @@
 package com.rongyi.easy.coupon.vo.operation;
 
+import java.io.Serializable;
+
 /**
  * @Description:统计卡券各个状态数量
  * @author:lqy
  * @time:2015年7月31日 下午6:08:29
  */
-public class CouponCountVO {
+public class CouponCountVO implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * 总数量
