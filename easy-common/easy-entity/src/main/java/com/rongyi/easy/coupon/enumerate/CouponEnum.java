@@ -45,8 +45,9 @@ public enum CouponEnum {
 	/** VoucherCouponParam end */
 	
 	/** tab */
-	TAB_ALL("all","全部"), TAB_STICKED("sticked","已置顶");
+	TAB_ALL("all","全部"), TAB_STICKED("sticked","已置顶"),
 	
+	SUCCESS(1,"正常"), ERROR(0,"系统错误"), ERROR_PARAM(0,"参数不合法");
 	
 	private Integer value;
 	

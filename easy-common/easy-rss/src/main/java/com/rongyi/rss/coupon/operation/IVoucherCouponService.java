@@ -126,24 +126,26 @@ public interface IVoucherCouponService {
 	 * @return
 	 * @throws Exception 
 	 */
-	ResponseResult stick(List<CouponSort> couponSortList) throws Exception;
+	ResponseResult submitStick(List<CouponSort> couponSortList) throws Exception;
 
 	/**
 	 * @Description:代金券取消置顶
 	 * @author:lqy
 	 * @param id 代金券id
 	 * @return 成功返回true 失败返回false
+	 * @throws Exception 
 	 */
-	boolean unstick(Integer id);
+	boolean submitUnstick(Integer id) throws Exception;
 
 	/**
 	 * @Description:置顶代金券排序
 	 * @author:lqy
 	 * @param couponSortId 排序id
-	 * @param sortIndex 排序值
+	 * @param sortIdx 排序值
+	 * @param cityId 城市id
 	 * @return 成功返回true 失败返回false
 	 */
-	boolean sort(Integer couponSortId, int sortIndex) throws Exception;
+	boolean submitSort(Integer couponSortId, int sortIdx, String cityId) throws Exception;
 
 
 	/***********置顶代金券 end***************/
