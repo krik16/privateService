@@ -24,8 +24,17 @@ public class OldShopVO implements Serializable {
     private String icon;//商家图片
     private String title;//商家名称
     private String telephone; //商家电话
+    private Double distance = 0.0; //距离
 
-    public List<Double> getLocation() {
+    public Double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(Double distance) {
+		this.distance = distance;
+	}
+
+	public List<Double> getLocation() {
         return location;
     }
 
