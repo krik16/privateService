@@ -24,7 +24,12 @@
 
 						<li class="name">商场</li>
 						<li class="line">|</li>
-						<li class="data max2">${order.mallName }</li>
+						<li class="data max2">
+							<c:choose>
+								<c:when test="${order.guideType==2 }"></c:when>
+								<c:otherwise>${order.mallName }</c:otherwise>
+							</c:choose>
+						</li>
 
 						<li class="name">昵称</li>
 						<li class="line">|</li>
@@ -47,6 +52,13 @@
 						<li class="name">真实姓名</li>
 						<li class="line">|</li>
 						<li class="data max2">${order.userName }</li>
+						
+						<li class="name">渠道</li>
+						<li class="line">|</li>
+						<li class="data max2">
+							<c:if test="${order.guideType==1 }">商家</c:if>
+							<c:if test="${order.guideType==2 }">买手（<span style="color:red">直播：</span>）</c:if>
+						</li>
 					</ul>
 				</div>
 			</div>
