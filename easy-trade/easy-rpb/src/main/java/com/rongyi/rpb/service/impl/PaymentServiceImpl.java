@@ -408,6 +408,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 		paymentLogInfo.setTradeMode("1");
 		paymentLogInfo.setTimeEnd(DateUtil.getCurrDateTime());
 		paymentLogInfo.setTotal_fee(0.00);
+		paymentLogInfo.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
 		paymentLogInfoService.insertGetId(paymentLogInfo);
 		String type = PaymentEventType.BUYER_PAID;
 		if (PaymentEventType.REFUND.equals(event.getType()))
@@ -613,7 +614,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 				if (Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1 == paymentEntity.getPayChannel()) {// 微信自动退款
 					Map<String, Object> resultMap = weixinPayService.weixinRefund(paymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), paymentEntity.getAmountMoney().doubleValue(),
 							payNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE6);
-					if (Constants.RESULT.SUCCESS.equals(resultMap.get("result")))
+					if (Constants.RESULT.SUCCESS.equals(resultMap.get("result")) || ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr().equals(resultMap.get("result")))
 						refundPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
 				}
 				insert(refundPaymentEntity);
@@ -701,5 +702,11 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 	@Override
 	public String getPayNo() {
 		return orderNoGenService.getOrderNo("0");
+	}
+
+	@Override
+	public void updateByIds(String[] ids, Map<String, Object> map) {
+		map.put("ids", ids);
+		this.getBaseDao().updateBySql(PAYMENTENTITY_NAMESPACE + ".updateByIds", map);
 	}
 }

@@ -9,6 +9,7 @@
 package com.rongyi.tms.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -17,14 +18,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rabbitmq.client.Channel;
+import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.core.constant.PaymentEventType;
 import com.rongyi.core.constant.TmsEventTypeEnum;
 import com.rongyi.easy.mq.MessageEvent;
+import com.rongyi.easy.rpb.vo.PayNotifyVO;
 import com.rongyi.tms.mq.Sender;
 import com.rongyi.tms.service.CouponCommissionService;
 import com.rongyi.tms.service.DrawApplyService;
 import com.rongyi.tms.service.InviteCommissionService;
 import com.rongyi.tms.service.MqReceiverService;
+import com.rongyi.tms.service.PaymentStatementService;
 import com.rongyi.tms.service.SalesCommissionService;
 
 /**
@@ -35,7 +39,7 @@ import com.rongyi.tms.service.SalesCommissionService;
  **/
 @Service
 public class MqReceiverServiceImpl implements MqReceiverService {
-	
+
 	private static final Logger LOGGER = Logger.getLogger(MqReceiverServiceImpl.class);
 
 	@Autowired
@@ -46,12 +50,16 @@ public class MqReceiverServiceImpl implements MqReceiverService {
 
 	@Autowired
 	CouponCommissionService couponCommissionService;
-	
+
 	@Autowired
 	InviteCommissionService inviteCommissionService;
-	
+
+	@Autowired
+	PaymentStatementService paymentStatementService;
+
 	@Autowired
 	Sender sender;
+
 	/**
 	 * @Description: 回调函数
 	 * @param message
@@ -59,6 +67,7 @@ public class MqReceiverServiceImpl implements MqReceiverService {
 	 * @Author: 柯军
 	 * @datetime:2015年6月2日上午10:27:32
 	 **/
+	@SuppressWarnings("unchecked")
 	@Override
 	public void callBack(Message message, Channel channel, String messageString) {
 		MessageEvent messageEvent = MessageEvent.messageToEvent(messageString);
@@ -73,12 +82,18 @@ public class MqReceiverServiceImpl implements MqReceiverService {
 		} else if (TmsEventTypeEnum.COMMISSION_POST.getCode().equals(messageEvent.getType())) {// 佣金提审
 			LOGGER.info("商品佣金提审-->");
 			salesCommissionService.addCommissionByMQ(messageEvent);
-		} else if (TmsEventTypeEnum.COUPON_COMMISSION.getCode().equals(messageEvent.getType())){//优惠券佣金
+		} else if (TmsEventTypeEnum.COUPON_COMMISSION.getCode().equals(messageEvent.getType())) {// 优惠券佣金
 			LOGGER.info("优惠券佣金提审-->");
 			couponCommissionService.insertByMq(messageEvent);
-		}else if(TmsEventTypeEnum.INVITE_COMMISSION.getCode().equals(messageEvent.getType())){
+		} else if (TmsEventTypeEnum.INVITE_COMMISSION.getCode().equals(messageEvent.getType())) {
 			LOGGER.info("邀请佣金提审-->");
 			inviteCommissionService.insertByMQ(messageEvent);
+		} else if (PaymentEventType.STATEMENT_PAY_NOTIFY.equals(messageEvent.getType())) {
+			LOGGER.info("商家对账支付成功通知-->");
+			Map<String, Object> map = new HashMap<String, Object>();
+			Map<String, Object> bodyMap = JsonUtil.getMapFromJson(messageEvent.getBody().toString());
+			map.put("statementList", bodyMap.get("statementList"));
+			paymentStatementService.updateByNotify(map);
 		}
 	}
 

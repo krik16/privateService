@@ -22,6 +22,7 @@
 		<result column="trade_at" property="tradeAt" jdbcType="TIMESTAMP" />
 		<result column="draw_user_id" property="drawUserId" jdbcType="VARCHAR" />
 		<result column="draw_username" property="drawUsername" jdbcType="VARCHAR" />
+		<result column="guide_type" property="guideType" jdbcType="INTEGER" />
 	</resultMap>
 	<resultMap id="DrawApplyInfo" type="com.rongyi.tms.moudle.vo.DrawApplyInfoVO">
 		<id property="userId" column="draw_user_id" />
@@ -31,7 +32,7 @@
 	<sql id="Base_Column_List">
 		id, create_at, end_at, mall_id, mall_name, shop_id, shop_name,
 		seller_account, seller_name,
-		draw_amount, pay_type, pay_account, pay_name, `status`,draw_no,trade_no,trade_at,draw_user_id,draw_username
+		draw_amount, pay_type, pay_account, pay_name, `status`,draw_no,trade_no,trade_at,draw_user_id,draw_username,guide_type
 	</sql>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
@@ -166,14 +167,15 @@
 		mall_name, shop_id, shop_name,
 		seller_account, seller_name, draw_amount,
 		pay_type, pay_account, pay_name,
-		`status`,draw_no,draw_user_id,draw_username)
+		`status`,draw_no,draw_user_id,draw_username,guide_type)
 		values (#{createAt,jdbcType=TIMESTAMP}, #{endAt,jdbcType=TIME},
 		#{mallId,jdbcType=VARCHAR},
 		#{mallName,jdbcType=VARCHAR}, #{shopId,jdbcType=INTEGER}, #{shopName,jdbcType=VARCHAR},
 		#{sellerAccount,jdbcType=VARCHAR}, #{sellerName,jdbcType=VARCHAR},
 		#{drawAmount,jdbcType=INTEGER},
 		#{payType,jdbcType=INTEGER}, #{payAccount,jdbcType=VARCHAR}, #{payName,jdbcType=VARCHAR},
-		#{status,jdbcType=INTEGER},	#{drawNo,jdbcType=VARCHAR},#{drawUserId,jdbcType=VARCHAR},#{drawUsername,jdbcType=VARCHAR})
+		#{status,jdbcType=INTEGER},	#{drawNo,jdbcType=VARCHAR},#{drawUserId,jdbcType=VARCHAR},#{drawUsername,jdbcType=VARCHAR},
+		#{guideType,jdbcType=INTEGER})
 	</insert>
 	<insert id="insertSelective" parameterType="com.rongyi.easy.tms.entity.DrawApply"
 		useGeneratedKeys="true" keyProperty="id">
@@ -192,7 +194,8 @@
 			pay_account,
 			pay_name,
 			`status`,
-			draw_no
+			draw_no,
+			guide_type
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			#{createAt,jdbcType=TIMESTAMP},
@@ -208,7 +211,8 @@
 			#{payAccount,jdbcType=VARCHAR},
 			#{payName,jdbcType=VARCHAR},
 			#{status,jdbcType=INTEGER},
-			#{drawNo,jdbcType=VARCHAR}
+			#{drawNo,jdbcType=VARCHAR},
+			#{guideType,jdbcType=INTEGER}
 		</trim>
 	</insert>
 	<update id="updateByPrimaryKeySelective" parameterType="com.rongyi.easy.tms.entity.DrawApply">
@@ -255,6 +259,9 @@
 			</if>
 			<if test="drawNo != null">
 				draw_no = #{drawNo,jdbcType=VARCHAR}
+			</if>
+			<if test="guideType != null">
+				guide_type = #{guideType,jdbcType=INTEGER}
 			</if>
 		</set>
 		where id = #{id,jdbcType=INTEGER}

@@ -85,6 +85,7 @@ public class WithdrawApplyServiceImpl implements WithdrawApplyService {
 				body.put("payAccount", accountNo);
 				body.put("payName", accountName);
 				body.put("applicationNo", applicationNo);
+//				body.put("guideType",guideType);
 
 				BaseEvent event = new BaseEvent();
 				event.setBody(JSONObject.fromObject(body));

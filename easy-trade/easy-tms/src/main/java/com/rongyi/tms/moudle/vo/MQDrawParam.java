@@ -45,6 +45,10 @@ public class MQDrawParam implements Serializable{
     private String payAccount;
     
     private String payName;
+    /**
+     * 渠道类型：1-导购   2-买手
+     */
+    private Integer guideType;
 
     public String getUserId() {
         return userId;
@@ -94,6 +98,14 @@ public class MQDrawParam implements Serializable{
         this.payName = payName;
     }
 
+    public Integer getGuideType() {
+        return guideType;
+    }
+
+    public void setGuideType(Integer guideType) {
+        this.guideType = guideType;
+    }
+
     public static MQDrawParam mapToEntity(Map<String ,Object> map){
         MQDrawParam mqDrawParam = new MQDrawParam();
         if(map != null){
@@ -109,6 +121,8 @@ public class MQDrawParam implements Serializable{
                 mqDrawParam.setPayAccount(map.get("payAccount").toString());
             if(map.get("payName") != null)
                 mqDrawParam.setPayName(map.get("payName").toString());
+            if(map.get("guideType") != null)
+                mqDrawParam.setGuideType(Integer.valueOf(map.get("guideType").toString()));
         }
         return mqDrawParam;
     }

@@ -8,12 +8,14 @@
 
 package com.rongyi.rpb.service.impl;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import net.sf.json.JSONObject;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -27,6 +29,7 @@ import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.PayAccountUseTotal;
 import com.rongyi.easy.rpb.vo.PaySuccessResponse;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
+import com.rongyi.easy.rpb.vo.PaymentParamVO;
 import com.rongyi.easy.rpb.vo.QueryOrderParamVO;
 import com.rongyi.easy.rpb.vo.WeixinQueryOrderParamVO;
 import com.rongyi.rpb.constants.ConstantEnum;
@@ -166,10 +169,10 @@ public class RpbServiceImpl implements IRpbService {
 				List<PaySuccessResponse> responseList = paymentLogInfoService.paySuccessToMessage(paymentEntity.getPayNo(), payAccount, orderNums, paymentEntity.getOrderType(), payChannel);
 				if (!responseList.isEmpty()) {
 					resultMap = responseList.get(0).getResult();
-					if ("0".equals(resultMap.get("errno"))) {
-					//	LOGGER.info("更新付款状态，付款单号-->" + paymentEntity.getPayNo());
-					//	paymentService.updateListStatusBypayNo(paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);// 修改付款单状态
-					}
+//					if ("0".equals(resultMap.get("errno"))) {
+//						LOGGER.info("更新付款状态，付款单号-->" + paymentEntity.getPayNo());
+//						paymentService.updateListStatusBypayNo(paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);// 修改付款单状态
+//					}
 				}else{
 					resultMap.put("errno", "10");
 					resultMap.put("errMsg", "订单系统处理异常");
@@ -291,7 +294,7 @@ public class RpbServiceImpl implements IRpbService {
 		List<PaymentEntity> list = paymentService.valiadteStatus(ids, Constants.PAYMENT_STATUS.STAUS2);
 		if (!list.isEmpty()) {
 			map.put("success", false);
-			if (PayEnum.DRAW_APPLY_ONE.getCode().equals(operateType) || PayEnum.EXCE_PAY_ONE.getCode().equals(operateType))
+			if (PayEnum.DRAW_APPLY_ONE.getCode().equals(operateType) || PayEnum.EXCE_PAY_ONE.getCode().equals(operateType) || PayEnum.STATEMENT_ONE.getCode().equals(operateType))
 				map.put("message", "该条记录已完成支付,无法再次支付!请刷新页面后再次操作!");
 			else if (PayEnum.DRAW_APPLY_MORE.getCode().equals(operateType) || PayEnum.EXCE_PAY_MORE.getCode().equals(operateType))
 				map.put("message", "批量列表中存在已完成支付的记录,无法再次支付!请刷新页面后再次操作!");
@@ -299,6 +302,8 @@ public class RpbServiceImpl implements IRpbService {
 				map.put("message", "该条退款记录已完成支付,无法再次支付!请刷新页面后再次操作!");
 			else if (PayEnum.TRADE_REFUND_MORE.getCode().equals(operateType))
 				map.put("message", "批量列表中存在已完成退款的记录,无法再次退款!请刷新页面后再次操作!");
+			else if (PayEnum.STATEMENT_MORE.getCode().equals(operateType))
+				map.put("message", "批量列表中存在已完成支付的记录,无法再次支付!请刷新页面后再次操作!");
 			else
 				map.put("message", "未知错误！");
 			return map;
@@ -307,4 +312,53 @@ public class RpbServiceImpl implements IRpbService {
 		map.put("message", "验证通过");
 		return map;
 	}
+	@Override
+	public Map<String, Object> generatePayment(PaymentParamVO paymentParamVO) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		try {
+			PaymentEntity oldPaymentEntity = paymentService.validateOrderNumExist(paymentParamVO.getOperateNo(), paymentParamVO.getPayChannel(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE7);
+			if (oldPaymentEntity != null && StringUtils.isNotEmpty(oldPaymentEntity.getPayNo())) {
+				LOGGER.info("单号已存在，返回历史付款单号" + oldPaymentEntity.getPayNo());
+			}
+			PaymentEntity paymentEntity = new PaymentEntity();
+			if (PaymentEventType.STATEMENT_PAY.equals(paymentParamVO.getOperateType())) {// 对账单付款
+				LOGGER.info("生成对账单付款记录，对账单号：" + paymentParamVO.getOperateNo());
+				paymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE7);
+				paymentEntity.setPayNo(paymentService.getPayNo());
+				paymentEntity.setOrderNum(paymentParamVO.getOperateNo());
+			} else {//无该类型的支付申请
+				LOGGER.info("无该类型的支付申请，请验证申请类型是否正确！");
+				map.put("success",false);
+				map.put("message", "未知支付申请类型");
+				return map;
+			}
+			if (paymentParamVO.getPayTotal() != null)
+				paymentEntity.setAmountMoney(BigDecimal.valueOf(Double.valueOf(paymentParamVO.getPayTotal())));
+			paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
+			paymentEntity.setCreateTime(paymentParamVO.getCreateAt());
+			paymentEntity.setPayChannel(paymentParamVO.getPayChannel());
+			paymentEntity.setOutAccount(paymentParamVO.getPayAccount());
+			paymentEntity.setPayName(paymentParamVO.getPayName());
+			paymentEntity.setDrawUserId(paymentParamVO.getUserId());
+			paymentService.insert(paymentEntity);
+			map.put("success", true);
+			map.put("message", "申请成功");
+		} catch (Exception e) {
+			map.put("success", false);
+			map.put("message", "申请异常");
+			e.printStackTrace();
+		}
+	
+		return map;
+	}
+
+	@Override
+	public void updatePaymentStatus(String[] ids, Integer status, Integer tradeType) {
+		if(ids != null  && Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE7 == tradeType){
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("status", status);
+			paymentService.updateByIds(ids, map);
+		}
+	}
 }
+

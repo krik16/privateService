@@ -6,7 +6,7 @@
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		<tr>
 		  <td style="text-align: center;"><input type="checkbox" id="select-all" onclick="selectAll()"/></td>
-			<td>异常交易号</td>
+			<td>付款单号</td>
 			<td>订单号</td>
 			<td>申请退款时间</td>
 			<td>打款方式</td>

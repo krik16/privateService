@@ -1,13 +1,6 @@
-/**   
- * @Title: DrawApplyController.java 
- * @Package: com.rongyi.tms.web.controller 
- * @Description: TODO
- * @author user  
- * @date 2015年5月14日 下午2:34:57 
- */
-
 package com.rongyi.tms.web.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.core.constant.PayEnum;
@@ -35,14 +27,17 @@ import com.rongyi.core.constant.PaymentEventType;
 import com.rongyi.easy.entity.MallLifeUserEntity;
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.osm.entity.OrderFormEntity;
+import com.rongyi.easy.settle.dto.PaymentStatementDto;
 import com.rongyi.easy.tms.vo.TradeVO;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.rss.mallshop.order.ROAOrderFormService;
 import com.rongyi.rss.rpb.IRpbService;
 import com.rongyi.tms.constants.Constant;
 import com.rongyi.tms.constants.ConstantEnum;
+import com.rongyi.tms.moudle.vo.ResponseResult;
 import com.rongyi.tms.mq.Sender;
 import com.rongyi.tms.service.PayService;
+import com.rongyi.tms.service.PaymentStatementService;
 import com.rongyi.tms.service.RefundService;
 
 /**
@@ -72,6 +67,9 @@ public class PayController extends BaseController {
 
 	@Autowired
 	ROAOrderFormService rOAOrderFormService;
+
+	@Autowired
+	PaymentStatementService paymentStatementService;
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String search(ModelMap model, String currentMallId, HttpServletRequest request, HttpServletResponse response, HttpSession session, String currpage) {
@@ -260,7 +258,12 @@ public class PayController extends BaseController {
 		LOGGER.info("================操作退款/付款前验证是否符合条件 ====================");
 		ResponseResult result = new ResponseResult();
 		try {
-			Map<String, Object> resultMap = rpbService.validatePayHtml(ids, operateType);
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			if (PayEnum.STATEMENT_ONE.getCode().equals(operateType) || PayEnum.STATEMENT_MORE.getCode().equals(operateType)) {
+				resultMap = paymentStatementService.validatePay(ids, operateType);
+			} else {
+				resultMap = rpbService.validatePayHtml(ids, operateType);
+			}
 			result.setSuccess(Boolean.valueOf(resultMap.get("success").toString()));
 			result.setMessage(resultMap.get("message").toString());
 		} catch (Exception e) {
@@ -351,6 +354,8 @@ public class PayController extends BaseController {
 			desc = ConstantEnum.TRADE_TYPE_REFUND.getValueStr();
 		else if (PayEnum.EXCE_PAY_ONE.getCode() == type || PayEnum.EXCE_PAY_MORE.getCode() == type)
 			desc = ConstantEnum.TRADE_TYPE_EXCE_PAY.getValueStr();
+		else if (PayEnum.STATEMENT_ONE.getCode() == type || PayEnum.STATEMENT_MORE.getCode() == type)
+			desc = ConstantEnum.TRADE_TYPE_STATEMENT.getValueStr();
 		return desc;
 	}
 
@@ -417,4 +422,91 @@ public class PayController extends BaseController {
 		return result;
 	}
 
+	/**
+	 * @Description: 对账单列表
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @return
+	 * @Author: 柯军
+	 * @datetime:2015年9月30日下午4:18:33
+	 **/
+	@RequestMapping("/statementList")
+	public String statementList(ModelMap model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		try {
+			LOGGER.info("----statement list ------");
+			Map<String, Object> map = getJsonMap(request);
+			String currpage = (String) map.get("currpage");
+			List<Byte> statusList = new ArrayList<Byte>();
+			statusList.add(ConstantEnum.STATEMENT_STATUE_6.getCodeByte());
+			statusList.add(ConstantEnum.STATEMENT_STATUE_9.getCodeByte());
+			statusList.add(ConstantEnum.STATEMENT_STATUE_10.getCodeByte());
+			statusList.add(ConstantEnum.STATEMENT_STATUE_11.getCodeByte());
+			map.put("statusList", statusList);
+			List<PaymentStatementDto> list = paymentStatementService.selectPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE);
+			double pageTotle = paymentStatementService.selectPageListCount(map);
+			Integer rowContNum = (int) Math.ceil(pageTotle / Constant.PAGE.PAGESIZE);
+			model.addAttribute("rowCont", rowContNum);
+			model.addAttribute("currpage", currpage);
+			model.addAttribute("list", list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/pay/statement_list";
+	}
+
+	/**
+	 * @Description: 线下付款更新状态
+	 * @param paymentIds 付款单id
+	 * @param statementIds  对账单id
+	 * @param payMemo
+	 * @return
+	 * @Author: 柯军
+	 * @datetime:2015年9月30日下午4:31:25
+	 **/
+	@RequestMapping("/statementOffPay")
+	@ResponseBody
+	public ResponseResult statementOffPay(@RequestParam String paymentIds,@RequestParam String statementIds, @RequestParam String tradeNo) {
+		ResponseResult responseResult = new ResponseResult();
+		try {
+			String[] paymentIdsArray = paymentIds.split(",");
+			String[] statementIdsArray = statementIds.split(",");
+			paymentStatementService.updateByOffPay(paymentIdsArray,statementIdsArray, tradeNo, ConstantEnum.STATEMENT_STATUE_12.getCodeInt());
+			responseResult.setSuccess(true);
+			responseResult.setMessage("操作成功");
+		} catch (Exception e) {
+			responseResult.setSuccess(false);
+			responseResult.setMessage("操作失败");
+			e.printStackTrace();
+		}
+
+		return responseResult;
+	}
+
+	/**
+	 * @Description: 冻结/解冻付款
+	 * @param id
+	 * @param status
+	 * @return
+	 * @Author: 柯军
+	 * @datetime:2015年9月30日下午5:39:03
+	 **/
+	@RequestMapping("/freeze")
+	@ResponseBody
+	public ResponseResult freeze(@RequestParam String statementIds, @RequestParam Integer status) {
+		ResponseResult responseResult = new ResponseResult();
+		try {
+			String[] statementIdsArray = statementIds.split(",");
+			paymentStatementService.updateByOffPay(null,statementIdsArray, null, status);
+			responseResult.setSuccess(true);
+			responseResult.setMessage((status == 9 ? "冻结" : "解冻") + "成功");
+		} catch (Exception e) {
+			responseResult.setSuccess(false);
+			responseResult.setMessage("操作失败");
+			e.printStackTrace();
+		}
+
+		return responseResult;
+	}
 }
