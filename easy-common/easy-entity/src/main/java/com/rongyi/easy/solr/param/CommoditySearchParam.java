@@ -11,6 +11,8 @@ package com.rongyi.easy.solr.param;
 
 import java.io.Serializable;
 
+import com.rongyi.easy.malllife.param.MalllifeBaseParam;
+
 /**
  * @author ZhengYl
  *
@@ -19,7 +21,7 @@ import java.io.Serializable;
  * @author ZhengYl
  *
  */
-public class CommoditySearchParam implements Serializable {
+public class CommoditySearchParam  extends MalllifeBaseParam implements Serializable {
 
 	/**  */
 	private static final long serialVersionUID = -3577116644255163015L;
@@ -56,52 +58,6 @@ public class CommoditySearchParam implements Serializable {
 	
 	/** 商品类型 (直播：1 ，全部商品：0)*/
 	private String commodityType;
-
-    private String  jsessionid;//用户信息jsessionid
-    private String  appVersion; //APP版本号
-    private String  appType; // 0 表示 ios,1表示 android
-    private Integer currentPage; //当前页数
-    private Integer pageSize;//每页显示数
-    
-	public Integer getCurrentPage() {
-		return currentPage;
-	}
-
-	public void setCurrentPage(Integer currentPage) {
-		this.currentPage = currentPage;
-	}
-
-	public Integer getPageSize() {
-		return pageSize;
-	}
-
-	public void setPageSize(Integer pageSize) {
-		this.pageSize = pageSize;
-	}
-
-	public String getJsessionid() {
-		return jsessionid;
-	}
-
-	public void setJsessionid(String jsessionid) {
-		this.jsessionid = jsessionid;
-	}
-
-	public String getAppVersion() {
-		return appVersion;
-	}
-
-	public void setAppVersion(String appVersion) {
-		this.appVersion = appVersion;
-	}
-
-	public String getAppType() {
-		return appType;
-	}
-
-	public void setAppType(String appType) {
-		this.appType = appType;
-	}
 
 	public String getCommodityType() {
 		return commodityType;
