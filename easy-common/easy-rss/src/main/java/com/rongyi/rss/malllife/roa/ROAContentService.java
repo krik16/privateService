@@ -287,4 +287,14 @@ public interface ROAContentService {
     public Integer init();
 
     public ContentDDO getFullById(Integer id);
+    
+    /**
+     * 收藏店铺
+     * 兼容店铺的mysqlId,mongoId
+     * @param userId
+     * @param contentId
+     * @param collectableType
+     * @return
+     */
+    public String insertShop(String userId, String shopId);
 }
