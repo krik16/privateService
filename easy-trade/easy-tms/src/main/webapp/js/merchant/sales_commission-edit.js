@@ -12,6 +12,7 @@ $(document).ready(function() {
 	$("#search").click(function(event) {
 		var name = $('#name').val();
 		var commissionNo = $("#liushui-no").val();	
+		var guideType = $("#guideType").val();
 		var mall = $("input[name='mallid']").val();
 		var shop = $("input[name='shopid']").val();
 		var status = $("#hadChecked").val();
@@ -26,7 +27,7 @@ $(document).ready(function() {
 			commissionNo=parseInt(commissionNo)-100000000;
 		}
 		
-		ajaxloadApplys(null,status,commissionNo,name,mall,shop,amountStart,amountEnd,vaStatus);
+		ajaxloadApplys(null,status,commissionNo,guideType,name,mall,shop,amountStart,amountEnd,vaStatus);
 	});
 	
 	$('.fancybox').fancybox();
@@ -52,7 +53,7 @@ $(document).ready(function() {
 		}
 	});
 });
-function ajaxloadApplys(page,status,commissionNo,name,mall,shop,amountStart,amountEnd,vaStatus) {
+function ajaxloadApplys(page,status,commissionNo,guideType,name,mall,shop,amountStart,amountEnd,vaStatus) {
 	var url_ = "../sc/list?module=merchant";
 	var param = $("#isChecked").val();
 	var start = $("input[name='start']").val();
@@ -75,6 +76,7 @@ function ajaxloadApplys(page,status,commissionNo,name,mall,shop,amountStart,amou
 		type : 'get',
 		data : {
 			"commissionNo" : commissionNo,
+			"guideType":guideType,
 			"mallName" : mall,
 			"shopName" : shop,
 			"uploadStartTime" : start,

@@ -31,6 +31,7 @@ public class BonusPageParam {
 	private Integer id;
 	private String sellerAccount;
 	private Integer type;
+	private String guideType;
 	private Integer operateType;
 	private String createStartTime;
 	private String createEndTime;
@@ -45,6 +46,14 @@ public class BonusPageParam {
 			page = 1;
 		}
 		return (page - 1) * Constant.PAGE.PAGESIZE;
+	}
+
+	public String getGuideType() {
+		return guideType;
+	}
+
+	public void setGuideType(String guideType) {
+		this.guideType = guideType;
 	}
 
 	public void setStart(Integer start) {
@@ -144,6 +153,9 @@ public class BonusPageParam {
 		if (StringUtils.isNotBlank(this.createStartTime)) {
 			if (DateUtil.checkDate(this.createStartTime))
 				paramMap.put("createStartTime", DateUtil.stringToDate(this.createStartTime, DateTool.FORMAT_DATETIME));
+		}
+		if(StringUtils.isNotBlank(this.getGuideType())){
+			paramMap.put("guideType", Integer.valueOf(this.getGuideType()));
 		}
 		if (StringUtils.isNotBlank(this.createEndTime)) {
 			if (DateUtil.checkDate(this.createEndTime))

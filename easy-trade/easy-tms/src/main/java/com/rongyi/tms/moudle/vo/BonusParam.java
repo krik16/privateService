@@ -28,6 +28,15 @@ public class BonusParam {
 	private Integer operateType;
 	private BigDecimal amount;
 	private String marks;
+	private String guideType;
+
+	public String getGuideType() {
+		return guideType;
+	}
+
+	public void setGuideType(String guideType) {
+		this.guideType = guideType;
+	}
 
 	public Integer getId() {
 		return id;
@@ -98,6 +107,9 @@ public class BonusParam {
 		}
 		if (StringUtils.isNotBlank(marks)) {
 			vo.setMarks(marks);
+		}
+		if(StringUtils.isNotBlank(this.getGuideType())){
+			vo.setGuideType(Integer.valueOf(this.getGuideType()));
 		}
 		return vo;
 	}

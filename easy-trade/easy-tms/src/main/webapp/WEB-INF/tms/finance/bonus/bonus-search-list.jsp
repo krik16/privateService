@@ -16,6 +16,7 @@
 				</c:if>
 
 				<td style="text-align: center;">流水号</td>
+				<td style="text-align: center;">渠道</td>
 				<td style="text-align: center;">卖家账号</td>
 				<c:if test="${checked==2}">
 					<td style="text-align: center;" id="td-check">审核</td>
@@ -42,6 +43,10 @@
 						<td style="text-align: center;"><a
 							href="${ctx}/bonus/detail?id=${item.id}" target="_blank"
 							style="text-decoration: underline;">${item.sdNo}</a></td>
+						<td>
+							<c:if test="${item.guideType==1}">商家</c:if>
+							<c:if test="${item.guideType==2}">买手</c:if>
+						</td>
 						<td style="text-align: center;">${item.sellerAccount }</td>
 						<c:if test="${checked==2}">
 							<td style="text-align: center;"><c:choose>

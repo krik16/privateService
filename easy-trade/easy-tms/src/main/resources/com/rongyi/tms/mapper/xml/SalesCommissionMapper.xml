@@ -16,6 +16,7 @@
 	<resultMap id="BonusMap" type="com.rongyi.tms.moudle.vo.BonusVO">
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="sd_no" property="sdNo" jdbcType="INTEGER" />
+		<result column="guide_type" property="guideType" jdbcType="INTEGER" />
 		<result column="guide_id" property="sellerId" jdbcType="VARCHAR" />
 		<result column="seller_account" property="sellerAccount"
 			jdbcType="VARCHAR" />
@@ -45,6 +46,7 @@
 		<result column="shop_mid" property="shopMid" jdbcType="VARCHAR" />
 		<result column="shop_name" property="shopName" jdbcType="VARCHAR" />
 		<result column="buyer_id" property="buyerId" jdbcType="VARCHAR" />
+		<result column="guide_type" property="guideType" jdbcType="INTEGER" />
 		<result column="buyer_account" property="buyerAccount"
 			jdbcType="VARCHAR" />
 		<result column="seller_name" property="sellerName" jdbcType="VARCHAR" />
@@ -88,7 +90,7 @@
 		mall_mid,mall_name,shop_mid,shop_name,buyer_id,buyer_account,seller_name,seller_account,order_create_at
 	</sql>
 	<sql id="Bonus_info_list">id,id+100000000 as sd_no
-		,guide_id,seller_account,type,commission_amount,status,update_user,create_user,create_at,remarks</sql>
+		,guide_id,seller_account,type,commission_amount,status,update_user,create_user,create_at,remarks,guide_type</sql>
 	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
 		parameterType="java.lang.Integer">
 		select
@@ -239,6 +241,9 @@
 		<if test="id!=null">
 			and id=#{id,jdbcType=INTEGER}
 		</if>
+		<if test="guideType!=null">
+			and guide_type=#{guideType,jdbcType=INTEGER}
+		</if>
 		<if test="sellerAccount !=null">
 			and seller_account=#{sellerAccount,jdbcType=VARCHAR}
 		</if>
@@ -270,6 +275,9 @@
 		from sales_commission where type is not null
 		<if test="id!=null">
 			and id=#{id,jdbcType=INTEGER}
+		</if>
+		<if test="guideType!=null">
+			and guide_type=#{guideType,jdbcType=INTEGER}
 		</if>
 		<if test="sellerAccount !=null">
 			and seller_account=#{sellerAccount,jdbcType=VARCHAR}
@@ -334,7 +342,8 @@
 		create_at,
 		create_user,
 		remarks,
-		`status`
+		`status`,
+		guide_type
 		)
 		VALUES (
 		#{sellerId,jdbcType=VARCHAR},
@@ -344,7 +353,8 @@
 		NOW(),
 		#{createUser,jdbcType=VARCHAR},
 		#{marks,jdbcType=LONGVARBINARY},
-		#{status,jdbcType=TINYINT}
+		#{status,jdbcType=TINYINT},
+		#{guideType,jdbcType=INTEGER}
 		)
 	</insert>
 	<insert id="batchInsertBonus" parameterType="java.util.List">
@@ -557,6 +567,9 @@
 			</if>
 			<if test="marks != null">
 				remarks = #{marks,jdbcType=LONGVARBINARY},
+			</if>
+			<if test="guideType != null">
+				guide_type = #{guideType,jdbcType=INTEGER},
 			</if>
 			update_at=NOW()
 		</set>
