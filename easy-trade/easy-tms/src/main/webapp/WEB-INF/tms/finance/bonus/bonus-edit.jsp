@@ -100,25 +100,23 @@ body {
 										</c:choose>
 									</select>
 						</li>
-						<li class="detail" >
-								<span style="width:80px">渠道：</span>
-								<select id="guideType" name="">
-									<c:choose>
-										<c:when test="${bonus==null }">
-											<option value="1" selected>商家</option>
-											<option value="2">买手</option>
-										</c:when>
-										<c:when test="${bonus!=null}">
-											<option value="1" <c:if test="${bonus.guideType==1 }">selected="selected"</c:if>>商家</option>
-											<option value="2" <c:if test="${bonus.guideType==2 }">selected="selected"</c:if>>买手</option>
-										</c:when>
-									</c:choose>
-								</select>
-						</li>
-						
+
 						<li class="w_100 lvse size-14">备注</li>
 						<li class="detail" >
-								<textarea rows="10" cols="10" id="marks" name="marks">${bonus.marks}</textarea>
+							<textarea rows="10" cols="10" id="marks" name="marks">${bonus.marks}</textarea>
+							<span style="width:80px;margin-left: 60px">渠道：</span>
+							<select id="guideType" name="">
+								<c:choose>
+									<c:when test="${bonus==null }">
+										<option value="1" selected>商家</option>
+										<option value="2">买手</option>
+									</c:when>
+									<c:when test="${bonus!=null}">
+										<option value="1" <c:if test="${bonus.guideType==1 }">selected="selected"</c:if>>商家</option>
+										<option value="2" <c:if test="${bonus.guideType==2 }">selected="selected"</c:if>>买手</option>
+									</c:when>
+								</c:choose>
+							</select>
 						</li>
 					</ul>
 				
@@ -126,7 +124,7 @@ body {
 			</div>
 			<div class="shopsButton">
 				<a href="javascript:history.go(-1);" class="Button">返回</a>
-				<a href="JavaScript:void(0);" style="margin-left: 20px;" class="Button saveAccount  checked" id="save">保存</a>
+				<a href="javaScript:void(0);" style="margin-left: 20px;" class="Button saveAccount  checked" id="save">保存</a>
 			</div>
 			</form>
 		</div>
@@ -165,6 +163,10 @@ var originalGuideType = $("#guideType").val();
 		var guideType = $("#guideType").val();
 		var operateType = $("select:[name='operateType']").val();
 		var type,marks,amount,temp=0;
+		if(guideType==2 && operateType==2){
+			_util.cmsTip("买手无验码佣金，请重新选择");
+			return;
+		}
 		if(laterSellerAccount==originalSellerAccount){
 			temp++;
 		}
