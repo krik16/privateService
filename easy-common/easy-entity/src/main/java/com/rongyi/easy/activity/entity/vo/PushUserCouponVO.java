@@ -27,12 +27,15 @@ public class PushUserCouponVO implements Serializable{
     private List<String> couponCodes;
     private String couponTitle;
     private String userId;
-    private String couponType;
+    private Integer couponType;
     private String type;
     private String useRestriction;
-    private Double currentPrice;
+    private Integer currentPrice;
     private Date validBeginDate;
     private Date validEndDate;
+    private String userPhone;
+    private String pushChannelId;
+
 
     /**
      * Creates a new instance of PushUserCouponVO.
@@ -52,7 +55,7 @@ public class PushUserCouponVO implements Serializable{
      * @param validEndDate
      */
 
-    public PushUserCouponVO(String pushId, String pushName, String couponId, List<String> couponCodes, String couponTitle, String userId, String couponType, String type, String useRestriction, Double currentPrice, Date validBeginDate, Date validEndDate) {
+    public PushUserCouponVO(String pushId, String pushName, String couponId, List<String> couponCodes, String couponTitle, String userId, Integer couponType, String type, String useRestriction, Integer currentPrice, Date validBeginDate, Date validEndDate,String userPhone,String pushChannelId) {
         super();
         this.pushId = pushId;
         this.pushName = pushName;
@@ -66,6 +69,8 @@ public class PushUserCouponVO implements Serializable{
         this.currentPrice = currentPrice;
         this.validBeginDate = validBeginDate;
         this.validEndDate = validEndDate;
+        this.userPhone=userPhone;
+        this.pushChannelId=pushChannelId;
     }
 
     @Override
@@ -77,13 +82,23 @@ public class PushUserCouponVO implements Serializable{
             ", couponCodes=" + couponCodes +
             ", couponTitle='" + couponTitle + '\'' +
             ", userId='" + userId + '\'' +
-            ", couponType='" + couponType + '\'' +
+            ", couponType=" + couponType +
             ", type='" + type + '\'' +
             ", useRestriction='" + useRestriction + '\'' +
             ", currentPrice=" + currentPrice +
             ", validBeginDate=" + validBeginDate +
             ", validEndDate=" + validEndDate +
+            ", userPhone='" + userPhone + '\'' +
+            ", pushChannelId='" + pushChannelId + '\'' +
             '}';
+    }
+
+    public String getPushChannelId() {
+        return pushChannelId;
+    }
+
+    public void setPushChannelId(String pushChannelId) {
+        this.pushChannelId = pushChannelId;
     }
 
     public String getPushId() {
@@ -134,11 +149,11 @@ public class PushUserCouponVO implements Serializable{
         this.userId = userId;
     }
 
-    public String getCouponType() {
+    public Integer getCouponType() {
         return couponType;
     }
 
-    public void setCouponType(String couponType) {
+    public void setCouponType(Integer couponType) {
         this.couponType = couponType;
     }
 
@@ -158,11 +173,11 @@ public class PushUserCouponVO implements Serializable{
         this.useRestriction = useRestriction;
     }
 
-    public Double getCurrentPrice() {
+    public Integer getCurrentPrice() {
         return currentPrice;
     }
 
-    public void setCurrentPrice(Double currentPrice) {
+    public void setCurrentPrice(Integer currentPrice) {
         this.currentPrice = currentPrice;
     }
 
@@ -180,6 +195,14 @@ public class PushUserCouponVO implements Serializable{
 
     public void setValidEndDate(Date validEndDate) {
         this.validEndDate = validEndDate;
+    }
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
     }
     
 }

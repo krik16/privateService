@@ -9,6 +9,8 @@
  */
 package com.rongyi.easy.coupon.param;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -98,6 +100,11 @@ public class RmmmCouponParam implements Serializable {
 	 * [随时退,过期退,免预约”,”不可退”]  如对应[1,0,0,0]，是集合类型 ,0否 1是
 	 */
 	private List<Integer> afterSaleService;
+
+	/**
+	 * 创建人
+	 */
+	private String createUser;
 
 	public String getTitle() {
 		return title;
@@ -227,14 +234,34 @@ public class RmmmCouponParam implements Serializable {
 		this.afterSaleService = afterSaleService;
 	}
 
-	@Override
-	public String toString() {
-		return "RmmmCouponParam [title=" + title + ", totalCount=" + totalCount + ", limitCount=" + limitCount
-				+ ", originalPrice=" + originalPrice + ", currentPrice=" + currentPrice + ", publishBeginDate="
-				+ publishBeginDate + ", publishEndDate=" + publishEndDate + ", validBeginDate=" + validBeginDate
-				+ ", validEndDate=" + validEndDate + ", useRestriction=" + useRestriction + ", useDescription=" + useDescription
-				+ ", detailPicUrls=" + detailPicUrls + ", shopId=" + shopId + ", limitPublishCount=" + limitPublishCount
-				+ ", limitUseCount=" + limitUseCount + ", afterSaleService=" + afterSaleService + "]";
+	public String getCreateUser() {
+		return createUser;
 	}
 
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append("title", title)
+				.append("totalCount", totalCount)
+				.append("limitCount", limitCount)
+				.append("originalPrice", originalPrice)
+				.append("currentPrice", currentPrice)
+				.append("publishBeginDate", publishBeginDate)
+				.append("publishEndDate", publishEndDate)
+				.append("validBeginDate", validBeginDate)
+				.append("validEndDate", validEndDate)
+				.append("useRestriction", useRestriction)
+				.append("useDescription", useDescription)
+				.append("detailPicUrls", detailPicUrls)
+				.append("shopId", shopId)
+				.append("limitPublishCount", limitPublishCount)
+				.append("limitUseCount", limitUseCount)
+				.append("afterSaleService", afterSaleService)
+				.append("createUser", createUser)
+				.toString();
+	}
 }

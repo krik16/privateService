@@ -1,15 +1,18 @@
 package com.rongyi.easy.coupon.param;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.List;
 
 /**
  * 卡券订单参数
  * <p/>
- * 名词解释： 卡券：包括优惠券、现金券
+ * 名词解释： 卡券：包括优惠券、红包
  *
  * @author Breggor
  */
+
 public class CouponOrderParam implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -112,5 +115,19 @@ public class CouponOrderParam implements Serializable {
 
     public void setCouponCodes(List<String> couponCodes) {
         this.couponCodes = couponCodes;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("activityId", activityId)
+                .append("activityName", activityName)
+                .append("couponId", couponId)
+                .append("couponCode", couponCode)
+                .append("userId", userId)
+                .append("userSrc", userSrc)
+                .append("couponCodes", couponCodes)
+                .append("business", business)
+                .toString();
     }
 }

@@ -1,12 +1,12 @@
 package com.rongyi.easy.solr.result;
 
+import com.rongyi.easy.solr.retrival.result.ActivityData;
+import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-
-import org.apache.commons.beanutils.PropertyUtils;
-
-import com.rongyi.easy.solr.retrival.result.ActivityData;
 
 public class ActivityDetailSearchResult implements Serializable{
 
@@ -50,5 +50,13 @@ public class ActivityDetailSearchResult implements Serializable{
 		PropertyUtils.copyProperties(this.result, data);
 	}
 
-	
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append("meta", meta)
+				.append("result", result)
+				.append("other_activities", other_activities)
+				.append("apply_shops", apply_shops)
+				.toString();
+	}
 }

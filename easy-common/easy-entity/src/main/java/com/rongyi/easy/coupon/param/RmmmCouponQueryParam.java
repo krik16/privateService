@@ -1,7 +1,7 @@
 /** 
  * @Title: RmmmCouponQueryParam.java 
  * @Package com.rongyi.easy.coupon.param 
- * @Description: RMMM查询现金券动作的请求参数封装
+ * @Description: RMMM查询红包动作的请求参数封装
  * @author 郑亦梁  zhengyiliang@rongyi.com
  * @date 2015年4月24日 下午4:19:40 
  * @version V1.0   
@@ -33,7 +33,7 @@ public class RmmmCouponQueryParam implements Serializable {
 	private String shopId;
 
 	/**
-	 * 现金券状态
+	 * 红包状态
 	 */
 	private String status;
 

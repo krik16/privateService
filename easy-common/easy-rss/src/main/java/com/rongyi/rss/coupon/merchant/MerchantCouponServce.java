@@ -1,8 +1,7 @@
 package com.rongyi.rss.coupon.merchant;
 
-import com.rongyi.core.common.PagingVO;
-import com.rongyi.easy.coupon.entity.mysql.Coupon;
-import com.rongyi.easy.coupon.entity.mysql.CouponRejectRecord;
+import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.coupon.entity.CouponRejectRecord;
 import com.rongyi.easy.coupon.vo.merchant.MerchantPaging;
 import com.rongyi.easy.coupon.vo.merchant.StatisticsCountVO;
 import com.rongyi.easy.coupon.vo.merchant.UserInfoVo;
@@ -41,7 +40,7 @@ public interface MerchantCouponServce {
      * 插入一条coupon
      * @return coupon id
      */
-    public int insertCoupon(Integer inChannel);
+    public String insertCoupon(Integer inChannel,UserInfoVo createUser);
 
     /**
      * 获取未通过列表
@@ -49,7 +48,7 @@ public interface MerchantCouponServce {
      * @param type
      * @return
      */
-    public List<CouponRejectRecord> getUnpassReasons(Integer couponId,Integer type);
+    public List<CouponRejectRecord> getUnpassReasons(String couponId,Integer type);
 
     /**
      * 根据登录用户统计，该用户所对应集团/品牌/分公司/商场 下面优惠券的 审核状态的数量
@@ -64,5 +63,7 @@ public interface MerchantCouponServce {
      * @return
      */
     public StatisticsCountVO statisticsPublishCount(UserInfoVo userInfoVo) ;
+
+    public Coupon selectByPrimaryKey(String couponId);
 
 }

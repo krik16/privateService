@@ -3,7 +3,7 @@ package com.rongyi.easy.coupon.vo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 /**
- * 提供给摩店 (订单管理)现金券VO
+ * 提供给摩店 (订单管理)红包VO
  * @author hebo
  *
  */
@@ -14,7 +14,7 @@ public class MMUserCouponVO implements Serializable {
 
     private String title;// 券名称
 
-    private BigDecimal discount;// 抵扣金额(现金券面值)
+    private BigDecimal discount;// 抵扣金额(红包面值)
 
     private String validBeginDate;// 有效期开始时间
 

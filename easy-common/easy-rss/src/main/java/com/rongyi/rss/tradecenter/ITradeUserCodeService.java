@@ -26,4 +26,6 @@ public interface ITradeUserCodeService {
 
     Map<String, Object> findTradeUserCodeForStatisticsCounts(Map<String, Object> paramsMap);
 
+    int dailyBuyCount(String couponId, String userId);
+
 }
