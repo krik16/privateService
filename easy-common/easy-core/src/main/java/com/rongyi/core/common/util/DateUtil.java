@@ -105,6 +105,14 @@ public class DateUtil {
         return org.apache.commons.lang.time.DateUtils.truncate(new Date(date.getTime() - DateUtil.DAY * numDay), Calendar.DATE);
     }
     
+	public static Date getDaysInAdd(int numDay) {
+        return org.apache.commons.lang.time.DateUtils.truncate(new Date((new Date()).getTime() + DateUtil.DAY * numDay), Calendar.DATE);
+    }
+
+    public static Date getDaysInAdd(Date date, int numDay) {
+        return org.apache.commons.lang.time.DateUtils.truncate(new Date(date.getTime() + DateUtil.DAY * numDay), Calendar.DATE);
+    }
+    
     public static Date getTomorrow(Date date) {
         if (date == null) return null;
         return org.apache.commons.lang.time.DateUtils.truncate(new Date(date.getTime() + DateUtil.DAY), Calendar.DATE);
@@ -459,9 +467,6 @@ public class DateUtil {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
 		Date currentTime = new Date();
 		return formatter.format(currentTime);
-	}
-	public static void main(String[] args) {
-		System.err.println(getCurrentDateYYYYMMDDHHMMSSsss());
 	}
 	public static boolean isYesterday(Date date){
 		

@@ -15,6 +15,7 @@ import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.PayAccountUseTotal;
+import com.rongyi.easy.rpb.vo.PaymentParamVO;
 import com.rongyi.easy.rpb.vo.QueryOrderParamVO;
 
 /**
@@ -131,5 +132,24 @@ public interface IRpbService {
 	 * @datetime:2015年9月1日下午2:44:13
 	 **/
 	public abstract Map<String,Object> validatePayHtml(String[] ids,Integer operateType);
+	
+	/**	
+	 * @Description: 生成付款 
+	 * @param paymentParamVO
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年9月28日下午1:32:47
+	 **/
+	public abstract Map<String,Object> generatePayment(PaymentParamVO paymentParamVO);
+	
+	/**	
+	 * @Description: 更新付款单状态 
+	 * @param ids
+	 * @param status
+	 * @param tradeType	
+	 * @Author:  柯军
+	 * @datetime:2015年10月14日下午6:33:40
+	 **/
+	public abstract void updatePaymentStatus(String[] ids,Integer status,Integer tradeType);
 	
 }
