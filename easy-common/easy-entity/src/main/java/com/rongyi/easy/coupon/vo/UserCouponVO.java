@@ -51,7 +51,17 @@ public class UserCouponVO implements Serializable {
     
     private Integer applyScope;//适用范围:商品/代金券[0] 商品[1] 代金券[2]
     
-    public Integer getApplyObject() {
+    private List<String> label;//标签
+    
+    public List<String> getLabel() {
+		return label;
+	}
+
+	public void setLabel(List<String> label) {
+		this.label = label;
+	}
+
+	public Integer getApplyObject() {
 		return applyObject;
 	}
 
