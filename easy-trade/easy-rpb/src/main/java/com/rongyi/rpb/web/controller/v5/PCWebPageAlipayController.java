@@ -74,8 +74,8 @@ public class PCWebPageAlipayController extends BaseController {
 			if (Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE2 == paymentEntity.getTradeType()) {// 打款给卖家
 				map = pcWebPageAlipayService.getOnePayInfo(paymentEntity.getPayNo(), paymentEntity.getAmountMoney().toString(), "13564452580", "柯军", "test");
 			} else {// 退款给客户
-				PaymentEntity hisPayEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);// 根据退款单记录中的订单号找到对应的历史付款单记录（用来查找付款交易流水号）
-				PaymentLogInfo paymentLogInfo = paymentLogInfoService.selectByOutTradeNo(hisPayEntity.getPayNo());
+				PaymentEntity hisPayEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,null);// 根据退款单记录中的订单号找到对应的历史付款单记录（用来查找付款交易流水号）
+				PaymentLogInfo paymentLogInfo = paymentLogInfoService.selectByOutTradeNo(hisPayEntity.getPayNo(),hisPayEntity.getTradeType());
 				if (paymentLogInfo != null)
 					map = pcWebPageAlipayService.getRefunInfo(paymentEntity, "1", paymentEntity.getAmountMoney().toString(), paymentLogInfo.getTrade_no(), "协商退款");
 				else
@@ -259,14 +259,13 @@ public class PCWebPageAlipayController extends BaseController {
 						paymentLogInfo.setTimeEnd(DateUtil.getCurrDateTime());
 						paymentLogInfo.setBuyer_type(0);// 买家账号
 						paymentLogInfo.setEventType(3);
-						paymentLogInfo.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
-						PaymentEntity refundPaymentEntity = null;
-						refundPaymentEntity =  getPaymentByPayTradeNo(paymentLogInfo.getTrade_no(),batch_no);
+						PaymentEntity refundPaymentEntity =  getPaymentByPayTradeNo(paymentLogInfo.getTrade_no(),batch_no);
 						if (refundPaymentEntity != null) {
+							paymentLogInfo.setTradeType(refundPaymentEntity.getTradeType());
 							paymentLogInfo.setOutTradeNo(refundPaymentEntity.getPayNo());
 							paymentLogInfoService.insertGetId(paymentLogInfo);
 							LOGGER.info("更改退款项状态 0--->2,退款单号=" + refundPaymentEntity.getPayNo());
-							paymentService.updateListStatusBypayNo(refundPaymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_STATUS.STAUS2);// 修改打款状态
+							paymentService.updateListStatusBypayNo(refundPaymentEntity.getPayNo(), refundPaymentEntity.getTradeType(), Constants.PAYMENT_STATUS.STAUS2);// 修改打款状态
 							refundNotifyMq(refundPaymentEntity);
 						}else{
 							LOGGER.info("订单不存在，退款状态更新失败.交易流水号-->"+paymentLogInfo.getTrade_no()+",批量单号-->"+batch_no);
@@ -317,7 +316,7 @@ public class PCWebPageAlipayController extends BaseController {
 	 * @datetime:2015年5月26日下午5:45:59
 	 **/
 	private PaymentEntity getPaymentByPayTradeNo(String tradeNo,String batchNo) {
-	PaymentEntity refundPaymentEntity = new PaymentEntity();
+	PaymentEntity refundPaymentEntity = null;
 	PaymentLogInfo oldPaymentLogInfo = paymentLogInfoService.selectByPayTradeNo(tradeNo);
 	List<PaymentEntity> paymentEntityList = paymentService.selectByPayNoAndTradeType(oldPaymentLogInfo.getOutTradeNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
 	if (paymentEntityList != null && !paymentEntityList.isEmpty()) {

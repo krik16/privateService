@@ -52,7 +52,8 @@ public interface Constants {
 		int TRADE_TYPE2 = 2;// 打款给卖家
 		int TRADE_TYPE3 = 3;// 提现
 		int TRADE_TYPE4 = 4;// 异常支付
-		int TRADE_TYPE5 = 5;//重复打款
+		int TRADE_TYPE5 = 5;//重复支付
+		int TRADE_TYPE6 = 6;//重复支付退款
 	}
 
 	interface PAYMENT_TRADE_TYPE_STR {

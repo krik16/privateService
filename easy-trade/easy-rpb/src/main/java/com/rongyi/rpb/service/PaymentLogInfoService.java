@@ -26,12 +26,13 @@ public interface PaymentLogInfoService {
 	public abstract Integer insertGetId(PaymentLogInfo logInfo);
 
 	/**
-	 * 根据付款单查询（支付宝返回结果记录）
+	 * 根据付款单查询（支付事件记录）
 	 * 
 	 * @param outTradeNo
+	 * @param tradeType
 	 * @return
 	 */
-	public abstract PaymentLogInfo selectByOutTradeNo(String outTradeNo);
+	public abstract PaymentLogInfo selectByOutTradeNo(String outTradeNo,Integer tradeType);
 
 	/**
 	 * 根据id查询

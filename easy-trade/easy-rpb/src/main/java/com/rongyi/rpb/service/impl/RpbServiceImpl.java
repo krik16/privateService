@@ -104,7 +104,7 @@ public class RpbServiceImpl implements IRpbService {
 	public Map<String, Object> operateWeixinRefund(Integer id) {
 		Map<String, Object> messageMap = new HashMap<String, Object>();
 		PaymentEntity paymentEntity = paymentService.selectByPrimaryKey(id.toString());
-		PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);
+		PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,paymentEntity.getPayChannel());
 		if (weixinPayService.weixinRefund(oldPaymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), oldPaymentEntity.getAmountMoney().doubleValue(), paymentEntity.getPayNo())) {
 			paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
 			paymentService.updateByPrimaryKeySelective(paymentEntity);
@@ -142,7 +142,7 @@ public class RpbServiceImpl implements IRpbService {
 			}
 			return resultMap;
 		}
-		PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, null);
+		PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, null,null);
 		if (paymentEntity == null) {
 			resultMap.put("errno", "100");
 			resultMap.put("errMsg", "订单支付记录不存在！");
@@ -157,7 +157,7 @@ public class RpbServiceImpl implements IRpbService {
 			QueryOrderParamVO queryOrderParamVO = aliPaymentService.queryOrder(null, paymentEntity.getPayNo());
 			payAccount = queryOrderParamVO.getBuyer_email();
 		}
-		if (Constants.PAYMENT_STATUS.STAUS2 != paymentEntity.getStatus()) {//异步通知暂未收到
+		if (Constants.PAYMENT_STATUS.STAUS2 != paymentEntity.getStatus()) {// 异步通知暂未收到
 			if (queryOrderPayStatus(null, paymentEntity.getPayNo(), paymentEntity.getPayChannel())) {
 				LOGGER.info("发送同步支付通知,订单号-->" + orderNo);
 				List<PaySuccessResponse> responseList = paymentLogInfoService.paySuccessToMessage(paymentEntity.getPayNo(), payAccount, orderNums, paymentEntity.getOrderType(), payChannel);
@@ -169,9 +169,10 @@ public class RpbServiceImpl implements IRpbService {
 					LOGGER.info(resultMap.toString());
 				}
 			}
-		}else{
+		} else {
 			List<PaySuccessResponse> responseList = paymentLogInfoService.paySuccessToMessage(paymentEntity.getPayNo(), payAccount, orderNums, paymentEntity.getOrderType(), payChannel);
-			resultMap = responseList.get(0).getResult();
+			if (!responseList.isEmpty())
+				resultMap = responseList.get(0).getResult();
 		}
 		return resultMap;
 	}
@@ -233,7 +234,6 @@ public class RpbServiceImpl implements IRpbService {
 		}
 		return false;
 	}
-
 
 	@Override
 	public QueryOrderParamVO queryOrder(Map<String, Object> map) {

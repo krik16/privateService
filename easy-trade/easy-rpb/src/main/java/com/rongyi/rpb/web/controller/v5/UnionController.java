@@ -129,7 +129,7 @@ public class UnionController extends BaseController {
 		if (list != null && !list.isEmpty()) {
 			paymentService.updateListStatusBypayNo(unionCouponLogVO.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS0);// 修改付款单状态
 			// 付款事件记录标记删除
-			PaymentLogInfo paymentLogInfo = paymentLogInfoService.selectByOutTradeNo(unionCouponLogVO.getPayNo());
+			PaymentLogInfo paymentLogInfo = paymentLogInfoService.selectByOutTradeNo(unionCouponLogVO.getPayNo(),null);
 			if (paymentLogInfo != null)
 				paymentLogInfoService.updateDeleteStatus(paymentLogInfo.getId(), Constants.DELETE_STATUS.DELETE_STATUS1);
 			// TODO 发送支付失败事件到订单状态机(待确定)

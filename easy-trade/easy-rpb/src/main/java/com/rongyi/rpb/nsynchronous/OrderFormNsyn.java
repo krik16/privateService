@@ -48,7 +48,7 @@ public class OrderFormNsyn {
 							final OrderFormEntity orderFormEntity = rOAOrderFormService.getOrderFormByOrderNum(tempOrderNumArray[i]);
 							if (orderFormEntity != null) {
 								final PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(tempOrderNumArray[i], Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0,
-										Constants.PAYMENT_STATUS.STAUS2);
+										Constants.PAYMENT_STATUS.STAUS2,null);
 								if (paymentEntity != null) {
 									paymentEntity.setOrderPrice(orderFormEntity.getTotalAmount());
 									paymentService.updateByPrimaryKeySelective(paymentEntity);
