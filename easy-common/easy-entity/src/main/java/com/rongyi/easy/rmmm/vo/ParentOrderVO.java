@@ -94,6 +94,16 @@ public class ParentOrderVO implements Serializable {
 	private String scoreDeduction;// 颜值抵扣金额
 	private String DeductCouponAmount;// 抵扣券实际抵扣价格
 
+	private String liveName;//直播名
+
+	public String getLiveName() {
+		return liveName;
+	}
+
+	public void setLiveName(String liveName) {
+		this.liveName = liveName;
+	}
+
 	public Integer getGuideType() {
 		return guideType;
 	}
