@@ -61,19 +61,26 @@
 			 <div class="search" style="height: 60px;">
 			<div class="memSuper-search" style="height: 130px; width: 100%">
 
-				<input type="hidden" value="1" name="pageNo" id="currpage">
+				<input type="hidden" value="1" name="pageNo" id="currpage"/>
 					<input type="hidden" value="2" id="isChecked" />
-				<ur>
-				<li>返佣流水号:<input type="text" id="liushui-no"></input>
+				<ul>
+				<li>返佣流水号:<input type="text" id="liushui-no"/>
+				</li>
+				<li>渠道:
+					<select id="guideType"  style="width: 90px">
+						<option value="">--全部--</option>
+						<option value="1">商家</option>
+						<option value="2">买手</option>
+					</select>
 				</li>
 				
-				<li class="xiala">商场：<input type="text" name='mallid' class="detail"></input>
+				<li class="xiala">商场：<input type="text" name='mallid' class="detail"/>
 				</li>
 				
-				<li class="xiala">店铺：<input type="text" name="shopid" class="detail"></input>
+				<li class="xiala">店铺：<input type="text" name="shopid" class="detail"/>
 				</li>
 				
-				<li>卖家姓名：<input id="name" type="text" class="detail"></input>
+				<li>卖家姓名：<input id="name" type="text" class="detail"/>
 				</li>
 				</li>
 				
@@ -113,17 +120,16 @@
 				<sec:authorize ifAnyGranted="TMS_F_SC_VERIFY" >
 					<a href="javascript:void(0);" class="btnsearch" style="border:0px;float: right;width: 100px" id="batch-check" onclick="batchCheck();" >批量审核通过</a></sec:authorize>
 				</li>
+					</ul>
 				<!-- <a href="javascript:void(0);" class="btnsearch" style="border:0px;float: right;width: 100px" id="batch-check" onclick="payingNow();" >立即打款</a> -->
 			</div>
 			</div>
 		</div>
 		<div id="resultList" class="memSuper-list member-search-list">
-			<input id="currpage" type="hidden" name="currpage"
+			<input <%--id="currpage"--%> type="hidden" name="currpage"
 				value="<c:out value='${currpage}'/>" />
 		</div>
-
 	</div>
-
 	</div>
 	<div class="MsgBoxBg"></div>
 	<div class="MsgBoxBgTip"></div>

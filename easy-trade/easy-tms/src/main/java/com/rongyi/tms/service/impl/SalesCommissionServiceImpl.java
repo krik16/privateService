@@ -2,10 +2,10 @@
  * @Title: SalesCommissionServiceImpl.java 
  * @Package com.rongyi.tms.service.impl 
  * @Description: TODO
- * @author 郑亦�?  zhengyiliang@rongyi.com
- * @date 2015�?5�?22�? 下午3:48:12 
+ * @author 郑亦�?  zhengyiliang@rongyi.com
+ * @date 2015�?5�?22�? 下午3:48:12 
  * @version V1.0   
- * Copyright (C),上海容易网电子商务有限公�?
+ * Copyright (C),上海容易网电子商务有限公�?
  */
 package com.rongyi.tms.service.impl;
 
@@ -138,12 +138,12 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 			if (bodyMap != null) {
 				MQCommissionParam mqCommissionParam = MQCommissionParam.mapToEntity(bodyMap);
 
-				// �?查数据库中是否有此订单的记录（因小票上传而产生）
+				// �?查数据库中是否有此订单的记录（因小票上传而产生）
 				SalesCommission salesCommission = selectByOrderNo(mqCommissionParam.getOrderNo());
 				if (salesCommission == null)
 					salesCommission = new SalesCommission();
 
-				// 传入的佣金数�?
+				// 传入的佣金数�?
 				salesCommission.setCommissionAmount(mqCommissionParam.getCommissionAmount());
 				salesCommission.setGuideId(mqCommissionParam.getGuideId());
 				salesCommission.setOrderNo(mqCommissionParam.getOrderNo());
@@ -158,10 +158,10 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 				}
 
 				if (salesCommission.getId() != null) {
-					// 记录存在，在佣金生成前已上传过小�?
+					// 记录存在，在佣金生成前已上传过小�?
 					updateByOrderNo(salesCommission);
 				} else {
-					// 记录不存在，未传过小�?
+					// 记录不存在，未传过小�?
 					salesCommission.setStatus(0);
 					insert(salesCommission);
 				}
@@ -216,8 +216,15 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 	public int updateBatch(CheckParam param, String user) {
 		Map<String, Object> paramsMap = param.paramToMap();
 		TransConfigurations transConf = rmmmSettingsService.getLatestTransConfigurations();
-		LOGGER.info("读取的参数为�?" + transConf.getCommissionCountMax());
-		paramsMap.put("max_commission_times", transConf.getCommissionCountMax() == 0 ? 5 : transConf.getCommissionCountMax());
+		LOGGER.info("读取的参数为�?" + transConf.getCommissionCountMax());
+		paramsMap.put("guideType", param.getGuideType());
+		if (param.getGuideType()==2) {
+			//买手
+			paramsMap.put("max_commission_times", transConf.getMaiShouCommissionCountMax() == 0 ? 5 : transConf.getMaiShouCommissionCountMax());
+		}else {
+			//导购
+			paramsMap.put("max_commission_times", transConf.getCommissionCountMax() == 0 ? 5 : transConf.getCommissionCountMax());
+		}
 		LOGGER.info("MAP:" + paramsMap);
 		int result = this.getBaseDao().updateBySql(NAMESPACE_SALESCOMMISSION + ".batchUpdate", paramsMap);
 		if (result > 0) {
@@ -231,7 +238,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 					auditLog.setMemo(param.getReason());
 				logService.createCommissionAuditLog(auditLog);
 			}
-			LOGGER.info(param.getStatus() > 0 ? param.getStatus() + "级审核操作�?�过" : (-param.getStatus() + "级审核未通过"));
+			LOGGER.info(param.getStatus() > 0 ? param.getStatus() + "级审核操作�?�过" : (-param.getStatus() + "级审核未通过"));
 			return 1;
 		} else {
 			return -1;
@@ -267,7 +274,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 		List<CommissionAmountTotalVO> vos = this.getBaseDao().selectListBySql(NAMESPACE_SALESCOMMISSION + ".commissionAmountTotal");
 		LOGGER.info("查询到需要发送到  VA 的记录数为：" + vos.size());
 		if (!vos.isEmpty()) {
-			// 每次MQ 消息�?多发�?50条记录，超过50的话，分次发�?
+			// 每次MQ 消息�?多发�?50条记录，超过50的话，分次发�?
 			int times = vos.size() % Constant.SENDSIZE.SIZE == 0 ? vos.size() / Constant.SENDSIZE.SIZE : (vos.size() / Constant.SENDSIZE.SIZE + 1);
 			LOGGER.info("times:" + times);
 			for (int i = 0; i < times; i++) {
@@ -297,11 +304,11 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 					MessageEvent event = MessageEvent.getMessageEvent(bodyMap, "tms", "va", VirtualAccountEventTypeEnum.COMMISSION_BATCH_POST.getCode());
 					sender.convertAndSend(event);
 				} else {
-					LOGGER.info("更新失败�?");
+					LOGGER.info("更新失败�?");
 				}
 			}
 		} else {
-			LOGGER.info("定时查询总金额没有查询到数据�?");
+			LOGGER.info("定时查询总金额没有查询到数据�?");
 		}
 
 	}

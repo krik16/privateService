@@ -18,6 +18,7 @@ $(document).ready(function() {
 		if(commissionNo!=null&&commissionNo!=""&&!isNaN(commissionNo)){
 			commissionNo=parseInt(commissionNo)-100000000;
 		}
+		var guideType = $("#guideType").val();
 		var name = $('#name').val();
 		
 		var mall = $("input[name='mallid']").val();
@@ -31,7 +32,7 @@ $(document).ready(function() {
 			return;
 		}
 		
-		ajaxloadApplys(null,commissionNo,mall,shop,amountStart,amountEnd,name,status,vaStatus);
+		ajaxloadApplys(null,commissionNo,guideType,mall,shop,amountStart,amountEnd,name,status,vaStatus);
 	});
 	$('.fancybox').fancybox();
 	$('.fancybox-buttons').fancybox({
@@ -57,7 +58,7 @@ $(document).ready(function() {
 	});
 
 });
-function ajaxloadApplys(page,commissionNo,mall,shop,amountStart,amountEnd,name,status,vaStatus) {
+function ajaxloadApplys(page,commissionNo,guideType,mall,shop,amountStart,amountEnd,name,status,vaStatus) {
 	var url_ = "../sc/list?module=finance";
 	var param = $("#isChecked").val();
 	var start = $("input[name='start']").val();
@@ -80,6 +81,7 @@ function ajaxloadApplys(page,commissionNo,mall,shop,amountStart,amountEnd,name,s
 		type : 'get',
 		data : {
 			"commissionNo" : commissionNo,
+			"guideType" : guideType,
 			"mallName" : mall,
 			"shopName" : shop,
 			"uploadStartTime" : start,
@@ -107,9 +109,10 @@ function ajaxloadApplys(page,commissionNo,mall,shop,amountStart,amountEnd,name,s
 	});
 }
 
-function checkApplys(ids, status, reason) {
+function checkApplys(ids, guideType, status, reason) {
 	$.post("../sc/check", {
 		ids : ids,
+		guideType : guideType,
 		status : status,
 		operateBiz:2,
 		reason : reason
@@ -176,7 +179,7 @@ function switchCheck(check) {
 	ajaxloadApplys();
 }
 
-function checkUnpass(id) {
+function checkUnpass(id, guideType) {
 	confirmMSG(
 			"理由：<textarea rows='5' cols='42' id='reason' placeholder='请输入100字符以内未通过理由'></textarea>",
 			function() {
@@ -189,7 +192,7 @@ function checkUnpass(id) {
 						_util.cmsTip("字数超过限制！");
 						return -1;
 					} else {
-						checkApplys(id, -2, reason);
+						checkApplys(id, guideType, -2, reason);
 					}
 				}
 			});
