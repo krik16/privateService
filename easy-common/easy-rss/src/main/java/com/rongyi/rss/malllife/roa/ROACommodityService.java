@@ -44,7 +44,7 @@ public interface ROACommodityService {
 	public ResponseResult getCommodityListByShopId(int identity, String shopId, String buyerId, int orderBy,
 			String keyword, int currentpage, int pagesize);
 
-	public ResponseResult getLiveCommodityList(int identity, String buyerId, int orderBy, int currentpage,
+	public ResponseResult getLiveCommodityList(String keyword, int identity, String buyerId, int orderBy, int currentpage,
 			int pagesize);
 
 	public String publishCommodity(CommodityVO commodityvo, long shopId, String shopMid, long brandId, long mallId,
