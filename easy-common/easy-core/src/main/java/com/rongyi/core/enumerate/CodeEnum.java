@@ -32,6 +32,7 @@ public enum CodeEnum {
     ERROR_WECHAT("-1103", "微信号已注册"),
     ERROR_EMAIL("-1104", "邮箱已注册"),
     ERROR_NICKNAME("-1105","昵称已经存在不能注册"),
+    ERROR_UPGRADENICKNAME("-1106","已有相同昵称存在,请更换"),
     ERROR_TELEPHONEEXISIT("-1109","电话号码不能为空"),
     ERROR_PHONEEXISIT("-1110","手机号码已存在"),
     
@@ -62,6 +63,10 @@ public enum CodeEnum {
     ERROR_EXCLUSIVE_GUIDE("-1126","设置专属导购出错"),
     ERROR_CANCEL_EXCLUSIVE_GUIDE("-1127","取消专属导购出错"),
     ERROR_EXCLUSIVE_GUIDE_LIST("-1128","专属导购列表当前页无数据"),
+    ERROR_CREATE_BRAND_MALL("-1129","创建品牌商场关联表出错"),
+    ERROR_INSERT_BRAND("-1130","插入品牌信息出错"),
+    ERROR_INSERT_MALL("-1131","插入商场信息出错"),
+    ERROR_INSERT_SHOP("-1132","插入店铺信息出错"),
     /** 密码修改 */
     ERROR_ORIGINAL_PASSOWRD("-1212", "原密码不正确"),
     ERROR_NEW_INVALID("-1213", "新密码无效"),
@@ -135,6 +140,7 @@ public enum CodeEnum {
     ERROR_COUPON_OUTDATE("-6001","此红包不可用"),
     ERROR_COUPON_REPEAT("-6002","一张红包只能使用一次"),
     ERROR_COUPON_PUBLISH_OVER("-6003","每日限量发行数填写错误"),
+    ERROR_COUPON_PUBLISH_CHANNEL("-6004","亲，活动券你不能管理哦"),
 
     ERROR_ACCOUNT_INSUFFICIENT_BALANCE("-7001","账户余额不足"),
     ERROR_ACCOUNT_NO_PERMISSION("-7002","账户被冻结或未授权"),
@@ -164,7 +170,8 @@ public enum CodeEnum {
     ERROR_PRAISE_NOTICE("1063002","对店铺公告点赞或取消赞失败"),
     ERROR_SAVE_NOTICE("1073003","新建店铺公告失败"),
     ERROR_UPDATE_NOTICE("1073004","修改店铺公告失败"),
-    ERROR_DELETE_NOTICE("1073005","删除店铺公告失败");
+    ERROR_DELETE_NOTICE("1073005","删除店铺公告失败"),
+    ERROR_OFFLINE_NOTICE("1073006","公告已强制下线");
     
     
     private String code; 

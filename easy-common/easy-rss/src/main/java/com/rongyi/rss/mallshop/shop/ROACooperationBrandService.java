@@ -116,4 +116,20 @@ public interface ROACooperationBrandService {
 	 * @throws Exception
 	 */
 	public BrandWallListVO getBrandWallListVO(String categoryId) throws Exception;
+	
+	/**
+	 * 通过mongoId获取mongo数据库中的品牌信息
+	 * 
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public BrandEntity getBrandEntityByMongoId(String brandMid) throws Exception;
+	/**
+	 * 通过brandMongoId得到rmmm库中的Integer类型brandId
+	 * @param brandMid
+	 * @return
+	 * @throws Exception
+	 */
+	public Integer getAndSaveCooperateBrandByBrandMid(String brandMid) throws Exception;
 }

@@ -42,4 +42,12 @@ public class MaxIntegralParam implements Serializable {
 		this.orderList = orderList;
 	}
 
+	@Override
+	public String toString() {
+		return "MaxIntegralParam{" +
+				"orderPrice=" + orderPrice +
+				", expressFee=" + expressFee +
+				", orderList=" + orderList +
+				'}';
+	}
 }

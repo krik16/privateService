@@ -47,15 +47,27 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	@Field("commodityBrandId")
 	private String commodityBrandId;
 	@Field("price")
-	private double price;
+	private Double price;
+	@Field("spot")
+	private Boolean spot;
+	@Field("type")
+	private Integer type;
+	@Field("liveId")
+	private String liveId;
+	@Field("liveStartTime")
+	private Date liveStartTime;
+	@Field("liveEndTime")
+	private Date liveEndTime;
+	@Field("createBy")
+	private String createBy;
 	@Field("commodityNameSubdiv")
 	private String commodityNameSubdiv;
 	
-	public double getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 	public String getCommodityMallId() {
@@ -202,6 +214,54 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	}
 	public void setCommodityNameSubdiv(String commodityNameSubdiv) {
 		this.commodityNameSubdiv = commodityNameSubdiv;
+	}
+
+	public Boolean getSpot() {
+		return spot;
+	}
+
+	public void setSpot(Boolean spot) {
+		this.spot = spot;
+	}
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	public String getLiveId() {
+		return liveId;
+	}
+
+	public void setLiveId(String liveId) {
+		this.liveId = liveId;
+	}
+
+	public Date getLiveStartTime() {
+		return liveStartTime;
+	}
+
+	public void setLiveStartTime(Date liveStartTime) {
+		this.liveStartTime = liveStartTime;
+	}
+
+	public Date getLiveEndTime() {
+		return liveEndTime;
+	}
+
+	public void setLiveEndTime(Date liveEndTime) {
+		this.liveEndTime = liveEndTime;
+	}
+
+	public String getCreateBy() {
+		return createBy;
+	}
+
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
 	}
 
 }

@@ -20,6 +20,7 @@ public class UserManagerParam extends BaseParam implements Serializable{
     private static final long serialVersionUID = 1L;
 
     private Integer id;//账户id
+    private String userAccount ;//用户账号
     private String userLogo;//用户头像
     private String  phone; //验证号码是否可注册
     private String  checkCode;//验证码",
@@ -47,11 +48,27 @@ public class UserManagerParam extends BaseParam implements Serializable{
     private String stopReason;//停用原因
     private String creatingUserType;
     private Integer merUserId;//操作人id
+ 
+
+	private String userDesc;//买手描述
+	private int flag=0;//操作参数 1升级功能
+	private int isUpdate = 0;  //操作参数  （==1直接修改未合作店长为已合作店长 ）
+
+
+
     public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getUserDesc() {
+		return userDesc;
+	}
+
+	public void setUserDesc(String userDesc) {
+		this.userDesc = userDesc;
 	}
 
 	public String getCreatingUserType() {
@@ -61,6 +78,14 @@ public class UserManagerParam extends BaseParam implements Serializable{
     
 	public void setCreatingUserType(String creatingUserType) {
 		this.creatingUserType = creatingUserType;
+	}
+
+	public int getFlag() {
+		return flag;
+	}
+
+	public void setFlag(int flag) {
+		this.flag = flag;
 	}
 
 	public Integer getRoleId() {
@@ -269,6 +294,18 @@ public Integer getIdentity() {
 		return merUserId;
 	}
 
+	public String getUserAccount() {
+		return userAccount;
+	}
+	public int getIsUpdate() {
+		return isUpdate;
+	}
+	public void setIsUpdate(int isUpdate) {
+		this.isUpdate = isUpdate;
+	}
+	public void setUserAccount(String userAccount) {
+		this.userAccount = userAccount;
+	}
 	public void setMerUserId(Integer merUserId) {
 		this.merUserId = merUserId;
 	}}

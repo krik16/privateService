@@ -1,7 +1,14 @@
 package com.rongyi.easy.rmmm.entity;
 
-public class RefundTypeEntity {
-    /** 主键 */
+import java.io.Serializable;
+
+public class RefundTypeEntity implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** 主键 */
     private Integer id;
 
     /** 退款类型名称 */

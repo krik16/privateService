@@ -61,6 +61,7 @@ public class OldCoupon implements Serializable {
     @Property("current_price")
     private Double currentPrice;// 现价
 
+
     private String type;// 配置类型 0:商场 1:店铺；红包 0：全场，1：商品
 
     @Property("check_description")

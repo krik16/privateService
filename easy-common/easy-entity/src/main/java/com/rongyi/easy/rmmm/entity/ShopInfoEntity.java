@@ -3,7 +3,12 @@ package com.rongyi.easy.rmmm.entity;
 import java.io.Serializable;
 
 public class ShopInfoEntity implements Serializable{
-    /** 主键 */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** 主键 */
     private Integer id;
 
     /** 店铺名称 */

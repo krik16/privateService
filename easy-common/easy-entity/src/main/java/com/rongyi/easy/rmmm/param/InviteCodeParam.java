@@ -11,6 +11,8 @@ public class InviteCodeParam implements Serializable{
 	private String number;
 	private String proposerAccount;
 
+	private int type=0;//2为买手
+
 
 	private String shopName;//":店名
 	private String cityName;//":城市名
@@ -76,5 +78,13 @@ public class InviteCodeParam implements Serializable{
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
 	}
 }

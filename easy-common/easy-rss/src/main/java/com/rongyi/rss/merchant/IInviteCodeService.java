@@ -15,6 +15,14 @@ public interface IInviteCodeService {
 	 * @throws Exception
 	 */
 	public boolean validationInviteCode(String code) throws Exception;
+	
+	/**
+	 * 验证邀请码
+	 * @param code
+	 * @throws Exception
+	 */
+	public boolean validationInviteCode(String code,Integer type) throws Exception;
+	
 	/**
 	 * 生成邀请码并将数据存入数据库
 	 * @param paramsMap
@@ -36,6 +44,13 @@ public interface IInviteCodeService {
 	 * @throws MallShopException
 	 */
 	public Integer UpdateByCode(String inviteCode,Integer userId) throws Exception;
+	
+	/**
+	 * 根据邀请码 进行更新
+	 * @param inviteCode
+	 * @throws MallShopException
+	 */
+	public Integer UpdateByCode(String inviteCode,Integer userId,Integer type) throws Exception;
 
 	/**
 	 * 查邀请码申请记录表数据数量

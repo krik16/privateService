@@ -15,6 +15,8 @@ public class SessionUserInfo implements Serializable{
     private Integer isCooperation;
 
     private String userPhone;
+    
+    private String userAccount;
 
     private String userName;
 
@@ -150,6 +152,14 @@ public class SessionUserInfo implements Serializable{
 
 	public void setUserPhone(String userPhone) {
 		this.userPhone = userPhone;
+	}
+
+	public String getUserAccount() {
+		return userAccount;
+	}
+
+	public void setUserAccount(String userAccount) {
+		this.userAccount = userAccount;
 	}
 
 	public String getUserName() {

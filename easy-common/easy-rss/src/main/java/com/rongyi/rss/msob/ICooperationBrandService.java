@@ -52,7 +52,7 @@ public interface ICooperationBrandService {
 
 	/**
 	 * 通过mongo id 获取品牌信息
-	 * @param param
+	 * @param
 	 * @return
 	 * @throws Exception
 	 */
@@ -86,7 +86,7 @@ public interface ICooperationBrandService {
 	/**
 	 * 品牌详情API
 	 * 
-	 * @param param
+	 * @param
 	 * @return
 	 * @throws Exception
 	 */
@@ -95,7 +95,7 @@ public interface ICooperationBrandService {
 	/**
 	 * 通过mongo id 获取品牌信息
 	 * 
-	 * @param param
+	 * @param
 	 * @return
 	 * @throws Exception
 	 */
@@ -103,7 +103,7 @@ public interface ICooperationBrandService {
 	
 	/**
 	 * 通过mongo id 获取品牌信息，不管是否已删除
-	 * @param param
+	 * @param
 	 * @return
 	 * @throws Exception
 	 */
@@ -116,4 +116,13 @@ public interface ICooperationBrandService {
 	 * @throws Exception
 	 */
 	public BrandWallListVO getBrandWallListVO(String categoryId) throws Exception;
+	
+	/**
+	 * 通过mongoId获取mongo数据库中的品牌信息
+	 * 
+	 * @param
+	 * @return
+	 * @throws Exception
+	 */
+	public BrandEntity getBrandEntityByMongoId(String brandMid) throws Exception;
 }

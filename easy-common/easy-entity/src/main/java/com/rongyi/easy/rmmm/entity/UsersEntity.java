@@ -1,8 +1,15 @@
 package com.rongyi.easy.rmmm.entity;
 
-public class UsersEntity {
+import java.io.Serializable;
+
+public class UsersEntity implements Serializable{
 	
-    private Long id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
 
     /** 用户头像logo*/
     private String logo;

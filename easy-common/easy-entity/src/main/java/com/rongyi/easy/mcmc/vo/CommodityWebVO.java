@@ -25,6 +25,8 @@ public class CommodityWebVO implements Serializable{
 	private boolean cashCoupon=false;//是否关联了现金卷
 	private String postage;
 	private String descrite;//商品描述
+	private String typeName; //渠道  1商家，2买手
+	private String spotName;// 是否现货
 	public CommodityWebVO(){
 		
 	}
@@ -53,6 +55,12 @@ public class CommodityWebVO implements Serializable{
 		this.code=commodity.getCode();
 		this.postage=commodity.getPostage();
 		this.descrite=commodity.getDescription();
+		this.typeName = (commodity.getType() == 1 ? "买手" : "商家");
+		if (commodity.getType() == 1) {
+			this.spotName = (commodity.isSpot() ? "自采" : "非自采");
+		} else {
+			this.spotName = "";
+		}
 	}
 	
 	
@@ -150,5 +158,21 @@ public class CommodityWebVO implements Serializable{
 	}
 	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;
+	}
+
+	public String getTypeName() {
+		return typeName;
+	}
+
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
+	}
+
+	public String getSpotName() {
+		return spotName;
+	}
+
+	public void setSpotName(String spotName) {
+		this.spotName = spotName;
 	}
 }

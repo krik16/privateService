@@ -1,5 +1,7 @@
 package com.rongyi.rss.mallshop.order;
 
+import java.util.Map;
+
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
@@ -27,7 +29,7 @@ public interface ROAOrderService {
 	 * @return
 	 * @throws Exception
 	 */
-	public ResponseResult submitOrder(SubmitOrderParam submitOrderParam, String buyerNum) throws Exception;
+//	public ResponseResult submitOrder(SubmitOrderParam submitOrderParam, String buyerNum) throws Exception;
 	
 	/**
 	 * 订单操作关闭订单API
@@ -44,7 +46,7 @@ public interface ROAOrderService {
 	 * @return
 	 * @throws Exception
 	 */
-	public ResponseResult orderPriceChange(OrderDealedParam param) throws Exception;
+//	public ResponseResult orderPriceChange(OrderDealedParam param) throws Exception;
 	
 	/**
 	 * 我的订单列表
@@ -116,7 +118,7 @@ public interface ROAOrderService {
 	 * @return
 	 * @throws Exception
 	 */
-	public void sendBodyByOrderEventType(ObjectId buyerNum, String orderNum, String orderEventType) throws Exception;
+//	public void sendBodyByOrderEventType(ObjectId buyerNum, String orderNum, String orderEventType) throws Exception;
 	
 	/**
 	 * 根据订单号查询订单所属店铺、商场，以及买家信息
@@ -125,15 +127,6 @@ public interface ROAOrderService {
 	 * @throws Exception
 	 */
 	public ShopMallVO getShopMallVOByOrderNum(String orderNum) throws Exception;
-	
-	/**
-	 * 根据买家id，收货地址id获取买家信息
-	 * @param orderNo
-	 * @param expressInfoId
-	 * @return
-	 * @throws Exception
-	 */
-	public BuyerVO getCustomerInfo(String buyerId, String addressId) throws Exception;
 	
 	/**
 	 * 根据订单号，物流id获取
@@ -178,5 +171,12 @@ public interface ROAOrderService {
 	 * @throws Exception
 	 */
 	public  Integer getMaxIntegral(MaxIntegralParam param, double limit, double moenyExchangeScore) throws Exception;
+	
+	/**
+	 * 分解订单状态路径
+	 * @param statusRoute
+	 * @return
+	 */
+	public Map<String, String> getRouteByStatusRoute(String statusRoute);
 
 }

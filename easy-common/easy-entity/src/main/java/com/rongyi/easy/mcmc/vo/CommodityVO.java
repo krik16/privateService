@@ -1,9 +1,10 @@
 package com.rongyi.easy.mcmc.vo;
 
-import com.rongyi.easy.mcmc.Commodity;
-
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
+
+import com.rongyi.easy.mcmc.Commodity;
 
 
 public class CommodityVO  implements  Serializable {
@@ -27,6 +28,82 @@ public class CommodityVO  implements  Serializable {
 	private String commodityCPriceMax;//我是最高现价”,
 	private String commodityCPriceMin;//我是最低现价”,
 	private String commodityOPOfLCP;//我是最低现价对应的原价
+	
+	private int commodityType;//渠道  0商家，1买手
+	private int isSpot;//是否现货	
+	private Date liveStartTime; // 直播开始时间
+	private Date liveEndTime; // 直播结束时间
+	private String create_by; // 创建人 
+	private String liveId; // 直播Id
+	private String commodityOriginalPrice;
+	private String commodityCurrentPrice;
+	private String shopId;
+	private String shopMid; // shop mongo id
+	private String commodityShopNumber;
+	private List<String> commodityPicList;
+	private List<CommoditySpecVO> commoditySpecList;
+	private String commodityCode;
+	private String commodityCommission;
+	private String brandMid;//品牌mongoId
+	private String mallMid;//商场mongoId
+	private String shopName;//店铺名称
+	private boolean supportCourierDeliver=true;//true是  false否
+	
+	public String getShopName() {
+		return shopName;
+	}
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+	public String getBrandMid() {
+		return brandMid;
+	}
+	public void setBrandMid(String brandMid) {
+		this.brandMid = brandMid;
+	}
+	public String getMallMid() {
+		return mallMid;
+	}
+	public void setMallMid(String mallMid) {
+		this.mallMid = mallMid;
+	}
+	public String getLiveId() {
+		return liveId;
+	}
+	public void setLiveId(String liveId) {
+		this.liveId = liveId;
+	}
+	public Date getLiveStartTime() {
+		return liveStartTime;
+	}
+	public void setLiveStartTime(Date liveStartTime) {
+		this.liveStartTime = liveStartTime;
+	}
+	public Date getLiveEndTime() {
+		return liveEndTime;
+	}
+	public void setLiveEndTime(Date liveEndTime) {
+		this.liveEndTime = liveEndTime;
+	}
+	public String getCreate_by() {
+		return create_by;
+	}
+	public void setCreate_by(String create_by) {
+		this.create_by = create_by;
+	}
+	public int getCommodityType() {
+		return commodityType;
+	}
+	public void setCommodityType(int commodityType) {
+		this.commodityType = commodityType;
+	}
+	
+	public int getIsSpot() {
+		return isSpot;
+	}
+	public void setIsSpot(int isSpot) {
+		this.isSpot = isSpot;
+	}
 	public String getCommodityOPriceMax() {
 		return commodityOPriceMax;
 	}
@@ -69,14 +146,14 @@ public class CommodityVO  implements  Serializable {
 	public void setCommodityStatus(int commodityStatus) {
 		this.commodityStatus = commodityStatus;
 	}
-	private String commodityOriginalPrice;
-	private String commodityCurrentPrice;
-	private String shopId;
-	private String commodityShopNumber;
-	private List<String> commodityPicList;
-	private List<CommoditySpecVO> commoditySpecList;
-	private String commodityCode;
-	private String commodityCommission;
+	
+	
+	public String getShopMid() {
+		return shopMid;
+	}
+	public void setShopMid(String shopMid) {
+		this.shopMid = shopMid;
+	}
 	public String getCommodityCommission() {
 		return commodityCommission;
 	}
@@ -100,11 +177,25 @@ public class CommodityVO  implements  Serializable {
 		
 	}
 	public CommodityVO(Commodity commodity){
+		this.commodityType = commodity.getType();
 		this.shopId = commodity.getShopId();
+		this.shopMid = commodity.getShopMid();//店铺mongoId
+		this.create_by = commodity.getCreate_by();//创建人
+		this.liveId = commodity.getLiveId();//直播id
+		this.liveStartTime = commodity.getLiveStartTime();//直播开始时间
+		this.liveEndTime = commodity.getLiveEndTime();//直播结束时间
 		this.commodityId = commodity.getId().toString();
 		this.commodityName = commodity.getName();
 		this.commodityCategory = commodity.getCategory();
 		this.commodityDescription = commodity.getDescription();
+		this.brandMid = commodity.getBrandMid();//品牌mongoId
+		this.mallMid = commodity.getMallMid();//商场mongoId
+		if(commodity.isSpot()){
+			this.isSpot = 1;//现货
+		}else{
+			this.isSpot = 0;//非现货
+		}
+		
 
 		if(commodity.getPostage() != null && !commodity.getPostage().isEmpty()){
 			try{
@@ -140,7 +231,7 @@ public class CommodityVO  implements  Serializable {
 		this.commodityCPriceMax = commodity.getcPriceMax();
 		this.commodityCPriceMin = commodity.getcPriceMin();
 		this.commodityOPOfLCP = commodity.getoPriceOfLowestCPrice();
-
+		this.supportCourierDeliver = commodity.isSupportCourierDeliver();
 
 	}
 	public String getCommodityId() {
@@ -215,5 +306,49 @@ public class CommodityVO  implements  Serializable {
 	public void setCommoditySpecList(List<CommoditySpecVO> commoditySpecList) {
 		this.commoditySpecList = commoditySpecList;
 	}
+	public boolean isSupportCourierDeliver() {
+		return supportCourierDeliver;
+	}
+	public void setSupportCourierDeliver(boolean supportCourierDeliver) {
+		this.supportCourierDeliver = supportCourierDeliver;
+	}
 
+	@Override
+	public String toString() {
+		return "CommodityVO{" +
+				"commodityId='" + commodityId + '\'' +
+				", commodityName='" + commodityName + '\'' +
+				", commodityCategory='" + commodityCategory + '\'' +
+				", commodityDescription='" + commodityDescription + '\'' +
+				", commodityPostage='" + commodityPostage + '\'' +
+				", commodityStock='" + commodityStock + '\'' +
+				", commoditySold='" + commoditySold + '\'' +
+				", commodityPubDate='" + commodityPubDate + '\'' +
+				", commodityStatus=" + commodityStatus +
+				", commodityOPriceMax='" + commodityOPriceMax + '\'' +
+				", commodityOPriceMin='" + commodityOPriceMin + '\'' +
+				", commodityCPriceMax='" + commodityCPriceMax + '\'' +
+				", commodityCPriceMin='" + commodityCPriceMin + '\'' +
+				", commodityOPOfLCP='" + commodityOPOfLCP + '\'' +
+				", commodityType=" + commodityType +
+				", isSpot=" + isSpot +
+				", liveStartTime=" + liveStartTime +
+				", liveEndTime=" + liveEndTime +
+				", create_by='" + create_by + '\'' +
+				", liveId='" + liveId + '\'' +
+				", commodityOriginalPrice='" + commodityOriginalPrice + '\'' +
+				", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +
+				", shopId='" + shopId + '\'' +
+				", shopMid='" + shopMid + '\'' +
+				", commodityShopNumber='" + commodityShopNumber + '\'' +
+				", commodityPicList=" + commodityPicList +
+				", commoditySpecList=" + commoditySpecList +
+				", commodityCode='" + commodityCode + '\'' +
+				", commodityCommission='" + commodityCommission + '\'' +
+				", brandMid='" + brandMid + '\'' +
+				", mallMid='" + mallMid + '\'' +
+				", shopName='" + shopName + '\'' +
+				", supportCourierDeliver=" + supportCourierDeliver +
+				'}';
+	}
 }

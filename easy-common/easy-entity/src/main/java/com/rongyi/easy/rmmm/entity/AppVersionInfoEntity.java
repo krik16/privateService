@@ -1,8 +1,14 @@
 package com.rongyi.easy.rmmm.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class AppVersionInfoEntity {
+public class AppVersionInfoEntity implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/**  */
 	private Integer id;
 

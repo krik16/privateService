@@ -1,5 +1,6 @@
 package com.rongyi.easy.coupon.entity;
 
+
 import com.rongyi.core.util.AmountConversion;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -19,7 +20,6 @@ public class UserRedenvelope implements Serializable {
 
 
     private Integer id;
-
 
     /**
      * 领用人id
@@ -99,6 +99,7 @@ public class UserRedenvelope implements Serializable {
     public UserRedenvelope() {
     }
 
+
     public UserRedenvelope(String userId, String couponId, String couponCode, Integer discount, Integer status, Date receiveAt, Integer channel, Date validStartAt, Date validEndAt, String activityName) {
         this.userId = userId;
         this.couponId = couponId;
@@ -111,6 +112,7 @@ public class UserRedenvelope implements Serializable {
         this.validEndAt = validEndAt;
         this.activityName = activityName;
     }
+
 
     public UserRedenvelope(String userId, String userName, String couponId, String couponCode, Integer discount, Integer status, String userAccount, Date receiveAt, Date useAt, Integer channel, String orderNo, Date validStartAt, Date validEndAt, String activityId, String activityName) {
         this.userId = userId;
@@ -236,6 +238,7 @@ public class UserRedenvelope implements Serializable {
     }
 
 
+
     public Integer getDiscount() {
         return discount;
     }
@@ -243,6 +246,7 @@ public class UserRedenvelope implements Serializable {
     public double getDiscount2Double() {
         double dis = 0D;
         if (discount != null) {
+
             dis = AmountConversion.fenToYuan(discount);
         }
         return dis;

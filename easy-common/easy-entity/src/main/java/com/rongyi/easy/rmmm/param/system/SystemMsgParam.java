@@ -21,7 +21,11 @@ public class SystemMsgParam implements Serializable{
 
     private String msgId;//消息Id
 
+    private Integer sellerId;//卖家Id
+
     private Integer msgStatus;//删除 -1 阅读 0 收藏 1
+
+    private String jsessionid;
 
     public String getCurrentPage() {
         return currentPage;
@@ -61,5 +65,21 @@ public class SystemMsgParam implements Serializable{
 
     public void setMsgStatus(Integer msgStatus) {
         this.msgStatus = msgStatus;
+    }
+
+    public Integer getSellerId() {
+        return sellerId;
+    }
+
+    public void setSellerId(Integer sellerId) {
+        this.sellerId = sellerId;
+    }
+
+    public String getJsessionid() {
+        return jsessionid;
+    }
+
+    public void setJsessionid(String jsessionid) {
+        this.jsessionid = jsessionid;
     }
 }

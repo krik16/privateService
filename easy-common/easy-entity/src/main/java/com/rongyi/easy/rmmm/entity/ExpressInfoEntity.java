@@ -1,9 +1,15 @@
 package com.rongyi.easy.rmmm.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ExpressInfoEntity {
-    /** 主键 */
+public class ExpressInfoEntity implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** 主键 */
     private Integer id;
 
     /** 快递公司名称 */

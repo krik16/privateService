@@ -108,5 +108,12 @@ public interface MSCouponService {
      */
     public List<OldCouponVO> findCouponIndexByIds(List<String> ids);
 
+    /**
+     * 根据卡券ID获取卡券详情
+     * @param couponId 卡券ID
+     * @return coupon
+     * @author lqy
+     */
+    Coupon getCouponById(String couponId);
 }
 

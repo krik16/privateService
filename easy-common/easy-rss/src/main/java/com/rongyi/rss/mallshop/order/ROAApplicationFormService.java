@@ -3,6 +3,7 @@ package com.rongyi.rss.mallshop.order;
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
+import com.rongyi.easy.osm.entity.ApplicationFormEntity;
 import com.rongyi.easy.rmmm.param.AfterSaleParam;
 import com.rongyi.easy.rmmm.param.RefundDetailParam;
 import com.rongyi.easy.rmmm.param.RefundParam;
@@ -63,5 +64,14 @@ public interface ROAApplicationFormService {
 	 * @throws Exception
 	 */
 	public ResponseResult cancelRefund(RefundParam param, ObjectId buyerNum) throws Exception;
+	
+	/**
+	 * 根据主键查询
+	 * 
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	public ApplicationFormEntity selectById(Integer id) throws Exception;
 
 }

@@ -76,6 +76,17 @@ public class MallEntity implements Serializable {
 	private boolean has_building;
 	private Integer position;
 	private String picture;
+
+	private String idStr;
+
+	public String getIdStr(){
+		return this.id.toString();
+	}
+
+	/*public void setIdStr(String idStr){
+		this.idStr = id.toString();
+	}*/
+
 	private String navigation_pic;// 黑白图
 	private String pathImg;// 路径图
 	private String aliasename;

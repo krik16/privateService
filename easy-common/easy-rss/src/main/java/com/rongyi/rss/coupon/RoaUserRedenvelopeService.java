@@ -142,5 +142,4 @@ public interface RoaUserRedenvelopeService {
      * @return
      */
     ResponseResult createByCouponOrderParam(CouponOrderParam param);
-
 }

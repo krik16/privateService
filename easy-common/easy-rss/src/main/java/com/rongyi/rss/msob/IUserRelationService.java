@@ -65,4 +65,12 @@ public interface IUserRelationService {
 	 * @throws Exception
 	 */
 	public RmmmUserRelationEntity getGuideInfoByMallUserIdAndShopIdAndStatus(String mallUserMid,Integer shopId) throws Exception;
+	
+	/**
+	 * 通过导购id查用户关联导购表
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+	public RmmmUserRelationEntity getUserRelationInfoByUserId(Integer userId,String mallUserMid) throws Exception;
 }

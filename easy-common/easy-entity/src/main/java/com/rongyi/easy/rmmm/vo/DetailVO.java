@@ -22,4 +22,10 @@ public class DetailVO extends PageVO implements Serializable {
 		this.detailList = detailList;
 	}
 
+	@Override
+	public String toString() {
+		return "DetailVO{" +
+				"detailList=" + detailList +
+				'}';
+	}
 }

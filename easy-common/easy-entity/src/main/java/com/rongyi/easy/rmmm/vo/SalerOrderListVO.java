@@ -22,5 +22,11 @@ public class SalerOrderListVO extends PageVO implements Serializable{
 	public void setParentOrderList(List<SalerParentOrderVO> parentOrderList) {
 		this.parentOrderList = parentOrderList;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "SalerOrderListVO{" +
+				"parentOrderList=" + parentOrderList +
+				'}';
+	}
 }

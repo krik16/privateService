@@ -2,9 +2,7 @@ package com.rongyi.rss.tradecenter;
 
 import com.rongyi.easy.coupon.entity.UserCoupon;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by xgq on 2015/8/26.

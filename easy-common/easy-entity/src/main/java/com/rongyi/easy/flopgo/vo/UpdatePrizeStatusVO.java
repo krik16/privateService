@@ -67,7 +67,8 @@ public class UpdatePrizeStatusVO implements Serializable
 
 
         }
-    }
+
+        }
     public String getUsername() {
         return username;
     }
@@ -104,7 +105,6 @@ public class UpdatePrizeStatusVO implements Serializable
     public void setType(String type) {
         this.type = type;
     }
-
     public List<CouponVO.CouponProduct> getScope() {
         return scope;
     }
@@ -159,5 +159,6 @@ public class UpdatePrizeStatusVO implements Serializable
     public void setDetail_img(List<String> detail_img) {
         this.detail_img = detail_img;
     }
+
 
 }

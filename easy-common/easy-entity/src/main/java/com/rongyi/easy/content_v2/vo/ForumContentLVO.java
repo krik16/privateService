@@ -29,6 +29,14 @@ public class ForumContentLVO  implements Serializable{
 	private Date createAt;
 	/**状态0待发布、1已发布、2已关闭*/
 	private Integer status;
+	/**
+	 *iosVersion版本
+	 */
+	private String iosVersion;
+	/**
+	 * 安卓版本号
+	 */
+	private String androidVersion;
 	public Integer getId() {
 		return id;
 	}
@@ -95,15 +103,39 @@ public class ForumContentLVO  implements Serializable{
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+
 	@Override
 	public String toString() {
-		return "ForumContentLVO [id=" + id + ", positionId=" + positionId
-				+ ", provName=" + provName + ", cityName=" + cityName
-				+ ", picUrls=" + picUrls + ", title=" + title
-				+ ", publishBeginAt=" + publishBeginAt + ", publishEndAt="
-				+ publishEndAt + ", createUser=" + createUser + ", createAt="
-				+ createAt + ", status=" + status + "]";
+		return "ForumContentLVO{" +
+				"id=" + id +
+				", positionId=" + positionId +
+				", provName='" + provName + '\'' +
+				", cityName='" + cityName + '\'' +
+				", picUrls='" + picUrls + '\'' +
+				", title='" + title + '\'' +
+				", publishBeginAt=" + publishBeginAt +
+				", publishEndAt=" + publishEndAt +
+				", createUser='" + createUser + '\'' +
+				", createAt=" + createAt +
+				", status=" + status +
+				", iosVersion='" + iosVersion + '\'' +
+				", androidVersion='" + androidVersion + '\'' +
+				'}';
 	}
 
-	
+	public String getIosVersion() {
+		return iosVersion;
+	}
+
+	public void setIosVersion(String iosVersion) {
+		this.iosVersion = iosVersion;
+	}
+
+	public String getAndroidVersion() {
+		return androidVersion;
+	}
+
+	public void setAndroidVersion(String androidVersion) {
+		this.androidVersion = androidVersion;
+	}
 }

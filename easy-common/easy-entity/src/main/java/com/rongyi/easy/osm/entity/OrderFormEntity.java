@@ -76,7 +76,39 @@ public class OrderFormEntity implements Serializable{
     /** 买家备注 */
     private String buyerComment;
     
-    private JSONObject jsonDiscountInfo;   
+    private JSONObject jsonDiscountInfo;
+    
+    /** 1是导购 2是买手*/
+    private Integer guideType;
+    /** 是否已提醒买家付款 0 未提醒 1 已提醒**/
+    private Byte isAlert;
+
+    /**订单总金额（不包括积分优惠）**/
+    private BigDecimal totalAmountWithoutScoreDiscount = null;
+
+	public Byte getIsAlert() {
+		return isAlert;
+	}
+
+	public void setIsAlert(Byte isAlert) {
+		this.isAlert = isAlert;
+	}
+
+    public BigDecimal getTotalAmountWithoutScoreDiscount() {
+        return totalAmountWithoutScoreDiscount;
+    }
+
+    public void setTotalAmountWithoutScoreDiscount(BigDecimal totalAmountWithoutScoreDiscount) {
+        this.totalAmountWithoutScoreDiscount = totalAmountWithoutScoreDiscount;
+    }
+
+    public Integer getGuideType() {
+		return guideType;
+	}
+
+	public void setGuideType(Integer guideType) {
+		this.guideType = guideType;
+	}
 
 	public JSONObject getJsonDiscountInfo() {
 		return jsonDiscountInfo;
@@ -452,5 +484,38 @@ public class OrderFormEntity implements Serializable{
      */
     public void setBuyerComment(String buyerComment) {
         this.buyerComment = buyerComment;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderFormEntity{" +
+                "id=" + id +
+                ", orderNo='" + orderNo + '\'' +
+                ", totalAmount=" + totalAmount +
+                ", expressFee=" + expressFee +
+                ", disconntFee=" + disconntFee +
+                ", expressInfoId='" + expressInfoId + '\'' +
+                ", status='" + status + '\'' +
+                ", statusRoute='" + statusRoute + '\'' +
+                ", createAt=" + createAt +
+                ", statusHoldMs=" + statusHoldMs +
+                ", nextStatusTime=" + nextStatusTime +
+                ", buyerId='" + buyerId + '\'' +
+                ", weidianId='" + weidianId + '\'' +
+                ", paymentIdList='" + paymentIdList + '\'' +
+                ", isComment=" + isComment +
+                ", addressId='" + addressId + '\'' +
+                ", orderType=" + orderType +
+                ", orderSource=" + orderSource +
+                ", couponId='" + couponId + '\'' +
+                ", internalCouponId='" + internalCouponId + '\'' +
+                ", guideId='" + guideId + '\'' +
+                ", discountInfo='" + discountInfo + '\'' +
+                ", buyerComment='" + buyerComment + '\'' +
+                ", jsonDiscountInfo=" + jsonDiscountInfo +
+                ", guideType=" + guideType +
+                ", isAlert=" + isAlert +
+                ", totalAmountWithoutScoreDiscount=" + totalAmountWithoutScoreDiscount +
+                '}';
     }
 }

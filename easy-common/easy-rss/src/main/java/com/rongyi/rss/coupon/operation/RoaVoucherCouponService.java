@@ -75,6 +75,8 @@ public interface RoaVoucherCouponService {
                          String reason);
 
     /**
+<<<<<<< HEAD
+=======
      * 卡券发布时没有选择集团、品牌、商场下的店铺，审核通过时，关联卡券对应类型下所有的店铺
      * @param coupon
      * @return
@@ -82,6 +84,7 @@ public interface RoaVoucherCouponService {
     boolean relationShops(Coupon coupon);
 
     /**
+>>>>>>> develop-yuzhijian
      * param ids    代金券id
      * param reason 下架原因
      * return 成功：true 失败：false

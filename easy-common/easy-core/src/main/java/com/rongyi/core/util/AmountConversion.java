@@ -39,7 +39,7 @@ public abstract class AmountConversion {
     }
 
 //    public static void main(String[] args) {
-//        System.out.println(AmountConversion.fenToYuan(39101));
+//        System.out.println(AmountConversion.fenToYuan(1990));
 //        System.out.println(AmountConversion.yuanToFen(39.109));
 //    }
 }

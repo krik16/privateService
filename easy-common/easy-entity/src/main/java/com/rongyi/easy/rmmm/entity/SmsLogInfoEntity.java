@@ -4,7 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class SmsLogInfoEntity implements Serializable{
-    /** 主键 */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** 主键 */
     private Integer id;
 
     /** 手机号码 */
