@@ -54,7 +54,7 @@
 		</if>
 		<!-- 买家id集合 -->
 		<if test="buyerAccount != null and buyerAccount != ''">
-			AND coupon_buyer_account=#{buyerAccount}
+			AND (coupon_buyer_account=#{buyerAccount}
 			<if test="buyerIds != null and buyerIds != ''">
 				OR buyer_id in
 				<foreach collection="buyerIds" index="index" item="item"
@@ -62,6 +62,7 @@
 					#{item}
 				</foreach>
 			</if>
+			)
 		</if>
 
 		<!-- 卖家姓名 -->

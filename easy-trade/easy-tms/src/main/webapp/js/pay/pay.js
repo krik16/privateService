@@ -241,6 +241,7 @@ function switchCheck(check) {
 		$("#search-orderNo").css("display","none");
 		$("#search-sellerName").css("display","block");
 		$("#search-buyerName").css("display","none");
+		$("#search-buyerAccount").css("display","none");
 		
 		$("#search-price").html('提现金额：');
 		$("#search-time").html('提现申请时间段：');
