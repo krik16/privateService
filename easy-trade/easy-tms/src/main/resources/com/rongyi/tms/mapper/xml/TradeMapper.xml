@@ -242,7 +242,7 @@
 				order_detail_form.coupon_id != '')) OR
 				<!-- 优惠券 -->
 				(trade_order.score > 0)
-				AND (trade_order.hb_discount > 0)))
+				AND (trade_order.hb_discount > 0))
 			</if>
 		</if>
 			<!-- 订单类型 -->
