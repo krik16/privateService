@@ -46,7 +46,8 @@ public interface CommodityService {
 
 	public String editCommodity(CommodityVO commodityvo, long shopId, long brandId);
 
-	public String editCommodityBuyer(CommodityVO commodityvo);
+	public String editCommodityBuyer(CommodityVO commodityvo, long brandId, long mallId, String mallMid,
+			String brandName,String brandMid,String shopNum, List<Double> position, List<String> zone_ids);
 
 	public ResponseResult updateCommodityPics(String id, List<String> picList, long shopId, int identity);
 
