@@ -133,7 +133,7 @@ public class RpbServiceImpl implements IRpbService {
 		LOGGER.info("参数：ordeNo=" + orderNo + ",totalAmount=" + totalAmount);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("errno", "0");
-		resultMap.put("errMsg", null);
+		resultMap.put("errMsg", "支付成功");
 		if (totalAmount == 0) {
 			List<PaymentEntity> list = paymentService.selectByOrderNum(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
 			// TODO 兼容老版本APP0元支付不走签名，在下个强制更新版本后此代码需删除
