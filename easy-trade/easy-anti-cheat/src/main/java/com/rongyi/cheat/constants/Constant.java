@@ -7,21 +7,21 @@ public interface Constant {
 
 	PropertyConfigurer propertyConfigurer = (PropertyConfigurer) SpringContextUtil.getBean("propertyConfigurer");
 	interface BLACKLIST_CONFIG {
-//		String WARN_COUNT = propertyConfigurer.getProperty("WARN.COUNT").toString();//报警数量
-//		String FREEZE_COUNT = propertyConfigurer.getProperty("FREEZE.COUNT").toString();//直接冻结数量
-//		String SEND_ADDRESS = propertyConfigurer.getProperty("SEND_ADDRESS").toString();//发送邮件地址
-//		String TO_ADDRESS = propertyConfigurer.getProperty("TO_ADDRESS").toString();//接收邮件地址
-//		String BLACKLIST_URL = propertyConfigurer.getProperty("BLACKLIST_URL").toString();//黑名单列表URL
-//		String BLACK_SECOND = propertyConfigurer.getProperty("BLACK_SECOND").toString();//黑名单查询时间跨度
-//		String SEND_PHONE = propertyConfigurer.getProperty("SEND_PHONE").toString();//发送短信手机号
+		String WARN_COUNT = propertyConfigurer.getProperty("WARN.COUNT").toString();//报警数量
+		String FREEZE_COUNT = propertyConfigurer.getProperty("FREEZE.COUNT").toString();//直接冻结数量
+		String SEND_ADDRESS = propertyConfigurer.getProperty("SEND_ADDRESS").toString();//发送邮件地址
+		String TO_ADDRESS = propertyConfigurer.getProperty("TO_ADDRESS").toString();//接收邮件地址
+		String BLACKLIST_URL = propertyConfigurer.getProperty("BLACKLIST_URL").toString();//黑名单列表URL
+		String BLACK_SECOND = propertyConfigurer.getProperty("BLACK_SECOND").toString();//黑名单查询时间跨度
+		String SEND_PHONE = propertyConfigurer.getProperty("SEND_PHONE").toString();//发送短信手机号
 		
-		String WARN_COUNT = "10";//报警数量
-		String FREEZE_COUNT = "15";//直接冻结数量
-		String SEND_ADDRESS = "anti@rongyi.com";//发送邮件地址
-		String TO_ADDRESS = "kejun@rongyi.com";//接收邮件地址
-		String BLACKLIST_URL = "test";//黑名单列表URL
-		String BLACK_SECOND ="86400";//黑名单查询时间跨度
-		String SEND_PHONE = "13564452580";//发送短信手机号
+	//	String WARN_COUNT = "10";//报警数量
+	//	String FREEZE_COUNT = "15";//直接冻结数量
+	//	String SEND_ADDRESS = "anti@rongyi.com";//发送邮件地址
+	//	String TO_ADDRESS = "kejun@rongyi.com";//接收邮件地址
+	//	String BLACKLIST_URL = "test";//黑名单列表URL
+	//	String BLACK_SECOND ="86400";//黑名单查询时间跨度
+	//	String SEND_PHONE = "13564452580";//发送短信手机号
 	}
 
 	
