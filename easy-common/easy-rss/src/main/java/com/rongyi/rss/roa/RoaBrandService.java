@@ -1,8 +1,8 @@
 package com.rongyi.rss.roa;
 
-import java.util.List;
 import java.util.Map;
 
+import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.roa.entity.BrandEntity;
 
 
@@ -20,6 +20,6 @@ public interface RoaBrandService {
 	 * @param pageSize
 	 * @return
 	 */
-	List<BrandEntity> getBrandListByMap(Map<String, Object> params, Integer currentPage, Integer pageSize) throws Exception;
+	PagingVO<BrandEntity> getBrandListByMap(Map<String, Object> params, Integer currentPage, Integer pageSize) throws Exception;
 	
 }
