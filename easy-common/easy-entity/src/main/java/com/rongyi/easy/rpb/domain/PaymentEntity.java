@@ -1,9 +1,15 @@
 package com.rongyi.easy.rpb.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class PaymentEntity {
+public class PaymentEntity implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2516018941608003955L;
 
 	public PaymentEntity() {
 		
