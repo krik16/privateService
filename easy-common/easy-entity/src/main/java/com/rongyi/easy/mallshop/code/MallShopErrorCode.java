@@ -34,13 +34,16 @@ public enum MallShopErrorCode {
     BUYER_ROLE_ISEXITS(1071801,"您已经拥有买手身份，无需升级!重新登录即可"),
     BUYER_DESC_ISLONGER(1071811,"简介内容过长，请重新编辑"),
     /** 商品相关 后4位区间  2001---3000*/
-    ERROR_REPORT_SHOP(1072001,"上报未找到的店铺失败")
+    ERROR_REPORT_SHOP(1072001,"上报未找到的店铺失败"),
 
 
     /** 订单相关  后4位区间  3001---4000*/
 
 
     /** 首页相关  后4位区间  4001---5000*/
+    
+    /** 代金券相关  后4位区间  5001---6000*/
+    ERROR_COUPON_PUBLISH_CHANNEL(1075001,"亲，活动券你不能管理哦"),
 
     ;
 
