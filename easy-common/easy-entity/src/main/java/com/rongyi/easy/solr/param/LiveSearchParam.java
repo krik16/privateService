@@ -40,7 +40,14 @@ public class LiveSearchParam extends BaseParam implements Serializable{
 	private String bullId; // 买手id
 	private Date start_time; // 开始时间
 	private Date end_time; // 结束时间
+	private Integer status;
 	
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 	public String get_id() {
 		return _id;
 	}
