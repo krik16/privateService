@@ -51,43 +51,57 @@ public class RefundServiceImpl extends BaseServiceImpl implements RefundService 
 	@Override
 	public List<TradeVO> selectRefundPageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
 		List<TradeVO> tradeVOList = new ArrayList<TradeVO>();
-
-		try {
-			if (map.get("buyerName") != null && StringUtils.isNotBlank(map.get("buyerName").toString())) {
+		List<String> buyerIds = new ArrayList<String>();
+		if (map.get("buyerName") != null && StringUtils.isNotBlank(map.get("buyerName").toString())) {
+			try {
 				List<UserInfoVO> userVoList = rOAMallLifeUserService.getUserDetailByName(map.get("buyerName").toString());
-				List<String> buyerIds = new ArrayList<String>();
 				for (UserInfoVO userVO : userVoList) {
 					buyerIds.add(userVO.getUserId());
 				}
-				map.put("buyerIds", buyerIds);
-
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			map.put("currentPage", (currentPage - 1) * pageSize);
-			map.put("pageSize", pageSize);
-			tradeVOList = this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectPayPageList", map);
-			for (TradeVO tradeVO : tradeVOList) {
-				PaymentEntity hisPayEntity = null;
-				if (ConstantEnum.TRADE_TYPE_REFUND.getCodeInt() == tradeVO.getTradeType())// 正常付款记录退款
-					hisPayEntity = rpbService.selectByOrderNumAndTradeType(tradeVO.getOrderNo(), ConstantEnum.TRADE_TYPE_PAY.getCodeInt(), ConstantEnum.TRADE_STATUS_PAY_YES.getCodeInt(),
-							tradeVO.getPayChannel());
-				else if (ConstantEnum.TRADE_TYPE_REPAY_REFUND.getCodeInt() == tradeVO.getTradeType())// 重复付款记录退款
-					hisPayEntity = rpbService.selectByOrderNumAndTradeType(tradeVO.getOrderNo(), ConstantEnum.TRADE_TYPE_REPAY.getCodeInt(), ConstantEnum.TRADE_STATUS_PAY_YES.getCodeInt(),
-							tradeVO.getPayChannel());
-				if (hisPayEntity != null)//此处把付款记录的付款单号放入退款明细，以便直接在第三方支付系统查询
-					tradeVO.setPayNo(hisPayEntity.getPayNo());
-				if (ConstantEnum.PAYMENT_ORDER_TYPE1.getCodeInt() == tradeVO.getOrderType()) {// 优惠券订单
-					CouponOrder couponOrder = roaCouponOrderService.findOneByOrderNo(tradeVO.getOrderNo());
-					if (couponOrder != null && couponOrder.getBuyerId() != null) {
+		}
+		if (map.get("buyerAccount") != null && StringUtils.isNotBlank(map.get("buyerAccount").toString())) {
+			try {
+				UserInfoVO userInfoVO = rOAMallLifeUserService.getByPhone(map.get("buyerAccount").toString());
+				if (userInfoVO != null)
+					buyerIds.add(userInfoVO.getUserId());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
+		if (!buyerIds.isEmpty())
+			map.put("buyerIds", buyerIds);
+		map.put("currentPage", (currentPage - 1) * pageSize);
+		map.put("pageSize", pageSize);
+		tradeVOList = this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectPayPageList", map);
+		for (TradeVO tradeVO : tradeVOList) {
+			PaymentEntity hisPayEntity = null;
+			if (ConstantEnum.TRADE_TYPE_REFUND.getCodeInt() == tradeVO.getTradeType())// 正常付款记录退款
+				hisPayEntity = rpbService.selectByOrderNumAndTradeType(tradeVO.getOrderNo(), ConstantEnum.TRADE_TYPE_PAY.getCodeInt(), ConstantEnum.TRADE_STATUS_PAY_YES.getCodeInt(),
+						tradeVO.getPayChannel());
+			else if (ConstantEnum.TRADE_TYPE_REPAY_REFUND.getCodeInt() == tradeVO.getTradeType())// 重复付款记录退款
+				hisPayEntity = rpbService.selectByOrderNumAndTradeType(tradeVO.getOrderNo(), ConstantEnum.TRADE_TYPE_REPAY.getCodeInt(), ConstantEnum.TRADE_STATUS_PAY_YES.getCodeInt(),
+						tradeVO.getPayChannel());
+			if (hisPayEntity != null)// 此处把付款记录的付款单号放入退款明细，以便直接在第三方支付系统查询
+				tradeVO.setPayNo(hisPayEntity.getPayNo());
+			if (ConstantEnum.PAYMENT_ORDER_TYPE1.getCodeInt() == tradeVO.getOrderType()) {// 优惠券订单
+				CouponOrder couponOrder = roaCouponOrderService.findOneByOrderNo(tradeVO.getOrderNo());
+				if (couponOrder != null && couponOrder.getBuyerId() != null) {
+					try {
 						MallLifeUserEntity mallLifeUserEntity = rOAMallLifeUserService.getEntityByUid(couponOrder.getBuyerId());
 						if (mallLifeUserEntity != null) {
 							tradeVO.setBuyerAccount(mallLifeUserEntity.getPhone());
 							tradeVO.setBuyerName(mallLifeUserEntity.getUserName());
 						}
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
+
 				}
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		return tradeVOList;
 	}

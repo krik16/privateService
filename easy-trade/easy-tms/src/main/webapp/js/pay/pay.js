@@ -142,6 +142,7 @@ function getParamsJson(){
 	  var mallName = $("input[name='mallId']").val();
 	  var shopName = $("input[name='shopId']").val();
 	  var sellerName = $('#sellerName').val();
+	  var buyerAccount = $('#buyerAccount').val();
 	  var buyerName = $('#buyerName').val();
 	  var payChannel = $('#payChannel').val();
 	  var tradeStartTime = $('#payStartTime').val();
@@ -158,6 +159,7 @@ function getParamsJson(){
 		        'mallName':mallName,
 		        'shopName':shopName,
 		        'sellerName':sellerName,
+		        'buyerAccount':buyerAccount,
 		        'buyerName':buyerName,
 		        'payChannel':payChannel,
 		        'tradeStartTime':tradeStartTime,
@@ -261,6 +263,7 @@ function switchCheck(check) {
 		$("#search-orderNo").css("display","block");
 		$("#search-sellerName").css("display","none");
 		$("#search-buyerName").css("display","block");
+		$("#search-buyerAccount").css("display","block");
 		$("#search-price").html('退款金额：');
 		$("#search-time").html('退款申请时间段：');
 		$("#search-price").width(60);
