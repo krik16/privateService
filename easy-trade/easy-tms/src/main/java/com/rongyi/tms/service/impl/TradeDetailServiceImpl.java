@@ -70,20 +70,33 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 		if (map.get("tradeType") == null || StringUtils.isEmpty(map.get("tradeType").toString())) {
 			map.remove("tradeType");
 		}
+		List<String> buyerIds = new ArrayList<String>();
 		if (map.get("buyerName") != null && StringUtils.isNotBlank(map.get("buyerName").toString())) {
 			try {
 				List<UserInfoVO> userVoList = rOAMallLifeUserService.getUserDetailByName(map.get("buyerName").toString());
-				List<String> buyerIds = new ArrayList<String>();
 				for (UserInfoVO userVO : userVoList) {
 					buyerIds.add(userVO.getUserId());
 				}
-				if (buyerIds.isEmpty())
-					buyerIds.add("null");
-				map.put("buyerIds", buyerIds);
 			} catch (Exception e) {
+				LOGGER.info("ROA接口调用失败!");
 				e.printStackTrace();
 			}
 		}
+		if (map.get("buyerAccount") != null && StringUtils.isNotBlank(map.get("buyerAccount").toString())) {
+			try {
+				UserInfoVO userInfoVO = rOAMallLifeUserService.getByPhone(map.get("buyerAccount").toString());
+				if (userInfoVO != null)
+					buyerIds.add(userInfoVO.getUserId());
+			} catch (Exception e) {
+				LOGGER.info("ROA接口调用失败!");
+				e.printStackTrace();
+			}
+
+		}
+		// if (buyerIds.isEmpty())
+		// buyerIds.add("null");
+		if (!buyerIds.isEmpty())
+			map.put("buyerIds", buyerIds);
 		List<TradeVO> list = this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectTradePageList", map);
 		String buyerId = null;
 		for (TradeVO tradeVO : list) {

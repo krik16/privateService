@@ -20,9 +20,11 @@ import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.coupon.entity.CouponOrder;
 import com.rongyi.easy.entity.MallLifeUserEntity;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
+import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.tms.vo.TradeVO;
 import com.rongyi.rss.coupon.RoaCouponOrderService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
+import com.rongyi.rss.rpb.IRpbService;
 import com.rongyi.tms.constants.ConstantEnum;
 import com.rongyi.tms.service.RefundService;
 
@@ -43,6 +45,9 @@ public class RefundServiceImpl extends BaseServiceImpl implements RefundService 
 	@Autowired
 	RoaCouponOrderService roaCouponOrderService;
 
+	@Autowired
+	IRpbService rpbService;
+
 	@Override
 	public List<TradeVO> selectRefundPageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
 		List<TradeVO> tradeVOList = new ArrayList<TradeVO>();
@@ -55,11 +60,21 @@ public class RefundServiceImpl extends BaseServiceImpl implements RefundService 
 					buyerIds.add(userVO.getUserId());
 				}
 				map.put("buyerIds", buyerIds);
+
 			}
 			map.put("currentPage", (currentPage - 1) * pageSize);
 			map.put("pageSize", pageSize);
 			tradeVOList = this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectPayPageList", map);
 			for (TradeVO tradeVO : tradeVOList) {
+				PaymentEntity hisPayEntity = null;
+				if (ConstantEnum.TRADE_TYPE_REFUND.getCodeInt() == tradeVO.getTradeType())// 正常付款记录退款
+					hisPayEntity = rpbService.selectByOrderNumAndTradeType(tradeVO.getOrderNo(), ConstantEnum.TRADE_TYPE_PAY.getCodeInt(), ConstantEnum.TRADE_STATUS_PAY_YES.getCodeInt(),
+							tradeVO.getPayChannel());
+				else if (ConstantEnum.TRADE_TYPE_REPAY_REFUND.getCodeInt() == tradeVO.getTradeType())// 重复付款记录退款
+					hisPayEntity = rpbService.selectByOrderNumAndTradeType(tradeVO.getOrderNo(), ConstantEnum.TRADE_TYPE_REPAY.getCodeInt(), ConstantEnum.TRADE_STATUS_PAY_YES.getCodeInt(),
+							tradeVO.getPayChannel());
+				if (hisPayEntity != null)//此处把付款记录的付款单号放入退款明细，以便直接在第三方支付系统查询
+					tradeVO.setPayNo(hisPayEntity.getPayNo());
 				if (ConstantEnum.PAYMENT_ORDER_TYPE1.getCodeInt() == tradeVO.getOrderType()) {// 优惠券订单
 					CouponOrder couponOrder = roaCouponOrderService.findOneByOrderNo(tradeVO.getOrderNo());
 					if (couponOrder != null && couponOrder.getBuyerId() != null) {
