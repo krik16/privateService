@@ -13,6 +13,7 @@ $(document).ready(function() {
 	$("#search").click(function(event) {
 		var status = $("#hadChecked").val();
 		var drawNo = $("#liushui-no").val();
+		var guideType = $("#guideType").val();
 		var name = $('#name').val();
 		var mall = $("input[name='mallid']").val();
 		var shop = $("input[name='shopid']").val();
@@ -24,10 +25,10 @@ $(document).ready(function() {
 			_util.cmsTip("请先选择商场！");
 			return;
 		}
-		ajaxloadApplys(null,status,drawNo,mall,shop,amountStart,amountEnd,name,channel);
+		ajaxloadApplys(null,status,drawNo,guideType,mall,shop,amountStart,amountEnd,name,channel);
 	});
 });
-function ajaxloadApplys(page,status,drawNo,mall,shop,amountStart,amountEnd,name,channel) {
+function ajaxloadApplys(page,status,drawNo,guideType,mall,shop,amountStart,amountEnd,name,channel) {
 	var url_ = "../bs/list?module=finance";
 	var param = $("#isChecked").val();
 	var start = $("input[name='start']").val();
@@ -50,6 +51,7 @@ function ajaxloadApplys(page,status,drawNo,mall,shop,amountStart,amountEnd,name,
 		type : 'get',
 		data : {
 			"drawNo" : drawNo,
+			"guideType" :guideType,
 			"mall" : mall,
 			"shop" : shop,
 			"start" : start,
