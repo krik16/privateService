@@ -40,13 +40,11 @@ public class WeixinPayServiceTest extends BaseTest{
 	@Autowired
 	Sender sender;
 
-	// @Test
+	 @Test
 	public void testSelectByPrimaryKey() {
 		// weixinPayService.getWeixinRefund("1000001898510594" ,0.01, 0.01);
-		List<PaymentEntity> list = paymentService.selectByPayNoAndTradeType("1000000239630150", 0);
-		if (list == null || list.size() == 0 || !list.get(0).getStatus().equals(2)) {
-			System.err.println(111);
-		}
+		List<PaymentEntity> list = paymentService.selectByPayNoAndTradeType("1000001597030813", 0);
+			System.err.println(list.toArray().toString());
 	}
 
 	// @Test

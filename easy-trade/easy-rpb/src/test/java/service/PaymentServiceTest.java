@@ -173,7 +173,8 @@ public class PaymentServiceTest extends BaseTest {
 
 	// @Test
 	public void testGetOrderNumStrsByPayNo() {
-		paymentService.getOrderNumStrsByPayNo("1000000028153019");
+//		List<PaymentEntity> list = paymentService.getOrderNumStrsByPayNo("1000001597030813",Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
+		
 	}
 
 //	@Test

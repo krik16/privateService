@@ -64,7 +64,7 @@ public interface PaymentService {
 	 * @param payNo
 	 * @return
 	 */
-	public abstract String getOrderNumStrsByPayNo(String payNo);
+	public abstract String getOrderNumStrsByPayNo(String payNo,Integer tradeType);
 
 	public abstract List<PaymentEntity> selectByPayNo(String payNo);
 

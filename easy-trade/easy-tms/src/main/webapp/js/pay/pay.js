@@ -256,7 +256,7 @@ function switchCheck(check) {
 		$("#paySeller").addClass("now");
 		$("#paySeller").removeClass("change-color");
 		
-		$("#search-payNo").css("display","block");
+		$("#search-payNo").css("display","none");
 		$("#search-drawNo").css("display","none");
 		$("#search-orderNo").css("display","block");
 		$("#search-sellerName").css("display","none");

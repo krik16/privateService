@@ -150,7 +150,7 @@ public class RpbServiceImpl implements IRpbService {
 			return resultMap;
 		}
 
-		String orderNums = paymentService.getOrderNumStrsByPayNo(paymentEntity.getPayNo());
+		String orderNums = paymentService.getOrderNumStrsByPayNo(paymentEntity.getPayNo(),Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
 		String payChannel = PaymentEventType.WEIXIN_PAY;
 		String payAccount = null;
 		if (paymentEntity.getPayChannel() == Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0) {

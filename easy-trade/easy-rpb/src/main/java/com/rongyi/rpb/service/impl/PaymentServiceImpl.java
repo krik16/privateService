@@ -186,9 +186,9 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 	}
 
 	@Override
-	public String getOrderNumStrsByPayNo(String payNo) {
+	public String getOrderNumStrsByPayNo(String payNo,Integer tradeType) {
 		String orderNum = "";
-		List<PaymentEntity> list = selectByPayNo(payNo);
+		List<PaymentEntity> list = selectByPayNoAndTradeType(payNo,tradeType);
 		if (list != null && list.size() > 0) {
 			for (int i = 0; i < list.size(); i++) {
 				orderNum += list.get(i).getOrderNum();
@@ -432,10 +432,10 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 	}
 
 	@Override
-	public List<PaymentEntity> selectByPayNoAndTradeType(String payNo, Integer tredeType) {
+	public List<PaymentEntity> selectByPayNoAndTradeType(String payNo, Integer tradeType) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("payNo", payNo);
-		params.put("tradeType", tredeType);
+		params.put("tradeType", tradeType);
 		return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectByPayNoAndTradeType", params);
 	}
 

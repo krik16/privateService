@@ -103,7 +103,7 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
 		if (list != null && !list.isEmpty() && list.get(0).getStatus() != Constants.PAYMENT_STATUS.STAUS2) {
 			Integer realPayChannel = paymentService.getRealPayChannel(Integer.valueOf(payChannel));
 			paymentService.updateListStatus(paymentLogInfo.getOutTradeNo(), tradeType, status, realPayChannel);// 修改付款单状态
-			String orderNums = paymentService.getOrderNumStrsByPayNo(paymentLogInfo.getOutTradeNo());
+			String orderNums = paymentService.getOrderNumStrsByPayNo(paymentLogInfo.getOutTradeNo(),Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
 			paySuccessToMessage(paymentLogInfo.getOutTradeNo(), paymentLogInfo.getBuyer_email(), orderNums, list.get(0).getOrderType(), payChannel);
 		}
 	}
