@@ -11,7 +11,15 @@ import com.rongyi.easy.solr.param.LiveSearchParam;
  * @author xiaobo
  *
  */
-public interface LiveService {
+public interface LiveService {	
+	/**
+	 * 更新直播状态
+	 * @param id 直播id
+	 * @param status 0发布，1上线，2下线
+	 * @return 返回 boolean 的 ResponseVO
+	 */
+	ResponseVO updateLiveStatus(String id,int status);
+	
 	/**
 	 * 新增、修改直播，如果存在则修改
 	 * @param vo 直播实体
