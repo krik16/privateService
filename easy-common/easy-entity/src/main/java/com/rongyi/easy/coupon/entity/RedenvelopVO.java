@@ -4,6 +4,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by lqy on 2015/11/17.
@@ -56,6 +57,16 @@ public class RedenvelopVO implements Serializable {
      */
     private Integer relatedType;
 
+    /**
+     * 审核未通过原因
+     */
+    private List<CouponRejectRecord> unpassReasons;
+
+    /**
+     * 下架原因列表
+     */
+    private List<CouponRejectRecord> offShelfReasons;
+
 
     public Integer getId() {
         return id;
@@ -105,15 +116,60 @@ public class RedenvelopVO implements Serializable {
         this.relatedType = relatedType;
     }
 
+    public Integer getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(Integer totalCount) {
+        this.totalCount = totalCount;
+    }
+
+    public Integer getStockCount() {
+        return stockCount;
+    }
+
+    public void setStockCount(Integer stockCount) {
+        this.stockCount = stockCount;
+    }
+
+    public Double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Double discount) {
+        this.discount = discount;
+    }
+
+    public List<CouponRejectRecord> getUnpassReasons() {
+        return unpassReasons;
+    }
+
+    public void setUnpassReasons(List<CouponRejectRecord> unpassReasons) {
+        this.unpassReasons = unpassReasons;
+    }
+
+    public List<CouponRejectRecord> getOffShelfReasons() {
+        return offShelfReasons;
+    }
+
+    public void setOffShelfReasons(List<CouponRejectRecord> offShelfReasons) {
+        this.offShelfReasons = offShelfReasons;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("id", id)
                 .append("name", name)
+                .append("totalCount", totalCount)
+                .append("stockCount", stockCount)
+                .append("discount", discount)
                 .append("type", type)
                 .append("status", status)
                 .append("applyGoods", applyGoods)
                 .append("relatedType", relatedType)
+                .append("unpassReasons", unpassReasons)
+                .append("offShelfReasons", offShelfReasons)
                 .toString();
     }
 }

@@ -75,6 +75,15 @@ public class OrderFormEntity implements Serializable{
 
     /** 买家备注 */
     private String buyerComment;
+
+    /**促销券抵扣金额*/
+    private BigDecimal couponDiscount;
+
+    /**促销券来源 1：平台 2：商家*/
+    private Integer couponSource;
+
+    /**促销券类型 1：满减 2：立减*/
+    private Integer couponType;
     
     private JSONObject jsonDiscountInfo;
     
@@ -486,6 +495,30 @@ public class OrderFormEntity implements Serializable{
         this.buyerComment = buyerComment;
     }
 
+    public BigDecimal getCouponDiscount() {
+        return couponDiscount;
+    }
+
+    public void setCouponDiscount(BigDecimal couponDiscount) {
+        this.couponDiscount = couponDiscount;
+    }
+
+    public Integer getCouponSource() {
+        return couponSource;
+    }
+
+    public void setCouponSource(Integer couponSource) {
+        this.couponSource = couponSource;
+    }
+
+    public Integer getCouponType() {
+        return couponType;
+    }
+
+    public void setCouponType(Integer couponType) {
+        this.couponType = couponType;
+    }
+
     @Override
     public String toString() {
         return "OrderFormEntity{" +
@@ -516,6 +549,9 @@ public class OrderFormEntity implements Serializable{
                 ", guideType=" + guideType +
                 ", isAlert=" + isAlert +
                 ", totalAmountWithoutScoreDiscount=" + totalAmountWithoutScoreDiscount +
+                ", couponDiscount=" + couponDiscount +
+                ", couponSource=" + couponSource +
+                ", couponType=" + couponType +
                 '}';
     }
 }
