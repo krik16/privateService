@@ -62,6 +62,16 @@ public class TransactionDetailVO implements Serializable{
 	private Integer errno;
 	/** 翻牌购拼接的url */
 	private String url;
+	
+	private String isCollection;//是否收藏了店铺
+
+	public String getIsCollection() {
+		return isCollection;
+	}
+
+	public void setIsCollection(String isCollection) {
+		this.isCollection = isCollection;
+	}
 
 	public Integer getGuideType() {
 		return guideType;
