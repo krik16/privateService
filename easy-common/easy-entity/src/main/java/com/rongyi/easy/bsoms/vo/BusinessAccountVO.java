@@ -38,6 +38,8 @@ public class BusinessAccountVO implements Serializable {
 	private Date createAt;
 	private String updateBy;//修改人
 	private Date updateAt;
+	private String stopReason;
+	private Date stopAt;
 	public Integer getId() {
 		return id;
 	}
@@ -205,6 +207,18 @@ public class BusinessAccountVO implements Serializable {
 	}
 	public void setBranchName(String branchName) {
 		this.branchName = branchName;
+	}
+	public String getStopReason() {
+		return stopReason;
+	}
+	public void setStopReason(String stopReason) {
+		this.stopReason = stopReason;
+	}
+	public Date getStopAt() {
+		return stopAt;
+	}
+	public void setStopAt(Date stopAt) {
+		this.stopAt = stopAt;
 	}
 	
 }

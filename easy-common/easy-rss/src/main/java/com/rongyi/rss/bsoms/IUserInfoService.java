@@ -83,4 +83,6 @@ public interface IUserInfoService {
 	 * @return
 	 */
 	public List<Integer> getAllUserIdByRole(Integer roleId);
+
+	UserInfo getUserByMap(Map<String, Object> paramsMap);
 }
