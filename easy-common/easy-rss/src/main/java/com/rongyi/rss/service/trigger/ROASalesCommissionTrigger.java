@@ -23,5 +23,11 @@ public interface ROASalesCommissionTrigger {
      * @Description 
      * @author 袁波
      */
-    public void statisticsCommissionAmountTrigger();
+     void statisticsCommissionAmountTrigger();
+
+    /**
+     * 定时统计每个买手的当前时间段内通过审核的返佣的总额，并通过MQ发送到VA
+     */
+     void statisticsBuyerCommissionAmountTrigger();
+
 }
