@@ -3,6 +3,8 @@ package com.rongyi.rss.mallshop.shop;
 import java.util.List;
 import java.util.Map;
 
+import org.bson.types.ObjectId;
+
 import com.rongyi.easy.entity.ShopEntity;
 import com.rongyi.easy.malllife.vo.ShopRmmmVO;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
@@ -15,6 +17,7 @@ import com.rongyi.easy.rmmm.vo.BrandShopListVO;
 import com.rongyi.easy.rmmm.vo.ShopDetailVO;
 import com.rongyi.easy.rmmm.vo.ShopInfoVO;
 import com.rongyi.easy.rmmm.vo.ShopMallVO;
+import com.rongyi.easy.rmmm.vo.CouponShopVO;
 
 public interface ROAShopService {
 
@@ -171,4 +174,13 @@ public interface ROAShopService {
 	public ShopMallVO getShopMallVOByOrderNum(Integer shopId) throws Exception;
 	
 	public Integer insertCooperateShopByshopMid(String shopMid, Integer brandId, Integer mallId) throws Exception;
+	
+	/**
+     * 查询店铺列表
+     *
+     * @param ids : 店铺id集合   userLocation 用户地理位置
+     * @return
+     * @throws Exception
+     */
+    public List<CouponShopVO> getShopsByIds(List<ObjectId> ids,List<Double> userLocation)  throws Exception;
 }

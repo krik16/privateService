@@ -3,6 +3,8 @@ package com.rongyi.rss.msob;
 import java.util.List;
 import java.util.Map;
 
+import org.bson.types.ObjectId;
+
 import com.rongyi.easy.entity.ShopEntity;
 import com.rongyi.easy.malllife.vo.ShopRmmmVO;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
@@ -15,6 +17,7 @@ import com.rongyi.easy.rmmm.vo.BrandShopListVO;
 import com.rongyi.easy.rmmm.vo.ShopDetailVO;
 import com.rongyi.easy.rmmm.vo.ShopInfoVO;
 import com.rongyi.easy.rmmm.vo.ShopMallVO;
+import com.rongyi.easy.rmmm.vo.CouponShopVO;
 
 public interface IShopService{
 	
@@ -166,4 +169,13 @@ public interface IShopService{
 	 * @throws Exception
 	 */
 	public ShopMallVO getShopMallVOByOrderNum(Integer shopId) throws Exception;
+	
+	/**
+     * 查询店铺列表
+     *
+     * @param ids
+     * @return
+     * @throws Exception
+     */
+    public List<CouponShopVO> getShopsByIds(List<ObjectId> ids,List<Double> userLocation)  throws Exception;
 }
