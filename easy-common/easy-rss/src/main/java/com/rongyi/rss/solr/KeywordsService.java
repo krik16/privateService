@@ -21,10 +21,11 @@ public interface KeywordsService {
 	 * 定时同步用户关键词历史记录
 	 * 
 	 * @author ZhengYl
-	 * @date 2015年10月14日 下午7:57:09 
-	 * @param searchType 1:commodity 2:poi 3:activity
+	 * @date 2015年10月26日 上午10:24:12 
+	 * @param scope 1:commodity 2:poi 3:activity
+	 * @param hours 同步前N小时的记录，默认为1
 	 */
-	public void SyncSearchKeywords(String searchType);
+	public void SyncSearchKeywords(String scope, Integer hours);
 	
 	/**
 	 * 关键词联想主入口

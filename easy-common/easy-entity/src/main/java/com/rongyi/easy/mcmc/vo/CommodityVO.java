@@ -117,11 +117,19 @@ public class CommodityVO  implements  Serializable {
 	private String commodityOriginalPrice;
 	private String commodityCurrentPrice;
 	private String shopId;
+	private String shopMid; // shop mongo id
 	private String commodityShopNumber;
 	private List<String> commodityPicList;
 	private List<CommoditySpecVO> commoditySpecList;
 	private String commodityCode;
 	private String commodityCommission;
+	
+	public String getShopMid() {
+		return shopMid;
+	}
+	public void setShopMid(String shopMid) {
+		this.shopMid = shopMid;
+	}
 	public String getCommodityCommission() {
 		return commodityCommission;
 	}
