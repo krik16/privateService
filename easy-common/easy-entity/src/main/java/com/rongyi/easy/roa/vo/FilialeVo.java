@@ -3,8 +3,6 @@ package com.rongyi.easy.roa.vo;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.bson.types.ObjectId;
-
 public class FilialeVo implements Serializable{
 	private String id;     
 	

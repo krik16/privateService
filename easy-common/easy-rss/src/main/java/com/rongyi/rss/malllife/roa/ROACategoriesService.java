@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.rongyi.easy.malllife.vo.ShopVO;
+import com.rongyi.easy.roa.entity.CategoriesEntity;
 
 
 /**
@@ -30,4 +31,13 @@ public interface ROACategoriesService {
      * @return
      */
     public List<Map<String, Object>> getSortByList();
+    /**
+     * 根据父目录id和分类级别查询
+     * @param type
+     * @param parentId
+     * @return
+     */
+    public List<CategoriesEntity> getSubByTypeOrParentId(Integer type,String parentId);
+    
+    public CategoriesEntity getCategoriesById(String id);
 }

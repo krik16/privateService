@@ -23,4 +23,5 @@ public interface ROAFilialeService {
 	 */
 	public List<FilialeVo> getFilialeList(Map paramMap,int currpage,int pageSize);
 	
+	public FilialeVo getFilialeById(String id);
 }

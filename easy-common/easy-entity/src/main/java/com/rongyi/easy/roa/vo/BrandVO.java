@@ -11,6 +11,8 @@ public class BrandVO implements Serializable {
     private static final long serialVersionUID = 1L;
 	private String id;//品牌ID
 	private String name;//品牌名称
+	private String icon;//品牌logo
+	private String description;// 品牌描述
 	private String cname;
 	private String ename;
 	public String getId() {
@@ -37,4 +39,17 @@ public class BrandVO implements Serializable {
 	public void setEname(String ename) {
 		this.ename = ename;
 	}
+	public String getIcon() {
+		return icon;
+	}
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
 }
