@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.rongyi.easy.mq.MessageEvent;
+import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.PayAccountUseTotal;
 import com.rongyi.easy.rpb.vo.QueryOrderParamVO;
@@ -97,4 +98,16 @@ public interface IRpbService {
 	 * @datetime:2015年8月24日下午5:46:02
 	 **/
 	public Map<String, Object> getPaySign(MessageEvent event);
+	
+	/**	
+	 * @Description: TODO 
+	 * @param orderNum
+	 * @param tradeType
+	 * @param status
+	 * @param payChannel
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年8月26日上午9:55:55
+	 **/
+	public abstract PaymentEntity selectByOrderNumAndTradeType(String orderNum, Integer tradeType, Integer status,Integer payChannel);
 }
