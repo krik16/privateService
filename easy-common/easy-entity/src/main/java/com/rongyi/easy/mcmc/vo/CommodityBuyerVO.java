@@ -12,6 +12,7 @@ public class CommodityBuyerVO implements Serializable{
 	 */
 	private static final long serialVersionUID = -1461107119422444629L;
 
+	private String shopName;//店铺名称
 	private List<String> commodityPicList;
 	private String commodityId;
 	private String commodityCode;
@@ -218,5 +219,11 @@ public class CommodityBuyerVO implements Serializable{
 
 	public void setShopIM(List<String> shopIM) {
 		this.shopIM = shopIM;
+	}
+	public String getShopName() {
+		return shopName;
+	}
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
 	}
 }
