@@ -87,6 +87,12 @@ public class MallEntity implements Serializable {
 		this.idStr = id.toString();
 	}*/
 
+	private String navigation_pic;// 黑白图
+	private String pathImg;// 路径图
+	private String aliasename;
+	private String aliasname;
+	private String businesstype;
+	
 	public ObjectId getId() {
 		return id;
 	}
@@ -467,6 +473,35 @@ public class MallEntity implements Serializable {
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
-	
+	public String getNavigation_pic() {
+		return navigation_pic;
+	}
+	public void setNavigation_pic(String navigation_pic) {
+		this.navigation_pic = navigation_pic;
+	}
+	public String getPathImg() {
+		return pathImg;
+	}
+	public void setPathImg(String pathImg) {
+		this.pathImg = pathImg;
+	}
+	public String getAliasename() {
+		return aliasename;
+	}
+	public void setAliasename(String aliasename) {
+		this.aliasename = aliasename;
+	}
+	public String getAliasname() {
+		return aliasname;
+	}
+	public void setAliasname(String aliasname) {
+		this.aliasname = aliasname;
+	}
+	public String getBusinesstype() {
+		return businesstype;
+	}
+	public void setBusinesstype(String businesstype) {
+		this.businesstype = businesstype;
+	}
 	
 }

@@ -17,7 +17,7 @@ public class BussinessLog implements Serializable {
 
     private String createUserId;
 
-    private Date creadeAt;
+    private Date createAt;
 
     private Byte isDelete;
 
@@ -55,15 +55,16 @@ public class BussinessLog implements Serializable {
         this.createUserId = createUserId;
     }
 
-    public Date getCreadeAt() {
-        return creadeAt;
-    }
 
-    public void setCreadeAt(Date creadeAt) {
-        this.creadeAt = creadeAt;
-    }
+    public Date getCreateAt() {
+		return createAt;
+	}
 
-    public Byte getIsDelete() {
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+
+	public Byte getIsDelete() {
         return isDelete;
     }
 
