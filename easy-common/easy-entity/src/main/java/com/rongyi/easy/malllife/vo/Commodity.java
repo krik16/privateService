@@ -12,6 +12,7 @@ public class Commodity implements Serializable{
     private String name;//商品名称
     private String category;//商品品类id
     private String shopId;//店铺id
+    private String shopMid;//店铺的mongoid
     private int status;//状态 1上架 0下架
     private String code;//商品编码
     private String description;//商品描述
@@ -208,4 +209,11 @@ public class Commodity implements Serializable{
     public void setCategory(String category) {
         this.category = category;
     }
+	public String getShopMid() {
+		return shopMid;
+	}
+	public void setShopMid(String shopMid) {
+		this.shopMid = shopMid;
+	}
+    
 }
