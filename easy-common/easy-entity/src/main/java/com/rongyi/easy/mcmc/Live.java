@@ -81,6 +81,11 @@ public class Live implements  Serializable{
 	 */
 	private int zoneType;
 	
+	/**
+	 * 买手名字
+	 */
+	private String bullName;
+	
 	public ObjectId getId() {
 		return id;
 	}
@@ -165,7 +170,11 @@ public class Live implements  Serializable{
 	public void setZoneType(int zoneType) {
 		this.zoneType = zoneType;
 	}
-
-	
+	public String getBullName() {
+		return bullName;
+	}
+	public void setBullName(String bullName) {
+		this.bullName = bullName;
+	}
 	
 }
