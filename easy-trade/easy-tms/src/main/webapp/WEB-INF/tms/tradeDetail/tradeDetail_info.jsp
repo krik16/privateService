@@ -129,6 +129,15 @@ body {
 						</c:otherwise>
 
 					</c:choose>
+					<div class="line-heights shopsName" style="width: 20%">渠道:</div>
+					<div class="shopsData" style="width: 70%">
+						<p class="p_text">
+							<c:choose>
+								<c:when test="${trade.guideType==1 }">商家</c:when>
+								<c:when test="${trade.guideType==2 }">买手</c:when>
+							</c:choose>
+						</p>
+					</div>
 				</div>
 					<div class="shops-main-right">
 						<div class="line-heights shopsName">交易时间:</div>
