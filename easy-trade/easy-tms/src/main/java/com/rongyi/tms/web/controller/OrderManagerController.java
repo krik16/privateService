@@ -276,7 +276,7 @@ public class OrderManagerController extends BaseController {
 			if (StringUtils.isNotBlank(status) && !"0".equals(status)) {
 				if ("6".equals(status)) {
 					searchMap.put("statusRoute", ">|<4,");
-					searchMap.put("status", 5);
+//					searchMap.put("status", 5);
 				} else {
 					searchMap.put("status", status);
 				}
@@ -296,6 +296,8 @@ public class OrderManagerController extends BaseController {
 			if (!CollectionUtils.isEmpty(orderForms)) {
 				for (OrderManagerVO orderManagerVO : orderForms) {
 					OrderManagerVO orderVo = setOrderTotalAmount(orderManagerVO);
+					if (StringUtils.isNotBlank(status) && !"0".equals(status))
+						orderVo.setStatus(status);
 					orderFormList.add(orderVo);
 				}
 			}
@@ -325,6 +327,10 @@ public class OrderManagerController extends BaseController {
 			}
 		}
 		orderManagerVO.setOrderTotalAmount(orderTotalAmount);
+		if (StringUtils.isNotBlank(orderManagerVO.getStatus())&&
+				("6".equals(orderManagerVO.getStatus())||"7".equals(orderManagerVO.getStatus()))){
+			orderManagerVO.setStatus("5");
+		}
 		//包含（">|<4,"）就是正常关闭
 		if (StringUtils.isNotBlank(orderManagerVO.getStatusRoute())
 				&& orderManagerVO.getStatusRoute().contains(">|<4,")) {
