@@ -18,6 +18,13 @@ import com.rongyi.easy.rmmm.vo.ShopMallVO;
 
 public interface ROAShopService {
 
+	/**
+	 * 根据店铺mongoId查mongo店铺表信息
+	 * @param shopMId
+	 * @return
+	 * @throws Exception
+	 */
+	public ShopEntity getShopEntityByMongoId(String shopMId) throws Exception;
     /**
      * 通过商场和品牌的mongoId获得mongo中的店铺
      *
