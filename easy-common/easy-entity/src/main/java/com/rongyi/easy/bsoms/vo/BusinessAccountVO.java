@@ -14,7 +14,8 @@ public class BusinessAccountVO implements Serializable {
 	private Integer id;//用户id
 	private String userLogo;//用户头像
 	private String idCard;//身份证
-	private String account;//用户账号
+	private String account;//用户账号 （手机号）
+	private String userAccount ;//  用户账号
 	private String userName;//用户姓名
 	private String nickName;//用户昵称
 	private Integer type;//商家类型
@@ -275,6 +276,12 @@ public class BusinessAccountVO implements Serializable {
 	}
 	public void setVirtualStopAt(Date virtualStopAt) {
 		this.virtualStopAt = virtualStopAt;
+	}
+	public String getUserAccount() {
+		return userAccount;
+	}
+	public void setUserAccount(String userAccount) {
+		this.userAccount = userAccount;
 	}
 	
 }

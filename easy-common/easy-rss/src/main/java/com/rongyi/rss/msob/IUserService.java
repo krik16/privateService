@@ -281,4 +281,11 @@ public interface IUserService {
      * @return
      */
     public RmmmUserInfoEntity selectRmmmUserInfoByUserPhoneAndNickName(Map map);
+    
+    /**
+     * 根据条件查询用户信息
+     * @param paramsMap
+     * @return
+     */
+    public RmmmUserInfoEntity selectRmmmUserInfoByUserParam(Map<String, Object> paramsMap);
 }

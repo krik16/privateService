@@ -167,4 +167,17 @@ public interface IMerchantAccountService {
 	 * @throws Exception
 	 */
 	public List<RmmmUserInfoEntity> selectUserPhoneByUserAccount(String userAccount) throws Exception;
+	
+	/**
+	 * 验证用户信息是否已存在
+	 * @param paramsMap
+	 *                userAccount 
+	 *                userNickName
+	 *                userPhone
+	 *                id
+	 *                type
+	 * @return   true 不存在相同的用户信息   
+	 * @throws Exception  
+	 */
+	public boolean validateUserByUserParam(Map<String, Object> paramsMap)throws Exception;
 }

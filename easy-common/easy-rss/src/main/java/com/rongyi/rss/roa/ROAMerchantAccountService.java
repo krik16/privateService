@@ -199,4 +199,16 @@ public interface ROAMerchantAccountService {
      * @throws Exception
      */
     public List<RmmmUserInfoEntity> selectUserPhoneByUserAccount(String userAccount) throws Exception;
+    
+    /**
+     * 验证用户信息是否已存在 
+     * @param paramsMap
+     *               userAccount
+     *               userNickName
+     *               userPhone
+     *               type
+     *               id
+     * @return
+     */
+    public boolean validateUserByUserParam(Map<String, Object> paramsMap)throws Exception;
 }
