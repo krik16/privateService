@@ -1,5 +1,7 @@
 package com.rongyi.easy.rmmm.param;
 
+import java.util.List;
+
 import com.rongyi.easy.rmmm.base.BaseParam;
 
 public class CouponParam extends BaseParam{
@@ -15,6 +17,16 @@ public class CouponParam extends BaseParam{
 	private Integer pageSize;
 	
 	private String orderId;//订单号
+	
+	private List<Double> userLocation;//用户地理位置
+
+	public List<Double> getUserLocation() {
+		return userLocation;
+	}
+
+	public void setUserLocation(List<Double> userLocation) {
+		this.userLocation = userLocation;
+	}
 
 	public Integer getCurrentPage() {
 		return currentPage;
