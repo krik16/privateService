@@ -46,14 +46,14 @@ public class TradeDetailController extends BaseController {
 	IRpbService rpbService;
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public String search(ModelMap model, String currentMallId, HttpServletRequest request, HttpServletResponse response, HttpSession session, String currpage) {
+	public String search(ModelMap model, String currpage) {
 		model.addAttribute("currpage", currpage);
 		return "/tradeDetail/tradeDetail";
 	}
 
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public String list(ModelMap model, String currentMallId, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+	public String list(ModelMap model, HttpServletRequest request) {
 		try {
 			try {
 				request.setCharacterEncoding("utf-8");
@@ -62,15 +62,9 @@ public class TradeDetailController extends BaseController {
 			}
 			String paramsJson = request.getParameter("paramsJson");
 			LOGGER.info("----- trade list -----paramsJson="+paramsJson);
-			if (paramsJson == null) {
-				Map<String, Object> resultMap = new HashMap<String, Object>();
-				resultMap.put("msg", "参数为NULL，请关闭再重试！");
-				resultMap.put("status", 0);
-				return null;
-			}
 			Map<String, Object> map = JsonUtil.getMapFromJson(paramsJson);
 			String currpage = (String) map.get("currpage");
-			List<TradeVO> list = tradeDetailService.selectTradePageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE);
+				List<TradeVO> list = tradeDetailService.selectTradePageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE);
 			double pageTotle = tradeDetailService.selectTradePageListCount(map);
 			Integer rowContNum = (int) Math.ceil(pageTotle / Constant.PAGE.PAGESIZE);
 			TradeDetailCount inocme = getTradeCount(map, 0);
@@ -101,7 +95,7 @@ public class TradeDetailController extends BaseController {
 		tradeDetailCount.setTradeType(tradeType);
 		if (map.get("tradeType") == null || StringUtils.isEmpty(map.get("tradeType").toString()) || tradeType.equals(Integer.valueOf(map.get("tradeType").toString()))
 				|| "5".equals(map.get("tradeType"))) {
-			Map<String, Object> paramMap = new HashMap<String, Object>();
+			Map<String, Object> paramMap = new HashMap<>();
 			paramMap.putAll(map);
 			paramMap.put("tradeType", tradeType);
 			if (tradeDetailService.selectTradeCount(paramMap) != null)
@@ -137,7 +131,6 @@ public class TradeDetailController extends BaseController {
 	/**
 	 * @Description: 验证导出报表总数是否超过限制
 	 * @param request
-	 * @param response
 	 * @return
 	 * @Author: 柯军
 	 * @datetime:2015年6月12日下午3:20:14
@@ -145,7 +138,7 @@ public class TradeDetailController extends BaseController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/validateExcelCount")
 	@ResponseBody
-	public ResponseResult validateExcelCount(HttpServletRequest request, HttpServletResponse response) {
+	public ResponseResult validateExcelCount(HttpServletRequest request) {
 		ResponseResult result = new ResponseResult();
 		result.setSuccess(true);
 		Map<String, Object> map = JsonUtil.getMapFromJson(request.getParameter("paramsJson"));
