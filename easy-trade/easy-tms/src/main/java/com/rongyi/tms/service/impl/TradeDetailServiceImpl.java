@@ -93,8 +93,6 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 			}
 
 		}
-		// if (buyerIds.isEmpty())
-		// buyerIds.add("null");
 		if (!buyerIds.isEmpty())
 			map.put("buyerIds", buyerIds);
 		List<TradeVO> list = this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectTradePageList", map);

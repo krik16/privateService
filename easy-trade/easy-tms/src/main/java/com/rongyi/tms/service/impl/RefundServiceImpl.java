@@ -70,7 +70,6 @@ public class RefundServiceImpl extends BaseServiceImpl implements RefundService 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
 		}
 		if (!buyerIds.isEmpty())
 			map.put("buyerIds", buyerIds);
