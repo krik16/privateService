@@ -18,4 +18,10 @@ public class TransactionDetailParam implements Serializable{
 		this.orderNums = orderNums;
 	}
 
+	@Override
+	public String toString() {
+		return "TransactionDetailParam{" +
+				"orderNums='" + orderNums + '\'' +
+				'}';
+	}
 }

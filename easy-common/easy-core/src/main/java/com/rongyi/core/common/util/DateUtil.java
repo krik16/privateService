@@ -777,7 +777,26 @@ public class DateUtil {
 		cal.add(Calendar.HOUR_OF_DAY, num);
 		return cal.getTime();
 	}
-	
+
+	/**
+	 * 时间加减
+	 *
+	 * @param date
+	 *            日期
+	 * @param num
+	 *            添加的时间
+	 * @param field
+	 *            添加类型
+	 * @return 添加后的日期
+	 */
+	public static java.util.Date addTime(java.util.Date date, int num,int field) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		cal.add(field, num);
+		return cal.getTime();
+	}
+
+
 	public static String getConfigurationDate(long m) {
 		String beapartdate = "";
 		int nDay = java.lang.Math.abs((int) m / (24 * 60 * 60));

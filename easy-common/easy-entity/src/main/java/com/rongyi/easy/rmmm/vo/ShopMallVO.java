@@ -138,4 +138,23 @@ public class ShopMallVO implements Serializable {
 		this.cityName = cityName;
 	}
 
+	@Override
+	public String toString() {
+		return "ShopMallVO{" +
+				"shopId='" + shopId + '\'' +
+				", shopName='" + shopName + '\'' +
+				", shopMid='" + shopMid + '\'' +
+				", mallId='" + mallId + '\'' +
+				", mallName='" + mallName + '\'' +
+				", mallMid='" + mallMid + '\'' +
+				", userId='" + userId + '\'' +
+				", userName='" + userName + '\'' +
+				", userPhone='" + userPhone + '\'' +
+				", nickname='" + nickname + '\'' +
+				", provinceId='" + provinceId + '\'' +
+				", cityId='" + cityId + '\'' +
+				", provinceName='" + provinceName + '\'' +
+				", cityName='" + cityName + '\'' +
+				'}';
+	}
 }

@@ -4,7 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class UserAccountEntity implements Serializable{
-    /** 主键 */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** 主键 */
     private Integer id;
 
     /** 类型1:支付宝,2：银行卡 */
@@ -222,4 +227,5 @@ public class UserAccountEntity implements Serializable{
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
+    
 }

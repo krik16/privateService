@@ -2,6 +2,7 @@ package com.rongyi.rss.coupon.mall.life;
 
 
 import com.rongyi.core.bean.ResponseResult;
+import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.old_vo.OldCouponVO;
 import com.rongyi.easy.coupon.vo.CouponVO;
@@ -68,4 +69,22 @@ public interface MLCouponService {
      * @return
      */
     ActivityData getCouponInfoForSolr(String couponId);
+
+    /**
+     * 根据卡券ID查询关联的店铺列表
+     * @param couponId 卡券id
+     * @param currentPage 起始页从1开始
+     * @param pageSize 每页行数
+     * @return pagingVO
+     * @author lqy
+     */
+    PagingVO getCouponShopsByCouponId(String couponId, Integer currentPage, Integer pageSize);
+
+    /**
+     * 根据卡券ID获取卡券详情（提供给容易逛代金券详情使用）
+     * @param couponId 卡券ID
+     * @return coupon
+     * @author lqy
+     */
+    Coupon getCouponById(String couponId);
 }

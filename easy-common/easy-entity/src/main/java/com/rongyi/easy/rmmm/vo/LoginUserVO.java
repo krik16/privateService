@@ -3,6 +3,7 @@ package com.rongyi.easy.rmmm.vo;
 import com.rongyi.easy.huanxin.HuanXinConfig;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class LoginUserVO implements Serializable{
 	Integer userId;
@@ -18,6 +19,10 @@ public class LoginUserVO implements Serializable{
 	 String logo;//头像url
 	String shopMId;//商铺MID
 	String sharCode;
+	List<Integer> identityType; //角色列表
+	String currentId;//当前角色状态
+
+
 
 	private String appCode= HuanXinConfig.IMCODE_SECOND;
 
@@ -117,5 +122,21 @@ public class LoginUserVO implements Serializable{
 
 	public void setSharCode(String sharCode) {
 		this.sharCode = sharCode;
+	}
+
+	public List<Integer> getIdentityType() {
+		return identityType;
+	}
+
+	public void setIdentityType(List<Integer> identityType) {
+		this.identityType = identityType;
+	}
+
+	public String getCurrentId() {
+		return currentId;
+	}
+
+	public void setCurrentId(String currentId) {
+		this.currentId = currentId;
 	}
 }

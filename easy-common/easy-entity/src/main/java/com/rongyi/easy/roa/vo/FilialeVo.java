@@ -20,13 +20,6 @@ public class FilialeVo implements Serializable{
 	
 	private String brandName; //关联品牌名称
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;
@@ -42,6 +35,14 @@ public class FilialeVo implements Serializable{
 
 	public void setManager(String manager) {
 		this.manager = manager;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getBrandId() {

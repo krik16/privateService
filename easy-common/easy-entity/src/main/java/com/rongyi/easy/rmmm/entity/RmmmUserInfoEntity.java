@@ -6,7 +6,12 @@ import java.util.Date;
 
 public class RmmmUserInfoEntity implements Serializable{
 
-    /** 主键  */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** 主键  */
     private Integer id;
 
     /** 用户头像logo */
@@ -17,6 +22,9 @@ public class RmmmUserInfoEntity implements Serializable{
 
     /** 电话号码 */
     private String userPhone;
+    
+    /**  用户账号 */
+    private String userAccount;
 
     /** 密码 */
     private String userPwd;
@@ -59,7 +67,7 @@ public class RmmmUserInfoEntity implements Serializable{
     /** 环信用户账号 */
     private String userIMCount;
     private String devId;//登录时获取当前设备Id
-    private Integer type;
+    private Integer type;  // 1 导购 2买手
     private Integer identity;
     private Integer isCooperation;
     private String memo;
@@ -67,12 +75,24 @@ public class RmmmUserInfoEntity implements Serializable{
     private Integer stopReason;
 	private String sharCode; //邀请码
 
+    private String userDesc;//用户简介
+
+   // private List<Integer> identityTypeList; //用户账号身份列表
+
     public Integer getId() {
 		return id;
 	}
 
 	public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getUserDesc() {
+        return userDesc;
+    }
+
+    public void setUserDesc(String userDesc) {
+        this.userDesc = userDesc;
     }
 
     public String getUserLogo() {
@@ -90,6 +110,7 @@ public class RmmmUserInfoEntity implements Serializable{
     public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
+
 
     public String getUserPhone() {
         return userPhone;
@@ -265,7 +286,15 @@ public class RmmmUserInfoEntity implements Serializable{
 	public void setStopReason(Integer stopReason) {
 		this.stopReason = stopReason;
 	}
-    public String getSharCode() {
+    public String getUserAccount() {
+		return userAccount;
+	}
+
+	public void setUserAccount(String userAccount) {
+		this.userAccount = userAccount;
+	}
+
+	public String getSharCode() {
         return sharCode;
     }
 

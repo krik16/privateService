@@ -1,6 +1,7 @@
 package com.rongyi.easy.coupon.param;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 用户红包参数
@@ -41,6 +42,7 @@ public class UserRedenvelopeParam implements Serializable {
     }
 
 
+
     public Integer getPageSize() {
         return pageSize;
     }
@@ -64,6 +66,7 @@ public class UserRedenvelopeParam implements Serializable {
     public void setOrderBy(String orderBy) {
         this.orderBy = orderBy;
     }
+
 
     public Boolean getIsExpired() {
         return isExpired;

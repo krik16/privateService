@@ -7,6 +7,7 @@ public class UserEditParam implements Serializable{
 	String nickname;
 	String phone;
 	String pswd;
+	String identity;
 
 	public String getUserlogo() {
 		return userlogo;
@@ -39,6 +40,12 @@ public class UserEditParam implements Serializable{
 	public void setPswd(String pswd) {
 		this.pswd = pswd;
 	}
-	
-	
-}	
+
+	public String getIdentity() {
+		return identity;
+	}
+
+	public void setIdentity(String identity) {
+		this.identity = identity;
+	}
+}

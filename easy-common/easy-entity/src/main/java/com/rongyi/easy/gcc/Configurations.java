@@ -40,25 +40,6 @@ public class Configurations implements Serializable {
 	private long officialJudgementWaitMax = 0L;
 	/* 评价关闭时间 */
 	private long commentCloseWaitMax = 0L;
-/*=======
-	private int apealCountMax;
-	*//* 退款次数上限 *//*
-	private int refundCountMax;
-	*//* 子订单退款超时时间 *//*
-	private long subOrderRefundWaitMax;
-	*//* 订单关闭超时时间 *//*
-	private long orderCloseWaitMax;
-	*//* 订单买家收货确认超时时间 *//*
-	private long commodityCommitWaitMax;
-	*//* 订单卖家发货超时时间 *//*
-	private long commodityDeliverWaitMax;
-	*//* 订单买家付款超时时间 *//*
-	private long paymentWaitMax;
-//	*//* 子订单维权超时时间 *//*
-//	private long subOrderSafeguardWaitMax;
-	*//* 官方介入超时时间 *//*
-	private long officialJudgementWaitMax;
->>>>>>> 1164ac8a99afd3383b29ede121d74c11dd8bb2b4*/
 
 	public int getRefundCountMax() {
 		return refundCountMax;
@@ -155,5 +136,4 @@ public class Configurations implements Serializable {
 	public void setCommentCloseWaitMax(long commentCloseWaitMax) {
 		this.commentCloseWaitMax = commentCloseWaitMax;
 	}
-
 }

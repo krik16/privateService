@@ -161,9 +161,18 @@ public interface IUserService {
     /**
      * 通过手机号查用户信息
      * @param phone
+     * @param identity
      * @return
      */
-    public RmmmUserInfoEntity getUsersEntityByPhone(String phone);
+    public RmmmUserInfoEntity getUsersEntityByPhone(String phone,String identity);
+
+
+    /**
+     * 手机号的List信息
+     * @param phone
+     * @return
+     */
+    public List<RmmmUserInfoEntity> getUserListByPhone(String phone)throws MallShopException;
 
     /**
      * 修改密码/昵称／手机／头像
@@ -172,12 +181,22 @@ public interface IUserService {
     public boolean editInfo(RmmmUserInfoEntity usersEntity);
 
     /**
+     * 用户信息修改
+     * @param paramStr 修改的参数
+     * @param phone 手机号
+     * @param flag 0修改手机号 1修改密码
+     * @return
+     * @throws MallShopException
+     */
+    public boolean updateByPhone(String paramStr,String phone,int flag)throws MallShopException;
+
+    /**
      * 根据用户昵称，用户UUID获取
      * @param flag  标识位
      * @param strName  0 查昵称 1查UUID
      * @return
      */
-    public RmmmUserInfoEntity getUsersEntityByStrName(int flag,String strName)throws MallShopException;
+    public RmmmUserInfoEntity getUsersEntityByStrName(int flag,String strName,String identity)throws MallShopException;
 
 
 
@@ -238,6 +257,35 @@ public interface IUserService {
      * @return 存在 true 不存在 false
      */
     public Boolean sharCodeIsExist(String sharCode)throws Exception;
+    
+    /**
+     * 通过userId获取导购部分数据
+     * @param userId
+     * @return
+     * @throws Exception
+     */
+    public UserinfoVO selectRmmmUserInfoByUserId(Integer userId) throws Exception;
 
-
+    /**
+     * 编辑用户简介
+     * @param userId 用户id
+     * @param desc 用户描述
+     * @return
+     * @throws MallShopException
+     */
+    public Integer editUserDesc(Integer userId,String desc)throws MallShopException;
+    
+    /**
+     * 根据手机号和昵称查询用户
+     * @param map
+     * @return
+     */
+    public RmmmUserInfoEntity selectRmmmUserInfoByUserPhoneAndNickName(Map map);
+    
+    /**
+     * 根据条件查询用户信息
+     * @param paramsMap
+     * @return
+     */
+    public RmmmUserInfoEntity selectRmmmUserInfoByUserParam(Map<String, Object> paramsMap);
 }

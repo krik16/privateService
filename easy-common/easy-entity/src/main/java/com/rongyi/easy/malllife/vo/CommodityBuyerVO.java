@@ -17,6 +17,7 @@ public class CommodityBuyerVO implements Serializable{
     private String shopId;//123”,
     private boolean isCollected;  //是否被收藏
     private String commodityCode;//商品编码
+    private String shopMid;//店铺mongoId
 	public CommodityBuyerVO(){
         
     }
@@ -32,6 +33,7 @@ public class CommodityBuyerVO implements Serializable{
         this.commodityName = commodity.getName();
         this.shopId = commodity.getShopId();
         this.commodityCode=commodity.getCode();
+        this.shopMid = commodity.getShopMid();
     }
     
     public List<String> getCommodityPicList() {
@@ -129,5 +131,11 @@ public class CommodityBuyerVO implements Serializable{
     public void setCommodityCode(String commodityCode) {
         this.commodityCode = commodityCode;
     }
+	public String getShopMid() {
+		return shopMid;
+	}
+	public void setShopMid(String shopMid) {
+		this.shopMid = shopMid;
+	}
     
 }

@@ -3,6 +3,7 @@ package com.rongyi.rss.mallshop.user;
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
+import com.rongyi.easy.entity.UserAddressEntity;
 import com.rongyi.easy.rmmm.param.OperateAddressParam;
 import com.rongyi.easy.rmmm.param.UserAddressListParam;
 
@@ -40,5 +41,14 @@ public interface ROAUserAddressService {
 	 * @throws Exception
 	 */
 	public void setDefaultAddress(String addressId,ObjectId userId) throws Exception;
+	
+	/**
+	 * 根据用户id和地址id查用户地址信息
+	 * @param userId
+	 * @param addressId
+	 * @return
+	 * @throws Exception
+	 */
+	public UserAddressEntity getUserAddressInfo(ObjectId userId,ObjectId addressId) throws Exception;
 
 }

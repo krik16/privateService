@@ -21,11 +21,14 @@ public class CouponParam implements Serializable {
     private Integer pageSize;
 
     /**
+<<<<<<< HEAD
+=======
      * 起始行数
      */
     private Integer offset;
 
     /**
+>>>>>>> develop-yuzhijian
      * 店铺ID
      */
     private String shopId;
@@ -364,6 +367,7 @@ public class CouponParam implements Serializable {
     public void setProductId(String productId) {
         this.productId = productId;
     }
+
 
     public String getUpdateUser() {
         return updateUser;

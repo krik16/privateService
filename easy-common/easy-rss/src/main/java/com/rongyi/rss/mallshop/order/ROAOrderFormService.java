@@ -1,5 +1,6 @@
 package com.rongyi.rss.mallshop.order;
 
+import java.util.List;
 import java.util.Map;
 
 import com.rongyi.core.bean.ResponseResult;
@@ -33,5 +34,9 @@ public interface ROAOrderFormService {
 	public OrderFormEntity getOrderFormByOrderNum(String orderNum) throws Exception;
 	
 	public PagingVO<OrderManagerVO> searchListByMap(Map<String, Object> paramsMap) throws Exception;
+	
+public List<OrderFormEntity> selectOrderList(Map param) throws Exception ;
+	
+	public int selectOrderListCount(String weidianId, String userId) throws Exception;
 
 }

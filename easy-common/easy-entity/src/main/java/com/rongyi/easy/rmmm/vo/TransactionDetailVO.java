@@ -40,6 +40,8 @@ public class TransactionDetailVO implements Serializable{
 	
 	private String userPhone;//导购电话号码
 	
+	private Integer guideType;// 1是导购 2是买手
+	
 	private String integral;//积分
 	
 	private String imId;//导购环信id
@@ -60,6 +62,34 @@ public class TransactionDetailVO implements Serializable{
 	private Integer errno;
 	/** 翻牌购拼接的url */
 	private String url;
+	
+	private String isCollection="0";//是否收藏了店铺 0否 1是
+	
+	private Integer ifAttention = 0;// 是否已关注0否1是
+
+	public Integer getIfAttention() {
+		return ifAttention;
+	}
+
+	public void setIfAttention(Integer ifAttention) {
+		this.ifAttention = ifAttention;
+	}
+
+	public String getIsCollection() {
+		return isCollection;
+	}
+
+	public void setIsCollection(String isCollection) {
+		this.isCollection = isCollection;
+	}
+
+	public Integer getGuideType() {
+		return guideType;
+	}
+
+	public void setGuideType(Integer guideType) {
+		this.guideType = guideType;
+	}
 
 	public String getConsignee() {
 		return consignee;
@@ -260,7 +290,39 @@ public class TransactionDetailVO implements Serializable{
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	
-	
-	
+
+
+	@Override
+	public String toString() {
+		return "TransactionDetailVO{" +
+				"consignee='" + consignee + '\'' +
+				", phone='" + phone + '\'' +
+				", address='" + address + '\'' +
+				", provinceName='" + provinceName + '\'' +
+				", cityName='" + cityName + '\'' +
+				", districtName='" + districtName + '\'' +
+				", commitOrderTime='" + commitOrderTime + '\'' +
+				", payTime='" + payTime + '\'' +
+				", orderNums=" + orderNums +
+				", userId=" + userId +
+				", userLogo='" + userLogo + '\'' +
+				", userScore=" + userScore +
+				", userNickName='" + userNickName + '\'' +
+				", userName='" + userName + '\'' +
+				", userPhone='" + userPhone + '\'' +
+				", guideType=" + guideType +
+				", integral='" + integral + '\'' +
+				", imId='" + imId + '\'' +
+				", isBelong=" + isBelong +
+				", shopId=" + shopId +
+				", shopMId='" + shopMId + '\'' +
+				", shopName='" + shopName + '\'' +
+				", mallMId='" + mallMId + '\'' +
+				", msg='" + msg + '\'' +
+				", errno=" + errno +
+				", url='" + url + '\'' +
+				", isCollection='" + isCollection + '\'' +
+				", ifAttention=" + ifAttention +
+				'}';
+	}
 }

@@ -11,6 +11,8 @@ package com.rongyi.easy.solr.param;
 
 import java.io.Serializable;
 
+import com.rongyi.easy.malllife.param.MalllifeBaseParam;
+
 /**
  * @author ZhengYl
  *
@@ -19,7 +21,7 @@ import java.io.Serializable;
  * @author ZhengYl
  *
  */
-public class CommoditySearchParam implements Serializable {
+public class CommoditySearchParam  extends MalllifeBaseParam implements Serializable {
 
 	/**  */
 	private static final long serialVersionUID = -3577116644255163015L;
@@ -42,17 +44,28 @@ public class CommoditySearchParam implements Serializable {
 	/** 排序规则 */
 	private String sortBy;
 	
-	/** 页 */
-	private int currentPage;
-	
-	/** 一页数量 */
-	private int pageSize;
-	
 	/** 坐标x */
 	private String coord_x;
 	
 	/** 坐标y */
 	private String coord_y;
+	
+	/** 买手id */
+	private String bullId;
+	
+	/** 直播id */
+	private String liveId;
+	
+	/** 商品类型 (直播：1 ，全部商品：0)*/
+	private String commodityType;
+
+	public String getCommodityType() {
+		return commodityType;
+	}
+
+	public void setCommodityType(String commodityType) {
+		this.commodityType = commodityType;
+	}
 
 	/**
 	 * @return the keyword
@@ -139,34 +152,6 @@ public class CommoditySearchParam implements Serializable {
 	}
 
 	/**
-	 * @return the currentPage
-	 */
-	public int getCurrentPage() {
-		return currentPage;
-	}
-
-	/**
-	 * @param currentPage the currentPage to set
-	 */
-	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
-	}
-
-	/**
-	 * @return the pageSize
-	 */
-	public int getPageSize() {
-		return pageSize;
-	}
-
-	/**
-	 * @param pageSize the pageSize to set
-	 */
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
-	}
-
-	/**
 	 * @return the coord_x
 	 */
 	public String getCoord_x() {
@@ -193,7 +178,37 @@ public class CommoditySearchParam implements Serializable {
 	public void setCoord_y(String coord_y) {
 		this.coord_y = coord_y;
 	}
-	
-	
 
+	public String getBullId() {
+		return bullId;
+	}
+
+	public void setBullId(String bullId) {
+		this.bullId = bullId;
+	}
+
+	public String getLiveId() {
+		return liveId;
+	}
+
+	public void setLiveId(String liveId) {
+		this.liveId = liveId;
+	}
+
+	@Override
+	public String toString() {
+		return "CommoditySearchParam{" +
+				"keyword='" + keyword + '\'' +
+				", shopId='" + shopId + '\'' +
+				", brandId='" + brandId + '\'' +
+				", mallId='" + mallId + '\'' +
+				", commodityCategory='" + commodityCategory + '\'' +
+				", sortBy='" + sortBy + '\'' +
+				", coord_x='" + coord_x + '\'' +
+				", coord_y='" + coord_y + '\'' +
+				", bullId='" + bullId + '\'' +
+				", liveId='" + liveId + '\'' +
+				", commodityType='" + commodityType + '\'' +
+				'}';
+	}
 }

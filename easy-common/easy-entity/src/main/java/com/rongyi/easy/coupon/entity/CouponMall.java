@@ -79,6 +79,7 @@ public class CouponMall implements Serializable {
         return builder.toString();
     }
 
+
     public CouponMall(String couponId, String mallId, String mallName, String mallAddress) {
         this.couponId = couponId;
         this.mallId = mallId;

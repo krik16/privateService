@@ -32,6 +32,7 @@ public class SalesCommissionParam {
     private String commissionNo;
     private String mallName;
     private String shopName;
+    private String guideType;
     private String sellerName;
     private String uploadStartTime;
     private String uploadEndTime;
@@ -48,7 +49,13 @@ public class SalesCommissionParam {
      */
     private String vaStatus;
     
-    public String getCommissionNo() {
+    public String getGuideType() {
+		return guideType;
+	}
+	public void setGuideType(String guideType) {
+		this.guideType = guideType;
+	}
+	public String getCommissionNo() {
         return commissionNo;
     }
     public void setCommissionNo(String commissionNo) {
@@ -130,7 +137,7 @@ public class SalesCommissionParam {
 	public Map<String, Object> paramsToMap(){
         Map<String,Object> paramsMap=new HashMap<String, Object>();
         if(StringUtils.isNotBlank(this.getCommissionNo())){
-            paramsMap.put("commissionNo", Integer.parseInt(this.getCommissionNo()));
+            paramsMap.put("commissionNo", this.getCommissionNo());
         }
         if(StringUtils.isNotBlank(this.getMallName())){
             paramsMap.put("mall", this.getMallName());
@@ -152,6 +159,9 @@ public class SalesCommissionParam {
         }
         if(NumberUtils.isNumber(this.getAmountEnd())){
             paramsMap.put("amountEnd", new BigDecimal(this.getAmountEnd()));
+        }
+        if(StringUtils.isNotBlank(this.getGuideType())){
+        	paramsMap.put("guideType", Integer.valueOf(this.getGuideType()));
         }
         List<Integer> checks=new ArrayList<Integer>();
         if(StringUtils.isNotBlank(this.getStatus())){
@@ -184,4 +194,11 @@ public class SalesCommissionParam {
         
         return paramsMap;
     }
+	@Override
+	public String toString() {
+		return "SalesCommissionParam [commissionNo=" + commissionNo + ", mallName=" + mallName + ", shopName=" + shopName + ", guideType=" + guideType + ", sellerName=" + sellerName
+				+ ", uploadStartTime=" + uploadStartTime + ", uploadEndTime=" + uploadEndTime + ", amountStart=" + amountStart + ", amountEnd=" + amountEnd + ", status=" + status + ", page=" + page
+				+ ", pageSize=" + pageSize + ", pageStart=" + pageStart + ", vaStatus=" + vaStatus + "]";
+	}
+	
 }

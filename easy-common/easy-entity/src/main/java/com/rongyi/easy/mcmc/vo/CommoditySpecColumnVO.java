@@ -49,4 +49,14 @@ public class CommoditySpecColumnVO implements  Serializable{
 	public void setRequired(boolean isRequired) {
 		this.isRequired = isRequired;
 	}
+
+	@Override
+	public String toString() {
+		return "CommoditySpecColumnVO{" +
+				"columnId='" + columnId + '\'' +
+				", columnName='" + columnName + '\'' +
+				", columnValue='" + columnValue + '\'' +
+				", isRequired=" + isRequired +
+				'}';
+	}
 }

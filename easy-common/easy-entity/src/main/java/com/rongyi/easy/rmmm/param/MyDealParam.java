@@ -61,4 +61,14 @@ public class MyDealParam implements Serializable {
 		this.guideId = guideId;
 	}
 
+	@Override
+	public String toString() {
+		return "MyDealParam{" +
+				"status='" + status + '\'' +
+				", currentPage='" + currentPage + '\'' +
+				", pageSize='" + pageSize + '\'' +
+				", date='" + date + '\'' +
+				", guideId='" + guideId + '\'' +
+				'}';
+	}
 }

@@ -73,6 +73,7 @@ public class ParentOrderVO implements Serializable {
 	private String userName;// 导购姓名
 	private String userPhone;// 导购电话
 	private String guideId;// 导购id
+	private Integer guideType;// 1是导购 2是买手
 	private String receiveTime;// 确认收货时间
 	private String cancelTime;// 卖家取消订单时间
 	private String closeTime;// 订单关闭时间
@@ -92,6 +93,24 @@ public class ParentOrderVO implements Serializable {
 	private String score;// 使用的颜值
 	private String scoreDeduction;// 颜值抵扣金额
 	private String DeductCouponAmount;// 抵扣券实际抵扣价格
+
+	private String liveName;//直播名
+
+	public String getLiveName() {
+		return liveName;
+	}
+
+	public void setLiveName(String liveName) {
+		this.liveName = liveName;
+	}
+
+	public Integer getGuideType() {
+		return guideType;
+	}
+
+	public void setGuideType(Integer guideType) {
+		this.guideType = guideType;
+	}
 
 	public BigDecimal getDiscountFee() {
 		return discountFee;
@@ -470,4 +489,58 @@ public class ParentOrderVO implements Serializable {
 		DeductCouponAmount = deductCouponAmount;
 	}
 
+	@Override
+	public String toString() {
+		return "ParentOrderVO{" +
+				"orderId='" + orderId + '\'' +
+				", mallName='" + mallName + '\'' +
+				", brandName='" + brandName + '\'' +
+				", shopName='" + shopName + '\'' +
+				", shopIM=" + shopIM +
+				", totalPrice='" + totalPrice + '\'' +
+				", parentOrderStatus='" + parentOrderStatus + '\'' +
+				", nextStatusTime='" + nextStatusTime + '\'' +
+				", sonOrderList=" + sonOrderList +
+				", consignee='" + consignee + '\'' +
+				", phone='" + phone + '\'' +
+				", address='" + address + '\'' +
+				", provinceName='" + provinceName + '\'' +
+				", cityName='" + cityName + '\'' +
+				", districtName='" + districtName + '\'' +
+				", commodityPostage='" + commodityPostage + '\'' +
+				", orderNum='" + orderNum + '\'' +
+				", comment='" + comment + '\'' +
+				", payTime='" + payTime + '\'' +
+				", commitOrderTime='" + commitOrderTime + '\'' +
+				", deliverTime='" + deliverTime + '\'' +
+				", shopId='" + shopId + '\'' +
+				", shopMid='" + shopMid + '\'' +
+				", shopLogo='" + shopLogo + '\'' +
+				", isComment='" + isComment + '\'' +
+				", closeType='" + closeType + '\'' +
+				", closeReason='" + closeReason + '\'' +
+				", originalTotalPrice='" + originalTotalPrice + '\'' +
+				", buyerNickName='" + buyerNickName + '\'' +
+				", buyerPhone='" + buyerPhone + '\'' +
+				", receiveType='" + receiveType + '\'' +
+				", nickName='" + nickName + '\'' +
+				", imId='" + imId + '\'' +
+				", userLogo='" + userLogo + '\'' +
+				", userName='" + userName + '\'' +
+				", userPhone='" + userPhone + '\'' +
+				", guideId='" + guideId + '\'' +
+				", guideType=" + guideType +
+				", receiveTime='" + receiveTime + '\'' +
+				", cancelTime='" + cancelTime + '\'' +
+				", closeTime='" + closeTime + '\'' +
+				", statusRoute='" + statusRoute + '\'' +
+				", expressBillId='" + expressBillId + '\'' +
+				", expressName='" + expressName + '\'' +
+				", discountFee=" + discountFee +
+				", score='" + score + '\'' +
+				", scoreDeduction='" + scoreDeduction + '\'' +
+				", DeductCouponAmount='" + DeductCouponAmount + '\'' +
+				", liveName='" + liveName + '\'' +
+				'}';
+	}
 }

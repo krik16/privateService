@@ -26,6 +26,15 @@ public class OrderModelVO extends OrderModelParam implements Serializable {
 	private String mallName;// 商场名称
 	private String provinceName;// 省名称
 	private String cityName;// 市名称
+	private Integer guideType;// 1是导购 2是买手
+
+	public Integer getGuideType() {
+		return guideType;
+	}
+
+	public void setGuideType(Integer guideType) {
+		this.guideType = guideType;
+	}
 
 	public String getOrderModelId() {
 		return orderModelId;
@@ -131,4 +140,23 @@ public class OrderModelVO extends OrderModelParam implements Serializable {
 		this.cityName = cityName;
 	}
 
+	@Override
+	public String toString() {
+		return "OrderModelVO{" +
+				"orderModelId='" + orderModelId + '\'' +
+				", provinceId='" + provinceId + '\'' +
+				", cityId='" + cityId + '\'' +
+				", nickName='" + nickName + '\'' +
+				", imId='" + imId + '\'' +
+				", paymentWaitMax='" + paymentWaitMax + '\'' +
+				", userLogo='" + userLogo + '\'' +
+				", userName='" + userName + '\'' +
+				", userPhone='" + userPhone + '\'' +
+				", shopName='" + shopName + '\'' +
+				", mallName='" + mallName + '\'' +
+				", provinceName='" + provinceName + '\'' +
+				", cityName='" + cityName + '\'' +
+				", guideType=" + guideType +
+				'}';
+	}
 }

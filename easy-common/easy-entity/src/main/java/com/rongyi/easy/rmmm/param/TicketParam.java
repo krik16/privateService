@@ -12,9 +12,16 @@ import java.util.List;
  */
 public class TicketParam implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private String orderNo;// 订单号
 
 	private String ticketPicList;// 小票上传的图片凭证,用“;”隔开”
+	
+	private Integer userType;//0 导购  1买手
 
 	public String getOrderNo() {
 		return orderNo;
@@ -32,4 +39,12 @@ public class TicketParam implements Serializable {
 		this.ticketPicList = ticketPicList;
 	}
 
+	public Integer getUserType() {
+		return userType;
+	}
+
+	public void setUserType(Integer userType) {
+		this.userType = userType;
+	}
+	
 }

@@ -1,7 +1,14 @@
 package com.rongyi.easy.rmmm.entity;
 
-public class UserImEntity {
-    /** 主键 */
+import java.io.Serializable;
+
+public class UserImEntity implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** 主键 */
     private Integer id;
 
     /** 环信账户 */

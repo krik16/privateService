@@ -10,6 +10,8 @@ public class ClearanceCommodityVO implements Serializable {
   private List<CommodityBuyerVO> list;// 清仓商品详情列表
 
   private String title = "特惠商品";
+  
+  private List<String> listPics;// 存放图片的全路径
 
   public List<CommodityBuyerVO> getList() {
     return list;
@@ -26,5 +28,14 @@ public class ClearanceCommodityVO implements Serializable {
   public void setTitle(String title) {
     this.title = title;
   }
+
+public List<String> getListPics() {
+	return listPics;
+}
+
+public void setListPics(List<String> listPics) {
+	this.listPics = listPics;
+}
+  
 
 }

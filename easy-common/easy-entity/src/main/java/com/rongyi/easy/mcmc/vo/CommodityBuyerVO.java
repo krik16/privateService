@@ -1,9 +1,9 @@
 package com.rongyi.easy.mcmc.vo;
 
-import com.rongyi.easy.mcmc.Commodity;
-
 import java.io.Serializable;
 import java.util.List;
+
+import com.rongyi.easy.mcmc.Commodity;
 
 public class CommodityBuyerVO implements Serializable{
 
@@ -12,14 +12,35 @@ public class CommodityBuyerVO implements Serializable{
 	 */
 	private static final long serialVersionUID = -1461107119422444629L;
 
+	private String shopName;//店铺名称
 	private List<String> commodityPicList;
 	private String commodityId;
 	private String commodityCode;
 	private String commodityStock;
 	private int commodityStatus;
+	private int commodityType;//渠道  1商家，2买手
+	private boolean supportCourierDeliver;//导购：true是   false否；买手：默认true   
 
 	private List<String> shopIM;// 店铺可用IM账号
+	
+	private String bullId;//创建人
+	
+	
+	public String getBullId() {
+		return bullId;
+	}
 
+	public void setBullId(String bullId) {
+		this.bullId = bullId;
+	}
+
+	public int getCommodityType() {
+		return commodityType;
+	}
+
+	public void setCommodityType(int commodityType) {
+		this.commodityType = commodityType;
+	}
 
 	public String getCommodityStock() {
 		return commodityStock;
@@ -124,6 +145,13 @@ public class CommodityBuyerVO implements Serializable{
 		if(commodity.getBrandName() != null){
 			this.commodityBrandName = commodity.getBrandName();
 		}
+		if(commodity.getCreate_by() != null){
+			this.bullId = commodity.getCreate_by();//商品创建人
+		}
+		// 买手版渠道  0商家，1买手
+		this.commodityType = commodity.getType();
+		this.supportCourierDeliver = commodity.isSupportCourierDeliver();
+		
 	}
 	
 	public List<String> getCommodityPicList() {
@@ -194,4 +222,19 @@ public class CommodityBuyerVO implements Serializable{
 	public void setShopIM(List<String> shopIM) {
 		this.shopIM = shopIM;
 	}
+	public String getShopName() {
+		return shopName;
+	}
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+
+	public boolean isSupportCourierDeliver() {
+		return supportCourierDeliver;
+	}
+
+	public void setSupportCourierDeliver(boolean supportCourierDeliver) {
+		this.supportCourierDeliver = supportCourierDeliver;
+	}
+	
 }

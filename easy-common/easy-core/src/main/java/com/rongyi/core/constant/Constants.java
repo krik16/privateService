@@ -23,6 +23,9 @@ public interface Constants {
      * 登录用户的session key
      */
     String USER_SESSION_KEY = "user_session_key"; //
+    
+    //商家账号初始密码
+  	String USER_INIT_PWD = "RYxyz123";
 
 
     String RESULT_SUCCES = "success"; //成功标志位
@@ -596,6 +599,10 @@ public interface Constants {
     interface ConfigType {
         String CONFIGURATIONS = "com.rongyi.easy.gcc.Configurations";
         String TRANS_CONFIGURATIONS = "com.rongyi.easy.gcc.TransConfigurations";
+        /** 买手交易配置*/
+        String BUYER_TRANS_CONFIGURATIONS = "com.rongyi.easy.gcc.BuyerTransConfigurations";
+        /** 微商城买手参数配置 */
+        String BUYER_CONFIGURATIONS = "com.rongyi.easy.gcc.BuyerConfigurations";
     }
     interface AppType{
     	/**

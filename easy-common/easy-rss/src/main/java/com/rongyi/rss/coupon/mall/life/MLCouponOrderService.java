@@ -198,7 +198,6 @@ public interface MLCouponOrderService {
 
     /**
      * 根据卡券类型购买代金券或领取红包
-     *
      * @param param
      * @param couponType
      * @return

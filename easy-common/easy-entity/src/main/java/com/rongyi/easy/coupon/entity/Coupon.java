@@ -1,5 +1,6 @@
 package com.rongyi.easy.coupon.entity;
 
+
 import com.rongyi.core.util.AmountConversion;
 import com.rongyi.easy.coupon.enumerate.CouponEnum;
 import org.apache.commons.collections.CollectionUtils;
@@ -9,6 +10,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.beans.Transient;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -23,6 +25,8 @@ import java.util.List;
 public class Coupon implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+
 
     /**
      * 展示区域：常规区域,活动区域;未选中[0]，选中[1] 例如 "1,1"表示都选中
@@ -357,6 +361,7 @@ public class Coupon implements Serializable {
     public double getOrigPrice2Double() {
         double val = 0D;
         if (origPrice != null) {
+
             val = AmountConversion.fenToYuan(origPrice);
         }
         return val;
@@ -401,7 +406,6 @@ public class Coupon implements Serializable {
     public String getDisplayRegion() {
         return displayRegion;
     }
-
     /**
      * 卡券是否活动展示区域
      *
@@ -829,6 +833,7 @@ public class Coupon implements Serializable {
         this.outChannelName = outChannelName;
     }
 
+
     public Boolean getIsRelatedAll() {
         return isRelatedAll;
     }
@@ -836,6 +841,7 @@ public class Coupon implements Serializable {
     public void setIsRelatedAll(Boolean isRelatedAll) {
         this.isRelatedAll = isRelatedAll;
     }
+
 
     @Override
     public String toString() {
