@@ -48,6 +48,8 @@ public class ShopVO implements Serializable{
 	private List<String> zones_ids; // 楼层ID集合
 
 	private String brandId;
+	
+	private String brandName;//品牌id
 
 	private String business_district;
 	
@@ -355,4 +357,13 @@ public class ShopVO implements Serializable{
 	public void setIm_id(List<String> im_id) {
 		this.im_id = im_id;
 	}
+
+	public String getBrandName() {
+		return brandName;
+	}
+
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
+	}
+	
 }
