@@ -21,6 +21,7 @@ import com.rongyi.rss.malllife.roa.ROARedisService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -221,7 +222,6 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 
 	@Override
 	public int updateBatch(CheckParam param, String user) {
-		Map<String, Object> paramsMap = param.paramToMap();
 		TransConfigurations transConf;
 		if (param.getGuideType()==2) {
 			//买手
@@ -234,9 +234,31 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 			transConf = new TransConfigurations();
 		}
 		LOGGER.info("读取的参数为:" + transConf.getCommissionCountMax());
-		paramsMap.put("max_commission_times", transConf.getCommissionCountMax() == 0 ? 5 : transConf.getCommissionCountMax());
-		LOGGER.info("MAP:" + paramsMap);
-		int result = this.getBaseDao().updateBySql(NAMESPACE_SALESCOMMISSION + ".batchUpdate", paramsMap);
+		Map<String, Object> searchMap = new HashMap<>();
+		String[] ids = param.getIds().trim().split(",");
+		searchMap.put("ids",ids);
+		List<SalesCommissionVO> salesCommissionVOs = this.getBaseDao().selectListBySql(NAMESPACE_SALESCOMMISSION + ".selectOneById", searchMap);
+		int result = 0;
+		if (CollectionUtils.isNotEmpty(salesCommissionVOs)){
+			for (SalesCommissionVO vo : salesCommissionVOs){
+				Map<String, Object> paramsMap = param.paramToMap();
+				paramsMap.put("guide_id",vo.getGuideId());
+				paramsMap.put("buyer_id",vo.getBuyerId());
+				Integer dailyCount = this.getBaseDao().selectOneBySql(NAMESPACE_SALESCOMMISSION + ".selectDailyCount", paramsMap);
+				if (dailyCount==null)
+					dailyCount=0;
+				searchMap.put("id", vo.getId());
+				if (dailyCount<=transConf.getCommissionCountMax()){
+					searchMap.put("status", param.getStatus());
+				}else {
+					searchMap.put("status", 5);
+				}
+				LOGGER.info("searchMap: "+searchMap);
+				int updateResult =  this.getBaseDao().updateBySql(NAMESPACE_SALESCOMMISSION + ".updateStatus", searchMap);
+				if (updateResult>0)
+					result++;
+			}
+		}
 		if (result > 0) {
 			for (Integer id : (ValidateUtil.StringToIntList(param.getIds()))) {
 				SalesCommissionAuditLog auditLog = new SalesCommissionAuditLog();
@@ -292,7 +314,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 			for (int i = 0; i < times; i++) {
 				long version = UUID.randomUUID().getMostSignificantBits();
 				LOGGER.info("version:" + version);
-				List<CommissionAmountTotalVO> newList = new ArrayList<CommissionAmountTotalVO>();
+				List<CommissionAmountTotalVO> newList;
 				if ((vos.size() - i * Constant.SENDSIZE.SIZE) > Constant.SENDSIZE.SIZE) {
 					newList = vos.subList(i * Constant.SENDSIZE.SIZE, (i + 1) * Constant.SENDSIZE.SIZE);
 				} else {

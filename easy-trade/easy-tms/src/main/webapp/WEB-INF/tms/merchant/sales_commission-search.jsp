@@ -75,11 +75,11 @@
 						<option value="2">买手</option>
 					</select>
 				</li>
-				<li class="xiala">商场：<input type="text" name='mallid'  style="width:120px"></input>
+				<li class="xiala">商场：<input type="text" name='mallid'  style="width:120px"/>
 				</li>
-				<li class="xiala">店铺：<input type="text" name="shopid"  style="width:120px"></input>
+				<li class="xiala">店铺：<input type="text" name="shopid"  style="width:120px"/>
 				</li>
-				<li>卖家账号：<input id="name" type="text"  style="width:120px"></input>
+				<li>卖家账号：<input id="name" type="text"  style="width:120px"/>
 				</li>
 				</li>
 				<li id="checkLi" style="display:none;">审核：
@@ -118,8 +118,8 @@
 			</div>
 		</div>
 		<div id="resultList" class="memSuper-list member-search-list">
-			<input id="currpage" type="hidden" name="currpage"
-				value="<c:out value='${currpage}'/>" />
+			<%--<input id="currpage" type="hidden" name="currpage"
+				value="<c:out value='${currpage}'/>" />--%>
 		</div>
 
 	</div>

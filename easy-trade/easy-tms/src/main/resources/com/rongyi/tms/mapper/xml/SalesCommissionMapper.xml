@@ -102,7 +102,7 @@
 		where id = #{id,jdbcType=INTEGER}
 	</select>
 	<select id="selectOneById" resultMap="AllInfoResultMap"
-		parameterType="java.lang.Integer">
+		parameterType="map">
 		select
 		<include refid="Base_Column_List" />
 		,
@@ -110,7 +110,15 @@
 		,
 		<include refid="All_Info_List" />
 		from sales_commission_view
-		where id = #{id,jdbcType=INTEGER}
+		<where>
+			<if test="id!=null">id = #{id,jdbcType=INTEGER}</if>
+			<if test="ids!=null">
+				id in
+				<foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
 	</select>
 	<select id="getOneBonus" resultMap="BonusWithBlobMap"
 		parameterType="map">
@@ -643,4 +651,13 @@
 		AND (type IS NULL or type =
 		3)
 	</select>
+	
+	<select id="selectDailyCount" parameterType="map" resultType="int">
+		SELECT COUNT(1)   FROM sales_commission_view
+		WHERE guide_id=#{guideId,jdbcType=VARCHAR} AND guide_type = #{guideType, jdbcType=INTEGER}
+		AND `status`=3  AND TO_DAYS(create_at)=TO_DAYS(NOW()) AND buyer_id=#{buyerId,jdbcType=VARCHAR} GROUP BY guide_id,buyer_account
+	</select>
+	<update id="updateStatus" parameterType="map">
+		UPDATE sales_commission SET `status`=#{status, jdbcType=INTEGER} WHERE id=#{id,jdbcType=INTEGER};
+	</update>
 </mapper>
