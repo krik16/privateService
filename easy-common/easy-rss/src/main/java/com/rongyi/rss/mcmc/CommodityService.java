@@ -30,13 +30,13 @@ public interface CommodityService {
 			int pagesize);
 
 	public ResponseResult getLiveCommodityList(String keyword, int identity, String buyerId, int orderBy, int currentpage,
-			int pagesize);
+			int pagesize, String liveId, int isEdit);
 
 	public String publishCommodity(CommodityVO commodityvo, long shopId, long brandId, long mallId, String mallMid,
 			String brandName, String shopNum, CommodityShopInfo shopInfo);
 
 	public String publishCommodityBuyer(CommodityVO commodityvo, long brandId, long mallId, String mallMid,
-			String brandName,String brandMid,String shopNum);
+			String brandName,String brandMid,String shopNum, List<Double> position, List<String> zone_ids);
 
 	public ResponseResult commodityToShelves(String id, long shopId, int identity);
 

@@ -1,10 +1,10 @@
 package com.rongyi.easy.entity;
 
-import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Id;
-
 import java.io.Serializable;
 import java.util.List;
+
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
 
 @Entity("shops")
 public class ShopEntity implements Serializable{
@@ -25,7 +25,7 @@ public class ShopEntity implements Serializable{
     private String description;
 //    private door_coordinate;
 //    private exchange_ids;
-//    private List<Double> location;
+    private List<Double> location;
     private String name;
 //    private String name_temp;
 //    private Integer old_code;
@@ -127,12 +127,12 @@ public class ShopEntity implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-//	public List<Double> getLocation() {
-//		return location;
-//	}
-//	public void setLocation(List<Double> location) {
-//		this.location = location;
-//	}
+	public List<Double> getLocation() {
+		return location;
+	}
+	public void setLocation(List<Double> location) {
+		this.location = location;
+	}
 	public String getName() {
 		return name;
 	}
