@@ -85,6 +85,14 @@ a.btnsearch{
 				<li>提现流水号:<input type="text" id="liushui-no" class="detail"></input>
 				</li>
 				
+				<li>渠道:
+					<select id="guideType"  style="width: 90px">
+						<option value="" selected>--全部--</option>
+						<option value="1">商家</option>
+						<option value="2">买手</option>
+					</select>
+				</li>
+				
 				<li class="xiala">商场：<input type="text" name='mallid' style="width: 120px"></input>
 				</li>
 				
