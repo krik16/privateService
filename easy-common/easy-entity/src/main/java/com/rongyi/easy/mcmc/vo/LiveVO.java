@@ -80,6 +80,16 @@ public class LiveVO implements Serializable {
 	 * sessionId
 	 */
 	private String jsessionId;
+	
+	/**
+	 * 定点位置id
+	 */
+	private String liveAddressId;
+	
+	/**
+	 * 地址类型 0商场，1街边店
+	 */
+	private int zoneType;
 
 	public String getJsessionId() {
 		return jsessionId;
@@ -192,4 +202,21 @@ public class LiveVO implements Serializable {
 	public void setDistance(Double distance) {
 		this.distance = distance;
 	}
+
+	public String getLiveAddressId() {
+		return liveAddressId;
+	}
+
+	public void setLiveAddressId(String liveAddressId) {
+		this.liveAddressId = liveAddressId;
+	}
+
+	public int getZoneType() {
+		return zoneType;
+	}
+
+	public void setZoneType(int zoneType) {
+		this.zoneType = zoneType;
+	}
+	
 }
