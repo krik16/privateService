@@ -30,7 +30,7 @@ public class CommodityVO  implements  Serializable {
 	private String commodityOPOfLCP;//我是最低现价对应的原价
 	
 	private int commodityType;//渠道  0商家，1买手
-	private boolean isSpot;//是否现货	
+	private int isSpot;//是否现货	
 	private Date liveStartTime; // 直播开始时间
 	private Date liveEndTime; // 直播结束时间
 	private String create_by; // 创建人 
@@ -89,10 +89,11 @@ public class CommodityVO  implements  Serializable {
 	public void setCommodityType(int commodityType) {
 		this.commodityType = commodityType;
 	}
-	public boolean isSpot() {
+	
+	public int getIsSpot() {
 		return isSpot;
 	}
-	public void setSpot(boolean isSpot) {
+	public void setIsSpot(int isSpot) {
 		this.isSpot = isSpot;
 	}
 	public String getCommodityOPriceMax() {
@@ -180,6 +181,7 @@ public class CommodityVO  implements  Serializable {
 		this.commodityDescription = commodity.getDescription();
 		this.brandMid = commodity.getBrandMid();//品牌mongoId
 		this.mallMid = commodity.getMallMid();//商场mongoId
+		
 
 		if(commodity.getPostage() != null && !commodity.getPostage().isEmpty()){
 			try{
