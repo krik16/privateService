@@ -44,12 +44,6 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	/** 排序规则 */
 	private String sortBy;
 	
-	/** 页 */
-	private Integer currentPage;
-	
-	/** 一页数量 */
-	private Integer pageSize;
-	
 	/** 坐标x */
 	private String coord_x;
 	
@@ -155,34 +149,6 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	 */
 	public void setSortBy(String sortBy) {
 		this.sortBy = sortBy;
-	}
-
-	/**
-	 * @return the currentPage
-	 */
-	public Integer getCurrentPage() {
-		return currentPage;
-	}
-
-	/**
-	 * @param currentPage the currentPage to set
-	 */
-	public void setCurrentPage(Integer currentPage) {
-		this.currentPage = currentPage;
-	}
-
-	/**
-	 * @return the pageSize
-	 */
-	public Integer getPageSize() {
-		return pageSize;
-	}
-
-	/**
-	 * @param pageSize the pageSize to set
-	 */
-	public void setPageSize(Integer pageSize) {
-		this.pageSize = pageSize;
 	}
 
 	/**
