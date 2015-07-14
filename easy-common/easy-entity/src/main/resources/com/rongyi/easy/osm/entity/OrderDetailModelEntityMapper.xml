@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongyi.easy.osm.entity.OrderDetailModelEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.rongyi.easy.osm.entity.OrderDetailModelEntity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="order_model_id" property="orderModelId" jdbcType="INTEGER" />
+    <result column="quantity" property="quantity" jdbcType="INTEGER" />
+    <result column="commodity_mid" property="commodityMid" jdbcType="VARCHAR" />
+    <result column="commodity_spec_mid" property="commoditySpecMid" jdbcType="VARCHAR" />
+    <result column="commodity_commission" property="commodityCommission" jdbcType="DECIMAL" />
+    <result column="unit_price" property="unitPrice" jdbcType="DECIMAL" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="is_disabled" property="isDisabled" jdbcType="INTEGER" />
+    <result column="version" property="version" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, order_model_id, quantity, commodity_mid, commodity_spec_mid, commodity_commission, 
+    unit_price, create_at, is_disabled, version
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rongyi.easy.osm.entity.OrderDetailModelEntityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from order_detail_model
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from order_detail_model
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order_detail_model
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rongyi.easy.osm.entity.OrderDetailModelEntityExample" >
+    delete from order_detail_model
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rongyi.easy.osm.entity.OrderDetailModelEntity" >
+    insert into order_detail_model (id, order_model_id, quantity, 
+      commodity_mid, commodity_spec_mid, commodity_commission, 
+      unit_price, create_at, is_disabled, 
+      version)
+    values (#{id,jdbcType=INTEGER}, #{orderModelId,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER}, 
+      #{commodityMid,jdbcType=VARCHAR}, #{commoditySpecMid,jdbcType=VARCHAR}, #{commodityCommission,jdbcType=DECIMAL}, 
+      #{unitPrice,jdbcType=DECIMAL}, #{createAt,jdbcType=TIMESTAMP}, #{isDisabled,jdbcType=INTEGER}, 
+      #{version,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rongyi.easy.osm.entity.OrderDetailModelEntity" >
+    insert into order_detail_model
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderModelId != null" >
+        order_model_id,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="commodityMid != null" >
+        commodity_mid,
+      </if>
+      <if test="commoditySpecMid != null" >
+        commodity_spec_mid,
+      </if>
+      <if test="commodityCommission != null" >
+        commodity_commission,
+      </if>
+      <if test="unitPrice != null" >
+        unit_price,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+      <if test="isDisabled != null" >
+        is_disabled,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderModelId != null" >
+        #{orderModelId,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="commodityMid != null" >
+        #{commodityMid,jdbcType=VARCHAR},
+      </if>
+      <if test="commoditySpecMid != null" >
+        #{commoditySpecMid,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityCommission != null" >
+        #{commodityCommission,jdbcType=DECIMAL},
+      </if>
+      <if test="unitPrice != null" >
+        #{unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDisabled != null" >
+        #{isDisabled,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rongyi.easy.osm.entity.OrderDetailModelEntityExample" resultType="java.lang.Integer" >
+    select count(*) from order_detail_model
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update order_detail_model
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderModelId != null" >
+        order_model_id = #{record.orderModelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.quantity != null" >
+        quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.commodityMid != null" >
+        commodity_mid = #{record.commodityMid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commoditySpecMid != null" >
+        commodity_spec_mid = #{record.commoditySpecMid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityCommission != null" >
+        commodity_commission = #{record.commodityCommission,jdbcType=DECIMAL},
+      </if>
+      <if test="record.unitPrice != null" >
+        unit_price = #{record.unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createAt != null" >
+        create_at = #{record.createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDisabled != null" >
+        is_disabled = #{record.isDisabled,jdbcType=INTEGER},
+      </if>
+      <if test="record.version != null" >
+        version = #{record.version,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update order_detail_model
+    set id = #{record.id,jdbcType=INTEGER},
+      order_model_id = #{record.orderModelId,jdbcType=INTEGER},
+      quantity = #{record.quantity,jdbcType=INTEGER},
+      commodity_mid = #{record.commodityMid,jdbcType=VARCHAR},
+      commodity_spec_mid = #{record.commoditySpecMid,jdbcType=VARCHAR},
+      commodity_commission = #{record.commodityCommission,jdbcType=DECIMAL},
+      unit_price = #{record.unitPrice,jdbcType=DECIMAL},
+      create_at = #{record.createAt,jdbcType=TIMESTAMP},
+      is_disabled = #{record.isDisabled,jdbcType=INTEGER},
+      version = #{record.version,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rongyi.easy.osm.entity.OrderDetailModelEntity" >
+    update order_detail_model
+    <set >
+      <if test="orderModelId != null" >
+        order_model_id = #{orderModelId,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="commodityMid != null" >
+        commodity_mid = #{commodityMid,jdbcType=VARCHAR},
+      </if>
+      <if test="commoditySpecMid != null" >
+        commodity_spec_mid = #{commoditySpecMid,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityCommission != null" >
+        commodity_commission = #{commodityCommission,jdbcType=DECIMAL},
+      </if>
+      <if test="unitPrice != null" >
+        unit_price = #{unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDisabled != null" >
+        is_disabled = #{isDisabled,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rongyi.easy.osm.entity.OrderDetailModelEntity" >
+    update order_detail_model
+    set order_model_id = #{orderModelId,jdbcType=INTEGER},
+      quantity = #{quantity,jdbcType=INTEGER},
+      commodity_mid = #{commodityMid,jdbcType=VARCHAR},
+      commodity_spec_mid = #{commoditySpecMid,jdbcType=VARCHAR},
+      commodity_commission = #{commodityCommission,jdbcType=DECIMAL},
+      unit_price = #{unitPrice,jdbcType=DECIMAL},
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      is_disabled = #{isDisabled,jdbcType=INTEGER},
+      version = #{version,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

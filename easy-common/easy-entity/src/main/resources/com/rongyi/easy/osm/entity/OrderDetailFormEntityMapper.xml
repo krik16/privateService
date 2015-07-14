@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongyi.easy.osm.entity.OrderDetailFormEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.rongyi.easy.osm.entity.OrderDetailFormEntity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="order_item_no" property="orderItemNo" jdbcType="VARCHAR" />
+    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <result column="commodity_mid" property="commodityMid" jdbcType="VARCHAR" />
+    <result column="unit_price" property="unitPrice" jdbcType="DECIMAL" />
+    <result column="quantity" property="quantity" jdbcType="INTEGER" />
+    <result column="refund_amount" property="refundAmount" jdbcType="DECIMAL" />
+    <result column="real_amount" property="realAmount" jdbcType="DECIMAL" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="appeal_times" property="appealTimes" jdbcType="INTEGER" />
+    <result column="refund_times" property="refundTimes" jdbcType="INTEGER" />
+    <result column="is_refunded" property="isRefunded" jdbcType="INTEGER" />
+    <result column="is_judged" property="isJudged" jdbcType="INTEGER" />
+    <result column="appeal_id" property="appealId" jdbcType="INTEGER" />
+    <result column="payment_id_list" property="paymentIdList" jdbcType="VARCHAR" />
+    <result column="commodity_spec_mid" property="commoditySpecMid" jdbcType="VARCHAR" />
+    <result column="coupon_id" property="couponId" jdbcType="VARCHAR" />
+    <result column="commodity_commission" property="commodityCommission" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, order_item_no, order_no, commodity_mid, unit_price, quantity, refund_amount, 
+    real_amount, status, appeal_times, refund_times, is_refunded, is_judged, appeal_id, 
+    payment_id_list, commodity_spec_mid, coupon_id, commodity_commission
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rongyi.easy.osm.entity.OrderDetailFormEntityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from order_detail_form
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from order_detail_form
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order_detail_form
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rongyi.easy.osm.entity.OrderDetailFormEntityExample" >
+    delete from order_detail_form
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rongyi.easy.osm.entity.OrderDetailFormEntity" >
+    insert into order_detail_form (id, order_item_no, order_no, 
+      commodity_mid, unit_price, quantity, 
+      refund_amount, real_amount, status, 
+      appeal_times, refund_times, is_refunded, 
+      is_judged, appeal_id, payment_id_list, 
+      commodity_spec_mid, coupon_id, commodity_commission
+      )
+    values (#{id,jdbcType=INTEGER}, #{orderItemNo,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, 
+      #{commodityMid,jdbcType=VARCHAR}, #{unitPrice,jdbcType=DECIMAL}, #{quantity,jdbcType=INTEGER}, 
+      #{refundAmount,jdbcType=DECIMAL}, #{realAmount,jdbcType=DECIMAL}, #{status,jdbcType=VARCHAR}, 
+      #{appealTimes,jdbcType=INTEGER}, #{refundTimes,jdbcType=INTEGER}, #{isRefunded,jdbcType=INTEGER}, 
+      #{isJudged,jdbcType=INTEGER}, #{appealId,jdbcType=INTEGER}, #{paymentIdList,jdbcType=VARCHAR}, 
+      #{commoditySpecMid,jdbcType=VARCHAR}, #{couponId,jdbcType=VARCHAR}, #{commodityCommission,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.rongyi.easy.osm.entity.OrderDetailFormEntity" >
+    insert into order_detail_form
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderItemNo != null" >
+        order_item_no,
+      </if>
+      <if test="orderNo != null" >
+        order_no,
+      </if>
+      <if test="commodityMid != null" >
+        commodity_mid,
+      </if>
+      <if test="unitPrice != null" >
+        unit_price,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="refundAmount != null" >
+        refund_amount,
+      </if>
+      <if test="realAmount != null" >
+        real_amount,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="appealTimes != null" >
+        appeal_times,
+      </if>
+      <if test="refundTimes != null" >
+        refund_times,
+      </if>
+      <if test="isRefunded != null" >
+        is_refunded,
+      </if>
+      <if test="isJudged != null" >
+        is_judged,
+      </if>
+      <if test="appealId != null" >
+        appeal_id,
+      </if>
+      <if test="paymentIdList != null" >
+        payment_id_list,
+      </if>
+      <if test="commoditySpecMid != null" >
+        commodity_spec_mid,
+      </if>
+      <if test="couponId != null" >
+        coupon_id,
+      </if>
+      <if test="commodityCommission != null" >
+        commodity_commission,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderItemNo != null" >
+        #{orderItemNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityMid != null" >
+        #{commodityMid,jdbcType=VARCHAR},
+      </if>
+      <if test="unitPrice != null" >
+        #{unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="refundAmount != null" >
+        #{refundAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="realAmount != null" >
+        #{realAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="appealTimes != null" >
+        #{appealTimes,jdbcType=INTEGER},
+      </if>
+      <if test="refundTimes != null" >
+        #{refundTimes,jdbcType=INTEGER},
+      </if>
+      <if test="isRefunded != null" >
+        #{isRefunded,jdbcType=INTEGER},
+      </if>
+      <if test="isJudged != null" >
+        #{isJudged,jdbcType=INTEGER},
+      </if>
+      <if test="appealId != null" >
+        #{appealId,jdbcType=INTEGER},
+      </if>
+      <if test="paymentIdList != null" >
+        #{paymentIdList,jdbcType=VARCHAR},
+      </if>
+      <if test="commoditySpecMid != null" >
+        #{commoditySpecMid,jdbcType=VARCHAR},
+      </if>
+      <if test="couponId != null" >
+        #{couponId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityCommission != null" >
+        #{commodityCommission,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rongyi.easy.osm.entity.OrderDetailFormEntityExample" resultType="java.lang.Integer" >
+    select count(*) from order_detail_form
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update order_detail_form
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderItemNo != null" >
+        order_item_no = #{record.orderItemNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderNo != null" >
+        order_no = #{record.orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityMid != null" >
+        commodity_mid = #{record.commodityMid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitPrice != null" >
+        unit_price = #{record.unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.quantity != null" >
+        quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.refundAmount != null" >
+        refund_amount = #{record.refundAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.realAmount != null" >
+        real_amount = #{record.realAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appealTimes != null" >
+        appeal_times = #{record.appealTimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.refundTimes != null" >
+        refund_times = #{record.refundTimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.isRefunded != null" >
+        is_refunded = #{record.isRefunded,jdbcType=INTEGER},
+      </if>
+      <if test="record.isJudged != null" >
+        is_judged = #{record.isJudged,jdbcType=INTEGER},
+      </if>
+      <if test="record.appealId != null" >
+        appeal_id = #{record.appealId,jdbcType=INTEGER},
+      </if>
+      <if test="record.paymentIdList != null" >
+        payment_id_list = #{record.paymentIdList,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commoditySpecMid != null" >
+        commodity_spec_mid = #{record.commoditySpecMid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponId != null" >
+        coupon_id = #{record.couponId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityCommission != null" >
+        commodity_commission = #{record.commodityCommission,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update order_detail_form
+    set id = #{record.id,jdbcType=INTEGER},
+      order_item_no = #{record.orderItemNo,jdbcType=VARCHAR},
+      order_no = #{record.orderNo,jdbcType=VARCHAR},
+      commodity_mid = #{record.commodityMid,jdbcType=VARCHAR},
+      unit_price = #{record.unitPrice,jdbcType=DECIMAL},
+      quantity = #{record.quantity,jdbcType=INTEGER},
+      refund_amount = #{record.refundAmount,jdbcType=DECIMAL},
+      real_amount = #{record.realAmount,jdbcType=DECIMAL},
+      status = #{record.status,jdbcType=VARCHAR},
+      appeal_times = #{record.appealTimes,jdbcType=INTEGER},
+      refund_times = #{record.refundTimes,jdbcType=INTEGER},
+      is_refunded = #{record.isRefunded,jdbcType=INTEGER},
+      is_judged = #{record.isJudged,jdbcType=INTEGER},
+      appeal_id = #{record.appealId,jdbcType=INTEGER},
+      payment_id_list = #{record.paymentIdList,jdbcType=VARCHAR},
+      commodity_spec_mid = #{record.commoditySpecMid,jdbcType=VARCHAR},
+      coupon_id = #{record.couponId,jdbcType=VARCHAR},
+      commodity_commission = #{record.commodityCommission,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rongyi.easy.osm.entity.OrderDetailFormEntity" >
+    update order_detail_form
+    <set >
+      <if test="orderItemNo != null" >
+        order_item_no = #{orderItemNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityMid != null" >
+        commodity_mid = #{commodityMid,jdbcType=VARCHAR},
+      </if>
+      <if test="unitPrice != null" >
+        unit_price = #{unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="refundAmount != null" >
+        refund_amount = #{refundAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="realAmount != null" >
+        real_amount = #{realAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="appealTimes != null" >
+        appeal_times = #{appealTimes,jdbcType=INTEGER},
+      </if>
+      <if test="refundTimes != null" >
+        refund_times = #{refundTimes,jdbcType=INTEGER},
+      </if>
+      <if test="isRefunded != null" >
+        is_refunded = #{isRefunded,jdbcType=INTEGER},
+      </if>
+      <if test="isJudged != null" >
+        is_judged = #{isJudged,jdbcType=INTEGER},
+      </if>
+      <if test="appealId != null" >
+        appeal_id = #{appealId,jdbcType=INTEGER},
+      </if>
+      <if test="paymentIdList != null" >
+        payment_id_list = #{paymentIdList,jdbcType=VARCHAR},
+      </if>
+      <if test="commoditySpecMid != null" >
+        commodity_spec_mid = #{commoditySpecMid,jdbcType=VARCHAR},
+      </if>
+      <if test="couponId != null" >
+        coupon_id = #{couponId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityCommission != null" >
+        commodity_commission = #{commodityCommission,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rongyi.easy.osm.entity.OrderDetailFormEntity" >
+    update order_detail_form
+    set order_item_no = #{orderItemNo,jdbcType=VARCHAR},
+      order_no = #{orderNo,jdbcType=VARCHAR},
+      commodity_mid = #{commodityMid,jdbcType=VARCHAR},
+      unit_price = #{unitPrice,jdbcType=DECIMAL},
+      quantity = #{quantity,jdbcType=INTEGER},
+      refund_amount = #{refundAmount,jdbcType=DECIMAL},
+      real_amount = #{realAmount,jdbcType=DECIMAL},
+      status = #{status,jdbcType=VARCHAR},
+      appeal_times = #{appealTimes,jdbcType=INTEGER},
+      refund_times = #{refundTimes,jdbcType=INTEGER},
+      is_refunded = #{isRefunded,jdbcType=INTEGER},
+      is_judged = #{isJudged,jdbcType=INTEGER},
+      appeal_id = #{appealId,jdbcType=INTEGER},
+      payment_id_list = #{paymentIdList,jdbcType=VARCHAR},
+      commodity_spec_mid = #{commoditySpecMid,jdbcType=VARCHAR},
+      coupon_id = #{couponId,jdbcType=VARCHAR},
+      commodity_commission = #{commodityCommission,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

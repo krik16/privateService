@@ -1,0 +1,55 @@
+package com.rongyi.easy.rmmm.param;
+
+import java.io.Serializable;
+
+public class OrderDealedParam implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String orderId;// 大订单id
+	private String discount;// 要减去的价格
+	private String commodityPostage;// 运费
+	private String orderNo;// 大订单号
+	private String orderPrice;// 订单价格
+
+	public String getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
+	}
+
+	public String getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(String discount) {
+		this.discount = discount;
+	}
+
+	public String getCommodityPostage() {
+		return commodityPostage;
+	}
+
+	public void setCommodityPostage(String commodityPostage) {
+		this.commodityPostage = commodityPostage;
+	}
+
+	public String getOrderNo() {
+		return orderNo;
+	}
+
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
+	}
+
+	public String getOrderPrice() {
+		return orderPrice;
+	}
+
+	public void setOrderPrice(String orderPrice) {
+		this.orderPrice = orderPrice;
+	}
+}

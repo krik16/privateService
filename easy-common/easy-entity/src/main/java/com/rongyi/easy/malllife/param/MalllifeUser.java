@@ -1,0 +1,122 @@
+package com.rongyi.easy.malllife.param;
+
+import java.io.Serializable;
+
+/*
+ * Copyright (C),上海容易网电子商务有限公司
+ * Author:  俞志坚
+ * Description:  
+ * time:  2015/6/3
+ * History: 变更记录
+ * <author>           <time>             <version>        <desc>
+ * 俞志坚             2015/6/3              1.0            创建文件
+ *
+ */
+public class MalllifeUser implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+
+    private String userId;
+
+    private String phone;
+
+    private String pwd;
+
+    private String nickName;
+
+    private  String avatar;  //头像地址
+
+
+    private String openId;
+
+    private String channel;
+
+    private String devUuid;//设备uuid
+
+    private String imId;
+
+    private Integer isLoginRed;//登录领红包 0未领取 1已经领取
+
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
+
+    public String getChannel() {
+        return channel;
+    }
+
+    public void setChannel(String channel) {
+        this.channel = channel;
+    }
+
+    public String getDevUuid() {
+        return devUuid;
+    }
+
+    public void setDevUuid(String devUuid) {
+        this.devUuid = devUuid;
+    }
+
+    public String getImId() {
+        return imId;
+    }
+
+    public void setImId(String imId) {
+        this.imId = imId;
+    }
+
+    public Integer getIsLoginRed() {
+        return isLoginRed;
+    }
+
+    public void setIsLoginRed(Integer isLoginRed) {
+        this.isLoginRed = isLoginRed;
+    }
+}

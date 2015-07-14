@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongyi.easy.entity.IntegralGiftMapper" >
+  <resultMap id="BaseResultMap" type="com.rongyi.easy.entity.IntegralGift" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="mall_id" property="mallId" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="total_num" property="totalNum" jdbcType="INTEGER" />
+    <result column="personal_times" property="personalTimes" jdbcType="INTEGER" />
+    <result column="thumbnail" property="thumbnail" jdbcType="VARCHAR" />
+    <result column="shelves_date" property="shelvesDate" jdbcType="TIMESTAMP" />
+    <result column="off_shelves_date" property="offShelvesDate" jdbcType="TIMESTAMP" />
+    <result column="deadline" property="deadline" jdbcType="TIMESTAMP" />
+    <result column="exchange_integral" property="exchangeIntegral" jdbcType="INTEGER" />
+    <result column="favourable_start_time" property="favourableStartTime" jdbcType="TIMESTAMP" />
+    <result column="favourable_end_time" property="favourableEndTime" jdbcType="TIMESTAMP" />
+    <result column="favourable_integral" property="favourableIntegral" jdbcType="INTEGER" />
+    <result column="receive_times" property="receiveTimes" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, mall_id, code, description, total_num, personal_times, thumbnail, shelves_date, 
+    off_shelves_date, deadline, exchange_integral, favourable_start_time, favourable_end_time, 
+    favourable_integral, receive_times
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rongyi.easy.entity.IntegralGiftExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rmc_integral_gift
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from rmc_integral_gift
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from rmc_integral_gift
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rongyi.easy.entity.IntegralGiftExample" >
+    delete from rmc_integral_gift
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rongyi.easy.entity.IntegralGift" >
+    insert into rmc_integral_gift (id, mall_id, code, 
+      description, total_num, personal_times, 
+      thumbnail, shelves_date, off_shelves_date, 
+      deadline, exchange_integral, favourable_start_time, 
+      favourable_end_time, favourable_integral, 
+      receive_times)
+    values (#{id,jdbcType=INTEGER}, #{mallId,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{totalNum,jdbcType=INTEGER}, #{personalTimes,jdbcType=INTEGER}, 
+      #{thumbnail,jdbcType=VARCHAR}, #{shelvesDate,jdbcType=TIMESTAMP}, #{offShelvesDate,jdbcType=TIMESTAMP}, 
+      #{deadline,jdbcType=TIMESTAMP}, #{exchangeIntegral,jdbcType=INTEGER}, #{favourableStartTime,jdbcType=TIMESTAMP}, 
+      #{favourableEndTime,jdbcType=TIMESTAMP}, #{favourableIntegral,jdbcType=INTEGER}, 
+      #{receiveTimes,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rongyi.easy.entity.IntegralGift" >
+    insert into rmc_integral_gift
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="mallId != null" >
+        mall_id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="totalNum != null" >
+        total_num,
+      </if>
+      <if test="personalTimes != null" >
+        personal_times,
+      </if>
+      <if test="thumbnail != null" >
+        thumbnail,
+      </if>
+      <if test="shelvesDate != null" >
+        shelves_date,
+      </if>
+      <if test="offShelvesDate != null" >
+        off_shelves_date,
+      </if>
+      <if test="deadline != null" >
+        deadline,
+      </if>
+      <if test="exchangeIntegral != null" >
+        exchange_integral,
+      </if>
+      <if test="favourableStartTime != null" >
+        favourable_start_time,
+      </if>
+      <if test="favourableEndTime != null" >
+        favourable_end_time,
+      </if>
+      <if test="favourableIntegral != null" >
+        favourable_integral,
+      </if>
+      <if test="receiveTimes != null" >
+        receive_times,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mallId != null" >
+        #{mallId,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="totalNum != null" >
+        #{totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="personalTimes != null" >
+        #{personalTimes,jdbcType=INTEGER},
+      </if>
+      <if test="thumbnail != null" >
+        #{thumbnail,jdbcType=VARCHAR},
+      </if>
+      <if test="shelvesDate != null" >
+        #{shelvesDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offShelvesDate != null" >
+        #{offShelvesDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deadline != null" >
+        #{deadline,jdbcType=TIMESTAMP},
+      </if>
+      <if test="exchangeIntegral != null" >
+        #{exchangeIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="favourableStartTime != null" >
+        #{favourableStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="favourableEndTime != null" >
+        #{favourableEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="favourableIntegral != null" >
+        #{favourableIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="receiveTimes != null" >
+        #{receiveTimes,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rongyi.easy.entity.IntegralGiftExample" resultType="java.lang.Integer" >
+    select count(*) from rmc_integral_gift
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update rmc_integral_gift
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.mallId != null" >
+        mall_id = #{record.mallId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalNum != null" >
+        total_num = #{record.totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.personalTimes != null" >
+        personal_times = #{record.personalTimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.thumbnail != null" >
+        thumbnail = #{record.thumbnail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shelvesDate != null" >
+        shelves_date = #{record.shelvesDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.offShelvesDate != null" >
+        off_shelves_date = #{record.offShelvesDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deadline != null" >
+        deadline = #{record.deadline,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.exchangeIntegral != null" >
+        exchange_integral = #{record.exchangeIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="record.favourableStartTime != null" >
+        favourable_start_time = #{record.favourableStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.favourableEndTime != null" >
+        favourable_end_time = #{record.favourableEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.favourableIntegral != null" >
+        favourable_integral = #{record.favourableIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="record.receiveTimes != null" >
+        receive_times = #{record.receiveTimes,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update rmc_integral_gift
+    set id = #{record.id,jdbcType=INTEGER},
+      mall_id = #{record.mallId,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      total_num = #{record.totalNum,jdbcType=INTEGER},
+      personal_times = #{record.personalTimes,jdbcType=INTEGER},
+      thumbnail = #{record.thumbnail,jdbcType=VARCHAR},
+      shelves_date = #{record.shelvesDate,jdbcType=TIMESTAMP},
+      off_shelves_date = #{record.offShelvesDate,jdbcType=TIMESTAMP},
+      deadline = #{record.deadline,jdbcType=TIMESTAMP},
+      exchange_integral = #{record.exchangeIntegral,jdbcType=INTEGER},
+      favourable_start_time = #{record.favourableStartTime,jdbcType=TIMESTAMP},
+      favourable_end_time = #{record.favourableEndTime,jdbcType=TIMESTAMP},
+      favourable_integral = #{record.favourableIntegral,jdbcType=INTEGER},
+      receive_times = #{record.receiveTimes,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rongyi.easy.entity.IntegralGift" >
+    update rmc_integral_gift
+    <set >
+      <if test="mallId != null" >
+        mall_id = #{mallId,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="totalNum != null" >
+        total_num = #{totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="personalTimes != null" >
+        personal_times = #{personalTimes,jdbcType=INTEGER},
+      </if>
+      <if test="thumbnail != null" >
+        thumbnail = #{thumbnail,jdbcType=VARCHAR},
+      </if>
+      <if test="shelvesDate != null" >
+        shelves_date = #{shelvesDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offShelvesDate != null" >
+        off_shelves_date = #{offShelvesDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deadline != null" >
+        deadline = #{deadline,jdbcType=TIMESTAMP},
+      </if>
+      <if test="exchangeIntegral != null" >
+        exchange_integral = #{exchangeIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="favourableStartTime != null" >
+        favourable_start_time = #{favourableStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="favourableEndTime != null" >
+        favourable_end_time = #{favourableEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="favourableIntegral != null" >
+        favourable_integral = #{favourableIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="receiveTimes != null" >
+        receive_times = #{receiveTimes,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rongyi.easy.entity.IntegralGift" >
+    update rmc_integral_gift
+    set mall_id = #{mallId,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      total_num = #{totalNum,jdbcType=INTEGER},
+      personal_times = #{personalTimes,jdbcType=INTEGER},
+      thumbnail = #{thumbnail,jdbcType=VARCHAR},
+      shelves_date = #{shelvesDate,jdbcType=TIMESTAMP},
+      off_shelves_date = #{offShelvesDate,jdbcType=TIMESTAMP},
+      deadline = #{deadline,jdbcType=TIMESTAMP},
+      exchange_integral = #{exchangeIntegral,jdbcType=INTEGER},
+      favourable_start_time = #{favourableStartTime,jdbcType=TIMESTAMP},
+      favourable_end_time = #{favourableEndTime,jdbcType=TIMESTAMP},
+      favourable_integral = #{favourableIntegral,jdbcType=INTEGER},
+      receive_times = #{receiveTimes,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

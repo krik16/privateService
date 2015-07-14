@@ -1,0 +1,129 @@
+package com.rongyi.rss.malllife.roa.user;
+
+import java.util.List;
+import java.util.Set;
+
+import org.bson.types.ObjectId;
+
+import com.rongyi.easy.entity.MallLifeUserEntity;
+import com.rongyi.easy.malllife.param.MalllifeUser;
+import com.rongyi.easy.malllife.vo.UserInfoVO;
+import com.rongyi.easy.rmmm.dto.user.UserVO;
+
+/*
+ * Copyright (C),上海容易网电子商务有限公司
+ * Author:  俞志坚
+ * Description:  
+ * time:  2015/6/1
+ * History: 变更记录
+ * <author>           <time>             <version>        <desc>
+ * 俞志坚             2015/6/1              1.0            创建文件
+ *
+ */
+public interface ROAMalllifeUserService {
+
+	public MallLifeUserEntity getEntityByUid(String userId) throws Exception;
+
+	/**
+	 * 注册用户
+	 * 
+	 * @param malllifeUser
+	 * @throws Exception
+	 */
+	public void registUser(MalllifeUser malllifeUser) throws Exception;
+
+	/**
+	 * 根据用户Id查询 uuid
+	 * 
+	 * @param uid
+	 * @return
+	 * @throws Exception
+	 */
+	public UserInfoVO getByUid(String uid) throws Exception;
+
+	/**
+	 * 根据用户手机号查询
+	 * 
+	 * @param phone
+	 * @return
+	 * @throws Exception
+	 */
+	public UserInfoVO getByPhone(String phone) throws Exception;
+
+	/**
+	 * 更新用户信息
+	 * 
+	 * @param malllifeUser
+	 * @throws Exception
+	 */
+	public void update(MalllifeUser malllifeUser) throws Exception;
+
+	/**
+	 * 注册IM账号
+	 * 
+	 * @param userId
+	 * @param imUser
+	 * @throws Exception
+	 */
+	public void updateImUser(String userId, String imUser) throws Exception;
+
+	/**
+	 * 第三方登录，若openId不存在，则新建一个用户
+	 * 
+	 * @param malllifeUser
+	 * @return
+	 * @throws Exception
+	 */
+	public UserInfoVO thirdLogin(MalllifeUser malllifeUser) throws Exception;
+
+	/**
+	 * 用户名是：phone和name 密码：encrypted_password
+	 * 
+	 * @param openId
+	 * @return
+	 * @throws Exception
+	 */
+	public UserInfoVO getByOpenId(String openId) throws Exception;
+
+	/**
+	 * 判断当前设备号是否可以注册
+	 * 
+	 * @param devuuid
+	 *            设备uuid
+	 * @return true 可以注册 false不能注册
+	 * @throws Exception
+	 */
+	public Boolean isExistBydevUuid(String devuuid) throws Exception;
+
+	/**
+	 * @param collectCommoditys
+	 * @param userId
+	 * @throws Exception
+	 */
+	public void collectCommodity(Set<String> collectCommoditys, ObjectId userId) throws Exception;
+
+	/**
+	 * 根据买家姓名模糊查询买家信息
+	 * 
+	 * @param name
+	 * @return
+	 * @throws Exception
+	 */
+	public List<UserInfoVO> getUserDetailByName(String name) throws Exception;
+	/**
+	 * 根据昵称模糊查询买家信息
+	 * 
+	 * @param nickname
+	 * @return
+	 * @throws Exception
+	 */
+	public List<UserInfoVO> getUserDetailByNickname(String nickname);
+
+	/**
+	 * 通过昵称或者用户名查询用户列表
+	 * @param nickname
+	 * @param username
+	 * @return
+	 */
+	public List<UserInfoVO> getUsersByNicknameUsername(String nickname, String username);
+}

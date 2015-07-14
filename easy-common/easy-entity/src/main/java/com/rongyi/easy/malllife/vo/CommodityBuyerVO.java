@@ -1,0 +1,133 @@
+package com.rongyi.easy.malllife.vo;
+
+
+import java.io.Serializable;
+import java.util.List;
+
+public class CommodityBuyerVO implements Serializable{
+    private List<String> commodityPicList;
+    private String commodityId;
+    private String commodityOPriceMax;//我是最高原价”,
+    private String commodityOPriceMin;//我是最低原价”,
+    private String commodityCPriceMax;//我是最高现价”,
+    private String commodityCPriceMin;//我是最低现价”,
+    private String commodityPostage;//我是商品邮费”,
+    private String commodityDescription;//我是商品描述”,
+    private String commodityName;//我是商品名称”,
+    private String shopId;//123”,
+    private boolean isCollected;  //是否被收藏
+    private String commodityCode;//商品编码
+	public CommodityBuyerVO(){
+        
+    }
+    public CommodityBuyerVO(Commodity commodity){
+        this.commodityId = commodity.getId().toString();
+        this.commodityPicList = commodity.getPicList();
+        this.commodityOPriceMax = commodity.getoPriceMax();
+        this.commodityOPriceMin = commodity.getoPriceMin();
+        this.commodityCPriceMax = commodity.getcPriceMax();
+        this.commodityCPriceMin = commodity.getcPriceMin();
+        this.commodityPostage = commodity.getPostage();
+        this.commodityDescription = commodity.getDescription();
+        this.commodityName = commodity.getName();
+        this.shopId = commodity.getShopId();
+        this.commodityCode=commodity.getCode();
+    }
+    
+    public List<String> getCommodityPicList() {
+        return commodityPicList;
+    }
+    
+    public void setCommodityPicList(List<String> commodityPicList) {
+        this.commodityPicList = commodityPicList;
+    }
+    
+    public String getCommodityId() {
+        return commodityId;
+    }
+    
+    public void setCommodityId(String commodityId) {
+        this.commodityId = commodityId;
+    }
+    
+    public String getCommodityOPriceMax() {
+        return commodityOPriceMax;
+    }
+    
+    public void setCommodityOPriceMax(String commodityOPriceMax) {
+        this.commodityOPriceMax = commodityOPriceMax;
+    }
+    
+    public String getCommodityOPriceMin() {
+        return commodityOPriceMin;
+    }
+    
+    public void setCommodityOPriceMin(String commodityOPriceMin) {
+        this.commodityOPriceMin = commodityOPriceMin;
+    }
+    
+    public String getCommodityCPriceMax() {
+        return commodityCPriceMax;
+    }
+    
+    public void setCommodityCPriceMax(String commodityCPriceMax) {
+        this.commodityCPriceMax = commodityCPriceMax;
+    }
+    
+    public String getCommodityCPriceMin() {
+        return commodityCPriceMin;
+    }
+    
+    public void setCommodityCPriceMin(String commodityCPriceMin) {
+        this.commodityCPriceMin = commodityCPriceMin;
+    }
+    
+    public String getCommodityPostage() {
+        return commodityPostage;
+    }
+    
+    public void setCommodityPostage(String commodityPostage) {
+        this.commodityPostage = commodityPostage;
+    }
+    
+    public String getCommodityDescription() {
+        return commodityDescription;
+    }
+    
+    public void setCommodityDescription(String commodityDescription) {
+        this.commodityDescription = commodityDescription;
+    }
+    
+    public String getCommodityName() {
+        return commodityName;
+    }
+    
+    public void setCommodityName(String commodityName) {
+        this.commodityName = commodityName;
+    }
+    
+    public String getShopId() {
+        return shopId;
+    }
+    
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
+    }
+    
+    public boolean isCollected() {
+        return isCollected;
+    }
+    
+    public void setCollected(boolean isCollected) {
+        this.isCollected = isCollected;
+    }
+    
+    public String getCommodityCode() {
+        return commodityCode;
+    }
+    
+    public void setCommodityCode(String commodityCode) {
+        this.commodityCode = commodityCode;
+    }
+    
+}

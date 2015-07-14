@@ -1,0 +1,83 @@
+package com.rongyi.easy.mcmc;
+
+import java.util.Date;
+import java.util.List;
+
+import org.bson.types.ObjectId;
+
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
+@Entity("mcmc_commodity_category")
+public class CommodityCategory  implements java.io.Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3491400779856182500L;
+	@Id
+	private ObjectId id;
+	private String name;
+	private String logoUrl;
+	private Date createAt;
+	private List<ObjectId> parentids;
+	private ObjectId parentid;
+	private int type;
+	private List<ObjectId> columnIds;
+	private int commodityCount;
+	public int getCommodityCount() {
+		return commodityCount;
+	}
+	public void setCommodityCount(int commodityCount) {
+		this.commodityCount = commodityCount;
+	}
+	public List<ObjectId> getColumnIds() {
+		return columnIds;
+	}
+	public void setColumnIds(List<ObjectId> columnIds) {
+		this.columnIds = columnIds;
+	}
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
+	public ObjectId getId() {
+		return id;
+	}
+	public void setId(ObjectId id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getLogoUrl() {
+		return logoUrl;
+	}
+	public void setLogoUrl(String logoUrl) {
+		this.logoUrl = logoUrl;
+	}
+	public Date getCreateAt() {
+		return createAt;
+	}
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+	public List<ObjectId> getParentids() {
+		return parentids;
+	}
+	public void setParentids(List<ObjectId> parentids) {
+		this.parentids = parentids;
+	}
+	public ObjectId getParentid() {
+		return parentid;
+	}
+	public void setParentid(ObjectId parentid) {
+		this.parentid = parentid;
+	}
+	
+	 
+}

@@ -1,0 +1,65 @@
+package com.rongyi.easy.rmmm.param;
+
+import java.io.Serializable;
+import java.util.List;
+
+public class ParentOrderParam implements Serializable {
+
+	private List<SonOrderParam> sonOrderList;//
+	private String shopId;// 店铺ID
+	private String comment;// 备注
+	private String addressId;// 邮寄地址id
+	private String orderModelId;// 父模板id
+	private String guideId;// 导购id
+
+
+
+	public List<SonOrderParam> getSonOrderList() {
+		return sonOrderList;
+	}
+
+	public void setSonOrderList(List<SonOrderParam> sonOrderList) {
+		this.sonOrderList = sonOrderList;
+	}
+
+	public String getShopId() {
+		return shopId;
+	}
+
+	public void setShopId(String shopId) {
+		this.shopId = shopId;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public String getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(String addressId) {
+		this.addressId = addressId;
+	}
+
+	public String getOrderModelId() {
+		return orderModelId;
+	}
+
+	public void setOrderModelId(String orderModelId) {
+		this.orderModelId = orderModelId;
+	}
+
+	public String getGuideId() {
+		return guideId;
+	}
+
+	public void setGuideId(String guideId) {
+		this.guideId = guideId;
+	}
+
+}
