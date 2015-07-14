@@ -1,0 +1,793 @@
+package com.rongyi.osm.knowledge;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import net.sf.json.JSONObject;
+
+import org.bson.types.ObjectId;
+import org.kie.api.runtime.KieSession;
+import org.kie.api.runtime.rule.FactHandle;
+import org.kie.api.runtime.rule.QueryResults;
+import org.kie.api.runtime.rule.QueryResultsRow;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.rongyi.core.common.util.DateUtil;
+import com.rongyi.core.constant.Constants;
+import com.rongyi.core.constant.OrderEventType;
+import com.rongyi.core.constant.OrderEventType.EventErrorCode;
+import com.rongyi.core.constant.VirtualAccountEventType;
+import com.rongyi.core.constant.VirtualAccountEventTypeEnum;
+import com.rongyi.easy.osm.entity.ApplicationFormEntity;
+import com.rongyi.easy.osm.entity.OrderDetailFormEntity;
+import com.rongyi.easy.osm.entity.OrderEventEntity;
+import com.rongyi.easy.osm.entity.OrderFormEntity;
+import com.rongyi.easy.va.entity.VirtualAccountDetailEntity;
+import com.rongyi.osm.constant.CashCouponStatus;
+import com.rongyi.osm.constant.OrderFormStatus;
+import com.rongyi.osm.mq.SpringAmqpSender;
+import com.rongyi.osm.service.ApplicationFormServiceImpl;
+import com.rongyi.osm.service.OrderDetailFormService;
+import com.rongyi.osm.service.OrderFormService;
+import com.rongyi.osm.service.PaymentActionService;
+import com.rongyi.osm.service.coupon.CouponStatusService;
+import com.rongyi.osm.service.mcmc.McmcStockService;
+import com.rongyi.rss.mallshop.order.ROAOrderService;
+
+@Component
+public class OrderUtil {
+
+	Logger logger = LoggerFactory.getLogger(getClass());
+
+	@Resource(name = "ksession")
+	private KieSession kSession;
+
+	@Autowired
+	private SpringAmqpSender mSender;
+
+	@Autowired
+	private McmcStockService stockService;
+
+	@Autowired
+	private CouponStatusService couponStatusService;
+
+	@Autowired
+	private OrderFormService orderFormService;
+
+	@Autowired
+	private OrderDetailFormService orderDetailFormService;
+
+	@Autowired
+	private ApplicationFormServiceImpl applicationFormService;
+
+	@Autowired
+	private PaymentActionService paymentActionService;
+	
+	@Autowired
+	private ROAOrderService roaOrderService;
+
+	/**
+	 * 用于停止定时器的最大时间（2038年1月1日 00:00:00）
+	 */
+	private Date maxDate = DateUtil.stringToDate("2038-1-1 00:00:00");
+
+	/**
+	 * 更新现金券状态
+	 *
+	 * @param orderDetailList 子订单集合
+	 * @param status 新状态
+	 * @return
+	 */
+	public boolean setCouponStatus(OrderDetailFormEntity[] orderDetailList, int status, String guideId) {
+		boolean result = true;
+		try {
+			for (OrderDetailFormEntity orderDetail : orderDetailList) {
+				String couponId = orderDetail.getCouponId();
+				if (couponId == null || couponId.isEmpty()) {
+					continue;
+				} else {
+					// 已领用 ->> 已使用
+					if (!(couponStatusService.getCouponStatusByCode(couponId) == CashCouponStatus.OCCUPIED)
+							&& status == CashCouponStatus.USED) {
+						logger.error("现金券状态 1 -> 2 错误， Id: " + couponId + "  当前状态："
+								+ couponStatusService.getCouponStatusByCode(couponId));
+						result = false;
+						break;
+					}
+
+					// 已使用 ->> 已领用
+					if (!(couponStatusService.getCouponStatusByCode(couponId) == CashCouponStatus.USED)
+							&& status == CashCouponStatus.OCCUPIED) {
+						logger.error("现金券状态 2 -> 1 错误， Id: " + couponId + "  当前状态："
+								+ couponStatusService.getCouponStatusByCode(couponId));
+						result = false;
+						break;
+					}
+
+					result = couponStatusService.setCouponStatusByCode(couponId, status, orderDetail.getOrderNo(),
+							Integer.parseInt(guideId));
+					if (!result)
+						break;
+				}
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			e.printStackTrace();
+			result = false;
+		}
+
+		return result;
+	}
+
+	/**
+	* @Title: calculateDiscount
+	* @Description: 由于前端计算折扣时没有计入优惠券金额，故在修改价格时补上
+	* @param  orderDetailList
+	* @param  origDiscount
+	* @return BigDecimal
+	* @throws
+	*/
+	public BigDecimal calculateDiscount(OrderDetailFormEntity[] orderDetailList, BigDecimal origDiscount) {
+		logger.info("Start to recalculateDiscount");
+		BigDecimal newDiscount = new BigDecimal(origDiscount.doubleValue());
+		logger.info("origDiscount value: " + origDiscount.doubleValue());
+		for (Object entity : orderDetailList) {
+			OrderDetailFormEntity orderDetail = (OrderDetailFormEntity) entity;
+			//退款的子订单优惠券不计入
+			if (orderDetail.getIsRefunded().intValue() > 0)
+				continue;
+
+			String couponId = orderDetail.getCouponId();
+			if (!(couponId == null || couponId.isEmpty())) {
+				Double couponAmount = couponStatusService.getDiscountByCode(couponId);
+				if (couponAmount != null) {
+					newDiscount = newDiscount.subtract(new BigDecimal(couponAmount));
+				}
+			}
+
+		}
+
+		return newDiscount;
+	}
+
+	/**
+	 * 计算订单的总价 总价 = (子订单价格总和 - 折扣 - 券抵扣金额) >= 0  + 运费（运费永不打折）
+	 * 子订单价格 = (子订单实价 - 券抵扣金额) >= 0
+	 *
+	 * @param order
+	 * @param orderDetailList
+	 */
+	public BigDecimal calculateTotalPrice(OrderFormEntity order, OrderDetailFormEntity[] orderDetailList) {
+		BigDecimal total = new BigDecimal(0);
+
+		// 计算子订单实际价格总和
+		for (Object entity : orderDetailList) {
+			OrderDetailFormEntity orderDetail = (OrderDetailFormEntity) entity;
+			BigDecimal detailTotal = orderDetail.getRealAmount();
+			String couponId = orderDetail.getCouponId();
+			if (!(couponId == null || couponId.isEmpty())) {
+				Double couponAmount = couponStatusService.getDiscountByCode(couponId);
+				if (couponAmount != null) {
+					detailTotal = detailTotal.subtract(new BigDecimal(couponAmount));
+				}
+			}
+			// 子单原价 - 现金券 > 0
+			if (detailTotal.compareTo(new BigDecimal(0)) > 0) {
+				total = total.add(detailTotal);
+			}
+
+			// 退款成功 减去退款金额
+			if (orderDetail.getIsRefunded().intValue() > 0) {
+				total = total.subtract(orderDetail.getRefundAmount());
+			}
+		}
+
+		// 减去折扣
+		if (order.getDisconntFee() != null) {
+			total = total.subtract(order.getDisconntFee());
+		}
+
+		//总价小于零的情况
+		total = total.compareTo(new BigDecimal(0)) < 0 ? new BigDecimal(0) : total;
+
+		// 加上邮费
+		if (order.getExpressFee() != null) {
+			total = total.add(order.getExpressFee());
+		}
+
+		return total;
+	}
+
+	/**
+	* C2C卖家修改价格后折扣的计算
+	* 若修改价格大于原始总价，则折扣 = 0，返回false；
+	* 否则，折扣 = 原始总价 - 修改价格，返回true；
+	* （原始总价 = 子订单原始价格之和）
+	* @param newPrice 修改价格
+	* @param order 大订单
+	* @param orderDetailList 子订单列表
+	* @return 修改价格是否合法（不可大于原始总价）
+	*/
+	public boolean orderSetDiscount(BigDecimal newPrice, OrderFormEntity order, OrderDetailFormEntity[] orderDetailList) {
+		BigDecimal totalAmount = new BigDecimal(0);
+		for (OrderDetailFormEntity detail : orderDetailList) {
+			totalAmount = totalAmount.add(detail.getRealAmount());
+		}
+		// 判断原始总价和新价格大小
+		if (newPrice.compareTo(totalAmount) <= 0) {
+			order.setDisconntFee(totalAmount.subtract(newPrice));
+			return true;
+		} else {
+			order.setDisconntFee(new BigDecimal(0));
+			return false;
+		}
+	}
+
+	/**
+	* 计算子订单佣金总和，并向tms发送待审核佣金信息
+	* @param orderDetailList
+	* @return
+	*/
+	public void postCommission(OrderFormEntity order) {
+		// for c2c only
+		if (order.getGuideId() == null)
+			return;
+
+		// get all order detail
+		OrderDetailFormEntity[] orderDetailList = this.queryGetOrderDetailList(order.getOrderNo());
+
+		// calc total commission
+		BigDecimal total = new BigDecimal(0);
+		for (OrderDetailFormEntity entity : orderDetailList) {
+			if (entity.getCommodityCommission() != null) {
+				total = total.add(entity.getCommodityCommission());
+			}
+		}
+
+		// construct new commission event
+		CommissionPostEvent commission = new CommissionPostEvent();
+		commission.setOrderNo(order.getOrderNo());
+		commission.setGuideId(order.getGuideId());
+		commission.setCommissionAmount(total);
+		commission.setBuyerId(order.getBuyerId());
+
+		// post commission
+		if (total.compareTo(new BigDecimal(0)) > 0) {
+			mSender.sendEvent(commission);
+			logger.info("[CommissionPostEvent] 订单: " + order.getOrderNo() + " 佣金进入审核系统: " + total + " 元");
+		} else {
+			logger.debug("[CommissionPostEvent] 订单: " + order.getOrderNo() + " 佣金为0");
+		}
+	}
+
+	public long getCurrentTime() {
+		return kSession.getSessionClock().getCurrentTime();
+	}
+
+	public Date getCurrentDate() {
+		return new Date(getCurrentTime());
+	}
+
+	public Date getDateFromTime(long time) {
+		return new Date(time);
+	}
+
+	public Date getDateInFuture(long interval) {
+		return new Date(getCurrentTime() + interval);
+	}
+
+	public OrderEventEntity createOrderEventEntity(String orderNum, String originalStatus, String detail,
+			String status, String type) {
+		OrderEventEntity entity = new OrderEventEntity();
+		entity.setCreateAt(getCurrentDate());
+		entity.setDetail(detail);
+		entity.setOrderNo(orderNum);
+		entity.setOrigStatus(originalStatus);
+		entity.setStatus(status);
+		entity.setType(type);
+		return entity;
+	}
+
+	public void orderChangeStatus(OrderFormEntity order, String nextStatus, int eventId) {
+		String originalStatus = order.getStatus();
+		String originalStatusRoute = order.getStatusRoute();
+		StringBuffer statusRoute = new StringBuffer();
+
+		if (originalStatusRoute != null && !originalStatusRoute.isEmpty()) {
+			statusRoute.append(originalStatusRoute);
+			statusRoute.append("|");
+		}
+
+		statusRoute.append("<" + originalStatus + "," + eventId + ">");
+
+		order.setStatusRoute(statusRoute.toString());
+		order.setStatus(nextStatus);
+	}
+
+	/**
+	 * 用于停止定时器的最大时间（2099年12月31日）
+	 *
+	 * @return
+	 */
+	public Date getMaxDate() {
+		return maxDate;
+	}
+
+	/**
+	 * 停止订单计时器
+	 *
+	 * @param order
+	 */
+	public void stopOrderTimer(OrderFormEntity order) {
+		if (order.getNextStatusTime() != maxDate) {
+			order.setStatusHoldMs(order.getNextStatusTime().getTime() - getCurrentTime());
+			order.setNextStatusTime(maxDate);
+		}
+	}
+
+	/**
+	 * 恢复订单计时器
+	 *
+	 * @param order
+	 */
+	public void resumeOrderTimer(OrderFormEntity order) {
+		if (order.getNextStatusTime() == maxDate) {
+			order.setNextStatusTime(getDateInFuture(order.getStatusHoldMs()));
+		}
+	}
+
+	/**
+	 * 获取最新一条退款维权记录
+	 *
+	 * @param appList
+	 * @return
+	 */
+	public ApplicationFormEntity getLastRefundRefusedApplicationForm(ArrayList<ApplicationFormEntity> appList) {
+		if (appList.isEmpty()) {
+			return null;
+		}
+		ApplicationFormEntity resultApp = appList.get(0);
+		for (ApplicationFormEntity app : appList) {
+			if (app.getCreateAt().after(resultApp.getCreateAt())) {
+				resultApp = app;
+			}
+		}
+
+		return resultApp;
+	}
+
+	public <T> Collection<T> commonQuery(String query, String variable, Class<T> c, Object... args) {
+		synchronized (kSession) {
+			Collection<T> results = new ArrayList<T>();
+			QueryResults qResults = kSession.getQueryResults(query, args);
+			for (QueryResultsRow qrr : qResults) {
+				@SuppressWarnings("unchecked")
+				T result = (T) qrr.get(variable);
+				results.add(result);
+			}
+			return results;
+		}
+	}
+
+	public OrderFormEntity queryGetOrder(String orderNum) {
+		QueryResults results = kSession.getQueryResults("getOrder", orderNum);
+
+		for (QueryResultsRow row : results) {
+			return (OrderFormEntity) row.get("order");
+		}
+
+		return null;
+	}
+
+	public OrderDetailFormEntity queryGetOrderDetail(String orderDetailNum) {
+		QueryResults results = kSession.getQueryResults("getOrderDetail", orderDetailNum);
+
+		for (QueryResultsRow row : results) {
+			return (OrderDetailFormEntity) row.get("orderDetail");
+		}
+
+		return null;
+	}
+
+	public OrderDetailFormEntity[] queryGetOrderDetailList(String orderNum) {
+		QueryResults results = kSession.getQueryResults("getOrderDetailList", orderNum);
+
+		if (results.size() == 0) {
+			return new OrderDetailFormEntity[0];
+		}
+
+		OrderDetailFormEntity[] list = new OrderDetailFormEntity[results.size()];
+		int i = 0;
+		for (QueryResultsRow row : results) {
+			list[i] = (OrderDetailFormEntity) row.get("orderDetail");
+			i++;
+		}
+
+		return list;
+	}
+
+	public ApplicationFormEntity queryGetApplication(Integer appId) {
+		QueryResults results = kSession.getQueryResults("getApplication", appId);
+
+		for (QueryResultsRow row : results) {
+			return (ApplicationFormEntity) row.get("application");
+		}
+
+		return null;
+	}
+
+	public PaymentAction queryPaymentAction(String orderNum, String orderDetailNum) {
+		QueryResults results = kSession.getQueryResults("getPaymentAction", orderNum, orderDetailNum);
+
+		for (QueryResultsRow row : results) {
+			return (PaymentAction) row.get("action");
+		}
+
+		return null;
+	}
+
+	/**
+	 * 发送事件给指定的组件
+	 *
+	 * @param event 待发送事件
+	 */
+	public void sendEvent(BaseEvent event) {
+		event.setTimestamp(getCurrentTime());
+		mSender.sendEvent(event);
+	}
+
+	/**
+	* 发送mq响应消息
+	*
+	* @param event 响应时间
+	* @param state 响应ErrorCode
+	* @param message 响应消息文字
+	*/
+	public void sendResponse(UserEvent event, int state, String message) {
+		sendEvent(event.buildResponseEvent(state, message));
+	}
+
+	public void sendCheckedResponse(UserEvent event, String requiredOrderStatus) {
+		int state;
+		OrderFormEntity order = queryGetOrder(event.getOrderNo());
+
+		if (order == null) {
+			state = EventErrorCode.REQUEST_ORDER_NOT_EXITS;
+		} else if (event.getType().equals(OrderEventType.PLACE_ORDER)) {
+			// 买家下单, 订单居然已经存在了？错误！
+			state = EventErrorCode.REQUEST_ORDER_EXISTS;
+		} else if (!order.getStatus().equals(requiredOrderStatus)) {
+			state = EventErrorCode.REQUEST_ORDER_INVALID_STATUS;
+		} else if (getCurrentTime() > order.getNextStatusTime().getTime()) {
+			state = EventErrorCode.REQUEST_TIMEOUT;
+		} else {
+			state = EventErrorCode.FAILED;
+		}
+
+		sendResponse(event, state, getErrorCodeName(state));
+	}
+
+	public void sendCheckedResponse(UserEvent event, String[] requiredOrderStatus, String[] requiredOrderDetailStatus) {
+		int state = EventErrorCode.FAILED;
+		OrderFormEntity order = queryGetOrder(event.getOrderNo());
+
+		if (order == null) {
+			state = EventErrorCode.REQUEST_ORDER_NOT_EXITS;
+		} else {
+			OrderDetailFormEntity orderDetail = queryGetOrderDetail(event.getOrderItemNo());
+			if (orderDetail == null) {
+				state = EventErrorCode.REQUEST_ORDERDETAIL_NOT_EXITS;
+			} else {
+				boolean foundError = false;
+
+				if (requiredOrderStatus != null && requiredOrderStatus.length > 0) {
+					boolean found = false;
+
+					// 匹配订单状态
+					for (String required : requiredOrderStatus) {
+						if (order.getStatus().equals(required)) {
+							found = true;
+							break;
+						}
+					}
+
+					if (!found) {
+						state = EventErrorCode.REQUEST_ORDER_INVALID_STATUS;
+						foundError = true;
+					}
+				}
+
+				if (!foundError && requiredOrderDetailStatus != null && requiredOrderDetailStatus.length > 0) {
+					boolean found = false;
+
+					// 匹配子订单状态
+					for (String required : requiredOrderDetailStatus) {
+						if (orderDetail.getStatus().equals(required)) {
+							found = true;
+							break;
+						}
+					}
+
+					if (!found) {
+						state = EventErrorCode.REQUEST_ORDERDETAIL_INVALID_STATUS;
+					}
+				}
+			}
+		}
+
+		sendResponse(event, state, getErrorCodeName(state));
+	}
+
+	public void decreaseStock(OrderFormEntity order) {
+		OrderDetailFormEntity[] list = queryGetOrderDetailList(order.getOrderNo());
+
+		if (list == null) {
+			logger.warn("No Sub Order found for OrderNum=" + order.getOrderNo());
+			return;
+		}
+
+		for (OrderDetailFormEntity entity : list) {
+			stockService.decreaseStock(entity.getCommodityMid(), entity.getCommoditySpecMid(), entity.getQuantity());
+		}
+	}
+
+	public void decreaseStock(OrderDetailFormEntity[] list) {
+		if (list == null) {
+			logger.warn("Sub Order List is NULL");
+			return;
+		}
+
+		for (OrderDetailFormEntity entity : list) {
+			stockService.decreaseStock(entity.getCommodityMid(), entity.getCommoditySpecMid(), entity.getQuantity());
+		}
+	}
+
+	public void decreaseStock(OrderDetailFormEntity orderDetail) {
+		stockService.decreaseStock(orderDetail.getCommodityMid(), orderDetail.getCommoditySpecMid(),
+				orderDetail.getQuantity());
+	}
+
+	public void increaseStock(OrderFormEntity order) {
+		OrderDetailFormEntity[] list = queryGetOrderDetailList(order.getOrderNo());
+
+		if (list == null) {
+			logger.warn("No Sub Order found for OrderNum=" + order.getOrderNo());
+			return;
+		}
+
+		for (OrderDetailFormEntity entity : list) {
+			stockService.increaseStock(entity.getCommodityMid(), entity.getCommoditySpecMid(), entity.getQuantity());
+		}
+	}
+
+	public void increaseStock(OrderDetailFormEntity orderDetail) {
+		stockService.increaseStock(orderDetail.getCommodityMid(), orderDetail.getCommoditySpecMid(),
+				orderDetail.getQuantity());
+	}
+
+	public void sendUserEvent(String type, String orderNum) {
+		UserEvent event = new UserEvent();
+		event.setOrderNo(orderNum);
+		event.setOrderItemNo(null);
+		event.setType(type);
+		event.setSource("osm");
+		event.setTarget("osm_event_listener");
+
+		sendEvent(event);
+	}
+
+	public void execKill() {
+		try {
+			Process pid = null;
+			String[] cmd = { "/bin/sh", "-c", "/usr/local/kill_osm.sh" };
+			pid = Runtime.getRuntime().exec(cmd);
+			logger.info("Success to execute >>>>>>>>>" + pid.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e.getMessage());
+		}
+	}
+
+	public void reloadOrder(String orderNum) {
+		OrderFormEntity order = queryGetOrder(orderNum);
+
+		if (order == null) {
+			// 检查数据库
+			order = orderFormService.selectByOrderNum(orderNum);
+			if (order == null || order.getStatus() == OrderFormStatus.CLOSED) {
+				return;
+			}
+
+			kSession.insert(order);
+
+			List<OrderDetailFormEntity> list = orderDetailFormService.selectOrderDetailListByParentNum(orderNum);
+			for (OrderDetailFormEntity item : list) {
+				kSession.insert(item);
+				ApplicationFormEntity app = applicationFormService.selectById(item.getAppealId());
+				if (app != null) {
+					kSession.insert(app);
+				}
+			}
+		} else {
+			OrderFormEntity orderNew = orderFormService.selectByOrderNum(orderNum);
+			if (orderNew == null) {
+				FactHandle handle = kSession.getFactHandle(order);
+				kSession.delete(handle);
+				OrderDetailFormEntity[] list = queryGetOrderDetailList(orderNum);
+				if (list == null) {
+					return;
+				}
+				for (OrderDetailFormEntity item : list) {
+					ApplicationFormEntity app = queryGetApplication(item.getAppealId());
+					if (app != null) {
+						kSession.delete(kSession.getFactHandle(app));
+					}
+					kSession.delete(kSession.getFactHandle(item));
+				}
+			} else {
+				FactHandle handle = kSession.getFactHandle(order);
+				kSession.update(handle, orderNew);
+
+				OrderDetailFormEntity[] list = queryGetOrderDetailList(orderNum);
+				if (list == null || list.length == 0) {
+					List<OrderDetailFormEntity> detailList = orderDetailFormService
+							.selectOrderDetailListByParentNum(orderNum);
+					for (OrderDetailFormEntity item : detailList) {
+						kSession.insert(item);
+						ApplicationFormEntity app = applicationFormService.selectById(item.getAppealId());
+						if (app != null) {
+							kSession.insert(app);
+						}
+					}
+					return;
+				}
+				for (OrderDetailFormEntity item : list) {
+					ApplicationFormEntity app = queryGetApplication(item.getAppealId());
+					ApplicationFormEntity appNew = applicationFormService.selectById(item.getAppealId());
+					if (app != null) {
+						if (appNew != null) {
+							kSession.update(kSession.getFactHandle(app), appNew);
+						} else {
+							kSession.delete(kSession.getFactHandle(app));
+						}
+					}
+
+					OrderDetailFormEntity itemNew = orderDetailFormService.selectByOrderNum(item.getOrderNo());
+					if (itemNew != null) {
+						kSession.update(kSession.getFactHandle(item), itemNew);
+					} else {
+						kSession.delete(kSession.getFactHandle(item));
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	* @Title: saveOrUpdatePaymentAction
+	* @Description: 保存PaymentAction到Redis
+	* @param paymentAction
+	* @return void
+	* @throws
+	*/
+	public void saveOrUpdatePaymentAction(PaymentAction paymentAction) {
+		paymentActionService.setPA(paymentAction);
+	}
+
+	/**
+	* @Title: dropPaymentAction
+	* @Description: 删除Redis中的PaymentAction
+	* @param orderNo 大订单号
+	* @param orderDetailNo 子订单号
+	* @return void
+	* @throws
+	*/
+	public void dropPaymentAction(String orderNo, String orderDetailNo) {
+		paymentActionService.del("payment.id." + orderNo + orderDetailNo);
+	}
+
+	/**
+	 * 将订单交易金额打款到虚拟账户中
+	 *
+	 * @author ZhengYl
+	 * @date 2015年5月27日 下午3:31:20
+	 * @param order 待发送订单
+	 */
+	public void orderPayToVirtualAccount(OrderFormEntity order, OrderDetailFormEntity[] orderDetailList) {
+		if (order.getGuideId() != null) {
+			BigDecimal total = new BigDecimal(0);
+
+			// 计算子订单实际价格总和
+			for (Object entity : orderDetailList) {
+				OrderDetailFormEntity orderDetail = (OrderDetailFormEntity) entity;
+				total = total.add(orderDetail.getRealAmount());
+
+				// 退款成功 减去退款金额
+				if (orderDetail.getIsRefunded().intValue() > 0) {
+					total = total.subtract(orderDetail.getRefundAmount());
+				}
+			}
+
+			// 减去折扣
+			if (order.getDisconntFee() != null) {
+				total = total.subtract(order.getDisconntFee());
+			}
+
+			//总价小于零的情况
+			total = total.compareTo(new BigDecimal(0)) < 0 ? new BigDecimal(0) : total;
+
+			// 加上邮费
+			if (order.getExpressFee() != null) {
+				total = total.add(order.getExpressFee());
+			}
+
+			logger.info("[Virtual Account]打款到虚拟账户Id: " + order.getGuideId() + ", 订单: " + order.getOrderNo() + ", 金额: "
+					+ total + " 元");
+			VirtualAccountDetailEntity accountDetail = new VirtualAccountDetailEntity();
+			accountDetail.setUserId(order.getGuideId());
+			accountDetail.setAmount(total);
+			accountDetail.setSign(1);
+			accountDetail.setRemark("Order Pay: " + order.getOrderNo());
+			accountDetail.setItemType(VirtualAccountEventType.PAYMENT);
+
+			try {
+				Map<String, Object> body = new HashMap<String, Object>();
+				body.put("userId", order.getGuideId());
+				body.put("detail", accountDetail);
+
+				BaseEvent event = new BaseEvent();
+				event.setBody(JSONObject.fromObject(body));
+				event.setSource(Constants.MQRequestParam.REQUEST_QUEUENAME_OSM);
+				event.setTimestamp((new Date()).getTime());
+				event.setType(VirtualAccountEventTypeEnum.ACCOUNT_POST.getCode());
+				event.setTarget(Constants.MQRequestParam.REQUEST_QUEUENAME_VA);
+
+				mSender.sendEvent(event);
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+				e.printStackTrace();
+			}
+
+		}
+	}
+
+	/**
+	 * 买家延迟未支付发送消息提醒
+	 * 
+	 * @author ZhengYl
+	 * @date 2015年7月10日 上午11:33:39 
+	 * @param buyerId
+	 * @param orderNo
+	 */
+	public void sendPaymentAlertMsg(String buyerId, String orderNo) {
+		try {
+			ObjectId buyerObjId = new ObjectId(buyerId);
+			roaOrderService.sendBodyByOrderEventType(buyerObjId, orderNo, OrderEventType.PAYMENT_DELAY_ALERT);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
+	// /////////////////////////////////////////////////////////////////////////////////////////
+
+	private String getErrorCodeName(int errorCode) {
+		String[] errorCodeList = { "操作成功", "操作失败", "订单状态不正确", "请求超时", "订单已存在", "订单不存在或者为关闭状态", "子订单不存在", "子订单状态不正确", };
+
+		if (errorCode < 0 || errorCode >= errorCodeList.length) {
+			return null;
+		}
+
+		return errorCodeList[errorCode];
+	}
+}

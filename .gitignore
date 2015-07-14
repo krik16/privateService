@@ -1,1 +1,8 @@
-/easy-tms/src/main/webapp/WEB-INF/classes
+.settings
+.classpath
+.project
+classes
+target
+*.iml*.properties
+.idea
+*.iml
