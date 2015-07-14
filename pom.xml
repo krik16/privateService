@@ -7,50 +7,12 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>easy-ruu</module>
-        <module>easy-entity</module>
-        <module>easy-mybatis-generator</module>
-        <module>easy-rmc</module>
-        <module>easy-roa</module>
-        <module>easy-rmq</module>
-        <module>easy-ramq</module>
-        <module>easy-rcmq</module>
-        <module>easy-redi</module>
-        <module>easy-core</module>
-        <module>easy-rvc</module>
-        <module>easy-revc</module>
-        <module>easy-rss</module>
-        <module>easy-rdc</module>
-        <module>easy-cmc</module>
-        <module>easy-im-client</module>
-        <module>easy-im-service</module>
-        <module>easy-mobile-shopcart-order_billing</module>
-        <module>easy-mobile-mallshop</module>
-        <module>easy-mobile-malllife-service</module>
-        <module>easy-mobile-malllife</module>
-        <module>easy-mobile-task</module>
-        <module>easy-mcmc</module>
-        <module>easy-rcc</module>
-        <module>easy-mms</module>
-        <module>easy-rsi</module>
-        <module>easy-solr</module>
-        <module>easy-smms</module>
+       
         <module>easy-osm</module>
         <module>easy-rpb</module>
-        <module>easy-rob</module>
-        <module>easy-gcc</module>
-        <module>easy-vms</module>
-        <module>easy-ruac</module>
-        <module>easy-content_management</module>
-        <module>easy-activity-service</module>
-        <module>easy-activity-view</module>
-        <module>easy-coupon-view</module>
-        <module>easy-coupon-service</module>
-        <module>easy-rabbitmq</module>
+        <module>easy-rob</module>      
         <module>easy-tms</module>
-        <module>easy-virtual-account</module>
-        <module>easy-merchant-invitationCode</module>
-        <module>easy-ganghui</module>
+
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -70,23 +32,27 @@
         <!-- TestNG/Mockito -->
         <testng.version>6.8.5</testng.version>
         <mockito.version>1.9.5</mockito.version>
+        
+         <easy.core.version>1.0.0-SNAPSHOT</easy.core.version>
+		<easy.entity.version>1.0.0-SNAPSHOT</easy.entity.version>
+		<easy.rss.version>1.0.0-SNAPSHOT</easy.rss.version>
     </properties>
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>com.rongyi</groupId>
                 <artifactId>easy-entity</artifactId>
-                <version>${project.version}</version>
+                <version>${easy.entity.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.rongyi</groupId>
                 <artifactId>easy-core</artifactId>
-                <version>${project.version}</version>
+                <version>${easy.core.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.rongyi</groupId>
                 <artifactId>easy-rss</artifactId>
-                <version>${project.version}</version>
+                <version>${easy.rss.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.rongyi</groupId>
