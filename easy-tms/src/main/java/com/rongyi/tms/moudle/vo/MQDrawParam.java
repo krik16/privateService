@@ -101,8 +101,8 @@ public class MQDrawParam implements Serializable{
                 mqDrawParam.setUserId(map.get("userId").toString());
             if(map.get("drawAmount") != null)
                 mqDrawParam.setDrawAmount(Double.valueOf(map.get("drawAmount").toString()));
-            if(map.get("drawNo") != null)
-                mqDrawParam.setDrawAmount(Double.valueOf(map.get("drawNo").toString()));
+            if(map.get("applicationNo") != null)
+                mqDrawParam.setDrawNo(map.get("applicationNo").toString());
             if(map.get("payType") != null)
                 mqDrawParam.setPayType(Integer.valueOf(map.get("payType").toString()));
             if(map.get("payAccount") != null)

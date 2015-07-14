@@ -147,10 +147,11 @@ public class DrawApplyServiceImpl extends BaseServiceImpl implements DrawApplySe
         try {
             drawApply.setCreateAt(DateUtil.getCurrDateTime());
             drawApply.setStatus(ConstantEnum.DRAWAPPLY_STATUS_0.getCodeInt());
-            drawApply.setDrawNo(orderNoGenService.getOrderNo());
+//            drawApply.setDrawNo(orderNoGenService.getOrderNo());
             Map<String, Object> bodyMap = JsonUtil.getMapFromJson(messageEvent.getBody().toString());
             if (bodyMap != null) {
                 MQDrawParam mqDrawParam = MQDrawParam.mapToEntity(bodyMap);
+                drawApply.setDrawNo(mqDrawParam.getDrawNo());
                 drawApply.setPayType(mqDrawParam.getPayType());
                 drawApply.setPayAccount(mqDrawParam.getPayAccount());
                 drawApply.setPayName(mqDrawParam.getPayName());
