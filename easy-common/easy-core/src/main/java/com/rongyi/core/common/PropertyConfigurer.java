@@ -17,8 +17,16 @@ public class PropertyConfigurer extends PropertyPlaceholderConfigurer {
 		this.props = props;
 	}
 
-	public Object getProperty(String key) {
+	public String getProperty(String key) {
 		return props.getProperty(key);
+	}
+	
+	public String getProperty(String key, String defaultValue) {
+		return props.getProperty(key, defaultValue);
+	}
+	
+	public Object setProperty(String key, String value) {
+		return props.setProperty(key, value);
 	}
 
 }
