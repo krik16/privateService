@@ -165,6 +165,8 @@ public interface RoaCouponOrderService {
 
 
     /**
+     * 根据卡券类型查询订单信息
+     *
      * @param paramsMap
      * @param currentPage
      * @param pageSize
