@@ -1,5 +1,10 @@
 package com.rongyi.easy.activity.entity;
 
+/**
+ * 推送coupon关联类
+ *
+ * @author yuanbo
+ */
 import java.io.Serializable;
 import java.util.Date;
 
