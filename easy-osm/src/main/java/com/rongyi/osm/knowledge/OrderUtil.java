@@ -762,6 +762,35 @@ public class OrderUtil {
 	}
 
 	/**
+	 * 买家在订单完成时获取积分（积分数 = 结算金额totalAmount取整）
+	 * 
+	 * @author ZhengYl
+	 * @date 2015年7月16日 下午1:09:30 
+	 * @param order
+	 */
+	public void buyerScoreObtain(OrderFormEntity order, OrderDetailFormEntity[] orderDetailList) {
+		if (order.getTotalAmount().compareTo(new BigDecimal(0)) > 0) {
+			BigDecimal score = order.getTotalAmount().setScale(0, BigDecimal.ROUND_HALF_UP);
+			BuyerScoreCommitEvent scoreEvent = new BuyerScoreCommitEvent();
+			
+			scoreEvent.setScore(score.intValue());
+			scoreEvent.setOrderNo(order.getOrderNo());
+			scoreEvent.setEventId(order.getOrderNo());
+			scoreEvent.setUserId(order.getBuyerId());
+			
+			String commodityIds = "";
+			for (Object entity : orderDetailList) {
+				OrderDetailFormEntity orderDetail = (OrderDetailFormEntity) entity;
+				commodityIds += orderDetail.getCommodityMid();			
+			}		
+			scoreEvent.setItemId(commodityIds);
+			
+			// 等积分系统完成
+//			this.sendEvent(scoreEvent);
+		}
+	}
+	
+	/**
 	 * 买家延迟未支付发送消息提醒
 	 * 
 	 * @author ZhengYl

@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 
 import net.sf.json.JSONObject;
 
+import com.rongyi.core.constant.Constants;
+
 public class PaymentEvent extends UserEvent {
 	/**  */
 	private static final long serialVersionUID = 8000726598132369643L;
@@ -13,8 +15,8 @@ public class PaymentEvent extends UserEvent {
 	private String weidianId;
 
 	public PaymentEvent() {
-		setTarget("rpb");
-		setSource("osm");
+		setTarget(Constants.MQRequestParam.REQUEST_QUEUENAME_RPB);
+		setSource(Constants.MQRequestParam.REQUEST_QUEUENAME_OSM);
 	}
 	
 	public BigDecimal getTotalAmount() {
