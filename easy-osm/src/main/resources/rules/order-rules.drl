@@ -1044,6 +1044,9 @@ rule "订单确认收货状态超时"
 		// C2C: 交易金额打款到导购的虚拟账户上
 		orderUtil.orderPayToVirtualAccount($order, orderDetailList);
 		
+		// 买家获得与结算金额相同的积分
+		orderUtil.buyerScoreObtain($order, orderDetailList);
+		
 		// 发送佣金待审核事件
 		orderUtil.postCommission($order);
 
