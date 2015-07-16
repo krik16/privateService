@@ -40,6 +40,8 @@ public class AbnormalParam {
 	private Date createAt;
 
 	private String createUser;
+	
+	private String paymentOrderType;
 
 	public Integer getId() {
 		return id;
@@ -137,5 +139,19 @@ public class AbnormalParam {
 		this.createUser = createUser;
 	}
 	
+	public String getPaymentOrderType() {
+		return paymentOrderType;
+	}
+
+	public void setPaymentOrderType(String paymentOrderType) {
+		this.paymentOrderType = paymentOrderType;
+	}
 	
+    @Override
+    public String toString() {
+        return "AbnormalParam [id=" + id + ", userId=" + userId + ", userAccount=" + userAccount
+                + ", orderNo=" + orderNo + ", amount=" + amount + ", paymentType=" + paymentType
+                + ", paymentAccount=" + paymentAccount + ", paymentName=" + paymentName + ", paymentBank=" + paymentBank
+                + ", createAt=" + createAt + ", createUser=" + createUser + ", paymentOrderType=" + paymentOrderType + "]";
+    }
 }

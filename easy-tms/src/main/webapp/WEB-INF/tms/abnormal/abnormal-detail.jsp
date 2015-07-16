@@ -45,6 +45,12 @@
 						<div class="coupon-new-title">异常支付详情</div>
 						<div class="w_100">
 							<ul>
+								<li class="li1">订单类型：</li>
+								<li class="li2"><c:choose>
+										<c:when test="${abnormal.paymentOrderType==0 }">商品订单</c:when>
+										<c:when test="${abnormal.paymentOrderType==1 }">优惠券订单</c:when>
+										<c:otherwise>其他</c:otherwise>
+									</c:choose></li>
 								<li class="li1">买家账号：</li>
 								<li class="li2"><span class="msg">${abnormal.userAccount}</span>
 								</li>

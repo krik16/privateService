@@ -69,7 +69,7 @@ public class OSMStandbyService {
 	private KieSession kSession;
 
 	public static void main(String[] args) {
-		try{
+		try {
 			SimpleMailMessage mailMessage = new SimpleMailMessage();
 			mailMessage.setFrom("zhengyiliang@rongyi.com");
 			mailMessage.setTo("zhuze@rongyi.com");
@@ -80,7 +80,7 @@ public class OSMStandbyService {
 			mailSender.setUsername("zhengyiliang@rongyi.com");
 			mailSender.setPassword("samsung28");
 			mailSender.send(mailMessage);
-		} catch (Exception exception){
+		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
 
@@ -98,19 +98,21 @@ public class OSMStandbyService {
 				logger.error(">>>>>>>>>>>> cannot init zkConfig");
 				return;
 			}
-			
+
 			// zk registering child, to determine master or slave
 			if (zkClient4subChild.exists(zkConfig.getZkNodeRoot())) {
 				List<String> childs = zkClient4subChild.getChildren(zkConfig.getZkNodeRoot());
 				if (childs.size() > 0) {
 					String currentNodePath = zkClient4subChild.create(zkConfig.getZkEgo(), zkConfig.getZkNodeInfo()
 							+ "[slave]", CreateMode.EPHEMERAL_SEQUENTIAL);
+					logger.info(">>>>>>>>>>>> Starting with SLAVE MODE, currentNodePath : " + currentNodePath);
 					zkConfig.setCurrentNodePath(currentNodePath);
 					zkConfig.setCurrentNodeSequence(Long.parseLong(currentNodePath.substring(currentNodePath
 							.lastIndexOf('-') + 1)));
 				} else {
 					String currentNodePath = zkClient4subChild.create(zkConfig.getZkEgo(), zkConfig.getZkNodeInfo()
 							+ "[master]", CreateMode.EPHEMERAL_SEQUENTIAL);
+					logger.info(">>>>>>>>>>>> Starting with MASTER MODE, currentNodePath : " + currentNodePath);
 					zkConfig.setCurrentNodePath(currentNodePath);
 					zkConfig.setCurrentNodeSequence(Long.parseLong(currentNodePath.substring(currentNodePath
 							.lastIndexOf('-') + 1)));
@@ -122,6 +124,8 @@ public class OSMStandbyService {
 
 				String currentNodePath = zkClient4subChild.create(zkConfig.getZkEgo(), zkConfig.getZkNodeInfo()
 						+ "[master]", CreateMode.EPHEMERAL_SEQUENTIAL);
+				logger.info(">>>>>>>>>>>> Starting with MASTER MODE, currentNodePath : " + currentNodePath);
+				
 				zkConfig.setCurrentNodePath(currentNodePath);
 				zkConfig.setCurrentNodeSequence(Long.parseLong(currentNodePath.substring(currentNodePath
 						.lastIndexOf('-') + 1)));

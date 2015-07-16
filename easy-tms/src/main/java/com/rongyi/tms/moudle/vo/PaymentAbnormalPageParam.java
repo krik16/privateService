@@ -52,6 +52,9 @@ public class PaymentAbnormalPageParam {
 
 	/** 审核状态 */
 	private String status;
+	
+	/** 订单类型 */
+	private String paymentOrderType;
 
 	public String getId() {
 		return id;
@@ -133,6 +136,14 @@ public class PaymentAbnormalPageParam {
 		this.status = status;
 	}
 
+	public String getPaymentOrderType() {
+		return paymentOrderType;
+	}
+
+	public void setPaymentOrderType(String paymentOrderType) {
+		this.paymentOrderType = paymentOrderType;
+	}
+	
 	public Map<String, Object> toParamsMap() {
 		Map<String, Object> params = new HashMap<String, Object>();
 		if (StringUtils.isNotBlank(this.getId())) {
@@ -158,6 +169,9 @@ public class PaymentAbnormalPageParam {
 		}
 		if (StringUtils.isNotBlank(this.getUserAccount())) {
 			params.put("userAccount", this.getUserAccount());
+		}
+		if (StringUtils.isNotBlank(this.getPaymentOrderType())) {
+			params.put("paymentOrderType", this.getPaymentOrderType());
 		}
 		if (StringUtils.isNotBlank(page)) {
 			params.put("begin", Constant.PAGE.PAGESIZE * (Integer.parseInt(page) - 1));

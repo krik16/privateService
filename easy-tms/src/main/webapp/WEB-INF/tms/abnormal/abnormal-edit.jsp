@@ -66,8 +66,14 @@ body {
 							value="<c:out value='${abnormal.id == null ? 0 : abnormal.id}'/>">
 						</input>
 						<ul>
-
 							<li class="w_100 lvse size-14">异常支付信息</li>
+							<li class="name">订单类型：</li>
+							<li class="detail"><select id="paymentOrderType"
+								name="paymentOrderType">
+									<option value="0" selected="selected">商品订单</option>
+									<option value="1">优惠券订单</option>
+							</select> <span class="msg">&nbsp;  &nbsp;</span> <span
+								style="width: 80px"></span></li>
 							<li class="name">买家账号：</li>
 
 							<li class="detail"><input id="account" name="userAccount"
@@ -83,11 +89,11 @@ body {
 								<span style="width: 80px">打款方式：</span> <select id="paymentType"
 								name="paymentType">
 									<c:choose>
-										<c:when test="${abnormal!=null &&abnormal.paymentType==0}">
+										<c:when test="${abnormal!=null && abnormal.paymentType==0}">
 											<option value="0" selected="selected">支付宝</option>
 											<option value="1">银行卡</option>
 										</c:when>
-										<c:when test="${abnormal!=null &&abnormal.paymentType==1}">
+										<c:when test="${abnormal!=null && abnormal.paymentType==1}">
 											<option value="0">支付宝</option>
 											<option value="1" selected="selected">银行卡</option>
 										</c:when>
@@ -163,6 +169,11 @@ body {
 			_util.cmsTip("请输入订单号!");
 			return;
 		}
+		var paymentOrderType = $("select:[name='paymentOrderType']").val();
+		if (!paymentOrderType) {
+			_util.cmsTip("请选择订单类型!");
+			return;
+		}
 		var paymentType = $("select:[name='paymentType']").val();
 		if (!paymentType) {
 			_util.cmsTip("请选择打款方式!");
@@ -201,6 +212,7 @@ body {
 			userAccount : userAccount,
 			orderNo : orderNo,
 			paymentType : paymentType,
+			paymentOrderType : paymentOrderType,
 			paymentAccount : paymentAccount,
 			paymentBank : paymentBank,
 			paymentName : paymentName,
