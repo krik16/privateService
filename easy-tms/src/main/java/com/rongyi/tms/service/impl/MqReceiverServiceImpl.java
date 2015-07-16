@@ -41,9 +41,6 @@ public class MqReceiverServiceImpl implements MqReceiverService {
 
 	@Autowired
 	Sender sender;
-
-	public static final String EXCHANGE_NAME = "core_exchange";
-
 	/**
 	 * @Description: 回调函数
 	 * @param message

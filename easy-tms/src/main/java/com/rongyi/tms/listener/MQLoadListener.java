@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 /**
  * mq server 启动类
  * 
- * @author baodk
+ * @author 柯军
  */
 @Component
 public class MQLoadListener implements ApplicationListener<ContextRefreshedEvent> {
@@ -20,43 +20,13 @@ public class MQLoadListener implements ApplicationListener<ContextRefreshedEvent
 	@Autowired
 	SimpleMessageListenerContainer container;
 
-	/*@Resource(name = "tmsTrigger")
-	CronTriggerBean cronTriggerBean;
-
-	@Resource
-	SchedulerFactoryBean schedulerFactoryBean;
-
-	@Autowired
-	private RmmmSettingsService rmmmSettingsService;
-*/
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		if (!container.isActive()) {
-//			try {
-//				TransConfigurations transConf = rmmmSettingsService.getLatestTransConfigurations();
-//				//default settlement days: 5 and 20
-//				int settleDateEarly = transConf.getSettleDateEarly() == 0 ? 5 : transConf.getSettleDateEarly();
-//				int settleDateLate = transConf.getSettleDateLate() == 0 ? 20 : transConf.getSettleDateLate();
-//
-//				// set trigger with a new cron expression by gcc setting
-//				String cron = "0 0 0 " + settleDateEarly + "," + settleDateLate + " * ?";
-//				logger.info(">>>>>> Loading settlement schedule by TransConfigurations: " + cron);
-//				cronTriggerBean.setCronExpression(cron);
-//				
-//				// get schedule
-//				Scheduler scheduler = schedulerFactoryBean.getScheduler();
-//				
-//				// reset trigger of the schedule
-////				Date date = scheduler.rescheduleJob(cronTriggerBean.getName(), cronTriggerBean.getGroup(), cronTriggerBean);
-////				logger.info(">>>>>> Next settlement day is: " + date.toString());
-//			} catch (Exception e) {
-//				logger.error(e.getMessage());
-//				e.printStackTrace();
-//			}
-
 			container.start();
 			logger.info("message receiver Starting...");
 		}
 
 	}
+
 }
