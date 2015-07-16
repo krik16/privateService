@@ -68,12 +68,12 @@ body {
 						<ul>
 							<li class="w_100 lvse size-14">异常支付信息</li>
 							<li class="name">订单类型：</li>
-							<li class="detail"><select id="paymentOrderType"
-								name="paymentOrderType">
-									<option value="0" selected="selected">商品订单</option>
-									<option value="1">优惠券订单</option>
-							</select> <span class="msg">&nbsp;  &nbsp;</span> <span
-								style="width: 80px"></span></li>
+							<li class="detail">							
+								<c:choose>
+									<c:when test="${abnormal.paymentOrderType==0 }">商品订单</c:when>
+									<c:when test="${abnormal.paymentOrderType==1 }">优惠券订单</c:when>
+									<c:otherwise>其他</c:otherwise>
+								</c:choose></li>
 							<li class="name">买家账号：</li>
 
 							<li class="detail"><input id="account" name="userAccount"
