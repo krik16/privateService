@@ -21,6 +21,7 @@
 		<result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
 		<result column="create_user" property="createUser" jdbcType="VARCHAR" />
 		<result column="is_deleted" property="isDeleted" jdbcType="BIT" />
+		<result column="check_result" property="checkResult" jdbcType="VARCHAR" />
 	</resultMap>
 	<resultMap id="ResultMapWithBLOBs" type="com.rongyi.easy.tms.entity.PaymentAbnormal"
 		extends="BaseResultMap">
@@ -47,6 +48,7 @@
 		<result column="payment_bank" property="paymentBank" jdbcType="VARCHAR" />
 		<result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
 		<result column="create_user" property="createUser" jdbcType="VARCHAR" />
+		<result column="check_result" property="checkResult" jdbcType="VARCHAR" />
 		<result column="remarks" property="remarks"
 			typeHandler="com.rongyi.core.common.util.ConvertBlobTypeHandler" />
 	</resultMap>
@@ -56,7 +58,7 @@
 		check_at,
 		payment_type, payment_order_type,
 		payment_account, payment_name, payment_bank, create_at, create_user,
-		is_deleted
+		is_deleted, check_result
 	</sql>
 	<sql id="Blob_Column_List">
 		remarks
@@ -538,10 +540,14 @@
 	</select>
 	<update id="checkAbnormalPayment" parameterType="java.util.Map">
 		UPDATE payment_abnormal
-		SET checked_by = #{checkedBy,jdbcType=VARCHAR},
-		check_at = #{checkAt,jdbcType=TIMESTAMP},
-		status = #{status,jdbcType=SMALLINT},
-		remarks = #{remarks,jdbcType=VARCHAR}
+		<set>
+			checked_by = #{checkedBy,jdbcType=VARCHAR},
+			check_at = #{checkAt,jdbcType=TIMESTAMP},
+			status = #{status,jdbcType=SMALLINT},
+			<if test="checkResult != null">
+				check_result = #{checkResult,jdbcType=VARCHAR},
+			</if>
+		</set>
 		WHERE id IN
 		<foreach collection="ids" index="index" item="item" open="("
 			separator="," close=")">

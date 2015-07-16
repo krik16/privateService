@@ -52,6 +52,8 @@ public class AbnormalVO {
 	private String idNo;
 	
 	private String paymentOrderType;
+	
+	private String checkResult;
 
 	public Integer getId() {
 		return id;
@@ -195,5 +197,13 @@ public class AbnormalVO {
 
 	public void setPaymentOrderType(String paymentOrderType) {
 		this.paymentOrderType = paymentOrderType;
+	}
+
+	public String getCheckResult() {
+		return checkResult;
+	}
+
+	public void setCheckResult(String checkResult) {
+		this.checkResult = checkResult;
 	}
 }

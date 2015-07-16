@@ -37,7 +37,7 @@
 						<td style="text-align: center;" name="checkStatusTd"><c:choose>
 								<c:when test="${item.status==0 }">未审核</c:when>
 								<c:when test="${item.status==-1 }">
-									<a name="remote" reason="${item.remarks}" href="#">未通过</a>
+									<a name="remote" reason="${item.checkResult}" href="#">未通过</a>
 								</c:when>
 								<c:when test="${item.status==1 }">通过</c:when>
 							</c:choose></td>

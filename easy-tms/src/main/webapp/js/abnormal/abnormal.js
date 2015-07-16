@@ -4,36 +4,28 @@
 $.ajaxSetup({
 	cache : false
 });
-$(document)
-		.ready(
-				function() {
-					ajaxloadApplys();
-					setDefaultTime();
-					bindEvent();
-					$("#search")
-							.click(
-									function(event) {
-										var status = $("#hadChecked").val();
-										var id = $("#liushui-no").val();
-										var userAccount = $(
-												"input[name='userAccount']")
-												.val();
-										var orderNo = $("input[name='orderNo']")
-												.val();
-										var start = $("input[name='start']")
-												.val();
-										var end = $("input[name='end']").val();
-										var paymentType = $("#channel").val();
-										var paymentOrderType = $("#orderType").val();
-										var amountMin = $("#amountMin")
-												.val();
-										var amountMax = $('#amountMax').val();
-										ajaxloadApplys(null, status, id,
-												userAccount, orderNo, start,
-												end, paymentType, amountMin,
-												amountMax, paymentOrderType);
-									});
-				});
+$(document).ready(
+		function() {
+			ajaxloadApplys();
+			setDefaultTime();
+			bindEvent();
+			$("#search").click(
+					function(event) {
+						var status = $("#hadChecked").val();
+						var id = $("#liushui-no").val();
+						var userAccount = $("input[name='userAccount']").val();
+						var orderNo = $("input[name='orderNo']").val();
+						var start = $("input[name='start']").val();
+						var end = $("input[name='end']").val();
+						var paymentType = $("#channel").val();
+						var paymentOrderType = $("#orderType").val();
+						var amountMin = $("#amountMin").val();
+						var amountMax = $('#amountMax').val();
+						ajaxloadApplys(null, status, id, userAccount, orderNo,
+								start, end, paymentType, amountMin, amountMax,
+								paymentOrderType);
+					});
+		});
 
 function ajaxloadApplys(page, status, id, userAccount, orderNo, start, end,
 		paymentType, amountMin, amountMax, paymentOrderType) {
@@ -72,16 +64,16 @@ function ajaxloadApplys(page, status, id, userAccount, orderNo, start, end,
 			$("#resultList").html(data);
 			checkListener();
 			pageListener();
-			$('a:[name="remote"]').poshytip({ 
-				className: 'tip-green',
-				offsetX: -7,
-				offsetY: 16,
-				allowTipHover: false,
-			    content: function(updateCallback) { 
-			    	var rejectReason="原因：" + $(this).attr("reason");
-			    	return rejectReason;
-			    } 
-			}); 
+			$('a:[name="remote"]').poshytip({
+				className : 'tip-green',
+				offsetX : -7,
+				offsetY : 16,
+				allowTipHover : false,
+				content : function(updateCallback) {
+					var rejectReason = "原因：" + $(this).attr("reason");
+					return rejectReason;
+				}
+			});
 		},
 		error : function(data) {
 
@@ -151,10 +143,10 @@ function batchCheck() {
 	}
 };
 
-function checkUnpass(id, remarks) {
+function checkUnpass(id) {
 	confirmMSG(
-			"理由：<textarea rows='5' cols='42' id='reason' placeholder='请输入200字符以内未通过理由'>"
-					+ remarks + "</textarea>", function() {
+			"理由：<textarea rows='5' cols='42' id='reason' placeholder='请输入200字符以内未通过理由'></textarea>",
+			function() {
 				var reason = $("#reason").val();
 				if (trimAll(reason) == '') {
 					_util.cmsTip("请输入审核不通过理由");
@@ -171,28 +163,27 @@ function checkUnpass(id, remarks) {
 }
 
 function setDeleted(ids) {
-	confirmMSG(
-			"是否确认要删除当前记录？", function() {
-				$.ajax({
-					url : "../ab/del",
-					type : "POST",
-					data : {
-						ids : ids,
-						status : 1,
-						operateBiz : 1,
-						reason : ""
-					},
-					success : function(data) {
-						if (data.success == true) {
-							_util.cmsTip("操作成功!");
-						} else {
-							_util.cmsTip("操作失败！");
-						}
-						ajaxloadApplys();
-					},
-					dataType : "json"
-				});
-			});
+	confirmMSG("是否确认要删除当前记录？", function() {
+		$.ajax({
+			url : "../ab/del",
+			type : "POST",
+			data : {
+				ids : ids,
+				status : 1,
+				operateBiz : 1,
+				reason : ""
+			},
+			success : function(data) {
+				if (data.success == true) {
+					_util.cmsTip("操作成功!");
+				} else {
+					_util.cmsTip("操作失败！");
+				}
+				ajaxloadApplys();
+			},
+			dataType : "json"
+		});
+	});
 }
 
 function checkListener() {
