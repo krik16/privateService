@@ -24,18 +24,19 @@ $(document)
 												.val();
 										var end = $("input[name='end']").val();
 										var paymentType = $("#channel").val();
+										var paymentOrderType = $("#orderType").val();
 										var amountMin = $("#amountMin")
 												.val();
 										var amountMax = $('#amountMax').val();
 										ajaxloadApplys(null, status, id,
 												userAccount, orderNo, start,
 												end, paymentType, amountMin,
-												amountMax);
+												amountMax, paymentOrderType);
 									});
 				});
 
 function ajaxloadApplys(page, status, id, userAccount, orderNo, start, end,
-		paymentType, amountMin, amountMax) {
+		paymentType, amountMin, amountMax, paymentOrderType) {
 	var url_ = "../ab/list";
 	var param = $("#isChecked").val();
 	var currpage;
@@ -61,6 +62,7 @@ function ajaxloadApplys(page, status, id, userAccount, orderNo, start, end,
 			"start" : start,
 			"end" : end,
 			"paymentType" : paymentType,
+			"paymentOrderType" : paymentOrderType,
 			"amountMin" : amountMin,
 			"amountMax" : amountMax,
 			"page" : currpage,

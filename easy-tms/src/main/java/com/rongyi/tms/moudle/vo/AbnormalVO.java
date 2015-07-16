@@ -50,6 +50,8 @@ public class AbnormalVO {
 	private String remarks;
 	
 	private String idNo;
+	
+	private String paymentOrderType;
 
 	public Integer getId() {
 		return id;
@@ -187,4 +189,11 @@ public class AbnormalVO {
 		this.idNo = idNo;
 	}
 
+	public String getPaymentOrderType() {
+		return paymentOrderType;
+	}
+
+	public void setPaymentOrderType(String paymentOrderType) {
+		this.paymentOrderType = paymentOrderType;
+	}
 }

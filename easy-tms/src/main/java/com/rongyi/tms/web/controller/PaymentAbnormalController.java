@@ -29,8 +29,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
+import com.rongyi.easy.coupon.entity.CouponOrder;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
 import com.rongyi.easy.osm.entity.OrderFormEntity;
+import com.rongyi.rss.coupon.RoaCouponOrderService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.rss.mallshop.order.ROAOrderFormService;
 import com.rongyi.tms.constants.CodeEnum;
@@ -63,6 +65,9 @@ public class PaymentAbnormalController extends BaseController {
 
 	@Autowired
 	private PaymentAbnormalPayServiceImpl paymentAbnormalPayServiceImpl;
+
+	@Autowired
+	private RoaCouponOrderService roaCouponOrderService;
 
 	@RequestMapping("/search")
 	public String searchIntegralComm() {
@@ -137,14 +142,32 @@ public class PaymentAbnormalController extends BaseController {
 			HttpServletResponse response, HttpSession session) {
 		ResponseResult result = new ResponseResult();
 		LOGGER.info("AbnormalPayment edit start>>>>>>Params: " + params);
+		String orderType = params.getPaymentOrderType();
+		Object order;
+		String orderBuyerId = "";
 
 		try {
+			if (orderType.equals("1")) {
+				// 优惠券订单
+				order = roaCouponOrderService.findOneByOrderNo(params.getOrderNo());
+				if (order != null)
+					// 取订单中的用户Id
+					orderBuyerId = ((CouponOrder) order).getBuyerId();
+			} else {
+				// 商品订单
+				order = roaOrderFormService.getOrderFormByOrderNum(params.getOrderNo());
+				if (order != null)
+					// 取订单中的用户Id
+					orderBuyerId = ((OrderFormEntity) order).getBuyerId();
+			}
+			
 			if (params.getOrderNo() != null) {
-				OrderFormEntity order = roaOrderFormService.getOrderFormByOrderNum(params.getOrderNo());
+				// 根据输入的买家账号（手机号）取用户信息
 				UserInfoVO user = malllifeUserService.getByPhone(params.getUserAccount());
 				if (user != null) {
 					if (order != null) {
-						if (user.getUserId().equals(order.getBuyerId())) {
+						// 输入账号对应的用户 = 输入的订单中对应的用户
+						if (user.getUserId().equals(orderBuyerId)) {
 							UserInfo userInfo = this.getSessionUser(request, session);
 
 							params.setUserId(user.getUserId());

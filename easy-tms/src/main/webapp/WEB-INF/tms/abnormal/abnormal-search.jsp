@@ -68,6 +68,11 @@
 						<option value="0">支付宝</option>
 						<option value="1">银行卡</option>
 				</select>
+				<li class="xiala">订单类型：<select id="orderType">
+						<option value="">--全部--</option>
+						<option value="0">商品订单</option>
+						<option value="1">优惠券订单</option>
+				</select>
 				</li>
 				<li class="xiala" id="checkLi" style="display:none;">审核：<select id="hadChecked">
 						<option value="0">--全部--</option>

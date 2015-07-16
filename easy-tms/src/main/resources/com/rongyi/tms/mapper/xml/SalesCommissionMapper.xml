@@ -521,9 +521,9 @@
 	<select id="selectCommissionInfoByUserId" resultMap="CommissionInfo"
 		parameterType="java.util.Map">
 		SELECT guide_id,
-		SUM(CASE WHEN (`status` &gt; -1 AND `status` &lt; 3) THEN commission_amount
+		SUM(CASE WHEN (`status` &gt; 0 AND `status` &lt; 5) THEN commission_amount
 		ELSE 0 END) AS commission_total,
-		SUM(CASE WHEN (`status` &gt; -1 AND `status` &lt; 3 AND DATEDIFF(create_at,
+		SUM(CASE WHEN (`status` &gt; 0 AND `status` &lt; 5 AND DATEDIFF(create_at,
 		NOW()) = 0) THEN commission_amount ELSE 0 END) AS commission_today
 		FROM sales_commission
 		WHERE guide_id = #{userId} AND type IS NULL;

@@ -12,6 +12,7 @@
 			<td style="text-align: center;">全选<input type="checkbox"
 				id="select-all" /></td>
 			<td style="text-align: center;">异常交易号</td>
+			<td style="text-align: center;">订单类型</td>
 			<td style="text-align: center;">订单号</td>
 			<td style="text-align: center;">打款方式</td>
 			<td style="text-align: center;">买家帐号</td>
@@ -29,6 +30,11 @@
 						<td style="text-align: center;"><a
 							href="${ctx}/ab/view?id=${item.id}" target="_blank"
 							style="text-decoration: underline;">${item.idNo}</a></td>
+						<td style="text-align: center;"><c:choose>
+								<c:when test="${item.paymentOrderType==0 }">商品订单</c:when>
+								<c:when test="${item.paymentOrderType==1 }">优惠券订单</c:when>
+								<c:otherwise>其他</c:otherwise>
+							</c:choose></td>
 						<td style="text-align: center;"><a
 							href="${ctx}/orderManager/orderInfoByNo?orderNo=${item.orderNo}&module=order"
 							style="text-decoration: underline" target="_blank">${item.orderNo}</a></td>
