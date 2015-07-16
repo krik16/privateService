@@ -762,7 +762,7 @@ public class OrderUtil {
 	}
 
 	/**
-	 * 买家在订单完成时获取积分（积分数 = 结算金额totalAmount取整）
+	 * 买家在订单完成时获取积分（积分数 = 结算金额totalAmount取整数部分）
 	 * 
 	 * @author ZhengYl
 	 * @date 2015年7月16日 下午1:09:30 
@@ -770,10 +770,9 @@ public class OrderUtil {
 	 */
 	public void buyerScoreObtain(OrderFormEntity order, OrderDetailFormEntity[] orderDetailList) {
 		if (order.getTotalAmount().compareTo(new BigDecimal(0)) > 0) {
-			BigDecimal score = order.getTotalAmount().setScale(0, BigDecimal.ROUND_HALF_UP);
 			BuyerScoreCommitEvent scoreEvent = new BuyerScoreCommitEvent();
 			
-			scoreEvent.setScore(score.intValue());
+			scoreEvent.setScore(order.getTotalAmount().intValue());  // 结算金额取整舍小数
 			scoreEvent.setOrderNo(order.getOrderNo());
 			scoreEvent.setEventId(order.getOrderNo());
 			scoreEvent.setUserId(order.getBuyerId());
