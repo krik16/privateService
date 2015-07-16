@@ -42,6 +42,8 @@ public class PaymentAbnormal implements Serializable {
 	private String remarks;
 	
 	private String paymentOrderType;
+	
+	private String checkResult;
 
 	public Integer getId() {
 		return id;
@@ -185,5 +187,13 @@ public class PaymentAbnormal implements Serializable {
 
 	public void setPaymentOrderType(String paymentOrderType) {
 		this.paymentOrderType = paymentOrderType;
+	}
+
+	public String getCheckResult() {
+		return checkResult;
+	}
+
+	public void setCheckResult(String checkResult) {
+		this.checkResult = checkResult;
 	}
 }
