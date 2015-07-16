@@ -386,6 +386,12 @@ salience 100
 		$order.setStatusHoldMs(0L);
 		$order.setNextStatusTime(orderUtil.getCurrentDate());
 		
+		OrderDetailFormEntity[] orderDetailList = orderUtil.queryGetOrderDetailList($orderNo);
+		// 更新现金券状态
+		if (!orderUtil.setCouponStatus(orderDetailList, CashCouponStatus.OCCUPIED, $order.getGuideId())) {
+			logger.error("[" + drools.getRule().getName() + "] OrderNo=" +
+    			$orderNo + " 现金券状态变更错误：现金券不存在或状态不正确");
+		}		
 
 		// 入主数据库
 		orderFormService.updateStatusWithTime($order);
@@ -514,7 +520,7 @@ salience 10
 	then
 		logger.info("[" + drools.getRule().getName() + "] OrderNo=" +
     		$orderNo + " 开始...");
-		orderUtil.sendCheckedResponse($event, OrderFormStatus.UNPAID);
+		orderUtil.sendCheckedResponse($event, OrderFormStatus.TO_SHIPPED);
 		logger.debug("[" + drools.getRule().getName() + "] OrderNo=" +
     		$orderNo + " 结束.");
 end

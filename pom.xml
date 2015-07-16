@@ -3,14 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.rongyi</groupId>
-    <artifactId>easy</artifactId>
+    <artifactId>easy-trade</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
        
         <module>easy-osm</module>
-        <module>easy-rpb</module>
-        <module>easy-rob</module>      
+        <module>easy-rpb</module>      
         <module>easy-tms</module>
         <module>easy-virtual-account</module>
     </modules>
@@ -33,32 +32,26 @@
         <testng.version>6.8.5</testng.version>
         <mockito.version>1.9.5</mockito.version>
         
-         <easy.core.version>1.0.0-SNAPSHOT</easy.core.version>
-		<easy.entity.version>1.0.0-SNAPSHOT</easy.entity.version>
-		<easy.rss.version>1.0.0-SNAPSHOT</easy.rss.version>
+
     </properties>
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>com.rongyi</groupId>
                 <artifactId>easy-entity</artifactId>
-                <version>${easy.entity.version}</version>
+                <version>1.0.0-RELEASE</version>
             </dependency>
             <dependency>
                 <groupId>com.rongyi</groupId>
                 <artifactId>easy-core</artifactId>
-                <version>${easy.core.version}</version>
+                <version>1.0.0-RELEASE</version>
             </dependency>
             <dependency>
                 <groupId>com.rongyi</groupId>
                 <artifactId>easy-rss</artifactId>
-                <version>${easy.rss.version}</version>
+                <version>1.0.0-RELEASE</version>
             </dependency>
-            <dependency>
-                <groupId>com.rongyi</groupId>
-                <artifactId>easy-mcmc</artifactId>
-                <version>${project.version}</version>
-            </dependency>
+           
             <!-- IBM MQ -->
             <dependency>
                 <groupId>com.ibm</groupId>

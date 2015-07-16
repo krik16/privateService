@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.rongyi</groupId>
-        <artifactId>easy</artifactId>
+        <artifactId>easy-trade</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <artifactId>easy-osm</artifactId>
