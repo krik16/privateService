@@ -6,6 +6,8 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry excluding="**" kind="src" path="src/main/webapp/js"/>
+	<classpathentry excluding="**" kind="src" path="src/main/webapp/WEB-INF/tms"/>
 	<classpathentry excluding="**" kind="src" output="src/main/webapp/WEB-INF/classes" path="src/main/resources">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>

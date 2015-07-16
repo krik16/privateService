@@ -96,10 +96,8 @@
 									<li class="li1">银行：</li>
 									<li class="li2">${abnormal.paymentBank}</li>
 								</c:if>
-								<c:if test="${abnormal.status >= 0 }">
-									<li class="li1">备注：</li>
-									<li class="li2">${abnormal.remarks}</li>
-								</c:if>
+								<li class="li1">备注：</li>
+								<li class="li2">${abnormal.remarks}</li>
 							</ul>
 							<ul>
 								<li class="li1"
@@ -111,7 +109,7 @@
 						</div>
 						<div style="color: red; font-size: 16px;">
 							<c:if test="${abnormal.status<0 }">
-								审核未通过理由：${abnormal.remarks }
+								审核未通过理由：${abnormal.checkResult }
 							</c:if>
 						</div>
 

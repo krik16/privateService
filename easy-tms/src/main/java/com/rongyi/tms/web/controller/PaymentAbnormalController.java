@@ -236,7 +236,7 @@ public class PaymentAbnormalController extends BaseController {
 					params.put("checkedBy", userInfo.getUsername());
 					params.put("checkAt", new Date());
 					params.put("status", checkParams.getStatus());
-					params.put("remarks", checkParams.getReason());
+					params.put("checkResult", checkParams.getReason());
 
 					String[] idStrs = checkParams.getIds().split(",");
 					int idIntArray[] = new int[idStrs.length];

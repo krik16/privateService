@@ -53,7 +53,7 @@
 							<sec:authorize ifAnyGranted="TMS_F_AB_EDIT"><a href="${ctx}/ab/edit?id=${item.id}" class="btnsearch" id="edit-${item.id }">修改</a></sec:authorize>
 							<sec:authorize ifAnyGranted="TMS_F_AB_DELETE"><a href="javascript:void(0);" class="btnsearch" id="delete-${item.id }" onclick="setDeleted(${item.id});">删除</a></sec:authorize>
 							<sec:authorize ifAnyGranted="TMS_F_AB_VERIFY"><a href="javascript:void(0);" class="btnsearch" id="checkok-${item.id }" onclick="checkApplys(${item.id},1)">审核通过</a></sec:authorize>
-							<sec:authorize ifAnyGranted="TMS_F_AB_VERIFY"><a href="javascript:void(0);" class="btnsearch"	id="checkunpass-${item.id }" onclick="checkUnpass(${item.id},'${item.remarks}');">审核不通过</a></sec:authorize>
+							<sec:authorize ifAnyGranted="TMS_F_AB_VERIFY"><a href="javascript:void(0);" class="btnsearch" id="checkunpass-${item.id }" onclick="checkUnpass(${item.id});">审核不通过</a></sec:authorize>
 						</td>
 					</tr>
 				</c:forEach>
