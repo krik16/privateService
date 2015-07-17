@@ -15,7 +15,7 @@ public class FlopPrizeDEntity {
     private String prizeType;
     /**奖品名称 */
     private String prizeName;
-    /**奖品id*/
+    /**奖品id 普照奖品的id为1234*/
     private String prizeId;
     /**奖品库存*/
     private Integer prizeStock;

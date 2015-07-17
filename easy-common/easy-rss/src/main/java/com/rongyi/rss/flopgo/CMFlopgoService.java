@@ -36,7 +36,7 @@ public interface CMFlopgoService {
 	 * @param flopgo
 	 * @return
 	 */
-	public int editFlopGo(FlopgoActivity flopgo);
+	public int editFlopGo(FlopgoActivity flopgo) throws Exception;
 	/**
 	 * 按照库存得到一条随机的奖品
 	 */
