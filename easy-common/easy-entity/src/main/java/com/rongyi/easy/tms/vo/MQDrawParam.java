@@ -50,6 +50,11 @@ public class MQDrawParam implements Serializable {
 	private String payAccount;
 
 	private String payName;
+	
+	/**
+	 * 订单类型
+	 */
+	private Integer orderType;
 
 	public String getUserId() {
 		return userId;
@@ -107,6 +112,14 @@ public class MQDrawParam implements Serializable {
 		this.orderNo = orderNo;
 	}
 
+	public Integer getOrderType() {
+		return orderType;
+	}
+
+	public void setOrderType(Integer orderType) {
+		this.orderType = orderType;
+	}
+
 	public static MQDrawParam mapToEntity(Map<String, Object> map) {
 		MQDrawParam mqDrawParam = new MQDrawParam();
 		if (map != null) {
@@ -124,6 +137,8 @@ public class MQDrawParam implements Serializable {
 				mqDrawParam.setPayName(map.get("payName").toString());
 			if (map.get("orderNo") != null)
 				mqDrawParam.setOrderNo(map.get("orderNo").toString());
+			if(map.get("orderType") != null)
+				mqDrawParam.setOrderType(Integer.valueOf(map.get("orderType").toString()));
 		}
 		return mqDrawParam;
 	}
