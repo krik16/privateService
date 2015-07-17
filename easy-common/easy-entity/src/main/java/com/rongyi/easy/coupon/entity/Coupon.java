@@ -35,6 +35,12 @@ public class Coupon implements Serializable {
     @Property("limit_count")
     private Integer limitCount;// 每人限购数量
 
+    @Property("limit_publish_count")
+    private Integer limitPublishCount;// 每日限量发行张数
+
+    @Property("limit_use_count")
+    private Integer limitUseCount;// 每人每日限用张数
+
     @Property("receive_count")
     private Integer receiveCount = Integer.valueOf(0);// 已领取数
 
@@ -177,7 +183,23 @@ public class Coupon implements Serializable {
         this.limitCount = limitCount;
     }
 
-    public Integer getReceiveCount() {
+    public Integer getLimitPublishCount() {
+		return limitPublishCount;
+	}
+
+	public void setLimitPublishCount(Integer limitPublishCount) {
+		this.limitPublishCount = limitPublishCount;
+	}
+
+	public Integer getLimitUseCount() {
+		return limitUseCount;
+	}
+
+	public void setLimitUseCount(Integer limitUseCount) {
+		this.limitUseCount = limitUseCount;
+	}
+
+	public Integer getReceiveCount() {
         return (receiveCount == null) ? Integer.valueOf(0) : receiveCount;
     }
 
@@ -706,49 +728,49 @@ public class Coupon implements Serializable {
 
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", id)
-                .append("title", title)
-                .append("couponType", couponType)
-                .append("totalCount", totalCount)
-                .append("limitCount", limitCount)
-                .append("receiveCount", receiveCount)
-                .append("discount", discount)
-                .append("recommend", recommend)
-                .append("validateType", validateType)
-                .append("originalPrice", originalPrice)
-                .append("currentPrice", currentPrice)
-                .append("type", type)
-                .append("checkDescription", checkDescription)
-                .append("listPicUrl", listPicUrl)
-                .append("detailPicUrls", detailPicUrls)
-                .append("sourceTarget", sourceTarget)
-                .append("synTarget", synTarget)
-                .append("synStatus", synStatus)
-                .append("operateType", operateType)
-                .append("malls", malls)
-                .append("shops", shops)
-                .append("status", status)
-                .append("checkStatus", checkStatus)
-                .append("activityStatus", activityStatus)
-                .append("delStatus", delStatus)
-                .append("publishBeginDate", publishBeginDate)
-                .append("publishEndDate", publishEndDate)
-                .append("validBeginDate", validBeginDate)
-                .append("validEndDate", validEndDate)
-                .append("createUser", createUser)
-                .append("createDate", createDate)
-                .append("updateUser", updateUser)
-                .append("updateDate", updateDate)
-                .append("useRestriction", useRestriction)
-                .append("useDescription", useDescription)
-                .append("sourceMallId", sourceMallId)
-                .append("products", products)
-                .append("visitedCount", visitedCount)
-                .append("sortIndex", sortIndex)
-                .append("version", version)
-                .toString();
-    }
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Coupon [id=").append(id).append(", title=")
+				.append(title).append(", couponType=").append(couponType)
+				.append(", totalCount=").append(totalCount)
+				.append(", limitCount=").append(limitCount)
+				.append(", limitPublishCount=").append(limitPublishCount)
+				.append(", limitUseCount=").append(limitUseCount)
+				.append(", receiveCount=").append(receiveCount)
+				.append(", discount=").append(discount).append(", recommend=")
+				.append(recommend).append(", validateType=")
+				.append(validateType).append(", originalPrice=")
+				.append(originalPrice).append(", currentPrice=")
+				.append(currentPrice).append(", type=").append(type)
+				.append(", checkDescription=").append(checkDescription)
+				.append(", listPicUrl=").append(listPicUrl)
+				.append(", detailPicUrls=").append(detailPicUrls)
+				.append(", sourceTarget=").append(sourceTarget)
+				.append(", synTarget=").append(synTarget)
+				.append(", synStatus=").append(synStatus)
+				.append(", operateType=").append(operateType)
+				.append(", malls=").append(malls).append(", shops=")
+				.append(shops).append(", status=").append(status)
+				.append(", checkStatus=").append(checkStatus)
+				.append(", activityStatus=").append(activityStatus)
+				.append(", delStatus=").append(delStatus)
+				.append(", publishBeginDate=").append(publishBeginDate)
+				.append(", publishEndDate=").append(publishEndDate)
+				.append(", validBeginDate=").append(validBeginDate)
+				.append(", validEndDate=").append(validEndDate)
+				.append(", createUser=").append(createUser)
+				.append(", createDate=").append(createDate)
+				.append(", updateUser=").append(updateUser)
+				.append(", updateDate=").append(updateDate)
+				.append(", useRestriction=").append(useRestriction)
+				.append(", useDescription=").append(useDescription)
+				.append(", sourceMallId=").append(sourceMallId)
+				.append(", products=").append(products)
+				.append(", visitedCount=").append(visitedCount)
+				.append(", sortIndex=").append(sortIndex).append(", version=")
+				.append(version).append("]");
+		return builder.toString();
+	}
+
 }

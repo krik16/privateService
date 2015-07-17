@@ -34,8 +34,10 @@ public class OldCouponVO implements Serializable {
     private String use_mode;        // 使用方式
     private List<OldShopVO> apply_shops;//券的商场信息
 
-    
-    
+    private Integer limitPublishCount;// 每日限量发行张数
+    private Integer limitUseCount;// 每人每日限用张数
+    private List<String> afterSaleService;//随时退[1] 过期退[2] 免预约[3]
+
     public String getDescription() {
 		return description;
 	}
@@ -228,5 +230,29 @@ public class OldCouponVO implements Serializable {
     public void setHolder_name(String holder_name) {
         this.holder_name = holder_name;
     }
+
+	public Integer getLimitPublishCount() {
+		return limitPublishCount;
+	}
+
+	public void setLimitPublishCount(Integer limitPublishCount) {
+		this.limitPublishCount = limitPublishCount;
+	}
+
+	public Integer getLimitUseCount() {
+		return limitUseCount;
+	}
+
+	public void setLimitUseCount(Integer limitUseCount) {
+		this.limitUseCount = limitUseCount;
+	}
+
+	public List<String> getAfterSaleService() {
+		return afterSaleService;
+	}
+
+	public void setAfterSaleService(List<String> afterSaleService) {
+		this.afterSaleService = afterSaleService;
+	}
 
 }
