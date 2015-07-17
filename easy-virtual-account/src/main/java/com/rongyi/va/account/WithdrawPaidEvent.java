@@ -95,7 +95,7 @@ public class WithdrawPaidEvent extends BaseEvent {
 			// 根据提现金额取负数，加入账户余额
 			int accountRow = virtualAccountService.updateBalance(paymentInfo.getUserId(),
 					paymentInfo.getDrawAmount().negate(), virtualAccountDetailEntity);
-			if (accountRow == 1) {
+			if (accountRow > 0) {
 				replyList.add(paymentInfo);
 			} else {
 				// throws Exception

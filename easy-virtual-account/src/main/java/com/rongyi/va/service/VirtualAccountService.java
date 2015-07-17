@@ -58,10 +58,16 @@ public class VirtualAccountService extends BaseServiceImpl {
 		return this.getBaseDao().updateBySql(MAPPER_NAMESPACE + ".updateAccountInfo", virtualAccountEntity);
 	}
 
+
 	/**
 	 * 账户余额变更
 	 * 
-	 * @param orderNo
+	 * @author ZhengYl
+	 * @date 2015年7月17日 下午6:26:14 
+	 * @param userId
+	 * @param amount
+	 * @param detailEntity
+	 * @return 插入明细行Id
 	 */
 	@Transactional
 	public int updateBalance(String userId, BigDecimal amount, VirtualAccountDetailEntity detailEntity) {
