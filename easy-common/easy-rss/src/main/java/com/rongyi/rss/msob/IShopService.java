@@ -74,7 +74,7 @@ public interface IShopService{
 	 * @return
 	 * @throws Exception
 	 */
-	public BrandShopDetailVO getBrandShopDetail(Integer shopId,MallLifeUserEntity user) throws Exception;
+	public BrandShopDetailVO getBrandShopDetail(String shopMId,MallLifeUserEntity user) throws Exception;
 
 
 
