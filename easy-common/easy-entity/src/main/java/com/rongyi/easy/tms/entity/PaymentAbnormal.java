@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class PaymentAbnormal implements Serializable {
-	private static final long serialVersionUID = -3490504338459066931L;
+	private static final long serialVersionUID = 5958856033731189669L;
 
 	private Integer id;
 
@@ -40,6 +40,10 @@ public class PaymentAbnormal implements Serializable {
 	private Boolean isDeleted;
 
 	private String remarks;
+	
+	private String paymentOrderType;
+	
+	private String checkResult;
 
 	public Integer getId() {
 		return id;
@@ -175,5 +179,21 @@ public class PaymentAbnormal implements Serializable {
 
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
+	}
+	
+	public String getPaymentOrderType() {
+		return paymentOrderType;
+	}
+
+	public void setPaymentOrderType(String paymentOrderType) {
+		this.paymentOrderType = paymentOrderType;
+	}
+
+	public String getCheckResult() {
+		return checkResult;
+	}
+
+	public void setCheckResult(String checkResult) {
+		this.checkResult = checkResult;
 	}
 }

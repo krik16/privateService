@@ -54,4 +54,12 @@ public interface CMFlopgoService {
 	 * @return
 	 */
 	public int updateFlopGoStatus(String flopgoId,String userid,String status);
+	
+	
+	 /**
+     * 修改翻牌购中的过期的活动，状态为1发布，3草稿的定时任务
+     * @Description  
+     * @author lijing
+     */
+	public void updateFlopGoValid();
 }
