@@ -48,7 +48,18 @@ public class BailianParam extends BaseParam implements java.io.Serializable {
   private String currentPage;// 起始页数
 
 
-  public String getMallId() {
+  private String mobile; //手机号码
+  
+	
+  public String getMobile() {
+	return mobile;
+  }
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+ public String getMallId() {
     return mallId;
   }
 
