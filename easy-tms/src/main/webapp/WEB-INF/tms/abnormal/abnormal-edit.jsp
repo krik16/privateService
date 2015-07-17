@@ -71,9 +71,9 @@ pageEncoding="UTF-8"%>
 										<li class="detail">
 											<c:if test="${abnormal.id != null}">						
 												<c:choose>
-													<c:when test="${abnormal.paymentOrderType==0 }">商品订单</c:when>
-													<c:when test="${abnormal.paymentOrderType==1 }">优惠券订单</c:when>
-													<c:otherwise>其他</c:otherwise>
+													<c:when test="${abnormal.paymentOrderType==0 }">商品订单<input id="paymentOrderType" style="display:none;" value="0" /></c:when>
+													<c:when test="${abnormal.paymentOrderType==1 }">优惠券订单<input id="paymentOrderType" style="display:none;" value="1" /></c:when>
+													<c:otherwise>其他<input id="paymentOrderType" style="display:none;" value="" /></c:otherwise>
 												</c:choose>
 											</c:if>
 											<c:if test="${abnormal.id == null}">
@@ -180,7 +180,7 @@ pageEncoding="UTF-8"%>
 									_util.cmsTip("请输入订单号!");
 									return;
 									}
-									var paymentOrderType = $("select:[name='paymentOrderType']").val();
+									var paymentOrderType = $("#paymentOrderType").val();
 									if (!paymentOrderType) {
 									_util.cmsTip("请选择订单类型!");
 									return;
