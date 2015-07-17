@@ -15,7 +15,7 @@ public class UserRelationParam implements Serializable{
 	
 	private Integer userId;//导购id(卖家)
 	
-	private String shopId;//店铺id或者店铺mongoId
+	private String shopMId;//店铺id或者店铺mongoId
 	
 	public String getMallUserMid() {
 		return mallUserMid;
@@ -33,12 +33,12 @@ public class UserRelationParam implements Serializable{
 		this.userId = userId;
 	}
 
-	public String getShopId() {
-		return shopId;
+	public String getShopMId() {
+		return shopMId;
 	}
 
-	public void setShopId(String shopId) {
-		this.shopId = shopId;
+	public void setShopMId(String shopMId) {
+		this.shopMId = shopMId;
 	}
 
 }
