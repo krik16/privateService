@@ -56,6 +56,7 @@ public class PaymentAbnormalPayServiceImpl {
 				bodyMap.put("payType", originPayType.toString());
 				bodyMap.put("payAccount", abnormalVO.getPaymentAccount());
 				bodyMap.put("payName", abnormalVO.getPaymentName());
+				bodyMap.put("orderType",abnormalVO.getPaymentOrderType());
 				MessageEvent event = MessageEvent.getMessageEvent(bodyMap,
 						Constants.MQRequestParam.REQUEST_QUEUENAME_TMS, Constants.MQRequestParam.REQUEST_QUEUENAME_RPB,
 						PaymentEventType.EXCE_PAY);

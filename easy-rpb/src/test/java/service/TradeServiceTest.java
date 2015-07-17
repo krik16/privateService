@@ -19,11 +19,13 @@ import org.testng.annotations.Test;
 
 import base.BaseTest;
 
+import com.rongyi.easy.coupon.entity.CouponOrder;
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.rpb.service.impl.PCWebPageAlipayServiceImpl;
 import com.rongyi.rpb.service.impl.PaymentServiceImpl;
 import com.rongyi.rpb.web.controller.v5.PCWebPageAlipayController;
+import com.rongyi.rss.coupon.RoaCouponOrderService;
 
 /**	
  * @Author:  柯军
@@ -48,6 +50,9 @@ public class TradeServiceTest extends BaseTest{
     
     @Autowired
     PaymentServiceImpl paymentService;
+    
+    @Autowired
+    RoaCouponOrderService roaCouponOrderService;
     
     
 //    @Test
@@ -89,7 +94,7 @@ public class TradeServiceTest extends BaseTest{
         
     }
     
-    @Test
+//    @Test
     public void paySuccessToMessageTest(){
         List<PaymentEntity> list = new ArrayList<PaymentEntity>();
         list.add(paymentService.selectByPrimaryKey("4747"));
@@ -98,6 +103,12 @@ public class TradeServiceTest extends BaseTest{
         list.add(paymentService.selectByPrimaryKey("4744"));
         pCWebPageAlipayController.paySuccessToMessage(list);
         
+    }
+    
+    @Test
+    public void testSelectCoupon(){
+    	CouponOrder couponOrder = roaCouponOrderService.findOneByOrderNo("2015071300350917");
+    	System.err.println(couponOrder.getBuyerId());
     }
     private Map<String,Object> getParamMap(){
         Map<String,Object> map = new HashMap<String,Object>();

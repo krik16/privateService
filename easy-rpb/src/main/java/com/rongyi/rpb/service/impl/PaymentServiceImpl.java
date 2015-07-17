@@ -499,17 +499,18 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 			if (oldPaymentEntity != null && StringUtils.isNotEmpty(oldPaymentEntity.getPayNo())) {
 				LOGGER.info("提现单号已存在，返回历史付款单号" + oldPaymentEntity.getPayNo());
 			}
-
+			if(mqDrawParam.getOrderType() != null)
+				paymentEntity.setOrderType(mqDrawParam.getOrderType());
 			if (mqDrawParam.getDrawAmount() != null)
 				paymentEntity.setAmountMoney(BigDecimal.valueOf(Double.valueOf(mqDrawParam.getDrawAmount())));
 			paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
 			if (PaymentEventType.DRAW_PAY.equals(event.getType())) {// 提现
-				LOGGER.info("生成提现申请记录，提现单号：" + mqDrawParam.getDrawNo() + "交易类型：" + paymentEntity.getTradeType());
+				LOGGER.info("生成提现申请记录，提现单号：" + mqDrawParam.getDrawNo());
 				paymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE3);
 				paymentEntity.setPayNo(orderNoGenService.getOrderNo());
 				paymentEntity.setOrderNum(mqDrawParam.getDrawNo());
 			} else {// 异常支付
-				LOGGER.info("生成异常记录，异常单号：" + bodyMap.get("exceTradeNo") + "交易类型：" + paymentEntity.getTradeType());
+				LOGGER.info("生成异常记录，异常单号：" + bodyMap.get("exceTradeNo"));
 				paymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE4);
 				paymentEntity.setPayNo(String.valueOf(bodyMap.get("exceTradeNo")));
 				paymentEntity.setOrderNum(mqDrawParam.getOrderNo());
