@@ -41,6 +41,8 @@ public class OldCouponItemVO implements Serializable {
     private boolean notOutCodeFlag = true; // 外部导入券标志 true 不是外部导入券,false 是外部导入券
 
     private double currentPrice;//当前价格（优惠券价格-红包折扣）
+    
+    private String couponId;//优惠券id
 
     public double getCurrentPrice() {
         return currentPrice;
@@ -177,5 +179,13 @@ public class OldCouponItemVO implements Serializable {
     public void setNotOutCodeFlag(boolean notOutCodeFlag) {
         this.notOutCodeFlag = notOutCodeFlag;
     }
+
+	public String getCouponId() {
+		return couponId;
+	}
+
+	public void setCouponId(String couponId) {
+		this.couponId = couponId;
+	}
 
 }
