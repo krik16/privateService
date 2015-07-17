@@ -75,9 +75,9 @@ public class CommissionBatchPostEvent extends BaseEvent {
 			detailEntity.setItemType(VirtualAccountDetailTypes.COMMISSION);
 			detailEntity.setSign(1);
 
-			int affectRows = 0;
+			int detailId = 0;
 			try {
-				affectRows = virtualAccountService.updateBalance(postedCommission.getGuideId(),
+				detailId = virtualAccountService.updateBalance(postedCommission.getGuideId(),
 						postedCommission.getCommissionAmount(), detailEntity);
 			} catch (Exception e) {
 				failureList += "更新虚拟账号失败, 金额未入账, 用户Id: " + postedCommission.getGuideId() + "\r\n";
@@ -85,7 +85,7 @@ public class CommissionBatchPostEvent extends BaseEvent {
 				continue;
 			}
 
-			if (affectRows == 1) {
+			if (detailId > 0) {
 				try {
 					Map<String, String> map = new HashMap<String, String>();
 					map.put("commission", postedCommission.getCommissionAmount().toString());
