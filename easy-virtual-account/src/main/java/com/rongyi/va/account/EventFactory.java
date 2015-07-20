@@ -53,6 +53,9 @@ public class EventFactory {
 			} else if (type.equals(VirtualAccountEventTypeEnum.COMMISSION_BATCH_POST.getCode())) {
 				// 佣金批量入账
 				event = new CommissionBatchPostEvent();
+			} else if (type.equals(VirtualAccountEventTypeEnum.COUPON_COMMISSION_BATCH_POST.getCode())) {
+				// 优惠券核销佣金批量入账
+				event = new CommissionBatchPostEvent();
 			} else if (type.equals(VirtualAccountEventType.ACCOUNT_CREATE)) {
 				// 虚拟账户创建
 				event = new AccountCreateEvent();

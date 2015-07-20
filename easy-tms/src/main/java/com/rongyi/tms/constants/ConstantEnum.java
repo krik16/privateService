@@ -31,6 +31,7 @@ public enum ConstantEnum {
     
     MESSAGE_EVENT_RPB("rpb","rpb消息队列"),
     MESSAGE_EVENT_TMS("tms","tms消息队列"),
+    MESSAGE_EVENT_VA("va","va消息队列"),
     
     TRADE_STATUS_PAY_NO(0,"待打款"),
     TRADE_STATUS_PAYING(1,"款已打"),
@@ -64,6 +65,9 @@ public enum ConstantEnum {
     
     PAYMENT_ORDER_TYPE0(0,"商品订单"),
     PAYMENT_ORDER_TYPE1(1,"优惠券订单"),
+    
+    COUPON_COMMISSION_STATUS0(0,"待审核"),
+    COUPON_COMMISSION_STATUS1(1,"审核通过"),
     
     EXCEL_LIMIT_COUNT(5000,"交易明细报表导出限制总数");
     interface ACCOUNT_STATUS{
