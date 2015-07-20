@@ -1,6 +1,6 @@
 package com.rongyi.easy.mallshop.customer;
 
-import com.rongyi.easy.content.entity.vo.PageVO;
+import com.rongyi.easy.rmmm.vo.PageVO;
 
 import java.io.Serializable;
 import java.util.List;
