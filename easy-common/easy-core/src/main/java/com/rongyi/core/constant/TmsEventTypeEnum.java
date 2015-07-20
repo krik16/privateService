@@ -15,7 +15,9 @@ package com.rongyi.core.constant;
  */
 public enum TmsEventTypeEnum {
 	DRAWAPPLY("0", "提现"),
-	COMMISSION_POST("1", "佣金上传");
+	COMMISSION_POST("1", "佣金上传"),
+	COUPON_COMMISSION("2","优惠券佣金");
+	
 
 	private String code;
 	private String value;
