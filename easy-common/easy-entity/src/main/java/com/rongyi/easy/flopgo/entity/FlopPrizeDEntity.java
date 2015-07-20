@@ -1,5 +1,6 @@
 package com.rongyi.easy.flopgo.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -8,14 +9,14 @@ import java.util.Date;
  * @author lijing 2015 07 16
  *
  */
-public class FlopPrizeDEntity {
+public class FlopPrizeDEntity implements Serializable{
 	/**每日配置奖项的id*/
     private Integer id;
     /**奖品类型  02优惠卷 03现金卷 00代表普照奖*/
     private String prizeType;
     /**奖品名称 */
     private String prizeName;
-    /**奖品id*/
+    /**奖品id 普照奖品的id为AD*/
     private String prizeId;
     /**奖品库存*/
     private Integer prizeStock;

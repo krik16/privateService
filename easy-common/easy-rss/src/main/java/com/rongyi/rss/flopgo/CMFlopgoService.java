@@ -3,6 +3,7 @@ package com.rongyi.rss.flopgo;
 import java.util.Map;
 
 import com.rongyi.easy.flopgo.entity.FlopgoActivity;
+import com.rongyi.easy.flopgo.vo.FlopSPrizeDailyVO;
 
 public interface CMFlopgoService {
 	/**
@@ -36,7 +37,7 @@ public interface CMFlopgoService {
 	 * @param flopgo
 	 * @return
 	 */
-	public int editFlopGo(FlopgoActivity flopgo);
+	public int editFlopGo(FlopgoActivity flopgo) throws Exception;
 	/**
 	 * 按照库存得到一条随机的奖品
 	 */
@@ -62,4 +63,14 @@ public interface CMFlopgoService {
      * @author lijing
      */
 	public void updateFlopGoValid();
+	
+	
+	/**
+	 * 通过翻牌狗的id查询翻牌购的信息和每日奖品信息
+	 * @param id
+	 * @return
+	 */
+	public FlopSPrizeDailyVO selectFPDByActivityId(String id);
+	
+	
 }
