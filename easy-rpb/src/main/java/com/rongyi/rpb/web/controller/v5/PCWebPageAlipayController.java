@@ -4,11 +4,13 @@ import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.constant.PaymentEventType;
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
+import com.rongyi.easy.rpb.domain.PaymentItemEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.PayNotifyVO;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.mq.Sender;
 import com.rongyi.rpb.service.PCWebPageAlipayService;
+import com.rongyi.rpb.service.PaymentItemService;
 import com.rongyi.rpb.service.PaymentLogInfoService;
 import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rpb.service.RpbEventService;
@@ -48,6 +50,9 @@ public class PCWebPageAlipayController extends BaseController {
 	@Autowired
 	PaymentService paymentService;
 
+	@Autowired
+	PaymentItemService paymentItemService;
+	
 	@Autowired
 	Sender sender;
 
@@ -282,6 +287,8 @@ public class PCWebPageAlipayController extends BaseController {
 		bodyMap.put("orderNum", refundPaymentEntity.getOrderNum());
 		bodyMap.put("totalPrice", refundPaymentEntity.getAmountMoney());
 		bodyMap.put("paymentId", refundPaymentEntity.getPayNo());
+		List<PaymentItemEntity> itemList = paymentItemService.selectByPaymentId(refundPaymentEntity.getId());
+		bodyMap.put("orderDetailNum",  paymentItemService.getDetailNum(itemList));
 		MessageEvent event = new MessageEvent();
 		if (Constants.ORDER_TYPE.ORDER_TYPE_1 == refundPaymentEntity.getOrderType())// 优惠券订单退款
 			event.setTarget(Constants.SOURCETYPE.COUPON);

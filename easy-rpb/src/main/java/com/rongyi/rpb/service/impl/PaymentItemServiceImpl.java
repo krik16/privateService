@@ -33,4 +33,16 @@ public class PaymentItemServiceImpl extends BaseServiceImpl implements PaymentIt
 		return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectByPaymentId", map);
 	}
 
+	@Override
+	public String getDetailNum(List<PaymentItemEntity> itemList) {
+		String detailNum = "";
+		if (itemList != null && !itemList.isEmpty())
+			for (int i = 0; i < itemList.size(); i++) {
+				detailNum += itemList.get(i).getDetailNum();
+				if (i < itemList.size() - 1) {
+					detailNum += ",";
+				}
+			}
+		return detailNum;
+	}
 }

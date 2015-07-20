@@ -100,7 +100,7 @@ public class RpbServiceImpl implements IRpbService {
 			if (Constants.ORDER_TYPE.ORDER_TYPE_1 == oldPaymentEntity.getOrderType()) {
 				target = Constants.SOURCETYPE.COUPON;
 				List<PaymentItemEntity> itemList = paymentItemService.selectByPaymentId(paymentEntity.getId());
-				orderDetailNum = getDetailNum(itemList);
+				orderDetailNum = paymentItemService.getDetailNum(itemList);
 			}
 			MessageEvent event = rpbEventService.getMessageEvent(paymentEntity.getPayNo(), paymentEntity.getOrderNum(), orderDetailNum, paymentEntity.getPayChannel().toString(),
 					Constants.SOURCETYPE.RPB, target, PaymentEventType.REFUND);
@@ -110,18 +110,6 @@ public class RpbServiceImpl implements IRpbService {
 		messageMap.put("success", false);
 		messageMap.put("message", "微信退款失败");
 		return messageMap;
-	}
-
-	private String getDetailNum(List<PaymentItemEntity> itemList) {
-		String detailNum = "";
-		if (itemList != null && !itemList.isEmpty())
-			for (int i = 0; i < itemList.size(); i++) {
-				detailNum += itemList.get(i).getDetailNum();
-				if (i < itemList.size() - 1) {
-					detailNum += ",";
-				}
-			}
-		return detailNum;
 	}
 
 }
