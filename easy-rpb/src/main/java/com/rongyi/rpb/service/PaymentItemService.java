@@ -27,5 +27,14 @@ public interface PaymentItemService {
 	 * @datetime:2015年7月14日上午10:43:30
 	 **/
 	public abstract List<PaymentItemEntity> selectByPaymentId(Integer paymentId);
+	
+	/**	
+	 * @Description: 获取子订单拼接字符串
+	 * @param itemList
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年7月20日上午11:53:37
+	 **/
+	public String getDetailNum(List<PaymentItemEntity> itemList);
 
 }
