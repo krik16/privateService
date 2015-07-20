@@ -74,7 +74,6 @@ public interface CMFlopgoService {
 	 */
 	public FlopSPrizeDailyVO selectFPDByActivityId(String id);
 	
-	
 	/**
 	 * 这是做修改 做每日配置的数量修改
 	 *  步骤查询 
