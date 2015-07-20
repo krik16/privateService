@@ -58,6 +58,7 @@ public enum CodeEnum {
     ERROR_NO_SHOP("-1122", "没有相关的店铺信息"),
     ERROR_INVALID_LETTER("-1123", "无效的首字母"),
     ERROR_NO_USER_SHOP("-1124", "该用户没有关联的店铺"),
+    ERROR_EXCLUSIVE_GUIDE("-1126","设置专属导购出错"),
     /** 密码修改 */
     ERROR_ORIGINAL_PASSOWRD("-1212", "原密码不正确"),
     ERROR_NEW_INVALID("-1213", "新密码无效"),

@@ -16,7 +16,8 @@ package com.rongyi.core.constant;
 public enum VirtualAccountEventTypeEnum {
 	DRAWAPPLY("0", "提现"),
 	ACCOUNT_POST("1", "金额入账"),
-	COMMISSION_BATCH_POST("2", "佣金批量入账");
+	COMMISSION_BATCH_POST("2", "佣金批量入账"),
+	COUPON_COMMISSION_BATCH_POST("3","优惠券核销佣金批量入账");
 	
 	private String code;
 	private String value;

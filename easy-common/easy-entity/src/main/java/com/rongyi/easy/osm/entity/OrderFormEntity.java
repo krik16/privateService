@@ -5,12 +5,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class OrderFormEntity implements Serializable{
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 161854131285062571L;
-
-	/** 主键id */
+    /** 主键id */
     private Integer id;
 
     /** 大订单号 */
@@ -53,7 +48,7 @@ public class OrderFormEntity implements Serializable{
     private String paymentIdList;
 
     /** 是否已评价 (0否 1是) */
-    private Integer isComment;
+    private Byte isComment;
 
     /** 邮寄地址id */
     private String addressId;
@@ -63,18 +58,21 @@ public class OrderFormEntity implements Serializable{
 
     /** 订单渠道 1APP 2终端机 */
     private Integer orderSource;
-    
+
     /** 抵扣券ID */
     private String couponId;
-    
+
     /** 容易网活动抵扣券ID */
     private String internalCouponId;
-    
-	/** 买家备注 */
-    private String buyerComment;
-    
+
     /** 导购id */
     private String guideId;
+
+    /** 本订单享受到的优惠(存json格式数据，方便后续扩展) */
+    private String discountInfo;
+
+    /** 买家备注 */
+    private String buyerComment;
 
     /**
      * 主键id
@@ -304,7 +302,7 @@ public class OrderFormEntity implements Serializable{
      * 是否已评价 (0否 1是)
      * @return isComment
      */
-    public Integer getIsComment() {
+    public Byte getIsComment() {
         return isComment;
     }
 
@@ -312,7 +310,7 @@ public class OrderFormEntity implements Serializable{
      * 是否已评价 (0否 1是)
      * @param isComment
      */
-    public void setIsComment(Integer isComment) {
+    public void setIsComment(Byte isComment) {
         this.isComment = isComment;
     }
 
@@ -362,7 +360,7 @@ public class OrderFormEntity implements Serializable{
      */
     public void setOrderSource(Integer orderSource) {
         this.orderSource = orderSource;
-    }    
+    }
 
     /**
      * 抵扣券ID
@@ -378,24 +376,56 @@ public class OrderFormEntity implements Serializable{
      */
     public void setCouponId(String couponId) {
         this.couponId = couponId;
-    } 
+    }
 
     /**
      * 容易网活动抵扣券ID
-     * @param internalCouponId
+     * @return internalCouponId
      */
     public String getInternalCouponId() {
-		return internalCouponId;
-	}
+        return internalCouponId;
+    }
 
     /**
      * 容易网活动抵扣券ID
      * @param internalCouponId
      */
     public void setInternalCouponId(String internalCouponId) {
-		this.internalCouponId = internalCouponId;
-	}
-   
+        this.internalCouponId = internalCouponId;
+    }
+
+    /**
+     * 导购id
+     * @return guideId
+     */
+    public String getGuideId() {
+        return guideId;
+    }
+
+    /**
+     * 导购id
+     * @param guideId
+     */
+    public void setGuideId(String guideId) {
+        this.guideId = guideId;
+    }
+
+    /**
+     * 本订单享受到的优惠(存json格式数据，方便后续扩展)
+     * @return discountInfo
+     */
+    public String getDiscountInfo() {
+        return discountInfo;
+    }
+
+    /**
+     * 本订单享受到的优惠(存json格式数据，方便后续扩展)
+     * @param discountInfo
+     */
+    public void setDiscountInfo(String discountInfo) {
+        this.discountInfo = discountInfo;
+    }
+
     /**
      * 买家备注
      * @return buyerComment
@@ -411,22 +441,4 @@ public class OrderFormEntity implements Serializable{
     public void setBuyerComment(String buyerComment) {
         this.buyerComment = buyerComment;
     }
-
-	/**
-	* 导购id
-	* @return
-	*/
-	public String getGuideId() {
-		return guideId;
-	}
-
-	/**
-	* 导购id
-	* @param guideId
-	*/
-	public void setGuideId(String guideId) {
-		this.guideId = guideId;
-	}
-    
-    
 }
