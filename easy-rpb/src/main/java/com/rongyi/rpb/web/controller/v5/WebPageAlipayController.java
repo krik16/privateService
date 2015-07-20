@@ -150,11 +150,11 @@ public class WebPageAlipayController extends BaseController {
 		PaymentLogInfo paymentLogInfo = new PaymentLogInfo();
 		try {
 			Map<String, Object> map = XMLUtil.doXMLParse(notify_data);
-			if (!validateTradeStatus(map.get("trade_status").toString()))
-				return;
 			if (map.get("out_trade_no") != null) {
 				PaymentLogInfo result = paymentLogInfoService.selectByOutTradeNo(map.get("out_trade_no").toString());
 				if (result != null)
+					return;
+				if (!validateTradeStatus(map.get("trade_status").toString()))
 					return;
 				LOGGER.info("支付宝手机网页支付异步通知开始-->");
 				paymentLogInfo.setNotifyId(map.get("notify_id").toString());
@@ -212,6 +212,9 @@ public class WebPageAlipayController extends BaseController {
 	@RequestMapping("/app/notify_url.htm")
 	public String appNotify(HttpServletRequest request, Model model, String notify_time, String notify_type, String notify_id, String sign_type, String sign, String out_trade_no, String trade_no,
 			String buyer_id, String buyer_email, String total_fee, String trade_status) {
+		PaymentLogInfo result = paymentLogInfoService.selectByNotifyId(notify_id);
+		if (result != null)
+			return null;
 		if (!validateTradeStatus(trade_status))
 			return null;
 		Map<String, String> verifyMap = beforeVerify(request);
@@ -219,9 +222,6 @@ public class WebPageAlipayController extends BaseController {
 			LOGGER.info("支付宝手机APP支付异步通知-->支付宝验证签名不通过，返回消息不是支付宝发出的合法消息!");
 			return null;
 		}
-		PaymentLogInfo result = paymentLogInfoService.selectByNotifyId(notify_id);
-		if (result != null)
-			return null;
 		LOGGER.info("支付宝手机APP支付异步通知开始-->");
 		PaymentLogInfo paymentLogInfo = getPaymentLogInfo(trade_no, out_trade_no, notify_id, notify_type, DateUtil.getCurrDateTime(), sign, sign_type, 0, 0, total_fee, buyer_email, buyer_id,
 				Constants.REPLAY_FLAG.REPLAY_FLAG0);
