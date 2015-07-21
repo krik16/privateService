@@ -120,4 +120,12 @@ public interface IShopService{
 	 * @throws Exception
 	 */
 	public List<ShopInfoEntity> getShopListByShopName(String shopName,Integer mallId) throws Exception;
+	
+	/**
+	 * 根据店铺的mongoId获取店铺信息
+	 * @param shopMId
+	 * @return
+	 * @throws Exception
+	 */
+	public ShopInfoVO getShopInfoByShopMId(String shopMId)  throws Exception;
 }
