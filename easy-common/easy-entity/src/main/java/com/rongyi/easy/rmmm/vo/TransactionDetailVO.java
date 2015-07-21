@@ -27,6 +27,20 @@ public class TransactionDetailVO implements Serializable{
 	private String payTime;// 付款时间
 
 	private List<String> orderNums;// 大订单号集合
+	
+	private Integer userId;//导购id
+	
+	private String userLogo;//导购头像
+	
+	private Double userScore;//导购获得的评分
+	
+	private Boolean isBelong;//是否专属
+	
+	private Integer shopId;//店铺id
+	
+	private String shopMId;//店铺mongoid
+	
+	private String shopName;//店铺名
 
 	public String getConsignee() {
 		return consignee;
@@ -100,4 +114,60 @@ public class TransactionDetailVO implements Serializable{
 		this.districtName = districtName;
 	}
 
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public String getUserLogo() {
+		return userLogo;
+	}
+
+	public void setUserLogo(String userLogo) {
+		this.userLogo = userLogo;
+	}
+
+	public Double getUserScore() {
+		return userScore;
+	}
+
+	public void setUserScore(Double userScore) {
+		this.userScore = userScore;
+	}
+
+	public Boolean getIsBelong() {
+		return isBelong;
+	}
+
+	public void setIsBelong(Boolean isBelong) {
+		this.isBelong = isBelong;
+	}
+
+	public Integer getShopId() {
+		return shopId;
+	}
+
+	public void setShopId(Integer shopId) {
+		this.shopId = shopId;
+	}
+
+	public String getShopMId() {
+		return shopMId;
+	}
+
+	public void setShopMId(String shopMId) {
+		this.shopMId = shopMId;
+	}
+
+	public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+	
 }
