@@ -3,6 +3,7 @@ package com.rongyi.rss.roa;
 import java.util.Map;
 
 import com.rongyi.easy.flopgo.entity.FlopgoActivity;
+import com.rongyi.easy.flopgo.vo.FlopSPrizeDailyVO;
 
 public interface IFlopgoService {
 	/**
@@ -64,4 +65,11 @@ public interface IFlopgoService {
      * @author lijing
      */
 	public void updateFlopGoValid();
+	
+	/**
+	 * 通过翻牌狗的id查询翻牌购的信息和每日奖品信息
+	 * @param id
+	 * @return
+	 */
+	public FlopSPrizeDailyVO selectFPDByActivityId(String id) throws Exception;
 }
