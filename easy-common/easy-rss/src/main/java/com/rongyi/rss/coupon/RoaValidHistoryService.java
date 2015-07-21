@@ -32,5 +32,13 @@ public interface RoaValidHistoryService {
       * @return
       */
      PagingVO<ValidHistory> getValidHistoryPage(MMValidHistoryParam params);
+
+     /**
+      * 查询用户当天该类优惠券的使用次数
+      * @param referenceId
+      * @param userId
+      * @return
+      */
+	int getDailyCount(String referenceId, String userId);
 	
 }
