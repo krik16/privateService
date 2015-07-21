@@ -34,6 +34,16 @@ public class TransactionDetailVO implements Serializable{
 	
 	private Double userScore;//导购获得的评分
 	
+	private String userNickName;//导购昵称
+	
+	private String userName;//导购姓名
+	
+	private String userPhone;//导购电话号码
+	
+	private String integral;//积分
+	
+	private String imId;//导购环信id
+	
 	private Boolean isBelong;//是否专属
 	
 	private Integer shopId;//店铺id
@@ -168,6 +178,46 @@ public class TransactionDetailVO implements Serializable{
 
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
+	}
+
+	public String getUserNickName() {
+		return userNickName;
+	}
+
+	public void setUserNickName(String userNickName) {
+		this.userNickName = userNickName;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserPhone() {
+		return userPhone;
+	}
+
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
+	}
+
+	public String getIntegral() {
+		return integral;
+	}
+
+	public void setIntegral(String integral) {
+		this.integral = integral;
+	}
+
+	public String getImId() {
+		return imId;
+	}
+
+	public void setImId(String imId) {
+		this.imId = imId;
 	}
 	
 }
