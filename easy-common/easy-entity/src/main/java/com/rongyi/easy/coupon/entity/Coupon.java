@@ -1,15 +1,19 @@
 package com.rongyi.easy.coupon.entity;
 
-import org.apache.commons.lang.time.DateUtils;
-import org.mongodb.morphia.annotations.*;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.bson.types.ObjectId;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.time.DateUtils;
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Property;
+import org.mongodb.morphia.annotations.Version;
 
 /**
  * 卡券信息
@@ -36,12 +40,6 @@ public class Coupon implements Serializable {
     @Property("limit_count")
     private Integer limitCount;// 每人限购数量
 
-    @Property("limit_publish_count")
-    private Integer limitPublishCount;// 每日限量发行张数
-
-    @Property("limit_use_count")
-    private Integer limitUseCount;// 每人每日限用张数
-
     @Property("receive_count")
     private Integer receiveCount = Integer.valueOf(0);// 已领取数
 
@@ -58,7 +56,12 @@ public class Coupon implements Serializable {
     @Property("current_price")
     private Double currentPrice;// 现价
 
-    private String type;// 配置类型 0:商场 1:店铺；现金券 0：全场，1：商品
+    /**
+     * 关联类型
+     * 代金券：集团[0],品牌[1], 商场 [2],店铺[3]
+     * 红包 ：全场[0],商品[1]
+     */
+    private String type;
 
     @Property("check_description")
     private String checkDescription;// 审核未通过信息描述
@@ -143,6 +146,81 @@ public class Coupon implements Serializable {
 
     @Version
     private Long version; // 乐观锁
+
+    /******新增字段 start******/
+
+    /**
+     * 分类 ： 一级分类，二级分类
+     */
+    @Embedded("categories")
+    private CouponCategories categories = new CouponCategories();
+
+    /**
+     * 大运营平台，平台代金券
+     * 展示区域：常规区域,活动区域
+     * 未选中：[0]，选中：[1] "1,1"表示都选中
+     */
+    @Property("display_region")
+    private String displayRegion;
+
+    /**
+     * 大运营平台，平台代金券
+     * 售后:随时退,过期退,免预约
+     * 未选中：[0]，选中：[1] "1,1,1"表示都选中
+     */
+    @Property("after_sale_service")
+    private String afterSaleService;
+
+    /**
+     * 大运营平台，平台代金券
+     * 备注
+     */
+    private String remark;
+
+    /**
+     * 大运营平台，平台代金券
+     * 关联品牌集合
+     */
+    @Embedded("brands")
+    private List<CouponBrand> brands = new ArrayList<>();
+
+    /**
+     * 大运营品台，平台代金券
+     * 每日限量发行张数
+     */
+    @Property("limit_publish_count")
+    private Integer limitPublishCount;
+
+    /**
+     * 大运营品台，平台代金券
+     * 每人每日限用张数
+     */
+    @Property("limit_use_count")
+    private Integer limitUseCount;
+
+    /**
+     * 是否是第三方导入
+     * [Y]是 [N]不是
+     */
+    @Property("out_status")
+    private String outStatus;
+    //推广渠道待定
+    //导入渠道待定
+
+    /**
+     * 商家管理平台
+     * 商场集团、品牌、商场、店铺id
+     */
+    @Property("source_id")
+    private String sourceId;
+
+	/**
+	 * 商家管理平台
+	 * 商场集团[0]、品牌[1]、商场[2]、店铺[3]
+	 */
+    @Property("source_type")
+	private Integer sourceType;
+    /******新增字段 end******/
 
     public ObjectId getId() {
         return id;
@@ -522,7 +600,73 @@ public class Coupon implements Serializable {
         return pic;
     }
 
-    public static class CouponProduct implements Serializable {
+
+    public String getDisplayRegion() {
+		return displayRegion;
+	}
+
+	public void setDisplayRegion(String displayRegion) {
+		this.displayRegion = displayRegion;
+	}
+
+	public String getAfterSaleService() {
+		return afterSaleService;
+	}
+
+	public void setAfterSaleService(String afterSaleService) {
+		this.afterSaleService = afterSaleService;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public List<CouponBrand> getBrands() {
+		return brands;
+	}
+
+	public void setBrands(List<CouponBrand> brands) {
+		this.brands = brands;
+	}
+
+	public String getOutStatus() {
+		return outStatus;
+	}
+
+	public void setOutStatus(String outStatus) {
+		this.outStatus = outStatus;
+	}
+
+	public String getSourceId() {
+		return sourceId;
+	}
+
+	public void setSourceId(String sourceId) {
+		this.sourceId = sourceId;
+	}
+
+	public Integer getSourceType() {
+		return sourceType;
+	}
+
+	public void setSourceType(Integer sourceType) {
+		this.sourceType = sourceType;
+	}
+
+	public CouponCategories getCategories() {
+		return categories;
+	}
+
+	public void setCategories(CouponCategories categories) {
+		this.categories = categories;
+	}
+
+
+	public static class CouponProduct implements Serializable {
 
         private static final long serialVersionUID = 1L;
 
@@ -728,6 +872,59 @@ public class Coupon implements Serializable {
         }
 
     }
+
+    public static class CouponBrand implements Serializable {
+
+        private static final long serialVersionUID = 1L;
+        private String id;
+
+        private String cname;
+
+        private String ename;
+
+		public String getId() {
+			return id;
+		}
+
+		public void setId(String id) {
+			this.id = id;
+		}
+
+		public String getCname() {
+			return cname;
+		}
+
+		public void setCname(String cname) {
+			this.cname = cname;
+		}
+
+		public String getEname() {
+			return ename;
+		}
+
+		public void setEname(String ename) {
+			this.ename = ename;
+		}
+    }
+
+    public static class CouponCategories implements Serializable {
+
+    	private static final long serialVersionUID = 1L;
+
+    	@Property("first_id")
+    	private String firstId;
+
+    	@Property("first_name")
+    	private String firstName;
+
+    	@Property("second_id")
+    	private String secondId;
+
+    	@Property("second_name")
+    	private String secondName;
+
+    }
+
 
 	@Override
 	public String toString() {
