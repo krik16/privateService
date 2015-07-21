@@ -12,7 +12,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 卡券基类
+ * 卡券信息
+ * 类型：代金券、红包、抵扣券
  *
  * @author Breggor
  */

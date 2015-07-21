@@ -132,6 +132,17 @@ public class UserCoupon implements Serializable {
      */
     private Date endTime;
 
+
+    /**
+     * 验码人
+     */
+    private Integer checkUserId;
+
+    /**
+     * 验码时间
+     */
+    private Date checkCodeTime;
+
     public UserCoupon() {
 
     }
@@ -388,17 +399,51 @@ public class UserCoupon implements Serializable {
         this.couponSource = couponSource;
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this).append("id", id).append("activityId", activityId)
-                .append("activityName", activityName).append("couponId", couponId).append("couponSource", couponSource)
-                .append("couponCode", couponCode).append("title", title).append("thumbnail", thumbnail)
-                .append("userId", userId).append("orderId", orderId).append("itemId", itemId)
-                .append("couponType", couponType).append("type", type).append("useDescription", useDescription)
-                .append("recommend", recommend).append("status", status).append("productIds", productIds)
-                .append("orgPrice", orgPrice).append("discount", discount).append("unitPrice", unitPrice)
-                .append("provideTime", provideTime).append("useTime", useTime).append("startTime", startTime)
-                .append("endTime", endTime).toString();
+    public Integer getCheckUserId() {
+        return checkUserId;
     }
 
+    public void setCheckUserId(Integer checkUserId) {
+        this.checkUserId = checkUserId;
+    }
+
+    public Date getCheckCodeTime() {
+        return checkCodeTime;
+    }
+
+    public void setCheckCodeTime(Date checkCodeTime) {
+        this.checkCodeTime = checkCodeTime;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("activityId", activityId)
+                .append("activityName", activityName)
+                .append("couponId", couponId)
+                .append("couponSource", couponSource)
+                .append("couponCode", couponCode)
+                .append("title", title)
+                .append("thumbnail", thumbnail)
+                .append("userId", userId)
+                .append("orderId", orderId)
+                .append("itemId", itemId)
+                .append("couponType", couponType)
+                .append("type", type)
+                .append("useDescription", useDescription)
+                .append("recommend", recommend)
+                .append("status", status)
+                .append("productIds", productIds)
+                .append("orgPrice", orgPrice)
+                .append("discount", discount)
+                .append("unitPrice", unitPrice)
+                .append("provideTime", provideTime)
+                .append("useTime", useTime)
+                .append("startTime", startTime)
+                .append("endTime", endTime)
+                .append("checkUserId", checkUserId)
+                .append("checkCodeTime", checkCodeTime)
+                .toString();
+    }
 }

@@ -32,8 +32,10 @@ public class CouponOrderItem implements Serializable {
     private String couponId;
 
     /**
+     * 暂时不用
      * 优惠券码(多个以逗号分隔)
      */
+    @Deprecated
     private String couponCode;
 
     /**
