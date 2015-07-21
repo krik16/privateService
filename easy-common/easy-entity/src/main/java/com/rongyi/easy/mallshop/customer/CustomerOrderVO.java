@@ -32,6 +32,11 @@ public class CustomerOrderVO implements Serializable {
     private Date createAt;
 
     /**
+     * 订单完成时间
+     */
+    private Date finishAt;
+
+    /**
      * 微店id
      */
     private String weidianId;
@@ -84,5 +89,13 @@ public class CustomerOrderVO implements Serializable {
 
     public void setOrderDetailVOList(List<CustomerOrderCommodityVO> orderDetailVOList) {
         this.orderDetailVOList = orderDetailVOList;
+    }
+
+    public String getFinishAt() {
+        return DateUtil.dateToString(this.finishAt);
+    }
+
+    public void setFinishAt(Date finishAt) {
+        this.finishAt = finishAt;
     }
 }

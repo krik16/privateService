@@ -5,6 +5,7 @@ import com.rongyi.easy.flopgo.vo.FlopSPrizeDailyVO;
 
 import java.util.Map;
 
+
 public interface IFlopgoService {
 	/**
 	 * 得到这个翻牌购集合

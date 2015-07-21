@@ -51,9 +51,9 @@ public class CustomerVO implements Serializable {
     private boolean belong;
 
     /**
-     * todo 用户来源
+     * 用户来源
      */
-    private String userSource;
+    private String userSource = "容易逛";
 
     /**
      * 备注名
