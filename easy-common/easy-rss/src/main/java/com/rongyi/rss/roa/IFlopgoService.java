@@ -1,9 +1,9 @@
 package com.rongyi.rss.roa;
 
-import java.util.Map;
-
 import com.rongyi.easy.flopgo.entity.FlopgoActivity;
 import com.rongyi.easy.flopgo.vo.FlopSPrizeDailyVO;
+
+import java.util.Map;
 
 public interface IFlopgoService {
 	/**
@@ -44,8 +44,8 @@ public interface IFlopgoService {
 	 */
 	public Map randomGetPrizeByStock(Map paramMap);
 	/**
-	 * 
-	 * @param 为了消耗次数得到这个奖品专门提供的
+	 * 为了消耗次数得到这个奖品专门提供的
+	 * @param
 	 * @return
 	 */
 	public FlopgoActivity getFlopInFoByTime(String id);
