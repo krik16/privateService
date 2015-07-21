@@ -118,7 +118,7 @@ public class UserCoupon implements Serializable {
     private Date provideTime;
 
     /**
-     * 使用时间
+     * 使用(验码)时间
      */
     private Date useTime;
 
@@ -138,10 +138,6 @@ public class UserCoupon implements Serializable {
      */
     private Integer checkUserId;
 
-    /**
-     * 验码时间
-     */
-    private Date checkCodeTime;
 
     public UserCoupon() {
 
@@ -407,13 +403,6 @@ public class UserCoupon implements Serializable {
         this.checkUserId = checkUserId;
     }
 
-    public Date getCheckCodeTime() {
-        return checkCodeTime;
-    }
-
-    public void setCheckCodeTime(Date checkCodeTime) {
-        this.checkCodeTime = checkCodeTime;
-    }
 
     @Override
     public String toString() {
@@ -443,7 +432,6 @@ public class UserCoupon implements Serializable {
                 .append("startTime", startTime)
                 .append("endTime", endTime)
                 .append("checkUserId", checkUserId)
-                .append("checkCodeTime", checkCodeTime)
                 .toString();
     }
 }
