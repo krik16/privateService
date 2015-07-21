@@ -2,6 +2,7 @@ package com.rongyi.rss.flopgo;
 
 import java.util.Map;
 
+import com.rongyi.easy.flopgo.entity.FlopPrizeDEntity;
 import com.rongyi.easy.flopgo.entity.FlopgoActivity;
 import com.rongyi.easy.flopgo.vo.FlopSPrizeDailyVO;
 
@@ -71,6 +72,4 @@ public interface CMFlopgoService {
 	 * @return
 	 */
 	public FlopSPrizeDailyVO selectFPDByActivityId(String id);
-	
-	
 }

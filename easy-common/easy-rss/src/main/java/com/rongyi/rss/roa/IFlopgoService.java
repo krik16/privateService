@@ -2,6 +2,7 @@ package com.rongyi.rss.roa;
 
 import java.util.Map;
 
+import com.rongyi.easy.flopgo.entity.FlopPrizeDEntity;
 import com.rongyi.easy.flopgo.entity.FlopgoActivity;
 import com.rongyi.easy.flopgo.vo.FlopSPrizeDailyVO;
 
