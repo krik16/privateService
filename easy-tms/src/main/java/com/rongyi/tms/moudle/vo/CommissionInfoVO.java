@@ -25,6 +25,11 @@ public class CommissionInfoVO {
 
 	/** 待审核佣金（今日） */
 	private BigDecimal commissionForAuditToday;
+	
+	/**
+	 *失败佣金（当月，包含交易佣金和验码佣金） 
+	 */
+	private BigDecimal faleCommissionMonth;
 
 	public String getUserId() {
 		return userId;
@@ -49,6 +54,13 @@ public class CommissionInfoVO {
 	public void setCommissionForAuditToday(BigDecimal commissionForAuditToday) {
 		this.commissionForAuditToday = commissionForAuditToday;
 	}
-	
-	
+
+	public BigDecimal getFaleCommissionMonth() {
+		return faleCommissionMonth;
+	}
+
+	public void setFaleCommissionMonth(BigDecimal faleCommissionMonth) {
+		this.faleCommissionMonth = faleCommissionMonth;
+	}
+
 }

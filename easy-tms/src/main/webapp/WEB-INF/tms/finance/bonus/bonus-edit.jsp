@@ -54,16 +54,11 @@ body {
 					<input type="hidden" name="id" class="accountId" value="<c:out value='${bonus.id}'/>"> </input>
 					<ul>
 						
-						<li class="w_100 lvse size-14">考核奖金信息</li>
-						<li class="name">
-								卖家账号</li>
-							
+						<li class="w_100 lvse size-14">卖家账号</li>
 						<li class="detail" >
 								<input id="account" name="sellerAccount" type="text" value="${bonus.sellerAccount}" onblur="checkAccount(this.value)"/>
 								<span class="msg" >(*请输入卖家账号)</span>
-								<span style="width:80px">类型：</span>
-								
-									
+								<span style="width:80px">考核方式：</span>
 									<select id="type" name="type">
 										<c:choose>
 											<c:when test="${bonus==null }">
@@ -79,7 +74,6 @@ body {
 												<option value="2" selected="selected">惩罚</option>
 											</c:when>
 										</c:choose>
-										
 									</select>
 						</li>
 						<li  class="w_100 lvse size-14">
@@ -88,6 +82,23 @@ body {
 						<li class="detail" >
 								<input id="amount" name="amount" type="text" value="${bonus.amount}" onblur="checkAmount(this.value);"/>
 								<span class="msg">(*请输入数字，小数点后面保留2位)</span>
+									<span style="width:80px">类型：</span>
+									<select id="operateType" name="operateType">
+										<c:choose>
+											<c:when test="${bonus eq null }">
+												<option value="1">交易佣金</option>
+												<option value="2">验码佣金</option>
+											</c:when>
+											<c:when test="${bonus!=null &&(bonus.bonusType==1||bonus.bonusType==2)}">
+												<option value="1" selected="selected">交易佣金</option>
+												<option value="2">验码佣金</option>
+											</c:when>
+											<c:otherwise>
+												<option value="1" >交易佣金</option>
+												<option value="2" selected="selected">验码佣金</option>
+											</c:otherwise>
+										</c:choose>
+									</select>
 						</li>
 						
 						<li class="w_100 lvse size-14">备注</li>
@@ -134,6 +145,7 @@ var originalMarks=$("textarea:[name='marks']").val();
 		var laterType=$("select:[name='type']").val();
 		var laterAmount=$("input:[name='amount']").val();
 		var laterMarks=$("textarea:[name='marks']").val();
+		var operateType = $("select:[name='operateType']").val();
 		var type,marks,amount,temp=0;
 		if(laterSellerAccount==originalSellerAccount){
 			temp++;
@@ -172,7 +184,7 @@ var originalMarks=$("textarea:[name='marks']").val();
 			_util.cmsTip("账号不为空！");
 			return;
 		}
-		$.get("../bonus/update",{id:id,sellerAccount:sellerAccount,type:type,marks:marks,amount:amount},
+		$.get("../bonus/update",{id:id,sellerAccount:sellerAccount,type:type,marks:marks,amount:amount,operateType:operateType},
 			function(data){
 				if (data.success == true) {
 					_util.cmsTip("操作成功!");

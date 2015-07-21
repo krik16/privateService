@@ -1,24 +1,25 @@
 package com.rongyi.tms.web.controller;
 
-import base.util.excel.ExcelWriter;
-import com.rongyi.core.bean.ResponseResult;
-import com.rongyi.easy.malllife.common.util.DateTool;
-import com.rongyi.easy.malllife.vo.PagingVO;
-import com.rongyi.easy.rmmm.entity.RmmmUserInfoEntity;
-import com.rongyi.easy.tms.entity.SalesCommissionAuditLog;
-import com.rongyi.easy.va.vo.VirtualAccountVO;
-import com.rongyi.rss.malllife.roa.ROARedisService;
-import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
-import com.rongyi.rss.mallshop.user.ROAUserService;
-import com.rongyi.rss.roa.ROAVirtualAccountGeneralService;
-import com.rongyi.tms.constants.CodeEnum;
-import com.rongyi.tms.constants.Constant;
-import com.rongyi.tms.moudle.vo.*;
-import com.rongyi.tms.service.BonusService;
-import com.rongyi.tms.service.SalesCommissionAuditLogService;
-import com.rongyi.tms.service.SalesCommissionService;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -34,12 +35,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.*;
-import java.math.BigDecimal;
-import java.util.*;
+import base.util.excel.ExcelWriter;
+
+import com.rongyi.core.bean.ResponseResult;
+import com.rongyi.easy.malllife.common.util.DateTool;
+import com.rongyi.easy.malllife.vo.PagingVO;
+import com.rongyi.easy.rmmm.entity.RmmmUserInfoEntity;
+import com.rongyi.easy.tms.entity.SalesCommissionAuditLog;
+import com.rongyi.easy.va.vo.VirtualAccountVO;
+import com.rongyi.rss.malllife.roa.ROARedisService;
+import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
+import com.rongyi.rss.mallshop.user.ROAUserService;
+import com.rongyi.rss.roa.ROAVirtualAccountGeneralService;
+import com.rongyi.tms.constants.CodeEnum;
+import com.rongyi.tms.constants.Constant;
+import com.rongyi.tms.moudle.vo.BonusPageParam;
+import com.rongyi.tms.moudle.vo.BonusParam;
+import com.rongyi.tms.moudle.vo.BonusVO;
+import com.rongyi.tms.moudle.vo.CheckParam;
+import com.rongyi.tms.moudle.vo.UserInfo;
+import com.rongyi.tms.service.BonusService;
+import com.rongyi.tms.service.SalesCommissionAuditLogService;
+import com.rongyi.tms.service.SalesCommissionService;
 
 /**
  * @Description 考核奖金 controller
@@ -221,7 +238,8 @@ public class BonusController extends BaseController {
         return "finance/bonus/bonus-upload";
     }
 
-    @RequestMapping(value = "/uploadExcel")
+    @SuppressWarnings("unchecked")
+	@RequestMapping(value = "/uploadExcel")
     public String uploadExcel(@RequestParam(value = "file", required = false) MultipartFile file, HttpSession session,
             HttpServletRequest request, ModelMap model) {
         Map<String, Object> resultInfoMap = new HashMap<String, Object>();
@@ -250,7 +268,6 @@ public class BonusController extends BaseController {
                     List<BonusVO> failList = this.batchInsertBonus(bonusVOs);
                     failList.addAll(readFailList);
                     // 把失败的记录存放在redis 缓存中
-
                     redisService.setObject("uploadFailList-" + random, getJSONString(failList));
                     model.put("fail", failList.size());
                     model.put("success", (Integer) resultMap.get("total") - failList.size());
@@ -394,6 +411,9 @@ public class BonusController extends BaseController {
             // 参数传递有误
             resultMap.put("code", CodeEnum.ERROR_PARAM.getActionCode());
         }
+        //TODO TEST
+//        resultMap.put("code", CodeEnum.SUCCESS.getActionCode());
+//        resultMap.put("userId", "123");
         return resultMap;
     }
 
@@ -449,23 +469,34 @@ public class BonusController extends BaseController {
                         continue;
                     }
                     bonusVO.setSellerId(verifuResultMap.get("userId").toString());
-                    String typeString = hssfRow.getCell(1).getStringCellValue();
-                    if (StringUtils.isBlank(typeString) || (!typeString.equals("奖励") && !typeString.equals("惩罚"))) {
-                        LOGGER.info("第" + rowNum + "行类型传递错误");
+                    
+                    String styleString = hssfRow.getCell(1).getStringCellValue();
+                    if (StringUtils.isBlank(styleString) || (!styleString.equals("奖励") && !styleString.equals("惩罚"))) {
+                        LOGGER.info("第" + rowNum + "行考核方式传递错误");
                         errorList.add(bonusVO);
                         continue;
                     }
-                    bonusVO.setBonusType(typeString.equals("奖励") ? 1 : 2);
-                    if (hssfRow.getCell(2).getCellType() != XSSFCell.CELL_TYPE_NUMERIC) {
+
+                    String operateType = hssfRow.getCell(2).getStringCellValue();
+                    if (StringUtils.isBlank(operateType) || (!operateType.equals("交易佣金") && !operateType.equals("验码佣金"))) {
+                    	LOGGER.info("第" + rowNum + "行类型传递错误");
+                    	errorList.add(bonusVO);
+                    	continue;
+                    }
+                    
+                    int type = BonusParam.converterType(styleString, operateType);
+                    bonusVO.setBonusType(type);
+                    
+                    if (hssfRow.getCell(3).getCellType() != XSSFCell.CELL_TYPE_NUMERIC) {
                         LOGGER.info("第" + rowNum + "行金额不是数字不正确");
                         errorList.add(bonusVO);
                         continue;
                     }
-                    Double amount = hssfRow.getCell(2).getNumericCellValue();
+                    Double amount = hssfRow.getCell(3).getNumericCellValue();
                     bonusVO.setAmount(new BigDecimal(amount));
-                    XSSFCell cell=hssfRow.getCell(3);
+                    XSSFCell cell=hssfRow.getCell(4);
                     if(cell!=null){
-	                    String marksString = hssfRow.getCell(3).getStringCellValue();
+	                    String marksString = hssfRow.getCell(4).getStringCellValue();
 	                    if (StringUtils.isNotBlank(marksString)) {
 	                        bonusVO.setMarks(marksString);
 	                    }

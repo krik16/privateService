@@ -53,6 +53,7 @@ public class AccountInfoServiceImpl implements AccountInfoService{
 			result.setCommissionForAuditTotal(commissionVo.getCommissionForAuditTotal());
 		}
 
+		
 		return result;
 	}
 }
