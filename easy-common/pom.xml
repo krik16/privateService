@@ -637,9 +637,6 @@
                             <goals>
                                 <goal>clean</goal>
                             </goals>
-                            <configuration>
-                                <directory>src/main/webapp/WEB-INF/lib</directory>
-                            </configuration>
                         </execution>
                     </executions>
                 </plugin>
@@ -660,12 +657,6 @@
                             <groupId>mysql</groupId>
                             <artifactId>mysql-connector-java</artifactId>
                             <version>5.1.26</version>
-                        </dependency>
-
-                        <dependency>
-                            <groupId>com.rongyi</groupId>
-                            <artifactId>easy-mybatis-generator</artifactId>
-                            <version>${project.version}</version>
                         </dependency>
                     </dependencies>
                 </plugin>
