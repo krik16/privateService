@@ -63,7 +63,6 @@ public class SalesCommissionController extends BaseController {
     public String findByPage(@ModelAttribute("param") SalesCommissionParam params, String module, ModelMap modelMap,
             HttpServletRequest request) {
         try {
-            LOGGER.info("params:" + params);
             PagingVO<SalesCommissionVO> pagingvos = commissionService.findByPage(params);
             request.setAttribute("list", pagingvos.getDataList());
             request.setAttribute("currpage", pagingvos.getCurrentPage());

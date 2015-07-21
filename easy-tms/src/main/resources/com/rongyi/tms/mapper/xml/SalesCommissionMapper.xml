@@ -59,15 +59,22 @@
 	</resultMap>
 	<resultMap id="CommissionAmountTotal"
 		type="com.rongyi.tms.moudle.vo.CommissionAmountTotalVO">
-		<id property="guideId" column="guide_id" jdbcType="VARCHAR"/>
-		<result property="version" column="version" jdbcType="INTEGER"/>
-		<result property="commissionAmount" column="amount_total" jdbcType="DECIMAL"/>
+		<id property="guideId" column="guide_id" jdbcType="VARCHAR" />
+		<result property="version" column="version" jdbcType="INTEGER" />
+		<result property="commissionAmount" column="amount_total"
+			jdbcType="DECIMAL" />
+	</resultMap>
+	<resultMap id="FaleCommissionMonth"
+		type="com.rongyi.tms.moudle.vo.CommissionInfoVO">
+		<id property="userId" column="guide_id" jdbcType="VARCHAR" />
+		<result property="faleCommissionMonth" column="fale_commission_month" jdbcType="DECIMAL" />
 	</resultMap>
 	<parameterMap type="map" id="checkMap">
 		<parameter property="commission_ids" jdbcType="VARCHAR"
 			mode="IN" />
 		<parameter property="check_status" jdbcType="TINYINT" mode="IN" />
-		<parameter property="max_commission_times" jdbcType="TINYINT" mode="IN" />
+		<parameter property="max_commission_times" jdbcType="TINYINT"
+			mode="IN" />
 	</parameterMap>
 	<sql id="Base_Column_List">
 		id, guide_id, order_no, commission_amount, `status`,
@@ -223,8 +230,9 @@
 			separator="," close=")">
 			#{item}
 		</foreach>
-		order by create_at desc 
-		limit #{start,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
+		order by create_at desc
+		limit
+		#{start,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
 	</select>
 	<select id="selectTotalBonus" resultType="int" parameterType="map">
 		select
@@ -303,9 +311,9 @@
 		#{status,jdbcType=TINYINT}
 		)
 	</insert>
-	<insert id="batchInsertBonus" parameterType="java.util.List">  
-    	INSERT INTO  
-    	sales_commission (
+	<insert id="batchInsertBonus" parameterType="java.util.List">
+		INSERT INTO
+		sales_commission (
 		guide_id,
 		seller_account,
 		type,
@@ -313,20 +321,21 @@
 		create_at,
 		create_user,
 		remarks,status
-		) 
-    	VALUES   
-    <foreach collection="list" item="item" index="index" separator="," >  
-        (
-        #{item.sellerId,jdbcType=VARCHAR},
-        #{item.sellerAccount,jdbcType=VARCHAR},
-        #{item.bonusType,jdbcType=TINYINT},
-        #{item.amount,jdbcType=DECIMAL},
-        NOW(),
-        #{item.createUser,jdbcType=VARCHAR},
-        #{item.marks,jdbcType=LONGVARBINARY},#{item.status,jdbcType=TINYINT}
-        )  
-    </foreach>  
-</insert>  
+		)
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			#{item.sellerId,jdbcType=VARCHAR},
+			#{item.sellerAccount,jdbcType=VARCHAR},
+			#{item.bonusType,jdbcType=TINYINT},
+			#{item.amount,jdbcType=DECIMAL},
+			NOW(),
+			#{item.createUser,jdbcType=VARCHAR},
+			#{item.marks,jdbcType=LONGVARBINARY},#{item.status,jdbcType=TINYINT}
+			)
+		</foreach>
+	</insert>
 	<insert id="insertSelective" parameterType="com.rongyi.easy.tms.entity.SalesCommission">
 		insert into sales_commission
 		<trim prefix="(" suffix=")" suffixOverrides=",">
@@ -354,7 +363,7 @@
 			1
 		</trim>
 	</insert>
-	
+
 	<update id="updateByPrimaryKeySelective" parameterType="com.rongyi.easy.tms.entity.SalesCommission">
 		update sales_commission
 		<set>
@@ -457,17 +466,18 @@
 		separator="," close=")"> #{item} </foreach> </update> -->
 	<update id="updateBatchHadSendedVA" parameterType="java.util.Map">
 
-		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
 			UPDATE sales_commission
 			<set>
-				status = 6,version=#{version,jdbcType=BIGINT}				
+				status = 6,version=#{version,jdbcType=BIGINT}
 			</set>
 			WHERE guide_id=#{item.guideId} and
 			<if test="item.version == 0">
-				version is null 
+				version is null
 			</if>
 			<if test="item.version != 0">
-				version=#{item.version} 
+				version=#{item.version}
 			</if>
 			and status=3
 		</foreach>
@@ -504,7 +514,8 @@
 		update sales_commission set status =case id
 
 		<foreach collection="ids" index="index" item="item">
-			when #{item} then #{status}
+			when #{item} then
+			#{status}
 		</foreach>
 		end where id in
 		<foreach collection="ids" index="index" item="item" open="("
@@ -521,21 +532,44 @@
 	<select id="selectCommissionInfoByUserId" resultMap="CommissionInfo"
 		parameterType="java.util.Map">
 		SELECT guide_id,
-		SUM(CASE WHEN (`status` &gt; 0 AND `status` &lt; 5) THEN commission_amount
-		ELSE 0 END) AS commission_total,
-		SUM(CASE WHEN (`status` &gt; 0 AND `status` &lt; 5 AND DATEDIFF(create_at,
-		NOW()) = 0) THEN commission_amount ELSE 0 END) AS commission_today
+		SUM(CASE WHEN (`status` &gt; 0 AND
+		`status` &lt; 5) THEN commission_amount
+		ELSE 0 END) AS
+		commission_total,
+		SUM(CASE WHEN (`status` &gt; 0 AND `status` &lt; 5
+		AND DATEDIFF(create_at,
+		NOW()) = 0) THEN commission_amount ELSE 0 END)
+		AS commission_today
 		FROM sales_commission
-		WHERE guide_id = #{userId} AND type IS NULL;
+		WHERE guide_id = #{userId} AND
+		type IS NULL;
 	</select>
 	<select id="commissionAmountTotal" resultMap="CommissionAmountTotal">
-		select 
+		select
 		guide_id,version ,SUM(commission_amount) as amount_total FROM
 		sales_commission where status=3 GROUP BY guide_id;
 	</select>
-	<select id="commissionAmountTotalByVersion" resultMap="CommissionAmountTotal" parameterType="long">
-		select 
-		guide_id,version ,SUM(commission_amount) as amount_total FROM
-		sales_commission where version=#{version,jdbcType=BIGINT} GROUP BY guide_id;
+	<select id="commissionAmountTotalByVersion" resultMap="CommissionAmountTotal"
+		parameterType="long">
+		select
+		guide_id,version ,SUM(commission_amount) as
+		amount_total FROM
+		sales_commission where
+		version=#{version,jdbcType=BIGINT} GROUP BY guide_id;
+	</select>
+
+	<select id="selectFaleCommission" resultMap="FaleCommissionMonth">
+		SELECT guide_id,
+		SUM(CASE WHEN (`status`
+		&lt; 0 AND
+		date_format(create_at,'%Y-%m')=date_format(now(),'%Y-%m') )
+		THEN
+		commission_amount
+		ELSE 0 END) AS fale_commission_month
+		FROM
+		sales_commission
+		WHERE guide_id = #{userId}
+		AND (type IS NULL or type =
+		3 or type = 4)
 	</select>
 </mapper>

@@ -21,6 +21,7 @@
 					<td style="text-align: center;" id="td-check">审核</td>
 				</c:if>
 
+				<td style="text-align: center;">考核方式</td>
 				<td style="text-align: center;">类型</td>
 				<td style="text-align: center;">金额(元)</td>
 				<td style="text-align: center;">创建时间</td>
@@ -50,13 +51,21 @@
 									</c:when>
 								</c:choose></td>
 						</c:if>
+						<td style="text-align: center;">
+								<c:choose>
+								<c:when test="${item.bonusType==1 || item.bonusType==3}">奖励</c:when>
+								<c:when test="${item.bonusType==2 || item.bonusType==4}">惩罚</c:when>
+							</c:choose>
+						</td>
+						<td style="text-align: center;">
+								<c:choose>
+								<c:when test="${item.bonusType==1 || item.bonusType==2}">交易佣金</c:when>
+								<c:when test="${item.bonusType==3 || item.bonusType==4}">验码佣金</c:when>
+							</c:choose>
+						</td>
 						<td style="text-align: center;"><c:choose>
-								<c:when test="${item.bonusType==1 }">奖励</c:when>
-								<c:when test="${item.bonusType==2 }">惩罚</c:when>
-							</c:choose></td>
-						<td style="text-align: center;"><c:choose>
-								<c:when test="${item.bonusType==1 }">${item.amount }</c:when>
-								<c:when test="${item.bonusType==2 }">-${item.amount }</c:when>
+								<c:when test="${item.bonusType==1 || item.bonusType==3}">${item.amount }</c:when>
+								<c:when test="${item.bonusType==2 || item.bonusType==4}">-${item.amount }</c:when>
 							</c:choose></td>
 						<td style="text-align: center;"><fmt:formatDate
 								value="${item.createAt}" pattern="yyyy-MM-dd HH:mm:ss" /></td>

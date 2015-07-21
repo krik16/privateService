@@ -69,6 +69,17 @@ public enum ConstantEnum {
     COUPON_COMMISSION_STATUS0(0,"待审核"),
     COUPON_COMMISSION_STATUS1(1,"审核通过"),
     
+    BONUS_STYLE1(1,"奖励"),
+    BONUS_STYLE2(2,"惩罚"),
+    
+    BONUS_OPERATE1(1,"交易佣金"),
+    BONUS_OPERATE2(2,"验码佣金"),
+
+    BONUS_TYPE1(1,"交易佣金奖励"),
+    BONUS_TYPE2(2,"交易佣金惩罚"),
+    BONUS_TYPE3(3,"验码佣金奖励"),
+    BONUS_TYPE4(4,"验码佣金惩罚"),
+    
     EXCEL_LIMIT_COUNT(5000,"交易明细报表导出限制总数");
     interface ACCOUNT_STATUS{
         int ACCOUNT_STATUS0 = 0;//登陆账号和支付账号正常

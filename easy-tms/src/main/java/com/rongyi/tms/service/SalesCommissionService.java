@@ -105,6 +105,16 @@ public interface SalesCommissionService {
      */
     public CommissionInfoVO selectCommissionInfo(String userId);
     
+    
+    /**	
+     * @Description: 获取审核失败佣金（包含交易佣金和商品佣金） 
+     * @param userId
+     * @return	
+     * @Author:  柯军
+     * @datetime:2015年7月21日下午7:56:14
+     **/
+    public CommissionInfoVO selectFaleCommission(String userId);
+    
     /**
      * 
      * @Description 统计用户佣金金额并通过MQ 发送到虚拟账户
