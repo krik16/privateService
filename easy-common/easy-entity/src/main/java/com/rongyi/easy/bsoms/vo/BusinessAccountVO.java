@@ -93,5 +93,15 @@ public class BusinessAccountVO implements Serializable {
 	public void setCreateSource(Integer createSource) {
 		this.createSource = createSource;
 	}
+	@Override
+	public String toString() {
+		return "BusinessAccountVO [id=" + id + ", account=" + account
+				+ ", userName=" + userName + ", type=" + type + ", identity="
+				+ identity + ", groupName=" + groupName + ", ownerName="
+				+ ownerName + ", mallName=" + mallName + ", accountStatus="
+				+ accountStatus + ", isSuspended=" + isSuspended
+				+ ", cashAccountStatus=" + cashAccountStatus
+				+ ", createSource=" + createSource + "]";
+	}
 	
 }

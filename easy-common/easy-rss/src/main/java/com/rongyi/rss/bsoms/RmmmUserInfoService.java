@@ -12,6 +12,20 @@ import com.rongyi.easy.bsoms.vo.BusinessAccountVO;
  */
 public interface RmmmUserInfoService {
 
+	/**
+	 * 分页查询商家账户列表
+	 * @param paramsMap
+	 * @param currentPage
+	 * @param pageSize
+	 * @return
+	 */
 	PagingVO<BusinessAccountVO> searchAccountListByMap(Map<String, Object> paramsMap, int currentPage, int pageSize);
 	
+	/**
+	 * 资金账户：冻结/解冻
+	 * @param userId
+	 * @param isSuspended
+	 * @return
+	 */
+	boolean updateAccountSuspended(String userId, boolean isSuspended);
 }
