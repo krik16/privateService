@@ -48,7 +48,7 @@ public class OrderFormEntity implements Serializable{
     private String paymentIdList;
 
     /** 是否已评价 (0否 1是) */
-    private Byte isComment;
+    private Integer isComment;
 
     /** 邮寄地址id */
     private String addressId;
@@ -302,7 +302,7 @@ public class OrderFormEntity implements Serializable{
      * 是否已评价 (0否 1是)
      * @return isComment
      */
-    public Byte getIsComment() {
+    public Integer getIsComment() {
         return isComment;
     }
 
@@ -310,7 +310,7 @@ public class OrderFormEntity implements Serializable{
      * 是否已评价 (0否 1是)
      * @param isComment
      */
-    public void setIsComment(Byte isComment) {
+    public void setIsComment(Integer isComment) {
         this.isComment = isComment;
     }
 
