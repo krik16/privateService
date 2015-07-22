@@ -1,12 +1,12 @@
 /** 
-* @Title: AccountInfoServiceImpl.java 
-* @Package com.rongyi.tms.service.impl 
-* @Description: 收入管理-账号信息接口 实现
-* @author 郑亦梁  zhengyiliang@rongyi.com
-* @date 2015年5月26日 下午2:50:10 
-* @version V1.0   
-* Copyright (C),上海容易网电子商务有限公司
-*/
+ * @Title: AccountInfoServiceImpl.java 
+ * @Package com.rongyi.tms.service.impl 
+ * @Description: 收入管理-账号信息接口 实现
+ * @author 郑亦梁  zhengyiliang@rongyi.com
+ * @date 2015年5月26日 下午2:50:10 
+ * @version V1.0   
+ * Copyright (C),上海容易网电子商务有限公司
+ */
 package com.rongyi.tms.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,39 +21,36 @@ import com.rongyi.tms.service.SalesCommissionService;
 
 /**
  * @author ZhengYl
- *
+ * 
  */
 @Service
-public class AccountInfoServiceImpl implements AccountInfoService{
-	
+public class AccountInfoServiceImpl implements AccountInfoService {
+
 	@Autowired
 	private DrawApplyService drawApplyService;
-	
+
 	@Autowired
 	private SalesCommissionService salesCommissionService;
-	
-	/* (non-Javadoc) 
-	* @param userId
-	* @return 
-	* @see com.rongyi.rss.tms.AccountInfoService#queryAccountInfo(java.lang.String) 
-	*/
-	public VirtualAccountVO queryAccountInfo(String userId){
+
+	public VirtualAccountVO queryAccountInfo(String userId) {
 		VirtualAccountVO result = new VirtualAccountVO();
 		result.setUserId(userId);
-		
+
 		// 查询提现金额（在审）合计
 		DrawApplyInfoVO drawApplyVo = drawApplyService.selectDrawApplyInfo(userId);
-		if(drawApplyVo != null){
+		if (drawApplyVo != null) {
 			result.setDrawForAuditTotal(drawApplyVo.getDrawForAuditTotal());
 		}
-		
+
 		// 查询佣金金额（在审）合计
 		CommissionInfoVO commissionVo = salesCommissionService.selectCommissionInfo(userId);
-		if(commissionVo != null){
+		if (commissionVo != null) {
 			result.setCommissionForAuditTotal(commissionVo.getCommissionForAuditTotal());
 		}
-
-		
+		// 审核失败佣金（本月）合计
+		commissionVo = salesCommissionService.selectFaleCommission(userId);
+		if (commissionVo != null && commissionVo.getFaleCommissionMonth() != null)
+			result.setFaleCommissionMonth(commissionVo.getFaleCommissionMonth());
 		return result;
 	}
 }

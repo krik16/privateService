@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.annotation.Rollback;
 import org.testng.annotations.Test;
 
@@ -22,6 +23,8 @@ import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.tms.entity.SalesCommission;
 import com.rongyi.easy.tms.vo.SalesCommissionParam;
 import com.rongyi.easy.tms.vo.SalesCommissionVO;
+import com.rongyi.easy.va.vo.VirtualAccountVO;
+import com.rongyi.rss.tms.AccountInfoService;
 import com.rongyi.tms.BaseTest;
 import com.rongyi.tms.moudle.vo.CheckParam;
 import com.rongyi.tms.moudle.vo.CommissionInfoVO;
@@ -34,6 +37,10 @@ public class SalesCommissionImplTest extends BaseTest {
 
 	@Autowired
 	SalesCommissionService salesCommissionService;
+	
+	@Autowired
+	@Qualifier("accountInfoServiceImpl")
+	AccountInfoService accountInfoService;
 
 	@Rollback(false)
 //	@Test(description = "插入")
@@ -105,10 +112,17 @@ public class SalesCommissionImplTest extends BaseTest {
 //        salesCommissionService.updateBatchHadSendedVA(ids);
     }
 	
-	@Test(description="查询当月失败佣金")
+//	@Test(description="查询当月失败佣金")
 	public void selectFaleCommissionTest(){
 		CommissionInfoVO comm = salesCommissionService.selectFaleCommission("244");
 		System.err.println("result="+comm.getFaleCommissionMonth());
 	}
 	
+	@Test
+	public void queryAccountInfoTest(){
+		VirtualAccountVO vir = accountInfoService.queryAccountInfo("244");
+		System.err.println("本月失败佣金："+vir.getFaleCommissionMonth());
+		System.err.println("提现中的佣金："+vir.getDrawForAuditTotal());
+		System.err.println("审核中的佣金："+vir.getCommissionForAuditTotal());
+	}
 }
