@@ -32,7 +32,7 @@ public class Coupon implements Serializable {
     private String title;// 券名称
 
     @Property("coupon_type")
-    private String couponType;// 券类型: 优惠券[02] 现金券[03]
+    private String couponType;// 券类型: 抵扣券[01] 代金券[02] 红包[03]
 
     @Property("total_count")
     private Integer totalCount;// 总量
@@ -204,6 +204,9 @@ public class Coupon implements Serializable {
      */
     @Property("out_status")
     private String outStatus;
+
+    @Property("check_fail_reason")
+    private List<String> checkFailReason;
     //推广渠道待定
     //导入渠道待定
 
@@ -663,6 +666,14 @@ public class Coupon implements Serializable {
 
 	public void setCategories(CouponCategories categories) {
 		this.categories = categories;
+	}
+
+	public List<String> getCheckFailReason() {
+		return checkFailReason;
+	}
+
+	public void setCheckFailReason(List<String> checkFailReason) {
+		this.checkFailReason = checkFailReason;
 	}
 
 
