@@ -233,15 +233,12 @@
 	</dependencies>
 	
 	<build>
-		<filters>
-			<filter>src/main/resources/maven_build/${environmentProperties}</filter>
-		</filters>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
 				<filtering>true</filtering>
 				<excludes>
-					<exclude>maven_build/**/*</exclude>
+					<exclude>${excludePropertyFiles}</exclude>
 				</excludes>
 			</resource>
 		</resources>
@@ -255,40 +252,15 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<environmentProperties>01_dev.properties</environmentProperties>
+				<excludePropertyFiles></excludePropertyFiles>
 			</properties>
 		</profile>
+
 		<profile>
-			<!-- 测试环境 -->
+			<!-- 正式环境 -->
 			<id>test</id>
 			<properties>
-				<!-- 环境配置文件 -->
-				<environmentProperties>02_test.properties</environmentProperties>
-			</properties>
-		</profile>
-		<profile>
-			<!-- 演示环境 -->
-			<id>show</id>
-			<properties>
-				<!-- 环境配置文件 -->
-				<environmentProperties>04_show.properties</environmentProperties>
-			</properties>
-		</profile>
-		<profile>
-			<!-- 正式环境 -->
-			<id>deploy</id>
-			<properties>
-				<!-- 环境配置文件 -->
-				<environmentProperties>03_deploy.properties</environmentProperties>
-			</properties>
-		</profile>
-		<profile>
-			<!-- 正式环境 -->
-			<id>test2</id>
-			
-			<properties>
-				<!-- 环境配置文件 -->
-				<environmentProperties>05_test2.properties</environmentProperties>
+				<excludePropertyFiles>maven_build/**/*</excludePropertyFiles>
 			</properties>
 		</profile>
 	</profiles>
