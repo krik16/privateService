@@ -206,6 +206,7 @@
 						<td>卡卷类型</td>
 						<td>卡卷名称</td>
 						<td>有效期</td>
+						<td>面值（元）</td>
 						<td>抵扣金额（元）</td>
 					</tr>
 
@@ -218,6 +219,7 @@
 										<td>${item.title }</td>
 										<td>${item.validBeginDate } - ${item.validEndDate }</td>
 										<td>${item.discount }</td>
+										<td>${item.realDiscount }</td>
 									</tr>
 								</c:forEach>
 							</c:when>
@@ -264,10 +266,14 @@
 							</c:choose>
 						</li>
 
-						<li class="name">抵扣金额</li>
+						<li class="name">卡券抵扣金额</li>
 						<li class="line">|</li>
 						<li class="data max2">${discountTotal }（元）</li>
 
+						<li class="name">积分抵扣金额</li>
+						<li class="line">|</li>
+						<li class="data max2">--（元）</li>
+						
 						<li class="name">买家应付金额</li>
 						<li class="line">|</li>
 						<li class="data max2">${order.totalPrice }（元）</li>

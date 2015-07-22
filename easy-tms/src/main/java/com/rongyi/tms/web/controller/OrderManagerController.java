@@ -2,7 +2,7 @@ package com.rongyi.tms.web.controller;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.common.util.JsonUtil;
-import com.rongyi.easy.coupon.vo.UserCouponVO;
+import com.rongyi.easy.coupon.vo.MMUserCouponVO;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
 import com.rongyi.easy.mcmc.vo.CommodityWebVO;
 import com.rongyi.easy.osm.entity.OrderDetailFormEntity;
@@ -12,7 +12,7 @@ import com.rongyi.easy.rmmm.entity.ShopInfoEntity;
 import com.rongyi.easy.rmmm.vo.OrderManagerVO;
 import com.rongyi.easy.rmmm.vo.ParentOrderVO;
 import com.rongyi.easy.rmmm.vo.SonOrderVO;
-import com.rongyi.rss.coupon.IUserCouponService;
+import com.rongyi.rss.coupon.MMUserCouponService;
 import com.rongyi.rss.malllife.roa.ROACommodityService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.rss.mallshop.order.ROAOrderDetailFormService;
@@ -71,7 +71,7 @@ public class OrderManagerController extends BaseController {
 	ROAMalllifeUserService roaMalllifeUserService;
 
 	@Autowired
-	IUserCouponService iUserCouponService;
+	MMUserCouponService mMUserCouponService;
 
 	@Autowired
 	ROACommodityService commodityService;
@@ -151,7 +151,7 @@ public class OrderManagerController extends BaseController {
 				throw new RuntimeException("orderId is null or empty");
 			}
 			ParentOrderVO orderDetailVo = roaOrderService.getParentOrderVO(Integer.valueOf(orderId));
-			List<UserCouponVO> cashCoupons = new ArrayList<UserCouponVO>();
+			List<MMUserCouponVO> cashCoupons = new ArrayList<MMUserCouponVO>();
 			List<SonOrderVO> sonOrderList = orderDetailVo.getSonOrderList();
 			BigDecimal discountTotal = new BigDecimal("0.00");//总红包（抵扣）
 			BigDecimal commidityTotalPice = new BigDecimal("0.00");//商品总价
@@ -160,10 +160,16 @@ public class OrderManagerController extends BaseController {
 					commidityTotalPice = commidityTotalPice.add(new BigDecimal(sonOrderVo.getNum())
 							.multiply(new BigDecimal(sonOrderVo.getCommodityCurrentPrice())));
 					if (StringUtils.isNotBlank(sonOrderVo.getCouponCode())) {
-						UserCouponVO userCouponVO = iUserCouponService.getUserCouponByCouponCode(sonOrderVo
+						MMUserCouponVO userCouponVO = mMUserCouponService.getUserCouponByCouponCode(sonOrderVo
 								.getCouponCode());
 						if (userCouponVO != null) {
-							discountTotal = discountTotal.add(new BigDecimal(userCouponVO.getDiscount()));
+							if (userCouponVO.getDiscount().compareTo(sonOrderVo.getRealAmount()) == 1) {
+								userCouponVO.setRealDiscount(sonOrderVo.getRealAmount());
+								discountTotal = discountTotal.add(sonOrderVo.getRealAmount());
+							}else{
+								userCouponVO.setRealDiscount(userCouponVO.getDiscount());
+								discountTotal = discountTotal.add(userCouponVO.getDiscount());
+							}
 							cashCoupons.add(userCouponVO);
 						}
 					}
