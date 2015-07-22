@@ -78,7 +78,7 @@ public class OSMStandbyService {
 			JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 			mailSender.setHost("smtp.rongyi.com");
 			mailSender.setUsername("zhengyiliang@rongyi.com");
-			mailSender.setPassword("samsung28");
+			mailSender.setPassword("123456");
 			mailSender.send(mailMessage);
 		} catch (Exception exception) {
 			exception.printStackTrace();
