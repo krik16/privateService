@@ -12,6 +12,7 @@ $(document).ready(function() {
 
 	$("#search").click(function(event) {
 		var status = $("#hadChecked").val();
+		var vaStatus = $("#vaStatus").val();
 		
 		var commissionNo = $("#liushui-no").val();
 		if(commissionNo!=null&&commissionNo!=""&&!isNaN(commissionNo)){
@@ -30,7 +31,7 @@ $(document).ready(function() {
 			return;
 		}
 		
-		ajaxloadApplys(null,commissionNo,mall,shop,amountStart,amountEnd,name,status);
+		ajaxloadApplys(null,commissionNo,mall,shop,amountStart,amountEnd,name,status,vaStatus);
 	});
 	$('.fancybox').fancybox();
 	$('.fancybox-buttons').fancybox({
@@ -56,7 +57,7 @@ $(document).ready(function() {
 	});
 
 });
-function ajaxloadApplys(page,commissionNo,mall,shop,amountStart,amountEnd,name,status) {
+function ajaxloadApplys(page,commissionNo,mall,shop,amountStart,amountEnd,name,status,vaStatus) {
 	var url_ = "../sc/list?module=finance";
 	var param = $("#isChecked").val();
 	var start = $("input[name='start']").val();
@@ -87,7 +88,8 @@ function ajaxloadApplys(page,commissionNo,mall,shop,amountStart,amountEnd,name,s
 			"amountEnd" : amountEnd,
 			"sellerName" : name,
 			"page" : currpage,
-			"status" : param
+			"status" : param,
+			"vaStatus":vaStatus
 		},
 		success : function(data) {
 			$("#resultList").html(data);
@@ -162,6 +164,7 @@ function switchCheck(check) {
 
 	} else {
 		$("#checkLi").css("display", "block");
+		$("#vaStatusLi").css("display", "block");
 		$("#uncheck").removeClass("change-color");
 		$("#uncheck").addClass("now");
 		$("#checked").addClass("change-color");

@@ -64,11 +64,10 @@ public class SalesCommissionImplTest extends BaseTest {
        
 	}
 	@Rollback(false)
-//    @Test(description = "查找")
+    @Test(description = "查找")
     public void searchPage() {
 	    SalesCommissionParam param=new SalesCommissionParam();
 	    param.setStatus("1,0");
-	    
 	    param.setMallName("");
 	    param.setAmountEnd("");
 	    param.setAmountStart("");
@@ -77,6 +76,7 @@ public class SalesCommissionImplTest extends BaseTest {
 	    param.setSellerName("");
 	    param.setUploadEndTime("");
 	    param.setUploadStartTime("");
+	    param.setVaStatus("-1,0,1");
 	    PagingVO<SalesCommissionVO> vos= salesCommissionService.findByPage(param);
 	    System.err.println("size:"+vos.getDataList().size());
     }
@@ -118,11 +118,12 @@ public class SalesCommissionImplTest extends BaseTest {
 		System.err.println("result="+comm.getFaleCommissionMonth());
 	}
 	
-	@Test
+//	@Test
 	public void queryAccountInfoTest(){
 		VirtualAccountVO vir = accountInfoService.queryAccountInfo("244");
 		System.err.println("本月失败佣金："+vir.getFaleCommissionMonth());
 		System.err.println("提现中的佣金："+vir.getDrawForAuditTotal());
 		System.err.println("审核中的佣金："+vir.getCommissionForAuditTotal());
+		System.err.println("今日交易金额："+vir.getTradeDaily());
 	}
 }
