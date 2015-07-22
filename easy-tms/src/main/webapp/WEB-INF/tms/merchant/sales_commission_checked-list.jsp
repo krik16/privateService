@@ -51,10 +51,10 @@
 			 		<td style="text-align: center;">${item.commissionAmount }</td>
 					<c:choose>
 						<c:when test="${item.status eq 6}">
-							<td style="text-align: center;">佣金已到账</td>
+							<td style="text-align: center;">已到账</td>
 						</c:when>
 						<c:otherwise>
-							<td style="text-align: center;">佣金未到账</td>
+							<td style="text-align: center;">未到账</td>
 						</c:otherwise>
 					</c:choose>
 					</tr>

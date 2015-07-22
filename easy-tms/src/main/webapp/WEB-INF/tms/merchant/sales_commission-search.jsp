@@ -83,6 +83,13 @@
 						<option value="-1,-2">未通过</option>
 				</select>
 				</li>
+				<li id="vaStatusLi" style="display:none;">返佣状态：
+				<select id="vaStatus" style="width: 100px">
+						<option value="">--全部--</option>
+						<option value="6">已到账</option>
+						<option value="-2,-1,0,1,2,3,4,5">未到账</option>
+				</select>
+				</li>
 				<a id="tt1" class="fancybox-buttons" data-fancybox-group="button" href=""><img width="50" height="50" style="display:none;" src="${ctx}/images/icon_1.png" alt="点击放大" /></a>
 				<li>小票上传时间段:<input name="start" type="text" value="" class="min bg2 startTime" id="payStartTime"/><span style="margin: 0 -55px 0 -15px">至</span> 
 							<input name="end" type="text" value="" class="min bg2 endTime" id="payEndTime"  style="margin-right: 0px;"/> 

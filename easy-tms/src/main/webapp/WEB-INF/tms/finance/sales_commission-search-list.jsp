@@ -19,6 +19,7 @@
             <td style="text-align: center;">卖家账号</td>
             <td style="text-align: center;">卖家姓名</td>
             <td style="text-align: center;">返佣金额</td>
+            <td style="text-align: center;">返佣状态</td>
             <td style="text-align: center;" name="operate">操作</td>
         </tr>
 		<c:choose>
@@ -43,6 +44,7 @@
 			 		<td style="text-align: center;">${item.sellerAccount }</td>
 			 		<td style="text-align: center;">${item.sellerName }</td>
 			 		<td style="text-align: center;">${item.commissionAmount }</td>
+			 		<td style="text-align: center;">未到账</td>
 			 		<td style="text-align: center;" name="operate">
 			 			<sec:authorize ifAnyGranted="TMS_F_SC_VERIFY" >
 				 			<a href="javascript:void(0);" class="btnsearch" id="checkok-${item.id }" onclick="checkApplys(${item.id},3)">审核通过</a>
