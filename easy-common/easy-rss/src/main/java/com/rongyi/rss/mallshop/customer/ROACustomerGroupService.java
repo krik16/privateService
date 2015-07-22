@@ -1,6 +1,8 @@
 package com.rongyi.rss.mallshop.customer;
 
 import com.rongyi.easy.mallshop.customer.CustomerGroup;
+import com.rongyi.easy.mallshop.customer.CustomerGroupPageVO;
+import com.rongyi.easy.mallshop.customer.PageParam;
 
 import java.util.List;
 
@@ -9,11 +11,11 @@ import java.util.List;
  */
 public interface ROACustomerGroupService {
 
-    /**
-     * 获取导购的客户组列表
-     * @param guideId
-     * @return
-     * @throws Exception
-     */
-    public List<CustomerGroup> selectByGuide(Integer guideId) throws Exception;
+    public CustomerGroupPageVO selectByGuide(Integer guideId, PageParam pageParam) throws Exception;
+
+    public Integer saveCustomerGroup(CustomerGroup customerGroup);
+
+    public void updateCustomerGroup(CustomerGroup customerGroup);
+
+    public void deleteCustomerGroup(Integer groupId);
 }

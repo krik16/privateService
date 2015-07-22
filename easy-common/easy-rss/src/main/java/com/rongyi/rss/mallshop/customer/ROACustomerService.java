@@ -3,9 +3,9 @@ package com.rongyi.rss.mallshop.customer;
 import com.rongyi.easy.mallshop.customer.*;
 
 /**
- * Created by xgq on 2015/7/21.
+ * Created by xgq on 2015/7/22.
  */
-public interface ICustomerService {
+public interface ROACustomerService {
     public CustomerVO selectCustomer(Integer customerId) throws Exception;
 
     public Integer saveCustomer(Customer customer);
