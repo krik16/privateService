@@ -39,17 +39,17 @@
             <dependency>
                 <groupId>com.rongyi</groupId>
                 <artifactId>easy-entity</artifactId>
-                <version>1.0.0-RELEASE</version>
+                <version>1.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.rongyi</groupId>
                 <artifactId>easy-core</artifactId>
-                <version>1.0.0-RELEASE</version>
+                <version>1.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.rongyi</groupId>
                 <artifactId>easy-rss</artifactId>
-                <version>1.0.0-RELEASE</version>
+                <version>1.0.1-SNAPSHOT</version>
             </dependency>
            
             <!-- IBM MQ -->

@@ -42,7 +42,7 @@ public class OrderEventTest {
 		order.setCreateAt(new Date());
 		order.setDisconntFee(new BigDecimal(20));
 		order.setNextStatusTime(DateUtil.addHours(new Date(), 24));
-		order.setIsComment(0);
+//		order.setIsComment(0);
 		order.setExpressInfoId("WL0001");
 		order.setOrderNo(ORDER_NUM_TEST);
 		order.setOrderSource(1);
