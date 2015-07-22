@@ -47,11 +47,6 @@
                 <artifactId>easy-rss</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.rongyi</groupId>
-                <artifactId>easy-mcmc</artifactId>
-                <version>${project.version}</version>
-            </dependency>
             <!-- IBM MQ -->
             <dependency>
                 <groupId>com.ibm</groupId>
