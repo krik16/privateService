@@ -15,8 +15,7 @@ $(document).ready(function() {
 		var mall = $("input[name='mallid']").val();
 		var shop = $("input[name='shopid']").val();
 		var status = $("#hadChecked").val();
-		
-		
+		var vaStatus = $("#vaStatus").val();
 		var amountStart = $("#jine-start").val();
 		var amountEnd = $('#jine-end').val();
 		if(mall.replace(/(^\s*)|(\s*$)/g, "")==""&&shop.replace(/(^\s*)|(\s*$)/g, "")!=""){
@@ -27,7 +26,7 @@ $(document).ready(function() {
 			commissionNo=parseInt(commissionNo)-100000000;
 		}
 		
-		ajaxloadApplys(null,status,commissionNo,name,mall,shop,amountStart,amountEnd);
+		ajaxloadApplys(null,status,commissionNo,name,mall,shop,amountStart,amountEnd,vaStatus);
 	});
 	
 	$('.fancybox').fancybox();
@@ -53,7 +52,7 @@ $(document).ready(function() {
 		}
 	});
 });
-function ajaxloadApplys(page,status,commissionNo,name,mall,shop,amountStart,amountEnd) {
+function ajaxloadApplys(page,status,commissionNo,name,mall,shop,amountStart,amountEnd,vaStatus) {
 	var url_ = "../sc/list?module=merchant";
 	var param = $("#isChecked").val();
 	var start = $("input[name='start']").val();
@@ -84,7 +83,8 @@ function ajaxloadApplys(page,status,commissionNo,name,mall,shop,amountStart,amou
 			"amountEnd" : amountEnd,
 			"sellerName" : name,
 			"page" : currpage,
-			"status" : param
+			"status" : param,
+			"vaStatus":vaStatus
 		},
 		success : function(data) {
 			$("#resultList").html(data);
@@ -169,6 +169,7 @@ function switchCheck(check) {
 
 	} else {
 		$("#checkLi").css("display", "block");
+		$("#vaStatusLi").css("display", "block");
 		$("#uncheck").removeClass("change-color");
 		$("#uncheck").addClass("now");
 		$("#checked").addClass("change-color");

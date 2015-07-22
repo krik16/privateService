@@ -19,6 +19,7 @@
             <td style="text-align: center;">卖家账号</td>
             <td style="text-align: center;">卖家姓名</td>
             <td style="text-align: center;">返佣金额</td>
+            <td style="text-align: center;">返佣状态</td>
         </tr>
 		<c:choose>
 			<c:when test="${not empty list}">
@@ -46,7 +47,14 @@
 			 		<td style="text-align: center;">${item.sellerAccount }</td>
 			 		<td style="text-align: center;">${item.sellerName }</td>
 			 		<td style="text-align: center;">${item.commissionAmount }</td>
-			 		
+			 		<c:choose>
+						<c:when test="${item.status eq 6}">
+							<td style="text-align: center;">已到账</td>
+						</c:when>
+						<c:otherwise>
+							<td style="text-align: center;">未到账</td>
+						</c:otherwise>
+					</c:choose>
 					</tr>
 			 	</c:forEach>
 			</c:when>

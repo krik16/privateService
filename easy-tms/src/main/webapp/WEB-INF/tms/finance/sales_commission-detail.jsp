@@ -96,6 +96,15 @@ $('.fancybox-buttons').fancybox({
 								<li class="li2">${apply.shopName}</li>
 								<li class="li1">卖家姓名：</li>
 								<li class="li2">${apply.sellerName }</li>
+								<li class="li1">返佣状态：</li>
+								<c:choose>
+									<c:when test="${apply.status eq 6 }">
+										<li class="li2">已到账</li>
+									</c:when>
+									<c:otherwise>
+										<li class="li2">未到账</li>
+									</c:otherwise>
+								</c:choose>
 							</ul>
 							
 						</div>

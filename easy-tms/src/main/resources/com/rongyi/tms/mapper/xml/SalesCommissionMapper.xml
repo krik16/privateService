@@ -155,6 +155,13 @@
 		<if test="amountEnd != null and amountEnd !=0">
 			and commission_amount &lt;= #{amountEnd,jdbcType=DECIMAL}
 		</if>
+		<if test="vaStatus != null and vaStatus != ''">
+			and status in 
+			<foreach collection="vaStatus" index="index" item="item" open="("
+				separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
 		order by ${orderBy}
 		limit
 		#{begin,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
@@ -204,6 +211,13 @@
 		</if>
 		<if test="amountEnd != null and amountEnd !=0">
 			and commission_amount &lt;= #{amountEnd,jdbcType=DECIMAL}
+		</if>
+		<if test="vaStatus != null and vaStatus != ''">
+			and status in 
+			<foreach collection="vaStatus" index="index" item="item" open="("
+				separator="," close=")">
+				#{item}
+			</foreach>
 		</if>
 	</select>
 	<select id="selectPageBonus" resultMap="BonusMap" parameterType="map">
