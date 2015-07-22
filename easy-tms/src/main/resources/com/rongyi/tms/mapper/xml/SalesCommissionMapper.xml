@@ -64,10 +64,10 @@
 		<result property="commissionAmount" column="amount_total"
 			jdbcType="DECIMAL" />
 	</resultMap>
-	<resultMap id="FaleCommissionMonth"
-		type="com.rongyi.tms.moudle.vo.CommissionInfoVO">
+	<resultMap id="FaleCommissionMonth" type="com.rongyi.tms.moudle.vo.CommissionInfoVO">
 		<id property="userId" column="guide_id" jdbcType="VARCHAR" />
-		<result property="faleCommissionMonth" column="fale_commission_month" jdbcType="DECIMAL" />
+		<result property="faleCommissionMonth" column="fale_commission_month"
+			jdbcType="DECIMAL" />
 	</resultMap>
 	<parameterMap type="map" id="checkMap">
 		<parameter property="commission_ids" jdbcType="VARCHAR"
@@ -532,18 +532,22 @@
 	<select id="selectCommissionInfoByUserId" resultMap="CommissionInfo"
 		parameterType="java.util.Map">
 		SELECT guide_id,
-		SUM(CASE WHEN (`status` &gt; 0 AND
-		`status` &lt; 5) THEN commission_amount
+		SUM(CASE WHEN (
+		(`status` &gt; 0 AND
+		`status` &lt; 5 AND type IS NULL) OR (`status` = 0 AND type = 3)
+		) THEN
+		commission_amount
 		ELSE 0 END) AS
 		commission_total,
-		SUM(CASE WHEN (`status` &gt; 0 AND `status` &lt; 5
+		SUM(CASE WHEN
+		(`status` &gt; 0 AND `status` &lt; 5
 		AND DATEDIFF(create_at,
-		NOW()) = 0) THEN commission_amount ELSE 0 END)
+		NOW()) = 0
+		and
+		type IS NULL) THEN commission_amount ELSE 0 END)
 		AS commission_today
 		FROM sales_commission
-		WHERE guide_id = #{userId} AND
-		(type IS NULL or type =
-		3);
+		WHERE guide_id = #{userId};
 	</select>
 	<select id="commissionAmountTotal" resultMap="CommissionAmountTotal">
 		select
