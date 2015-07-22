@@ -10,15 +10,14 @@ public class ExclusiveGuideListVO extends PageVO implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private List<UserExclusiveGuideVO> userExclusiveGuideList;
+	private List<UserExclusiveGuideVO> list;
 
-	public List<UserExclusiveGuideVO> getUserExclusiveGuideList() {
-		return userExclusiveGuideList;
+	public List<UserExclusiveGuideVO> getList() {
+		return list;
 	}
 
-	public void setUserExclusiveGuideList(
-			List<UserExclusiveGuideVO> userExclusiveGuideList) {
-		this.userExclusiveGuideList = userExclusiveGuideList;
+	public void setList(List<UserExclusiveGuideVO> list) {
+		this.list = list;
 	}
 	
 }
