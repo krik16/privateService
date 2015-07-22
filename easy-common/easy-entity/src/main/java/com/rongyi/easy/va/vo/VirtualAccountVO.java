@@ -61,7 +61,7 @@ public class VirtualAccountVO implements Serializable {
 	/**
 	 * 失败佣金
 	 */
-	private BigDecimal faleCommission;
+	private BigDecimal faleCommissionMonth;
 
 	public String getUserId() {
 		return userId;
@@ -167,12 +167,12 @@ public class VirtualAccountVO implements Serializable {
 		this.isSuspended = isSuspended;
 	}
 
-	public BigDecimal getFaleCommission() {
-		return faleCommission;
+	public BigDecimal getFaleCommissionMonth() {
+		return faleCommissionMonth;
 	}
 
-	public void setFaleCommission(BigDecimal faleCommission) {
-		this.faleCommission = faleCommission;
+	public void setFaleCommissionMonth(BigDecimal faleCommissionMonth) {
+		this.faleCommissionMonth = faleCommissionMonth;
 	}
 	
 }
