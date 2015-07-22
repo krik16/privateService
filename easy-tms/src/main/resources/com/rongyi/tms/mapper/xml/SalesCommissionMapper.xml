@@ -542,7 +542,8 @@
 		AS commission_today
 		FROM sales_commission
 		WHERE guide_id = #{userId} AND
-		type IS NULL;
+		(type IS NULL or type =
+		3);
 	</select>
 	<select id="commissionAmountTotal" resultMap="CommissionAmountTotal">
 		select
@@ -570,6 +571,6 @@
 		sales_commission
 		WHERE guide_id = #{userId}
 		AND (type IS NULL or type =
-		3 or type = 4)
+		3)
 	</select>
 </mapper>
