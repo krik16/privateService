@@ -124,5 +124,6 @@ public class SalesCommissionImplTest extends BaseTest {
 		System.err.println("本月失败佣金："+vir.getFaleCommissionMonth());
 		System.err.println("提现中的佣金："+vir.getDrawForAuditTotal());
 		System.err.println("审核中的佣金："+vir.getCommissionForAuditTotal());
+		System.err.println("今日交易金额："+vir.getTradeDaily());
 	}
 }

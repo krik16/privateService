@@ -42,15 +42,15 @@ public class AccountInfoServiceImpl implements AccountInfoService {
 			result.setDrawForAuditTotal(drawApplyVo.getDrawForAuditTotal());
 		}
 
-		// 查询佣金金额（在审）合计
+		// 查询审核中佣金金额（包含交易佣金和验码佣金）合计
 		CommissionInfoVO commissionVo = salesCommissionService.selectCommissionInfo(userId);
 		if (commissionVo != null) {
 			result.setCommissionForAuditTotal(commissionVo.getCommissionForAuditTotal());
 		}
-		// 审核失败佣金（本月）合计
-//		commissionVo = salesCommissionService.selectFaleCommission(userId);
-//		if (commissionVo != null && commissionVo.getFaleCommissionMonth() != null)
-//			result.setFaleCommissionMonth(commissionVo.getFaleCommissionMonth());
+		// 审核失败佣金（本月,包含交易佣金和验码佣金）合计
+		commissionVo = salesCommissionService.selectFaleCommission(userId);
+		if (commissionVo != null && commissionVo.getFaleCommissionMonth() != null)
+			result.setFaleCommissionMonth(commissionVo.getFaleCommissionMonth());
 		return result;
 	}
 }
