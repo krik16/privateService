@@ -23,8 +23,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
 
 import com.rongyi.osm.knowledge.ClockUpdater;
@@ -69,20 +67,20 @@ public class OSMStandbyService {
 	private KieSession kSession;
 
 	public static void main(String[] args) {
-		try {
-			SimpleMailMessage mailMessage = new SimpleMailMessage();
-			mailMessage.setFrom("zhengyiliang@rongyi.com");
-			mailMessage.setTo("zhuze@rongyi.com");
-			mailMessage.setText("TEST HEHE");
-			mailMessage.setSubject("OSM Error Report");
-			JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-			mailSender.setHost("smtp.rongyi.com");
-			mailSender.setUsername("zhengyiliang@rongyi.com");
-			mailSender.setPassword("123456");
-			mailSender.send(mailMessage);
-		} catch (Exception exception) {
-			exception.printStackTrace();
-		}
+//		try {
+//			SimpleMailMessage mailMessage = new SimpleMailMessage();
+//			mailMessage.setFrom("zhengyiliang@rongyi.com");
+//			mailMessage.setTo("zhuze@rongyi.com");
+//			mailMessage.setText("TEST HEHE");
+//			mailMessage.setSubject("OSM Error Report");
+//			JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+//			mailSender.setHost("smtp.rongyi.com");
+//			mailSender.setUsername("zhengyiliang@rongyi.com");
+//			mailSender.setPassword("123456");
+//			mailSender.send(mailMessage);
+//		} catch (Exception exception) {
+//			exception.printStackTrace();
+//		}
 
 	}
 
