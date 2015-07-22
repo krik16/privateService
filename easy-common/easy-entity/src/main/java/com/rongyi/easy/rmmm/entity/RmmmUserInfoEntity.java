@@ -3,6 +3,7 @@ package com.rongyi.easy.rmmm.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+
 public class RmmmUserInfoEntity implements Serializable{
 
     /** 主键  */

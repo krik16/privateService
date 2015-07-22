@@ -60,7 +60,7 @@ public enum CodeEnum {
     ERROR_NO_USER_SHOP("-1124", "该用户没有关联的店铺"),
     ERROR_EXCLUSIVE_GUIDE("-1126","设置专属导购出错"),
     ERROR_CANCEL_EXCLUSIVE_GUIDE("-1127","取消专属导购出错"),
-    ERROR_EXCLUSIVE_GUIDE_LIST("-1128","通过容易逛用户id获取专属导购列表出错"),
+    ERROR_EXCLUSIVE_GUIDE_LIST("-1128","专属导购列表当前页无数据"),
     /** 密码修改 */
     ERROR_ORIGINAL_PASSOWRD("-1212", "原密码不正确"),
     ERROR_NEW_INVALID("-1213", "新密码无效"),
@@ -130,9 +130,10 @@ public enum CodeEnum {
     ERROR_APEAL_MAXOVER("-4001","维权次数已达上限"),
     /** 子订单评价错误提示*/
     ERROR_EVALUATE_EXIST("-5001","已评价"),
-    /** 现金券过期*/
+    /** 现金券优惠券错误提示*/
     ERROR_COUPON_OUTDATE("-6001","此现金券不可用"),
     ERROR_COUPON_REPEAT("-6002","一张现金券只能使用一次"),
+    ERROR_COUPON_PUBLISH_OVER("-6003","每日限量发行数填写错误"),
 
     ERROR_ACCOUNT_INSUFFICIENT_BALANCE("-7001","账户余额不足"),
     ERROR_ACCOUNT_NO_PERMISSION("-7002","账户被冻结或未授权"),
@@ -145,7 +146,8 @@ public enum CodeEnum {
     ERROR_DEBIT_NOTE_STAUTS("-9001","佣金小票审核中，无法再次上传"),
     ERROR_NO_VALIDHISTORY("-9002","没有券码核销记录"),
 
-    ERROR_LOGIN_IN_INVALID("-2000","登录出错")
+    ERROR_LOGIN_IN_INVALID("-2000","登录出错"),
+    ERROR_UN_LOGIN("-10000", "尚未登陆或登陆出错，请重新登录")
     ;
     
     private String code; 
