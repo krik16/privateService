@@ -13,6 +13,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
 
+import com.rongyi.easy.osm.entity.OrderFormEntity;
+
 /**
  * @author ZhengYl
  *
@@ -30,5 +32,7 @@ public class OSMMailSender {
 		mailSender.setUsername("zhengyiliang@rongyi.com");
 		mailSender.setPassword("samsung28");
 		mailSender.send(mailMessage);
+		OrderFormEntity od = new OrderFormEntity();
+		od.setIsComment(1);
 	}
 }
