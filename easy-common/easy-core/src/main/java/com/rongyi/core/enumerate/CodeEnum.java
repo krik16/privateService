@@ -146,7 +146,8 @@ public enum CodeEnum {
     ERROR_DEBIT_NOTE_STAUTS("-9001","佣金小票审核中，无法再次上传"),
     ERROR_NO_VALIDHISTORY("-9002","没有券码核销记录"),
 
-    ERROR_LOGIN_IN_INVALID("-2000","登录出错")
+    ERROR_LOGIN_IN_INVALID("-2000","登录出错"),
+    ERROR_UN_LOGIN("-10000", "尚未登陆或登陆出错，请重新登录")
     ;
     
     private String code; 

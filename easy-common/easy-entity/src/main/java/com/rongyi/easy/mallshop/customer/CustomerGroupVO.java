@@ -32,4 +32,11 @@ public class CustomerGroupVO implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    public CustomerGroup toCustomerGroup() {
+        CustomerGroup customerGroup = new CustomerGroup();
+        customerGroup.setName(this.name);
+        customerGroup.setId(this.id);
+        return customerGroup;
+    }
 }
