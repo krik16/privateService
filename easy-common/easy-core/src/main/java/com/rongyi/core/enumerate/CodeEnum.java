@@ -60,7 +60,7 @@ public enum CodeEnum {
     ERROR_NO_USER_SHOP("-1124", "该用户没有关联的店铺"),
     ERROR_EXCLUSIVE_GUIDE("-1126","设置专属导购出错"),
     ERROR_CANCEL_EXCLUSIVE_GUIDE("-1127","取消专属导购出错"),
-    ERROR_EXCLUSIVE_GUIDE_LIST("-1128","通过容易逛用户id获取专属导购列表出错"),
+    ERROR_EXCLUSIVE_GUIDE_LIST("-1128","专属导购列表当前页无数据"),
     /** 密码修改 */
     ERROR_ORIGINAL_PASSOWRD("-1212", "原密码不正确"),
     ERROR_NEW_INVALID("-1213", "新密码无效"),
