@@ -29,6 +29,11 @@ public class QueryParam {
      */
     private int pageSize;
 
+    /**
+     * 开始查询记录 对应 (limit 0,10)中的 0
+     */
+    private int offset;
+
     public List<QueryFilter> getQueryFilters() {
         return queryFilters;
     }
@@ -65,5 +70,13 @@ public class QueryParam {
 
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public int getOffset() {
+        return  (this.getCurrentPage()-1)*this.getPageSize();
+    }
+
+    public void setOffset(int offset) {
+        this.offset = offset;
     }
 }

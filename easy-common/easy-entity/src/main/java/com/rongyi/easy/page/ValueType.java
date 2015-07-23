@@ -9,71 +9,61 @@ import java.util.Date;
  * Created at 2015/7/21 17:17.
  */
 public  enum ValueType {
-    String, DateTime, Integer, Float, Boolean, Date;
+    VARCHAR, DATE, TIMESTAMP, DECIMAL, BIGINT, FLOAT,TINYINT,INTEGER;
 
     public static ValueType toType(String type) {
-        if ("1".equals(type)) {
-            return String;
+        if ("VARCHAR".equals(type)) {
+            return VARCHAR;
         }
-        if ("2".equals(type)) {
-            return DateTime;
+        if ("DATE".equals(type)) {
+            return DATE;
         }
-        if ("3".equals(type)) {
-            return Integer;
+        if ("TIMESTAMP".equals(type)) {
+            return TIMESTAMP;
         }
-        if ("4".equals(type)) {
-            return Float;
+        if ("DECIMAL".equals(type)) {
+            return DECIMAL;
         }
-        if ("5".equals(type)) {
-            return Boolean;
+        if ("BIGINT".equals(type)) {
+            return BIGINT;
         }
-        if ("6".equals(type)) {
-            return Date;
+        if ("FLOAT".equals(type)) {
+            return FLOAT;
         }
-        return null;
-    }
-
-    public static ValueType toValueType(Object type) {
-        if ((type instanceof String)) {
-            return String;
+        if ("TINYINT".equals(type)) {
+            return TINYINT;
         }
-        if ((type instanceof Timestamp)) {
-            return DateTime;
-        }
-        if ((type instanceof Integer)) {
-            return Integer;
-        }
-        if ((type instanceof Float)) {
-            return Float;
-        }
-        if ((type instanceof Boolean)) {
-            return Boolean;
-        }
-        if ((type instanceof Date)) {
-            return Date;
+        if ("INTEGER".equals(type)) {
+            return INTEGER;
         }
         return null;
     }
 
     public String toString() {
-        if (this == String) {
-            return "1";
+        if (this == VARCHAR) {
+            return "VARCHAR";
         }
-        if (this == DateTime) {
-            return "2";
+        if (this == DATE) {
+            return "DATE";
         }
-        if (this == Integer) {
-            return "3";
+        if (this == TIMESTAMP) {
+            return "TIMESTAMP";
         }
-        if (this == Float) {
-            return "4";
+        if (this == DECIMAL) {
+            return "DECIMAL";
         }
-        if (this == Boolean) {
-            return "5";
+        if (this == BIGINT) {
+            return "BIGINT";
         }
-        if (this == Date) {
-            return "6";
+        if (this == FLOAT) {
+            return "FLOAT";
         }
-        return "1";
+        if (this == TINYINT) {
+            return "TINYINT";
+        }
+        if (this == INTEGER) {
+            return "INTEGER";
+        }
+        return "VARCHAR";
     }
 }

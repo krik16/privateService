@@ -16,16 +16,16 @@ public enum FilterType {
         if ("=".equals(type)) {
             return EQUALS;
         }
-        if ("&gt;".equals(type)) {
+        if (">".equals(type)) {
             return GREATETHAN;
         }
-        if ("&gt;=".equals(type)) {
+        if (">=".equals(type)) {
             return GREATEEQUAL;
         }
-        if ("&lt;".equals(type)) {
+        if ("<".equals(type)) {
             return LESSTHAN;
         }
-        if ("&lt;=".equals(type)) {
+        if ("<=".equals(type)) {
             return LESSEQUAL;
         }
         if ("!=".equals(type)) {
@@ -58,16 +58,16 @@ public enum FilterType {
             return "=";
         }
         if (this == GREATETHAN) {
-            return "&gt;";
+            return ">";
         }
         if (this == GREATEEQUAL) {
-            return "&gt;=";
+            return ">=";
         }
         if (this == LESSTHAN) {
-            return "&lt;";
+            return "<";
         }
         if (this == LESSEQUAL) {
-            return "&lt;=";
+            return "<=";
         }
         if (this == NOTEQUAL) {
             return "!=";
