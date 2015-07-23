@@ -231,7 +231,7 @@
 		</dependency>
 
 	</dependencies>
-	
+
 	<build>
 		<resources>
 			<resource>
@@ -243,6 +243,10 @@
 			</resource>
 		</resources>
 	</build>
+	
+	<properties>
+	  <excludePropertyFiles></excludePropertyFiles>
+	</properties>
 	
 	<profiles>
 		<profile>
