@@ -1,13 +1,17 @@
 package com.rongyi.easy.page;
 
+import com.rongyi.core.constant.Constants;
+
 import java.util.List;
 
 /**
- * Descriptions:
+ * Descriptions:通用查询参数
  * Created by 袁波
  * Created at 2015/7/21 17:19.
  */
 public class QueryParam {
+    private static final int PAGESIZE=10;
+    private static final int CURRENTPAGE=1;
     /**
      * 查询的过滤集合
      */
@@ -42,6 +46,9 @@ public class QueryParam {
     }
 
     public int getCurrentPage() {
+        if(currentPage==0){
+            currentPage=CURRENTPAGE;
+        }
         return currentPage;
     }
 
@@ -50,6 +57,9 @@ public class QueryParam {
     }
 
     public int getPageSize() {
+        if(pageSize==0){
+            pageSize=PAGESIZE;
+        }
         return pageSize;
     }
 
