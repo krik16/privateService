@@ -1,5 +1,6 @@
 package com.rongyi.rss.roa;
 
+import java.util.List;
 import java.util.Map;
 
 import com.rongyi.easy.flopgo.entity.FlopPrizeDEntity;
@@ -73,4 +74,15 @@ public interface IFlopgoService {
 	 * @return
 	 */
 	public FlopSPrizeDailyVO selectFPDByActivityId(String id) throws Exception;
+	
+	/**
+	 * 这是做修改 做每日配置的数量修改
+	 *  步骤查询 
+	 *     删除
+	 *     插入
+	 *     
+	 * @return
+	 * @throws Exception
+	 */
+	public int updateDailyPrizes(List<FlopPrizeDEntity> dafe,String state,String flopId) throws Exception;
 }
