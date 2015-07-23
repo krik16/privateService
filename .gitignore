@@ -1,3 +1,10 @@
-/easy-rpb/.settings
-/easy-tms/.settings
-/easy-virtual-account/.settings
+.settings
+.classpath
+.project
+classes
+target
+*.iml*.properties
+.idea
+*.iml
+.gitignore
+!/.gitignore
