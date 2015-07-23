@@ -91,4 +91,5 @@ public interface IFlopgoService {
 	 * @throws Exception
 	 */
 	public int updateDailyPrizes(List<FlopPrizeDEntity> dafe,String state,String flopId) throws Exception;
+	
 }

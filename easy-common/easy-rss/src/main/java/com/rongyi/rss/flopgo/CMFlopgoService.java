@@ -85,4 +85,5 @@ public interface CMFlopgoService {
 	 * @throws Exception
 	 */
 	public int updateDailyPrizes(List<FlopPrizeDEntity> dafe,String state,String flopId) throws Exception;
+	
 }
