@@ -8,6 +8,7 @@ import org.bson.types.ObjectId;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -140,6 +141,8 @@ public class Coupon implements Serializable {
 
     @Property("sort_index")
     private Integer sortIndex = Integer.valueOf(0);//优惠券排序字段，目前作用是置顶
+
+    private List<Integer> afterSaleService = Arrays.asList(1,1,1);//[1,1,1] 1为支持，0为不支持。第一位：随时退、第二位：过期退 第三位： 免预约
 
     @Version
     private Long version; // 乐观锁
@@ -520,6 +523,14 @@ public class Coupon implements Serializable {
         if (this.detailPicUrls != null && !this.detailPicUrls.isEmpty())
             pic = this.detailPicUrls.get(0);
         return pic;
+    }
+
+    public List<Integer> getAfterSaleService() {
+        return afterSaleService;
+    }
+
+    public void setAfterSaleService(List<Integer> afterSaleService) {
+        this.afterSaleService = afterSaleService;
     }
 
     public static class CouponProduct implements Serializable {
