@@ -16,16 +16,16 @@ public class CouponHistoryVO implements Serializable{
 	private String userPhone;//手机号
 	private Double originalPrice;//原价
 	private Double nowPrice;//现价
-	private Date updateTime;//验证时间
-	private BigDecimal validCommission;//佣金
+	private Date updateTime;//验证时间(类型：Date)
+	private BigDecimal amount;//佣金
 	private String title;
 	private String couponId;//券id
-	
-	public BigDecimal getValidCommission() {
-		return validCommission;
+	private String date;//验证时间（类型：String）
+	public BigDecimal getAmount() {
+		return amount;
 	}
-	public void setValidCommission(BigDecimal validCommission) {
-		this.validCommission = validCommission;
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
 	}
 	public String getTitle() {
 		return title;
@@ -38,6 +38,12 @@ public class CouponHistoryVO implements Serializable{
 	}
 	public void setCouponId(String couponId) {
 		this.couponId = couponId;
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
 	}
 	public String getCode() {
 		return code;
