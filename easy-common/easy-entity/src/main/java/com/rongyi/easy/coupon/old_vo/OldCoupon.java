@@ -1,17 +1,14 @@
 package com.rongyi.easy.coupon.old_vo;
 
 
-import com.rongyi.easy.malllife.vo.ShopMall;
-
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /**
  * 优惠券信息
  */
-public class OldCoupon extends ShopMall implements Serializable {
+public class OldCoupon extends OldMallShopVO implements Serializable {
     protected String thumbnail;//缩略图
     protected String vistedNum;//访问次数
     protected String couponPrice;//优惠劵价格
@@ -34,9 +31,13 @@ public class OldCoupon extends ShopMall implements Serializable {
     protected String holder_id;
 
     protected String holder_type;
-    protected ArrayList<String> carouselImg;
+    protected List<String> carouselImg;
 
     protected boolean any_activity;
+
+    protected int limitPublishCount;  // 每日限量发行张数
+    protected int limitUseCount;   // 每人每日限用张数
+    protected int limitCount; // 每人限购数量
 
     private List<Integer> afterSaleService = Arrays.asList(1, 1, 1);  //[1,1,1] 1为支持，0为不支持。第一位：随时退、第二位：过期退 第三位： 免预约
 
@@ -184,11 +185,11 @@ public class OldCoupon extends ShopMall implements Serializable {
         this.holder_type = holder_type;
     }
 
-    public ArrayList<String> getCarouselImg() {
+    public List<String> getCarouselImg() {
         return carouselImg;
     }
 
-    public void setCarouselImg(ArrayList<String> carouselImg) {
+    public void setCarouselImg(List<String> carouselImg) {
         this.carouselImg = carouselImg;
     }
 
@@ -206,5 +207,29 @@ public class OldCoupon extends ShopMall implements Serializable {
 
     public void setAfterSaleService(List<Integer> afterSaleService) {
         this.afterSaleService = afterSaleService;
+    }
+
+    public int getLimitPublishCount() {
+        return limitPublishCount;
+    }
+
+    public void setLimitPublishCount(int limitPublishCount) {
+        this.limitPublishCount = limitPublishCount;
+    }
+
+    public int getLimitUseCount() {
+        return limitUseCount;
+    }
+
+    public void setLimitUseCount(int limitUseCount) {
+        this.limitUseCount = limitUseCount;
+    }
+
+    public int getLimitCount() {
+        return limitCount;
+    }
+
+    public void setLimitCount(int limitCount) {
+        this.limitCount = limitCount;
     }
 }

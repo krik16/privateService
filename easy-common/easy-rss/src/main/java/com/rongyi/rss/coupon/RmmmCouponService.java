@@ -10,6 +10,7 @@
 package com.rongyi.rss.coupon;
 
 import com.rongyi.core.bean.ResponseResult;
+import com.rongyi.easy.coupon.old_vo.OldCouponDetailVO;
 import com.rongyi.easy.coupon.old_vo.OldCouponVO;
 import com.rongyi.easy.coupon.param.RmmmCouponParam;
 import com.rongyi.easy.coupon.param.RmmmCouponQueryParam;
@@ -46,10 +47,19 @@ public interface RmmmCouponService {
 
     /**
      * 优惠券详情
+     *
      * @param couponId
      * @return
      */
     OldCouponVO getCouponDetail(String couponId);
+
+
+    /**
+     * solr搜索优惠券详情页
+     * @param couponId
+     * @return
+     */
+    OldCouponDetailVO getCouponInfoForSolr(String couponId);
 
 }
 
