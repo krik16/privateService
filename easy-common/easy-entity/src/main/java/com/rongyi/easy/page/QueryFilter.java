@@ -62,4 +62,23 @@ public class QueryFilter {
     public void setValueTypeString(String valueTypeString) {
         this.valueTypeString = valueTypeString;
     }
+
+    public QueryFilter(String name, FilterType type, ValueType valueType, Object value) {
+        this.name = name;
+        this.type = type;
+        this.valueType = valueType;
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "QueryFilter{" +
+            "name='" + name + '\'' +
+            ", type=" + type +
+            ", valueType=" + valueType +
+            ", value=" + value +
+            ", filterTypeValue='" + this.getFilterTypeValue() + '\'' +
+            ", valueTypeString='" + this.getValueTypeString() + '\'' +
+            '}';
+    }
 }

@@ -79,4 +79,33 @@ public class QueryParam {
     public void setOffset(int offset) {
         this.offset = offset;
     }
+
+    public QueryParam(List<QueryFilter> queryFilters, List<QueryOrder> queryOrders) {
+        this.queryFilters = queryFilters;
+        this.queryOrders = queryOrders;
+    }
+
+    public QueryParam(List<QueryFilter> queryFilters, List<QueryOrder> queryOrders, int currentPage) {
+        this.queryFilters = queryFilters;
+        this.queryOrders = queryOrders;
+        this.currentPage = currentPage;
+    }
+
+    public QueryParam(List<QueryFilter> queryFilters, List<QueryOrder> queryOrders, int currentPage, int pageSize) {
+        this.queryFilters = queryFilters;
+        this.queryOrders = queryOrders;
+        this.currentPage = currentPage;
+        this.pageSize = pageSize;
+    }
+
+    @Override
+    public String toString() {
+        return "QueryParam{" +
+            "pageSize=" + this.getPageSize() +
+            ", offset=" + this.getOffset() +
+            ", queryOrders=" + queryOrders +
+            ", currentPage=" + this.getCurrentPage() +
+            ", queryFilters=" + queryFilters +
+            '}';
+    }
 }
