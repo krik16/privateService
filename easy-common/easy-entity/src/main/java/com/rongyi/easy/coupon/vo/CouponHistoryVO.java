@@ -21,6 +21,13 @@ public class CouponHistoryVO implements Serializable{
 	private String title;
 	private String couponId;//券id
 	private String date;//验证时间（类型：String）
+	private String from;//码佣
+	public String getFrom() {
+		return from;
+	}
+	public void setFrom(String from) {
+		this.from = from;
+	}
 	public BigDecimal getAmount() {
 		return amount;
 	}
