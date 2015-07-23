@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 优惠券信息
  */
-public class OldCoupon extends OldMallShopVO implements Serializable {
+public class OldCoupon extends OldMallShop implements Serializable {
     protected String thumbnail;//缩略图
     protected String vistedNum;//访问次数
     protected String couponPrice;//优惠劵价格

@@ -6,13 +6,13 @@ import java.util.List;
 /**
  * 优惠券详情
  */
-public class OldCouponDetailVO implements Serializable{
+public class OldCouponDetail implements Serializable{
 
     protected OldCoupon result;
 
     protected List<OldCoupon> other_activities;
 
-    protected List<OldMallShopVO> apply_shops;
+    protected List<OldMallShop> apply_shops;
 
 
     public OldCoupon getResult() {
@@ -31,11 +31,11 @@ public class OldCouponDetailVO implements Serializable{
         this.other_activities = other_activities;
     }
 
-    public List<OldMallShopVO> getApply_shops() {
+    public List<OldMallShop> getApply_shops() {
         return apply_shops;
     }
 
-    public void setApply_shops(List<OldMallShopVO> apply_shops) {
+    public void setApply_shops(List<OldMallShop> apply_shops) {
         this.apply_shops = apply_shops;
     }
 }
