@@ -16,13 +16,14 @@
     <result column="buyer_id" property="buyerId" jdbcType="VARCHAR" />
     <result column="weidian_id" property="weidianId" jdbcType="VARCHAR" />
     <result column="payment_id_list" property="paymentIdList" jdbcType="VARCHAR" />
-    <result column="is_comment" property="isComment" jdbcType="INTEGER" />
+    <result column="is_comment" property="isComment" jdbcType="TINYINT" />
     <result column="address_id" property="addressId" jdbcType="VARCHAR" />
     <result column="order_type" property="orderType" jdbcType="INTEGER" />
     <result column="order_source" property="orderSource" jdbcType="INTEGER" />
     <result column="coupon_id" property="couponId" jdbcType="VARCHAR" />
     <result column="internal_coupon_id" property="internalCouponId" jdbcType="VARCHAR" />
     <result column="guide_id" property="guideId" jdbcType="VARCHAR" />
+    <result column="discount_info" property="discountInfo" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.rongyi.easy.osm.entity.OrderFormEntity" extends="BaseResultMap" >
     <result column="buyer_comment" property="buyerComment" typeHandler="com.rongyi.core.common.util.ConvertBlobTypeHandler" />
@@ -89,7 +90,7 @@
     id, order_no, total_amount, express_fee, disconnt_fee, express_info_id, status, status_route, 
     create_at, status_hold_ms, next_status_time, buyer_id, weidian_id, payment_id_list, 
     is_comment, address_id, order_type, order_source, coupon_id, internal_coupon_id, 
-    guide_id
+    guide_id, discount_info
   </sql>
   <sql id="Blob_Column_List" >
     buyer_comment
@@ -150,15 +151,15 @@
       weidian_id, payment_id_list, is_comment, 
       address_id, order_type, order_source, 
       coupon_id, internal_coupon_id, guide_id, 
-      buyer_comment)
+      discount_info, buyer_comment)
     values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, #{totalAmount,jdbcType=DECIMAL}, 
       #{expressFee,jdbcType=DECIMAL}, #{disconntFee,jdbcType=DECIMAL}, #{expressInfoId,jdbcType=VARCHAR}, 
       #{status,jdbcType=VARCHAR}, #{statusRoute,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, 
       #{statusHoldMs,jdbcType=BIGINT}, #{nextStatusTime,jdbcType=TIMESTAMP}, #{buyerId,jdbcType=VARCHAR}, 
-      #{weidianId,jdbcType=VARCHAR}, #{paymentIdList,jdbcType=VARCHAR}, #{isComment,jdbcType=INTEGER}, 
+      #{weidianId,jdbcType=VARCHAR}, #{paymentIdList,jdbcType=VARCHAR}, #{isComment,jdbcType=TINYINT}, 
       #{addressId,jdbcType=VARCHAR}, #{orderType,jdbcType=INTEGER}, #{orderSource,jdbcType=INTEGER}, 
-      #{couponId,jdbcType=VARCHAR}, #{internalCouponId,jdbcType=VARCHAR}, #{guideId,jdbcType=VARCHAR},
-      #{buyerComment,jdbcType=VARCHAR})
+      #{couponId,jdbcType=VARCHAR}, #{internalCouponId,jdbcType=VARCHAR}, #{guideId,jdbcType=VARCHAR}, 
+      #{discountInfo,jdbcType=VARCHAR}, #{buyerComment,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.rongyi.easy.osm.entity.OrderFormEntity" >
     insert into order_form
@@ -217,14 +218,17 @@
       <if test="orderSource != null" >
         order_source,
       </if>
-      <if test="couponId != null">
+      <if test="couponId != null" >
         coupon_id,
       </if>
-      <if test="internalCouponId != null">
+      <if test="internalCouponId != null" >
         internal_coupon_id,
       </if>
       <if test="guideId != null" >
         guide_id,
+      </if>
+      <if test="discountInfo != null" >
+        discount_info,
       </if>
       <if test="buyerComment != null" >
         buyer_comment,
@@ -274,7 +278,7 @@
         #{paymentIdList,jdbcType=VARCHAR},
       </if>
       <if test="isComment != null" >
-        #{isComment,jdbcType=INTEGER},
+        #{isComment,jdbcType=TINYINT},
       </if>
       <if test="addressId != null" >
         #{addressId,jdbcType=VARCHAR},
@@ -285,14 +289,17 @@
       <if test="orderSource != null" >
         #{orderSource,jdbcType=INTEGER},
       </if>
-      <if test="couponId != null">
+      <if test="couponId != null" >
         #{couponId,jdbcType=VARCHAR},
       </if>
-      <if test="internalCouponId != null">
+      <if test="internalCouponId != null" >
         #{internalCouponId,jdbcType=VARCHAR},
       </if>
       <if test="guideId != null" >
         #{guideId,jdbcType=VARCHAR},
+      </if>
+      <if test="discountInfo != null" >
+        #{discountInfo,jdbcType=VARCHAR},
       </if>
       <if test="buyerComment != null" >
         #{buyerComment,jdbcType=VARCHAR},
@@ -351,7 +358,7 @@
         payment_id_list = #{record.paymentIdList,jdbcType=VARCHAR},
       </if>
       <if test="record.isComment != null" >
-        is_comment = #{record.isComment,jdbcType=INTEGER},
+        is_comment = #{record.isComment,jdbcType=TINYINT},
       </if>
       <if test="record.addressId != null" >
         address_id = #{record.addressId,jdbcType=VARCHAR},
@@ -365,11 +372,14 @@
       <if test="record.couponId != null" >
         coupon_id = #{record.couponId,jdbcType=VARCHAR},
       </if>
-      <if test="record.internalCouponId != null">
+      <if test="record.internalCouponId != null" >
         internal_coupon_id = #{record.internalCouponId,jdbcType=VARCHAR},
       </if>
       <if test="record.guideId != null" >
         guide_id = #{record.guideId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.discountInfo != null" >
+        discount_info = #{record.discountInfo,jdbcType=VARCHAR},
       </if>
       <if test="record.buyerComment != null" >
         buyer_comment = #{record.buyerComment,jdbcType=VARCHAR},
@@ -395,13 +405,14 @@
       buyer_id = #{record.buyerId,jdbcType=VARCHAR},
       weidian_id = #{record.weidianId,jdbcType=VARCHAR},
       payment_id_list = #{record.paymentIdList,jdbcType=VARCHAR},
-      is_comment = #{record.isComment,jdbcType=INTEGER},
+      is_comment = #{record.isComment,jdbcType=TINYINT},
       address_id = #{record.addressId,jdbcType=VARCHAR},
       order_type = #{record.orderType,jdbcType=INTEGER},
       order_source = #{record.orderSource,jdbcType=INTEGER},
       coupon_id = #{record.couponId,jdbcType=VARCHAR},
       internal_coupon_id = #{record.internalCouponId,jdbcType=VARCHAR},
       guide_id = #{record.guideId,jdbcType=VARCHAR},
+      discount_info = #{record.discountInfo,jdbcType=VARCHAR},
       buyer_comment = #{record.buyerComment,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -423,13 +434,14 @@
       buyer_id = #{record.buyerId,jdbcType=VARCHAR},
       weidian_id = #{record.weidianId,jdbcType=VARCHAR},
       payment_id_list = #{record.paymentIdList,jdbcType=VARCHAR},
-      is_comment = #{record.isComment,jdbcType=INTEGER},
+      is_comment = #{record.isComment,jdbcType=TINYINT},
       address_id = #{record.addressId,jdbcType=VARCHAR},
       order_type = #{record.orderType,jdbcType=INTEGER},
       order_source = #{record.orderSource,jdbcType=INTEGER},
       coupon_id = #{record.couponId,jdbcType=VARCHAR},
       internal_coupon_id = #{record.internalCouponId,jdbcType=VARCHAR},
-      guide_id = #{record.guideId,jdbcType=VARCHAR}
+      guide_id = #{record.guideId,jdbcType=VARCHAR},
+      discount_info = #{record.discountInfo,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -477,7 +489,7 @@
         payment_id_list = #{paymentIdList,jdbcType=VARCHAR},
       </if>
       <if test="isComment != null" >
-        is_comment = #{isComment,jdbcType=INTEGER},
+        is_comment = #{isComment,jdbcType=TINYINT},
       </if>
       <if test="addressId != null" >
         address_id = #{addressId,jdbcType=VARCHAR},
@@ -488,14 +500,17 @@
       <if test="orderSource != null" >
         order_source = #{orderSource,jdbcType=INTEGER},
       </if>
-      <if test="couponId != null">
+      <if test="couponId != null" >
         coupon_id = #{couponId,jdbcType=VARCHAR},
       </if>
-      <if test="internalCouponId != null">
+      <if test="internalCouponId != null" >
         internal_coupon_id = #{internalCouponId,jdbcType=VARCHAR},
       </if>
       <if test="guideId != null" >
         guide_id = #{guideId,jdbcType=VARCHAR},
+      </if>
+      <if test="discountInfo != null" >
+        discount_info = #{discountInfo,jdbcType=VARCHAR},
       </if>
       <if test="buyerComment != null" >
         buyer_comment = #{buyerComment,jdbcType=VARCHAR},
@@ -518,13 +533,14 @@
       buyer_id = #{buyerId,jdbcType=VARCHAR},
       weidian_id = #{weidianId,jdbcType=VARCHAR},
       payment_id_list = #{paymentIdList,jdbcType=VARCHAR},
-      is_comment = #{isComment,jdbcType=INTEGER},
+      is_comment = #{isComment,jdbcType=TINYINT},
       address_id = #{addressId,jdbcType=VARCHAR},
       order_type = #{orderType,jdbcType=INTEGER},
       order_source = #{orderSource,jdbcType=INTEGER},
       coupon_id = #{couponId,jdbcType=VARCHAR},
       internal_coupon_id = #{internalCouponId,jdbcType=VARCHAR},
       guide_id = #{guideId,jdbcType=VARCHAR},
+      discount_info = #{discountInfo,jdbcType=VARCHAR},
       buyer_comment = #{buyerComment,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -543,13 +559,14 @@
       buyer_id = #{buyerId,jdbcType=VARCHAR},
       weidian_id = #{weidianId,jdbcType=VARCHAR},
       payment_id_list = #{paymentIdList,jdbcType=VARCHAR},
-      is_comment = #{isComment,jdbcType=INTEGER},
+      is_comment = #{isComment,jdbcType=TINYINT},
       address_id = #{addressId,jdbcType=VARCHAR},
       order_type = #{orderType,jdbcType=INTEGER},
       order_source = #{orderSource,jdbcType=INTEGER},
       coupon_id = #{couponId,jdbcType=VARCHAR},
       internal_coupon_id = #{internalCouponId,jdbcType=VARCHAR},
-      guide_id = #{guideId,jdbcType=VARCHAR}
+      guide_id = #{guideId,jdbcType=VARCHAR},
+      discount_info = #{discountInfo,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

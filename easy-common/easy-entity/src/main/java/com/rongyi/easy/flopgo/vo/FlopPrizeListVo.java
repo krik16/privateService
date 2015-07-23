@@ -6,9 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.bson.types.ObjectId;
-
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Property;
+
 import com.rongyi.easy.flopgo.entity.FlopgoActivity;
 import com.rongyi.easy.flopgo.entity.FlopgoActivity.Prize;
 
@@ -17,7 +17,7 @@ public class FlopPrizeListVo implements Serializable{
 	private ObjectId id;// 翻牌购id
 	private String name;// 翻牌购名称
 
-	private Integer state;// 翻牌购状态 0代表关闭，1代表发布 默认关闭0
+	private Integer state;//  翻牌购状态 0代表关闭，1代表发布  3草稿  4结束  默认草稿（2作为全部查询的状态）
 	private int count;// 翻牌购的张数
 	
 	private int eachFlopCount;// 每个人的翻牌次数
@@ -28,7 +28,7 @@ public class FlopPrizeListVo implements Serializable{
 
 	private Integer type;// 表示这个翻牌购是为新增还是修改类型，0表示新增（默认），1表示修改 2,表示删除
 	
-private Date createDate;// 创建翻牌购时间
+	private Date createDate;// 创建翻牌购时间
 	
 	private Date updateDate;// 修改翻牌购时间
 
@@ -36,7 +36,8 @@ private Date createDate;// 创建翻牌购时间
 
 	private String updateUser;// 修改翻牌购的人
 	private Integer isUsed;// 代表是否有人参与了这个翻牌购活动，0为默认 没有参与 1为有人参与了这个活动
-
+   
+	private String sourceTarget;//信息同步终端  0：容易逛    （默认）  1：互动屏   2：微信
 	public Date getCreateDate() {
 		return createDate;
 	}
@@ -87,8 +88,15 @@ private Date createDate;// 创建翻牌购时间
 		this.createUser=flopa.getCreateUser();
 		this.updateUser=flopa.getUpdateUser();
 		this.isUsed=flopa.getIsUsed();
+		this.sourceTarget=flopa.getSourceTarget();
 	}
 	
+	public String getSourceTarget() {
+		return sourceTarget;
+	}
+	public void setSourceTarget(String sourceTarget) {
+		this.sourceTarget = sourceTarget;
+	}
 	public ObjectId getId() {
 		return id;
 	}

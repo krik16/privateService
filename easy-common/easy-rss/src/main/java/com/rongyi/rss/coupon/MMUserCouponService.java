@@ -2,6 +2,7 @@ package com.rongyi.rss.coupon;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.UserCoupon;
+import com.rongyi.easy.coupon.vo.MMUserCouponVO;
 import com.rongyi.easy.roa.entity.MallEntity;
 import com.rongyi.easy.roa.vo.ShopVO;
 
@@ -54,5 +55,11 @@ public interface MMUserCouponService {
 
     public UserCoupon findUserCouponByCouponCode(String couponCode);
 
+    /**
+     * 查询出现金券vo
+     * @param couponCode
+     * @return
+     */
+    MMUserCouponVO getUserCouponByCouponCode(String couponCode);
 
 }

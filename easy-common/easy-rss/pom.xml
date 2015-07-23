@@ -4,10 +4,14 @@
 	<parent>
 		<groupId>com.rongyi</groupId>
 		<artifactId>easy-common</artifactId>
-		<version>1.0.0-RELEASE</version>
+		<version>1.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>easy-rss</artifactId>
 	<packaging>jar</packaging>
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/easy-common-feature-810
 	<dependencies>
 		<dependency>
 			<groupId>com.rongyi</groupId>
