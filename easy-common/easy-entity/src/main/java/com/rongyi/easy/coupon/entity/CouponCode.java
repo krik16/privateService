@@ -213,4 +213,74 @@ public class CouponCode implements Serializable {
 				.toString();
 	}
 
+		@Override
+		public boolean equals(Object o) {
+				if (this == o)
+						return true;
+				if (o == null || getClass() != o.getClass())
+						return false;
+
+				CouponCode that = (CouponCode) o;
+
+				if (id != null ? !id.equals(that.id) : that.id != null)
+						return false;
+				if (code != null ? !code.equals(that.code) : that.code != null)
+						return false;
+				if (couponId != null ? !couponId.equals(that.couponId) : that.couponId != null)
+						return false;
+				if (mallId != null ? !mallId.equals(that.mallId) : that.mallId != null)
+						return false;
+				if (shopId != null ? !shopId.equals(that.shopId) : that.shopId != null)
+						return false;
+				if (type != null ? !type.equals(that.type) : that.type != null)
+						return false;
+				if (status != null ? !status.equals(that.status) : that.status != null)
+						return false;
+				if (userId != null ? !userId.equals(that.userId) : that.userId != null)
+						return false;
+				if (userType != null ? !userType.equals(that.userType) : that.userType != null)
+						return false;
+				if (mobile != null ? !mobile.equals(that.mobile) : that.mobile != null)
+						return false;
+				if (createdTime != null ? !createdTime.equals(that.createdTime) : that.createdTime != null)
+						return false;
+				if (updatedTime != null ? !updatedTime.equals(that.updatedTime) : that.updatedTime != null)
+						return false;
+				if (isDelete != null ? !isDelete.equals(that.isDelete) : that.isDelete != null)
+						return false;
+				if (userSrc != null ? !userSrc.equals(that.userSrc) : that.userSrc != null)
+						return false;
+				if (validBeginDate != null ?
+						!validBeginDate.equals(that.validBeginDate) :
+						that.validBeginDate != null)
+						return false;
+				if (validEndDate != null ?
+						!validEndDate.equals(that.validEndDate) :
+						that.validEndDate != null)
+						return false;
+				return !(discount != null ? !discount.equals(that.discount) : that.discount != null);
+
+		}
+
+		@Override
+		public int hashCode() {
+				int result = id != null ? id.hashCode() : 0;
+				result = 31 * result + (code != null ? code.hashCode() : 0);
+				result = 31 * result + (couponId != null ? couponId.hashCode() : 0);
+				result = 31 * result + (mallId != null ? mallId.hashCode() : 0);
+				result = 31 * result + (shopId != null ? shopId.hashCode() : 0);
+				result = 31 * result + (type != null ? type.hashCode() : 0);
+				result = 31 * result + (status != null ? status.hashCode() : 0);
+				result = 31 * result + (userId != null ? userId.hashCode() : 0);
+				result = 31 * result + (userType != null ? userType.hashCode() : 0);
+				result = 31 * result + (mobile != null ? mobile.hashCode() : 0);
+				result = 31 * result + (createdTime != null ? createdTime.hashCode() : 0);
+				result = 31 * result + (updatedTime != null ? updatedTime.hashCode() : 0);
+				result = 31 * result + (isDelete != null ? isDelete.hashCode() : 0);
+				result = 31 * result + (userSrc != null ? userSrc.hashCode() : 0);
+				result = 31 * result + (validBeginDate != null ? validBeginDate.hashCode() : 0);
+				result = 31 * result + (validEndDate != null ? validEndDate.hashCode() : 0);
+				result = 31 * result + (discount != null ? discount.hashCode() : 0);
+				return result;
+		}
 }
