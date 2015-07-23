@@ -1,9 +1,10 @@
 package com.rongyi.rss.integral;
 
-import com.rongyi.core.bean.ResponseResult;
+ import net.sf.json.JSONObject;
+
 import com.rongyi.easy.integral.constant.ActionType;
 import com.rongyi.easy.integral.constant.ScoreRuleEnum;
-import com.rongyi.easy.integral.vo.IntegralRecord;
+import com.rongyi.easy.integral.vo.IntegralRecordVO;
 
 /**
  * 积分
@@ -19,20 +20,20 @@ public interface IntegralService {
 	 * 修改积分
 	 * @param integral
 	 */
-	public ResponseResult addOrSubScore(IntegralRecord integral);
+	public JSONObject addOrSubScore(IntegralRecordVO integral);
 	
 	/**
 	 * 根据用户id查询用户积分
 	 * @param userId
 	 */
-	public ResponseResult getScoreByUserId(String userId);
+	public JSONObject getScoreByUserId(String userId);
 	
 	/**
 	 * 根据规则类型获取规则
 	 * @param scoreRuleEnum
 	 * @return
 	 */
-	public ResponseResult  getRuleByType(ScoreRuleEnum scoreRuleEnum);
+	public JSONObject  getRuleByType(ScoreRuleEnum scoreRuleEnum);
 	/**
 	 * 获取积分记录
 	 * @param userid
@@ -42,8 +43,12 @@ public interface IntegralService {
 	 * @param page
 	 * @return
 	 */
-	public ResponseResult  getScoreRecord(String userid,ScoreRuleEnum scoreRuleEnum,ActionType actionType,int row,int page);
-	
-	
+	public JSONObject  getScoreRecord(String userid,ScoreRuleEnum scoreRuleEnum,ActionType actionType,int row,int page);
+	/**
+	 * 根据订单号获取积分记录
+	 * @param orderSn
+	 * @return
+	 */
+	public IntegralRecordVO getIntegralRecordByOrderSn(String orderSn);
 	
 }
