@@ -8,6 +8,10 @@ package com.rongyi.easy.page;
 public class QueryOrder {
     private String orderColumn;
 
+    public QueryOrder(String orderColumn) {
+        this.orderColumn = orderColumn;
+    }
+
     public String getOrderColumn() {
         return orderColumn;
     }
