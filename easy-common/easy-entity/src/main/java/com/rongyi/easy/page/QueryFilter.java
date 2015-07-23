@@ -13,7 +13,8 @@ public class QueryFilter {
     private FilterType type;
     private ValueType valueType;
     private Object value;
-    private String filterTypeVallue;
+    private String filterTypeValue;
+    private String valueTypeString;
     public String getName() {
         return name;
     }
@@ -46,11 +47,19 @@ public class QueryFilter {
         this.value = value;
     }
 
-    public String getFilterTypeVallue() {
-        return type.toString();
+    public String getFilterTypeValue() {
+        return this.getType().toString();
     }
 
-    public void setFilterTypeVallue(String filterTypeVallue) {
-        this.filterTypeVallue = filterTypeVallue;
+    public void setFilterTypeValue(String filterTypeValue) {
+        this.filterTypeValue = filterTypeValue;
+    }
+
+    public String getValueTypeString() {
+        return this.getValueType().toString();
+    }
+
+    public void setValueTypeString(String valueTypeString) {
+        this.valueTypeString = valueTypeString;
     }
 }
