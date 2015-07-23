@@ -8,10 +8,7 @@
 	</parent>
 	<artifactId>easy-rss</artifactId>
 	<packaging>jar</packaging>
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/easy-common-feature-810
+ 
 	<dependencies>
 		<dependency>
 			<groupId>com.rongyi</groupId>

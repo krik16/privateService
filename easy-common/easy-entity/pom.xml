@@ -3,11 +3,7 @@
 	<parent>
 		<groupId>com.rongyi</groupId>
 		<artifactId>easy-common</artifactId>
-<<<<<<< HEAD
-		<version>1.0.0-SNAPSHOT</version>
-=======
-		<version>1.0.1-SNAPSHOT</version>
->>>>>>> refs/remotes/origin/easy-common-feature-810
+		<version>1.0.1-SNAPSHOT</version> 
 	</parent>
 	<artifactId>easy-entity</artifactId>
 	<packaging>jar</packaging>
