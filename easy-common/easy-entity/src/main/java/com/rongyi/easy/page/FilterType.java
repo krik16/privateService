@@ -6,44 +6,45 @@ package com.rongyi.easy.page;
  * Created at 2015/7/21 17:16.
  */
 public enum FilterType {
-    LIKE,  EQUALS,  GREATETHAN,  GREATEEQUAL,  LESSTHAN,  LESSEQUAL,  NOTEQUAL,  IN,NIN,EXISTS,ALL,SIZE;
+
+    LIKE,  EQUALS,  GREATETHAN,  GREATEEQUAL,  LESSTHAN,  LESSEQUAL,  NOTEQUAL,  IN,NIN,ISNULL,ISNOTNULL,REGEXP;
     public static FilterType toType(String type)
     {
-        if ("elem".equals(type)) {
+        if ("LIKE".equals(type)) {
             return LIKE;
         }
         if ("=".equals(type)) {
             return EQUALS;
         }
-        if (">".equals(type)) {
+        if ("&gt;".equals(type)) {
             return GREATETHAN;
         }
-        if (">=".equals(type)) {
+        if ("&gt;=".equals(type)) {
             return GREATEEQUAL;
         }
-        if ("<".equals(type)) {
+        if ("&lt;".equals(type)) {
             return LESSTHAN;
         }
-        if ("<=".equals(type)) {
+        if ("&lt;=".equals(type)) {
             return LESSEQUAL;
         }
         if ("!=".equals(type)) {
             return NOTEQUAL;
         }
-        if ("in".equals(type)) {
+        if ("IN".equals(type)) {
             return IN;
         }
-        if ("nin".equals(type)) {
+        if ("NOT IN".equals(type)) {
             return NIN;
         }
-        if ("exists".equals(type)) {
-            return EXISTS;
+        if ("IS NULL".equals(type)) {
+            return ISNULL;
         }
-        if ("all".equals(type)) {
-            return ALL;
+        if ("IS NOT NULL".equals(type)) {
+            return ISNOTNULL;
         }
-        if ("size".equals(type)) {
-            return SIZE;
+        if ("REGEXP".equals(type)) {
+            return REGEXP;
         }
         return null;
     }
@@ -51,22 +52,22 @@ public enum FilterType {
     public String toString()
     {
         if (this == LIKE) {
-            return "elem";
+            return "LIKE";
         }
         if (this == EQUALS) {
             return "=";
         }
         if (this == GREATETHAN) {
-            return ">";
+            return "&gt;";
         }
         if (this == GREATEEQUAL) {
-            return ">=";
+            return "&gt;=";
         }
         if (this == LESSTHAN) {
-            return "<";
+            return "&lt;";
         }
         if (this == LESSEQUAL) {
-            return "<=";
+            return "&lt;=";
         }
         if (this == NOTEQUAL) {
             return "!=";
@@ -75,16 +76,16 @@ public enum FilterType {
             return "in";
         }
         if (this == NIN) {
-            return "nin";
+            return "NOT IN";
         }
-        if (this == EXISTS) {
-            return "exists";
+        if (this == ISNULL) {
+            return "IS NULL";
         }
-        if (this == ALL) {
-            return "all";
+        if (this == ISNOTNULL) {
+            return "IS NOT NULL";
         }
-        if (this == SIZE) {
-            return "size";
+        if (this == REGEXP) {
+            return "REGEXP";
         }
         return "";
     }
