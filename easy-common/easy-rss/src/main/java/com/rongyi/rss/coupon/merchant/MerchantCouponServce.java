@@ -2,7 +2,6 @@ package com.rongyi.rss.coupon.merchant;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.Coupon;
-import com.rongyi.easy.coupon.merchant.vo.MerchantCouponListParam;
 import com.rongyi.easy.page.QueryParam;
 
 /**
