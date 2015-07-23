@@ -13,7 +13,7 @@ public class QueryFilter {
     private FilterType type;
     private ValueType valueType;
     private Object value;
-
+    private String filterTypeVallue;
     public String getName() {
         return name;
     }
@@ -44,5 +44,13 @@ public class QueryFilter {
 
     public void setValue(Object value) {
         this.value = value;
+    }
+
+    public String getFilterTypeVallue() {
+        return type.toString();
+    }
+
+    public void setFilterTypeVallue(String filterTypeVallue) {
+        this.filterTypeVallue = filterTypeVallue;
     }
 }
