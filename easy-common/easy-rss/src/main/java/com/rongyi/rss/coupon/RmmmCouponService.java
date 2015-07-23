@@ -10,11 +10,11 @@
 package com.rongyi.rss.coupon;
 
 import com.rongyi.core.bean.ResponseResult;
-import com.rongyi.easy.coupon.old_vo.OldCouponDetail;
 import com.rongyi.easy.coupon.old_vo.OldCouponVO;
 import com.rongyi.easy.coupon.param.RmmmCouponParam;
 import com.rongyi.easy.coupon.param.RmmmCouponQueryParam;
 import com.rongyi.easy.coupon.vo.RmmmCouponQueryListVO;
+import com.rongyi.easy.solr.retrival.result.ActivityData;
 
 /**
  * 功能描述： 摩店 优惠券操作接口
@@ -59,7 +59,7 @@ public interface RmmmCouponService {
      * @param couponId
      * @return
      */
-    OldCouponDetail getCouponInfoForSolr(String couponId);
+    ActivityData getCouponInfoForSolr(String couponId);
 
 }
 

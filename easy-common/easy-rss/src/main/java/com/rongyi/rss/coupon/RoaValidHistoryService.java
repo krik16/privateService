@@ -32,6 +32,13 @@ public interface RoaValidHistoryService {
       * @return
       */
      PagingVO<ValidHistory> getValidHistoryPage(MMValidHistoryParam params);
+    
+     /**
+      * 核销佣金列表
+      * @param params
+      * @return
+      */
+     PagingVO<CouponHistoryVO> getValidCommissionPageVO(MMValidHistoryParam params);
 
      /**
       * 查询用户当天该类优惠券的使用次数
