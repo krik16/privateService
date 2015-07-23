@@ -4,22 +4,23 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * 积分
+ * 积分记录
 * @Title: IntegralRecord.java 
 * @Package com.rongyi.easy.integral.pojo 
 * @Description: 
 * @author zzq 
 * @date 2015-7-17 下午4:27:01
  */
-public class IntegralRecord {
+public class IntegralRecordVO {
 	private String user_id;
 	private int sourceType;//1:app,2:后台操作
 	private int action ; //1加积分，2减积分
 	private int type; //1.上传头像，2评论店铺或商场，3订单评论，4.每日签到，5.下单扣减，6支付超时恢复积分，7支付失败恢复积分，8验券成功加积分，9交易成功加积分
-	private int score; //积分
+	private int use_score; //积分	
 	private BigDecimal pay_money; //支付金额
-	private BigDecimal total_money;//总金额
-	private BigDecimal deduction ; //抵扣金额
+	private BigDecimal total_money;//原结算金额
+	private BigDecimal preferential_deduction ; //使用优惠抵扣金额
+	private BigDecimal score_deduction; //积分抵扣金额
  	private int remain_score;  //剩余积分
  	private String item_name; //商品名称
  	private String item_id; //id
@@ -30,7 +31,25 @@ public class IntegralRecord {
  	private String event_id; //user_id+action+type+event_id
  	private Date update_time; 
  	private String reason; 
- 	
+ 	private String op_name;
+	public int getUse_score() {
+		return use_score;
+	}
+	public void setUse_score(int use_score) {
+		this.use_score = use_score;
+	}
+	public BigDecimal getPreferential_deduction() {
+		return preferential_deduction;
+	}
+	public void setPreferential_deduction(BigDecimal preferential_deduction) {
+		this.preferential_deduction = preferential_deduction;
+	}
+	public BigDecimal getScore_deduction() {
+		return score_deduction;
+	}
+	public void setScore_deduction(BigDecimal score_deduction) {
+		this.score_deduction = score_deduction;
+	}
 	public BigDecimal getTotal_money() {
 		return total_money;
 	}
@@ -61,24 +80,14 @@ public class IntegralRecord {
 	public void setType(int type) {
 		this.type = type;
 	}
-	public int getScore() {
-		return score;
-	}
-	public void setScore(int score) {
-		this.score = score;
-	}
+ 
 	public BigDecimal getPay_money() {
 		return pay_money;
 	}
 	public void setPay_money(BigDecimal pay_money) {
 		this.pay_money = pay_money;
 	}
-	public BigDecimal getDeduction() {
-		return deduction;
-	}
-	public void setDeduction(BigDecimal deduction) {
-		this.deduction = deduction;
-	}
+ 
 	public int getRemain_score() {
 		return remain_score;
 	}
@@ -145,5 +154,5 @@ public class IntegralRecord {
 	public void setOp_name(String op_name) {
 		this.op_name = op_name;
 	}
-	private String op_name;
+	
 }
