@@ -85,4 +85,15 @@ public class CustomerParam implements Serializable {
         this.memo = memo;
     }
 
+    public Customer toCustomer() {
+        Customer customer = new Customer();
+        customer.setId(this.id);
+        customer.setMemoName(this.memoName);
+        customer.setMemo(this.memo);
+        customer.setGender(this.gender);
+        customer.setFamilyType(this.familyType);
+        customer.setBirthday(this.birthday);
+        return customer;
+    }
+
 }
