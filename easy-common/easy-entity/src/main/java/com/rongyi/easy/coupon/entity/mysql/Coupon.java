@@ -7,9 +7,9 @@ public class Coupon {
 
     private String name;
 
-    private Byte couponType;
+    private Integer couponType;
 
-    private Byte validateType;
+    private Integer validateType;
 
     private Integer totalCount;
 
@@ -45,7 +45,7 @@ public class Coupon {
 
     private String detailPicUrl;
 
-    private Byte relatedType;
+    private Integer relatedType;
 
     private Integer limitCount;
 
@@ -55,9 +55,9 @@ public class Coupon {
 
     private String synTarget;
 
-    private Byte sourceTarget;
+    private Integer sourceTarget;
 
-    private Byte status;
+    private Integer status;
 
     private String createUser;
 
@@ -67,11 +67,11 @@ public class Coupon {
 
     private Date updateAt;
 
-    private Byte outStatus;
+    private Boolean outStatus;
 
-    private Byte enabled;
+    private Boolean enabled;
 
-    private Byte sortIndex;
+    private Integer sortIndex;
 
     private String sourceName;
 
@@ -91,19 +91,19 @@ public class Coupon {
         this.name = name;
     }
 
-    public Byte getCouponType() {
+    public Integer getCouponType() {
         return couponType;
     }
 
-    public void setCouponType(Byte couponType) {
+    public void setCouponType(Integer couponType) {
         this.couponType = couponType;
     }
 
-    public Byte getValidateType() {
+    public Integer getValidateType() {
         return validateType;
     }
 
-    public void setValidateType(Byte validateType) {
+    public void setValidateType(Integer validateType) {
         this.validateType = validateType;
     }
 
@@ -243,11 +243,11 @@ public class Coupon {
         this.detailPicUrl = detailPicUrl;
     }
 
-    public Byte getRelatedType() {
+    public Integer getRelatedType() {
         return relatedType;
     }
 
-    public void setRelatedType(Byte relatedType) {
+    public void setRelatedType(Integer relatedType) {
         this.relatedType = relatedType;
     }
 
@@ -283,19 +283,19 @@ public class Coupon {
         this.synTarget = synTarget;
     }
 
-    public Byte getSourceTarget() {
+    public Integer getSourceTarget() {
         return sourceTarget;
     }
 
-    public void setSourceTarget(Byte sourceTarget) {
+    public void setSourceTarget(Integer sourceTarget) {
         this.sourceTarget = sourceTarget;
     }
 
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -331,27 +331,27 @@ public class Coupon {
         this.updateAt = updateAt;
     }
 
-    public Byte getOutStatus() {
+    public Boolean getOutStatus() {
         return outStatus;
     }
 
-    public void setOutStatus(Byte outStatus) {
+    public void setOutStatus(Boolean outStatus) {
         this.outStatus = outStatus;
     }
 
-    public Byte getEnabled() {
+    public Boolean getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(Byte enabled) {
+    public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
 
-    public Byte getSortIndex() {
+    public Integer getSortIndex() {
         return sortIndex;
     }
 
-    public void setSortIndex(Byte sortIndex) {
+    public void setSortIndex(Integer sortIndex) {
         this.sortIndex = sortIndex;
     }
 
