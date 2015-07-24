@@ -127,4 +127,8 @@ public class CouponCode implements Serializable {
 				this.code = code;
 				this.couponId = couponId;
 		}
+
+		public CouponCode() {
+
+		}
 }
