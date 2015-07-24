@@ -2,6 +2,7 @@ package com.rongyi.rss.coupon;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.param.MMValidHistoryParam;
+import com.rongyi.easy.coupon.vo.CouponHistoryVO;
 import com.rongyi.easy.roa.entity.ValidHistory;
 
 /**
@@ -18,4 +19,11 @@ public interface MMValidHistoryService {
      */
      PagingVO<ValidHistory> getValidHostoryPage(MMValidHistoryParam params);
 	
+     /**
+      * 分页查询核销佣金
+      * @param params
+      * @return
+      */
+     PagingVO<CouponHistoryVO> getValidCommissionPage(MMValidHistoryParam params);
+     
 }

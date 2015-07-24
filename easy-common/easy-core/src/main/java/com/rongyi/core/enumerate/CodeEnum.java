@@ -147,7 +147,8 @@ public enum CodeEnum {
     ERROR_NO_VALIDHISTORY("-9002","没有券码核销记录"),
 
     ERROR_LOGIN_IN_INVALID("-2000","登录出错"),
-    ERROR_UN_LOGIN("-10000", "尚未登陆或登陆出错，请重新登录")
+    ERROR_UN_LOGIN("-10000", "尚未登陆或登陆出错，请重新登录"),
+    ERROR_TAG_NUM_OUT("-10001", "标签数目超过最大数目")
     ;
     
     private String code; 

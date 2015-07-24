@@ -2,7 +2,6 @@ package com.rongyi.easy.mallshop.customer;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by xgq on 2015/7/16.

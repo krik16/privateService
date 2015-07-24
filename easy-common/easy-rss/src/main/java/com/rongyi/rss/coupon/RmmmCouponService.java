@@ -14,6 +14,7 @@ import com.rongyi.easy.coupon.old_vo.OldCouponVO;
 import com.rongyi.easy.coupon.param.RmmmCouponParam;
 import com.rongyi.easy.coupon.param.RmmmCouponQueryParam;
 import com.rongyi.easy.coupon.vo.RmmmCouponQueryListVO;
+import com.rongyi.easy.solr.retrival.result.ActivityData;
 
 /**
  * 功能描述： 摩店 优惠券操作接口
@@ -46,10 +47,19 @@ public interface RmmmCouponService {
 
     /**
      * 优惠券详情
+     *
      * @param couponId
      * @return
      */
     OldCouponVO getCouponDetail(String couponId);
+
+
+    /**
+     * solr搜索优惠券详情页
+     * @param couponId
+     * @return
+     */
+    ActivityData getCouponInfoForSolr(String couponId);
 
 }
 
