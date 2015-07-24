@@ -36,6 +36,7 @@ public interface CouponConst {
     interface CouponOrderItemStatus {
         int NO_REFUND = 0;
         int REFUNDED = 1;
+        int REFUNDING = 2;
     }
 
     /**

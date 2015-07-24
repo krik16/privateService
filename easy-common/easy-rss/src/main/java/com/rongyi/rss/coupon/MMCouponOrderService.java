@@ -92,9 +92,10 @@ public interface MMCouponOrderService {
      * @param orderNo   订单号
      * @param tradeWay  支付方式
      * @param paymentNo 支付单号
+     * @param payAccount 支付账户(例如支付宝账户)
      * @return
      */
-    boolean processCouponOrderForPayed(String orderNo, int tradeWay, String paymentNo);
+    boolean processCouponOrderForPayed(String orderNo, int tradeWay, String paymentNo, String payAccount);
 
     /**
      * 获取未支付订单及订单项
