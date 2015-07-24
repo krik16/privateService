@@ -10,7 +10,7 @@ import com.rongyi.easy.bsoms.vo.BusinessAccountVO;
  * @author hebo 2015/07/17
  *
  */
-public interface RmmmUserInfoService {
+public interface IUserInfoService {
 
 	/**
 	 * 分页查询商家账户列表
