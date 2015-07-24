@@ -25,8 +25,13 @@ public class VirtualAccountQuerySumVO {
 	/** 总交易额 */
 	private BigDecimal tradeSum;
 	
-	/** 总佣金收入 */
+	/** 总交易佣金收入 */
 	private BigDecimal commissionSum;
+	
+	/**
+	 * 总优惠券佣金收入
+	 */
+	private BigDecimal couponCommissionSum;
 	
 	/** 总奖金收入 */
 	private BigDecimal bonusSum;
@@ -102,6 +107,14 @@ public class VirtualAccountQuerySumVO {
 
 	public void setTradeDaily(BigDecimal tradeDaily) {
 		this.tradeDaily = tradeDaily;
+	}
+
+	public BigDecimal getCouponCommissionSum() {
+		return couponCommissionSum;
+	}
+
+	public void setCouponCommissionSum(BigDecimal couponCommissionSum) {
+		this.couponCommissionSum = couponCommissionSum;
 	}
 
 }

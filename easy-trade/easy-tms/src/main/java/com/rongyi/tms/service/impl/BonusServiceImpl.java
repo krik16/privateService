@@ -92,9 +92,8 @@ public class BonusServiceImpl extends BaseServiceImpl implements BonusService {
                 paramsMap.put("memo", params.getReason());
             }
             result= logService.batachInsertCommissionAuditLog(paramsMap);
-            //发送消息到OSM
+            //发送消息到VA
             if(params.getStatus()>0){
-                LOGGER.info("审核通过发送消息到 OSM");
                 List<Integer> idsList=ValidateUtil.StringToIntList(params.getIds());
                 for(int i=0;i<idsList.size();i++){
                     BonusVO vo=this.getById(idsList.get(i));
@@ -104,15 +103,25 @@ public class BonusServiceImpl extends BaseServiceImpl implements BonusService {
                    
                    
                     if(vo.getBonusType()==1){
-                        //奖金
+                        //交易奖励
                         accountDetail.setSign(1);
                         accountDetail.setItemType(VirtualAccountEventType.BONUS);
                         accountDetail.setRemark("bonus: " + vo.getMarks()==null?"":vo.getMarks());
-                    }else{
-                        //惩罚
+                    }else if(vo.getBonusType() == 2){
+                        //交易惩罚
                         accountDetail.setSign(-1);
                         accountDetail.setItemType(VirtualAccountEventType.FINE);
                         accountDetail.setRemark("punishment: " + vo.getMarks()==null?"":vo.getMarks());
+                    }else if(vo.getBonusType() == 3){
+                    	//优惠券佣金奖励
+                    	accountDetail.setSign(1);
+                    	accountDetail.setItemType(VirtualAccountEventType.COUPON_COMMISSION);
+                    	accountDetail.setRemark("coupon commission : " + vo.getMarks()==null?"":vo.getMarks());
+                    }else{
+                    	//优惠券佣金惩罚
+                    	accountDetail.setSign(-1);
+                    	accountDetail.setItemType(VirtualAccountEventType.COUPON_COMMISSION);
+                    	accountDetail.setRemark("coupon commission : " + vo.getMarks()==null?"":vo.getMarks());
                     }
                     try {
                         Map<String, Object> body = new HashMap<String, Object>();
