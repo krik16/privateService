@@ -12,6 +12,9 @@ public class QueryOrder {
         this.orderColumn = orderColumn;
     }
 
+    public QueryOrder() {
+    }
+
     public String getOrderColumn() {
         return orderColumn;
     }
