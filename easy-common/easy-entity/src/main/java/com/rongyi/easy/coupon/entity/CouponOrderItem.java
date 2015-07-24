@@ -105,7 +105,6 @@ public class CouponOrderItem implements Serializable {
      */
     private String thumbnail;
 
-
     public CouponOrderItem() {
 
     }

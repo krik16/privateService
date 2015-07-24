@@ -70,12 +70,43 @@ public class CouponOrder implements Serializable {
      */
     private String paymentNo;
 
+    /**
+     * 设备ID，限购使用
+     */
+    private String devId;
+
+    /**
+     * 支付账户，限购使用
+     */
+    private String payAccount;
+
+    /**
+     * 原结算金额
+     */
+    private Double totalAmount;
+
+    /**
+     * 实际支付金额
+     */
+    private Double payAmount;
+
+    /**
+     * 优惠金额 （积分+红包+后续其他优惠）
+     */
+    private Double discountAmount;
+
+    /**
+     * 优惠详情，json格式，例如{“score”:”100”, "scoreDeduction":"1"}
+     */
+    private String discountInfo;
+
     public CouponOrder() {
 
     }
 
     public CouponOrder(String orderNo, String buyerId, String buyerName, String buyerMobile, Integer tradeStatus,
-                       Date orderTime, Date payTime, Integer tradeWay) {
+                       Date orderTime, Date payTime, Integer tradeWay, String devId, String payAccount,
+                       Double totalAmount, Double payAmount, Double discountAmount, String discountInfo) {
         super();
         this.orderNo = orderNo;
         this.buyerId = buyerId;
@@ -85,6 +116,12 @@ public class CouponOrder implements Serializable {
         this.orderTime = orderTime;
         this.payTime = payTime;
         this.tradeWay = tradeWay;
+        this.devId = devId;
+        this.payAccount = payAccount;
+        this.totalAmount = totalAmount;
+        this.payAmount = payAmount;
+        this.discountAmount = discountAmount;
+        this.discountInfo = discountInfo;
     }
 
     /**
@@ -245,6 +282,54 @@ public class CouponOrder implements Serializable {
         this.paymentNo = paymentNo;
     }
 
+    public String getDevId() {
+        return devId;
+    }
+
+    public void setDevId(String devId) {
+        this.devId = devId;
+    }
+
+    public String getPayAccount() {
+        return payAccount;
+    }
+
+    public void setPayAccount(String payAccount) {
+        this.payAccount = payAccount;
+    }
+
+    public Double getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(Double totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public Double getPayAmount() {
+        return payAmount;
+    }
+
+    public void setPayAmount(Double payAmount) {
+        this.payAmount = payAmount;
+    }
+
+    public Double getDiscountAmount() {
+        return discountAmount;
+    }
+
+    public void setDiscountAmount(Double discountAmount) {
+        this.discountAmount = discountAmount;
+    }
+
+    public String getDiscountInfo() {
+        return discountInfo;
+    }
+
+    public void setDiscountInfo(String discountInfo) {
+        this.discountInfo = discountInfo;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -261,6 +346,12 @@ public class CouponOrder implements Serializable {
                 .append("tradeWay", tradeWay)
                 .append("cashCouponCode", cashCouponCode)
                 .append("paymentNo", paymentNo)
+                .append("devId", devId)
+                .append("payAccount", payAccount)
+                .append("totalAmount", totalAmount)
+                .append("payAmount", payAmount)
+                .append("discountAmount", discountAmount)
+                .append("discountInfo", discountInfo)
                 .toString();
     }
 }
