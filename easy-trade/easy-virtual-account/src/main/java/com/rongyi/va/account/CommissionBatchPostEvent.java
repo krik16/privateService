@@ -19,6 +19,7 @@ import org.springframework.context.ApplicationContext;
 
 import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.core.constant.CommissionEnum;
+import com.rongyi.core.constant.VirtualAccountEventTypeEnum;
 import com.rongyi.easy.va.entity.VirtualAccountDetailEntity;
 import com.rongyi.rss.mallshop.order.ROACommodityCommissionService;
 import com.rongyi.va.constants.VirtualAccountDetailTypes;
@@ -32,8 +33,7 @@ import com.rongyi.va.vo.CommissionBatchPostVO;
 public class CommissionBatchPostEvent extends BaseEvent {
 	/** 佣金列表 */
 	private CommissionBatchPostVO[] commissionList;
-
-	@SuppressWarnings("unchecked")
+	
 	public void load(JSONObject json) throws Exception {
 		// 调用父类分析函数
 		super.load(json);
@@ -48,7 +48,6 @@ public class CommissionBatchPostEvent extends BaseEvent {
 			list[i] = (CommissionBatchPostVO) obj;
 			i++;
 		}
-
 		setCommissionList(list);
 	}
 
@@ -72,9 +71,11 @@ public class CommissionBatchPostEvent extends BaseEvent {
 			detailEntity.setCreateAt(new Date());
 			detailEntity.setAmount(postedCommission.getCommissionAmount());
 			detailEntity.setUserId(postedCommission.getGuideId());
-			detailEntity.setItemType(VirtualAccountDetailTypes.COMMISSION);
+			if(VirtualAccountEventTypeEnum.COMMISSION_BATCH_POST.getCode().equals(this.getType()))//商品佣金
+				detailEntity.setItemType(VirtualAccountDetailTypes.COMMISSION);
+			else//优惠券佣金
+				detailEntity.setItemType(VirtualAccountDetailTypes.COUPON_COMMISSION);
 			detailEntity.setSign(1);
-
 			int detailId = 0;
 			try {
 				detailId = virtualAccountService.updateBalance(postedCommission.getGuideId(),

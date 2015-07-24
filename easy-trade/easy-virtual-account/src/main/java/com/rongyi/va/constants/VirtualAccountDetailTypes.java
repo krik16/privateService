@@ -16,7 +16,7 @@ package com.rongyi.va.constants;
 public interface VirtualAccountDetailTypes {
 	/** 账户明细项目类型（1 返佣，2 奖金 ，3 支付款，4 罚款，5 提现） */
 	
-	/** 返佣 */
+	/** 交易返佣 */
 	public static final int COMMISSION = 1;
 	
 	/** 奖金 */
@@ -30,4 +30,7 @@ public interface VirtualAccountDetailTypes {
 	
 	/** 提现 */
 	public static final int WITHDRAW = 5;
+	
+	/** 优惠券返佣*/
+	public static final int COUPON_COMMISSION = 6;
 }
