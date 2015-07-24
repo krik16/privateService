@@ -41,7 +41,7 @@ public class RpbEventServiceImpl extends BaseServiceImpl implements RpbEventServ
 	}
 
 	@Override
-	public MessageEvent getMessageEvent(String payNo, String orderNum, String orderDetailNum, String payChannel, String source, String target, String type) {
+	public MessageEvent getMessageEvent(String payNo, String orderNum, String orderDetailNum, String payChannel,String payAccount, String source, String target, String type) {
 		MessageEvent event = new MessageEvent();
 		Map<String, Object> bodyMap = new HashMap<String, Object>();
 		bodyMap.put("orderNum", orderNum);
@@ -49,6 +49,10 @@ public class RpbEventServiceImpl extends BaseServiceImpl implements RpbEventServ
 			bodyMap.put("orderDetailNum", orderDetailNum);
 		else
 			bodyMap.put("orderDetailNum", "");
+		if(StringUtils.isNotEmpty(payAccount))
+			bodyMap.put("payAccount", payAccount);
+		else
+			bodyMap.put("payAccount", "");
 		bodyMap.put("paymentId", payNo);
 		bodyMap.put("payChannel", payChannel);
 		event.setBody(bodyMap);

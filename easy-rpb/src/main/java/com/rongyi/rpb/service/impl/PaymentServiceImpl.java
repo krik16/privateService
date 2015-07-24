@@ -421,7 +421,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 		String target = Constants.SOURCETYPE.OSM;
 		if(Constants.ORDER_TYPE.ORDER_TYPE_1 == paymentEntityVO.getOrderType())
 			target = Constants.SOURCETYPE.COUPON;
-		event = rpbEventService.getMessageEvent(paymentEntityVO.getPayNo(), paymentEntityVO.getOrderNum(), paymentEntityVO.getOrderDetailNumArray(), PaymentEventType.ZERO_PAY, Constants.SOURCETYPE.RPB,target, type);
+		event = rpbEventService.getMessageEvent(paymentEntityVO.getPayNo(),null, paymentEntityVO.getOrderNum(), paymentEntityVO.getOrderDetailNumArray(), PaymentEventType.ZERO_PAY, Constants.SOURCETYPE.RPB,target, type);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("code", 0);
 		resultMap.put("totlePrice", 0);

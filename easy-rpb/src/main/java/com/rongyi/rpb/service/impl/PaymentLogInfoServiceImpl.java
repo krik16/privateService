@@ -99,19 +99,19 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
 		if (list != null && !list.isEmpty() && list.get(0).getStatus() != Constants.PAYMENT_STATUS.STAUS2) {
 			paymentService.updateListStatusBypayNo(paymentLogInfo.getOutTradeNo(), tradeType, status);// 修改付款单状态
 			String orderNums = paymentService.getOrderNumStrsByPayNo(paymentLogInfo.getOutTradeNo());
-			paySuccessToMessage(paymentLogInfo.getOutTradeNo(), orderNums, list.get(0).getOrderType(), payChannel);
+			paySuccessToMessage(paymentLogInfo.getOutTradeNo(),paymentLogInfo.getBuyer_email(), orderNums, list.get(0).getOrderType(), payChannel);
 		}
 	}
 
 	@Override
-	public void paySuccessToMessage(String outTradeNo, String orderNums, Integer orderType, String payChannel) {
+	public void paySuccessToMessage(String out_trade_no,String buyerEmail, String orderNums, Integer orderType, String payChannel) {
 		if (orderNums != null) {
 			String[] orderNumArray = orderNums.split("\\,");
+			String target = Constants.SOURCETYPE.COUPON;// 优惠券订单
 			for (int i = 0; i < orderNumArray.length; i++) {
-				String target = Constants.SOURCETYPE.COUPON;// 优惠券订单
 				if (Constants.ORDER_TYPE.ORDER_TYPE_0 == orderType)// 商品订单
 					target = Constants.SOURCETYPE.OSM;
-				MessageEvent event = rpbEventService.getMessageEvent(outTradeNo, orderNumArray[i], null, payChannel, Constants.SOURCETYPE.RPB, target, PaymentEventType.BUYER_PAID);
+				MessageEvent event = rpbEventService.getMessageEvent(out_trade_no, orderNumArray[i], null, payChannel,buyerEmail, Constants.SOURCETYPE.RPB, target, PaymentEventType.BUYER_PAID);
 				sender.convertAndSend(event);
 			}
 		}

@@ -29,5 +29,5 @@ public interface RpbEventService {
 	 * @param target数据目的地
 	 * @param type支付类型
 	 */
-	public abstract MessageEvent getMessageEvent(String payNo, String orderNum, String orderDetailNum, String payChannel, String source, String target, String type);
+	public abstract MessageEvent getMessageEvent(String payNo, String orderNum, String orderDetailNum, String payChannel,String payAccount, String source, String target, String type);
 }
