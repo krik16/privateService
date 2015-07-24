@@ -137,6 +137,27 @@ public class TradeVO implements Serializable {
 	 * 卖家支付账号姓名
 	 */
 	private String sellerPayName;
+
+	/**
+	 * 优惠信息（积分，抵扣券信息，json格式）
+	 */
+	private String integralDiscount;
+
+	/**
+	 * 使用积分数
+	 */
+	private Integer integral;
+
+	/**
+	 * 使用优惠券金额
+	 */
+	private Double couponDiscount;
+
+	/**
+	 * 优惠券金额整数
+	 */
+	private int couponDiscountInt;
+
 	/*----查询字段----*/
 	/**
 	 * 交易开始时间
@@ -167,6 +188,11 @@ public class TradeVO implements Serializable {
 	 * 订单用户Id
 	 */
 	private String orderUserId;
+
+	/**
+	 * 优惠方式
+	 */
+	private Integer favorType;
 
 	public Integer getId() {
 		return id;
@@ -431,4 +457,47 @@ public class TradeVO implements Serializable {
 	public void setOrderType(Integer orderType) {
 		this.orderType = orderType;
 	}
+
+	public String getIntegralDiscount() {
+		return integralDiscount;
+	}
+
+	public void setIntegralDiscount(String integralDiscount) {
+		this.integralDiscount = integralDiscount;
+	}
+
+	public Integer getIntegral() {
+		return integral;
+	}
+
+	public void setIntegral(Integer integral) {
+		this.integral = integral;
+	}
+
+	public Double getCouponDiscount() {
+		return couponDiscount;
+	}
+
+	public void setCouponDiscount(Double couponDiscount) {
+		this.couponDiscount = couponDiscount;
+		if (this.getCouponDiscount() != null && this.getCouponDiscount() > 0)
+			this.couponDiscountInt = (int) this.couponDiscount.doubleValue();
+	}
+
+	public Integer getFavorType() {
+		return favorType;
+	}
+
+	public void setFavorType(Integer favorType) {
+		this.favorType = favorType;
+	}
+
+	public int getCouponDiscountInt() {
+		return couponDiscountInt;
+	}
+
+	public void setCouponDiscountInt(int couponDiscountInt) {
+		this.couponDiscountInt = couponDiscountInt;
+	}
+
 }
