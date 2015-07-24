@@ -20,5 +20,7 @@ public interface ICustomerService {
 
     public List<CustomerSimpleVO> selectCustomerSimpleVOsByGroup(Integer guideId, Integer groupId) throws Exception;
 
+    public Customer selectByGuideAndUser(Integer guideId, String userId);
+
     public void deleteCustomer(Integer customerId) throws Exception;
 }
