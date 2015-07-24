@@ -81,4 +81,7 @@ public class QueryFilter {
             ", valueTypeString='" + this.getValueTypeString() + '\'' +
             '}';
     }
+
+    public QueryFilter() {
+    }
 }

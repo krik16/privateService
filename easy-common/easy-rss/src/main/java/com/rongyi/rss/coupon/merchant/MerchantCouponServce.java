@@ -2,6 +2,7 @@ package com.rongyi.rss.coupon.merchant;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.coupon.entity.mysql.CouponEntity;
 import com.rongyi.easy.page.QueryParam;
 
 /**
@@ -19,9 +20,17 @@ public interface MerchantCouponServce {
     public PagingVO<Coupon> getCouponByPage(QueryParam queryParam);
 
     /**
+     *卡券通用查询接口
+     * @param queryParam
+     * @return
+     */
+    public PagingVO<CouponEntity> getCouponByPageMysql(QueryParam queryParam);
+
+    /**
      * 商家优惠券，新增，修改，审核，删除等操作
      * @param coupon
      * @return
      */
     public int updateCoupon(Coupon coupon);
+
 }

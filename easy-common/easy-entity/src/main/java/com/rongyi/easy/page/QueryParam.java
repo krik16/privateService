@@ -108,4 +108,7 @@ public class QueryParam {
             ", queryFilters=" + queryFilters +
             '}';
     }
+
+    public QueryParam() {
+    }
 }
