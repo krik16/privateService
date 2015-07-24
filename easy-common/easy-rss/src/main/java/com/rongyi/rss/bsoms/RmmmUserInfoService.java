@@ -28,4 +28,10 @@ public interface RmmmUserInfoService {
 	 * @return
 	 */
 	boolean updateAccountSuspended(String userId, boolean isSuspended);
+
+	/**
+	 * 根据id修改账户状态：启用/停用
+	 * @param paraMap
+	 */
+	void updateAccountStatus(int id, int isSuspended);
 }
