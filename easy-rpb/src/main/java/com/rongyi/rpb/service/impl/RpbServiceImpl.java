@@ -102,7 +102,7 @@ public class RpbServiceImpl implements IRpbService {
 				List<PaymentItemEntity> itemList = paymentItemService.selectByPaymentId(paymentEntity.getId());
 				orderDetailNum = paymentItemService.getDetailNum(itemList);
 			}
-			MessageEvent event = rpbEventService.getMessageEvent(paymentEntity.getPayNo(), paymentEntity.getOrderNum(), orderDetailNum, paymentEntity.getPayChannel().toString(),
+			MessageEvent event = rpbEventService.getMessageEvent(paymentEntity.getPayNo(), paymentEntity.getOrderNum(), orderDetailNum, paymentEntity.getPayChannel().toString(),null,
 					Constants.SOURCETYPE.RPB, target, PaymentEventType.REFUND);
 			sender.convertAndSend(event);
 			return messageMap;

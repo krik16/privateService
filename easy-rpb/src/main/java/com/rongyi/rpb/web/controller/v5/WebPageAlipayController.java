@@ -103,25 +103,12 @@ public class WebPageAlipayController extends BaseController {
 				return "zhifuFail";
 			}
 			String orderNums = paymentService.getOrderNumStrsByPayNo(out_trade_no);
-			// Sender.Notification notification = new Sender.Notification();
-			// sender.addOrderNotification(orderNums, notification);
 			List<PaymentEntity> list = paymentService.selectByPayNoAndTradeType(out_trade_no, 0);
 			if (list != null && !list.isEmpty() && list.get(0).getStatus() != Constants.PAYMENT_STATUS.STAUS2) {
 				paymentService.updateListStatusBypayNo(out_trade_no, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);// 修改付款单状态
-				paymentLogInfoService.paySuccessToMessage(out_trade_no, orderNums, list.get(0).getOrderType(), PaymentEventType.PAYMENT);
-
+				paymentLogInfoService.paySuccessToMessage(out_trade_no,null, orderNums, list.get(0).getOrderType(), PaymentEventType.PAYMENT);
+				
 			}
-			// if (!notification.isNotified()) {
-			// notification.await(2000);
-			// }
-			// if (notification.isNotified()) {
-			// LOGGER.info("osm同步返回通知订单号:" + orderNums);
-			// if ("success".equals(result)) {
-			// model.addAttribute("content", "支付成功");
-			// } else {
-			// model.addAttribute("content", "支付成功但是没有返回Result信息！");
-			// }
-			// }
 			LOGGER.info("<---支付宝手机网页同步通知结束 ");
 			return "zhifuSuccess";
 		} catch (Exception e) {

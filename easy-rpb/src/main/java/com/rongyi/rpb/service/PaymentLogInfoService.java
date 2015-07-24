@@ -64,13 +64,13 @@ public interface PaymentLogInfoService {
 
 	/**
 	 * @Description: 支付成功发送通知消息
-	 * @param outTradeNo
+	 * @param paymentLogInfo
 	 * @param orderNums
 	 * @param orderType
 	 * @Author: 柯军
 	 * @datetime:2015年5月21日上午11:53:11
 	 **/
-	public abstract void paySuccessToMessage(String outTradeNo, String orderNums, Integer orderType, String payChannel);
+	public abstract void paySuccessToMessage(String out_trade_no,String buyerEmail, String orderNums, Integer orderType, String payChannel);
 
 	/**
 	 * @Description: 更新退款事件删除状态
