@@ -30,6 +30,8 @@
 		<result column="seller_pay_name" property="sellerPayName"
 			jdbcType="VARCHAR" />
 		<result column="order_type" property="orderType" jdbcType="VARCHAR" />
+		<result column="integral_discount" property="integralDiscount" jdbcType="VARCHAR" />
+		<result column="coupon_discount" property="couponDiscount" jdbcType="DOUBLE" />
 	</resultMap>
 
 	<resultMap id="TradeDetailCountResultMap" type="com.rongyi.tms.moudle.vo.TradeDetailCount">
@@ -45,7 +47,7 @@
 		transaction_id, trade_time, shop_id,
 		shop_name, mail_id, mall_name, buyer_id,
 		seller_account,
-		seller_name,trade_type,pay_channel,seller_pay_type,seller_pay_account,seller_pay_name,order_type
+		seller_name,trade_type,pay_channel,seller_pay_type,seller_pay_account,seller_pay_name,order_type,integral_discount,coupon_discount
 	</sql>
 	<sql id="trade_list_where_clause">
 		<!-- 交易流水号 -->
@@ -111,6 +113,35 @@
 		<if test="maxTotalPrice != null and maxTotalPrice != ''">
 			AND #{maxTotalPrice} >= order_price
 		</if>
+		
+		<!-- 订单类型 -->
+		<if test="orderType != null and orderType != ''">
+			AND order_type = #{orderType}	
+		</if>
+		<!-- 优惠方式 -->
+		<if test="favorType != null and favorType != ''">
+			<!-- 未使用积分和现金券 -->
+			<if test="favorType == 0">
+				AND (integral_discount NOT LIKE '%score%' OR integral_discount IS NULL) 
+				AND ( 0 >= coupon_discount  OR coupon_discount is null)  
+			</if>
+				<!-- 使用现金券 -->
+			<if test="favorType == 1">
+				AND coupon_discount > 0
+				AND (integral_discount NOT LIKE '%score%' OR integral_discount IS NULL) 
+			</if>
+				<!-- 使用积分 --> 
+			<if test="favorType == 2">
+				AND integral_discount LIKE '%score%'
+				AND ( 0 >= coupon_discount  OR coupon_discount is null)  
+			</if>
+				<!-- 使用积分和现金券 -->
+			<if test="favorType == 3">
+				AND integral_discount LIKE '%score%' 
+				AND coupon_discount > 0
+			</if>
+		</if>
+		
 	</sql>
 	<select id="selectTradePageList" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">

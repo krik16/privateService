@@ -64,6 +64,17 @@ body {
 								 ${trade.orderNo}
 							</p>
 						</div>
+						<div class="line-heights shopsName">订单类型:</div>
+						<div class="shopsData">
+							<p class="p_text">
+								<c:choose>
+									<c:when test="${trade.tradeType eq 0}">
+										商品订单
+									</c:when>
+									<c:otherwise>优惠券订单</c:otherwise>
+								</c:choose>
+							</p>
+						</div>
 						<div class="line-heights shopsName">打款方式:</div>
 						<div class="shopsData">
 							<p class="p_text">
@@ -140,6 +151,24 @@ body {
 							${trade.orderPrice}&nbsp;元
 							</p>
 						</div>
+						<div class="line-heights shopsName">优惠方式:</div>
+						<div class="shopsData">
+							<p class="p_text" style="color: red;font-weight: bold;font-size: 14px">
+							<c:if test="${ not empty trade.integral && trade.integral > 0}">
+									积分 
+									(${trade.integral})
+									<c:if
+									test="${ not empty trade.couponDiscount && trade.couponDiscount > 0}">
+									、
+									</c:if>
+							</c:if>
+							<c:if
+								test="${ not empty trade.couponDiscountInt && trade.couponDiscountInt > 0}">
+									现金券(${trade.couponDiscountInt}元)
+							</c:if>
+							</p>
+						</div>
+						<div style="clear: both;"></div>
 						<div class="line-heights shopsName">店铺:</div>
 						<div class="shopsData">
 							<p class="p_text">

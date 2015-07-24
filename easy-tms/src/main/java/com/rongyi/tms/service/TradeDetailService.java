@@ -11,6 +11,7 @@ package com.rongyi.tms.service;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.coupon.entity.UserCoupon;
 import com.rongyi.easy.tms.vo.TradeVO;
 import com.rongyi.tms.moudle.vo.TradeDetailCount;
 
@@ -60,5 +61,23 @@ public interface TradeDetailService {
      * @datetime:2015年5月27日下午3:25:14
      **/
     public TradeVO selectById(Integer id);
+    
+    /**	
+     * @Description: 根据订单号查询订单使用现金券记录 
+     * @param orderNo
+     * @return	
+     * @Author:  柯军
+     * @datetime:2015年7月22日下午5:44:54
+     **/
+    public UserCoupon getCouponOrderRecordByOrderNo(String orderNo); 
+
+    /**
+	 * @Description: 根据优惠信息获取积分优惠
+	 * @param integralDiscount
+	 * @return
+	 * @Author: 柯军
+	 * @datetime:2015年7月23日下午2:29:10
+	 **/
+    public Integer getIntegral(String integralDiscount);
 
 }

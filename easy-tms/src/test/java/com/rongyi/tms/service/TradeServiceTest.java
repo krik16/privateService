@@ -9,6 +9,7 @@ import org.springframework.test.annotation.Rollback;
 import org.testng.annotations.Test;
 
 import com.rongyi.easy.coupon.entity.CouponOrder;
+import com.rongyi.easy.coupon.entity.UserCoupon;
 import com.rongyi.easy.entity.MallLifeUserEntity;
 import com.rongyi.rss.coupon.RoaCouponOrderService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
@@ -66,6 +67,12 @@ public class TradeServiceTest extends BaseTest{
     @Test
     public void testSelectCoupon(){
     	CouponOrder couponOrder = roaCouponOrderService.findOneByOrderNo("2015071300350917");
-    	System.err.println(couponOrder.getBuyerId());
+    	System.err.println("buyerId="+couponOrder.getBuyerId());
+    }
+    
+    @Test
+    public void testGetUserCouponByOrderNo(){
+    	UserCoupon userCoupon = tradeDetailService.getCouponOrderRecordByOrderNo("2015071300350917");
+    	System.err.println("result="+userCoupon.getDiscount());
     }
 }

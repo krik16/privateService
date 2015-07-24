@@ -142,6 +142,7 @@ public class TradeDetailController extends BaseController {
         PaymentLogInfo paymentLogInfo = rpbService.selectByTradeNo(tradeNo);
         if (paymentLogInfo != null)
             tradeVO.setBuyerAccount(paymentLogInfo.getBuyer_email());
+        tradeVO.setIntegral(tradeDetailService.getIntegral(tradeVO.getIntegralDiscount()));
         model.addAttribute("trade", tradeVO);
         getRongyiAccount(model, tradeVO.getPayChannel());
         return "/tradeDetail/tradeDetail_info";

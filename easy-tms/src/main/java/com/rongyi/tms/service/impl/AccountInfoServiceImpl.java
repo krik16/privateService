@@ -48,9 +48,9 @@ public class AccountInfoServiceImpl implements AccountInfoService {
 			result.setCommissionForAuditTotal(commissionVo.getCommissionForAuditTotal());
 		}
 		// 审核失败佣金（本月,包含交易佣金和验码佣金）合计
-//		commissionVo = salesCommissionService.selectFaleCommission(userId);
-//		if (commissionVo != null && commissionVo.getFaleCommissionMonth() != null)
-//			result.setFaleCommissionMonth(commissionVo.getFaleCommissionMonth());
+		commissionVo = salesCommissionService.selectFaleCommission(userId);
+		if (commissionVo != null && commissionVo.getFaleCommissionMonth() != null)
+			result.setFaleCommissionMonth(commissionVo.getFaleCommissionMonth());
 		return result;
 	}
 }

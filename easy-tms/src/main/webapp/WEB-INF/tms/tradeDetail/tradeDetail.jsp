@@ -92,6 +92,23 @@ pageEncoding="UTF-8"%>
 								<option value="2">银行卡</option>
 							</select>
 						</li>
+						<li style="margin-top: 25px;">订单类型
+							<select id="orderType" style="width: 90px">
+								<option value="">--全部--</option>
+								<option value="0">商品订单</option>
+								<option value="1">优惠券订单</option>
+							</select>
+						</li>
+						<li style="margin-top: 25px;">优惠方式
+							<select id="favorType" style="width: 110px">
+								<option value="">--全部--</option>
+								<option value="0">未使用优惠</option>
+								<option value="1">现金券</option>
+								<option value="2">积分</option>
+								<option value="3">现金券加积分</option>
+							</select>
+						</li>
+						
 						<li><span id="search-time" style="width: 76px;">交易时间段:</span>
 							<input name="start" type="text" value="" class="min bg2 startTime" id="tradeStartTime" style="width:160px"/><span style="margin: 0 -55px 0 -15px">至</span> 
 							<input name="end" type="text" value="" class="min bg2 endTime" id="tradeEndTime"  style="width:160px"/> 
