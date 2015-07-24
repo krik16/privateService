@@ -15,5 +15,5 @@ public interface ICustomerGroupService {
 
     public void updateCustomerGroup(CustomerGroup customerGroup);
 
-    public void deleteCustomerGroup(Integer groupId);
+    public void deleteCustomerGroup(Integer groupId) throws Exception;
 }

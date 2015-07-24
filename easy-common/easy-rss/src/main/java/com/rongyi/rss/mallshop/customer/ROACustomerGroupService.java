@@ -4,8 +4,6 @@ import com.rongyi.easy.mallshop.customer.CustomerGroup;
 import com.rongyi.easy.mallshop.customer.CustomerGroupPageVO;
 import com.rongyi.easy.mallshop.customer.PageParam;
 
-import java.util.List;
-
 /**
  * Created by xgq on 2015/7/17.
  */
@@ -17,5 +15,5 @@ public interface ROACustomerGroupService {
 
     public void updateCustomerGroup(CustomerGroup customerGroup);
 
-    public void deleteCustomerGroup(Integer groupId);
+    public void deleteCustomerGroup(Integer groupId) throws Exception;
 }

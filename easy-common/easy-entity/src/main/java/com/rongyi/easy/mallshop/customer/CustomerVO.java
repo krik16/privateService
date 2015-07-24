@@ -46,7 +46,7 @@ public class CustomerVO implements Serializable {
     private String headImg;
 
     /**
-     * todo 是否为专属导购
+     * 是否为专属导购
      */
     private boolean belong;
 
@@ -81,7 +81,7 @@ public class CustomerVO implements Serializable {
     private String memo;
 
     /**
-     * todo 购买列表 该顾客最新4张在该店铺购买商品的id 缩略图
+     * 购买列表 该顾客最新4张在该店铺购买商品的id 缩略图
      */
     private List<CustomerOrderCommodityVO> commodityVOs;
 
