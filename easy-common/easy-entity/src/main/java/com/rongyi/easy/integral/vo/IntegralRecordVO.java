@@ -21,6 +21,7 @@ public class IntegralRecordVO {
 	private BigDecimal total_money;//原结算金额
 	private BigDecimal preferential_deduction ; //使用优惠抵扣金额
 	private BigDecimal score_deduction; //积分抵扣金额
+	private BigDecimal post_money ; //邮费
  	private int remain_score;  //剩余积分
  	private String item_name; //商品名称
  	private String item_id; //id
@@ -32,6 +33,12 @@ public class IntegralRecordVO {
  	private Date update_time; 
  	private String reason; 
  	private String op_name;
+	public BigDecimal getPost_money() {
+		return post_money;
+	}
+	public void setPost_money(BigDecimal post_money) {
+		this.post_money = post_money;
+	}
 	public int getUse_score() {
 		return use_score;
 	}
@@ -133,6 +140,7 @@ public class IntegralRecordVO {
 	public String getEvent_id() {
 		return event_id;
 	}
+
 	public void setEvent_id(String event_id) {
 		this.event_id = event_id;
 	}
@@ -154,5 +162,18 @@ public class IntegralRecordVO {
 	public void setOp_name(String op_name) {
 		this.op_name = op_name;
 	}
-	
+	@Override
+	public String toString() {
+		return "IntegralRecordVO [user_id=" + user_id + ", sourceType="
+				+ sourceType + ", action=" + action + ", type=" + type
+				+ ", use_score=" + use_score + ", pay_money=" + pay_money
+				+ ", total_money=" + total_money + ", preferential_deduction="
+				+ preferential_deduction + ", score_deduction="
+				+ score_deduction + ", remain_score=" + remain_score
+				+ ", item_name=" + item_name + ", item_id=" + item_id
+				+ ", item_type=" + item_type + ", order_sn=" + order_sn
+				+ ", coupon_code=" + coupon_code + ", comment_id=" + comment_id
+				+ ", event_id=" + event_id + ", update_time=" + update_time
+				+ ", reason=" + reason + ", op_name=" + op_name + "]";
+	}
 }
