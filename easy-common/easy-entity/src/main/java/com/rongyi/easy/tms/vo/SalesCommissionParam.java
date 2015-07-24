@@ -12,6 +12,7 @@ package com.rongyi.easy.tms.vo;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +42,13 @@ public class SalesCommissionParam {
     private int page;
     private int pageSize;
     private int pageStart;
+    
+    /**
+     * @author kejun
+     * 佣金是否已到账（6已到账，其余未到账）
+     */
+    private String vaStatus;
+    
     public String getCommissionNo() {
         return commissionNo;
     }
@@ -113,7 +121,14 @@ public class SalesCommissionParam {
     public void setPageStart(int pageStart) {
         this.pageStart = pageStart;
     }
-    public Map<String, Object> paramsToMap(){
+    
+    public String getVaStatus() {
+		return vaStatus;
+	}
+	public void setVaStatus(String vaStatus) {
+		this.vaStatus = vaStatus;
+	}
+	public Map<String, Object> paramsToMap(){
         Map<String,Object> paramsMap=new HashMap<String, Object>();
         if(StringUtils.isNotBlank(this.getCommissionNo())){
             paramsMap.put("commissionNo", Integer.parseInt(this.getCommissionNo()));
@@ -160,6 +175,14 @@ public class SalesCommissionParam {
         paramsMap.put("begin", (page-1)*15);
         paramsMap.put("size",pageSize);
         paramsMap.put("orderBy", "-create_at");
+        
+        //TODO ADD BY KEJUN
+        if(StringUtils.isNotBlank(this.getVaStatus())){
+            String [] vaStatusArray=this.getVaStatus().split(",");
+//            List<String> vaStatusList = Arrays.asList(vaStatusArray);    
+            paramsMap.put("vaStatus",vaStatusArray);
+        }
+        
         return paramsMap;
     }
 }
