@@ -21,9 +21,11 @@
 			<td>交易时间</td>
 			<td>收支类型</td>
 			<td>打款方式</td>
+			<td>优惠方式</td>
 			<td>商场</td>
 			<td>店铺</td>
 			<td>订单号</td>
+			<td>订单类型</td>
 			<td>下单时间</td>
 			<td>买家账号</td>
 			<td>买家姓名</td>
@@ -48,6 +50,21 @@
 							${entity.payChannel eq '1' ? '微信' : ''}
 							${entity.payChannel eq '2' ? '银行卡 ' : ''}
 						</td>
+						<c:choose>
+							<c:when test="${entity.integral > 0 && entity.couponDiscount > 0}">
+								<td>现金券加积分</td>
+							</c:when>
+							<c:when test="${entity.integral > 0}">
+								<td>积分</td>
+							</c:when>
+							<c:when test="${entity.couponDiscount > 0}">
+								<td>现金券</td>
+							</c:when>
+							<c:otherwise>
+								<td></td>
+							</c:otherwise>
+						</c:choose>
+						
 						<td>${entity.mallName}</td>
 						<td>${entity.shopName}</td>
 						<c:choose>
@@ -56,6 +73,14 @@
 							</c:when>
 							<c:otherwise>
 								<td>${entity.orderNo}</td>
+							</c:otherwise>
+						</c:choose>
+						<c:choose>
+							<c:when test="${entity.orderType eq 0}">
+								<td>商品订单</td>
+							</c:when>
+							<c:otherwise>
+								<td>优惠券订单</td>
 							</c:otherwise>
 						</c:choose>
 						<td><fmt:formatDate value="${entity.orderTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
@@ -77,7 +102,7 @@
 			</c:when>
 			<c:otherwise>
 				<tr>
-					<td style="text-align: center;" colspan="12">暂无记录</td>
+					<td style="text-align: center;" colspan="15">暂无记录</td>
 				</tr>
 			</c:otherwise>
 		</c:choose>

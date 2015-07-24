@@ -157,6 +157,8 @@ function getParamsJson(){
 	  var tradeEndTime = $('#tradeEndTime').val();
 	  var minTotalPrice = $('#minTotalPrice').val();
 	  var maxTotalPrice = $('#maxTotalPrice').val();
+	  var orderType = $('#orderType').val();
+	  var favorType = $('#favorType').val();
 	 var paramsJson = {
 		        'currpage': currpage,
 		        'tradeNo':tradeNo,
@@ -170,7 +172,9 @@ function getParamsJson(){
 		        'tradeStartTime':tradeStartTime,
 		        'tradeEndTime':tradeEndTime,
 		        'minTotalPrice':minTotalPrice,
-		        'maxTotalPrice':maxTotalPrice
+		        'maxTotalPrice':maxTotalPrice,
+		        'orderType':orderType,
+		        'favorType':favorType
 		    };
 	 return paramsJson;
 }
