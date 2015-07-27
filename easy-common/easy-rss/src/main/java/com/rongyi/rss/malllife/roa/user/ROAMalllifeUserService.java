@@ -51,6 +51,15 @@ public interface ROAMalllifeUserService {
 	public UserInfoVO getByPhone(String phone) throws Exception;
 
 	/**
+	 * 根据im_id查询摩生活用户
+	 *
+	 * @param imId
+	 * @return
+	 * @throws Exception
+	 */
+	public MallLifeUserEntity getUserByIMId(String imId) throws Exception;
+
+	/**
 	 * 更新用户信息
 	 * 
 	 * @param malllifeUser

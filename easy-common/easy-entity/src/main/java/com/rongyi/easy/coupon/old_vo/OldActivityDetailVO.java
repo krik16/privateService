@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class OldCouponItemVO implements Serializable {
+public class OldActivityDetailVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -41,8 +41,12 @@ public class OldCouponItemVO implements Serializable {
     private boolean notOutCodeFlag = true; // 外部导入券标志 true 不是外部导入券,false 是外部导入券
 
     private double currentPrice;//当前价格（优惠券价格-红包折扣）
-    
+
     private String couponId;//优惠券id
+
+    private int integral;  // 购买时使用的积分
+    private double couponDiscount; //购买时使用的红包价格
+    private int unUsered;  //未使用的数量
 
     public double getCurrentPrice() {
         return currentPrice;
@@ -180,12 +184,35 @@ public class OldCouponItemVO implements Serializable {
         this.notOutCodeFlag = notOutCodeFlag;
     }
 
-	public String getCouponId() {
-		return couponId;
-	}
+    public String getCouponId() {
+        return couponId;
+    }
 
-	public void setCouponId(String couponId) {
-		this.couponId = couponId;
-	}
+    public void setCouponId(String couponId) {
+        this.couponId = couponId;
+    }
 
+    public int getIntegral() {
+        return integral;
+    }
+
+    public void setIntegral(int integral) {
+        this.integral = integral;
+    }
+
+    public double getCouponDiscount() {
+        return couponDiscount;
+    }
+
+    public void setCouponDiscount(double couponDiscount) {
+        this.couponDiscount = couponDiscount;
+    }
+
+    public int getUnUsered() {
+        return unUsered;
+    }
+
+    public void setUnUsered(int unUsered) {
+        this.unUsered = unUsered;
+    }
 }

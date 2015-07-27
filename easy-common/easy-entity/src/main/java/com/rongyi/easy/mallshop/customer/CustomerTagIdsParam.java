@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by xgq on 2015/7/16.
  */
-public class CustomerTagsDeleteParam implements Serializable {
+public class CustomerTagIdsParam implements Serializable {
     /**
      * 顾客Id
      */

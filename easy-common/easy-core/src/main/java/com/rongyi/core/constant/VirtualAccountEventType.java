@@ -30,6 +30,11 @@ public interface VirtualAccountEventType {
     /** 提现 */
     public static final int DRAW = 5;
     
+    /**
+     * 优惠券返佣
+     */
+    public static final int COUPON_COMMISSION = 6;
+    
     /** 修改虚拟账户 (tms) */
 
     /** 提现支付 (rpb) */

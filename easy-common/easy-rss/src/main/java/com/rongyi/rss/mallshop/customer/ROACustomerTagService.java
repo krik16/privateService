@@ -1,8 +1,8 @@
 package com.rongyi.rss.mallshop.customer;
 
+import com.rongyi.easy.mallshop.customer.CustomerTagIdsParam;
 import com.rongyi.easy.mallshop.customer.CustomerTagVO;
 import com.rongyi.easy.mallshop.customer.CustomerTagsCreateParam;
-import com.rongyi.easy.mallshop.customer.CustomerTagsDeleteParam;
 
 import java.util.List;
 
@@ -16,5 +16,7 @@ public interface ROACustomerTagService {
 
     public void saveCustomerTagList(CustomerTagsCreateParam customerTagsCreateParam);
 
-    public void deleteCustomerTagList(CustomerTagsDeleteParam customerTagsDeleteParam);
+    public void deleteCustomerTagList(CustomerTagIdsParam customerTagsDeleteParam);
+
+    public void setupCustomerDefaultTagList(CustomerTagIdsParam customerTagIdsParam);
 }

@@ -8,7 +8,6 @@
 	</parent>
 	<artifactId>easy-core</artifactId>
 	<packaging>jar</packaging>
-
 	<dependencies>
 		<!-- spring start -->
 		<dependency>
