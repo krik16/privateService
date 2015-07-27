@@ -59,6 +59,9 @@ public class RmmmUserInfoEntity implements Serializable{
     /** 环信用户账号 */
     private String userIMCount;
 
+
+    private String devId;//登录时获取当前设备Id
+
     public Integer getId() {
         return id;
     }
@@ -201,5 +204,13 @@ public class RmmmUserInfoEntity implements Serializable{
 
     public void setUserIMCount(String userIMCount) {
         this.userIMCount = userIMCount;
+    }
+
+    public String getDevId() {
+        return devId;
+    }
+
+    public void setDevId(String devId) {
+        this.devId = devId;
     }
 }
