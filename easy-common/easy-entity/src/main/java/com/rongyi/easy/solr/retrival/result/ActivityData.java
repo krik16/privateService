@@ -38,9 +38,9 @@ public class ActivityData extends Data implements Serializable {
     private String type;//类型
 
 
-    protected int limitPublishCount;  // 每日限量发行张数
-    protected int limitUseCount;   // 每人每日限用张数
-    protected int limitCount; // 每人限购数量
+    protected Integer limitPublishCount;  // 每日限量发行张数
+    protected Integer limitUseCount;   // 每人每日限用张数
+    protected Integer limitCount; // 每人限购数量
     private List<Integer> afterSaleService = Arrays.asList(1, 1, 1);//[1,1,1] 1为支持，0为不支持。第一位：随时退、第二位：过期退 第三位： 免预约
 
     public String get_id() {
@@ -219,27 +219,27 @@ public class ActivityData extends Data implements Serializable {
         this.grouponStyle = grouponStyle;
     }
 
-    public int getLimitPublishCount() {
+    public Integer getLimitPublishCount() {
         return limitPublishCount;
     }
 
-    public void setLimitPublishCount(int limitPublishCount) {
+    public void setLimitPublishCount(Integer limitPublishCount) {
         this.limitPublishCount = limitPublishCount;
     }
 
-    public int getLimitUseCount() {
+    public Integer getLimitUseCount() {
         return limitUseCount;
     }
 
-    public void setLimitUseCount(int limitUseCount) {
+    public void setLimitUseCount(Integer limitUseCount) {
         this.limitUseCount = limitUseCount;
     }
 
-    public int getLimitCount() {
+    public Integer getLimitCount() {
         return limitCount;
     }
 
-    public void setLimitCount(int limitCount) {
+    public void setLimitCount(Integer limitCount) {
         this.limitCount = limitCount;
     }
 
