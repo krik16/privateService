@@ -31,7 +31,7 @@ public interface CouponConst {
     }
 
     /**
-     * 退款状态：未退款[0], 已退款[1]
+     * 退款状态：未退款[0], 已退款[1]，退款中[2]
      */
     interface CouponOrderItemStatus {
         int NO_REFUND = 0;
