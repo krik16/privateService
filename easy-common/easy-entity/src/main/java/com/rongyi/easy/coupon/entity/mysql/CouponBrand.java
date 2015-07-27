@@ -9,7 +9,7 @@ public class CouponBrand {
 
     private Integer couponId;
 
-    private Byte enabled;
+    private Integer enabled;
 
     public Integer getId() {
         return id;
@@ -43,11 +43,11 @@ public class CouponBrand {
         this.couponId = couponId;
     }
 
-    public Byte getEnabled() {
+    public Integer getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(Byte enabled) {
+    public void setEnabled(Integer enabled) {
         this.enabled = enabled;
     }
 }

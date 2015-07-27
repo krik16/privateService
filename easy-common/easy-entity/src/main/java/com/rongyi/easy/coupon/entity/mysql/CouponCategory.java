@@ -5,13 +5,15 @@ public class CouponCategory {
 
     private Integer couponId;
 
-    private Integer categoryId;
+    private String firstCategoryId;
 
-    private String categoryName;
+    private String firstCategoryName;
 
-    private Byte categoryLevel;
+    private String secendCategoryId;
 
-    private Byte enabled;
+    private String secendCategoryName;
+
+    private Integer enabled;
 
     public Integer getId() {
         return id;
@@ -29,35 +31,43 @@ public class CouponCategory {
         this.couponId = couponId;
     }
 
-    public Integer getCategoryId() {
-        return categoryId;
+    public String getFirstCategoryId() {
+        return firstCategoryId;
     }
 
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
+    public void setFirstCategoryId(String firstCategoryId) {
+        this.firstCategoryId = firstCategoryId;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public String getFirstCategoryName() {
+        return firstCategoryName;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setFirstCategoryName(String firstCategoryName) {
+        this.firstCategoryName = firstCategoryName;
     }
 
-    public Byte getCategoryLevel() {
-        return categoryLevel;
+    public String getSecendCategoryId() {
+        return secendCategoryId;
     }
 
-    public void setCategoryLevel(Byte categoryLevel) {
-        this.categoryLevel = categoryLevel;
+    public void setSecendCategoryId(String secendCategoryId) {
+        this.secendCategoryId = secendCategoryId;
     }
 
-    public Byte getEnabled() {
+    public String getSecendCategoryName() {
+        return secendCategoryName;
+    }
+
+    public void setSecendCategoryName(String secendCategoryName) {
+        this.secendCategoryName = secendCategoryName;
+    }
+
+    public Integer getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(Byte enabled) {
+    public void setEnabled(Integer enabled) {
         this.enabled = enabled;
     }
 }

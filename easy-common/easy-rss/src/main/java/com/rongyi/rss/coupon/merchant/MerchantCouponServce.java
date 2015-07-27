@@ -30,6 +30,6 @@ public interface MerchantCouponServce {
      * @param coupon
      * @return
      */
-    public int updateCoupon(Coupon coupon);
+    public Boolean updateCoupon(Coupon coupon);
 
 }
