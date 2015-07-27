@@ -60,7 +60,7 @@ public class RmmmUserInfoEntity implements Serializable{
     private String userIMCount;
 
 
-    private String devId;//登录账号设备Id
+    private String devId;//登录时获取当前设备Id
 
     public Integer getId() {
         return id;

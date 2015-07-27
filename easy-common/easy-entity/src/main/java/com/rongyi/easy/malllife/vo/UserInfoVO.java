@@ -36,6 +36,9 @@ public class UserInfoVO implements Serializable {
 
 	private int isLoginRed;//是否领过红包
 
+
+	private String devId;//登录时设备的ID
+
 	public String getUserId() {
 		return userId;
 	}
@@ -186,5 +189,13 @@ public class UserInfoVO implements Serializable {
 
 	public void setIsLoginRed(int isLoginRed) {
 		this.isLoginRed = isLoginRed;
+	}
+
+	public String getDevId() {
+		return devId;
+	}
+
+	public void setDevId(String devId) {
+		this.devId = devId;
 	}
 }
