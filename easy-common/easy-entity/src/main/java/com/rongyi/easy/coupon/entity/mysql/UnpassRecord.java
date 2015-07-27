@@ -9,7 +9,7 @@ public class UnpassRecord {
 
     private Date createAt;
 
-    private Byte type;
+    private Integer type;
 
     private Integer couponId;
 
@@ -37,11 +37,11 @@ public class UnpassRecord {
         this.createAt = createAt;
     }
 
-    public Byte getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(Byte type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 

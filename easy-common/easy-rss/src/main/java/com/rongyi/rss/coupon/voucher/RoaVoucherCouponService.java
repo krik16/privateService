@@ -1,6 +1,6 @@
 package com.rongyi.rss.coupon.voucher;
 
-import org.bson.types.ObjectId;
+import java.util.List;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.mysql.Coupon;
@@ -41,13 +41,13 @@ public interface RoaVoucherCouponService {
 	/**
 	 * @Description:审核代金券
 	 * @author:lqy
-	 * @param id 代金券id
-	 * @param checkStatus 审核状态 ：待审核[0] 未通过[1] 已通过[2]
-	 * @param checkFailReason 未通过原因
+	 * @param ids 代金券id
+	 * @param status 审核状态 ：待审核[0] 未通过[1] 已通过[2]
+	 * @param reason 未通过原因
 	 * @return 成功：true 失败：false
 	 */
-	Boolean verifyCoupon(ObjectId id, String checkStatus,
-			String checkFailReason);
+	Boolean verifyCoupon(List<Integer> ids, Integer status,
+			String reason) throws Exception;
 
 	/**
 	 * @Description:根据id查询代金券
