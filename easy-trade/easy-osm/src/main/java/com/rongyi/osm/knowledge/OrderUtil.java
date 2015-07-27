@@ -10,8 +10,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import net.sf.json.JSONObject;
-
 import org.bson.types.ObjectId;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.rule.FactHandle;
@@ -28,6 +26,7 @@ import com.rongyi.core.constant.OrderEventType;
 import com.rongyi.core.constant.OrderEventType.EventErrorCode;
 import com.rongyi.core.constant.VirtualAccountEventType;
 import com.rongyi.core.constant.VirtualAccountEventTypeEnum;
+import com.rongyi.easy.integral.vo.IntegralRecordVO;
 import com.rongyi.easy.osm.entity.ApplicationFormEntity;
 import com.rongyi.easy.osm.entity.OrderDetailFormEntity;
 import com.rongyi.easy.osm.entity.OrderEventEntity;
@@ -42,7 +41,10 @@ import com.rongyi.osm.service.OrderFormService;
 import com.rongyi.osm.service.PaymentActionService;
 import com.rongyi.osm.service.coupon.CouponStatusService;
 import com.rongyi.osm.service.mcmc.McmcStockService;
+import com.rongyi.rss.integral.IntegralService;
 import com.rongyi.rss.mallshop.order.ROAOrderService;
+
+import net.sf.json.JSONObject;
 
 @Component
 public class OrderUtil {
@@ -72,9 +74,12 @@ public class OrderUtil {
 
 	@Autowired
 	private PaymentActionService paymentActionService;
-	
+
 	@Autowired
 	private ROAOrderService roaOrderService;
+
+	@Autowired
+	private IntegralService integralService;
 
 	/**
 	 * 用于停止定时器的最大时间（2038年1月1日 00:00:00）
@@ -218,7 +223,8 @@ public class OrderUtil {
 	* @param orderDetailList 子订单列表
 	* @return 修改价格是否合法（不可大于原始总价）
 	*/
-	public boolean orderSetDiscount(BigDecimal newPrice, OrderFormEntity order, OrderDetailFormEntity[] orderDetailList) {
+	public boolean orderSetDiscount(BigDecimal newPrice, OrderFormEntity order,
+			OrderDetailFormEntity[] orderDetailList) {
 		BigDecimal totalAmount = new BigDecimal(0);
 		for (OrderDetailFormEntity detail : orderDetailList) {
 			totalAmount = totalAmount.add(detail.getRealAmount());
@@ -286,8 +292,8 @@ public class OrderUtil {
 		return new Date(getCurrentTime() + interval);
 	}
 
-	public OrderEventEntity createOrderEventEntity(String orderNum, String originalStatus, String detail,
-			String status, String type) {
+	public OrderEventEntity createOrderEventEntity(String orderNum, String originalStatus, String detail, String status,
+			String type) {
 		OrderEventEntity entity = new OrderEventEntity();
 		entity.setCreateAt(getCurrentDate());
 		entity.setDetail(detail);
@@ -762,7 +768,7 @@ public class OrderUtil {
 	}
 
 	/**
-	 * 买家在订单完成时获取积分（积分数 = 结算金额totalAmount取整数部分）
+	 * 买家在订单完成时获取积分
 	 * 
 	 * @author ZhengYl
 	 * @date 2015年7月16日 下午1:09:30 
@@ -770,25 +776,32 @@ public class OrderUtil {
 	 */
 	public void buyerScoreObtain(OrderFormEntity order, OrderDetailFormEntity[] orderDetailList) {
 		if (order.getTotalAmount().compareTo(new BigDecimal(0)) > 0) {
-			BuyerScoreCommitEvent scoreEvent = new BuyerScoreCommitEvent();
-			
-			scoreEvent.setScore(order.getTotalAmount().intValue());  // 结算金额取整舍小数
-			scoreEvent.setOrderNo(order.getOrderNo());
-			scoreEvent.setEventId(order.getOrderNo());
-			scoreEvent.setUserId(order.getBuyerId());
-			
+			logger.info(order.getOrderNo() + " : 订单完成增加积分");
+			IntegralRecordVO scoreVO = new IntegralRecordVO();
+
+			scoreVO.setSourceType(2);
+			scoreVO.setAction(1);
+			scoreVO.setType(9);
+			scoreVO.setOrder_sn(order.getOrderNo());
+			scoreVO.setEvent_id(order.getOrderNo());
+			scoreVO.setPay_money(order.getTotalAmount());
+			scoreVO.setUser_id(order.getBuyerId());
 			String commodityIds = "";
 			for (Object entity : orderDetailList) {
 				OrderDetailFormEntity orderDetail = (OrderDetailFormEntity) entity;
-				commodityIds += orderDetail.getCommodityMid();			
-			}		
-			scoreEvent.setItemId(commodityIds);
-			
-			// 等积分系统完成
-//			this.sendEvent(scoreEvent);
+				commodityIds += orderDetail.getCommodityMid();
+			}
+			scoreVO.setComment_id(commodityIds);
+			try {
+				integralService.addOrSubScore(scoreVO);
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+				e.printStackTrace();
+			}
 		}
+
 	}
-	
+
 	/**
 	 * 买家延迟未支付发送消息提醒
 	 * 
