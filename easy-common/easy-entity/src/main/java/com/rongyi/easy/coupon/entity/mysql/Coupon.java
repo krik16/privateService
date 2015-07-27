@@ -1,6 +1,8 @@
 package com.rongyi.easy.coupon.entity.mysql;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Coupon {
     private Integer id;
@@ -74,6 +76,19 @@ public class Coupon {
     private Integer sortIndex;
 
     private String sourceName;
+
+
+    private CouponBrand couponBrand = new CouponBrand();
+
+    private List<CouponMall> malls = new ArrayList<CouponMall>();
+
+    private List<CouponShop> shops = new ArrayList<CouponShop>();
+
+    private CouponCategory couponCategory = new CouponCategory();
+
+
+
+
 
     public Integer getId() {
         return id;
@@ -362,4 +377,83 @@ public class Coupon {
     public void setSourceName(String sourceName) {
         this.sourceName = sourceName;
     }
+
+
+
+
+
+
+	public CouponBrand getCouponBrand() {
+		return couponBrand;
+	}
+
+	public void setCouponBrand(CouponBrand couponBrand) {
+		this.couponBrand = couponBrand;
+	}
+
+	public List<CouponMall> getMalls() {
+		return malls;
+	}
+
+	public void setMalls(List<CouponMall> malls) {
+		this.malls = malls;
+	}
+
+	public List<CouponShop> getShops() {
+		return shops;
+	}
+
+	public void setShops(List<CouponShop> shops) {
+		this.shops = shops;
+	}
+
+	public CouponCategory getCouponCategory() {
+		return couponCategory;
+	}
+
+	public void setCouponCategory(CouponCategory couponCategory) {
+		this.couponCategory = couponCategory;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Coupon [id=").append(id).append(", name=").append(name)
+				.append(", couponType=").append(couponType)
+				.append(", validateType=").append(validateType)
+				.append(", totalCount=").append(totalCount)
+				.append(", stockCount=").append(stockCount)
+				.append(", originalPrice=").append(originalPrice)
+				.append(", currentPrice=").append(currentPrice)
+				.append(", discount=").append(discount)
+				.append(", displayRegion=").append(displayRegion)
+				.append(", afterSaleService=").append(afterSaleService)
+				.append(", publishStartTime=").append(publishStartTime)
+				.append(", publishEndTime=").append(publishEndTime)
+				.append(", validBeginTime=").append(validBeginTime)
+				.append(", validEndDate=").append(validEndDate)
+				.append(", useRestriction=").append(useRestriction)
+				.append(", useDescription=").append(useDescription)
+				.append(", recommend=").append(recommend).append(", marks=")
+				.append(marks).append(", listPicUrl=").append(listPicUrl)
+				.append(", detailPicUrl=").append(detailPicUrl)
+				.append(", relatedType=").append(relatedType)
+				.append(", limitCount=").append(limitCount)
+				.append(", limitUseCount=").append(limitUseCount)
+				.append(", limitPublishCount=").append(limitPublishCount)
+				.append(", synTarget=").append(synTarget)
+				.append(", sourceTarget=").append(sourceTarget)
+				.append(", status=").append(status).append(", createUser=")
+				.append(createUser).append(", createAt=").append(createAt)
+				.append(", updateUser=").append(updateUser)
+				.append(", updateAt=").append(updateAt).append(", outStatus=")
+				.append(outStatus).append(", enabled=").append(enabled)
+				.append(", sortIndex=").append(sortIndex)
+				.append(", sourceName=").append(sourceName).append(", malls=")
+				.append(malls).append(", shops=").append(shops).append("]");
+		return builder.toString();
+	}
+
+
+
 }
