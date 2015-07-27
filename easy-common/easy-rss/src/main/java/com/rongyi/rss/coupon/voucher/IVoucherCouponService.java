@@ -39,6 +39,17 @@ public interface IVoucherCouponService {
 	Boolean verifyCoupon(List<Integer> ids, Integer status,
 			String reason) throws Exception;
 
+	/**
+	 * @Description:下架代金券
+	 * @author:lqy
+	 * @param ids 代金券id
+	 * @param status 下架状态为[3]
+	 * @param reason 下架原因
+	 * @return 成功：true 失败：false
+	 * @throws Exception
+	 */
+	Boolean soldOutCoupon(List<Integer> ids, Integer status, String reason)
+			throws Exception;
 
 	/**
 	 * @Description:根据id查询代金券
