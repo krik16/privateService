@@ -1,5 +1,6 @@
 package com.rongyi.easy.integral.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 /**
  * 积分
@@ -9,7 +10,7 @@ import java.util.Date;
 * @author zzq 
 * @date 2015-7-21 下午3:46:00
  */
-public class IntegralVO {
+public class IntegralVO implements Serializable{
 
 	private String user_id;
 	private int score;

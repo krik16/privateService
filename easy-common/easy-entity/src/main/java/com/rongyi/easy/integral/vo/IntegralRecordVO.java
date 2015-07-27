@@ -1,5 +1,6 @@
 package com.rongyi.easy.integral.vo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -11,7 +12,7 @@ import java.util.Date;
 * @author zzq 
 * @date 2015-7-17 下午4:27:01
  */
-public class IntegralRecordVO {
+public class IntegralRecordVO implements Serializable {
 	private String user_id;
 	private int sourceType;//1:app,2:后台操作
 	private int action ; //1加积分，2减积分
