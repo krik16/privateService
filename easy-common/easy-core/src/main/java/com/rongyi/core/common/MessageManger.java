@@ -1,15 +1,11 @@
 package com.rongyi.core.common;
 
 import com.jianzhou.sdk.BusinessService;
-import com.rongyi.core.common.util.PropertiesUtil;
-import com.rongyi.core.constant.Constants;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Properties;
 
 /**
  * 类MessageManger.java的实现描述：TODO 类实现描述
@@ -108,14 +104,14 @@ public class MessageManger {
     	logger.info("--------------------------------->");
     	logger.info("-----进入短信通道----->");
     	logger.info("-----phone----->"+ phone);
-    	String messageChannel = "1";//短信通道,1:云短信通道 ，2：百悟短信通道，3:建周短信通道
+    	String messageChannel = "3";//短信通道,1:云短信通道 ，2：百悟短信通道，3:建周短信通道
     	String result = null;
     	String classesPath = MessageManger.class.getClassLoader().getResource("").getFile();
 		classesPath += "config.properties";
 		logger.info("classesPath--->"+ classesPath);
 //		logger.info(classesPath);
-		Properties pro = PropertiesUtil.getProperties(classesPath);
-		messageChannel = pro.getProperty(Constants.Common.MESSAGE_CHANNEL);
+		//Properties pro = PropertiesUtil.getProperties(classesPath);
+		//messageChannel = pro.getProperty(Constants.Common.MESSAGE_CHANNEL);
 		logger.info("messageChannel--->"+ messageChannel);
 //    	if(propertyConfigurer!=null && propertyConfigurer.getProperty(Constants.Common.MESSAGE_CHANNEL) != null) {    		
 //    		messageChannel = propertyConfigurer.getProperty(Constants.Common.MESSAGE_CHANNEL).toString();
