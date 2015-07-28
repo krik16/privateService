@@ -34,6 +34,7 @@ public interface ICooperationBrandService {
 	 * @throws Exception
 	 */
 	 public Integer insertCooperationBrand(PrincipalAndCategoryParam param) throws Exception;
+	 public Integer getAndSaveCooperateBrandByBrandMid(String brandMid) throws Exception;
 	/**
 	 * 通过mall name 得到合作商场品牌列表
 	 */
