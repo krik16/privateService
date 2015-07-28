@@ -120,4 +120,7 @@ public interface IShopService{
 	 * @throws Exception
 	 */
 	public List<ShopInfoEntity> getShopListByShopName(String shopName,Integer mallId) throws Exception;
+
+	public BrandShopDetailVO getBrandShopDetail(Integer shopId,
+			MallLifeUserEntity user);
 }
