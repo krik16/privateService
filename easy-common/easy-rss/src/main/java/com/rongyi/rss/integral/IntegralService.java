@@ -29,11 +29,18 @@ public interface IntegralService {
 	public JSONObject getScoreByUserId(String userId);
 	
 	/**
-	 * 根据规则类型获取规则
+	 * 根据规则类型获取规则信息
 	 * @param scoreRuleEnum
 	 * @return
 	 */
-	public JSONObject  getRuleByType(ScoreRuleEnum scoreRuleEnum);
+	public JSONObject  getRuleByType(int scoreRuleEnum);
+
+	/**
+	 * 根据规则类型获取规则比率
+	 * @param scoreRuleEnum
+	 * @return 
+	 */
+	public JSONObject  getRuleRateByType(int scoreRuleEnum);
 	/**
 	 * 获取积分记录
 	 * @param userid
