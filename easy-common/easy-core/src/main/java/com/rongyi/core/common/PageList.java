@@ -1,14 +1,25 @@
 package com.rongyi.core.common;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * 
+ * ClassName: PageList <br/>
+ * Function: TODO ADD FUNCTION. <br/>
+ * Reason: 分页对象 <br/>
+ * date: 2015年7月20日 上午11:07:21 <br/>
+ * 
+ * @author bin.zhang
+ * @version @param <T>
+ * @since JDK 1.6
+ */
 public class PageList<T> implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  private List<T> list;// 查询结果
+  private List<T> list;
 
   private int total;// 总条数
 
@@ -17,6 +28,12 @@ public class PageList<T> implements Serializable {
   public PageList(List<T> list, Page page) {
     this.list = list;
     this.page = page;
+    this.total = page.getTotalCount();
+  }
+
+  public PageList() {
+    this.list = new ArrayList<T>();
+    this.page = new Page();
     this.total = page.getTotalCount();
   }
 
