@@ -32,4 +32,10 @@ public interface MerchantCouponServce {
      */
     public Boolean updateCoupon(Coupon coupon);
 
+    /**
+     * 插入一条coupon
+     * @return coupon id
+     */
+    public int insertCoupon();
+
 }
