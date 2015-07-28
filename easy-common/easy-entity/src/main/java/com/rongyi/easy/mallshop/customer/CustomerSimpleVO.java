@@ -31,6 +31,12 @@ public class CustomerSimpleVO implements Serializable {
      */
     private String memoName;
 
+
+    /**
+     * 容易逛用户ID
+     */
+    private String userId;
+
     public Integer getId() {
         return id;
     }
@@ -69,5 +75,13 @@ public class CustomerSimpleVO implements Serializable {
 
     public void setMemoName(String memoName) {
         this.memoName = memoName;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }
