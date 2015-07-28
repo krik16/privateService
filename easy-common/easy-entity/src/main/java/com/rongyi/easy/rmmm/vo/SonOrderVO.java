@@ -3,6 +3,7 @@ package com.rongyi.easy.rmmm.vo;
 import com.rongyi.easy.mcmc.vo.CommoditySpecColumnVO;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class SonOrderVO implements Serializable{
@@ -17,6 +18,8 @@ public class SonOrderVO implements Serializable{
 
 	private String commodityOriginalPrice;// 商品原价
 
+	private BigDecimal realAmount;// 子订单实际价格
+	
 	private String sonOrderStatus;// 子订单状态（含有维权状态）
 
 	private String refundStatus;// 退款状态
@@ -40,6 +43,14 @@ public class SonOrderVO implements Serializable{
 
 	private String description;// 全场红包/店铺红包
 
+	public BigDecimal getRealAmount() {
+		return realAmount;
+	}
+
+	public void setRealAmount(BigDecimal realAmount) {
+		this.realAmount = realAmount;
+	}
+	
 	public String getNum() {
 		return num;
 	}

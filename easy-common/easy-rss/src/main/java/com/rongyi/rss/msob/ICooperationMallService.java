@@ -61,6 +61,14 @@ public interface ICooperationMallService {
 	 */
 	public MallCooperateEntity getCooperateMallByMongoId(String mongoId) throws Exception;
 
+	/**
+	 * rePackage
+	 * 閫氳繃mallMongoId寰楀埌rmmm搴撲腑鐨処nteger绫诲瀷mallId
+	 * @param mallMid
+	 * @return
+	 */
+	public Integer getAndSaveCooperateMallByMallMid(String mallMid) throws Exception ;
+	
 	/** 以下两个方法是 从rongyi.app.content 移过来的方法 */
 	public CooperateMallEntity selectMallInfoById(Integer id);
 
