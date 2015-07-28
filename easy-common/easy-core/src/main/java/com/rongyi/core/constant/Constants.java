@@ -22,8 +22,10 @@ public interface Constants {
         String API_NULL_FLOPUSER = "用户名参数没有";
         String API_NULL_FLOPCHANNEL = "用户渠道没有";
         String API_NULL_OBJECTFLOPGOID = "翻牌活动id没有";
+        String API_NULL_ACTIVITYID="最近没有活动";
         String API_NULL_LISTTYPE = "列表类型没有";
         String API_NULL_PAGESize = "没有分页";
+        String API_NULL_USERPHONE="用户手机号为空";
         String API_NULL_COUPONID = "没有卷码";
         String API_NULL_ID = "没有奖品id";
     }
