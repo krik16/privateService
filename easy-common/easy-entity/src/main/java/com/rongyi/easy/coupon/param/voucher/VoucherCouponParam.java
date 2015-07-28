@@ -1,4 +1,4 @@
-package com.rongyi.easy.coupon.param;
+package com.rongyi.easy.coupon.param.voucher;
 
 import java.io.Serializable;
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.mysql.Coupon;
-import com.rongyi.easy.coupon.param.VoucherCouponParam;
+import com.rongyi.easy.coupon.param.voucher.VoucherCouponParam;
 
 /**
  * @Description:大运营平台代金券接口
