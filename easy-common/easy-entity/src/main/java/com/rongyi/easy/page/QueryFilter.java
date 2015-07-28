@@ -10,9 +10,16 @@ public class QueryFilter {
      * 要查询的字段名
      */
     private String name;
+
+    /**过滤类型*/
     private FilterType type;
+    /**值的类型*/
     private ValueType valueType;
+    /**值*/
     private Object value;
+
+    /**过滤关系 AND 或者 OR*/
+    private String filterRelation;
     private String filterTypeValue;
     private String valueTypeString;
     public String getName() {
@@ -70,6 +77,14 @@ public class QueryFilter {
         this.value = value;
     }
 
+    public QueryFilter(String name, FilterType type, ValueType valueType, Object value, String filterRelation) {
+        this.name = name;
+        this.type = type;
+        this.valueType = valueType;
+        this.value = value;
+        this.filterRelation = filterRelation;
+    }
+
     @Override
     public String toString() {
         return "QueryFilter{" +
@@ -83,5 +98,13 @@ public class QueryFilter {
     }
 
     public QueryFilter() {
+    }
+
+    public String getFilterRelation() {
+        return filterRelation;
+    }
+
+    public void setFilterRelation(String filterRelation) {
+        this.filterRelation = filterRelation;
     }
 }
