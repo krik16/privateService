@@ -143,7 +143,7 @@ public class WebPageAlipayController extends BaseController {
 					return;
 				if (!validateTradeStatus(map.get("trade_status").toString()))
 					return;
-				LOGGER.info("支付宝手机网页支付异步通知开始-->");
+				LOGGER.info("支付宝手机网页支付异步通知开始,交易流水号-->"+map.get("trade_no"));
 				paymentLogInfo.setNotifyId(map.get("notify_id").toString());
 				if (map.get("buyer_email") != null)
 					paymentLogInfo.setBuyer_email(map.get("buyer_email").toString());
@@ -209,7 +209,7 @@ public class WebPageAlipayController extends BaseController {
 			LOGGER.info("支付宝手机APP支付异步通知-->支付宝验证签名不通过，返回消息不是支付宝发出的合法消息!");
 			return null;
 		}
-		LOGGER.info("支付宝手机APP支付异步通知开始-->");
+		LOGGER.info("支付宝手机APP支付异步通知开始,交易流水号-->"+trade_no);
 		PaymentLogInfo paymentLogInfo = getPaymentLogInfo(trade_no, out_trade_no, notify_id, notify_type, DateUtil.getCurrDateTime(), sign, sign_type, 0, 0, total_fee, buyer_email, buyer_id,
 				Constants.REPLAY_FLAG.REPLAY_FLAG0);
 		paymentLogInfoService.insertPayNotify(paymentLogInfo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, PaymentEventType.APP);
@@ -257,7 +257,7 @@ public class WebPageAlipayController extends BaseController {
 			PaymentLogInfo result = paymentLogInfoService.selectByOutTradeNo(out_trade_no);
 			if (result != null)
 				return null;
-			LOGGER.info("微信支付异步通知开始-->");
+			LOGGER.info("微信支付异步通知开始，交易流水号-->"+transaction_id);
 			PaymentLogInfo paymentLogInfo = getPaymentLogInfo(transaction_id, out_trade_no, notify_id, null, DateUtil.getCurrDateTime(), sign, sign_type, 0, 0, total_fee, null, null,
 					Constants.REPLAY_FLAG.REPLAY_FLAG3);
 			paymentLogInfoService.insertPayNotify(paymentLogInfo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, PaymentEventType.WEIXIN_PAY);

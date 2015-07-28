@@ -163,7 +163,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 		PaymentEntityVO paymentEntityVO = paymentService.bodyToPaymentEntity(event.getBody(), null);
 		PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntityVO.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);// 根据退款单记录中的订单号找到对应的历史付款单记录（用来查找付款交易流水号）
 		if (paymentEntity == null) {
-			LOGGER.info("退款失败，历史付款单记录查找不存，请确认订单号:" + paymentEntityVO.getOrderNum() + "付款记录是否存在！");
+			throw new RuntimeException("退款失败，历史付款单记录查找不存在，请确认订单号:" + paymentEntityVO.getOrderNum() + "付款记录是否存在！");
 		} else if (paymentEntity != null && Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1 == paymentEntity.getPayChannel()) {
 			return true;
 		}
