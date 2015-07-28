@@ -185,17 +185,11 @@
 			<classifier>jdk15</classifier>
 		</dependency>
 
-		<!-- mongo start -->
 		<dependency>
-			<groupId>org.mongodb</groupId>
-			<artifactId>mongo-java-driver</artifactId>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.mongodb.morphia</groupId>
-			<artifactId>morphia</artifactId>
-		</dependency>
-		<!-- mongo end -->
-		
+
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
@@ -214,16 +208,25 @@
 		  <groupId>com.jianzhou</groupId>
 		  <artifactId>jzsms</artifactId>
 		</dependency>
-		<!--  Redis  Start-->
-		<dependency>  
-	        <groupId>org.springframework.data</groupId>  
-	        <artifactId>spring-data-redis</artifactId>  
-        </dependency>  
-        <dependency>  
-	        <groupId>redis.clients</groupId>  
-	        <artifactId>jedis</artifactId>
+		<!-- mongo start -->
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.mongodb.morphia</groupId>
+			<artifactId>morphia</artifactId>
+		</dependency>
+		<!-- mongo end -->
+		<!--  Redis  Start-->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.belerweb</groupId>
 			<artifactId>pinyin4j</artifactId>

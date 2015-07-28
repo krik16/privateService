@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import net.sf.json.JSONObject;
+
 public class OrderFormEntity implements Serializable{
     /** 主键id */
     private Integer id;
@@ -73,6 +75,16 @@ public class OrderFormEntity implements Serializable{
 
     /** 买家备注 */
     private String buyerComment;
+    
+    private JSONObject jsonDiscountInfo;   
+
+	public JSONObject getJsonDiscountInfo() {
+		return jsonDiscountInfo;
+	}
+
+	public void setJsonDiscountInfo(JSONObject jsonDiscountInfo) {
+		this.jsonDiscountInfo = jsonDiscountInfo;
+	}
 
     /**
      * 主键id

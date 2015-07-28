@@ -35,4 +35,11 @@ public interface CMFlopgoRecordService {
 	 * @return
 	 */
 	public int insertFlopRecord(FlopgoRecordEntity flopgoRecordEntity);
+	
+	/**
+	 * 修改领取的状态
+	 * @param flopgoRecordEntity
+	 * @param State
+	 */
+	public void updateReceiveTrue(FlopgoRecordEntity flopgoRecordEntity,String State) throws Exception;
 }
