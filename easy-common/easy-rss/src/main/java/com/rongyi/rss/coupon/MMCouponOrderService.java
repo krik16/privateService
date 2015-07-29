@@ -166,4 +166,13 @@ public interface MMCouponOrderService {
      */
     Map<String, Object> getCouponOrderByStatus(Map<String, Object> paramsMap,
                                                Integer currentPage, Integer pageSize);
+    
+    /**
+    * 本次可退最大金额
+    * @param orderNo
+    * @param number
+    * @param userId
+    * @return
+    */
+   Map<String, Object> calcRefundAmount(String orderNo, Integer number, String userId);
 }
