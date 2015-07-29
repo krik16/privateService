@@ -21,6 +21,7 @@
 		<property name="ignoreResourceNotFound" value="true" />
 		<property name="locations">
 			<list>
+				<value>classpath:/properties/config.properties</value>
 				<value>classpath:/maven_build/01_dev.properties</value>
 				<value>file:/data/etc/common/*.properties</value>
 				<value>file:/data/etc/projects/${project.name}.properties</value>
