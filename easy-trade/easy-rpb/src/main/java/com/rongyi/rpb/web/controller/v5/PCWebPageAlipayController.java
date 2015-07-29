@@ -52,7 +52,7 @@ public class PCWebPageAlipayController extends BaseController {
 
 	@Autowired
 	PaymentItemService paymentItemService;
-	
+
 	@Autowired
 	Sender sender;
 
@@ -230,9 +230,9 @@ public class PCWebPageAlipayController extends BaseController {
 	@RequestMapping("/refund_notify_url.htm")
 	public String notifyRefund(Model model, String notify_time, String notify_type, String notify_id, String sign_type, String sign, String batch_no, String success_num, String result_details) {
 		PaymentLogInfo result = paymentLogInfoService.selectByNotifyId(notify_id);
+		LOGGER.info("返回结果：" + result_details);
 		if (result != null)
 			return null;
-		LOGGER.info("返回结果：" + result_details);
 		if (!validateTradeStatus(result_details)) {
 			LOGGER.info("该订单状态支付宝不允许退款，退款状态未变更，退款事件记录未生成！");
 			return null;
@@ -259,7 +259,9 @@ public class PCWebPageAlipayController extends BaseController {
 						paymentLogInfo.setTimeEnd(DateUtil.getCurrDateTime());
 						paymentLogInfo.setBuyer_type(0);// 买家账号
 						paymentLogInfo.setEventType(3);
-						PaymentEntity refundPaymentEntity = getPaymentByPayTradeNo(paymentLogInfo.getTrade_no());
+						List<PaymentEntity> refundPaymentEntityList = paymentService.selectByPayNoAndTradeType(batch_no.substring(8),Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1); 
+						PaymentEntity refundPaymentEntity = refundPaymentEntityList.get(0);		
+//								getPaymentByPayTradeNo(paymentLogInfo.getTrade_no());
 						paymentLogInfo.setOutTradeNo(refundPaymentEntity.getPayNo());
 						paymentLogInfoService.insertGetId(paymentLogInfo);
 						LOGGER.info("更改退款项状态 0--->2,退款单号=" + refundPaymentEntity.getPayNo());
@@ -275,6 +277,10 @@ public class PCWebPageAlipayController extends BaseController {
 		LOGGER.info("<--支付宝退款成功异步通知结束");
 		return "payManager/notify";
 	}
+	
+	public static void main(String[] args) {
+		System.err.println("201507291000000432692920".substring(8));
+	}
 
 	/**
 	 * @Description: 支付宝退款通知成功后发送退款成功消息到订单系统
@@ -288,7 +294,7 @@ public class PCWebPageAlipayController extends BaseController {
 		bodyMap.put("totalPrice", refundPaymentEntity.getAmountMoney());
 		bodyMap.put("paymentId", refundPaymentEntity.getPayNo());
 		List<PaymentItemEntity> itemList = paymentItemService.selectByPaymentId(refundPaymentEntity.getId());
-		bodyMap.put("orderDetailNum",  paymentItemService.getDetailNum(itemList));
+		bodyMap.put("orderDetailNum", paymentItemService.getDetailNum(itemList));
 		MessageEvent event = new MessageEvent();
 		if (Constants.ORDER_TYPE.ORDER_TYPE_1 == refundPaymentEntity.getOrderType())// 优惠券订单退款
 			event.setTarget(Constants.SOURCETYPE.COUPON);
@@ -310,15 +316,15 @@ public class PCWebPageAlipayController extends BaseController {
 	 * @Author: 柯军
 	 * @datetime:2015年5月26日下午5:45:59
 	 **/
-	private PaymentEntity getPaymentByPayTradeNo(String tradeNo) {
-		PaymentEntity refundPaymentEntity = new PaymentEntity();
-		PaymentLogInfo oldPaymentLogInfo = paymentLogInfoService.selectByPayTradeNo(tradeNo);
-		List<PaymentEntity> paymentEntityList = paymentService.selectByPayNoAndTradeType(oldPaymentLogInfo.getOutTradeNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
-		if (paymentEntityList != null && !paymentEntityList.isEmpty()) {
-			refundPaymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntityList.get(0).getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_STATUS.STAUS0);
-		}
-		return refundPaymentEntity;
-	}
+//	private PaymentEntity getPaymentByPayTradeNo(String tradeNo) {
+//		PaymentEntity refundPaymentEntity = new PaymentEntity();
+//		PaymentLogInfo oldPaymentLogInfo = paymentLogInfoService.selectByPayTradeNo(tradeNo);
+//		List<PaymentEntity> paymentEntityList = paymentService.selectByPayNoAndTradeType(oldPaymentLogInfo.getOutTradeNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
+//		if (paymentEntityList != null && !paymentEntityList.isEmpty()) {
+//			refundPaymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntityList.get(0).getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_STATUS.STAUS0);
+//		}
+//		return refundPaymentEntity;
+//	}
 
 	/**
 	 * 支付失败时支付宝端回调接口
@@ -338,6 +344,6 @@ public class PCWebPageAlipayController extends BaseController {
 	 * @datetime:2015年4月24日上午10:47:02
 	 **/
 	private boolean validateTradeStatus(String tradeResult) {
-		return tradeResult.contains("TRADE_SUCCESS");
+		return tradeResult.contains("TRADE_SUCCESS") || tradeResult.contains("SUCCESS");
 	}
 }
