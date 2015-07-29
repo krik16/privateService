@@ -25,7 +25,7 @@ public class OrderCreateEvent extends UserEvent{
 						OrderFormEntity.class));
 		
 		OrderFormEntity orderFormEntity = getOrderFormEntity();
-		if(orderFormEntity.getJsonDiscountInfo()!=null){
+		if(orderFormEntity.getJsonDiscountInfo()!=null && orderFormEntity.getDiscountInfo().length()>0){
 			orderFormEntity.setDiscountInfo(orderFormEntity.getJsonDiscountInfo().toString());
 		}
 		

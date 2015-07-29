@@ -852,7 +852,7 @@ public class OrderUtil {
 	// /////////////////////////////////////////////////////////////////////////////////////////  
 		// 判断用户是否使用积分支付
 		public boolean createOrder(OrderFormEntity order,OrderDetailFormEntity[] orderDetailList) {
-			if(order.getDiscountInfo()!=null && order.getDiscountInfo().length()>0){
+			if(order.getDiscountInfo()!=null && order.getDiscountInfo().length()>0){ 
 				Map<String, Object> mapObject = JsonUtil.getMapFromJson(order.getDiscountInfo());
 				if (mapObject.get("score") != null && Integer.parseInt(mapObject.get("score").toString()) > 0) {
 					IntegralRecordVO integralRecordVO = setIntegralRecordVOInfo(order,orderDetailList);
