@@ -15,7 +15,11 @@ public enum UserLogOperateBiz implements IEnum {
   /**
    * 签到
    */
-  SIGN_IN(2);
+  SIGN_IN(2),
+  /**
+   * 绑定会员卡
+   */
+  BIND_VIP_CODE(3), ;
 
 
 
@@ -32,6 +36,8 @@ public enum UserLogOperateBiz implements IEnum {
         return LOGIN;
       case 2:
         return SIGN_IN;
+	  case 3:
+        return BIND_VIP_CODE;
       default:
         return null;
 
