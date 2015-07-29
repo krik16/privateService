@@ -92,4 +92,11 @@ public interface CMFlopgoService {
 	 */
 	public String getNewActivityId();
 	
+	/**
+	 * 修改数量+1
+	 * @param dafe
+	 * @return
+	 */
+	public int updateCountDaily(FlopPrizeDEntity dafe);
+	
 }
