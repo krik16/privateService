@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.json.JSONArray;
+
 import javax.annotation.Resource;
 
 import org.bson.types.ObjectId;
@@ -20,12 +22,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.rongyi.easy.malllife.common.util.JsonUtil;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.constant.Constants;
 import com.rongyi.core.constant.OrderEventType;
 import com.rongyi.core.constant.OrderEventType.EventErrorCode;
 import com.rongyi.core.constant.VirtualAccountEventType;
 import com.rongyi.core.constant.VirtualAccountEventTypeEnum;
+import com.rongyi.easy.integral.constant.ActionType;
+import com.rongyi.easy.integral.constant.ItemType;
+import com.rongyi.easy.integral.constant.ScoreRuleEnum;
 import com.rongyi.easy.integral.vo.IntegralRecordVO;
 import com.rongyi.easy.osm.entity.ApplicationFormEntity;
 import com.rongyi.easy.osm.entity.OrderDetailFormEntity;
@@ -201,6 +207,15 @@ public class OrderUtil {
 		if (order.getDisconntFee() != null) {
 			total = total.subtract(order.getDisconntFee());
 		}
+		
+		// 减去积分
+				Map map = JsonUtil.getMapFromJson(order.getDiscountInfo());
+				if (map.get("score") != null
+						&& Integer.parseInt(map.get("score").toString()) > 0) {
+					Integer scoreInt = Integer.parseInt(map.get("score").toString()) / 100;
+					BigDecimal score = new BigDecimal(scoreInt);
+					total = total.subtract(score);
+				}
 
 		//总价小于零的情况
 		total = total.compareTo(new BigDecimal(0)) < 0 ? new BigDecimal(0) : total;
@@ -831,4 +846,135 @@ public class OrderUtil {
 
 		return errorCodeList[errorCode];
 	}
+	
+	
+	// /////////////////////////////////////////////////////////////////////////////////////////
+		// 判断用户是否使用积分支付
+		public boolean createOrder(OrderFormEntity order,OrderDetailFormEntity[] orderDetailList) {
+			if(order.getDiscountInfo().toString()!=null){
+				Map<String, Object> mapObject = JsonUtil.getMapFromJson(order.getDiscountInfo());
+				if (mapObject.get("score") != null && Integer.parseInt(mapObject.get("score").toString()) > 0) {
+					IntegralRecordVO integralRecordVO = setIntegralRecordVOInfo(order,orderDetailList);
+					// 下单时验证前端传送积分抵扣金额
+					if (integralRecordVO.getAction() == ActionType.ACTION_ADD) {
+						BigDecimal scoreDeductionMoney = new BigDecimal(Double.parseDouble(mapObject.get("score").toString()) / 100); // 积分抵扣金额，100积分兑换1RMB
+						BigDecimal pageScoreDeductionMoney = new BigDecimal(Double.parseDouble(mapObject.get("scoreDeduction").toString())); // 前端传送积分抵扣金额
+						if (scoreDeductionMoney.compareTo(pageScoreDeductionMoney) != 0) {
+							logger.info("该积分与积分抵扣金额不一致");
+							return false;
+						}
+					}
+					// 扣积分
+					if (scoreOperation(integralRecordVO)) {
+						return true;
+					} else {
+						return false;
+					}
+				}else{
+					return true;// 没有使用积分支付
+				}
+			}else {
+				// 没有使用积分支付
+				return true;
+			}
+		}
+
+		public IntegralRecordVO setIntegralRecordVOInfo(OrderFormEntity order,
+				OrderDetailFormEntity[] orderDetailList) {
+			
+			IntegralRecordVO integralRecordVO = new IntegralRecordVO();
+			// CLOSED卖家订单关闭,TO_SHIPPED卖家超时未发货,UNPAID买家超时未支付
+			if (order.getStatus().equals(OrderFormStatus.CLOSED)|| order.getStatus().equals(OrderFormStatus.TO_SHIPPED)|| order.getStatus().equals(OrderFormStatus.UNPAID)) {
+				integralRecordVO.setAction(ActionType.ACTION_ADD); // 操作类型 家超时未支付
+				integralRecordVO.setType(ScoreRuleEnum.SCORE_COUPON_ADD.getCode()); // 操作详情:超时未支付
+				integralRecordVO.setEvent_id(order.getBuyerId()+ActionType.ACTION_ADD+ScoreRuleEnum.SCORE_COUPON_ADD.getCode()+System.currentTimeMillis());
+			} else {
+				integralRecordVO.setAction(ActionType.ACTION_SUB); // 操作类型 买家下单
+				integralRecordVO.setType(ScoreRuleEnum.SCORE_ORDER_SUB.getCode()); // 操作详情:下单
+				integralRecordVO.setEvent_id(order.getBuyerId()+ActionType.ACTION_SUB+ScoreRuleEnum.SCORE_ORDER_SUB.getCode()+System.currentTimeMillis());
+			}
+			if (order.getStatus().equals(OrderFormStatus.CLOSED)){
+				integralRecordVO.setReason("卖家关闭订单");
+			}else if(order.getStatus().equals(OrderFormStatus.TO_SHIPPED)){
+				integralRecordVO.setReason("卖家超时未发货");
+			}else if(order.getStatus().equals(OrderFormStatus.UNPAID)){
+				integralRecordVO.setReason("买家超时未支付");
+			}else{
+				integralRecordVO.setReason("买家下单");
+			}
+			
+			integralRecordVO.setUser_id(order.getBuyerId()); // 买家
+			if(order.getDiscountInfo().toString()!=null){
+				Map<String, Object> mapObject = JsonUtil.getMapFromJson(order.getDiscountInfo());
+				integralRecordVO.setUse_score(Integer.parseInt(mapObject.get("score").toString())); // 积分
+				integralRecordVO.setScore_deduction(new BigDecimal(mapObject.get("scoreDeduction").toString()));
+			}
+			integralRecordVO.setOrder_sn(order.getOrderNo());//订单号
+			BigDecimal totalMoney = new BigDecimal(0);// 原结算金额
+			BigDecimal deductionMoney = new BigDecimal(0); // 优惠金额
+			String commodityMid="";
+			// 计算红包，原结算金额
+			for (Object entity : orderDetailList) {
+				OrderDetailFormEntity orderDetail = (OrderDetailFormEntity) entity;
+				commodityMid=orderDetail.getCommodityMid()+",";
+				totalMoney = totalMoney.add(orderDetail.getRealAmount());// 原结算金额
+				String couponId = orderDetail.getCouponId(); // 优惠code
+				if (!(couponId == null || couponId.isEmpty())) {
+					Double couponAmount = couponStatusService.getDiscountByCode(couponId); // 优惠抵扣金额
+					if (couponAmount != null) {
+						deductionMoney = deductionMoney.add(new BigDecimal(couponAmount));
+					}
+				}
+			}
+			integralRecordVO.setPay_money(calculateTotalPrice(order,orderDetailList));// 实际支付金额
+			integralRecordVO.setTotal_money(totalMoney); // 原结算金额
+			integralRecordVO.setPreferential_deduction(deductionMoney); // 优惠抵扣金额
+			
+			if(commodityMid!=null && commodityMid.length()>1){
+				integralRecordVO.setItem_id(commodityMid.substring(0,commodityMid.length()-1));//商品编号
+				integralRecordVO.setItem_type(ItemType.ITEM_PRODUCT+"");//商品
+			}
+			if(order.getExpressFee()!=null){
+				integralRecordVO.setPost_money(order.getExpressFee()); //邮费
+			}else{
+				integralRecordVO.setPost_money(new BigDecimal(0));//邮费
+			}
+			return integralRecordVO;
+		}
+		
+		
+		
+
+		// 积分操作
+		public boolean scoreOperation(IntegralRecordVO integralRecordVO) {
+			System.out.println(".................积分操作开始.................");
+			System.out.println("操作类型Action:"+integralRecordVO.getAction());
+			System.out.println("json---->integralRecordVO:"+new JSONArray().fromObject(integralRecordVO).toString());
+			// 调用dobbu接口真正扣积分
+			JSONObject jSONObject = integralService.addOrSubScore(integralRecordVO);
+			System.out.println("jSONObject:"+jSONObject.toString());
+			Map<String,Object> keyMap = JsonUtil.getMapFromJson(jSONObject.toString());
+			if (keyMap.get("errno") != null && Integer.parseInt(keyMap.get("errno").toString()) == 0) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		//还原积分
+		public boolean subtractScore(OrderFormEntity order) {
+			System.out.println("开始还原积分........................");
+			System.out.println("json---->OrderFormEntity:"+new JSONArray().fromObject(order).toString());
+			List<OrderDetailFormEntity> list = orderDetailFormService.selectOrderDetailListByParentNum(order.getOrderNo());
+			//OrderDetailFormEntity[] orderDetailList=(OrderDetailFormEntity[]) list.toArray();
+			OrderDetailFormEntity[] orderDetailList=list.toArray(new OrderDetailFormEntity[list.size()]);
+			IntegralRecordVO integralRecordVO = setIntegralRecordVOInfo(order,orderDetailList);
+			// 扣积分
+			if (scoreOperation(integralRecordVO)) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	
 }

@@ -24,6 +24,11 @@ public class OrderCreateEvent extends UserEvent{
 						param.get("order").toString(),
 						OrderFormEntity.class));
 		
+		OrderFormEntity orderFormEntity = getOrderFormEntity();
+		if(orderFormEntity.getJsonDiscountInfo().toString()!=null){
+			orderFormEntity.setDiscountInfo(orderFormEntity.getJsonDiscountInfo().toString());
+		}
+		
 		Object[] objList = JsonUtil.getDTOArray(
 				param.get("orderDetailList").toString(), 
 				OrderDetailFormEntity.class);
