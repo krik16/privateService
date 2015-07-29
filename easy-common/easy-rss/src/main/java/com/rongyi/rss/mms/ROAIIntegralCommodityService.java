@@ -2,6 +2,8 @@ package com.rongyi.rss.mms;
 
 import java.util.Map;
 
+import com.rongyi.core.common.Page;
+import com.rongyi.core.common.PageList;
 import com.rongyi.core.framework.exception.RYServiceException;
 import com.rongyi.easy.mms.vo.IntegralCommodityVO;
 
@@ -30,7 +32,7 @@ public interface ROAIIntegralCommodityService {
    * @return
    * @throws Exception
    */
-  public IntegralCommodityVO getIntegralCommById(String inteCommId) throws Exception;
+  public IntegralCommodityVO getIntegralCommById(String inteCommId) throws RYServiceException;
 
   /**
    * @param inteCommId 积分商品id
@@ -41,4 +43,17 @@ public interface ROAIIntegralCommodityService {
   public String exchangeIntegralComm(String memberId, String inteCommId, int exchangeNum,
       String phone) throws RYServiceException;
 
+  /**
+   * 
+   * queryIntegralCommList:查看礼品列表. <br/>
+   * 
+   * @author bin.zhang
+   * @param params
+   * @param page
+   * @return
+   * @throws RYServiceException
+   * @since JDK 1.6
+   */
+  public PageList<IntegralCommodityVO> queryIntegralCommList(Map params, Page page)
+      throws RYServiceException;
 }
