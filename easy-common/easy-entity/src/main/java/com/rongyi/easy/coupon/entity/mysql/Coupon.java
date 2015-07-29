@@ -5,85 +5,209 @@ import java.util.Date;
 import java.util.List;
 
 public class Coupon {
+
+    /**
+     * 主键id
+     */
     private Integer id;
 
+    /**
+     * 卡券名称
+     */
     private String name;
 
+    /**
+     * 卡券类型:抵扣券[1], 代金券[2], 红包[3]
+     */
     private Integer couponType;
 
+    /**
+     * 验证方式：容易后验证[0], 互动屏票据[1], 两者兼容[2]
+     */
     private Integer validateType;
 
+    /**
+     * 券码发行量
+     */
     private Integer totalCount;
 
+    /**
+     * 库存量
+     */
     private Integer stockCount;
 
+    /**
+     * 原价
+     */
     private Double originalPrice;
 
+    /**
+     * 现价
+     */
     private Double currentPrice;
 
+    /**
+     * 折扣价,属于红包字段
+     */
     private Double discount;
 
+    /**
+     * 大运营平台，平台代金券;
+     * 展示区域：常规区域,活动区域;
+     * 未选中：[0] 选中：[1] 例如： "1,1"表示都选中
+     */
     private String displayRegion;
 
+    /**
+     * 大运营平台，平台代金券
+     * 售后:随时退,过期退,免预约 ；
+     * 未选中：[0] 选中：[1] 例如： "1,1,1"表示都选中
+     */
     private String afterSaleService;
 
+    /**
+     * 发布开始时间
+     */
     private Date publishStartTime;
 
+    /**
+     * 发布结束时间
+     */
     private Date publishEndTime;
 
+    /**
+     * 有效期开始时间
+     */
     private Date validBeginTime;
 
+    /**
+     * 有效期结束时间
+     */
     private Date validEndDate;
 
+    /**
+     * 使用限制
+     */
     private String useRestriction;
 
+    /**
+     * 使用说明
+     */
     private String useDescription;
 
+    /**
+     * 推荐说明，属于红包字段
+     */
     private String recommend;
 
+    /**
+     * 备注
+     */
     private String marks;
 
+    /**
+     * 列表图url
+     */
     private String listPicUrl;
 
+    /**
+     * 详情图url，多张图以";"隔开
+     */
     private String detailPicUrl;
 
+    /**
+     * 关联类型
+     * 代金券：集团[0], 品牌[1], 商场 [2], 店铺[3]
+     * 红包 ：全场[0], 商品[1]
+     */
     private Integer relatedType;
 
+    /**
+     * 每人限购数量
+     */
     private Integer limitCount;
 
+    /**
+     * 每人每日限用张数
+     */
     private Integer limitUseCount;
 
+    /**
+     * 每日最大发行张数
+     */
     private Integer limitPublishCount;
 
+    /**
+     * 信息同步终端: 互动屏,微信,容易逛 ，例如 [1,1,1]表示三个都选中
+     */
     private String synTarget;
 
+    /**
+     * 卡券发布渠道：大运营平台[0], 商家管理后台[1]
+     */
     private Integer sourceTarget;
 
+    /**
+     * 状态: 待审核[0], 审核未通过[1], 审核通过[2], 已下架[3]
+     */
     private Integer status;
 
+    /**
+     * 创建人
+     */
     private String createUser;
 
+    /**
+     * 创建时间
+     */
     private Date createAt;
 
+    /**
+     * 更新人
+     */
     private String updateUser;
 
+    /**
+     * 更新时间
+     */
     private Date updateAt;
 
+    /**
+     * 是否是第三方券 否[false], 是[true], 默认不是第三方券
+     */
     private Boolean outStatus;
 
+    /**
+     * 是否可用：否[false], 是[true], 默认为true 可用
+     */
     private Boolean enabled;
 
-    private Integer sortIndex;
-
+    /**
+     * 店铺对应的公司名  属于商家管理平台字段
+     */
     private String sourceName;
 
 
+
+
+    /**
+     * 代金券关联的品牌
+     */
     private CouponBrand couponBrand = new CouponBrand();
 
+    /**
+     * 代金券关联的商场
+     */
     private List<CouponMall> malls = new ArrayList<CouponMall>();
 
+    /**
+     * 代金券关联的店铺
+     */
     private List<CouponShop> shops = new ArrayList<CouponShop>();
 
+    /**
+     * 代金券分类
+     */
     private CouponCategory couponCategory = new CouponCategory();
 
 
@@ -362,14 +486,6 @@ public class Coupon {
         this.enabled = enabled;
     }
 
-    public Integer getSortIndex() {
-        return sortIndex;
-    }
-
-    public void setSortIndex(Integer sortIndex) {
-        this.sortIndex = sortIndex;
-    }
-
     public String getSourceName() {
         return sourceName;
     }
@@ -448,7 +564,6 @@ public class Coupon {
 				.append(", updateUser=").append(updateUser)
 				.append(", updateAt=").append(updateAt).append(", outStatus=")
 				.append(outStatus).append(", enabled=").append(enabled)
-				.append(", sortIndex=").append(sortIndex)
 				.append(", sourceName=").append(sourceName).append(", malls=")
 				.append(malls).append(", shops=").append(shops).append("]");
 		return builder.toString();
