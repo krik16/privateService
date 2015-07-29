@@ -6,6 +6,7 @@
 		<artifactId>easy-common</artifactId>
 		<version>1.1.0-SHAPSHOT</version>
 	</parent>
+	<version>1.1.0-3.3.0-SHAPSHOT</version>
 	<artifactId>easy-rss</artifactId>
 
 	<dependencies>
