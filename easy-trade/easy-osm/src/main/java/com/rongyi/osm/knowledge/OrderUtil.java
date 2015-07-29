@@ -210,13 +210,15 @@ public class OrderUtil {
 		}
 		
 		// 减去积分
-				Map map = JsonUtil.getMapFromJson(order.getDiscountInfo());
-				if (map.get("score") != null
-						&& Integer.parseInt(map.get("score").toString()) > 0) {
-					Integer scoreInt = Integer.parseInt(map.get("score").toString()) / 100;
-					BigDecimal score = new BigDecimal(scoreInt);
-					total = total.subtract(score);
-				}
+		if(order.getDiscountInfo().length()>0 && order.getDiscountInfo()!=null){
+			Map map = JsonUtil.getMapFromJson(order.getDiscountInfo());
+			if (map.get("score") != null
+					&& Integer.parseInt(map.get("score").toString()) > 0) {
+				Integer scoreInt = Integer.parseInt(map.get("score").toString()) / 100;
+				BigDecimal score = new BigDecimal(scoreInt);
+				total = total.subtract(score);
+			}
+		}
 
 		//总价小于零的情况
 		total = total.compareTo(new BigDecimal(0)) < 0 ? new BigDecimal(0) : total;
