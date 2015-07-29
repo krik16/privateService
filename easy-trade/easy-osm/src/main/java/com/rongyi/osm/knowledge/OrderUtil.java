@@ -40,6 +40,7 @@ import com.rongyi.easy.osm.entity.OrderFormEntity;
 import com.rongyi.easy.va.entity.VirtualAccountDetailEntity;
 import com.rongyi.osm.constant.CashCouponStatus;
 import com.rongyi.osm.constant.OrderFormStatus;
+//import com.rongyi.osm.constant.OsmLogEntity;
 import com.rongyi.osm.mq.SpringAmqpSender;
 import com.rongyi.osm.service.ApplicationFormServiceImpl;
 import com.rongyi.osm.service.OrderDetailFormService;
@@ -848,10 +849,10 @@ public class OrderUtil {
 	}
 	
 	
-	// /////////////////////////////////////////////////////////////////////////////////////////
+	// /////////////////////////////////////////////////////////////////////////////////////////  
 		// 判断用户是否使用积分支付
 		public boolean createOrder(OrderFormEntity order,OrderDetailFormEntity[] orderDetailList) {
-			if(order.getDiscountInfo().toString()!=null){
+			if(order.getDiscountInfo()!=null){
 				Map<String, Object> mapObject = JsonUtil.getMapFromJson(order.getDiscountInfo());
 				if (mapObject.get("score") != null && Integer.parseInt(mapObject.get("score").toString()) > 0) {
 					IntegralRecordVO integralRecordVO = setIntegralRecordVOInfo(order,orderDetailList);
@@ -976,5 +977,31 @@ public class OrderUtil {
 				return false;
 			}
 		}
-	
+//		public OsmLogEntity setLogEntityInfo(OrderFormEntity order){
+//			List<OrderDetailFormEntity> list = orderDetailFormService.selectOrderDetailListByParentNum(order.getOrderNo());
+//			OrderDetailFormEntity[] orderDetailList=list.toArray(new OrderDetailFormEntity[list.size()]);
+//			OsmLogEntity osmLogEntity=new OsmLogEntity();
+//			BigDecimal totalMoney = new BigDecimal(0);// 原结算金额
+//			String commodityMid="";//商品偏好
+//			String orderItemNo="";//子订单号
+//			String couponId="";//券List
+//			String orderItemStatus="";//子订单状态
+//			// 计算红包，原结算金额
+//			for (Object entity : orderDetailList) {
+//				OrderDetailFormEntity orderDetail = (OrderDetailFormEntity) entity;
+//				commodityMid=orderDetail.getCommodityMid()+",";
+//				orderItemNo=orderDetail.getOrderItemNo()+",";
+//				orderItemStatus=orderDetail.getStatus()+",";
+//				couponId = orderDetail.getCouponId()+","; // 优惠code
+//				totalMoney = totalMoney.add(orderDetail.getRealAmount());// 原结算金额
+//			}
+//	        osmLogEntity.setDealId(commodityMid.substring(0,commodityMid.length()-1));//	商品id
+//	        osmLogEntity.setCouponList(couponId.substring(0,couponId.length()-1)); //券list
+//			osmLogEntity.setOrderId("大订单号["+order.getOrderNo()+"]对应子订单号["+ orderItemNo.substring(0,orderItemNo.length()-1)+"]");//	订单号
+//			osmLogEntity.setPayPrice(calculateTotalPrice(order,orderDetailList));// 实际支付金额
+//			osmLogEntity.setSumPrice(totalMoney); // 原结算金额
+//			osmLogEntity.setOrderStatus("大订单状态["+order.getStatus()+"]对应子订单状态["+orderItemStatus.substring(0,orderItemStatus.length()-1)+"]");//	订单状态
+//			//System.out.println(new JSONArray().fromObject(osmLogEntity).toString());
+//			return osmLogEntity;
+//		}
 }
