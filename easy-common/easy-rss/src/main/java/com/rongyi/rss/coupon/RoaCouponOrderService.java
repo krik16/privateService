@@ -197,4 +197,13 @@ public interface RoaCouponOrderService {
      */
     Map<String, Object> getCouponOrderByStatus(Map<String, Object> paramsMap,
                                                Integer currentPage, Integer pageSize);
+
+    /**
+     *
+     * @param orderNo
+     * @param number
+     * @param userId
+     * @return
+     */
+    Map<String, Object> calcRefundAmount(String orderNo, Integer number, String userId);
 }
