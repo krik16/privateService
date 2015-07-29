@@ -572,5 +572,8 @@ public interface Constants {
         int HAS_USED = 8;
         int OUT_CODE = 9;
     }
-
+    interface FilterRelation{
+        String AND="AND";
+        String OR="OR";
+    }
 }

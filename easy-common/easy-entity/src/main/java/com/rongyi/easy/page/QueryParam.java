@@ -2,6 +2,7 @@ package com.rongyi.easy.page;
 
 import com.rongyi.core.constant.Constants;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -82,6 +83,12 @@ public class QueryParam {
 
     public QueryParam(List<QueryFilter> queryFilters, List<QueryOrder> queryOrders) {
         this.queryFilters = queryFilters;
+        this.queryOrders = queryOrders;
+    }
+    public QueryParam(List<QueryFilter> queryFilters) {
+        this.queryFilters = queryFilters;
+        List<QueryOrder> queryOrders=new ArrayList<>();
+        queryOrders.add(new QueryOrder("-create_at"));
         this.queryOrders = queryOrders;
     }
 
