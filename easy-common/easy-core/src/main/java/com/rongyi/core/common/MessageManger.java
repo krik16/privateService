@@ -1,11 +1,25 @@
 package com.rongyi.core.common;
 
 import com.jianzhou.sdk.BusinessService;
+import com.rongyi.core.sms.SmsConfig;
+import com.rongyi.core.sms.SmsEntity;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.Iterator;
 
 /**
  * 类MessageManger.java的实现描述：TODO 类实现描述
@@ -19,9 +33,12 @@ public class MessageManger {
     private static final String  SMS_URL  = "http://service6.baiwutong.com:8080/sms_send2.do";
 
 	private PropertyConfigurer propertyConfigurer;
-	
-    private MessageManger() {
-    } 
+
+
+    public MessageManger() {
+    }
+
+
 
     public static MessageManger getInstance() {
         return instance;
@@ -131,7 +148,161 @@ public class MessageManger {
     	return result;
     }
 
-	public PropertyConfigurer getPropertyConfigurer() {
+
+
+
+    //发送短信
+    public StringBuffer SendMessage(String mobile,String content,String code)
+    {
+
+        BufferedReader br=null;
+        URL url=null;
+        HttpURLConnection con;
+        String line;
+        StringBuffer sub=new StringBuffer();
+        String account= SmsConfig.csUserName;
+        String password= SmsConfig.csPassWord;
+        String userid="";
+        String sendTime="";
+        try {
+            content=content.replaceAll("@",code);
+            //设置发送内容的编码方式
+            String send_content= URLEncoder.encode(content.replaceAll("<br/>", " "), "UTF-8");//发送内容
+            url=new URL(SmsConfig.csSendURL+"&userid="+userid+"&account="+account+"&password="+password+"&mobile="+mobile+"&content="+send_content+"&sendTime="+sendTime+"");
+            con = (HttpURLConnection)url.openConnection();
+            br=new BufferedReader(new InputStreamReader(con.getInputStream(),"UTF-8"));
+            while((line=br.readLine())!=null)
+            {
+                //追加字符串获得XML形式的字符串
+                sub.append(line+"");
+                //System.out.println("提取数据 :  "+line);
+            }
+            br.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally
+        {
+            return sub;
+        }
+    }
+
+
+
+    //XML字符串解析通用方法
+    public SmsEntity readStringXmlCommen(SmsEntity xmlentity,String xml)
+    {
+        SmsEntity xe=new SmsEntity();
+
+        Document doc=null;
+
+        try {
+            //将字符转化为XML
+            doc= DocumentHelper.parseText(xml);
+            //获取根节点
+            Element rootElt=doc.getRootElement();
+            //拿到根节点的名称
+            //System.out.println("根节点：" + rootElt.getName());
+
+            //获取根节点下的子节点的值
+            if(xmlentity.getReturnstatus()!=null)
+            {
+                xe.setReturnstatus(rootElt.elementText(xmlentity.getReturnstatus()).trim());
+            }
+            if(xmlentity.getMessage()!=null)
+            {
+                xe.setMessage(rootElt.elementText(xmlentity.getMessage()).trim());
+            }
+            if(xmlentity.getRemainpoint()!=null)
+            {
+                xe.setRemainpoint(rootElt.elementText(xmlentity.getRemainpoint()).trim());
+            }
+            if(xmlentity.getTaskID()!=null)
+            {
+                xe.setTaskID(rootElt.elementText(xmlentity.getTaskID()).trim());
+            }
+            if(xmlentity.getSuccessCounts()!=null)
+            {
+                xe.setSuccessCounts(rootElt.elementText(xmlentity.getSuccessCounts()).trim());
+            }
+            if(xmlentity.getPayinfo()!=null)
+            {
+                xe.setPayinfo(rootElt.elementText(xmlentity.getPayinfo()).trim());
+            }
+            if(xmlentity.getOverage()!=null)
+            {
+                xe.setOverage(rootElt.elementText(xmlentity.getOverage()).trim());
+            }
+            if(xmlentity.getSendTotal()!=null)
+            {
+                xe.setSendTotal(rootElt.elementText(xmlentity.getSendTotal()).trim());
+            }
+            //接收状态返回的报告
+            if(rootElt.hasMixedContent()==false)
+            {
+                System.out.println("无返回状态！");
+            }
+            else
+            {
+                for (int i = 1; i <= rootElt.elements().size(); i++) {
+                    if(xmlentity.getStatusbox()!=null)
+                    {
+                        logger.info("状态"+i+":");
+                        //获取根节点下的子节点statusbox
+                        Iterator iter = rootElt.elementIterator(xmlentity.getStatusbox());
+                        // 遍历statusbox节点
+                        while(iter.hasNext())
+                        {
+                            Element recordEle = (Element) iter.next();
+                            xe.setMobile(recordEle.elementText("mobile").trim());
+                            xe.setTaskid(recordEle.elementText("taskid").trim());
+                            xe.setStatus(recordEle.elementText("status").trim());
+                            xe.setReceivetime(recordEle.elementText("receivetime").trim());
+                            logger.info("短信正常返回：对应手机号："+xe.getMobile());
+                            logger.info("同一批任务ID：" + xe.getTaskid());
+                            logger.info("状态报告----10：发送成功，20：发送失败：" + xe.getStatus());
+                            logger.info("接收时间：" + xe.getReceivetime());
+                        }
+                    }
+
+                }
+
+            }
+
+            //错误返回的报告
+            if(xmlentity.getErrorstatus()!=null)
+            {
+                //获取根节点下的子节点errorstatus
+                Iterator itererr = rootElt.elementIterator(xmlentity.getErrorstatus());
+                // 遍历errorstatus节点
+                while(itererr.hasNext())
+                {
+                    Element recordElerr = (Element) itererr.next();
+                    xe.setError(recordElerr.elementText("error").trim());
+                    xe.setRemark(recordElerr.elementText("remark").trim());
+                    logger.info("短信错误代码：" + xe.getError());
+                    logger.info("错误描述："+xe.getRemark());
+                }
+            }
+
+        } catch (DocumentException e) {
+            logger.info("发送短信失败====对应手机号==："+xe.getMobile());
+            e.printStackTrace();
+            return null;
+        }
+        return xe;
+    }
+
+
+
+
+
+
+
+
+
+    public PropertyConfigurer getPropertyConfigurer() {
 		return propertyConfigurer;
 	}
 

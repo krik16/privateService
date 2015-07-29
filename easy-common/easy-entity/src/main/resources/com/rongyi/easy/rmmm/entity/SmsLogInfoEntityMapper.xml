@@ -10,6 +10,7 @@
     <result column="send_module" property="sendModule" jdbcType="INTEGER" />
     <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
     <result column="update_at" property="updateAt" jdbcType="TIMESTAMP" />
+    <result column="send_result" property="sendResult" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, phone, content, channel, product_type, send_module, create_at, update_at
+    id, phone, content, channel, product_type, send_module, create_at, update_at,send_result
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rongyi.easy.rmmm.entity.SmsLogInfoEntity" >
     select
@@ -105,10 +106,10 @@
   <insert id="insert" parameterType="com.rongyi.easy.rmmm.entity.SmsLogInfoEntity" >
     insert into sms_log_info (id, phone, content, 
       channel, product_type, send_module, 
-      create_at, update_at)
+      create_at, update_at,send_result)
     values (#{id,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
       #{channel,jdbcType=INTEGER}, #{productType,jdbcType=INTEGER}, #{sendModule,jdbcType=INTEGER}, 
-      #{createAt,jdbcType=TIMESTAMP}, #{updateAt,jdbcType=TIMESTAMP})
+      #{createAt,jdbcType=TIMESTAMP}, #{updateAt,jdbcType=TIMESTAMP},#{sendResult,jdbcType=VARCHAR})
   </insert>
 
   <select id="countByExample" parameterType="com.rongyi.easy.rmmm.entity.SmsLogInfoEntityExample" resultType="java.lang.Integer" >
@@ -194,6 +195,7 @@
     update sms_log_info
     set phone = #{phone,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},
+      send_result = #{sendResult,jdbcType=VARCHAR},
       channel = #{channel,jdbcType=INTEGER},
       product_type = #{productType,jdbcType=INTEGER},
       send_module = #{sendModule,jdbcType=INTEGER},

@@ -19,7 +19,7 @@ public class SmsLogInfoEntity implements Serializable{
     /** 产品类型 1 mallShop 2,Malllife */
     private Integer productType;
 
-    /** 发送类型 1注册，2找回密码，3登录4绑定时间 */
+    /** 发送类型 1注册，2找回密码，3登录4绑定手机 */
     private Integer sendModule;
 
     /** 创建时间 */
@@ -27,6 +27,11 @@ public class SmsLogInfoEntity implements Serializable{
 
     /** 发送时间 */
     private Date updateAt;
+
+
+
+    /*返回结果*/
+    private String sendResult;
 
     /**
      * 主键
@@ -154,5 +159,13 @@ public class SmsLogInfoEntity implements Serializable{
      */
     public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
+    }
+
+    public String getSendResult() {
+        return sendResult;
+    }
+
+    public void setSendResult(String sendResult) {
+        this.sendResult = sendResult;
     }
 }

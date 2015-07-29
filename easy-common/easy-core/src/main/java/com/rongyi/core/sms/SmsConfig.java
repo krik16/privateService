@@ -35,6 +35,53 @@ public class SmsConfig implements Serializable{
     public static final String MALLLIFE_BINDING="【容易逛】验证码：@，您正在绑定手机号。10分钟有效，请勿泄露。";
 
 
+    //返回异常
+    public static final String LIMIT_EXCEPTION_MSG="亲你的手机,今天发送短信已达到上限,请明天再试!";
+    public static final String LIMIT_MSG="Limit";
+
+
+
+
+
+
+
+
+
+
+
+
+    //产品名称
+    public abstract class PRODUCT_TYPE {
+        public static final int MALL_SHOP=1;//摩店
+        public static final  int MALL_LIFE=2;//容易逛
+    }
+
+
+
+    /**
+     * 发送通道
+     * 1注册，2找回密码，3登录 4绑定手机
+     */
+    public abstract class SEND_MODULE{
+        public static final int REGISTER=1;
+        public static final int RESET_PWD=2;
+        public static final  int LOGIN=3;
+        public static final  int BINDING=4;
+    }
+
+    /**
+     * 发送渠道
+     * 1创世华信,2建周
+     */
+    public abstract class SEND_CHANNEL{
+        public static final  int CHANNEL_CHUANGSHI=1;
+        public static final  int CHANNEL_JIANZHOU=2;
+    }
+
+
+
+
+
 
 
 
