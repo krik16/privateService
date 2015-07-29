@@ -21,6 +21,11 @@ public class CustomerVO implements Serializable {
     private String userId;
 
     /**
+     * 关联的摩生活用户的IMID
+     */
+    private String userIMId;
+
+    /**
      * 顾客组
      */
     private CustomerGroupVO customerGroupVO;
@@ -203,5 +208,13 @@ public class CustomerVO implements Serializable {
 
     public void setUserSource(String userSource) {
         this.userSource = userSource;
+    }
+
+    public String getUserIMId() {
+        return userIMId;
+    }
+
+    public void setUserIMId(String userIMId) {
+        this.userIMId = userIMId;
     }
 }

@@ -22,7 +22,7 @@ public class CustomerSimpleVO implements Serializable {
     private String headImg;
 
     /**
-     * todo 是否为专属导购
+     * 是否为专属导购
      */
     private boolean belong;
 
