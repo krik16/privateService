@@ -86,6 +86,23 @@ public interface IVoucherCouponService {
 	 */
 	ResponseResult stick(List<CouponSort> couponSortList);
 
+	/**
+	 * @Description:代金券取消置顶
+	 * @author:lqy
+	 * @param id 代金券id
+	 * @return 成功返回true 失败返回false
+	 */
+	boolean unstick(Integer id);
+
+	/**
+	 * @Description:置顶代金券排序
+	 * @author:lqy
+	 * @param couponSortId 排序id
+	 * @param sortIndex 排序值
+	 * @return 成功返回true 失败返回false
+	 */
+	boolean sort(Integer couponSortId, Integer sortIndex);
+
 	/***********置顶代金券 end***************/
 
 }
