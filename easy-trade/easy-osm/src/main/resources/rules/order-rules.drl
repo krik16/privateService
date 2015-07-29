@@ -253,7 +253,7 @@ salience 100
 					// 减少库存
 			        orderUtil.decreaseStock(order);	
 			        
-					logger.debug("[" + drools.getRule().getName() + "成功] {OrderNo:" +$orderNo + " ,dealId:["+commodityMid+"],}");	
+					logger.debug("[" + drools.getRule().getName() + "成功] {OrderNo:" +$orderNo + "}");	
 					// 创建完成, 发送返回事件
 					orderUtil.sendResponse($event, EventErrorCode.SUCCESS, "订单创建成功");
 			    		
