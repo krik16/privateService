@@ -2,8 +2,10 @@ package com.rongyi.rss.coupon.voucher;
 
 import java.util.List;
 
+import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.mysql.Coupon;
+import com.rongyi.easy.coupon.entity.mysql.CouponSort;
 import com.rongyi.easy.coupon.param.voucher.VoucherCouponParam;
 
 /**
@@ -79,5 +81,23 @@ public interface RoaVoucherCouponService {
 	 * @throws Exception
 	 */
 	Boolean addCouponCount(Integer id, Integer addCount) throws Exception;
+
+
+
+
+
+
+
+	/***********置顶代金券 start***************/
+
+	/**
+	 * @Description:代金券置顶
+	 * @author:lqy
+	 * @param couponSortList 置顶对象集合
+	 * @return
+	 */
+	ResponseResult stick(List<CouponSort> couponSortList);
+
+	/***********置顶代金券 end***************/
 
 }
