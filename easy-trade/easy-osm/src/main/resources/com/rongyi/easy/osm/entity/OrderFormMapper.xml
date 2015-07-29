@@ -31,7 +31,8 @@
 	      	order_source,
 	      	coupon_id,
 	      	guide_id,
-	      	internal_coupon_id
+	      	internal_coupon_id,
+	      	discount_info
 	     )
 	    SELECT
 	    	#{id,jdbcType=INTEGER}, 
@@ -55,7 +56,8 @@
 	      	#{orderSource,jdbcType=INTEGER},
 	      	#{couponId,jdbcType=VARCHAR},
 	      	#{guideId,jdbcType=VARCHAR}, 
-	      	#{internalCouponId,jdbcType=VARCHAR}
+	      	#{internalCouponId,jdbcType=VARCHAR},
+	      	#{discountInfo,jdbcType=VARCHAR}
 	   	FROM dual 
 		WHERE NOT EXISTS (SELECT * FROM order_form 
 			WHERE order_form.order_no = #{orderNo}); 

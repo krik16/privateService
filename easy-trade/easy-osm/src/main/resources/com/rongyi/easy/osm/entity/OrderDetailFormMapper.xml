@@ -37,7 +37,8 @@
 			payment_id_list,
 			commodity_spec_mid,
 			coupon_id,
-			commodity_commission
+			commodity_commission,
+			refund_discount_info
 		)
 		values 
 		<foreach collection="list" item="item" index="index" separator="," >  
@@ -59,7 +60,8 @@
 				#{item.paymentIdList,jdbcType=INTEGER},
 				#{item.commoditySpecMid,jdbcType=VARCHAR},
 				#{item.couponId,jdbcType=VARCHAR},
-				#{item.commodityCommission,jdbcType=DECIMAL}
+				#{item.commodityCommission,jdbcType=DECIMAL},
+				#{item.refundDiscountInfo,jdbcType=VARCHAR}
 			 )
 		</foreach>
 	</insert>

@@ -40,6 +40,7 @@ import com.rongyi.core.constant.PaymentEventType;
 
 import com.rongyi.osm.knowledge.SessionUtil;
 
+
 //全局变量声明
 global Logger logger;
 global OrderFormService orderFormService;
@@ -50,6 +51,8 @@ global Configurations orderConfig;
 global OrderUtil orderUtil;
 global SpringAmqpSender msgSender;
 global SessionUtil sessionUtil;
+
+
 
 //订单创建事件
 declare OrderCreateEvent
@@ -209,69 +212,76 @@ salience 100
     	// 获得订单和子订单列表
     	OrderFormEntity order = $event.getOrderFormEntity();
 		OrderDetailFormEntity[] orderDetailList = $event.getOrderDetailFormEntityList();
-
-        // 设置订单  状态为：等待付款  未评价
-        order.setStatus(OrderFormStatus.UNPAID);
-        order.setStatusRoute(null);
-        order.setIsComment(0);
-        
-        // 设置子订单  状态为：正常 退款未成功 退款次数 维权名额
-        for (OrderDetailFormEntity entity: orderDetailList) {
-        	entity.setStatus(OrderDetailFormStatus.NORMAL);
-        	entity.setIsRefunded(0);
-        	entity.setAppealTimes(0);
-        	entity.setRefundTimes(0);
-        	entity.setAppealId(0);
-        }
-        
-        // 根据创建订单消息传入的总价计算订单折扣
-		orderUtil.orderSetDiscount(order.getTotalAmount(), order, orderDetailList);
-		
-		// 计算订单总价
-		order.setTotalAmount(orderUtil.calculateTotalPrice(order, orderDetailList));
-	
-		// 更新现金券状态
-		if (orderUtil.setCouponStatus(orderDetailList, CashCouponStatus.USED, order.getGuideId())) {
-			// 设置创建时间,过期时间,状态保持剩余时间
-	        order.setCreateAt(orderUtil.getCurrentDate());
-	        order.setNextStatusTime(
-	        	orderUtil.getDateFromTime(
-	        		order.getCreateAt().getTime() + orderConfig.getPaymentWaitMax()));
-	        order.setStatusHoldMs(orderConfig.getPaymentWaitMax());
+     if(orderUtil.createOrder(order,orderDetailList)){
+	        // 设置订单  状态为：等待付款  未评价
+	        order.setStatus(OrderFormStatus.UNPAID);
+	        order.setStatusRoute(null);
+	        order.setIsComment(0);
 	        
-		    // 入库订单和子订单
-		    if(orderFormService.insert(order, orderDetailList)){
-			    		// 入规则引擎
-				for (OrderDetailFormEntity entity: orderDetailList) {
-					sessionUtil.insert(entity);
-				}
-				sessionUtil.insert(order);
-				
-				// 减少库存
-		        orderUtil.decreaseStock(order);
+	        // 设置子订单  状态为：正常 退款未成功 退款次数 维权名额
+	        for (OrderDetailFormEntity entity: orderDetailList) {
+	        	entity.setStatus(OrderDetailFormStatus.NORMAL);
+	        	entity.setIsRefunded(0);
+	        	entity.setAppealTimes(0);
+	        	entity.setRefundTimes(0);
+	        	entity.setAppealId(0);
+	        }
+	        
+	        // 根据创建订单消息传入的总价计算订单折扣
+			orderUtil.orderSetDiscount(order.getTotalAmount(), order, orderDetailList);
+			
+			// 计算订单总价
+			order.setTotalAmount(orderUtil.calculateTotalPrice(order, orderDetailList));
 		
-				// 创建完成, 发送返回事件
-				orderUtil.sendResponse($event, EventErrorCode.SUCCESS, "订单创建成功");
-		    		
-		    	// 记录买家延迟未支付提醒消息事件
-				PaymentAlert alert = PaymentAlert.create(order.getOrderNo(), order.getBuyerId(),
-						orderUtil.getDateFromTime(order.getCreateAt().getTime() + 120000));
-				insert(alert);
-				
-				logger.debug("[" + drools.getRule().getName() + "] OrderNo=" +
-		    		$orderNo + " 结束.");				
-				
-		    } else {
-		    	orderUtil.sendResponse($event, EventErrorCode.REQUEST_ORDER_EXISTS, "订单已经存在");
-		    	logger.error("[" + drools.getRule().getName() + "] OrderNo=" +
-		    		$orderNo + " 数据库存在重复订单,停止创建.");
-		    }
-		    
-		} else {
-			orderUtil.sendResponse($event, EventErrorCode.ORDER_COUPON_ERROR, "优惠券异常，订单创建失败");
-			logger.error("[" + drools.getRule().getName() + "] OrderNo=" +
-    			$orderNo + " 现金券状态变更错误：现金券不存在或状态不正确，订单创建失败");
-		}
+			// 更新现金券状态
+			if (orderUtil.setCouponStatus(orderDetailList, CashCouponStatus.USED, order.getGuideId())) {
+				// 设置创建时间,过期时间,状态保持剩余时间
+		        order.setCreateAt(orderUtil.getCurrentDate());
+		        order.setNextStatusTime(
+		        	orderUtil.getDateFromTime(
+		        		order.getCreateAt().getTime() + orderConfig.getPaymentWaitMax()));
+		        order.setStatusHoldMs(orderConfig.getPaymentWaitMax());
+		        
+			    // 入库订单和子订单
+			    if(orderFormService.insert(order, orderDetailList)){
+				    		// 入规则引擎
+					for (OrderDetailFormEntity entity: orderDetailList) {
+						sessionUtil.insert(entity);
+					}
+					sessionUtil.insert(order);
+					
+					// 减少库存
+			        orderUtil.decreaseStock(order);	
+			        
+					logger.debug("[" + drools.getRule().getName() + "成功] {OrderNo:" +$orderNo + " ,dealId:["+commodityMid+"],}");	
+					// 创建完成, 发送返回事件
+					orderUtil.sendResponse($event, EventErrorCode.SUCCESS, "订单创建成功");
+			    		
+			    	// 记录买家延迟未支付提醒消息事件
+					PaymentAlert alert = PaymentAlert.create(order.getOrderNo(), order.getBuyerId(),
+							orderUtil.getDateFromTime(order.getCreateAt().getTime() + 120000));
+					insert(alert);
+					
+					logger.debug("[" + drools.getRule().getName() + "] OrderNo=" +
+			    		$orderNo + " 结束.");				
+					
+			    } else {
+			        logger.error("积分归还开始----------");
+			        orderUtil.subtractScore(order); //还原积分
+			        logger.error("积分归还结束----------");
+			    	orderUtil.sendResponse($event, EventErrorCode.REQUEST_ORDER_EXISTS, "订单已经存在");
+			    	logger.error("[" + drools.getRule().getName() + "] OrderNo=" + $orderNo + " 数据库存在重复订单,停止创建.");
+			    }
+			    
+			} else {
+			    orderUtil.subtractScore(order); //还原积分
+				orderUtil.sendResponse($event, EventErrorCode.ORDER_COUPON_ERROR, "优惠券异常，订单创建失败");
+				logger.error("[" + drools.getRule().getName() + "] OrderNo=" + $orderNo + " 现金券状态变更错误：现金券不存在或状态不正确，订单创建失败");
+			}
+	     }else{
+             orderUtil.sendResponse($event, EventErrorCode.ORDER_SCORE_ERROR, "积分异常，订单创建失败");
+			 logger.error("[" + drools.getRule().getName() + "] OrderNo=" + $orderNo + "积分异常：该账户没有积分或扣除积分失败，订单创建失败");
+         }
 
 
 
@@ -353,6 +363,10 @@ rule "买家超时未支付"
 		
 		// 归还库存
 		orderUtil.increaseStock($order);
+		
+		boolean flag=orderUtil.subtractScore($order); //还原买家积分
+		logger.debug("还原积分状态"+ flag + " end");
+		
 		logger.debug("[" + drools.getRule().getName() + "] OrderNo=" +
     		$orderNo + " 结束.");
 end
@@ -386,12 +400,6 @@ salience 100
 		$order.setStatusHoldMs(0L);
 		$order.setNextStatusTime(orderUtil.getCurrentDate());
 		
-		OrderDetailFormEntity[] orderDetailList = orderUtil.queryGetOrderDetailList($orderNo);
-		// 更新现金券状态
-		if (!orderUtil.setCouponStatus(orderDetailList, CashCouponStatus.OCCUPIED, $order.getGuideId())) {
-			logger.error("[" + drools.getRule().getName() + "] OrderNo=" +
-    			$orderNo + " 现金券状态变更错误：现金券不存在或状态不正确");
-		}		
 
 		// 入主数据库
 		orderFormService.updateStatusWithTime($order);
@@ -401,6 +409,12 @@ salience 100
 		// 归还库存
 		orderUtil.increaseStock($order);
 		
+		//boolean flag=orderUtil.subtractScore($order); //还原买家积分
+		//logger.debug("还原积分状态"+ flag + " end");
+		//Map<String, Object> mapObject = JsonUtil.getMapFromJson($order.getDiscountInfo());
+		//if(flag){
+		//  logger.debug("[" + drools.getRule().getName() + "] OrderNo=" +$orderNo + " 归还用户["+ $order.getBuyerId()+"]"+mapObject.getkey("score") +"积分 结束.");
+		//}
 		orderUtil.sendResponse($event, EventErrorCode.SUCCESS, "订单关闭成功");
 		
 		logger.debug("[" + drools.getRule().getName() + "] OrderNo=" +
@@ -424,8 +438,8 @@ salience 100
 	when
 		Clock($currentDate: currentDate)
 		$event: OrderCancelBySellerEvent($orderNo: orderNo)
-		$order: OrderFormEntity(orderNo == $orderNo, status == OrderFormStatus.TO_SHIPPED, 
-			$currentDate < nextStatusTime)
+		$order: OrderFormEntity(orderNo == $orderNo, status == OrderFormStatus.TO_SHIPPED,
+		 $currentDate < nextStatusTime)
 		not ApplicationFormEntity(orderNo == $orderNo, (
 			status == ApplicationFormStatus.REFUND_REQUESTING || 
 			status == ApplicationFormStatus.APPEALING || 
@@ -488,7 +502,10 @@ salience 100
 		orderUtil.increaseStock($order);
 		
 		orderUtil.sendResponse($event, EventErrorCode.SUCCESS, "订单撤销成功");
-	
+		logger.debug("还原积分start"); 
+	    boolean flag=orderUtil.subtractScore($order); //还原买家积分
+		logger.debug("还原积分状态"+ flag + " end"); 
+		
 		// add 20150710
 		ApplicationFormEntity application = new ApplicationFormEntity();
 		application.setCreateAt(orderUtil.getCurrentDate());
@@ -520,7 +537,7 @@ salience 10
 	then
 		logger.info("[" + drools.getRule().getName() + "] OrderNo=" +
     		$orderNo + " 开始...");
-		orderUtil.sendCheckedResponse($event, OrderFormStatus.TO_SHIPPED);
+		orderUtil.sendCheckedResponse($event, OrderFormStatus.UNPAID);
 		logger.debug("[" + drools.getRule().getName() + "] OrderNo=" +
     		$orderNo + " 结束.");
 end
@@ -855,6 +872,10 @@ rule "卖家超时未发货"
 		// 归还库存
 		orderUtil.increaseStock($order);
 		
+		boolean flag=orderUtil.subtractScore($order); //还原买家积分
+		logger.debug("还原积分状态"+ flag + " end"); 
+		
+		
 		// 发送退款事件
 		msgSender.sendEvent(pay);
 		                                                                       
@@ -1043,9 +1064,6 @@ rule "订单确认收货状态超时"
 		
 		// C2C: 交易金额打款到导购的虚拟账户上
 		orderUtil.orderPayToVirtualAccount($order, orderDetailList);
-		
-		// 买家获得积分
-		orderUtil.buyerScoreObtain($order, orderDetailList);
 		
 		// 发送佣金待审核事件
 		orderUtil.postCommission($order);
