@@ -272,7 +272,7 @@
 
 						<li class="name">积分抵扣金额</li>
 						<li class="line">|</li>
-						<li class="data max2">--（元）</li>
+						<li class="data max2">${order.scoreDeduction }（元）</li>
 						
 						<li class="name">买家应付金额</li>
 						<li class="line">|</li>
