@@ -46,5 +46,14 @@ public interface IRpbService {
 	 * @datetime:2015年7月12日下午1:12:12
 	 **/
 	public abstract Map<String, Object> operateWeixinRefund(Integer id);
+	
+	/**	
+	 * @Description: 订单支付完成后前端收到支付成功同步通知后端完成支付（更改支付状态） 
+	 * @param orderNo
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年7月30日上午9:48:46
+	 **/
+	public abstract boolean paySuccessNotify(String orderNo);
     
 }
