@@ -96,7 +96,7 @@ public class OrderUtil {
 	/**
 	 * 更新现金券状态
 	 *
-	 * @param orderDetailList 子订单集合
+	 * @param orderDetailList 子订单集合      
 	 * @param status 新状态
 	 * @return
 	 */
@@ -214,7 +214,6 @@ public class OrderUtil {
 			Map map = JsonUtil.getMapFromJson(order.getDiscountInfo());
 			if (map.get("score") != null
 					&& Integer.parseInt(map.get("score").toString()) > 0) {
-				//Integer scoreInt = Integer.parseInt(map.get("score").toString()) / 100;
 				Double scoreInt = Double.parseDouble(map.get("score").toString()) / 100;
 				BigDecimal score = new BigDecimal(scoreInt);
 				total = total.subtract(score);
