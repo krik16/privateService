@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.rongyi.core.constant.PaymentEventType;
@@ -38,6 +39,8 @@ import com.rongyi.rss.rpb.IRpbService;
  **/
 public class RpbServiceImpl implements IRpbService {
 
+	private static final Logger LOGGER = Logger.getLogger(RpbServiceImpl.class);
+	
 	@Autowired
 	OrderFormNsyn orderFormNsyn;
 
@@ -115,20 +118,22 @@ public class RpbServiceImpl implements IRpbService {
 
 	@Override
 	public boolean paySuccessNotify(String orderNo) {
+		boolean result = false;
 		PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS0);
 		if (paymentEntity == null)
-			return false;
+			return result;
+		LOGGER.info("同步支付通知,订单号-->" + orderNo);
 		if (paymentEntity.getStatus() != Constants.PAYMENT_STATUS.STAUS2) {
 			String orderNums = paymentService.getOrderNumStrsByPayNo(paymentEntity.getPayNo());
 			List<PaySuccessResponse> responseList = paymentLogInfoService.paySuccessToMessage(paymentEntity.getPayNo(), null, orderNums, paymentEntity.getOrderType(), paymentEntity.getPayChannel()
 					.toString());
 			if (validateResponseList(responseList)) {
 				paymentService.updateListStatusBypayNo(paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);// 修改付款单状态
-				return true;
+				result = true;
 			}
-			return false;
+			LOGGER.info("是否发送同步通知-->" + (result ? "是，已成功发送" : "否，订单系统返回更新失败"));
 		}
-		return true;
+		return result;
 	}
 
 	/**

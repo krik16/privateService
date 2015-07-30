@@ -117,6 +117,8 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
 					target = Constants.SOURCETYPE.OSM;
 				MessageEvent event = rpbEventService.getMessageEvent(out_trade_no, orderNumArray[i], null, payChannel, buyerEmail, Constants.SOURCETYPE.RPB, target, PaymentEventType.BUYER_PAID);
 				String response = sender.convertSendAndReceive(event);
+				if (response == null)
+					continue;
 				MessageEvent responseEvent = rpbEventService.messageToMessageEvent(response);
 				Map<String, Object> map = (Map<String, Object>) responseEvent.getBody();
 				if (map.get("orderNum") != null && map.get("result") != null) {
