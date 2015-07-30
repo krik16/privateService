@@ -1,8 +1,9 @@
 package com.rongyi.easy.solr.retrival.result;
 
+import com.rongyi.core.constant.CouponConst;
+
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class ActivityData extends Data implements Serializable {
     protected Integer limitPublishCount;  // 每日限量发行张数
     protected Integer limitUseCount;   // 每人每日限用张数
     protected Integer limitCount; // 每人限购数量
-    private List<Integer> afterSaleService = Arrays.asList(1, 1, 1);//[1,1,1] 1为支持，0为不支持。第一位：随时退、第二位：过期退 第三位： 免预约
+    private List<Integer> afterSaleService = CouponConst.AFTER_SALE_SERVICE;//[1,1,1] 1为支持，0为不支持。第一位：随时退、第二位：过期退 第三位： 免预约
 
     public String get_id() {
         return _id;
