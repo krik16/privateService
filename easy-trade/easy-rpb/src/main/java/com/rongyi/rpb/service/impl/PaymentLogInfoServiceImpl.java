@@ -1,5 +1,6 @@
 package com.rongyi.rpb.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
+import com.rongyi.easy.rpb.vo.PaySuccessResponse;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.mq.Sender;
 import com.rongyi.rpb.service.PaymentLogInfoService;
@@ -99,22 +101,31 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
 		if (list != null && !list.isEmpty() && list.get(0).getStatus() != Constants.PAYMENT_STATUS.STAUS2) {
 			paymentService.updateListStatusBypayNo(paymentLogInfo.getOutTradeNo(), tradeType, status);// 修改付款单状态
 			String orderNums = paymentService.getOrderNumStrsByPayNo(paymentLogInfo.getOutTradeNo());
-			paySuccessToMessage(paymentLogInfo.getOutTradeNo(),paymentLogInfo.getBuyer_email(), orderNums, list.get(0).getOrderType(), payChannel);
+			paySuccessToMessage(paymentLogInfo.getOutTradeNo(), paymentLogInfo.getBuyer_email(), orderNums, list.get(0).getOrderType(), payChannel);
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public void paySuccessToMessage(String out_trade_no,String buyerEmail, String orderNums, Integer orderType, String payChannel) {
+	public List<PaySuccessResponse> paySuccessToMessage(String out_trade_no, String buyerEmail, String orderNums, Integer orderType, String payChannel) {
+		List<PaySuccessResponse> responseList = new ArrayList<PaySuccessResponse>();
 		if (orderNums != null) {
 			String[] orderNumArray = orderNums.split("\\,");
 			String target = Constants.SOURCETYPE.COUPON;// 优惠券订单
 			for (int i = 0; i < orderNumArray.length; i++) {
 				if (Constants.ORDER_TYPE.ORDER_TYPE_0 == orderType)// 商品订单
 					target = Constants.SOURCETYPE.OSM;
-				MessageEvent event = rpbEventService.getMessageEvent(out_trade_no, orderNumArray[i], null, payChannel,buyerEmail, Constants.SOURCETYPE.RPB, target, PaymentEventType.BUYER_PAID);
-				sender.convertAndSend(event);
+				MessageEvent event = rpbEventService.getMessageEvent(out_trade_no, orderNumArray[i], null, payChannel, buyerEmail, Constants.SOURCETYPE.RPB, target, PaymentEventType.BUYER_PAID);
+				String response = sender.convertSendAndReceive(event);
+				MessageEvent responseEvent = rpbEventService.messageToMessageEvent(response);
+				Map<String, Object> map = (Map<String, Object>) responseEvent.getBody();
+				if (map.get("orderNum") != null && map.get("result") != null) {
+					PaySuccessResponse paySuccessResponse = new PaySuccessResponse((String) map.get("orderNum"), (Boolean) map.get("result"));
+					responseList.add(paySuccessResponse);
+				}
 			}
 		}
+		return responseList;
 	}
 
 	@Override
