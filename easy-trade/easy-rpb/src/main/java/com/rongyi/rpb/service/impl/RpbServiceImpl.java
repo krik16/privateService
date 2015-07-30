@@ -19,6 +19,7 @@ import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentItemEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
+import com.rongyi.easy.rpb.vo.PaySuccessResponse;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.mq.Sender;
 import com.rongyi.rpb.nsynchronous.OrderFormNsyn;
@@ -102,7 +103,7 @@ public class RpbServiceImpl implements IRpbService {
 				List<PaymentItemEntity> itemList = paymentItemService.selectByPaymentId(paymentEntity.getId());
 				orderDetailNum = paymentItemService.getDetailNum(itemList);
 			}
-			MessageEvent event = rpbEventService.getMessageEvent(paymentEntity.getPayNo(), paymentEntity.getOrderNum(), orderDetailNum, paymentEntity.getPayChannel().toString(),null,
+			MessageEvent event = rpbEventService.getMessageEvent(paymentEntity.getPayNo(), paymentEntity.getOrderNum(), orderDetailNum, paymentEntity.getPayChannel().toString(), null,
 					Constants.SOURCETYPE.RPB, target, PaymentEventType.REFUND);
 			sender.convertAndSend(event);
 			return messageMap;
@@ -112,4 +113,36 @@ public class RpbServiceImpl implements IRpbService {
 		return messageMap;
 	}
 
+	@Override
+	public boolean paySuccessNotify(String orderNo) {
+		PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS0);
+		if (paymentEntity == null)
+			return false;
+		if (paymentEntity.getStatus() != Constants.PAYMENT_STATUS.STAUS2) {
+			String orderNums = paymentService.getOrderNumStrsByPayNo(paymentEntity.getPayNo());
+			List<PaySuccessResponse> responseList = paymentLogInfoService.paySuccessToMessage(paymentEntity.getPayNo(), null, orderNums, paymentEntity.getOrderType(), paymentEntity.getPayChannel()
+					.toString());
+			if (validateResponseList(responseList)) {
+				paymentService.updateListStatusBypayNo(paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);// 修改付款单状态
+				return true;
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * @Description: 验证返回结果中是否有未成功记录
+	 * @param responseList
+	 * @return
+	 * @Author: 柯军
+	 * @datetime:2015年7月30日上午11:17:19
+	 **/
+	private boolean validateResponseList(List<PaySuccessResponse> responseList) {
+		for (PaySuccessResponse paySuccessResponse : responseList) {
+			if (!paySuccessResponse.isResult())
+				return false;
+		}
+		return true;
+	}
 }

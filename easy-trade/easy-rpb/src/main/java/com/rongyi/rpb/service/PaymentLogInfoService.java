@@ -1,8 +1,10 @@
 package com.rongyi.rpb.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
+import com.rongyi.easy.rpb.vo.PaySuccessResponse;
 
 /**
  * @Author: 柯军
@@ -70,7 +72,8 @@ public interface PaymentLogInfoService {
 	 * @Author: 柯军
 	 * @datetime:2015年5月21日上午11:53:11
 	 **/
-	public abstract void paySuccessToMessage(String out_trade_no,String buyerEmail, String orderNums, Integer orderType, String payChannel);
+	public abstract List<PaySuccessResponse> paySuccessToMessage(String out_trade_no,String buyerEmail, String orderNums, Integer orderType, String payChannel);
+	
 
 	/**
 	 * @Description: 更新退款事件删除状态

@@ -230,9 +230,9 @@ public class PCWebPageAlipayController extends BaseController {
 	@RequestMapping("/refund_notify_url.htm")
 	public String notifyRefund(Model model, String notify_time, String notify_type, String notify_id, String sign_type, String sign, String batch_no, String success_num, String result_details) {
 		PaymentLogInfo result = paymentLogInfoService.selectByNotifyId(notify_id);
-		LOGGER.info("返回结果：" + result_details);
 		if (result != null)
 			return null;
+		LOGGER.info("返回结果：" + result_details);
 		if (!validateTradeStatus(result_details)) {
 			LOGGER.info("该订单状态支付宝不允许退款，退款状态未变更，退款事件记录未生成！");
 			return null;
