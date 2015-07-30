@@ -138,6 +138,8 @@ public class UserCoupon implements Serializable {
      */
     private Integer checkUserId;
 
+    private Double refundAmount;
+
 
     public UserCoupon() {
 
@@ -164,7 +166,8 @@ public class UserCoupon implements Serializable {
                       Date provideTime,
                       Date useTime,
                       Date startTime,
-                      Date endTime) {
+                      Date endTime,
+                      Double refundAmount) {
         super();
         this.activityId = activityId;
         this.activityName = activityName;
@@ -188,6 +191,7 @@ public class UserCoupon implements Serializable {
         this.useTime = useTime;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.refundAmount = refundAmount;
     }
 
     public Long getId() {
@@ -403,6 +407,13 @@ public class UserCoupon implements Serializable {
         this.checkUserId = checkUserId;
     }
 
+    public Double getRefundAmount() {
+        return refundAmount;
+    }
+
+    public void setRefundAmount(Double refundAmount) {
+        this.refundAmount = refundAmount;
+    }
 
     @Override
     public String toString() {
@@ -432,6 +443,7 @@ public class UserCoupon implements Serializable {
                 .append("startTime", startTime)
                 .append("endTime", endTime)
                 .append("checkUserId", checkUserId)
+                .append("refundAmount", refundAmount)
                 .toString();
     }
 }

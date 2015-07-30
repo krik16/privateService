@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import com.rongyi.easy.coupon.entity.Coupon;
+
 public class FlopgoPrizeByTimesVO implements Serializable{
 	/**
 	 * 
@@ -25,7 +27,7 @@ public class FlopgoPrizeByTimesVO implements Serializable{
 	private List<String> detail_img;//详情图
 	private List<CouponProductVO> scope;//现金卷的使用范围
 	private String recommendation;//推荐文案
-	
+	private String activityId;//翻牌购的id
 	public FlopgoPrizeByTimesVO(){
 		
 	}
@@ -49,6 +51,33 @@ public class FlopgoPrizeByTimesVO implements Serializable{
 			this.recommendation=flopprize.getRecommend();
 		}
 	}
+	public FlopgoPrizeByTimesVO(Coupon flopprize){
+		if(flopprize!=null){
+			this._id=flopprize.getId().toString();
+			this.created_at=flopprize.getCreateDate();
+			this.updated_at=flopprize.getUpdateDate();
+			this.type=flopprize.getCouponType();
+			this.title=flopprize.getTitle();
+			this.restrictions=flopprize.getUseRestriction();
+	
+			this.detail_img=flopprize.getDetailPicUrls();
+			if("02".equals(flopprize.getCouponType())){
+				this.actual_price=flopprize.getOriginalPrice();
+				this.discount_price=flopprize.getCurrentPrice();
+				this.scope=null;
+				this.recommendation=flopprize.getUseDescription();
+			}
+			if("03".equals(flopprize.getCouponType())){
+				this.discount_price=flopprize.getDiscount();
+				this.recommendation=flopprize.getRecommend();
+			}
+		}
+	}
+	public FlopgoPrizeByTimesVO(FlopPRizeResultByDateAFidVO flopprize){
+		this._id=flopprize.getPrizeId();
+		this.type=flopprize.getPrizeType();
+		this.title=flopprize.getPrizeName();
+	}
 	public String get_id() {
 		return _id;
 	}
@@ -63,6 +92,13 @@ public class FlopgoPrizeByTimesVO implements Serializable{
 	}
 	public Date getUpdated_at() {
 		return updated_at;
+	}
+	
+	public String getActivityId() {
+		return activityId;
+	}
+	public void setActivityId(String activityId) {
+		this.activityId = activityId;
 	}
 	public void setUpdated_at(Date updated_at) {
 		this.updated_at = updated_at;

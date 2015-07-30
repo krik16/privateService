@@ -105,6 +105,7 @@ public class CouponOrderItem implements Serializable {
      */
     private String thumbnail;
 
+    private Double refundAmount;
 
     public CouponOrderItem() {
 
@@ -112,7 +113,7 @@ public class CouponOrderItem implements Serializable {
 
     public CouponOrderItem(Long orderId, String orderNo, String couponId, String couponCode, String name, String couponType, Double unitPrice,
                            Integer unitCount, Date updateTime,
-                           Date saleStartTime, Date saleEndTime, Date startTime, Date endTime, String thumbnail) {
+                           Date saleStartTime, Date saleEndTime, Date startTime, Date endTime, String thumbnail, Double refundAmount) {
         this.orderId = orderId;
         this.orderNo = orderNo;
         this.couponId = couponId;
@@ -127,6 +128,7 @@ public class CouponOrderItem implements Serializable {
         this.startTime = startTime;
         this.endTime = endTime;
         this.thumbnail = thumbnail;
+        this.refundAmount = refundAmount;
     }
 
     /**
@@ -365,6 +367,14 @@ public class CouponOrderItem implements Serializable {
         return couponType;
     }
 
+    public Double getRefundAmount() {
+        return refundAmount;
+    }
+
+    public void setRefundAmount(Double refundAmount) {
+        this.refundAmount = refundAmount;
+    }
+
     public void setCouponType(String couponType) {
         this.couponType = couponType;
     }
@@ -389,6 +399,7 @@ public class CouponOrderItem implements Serializable {
                 .append("startTime", startTime)
                 .append("endTime", endTime)
                 .append("thumbnail", thumbnail)
+                .append("refundAmount", refundAmount)
                 .toString();
     }
 }

@@ -86,4 +86,17 @@ public interface CMFlopgoService {
 	 */
 	public int updateDailyPrizes(List<FlopPrizeDEntity> dafe,String state,String flopId) throws Exception;
 	
+	/**
+	 * 得到俞当前时间最近的时间的活动Id，并且必须是发布状态，并且不是删除了的
+	 * @return
+	 */
+	public String getNewActivityId();
+	
+	/**
+	 * 修改数量+1
+	 * @param dafe
+	 * @return
+	 */
+	public int updateCountDaily(FlopPrizeDEntity dafe);
+	
 }

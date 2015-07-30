@@ -180,7 +180,7 @@ public class Coupon implements Serializable {
     }
 
     public Integer getLimitCount() {
-        return limitCount;
+        return (limitCount == null) ? Integer.valueOf(0) : limitCount;
     }
 
     public void setLimitCount(Integer limitCount) {
@@ -188,7 +188,7 @@ public class Coupon implements Serializable {
     }
 
     public Integer getLimitPublishCount() {
-		return limitPublishCount;
+		return (limitPublishCount == null) ? Integer.valueOf(0) : limitPublishCount;
 	}
 
 	public void setLimitPublishCount(Integer limitPublishCount) {
@@ -196,7 +196,7 @@ public class Coupon implements Serializable {
 	}
 
 	public Integer getLimitUseCount() {
-		return limitUseCount;
+		return (limitUseCount == null) ? Integer.valueOf(0) : limitPublishCount;
 	}
 
 	public void setLimitUseCount(Integer limitUseCount) {
