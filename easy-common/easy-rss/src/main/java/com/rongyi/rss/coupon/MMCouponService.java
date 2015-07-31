@@ -56,4 +56,10 @@ public interface MMCouponService {
      */
     public List<OldCouponVO> getCouponDetailLIstOne(List<String> ids);
 
+    /**
+     * 推荐优惠券首页（优化）
+     * @param ids
+     * @return
+     */
+    public List<OldCouponVO> getCouponIndexLIstOne(List<String> ids);
 }
