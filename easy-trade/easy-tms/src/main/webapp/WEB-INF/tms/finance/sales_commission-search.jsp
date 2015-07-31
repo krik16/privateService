@@ -113,7 +113,7 @@
 				<sec:authorize ifAnyGranted="TMS_F_SC_VERIFY" >
 					<a href="javascript:void(0);" class="btnsearch" style="border:0px;float: right;width: 100px" id="batch-check" onclick="batchCheck();" >批量审核通过</a></sec:authorize>
 				</li>
-				
+					<a href="javascript:void(0);" class="btnsearch" style="border:0px;float: right;width: 100px" id="batch-check" onclick="payingNow();" >立即打款</a>
 			</div>
 			</div>
 		</div>

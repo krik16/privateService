@@ -194,3 +194,12 @@ function checkUnpass(id) {
 				}
 			});
 }
+function payingNow(){
+	_util.cmsConfirm("您确认要立即打款给卖家吗？", function() {
+		$.get("../sc/payingNow",function(data){
+			if(data.success==true){
+				_util.cmsTip("打款请求已经发送!请稍后查看账户是否收到打款！");
+			}
+		},"json")
+	});
+}
