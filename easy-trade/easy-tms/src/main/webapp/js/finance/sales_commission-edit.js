@@ -161,6 +161,7 @@ function switchCheck(check) {
 		$("#batch-check").css("display", "block");
 		$("#isChecked").val(2);
 		$("#checkLi").css("display", "none");
+		$("#vaStatusLi").css("display", "none");
 
 	} else {
 		$("#checkLi").css("display", "block");

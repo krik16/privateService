@@ -14,10 +14,11 @@ $(document).ready(function() {
 		var adno = $("#liushui-no").val();
 		var account = $('#account').val();
 		var type = $("#type").val();
-		ajaxloadApplys(null, adno, account, type, status);
+		var operateType = $("#operateType").val();
+		ajaxloadApplys(null, adno, account, type, status,operateType);
 	});
 });
-function ajaxloadApplys(page, adno, account, type, status) {
+function ajaxloadApplys(page, adno, account, type, status,operateType) {
 	var url_ = "../bonus/list";
 	var param = $("#isChecked").val();
 	var start = $("#startTime").val();
@@ -46,7 +47,8 @@ function ajaxloadApplys(page, adno, account, type, status) {
 					"createStartTime" : start,
 					"createEndTime" : end,
 					"page" : currpage,
-					"status" : param
+					"status" : param,
+					"operateType":operateType
 				},
 				success : function(data) {
 					$("#resultList").html(data);

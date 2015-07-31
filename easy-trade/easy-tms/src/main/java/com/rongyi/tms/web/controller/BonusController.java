@@ -559,17 +559,18 @@ public class BonusController extends BaseController {
             excelWriter.createSheet(DateTool.date2String(new Date(), DateTool.FORMAT_DATE_2));
             excelWriter.createRow(0);
             excelWriter.setCell(0, "卖家账号");
-            excelWriter.setCell(1, "类型");
-            excelWriter.setCell(2, "金额");
-            excelWriter.setCell(3, "备注");
-            String status = "";
+            excelWriter.setCell(1, "考核方式");
+            excelWriter.setCell(2, "类型");
+            excelWriter.setCell(3, "金额");
+            excelWriter.setCell(4, "备注");
             int i = 1;
             for (BonusVO vo : vos) {
                 excelWriter.createRow(i);
                 excelWriter.setCell(0, vo.getSellerAccount() == null ? "" : vo.getSellerAccount());
-                excelWriter.setCell(1, vo.getBonusType() == 0 ? "" : (vo.getBonusType() == 1 ? "奖励" : "惩罚"));
-                excelWriter.setCell(2, vo.getAmount() == null ? "" : vo.getAmount().toString());
-                excelWriter.setCell(3, vo.getMarks() == null ? "" : vo.getMarks());
+                excelWriter.setCell(1, vo.getBonusType() == 0 ? "" : ((vo.getBonusType()  == 1 || vo.getBonusType() == 3) ? "奖励" : "惩罚"));
+                excelWriter.setCell(2, vo.getBonusType() == 0 ? "" : ((vo.getBonusType()  == 1 || vo.getBonusType() == 2) ? "交易佣金" : "验码佣金"));
+                excelWriter.setCell(3, vo.getAmount() == null ? "" : vo.getAmount().toString());
+                excelWriter.setCell(4, vo.getMarks() == null ? "" : vo.getMarks());
                 i++;
             }
             excelWriter.export();

@@ -76,7 +76,7 @@
 									<a href="${ctx}/bonus/edit?id=${item.id}" class="btnsearch">修改</a>
 								</sec:authorize> <sec:authorize ifAnyGranted="TMS_F_EXM_DELETE">
 									<a href="javascript:void(0);" class="btnsearch"
-										id="checkok-${item.id }" onclick="delete(${item.id });">删除</a>
+										id="checkok-${item.id }" onclick="deleteBonus(${item.id},${item.sdNo});">删除</a>
 								</sec:authorize> <sec:authorize ifAnyGranted="TMS_F_EXM_VERIFY">
 									<a href="javascript:void(0);" class="btnsearch"
 										id="checkok-${item.id }" onclick="checkApplys(${item.id},1)">审核通过</a>

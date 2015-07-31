@@ -59,7 +59,12 @@
 				</li>
 				
 				<li>卖家账号：<input id="account" type="text"></input>
-				<li>类型：<select id="type">
+				<li>类型：<select id="operateType">
+						<option value="">--全部--</option>
+						<option value="1">交易佣金</option>
+						<option value="2">验码佣金</option>
+				</select>
+				<li>考核方式：<select id="type">
 						<option value="">--全部--</option>
 						<option value="1">奖励</option>
 						<option value="2">惩罚</option>

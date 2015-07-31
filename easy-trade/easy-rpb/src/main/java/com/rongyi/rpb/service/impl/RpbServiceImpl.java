@@ -117,7 +117,11 @@ public class RpbServiceImpl implements IRpbService {
 	}
 
 	@Override
-	public boolean paySuccessNotify(String orderNo) {
+	public boolean paySuccessNotify(String orderNo,Double totalAmount) {
+		if(totalAmount == 0){
+		LOGGER.info("0元商品购买，无需发送通知,orderNo-->"+orderNo);
+			return true;
+		}
 		boolean result = false;
 		PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS0);
 		if (paymentEntity == null)
