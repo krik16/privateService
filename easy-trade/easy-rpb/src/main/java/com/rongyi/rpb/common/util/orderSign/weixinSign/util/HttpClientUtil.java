@@ -222,7 +222,7 @@ public class HttpClientUtil {
 
 	public static String InputStreamTOString(InputStream in,String encoding) throws IOException{  
 
-        return new String(InputStreamTOByte(in),"utf-8");
+        return new String(InputStreamTOByte(in),encoding);
         
     }
     

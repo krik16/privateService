@@ -65,11 +65,11 @@ body {
 												<option value="1">奖励</option>
 												<option value="2">惩罚</option>
 											</c:when>
-											<c:when test="${bonus!=null &&bonus.bonusType==1}">
+											<c:when test="${bonus!=null &&(bonus.bonusType==1 || bonus.bonusType==3)}">
 												<option value="1" selected="selected">奖励</option>
 												<option value="2">惩罚</option>
 											</c:when>
-											<c:when test="${bonus!=null &&bonus.bonusType==2}">
+											<c:when test="${bonus!=null &&(bonus.bonusType==2 || bonus.bonusType==4)}">
 												<option value="1" >奖励</option>
 												<option value="2" selected="selected">惩罚</option>
 											</c:when>
@@ -139,6 +139,7 @@ var originalSellerAccount=$("input:[name='sellerAccount']").val();
 var originalType=$("select:[name='type']").val();
 var originalAmount=$("input:[name='amount']").val();
 var originalMarks=$("textarea:[name='marks']").val();
+var originalOperateType = $("select:[name='operateType']").val();
 	$("#save").click(function(){
 		var id=$("input:[name='id']").val();
 		var laterSellerAccount=$("input:[name='sellerAccount']").val();
@@ -166,10 +167,13 @@ var originalMarks=$("textarea:[name='marks']").val();
 			temp++;
 		}
 			marks=laterMarks;
-		
-		if(temp==4){
+		if(operateType == originalOperateType){
+			temp++;
+		}
+			
+		if(temp==5){
 			_util.cmsTip("未作任何修改！!");
-			return;
+			return; 
 		}
 		if(parseFloat(amount)==0){
 			_util.cmsTip("金额不能为0");

@@ -156,9 +156,9 @@
 			and commission_amount &lt;= #{amountEnd,jdbcType=DECIMAL}
 		</if>
 		<if test="vaStatus != null and vaStatus != ''">
-			and status in 
-			<foreach collection="vaStatus" index="index" item="item" open="("
-				separator="," close=")">
+			and status in
+			<foreach collection="vaStatus" index="index" item="item"
+				open="(" separator="," close=")">
 				#{item}
 			</foreach>
 		</if>
@@ -213,9 +213,9 @@
 			and commission_amount &lt;= #{amountEnd,jdbcType=DECIMAL}
 		</if>
 		<if test="vaStatus != null and vaStatus != ''">
-			and status in 
-			<foreach collection="vaStatus" index="index" item="item" open="("
-				separator="," close=")">
+			and status in
+			<foreach collection="vaStatus" index="index" item="item"
+				open="(" separator="," close=")">
 				#{item}
 			</foreach>
 		</if>
@@ -230,8 +230,12 @@
 		<if test="sellerAccount !=null">
 			and seller_account=#{sellerAccount,jdbcType=VARCHAR}
 		</if>
-		<if test="type!=null">
-			and type=#{type,jdbcType=INTEGER }
+		<if test="type!=null and type != ''">
+			and type in
+			<foreach collection="type" index="index" item="item" open="("
+				separator="," close=")">
+				#{item}
+			</foreach>
 		</if>
 		<if test="createStartTime != null">
 			and create_at >= #{createStartTime,jdbcType=TIMESTAMP}
@@ -258,8 +262,12 @@
 		<if test="sellerAccount !=null">
 			and seller_account=#{sellerAccount,jdbcType=VARCHAR}
 		</if>
-		<if test="type!=null">
-			and type=#{type,jdbcType=INTEGER }
+		<if test="type!=null and type != ''">
+			and type in
+			<foreach collection="type" index="index" item="item" open="("
+				separator="," close=")">
+				#{item}
+			</foreach>
 		</if>
 		<if test="createStartTime != null">
 			and create_at >= #{createStartTime,jdbcType=TIMESTAMP}
