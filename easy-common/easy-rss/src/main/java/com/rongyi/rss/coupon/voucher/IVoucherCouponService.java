@@ -55,12 +55,12 @@ public interface IVoucherCouponService {
 	 * @Description:下架代金券
 	 * @author:lqy
 	 * @param ids 代金券id
-	 * @param status 下架状态为[3]
+	 * @param offShelfStatus 下架状态
 	 * @param reason 下架原因
 	 * @return 成功：true 失败：false
 	 * @throws Exception
 	 */
-	Boolean soldOutCoupon(List<Integer> ids, Integer status, String reason)
+	Boolean offShelfCoupon(List<Integer> ids, Boolean offShelfStatus, String reason)
 			throws Exception;
 
 	/**
