@@ -15,7 +15,9 @@ import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
 import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.rabbit.support.DefaultMessagePropertiesConverter;
 import org.springframework.stereotype.Component;
 
 import com.rabbitmq.client.AMQP.BasicProperties;
@@ -109,43 +111,24 @@ public class Sender {
     public void rpcSend(Map<String, Object> messageMap, Message message, Channel channel) {
         try {
             String messageStr = JSONObject.fromObject(messageMap).toString();
-            BasicProperties basicProperties = Receiver.getBasicProperties(message);
+            BasicProperties basicProperties = getBasicProperties(message);
             channel.basicPublish("", basicProperties.getReplyTo(), basicProperties, messageStr.getBytes());
             LOGGER.info("rpc回复" + basicProperties.getReplyTo() + "消息,消息内容：" + messageStr);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-//
-//    public void addOrderNotification(String orderNum, Notification notifier) {
-//        syscNotifyMap.put(orderNum, notifier);
-//    }
-//
-//    public void removeNotification(String orderNum) {
-//        syscNotifyMap.remove(orderNum);
-//    }
-//
-//    public static class Notification {
-//        private boolean notified = false;
-//
-//        public boolean isNotified() {
-//            return notified;
-//        }
-//
-//        public void setNotified(boolean notified) {
-//            this.notified = notified;
-//        }
-//
-//        public synchronized void await(int time) {
-//            try {
-//                wait(time);
-//            } catch (InterruptedException e) {
-//                LOGGER.error(e);
-//            }
-//        }
-//
-//        public synchronized void anotify() {
-//            notify();
-//        }
-//    }
+
+    /**
+     * @Description: 将 Message messageProperties 转换为 channel 使用的BasicProperties
+     * @param message
+     * @return
+     * @Author: 柯军
+     * @datetime:2015年6月2日下午5:51:57
+     **/
+    public static BasicProperties getBasicProperties(Message message) {
+        MessageProperties messageProperties = message.getMessageProperties();
+        DefaultMessagePropertiesConverter defaultMessagePropertiesConverter = new DefaultMessagePropertiesConverter();
+        return defaultMessagePropertiesConverter.fromMessageProperties(messageProperties, "UTF-8");
+    }
 }
