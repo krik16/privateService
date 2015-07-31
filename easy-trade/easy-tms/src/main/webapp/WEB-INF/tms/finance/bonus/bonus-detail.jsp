@@ -45,10 +45,15 @@
 								<li class="li2"  >${bonus.marks}</li>
 							</ul>
 							<ul>
-								<li class="li1">类型：</li>
+								<li class="li1">考核方式：</li>
 								<li class="li2">
-									<c:if test="${bonus.bonusType==1}">奖金</c:if>
-									<c:if test="${bonus.bonusType==2}">惩罚</c:if>
+									<c:if test="${bonus.bonusType==1 || bonus.bonusType == 3}">奖励</c:if>
+									<c:if test="${bonus.bonusType==2 || bonus.bonusType == 4}">惩罚</c:if>
+								</li>
+									<li class="li1">类型：</li>
+								<li class="li2">
+									<c:if test="${bonus.bonusType==1 || bonus.bonusType == 2}">交易佣金</c:if>
+									<c:if test="${bonus.bonusType==3 || bonus.bonusType == 4}">验码佣金</c:if>
 								</li>
 								<li class="li1">审核：</li>
 								<li class="li2">

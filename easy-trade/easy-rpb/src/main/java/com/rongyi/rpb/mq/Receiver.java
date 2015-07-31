@@ -39,17 +39,4 @@ public class Receiver implements ChannelAwareMessageListener {
             e.printStackTrace();
         }
     }
-
-    /**
-     * @Description: 将 Message messageProperties 转换为 channel 使用的BasicProperties
-     * @param message
-     * @return
-     * @Author: 柯军
-     * @datetime:2015年6月2日下午5:51:57
-     **/
-    public static BasicProperties getBasicProperties(Message message) {
-        MessageProperties messageProperties = message.getMessageProperties();
-        DefaultMessagePropertiesConverter defaultMessagePropertiesConverter = new DefaultMessagePropertiesConverter();
-        return defaultMessagePropertiesConverter.fromMessageProperties(messageProperties, "UTF-8");
-    }
 }
