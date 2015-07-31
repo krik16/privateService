@@ -34,8 +34,8 @@ import com.rongyi.tms.service.SalesCommissionAuditLogService;
 import com.rongyi.tms.service.SalesCommissionService;
 
 /**
- * @Description 提现申请 controller
  * @author 袁波
+ * @Description 提现申请 controller
  * @date 2015年5月25日 下午9:57:57
  */
 @Controller
@@ -50,7 +50,7 @@ public class SalesCommissionController extends BaseController {
 
     @Autowired
     private SalesCommissionAuditLogService commissionAuditLogService;
-    
+
     @Autowired
     private ROACommodityCommissionService roaCommodityCommissionService;
 
@@ -60,8 +60,7 @@ public class SalesCommissionController extends BaseController {
     }
 
     @RequestMapping(value = "/list")
-    public String findByPage(@ModelAttribute("param") SalesCommissionParam params, String module, ModelMap modelMap,
-            HttpServletRequest request) {
+    public String findByPage(@ModelAttribute("param") SalesCommissionParam params, String module, ModelMap modelMap, HttpServletRequest request) {
         try {
             PagingVO<SalesCommissionVO> pagingvos = commissionService.findByPage(params);
             request.setAttribute("list", pagingvos.getDataList());
@@ -94,26 +93,28 @@ public class SalesCommissionController extends BaseController {
     @ResponseBody
     public ResponseResult checkCommission(CheckParam params, HttpSession session, HttpServletRequest request) {
         try {
-            if (StringUtils.isBlank(params.getIds()) || params.getStatus() == null
-                    || (params.getStatus() == -1 && StringUtils.isBlank(params.getReason()))) {
+            if (StringUtils.isBlank(params.getIds()) || params.getStatus() == null || (
+                params.getStatus() == -1 && StringUtils.isBlank(params.getReason()))) {
                 result.setCode(CodeEnum.ERROR_PARAM.getActionCode());
                 result.setMessage(CodeEnum.ERROR_PARAM.getMessage());
                 result.setSuccess(false);
             } else {
                 UserInfo userInfo = this.getSessionUser(request, session);
                 if (userInfo != null) {
-                    int updateResult = commissionService.updateBatch(params, userInfo.getUsername());
+                    int updateResult =
+                        commissionService.updateBatch(params, userInfo.getUsername());
                     if (updateResult > 0) {
-                    	if(params.getStatus() < 0){
-                    		// 审核不通过时 向用户推送消息 add by ZhengYl 2015-06-03
-        					Map<String, String> map = new HashMap<String, String>();
-        					SalesCommissionVO salesCommissionVO = commissionService.selectOneById(Integer.parseInt(params.getIds()));
-        					map.put("orderNumber", salesCommissionVO.getOrderNo());
-        					map.put("commission", salesCommissionVO.getCommissionAmount().toString());
-        					map.put("eventType", CommissionEnum.COMMISSION_CHECK_FAIlURE.getCode().toString());
-                    		roaCommodityCommissionService.sendBodyByOrderEventType(map);
-                    	}
-                    	
+                        if (params.getStatus() < 0) {
+                            // 审核不通过时 向用户推送消息 add by ZhengYl 2015-06-03
+                            Map<String, String> map = new HashMap<String, String>();
+                            SalesCommissionVO salesCommissionVO =
+                                commissionService.selectOneById(Integer.parseInt(params.getIds()));
+                            map.put("orderNumber", salesCommissionVO.getOrderNo());
+                            map.put("commission", salesCommissionVO.getCommissionAmount().toString());
+                            map.put("eventType", CommissionEnum.COMMISSION_CHECK_FAIlURE.getCode().toString());
+                            roaCommodityCommissionService.sendBodyByOrderEventType(map);
+                        }
+
                         result.setCode(CodeEnum.SUCCESS.getActionCode());
                         result.setMessage(CodeEnum.SUCCESS.getMessage());
                         result.setSuccess(true);
@@ -149,9 +150,11 @@ public class SalesCommissionController extends BaseController {
             } else {
                 SalesCommissionVO commission = commissionService.selectOneById(id);
                 int operate = module.equals("merchant") ? 1 : 2;
-                SalesCommissionAuditLog auditLog = commissionAuditLogService.selectByCommissionId(id, operate);
-                LOGGER.info(auditLog == null ? "没有审核记录" : (auditLog.getMemo() == null ? "审核通过，没有不通过理由" : auditLog
-                        .getMemo()));
+                SalesCommissionAuditLog auditLog =
+                    commissionAuditLogService.selectByCommissionId(id, operate);
+                LOGGER.info(auditLog == null ?
+                    "没有审核记录" :
+                    (auditLog.getMemo() == null ? "审核通过，没有不通过理由" : auditLog.getMemo()));
                 if (auditLog != null) {
                     commission.setReason(auditLog.getMemo());
                 }
@@ -166,16 +169,32 @@ public class SalesCommissionController extends BaseController {
         }
         return returnView;
     }
-    @RequestMapping(value="getReason")
-    public void getUnPassReason(Integer id,Integer operate,HttpServletResponse response){
-        Map<String, Object> resultMap=new HashMap<String, Object>();
-        if(id==0){
+
+    @RequestMapping(value = "getReason")
+    public void getUnPassReason(Integer id, Integer operate, HttpServletResponse response) {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        if (id == 0) {
             resultMap.put("msg", "");
-        }else{
-            SalesCommissionAuditLog log=commissionAuditLogService.selectByCommissionId(id, operate);
-            resultMap.put("msg", log==null?"":log.getMemo());
+        } else {
+            SalesCommissionAuditLog log =
+                commissionAuditLogService.selectByCommissionId(id, operate);
+            resultMap.put("msg", log == null ? "" : log.getMemo());
         }
-        JSONObject json=JSONObject.fromObject(resultMap);
+        JSONObject json = JSONObject.fromObject(resultMap);
         responseJson(json.toString(), response);
+    }
+
+    @RequestMapping(value = "payingNow")
+    @ResponseBody
+    public ResponseResult payingToSellerNow() {
+        try {
+            commissionService.statisticsCommissionAmountTrigger();
+        } catch (Exception e) {
+            e.printStackTrace();
+            LOGGER.info(e);
+            result.setSuccess(false);
+        }
+        return result;
+
     }
 }
