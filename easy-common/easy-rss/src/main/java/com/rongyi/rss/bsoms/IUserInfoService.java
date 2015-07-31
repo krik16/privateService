@@ -33,5 +33,5 @@ public interface IUserInfoService {
 	 * 根据id修改账户状态：启用/停用
 	 * @param paraMap
 	 */
-	void updateAccountStatus(int id, int isSuspended);
+	void updateAccountStatus(int id, int isSuspended, String stopReason);
 }
