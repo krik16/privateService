@@ -6,6 +6,7 @@
     <result column="value" jdbcType="VARCHAR" property="value" />
     <result column="integral_id" jdbcType="INTEGER" property="integralId" />
     <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="mall_id" property="mallId" jdbcType="VARCHAR" />
     <result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
     <result column="operate_biz" jdbcType="INTEGER" property="operateBiz" />
     <result column="member_id" jdbcType="INTEGER" property="memberId" />
@@ -78,7 +79,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from integral_log_daning
+    from integral_log
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -89,21 +90,21 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from integral_log_daning
+    from integral_log
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from integral_log_daning
+    delete from integral_log
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.rongyi.easy.domain.member.daning.IntegralLogExample">
-    delete from integral_log_daning
+    delete from integral_log
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.rongyi.easy.domain.member.daning.IntegralLog">
-    insert into integral_log_daning (id, value, integral_id, 
+    insert into integral_log (id, value, integral_id, 
       memo, create_at, operate_biz, 
       member_id, member_name)
     values (#{id,jdbcType=INTEGER}, #{value,jdbcType=VARCHAR}, #{integralId,jdbcType=INTEGER}, 
@@ -111,7 +112,7 @@
       #{memberId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.rongyi.easy.domain.member.daning.IntegralLog">
-    insert into integral_log_daning
+    insert into integral_log
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -166,13 +167,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.rongyi.easy.domain.member.daning.IntegralLogExample" resultType="java.lang.Integer">
-    select count(*) from integral_log_daning
+    select count(*) from integral_log
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update integral_log_daning
+    update integral_log
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
@@ -204,7 +205,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update integral_log_daning
+    update integral_log
     set id = #{record.id,jdbcType=INTEGER},
       value = #{record.value,jdbcType=VARCHAR},
       integral_id = #{record.integralId,jdbcType=INTEGER},
@@ -218,7 +219,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.rongyi.easy.domain.member.daning.IntegralLog">
-    update integral_log_daning
+    update integral_log
     <set>
       <if test="value != null">
         value = #{value,jdbcType=VARCHAR},
@@ -245,7 +246,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.rongyi.easy.domain.member.daning.IntegralLog">
-    update integral_log_daning
+    update integral_log
     set value = #{value,jdbcType=VARCHAR},
       integral_id = #{integralId,jdbcType=INTEGER},
       memo = #{memo,jdbcType=VARCHAR},
