@@ -83,7 +83,7 @@ public class Coupon {
     /**
      * 有效期结束时间
      */
-    private Date validEndDate;
+    private Date validEndTime;
 
     /**
      * 使用限制
@@ -148,7 +148,7 @@ public class Coupon {
     private Integer sourceTarget;
 
     /**
-     * 状态: 待审核[0], 审核未通过[1], 审核通过[2], 已下架[3]
+     * 状态: 待审核[0], 审核未通过[1], 审核通过[2]
      */
     private Integer status;
 
@@ -176,6 +176,11 @@ public class Coupon {
      * 是否是第三方券 否[false], 是[true], 默认不是第三方券
      */
     private Boolean outStatus;
+
+    /**
+     * 是否已下架  否[false], 是[true], 默认没有下架
+     */
+    private Boolean offShelfStatus;
 
     /**
      * 是否可用：否[false], 是[true], 默认为true 可用
@@ -326,12 +331,12 @@ public class Coupon {
         this.validBeginTime = validBeginTime;
     }
 
-    public Date getValidEndDate() {
-        return validEndDate;
+    public Date getValidEndTime() {
+        return validEndTime;
     }
 
-    public void setValidEndDate(Date validEndDate) {
-        this.validEndDate = validEndDate;
+    public void setValidEndTime(Date validEndTime) {
+        this.validEndTime = validEndTime;
     }
 
     public String getUseRestriction() {
@@ -478,7 +483,15 @@ public class Coupon {
         this.outStatus = outStatus;
     }
 
-    public Boolean getEnabled() {
+    public Boolean getOffShelfStatus() {
+		return offShelfStatus;
+	}
+
+	public void setOffShelfStatus(Boolean offShelfStatus) {
+		this.offShelfStatus = offShelfStatus;
+	}
+
+	public Boolean getEnabled() {
         return enabled;
     }
 
@@ -547,7 +560,7 @@ public class Coupon {
 				.append(", publishStartTime=").append(publishStartTime)
 				.append(", publishEndTime=").append(publishEndTime)
 				.append(", validBeginTime=").append(validBeginTime)
-				.append(", validEndDate=").append(validEndDate)
+				.append(", validEndTime=").append(validEndTime)
 				.append(", useRestriction=").append(useRestriction)
 				.append(", useDescription=").append(useDescription)
 				.append(", recommend=").append(recommend).append(", marks=")

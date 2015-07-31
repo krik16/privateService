@@ -3,8 +3,11 @@ package com.rongyi.rss.coupon.voucher;
 import java.util.List;
 
 import com.rongyi.core.bean.ResponseResult;
+import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.mysql.Coupon;
 import com.rongyi.easy.coupon.entity.mysql.CouponSort;
+import com.rongyi.easy.coupon.param.operation.VoucherCouponParam;
+import com.rongyi.easy.coupon.vo.operation.VoucherCouponVO;
 
 /**
  * @Description:大运营平台代金券接口
@@ -29,6 +32,13 @@ public interface IVoucherCouponService {
 	 */
 	Boolean deleteById(Integer id);
 
+	/**
+	 * @Description:多条件分页查询代金券
+	 * @author:lqy
+	 * @param param 参数对象
+	 * @return VoucherCouponVO集合
+	 */
+	PagingVO<VoucherCouponVO> findAllByPage(VoucherCouponParam param);
 
 	/**
 	 * @Description:审核代金券
