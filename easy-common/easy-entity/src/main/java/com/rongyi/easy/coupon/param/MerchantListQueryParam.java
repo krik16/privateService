@@ -22,6 +22,8 @@ public class MerchantListQueryParam {
     private Integer status;
     private Date publishStartTime;
     private Date publishEndTime;
+    private Date validStartTime;
+    private Date validEndTime;
     private String like;
 
     public Integer getCouponType() {
@@ -46,6 +48,22 @@ public class MerchantListQueryParam {
 
     public void setPublishStartTime(Date publishStartTime) {
         this.publishStartTime = publishStartTime;
+    }
+
+    public Date getValidStartTime() {
+        return validStartTime;
+    }
+
+    public void setValidStartTime(Date validStartTime) {
+        this.validStartTime = validStartTime;
+    }
+
+    public Date getValidEndTime() {
+        return validEndTime;
+    }
+
+    public void setValidEndTime(Date validEndTime) {
+        this.validEndTime = validEndTime;
     }
 
     public Date getPublishEndTime() {
@@ -133,6 +151,14 @@ public class MerchantListQueryParam {
         }
         if(this.getPublishEndTime()!=null){
             QueryFilter filter1=new QueryFilter("publish_end_time", FilterType.LESSEQUAL, ValueType.VARCHAR,this.getPublishEndTime(), Constants.FilterRelation.AND);
+            paramList.add(filter1);
+        }
+        if(this.getValidStartTime()!=null){
+            QueryFilter filter1=new QueryFilter("valid_begin_time", FilterType.GREATEEQUAL, ValueType.VARCHAR,this.getValidStartTime(), Constants.FilterRelation.AND);
+            paramList.add(filter1);
+        }
+        if(this.getValidEndTime()!=null){
+            QueryFilter filter1=new QueryFilter("valid_end_time", FilterType.LESSEQUAL, ValueType.VARCHAR,this.getValidEndTime(), Constants.FilterRelation.AND);
             paramList.add(filter1);
         }
         return  new QueryParam(paramList);
