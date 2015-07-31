@@ -402,7 +402,7 @@ public class DateUtil {
 		boolean b = m.matches();
 		if (b) {
 
-			LOGGER.info(date + "格式正确");
+//			LOGGER.info(date + "格式正确");
 		} else {
 		    LOGGER.info(date + "格式错误");
 		}
