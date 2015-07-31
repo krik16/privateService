@@ -54,6 +54,6 @@ public interface IRpbService {
 	 * @Author:  柯军
 	 * @datetime:2015年7月30日上午9:48:46
 	 **/
-	public abstract boolean paySuccessNotify(String orderNo);
+	public boolean paySuccessNotify(String orderNo,Double totalAmount);
     
 }
