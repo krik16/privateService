@@ -17,14 +17,14 @@ public class Coupon {
     private String name;
 
     /**
-     * 卡券类型:抵扣券[1], 代金券[2], 红包[3]
+     * 卡券类型:抵扣券[rebate], 代金券[voucher], 红包[redEnvelope]
      */
-    private Integer couponType;
+    private String couponType;
 
     /**
-     * 验证方式：容易后验证[0], 互动屏票据[1], 两者兼容[2]
+     * 验证方式：容易后验证[after_check], 互动屏票据[interact_check], 两者兼容[all]
      */
-    private Integer validateType;
+    private String validateType;
 
     /**
      * 券码发行量
@@ -116,11 +116,9 @@ public class Coupon {
     private String detailPicUrl;
 
     /**
-     * 关联类型
-     * 代金券：集团[0], 品牌[1], 商场 [2], 店铺[3]
-     * 红包 ：全场[0], 商品[1]
+     * 关联类型 代金券：集团[group],品牌[brand], 商场 [market],店铺[shop] ；红包 ：全场[all_court],商品[commodity]
      */
-    private Integer relatedType;
+    private String relatedType;
 
     /**
      * 每人限购数量
@@ -143,14 +141,14 @@ public class Coupon {
     private String synTarget;
 
     /**
-     * 卡券发布渠道：大运营平台[0], 商家管理后台[1]
+     * 卡券发布渠道：大运营平台[operation], 商家管理后台[merchant]
      */
-    private Integer sourceTarget;
+    private String sourceTarget;
 
     /**
-     * 状态: 待审核[0], 审核未通过[1], 审核通过[2]
+     * 状态: 待审核[uncheck], 审核未通过[unpass], 审核通过[pass]
      */
-    private Integer status;
+    private String status;
 
     /**
      * 创建人
@@ -235,21 +233,8 @@ public class Coupon {
         this.name = name;
     }
 
-    public Integer getCouponType() {
-        return couponType;
-    }
 
-    public void setCouponType(Integer couponType) {
-        this.couponType = couponType;
-    }
 
-    public Integer getValidateType() {
-        return validateType;
-    }
-
-    public void setValidateType(Integer validateType) {
-        this.validateType = validateType;
-    }
 
     public Integer getTotalCount() {
         return totalCount;
@@ -387,13 +372,6 @@ public class Coupon {
         this.detailPicUrl = detailPicUrl;
     }
 
-    public Integer getRelatedType() {
-        return relatedType;
-    }
-
-    public void setRelatedType(Integer relatedType) {
-        this.relatedType = relatedType;
-    }
 
     public Integer getLimitCount() {
         return limitCount;
@@ -425,22 +403,6 @@ public class Coupon {
 
     public void setSynTarget(String synTarget) {
         this.synTarget = synTarget;
-    }
-
-    public Integer getSourceTarget() {
-        return sourceTarget;
-    }
-
-    public void setSourceTarget(Integer sourceTarget) {
-        this.sourceTarget = sourceTarget;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
     }
 
     public String getCreateUser() {
@@ -509,10 +471,47 @@ public class Coupon {
 
 
 
+    public String getCouponType() {
+        return couponType;
+    }
 
+    public void setCouponType(String couponType) {
+        this.couponType = couponType;
+    }
 
+    public String getValidateType() {
+        return validateType;
+    }
 
-	public CouponBrand getCouponBrand() {
+    public void setValidateType(String validateType) {
+        this.validateType = validateType;
+    }
+
+    public String getRelatedType() {
+        return relatedType;
+    }
+
+    public void setRelatedType(String relatedType) {
+        this.relatedType = relatedType;
+    }
+
+    public String getSourceTarget() {
+        return sourceTarget;
+    }
+
+    public void setSourceTarget(String sourceTarget) {
+        this.sourceTarget = sourceTarget;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public CouponBrand getCouponBrand() {
 		return couponBrand;
 	}
 
