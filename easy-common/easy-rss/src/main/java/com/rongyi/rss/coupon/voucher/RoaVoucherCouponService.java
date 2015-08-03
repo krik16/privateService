@@ -7,6 +7,7 @@ import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.mysql.Coupon;
 import com.rongyi.easy.coupon.entity.mysql.CouponSort;
 import com.rongyi.easy.coupon.param.operation.VoucherCouponParam;
+import com.rongyi.easy.coupon.vo.operation.CouponCountVO;
 import com.rongyi.easy.coupon.vo.operation.VoucherCouponVO;
 
 /**
@@ -40,6 +41,14 @@ public interface RoaVoucherCouponService {
 	 * @return VoucherCouponVO集合
 	 */
 	PagingVO<VoucherCouponVO> findAllByPage(VoucherCouponParam param);
+
+	/**
+	 * @Description:统计卡券各个状态下数量
+	 * @author:lqy
+	 * @param param 参数对象
+	 * @return CouponCountVO
+	 */
+	CouponCountVO countByStatus(VoucherCouponParam param);
 
 	/**
 	 * @Description:审核代金券
@@ -115,6 +124,7 @@ public interface RoaVoucherCouponService {
 	 * @return 成功返回true 失败返回false
 	 */
 	boolean sort(Integer couponSortId, Integer sortIndex);
+
 
 	/***********置顶代金券 end***************/
 
