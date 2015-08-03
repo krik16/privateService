@@ -1,9 +1,10 @@
 package com.rongyi.easy.coupon.entity;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class CouponOrder implements Serializable {
 
@@ -94,6 +95,11 @@ public class CouponOrder implements Serializable {
      * 优惠金额 （积分+红包+后续其他优惠）
      */
     private Double discountAmount;
+
+    /**
+     * 订单项
+     */
+    private List<CouponOrderItem> itemList;
 
     /**
      * 优惠详情，json格式，例如{“score”:”100”, "scoreDeduction":"1"}
@@ -354,4 +360,14 @@ public class CouponOrder implements Serializable {
                 .append("discountInfo", discountInfo)
                 .toString();
     }
+
+	public List<CouponOrderItem> getItemList() {
+		return itemList;
+	}
+
+	public void setItemList(List<CouponOrderItem> itemList) {
+		this.itemList = itemList;
+	}
+
+
 }
