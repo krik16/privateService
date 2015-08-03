@@ -14,9 +14,11 @@ public interface Constants {
     String RESULT_SUCCES = "success"; //成功标志位
     String RESULT_FAIL = "fail"; //失败标志位
 
+
     interface Version {
         String VERSION1 = "0.1.0";
     }
+
 
     interface FlopgoMessage {
         String API_NULL_FLOPUSER = "用户名参数没有";
@@ -27,6 +29,7 @@ public interface Constants {
         String API_NULL_COUPONID = "没有卷码";
         String API_NULL_ID = "没有奖品id";
     }
+
 
     interface SOME_TIME {
 
@@ -74,6 +77,7 @@ public interface Constants {
         String UPDATE_BY = "用户";
     }
 
+
     interface Common {
 
         int YES = 1;
@@ -93,6 +97,7 @@ public interface Constants {
         String GET_CODE_4_VERIFY_PHONE = "getCode4VerifyPhone_";
     }
 
+
     interface JSON_RESULT {
         /**
          * 正常返回状态
@@ -111,6 +116,7 @@ public interface Constants {
          */
         short STATUS_UN_LOGIN = 21;
     }
+
 
     interface PageSize {
         /**
@@ -132,6 +138,7 @@ public interface Constants {
 
     }
 
+
     interface ZonesType {
         String TYPE_PROVINCE = "Province";
         String TYPE_CITY = "City";
@@ -142,24 +149,31 @@ public interface Constants {
 
     }
 
+
     interface Valid {
         int OPEN = 0;
         int CLOSE = 1;
         int DELETE = 2;
     }
 
+
     interface Categories {
         String FIRST_PARENT_IDS = "51f9da1731d65584ab001f0f"; // 最上面一级的分类ID
     }
 
+
     interface MallActivity {
-        PropertyConfigurer propertyConfigurer = (PropertyConfigurer) SpringContextUtil.getBean("propertyConfigurer");
+        PropertyConfigurer propertyConfigurer =
+            (PropertyConfigurer) SpringContextUtil.getBean("propertyConfigurer");
         String CRM_HOST_URL_Path = propertyConfigurer.getProperty("crm.rongyi.com").toString();
-        String CRM_MALL_ACTIVITYS_IMAGE_PATH = propertyConfigurer.getProperty("mallActivity.image.path").toString();
+        String CRM_MALL_ACTIVITYS_IMAGE_PATH =
+            propertyConfigurer.getProperty("mallActivity.image.path").toString();
     }
 
+
     interface SolrURL {
-        PropertyConfigurer propertyConfigurer = (PropertyConfigurer) SpringContextUtil.getBean("propertyConfigurer");
+        PropertyConfigurer propertyConfigurer =
+            (PropertyConfigurer) SpringContextUtil.getBean("propertyConfigurer");
         String SOLR_TEST_BASE = propertyConfigurer.getProperty("solr.base.url").toString();
         // String SOLR_TEST_BASE = "http://192.168.1.202:8080/solr/";
         // String SOLR_TEST_BASE = "http://10.4.13.17/solr";
@@ -171,6 +185,7 @@ public interface Constants {
         String SOLR_RMMMSHOP = SOLR_TEST_BASE + "poi/";
     }
 
+
     interface ActivityType {
         String SHOP = "2";
         String BRAND = "0";
@@ -178,12 +193,14 @@ public interface Constants {
         String BAILIAN = "4";
     }
 
+
     interface CouponOrderBy {
         String PRICEASC = "priceAsc";
         String PRICEDESC = "priceDesc";
         String PUBLICASC = "publicAsc";
         String PUBLICDESC = "publicDesc";
     }
+
 
     /**
      * 优惠券展示渠道
@@ -225,15 +242,18 @@ public interface Constants {
         String TERMINAL_WECHAT = "7";
     }
 
+
     interface CheckCodeError {
         String CODEERROR = "抱歉，您输入的券码错误，不能打印，如有疑问请咨询下方的客服电话";
         String NOPRINT = "抱歉，目前不提供打印功能，请咨询下方的客服电话";
     }
 
+
     interface CheckType {
         String COMMODITY = "01";
         String COUPON = "02";
     }
+
 
     /**
      * 集团id
@@ -245,6 +265,7 @@ public interface Constants {
         String BAILIAN = "100003"; // 百联
         String RONGYI = "100000"; // 容易
     }
+
 
     /**
      * owner_id 软件提供商id
@@ -268,6 +289,7 @@ public interface Constants {
         String RONGYI = "000000"; // 容易
     }
 
+
     /**
      * 会员类型 1:实体会员， 2:电子会员
      */
@@ -282,12 +304,14 @@ public interface Constants {
         int ELECTRONIC_MEMBER = 2;
     }
 
+
     interface ImagesCloud {
         String UPAIYUN_Url = "http://rongyi.b0.upaiyun.com/"; // 云盘路径
         String UPAIYUN_URL_BENEFITS = "system/benefits/"; // 云盘路径-会员权益
         String UPAIYUN_URL_INTEGRALRULES = "system/integralRules/"; // 云盘路径-积分规则
         String UPAIYUN_URL_INTEGRALCOMM = "system/mall/commodity/intrgral/"; // 云盘路径-积分商品
     }
+
 
     /**
      * 是否绑定的会员
@@ -303,6 +327,7 @@ public interface Constants {
         int UNBIND = 1;
     }
 
+
     /**
      * 会员性别
      */
@@ -317,11 +342,13 @@ public interface Constants {
         String FEMALE = "F";
     }
 
+
     interface RoaCommon {
         String PHONE_VERIFYCODE_OK = "true";
         String DELAYTIME = "30";
 
     }
+
 
     /**
      * 来源：0000（终端机），0001（app），0002（微信），0003为 移动微商城卖家版，
@@ -338,13 +365,17 @@ public interface Constants {
         String WEB_PAGE = "0005";
     }
 
+
     interface RSA {
         String PUBLIC_KEY = "publicKey";
         String PRIVATE_KEY = "privateKey";
 
-        String PUBLIC_KEY_STR = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCe1N+tR4udbureHSxDVlRCv7SLw7LLFixyLoXEjVFNNkxpnluammzeRlZ23PU16DLPIpCI9BtYHMh+n6Al4plc4nKEfJ0OgoLr4M/VzlCReAWl7+DFFxKZV7MA7yr7gsX/eLQyWAachc17gMmLMFfXBRD/8PZB2if2XnNfcsHL5wIDAQAB";
-        String PRIVATE_KEY_STR = "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAJ7U361Hi51u6t4dLENWVEK/tIvDsssWLHIuhcSNUU02TGmeW5qabN5GVnbc9TXoMs8ikIj0G1gcyH6foCXimVzicoR8nQ6Cguvgz9XOUJF4BaXv4MUXEplXswDvKvuCxf94tDJYBpyFzXuAyYswV9cFEP/w9kHaJ/Zec19ywcvnAgMBAAECgYBh/lBqZkPbQ/2gQDt46CBgdkp8GKeM6QdPAykA1XedvaxzVYKK5k/Y62iZOUYIllQSu+6UsJbWTBvfE7kI5r9bOH08nnReZN8HXEIPQGX5OYUzm/7kHhZYSXdw+rCNmbTBACEFskJ0qHGMKddxqGjuHRriI2zmVem2yHJ3uIx7EQJBAMvmqQYetN1Tfoud2ilVVMuPoFoetZdz1oHodyDFRgB82Lkpjv6e8JRg0Kuu+CXMK/0E788P1j+N16BJnqB9e4sCQQDHai4tT2ESAuqiQ3kgxqbNXlKq2c1eQFIqFn+crJesltt53ymAYShCRiGS18UFfU4tIS0nNji7qe5om0j9FyyVAkEAxQ81h66hic2p3XE/aPcJLnqutKo9QhQ32fE7QLangs0l/z3E7xvY0u4GfgZp2M3MLYpZ4boii+Wf4U+FOQJNJQJBAKSl39CbbNtxOweUzEsqmgiQ65KTWISMeQq1HtJekrD2seozPtH35kSqIQhcTRlWN5j9fomUtE0GZolKRX5qhu0CQE9D3ZasigRGCBRb9QBsSp+/5YZ1B8UPN7wUBmBKqhLVzZbTyEFVC95AofejU0jjcJ/HwPLaJmAs07oDzpJzNxU=";
+        String PUBLIC_KEY_STR =
+            "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCe1N+tR4udbureHSxDVlRCv7SLw7LLFixyLoXEjVFNNkxpnluammzeRlZ23PU16DLPIpCI9BtYHMh+n6Al4plc4nKEfJ0OgoLr4M/VzlCReAWl7+DFFxKZV7MA7yr7gsX/eLQyWAachc17gMmLMFfXBRD/8PZB2if2XnNfcsHL5wIDAQAB";
+        String PRIVATE_KEY_STR =
+            "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAJ7U361Hi51u6t4dLENWVEK/tIvDsssWLHIuhcSNUU02TGmeW5qabN5GVnbc9TXoMs8ikIj0G1gcyH6foCXimVzicoR8nQ6Cguvgz9XOUJF4BaXv4MUXEplXswDvKvuCxf94tDJYBpyFzXuAyYswV9cFEP/w9kHaJ/Zec19ywcvnAgMBAAECgYBh/lBqZkPbQ/2gQDt46CBgdkp8GKeM6QdPAykA1XedvaxzVYKK5k/Y62iZOUYIllQSu+6UsJbWTBvfE7kI5r9bOH08nnReZN8HXEIPQGX5OYUzm/7kHhZYSXdw+rCNmbTBACEFskJ0qHGMKddxqGjuHRriI2zmVem2yHJ3uIx7EQJBAMvmqQYetN1Tfoud2ilVVMuPoFoetZdz1oHodyDFRgB82Lkpjv6e8JRg0Kuu+CXMK/0E788P1j+N16BJnqB9e4sCQQDHai4tT2ESAuqiQ3kgxqbNXlKq2c1eQFIqFn+crJesltt53ymAYShCRiGS18UFfU4tIS0nNji7qe5om0j9FyyVAkEAxQ81h66hic2p3XE/aPcJLnqutKo9QhQ32fE7QLangs0l/z3E7xvY0u4GfgZp2M3MLYpZ4boii+Wf4U+FOQJNJQJBAKSl39CbbNtxOweUzEsqmgiQ65KTWISMeQq1HtJekrD2seozPtH35kSqIQhcTRlWN5j9fomUtE0GZolKRX5qhu0CQE9D3ZasigRGCBRb9QBsSp+/5YZ1B8UPN7wUBmBKqhLVzZbTyEFVC95AofejU0jjcJ/HwPLaJmAs07oDzpJzNxU=";
     }
+
 
     /**
      * 退款状态, 未处理:0,已通过:1,已驳回:2
@@ -357,6 +388,7 @@ public interface Constants {
         int REJECT = 2;
     }
 
+
     interface MQRequestParam {
         String REQUEST_QUEUENAME_OSM = "osm";
         String REQUEST_QUEUENAME_RPB = "rpb";
@@ -365,9 +397,11 @@ public interface Constants {
         String EXCHANGE = "core_exchange";
     }
 
+
     interface Comment {
         String DEFAULT_PRAISE_WORDS = "东西不错，好评~";
     }
+
 
     interface forumCode {
 
@@ -377,6 +411,7 @@ public interface Constants {
         String CLEARANCE_COMMODITY = "A1003";
 
     }
+
 
     /*
      * 系统来源
@@ -388,6 +423,7 @@ public interface Constants {
         String MALLSHOP_COUPON = "MALLSHOP_COUPON";// 摩店优惠券
     }
 
+
     interface UdField {
         String UCONPONSIDS = "uConponsIds";// 优惠券增加和修改
         String DCONPONSIDS = "dConponsIds";// 优惠券删除
@@ -397,6 +433,7 @@ public interface Constants {
         String UINTEGRALCOMMODITYIDS = "uIntegralCommodityIds";// 积分商品增加和修改
         String DINTEGRALCOMMODITYIDS = "dIntegralCommodityIds";// 积分商品删除
     }
+
 
     /**
      * 发布
@@ -411,6 +448,7 @@ public interface Constants {
          */
         byte published_1 = 1;
     }
+
 
     /**
      * 用户状态
@@ -433,6 +471,7 @@ public interface Constants {
          */
         Integer ACCESS = 1;
     }
+
 
     interface AccountType {
         /**
@@ -490,6 +529,7 @@ public interface Constants {
 
     }
 
+
     /**
      * SQL return Exception
      *
@@ -499,51 +539,57 @@ public interface Constants {
         String INCORRECT_VALUE = "Incorrect string value";
     }
 
+
     /**
      * 魔生活魔店版本号
-     * @author user
      *
+     * @author user
      */
-    interface MallLifeVersion{
-    	Integer VERSION=1;
+    interface MallLifeVersion {
+        Integer VERSION = 1;
     }
 
+
     interface TMSTimeRangeType {
-    	int ALL = 0;
+        int ALL = 0;
         int DAY = 1;
         int WEEK = 2;
         int MONTH = 3;
     }
 
+
     /**
-    * @ClassName: DrawApplyStatus
-    * @Description: TODO(提现记录状态)
-    * @author lqy
-    * @date 2015年5月28日 下午4:09:48
-    *
-    */
-    interface DrawApplyStatus{
-    	int ALL = 0;//所有
-    	int SEND = 1;//已发放
-    	int PROCESSING = 2;//处理中
-    	int FAIL = 3;//失败
-    	String BONUS_DEFAULT_MSG = "优秀成交额外奖励";
+     * @author lqy
+     * @ClassName: DrawApplyStatus
+     * @Description: TODO(提现记录状态)
+     * @date 2015年5月28日 下午4:09:48
+     */
+    interface DrawApplyStatus {
+        int ALL = 0;//所有
+        int SEND = 1;//已发放
+        int PROCESSING = 2;//处理中
+        int FAIL = 3;//失败
+        String BONUS_DEFAULT_MSG = "优秀成交额外奖励";
     }
+
+
     interface VderStatus {
         int NOT_PAY = 0;//待付款
         int HAD_PAY = 1;//已付款
         int HAD_CANCEL = 2;//已取消
         int HAD_DELETE = 3;//已删除
         int REFUND = 5; //退款状态,包括退款中和已退款
-        PropertyDate[] vderStatusProperty = {new PropertyDate("0", "待付款"), new PropertyDate("1", "已付款"),
-                new PropertyDate("2", "已取消"), new PropertyDate("3", "已删除")};
+        PropertyDate[] vderStatusProperty =
+            {new PropertyDate("0", "待付款"), new PropertyDate("1", "已付款"), new PropertyDate("2", "已取消"), new PropertyDate("3", "已删除")};
     }
+
 
     interface MyOrder {
         String ORDER_SPLIT = ",";
         int NOT_OUT_DATE = 0;
         int OUT_DATE = 1;
     }
+
 
     /**
      * 优惠券使用状态. 未使用:0,已使用:1,退款中:2,已退款:3,已过期:4
@@ -557,6 +603,7 @@ public interface Constants {
         int REFUNDED = 3;
         int EXPIRED = 4;
     }
+
 
     /**
      * 只用于优惠券列表展示, 待付款、已付款、已取消、已删除值与VderStatus同，不再重复赋值。 新增 4退款中, 5未消费, 6已退款,
@@ -572,8 +619,41 @@ public interface Constants {
         int HAS_USED = 8;
         int OUT_CODE = 9;
     }
-    interface FilterRelation{
-        String AND="AND";
-        String OR="OR";
+
+
+    interface FilterRelation {
+        String AND = "AND";
+        String OR = "OR";
+    }
+
+
+    interface couponType {
+        String REBATE = "rebate";//抵扣券
+        String REDENVELOPE="redEnvelope";//红包
+        String VOUCHER="voucher";//代金券
+    }
+    interface couponValidateType{
+        String AFTER_CHECK="after_check";//容易后验证
+        String INTERACT_CHECK="interact_check";//互动屏票据
+    }
+    //关联类型 代金券：集团[group],品牌[brand], 商场 [market],店铺[shop] ；红包 ：全场[all_court],商品[commodity]
+    interface couponRelatedType{
+        String COMMODITY="commodity";
+        String ALL_COURT="all_court";
+        String SHOP="shop";
+        String MARKET="market";
+        String BRAND="brand";
+        String GROUP="group";
+    }
+    //卡券发布渠道：大运营平台[operation], 商家管理后台[merchant]
+    interface couponSourceTarget{
+        String OPERATION="operation";
+        String MERCHANT="merchant";
+    }
+    //状态: 待审核[uncheck], 审核未通过[unpass], 审核通过[pass]
+    interface couponStatus{
+        String UNCHECK="uncheck";
+        String UNPASS="unpass";
+        String PASS="pass";
     }
 }
