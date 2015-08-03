@@ -94,6 +94,11 @@ public class PaymentEntity {
 	 * 提现账号姓名
 	 */
 	private String payName;
+	
+	/**
+	 * 批量退款单号
+	 */
+	private String batchNo;
 
 	/**
 	 * 主键id
@@ -355,4 +360,14 @@ public class PaymentEntity {
 	public void setOrderType(Integer orderType) {
 		this.orderType = orderType;
 	}
+
+	public String getBatchNo() {
+		return batchNo;
+	}
+
+	public void setBatchNo(String batchNo) {
+		this.batchNo = batchNo;
+	}
+	
+	
 }
