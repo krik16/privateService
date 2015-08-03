@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class OldActivityDetailVO implements Serializable {
+public class OldCouponItemVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
