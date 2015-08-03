@@ -1,8 +1,10 @@
 package com.rongyi.core.common;
 
 import com.jianzhou.sdk.BusinessService;
+import com.rongyi.core.constant.Constants;
 import com.rongyi.core.sms.SmsConfig;
 import com.rongyi.core.sms.SmsEntity;
+
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.GetMethod;
@@ -98,6 +100,107 @@ public class MessageManger {
             getMethod.releaseConnection();
         }
     }
+    
+    /**
+     * 发送短信
+     * @param phone  手机号
+     * @param message 老的信息
+     * @param content 新的发送信息
+     * @param mallName 验证码
+     * @return
+     */
+    public String sendValidSmsMessage(String phone,String message,String content,String mallName,String title,String time,String balance) {
+
+        SmsEntity xmlentity=new SmsEntity();
+        String xml=null;
+
+        try {
+
+
+        xml=this.SendValidMessage(phone,content,mallName,title,time,balance).toString();
+       // System.out.println(xml);
+        xmlentity.setReturnstatus("returnstatus");
+        xmlentity.setMessage("message");
+        xmlentity.setRemainpoint("remainpoint");
+        xmlentity.setTaskID("taskID");
+        xmlentity.setSuccessCounts("successCounts");
+        xmlentity=readStringXmlCommen(xmlentity, xml);
+        logger.info("状态"+xmlentity.getReturnstatus()+"返回信息"+xmlentity.getMessage()+"成功条数"+xmlentity.getSuccessCounts());
+        }catch (Exception e){
+            logger.error("发送短信发生异常"+e.getMessage());
+            e.printStackTrace();
+        }
+
+        if(null!=xmlentity&&xmlentity.getReturnstatus()!=null&&xmlentity.getReturnstatus().equals("Success")){
+         return xmlentity.getReturnstatus();
+        }else {
+            //第一渠道发送信息失败，进入原有通道进行发送
+            String messageChannel = "1";//短信通道,1:云短信通道 ，2：百悟短信通道 3:建周短信通道
+            String result = null;
+
+            if(propertyConfigurer!=null && propertyConfigurer.getProperty(Constants.Common.MESSAGE_CHANNEL) != null) {
+                messageChannel = propertyConfigurer.getProperty(Constants.Common.MESSAGE_CHANNEL).toString();
+            }
+            //  messageChannel = "3";
+            if("1".equals(messageChannel)) {
+                result = sendYunSmsMessage(phone, message);
+            }else if("2".equals(messageChannel)) {
+                result = sendBaiwutongSmsMessage(phone, message);
+            }else if("3".equals(messageChannel)) {
+                //建周需要自己添加签名
+                message+="【容易网】";
+                result = sendJianZhouSmsMessage(phone, message);
+            }
+            return result;
+
+        }
+
+
+
+    }
+  //发送短信
+    public StringBuffer SendValidMessage(String mobile,String content,String mallName,String title,String time,String balance)
+    {
+
+        BufferedReader br=null;
+        URL url=null;
+        HttpURLConnection con;
+        String line;
+        StringBuffer sub=new StringBuffer();
+        String account= SmsConfig.csUserName;
+        String password=SmsConfig.csPassWord;
+        String userid="";
+        String sendTime="";
+        try {
+//        	content=String.format(content, mallName,time,balance);
+            content = content.replaceFirst("@", mallName).replaceFirst("@", time).replaceFirst("@", balance);
+            //设置发送内容的编码方式
+            String send_content= URLEncoder.encode(content.replaceAll("<br/>", " "), "UTF-8");//发送内容
+
+            url=new URL(SmsConfig.csSendURL+"&userid="+userid+"&account="+account+"&password="+password+"&mobile="+mobile+"&content="+send_content+"&sendTime="+sendTime+"");
+            con = (HttpURLConnection)url.openConnection();
+
+            br=new BufferedReader(new InputStreamReader(con.getInputStream(),"UTF-8"));
+            //br=new BufferedReader(new InputStreamReader(url.openStream()));
+
+            while((line=br.readLine())!=null)
+            {
+                //追加字符串获得XML形式的字符串
+                sub.append(line+"");
+                //System.out.println("提取数据 :  "+line);
+            }
+            br.close();
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        finally
+        {
+            return sub;
+        }
+    }
+
 
     /**
      * 发送短信
