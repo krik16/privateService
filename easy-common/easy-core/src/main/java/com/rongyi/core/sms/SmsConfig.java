@@ -33,7 +33,7 @@ public class SmsConfig implements Serializable{
     public static final String MALLLIFE_REGISTER="【容易逛】验证码：@，您正在注册容易逛， 10分钟内有效，请勿泄露";
     public static final String MALLLIFE_LOGIN="【容易逛】验证码：@，您正在手机快捷登录容易逛，10分钟有效，请勿泄露";
     public static final String MALLLIFE_BINDING="【容易逛】验证码：@，您正在绑定手机号。10分钟有效，请勿泄露。";
-
+    public static final String COUPON_VALID = "【容易逛】您购买的%s于%s验证1份，剩%s份未消费，如有任何疑问请您与商家咨询：400-040-8989";
 
     //返回异常
     public static final String LIMIT_EXCEPTION_MSG="亲你的手机,今天发送短信已达到上限,请明天再试!";
