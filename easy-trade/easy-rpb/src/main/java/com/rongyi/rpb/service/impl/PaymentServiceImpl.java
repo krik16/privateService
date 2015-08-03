@@ -251,7 +251,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 			messageMap.put("type", event.getType());
 			if (paymentEntityVO.getAmountMoney() == null || isZero(paymentEntityVO.getAmountMoney())) {// 如果支付价格为0，则不用获取支付宝的签名，直接返回数据
 				LOGGER.info("商品价格为0");
-				return getZeroSendMessage(event,messageMap, paymentEntityVO);
+				return getZeroSendMessage(event, messageMap, paymentEntityVO);
 			}
 			messageMap.put("body", JSONObject.fromObject(getBodyMap(paymentEntityVO, event)));
 		} catch (Exception e) {
@@ -316,8 +316,10 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 					LOGGER.info("订单号已存在，返回历史付款单号" + payNo);
 					return paymentEntityVO;
 				} else {
-					LOGGER.info("微信支付修改价格，重新生成支付单号-->");
-					weixinPayService.closeOrder(payNo);
+					if (paymentLogInfoService.selectByOutTradeNo(payNo) == null) {
+						LOGGER.info("微信支付修改价格，重新生成支付单号-->");
+						weixinPayService.closeOrder(payNo);
+					}
 				}
 			}
 
@@ -350,6 +352,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 	}
 
 	private void insertList(List<PaymentEntity> paymentEntityList, PaymentEntityVO paymentEntityVO, MessageEvent event) {
+		LOGGER.info("insertList" + paymentEntityVO.getPayNo());
 		for (PaymentEntity paymentEntity : paymentEntityList) {
 			paymentEntity.setTradeType(0);// 默认支付
 			if (PaymentEventType.PAY_TO_SELLER.equals(event.getType())) {// 打款给卖家
@@ -394,19 +397,19 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 		}
 	}
 
-	/**	
-	 * @Description: 0元支付或退款默认成功，消息立马返回 
+	/**
+	 * @Description: 0元支付或退款默认成功，消息立马返回
 	 * @param event
 	 * @param messageMap
 	 * @param payNo
 	 * @param orderNum
 	 * @param orderDetailNum
-	 * @return	
-	 * @Author:  柯军
+	 * @return
+	 * @Author: 柯军
 	 * @datetime:2015年7月12日下午2:29:33
 	 **/
 	@Override
-	public Map<String, Object> getZeroSendMessage(MessageEvent event, Map<String, Object> messageMap,PaymentEntityVO paymentEntityVO) {
+	public Map<String, Object> getZeroSendMessage(MessageEvent event, Map<String, Object> messageMap, PaymentEntityVO paymentEntityVO) {
 		PaymentLogInfo paymentLogInfo = new PaymentLogInfo();
 		paymentLogInfo.setOutTradeNo(paymentEntityVO.getPayNo());
 		paymentLogInfo.setNotifyTime(DateUtil.getCurrDateTime());
@@ -419,9 +422,10 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 		if (PaymentEventType.REFUND.equals(event.getType()))
 			type = PaymentEventType.REFUND;
 		String target = Constants.SOURCETYPE.OSM;
-		if(Constants.ORDER_TYPE.ORDER_TYPE_1 == paymentEntityVO.getOrderType())
+		if (Constants.ORDER_TYPE.ORDER_TYPE_1 == paymentEntityVO.getOrderType())
 			target = Constants.SOURCETYPE.COUPON;
-		event = rpbEventService.getMessageEvent(paymentEntityVO.getPayNo(),paymentEntityVO.getOrderNum(), paymentEntityVO.getOrderDetailNumArray(), PaymentEventType.ZERO_PAY,null, Constants.SOURCETYPE.RPB,target, type);
+		event = rpbEventService.getMessageEvent(paymentEntityVO.getPayNo(), paymentEntityVO.getOrderNum(), paymentEntityVO.getOrderDetailNumArray(), PaymentEventType.ZERO_PAY, null,
+				Constants.SOURCETYPE.RPB, target, type);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("code", 0);
 		resultMap.put("totlePrice", 0);
@@ -440,6 +444,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
 	@Override
 	public List<PaymentEntity> selectByPayNoAndTradeType(String payNo, Integer tredeType) {
+		LOGGER.info("selectByPayNoAndTradeType" + payNo);
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("payNo", payNo);
 		params.put("tradeType", tredeType);
@@ -499,7 +504,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 			if (oldPaymentEntity != null && StringUtils.isNotEmpty(oldPaymentEntity.getPayNo())) {
 				LOGGER.info("提现单号已存在，返回历史付款单号" + oldPaymentEntity.getPayNo());
 			}
-			if(mqDrawParam.getOrderType() != null)
+			if (mqDrawParam.getOrderType() != null)
 				paymentEntity.setOrderType(mqDrawParam.getOrderType());
 			if (mqDrawParam.getDrawAmount() != null)
 				paymentEntity.setAmountMoney(BigDecimal.valueOf(Double.valueOf(mqDrawParam.getDrawAmount())));
@@ -562,5 +567,12 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 	@Override
 	public void deleteByPayNo(String payNo) {
 		this.getBaseDao().delete(PAYMENTENTITY_NAMESPACE + ".deleteByPayNo", payNo);
+	}
+	@Override
+	public PaymentEntity selectByOrderNumAndBatchNo(String orderNum, String batchNo) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("orderNum", orderNum);
+		params.put("batchNo", batchNo);
+		return this.getBaseDao().selectOneBySql(PAYMENTENTITY_NAMESPACE + ".selectByOrderNumAndBatchNo", params);
 	}
 }

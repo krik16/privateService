@@ -57,6 +57,7 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
 
 	@Override
 	public Integer insertGetId(PaymentLogInfo logInfo) {
+		LOGGER.info("insertGetId"+logInfo.getOutTradeNo());
 		try {
 			this.getBaseDao().insertBySql(LOG_NAMESPACE + ".insert", logInfo);
 			return logInfo.getId();
@@ -96,6 +97,7 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
 
 	@Override
 	public void insertPayNotify(PaymentLogInfo paymentLogInfo, Integer tradeType, Integer status, String payChannel) {
+		LOGGER.info("paymentLogInfo insert "+paymentLogInfo.getOutTradeNo());
 		insertGetId(paymentLogInfo);
 		List<PaymentEntity> list = paymentService.selectByPayNoAndTradeType(paymentLogInfo.getOutTradeNo(), tradeType);
 		if (list != null && !list.isEmpty() && list.get(0).getStatus() != Constants.PAYMENT_STATUS.STAUS2) {

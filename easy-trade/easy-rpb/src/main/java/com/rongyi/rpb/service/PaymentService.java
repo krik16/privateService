@@ -111,6 +111,7 @@ public interface PaymentService {
 	public abstract List<PaymentEntity> selectByOrderNum(String orderNum,Integer tradeType);
 
 	public abstract PaymentEntity selectByOrderNumAndTradeType(String orderNum, int tradeType, int status);
+	
 
 	public abstract int updateByPrimaryKeySelective(PaymentEntity paymentEntity);
 
@@ -127,5 +128,15 @@ public interface PaymentService {
 	public abstract List<PaymentEntity> updateListStatusBypayNo(String payNo, Integer tradeTsype, Integer status);
 
 	public abstract void deleteByPayNo(String payNo);
+	
+	/**	
+	 * @Description: 根据订单号和退款批量单号查询 
+	 * @param orderNum
+	 * @param batchNo
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年8月3日下午4:56:12
+	 **/
+	public abstract PaymentEntity selectByOrderNumAndBatchNo(String orderNum,String batchNo);
 
 }

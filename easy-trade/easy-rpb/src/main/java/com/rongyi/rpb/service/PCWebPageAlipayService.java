@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.rongyi.easy.mq.MessageEvent;
+import com.rongyi.easy.rpb.domain.PaymentEntity;
 /**
  * @Author: 柯军
  * @Description: PC端退付款实现
@@ -57,7 +58,7 @@ public interface PCWebPageAlipayService {
 	 * @param desc
 	 * @return
 	 */
-	public abstract Map<String, Object> getRefunInfo(String payNo, String batch_num, String price, String tradeNo, String desc);
+	public abstract Map<String, Object> getRefunInfo(PaymentEntity paymentEntity, String batch_num, String price, String tradeNo, String desc);
 
 	/**
 	 * 批量退款获取付款信息列表
