@@ -95,7 +95,7 @@ public class WebPageAlipayController extends BaseController {
 	 **/
 	@RequestMapping("/call_back.htm")
 	public String callBack(HttpServletRequest request, Model model, String sign, String result, String out_trade_no, String trade_no, String request_token) {
-		LOGGER.info("支付宝手机网页同步通知开始-->");
+		LOGGER.info("支付宝手机网页同步通知开始-->,交易流水号=" + trade_no + ",付款单号=" + out_trade_no + ",result=" + result);
 		try {
 			Map<String, String> verifyMap = beforeVerify(request);
 			if (!AlipayNotify.verifyReturn(verifyMap)) {
@@ -106,8 +106,8 @@ public class WebPageAlipayController extends BaseController {
 			List<PaymentEntity> list = paymentService.selectByPayNoAndTradeType(out_trade_no, 0);
 			if (list != null && !list.isEmpty() && list.get(0).getStatus() != Constants.PAYMENT_STATUS.STAUS2) {
 				paymentService.updateListStatusBypayNo(out_trade_no, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);// 修改付款单状态
-				paymentLogInfoService.paySuccessToMessage(out_trade_no,null, orderNums, list.get(0).getOrderType(), PaymentEventType.PAYMENT);
-				
+				paymentLogInfoService.paySuccessToMessage(out_trade_no, null, orderNums, list.get(0).getOrderType(), PaymentEventType.PAYMENT);
+
 			}
 			LOGGER.info("<---支付宝手机网页同步通知结束 ");
 			return "zhifuSuccess";
@@ -143,7 +143,13 @@ public class WebPageAlipayController extends BaseController {
 					return;
 				if (!validateTradeStatus(map.get("trade_status").toString()))
 					return;
-				LOGGER.info("支付宝手机网页支付异步通知开始,交易流水号-->"+map.get("trade_no"));
+				LOGGER.info("支付宝手机网页支付异步通知开始,消息内容="+notify_data+"交易流水号-->" + map.get("trade_no"));
+				LOGGER.info("支付宝通知消息=" + notify_data);
+				PaymentLogInfo tradeNoResult = paymentLogInfoService.selectByPayTradeNo(map.get("trade_no").toString());
+				if (tradeNoResult != null) {
+					LOGGER.info("交易流水号已存在，此笔交易通知不是支付成功通知，是退款成功，订单状态变更通知，交易流水号为-->" + map.get("trade_no").toString());
+					return;
+				}
 				paymentLogInfo.setNotifyId(map.get("notify_id").toString());
 				if (map.get("buyer_email") != null)
 					paymentLogInfo.setBuyer_email(map.get("buyer_email").toString());
@@ -201,15 +207,21 @@ public class WebPageAlipayController extends BaseController {
 			String buyer_id, String buyer_email, String total_fee, String trade_status) {
 		PaymentLogInfo result = paymentLogInfoService.selectByNotifyId(notify_id);
 		if (result != null)
-			return null;
+			return "appwebpage/notify";
 		if (!validateTradeStatus(trade_status))
-			return null;
+			return "appwebpage/notify";
+		//支付宝退款时也调用了此通知接口，需修改，验证交易流水号是否存在.
+		PaymentLogInfo tradeNoResult = paymentLogInfoService.selectByPayTradeNo(trade_no);
+		if (tradeNoResult != null) {
+			LOGGER.info("交易流水号已存在，此笔交易通知不是支付成功通知，是退款成功订单状态变更通知，交易流水号为-->" + trade_no);
+			return "appwebpage/notify";
+		}
 		Map<String, String> verifyMap = beforeVerify(request);
 		if (!AliAppPayNotify.verify(verifyMap)) {
 			LOGGER.info("支付宝手机APP支付异步通知-->支付宝验证签名不通过，返回消息不是支付宝发出的合法消息!");
-			return null;
+			return "appwebpage/notify";
 		}
-		LOGGER.info("支付宝手机APP支付异步通知开始,交易流水号-->"+trade_no);
+		LOGGER.info("支付宝手机APP支付异步通知开始,交易流水号-->" + trade_no);
 		PaymentLogInfo paymentLogInfo = getPaymentLogInfo(trade_no, out_trade_no, notify_id, notify_type, DateUtil.getCurrDateTime(), sign, sign_type, 0, 0, total_fee, buyer_email, buyer_id,
 				Constants.REPLAY_FLAG.REPLAY_FLAG0);
 		paymentLogInfoService.insertPayNotify(paymentLogInfo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, PaymentEventType.APP);
@@ -246,18 +258,20 @@ public class WebPageAlipayController extends BaseController {
 			String out_trade_no, String product_fee, String sign, String sign_type, String time_end, String total_fee, String trade_mode, String trade_state, String transaction_id,
 			String transport_fee) {
 		if (!"0".equals(trade_state))
-			return null;
+			return "appwebpage/notify";
+		;
 		ResponseHandler resHandler = new ResponseHandler(request, response);
 		resHandler.setKey(ConstantUtil.PayWeiXin.PARTNER_KEY);
 		if (!resHandler.isTenpaySign()) {
 			LOGGER.info("微信支付异步通知-->微信验证签名不通过，返回消息不是财付通发出的合法消息!");
-			return null;
+			return "appwebpage/notify";
 		}
 		try {
 			PaymentLogInfo result = paymentLogInfoService.selectByOutTradeNo(out_trade_no);
 			if (result != null)
-				return null;
-			LOGGER.info("微信支付异步通知开始，交易流水号-->"+transaction_id);
+				return "appwebpage/notify";
+			;
+			LOGGER.info("微信支付异步通知开始，交易流水号-->" + transaction_id);
 			PaymentLogInfo paymentLogInfo = getPaymentLogInfo(transaction_id, out_trade_no, notify_id, null, DateUtil.getCurrDateTime(), sign, sign_type, 0, 0, total_fee, null, null,
 					Constants.REPLAY_FLAG.REPLAY_FLAG3);
 			paymentLogInfoService.insertPayNotify(paymentLogInfo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, PaymentEventType.WEIXIN_PAY);

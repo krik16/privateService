@@ -118,6 +118,7 @@ public class RpbServiceImpl implements IRpbService {
 
 	@Override
 	public boolean paySuccessNotify(String orderNo,Double totalAmount) {
+		 LOGGER.info("参数：ordeNo="+orderNo+",totalAmount="+totalAmount);
 		if(totalAmount == 0){
 		LOGGER.info("0元商品购买，无需发送通知,orderNo-->"+orderNo);
 			return true;
