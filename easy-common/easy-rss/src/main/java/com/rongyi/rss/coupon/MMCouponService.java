@@ -32,7 +32,7 @@ public interface MMCouponService {
      * @param couponId
      * @return FavourableVO
      */
-    public void updateCouponVistiedCount(String couponId, int visitedCount);
+    public void addCouponVistiedCount(String couponId, int visitedCount);
 
     /**
      * 通过ids得懂啊oldCOuponVO  List
