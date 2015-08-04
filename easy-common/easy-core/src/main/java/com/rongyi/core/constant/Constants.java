@@ -575,4 +575,11 @@ public interface Constants {
         int OUT_CODE = 9;
     }
 
+    /**
+     * 配置的类型
+     */
+    interface ConfigType {
+        String CONFIGURATIONS = "com.rongyi.easy.gcc.Configurations";
+        String TRANS_CONFIGURATIONS = "com.rongyi.easy.gcc.TransConfigurations";
+    }
 }
