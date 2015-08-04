@@ -47,6 +47,7 @@ public class OldCouponItemVO implements Serializable {
     private int integral;  // 购买时使用的积分
     private double couponDiscount; //购买时使用的红包价格
     private int unUsered;  //未使用的数量
+    private Double orderPrice;//订单总价
 
     public double getCurrentPrice() {
         return currentPrice;
@@ -215,4 +216,14 @@ public class OldCouponItemVO implements Serializable {
     public void setUnUsered(int unUsered) {
         this.unUsered = unUsered;
     }
+
+	public Double getOrderPrice() {
+		return orderPrice;
+	}
+
+	public void setOrderPrice(Double orderPrice) {
+		this.orderPrice = orderPrice;
+	}
+    
+    
 }
