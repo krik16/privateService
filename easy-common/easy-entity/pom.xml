@@ -79,7 +79,6 @@
 
 	</dependencies>
 	<build>
-		<finalName>easy-entity</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.mybatis.generator</groupId>
