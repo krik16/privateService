@@ -28,6 +28,8 @@ public interface Constants {
         String API_NULL_USERPHONE="用户手机号为空";
         String API_NULL_COUPONID = "没有卷码";
         String API_NULL_ID = "没有奖品id";
+        String API_USER_NO="用户没有登录";
+        String API_USER_CHANNEL_ERROR="用户渠道错误 ";
     }
 
     interface SOME_TIME {

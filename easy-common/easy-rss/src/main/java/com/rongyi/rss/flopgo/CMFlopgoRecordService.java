@@ -34,7 +34,7 @@ public interface CMFlopgoRecordService {
 	 * @param flopgoRecordEntity
 	 * @return
 	 */
-	public int insertFlopRecord(FlopgoRecordEntity flopgoRecordEntity);
+	public String insertFlopRecord(FlopgoRecordEntity flopgoRecordEntity);
 	
 	/**
 	 * 修改领取的状态
@@ -63,4 +63,10 @@ public interface CMFlopgoRecordService {
 	 * @return
 	 */
 	public int updateReceiveS(FlopgoRecordEntity flopgoRecordEntity);
+	
+	
+	/**
+	 * 
+	 */
+	public FlopgoRecordEntity selectRecordEById(String id);
 }
