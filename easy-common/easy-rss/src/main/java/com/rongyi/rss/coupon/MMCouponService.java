@@ -24,7 +24,8 @@ public interface MMCouponService {
      * @param id
      * @return
      */
-    public Coupon getCouponById(ObjectId id);
+    public Coupon findCouponById(ObjectId id);
+
     /**
      * 老优惠:通过id修改优惠券详情浏览次数
      *
@@ -32,13 +33,14 @@ public interface MMCouponService {
      * @return FavourableVO
      */
     public void updateCouponVistiedCount(String couponId, int visitedCount);
+
     /**
      * 通过ids得懂啊oldCOuponVO  List
      *
      * @param ids
      * @return
      */
-    public List<OldCouponVO> getCouponDetailList(List<String> ids);
+    public List<OldCouponVO> findCouponDetailByIds(List<String> ids);
 
     /**
      * 推荐优惠券首页（优化）
@@ -46,5 +48,5 @@ public interface MMCouponService {
      * @param ids
      * @return
      */
-    public List<OldCouponVO> getCouponIndex(List<String> ids);
+    public List<OldCouponVO> findCouponIndexByIds(List<String> ids);
 }
