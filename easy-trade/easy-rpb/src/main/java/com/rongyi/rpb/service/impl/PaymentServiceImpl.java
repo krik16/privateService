@@ -92,42 +92,14 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 			currpage = Integer.valueOf(searchValueMap.get("currpage").toString());
 		searchValueMap.put("currentPage", (currpage - 1) * Constants.PAGE.pageSize);
 		searchValueMap.put("pageSize", Constants.PAGE.pageSize);
-		List<PaymentEntity> list = this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectPageListBySearch", searchValueMap);
+		// List<PaymentEntity> list =
+		// this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE +
+		// ".selectPageListBySearch", searchValueMap);
 		List<PaymentEntityVO> listVO = new ArrayList<PaymentEntityVO>();
-		for (PaymentEntity paymentEntity : list) {
-			listVO.add(entityToVo(paymentEntity));
-		}
+		// for (PaymentEntity paymentEntity : list) {
+		// listVO.add(entityToVo(paymentEntity));
+		// }
 		return listVO;
-	}
-
-	private PaymentEntityVO entityToVo(PaymentEntity paymentEntity) {
-		PaymentEntityVO vo = new PaymentEntityVO();
-		BeanUtils.copyProperties(paymentEntity, vo);
-		vo.setCreateTimeStr(DateUtil.dateToString(paymentEntity.getCreateTime()));
-		if (paymentEntity.getFinishTime() != null)
-			vo.setFinishTimeStr(DateUtil.dateToString(paymentEntity.getFinishTime()));
-		// 状态
-		if (paymentEntity.getStatus() != null && Constants.PAYMENT_STATUS.STAUS0 == paymentEntity.getStatus())
-			vo.setStatusStr(Constants.PAYMENT_STATUS_STR.STAUS_STR0);
-		else if (paymentEntity.getStatus() != null && Constants.PAYMENT_STATUS.STAUS1 == paymentEntity.getStatus())
-			vo.setStatusStr(Constants.PAYMENT_STATUS_STR.STAUS_STR1);
-		else if (paymentEntity.getStatus() != null && Constants.PAYMENT_STATUS.STAUS2 == paymentEntity.getStatus())
-			vo.setStatusStr(Constants.PAYMENT_STATUS_STR.STAUS_STR2);
-		// 交易类型
-		if (paymentEntity.getTradeType() != null && Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0 == paymentEntity.getTradeType())
-			vo.setTradeTypeStr(Constants.PAYMENT_TRADE_TYPE_STR.TRADE_TYPE_STR0);
-		else if (paymentEntity.getTradeType() != null && Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1 == paymentEntity.getTradeType())
-			vo.setTradeTypeStr(Constants.PAYMENT_TRADE_TYPE_STR.TRADE_TYPE_STR1);
-		else if (paymentEntity.getTradeType() != null && Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE2 == paymentEntity.getTradeType())
-			vo.setTradeTypeStr(Constants.PAYMENT_TRADE_TYPE_STR.TRADE_TYPE_STR2);
-		// 支付工具
-		if (paymentEntity.getPayChannel() != null && Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0 == paymentEntity.getPayChannel())
-			vo.setPayChannelStr(Constants.PAYMENT_PAY_CHANNEL_STR.PAY_CHANNEL_STR0);
-		else if (paymentEntity.getPayChannel() != null && Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1 == paymentEntity.getPayChannel())
-			vo.setPayChannelStr(Constants.PAYMENT_PAY_CHANNEL_STR.PAY_CHANNEL_STR1);
-		else if (paymentEntity.getPayChannel() != null && Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2 == paymentEntity.getPayChannel())
-			vo.setPayChannelStr(Constants.PAYMENT_PAY_CHANNEL_STR.PAY_CHANNEL_STR2);
-		return vo;
 	}
 
 	@Override
@@ -168,6 +140,8 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 			paymentEntityVO.setOrderType(Constants.ORDER_TYPE.ORDER_TYPE_0);
 		if (bodyMap.get("totalPrice") != null)
 			paymentEntityVO.setAmountMoney(BigDecimal.valueOf(Double.valueOf(bodyMap.get("totalPrice").toString())));
+		else
+			paymentEntityVO.setAmountMoney(new BigDecimal(0));
 		paymentEntityVO.setCreateTime(DateUtil.getCurrDateTime());
 		paymentEntityVO.setTitle(getTitle(paymentEntityVO.getOrderNum()));
 		if (bodyMap.get("orderDetailNum") != null)
@@ -181,7 +155,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 			paymentEntityVO.setPayChannel(1);
 		else if (PaymentEventType.UNION_PAY.equals(type))
 			paymentEntityVO.setPayChannel(2);
-		else
+		else if (PaymentEventType.APP.equals(type) || PaymentEventType.PAYMENT.equals(type))
 			paymentEntityVO.setPayChannel(0);
 		return paymentEntityVO;
 	}
@@ -352,7 +326,6 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 	}
 
 	private void insertList(List<PaymentEntity> paymentEntityList, PaymentEntityVO paymentEntityVO, MessageEvent event) {
-		LOGGER.info("insertList" + paymentEntityVO.getPayNo());
 		for (PaymentEntity paymentEntity : paymentEntityList) {
 			paymentEntity.setTradeType(0);// 默认支付
 			if (PaymentEventType.PAY_TO_SELLER.equals(event.getType())) {// 打款给卖家
@@ -568,6 +541,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 	public void deleteByPayNo(String payNo) {
 		this.getBaseDao().delete(PAYMENTENTITY_NAMESPACE + ".deleteByPayNo", payNo);
 	}
+
 	@Override
 	public PaymentEntity selectByOrderNumAndBatchNo(String orderNum, String batchNo) {
 		Map<String, Object> params = new HashMap<String, Object>();

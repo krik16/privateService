@@ -46,6 +46,7 @@
 						</c:choose>	
 						</td>
 						<td>
+							${empty entity.payChannel ? '' : ''}
 							${entity.payChannel eq '0' ? '支付宝 ' : ''}
 							${entity.payChannel eq '1' ? '微信' : ''}
 							${entity.payChannel eq '2' ? '银行卡 ' : ''}
