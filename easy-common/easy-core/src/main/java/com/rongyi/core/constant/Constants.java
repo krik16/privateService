@@ -66,7 +66,7 @@ public interface Constants {
         String ORDER_SUCCESS = "下单成功";
         String GROUPON_REST_LACK = "优惠券剩余数量不足";
         String GROUPON_OUT_QUOTA = "购买数量已经超出每个用户购买限制";
-        String GROUPON_OUT_QUOTA_TODAY = "购买数量已经超出每个用户当日购买限制";
+        String GROUPON_OUT_QUOTA_TODAY = "亲，优惠券已被抢购一空，明天再来吧";
         // 接口使用信息
         String NO_RELATIVE_GROUPON = "未找到相关优惠券";
         String ABNORMAL_USE_TIME = "优惠券使用时间异常";
