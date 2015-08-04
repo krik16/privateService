@@ -43,6 +43,8 @@ public class UserinfoVO implements Serializable{
     
     private String shopName;//店铺名称
     
+    private String customerId;//顾客表id
+    
 
 	public String getLogo() {
 		return logo;
@@ -148,4 +150,12 @@ public class UserinfoVO implements Serializable{
 		this.shopName = shopName;
 	}
 
+	public String getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
+	
 }
