@@ -3,6 +3,7 @@ package com.rongyi.rss.coupon;
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.Coupon;
+
 import org.bson.types.ObjectId;
 
 import java.util.List;
@@ -91,4 +92,13 @@ public interface ICashCouponService {
      * @return
      */
     public ResponseResult subtractCouponInventory(String coupongId);
+    
+    /**
+     * 卡券返库
+     * 库存量，券码状态
+     * @param couponId
+     * @param couponCode
+     * @return
+     */
+     boolean  restoreCouponInventory(String couponId,String couponCode);
 }

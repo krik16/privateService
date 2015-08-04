@@ -92,4 +92,17 @@ public interface CMFlopgoService {
 	 */
 	public String getNewActivityId();
 	
+	/**
+	 * 修改数量+1
+	 * @param dafe
+	 * @return
+	 */
+	public int updateCountDaily(FlopPrizeDEntity dafe);
+	
+	/**
+	 * 通过 活动id 时间 奖品id 查询出奖品信息
+	 * @param f
+	 * @return
+	 */
+	public FlopPrizeDEntity selectByFlopEntity(FlopPrizeDEntity f);
 }

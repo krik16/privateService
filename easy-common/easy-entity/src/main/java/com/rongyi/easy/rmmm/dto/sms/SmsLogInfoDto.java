@@ -39,6 +39,10 @@ public class SmsLogInfoDto implements Serializable{
     /** 发送时间 */
     private Date updateAt;
 
+
+    /*返回结果*/
+    private String sendResult;
+
     /**
      * 主键
      * @return id
@@ -165,5 +169,13 @@ public class SmsLogInfoDto implements Serializable{
      */
     public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
+    }
+
+    public String getSendResult() {
+        return sendResult;
+    }
+
+    public void setSendResult(String sendResult) {
+        this.sendResult = sendResult;
     }
 }

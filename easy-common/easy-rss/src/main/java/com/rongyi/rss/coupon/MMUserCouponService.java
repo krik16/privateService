@@ -8,6 +8,8 @@ import com.rongyi.easy.roa.vo.ShopVO;
 
 import java.util.List;
 
+import org.bson.types.ObjectId;
+
 /**
  * 1.获取优惠列表   (分页)  2.主键获取用户优惠
  *
@@ -61,5 +63,9 @@ public interface MMUserCouponService {
      * @return
      */
     MMUserCouponVO getUserCouponByCouponCode(String couponCode);
+
+	public List<MallEntity> searchMallsByIds(List<ObjectId> ids);
+
+	List<ShopVO> getShopsByIds(List<ObjectId> ids);
 
 }

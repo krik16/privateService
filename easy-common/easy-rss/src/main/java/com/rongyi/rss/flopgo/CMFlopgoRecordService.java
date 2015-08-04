@@ -42,4 +42,25 @@ public interface CMFlopgoRecordService {
 	 * @param State
 	 */
 	public void updateReceiveTrue(FlopgoRecordEntity flopgoRecordEntity,String State) throws Exception;
+	
+	/**
+	 * 通过用户id，渠道，奖品id，卷码得到详细的用户信息
+	 * @param flopgoRecordEntity
+	 * @return
+	 */
+	public List<FlopgoRecordEntity> selectFlopRecordByFop(FlopgoRecordEntity flopgoRecordEntity);
+	
+	/**
+	 * 查询出需要返回库存的数据   通过prize_type!=00,is_receive=1,时间《=现在的时间。并且type=0这些条件来查询
+	 * @return
+	 */
+	public List<FlopgoRecordEntity> selectReturnStockByN();
+	
+	/**
+	 * 提供给定时用的修改  
+	 * @param flopgoRecordEntity
+	 * @param State
+	 * @return
+	 */
+	public int updateReceiveS(FlopgoRecordEntity flopgoRecordEntity);
 }
