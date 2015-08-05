@@ -39,6 +39,7 @@ import com.rongyi.core.constant.OrderEventType.EventErrorCode;
 import com.rongyi.core.constant.PaymentEventType;
 
 import com.rongyi.osm.knowledge.SessionUtil;
+import net.sf.json.JSONArray;
 
 
 //全局变量声明
@@ -254,6 +255,11 @@ salience 100
 			        orderUtil.decreaseStock(order);	
 			        
 					logger.debug("[" + drools.getRule().getName() + "成功] {OrderNo:" +$orderNo + "}");	
+					
+					//记录日志
+					//logger.debug("{"+new JSONArray().fromObject(orderUtil.setLogEntityInfo(order)).toString() +"}");	
+					
+					
 					// 创建完成, 发送返回事件
 					orderUtil.sendResponse($event, EventErrorCode.SUCCESS, "订单创建成功");
 			    		
@@ -367,6 +373,8 @@ rule "买家超时未支付"
 		boolean flag=orderUtil.subtractScore($order); //还原买家积分
 		logger.debug("还原积分状态"+ flag + " end");
 		
+		//记录日志
+		//logger.debug("{"+new JSONArray().fromObject(orderUtil.setLogEntityInfo($order)).toString() +"}");	
 		logger.debug("[" + drools.getRule().getName() + "] OrderNo=" +
     		$orderNo + " 结束.");
 end
@@ -409,12 +417,7 @@ salience 100
 		// 归还库存
 		orderUtil.increaseStock($order);
 		
-		//boolean flag=orderUtil.subtractScore($order); //还原买家积分
-		//logger.debug("还原积分状态"+ flag + " end");
-		//Map<String, Object> mapObject = JsonUtil.getMapFromJson($order.getDiscountInfo());
-		//if(flag){
-		//  logger.debug("[" + drools.getRule().getName() + "] OrderNo=" +$orderNo + " 归还用户["+ $order.getBuyerId()+"]"+mapObject.getkey("score") +"积分 结束.");
-		//}
+		boolean flag=orderUtil.subtractScore($order); //还原买家积分
 		orderUtil.sendResponse($event, EventErrorCode.SUCCESS, "订单关闭成功");
 		
 		logger.debug("[" + drools.getRule().getName() + "] OrderNo=" +
@@ -506,6 +509,9 @@ salience 100
 	    boolean flag=orderUtil.subtractScore($order); //还原买家积分
 		logger.debug("还原积分状态"+ flag + " end"); 
 		
+		//记录日志
+		//logger.debug("{"+new JSONArray().fromObject(orderUtil.setLogEntityInfo($order)).toString() +"}");	
+		
 		// add 20150710
 		ApplicationFormEntity application = new ApplicationFormEntity();
 		application.setCreateAt(orderUtil.getCurrentDate());
@@ -564,6 +570,8 @@ salience 100
 		// 修改入库
 		orderFormService.updateTotalPrice($order);
 		
+		//记录日志
+		//logger.debug("{"+new JSONArray().fromObject(orderUtil.setLogEntityInfo($order)).toString() +"}");	
 		// 更新Fact
 		sessionUtil.update($order);
 		
@@ -679,6 +687,8 @@ salience 100
 		$order.setStatusHoldMs(orderConfig.getCommodityDeliverWaitMax());
 		$order.setNextStatusTime(orderUtil.getDateInFuture(orderConfig.getCommodityDeliverWaitMax()));
 		
+		//记录日志
+		//logger.debug("{"+new JSONArray().fromObject(orderUtil.setLogEntityInfo($order)).toString() +"}");	
 		
 		// 入主数据库
 		orderFormService.updateStatusAndPaymentIdWithTime($order);
@@ -774,6 +784,9 @@ salience 100
 		orderFormService.updateStatusAndLogisticsBillIdWithTime($order);
 		
 		sessionUtil.update($order);
+		
+		//记录日志
+		//logger.debug("{"+new JSONArray().fromObject(orderUtil.setLogEntityInfo($order)).toString() +"}");	
 		
 		orderUtil.sendResponse($event, EventErrorCode.SUCCESS, "卖家发货成功");
 		
@@ -875,6 +888,8 @@ rule "卖家超时未发货"
 		boolean flag=orderUtil.subtractScore($order); //还原买家积分
 		logger.debug("还原积分状态"+ flag + " end"); 
 		
+		//记录日志
+		//logger.debug("{"+new JSONArray().fromObject(orderUtil.setLogEntityInfo($order)).toString() +"}");	
 		
 		// 发送退款事件
 		msgSender.sendEvent(pay);
@@ -921,6 +936,8 @@ salience 100
 		
 		sessionUtil.update($order);
 		
+		//记录日志
+		//logger.debug("{"+new JSONArray().fromObject(orderUtil.setLogEntityInfo($order)).toString() +"}");	
 		orderUtil.sendResponse($event, EventErrorCode.SUCCESS, "买家确认收货");
 		
 		logger.debug("[" + drools.getRule().getName() + "] OrderNo=" +
@@ -972,6 +989,8 @@ rule "买家超时未确认收货"
 		
 		sessionUtil.update($order);
 		
+		//记录日志
+		//logger.debug("{"+new JSONArray().fromObject(orderUtil.setLogEntityInfo($order)).toString() +"}");	
 		orderUtil.sendUserEvent(OrderEventType.UNCONFIRMED_RECEIPT_WITHIN_TIME, $orderNo);
 
 		logger.debug("[" + drools.getRule().getName() + "] OrderNo=" +
@@ -1065,9 +1084,9 @@ rule "订单确认收货状态超时"
 		// C2C: 交易金额打款到导购的虚拟账户上
 		orderUtil.orderPayToVirtualAccount($order, orderDetailList);
 
+		
 		// 买家获得积分
 		orderUtil.buyerScoreObtain($order, orderDetailList);
-
 		// 发送佣金待审核事件
 		orderUtil.postCommission($order);
 
@@ -1355,7 +1374,8 @@ salience 100
 			$order.getStatus() == OrderFormStatus.UNPAID) {
 			orderUtil.increaseStock($orderDetail);
 		}
-		
+		//记录日志
+		//logger.debug("{"+new JSONArray().fromObject(orderUtil.setLogEntityInfo($order)).toString() +"}");	
 		// 发送退款事件
 		msgSender.sendEvent(pay);
 		
