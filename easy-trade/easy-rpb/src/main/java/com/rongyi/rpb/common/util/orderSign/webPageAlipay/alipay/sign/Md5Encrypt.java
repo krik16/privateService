@@ -1,20 +1,24 @@
-﻿/**
- * Alipay.com Inc. Copyright (c) 2004-2005 All Rights Reserved.
- * 
- * <p>
- * Created on 2005-7-9
- * </p>
- */
+/**
+ * @Copyright (C),上海容易网电子商务有限公司	
+ * @Author: 柯军 
+ * @datetime:2015年8月5日下午2:43:00
+ * @Description: TODO
+ *
+ **/
+
 package com.rongyi.rpb.common.util.orderSign.webPageAlipay.alipay.sign;
+
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+/**	
+ * @Author:  柯军
+ * @Description: TODO 
+ * @datetime:2015年8月5日下午2:43:00
+ *
+ **/
 
-/**
- * 名称：MD5加密类 功能：将支付宝提交的相关参数按照传入编码进行MD5加密 接口名称：单笔查询接口 版本：2.0 日期：2008-12-25
- * 作者：支付宝公司销售部技术支持团队 联系：0571-26888888 版权：支付宝公司
- * */
 public class Md5Encrypt {
 	/**
 	 * Used building output as Hex
