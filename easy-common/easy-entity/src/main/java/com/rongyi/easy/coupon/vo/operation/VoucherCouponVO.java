@@ -1,8 +1,13 @@
 package com.rongyi.easy.coupon.vo.operation;
 
-public class VoucherCouponVO {
+import java.io.Serializable;
 
-    private Integer id;
+public class VoucherCouponVO implements Serializable {
+
+
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
 
     /**
      * 代金券名称
@@ -10,9 +15,9 @@ public class VoucherCouponVO {
     private String name;
 
     /**
-     * 卡券类型:抵扣券[1], 代金券[2], 红包[3]
+     * 卡券类型:抵扣券[rebate], 代金券[voucher], 红包[redenvelope]
      */
-    private Integer couponType;
+    private String couponType;
 
     /**
      * 券码发行量
@@ -27,43 +32,45 @@ public class VoucherCouponVO {
     /**
      * 原价
      */
-    private Double originalPrice;
+    private Double origPrice;
 
     /**
      * 现价
      */
-    private Double currentPrice;
+    private Double currPrice;
 
     /**
      * 关联类型
-     * 代金券：集团[0], 品牌[1], 商场 [2], 店铺[3]
+     * 代金券：集团[group],品牌[brand], 商场 [mall],店铺[shop];
+     * 红包 ：全场[all_court],商品[commodity]
      */
-    private Integer relatedType;
+    private String relatedType;
 
     /**
-     * 状态: 待审核[0], 审核未通过[1], 审核通过[2]
+     * 状态: 待审核[uncheck], 审核未通过[unpass], 审核通过[pass]
      */
-    private Integer status;
+    private String status;
 
     /**
-     * 发布状态：待发布[0] 进行中[1] 已结束[2] 已下架[3]
+	 * 发布状态：待发布[unpublish] 进行中[proceeing] 已结束[ended] 已下架[off]
+	 *
+	 */
+	private String publishStatus;
+
+	 /**
+     * 是否是第三方券 否[false], 是[true], 默认不是第三方券fasle
      */
-    private Integer publishStatus;
+    private Boolean is3rd;
 
     /**
-     * 一级分类名称
+     * 一级分类name
      */
-    private String firstCategoryName;
+    private String lv1Name;
 
     /**
-     * 二级分类名称
+     * 一级分类name
      */
-    private String secendCategoryName;
-
-    /**
-     * 是否是第三方券 否[false], 是[true], 默认不是第三方券
-     */
-    private Boolean outStatus;
+    private String lv2Name;
 
 	public Integer getId() {
 		return id;
@@ -81,11 +88,11 @@ public class VoucherCouponVO {
 		this.name = name;
 	}
 
-	public Integer getCouponType() {
+	public String getCouponType() {
 		return couponType;
 	}
 
-	public void setCouponType(Integer couponType) {
+	public void setCouponType(String couponType) {
 		this.couponType = couponType;
 	}
 
@@ -105,68 +112,68 @@ public class VoucherCouponVO {
 		this.stockCount = stockCount;
 	}
 
-	public Double getOriginalPrice() {
-		return originalPrice;
+	public Double getOrigPrice() {
+		return origPrice;
 	}
 
-	public void setOriginalPrice(Double originalPrice) {
-		this.originalPrice = originalPrice;
+	public void setOrigPrice(Double origPrice) {
+		this.origPrice = origPrice;
 	}
 
-	public Double getCurrentPrice() {
-		return currentPrice;
+	public Double getCurrPrice() {
+		return currPrice;
 	}
 
-	public void setCurrentPrice(Double currentPrice) {
-		this.currentPrice = currentPrice;
+	public void setCurrPrice(Double currPrice) {
+		this.currPrice = currPrice;
 	}
 
-	public Integer getRelatedType() {
+	public String getRelatedType() {
 		return relatedType;
 	}
 
-	public void setRelatedType(Integer relatedType) {
+	public void setRelatedType(String relatedType) {
 		this.relatedType = relatedType;
 	}
 
-	public Integer getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(Integer status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
-	public Integer getPublishStatus() {
+	public String getPublishStatus() {
 		return publishStatus;
 	}
 
-	public void setPublishStatus(Integer publishStatus) {
+	public void setPublishStatus(String publishStatus) {
 		this.publishStatus = publishStatus;
 	}
 
-	public String getFirstCategoryName() {
-		return firstCategoryName;
+	public Boolean getIs3rd() {
+		return is3rd;
 	}
 
-	public void setFirstCategoryName(String firstCategoryName) {
-		this.firstCategoryName = firstCategoryName;
+	public void setIs3rd(Boolean is3rd) {
+		this.is3rd = is3rd;
 	}
 
-	public String getSecendCategoryName() {
-		return secendCategoryName;
+	public String getLv1Name() {
+		return lv1Name;
 	}
 
-	public void setSecendCategoryName(String secendCategoryName) {
-		this.secendCategoryName = secendCategoryName;
+	public void setLv1Name(String lv1Name) {
+		this.lv1Name = lv1Name;
 	}
 
-	public Boolean getOutStatus() {
-		return outStatus;
+	public String getLv2Name() {
+		return lv2Name;
 	}
 
-	public void setOutStatus(Boolean outStatus) {
-		this.outStatus = outStatus;
+	public void setLv2Name(String lv2Name) {
+		this.lv2Name = lv2Name;
 	}
 
 	@Override
@@ -176,14 +183,13 @@ public class VoucherCouponVO {
 				.append(name).append(", couponType=").append(couponType)
 				.append(", totalCount=").append(totalCount)
 				.append(", stockCount=").append(stockCount)
-				.append(", originalPrice=").append(originalPrice)
-				.append(", currentPrice=").append(currentPrice)
+				.append(", origPrice=").append(origPrice)
+				.append(", currPrice=").append(currPrice)
 				.append(", relatedType=").append(relatedType)
 				.append(", status=").append(status).append(", publishStatus=")
-				.append(publishStatus).append(", firstCategoryName=")
-				.append(firstCategoryName).append(", secendCategoryName=")
-				.append(secendCategoryName).append(", outStatus=")
-				.append(outStatus).append("]");
+				.append(publishStatus).append(", is3rd=").append(is3rd)
+				.append(", lv1Name=").append(lv1Name).append(", lv2Name=")
+				.append(lv2Name).append("]");
 		return builder.toString();
 	}
 

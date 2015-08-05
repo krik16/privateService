@@ -3,19 +3,35 @@ package com.rongyi.easy.coupon.entity.mysql;
 public class CouponShop {
     private Integer id;
 
-    private String shopId;
-
-    private String shopName;
-
-    private String shopMallName;
-
-    private String shopLogoUrl;
-
-    private String shopBrand;
-
+    /**
+     * 卡券id
+     */
     private Integer couponId;
 
-    private Integer enabled;
+    /**
+     * 店铺id
+     */
+    private String shopId;
+
+    /**
+     * 店铺名
+     */
+    private String shopName;
+
+    /**
+     * 店铺所在商场名
+     */
+    private String shopMallName;
+
+    /**
+     * 店铺logo
+     */
+    private String shopLogoUrl;
+
+    /**
+     * 店铺品牌
+     */
+    private String shopBrand;
 
     public Integer getId() {
         return id;
@@ -23,6 +39,14 @@ public class CouponShop {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getCouponId() {
+        return couponId;
+    }
+
+    public void setCouponId(Integer couponId) {
+        this.couponId = couponId;
     }
 
     public String getShopId() {
@@ -63,21 +87,5 @@ public class CouponShop {
 
     public void setShopBrand(String shopBrand) {
         this.shopBrand = shopBrand;
-    }
-
-    public Integer getCouponId() {
-        return couponId;
-    }
-
-    public void setCouponId(Integer couponId) {
-        this.couponId = couponId;
-    }
-
-    public Integer getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(Integer enabled) {
-        this.enabled = enabled;
     }
 }

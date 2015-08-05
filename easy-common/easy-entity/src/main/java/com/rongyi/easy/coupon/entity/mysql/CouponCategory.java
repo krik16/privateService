@@ -3,17 +3,30 @@ package com.rongyi.easy.coupon.entity.mysql;
 public class CouponCategory {
     private Integer id;
 
+    /**
+     * 卡券id
+     */
     private Integer couponId;
 
-    private String firstCategoryId;
+    /**
+     * 一级分类id
+     */
+    private String lv1Id;
 
-    private String firstCategoryName;
+    /**
+     * 一级分类名称
+     */
+    private String lv1Name;
 
-    private String secendCategoryId;
+    /**
+     * 二级分类id
+     */
+    private String lv2Id;
 
-    private String secendCategoryName;
-
-    private Integer enabled;
+    /**
+     * 二级分类名称
+     */
+    private String lv2Name;
 
     public Integer getId() {
         return id;
@@ -31,43 +44,35 @@ public class CouponCategory {
         this.couponId = couponId;
     }
 
-    public String getFirstCategoryId() {
-        return firstCategoryId;
+    public String getLv1Id() {
+        return lv1Id;
     }
 
-    public void setFirstCategoryId(String firstCategoryId) {
-        this.firstCategoryId = firstCategoryId;
+    public void setLv1Id(String lv1Id) {
+        this.lv1Id = lv1Id;
     }
 
-    public String getFirstCategoryName() {
-        return firstCategoryName;
+    public String getLv1Name() {
+        return lv1Name;
     }
 
-    public void setFirstCategoryName(String firstCategoryName) {
-        this.firstCategoryName = firstCategoryName;
+    public void setLv1Name(String lv1Name) {
+        this.lv1Name = lv1Name;
     }
 
-    public String getSecendCategoryId() {
-        return secendCategoryId;
+    public String getLv2Id() {
+        return lv2Id;
     }
 
-    public void setSecendCategoryId(String secendCategoryId) {
-        this.secendCategoryId = secendCategoryId;
+    public void setLv2Id(String lv2Id) {
+        this.lv2Id = lv2Id;
     }
 
-    public String getSecendCategoryName() {
-        return secendCategoryName;
+    public String getLv2Name() {
+        return lv2Name;
     }
 
-    public void setSecendCategoryName(String secendCategoryName) {
-        this.secendCategoryName = secendCategoryName;
-    }
-
-    public Integer getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(Integer enabled) {
-        this.enabled = enabled;
+    public void setLv2Name(String lv2Name) {
+        this.lv2Name = lv2Name;
     }
 }

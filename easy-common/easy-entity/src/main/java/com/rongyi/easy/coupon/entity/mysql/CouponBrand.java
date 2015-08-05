@@ -3,13 +3,25 @@ package com.rongyi.easy.coupon.entity.mysql;
 public class CouponBrand {
     private Integer id;
 
-    private String brandId;
-
-    private String brandName;
-
+    /**
+     * 卡券id
+     */
     private Integer couponId;
 
-    private Integer enabled;
+    /**
+     * 品牌id
+     */
+    private String brandId;
+
+    /**
+     * 品牌中文名
+     */
+    private String brandCname;
+
+    /**
+     * 品牌英文名
+     */
+    private String brandEname;
 
     public Integer getId() {
         return id;
@@ -17,22 +29,6 @@ public class CouponBrand {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getBrandId() {
-        return brandId;
-    }
-
-    public void setBrandId(String brandId) {
-        this.brandId = brandId;
-    }
-
-    public String getBrandName() {
-        return brandName;
-    }
-
-    public void setBrandName(String brandName) {
-        this.brandName = brandName;
     }
 
     public Integer getCouponId() {
@@ -43,11 +39,27 @@ public class CouponBrand {
         this.couponId = couponId;
     }
 
-    public Integer getEnabled() {
-        return enabled;
+    public String getBrandId() {
+        return brandId;
     }
 
-    public void setEnabled(Integer enabled) {
-        this.enabled = enabled;
+    public void setBrandId(String brandId) {
+        this.brandId = brandId;
+    }
+
+    public String getBrandCname() {
+        return brandCname;
+    }
+
+    public void setBrandCname(String brandCname) {
+        this.brandCname = brandCname;
+    }
+
+    public String getBrandEname() {
+        return brandEname;
+    }
+
+    public void setBrandEname(String brandEname) {
+        this.brandEname = brandEname;
     }
 }

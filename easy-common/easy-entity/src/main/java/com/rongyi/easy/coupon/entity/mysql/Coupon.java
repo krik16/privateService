@@ -5,8 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Coupon {
-
-    /**
+	/**
      * 主键id
      */
     private Integer id;
@@ -17,7 +16,7 @@ public class Coupon {
     private String name;
 
     /**
-     * 卡券类型:抵扣券[rebate], 代金券[voucher], 红包[redEnvelope]
+     * 卡券类型:抵扣券[rebate], 代金券[voucher], 红包[redenvelope]
      */
     private String couponType;
 
@@ -39,12 +38,12 @@ public class Coupon {
     /**
      * 原价
      */
-    private Double originalPrice;
+    private Double origPrice;
 
     /**
      * 现价
      */
-    private Double currentPrice;
+    private Double currPrice;
 
     /**
      * 折扣价,属于红包字段
@@ -52,48 +51,44 @@ public class Coupon {
     private Double discount;
 
     /**
-     * 大运营平台，平台代金券;
-     * 展示区域：常规区域,活动区域;
-     * 未选中：[0] 选中：[1] 例如： "1,1"表示都选中
+     * 大运营平台，平台代金券;展示区域：常规区域,活动区域;未选中[0]，选中[1] 例如 "1,1"表示都选中
      */
     private String displayRegion;
 
     /**
-     * 大运营平台，平台代金券
-     * 售后:随时退,过期退,免预约 ；
-     * 未选中：[0] 选中：[1] 例如： "1,1,1"表示都选中
+     * 大运营平台，平台代金券 售后:随时退,过期退,免预约 ；未选中[0]，选中[1] 例如 "1,1,1"表示都选中
      */
     private String afterSaleService;
 
     /**
      * 发布开始时间
      */
-    private Date publishStartTime;
+    private Date publishStartAt;
 
     /**
      * 发布结束时间
      */
-    private Date publishEndTime;
+    private Date publishEndAt;
 
     /**
      * 有效期开始时间
      */
-    private Date validBeginTime;
+    private Date enableStartAt;
 
     /**
      * 有效期结束时间
      */
-    private Date validEndTime;
+    private Date enableEndAt;
 
     /**
      * 使用限制
      */
-    private String useRestriction;
+    private String limitDesc;
 
     /**
      * 使用说明
      */
-    private String useDescription;
+    private String usageDesc;
 
     /**
      * 推荐说明，属于红包字段
@@ -103,10 +98,10 @@ public class Coupon {
     /**
      * 备注
      */
-    private String marks;
+    private String remark;
 
     /**
-     * 列表图url
+     * 列表图url,只有一张
      */
     private String listPicUrl;
 
@@ -116,7 +111,9 @@ public class Coupon {
     private String detailPicUrl;
 
     /**
-     * 关联类型 代金券：集团[group],品牌[brand], 商场 [market],店铺[shop] ；红包 ：全场[all_court],商品[commodity]
+     * 关联类型
+     * 代金券：集团[group],品牌[brand], 商场 [mall],店铺[shop];
+     * 红包 ：全场[all_court],商品[commodity]
      */
     private String relatedType;
 
@@ -136,14 +133,14 @@ public class Coupon {
     private Integer limitPublishCount;
 
     /**
-     * 信息同步终端: 互动屏,微信,容易逛 ，例如 [1,1,1]表示三个都选中
+     * 信息同步终端: 互动屏,微信,容易逛 [1,1,1]表示三个都没选中
      */
     private String synTarget;
 
     /**
      * 卡券发布渠道：大运营平台[operation], 商家管理后台[merchant]
      */
-    private String sourceTarget;
+    private String publishChannel;
 
     /**
      * 状态: 待审核[uncheck], 审核未通过[unpass], 审核通过[pass]
@@ -171,27 +168,35 @@ public class Coupon {
     private Date updateAt;
 
     /**
-     * 是否是第三方券 否[false], 是[true], 默认不是第三方券
+     * 是否是第三方券 否[false], 是[true], 默认不是第三方券fasle
      */
-    private Boolean outStatus;
+    private Boolean is3rd;
 
     /**
-     * 是否已下架  否[false], 是[true], 默认没有下架
+     * 是否已下架 初始状态[false]，已下架[true]
      */
-    private Boolean offShelfStatus;
+    private Boolean isOffStock;
 
     /**
-     * 是否可用：否[false], 是[true], 默认为true 可用
+     * 是否删除：否[false], 是[true], 默认为false未删除
      */
-    private Boolean enabled;
+    private Boolean isDeleted;
 
     /**
-     * 店铺对应的公司名  属于商家管理平台字段
+     * 店铺对应的公司名
      */
     private String sourceName;
 
 
+    /**
+     * 代金券分类
+     */
+    private CouponCategory couponCategory = new CouponCategory();
 
+    /**
+     * 代金券关联的集团
+     */
+    private CouponGroup couponGroup = new CouponGroup();
 
     /**
      * 代金券关联的品牌
@@ -207,14 +212,6 @@ public class Coupon {
      * 代金券关联的店铺
      */
     private List<CouponShop> shops = new ArrayList<CouponShop>();
-
-    /**
-     * 代金券分类
-     */
-    private CouponCategory couponCategory = new CouponCategory();
-
-
-
 
 
     public Integer getId() {
@@ -233,8 +230,21 @@ public class Coupon {
         this.name = name;
     }
 
+    public String getCouponType() {
+        return couponType;
+    }
 
+    public void setCouponType(String couponType) {
+        this.couponType = couponType;
+    }
 
+    public String getValidateType() {
+        return validateType;
+    }
+
+    public void setValidateType(String validateType) {
+        this.validateType = validateType;
+    }
 
     public Integer getTotalCount() {
         return totalCount;
@@ -252,20 +262,20 @@ public class Coupon {
         this.stockCount = stockCount;
     }
 
-    public Double getOriginalPrice() {
-        return originalPrice;
+    public Double getOrigPrice() {
+        return origPrice;
     }
 
-    public void setOriginalPrice(Double originalPrice) {
-        this.originalPrice = originalPrice;
+    public void setOrigPrice(Double origPrice) {
+        this.origPrice = origPrice;
     }
 
-    public Double getCurrentPrice() {
-        return currentPrice;
+    public Double getCurrPrice() {
+        return currPrice;
     }
 
-    public void setCurrentPrice(Double currentPrice) {
-        this.currentPrice = currentPrice;
+    public void setCurrPrice(Double currPrice) {
+        this.currPrice = currPrice;
     }
 
     public Double getDiscount() {
@@ -292,52 +302,52 @@ public class Coupon {
         this.afterSaleService = afterSaleService;
     }
 
-    public Date getPublishStartTime() {
-        return publishStartTime;
+    public Date getPublishStartAt() {
+        return publishStartAt;
     }
 
-    public void setPublishStartTime(Date publishStartTime) {
-        this.publishStartTime = publishStartTime;
+    public void setPublishStartAt(Date publishStartAt) {
+        this.publishStartAt = publishStartAt;
     }
 
-    public Date getPublishEndTime() {
-        return publishEndTime;
+    public Date getPublishEndAt() {
+        return publishEndAt;
     }
 
-    public void setPublishEndTime(Date publishEndTime) {
-        this.publishEndTime = publishEndTime;
+    public void setPublishEndAt(Date publishEndAt) {
+        this.publishEndAt = publishEndAt;
     }
 
-    public Date getValidBeginTime() {
-        return validBeginTime;
+    public Date getEnableStartAt() {
+        return enableStartAt;
     }
 
-    public void setValidBeginTime(Date validBeginTime) {
-        this.validBeginTime = validBeginTime;
+    public void setEnableStartAt(Date enableStartAt) {
+        this.enableStartAt = enableStartAt;
     }
 
-    public Date getValidEndTime() {
-        return validEndTime;
+    public Date getEnableEndAt() {
+        return enableEndAt;
     }
 
-    public void setValidEndTime(Date validEndTime) {
-        this.validEndTime = validEndTime;
+    public void setEnableEndAt(Date enableEndAt) {
+        this.enableEndAt = enableEndAt;
     }
 
-    public String getUseRestriction() {
-        return useRestriction;
+    public String getLimitDesc() {
+        return limitDesc;
     }
 
-    public void setUseRestriction(String useRestriction) {
-        this.useRestriction = useRestriction;
+    public void setLimitDesc(String limitDesc) {
+        this.limitDesc = limitDesc;
     }
 
-    public String getUseDescription() {
-        return useDescription;
+    public String getUsageDesc() {
+        return usageDesc;
     }
 
-    public void setUseDescription(String useDescription) {
-        this.useDescription = useDescription;
+    public void setUsageDesc(String usageDesc) {
+        this.usageDesc = usageDesc;
     }
 
     public String getRecommend() {
@@ -348,12 +358,12 @@ public class Coupon {
         this.recommend = recommend;
     }
 
-    public String getMarks() {
-        return marks;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setMarks(String marks) {
-        this.marks = marks;
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public String getListPicUrl() {
@@ -372,6 +382,13 @@ public class Coupon {
         this.detailPicUrl = detailPicUrl;
     }
 
+    public String getRelatedType() {
+        return relatedType;
+    }
+
+    public void setRelatedType(String relatedType) {
+        this.relatedType = relatedType;
+    }
 
     public Integer getLimitCount() {
         return limitCount;
@@ -403,6 +420,22 @@ public class Coupon {
 
     public void setSynTarget(String synTarget) {
         this.synTarget = synTarget;
+    }
+
+    public String getPublishChannel() {
+        return publishChannel;
+    }
+
+    public void setPublishChannel(String publishChannel) {
+        this.publishChannel = publishChannel;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getCreateUser() {
@@ -437,31 +470,32 @@ public class Coupon {
         this.updateAt = updateAt;
     }
 
-    public Boolean getOutStatus() {
-        return outStatus;
-    }
 
-    public void setOutStatus(Boolean outStatus) {
-        this.outStatus = outStatus;
-    }
-
-    public Boolean getOffShelfStatus() {
-		return offShelfStatus;
+    public Boolean getIs3rd() {
+		return is3rd;
 	}
 
-	public void setOffShelfStatus(Boolean offShelfStatus) {
-		this.offShelfStatus = offShelfStatus;
+	public void setIs3rd(Boolean is3rd) {
+		this.is3rd = is3rd;
 	}
 
-	public Boolean getEnabled() {
-        return enabled;
-    }
+	public Boolean getIsOffStock() {
+		return isOffStock;
+	}
 
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
+	public void setIsOffStock(Boolean isOffStock) {
+		this.isOffStock = isOffStock;
+	}
 
-    public String getSourceName() {
+	public Boolean getIsDeleted() {
+		return isDeleted;
+	}
+
+	public void setIsDeleted(Boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
+	public String getSourceName() {
         return sourceName;
     }
 
@@ -469,49 +503,23 @@ public class Coupon {
         this.sourceName = sourceName;
     }
 
+	public CouponCategory getCouponCategory() {
+		return couponCategory;
+	}
 
+	public void setCouponCategory(CouponCategory couponCategory) {
+		this.couponCategory = couponCategory;
+	}
 
-    public String getCouponType() {
-        return couponType;
-    }
+	public CouponGroup getCouponGroup() {
+		return couponGroup;
+	}
 
-    public void setCouponType(String couponType) {
-        this.couponType = couponType;
-    }
+	public void setCouponGroup(CouponGroup couponGroup) {
+		this.couponGroup = couponGroup;
+	}
 
-    public String getValidateType() {
-        return validateType;
-    }
-
-    public void setValidateType(String validateType) {
-        this.validateType = validateType;
-    }
-
-    public String getRelatedType() {
-        return relatedType;
-    }
-
-    public void setRelatedType(String relatedType) {
-        this.relatedType = relatedType;
-    }
-
-    public String getSourceTarget() {
-        return sourceTarget;
-    }
-
-    public void setSourceTarget(String sourceTarget) {
-        this.sourceTarget = sourceTarget;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public CouponBrand getCouponBrand() {
+	public CouponBrand getCouponBrand() {
 		return couponBrand;
 	}
 
@@ -534,53 +542,5 @@ public class Coupon {
 	public void setShops(List<CouponShop> shops) {
 		this.shops = shops;
 	}
-
-	public CouponCategory getCouponCategory() {
-		return couponCategory;
-	}
-
-	public void setCouponCategory(CouponCategory couponCategory) {
-		this.couponCategory = couponCategory;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Coupon [id=").append(id).append(", name=").append(name)
-				.append(", couponType=").append(couponType)
-				.append(", validateType=").append(validateType)
-				.append(", totalCount=").append(totalCount)
-				.append(", stockCount=").append(stockCount)
-				.append(", originalPrice=").append(originalPrice)
-				.append(", currentPrice=").append(currentPrice)
-				.append(", discount=").append(discount)
-				.append(", displayRegion=").append(displayRegion)
-				.append(", afterSaleService=").append(afterSaleService)
-				.append(", publishStartTime=").append(publishStartTime)
-				.append(", publishEndTime=").append(publishEndTime)
-				.append(", validBeginTime=").append(validBeginTime)
-				.append(", validEndTime=").append(validEndTime)
-				.append(", useRestriction=").append(useRestriction)
-				.append(", useDescription=").append(useDescription)
-				.append(", recommend=").append(recommend).append(", marks=")
-				.append(marks).append(", listPicUrl=").append(listPicUrl)
-				.append(", detailPicUrl=").append(detailPicUrl)
-				.append(", relatedType=").append(relatedType)
-				.append(", limitCount=").append(limitCount)
-				.append(", limitUseCount=").append(limitUseCount)
-				.append(", limitPublishCount=").append(limitPublishCount)
-				.append(", synTarget=").append(synTarget)
-				.append(", sourceTarget=").append(sourceTarget)
-				.append(", status=").append(status).append(", createUser=")
-				.append(createUser).append(", createAt=").append(createAt)
-				.append(", updateUser=").append(updateUser)
-				.append(", updateAt=").append(updateAt).append(", outStatus=")
-				.append(outStatus).append(", enabled=").append(enabled)
-				.append(", sourceName=").append(sourceName).append(", malls=")
-				.append(malls).append(", shops=").append(shops).append("]");
-		return builder.toString();
-	}
-
-
 
 }
