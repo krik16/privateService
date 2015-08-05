@@ -34,9 +34,9 @@ public class SpringAmqpReceiver implements ChannelAwareMessageListener {
 		// 必须捕获异常，否则会导致SpringRabbit重新调用消息接收函数
 		try {	
 			String replyTo = message.getMessageProperties().getReplyTo();
-			//String correlationId = message.getMessageProperties().getReplyTo();
-			byte[] objectCorrelationId = message.getMessageProperties().getCorrelationId();
-			String correlationId=new String(objectCorrelationId);
+			String correlationId = message.getMessageProperties().getReplyTo();
+//			byte[] objectCorrelationId = message.getMessageProperties().getCorrelationId();
+//			String correlationId=new String(objectCorrelationId);
 
 
 			logger.info("Received Event: " + new String(message.getBody(), "UTF-8") + "  replyTo: " + replyTo
