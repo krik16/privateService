@@ -275,6 +275,13 @@ salience 100
 			        logger.error("积分归还开始----------");
 			        orderUtil.subtractScore(order); //还原积分
 			        logger.error("积分归还结束----------");
+			        logger.error("红包归还开始----------");
+			        // 更新现金券状态
+					if (!orderUtil.setCouponStatus(orderDetailList, CashCouponStatus.OCCUPIED, order.getGuideId())) {
+						logger.error("[" + drools.getRule().getName() + "] OrderNo=" +
+			    			$orderNo + " 现金券状态变更错误：现金券不存在或状态不正确");
+					}
+			        logger.error("红包归还结束----------");
 			    	orderUtil.sendResponse($event, EventErrorCode.REQUEST_ORDER_EXISTS, "订单已经存在");
 			    	logger.error("[" + drools.getRule().getName() + "] OrderNo=" + $orderNo + " 数据库存在重复订单,停止创建.");
 			    }
@@ -418,6 +425,14 @@ salience 100
 		orderUtil.increaseStock($order);
 		
 		boolean flag=orderUtil.subtractScore($order); //还原买家积分
+		logger.error("红包归还开始----------");
+		OrderDetailFormEntity[] orderDetailList = orderUtil.queryGetOrderDetailList($order.getOrderNo);
+	    // 更新现金券状态
+		if (!orderUtil.setCouponStatus(orderDetailList, CashCouponStatus.OCCUPIED, $order.getGuideId())) {
+		    logger.error("[" + drools.getRule().getName() + "] OrderNo=" +$orderNo + " 现金券状态变更错误：现金券不存在或状态不正确");
+		}
+		logger.error("红包归还结束----------");
+		
 		orderUtil.sendResponse($event, EventErrorCode.SUCCESS, "订单关闭成功");
 		
 		logger.debug("[" + drools.getRule().getName() + "] OrderNo=" +
@@ -505,6 +520,14 @@ salience 100
 		orderUtil.increaseStock($order);
 		
 		orderUtil.sendResponse($event, EventErrorCode.SUCCESS, "订单撤销成功");
+		
+		logger.error("红包归还开始----------");
+		OrderDetailFormEntity[] orderDetailList = orderUtil.queryGetOrderDetailList($order.getOrderNo);
+	    // 更新现金券状态
+		if (!orderUtil.setCouponStatus(orderDetailList, CashCouponStatus.OCCUPIED, $order.getGuideId())) {
+		    logger.error("[" + drools.getRule().getName() + "] OrderNo=" +$orderNo + " 现金券状态变更错误：现金券不存在或状态不正确");
+		}
+		logger.error("红包归还结束----------");
 		logger.debug("还原积分start"); 
 	    boolean flag=orderUtil.subtractScore($order); //还原买家积分
 		logger.debug("还原积分状态"+ flag + " end"); 
@@ -884,6 +907,14 @@ rule "卖家超时未发货"
 
 		// 归还库存
 		orderUtil.increaseStock($order);
+		
+		logger.error("红包归还开始----------");
+		OrderDetailFormEntity[] orderDetailList = orderUtil.queryGetOrderDetailList($order.getOrderNo);
+	    // 更新现金券状态
+		if (!orderUtil.setCouponStatus(orderDetailList, CashCouponStatus.OCCUPIED, $order.getGuideId())) {
+		    logger.error("[" + drools.getRule().getName() + "] OrderNo=" +$orderNo + " 现金券状态变更错误：现金券不存在或状态不正确");
+		}
+		logger.error("红包归还结束----------");
 		
 		boolean flag=orderUtil.subtractScore($order); //还原买家积分
 		logger.debug("还原积分状态"+ flag + " end"); 
