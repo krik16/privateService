@@ -92,7 +92,14 @@ public interface RoaVoucherCouponService {
 	 */
 	Boolean addCouponCount(Integer id, Integer addCount) throws Exception;
 
-
+	/**
+	 * @Description:设置展示区域
+	 * @author:lqy
+	 * @param ids 卡券集合
+	 * @param displayRegion 展示区域： 常规区域,活动区域;未选中[0]，选中[1] 例如 "1,1"表示都选中
+	 * @return
+	 */
+	ResponseResult deployRegion(List<Integer> ids, String displayRegion);
 
 
 
