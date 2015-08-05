@@ -3,17 +3,35 @@ package com.rongyi.easy.coupon.entity.mysql;
 public class CouponSort {
     private Integer id;
 
+    /**
+     * 卡券id
+     */
     private Integer couponId;
 
-    private String proId;
+    /**
+     * 省id
+     */
+    private String provinceId;
 
-    private String pro;
+    /**
+     * 省名
+     */
+    private String provinceName;
 
+    /**
+     * 市id
+     */
     private String cityId;
 
-    private String city;
+    /**
+     * 市名
+     */
+    private String cityName;
 
-    private Integer sortIndex;
+    /**
+     * 排序值 1~10 数字越小越靠前
+     */
+    private Integer sortIdx;
 
     public Integer getId() {
         return id;
@@ -31,20 +49,20 @@ public class CouponSort {
         this.couponId = couponId;
     }
 
-    public String getProId() {
-        return proId;
+    public String getProvinceId() {
+        return provinceId;
     }
 
-    public void setProId(String proId) {
-        this.proId = proId;
+    public void setProvinceId(String provinceId) {
+        this.provinceId = provinceId;
     }
 
-    public String getPro() {
-        return pro;
+    public String getProvinceName() {
+        return provinceName;
     }
 
-    public void setPro(String pro) {
-        this.pro = pro;
+    public void setProvinceName(String provinceName) {
+        this.provinceName = provinceName;
     }
 
     public String getCityId() {
@@ -55,19 +73,19 @@ public class CouponSort {
         this.cityId = cityId;
     }
 
-    public String getCity() {
-        return city;
+    public String getCityName() {
+        return cityName;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
-    public Integer getSortIndex() {
-        return sortIndex;
+    public Integer getSortIdx() {
+        return sortIdx;
     }
 
-    public void setSortIndex(Integer sortIndex) {
-        this.sortIndex = sortIndex;
+    public void setSortIdx(Integer sortIdx) {
+        this.sortIdx = sortIdx;
     }
 }

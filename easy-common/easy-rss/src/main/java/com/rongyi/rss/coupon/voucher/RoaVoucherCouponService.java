@@ -66,12 +66,12 @@ public interface RoaVoucherCouponService {
 	 * @Description:下架代金券
 	 * @author:lqy
 	 * @param ids 代金券id
-	 * @param offShelfStatus 下架状态
+	 * @param isOffStock 下架状态 已下架[true]
 	 * @param reason 下架原因
 	 * @return 成功：true 失败：false
 	 * @throws Exception
 	 */
-	Boolean offShelfCoupon(List<Integer> ids, Boolean offShelfStatus, String reason)
+	Boolean offShelfCoupon(List<Integer> ids, Boolean isOffStock, String reason)
 			throws Exception;
 
 	/**
@@ -120,10 +120,10 @@ public interface RoaVoucherCouponService {
 	 * @Description:置顶代金券排序
 	 * @author:lqy
 	 * @param couponSortId 排序id
-	 * @param sortIndex 排序值
+	 * @param sortIdx 排序值
 	 * @return 成功返回true 失败返回false
 	 */
-	boolean sort(Integer couponSortId, Integer sortIndex);
+	boolean sort(Integer couponSortId, Integer sortIdx);
 
 
 	/***********置顶代金券 end***************/
