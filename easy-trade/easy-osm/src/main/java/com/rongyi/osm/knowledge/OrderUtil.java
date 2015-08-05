@@ -891,7 +891,7 @@ public class OrderUtil {
 			if (order.getStatus().equals(OrderFormStatus.CLOSED)|| order.getStatus().equals(OrderFormStatus.TO_SHIPPED)|| order.getStatus().equals(OrderFormStatus.UNPAID)) {
 				integralRecordVO.setAction(ActionType.ACTION_ADD); // 操作类型 家超时未支付
 				integralRecordVO.setType(ScoreRuleEnum.SCORE_PAY_TIMEOUT_ROLLBACK.getCode()); // 操作详情:超时未支付
-				integralRecordVO.setEvent_id(order.getBuyerId()+ActionType.ACTION_ADD+ScoreRuleEnum.SCORE_COUPON_ADD.getCode()+System.currentTimeMillis());
+				integralRecordVO.setEvent_id(order.getBuyerId()+ActionType.ACTION_ADD+ScoreRuleEnum.SCORE_PAY_TIMEOUT_ROLLBACK.getCode()+System.currentTimeMillis());
 			} else {
 				integralRecordVO.setAction(ActionType.ACTION_SUB); // 操作类型 买家下单
 				integralRecordVO.setType(ScoreRuleEnum.SCORE_ORDER_SUB.getCode()); // 操作详情:下单
