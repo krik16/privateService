@@ -155,7 +155,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 			paymentEntityVO.setPayChannel(1);
 		else if (PaymentEventType.UNION_PAY.equals(type))
 			paymentEntityVO.setPayChannel(2);
-		else if (PaymentEventType.APP.equals(type) || PaymentEventType.PAYMENT.equals(type))
+		else
 			paymentEntityVO.setPayChannel(0);
 		return paymentEntityVO;
 	}
@@ -340,6 +340,8 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 				paymentEntity.setStatus(2);
 				paymentEntity.setFinishTime(DateUtil.getCurrDateTime());
 			}
+			if(paymentEntityVO.getAmountMoney().doubleValue() == 0)
+				paymentEntity.setPayChannel(null);
 			insertByOrderDetailNum(paymentEntity, paymentEntityVO.getOrderDetailNumArray());// 插入数据库
 			LOGGER.info("==================插入数据库成功==============");
 		}
