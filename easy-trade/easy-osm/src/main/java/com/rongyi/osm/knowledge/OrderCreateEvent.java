@@ -26,7 +26,10 @@ public class OrderCreateEvent extends UserEvent{
 		
 		OrderFormEntity orderFormEntity = getOrderFormEntity();
 		if(orderFormEntity.getJsonDiscountInfo()!=null && orderFormEntity.getJsonDiscountInfo().size()>0){
-			orderFormEntity.setDiscountInfo(orderFormEntity.getJsonDiscountInfo().toString());
+			JSONObject str=JSONObject.fromObject(orderFormEntity.getJsonDiscountInfo());
+			if(str.get("score") !=null && Integer.valueOf(str.get("score").toString())>0){
+				orderFormEntity.setDiscountInfo(orderFormEntity.getJsonDiscountInfo().toString());
+			}
 		}
 		
 		Object[] objList = JsonUtil.getDTOArray(
