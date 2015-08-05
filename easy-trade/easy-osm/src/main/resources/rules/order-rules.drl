@@ -426,7 +426,7 @@ salience 100
 		
 		boolean flag=orderUtil.subtractScore($order); //还原买家积分
 		logger.error("红包归还开始----------");
-		OrderDetailFormEntity[] orderDetailList = orderUtil.queryGetOrderDetailList($order.getOrderNo);
+		OrderDetailFormEntity[] orderDetailList = orderUtil.queryGetOrderDetailList($order.getOrderNo());
 	    // 更新现金券状态
 		if (!orderUtil.setCouponStatus(orderDetailList, CashCouponStatus.OCCUPIED, $order.getGuideId())) {
 		    logger.error("[" + drools.getRule().getName() + "] OrderNo=" +$orderNo + " 现金券状态变更错误：现金券不存在或状态不正确");
@@ -522,7 +522,7 @@ salience 100
 		orderUtil.sendResponse($event, EventErrorCode.SUCCESS, "订单撤销成功");
 		
 		logger.error("红包归还开始----------");
-		OrderDetailFormEntity[] orderDetailList = orderUtil.queryGetOrderDetailList($order.getOrderNo);
+		OrderDetailFormEntity[] orderDetailList = orderUtil.queryGetOrderDetailList($order.getOrderNo());
 	    // 更新现金券状态
 		if (!orderUtil.setCouponStatus(orderDetailList, CashCouponStatus.OCCUPIED, $order.getGuideId())) {
 		    logger.error("[" + drools.getRule().getName() + "] OrderNo=" +$orderNo + " 现金券状态变更错误：现金券不存在或状态不正确");
@@ -909,7 +909,7 @@ rule "卖家超时未发货"
 		orderUtil.increaseStock($order);
 		
 		logger.error("红包归还开始----------");
-		OrderDetailFormEntity[] orderDetailList = orderUtil.queryGetOrderDetailList($order.getOrderNo);
+		OrderDetailFormEntity[] orderDetailList = orderUtil.queryGetOrderDetailList($order.getOrderNo());
 	    // 更新现金券状态
 		if (!orderUtil.setCouponStatus(orderDetailList, CashCouponStatus.OCCUPIED, $order.getGuideId())) {
 		    logger.error("[" + drools.getRule().getName() + "] OrderNo=" +$orderNo + " 现金券状态变更错误：现金券不存在或状态不正确");
