@@ -29,5 +29,14 @@ public interface AliPaymentService {
 	 **/
 	public Map<String, Object> getZhiFuBaoSign(Map<String, Object> orderMaps, String payNo);
 	
+	/**	
+	 * @Description: 查询支付宝订单支付状态 
+	 * @param payNo
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年8月5日上午9:42:53
+	 **/
+	public String queryOrder(String payNo);
+	
 	
 }

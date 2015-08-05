@@ -5,21 +5,16 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.stereotype.Service;
-
 import net.sf.json.JSONObject;
 
-import java.util.List;
+import org.springframework.stereotype.Service;
 
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.rpb.entity.UnionActivityRegister;
-import com.rongyi.easy.rpb.entity.UnionBaseEntity;
-import com.rongyi.easy.rpb.entity.UnionCouponLogEntity;
 import com.rongyi.rpb.common.util.orderSign.union.UnionUtil;
 import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.service.UnionpayMarketingService;
 import com.unionpay.acp.sdk.HttpClient;
-import com.unionpay.acp.sdk.SDKConfig;
 import com.unionpay.acp.sdk.SDKUtil;
 
 /**
@@ -28,12 +23,11 @@ import com.unionpay.acp.sdk.SDKUtil;
  * 
  */
 @Service
-public class UnionpayMarketingServiceImpl extends BaseServiceImpl implements
-		UnionpayMarketingService {
+public class UnionpayMarketingServiceImpl extends BaseServiceImpl implements UnionpayMarketingService {
 	private static final String NAMESPACE = "com.rongyi.rpb.mapper.UnionActivityRegisterMapper";
 
 	@Override
-	public Map<String, Object> validateXML(Map<String, String[]> paramMap)throws ParseException {
+	public Map<String, Object> validateXML(Map<String, String[]> paramMap) throws ParseException {
 		UnionActivityRegister unionActivityRegister = UnionActivityRegister.mapToEntity(paramMap);
 		Map<String, String> respMap = responseUnionMessage(unionActivityRegister);
 		System.err.println("返回报文：" + JSONObject.fromObject(respMap).toString());
@@ -46,8 +40,7 @@ public class UnionpayMarketingServiceImpl extends BaseServiceImpl implements
 	 */
 	@Override
 	public void insert(UnionActivityRegister unionActivityRegister) {
-		this.getBaseDao().insertBySql(NAMESPACE + ".insert",
-				unionActivityRegister);
+		this.getBaseDao().insertBySql(NAMESPACE + ".insert", unionActivityRegister);
 	}
 
 	// 组织报文发送银联商务
@@ -74,12 +67,11 @@ public class UnionpayMarketingServiceImpl extends BaseServiceImpl implements
 																			// 非必传
 		data.put("event_status", unionActivityRegister.getEventStatus());// 活动状态
 		String parmaPlain = UnionUtil.getParamPlain3(data);
-		String sign = com.chinaums.ysmktaln.mktaln4sp.Service.sign(parmaPlain,ConstantEnum.UNION_PRIVATE_KEY.getValueStr());
+		String sign = com.chinaums.ysmktaln.mktaln4sp.Service.sign(parmaPlain, ConstantEnum.UNION_PRIVATE_KEY.getValueStr());
 		data.put("shop_no", unionActivityRegister.getShopNo());// 门店号
 		data.put("sign", sign);// 签名数据
-		System.err.println("requestXML-submitDataInfo："
-				+ JSONObject.fromObject(data).toString());
-		Map<String, String> resMap = submitDataInfo(data,"http://dev.spserv.yxlm.chinaums.com:17201/spservice/spevent/process");
+		System.err.println("requestXML-submitDataInfo：" + JSONObject.fromObject(data).toString());
+		Map<String, String> resMap = submitDataInfo(data, "http://dev.spserv.yxlm.chinaums.com:17201/spservice/spevent/process");
 		return resMap;
 	}
 
@@ -87,8 +79,7 @@ public class UnionpayMarketingServiceImpl extends BaseServiceImpl implements
 	 * @param contentData
 	 * @return 返回报文 map
 	 */
-	public static Map<String, String> submitDataInfo(
-			Map<String, String> submitFromData, String requestUrl) {
+	public static Map<String, String> submitDataInfo(Map<String, String> submitFromData, String requestUrl) {
 		String resultString = "";
 		// 发送
 		HttpClient hc = new HttpClient(requestUrl, 30000, 30000);
@@ -96,8 +87,7 @@ public class UnionpayMarketingServiceImpl extends BaseServiceImpl implements
 			int status = hc.send(submitFromData, "UTF-8");
 			if (200 == status) {
 				resultString = hc.getResult();
-				System.err.println("responseXML-submitDataInfo："
-						+ JSONObject.fromObject(resultString).toString());
+				System.err.println("responseXML-submitDataInfo：" + JSONObject.fromObject(resultString).toString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -107,13 +97,13 @@ public class UnionpayMarketingServiceImpl extends BaseServiceImpl implements
 		if (null != resultString && !"".equals(resultString)) {
 			// 将返回结果转换为map
 			resData = SDKUtil.convertResultStringToMap(resultString);
-//			if (SDKUtil.validate(resData, "utf-8")) {
-//				// if (UnionUtil.verify(resData.toString(),
-//				// resData.get("sign"))) {
-//				System.out.println("返回数据合法性");
-//			} else {
-//				System.out.println("验证签名失败");
-//			}
+			// if (SDKUtil.validate(resData, "utf-8")) {
+			// // if (UnionUtil.verify(resData.toString(),
+			// // resData.get("sign"))) {
+			// System.out.println("返回数据合法性");
+			// } else {
+			// System.out.println("验证签名失败");
+			// }
 			// 打印返回报文
 			System.out.println("打印返回报文：" + resultString);
 		}
@@ -125,16 +115,13 @@ public class UnionpayMarketingServiceImpl extends BaseServiceImpl implements
 	public UnionActivityRegister selectByShopNo(String shop_no) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("shopNo", shop_no);
-		return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectByShopNo",
-				map);
+		return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectByShopNo", map);
 	}
 
 	// 注销活动号
 	@Override
-	public void deleteByEventStatus(Map<String, String[]> paramMap)
-			throws ParseException {
-		UnionActivityRegister unionActivityRegister = UnionActivityRegister
-				.deleteActivity(paramMap);
+	public void deleteByEventStatus(Map<String, String[]> paramMap) throws ParseException {
+		UnionActivityRegister unionActivityRegister = UnionActivityRegister.deleteActivity(paramMap);
 
 		Map<String, String> data = new HashMap<String, String>();
 		data.put("msg_type", unionActivityRegister.getMsgType());// 报文类型
@@ -153,11 +140,11 @@ public class UnionpayMarketingServiceImpl extends BaseServiceImpl implements
 		data.put("end_date", new SimpleDateFormat("yyyyMMddHHmmss").format(unionActivityRegister.getEndAt()));// 结束时间
 		data.put("event_status", unionActivityRegister.getEventStatus());// 活动状态
 		String parmaPlain = UnionUtil.getParamPlain3(data);
-		String sign = com.chinaums.ysmktaln.mktaln4sp.Service.sign(parmaPlain,ConstantEnum.UNION_PRIVATE_KEY.getValueStr());
+		String sign = com.chinaums.ysmktaln.mktaln4sp.Service.sign(parmaPlain, ConstantEnum.UNION_PRIVATE_KEY.getValueStr());
 		data.put("shop_no", unionActivityRegister.getShopNo());// 门店号
 		data.put("sign", sign);// 签名数据
-		Map<String, String> resMap = submitDataInfo(data,"http://dev.spserv.yxlm.chinaums.com:17201/spservice/spevent/process");
-		System.err.println("deleteByEventStatus-responseXML："+ JSONObject.fromObject(resMap).toString());
+		Map<String, String> resMap = submitDataInfo(data, "http://dev.spserv.yxlm.chinaums.com:17201/spservice/spevent/process");
+		System.err.println("deleteByEventStatus-responseXML：" + JSONObject.fromObject(resMap).toString());
 		// this.getBaseDao().updateBySql(NAMESPACE +
 		// ".updateByPrimaryKeySelective", unionActivityRegister);
 	}
