@@ -48,19 +48,6 @@ public class OrderCreateEvent extends UserEvent{
 			list[i] = (OrderDetailFormEntity)obj;
 			i++;
 		}
-		
-		BigDecimal bigCouponAmount =new BigDecimal(0);
-        for(Object obj:objList){
-        	OrderDetailFormEntity orderDetail =(OrderDetailFormEntity)obj;
-        	String couponId = orderDetail.getCouponId();
-    		if (!(couponId == null || couponId.isEmpty())) {
-    			Double couponAmount = couponStatusService.getDiscountByCode(couponId);
-    			if (couponAmount != null) {
-    				bigCouponAmount = bigCouponAmount.add(new BigDecimal(couponAmount));
-    			}
-    		}
-		}
-        orderFormEntity.getJsonDiscountInfo().put("CouponAmount", bigCouponAmount);
         
 		setOrderDetailFormEntityList(list);
 	}
