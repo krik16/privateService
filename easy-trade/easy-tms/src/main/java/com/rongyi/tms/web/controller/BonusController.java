@@ -242,7 +242,6 @@ public class BonusController extends BaseController {
 	@RequestMapping(value = "/uploadExcel")
     public String uploadExcel(@RequestParam(value = "file", required = false) MultipartFile file, HttpSession session,
             HttpServletRequest request, ModelMap model) {
-        Map<String, Object> resultInfoMap = new HashMap<String, Object>();
         try {
             String path = request.getSession().getServletContext().getRealPath("upload");
             String fileName = file.getOriginalFilename();

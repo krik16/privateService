@@ -1,7 +1,11 @@
 package com.rongyi.rpb.service.impl;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
@@ -10,10 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
+import com.rongyi.rpb.common.util.orderSign.webPageAlipay.alipay.sign.Md5Encrypt;
 import com.rongyi.rpb.common.util.orderSign.webPageAlipay.alipay.sign.RSA;
 import com.rongyi.rpb.constants.ConstantUtil;
+import com.rongyi.rpb.constants.ConstantUtil.PayZhiFuBao;
+import com.rongyi.rpb.constants.ConstantUtil.ZhiFuBaoWebPage;
 import com.rongyi.rpb.service.AliPaymentService;
 import com.rongyi.rpb.service.PaymentService;
+import com.unionpay.acp.sdk.HttpClient;
 
 /**
  * @Author: 柯军
@@ -22,7 +30,7 @@ import com.rongyi.rpb.service.PaymentService;
  * 
  **/
 @Service
-public class AliPaymentServiceImpl extends BaseServiceImpl implements AliPaymentService{
+public class AliPaymentServiceImpl extends BaseServiceImpl implements AliPaymentService {
 
 	private static final Logger LOGGER = Logger.getLogger(AliPaymentServiceImpl.class);
 	@Autowired
@@ -47,7 +55,7 @@ public class AliPaymentServiceImpl extends BaseServiceImpl implements AliPayment
 			resultMap.put("title", title);
 			resultMap.put("totlePrice", totalPrice);
 		} catch (Exception e) {
-		    resultMap.put("code", 1);//生成失败
+			resultMap.put("code", 1);// 生成失败
 			LOGGER.error(e);
 		}
 		return resultMap;
@@ -84,6 +92,112 @@ public class AliPaymentServiceImpl extends BaseServiceImpl implements AliPayment
 		sb.append("\"");
 
 		return new String(sb);
+	}
+
+	/**
+	 * @Description: 查询订单状态
+	 * @param payNo
+	 * @return
+	 * @Author: 柯军
+	 * @datetime:2015年8月5日上午9:34:52
+	 **/
+	@Override
+	public String queryOrder(String payNo) {
+		String url = CreateUrl(payNo);
+		HttpClient hc = new HttpClient(url, 30000, 30000);
+		try {
+			int status = hc.send(new HashMap<String, String>(), PayZhiFuBao.INPUT_CHARSET);
+			System.err.println(status);
+			if (status == 200)
+				return hc.getResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * 生成url方法 网关
+	 * 
+	 * @param paygateway
+	 *            服务参数
+	 * @param service
+	 *            签名类型
+	 * @param sign_type
+	 *            外部订单号
+	 * @param out_trade_no
+	 *            编码机制
+	 * @param input_charset
+	 *            合作者ID
+	 * @param partner
+	 *            安全校验码
+	 * @param key
+	 * @return
+	 */
+	public String CreateUrl(String outTradeNo) {
+
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("service", ZhiFuBaoWebPage.QUERY_SERVICE);
+		params.put("partner", PayZhiFuBao.PARTNER);
+		params.put("out_trade_no", outTradeNo);
+		params.put("_input_charset", PayZhiFuBao.INPUT_CHARSET);
+
+		String prestr = "";
+
+		prestr = prestr + PayZhiFuBao.PRIVATE_KEY;
+
+		String sign = Md5Encrypt.md5(getContent(params, PayZhiFuBao.PRIVATE_KEY), PayZhiFuBao.INPUT_CHARSET);
+
+		String parameter = "";
+		parameter = parameter + ZhiFuBaoWebPage.ALIPAY_QUERY_ORDER_GATEWAY;
+		List<String> keys = new ArrayList<String>(params.keySet());
+		for (int i = 0; i < keys.size(); i++) {
+			String value = (String) params.get(keys.get(i));
+			if (value == null || value.trim().length() == 0) {
+				continue;
+			}
+			try {
+				parameter = parameter + keys.get(i) + "=" + URLEncoder.encode(value, PayZhiFuBao.INPUT_CHARSET) + "&";
+			} catch (UnsupportedEncodingException e) {
+
+				e.printStackTrace();
+			}
+		}
+
+		parameter = parameter + "sign=" + sign + "&sign_type=" + PayZhiFuBao.SIGNTYPE;
+
+		return parameter;
+
+	}
+
+	/**
+	 * 功能：将安全校验码和参数排序 参数集合
+	 * 
+	 * @param params
+	 *            安全校验码
+	 * @param privateKey
+	 * */
+	private String getContent(Map<String, Object> params, String privateKey) {
+		List<String> keys = new ArrayList<String>(params.keySet());
+		Collections.sort(keys);
+		String prestr = "";
+
+		boolean first = true;
+		for (int i = 0; i < keys.size(); i++) {
+			String key = (String) keys.get(i);
+			String value = (String) params.get(key);
+			if (value == null || value.trim().length() == 0) {
+				continue;
+			}
+			if (first) {
+				prestr = prestr + key + "=" + value;
+				first = false;
+			} else {
+				prestr = prestr + "&" + key + "=" + value;
+			}
+		}
+
+		return prestr + privateKey;
 	}
 
 }

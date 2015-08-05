@@ -17,6 +17,7 @@ import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentItemEntity;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
+import com.rongyi.rpb.service.AliPaymentService;
 import com.rongyi.rpb.service.PaymentItemService;
 import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rss.coupon.RoaCouponOrderService;
@@ -32,6 +33,9 @@ public class PaymentServiceTest extends BaseTest {
 	@Autowired
 	PaymentItemService paymentItemService;
 
+	@Autowired
+	AliPaymentService aliPaymentService;
+	
 	// @Test
 	public void testSelectPageListBySearch() {
 		Map<String, Object> searchValueMap = null;
@@ -176,10 +180,15 @@ public class PaymentServiceTest extends BaseTest {
 		roaCouponOrderService.findOneByOrderNo("");
 	}
 
-	@Test
+//	@Test
 	public void testSelectItemByPaymentId(){
 		List<PaymentItemEntity> list = paymentItemService.selectByPaymentId(2171);
 		System.err.println(list.get(0).getDetailNum());
+	}
+	
+	@Test
+	public void testQueryOrder(){
+		System.err.println(aliPaymentService.queryOrder("1000001985815160"));	
 	}
 	
 	public MessageEvent getRpbEvent(String soruce, String type) {

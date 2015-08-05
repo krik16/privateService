@@ -26,7 +26,7 @@ public class MQTest extends BaseTest {
 		event.setType("4");
 		event.setTarget("coupon_order_queue");
 		Map<String, Object> bodyMap = new HashMap<String, Object>();
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 1; i++) {
 			bodyMap.put("paymentId", "100000" + i);
 			bodyMap.put("payChannel", "3");
 			bodyMap.put("orderNum", "20150805" + i);
