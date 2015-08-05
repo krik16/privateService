@@ -39,6 +39,7 @@ import com.rongyi.core.constant.OrderEventType.EventErrorCode;
 import com.rongyi.core.constant.PaymentEventType;
 
 import com.rongyi.osm.knowledge.SessionUtil;
+import net.sf.json.JSONArray;
 
 
 //全局变量声明
@@ -1086,7 +1087,6 @@ rule "订单确认收货状态超时"
 		
 		// 买家获得积分
 		orderUtil.buyerScoreObtain($order, orderDetailList);
-
 		// 发送佣金待审核事件
 		orderUtil.postCommission($order);
 

@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.json.JSONArray;
+//import net.sf.json.JSONArray;
 
 import javax.annotation.Resource;
 
@@ -40,7 +40,7 @@ import com.rongyi.easy.osm.entity.OrderFormEntity;
 import com.rongyi.easy.va.entity.VirtualAccountDetailEntity;
 import com.rongyi.osm.constant.CashCouponStatus;
 import com.rongyi.osm.constant.OrderFormStatus;
-import com.rongyi.osm.constant.OsmLogEntity;
+//import com.rongyi.osm.constant.OsmLogEntity;
 //import com.rongyi.osm.constant.OsmLogEntity;
 import com.rongyi.osm.mq.SpringAmqpSender;
 import com.rongyi.osm.service.ApplicationFormServiceImpl;
