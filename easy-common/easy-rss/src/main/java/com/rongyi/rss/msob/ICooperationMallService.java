@@ -20,6 +20,7 @@ public interface ICooperationMallService {
 	 */
 	public MallEntity getMallEntityByMongoId(PrincipalAndCategoryParam param) throws Exception;
 
+	public List<MallCooperateEntity> getMallEntityByGroupId(Integer groupId) throws Exception;
 	/**
 	 * 插入商场信息 注：添加负责人使用
 	 * 
