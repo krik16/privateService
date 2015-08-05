@@ -103,9 +103,9 @@ pageEncoding="UTF-8"%>
 							<select id="favorType" style="width: 110px">
 								<option value="">--全部--</option>
 								<option value="0">未使用优惠</option>
-								<option value="1">现金券</option>
+								<option value="1">红包</option>
 								<option value="2">积分</option>
-								<option value="3">现金券加积分</option>
+								<option value="3">红包加积分</option>
 							</select>
 						</li>
 						

@@ -53,13 +53,13 @@
 						</td>
 						<c:choose>
 							<c:when test="${entity.integral > 0 && entity.couponDiscount > 0}">
-								<td>现金券加积分</td>
+								<td>红包加积分</td>
 							</c:when>
 							<c:when test="${entity.integral > 0}">
 								<td>积分</td>
 							</c:when>
 							<c:when test="${entity.couponDiscount > 0}">
-								<td>现金券</td>
+								<td>红包</td>
 							</c:when>
 							<c:otherwise>
 								<td></td>

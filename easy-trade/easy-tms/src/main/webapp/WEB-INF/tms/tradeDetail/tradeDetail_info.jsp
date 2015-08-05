@@ -164,7 +164,7 @@ body {
 							</c:if>
 							<c:if
 								test="${ not empty trade.couponDiscountInt && trade.couponDiscountInt > 0}">
-									现金券(${trade.couponDiscountInt}元)
+									红包(${trade.couponDiscountInt}元)
 							</c:if>
 							</p>
 						</div>
