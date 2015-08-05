@@ -40,6 +40,7 @@ import com.rongyi.easy.osm.entity.OrderFormEntity;
 import com.rongyi.easy.va.entity.VirtualAccountDetailEntity;
 import com.rongyi.osm.constant.CashCouponStatus;
 import com.rongyi.osm.constant.OrderFormStatus;
+import com.rongyi.osm.constant.OsmLogEntity;
 //import com.rongyi.osm.constant.OsmLogEntity;
 import com.rongyi.osm.mq.SpringAmqpSender;
 import com.rongyi.osm.service.ApplicationFormServiceImpl;
@@ -889,7 +890,7 @@ public class OrderUtil {
 			// CLOSED卖家订单关闭,TO_SHIPPED卖家超时未发货,UNPAID买家超时未支付
 			if (order.getStatus().equals(OrderFormStatus.CLOSED)|| order.getStatus().equals(OrderFormStatus.TO_SHIPPED)|| order.getStatus().equals(OrderFormStatus.UNPAID)) {
 				integralRecordVO.setAction(ActionType.ACTION_ADD); // 操作类型 家超时未支付
-				integralRecordVO.setType(ScoreRuleEnum.SCORE_COUPON_ADD.getCode()); // 操作详情:超时未支付
+				integralRecordVO.setType(ScoreRuleEnum.SCORE_PAY_TIMEOUT_ROLLBACK.getCode()); // 操作详情:超时未支付
 				integralRecordVO.setEvent_id(order.getBuyerId()+ActionType.ACTION_ADD+ScoreRuleEnum.SCORE_COUPON_ADD.getCode()+System.currentTimeMillis());
 			} else {
 				integralRecordVO.setAction(ActionType.ACTION_SUB); // 操作类型 买家下单
@@ -929,7 +930,7 @@ public class OrderUtil {
 					}
 				}
 			}
-			integralRecordVO.setPay_money(calculateTotalPrice(order,orderDetailList));// 实际支付金额
+			//integralRecordVO.setPay_money(calculateTotalPrice(order,orderDetailList));// 实际支付金额
 			integralRecordVO.setTotal_money(totalMoney); // 原结算金额
 			integralRecordVO.setPreferential_deduction(deductionMoney); // 优惠抵扣金额
 			
@@ -950,12 +951,8 @@ public class OrderUtil {
 
 		// 积分操作
 		public boolean scoreOperation(IntegralRecordVO integralRecordVO) {
-			System.out.println(".................积分操作开始.................");
-			System.out.println("操作类型Action:"+integralRecordVO.getAction());
-			System.out.println("json---->integralRecordVO:"+new JSONArray().fromObject(integralRecordVO).toString());
 			// 调用dobbu接口真正扣积分
 			JSONObject jSONObject = integralService.addOrSubScore(integralRecordVO);
-			System.out.println("jSONObject:"+jSONObject.toString());
 			Map<String,Object> keyMap = JsonUtil.getMapFromJson(jSONObject.toString());
 			if (keyMap.get("errno") != null && Integer.parseInt(keyMap.get("errno").toString()) == 0) {
 				return true;
@@ -966,10 +963,7 @@ public class OrderUtil {
 
 		//还原积分
 		public boolean subtractScore(OrderFormEntity order) {
-			System.out.println("开始还原积分........................");
-			System.out.println("json---->OrderFormEntity:"+new JSONArray().fromObject(order).toString());
 			List<OrderDetailFormEntity> list = orderDetailFormService.selectOrderDetailListByParentNum(order.getOrderNo());
-			//OrderDetailFormEntity[] orderDetailList=(OrderDetailFormEntity[]) list.toArray();
 			OrderDetailFormEntity[] orderDetailList=list.toArray(new OrderDetailFormEntity[list.size()]);
 			IntegralRecordVO integralRecordVO = setIntegralRecordVOInfo(order,orderDetailList);
 			// 扣积分
