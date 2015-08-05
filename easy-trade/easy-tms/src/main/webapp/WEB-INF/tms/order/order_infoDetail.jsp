@@ -230,17 +230,22 @@
 							</c:otherwise>
 						</c:choose>
 					</tr>
-					<!-- <tr>
-						<td>现金券</td>
-						<td>抵扣60元</td>
-						<td>2015/05/01 17:45 - 2015/05/02 17:45</td>
-						<td>60</td>
-					</tr> -->
 				</table>
 			</div>
 
 			<div class="mallNew-main">
 				<div class="mallNew-main-left">
+					<ul>
+						<li class="w_100 lvse size-14">抵用积分</li>
+						
+						<li class="name">抵扣积分</li>
+						<li class="line">|</li>
+						<li class="data max2">
+							<c:if test="${order.score==null }">0</c:if>
+							<c:if test="${order.score!=null }">${order.score }</c:if>
+						</li>
+					</ul>
+					
 					<ul>
 						<li class="w_100 lvse size-14">订单信息</li>
 
