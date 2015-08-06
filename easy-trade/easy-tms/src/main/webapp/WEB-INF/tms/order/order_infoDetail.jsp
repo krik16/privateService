@@ -273,13 +273,13 @@
 
 						<li class="name">卡券抵扣金额</li>
 						<li class="line">|</li>
-						<li class="data max2">${discountTotal }（元）</li>
+						<li class="data max2">${0-discountTotal }（元）</li>
 
 						<li class="name">积分抵扣金额</li>
 						<li class="line">|</li>
 						<li class="data max2">
 							<c:if test="${order.scoreDeduction==null }">0.00</c:if>
-							<c:if test="${order.scoreDeduction!=null }">${order.scoreDeduction }</c:if>（元）
+							<c:if test="${order.scoreDeduction!=null }">${0-order.scoreDeduction }</c:if>（元）
 						</li>
 						
 						<li class="name">买家应付金额</li>
