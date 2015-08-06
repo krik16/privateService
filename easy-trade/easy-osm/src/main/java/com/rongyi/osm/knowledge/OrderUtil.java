@@ -1,6 +1,7 @@
 package com.rongyi.osm.knowledge;
 
 import java.math.BigDecimal;
+import net.sf.json.JSONArray;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -12,8 +13,10 @@ import java.util.Map;
 
 
 
+
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.bson.types.ObjectId;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.rule.FactHandle;
@@ -914,7 +917,7 @@ public class OrderUtil {
 			}
 			
 			integralRecordVO.setUser_id(order.getBuyerId()); // 买家
-			if(order.getDiscountInfo().toString()!=null){
+			if(StringUtils.isEmpty(order.getDiscountInfo())){
 				Map<String, Object> mapObject = JsonUtil.getMapFromJson(order.getDiscountInfo());
 				integralRecordVO.setUse_score(Integer.parseInt(mapObject.get("score").toString())); // 积分
 				integralRecordVO.setScore_deduction(new BigDecimal(mapObject.get("scoreDeduction").toString()));
@@ -936,7 +939,7 @@ public class OrderUtil {
 					}
 				}
 			}
-			//integralRecordVO.setPay_money(calculateTotalPrice(order,orderDetailList));// 实际支付金额
+			integralRecordVO.setPay_money(calculateTotalPrice(order,orderDetailList));// 实际支付金额
 			integralRecordVO.setTotal_money(totalMoney); // 原结算金额
 			integralRecordVO.setPreferential_deduction(deductionMoney); // 优惠抵扣金额
 			
@@ -949,6 +952,8 @@ public class OrderUtil {
 			}else{
 				integralRecordVO.setPost_money(new BigDecimal(0));//邮费
 			}
+			
+			logger.info("setIntegralRecordVO------>"+new JSONArray().fromObject(integralRecordVO).toString());
 			return integralRecordVO;
 		}
 		
