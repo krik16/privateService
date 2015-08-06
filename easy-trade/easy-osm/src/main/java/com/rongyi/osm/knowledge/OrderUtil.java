@@ -188,7 +188,11 @@ public class OrderUtil {
 	public BigDecimal calculateTotalPrice(OrderFormEntity order, OrderDetailFormEntity[] orderDetailList) {
 		BigDecimal total = new BigDecimal(0);
 		BigDecimal cashCouponDiscount = new BigDecimal(0); //优惠券总金额
-		JSONObject jsonObject=JSONObject.fromObject(order.getDiscountInfo());
+		JSONObject jsonObject=new JSONObject();
+		if(!StringUtils.isEmpty(order.getDiscountInfo())){
+			 jsonObject=JSONObject.fromObject(order.getDiscountInfo());
+		}
+		
 		// 计算子订单实际价格总和
 		for (Object entity : orderDetailList) {
 			OrderDetailFormEntity orderDetail = (OrderDetailFormEntity) entity;
@@ -917,7 +921,7 @@ public class OrderUtil {
 			}
 			
 			integralRecordVO.setUser_id(order.getBuyerId()); // 买家
-			if(StringUtils.isEmpty(order.getDiscountInfo())){
+			if(!StringUtils.isEmpty(order.getDiscountInfo())){
 				Map<String, Object> mapObject = JsonUtil.getMapFromJson(order.getDiscountInfo());
 				integralRecordVO.setUse_score(Integer.parseInt(mapObject.get("score").toString())); // 积分
 				integralRecordVO.setScore_deduction(new BigDecimal(mapObject.get("scoreDeduction").toString()));
