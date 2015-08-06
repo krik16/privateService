@@ -223,16 +223,7 @@ public class OrderUtil {
 			total = total.subtract(order.getDisconntFee());
 		}
 		
-		// 减去积分
-		if(order.getDiscountInfo().length()>0 && order.getDiscountInfo()!=null){
-			Map map = JsonUtil.getMapFromJson(order.getDiscountInfo());
-			if (map.get("score") != null
-					&& Integer.parseInt(map.get("score").toString()) > 0) {
-				Double scoreInt = Double.parseDouble(map.get("score").toString()) / 100;
-				BigDecimal score = new BigDecimal(scoreInt);
-				total = total.subtract(score);
-			}
-		}
+		
 
 		//总价小于零的情况
 		total = total.compareTo(new BigDecimal(0)) < 0 ? new BigDecimal(0) : total;
@@ -242,6 +233,16 @@ public class OrderUtil {
 			total = total.add(order.getExpressFee());
 		}
 
+		// 减去积分
+				if(order.getDiscountInfo().length()>0 && order.getDiscountInfo()!=null){
+					Map map = JsonUtil.getMapFromJson(order.getDiscountInfo());
+					if (map.get("score") != null
+							&& Integer.parseInt(map.get("score").toString()) > 0) {
+						Double scoreInt = Double.parseDouble(map.get("score").toString()) / 100;
+						BigDecimal score = new BigDecimal(scoreInt);
+						total = total.subtract(score);
+					}
+				}
 		return total;
 	}
 
