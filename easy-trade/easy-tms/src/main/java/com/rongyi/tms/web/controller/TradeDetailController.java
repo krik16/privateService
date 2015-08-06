@@ -20,10 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.util.JsonUtil;
-import com.rongyi.easy.osm.entity.OrderFormEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.tms.vo.TradeVO;
-import com.rongyi.rss.mallshop.order.ROAOrderFormService;
 import com.rongyi.rss.rpb.IRpbService;
 import com.rongyi.tms.constants.Constant;
 import com.rongyi.tms.constants.ConstantEnum;
@@ -35,168 +33,153 @@ import com.rongyi.tms.service.TradeDetailService;
 @RequestMapping("/tradeDetail")
 public class TradeDetailController extends BaseController {
 
-    private static final Logger LOGGER = Logger.getLogger(TradeDetailController.class);
+	private static final Logger LOGGER = Logger.getLogger(TradeDetailController.class);
 
-    @Autowired
-    TradeDetailService tradeDetailService;
+	@Autowired
+	TradeDetailService tradeDetailService;
 
-    @Autowired
-    ExportTradeDetailExcel exportTradeDetailExcel;
+	@Autowired
+	ExportTradeDetailExcel exportTradeDetailExcel;
 
-    @Autowired
-    IRpbService rpbService;
-    
-    @Autowired
-    ROAOrderFormService rOAOrderFormService;
+	@Autowired
+	IRpbService rpbService;
 
-    @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public String search(ModelMap model, String currentMallId, HttpServletRequest request,
-            HttpServletResponse response, HttpSession session, String currpage) {
-        model.addAttribute("currpage", currpage);
-        return "/tradeDetail/tradeDetail";
-    }
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String search(ModelMap model, String currentMallId, HttpServletRequest request, HttpServletResponse response, HttpSession session, String currpage) {
+		model.addAttribute("currpage", currpage);
+		return "/tradeDetail/tradeDetail";
+	}
 
-    @SuppressWarnings("unchecked")
-    @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public String list(ModelMap model, String currentMallId, HttpServletRequest request, HttpServletResponse response,
-            HttpSession session) {
-        try {
-            LOGGER.info("----- trade list -----");
-            try {
-                request.setCharacterEncoding("utf-8");
-            } catch (UnsupportedEncodingException e1) {
-                LOGGER.error(e1);
-            }
-            String paramsJson = request.getParameter("paramsJson");
-            if (paramsJson == null) {
-                Map<String, Object> resultMap = new HashMap<String, Object>();
-                resultMap.put("msg", "参数为NULL，请关闭再重试！");
-                resultMap.put("status", 0);
-                return null;
-            }
-            Map<String, Object> map = JsonUtil.getMapFromJson(paramsJson);
-            String currpage = (String) map.get("currpage");
-            List<TradeVO> list = tradeDetailService.selectTradePageList(map, Integer.valueOf(currpage),
-                    Constant.PAGE.PAGESIZE);
-            OrderFormEntity orderFormEntity = null;
-            for (TradeVO tradeVO : list) {
-            	orderFormEntity = rOAOrderFormService.getOrderFormByOrderNum(tradeVO.getOrderNo());
-            	if(orderFormEntity != null){
-            	tradeVO.setOrderId(orderFormEntity.getId().toString());
-            	tradeVO.setOrderUserId(orderFormEntity.getBuyerId());
-            	}
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/list", method = RequestMethod.POST)
+	public String list(ModelMap model, String currentMallId, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		try {
+			LOGGER.info("----- trade list -----");
+			try {
+				request.setCharacterEncoding("utf-8");
+			} catch (UnsupportedEncodingException e1) {
+				LOGGER.error(e1);
 			}
-            double pageTotle = tradeDetailService.selectTradePageListCount(map);
-            Integer rowContNum = (int) Math.ceil(pageTotle / Constant.PAGE.PAGESIZE);
-            TradeDetailCount inocme = getTradeCount(map, 0);
-            model.addAttribute("inocmeAmount", inocme.getAmountCount());
-            model.addAttribute("inocmeTotal", inocme.getTotalCount());
-            TradeDetailCount expense = getTradeCount(map, 1);
-            model.addAttribute("expenseAmount", expense.getAmountCount());
-            model.addAttribute("expenseTotal", expense.getTotalCount());
-            model.addAttribute("rowCont", rowContNum);
-            model.addAttribute("currpage", currpage);
-            model.addAttribute("list", list);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } 
-        return "/tradeDetail/tradeDetail_list";
-    }
+			String paramsJson = request.getParameter("paramsJson");
+			if (paramsJson == null) {
+				Map<String, Object> resultMap = new HashMap<String, Object>();
+				resultMap.put("msg", "参数为NULL，请关闭再重试！");
+				resultMap.put("status", 0);
+				return null;
+			}
+			Map<String, Object> map = JsonUtil.getMapFromJson(paramsJson);
+			String currpage = (String) map.get("currpage");
+			List<TradeVO> list = tradeDetailService.selectTradePageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE);
+			double pageTotle = tradeDetailService.selectTradePageListCount(map);
+			Integer rowContNum = (int) Math.ceil(pageTotle / Constant.PAGE.PAGESIZE);
+			TradeDetailCount inocme = getTradeCount(map, 0);
+			model.addAttribute("inocmeAmount", inocme.getAmountCount());
+			model.addAttribute("inocmeTotal", inocme.getTotalCount());
+			TradeDetailCount expense = getTradeCount(map, 1);
+			model.addAttribute("expenseAmount", expense.getAmountCount());
+			model.addAttribute("expenseTotal", expense.getTotalCount());
+			model.addAttribute("rowCont", rowContNum);
+			model.addAttribute("currpage", currpage);
+			model.addAttribute("list", list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/tradeDetail/tradeDetail_list";
+	}
 
-    /**
-     * @Description: 收入（支出）总数
-     * @param map
-     * @param tradeType
-     * @return
-     * @Author: 柯军
-     * @datetime:2015年6月12日下午2:12:55
-     **/
-    private TradeDetailCount getTradeCount(Map<String, Object> map, Integer tradeType) {
-        TradeDetailCount tradeDetailCount = new TradeDetailCount();
-        tradeDetailCount.setTradeType(tradeType);
-        if (map.get("tradeType") == null || StringUtils.isEmpty(map.get("tradeType").toString())
-                || tradeType.equals(Integer.valueOf(map.get("tradeType").toString()))) {
-            Map<String, Object> paramMap = new HashMap<String, Object>();
-            paramMap.putAll(map);
-            paramMap.put("tradeType", tradeType);
-            tradeDetailCount = tradeDetailService.selectTradeCount(paramMap);
-        }
-        if (tradeDetailCount.getAmountCount() == null)
-            tradeDetailCount.setAmountCount(0d);
-        if (tradeDetailCount.getTotalCount() == null)
-            tradeDetailCount.setTotalCount(0l);
-        return tradeDetailCount;
-    }
+	/**
+	 * @Description: 收入（支出）总数
+	 * @param map
+	 * @param tradeType
+	 * @return
+	 * @Author: 柯军
+	 * @datetime:2015年6月12日下午2:12:55
+	 **/
+	private TradeDetailCount getTradeCount(Map<String, Object> map, Integer tradeType) {
+		TradeDetailCount tradeDetailCount = new TradeDetailCount();
+		tradeDetailCount.setTradeType(tradeType);
+		if (map.get("tradeType") == null || StringUtils.isEmpty(map.get("tradeType").toString()) || tradeType.equals(Integer.valueOf(map.get("tradeType").toString()))) {
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+			paramMap.putAll(map);
+			paramMap.put("tradeType", tradeType);
+			tradeDetailCount = tradeDetailService.selectTradeCount(paramMap);
+		}
+		if (tradeDetailCount.getAmountCount() == null)
+			tradeDetailCount.setAmountCount(0d);
+		if (tradeDetailCount.getTotalCount() == null)
+			tradeDetailCount.setTotalCount(0l);
+		return tradeDetailCount;
+	}
 
-    /**
-     * @Description: 交易明细
-     * @param model
-     * @param id
-     * @return
-     * @Author: 柯军
-     * @datetime:2015年6月11日下午2:32:24
-     **/
-    @RequestMapping(value = "/info", method = RequestMethod.GET)
-    public String info(ModelMap model, Integer id, String tradeNo) {
-        TradeVO tradeVO = tradeDetailService.selectById(id);
-        PaymentLogInfo paymentLogInfo = rpbService.selectByTradeNo(tradeNo);
-        if (paymentLogInfo != null)
-            tradeVO.setBuyerAccount(paymentLogInfo.getBuyer_email());
-        tradeVO.setIntegral(tradeDetailService.getIntegral(tradeVO.getIntegralDiscount()));
-        model.addAttribute("trade", tradeVO);
-        getRongyiAccount(model, tradeVO.getPayChannel());
-        return "/tradeDetail/tradeDetail_info";
-    }
+	/**
+	 * @Description: 交易明细
+	 * @param model
+	 * @param id
+	 * @return
+	 * @Author: 柯军
+	 * @datetime:2015年6月11日下午2:32:24
+	 **/
+	@RequestMapping(value = "/info", method = RequestMethod.GET)
+	public String info(ModelMap model, Integer id, String tradeNo) {
+		TradeVO tradeVO = tradeDetailService.selectById(id);
+		PaymentLogInfo paymentLogInfo = rpbService.selectByTradeNo(tradeNo);
+		if (paymentLogInfo != null)
+			tradeVO.setBuyerAccount(paymentLogInfo.getBuyer_email());
+		tradeDetailService.setIntegralAndCouponDiscount(tradeVO);
+		model.addAttribute("trade", tradeVO);
+		getRongyiAccount(model, tradeVO.getPayChannel());
+		return "/tradeDetail/tradeDetail_info";
+	}
 
-    /**	
-     * @Description: 验证导出报表总数是否超过限制
-     * @param request
-     * @param response
-     * @return	
-     * @Author:  柯军
-     * @datetime:2015年6月12日下午3:20:14
-     **/
-    @SuppressWarnings("unchecked")
-    @RequestMapping(value = "/validateExcelCount")
-    @ResponseBody
-    public ResponseResult validateExcelCount(HttpServletRequest request, HttpServletResponse response) {
-        ResponseResult result = new ResponseResult();
-        result.setSuccess(true);
-        Map<String, Object> map = JsonUtil.getMapFromJson(request.getParameter("paramsJson"));
-        int tradeDetailCount = tradeDetailService.selectTradePageListCount(map);
-        if (tradeDetailCount > ConstantEnum.EXCEL_LIMIT_COUNT.getCodeInt())
-            result.setSuccess(false);
-        return result;
-    }
+	/**
+	 * @Description: 验证导出报表总数是否超过限制
+	 * @param request
+	 * @param response
+	 * @return
+	 * @Author: 柯军
+	 * @datetime:2015年6月12日下午3:20:14
+	 **/
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/validateExcelCount")
+	@ResponseBody
+	public ResponseResult validateExcelCount(HttpServletRequest request, HttpServletResponse response) {
+		ResponseResult result = new ResponseResult();
+		result.setSuccess(true);
+		Map<String, Object> map = JsonUtil.getMapFromJson(request.getParameter("paramsJson"));
+		int tradeDetailCount = tradeDetailService.selectTradePageListCount(map);
+		if (tradeDetailCount > ConstantEnum.EXCEL_LIMIT_COUNT.getCodeInt())
+			result.setSuccess(false);
+		return result;
+	}
 
-    /**
-     * 报表导出
-     * 
-     * @param response
-     */
-    @RequestMapping(value = "/exportExcel", method = RequestMethod.GET)
-    public void exportExcel(HttpServletRequest request, HttpServletResponse response) {
-        LOGGER.info("---导出交易明细报表---");
-        exportTradeDetailExcel.exportExcel(request, response);
-    }
+	/**
+	 * 报表导出
+	 * 
+	 * @param response
+	 */
+	@RequestMapping(value = "/exportExcel", method = RequestMethod.GET)
+	public void exportExcel(HttpServletRequest request, HttpServletResponse response) {
+		LOGGER.info("---导出交易明细报表---");
+		exportTradeDetailExcel.exportExcel(request, response);
+	}
 
-    /**
-     * @Description: 获取容易网支付账号
-     * @param model
-     * @param payChannel
-     * @Author: 柯军
-     * @datetime:2015年6月11日下午2:32:12
-     **/
-    private void getRongyiAccount(ModelMap model, Integer payChannel) {
-        if (ConstantEnum.PAY_CHANNEL_ZHIFUBAO.getCodeInt().equals(payChannel)) {// 容易网支付宝账号
-            model.addAttribute("rongyiAccount", ConstantEnum.RONGYI_ZHIFUBAO_ACCOUNT.getCodeStr());
-            model.addAttribute("rongyiName", ConstantEnum.RONGYI_ZHIFUBAO_NAME.getCodeStr());
-        } else if (ConstantEnum.PAY_CHANNEL_ZHIFUBAO.getCodeInt().equals(payChannel)) {// 容易网微信账号
-            model.addAttribute("rongyiAccount", ConstantEnum.RONGYI_WEIXIN_ACCOUNT.getCodeStr());
-            model.addAttribute("rongyiName", ConstantEnum.RONGYI_WEIXIN_NAME.getCodeStr());
-        } else {
-            // TODO 添加容易网银行卡信息
-        }
-    }
+	/**
+	 * @Description: 获取容易网支付账号
+	 * @param model
+	 * @param payChannel
+	 * @Author: 柯军
+	 * @datetime:2015年6月11日下午2:32:12
+	 **/
+	private void getRongyiAccount(ModelMap model, Integer payChannel) {
+		if (ConstantEnum.PAY_CHANNEL_ZHIFUBAO.getCodeInt().equals(payChannel)) {// 容易网支付宝账号
+			model.addAttribute("rongyiAccount", ConstantEnum.RONGYI_ZHIFUBAO_ACCOUNT.getCodeStr());
+			model.addAttribute("rongyiName", ConstantEnum.RONGYI_ZHIFUBAO_NAME.getCodeStr());
+		} else if (ConstantEnum.PAY_CHANNEL_ZHIFUBAO.getCodeInt().equals(payChannel)) {// 容易网微信账号
+			model.addAttribute("rongyiAccount", ConstantEnum.RONGYI_WEIXIN_ACCOUNT.getCodeStr());
+			model.addAttribute("rongyiName", ConstantEnum.RONGYI_WEIXIN_NAME.getCodeStr());
+		} else {
+			// TODO 添加容易网银行卡信息
+		}
+	}
 
 }

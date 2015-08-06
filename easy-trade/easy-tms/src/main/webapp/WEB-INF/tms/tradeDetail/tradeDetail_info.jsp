@@ -89,6 +89,7 @@ body {
 								${trade.mallName}
 							</p>
 						</div>
+						<div style="clear: both;"></div>
 					<c:choose>
 						<c:when test="${trade.tradeType eq '0'}">
 							<c:choose>
@@ -158,12 +159,12 @@ body {
 									积分 
 									(${trade.integral})
 									<c:if
-									test="${ not empty trade.couponDiscount && trade.couponDiscount > 0}">
+									test="${trade.couponDiscountInt > 0}">
 									、
 									</c:if>
 							</c:if>
 							<c:if
-								test="${ not empty trade.couponDiscountInt && trade.couponDiscountInt > 0}">
+								test="${trade.couponDiscountInt > 0}">
 									红包(${trade.couponDiscountInt}元)
 							</c:if>
 							</p>
@@ -175,6 +176,7 @@ body {
 								${trade.shopName}
 							</p>
 						</div>
+						<div style="clear: both;"></div>
 					<c:choose>
 						<c:when test="${trade.tradeType eq '0'}">
 							<c:choose>
