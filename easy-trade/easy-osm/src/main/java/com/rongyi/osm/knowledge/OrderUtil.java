@@ -923,7 +923,7 @@ public class OrderUtil {
 			integralRecordVO.setUser_id(order.getBuyerId()); // 买家
 			if(!StringUtils.isEmpty(order.getDiscountInfo())){
 				Map<String, Object> mapObject = JsonUtil.getMapFromJson(order.getDiscountInfo());
-				if(!StringUtils.isEmpty(mapObject.get("score").toString()) && Integer.parseInt(mapObject.get("score").toString())>0){
+				if(mapObject.get("score")!=null && Integer.parseInt(mapObject.get("score").toString())>0){
 					integralRecordVO.setUse_score(Integer.parseInt(mapObject.get("score").toString())); // 积分 
 					integralRecordVO.setScore_deduction(new BigDecimal(mapObject.get("scoreDeduction").toString()));  //积分抵扣金额
 				}
