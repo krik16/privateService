@@ -141,8 +141,28 @@ public class TradeVO implements Serializable {
 	/**
 	 * 优惠信息（积分，抵扣券信息，json格式）
 	 */
-	private String integralDiscount;
-
+//	private String integralDiscount;
+	
+	/**
+	 * 商品订单优惠信息（积分，红包使用记录，json格式）
+	 */
+	private String orderDiscountInfo;
+	
+	/**
+	 *  商品使用红包 券码
+	 */
+	private String orderCouponCode;
+	
+	/**
+	 * 优惠券订单优惠信息（积分，红包使用记录，json格式）
+	 */
+	private String couponDiscuntInfo;
+	
+	/**
+	 * 优惠券使用红包 券码
+	 */
+	private String couponCashCouponCode;
+	
 	/**
 	 * 使用积分数
 	 */
@@ -151,7 +171,7 @@ public class TradeVO implements Serializable {
 	/**
 	 * 使用优惠券金额
 	 */
-	private Double couponDiscount;
+//	private Double couponDiscount;
 
 	/**
 	 * 优惠券金额整数
@@ -458,13 +478,6 @@ public class TradeVO implements Serializable {
 		this.orderType = orderType;
 	}
 
-	public String getIntegralDiscount() {
-		return integralDiscount;
-	}
-
-	public void setIntegralDiscount(String integralDiscount) {
-		this.integralDiscount = integralDiscount;
-	}
 
 	public Integer getIntegral() {
 		return integral;
@@ -474,15 +487,40 @@ public class TradeVO implements Serializable {
 		this.integral = integral;
 	}
 
-	public Double getCouponDiscount() {
-		return couponDiscount;
+	
+	public String getOrderDiscountInfo() {
+		return orderDiscountInfo;
 	}
 
-	public void setCouponDiscount(Double couponDiscount) {
-		this.couponDiscount = couponDiscount;
-		if (this.getCouponDiscount() != null && this.getCouponDiscount() > 0)
-			this.couponDiscountInt = (int) this.couponDiscount.doubleValue();
+	public void setOrderDiscountInfo(String orderDiscountInfo) {
+		this.orderDiscountInfo = orderDiscountInfo;
 	}
+
+
+	public String getOrderCouponCode() {
+		return orderCouponCode;
+	}
+
+	public void setOrderCouponCode(String orderCouponCode) {
+		this.orderCouponCode = orderCouponCode;
+	}
+
+	public String getCouponCashCouponCode() {
+		return couponCashCouponCode;
+	}
+
+	public void setCouponCashCouponCode(String couponCashCouponCode) {
+		this.couponCashCouponCode = couponCashCouponCode;
+	}
+
+	public String getCouponDiscuntInfo() {
+		return couponDiscuntInfo;
+	}
+
+	public void setCouponDiscuntInfo(String couponDiscuntInfo) {
+		this.couponDiscuntInfo = couponDiscuntInfo;
+	}
+
 
 	public Integer getFavorType() {
 		return favorType;
