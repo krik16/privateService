@@ -873,7 +873,7 @@ public class OrderUtil {
 				if (mapObject.get("score") != null && Integer.parseInt(mapObject.get("score").toString()) > 0) {
 					IntegralRecordVO integralRecordVO = setIntegralRecordVOInfo(order,orderDetailList);
 					// 下单时验证前端传送积分抵扣金额
-					if (integralRecordVO.getAction() == ActionType.ACTION_ADD) {
+					if (integralRecordVO.getAction() == ActionType.ACTION_SUB) {
 						BigDecimal scoreDeductionMoney = new BigDecimal(Double.parseDouble(mapObject.get("score").toString()) / 100); // 积分抵扣金额，100积分兑换1RMB
 						BigDecimal pageScoreDeductionMoney = new BigDecimal(Double.parseDouble(mapObject.get("scoreDeduction").toString())); // 前端传送积分抵扣金额
 						if (scoreDeductionMoney.compareTo(pageScoreDeductionMoney) != 0) {
@@ -943,7 +943,7 @@ public class OrderUtil {
 					}
 				}
 			}
-			integralRecordVO.setPay_money(calculateTotalPrice(order,orderDetailList));// 实际支付金额
+//			integralRecordVO.setPay_money(calculateTotalPrice(order,orderDetailList));// 实际支付金额
 			integralRecordVO.setTotal_money(totalMoney); // 原结算金额
 			integralRecordVO.setPreferential_deduction(deductionMoney); // 优惠抵扣金额
 			
