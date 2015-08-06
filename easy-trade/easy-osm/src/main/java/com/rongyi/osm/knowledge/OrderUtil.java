@@ -943,7 +943,7 @@ public class OrderUtil {
 					}
 				}
 			}
-			integralRecordVO.setPay_money(calculateTotalPrice(order,orderDetailList));// 实际支付金额
+//			integralRecordVO.setPay_money(calculateTotalPrice(order,orderDetailList));// 实际支付金额
 			integralRecordVO.setTotal_money(totalMoney); // 原结算金额
 			integralRecordVO.setPreferential_deduction(deductionMoney); // 优惠抵扣金额
 			
