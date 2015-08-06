@@ -164,7 +164,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 		PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntityVO.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);// 根据退款单记录中的订单号找到对应的历史付款单记录（用来查找付款交易流水号）
 		if (paymentEntity == null) {
 			LOGGER.info("退款失败，历史付款单记录查找不存，请确认订单号:" + paymentEntityVO.getOrderNum() + "付款记录是否存在！");
-		} else if (paymentEntity != null && Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1 == paymentEntity.getPayChannel()) {
+		} else if (paymentEntity != null && paymentEntity.getPayChannel() != null && Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1 == paymentEntity.getPayChannel()) {
 			return true;
 		}
 		return false;
@@ -348,8 +348,8 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 				LOGGER.info("微信撤销订单成功，删除系统中支付单号-->" + payNo + " 付款记录");
 			}
 		} catch (Exception e) {
-			LOGGER.info("微信撤销订单失败，付款单号-->" + payNo);
 			e.printStackTrace();
+			throw new RuntimeException("微信撤销订单失败，付款单号-->" + payNo);
 		}
 	}
 

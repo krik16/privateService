@@ -122,7 +122,8 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 				}
 			}
 		} catch (Exception e) {
-			LOGGER.error(e);
+			e.printStackTrace();
+			throw new RuntimeException("插入付款单记录失败，失败原因:"+e.getMessage());
 		}
 	}
 
@@ -230,7 +231,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 			messageMap.put("body", JSONObject.fromObject(getBodyMap(paymentEntityVO, event)));
 		} catch (Exception e) {
 			e.printStackTrace();
-			LOGGER.error("处理订单信息失败：" + event.getBody().toString() + ",失败原因：" + e.getMessage());
+			throw new RuntimeException("处理订单信息失败：" + event.getBody().toString() + ",失败原因：" + e.getMessage());
 		}
 
 		return messageMap;
