@@ -923,8 +923,10 @@ public class OrderUtil {
 			integralRecordVO.setUser_id(order.getBuyerId()); // 买家
 			if(!StringUtils.isEmpty(order.getDiscountInfo())){
 				Map<String, Object> mapObject = JsonUtil.getMapFromJson(order.getDiscountInfo());
-				integralRecordVO.setUse_score(Integer.parseInt(mapObject.get("score").toString())); // 积分
-				integralRecordVO.setScore_deduction(new BigDecimal(mapObject.get("scoreDeduction").toString()));
+				if(!StringUtils.isEmpty(mapObject.get("score").toString()) && Integer.parseInt(mapObject.get("score").toString())>0){
+					integralRecordVO.setUse_score(Integer.parseInt(mapObject.get("score").toString())); // 积分
+					integralRecordVO.setScore_deduction(new BigDecimal(mapObject.get("scoreDeduction").toString()));
+				}
 			}
 			integralRecordVO.setOrder_sn(order.getOrderNo());//订单号
 			BigDecimal totalMoney = new BigDecimal(0);// 原结算金额
