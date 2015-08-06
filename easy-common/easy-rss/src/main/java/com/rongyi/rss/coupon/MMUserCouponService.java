@@ -36,7 +36,7 @@ public interface MMUserCouponService {
      * @param id
      * @return
      */
-    UserCoupon findUserCouponById(Long id);
+    UserCoupon findUserCouponById(Long id, String userId);
 
     /**
      * 订单Id和couponId查询用户优惠列表

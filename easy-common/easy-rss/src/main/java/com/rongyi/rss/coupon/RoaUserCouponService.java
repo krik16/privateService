@@ -58,7 +58,7 @@ public interface RoaUserCouponService {
      */
     public PagingVO<UserCoupon> searchUserCouponList(String userId, Integer status, Integer currentPage, Integer pageSize);
 
-    UserCoupon findUserCouponById(Long id);
+    UserCoupon findUserCouponById(Long id, String userId);
 
 
     /**
