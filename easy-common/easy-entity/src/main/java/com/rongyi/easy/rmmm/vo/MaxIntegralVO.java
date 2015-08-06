@@ -13,6 +13,8 @@ public class MaxIntegralVO {
 
 	private double integralRatio;// 积分抵扣比例
 
+	private int myIntegral;// 我的积分
+
 	public int getMaxIntegral() {
 		return maxIntegral;
 	}
@@ -27,6 +29,14 @@ public class MaxIntegralVO {
 
 	public void setIntegralRatio(double integralRatio) {
 		this.integralRatio = integralRatio;
+	}
+
+	public int getMyIntegral() {
+		return myIntegral;
+	}
+
+	public void setMyIntegral(int myIntegral) {
+		this.myIntegral = myIntegral;
 	}
 
 }
