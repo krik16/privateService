@@ -30,8 +30,11 @@
 		<result column="seller_pay_name" property="sellerPayName"
 			jdbcType="VARCHAR" />
 		<result column="order_type" property="orderType" jdbcType="VARCHAR" />
-		<result column="integral_discount" property="integralDiscount" jdbcType="VARCHAR" />
-		<result column="coupon_discount" property="couponDiscount" jdbcType="DOUBLE" />
+		<result column="coupon_code" property="orderCouponCode" jdbcType="VARCHAR" />
+		<result column="order_discount_info" property="orderDiscountInfo" jdbcType="VARCHAR" />
+		<result column="cash_coupon_code" property="couponCashCouponCode" jdbcType="VARCHAR" />
+		<result column="coupon_discunt_info" property="couponDiscuntInfo" jdbcType="VARCHAR" />
+		
 	</resultMap>
 
 	<resultMap id="TradeDetailCountResultMap" type="com.rongyi.tms.moudle.vo.TradeDetailCount">
@@ -47,7 +50,7 @@
 		transaction_id, trade_time, shop_id,
 		shop_name, mail_id, mall_name, buyer_id,
 		seller_account,
-		seller_name,trade_type,pay_channel,seller_pay_type,seller_pay_account,seller_pay_name,order_type,integral_discount,coupon_discount
+		seller_name,trade_type,pay_channel,seller_pay_type,seller_pay_account,seller_pay_name,order_type,coupon_code,order_discount_info,cash_coupon_code,coupon_discunt_info
 	</sql>
 	<sql id="trade_list_where_clause">
 		<!-- 交易流水号 -->
@@ -120,25 +123,42 @@
 		</if>
 		<!-- 优惠方式 -->
 		<if test="favorType != null and favorType != ''">
-			<!-- 未使用积分和现金券 -->
+			<!-- 未使用积分和红包 -->
 			<if test="favorType == 0">
-				AND (integral_discount NOT LIKE '%score%' OR integral_discount IS NULL) 
-				AND ( 0 >= coupon_discount  OR coupon_discount is null)  
+				<!-- 商品 -->
+				AND (((order_discount_info NOT LIKE '%score%' OR order_discount_info IS NULL)
+				AND (coupon_code IS NULL OR coupon_code = '')) AND
+				<!-- 优惠券 -->
+				((coupon_discunt_info NOT LIKE '%score%' OR coupon_discunt_info IS NULL) 
+				AND (cash_coupon_code IS NULL OR cash_coupon_code = '')))  
 			</if>
-				<!-- 使用现金券 -->
+				<!-- 使用红包 -->
 			<if test="favorType == 1">
-				AND coupon_discount > 0
-				AND (integral_discount NOT LIKE '%score%' OR integral_discount IS NULL) 
+				<!-- 商品 -->
+				AND (((order_discount_info NOT LIKE '%score%' OR order_discount_info IS NULL)
+				AND (coupon_code IS NOT NULL AND coupon_code != '')) OR
+				<!-- 优惠券 -->
+				((coupon_discunt_info NOT LIKE '%score%' OR coupon_discunt_info IS NULL) 
+				AND cash_coupon_code IS NOT NULL AND cash_coupon_code != ''))
+				 
 			</if>
 				<!-- 使用积分 --> 
 			<if test="favorType == 2">
-				AND integral_discount LIKE '%score%'
-				AND ( 0 >= coupon_discount  OR coupon_discount is null)  
+				<!-- 商品 -->
+				AND (((order_discount_info LIKE '%score%')
+				AND (coupon_code IS NULL OR coupon_code = '')) OR
+				<!-- 优惠券 -->
+				(coupon_discunt_info LIKE '%score%' 
+				AND (cash_coupon_code IS NULL OR cash_coupon_code = '')))  
 			</if>
-				<!-- 使用积分和现金券 -->
+				<!-- 使用积分和红包 -->
 			<if test="favorType == 3">
-				AND integral_discount LIKE '%score%' 
-				AND coupon_discount > 0
+				<!-- 商品 -->
+				AND (((order_discount_info LIKE '%score%')
+				AND (coupon_code IS NOT NULL AND coupon_code != '')) OR
+				<!-- 优惠券 -->
+				((coupon_discunt_info LIKE '%score%') 
+				AND cash_coupon_code IS NOT NULL AND cash_coupon_code != ''))  
 			</if>
 		</if>
 		

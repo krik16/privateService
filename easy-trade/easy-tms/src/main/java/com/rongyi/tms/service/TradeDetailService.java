@@ -72,12 +72,12 @@ public interface TradeDetailService {
     public UserCoupon getCouponOrderRecordByOrderNo(String orderNo); 
 
     /**
-	 * @Description: 根据优惠信息获取积分优惠
-	 * @param integralDiscount
+	 * @Description: 计算优惠信息中包含的折扣（积分，红包）信息
+	 * @param TradeVO tradeVo
 	 * @return
 	 * @Author: 柯军
 	 * @datetime:2015年7月23日下午2:29:10
 	 **/
-    public Integer getIntegral(String integralDiscount);
+    public TradeVO setIntegralAndCouponDiscount(TradeVO tradeVo);
 
 }

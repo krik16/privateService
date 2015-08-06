@@ -25,10 +25,12 @@ import com.rongyi.easy.coupon.entity.CouponOrder;
 import com.rongyi.easy.coupon.entity.UserCoupon;
 import com.rongyi.easy.entity.MallLifeUserEntity;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
+import com.rongyi.easy.osm.entity.OrderFormEntity;
 import com.rongyi.easy.tms.vo.TradeVO;
 import com.rongyi.rss.coupon.MMUserCouponService;
 import com.rongyi.rss.coupon.RoaCouponOrderService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
+import com.rongyi.rss.mallshop.order.ROAOrderFormService;
 import com.rongyi.tms.constants.ConstantEnum;
 import com.rongyi.tms.moudle.vo.TradeDetailCount;
 import com.rongyi.tms.service.TradeDetailService;
@@ -44,7 +46,7 @@ import com.rongyi.tms.service.TradeDetailService;
 public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDetailService {
 
 	private static final String PAYMENTENTITY_NAMESPACE = "com.rongyi.tms.mapper.xml.TradeMapper";
-	
+
 	private static final Logger LOGGER = Logger.getLogger(TradeDetailServiceImpl.class);
 
 	@Autowired
@@ -55,6 +57,9 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 
 	@Autowired
 	MMUserCouponService mmUserCouponService;
+
+	@Autowired
+	ROAOrderFormService rOAOrderFormService;
 
 	@Override
 	public List<TradeVO> selectTradePageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
@@ -82,9 +87,8 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 		List<TradeVO> list = this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectTradePageList", map);
 		String buyerId = null;
 		for (TradeVO tradeVO : list) {
-			tradeVO.setIntegral(getIntegral(tradeVO.getIntegralDiscount()));
-			buyerId = tradeVO.getBuyerId();
 			try {
+				buyerId = tradeVO.getBuyerId();
 				if (ConstantEnum.PAYMENT_ORDER_TYPE1.getCodeInt() == tradeVO.getOrderType()) {// 优惠券订单
 					CouponOrder couponOrder = raoCouponOrderService.findOneByOrderNo(tradeVO.getOrderNo());
 					if (couponOrder != null)
@@ -97,14 +101,18 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 						tradeVO.setBuyerName(mallLifeUserEntity.getUserName());
 					}
 				}
+				OrderFormEntity orderFormEntity = rOAOrderFormService.getOrderFormByOrderNum(tradeVO.getOrderNo());
+				if (orderFormEntity != null) {
+					tradeVO.setOrderId(orderFormEntity.getId().toString());
+					tradeVO.setOrderUserId(orderFormEntity.getBuyerId());
+				}
 			} catch (Exception e) {
-				LOGGER.error(" roa inteface no provider error!"+e.getMessage());
+				LOGGER.error(" roa inteface no provider error!" + e.getMessage());
 			}
-
+			setIntegralAndCouponDiscount(tradeVO);
 		}
 		return list;
 	}
-
 
 	@Override
 	public Integer selectTradePageListCount(Map<String, Object> map) {
@@ -132,15 +140,22 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 		return userCoupon;
 	}
 
-
 	@Override
-	public Integer getIntegral(String integralDiscount) {
-		int integral = 0;
-		if (StringUtils.isEmpty(integralDiscount))
-			return integral;
-		JSONObject jsonObject = JSONObject.fromObject(integralDiscount);
+	public TradeVO setIntegralAndCouponDiscount(TradeVO tradeVo) {
+		JSONObject jsonObject = null;
+		if (ConstantEnum.PAYMENT_ORDER_TYPE0.getCodeInt().equals(tradeVo.getOrderType())) {
+			if (!StringUtils.isEmpty(tradeVo.getOrderDiscountInfo())) {
+				jsonObject = JSONObject.fromObject(tradeVo.getOrderDiscountInfo());
+			}
+		} else {
+			if (!StringUtils.isEmpty(tradeVo.getCouponDiscuntInfo())) {
+				jsonObject = JSONObject.fromObject(tradeVo.getCouponDiscuntInfo());
+			}
+		}
 		if (jsonObject != null && jsonObject.get("score") != null)
-			integral = jsonObject.getInt("score");
-		return integral;
+			tradeVo.setIntegral(jsonObject.getInt("score"));
+		if (jsonObject != null && jsonObject.get("cashCouponDiscount") != null)
+			tradeVo.setCouponDiscountInt(Integer.valueOf(jsonObject.getString("cashCouponDiscount")));
+		return tradeVo;
 	}
 }
