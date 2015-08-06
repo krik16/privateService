@@ -1,6 +1,5 @@
 package com.rongyi.easy.coupon.entity.mysql;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -191,27 +190,27 @@ public class Coupon {
     /**
      * 代金券分类
      */
-    private CouponCategory couponCategory = new CouponCategory();
+    private CouponCategory couponCategory;
 
     /**
      * 代金券关联的集团
      */
-    private CouponGroup couponGroup = new CouponGroup();
+    private CouponGroup couponGroup;
 
     /**
      * 代金券关联的品牌
      */
-    private CouponBrand couponBrand = new CouponBrand();
+    private CouponBrand couponBrand;
 
     /**
      * 代金券关联的商场
      */
-    private List<CouponMall> malls = new ArrayList<CouponMall>();
+    private CouponMall mall;
 
     /**
      * 代金券关联的店铺
      */
-    private List<CouponShop> shops = new ArrayList<CouponShop>();
+    private List<CouponShop> shops;
 
 
     public Integer getId() {
@@ -527,12 +526,12 @@ public class Coupon {
 		this.couponBrand = couponBrand;
 	}
 
-	public List<CouponMall> getMalls() {
-		return malls;
+	public CouponMall getMall() {
+		return mall;
 	}
 
-	public void setMalls(List<CouponMall> malls) {
-		this.malls = malls;
+	public void setMall(CouponMall mall) {
+		this.mall = mall;
 	}
 
 	public List<CouponShop> getShops() {
