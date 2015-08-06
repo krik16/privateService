@@ -3,23 +3,23 @@ package com.rongyi.easy.malllife.vo;
 import com.rongyi.easy.huanxin.HuanXinConfig;
 
 import java.io.Serializable;
+import java.util.Set;
 
 public class UserInfoVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-
-	private String userId;//表id
+	private String userId;// 表id
 	private String userName;
 	private String password;
 	private String email;
 	private String userPhone;
 	private String headImg;
-	private String uid;//用戶登錄名
+	private String uid;// 用戶登錄名
 	private String openId;
-	private String nickName;//呢称
+	private String nickName;// 呢称
 
-	private String imId;//IM账户
+	private String imId;// IM账户
 
 	private String usualAddress;
 	private boolean hasBindingPhone = false;
@@ -30,14 +30,15 @@ public class UserInfoVO implements Serializable {
 
 	private String hasPwd;
 
-	private String appCode= HuanXinConfig.IMCODE_SECOND;
+	private String appCode = HuanXinConfig.IMCODE_SECOND;
 
-	private Boolean ischeck=false;
+	private Boolean ischeck = false;
 
-	private int isLoginRed;//是否领过红包
+	private int isLoginRed;// 是否领过红包
 
+	private String devId;// 登录时设备的ID
 
-	private String devId;//登录时设备的ID
+	private Set<String> collectCommoditys;// 收藏的商品编号
 
 	public String getUserId() {
 		return userId;
@@ -198,4 +199,13 @@ public class UserInfoVO implements Serializable {
 	public void setDevId(String devId) {
 		this.devId = devId;
 	}
+
+	public Set<String> getCollectCommoditys() {
+		return collectCommoditys;
+	}
+
+	public void setCollectCommoditys(Set<String> collectCommoditys) {
+		this.collectCommoditys = collectCommoditys;
+	}
+
 }

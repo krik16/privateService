@@ -1,8 +1,11 @@
 package com.rongyi.rss.msob;
 
-import com.rongyi.easy.entity.MallLifeUserEntity;
+import java.util.List;
+import java.util.Map;
+
 import com.rongyi.easy.entity.ShopEntity;
 import com.rongyi.easy.malllife.vo.ShopRmmmVO;
+import com.rongyi.easy.malllife.vo.UserInfoVO;
 import com.rongyi.easy.rmmm.entity.ShopInfoEntity;
 import com.rongyi.easy.rmmm.exception.RmmmException;
 import com.rongyi.easy.rmmm.param.BrandParam;
@@ -11,9 +14,6 @@ import com.rongyi.easy.rmmm.vo.BrandShopDetailVO;
 import com.rongyi.easy.rmmm.vo.BrandShopListVO;
 import com.rongyi.easy.rmmm.vo.ShopDetailVO;
 import com.rongyi.easy.rmmm.vo.ShopInfoVO;
-
-import java.util.List;
-import java.util.Map;
 
 public interface IShopService{
 	
@@ -74,7 +74,7 @@ public interface IShopService{
 	 * @return
 	 * @throws Exception
 	 */
-	public BrandShopDetailVO getBrandShopDetail(String shopMId,MallLifeUserEntity user) throws Exception;
+	public BrandShopDetailVO getBrandShopDetail(String shopMId,UserInfoVO user) throws Exception;
 
 
 
