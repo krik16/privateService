@@ -873,7 +873,7 @@ public class OrderUtil {
 				if (mapObject.get("score") != null && Integer.parseInt(mapObject.get("score").toString()) > 0) {
 					IntegralRecordVO integralRecordVO = setIntegralRecordVOInfo(order,orderDetailList);
 					// 下单时验证前端传送积分抵扣金额
-					if (integralRecordVO.getAction() == ActionType.ACTION_ADD) {
+					if (integralRecordVO.getAction() == ActionType.ACTION_SUB) {
 						BigDecimal scoreDeductionMoney = new BigDecimal(Double.parseDouble(mapObject.get("score").toString()) / 100); // 积分抵扣金额，100积分兑换1RMB
 						BigDecimal pageScoreDeductionMoney = new BigDecimal(Double.parseDouble(mapObject.get("scoreDeduction").toString())); // 前端传送积分抵扣金额
 						if (scoreDeductionMoney.compareTo(pageScoreDeductionMoney) != 0) {
