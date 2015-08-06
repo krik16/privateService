@@ -200,7 +200,7 @@ public class OrderUtil {
 			String couponId = orderDetail.getCouponId();
 			if (!(couponId == null || couponId.isEmpty())) {
 				Double couponAmount = couponStatusService.getDiscountByCode(couponId);
-				cashCouponDiscount=cashCouponDiscount.add(new BigDecimal(couponAmount));
+				cashCouponDiscount =cashCouponDiscount.add(new BigDecimal(couponAmount));
 				if (couponAmount != null) {
 					detailTotal = detailTotal.subtract(new BigDecimal(couponAmount));
 				}
@@ -873,7 +873,7 @@ public class OrderUtil {
 				if (mapObject.get("score") != null && Integer.parseInt(mapObject.get("score").toString()) > 0) {
 					IntegralRecordVO integralRecordVO = setIntegralRecordVOInfo(order,orderDetailList);
 					// 下单时验证前端传送积分抵扣金额
-					if (integralRecordVO.getAction() == ActionType.ACTION_SUB) {
+					if (integralRecordVO.getType() == ScoreRuleEnum.SCORE_ORDER_SUB.getCode()) {
 						BigDecimal scoreDeductionMoney = new BigDecimal(Double.parseDouble(mapObject.get("score").toString()) / 100); // 积分抵扣金额，100积分兑换1RMB
 						BigDecimal pageScoreDeductionMoney = new BigDecimal(Double.parseDouble(mapObject.get("scoreDeduction").toString())); // 前端传送积分抵扣金额
 						if (scoreDeductionMoney.compareTo(pageScoreDeductionMoney) != 0) {
