@@ -130,13 +130,18 @@ public class UserCoupon implements Serializable {
     /**
      * 有效起止
      */
-    private Date endTime;
-
+    private Integer checkUserId;
 
     /**
      * 验码人
      */
-    private Integer checkUserId;
+    private String shopId;
+
+    /**
+     * 有效起止
+     */
+    private Date endTime;
+
 
     private Double refundAmount;
 
@@ -377,6 +382,15 @@ public class UserCoupon implements Serializable {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+
+    public String getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
     }
 
     @Transient
