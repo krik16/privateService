@@ -10,6 +10,8 @@ package com.rongyi.rpb.service;
 
 import java.util.Map;
 
+import com.rongyi.easy.rpb.vo.QueryOrderParamVO;
+
 /**	
  * @Author:  柯军
  * @Description: 支付宝服务 
@@ -36,7 +38,7 @@ public interface AliPaymentService {
 	 * @Author:  柯军
 	 * @datetime:2015年8月5日上午9:42:53
 	 **/
-	public String queryOrder(String payNo);
+	public QueryOrderParamVO queryOrder(String payNo,String tradeNo);
 	
 	
 }

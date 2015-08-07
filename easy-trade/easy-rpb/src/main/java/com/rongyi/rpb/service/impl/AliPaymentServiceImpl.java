@@ -1,21 +1,25 @@
 package com.rongyi.rpb.service.impl;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.jdom.JDOMException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rongyi.core.bean.ObjectConvert;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
-import com.rongyi.rpb.common.util.orderSign.webPageAlipay.alipay.sign.Md5Encrypt;
+import com.rongyi.easy.rpb.vo.QueryOrderParamVO;
 import com.rongyi.rpb.common.util.orderSign.webPageAlipay.alipay.sign.RSA;
+import com.rongyi.rpb.common.util.orderSign.webPageAlipay.alipay.util.AlipaySubmit;
+import com.rongyi.rpb.common.util.orderSign.weixinSign.util.XMLUtil;
 import com.rongyi.rpb.constants.ConstantUtil;
 import com.rongyi.rpb.constants.ConstantUtil.PayZhiFuBao;
 import com.rongyi.rpb.constants.ConstantUtil.ZhiFuBaoWebPage;
@@ -102,52 +106,69 @@ public class AliPaymentServiceImpl extends BaseServiceImpl implements AliPayment
 	 * @datetime:2015年8月5日上午9:34:52
 	 **/
 	@Override
-	public String queryOrder(String payNo) {
-		String url = CreateUrl(payNo);
+	public QueryOrderParamVO queryOrder(String payNo, String tradeNo) {
+		String url = CreateUrl(payNo, tradeNo);
 		HttpClient hc = new HttpClient(url, 30000, 30000);
+		int status = 200;
 		try {
-			int status = hc.send(new HashMap<String, String>(), PayZhiFuBao.INPUT_CHARSET);
-			System.err.println(status);
+			status = hc.send(new HashMap<String, String>(), PayZhiFuBao.INPUT_CHARSET);
 			if (status == 200)
-				return hc.getResult();
+				return xmlStringToQueryOrderParamVO(hc.getResult());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		LOGGER.error("调用支付宝通信异常，通信状态-->" + status);
 		return null;
 	}
 
 	/**
-	 * 生成url方法 网关
-	 * 
-	 * @param paygateway
-	 *            服务参数
-	 * @param service
-	 *            签名类型
-	 * @param sign_type
-	 *            外部订单号
-	 * @param out_trade_no
-	 *            编码机制
-	 * @param input_charset
-	 *            合作者ID
-	 * @param partner
-	 *            安全校验码
-	 * @param key
+	 * @Description: xml 结果转换成QueryOrderParamVO对象
+	 * @param xmlString
 	 * @return
-	 */
-	public String CreateUrl(String outTradeNo) {
+	 * @Author: 柯军
+	 * @datetime:2015年8月7日上午11:17:59
+	 **/
+	@SuppressWarnings("unchecked")
+	private QueryOrderParamVO xmlStringToQueryOrderParamVO(String xmlString) {
+		QueryOrderParamVO queryOrderParamVO = new QueryOrderParamVO();
+		try {
+			Map<String, Object> xmlMap = XMLUtil.doXMLParse(xmlString);
+			if ("T".equals(xmlMap.get("is_success"))) {
+				String responseStr = xmlMap.get("response").toString();
+				Map<String, Object> responseMap = XMLUtil.doXMLParse(responseStr);
+				queryOrderParamVO = (QueryOrderParamVO) ObjectConvert.convertFromMap(QueryOrderParamVO.class, responseMap);
+				queryOrderParamVO.setIs_success("T");
+			} else {
+				queryOrderParamVO.setIs_success("F");
+				queryOrderParamVO.setError((String) xmlMap.get("error"));
+			}
+		} catch (JDOMException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return queryOrderParamVO;
+	}
 
-		Map<String, Object> params = new HashMap<String, Object>();
+	/**
+	 * @Description: 生成订单查询URL字符串
+	 * @param outTradeNo付款单号
+	 * @param tradeNo支付宝交易流水号
+	 * @return
+	 * @Author: 柯军
+	 * @datetime:2015年8月7日上午11:20:00
+	 **/
+	public String CreateUrl(String outTradeNo, String tradeNo) {
+
+		Map<String, String> params = new HashMap<String, String>();
 		params.put("service", ZhiFuBaoWebPage.QUERY_SERVICE);
 		params.put("partner", PayZhiFuBao.PARTNER);
-		params.put("out_trade_no", outTradeNo);
+		if (!StringUtils.isEmpty(outTradeNo))
+			params.put("out_trade_no", outTradeNo);
+		if (!StringUtils.isEmpty(tradeNo))
+			params.put("trade_no", tradeNo);
 		params.put("_input_charset", PayZhiFuBao.INPUT_CHARSET);
-
-		String prestr = "";
-
-		prestr = prestr + PayZhiFuBao.PRIVATE_KEY;
-
-		String sign = Md5Encrypt.md5(getContent(params, PayZhiFuBao.PRIVATE_KEY), PayZhiFuBao.INPUT_CHARSET);
-
+		String sign = AlipaySubmit.buildRequestMysign(params);
 		String parameter = "";
 		parameter = parameter + ZhiFuBaoWebPage.ALIPAY_QUERY_ORDER_GATEWAY;
 		List<String> keys = new ArrayList<String>(params.keySet());
@@ -163,41 +184,10 @@ public class AliPaymentServiceImpl extends BaseServiceImpl implements AliPayment
 				e.printStackTrace();
 			}
 		}
-
 		parameter = parameter + "sign=" + sign + "&sign_type=" + PayZhiFuBao.SIGNTYPE;
 
 		return parameter;
 
-	}
-
-	/**
-	 * 功能：将安全校验码和参数排序 参数集合
-	 * 
-	 * @param params
-	 *            安全校验码
-	 * @param privateKey
-	 * */
-	private String getContent(Map<String, Object> params, String privateKey) {
-		List<String> keys = new ArrayList<String>(params.keySet());
-		Collections.sort(keys);
-		String prestr = "";
-
-		boolean first = true;
-		for (int i = 0; i < keys.size(); i++) {
-			String key = (String) keys.get(i);
-			String value = (String) params.get(key);
-			if (value == null || value.trim().length() == 0) {
-				continue;
-			}
-			if (first) {
-				prestr = prestr + key + "=" + value;
-				first = false;
-			} else {
-				prestr = prestr + "&" + key + "=" + value;
-			}
-		}
-
-		return prestr + privateKey;
 	}
 
 }

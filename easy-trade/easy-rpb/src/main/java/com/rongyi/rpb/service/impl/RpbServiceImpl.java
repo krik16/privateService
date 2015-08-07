@@ -21,9 +21,11 @@ import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentItemEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.PaySuccessResponse;
+import com.rongyi.easy.rpb.vo.QueryOrderParamVO;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.mq.Sender;
 import com.rongyi.rpb.nsynchronous.OrderFormNsyn;
+import com.rongyi.rpb.service.AliPaymentService;
 import com.rongyi.rpb.service.PaymentItemService;
 import com.rongyi.rpb.service.PaymentLogInfoService;
 import com.rongyi.rpb.service.PaymentService;
@@ -40,7 +42,7 @@ import com.rongyi.rss.rpb.IRpbService;
 public class RpbServiceImpl implements IRpbService {
 
 	private static final Logger LOGGER = Logger.getLogger(RpbServiceImpl.class);
-	
+
 	@Autowired
 	OrderFormNsyn orderFormNsyn;
 
@@ -61,6 +63,9 @@ public class RpbServiceImpl implements IRpbService {
 
 	@Autowired
 	PaymentItemService paymentItemService;
+
+	@Autowired
+	AliPaymentService aliPaymentService;
 
 	@Override
 	public Map<Integer, String> validateAccount(String paymentIds) {
@@ -117,10 +122,10 @@ public class RpbServiceImpl implements IRpbService {
 	}
 
 	@Override
-	public boolean paySuccessNotify(String orderNo,Double totalAmount) {
-		 LOGGER.info("参数：ordeNo="+orderNo+",totalAmount="+totalAmount);
-		if(totalAmount == 0){
-		LOGGER.info("0元商品购买，无需发送通知,orderNo-->"+orderNo);
+	public boolean paySuccessNotify(String orderNo, Double totalAmount) {
+		LOGGER.info("参数：ordeNo=" + orderNo + ",totalAmount=" + totalAmount);
+		if (totalAmount == 0) {
+			LOGGER.info("0元商品购买，无需发送通知,orderNo-->" + orderNo);
 			return true;
 		}
 		boolean result = false;
@@ -154,5 +159,12 @@ public class RpbServiceImpl implements IRpbService {
 				return false;
 		}
 		return true;
+	}
+
+	@Override
+	public QueryOrderParamVO queryOrder(Map<String, Object> map) {
+		String payNo = (map.get("payNo") != null) ? map.get("payNo").toString() : null;
+		String tradeNo = (map.get("tradeNo") != null) ? map.get("tradeNo").toString() : null;
+		return aliPaymentService.queryOrder(payNo, tradeNo);
 	}
 }
