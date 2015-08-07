@@ -11,6 +11,7 @@ package com.rongyi.rss.rpb;
 import java.util.Map;
 
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
+import com.rongyi.easy.rpb.vo.QueryOrderParamVO;
 
 /**
  * @Author: 柯军
@@ -55,5 +56,14 @@ public interface IRpbService {
 	 * @datetime:2015年7月30日上午9:48:46
 	 **/
 	public boolean paySuccessNotify(String orderNo,Double totalAmount);
+	
+	
+	/**	
+	 * @Description: 查询订单 
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年8月7日下午1:39:56
+	 **/
+	public QueryOrderParamVO queryOrder(Map<String,Object> map);
     
 }
