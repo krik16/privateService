@@ -246,6 +246,8 @@ public class OrderUtil {
 						Double scoreInt = Double.parseDouble(map.get("score").toString()) * scoreExchangeMoney;
 						BigDecimal score = new BigDecimal(scoreInt);
 						total = total.subtract(score);
+						//总价小于零的情况
+						total = total.compareTo(new BigDecimal(0)) < 0 ? new BigDecimal(0) : total;
 					}
 				}
 		return total;
