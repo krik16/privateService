@@ -228,6 +228,7 @@ salience 100
 	        	entity.setAppealId(0);
 	        }
 	        
+	        
 	        // 根据创建订单消息传入的总价计算订单折扣
 			orderUtil.orderSetDiscount(order.getTotalAmount(), order, orderDetailList);
 			
@@ -584,7 +585,7 @@ salience 100
 				
 		OrderDetailFormEntity[] orderDetailList = orderUtil.queryGetOrderDetailList($orderNo);
 		
-		$order.setDisconntFee(orderUtil.calculateDiscount(orderDetailList, $event.getDisconntFee()));
+		$order.setDisconntFee(orderUtil.calculateDiscount(orderDetailList, $event.getDisconntFee(),$order));
 		$order.setExpressFee($event.getExpressFee());
 		
 		// 重新计算订单总价
