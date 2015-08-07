@@ -188,7 +188,7 @@ public class PaymentServiceTest extends BaseTest {
 	
 	@Test
 	public void testQueryOrder(){
-		System.err.println(aliPaymentService.queryOrder("1000001985815160"));	
+		System.err.println(aliPaymentService.queryOrder("1000001063768572","2015080700001000480061032614"));	
 	}
 	
 	public MessageEvent getRpbEvent(String soruce, String type) {
