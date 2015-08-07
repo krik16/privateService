@@ -891,7 +891,9 @@ public class OrderUtil {
 					IntegralRecordVO integralRecordVO = setIntegralRecordVOInfo(order,orderDetailList);
 					// 下单时验证前端传送积分抵扣金额
 					if (integralRecordVO.getType() == ScoreRuleEnum.SCORE_ORDER_SUB.getCode()) {
-						BigDecimal scoreDeductionMoney = new BigDecimal(Double.parseDouble(mapObject.get("score").toString()) / 100); // 积分抵扣金额，100积分兑换1RMB
+						Map<String, Object> mapScoreExchangeMoney=getMapByJson(ScoreRuleEnum.SCORE_ORDER_SUB.getCode());
+						double scoreExchangeMoney= Double.parseDouble(mapScoreExchangeMoney.get("scoreExchangeMoney").toString());
+						BigDecimal scoreDeductionMoney = new BigDecimal(Double.parseDouble(mapObject.get("score").toString()) * scoreExchangeMoney); // 积分抵扣金额，100积分兑换1RMB
 						BigDecimal pageScoreDeductionMoney = new BigDecimal(Double.parseDouble(mapObject.get("scoreDeduction").toString())); // 前端传送积分抵扣金额
 						if (scoreDeductionMoney.compareTo(pageScoreDeductionMoney) != 0) {
 							logger.info("该积分与积分抵扣金额不一致");
