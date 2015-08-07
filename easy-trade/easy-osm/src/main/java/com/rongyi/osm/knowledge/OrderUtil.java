@@ -1,7 +1,9 @@
 package com.rongyi.osm.knowledge;
 
 import java.math.BigDecimal;
+
 import net.sf.json.JSONArray;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -10,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 //import net.sf.json.JSONArray;
+
 
 
 
@@ -236,9 +239,11 @@ public class OrderUtil {
 		// 减去积分
 				if(order.getDiscountInfo().length()>0 && order.getDiscountInfo()!=null){
 					Map map = JsonUtil.getMapFromJson(order.getDiscountInfo());
-					if (map.get("score") != null
-							&& Integer.parseInt(map.get("score").toString()) > 0) {
-						Double scoreInt = Double.parseDouble(map.get("score").toString()) / 100;
+					if (map.get("score") != null  && Integer.parseInt(map.get("score").toString()) > 0) {
+						
+						Map<String, Object> mapObject=getMapByJson(ScoreRuleEnum.SCORE_ORDER_SUB.getCode());
+						double scoreExchangeMoney= Double.parseDouble(mapObject.get("scoreExchangeMoney").toString());
+						Double scoreInt = Double.parseDouble(map.get("score").toString()) * scoreExchangeMoney;
 						BigDecimal score = new BigDecimal(scoreInt);
 						total = total.subtract(score);
 					}
@@ -246,6 +251,17 @@ public class OrderUtil {
 		return total;
 	}
 
+	public Map<String, Object> getMapByJson(Integer scoreRuleEnum){
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		JSONObject json = integralService.getRuleByType(scoreRuleEnum);
+		if (json != null && json.get("rule_expression") != null) {
+			JSONObject ruleExpression = (JSONObject) json.get("rule_expression");
+			if (ruleExpression != null && ruleExpression.get("scoreExchangeMoney") != null) {
+				resultMap.put("scoreExchangeMoney", ruleExpression.get("scoreExchangeMoney"));
+			}
+		}
+		return resultMap;
+	}
 	/**
 	* C2C卖家修改价格后折扣的计算
 	* 若修改价格大于原始总价，则折扣 = 0，返回false；
