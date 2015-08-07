@@ -158,10 +158,11 @@ public class OrderUtil {
 	* @return BigDecimal
 	* @throws
 	*/
-	public BigDecimal calculateDiscount(OrderDetailFormEntity[] orderDetailList, BigDecimal origDiscount) {
+	public BigDecimal calculateDiscount(OrderDetailFormEntity[] orderDetailList, BigDecimal origDiscount, OrderFormEntity order) {
 		logger.info("Start to recalculateDiscount");
 		BigDecimal newDiscount = new BigDecimal(origDiscount.doubleValue());
 		logger.info("origDiscount value: " + origDiscount.doubleValue());
+		
 		for (Object entity : orderDetailList) {
 			OrderDetailFormEntity orderDetail = (OrderDetailFormEntity) entity;
 			//退款的子订单优惠券不计入
@@ -175,9 +176,22 @@ public class OrderUtil {
 					newDiscount = newDiscount.subtract(new BigDecimal(couponAmount));
 				}
 			}
-
 		}
-
+		
+		//减去积分
+		if(order.getDiscountInfo().length()>0 && order.getDiscountInfo()!=null){
+			Map map = JsonUtil.getMapFromJson(order.getDiscountInfo());
+			if (map.get("score") != null  && Integer.parseInt(map.get("score").toString()) > 0) {
+				Map<String, Object> mapObject=getMapByJson(ScoreRuleEnum.SCORE_ORDER_SUB.getCode());
+				double scoreExchangeMoney= Double.parseDouble(mapObject.get("scoreExchangeMoney").toString());
+				Double scoreInt = Double.parseDouble(map.get("score").toString()) * scoreExchangeMoney;
+				BigDecimal score = new BigDecimal(scoreInt);
+				newDiscount = newDiscount.subtract(score);
+				//总价小于零的情况
+				newDiscount = newDiscount.compareTo(new BigDecimal(0)) < 0 ? new BigDecimal(0) : newDiscount;
+			}
+		}
+		
 		return newDiscount;
 	}
 
