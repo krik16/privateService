@@ -21,7 +21,7 @@ public class MainController extends BaseController {
 	private static final Logger LOGGER = Logger.getLogger(MainController.class);
 
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
-	public String index(ModelMap model, HttpServletRequest request) {
+	public String index(ModelMap model, HttpServletRequest request){
 		LOGGER.info(request.getAttribute("X-Real-IP") + "," + request.getRemoteAddr() + ">>>index");
 		try {
 			Users user = getUser();
