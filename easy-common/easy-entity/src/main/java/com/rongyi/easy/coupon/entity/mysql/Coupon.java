@@ -205,7 +205,7 @@ public class Coupon {
     /**
      * 代金券关联的商场
      */
-    private CouponMall mall;
+    private CouponMall couponMall;
 
     /**
      * 代金券关联的店铺
@@ -526,12 +526,12 @@ public class Coupon {
 		this.couponBrand = couponBrand;
 	}
 
-	public CouponMall getMall() {
-		return mall;
+	public CouponMall getCouponMall() {
+		return couponMall;
 	}
 
-	public void setMall(CouponMall mall) {
-		this.mall = mall;
+	public void setCouponMall(CouponMall couponMall) {
+		this.couponMall = couponMall;
 	}
 
 	public List<CouponShop> getShops() {
