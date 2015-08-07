@@ -20,6 +20,7 @@ import com.rongyi.easy.rpb.vo.QueryOrderParamVO;
 import com.rongyi.rpb.common.util.orderSign.webPageAlipay.alipay.sign.RSA;
 import com.rongyi.rpb.common.util.orderSign.webPageAlipay.alipay.util.AlipaySubmit;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.util.XMLUtil;
+import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.ConstantUtil;
 import com.rongyi.rpb.constants.ConstantUtil.PayZhiFuBao;
 import com.rongyi.rpb.constants.ConstantUtil.ZhiFuBaoWebPage;
@@ -140,7 +141,10 @@ public class AliPaymentServiceImpl extends BaseServiceImpl implements AliPayment
 				queryOrderParamVO.setIs_success("T");
 			} else {
 				queryOrderParamVO.setIs_success("F");
-				queryOrderParamVO.setError((String) xmlMap.get("error"));
+				if (ConstantEnum.ALI_QUERY_ORDER_ERROR_CODE.getCodeStr().equals(xmlMap.get("error")))
+					queryOrderParamVO.setError(ConstantEnum.ALI_QUERY_ORDER_ERROR_CODE.getValueStr());
+				else
+					queryOrderParamVO.setError((String) xmlMap.get("error"));
 			}
 		} catch (JDOMException e) {
 			e.printStackTrace();
