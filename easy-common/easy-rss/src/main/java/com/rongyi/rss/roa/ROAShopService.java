@@ -1,5 +1,6 @@
 package com.rongyi.rss.roa;
 
+import java.util.List;
 import java.util.Map;
 
 import com.rongyi.easy.roa.vo.ShopVO;
@@ -33,4 +34,11 @@ public interface ROAShopService {
      */
     public ShopVO getShopsVOById(String id)throws Exception;
     
+    /**
+     * 通过分公司id查店铺
+     * @param filialeId
+     * @return
+     * @throws Exception
+     */
+    public List<ShopVO> getShopDetailByFilialeId(String filialeId) throws Exception ;
 }
