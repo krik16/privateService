@@ -3,6 +3,12 @@ package com.rongyi.easy.coupon.entity.mysql;
 import java.util.Date;
 import java.util.List;
 
+import com.rongyi.easy.coupon.entity.mysql.CouponBrand;
+import com.rongyi.easy.coupon.entity.mysql.CouponCategory;
+import com.rongyi.easy.coupon.entity.mysql.CouponGroup;
+import com.rongyi.easy.coupon.entity.mysql.CouponMall;
+import com.rongyi.easy.coupon.entity.mysql.CouponShop;
+
 public class Coupon {
 	/**
      * 主键id
@@ -15,14 +21,16 @@ public class Coupon {
     private String name;
 
     /**
+     * 卡券类型:代金券[0], 抵扣券[1], 红包[2]
      * 卡券类型:抵扣券[rebate], 代金券[voucher], 红包[redenvelope]
      */
-    private String couponType;
+    private Integer couponType;
 
     /**
+     * 验证方式：容易后验证[0], 互动屏票据[1], 两者兼容[2]
      * 验证方式：容易后验证[after_check], 互动屏票据[interact_check], 两者兼容[all]
      */
-    private String validateType;
+    private Integer validateType;
 
     /**
      * 券码发行量
@@ -72,12 +80,12 @@ public class Coupon {
     /**
      * 有效期开始时间
      */
-    private Date enableStartAt;
+    private Date validStartAt;
 
     /**
      * 有效期结束时间
      */
-    private Date enableEndAt;
+    private Date validEndAt;
 
     /**
      * 使用限制
@@ -111,10 +119,12 @@ public class Coupon {
 
     /**
      * 关联类型
+     * 代金券：集团[0],品牌[1], 商场 [2],店铺[3];
+     * 红包 ：全场[0],商品[1]
      * 代金券：集团[group],品牌[brand], 商场 [mall],店铺[shop];
      * 红包 ：全场[all_court],商品[commodity]
      */
-    private String relatedType;
+    private Integer relatedType;
 
     /**
      * 每人限购数量
@@ -137,14 +147,21 @@ public class Coupon {
     private String synTarget;
 
     /**
+     * 卡券发布渠道：大运营平台[0], 商家管理后台[1]
      * 卡券发布渠道：大运营平台[operation], 商家管理后台[merchant]
      */
-    private String publishChannel;
+    private Integer publishChannel;
 
     /**
+     * 状态: 待审核[0], 审核未通过[1], 审核通过[2]
      * 状态: 待审核[uncheck], 审核未通过[unpass], 审核通过[pass]
      */
-    private String status;
+    private Integer status;
+
+    /**
+     * 店铺对应的公司名
+     */
+    private String sourceName;
 
     /**
      * 创建人
@@ -169,10 +186,10 @@ public class Coupon {
     /**
      * 是否是第三方券 否[false], 是[true], 默认不是第三方券fasle
      */
-    private Boolean is3rd;
+    private Boolean isThird;
 
     /**
-     * 是否已下架 初始状态[false]，已下架[true]
+     * 是否已下架 初始状态[false]，已下架[true], 默认false
      */
     private Boolean isOffStock;
 
@@ -180,13 +197,7 @@ public class Coupon {
      * 是否删除：否[false], 是[true], 默认为false未删除
      */
     private Boolean isDeleted;
-
-    /**
-     * 店铺对应的公司名
-     */
-    private String sourceName;
-
-
+    
     /**
      * 代金券分类
      */
@@ -212,7 +223,6 @@ public class Coupon {
      */
     private List<CouponShop> shops;
 
-
     public Integer getId() {
         return id;
     }
@@ -229,19 +239,19 @@ public class Coupon {
         this.name = name;
     }
 
-    public String getCouponType() {
+    public Integer getCouponType() {
         return couponType;
     }
 
-    public void setCouponType(String couponType) {
+    public void setCouponType(Integer couponType) {
         this.couponType = couponType;
     }
 
-    public String getValidateType() {
+    public Integer getValidateType() {
         return validateType;
     }
 
-    public void setValidateType(String validateType) {
+    public void setValidateType(Integer validateType) {
         this.validateType = validateType;
     }
 
@@ -317,20 +327,20 @@ public class Coupon {
         this.publishEndAt = publishEndAt;
     }
 
-    public Date getEnableStartAt() {
-        return enableStartAt;
+    public Date getValidStartAt() {
+        return validStartAt;
     }
 
-    public void setEnableStartAt(Date enableStartAt) {
-        this.enableStartAt = enableStartAt;
+    public void setValidStartAt(Date validStartAt) {
+        this.validStartAt = validStartAt;
     }
 
-    public Date getEnableEndAt() {
-        return enableEndAt;
+    public Date getValidEndAt() {
+        return validEndAt;
     }
 
-    public void setEnableEndAt(Date enableEndAt) {
-        this.enableEndAt = enableEndAt;
+    public void setValidEndAt(Date validEndAt) {
+        this.validEndAt = validEndAt;
     }
 
     public String getLimitDesc() {
@@ -381,11 +391,11 @@ public class Coupon {
         this.detailPicUrl = detailPicUrl;
     }
 
-    public String getRelatedType() {
+    public Integer getRelatedType() {
         return relatedType;
     }
 
-    public void setRelatedType(String relatedType) {
+    public void setRelatedType(Integer relatedType) {
         this.relatedType = relatedType;
     }
 
@@ -421,20 +431,28 @@ public class Coupon {
         this.synTarget = synTarget;
     }
 
-    public String getPublishChannel() {
+    public Integer getPublishChannel() {
         return publishChannel;
     }
 
-    public void setPublishChannel(String publishChannel) {
+    public void setPublishChannel(Integer publishChannel) {
         this.publishChannel = publishChannel;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getSourceName() {
+        return sourceName;
+    }
+
+    public void setSourceName(String sourceName) {
+        this.sourceName = sourceName;
     }
 
     public String getCreateUser() {
@@ -469,37 +487,28 @@ public class Coupon {
         this.updateAt = updateAt;
     }
 
-
-    public Boolean getIs3rd() {
-		return is3rd;
-	}
-
-	public void setIs3rd(Boolean is3rd) {
-		this.is3rd = is3rd;
-	}
-
-	public Boolean getIsOffStock() {
-		return isOffStock;
-	}
-
-	public void setIsOffStock(Boolean isOffStock) {
-		this.isOffStock = isOffStock;
-	}
-
-	public Boolean getIsDeleted() {
-		return isDeleted;
-	}
-
-	public void setIsDeleted(Boolean isDeleted) {
-		this.isDeleted = isDeleted;
-	}
-
-	public String getSourceName() {
-        return sourceName;
+    public Boolean getIsThird() {
+        return isThird;
     }
 
-    public void setSourceName(String sourceName) {
-        this.sourceName = sourceName;
+    public void setIsThird(Boolean isThird) {
+        this.isThird = isThird;
+    }
+
+    public Boolean getIsOffStock() {
+        return isOffStock;
+    }
+
+    public void setIsOffStock(Boolean isOffStock) {
+        this.isOffStock = isOffStock;
+    }
+
+    public Boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
 	public CouponCategory getCouponCategory() {
@@ -542,4 +551,29 @@ public class Coupon {
 		this.shops = shops;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Coupon [id=").append(id).append(", name=").append(name).append(", couponType=")
+				.append(couponType).append(", validateType=").append(validateType).append(", totalCount=")
+				.append(totalCount).append(", stockCount=").append(stockCount).append(", origPrice=").append(origPrice)
+				.append(", currPrice=").append(currPrice).append(", discount=").append(discount)
+				.append(", displayRegion=").append(displayRegion).append(", afterSaleService=").append(afterSaleService)
+				.append(", publishStartAt=").append(publishStartAt).append(", publishEndAt=").append(publishEndAt)
+				.append(", validStartAt=").append(validStartAt).append(", validEndAt=").append(validEndAt)
+				.append(", limitDesc=").append(limitDesc).append(", usageDesc=").append(usageDesc)
+				.append(", recommend=").append(recommend).append(", remark=").append(remark).append(", listPicUrl=")
+				.append(listPicUrl).append(", detailPicUrl=").append(detailPicUrl).append(", relatedType=")
+				.append(relatedType).append(", limitCount=").append(limitCount).append(", limitUseCount=")
+				.append(limitUseCount).append(", limitPublishCount=").append(limitPublishCount).append(", synTarget=")
+				.append(synTarget).append(", publishChannel=").append(publishChannel).append(", status=").append(status)
+				.append(", sourceName=").append(sourceName).append(", createUser=").append(createUser)
+				.append(", createAt=").append(createAt).append(", updateUser=").append(updateUser).append(", updateAt=")
+				.append(updateAt).append(", isThird=").append(isThird).append(", isOffStock=").append(isOffStock)
+				.append(", isDeleted=").append(isDeleted).append(", couponCategory=").append(couponCategory)
+				.append(", couponGroup=").append(couponGroup).append(", couponBrand=").append(couponBrand)
+				.append(", couponMall=").append(couponMall).append(", shops=").append(shops).append("]");
+		return builder.toString();
+	}
+    
 }
