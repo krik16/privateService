@@ -15,7 +15,7 @@ public class VoucherCouponVO implements Serializable {
     private String name;
 
     /**
-     * 卡券类型:抵扣券[rebate], 代金券[voucher], 红包[redenvelope]
+     * 卡券类型:代金券[0], 抵扣券[1], 红包[2]
      */
     private String couponType;
 
@@ -41,17 +41,21 @@ public class VoucherCouponVO implements Serializable {
 
     /**
      * 关联类型
+     * 代金券：集团[0],品牌[1], 商场 [2],店铺[3];
+     * 红包 ：全场[0],商品[1]
      * 代金券：集团[group],品牌[brand], 商场 [mall],店铺[shop];
      * 红包 ：全场[all_court],商品[commodity]
      */
     private String relatedType;
 
     /**
+     * 状态: 待审核[0], 审核未通过[1], 审核通过[2]
      * 状态: 待审核[uncheck], 审核未通过[unpass], 审核通过[pass]
      */
     private String status;
 
     /**
+     * 发布状态：待发布[0] 进行中[1] 已结束[2] 已下架[3]
 	 * 发布状态：待发布[unpublish] 进行中[proceeing] 已结束[ended] 已下架[off]
 	 *
 	 */
@@ -60,7 +64,7 @@ public class VoucherCouponVO implements Serializable {
 	 /**
      * 是否是第三方券 否[false], 是[true], 默认不是第三方券fasle
      */
-    private Boolean is3rd;
+    private Boolean isThird;
 
     /**
      * 一级分类name
@@ -152,12 +156,12 @@ public class VoucherCouponVO implements Serializable {
 		this.publishStatus = publishStatus;
 	}
 
-	public Boolean getIs3rd() {
-		return is3rd;
+	public Boolean getIsThird() {
+		return isThird;
 	}
 
-	public void setIs3rd(Boolean is3rd) {
-		this.is3rd = is3rd;
+	public void setIsThird(Boolean isThird) {
+		this.isThird = isThird;
 	}
 
 	public String getLv1Name() {
@@ -179,17 +183,12 @@ public class VoucherCouponVO implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("VoucherCouponVO [id=").append(id).append(", name=")
-				.append(name).append(", couponType=").append(couponType)
-				.append(", totalCount=").append(totalCount)
-				.append(", stockCount=").append(stockCount)
-				.append(", origPrice=").append(origPrice)
-				.append(", currPrice=").append(currPrice)
-				.append(", relatedType=").append(relatedType)
-				.append(", status=").append(status).append(", publishStatus=")
-				.append(publishStatus).append(", is3rd=").append(is3rd)
-				.append(", lv1Name=").append(lv1Name).append(", lv2Name=")
-				.append(lv2Name).append("]");
+		builder.append("VoucherCouponVO [id=").append(id).append(", name=").append(name).append(", couponType=")
+				.append(couponType).append(", totalCount=").append(totalCount).append(", stockCount=")
+				.append(stockCount).append(", origPrice=").append(origPrice).append(", currPrice=").append(currPrice)
+				.append(", relatedType=").append(relatedType).append(", status=").append(status)
+				.append(", publishStatus=").append(publishStatus).append(", isThird=").append(isThird)
+				.append(", lv1Name=").append(lv1Name).append(", lv2Name=").append(lv2Name).append("]");
 		return builder.toString();
 	}
 

@@ -24,7 +24,7 @@ public interface RoaVoucherCouponService {
 	 * @param coupon 代金券entity
 	 * @return 成功：true 失败：false
 	 */
-	Boolean saveOrUpdate(Coupon coupon) throws Exception;
+	boolean saveOrUpdate(Coupon coupon) throws Exception;
 
 	/**
 	 * @Description:根据id删除代金券
@@ -32,7 +32,7 @@ public interface RoaVoucherCouponService {
 	 * @param id 代金券id
 	 * @return 成功：true 失败：false
 	 */
-	Boolean deleteById(Integer id);
+	boolean remove(Integer id);
 
 	/**
 	 * @Description:多条件分页查询代金券
@@ -59,7 +59,7 @@ public interface RoaVoucherCouponService {
 	 * @return 成功：true 失败：false
 	 * @throws Exception
 	 */
-	Boolean verifyCoupon(List<Integer> ids, Integer status,
+	boolean verifyCoupon(List<Integer> ids, Integer status,
 			String reason) throws Exception;
 
 	/**
@@ -71,7 +71,7 @@ public interface RoaVoucherCouponService {
 	 * @return 成功：true 失败：false
 	 * @throws Exception
 	 */
-	Boolean offShelfCoupon(List<Integer> ids, Boolean isOffStock, String reason)
+	boolean offShelfCoupon(List<Integer> ids, boolean isOffStock, String reason)
 			throws Exception;
 
 	/**
@@ -90,7 +90,7 @@ public interface RoaVoucherCouponService {
 	 * @return
 	 * @throws Exception
 	 */
-	Boolean addCouponCount(Integer id, Integer addCount) throws Exception;
+	boolean addCouponCount(Integer id, Integer addCount) throws Exception;
 
 	/**
 	 * @Description:设置展示区域

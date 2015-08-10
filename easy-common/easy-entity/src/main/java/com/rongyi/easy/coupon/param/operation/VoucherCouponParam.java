@@ -18,10 +18,12 @@ public class VoucherCouponParam implements Serializable{
 	/**
      *
      * 关联类型
+     * 代金券：集团[0],品牌[1], 商场 [2],店铺[3];
+     * 红包 ：全场[0],商品[1]
      * 代金券：集团[group],品牌[brand], 商场 [mall],店铺[shop];
      * 红包 ：全场[all_court],商品[commodity]
      */
-    private String relatedType;
+    private Integer relatedType;
 
 	/**
 	 * 对应的类型id
@@ -29,15 +31,16 @@ public class VoucherCouponParam implements Serializable{
 	private String relatedTypeId;
 
 	/**
+	 * 审核状态: 待审核[0], 审核未通过[1], 审核通过[2]
 	 * 审核状态: 待审核[uncheck], 审核未通过[unpass], 审核通过[pass]
 	 */
-	private String status;
+	private Integer status;
 
 	/**
+	 * 发布状态：待发布[0] 进行中[1] 已结束[2] 已下架[3]
 	 * 发布状态：待发布[unpublish] 进行中[proceeing] 已结束[ended] 已下架[off]
-	 *
 	 */
-	private String publishStatus;
+	private Integer publishStatus;
 
 	/**
 	 * 一级分类id
@@ -60,6 +63,7 @@ public class VoucherCouponParam implements Serializable{
 	private String outChannel;
 
 	/**
+	 * 时间类型：发布开始时间[0] 发布结束时间[1] 有效期开始时间[2] 有效期结束时间[3]
 	 * 时间类型：发布开始时间[publish_start] 发布结束时间[publish_end] 有效期开始时间[enable_start] 有效期结束时间[enable_end]
 	 */
 	private Integer dateType;
@@ -72,12 +76,13 @@ public class VoucherCouponParam implements Serializable{
 	private Date endDate;
 
 	/**
+	 * 卡券发布渠道：大运营平台[0], 商家管理后台[1]
      * 卡券发布渠道：大运营平台[operation], 商家管理后台[merchant]
      */
-    private String publishChannel;
+    private Integer publishChannel;
 
     /**
-     * 卡券类型:抵扣券[rebate], 代金券[voucher], 红包[redenvelope]
+     * 卡券类型: 代金券[0],抵扣券[1], 红包[2]
      */
     private Integer couponType;
 
@@ -108,11 +113,11 @@ public class VoucherCouponParam implements Serializable{
 		this.name = name;
 	}
 
-	public String getRelatedType() {
+	public Integer getRelatedType() {
 		return relatedType;
 	}
 
-	public void setRelatedType(String relatedType) {
+	public void setRelatedType(Integer relatedType) {
 		this.relatedType = relatedType;
 	}
 
@@ -124,19 +129,19 @@ public class VoucherCouponParam implements Serializable{
 		this.relatedTypeId = relatedTypeId;
 	}
 
-	public String getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
-	public String getPublishStatus() {
+	public Integer getPublishStatus() {
 		return publishStatus;
 	}
 
-	public void setPublishStatus(String publishStatus) {
+	public void setPublishStatus(Integer publishStatus) {
 		this.publishStatus = publishStatus;
 	}
 
@@ -196,11 +201,11 @@ public class VoucherCouponParam implements Serializable{
 		this.endDate = endDate;
 	}
 
-	public String getPublishChannel() {
+	public Integer getPublishChannel() {
 		return publishChannel;
 	}
 
-	public void setPublishChannel(String publishChannel) {
+	public void setPublishChannel(Integer publishChannel) {
 		this.publishChannel = publishChannel;
 	}
 
@@ -247,21 +252,14 @@ public class VoucherCouponParam implements Serializable{
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("VoucherCouponParam [id=").append(id).append(", name=")
-				.append(name).append(", relatedType=").append(relatedType)
-				.append(", relatedTypeId=").append(relatedTypeId)
-				.append(", status=").append(status).append(", publishStatus=")
-				.append(publishStatus).append(", lv1Id=").append(lv1Id)
-				.append(", lv2Id=").append(lv2Id).append(", inChannel=")
-				.append(inChannel).append(", outChannel=").append(outChannel)
-				.append(", dateType=").append(dateType).append(", startDate=")
-				.append(startDate).append(", endDate=").append(endDate)
-				.append(", publishChannel=").append(publishChannel)
-				.append(", couponType=").append(couponType)
-				.append(", currentPage=").append(currentPage)
-				.append(", pageSize=").append(pageSize).append(", offset=")
-				.append(offset).append(", orderByClause=")
-				.append(orderByClause).append("]");
+		builder.append("VoucherCouponParam [id=").append(id).append(", name=").append(name).append(", relatedType=")
+				.append(relatedType).append(", relatedTypeId=").append(relatedTypeId).append(", status=").append(status)
+				.append(", publishStatus=").append(publishStatus).append(", lv1Id=").append(lv1Id).append(", lv2Id=")
+				.append(lv2Id).append(", inChannel=").append(inChannel).append(", outChannel=").append(outChannel)
+				.append(", dateType=").append(dateType).append(", startDate=").append(startDate).append(", endDate=")
+				.append(endDate).append(", publishChannel=").append(publishChannel).append(", couponType=")
+				.append(couponType).append(", currentPage=").append(currentPage).append(", pageSize=").append(pageSize)
+				.append(", offset=").append(offset).append(", orderByClause=").append(orderByClause).append("]");
 		return builder.toString();
 	}
 
