@@ -25,6 +25,8 @@ public class MerchantListQueryParam {
     private Date validStartTime;
     private Date validEndTime;
     private String like;
+    private Date createStartTime;
+    private Date createEndTime;
 
     public Integer getCouponType() {
         return couponType;
