@@ -13,34 +13,34 @@ public enum FilterType {
         if ("LIKE".equals(type)) {
             return LIKE;
         }
-        if ("=".equals(type)) {
+        if ("EQ".equals(type)) {
             return EQUALS;
         }
-        if (">".equals(type)) {
+        if ("GH".equals(type)) {
             return GREATETHAN;
         }
-        if (">=".equals(type)) {
+        if ("GE".equals(type)) {
             return GREATEEQUAL;
         }
-        if ("<".equals(type)) {
+        if ("LH".equals(type)) {
             return LESSTHAN;
         }
-        if ("<=".equals(type)) {
+        if ("LE".equals(type)) {
             return LESSEQUAL;
         }
-        if ("!=".equals(type)) {
+        if ("NEQ".equals(type)) {
             return NOTEQUAL;
         }
         if ("IN".equals(type)) {
             return IN;
         }
-        if ("NOT IN".equals(type)) {
+        if ("NIN".equals(type)) {
             return NIN;
         }
-        if ("IS NULL".equals(type)) {
+        if ("NULL".equals(type)) {
             return ISNULL;
         }
-        if ("IS NOT NULL".equals(type)) {
+        if ("NNULL".equals(type)) {
             return ISNOTNULL;
         }
         if ("REGEXP".equals(type)) {
