@@ -20,6 +20,12 @@ public class ApplyRecordEntity implements Serializable{
 
     /** 申请人账号 */
     private String proposerAccount;
+    
+    /** 创建人账号ID **/
+    private Long createAccountId;
+    
+    /** 创建人账号  **/
+    private String createAccount;
 
     public Integer getId() {
         return id;
@@ -52,4 +58,22 @@ public class ApplyRecordEntity implements Serializable{
     public void setProposerAccount(String proposerAccount) {
         this.proposerAccount = proposerAccount;
     }
+
+	public Long getCreateAccountId() {
+		return createAccountId;
+	}
+
+	public void setCreateAccountId(Long createAccountId) {
+		this.createAccountId = createAccountId;
+	}
+
+	public String getCreateAccount() {
+		return createAccount;
+	}
+
+	public void setCreateAccount(String createAccount) {
+		this.createAccount = createAccount;
+	}
+    
+    
 }

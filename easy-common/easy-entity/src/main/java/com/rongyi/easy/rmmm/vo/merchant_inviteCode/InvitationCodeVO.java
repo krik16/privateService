@@ -20,6 +20,8 @@ public class InvitationCodeVO {
 	private int usedInviteNum;//已使用数量
 	private int invalidNum;//作废数量
 	private Date createAt;//申请时间
+	private Long createAccountId;
+	private String createAccount;
 	
 	public int getId() {
 		return id;
@@ -57,5 +59,18 @@ public class InvitationCodeVO {
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
+	public Long getCreateAccountId() {
+		return createAccountId;
+	}
+	public void setCreateAccountId(Long createAccountId) {
+		this.createAccountId = createAccountId;
+	}
+	public String getCreateAccount() {
+		return createAccount;
+	}
+	public void setCreateAccount(String createAccount) {
+		this.createAccount = createAccount;
+	}
+	
 	
 }
