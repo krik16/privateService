@@ -43,20 +43,16 @@ public class VoucherCouponVO implements Serializable {
      * 关联类型
      * 代金券：集团[0],品牌[1], 商场 [2],店铺[3];
      * 红包 ：全场[0],商品[1]
-     * 代金券：集团[group],品牌[brand], 商场 [mall],店铺[shop];
-     * 红包 ：全场[all_court],商品[commodity]
      */
     private String relatedType;
 
     /**
      * 状态: 待审核[0], 审核未通过[1], 审核通过[2]
-     * 状态: 待审核[uncheck], 审核未通过[unpass], 审核通过[pass]
      */
     private String status;
 
     /**
      * 发布状态：待发布[0] 进行中[1] 已结束[2] 已下架[3]
-	 * 发布状态：待发布[unpublish] 进行中[proceeing] 已结束[ended] 已下架[off]
 	 *
 	 */
 	private String publishStatus;
