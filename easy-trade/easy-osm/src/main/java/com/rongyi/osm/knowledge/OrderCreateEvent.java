@@ -1,15 +1,10 @@
 package com.rongyi.osm.knowledge;
 
-import java.math.BigDecimal;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import net.sf.json.JSONObject;
 
 import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.easy.osm.entity.OrderDetailFormEntity;
 import com.rongyi.easy.osm.entity.OrderFormEntity;
-import com.rongyi.osm.service.coupon.CouponStatusService;
 
 public class OrderCreateEvent extends UserEvent{
 	/**  */
@@ -17,8 +12,6 @@ public class OrderCreateEvent extends UserEvent{
 	
 	private OrderFormEntity orderFormEntity;
 	private OrderDetailFormEntity[] orderDetailFormEntityList;
-	@Autowired
-	private CouponStatusService couponStatusService;
 	public void load(JSONObject json) throws Exception {
 		// 调用父类分析函数
 		super.load(json);

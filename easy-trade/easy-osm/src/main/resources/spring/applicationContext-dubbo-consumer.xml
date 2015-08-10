@@ -18,9 +18,7 @@
     <dubbo:reference id="roaCouponService" interface="com.rongyi.rss.coupon.RoaCouponService"  version="${dubbo.version}" check="false"/>
     <dubbo:reference id="userCashCouponService" interface="com.rongyi.rss.coupon.RoaUserCashCouponService"  version="${dubbo.version}" check="false"/>
     <dubbo:reference id="roaOrderService" interface="com.rongyi.rss.mallshop.order.ROAOrderService"  version="${dubbo.version}" check="false"/>
-    <!--     积分操作接口 -->
-    <dubbo:reference id="integralService" interface="com.rongyi.rss.integral.IntegralService"  version="${dubbo.version}" check="false"/>
-<!--     url="dubbo://10.1.1.23:20880/com.rongyi.rss.integral.IntegralService" -->
+    <dubbo:reference id="scoreService" interface="com.rongyi.rss.integral.IntegralService"  version="${dubbo.version}" check="false"/>
 <!--     <bean id="demoController" class="com.rongyi.roa.web.controller.demo.DemoController"> 和本地服务一样使用远程服务 -->
 <!-- 	    <property name="memberService" ref="memberService" /> -->
 <!-- 	</bean> -->
