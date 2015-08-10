@@ -19,6 +19,7 @@ public class CouponRejectRecord {
      * 审核[0], 下架[1]
      */
     private Integer type;
+    
 
     /**
      * 创建时间
