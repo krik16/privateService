@@ -16,9 +16,10 @@ public class CouponRejectRecord {
     private String reason;
 
     /**
-     * 审核[verify], 下架[offstock]
+     * 审核[0], 下架[1]
      */
-    private String type;
+    private Integer type;
+    
 
     /**
      * 创建时间
@@ -49,11 +50,11 @@ public class CouponRejectRecord {
         this.reason = reason;
     }
 
-    public String getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
