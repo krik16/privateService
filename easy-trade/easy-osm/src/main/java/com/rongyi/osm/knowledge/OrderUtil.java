@@ -17,6 +17,7 @@ import java.util.Map;
 
 
 
+
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
@@ -59,6 +60,7 @@ import com.rongyi.osm.service.coupon.CouponStatusService;
 import com.rongyi.osm.service.mcmc.McmcStockService;
 import com.rongyi.rss.integral.IntegralService;
 import com.rongyi.rss.mallshop.order.ROAOrderService;
+import com.rongyi.osm.knowledge.OrderPriceResetEvent;
 
 import net.sf.json.JSONObject;
 
@@ -251,33 +253,22 @@ public class OrderUtil {
 		}
 
 		// 减去积分
-				if(order.getDiscountInfo().length()>0 && order.getDiscountInfo()!=null){
-					Map map = JsonUtil.getMapFromJson(order.getDiscountInfo());
-					if (map.get("score") != null  && Integer.parseInt(map.get("score").toString()) > 0) {
-						
-						Map<String, Object> mapObject=getMapByJson(ScoreRuleEnum.SCORE_ORDER_SUB.getCode());
-						double scoreExchangeMoney= Double.parseDouble(mapObject.get("scoreExchangeMoney").toString());
-						Double scoreInt = Double.parseDouble(map.get("score").toString()) * scoreExchangeMoney;
-						BigDecimal score = new BigDecimal(scoreInt);
-						total = total.subtract(score);
-						//总价小于零的情况
-						total = total.compareTo(new BigDecimal(0)) < 0 ? new BigDecimal(0) : total;
-					}
-				}
-		return total;
-	}
-
-	public Map<String, Object> getMapByJson(Integer scoreRuleEnum){
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		JSONObject json = integralService.getRuleByType(scoreRuleEnum);
-		if (json != null && json.get("rule_expression") != null) {
-			JSONObject ruleExpression = (JSONObject) json.get("rule_expression");
-			if (ruleExpression != null && ruleExpression.get("scoreExchangeMoney") != null) {
-				resultMap.put("scoreExchangeMoney", ruleExpression.get("scoreExchangeMoney"));
+		if(order.getDiscountInfo()!=null  && order.getDiscountInfo().length()>0){
+			Map map = JsonUtil.getMapFromJson(order.getDiscountInfo());
+			if (map.get("score") != null  && Integer.parseInt(map.get("score").toString()) > 0) {
+				Map<String, Object> mapObject=getMapByJson(ScoreRuleEnum.SCORE_ORDER_SUB.getCode());
+				double scoreExchangeMoney= Double.parseDouble(mapObject.get("scoreExchangeMoney").toString());
+				Double scoreInt = Double.parseDouble(map.get("score").toString()) * scoreExchangeMoney;
+				BigDecimal score = new BigDecimal(scoreInt);
+				total = total.subtract(score);
+				//总价小于零的情况
+				total = total.compareTo(new BigDecimal(0)) < 0 ? new BigDecimal(0) : total;
 			}
 		}
-		return resultMap;
+		return total;
 	}
+	
+	
 	/**
 	* C2C卖家修改价格后折扣的计算
 	* 若修改价格大于原始总价，则折扣 = 0，返回false；
@@ -988,6 +979,7 @@ public class OrderUtil {
 				integralRecordVO.setItem_id(commodityMid.substring(0,commodityMid.length()-1));//商品编号
 				integralRecordVO.setItem_type(ItemType.ITEM_PRODUCT+"");//商品
 			}
+			
 			if(order.getExpressFee()!=null){
 				integralRecordVO.setPost_money(order.getExpressFee()); //邮费
 			}else{
@@ -1023,6 +1015,99 @@ public class OrderUtil {
 				return true;
 			} else {
 				return false;
+			}
+		}
+		//获取积计算的相关参数(积分抵扣金额，积分支付占实际支付的10%)
+		public Map<String, Object> getMapByJson(Integer scoreRuleEnum){
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			JSONObject json = integralService.getRuleByType(scoreRuleEnum);
+			if (json != null && json.get("rule_expression") != null) {
+				JSONObject ruleExpression = (JSONObject) json.get("rule_expression");
+				if (ruleExpression != null && ruleExpression.get("scoreExchangeMoney") != null) {
+					resultMap.put("scoreExchangeMoney", ruleExpression.get("scoreExchangeMoney"));
+					resultMap.put("limit", ruleExpression.get("limit"));
+					resultMap.put("moneyExchangeScore", ruleExpression.get("moneyExchangeScore"));
+
+				}
+			}
+			return resultMap;
+		}
+		
+		
+		
+		/**
+		 * 判断积分是否大于订单价格的10%
+		 * 
+		 * @param discountInfo
+		 * @param discount
+		 * @return
+		 * @throws Exception
+		 */
+		public void returnScore(OrderFormEntity order,OrderDetailFormEntity[] orderDetailList,OrderPriceResetEvent event)throws Exception {
+			logger.info("rule_expressionreturnScore---start----");
+			JSONObject jsonObject=new JSONObject();
+			if(!StringUtils.isEmpty(order.getDiscountInfo())){
+				 jsonObject=JSONObject.fromObject(order.getDiscountInfo());
+			}
+			if(!StringUtils.isEmpty(order.getDiscountInfo())){
+				 jsonObject=JSONObject.fromObject(order.getDiscountInfo());
+				if ( jsonObject.get("score") != null && StringUtils.isNotBlank(jsonObject.get("score").toString())) {
+					Map<String, Object> scoreMap = getMapByJson(ScoreRuleEnum.SCORE_ORDER_SUB.getCode());
+					if (scoreMap != null && scoreMap.get("scoreExchangeMoney") != null) {
+						logger.info("rule_expression--->"+scoreMap.toString());
+						double scoreExchangeMoney = Double.parseDouble(scoreMap.get("scoreExchangeMoney").toString()); //积分兑换金额参数
+						BigDecimal ratio = new BigDecimal(scoreMap.get("limit").toString());//判断积分支付是否大于订单价格的10%参数
+						BigDecimal cashCouponDiscount = new BigDecimal(0); //优惠券总金额
+						// 计算红包，原结算金额
+						for (Object entity : orderDetailList) {
+							OrderDetailFormEntity orderDetail = (OrderDetailFormEntity) entity;
+							String couponId = orderDetail.getCouponId(); // 优惠code
+							if (!(couponId == null || couponId.isEmpty())) {
+								Double couponAmount = couponStatusService.getDiscountByCode(couponId); // 优惠抵扣金额
+								if (couponAmount != null) {
+									cashCouponDiscount = cashCouponDiscount.add(new BigDecimal(couponAmount));
+								}
+							}
+						}
+						logger.info("cashCouponDiscount-------"+cashCouponDiscount);
+						//修改后的价格10%
+						BigDecimal ratioOrderPrice =event.getOrderPrice().multiply(ratio);
+						if(ratioOrderPrice.compareTo(event.getOrderPrice().subtract(cashCouponDiscount)) < 0){
+							int returnScore=0;//返还积分
+							
+							//是否使用红包
+							if(cashCouponDiscount.compareTo(new BigDecimal(0))>0){
+								//当订单结算金额由于用户使用其他优惠后被抵扣到结算金额小于原订单价格的10%后，该订单的可用积分上限即为剩余结算金额换算出的积分数
+								
+								int score=Integer.parseInt(jsonObject.get("score").toString());
+								//减去红包
+								BigDecimal subtractCoupon=event.getOrderPrice().subtract(cashCouponDiscount); 
+								if(subtractCoupon.compareTo(ratioOrderPrice)<0){
+									returnScore=score-subtractCoupon.intValue() > 0 ? (score-subtractCoupon.intValue()):0;
+								}else{
+									returnScore=score-ratioOrderPrice.intValue() > 0 ? (score-ratioOrderPrice.intValue()):0;
+								}
+							}else{
+								//积分关联到订单，用户若使用积分抵扣，则按照订单不使用任何优惠形式时的结算金额的10%作为该订单的可用积分上限
+								returnScore=ratioOrderPrice.intValue();
+							}
+							if(returnScore>0){
+								//返还积分
+								jsonObject.put("score", returnScore);
+								jsonObject.put("scoreDeduction", returnScore * scoreExchangeMoney);
+								order.setDiscountInfo(jsonObject.toString());
+								logger.info("returnScore-------"+returnScore);
+								logger.info("returnScore------start-");
+								if(!subtractScore(order)){
+									throw new Exception("积分归还失败");
+								}
+								logger.info("returnScore------end-");
+							}
+						}else{
+							throw new Exception("积分抵扣金额支付上限为10%");
+						}
+					} 
+				}
 			}
 		}
 }
