@@ -31,7 +31,7 @@ public class ShopVO implements Serializable{
 
 	private List<String> parking;
 
-	private Integer rank; // 评分
+	private Integer rank_avg; // 评分
 	private Integer attention_count; // 关注数量
 	private Boolean is_attention; // 当前用户是否关注
 	private String shop_own;// 所属商场名称
@@ -150,9 +150,7 @@ public class ShopVO implements Serializable{
 		return floorId;
 	}
 
-	public Integer getRank() {
-		return rank;
-	}
+
 
 	public Integer getAttention_count() {
 		return attention_count;
@@ -246,8 +244,12 @@ public class ShopVO implements Serializable{
 		this.floorId = floorId;
 	}
 
-	public void setRank(Integer rank) {
-		this.rank = rank;
+	public Integer getRank_avg() {
+		return rank_avg;
+	}
+
+	public void setRank_avg(Integer rank_avg) {
+		this.rank_avg = rank_avg;
 	}
 
 	public List<String> getParking() {
