@@ -96,16 +96,6 @@ $(document).ready(function() {
 						}
 			        }
 			 });
-			
-			$.get('../main/ajaxGetShops', {
-				paramsJson : JSON.stringify(paramsJson)
-			}, function(data) {
-				$.each(data.msg, function(i, shop) {
-					map[shop.name] = shop.id;
-					m_names.push(shop.name);
-				});
-				process(m_names);
-			});
 		},
 		items : 20,
 		updater : function(selection) {
