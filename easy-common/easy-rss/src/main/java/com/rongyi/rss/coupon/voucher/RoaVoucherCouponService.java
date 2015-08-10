@@ -31,8 +31,9 @@ public interface RoaVoucherCouponService {
 	 * @author:lqy
 	 * @param id 代金券id
 	 * @return 成功：true 失败：false
+	 * @throws Exception 
 	 */
-	boolean remove(Integer id);
+	boolean remove(Integer id) throws Exception;
 
 	/**
 	 * @Description:多条件分页查询代金券
