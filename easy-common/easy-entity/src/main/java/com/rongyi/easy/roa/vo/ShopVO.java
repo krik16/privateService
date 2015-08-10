@@ -28,6 +28,7 @@ public class ShopVO implements Serializable{
 	private List<String> terminalImgs;
 	private Boolean hasCoupons;
 	private List<Double> location;
+	private String filiale_id;
 	public List<Double> getLocation() {
 		return location;
 	}
@@ -147,6 +148,12 @@ public class ShopVO implements Serializable{
 	}
 	public void setHasCoupons(Boolean hasCoupons) {
 		this.hasCoupons = hasCoupons;
+	}
+	public String getFiliale_id() {
+		return filiale_id;
+	}
+	public void setFiliale_id(String filiale_id) {
+		this.filiale_id = filiale_id;
 	}
 	
 }
