@@ -11,7 +11,7 @@ import java.io.Serializable;
  * <author>            <time>          <version>        <desc>
  * 张争平                                  2015年6月4日                        1.0           创建文件
  */
-public class MallVO implements Serializable{
+public class MallSearchVO implements Serializable{
 
 	/**
 	 * 
