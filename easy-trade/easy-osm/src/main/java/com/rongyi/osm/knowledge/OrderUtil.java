@@ -1072,20 +1072,19 @@ public class OrderUtil {
 						logger.info("cashCouponDiscount-------"+cashCouponDiscount);
 						//修改后的价格10%
 						BigDecimal ratioOrderPrice =event.getOrderPrice().multiply(ratio);
-						if(ratioOrderPrice.compareTo(event.getOrderPrice().subtract(cashCouponDiscount)) < 0){
+						if(ratioOrderPrice.compareTo(event.getOrderPrice().subtract(cashCouponDiscount))<0){
 							int returnScore=0;//返还积分
 							
 							//是否使用红包
 							if(cashCouponDiscount.compareTo(new BigDecimal(0))>0){
 								//当订单结算金额由于用户使用其他优惠后被抵扣到结算金额小于原订单价格的10%后，该订单的可用积分上限即为剩余结算金额换算出的积分数
-								
 								int score=Integer.parseInt(jsonObject.get("score").toString());
 								//减去红包
 								BigDecimal subtractCoupon=event.getOrderPrice().subtract(cashCouponDiscount); 
 								if(subtractCoupon.compareTo(ratioOrderPrice)<0){
-									returnScore=score-subtractCoupon.intValue() > 0 ? (score-subtractCoupon.intValue()):0;
+									returnScore=(score-subtractCoupon.intValue()) > 0 ? (score-subtractCoupon.intValue()):0;
 								}else{
-									returnScore=score-ratioOrderPrice.intValue() > 0 ? (score-ratioOrderPrice.intValue()):0;
+									returnScore=(score-ratioOrderPrice.intValue()) > 0 ? (score-ratioOrderPrice.intValue()):0;
 								}
 							}else{
 								//积分关联到订单，用户若使用积分抵扣，则按照订单不使用任何优惠形式时的结算金额的10%作为该订单的可用积分上限
