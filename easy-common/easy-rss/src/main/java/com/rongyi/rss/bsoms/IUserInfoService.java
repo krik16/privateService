@@ -3,6 +3,7 @@ package com.rongyi.rss.bsoms;
 import java.util.Map;
 
 import com.rongyi.core.common.PagingVO;
+import com.rongyi.easy.bsoms.entity.UserInfo;
 import com.rongyi.easy.bsoms.vo.BusinessAccountVO;
 
 /**
@@ -34,4 +35,6 @@ public interface IUserInfoService {
 	 * @param paraMap
 	 */
 	void updateAccountStatus(int id, int isSuspended, String stopReason);
+	
+	UserInfo getUserInfoById(Integer id);
 }
