@@ -636,7 +636,11 @@ salience 100
 		
 		// 重新计算订单总价
 		$order.setTotalAmount(orderUtil.calculateTotalPrice($order, orderDetailList));
-		
+		//
+		logger.debug("计算积分支付占总金额比例和归还积分------start--------");
+		//归还积分开始
+		orderUtil.returnScore($order,orderDetailList,$event);
+		logger.debug("修改入库-----start-------");
 		// 修改入库
 		orderFormService.updateTotalPrice($order);
 		
