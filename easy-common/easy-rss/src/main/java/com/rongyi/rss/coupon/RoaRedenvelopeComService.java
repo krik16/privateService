@@ -59,7 +59,7 @@ public interface RoaRedenvelopeComService {
      * @param checkDesc   审核说明
      * @return
      */
-    boolean checkCoupon(int id, String checkStatus, String checkDesc) throws Exception;
+    boolean checkCoupon(int id, int checkStatus, String checkDesc) throws Exception;
 
     /**
      * 配置现金券
