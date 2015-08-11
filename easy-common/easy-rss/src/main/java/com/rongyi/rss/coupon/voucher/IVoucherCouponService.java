@@ -18,12 +18,20 @@ import com.rongyi.easy.coupon.vo.operation.VoucherCouponVO;
 public interface IVoucherCouponService {
 
 	/**
-	 * @Description:添加、更新代金券
+	 * @Description:创建代金券
 	 * @author:lqy
-	 * @param coupon
+	 * @param coupon 代金券entity
 	 * @return 成功：true 失败：false
 	 */
-	Boolean saveOrUpdate(Coupon coupon);
+	boolean create(Coupon coupon) throws Exception;
+	
+	/**
+	 * @Description:修改代金券
+	 * @author:lqy
+	 * @param coupon 代金券entity
+	 * @return 成功：true 失败：false
+	 */
+	boolean update(Coupon coupon) throws Exception;
 
 	/**
 	 * @Description:根据id删除代金券
@@ -31,7 +39,7 @@ public interface IVoucherCouponService {
 	 * @param id 代金券id
 	 * @return 成功：true 失败：false
 	 */
-	Boolean deleteById(Integer id);
+	boolean remove(Integer id) throws Exception;
 
 	/**
 	 * @Description:多条件分页查询代金券
@@ -39,7 +47,7 @@ public interface IVoucherCouponService {
 	 * @param param 参数对象
 	 * @return VoucherCouponVO集合
 	 */
-	PagingVO<VoucherCouponVO> findAllByPage(VoucherCouponParam param);
+	PagingVO<VoucherCouponVO> findAllByPage(VoucherCouponParam param) throws Exception;
 
 	/**
 	 * @Description:统计卡券各个状态下数量

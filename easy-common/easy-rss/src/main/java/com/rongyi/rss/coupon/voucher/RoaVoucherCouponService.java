@@ -19,12 +19,21 @@ public interface RoaVoucherCouponService {
 
 
 	/**
-	 * @Description:添加和修改代金券
+	 * @Description:创建代金券
 	 * @author:lqy
 	 * @param coupon 代金券entity
 	 * @return 成功：true 失败：false
 	 */
-	boolean saveOrUpdate(Coupon coupon) throws Exception;
+	boolean create(Coupon coupon) throws Exception;
+	
+	/**
+	 * @Description:修改代金券
+	 * @author:lqy
+	 * @param coupon 代金券entity
+	 * @return 成功：true 失败：false
+	 */
+	boolean update(Coupon coupon) throws Exception;
+	
 
 	/**
 	 * @Description:根据id删除代金券
@@ -40,8 +49,9 @@ public interface RoaVoucherCouponService {
 	 * @author:lqy
 	 * @param param 参数对象
 	 * @return VoucherCouponVO集合
+	 * @throws Exception 
 	 */
-	PagingVO<VoucherCouponVO> findAllByPage(VoucherCouponParam param);
+	PagingVO<VoucherCouponVO> findAllByPage(VoucherCouponParam param) throws Exception;
 
 	/**
 	 * @Description:统计卡券各个状态下数量
