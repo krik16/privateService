@@ -1044,7 +1044,7 @@ public class OrderUtil {
 		 * @return
 		 * @throws Exception
 		 */
-	    public void returnScore(OrderFormEntity order, OrderDetailFormEntity[] orderDetailList, OrderPriceResetEvent event){
+	    public void returnScore(OrderFormEntity order, OrderDetailFormEntity[] orderDetailList){
 			logger.info("rule_expressionreturnScore---start----");
 			JSONObject jsonObject = new JSONObject();
 			if (!StringUtils.isEmpty(order.getDiscountInfo())) {
@@ -1060,10 +1060,12 @@ public class OrderUtil {
 						BigDecimal ratio = new BigDecimal(scoreMap.get("limit").toString());// 判断积分支付是否大于订单价格的10%参数
 						BigDecimal moneyExchangeScore = new BigDecimal(scoreMap.get("moneyExchangeScore").toString()); // 积分兑换金额参数
 						BigDecimal cashCouponDiscount = new BigDecimal(0); // 优惠券总金额
+						BigDecimal orderDetailRealAmount = new BigDecimal(0); //子订单实际总价格
 						// 计算红包，原结算金额
 						for (Object entity : orderDetailList) {
 							OrderDetailFormEntity orderDetail = (OrderDetailFormEntity) entity;
 							String couponId = orderDetail.getCouponId(); // 优惠code
+							orderDetailRealAmount=orderDetailRealAmount.add(orderDetail.getRealAmount());
 							if (!(couponId == null || couponId.isEmpty())) {
 								Double couponAmount = couponStatusService.getDiscountByCode(couponId); // 优惠抵扣金额
 								if (couponAmount != null) {
@@ -1072,11 +1074,16 @@ public class OrderUtil {
 							}
 						}
 						logger.info("cashCouponDiscount-------" + cashCouponDiscount);
+						logger.info("orderDetailRealAmount-------" + orderDetailRealAmount);
+						logger.info("order.getDisconntFee-------" + order.getDisconntFee());
+						BigDecimal orderPrice=orderDetailRealAmount.subtract(order.getDisconntFee());
+						logger.info("orderPrice-------" + orderPrice);
 						BigDecimal returnScore = new BigDecimal(0);// 返还的积分
 						BigDecimal score = new BigDecimal(jsonObject.get("score").toString());// 修改价格之前使用的积分
-						BigDecimal ratioOrderPrice = event.getOrderPrice().multiply(ratio);// 修改后的价格10%
-						BigDecimal subtractCoupon = event.getOrderPrice().subtract(cashCouponDiscount);// 修红改之后的价格减去包
-						if (event.getOrderPrice().compareTo(new BigDecimal(0)) > 0) {
+						BigDecimal ratioOrderPrice = orderPrice.multiply(ratio);// 修改后的价格10%
+						
+						BigDecimal subtractCoupon = orderPrice.subtract(cashCouponDiscount);// 修红改之后的价格减去包
+						if (orderPrice.compareTo(new BigDecimal(0)) > 0) {
 							//修改后的价格10%比较减去红包之后的价格
 							if (ratioOrderPrice.compareTo(subtractCoupon) > 0) {
 								if(score.compareTo(ratioOrderPrice)>0){
