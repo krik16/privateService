@@ -132,7 +132,6 @@ public class HttpsRequest implements IServiceRequest{
 
 //        Util.log("API，POST过去的数据是：");
 //        Util.log(postDataXML);
-
         //得指明使用UTF-8编码，否则到API服务器XML的中文不能被成功识别
         StringEntity postEntity = new StringEntity(postDataXML, "UTF-8");
         httpPost.addHeader("Content-Type", "text/xml");

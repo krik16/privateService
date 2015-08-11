@@ -119,6 +119,7 @@ li ul li span.fancytree-title{
 						<sec:authorize ifAnyGranted="TMS_F_EXM_VIEW" ><li><a href="${ctx}/bonus/search" target="mainFrame">考核奖金</a></li></sec:authorize>
 						<sec:authorize ifAnyGranted="TMS_F_AB_VIEW" ><li><a href="${ctx}/ab/search" target="mainFrame">异常账务</a></li></sec:authorize>
 						<sec:authorize ifAnyGranted="TMS_F_PAY_VIEW" ><li><a href="${ctx}/pay/search?currpage=1" target="mainFrame">付款</a></li></sec:authorize>
+					<%-- 	<sec:authorize ifAnyGranted="TMS_F_PAY_VIEW" ><li><a href="${ctx}/tradeDetail/queryOrder?currpage=1" target="mainFrame">订单查询</a></li></sec:authorize> --%>
 					</ul>
 				</li>
 				</sec:authorize>

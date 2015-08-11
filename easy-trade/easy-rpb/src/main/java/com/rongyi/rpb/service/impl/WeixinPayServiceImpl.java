@@ -32,6 +32,8 @@ import com.rongyi.rpb.common.util.orderSign.weixinSign.client.ClientResponseHand
 import com.rongyi.rpb.common.util.orderSign.weixinSign.client.TenpayHttpClient;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.scan.ReverseReqData;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.scan.ReverseService;
+import com.rongyi.rpb.common.util.orderSign.weixinSign.scan.ScanPayQueryReqData;
+import com.rongyi.rpb.common.util.orderSign.weixinSign.scan.ScanPayQueryService;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.util.MD5Util;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.util.Sha1Util;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.util.WXUtil;
@@ -51,7 +53,6 @@ import com.rongyi.rss.rpb.OrderNoGenService;
  **/
 @Service
 public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPayService {
-	// private String packageString; // 微信sign所需package数据
 
 	@Autowired
 	PCWebPageAlipayService pcWebPageAlipayService;
@@ -198,11 +199,15 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 			paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
 			LOGGER.info("微信退款失败,生成支付款记录，但未生成付款成功事件！");
 		}
-//		PaymentEntity oldPaymentEntity = paymentService.validateOrderNumExist(paymentEntityVO.getOrderNum(), hisPayEntity.getPayChannel(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
-//		if (oldPaymentEntity == null)
-			paymentService.insertByOrderDetailNum(paymentEntity, paymentEntityVO.getOrderDetailNumArray());
-//		else
-//			LOGGER.info("订单号-->" + paymentEntityVO.getOrderNum() + "微信退款记录已存在，未重新生成新的退款记录。");
+		// PaymentEntity oldPaymentEntity =
+		// paymentService.validateOrderNumExist(paymentEntityVO.getOrderNum(),
+		// hisPayEntity.getPayChannel(),
+		// Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
+		// if (oldPaymentEntity == null)
+		paymentService.insertByOrderDetailNum(paymentEntity, paymentEntityVO.getOrderDetailNumArray());
+		// else
+		// LOGGER.info("订单号-->" + paymentEntityVO.getOrderNum() +
+		// "微信退款记录已存在，未重新生成新的退款记录。");
 		return result;
 	}
 
@@ -237,7 +242,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 		classesPath += "cret";
 		httpClient.setCaInfo(new File(classesPath + "/cacert.pem"));
 		// 设置个人(商户)证书
-		LOGGER.info("证书目录="+ConstantUtil.CRET_DIRECTORY);
+		LOGGER.info("证书目录=" + ConstantUtil.CRET_DIRECTORY);
 		httpClient.setCertInfo(new File(ConstantUtil.CRET_DIRECTORY), ConstantUtil.PayWeiXin.PARTNER);
 		// 设置发送类型POST
 		httpClient.setMethod(ConstantUtil.PayWeiXin.METHOD_POST);
@@ -351,6 +356,26 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 			e.printStackTrace();
 			throw new RuntimeException("微信撤销订单失败，付款单号-->" + payNo);
 		}
+	}
+
+	@Override
+	public String queryOrder(String tradeNo, String payNo) {
+		try {
+			ScanPayQueryService scanPayQueryService = new ScanPayQueryService();
+			ScanPayQueryReqData scanPayQueryReqData = new ScanPayQueryReqData(tradeNo, payNo);
+			String response = scanPayQueryService.request(scanPayQueryReqData);
+			return response;
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

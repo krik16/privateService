@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
+import com.rongyi.easy.rpb.vo.QueryOrderParamVO;
 import com.rongyi.easy.tms.vo.TradeVO;
 import com.rongyi.rss.rpb.IRpbService;
 import com.rongyi.tms.constants.Constant;
@@ -161,6 +162,33 @@ public class TradeDetailController extends BaseController {
 	public void exportExcel(HttpServletRequest request, HttpServletResponse response) {
 		LOGGER.info("---导出交易明细报表---");
 		exportTradeDetailExcel.exportExcel(request, response);
+	}
+
+	/**
+	 * @Description: 订单查询页面
+	 * @return
+	 * @Author: 柯军
+	 * @datetime:2015年8月7日下午3:15:24
+	 **/
+	@RequestMapping(value = "/queryOrder")
+	public String queryOrder() {
+		return "/tradeDetail/queryOrder";
+	}
+
+	/**
+	 * @Description: 订单数据查询
+	 * @param request
+	 * @return
+	 * @Author: 柯军
+	 * @datetime:2015年8月7日下午2:43:59
+	 **/
+	@RequestMapping(value = "/orderInfo")
+	@ResponseBody
+	public QueryOrderParamVO orderInfo(HttpServletRequest request) {
+		@SuppressWarnings("unchecked")
+		Map<String, Object> map = JsonUtil.getMapFromJson(request.getParameter("paramsJson"));
+		QueryOrderParamVO queryOrderParamVO = rpbService.queryOrder(map);
+		return queryOrderParamVO;
 	}
 
 	/**

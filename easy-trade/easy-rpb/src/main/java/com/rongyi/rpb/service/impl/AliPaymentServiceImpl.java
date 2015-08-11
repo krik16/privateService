@@ -131,6 +131,7 @@ public class AliPaymentServiceImpl extends BaseServiceImpl implements AliPayment
 	 **/
 	@SuppressWarnings("unchecked")
 	private QueryOrderParamVO xmlStringToQueryOrderParamVO(String xmlString) {
+		LOGGER.info("支付宝订单查询结果数据："+xmlString);
 		QueryOrderParamVO queryOrderParamVO = new QueryOrderParamVO();
 		try {
 			Map<String, Object> xmlMap = XMLUtil.doXMLParse(xmlString);
@@ -141,10 +142,10 @@ public class AliPaymentServiceImpl extends BaseServiceImpl implements AliPayment
 				queryOrderParamVO.setIs_success("T");
 			} else {
 				queryOrderParamVO.setIs_success("F");
-				if (ConstantEnum.ALI_QUERY_ORDER_ERROR_CODE.getCodeStr().equals(xmlMap.get("error")))
+//				if (ConstantEnum.ALI_QUERY_ORDER_ERROR_CODE.getCodeStr().equals(xmlMap.get("error")))
 					queryOrderParamVO.setError(ConstantEnum.ALI_QUERY_ORDER_ERROR_CODE.getValueStr());
-				else
-					queryOrderParamVO.setError((String) xmlMap.get("error"));
+//				else
+//					queryOrderParamVO.setError((String) xmlMap.get("error"));
 			}
 		} catch (JDOMException e) {
 			e.printStackTrace();

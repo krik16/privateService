@@ -73,6 +73,23 @@ public class TenpayHttpClient {
 
 		this.inputStream = null;
 	}
+	
+	public TenpayHttpClient(String charset) {
+		this.caFile = null;
+		this.certFile = null;
+		this.certPasswd = "";
+
+		this.reqContent = "";
+		this.resContent = "";
+		this.method = "POST";
+		this.errInfo = "";
+		this.timeOut = 30;
+
+		this.responseCode = 0;
+		this.charset = charset;
+
+		this.inputStream = null;
+	}
 
 	public void setCertInfo(File certFile, String certPasswd) {
 		this.certFile = certFile;

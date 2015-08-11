@@ -259,9 +259,7 @@ public class WebPageAlipayController extends BaseController {
 			String transport_fee) {
 		if (!"0".equals(trade_state))
 			return "appwebpage/notify";
-		System.err.println("openId1="+request.getParameter("openId"));
 		ResponseHandler resHandler = new ResponseHandler(request, response);
-		System.err.println("openId2="+resHandler.getParameter("openId"));
 		resHandler.setKey(ConstantUtil.PayWeiXin.PARTNER_KEY);
 		if (!resHandler.isTenpaySign()) {
 			LOGGER.info("微信支付异步通知-->微信验证签名不通过，返回消息不是财付通发出的合法消息!");
@@ -280,7 +278,11 @@ public class WebPageAlipayController extends BaseController {
 		} catch (Exception e) {
 			LOGGER.error(e);
 		}
-
+		System.err.println("allParameters="+resHandler.getAllParameters().toString());
+		System.err.println("openId1="+request.getParameter("openId"));
+		System.err.println("open_id1="+request.getParameter("open_id"));
+		System.err.println("openId2="+resHandler.getParameter("openId"));
+		System.err.println("open_id2="+resHandler.getParameter("open_id"));
 		return "appwebpage/notify";
 	}
 
