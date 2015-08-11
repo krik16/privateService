@@ -1,5 +1,6 @@
 package com.rongyi.rpb.web.controller.v5;
 
+import java.io.InputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -10,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -143,7 +147,7 @@ public class WebPageAlipayController extends BaseController {
 					return;
 				if (!validateTradeStatus(map.get("trade_status").toString()))
 					return;
-				LOGGER.info("支付宝手机网页支付异步通知开始,消息内容="+notify_data+"交易流水号-->" + map.get("trade_no"));
+				LOGGER.info("支付宝手机网页支付异步通知开始,消息内容=" + notify_data + "交易流水号-->" + map.get("trade_no"));
 				LOGGER.info("支付宝通知消息=" + notify_data);
 				PaymentLogInfo tradeNoResult = paymentLogInfoService.selectByPayTradeNo(map.get("trade_no").toString());
 				if (tradeNoResult != null) {
@@ -210,7 +214,7 @@ public class WebPageAlipayController extends BaseController {
 			return "appwebpage/notify";
 		if (!validateTradeStatus(trade_status))
 			return "appwebpage/notify";
-		//支付宝退款时也调用了此通知接口，需修改，验证交易流水号是否存在.
+		// 支付宝退款时也调用了此通知接口，需修改，验证交易流水号是否存在.
 		PaymentLogInfo tradeNoResult = paymentLogInfoService.selectByPayTradeNo(trade_no);
 		if (tradeNoResult != null) {
 			LOGGER.info("交易流水号已存在，此笔交易通知不是支付成功通知，是退款成功订单状态变更通知，交易流水号为-->" + trade_no);
@@ -260,6 +264,7 @@ public class WebPageAlipayController extends BaseController {
 		if (!"0".equals(trade_state))
 			return "appwebpage/notify";
 		ResponseHandler resHandler = new ResponseHandler(request, response);
+		parseXml(request);
 		resHandler.setKey(ConstantUtil.PayWeiXin.PARTNER_KEY);
 		if (!resHandler.isTenpaySign()) {
 			LOGGER.info("微信支付异步通知-->微信验证签名不通过，返回消息不是财付通发出的合法消息!");
@@ -269,7 +274,6 @@ public class WebPageAlipayController extends BaseController {
 			PaymentLogInfo result = paymentLogInfoService.selectByOutTradeNo(out_trade_no);
 			if (result != null)
 				return "appwebpage/notify";
-			;
 			LOGGER.info("微信支付异步通知开始，交易流水号-->" + transaction_id);
 			PaymentLogInfo paymentLogInfo = getPaymentLogInfo(transaction_id, out_trade_no, notify_id, null, DateUtil.getCurrDateTime(), sign, sign_type, 0, 0, total_fee, null, null,
 					Constants.REPLAY_FLAG.REPLAY_FLAG3);
@@ -278,12 +282,36 @@ public class WebPageAlipayController extends BaseController {
 		} catch (Exception e) {
 			LOGGER.error(e);
 		}
-		System.err.println("allParameters="+resHandler.getAllParameters().toString());
-		System.err.println("openId1="+request.getParameter("openId"));
-		System.err.println("open_id1="+request.getParameter("open_id"));
-		System.err.println("openId2="+resHandler.getParameter("openId"));
-		System.err.println("open_id2="+resHandler.getParameter("open_id"));
 		return "appwebpage/notify";
+	}
+
+	@SuppressWarnings("unchecked")
+	private static Map<String, String> parseXml(HttpServletRequest request) {
+		Map<String, String> map = new HashMap<String, String>();
+
+		try {
+			InputStream inputStream = request.getInputStream();
+			// 读取输入流
+			SAXReader reader = new SAXReader();
+			Document document = reader.read(inputStream);
+			// 得到xml根元素
+			Element root = document.getRootElement();
+			// 得到根元素的所有子节点
+			List<Element> elementList = root.elements();
+
+			// 遍历所有子节点
+			for (Element e : elementList)
+				map.put(e.getName(), e.getText());
+			// 释放资源
+			inputStream.close();
+			inputStream = null;
+			System.err.println(map.toString());
+
+		} catch (Exception e) {
+			LOGGER.error("解析微信返回结果xml失败");
+			e.printStackTrace();
+		}
+		return map;
 	}
 
 	/**
