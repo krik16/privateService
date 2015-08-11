@@ -7,7 +7,7 @@ import java.util.Date;
 public class VoucherCouponParam implements Serializable{
 
 //	private static final long serialVersionUID = 1L;
-
+	
 	private Integer id;
 
 	/**
@@ -79,9 +79,9 @@ public class VoucherCouponParam implements Serializable{
      */
     private Integer couponType;
 
-	private Integer currentPage;
+	private Integer currentPage = 1;
 
-	private Integer pageSize;
+	private Integer pageSize = 10;
 
 	private Integer offset;
 
@@ -227,6 +227,7 @@ public class VoucherCouponParam implements Serializable{
 	}
 
 	public Integer getOffset() {
+		offset = (this.currentPage -1) * this.pageSize;
 		return offset;
 	}
 

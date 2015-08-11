@@ -1,6 +1,9 @@
 package com.rongyi.easy.coupon.vo.operation;
 
 import java.io.Serializable;
+import java.util.List;
+
+import com.rongyi.easy.coupon.entity.mysql.CouponRejectRecord;
 
 public class VoucherCouponVO implements Serializable {
 
@@ -71,6 +74,11 @@ public class VoucherCouponVO implements Serializable {
      * 一级分类name
      */
     private String lv2Name;
+    
+    /**
+     * 拒绝原因
+     */
+    private List<CouponRejectRecord> rejectRecordList;
 
 	public Integer getId() {
 		return id;
@@ -176,6 +184,14 @@ public class VoucherCouponVO implements Serializable {
 		this.lv2Name = lv2Name;
 	}
 
+	public List<CouponRejectRecord> getRejectRecordList() {
+		return rejectRecordList;
+	}
+
+	public void setRejectRecordList(List<CouponRejectRecord> rejectRecordList) {
+		this.rejectRecordList = rejectRecordList;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -184,7 +200,8 @@ public class VoucherCouponVO implements Serializable {
 				.append(stockCount).append(", origPrice=").append(origPrice).append(", currPrice=").append(currPrice)
 				.append(", relatedType=").append(relatedType).append(", status=").append(status)
 				.append(", publishStatus=").append(publishStatus).append(", isThird=").append(isThird)
-				.append(", lv1Name=").append(lv1Name).append(", lv2Name=").append(lv2Name).append("]");
+				.append(", lv1Name=").append(lv1Name).append(", lv2Name=").append(lv2Name).append(", rejectRecordList=")
+				.append(rejectRecordList).append("]");
 		return builder.toString();
 	}
 

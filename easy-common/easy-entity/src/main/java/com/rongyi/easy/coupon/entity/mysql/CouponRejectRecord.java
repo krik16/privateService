@@ -65,4 +65,13 @@ public class CouponRejectRecord {
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
     }
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("CouponRejectRecord [id=").append(id).append(", couponId=").append(couponId).append(", reason=")
+				.append(reason).append(", type=").append(type).append(", createAt=").append(createAt).append("]");
+		return builder.toString();
+	}
+    
 }
