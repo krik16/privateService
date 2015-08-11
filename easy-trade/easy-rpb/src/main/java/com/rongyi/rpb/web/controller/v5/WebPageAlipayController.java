@@ -259,7 +259,6 @@ public class WebPageAlipayController extends BaseController {
 			String transport_fee) {
 		if (!"0".equals(trade_state))
 			return "appwebpage/notify";
-		;
 		ResponseHandler resHandler = new ResponseHandler(request, response);
 		resHandler.setKey(ConstantUtil.PayWeiXin.PARTNER_KEY);
 		if (!resHandler.isTenpaySign()) {
@@ -279,7 +278,11 @@ public class WebPageAlipayController extends BaseController {
 		} catch (Exception e) {
 			LOGGER.error(e);
 		}
-
+		System.err.println("allParameters="+resHandler.getAllParameters().toString());
+		System.err.println("openId1="+request.getParameter("openId"));
+		System.err.println("open_id1="+request.getParameter("open_id"));
+		System.err.println("openId2="+resHandler.getParameter("openId"));
+		System.err.println("open_id2="+resHandler.getParameter("open_id"));
 		return "appwebpage/notify";
 	}
 
