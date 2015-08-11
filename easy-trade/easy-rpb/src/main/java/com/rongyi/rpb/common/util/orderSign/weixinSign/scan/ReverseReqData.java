@@ -101,7 +101,14 @@ public class ReverseReqData {
         this.sign = sign;
     }
 
-    public Map<String,Object> toMap(){
+    
+    
+    @Override
+	public String toString() {
+		return "ReverseReqData [appid=" + appid + ", mch_id=" + mch_id + ", transaction_id=" + transaction_id + ", out_trade_no=" + out_trade_no + ", nonce_str=" + nonce_str + ", sign=" + sign + "]";
+	}
+
+	public Map<String,Object> toMap(){
         Map<String,Object> map = new HashMap<String, Object>();
         Field[] fields = this.getClass().getDeclaredFields();
         for (Field field : fields) {

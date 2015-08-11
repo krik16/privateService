@@ -35,16 +35,15 @@ public interface WeixinPayService {
 	 * @return
 	 */
 	public abstract boolean validateIsWeixinPay(MessageEvent event);
-	
-	
-	/**	
-	 * @Description: 获取微信退款发送消息 
+
+	/**
+	 * @Description: 获取微信退款发送消息
 	 * @param event
-	 * @return	
-	 * @Author:  柯军
+	 * @return
+	 * @Author: 柯军
 	 * @datetime:2015年7月9日下午4:42:39
 	 **/
-	public abstract Map<String,Object> getRefundMessageMap(MessageEvent event);
+	public abstract Map<String, Object> getRefundMessageMap(MessageEvent event);
 
 	/**
 	 * mq接收微信退款消息
@@ -59,7 +58,8 @@ public interface WeixinPayService {
 	 * 
 	 * @param payNo历史付款单号
 	 * @param total_fee历史付款单总额
-	 * @param refund_fee退款总额 (不大于付款总额)
+	 * @param refund_fee退款总额
+	 *            (不大于付款总额)
 	 * @param newPayNo付款单号
 	 */
 	public abstract boolean weixinRefund(String payNo, double refundFee, double totalFee, String newPayNo);
@@ -69,10 +69,20 @@ public interface WeixinPayService {
 	public abstract String getResultMessage(String message);
 
 	public abstract String getPennyByMoney(double totalFee);
-	
+
 	/**
 	 * 微信关闭订单
 	 */
 	public abstract void closeOrder(String payNo);
+
+	/**
+	 * @Description: 查询订单
+	 * @param tradeNo交易流水号
+	 * @param payNo付款单号
+	 * @return
+	 * @Author: 柯军
+	 * @datetime:2015年8月10日下午2:28:05
+	 **/
+	public abstract String queryOrder(String tradeNo, String payNo);
 
 }
