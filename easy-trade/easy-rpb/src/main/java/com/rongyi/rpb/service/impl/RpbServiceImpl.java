@@ -22,6 +22,7 @@ import com.rongyi.easy.rpb.domain.PaymentItemEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.PaySuccessResponse;
 import com.rongyi.easy.rpb.vo.QueryOrderParamVO;
+import com.rongyi.easy.rpb.vo.WeixinQueryOrderParamVO;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.mq.Sender;
 import com.rongyi.rpb.nsynchronous.OrderFormNsyn;
@@ -132,8 +133,8 @@ public class RpbServiceImpl implements IRpbService {
 		PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS0);
 		if (paymentEntity == null)
 			return result;
-		LOGGER.info("同步支付通知,订单号-->" + orderNo);
-		if (paymentEntity.getStatus() != Constants.PAYMENT_STATUS.STAUS2) {
+		if (queryOrderPayStatus(null, paymentEntity.getPayNo(), paymentEntity.getPayChannel())) {
+			LOGGER.info("更新付款状态，发送同步支付通知,订单号-->" + orderNo);
 			String orderNums = paymentService.getOrderNumStrsByPayNo(paymentEntity.getPayNo());
 			List<PaySuccessResponse> responseList = paymentLogInfoService.paySuccessToMessage(paymentEntity.getPayNo(), null, orderNums, paymentEntity.getOrderType(), paymentEntity.getPayChannel()
 					.toString());
@@ -141,9 +142,32 @@ public class RpbServiceImpl implements IRpbService {
 				paymentService.updateListStatusBypayNo(paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);// 修改付款单状态
 				result = true;
 			}
-			LOGGER.info("是否发送同步通知-->" + (result ? "是，已成功发送" : "否，订单系统返回更新失败"));
 		}
 		return result;
+	}
+
+	/**
+	 * @Description: 查询订单在第三方交易系统中状态
+	 * @param paymentEntity
+	 * @return
+	 * @Author: 柯军
+	 * @datetime:2015年8月11日下午4:17:19
+	 **/
+	@Override
+	public boolean queryOrderPayStatus(String tradeNo, String payNo, Integer payChannel) {
+		if (Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0 == payChannel) {
+			QueryOrderParamVO queryOrderParamVO = aliPaymentService.queryOrder(tradeNo, payNo);
+			if (queryOrderParamVO != null && ("TRADE_SUCCESS".equals(queryOrderParamVO.getTrade_status()) || "TRADE_FINISHED".equals(queryOrderParamVO.getTrade_status()))) {
+				return true;
+			}
+		} else if (Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1 == payChannel) {
+			WeixinQueryOrderParamVO weixinQueryOrderParamVO = weixinPayService.queryOrder(tradeNo, payNo);
+			if (weixinQueryOrderParamVO != null && "SUCCESS".equals(weixinQueryOrderParamVO.getResult_code()) && "SUCCESS".equals(weixinQueryOrderParamVO.getTrade_state())) {
+				return true;
+			}
+		}
+		LOGGER.info("未找到对应付款方式-->payChannel=" + payChannel + ",tradeNo=" + tradeNo + ",payNo=" + payNo);
+		return false;
 	}
 
 	/**
