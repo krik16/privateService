@@ -259,8 +259,9 @@ public class WebPageAlipayController extends BaseController {
 			String transport_fee) {
 		if (!"0".equals(trade_state))
 			return "appwebpage/notify";
-		;
+		System.err.println("openId1="+request.getParameter("openId"));
 		ResponseHandler resHandler = new ResponseHandler(request, response);
+		System.err.println("openId2="+resHandler.getParameter("openId"));
 		resHandler.setKey(ConstantUtil.PayWeiXin.PARTNER_KEY);
 		if (!resHandler.isTenpaySign()) {
 			LOGGER.info("微信支付异步通知-->微信验证签名不通过，返回消息不是财付通发出的合法消息!");
