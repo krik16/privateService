@@ -1,14 +1,14 @@
 package com.rongyi.easy.coupon.entity;
 
-import org.apache.commons.lang.time.DateUtils;
-import org.mongodb.morphia.annotations.*;
+import com.rongyi.core.constant.CouponConst;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.time.DateUtils;
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -142,7 +142,7 @@ public class Coupon implements Serializable {
     @Property("sort_index")
     private Integer sortIndex = Integer.valueOf(0);//优惠券排序字段，目前作用是置顶
 
-    private List<Integer> afterSaleService = Arrays.asList(1,1,1);//[1,1,1] 1为支持，0为不支持。第一位：随时退、第二位：过期退 第三位： 免预约
+    private List<Integer> afterSaleService = CouponConst.AFTER_SALE_SERVICE;//[1,1,1] 1为支持，0为不支持。第一位：随时退、第二位：过期退 第三位： 免预约
 
     @Version
     private Long version; // 乐观锁
