@@ -136,14 +136,13 @@ public interface MMCouponOrderService {
 
 
     /**
+     * 优惠券订单列表（全部、待付款）
      * @param paramsMap
      * @param currentPage
      * @param pageSize
-     * @return Map<String,Object>    返回类型
-     * @Title: getCouponOrdersByType
-     * @Description: TODO(根据卡券类型查询我的订单列表)
+     * @return
      */
-    Map<String, Object> getCouponOrdersByType(Map<String, Object> paramsMap,
+    Map<String, Object> findAllOrdersByType(Map<String, Object> paramsMap,
                                               Integer currentPage, Integer pageSize);
 
     /**
@@ -157,14 +156,13 @@ public interface MMCouponOrderService {
 
 
     /**
+     * 优惠券列表（未消费、已退款、退款中）
      * @param paramsMap
      * @param currentPage
      * @param pageSize
-     * @return Map<String,Object>    返回类型
-     * @Title: getCouponOrderByStatus
-     * @Description: TODO(查询未消费或退款订单列表)
+     * @return
      */
-    Map<String, Object> getCouponOrderByStatus(Map<String, Object> paramsMap,
+    Map<String, Object> findOrdersByStatus(Map<String, Object> paramsMap,
                                                Integer currentPage, Integer pageSize);
     
     /**
