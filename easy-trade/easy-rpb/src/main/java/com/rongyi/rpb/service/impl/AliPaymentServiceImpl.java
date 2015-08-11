@@ -107,8 +107,8 @@ public class AliPaymentServiceImpl extends BaseServiceImpl implements AliPayment
 	 * @datetime:2015年8月5日上午9:34:52
 	 **/
 	@Override
-	public QueryOrderParamVO queryOrder(String payNo, String tradeNo) {
-		String url = CreateUrl(payNo, tradeNo);
+	public QueryOrderParamVO queryOrder(String tradeNo,String payNo) {
+		String url = CreateUrl(tradeNo,payNo);
 		HttpClient hc = new HttpClient(url, 30000, 30000);
 		int status = 200;
 		try {
@@ -163,7 +163,7 @@ public class AliPaymentServiceImpl extends BaseServiceImpl implements AliPayment
 	 * @Author: 柯军
 	 * @datetime:2015年8月7日上午11:20:00
 	 **/
-	public String CreateUrl(String outTradeNo, String tradeNo) {
+	public String CreateUrl(String tradeNo,String outTradeNo) {
 
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("service", ZhiFuBaoWebPage.QUERY_SERVICE);

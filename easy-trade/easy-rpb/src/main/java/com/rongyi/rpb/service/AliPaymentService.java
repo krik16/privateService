@@ -33,12 +33,13 @@ public interface AliPaymentService {
 	
 	/**	
 	 * @Description: 查询支付宝订单支付状态 
+	 * @param tradeNo
 	 * @param payNo
 	 * @return	
 	 * @Author:  柯军
 	 * @datetime:2015年8月5日上午9:42:53
 	 **/
-	public QueryOrderParamVO queryOrder(String payNo,String tradeNo);
+	public QueryOrderParamVO queryOrder(String tradeNo,String payNo);
 	
 	
 }

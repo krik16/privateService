@@ -18,12 +18,14 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
+import com.rongyi.core.bean.ObjectConvert;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
+import com.rongyi.easy.rpb.vo.WeixinQueryOrderParamVO;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.AccessTokenRequestHandler;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.GetPackage;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.PrepayIdRequestHandler;
@@ -37,6 +39,7 @@ import com.rongyi.rpb.common.util.orderSign.weixinSign.scan.ScanPayQueryService;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.util.MD5Util;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.util.Sha1Util;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.util.WXUtil;
+import com.rongyi.rpb.common.util.orderSign.weixinSign.util.XMLUtil;
 import com.rongyi.rpb.constants.ConstantUtil;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.service.PCWebPageAlipayService;
@@ -358,21 +361,22 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public String queryOrder(String tradeNo, String payNo) {
+	public WeixinQueryOrderParamVO queryOrder(String tradeNo, String payNo) {
 		try {
 			ScanPayQueryService scanPayQueryService = new ScanPayQueryService();
 			ScanPayQueryReqData scanPayQueryReqData = new ScanPayQueryReqData(tradeNo, payNo);
-			String response = scanPayQueryService.request(scanPayQueryReqData);
-			return response;
+			String xmlString = scanPayQueryService.request(scanPayQueryReqData);
+			LOGGER.info("微信订单查询返回结果："+xmlString);
+			Map<String, Object> xmlMap = XMLUtil.doXMLParse(xmlString);
+			WeixinQueryOrderParamVO weixinQueryOrderParamVO = (WeixinQueryOrderParamVO) ObjectConvert.convertFromMap(WeixinQueryOrderParamVO.class, xmlMap);
+			return weixinQueryOrderParamVO;
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

@@ -7,6 +7,7 @@ import org.json.JSONException;
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
+import com.rongyi.easy.rpb.vo.WeixinQueryOrderParamVO;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.client.ClientResponseHandler;
 
 /**
@@ -83,6 +84,6 @@ public interface WeixinPayService {
 	 * @Author: 柯军
 	 * @datetime:2015年8月10日下午2:28:05
 	 **/
-	public abstract String queryOrder(String tradeNo, String payNo);
+	public abstract WeixinQueryOrderParamVO queryOrder(String tradeNo, String payNo);
 
 }
