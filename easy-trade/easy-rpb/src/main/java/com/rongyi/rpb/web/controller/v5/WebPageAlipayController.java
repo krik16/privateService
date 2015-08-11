@@ -148,7 +148,6 @@ public class WebPageAlipayController extends BaseController {
 				if (!validateTradeStatus(map.get("trade_status").toString()))
 					return;
 				LOGGER.info("支付宝手机网页支付异步通知开始,消息内容=" + notify_data + "交易流水号-->" + map.get("trade_no"));
-				LOGGER.info("支付宝通知消息=" + notify_data);
 				PaymentLogInfo tradeNoResult = paymentLogInfoService.selectByPayTradeNo(map.get("trade_no").toString());
 				if (tradeNoResult != null) {
 					LOGGER.info("交易流水号已存在，此笔交易通知不是支付成功通知，是退款成功，订单状态变更通知，交易流水号为-->" + map.get("trade_no").toString());
@@ -264,7 +263,7 @@ public class WebPageAlipayController extends BaseController {
 		if (!"0".equals(trade_state))
 			return "appwebpage/notify";
 		ResponseHandler resHandler = new ResponseHandler(request, response);
-		parseXml(request);
+
 		resHandler.setKey(ConstantUtil.PayWeiXin.PARTNER_KEY);
 		if (!resHandler.isTenpaySign()) {
 			LOGGER.info("微信支付异步通知-->微信验证签名不通过，返回消息不是财付通发出的合法消息!");
@@ -275,8 +274,9 @@ public class WebPageAlipayController extends BaseController {
 			if (result != null)
 				return "appwebpage/notify";
 			LOGGER.info("微信支付异步通知开始，交易流水号-->" + transaction_id);
-			PaymentLogInfo paymentLogInfo = getPaymentLogInfo(transaction_id, out_trade_no, notify_id, null, DateUtil.getCurrDateTime(), sign, sign_type, 0, 0, total_fee, null, null,
-					Constants.REPLAY_FLAG.REPLAY_FLAG3);
+			Map<String, String> requestMap = parseXml(request);
+			PaymentLogInfo paymentLogInfo = getPaymentLogInfo(transaction_id, out_trade_no, notify_id, null, DateUtil.getCurrDateTime(), sign, sign_type, 0, 0, total_fee, requestMap.get("OpenId"),
+					null, Constants.REPLAY_FLAG.REPLAY_FLAG3);
 			paymentLogInfoService.insertPayNotify(paymentLogInfo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, PaymentEventType.WEIXIN_PAY);
 			LOGGER.info("<--微信支付异步通知结束");
 		} catch (Exception e) {
@@ -285,28 +285,26 @@ public class WebPageAlipayController extends BaseController {
 		return "appwebpage/notify";
 	}
 
+	/**	
+	 * @Description: 解析微信异步通知中的xml元素值 
+	 * @param request
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年8月11日下午3:33:45
+	 **/
 	@SuppressWarnings("unchecked")
 	private static Map<String, String> parseXml(HttpServletRequest request) {
 		Map<String, String> map = new HashMap<String, String>();
 
 		try {
 			InputStream inputStream = request.getInputStream();
-			// 读取输入流
 			SAXReader reader = new SAXReader();
 			Document document = reader.read(inputStream);
-			// 得到xml根元素
 			Element root = document.getRootElement();
-			// 得到根元素的所有子节点
 			List<Element> elementList = root.elements();
-
-			// 遍历所有子节点
 			for (Element e : elementList)
 				map.put(e.getName(), e.getText());
-			// 释放资源
 			inputStream.close();
-			inputStream = null;
-			System.err.println(map.toString());
-
 		} catch (Exception e) {
 			LOGGER.error("解析微信返回结果xml失败");
 			e.printStackTrace();
