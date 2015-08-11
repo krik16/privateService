@@ -584,4 +584,14 @@ public interface Constants {
         String CONFIGURATIONS = "com.rongyi.easy.gcc.Configurations";
         String TRANS_CONFIGURATIONS = "com.rongyi.easy.gcc.TransConfigurations";
     }
+    interface AppType{
+    	/**
+    	 * 容易逛
+    	 */
+    	Integer MALLLIFE = 1;
+    	/**
+    	 * 摩店
+    	 */
+    	Integer MALLSHOP = 2;
+    }
 }
