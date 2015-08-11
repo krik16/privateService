@@ -842,6 +842,7 @@ public class OrderUtil {
 			scoreVO.setEvent_id(order.getOrderNo());
 			scoreVO.setPay_money(order.getTotalAmount());
 			scoreVO.setUser_id(order.getBuyerId());
+			scoreVO.setPost_money(order.getExpressFee());
 			String commodityIds = "";
 			for (Object entity : orderDetailList) {
 				OrderDetailFormEntity orderDetail = (OrderDetailFormEntity) entity;
@@ -1089,8 +1090,9 @@ public class OrderUtil {
 						} else {
 							returnScore = score;
 						}
+						logger.info("returnScore-------" + returnScore);
 						if (returnScore.compareTo(new BigDecimal(0)) > 0) {
-							// 返还积分
+							//设置返还的积分
 							jsonObject.put("score", returnScore.intValue());
 							jsonObject.put("scoreDeduction", returnScore.intValue() * scoreExchangeMoney);
 							order.setDiscountInfo(jsonObject.toString());
@@ -1099,11 +1101,11 @@ public class OrderUtil {
 							if (!subtractScore(order)) {
 								logger.info("积分归还失败");
 							}
+							logger.info("returnScore------end-");
 							//更新实际使用的积分
 							jsonObject.put("score", score.subtract(returnScore).intValue());
 							jsonObject.put("scoreDeduction",score.subtract(returnScore).intValue() * scoreExchangeMoney);
 							order.setDiscountInfo(jsonObject.toString());
-							logger.info("returnScore------end-");
 						}
 					}
 				}
