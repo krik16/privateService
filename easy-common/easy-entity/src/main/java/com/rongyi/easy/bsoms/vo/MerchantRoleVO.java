@@ -2,29 +2,26 @@ package com.rongyi.easy.bsoms.vo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 /**
- * 商家角色列表VO
- * @author he
+ * 商家角色VO
+ * @author hebo 2015/08/07
  *
  */
-public class MerchantRoleVO implements Serializable {
-
-	private Integer id;
+public class MerchantRoleVO implements Serializable{
 	private Integer type;
 	private Integer identity;
-	private Integer status;
-	private String brandName;
-	private String groupName;
 	private String mallName;
+	private String groupName;
+	private String brandName;
+	private List<String> auths;
+	
+	private Integer id;
+	private Integer status;
 	private String createBy;
 	private Date createTime;
 	private String stopReason;
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
 	public Integer getType() {
 		return type;
 	}
@@ -37,17 +34,11 @@ public class MerchantRoleVO implements Serializable {
 	public void setIdentity(Integer identity) {
 		this.identity = identity;
 	}
-	public Integer getStatus() {
-		return status;
+	public String getMallName() {
+		return mallName;
 	}
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
-	public String getBrandName() {
-		return brandName;
-	}
-	public void setBrandName(String brandName) {
-		this.brandName = brandName;
+	public void setMallName(String mallName) {
+		this.mallName = mallName;
 	}
 	public String getGroupName() {
 		return groupName;
@@ -55,11 +46,29 @@ public class MerchantRoleVO implements Serializable {
 	public void setGroupName(String groupName) {
 		this.groupName = groupName;
 	}
-	public String getMallName() {
-		return mallName;
+	public String getBrandName() {
+		return brandName;
 	}
-	public void setMallName(String mallName) {
-		this.mallName = mallName;
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
+	}
+	public List<String> getAuths() {
+		return auths;
+	}
+	public void setAuths(List<String> auths) {
+		this.auths = auths;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 	public String getCreateBy() {
 		return createBy;
