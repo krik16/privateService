@@ -124,7 +124,7 @@ public class CouponEntity implements Serializable {
 
     @Property("updated_user")
     private Integer updatedUser; // 更新人
-
+    @Property("description")
     private String description; // 描述
 
     @Property("buyed_num")
