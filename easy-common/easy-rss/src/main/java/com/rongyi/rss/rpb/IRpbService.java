@@ -65,5 +65,15 @@ public interface IRpbService {
 	 * @datetime:2015年8月7日下午1:39:56
 	 **/
 	public QueryOrderParamVO queryOrder(Map<String,Object> map);
-    
+	
+	/**	
+	 * @Description: 查询订单在第三方系统中状态 
+	 * @param tradeNo交易流水号
+	 * @param payNo付款单号
+	 * @param payChannel付款方式(0:支付宝，1:微信)
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年8月11日下午4:50:55
+	 **/
+	public boolean queryOrderPayStatus(String tradeNo, String payNo, Integer payChannel);
 }
