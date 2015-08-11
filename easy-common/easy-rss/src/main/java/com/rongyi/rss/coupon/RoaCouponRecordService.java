@@ -43,4 +43,13 @@ public interface RoaCouponRecordService {
 	*/
 	boolean updateRecordByUse(String couponCode, String orderNo, Integer orderType,
 			Integer sellerId);
+
+	/**
+	 * @param couponCode
+	 * @param orderNo
+	 * @param orderType
+	 * @param sellerId
+	 * @param status
+	 */
+	public void updateRecordStatusByCode(String couponCode, String orderNo, Integer orderType, Integer sellerId, Integer status);
 }
