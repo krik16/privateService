@@ -148,26 +148,27 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 	@Override
 	public Map<String, Object> getRefunInfo(PaymentEntity paymentEntity, String batch_num, String price, String tradeNo, String desc) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String detailData = tradeNo + "^" + price + "^" + desc;
-		// 把请求参数打包成数组
-		Map<String, String> sParaTemp = new HashMap<String, String>();
-		sParaTemp.put("service", ConstantUtil.PCRefundWebPage.AUTHORIZATION_SERVICE);
-		sParaTemp.put("partner", AlipayConfig.partner);
-		sParaTemp.put("_input_charset", AlipayConfig.input_charset);
-		sParaTemp.put("notify_url", ConstantUtil.PCRefundWebPage.NOTIFY_URL_ZHIFUBAO_PC_WEB);
-		sParaTemp.put("seller_email", ConstantUtil.PayZhiFuBao.SELLER_ID);
-		sParaTemp.put("refund_date", DateUtil.dateToString(DateUtil.getCurrDateTime(), "yyyy-MM-dd hh:mm:ss"));
-		sParaTemp.put("batch_no", getBatchNo(paymentEntity.getPayNo()));
-		sParaTemp.put("batch_num", batch_num);
-		sParaTemp.put("detail_data", detailData);
-
+		String batchNo = getBatchNo(paymentEntity.getPayNo());
 		try {
-			// 建立请求
+			if (paymentEntity.getBatchNo() == null) {
+				paymentEntity.setBatchNo(batchNo);
+				paymentService.updateByPrimaryKeySelective(paymentEntity);
+			} else
+				batchNo = paymentEntity.getBatchNo();
+			String detailData = tradeNo + "^" + price + "^" + desc;
+			// 把请求参数打包成数组
+			Map<String, String> sParaTemp = new HashMap<String, String>();
+			sParaTemp.put("service", ConstantUtil.PCRefundWebPage.AUTHORIZATION_SERVICE);
+			sParaTemp.put("partner", AlipayConfig.partner);
+			sParaTemp.put("_input_charset", AlipayConfig.input_charset);
+			sParaTemp.put("notify_url", ConstantUtil.PCRefundWebPage.NOTIFY_URL_ZHIFUBAO_PC_WEB);
+			sParaTemp.put("seller_email", ConstantUtil.PayZhiFuBao.SELLER_ID);
+			sParaTemp.put("refund_date", DateUtil.dateToString(DateUtil.getCurrDateTime(), "yyyy-MM-dd hh:mm:ss"));
+			sParaTemp.put("batch_no", batchNo);
+			sParaTemp.put("batch_num", batch_num);
+			sParaTemp.put("detail_data", detailData);
 			String sHtmlText = AlipaySubmit.buildRequest(sParaTemp, "get", "确认");
 			map.put("sHtmlText", sHtmlText);
-			// 更新批量退款单号到数据库
-			paymentEntity.setBatchNo(sParaTemp.get("batch_no"));
-			paymentService.updateByPrimaryKeySelective(paymentEntity);
 		} catch (Exception e) {
 			LOGGER.error(e);
 			map.put("Exception", e.getMessage());
@@ -187,6 +188,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 				paymentService.updateByPrimaryKeySelective(paymentEntity);
 			} else
 				batchNo = paymentEntity.getBatchNo();
+			System.err.println("batchNo=" + batchNo);
 			PaymentEntity historyPaymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);
 			if (historyPaymentEntity != null) {
 				PaymentLogInfo paymentLogInfo = paymentLogInfoService.selectByOutTradeNo(historyPaymentEntity.getPayNo());
