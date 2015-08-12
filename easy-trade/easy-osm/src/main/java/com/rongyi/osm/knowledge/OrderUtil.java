@@ -1076,20 +1076,21 @@ public class OrderUtil {
 						logger.info("cashCouponDiscount-------" + cashCouponDiscount);
 						logger.info("orderDetailRealAmount-------" + orderDetailRealAmount);
 						logger.info("order.getDisconntFee-------" + order.getDisconntFee());
-						BigDecimal orderPrice=orderDetailRealAmount.subtract(order.getDisconntFee());
+						BigDecimal orderPrice=orderDetailRealAmount.subtract(order.getDisconntFee()).add(order.getExpressFee());//子订单实际价格+邮费
 						logger.info("orderPrice-------" + orderPrice);
 						BigDecimal returnScore = new BigDecimal(0);// 返还的积分
-						BigDecimal score = new BigDecimal(jsonObject.get("score").toString());// 修改价格之前使用的积分
-						BigDecimal ratioOrderPrice = orderPrice.multiply(ratio);// 修改后的价格10%
+						BigDecimal score =new BigDecimal(jsonObject.get("score").toString());// 修改价格之前使用的积分
+						BigDecimal ratioOrderPrice =orderPrice.multiply(ratio);// 修改后的价格10%
 						
-						BigDecimal subtractCoupon = orderPrice.subtract(cashCouponDiscount);// 修红改之后的价格减去包
+						BigDecimal subtractCoupon =orderPrice.subtract(cashCouponDiscount);// 修红改之后的价格减去包
 						if (orderPrice.compareTo(new BigDecimal(0)) > 0) {
 							//修改后的价格10%比较减去红包之后的价格
-							if (ratioOrderPrice.compareTo(subtractCoupon) > 0) {
+							if (ratioOrderPrice.compareTo(subtractCoupon) < 0) { 
 								BigDecimal transformScore=ratioOrderPrice.multiply(moneyExchangeScore);
 								if(score.compareTo(transformScore)>0){
 									returnScore = score.subtract(transformScore);
 								}
+								
 							} else {
 								BigDecimal transformScore=subtractCoupon.multiply(moneyExchangeScore);
 								if(score.compareTo(transformScore)>0){
