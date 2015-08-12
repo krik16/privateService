@@ -78,12 +78,11 @@ public interface WeixinPayService {
 
 	/**
 	 * @Description: 查询订单
-	 * @param tradeNo交易流水号
 	 * @param payNo付款单号
 	 * @return
 	 * @Author: 柯军
 	 * @datetime:2015年8月10日下午2:28:05
 	 **/
-	public abstract WeixinQueryOrderParamVO queryOrder(String tradeNo, String payNo);
+	public abstract WeixinQueryOrderParamVO queryOrder(String payNo);
 
 }

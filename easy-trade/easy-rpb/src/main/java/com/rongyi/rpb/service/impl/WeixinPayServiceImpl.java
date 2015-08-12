@@ -5,12 +5,20 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +28,7 @@ import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.rongyi.core.bean.ObjectConvert;
 import com.rongyi.core.common.util.DateUtil;
+import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
@@ -34,12 +43,9 @@ import com.rongyi.rpb.common.util.orderSign.weixinSign.client.ClientResponseHand
 import com.rongyi.rpb.common.util.orderSign.weixinSign.client.TenpayHttpClient;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.scan.ReverseReqData;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.scan.ReverseService;
-import com.rongyi.rpb.common.util.orderSign.weixinSign.scan.ScanPayQueryReqData;
-import com.rongyi.rpb.common.util.orderSign.weixinSign.scan.ScanPayQueryService;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.util.MD5Util;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.util.Sha1Util;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.util.WXUtil;
-import com.rongyi.rpb.common.util.orderSign.weixinSign.util.XMLUtil;
 import com.rongyi.rpb.constants.ConstantUtil;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.service.PCWebPageAlipayService;
@@ -54,6 +60,7 @@ import com.rongyi.rss.rpb.OrderNoGenService;
  * @datetime:2015年4月23日上午10:07:12
  * 
  **/
+@SuppressWarnings("deprecation")
 @Service
 public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPayService {
 
@@ -363,23 +370,50 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public WeixinQueryOrderParamVO queryOrder(String tradeNo, String payNo) {
-		try {
-			ScanPayQueryService scanPayQueryService = new ScanPayQueryService();
-			ScanPayQueryReqData scanPayQueryReqData = new ScanPayQueryReqData(tradeNo, payNo);
-			String xmlString = scanPayQueryService.request(scanPayQueryReqData);
-			LOGGER.info("微信订单查询返回结果："+xmlString);
-			Map<String, Object> xmlMap = XMLUtil.doXMLParse(xmlString);
-			WeixinQueryOrderParamVO weixinQueryOrderParamVO = (WeixinQueryOrderParamVO) ObjectConvert.convertFromMap(WeixinQueryOrderParamVO.class, xmlMap);
-			return weixinQueryOrderParamVO;
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+	public WeixinQueryOrderParamVO queryOrder(String payNo) {
+		String result = orderquery(payNo);
+		WeixinQueryOrderParamVO weixinQueryOrderParamVO = new WeixinQueryOrderParamVO();
+		JSONObject jsonObject = JSONObject.fromObject(result);
+		JSONObject orderInfo = jsonObject.getJSONObject("order_info");
+		Map<String, Object> map = JsonUtil.getMapFromJson(orderInfo.toString());
+		weixinQueryOrderParamVO = (WeixinQueryOrderParamVO) ObjectConvert.convertFromMap(WeixinQueryOrderParamVO.class, map);
+		return weixinQueryOrderParamVO;
 	}
 
+	public static String orderquery(String out_trade_no) {
+		DefaultHttpClient httpclient = new DefaultHttpClient();
+		String result = null;
+		try {
+			String access_token = AccessTokenRequestHandler.getAccessToken();
+			String url = ConstantUtil.PayWeiXin.QUERY_URL + access_token;
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("appid", ConstantUtil.PayWeiXin.APP_ID);
+			String timestamp = Long.toString(System.currentTimeMillis() / 1000);
+			jsonObject.put("timestamp", timestamp);
+			jsonObject.put("sign_method", "sha1");
+			String sign = "out_trade_no=" + out_trade_no + "&partner=" + ConstantUtil.PayWeiXin.PARTNER + "&key=" + ConstantUtil.PayWeiXin.PARTNER_KEY;
+			sign = MD5Util.MD5Encode(sign, "utf-8");
+			sign = sign.toUpperCase();
+			String packageStr = "out_trade_no=" + out_trade_no + "&partner=" + ConstantUtil.PayWeiXin.PARTNER + "&sign=" + sign;
+			jsonObject.put("package", packageStr);
+			SortedMap<String, String> prePayParams = new TreeMap<String, String>();
+			prePayParams.put("appid", ConstantUtil.PayWeiXin.APP_ID);
+			prePayParams.put("appkey", ConstantUtil.PayWeiXin.APP_KEY);
+			prePayParams.put("package", packageStr);
+			prePayParams.put("timestamp", timestamp);
+			String app_signature = Sha1Util.createSHA1Sign(prePayParams);
+			jsonObject.put("app_signature", app_signature);
+			HttpPost httpost = new HttpPost(url);
+			StringEntity postEntity = new StringEntity(jsonObject.toString(), "UTF-8");
+			httpost.setEntity(postEntity);
+			HttpResponse response = httpclient.execute(httpost);
+			HttpEntity entity = response.getEntity();
+			result = EntityUtils.toString(entity, "UTF-8");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			httpclient.close();
+		}
+		return result;
+	}
 }

@@ -1,6 +1,9 @@
 package com.rongyi.rpb.common.util.orderSign.weixinSign.util;
 
 import java.security.MessageDigest;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
@@ -38,6 +41,32 @@ public class Sha1Util {
 			LOGGER.error(e);
 			return null;
 		}
+	}
+
+	public static String createSHA1Sign(Map<String, String> map) {
+
+		StringBuffer sb = new StringBuffer();
+		for (String key : map.keySet()) {
+			String value = map.get(key);
+			sb.append(key + "=" + value + "&");
+			}
+		
+//		Set es = map.keySet();
+//		Iterator it = es.iterator();
+//		for (String key : map.keySet()) {
+//			String value = map.get(key);
+//			sb.append(key + "=" + value + "&");
+//			}
+//		
+//		while (it.hasNext()) {
+//			Map.Entry entry = (Map.Entry) it.next();
+//			String k = (String) entry.getKey();
+//			String v = (String) entry.getValue();
+//			sb.append(k + "=" + v + "&");
+//		}
+		String params = sb.substring(0, sb.lastIndexOf("&"));
+		String appsign = Sha1Util.getSha1(params);
+		return appsign;
 	}
 
 }

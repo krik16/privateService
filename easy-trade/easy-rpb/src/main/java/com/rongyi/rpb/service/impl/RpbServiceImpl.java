@@ -161,13 +161,15 @@ public class RpbServiceImpl implements IRpbService {
 			if (queryOrderParamVO != null && ("TRADE_SUCCESS".equals(queryOrderParamVO.getTrade_status()) || "TRADE_FINISHED".equals(queryOrderParamVO.getTrade_status()))) {
 				return true;
 			}
+			LOGGER.info("支付宝订单状态-->" + queryOrderParamVO.getTrade_status());
 		} else if (Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1 == payChannel) {
-			WeixinQueryOrderParamVO weixinQueryOrderParamVO = weixinPayService.queryOrder(tradeNo, payNo);
-			if (weixinQueryOrderParamVO != null && "SUCCESS".equals(weixinQueryOrderParamVO.getResult_code()) && "SUCCESS".equals(weixinQueryOrderParamVO.getTrade_state())) {
+			WeixinQueryOrderParamVO weixinQueryOrderParamVO = weixinPayService.queryOrder(payNo);
+			if (weixinQueryOrderParamVO != null && 0 == weixinQueryOrderParamVO.getRet_code()) {
 				return true;
 			}
-		}else{
-		LOGGER.info("未找到对应付款方式-->payChannel=" + payChannel + ",tradeNo=" + tradeNo + ",payNo=" + payNo);
+			LOGGER.info("微信订单-->" + (weixinQueryOrderParamVO.getRet_code() == 62623003) != null ? "订单不存在" : weixinQueryOrderParamVO.getRet_code());
+		} else {
+			LOGGER.info("未找到对应付款方式-->payChannel=" + payChannel + ",tradeNo=" + tradeNo + ",payNo=" + payNo);
 		}
 		return false;
 	}
@@ -193,9 +195,9 @@ public class RpbServiceImpl implements IRpbService {
 		String tradeNo = (map.get("tradeNo") != null) ? map.get("tradeNo").toString() : null;
 		return aliPaymentService.queryOrder(payNo, tradeNo);
 	}
-	
+
 	@Override
-	public List<PayAccountUseTotal> selectPayAccountUseTotal(Map<String, Object> map){
+	public List<PayAccountUseTotal> selectPayAccountUseTotal(Map<String, Object> map) {
 		return paymentLogInfoService.selectPayAccountUseTotal(map);
 	}
 }

@@ -35,6 +35,7 @@ import com.rongyi.rpb.service.PaymentLogInfoService;
 import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rpb.service.WebPageAlipayService;
 import com.rongyi.rpb.web.controller.BaseController;
+import com.rongyi.rss.rpb.IRpbService;
 
 /**
  * @author kejun 包含支付宝网页支付： 1.进入收银台之前页面，2.支付宝支付成功回调接口，3.支付宝支付失败接口
@@ -56,6 +57,9 @@ public class WebPageAlipayController extends BaseController {
 
 	@Autowired
 	Sender sender;
+
+	@Autowired
+	IRpbService rpbService;
 
 	/**
 	 * @Description: 支付宝页面支付，接收APP前台传来订单号进行支付宝网页支付相关操作（测试使用）
@@ -104,6 +108,11 @@ public class WebPageAlipayController extends BaseController {
 			Map<String, String> verifyMap = beforeVerify(request);
 			if (!AlipayNotify.verifyReturn(verifyMap)) {
 				LOGGER.info("支付宝网页支付同步通知-->支付宝验证签名不通过，返回消息不是支付宝发出的合法消息!");
+				return "zhifuFail";
+			}
+			boolean bool = rpbService.queryOrderPayStatus(trade_no, out_trade_no, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
+			if (!bool) {
+				LOGGER.info("支付宝订单查询结果是未支付状态");
 				return "zhifuFail";
 			}
 			String orderNums = paymentService.getOrderNumStrsByPayNo(out_trade_no);
@@ -225,6 +234,7 @@ public class WebPageAlipayController extends BaseController {
 			return "appwebpage/notify";
 		}
 		LOGGER.info("支付宝手机APP支付异步通知开始,交易流水号-->" + trade_no);
+		rpbService.queryOrderPayStatus(trade_no, out_trade_no, 0);
 		PaymentLogInfo paymentLogInfo = getPaymentLogInfo(trade_no, out_trade_no, notify_id, notify_type, DateUtil.getCurrDateTime(), sign, sign_type, 0, 0, total_fee, buyer_email, buyer_id,
 				Constants.REPLAY_FLAG.REPLAY_FLAG0);
 		paymentLogInfoService.insertPayNotify(paymentLogInfo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, PaymentEventType.APP);
@@ -263,7 +273,7 @@ public class WebPageAlipayController extends BaseController {
 		if (!"0".equals(trade_state))
 			return "appwebpage/notify";
 		ResponseHandler resHandler = new ResponseHandler(request, response);
-
+		rpbService.queryOrderPayStatus(transaction_id, out_trade_no, 1);
 		resHandler.setKey(ConstantUtil.PayWeiXin.PARTNER_KEY);
 		if (!resHandler.isTenpaySign()) {
 			LOGGER.info("微信支付异步通知-->微信验证签名不通过，返回消息不是财付通发出的合法消息!");
@@ -275,8 +285,8 @@ public class WebPageAlipayController extends BaseController {
 				return "appwebpage/notify";
 			LOGGER.info("微信支付异步通知开始，交易流水号-->" + transaction_id);
 			Map<String, String> requestMap = parseXml(request);
-			PaymentLogInfo paymentLogInfo = getPaymentLogInfo(transaction_id, out_trade_no, notify_id, null, DateUtil.getCurrDateTime(), sign, sign_type, 0, 0, total_fee, requestMap.get("OpenId"),
-					null, Constants.REPLAY_FLAG.REPLAY_FLAG3);
+			PaymentLogInfo paymentLogInfo = getPaymentLogInfo(transaction_id, out_trade_no, notify_id, null, DateUtil.getCurrDateTime(), sign, sign_type, 0, 0, total_fee, null,
+					requestMap.get("OpenId"), Constants.REPLAY_FLAG.REPLAY_FLAG3);
 			paymentLogInfoService.insertPayNotify(paymentLogInfo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, PaymentEventType.WEIXIN_PAY);
 			LOGGER.info("<--微信支付异步通知结束");
 		} catch (Exception e) {
@@ -285,11 +295,11 @@ public class WebPageAlipayController extends BaseController {
 		return "appwebpage/notify";
 	}
 
-	/**	
-	 * @Description: 解析微信异步通知中的xml元素值 
+	/**
+	 * @Description: 解析微信异步通知中的xml元素值
 	 * @param request
-	 * @return	
-	 * @Author:  柯军
+	 * @return
+	 * @Author: 柯军
 	 * @datetime:2015年8月11日下午3:33:45
 	 **/
 	@SuppressWarnings("unchecked")
