@@ -18,6 +18,7 @@ import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentItemEntity;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
 import com.rongyi.rpb.service.AliPaymentService;
+import com.rongyi.rpb.service.PCWebPageAlipayService;
 import com.rongyi.rpb.service.PaymentItemService;
 import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rss.coupon.RoaCouponOrderService;
@@ -35,6 +36,9 @@ public class PaymentServiceTest extends BaseTest {
 
 	@Autowired
 	AliPaymentService aliPaymentService;
+	
+	@Autowired
+	PCWebPageAlipayService pcWebPageAlipayService;
 	
 	// @Test
 	public void testSelectPageListBySearch() {
@@ -186,7 +190,7 @@ public class PaymentServiceTest extends BaseTest {
 		System.err.println(list.get(0).getDetailNum());
 	}
 	
-	@Test
+//	@Test
 	public void testQueryOrder(){
 		System.err.println(aliPaymentService.queryOrder("1000001063768572","2015080700001000480061032614").toString());	
 	}
@@ -204,6 +208,13 @@ public class PaymentServiceTest extends BaseTest {
 		event.setTimestamp(Long.valueOf("1428565002336"));
 		event.setType(type);
 		return event;
+	}
+	
+	@Test
+	public void testGetBatchRefundBuyerMessage(){
+		String[] idArray = new String[]{"4693"};
+		//20150812192257707
+		pcWebPageAlipayService.getBatchRefundBuyerMessage(idArray, "test");
 	}
 
 }
