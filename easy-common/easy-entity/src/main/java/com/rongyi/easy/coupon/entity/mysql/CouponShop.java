@@ -88,4 +88,14 @@ public class CouponShop {
     public void setShopBrand(String shopBrand) {
         this.shopBrand = shopBrand;
     }
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("CouponShop [id=").append(id).append(", couponId=").append(couponId).append(", shopId=")
+				.append(shopId).append(", shopName=").append(shopName).append(", shopMallName=").append(shopMallName)
+				.append(", shopLogoUrl=").append(shopLogoUrl).append(", shopBrand=").append(shopBrand).append("]");
+		return builder.toString();
+	}
+    
 }
