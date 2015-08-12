@@ -75,4 +75,14 @@ public class CouponMall {
     public void setMallLogUrl(String mallLogUrl) {
         this.mallLogUrl = mallLogUrl;
     }
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("CouponMall [id=").append(id).append(", couponId=").append(couponId).append(", mallId=")
+				.append(mallId).append(", mallName=").append(mallName).append(", mallAddress=").append(mallAddress)
+				.append(", mallLogUrl=").append(mallLogUrl).append("]");
+		return builder.toString();
+	}
+    
 }

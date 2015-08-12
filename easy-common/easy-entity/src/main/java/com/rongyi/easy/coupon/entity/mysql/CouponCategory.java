@@ -75,4 +75,14 @@ public class CouponCategory {
     public void setLv2Name(String lv2Name) {
         this.lv2Name = lv2Name;
     }
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("CouponCategory [id=").append(id).append(", couponId=").append(couponId).append(", lv1Id=")
+				.append(lv1Id).append(", lv1Name=").append(lv1Name).append(", lv2Id=").append(lv2Id)
+				.append(", lv2Name=").append(lv2Name).append("]");
+		return builder.toString();
+	}
+    
 }

@@ -49,4 +49,12 @@ public class CouponGroup {
     public void setGroupName(String groupName) {
         this.groupName = groupName;
     }
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("CouponGroup [id=").append(id).append(", couponId=").append(couponId).append(", groupId=")
+				.append(groupId).append(", groupName=").append(groupName).append("]");
+		return builder.toString();
+	}
 }

@@ -221,7 +221,7 @@ public class Coupon {
     /**
      * 代金券关联的店铺
      */
-    private List<CouponShop> shops;
+    private List<CouponShop> couponShops;
 
     /**
      * 红包关联的商品  related_type只有这个类型是1 并且coupon_type 为2 的时候  才有这个类型
@@ -548,12 +548,12 @@ public class Coupon {
 		this.couponMall = couponMall;
 	}
 
-	public List<CouponShop> getShops() {
-		return shops;
+	public List<CouponShop> getCouponShops() {
+		return couponShops;
 	}
 
-	public void setShops(List<CouponShop> shops) {
-		this.shops = shops;
+	public void setCouponShops(List<CouponShop> couponShops) {
+		this.couponShops = couponShops;
 	}
 
 	public List<RedenvelopeCommodity> getrCommoditys() {
@@ -585,7 +585,8 @@ public class Coupon {
 				.append(updateAt).append(", isThird=").append(isThird).append(", isOffStock=").append(isOffStock)
 				.append(", isDeleted=").append(isDeleted).append(", couponCategory=").append(couponCategory)
 				.append(", couponGroup=").append(couponGroup).append(", couponBrand=").append(couponBrand)
-				.append(", couponMall=").append(couponMall).append(", shops=").append(shops).append(", rcommodiyts=").append(rCommoditys).append("]");
+				.append(", couponMall=").append(couponMall).append(", couponShops=").append(couponShops)
+				.append(", rCommoditys=").append(rCommoditys).append("]");
 		return builder.toString();
 	}
     
