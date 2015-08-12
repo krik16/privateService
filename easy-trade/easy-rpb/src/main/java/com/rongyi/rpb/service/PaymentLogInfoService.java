@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
+import com.rongyi.easy.rpb.vo.PayAccountUseTotal;
 import com.rongyi.easy.rpb.vo.PaySuccessResponse;
 
 /**
@@ -83,5 +84,15 @@ public interface PaymentLogInfoService {
 	 * @datetime:2015年7月9日上午11:00:39
 	 **/
 	public abstract void updateDeleteStatus(Integer id, Integer deleteStatus);
+	
+	/**	
+	 * @Description: 查询支付账号使用次数 
+	 * @param map
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年8月12日上午11:34:50
+	 **/
+	public abstract List<PayAccountUseTotal> selectPayAccountUseTotal(Map<String,Object> map);
+	
 
 }
