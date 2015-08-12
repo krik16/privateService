@@ -96,11 +96,11 @@ public interface RoaVoucherCouponService {
 	 * @Description:追加代金券
 	 * @author:lqy
 	 * @param id 代金券id
-	 * @param addCount 追加数量
+	 * @param count 追加数量
 	 * @return
 	 * @throws Exception
 	 */
-	boolean addCouponCount(Integer id, Integer addCount) throws Exception;
+	boolean addCouponCount(Integer id, Integer count) throws Exception;
 
 	/**
 	 * @Description:设置展示区域
