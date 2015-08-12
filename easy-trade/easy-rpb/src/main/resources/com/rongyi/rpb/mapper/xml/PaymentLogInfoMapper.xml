@@ -28,6 +28,12 @@
 		<result column="deleteStatus" property="delete_status"
 			jdbcType="INTEGER" />
 	</resultMap>
+	
+	<resultMap id="PayAccountUserTotalMap" type="com.rongyi.easy.rpb.vo.PayAccountUseTotal">
+		<result column="pay_account" property="payAccount" jdbcType="VARCHAR" />
+		<result column="pay_type" property="payType" jdbcType="VARCHAR" />
+		<result column="count" property="count" jdbcType="INTEGER" />
+	</resultMap>
 
 	<sql id="Base_Column_List">
 		id, notify_time, notify_id, notify_type, sign, sign_type,
@@ -208,5 +214,17 @@
 		#{deleteStatus,jdbcType=INTEGER}
 		where id =#{id,jdbcType=INTEGER}
 	</update>
+	
+	<select id="selectPayAccountUseTotal" resultMap="PayAccountUserTotalMap"
+		parameterType="java.lang.String">
+		select buyer_email as pay_account,pay_channel as pay_type,COUNT(buyer_email) as count from payment_event pe
+		left join payment_order po ON pe.out_trade_no = po.pay_no
+		where (buyer_email IS NOT null and buyer_email != '')
+		GROUP BY buyer_email
+		<if test="count != null">
+		HAVING count >= #{count,jdbcType=INTEGER}
+		</if> 
+		order by count desc 
+	</select>
 
 </mapper>

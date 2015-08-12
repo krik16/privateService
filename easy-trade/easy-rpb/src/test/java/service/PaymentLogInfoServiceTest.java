@@ -8,6 +8,8 @@
 
 package service;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.testng.annotations.Test;
@@ -28,10 +30,14 @@ public class PaymentLogInfoServiceTest extends BaseTest{
 	@Autowired
 	PaymentLogInfoService paymentLogInfoService;
 	
-	@Test
+//	@Test
 	@Rollback(false)
 	public void testUpdateDeleteStatus(){
 		paymentLogInfoService.updateDeleteStatus(1268, 1);
 	}
-
+	
+	@Test
+	public void testSelectPayAccountUseTotal(){
+		System.err.println(paymentLogInfoService.selectPayAccountUseTotal(new HashMap<String,Object>()).size());
+	}
 }

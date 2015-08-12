@@ -20,6 +20,7 @@ import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentItemEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
+import com.rongyi.easy.rpb.vo.PayAccountUseTotal;
 import com.rongyi.easy.rpb.vo.PaySuccessResponse;
 import com.rongyi.easy.rpb.vo.QueryOrderParamVO;
 import com.rongyi.easy.rpb.vo.WeixinQueryOrderParamVO;
@@ -165,8 +166,9 @@ public class RpbServiceImpl implements IRpbService {
 			if (weixinQueryOrderParamVO != null && "SUCCESS".equals(weixinQueryOrderParamVO.getResult_code()) && "SUCCESS".equals(weixinQueryOrderParamVO.getTrade_state())) {
 				return true;
 			}
-		}
+		}else{
 		LOGGER.info("未找到对应付款方式-->payChannel=" + payChannel + ",tradeNo=" + tradeNo + ",payNo=" + payNo);
+		}
 		return false;
 	}
 
@@ -190,5 +192,10 @@ public class RpbServiceImpl implements IRpbService {
 		String payNo = (map.get("payNo") != null) ? map.get("payNo").toString() : null;
 		String tradeNo = (map.get("tradeNo") != null) ? map.get("tradeNo").toString() : null;
 		return aliPaymentService.queryOrder(payNo, tradeNo);
+	}
+	
+	@Override
+	public List<PayAccountUseTotal> selectPayAccountUseTotal(Map<String, Object> map){
+		return paymentLogInfoService.selectPayAccountUseTotal(map);
 	}
 }

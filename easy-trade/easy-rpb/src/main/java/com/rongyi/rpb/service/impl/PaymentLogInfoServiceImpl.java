@@ -14,6 +14,7 @@ import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
+import com.rongyi.easy.rpb.vo.PayAccountUseTotal;
 import com.rongyi.easy.rpb.vo.PaySuccessResponse;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.mq.Sender;
@@ -138,5 +139,10 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
 		resultMap.put("id", id);
 		resultMap.put("deleteStatus", deleteStatus);
 		this.getBaseDao().updateBySql(LOG_NAMESPACE + ".updateDeleteStatus", resultMap);
+	}
+
+	@Override
+	public List<PayAccountUseTotal> selectPayAccountUseTotal(Map<String, Object> map) {
+		return this.getBaseDao().selectListBySql(LOG_NAMESPACE+".selectPayAccountUseTotal", map);
 	}
 }
