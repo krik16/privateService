@@ -11,13 +11,13 @@ public interface IValidCouponCodeService {
 
 	/**
      * 优惠券验证
-     * @param couponCode
+     * @param orderNo
      * @param mallId
      * @param shopId
      * @param useMode
-     * @param couponId
+     * @param checkNum
      * @return
      */
-    public ResponseResult validateCouponCode(String couponCode, String mallId, String shopId, Long useMode, String couponId);
+    public ResponseResult validateCouponCode(String orderNo, String mallId, String shopId, Long useMode, Integer checkNum);
     
 }
