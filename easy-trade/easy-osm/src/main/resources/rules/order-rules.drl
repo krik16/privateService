@@ -378,7 +378,7 @@ rule "买家超时未支付"
 		// 归还库存
 		orderUtil.increaseStock($order);
 		
-		boolean flag=orderUtil.subtractScore($order); //还原买家积分
+		boolean flag=orderUtil.subtractScore($order,false); //还原买家积分
 		logger.debug("还原积分状态"+ flag + " end");
 		
 		//记录日志
