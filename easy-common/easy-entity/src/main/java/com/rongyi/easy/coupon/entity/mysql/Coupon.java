@@ -223,6 +223,11 @@ public class Coupon {
      */
     private List<CouponShop> shops;
 
+    /**
+     * 红包关联的商品  related_type只有这个类型是1 并且coupon_type 为2 的时候  才有这个类型
+     */
+    private List<RedenvelopeCommodity> rCommoditys;
+    
     public Integer getId() {
         return id;
     }
@@ -551,6 +556,14 @@ public class Coupon {
 		this.shops = shops;
 	}
 
+	public List<RedenvelopeCommodity> getrCommoditys() {
+		return rCommoditys;
+	}
+
+	public void setrCommoditys(List<RedenvelopeCommodity> rCommoditys) {
+		this.rCommoditys = rCommoditys;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -572,7 +585,7 @@ public class Coupon {
 				.append(updateAt).append(", isThird=").append(isThird).append(", isOffStock=").append(isOffStock)
 				.append(", isDeleted=").append(isDeleted).append(", couponCategory=").append(couponCategory)
 				.append(", couponGroup=").append(couponGroup).append(", couponBrand=").append(couponBrand)
-				.append(", couponMall=").append(couponMall).append(", shops=").append(shops).append("]");
+				.append(", couponMall=").append(couponMall).append(", shops=").append(shops).append(", rcommodiyts=").append(rCommoditys).append("]");
 		return builder.toString();
 	}
     
