@@ -18,9 +18,12 @@ public class MerchantRoleVO implements Serializable{
 	private List<String> auths;
 	
 	private Integer id;
+	private String name;//商家角色名
 	private Integer status;
 	private String createBy;
 	private Date createTime;
+	private String updateBy;
+	private Date updateTime;
 	private String stopReason;
 	public Integer getType() {
 		return type;
@@ -87,6 +90,24 @@ public class MerchantRoleVO implements Serializable{
 	}
 	public void setStopReason(String stopReason) {
 		this.stopReason = stopReason;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getUpdateBy() {
+		return updateBy;
+	}
+	public void setUpdateBy(String updateBy) {
+		this.updateBy = updateBy;
+	}
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
 	}
 	
 }
