@@ -47,6 +47,7 @@ public interface ConstantUtil {
 		public static String VERSION = "1.1";
 		public static String ENCODE_GBK = "GBK";
 		public static String METHOD_POST = "POST";
+		public static String QUERY_URL = "https://api.weixin.qq.com/pay/orderquery?access_token=";
 	}
 
 	interface PayZhiFuBao {
