@@ -1,14 +1,13 @@
 package com.rongyi.easy.coupon.entity;
 
-import org.apache.commons.lang.time.DateUtils;
-import org.mongodb.morphia.annotations.*;
+import com.rongyi.core.constant.CouponConst;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -142,7 +141,7 @@ public class Coupon implements Serializable {
     @Property("sort_index")
     private Integer sortIndex = Integer.valueOf(0);//优惠券排序字段，目前作用是置顶
 
-    private List<Integer> afterSaleService = Arrays.asList(1,1,1);//[1,1,1] 1为支持，0为不支持。第一位：随时退、第二位：过期退 第三位： 免预约
+    private List<Integer> afterSaleService = CouponConst.AFTER_SALE_SERVICE;//[1,1,1] 1为支持，0为不支持。第一位：随时退、第二位：过期退 第三位： 免预约
 
     @Version
     private Long version; // 乐观锁
@@ -368,11 +367,11 @@ public class Coupon implements Serializable {
     }
 
     public void setPublishBeginDate(Date publishBeginDate) {
-        if (publishBeginDate != null) {
-            publishBeginDate = DateUtils.setHours(publishBeginDate, 0);
-            publishBeginDate = DateUtils.setMinutes(publishBeginDate, 0);
-            publishBeginDate = DateUtils.setSeconds(publishBeginDate, 0);
-        }
+//        if (publishBeginDate != null) {
+//            publishBeginDate = DateUtils.setHours(publishBeginDate, 0);
+//            publishBeginDate = DateUtils.setMinutes(publishBeginDate, 0);
+//            publishBeginDate = DateUtils.setSeconds(publishBeginDate, 0);
+//        }
         this.publishBeginDate = publishBeginDate;
     }
 
@@ -381,11 +380,11 @@ public class Coupon implements Serializable {
     }
 
     public void setPublishEndDate(Date publishEndDate) {
-        if (publishEndDate != null) {
-            publishEndDate = DateUtils.setHours(publishEndDate, 23);
-            publishEndDate = DateUtils.setMinutes(publishEndDate, 59);
-            publishEndDate = DateUtils.setSeconds(publishEndDate, 59);
-        }
+//        if (publishEndDate != null) {
+//            publishEndDate = DateUtils.setHours(publishEndDate, 23);
+//            publishEndDate = DateUtils.setMinutes(publishEndDate, 59);
+//            publishEndDate = DateUtils.setSeconds(publishEndDate, 59);
+//        }
         this.publishEndDate = publishEndDate;
     }
 
@@ -394,11 +393,11 @@ public class Coupon implements Serializable {
     }
 
     public void setValidBeginDate(Date validBeginDate) {
-        if (validBeginDate != null) {
-            validBeginDate = DateUtils.setHours(validBeginDate, 0);
-            validBeginDate = DateUtils.setMinutes(validBeginDate, 0);
-            validBeginDate = DateUtils.setSeconds(validBeginDate, 0);
-        }
+//        if (validBeginDate != null) {
+//            validBeginDate = DateUtils.setHours(validBeginDate, 0);
+//            validBeginDate = DateUtils.setMinutes(validBeginDate, 0);
+//            validBeginDate = DateUtils.setSeconds(validBeginDate, 0);
+//        }
         this.validBeginDate = validBeginDate;
     }
 
@@ -407,11 +406,11 @@ public class Coupon implements Serializable {
     }
 
     public void setValidEndDate(Date validEndDate) {
-        if (validEndDate != null) {
-            validEndDate = DateUtils.setHours(validEndDate, 23);
-            validEndDate = DateUtils.setMinutes(validEndDate, 59);
-            validEndDate = DateUtils.setSeconds(validEndDate, 59);
-        }
+//        if (validEndDate != null) {
+//            validEndDate = DateUtils.setHours(validEndDate, 23);
+//            validEndDate = DateUtils.setMinutes(validEndDate, 59);
+//            validEndDate = DateUtils.setSeconds(validEndDate, 59);
+//        }
         this.validEndDate = validEndDate;
     }
 
