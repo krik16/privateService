@@ -8,9 +8,11 @@
 
 package com.rongyi.rss.rpb;
 
+import java.util.List;
 import java.util.Map;
 
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
+import com.rongyi.easy.rpb.vo.PayAccountUseTotal;
 import com.rongyi.easy.rpb.vo.QueryOrderParamVO;
 
 /**
@@ -76,4 +78,13 @@ public interface IRpbService {
 	 * @datetime:2015年8月11日下午4:50:55
 	 **/
 	public boolean queryOrderPayStatus(String tradeNo, String payNo, Integer payChannel);
+	
+	/**	
+	 * @Description: 查询支付账号购买次数 
+	 * @param map给定count参数查询大于该count的所有账号
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年8月12日上午11:46:46
+	 **/
+	public List<PayAccountUseTotal> selectPayAccountUseTotal(Map<String, Object> map);
 }
