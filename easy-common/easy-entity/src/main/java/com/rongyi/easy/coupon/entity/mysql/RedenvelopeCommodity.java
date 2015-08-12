@@ -127,4 +127,16 @@ public class RedenvelopeCommodity implements Serializable{
     public void setStatus(Integer status) {
         this.status = status;
     }
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("RedenvelopeCommodity [id=").append(id).append(", couponId=").append(couponId)
+				.append(", commodityId=").append(commodityId).append(", commodityName=").append(commodityName)
+				.append(", commodityCode=").append(commodityCode).append(", mallName=").append(mallName)
+				.append(", shopName=").append(shopName).append(", mallId=").append(mallId).append(", shopId=")
+				.append(shopId).append(", pics=").append(pics).append(", status=").append(status).append("]");
+		return builder.toString();
+	}
+    
 }
