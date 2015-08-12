@@ -34,7 +34,7 @@ public class RedenvelopeCommodity implements Serializable{
     /**商品图片用；隔开*/
     private String pics;
     /**商品状态 1上架   0下架*/
-    private Byte status;
+    private Integer status;
 
     public RedenvelopeCommodity(){
     	
@@ -120,11 +120,11 @@ public class RedenvelopeCommodity implements Serializable{
         this.pics = pics;
     }
 
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 }
