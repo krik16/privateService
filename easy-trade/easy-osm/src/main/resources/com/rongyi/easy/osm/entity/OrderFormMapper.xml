@@ -77,7 +77,8 @@
   	set 
   		total_amount = #{totalAmount}, 
   		disconnt_fee = #{disconntFee}, 
-  		express_fee = #{expressFee} 
+  		express_fee = #{expressFee},
+  		discount_info = #{discountInfo} 
  	where order_no = #{orderNo}
   </update>
   
