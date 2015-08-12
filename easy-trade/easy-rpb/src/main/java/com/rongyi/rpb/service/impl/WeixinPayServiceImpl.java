@@ -372,6 +372,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 	@Override
 	public WeixinQueryOrderParamVO queryOrder(String payNo) {
 		String result = orderquery(payNo);
+		LOGGER.info("微信订单查询返回结果："+result);
 		WeixinQueryOrderParamVO weixinQueryOrderParamVO = new WeixinQueryOrderParamVO();
 		JSONObject jsonObject = JSONObject.fromObject(result);
 		JSONObject orderInfo = jsonObject.getJSONObject("order_info");

@@ -234,7 +234,6 @@ public class WebPageAlipayController extends BaseController {
 			return "appwebpage/notify";
 		}
 		LOGGER.info("支付宝手机APP支付异步通知开始,交易流水号-->" + trade_no);
-		rpbService.queryOrderPayStatus(trade_no, out_trade_no, 0);
 		PaymentLogInfo paymentLogInfo = getPaymentLogInfo(trade_no, out_trade_no, notify_id, notify_type, DateUtil.getCurrDateTime(), sign, sign_type, 0, 0, total_fee, buyer_email, buyer_id,
 				Constants.REPLAY_FLAG.REPLAY_FLAG0);
 		paymentLogInfoService.insertPayNotify(paymentLogInfo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, PaymentEventType.APP);

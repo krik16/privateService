@@ -165,7 +165,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 			// 建立请求
 			String sHtmlText = AlipaySubmit.buildRequest(sParaTemp, "get", "确认");
 			map.put("sHtmlText", sHtmlText);
-			//更新批量退款单号到数据库
+			// 更新批量退款单号到数据库
 			paymentEntity.setBatchNo(sParaTemp.get("batch_no"));
 			paymentService.updateByPrimaryKeySelective(paymentEntity);
 		} catch (Exception e) {
@@ -182,8 +182,11 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 		for (String id : idArray) {
 			Map<String, Object> buyerMap = new HashMap<String, Object>();
 			PaymentEntity paymentEntity = paymentService.selectByPrimaryKey(id);
-			paymentEntity.setBatchNo(batchNo);
-			paymentService.updateByPrimaryKeySelective(paymentEntity);
+			if (paymentEntity.getBatchNo() == null) {
+				paymentEntity.setBatchNo(batchNo);
+				paymentService.updateByPrimaryKeySelective(paymentEntity);
+			} else
+				batchNo = paymentEntity.getBatchNo();
 			PaymentEntity historyPaymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);
 			if (historyPaymentEntity != null) {
 				PaymentLogInfo paymentLogInfo = paymentLogInfoService.selectByOutTradeNo(historyPaymentEntity.getPayNo());
@@ -193,7 +196,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 				buyerMap.put("payNo", paymentLogInfo.getOutTradeNo());
 				buyerMap.put("totalFee", paymentEntity.getAmountMoney().toString());
 				buyerMap.put("desc", desc);
-				buyerMap.put("batchNo",batchNo);
+				buyerMap.put("batchNo", batchNo);
 				refundList.add(buyerMap);
 			}
 
@@ -223,7 +226,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 		sParaTemp.put("notify_url", ConstantUtil.PCRefundWebPage.NOTIFY_URL_ZHIFUBAO_PC_WEB);
 		sParaTemp.put("seller_email", ConstantUtil.PayZhiFuBao.SELLER_ID);
 		sParaTemp.put("refund_date", DateUtil.dateToString(DateUtil.getCurrDateTime(), "yyyy-MM-dd hh:mm:ss"));
-		sParaTemp.put("batch_no",refundList.get(0).get("batchNo").toString());
+		sParaTemp.put("batch_no", refundList.get(0).get("batchNo").toString());
 		sParaTemp.put("batch_num", Integer.toString(refundList.size()));
 		sParaTemp.put("detail_data", detailData.toString());
 		try {
