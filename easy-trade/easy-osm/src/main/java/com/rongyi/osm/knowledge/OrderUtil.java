@@ -1086,15 +1086,18 @@ public class OrderUtil {
 						if (orderPrice.compareTo(new BigDecimal(0)) > 0) {
 							//修改后的价格10%比较减去红包之后的价格
 							if (ratioOrderPrice.compareTo(subtractCoupon) > 0) {
-								if(score.compareTo(ratioOrderPrice)>0){
-									returnScore = score.subtract(ratioOrderPrice);
+								BigDecimal transformScore=ratioOrderPrice.multiply(moneyExchangeScore);
+								if(score.compareTo(transformScore)>0){
+									returnScore = score.subtract(transformScore);
 								}
 							} else {
-								if(score.compareTo(subtractCoupon.multiply(moneyExchangeScore))>0){
-									 returnScore=score.subtract((subtractCoupon.multiply(moneyExchangeScore)));
+								BigDecimal transformScore=subtractCoupon.multiply(moneyExchangeScore);
+								if(score.compareTo(transformScore)>0){
+									 returnScore=score.subtract(transformScore);
 								}
 							}
 						} else {
+							//修改价格为0的情况
 							returnScore = score;
 						}
 						logger.info("returnScore-------" + returnScore);
