@@ -951,7 +951,7 @@ public class OrderUtil {
 			if(!StringUtils.isEmpty(order.getDiscountInfo())){
 				Map<String, Object> mapObject = JsonUtil.getMapFromJson(order.getDiscountInfo());
 				if(mapObject.get("score")!=null && Integer.parseInt(mapObject.get("score").toString())>0){
-					if(flag){
+					if(mapObject.get("returnScoreFlag")!=null ){
 						integralRecordVO.setUse_score(Integer.parseInt(mapObject.get("returnScore").toString())); // 积分 
 						integralRecordVO.setScore_deduction(new BigDecimal(mapObject.get("returnScoreDeduction").toString()));  //积分抵扣金额
 					}else{
@@ -1113,6 +1113,7 @@ public class OrderUtil {
 							jsonObject.put("scoreDeduction",(score-returnScore)*scoreExchangeMoney);
 							jsonObject.put("returnScore", returnScore);
 							jsonObject.put("returnScoreDeduction", returnScore*scoreExchangeMoney);
+							jsonObject.put("returnScoreFlag", returnScore);
 							order.setDiscountInfo(jsonObject.toString());
 						}
 					}
