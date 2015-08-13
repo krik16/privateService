@@ -73,7 +73,7 @@
 				pay_account = #{payAccount,jdbcType=VARCHAR},
 			</if>
 			<if test="payType != null">
-				pay_type = #{paytype,jdbcType=TINYINT},
+				pay_type = #{payType,jdbcType=TINYINT},
 			</if>
 			<if test="count != null">
 				`count` = #{count,jdbcType=INTEGER},
@@ -91,7 +91,7 @@
 				update_at = #{updateAt,jdbcType=TIMESTAMP},
 			</if>
 			<if test="desc != null">
-				 `desc` = #{desc,jdbcType=VARHCAR}
+				`desc` = #{desc,jdbcType=VARHCAR}
 			</if>
 		</set>
 		where id = #{id,jdbcType=INTEGER}
@@ -109,7 +109,7 @@
 		#{createAt,jdbcType=TIMESTAMP},
 		update_at =
 		#{updateAt,jdbcType=TIMESTAMP},
-		 `desc` = #{desc,jdbcType=VARCHAR}
+		`desc` = #{desc,jdbcType=VARCHAR}
 		where id
 		= #{id,jdbcType=INTEGER}
 
@@ -120,8 +120,11 @@
 		select
 		<include refid="Base_Column_List" />
 		from account_blacklist
-		where pay_account =	#{payAccount,jdbcType=VARCHAR}
-		and pay_type = #{payType,jdbcType=TINYINT}
+		where pay_account =
+		#{payAccount,jdbcType=VARCHAR}
+		<if test="payType != null">
+			and pay_type = #{payType,jdbcType=TINYINT}
+		</if>
 		<if test="status != null">
 			and status = #{status,jdbcType=TINYINT}
 		</if>
