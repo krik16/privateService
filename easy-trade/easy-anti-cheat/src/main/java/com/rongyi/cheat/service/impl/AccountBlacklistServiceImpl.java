@@ -74,7 +74,7 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 
 	@Override
 	public void valadatePayAccount(Map<String, Object> map) {
-		map.put("count", BLACK_ROLL.WARN_COUNT);
+		map.put("count", 10);
 		LOGGER.info("扫描是否有账号符合黑名单条件，购买次数大于" + BLACK_ROLL.WARN_COUNT);
 		List<PayAccountUseTotal> list = rpbService.selectPayAccountUseTotal(map);
 		List<AccountBlacklist> mailWranList = new ArrayList<AccountBlacklist>();
