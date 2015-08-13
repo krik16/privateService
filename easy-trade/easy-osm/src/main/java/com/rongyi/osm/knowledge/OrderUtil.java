@@ -1099,13 +1099,16 @@ public class OrderUtil {
 						if (orderPrice.compareTo(new BigDecimal(0)) > 0) {
 							//修改后的价格10%比较减去红包之后的价格
 							if (ratioOrderPrice.compareTo(subtractCoupon) < 0) { 
-								int transformScore=(ratioOrderPrice.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_UP)).intValue();
+								int transformScore=(ratioOrderPrice.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_DOWN)).intValue();
 								if(score > transformScore){
-									returnScore =score-transformScore;
+									//满一个积分才能使用
+									if(transformScore>=1){
+										returnScore =score-transformScore;
+									}
 								}
 								
 							} else {
-								int transformScore=(subtractCoupon.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_UP)).intValue();
+								int transformScore=(subtractCoupon.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_DOWN)).intValue();
 								if(score > transformScore){
 									 returnScore=score-transformScore;
 								}
