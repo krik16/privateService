@@ -223,48 +223,49 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 
 	@Override
 	public boolean weixinRefund(String payNo, double refundFee, double totalFee, String newPayNo) {
-
-		RequestHandler reqHandler = new RequestHandler(null, null);
-		TenpayHttpClient httpClient = new TenpayHttpClient();
-		// -----------------------------
-		// 设置请求参数
-		// -----------------------------
-		reqHandler.init();
-		reqHandler.setKey(ConstantUtil.PayWeiXin.PARTNER_KEY);
-		reqHandler.setGateUrl(ConstantUtil.PayWeiXin.REFUND_URL);
-		// -----------------------------
-		// 设置接口参数
-		// -----------------------------
-		reqHandler.setParameter("service_version", ConstantUtil.PayWeiXin.VERSION);
-		reqHandler.setParameter("partner", ConstantUtil.PayWeiXin.PARTNER);
-		reqHandler.setParameter("out_trade_no", payNo);
-		reqHandler.setParameter("out_refund_no", pcWebPageAlipayService.getBatchNo(null));
-		reqHandler.setParameter("total_fee", getPennyByMoney(totalFee));
-		reqHandler.setParameter("refund_fee", getPennyByMoney(refundFee));
-		reqHandler.setParameter("op_user_id", ConstantUtil.PayWeiXin.PARTNER);
-		// 操作员密码,MD5处理
-		reqHandler.setParameter("op_user_passwd", MD5Util.MD5Encode(ConstantUtil.PayWeiXin.PASSWORD, ConstantUtil.PayWeiXin.ENCODE_GBK));
-		// -----------------------------
-		// 设置请求返回的等待时间
-		httpClient.setTimeOut(5);
-		// // 设置ca证书
-		String classesPath = this.getClass().getClassLoader().getResource("").getFile();
-		classesPath += "cret";
-		httpClient.setCaInfo(new File(classesPath + "/cacert.pem"));
-		// 设置个人(商户)证书
-		LOGGER.info("证书目录=" + ConstantUtil.CRET_DIRECTORY);
-		httpClient.setCertInfo(new File(ConstantUtil.CRET_DIRECTORY), ConstantUtil.PayWeiXin.PARTNER);
-		// 设置发送类型POST
-		httpClient.setMethod(ConstantUtil.PayWeiXin.METHOD_POST);
-		// 设置请求内容
-		String requestUrl;
 		try {
+			RequestHandler reqHandler = new RequestHandler(null, null);
+			TenpayHttpClient httpClient = new TenpayHttpClient();
+			// -----------------------------
+			// 设置请求参数
+			// -----------------------------
+			reqHandler.init();
+			reqHandler.setKey(ConstantUtil.PayWeiXin.PARTNER_KEY);
+			reqHandler.setGateUrl(ConstantUtil.PayWeiXin.REFUND_URL);
+			// -----------------------------
+			// 设置接口参数
+			// -----------------------------
+			reqHandler.setParameter("service_version", ConstantUtil.PayWeiXin.VERSION);
+			reqHandler.setParameter("partner", ConstantUtil.PayWeiXin.PARTNER);
+			reqHandler.setParameter("out_trade_no", payNo);
+			reqHandler.setParameter("out_refund_no", pcWebPageAlipayService.getBatchNo(null));
+			reqHandler.setParameter("total_fee", getPennyByMoney(totalFee));
+			reqHandler.setParameter("refund_fee", getPennyByMoney(refundFee));
+			reqHandler.setParameter("op_user_id", ConstantUtil.PayWeiXin.PARTNER);
+			// 操作员密码,MD5处理
+			reqHandler.setParameter("op_user_passwd", MD5Util.MD5Encode(ConstantUtil.PayWeiXin.PASSWORD, ConstantUtil.PayWeiXin.ENCODE_GBK));
+			// -----------------------------
+			// 设置请求返回的等待时间
+			httpClient.setTimeOut(5);
+			// // 设置ca证书
+			String classesPath = this.getClass().getClassLoader().getResource("").getFile();
+			classesPath += "cret";
+			httpClient.setCaInfo(new File(classesPath + "/cacert.pem"));
+			// 设置个人(商户)证书
+			LOGGER.info("证书目录=" + ConstantUtil.CRET_DIRECTORY);
+			LOGGER.info("外网地址=" + ConstantUtil.NOTIFY_URL.outernetAddress);
+			httpClient.setCertInfo(new File(ConstantUtil.CRET_DIRECTORY), ConstantUtil.PayWeiXin.PARTNER);
+			// 设置发送类型POST
+			httpClient.setMethod(ConstantUtil.PayWeiXin.METHOD_POST);
+			// 设置请求内容
+			String requestUrl;
 			requestUrl = reqHandler.getRequestURL();
 			httpClient.setReqContent(requestUrl);
+			return getRescontent(httpClient, newPayNo);
 		} catch (Exception e) {
-			LOGGER.error(e);
+			e.printStackTrace();
 		}
-		return getRescontent(httpClient, newPayNo);
+		return false;
 	}
 
 	private boolean getRescontent(TenpayHttpClient httpClient, String newPayNo) {
@@ -289,7 +290,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 				LOGGER.info("后台调用通信失败");
 			}
 		} catch (Exception e) {
-			LOGGER.error(e);
+			e.printStackTrace();
 		}
 		return false;
 	}
@@ -372,7 +373,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 	@Override
 	public WeixinQueryOrderParamVO queryOrder(String payNo) {
 		String result = orderquery(payNo);
-		LOGGER.info("微信订单查询返回结果："+result);
+		LOGGER.info("微信订单查询返回结果：" + result);
 		WeixinQueryOrderParamVO weixinQueryOrderParamVO = new WeixinQueryOrderParamVO();
 		JSONObject jsonObject = JSONObject.fromObject(result);
 		JSONObject orderInfo = jsonObject.getJSONObject("order_info");
