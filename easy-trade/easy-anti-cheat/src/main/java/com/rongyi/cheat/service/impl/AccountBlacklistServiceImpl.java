@@ -47,7 +47,7 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 	@Autowired
 	MailService mailService;
 
-	private static final String NAMESPACE = "com.rongyi.cheat.mapper.xml.BlackRollMapper";
+	private static final String NAMESPACE = "com.rongyi.cheat.mapper.xml.AccountBlacklistMapper";
 
 	@Override
 	public void insert(AccountBlacklist accountBlacklist) {
@@ -61,10 +61,11 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 	}
 
 	@Override
-	public AccountBlacklist selectByPayAccount(String payAccout, Byte payType) {
+	public AccountBlacklist selectByPayAccount(String payAccout, Byte payType, Byte status) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("payAccout", payAccout);
 		map.put("payType", payType);
+		map.put("status", status);
 		return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectByPayAccount", map);
 	}
 
@@ -74,7 +75,7 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 		List<PayAccountUseTotal> list = rpbService.selectPayAccountUseTotal(map);
 		List<AccountBlacklist> mailWranList = new ArrayList<AccountBlacklist>();
 		for (PayAccountUseTotal payAccountUseTotal : list) {
-			AccountBlacklist accountBlacklist = selectByPayAccount(payAccountUseTotal.getPayAccount(), Integer.valueOf(payAccountUseTotal.getPayType()).byteValue());
+			AccountBlacklist accountBlacklist = selectByPayAccount(payAccountUseTotal.getPayAccount(), Integer.valueOf(payAccountUseTotal.getPayType()).byteValue(), null);
 			if (accountBlacklist == null) {
 				accountBlacklist = getAccountBlacklist(payAccountUseTotal);
 				insert(accountBlacklist);
@@ -87,7 +88,7 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 					mailWranList.add(accountBlacklist);
 			}
 		}
-//		sendWranEmail(mailWranList);
+		// sendWranEmail(mailWranList);
 	}
 
 	private void sendWranEmail(List<AccountBlacklist> mailWranList) {

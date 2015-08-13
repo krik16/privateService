@@ -41,11 +41,12 @@ public interface AccountBlacklistService {
 	 * @Description: 查询账号记录
 	 * @param payAccout
 	 * @param payType
+	 * @param status
 	 * @return
 	 * @Author: 柯军
 	 * @datetime:2015年8月12日下午7:46:00
 	 **/
-	public AccountBlacklist selectByPayAccount(String payAccout, Byte payType);
+	public AccountBlacklist selectByPayAccount(String payAccout, Byte payType,Byte status);
 
 	/**
 	 * @Description: 检查支付账号是否满足加入黑名单条件
