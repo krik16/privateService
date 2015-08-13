@@ -7,6 +7,7 @@ import org.springframework.test.annotation.Rollback;
 import org.testng.annotations.Test;
 
 import com.rongyi.cheat.service.AccountBlacklistService;
+import com.rongyi.easy.cheat.AccountBlacklist;
 import com.rongyi.rss.cheat.IAntiCheatService;
 import com.rongyi.tms.BaseTest;
 
@@ -18,14 +19,15 @@ public class AccountBlackListServiceImplTest extends BaseTest{
 	@Autowired
 	IAntiCheatService iAntiCheatService;
 	
-//	@Test
+	@Test
 	@Rollback(false)
 	public void testValadatePayAccount(){
 		blackRollService.valadatePayAccount(new HashMap<String,Object>());
 	}
 	
-	@Test
+//	@Test
 	public void testSelectByPayAccount(){
-		iAntiCheatService.valdateAccountInBlackList("1",new Byte((byte) 0),new Byte((byte) 0));
+		AccountBlacklist accountBlacklist = blackRollService.selectByPayAccount("1041929273@qq.com",null,null);
+		System.err.println(accountBlacklist.getId());
 	}
 }
