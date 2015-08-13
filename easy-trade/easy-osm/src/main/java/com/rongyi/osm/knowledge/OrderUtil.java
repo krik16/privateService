@@ -253,6 +253,7 @@ public class OrderUtil {
 			total = total.add(order.getExpressFee());
 		}
 
+		logger.info("减去红包，折扣等后的金额-------" + total);
 		// 减去积分
 		if(order.getDiscountInfo()!=null  && order.getDiscountInfo().length()>0){
 			Map<String,Object> map = JsonUtil.getMapFromJson(order.getDiscountInfo());
@@ -265,7 +266,7 @@ public class OrderUtil {
 				//cashScore代表修改价格后实际使用的积分
 				
 				if(map.get("cashScore")!=null && Integer.parseInt(map.get("cashScore").toString())>0){
-					System.out.println("cashScore----->"+Integer.parseInt(map.get("cashScore").toString()));
+					logger.info("cashScore----->"+Integer.parseInt(map.get("cashScore").toString()));
 					scoreValue = Double.parseDouble(map.get("cashScore").toString()) * scoreExchangeMoney;
 				}else{
 					scoreValue = Double.parseDouble(map.get("score").toString()) * scoreExchangeMoney;
@@ -273,13 +274,14 @@ public class OrderUtil {
 
 				//金额的10%兑换积分不满足1积分则不能使用积分支付
 				BigDecimal rationTotalScore=ratioTotal.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_DOWN);
-				if(rationTotalScore.compareTo(new BigDecimal(1))>0){
+				if(rationTotalScore.compareTo(new BigDecimal(1))>=0){
 					BigDecimal score = new BigDecimal(scoreValue);
 					total = total.subtract(score);
 				}
 				//总价小于零则取零，否则保留2位小数
 				total=total.setScale(2,BigDecimal.ROUND_HALF_UP);
 				total = total.compareTo(new BigDecimal(0)) < 0 ? new BigDecimal(0) : total;
+				logger.info("减去积分后的金额-------" + total);
 			}
 		}
 		return total;
