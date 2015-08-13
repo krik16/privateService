@@ -1,9 +1,13 @@
 package com.rongyi.osm.service;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.json.JSONObject;
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -104,9 +108,28 @@ public class OrderFormService extends BaseServiceImpl {
 	 * @param orderFormEntity
 	 */
 	public void updateStatusAndPaymentIdWithTime(OrderFormEntity orderFormEntity) {
+		JSONObject jsonObject = new JSONObject();
+		if (!StringUtils.isEmpty(orderFormEntity.getDiscountInfo())) {
+			jsonObject = JSONObject.fromObject(orderFormEntity.getDiscountInfo());
+			if (jsonObject.get("returnScore") != null && Integer.parseInt(jsonObject.get("returnScore").toString()) > 0) {
+				//实际使用的积分
+				jsonObject.put("score", Integer.parseInt(jsonObject.get("score").toString())-Integer.parseInt(jsonObject.get("returnScore").toString()));
+				//修改价格前积分对应的积分抵用金额
+				double scoreDeduction=Double.valueOf(jsonObject.get("scoreDeduction").toString());
+				//修改价格后积分对应的积分抵用金额
+				double returnScoreDeduction=Double.valueOf(jsonObject.get("returnScoreDeduction").toString());
+				//实际使用的积分对应的积分抵用金额
+				jsonObject.put("scoreDeduction", sub(scoreDeduction,returnScoreDeduction));
+				orderFormEntity.setDiscountInfo(jsonObject.toString());
+			}
+		}
 		this.getBaseDao().updateBySql(MAPPER_NAMESPACE + ".updateStatusAndPaymentIdWithTime", orderFormEntity);
 	}
-
+	public static double sub(double value1,double value2){
+		BigDecimal b1 = new BigDecimal(Double.valueOf(value1));
+		BigDecimal b2 = new BigDecimal(Double.valueOf(value2));
+		return b1.subtract(b2).doubleValue();
+	}
 	/**
 	 * 更新订单状态和物流ID（包括订单状态，状态路径，状态保持时间，预计进入下一状态时间）
 	 * 
