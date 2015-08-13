@@ -29,11 +29,10 @@ public class BRoles implements Serializable{
     
     private String createName;
     
-    private String stopReason;
-    
     private Date stopAt;
     
     private Integer stopBy;
+    private String stopReason;
     
     private BBelongRelation belongRelation; 
 
@@ -133,14 +132,6 @@ public class BRoles implements Serializable{
 		this.createName = createName;
 	}
 
-	public String getStopReason() {
-		return stopReason;
-	}
-
-	public void setStopReason(String stopReason) {
-		this.stopReason = stopReason;
-	}
-
 	public Date getStopAt() {
 		return stopAt;
 	}
@@ -163,6 +154,13 @@ public class BRoles implements Serializable{
 
 	public void setBelongRelation(BBelongRelation belongRelation) {
 		this.belongRelation = belongRelation;
+	}
+	public String getStopReason() {
+		return stopReason;
+	}
+
+	public void setStopReason(String stopReason) {
+		this.stopReason = stopReason;
 	}
     
 }

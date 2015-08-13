@@ -46,6 +46,18 @@ public class UserInfo implements Serializable{
     private String cardId;
 
     private String memo;
+    
+    private Date stopAt ;
+    
+    private Integer stopBy;
+    
+    private String branchCompanyName;   //所属分公司
+    
+    private String shopName ;  //所属店铺
+    
+    private String createName;  //添加人
+    
+    private String roleName ;  //角色职位
 
     private Integer createSource;
     
@@ -228,8 +240,48 @@ public class UserInfo implements Serializable{
     public void setMemo(String memo) {
         this.memo = memo == null ? null : memo.trim();
     }
+    
+    public Date getStopAt() {
+		return stopAt;
+	}
 
-    public Integer getCreateSource() {
+	public void setStopAt(Date stopAt) {
+		this.stopAt = stopAt;
+	}
+
+	public Integer getStopBy() {
+		return stopBy;
+	}
+
+	public void setStopBy(Integer stopBy) {
+		this.stopBy = stopBy;
+	}
+
+	public String getBranchCompanyName() {
+		return branchCompanyName;
+	}
+
+	public void setBranchCompanyName(String branchCompanyName) {
+		this.branchCompanyName = branchCompanyName;
+	}
+
+	public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+
+	public String getCreateName() {
+		return createName;
+	}
+
+	public void setCreateName(String createName) {
+		this.createName = createName;
+	}
+
+	public Integer getCreateSource() {
         return createSource;
     }
 
@@ -245,4 +297,12 @@ public class UserInfo implements Serializable{
 		this.userShop = userShop;
 	}
 	
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+
 }
