@@ -2,6 +2,7 @@ package com.rongyi.easy.bsoms.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class UserInfo implements Serializable{
     private Integer id;
@@ -61,6 +62,8 @@ public class UserInfo implements Serializable{
     private Integer createSource;
     
     private String stopReason;//停用 原因
+    
+    private UserShop userShop;
     
     public String getStopReason() {
 		return stopReason;
@@ -286,6 +289,14 @@ public class UserInfo implements Serializable{
         this.createSource = createSource;
     }
 
+	public UserShop getUserShop() {
+		return userShop;
+	}
+
+	public void setUserShop(UserShop userShop) {
+		this.userShop = userShop;
+	}
+	
 	public String getRoleName() {
 		return roleName;
 	}
