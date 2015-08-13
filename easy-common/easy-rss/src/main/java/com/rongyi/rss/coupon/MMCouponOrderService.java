@@ -57,7 +57,16 @@ public interface MMCouponOrderService {
      * @param orderNo
      * @return
      */
-    List<CouponOrderItem> findItemListByOrderNo(String orderNo);
+    List<CouponOrderItem> findOrderItemsByNo(String orderNo);
+
+
+    /**
+     * 根据订单Id查询订单项
+     *
+     * @param orderId
+     * @return
+     */
+    List<CouponOrderItem> findOrderItemsById(Long orderId);
 
     /**
      * 优惠券立即购买
