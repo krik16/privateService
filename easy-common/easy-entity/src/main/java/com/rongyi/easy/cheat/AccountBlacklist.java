@@ -3,7 +3,7 @@ package com.rongyi.easy.cheat;
 import java.io.Serializable;
 import java.util.Date;
 
-public class BlackRoll implements Serializable {
+public class AccountBlacklist implements Serializable {
 	/**
 	 * 
 	 */
@@ -45,6 +45,8 @@ public class BlackRoll implements Serializable {
 	 * 更新时间
 	 */
 	private Date updateAt;
+
+	private String desc;
 
 	public Integer getId() {
 		return id;
@@ -109,4 +111,13 @@ public class BlackRoll implements Serializable {
 	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;
 	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+
 }

@@ -32,7 +32,7 @@ public class PayAccountUseTotal implements Serializable{
 	/**
 	 * 账号类型
 	 */
-	private Integer payType;
+	private String payType;
 	
 	/**
 	 * 购买次数
@@ -47,11 +47,11 @@ public class PayAccountUseTotal implements Serializable{
 		this.payAccount = payAccount;
 	}
 
-	public Integer getPayType() {
+	public String getPayType() {
 		return payType;
 	}
 
-	public void setPayType(Integer payType) {
+	public void setPayType(String payType) {
 		this.payType = payType;
 	}
 
