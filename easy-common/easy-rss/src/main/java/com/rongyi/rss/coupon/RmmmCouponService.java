@@ -61,5 +61,13 @@ public interface RmmmCouponService {
      */
     ActivityData getCouponInfoForSolr(String couponId);
 
+
+    /**
+     * 根据id查看优惠券是否存在
+     * @param couponId
+     * @return
+     */
+    boolean hasCoupon(String couponId);
+
 }
 

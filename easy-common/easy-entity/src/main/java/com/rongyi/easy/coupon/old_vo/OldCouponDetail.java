@@ -4,7 +4,13 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class OldCouponItemVO implements Serializable {
+
+/**
+ * 优惠券订单详情信息 （优惠券基本信息与券码信息）
+ * @author Breggor
+ * @date 2015-08-13
+ */
+public class OldCouponDetail implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -32,7 +38,11 @@ public class OldCouponItemVO implements Serializable {
 
     private String thumbnail;// 缩略图
 
-    private List<OldUserCouponVO> myActivityList;// 老用户优惠VO列表（app-activity-detail）
+    //新版本废弃
+    @Deprecated
+    private List<OldUserCode> myActivityList;// 老用户优惠VO列表
+
+    private List<OldUserCode> userCouponList; //用户券码列表
 
     private Integer ticketTotalNumber;// 订单项对应的用户优惠总数量
 
@@ -45,8 +55,11 @@ public class OldCouponItemVO implements Serializable {
     private String couponId;//优惠券id
 
     private int integral;  // 购买时使用的积分
+
     private double couponDiscount; //购买时使用的红包价格
+
     private int unUsered;  //未使用的数量
+
     private Double orderPrice;//订单总价
 
     public double getCurrentPrice() {
@@ -153,11 +166,11 @@ public class OldCouponItemVO implements Serializable {
         this.thumbnail = thumbnail;
     }
 
-    public List<OldUserCouponVO> getMyActivityList() {
+    public List<OldUserCode> getMyActivityList() {
         return myActivityList;
     }
 
-    public void setMyActivityList(List<OldUserCouponVO> myActivityList) {
+    public void setMyActivityList(List<OldUserCode> myActivityList) {
         this.myActivityList = myActivityList;
     }
 
@@ -217,13 +230,13 @@ public class OldCouponItemVO implements Serializable {
         this.unUsered = unUsered;
     }
 
-	public Double getOrderPrice() {
-		return orderPrice;
-	}
+    public Double getOrderPrice() {
+        return orderPrice;
+    }
 
-	public void setOrderPrice(Double orderPrice) {
-		this.orderPrice = orderPrice;
-	}
-    
-    
+    public void setOrderPrice(Double orderPrice) {
+        this.orderPrice = orderPrice;
+    }
+
+
 }

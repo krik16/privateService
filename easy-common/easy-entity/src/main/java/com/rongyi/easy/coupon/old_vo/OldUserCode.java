@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 
-public class OldUserCouponVO implements Serializable {
+public class OldUserCode implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer id;
