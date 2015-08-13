@@ -19,6 +19,7 @@ import java.util.Set;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,6 +50,8 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 
 	private static final String NAMESPACE = "com.rongyi.cheat.mapper.xml.AccountBlacklistMapper";
 
+	private static final Logger LOGGER = Logger.getLogger(AccountBlacklistServiceImpl.class);
+
 	@Override
 	public void insert(AccountBlacklist accountBlacklist) {
 		this.getBaseDao().insertBySql(NAMESPACE + ".insert", accountBlacklist);
@@ -61,9 +64,9 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 	}
 
 	@Override
-	public AccountBlacklist selectByPayAccount(String payAccout, Byte payType, Byte status) {
+	public AccountBlacklist selectByPayAccount(String payAccount, Byte payType, Byte status) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("payAccout", payAccout);
+		map.put("payAccount", payAccount);
 		map.put("payType", payType);
 		map.put("status", status);
 		return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectByPayAccount", map);
@@ -72,10 +75,12 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 	@Override
 	public void valadatePayAccount(Map<String, Object> map) {
 		map.put("count", BLACK_ROLL.WARN_COUNT);
+		LOGGER.info("扫描是否有账号符合黑名单条件，购买次数大于" + BLACK_ROLL.WARN_COUNT);
 		List<PayAccountUseTotal> list = rpbService.selectPayAccountUseTotal(map);
 		List<AccountBlacklist> mailWranList = new ArrayList<AccountBlacklist>();
 		for (PayAccountUseTotal payAccountUseTotal : list) {
-			AccountBlacklist accountBlacklist = selectByPayAccount(payAccountUseTotal.getPayAccount(), Integer.valueOf(payAccountUseTotal.getPayType()).byteValue(), null);
+			AccountBlacklist accountBlacklist = selectByPayAccount(payAccountUseTotal.getPayAccount(), Integer.valueOf(payAccountUseTotal.getPayType()).byteValue(),
+					ConstantEnum.BLACK_ROLL_STATUS_0.getCodeByte());
 			if (accountBlacklist == null) {
 				accountBlacklist = getAccountBlacklist(payAccountUseTotal);
 				insert(accountBlacklist);
@@ -88,7 +93,8 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 					mailWranList.add(accountBlacklist);
 			}
 		}
-		// sendWranEmail(mailWranList);
+		if (!mailWranList.isEmpty())
+			sendWranEmail(mailWranList);
 	}
 
 	private void sendWranEmail(List<AccountBlacklist> mailWranList) {
@@ -99,15 +105,16 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 		for (AccountBlacklist accountBlacklist : mailWranList) {
 			sb.append("账号：");
 			sb.append(accountBlacklist.getPayAccount());
-			sb.append("账号类型：");
+			sb.append(",账号类型：");
 			sb.append((accountBlacklist.getPayType() == 0) ? "支付宝" : "微信");
-			sb.append("购买总数量：");
+			sb.append(",购买总数量：");
 			sb.append(accountBlacklist.getCount());
 			sb.append(";");
 			sb.append("\n");
 		}
 
 		try {
+			LOGGER.info("发送报警邮件，收件人列表" + toAdrs.toString());
 			mailService.sendAttachmentEmail("刷单账号预警", "kejun@rongyi.com", toAdrs, sb.toString(), null);
 		} catch (AddressException e) {
 			e.printStackTrace();
