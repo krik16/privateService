@@ -108,7 +108,8 @@
     	status_route = #{statusRoute}, 
     	status_hold_ms = #{statusHoldMs}, 
     	next_status_time = #{nextStatusTime,jdbcType=TIMESTAMP},
-    	payment_id_list = #{paymentIdList}
+    	payment_id_list = #{paymentIdList},
+    	discount_info = #{discountInfo} 
     where order_no = #{orderNo}
   </update>
   

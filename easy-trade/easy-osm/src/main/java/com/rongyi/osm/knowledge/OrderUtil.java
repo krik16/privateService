@@ -1108,8 +1108,8 @@ public class OrderUtil {
 						logger.info("returnScore-------" + returnScore);
 						if (returnScore > 0) {
 							//更新实际使用的积分
-							jsonObject.put("score", score-returnScore);
-							jsonObject.put("scoreDeduction",(score-returnScore)*scoreExchangeMoney);
+//							jsonObject.put("score", score-returnScore);
+//							jsonObject.put("scoreDeduction",(score-returnScore)*scoreExchangeMoney);
 							//返还的积分
 							jsonObject.put("returnScore", returnScore);
 							jsonObject.put("returnScoreDeduction", returnScore*scoreExchangeMoney);
