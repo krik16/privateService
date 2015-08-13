@@ -634,7 +634,7 @@ salience 100
 		// 计算并设置折扣
 		boolean legalPrice = orderUtil.orderSetDiscount($event.getOrderPrice(), $order, orderDetailList);
 		logger.debug("计算多余积分且归还积分------start--------");
-		orderUtil.returnScore($order,orderDetailList,$event.getOrderPrice());
+		orderUtil.returnScore($order,orderDetailList);
 		logger.debug("修改入库-----end-------");
 		// 重新计算订单总价
 		$order.setTotalAmount(orderUtil.calculateTotalPrice($order, orderDetailList));
