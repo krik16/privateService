@@ -1102,7 +1102,7 @@ public class OrderUtil {
 						int score =Integer.parseInt(jsonObject.get("score").toString());// 修改价格之前使用的积分
 						BigDecimal ratioOrderPrice =orderPrice.multiply(ratio);// 修改后的价格10%
 						
-						BigDecimal subtractCoupon =orderPrice.subtract(cashCouponDiscount);// 修红改之后的价格减去包
+						BigDecimal subtractCoupon = orderPrice.subtract(cashCouponDiscount);// 修红改之后的价格减去包
 						if (orderPrice.compareTo(new BigDecimal(0)) > 0) {
 							//修改后的价格10%比较减去红包之后的价格
 							if (ratioOrderPrice.compareTo(subtractCoupon) < 0) { 
@@ -1115,10 +1115,17 @@ public class OrderUtil {
 								}
 								
 							} else {
-								int transformScore=(subtractCoupon.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_DOWN)).intValue();
-								if(score > transformScore){
-									 returnScore=score-transformScore;
-								}
+								//
+								BigDecimal ratioExpressFee=order.getExpressFee().multiply(ratio);//运费的10%
+								int scoreExpressFee=ratioExpressFee.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_DOWN).intValue();//运费对应的积分折扣
+                                if(scoreExpressFee >=1){
+                                	//orderPrice.subtract(new BigDecimal(scoreExpressFee).multiply(scoreExchangeMoney));
+                                	returnScore =score-scoreExpressFee;
+                                }
+//								int transformScore=(subtractCoupon.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_DOWN)).intValue();
+//								if(score > transformScore){
+//									 returnScore=score-transformScore;
+//								}
 							}
 						} else {
 							//修改价格为0的情况
