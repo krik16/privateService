@@ -253,7 +253,6 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 			httpClient.setCaInfo(new File(classesPath + "/cacert.pem"));
 			// 设置个人(商户)证书
 			LOGGER.info("证书目录=" + ConstantUtil.CRET_DIRECTORY);
-			LOGGER.info("外网地址=" + ConstantUtil.NOTIFY_URL.outernetAddress);
 			httpClient.setCertInfo(new File(ConstantUtil.CRET_DIRECTORY), ConstantUtil.PayWeiXin.PARTNER);
 			// 设置发送类型POST
 			httpClient.setMethod(ConstantUtil.PayWeiXin.METHOD_POST);

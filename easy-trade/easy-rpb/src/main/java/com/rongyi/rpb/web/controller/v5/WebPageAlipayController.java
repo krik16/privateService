@@ -284,8 +284,8 @@ public class WebPageAlipayController extends BaseController {
 				return "appwebpage/notify";
 			LOGGER.info("微信支付异步通知开始，交易流水号-->" + transaction_id);
 			Map<String, String> requestMap = parseXml(request);
-			PaymentLogInfo paymentLogInfo = getPaymentLogInfo(transaction_id, out_trade_no, notify_id, null, DateUtil.getCurrDateTime(), sign, sign_type, 0, 0, total_fee, null,
-					requestMap.get("OpenId"), Constants.REPLAY_FLAG.REPLAY_FLAG3);
+			PaymentLogInfo paymentLogInfo = getPaymentLogInfo(transaction_id, out_trade_no, notify_id, null, DateUtil.getCurrDateTime(), sign, sign_type, 0, 0, total_fee, requestMap.get("OpenId"),
+					null, Constants.REPLAY_FLAG.REPLAY_FLAG3);
 			paymentLogInfoService.insertPayNotify(paymentLogInfo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, PaymentEventType.WEIXIN_PAY);
 			LOGGER.info("<--微信支付异步通知结束");
 		} catch (Exception e) {
