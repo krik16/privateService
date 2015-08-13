@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.testng.annotations.Test;
 
-import com.rongyi.cheat.service.BlackRollService;
+import com.rongyi.cheat.service.AccountBlacklistService;
 import com.rongyi.tms.BaseTest;
 
-public class BlackRollServiceImplTest extends BaseTest{
+public class AccountBlackListServiceImplTest extends BaseTest{
 	
 	@Autowired
-	BlackRollService blackRollService;
+	AccountBlacklistService blackRollService;
 	
 	@Test
 	@Rollback(false)

@@ -15,4 +15,6 @@
 	<import resource="applicationContext-mybatis-tx.xml" />
 	<import resource="applicationContext-rabbit.xml" />
 	<import resource="applicationContext-cheat.xml" />
+	<import resource="applicationContext-mail.xml" />
+	
 </beans>
