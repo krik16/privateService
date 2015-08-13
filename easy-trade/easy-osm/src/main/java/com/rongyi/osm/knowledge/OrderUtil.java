@@ -260,7 +260,7 @@ public class OrderUtil {
 				Map<String, Object> mapObject=getMapByJson(ScoreRuleEnum.SCORE_ORDER_SUB.getCode());
 				double scoreExchangeMoney= Double.parseDouble(mapObject.get("scoreExchangeMoney").toString());
 				BigDecimal ratio = new BigDecimal(mapObject.get("limit").toString());// 判断积分支付是否大于订单价格的10%参数
-				BigDecimal ratioTotal =ratio.multiply(ratio);// 支付金额的10%
+				BigDecimal ratioTotal =total.multiply(ratio);// 支付金额的10%
 				Double scoreValue=0.0;
 				//cashScore代表修改价格后实际使用的积分
 				
@@ -272,7 +272,8 @@ public class OrderUtil {
 				}
 
 				//金额的10%兑换积分不满足1积分则不能使用积分支付
-				if(ratioTotal.divide(new BigDecimal(scoreExchangeMoney)).compareTo(new BigDecimal(1))>0){
+				BigDecimal rationTotalScore=ratioTotal.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_DOWN);
+				if(rationTotalScore.compareTo(new BigDecimal(1))>0){
 					BigDecimal score = new BigDecimal(scoreValue);
 					total = total.subtract(score);
 				}
