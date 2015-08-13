@@ -18,6 +18,7 @@ import java.util.Map;
 
 
 
+
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
@@ -260,7 +261,9 @@ public class OrderUtil {
 				double scoreExchangeMoney= Double.parseDouble(mapObject.get("scoreExchangeMoney").toString());
 				Double scoreValue=0.0;
 				//cashScore代表修改价格后实际使用的积分
-				if(mapObject.get("cashScore")!=null && Integer.parseInt(mapObject.get("cashScore").toString())>0){
+				
+				if(map.get("cashScore")!=null && Integer.parseInt(map.get("cashScore").toString())>0){
+					System.out.println("cashScore----->"+Integer.parseInt(map.get("cashScore").toString()));
 					scoreValue = Double.parseDouble(map.get("cashScore").toString()) * scoreExchangeMoney;
 				}else{
 					scoreValue = Double.parseDouble(map.get("score").toString()) * scoreExchangeMoney;
@@ -268,13 +271,12 @@ public class OrderUtil {
 				
 				BigDecimal score = new BigDecimal(scoreValue);
 				total = total.subtract(score);
-				//总价小于零的情况
-				total = total.compareTo(new BigDecimal(0)) < 0 ? new BigDecimal(0) : total;
+				//总价小于零则取零，否则保留2位小数
+				total = total.compareTo(new BigDecimal(0)) < 0 ? new BigDecimal(0) : total.setScale(2,BigDecimal.ROUND_HALF_UP);
 			}
 		}
 		return total;
 	}
-	
 	
 	/**
 	* C2C卖家修改价格后折扣的计算
@@ -1077,7 +1079,7 @@ public class OrderUtil {
 						for (Object entity : orderDetailList) {
 							OrderDetailFormEntity orderDetail = (OrderDetailFormEntity) entity;
 							String couponId = orderDetail.getCouponId(); // 优惠code
-							orderDetailRealAmount.add(orderDetail.getRealAmount());
+							orderDetailRealAmount=orderDetailRealAmount.add(orderDetail.getRealAmount());
 							if (!(couponId == null || couponId.isEmpty())) {
 								Double couponAmount = couponStatusService.getDiscountByCode(couponId); // 优惠抵扣金额
 								if (couponAmount != null) {
