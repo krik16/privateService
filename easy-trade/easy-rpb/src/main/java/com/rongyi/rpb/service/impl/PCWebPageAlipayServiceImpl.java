@@ -180,15 +180,21 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 	public List<Map<String, Object>> getBatchRefundBuyerMessage(String[] idArray, String desc) {
 		List<Map<String, Object>> refundList = new ArrayList<Map<String, Object>>();
 		String batchNo = getBatchNo(null);
+		for (String id : idArray) {//暂循环获取批量单号是否存在，后续更改直接查库
+			PaymentEntity paymentEntity = paymentService.selectByPrimaryKey(id);
+			if (paymentEntity.getBatchNo() != null) {
+				batchNo = paymentEntity.getBatchNo();
+				break;
+			}
+		}
 		for (String id : idArray) {
 			Map<String, Object> buyerMap = new HashMap<String, Object>();
 			PaymentEntity paymentEntity = paymentService.selectByPrimaryKey(id);
+			System.err.println("batchNo=" + batchNo);
 			if (paymentEntity.getBatchNo() == null) {
 				paymentEntity.setBatchNo(batchNo);
 				paymentService.updateByPrimaryKeySelective(paymentEntity);
-			} else
-				batchNo = paymentEntity.getBatchNo();
-			System.err.println("batchNo=" + batchNo);
+			}
 			PaymentEntity historyPaymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);
 			if (historyPaymentEntity != null) {
 				PaymentLogInfo paymentLogInfo = paymentLogInfoService.selectByOutTradeNo(historyPaymentEntity.getPayNo());
