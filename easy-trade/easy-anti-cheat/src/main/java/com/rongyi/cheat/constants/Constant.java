@@ -5,11 +5,11 @@ import com.rongyi.core.framework.spring.context.utils.SpringContextUtil;
 
 public interface Constant {
 
-	PropertyConfigurer propertyConfigurer = (PropertyConfigurer) SpringContextUtil.getBean("propertyConfigurer");
+	/*PropertyConfigurer propertyConfigurer = (PropertyConfigurer) SpringContextUtil.getBean("propertyConfigurer");
 	interface BLACK_ROLL {
 		String WARN_COUNT = propertyConfigurer.getProperty("WARN.COUNT").toString();//报警数量
 		String FREEZE_COUNT = propertyConfigurer.getProperty("FREEZE.COUNT").toString();//直接冻结数量
-	}
+	}*/
 
 	
 	String USER_SESSION_KEY = "user_session_key"; //

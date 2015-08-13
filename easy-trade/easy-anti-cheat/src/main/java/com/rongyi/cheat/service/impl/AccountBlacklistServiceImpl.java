@@ -23,7 +23,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rongyi.cheat.constants.Constant.BLACK_ROLL;
 import com.rongyi.cheat.constants.ConstantEnum;
 import com.rongyi.cheat.mail.MailService;
 import com.rongyi.cheat.service.AccountBlacklistService;
@@ -75,7 +74,7 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 	@Override
 	public void valadatePayAccount(Map<String, Object> map) {
 		map.put("count", 10);
-		LOGGER.info("扫描是否有账号符合黑名单条件，购买次数大于" + BLACK_ROLL.WARN_COUNT);
+		LOGGER.info("扫描是否有账号符合黑名单条件，购买次数大于" + 10);
 		List<PayAccountUseTotal> list = rpbService.selectPayAccountUseTotal(map);
 		List<AccountBlacklist> mailWranList = new ArrayList<AccountBlacklist>();
 		for (PayAccountUseTotal payAccountUseTotal : list) {
