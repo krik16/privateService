@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.bson.types.ObjectId;
-
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 @Entity("mcmc_commodity_spec")
@@ -27,6 +26,9 @@ public class CommoditySpec implements  Serializable {
 	private String extendColums;
 	private Date createAt;
 	private Date updateAt;
+	private String code;//商品编码
+	private String systemNumber;//系统编号
+	private String shopId;//对应商品所属店铺
 	public List<ObjectId> getColumnIds() {
 		return columnIds;
 	}
@@ -81,6 +83,23 @@ public class CommoditySpec implements  Serializable {
 	public void setColumnValues(List<String> columnValues) {
 		this.columnValues = columnValues;
 	}
-	
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public String getSystemNumber() {
+		return systemNumber;
+	}
+	public void setSystemNumber(String systemNumber) {
+		this.systemNumber = systemNumber;
+	}
+	public String getShopId() {
+		return shopId;
+	}
+	public void setShopId(String shopId) {
+		this.shopId = shopId;
+	}
 	
 }

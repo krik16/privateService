@@ -24,7 +24,7 @@ public class Commodity implements  Serializable {
 	private String category;//商品品类id
 	private String shopId;//店铺id
 	private String shopMid;//店铺的mongoid
-	private int status;//状态 1上架 0下架 2是删除
+	private int status;//状态 1上架 0下架 2是删除3待上架
 	private String code;//商品编码
 	private String description;//商品描述
 	private String postage;//商品邮费
@@ -39,7 +39,6 @@ public class Commodity implements  Serializable {
 	private String mallMid;
 	private String shopNum;
 	private String update_by;//修改人
-	
 	public String getUpdate_by() {
 		return update_by;
 	}
@@ -78,6 +77,13 @@ public class Commodity implements  Serializable {
 	private String brandId;//商品所属品牌id
 	private String mallId;//商品所属商场id
 	private List<ObjectId> categoryIds;//商品所属的品类列表
+	private List<String> customCategory;//自定义分类
+	private String systemNumber;//系统编号
+	private byte distribution;//配送方式
+	private double freight;//运费 >0买家承担运费<0商家承担运费
+	private Date registerTime;//上架时间
+	private Date soldOutTime;//下架时间
+	
 //	private int commentCount;
 //	private int highCommentCount;
 //	private int mediumCommentCount;
@@ -141,7 +147,7 @@ public String getShopMid() {
 	private String oPriceMin;//商品原最低价（用于买家版）
 	private String cPriceMax;//商品现最高价（用于买家版）
 	private String cPriceMin;//商品现最高价（用于买家版）
-
+	
 	public String getoPriceMax() {
 		return oPriceMax;
 	}
@@ -262,4 +268,41 @@ public String getShopMid() {
 	public void setCategory(String category) {
 		this.category = category;
 	}
+	public List<String> getCustomCategory() {
+		return customCategory;
+	}
+	public void setCustomCategory(List<String> customCategory) {
+		this.customCategory = customCategory;
+	}
+	public String getSystemNumber() {
+		return systemNumber;
+	}
+	public void setSystemNumber(String systemNumber) {
+		this.systemNumber = systemNumber;
+	}
+	public byte getDistribution() {
+		return distribution;
+	}
+	public void setDistribution(byte distribution) {
+		this.distribution = distribution;
+	}
+	public double getFreight() {
+		return freight;
+	}
+	public void setFreight(double freight) {
+		this.freight = freight;
+	}
+	public Date getRegisterTime() {
+		return registerTime;
+	}
+	public void setRegisterTime(Date registerTime) {
+		this.registerTime = registerTime;
+	}
+	public Date getSoldOutTime() {
+		return soldOutTime;
+	}
+	public void setSoldOutTime(Date soldOutTime) {
+		this.soldOutTime = soldOutTime;
+	}
+	
 }
