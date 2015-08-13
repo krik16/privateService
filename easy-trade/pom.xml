@@ -12,6 +12,7 @@
         <module>easy-rpb</module>      
         <module>easy-tms</module>
         <module>easy-virtual-account</module>
+        <module>easy-anti-cheat</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

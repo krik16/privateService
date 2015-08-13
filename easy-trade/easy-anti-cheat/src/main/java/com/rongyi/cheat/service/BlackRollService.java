@@ -1,0 +1,59 @@
+/**
+ * @Copyright (C),上海容易网电子商务有限公司	
+ * @Author: 柯军 
+ * @datetime:2015年8月12日上午10:25:55
+ * @Description: TODO
+ *
+ **/
+
+package com.rongyi.cheat.service;
+
+import java.util.Map;
+
+import com.rongyi.easy.cheat.BlackRoll;
+
+/**
+ * @Author: 柯军
+ * @Description: 黑名单列表接口
+ * @datetime:2015年8月12日上午10:25:55
+ * 
+ **/
+
+public interface BlackRollService {
+
+	/**
+	 * @Description: 新增
+	 * @param blackRoll
+	 * @Author: 柯军
+	 * @datetime:2015年8月12日上午10:29:37
+	 **/
+	public abstract void insert(BlackRoll blackRoll);
+
+	/**
+	 * @Description: 更新
+	 * @param blackRoll
+	 * @Author: 柯军
+	 * @datetime:2015年8月12日上午10:29:47
+	 **/
+	public abstract void update(BlackRoll blackRoll);
+
+	/**
+	 * @Description: 查询账号记录
+	 * @param payAccout
+	 * @param payType
+	 * @return
+	 * @Author: 柯军
+	 * @datetime:2015年8月12日下午7:46:00
+	 **/
+	public BlackRoll selectByPayAccount(String payAccout, Byte payType);
+
+	/**
+	 * @Description: 检查支付账号是否满足加入黑名单条件
+	 * @param map
+	 * @return
+	 * @Author: 柯军
+	 * @datetime:2015年8月12日下午12:03:00
+	 **/
+	public abstract void valadatePayAccount(Map<String, Object> map);
+	
+}
