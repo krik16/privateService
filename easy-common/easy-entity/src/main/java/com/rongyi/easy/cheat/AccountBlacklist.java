@@ -46,6 +46,8 @@ public class AccountBlacklist implements Serializable {
 	 */
 	private Date updateAt;
 
+	private String desc;
+
 	public Integer getId() {
 		return id;
 	}
@@ -109,4 +111,13 @@ public class AccountBlacklist implements Serializable {
 	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;
 	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+
 }
