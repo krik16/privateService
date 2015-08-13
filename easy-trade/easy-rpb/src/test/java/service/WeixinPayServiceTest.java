@@ -180,7 +180,10 @@ public class WeixinPayServiceTest extends BaseTest{
 
 	@Test
 	public void testQueryOrder2(){
+		 System.err.println(ConstantUtil.CRET_DIRECTORY);
 		System.err.println(weixinPayService.queryOrder("10000002315977421").getRet_code());
+		
+		
 	}
 	
 }

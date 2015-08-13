@@ -10,7 +10,7 @@ package com.rongyi.cheat.service;
 
 import java.util.Map;
 
-import com.rongyi.easy.cheat.BlackRoll;
+import com.rongyi.easy.cheat.AccountBlacklist;
 
 /**
  * @Author: 柯军
@@ -19,7 +19,7 @@ import com.rongyi.easy.cheat.BlackRoll;
  * 
  **/
 
-public interface BlackRollService {
+public interface AccountBlacklistService {
 
 	/**
 	 * @Description: 新增
@@ -27,25 +27,26 @@ public interface BlackRollService {
 	 * @Author: 柯军
 	 * @datetime:2015年8月12日上午10:29:37
 	 **/
-	public abstract void insert(BlackRoll blackRoll);
+	public abstract void insert(AccountBlacklist accountBlacklist);
 
 	/**
 	 * @Description: 更新
-	 * @param blackRoll
+	 * @param accountBlacklist
 	 * @Author: 柯军
 	 * @datetime:2015年8月12日上午10:29:47
 	 **/
-	public abstract void update(BlackRoll blackRoll);
+	public abstract void update(AccountBlacklist accountBlacklist);
 
 	/**
 	 * @Description: 查询账号记录
 	 * @param payAccout
 	 * @param payType
+	 * @param status
 	 * @return
 	 * @Author: 柯军
 	 * @datetime:2015年8月12日下午7:46:00
 	 **/
-	public BlackRoll selectByPayAccount(String payAccout, Byte payType);
+	public AccountBlacklist selectByPayAccount(String payAccout, Byte payType,Byte status);
 
 	/**
 	 * @Description: 检查支付账号是否满足加入黑名单条件
