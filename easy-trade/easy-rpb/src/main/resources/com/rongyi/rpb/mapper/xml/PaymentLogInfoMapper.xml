@@ -31,7 +31,7 @@
 	
 	<resultMap id="PayAccountUserTotalMap" type="com.rongyi.easy.rpb.vo.PayAccountUseTotal">
 		<result column="pay_account" property="payAccount" jdbcType="VARCHAR" />
-		<result column="pay_type" property="payType" jdbcType="INTEGER" />
+		<result column="pay_type" property="payType" jdbcType="VARCHAR" />
 		<result column="count" property="count" jdbcType="INTEGER" />
 	</resultMap>
 
