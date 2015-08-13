@@ -142,7 +142,7 @@ public class Coupon {
     private Integer limitPublishCount;
 
     /**
-     * 信息同步终端: 互动屏,微信,容易逛 [1,1,1]表示三个都没选中
+     * 信息同步终端: 互动屏,微商,容易逛 [1,1,1]表示三个都没选中
      */
     private String synTarget;
 

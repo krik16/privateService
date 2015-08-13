@@ -88,4 +88,14 @@ public class CouponSort {
     public void setSortIdx(Integer sortIdx) {
         this.sortIdx = sortIdx;
     }
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("CouponSort [id=").append(id).append(", couponId=").append(couponId).append(", provinceId=")
+				.append(provinceId).append(", provinceName=").append(provinceName).append(", cityId=").append(cityId)
+				.append(", cityName=").append(cityName).append(", sortIdx=").append(sortIdx).append("]");
+		return builder.toString();
+	}
+    
 }
