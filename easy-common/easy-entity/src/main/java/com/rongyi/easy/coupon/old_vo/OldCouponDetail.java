@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * 优惠券订单详情信息 （优惠券基本信息与券码信息）
+ *
  * @author Breggor
  * @date 2015-08-13
  */
@@ -238,5 +239,11 @@ public class OldCouponDetail implements Serializable {
         this.orderPrice = orderPrice;
     }
 
+    public List<OldUserCode> getUserCouponList() {
+        return userCouponList;
+    }
 
+    public void setUserCouponList(List<OldUserCode> userCouponList) {
+        this.userCouponList = userCouponList;
+    }
 }
