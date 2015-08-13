@@ -4,109 +4,109 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class BlackRoll implements Serializable {
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -8637684754246223142L;
 
 	private Integer id;
 
-    /**
-     * 付款账号
-     */
-    private String payAccout;
+	/**
+	 * 付款账号
+	 */
+	private String payAccount;
 
-    /**
-     * 账号类型(0:支付宝，1：微信)
-     */
-    private Byte accoutType;
+	/**
+	 * 账号类型(0:支付宝，1：微信)
+	 */
+	private Byte payType;
 
-    /**
-     * 刷单总数量
-     */
-    private Integer count;
+	/**
+	 * 刷单总数量
+	 */
+	private Integer count;
 
-    /**
-     * 状态(0:整除，1：冻结)
-     */
-    private Byte status;
+	/**
+	 * 状态(0:整除，1：冻结)
+	 */
+	private Byte status;
 
-    /**
-     * 活动类型
-     */
-    private Byte activeType;
+	/**
+	 * 活动类型
+	 */
+	private Byte activeType;
 
-    /**
-     * 创建时间
-     */
-    private Date createAt;
+	/**
+	 * 创建时间
+	 */
+	private Date createAt;
 
-    /**
-     * 更新时间
-     */
-    private Date updateAt;
+	/**
+	 * 更新时间
+	 */
+	private Date updateAt;
 
-    public Integer getId() {
-        return id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public String getPayAccout() {
-        return payAccout;
-    }
+	public String getPayAccount() {
+		return payAccount;
+	}
 
-    public void setPayAccout(String payAccout) {
-        this.payAccout = payAccout;
-    }
+	public void setPayAccount(String payAccount) {
+		this.payAccount = payAccount;
+	}
 
-    public Byte getAccoutType() {
-        return accoutType;
-    }
+	public Byte getPayType() {
+		return payType;
+	}
 
-    public void setAccoutType(Byte accoutType) {
-        this.accoutType = accoutType;
-    }
+	public void setPayType(Byte payType) {
+		this.payType = payType;
+	}
 
-    public Integer getCount() {
-        return count;
-    }
+	public Integer getCount() {
+		return count;
+	}
 
-    public void setCount(Integer count) {
-        this.count = count;
-    }
+	public void setCount(Integer count) {
+		this.count = count;
+	}
 
-    public Byte getStatus() {
-        return status;
-    }
+	public Byte getStatus() {
+		return status;
+	}
 
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
+	public void setStatus(Byte status) {
+		this.status = status;
+	}
 
-    public Byte getActiveType() {
-        return activeType;
-    }
+	public Byte getActiveType() {
+		return activeType;
+	}
 
-    public void setActiveType(Byte activeType) {
-        this.activeType = activeType;
-    }
+	public void setActiveType(Byte activeType) {
+		this.activeType = activeType;
+	}
 
-    public Date getCreateAt() {
-        return createAt;
-    }
+	public Date getCreateAt() {
+		return createAt;
+	}
 
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
-    }
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
 
-    public Date getUpdateAt() {
-        return updateAt;
-    }
+	public Date getUpdateAt() {
+		return updateAt;
+	}
 
-    public void setUpdateAt(Date updateAt) {
-        this.updateAt = updateAt;
-    }
+	public void setUpdateAt(Date updateAt) {
+		this.updateAt = updateAt;
+	}
 }
