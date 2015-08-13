@@ -3,7 +3,7 @@ package com.rongyi.easy.cheat;
 import java.io.Serializable;
 import java.util.Date;
 
-public class BlackRoll implements Serializable {
+public class AccountBlacklist implements Serializable {
 	/**
 	 * 
 	 */
