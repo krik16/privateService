@@ -213,7 +213,7 @@ salience 100
     	// 获得订单和子订单列表
     	OrderFormEntity order = $event.getOrderFormEntity();
 		OrderDetailFormEntity[] orderDetailList = $event.getOrderDetailFormEntityList();
-     if(orderUtil.createOrder(order,orderDetailList,false)){
+     if(orderUtil.createOrder(order,orderDetailList)){
 	        // 设置订单  状态为：等待付款  未评价
 	        order.setStatus(OrderFormStatus.UNPAID);
 	        order.setStatusRoute(null);
@@ -274,7 +274,7 @@ salience 100
 					
 			    } else {
 			        logger.error("积分归还开始----------");
-			        orderUtil.subtractScore(order,false); //还原积分
+			        orderUtil.subtractScore(order); //还原积分
 			        logger.error("积分归还结束----------");
 			        logger.error("红包归还开始----------");
 			        // 更新现金券状态
@@ -288,7 +288,7 @@ salience 100
 			    }
 			    
 			} else {
-			    orderUtil.subtractScore(order,false); //还原积分
+			    orderUtil.subtractScore(order); //还原积分
 				orderUtil.sendResponse($event, EventErrorCode.ORDER_COUPON_ERROR, "优惠券异常，订单创建失败");
 				logger.error("[" + drools.getRule().getName() + "] OrderNo=" + $orderNo + " 现金券状态变更错误：现金券不存在或状态不正确，订单创建失败");
 			}
@@ -378,7 +378,7 @@ rule "买家超时未支付"
 		// 归还库存
 		orderUtil.increaseStock($order);
 		
-		boolean flag=orderUtil.subtractScore($order,false); //还原买家积分
+		boolean flag=orderUtil.subtractScore($order); //还原买家积分
 		logger.debug("还原积分状态"+ flag + " end");
 		
 		//记录日志
@@ -425,7 +425,7 @@ salience 100
 		// 归还库存
 		orderUtil.increaseStock($order);
 		
-		boolean flag=orderUtil.subtractScore($order,false); //还原买家积分
+		boolean flag=orderUtil.subtractScore($order); //还原买家积分
 		logger.error("红包归还开始----------");
 		OrderDetailFormEntity[] orderDetailList = orderUtil.queryGetOrderDetailList($order.getOrderNo());
 	    // 更新现金券状态
@@ -530,7 +530,7 @@ salience 100
 		}
 		logger.error("红包归还结束----------");
 		logger.debug("还原积分start"); 
-	    boolean flag=orderUtil.subtractScore($order,false); //还原买家积分
+	    boolean flag=orderUtil.subtractScore($order); //还原买家积分
 		logger.debug("还原积分状态"+ flag + " end"); 
 		
 		//记录日志
@@ -633,12 +633,12 @@ salience 100
 		
 		// 计算并设置折扣
 		boolean legalPrice = orderUtil.orderSetDiscount($event.getOrderPrice(), $order, orderDetailList);
-		//logger.debug("计算积分支付占总金额比例和归还积分------start--------");
-		orderUtil.returnScore($order,orderDetailList);
-		//logger.debug("修改入库-----start-------");
+		logger.debug("计算多余积分且归还积分------start--------");
+		orderUtil.returnScore($order,orderDetailList,$event.getOrderPrice());
+		logger.debug("修改入库-----end-------");
 		// 重新计算订单总价
 		$order.setTotalAmount(orderUtil.calculateTotalPrice($order, orderDetailList));
-		
+		logger.debug("修改价格后的总价-------"+$order.getTotalAmount());
 		// 修改入库
 		orderFormService.updateTotalPrice($order);
 		
@@ -718,7 +718,7 @@ salience 100
 		
 		logger.debug("计算积分支付占总金额比例和归还积分------start--------");
 		//归还积分开始
-		orderUtil.subtractScore($order,true);
+		orderUtil.subtractScore($order);
 		logger.debug("修改入库-----start-------");
 		
 		// 入主数据库
@@ -924,7 +924,7 @@ rule "卖家超时未发货"
 		}
 		logger.error("红包归还结束----------");
 		
-		boolean flag=orderUtil.subtractScore($order,false); //还原买家积分
+		boolean flag=orderUtil.subtractScore($order); //还原买家积分
 		logger.debug("还原积分状态"+ flag + " end"); 
 		
 		//记录日志
