@@ -254,12 +254,19 @@ public class OrderUtil {
 
 		// 减去积分
 		if(order.getDiscountInfo()!=null  && order.getDiscountInfo().length()>0){
-			Map map = JsonUtil.getMapFromJson(order.getDiscountInfo());
+			Map<String,Object> map = JsonUtil.getMapFromJson(order.getDiscountInfo());
 			if (map.get("score") != null  && Integer.parseInt(map.get("score").toString()) > 0) {
 				Map<String, Object> mapObject=getMapByJson(ScoreRuleEnum.SCORE_ORDER_SUB.getCode());
 				double scoreExchangeMoney= Double.parseDouble(mapObject.get("scoreExchangeMoney").toString());
-				Double scoreInt = Double.parseDouble(map.get("score").toString()) * scoreExchangeMoney;
-				BigDecimal score = new BigDecimal(scoreInt);
+				Double scoreValue=0.0;
+				//cashScore代表修改价格后实际使用的积分
+				if(mapObject.get("cashScore")!=null && Integer.parseInt(mapObject.get("cashScore").toString())>0){
+					scoreValue = Double.parseDouble(map.get("cashScore").toString()) * scoreExchangeMoney;
+				}else{
+					scoreValue = Double.parseDouble(map.get("score").toString()) * scoreExchangeMoney;
+				}
+				
+				BigDecimal score = new BigDecimal(scoreValue);
 				total = total.subtract(score);
 				//总价小于零的情况
 				total = total.compareTo(new BigDecimal(0)) < 0 ? new BigDecimal(0) : total;
@@ -1090,13 +1097,13 @@ public class OrderUtil {
 						if (orderPrice.compareTo(new BigDecimal(0)) > 0) {
 							//修改后的价格10%比较减去红包之后的价格
 							if (ratioOrderPrice.compareTo(subtractCoupon) < 0) { 
-								int transformScore=(ratioOrderPrice.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_EVEN)).intValue();
+								int transformScore=(ratioOrderPrice.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_UP)).intValue();
 								if(score > transformScore){
 									returnScore =score-transformScore;
 								}
 								
 							} else {
-								int transformScore=(subtractCoupon.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_EVEN)).intValue();
+								int transformScore=(subtractCoupon.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_UP)).intValue();
 								if(score > transformScore){
 									 returnScore=score-transformScore;
 								}
@@ -1108,8 +1115,8 @@ public class OrderUtil {
 						logger.info("returnScore-------" + returnScore);
 						if (returnScore > 0) {
 							//更新实际使用的积分
-//							jsonObject.put("score", score-returnScore);
-//							jsonObject.put("scoreDeduction",(score-returnScore)*scoreExchangeMoney);
+							jsonObject.put("cashScore", score-returnScore);
+							jsonObject.put("cashScoreDeduction",(score-returnScore)*scoreExchangeMoney);
 							//返还的积分
 							jsonObject.put("returnScore", returnScore);
 							jsonObject.put("returnScoreDeduction", returnScore*scoreExchangeMoney);
