@@ -132,6 +132,8 @@ public interface IMerchantAccountService {
 	 * @throws Exception
 	 */
 	public List<ShopEntity> getShopEntityByMallName(String shopName,String mallMId) throws Exception;
+	
+	public Boolean updateSimpleUserInfo(Map<String, Object> paramMap,Integer optUserId) throws Exception;
 	/**
 	 * 修改商家账号相关信息
 	 * @param paraMap
