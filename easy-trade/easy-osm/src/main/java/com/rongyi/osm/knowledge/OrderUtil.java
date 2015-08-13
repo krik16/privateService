@@ -268,11 +268,15 @@ public class OrderUtil {
 				}else{
 					scoreValue = Double.parseDouble(map.get("score").toString()) * scoreExchangeMoney;
 				}
-				
-				BigDecimal score = new BigDecimal(scoreValue);
-				total = total.subtract(score);
+
+				//金额兑换积分不满足1积分则不能使用积分支付
+				if(total.divide(new BigDecimal(scoreExchangeMoney)).compareTo(new BigDecimal(1))>0){
+					BigDecimal score = new BigDecimal(scoreValue);
+					total = total.subtract(score);
+				}
 				//总价小于零则取零，否则保留2位小数
-				total = total.compareTo(new BigDecimal(0)) < 0 ? new BigDecimal(0) : total.setScale(2,BigDecimal.ROUND_HALF_UP);
+				total=total.setScale(2,BigDecimal.ROUND_HALF_UP);
+				total = total.compareTo(new BigDecimal(0)) < 0 ? new BigDecimal(0) : total;
 			}
 		}
 		return total;
