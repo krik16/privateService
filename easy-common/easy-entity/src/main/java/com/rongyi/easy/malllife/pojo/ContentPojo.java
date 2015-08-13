@@ -17,6 +17,7 @@ public class ContentPojo implements Serializable{
     private String  picture;      // 缩略图
     private Integer markCount;    // 收藏总数
     private Integer referenceId;  // 外键id
+	private String content;//内容详情
     private String  type;
     private double  logoX;
     private double  logoY;
@@ -327,4 +328,11 @@ public class ContentPojo implements Serializable{
         this.grouponId = grouponId;
     }
 
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
 }
