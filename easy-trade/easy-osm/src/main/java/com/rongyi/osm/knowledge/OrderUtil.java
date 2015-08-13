@@ -951,8 +951,14 @@ public class OrderUtil {
 			if(!StringUtils.isEmpty(order.getDiscountInfo())){
 				Map<String, Object> mapObject = JsonUtil.getMapFromJson(order.getDiscountInfo());
 				if(mapObject.get("score")!=null && Integer.parseInt(mapObject.get("score").toString())>0){
-					integralRecordVO.setUse_score(Integer.parseInt(mapObject.get("score").toString())); // 积分 
-					integralRecordVO.setScore_deduction(new BigDecimal(mapObject.get("scoreDeduction").toString()));  //积分抵扣金额
+					//returnScore表示卖家修改价格需要退还买家积分
+					if(mapObject.get("returnScore")!=null && Integer.parseInt(mapObject.get("returnScore").toString())>0){
+						integralRecordVO.setUse_score(Integer.parseInt(mapObject.get("returnScore").toString())); // 积分 
+						integralRecordVO.setScore_deduction(new BigDecimal(mapObject.get("returnScoreDeduction").toString()));  //积分抵扣金额
+					}else{
+						integralRecordVO.setUse_score(Integer.parseInt(mapObject.get("score").toString())); // 积分 
+						integralRecordVO.setScore_deduction(new BigDecimal(mapObject.get("scoreDeduction").toString()));  //积分抵扣金额
+					}
 				}
 			}
 			integralRecordVO.setOrder_sn(order.getOrderNo());//订单号
@@ -972,7 +978,6 @@ public class OrderUtil {
 					}
 				}
 			}
-//			integralRecordVO.setPay_money(calculateTotalPrice(order,orderDetailList));// 实际支付金额
 			integralRecordVO.setTotal_money(totalMoney); // 原结算金额
 			integralRecordVO.setPreferential_deduction(deductionMoney); // 优惠抵扣金额
 			
@@ -1044,7 +1049,7 @@ public class OrderUtil {
 		 * @return
 		 * @throws Exception
 		 */
-	    public void returnScore(OrderFormEntity order, OrderDetailFormEntity[] orderDetailList,BigDecimal orderPrice){
+	    public void returnScore(OrderFormEntity order, OrderDetailFormEntity[] orderDetailList){
 			logger.info("rule_expressionreturnScore---start----");
 			JSONObject jsonObject = new JSONObject();
 			if (!StringUtils.isEmpty(order.getDiscountInfo())) {
@@ -1059,12 +1064,13 @@ public class OrderUtil {
 						Double scoreExchangeMoney =Double.parseDouble(scoreMap.get("scoreExchangeMoney").toString()); // 积分兑换金额参数
 						BigDecimal ratio = new BigDecimal(scoreMap.get("limit").toString());// 判断积分支付是否大于订单价格的10%参数
 						BigDecimal cashCouponDiscount = new BigDecimal(0); // 优惠券总金额
-						//BigDecimal orderDetailRealAmount = new BigDecimal(0); //子订单实际总价格
+						BigDecimal orderDetailRealAmount = new BigDecimal(0); // 子订单实际价格
+						
 						// 计算红包，原结算金额
 						for (Object entity : orderDetailList) {
 							OrderDetailFormEntity orderDetail = (OrderDetailFormEntity) entity;
 							String couponId = orderDetail.getCouponId(); // 优惠code
-							//orderDetailRealAmount=orderDetailRealAmount.add(orderDetail.getRealAmount());
+							orderDetailRealAmount.add(orderDetail.getRealAmount());
 							if (!(couponId == null || couponId.isEmpty())) {
 								Double couponAmount = couponStatusService.getDiscountByCode(couponId); // 优惠抵扣金额
 								if (couponAmount != null) {
@@ -1073,10 +1079,8 @@ public class OrderUtil {
 							}
 						}
 						logger.info("cashCouponDiscount-------" + cashCouponDiscount);
-						//logger.info("orderDetailRealAmount-------" + orderDetailRealAmount);
 						logger.info("order.getDisconntFee-------" + order.getDisconntFee());
-						//BigDecimal orderPrice=orderDetailRealAmount.subtract(order.getDisconntFee()).add(order.getExpressFee());//子订单实际价格+邮费
-					    orderPrice=orderPrice.add(order.getExpressFee());//子订单实际价格+邮费
+						BigDecimal orderPrice=orderDetailRealAmount.subtract(order.getDisconntFee()).add(order.getExpressFee());//子订单实际价格-折扣+邮费
 						logger.info("orderPrice-------" + orderPrice);
 						int returnScore =0;// 返还的积分
 						int score =Integer.parseInt(jsonObject.get("score").toString());// 修改价格之前使用的积分
@@ -1086,7 +1090,6 @@ public class OrderUtil {
 						if (orderPrice.compareTo(new BigDecimal(0)) > 0) {
 							//修改后的价格10%比较减去红包之后的价格
 							if (ratioOrderPrice.compareTo(subtractCoupon) < 0) { 
-								
 								int transformScore=(ratioOrderPrice.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_EVEN)).intValue();
 								if(score > transformScore){
 									returnScore =score-transformScore;
@@ -1104,21 +1107,13 @@ public class OrderUtil {
 						}
 						logger.info("returnScore-------" + returnScore);
 						if (returnScore > 0) {
-							//返还积分
-							jsonObject.put("score", returnScore);
-							jsonObject.put("scoreDeduction",(score-returnScore)*scoreExchangeMoney);
-							order.setDiscountInfo(jsonObject.toString());
-							logger.info("returnScore------start-");
-							if (!subtractScore(order)) {
-								logger.info("积分归还失败");
-							}
-							logger.info("returnScore------end-");
-							logger.info("update orderForm score-scoreDeduction------start-");
 							//更新实际使用的积分
 							jsonObject.put("score", score-returnScore);
-							jsonObject.put("scoreDeduction", returnScore*scoreExchangeMoney);
+							jsonObject.put("scoreDeduction",(score-returnScore)*scoreExchangeMoney);
+							//返还的积分
+							jsonObject.put("returnScore", returnScore);
+							jsonObject.put("returnScoreDeduction", returnScore*scoreExchangeMoney);
 							order.setDiscountInfo(jsonObject.toString());
-							logger.info("update orderForm score-scoreDeduction------end-");
 						}
 					}
 				}
