@@ -264,8 +264,7 @@ public class OrderUtil {
 				BigDecimal ratioTotal =total.multiply(ratio);// 支付金额的10%
 				Double scoreValue=0.0;
 				//cashScore代表修改价格后实际使用的积分
-				
-				if(map.get("cashScore")!=null && Integer.parseInt(map.get("cashScore").toString())>0){
+				if(map.get("cashScore")!=null && Integer.parseInt(map.get("cashScore").toString())>=0){
 					logger.info("cashScore----->"+Integer.parseInt(map.get("cashScore").toString()));
 					scoreValue = Double.parseDouble(map.get("cashScore").toString()) * scoreExchangeMoney;
 				}else{
@@ -1120,10 +1119,12 @@ public class OrderUtil {
 								//
 								BigDecimal ratioExpressFee=order.getExpressFee().multiply(ratio);//运费的10%
 								int scoreExpressFee=ratioExpressFee.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_DOWN).intValue();//运费对应的积分折扣
-                                if(scoreExpressFee >=1){
+								if(score >= scoreExpressFee){
+								if(scoreExpressFee >=1){
                                 	//orderPrice.subtract(new BigDecimal(scoreExpressFee).multiply(scoreExchangeMoney));
                                 	returnScore =score-scoreExpressFee;
                                 }
+								}
 //								int transformScore=(subtractCoupon.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_DOWN)).intValue();
 //								if(score > transformScore){
 //									 returnScore=score-transformScore;
@@ -1134,7 +1135,7 @@ public class OrderUtil {
 							returnScore = score;
 						}
 						logger.info("returnScore-------" + returnScore);
-						if (returnScore > 0) {
+						if (returnScore >= 0) {
 							//更新实际使用的积分
 							jsonObject.put("cashScore", score-returnScore);
 							jsonObject.put("cashScoreDeduction",(score-returnScore)*scoreExchangeMoney);
