@@ -98,7 +98,6 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
 
 	@Override
 	public void insertPayNotify(PaymentLogInfo paymentLogInfo, Integer tradeType, Integer status, String payChannel) {
-		LOGGER.info("paymentLogInfo insert "+paymentLogInfo.getOutTradeNo());
 		insertGetId(paymentLogInfo);
 		List<PaymentEntity> list = paymentService.selectByPayNoAndTradeType(paymentLogInfo.getOutTradeNo(), tradeType);
 		if (list != null && !list.isEmpty() && list.get(0).getStatus() != Constants.PAYMENT_STATUS.STAUS2) {
