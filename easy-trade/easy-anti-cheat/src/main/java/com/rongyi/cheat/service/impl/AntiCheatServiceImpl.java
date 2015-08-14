@@ -24,4 +24,9 @@ public class AntiCheatServiceImpl implements IAntiCheatService {
 		return accountBlacklistService.selectPageList(currentPage, pageSize, map);
 	}
 
+	@Override
+	public Map<String, Object> updateFrozenAccount(String[] ids) {
+		return accountBlacklistService.updateFrozenAccount(ids);
+	}
+
 }

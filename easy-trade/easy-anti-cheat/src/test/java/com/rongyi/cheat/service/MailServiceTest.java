@@ -1,4 +1,4 @@
-package com.rongyi.tms.service;
+package com.rongyi.cheat.service;
 
 import java.io.UnsupportedEncodingException;
 
@@ -8,8 +8,8 @@ import javax.mail.internet.AddressException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
 
+import com.rongyi.cheat.BaseTest;
 import com.rongyi.cheat.mail.MailService;
-import com.rongyi.tms.BaseTest;
 
 public class MailServiceTest extends BaseTest{
 	

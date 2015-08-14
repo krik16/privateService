@@ -37,6 +37,15 @@ public interface AccountBlacklistService {
 	 * @datetime:2015年8月12日上午10:29:47
 	 **/
 	public abstract void update(AccountBlacklist accountBlacklist);
+	
+	
+	/**	
+	 * @Description: 查询 
+	 * @param id	
+	 * @Author:  柯军
+	 * @datetime:2015年8月14日上午11:21:03
+	 **/
+	public abstract AccountBlacklist selectById(Integer id);
 
 	/**
 	 * @Description: 查询账号记录
@@ -69,5 +78,15 @@ public interface AccountBlacklistService {
 	 * @datetime:2015年8月13日下午7:40:03
 	 **/
 	public abstract Map<String,Object> selectPageList(Integer currentPage,Integer pageSize,Map<String,Object> map);
+	
+	
+	/**	
+	 * @Description: 账号冻结 
+	 * @param ids
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年8月14日上午11:19:23
+	 **/
+	public abstract Map<String,Object> updateFrozenAccount(String[] ids);
 	
 }

@@ -1,4 +1,4 @@
-package com.rongyi.tms;
+package com.rongyi.cheat;
 
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;

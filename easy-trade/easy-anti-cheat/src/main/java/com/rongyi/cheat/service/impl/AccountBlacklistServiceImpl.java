@@ -63,6 +63,13 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 	}
 
 	@Override
+	public AccountBlacklist selectById(Integer id) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectByPrimaryKey", map);
+	}
+
+	@Override
 	public AccountBlacklist selectByPayAccount(String payAccount, Byte payType, Byte status) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("payAccount", payAccount);
@@ -106,6 +113,25 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 		resultMap.put("list", list);
 		resultMap.put("count", count);
 		return resultMap;
+	}
+
+	@Override
+	public Map<String, Object> updateFrozenAccount(String[] ids) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		try {
+			for (String id : ids) {
+				AccountBlacklist accountBlacklist = selectById(Integer.valueOf(id));
+				accountBlacklist.setStatus(ConstantEnum.BLACK_ROLL_STATUS_1.getCodeByte());
+				update(accountBlacklist);
+			}
+			map.put("success",true);
+			map.put("message","冻结账号成功");
+		} catch (Exception e) {
+			map.put("success",false);
+			map.put("message","冻结账号失败");
+			e.printStackTrace();
+		}
+		return map;
 	}
 
 	private void sendWranEmail(List<AccountBlacklist> mailWranList) {
