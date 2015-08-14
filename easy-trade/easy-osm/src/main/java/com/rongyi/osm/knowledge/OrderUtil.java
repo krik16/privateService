@@ -1145,12 +1145,12 @@ public class OrderUtil {
 								BigDecimal ratioExpressFee=order.getExpressFee().multiply(ratio);//运费的10%
 								int curMaxScore=0;
 								if(subtractCoupon.compareTo(new BigDecimal(0))>0){
-									 curMaxScore=subtractCoupon.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_DOWN).intValue();//运费对应的积分折扣
+									 curMaxScore=subtractCoupon.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_UP).intValue();//运费对应的积分折扣
 								}else{
-									curMaxScore=ratioExpressFee.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_DOWN).intValue();//运费对应的积分折扣
+									curMaxScore=ratioExpressFee.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_UP).intValue();//运费对应的积分折扣
 								}
 								
-								if (curMaxScore <= 1)
+								if (curMaxScore < 1)
 								{
 									curMaxScore = 0;
 								}
