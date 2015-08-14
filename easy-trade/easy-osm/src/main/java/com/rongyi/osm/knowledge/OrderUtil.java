@@ -973,6 +973,7 @@ public class OrderUtil {
 						integralRecordVO.setUse_score(Integer.parseInt(mapObject.get("returnScore").toString())); // 积分 
 						integralRecordVO.setScore_deduction(new BigDecimal(mapObject.get("returnScoreDeduction").toString()));  //积分抵扣金额
 					}else if(mapObject.get("zeroScore")!=null && Integer.parseInt(mapObject.get("zeroScore").toString())==0){
+						//修改成原来价格
 						integralRecordVO.setUse_score(Integer.parseInt(mapObject.get("zeroScore").toString())); // 积分 
 						integralRecordVO.setScore_deduction(new BigDecimal(mapObject.get("zeroScoreDeduction").toString()));  //积分抵扣金额
 					}else{
