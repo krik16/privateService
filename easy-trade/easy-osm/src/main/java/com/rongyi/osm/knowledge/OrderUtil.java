@@ -212,11 +212,14 @@ public class OrderUtil {
 		if(!StringUtils.isEmpty(order.getDiscountInfo())){
 			 jsonObject=JSONObject.fromObject(order.getDiscountInfo());
 		}
+		//订单原始值
+		BigDecimal realAmountExpressFee = new BigDecimal(0);
 		
 		// 计算子订单实际价格总和
 		for (Object entity : orderDetailList) {
 			OrderDetailFormEntity orderDetail = (OrderDetailFormEntity) entity;
 			BigDecimal detailTotal = orderDetail.getRealAmount();
+			realAmountExpressFee=realAmountExpressFee.add(detailTotal);
 			String couponId = orderDetail.getCouponId();
 			if (!(couponId == null || couponId.isEmpty())) {
 				Double couponAmount = couponStatusService.getDiscountByCode(couponId);
@@ -251,6 +254,7 @@ public class OrderUtil {
 		// 加上邮费
 		if (order.getExpressFee() != null) {
 			total = total.add(order.getExpressFee());
+			realAmountExpressFee=realAmountExpressFee.add(order.getExpressFee());
 		}
 
 		logger.info("减去红包，折扣等后的金额-------" + total);
@@ -262,6 +266,15 @@ public class OrderUtil {
 				double scoreExchangeMoney= Double.parseDouble(mapObject.get("scoreExchangeMoney").toString());
 				BigDecimal ratio = new BigDecimal(mapObject.get("limit").toString());// 判断积分支付是否大于订单价格的10%参数
 				BigDecimal ratioTotal =total.multiply(ratio);// 支付金额的10%
+				BigDecimal ratioRealAmountExpressFee=realAmountExpressFee.multiply(ratio);//(实际子订单+邮费)*10%
+				int scoreLimit=0;//积分使用上限
+				//当支付金额>总价格的10%，则最大上限使用积分数为总金额10%的积分数
+				if(total.compareTo(ratioRealAmountExpressFee)>=0){
+					scoreLimit=ratioRealAmountExpressFee.divide(new BigDecimal(scoreExchangeMoney),1, BigDecimal.ROUND_HALF_DOWN).intValue();
+				}
+				if(total.compareTo(ratioRealAmountExpressFee)< 0){
+					scoreLimit=total.divide(new BigDecimal(scoreExchangeMoney),1, BigDecimal.ROUND_HALF_DOWN).intValue();
+				}
 				Double scoreValue=0.0;
 				//cashScore代表修改价格后实际使用的积分
 				if(map.get("cashScore")!=null && Integer.parseInt(map.get("cashScore").toString())>=0){
@@ -270,21 +283,26 @@ public class OrderUtil {
 				}else{
 					scoreValue = Double.parseDouble(map.get("score").toString()) * scoreExchangeMoney;
 				}
-
-				//金额的10%兑换积分不满足1积分则不能使用积分支付
-				BigDecimal rationTotalScore=ratioTotal.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_DOWN);
-				if(rationTotalScore.compareTo(new BigDecimal(1))>=0){
-					BigDecimal score = new BigDecimal(scoreValue);
-					total = total.subtract(score);
+				
+				if(scoreLimit<scoreValue){
+					//超过积分使用最大上限
+				}else{
+					//金额的10%兑换积分不满足1积分则不能使用积分支付
+					//BigDecimal rationTotalScore=ratioTotal.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_DOWN);
+					//if(rationTotalScore.compareTo(new BigDecimal(1))>=0){
+						BigDecimal score = new BigDecimal(scoreValue);
+						total = total.subtract(score);
+					//}
+					//总价小于零则取零，否则保留2位小数
+					total = total.compareTo(new BigDecimal(0)) < 0 ? new BigDecimal(0) : total.setScale(2,BigDecimal.ROUND_HALF_UP);
+					logger.info("减去积分后的金额-------" + total);
 				}
-				//总价小于零则取零，否则保留2位小数
-				total=total.setScale(2,BigDecimal.ROUND_HALF_UP);
-				total = total.compareTo(new BigDecimal(0)) < 0 ? new BigDecimal(0) : total;
-				logger.info("减去积分后的金额-------" + total);
 			}
 		}
 		return total;
 	}
+	
+	
 	
 	/**
 	* C2C卖家修改价格后折扣的计算
