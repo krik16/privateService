@@ -972,6 +972,9 @@ public class OrderUtil {
 					if(mapObject.get("returnScore")!=null && Integer.parseInt(mapObject.get("returnScore").toString())>0){
 						integralRecordVO.setUse_score(Integer.parseInt(mapObject.get("returnScore").toString())); // 积分 
 						integralRecordVO.setScore_deduction(new BigDecimal(mapObject.get("returnScoreDeduction").toString()));  //积分抵扣金额
+					}else if(mapObject.get("zeroScore")!=null && Integer.parseInt(mapObject.get("zeroScore").toString())==0){
+						integralRecordVO.setUse_score(Integer.parseInt(mapObject.get("zeroScore").toString())); // 积分 
+						integralRecordVO.setScore_deduction(new BigDecimal(mapObject.get("zeroScoreDeduction").toString()));  //积分抵扣金额
 					}else{
 						integralRecordVO.setUse_score(Integer.parseInt(mapObject.get("score").toString())); // 积分 
 						integralRecordVO.setScore_deduction(new BigDecimal(mapObject.get("scoreDeduction").toString()));  //积分抵扣金额
@@ -1121,14 +1124,9 @@ public class OrderUtil {
 								int scoreExpressFee=ratioExpressFee.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_DOWN).intValue();//运费对应的积分折扣
 								if(score >= scoreExpressFee){
 								if(scoreExpressFee >=1){
-                                	//orderPrice.subtract(new BigDecimal(scoreExpressFee).multiply(scoreExchangeMoney));
                                 	returnScore =score-scoreExpressFee;
                                 }
 								}
-//								int transformScore=(subtractCoupon.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_DOWN)).intValue();
-//								if(score > transformScore){
-//									 returnScore=score-transformScore;
-//								}
 							}
 						} else {
 							//修改价格为0的情况
@@ -1139,6 +1137,8 @@ public class OrderUtil {
 							//更新实际使用的积分
 							jsonObject.put("cashScore", score-returnScore);
 							jsonObject.put("cashScoreDeduction",(score-returnScore)*scoreExchangeMoney);
+							jsonObject.put("zeroScore", returnScore);
+							jsonObject.put("zeroScoreDeduction", returnScore*scoreExchangeMoney);
 							//返还的积分
 							jsonObject.put("returnScore", returnScore);
 							jsonObject.put("returnScoreDeduction", returnScore*scoreExchangeMoney);
