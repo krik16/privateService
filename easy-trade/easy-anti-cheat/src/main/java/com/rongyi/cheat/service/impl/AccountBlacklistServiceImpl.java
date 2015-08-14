@@ -118,12 +118,12 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 	}
 
 	@Override
-	public Map<String, Object> updateFrozenAccount(String[] ids) {
+	public Map<String, Object> updateFrozenAccount(String[] ids,Byte status) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			for (String id : ids) {
 				AccountBlacklist accountBlacklist = selectById(Integer.valueOf(id));
-				accountBlacklist.setStatus(ConstantEnum.BLACK_ROLL_STATUS_1.getCodeByte());
+				accountBlacklist.setStatus(status);
 				update(accountBlacklist);
 			}
 			map.put("success", true);

@@ -25,8 +25,8 @@ public class AntiCheatServiceImpl implements IAntiCheatService {
 	}
 
 	@Override
-	public Map<String, Object> updateFrozenAccount(String[] ids) {
-		return accountBlacklistService.updateFrozenAccount(ids);
+	public Map<String, Object> updateFrozenAccount(String[] ids,Byte status) {
+		return accountBlacklistService.updateFrozenAccount(ids,status);
 	}
 
 }
