@@ -36,6 +36,11 @@ public class VoucherCouponParam implements Serializable{
 	 * 发布状态：待发布[0] 进行中[1] 已结束[2] 已下架[3]
 	 */
 	private Integer publishStatus;
+	
+	/**
+	 * 置顶状态：未置顶[0] 已置顶[1]
+	 */
+	private Integer stickStatus;
 
 	/**
 	 * 一级分类id
@@ -78,6 +83,22 @@ public class VoucherCouponParam implements Serializable{
      * 卡券类型: 代金券[0],抵扣券[1], 红包[2]
      */
     private Integer couponType;
+    
+    /**
+     * 已置顶代金券 省ID
+     */
+    private String provinceId;
+    
+    /**
+     * 已置顶代金券 城市ID
+     */
+    private String cityId;
+    
+    /**
+     * 列表标签类型
+     * 置顶代金券：全部[all] 已置顶[sticked]
+     */
+    private String tabType;
 
 	private Integer currentPage = 1;
 
@@ -243,16 +264,50 @@ public class VoucherCouponParam implements Serializable{
 		this.orderByClause = orderByClause;
 	}
 
+	public Integer getStickStatus() {
+		return stickStatus;
+	}
+
+	public void setStickStatus(Integer stickStatus) {
+		this.stickStatus = stickStatus;
+	}
+
+	public String getTabType() {
+		return tabType;
+	}
+
+	public void setTabType(String tabType) {
+		this.tabType = tabType;
+	}
+	
+	public String getProvinceId() {
+		return provinceId;
+	}
+
+	public void setProvinceId(String provinceId) {
+		this.provinceId = provinceId;
+	}
+
+	public String getCityId() {
+		return cityId;
+	}
+
+	public void setCityId(String cityId) {
+		this.cityId = cityId;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("VoucherCouponParam [id=").append(id).append(", name=").append(name).append(", relatedType=")
 				.append(relatedType).append(", relatedTypeId=").append(relatedTypeId).append(", status=").append(status)
-				.append(", publishStatus=").append(publishStatus).append(", lv1Id=").append(lv1Id).append(", lv2Id=")
-				.append(lv2Id).append(", inChannel=").append(inChannel).append(", outChannel=").append(outChannel)
-				.append(", dateType=").append(dateType).append(", startDate=").append(startDate).append(", endDate=")
-				.append(endDate).append(", publishChannel=").append(publishChannel).append(", couponType=")
-				.append(couponType).append(", currentPage=").append(currentPage).append(", pageSize=").append(pageSize)
+				.append(", publishStatus=").append(publishStatus).append(", stickStatus=").append(stickStatus)
+				.append(", lv1Id=").append(lv1Id).append(", lv2Id=").append(lv2Id).append(", inChannel=")
+				.append(inChannel).append(", outChannel=").append(outChannel).append(", dateType=").append(dateType)
+				.append(", startDate=").append(startDate).append(", endDate=").append(endDate)
+				.append(", publishChannel=").append(publishChannel).append(", couponType=").append(couponType)
+				.append(", provinceId=").append(provinceId).append(", cityId=").append(cityId).append(", tabType=")
+				.append(tabType).append(", currentPage=").append(currentPage).append(", pageSize=").append(pageSize)
 				.append(", offset=").append(offset).append(", orderByClause=").append(orderByClause).append("]");
 		return builder.toString();
 	}

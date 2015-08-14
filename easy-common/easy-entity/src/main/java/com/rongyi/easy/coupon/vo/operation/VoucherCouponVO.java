@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.rongyi.easy.coupon.entity.mysql.CouponRejectRecord;
+import com.rongyi.easy.coupon.entity.mysql.CouponSort;
 
 public class VoucherCouponVO implements Serializable {
 
@@ -20,7 +21,7 @@ public class VoucherCouponVO implements Serializable {
     /**
      * 卡券类型:代金券[0], 抵扣券[1], 红包[2]
      */
-    private String couponType;
+    private Integer couponType;
 
     /**
      * 券码发行量
@@ -47,18 +48,23 @@ public class VoucherCouponVO implements Serializable {
      * 代金券：集团[0],品牌[1], 商场 [2],店铺[3];
      * 红包 ：全场[0],商品[1]
      */
-    private String relatedType;
+    private Integer relatedType;
 
     /**
      * 状态: 待审核[0], 审核未通过[1], 审核通过[2]
      */
-    private String status;
+    private Integer status;
 
     /**
      * 发布状态：待发布[0] 进行中[1] 已结束[2] 已下架[3]
 	 *
 	 */
-	private String publishStatus;
+	private Integer publishStatus;
+	
+	/**
+	 * 置顶状态：未置顶[0] 已置顶[1]
+	 */
+	private Integer stickStatus;
 
 	 /**
      * 是否是第三方券 否[false], 是[true], 默认不是第三方券fasle
@@ -79,6 +85,11 @@ public class VoucherCouponVO implements Serializable {
      * 拒绝原因
      */
     private List<CouponRejectRecord> rejectRecordList;
+    
+    /**
+     * 已置顶代金券
+     */
+    private CouponSort couponSort;
 
 	public Integer getId() {
 		return id;
@@ -96,11 +107,11 @@ public class VoucherCouponVO implements Serializable {
 		this.name = name;
 	}
 
-	public String getCouponType() {
+	public Integer getCouponType() {
 		return couponType;
 	}
 
-	public void setCouponType(String couponType) {
+	public void setCouponType(Integer couponType) {
 		this.couponType = couponType;
 	}
 
@@ -136,28 +147,36 @@ public class VoucherCouponVO implements Serializable {
 		this.currPrice = currPrice;
 	}
 
-	public String getRelatedType() {
+	public Integer getRelatedType() {
 		return relatedType;
 	}
 
-	public void setRelatedType(String relatedType) {
+	public void setRelatedType(Integer relatedType) {
 		this.relatedType = relatedType;
 	}
 
-	public String getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
-	public String getPublishStatus() {
+	public Integer getPublishStatus() {
 		return publishStatus;
 	}
 
-	public void setPublishStatus(String publishStatus) {
+	public void setPublishStatus(Integer publishStatus) {
 		this.publishStatus = publishStatus;
+	}
+
+	public Integer getStickStatus() {
+		return stickStatus;
+	}
+
+	public void setStickStatus(Integer stickStatus) {
+		this.stickStatus = stickStatus;
 	}
 
 	public Boolean getIsThird() {
@@ -191,6 +210,14 @@ public class VoucherCouponVO implements Serializable {
 	public void setRejectRecordList(List<CouponRejectRecord> rejectRecordList) {
 		this.rejectRecordList = rejectRecordList;
 	}
+	
+	public CouponSort getCouponSort() {
+		return couponSort;
+	}
+
+	public void setCouponSort(CouponSort couponSort) {
+		this.couponSort = couponSort;
+	}
 
 	@Override
 	public String toString() {
@@ -199,9 +226,10 @@ public class VoucherCouponVO implements Serializable {
 				.append(couponType).append(", totalCount=").append(totalCount).append(", stockCount=")
 				.append(stockCount).append(", origPrice=").append(origPrice).append(", currPrice=").append(currPrice)
 				.append(", relatedType=").append(relatedType).append(", status=").append(status)
-				.append(", publishStatus=").append(publishStatus).append(", isThird=").append(isThird)
-				.append(", lv1Name=").append(lv1Name).append(", lv2Name=").append(lv2Name).append(", rejectRecordList=")
-				.append(rejectRecordList).append("]");
+				.append(", publishStatus=").append(publishStatus).append(", stickStatus=").append(stickStatus)
+				.append(", isThird=").append(isThird).append(", lv1Name=").append(lv1Name).append(", lv2Name=")
+				.append(lv2Name).append(", rejectRecordList=").append(rejectRecordList).append(", couponSort=")
+				.append(couponSort).append("]");
 		return builder.toString();
 	}
 

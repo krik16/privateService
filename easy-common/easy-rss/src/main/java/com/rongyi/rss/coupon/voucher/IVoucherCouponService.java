@@ -112,12 +112,21 @@ public interface IVoucherCouponService {
 	/***********置顶代金券 start***************/
 
 	/**
+	 * 分页查询置顶代金券列表
+	 * @param param 查询参数
+	 * @return
+	 * @throws Exception
+	 */
+	PagingVO<VoucherCouponVO> findAllStickByPage(VoucherCouponParam param) throws Exception;
+	
+	/**
 	 * @Description:代金券置顶
 	 * @author:lqy
 	 * @param couponSortList 置顶对象集合
 	 * @return
+	 * @throws Exception 
 	 */
-	ResponseResult stick(List<CouponSort> couponSortList);
+	ResponseResult stick(List<CouponSort> couponSortList) throws Exception;
 
 	/**
 	 * @Description:代金券取消置顶
@@ -134,7 +143,7 @@ public interface IVoucherCouponService {
 	 * @param sortIndex 排序值
 	 * @return 成功返回true 失败返回false
 	 */
-	boolean sort(Integer couponSortId, Integer sortIndex);
+	boolean sort(Integer couponSortId, int sortIndex) throws Exception;
 
 
 	/***********置顶代金券 end***************/
