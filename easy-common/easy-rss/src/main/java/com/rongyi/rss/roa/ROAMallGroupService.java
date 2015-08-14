@@ -31,4 +31,12 @@ public interface ROAMallGroupService {
      * @throws Exception
      */
     public List<MallGroupVO> getMallGroups(Map params) throws Exception;
+    
+    /**
+     * 通过商场获得集团
+     * @param mallMid
+     * @return
+     * @throws Exception
+     */
+    public MallGroupVO getMallGroupsByMallMid(String mallMid) throws Exception;
 }
