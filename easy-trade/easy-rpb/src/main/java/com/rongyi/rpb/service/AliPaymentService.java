@@ -29,7 +29,7 @@ public interface AliPaymentService {
 	 * @Author:  柯军
 	 * @datetime:2015年6月25日下午4:07:08
 	 **/
-	public Map<String, Object> getZhiFuBaoSign(Map<String, Object> orderMaps, String payNo);
+	public abstract Map<String, Object> getZhiFuBaoSign(Map<String, Object> orderMaps, String payNo);
 	
 	/**	
 	 * @Description: 查询支付宝订单支付状态 
@@ -39,7 +39,7 @@ public interface AliPaymentService {
 	 * @Author:  柯军
 	 * @datetime:2015年8月5日上午9:42:53
 	 **/
-	public QueryOrderParamVO queryOrder(String tradeNo,String payNo);
+	public abstract QueryOrderParamVO queryOrder(String tradeNo,String payNo);
 	
 	
 }
