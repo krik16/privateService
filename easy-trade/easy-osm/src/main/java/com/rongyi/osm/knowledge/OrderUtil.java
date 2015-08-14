@@ -1150,7 +1150,7 @@ public class OrderUtil {
 									curMaxScore=ratioExpressFee.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_DOWN).intValue();//运费对应的积分折扣
 								}
 								
-								if (curMaxScore < 1)
+								if (curMaxScore <= 1)
 								{
 									curMaxScore = 0;
 								}
