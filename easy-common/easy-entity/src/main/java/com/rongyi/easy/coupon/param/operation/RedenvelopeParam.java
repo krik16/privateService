@@ -62,9 +62,9 @@ public class RedenvelopeParam implements Serializable{
 	/**这个是库存  0代表库存==0  1代表库存要大于0 2代表库存大于等于0*/
 	private Integer stockCount;
 	/**当前页数 */
-	private int curpage;
+	private int curpage=1;
 	/**每页显示的数量*/
-	private int pagesize;
+	private int pagesize=10;
 	
 	
 	public RedenvelopeParam(){
