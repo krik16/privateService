@@ -538,6 +538,9 @@ salience 100
 		if(!StringUtils.isEmpty($order.getDiscountInfo())){
 				Map<String, Object> mapObject = JsonUtil.getMapFromJson($order.getDiscountInfo());
 				if(mapObject.get("score")!=null && Integer.parseInt(mapObject.get("score").toString())>0){
+			        JSONObject jsonObject=JSONObject.fromObject($order.getDiscountInfo());
+			        jsonObject.put("zeroScore",-1);
+			        $order.setDiscountInfo(jsonObject.toString());
 					//修改了价格
 					if(mapObject.get("returnScore")!=null && Integer.parseInt(mapObject.get("returnScore").toString())>0){
 						//归还积分开始
