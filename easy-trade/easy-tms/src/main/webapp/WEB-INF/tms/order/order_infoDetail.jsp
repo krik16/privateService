@@ -195,7 +195,7 @@
 						</td>
 						<td>${sonOrder.commodityCurrentPrice }</td>
 						<td>${sonOrder.num }</td>
-						<td>${sonOrder.commodityCurrentPrice * sonOrder.num }</td>
+						<td>${sonOrder.realAmount }</td>
 						</tr>
 					</c:forEach>
 				</table>
