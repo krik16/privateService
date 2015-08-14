@@ -46,7 +46,7 @@ public class AccountBlackListServiceImplTest extends BaseTest {
 	
 //	@Test
 	public void testUpdateForzenAccount(){
-		Map<String,Object> map = blackRollService.updateFrozenAccount(new String[]{"41"});
+		Map<String,Object> map = blackRollService.updateFrozenAccount(new String[]{"41"},(byte)0);
 		System.err.println(map.get("success"));
 	}
 }
