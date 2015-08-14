@@ -39,9 +39,11 @@
 						
 						<c:choose>
 							<c:when test="${item.status eq 0}">
-							<td><a href="javascript:void(0);" class="btnsearch checked" id="frozen-button" onclick="frozenAccount(${item.id})">冻结</a></td>
+							<td><a href="javascript:void(0);" class="btnsearch checked" id="frozen-button" onclick="frozenAccount(${item.id},1)">冻结</a></td>
 							</c:when>
-							<c:otherwise><td></td></c:otherwise>	
+							<c:otherwise>
+							<td><a href="javascript:void(0);" class="btnsearch checked" id="frozen-button" onclick="frozenAccount(${item.id},0)">解冻</a></td>
+							</c:otherwise>	
 						</c:choose>
 			 		</td>
 					</tr>

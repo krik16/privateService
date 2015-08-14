@@ -26,9 +26,10 @@ function getParamsJson() {
  * 
  * @param id
  */
-function frozenAccount(id) {
+function frozenAccount(id,status) {
 	$.post("../accountBlack/frozenAccount", {
-		id : id
+		id : id,
+		status:status
 	}, function(data) {
 		_util.cmsTip(data.message);
 		ajaxCommonSearch(url_, getParamsJson());

@@ -72,11 +72,11 @@ public class AccountBlacklistController extends BaseController {
 
 	@RequestMapping("/frozenAccount")
 	@ResponseBody
-	public ResponseResult weixinRefund(@RequestParam Integer id, Model model) {
+	public ResponseResult weixinRefund(@RequestParam Integer id,@RequestParam Integer status, Model model) {
 		LOGGER.info("================冻结账号====================");
 		ResponseResult result = new ResponseResult();
 		try {
-			Map<String, Object> resultMap = antiCheatService.updateFrozenAccount(new String[] { id.toString() });
+			Map<String, Object> resultMap = antiCheatService.updateFrozenAccount(new String[] { id.toString()},status.byteValue());
 			result.setSuccess(Boolean.valueOf(resultMap.get("success").toString()));
 			result.setMessage(resultMap.get("message").toString());
 		} catch (Exception e) {
