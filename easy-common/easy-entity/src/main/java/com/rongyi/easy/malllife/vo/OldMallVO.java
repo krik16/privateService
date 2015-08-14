@@ -7,7 +7,7 @@ public class OldMallVO implements Serializable{
 	private String id;
 	private String name;
 	private String icon;
-	private Integer rank_avg;
+	private String rank_avg;
 	private String address;
 	private List<MainCategoriesVO> main_categories;
 	private String telephone;
@@ -45,10 +45,10 @@ public class OldMallVO implements Serializable{
 	public void setIcon(String icon) {
 		this.icon = icon;
 	}
-	public Integer getRank_avg() {
+	public String getRank_avg() {
 		return rank_avg;
 	}
-	public void setRank_avg(Integer rank_avg) {
+	public void setRank_avg(String rank_avg) {
 		this.rank_avg = rank_avg;
 	}
 	public String getAddress() {
