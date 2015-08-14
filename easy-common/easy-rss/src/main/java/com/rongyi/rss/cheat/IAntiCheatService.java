@@ -30,7 +30,7 @@ public interface IAntiCheatService {
 	 * @Author: 柯军
 	 * @datetime:2015年8月12日下午7:46:00
 	 **/
-	public boolean valdateAccountInBlackList(String payAccout, Byte payType,Byte status);
+	public abstract boolean valdateAccountInBlackList(String payAccout, Byte payType,Byte status);
 	
 	
 	/**	
@@ -42,5 +42,14 @@ public interface IAntiCheatService {
 	 * @Author:  柯军
 	 * @datetime:2015年8月14日上午9:54:12
 	 **/
-	public Map<String,Object> getPageMap(Integer currentPage, Integer pageSize, Map<String, Object> map);
+	public abstract Map<String,Object> getPageMap(Integer currentPage, Integer pageSize, Map<String, Object> map);
+	
+	/**	
+	 * @Description: 冻结黑名单账号 
+	 * @param ids
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年8月14日上午11:35:09
+	 **/
+	public abstract Map<String,Object> updateFrozenAccount(String[] ids);
 }
