@@ -81,8 +81,8 @@ public class Commodity implements  Serializable {
 	private String systemNumber;//系统编号
 	private byte distribution;//配送方式
 	private double freight;//运费 >0买家承担运费<0商家承担运费
-	private Date registerTime;//上架时间
-	private Date soldOutTime;//下架时间
+	private Date registerAt;//上架时间
+	private Date soldOutAt;//下架时间
 	
 //	private int commentCount;
 //	private int highCommentCount;
@@ -292,17 +292,16 @@ public String getShopMid() {
 	public void setFreight(double freight) {
 		this.freight = freight;
 	}
-	public Date getRegisterTime() {
-		return registerTime;
+	public Date getRegisterAt() {
+		return registerAt;
 	}
-	public void setRegisterTime(Date registerTime) {
-		this.registerTime = registerTime;
+	public void setRegisterAt(Date registerAt) {
+		this.registerAt = registerAt;
 	}
-	public Date getSoldOutTime() {
-		return soldOutTime;
+	public Date getSoldOutAt() {
+		return soldOutAt;
 	}
-	public void setSoldOutTime(Date soldOutTime) {
-		this.soldOutTime = soldOutTime;
+	public void setSoldOutAt(Date soldOutAt) {
+		this.soldOutAt = soldOutAt;
 	}
-	
 }
