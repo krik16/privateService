@@ -16,6 +16,9 @@ import net.sf.json.JSONObject;
 import java.math.BigDecimal;
 import org.slf4j.Logger;
 import com.rongyi.easy.gcc.Configurations;
+import org.apache.commons.lang.StringUtils;
+import java.util.Map;
+import com.rongyi.easy.malllife.common.util.JsonUtil;
 
 import com.rongyi.easy.osm.entity.OrderFormEntity;
 import com.rongyi.easy.osm.entity.OrderDetailFormEntity;
@@ -722,9 +725,18 @@ salience 100
 		
 		logger.debug("计算积分支付占总金额比例和归还积分------start--------");
 		//返还积分后对数据库中的returnScore清除
-		orderFormService.updateRetrunScore($order);
-		//归还积分开始
-		orderUtil.subtractScore($order);
+		//orderFormService.updateRetrunScore($order);
+		if(!StringUtils.isEmpty($order.getDiscountInfo())){
+				Map<String, Object> mapObject = JsonUtil.getMapFromJson($order.getDiscountInfo());
+				if(mapObject.get("score")!=null && Integer.parseInt(mapObject.get("score").toString())>0){
+					//returnScore表示卖家修改价格需要退还买家积分
+					if(mapObject.get("returnScore")!=null && Integer.parseInt(mapObject.get("returnScore").toString())>0){
+						//归还积分开始
+		               orderUtil.subtractScore($order);
+					}
+				}
+		}
+		
 		logger.debug("修改入库-----start-------");
 		
 		// 入主数据库
