@@ -158,7 +158,7 @@ public class OrderManagerController extends BaseController {
 			if (!CollectionUtils.isEmpty(sonOrderList)) {
 				for (SonOrderVO sonOrderVo : sonOrderList) {
 					commidityTotalPice = commidityTotalPice.add(new BigDecimal(sonOrderVo.getNum())
-							.multiply(new BigDecimal(sonOrderVo.getCommodityCurrentPrice())));
+							.multiply(new BigDecimal(sonOrderVo.getCommodityCurrentPrice()))).setScale(2, BigDecimal.ROUND_HALF_UP);
 					if (StringUtils.isNotBlank(sonOrderVo.getCouponCode())) {
 						MMUserCouponVO userCouponVO = mMUserCouponService.getUserCouponByCouponCode(sonOrderVo
 								.getCouponCode());
