@@ -429,7 +429,22 @@ salience 100
 		orderUtil.increaseStock($order);
 		 //返还积分后对数据库中的returnScore清除
 		//orderFormService.updateRetrunScore($order);
-		boolean flag=orderUtil.subtractScore($order); //还原买家积分
+		//boolean flag=orderUtil.subtractScore($order); //还原买家积分
+		if(!StringUtils.isEmpty($order.getDiscountInfo())){
+				Map<String, Object> mapObject = JsonUtil.getMapFromJson($order.getDiscountInfo());
+				if(mapObject.get("score")!=null && Integer.parseInt(mapObject.get("score").toString())>0){
+			        JSONObject jsonObject=JSONObject.fromObject($order.getDiscountInfo());
+			        jsonObject.put("zeroScore",-1);
+			        $order.setDiscountInfo(jsonObject.toString());
+					//修改了价格
+					if(mapObject.get("returnScore")!=null && Integer.parseInt(mapObject.get("returnScore").toString())>0){
+						//归还积分开始
+		               //orderUtil.subtractScore($order);
+					}else{
+					   orderUtil.subtractScore($order); //还原买家积分
+					}
+				}
+		}
 		
 		logger.error("红包归还开始----------");
 		OrderDetailFormEntity[] orderDetailList = orderUtil.queryGetOrderDetailList($order.getOrderNo());
