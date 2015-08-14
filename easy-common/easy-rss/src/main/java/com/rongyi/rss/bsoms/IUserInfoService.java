@@ -5,6 +5,8 @@ import java.util.Map;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.bsoms.entity.UserInfo;
 import com.rongyi.easy.bsoms.vo.BusinessAccountVO;
+import com.rongyi.easy.mallshop.MallShopException;
+import com.rongyi.easy.rmmm.param.user.UserManagerParam;
 
 /**
  * 账户用户相关
@@ -37,4 +39,13 @@ public interface IUserInfoService {
 	void updateAccountStatus(int id, int isSuspended, String stopReason);
 	
 	UserInfo getUserInfoById(Integer id);
+
+	/**
+	 * 查询商家账户信息（包含关联信息）
+	 * @param id
+	 * @return
+	 */
+	BusinessAccountVO getUserDetailInfoById(Integer id);
+
+	boolean insertUserInfo (UserManagerParam userParam)throws MallShopException;
 }

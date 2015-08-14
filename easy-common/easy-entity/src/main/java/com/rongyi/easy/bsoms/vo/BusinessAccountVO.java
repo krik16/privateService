@@ -1,6 +1,7 @@
 package com.rongyi.easy.bsoms.vo;
 
 import java.io.Serializable;
+import java.util.Date;
 /**
  * 商家账户VO
  * @author hebo
@@ -10,22 +11,44 @@ public class BusinessAccountVO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	private Integer id;//用户id
+	private String idCard;//身份证
 	private String account;//用户账号
 	private String userName;//用户姓名
+	private String nickName;//用户昵称
 	private Integer type;//商家类型
 	private Integer identity;//身份类型
+	private Integer groupId;//集团id
 	private String groupName;//集团名称
-	private String ownerName;//品牌名
+	private Integer brandId;//品牌id
+	private String brandName;//品牌名
+	private Integer mallId;//商场id
 	private String mallName;//商场名
+	private Integer shopId;//店铺id
+	private String shopName;//店铺名
+	private Integer roleId;//角色id
+	private String roleName;//角色名
+	private Integer branchId;//分公司id
+	private String branchName;//分公司名
 	private Integer accountStatus;//账号状态：是否禁用0正常 1禁用'
-	private Integer isSuspended;//是否冻结
-	private Integer cashAccountStatus;//账户资金状态：0正常  1冻结
+	private Integer isSuspended;//资金账户：是否冻结
+	private String comment;//评价
+//	private Integer cashAccountStatus;//账户资金状态：0正常  1冻结
 	private Integer createSource;//账号来源：0大运营、1商家后台
+	private String createBy;//创建人
+	private Date createAt;
+	private String updateBy;//修改人
+	private Date updateAt;
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public String getIdCard() {
+		return idCard;
+	}
+	public void setIdCard(String idCard) {
+		this.idCard = idCard;
 	}
 	public String getAccount() {
 		return account;
@@ -57,12 +80,6 @@ public class BusinessAccountVO implements Serializable {
 	public void setGroupName(String groupName) {
 		this.groupName = groupName;
 	}
-	public String getOwnerName() {
-		return ownerName;
-	}
-	public void setOwnerName(String ownerName) {
-		this.ownerName = ownerName;
-	}
 	public String getMallName() {
 		return mallName;
 	}
@@ -81,27 +98,113 @@ public class BusinessAccountVO implements Serializable {
 	public void setIsSuspended(Integer isSuspended) {
 		this.isSuspended = isSuspended;
 	}
-	public Integer getCashAccountStatus() {
-		return cashAccountStatus;
-	}
-	public void setCashAccountStatus(Integer cashAccountStatus) {
-		this.cashAccountStatus = cashAccountStatus;
-	}
+//	public Integer getCashAccountStatus() {
+//		return cashAccountStatus;
+//	}
+//	public void setCashAccountStatus(Integer cashAccountStatus) {
+//		this.cashAccountStatus = cashAccountStatus;
+//	}
 	public Integer getCreateSource() {
 		return createSource;
 	}
 	public void setCreateSource(Integer createSource) {
 		this.createSource = createSource;
 	}
-	@Override
-	public String toString() {
-		return "BusinessAccountVO [id=" + id + ", account=" + account
-				+ ", userName=" + userName + ", type=" + type + ", identity="
-				+ identity + ", groupName=" + groupName + ", ownerName="
-				+ ownerName + ", mallName=" + mallName + ", accountStatus="
-				+ accountStatus + ", isSuspended=" + isSuspended
-				+ ", cashAccountStatus=" + cashAccountStatus
-				+ ", createSource=" + createSource + "]";
+	public Integer getGroupId() {
+		return groupId;
+	}
+	public void setGroupId(Integer groupId) {
+		this.groupId = groupId;
+	}
+	public Integer getMallId() {
+		return mallId;
+	}
+	public void setMallId(Integer mallId) {
+		this.mallId = mallId;
+	}
+	public Integer getBrandId() {
+		return brandId;
+	}
+	public void setBrandId(Integer brandId) {
+		this.brandId = brandId;
+	}
+	public String getBrandName() {
+		return brandName;
+	}
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
+	}
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+	public Integer getShopId() {
+		return shopId;
+	}
+	public void setShopId(Integer shopId) {
+		this.shopId = shopId;
+	}
+	public String getShopName() {
+		return shopName;
+	}
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+	public String getCreateBy() {
+		return createBy;
+	}
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
+	}
+	public Date getCreateAt() {
+		return createAt;
+	}
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+	public String getUpdateBy() {
+		return updateBy;
+	}
+	public void setUpdateBy(String updateBy) {
+		this.updateBy = updateBy;
+	}
+	public Date getUpdateAt() {
+		return updateAt;
+	}
+	public void setUpdateAt(Date updateAt) {
+		this.updateAt = updateAt;
+	}
+	public Integer getRoleId() {
+		return roleId;
+	}
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
+	}
+	public String getRoleName() {
+		return roleName;
+	}
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+	public Integer getBranchId() {
+		return branchId;
+	}
+	public void setBranchId(Integer branchId) {
+		this.branchId = branchId;
+	}
+	public String getBranchName() {
+		return branchName;
+	}
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
 	}
 	
 }
