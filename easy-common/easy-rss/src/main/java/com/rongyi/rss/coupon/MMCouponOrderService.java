@@ -136,13 +136,19 @@ public interface MMCouponOrderService {
     void sendRefundCouponMsg(String orderNo, String couponName, double refundAmount, String paymentNo, String userCouponIds);
 
     /**
+     * 根据订单Id查询订单
      * @param orderId
-     * @return CouponOrder    返回类型
-     * @Title: findCouponOrderById
-     * @Description: TODO(通过订单id查询订单信息)
+     * @return
      */
     CouponOrder findCouponOrderById(Long orderId);
 
+
+    /**
+     * 根据单号查询订单
+     * @param orderNo
+     * @return
+     */
+    CouponOrder findCouponOrderByNo(String orderNo);
 
     /**
      * 优惠券订单列表（全部、待付款）
