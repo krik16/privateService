@@ -428,7 +428,7 @@ salience 100
 		// 归还库存
 		orderUtil.increaseStock($order);
 		 //返还积分后对数据库中的returnScore清除
-		orderFormService.updateRetrunScore($order);
+		//orderFormService.updateRetrunScore($order);
 		boolean flag=orderUtil.subtractScore($order); //还原买家积分
 		
 		logger.error("红包归还开始----------");
