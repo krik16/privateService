@@ -17,6 +17,12 @@
 		create_at,
 		update_at,`desc`
 	</sql>
+	
+	<sql id="page_list_where_clause">
+		<if test="payAccount != null and payAccount != ''">
+			AND pay_account = #{payAccount}
+		</if>
+	</sql>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
 		select
@@ -110,7 +116,8 @@
 		update_at =
 		#{updateAt,jdbcType=TIMESTAMP},
 		`desc` = #{desc,jdbcType=VARCHAR}
-		where id
+		where
+		id
 		= #{id,jdbcType=INTEGER}
 
 	</update>
@@ -128,5 +135,35 @@
 		<if test="status != null">
 			and status = #{status,jdbcType=TINYINT}
 		</if>
+	</select>
+
+	<select id="selectPageList" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from account_blacklist
+		<where>
+			<include refid="page_list_where_clause" />
+		</where>
+		<if test="orderby != null">
+			order by ${orderby} ${orderVa}
+		</if>
+
+		<if test="orderby == null">
+			order by status desc,create_at desc
+		</if>
+		<if test="currentPage != null">
+			limit
+			#{currentPage,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+		</if>
+	</select>
+	<select id="selectPageListCount" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		select
+		count(id)
+		from account_blacklist
+		<where>
+			<include refid="page_list_where_clause" />
+		</where>
 	</select>
 </mapper>

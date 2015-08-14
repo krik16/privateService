@@ -8,6 +8,7 @@
 
 package com.rongyi.cheat.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.rongyi.easy.cheat.AccountBlacklist;
@@ -56,5 +57,17 @@ public interface AccountBlacklistService {
 	 * @datetime:2015年8月12日下午12:03:00
 	 **/
 	public abstract void valadatePayAccount(Map<String, Object> map);
+	
+	
+	/**	
+	 * @Description: 分页查询黑名单列表 
+	 * @param currentPage
+	 * @param pageSize
+	 * @param map
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年8月13日下午7:40:03
+	 **/
+	public abstract Map<String,Object> selectPageList(Integer currentPage,Integer pageSize,Map<String,Object> map);
 	
 }
