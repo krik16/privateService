@@ -194,9 +194,9 @@ public class RpbServiceImpl implements IRpbService {
 
 	@Override
 	public QueryOrderParamVO queryOrder(Map<String, Object> map) {
-		String payNo = (map.get("payNo") != null) ? map.get("payNo").toString() : null;
 		String tradeNo = (map.get("tradeNo") != null) ? map.get("tradeNo").toString() : null;
-		return aliPaymentService.queryOrder(payNo, tradeNo);
+		String payNo = (map.get("payNo") != null) ? map.get("payNo").toString() : null;
+		return aliPaymentService.queryOrder(tradeNo,payNo);
 	}
 
 	@Override
