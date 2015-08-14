@@ -439,7 +439,7 @@ salience 100
 					//修改了价格
 					if(mapObject.get("returnScore")!=null && Integer.parseInt(mapObject.get("returnScore").toString())>0){
 						//归还积分开始
-		               //orderUtil.subtractScore($order);
+		               orderUtil.subtractScore($order);
 					}else{
 					   orderUtil.subtractScore($order); //还原买家积分
 					}
