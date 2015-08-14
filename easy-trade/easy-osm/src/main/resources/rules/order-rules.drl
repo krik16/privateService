@@ -381,6 +381,8 @@ rule "买家超时未支付"
 		boolean flag=orderUtil.subtractScore($order); //还原买家积分
 		logger.debug("还原积分状态"+ flag + " end");
 		
+		//返还积分后对数据库中的returnScore清除
+		orderFormService.updateRetrunScore($order);
 		//记录日志
 		//logger.debug("{"+new JSONArray().fromObject(orderUtil.setLogEntityInfo($order)).toString() +"}");	
 		logger.debug("[" + drools.getRule().getName() + "] OrderNo=" +
@@ -424,8 +426,10 @@ salience 100
 		
 		// 归还库存
 		orderUtil.increaseStock($order);
-		
+		 //返还积分后对数据库中的returnScore清除
+		orderFormService.updateRetrunScore($order);
 		boolean flag=orderUtil.subtractScore($order); //还原买家积分
+		
 		logger.error("红包归还开始----------");
 		OrderDetailFormEntity[] orderDetailList = orderUtil.queryGetOrderDetailList($order.getOrderNo());
 	    // 更新现金券状态
@@ -717,11 +721,12 @@ salience 100
 		//logger.debug("{"+new JSONArray().fromObject(orderUtil.setLogEntityInfo($order)).toString() +"}");	
 		
 		logger.debug("计算积分支付占总金额比例和归还积分------start--------");
+		//返还积分后对数据库中的returnScore清除
+		orderFormService.updateRetrunScore($order);
 		//归还积分开始
 		orderUtil.subtractScore($order);
 		logger.debug("修改入库-----start-------");
-		//返还积分后对数据库中的returnScore清除
-		orderFormService.updateRetrunScore($order);
+		
 		// 入主数据库
 		orderFormService.updateStatusAndPaymentIdWithTime($order);
 		
@@ -927,7 +932,8 @@ rule "卖家超时未发货"
 		
 		boolean flag=orderUtil.subtractScore($order); //还原买家积分
 		logger.debug("还原积分状态"+ flag + " end"); 
-		
+		//返还积分后对数据库中的returnScore清除
+		orderFormService.updateRetrunScore($order);
 		//记录日志
 		//logger.debug("{"+new JSONArray().fromObject(orderUtil.setLogEntityInfo($order)).toString() +"}");	
 		
