@@ -10,6 +10,7 @@ package com.rongyi.cheat.service.impl;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -23,6 +24,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rongyi.cheat.constants.Constant;
 import com.rongyi.cheat.constants.ConstantEnum;
 import com.rongyi.cheat.mail.MailService;
 import com.rongyi.cheat.service.AccountBlacklistService;
@@ -80,8 +82,8 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 
 	@Override
 	public void valadatePayAccount(Map<String, Object> map) {
-		map.put("count", 10);
-		LOGGER.info("扫描是否有账号符合黑名单条件，购买次数大于" + 10);
+		map.put("count", Constant.BLACKLIST_CONFIG.WARN_COUNT);
+		LOGGER.info("扫描是否有账号符合黑名单条件，购买次数大于" + Constant.BLACKLIST_CONFIG.WARN_COUNT);
 		List<PayAccountUseTotal> list = rpbService.selectPayAccountUseTotal(map);
 		List<AccountBlacklist> mailWranList = new ArrayList<AccountBlacklist>();
 		for (PayAccountUseTotal payAccountUseTotal : list) {
@@ -135,8 +137,8 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 	}
 
 	private void sendWranEmail(List<AccountBlacklist> mailWranList) {
-		Set<String> toAdrs = new HashSet<String>();
-		toAdrs.add("kejun@rongyi.com");
+//		Set<String> toAdrs = new HashSet<String>();
+//		toAdrs.add("kejun@rongyi.com");
 		StringBuffer sb = new StringBuffer();
 		sb.append("以下账号存在刷单风险：\n");
 		for (AccountBlacklist accountBlacklist : mailWranList) {
@@ -151,8 +153,8 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 		}
 
 		try {
-			LOGGER.info("发送报警邮件，收件人列表" + toAdrs.toString());
-			mailService.sendAttachmentEmail("刷单账号预警", "kejun@rongyi.com", toAdrs, sb.toString(), null);
+			LOGGER.info("发送报警邮件，收件人列表" + getToAddress().toString());
+			mailService.sendAttachmentEmail("刷单账号预警", "kejun@rongyi.com", getToAddress(), sb.toString(), null);
 		} catch (AddressException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
@@ -160,6 +162,13 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	private Set<String> getToAddress(){
+		String toAddress = Constant.BLACKLIST_CONFIG.TO_ADDRESS;
+		String[] arrays = toAddress.split(",");
+		return new HashSet(Arrays.asList(arrays)); 
 	}
 
 	private AccountBlacklist getAccountBlacklist(PayAccountUseTotal payAccountUseTotal) {

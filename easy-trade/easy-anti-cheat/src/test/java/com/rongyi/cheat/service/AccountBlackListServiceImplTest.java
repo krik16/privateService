@@ -20,7 +20,7 @@ public class AccountBlackListServiceImplTest extends BaseTest {
 	@Autowired
 	IAntiCheatService iAntiCheatService;
 
-	// @Test
+	 @Test
 	@Rollback(false)
 	public void testValadatePayAccount() {
 		blackRollService.valadatePayAccount(new HashMap<String, Object>());
@@ -38,7 +38,7 @@ public class AccountBlackListServiceImplTest extends BaseTest {
 		System.err.println(map.get("count"));
 	}
 	
-	@Test
+//	@Test
 	public void testSelectById(){
 		AccountBlacklist accountBlacklist = blackRollService.selectById(41);
 		System.err.println(accountBlacklist.getId());

@@ -150,7 +150,7 @@
 		</if>
 
 		<if test="orderby == null">
-			order by status asc,create_at desc
+			order by status asc,count desc,create_at desc
 		</if>
 		<if test="currentPage != null">
 			limit
