@@ -123,6 +123,14 @@ li ul li span.fancytree-title{
 					</ul>
 				</li>
 				</sec:authorize>
+				
+				<sec:authorize ifAnyGranted="TMS_F_BS_VIEW,TMS_F_SC_VIEW,TMS_F_EXM_VIEW,TMS_F_AB_VIEW,TMS_F_PAY_VIEW" >
+				<li class="folder expanded">防作弊管理
+					<ul>
+						<sec:authorize ifAnyGranted="TMS_F_BS_VIEW" ><li><a href="${ctx}/accountBlack/search" target="mainFrame">黑名单</a></li></sec:authorize>
+					</ul>
+				</li>
+				</sec:authorize>
 			</ul>
 		</div>
 	</div>

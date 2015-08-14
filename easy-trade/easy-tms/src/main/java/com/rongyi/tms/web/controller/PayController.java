@@ -8,7 +8,6 @@
 
 package com.rongyi.tms.web.controller;
 
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -299,22 +298,6 @@ public class PayController extends BaseController {
 		return desc;
 	}
 
-	@SuppressWarnings("unchecked")
-	private Map<String, Object> getJsonMap(HttpServletRequest request) {
-		try {
-			request.setCharacterEncoding("utf-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-		String paramsJson = request.getParameter("paramsJson");
-		if (paramsJson == null) {
-			Map<String, Object> resultMap = new HashMap<String, Object>();
-			resultMap.put("msg", "参数为NULL，请关闭再重试！");
-			resultMap.put("status", 0);
-			return null;
-		}
-		return JsonUtil.getMapFromJson(paramsJson);
-	}
 
 	private MessageEvent getMessageEvent(Integer operateType, Integer payChannel, String paymentId, String desc) {
 		MessageEvent event = new MessageEvent();

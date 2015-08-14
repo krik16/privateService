@@ -9,7 +9,9 @@ public interface Constant {
 	interface BLACKLIST_CONFIG {
 		String WARN_COUNT = propertyConfigurer.getProperty("WARN.COUNT").toString();//报警数量
 		String FREEZE_COUNT = propertyConfigurer.getProperty("FREEZE.COUNT").toString();//直接冻结数量
-		String TO_ADDRESS = propertyConfigurer.getProperty("TO_ADDRESS").toString();//直接冻结数量
+		String SEND_ADDRESS = propertyConfigurer.getProperty("SEND_ADDRESS").toString();//发送邮件地址
+		String TO_ADDRESS = propertyConfigurer.getProperty("TO_ADDRESS").toString();//接收邮件地址
+		String BLACKLIST_URL = propertyConfigurer.getProperty("BLACKLIST_URL").toString();//黑名单列表URL
 	}
 
 	
