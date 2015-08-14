@@ -27,7 +27,7 @@ public class CommentsEntity implements Serializable {
     private ObjectId id;// 表id
 
     @Property("commentable_id")
-    private ObjectId commentableId;
+    private String commentableId;
     @Property("commentable_type")
     private String  commentableType;
 
@@ -117,11 +117,11 @@ public class CommentsEntity implements Serializable {
         this.userId = userId;
     }
 
-    public ObjectId getCommentableId() {
+    public String getCommentableId() {
         return commentableId;
     }
 
-    public void setCommentableId(ObjectId commentableId) {
+    public void setCommentableId(String commentableId) {
         this.commentableId = commentableId;
     }
 }
