@@ -87,8 +87,7 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 		List<PayAccountUseTotal> list = rpbService.selectPayAccountUseTotal(map);
 		List<AccountBlacklist> mailWranList = new ArrayList<AccountBlacklist>();
 		for (PayAccountUseTotal payAccountUseTotal : list) {
-			AccountBlacklist accountBlacklist = selectByPayAccount(payAccountUseTotal.getPayAccount(), Integer.valueOf(payAccountUseTotal.getPayType()).byteValue(),
-					ConstantEnum.BLACK_ROLL_STATUS_0.getCodeByte());
+			AccountBlacklist accountBlacklist = selectByPayAccount(payAccountUseTotal.getPayAccount(), Integer.valueOf(payAccountUseTotal.getPayType()).byteValue(), null);
 			if (accountBlacklist == null) {
 				accountBlacklist = getAccountBlacklist(payAccountUseTotal);
 				insert(accountBlacklist);
@@ -183,5 +182,4 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 		return accountBlacklist;
 
 	}
-
 }
