@@ -286,6 +286,7 @@ public class OrderUtil {
 				
 				if(scoreLimit<scoreValue){
 					//超过积分使用最大上限
+					logger.info("超过积分使用最大上限-------scoreValue,scoreLimit" + scoreValue+","+scoreLimit);
 				}else{
 					//金额的10%兑换积分不满足1积分则不能使用积分支付
 					//BigDecimal rationTotalScore=ratioTotal.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_DOWN);
