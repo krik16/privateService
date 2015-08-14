@@ -65,6 +65,16 @@ public class OldCouponDetail implements Serializable {
     
     private int refundNum;//最大退款数量
 
+    private int orderNum;//购买数量
+
+    public int getOrderNum() {
+        return orderNum;
+    }
+
+    public void setOrderNum(int orderNum) {
+        this.orderNum = orderNum;
+    }
+
     public double getCurrentPrice() {
         return currentPrice;
     }
