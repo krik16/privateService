@@ -384,8 +384,6 @@ rule "买家超时未支付"
 		boolean flag=orderUtil.subtractScore($order); //还原买家积分
 		logger.debug("还原积分状态"+ flag + " end");
 		
-		//返还积分后对数据库中的returnScore清除
-		orderFormService.updateRetrunScore($order);
 		//记录日志
 		//logger.debug("{"+new JSONArray().fromObject(orderUtil.setLogEntityInfo($order)).toString() +"}");	
 		logger.debug("[" + drools.getRule().getName() + "] OrderNo=" +
@@ -537,8 +535,18 @@ salience 100
 		}
 		logger.error("红包归还结束----------");
 		logger.debug("还原积分start"); 
-	    boolean flag=orderUtil.subtractScore($order); //还原买家积分
-		logger.debug("还原积分状态"+ flag + " end"); 
+		if(!StringUtils.isEmpty($order.getDiscountInfo())){
+				Map<String, Object> mapObject = JsonUtil.getMapFromJson($order.getDiscountInfo());
+				if(mapObject.get("score")!=null && Integer.parseInt(mapObject.get("score").toString())>0){
+					//修改了价格
+					if(mapObject.get("returnScore")!=null && Integer.parseInt(mapObject.get("returnScore").toString())>=0){
+						//归还积分开始
+		               //orderUtil.subtractScore($order);
+					}else{
+					   orderUtil.subtractScore($order); //还原买家积分
+					}
+				}
+		}
 		
 		//记录日志
 		//logger.debug("{"+new JSONArray().fromObject(orderUtil.setLogEntityInfo($order)).toString() +"}");	
@@ -944,8 +952,6 @@ rule "卖家超时未发货"
 		
 		boolean flag=orderUtil.subtractScore($order); //还原买家积分
 		logger.debug("还原积分状态"+ flag + " end"); 
-		//返还积分后对数据库中的returnScore清除
-		orderFormService.updateRetrunScore($order);
 		//记录日志
 		//logger.debug("{"+new JSONArray().fromObject(orderUtil.setLogEntityInfo($order)).toString() +"}");	
 		
