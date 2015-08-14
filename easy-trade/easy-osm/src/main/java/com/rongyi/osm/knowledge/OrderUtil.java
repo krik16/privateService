@@ -289,11 +289,11 @@ public class OrderUtil {
 					logger.info("超过积分使用最大上限-------scoreValue,scoreLimit" + scoreValue+","+scoreLimit);
 				}else{
 					//金额的10%兑换积分不满足1积分则不能使用积分支付
-					//BigDecimal rationTotalScore=ratioTotal.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_DOWN);
-					//if(rationTotalScore.compareTo(new BigDecimal(1))>=0){
+					BigDecimal rationTotalScore=ratioTotal.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_DOWN);
+					if(rationTotalScore.compareTo(new BigDecimal(1))>=0){
 						BigDecimal score = new BigDecimal(scoreValue);
 						total = total.subtract(score);
-					//}
+					}
 					//总价小于零则取零，否则保留2位小数
 					total = total.compareTo(new BigDecimal(0)) < 0 ? new BigDecimal(0) : total.setScale(2,BigDecimal.ROUND_HALF_UP);
 					logger.info("减去积分后的金额-------" + total);
