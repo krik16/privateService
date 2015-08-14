@@ -1,9 +1,16 @@
 package com.rongyi.easy.coupon.entity.mysql;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class CouponRejectRecord {
-    private Integer id;
+public class CouponRejectRecord implements Serializable {
+	
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
 
     /**
      * 卡券id

@@ -1,9 +1,6 @@
 package com.rongyi.rss.coupon;
 
 import java.util.List;
-import java.util.Map;
-
-import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
@@ -11,7 +8,7 @@ import com.rongyi.easy.coupon.entity.mysql.Coupon;
 import com.rongyi.easy.coupon.param.operation.RedenvelopeParam;
 import com.rongyi.easy.coupon.vo.operation.RedenvelopCouponVO;
 
-public interface RoaRedenvelopeComService {
+public interface IRedenvelopeService {
 	 /**
      * 根据PK查询
      *
@@ -44,17 +41,13 @@ public interface RoaRedenvelopeComService {
      */
     boolean remove(int id) throws Exception;
 
-    /**
-     * 返回所有数据
-     *
-     * @return
-     */
-    List<Coupon> findAll();
+   
 
     /**
      * 分页查询
      *
      * @param RedenvelopeParam
+     * @throws RuntimeExceptiona
      * @return
      */
     PagingVO<RedenvelopCouponVO> findAllByPage(RedenvelopeParam paramVo);
