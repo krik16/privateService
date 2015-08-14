@@ -17,6 +17,7 @@ public class UserManagerParam implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
+    private Integer id;//账户id
     private String userLogo;//用户头像
     private String  phone; //验证号码是否可注册
     private String  checkCode;//验证码",
@@ -44,7 +45,15 @@ public class UserManagerParam implements Serializable{
     private String stopReason;//停用原因
     private String creatingUserType;
     
-    public String getCreatingUserType() {
+    public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getCreatingUserType() {
 		return creatingUserType;
 	}
 
