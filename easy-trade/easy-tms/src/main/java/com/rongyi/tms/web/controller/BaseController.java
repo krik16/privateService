@@ -1,6 +1,8 @@
 package com.rongyi.tms.web.controller;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.rongyi.core.common.util.AuthorityUtil;
+import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.easy.solr.MallsDocument;
 import com.rongyi.tms.constants.Constant;
 import com.rongyi.tms.moudle.vo.UserInfo;
@@ -108,4 +111,20 @@ public class BaseController {
 		}
         return user;
     }
+    @SuppressWarnings("unchecked")
+	public  Map<String, Object> getJsonMap(HttpServletRequest request) {
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		String paramsJson = request.getParameter("paramsJson");
+		if (paramsJson == null) {
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			resultMap.put("msg", "参数为NULL，请关闭再重试！");
+			resultMap.put("status", 0);
+			return null;
+		}
+		return JsonUtil.getMapFromJson(paramsJson);
+	}
 }

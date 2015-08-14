@@ -119,26 +119,24 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 
 	@Override
 	public Map<String, Object> updateFrozenAccount(String[] ids) {
-		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			for (String id : ids) {
 				AccountBlacklist accountBlacklist = selectById(Integer.valueOf(id));
 				accountBlacklist.setStatus(ConstantEnum.BLACK_ROLL_STATUS_1.getCodeByte());
 				update(accountBlacklist);
 			}
-			map.put("success",true);
-			map.put("message","冻结账号成功");
+			map.put("success", true);
+			map.put("message", "冻结账号成功");
 		} catch (Exception e) {
-			map.put("success",false);
-			map.put("message","冻结账号失败");
+			map.put("success", false);
+			map.put("message", "冻结账号失败");
 			e.printStackTrace();
 		}
 		return map;
 	}
 
 	private void sendWranEmail(List<AccountBlacklist> mailWranList) {
-//		Set<String> toAdrs = new HashSet<String>();
-//		toAdrs.add("kejun@rongyi.com");
 		StringBuffer sb = new StringBuffer();
 		sb.append("以下账号存在刷单风险：\n");
 		for (AccountBlacklist accountBlacklist : mailWranList) {
@@ -151,10 +149,11 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 			sb.append(";");
 			sb.append("\n");
 		}
-
+		sb.append("黑名单列表访问地址:");
+		sb.append(Constant.BLACKLIST_CONFIG.BLACKLIST_URL);
 		try {
 			LOGGER.info("发送报警邮件，收件人列表" + getToAddress().toString());
-			mailService.sendAttachmentEmail("刷单账号预警", "kejun@rongyi.com", getToAddress(), sb.toString(), null);
+			mailService.sendAttachmentEmail("刷单风险账号预警",Constant.BLACKLIST_CONFIG.SEND_ADDRESS, getToAddress(), sb.toString(), null);
 		} catch (AddressException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
@@ -163,12 +162,12 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 			e.printStackTrace();
 		}
 	}
-	
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private Set<String> getToAddress(){
+	private Set<String> getToAddress() {
 		String toAddress = Constant.BLACKLIST_CONFIG.TO_ADDRESS;
 		String[] arrays = toAddress.split(",");
-		return new HashSet(Arrays.asList(arrays)); 
+		return new HashSet(Arrays.asList(arrays));
 	}
 
 	private AccountBlacklist getAccountBlacklist(PayAccountUseTotal payAccountUseTotal) {
