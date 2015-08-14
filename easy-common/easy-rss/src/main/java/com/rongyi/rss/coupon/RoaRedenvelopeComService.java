@@ -9,6 +9,7 @@ import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.mysql.Coupon;
 import com.rongyi.easy.coupon.param.operation.RedenvelopeParam;
+import com.rongyi.easy.coupon.vo.operation.RedenvelopCouponVO;
 
 public interface RoaRedenvelopeComService {
 	 /**
@@ -48,7 +49,7 @@ public interface RoaRedenvelopeComService {
      * @param RedenvelopeParam
      * @return
      */
-    PagingVO<Coupon> findAllByPage(RedenvelopeParam paramVo);
+    PagingVO<RedenvelopCouponVO> findAllByPage(RedenvelopeParam paramVo);
 
     /**
      * 审核现金劵
