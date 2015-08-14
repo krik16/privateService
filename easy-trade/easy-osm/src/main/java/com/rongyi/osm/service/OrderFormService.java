@@ -41,7 +41,20 @@ public class OrderFormService extends BaseServiceImpl {
 		params.put("orderNo", orderNo);
 		return this.getBaseDao().selectOneBySql(MAPPER_NAMESPACE + ".selectByOrderNum", params);
 	}
-
+    //<!--   //卖家修改价格-买家支付完成后返还积分后应把数据库returnScore清空 -->
+	public void updateRetrunScore(OrderFormEntity orderFormEntity) {
+		JSONObject jsonObject = new JSONObject();
+		if (!StringUtils.isEmpty(orderFormEntity.getDiscountInfo())) {
+			jsonObject = JSONObject.fromObject(orderFormEntity.getDiscountInfo());
+			if (jsonObject.get("returnScore") != null && Integer.parseInt(jsonObject.get("returnScore").toString()) > 0) {
+				jsonObject.put("returnScore","null");
+				//实际使用的积分对应的积分抵用金额
+				jsonObject.put("returnScoreDeduction","null");
+				orderFormEntity.setDiscountInfo(jsonObject.toString());
+			}
+		}
+		this.getBaseDao().updateBySql(MAPPER_NAMESPACE + ".updateRetrunScore", orderFormEntity);
+	}
 	public List<OrderFormEntity> selectNonClosedOrder(int start, int range) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("status", OrderFormStatus.CLOSED);
@@ -49,6 +62,8 @@ public class OrderFormService extends BaseServiceImpl {
 		params.put("range", range);
 		return this.getBaseDao().selectListBySql(MAPPER_NAMESPACE + ".selectNonClosedOrder", params);
 	}
+	
+	
 
 	/**
 	 * 插入订单，包括订单明细

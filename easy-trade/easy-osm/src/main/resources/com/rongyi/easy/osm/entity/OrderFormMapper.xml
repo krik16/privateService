@@ -82,6 +82,14 @@
  	where order_no = #{orderNo}
   </update>
   
+<!--   //卖家修改价格-买家支付完成后返还积分后应把数据库returnScore清空 -->
+   <update id="updateRetrunScore" parameterType="com.rongyi.easy.osm.entity.OrderFormEntity">
+  	update order_form 
+  	set 
+  		discount_info = #{discountInfo} 
+ 	where order_no = #{orderNo}
+  </update>
+  
   <update id="updateStatus" parameterType="com.rongyi.easy.osm.entity.OrderFormEntity">
   	update order_form 
   	set 
@@ -100,6 +108,8 @@
     	is_comment = #{isComment,jdbcType=INTEGER}
     where order_no = #{orderNo}
   </update>
+  
+  
   
   <update id="updateStatusAndPaymentIdWithTime" parameterType="com.rongyi.easy.osm.entity.OrderFormEntity">
     update order_form 
