@@ -289,11 +289,11 @@ public class OrderUtil {
 					logger.info("超过积分使用最大上限-------scoreValue,scoreLimit" + scoreValue+","+scoreLimit);
 				}else{
 					//金额的10%兑换积分不满足1积分则不能使用积分支付
-					BigDecimal rationTotalScore=ratioTotal.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_DOWN);
-					if(rationTotalScore.compareTo(new BigDecimal(1))>=0){
+					//BigDecimal rationTotalScore=ratioTotal.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_DOWN);
+					//if(rationTotalScore.compareTo(new BigDecimal(1))>=0){
 						BigDecimal score = new BigDecimal(scoreValue);
 						total = total.subtract(score);
-					}
+					//}
 					//总价小于零则取零，否则保留2位小数
 					total = total.compareTo(new BigDecimal(0)) < 0 ? new BigDecimal(0) : total.setScale(2,BigDecimal.ROUND_HALF_UP);
 					logger.info("减去积分后的金额-------" + total);
@@ -1130,22 +1130,26 @@ public class OrderUtil {
 						if (orderPrice.compareTo(new BigDecimal(0)) > 0) {
 							//修改后的价格10%比较减去红包之后的价格
 							if (ratioOrderPrice.compareTo(subtractCoupon) < 0) { 
-								int transformScore=(ratioOrderPrice.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_DOWN)).intValue();
-								if(score >= transformScore){
+								int curMaxScore=(ratioOrderPrice.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_DOWN)).intValue();
+								if (curMaxScore < 1)
+								{
+									curMaxScore = 0;
+								}
+								if(score > curMaxScore){
 									//满一个积分才能使用
-									if(transformScore>=1){
-										returnScore =score-transformScore;
-									}
+									returnScore =score-curMaxScore;
 								}
 								
 							} else {
 								//
-								BigDecimal ratioExpressFee=order.getExpressFee().multiply(ratio);//运费的10%
-								int scoreExpressFee=ratioExpressFee.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_DOWN).intValue();//运费对应的积分折扣
-								if(score >= scoreExpressFee){
-								if(scoreExpressFee >=1){
-                                	returnScore =score-scoreExpressFee;
-                                }
+//								BigDecimal ratioExpressFee=order.getExpressFee().multiply(ratio);//运费的10%
+								int curMaxScore=subtractCoupon.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_DOWN).intValue();//运费对应的积分折扣
+								if (curMaxScore < 1)
+								{
+									curMaxScore = 0;
+								}
+								if(score > curMaxScore){
+                                	returnScore = score-curMaxScore;
 								}
 							}
 						} else {
