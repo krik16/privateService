@@ -8,6 +8,8 @@
 
 package com.rongyi.rss.cheat;
 
+import java.util.Map;
+
 
 /**	
  * @Author:  柯军
@@ -29,4 +31,16 @@ public interface IAntiCheatService {
 	 * @datetime:2015年8月12日下午7:46:00
 	 **/
 	public boolean valdateAccountInBlackList(String payAccout, Byte payType,Byte status);
+	
+	
+	/**	
+	 * @Description: 分页获取黑名单列表 
+	 * @param currentPage
+	 * @param pageSize
+	 * @param map
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年8月14日上午9:54:12
+	 **/
+	public Map<String,Object> getPageMap(Integer currentPage, Integer pageSize, Map<String, Object> map);
 }
