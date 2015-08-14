@@ -969,7 +969,7 @@ public class OrderUtil {
 				Map<String, Object> mapObject = JsonUtil.getMapFromJson(order.getDiscountInfo());
 				if(mapObject.get("score")!=null && Integer.parseInt(mapObject.get("score").toString())>0){
 					//returnScore表示卖家修改价格需要退还买家积分
-					if(mapObject.get("returnScore")!=null && Integer.parseInt(mapObject.get("returnScore").toString())>0){
+					if(mapObject.get("returnScore")!=null && Integer.parseInt(mapObject.get("returnScore").toString())>=0){
 						integralRecordVO.setUse_score(Integer.parseInt(mapObject.get("returnScore").toString())); // 积分 
 						integralRecordVO.setScore_deduction(new BigDecimal(mapObject.get("returnScoreDeduction").toString()));  //积分抵扣金额
 					}else{
