@@ -62,6 +62,8 @@ public class OldCouponDetail implements Serializable {
     private int unUsered;  //未使用的数量
 
     private Double orderPrice;//订单总价
+    
+    private int refundNum;//最大退款数量
 
     public double getCurrentPrice() {
         return currentPrice;
@@ -246,4 +248,14 @@ public class OldCouponDetail implements Serializable {
     public void setUserCouponList(List<OldUserCode> userCouponList) {
         this.userCouponList = userCouponList;
     }
+
+	public int getRefundNum() {
+		return refundNum;
+	}
+
+	public void setRefundNum(int refundNum) {
+		this.refundNum = refundNum;
+	}
+    
+    
 }
