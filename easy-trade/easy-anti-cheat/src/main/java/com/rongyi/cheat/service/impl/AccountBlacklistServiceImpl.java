@@ -96,6 +96,18 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 			sendWranEmail(mailWranList);
 	}
 
+	@Override
+	public Map<String, Object> selectPageList(Integer currentPage, Integer pageSize, Map<String, Object> map) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		map.put("currentPage", (currentPage - 1) * pageSize);
+		map.put("pageSize", pageSize);
+		List<AccountBlacklist> list = this.getBaseDao().selectListBySql(NAMESPACE + ".selectPageList", map);
+		Integer count = this.getBaseDao().selectOneBySql(NAMESPACE + ".selectPageListCount", map);
+		resultMap.put("list", list);
+		resultMap.put("count", count);
+		return resultMap;
+	}
+
 	private void sendWranEmail(List<AccountBlacklist> mailWranList) {
 		Set<String> toAdrs = new HashSet<String>();
 		toAdrs.add("kejun@rongyi.com");
@@ -134,4 +146,5 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 		return accountBlacklist;
 
 	}
+
 }
