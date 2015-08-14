@@ -79,7 +79,7 @@ public interface IRpbService {
 	 **/
 	public boolean queryOrderPayStatus(String tradeNo, String payNo, Integer payChannel);
 	
-	/**	
+	/**	 
 	 * @Description: 查询支付账号购买次数 
 	 * @param map给定count参数查询大于该count的所有账号
 	 * @return	
