@@ -118,7 +118,7 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 	}
 
 	@Override
-	public Map<String, Object> updateFrozenAccount(String[] ids,Byte status) {
+	public Map<String, Object> updateFrozenAccount(String[] ids, Byte status) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			for (String id : ids) {
@@ -127,7 +127,10 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 				update(accountBlacklist);
 			}
 			map.put("success", true);
-			map.put("message", "冻结账号成功");
+			if (ConstantEnum.BLACK_ROLL_STATUS_0.getCodeByte().equals(status))
+				map.put("message", "解冻账号成功");
+			else
+				map.put("message", "冻结账号成功");
 		} catch (Exception e) {
 			map.put("success", false);
 			map.put("message", "冻结账号失败");
@@ -153,7 +156,7 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 		sb.append(Constant.BLACKLIST_CONFIG.BLACKLIST_URL);
 		try {
 			LOGGER.info("发送报警邮件，收件人列表" + getToAddress().toString());
-			mailService.sendAttachmentEmail("刷单风险账号预警",Constant.BLACKLIST_CONFIG.SEND_ADDRESS, getToAddress(), sb.toString(), null);
+			mailService.sendAttachmentEmail("刷单风险账号预警", Constant.BLACKLIST_CONFIG.SEND_ADDRESS, getToAddress(), sb.toString(), null);
 		} catch (AddressException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {

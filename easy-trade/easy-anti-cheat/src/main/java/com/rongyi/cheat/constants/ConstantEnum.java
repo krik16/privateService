@@ -17,7 +17,8 @@ package com.rongyi.cheat.constants;
 
 public enum ConstantEnum {
 
-	BLACK_ROLL_STATUS_0(0, "正常"), BLACK_ROLL_STATUS_1(1, "冻结"),
+	BLACK_ROLL_STATUS_0(0, "正常"), 
+	BLACK_ROLL_STATUS_1(1, "冻结"),
 
 	EXCEL_LIMIT_COUNT(5000, "交易明细报表导出限制总数");
 	private Object code;
