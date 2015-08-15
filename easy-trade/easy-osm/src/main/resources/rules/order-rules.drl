@@ -418,15 +418,6 @@ salience 100
 		// 设置时间相关的项
 		$order.setStatusHoldMs(0L);
 		$order.setNextStatusTime(orderUtil.getCurrentDate());
-		
-
-		// 入主数据库
-		orderFormService.updateStatusWithTime($order);
-		
-		sessionUtil.update($order);
-		
-		// 归还库存
-		orderUtil.increaseStock($order);
 		 //返还积分后对数据库中的returnScore清除
 		//orderFormService.updateRetrunScore($order);
 		//boolean flag=orderUtil.subtractScore($order); //还原买家积分
@@ -446,6 +437,15 @@ salience 100
 					//}
 				}
 		}
+
+		// 入主数据库
+		orderFormService.updateStatusWithTime($order);
+		
+		sessionUtil.update($order);
+		
+		// 归还库存
+		orderUtil.increaseStock($order);
+		
 		
 		logger.error("红包归还开始----------");
 		OrderDetailFormEntity[] orderDetailList = orderUtil.queryGetOrderDetailList($order.getOrderNo());
