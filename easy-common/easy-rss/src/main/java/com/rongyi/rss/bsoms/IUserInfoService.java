@@ -47,5 +47,20 @@ public interface IUserInfoService {
 	 */
 	BusinessAccountVO getUserDetailInfoById(Integer id);
 
+	/**
+	 * 新增商家账号
+	 * @param userParam
+	 * @return
+	 * @throws MallShopException
+	 */
 	boolean insertUserInfo (UserManagerParam userParam)throws MallShopException;
+	
+	/**
+	 * 修改商家账号
+	 * @param param
+	 * @param merUserId
+	 * @return
+	 * @throws Exception
+	 */
+	public Boolean updateMerAccountInfo(UserManagerParam param,Integer merUserId) throws Exception;
 }
