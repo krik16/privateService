@@ -426,7 +426,7 @@ salience 100
 				if(mapObject.get("score")!=null && Integer.parseInt(mapObject.get("score").toString())>0){
 			        JSONObject jsonObject=JSONObject.fromObject($order.getDiscountInfo());
 			        jsonObject.put("zeroScore",-1);
-			         jsonObject.put("returnScore",0);
+			        jsonObject.put("returnScore",0);
 			        $order.setDiscountInfo(jsonObject.toString());
 					//修改了价格
 					//if(mapObject.get("returnScore")!=null && Integer.parseInt(mapObject.get("returnScore").toString())>0){
@@ -969,8 +969,25 @@ rule "卖家超时未发货"
 		}
 		logger.error("红包归还结束----------");
 		
-		boolean flag=orderUtil.subtractScore($order); //还原买家积分
-		logger.debug("还原积分状态"+ flag + " end"); 
+		if(!StringUtils.isEmpty($order.getDiscountInfo())){
+			Map<String, Object> mapObject = JsonUtil.getMapFromJson($order.getDiscountInfo());
+			if(mapObject.get("score")!=null && Integer.parseInt(mapObject.get("score").toString())>0){
+				//returnScore表示卖家修改价格需要退还买家积分
+				JSONObject jsonObject=JSONObject.fromObject($order.getDiscountInfo());
+		        int retrunScroe=Integer.parseInt(mapObject.get("score").toString()) - Integer.parseInt(mapObject.get("returnScore").toString());
+		        jsonObject.put("returnScore",retrunScroe);
+		        $order.setDiscountInfo(jsonObject.toString());
+				if(mapObject.get("returnScore")!=null && Integer.parseInt(mapObject.get("returnScore").toString())>=0){
+					//归还积分开始
+	               orderUtil.subtractScore($order);
+				}else{
+				   orderUtil.subtractScore($order);
+				}
+			}
+		}
+		
+		//boolean flag=orderUtil.subtractScore($order); //还原买家积分
+		//logger.debug("还原积分状态"+ flag + " end"); 
 		//记录日志
 		//logger.debug("{"+new JSONArray().fromObject(orderUtil.setLogEntityInfo($order)).toString() +"}");	
 		
