@@ -137,11 +137,16 @@ public class RpbServiceImpl implements IRpbService {
 		if (queryOrderPayStatus(null, paymentEntity.getPayNo(), paymentEntity.getPayChannel())) {
 			LOGGER.info("更新付款状态，发送同步支付通知,订单号-->" + orderNo);
 			String orderNums = paymentService.getOrderNumStrsByPayNo(paymentEntity.getPayNo());
-			String payChannel = PaymentEventType.APP;
-			if (paymentEntity.getPayChannel() == Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1) {
-				payChannel = PaymentEventType.WEIXIN_PAY;
+			String payChannel = PaymentEventType.WEIXIN_PAY;
+			String payAccount = null;
+			if (paymentEntity.getPayChannel() == Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0) {
+				payChannel = PaymentEventType.APP;
+				QueryOrderParamVO queryOrderParamVO = aliPaymentService.queryOrder(null, paymentEntity.getPayNo());
+				payAccount = queryOrderParamVO.getBuyer_email();
+			}else{
+				
 			}
-			List<PaySuccessResponse> responseList = paymentLogInfoService.paySuccessToMessage(paymentEntity.getPayNo(), null, orderNums, paymentEntity.getOrderType(), payChannel);
+			List<PaySuccessResponse> responseList = paymentLogInfoService.paySuccessToMessage(paymentEntity.getPayNo(), payAccount, orderNums, paymentEntity.getOrderType(), payChannel);
 			if (validateResponseList(responseList)) {
 				paymentService.updateListStatusBypayNo(paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);// 修改付款单状态
 				result = true;
