@@ -989,7 +989,11 @@ public class OrderUtil {
 				if(mapObject.get("score")!=null && Integer.parseInt(mapObject.get("score").toString())>0){
 					//returnScore表示卖家修改价格需要退还买家积分
 					if(mapObject.get("returnScore")!=null && Integer.parseInt(mapObject.get("returnScore").toString())>0){
-						integralRecordVO.setUse_score(Integer.parseInt(mapObject.get("returnScore").toString())); // 积分 
+						if(mapObject.get("curMaxScore")!=null && Integer.parseInt(mapObject.get("curMaxScore").toString())==1){
+							integralRecordVO.setUse_score(Integer.parseInt(mapObject.get("returnScore").toString())+Integer.parseInt(mapObject.get("curMaxScore").toString())); // 积分 
+						}else{
+							integralRecordVO.setUse_score(Integer.parseInt(mapObject.get("returnScore").toString())); // 积分 
+						}
 						integralRecordVO.setScore_deduction(new BigDecimal(mapObject.get("returnScoreDeduction").toString()));  //积分抵扣金额
 					}else if(mapObject.get("zeroScore")!=null && Integer.parseInt(mapObject.get("zeroScore").toString())==0){
 						//修改成原来价格
@@ -1127,10 +1131,13 @@ public class OrderUtil {
 						BigDecimal ratioOrderPrice =orderPrice.multiply(ratio);// 修改后的价格10%
 						
 						BigDecimal subtractCoupon = orderPrice.subtract(cashCouponDiscount);// 修红改之后的价格减去包
+						int curMaxScore=0;
 						if (orderPrice.compareTo(new BigDecimal(0)) > 0) {
 							//修改后的价格10%比较减去红包之后的价格
+							
 							if (ratioOrderPrice.compareTo(subtractCoupon) < 0) { 
-								int curMaxScore=(ratioOrderPrice.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_DOWN)).intValue();
+								
+								 curMaxScore=(ratioOrderPrice.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_DOWN)).intValue();
 								if (curMaxScore < 1)
 								{
 									curMaxScore = 0;
@@ -1143,18 +1150,17 @@ public class OrderUtil {
 							} else {
 								//
 								BigDecimal ratioExpressFee=order.getExpressFee().multiply(ratio);//运费的10%
-								int curMaxScore=0;
 								if(subtractCoupon.compareTo(new BigDecimal(0))>0){
 									 curMaxScore=subtractCoupon.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_UP).intValue();//运费对应的积分折扣
 								}else{
 									curMaxScore=ratioExpressFee.divide(new BigDecimal(scoreExchangeMoney),2, BigDecimal.ROUND_HALF_UP).intValue();//运费对应的积分折扣
 								}
-								
 								if (curMaxScore < 1)
 								{
 									curMaxScore = 0;
 								}
 								if(score > curMaxScore){
+									
                                 	returnScore = score-curMaxScore;
 								}
 							}
@@ -1167,8 +1173,11 @@ public class OrderUtil {
 							//更新实际使用的积分
 							jsonObject.put("cashScore", score-returnScore);
 							jsonObject.put("cashScoreDeduction",(score-returnScore)*scoreExchangeMoney);
+							//反复改价后，改回原来下单后的金额，所以该返还的积分为0
 							jsonObject.put("zeroScore", returnScore);
 							jsonObject.put("zeroScoreDeduction", returnScore*scoreExchangeMoney);
+							if(curMaxScore==1)
+							jsonObject.put("curMaxScore", curMaxScore);
 							//返还的积分
 							jsonObject.put("returnScore", returnScore);
 							jsonObject.put("returnScoreDeduction", returnScore*scoreExchangeMoney);
