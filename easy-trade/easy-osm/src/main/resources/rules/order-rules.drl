@@ -974,10 +974,10 @@ rule "卖家超时未发货"
 			if(mapObject.get("score")!=null && Integer.parseInt(mapObject.get("score").toString())>0){
 				//returnScore表示卖家修改价格需要退还买家积分
 				JSONObject jsonObject=JSONObject.fromObject($order.getDiscountInfo());
-		        int retrunScroe=Integer.parseInt(mapObject.get("score").toString()) - Integer.parseInt(mapObject.get("returnScore").toString());
-		        jsonObject.put("returnScore",retrunScroe);
-		        $order.setDiscountInfo(jsonObject.toString());
 				if(mapObject.get("returnScore")!=null && Integer.parseInt(mapObject.get("returnScore").toString())>=0){
+					int retrunScroe=Integer.parseInt(mapObject.get("score").toString()) - Integer.parseInt(mapObject.get("returnScore").toString());
+			        jsonObject.put("returnScore",retrunScroe);
+			        $order.setDiscountInfo(jsonObject.toString());
 					//归还积分开始
 	               orderUtil.subtractScore($order);
 				}else{
