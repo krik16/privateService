@@ -989,11 +989,7 @@ public class OrderUtil {
 				if(mapObject.get("score")!=null && Integer.parseInt(mapObject.get("score").toString())>0){
 					//returnScore表示卖家修改价格需要退还买家积分
 					if(mapObject.get("returnScore")!=null && Integer.parseInt(mapObject.get("returnScore").toString())>0){
-						if(mapObject.get("curMaxScore")!=null && Integer.parseInt(mapObject.get("curMaxScore").toString())==1){
-							integralRecordVO.setUse_score(Integer.parseInt(mapObject.get("returnScore").toString())+Integer.parseInt(mapObject.get("curMaxScore").toString())); // 积分 
-						}else{
-							integralRecordVO.setUse_score(Integer.parseInt(mapObject.get("returnScore").toString())); // 积分 
-						}
+						integralRecordVO.setUse_score(Integer.parseInt(mapObject.get("returnScore").toString())); // 积分 
 						integralRecordVO.setScore_deduction(new BigDecimal(mapObject.get("returnScoreDeduction").toString()));  //积分抵扣金额
 					}else if(mapObject.get("zeroScore")!=null && Integer.parseInt(mapObject.get("zeroScore").toString())==0){
 						//修改成原来价格
@@ -1176,9 +1172,6 @@ public class OrderUtil {
 							//反复改价后，改回原来下单后的金额，所以该返还的积分为0
 							jsonObject.put("zeroScore", returnScore);
 							jsonObject.put("zeroScoreDeduction", returnScore*scoreExchangeMoney);
-							if(curMaxScore==1){
-							jsonObject.put("curMaxScore", curMaxScore);
-							}
 							//返还的积分
 							jsonObject.put("returnScore", returnScore);
 							jsonObject.put("returnScoreDeduction", returnScore*scoreExchangeMoney);
