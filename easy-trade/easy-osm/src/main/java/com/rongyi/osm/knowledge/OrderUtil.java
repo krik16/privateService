@@ -1176,8 +1176,9 @@ public class OrderUtil {
 							//反复改价后，改回原来下单后的金额，所以该返还的积分为0
 							jsonObject.put("zeroScore", returnScore);
 							jsonObject.put("zeroScoreDeduction", returnScore*scoreExchangeMoney);
-							if(curMaxScore==1)
+							if(curMaxScore==1){
 							jsonObject.put("curMaxScore", curMaxScore);
+							}
 							//返还的积分
 							jsonObject.put("returnScore", returnScore);
 							jsonObject.put("returnScoreDeduction", returnScore*scoreExchangeMoney);
