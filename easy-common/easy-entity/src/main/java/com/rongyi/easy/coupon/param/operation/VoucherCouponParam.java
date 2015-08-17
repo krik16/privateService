@@ -55,12 +55,12 @@ public class VoucherCouponParam implements Serializable{
 	/**
 	 * 导入渠道
 	 */
-	private String inChannel;
+	private Integer inChannel;
 
 	/**
-	 * 导出渠道
+	 * 推广渠道
 	 */
-	private String outChannel;
+	private Integer outChannel;
 
 	/**
 	 * 时间类型：发布开始时间[0] 发布结束时间[1] 有效期开始时间[2] 有效期结束时间[3]
@@ -175,19 +175,19 @@ public class VoucherCouponParam implements Serializable{
 		this.lv2Id = lv2Id;
 	}
 
-	public String getInChannel() {
+	public Integer getInChannel() {
 		return inChannel;
 	}
 
-	public void setInChannel(String inChannel) {
+	public void setInChannel(Integer inChannel) {
 		this.inChannel = inChannel;
 	}
 
-	public String getOutChannel() {
+	public Integer getOutChannel() {
 		return outChannel;
 	}
 
-	public void setOutChannel(String outChannel) {
+	public void setOutChannel(Integer outChannel) {
 		this.outChannel = outChannel;
 	}
 

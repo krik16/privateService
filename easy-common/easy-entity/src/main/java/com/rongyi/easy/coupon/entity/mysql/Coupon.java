@@ -22,13 +22,11 @@ public class Coupon {
 
     /**
      * 卡券类型:代金券[0], 抵扣券[1], 红包[2]
-     * 卡券类型:抵扣券[rebate], 代金券[voucher], 红包[redenvelope]
      */
     private Integer couponType;
 
     /**
      * 验证方式：容易后验证[0], 互动屏票据[1], 两者兼容[2]
-     * 验证方式：容易后验证[after_check], 互动屏票据[interact_check], 两者兼容[all]
      */
     private Integer validateType;
 
@@ -121,8 +119,6 @@ public class Coupon {
      * 关联类型
      * 代金券：集团[0],品牌[1], 商场 [2],店铺[3];
      * 红包 ：全场[0],商品[1]
-     * 代金券：集团[group],品牌[brand], 商场 [mall],店铺[shop];
-     * 红包 ：全场[all_court],商品[commodity]
      */
     private Integer relatedType;
 
@@ -148,15 +144,23 @@ public class Coupon {
 
     /**
      * 卡券发布渠道：大运营平台[0], 商家管理后台[1]
-     * 卡券发布渠道：大运营平台[operation], 商家管理后台[merchant]
      */
     private Integer publishChannel;
 
     /**
      * 状态: 待审核[0], 审核未通过[1], 审核通过[2]
-     * 状态: 待审核[uncheck], 审核未通过[unpass], 审核通过[pass]
      */
     private Integer status;
+    
+    /**
+     * 导入渠道
+     */
+    private Integer inChannel;
+    
+    /**
+     * 推广渠道
+     */
+    private Integer outChannel;
 
     /**
      * 店铺对应的公司名
@@ -452,7 +456,23 @@ public class Coupon {
         this.status = status;
     }
 
-    public String getSourceName() {
+    public Integer getInChannel() {
+		return inChannel;
+	}
+
+	public void setInChannel(Integer inChannel) {
+		this.inChannel = inChannel;
+	}
+
+	public Integer getOutChannel() {
+		return outChannel;
+	}
+
+	public void setOutChannel(Integer outChannel) {
+		this.outChannel = outChannel;
+	}
+
+	public String getSourceName() {
         return sourceName;
     }
 
@@ -580,6 +600,7 @@ public class Coupon {
 				.append(relatedType).append(", limitCount=").append(limitCount).append(", limitUseCount=")
 				.append(limitUseCount).append(", limitPublishCount=").append(limitPublishCount).append(", synTarget=")
 				.append(synTarget).append(", publishChannel=").append(publishChannel).append(", status=").append(status)
+				.append(", inChannel=").append(inChannel).append(", outChannel=").append(outChannel)
 				.append(", sourceName=").append(sourceName).append(", createUser=").append(createUser)
 				.append(", createAt=").append(createAt).append(", updateUser=").append(updateUser).append(", updateAt=")
 				.append(updateAt).append(", isThird=").append(isThird).append(", isOffStock=").append(isOffStock)
