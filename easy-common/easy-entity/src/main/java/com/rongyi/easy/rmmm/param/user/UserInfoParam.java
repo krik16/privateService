@@ -11,7 +11,8 @@ public class UserInfoParam implements Serializable{
 	
 	public static final long serialVersionUID = 1L;
 	
-	private String shopMId;// //店铺id或者店铺MongoId
+	private String shopId;// //店铺id或者店铺MongoId
+	private String shopMId;
 	
 	private String currentPage; // 从0页开始
 	private String pageSize; // 每页数据显示数量
@@ -32,6 +33,14 @@ public class UserInfoParam implements Serializable{
 		this.pageSize = pageSize;
 	}
 
+	public String getShopId() {
+		return shopId;
+	}
+
+	public void setShopId(String shopId) {
+		this.shopId = shopId;
+	}
+
 	public String getShopMId() {
 		return shopMId;
 	}
@@ -39,5 +48,5 @@ public class UserInfoParam implements Serializable{
 	public void setShopMId(String shopMId) {
 		this.shopMId = shopMId;
 	}
-
+	
 }
