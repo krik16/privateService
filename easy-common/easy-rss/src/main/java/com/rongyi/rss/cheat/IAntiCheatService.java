@@ -51,5 +51,5 @@ public interface IAntiCheatService {
 	 * @Author:  柯军
 	 * @datetime:2015年8月14日上午11:35:09
 	 **/
-	public abstract Map<String,Object> updateFrozenAccount(String[] ids);
+	public abstract Map<String,Object> updateFrozenAccount(String[] ids,Byte status);
 }
