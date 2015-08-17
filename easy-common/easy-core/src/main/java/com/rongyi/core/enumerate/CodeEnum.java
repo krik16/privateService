@@ -9,7 +9,8 @@ public enum CodeEnum {
     SUCCESS("0", "正常"),
     
     /** 系统性错误 */
-    ERROR_ID_INVALID("-1", "调用者ID不存在或无效"),
+    //ERROR_ID_INVALID("-1", "调用者ID不存在或无效"),
+    ERROR_ID_INVALID("-1", "请重新登录"),
     ERROR_PASSWORD("-2", "调用者密码出错"),
     ERROR_ID_ILLEGAL("-3", "调用方ID不合法 "),
     ERROR_VARSION("-4", "版本不匹配"),
