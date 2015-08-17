@@ -492,15 +492,9 @@
 			close="" separator=";">
 			UPDATE sales_commission
 			<set>
-				status = 6,version=#{version,jdbcType=BIGINT}
+				status = 6
 			</set>
-			WHERE guide_id=#{item.guideId} and
-			<if test="item.version == 0">
-				version is null
-			</if>
-			<if test="item.version != 0">
-				version=#{item.version}
-			</if>
+			WHERE guide_id=#{item.guideId} 
 			and status=3
 		</foreach>
 	</update>
