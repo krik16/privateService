@@ -96,7 +96,7 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 				accountBlacklist.setCount(payAccountUseTotal.getCount());
 				accountBlacklist.setUpdateAt(DateUtil.getCurrDateTime());
 				update(accountBlacklist);
-				if (ConstantEnum.BLACK_ROLL_STATUS_0.getCodeInt().equals(accountBlacklist.getStatus()))
+				if (ConstantEnum.BLACK_ROLL_STATUS_0.getCodeByte().equals(accountBlacklist.getStatus()))
 					mailWranList.add(accountBlacklist);
 			}
 		}
