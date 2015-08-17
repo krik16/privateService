@@ -80,7 +80,7 @@ public interface IShopService{
 
 	public List<String> getSellerImIdByShopId(String shopId);
 
-	public ShopInfoEntity getShopByShopMId(String shopId) throws RmmmException;
+	public ShopInfoEntity getShopByShopMId(String shopMId) throws RmmmException;
 
 
 
