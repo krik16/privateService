@@ -6,6 +6,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
 
+import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -14,7 +15,7 @@ import java.util.regex.Pattern;
 public class GetPackage {
 
 	public static String getOrderPackage(double total_fee,String payNo ) {
-		long total_fee1 = (long) (total_fee * 100);
+		BigDecimal total_fee1 = new BigDecimal(total_fee+"").multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
 		List<NameValuePair> params = new LinkedList<NameValuePair>();
 		params.add(new BasicNameValuePair("bank_type", "WX"));
 //		bodyString = replaceBlank(bodyString);
@@ -26,7 +27,7 @@ public class GetPackage {
 		params.add(new BasicNameValuePair("out_trade_no", payNo));
 		params.add(new BasicNameValuePair("partner", ConstantUtil.PayWeiXin.PARTNER));
 		params.add(new BasicNameValuePair("spbill_create_ip", ConstantUtil.PayNetAdress.SPBILL_CREATE_IP_WEIXIN));
-		params.add(new BasicNameValuePair("total_fee", String.valueOf(total_fee1)));
+		params.add(new BasicNameValuePair("total_fee", total_fee1.toString()));
 		// params.add(new BasicNameValuePair("total_fee","1"));
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < params.size(); i++) {
