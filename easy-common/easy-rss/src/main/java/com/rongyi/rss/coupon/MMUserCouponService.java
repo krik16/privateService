@@ -32,7 +32,7 @@ public interface MMUserCouponService {
     /**
      * 根据Id查询优惠券
      *
-     * @param id
+     * @param userCouponId
      * @return
      */
     UserCoupon findUserCouponById(Long userCouponId);
