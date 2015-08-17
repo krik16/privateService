@@ -486,7 +486,7 @@
 		item="item" index="index"> when #{item.} then 6 </foreach> end where status=3,version 
 		and guide_id in <foreach collection="list" index="index" item="item" open="(" 
 		separator="," close=")"> #{item} </foreach> </update> -->
-	<update id="updateBatchHadSendedVA" parameterType="java.util.Map">
+	<update id="updateBatchHadSendedVA" parameterType="java.util.List">
 
 		<foreach collection="list" item="item" index="index" open=""
 			close="" separator=";">
