@@ -491,9 +491,7 @@
 		<foreach collection="list" item="item" index="index" open=""
 			close="" separator=";">
 			UPDATE sales_commission
-			<set>
-				status = 6,version=#{version,jdbcType=BIGINT}
-			</set>
+			set status = 6,version=#{version,jdbcType=BIGINT}
 			WHERE guide_id=#{item.guideId} and
 			<if test="item.version == 0">
 				version is null
@@ -504,6 +502,21 @@
 			and status=3
 		</foreach>
 	</update>
+	
+	<update id="updateSendVA" parameterType="java.util.Map">
+			UPDATE sales_commission
+			set	status = 6,version=#{version,jdbcType=BIGINT}
+			WHERE guide_id=#{guideId,jdbcType=VARCHAR}
+			and status=3 and
+			<if test="oldVersion == 0">
+				version is null
+			</if>
+			<if test="oldVersion != 0">
+				version=#{oldVersion,jdbcType=BIGINT}
+			</if>
+	</update>
+		
+	
 	<update id="updateBonus" parameterType="com.rongyi.tms.moudle.vo.BonusVO">
 		update sales_commission
 		<set>
