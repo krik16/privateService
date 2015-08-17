@@ -373,9 +373,15 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 	@Override
 	public int updateBatchHadSendedVA(List<CommissionAmountTotalVO> ids, long version) {
 		Map<String, Object> paramsMap = new HashMap<String, Object>();
-		paramsMap.put("list", ids);
-		paramsMap.put("version", version);
-		return this.getBaseDao().updateBySql(NAMESPACE_SALESCOMMISSION + ".updateBatchHadSendedVA", paramsMap);
+		int count = 0;
+		for (CommissionAmountTotalVO commissionAmountTotalVO : ids) {
+			paramsMap.put("guideId", commissionAmountTotalVO.getGuideId());
+			paramsMap.put("oldVersion", commissionAmountTotalVO.getVersion());
+			paramsMap.put("version", version);
+			this.getBaseDao().updateBySql(NAMESPACE_SALESCOMMISSION + ".updateSendVA", paramsMap);
+			count++;
+		}
+		return count;
 	}
 
 	@Override
