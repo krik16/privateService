@@ -15,6 +15,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.constant.PaymentEventType;
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
@@ -22,6 +23,7 @@ import com.rongyi.easy.rpb.domain.PaymentItemEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.PayAccountUseTotal;
 import com.rongyi.easy.rpb.vo.PaySuccessResponse;
+import com.rongyi.easy.rpb.vo.PaymentEntityVO;
 import com.rongyi.easy.rpb.vo.QueryOrderParamVO;
 import com.rongyi.easy.rpb.vo.WeixinQueryOrderParamVO;
 import com.rongyi.rpb.constants.Constants;
@@ -127,7 +129,12 @@ public class RpbServiceImpl implements IRpbService {
 	public boolean paySuccessNotify(String orderNo, Double totalAmount) {
 		LOGGER.info("参数：ordeNo=" + orderNo + ",totalAmount=" + totalAmount);
 		if (totalAmount == 0) {
-			LOGGER.info("0元商品购买，无需发送通知,orderNo-->" + orderNo);
+			List<PaymentEntity> list =paymentService.selectByOrderNum(orderNo,Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
+			//TODO 兼容老版本APP0元支付不走签名，在下个强制更新版本后此代码需删除
+			if(list.isEmpty()){
+				insertZeroOrder(orderNo, totalAmount);
+				LOGGER.info("老版本0元商品购买，发送通知,orderNo-->" + orderNo);
+			}
 			return true;
 		}
 		boolean result = false;
@@ -154,6 +161,39 @@ public class RpbServiceImpl implements IRpbService {
 		}
 		return result;
 	}
+	
+
+	/**
+	 * @Description: 
+	 *               增加0元支付（此版本临时增加此方法，原因是前端APP在优惠券0元购买是未请求获取支付签名，导致系统无0元支付记录，故在支付成功通知时增加交易记录
+	 *               ）
+	 * @param orderNo
+	 * @param totalAmount
+	 * @Author: 柯军
+	 * @datetime:2015年7月30日下午5:23:52
+	 **/
+	private void insertZeroOrder(String orderNo, Double totalAmount) {
+		MessageEvent event = new MessageEvent();
+		Map<String, Object> bodyMap = new HashMap<String, Object>();
+		bodyMap.put("orderNum", orderNo);
+		bodyMap.put("orderType", Constants.ORDER_TYPE.ORDER_TYPE_1);
+		bodyMap.put("totalPrice", totalAmount);
+		event.setBody(bodyMap);
+		event.setTimestamp(DateUtil.getCurrDateTime().getTime());
+		event.setType(PaymentEventType.PAYMENT);
+		PaymentEntityVO paymentEntityVO = paymentService.insertOrderMessage(event);
+		PaymentLogInfo paymentLogInfo = new PaymentLogInfo();
+		paymentLogInfo.setOutTradeNo(paymentEntityVO.getPayNo());
+		paymentLogInfo.setNotifyTime(DateUtil.getCurrDateTime());
+		paymentLogInfo.setResult("success");
+		paymentLogInfo.setTradeMode("1");
+		paymentLogInfo.setTimeEnd(DateUtil.getCurrDateTime());
+		paymentLogInfo.setTotal_fee(0.00);
+		paymentLogInfoService.insertGetId(paymentLogInfo);
+
+		paymentLogInfoService.paySuccessToMessage(paymentEntityVO.getPayNo(), null, orderNo, Constants.ORDER_TYPE.ORDER_TYPE_1, paymentEntityVO.getPayChannel().toString());
+	}
+
 
 	/**
 	 * @Description: 查询订单在第三方交易系统中状态
