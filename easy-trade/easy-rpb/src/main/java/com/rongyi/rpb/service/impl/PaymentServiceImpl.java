@@ -123,7 +123,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException("插入付款单记录失败，失败原因:"+e.getMessage());
+			throw new RuntimeException("插入付款单记录失败，失败原因:" + e.getMessage());
 		}
 	}
 
@@ -343,7 +343,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 				paymentEntity.setStatus(2);
 				paymentEntity.setFinishTime(DateUtil.getCurrDateTime());
 			}
-			if(paymentEntityVO.getAmountMoney().doubleValue() == 0)
+			if (paymentEntityVO.getAmountMoney().doubleValue() == 0)
 				paymentEntity.setPayChannel(null);
 			insertByOrderDetailNum(paymentEntity, paymentEntityVO.getOrderDetailNumArray());// 插入数据库
 			LOGGER.info("==================插入数据库成功==============");
@@ -552,5 +552,54 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 		params.put("orderNum", orderNum);
 		params.put("batchNo", batchNo);
 		return this.getBaseDao().selectOneBySql(PAYMENTENTITY_NAMESPACE + ".selectByOrderNumAndBatchNo", params);
+	}
+
+	@Override
+	public PaymentEntity selectByPayNoAndPayChannelAndTradeType(String payNo, Integer payChannel, Integer tradeType, Integer status) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("payNo", payNo);
+		params.put("payChannel", payChannel);
+		params.put("tradeType", tradeType);
+		params.put("status", status);
+		return this.getBaseDao().selectOneBySql(PAYMENTENTITY_NAMESPACE + ".selectByPayNoAndPayChannelAndTradeType", params);
+	}
+
+	@Override
+	public void insertRepeatPay(PaymentEntity paymentEntity, PaymentLogInfo paymentLogInfo) {
+		insert(paymentEntity);
+		paymentLogInfoService.insert(paymentLogInfo);
+	}
+
+	@Override
+	public PaymentEntity validateRepeatPay(String payNo, Integer oldPaychannel, Integer newPayChannel) {
+		PaymentEntity paymentEntity = selectByPayNoAndPayChannelAndTradeType(payNo, oldPaychannel, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);
+		if (paymentEntity == null)// 无重复付款项
+			return null;
+		LOGGER.info("存在重复付款项，重复付款单号-->" + payNo);
+		PaymentEntity newPaymentEntity = new PaymentEntity();
+		BeanUtils.copyProperties(paymentEntity, newPaymentEntity);
+		newPaymentEntity.setId(null);
+		newPaymentEntity.setPayChannel(newPayChannel);
+		newPaymentEntity.setFinishTime(DateUtil.getCurrDateTime());
+		newPaymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE5);
+		return newPaymentEntity;
+	}
+
+	@Override
+	public void repeatPayToRefund(PaymentEntity paymentEntity, PaymentLogInfo paymentLogInfo) {
+		if (paymentEntity != null) {// 重复支付
+			insertRepeatPay(paymentEntity, paymentLogInfo);// 增加重复付款记录
+			String payNo = orderNoGenService.getOrderNo();
+			PaymentEntity refundPaymentEntity = new PaymentEntity();
+			BeanUtils.copyProperties(paymentEntity, refundPaymentEntity);
+			refundPaymentEntity.setId(null);
+			refundPaymentEntity.setFinishTime(null);
+			refundPaymentEntity.setPayNo(payNo);
+			refundPaymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
+			LOGGER.info(Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0 == paymentEntity.getPayChannel() ? "支付宝" : "微信" + "重复支付直接退款-->退款单号" + payNo);
+			if (Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1 == paymentEntity.getPayChannel())// 微信自动退款
+				weixinPayService.weixinRefund(paymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), paymentEntity.getAmountMoney().doubleValue(), payNo);
+			insert(refundPaymentEntity);
+		}
 	}
 }
