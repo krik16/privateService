@@ -130,7 +130,6 @@ public class RpbServiceImpl implements IRpbService {
 		LOGGER.info("参数：ordeNo=" + orderNo + ",totalAmount=" + totalAmount);
 		if (totalAmount == 0) {
 			List<PaymentEntity> list =paymentService.selectByOrderNum(orderNo,Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
-			//TODO 兼容老版本APP0元支付不走签名，在下个强制更新版本后此代码需删除
 			if(list.isEmpty()){
 				insertZeroOrder(orderNo, totalAmount);
 				LOGGER.info("老版本0元商品购买，发送通知,orderNo-->" + orderNo);
@@ -175,7 +174,8 @@ public class RpbServiceImpl implements IRpbService {
 	private void insertZeroOrder(String orderNo, Double totalAmount) {
 		MessageEvent event = new MessageEvent();
 		Map<String, Object> bodyMap = new HashMap<String, Object>();
-		bodyMap.put("orderNum", orderNo);
+		//TODO 此处orderNo不加双引号转义，JSOBObject.formObject逗比方法会把orderNo当做int处理，丢弃首位的0
+		bodyMap.put("orderNum", "\""+orderNo+"\"");
 		bodyMap.put("orderType", Constants.ORDER_TYPE.ORDER_TYPE_1);
 		bodyMap.put("totalPrice", totalAmount);
 		event.setBody(bodyMap);
