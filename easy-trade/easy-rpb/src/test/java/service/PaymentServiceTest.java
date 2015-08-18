@@ -21,6 +21,7 @@ import com.rongyi.rpb.service.AliPaymentService;
 import com.rongyi.rpb.service.PCWebPageAlipayService;
 import com.rongyi.rpb.service.PaymentItemService;
 import com.rongyi.rpb.service.PaymentService;
+import com.rongyi.rpb.service.impl.RpbServiceImpl;
 import com.rongyi.rss.coupon.RoaCouponOrderService;
 
 public class PaymentServiceTest extends BaseTest {
@@ -39,6 +40,9 @@ public class PaymentServiceTest extends BaseTest {
 	
 	@Autowired
 	PCWebPageAlipayService pcWebPageAlipayService;
+	
+	@Autowired
+	RpbServiceImpl rpbServiceImpl;
 	
 	// @Test
 	public void testSelectPageListBySearch() {
@@ -215,6 +219,11 @@ public class PaymentServiceTest extends BaseTest {
 		String[] idArray = new String[]{"4693"};
 		//20150812192257707
 		pcWebPageAlipayService.getBatchRefundBuyerMessage(idArray, "test");
+	}
+	
+	@Test
+	public void testPaysuccess(){
+		rpbServiceImpl.paySuccessNotify("0818930009601625", 0.00);
 	}
 
 }
