@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
+import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
 
 /**
@@ -138,5 +139,49 @@ public interface PaymentService {
 	 * @datetime:2015年8月3日下午4:56:12
 	 **/
 	public abstract PaymentEntity selectByOrderNumAndBatchNo(String orderNum,String batchNo);
+	
+	/**	
+	 * @Description: 查询付款单号某种支付方式是否已完成支付（验证是否是重复支付） 
+	 * @param payNo
+	 * @param payChannel
+	 * @param tradeType
+	 * @param status
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年8月17日上午10:54:53
+	 **/
+	public abstract PaymentEntity selectByPayNoAndPayChannelAndTradeType(String payNo,Integer payChannel,Integer tradeType,Integer status);
+	
+	/**	
+	 * @Description: 增加重复支付记录 
+	 * @param paymentEntity
+	 * @param paymentLogInfo	
+	 * @Author:  柯军
+	 * @datetime:2015年8月17日上午11:46:00
+	 **/
+	public abstract void insertRepeatPay(PaymentEntity paymentEntity,PaymentLogInfo paymentLogInfo);
 
+
+	/**
+	 * @Description: 验证是否是重复付款
+	 * @param payNo
+	 * @param oldPaychannel
+	 *            已存在支付记录支付方式
+	 * @param newOldPayChannel
+	 *            收到新支付通知中的支付方式
+	 * @return
+	 * @Author: 柯军
+	 * @datetime:2015年8月17日上午11:24:04
+	 **/
+	public PaymentEntity validateRepeatPay(String payNo, Integer oldPaychannel, Integer newPayChannel);
+	
+
+	/**
+	 * @Description: 重复付款自动退还重复付款的金额并记录重复付款记录
+	 * @param paymentEntity
+	 * @param paymentLogInfo
+	 * @Author: 柯军
+	 * @datetime:2015年8月17日上午11:58:59
+	 **/
+	public  void repeatPayToRefund(PaymentEntity paymentEntity, PaymentLogInfo paymentLogInfo);
 }
