@@ -4,13 +4,14 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.bson.types.ObjectId;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * 品牌
  */
 @Entity("brands")
-public class BrandEntity {
+public class BrandEntity implements Serializable{
     @Id
     private ObjectId id;
     private String name;
