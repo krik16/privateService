@@ -3,9 +3,9 @@ package com.rongyi.rss.rmc;
 import java.util.Map;
 
 import com.rongyi.core.framework.exception.RYServiceException;
+import com.rongyi.easy.domain.member.MallMember;
 import com.rongyi.easy.domain.member.UserLog;
 import com.rongyi.easy.rmc.param.MemberInfoParam;
-import com.rongyi.easy.rvc.entity.Member;
 
 /**
  * ClassName: ISignInService <br/>
@@ -54,6 +54,6 @@ public interface MemberService {
    * @since JDK 1.6
    */
 
-  Member pullMember(MemberInfoParam memberInfoParam) throws RYServiceException;
+  MallMember pullMember(MemberInfoParam memberInfoParam) throws RYServiceException;
 
 }
