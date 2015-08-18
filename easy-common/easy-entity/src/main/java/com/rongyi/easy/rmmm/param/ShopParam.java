@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 public class ShopParam implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String shopId;// 店铺id(mysql)
 
 	public String getShopId() {
@@ -13,5 +17,6 @@ public class ShopParam implements Serializable{
 	public void setShopId(String shopId) {
 		this.shopId = shopId;
 	}
+
 
 }

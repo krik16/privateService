@@ -8,7 +8,7 @@ import org.bson.types.ObjectId;
 import java.io.Serializable;
 import java.util.Date;
 
-@Entity(value="collections")
+@Entity(value="collections", noClassnameStored = true)
 public class CollectionsEntity implements Serializable{
 
 	@Id

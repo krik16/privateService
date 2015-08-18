@@ -1,7 +1,9 @@
 package com.rongyi.rss.flopgo;
 
+import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.flopgo.entity.FlopPrizeDEntity;
 import com.rongyi.easy.flopgo.entity.FlopgoActivity;
 import com.rongyi.easy.flopgo.vo.FlopSPrizeDailyVO;
 
@@ -72,5 +74,34 @@ public interface CMFlopgoService {
 	 */
 	public FlopSPrizeDailyVO selectFPDByActivityId(String id);
 	
+	/**
+	 * 这是做修改 做每日配置的数量修改
+	 *  步骤查询 
+	 *     删除
+	 *     插入
+	 *     
+	 * @return
+	 * @throws Exception
+	 */
+	public int updateDailyPrizes(List<FlopPrizeDEntity> dafe,String state,String flopId) throws Exception;
 	
+	/**
+	 * 得到俞当前时间最近的时间的活动Id，并且必须是发布状态，并且不是删除了的
+	 * @return
+	 */
+	public String getNewActivityId();
+	
+	/**
+	 * 修改数量+1
+	 * @param dafe
+	 * @return
+	 */
+	public int updateCountDaily(FlopPrizeDEntity dafe);
+	
+	/**
+	 * 通过 活动id 时间 奖品id 查询出奖品信息
+	 * @param f
+	 * @return
+	 */
+	public FlopPrizeDEntity selectByFlopEntity(FlopPrizeDEntity f);
 }

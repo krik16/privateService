@@ -23,6 +23,7 @@ public class RoaCouponOrderParam implements Serializable {
     private String mallId; // 商场对应的ID
     private String openId; // 当下单渠道是“微网站”时，需传入openid
     private String buyerId; // 摩生活对应的用户ID，只用“摩生活”下单的用户，才需要记录用户ID
+    private String devId; //设备ID，购买优惠券时限购使用
 
     /**
      * 将json字符串转换成RoaCouponOrderParam对象
@@ -59,6 +60,10 @@ public class RoaCouponOrderParam implements Serializable {
         }
         if (map.get("tmStatus") != null) {
             param.setTmStatus(map.get("tmStatus").toString());
+        }
+        if (map.get("devId") != null)
+        {
+            param.setDevId(map.get("devId").toString());
         }
         return param;
     }
@@ -135,6 +140,14 @@ public class RoaCouponOrderParam implements Serializable {
         this.buyerId = buyerId;
     }
 
+    public String getDevId() {
+        return devId;
+    }
+
+    public void setDevId(String devId) {
+        this.devId = devId;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -147,6 +160,7 @@ public class RoaCouponOrderParam implements Serializable {
                 .append("mallId", mallId)
                 .append("openId", openId)
                 .append("buyerId", buyerId)
+                .append("devId", devId)
                 .toString();
     }
 }

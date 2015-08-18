@@ -149,5 +149,11 @@ public interface OrderEventType {
     	 * 优惠券异常
     	 */
     	public static final int ORDER_COUPON_ERROR = 11;
+    	
+    	
+    	/**
+    	 * 积分异常
+    	 */
+    	public static final int ORDER_SCORE_ERROR=12;
     }
 }

@@ -1,18 +1,16 @@
-/** 
- * @Title: CouponParam.java 
- * @Package com.rongyi.easy.coupon.param 
+/**
+ * @Title: CouponParam.java
+ * @Package com.rongyi.easy.coupon.param
  * @Description: RMMM创建优惠券传入参数的封装
  * @author 郑亦梁  zhengyiliang@rongyi.com
- * @date 2015年4月23日 上午10:57:02 
- * @version V1.0   
+ * @date 2015年4月23日 上午10:57:02
+ * @version V1.0
  * Copyright (C),上海容易网电子商务有限公司
  */
 package com.rongyi.easy.coupon.param;
 
 import java.io.Serializable;
 import java.util.List;
-
-import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * @author ZhengYl
@@ -85,6 +83,16 @@ public class RmmmCouponParam implements Serializable {
 	 * 关联店铺集合 店铺id串
 	 */
 	private String shopId;
+
+	/**
+	 * 每日限量发行张数
+	 */
+	private Integer limitPublishCount;
+
+	/**
+	 * 每人每日限用张数
+	 */
+	private Integer limitUseCount;
 
 	public String getTitle() {
 		return title;
@@ -190,15 +198,34 @@ public class RmmmCouponParam implements Serializable {
 		this.shopId = shopId;
 	}
 
+	public Integer getLimitPublishCount() {
+		return limitPublishCount;
+	}
+
+	public void setLimitPublishCount(Integer limitPublishCount) {
+		this.limitPublishCount = limitPublishCount;
+	}
+
+	public Integer getLimitUseCount() {
+		return limitUseCount;
+	}
+
+	public void setLimitUseCount(Integer limitUseCount) {
+		this.limitUseCount = limitUseCount;
+	}
+
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this).append("title", title).append("totalCount", totalCount)
-				.append("limitCount", limitCount).append("originalPrice", originalPrice)
-				.append("currentPrice", currentPrice).append("publishBeginDate", publishBeginDate)
-				.append("publishEndDate", publishEndDate).append("validBeginDate", validBeginDate)
-				.append("validEndDate", validEndDate).append("useRestriction", useRestriction)
-				.append("useDescription", useDescription).append("detailPicUrls", detailPicUrls)
-				.append("shopId", shopId).toString();
+		return "RmmmCouponParam [title=" + title + ", totalCount=" + totalCount
+				+ ", limitCount=" + limitCount + ", originalPrice="
+				+ originalPrice + ", currentPrice=" + currentPrice
+				+ ", publishBeginDate=" + publishBeginDate
+				+ ", publishEndDate=" + publishEndDate + ", validBeginDate="
+				+ validBeginDate + ", validEndDate=" + validEndDate
+				+ ", useRestriction=" + useRestriction + ", useDescription="
+				+ useDescription + ", detailPicUrls=" + detailPicUrls
+				+ ", shopId=" + shopId + ", limitPublishCount="
+				+ limitPublishCount + ", limitUseCount=" + limitUseCount + "]";
 	}
 
 }

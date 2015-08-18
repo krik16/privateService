@@ -1026,52 +1026,52 @@ public class OrderFormEntityExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsCommentEqualTo(Integer value) {
+        public Criteria andIsCommentEqualTo(Byte value) {
             addCriterion("is_comment =", value, "isComment");
             return (Criteria) this;
         }
 
-        public Criteria andIsCommentNotEqualTo(Integer value) {
+        public Criteria andIsCommentNotEqualTo(Byte value) {
             addCriterion("is_comment <>", value, "isComment");
             return (Criteria) this;
         }
 
-        public Criteria andIsCommentGreaterThan(Integer value) {
+        public Criteria andIsCommentGreaterThan(Byte value) {
             addCriterion("is_comment >", value, "isComment");
             return (Criteria) this;
         }
 
-        public Criteria andIsCommentGreaterThanOrEqualTo(Integer value) {
+        public Criteria andIsCommentGreaterThanOrEqualTo(Byte value) {
             addCriterion("is_comment >=", value, "isComment");
             return (Criteria) this;
         }
 
-        public Criteria andIsCommentLessThan(Integer value) {
+        public Criteria andIsCommentLessThan(Byte value) {
             addCriterion("is_comment <", value, "isComment");
             return (Criteria) this;
         }
 
-        public Criteria andIsCommentLessThanOrEqualTo(Integer value) {
+        public Criteria andIsCommentLessThanOrEqualTo(Byte value) {
             addCriterion("is_comment <=", value, "isComment");
             return (Criteria) this;
         }
 
-        public Criteria andIsCommentIn(List<Integer> values) {
+        public Criteria andIsCommentIn(List<Byte> values) {
             addCriterion("is_comment in", values, "isComment");
             return (Criteria) this;
         }
 
-        public Criteria andIsCommentNotIn(List<Integer> values) {
+        public Criteria andIsCommentNotIn(List<Byte> values) {
             addCriterion("is_comment not in", values, "isComment");
             return (Criteria) this;
         }
 
-        public Criteria andIsCommentBetween(Integer value1, Integer value2) {
+        public Criteria andIsCommentBetween(Byte value1, Byte value2) {
             addCriterion("is_comment between", value1, value2, "isComment");
             return (Criteria) this;
         }
 
-        public Criteria andIsCommentNotBetween(Integer value1, Integer value2) {
+        public Criteria andIsCommentNotBetween(Byte value1, Byte value2) {
             addCriterion("is_comment not between", value1, value2, "isComment");
             return (Criteria) this;
         }
@@ -1417,37 +1417,31 @@ public class OrderFormEntityExample {
         }
 
         public Criteria andGuideIdEqualTo(String value) {
-
             addCriterion("guide_id =", value, "guideId");
             return (Criteria) this;
         }
 
         public Criteria andGuideIdNotEqualTo(String value) {
-
             addCriterion("guide_id <>", value, "guideId");
             return (Criteria) this;
         }
 
         public Criteria andGuideIdGreaterThan(String value) {
-
             addCriterion("guide_id >", value, "guideId");
             return (Criteria) this;
         }
 
         public Criteria andGuideIdGreaterThanOrEqualTo(String value) {
-
             addCriterion("guide_id >=", value, "guideId");
             return (Criteria) this;
         }
 
         public Criteria andGuideIdLessThan(String value) {
-
             addCriterion("guide_id <", value, "guideId");
             return (Criteria) this;
         }
 
         public Criteria andGuideIdLessThanOrEqualTo(String value) {
-
             addCriterion("guide_id <=", value, "guideId");
             return (Criteria) this;
         }
@@ -1463,26 +1457,92 @@ public class OrderFormEntityExample {
         }
 
         public Criteria andGuideIdIn(List<String> values) {
-
             addCriterion("guide_id in", values, "guideId");
             return (Criteria) this;
         }
 
         public Criteria andGuideIdNotIn(List<String> values) {
-
             addCriterion("guide_id not in", values, "guideId");
             return (Criteria) this;
         }
 
         public Criteria andGuideIdBetween(String value1, String value2) {
-
             addCriterion("guide_id between", value1, value2, "guideId");
             return (Criteria) this;
         }
 
         public Criteria andGuideIdNotBetween(String value1, String value2) {
-
             addCriterion("guide_id not between", value1, value2, "guideId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountInfoIsNull() {
+            addCriterion("discount_info is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountInfoIsNotNull() {
+            addCriterion("discount_info is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountInfoEqualTo(String value) {
+            addCriterion("discount_info =", value, "discountInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountInfoNotEqualTo(String value) {
+            addCriterion("discount_info <>", value, "discountInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountInfoGreaterThan(String value) {
+            addCriterion("discount_info >", value, "discountInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountInfoGreaterThanOrEqualTo(String value) {
+            addCriterion("discount_info >=", value, "discountInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountInfoLessThan(String value) {
+            addCriterion("discount_info <", value, "discountInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountInfoLessThanOrEqualTo(String value) {
+            addCriterion("discount_info <=", value, "discountInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountInfoLike(String value) {
+            addCriterion("discount_info like", value, "discountInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountInfoNotLike(String value) {
+            addCriterion("discount_info not like", value, "discountInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountInfoIn(List<String> values) {
+            addCriterion("discount_info in", values, "discountInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountInfoNotIn(List<String> values) {
+            addCriterion("discount_info not in", values, "discountInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountInfoBetween(String value1, String value2) {
+            addCriterion("discount_info between", value1, value2, "discountInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountInfoNotBetween(String value1, String value2) {
+            addCriterion("discount_info not between", value1, value2, "discountInfo");
             return (Criteria) this;
         }
     }

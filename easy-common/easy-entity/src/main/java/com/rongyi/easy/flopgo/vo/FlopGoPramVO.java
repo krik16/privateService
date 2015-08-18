@@ -9,6 +9,7 @@ public class FlopGoPramVO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String username;//用户的名字
 	private String channel;//用户渠道
+	private String userPhone;//用户手机
 	private int times;//用户的翻牌的剩余次数
 	public FlopGoPramVO(){
 		
@@ -31,5 +32,12 @@ public class FlopGoPramVO implements Serializable{
 	public void setTimes(int times) {
 		this.times = times;
 	}
+	public String getUserPhone() {
+		return userPhone;
+	}
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
+	}
+	
 	
 }

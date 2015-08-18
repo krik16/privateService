@@ -1,5 +1,8 @@
 package com.rongyi.core.constant;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * 卡券状态常量
  * Created by Breggor on 2015/6/24.
@@ -31,25 +34,32 @@ public interface CouponConst {
     }
 
     /**
-     * 退款状态：未退款[0], 已退款[1]
+     * 退款状态：未退款[0], 已退款[1]，退款中[2]
      */
     interface CouponOrderItemStatus {
         int NO_REFUND = 0;
         int REFUNDED = 1;
+        int REFUNDING = 2;
     }
 
     /**
-     *订单OldOrderVO页面展示状态 status 0:待付款 , 2:已取消, 3:已删除, 4退款中, 5未消费, 6已退款, 7已过期, 8已使用
-     *
+     * 订单OldOrderVO页面展示状态 status 0:待付款 , 2:已取消, 3:已删除, 4退款中, 5未消费, 6已退款, 7已过期, 8已使用
      */
     interface CouponOrderDisplayStatus {
-    	int NO_PAY = 0;
-    	int CANCELED = 2;
-    	int DELETED = 3;
-    	int REFUNDING = 4;
-    	int NO_USE = 5;
-    	int REFUNDED = 6;
-    	int EXPIRED = 7;
-    	int USED = 8;
+        int NO_PAY = 0;
+        int CANCELED = 2;
+        int DELETED = 3;
+        int REFUNDING = 4;
+        int NO_USE = 5;
+        int REFUNDED = 6;
+        int EXPIRED = 7;
+        int USED = 8;
     }
+
+
+    /**
+     * 随时退/过期退/免预约
+     * [1,1,1] 1为支持，0为不支持。第一位：随时退、第二位：过期退 第三位： 免预约
+     */
+    List<Integer> AFTER_SALE_SERVICE = Arrays.asList(1, 0, 0);
 }

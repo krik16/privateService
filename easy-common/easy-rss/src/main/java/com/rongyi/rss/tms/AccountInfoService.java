@@ -18,7 +18,7 @@ import com.rongyi.easy.va.vo.VirtualAccountVO;
 public interface AccountInfoService {
 
 	/**
-	 * 账号信息查询（审核中佣金，提现中金额）
+	 * 账号信息查询（审核中佣金，提现中金额,失败佣金（本月））
 	 * 
 	 * @author ZhengYl
 	 * @date 2015年5月26日 下午2:47:35 

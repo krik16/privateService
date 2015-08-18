@@ -118,7 +118,7 @@ public class UserCoupon implements Serializable {
     private Date provideTime;
 
     /**
-     * 使用时间
+     * 使用(验码)时间
      */
     private Date useTime;
 
@@ -130,7 +130,21 @@ public class UserCoupon implements Serializable {
     /**
      * 有效起止
      */
+    private Integer checkUserId;
+
+    /**
+     * 验码人
+     */
+    private String shopId;
+
+    /**
+     * 有效起止
+     */
     private Date endTime;
+
+
+    private Double refundAmount;
+
 
     public UserCoupon() {
 
@@ -157,7 +171,8 @@ public class UserCoupon implements Serializable {
                       Date provideTime,
                       Date useTime,
                       Date startTime,
-                      Date endTime) {
+                      Date endTime,
+                      Double refundAmount) {
         super();
         this.activityId = activityId;
         this.activityName = activityName;
@@ -181,6 +196,7 @@ public class UserCoupon implements Serializable {
         this.useTime = useTime;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.refundAmount = refundAmount;
     }
 
     public Long getId() {
@@ -368,6 +384,15 @@ public class UserCoupon implements Serializable {
         this.endTime = endTime;
     }
 
+
+    public String getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
+    }
+
     @Transient
     public Boolean existProduct(String productId) {
         if (StringUtils.isNotBlank(this.getProductIds())) {
@@ -388,17 +413,51 @@ public class UserCoupon implements Serializable {
         this.couponSource = couponSource;
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this).append("id", id).append("activityId", activityId)
-                .append("activityName", activityName).append("couponId", couponId).append("couponSource", couponSource)
-                .append("couponCode", couponCode).append("title", title).append("thumbnail", thumbnail)
-                .append("userId", userId).append("orderId", orderId).append("itemId", itemId)
-                .append("couponType", couponType).append("type", type).append("useDescription", useDescription)
-                .append("recommend", recommend).append("status", status).append("productIds", productIds)
-                .append("orgPrice", orgPrice).append("discount", discount).append("unitPrice", unitPrice)
-                .append("provideTime", provideTime).append("useTime", useTime).append("startTime", startTime)
-                .append("endTime", endTime).toString();
+    public Integer getCheckUserId() {
+        return checkUserId;
     }
 
+    public void setCheckUserId(Integer checkUserId) {
+        this.checkUserId = checkUserId;
+    }
+
+    public Double getRefundAmount() {
+        return refundAmount;
+    }
+
+    public void setRefundAmount(Double refundAmount) {
+        this.refundAmount = refundAmount;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("activityId", activityId)
+                .append("activityName", activityName)
+                .append("couponId", couponId)
+                .append("couponSource", couponSource)
+                .append("couponCode", couponCode)
+                .append("title", title)
+                .append("thumbnail", thumbnail)
+                .append("userId", userId)
+                .append("orderId", orderId)
+                .append("itemId", itemId)
+                .append("couponType", couponType)
+                .append("type", type)
+                .append("useDescription", useDescription)
+                .append("recommend", recommend)
+                .append("status", status)
+                .append("productIds", productIds)
+                .append("orgPrice", orgPrice)
+                .append("discount", discount)
+                .append("unitPrice", unitPrice)
+                .append("provideTime", provideTime)
+                .append("useTime", useTime)
+                .append("startTime", startTime)
+                .append("endTime", endTime)
+                .append("checkUserId", checkUserId)
+                .append("refundAmount", refundAmount)
+                .toString();
+    }
 }

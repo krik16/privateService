@@ -19,7 +19,7 @@ public interface ROAPersonManagementService {
 	 * @param name
 	 * @throws Exception
 	 */
-	public void contactShopAssistant(String contact, String content,String userId,String name) throws Exception;
+	public void contactShopAssistant(String contact, String content,String name) throws Exception;
 	
 	/**
 	 * 给卖家评分

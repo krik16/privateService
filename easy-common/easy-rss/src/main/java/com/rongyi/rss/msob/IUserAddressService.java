@@ -15,7 +15,7 @@ public interface IUserAddressService {
 	 * @param userId
 	 * @throws Exception
 	 */
-	public void operateAddress(OperateAddressParam param, ObjectId userId) throws Exception;
+	public String operateAddress(OperateAddressParam param, ObjectId userId) throws Exception;
 	
 	/**
 	 * 获取用户地址列表

@@ -16,7 +16,7 @@ public class FlopRecordVo implements Serializable{
 	private String userName;//翻牌用户的账号
 	private ObjectId flopActivityId;//关联的翻牌购		
 	private String flopName;//翻牌购的名字
-	private ObjectId prizeId;//翻牌购的奖品
+	private String prizeId;//翻牌购的奖品
 	private String prizeCode;//翻牌购奖品的卷码
 	private String prizeName;//奖品名称	
 	private String prizeType;//奖品类型 与优惠券表中的类型对应  01优惠卷  02现金卷
@@ -60,10 +60,10 @@ public class FlopRecordVo implements Serializable{
 	public void setFlopName(String flopName) {
 		this.flopName = flopName;
 	}
-	public ObjectId getPrizeId() {
+	public String getPrizeId() {
 		return prizeId;
 	}
-	public void setPrizeId(ObjectId prizeId) {
+	public void setPrizeId(String prizeId) {
 		this.prizeId = prizeId;
 	}
 	public String getPrizeCode() {

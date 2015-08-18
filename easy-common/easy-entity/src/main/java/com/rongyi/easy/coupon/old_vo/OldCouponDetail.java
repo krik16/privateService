@@ -4,7 +4,14 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class OldCouponItemVO implements Serializable {
+
+/**
+ * 优惠券订单详情信息 （优惠券基本信息与券码信息）
+ *
+ * @author Breggor
+ * @date 2015-08-13
+ */
+public class OldCouponDetail implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -32,7 +39,11 @@ public class OldCouponItemVO implements Serializable {
 
     private String thumbnail;// 缩略图
 
-    private List<OldUserCouponVO> myActivityList;// 老用户优惠VO列表（app-activity-detail）
+    //新版本废弃
+    @Deprecated
+    private List<OldUserCode> myActivityList;// 老用户优惠VO列表
+
+    private List<OldUserCode> userCouponList; //用户券码列表
 
     private Integer ticketTotalNumber;// 订单项对应的用户优惠总数量
 
@@ -41,6 +52,28 @@ public class OldCouponItemVO implements Serializable {
     private boolean notOutCodeFlag = true; // 外部导入券标志 true 不是外部导入券,false 是外部导入券
 
     private double currentPrice;//当前价格（优惠券价格-红包折扣）
+
+    private String couponId;//优惠券id
+
+    private int integral;  // 购买时使用的积分
+
+    private double couponDiscount; //购买时使用的红包价格
+
+    private int unUsered;  //未使用的数量
+
+    private Double orderPrice;//订单总价
+    
+    private int refundNum;//最大退款数量
+
+    private int buyedNum;//购买数量
+
+    public int getBuyedNum() {
+        return buyedNum;
+    }
+
+    public void setBuyedNum(int buyedNum) {
+        this.buyedNum = buyedNum;
+    }
 
     public double getCurrentPrice() {
         return currentPrice;
@@ -146,11 +179,11 @@ public class OldCouponItemVO implements Serializable {
         this.thumbnail = thumbnail;
     }
 
-    public List<OldUserCouponVO> getMyActivityList() {
+    public List<OldUserCode> getMyActivityList() {
         return myActivityList;
     }
 
-    public void setMyActivityList(List<OldUserCouponVO> myActivityList) {
+    public void setMyActivityList(List<OldUserCode> myActivityList) {
         this.myActivityList = myActivityList;
     }
 
@@ -178,4 +211,61 @@ public class OldCouponItemVO implements Serializable {
         this.notOutCodeFlag = notOutCodeFlag;
     }
 
+    public String getCouponId() {
+        return couponId;
+    }
+
+    public void setCouponId(String couponId) {
+        this.couponId = couponId;
+    }
+
+    public int getIntegral() {
+        return integral;
+    }
+
+    public void setIntegral(int integral) {
+        this.integral = integral;
+    }
+
+    public double getCouponDiscount() {
+        return couponDiscount;
+    }
+
+    public void setCouponDiscount(double couponDiscount) {
+        this.couponDiscount = couponDiscount;
+    }
+
+    public int getUnUsered() {
+        return unUsered;
+    }
+
+    public void setUnUsered(int unUsered) {
+        this.unUsered = unUsered;
+    }
+
+    public Double getOrderPrice() {
+        return orderPrice;
+    }
+
+    public void setOrderPrice(Double orderPrice) {
+        this.orderPrice = orderPrice;
+    }
+
+    public List<OldUserCode> getUserCouponList() {
+        return userCouponList;
+    }
+
+    public void setUserCouponList(List<OldUserCode> userCouponList) {
+        this.userCouponList = userCouponList;
+    }
+
+	public int getRefundNum() {
+		return refundNum;
+	}
+
+	public void setRefundNum(int refundNum) {
+		this.refundNum = refundNum;
+	}
+    
+    
 }

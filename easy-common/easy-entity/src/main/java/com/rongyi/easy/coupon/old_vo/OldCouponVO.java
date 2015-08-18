@@ -1,6 +1,8 @@
 package com.rongyi.easy.coupon.old_vo;
 
 
+import com.rongyi.core.constant.CouponConst;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -34,17 +36,19 @@ public class OldCouponVO implements Serializable {
     private String use_mode;        // 使用方式
     private List<OldShopVO> apply_shops;//券的商场信息
 
-    
-    
+    private Integer limitPublishCount;// 每日限量发行张数
+    private Integer limitUseCount;// 每人每日限用张数
+    private List<Integer> afterSaleService = CouponConst.AFTER_SALE_SERVICE; //[1,1,1] 1为支持，0为不支持。第一位：随时退、第二位：过期退 第三位： 免预约
+
     public String getDescription() {
-		return description;
-	}
+        return description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public String getId() {
+    public String getId() {
         return id;
     }
 
@@ -182,14 +186,14 @@ public class OldCouponVO implements Serializable {
 
 
     public List<OldShopVO> getApply_shops() {
-		return apply_shops;
-	}
+        return apply_shops;
+    }
 
-	public void setApply_shops(List<OldShopVO> apply_shops) {
-		this.apply_shops = apply_shops;
-	}
+    public void setApply_shops(List<OldShopVO> apply_shops) {
+        this.apply_shops = apply_shops;
+    }
 
-	public Integer getBuyed_amount() {
+    public Integer getBuyed_amount() {
         return buyed_amount;
     }
 
@@ -227,6 +231,30 @@ public class OldCouponVO implements Serializable {
 
     public void setHolder_name(String holder_name) {
         this.holder_name = holder_name;
+    }
+
+    public Integer getLimitPublishCount() {
+        return limitPublishCount;
+    }
+
+    public void setLimitPublishCount(Integer limitPublishCount) {
+        this.limitPublishCount = limitPublishCount;
+    }
+
+    public Integer getLimitUseCount() {
+        return limitUseCount;
+    }
+
+    public void setLimitUseCount(Integer limitUseCount) {
+        this.limitUseCount = limitUseCount;
+    }
+
+    public List<Integer> getAfterSaleService() {
+        return afterSaleService;
+    }
+
+    public void setAfterSaleService(List<Integer> afterSaleService) {
+        this.afterSaleService = afterSaleService;
     }
 
 }
