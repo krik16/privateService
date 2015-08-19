@@ -80,7 +80,10 @@ public class RedenvelopCouponVO implements Serializable{
      */
     private Date publishEndAt;
 
-	
+    /**
+     * 得到最后一条审核不通过的记录
+     */
+	private String checkDesic;
     
     /**
      * 拒绝原因
@@ -209,6 +212,23 @@ public class RedenvelopCouponVO implements Serializable{
 
 	public void setRejectRecordList(List<CouponRejectRecord> rejectRecordList) {
 		this.rejectRecordList = rejectRecordList;
+	}
+
+	public String getCheckDesic() {
+		if(this.rejectRecordList != null && !this.rejectRecordList.isEmpty()){
+			return this.rejectRecordList.get(this.rejectRecordList.size()-1).getReason();
+		}else{
+			return "";
+		}
+	}
+
+	public void setCheckDesic(String checkDesic) {
+		if(this.rejectRecordList != null && !this.rejectRecordList.isEmpty()){
+			this.checkDesic = this.rejectRecordList.get(this.rejectRecordList.size()-1).getReason();
+		}else{
+			this.checkDesic = "";
+		}
+		
 	}
     
     

@@ -1,5 +1,6 @@
 package com.rongyi.easy.coupon.entity.mysql;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +10,12 @@ import com.rongyi.easy.coupon.entity.mysql.CouponGroup;
 import com.rongyi.easy.coupon.entity.mysql.CouponMall;
 import com.rongyi.easy.coupon.entity.mysql.CouponShop;
 
-public class Coupon {
+public class Coupon implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/**
      * 主键id
      */
