@@ -3,6 +3,8 @@ package com.rongyi.easy.rmmm.param;
 import java.io.Serializable;
 import java.util.List;
 
+import net.sf.json.JSONObject;
+
 public class ParentOrderParam implements Serializable {
 
 	private List<SonOrderParam> sonOrderList;//
@@ -11,7 +13,7 @@ public class ParentOrderParam implements Serializable {
 	private String addressId;// 邮寄地址id
 	private String orderModelId;// 父模板id
 	private String guideId;// 导购id
-	private String discountInfo;// {“score”:”使用积分”}
+	private JSONObject discountInfo;// {“score”:”使用积分”}
 
 	public List<SonOrderParam> getSonOrderList() {
 		return sonOrderList;
@@ -61,12 +63,14 @@ public class ParentOrderParam implements Serializable {
 		this.guideId = guideId;
 	}
 
-	public String getDiscountInfo() {
+	public JSONObject getDiscountInfo() {
 		return discountInfo;
 	}
 
-	public void setDiscountInfo(String discountInfo) {
+	public void setDiscountInfo(JSONObject discountInfo) {
 		this.discountInfo = discountInfo;
 	}
+
+	
 
 }

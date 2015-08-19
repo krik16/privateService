@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface ICustomerTagService {
 
-    public List<CustomerTagVO> selectTagList(Integer customerId) throws Exception;
+    public List<CustomerTagVO> selectTagList(Integer customerId);
 
     public List<CustomerTagVO> selectDefaultTagList() throws Exception;
 

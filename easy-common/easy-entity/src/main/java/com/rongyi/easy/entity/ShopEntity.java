@@ -44,7 +44,7 @@ public class ShopEntity implements Serializable{
 //    private String terminal_shop;
 //    private String token;
 //    private Date updated_at;
-//    private Integer valid;
+    private Integer valid;
     private String zone_id;
     private List<String> zone_ids;//依次是省、市、区、商圈、商场、楼层
 //    private Integer recommend;
@@ -235,12 +235,12 @@ public class ShopEntity implements Serializable{
 //	public void setUpdated_at(Date updated_at) {
 //		this.updated_at = updated_at;
 //	}
-//	public Integer getValid() {
-//		return valid;
-//	}
-//	public void setValid(Integer valid) {
-//		this.valid = valid;
-//	}
+	public Integer getValid() {
+		return valid;
+	}
+	public void setValid(Integer valid) {
+		this.valid = valid;
+	}
 	public String getZone_id() {
 		return zone_id;
 	}

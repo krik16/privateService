@@ -73,6 +73,15 @@ public interface IMallLifeUserService {
     public UserInfoVO getByUserPhone(String phone) throws Exception;
 
     /**
+     * 根据im_id查询摩生活用户
+     *
+     * @param imId
+     * @return
+     * @throws Exception
+     */
+    public MallLifeUserEntity getUserByIMId(String imId) throws Exception;
+
+    /**
      * 第三方登录，若openId不存在，则新建一个用户
      * @param malllifeUser
      * @return

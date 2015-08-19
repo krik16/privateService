@@ -3,10 +3,9 @@ package com.rongyi.rss.mallshop.shop;
 import java.util.List;
 import java.util.Map;
 
-import com.rongyi.core.framework.mybatis.pojo.Page;
-import com.rongyi.easy.entity.MallLifeUserEntity;
 import com.rongyi.easy.entity.ShopEntity;
 import com.rongyi.easy.malllife.vo.ShopRmmmVO;
+import com.rongyi.easy.malllife.vo.UserInfoVO;
 import com.rongyi.easy.rmmm.entity.ShopInfoEntity;
 import com.rongyi.easy.rmmm.exception.RmmmException;
 import com.rongyi.easy.rmmm.param.BrandParam;
@@ -75,7 +74,7 @@ public interface ROAShopService{
 	 * @return
 	 * @throws Exception
 	 */
-	public BrandShopDetailVO getBrandShopDetail(Integer shopId,MallLifeUserEntity user) throws Exception;
+	public BrandShopDetailVO getBrandShopDetail(String shopId,UserInfoVO user) throws Exception;
 
 
 
@@ -113,4 +112,12 @@ public interface ROAShopService{
 	 * @throws Exception
 	 */
 	public List<ShopInfoEntity> getShopListByShopName(String shopName,Integer mallId) throws Exception;
+	
+	/**
+	 * 根据店铺的mongoId获取店铺信息
+	 * @param shopMId
+	 * @return
+	 * @throws Exception
+	 */
+	public ShopInfoVO getShopInfoByShopMId(String shopMId)  throws Exception;
 }

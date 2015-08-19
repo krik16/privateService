@@ -10,7 +10,7 @@ import java.util.List;
  * Created by xgq on 2015/7/22.
  */
 public interface ROACustomerTagService {
-    public List<CustomerTagVO> selectTagList(Integer customerId) throws Exception;
+    public List<CustomerTagVO> selectTagList(Integer customerId);
 
     public List<CustomerTagVO> selectDefaultTagList() throws Exception;
 

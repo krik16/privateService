@@ -57,6 +57,10 @@ public class MallLifeUserEntity implements Serializable {
 
 	@Property("updated_at")
 	private Date updatedAt;
+
+	@Property("created_at")
+	private Date createdAt;
+
 	public ObjectId getId() {
 		return id;
 	}
@@ -202,5 +206,13 @@ public class MallLifeUserEntity implements Serializable {
 
 	public void setIsLoginRed(Integer isLoginRed) {
 		this.isLoginRed = isLoginRed;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 }

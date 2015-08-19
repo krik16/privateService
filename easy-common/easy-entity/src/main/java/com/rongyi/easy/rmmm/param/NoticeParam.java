@@ -16,22 +16,25 @@ public class NoticeParam implements Serializable{
 
 	/** 公告内容 */
 	private String content;
-	private String shopMId;
-	/** 关联店铺id */
-	private String shopId;
 
+	/** 关联店铺Mongoid */
+	private String shopMId;
+
+	private String shopId;
 	public String getContent() {
 		return content;
 	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
 	public String getShopMId() {
 		return shopMId;
 	}
 
 	public void setShopMId(String shopMId) {
 		this.shopMId = shopMId;
-	}
-	public void setContent(String content) {
-		this.content = content;
 	}
 
 	public String getShopId() {
@@ -41,5 +44,5 @@ public class NoticeParam implements Serializable{
 	public void setShopId(String shopId) {
 		this.shopId = shopId;
 	}
-
+	
 }

@@ -22,7 +22,7 @@ public class CustomerSimpleVO implements Serializable {
     private String headImg;
 
     /**
-     * todo 是否为专属导购
+     * 是否为专属导购
      */
     private boolean belong;
 
@@ -30,6 +30,17 @@ public class CustomerSimpleVO implements Serializable {
      * 备注名
      */
     private String memoName;
+
+
+    /**
+     * 容易逛用户ID
+     */
+    private String userId;
+
+    /**
+     * 容易逛用户imId
+     */
+    private String imId;
 
     public Integer getId() {
         return id;
@@ -69,5 +80,21 @@ public class CustomerSimpleVO implements Serializable {
 
     public void setMemoName(String memoName) {
         this.memoName = memoName;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getImId() {
+        return imId;
+    }
+
+    public void setImId(String imId) {
+        this.imId = imId;
     }
 }

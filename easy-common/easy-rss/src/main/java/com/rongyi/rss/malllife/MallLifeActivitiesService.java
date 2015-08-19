@@ -5,6 +5,10 @@ import java.util.Map;
 
 
 
+
+import org.bson.types.ObjectId;
+
+import com.rongyi.easy.malllife.entity.ActivityEntity;
 import com.rongyi.easy.malllife.vo.GroupVO;
 
 
@@ -39,4 +43,13 @@ public interface MallLifeActivitiesService {
      * @return
      */
     public List<GroupVO>listActivities(List<String> ids);
+
+    /**
+     * 根据id查找activity
+     * @param id
+     * @return
+     */
+    public ActivityEntity searchActivityById(ObjectId id);
+
+	public void updateVisitedNum(String id, int visitedCount);
 }

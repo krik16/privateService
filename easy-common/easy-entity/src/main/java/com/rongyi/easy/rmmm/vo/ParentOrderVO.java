@@ -75,18 +75,22 @@ public class ParentOrderVO implements Serializable {
 	private String guideId;// 导购id
 	private String receiveTime;// 确认收货时间
 	private String cancelTime;// 卖家取消订单时间
-	private String closeTime;//订单关闭时间
-	private String statusRoute;//状态路径
+	private String closeTime;// 订单关闭时间
+	private String statusRoute;// 状态路径
 
-	
-/*	private String expressBillId;// 物流单号ID
-	
-	private String expressName;// 物流名称*/
+	/*
+	 * private String expressBillId;// 物流单号ID
+	 * 
+	 * private String expressName;// 物流名称
+	 */
 
 	private String expressBillId;// 物流单号ID
-	
+
 	private String expressName;// 物流名称
-	private BigDecimal discountFee;//商品折扣价
+	private BigDecimal discountFee;// 商品折扣价
+
+	private String score;// 使用的积分
+	private String scoreDeduction;// 积分抵扣金额
 
 	public BigDecimal getDiscountFee() {
 		return discountFee;
@@ -344,7 +348,6 @@ public class ParentOrderVO implements Serializable {
 		this.expressName = expressName;
 	}
 
-
 	public String getNickName() {
 		return nickName;
 	}
@@ -439,6 +442,22 @@ public class ParentOrderVO implements Serializable {
 
 	public void setStatusRoute(String statusRoute) {
 		this.statusRoute = statusRoute;
+	}
+
+	public String getScore() {
+		return score;
+	}
+
+	public void setScore(String score) {
+		this.score = score;
+	}
+
+	public String getScoreDeduction() {
+		return scoreDeduction;
+	}
+
+	public void setScoreDeduction(String scoreDeduction) {
+		this.scoreDeduction = scoreDeduction;
 	}
 
 }

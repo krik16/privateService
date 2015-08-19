@@ -3,6 +3,7 @@ package com.rongyi.easy.rmmm.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+
 public class RmmmUserInfoEntity implements Serializable{
 
     /** 主键  */
@@ -57,15 +58,15 @@ public class RmmmUserInfoEntity implements Serializable{
     private String cardId;
     /** 环信用户账号 */
     private String userIMCount;
-
+	private String devId;//登录时获取当前设备Id
     private Integer type;
     private Integer identity;
     private Integer isCooperation;
     private String memo;
     private Integer createSource;
     private Integer stopReason;
-    public Integer getId() {
-        return id;
+ 	public Integer getId() {
+      return id;
     }
 
     public void setId(Integer id) {
@@ -207,6 +208,13 @@ public class RmmmUserInfoEntity implements Serializable{
     public void setUserIMCount(String userIMCount) {
         this.userIMCount = userIMCount;
     }
+    public String getDevId() {
+        return devId;
+    }
+
+    public void setDevId(String devId) {
+        this.devId = devId;
+    }
 
 	public Integer getType() {
 		return type;
@@ -255,5 +263,4 @@ public class RmmmUserInfoEntity implements Serializable{
 	public void setStopReason(Integer stopReason) {
 		this.stopReason = stopReason;
 	}
-    
 }

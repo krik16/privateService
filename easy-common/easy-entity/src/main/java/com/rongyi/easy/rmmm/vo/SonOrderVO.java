@@ -17,9 +17,9 @@ public class SonOrderVO implements Serializable{
 	private String commodityCurrentPrice;// 商品现价
 
 	private String commodityOriginalPrice;// 商品原价
-
-	private BigDecimal realAmount;// 子订单实际价格
 	
+	private BigDecimal realAmount;// 子订单实际价格
+
 	private String sonOrderStatus;// 子订单状态（含有维权状态）
 
 	private String refundStatus;// 退款状态
@@ -34,8 +34,8 @@ public class SonOrderVO implements Serializable{
 
 	private String appealTimes;// 维权次数
 
-	private String refundTimes;// 退款次数
 
+	private String refundTimes;// 退款次数
 
 	private String couponCode;// 卡券码
 
@@ -50,7 +50,7 @@ public class SonOrderVO implements Serializable{
 	public void setRealAmount(BigDecimal realAmount) {
 		this.realAmount = realAmount;
 	}
-	
+
 	public String getNum() {
 		return num;
 	}

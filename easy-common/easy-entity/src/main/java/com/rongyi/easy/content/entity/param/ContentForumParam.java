@@ -16,6 +16,8 @@ public class ContentForumParam implements Serializable{
 	private String currentPage; // 从0页开始
 	private String pageSize; // 每页数据显示数量
 
+	private String version="0";  //默认老版本 1新版本
+
 	public String getCurrentPage() {
 		return currentPage;
 	}
@@ -38,5 +40,13 @@ public class ContentForumParam implements Serializable{
 
 	public void setForumCode(String forumCode) {
 		this.forumCode = forumCode;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
 	}
 }

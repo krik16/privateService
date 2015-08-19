@@ -104,7 +104,7 @@ public interface IOrderService {
 	 * @return
 	 * @throws Exception
 	 */
-	public TransactionDetailVO getTransactionDetail(TransactionDetailParam param) throws Exception;
+	public TransactionDetailVO getTransactionDetail(TransactionDetailParam param,String mallUserMid) throws Exception;
 	
 	/**
 	 * 根据不同的事件，发送不同的数据
