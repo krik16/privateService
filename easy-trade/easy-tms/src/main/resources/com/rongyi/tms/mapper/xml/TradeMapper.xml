@@ -57,6 +57,10 @@
 		<if test="tradeNo != null and tradeNo != ''">
 			AND trade_no = #{tradeNo}
 		</if>
+		<!-- 付款单号 -->
+		<if test="payNo != null and payNo != ''">
+			AND pay_no = #{payNo}
+		</if>
 		<!-- 订单号 -->
 		<if test="orderNo != null and orderNo != ''">
 			AND order_no = #{orderNo}
@@ -87,7 +91,7 @@
 		<!-- 收支类型 -->
 		<!-- 收入 -->
 		<if test="tradeType == 0">
-			AND trade_type = 0
+			AND (trade_type = 0 or trade_type = 5) 
 		</if>
 		<!-- 支出 -->
 		<if test="tradeType == 1 or tradeType == 4">
@@ -95,7 +99,7 @@
 		</if>
 
 		<if test="tradeType == null or tradeType == ''">
-			AND (trade_type = 0 or trade_type = 1 or trade_type = 4)
+			AND (trade_type = 0 or trade_type = 1 or trade_type = 4 or trade_type = 5)
 		</if>
 		<!-- 打款方式 -->
 		<if test="payChannel != null and payChannel != ''">

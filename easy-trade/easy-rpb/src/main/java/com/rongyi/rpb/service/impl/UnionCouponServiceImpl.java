@@ -242,7 +242,7 @@ public class UnionCouponServiceImpl extends BaseServiceImpl implements UnionCoup
 		paymentService.insert(paymentEntity);// 生成退款记录
 		PaymentLogInfo paymentLogInfo = new PaymentLogInfo(Constants.REPLAY_FLAG.REPLAY_FLAG4, unionCouponLogVO.getMsgCrrltnId(), null, null, DateUtil.getCurrDateTime(), null, null,
 				unionCouponLogVO.getTransCrrltnNo(), unionCouponLogVO.getEncCardNo(), unionCouponLogVO.getPartCardNo(), 0, "1", unionCouponLogVO.getReqSerialNo(), DateUtil.getCurrDateTime(),
-				unionCouponLogVO.getPayNo(), null, unionCouponLogVO.getPayAmt(), "success", 3);
+				unionCouponLogVO.getPayNo(), null, unionCouponLogVO.getPayAmt(), "success", 3,0);
 		paymentLogInfoService.insert(paymentLogInfo);// 生成退款事件
 	}
 

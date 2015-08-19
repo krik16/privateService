@@ -588,7 +588,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 		if (paymentEntity != null) {// 重复支付
 			insertRepeatPay(paymentEntity, paymentLogInfo);// 增加重复付款记录
 			String payNo = orderNoGenService.getOrderNo();
-			PaymentEntity refundPaymentEntity = new PaymentEntity();
+			PaymentEntity refundPaymentEntity = new PaymentEntity(); 
 			BeanUtils.copyProperties(paymentEntity, refundPaymentEntity);
 			refundPaymentEntity.setId(null);
 			refundPaymentEntity.setFinishTime(null);

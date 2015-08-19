@@ -18,6 +18,7 @@
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td>交易流水号</td>
+			<td>付款单号</td>
 			<td>交易时间</td>
 			<td>收支类型</td>
 			<td>打款方式</td>
@@ -38,10 +39,12 @@
 				<c:forEach var="entity" items="${list}" varStatus="status">
 					<tr>
 						<td><a href="${ctx}/tradeDetail/info?id=${entity.id}&tradeNo=${entity.tradeNo}"  target="_blank" style="text-decoration: underline;">${entity.tradeNo}</a></td>
+						<td>${entity.payNo}</td>
 						<td><fmt:formatDate value="${entity.tradeTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 						<td>
 						<c:choose>
-							<c:when test="${entity.tradeType eq 0}">收入</c:when>						
+							<c:when test="${entity.tradeType eq 0}">收入</c:when>
+							<c:when test="${entity.tradeType eq 5}">重复支付收入</c:when>						
 							<c:otherwise>支出</c:otherwise>
 						</c:choose>	
 						</td>
@@ -92,7 +95,7 @@
 						<td>
 							<c:if test="${not empty entity.orderPrice}">
 								<c:choose>
-									<c:when test="${entity.tradeType eq 0}">+</c:when>						
+									<c:when test="${entity.tradeType eq 0 or entity.tradeType eq 5}">+</c:when>						
 									<c:otherwise>-</c:otherwise>
 								</c:choose>	
 								${entity.orderPrice}

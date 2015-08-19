@@ -61,6 +61,10 @@ pageEncoding="UTF-8"%>
 							订单号:
 							<input id="orderNo"  class="detail" type="text" maxlength="50" /></input>
 						</li>
+							<li>
+							付款单号:
+							<input id="payNo"  class="detail" type="text" maxlength="50" /></input>
+						</li>
 						<li  class="xiala" >
 							<div>
 							<label>商场：</label>
@@ -82,6 +86,7 @@ pageEncoding="UTF-8"%>
 								<option value="">--全部--</option>
 								<option value="0">收入</option>
 								<option value="1">支出</option>
+						<!-- 		<option value="5">重复支付收入</option> -->
 							</select>
 						</li>
 						<li style="margin-top: 25px;">打款方式：
