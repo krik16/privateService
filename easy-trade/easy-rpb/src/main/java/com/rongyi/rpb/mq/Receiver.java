@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.rabbitmq.client.Channel;
+import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.rpb.service.MqReceiverService;
 
 /**	
@@ -26,6 +27,7 @@ public class Receiver implements ChannelAwareMessageListener {
 
     @Override
     public void onMessage(Message message, Channel channel) throws Exception {
+    	LOGGER.info("消息接收到时间-->"+DateUtil.getCurrDateTime().getTime());
         String messageString = new String(message.getBody());
         LOGGER.info("接收消息：" + messageString);
         try {

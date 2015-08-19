@@ -45,7 +45,7 @@
 
 	<rabbit:listener-container
 		connection-factory="connectionFactory" auto-startup="false"
-		acknowledge="manual" prefetch="1000">
+		acknowledge="manual" prefetch="1000" task-executor="taskExecutor">
 		<rabbit:listener queues="${mq.queuename}" ref="receiver" />
 	</rabbit:listener-container>
 
