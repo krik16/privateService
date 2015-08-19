@@ -7,7 +7,7 @@ package com.rongyi.easy.page;
  */
 public enum FilterType {
 
-    LIKE,  EQUALS,  GREATETHAN,  GREATEEQUAL,  LESSTHAN,  LESSEQUAL,  NOTEQUAL,  IN,NIN,ISNULL,ISNOTNULL,REGEXP;
+    LIKE,  EQUALS,  GREATETHAN,  GREATEEQUAL,  LESSTHAN,  LESSEQUAL,  NOTEQUAL,  IN,NIN,ISNULL,ISNOTNULL,REGEXP,BEQ;
     public static FilterType toType(String type)
     {
         if ("LIKE".equals(type)) {
@@ -30,6 +30,9 @@ public enum FilterType {
         }
         if ("NEQ".equals(type)) {
             return NOTEQUAL;
+        }
+        if ("BEQ".equals(type)) {
+            return BEQ;
         }
         if ("IN".equals(type)) {
             return IN;
@@ -86,6 +89,9 @@ public enum FilterType {
         }
         if (this == REGEXP) {
             return "REGEXP";
+        }
+        if (this == BEQ) {
+            return "beq";
         }
         return "";
     }
