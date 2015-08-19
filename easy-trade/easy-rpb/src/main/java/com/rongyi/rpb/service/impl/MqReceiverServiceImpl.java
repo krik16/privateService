@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rabbitmq.client.Channel;
+import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.OSMRoutingUtil;
 import com.rongyi.core.constant.PaymentEventType;
 import com.rongyi.easy.mq.MessageEvent;
@@ -87,6 +88,7 @@ public class MqReceiverServiceImpl implements MqReceiverService {
 			messageMap = paymentService.getSendMessage(event);
 		}
 		if (messageMap != null && isAppPay(event.getType())) {// 支付消息回复
+			LOGGER.info("支付签名发送时间-->"+DateUtil.getCurrDateTime().getTime());
 			sender.rpcSend(messageMap, message, channel);
 		}
 	}
