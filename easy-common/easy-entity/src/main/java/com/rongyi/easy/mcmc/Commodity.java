@@ -24,7 +24,7 @@ public class Commodity implements  Serializable {
 	private String category;//商品品类id
 	private String shopId;//店铺id
 	private String shopMid;//店铺的mongoid
-	private int status;//状态 1上架 0下架 2是删除3待上架
+	private int status;//状态 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理 
 	private String code;//商品编码
 	private String description;//商品描述
 	private String postage;//商品邮费
