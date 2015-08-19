@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.json.JSONObject;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -174,8 +176,9 @@ public class RpbServiceImpl implements IRpbService {
 	private void insertZeroOrder(String orderNo, Double totalAmount) {
 		MessageEvent event = new MessageEvent();
 		Map<String, Object> bodyMap = new HashMap<String, Object>();
-		//TODO 此处orderNo不加双引号转义，JSOBObject.formObject逗比方法会把orderNo当做int处理，丢弃首位的0
-		bodyMap.put("orderNum", "\""+orderNo+"\"");
+		// TODO
+		// 此处orderNo不加双引号转义，JSOBObject.formObject逗比方法会把orderNo当做int处理，丢弃首位的0
+		bodyMap.put("orderNum", "\"" + orderNo + "\"");
 		bodyMap.put("orderType", Constants.ORDER_TYPE.ORDER_TYPE_1);
 		bodyMap.put("totalPrice", totalAmount);
 		event.setBody(bodyMap);
@@ -250,6 +253,8 @@ public class RpbServiceImpl implements IRpbService {
 
 	@Override
 	public Map<String, Object> getPaySign(MessageEvent event) {
-		return paymentService.getSendMessage(event);
+		JSONObject jsonObject = JSONObject.fromObject(event);
+		MessageEvent event2 = rpbEventService.messageToMessageEvent(jsonObject.toString());
+		return paymentService.getSendMessage(event2);
 	}
 }
