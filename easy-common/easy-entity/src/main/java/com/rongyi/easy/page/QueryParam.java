@@ -21,6 +21,11 @@ public class QueryParam {
      * 查询的排序集合
      */
     private List<QueryOrder> queryOrders;
+
+    /**
+     * 查询的表集合
+     */
+    private List<Form> fromList;
     /**
      * 当前页
      */
@@ -117,5 +122,13 @@ public class QueryParam {
     }
 
     public QueryParam() {
+    }
+
+    public List<Form> getFromList() {
+        return fromList;
+    }
+
+    public void setFromList(List<Form> fromList) {
+        this.fromList = fromList;
     }
 }
