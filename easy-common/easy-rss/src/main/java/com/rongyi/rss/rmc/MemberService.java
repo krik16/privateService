@@ -5,6 +5,7 @@ import java.util.Map;
 import com.rongyi.core.framework.exception.RYServiceException;
 import com.rongyi.easy.domain.member.MallMember;
 import com.rongyi.easy.domain.member.UserLog;
+import com.rongyi.easy.revc.param.ElectronicMemberParam;
 import com.rongyi.easy.rmc.param.MemberInfoParam;
 
 /**
@@ -55,5 +56,17 @@ public interface MemberService {
    */
 
   MallMember pullMember(MemberInfoParam memberInfoParam) throws RYServiceException;
+
+  /**
+   * 
+   * register:注册. <br/>
+   * 
+   * @author bin.zhang
+   * @param electronicMemberParam
+   * @throws RYServiceException
+   * @since JDK 1.6
+   */
+  void register(ElectronicMemberParam electronicMemberParam) throws RYServiceException;
+
 
 }

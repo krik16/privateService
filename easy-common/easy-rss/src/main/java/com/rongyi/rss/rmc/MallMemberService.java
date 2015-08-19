@@ -80,4 +80,18 @@ public interface MallMemberService {
    */
   MallMember queryById(Integer id) throws RYServiceException, MallMemberNotFoundException;
 
+  /**
+   * 
+   * registerEMemberAndBindMallMember:注册电子会员同时与实体会员绑定 <br/>
+   * 
+   * @author bin.zhang
+   * @param mallMember
+   * @return
+   * @throws RYServiceException
+   * @throws MallMemberNotFoundException
+   * @since JDK 1.6
+   */
+  void registerEMemberAndBindMallMember(MallMember mallMember) throws RYServiceException,
+      MallMemberNotFoundException;
+
 }

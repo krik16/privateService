@@ -22,7 +22,7 @@ public class MemberInfoParam extends BaseParam implements Serializable {
   /** 会员编号 */
   private String memberNo;
   /** 手机号 */
-  private String mobile;
+  private String phone;
   private String mallId;
   /**
    * 模块id 0000（终端机），0001（app），0002（微信），0003-9999（其他，包括发码，活动等）
@@ -34,6 +34,16 @@ public class MemberInfoParam extends BaseParam implements Serializable {
    * 类型:手机号,会员号,微信
    */
   private ChannelType channelType;
+
+
+
+  public String getPhone() {
+    return phone;
+  }
+
+  public void setPhone(String phone) {
+    this.phone = phone;
+  }
 
   public SignInType getSignInType() {
     return signInType;
@@ -76,11 +86,5 @@ public class MemberInfoParam extends BaseParam implements Serializable {
     this.memberNo = memberNo;
   }
 
-  public String getMobile() {
-    return mobile;
-  }
 
-  public void setMobile(String mobile) {
-    this.mobile = mobile;
-  }
 }
