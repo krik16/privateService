@@ -136,6 +136,7 @@ function exportExcel() {
 function getParamsJson(){
 	  var currpage = $('#currpage').val();
 	  var tradeNo = $('#tradeNo').val();
+	  var payNo =  $('#payNo').val();
 	  var orderNo = $('#orderNo').val();
 	  var mallName = $("input[name='mallId']").val();
 	  var shopName = $("input[name='shopId']").val();
@@ -152,6 +153,7 @@ function getParamsJson(){
 	 var paramsJson = {
 		        'currpage': currpage,
 		        'tradeNo':tradeNo,
+		        'payNo':payNo,
 		        'orderNo':orderNo,
 		        'mallName':mallName,
 		        'shopName':shopName,
