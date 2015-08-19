@@ -12,8 +12,14 @@ import java.util.List;
 public class MerchantRoleVO implements Serializable{
 	private Integer type;
 	private Integer identity;
+	/** 商场的mongoId */
+	private String mallId;
 	private String mallName;
+	/** 集团的mongoId */
+	private String groupId;
 	private String groupName;
+	/** 品牌的mongoId */
+	private String brandId;
 	private String brandName;
 	private List<String> auths;
 	
@@ -108,6 +114,24 @@ public class MerchantRoleVO implements Serializable{
 	}
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+	public String getMallId() {
+		return mallId;
+	}
+	public void setMallId(String mallId) {
+		this.mallId = mallId;
+	}
+	public String getGroupId() {
+		return groupId;
+	}
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
+	}
+	public String getBrandId() {
+		return brandId;
+	}
+	public void setBrandId(String brandId) {
+		this.brandId = brandId;
 	}
 	
 }
