@@ -54,13 +54,4 @@ public class PageVO implements Serializable{
 		}
 	}
 
-	public void setTotalPageByTotalRecord(int totalRecord) {
-		this.totalPage = (int) Math.floor((totalRecord * 1.0d) / this.pageSize);
-		if (totalRecord % this.pageSize != 0) {
-			this.totalPage++;
-		}
-		if (this.totalPage == 0) {
-			this.totalPage = 1;
-		}
-	}
 }
