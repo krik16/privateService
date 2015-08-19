@@ -11,4 +11,5 @@ public interface IGroupService {
 
 	GroupsInfo searchGroupById(Integer id);
 	
+	GroupsInfo getByMongoId(String mongoId) throws Exception;
 }

@@ -52,8 +52,9 @@ public interface IUserInfoService {
 	 * @param userParam
 	 * @return
 	 * @throws MallShopException
+	 * @throws Exception 
 	 */
-	boolean insertUserInfo (UserManagerParam userParam)throws MallShopException;
+	boolean insertUserInfo (UserManagerParam userParam)throws MallShopException, Exception;
 	
 	/**
 	 * 修改商家账号
