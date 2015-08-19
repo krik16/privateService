@@ -129,9 +129,9 @@ public class RpbServiceImpl implements IRpbService {
 	public boolean paySuccessNotify(String orderNo, Double totalAmount) {
 		LOGGER.info("参数：ordeNo=" + orderNo + ",totalAmount=" + totalAmount);
 		if (totalAmount == 0) {
-			List<PaymentEntity> list =paymentService.selectByOrderNum(orderNo,Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
-			//TODO 兼容老版本APP0元支付不走签名，在下个强制更新版本后此代码需删除
-			if(list.isEmpty()){
+			List<PaymentEntity> list = paymentService.selectByOrderNum(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
+			// TODO 兼容老版本APP0元支付不走签名，在下个强制更新版本后此代码需删除
+			if (list.isEmpty()) {
 				insertZeroOrder(orderNo, totalAmount);
 				LOGGER.info("老版本0元商品购买，发送通知,orderNo-->" + orderNo);
 			}
@@ -150,8 +150,8 @@ public class RpbServiceImpl implements IRpbService {
 				payChannel = PaymentEventType.APP;
 				QueryOrderParamVO queryOrderParamVO = aliPaymentService.queryOrder(null, paymentEntity.getPayNo());
 				payAccount = queryOrderParamVO.getBuyer_email();
-			}else{
-				
+			} else {
+
 			}
 			List<PaySuccessResponse> responseList = paymentLogInfoService.paySuccessToMessage(paymentEntity.getPayNo(), payAccount, orderNums, paymentEntity.getOrderType(), payChannel);
 			if (validateResponseList(responseList)) {
@@ -161,7 +161,6 @@ public class RpbServiceImpl implements IRpbService {
 		}
 		return result;
 	}
-	
 
 	/**
 	 * @Description: 
@@ -193,7 +192,6 @@ public class RpbServiceImpl implements IRpbService {
 
 		paymentLogInfoService.paySuccessToMessage(paymentEntityVO.getPayNo(), null, orderNo, Constants.ORDER_TYPE.ORDER_TYPE_1, paymentEntityVO.getPayChannel().toString());
 	}
-
 
 	/**
 	 * @Description: 查询订单在第三方交易系统中状态
@@ -241,11 +239,16 @@ public class RpbServiceImpl implements IRpbService {
 	public QueryOrderParamVO queryOrder(Map<String, Object> map) {
 		String tradeNo = (map.get("tradeNo") != null) ? map.get("tradeNo").toString() : null;
 		String payNo = (map.get("payNo") != null) ? map.get("payNo").toString() : null;
-		return aliPaymentService.queryOrder(tradeNo,payNo);
+		return aliPaymentService.queryOrder(tradeNo, payNo);
 	}
 
 	@Override
 	public List<PayAccountUseTotal> selectPayAccountUseTotal(Map<String, Object> map) {
 		return paymentLogInfoService.selectPayAccountUseTotal(map);
+	}
+
+	@Override
+	public Map<String, Object> getPaySign(MessageEvent event) {
+		return paymentService.getSendMessage(event);
 	}
 }
