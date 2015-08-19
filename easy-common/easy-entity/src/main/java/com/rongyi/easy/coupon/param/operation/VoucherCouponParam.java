@@ -3,10 +3,17 @@ package com.rongyi.easy.coupon.param.operation;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
+import org.springframework.util.Assert;
+
 @SuppressWarnings("serial")
 public class VoucherCouponParam implements Serializable{
 
 //	private static final long serialVersionUID = 1L;
+	
+	private static final Integer CURRENTPAGE = 1;
+	private static final Integer PAGESIZE = 10;
+	private static final String ORDER_BY_CLAUSE = "create_at DESC";
 	
 	private Integer id;
 
@@ -100,16 +107,16 @@ public class VoucherCouponParam implements Serializable{
      */
     private String tabType;
 
-	private Integer currentPage = 1;
+	private Integer currentPage = CURRENTPAGE;
 
-	private Integer pageSize = 10;
+	private Integer pageSize = PAGESIZE;
 
 	private Integer offset;
 
 	/**
 	 * 排序字段
 	 */
-	private String orderByClause;
+	private String orderByClause = ORDER_BY_CLAUSE;
 
 	public Integer getId() {
 		return id;
@@ -124,7 +131,7 @@ public class VoucherCouponParam implements Serializable{
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.name = StringUtils.isNotBlank(name) ? name.trim() : null;
 	}
 
 	public Integer getRelatedType() {
@@ -140,7 +147,7 @@ public class VoucherCouponParam implements Serializable{
 	}
 
 	public void setRelatedTypeId(String relatedTypeId) {
-		this.relatedTypeId = relatedTypeId;
+		this.relatedTypeId = StringUtils.isNotBlank(relatedTypeId) ? relatedTypeId.trim() : null;
 	}
 
 	public Integer getStatus() {
@@ -164,7 +171,7 @@ public class VoucherCouponParam implements Serializable{
 	}
 
 	public void setLv1Id(String lv1Id) {
-		this.lv1Id = lv1Id;
+		this.lv1Id = StringUtils.isNotBlank(lv1Id) ? lv1Id.trim() : null;
 	}
 
 	public String getLv2Id() {
@@ -172,7 +179,7 @@ public class VoucherCouponParam implements Serializable{
 	}
 
 	public void setLv2Id(String lv2Id) {
-		this.lv2Id = lv2Id;
+		this.lv2Id = StringUtils.isNotBlank(lv2Id) ? lv2Id.trim() : null;
 	}
 
 	public Integer getInChannel() {
