@@ -109,7 +109,7 @@ public class UnionController extends BaseController {
 		UnionCouponLogVO unionCouponLogVO = getUnionCouponLogEntity(request, ConstantEnum.UNION_MSG_TXN_CODE_TWO.getValueStr());
 		PaymentLogInfo paymentLogInfo = new PaymentLogInfo(Constants.REPLAY_FLAG.REPLAY_FLAG4, unionCouponLogVO.getMsgCrrltnId(), null, null, DateUtil.getCurrDateTime(), null, null,
 				unionCouponLogVO.getTransCrrltnNo(), unionCouponLogVO.getEncCardNo(), unionCouponLogVO.getPartCardNo(), 0, "1", null, DateUtil.getCurrDateTime(), unionCouponLogVO.getPayNo(), null,
-				unionCouponLogVO.getPayAmt(), "success", 0);
+				unionCouponLogVO.getPayAmt(), "success", 0,0);
 		paymentLogInfoService.insertPayNotify(paymentLogInfo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, PaymentEventType.UNION_PAY);
 		Map<String, Object> responseMap = getSuccessNotifyResponse(unionCouponLogVO);
 		setResponse(response, responseMap);
