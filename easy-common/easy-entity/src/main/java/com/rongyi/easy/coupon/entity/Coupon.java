@@ -140,6 +140,9 @@ public class Coupon implements Serializable {
 
     @Property("sort_index")
     private Integer sortIndex = Integer.valueOf(0);//优惠券排序字段，目前作用是置顶
+    
+    @Property("purchase_type")
+    private Integer purchaseType = Integer.valueOf(0);//购买类型 0正常购买类型 1抢购类型
 
     private List<Integer> afterSaleService = CouponConst.AFTER_SALE_SERVICE;//[1,1,1] 1为支持，0为不支持。第一位：随时退、第二位：过期退 第三位： 免预约
 
@@ -168,6 +171,14 @@ public class Coupon implements Serializable {
 
     public void setCouponType(String couponType) {
         this.couponType = couponType;
+    }
+    
+    public Integer getPurchaseType() {
+        return purchaseType;
+    }
+
+    public void setPurchaseType(Integer purchaseType) {
+        this.purchaseType = purchaseType;
     }
 
     public Integer getTotalCount() {
