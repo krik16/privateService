@@ -15,6 +15,18 @@ public class IntegralCommodityVO extends IntegralCommodity {
   private Integer validStatus;
 
   /**
+   * 大悦城礼品Code
+   */
+  private String joyCode;
+  public String getJoyCode() {
+	return joyCode;
+  }
+
+  public void setJoyCode(String joyCode) {
+	this.joyCode = joyCode;
+  }
+
+/**
    * 审核未通过理由
    */
   private String memo;
