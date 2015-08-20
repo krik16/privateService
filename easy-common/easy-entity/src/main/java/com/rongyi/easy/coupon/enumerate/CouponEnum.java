@@ -40,17 +40,27 @@ public enum CouponEnum {
 	PUBLISH_START(0,"发布开始时间"), PUBLISH_END(1,"发布结束时间"), VALID_START(2,"有效期开始时间"), VALID_END(3,"有效期结束时间"),
 	
 	/** 置顶状态 stickStatus*/
-	UNSTICK(0,"未置顶"), STICKED(1,"已置顶");
+	UNSTICK(0,"未置顶"), STICKED(1,"已置顶"),
 	
 	/** VoucherCouponParam end */
+	
+	/** tab */
+	TAB_ALL("all","全部"), TAB_STICKED("sticked","已置顶");
 	
 	
 	private Integer value;
 	
 	private String message;
 	
+	private String valueStr;
+	
 	private CouponEnum(Integer value, String message) {
 		this.value = value;
+		this.message = message;
+	}
+	
+	private CouponEnum(String valueStr, String message) {
+		this.valueStr = valueStr;
 		this.message = message;
 	}
 	
@@ -61,4 +71,13 @@ public enum CouponEnum {
 	public String getMessage() {
 		return message;
 	}
+
+	public String getValueStr() {
+		return valueStr;
+	}
+
+	public void setValueStr(String valueStr) {
+		this.valueStr = valueStr;
+	}
+	
 }
