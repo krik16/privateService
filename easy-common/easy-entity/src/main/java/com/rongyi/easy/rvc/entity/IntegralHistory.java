@@ -13,7 +13,7 @@ public class IntegralHistory implements java.io.Serializable {
   private Long id;
 
   /** 会员表member:ID */
-  private Long memberId;
+  private String memberId;
 
   /** 积分数量：>0加，<0减 */
   private Integer integralNum;
@@ -99,7 +99,7 @@ public class IntegralHistory implements java.io.Serializable {
    * 
    * @return memberId
    */
-  public Long getMemberId() {
+  public String getMemberId() {
     return memberId;
   }
 
@@ -108,7 +108,7 @@ public class IntegralHistory implements java.io.Serializable {
    * 
    * @param memberId
    */
-  public void setMemberId(Long memberId) {
+  public void setMemberId(String memberId) {
     this.memberId = memberId;
   }
 

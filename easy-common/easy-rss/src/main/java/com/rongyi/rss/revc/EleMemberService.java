@@ -129,13 +129,9 @@ public interface EleMemberService {
 
 
   /**
-   * bind:(这里用一句话描述这个方法的作用). <br/>
-   * TODO(这里描述这个方法适用条件 – 可选).<br/>
-   * TODO(这里描述这个方法的执行流程 – 可选).<br/>
-   * TODO(这里描述这个方法的使用方法 – 可选).<br/>
-   * TODO(这里描述这个方法的注意事项 – 可选).<br/>
+   * bind:绑定实体会员卡. <br/>
    * 
-   * @author zeuskingzb
+   * @author bin.zhang
    * @param memberId
    * @param mallMemberId
    * @throws RYServiceException

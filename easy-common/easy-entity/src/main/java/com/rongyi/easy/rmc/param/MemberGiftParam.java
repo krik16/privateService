@@ -15,7 +15,7 @@ public class MemberGiftParam extends BaseParam implements Serializable {
   /**
    * 手机号
    */
-  private String mobile;
+  private String phone;
   /**
    * 数量
    */
@@ -168,12 +168,13 @@ public class MemberGiftParam extends BaseParam implements Serializable {
     this.memberNo = memberNo;
   }
 
-  public String getMobile() {
-    return mobile;
+
+  public String getPhone() {
+    return phone;
   }
 
-  public void setMobile(String mobile) {
-    this.mobile = mobile;
+  public void setPhone(String phone) {
+    this.phone = phone;
   }
 
   public Integer getPageSize() {
