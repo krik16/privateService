@@ -1,7 +1,14 @@
 package com.rongyi.easy.coupon.entity.mysql;
 
-public class CouponShop {
-    private Integer id;
+import java.io.Serializable;
+
+public class CouponShop implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
 
     /**
      * 卡券id
