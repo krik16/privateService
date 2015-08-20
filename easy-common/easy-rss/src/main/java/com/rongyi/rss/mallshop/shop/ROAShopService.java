@@ -120,4 +120,12 @@ public interface ROAShopService{
 	 * @throws Exception
 	 */
 	public ShopInfoVO getShopInfoByShopMId(String shopMId)  throws Exception;
+	
+	/**
+	 * 根据userId获取店铺的mongoId
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+	public String selectShopMidByUserId(Integer userId)  throws Exception;
 }
