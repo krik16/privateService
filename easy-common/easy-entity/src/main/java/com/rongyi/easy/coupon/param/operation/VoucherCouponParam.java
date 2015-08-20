@@ -292,7 +292,7 @@ public class VoucherCouponParam implements Serializable{
 	}
 
 	public void setProvinceId(String provinceId) {
-		this.provinceId = provinceId;
+		this.provinceId = StringUtils.isNotBlank(provinceId) ? provinceId.trim() : null;
 	}
 
 	public String getCityId() {
@@ -300,7 +300,7 @@ public class VoucherCouponParam implements Serializable{
 	}
 
 	public void setCityId(String cityId) {
-		this.cityId = cityId;
+		this.cityId = StringUtils.isNotBlank(cityId) ? cityId.trim() : null;
 	}
 
 	@Override
