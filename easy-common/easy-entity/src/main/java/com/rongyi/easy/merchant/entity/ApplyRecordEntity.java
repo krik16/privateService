@@ -22,7 +22,7 @@ public class ApplyRecordEntity implements Serializable{
     private String proposerAccount;
     
     /** 创建人账号ID **/
-    private Long createAccountId;
+    private int createAccountId;
     
     /** 创建人账号  **/
     private String createAccount;
@@ -59,11 +59,11 @@ public class ApplyRecordEntity implements Serializable{
         this.proposerAccount = proposerAccount;
     }
 
-	public Long getCreateAccountId() {
+	public int getCreateAccountId() {
 		return createAccountId;
 	}
 
-	public void setCreateAccountId(Long createAccountId) {
+	public void setCreateAccountId(int createAccountId) {
 		this.createAccountId = createAccountId;
 	}
 
