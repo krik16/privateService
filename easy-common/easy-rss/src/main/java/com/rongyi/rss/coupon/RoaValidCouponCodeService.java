@@ -52,9 +52,5 @@ public interface RoaValidCouponCodeService {
      */
     public String getUserMobile(String couponCode);
     
-    /**
-     * 根据couponcode获取买家手机号
-     */
-    public String getUserMobile(String couponCode);
     
 }
