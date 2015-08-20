@@ -45,10 +45,12 @@ public interface RoaValidCouponCodeService {
      * 提供给手机端 查询未使用券码的接口
      */
     public Map<String,Object> unusedCodeNum(String couponCode, Integer codeNum);
-    
     /**
-     * 根据couponcode获取买家手机号
+     * 根据couponCode查用户手机号码
+     * @param couponCode
+     * @return
      */
     public String getUserMobile(String couponCode);
+    
     
 }

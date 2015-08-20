@@ -146,7 +146,8 @@ public enum CodeEnum {
     ERROR_DEBIT_NOTE("-9000","佣金小票上传失败，请重新上传"),
     ERROR_DEBIT_NOTE_STAUTS("-9001","佣金小票审核中，无法再次上传"),
     ERROR_NO_VALIDHISTORY("-9002","没有券码核销记录"),
-
+    ERROR_SWEEP_CODE("-9003","扫码验券失败"),
+    
     ERROR_LOGIN_IN_INVALID("-2000","登录出错"),
     ERROR_UN_LOGIN("-10000", "尚未登陆或登陆出错，请重新登录"),
     ERROR_TAG_NUM_OUT("-10001", "标签数目超过最大数目")
