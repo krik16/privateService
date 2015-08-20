@@ -46,4 +46,9 @@ public interface RoaValidCouponCodeService {
      */
     public Map<String,Object> unusedCodeNum(String couponCode, Integer codeNum);
     
+    /**
+     * 根据couponcode获取买家手机号
+     */
+    public String getUserMobile(String couponCode);
+    
 }
