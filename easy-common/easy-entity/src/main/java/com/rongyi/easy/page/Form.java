@@ -26,4 +26,8 @@ public class Form implements Serializable{
     public void setAsName(String asName) {
         this.asName = asName;
     }
+
+    public Form(String formName) {
+        this.formName = formName;
+    }
 }

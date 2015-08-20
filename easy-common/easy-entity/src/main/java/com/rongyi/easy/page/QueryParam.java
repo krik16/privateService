@@ -22,6 +22,7 @@ public class QueryParam {
      */
     private List<QueryOrder> queryOrders;
 
+
     /**
      * 查询的表集合
      */
@@ -108,6 +109,12 @@ public class QueryParam {
         this.queryOrders = queryOrders;
         this.currentPage = currentPage;
         this.pageSize = pageSize;
+    }
+    public QueryParam(List<QueryFilter> queryFilters, List<QueryOrder> queryOrders, List<Form> fromList) {
+
+        this.queryFilters = queryFilters;
+        this.queryOrders = queryOrders;
+        this.fromList = fromList;
     }
 
     @Override

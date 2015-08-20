@@ -55,4 +55,11 @@ public class StatisticsCountVO implements Serializable{
     public void setOver(Integer over) {
         this.over = over;
     }
+
+    public StatisticsCountVO(Integer total, Integer done, Integer wait, Integer over) {
+        this.total = total;
+        this.done = done;
+        this.wait = wait;
+        this.over = over;
+    }
 }

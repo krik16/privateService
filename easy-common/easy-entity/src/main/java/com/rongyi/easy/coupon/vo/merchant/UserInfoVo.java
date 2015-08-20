@@ -1,5 +1,7 @@
 package com.rongyi.easy.coupon.vo.merchant;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 
 /**
@@ -10,11 +12,11 @@ import java.io.Serializable;
 public class UserInfoVo implements Serializable{
     private Integer id;
     private Integer Identity;
-    private Integer shopId;
-    private Integer mallId;
-    private Integer groupId;
-    private Integer brandId;
-    private Integer branchCompanyId;
+    private String shopId;
+    private String  mallId;
+    private String groupId;
+    private String brandId;
+    private String branchCompanyId;
 
     public Integer getId() {
         return id;
@@ -32,43 +34,48 @@ public class UserInfoVo implements Serializable{
         Identity = identity;
     }
 
-    public Integer getShopId() {
+    public String getShopId() {
         return shopId;
     }
 
-    public void setShopId(Integer shopId) {
+    public void setShopId(String shopId) {
         this.shopId = shopId;
     }
 
-    public Integer getMallId() {
+    public String getMallId() {
         return mallId;
     }
 
-    public void setMallId(Integer mallId) {
+    public void setMallId(String mallId) {
         this.mallId = mallId;
     }
 
-    public Integer getGroupId() {
+    public String getGroupId() {
         return groupId;
     }
 
-    public void setGroupId(Integer groupId) {
+    public void setGroupId(String groupId) {
         this.groupId = groupId;
     }
 
-    public Integer getBrandId() {
+    public String getBrandId() {
         return brandId;
     }
 
-    public void setBrandId(Integer brandId) {
+    public void setBrandId(String brandId) {
         this.brandId = brandId;
     }
 
-    public Integer getBranchCompanyId() {
+    public String getBranchCompanyId() {
         return branchCompanyId;
     }
 
-    public void setBranchCompanyId(Integer branchCompanyId) {
+    public void setBranchCompanyId(String branchCompanyId) {
         this.branchCompanyId = branchCompanyId;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).append("id", id).append("Identity", Identity).append("shopId", shopId).append("mallId", mallId).append("groupId", groupId).append("brandId", brandId).append("branchCompanyId", branchCompanyId).toString();
     }
 }
