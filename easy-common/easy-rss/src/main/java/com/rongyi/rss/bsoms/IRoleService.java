@@ -7,6 +7,7 @@ import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.bsoms.entity.BAuthorities;
 import com.rongyi.easy.bsoms.entity.BRoles;
 import com.rongyi.easy.bsoms.vo.MerchantRoleVO;
+import com.rongyi.easy.rmmm.param.user.UserManagerParam;
 
 public interface IRoleService {
 	Integer saveOrUpdate(Map<String, Object> paramsMap,List<String> auths,Integer optId) throws Exception;
@@ -25,4 +26,11 @@ public interface IRoleService {
 	 * @return
 	 */
 	List<BAuthorities> getAuthoritiesByRoleId(Integer id);
+	
+	/**
+	 * 根据param条件获取角色
+	 * @param userParam
+	 * @return
+	 */
+	BRoles getBRoleByParam(UserManagerParam userParam);
 }
