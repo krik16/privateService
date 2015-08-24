@@ -67,6 +67,8 @@ public class OldCouponDetail implements Serializable {
 
     private int buyedNum;//购买数量
 
+    private List<Integer> afterSaleService;
+
     public int getBuyedNum() {
         return buyedNum;
     }
@@ -179,10 +181,12 @@ public class OldCouponDetail implements Serializable {
         this.thumbnail = thumbnail;
     }
 
+    @Deprecated
     public List<OldUserCode> getMyActivityList() {
         return myActivityList;
     }
 
+    @Deprecated
     public void setMyActivityList(List<OldUserCode> myActivityList) {
         this.myActivityList = myActivityList;
     }
@@ -266,6 +270,12 @@ public class OldCouponDetail implements Serializable {
 	public void setRefundNum(int refundNum) {
 		this.refundNum = refundNum;
 	}
-    
-    
+
+    public List<Integer> getAfterSaleService() {
+        return afterSaleService;
+    }
+
+    public void setAfterSaleService(List<Integer> afterSaleService) {
+        this.afterSaleService = afterSaleService;
+    }
 }
