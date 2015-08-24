@@ -94,5 +94,5 @@ public interface PCWebPageAlipayService {
 	 * @return
 	 */
 	public abstract String getBatchNo(String payNo);
-
+	
 }

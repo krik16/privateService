@@ -620,4 +620,12 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 			insert(refundPaymentEntity);
 		}
 	}
+
+	@Override
+	public List<PaymentEntity> selectByBatchNoAndStatus(String batchNo, Integer status) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("batchNo", batchNo);
+		map.put("status", status);
+		return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectByBatchNoAndStatus", map);
+	}
 }
