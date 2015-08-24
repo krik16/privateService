@@ -87,9 +87,34 @@ public class VoucherCouponVO implements Serializable {
     private List<CouponRejectRecord> rejectRecordList;
     
     /**
-     * 已置顶代金券
+     * 排序id
      */
-    private CouponSort couponSort;
+    private Integer couponSortId;
+    
+    /**
+     * 省id
+     */
+    private String provinceId;
+    
+    /**
+     * 省名
+     */
+    private String provinceName;
+    
+    /**
+     * 城市id
+     */
+    private String cityId;
+    
+    /**
+     * 城市名
+     */
+    private String cityName;
+    
+    /**
+     * 排序值
+     */
+    private Integer sortIdx;
 
 	public Integer getId() {
 		return id;
@@ -210,13 +235,53 @@ public class VoucherCouponVO implements Serializable {
 	public void setRejectRecordList(List<CouponRejectRecord> rejectRecordList) {
 		this.rejectRecordList = rejectRecordList;
 	}
-	
-	public CouponSort getCouponSort() {
-		return couponSort;
+
+	public Integer getCouponSortId() {
+		return couponSortId;
 	}
 
-	public void setCouponSort(CouponSort couponSort) {
-		this.couponSort = couponSort;
+	public void setCouponSortId(Integer couponSortId) {
+		this.couponSortId = couponSortId;
+	}
+
+	public String getProvinceId() {
+		return provinceId;
+	}
+
+	public void setProvinceId(String provinceId) {
+		this.provinceId = provinceId;
+	}
+
+	public String getProvinceName() {
+		return provinceName;
+	}
+
+	public void setProvinceName(String provinceName) {
+		this.provinceName = provinceName;
+	}
+
+	public String getCityId() {
+		return cityId;
+	}
+
+	public void setCityId(String cityId) {
+		this.cityId = cityId;
+	}
+
+	public String getCityName() {
+		return cityName;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+
+	public Integer getSortIdx() {
+		return sortIdx;
+	}
+
+	public void setSortIdx(Integer sortIdx) {
+		this.sortIdx = sortIdx;
 	}
 
 	@Override
@@ -228,9 +293,10 @@ public class VoucherCouponVO implements Serializable {
 				.append(", relatedType=").append(relatedType).append(", status=").append(status)
 				.append(", publishStatus=").append(publishStatus).append(", stickStatus=").append(stickStatus)
 				.append(", isThird=").append(isThird).append(", lv1Name=").append(lv1Name).append(", lv2Name=")
-				.append(lv2Name).append(", rejectRecordList=").append(rejectRecordList).append(", couponSort=")
-				.append(couponSort).append("]");
+				.append(lv2Name).append(", rejectRecordList=").append(rejectRecordList).append(", couponSortId=")
+				.append(couponSortId).append(", provinceId=").append(provinceId).append(", provinceName=")
+				.append(provinceName).append(", cityId=").append(cityId).append(", cityName=").append(cityName)
+				.append(", sortIdx=").append(sortIdx).append("]");
 		return builder.toString();
 	}
-
 }
