@@ -111,6 +111,7 @@ public class CouponOrderItem implements Serializable {
 
     }
 
+
     public CouponOrderItem(Long orderId, String orderNo, String couponId, String name, String couponType, Double unitPrice,
                            Integer unitCount, Date updateTime,
                            Date saleStartTime, Date saleEndTime, Date startTime, Date endTime, String thumbnail, Double refundAmount) {
