@@ -33,4 +33,7 @@ public interface IRoleService {
 	 * @return
 	 */
 	BRoles getBRoleByParam(UserManagerParam userParam);
+
+	boolean updateAccountStatus(Integer id, int status, String reason,
+			Integer userId);
 }

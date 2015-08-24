@@ -31,6 +31,7 @@ public class MerchantRoleVO implements Serializable{
 	private String updateBy;
 	private Date updateTime;
 	private String stopReason;
+	private Date stopTime;
 	public Integer getType() {
 		return type;
 	}
@@ -132,6 +133,12 @@ public class MerchantRoleVO implements Serializable{
 	}
 	public void setBrandId(String brandId) {
 		this.brandId = brandId;
+	}
+	public Date getStopTime() {
+		return stopTime;
+	}
+	public void setStopTime(Date stopTime) {
+		this.stopTime = stopTime;
 	}
 	
 }

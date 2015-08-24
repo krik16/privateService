@@ -1,5 +1,6 @@
 package com.rongyi.rss.bsoms;
 
+import java.util.List;
 import java.util.Map;
 
 import com.rongyi.core.common.PagingVO;
@@ -7,6 +8,7 @@ import com.rongyi.easy.bsoms.entity.UserInfo;
 import com.rongyi.easy.bsoms.vo.BusinessAccountVO;
 import com.rongyi.easy.mallshop.MallShopException;
 import com.rongyi.easy.rmmm.param.user.UserManagerParam;
+import com.rongyi.easy.va.vo.VirtualAccountVO;
 
 /**
  * 账户用户相关
@@ -36,7 +38,7 @@ public interface IUserInfoService {
 	 * 根据id修改账户状态：启用/停用
 	 * @param paraMap
 	 */
-	void updateAccountStatus(int id, int isSuspended, String stopReason);
+	boolean updateAccountStatus(int id, int accountStatus, String stopReason, Integer userId);
 	
 	UserInfo getUserInfoById(Integer id);
 
@@ -64,4 +66,21 @@ public interface IUserInfoService {
 	 * @throws Exception
 	 */
 	public Boolean updateMerAccountInfo(UserManagerParam param,Integer merUserId) throws Exception;
+	
+	/**
+	 * 虚拟账户查询
+	 * 
+	 * @date 2015年8月24日 
+	 * @param userId
+	 *            用户id
+	 * @return
+	 */
+	public VirtualAccountVO queryVirtualAccount(String userId);
+	
+	/**
+	 * 获取角色下的所有账户（）
+	 * @param roleId
+	 * @return
+	 */
+	public List<Integer> getAllUserIdByRole(Integer roleId);
 }
