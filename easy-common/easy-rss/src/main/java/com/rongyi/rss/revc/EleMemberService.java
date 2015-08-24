@@ -5,6 +5,7 @@ import java.util.Map;
 import com.rongyi.core.common.Page;
 import com.rongyi.core.common.PageList;
 import com.rongyi.core.framework.exception.RYServiceException;
+import com.rongyi.easy.domain.member.IntegralChangeAction;
 import com.rongyi.easy.revc.entity.EMember;
 import com.rongyi.easy.revc.exception.EMemberIntegralNotEnoughException;
 import com.rongyi.easy.revc.exception.EMemberNotFoundException;
@@ -71,7 +72,7 @@ public interface EleMemberService {
 
   /**
    * 
-   * getEMemberInfoByMallId:商场会员查询. <br/>
+   * getEMemberInfoByMallId:电子会员查询. <br/>
    * 
    * @author bin.zhang
    * @param mallId
@@ -83,15 +84,18 @@ public interface EleMemberService {
 
   /**
    * 
-   * updateEMemberIntegrals:积分变动. <br/>
+   * updateEMemberIntegrals:积分变更. <br/>
    * 
    * @author bin.zhang
    * @param eMember
    * @param integral
+   * @return
    * @throws RYServiceException
+   * @throws EMemberIntegralNotEnoughException
    * @since JDK 1.6
    */
-  void updateEMemberIntegrals(EMember eMember, Integer integral) throws RYServiceException,
+  int updateEMemberIntegrals(EMember eMember, Integer integral,
+      IntegralChangeAction integralChangeAction) throws RYServiceException,
       EMemberIntegralNotEnoughException;
 
   /**

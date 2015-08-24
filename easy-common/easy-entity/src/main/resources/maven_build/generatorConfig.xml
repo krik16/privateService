@@ -27,9 +27,7 @@
 <!-- 			<property name="rootInterface" value="com.rongyi.merchant.biz.mapper.BaseMapper"/> -->
 		</javaClientGenerator>
 		
-		<table tableName="id_card" domainObjectName="domain.member.IDCard"></table>
-		<table tableName="mall_member" domainObjectName="domain.member.MallMember"></table>
-		<table tableName="e_member" domainObjectName="domain.member.EMember"></table>
+		<table tableName="integral_history_add" domainObjectName="domain.member.IntegralHistoryAdd"></table>
 
 	</context>
 </generatorConfiguration>
