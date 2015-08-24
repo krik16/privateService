@@ -11,6 +11,7 @@ package com.rongyi.rss.rpb;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.PayAccountUseTotal;
 import com.rongyi.easy.rpb.vo.QueryOrderParamVO;
@@ -57,7 +58,7 @@ public interface IRpbService {
 	 * @Author:  柯军
 	 * @datetime:2015年7月30日上午9:48:46
 	 **/
-	public boolean paySuccessNotify(String orderNo,Double totalAmount);
+	public Map<String,Object> paySuccessNotify(String orderNo,Double totalAmount);
 	
 	
 	/**	
@@ -87,4 +88,13 @@ public interface IRpbService {
 	 * @datetime:2015年8月12日上午11:46:46
 	 **/
 	public List<PayAccountUseTotal> selectPayAccountUseTotal(Map<String, Object> map);
+	
+	/**	
+	 * @Description: 获取支付签名 
+	 * @param event
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年8月24日下午5:46:02
+	 **/
+	public Map<String, Object> getPaySign(MessageEvent event);
 }

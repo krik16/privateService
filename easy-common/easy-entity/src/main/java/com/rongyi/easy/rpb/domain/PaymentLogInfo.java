@@ -19,7 +19,7 @@ public class PaymentLogInfo implements Serializable {
 	}
 
 	public PaymentLogInfo(Integer replayFlag, String notifyId, String notifyType, String signType, Date notifyTime, String request_token, String sign, String trade_no, String buyer_id,
-			String buyer_email, Integer buyer_type, String tradeMode, String transactionId, Date timeEnd, String outTradeNo, Date request_time, double total_fee, String result, Integer eventType) {
+			String buyer_email, Integer buyer_type, String tradeMode, String transactionId, Date timeEnd, String outTradeNo, Date request_time, double total_fee, String result, Integer eventType,Integer tradeType) {
 		super();
 		this.replayFlag = replayFlag;
 		this.notifyId = notifyId;
@@ -40,6 +40,7 @@ public class PaymentLogInfo implements Serializable {
 		this.total_fee = total_fee;
 		this.result = result;
 		this.eventType = eventType;
+		this.tradeType = tradeType;
 	}
 
 	// 回复标志
@@ -93,6 +94,11 @@ public class PaymentLogInfo implements Serializable {
 	 * 0:手机APP支付,1:手机网页支付,2:PC端付款给商家，3:PC端退款给买家
 	 */
 	private Integer eventType;
+	
+	/**
+	 * 交易类型（同paymentOrder定义相同）
+	 */
+	private Integer tradeType;
 
 	public Integer getId() {
 		return id;
@@ -262,4 +268,13 @@ public class PaymentLogInfo implements Serializable {
 		this.deleteStatus = deleteStatus;
 	}
 
+	public Integer getTradeType() {
+		return tradeType;
+	}
+
+	public void setTradeType(Integer tradeType) {
+		this.tradeType = tradeType;
+	}
+
+	
 }
