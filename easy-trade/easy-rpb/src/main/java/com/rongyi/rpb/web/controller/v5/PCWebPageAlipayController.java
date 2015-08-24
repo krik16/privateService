@@ -259,6 +259,7 @@ public class PCWebPageAlipayController extends BaseController {
 						paymentLogInfo.setTimeEnd(DateUtil.getCurrDateTime());
 						paymentLogInfo.setBuyer_type(0);// 买家账号
 						paymentLogInfo.setEventType(3);
+						paymentLogInfo.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
 						PaymentEntity refundPaymentEntity = null;
 						refundPaymentEntity =  getPaymentByPayTradeNo(paymentLogInfo.getTrade_no(),batch_no);
 						if (refundPaymentEntity != null) {

@@ -111,7 +111,7 @@ public interface PaymentService {
 
 	public abstract List<PaymentEntity> selectByOrderNum(String orderNum,Integer tradeType);
 
-	public abstract PaymentEntity selectByOrderNumAndTradeType(String orderNum, int tradeType, int status);
+	public abstract PaymentEntity selectByOrderNumAndTradeType(String orderNum, int tradeType, Integer status);
 	
 
 	public abstract int updateByPrimaryKeySelective(PaymentEntity paymentEntity);
@@ -165,15 +165,12 @@ public interface PaymentService {
 	/**
 	 * @Description: 验证是否是重复付款
 	 * @param payNo
-	 * @param oldPaychannel
-	 *            已存在支付记录支付方式
-	 * @param newOldPayChannel
-	 *            收到新支付通知中的支付方式
+	 * @param newPayChannel收到新支付通知中的支付方式
 	 * @return
 	 * @Author: 柯军
 	 * @datetime:2015年8月17日上午11:24:04
 	 **/
-	public PaymentEntity validateRepeatPay(String payNo, Integer oldPaychannel, Integer newPayChannel);
+	public PaymentEntity validateRepeatPay(String payNo,Integer newPayChannel);
 	
 
 	/**
@@ -194,4 +191,25 @@ public interface PaymentService {
 	 * @datetime:2015年8月24日上午9:19:03
 	 **/
 	public abstract List<PaymentEntity> selectByBatchNoAndStatus(String batchNo,Integer status);
+	
+	/**	
+	 * @Description: 将paymentEvent中的付款方式转换成数据库中存储方式 
+	 * @param payChannel
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年8月24日下午4:05:44
+	 **/
+	public abstract Integer getRealPayChannel(Integer payChannel);
+	
+	/**	
+	 * @Description: 更新支付订单状态 
+	 * @param payNo
+	 * @param type
+	 * @param status
+	 * @param payChannel
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年8月24日下午4:14:11
+	 **/
+	public List<PaymentEntity> updateListStatus(String payNo, Integer type, Integer status,Integer payChannel);
 }

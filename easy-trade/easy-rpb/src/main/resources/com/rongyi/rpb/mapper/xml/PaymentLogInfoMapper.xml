@@ -27,8 +27,9 @@
 		<result column="eventType" property="event_type" jdbcType="INTEGER" />
 		<result column="deleteStatus" property="delete_status"
 			jdbcType="INTEGER" />
+		<result column="tradeType" property="trade_type" jdbcType="INTEGER" />
 	</resultMap>
-	
+
 	<resultMap id="PayAccountUserTotalMap" type="com.rongyi.easy.rpb.vo.PayAccountUseTotal">
 		<result column="pay_account" property="payAccount" jdbcType="VARCHAR" />
 		<result column="pay_type" property="payType" jdbcType="VARCHAR" />
@@ -40,7 +41,7 @@
 		trade_mode,
 		transaction_id,out_trade_no,time_end,replayFlag
 		,request_token,trade_no, result,
-		request_time,total_fee,buyer_id,buyer_email,buyer_type,event_type
+		request_time,total_fee,buyer_id,buyer_email,buyer_type,event_type,trade_type
 		<!-- ,delete_status -->
 	</sql>
 
@@ -109,7 +110,10 @@
 				event_type,
 			</if>
 			<if test="deleteStatus != null">
-				delete_status
+				delete_status,
+			</if>
+			<if test="tradeType != null">
+				trade_type
 			</if>
 
 		</trim>
@@ -173,7 +177,10 @@
 				#{eventType,jdbcType=INTEGER},
 			</if>
 			<if test="deleteStatus != null">
-				#{deleteStatus,jdbcType=INTEGER}
+				#{deleteStatus,jdbcType=INTEGER},
+			</if>
+			<if test="tradeType != null">
+				#{tradeType,jdbcType=INTEGER}
 			</if>
 		</trim>
 	</insert>
@@ -214,17 +221,20 @@
 		#{deleteStatus,jdbcType=INTEGER}
 		where id =#{id,jdbcType=INTEGER}
 	</update>
-	
+
 	<select id="selectPayAccountUseTotal" resultMap="PayAccountUserTotalMap"
 		parameterType="java.lang.String">
-		select buyer_email as pay_account,pay_channel as pay_type,COUNT(buyer_email) as count from payment_event pe
-		left join payment_order po ON pe.out_trade_no = po.pay_no
-		where (buyer_email IS NOT null and buyer_email != '')
+		select buyer_email as pay_account,pay_channel as
+		pay_type,COUNT(buyer_email) as count from payment_event pe
+		left join
+		payment_order po ON pe.out_trade_no = po.pay_no
+		where (buyer_email IS
+		NOT null and buyer_email != '')
 		GROUP BY buyer_email
 		<if test="count != null">
-		HAVING count >= #{count,jdbcType=INTEGER}
-		</if> 
-		order by count desc 
+			HAVING count >= #{count,jdbcType=INTEGER}
+		</if>
+		order by count desc
 	</select>
 
 </mapper>

@@ -100,7 +100,8 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
 		insertGetId(paymentLogInfo);
 		List<PaymentEntity> list = paymentService.selectByPayNoAndTradeType(paymentLogInfo.getOutTradeNo(), tradeType);
 		if (list != null && !list.isEmpty() && list.get(0).getStatus() != Constants.PAYMENT_STATUS.STAUS2) {
-			paymentService.updateListStatusBypayNo(paymentLogInfo.getOutTradeNo(), tradeType, status);// 修改付款单状态
+			Integer realPayChannel = paymentService.getRealPayChannel(Integer.valueOf(payChannel));
+			paymentService.updateListStatus(paymentLogInfo.getOutTradeNo(), tradeType, status, realPayChannel);// 修改付款单状态
 			String orderNums = paymentService.getOrderNumStrsByPayNo(paymentLogInfo.getOutTradeNo());
 			paySuccessToMessage(paymentLogInfo.getOutTradeNo(), paymentLogInfo.getBuyer_email(), orderNums, list.get(0).getOrderType(), payChannel);
 		}
@@ -123,7 +124,7 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
 				MessageEvent responseEvent = rpbEventService.messageToMessageEvent(response);
 				Map<String, Object> map = (Map<String, Object>) responseEvent.getBody();
 				if (map.get("orderNum") != null && map.get("result") != null) {
-					PaySuccessResponse paySuccessResponse = new PaySuccessResponse((String) map.get("orderNum"), (Boolean) map.get("result"));
+					PaySuccessResponse paySuccessResponse = new PaySuccessResponse((String) map.get("orderNum"), (Map<String, Object>) map.get("result"));
 					responseList.add(paySuccessResponse);
 				}
 			}
@@ -141,6 +142,6 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
 
 	@Override
 	public List<PayAccountUseTotal> selectPayAccountUseTotal(Map<String, Object> map) {
-		return this.getBaseDao().selectListBySql(LOG_NAMESPACE+".selectPayAccountUseTotal", map);
+		return this.getBaseDao().selectListBySql(LOG_NAMESPACE + ".selectPayAccountUseTotal", map);
 	}
 }

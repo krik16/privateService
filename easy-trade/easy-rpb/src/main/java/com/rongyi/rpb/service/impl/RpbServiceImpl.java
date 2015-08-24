@@ -128,46 +128,56 @@ public class RpbServiceImpl implements IRpbService {
 	}
 
 	@Override
-	public boolean paySuccessNotify(String orderNo, Double totalAmount) {
+	public Map<String, Object> paySuccessNotify(String orderNo, Double totalAmount) {
 		LOGGER.info("参数：ordeNo=" + orderNo + ",totalAmount=" + totalAmount);
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("errno", "0");
+		resultMap.put("errMsg", null);
 		if (totalAmount == 0) {
 			List<PaymentEntity> list = paymentService.selectByOrderNum(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
 			// TODO 兼容老版本APP0元支付不走签名，在下个强制更新版本后此代码需删除
 			if (list.isEmpty()) {
 				insertZeroOrder(orderNo, totalAmount);
-				LOGGER.info("老版本0元商品购买，发送通知,orderNo-->" + orderNo);
+				LOGGER.info("老版本0元商品购买,增加0元购买记录,orderNo-->" + orderNo);
 			}
-			return true;
+			return resultMap;
 		}
-		boolean result = false;
-		PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS0);
-		if (paymentEntity == null)
-			return result;
-		if (queryOrderPayStatus(null, paymentEntity.getPayNo(), paymentEntity.getPayChannel())) {
-			LOGGER.info("更新付款状态，发送同步支付通知,订单号-->" + orderNo);
-			String orderNums = paymentService.getOrderNumStrsByPayNo(paymentEntity.getPayNo());
-			String payChannel = PaymentEventType.WEIXIN_PAY;
-			String payAccount = null;
-			if (paymentEntity.getPayChannel() == Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0) {
-				payChannel = PaymentEventType.APP;
-				QueryOrderParamVO queryOrderParamVO = aliPaymentService.queryOrder(null, paymentEntity.getPayNo());
-				payAccount = queryOrderParamVO.getBuyer_email();
-			} else {
+		PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, null);
+		if (paymentEntity == null) {
+			resultMap.put("errno", "100");
+			resultMap.put("errMsg", "订单支付记录不存在！");
+			return resultMap;
+		}
 
-			}
-			List<PaySuccessResponse> responseList = paymentLogInfoService.paySuccessToMessage(paymentEntity.getPayNo(), payAccount, orderNums, paymentEntity.getOrderType(), payChannel);
-			if (validateResponseList(responseList)) {
-				paymentService.updateListStatusBypayNo(paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);// 修改付款单状态
-				result = true;
-			}
+		String orderNums = paymentService.getOrderNumStrsByPayNo(paymentEntity.getPayNo());
+		String payChannel = PaymentEventType.WEIXIN_PAY;
+		String payAccount = null;
+		if (paymentEntity.getPayChannel() == Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0) {
+			payChannel = PaymentEventType.APP;
+			QueryOrderParamVO queryOrderParamVO = aliPaymentService.queryOrder(null, paymentEntity.getPayNo());
+			payAccount = queryOrderParamVO.getBuyer_email();
 		}
-		return result;
+		if (Constants.PAYMENT_STATUS.STAUS2 != paymentEntity.getStatus()) {//异步通知暂未收到
+			if (queryOrderPayStatus(null, paymentEntity.getPayNo(), paymentEntity.getPayChannel())) {
+				LOGGER.info("发送同步支付通知,订单号-->" + orderNo);
+				List<PaySuccessResponse> responseList = paymentLogInfoService.paySuccessToMessage(paymentEntity.getPayNo(), payAccount, orderNums, paymentEntity.getOrderType(), payChannel);
+				resultMap = responseList.get(0).getResult();
+				if ("0".equals(resultMap.get("errno"))) {
+					LOGGER.info("更新付款状态，付款单号-->" + paymentEntity.getPayNo());
+					paymentService.updateListStatusBypayNo(paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);// 修改付款单状态
+				} else {
+					LOGGER.info(resultMap.toString());
+				}
+			}
+		}else{
+			List<PaySuccessResponse> responseList = paymentLogInfoService.paySuccessToMessage(paymentEntity.getPayNo(), payAccount, orderNums, paymentEntity.getOrderType(), payChannel);
+			resultMap = responseList.get(0).getResult();
+		}
+		return resultMap;
 	}
 
 	/**
-	 * @Description: 
-	 *               增加0元支付（此版本临时增加此方法，原因是前端APP在优惠券0元购买是未请求获取支付签名，导致系统无0元支付记录，故在支付成功通知时增加交易记录
-	 *               ）
+	 * @Description:增加0元支付（此版本临时增加此方法，原因是前端APP在优惠券0元购买是未请求获取支付签名，导致系统无0元支付记录，故在支付成功通知时增加交易记录）
 	 * @param orderNo
 	 * @param totalAmount
 	 * @Author: 柯军
@@ -224,20 +234,6 @@ public class RpbServiceImpl implements IRpbService {
 		return false;
 	}
 
-	/**
-	 * @Description: 验证返回结果中是否有未成功记录
-	 * @param responseList
-	 * @return
-	 * @Author: 柯军
-	 * @datetime:2015年7月30日上午11:17:19
-	 **/
-	private boolean validateResponseList(List<PaySuccessResponse> responseList) {
-		for (PaySuccessResponse paySuccessResponse : responseList) {
-			if (!paySuccessResponse.isResult())
-				return false;
-		}
-		return true;
-	}
 
 	@Override
 	public QueryOrderParamVO queryOrder(Map<String, Object> map) {
@@ -254,7 +250,10 @@ public class RpbServiceImpl implements IRpbService {
 	@Override
 	public Map<String, Object> getPaySign(MessageEvent event) {
 		JSONObject jsonObject = JSONObject.fromObject(event);
+		LOGGER.info("支付签名请求，签名参数-->" + jsonObject.toString());
 		MessageEvent event2 = rpbEventService.messageToMessageEvent(jsonObject.toString());
-		return paymentService.getSendMessage(event2);
+		Map<String, Object> resultMap = paymentService.getSendMessage(event2);
+		LOGGER.info("返回签名结果-->" + resultMap.toString());
+		return resultMap;
 	}
 }

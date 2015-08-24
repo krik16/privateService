@@ -129,11 +129,17 @@ public class PayController extends BaseController {
 			List<TradeVO> list = buildList(refundService.selectRefundPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE));
 			OrderFormEntity orderFormEntity = null;
 			for (TradeVO tradeVO : list) {
-				orderFormEntity = rOAOrderFormService.getOrderFormByOrderNum(tradeVO.getOrderNo());
-				if (orderFormEntity != null) {
-					tradeVO.setOrderId(orderFormEntity.getId().toString());
-					tradeVO.setOrderUserId(orderFormEntity.getBuyerId());
+				try {
+					orderFormEntity = rOAOrderFormService.getOrderFormByOrderNum(tradeVO.getOrderNo());
+					if (orderFormEntity != null) {
+						tradeVO.setOrderId(orderFormEntity.getId().toString());
+						tradeVO.setOrderUserId(orderFormEntity.getBuyerId());
+					}
+				} catch (Exception e) {
+					LOGGER.error("roa接口未提供");
+					e.printStackTrace();
 				}
+				
 			}
 			double pageTotle = refundService.selectRefundPageListCount(map);
 			Integer rowContNum = (int) Math.ceil(pageTotle / Constant.PAGE.PAGESIZE);

@@ -240,7 +240,8 @@
 		=#{payName,jdbcType=VARCHAR}
 		batch_no
 		=#{batchNo,jdbcType=VARCHAR}
-		where id =
+		where
+		id =
 		#{id,jdbcType=INTEGER}
 	</update>
 
@@ -327,22 +328,24 @@
 		<include refid="Base_Column_List" />
 		from payment_order
 		where order_no = #{orderNum,jdbcType=VARCHAR} and
-		trade_type = #{tradeType,jdbcType=INTEGER} and status =
-		#{status,jdbcType=INTEGER}
+		trade_type = #{tradeType,jdbcType=INTEGER}
+		<if test="status != null">
+			and status =#{status,jdbcType=INTEGER}
+		</if>
 	</select>
 
 	<delete id="deleteByPayNo" parameterType="java.lang.String">
 		delete from
 		payment_order where pay_no = #{payNo,jdbcType=VARCHAR}
 	</delete>
-	
+
 	<select id="selectByOrderNumAndBatchNo" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column_List" />
 		from payment_order
 		where order_no = #{orderNum,jdbcType=VARCHAR}
-		 and batch_no = #{batchNo,jdbcType=VARCHAR} 
+		and batch_no = #{batchNo,jdbcType=VARCHAR}
 	</select>
 	<select id="selectByPayNoAndPayChannelAndTradeType" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
@@ -350,9 +353,12 @@
 		<include refid="Base_Column_List" />
 		from payment_order
 		where pay_no = #{payNo,jdbcType=VARCHAR}
-		and pay_channel = #{payChannel,jdbcType=INTEGER}
+		<if test="payChannel != null">
+			and pay_channel = #{payChannel,jdbcType=INTEGER}
+		</if>
 		and trade_type = #{tradeType,jdbcType=INTEGER}
-		and status =  #{status,jdbcType=INTEGER}
+		and status =
+		#{status,jdbcType=INTEGER}
 	</select>
 	<select id="selectByBatchNoAndStatus" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
@@ -360,6 +366,7 @@
 		<include refid="Base_Column_List" />
 		from payment_order
 		where batch_no = #{batchNo,jdbcType=VARCHAR}
-		and status =  #{status,jdbcType=INTEGER}
+		and
+		status = #{status,jdbcType=INTEGER}
 	</select>
 </mapper>

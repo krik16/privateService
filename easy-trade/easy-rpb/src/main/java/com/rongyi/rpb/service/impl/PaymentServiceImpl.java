@@ -468,7 +468,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 	}
 
 	@Override
-	public PaymentEntity selectByOrderNumAndTradeType(String orderNum, int tradeType, int status) {
+	public PaymentEntity selectByOrderNumAndTradeType(String orderNum, int tradeType, Integer status) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("orderNum", orderNum);
 		params.put("tradeType", tradeType);
@@ -539,17 +539,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
 	@Override
 	public List<PaymentEntity> updateListStatusBypayNo(String payNo, Integer type, Integer status) {
-		List<PaymentEntity> paymentEntityList = selectByPayNoAndTradeType(payNo, type);
-		if (paymentEntityList != null && !paymentEntityList.isEmpty()) {
-			for (PaymentEntity paymentEntity : paymentEntityList) {
-				if (paymentEntity != null) {
-					paymentEntity.setFinishTime(DateUtil.getCurrDateTime());
-					paymentEntity.setStatus(status);
-					updateByPrimaryKeySelective(paymentEntity);// 修改打款状态
-				}
-			}
-		}
-		return paymentEntityList;
+		return updateListStatusBypayNoAndPayChannel(payNo, type, status, null);
 	}
 
 	@Override
@@ -585,11 +575,11 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 	}
 
 	@Override
-	public PaymentEntity validateRepeatPay(String payNo, Integer oldPaychannel, Integer newPayChannel) {
-		PaymentEntity paymentEntity = selectByPayNoAndPayChannelAndTradeType(payNo, oldPaychannel, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);
+	public PaymentEntity validateRepeatPay(String payNo, Integer newPayChannel) {
+		PaymentEntity paymentEntity = selectByPayNoAndPayChannelAndTradeType(payNo, null, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);
 		if (paymentEntity == null)// 无重复付款项
 			return null;
-		LOGGER.info("存在重复付款项，重复付款单号-->" + payNo);
+		LOGGER.info("重复支付,已存在支付记录支付方式为-->" + paymentEntity.getPayChannel() + "重复支付方式为-->" + newPayChannel + ",重复付款单号-->" + payNo);
 		PaymentEntity newPaymentEntity = new PaymentEntity();
 		BeanUtils.copyProperties(paymentEntity, newPaymentEntity);
 		newPaymentEntity.setId(null);
@@ -604,7 +594,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 		if (paymentEntity != null) {// 重复支付
 			PaymentEntity oldPaymentEntity = selectByPayNoAndPayChannelAndTradeType(paymentEntity.getPayNo(), paymentEntity.getPayChannel(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0,
 					Constants.PAYMENT_STATUS.STAUS0);
-			if (paymentEntity != null)// 该支付方式的待支付状态记录是否已存在
+			if (oldPaymentEntity != null)// 该支付方式的待支付状态记录是否已存在
 				BeanUtils.copyProperties(oldPaymentEntity, paymentEntity);
 			insertRepeatPay(paymentEntity, paymentLogInfo);// 增加重复付款记录
 			String payNo = orderNoGenService.getOrderNo();
@@ -627,5 +617,43 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 		map.put("batchNo", batchNo);
 		map.put("status", status);
 		return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectByBatchNoAndStatus", map);
+	}
+
+	@Override
+	public Integer getRealPayChannel(Integer payChannel) {
+		switch (payChannel) {
+		case 1:
+			return Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0;
+		case 3:
+			return Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0;
+		case 5:
+			return Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1;
+		case 6:
+			return Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2;
+		default:
+			break;
+		}
+		return null;
+	}
+
+	@Override
+	public List<PaymentEntity> updateListStatus(String payNo, Integer type, Integer status, Integer payChannel) {
+		return updateListStatusBypayNoAndPayChannel(payNo, type, status, payChannel);
+	}
+
+	private List<PaymentEntity> updateListStatusBypayNoAndPayChannel(String payNo, Integer type, Integer status, Integer payChannel) {
+		List<PaymentEntity> paymentEntityList = selectByPayNoAndTradeType(payNo, type);
+		if (paymentEntityList != null && !paymentEntityList.isEmpty()) {
+			for (PaymentEntity paymentEntity : paymentEntityList) {
+				if (paymentEntity != null) {
+					paymentEntity.setFinishTime(DateUtil.getCurrDateTime());
+					paymentEntity.setStatus(status);
+					if (payChannel != null)
+						paymentEntity.setPayChannel(payChannel);
+					updateByPrimaryKeySelective(paymentEntity);// 修改打款状态
+				}
+			}
+		}
+		return paymentEntityList;
 	}
 }

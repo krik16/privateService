@@ -214,16 +214,20 @@ public class PaymentServiceTest extends BaseTest {
 		return event;
 	}
 	
-	@Test
+//	@Test
 	public void testGetBatchRefundBuyerMessage(){
 		String[] idArray = new String[]{"4693"};
 		//20150812192257707
 		pcWebPageAlipayService.getBatchRefundBuyerMessage(idArray, "test");
 	}
 	
-	@Test
+//	@Test
 	public void testPaysuccess(){
 		rpbServiceImpl.paySuccessNotify("0818930009601625", 0.00);
 	}
 
+	@Test
+	public void testSelectByBatchNoAndStatus(){
+		System.err.println(paymentService.selectByBatchNoAndStatus("20150812192552139",2).size());
+	}
 }

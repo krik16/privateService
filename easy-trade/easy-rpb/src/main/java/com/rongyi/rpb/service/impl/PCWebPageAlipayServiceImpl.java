@@ -150,14 +150,16 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 		Map<String, Object> map = new HashMap<String, Object>();
 		String batchNo = getBatchNo(paymentEntity.getPayNo());
 		try {
-			if (paymentEntity.getBatchNo() == null) {
-				paymentService.updateByPrimaryKeySelective(paymentEntity);
-			} else {
+			if (paymentEntity.getBatchNo() != null) {
 				List<PaymentEntity> list = paymentService.selectByBatchNoAndStatus(paymentEntity.getBatchNo(), Constants.PAYMENT_STATUS.STAUS2);
 				if (list.isEmpty())
 					batchNo = paymentEntity.getBatchNo();
 			}
-			paymentEntity.setBatchNo(batchNo);
+			LOGGER.info("批量单号-->"+batchNo);
+			if(paymentEntity.getBatchNo() == null || !batchNo.equals(paymentEntity.getBatchNo())){
+				paymentEntity.setBatchNo(batchNo);
+				paymentService.updateByPrimaryKeySelective(paymentEntity);
+			}
 			String detailData = tradeNo + "^" + price + "^" + desc;
 			// 把请求参数打包成数组
 			Map<String, String> sParaTemp = new HashMap<String, String>();
@@ -193,11 +195,11 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 				}
 			}
 		}
+		LOGGER.info("batchNo=" + batchNo);
 		for (String id : idArray) {
 			Map<String, Object> buyerMap = new HashMap<String, Object>();
 			PaymentEntity paymentEntity = paymentService.selectByPrimaryKey(id);
-			LOGGER.info("batchNo=" + batchNo);
-			if (paymentEntity.getBatchNo() == null) {
+			if (paymentEntity.getBatchNo() == null || !batchNo.equals(paymentEntity.getBatchNo())) {
 				paymentEntity.setBatchNo(batchNo);
 				paymentService.updateByPrimaryKeySelective(paymentEntity);
 			}
