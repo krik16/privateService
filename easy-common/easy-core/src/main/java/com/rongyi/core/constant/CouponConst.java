@@ -62,4 +62,6 @@ public interface CouponConst {
      * [1,1,1] 1为支持，0为不支持。第一位：随时退、第二位：过期退 第三位： 免预约、第四位：不可退
      */
     List<Integer> AFTER_SALE_SERVICE = Arrays.asList(1, 0, 0, 0);
+
+
 }
