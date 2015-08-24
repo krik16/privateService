@@ -26,6 +26,7 @@ public class SweepCodeToValidVO implements Serializable{
 	private Double currentPrice;//现价
 	private String suggest;//建议
 	private Integer codeNum;//验码数量
+	private String phone;//用户名
 	
 	public String getCode() {
 		return code;
@@ -68,6 +69,12 @@ public class SweepCodeToValidVO implements Serializable{
 	}
 	public void setCurrentPrice(Double currentPrice) {
 		this.currentPrice = currentPrice;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	
 }
