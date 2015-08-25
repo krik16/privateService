@@ -1,11 +1,13 @@
 package com.rongyi.easy.page;
 
+import java.io.Serializable;
+
 /**
  * Descriptions:
  * Created by 袁波
  * Created at 2015/7/21 17:31.
  */
-public class QueryOrder {
+public class QueryOrder implements Serializable {
     private String orderColumn;
 
     public QueryOrder(String orderColumn) {

@@ -1,11 +1,13 @@
 package com.rongyi.easy.page;
 
+import java.io.Serializable;
+
 /**
  * Descriptions:
  * Created by 袁波
  * Created at 2015/7/21 17:16.
  */
-public enum FilterType {
+public enum FilterType implements Serializable {
 
     LIKE,  EQUALS,  GREATETHAN,  GREATEEQUAL,  LESSTHAN,  LESSEQUAL,  NOTEQUAL,  IN,NIN,ISNULL,ISNOTNULL,REGEXP,BEQ;
     public static FilterType toType(String type)

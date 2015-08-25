@@ -1,5 +1,6 @@
 package com.rongyi.easy.page;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -8,7 +9,7 @@ import java.util.Date;
  * Created by 袁波
  * Created at 2015/7/21 17:17.
  */
-public  enum ValueType {
+public  enum ValueType implements Serializable {
     VARCHAR, DATE, TIMESTAMP, DECIMAL, BIGINT, FLOAT,TINYINT,INTEGER;
 
     public static ValueType toType(String type) {

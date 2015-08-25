@@ -2,6 +2,7 @@ package com.rongyi.easy.page;
 
 import com.rongyi.core.constant.Constants;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * Created by 袁波
  * Created at 2015/7/21 17:19.
  */
-public class QueryParam {
+public class QueryParam implements Serializable{
     private static final int PAGESIZE=10;
     private static final int CURRENTPAGE=1;
     /**

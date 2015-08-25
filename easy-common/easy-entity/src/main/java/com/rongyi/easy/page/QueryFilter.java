@@ -1,11 +1,13 @@
 package com.rongyi.easy.page;
 
+import java.io.Serializable;
+
 /**
  * Descriptions:
  * Created by 袁波
  * Created at 2015/7/21 17:29.
  */
-public class QueryFilter {
+public class QueryFilter implements Serializable {
     /**
      * 要查询的字段名
      */
