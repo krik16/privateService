@@ -111,7 +111,7 @@ public interface PaymentService {
 
 	public abstract List<PaymentEntity> selectByOrderNum(String orderNum,Integer tradeType);
 
-	public abstract PaymentEntity selectByOrderNumAndTradeType(String orderNum, int tradeType, Integer status);
+	public abstract PaymentEntity selectByOrderNumAndTradeType(String orderNum, Integer tradeType, Integer status,Integer payChannel);
 	
 
 	public abstract int updateByPrimaryKeySelective(PaymentEntity paymentEntity);
@@ -212,4 +212,5 @@ public interface PaymentService {
 	 * @datetime:2015年8月24日下午4:14:11
 	 **/
 	public List<PaymentEntity> updateListStatus(String payNo, Integer type, Integer status,Integer payChannel);
+	
 }

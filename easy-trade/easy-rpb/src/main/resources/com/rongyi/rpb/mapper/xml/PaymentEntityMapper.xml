@@ -327,11 +327,17 @@
 		select
 		<include refid="Base_Column_List" />
 		from payment_order
-		where order_no = #{orderNum,jdbcType=VARCHAR} and
-		trade_type = #{tradeType,jdbcType=INTEGER}
+		where order_no = #{orderNum,jdbcType=VARCHAR}
+		<if test="tradeType != null and tradeType != ''">
+		 and trade_type = #{tradeType,jdbcType=INTEGER}
+		</if>
 		<if test="status != null">
 			and status =#{status,jdbcType=INTEGER}
 		</if>
+		<if test="payChannel != null">
+			and pay_channel =#{payChannel,jdbcType=INTEGER}
+		</if>
+		
 	</select>
 
 	<delete id="deleteByPayNo" parameterType="java.lang.String">

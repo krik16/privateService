@@ -1,6 +1,7 @@
 package com.rongyi.rpb.service.impl;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -172,20 +173,19 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 	@Override
 	public boolean validateIsWeixinPay(MessageEvent event) {
 		PaymentEntityVO paymentEntityVO = paymentService.bodyToPaymentEntity(event.getBody(), null);
-		PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntityVO.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);// 根据退款单记录中的订单号找到对应的历史付款单记录（用来查找付款交易流水号）
+		PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntityVO.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);// 根据退款单记录中的订单号找到对应的历史付款单记录（用来查找付款交易流水号）
 		if (paymentEntity == null) {
 			LOGGER.info("退款失败，历史付款单记录查找不存，请确认订单号:" + paymentEntityVO.getOrderNum() + "付款记录是否存在！");
-		} else if (paymentEntity != null && paymentEntity.getPayChannel() != null && Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1 == paymentEntity.getPayChannel()) {
-			return true;
+			return false;
 		}
-		return false;
+		return true;
 	}
 
 	@Override
 	public Map<String, Object> getRefundMessageMap(MessageEvent event) {
 
 		PaymentEntityVO paymentEntityVO = paymentService.bodyToPaymentEntity(event.getBody(), null);
-		PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntityVO.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);
+		PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntityVO.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
 		if (messageToRefund(paymentEntityVO, paymentEntity)) {
 			return weixinRefundMessage(event, paymentEntityVO, paymentEntity.getPayNo());
 		}
@@ -194,6 +194,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 
 	@Override
 	public boolean messageToRefund(PaymentEntityVO paymentEntityVO, PaymentEntity hisPayEntity) {
+		LOGGER.info("申请退款，退款单号-->"+hisPayEntity.getPayNo()+",退款订单号-->"+hisPayEntity.getOrderNum());
 		String newPayNo = orderNoGenService.getOrderNo();
 		boolean result = weixinRefund(hisPayEntity.getPayNo(), paymentEntityVO.getAmountMoney().doubleValue(), hisPayEntity.getAmountMoney().doubleValue(), newPayNo);
 		PaymentEntity paymentEntity = new PaymentEntity();
@@ -349,7 +350,8 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 
 	@Override
 	public String getPennyByMoney(double totalFee) {
-		return String.valueOf((int) (totalFee * 100));
+		BigDecimal bgTotalFee = new BigDecimal(totalFee+"").multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
+		return bgTotalFee.toString();
 	}
 
 	@Override

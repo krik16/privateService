@@ -158,7 +158,7 @@ public class WebPageAlipayController extends BaseController {
 		try {
 			Map<String, Object> map = XMLUtil.doXMLParse(notify_data);
 			if (map.get("out_trade_no") != null) {
-				PaymentLogInfo result = paymentLogInfoService.selectByOutTradeNo(map.get("out_trade_no").toString());
+				PaymentLogInfo result = paymentLogInfoService.selectByOutTradeNo(map.get("out_trade_no").toString(),null);
 				if (result != null)
 					return;
 				if (!validateTradeStatus(map.get("trade_status").toString()))

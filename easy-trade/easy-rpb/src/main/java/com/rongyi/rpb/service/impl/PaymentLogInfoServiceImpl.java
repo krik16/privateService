@@ -68,9 +68,10 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
 	}
 
 	@Override
-	public PaymentLogInfo selectByOutTradeNo(String outTradeNo) {
+	public PaymentLogInfo selectByOutTradeNo(String outTradeNo,Integer tradeType) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("outTradeNo", outTradeNo);
+		resultMap.put("tradeType", tradeType);
 		return this.getBaseDao().selectOneBySql(LOG_NAMESPACE + ".selectByOrderNum", resultMap);
 	}
 

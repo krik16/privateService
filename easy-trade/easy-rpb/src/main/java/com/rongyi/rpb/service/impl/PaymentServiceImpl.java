@@ -293,7 +293,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 					LOGGER.info("订单号已存在，返回历史付款单号" + payNo);
 					return paymentEntityVO;
 				} else {
-					if (paymentLogInfoService.selectByOutTradeNo(payNo) == null) {
+					if (paymentLogInfoService.selectByOutTradeNo(payNo,null) == null) {
 						LOGGER.info("微信支付修改价格，重新生成支付单号-->");
 						weixinPayService.closeOrder(payNo);
 					}
@@ -468,11 +468,12 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 	}
 
 	@Override
-	public PaymentEntity selectByOrderNumAndTradeType(String orderNum, int tradeType, Integer status) {
+	public PaymentEntity selectByOrderNumAndTradeType(String orderNum, Integer tradeType, Integer status,Integer payChannel) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("orderNum", orderNum);
 		params.put("tradeType", tradeType);
 		params.put("status", status);
+		params.put("payChannel", payChannel);
 		return this.getBaseDao().selectOneBySql(PAYMENTENTITY_NAMESPACE + ".selectByOrderNumAndTradeType", params);
 	}
 
@@ -603,10 +604,14 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 			refundPaymentEntity.setId(null);
 			refundPaymentEntity.setFinishTime(null);
 			refundPaymentEntity.setPayNo(payNo);
-			refundPaymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
+			refundPaymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE6);
+			refundPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
 			LOGGER.info(Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0 == paymentEntity.getPayChannel() ? "支付宝" : "微信" + "重复支付直接退款-->退款单号" + payNo);
-			if (Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1 == paymentEntity.getPayChannel())// 微信自动退款
-				weixinPayService.weixinRefund(paymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), paymentEntity.getAmountMoney().doubleValue(), payNo);
+			if (Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1 == paymentEntity.getPayChannel()) {// 微信自动退款
+				boolean result = weixinPayService.weixinRefund(paymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), paymentEntity.getAmountMoney().doubleValue(), payNo);
+				if (result)
+					refundPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
+			}
 			insert(refundPaymentEntity);
 		}
 	}

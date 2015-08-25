@@ -17,6 +17,7 @@ import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentItemEntity;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
+import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.service.AliPaymentService;
 import com.rongyi.rpb.service.PCWebPageAlipayService;
 import com.rongyi.rpb.service.PaymentItemService;
@@ -226,8 +227,14 @@ public class PaymentServiceTest extends BaseTest {
 		rpbServiceImpl.paySuccessNotify("0818930009601625", 0.00);
 	}
 
-	@Test
+//	@Test
 	public void testSelectByBatchNoAndStatus(){
 		System.err.println(paymentService.selectByBatchNoAndStatus("20150812192552139",2).size());
+	}
+	
+	@Test
+	public void testSelectByTradeType(){
+		PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType("0825255175681151", Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE5, Constants.PAYMENT_STATUS.STAUS2,0);
+		System.err.println(paymentEntity.getId());
 	}
 }

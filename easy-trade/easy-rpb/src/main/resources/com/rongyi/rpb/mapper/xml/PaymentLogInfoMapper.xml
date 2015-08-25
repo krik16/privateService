@@ -191,6 +191,10 @@
 		<include refid="Base_Column_List" />
 		from payment_event
 		where out_trade_no = #{outTradeNo,jdbcType=VARCHAR}
+		<if test="tradeType != null">
+		<!-- trade_type is null 兼容老数据trade_type为空-->
+		and (trade_type is null or trade_type = #{tradeType,jdbcType=INTEGER})
+		</if>
 	</select>
 	<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		select
