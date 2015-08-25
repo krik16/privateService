@@ -1,8 +1,9 @@
 package com.rongyi.easy.bsoms.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserShop {
+public class UserShop implements Serializable{
     private Integer id;
 
     private Integer brandId;
