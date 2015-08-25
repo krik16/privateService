@@ -2,6 +2,7 @@
 package com.rongyi.tms.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.testng.annotations.Test;
 import com.rongyi.easy.coupon.entity.CouponOrder;
 import com.rongyi.easy.coupon.entity.UserCoupon;
 import com.rongyi.easy.entity.MallLifeUserEntity;
+import com.rongyi.easy.tms.vo.TradeVO;
 import com.rongyi.rss.coupon.RoaCouponOrderService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.tms.BaseTest;
@@ -28,10 +30,12 @@ public class TradeServiceTest extends BaseTest{
     RoaCouponOrderService roaCouponOrderService;
     
     @Rollback(true)
-//    @Test(description = "rpb接口调用--交易明细")
+    @Test(description = "rpb接口调用--交易明细")
     public void rpbTradeDetailTest(){
         Map<String,Object> map = new HashMap<String,Object>();
-        System.err.println(tradeDetailService.selectTradePageList(map, 1, 10).size());
+        map.put("orderNo","0825182220801455");
+        List<TradeVO> list = tradeDetailService.selectTradePageList(map, 1, 10);
+        System.err.println(list.size());
     }
     
     @Rollback(true)
@@ -64,13 +68,13 @@ public class TradeServiceTest extends BaseTest{
         tradeDetailService.selectById(3513);
     }
     
-    @Test
+//    @Test
     public void testSelectCoupon(){
     	CouponOrder couponOrder = roaCouponOrderService.findOneByOrderNo("2015071300350917");
     	System.err.println("buyerId="+couponOrder.getBuyerId());
     }
     
-    @Test
+//    @Test
     public void testGetUserCouponByOrderNo(){
     	UserCoupon userCoupon = tradeDetailService.getCouponOrderRecordByOrderNo("2015071300350917");
     	System.err.println("result="+userCoupon.getDiscount());

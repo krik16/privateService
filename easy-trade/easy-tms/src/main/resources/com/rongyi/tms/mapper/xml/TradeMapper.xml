@@ -95,11 +95,11 @@
 		</if>
 		<!-- 支出 -->
 		<if test="tradeType == 1 or tradeType == 4">
-			AND (trade_type = 1 or trade_type = 4)
+			AND (trade_type = 1 or trade_type = 4 or trade_type = 6)
 		</if>
 
 		<if test="tradeType == null or tradeType == ''">
-			AND (trade_type = 0 or trade_type = 1 or trade_type = 4 or trade_type = 5)
+			AND (trade_type = 0 or trade_type = 1 or trade_type = 4 or trade_type = 5 or trade_type = 6)
 		</if>
 		<!-- 打款方式 -->
 		<if test="payChannel != null and payChannel != ''">

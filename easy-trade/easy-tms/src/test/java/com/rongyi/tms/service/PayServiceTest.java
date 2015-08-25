@@ -9,13 +9,17 @@
 package com.rongyi.tms.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
 
+import com.rongyi.easy.tms.vo.TradeVO;
 import com.rongyi.rss.roa.ROAMallService;
 import com.rongyi.tms.BaseTest;
+import com.rongyi.tms.constants.Constant;
+import com.rongyi.tms.constants.ConstantEnum;
 
 /**	
  * @Author:  柯军
@@ -32,6 +36,9 @@ public class PayServiceTest extends BaseTest{
     @Autowired
     ROAMallService mallService;
     
+    @Autowired
+    RefundService refundService;
+    
     
 //    @Test
     public void selectListTest(){
@@ -39,7 +46,7 @@ public class PayServiceTest extends BaseTest{
         payService.selectPayPageList(new HashMap<String, Object>(), 1, 10);
     }
     
-    @Test
+//    @Test
     public void getMailListTest(){
         String keywords ="test";
         logger.info("keywords:"+keywords);
@@ -51,5 +58,14 @@ public class PayServiceTest extends BaseTest{
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+    
+    @Test
+    public void selectRefundList(){
+    	Map<String,Object> map = new HashMap<String,Object>();
+    	map.put("tradeType", ConstantEnum.TRADE_TYPE_REFUND.getCodeInt());
+    	map.put("tradeStartTime", "2015-08-25");
+    	 List<TradeVO> list = refundService.selectRefundPageList(map, 1, Constant.PAGE.PAGESIZE);
+    	System.err.println(list.size());
     }
 }

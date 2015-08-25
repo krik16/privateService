@@ -66,7 +66,10 @@
 		</if>
 
 		<!-- 交易类型 -->
-		<if test="tradeType != null and tradeType != ''">
+		<if test="tradeType != null and tradeType == 1">
+			AND (trade_type = 1 OR trade_type = 6) 
+		</if>
+		<if test="tradeType != null and tradeType != 1">
 			AND trade_type = #{tradeType}
 		</if>
 		<!-- 付款方式-->
