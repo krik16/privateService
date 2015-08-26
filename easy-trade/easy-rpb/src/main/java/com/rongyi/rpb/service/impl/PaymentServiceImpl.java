@@ -432,10 +432,10 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 	}
 
 	@Override
-	public List<PaymentEntity> selectByPayNoAndTradeType(String payNo, Integer tredeType) {
+	public List<PaymentEntity> selectByPayNoAndTradeType(String payNo, Integer tradeType) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("payNo", payNo);
-		params.put("tradeType", tredeType);
+		params.put("tradeType", tradeType);
 		return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectByPayNoAndTradeType", params);
 	}
 
