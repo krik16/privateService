@@ -94,11 +94,16 @@ pageEncoding="UTF-8"%>
 								<input id="sellerName"  type="text" style="width: 100px"></input>
 							</li>
 						</div>
-						<div style="display: none;" id ="search-buyerName">
+							<div style="display: none;" id ="search-buyerAccount">
+							<li>买家账号：
+								<input id="buyerAccount"  type="text" style="width: 100px"></input>
+							</li>
+						</div>
+						<!-- <div style="display: none;" id ="search-buyerName">
 							<li>买家姓名：
 								<input id="buyerName"  type="text" style="width: 100px"></input>
 							</li>
-						</div>
+						</div> -->
 						<li>打款方式：
 							<select id="payChannel" style="width: 100px">
 								<option value="">--全部--</option>
