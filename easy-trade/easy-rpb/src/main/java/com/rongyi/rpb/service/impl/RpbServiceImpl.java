@@ -158,13 +158,11 @@ public class RpbServiceImpl implements IRpbService {
 			QueryOrderParamVO queryOrderParamVO = aliPaymentService.queryOrder(null, paymentEntity.getPayNo());
 			payAccount = queryOrderParamVO.getBuyer_email();
 		}
-		LOGGER.info("付款单状态-->"+paymentEntity.getStatus());
 		if (Constants.PAYMENT_STATUS.STAUS2 != paymentEntity.getStatus()) {// 异步通知暂未收到
 			if (queryOrderPayStatus(null, paymentEntity.getPayNo(), paymentEntity.getPayChannel())) {
 				LOGGER.info("发送同步支付通知,订单号-->" + orderNo);
 				List<PaySuccessResponse> responseList = paymentLogInfoService.paySuccessToMessage(paymentEntity.getPayNo(), payAccount, orderNums, paymentEntity.getOrderType(), payChannel);
 				resultMap = responseList.get(0).getResult();
-				LOGGER.info("订单系统订单处理结果-->" + resultMap.toString());
 				if ("0".equals(resultMap.get("errno"))) {
 					LOGGER.info("更新付款状态，付款单号-->" + paymentEntity.getPayNo());
 					paymentService.updateListStatusBypayNo(paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);// 修改付款单状态
@@ -175,6 +173,7 @@ public class RpbServiceImpl implements IRpbService {
 			if (!responseList.isEmpty())
 				resultMap = responseList.get(0).getResult();
 		}
+		LOGGER.info("订单系统订单处理结果" + resultMap.toString());
 		return resultMap;
 	}
 
@@ -256,5 +255,10 @@ public class RpbServiceImpl implements IRpbService {
 		Map<String, Object> resultMap = paymentService.getSendMessage(event2);
 		LOGGER.info("返回签名结果-->" + resultMap.toString());
 		return resultMap;
+	}
+
+	@Override
+	public PaymentEntity selectByOrderNumAndTradeType(String orderNum, Integer tradeType, Integer status, Integer payChannel) {
+		return paymentService.selectByOrderNumAndTradeType(orderNum, tradeType, status, payChannel);
 	}
 }

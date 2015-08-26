@@ -140,6 +140,7 @@ function getParamsJson(){
 	  var orderNo = $('#orderNo').val();
 	  var mallName = $("input[name='mallId']").val();
 	  var shopName = $("input[name='shopId']").val();
+	  var buyerAccount = $('#buyerAccount').val();
 	  var buyerName = $('#buyerName').val();
 	  var sellerName = $('#sellerName').val();
 	  var tradeType = $('#tradeType').val();
@@ -157,6 +158,7 @@ function getParamsJson(){
 		        'orderNo':orderNo,
 		        'mallName':mallName,
 		        'shopName':shopName,
+		        'buyerAccount':buyerAccount,
 		        'buyerName':buyerName,
 		        'sellerName':sellerName,
 		        'tradeType':tradeType,

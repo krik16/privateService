@@ -72,7 +72,7 @@ pageEncoding="UTF-8"%>
 						</div>
 						<div style="display: none;" id="search-payNo">
 							<li>
-								异常交易号:
+								付款单号:
 								<input id="payNo" class="payNo" type="text" maxlength="50" /></input>
 							</li>
 						</div>

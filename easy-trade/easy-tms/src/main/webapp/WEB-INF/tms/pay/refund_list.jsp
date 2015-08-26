@@ -6,6 +6,7 @@
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		<tr>
 		 <td style="text-align: center;"><input type="checkbox" id="select-all" onclick="selectAll()"/></td>
+			<td>付款单号</td>
 			<td>订单号</td>
 			<td>申请退款时间</td>
 			<td>打款方式</td>
@@ -21,6 +22,7 @@
 				<c:forEach var="item" items="${list}" varStatus="status">
 					<tr>
 						<td style="text-align: center;"><input type="checkbox" name="subBox" id="${item.id}" payChannel="${item.payChannel}" ></td>
+						<td>${item.payNo}</td>
 						<c:choose>
 							<c:when test="${item.orderType eq 0}">
 								<td><a href="${ctx}/orderManager/orderInfo?orderId=${item.orderId}&userId=${item.orderUserId}&module=order&type=tradeDetail" target="_parent"  style="text-decoration:underline" >${item.orderNo}</a></td>
@@ -29,7 +31,6 @@
 								<td>${item.orderNo}</a></td>
 							</c:otherwise>
 						</c:choose>
-					
 						<td><fmt:formatDate value="${item.orderTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 						<c:choose>
 						<c:when test="${item.payChannel eq 0}">

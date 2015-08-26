@@ -74,9 +74,12 @@ pageEncoding="UTF-8"%>
 						<li  class="xiala">店铺：
 							<input type="text" name="shopId" class="detail" style="width:80px"></input>
 						</li>
-						<li >买家姓名：
+						<li >买家账号：
+								<input id="buyerAccount"  type="text"  class="detail" style="width:100px"></input>
+						</li>
+						<!-- <li >买家姓名：
 								<input id="buyerName"  type="text"  class="detail" style="width:50px"></input>
-							</li>
+						</li> -->
 						<li>卖家姓名：
 								<input id="sellerName"  type="text"  class="detail" style="width:50px"></input>
 							</li>
