@@ -123,7 +123,7 @@ public class WebPageAlipayController extends BaseController {
 				LOGGER.info("支付宝订单查询结果是未支付状态");
 				return "zhifuFail";
 			}
-			String orderNums = paymentService.getOrderNumStrsByPayNo(out_trade_no);
+			String orderNums = paymentService.getOrderNumStrsByPayNo(out_trade_no,Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
 			List<PaymentEntity> list = paymentService.selectByPayNoAndTradeType(out_trade_no, 0);
 			if (list != null && !list.isEmpty() && list.get(0).getStatus() != Constants.PAYMENT_STATUS.STAUS2) {
 				paymentService.updateListStatusBypayNo(out_trade_no, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);// 修改付款单状态
