@@ -61,7 +61,7 @@ public class PrepayIdRequestHandler extends RequestHandler {
 		String requestUrl = super.getGateUrl();
 		this.setDebugInfo(this.getDebugInfo() + "\r\n" + "requestUrl:"
 				+ requestUrl);
-		TenpayHttpClient httpClient = new TenpayHttpClient();
+		TenpayHttpClient httpClient = new TenpayHttpClient("UTF-8");
 		httpClient.setReqContent(requestUrl);
 		String resContent = "";
 		this.setDebugInfo(this.getDebugInfo() + "\r\n" + "post data:" + params);
