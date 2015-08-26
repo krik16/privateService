@@ -4,19 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import com.rongyi.easy.coupon.entity.mysql.CouponBrand;
-import com.rongyi.easy.coupon.entity.mysql.CouponCategory;
-import com.rongyi.easy.coupon.entity.mysql.CouponGroup;
-import com.rongyi.easy.coupon.entity.mysql.CouponMall;
-import com.rongyi.easy.coupon.entity.mysql.CouponShop;
+public class Coupon implements Serializable {
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-public class Coupon implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	/**
+    /**
      * 主键id
      */
     private Integer id;
@@ -157,12 +151,12 @@ public class Coupon implements Serializable{
      * 状态: 待审核[0], 审核未通过[1], 审核通过[2]
      */
     private Integer status;
-    
+
     /**
      * 导入渠道
      */
     private Integer inChannel;
-    
+
     /**
      * 推广渠道
      */
@@ -207,7 +201,7 @@ public class Coupon implements Serializable{
      * 是否删除：否[false], 是[true], 默认为false未删除
      */
     private Boolean isDeleted;
-    
+
     /**
      * 代金券分类
      */
@@ -233,16 +227,24 @@ public class Coupon implements Serializable{
      */
     private List<CouponShop> couponShops;
 
+
+
     /**
      * 优惠方式 0：满减 ；1：立减。
      */
     private Integer preferentialType;
+    public Integer getPreferentialType() {
+        return preferentialType;
+    }
 
+    public void setPreferentialType(Integer preferentialType) {
+        this.preferentialType = preferentialType;
+    }
     /**
      * 红包关联的商品  related_type只有这个类型是1 并且coupon_type 为2 的时候  才有这个类型
      */
     private List<RedenvelopeCommodity> rCommoditys;
-    
+
     public Integer getId() {
         return id;
     }
@@ -468,22 +470,22 @@ public class Coupon implements Serializable{
     }
 
     public Integer getInChannel() {
-		return inChannel;
-	}
+        return inChannel;
+    }
 
-	public void setInChannel(Integer inChannel) {
-		this.inChannel = inChannel;
-	}
+    public void setInChannel(Integer inChannel) {
+        this.inChannel = inChannel;
+    }
 
-	public Integer getOutChannel() {
-		return outChannel;
-	}
+    public Integer getOutChannel() {
+        return outChannel;
+    }
 
-	public void setOutChannel(Integer outChannel) {
-		this.outChannel = outChannel;
-	}
+    public void setOutChannel(Integer outChannel) {
+        this.outChannel = outChannel;
+    }
 
-	public String getSourceName() {
+    public String getSourceName() {
         return sourceName;
     }
 
@@ -547,79 +549,59 @@ public class Coupon implements Serializable{
         this.isDeleted = isDeleted;
     }
 
-	public CouponCategory getCouponCategory() {
-		return couponCategory;
-	}
+    public CouponCategory getCouponCategory() {
+        return couponCategory;
+    }
 
-	public void setCouponCategory(CouponCategory couponCategory) {
-		this.couponCategory = couponCategory;
-	}
+    public void setCouponCategory(CouponCategory couponCategory) {
+        this.couponCategory = couponCategory;
+    }
 
-	public CouponGroup getCouponGroup() {
-		return couponGroup;
-	}
+    public CouponGroup getCouponGroup() {
+        return couponGroup;
+    }
 
-	public void setCouponGroup(CouponGroup couponGroup) {
-		this.couponGroup = couponGroup;
-	}
+    public void setCouponGroup(CouponGroup couponGroup) {
+        this.couponGroup = couponGroup;
+    }
 
-	public CouponBrand getCouponBrand() {
-		return couponBrand;
-	}
+    public CouponBrand getCouponBrand() {
+        return couponBrand;
+    }
 
-	public void setCouponBrand(CouponBrand couponBrand) {
-		this.couponBrand = couponBrand;
-	}
+    public void setCouponBrand(CouponBrand couponBrand) {
+        this.couponBrand = couponBrand;
+    }
 
-	public CouponMall getCouponMall() {
-		return couponMall;
-	}
+    public CouponMall getCouponMall() {
+        return couponMall;
+    }
 
-	public void setCouponMall(CouponMall couponMall) {
-		this.couponMall = couponMall;
-	}
+    public void setCouponMall(CouponMall couponMall) {
+        this.couponMall = couponMall;
+    }
 
-	public List<CouponShop> getCouponShops() {
-		return couponShops;
-	}
+    public List<CouponShop> getCouponShops() {
+        return couponShops;
+    }
 
-	public void setCouponShops(List<CouponShop> couponShops) {
-		this.couponShops = couponShops;
-	}
+    public void setCouponShops(List<CouponShop> couponShops) {
+        this.couponShops = couponShops;
+    }
 
-	public List<RedenvelopeCommodity> getrCommoditys() {
-		return rCommoditys;
-	}
+    public List<RedenvelopeCommodity> getrCommoditys() {
+        return rCommoditys;
+    }
 
-	public void setrCommoditys(List<RedenvelopeCommodity> rCommoditys) {
-		this.rCommoditys = rCommoditys;
-	}
+    public void setrCommoditys(List<RedenvelopeCommodity> rCommoditys) {
+        this.rCommoditys = rCommoditys;
+    }
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Coupon [id=").append(id).append(", name=").append(name).append(", couponType=")
-				.append(couponType).append(", validateType=").append(validateType).append(", totalCount=")
-				.append(totalCount).append(", stockCount=").append(stockCount).append(", origPrice=").append(origPrice)
-				.append(", currPrice=").append(currPrice).append(", discount=").append(discount)
-				.append(", displayRegion=").append(displayRegion).append(", afterSaleService=").append(afterSaleService)
-				.append(", publishStartAt=").append(publishStartAt).append(", publishEndAt=").append(publishEndAt)
-				.append(", validStartAt=").append(validStartAt).append(", validEndAt=").append(validEndAt)
-				.append(", limitDesc=").append(limitDesc).append(", usageDesc=").append(usageDesc)
-				.append(", recommend=").append(recommend).append(", remark=").append(remark).append(", listPicUrl=")
-				.append(listPicUrl).append(", detailPicUrl=").append(detailPicUrl).append(", relatedType=")
-				.append(relatedType).append(", limitCount=").append(limitCount).append(", limitUseCount=")
-				.append(limitUseCount).append(", limitPublishCount=").append(limitPublishCount).append(", synTarget=")
-				.append(synTarget).append(", publishChannel=").append(publishChannel).append(", status=").append(status)
-				.append(", inChannel=").append(inChannel).append(", outChannel=").append(outChannel)
-				.append(", sourceName=").append(sourceName).append(", createUser=").append(createUser)
-				.append(", createAt=").append(createAt).append(", updateUser=").append(updateUser).append(", updateAt=")
-				.append(updateAt).append(", isThird=").append(isThird).append(", isOffStock=").append(isOffStock)
-				.append(", isDeleted=").append(isDeleted).append(", couponCategory=").append(couponCategory)
-				.append(", couponGroup=").append(couponGroup).append(", couponBrand=").append(couponBrand)
-				.append(", couponMall=").append(couponMall).append(", couponShops=").append(couponShops)
-				.append(", rCommoditys=").append(rCommoditys).append("]");
-		return builder.toString();
-	}
-    
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Coupon [id=").append(id).append(", name=").append(name).append(", couponType=").append(couponType).append(", validateType=").append(validateType).append(", totalCount=").append(totalCount).append(", stockCount=").append(stockCount).append(", origPrice=").append(origPrice).append(", currPrice=").append(currPrice).append(", discount=").append(discount).append(", displayRegion=").append(displayRegion).append(", afterSaleService=").append(afterSaleService).append(", publishStartAt=").append(publishStartAt).append(", publishEndAt=").append(publishEndAt).append(", validStartAt=").append(validStartAt).append(", validEndAt=").append(validEndAt).append(", limitDesc=").append(limitDesc).append(", usageDesc=").append(usageDesc).append(", recommend=").append(recommend).append(", remark=").append(remark).append(", listPicUrl=").append(listPicUrl).append(", detailPicUrl=").append(detailPicUrl).append(", relatedType=").append(relatedType).append(", limitCount=").append(limitCount).append(", limitUseCount=").append(limitUseCount).append(", limitPublishCount=").append(limitPublishCount).append(", synTarget=").append(synTarget).append(", publishChannel=").append(publishChannel).append(", status=").append(status).append(", inChannel=").append(inChannel).append(", outChannel=").append(outChannel).append(", sourceName=").append(sourceName).append(", createUser=").append(createUser).append(", createAt=").append(createAt).append(", updateUser=").append(updateUser).append(", updateAt=").append(updateAt).append(", isThird=").append(isThird).append(", isOffStock=").append(isOffStock).append(", isDeleted=").append(isDeleted).append(", couponCategory=").append(couponCategory).append(", couponGroup=").append(couponGroup).append(", couponBrand=").append(couponBrand).append(", couponMall=").append(couponMall).append(", couponShops=").append(couponShops).append(", rCommoditys=").append(rCommoditys).append("]");
+        return builder.toString();
+    }
+
 }
