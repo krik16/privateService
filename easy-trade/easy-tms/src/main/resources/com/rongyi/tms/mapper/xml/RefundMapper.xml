@@ -14,11 +14,16 @@
 		<result column="mall_id" property="mallId" jdbcType="VARCHAR" />
 		<result column="mall_name" property="mallName" jdbcType="VARCHAR" />
 		<result column="buyer_id" property="buyerId" jdbcType="VARCHAR" />
-		<result column="seller_account" property="sellerAccount" jdbcType="VARCHAR" />
+		<result column="seller_account" property="sellerAccount"
+			jdbcType="VARCHAR" />
 		<result column="seller_name" property="sellerName" jdbcType="VARCHAR" />
 		<result column="trade_type" property="tradeType" jdbcType="VARCHAR" />
 		<result column="pay_channel" property="payChannel" jdbcType="INTEGER" />
 		<result column="order_type" property="orderType" jdbcType="INTEGER" />
+		<result column="coupon_buyer_id" property="couponBuyerId"
+			jdbcType="VARCHAR" />
+		<result column="coupon_buyer_account" property="couponBuyerAccount"
+			jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
 		id, order_time, `status`, draw_user_id, order_price,
@@ -26,7 +31,7 @@
 		shop_id,
 		shop_name, mail_id, mall_name, buyer_id,
 		seller_account,trade_type,
-		seller_name,pay_channel,order_type
+		seller_name,pay_channel,order_type,coupon_buyer_id,coupon_buyer_account
 	</sql>
 	<sql id="trade_list_where_clause">
 		<!-- 付款单号 -->
@@ -48,13 +53,17 @@
 			concat('%',#{shopName,jdbcType=VARCHAR},'%')
 		</if>
 		<!-- 买家id集合 -->
-		<if test="buyerIds != null and buyerIds != ''">
-			AND buyer_id in
-			<foreach collection="buyerIds" index="index" item="item"
-				open="(" separator="," close=")">
-				#{item}
-			</foreach>
+		<if test="buyerAccount != null and buyerAccount != ''">
+			AND coupon_buyer_account=#{buyerAccount}
+			<if test="buyerIds != null and buyerIds != ''">
+				OR buyer_id in
+				<foreach collection="buyerIds" index="index" item="item"
+					open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
 		</if>
+
 		<!-- 卖家姓名 -->
 		<if test="sellerName != null and sellerName != ''">
 			AND seller_name like
@@ -67,12 +76,12 @@
 
 		<!-- 交易类型 -->
 		<if test="tradeType != null and tradeType == 1">
-			AND (trade_type = 1 OR trade_type = 6) 
+			AND (trade_type = 1 OR trade_type = 6)
 		</if>
 		<if test="tradeType != null and tradeType != 1">
 			AND trade_type = #{tradeType}
 		</if>
-		<!-- 付款方式-->
+		<!-- 付款方式 -->
 		<if test="payChannel != null and payChannel != ''">
 			AND pay_channel = #{payChannel}
 		</if>
