@@ -109,7 +109,7 @@ public class MessageManger {
      * @param mallName 验证码
      * @return
      */
-    public String sendValidSmsMessage(String phone,String message,String content,String mallName,String title,String time,String balance) {
+    public String sendValidSmsMessage(String phone,String message,String content,String mallName,String title,String time,String balance,String checkNum) {
 
         SmsEntity xmlentity=new SmsEntity();
         String xml=null;
@@ -117,7 +117,7 @@ public class MessageManger {
         try {
 
 
-        xml=this.SendValidMessage(phone,content,mallName,title,time,balance).toString();
+        xml=this.SendValidMessage(phone,content,mallName,title,time,balance,checkNum).toString();
        // System.out.println(xml);
         xmlentity.setReturnstatus("returnstatus");
         xmlentity.setMessage("message");
@@ -159,7 +159,7 @@ public class MessageManger {
 
     }
   //发送短信
-    public StringBuffer SendValidMessage(String mobile,String content,String mallName,String title,String time,String balance)
+    public StringBuffer SendValidMessage(String mobile,String content,String mallName,String title,String time,String balance,String checkNum)
     {
 
         BufferedReader br=null;
@@ -173,7 +173,7 @@ public class MessageManger {
         String sendTime="";
         try {
 //        	content=String.format(content, mallName,time,balance);
-            content = content.replaceFirst("@", mallName).replaceFirst("@", time).replaceFirst("@", balance);
+            content = content.replaceFirst("@", mallName).replaceFirst("@", time).replaceFirst("@", checkNum).replaceFirst("@", balance);
             //设置发送内容的编码方式
             String send_content= URLEncoder.encode(content.replaceAll("<br/>", " "), "UTF-8");//发送内容
 
