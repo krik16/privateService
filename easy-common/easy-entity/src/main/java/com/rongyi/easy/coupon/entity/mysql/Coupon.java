@@ -234,6 +234,11 @@ public class Coupon implements Serializable{
     private List<CouponShop> couponShops;
 
     /**
+     * 优惠方式 0：满减 ；1：立减。
+     */
+    private Integer preferentialType;
+
+    /**
      * 红包关联的商品  related_type只有这个类型是1 并且coupon_type 为2 的时候  才有这个类型
      */
     private List<RedenvelopeCommodity> rCommoditys;
