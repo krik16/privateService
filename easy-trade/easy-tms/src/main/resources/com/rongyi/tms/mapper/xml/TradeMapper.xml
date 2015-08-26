@@ -85,7 +85,7 @@
 			concat('%',#{shopName,jdbcType=VARCHAR},'%')
 		</if>
 		<if test="buyerAccount != null and buyerAccount != ''">
-			AND coupon_buyer_account=#{buyerAccount}
+			AND (coupon_buyer_account=#{buyerAccount}
 			<!-- 买家id集合 -->
 			<if test="buyerIds != null and buyerIds != ''">
 				OR buyer_id in
@@ -94,6 +94,7 @@
 					#{item}
 				</foreach>
 			</if>
+			)
 		</if>
 		<!-- 卖家姓名 -->
 		<if test="sellerName != null and sellerName != ''">
