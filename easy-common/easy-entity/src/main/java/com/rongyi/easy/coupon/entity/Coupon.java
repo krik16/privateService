@@ -223,6 +223,11 @@ public class Coupon implements Serializable {
 	 */
     @Property("source_type")
 	private Integer sourceType;
+
+    /**
+     *优惠方式 0：满减 ；1：立减。
+     */
+    private Integer preferentialType;
     /******新增字段 end******/
 
     public ObjectId getId() {
