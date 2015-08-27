@@ -250,7 +250,6 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
 		Map<String, Object> bodyMap = new HashMap<String, Object>();
 		try {
-			LOGGER.info("支付签名生成开始时间-->" + DateUtil.getCurrDateTime().getTime());
 			if (PaymentEventType.APP.equals(event.getType())) {// 手机APP支付
 				bodyMap = aliPaymentService.getZhiFuBaoSign((Map<String, Object>) event.getBody(), paymentEntityVO.getPayNo());
 				LOGGER.info("支付宝APP支付");
@@ -267,7 +266,6 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 				bodyMap.put("paymentId", paymentEntityVO.getPayNo());
 				LOGGER.info("申请退款或打款给卖家");
 			}
-			LOGGER.info("支付签名生成结束时间-->" + DateUtil.getCurrDateTime().getTime());
 			bodyMap.put("orderNum", paymentEntityVO.getOrderNum());
 			bodyMap.put("orderDetailNum", paymentEntityVO.getOrderDetailNumArray());
 		} catch (Exception e) {
