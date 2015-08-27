@@ -14,9 +14,9 @@ import java.util.Date;
  */
 public class IntegralRecordVO implements Serializable {
 	private String user_id;
-	private int sourceType;//1:app,2:后台操作
+	private int sourceType;//1:app,2:后台操作3终端
 	private int action ; //1加积分，2减积分
-	private int type; //1.上传头像，2评论店铺或商场，3订单评论，4.每日签到，5.下单扣减，6支付超时恢复积分，7支付失败恢复积分，8验券成功加积分，9交易成功加积分
+	private int type; //1.上传头像，2评论店铺或商场，3订单评论，4.每日签到，5.下单扣减，6支付超时恢复积分，7支付失败恢复积分，8验券成功加积分，9交易成功加积分10终端签到
 	private int use_score; //积分	
 	private BigDecimal pay_money; //支付金额
 	private BigDecimal total_money;//原结算金额
@@ -36,8 +36,8 @@ public class IntegralRecordVO implements Serializable {
  	private String op_name;
  
   	private String device_id ; //设备ID
-  	private String shop_id;  //商场id
-  	private String store_id; //店铺
+  	private String mall_id;  //商场id
+  	private String shop_id; //店铺
 	 
 	public String getDevice_id() {
 		return device_id;
@@ -51,12 +51,15 @@ public class IntegralRecordVO implements Serializable {
 	public void setShop_id(String shop_id) {
 		this.shop_id = shop_id;
 	}
-	public String getStore_id() {
-		return store_id;
+
+	public String getMall_id() {
+		return mall_id;
 	}
-	public void setStore_id(String store_id) {
-		this.store_id = store_id;
+
+	public void setMall_id(String mall_id) {
+		this.mall_id = mall_id;
 	}
+
 	public BigDecimal getPost_money() {
 		return post_money;
 	}
