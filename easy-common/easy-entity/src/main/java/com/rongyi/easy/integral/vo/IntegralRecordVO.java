@@ -35,26 +35,27 @@ public class IntegralRecordVO implements Serializable {
  	private String reason; 
  	private String op_name;
  
-  	private String deviceId ; //设备ID
-  	private String shopId;  //商场id
-  	private String storeId; //店铺
-	public String getDeviceId() {
-		return deviceId;
+  	private String device_id ; //设备ID
+  	private String shop_id;  //商场id
+  	private String store_id; //店铺
+	 
+	public String getDevice_id() {
+		return device_id;
 	}
-	public void setDeviceId(String deviceId) {
-		this.deviceId = deviceId;
+	public void setDevice_id(String device_id) {
+		this.device_id = device_id;
 	}
-	public String getShopId() {
-		return shopId;
+	public String getShop_id() {
+		return shop_id;
 	}
-	public void setShopId(String shopId) {
-		this.shopId = shopId;
+	public void setShop_id(String shop_id) {
+		this.shop_id = shop_id;
 	}
-	public String getStoreId() {
-		return storeId;
+	public String getStore_id() {
+		return store_id;
 	}
-	public void setStoreId(String storeId) {
-		this.storeId = storeId;
+	public void setStore_id(String store_id) {
+		this.store_id = store_id;
 	}
 	public BigDecimal getPost_money() {
 		return post_money;
