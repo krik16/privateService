@@ -85,4 +85,11 @@ public interface WeixinPayService {
 	 **/
 	public abstract WeixinQueryOrderParamVO queryOrder(String payNo);
 
+	/**	
+	 * @Description: 微信定时批量退款 
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年8月27日上午10:38:00
+	 **/
+	public void batchTriggerWeixinRefund();
 }

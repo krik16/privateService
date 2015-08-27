@@ -186,9 +186,9 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 	}
 
 	@Override
-	public String getOrderNumStrsByPayNo(String payNo,Integer tradeType) {
+	public String getOrderNumStrsByPayNo(String payNo, Integer tradeType) {
 		String orderNum = "";
-		List<PaymentEntity> list = selectByPayNoAndTradeType(payNo,tradeType);
+		List<PaymentEntity> list = selectByPayNoAndTradeType(payNo, tradeType);
 		if (list != null && list.size() > 0) {
 			for (int i = 0; i < list.size(); i++) {
 				orderNum += list.get(i).getOrderNum();
@@ -218,7 +218,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 	public Map<String, Object> getSendMessage(MessageEvent event) {
 		Map<String, Object> messageMap = new HashMap<String, Object>();
 		try {
-			if (PaymentEventType.BUYER_PAID.equals(event.getType()))// osm支付成功回调通知
+			if (PaymentEventType.BUYER_PAID.equals(event.getType()))// 支付成功回调通知
 				return null;
 			PaymentEntityVO paymentEntityVO = insertOrderMessage(event);// 插入数据库
 			messageMap.put("timestamp", DateUtil.getCurrDateTime().getTime());
@@ -291,7 +291,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 					LOGGER.info("订单号已存在，返回历史付款单号" + payNo);
 					return paymentEntityVO;
 				} else {
-					if (paymentLogInfoService.selectByOutTradeNo(payNo,null) == null) {
+					if (paymentLogInfoService.selectByOutTradeNo(payNo, null) == null) {
 						LOGGER.info("微信支付修改价格，重新生成支付单号-->");
 						weixinPayService.closeOrder(payNo);
 					}
@@ -332,7 +332,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 			if (PaymentEventType.PAY_TO_SELLER.equals(event.getType())) {// 打款给卖家
 				LOGGER.info("打款给卖家");
 				paymentEntity.setTradeType(2);
-			} else if (PaymentEventType.REFUND.equals(event.getType())) {// 后端OSM退款
+			} else if (PaymentEventType.REFUND.equals(event.getType())) {// 后端退款
 				LOGGER.info("买家申请退款");
 				paymentEntity.setTradeType(1);
 			}
@@ -466,7 +466,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 	}
 
 	@Override
-	public PaymentEntity selectByOrderNumAndTradeType(String orderNum, Integer tradeType, Integer status,Integer payChannel) {
+	public PaymentEntity selectByOrderNumAndTradeType(String orderNum, Integer tradeType, Integer status, Integer payChannel) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("orderNum", orderNum);
 		params.put("tradeType", tradeType);
@@ -658,5 +658,14 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 			}
 		}
 		return paymentEntityList;
+	}
+
+	@Override
+	public List<PaymentEntity> selectByTradeTypeAndAgreeRefund(Integer tradeType, Integer payChannel, Integer agreeRefund) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("tradeType", tradeType);
+		map.put("payChannel", payChannel);
+		map.put("agreeRefund", agreeRefund);
+		return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectByTradeTypeAndAgreeRefund", map);
 	}
 }
