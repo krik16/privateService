@@ -2,8 +2,10 @@ package com.rongyi.rss.coupon.merchant;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.mysql.Coupon;
+import com.rongyi.easy.coupon.entity.mysql.CouponRejectRecord;
 import com.rongyi.easy.coupon.vo.merchant.UserInfoVo;
 import com.rongyi.easy.page.QueryParam;
+import  java.util.List;
 
 /**
  * Descriptions:
@@ -38,5 +40,13 @@ public interface MerchantCouponServce {
      * @return coupon id
      */
     public int insertCoupon();
+
+    /**
+     * 获取未通过列表
+     * @param couponId
+     * @param type
+     * @return
+     */
+    public List<CouponRejectRecord> getUnpassReasons(Integer couponId,Integer type);
 
 }
