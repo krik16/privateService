@@ -223,6 +223,6 @@ public interface PaymentService {
 	 * @Author:  柯军
 	 * @datetime:2015年8月27日上午10:42:19  的                                                                                                                         
 	 **/
-	public List<PaymentEntity> selectByTradeTypeAndRefundRejected(Integer tradeType,Integer payChannel,Integer refundRejected);
+	public List<PaymentEntity> selectByTradeTypeAndRefundRejected(Integer tradeType,Integer payChannel,Integer refundRejected,Integer status);
 	
 }

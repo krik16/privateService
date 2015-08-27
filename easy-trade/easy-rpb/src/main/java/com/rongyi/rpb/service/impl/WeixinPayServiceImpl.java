@@ -240,6 +240,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 	@Override
 	public boolean weixinRefund(String payNo, double refundFee, double totalFee, String newPayNo) {
 		try {
+			LOGGER.info("原付款单号-->"+payNo+",付款总金额-->"+totalFee+",退款单号-->"+newPayNo+",退款金额-->"+refundFee);
 			RequestHandler reqHandler = new RequestHandler(null, null);
 			TenpayHttpClient httpClient = new TenpayHttpClient();
 			// -----------------------------
@@ -439,7 +440,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 	public void batchTriggerWeixinRefund() {
 		List<String> failList = new ArrayList<String>();
 		List<PaymentEntity> list = paymentService.selectByTradeTypeAndRefundRejected(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1,
-				Constants.REFUND_REJECTED.REFUND_REJECTED0);
+				Constants.REFUND_REJECTED.REFUND_REJECTED0,Constants.PAYMENT_STATUS.STAUS0);
 		for (PaymentEntity paymentEntity : list) {
 			PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
 					paymentEntity.getPayChannel());
@@ -463,6 +464,6 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 		if (failList.isEmpty())
 			LOGGER.info("微信批量退款成功！");
 		else
-			LOGGER.info("以下微信订单失败退款,失败退款单号-->" + failList.toString());
+			LOGGER.info("微信批量退款失败单号-->" + failList.toString());
 	}
 }

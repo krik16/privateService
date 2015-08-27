@@ -5,14 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.testng.annotations.Test;
 
 import base.BaseTest;
 
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
-import com.rongyi.easy.rpb.vo.WeixinQueryOrderParamVO;
-import com.rongyi.rpb.common.util.orderSign.weixinSign.AccessTokenRequestHandler;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.client.TenpayHttpClient;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.scan.RandomStringGenerator;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.scan.RefundReqData;
@@ -40,10 +39,10 @@ public class WeixinPayServiceTest extends BaseTest{
 	@Autowired
 	Sender sender;
 
-	 @Test
+//	 @Test
 	public void testSelectByPrimaryKey() {
 		// weixinPayService.getWeixinRefund("1000001898510594" ,0.01, 0.01);
-		List<PaymentEntity> list = paymentService.selectByPayNoAndTradeType("1000001597030813", 0);
+		List<PaymentEntity> list = paymentService.selectByPayNoAndTradeType(null, 0);
 			System.err.println(list.toArray().toString());
 	}
 
@@ -176,12 +175,15 @@ public class WeixinPayServiceTest extends BaseTest{
 		System.err.println(resContent);
 	}
 
-	@Test
+//	@Test
 	public void testQueryOrder2(){
 		 System.err.println(ConstantUtil.CRET_DIRECTORY);
 		System.err.println(weixinPayService.queryOrder("10000002315977421").getRet_code());
-		
-		
 	}
-	
+
+	@Test
+	@Rollback(false)
+	public void testBatchRefund(){
+		weixinPayService.batchTriggerWeixinRefund();
+	}
 }

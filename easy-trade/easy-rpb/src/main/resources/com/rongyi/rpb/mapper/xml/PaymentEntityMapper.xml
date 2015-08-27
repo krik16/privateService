@@ -395,5 +395,6 @@
 		where trade_type = #{tradeType,jdbcType=INTEGER}
 		and	pay_channel = #{payChannel,jdbcType=INTEGER}
 		and refund_rejected = #{refundRejected,jdbcType=INTEGER}
+		and status = #{status,jdbcType=INTEGER}
 	</select>
 </mapper>
