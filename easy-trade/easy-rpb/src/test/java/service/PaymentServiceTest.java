@@ -233,9 +233,16 @@ public class PaymentServiceTest extends BaseTest {
 		System.err.println(paymentService.selectByBatchNoAndStatus("20150812192552139",2).size());
 	}
 	
-	@Test
+//	@Test
 	public void testSelectByTradeType(){
 		PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType("0825255175681151", Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE5, Constants.PAYMENT_STATUS.STAUS2,0);
 		System.err.println(paymentEntity.getId());
+	}
+	
+	@Test
+	public void testBodyToEntity(){
+		String body = "{\"body\":{\"title\":\"c5555555\",\"orderDetailNum\":\"626676\",\"orderType\":\"1\",\"paymentId\":\"1000000459740290\","
+				+ "\"orderNum\":\"0827630333441716\",\"totalPrice\":\"0.01\"},\"source\":\"coupon_order_queue\",\"target\":\"rpb\",\"timestamp\":1440667020557,\"type\":\"2\"}";
+		paymentService.bodyToPaymentEntity(body, "2");
 	}
 }

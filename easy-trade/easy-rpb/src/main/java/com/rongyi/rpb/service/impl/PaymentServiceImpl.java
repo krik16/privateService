@@ -151,6 +151,8 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 			paymentEntityVO.setOrderDetailNumArray("");
 		if (bodyMap.get("weidianId") != null && StringUtils.isNotEmpty(bodyMap.get("weidianId").toString()))
 			paymentEntityVO.setShowNum(Integer.valueOf(bodyMap.get("weidianId").toString()));
+		if (bodyMap.get("paymentId") != null && StringUtils.isNotEmpty(bodyMap.get("paymentId").toString()))
+			paymentEntityVO.setPayNo(bodyMap.get("paymentId").toString());
 		paymentEntityVO.setStatus(0);
 		if (PaymentEventType.WEIXIN_PAY.equals(type))
 			paymentEntityVO.setPayChannel(1);
@@ -167,6 +169,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 		String[] orderNumArray = paymentEntityVO.getOrderNum().split("\\,");
 		PaymentEntity paymentEntity = null;
 		String payNo = orderNoGenService.getOrderNo();// 生成付款单号,多个订单号付款单号一样
+		LOGGER.info("生成付款单号：" + payNo);
 		if (orderNumArray != null && orderNumArray.length > 0) {
 			for (int i = 0; i < orderNumArray.length; i++) {
 				paymentEntity = new PaymentEntity();
@@ -186,9 +189,9 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 	}
 
 	@Override
-	public String getOrderNumStrsByPayNo(String payNo,Integer tradeType) {
+	public String getOrderNumStrsByPayNo(String payNo, Integer tradeType) {
 		String orderNum = "";
-		List<PaymentEntity> list = selectByPayNoAndTradeType(payNo,tradeType);
+		List<PaymentEntity> list = selectByPayNoAndTradeType(payNo, tradeType);
 		if (list != null && list.size() > 0) {
 			for (int i = 0; i < list.size(); i++) {
 				orderNum += list.get(i).getOrderNum();
@@ -218,7 +221,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 	public Map<String, Object> getSendMessage(MessageEvent event) {
 		Map<String, Object> messageMap = new HashMap<String, Object>();
 		try {
-			if (PaymentEventType.BUYER_PAID.equals(event.getType()))// osm支付成功回调通知
+			if (PaymentEventType.BUYER_PAID.equals(event.getType()))// 支付成功回调通知
 				return null;
 			PaymentEntityVO paymentEntityVO = insertOrderMessage(event);// 插入数据库
 			messageMap.put("timestamp", DateUtil.getCurrDateTime().getTime());
@@ -290,23 +293,21 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 					paymentEntityVO.setPayNo(payNo);
 					LOGGER.info("订单号已存在，返回历史付款单号" + payNo);
 					return paymentEntityVO;
-				} else {
-					if (paymentLogInfoService.selectByOutTradeNo(payNo,null) == null) {
-						LOGGER.info("微信支付修改价格，重新生成支付单号-->");
-						weixinPayService.closeOrder(payNo);
-					}
+				} else if (paymentLogInfoService.selectByOutTradeNo(payNo, null) == null) {
+					LOGGER.info("微信支付修改价格，重新生成支付单号-->");
+					weixinPayService.closeOrder(payNo);
 				}
 			}
 
 		}
 		List<PaymentEntity> paymentEntityList = getPaymemtsByMoreOrderNum(paymentEntityVO);// 多个订单号生成多条记录对应一条付款单号
-		payNo = paymentEntityList.get(0).getPayNo();// 付款单号
-		LOGGER.info("生成付款单号：" + payNo);
+		String oldPayNo = paymentEntityVO.getPayNo();
+		payNo = paymentEntityList.get(0).getPayNo();// 新付款单号
 		paymentEntityVO.setPayNo(payNo);
 		if (StringUtils.isEmpty(paymentEntityVO.getTitle())) {
-			paymentEntityVO.setTitle(getTitle(paymentEntityList.get(0).getPayNo()));
+			paymentEntityVO.setTitle(getTitle(payNo));
 		}
-		insertList(paymentEntityList, paymentEntityVO, event);
+		insertList(paymentEntityList, paymentEntityVO, event, oldPayNo);
 		orderFormNsyn.updateOrderPrice(paymentEntityVO.getOrderNum());
 		return paymentEntityVO;
 	}
@@ -326,15 +327,18 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 		return false;
 	}
 
-	private void insertList(List<PaymentEntity> paymentEntityList, PaymentEntityVO paymentEntityVO, MessageEvent event) {
+	private void insertList(List<PaymentEntity> paymentEntityList, PaymentEntityVO paymentEntityVO, MessageEvent event, String oldPayNo) {
 		for (PaymentEntity paymentEntity : paymentEntityList) {
 			paymentEntity.setTradeType(0);// 默认支付
 			if (PaymentEventType.PAY_TO_SELLER.equals(event.getType())) {// 打款给卖家
 				LOGGER.info("打款给卖家");
 				paymentEntity.setTradeType(2);
-			} else if (PaymentEventType.REFUND.equals(event.getType())) {// 后端OSM退款
+			} else if (PaymentEventType.REFUND.equals(event.getType())) {// 后端退款
 				LOGGER.info("买家申请退款");
 				paymentEntity.setTradeType(1);
+				List<PaymentEntity> historyList = selectByPayNoAndTradeType(oldPayNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
+				if (!historyList.isEmpty()) // 退款时根据付款单号找到对应付款记录中的付款方式
+					paymentEntity.setPayChannel(historyList.get(0).getPayChannel());
 			}
 			paymentEntity.setTitle(paymentEntityVO.getTitle());
 			if (paymentEntityVO.getAmountMoney() == null || isZero(paymentEntityVO.getAmountMoney())) {// 支付款是0元是直接设置支付状态为已支付
@@ -466,7 +470,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 	}
 
 	@Override
-	public PaymentEntity selectByOrderNumAndTradeType(String orderNum, Integer tradeType, Integer status,Integer payChannel) {
+	public PaymentEntity selectByOrderNumAndTradeType(String orderNum, Integer tradeType, Integer status, Integer payChannel) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("orderNum", orderNum);
 		params.put("tradeType", tradeType);
@@ -658,5 +662,15 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 			}
 		}
 		return paymentEntityList;
+	}
+
+	@Override
+	public List<PaymentEntity> selectByTradeTypeAndRefundRejected(Integer tradeType, Integer payChannel, Integer refundRejected, Integer status) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("tradeType", tradeType);
+		map.put("payChannel", payChannel);
+		map.put("refundRejected", refundRejected);
+		map.put("status", status);
+		return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectByTradeTypeAndRefundRejected", map);
 	}
 }
