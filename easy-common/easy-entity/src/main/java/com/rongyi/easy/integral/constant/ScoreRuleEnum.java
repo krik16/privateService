@@ -15,7 +15,8 @@ public enum ScoreRuleEnum {
 	    SCORE_ORDER_SUB(5,"下单扣减"),
 	    SCORE_PAY_TIMEOUT_ROLLBACK(6,"退积分"),
  	    SCORE_COUPON_ADD(8,"验券成功加积分"),
-	    SCORE_PAY_SUCCESS_ADD(9,"交易成功加积分");
+	    SCORE_PAY_SUCCESS_ADD(9,"交易成功加积分"),
+	    SCORE_TERMINAL(10,"终端签到");
  
 	ScoreRuleEnum(Integer code,String value){
 	        this.code = code;
