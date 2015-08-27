@@ -111,13 +111,13 @@ public class CouponOrderItem implements Serializable {
 
     }
 
-    public CouponOrderItem(Long orderId, String orderNo, String couponId, String couponCode, String name, String couponType, Double unitPrice,
+
+    public CouponOrderItem(Long orderId, String orderNo, String couponId, String name, String couponType, Double unitPrice,
                            Integer unitCount, Date updateTime,
                            Date saleStartTime, Date saleEndTime, Date startTime, Date endTime, String thumbnail, Double refundAmount) {
         this.orderId = orderId;
         this.orderNo = orderNo;
         this.couponId = couponId;
-        this.couponCode = couponCode;
         this.name = name;
         this.couponType = couponType;
         this.unitPrice = unitPrice;

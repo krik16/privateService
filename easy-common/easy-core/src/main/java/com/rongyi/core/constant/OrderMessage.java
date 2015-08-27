@@ -104,5 +104,9 @@ public interface OrderMessage {
 	/** 交易成功*/
 	public static final String TRADE_SUCCESS_MESSAGE1 = "您有一笔订单交易成功，该订单视为交易成功，如需要退货，请联系导购进行线下退货";
 	public static final String TRADE_SUCCESS_MESSAGE2 = "您有一笔订单交易成功，系统默认将全款金额发放至您的账户，请及时查看";
+	
+	/** 验码佣金 */
+	public static final String COMMISSION_VALID1 = "亲爱的导购，验码佣金";
+	public static final String COMMISSION_VALID2 = "元正常发放到您的账户，请注意查收。";
 
 }

@@ -19,6 +19,8 @@ public class OldCouponDetail implements Serializable {
 
     private String title;//券名称
 
+    //新版本废弃
+    @Deprecated
     private String activityCode;// 团购券验证码
 
     private Integer status;// 未使用:0,已使用:1,退款中:2,已退款:3,已过期:4
@@ -43,7 +45,7 @@ public class OldCouponDetail implements Serializable {
     @Deprecated
     private List<OldUserCode> myActivityList;// 老用户优惠VO列表
 
-    private List<OldUserCode> userCouponList; //用户券码列表
+    private List<OldUserCode> userCodeList; //用户券码列表
 
     private Integer ticketTotalNumber;// 订单项对应的用户优惠总数量
 
@@ -62,18 +64,12 @@ public class OldCouponDetail implements Serializable {
     private int unUsered;  //未使用的数量
 
     private Double orderPrice;//订单总价
-    
+
     private int refundNum;//最大退款数量
 
-    private int buyedNum;//购买数量
 
-    public int getBuyedNum() {
-        return buyedNum;
-    }
+    private List<Integer> afterSaleService;
 
-    public void setBuyedNum(int buyedNum) {
-        this.buyedNum = buyedNum;
-    }
 
     public double getCurrentPrice() {
         return currentPrice;
@@ -91,10 +87,14 @@ public class OldCouponDetail implements Serializable {
         this.id = id;
     }
 
+    //新版本废弃
+    @Deprecated
     public String getActivityCode() {
         return activityCode;
     }
 
+    //新版本废弃
+    @Deprecated
     public void setActivityCode(String activityCode) {
         this.activityCode = activityCode;
     }
@@ -179,10 +179,12 @@ public class OldCouponDetail implements Serializable {
         this.thumbnail = thumbnail;
     }
 
+    @Deprecated
     public List<OldUserCode> getMyActivityList() {
         return myActivityList;
     }
 
+    @Deprecated
     public void setMyActivityList(List<OldUserCode> myActivityList) {
         this.myActivityList = myActivityList;
     }
@@ -251,21 +253,28 @@ public class OldCouponDetail implements Serializable {
         this.orderPrice = orderPrice;
     }
 
-    public List<OldUserCode> getUserCouponList() {
-        return userCouponList;
+
+    public int getRefundNum() {
+        return refundNum;
     }
 
-    public void setUserCouponList(List<OldUserCode> userCouponList) {
-        this.userCouponList = userCouponList;
+    public void setRefundNum(int refundNum) {
+        this.refundNum = refundNum;
     }
 
-	public int getRefundNum() {
-		return refundNum;
-	}
+    public List<Integer> getAfterSaleService() {
+        return afterSaleService;
+    }
 
-	public void setRefundNum(int refundNum) {
-		this.refundNum = refundNum;
-	}
-    
-    
+    public void setAfterSaleService(List<Integer> afterSaleService) {
+        this.afterSaleService = afterSaleService;
+    }
+
+    public List<OldUserCode> getUserCodeList() {
+        return userCodeList;
+    }
+
+    public void setUserCodeList(List<OldUserCode> userCodeList) {
+        this.userCodeList = userCodeList;
+    }
 }

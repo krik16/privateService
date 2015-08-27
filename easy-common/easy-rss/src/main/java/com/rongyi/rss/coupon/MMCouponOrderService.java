@@ -104,7 +104,7 @@ public interface MMCouponOrderService {
      * @param payAccount 支付账户(例如支付宝账户)
      * @return
      */
-    boolean processCouponOrderForPayed(String orderNo, int tradeWay, String paymentNo, String payAccount);
+    Map<String,Object> processCouponOrderForPayed(String orderNo, int tradeWay, String paymentNo, String payAccount);
 
     /**
      * 获取未支付订单及订单项

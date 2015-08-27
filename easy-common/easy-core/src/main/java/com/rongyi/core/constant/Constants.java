@@ -5,6 +5,12 @@ import com.rongyi.core.framework.spring.context.utils.SpringContextUtil;
 
 public interface Constants {
 
+
+    interface OrderPaytime {
+        Integer PAY_SECOND = 900; //订单支付最大时间（秒数）
+    }
+
+
     /**
      * 登录用户的session key
      */
@@ -599,5 +605,11 @@ public interface Constants {
     	 * 扫码验券建议
     	 */
     	String VALID_CODE_SUGGEST = "小提醒：如果遇到用户选择数量和本页面不一致的情况，建议采用单张验码的方式试试噢。问题反馈：400-040-8989";
+    }
+    interface ValidCodeNum{
+    	/**
+    	 * 验券的数量（默认值）
+    	 */
+    	Integer DEFAULT_VALID_CODE_NUM = 1;
     }
 }
