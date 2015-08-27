@@ -80,15 +80,14 @@ public class MqReceiverServiceImpl implements MqReceiverService {
 	 **/
 	private void business(Message message, Channel channel, MessageEvent event) {
 		Map<String, Object> messageMap = null;
-		if (PaymentEventType.REFUND.equals(event.getType()) && weixinPayService.validateIsWeixinPay(event)) {// 微信退款
-			messageMap = weixinPayService.getRefundMessageMap(event);
-			if (messageMap != null)
-				sender.convertAndSend(messageMap, event.getSource());
-		} else {
+//		if (PaymentEventType.REFUND.equals(event.getType()) && weixinPayService.validateIsWeixinPay(event)) {// 微信退款
+//			messageMap = weixinPayService.getRefundMessageMap(event);
+//			if (messageMap != null)
+//				sender.convertAndSend(messageMap, event.getSource());
+//		} else {
 			messageMap = paymentService.getSendMessage(event);
-		}
+//		}
 		if (messageMap != null && isAppPay(event.getType())) {// 支付消息回复
-			LOGGER.info("支付签名发送时间-->"+DateUtil.getCurrDateTime().getTime());
 			sender.rpcSend(messageMap, message, channel);
 		}
 	}

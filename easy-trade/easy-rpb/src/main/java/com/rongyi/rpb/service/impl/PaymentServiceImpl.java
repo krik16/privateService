@@ -151,6 +151,8 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 			paymentEntityVO.setOrderDetailNumArray("");
 		if (bodyMap.get("weidianId") != null && StringUtils.isNotEmpty(bodyMap.get("weidianId").toString()))
 			paymentEntityVO.setShowNum(Integer.valueOf(bodyMap.get("weidianId").toString()));
+		if (bodyMap.get("paymentId") != null && StringUtils.isNotEmpty(bodyMap.get("paymentId").toString()))
+			paymentEntityVO.setPayNo(bodyMap.get("paymentId").toString());
 		paymentEntityVO.setStatus(0);
 		if (PaymentEventType.WEIXIN_PAY.equals(type))
 			paymentEntityVO.setPayChannel(1);
@@ -335,6 +337,9 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 			} else if (PaymentEventType.REFUND.equals(event.getType())) {// 后端退款
 				LOGGER.info("买家申请退款");
 				paymentEntity.setTradeType(1);
+				List<PaymentEntity> historyList = selectByPayNoAndTradeType(paymentEntityVO.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
+				if (!historyList.isEmpty())// 退款时根据付款单号找到对应付款记录中的付款方式
+					paymentEntity.setPayChannel(historyList.get(0).getPayChannel());
 			}
 			paymentEntity.setTitle(paymentEntityVO.getTitle());
 			if (paymentEntityVO.getAmountMoney() == null || isZero(paymentEntityVO.getAmountMoney())) {// 支付款是0元是直接设置支付状态为已支付
@@ -661,11 +666,11 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 	}
 
 	@Override
-	public List<PaymentEntity> selectByTradeTypeAndAgreeRefund(Integer tradeType, Integer payChannel, Integer agreeRefund) {
+	public List<PaymentEntity> selectByTradeTypeAndRefundRejected(Integer tradeType, Integer payChannel, Integer refundRejected) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("tradeType", tradeType);
 		map.put("payChannel", payChannel);
-		map.put("agreeRefund", agreeRefund);
-		return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectByTradeTypeAndAgreeRefund", map);
+		map.put("refundRejected", refundRejected);
+		return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectByTradeTypeAndRefundRejected", map);
 	}
 }

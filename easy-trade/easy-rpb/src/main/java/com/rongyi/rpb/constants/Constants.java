@@ -129,9 +129,9 @@ public interface Constants {
 	 * @datetime:2015年8月27日下午2:31:25
 	 *
 	 **/
-	interface AGREE_REFUND{
-		int AGREE_REFUND0 = 0;//允许退款
-		int AGREE_REFUND1 = 1;//拒绝退款
+	interface REFUND_REJECTED{
+		int REFUND_REJECTED0 = 0;//允许退款
+		int REFUND_REJECTED1 = 1;//拒绝退款
 	}
 
 }
