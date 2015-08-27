@@ -2,6 +2,7 @@ package com.rongyi.rpb.service.impl;
 
 import java.io.File;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -30,9 +31,11 @@ import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.rongyi.core.bean.ObjectConvert;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.JsonUtil;
+import com.rongyi.core.constant.PaymentEventType;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
+import com.rongyi.easy.rpb.domain.PaymentItemEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
 import com.rongyi.easy.rpb.vo.WeixinQueryOrderParamVO;
@@ -49,9 +52,12 @@ import com.rongyi.rpb.common.util.orderSign.weixinSign.util.Sha1Util;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.util.WXUtil;
 import com.rongyi.rpb.constants.ConstantUtil;
 import com.rongyi.rpb.constants.Constants;
+import com.rongyi.rpb.mq.Sender;
 import com.rongyi.rpb.service.PCWebPageAlipayService;
+import com.rongyi.rpb.service.PaymentItemService;
 import com.rongyi.rpb.service.PaymentLogInfoService;
 import com.rongyi.rpb.service.PaymentService;
+import com.rongyi.rpb.service.RpbEventService;
 import com.rongyi.rpb.service.WeixinPayService;
 import com.rongyi.rss.rpb.OrderNoGenService;
 
@@ -76,6 +82,15 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 
 	@Autowired
 	OrderNoGenService orderNoGenService;
+
+	@Autowired
+	PaymentItemService paymentItemService;
+
+	@Autowired
+	RpbEventService rpbEventService;
+
+	@Autowired
+	Sender sender;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(WeixinPayServiceImpl.class);
 
@@ -173,7 +188,8 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 	@Override
 	public boolean validateIsWeixinPay(MessageEvent event) {
 		PaymentEntityVO paymentEntityVO = paymentService.bodyToPaymentEntity(event.getBody(), null);
-		PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntityVO.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);// 根据退款单记录中的订单号找到对应的历史付款单记录（用来查找付款交易流水号）
+		PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntityVO.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
+				Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);// 根据退款单记录中的订单号找到对应的历史付款单记录（用来查找付款交易流水号）
 		if (paymentEntity == null) {
 			LOGGER.info("退款失败，历史付款单记录查找不存，请确认订单号:" + paymentEntityVO.getOrderNum() + "付款记录是否存在！");
 			return false;
@@ -185,7 +201,8 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 	public Map<String, Object> getRefundMessageMap(MessageEvent event) {
 
 		PaymentEntityVO paymentEntityVO = paymentService.bodyToPaymentEntity(event.getBody(), null);
-		PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntityVO.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
+		PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntityVO.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
+				Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
 		if (messageToRefund(paymentEntityVO, paymentEntity)) {
 			return weixinRefundMessage(event, paymentEntityVO, paymentEntity.getPayNo());
 		}
@@ -194,13 +211,13 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 
 	@Override
 	public boolean messageToRefund(PaymentEntityVO paymentEntityVO, PaymentEntity hisPayEntity) {
-		LOGGER.info("申请退款，退款单号-->"+hisPayEntity.getPayNo()+",退款订单号-->"+hisPayEntity.getOrderNum());
+		LOGGER.info("申请退款，退款单号-->" + hisPayEntity.getPayNo() + ",退款订单号-->" + hisPayEntity.getOrderNum());
 		String newPayNo = orderNoGenService.getOrderNo();
 		boolean result = weixinRefund(hisPayEntity.getPayNo(), paymentEntityVO.getAmountMoney().doubleValue(), hisPayEntity.getAmountMoney().doubleValue(), newPayNo);
 		PaymentEntity paymentEntity = new PaymentEntity();
 		BeanUtils.copyProperties(paymentEntityVO, paymentEntity);
 		paymentEntity.setPayNo(newPayNo);
-		paymentEntity.setTradeType(1);
+		paymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
 		paymentEntity.setCreateTime(DateUtil.getCurrDateTime());
 		paymentEntity.setFinishTime(DateUtil.getCurrDateTime());
 		paymentEntity.setPayChannel(hisPayEntity.getPayChannel());
@@ -350,7 +367,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 
 	@Override
 	public String getPennyByMoney(double totalFee) {
-		BigDecimal bgTotalFee = new BigDecimal(totalFee+"").multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
+		BigDecimal bgTotalFee = new BigDecimal(totalFee + "").multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
 		return bgTotalFee.toString();
 	}
 
@@ -418,5 +435,36 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 			httpclient.close();
 		}
 		return result;
+	}
+
+	@Override
+	public void batchTriggerWeixinRefund() {
+		List<String> failList = new ArrayList<String>();
+		List<PaymentEntity> list = paymentService.selectByTradeTypeAndAgreeRefund(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1,
+				Constants.AGREE_REFUND.AGREE_REFUND0);
+		for (PaymentEntity paymentEntity : list) {
+			PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
+					paymentEntity.getPayChannel());
+			if (weixinRefund(oldPaymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), oldPaymentEntity.getAmountMoney().doubleValue(), paymentEntity.getPayNo())) {
+				paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
+				paymentService.updateByPrimaryKeySelective(paymentEntity);
+				String target = Constants.SOURCETYPE.OSM;
+				String orderDetailNum = "";
+				if (Constants.ORDER_TYPE.ORDER_TYPE_1 == oldPaymentEntity.getOrderType()) {
+					target = Constants.SOURCETYPE.COUPON;
+					List<PaymentItemEntity> itemList = paymentItemService.selectByPaymentId(paymentEntity.getId());
+					orderDetailNum = paymentItemService.getDetailNum(itemList);
+				}
+				MessageEvent event = rpbEventService.getMessageEvent(paymentEntity.getPayNo(), paymentEntity.getOrderNum(), orderDetailNum, paymentEntity.getPayChannel().toString(), null,
+						Constants.SOURCETYPE.RPB, target, PaymentEventType.REFUND);
+				sender.convertAndSend(event);
+			} else {
+				failList.add(paymentEntity.getPayNo());
+			}
+		}
+		if (failList.isEmpty())
+			LOGGER.info("微信批量退款成功！");
+		else
+			LOGGER.info("以下微信订单失败退款,失败退款单号-->" + failList.toString());
 	}
 }
