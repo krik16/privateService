@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.bson.types.ObjectId;
-
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
@@ -83,7 +82,7 @@ public class Commodity implements  Serializable {
 	private double freight;//运费 >0买家承担运费<0商家承担运费
 	private Date registerAt;//上架时间
 	private Date soldOutAt;//下架时间
-	
+
 //	private int commentCount;
 //	private int highCommentCount;
 //	private int mediumCommentCount;
@@ -304,4 +303,7 @@ public String getShopMid() {
 	public void setSoldOutAt(Date soldOutAt) {
 		this.soldOutAt = soldOutAt;
 	}
+	
+	
+	
 }
