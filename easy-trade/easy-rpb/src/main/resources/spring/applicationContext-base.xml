@@ -22,9 +22,9 @@
 		<property name="locations">
 			<list>
 				<value>classpath:/properties/config.properties</value>
-				<value>classpath:/maven_build/04_show.properties</value>
+				<value>classpath:/maven_build/01_dev.properties</value>
 				<value>file:/data/etc/common/*.properties</value>
-				<value>file:/data/etc/projects/easy-rpb.properties</value>
+				<value>file:/data/etc/projects/${project.name}.properties</value>
 			</list>
 		</property>
 	</bean>
