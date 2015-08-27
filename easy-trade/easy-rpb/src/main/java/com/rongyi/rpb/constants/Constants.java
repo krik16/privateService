@@ -119,8 +119,19 @@ public interface Constants {
 	 *
 	 **/
 	interface DELETE_STATUS{
-		int DELETE_STATUS0 = 0;//整除
+		int DELETE_STATUS0 = 0;//正常
 		int DELETE_STATUS1 = 1;//删除
+	}
+	
+	/**	
+	 * @Author:  柯军
+	 * @Description: 是否拒绝退款 
+	 * @datetime:2015年8月27日下午2:31:25
+	 *
+	 **/
+	interface REFUND_REJECTED{
+		int REFUND_REJECTED0 = 0;//允许退款
+		int REFUND_REJECTED1 = 1;//拒绝退款
 	}
 
 }

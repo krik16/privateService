@@ -213,4 +213,16 @@ public interface PaymentService {
 	 **/
 	public List<PaymentEntity> updateListStatus(String payNo, Integer type, Integer status,Integer payChannel);
 	
+	
+	/**	
+	 * @Description:  查询是否允许退款的记录
+	 * @param tradeType
+	 * @param payChannel
+	 * @param agreeRefund
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年8月27日上午10:42:19  的                                                                                                                         
+	 **/
+	public List<PaymentEntity> selectByTradeTypeAndRefundRejected(Integer tradeType,Integer payChannel,Integer refundRejected);
+	
 }
