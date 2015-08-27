@@ -65,7 +65,7 @@ public interface IVoucherCouponService {
 	 * @param reason 未通过原因
 	 * @return 成功：true 失败：false
 	 */
-	Boolean verifyCoupon(List<Integer> ids, Integer status,
+	boolean submitVerify(List<Integer> ids, Integer status,
 			String reason) throws Exception;
 
 	/**
@@ -95,7 +95,7 @@ public interface IVoucherCouponService {
 	 * @param count 追加数量
 	 * @return
 	 */
-	Boolean addCouponCount(Integer id, Integer count) throws Exception;
+	boolean addCouponCount(Integer id, int count) throws Exception;
 
 	/**
 	 * @Description:设置展示区域

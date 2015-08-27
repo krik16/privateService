@@ -70,7 +70,7 @@ public interface RoaVoucherCouponService {
 	 * @return 成功：true 失败：false
 	 * @throws Exception
 	 */
-	boolean verifyCoupon(List<Integer> ids, Integer status,
+	boolean submitVerify(List<Integer> ids, Integer status,
 			String reason) throws Exception;
 
 	/**
@@ -100,7 +100,7 @@ public interface RoaVoucherCouponService {
 	 * @return
 	 * @throws Exception
 	 */
-	boolean addCouponCount(Integer id, Integer count) throws Exception;
+	boolean addCouponCount(Integer id, int count) throws Exception;
 
 	/**
 	 * @Description:设置展示区域
