@@ -11,6 +11,7 @@ package com.rongyi.easy.va.vo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * @author ZhengYl
@@ -27,6 +28,12 @@ public class VirtualAccountVO implements Serializable {
 
 	/** 是否冻结 */
 	private Boolean isSuspended;
+	
+	/** 是否冻结 */
+	private Date stopAt;
+	
+	/** 冻结原因 */
+	private String stopReason;
 
 	/** 账户余额 */
 	private BigDecimal balance;
@@ -171,6 +178,14 @@ public class VirtualAccountVO implements Serializable {
 		this.isSuspended = isSuspended;
 	}
 
+	public String getStopReason() {
+		return stopReason;
+	}
+
+	public void setStopReason(String stopReason) {
+		this.stopReason = stopReason;
+	}
+
 	public BigDecimal getFaleCommissionMonth() {
 		return faleCommissionMonth;
 	}
@@ -185,6 +200,14 @@ public class VirtualAccountVO implements Serializable {
 
 	public void setCommissionIncome(BigDecimal commissionIncome) {
 		this.commissionIncome = commissionIncome;
+	}
+
+	public Date getStopAt() {
+		return stopAt;
+	}
+
+	public void setStopAt(Date stopAt) {
+		this.stopAt = stopAt;
 	}
 	
 	

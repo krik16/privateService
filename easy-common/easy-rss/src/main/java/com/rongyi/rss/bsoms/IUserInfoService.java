@@ -32,7 +32,7 @@ public interface IUserInfoService {
 	 * @param isSuspended
 	 * @return
 	 */
-	boolean updateAccountSuspended(String userId, boolean isSuspended);
+	boolean updateAccountSuspended(String userId, boolean isSuspended, String stopReason);
 
 	/**
 	 * 根据id修改账户状态：启用/停用

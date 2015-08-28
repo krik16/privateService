@@ -39,6 +39,6 @@ public interface VirtualAccountGeneralService {
 	 *            true=冻结，false=解冻
 	 * @return
 	 */
-	public boolean setAccountSuspend(String userId, boolean isSuspended);
+	public boolean setAccountSuspend(String userId, boolean isSuspended, String stopReason);
 
 }
