@@ -65,16 +65,19 @@ public class CommissionBatchPostEvent extends BaseEvent {
 		ROACommodityCommissionService roaCommodityCommissionService = ctx.getBean(ROACommodityCommissionService.class);
 
 		String failureList = "";
-
+		String eventType = null;
 		for (CommissionBatchPostVO postedCommission : this.commissionList) {
 			VirtualAccountDetailEntity detailEntity = new VirtualAccountDetailEntity();
 			detailEntity.setCreateAt(new Date());
 			detailEntity.setAmount(postedCommission.getCommissionAmount());
 			detailEntity.setUserId(postedCommission.getGuideId());
-			if(VirtualAccountEventTypeEnum.COMMISSION_BATCH_POST.getCode().equals(this.getType()))//商品佣金
+			if(VirtualAccountEventTypeEnum.COMMISSION_BATCH_POST.getCode().equals(this.getType())){//商品佣金
 				detailEntity.setItemType(VirtualAccountDetailTypes.COMMISSION);
-			else//优惠券佣金
+				eventType = CommissionEnum.COMMISSION_ISSUE.getCode().toString();
+			}else{//优惠券佣金
 				detailEntity.setItemType(VirtualAccountDetailTypes.COUPON_COMMISSION);
+				eventType = CommissionEnum.COMMISSION_VALID.getCode().toString();
+			}
 			detailEntity.setSign(1);
 			int detailId = 0;
 			try {
@@ -90,7 +93,7 @@ public class CommissionBatchPostEvent extends BaseEvent {
 				try {
 					Map<String, String> map = new HashMap<String, String>();
 					map.put("commission", postedCommission.getCommissionAmount().toString());
-					map.put("eventType", CommissionEnum.COMMISSION_ISSUE.getCode().toString());
+					map.put("eventType",eventType);
 					map.put("guideId", postedCommission.getGuideId());
 					roaCommodityCommissionService.sendBodyByOrderEventType(map);
 				} catch (Exception e) {
