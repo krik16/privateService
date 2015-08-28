@@ -11,6 +11,7 @@ public class BusinessAccountVO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	private Integer id;//用户id
+	private String userLogo;//用户头像
 	private String idCard;//身份证
 	private String account;//用户账号
 	private String userName;//用户姓名
@@ -32,7 +33,6 @@ public class BusinessAccountVO implements Serializable {
 	private Integer accountStatus;//账号状态：是否禁用0正常 1禁用'
 	private Integer isSuspended;//资金账户：是否冻结
 	private String comment;//评价
-//	private Integer cashAccountStatus;//账户资金状态：0正常  1冻结
 	private Integer createSource;//账号来源：0大运营、1商家后台
 	private String createBy;//创建人
 	private Date createAt;
@@ -45,6 +45,12 @@ public class BusinessAccountVO implements Serializable {
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public String getUserLogo() {
+		return userLogo;
+	}
+	public void setUserLogo(String userLogo) {
+		this.userLogo = userLogo;
 	}
 	public String getIdCard() {
 		return idCard;
