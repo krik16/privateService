@@ -673,4 +673,12 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 		map.put("status", status);
 		return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectByTradeTypeAndRefundRejected", map);
 	}
+
+	@Override
+	public void updateRefundRejected(Integer id, Integer refundRejected) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("id", id);
+		map.put("refundRejected", refundRejected);
+		this.getBaseDao().updateBySql(PAYMENTENTITY_NAMESPACE+".updateRefundRejected", map);
+	}
 }

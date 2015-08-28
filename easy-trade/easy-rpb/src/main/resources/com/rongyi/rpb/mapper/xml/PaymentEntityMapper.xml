@@ -21,7 +21,8 @@
 		<result column="draw_user_id" property="drawUserId" jdbcType="VARCHAR" />
 		<result column="pay_name" property="payName" jdbcType="VARCHAR" />
 		<result column="batch_no" property="batchNo" jdbcType="VARCHAR" />
-		<result column="refund_rejected" property="refundRejected" jdbcType="VARCHAR" />
+		<result column="refund_rejected" property="refundRejected"
+			jdbcType="VARCHAR" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
@@ -311,7 +312,8 @@
 		<include refid="Base_Column_List" />
 		from payment_order
 		where pay_no = #{payNo,jdbcType=VARCHAR}
-		and trade_type = #{tradeType,jdbcType=INTEGER}
+		and
+		trade_type = #{tradeType,jdbcType=INTEGER}
 	</select>
 
 	<select id="selectByPayNo" resultMap="BaseResultMap"
@@ -386,15 +388,25 @@
 		and
 		status = #{status,jdbcType=INTEGER}
 	</select>
-	
+
 	<select id="selectByTradeTypeAndRefundRejected" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column_List" />
 		from payment_order
 		where trade_type = #{tradeType,jdbcType=INTEGER}
-		and	pay_channel = #{payChannel,jdbcType=INTEGER}
-		and refund_rejected = #{refundRejected,jdbcType=INTEGER}
-		and status = #{status,jdbcType=INTEGER}
+		and
+		pay_channel = #{payChannel,jdbcType=INTEGER}
+		and refund_rejected =
+		#{refundRejected,jdbcType=INTEGER}
+		and status =
+		#{status,jdbcType=INTEGER}
 	</select>
+	<update id="updateRefundRejected" parameterType="java.lang.Integer">
+		update payment_order
+		<set>
+			refund_rejected = #{refundRejected,jdbcType=INTEGER},
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
 </mapper>

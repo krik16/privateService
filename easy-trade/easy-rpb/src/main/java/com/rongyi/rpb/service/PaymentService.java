@@ -225,4 +225,13 @@ public interface PaymentService {
 	 **/
 	public List<PaymentEntity> selectByTradeTypeAndRefundRejected(Integer tradeType,Integer payChannel,Integer refundRejected,Integer status);
 	
+	/**	
+	 * @Description:  
+	 * @param id
+	 * @param refundRejected	
+	 * @Author:  柯军
+	 * @datetime:2015年8月28日上午10:42:04
+	 **/
+	public void updateRefundRejected(Integer id,Integer refundRejected);
+	
 }

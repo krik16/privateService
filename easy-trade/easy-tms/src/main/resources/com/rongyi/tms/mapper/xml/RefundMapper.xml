@@ -24,6 +24,8 @@
 			jdbcType="VARCHAR" />
 		<result column="coupon_buyer_account" property="couponBuyerAccount"
 			jdbcType="VARCHAR" />
+		<result column="refund_rejected" property="refundRejected"
+			jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
 		id, order_time, `status`, draw_user_id, order_price,
@@ -31,7 +33,7 @@
 		shop_id,
 		shop_name, mail_id, mall_name, buyer_id,
 		seller_account,trade_type,
-		seller_name,pay_channel,order_type,coupon_buyer_id,coupon_buyer_account
+		seller_name,pay_channel,order_type,coupon_buyer_id,coupon_buyer_account,refund_rejected
 	</sql>
 	<sql id="trade_list_where_clause">
 		<!-- 付款单号 -->

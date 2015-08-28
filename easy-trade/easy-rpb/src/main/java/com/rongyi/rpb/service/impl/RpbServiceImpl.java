@@ -150,7 +150,7 @@ public class RpbServiceImpl implements IRpbService {
 			return resultMap;
 		}
 
-		String orderNums = paymentService.getOrderNumStrsByPayNo(paymentEntity.getPayNo(),Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
+		String orderNums = paymentService.getOrderNumStrsByPayNo(paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
 		String payChannel = PaymentEventType.WEIXIN_PAY;
 		String payAccount = null;
 		if (paymentEntity.getPayChannel() == Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0) {
@@ -260,5 +260,20 @@ public class RpbServiceImpl implements IRpbService {
 	@Override
 	public PaymentEntity selectByOrderNumAndTradeType(String orderNum, Integer tradeType, Integer status, Integer payChannel) {
 		return paymentService.selectByOrderNumAndTradeType(orderNum, tradeType, status, payChannel);
+	}
+
+	@Override
+	public Map<String, Object> weixinRefundRejected(Integer paymentId, Integer refundRejected) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("success", true);
+		map.put("message", refundRejected == Constants.REFUND_REJECTED.REFUND_REJECTED0 ? "同意退款操作成功" : "拒绝退款操作成功");
+		try {
+			paymentService.updateRefundRejected(paymentId, refundRejected);
+		} catch (Exception e) {
+			map.put("success", false);
+			map.put("message", refundRejected == Constants.REFUND_REJECTED.REFUND_REJECTED0 ? "同意退款操作失败" : "拒绝退款操作失败");
+			e.printStackTrace();
+		}
+		return map;
 	}
 }

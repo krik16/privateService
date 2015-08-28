@@ -139,7 +139,7 @@ public class PayController extends BaseController {
 					LOGGER.error("roa接口未提供");
 					e.printStackTrace();
 				}
-				
+
 			}
 			double pageTotle = refundService.selectRefundPageListCount(map);
 			Integer rowContNum = (int) Math.ceil(pageTotle / Constant.PAGE.PAGESIZE);
@@ -295,6 +295,29 @@ public class PayController extends BaseController {
 		return result;
 	}
 
+	/**
+	 * @Description: 微信退款拒绝/同意操作
+	 * @param paymentId
+	 * @param refundRejected
+	 * @param model
+	 * @return
+	 * @Author: 柯军
+	 * @datetime:2015年8月28日上午10:58:17
+	 **/
+	@RequestMapping("/refundRejected")
+	@ResponseBody
+	public ResponseResult weixinRefundRejected(@RequestParam Integer paymentId, @RequestParam Integer refundRejected, Model model) {
+		LOGGER.info("================微信退款" + (refundRejected == 0 ? "同意" : "拒绝") + "操作====================");
+		try {
+			Map<String, Object> resultMap = rpbService.weixinRefundRejected(paymentId, refundRejected);
+			result.setSuccess(Boolean.valueOf(resultMap.get("success").toString()));
+			result.setMessage(resultMap.get("message").toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 	private String getDesc(Integer type) {
 		String desc = ConstantEnum.TRADE_TYPE_TO_DRAW_APPLY.getValueStr();
 		if (PayEnum.TRADE_REFUND_ONE.getCode() == type || PayEnum.TRADE_REFUND_MORE.getCode() == type)
@@ -303,7 +326,6 @@ public class PayController extends BaseController {
 			desc = ConstantEnum.TRADE_TYPE_EXCE_PAY.getValueStr();
 		return desc;
 	}
-
 
 	private MessageEvent getMessageEvent(Integer operateType, Integer payChannel, String paymentId, String desc) {
 		MessageEvent event = new MessageEvent();

@@ -9,6 +9,7 @@ import junit.framework.Assert;
 import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.testng.annotations.Test;
 
 import base.BaseTest;
@@ -239,10 +240,17 @@ public class PaymentServiceTest extends BaseTest {
 		System.err.println(paymentEntity.getId());
 	}
 	
-	@Test
+//	@Test
 	public void testBodyToEntity(){
 		String body = "{\"body\":{\"title\":\"c5555555\",\"orderDetailNum\":\"626676\",\"orderType\":\"1\",\"paymentId\":\"1000000459740290\","
 				+ "\"orderNum\":\"0827630333441716\",\"totalPrice\":\"0.01\"},\"source\":\"coupon_order_queue\",\"target\":\"rpb\",\"timestamp\":1440667020557,\"type\":\"2\"}";
 		paymentService.bodyToPaymentEntity(body, "2");
 	}
+	
+	@Test
+	@Rollback(false)
+	public void testUpdateRefundRejected(){
+		paymentService.updateRefundRejected(4690,1);
+	}
+	
 }

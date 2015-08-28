@@ -195,10 +195,28 @@ function validateAccount(ids,type,payChannel) {
 }
 
 /**
+ * 微信同意/拒绝退款操作
+ * @param paymentId
+ */
+function weixinRefundRejected(paymentId,refundRejected) {
+	$.post("../pay/refundRejected", {
+		paymentId : paymentId,
+		refundRejected:refundRejected
+	}, function(data) {
+		_util.cmsTip(data.message);
+		ajaxCommonSearch(url_,getParamsJson());
+	}, "json");
+}
+
+/**
  * 微信手动退款
  * @param paymentId
  */
-function weixinRefund(paymentId) {
+function weixinRefund(paymentId,refundRejected) {
+	if(refundRejected == 1){
+		_util.cmsTip("此笔退款已被拒绝退款操作，无法退款，如需退款，请先同意退款操作！");
+		return;
+	}
 	$.post("../pay/weixinRefund", {
 		paymentId : paymentId
 	}, function(data) {
