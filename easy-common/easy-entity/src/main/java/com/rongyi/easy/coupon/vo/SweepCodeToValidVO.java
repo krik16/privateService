@@ -27,7 +27,15 @@ public class SweepCodeToValidVO implements Serializable{
 	private String suggest;//建议
 	private Integer codeNum;//验码数量
 	private String phone;//用户名
+	private String errorNo;
 	
+	
+	public String getErrorNo() {
+		return errorNo;
+	}
+	public void setErrorNo(String errorNo) {
+		this.errorNo = errorNo;
+	}
 	public String getCode() {
 		return code;
 	}
