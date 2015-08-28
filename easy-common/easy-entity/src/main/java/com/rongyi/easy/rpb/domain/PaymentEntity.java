@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class PaymentEntity implements Serializable{
+public class PaymentEntity implements Serializable {
 
 	/**
 	 * 
@@ -12,7 +12,7 @@ public class PaymentEntity implements Serializable{
 	private static final long serialVersionUID = 2516018941608003955L;
 
 	public PaymentEntity() {
-		
+
 	}
 
 	public PaymentEntity(String payNo, String orderNum, Integer orderType, BigDecimal orderPrice, String title, BigDecimal amountMoney, Integer status, Integer tradeType, Date createTime,
@@ -100,11 +100,16 @@ public class PaymentEntity implements Serializable{
 	 * 提现账号姓名
 	 */
 	private String payName;
-	
+
 	/**
 	 * 批量退款单号
 	 */
 	private String batchNo;
+
+	/**
+	 * 允许退款(0:允许，1：拒绝)
+	 */
+	private String refundRejected;
 
 	/**
 	 * 主键id
@@ -374,6 +379,12 @@ public class PaymentEntity implements Serializable{
 	public void setBatchNo(String batchNo) {
 		this.batchNo = batchNo;
 	}
-	
-	
+
+	public String getRefundRejected() {
+		return refundRejected;
+	}
+
+	public void setRefundRejected(String refundRejected) {
+		this.refundRejected = refundRejected;
+	}
 }

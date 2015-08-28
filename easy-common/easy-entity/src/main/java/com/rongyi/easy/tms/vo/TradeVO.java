@@ -185,6 +185,8 @@ public class TradeVO implements Serializable {
 	 * 优惠券金额整数
 	 */
 	private int couponDiscountInt;
+	
+	private Integer refundRejected;
 
 	/*----查询字段----*/
 	/**
@@ -556,5 +558,13 @@ public class TradeVO implements Serializable {
 
 	public void setCouponBuyerAccount(String couponBuyerAccount) {
 		this.couponBuyerAccount = couponBuyerAccount;
+	}
+
+	public Integer getRefundRejected() {
+		return refundRejected;
+	}
+
+	public void setRefundRejected(Integer refundRejected) {
+		this.refundRejected = refundRejected;
 	}
 }
