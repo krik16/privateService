@@ -26,6 +26,7 @@ public class RmmmValidCodeVO implements Serializable{
 	private String originalPrice;// 原价
 	private String currentPrice;// 现价
 	private String phone;//用户名
+	private String title;//券名
 	public Integer getTotalAmount() {
 		return totalAmount;
 	}
@@ -61,6 +62,12 @@ public class RmmmValidCodeVO implements Serializable{
 	}
 	public void setCurrentPrice(String currentPrice) {
 		this.currentPrice = currentPrice;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	
 }
