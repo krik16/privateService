@@ -11,6 +11,8 @@
     <result column="alipay_account" property="alipayAccount" jdbcType="VARCHAR" />
     <result column="is_authenticated" property="isAuthenticated" jdbcType="BIT" />
     <result column="is_suspended" property="isSuspended" jdbcType="BIT" />
+    <result column="stop_reason" property="stopReason" jdbcType="VARCHAR" />
+    <result column="stop_at" property="stopAt" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
