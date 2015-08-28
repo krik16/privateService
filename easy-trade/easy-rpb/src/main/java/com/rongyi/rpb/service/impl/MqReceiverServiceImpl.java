@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rabbitmq.client.Channel;
-import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.OSMRoutingUtil;
 import com.rongyi.core.constant.PaymentEventType;
 import com.rongyi.easy.mq.MessageEvent;
@@ -39,9 +38,6 @@ import com.rongyi.rpb.service.WeixinPayService;
 public class MqReceiverServiceImpl implements MqReceiverService {
 
 	private static final Logger LOGGER = Logger.getLogger(MqReceiverServiceImpl.class);
-
-	// private Map<String, Notification> syscNotifyMap = new HashMap<String,
-	// Notification>();
 
 	private static final List<String> payTypeList = new ArrayList<String>();
 
@@ -79,14 +75,7 @@ public class MqReceiverServiceImpl implements MqReceiverService {
 	 * @datetime:2015年6月3日上午10:32:08
 	 **/
 	private void business(Message message, Channel channel, MessageEvent event) {
-		Map<String, Object> messageMap = null;
-//		if (PaymentEventType.REFUND.equals(event.getType()) && weixinPayService.validateIsWeixinPay(event)) {// 微信退款
-//			messageMap = weixinPayService.getRefundMessageMap(event);
-//			if (messageMap != null)
-//				sender.convertAndSend(messageMap, event.getSource());
-//		} else {
-			messageMap = paymentService.getSendMessage(event);
-//		}
+		Map<String, Object> messageMap = paymentService.getSendMessage(event);
 		if (messageMap != null && isAppPay(event.getType())) {// 支付消息回复
 			sender.rpcSend(messageMap, message, channel);
 		}

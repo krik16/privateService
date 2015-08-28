@@ -301,7 +301,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
 		}
 		List<PaymentEntity> paymentEntityList = getPaymemtsByMoreOrderNum(paymentEntityVO);// 多个订单号生成多条记录对应一条付款单号
-		String oldPayNo = paymentEntityVO.getPayNo();
+		String oldPayNo = paymentEntityVO.getPayNo();//原订单号
 		payNo = paymentEntityList.get(0).getPayNo();// 新付款单号
 		paymentEntityVO.setPayNo(payNo);
 		if (StringUtils.isEmpty(paymentEntityVO.getTitle())) {
