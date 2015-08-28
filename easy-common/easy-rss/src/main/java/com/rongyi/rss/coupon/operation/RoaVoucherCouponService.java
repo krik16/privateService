@@ -81,7 +81,7 @@ public interface RoaVoucherCouponService {
 	 * @return 成功：true 失败：false
 	 * @throws Exception
 	 */
-	boolean offStock(List<Integer> ids, String reason)
+	boolean submitOffStock(List<Integer> ids, String reason)
 			throws Exception;
 
 	/**
