@@ -1,5 +1,6 @@
 package com.rongyi.easy.rvc.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.rongyi.easy.domain.member.IntegralChangeAction;
@@ -16,7 +17,9 @@ import com.rongyi.easy.domain.member.MemberType;
  * @version
  * @since JDK 1.6
  */
-public class IntegralLog {
+public class IntegralLog implements Serializable {
+  private static final long serialVersionUID = 4045378800971384690L;
+
   /**  */
   private Integer id;
 
