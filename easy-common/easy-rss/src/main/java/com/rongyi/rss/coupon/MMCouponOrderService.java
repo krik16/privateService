@@ -188,4 +188,10 @@ public interface MMCouponOrderService {
     * @return
     */
    Map<String, Object> calcRefundAmount(String orderNo, Integer number, String userId);
+   
+   /**
+    * 定时关闭未支付订单
+    * @return
+    */
+   void closeUnpayOrder();
 }

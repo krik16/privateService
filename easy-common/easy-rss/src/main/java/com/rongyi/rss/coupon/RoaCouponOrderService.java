@@ -211,4 +211,10 @@ public interface RoaCouponOrderService {
      * @return
      */
     Map<String, Object> calcRefundAmount(String orderNo, Integer number, String userId);
+    
+    /**
+    *
+    * @return
+    */
+   void closeUnpayOrder();
 }
