@@ -43,7 +43,7 @@ public interface TradeDetailService {
      * @Author:  柯军
      * @datetime:2015年5月15日下午5:51:40
      **/
-    public Integer selectTradePageListCount(Map<String,Object> map);
+    public int selectTradePageListCount(Map<String,Object> map);
     
     /**	
      * @Description: 查询交易总收入或支出

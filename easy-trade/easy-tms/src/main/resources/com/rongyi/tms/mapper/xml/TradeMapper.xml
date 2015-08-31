@@ -52,43 +52,104 @@
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id, order_time, `status`, draw_user_id, order_price,
-		order_no, pay_no,
-		trade_no,
-		transaction_id, trade_time, shop_id,
-		shop_name, mail_id, mall_name, buyer_id,
-		seller_account,
-		seller_name,trade_type,pay_channel,seller_pay_type,seller_pay_account,seller_pay_name,order_type,coupon_code,
-		order_discount_info,cash_coupon_code,coupon_discunt_info,coupon_buyer_id,coupon_buyer_account
+			payment_event.id id,
+	payment_event.trade_no,
+	payment_event.transaction_id,
+	payment_event.time_end AS trade_time,
+	payment_event.event_type,
+	payment_order.create_at AS order_time,
+	payment_order.`status`,
+	payment_order.draw_user_id,
+	payment_order.pay_amount as order_price,
+	payment_order.order_no,
+	payment_order.order_type,
+	payment_order.pay_no,
+	payment_order.trade_type,
+  payment_order.pay_channel,
+	shop_info.id AS shop_id,
+	shop_info.shop_name,
+	mall_cooperate.id AS mail_id,
+	mall_cooperate.mall_name,
+	rmmm_user_info.user_phone AS seller_account,
+	rmmm_user_info.user_name AS seller_name,
+	user_account.account_type AS seller_pay_type,
+	user_account.account_code AS seller_pay_account,
+	user_account.account_name AS seller_pay_name,
+	order_form.buyer_id,
+	null AS integral_discount,
+	order_detail_form.coupon_id AS coupon_code,
+	null AS coupon_discount,
+	order_form.discount_info as order_discount_info,
+	coupon_order.cash_coupon_code,
+	coupon_order.discount_info as coupon_discunt_info,
+	coupon_order.buyer_id as coupon_buyer_id,
+	coupon_order.buyer_mobile as coupon_buyer_account
+	</sql>
+	<sql id="Base_from">
+		ry_rpb.payment_event AS payment_event
+		LEFT JOIN
+		ry_rpb.payment_order AS payment_order ON
+		payment_event.out_trade_no =
+		payment_order.pay_no
+		LEFT JOIN ry_osm.order_form AS order_form ON
+		payment_order.order_no =
+		order_form.order_no
+		LEFT JOIN
+		ry_osm.order_detail_form AS order_detail_form ON
+		order_form.order_no =
+		order_detail_form.order_no
+		LEFT JOIN ry_rmmm.shop_info AS shop_info ON
+		shop_info.id =
+		order_form.weidian_id
+		LEFT JOIN ry_rmmm.mall_cooperate AS
+		mall_cooperate ON mall_cooperate.id =
+		shop_info.mall_id
+		LEFT JOIN
+		ry_rmmm.user_shop AS user_shop ON user_shop.shop_id =
+		shop_info.id
+		LEFT
+		JOIN ry_rmmm.rmmm_user_info AS rmmm_user_info ON rmmm_user_info.id =
+		order_form.guide_id
+		LEFT JOIN ry_rmmm.user_account AS user_account ON
+		user_account.user_id =
+		rmmm_user_info.id
+		LEFT JOIN ry_crm.coupon_order
+		AS coupon_order ON coupon_order.order_no =
+		payment_order.order_no
+	</sql>
+	<sql id="Base_group_by">
+		GROUP BY payment_event.id
 	</sql>
 	<sql id="trade_list_where_clause">
+		(payment_event.trade_type = payment_order.trade_type or
+		payment_event.trade_type is null)
 		<!-- 交易流水号 -->
 		<if test="tradeNo != null and tradeNo != ''">
-			AND trade_no = #{tradeNo}
+			AND payment_event.trade_no = #{tradeNo}
 		</if>
 		<!-- 付款单号 -->
 		<if test="payNo != null and payNo != ''">
-			AND pay_no = #{payNo}
+			AND payment_order.pay_no = #{payNo}
 		</if>
 		<!-- 订单号 -->
 		<if test="orderNo != null and orderNo != ''">
-			AND order_no = #{orderNo}
+			AND payment_order.order_no = #{orderNo}
 		</if>
 		<!-- 商场名称 -->
 		<if test="mallName != null and mallName != ''">
-			AND mall_name like
+			AND mall_cooperate.mall_name like
 			concat('%',#{mallName,jdbcType=VARCHAR},'%')
 		</if>
 		<!-- 店铺名称 -->
 		<if test="shopName != null and shopName != ''">
-			AND shop_name like
+			AND shop_info.shop_name like
 			concat('%',#{shopName,jdbcType=VARCHAR},'%')
 		</if>
 		<if test="buyerAccount != null and buyerAccount != ''">
-			AND (coupon_buyer_account=#{buyerAccount}
+			AND (coupon_order.coupon_buyer_account=#{buyerAccount}
 			<!-- 买家id集合 -->
 			<if test="buyerIds != null and buyerIds != ''">
-				OR buyer_id in
+				OR order_form.buyer_id in
 				<foreach collection="buyerIds" index="index" item="item"
 					open="(" separator="," close=")">
 					#{item}
@@ -98,102 +159,106 @@
 		</if>
 		<!-- 卖家姓名 -->
 		<if test="sellerName != null and sellerName != ''">
-			AND seller_name like
+			AND rmmm_user_info.user_name like
 			concat('%',#{sellerName,jdbcType=VARCHAR},'%')
 		</if>
 		<!-- 收支类型 -->
 		<!-- 收入 -->
 		<if test="tradeType == 0">
-			AND (trade_type = 0 or trade_type = 5)
+			AND (payment_order.trade_type = 0 or
+			payment_order.trade_type = 5)
 		</if>
 		<!-- 支出 -->
 		<if test="tradeType == 1 or tradeType == 4">
-			AND (trade_type = 1 or trade_type = 4 or trade_type = 6)
+			AND (payment_order.trade_type = 1 or
+			payment_order.trade_type = 4 or payment_order.trade_type = 6)
 		</if>
 
 		<if test="tradeType == null or tradeType == ''">
-			AND (trade_type = 0 or trade_type = 1 or trade_type = 4 or
-			trade_type = 5 or trade_type = 6)
+			AND (payment_order.trade_type = 0 or
+			payment_order.trade_type = 1 or payment_order.trade_type = 4 or
+			payment_order.trade_type = 5 or payment_order.trade_type = 6)
 		</if>
 		<!-- 打款方式 -->
 		<if test="payChannel != null and payChannel != ''">
-			AND pay_channel = #{payChannel}
+			AND payment_order.pay_channel = #{payChannel}
 		</if>
 
 		<!-- 交易时间 -->
 		<if test="tradeStartTime != null and tradeStartTime != ''">
-			AND trade_time >= #{tradeStartTime}
+			AND payment_event.time_end >= #{tradeStartTime}
 		</if>
 		<if test="tradeEndTime != null and tradeEndTime != ''">
-			AND #{tradeEndTime} >= trade_time
+			AND #{tradeEndTime} >= payment_event.time_end
 		</if>
 		<!-- 交易金额 -->
 		<if test="minTotalPrice != null and minTotalPrice != ''">
-			AND order_price >= #{minTotalPrice}
+			AND payment_order.pay_amount >= #{minTotalPrice}
 		</if>
 		<if test="maxTotalPrice != null and maxTotalPrice != ''">
-			AND #{maxTotalPrice} >= order_price
+			AND #{maxTotalPrice} >= payment_order.pay_amount
 		</if>
 
 		<!-- 订单类型 -->
 		<if test="orderType != null and orderType != ''">
-			AND order_type = #{orderType}
+			AND payment_order.order_type = #{orderType}
 		</if>
 		<!-- 优惠方式 -->
 		<if test="favorType != null and favorType != ''">
 			<!-- 未使用积分和红包 -->
 			<if test="favorType == 0">
 				<!-- 商品 -->
-				AND (((order_discount_info NOT LIKE '%score%' OR order_discount_info
+				AND (((order_form.discount_info NOT LIKE '%score%' OR order_form.discount_info
 				IS NULL)
-				AND (coupon_code IS NULL OR coupon_code = '')) AND
+				AND (order_detail_form.coupon_id IS NULL OR order_detail_form.coupon_id = '')) AND
 				<!-- 优惠券 -->
-				((coupon_discunt_info NOT LIKE '%score%' OR coupon_discunt_info IS
+				((	coupon_order.discount_info NOT LIKE '%score%' OR 	coupon_order.discount_info IS
 				NULL)
-				AND (cash_coupon_code IS NULL OR cash_coupon_code = '')))
+				AND (coupon_order.cash_coupon_code IS NULL OR coupon_order.cash_coupon_code = '')))
 			</if>
 			<!-- 使用红包 -->
 			<if test="favorType == 1">
 				<!-- 商品 -->
-				AND (((order_discount_info NOT LIKE '%score%' OR order_discount_info
+				AND (((order_form.discount_info NOT LIKE '%score%' OR order_form.discount_info
 				IS NULL)
-				AND (coupon_code IS NOT NULL AND coupon_code != '')) OR
+				AND (order_detail_form.coupon_id IS NOT NULL AND order_detail_form.coupon_id != '')) OR
 				<!-- 优惠券 -->
-				((coupon_discunt_info NOT LIKE '%score%' OR coupon_discunt_info IS
+				((	coupon_order.discount_info NOT LIKE '%score%' OR 	coupon_order.discount_info IS
 				NULL)
-				AND cash_coupon_code IS NOT NULL AND cash_coupon_code != ''))
+				AND coupon_order.cash_coupon_code IS NOT NULL AND coupon_order.cash_coupon_code != ''))
 
 			</if>
 			<!-- 使用积分 -->
 			<if test="favorType == 2">
 				<!-- 商品 -->
-				AND (((order_discount_info LIKE '%score%')
-				AND (coupon_code IS NULL
-				OR coupon_code = '')) OR
+				AND (((order_form.discount_info LIKE '%score%')
+				AND (order_detail_form.coupon_id IS NULL
+				OR order_detail_form.coupon_id = '')) OR
 				<!-- 优惠券 -->
-				(coupon_discunt_info LIKE '%score%'
-				AND (cash_coupon_code IS NULL OR
-				cash_coupon_code = '')))
+				(	coupon_order.discount_info LIKE '%score%'
+				AND (coupon_order.cash_coupon_code IS NULL OR
+				coupon_order.cash_coupon_code = '')))
 			</if>
 			<!-- 使用积分和红包 -->
 			<if test="favorType == 3">
 				<!-- 商品 -->
-				AND (((order_discount_info LIKE '%score%')
-				AND (coupon_code IS NOT
-				NULL AND coupon_code != '')) OR
+				AND (((order_form.discount_info LIKE '%score%')
+				AND (order_detail_form.coupon_id IS NOT
+				NULL AND order_detail_form.coupon_id != '')) OR
 				<!-- 优惠券 -->
-				((coupon_discunt_info LIKE '%score%')
-				AND cash_coupon_code IS NOT
-				NULL AND cash_coupon_code != ''))
+				((	coupon_order.discount_info LIKE '%score%')
+				AND coupon_order.cash_coupon_code IS NOT
+				NULL AND coupon_order.cash_coupon_code != ''))
 			</if>
 		</if>
-
+		<include refid="Base_group_by" />
 	</sql>
 	<select id="selectTradePageList" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column_List" />
-		from trade_view
+		from
+		<include refid="Base_from" />
 		<where>
 			<include refid="trade_list_where_clause" />
 		</where>
@@ -212,8 +277,9 @@
 	<select id="selectTradePageListCount" parameterType="java.util.Map"
 		resultType="java.lang.Integer">
 		select
-		count(id)
-		from trade_view
+		count(payment_event.id)
+		from
+		<include refid="Base_from" />
 		<where>
 			<include refid="trade_list_where_clause" />
 		</where>
@@ -221,8 +287,9 @@
 
 	<select id="selectTradeCount" resultMap="TradeDetailCountResultMap"
 		parameterType="java.util.Map">
-		select sum(order_price) amount_count,count(id) total_count,trade_type
-		from trade_view
+		select sum(payment_order.pay_amount) amount_count,count(payment_event.id) total_count,payment_order.trade_type
+		from
+		<include refid="Base_from" />
 		<where>
 			<include refid="trade_list_where_clause" />
 		</where>
@@ -232,7 +299,9 @@
 	<select id="selectById" resultMap="BaseResultMap" parameterType="java.util.Map">
 		select
 		<include refid="Base_Column_List" />
-		from trade_view where
-		id = #{id}
+		from
+		<include refid="Base_from" />
+		where
+		payment_event.id = #{id}
 	</select>
 </mapper>

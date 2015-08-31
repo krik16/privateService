@@ -33,7 +33,7 @@ public class TradeServiceTest extends BaseTest{
     @Test(description = "rpb接口调用--交易明细")
     public void rpbTradeDetailTest(){
         Map<String,Object> map = new HashMap<String,Object>();
-        map.put("orderNo","0825182220801455");
+//        map.put("orderNo","0825182220801455");
         List<TradeVO> list = tradeDetailService.selectTradePageList(map, 1, 10);
         System.err.println(list.size());
     }

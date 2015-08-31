@@ -99,11 +99,13 @@ public class TradeDetailController extends BaseController {
 	private TradeDetailCount getTradeCount(Map<String, Object> map, Integer tradeType) {
 		TradeDetailCount tradeDetailCount = new TradeDetailCount();
 		tradeDetailCount.setTradeType(tradeType);
-		if (map.get("tradeType") == null || StringUtils.isEmpty(map.get("tradeType").toString()) || tradeType.equals(Integer.valueOf(map.get("tradeType").toString())) || "5".equals(map.get("tradeType"))) {
+		if (map.get("tradeType") == null || StringUtils.isEmpty(map.get("tradeType").toString()) || tradeType.equals(Integer.valueOf(map.get("tradeType").toString()))
+				|| "5".equals(map.get("tradeType"))) {
 			Map<String, Object> paramMap = new HashMap<String, Object>();
 			paramMap.putAll(map);
 			paramMap.put("tradeType", tradeType);
-			tradeDetailCount = tradeDetailService.selectTradeCount(paramMap);
+			if (tradeDetailService.selectTradeCount(paramMap) != null)
+				tradeDetailCount = tradeDetailService.selectTradeCount(paramMap);
 		}
 		if (tradeDetailCount.getAmountCount() == null)
 			tradeDetailCount.setAmountCount(0d);

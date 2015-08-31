@@ -126,8 +126,9 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 	}
 
 	@Override
-	public Integer selectTradePageListCount(Map<String, Object> map) {
-		return this.getBaseDao().selectOneBySql(PAYMENTENTITY_NAMESPACE + ".selectTradePageListCount", map);
+	public int selectTradePageListCount(Map<String, Object> map) {
+		Integer count = this.getBaseDao().selectOneBySql(PAYMENTENTITY_NAMESPACE + ".selectTradePageListCount", map);
+		return count == null ? 0 : count;
 	}
 
 	@Override
