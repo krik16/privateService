@@ -26,5 +26,5 @@ public interface ROAVirtualAccountGeneralService {
 	 *            true=冻结，false=false
 	 * @return
 	 */
-	public boolean setAccountSuspend(String userId, boolean isSuspended);
+	public boolean setAccountSuspend(String userId, boolean isSuspended, String stopReason);
 }

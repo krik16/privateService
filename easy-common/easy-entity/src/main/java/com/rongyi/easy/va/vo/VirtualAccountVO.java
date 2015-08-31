@@ -11,6 +11,7 @@ package com.rongyi.easy.va.vo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * @author ZhengYl
@@ -27,6 +28,12 @@ public class VirtualAccountVO implements Serializable {
 
 	/** 是否冻结 */
 	private Boolean isSuspended;
+	
+	/** 是否冻结 */
+	private Date stopAt;
+	
+	/** 冻结原因 */
+	private String stopReason;
 
 	/** 账户余额 */
 	private BigDecimal balance;
@@ -57,7 +64,16 @@ public class VirtualAccountVO implements Serializable {
 
 	/** 返佣审核中 */
 	private BigDecimal commissionForAuditTotal;
-
+	
+	/**
+	 * 失败佣金
+	 */
+	private BigDecimal faleCommissionMonth;
+	
+	/**
+	 * 总佣金收入（包含交易佣金，优惠券佣金，奖金佣金）
+	 */
+	private BigDecimal commissionIncome;
 	public String getUserId() {
 		return userId;
 	}
@@ -162,4 +178,37 @@ public class VirtualAccountVO implements Serializable {
 		this.isSuspended = isSuspended;
 	}
 
+	public String getStopReason() {
+		return stopReason;
+	}
+
+	public void setStopReason(String stopReason) {
+		this.stopReason = stopReason;
+	}
+
+	public BigDecimal getFaleCommissionMonth() {
+		return faleCommissionMonth;
+	}
+
+	public void setFaleCommissionMonth(BigDecimal faleCommissionMonth) {
+		this.faleCommissionMonth = faleCommissionMonth;
+	}
+
+	public BigDecimal getCommissionIncome() {
+		return commissionIncome;
+	}
+
+	public void setCommissionIncome(BigDecimal commissionIncome) {
+		this.commissionIncome = commissionIncome;
+	}
+
+	public Date getStopAt() {
+		return stopAt;
+	}
+
+	public void setStopAt(Date stopAt) {
+		this.stopAt = stopAt;
+	}
+	
+	
 }

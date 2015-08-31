@@ -10,13 +10,20 @@ public class MMValidHistoryParam implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	private Integer date;//时间（0所有时间，1当天，2当周，3当月）
 	private String shopId;//店铺id
 	private String orderBy;//排序：（默认 update_time降序）
 	private String orderVa;//排序方式:降序[-1]
-	private Integer pageSize;//默认15
-	private Integer currentPage;//当前页（后台处理）
-	private String sellerId;//卖家id
+	private Integer pageSize = 15;//默认15
+	private Integer currentPage = 1;//当前页（后台处理）
+	private String sellerId;//核销人id
 	
+	public Integer getDate() {
+		return date;
+	}
+	public void setDate(Integer date) {
+		this.date = date;
+	}
 	public String getOrderBy() {
 		return orderBy;
 	}

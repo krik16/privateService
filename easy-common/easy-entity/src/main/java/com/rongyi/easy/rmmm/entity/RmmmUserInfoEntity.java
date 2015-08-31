@@ -3,6 +3,7 @@ package com.rongyi.easy.rmmm.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+
 public class RmmmUserInfoEntity implements Serializable{
 
     /** 主键  */
@@ -57,9 +58,15 @@ public class RmmmUserInfoEntity implements Serializable{
     private String cardId;
     /** 环信用户账号 */
     private String userIMCount;
-
-    public Integer getId() {
-        return id;
+	private String devId;//登录时获取当前设备Id
+    private Integer type;
+    private Integer identity;
+    private Integer isCooperation;
+    private String memo;
+    private Integer createSource;
+    private Integer stopReason;
+ 	public Integer getId() {
+      return id;
     }
 
     public void setId(Integer id) {
@@ -201,4 +208,59 @@ public class RmmmUserInfoEntity implements Serializable{
     public void setUserIMCount(String userIMCount) {
         this.userIMCount = userIMCount;
     }
+    public String getDevId() {
+        return devId;
+    }
+
+    public void setDevId(String devId) {
+        this.devId = devId;
+    }
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	public Integer getIdentity() {
+		return identity;
+	}
+
+	public void setIdentity(Integer identity) {
+		this.identity = identity;
+	}
+
+	public Integer getIsCooperation() {
+		return isCooperation;
+	}
+
+	public void setIsCooperation(Integer isCooperation) {
+		this.isCooperation = isCooperation;
+	}
+
+	public String getMemo() {
+		return memo;
+	}
+
+	public void setMemo(String memo) {
+		this.memo = memo;
+	}
+
+	public Integer getCreateSource() {
+		return createSource;
+	}
+
+	public void setCreateSource(Integer createSource) {
+		this.createSource = createSource;
+	}
+
+	public Integer getStopReason() {
+		return stopReason;
+	}
+
+	public void setStopReason(Integer stopReason) {
+		this.stopReason = stopReason;
+	}
 }

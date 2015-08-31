@@ -26,13 +26,4 @@ public interface RoaValidCouponCodeService {
      */
     public ResponseResult checkCouponCode(String couponCode, String shopId, Integer sellerId);
     
-    /**
-     * 验证券码的合法性（有效期和店铺）
-     * @param couponCode
-     * @param shopId
-     * @return
-     */
-    ResponseResult checkLegality(String couponCode, String shopId);
-    
-	
 }

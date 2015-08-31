@@ -32,7 +32,10 @@ public class FeedbackParam implements Serializable {
 	 * 称呼
 	 */
 	private String name;
-	
+	/**
+	 * 类型
+	 */
+	private Integer type;//1容易逛 2摩店
 	public String getContact() {
 		return contact;
 	}
@@ -55,6 +58,14 @@ public class FeedbackParam implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
 	}
 	
 }

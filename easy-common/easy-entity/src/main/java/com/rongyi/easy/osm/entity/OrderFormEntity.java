@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import net.sf.json.JSONObject;
+
 public class OrderFormEntity implements Serializable{
     /** 主键id */
     private Integer id;
@@ -48,7 +50,7 @@ public class OrderFormEntity implements Serializable{
     private String paymentIdList;
 
     /** 是否已评价 (0否 1是) */
-    private Byte isComment;
+    private Integer isComment;
 
     /** 邮寄地址id */
     private String addressId;
@@ -73,6 +75,16 @@ public class OrderFormEntity implements Serializable{
 
     /** 买家备注 */
     private String buyerComment;
+    
+    private JSONObject jsonDiscountInfo;   
+
+	public JSONObject getJsonDiscountInfo() {
+		return jsonDiscountInfo;
+	}
+
+	public void setJsonDiscountInfo(JSONObject jsonDiscountInfo) {
+		this.jsonDiscountInfo = jsonDiscountInfo;
+	}
 
     /**
      * 主键id
@@ -302,7 +314,7 @@ public class OrderFormEntity implements Serializable{
      * 是否已评价 (0否 1是)
      * @return isComment
      */
-    public Byte getIsComment() {
+    public Integer getIsComment() {
         return isComment;
     }
 
@@ -310,7 +322,7 @@ public class OrderFormEntity implements Serializable{
      * 是否已评价 (0否 1是)
      * @param isComment
      */
-    public void setIsComment(Byte isComment) {
+    public void setIsComment(Integer isComment) {
         this.isComment = isComment;
     }
 

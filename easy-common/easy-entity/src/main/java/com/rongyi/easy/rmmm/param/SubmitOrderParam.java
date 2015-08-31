@@ -3,7 +3,7 @@ package com.rongyi.easy.rmmm.param;
 import java.io.Serializable;
 import java.util.List;
 
-public class SubmitOrderParam implements Serializable{
+public class SubmitOrderParam implements Serializable {
 
 	/**
 	 * 
@@ -13,6 +13,8 @@ public class SubmitOrderParam implements Serializable{
 	private List<ParentOrderParam> parentOrderList;
 
 	private List<String> commodityCartIds;
+
+	private String devId;// 设备号
 
 	public List<ParentOrderParam> getParentOrderList() {
 		return parentOrderList;
@@ -28,6 +30,14 @@ public class SubmitOrderParam implements Serializable{
 
 	public void setCommodityCartIds(List<String> commodityCartIds) {
 		this.commodityCartIds = commodityCartIds;
+	}
+
+	public String getDevId() {
+		return devId;
+	}
+
+	public void setDevId(String devId) {
+		this.devId = devId;
 	}
 
 }

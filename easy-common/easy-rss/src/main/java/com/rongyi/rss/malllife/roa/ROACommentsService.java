@@ -40,4 +40,12 @@ public interface ROACommentsService {
 	 * @throws Exception
 	 */
 	public Map<String, Object> queryCommentsByTypeAndId(String objects, String typeId, Integer page, Integer pageSize) throws Exception;
+	/**
+     * 返回店铺，商场等的评分
+     * @param objects
+     * @param typeId
+     * @return
+     * @throws Exception
+     */
+    public String queryCommentRankByTypeAndId(String objects, String typeId) throws Exception;
 }

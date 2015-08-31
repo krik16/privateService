@@ -2,9 +2,8 @@ package com.rongyi.rss.msob;
 
 import java.util.List;
 
-import com.rongyi.core.framework.mybatis.pojo.Page;
 import com.rongyi.easy.entity.BrandEntity;
-import com.rongyi.easy.entity.MallLifeUserEntity;
+import com.rongyi.easy.malllife.vo.UserInfoVO;
 import com.rongyi.easy.rmmm.entity.BrandInfoEntity;
 import com.rongyi.easy.rmmm.param.BrandListParam;
 import com.rongyi.easy.rmmm.param.BrandParam;
@@ -34,6 +33,7 @@ public interface ICooperationBrandService {
 	 * @throws Exception
 	 */
 	 public Integer insertCooperationBrand(PrincipalAndCategoryParam param) throws Exception;
+	 public Integer getAndSaveCooperateBrandByBrandMid(String brandMid) throws Exception;
 	/**
 	 * 通过mall name 得到合作商场品牌列表
 	 */
@@ -90,7 +90,7 @@ public interface ICooperationBrandService {
 	 * @return
 	 * @throws Exception
 	 */
-	public BrandDetailVO getBrandDetail(BrandParam brandParam, MallLifeUserEntity user) throws Exception;
+	public BrandDetailVO getBrandDetail(BrandParam brandParam, UserInfoVO user) throws Exception;
 
 	/**
 	 * 通过mongo id 获取品牌信息

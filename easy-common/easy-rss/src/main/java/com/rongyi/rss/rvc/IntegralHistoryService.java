@@ -8,8 +8,12 @@ package com.rongyi.rss.rvc;
 
 import java.util.List;
 
+import com.rongyi.core.common.Page;
+import com.rongyi.core.common.PageList;
 import com.rongyi.core.common.PagingVO;
+import com.rongyi.core.framework.exception.RYServiceException;
 import com.rongyi.easy.rvc.entity.IntegralHistory;
+import com.rongyi.easy.rvc.param.IntegralGiftParam;
 
 /**
  * ClassName:IntegralHistoryService <br/>
@@ -77,5 +81,20 @@ public interface IntegralHistoryService {
    * @since JDK 1.6
    */
   public int countToday(Long memberId, String mallId);
+
+  /**
+   * 
+   * getMemberGift:礼品列表查询. <br/>
+   * 
+   * @author bin.zhang
+   * @param mallId
+   * @param memberId
+   * @param page
+   * @return
+   * @throws Exception
+   * @since JDK 1.6
+   */
+  public PageList<IntegralGiftParam> getMemberGift(String mallId, Long memberId, Page page)
+      throws RYServiceException;
 
 }

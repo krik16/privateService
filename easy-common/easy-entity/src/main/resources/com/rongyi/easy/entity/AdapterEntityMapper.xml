@@ -285,7 +285,10 @@
   	  <if test="ownerId == null and mallId !=null" >
   	and  mall_id = #{mallId} 
   	 </if>
-  	
-  	  
+  </select>
+    <select id="selectByMallId" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	select * from rmc_adapter where
+  	 method_name = #{methodName}
+  	and  mall_id = #{mallId} 
   </select>
 </mapper>

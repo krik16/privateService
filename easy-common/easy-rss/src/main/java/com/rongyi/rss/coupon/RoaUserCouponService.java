@@ -58,7 +58,22 @@ public interface RoaUserCouponService {
      */
     public PagingVO<UserCoupon> searchUserCouponList(String userId, Integer status, Integer currentPage, Integer pageSize);
 
+
+    /**
+     * 根据用户优惠券Id查询
+     * @param id
+     * @return
+     */
     UserCoupon findUserCouponById(Long id);
+
+
+    /**
+     * 根据用户Id，用户卡券Id查询
+     * @param userCouponId
+     * @param userId
+     * @return
+     */
+    UserCoupon findUserCoupon(Long userCouponId, String userId);
 
 
     /**

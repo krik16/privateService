@@ -21,6 +21,11 @@ public class CustomerVO implements Serializable {
     private String userId;
 
     /**
+     * 关联的摩生活用户的IMID
+     */
+    private String userIMId;
+
+    /**
      * 顾客组
      */
     private CustomerGroupVO customerGroupVO;
@@ -46,14 +51,14 @@ public class CustomerVO implements Serializable {
     private String headImg;
 
     /**
-     * todo 是否为专属导购
+     * 是否为专属导购
      */
     private boolean belong;
 
     /**
-     * todo 用户来源
+     * 用户来源
      */
-    private String userSource;
+    private String userSource = "容易逛";
 
     /**
      * 备注名
@@ -81,7 +86,7 @@ public class CustomerVO implements Serializable {
     private String memo;
 
     /**
-     * todo 购买列表 该顾客最新4张在该店铺购买商品的id 缩略图
+     * 购买列表 该顾客最新4张在该店铺购买商品的id 缩略图
      */
     private List<CustomerOrderCommodityVO> commodityVOs;
 
@@ -203,5 +208,13 @@ public class CustomerVO implements Serializable {
 
     public void setUserSource(String userSource) {
         this.userSource = userSource;
+    }
+
+    public String getUserIMId() {
+        return userIMId;
+    }
+
+    public void setUserIMId(String userIMId) {
+        this.userIMId = userIMId;
     }
 }

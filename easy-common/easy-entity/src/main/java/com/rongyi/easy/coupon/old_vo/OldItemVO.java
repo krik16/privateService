@@ -16,7 +16,7 @@ public class OldItemVO {
     private Integer orderNum;//下单总数量
     private Integer outDateFlag;//是否已过销售时间：0-未过  1-已过
     private Integer orderDetailId;//订单项主键Id
-    private List<OldUserCouponVO> myActivityList;
+    private List<OldUserCode> myActivityList;
 
     public String getItemName() {
         return itemName;
@@ -58,11 +58,11 @@ public class OldItemVO {
         this.outDateFlag = outDateFlag;
     }
 
-    public List<OldUserCouponVO> getMyActivityList() {
+    public List<OldUserCode> getMyActivityList() {
         return myActivityList;
     }
 
-    public void setMyActivityList(List<OldUserCouponVO> myActivityList) {
+    public void setMyActivityList(List<OldUserCode> myActivityList) {
         this.myActivityList = myActivityList;
     }
 

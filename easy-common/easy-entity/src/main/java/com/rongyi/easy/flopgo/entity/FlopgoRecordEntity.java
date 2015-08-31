@@ -28,7 +28,7 @@ public class FlopgoRecordEntity implements Serializable{
 	private String flopName;//翻牌购的名字
 	
 	@Property("prize_id")
-	private ObjectId prizeId;//翻牌购的奖品
+	private String prizeId;//翻牌购的奖品
 	@Property("prize_code")
 	private String prizeCode;//翻牌购奖品的卷码
 	@Property("prize_name")
@@ -40,7 +40,14 @@ public class FlopgoRecordEntity implements Serializable{
 	@Property("user_scr")
 	private String userScr;//用户来源 0 mall_life  1.qq  2.wechat 3.weibo
 	private String type;//0表示新增（默认），1表示修改 2表示删除
-	
+	/**领取的到期时间*/
+	@Property("receive_time")
+	private Date receiveExpirationTime;//预定是领取时间的+30分钟
+	/**是否已经领取了 1表示默认的抽到了奖品没有领取，2表示已经领取了，3表示回库存操作了 4表示用于自己不领取的操作*/
+	@Property("is_receive")
+	private String receiveTrue;
+	/**用户手机号*/
+	private String userphone;
 	public String getType() {
 		return type;
 	}
@@ -79,10 +86,10 @@ public class FlopgoRecordEntity implements Serializable{
 		this.flopName = flopName;
 	}
 	
-	public ObjectId getPrizeId() {
+	public String getPrizeId() {
 		return prizeId;
 	}
-	public void setPrizeId(ObjectId prizeId) {
+	public void setPrizeId(String prizeId) {
 		this.prizeId = prizeId;
 	}
 	public String getPrizeCode() {
@@ -108,6 +115,24 @@ public class FlopgoRecordEntity implements Serializable{
 	}
 	public void setFlopTime(Date flopTime) {
 		this.flopTime = flopTime;
+	}
+	public Date getReceiveExpirationTime() {
+		return receiveExpirationTime;
+	}
+	public void setReceiveExpirationTime(Date receiveExpirationTime) {
+		this.receiveExpirationTime = receiveExpirationTime;
+	}
+	public String getReceiveTrue() {
+		return receiveTrue;
+	}
+	public void setReceiveTrue(String receiveTrue) {
+		this.receiveTrue = receiveTrue;
+	}
+	public String getUserphone() {
+		return userphone;
+	}
+	public void setUserphone(String userphone) {
+		this.userphone = userphone;
 	}
 	
 	

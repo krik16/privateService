@@ -1,8 +1,8 @@
 package com.rongyi.easy.coupon.entity;
 
+import com.rongyi.core.constant.CouponConst;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.time.DateUtils;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.*;
 
@@ -28,13 +28,19 @@ public class Coupon implements Serializable {
     private String title;// 券名称
 
     @Property("coupon_type")
-    private String couponType;// 券类型: 抵扣券[01] 代金券[02] 红包[03]
+    private String couponType;// 券类型: 优惠券[02] 现金券[03]
 
     @Property("total_count")
     private Integer totalCount;// 总量
 
     @Property("limit_count")
     private Integer limitCount;// 每人限购数量
+
+    @Property("limit_publish_count")
+    private Integer limitPublishCount;// 每日限量发行张数
+
+    @Property("limit_use_count")
+    private Integer limitUseCount;// 每人每日限用张数
 
     @Property("receive_count")
     private Integer receiveCount = Integer.valueOf(0);// 已领取数
@@ -52,12 +58,7 @@ public class Coupon implements Serializable {
     @Property("current_price")
     private Double currentPrice;// 现价
 
-    /**
-     * 关联类型
-     * 代金券：集团[0],品牌[1], 商场 [2],店铺[3]
-     * 红包 ：全场[0],商品[1]
-     */
-    private String type;
+    private String type;// 配置类型 0:商场 1:店铺；现金券 0：全场，1：商品
 
     @Property("check_description")
     private String checkDescription;// 审核未通过信息描述
@@ -86,8 +87,7 @@ public class Coupon implements Serializable {
     @Embedded("shops")
     private List<CouponShop> shops = new ArrayList<CouponShop>();// 关联店铺集合
 
-    private String status;
-    // 状态(审核中[0]、已上线[1]、已使用[2]、已过期[3]、已下线[4]), 规则：比如100张优惠券有一张被领用将状态置为2，被领用后就不能对优惠券进行操作了
+    private String status; // 状态(审核中[0]、已上线[1]、已使用[2]、已过期[3]、已下线[4]), 规则：比如100张优惠券有一张被领用将状态置为2，被领用后就不能对优惠券进行操作了
 
 
     @Property("check_status")
@@ -141,102 +141,10 @@ public class Coupon implements Serializable {
     @Property("sort_index")
     private Integer sortIndex = Integer.valueOf(0);//优惠券排序字段，目前作用是置顶
 
+    private List<Integer> afterSaleService = CouponConst.AFTER_SALE_SERVICE;//[1,1,1] 1为支持，0为不支持。第一位：随时退、第二位：过期退 第三位： 免预约
+
     @Version
     private Long version; // 乐观锁
-
-    /******新增字段 start******/
-
-    /**
-     * 分类 ： 一级分类，二级分类
-     */
-    @Embedded("categories")
-    private CouponCategories categories = new CouponCategories();
-
-    /**
-     * 大运营平台，平台代金券
-     * 展示区域：常规区域,活动区域
-     * 未选中：[0]，选中：[1] "1,1"表示都选中
-     */
-    @Property("display_region")
-    private String displayRegion;
-
-    /**
-     * 大运营平台，平台代金券
-     * 售后:随时退,过期退,免预约
-     * 未选中：[0]，选中：[1] "1,1,1"表示都选中
-     */
-    @Property("after_sale_service")
-    private String afterSaleService;
-
-    /**
-     * 大运营平台，平台代金券
-     * 备注
-     */
-    private String remark;
-
-    /**
-     * 大运营平台，平台代金券
-     * 关联品牌集合
-     */
-    @Embedded("brands")
-    private List<CouponBrand> brands = new ArrayList<>();
-
-    /**
-     * 大运营品台，平台代金券
-     * 每日限量发行张数
-     */
-    @Property("limit_publish_count")
-    private Integer limitPublishCount;
-
-    /**
-     * 大运营品台，平台代金券
-     * 每人每日限用张数
-     */
-    @Property("limit_use_count")
-    private Integer limitUseCount;
-
-    /**
-     * 是否是第三方导入
-     * [Y]是 [N]不是
-     */
-    @Property("out_status")
-    private String outStatus;
-
-    @Property("check_fail_reason")
-    private List<String> checkFailReason;
-    //推广渠道待定
-    //导入渠道待定
-
-    /**
-     * 商家管理平台
-     * 商场集团、品牌、商场、店铺id
-     */
-    @Property("source_id")
-    private String sourceId;
-
-    /**
-     * 商家管理平台
-     * 商场集团[0]、品牌[1]、商场[2]、店铺[3]
-     */
-    @Property("source_type")
-    private Integer sourceType;
-
-    /**
-     * 优惠方式 0：满减 ；1：立减。
-     */
-    private Integer preferentialType;
-
-    public Integer getPreferentialType() {
-        return preferentialType;
-    }
-
-    public void setPreferentialType(Integer preferentialType) {
-        this.preferentialType = preferentialType;
-    }
-
-    /**
-     * ***新增字段 end*****
-     */
 
     public ObjectId getId() {
         return id;
@@ -271,7 +179,7 @@ public class Coupon implements Serializable {
     }
 
     public Integer getLimitCount() {
-        return limitCount;
+        return (limitCount == null) ? Integer.valueOf(0) : limitCount;
     }
 
     public void setLimitCount(Integer limitCount) {
@@ -279,22 +187,22 @@ public class Coupon implements Serializable {
     }
 
     public Integer getLimitPublishCount() {
-        return limitPublishCount;
-    }
+		return (limitPublishCount == null) ? Integer.valueOf(0) : limitPublishCount;
+	}
 
-    public void setLimitPublishCount(Integer limitPublishCount) {
-        this.limitPublishCount = limitPublishCount;
-    }
+	public void setLimitPublishCount(Integer limitPublishCount) {
+		this.limitPublishCount = limitPublishCount;
+	}
 
-    public Integer getLimitUseCount() {
-        return limitUseCount;
-    }
+	public Integer getLimitUseCount() {
+		return (limitUseCount == null) ? Integer.valueOf(0) : limitPublishCount;
+	}
 
-    public void setLimitUseCount(Integer limitUseCount) {
-        this.limitUseCount = limitUseCount;
-    }
+	public void setLimitUseCount(Integer limitUseCount) {
+		this.limitUseCount = limitUseCount;
+	}
 
-    public Integer getReceiveCount() {
+	public Integer getReceiveCount() {
         return (receiveCount == null) ? Integer.valueOf(0) : receiveCount;
     }
 
@@ -459,11 +367,11 @@ public class Coupon implements Serializable {
     }
 
     public void setPublishBeginDate(Date publishBeginDate) {
-        if (publishBeginDate != null) {
-            publishBeginDate = DateUtils.setHours(publishBeginDate, 0);
-            publishBeginDate = DateUtils.setMinutes(publishBeginDate, 0);
-            publishBeginDate = DateUtils.setSeconds(publishBeginDate, 0);
-        }
+//        if (publishBeginDate != null) {
+//            publishBeginDate = DateUtils.setHours(publishBeginDate, 0);
+//            publishBeginDate = DateUtils.setMinutes(publishBeginDate, 0);
+//            publishBeginDate = DateUtils.setSeconds(publishBeginDate, 0);
+//        }
         this.publishBeginDate = publishBeginDate;
     }
 
@@ -472,11 +380,11 @@ public class Coupon implements Serializable {
     }
 
     public void setPublishEndDate(Date publishEndDate) {
-        if (publishEndDate != null) {
-            publishEndDate = DateUtils.setHours(publishEndDate, 23);
-            publishEndDate = DateUtils.setMinutes(publishEndDate, 59);
-            publishEndDate = DateUtils.setSeconds(publishEndDate, 59);
-        }
+//        if (publishEndDate != null) {
+//            publishEndDate = DateUtils.setHours(publishEndDate, 23);
+//            publishEndDate = DateUtils.setMinutes(publishEndDate, 59);
+//            publishEndDate = DateUtils.setSeconds(publishEndDate, 59);
+//        }
         this.publishEndDate = publishEndDate;
     }
 
@@ -485,11 +393,11 @@ public class Coupon implements Serializable {
     }
 
     public void setValidBeginDate(Date validBeginDate) {
-        if (validBeginDate != null) {
-            validBeginDate = DateUtils.setHours(validBeginDate, 0);
-            validBeginDate = DateUtils.setMinutes(validBeginDate, 0);
-            validBeginDate = DateUtils.setSeconds(validBeginDate, 0);
-        }
+//        if (validBeginDate != null) {
+//            validBeginDate = DateUtils.setHours(validBeginDate, 0);
+//            validBeginDate = DateUtils.setMinutes(validBeginDate, 0);
+//            validBeginDate = DateUtils.setSeconds(validBeginDate, 0);
+//        }
         this.validBeginDate = validBeginDate;
     }
 
@@ -498,11 +406,11 @@ public class Coupon implements Serializable {
     }
 
     public void setValidEndDate(Date validEndDate) {
-        if (validEndDate != null) {
-            validEndDate = DateUtils.setHours(validEndDate, 23);
-            validEndDate = DateUtils.setMinutes(validEndDate, 59);
-            validEndDate = DateUtils.setSeconds(validEndDate, 59);
-        }
+//        if (validEndDate != null) {
+//            validEndDate = DateUtils.setHours(validEndDate, 23);
+//            validEndDate = DateUtils.setMinutes(validEndDate, 59);
+//            validEndDate = DateUtils.setSeconds(validEndDate, 59);
+//        }
         this.validEndDate = validEndDate;
     }
 
@@ -616,79 +524,13 @@ public class Coupon implements Serializable {
         return pic;
     }
 
-
-    public String getDisplayRegion() {
-        return displayRegion;
-    }
-
-    public void setDisplayRegion(String displayRegion) {
-        this.displayRegion = displayRegion;
-    }
-
-    public String getAfterSaleService() {
+    public List<Integer> getAfterSaleService() {
         return afterSaleService;
     }
 
-    public void setAfterSaleService(String afterSaleService) {
+    public void setAfterSaleService(List<Integer> afterSaleService) {
         this.afterSaleService = afterSaleService;
     }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    public List<CouponBrand> getBrands() {
-        return brands;
-    }
-
-    public void setBrands(List<CouponBrand> brands) {
-        this.brands = brands;
-    }
-
-    public String getOutStatus() {
-        return outStatus;
-    }
-
-    public void setOutStatus(String outStatus) {
-        this.outStatus = outStatus;
-    }
-
-    public String getSourceId() {
-        return sourceId;
-    }
-
-    public void setSourceId(String sourceId) {
-        this.sourceId = sourceId;
-    }
-
-    public Integer getSourceType() {
-        return sourceType;
-    }
-
-    public void setSourceType(Integer sourceType) {
-        this.sourceType = sourceType;
-    }
-
-    public CouponCategories getCategories() {
-        return categories;
-    }
-
-    public void setCategories(CouponCategories categories) {
-        this.categories = categories;
-    }
-
-    public List<String> getCheckFailReason() {
-        return checkFailReason;
-    }
-
-    public void setCheckFailReason(List<String> checkFailReason) {
-        this.checkFailReason = checkFailReason;
-    }
-
 
     public static class CouponProduct implements Serializable {
 
@@ -771,11 +613,12 @@ public class Coupon implements Serializable {
 
         @Override
         public String toString() {
-            return new ToStringBuilder(this).append("productId", productId).append("marketName", marketName).append("shopName", shopName).append("productNum", productNum).append("productName", productName).append("pics", pics).append("status", status).toString();
+            return new ToStringBuilder(this).append("productId", productId).append("marketName", marketName)
+                    .append("shopName", shopName).append("productNum", productNum).append("productName", productName)
+                    .append("pics", pics).append("status", status).toString();
         }
 
     }
-
 
     public static class CouponMall implements Serializable {
 
@@ -825,11 +668,11 @@ public class Coupon implements Serializable {
 
         @Override
         public String toString() {
-            return new ToStringBuilder(this).append("id", id).append("mallName", mallName).append("mallAddress", mallAddress).append("mallLogoUrl", mallLogoUrl).toString();
+            return new ToStringBuilder(this).append("id", id).append("mallName", mallName)
+                    .append("mallAddress", mallAddress).append("mallLogoUrl", mallLogoUrl).toString();
         }
 
     }
-
 
     public static class CouponShop implements Serializable {
 
@@ -890,71 +733,55 @@ public class Coupon implements Serializable {
 
         @Override
         public String toString() {
-            return new ToStringBuilder(this).append("id", id).append("shopName", shopName).append("mallName", mallName).append("shopLogoUrl", shopLogoUrl).append("brandName", brandName).toString();
+            return new ToStringBuilder(this).append("id", id).append("shopName", shopName).append("mallName", mallName)
+                    .append("shopLogoUrl", shopLogoUrl).append("brandName", brandName).toString();
         }
 
     }
 
-
-    public static class CouponBrand implements Serializable {
-
-        private static final long serialVersionUID = 1L;
-        private String id;
-
-        private String cname;
-
-        private String ename;
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public String getCname() {
-            return cname;
-        }
-
-        public void setCname(String cname) {
-            this.cname = cname;
-        }
-
-        public String getEname() {
-            return ename;
-        }
-
-        public void setEname(String ename) {
-            this.ename = ename;
-        }
-    }
-
-
-    public static class CouponCategories implements Serializable {
-
-        private static final long serialVersionUID = 1L;
-
-        @Property("first_id")
-        private String firstId;
-
-        @Property("first_name")
-        private String firstName;
-
-        @Property("second_id")
-        private String secondId;
-
-        @Property("second_name")
-        private String secondName;
-
-    }
-
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Coupon [id=").append(id).append(", title=").append(title).append(", couponType=").append(couponType).append(", totalCount=").append(totalCount).append(", limitCount=").append(limitCount).append(", limitPublishCount=").append(limitPublishCount).append(", limitUseCount=").append(limitUseCount).append(", receiveCount=").append(receiveCount).append(", discount=").append(discount).append(", recommend=").append(recommend).append(", validateType=").append(validateType).append(", originalPrice=").append(originalPrice).append(", currentPrice=").append(currentPrice).append(", type=").append(type).append(", checkDescription=").append(checkDescription).append(", listPicUrl=").append(listPicUrl).append(", detailPicUrls=").append(detailPicUrls).append(", sourceTarget=").append(sourceTarget).append(", synTarget=").append(synTarget).append(", synStatus=").append(synStatus).append(", operateType=").append(operateType).append(", malls=").append(malls).append(", shops=").append(shops).append(", status=").append(status).append(", checkStatus=").append(checkStatus).append(", activityStatus=").append(activityStatus).append(", delStatus=").append(delStatus).append(", publishBeginDate=").append(publishBeginDate).append(", publishEndDate=").append(publishEndDate).append(", validBeginDate=").append(validBeginDate).append(", validEndDate=").append(validEndDate).append(", createUser=").append(createUser).append(", createDate=").append(createDate).append(", updateUser=").append(updateUser).append(", updateDate=").append(updateDate).append(", useRestriction=").append(useRestriction).append(", useDescription=").append(useDescription).append(", sourceMallId=").append(sourceMallId).append(", products=").append(products).append(", visitedCount=").append(visitedCount).append(", sortIndex=").append(sortIndex).append(", version=").append(version).append("]");
-        return builder.toString();
-    }
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Coupon [id=").append(id).append(", title=")
+				.append(title).append(", couponType=").append(couponType)
+				.append(", totalCount=").append(totalCount)
+				.append(", limitCount=").append(limitCount)
+				.append(", limitPublishCount=").append(limitPublishCount)
+				.append(", limitUseCount=").append(limitUseCount)
+				.append(", receiveCount=").append(receiveCount)
+				.append(", discount=").append(discount).append(", recommend=")
+				.append(recommend).append(", validateType=")
+				.append(validateType).append(", originalPrice=")
+				.append(originalPrice).append(", currentPrice=")
+				.append(currentPrice).append(", type=").append(type)
+				.append(", checkDescription=").append(checkDescription)
+				.append(", listPicUrl=").append(listPicUrl)
+				.append(", detailPicUrls=").append(detailPicUrls)
+				.append(", sourceTarget=").append(sourceTarget)
+				.append(", synTarget=").append(synTarget)
+				.append(", synStatus=").append(synStatus)
+				.append(", operateType=").append(operateType)
+				.append(", malls=").append(malls).append(", shops=")
+				.append(shops).append(", status=").append(status)
+				.append(", checkStatus=").append(checkStatus)
+				.append(", activityStatus=").append(activityStatus)
+				.append(", delStatus=").append(delStatus)
+				.append(", publishBeginDate=").append(publishBeginDate)
+				.append(", publishEndDate=").append(publishEndDate)
+				.append(", validBeginDate=").append(validBeginDate)
+				.append(", validEndDate=").append(validEndDate)
+				.append(", createUser=").append(createUser)
+				.append(", createDate=").append(createDate)
+				.append(", updateUser=").append(updateUser)
+				.append(", updateDate=").append(updateDate)
+				.append(", useRestriction=").append(useRestriction)
+				.append(", useDescription=").append(useDescription)
+				.append(", sourceMallId=").append(sourceMallId)
+				.append(", products=").append(products)
+				.append(", visitedCount=").append(visitedCount)
+				.append(", sortIndex=").append(sortIndex).append(", version=")
+				.append(version).append("]");
+		return builder.toString();
+	}
 
 }

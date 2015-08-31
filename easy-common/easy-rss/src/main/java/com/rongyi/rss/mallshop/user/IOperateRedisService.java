@@ -21,6 +21,12 @@ public interface IOperateRedisService {
     public void  set(String key,String strValue)throws Exception;
 
 
+    /**
+     * 设置对象
+     * @param key
+     * @param object
+     */
+    public void  setObject(String key, Object object)throws Exception;
 
     /**
      *

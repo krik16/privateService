@@ -24,10 +24,14 @@ public interface Constants {
         String API_NULL_FLOPUSER = "用户名参数没有";
         String API_NULL_FLOPCHANNEL = "用户渠道没有";
         String API_NULL_OBJECTFLOPGOID = "翻牌活动id没有";
+        String API_NULL_ACTIVITYID="最近没有活动";
         String API_NULL_LISTTYPE = "列表类型没有";
         String API_NULL_PAGESize = "没有分页";
+        String API_NULL_USERPHONE="用户手机号为空";
         String API_NULL_COUPONID = "没有卷码";
         String API_NULL_ID = "没有奖品id";
+        String API_USER_NO="用户没有登录";
+        String API_USER_CHANNEL_ERROR="用户渠道错误 ";
     }
 
 
@@ -67,7 +71,7 @@ public interface Constants {
         String ORDER_SUCCESS = "下单成功";
         String GROUPON_REST_LACK = "优惠券剩余数量不足";
         String GROUPON_OUT_QUOTA = "购买数量已经超出每个用户购买限制";
-        String GROUPON_OUT_QUOTA_TODAY = "购买数量已经超出每个用户当日购买限制";
+        String GROUPON_OUT_QUOTA_TODAY = "亲，优惠券已被抢购一空，明天再来吧";
         // 接口使用信息
         String NO_RELATIVE_GROUPON = "未找到相关优惠券";
         String ABNORMAL_USE_TIME = "优惠券使用时间异常";
@@ -163,17 +167,14 @@ public interface Constants {
 
 
     interface MallActivity {
-        PropertyConfigurer propertyConfigurer =
-            (PropertyConfigurer) SpringContextUtil.getBean("propertyConfigurer");
+        PropertyConfigurer propertyConfigurer = (PropertyConfigurer) SpringContextUtil.getBean("propertyConfigurer");
         String CRM_HOST_URL_Path = propertyConfigurer.getProperty("crm.rongyi.com").toString();
-        String CRM_MALL_ACTIVITYS_IMAGE_PATH =
-            propertyConfigurer.getProperty("mallActivity.image.path").toString();
+        String CRM_MALL_ACTIVITYS_IMAGE_PATH = propertyConfigurer.getProperty("mallActivity.image.path").toString();
     }
 
 
     interface SolrURL {
-        PropertyConfigurer propertyConfigurer =
-            (PropertyConfigurer) SpringContextUtil.getBean("propertyConfigurer");
+        PropertyConfigurer propertyConfigurer = (PropertyConfigurer) SpringContextUtil.getBean("propertyConfigurer");
         String SOLR_TEST_BASE = propertyConfigurer.getProperty("solr.base.url").toString();
         // String SOLR_TEST_BASE = "http://192.168.1.202:8080/solr/";
         // String SOLR_TEST_BASE = "http://10.4.13.17/solr";
@@ -370,10 +371,8 @@ public interface Constants {
         String PUBLIC_KEY = "publicKey";
         String PRIVATE_KEY = "privateKey";
 
-        String PUBLIC_KEY_STR =
-            "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCe1N+tR4udbureHSxDVlRCv7SLw7LLFixyLoXEjVFNNkxpnluammzeRlZ23PU16DLPIpCI9BtYHMh+n6Al4plc4nKEfJ0OgoLr4M/VzlCReAWl7+DFFxKZV7MA7yr7gsX/eLQyWAachc17gMmLMFfXBRD/8PZB2if2XnNfcsHL5wIDAQAB";
-        String PRIVATE_KEY_STR =
-            "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAJ7U361Hi51u6t4dLENWVEK/tIvDsssWLHIuhcSNUU02TGmeW5qabN5GVnbc9TXoMs8ikIj0G1gcyH6foCXimVzicoR8nQ6Cguvgz9XOUJF4BaXv4MUXEplXswDvKvuCxf94tDJYBpyFzXuAyYswV9cFEP/w9kHaJ/Zec19ywcvnAgMBAAECgYBh/lBqZkPbQ/2gQDt46CBgdkp8GKeM6QdPAykA1XedvaxzVYKK5k/Y62iZOUYIllQSu+6UsJbWTBvfE7kI5r9bOH08nnReZN8HXEIPQGX5OYUzm/7kHhZYSXdw+rCNmbTBACEFskJ0qHGMKddxqGjuHRriI2zmVem2yHJ3uIx7EQJBAMvmqQYetN1Tfoud2ilVVMuPoFoetZdz1oHodyDFRgB82Lkpjv6e8JRg0Kuu+CXMK/0E788P1j+N16BJnqB9e4sCQQDHai4tT2ESAuqiQ3kgxqbNXlKq2c1eQFIqFn+crJesltt53ymAYShCRiGS18UFfU4tIS0nNji7qe5om0j9FyyVAkEAxQ81h66hic2p3XE/aPcJLnqutKo9QhQ32fE7QLangs0l/z3E7xvY0u4GfgZp2M3MLYpZ4boii+Wf4U+FOQJNJQJBAKSl39CbbNtxOweUzEsqmgiQ65KTWISMeQq1HtJekrD2seozPtH35kSqIQhcTRlWN5j9fomUtE0GZolKRX5qhu0CQE9D3ZasigRGCBRb9QBsSp+/5YZ1B8UPN7wUBmBKqhLVzZbTyEFVC95AofejU0jjcJ/HwPLaJmAs07oDzpJzNxU=";
+        String PUBLIC_KEY_STR = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCe1N+tR4udbureHSxDVlRCv7SLw7LLFixyLoXEjVFNNkxpnluammzeRlZ23PU16DLPIpCI9BtYHMh+n6Al4plc4nKEfJ0OgoLr4M/VzlCReAWl7+DFFxKZV7MA7yr7gsX/eLQyWAachc17gMmLMFfXBRD/8PZB2if2XnNfcsHL5wIDAQAB";
+        String PRIVATE_KEY_STR = "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAJ7U361Hi51u6t4dLENWVEK/tIvDsssWLHIuhcSNUU02TGmeW5qabN5GVnbc9TXoMs8ikIj0G1gcyH6foCXimVzicoR8nQ6Cguvgz9XOUJF4BaXv4MUXEplXswDvKvuCxf94tDJYBpyFzXuAyYswV9cFEP/w9kHaJ/Zec19ywcvnAgMBAAECgYBh/lBqZkPbQ/2gQDt46CBgdkp8GKeM6QdPAykA1XedvaxzVYKK5k/Y62iZOUYIllQSu+6UsJbWTBvfE7kI5r9bOH08nnReZN8HXEIPQGX5OYUzm/7kHhZYSXdw+rCNmbTBACEFskJ0qHGMKddxqGjuHRriI2zmVem2yHJ3uIx7EQJBAMvmqQYetN1Tfoud2ilVVMuPoFoetZdz1oHodyDFRgB82Lkpjv6e8JRg0Kuu+CXMK/0E788P1j+N16BJnqB9e4sCQQDHai4tT2ESAuqiQ3kgxqbNXlKq2c1eQFIqFn+crJesltt53ymAYShCRiGS18UFfU4tIS0nNji7qe5om0j9FyyVAkEAxQ81h66hic2p3XE/aPcJLnqutKo9QhQ32fE7QLangs0l/z3E7xvY0u4GfgZp2M3MLYpZ4boii+Wf4U+FOQJNJQJBAKSl39CbbNtxOweUzEsqmgiQ65KTWISMeQq1HtJekrD2seozPtH35kSqIQhcTRlWN5j9fomUtE0GZolKRX5qhu0CQE9D3ZasigRGCBRb9QBsSp+/5YZ1B8UPN7wUBmBKqhLVzZbTyEFVC95AofejU0jjcJ/HwPLaJmAs07oDzpJzNxU=";
     }
 
 
@@ -579,8 +578,8 @@ public interface Constants {
         int HAD_CANCEL = 2;//已取消
         int HAD_DELETE = 3;//已删除
         int REFUND = 5; //退款状态,包括退款中和已退款
-        PropertyDate[] vderStatusProperty =
-            {new PropertyDate("0", "待付款"), new PropertyDate("1", "已付款"), new PropertyDate("2", "已取消"), new PropertyDate("3", "已删除")};
+        PropertyDate[] vderStatusProperty = {new PropertyDate("0", "待付款"), new PropertyDate("1", "已付款"),
+                new PropertyDate("2", "已取消"), new PropertyDate("3", "已删除")};
     }
 
 
@@ -655,5 +654,22 @@ public interface Constants {
         String UNCHECK="uncheck";
         String UNPASS="unpass";
         String PASS="pass";
+    }
+	 /**
+     * 配置的类型
+     */
+    interface ConfigType {
+        String CONFIGURATIONS = "com.rongyi.easy.gcc.Configurations";
+        String TRANS_CONFIGURATIONS = "com.rongyi.easy.gcc.TransConfigurations";
+    }
+    interface AppType{
+    	/**
+    	 * 容易逛
+    	 */
+    	Integer MALLLIFE = 1;
+    	/**
+    	 * 摩店
+    	 */
+    	Integer MALLSHOP = 2;
     }
 }
