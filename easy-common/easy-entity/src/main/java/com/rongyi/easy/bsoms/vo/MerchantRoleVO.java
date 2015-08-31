@@ -10,6 +10,7 @@ import java.util.List;
  *
  */
 public class MerchantRoleVO implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private Integer type;
 	private Integer identity;
 	/** 商场的mongoId */
@@ -32,6 +33,7 @@ public class MerchantRoleVO implements Serializable{
 	private Date updateTime;
 	private String stopReason;
 	private Date stopTime;
+	private Integer createSource;
 	public Integer getType() {
 		return type;
 	}
@@ -139,6 +141,12 @@ public class MerchantRoleVO implements Serializable{
 	}
 	public void setStopTime(Date stopTime) {
 		this.stopTime = stopTime;
+	}
+	public Integer getCreateSource() {
+		return createSource;
+	}
+	public void setCreateSource(Integer createSource) {
+		this.createSource = createSource;
 	}
 	
 }
