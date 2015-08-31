@@ -148,6 +148,7 @@ public enum CodeEnum {
     ERROR_NO_VALIDHISTORY("-9002","没有券码核销记录"),
     ERROR_SWEEP_CODE("-9003","扫码验券失败"),
     ERROR_VALID_CODE("-9004","验码失败"),
+    SUCCESS_VALID_CODE("-9005","优惠券码验证成功"),
     
     ERROR_LOGIN_IN_INVALID("-2000","登录出错"),
     ERROR_UN_LOGIN("-10000", "尚未登陆或登陆出错，请重新登录"),
