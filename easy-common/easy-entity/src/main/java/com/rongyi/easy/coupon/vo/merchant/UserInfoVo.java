@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 public class UserInfoVo implements Serializable{
     private Integer id;
-    private Integer Identity;
+    private Integer identity;
     private String shopId;
     private String  mallId;
     private String groupId;
@@ -24,14 +24,6 @@ public class UserInfoVo implements Serializable{
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getIdentity() {
-        return Identity;
-    }
-
-    public void setIdentity(Integer identity) {
-        Identity = identity;
     }
 
     public String getShopId() {
@@ -74,8 +66,16 @@ public class UserInfoVo implements Serializable{
         this.branchCompanyId = branchCompanyId;
     }
 
+    public Integer getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(Integer identity) {
+        this.identity = identity;
+    }
+
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("id", id).append("Identity", Identity).append("shopId", shopId).append("mallId", mallId).append("groupId", groupId).append("brandId", brandId).append("branchCompanyId", branchCompanyId).toString();
+        return new ToStringBuilder(this).append("id", id).append("identity", identity).append("shopId", shopId).append("mallId", mallId).append("groupId", groupId).append("brandId", brandId).append("branchCompanyId", branchCompanyId).toString();
     }
 }

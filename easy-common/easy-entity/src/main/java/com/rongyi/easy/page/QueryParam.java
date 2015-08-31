@@ -1,7 +1,5 @@
 package com.rongyi.easy.page;
 
-import com.rongyi.core.constant.Constants;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +9,9 @@ import java.util.List;
  * Created by 袁波
  * Created at 2015/7/21 17:19.
  */
-public class QueryParam implements Serializable{
-    private static final int PAGESIZE=10;
-    private static final int CURRENTPAGE=1;
+public class QueryParam implements Serializable {
+    private static final int PAGESIZE = 10;
+    private static final int CURRENTPAGE = 1;
     /**
      * 查询的过滤集合
      */
@@ -59,8 +57,8 @@ public class QueryParam implements Serializable{
     }
 
     public int getCurrentPage() {
-        if(currentPage==0){
-            currentPage=CURRENTPAGE;
+        if (currentPage == 0) {
+            currentPage = CURRENTPAGE;
         }
         return currentPage;
     }
@@ -70,8 +68,8 @@ public class QueryParam implements Serializable{
     }
 
     public int getPageSize() {
-        if(pageSize==0){
-            pageSize=PAGESIZE;
+        if (pageSize == 0) {
+            pageSize = PAGESIZE;
         }
         return pageSize;
     }
@@ -81,7 +79,7 @@ public class QueryParam implements Serializable{
     }
 
     public int getOffset() {
-        return  (this.getCurrentPage()-1)*this.getPageSize();
+        return (this.getCurrentPage() - 1) * this.getPageSize();
     }
 
     public void setOffset(int offset) {
@@ -92,9 +90,10 @@ public class QueryParam implements Serializable{
         this.queryFilters = queryFilters;
         this.queryOrders = queryOrders;
     }
+
     public QueryParam(List<QueryFilter> queryFilters) {
         this.queryFilters = queryFilters;
-        List<QueryOrder> queryOrders=new ArrayList<>();
+        List<QueryOrder> queryOrders = new ArrayList<>();
         queryOrders.add(new QueryOrder("-create_at"));
         this.queryOrders = queryOrders;
     }
@@ -111,6 +110,7 @@ public class QueryParam implements Serializable{
         this.currentPage = currentPage;
         this.pageSize = pageSize;
     }
+
     public QueryParam(List<QueryFilter> queryFilters, List<QueryOrder> queryOrders, List<Form> fromList) {
 
         this.queryFilters = queryFilters;
