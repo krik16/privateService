@@ -9,7 +9,7 @@ public class ClearanceCommodityVO implements Serializable{
 
 	private List<CommodityBuyerVO> list;// 清仓商品详情列表
 
-	private String title = "特惠商品大放送";
+	private String title = "特惠商品";
 
 	public List<CommodityBuyerVO> getList() {
 		return list;
