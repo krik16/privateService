@@ -151,8 +151,12 @@ public enum CodeEnum {
     
     ERROR_LOGIN_IN_INVALID("-2000","登录出错"),
     ERROR_UN_LOGIN("-10000", "尚未登陆或登陆出错，请重新登录"),
-    ERROR_TAG_NUM_OUT("-10001", "标签数目超过最大数目")
-    ;
+    ERROR_TAG_NUM_OUT("-10001", "标签数目超过最大数目"),
+    
+    ERROR_CODE("-20001","券码有误"),
+    ERROR_CODE_USED("-20002","券码已使用"),
+    ERROR_CODE_OUTDATE("-20003","券码已过期或已失效");
+    
     
     private String code; 
     private String message; 
