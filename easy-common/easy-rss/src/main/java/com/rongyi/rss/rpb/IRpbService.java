@@ -121,4 +121,15 @@ public interface IRpbService {
 	 * @datetime:2015年8月28日上午10:38:48
 	 **/
 	public abstract Map<String,Object> weixinRefundRejected(Integer paymentId,Integer refundRejected);
+	
+	/**	
+	 * @Description: 付款/退款操作前验证是否付款操作条件 
+	 * @param ids
+	 * @param operateType
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年9月1日下午2:44:13
+	 **/
+	public abstract Map<String,Object> validatePayHtml(String[] ids,Integer operateType);
+	
 }
