@@ -2,7 +2,12 @@ package com.rongyi.rss.coupon.merchant;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.mysql.Coupon;
+import com.rongyi.easy.coupon.entity.mysql.CouponRejectRecord;
+import com.rongyi.easy.coupon.vo.merchant.StatisticsCountVO;
+import com.rongyi.easy.coupon.vo.merchant.UserInfoVo;
 import com.rongyi.easy.page.QueryParam;
+
+import java.util.List;
 
 /**
  * Descriptions:
@@ -15,11 +20,40 @@ public interface ROAMerchantCouponService {
      * @param queryParam
      * @return
      */
-    public PagingVO<Coupon> getCouponByPageMysql(QueryParam queryParam);
+    public PagingVO<Coupon> getCouponByPageMysql(QueryParam queryParam,UserInfoVo UserInfoVo);
 
     /**
-     * 导入第三方码的时候，首先先新建一个空的卡券
+     * 商家优惠券，新增，修改，审核，删除等操作
+     * @param coupon
      * @return
      */
+    public Boolean updateCoupon(Coupon coupon);
+
+    /**
+     * 插入一条coupon
+     * @return coupon id
+     */
     public int insertCoupon();
+
+    /**
+     * 获取未通过列表
+     * @param couponId
+     * @param type
+     * @return
+     */
+    public List<CouponRejectRecord> getUnpassReasons(Integer couponId,Integer type);
+
+    /**
+     * 根据登录用户统计，该用户所对应集团/品牌/分公司/商场 下面优惠券的 审核状态的数量
+     * @param userInfoVo
+     * @return
+     */
+    public StatisticsCountVO statisticsCheckCount(UserInfoVo userInfoVo);
+
+    /**
+     * 根据登录用户统计，该用户所对应集团/品牌/分公司/商场 下面优惠券的 发布状态的数量
+     * @param userInfoVo
+     * @return
+     */
+    public StatisticsCountVO statisticsPublishCount(UserInfoVo userInfoVo) ;
 }
