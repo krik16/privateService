@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.bson.types.ObjectId;
-
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
@@ -24,7 +23,7 @@ public class Commodity implements  Serializable {
 	private String category;//商品品类id
 	private String shopId;//店铺id
 	private String shopMid;//店铺的mongoid
-	private int status;//状态 1上架 0下架 2是删除3待上架
+	private int status;//状态 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理 
 	private String code;//商品编码
 	private String description;//商品描述
 	private String postage;//商品邮费
@@ -81,9 +80,9 @@ public class Commodity implements  Serializable {
 	private String systemNumber;//系统编号
 	private byte distribution;//配送方式
 	private double freight;//运费 >0买家承担运费<0商家承担运费
-	private Date registerTime;//上架时间
-	private Date soldOutTime;//下架时间
-	
+	private Date registerAt;//上架时间
+	private Date soldOutAt;//下架时间
+
 //	private int commentCount;
 //	private int highCommentCount;
 //	private int mediumCommentCount;
@@ -292,17 +291,19 @@ public String getShopMid() {
 	public void setFreight(double freight) {
 		this.freight = freight;
 	}
-	public Date getRegisterTime() {
-		return registerTime;
+	public Date getRegisterAt() {
+		return registerAt;
 	}
-	public void setRegisterTime(Date registerTime) {
-		this.registerTime = registerTime;
+	public void setRegisterAt(Date registerAt) {
+		this.registerAt = registerAt;
 	}
-	public Date getSoldOutTime() {
-		return soldOutTime;
+	public Date getSoldOutAt() {
+		return soldOutAt;
 	}
-	public void setSoldOutTime(Date soldOutTime) {
-		this.soldOutTime = soldOutTime;
+	public void setSoldOutAt(Date soldOutAt) {
+		this.soldOutAt = soldOutAt;
 	}
+	
+	
 	
 }

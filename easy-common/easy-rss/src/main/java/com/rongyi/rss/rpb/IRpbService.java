@@ -36,7 +36,7 @@ public interface IRpbService {
     
     /**	
      * @Description: 根据交易流水号查询对应的付款记录
-     * @param id
+     * @param tradeNo
      * @return	
      * @Author:  柯军
      * @datetime:2015年6月11日下午3:48:36
@@ -72,9 +72,9 @@ public interface IRpbService {
 	
 	/**	
 	 * @Description: 查询订单在第三方系统中状态 
-	 * @param tradeNo交易流水号
-	 * @param payNo付款单号
-	 * @param payChannel付款方式(0:支付宝，1:微信)
+	 * @param tradeNo//交易流水号
+	 * @param payNo//付款单号
+	 * @param payChannel//付款方式(0:支付宝，1:微信)
 	 * @return	
 	 * @Author:  柯军
 	 * @datetime:2015年8月11日下午4:50:55
@@ -83,14 +83,15 @@ public interface IRpbService {
 	
 	/**	 
 	 * @Description: 查询支付账号购买次数 
-	 * @param map给定count参数查询大于该count的所有账号
+	 * @param map//给定count参数查询大于该count的所有账号
 	 * @return	
 	 * @Author:  柯军
 	 * @datetime:2015年8月12日上午11:46:46
 	 **/
 	public List<PayAccountUseTotal> selectPayAccountUseTotal(Map<String, Object> map);
 	
-	/**	
+
+	/**
 	 * @Description: 获取支付签名 
 	 * @param event
 	 * @return	

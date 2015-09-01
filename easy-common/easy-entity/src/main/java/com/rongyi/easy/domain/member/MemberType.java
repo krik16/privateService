@@ -3,48 +3,36 @@ package com.rongyi.easy.domain.member;
 import com.rongyi.core.framework.ienum.IEnum;
 
 /**
- * ClassName: ChannelType <br/>
+ * ClassName: MemberType <br/>
  * Function: TODO ADD FUNCTION. <br/>
- * Reason:来源类型 <br/>
+ * Reason:会员类型 <br/>
  * date: 2015年4月29日 下午8:05:37 <br/>
  * 
  * @author bin.zhang
  * @version
  * @since JDK 1.6
  */
-public enum ChannelType implements IEnum {
+public enum MemberType implements IEnum {
   /**
-   * 手机
+   * 电子会员
    */
-  PHONE(0),
+  E_MEMBER(0),
   /**
-   * 会员号
+   * 商场会员
    */
-  MEMBER_NO(1),
-  /**
-   * 微信
-   */
-  WECHAT(2),
-  /**
-   * 身份证
-   */
-  IDENTIFY(3);
+  MALL_MEMBER(1);
 
   @Override
   public int getValue() {
     return this.value;
   }
 
-  public static ChannelType findByValue(int value) {
+  public static MemberType findByValue(int value) {
     switch (value) {
       case 0:
-        return PHONE;
+        return E_MEMBER;
       case 1:
-        return MEMBER_NO;
-      case 2:
-        return WECHAT;
-      case 3:
-        return IDENTIFY;
+        return MALL_MEMBER;
       default:
         return null;
 
@@ -53,7 +41,7 @@ public enum ChannelType implements IEnum {
 
   private int value;
 
-  private ChannelType(int value) {
+  private MemberType(int value) {
     this.value = value;
   }
 }

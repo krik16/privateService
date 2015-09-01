@@ -3,6 +3,7 @@ package com.rongyi.easy.rmc.param;
 import java.io.Serializable;
 
 import com.rongyi.easy.base.param.BaseParam;
+import com.rongyi.easy.domain.member.IntegralChangeAction;
 
 /**
  * 
@@ -31,7 +32,7 @@ public class MemberBonusParam extends BaseParam implements Serializable {
   /**
    * 调整积分:+3 增加3积分,-3减少3积分
    */
-  private String bonusPoint;
+  private int bonusPoint;
   /**
    * 调整理由
    */
@@ -44,16 +45,28 @@ public class MemberBonusParam extends BaseParam implements Serializable {
   /**
    * 手机
    */
-  private String mobile;
+  private String phone;
+  /**
+   * 积分变化动作
+   */
+  private IntegralChangeAction action;
 
 
 
-  public String getMobile() {
-    return mobile;
+  public IntegralChangeAction getAction() {
+    return action;
   }
 
-  public void setMobile(String mobile) {
-    this.mobile = mobile;
+  public void setAction(IntegralChangeAction action) {
+    this.action = action;
+  }
+
+  public String getPhone() {
+    return phone;
+  }
+
+  public void setPhone(String phone) {
+    this.phone = phone;
   }
 
   public String getMallId() {
@@ -72,11 +85,12 @@ public class MemberBonusParam extends BaseParam implements Serializable {
     this.memberNo = memberNo;
   }
 
-  public String getBonusPoint() {
+
+  public int getBonusPoint() {
     return bonusPoint;
   }
 
-  public void setBonusPoint(String bonusPoint) {
+  public void setBonusPoint(int bonusPoint) {
     this.bonusPoint = bonusPoint;
   }
 

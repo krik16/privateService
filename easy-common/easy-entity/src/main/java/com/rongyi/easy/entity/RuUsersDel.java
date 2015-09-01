@@ -13,7 +13,7 @@ import org.mongodb.morphia.annotations.Property;
  * @author baodk
  */
 @Entity(value = "rmc_ru_users", noClassnameStored = true)
-public class RuUsers {
+public class RuUsersDel {
 
     @Id
     private ObjectId id;

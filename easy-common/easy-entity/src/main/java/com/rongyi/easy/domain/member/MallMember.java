@@ -1,24 +1,35 @@
 package com.rongyi.easy.domain.member;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 
- * ClassName: RYUser <br/>
+ * ClassName: MallMember <br/>
  * Function: TODO ADD FUNCTION. <br/>
- * Reason: 容易网电子会员. <br/>
- * date: 2015年4月30日 下午10:19:52 <br/>
+ * Reason: 商场会员信息. <br/>
+ * date: 2015年8月3日 下午4:04:56 <br/>
  * 
  * @author bin.zhang
  * @version
  * @since JDK 1.6
  */
-public class RYUser {
-  /** 容易网唯一id */
+public class MallMember implements Serializable {
+  /**
+   * serialVersionUID:TODO(用一句话描述这个变量表示什么).
+   * 
+   * @since JDK 1.6
+   */
+  private static final long serialVersionUID = 3325996336532182859L;
+
+  /** 用户ID */
   private Integer id;
 
-  /** 手机号 */
-  private String mobile;
+  /** 商场ID */
+  private String mallId;
+
+  /** 会员号 */
+  private String memberNo;
 
   /** 真实姓名 */
   private String name;
@@ -35,20 +46,27 @@ public class RYUser {
   /** 地址 */
   private String address;
 
-  /** 身份证号 */
-  private String identity;
+  /** 手机号 */
+  private String phone;
 
-  /** 性别 */
-  private Integer gender;
+  /** 身份证号 */
+  private String idCard;
+
+  /** 性别(F女, M男) */
+  private String gender;
 
   /** 出生日期 */
   private Date birthday;
 
   /** 积分 */
-  private Float integral;
+  private Integer integral;
 
   /** 会员等级 */
   private String level;
+  /**
+   * 等级描述
+   */
+  private String levelDes;
 
   /** 邮件 */
   private String email;
@@ -68,8 +86,15 @@ public class RYUser {
   /** 微信 */
   private String weixin;
 
+  /** 创建时间 */
+  private Date createAt;
+
+  /** 最后更新时间 */
+  private Date updateAt;
+
+
   /**
-   * 容易网唯一id
+   * 用户ID
    * 
    * @return id
    */
@@ -78,7 +103,7 @@ public class RYUser {
   }
 
   /**
-   * 容易网唯一id
+   * 用户ID
    * 
    * @param id
    */
@@ -87,21 +112,39 @@ public class RYUser {
   }
 
   /**
-   * 手机号
+   * 商场ID
    * 
-   * @return mobile
+   * @return mallId
    */
-  public String getMobile() {
-    return mobile;
+  public String getMallId() {
+    return mallId;
   }
 
   /**
-   * 手机号
+   * 商场ID
    * 
-   * @param mobile
+   * @param mallId
    */
-  public void setMobile(String mobile) {
-    this.mobile = mobile;
+  public void setMallId(String mallId) {
+    this.mallId = mallId;
+  }
+
+  /**
+   * 会员号
+   * 
+   * @return memberNo
+   */
+  public String getMemberNo() {
+    return memberNo;
+  }
+
+  /**
+   * 会员号
+   * 
+   * @param memberNo
+   */
+  public void setMemberNo(String memberNo) {
+    this.memberNo = memberNo;
   }
 
   /**
@@ -194,39 +237,48 @@ public class RYUser {
     this.address = address;
   }
 
-  /**
-   * 身份证号
-   * 
-   * @return identity
-   */
-  public String getIdentity() {
-    return identity;
+
+  public String getPhone() {
+    return phone;
+  }
+
+  public void setPhone(String phone) {
+    this.phone = phone;
   }
 
   /**
    * 身份证号
    * 
-   * @param identity
+   * @return idCard
    */
-  public void setIdentity(String identity) {
-    this.identity = identity;
+  public String getIdCard() {
+    return idCard;
   }
 
   /**
-   * 性别
+   * 身份证号
+   * 
+   * @param idCard
+   */
+  public void setIdCard(String idCard) {
+    this.idCard = idCard;
+  }
+
+  /**
+   * 性别(F女, M男)
    * 
    * @return gender
    */
-  public Integer getGender() {
+  public String getGender() {
     return gender;
   }
 
   /**
-   * 性别
+   * 性别(F女, M男)
    * 
    * @param gender
    */
-  public void setGender(Integer gender) {
+  public void setGender(String gender) {
     this.gender = gender;
   }
 
@@ -253,7 +305,7 @@ public class RYUser {
    * 
    * @return integral
    */
-  public Float getIntegral() {
+  public Integer getIntegral() {
     return integral;
   }
 
@@ -262,7 +314,7 @@ public class RYUser {
    * 
    * @param integral
    */
-  public void setIntegral(Float integral) {
+  public void setIntegral(Integer integral) {
     this.integral = integral;
   }
 
@@ -391,4 +443,50 @@ public class RYUser {
   public void setWeixin(String weixin) {
     this.weixin = weixin;
   }
+
+  /**
+   * 创建时间
+   * 
+   * @return createAt
+   */
+  public Date getCreateAt() {
+    return createAt;
+  }
+
+  /**
+   * 创建时间
+   * 
+   * @param createAt
+   */
+  public void setCreateAt(Date createAt) {
+    this.createAt = createAt;
+  }
+
+  /**
+   * 最后更新时间
+   * 
+   * @return updateAt
+   */
+  public Date getUpdateAt() {
+    return updateAt;
+  }
+
+  /**
+   * 最后更新时间
+   * 
+   * @param updateAt
+   */
+  public void setUpdateAt(Date updateAt) {
+    this.updateAt = updateAt;
+  }
+
+  public String getLevelDes() {
+    return levelDes;
+  }
+
+  public void setLevelDes(String levelDes) {
+    this.levelDes = levelDes;
+  }
+
+
 }
