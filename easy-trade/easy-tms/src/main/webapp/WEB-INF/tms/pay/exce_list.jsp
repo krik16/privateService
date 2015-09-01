@@ -44,7 +44,7 @@
 						<td>${item.buyerAccount}</td>
 						<td>${item.buyerName}</td>
 						<td>${item.orderPrice}</td>
-						<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><a href="${ctx}/pay/pay?paymentId=${item.id}&type=4&payChannel=${item.payChannel}"   class="btnsearch" id="pay-button" target="_blank">付款</a></sec:authorize></td>
+						<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="morePay(${item.id},4, ${item.payChannel})"  class="btnsearch" id="pay-button" target="_blank">付款</a></sec:authorize></td>
 			 		</td>
 					</tr>
 				</c:forEach>

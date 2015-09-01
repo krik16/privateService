@@ -244,6 +244,28 @@ public class PayController extends BaseController {
 		return "/pay/draw_apply_list";
 	}
 
+	/**	
+	 * @Description: 操作退款/付款前验证是否符合条件 
+	 * @param paymentId
+	 * @param model
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年9月1日下午2:40:13
+	 **/
+	@RequestMapping("/validatePay")
+	@ResponseBody
+	public ResponseResult validatePay(@RequestParam String ids[],@RequestParam Integer operateType, Model model) {
+		LOGGER.info("================操作退款/付款前验证是否符合条件 ====================");
+		try {
+			Map<String, Object> resultMap = rpbService.validatePayHtml(ids, operateType);
+			result.setSuccess(Boolean.valueOf(resultMap.get("success").toString()));
+			result.setMessage(resultMap.get("message").toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	/**
 	 * @Description: 支付
 	 * @param paymentId

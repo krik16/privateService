@@ -48,7 +48,7 @@
 						<td>${item.orderPrice}</td>
 						<c:choose>
 						<c:when test="${item.payChannel eq 0}">
-							<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><a href="${ctx}/pay/pay?paymentId=${item.id}&type=2&payChannel=${item.payChannel}" class="btnsearch" id="pay-button" target="_blank">付款</a></sec:authorize></td>
+							<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="morePay(${item.id},2, ${item.payChannel})" class="btnsearch" id="pay-button" target="_blank">付款</a></sec:authorize></td>
 						</c:when>
 						<c:otherwise>
 							<td><a href="javascript:void(0);" class="btnsearch checked" id="weixin-refund-button" onclick="weixinRefund(${item.id},${item.refundRejected})">退款</a>

@@ -226,14 +226,24 @@ function weixinRefund(paymentId,refundRejected) {
 }
 
 /**
- * 批量操作
+ * 批量操作退款/付款
  * @param ids
  * @param type
  * @param payChannel
  */
 function morePay(ids, type,payChannel) {
-	var url = '../pay/pay?paymentId=' + ids + '&type=' + type+'&payChannel=' + payChannel;
-	 window.open(url);
+	$.post("../pay/validatePay", {
+		ids:ids,
+		operateType:type
+	}, function(data) {
+		if (data.success == false)
+			_util.cmsTip(data.message);
+		else{
+			var url = '../pay/pay?paymentId=' + ids + '&type=' + type+'&payChannel=' + payChannel;
+			 window.open(url);			
+		}
+	}, "json");
+	
 }
 
 function switchCheck(check) {

@@ -247,10 +247,15 @@ public class PaymentServiceTest extends BaseTest {
 		paymentService.bodyToPaymentEntity(body, "2");
 	}
 	
-	@Test
+//	@Test
 	@Rollback(false)
 	public void testUpdateRefundRejected(){
 		paymentService.updateRefundRejected(4690,1);
 	}
 	
+	@Test
+	public void testValiadteStatus(){
+		String[] ids = new String[]{"1","2","3"};
+		paymentService.valiadteStatus(ids, 2);	
+	}
 }

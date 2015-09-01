@@ -168,7 +168,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 		List<PaymentEntity> paymentEntityList = new ArrayList<PaymentEntity>();
 		String[] orderNumArray = paymentEntityVO.getOrderNum().split("\\,");
 		PaymentEntity paymentEntity = null;
-		String payNo = orderNoGenService.getOrderNo();// 生成付款单号,多个订单号付款单号一样
+		String payNo = getPayNo();// 生成付款单号,多个订单号付款单号一样
 		LOGGER.info("生成付款单号：" + payNo);
 		if (orderNumArray != null && orderNumArray.length > 0) {
 			for (int i = 0; i < orderNumArray.length; i++) {
@@ -503,7 +503,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 			if (PaymentEventType.DRAW_PAY.equals(event.getType())) {// 提现
 				LOGGER.info("生成提现申请记录，提现单号：" + mqDrawParam.getDrawNo());
 				paymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE3);
-				paymentEntity.setPayNo(orderNoGenService.getOrderNo());
+				paymentEntity.setPayNo(getPayNo());
 				paymentEntity.setOrderNum(mqDrawParam.getDrawNo());
 			} else {// 异常支付
 				LOGGER.info("生成异常记录，异常单号：" + bodyMap.get("exceTradeNo"));
@@ -600,7 +600,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 			if (oldPaymentEntity != null)// 该支付方式的待支付状态记录是否已存在
 				BeanUtils.copyProperties(oldPaymentEntity, paymentEntity);
 			insertRepeatPay(paymentEntity, paymentLogInfo);// 增加重复付款记录
-			String payNo = orderNoGenService.getOrderNo();
+			String payNo = getPayNo();
 			PaymentEntity refundPaymentEntity = new PaymentEntity();
 			BeanUtils.copyProperties(paymentEntity, refundPaymentEntity);
 			refundPaymentEntity.setId(null);
@@ -680,5 +680,18 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 		map.put("id", id);
 		map.put("refundRejected", refundRejected);
 		this.getBaseDao().updateBySql(PAYMENTENTITY_NAMESPACE+".updateRefundRejected", map);
+	}
+
+	@Override
+	public List<PaymentEntity> valiadteStatus(String[] ids, Integer status) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("ids",ids);
+		map.put("status",status);
+		return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE+".valiadteStatus",map);
+	}
+
+	@Override
+	public String getPayNo() {
+		return orderNoGenService.getOrderNo("0");
 	}
 }

@@ -52,40 +52,40 @@
 	</resultMap>
 
 	<sql id="Base_Column_List">
-	payment_event.id id,
-	payment_event.trade_no,
-	payment_event.transaction_id,
-	payment_event.time_end AS trade_time,
-	payment_event.event_type,
-	payment_order.create_at AS order_time,
-	payment_order.`status`,
-	payment_order.draw_user_id,
-	payment_order.pay_amount as order_price,
-	payment_order.order_no,
-	payment_order.order_type,
-	payment_order.pay_no,
-	payment_order.trade_type,
-  payment_order.pay_channel,
-	shop_info.id AS shop_id,
-	shop_info.shop_name,
-	mall_cooperate.id AS mail_id,
-	mall_cooperate.mall_name,
-	rmmm_user_info.user_phone AS seller_account,
-	rmmm_user_info.user_name AS seller_name,
-	user_account.account_type AS seller_pay_type,
-	user_account.account_code AS seller_pay_account,
-	user_account.account_name AS seller_pay_name,
-	order_form.buyer_id,
-	null AS integral_discount,
-	order_detail_form.coupon_id AS coupon_code,
-	null AS coupon_discount,
-	order_form.discount_info as order_discount_info,
-	coupon_order.cash_coupon_code,
-	coupon_order.discount_info as coupon_discunt_info,
-	coupon_order.buyer_id as coupon_buyer_id,
-	coupon_order.buyer_mobile as coupon_buyer_account
+		payment_event.id id,
+		payment_event.trade_no,
+		payment_event.transaction_id,
+		payment_event.time_end AS trade_time,
+		payment_event.event_type,
+		payment_order.create_at AS order_time,
+		payment_order.`status`,
+		payment_order.draw_user_id,
+		payment_order.pay_amount as order_price,
+		payment_order.order_no,
+		payment_order.order_type,
+		payment_order.pay_no,
+		payment_order.trade_type,
+		payment_order.pay_channel,
+		shop_info.id AS shop_id,
+		shop_info.shop_name,
+		mall_cooperate.id AS mail_id,
+		mall_cooperate.mall_name,
+		rmmm_user_info.user_phone AS seller_account,
+		rmmm_user_info.user_name AS seller_name,
+		user_account.account_type AS seller_pay_type,
+		user_account.account_code AS seller_pay_account,
+		user_account.account_name AS seller_pay_name,
+		order_form.buyer_id,
+		null AS integral_discount,
+		order_detail_form.coupon_id AS coupon_code,
+		null AS coupon_discount,
+		order_form.discount_info as order_discount_info,
+		coupon_order.cash_coupon_code,
+		coupon_order.discount_info as coupon_discunt_info,
+		coupon_order.buyer_id as coupon_buyer_id,
+		coupon_order.buyer_mobile as coupon_buyer_account
 	</sql>
-		
+
 	<sql id="Base_from">
 		ry_rpb.payment_event AS payment_event
 		LEFT JOIN
@@ -106,10 +106,7 @@
 		mall_cooperate ON mall_cooperate.id =
 		shop_info.mall_id
 		LEFT JOIN
-		ry_rmmm.user_shop AS user_shop ON user_shop.shop_id =
-		shop_info.id
-		LEFT
-		JOIN ry_rmmm.rmmm_user_info AS rmmm_user_info ON rmmm_user_info.id =
+		ry_rmmm.rmmm_user_info AS rmmm_user_info ON rmmm_user_info.id =
 		order_form.guide_id
 		LEFT JOIN ry_rmmm.user_account AS user_account ON
 		user_account.user_id =
@@ -118,8 +115,8 @@
 		AS coupon_order ON coupon_order.order_no =
 		payment_order.order_no
 	</sql>
-	
-	
+
+
 	<sql id="Base_group_by">
 		GROUP BY payment_event.id
 	</sql>
@@ -211,47 +208,62 @@
 			<!-- 未使用积分和红包 -->
 			<if test="favorType == 0">
 				<!-- 商品 -->
-				AND (((order_form.discount_info NOT LIKE '%score%' OR order_form.discount_info
+				AND (((order_form.discount_info NOT LIKE '%score%' OR
+				order_form.discount_info
 				IS NULL)
-				AND (order_detail_form.coupon_id IS NULL OR order_detail_form.coupon_id = '')) AND
+				AND (order_detail_form.coupon_id IS
+				NULL OR order_detail_form.coupon_id = '')) AND
 				<!-- 优惠券 -->
-				((	coupon_order.discount_info NOT LIKE '%score%' OR 	coupon_order.discount_info IS
+				(( coupon_order.discount_info NOT LIKE '%score%' OR
+				coupon_order.discount_info IS
 				NULL)
-				AND (coupon_order.cash_coupon_code IS NULL OR coupon_order.cash_coupon_code = '')))
+				AND (coupon_order.cash_coupon_code
+				IS NULL OR coupon_order.cash_coupon_code = '')))
 			</if>
 			<!-- 使用红包 -->
 			<if test="favorType == 1">
 				<!-- 商品 -->
-				AND (((order_form.discount_info NOT LIKE '%score%' OR order_form.discount_info
+				AND (((order_form.discount_info NOT LIKE '%score%' OR
+				order_form.discount_info
 				IS NULL)
-				AND (order_detail_form.coupon_id IS NOT NULL AND order_detail_form.coupon_id != '')) OR
+				AND (order_detail_form.coupon_id IS
+				NOT NULL AND order_detail_form.coupon_id != '')) OR
 				<!-- 优惠券 -->
-				((	coupon_order.discount_info NOT LIKE '%score%' OR 	coupon_order.discount_info IS
+				(( coupon_order.discount_info NOT LIKE '%score%' OR
+				coupon_order.discount_info IS
 				NULL)
-				AND coupon_order.cash_coupon_code IS NOT NULL AND coupon_order.cash_coupon_code != ''))
+				AND coupon_order.cash_coupon_code
+				IS NOT NULL AND coupon_order.cash_coupon_code != ''))
 
 			</if>
 			<!-- 使用积分 -->
 			<if test="favorType == 2">
 				<!-- 商品 -->
 				AND (((order_form.discount_info LIKE '%score%')
-				AND (order_detail_form.coupon_id IS NULL
-				OR order_detail_form.coupon_id = '')) OR
+				AND
+				(order_detail_form.coupon_id IS NULL
+				OR order_detail_form.coupon_id =
+				'')) OR
 				<!-- 优惠券 -->
-				(	coupon_order.discount_info LIKE '%score%'
-				AND (coupon_order.cash_coupon_code IS NULL OR
+				( coupon_order.discount_info LIKE '%score%'
+				AND
+				(coupon_order.cash_coupon_code IS NULL OR
 				coupon_order.cash_coupon_code = '')))
 			</if>
 			<!-- 使用积分和红包 -->
 			<if test="favorType == 3">
 				<!-- 商品 -->
 				AND (((order_form.discount_info LIKE '%score%')
-				AND (order_detail_form.coupon_id IS NOT
-				NULL AND order_detail_form.coupon_id != '')) OR
+				AND
+				(order_detail_form.coupon_id IS NOT
+				NULL AND
+				order_detail_form.coupon_id != '')) OR
 				<!-- 优惠券 -->
-				((	coupon_order.discount_info LIKE '%score%')
-				AND coupon_order.cash_coupon_code IS NOT
-				NULL AND coupon_order.cash_coupon_code != ''))
+				(( coupon_order.discount_info LIKE '%score%')
+				AND
+				coupon_order.cash_coupon_code IS NOT
+				NULL AND
+				coupon_order.cash_coupon_code != ''))
 			</if>
 		</if>
 	</sql>
@@ -289,7 +301,9 @@
 
 	<select id="selectTradeCount" resultMap="TradeDetailCountResultMap"
 		parameterType="java.util.Map">
-		select sum(payment_order.pay_amount) amount_count,count(payment_event.id) total_count,payment_order.trade_type
+		select sum(payment_order.pay_amount)
+		amount_count,count(payment_event.id)
+		total_count,payment_order.trade_type
 		from
 		<include refid="Base_from" />
 		<where>

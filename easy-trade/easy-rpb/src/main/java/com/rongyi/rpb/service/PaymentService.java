@@ -233,5 +233,23 @@ public interface PaymentService {
 	 * @datetime:2015年8月28日上午10:42:04
 	 **/
 	public void updateRefundRejected(Integer id,Integer refundRejected);
+
 	
+	/**	
+	 * @Description: 验证付款记录状态 
+	 * @param ids
+	 * @param status
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年9月1日下午1:40:43
+	 **/
+	public abstract List<PaymentEntity> valiadteStatus(String[] ids,Integer status);
+	
+	/**	
+	 * @Description: 生成付款单号 
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年9月1日下午5:30:18
+	 **/
+	public abstract String getPayNo();
 }

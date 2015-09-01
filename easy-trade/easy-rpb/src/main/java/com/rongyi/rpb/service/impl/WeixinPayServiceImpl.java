@@ -210,7 +210,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 	@Override
 	public boolean messageToRefund(PaymentEntityVO paymentEntityVO, PaymentEntity hisPayEntity) {
 		LOGGER.info("申请退款，退款单号-->" + hisPayEntity.getPayNo() + ",退款订单号-->" + hisPayEntity.getOrderNum());
-		String newPayNo = orderNoGenService.getOrderNo();
+		String newPayNo = paymentService.getPayNo();
 		boolean result = weixinRefund(hisPayEntity.getPayNo(), paymentEntityVO.getAmountMoney().doubleValue(), hisPayEntity.getAmountMoney().doubleValue(), newPayNo);
 		PaymentEntity paymentEntity = new PaymentEntity();
 		BeanUtils.copyProperties(paymentEntityVO, paymentEntity);

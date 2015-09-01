@@ -18,6 +18,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.rongyi.core.common.util.DateUtil;
+import com.rongyi.core.constant.PayEnum;
 import com.rongyi.core.constant.PaymentEventType;
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
@@ -274,6 +275,29 @@ public class RpbServiceImpl implements IRpbService {
 			map.put("message", refundRejected == Constants.REFUND_REJECTED.REFUND_REJECTED0 ? "同意退款操作失败" : "拒绝退款操作失败");
 			e.printStackTrace();
 		}
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> validatePayHtml(String[] ids, Integer operateType) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<PaymentEntity> list = paymentService.valiadteStatus(ids, Constants.PAYMENT_STATUS.STAUS2);
+		if (!list.isEmpty()) {
+			map.put("success", false);
+			if (PayEnum.DRAW_APPLY_ONE.getCode().equals(operateType) || PayEnum.EXCE_PAY_ONE.getCode().equals(operateType))
+				map.put("message", "该条记录已完成支付,无法再次支付!请刷新页面后再次操作!");
+			else if (PayEnum.DRAW_APPLY_MORE.getCode().equals(operateType) || PayEnum.EXCE_PAY_MORE.getCode().equals(operateType))
+				map.put("message", "批量列表中存在已完成支付的记录,无法再次支付!请刷新页面后再次操作!");
+			else if (PayEnum.TRADE_REFUND_ONE.getCode().equals(operateType))
+				map.put("message", "该条退款记录已完成支付,无法再次支付!请刷新页面后再次操作!");
+			else if (PayEnum.TRADE_REFUND_MORE.getCode().equals(operateType))
+				map.put("message", "批量列表中存在已完成退款的记录,无法再次退款!请刷新页面后再次操作!");
+			else
+				map.put("message", "未知错误！");
+			return map;
+		}
+		map.put("success", true);
+		map.put("message", "验证通过");
 		return map;
 	}
 }

@@ -312,8 +312,9 @@
 		<include refid="Base_Column_List" />
 		from payment_order
 		where pay_no = #{payNo,jdbcType=VARCHAR}
-		and
-		trade_type = #{tradeType,jdbcType=INTEGER}
+		<if test="tradeType != null and tradeType != ''">
+			and	trade_type = #{tradeType,jdbcType=INTEGER}
+		</if>
 	</select>
 
 	<select id="selectByPayNo" resultMap="BaseResultMap"
@@ -409,4 +410,18 @@
 		</set>
 		where id = #{id,jdbcType=INTEGER}
 	</update>
+
+	<select id="valiadteStatus" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from payment_order
+		where status =
+		#{status,jdbcType=INTEGER}
+		and id in
+		<foreach item="item" index="index" collection="ids" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
 </mapper>
+

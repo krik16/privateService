@@ -234,7 +234,7 @@ public class WebPageAlipayController extends BaseController {
 			return "appwebpage/notify";
 		PaymentLogInfo tradeNoResult = paymentLogInfoService.selectByPayTradeNo(trade_no);
 		if (tradeNoResult != null) {
-			LOGGER.info("交易流水号已存在，此笔交易通知不是支付成功通知，是退款成功订单状态变更通知，交易流水号为-->" + trade_no);
+//			LOGGER.info("交易流水号已存在，此笔交易通知不是支付成功通知，是退款成功订单状态变更通知，交易流水号为-->" + trade_no);
 			return "appwebpage/notify";
 		}
 		Map<String, String> verifyMap = beforeVerify(request);
