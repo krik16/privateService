@@ -213,4 +213,11 @@ public class CouponCode implements Serializable {
 				.toString();
 	}
 
+		public CouponCode() {
+		}
+
+		public CouponCode(String code, String couponId) {
+				this.code = code;
+				this.couponId = couponId;
+		}
 }
