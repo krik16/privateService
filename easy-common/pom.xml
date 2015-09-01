@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.rongyi</groupId>
     <artifactId>easy-common</artifactId>
-    <version>1.1.1-820-SHAPSHOT</version>
+    <version>1.0.6-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
         <module>easy-entity</module>
@@ -35,17 +35,17 @@
             <dependency>
                 <groupId>com.rongyi</groupId>
                 <artifactId>easy-entity</artifactId>
-                <version>1.1.1-820-SHAPSHOT</version>
+                <version>1.0.6-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.rongyi</groupId>
                 <artifactId>easy-core</artifactId>
-                <version>1.1.1-820-SHAPSHOT</version>
+                <version>1.0.6-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.rongyi</groupId>
                 <artifactId>easy-rss</artifactId>
-                <version>1.1.1-820-SHAPSHOT</version>
+                <version>1.0.6-SNAPSHOT</version>
             </dependency>
             <!-- IBM MQ -->
             <dependency>

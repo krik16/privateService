@@ -98,7 +98,7 @@ public class TradeOrder implements Serializable {
 
 
     /**
-     * ·µ»ØÔª
+     * å…ƒ
      * @return
      */
     public Double getTotalAmount_Y() {
@@ -131,7 +131,7 @@ public class TradeOrder implements Serializable {
 
 
     /**
-     * ·µ»ØÔª
+     * ï¿½ï¿½ï¿½ï¿½Ôª
      * @return
      */
     public String getDiscountInfo_Y() {
