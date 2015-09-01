@@ -5,233 +5,244 @@ import java.util.Date;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
+import com.rongyi.easy.domain.member.MemberType;
 import com.rongyi.easy.mvc.DateJson.DateJsonDeserializer;
 import com.rongyi.easy.mvc.DateJson.DateJsonSerializer;
 
-public class IntegralGiftParam implements java.io.Serializable{
-    /**
+public class IntegralGiftParam implements java.io.Serializable {
+  /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	private Integer id;
+  private Integer id;
 
-    /** 奖品已被领取数 */
-    private String mallId;
+  /** 奖品已被领取数 */
+  private String mallId;
 
-    /** 奖品编码 */
-    private String code;
+  /** 奖品编码 */
+  private String code;
 
-    /** 奖品名称 */
-    private String title;
-    
-    private String description;
+  /** 奖品名称 */
+  private String title;
 
-    /** 奖品总数 */
-    private Integer totalNum;
+  private String description;
 
-    /** 每人兑换限制次数 */
-    private Integer personalTimes;
+  /** 奖品总数 */
+  private Integer totalNum;
 
-    /** 奖品图片编号 */
-    private String thumbnail;
+  /** 每人兑换限制次数 */
+  private Integer personalTimes;
 
-    /** 上架时间 */
-    private Date shelvesDate;
+  /** 奖品图片编号 */
+  private String thumbnail;
 
-    /** 下架时间 */
-    private Date offShelvesDate;
+  /** 上架时间 */
+  private Date shelvesDate;
 
-    /** 最晚领取时间（实际意义？） */
-    private Date deadline;
+  /** 下架时间 */
+  private Date offShelvesDate;
 
-    /** 兑换积分 */
-    private Integer exchangeIntegral;
+  /** 最晚领取时间（实际意义？） */
+  private Date deadline;
 
-    /** 优惠起始时间 */
-    private Date favourableStartTime;
+  /** 兑换积分 */
+  private Integer exchangeIntegral;
 
-    /** 优惠结束时间 */
-    private Date favourableEndTime;
+  /** 优惠起始时间 */
+  private Date favourableStartTime;
 
-    /** 优惠期间兑换积分 */
-    private Integer favourableIntegral;
+  /** 优惠结束时间 */
+  private Date favourableEndTime;
 
-    /** 奖品已被领取数 */
-    private Integer receiveTimes;
-    
-    /** 状态：默认0，若退还的时候，则把当初兑换的状态改成1,礼品领取了之后状态变成2 */
-    private Byte status;
-    
-    /** 验证方式 */
-    private Long useMode;
-    /** 兑换时间 */
-    private Date exchangeDate;
-    
-    /** 增减积分接口和返回积分记录加上type:-1减积分，1加积分 */
-    private Integer type;
+  /** 优惠期间兑换积分 */
+  private Integer favourableIntegral;
 
-    public Integer getId() {
-        return id;
-    }
+  /** 奖品已被领取数 */
+  private Integer receiveTimes;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+  /** 状态：默认0，若退还的时候，则把当初兑换的状态改成1,礼品领取了之后状态变成2 */
+  private Byte status;
 
-    public String getMallId() {
-        return mallId;
-    }
+  /** 验证方式 */
+  private Long useMode;
+  /** 兑换时间 */
+  private Date exchangeDate;
 
-    public void setMallId(String mallId) {
-        this.mallId = mallId;
-    }
+  /**
+   * 会员类型：0，电子会员,1商场会员
+   */
+  private MemberType type;
 
-    public String getCode() {
-        return code;
-    }
+  public Integer getId() {
+    return id;
+  }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-    public String getDescription() {
-        return description;
-    }
+  public String getMallId() {
+    return mallId;
+  }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+  public void setMallId(String mallId) {
+    this.mallId = mallId;
+  }
 
-    public Integer getTotalNum() {
-        return totalNum;
-    }
+  public String getCode() {
+    return code;
+  }
 
-    public void setTotalNum(Integer totalNum) {
-        this.totalNum = totalNum;
-    }
+  public void setCode(String code) {
+    this.code = code;
+  }
 
-    public Integer getPersonalTimes() {
-        return personalTimes;
-    }
+  public String getDescription() {
+    return description;
+  }
 
-    public void setPersonalTimes(Integer personalTimes) {
-        this.personalTimes = personalTimes;
-    }
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-    public String getThumbnail() {
-        return thumbnail;
-    }
+  public Integer getTotalNum() {
+    return totalNum;
+  }
 
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
-    }
-    @JsonSerialize(using=DateJsonSerializer.class)
-    public Date getShelvesDate() {
-        return shelvesDate;
-    }
-    @JsonDeserialize(using=DateJsonDeserializer.class)
-    public void setShelvesDate(Date shelvesDate) {
-        this.shelvesDate = shelvesDate;
-    }
-    @JsonSerialize(using=DateJsonSerializer.class)
-    public Date getOffShelvesDate() {
-        return offShelvesDate;
-    }
-    @JsonDeserialize(using=DateJsonDeserializer.class)
-    public void setOffShelvesDate(Date offShelvesDate) {
-        this.offShelvesDate = offShelvesDate;
-    }
-    @JsonSerialize(using=DateJsonSerializer.class)
-    public Date getDeadline() {
-        return deadline;
-    }
-    @JsonDeserialize(using=DateJsonDeserializer.class)
-    public void setDeadline(Date deadline) {
-        this.deadline = deadline;
-    }
+  public void setTotalNum(Integer totalNum) {
+    this.totalNum = totalNum;
+  }
 
-    public Integer getExchangeIntegral() {
-        return exchangeIntegral;
-    }
+  public Integer getPersonalTimes() {
+    return personalTimes;
+  }
 
-    public void setExchangeIntegral(Integer exchangeIntegral) {
-        this.exchangeIntegral = exchangeIntegral;
-    }
+  public void setPersonalTimes(Integer personalTimes) {
+    this.personalTimes = personalTimes;
+  }
 
-    @JsonSerialize(using=DateJsonSerializer.class)
-    public Date getFavourableStartTime() {
-        return favourableStartTime;
-    }
+  public String getThumbnail() {
+    return thumbnail;
+  }
 
-    @JsonDeserialize(using=DateJsonDeserializer.class)
-    public void setFavourableStartTime(Date favourableStartTime) {
-        this.favourableStartTime = favourableStartTime;
-    }
+  public void setThumbnail(String thumbnail) {
+    this.thumbnail = thumbnail;
+  }
 
-    @JsonSerialize(using=DateJsonSerializer.class)
-    public Date getFavourableEndTime() {
-        return favourableEndTime;
-    }
+  @JsonSerialize(using = DateJsonSerializer.class)
+  public Date getShelvesDate() {
+    return shelvesDate;
+  }
 
-    @JsonDeserialize(using=DateJsonDeserializer.class)
-    public void setFavourableEndTime(Date favourableEndTime) {
-        this.favourableEndTime = favourableEndTime;
-    }
+  @JsonDeserialize(using = DateJsonDeserializer.class)
+  public void setShelvesDate(Date shelvesDate) {
+    this.shelvesDate = shelvesDate;
+  }
 
-    public Integer getFavourableIntegral() {
-        return favourableIntegral;
-    }
+  @JsonSerialize(using = DateJsonSerializer.class)
+  public Date getOffShelvesDate() {
+    return offShelvesDate;
+  }
 
-    public void setFavourableIntegral(Integer favourableIntegral) {
-        this.favourableIntegral = favourableIntegral;
-    }
+  @JsonDeserialize(using = DateJsonDeserializer.class)
+  public void setOffShelvesDate(Date offShelvesDate) {
+    this.offShelvesDate = offShelvesDate;
+  }
 
-    public Integer getReceiveTimes() {
-        return receiveTimes;
-    }
+  @JsonSerialize(using = DateJsonSerializer.class)
+  public Date getDeadline() {
+    return deadline;
+  }
 
-    public void setReceiveTimes(Integer receiveTimes) {
-        this.receiveTimes = receiveTimes;
-    }
+  @JsonDeserialize(using = DateJsonDeserializer.class)
+  public void setDeadline(Date deadline) {
+    this.deadline = deadline;
+  }
 
-	public Byte getStatus() {
-		return status;
-	}
+  public Integer getExchangeIntegral() {
+    return exchangeIntegral;
+  }
 
-	public void setStatus(Byte status) {
-		this.status = status;
-	}
+  public void setExchangeIntegral(Integer exchangeIntegral) {
+    this.exchangeIntegral = exchangeIntegral;
+  }
 
-	public Long getUseMode() {
-		return useMode;
-	}
+  @JsonSerialize(using = DateJsonSerializer.class)
+  public Date getFavourableStartTime() {
+    return favourableStartTime;
+  }
 
-	public void setUseMode(Long useMode) {
-		this.useMode = useMode;
-	}
+  @JsonDeserialize(using = DateJsonDeserializer.class)
+  public void setFavourableStartTime(Date favourableStartTime) {
+    this.favourableStartTime = favourableStartTime;
+  }
 
-	public String getTitle() {
-		return title;
-	}
+  @JsonSerialize(using = DateJsonSerializer.class)
+  public Date getFavourableEndTime() {
+    return favourableEndTime;
+  }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+  @JsonDeserialize(using = DateJsonDeserializer.class)
+  public void setFavourableEndTime(Date favourableEndTime) {
+    this.favourableEndTime = favourableEndTime;
+  }
 
-	public Date getExchangeDate() {
-		return exchangeDate;
-	}
+  public Integer getFavourableIntegral() {
+    return favourableIntegral;
+  }
 
-	public void setExchangeDate(Date exchangeDate) {
-		this.exchangeDate = exchangeDate;
-	}
+  public void setFavourableIntegral(Integer favourableIntegral) {
+    this.favourableIntegral = favourableIntegral;
+  }
 
-	public Integer getType() {
-		return type;
-	}
+  public Integer getReceiveTimes() {
+    return receiveTimes;
+  }
 
-	public void setType(Integer type) {
-		this.type = type;
-	}
+  public void setReceiveTimes(Integer receiveTimes) {
+    this.receiveTimes = receiveTimes;
+  }
+
+  public Byte getStatus() {
+    return status;
+  }
+
+  public void setStatus(Byte status) {
+    this.status = status;
+  }
+
+  public Long getUseMode() {
+    return useMode;
+  }
+
+  public void setUseMode(Long useMode) {
+    this.useMode = useMode;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public Date getExchangeDate() {
+    return exchangeDate;
+  }
+
+  public void setExchangeDate(Date exchangeDate) {
+    this.exchangeDate = exchangeDate;
+  }
+
+  public MemberType getType() {
+    return type;
+  }
+
+  public void setType(MemberType type) {
+    this.type = type;
+  }
+
+
 }

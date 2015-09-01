@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.rongyi</groupId>
     <artifactId>easy-common</artifactId>
-    <version>1.1.0-3.3.0-SNAPSHOT</version>
+    <version>1.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
         <module>easy-entity</module>
@@ -35,17 +35,17 @@
             <dependency>
                 <groupId>com.rongyi</groupId>
                 <artifactId>easy-entity</artifactId>
-                <version>${project.version}</version>
+                <version>1.1.0-3.3.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.rongyi</groupId>
                 <artifactId>easy-core</artifactId>
-                <version>${project.version}</version>
+                <version>1.1.0-3.3.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.rongyi</groupId>
                 <artifactId>easy-rss</artifactId>
-                <version>${project.version}</version>
+                <version>1.1.0-3.3.0-SNAPSHOT</version>
             </dependency>
             <!-- IBM MQ -->
             <dependency>
@@ -652,6 +652,11 @@
                             <groupId>mysql</groupId>
                             <artifactId>mysql-connector-java</artifactId>
                             <version>5.1.26</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>com.rongyi</groupId>
+                            <artifactId>easy-mybatis-generator</artifactId>
+                            <version>1.0.0-SNAPSHOT</version>
                         </dependency>
                     </dependencies>
                 </plugin>

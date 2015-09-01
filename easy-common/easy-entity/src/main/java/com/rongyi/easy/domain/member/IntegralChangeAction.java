@@ -3,48 +3,42 @@ package com.rongyi.easy.domain.member;
 import com.rongyi.core.framework.ienum.IEnum;
 
 /**
- * ClassName: ChannelType <br/>
+ * ClassName: IntegralChangeAction <br/>
  * Function: TODO ADD FUNCTION. <br/>
- * Reason:来源类型 <br/>
+ * Reason: 积分变化action<br/>
  * date: 2015年4月29日 下午8:05:37 <br/>
  * 
  * @author bin.zhang
  * @version
  * @since JDK 1.6
  */
-public enum ChannelType implements IEnum {
+public enum IntegralChangeAction implements IEnum {
   /**
-   * 手机
+   * 签到加积分
    */
-  PHONE(0),
+  SIGN_IN(0),
   /**
-   * 会员号
+   * 礼品回退加积分
    */
-  MEMBER_NO(1),
+  GIFT_ROLLBACK(1),
   /**
-   * 微信
+   * 礼品兑换:减积分
    */
-  WECHAT(2),
-  /**
-   * 身份证
-   */
-  IDENTIFY(3);
+  GIFT_EXCHANGE(2);
 
   @Override
   public int getValue() {
     return this.value;
   }
 
-  public static ChannelType findByValue(int value) {
+  public static IntegralChangeAction findByValue(int value) {
     switch (value) {
       case 0:
-        return PHONE;
+        return SIGN_IN;
       case 1:
-        return MEMBER_NO;
+        return GIFT_ROLLBACK;
       case 2:
-        return WECHAT;
-      case 3:
-        return IDENTIFY;
+        return GIFT_EXCHANGE;
       default:
         return null;
 
@@ -53,7 +47,7 @@ public enum ChannelType implements IEnum {
 
   private int value;
 
-  private ChannelType(int value) {
+  private IntegralChangeAction(int value) {
     this.value = value;
   }
 }

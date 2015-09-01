@@ -30,10 +30,6 @@ public class ElectronicMemberParam extends BaseParam implements Serializable {
 
   /** 手机号 */
   private String phone;
-  /**
-   * 手机号
-   */
-  private String mobile;
 
 
   /** 电子会员编号 */
@@ -81,13 +77,6 @@ public class ElectronicMemberParam extends BaseParam implements Serializable {
     this.sureName = sureName;
   }
 
-  public String getMobile() {
-    return mobile;
-  }
-
-  public void setMobile(String mobile) {
-    this.mobile = mobile;
-  }
 
   public String getChannel() {
     return channel;

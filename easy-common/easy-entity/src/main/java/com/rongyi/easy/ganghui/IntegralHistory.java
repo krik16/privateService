@@ -56,8 +56,6 @@ public class IntegralHistory implements java.io.Serializable {
   /** 服务商+商场ID */
   private String owner;
 
-  /** 增减积分接口和返回积分记录加上type:-1减积分，1加积分 */
-  private Integer type;
   /**
    * 会员名
    */
@@ -316,20 +314,5 @@ public class IntegralHistory implements java.io.Serializable {
     this.owner = owner;
   }
 
-  public Integer getType() {
-    return type;
-  }
-
-  public void setType(Integer type) {
-    this.type = type;
-  }
-
-  @Override
-  public String toString() {
-    return "IntegralHistory [id=" + id + ", memberId=" + memberId + ", integralNum=" + integralNum
-        + ", giftNo=" + giftNo + ", giftCode=" + giftCode + ", giftNum=" + giftNum + ", memo="
-        + memo + ", status=" + status + ", insDt=" + insDt + ", updDt=" + updDt + ", channel="
-        + channel + ", mallId=" + mallId + ", owner=" + owner + ", type=" + type + "]";
-  }
 
 }
