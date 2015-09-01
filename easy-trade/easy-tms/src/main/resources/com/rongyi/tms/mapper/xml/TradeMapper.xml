@@ -52,7 +52,7 @@
 	</resultMap>
 
 	<sql id="Base_Column_List">
-			payment_event.id id,
+	payment_event.id id,
 	payment_event.trade_no,
 	payment_event.transaction_id,
 	payment_event.time_end AS trade_time,
@@ -85,6 +85,7 @@
 	coupon_order.buyer_id as coupon_buyer_id,
 	coupon_order.buyer_mobile as coupon_buyer_account
 	</sql>
+		
 	<sql id="Base_from">
 		ry_rpb.payment_event AS payment_event
 		LEFT JOIN
@@ -117,6 +118,8 @@
 		AS coupon_order ON coupon_order.order_no =
 		payment_order.order_no
 	</sql>
+	
+	
 	<sql id="Base_group_by">
 		GROUP BY payment_event.id
 	</sql>
@@ -251,7 +254,6 @@
 				NULL AND coupon_order.cash_coupon_code != ''))
 			</if>
 		</if>
-		<include refid="Base_group_by" />
 	</sql>
 	<select id="selectTradePageList" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">

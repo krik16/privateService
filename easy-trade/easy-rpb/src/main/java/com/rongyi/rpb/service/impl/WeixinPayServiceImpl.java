@@ -353,7 +353,8 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 		paymentLogInfo.setBuyer_email(resHandler.getParameter("reccv_user_name"));
 		paymentLogInfo.setBuyer_type(0);// 买家账号
 		paymentLogInfo.setEventType(4);
-		paymentLogInfo.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
+		//TODO 增加trade_type值
+		
 		paymentLogInfoService.insert(paymentLogInfo);
 	}
 
