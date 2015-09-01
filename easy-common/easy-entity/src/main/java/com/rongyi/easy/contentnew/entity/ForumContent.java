@@ -46,6 +46,7 @@ public class ForumContent implements Serializable{
     private Integer type;
     /**id值 对应的是上面类型所对应的id      如类型为商场 则id是商场的id*/
     private String typeId;
+
     /**外链的地址*/
     private String typeUrl;
     /**店铺ids*/
@@ -242,4 +243,7 @@ public class ForumContent implements Serializable{
     public void setStatus(Integer status) {
         this.status = status;
     }
+
+    
+    
 }
