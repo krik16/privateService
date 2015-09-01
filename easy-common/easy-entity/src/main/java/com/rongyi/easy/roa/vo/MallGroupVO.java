@@ -1,5 +1,7 @@
 package com.rongyi.easy.roa.vo;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -42,6 +44,8 @@ public class MallGroupVO implements Serializable {
         this.status = status;
     }
 
-
-
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).append("id", id).append("name", name).append("status", status).append("mallIds", mallIds).toString();
+    }
 }
