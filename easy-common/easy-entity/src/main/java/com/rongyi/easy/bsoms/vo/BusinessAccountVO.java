@@ -1,6 +1,7 @@
 package com.rongyi.easy.bsoms.vo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 /**
  * 商家账户VO
@@ -23,8 +24,10 @@ public class BusinessAccountVO implements Serializable {
 	private Integer brandId;//品牌id
 	private String brandName;//品牌名
 	private Integer mallId;//商场id
+	private String mallMid;//商场mid
 	private String mallName;//商场名
 	private Integer shopId;//店铺id
+	private String shopMid;//店铺mid
 	private String shopName;//店铺名
 	private Integer roleId;//角色id
 	private String roleName;//角色名
@@ -32,6 +35,7 @@ public class BusinessAccountVO implements Serializable {
 	private String branchName;//分公司名
 	private Integer accountStatus;//账号状态：是否禁用0正常 1禁用'
 	private Integer isSuspended;//资金账户：是否冻结
+	private BigDecimal balance;//资金账户余额
 	private String comment;//评价
 	private Integer createSource;//账号来源：0大运营、1商家后台
 	private String createBy;//创建人
@@ -51,6 +55,12 @@ public class BusinessAccountVO implements Serializable {
 	}
 	public void setUserLogo(String userLogo) {
 		this.userLogo = userLogo;
+	}
+	public BigDecimal getBalance() {
+		return balance;
+	}
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
 	}
 	public String getIdCard() {
 		return idCard;
@@ -225,6 +235,18 @@ public class BusinessAccountVO implements Serializable {
 	}
 	public void setStopAt(Date stopAt) {
 		this.stopAt = stopAt;
+	}
+	public String getMallMid() {
+		return mallMid;
+	}
+	public void setMallMid(String mallMid) {
+		this.mallMid = mallMid;
+	}
+	public String getShopMid() {
+		return shopMid;
+	}
+	public void setShopMid(String shopMid) {
+		this.shopMid = shopMid;
 	}
 	
 }

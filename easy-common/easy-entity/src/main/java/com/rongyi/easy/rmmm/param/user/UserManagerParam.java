@@ -44,7 +44,7 @@ public class UserManagerParam implements Serializable{
     private Integer createSource;//账号创建来源：0大运营、1商家后台
     private String stopReason;//停用原因
     private String creatingUserType;
-    
+    private Integer merUserId;//操作人id
     public Integer getId() {
 		return id;
 	}
@@ -263,6 +263,13 @@ public class UserManagerParam implements Serializable{
 
 	public void setRoleType(Integer roleType) {
 		this.roleType = roleType;
+	}
+	public Integer getMerUserId() {
+		return merUserId;
+	}
+
+	public void setMerUserId(Integer merUserId) {
+		this.merUserId = merUserId;
 	}
 	
 
