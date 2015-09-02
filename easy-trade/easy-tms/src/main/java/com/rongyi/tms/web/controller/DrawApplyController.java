@@ -50,7 +50,6 @@ import com.rongyi.tms.service.DrawVerifyLogService;
 @RequestMapping("/bs")
 public class DrawApplyController extends BaseController {
     private static final Log LOGGER = LogFactory.getLog(DrawApplyController.class);
-    protected ResponseResult result = new ResponseResult();
     @Autowired
     private DrawApplyService drawService;
     
@@ -95,7 +94,8 @@ public class DrawApplyController extends BaseController {
     @RequestMapping(value="/check")
     @ResponseBody
     public ResponseResult checkDrawApply(CheckParam params,HttpSession session,HttpServletRequest request){
-        try {
+    	ResponseResult result = new ResponseResult();
+    	try {
             LOGGER.info("checkParams:"+params);
            if(StringUtils.isBlank(params.getIds())||params.getStatus()==null||(params.getStatus()==-1&&StringUtils.isBlank(params.getReason()))){
                result.setCode(CodeEnum.ERROR_PARAM.getActionCode());

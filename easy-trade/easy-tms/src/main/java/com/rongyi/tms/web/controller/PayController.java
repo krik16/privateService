@@ -55,7 +55,6 @@ import com.rongyi.tms.service.RefundService;
 @RequestMapping("/pay")
 public class PayController extends BaseController {
 	private static final Log LOGGER = LogFactory.getLog(PayController.class);
-	protected ResponseResult result = new ResponseResult();
 	@Autowired
 	private PayService payService;
 
@@ -256,6 +255,7 @@ public class PayController extends BaseController {
 	@ResponseBody
 	public ResponseResult validatePay(@RequestParam String ids[],@RequestParam Integer operateType, Model model) {
 		LOGGER.info("================操作退款/付款前验证是否符合条件 ====================");
+		ResponseResult result = new ResponseResult();
 		try {
 			Map<String, Object> resultMap = rpbService.validatePayHtml(ids, operateType);
 			result.setSuccess(Boolean.valueOf(resultMap.get("success").toString()));
@@ -307,6 +307,7 @@ public class PayController extends BaseController {
 	@ResponseBody
 	public ResponseResult weixinRefund(@RequestParam Integer paymentId, Model model) {
 		LOGGER.info("================微信手动操作退款====================");
+		ResponseResult result = new ResponseResult();
 		try {
 			Map<String, Object> resultMap = rpbService.operateWeixinRefund(paymentId);
 			result.setSuccess(Boolean.valueOf(resultMap.get("success").toString()));
@@ -330,6 +331,7 @@ public class PayController extends BaseController {
 	@ResponseBody
 	public ResponseResult weixinRefundRejected(@RequestParam Integer paymentId, @RequestParam Integer refundRejected, Model model) {
 		LOGGER.info("================微信退款" + (refundRejected == 0 ? "同意" : "拒绝") + "操作====================");
+		ResponseResult result = new ResponseResult();
 		try {
 			Map<String, Object> resultMap = rpbService.weixinRefundRejected(paymentId, refundRejected);
 			result.setSuccess(Boolean.valueOf(resultMap.get("success").toString()));
@@ -376,6 +378,7 @@ public class PayController extends BaseController {
 	@RequestMapping(value = "/validateAccount")
 	@ResponseBody
 	public ResponseResult validateAccount(String ids, HttpSession session, HttpServletRequest request) {
+		ResponseResult result = new ResponseResult();
 		// try {
 		// Map<Integer, String> map = rpbService.validateAccount(ids);
 		// result.setSuccess(false);

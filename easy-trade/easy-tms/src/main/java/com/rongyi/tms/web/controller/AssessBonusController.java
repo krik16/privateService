@@ -30,7 +30,6 @@ import com.rongyi.tms.service.SalesCommissionService;
 public class AssessBonusController extends BaseController {
     private static final Log LOGGER = LogFactory.getLog(AssessBonusController.class);
 
-    protected ResponseResult result = new ResponseResult();
     
     @Autowired
     private SalesCommissionService commissionService;
