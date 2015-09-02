@@ -1,25 +1,29 @@
 package com.rongyi.easy.tradecenter.param;
 
-import com.rongyi.core.common.util.JsonUtil;
-import org.apache.commons.lang.builder.ToStringBuilder;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * ROA调用
  * 优惠券订单创建参数
- * 0元单和非0元单
+ * 0元单、非0元单、扫码领券、翻牌购、推送
  * 使用场合：微信公众号优惠劵 互动屏优惠券 容易逛
  */
 public class TradeOrderCreateParam implements Serializable {
 
     /**
+     * 0普通单
+     * 1 “0元单”
+     * 2扫码领券
+     * 3短信push
+     * 4翻牌购
+     */
+    private byte business;
+    /**
      * 优惠券ID
      */
-    private String couponId;
+    private String unitId;
     /**
      * 购买份数
      */
@@ -39,7 +43,7 @@ public class TradeOrderCreateParam implements Serializable {
     /**
      * 红包
      */
-    private String cashCouponCode;
+    private String hbCode;
     /**
      * 积分
      */
@@ -68,6 +72,18 @@ public class TradeOrderCreateParam implements Serializable {
      * 设备ID，购买优惠券时限购使用
      */
     private String devId;
+    /**
+     * 扫码、翻牌时券码已经生成好了
+     */
+    private String code;
+    /**
+     * 活动id 翻牌购
+     */
+    private String activityId;
+    /**
+     * 活动名字 翻牌购
+     */
+    private String activityName;
 
     /**
      * start
@@ -97,12 +113,19 @@ public class TradeOrderCreateParam implements Serializable {
      * end
      */
 
-    public String getCouponId() {
-        return couponId;
+    public Byte getBusiness() {
+        return business;
     }
 
-    public void setCouponId(String couponId) {
-        this.couponId = couponId;
+    public void setBusiness(Byte business) {
+        this.business = business;
+    }
+    public String getUnitId() {
+        return unitId;
+    }
+
+    public void setUnitId(String unitId) {
+        this.unitId = unitId;
     }
 
     public Integer getUnitNum() {
@@ -177,12 +200,40 @@ public class TradeOrderCreateParam implements Serializable {
         this.devId = devId;
     }
 
-    public String getCashCouponCode() {
-        return cashCouponCode;
+    public String getHbCode() {
+        return hbCode;
     }
 
-    public void setCashCouponCode(String cashCouponCode) {
-        this.cashCouponCode = cashCouponCode;
+    public void setHbCode(String hbCode) {
+        this.hbCode = hbCode;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public void setBusiness(byte business) {
+        this.business = business;
+    }
+
+    public String getActivityId() {
+        return activityId;
+    }
+
+    public void setActivityId(String activityId) {
+        this.activityId = activityId;
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
     }
 
     public Integer getScore() {
@@ -284,12 +335,13 @@ public class TradeOrderCreateParam implements Serializable {
     @Override
     public String toString() {
         return "TradeOrderCreateParam{" +
-                "couponId='" + couponId + '\'' +
+                "business=" + business +
+                ", unitId='" + unitId + '\'' +
                 ", unitNum=" + unitNum +
                 ", buyerId='" + buyerId + '\'' +
                 ", buyerName='" + buyerName + '\'' +
                 ", buyerMobile='" + buyerMobile + '\'' +
-                ", cashCouponCode='" + cashCouponCode + '\'' +
+                ", hbCode='" + hbCode + '\'' +
                 ", score=" + score +
                 ", scoreDeduction=" + scoreDeduction +
                 ", orderSource=" + orderSource +
@@ -297,6 +349,19 @@ public class TradeOrderCreateParam implements Serializable {
                 ", mallId='" + mallId + '\'' +
                 ", openId='" + openId + '\'' +
                 ", devId='" + devId + '\'' +
+                ", code='" + code + '\'' +
+                ", activityId='" + activityId + '\'' +
+                ", activityName='" + activityName + '\'' +
+                ", useHb=" + useHb +
+                ", useScore=" + useScore +
+                ", discountWithOutScore=" + discountWithOutScore +
+                ", totalAmount=" + totalAmount +
+                ", payAmount=" + payAmount +
+                ", discountAmount=" + discountAmount +
+                ", scoreDiscount=" + scoreDiscount +
+                ", discountBitMap=" + discountBitMap +
+                ", statusHold=" + statusHold +
+                ", nextStatusTime=" + nextStatusTime +
                 '}';
     }
 }

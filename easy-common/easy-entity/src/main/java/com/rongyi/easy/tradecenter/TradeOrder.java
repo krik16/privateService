@@ -24,6 +24,8 @@ public class TradeOrder implements Serializable {
 
     private Byte type;
 
+    private Byte business;
+
     private String source;
 
     private Integer codeNum;
@@ -96,7 +98,6 @@ public class TradeOrder implements Serializable {
 
     private List<TradeSubOrder> subOrderList;
 
-
     /**
      * 元
      * @return
@@ -131,7 +132,7 @@ public class TradeOrder implements Serializable {
 
 
     /**
-     * ����Ԫ
+     * 元
      * @return
      */
     public String getDiscountInfo_Y() {
@@ -201,6 +202,14 @@ public class TradeOrder implements Serializable {
 
     public void setType(Byte type) {
         this.type = type;
+    }
+
+    public Byte getBusiness() {
+        return business;
+    }
+
+    public void setBusiness(Byte business) {
+        this.business = business;
     }
 
     public String getSource() {
