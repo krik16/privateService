@@ -83,6 +83,13 @@ public interface IUserInfoService {
 	 * @return
 	 */
 	public List<Integer> getAllUserIdByRole(Integer roleId);
+	
+	/**
+	 * 修改个人信息
+	 * @param paramsMap
+	 * @return
+	 */
+	public boolean updateUserInfo(Map<String, Object> paramsMap) throws Exception;
 
 	UserInfo getUserByMap(Map<String, Object> paramsMap);
 }
