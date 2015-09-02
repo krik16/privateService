@@ -94,13 +94,6 @@ public interface RoaProxyCouponOrderService {
     List<CouponOrderItem> findOrderItemsById(Long orderId);
 
     /**
-     * 更新优惠券订单项
-     *
-     * @param item
-     */
-    void updateCouponOrderItem(CouponOrderItem item);
-
-    /**
      * 优惠券退款处理
      *
      * @param orderNo      订单编号
@@ -150,7 +143,7 @@ public interface RoaProxyCouponOrderService {
      * @param payAccount 支付账户(例如支付宝账户)
      * @return
      */
-    boolean processCouponOrderForPayed(String orderNo, int tradeWay, String paymentNo, String payAccount);
+    Map<String, Object> processCouponOrderForPayed(String orderNo, int tradeWay, String paymentNo, String payAccount);
 
     /**
      * 优惠券立即购买
