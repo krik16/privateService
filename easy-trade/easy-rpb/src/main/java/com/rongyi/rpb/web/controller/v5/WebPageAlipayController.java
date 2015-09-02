@@ -1,6 +1,8 @@
 package com.rongyi.rpb.web.controller.v5;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -9,6 +11,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
 import org.dom4j.Document;
@@ -28,6 +32,7 @@ import com.rongyi.rpb.common.util.orderSign.webPageAlipay.alipay.util.AliAppPayN
 import com.rongyi.rpb.common.util.orderSign.webPageAlipay.alipay.util.AlipayNotify;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.ResponseHandler;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.util.XMLUtil;
+import com.rongyi.rpb.common.v3.weixin.util.XMLParser;
 import com.rongyi.rpb.constants.ConstantUtil;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.mq.Sender;
@@ -305,6 +310,52 @@ public class WebPageAlipayController extends BaseController {
 			e.printStackTrace();
 		}
 		return "appwebpage/notify";
+	}
+	
+	
+	@RequestMapping("/weixin/notify_url.htm")
+	public void weixinNotify(Model model, HttpServletRequest request, HttpServletResponse response){
+		ResponseHandler resHandler = new ResponseHandler(request, response);
+		Map<String,Object> map = resHandler.getAllParameters();
+		resHandler.setKey(ConstantUtil.PayWeiXin.PARTNER_KEY);
+		if (!resHandler.isTenpaySign()) {
+			LOGGER.info("微信支付异步通知-->微信验证签名不通过，返回消息不是财付通发出的合法消息!");
+			return;
+		}
+		if("SUCCESS".equals(map.get("result_code "))){
+			Map<String, Object> responseMap = new HashMap<String,Object>();
+			boolean bool = paymentLogInfoService.validateByTradeNoAndPayNo(map.get("transaction_id").toString(),map.get("out_trade_no").toString());
+			if (bool)// 重复通知
+				setResponse(response, responseMap);
+		}
+	}
+	
+	
+	/**
+	 * @Description: response 结果到银联
+	 * @param response
+	 * @param responseMap
+	 * @Author: 柯军
+	 * @datetime:2015年7月7日下午3:23:10
+	 **/
+	private void setResponse(HttpServletResponse response, Map<String, Object> responseMap) {
+//		response.setCharacterEncoding("UTF-8");
+//		response.setContentType("application/json; charset=utf-8");
+//		JSONObject jsonObject = JSONObject.fromObject(responseMap);
+//		XMLParser
+//		PrintWriter out = null;
+//		try {
+//			out = response.getWriter();
+//			out.append(jsonObject.toString());
+//			LOGGER.info("银联请求应答数据：" + jsonObject.toString());
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (out != null) {
+//				out.close();
+//			}
+//		}
+
 	}
 
 	/**

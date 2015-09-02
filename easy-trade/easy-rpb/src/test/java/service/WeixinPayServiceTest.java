@@ -1,8 +1,21 @@
 package service;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.ConnectException;
+import java.net.URL;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
@@ -13,22 +26,27 @@ import base.BaseTest;
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.client.TenpayHttpClient;
-import com.rongyi.rpb.common.util.orderSign.weixinSign.scan.RandomStringGenerator;
-import com.rongyi.rpb.common.util.orderSign.weixinSign.scan.RefundReqData;
-import com.rongyi.rpb.common.util.orderSign.weixinSign.scan.RefundService;
-import com.rongyi.rpb.common.util.orderSign.weixinSign.scan.ReverseReqData;
-import com.rongyi.rpb.common.util.orderSign.weixinSign.scan.ReverseService;
-import com.rongyi.rpb.common.util.orderSign.weixinSign.scan.ScanPayQueryReqData;
-import com.rongyi.rpb.common.util.orderSign.weixinSign.scan.ScanPayQueryService;
-import com.rongyi.rpb.common.util.orderSign.weixinSign.scan.ScanPayReqData;
-import com.rongyi.rpb.common.util.orderSign.weixinSign.scan.ScanPayService;
-import com.rongyi.rpb.common.util.orderSign.weixinSign.scan.Signature;
+import com.rongyi.rpb.common.util.orderSign.weixinSign.util.WXUtil;
+import com.rongyi.rpb.common.v3.weixin.model.RefundReqData;
+import com.rongyi.rpb.common.v3.weixin.model.ReverseReqData;
+import com.rongyi.rpb.common.v3.weixin.model.ScanPayQueryReqData;
+import com.rongyi.rpb.common.v3.weixin.model.ScanPayReqData;
+import com.rongyi.rpb.common.v3.weixin.model.ScanPayService;
+import com.rongyi.rpb.common.v3.weixin.model.UnifedOrderReqData;
+import com.rongyi.rpb.common.v3.weixin.service.RefundService;
+import com.rongyi.rpb.common.v3.weixin.service.ReverseService;
+import com.rongyi.rpb.common.v3.weixin.service.ScanPayQueryService;
+import com.rongyi.rpb.common.v3.weixin.service.UnifiedorderService;
+import com.rongyi.rpb.common.v3.weixin.util.MD5;
+import com.rongyi.rpb.common.v3.weixin.util.RandomStringGenerator;
+import com.rongyi.rpb.common.v3.weixin.util.Signature;
 import com.rongyi.rpb.constants.ConstantUtil;
 import com.rongyi.rpb.mq.Sender;
 import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rpb.service.WeixinPayService;
+import com.unionpay.acp.sdk.BaseHttpSSLSocketFactory.MyX509TrustManager;
 
-public class WeixinPayServiceTest extends BaseTest{
+public class WeixinPayServiceTest extends BaseTest {
 
 	@Autowired
 	WeixinPayService weixinPayService;
@@ -39,11 +57,11 @@ public class WeixinPayServiceTest extends BaseTest{
 	@Autowired
 	Sender sender;
 
-//	 @Test
+	// @Test
 	public void testSelectByPrimaryKey() {
 		// weixinPayService.getWeixinRefund("1000001898510594" ,0.01, 0.01);
 		List<PaymentEntity> list = paymentService.selectByPayNoAndTradeType(null, 0);
-			System.err.println(list.toArray().toString());
+		System.err.println(list.toArray().toString());
 	}
 
 	// @Test
@@ -58,7 +76,7 @@ public class WeixinPayServiceTest extends BaseTest{
 		// weixinPayService.getAppWeXinSign("1000000197371298", 0.01);
 	}
 
-//	 @Test
+	// @Test
 	public void testMessageToRefund() {
 		String body = "{\"title\":\"饮料\",\"orderDetailNum\":\"\",\"orderNum\":\"1000000050790901\",\"type\":\"3\",\"totalPrice\":0.01}";
 		MessageEvent rpbEvent = new MessageEvent();
@@ -103,13 +121,14 @@ public class WeixinPayServiceTest extends BaseTest{
 	 * @Author: 柯军
 	 * @datetime:2015年6月25日下午1:57:08
 	 **/
-//	 @Test
+	// @Test
 	public void testWinxinScanQuery() {
 		try {
-//			ScanPayQueryReqData scanPayQueryReqData = new ScanPayQueryReqData("1009290229201506250300791418","1000001753309557");
-			ScanPayQueryReqData scanPayQueryReqData = new ScanPayQueryReqData("1220588601201508126069022737","1000001707022561");
+			// ScanPayQueryReqData scanPayQueryReqData = new
+			// ScanPayQueryReqData("1009290229201506250300791418","1000001753309557");
+			ScanPayQueryReqData scanPayQueryReqData = new ScanPayQueryReqData("1220588601201508126069022737", "1000001707022561");
 			ScanPayQueryService scanPayQueryService = new ScanPayQueryService();
-//			System.err.println(scanPayQueryReqData.toString());
+			// System.err.println(scanPayQueryReqData.toString());
 			String response = scanPayQueryService.request(scanPayQueryReqData);
 			System.err.println(response);
 		} catch (Exception e) {
@@ -131,7 +150,7 @@ public class WeixinPayServiceTest extends BaseTest{
 	/**
 	 * 微信撤销订单
 	 */
-//	@Test
+	// @Test
 	public void testWeixinReverse() {
 		try {
 			ReverseService reverseService = new ReverseService();
@@ -143,47 +162,58 @@ public class WeixinPayServiceTest extends BaseTest{
 		}
 
 	}
-	
-//	@Test
-	public void testQueryOrder(){
+
+	// @Test
+	public void testQueryOrder() {
 		TenpayHttpClient httpClient = new TenpayHttpClient("UTF-8");
 		httpClient.setReqContent("https://api.mch.weixin.qq.com/pay/orderquery");
-        Map<String,Object> map = new HashMap<String,Object>();
-        map.put("appid", "wxf379a9c3029f1f15");
-        map.put("mch_id", "1220588601");
-        map.put("transaction_id", "1220588601201508116025541515");
-        /*map.put("out_trade_no","1000001768287279");*/
-        //随机字符串，不长于32 位
-        String nonce_str = RandomStringGenerator.getRandomStringByLength(32);
-        map.put("nonce_str",nonce_str);
-        //根据API给的签名规则进行签名
-        String sign = Signature.getSign(map);
-//        map.put("sign", sign);
-//		String postDataXML = xStreamForRequestPostData.toXML(map);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("appid", "wxf379a9c3029f1f15");
+		map.put("mch_id", "1220588601");
+		map.put("transaction_id", "1220588601201508116025541515");
+		/* map.put("out_trade_no","1000001768287279"); */
+		// 随机字符串，不长于32 位
+		String nonce_str = RandomStringGenerator.getRandomStringByLength(32);
+		map.put("nonce_str", nonce_str);
+		// 根据API给的签名规则进行签名
+		String sign = Signature.getSign(map);
+		// map.put("sign", sign);
+		// String postDataXML = xStreamForRequestPostData.toXML(map);
 
-        String postDataXML = "<xml>"
-        		+ "<appid>wxf379a9c3029f1f15</appid>"
-        		+ "<mch_id>1220588601</mch_id>"
-        		+ "<nonce_str>"+nonce_str+"</nonce_str>"
-        	/*	+ "<out_trade_no>1000001768287279</out_trade_no>"*/
-        		+ "<transaction_id>1220588601201508116025541515</transaction_id>"
-        		+ "<sign>"+sign+"</sign>"
-        		+ "</xml>";
+		String postDataXML = "<xml>" + "<appid>wxf379a9c3029f1f15</appid>" + "<mch_id>1220588601</mch_id>" + "<nonce_str>" + nonce_str + "</nonce_str>"
+		/* + "<out_trade_no>1000001768287279</out_trade_no>" */
+		+ "<transaction_id>1220588601201508116025541515</transaction_id>" + "<sign>" + sign + "</sign>" + "</xml>";
 		boolean bool = httpClient.callHttpPost("https://api.mch.weixin.qq.com/pay/orderquery", postDataXML);
-		System.err.println("bool="+bool);
+		System.err.println("bool=" + bool);
 		String resContent = httpClient.getResContent();
 		System.err.println(resContent);
 	}
 
-//	@Test
-	public void testQueryOrder2(){
-		 System.err.println(ConstantUtil.CRET_DIRECTORY);
+	// @Test
+	public void testQueryOrder2() {
+		System.err.println(ConstantUtil.CRET_DIRECTORY);
 		System.err.println(weixinPayService.queryOrder("10000002315977421").getRet_code());
 	}
 
-	@Test
+	// @Test
 	@Rollback(false)
-	public void testBatchRefund(){
+	public void testBatchRefund() {
 		weixinPayService.batchTriggerWeixinRefund();
+	}
+
+	@Test
+	public void testgetPaySignV3() {
+		try {
+			UnifiedorderService unifiedorderService = new UnifiedorderService();
+			unifiedorderService.getAppWeXinSign("100000000011", 1, "test");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testGetWeixinPaySign(){
+		Map<String,Object> map = weixinPayService.getAppWeXinSign("1000001111211",1d);
+		System.err.println(map.toString());
 	}
 }

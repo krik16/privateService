@@ -1,15 +1,20 @@
-package com.rongyi.rpb.common.util.orderSign.weixinSign.scan;
+package com.rongyi.rpb.common.v3.weixin.model;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.rongyi.rpb.common.v3.weixin.util.Configure;
+import com.rongyi.rpb.common.v3.weixin.util.RandomStringGenerator;
+import com.rongyi.rpb.common.v3.weixin.util.Signature;
+
 /**
  * User: rizenguo
  * Date: 2014/10/25
- * Time: 16:42
+ * Time: 13:54
  */
-public class ReverseReqData {
+public class ScanPayQueryReqData {
+
     //每个字段具体的意思请查看API文档
     private String appid = "";
     private String mch_id = "";
@@ -19,14 +24,13 @@ public class ReverseReqData {
     private String sign = "";
 
     /**
-     * 请求撤销服务
+     * 请求支付查询服务
      * @param transactionID 是微信系统为每一笔支付交易分配的订单号，通过这个订单号可以标识这笔交易，它由支付订单API支付成功时返回的数据里面获取到。建议优先使用
      * @param outTradeNo 商户系统内部的订单号,transaction_id 、out_trade_no 二选一，如果同时存在优先级：transaction_id>out_trade_no
      * @return API返回的XML数据
      * @throws Exception
      */
-
-    public ReverseReqData(String transactionID,String outTradeNo){
+    public ScanPayQueryReqData(String transactionID, String outTradeNo){
 
         //--------------------------------------------------------------------
         //以下是测试数据，请商户按照自己的实际情况填写具体的值进去
@@ -50,6 +54,7 @@ public class ReverseReqData {
         //根据API给的签名规则进行签名
         String sign = Signature.getSign(toMap());
         setSign(sign);//把签名数据设置到Sign这个属性中
+
 
     }
 
@@ -101,11 +106,10 @@ public class ReverseReqData {
         this.sign = sign;
     }
 
-    
-    
     @Override
 	public String toString() {
-		return "ReverseReqData [appid=" + appid + ", mch_id=" + mch_id + ", transaction_id=" + transaction_id + ", out_trade_no=" + out_trade_no + ", nonce_str=" + nonce_str + ", sign=" + sign + "]";
+		return "ScanPayQueryReqData [appid=" + appid + ", mch_id=" + mch_id + ", transaction_id=" + transaction_id + ", out_trade_no=" + out_trade_no + ", nonce_str=" + nonce_str + ", sign=" + sign
+				+ "]";
 	}
 
 	public Map<String,Object> toMap(){
@@ -126,5 +130,4 @@ public class ReverseReqData {
         }
         return map;
     }
-
 }

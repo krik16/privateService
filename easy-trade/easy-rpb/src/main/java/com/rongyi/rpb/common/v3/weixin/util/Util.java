@@ -1,13 +1,13 @@
-package com.rongyi.rpb.common.util.orderSign.weixinSign.scan;
+package com.rongyi.rpb.common.v3.weixin.util;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Field;
+import java.util.Map;
 
 import com.thoughtworks.xstream.XStream;
-import org.slf4j.LoggerFactory;
-
-import java.io.*;
-import java.lang.reflect.Field;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Map;
 
 /**
  * User: rizenguo
@@ -16,8 +16,6 @@ import java.util.Map;
  */
 public class Util {
 
-    //打log用
-    private static Log logger = new Log(LoggerFactory.getLogger(Util.class));
 
     /**
      * 通过反射的方式遍历对象的属性和属性值，方便调试
@@ -101,8 +99,6 @@ public class Util {
      * @return 返回log
      */
     public static String log(Object log){
-        logger.i(log.toString());
-        //System.out.println(log);
         return log.toString();
     }
 

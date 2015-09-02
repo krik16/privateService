@@ -95,5 +95,15 @@ public interface PaymentLogInfoService {
 	 **/
 	public abstract List<PayAccountUseTotal> selectPayAccountUseTotal(Map<String,Object> map);
 	
+	
+	/**	
+	 * @Description: 验证交易记录是否已存在 
+	 * @param tradeNo
+	 * @param payNo
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年9月2日下午3:13:09
+	 **/
+	public abstract boolean validateByTradeNoAndPayNo(String tradeNo,String payNo);
 
 }

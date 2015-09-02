@@ -4,7 +4,6 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
@@ -15,13 +14,10 @@ import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,16 +36,15 @@ import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
 import com.rongyi.easy.rpb.vo.WeixinQueryOrderParamVO;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.AccessTokenRequestHandler;
-import com.rongyi.rpb.common.util.orderSign.weixinSign.GetPackage;
-import com.rongyi.rpb.common.util.orderSign.weixinSign.PrepayIdRequestHandler;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.RequestHandler;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.client.ClientResponseHandler;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.client.TenpayHttpClient;
-import com.rongyi.rpb.common.util.orderSign.weixinSign.scan.ReverseReqData;
-import com.rongyi.rpb.common.util.orderSign.weixinSign.scan.ReverseService;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.util.MD5Util;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.util.Sha1Util;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.util.WXUtil;
+import com.rongyi.rpb.common.v3.weixin.model.ReverseReqData;
+import com.rongyi.rpb.common.v3.weixin.service.ReverseService;
+import com.rongyi.rpb.common.v3.weixin.service.UnifiedorderService;
 import com.rongyi.rpb.constants.ConstantUtil;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.mq.Sender;
@@ -95,80 +90,19 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 	private static final Logger LOGGER = LoggerFactory.getLogger(WeixinPayServiceImpl.class);
 
 	@Override
-	public Map<String, Object> getAppWeXinSign(String payNo, double total_fee) throws JSONException {
-		Map<String, Object> map = new HashMap<String, Object>();
-
-		// 2. 生成access_token
-		String accessToken = AccessTokenRequestHandler.getAccessToken();
-
-		// 3. 生成Signature
-		PrepayIdRequestHandler wxReqHandler = new PrepayIdRequestHandler(null, null);
-		wxReqHandler.setParameter("appid", ConstantUtil.PayWeiXin.APP_ID);
-		wxReqHandler.setParameter("appkey", ConstantUtil.PayWeiXin.APP_KEY);
-		String noncestr = WXUtil.getNonceStr();
-		wxReqHandler.setParameter("noncestr", noncestr);
-		wxReqHandler.setParameter("package", GetPackage.getOrderPackage(total_fee, payNo));
-
-		String timestamp = WXUtil.getTimeStamp();
-		wxReqHandler.setParameter("timestamp", timestamp);
-		wxReqHandler.setParameter("traceid", ConstantUtil.PayWeiXin.TRACEID); // traceid
-
-		// 4. 生成PrepayId
-		String sign = wxReqHandler.createSHA1Sign();
-		wxReqHandler.setParameter("app_signature", sign);
-		wxReqHandler.setParameter("sign_method", ConstantUtil.PayWeiXin.SIGN_METHOD);
-		String gateUrl = ConstantUtil.PayWeiXin.GATEURL + accessToken;
-		wxReqHandler.setGateUrl(gateUrl);
-		String prepayid = "";
+	public Map<String, Object> getAppWeXinSign(String payNo, double total_fee){
+		Map<String,Object> map = new HashMap<String,Object>();
 		try {
-			prepayid = wxReqHandler.sendPrepay();
-		} catch (JSONException e) {
-			LOGGER.error(e);
+			BigDecimal totalFee = new BigDecimal(total_fee+"").multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
+			UnifiedorderService unifiedorderService = new UnifiedorderService();
+			map = unifiedorderService.getAppWeXinSign(payNo, totalFee.intValue(), "容易网商品");
+			map.put("timestamp",WXUtil.getTimeStamp());
+			map.put("code", 0);
+			map.put("totlePrice", total_fee);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		List<NameValuePair> signParams = new LinkedList<NameValuePair>();
-		signParams.add(new BasicNameValuePair("appid", ConstantUtil.PayWeiXin.APP_ID));
-		signParams.add(new BasicNameValuePair("appkey", ConstantUtil.PayWeiXin.APP_KEY));
-		signParams.add(new BasicNameValuePair("noncestr", noncestr));
-		signParams.add(new BasicNameValuePair("package", "Sign=WXPay"));
-		signParams.add(new BasicNameValuePair("partnerid", ConstantUtil.PayWeiXin.PARTNER));
-		signParams.add(new BasicNameValuePair("prepayid", prepayid));
-		signParams.add(new BasicNameValuePair("timestamp", timestamp));
-		sign = getSHA1Sign(signParams);
-
-		map.put("app_signature", sign);
-		map.put("prepayid", prepayid);
-		map.put("noncestr", noncestr);
-		map.put("timestamp", timestamp);
-		map.put("code", 0);
-		map.put("totlePrice", total_fee);
 		return map;
-
-	}
-
-	private String getSHA1Sign(List<NameValuePair> params) {
-		String sign = genSign(params);
-		return Sha1Util.getSha1(sign);
-	}
-
-	/**
-	 * 微信客户端支付所需签名
-	 * 
-	 * @param params
-	 * @return
-	 */
-	private String genSign(List<NameValuePair> params) {
-		StringBuilder sb = new StringBuilder();
-		int i = 0;
-		for (; i < params.size() - 1; i++) {
-			sb.append(params.get(i).getName());
-			sb.append('=');
-			sb.append(params.get(i).getValue());
-			sb.append('&');
-		}
-		sb.append(params.get(i).getName());
-		sb.append('=');
-		sb.append(params.get(i).getValue());
-		return sb.toString();
 	}
 
 	public Map<String, Object> weixinRefundMessage(MessageEvent event, PaymentEntityVO paymentEntityVO, String payNo) {
@@ -225,15 +159,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 			paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
 			LOGGER.info("微信退款失败,生成支付款记录，但未生成付款成功事件！");
 		}
-		// PaymentEntity oldPaymentEntity =
-		// paymentService.validateOrderNumExist(paymentEntityVO.getOrderNum(),
-		// hisPayEntity.getPayChannel(),
-		// Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
-		// if (oldPaymentEntity == null)
 		paymentService.insertByOrderDetailNum(paymentEntity, paymentEntityVO.getOrderDetailNumArray());
-		// else
-		// LOGGER.info("订单号-->" + paymentEntityVO.getOrderNum() +
-		// "微信退款记录已存在，未重新生成新的退款记录。");
 		return result;
 	}
 

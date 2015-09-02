@@ -132,5 +132,33 @@ public interface ConstantUtil {
 	 *证书目录 
 	 */
 	String CRET_DIRECTORY = NOTIFY_URL.cretDirectory;
+
 	
+	
+	/**	
+	 * @Author:  柯军
+	 * @Description: V3版本微信常量配置 
+	 * @datetime:2015年9月1日下午6:29:53
+	 *
+	 **/
+	interface PayWeiXin_V3{
+		
+		
+		String SPBILL_CREATE_IP = "127.0.0.1";//终端IP
+		
+		String TRADE_TYPE = "APP";//交易类型
+		
+		public static String UNIFIED_ORDER_URL = "https://api.mch.weixin.qq.com/pay/unifiedorder";//支付接口地址
+		
+		public static String  WEIXIN_NOTIFY_URL = "http://" + NOTIFY_URL.outernetAddress + "/v5/WebPageAlipay/weixin/notify_url.htm";//支付成功异步通知接口
+		
+		public static String QUERY_ORDER_URL = "https://api.mch.weixin.qq.com/pay/orderquery";//订单查询接口地址
+		
+		public static String CLOSE_ORDER_URL = "https://api.mch.weixin.qq.com/pay/closeorder";//订单关闭接口地址
+		
+		public static String REQUEST_REFUND_URL = "https://api.mch.weixin.qq.com/secapi/pay/refund";//订单查询接口
+		
+		public static String QUERY_REFUND_URL = "https://api.mch.weixin.qq.com/pay/refundquery";//查询退款接口
+		
+	}
 }

@@ -145,4 +145,13 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
 	public List<PayAccountUseTotal> selectPayAccountUseTotal(Map<String, Object> map) {
 		return this.getBaseDao().selectListBySql(LOG_NAMESPACE + ".selectPayAccountUseTotal", map);
 	}
+
+	@Override
+	public boolean validateByTradeNoAndPayNo(String tradeNo, String payNo) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("tradeNo",tradeNo);
+		map.put("payNo", payNo);
+		Integer count = this.getBaseDao().selectOneBySql(LOG_NAMESPACE+".validateByTradeNoAndPayNo",map);
+		return (count != null && count >0);
+	}
 }

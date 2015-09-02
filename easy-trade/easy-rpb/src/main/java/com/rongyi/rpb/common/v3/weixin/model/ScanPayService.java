@@ -1,4 +1,7 @@
-package com.rongyi.rpb.common.util.orderSign.weixinSign.scan;
+package com.rongyi.rpb.common.v3.weixin.model;
+
+import com.rongyi.rpb.common.v3.weixin.service.BaseService;
+import com.rongyi.rpb.common.v3.weixin.util.Configure;
 
 
 

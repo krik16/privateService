@@ -27,7 +27,7 @@ public interface WeixinPayService {
 	 * @return
 	 * @throws JSONException
 	 */
-	public abstract Map<String, Object> getAppWeXinSign(String payNo, double total_fee) throws JSONException;
+	public abstract Map<String, Object> getAppWeXinSign(String payNo, double total_fee);
 
 	/**
 	 * 验证是否是微信退款，是则返回true
@@ -92,4 +92,5 @@ public interface WeixinPayService {
 	 * @datetime:2015年8月27日上午10:38:00
 	 **/
 	public void batchTriggerWeixinRefund();
+	
 }

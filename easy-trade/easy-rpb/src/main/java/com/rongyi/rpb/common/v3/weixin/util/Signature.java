@@ -1,13 +1,14 @@
-package com.rongyi.rpb.common.util.orderSign.weixinSign.scan;
+package com.rongyi.rpb.common.v3.weixin.util;
 
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 /**
  * User: rizenguo
@@ -40,9 +41,7 @@ public class Signature {
         }
         String result = sb.toString();
         result += "key=" + Configure.getKey();
-        Util.log("Sign Before MD5:" + result);
         result = MD5.MD5Encode(result).toUpperCase();
-        Util.log("Sign Result:" + result);
         return result;
     }
 
@@ -62,9 +61,7 @@ public class Signature {
         }
         String result = sb.toString();
         result += "key=" + Configure.getKey();
-        Util.log("Sign Before MD5:" + result);
         result = MD5.MD5Encode(result).toUpperCase();
-        Util.log("Sign Result:" + result);
         return result;
     }
 

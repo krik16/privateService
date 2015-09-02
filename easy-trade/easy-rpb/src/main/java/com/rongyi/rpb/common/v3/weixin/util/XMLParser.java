@@ -1,11 +1,13 @@
-package com.rongyi.rpb.common.util.orderSign.weixinSign.scan;
+package com.rongyi.rpb.common.v3.weixin.util;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -16,6 +18,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import com.rongyi.rpb.common.v3.weixin.model.RefundOrderData;
 
 /**
  * User: rizenguo
@@ -80,6 +84,33 @@ public class XMLParser {
         }
         return map;
 
+    }
+    
+    /**	
+     * @Description: 将Map转换为XML格式 
+     * @param parameters
+     * @param isCdata 是否需要加上CDATA
+     * @return	
+     * @Author:  柯军
+     * @datetime:2015年9月2日下午3:34:25
+     **/
+    public static String getXmlFormMap(Map<String,Object> parameters,boolean isCdata){
+        StringBuffer sb = new StringBuffer();
+        sb.append("<xml>");
+        Set es = parameters.entrySet();
+        Iterator it = es.iterator();
+        while(it.hasNext()) {
+            Map.Entry entry = (Map.Entry)it.next();
+            String k = (String)entry.getKey();
+            String v = (String)entry.getValue();
+            if (isCdata) {
+                sb.append("<"+k+">"+"<![CDATA["+v+"]]></"+k+">");
+            }else {
+                sb.append("<"+k+">"+v+"</"+k+">");
+            }
+        }
+        sb.append("</xml>");
+        return sb.toString();
     }
 
 

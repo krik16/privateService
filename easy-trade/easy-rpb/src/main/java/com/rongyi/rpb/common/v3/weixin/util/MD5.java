@@ -1,4 +1,4 @@
-package com.rongyi.rpb.common.util.orderSign.weixinSign.scan;
+package com.rongyi.rpb.common.v3.weixin.util;
 
 import java.security.MessageDigest;
 

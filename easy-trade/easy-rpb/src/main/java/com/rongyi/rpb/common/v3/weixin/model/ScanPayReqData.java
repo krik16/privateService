@@ -1,4 +1,4 @@
-package com.rongyi.rpb.common.util.orderSign.weixinSign.scan;
+package com.rongyi.rpb.common.v3.weixin.model;
 
 /**
  * User: rizenguo
@@ -9,6 +9,10 @@ package com.rongyi.rpb.common.util.orderSign.weixinSign.scan;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.rongyi.rpb.common.v3.weixin.util.Configure;
+import com.rongyi.rpb.common.v3.weixin.util.RandomStringGenerator;
+import com.rongyi.rpb.common.v3.weixin.util.Signature;
 
 /**
  * 请求被扫支付API需要提交的数据

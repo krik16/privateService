@@ -1,4 +1,4 @@
-package com.rongyi.rpb.common.util.orderSign.weixinSign.scan;
+package com.rongyi.rpb.common.v3.weixin.util;
 
 import com.rongyi.rpb.constants.ConstantUtil;
 
@@ -36,6 +36,10 @@ public class Configure {
 	private static String ip = "127.0.0.1";
 
 	//以下是几个API的路径：
+	
+	//统一下单API
+	public static String UNIFIED_ORDER_API = "https://api.mch.weixin.qq.com/pay/unifiedorder";
+
 	//1）被扫支付API
 	public static String PAY_API = "https://api.mch.weixin.qq.com/pay/micropay";
 
@@ -65,7 +69,7 @@ public class Configure {
 		Configure.useThreadToDoReport = useThreadToDoReport;
 	}
 
-	public static String HttpsRequestClassName = "com.rongyi.rpb.common.util.orderSign.weixinSign.scan.HttpsRequest";
+	public static String HttpsRequestClassName = "com.rongyi.rpb.common.v3.weixin.util.HttpsRequest";
 
 	public static void setKey(String key) {
 		Configure.key = key;

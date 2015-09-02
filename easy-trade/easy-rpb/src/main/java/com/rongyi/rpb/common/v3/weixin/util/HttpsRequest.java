@@ -1,4 +1,4 @@
-package com.rongyi.rpb.common.util.orderSign.weixinSign.scan;
+package com.rongyi.rpb.common.v3.weixin.util;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,8 +25,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.slf4j.LoggerFactory;
 
+import com.rongyi.rpb.common.v3.weixin.service.IServiceRequest;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.io.xml.XmlFriendlyNameCoder;
@@ -44,8 +44,6 @@ public class HttpsRequest implements IServiceRequest{
         public void onConnectionPoolTimeoutError();
 
     }
-
-    private static Log log = new Log(LoggerFactory.getLogger(HttpsRequest.class));
 
     //表示请求器是否已经做了初始化工作
     private boolean hasInit = false;
@@ -130,8 +128,7 @@ public class HttpsRequest implements IServiceRequest{
         //将要提交给API的数据对象转换成XML格式数据Post给API
         String postDataXML = xStreamForRequestPostData.toXML(xmlObj);
 
-//        Util.log("API，POST过去的数据是：");
-//        Util.log(postDataXML);
+        System.err.println("post data:"+postDataXML);
         //得指明使用UTF-8编码，否则到API服务器XML的中文不能被成功识别
         StringEntity postEntity = new StringEntity(postDataXML, "UTF-8");
         httpPost.addHeader("Content-Type", "text/xml");
@@ -139,8 +136,6 @@ public class HttpsRequest implements IServiceRequest{
 
         //设置请求器的配置
         httpPost.setConfig(requestConfig);
-
-        Util.log("executing request" + httpPost.getRequestLine());
 
         try {
             HttpResponse response = httpClient.execute(httpPost);
@@ -150,17 +145,16 @@ public class HttpsRequest implements IServiceRequest{
             result = EntityUtils.toString(entity, "UTF-8");
 
         } catch (ConnectionPoolTimeoutException e) {
-            log.e("http get throw ConnectionPoolTimeoutException(wait time out)");
+           e.printStackTrace();
 
         } catch (ConnectTimeoutException e) {
-            log.e("http get throw ConnectTimeoutException");
+        	e.printStackTrace();
 
         } catch (SocketTimeoutException e) {
-            log.e("http get throw SocketTimeoutException");
+        	e.printStackTrace();
 
         } catch (Exception e) {
         	e.printStackTrace();
-            log.e("http get throw Exception");
 
         } finally {
             httpPost.abort();
