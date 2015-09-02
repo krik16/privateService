@@ -33,7 +33,14 @@ public interface ProxyCouponOrderService {
      *
      * @param order
      */
+    @Deprecated
     void updateCouponOrder(CouponOrder order);
+
+    /**
+     * 更新订单号更新订单状态为退款完成
+     * @param orderNo
+     */
+    void updateOrderRefundedByNo(String orderNo);
 
     /**
      * 订单参数创建优惠订单
