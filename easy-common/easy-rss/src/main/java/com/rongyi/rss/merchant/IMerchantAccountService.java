@@ -142,6 +142,14 @@ public interface IMerchantAccountService {
 	 * @throws Exception
 	 */
 	public Boolean updateMerAccountInfo(UserManagerParam param,Integer merUserId) throws Exception;
+	
+	/**
+	 * 修改个人信息
+	 * @param paramsMap
+	 * @return
+	 */
+	public Boolean updateUserInfo(Map<String, Object> paramsMap) throws Exception;
+	
 	/**
 	 * 模糊查询用户手机号码
 	 * @param userAccount
