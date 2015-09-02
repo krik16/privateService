@@ -20,6 +20,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.coupon.entity.CouponOrder;
 import com.rongyi.easy.coupon.entity.UserCoupon;
@@ -73,6 +74,7 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 		List<String> buyerIds = new ArrayList<String>();
 		if (map.get("buyerName") != null && StringUtils.isNotBlank(map.get("buyerName").toString())) {
 			try {
+				LOGGER.info("dubbo service rOAMallLifeUserService.getUserDetailByName(),服务请求时间-->"+DateUtil.getCurrentDateYYYYMMDDHHMMSSsss());
 				List<UserInfoVO> userVoList = rOAMallLifeUserService.getUserDetailByName(map.get("buyerName").toString());
 				for (UserInfoVO userVO : userVoList) {
 					buyerIds.add(userVO.getUserId());
@@ -84,6 +86,7 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 		}
 		if (map.get("buyerAccount") != null && StringUtils.isNotBlank(map.get("buyerAccount").toString())) {
 			try {
+				LOGGER.info("dubbo service rOAMallLifeUserService.getByPhone(),服务请求时间-->"+DateUtil.getCurrentDateYYYYMMDDHHMMSSsss());
 				UserInfoVO userInfoVO = rOAMallLifeUserService.getByPhone(map.get("buyerAccount").toString());
 				if (userInfoVO != null)
 					buyerIds.add(userInfoVO.getUserId());
