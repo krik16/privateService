@@ -254,7 +254,7 @@ public class WeixinPayServiceTest extends BaseTest {
 	}
 	
 	@Test
-	@Description("微信退款查询")
+	@Description("微信退款")
 	public void testRefundQuery(){
 		try{
 		RefundQueryService refundQueryService = new RefundQueryService();
