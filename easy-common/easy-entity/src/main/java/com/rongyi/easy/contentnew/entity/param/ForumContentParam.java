@@ -14,7 +14,7 @@ import org.apache.commons.lang.StringUtils;
 public class ForumContentParam implements Serializable{
 	private static final Integer CURRENTPAGE = 1;
 	private static final Integer PAGESIZE = 10;
-	private static final String ORDER_BY_CLAUSE = "create_at DESC";
+	private static final String ORDER_BY_CLAUSE = "create_at";
 	
 	/**省id  0代表全国*/
 	private String provId;
