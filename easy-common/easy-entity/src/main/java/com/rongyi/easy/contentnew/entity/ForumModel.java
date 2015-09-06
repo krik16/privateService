@@ -17,8 +17,7 @@ public class ForumModel implements Serializable {
     private String imagePixel;
     /**图片大小的显示 如 30   以K为单位*/
     private Integer imageSize;
-    /**只有模块是热点推荐的才有3个默认的热点图标，使用;隔开*/
-    private String hotImages;
+   
     
     public Integer getId() {
         return id;
@@ -60,11 +59,4 @@ public class ForumModel implements Serializable {
         this.imageSize = imageSize;
     }
 
-    public String getHotImages() {
-        return hotImages;
-    }
-
-    public void setHotImages(String hotImages) {
-        this.hotImages = hotImages;
-    }
 }
