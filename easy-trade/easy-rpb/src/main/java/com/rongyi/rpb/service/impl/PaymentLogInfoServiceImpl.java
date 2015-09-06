@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.constant.PaymentEventType;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.mq.MessageEvent;
@@ -68,7 +69,7 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
 	}
 
 	@Override
-	public PaymentLogInfo selectByOutTradeNo(String outTradeNo,Integer tradeType) {
+	public PaymentLogInfo selectByOutTradeNo(String outTradeNo, Integer tradeType) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("outTradeNo", outTradeNo);
 		resultMap.put("tradeType", tradeType);
@@ -97,15 +98,21 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
 	}
 
 	@Override
-	public void insertPayNotify(PaymentLogInfo paymentLogInfo, Integer tradeType, Integer status, String payChannel) {
-		insertGetId(paymentLogInfo);
-		List<PaymentEntity> list = paymentService.selectByPayNoAndTradeType(paymentLogInfo.getOutTradeNo(), tradeType);
-		if (list != null && !list.isEmpty() && list.get(0).getStatus() != Constants.PAYMENT_STATUS.STAUS2) {
-			Integer realPayChannel = paymentService.getRealPayChannel(Integer.valueOf(payChannel));
-			paymentService.updateListStatus(paymentLogInfo.getOutTradeNo(), tradeType, status, realPayChannel);// 修改付款单状态
-			String orderNums = paymentService.getOrderNumStrsByPayNo(paymentLogInfo.getOutTradeNo(),Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
-			paySuccessToMessage(paymentLogInfo.getOutTradeNo(), paymentLogInfo.getBuyer_email(), orderNums, list.get(0).getOrderType(), payChannel);
+	public boolean insertPayNotify(PaymentLogInfo paymentLogInfo, Integer tradeType, Integer status, String payChannel) {
+		try {
+			insertGetId(paymentLogInfo);
+			List<PaymentEntity> list = paymentService.selectByPayNoAndTradeType(paymentLogInfo.getOutTradeNo(), tradeType);
+			if (list != null && !list.isEmpty() && list.get(0).getStatus() != Constants.PAYMENT_STATUS.STAUS2) {
+				Integer realPayChannel = paymentService.getRealPayChannel(Integer.valueOf(payChannel));
+				paymentService.updateListStatus(paymentLogInfo.getOutTradeNo(), tradeType, status, realPayChannel);// 修改付款单状态
+				String orderNums = paymentService.getOrderNumStrsByPayNo(paymentLogInfo.getOutTradeNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
+				paySuccessToMessage(paymentLogInfo.getOutTradeNo(), paymentLogInfo.getBuyer_email(), orderNums, list.get(0).getOrderType(), payChannel);
+			}
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		return false;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -148,10 +155,29 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
 
 	@Override
 	public boolean validateByTradeNoAndPayNo(String tradeNo, String payNo) {
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("tradeNo",tradeNo);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("tradeNo", tradeNo);
 		map.put("payNo", payNo);
-		Integer count = this.getBaseDao().selectOneBySql(LOG_NAMESPACE+".validateByTradeNoAndPayNo",map);
-		return (count != null && count >0);
+		Integer count = this.getBaseDao().selectOneBySql(LOG_NAMESPACE + ".validateByTradeNoAndPayNo", map);
+		return (count != null && count > 0);
+	}
+
+	@Override
+	public PaymentLogInfo getByWeixinNotify(Map<String, Object> map) {
+		PaymentLogInfo paymentLogInfo = new PaymentLogInfo();
+		paymentLogInfo.setTrade_no(map.get("transaction_id").toString());// 交易流水号
+		paymentLogInfo.setOutTradeNo(map.get("out_trade_no").toString());
+		paymentLogInfo.setNotifyTime(DateUtil.getCurrDateTime());
+		paymentLogInfo.setReplayFlag(Constants.REPLAY_FLAG.REPLAY_FLAG3);
+		paymentLogInfo.setSign(map.get("sign").toString());
+		paymentLogInfo.setTradeMode("1");
+		paymentLogInfo.setTimeEnd(DateUtil.getCurrDateTime());
+		paymentLogInfo.setBuyer_type(0);// 买家账号
+		paymentLogInfo.setEventType(Constants.EVENT_TYPE.EVENT_TYPE2);
+		paymentLogInfo.setTotal_fee(Double.valueOf(map.get("total_fee").toString()) / 100);// 微信金额单位为分
+		paymentLogInfo.setResult(map.get("result_code").toString());
+		paymentLogInfo.setBuyer_email(map.get("openid").toString());
+		paymentLogInfo.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
+		return paymentLogInfo;
 	}
 }

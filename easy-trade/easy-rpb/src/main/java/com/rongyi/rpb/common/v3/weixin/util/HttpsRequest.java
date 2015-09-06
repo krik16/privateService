@@ -128,7 +128,7 @@ public class HttpsRequest implements IServiceRequest{
         //将要提交给API的数据对象转换成XML格式数据Post给API
         String postDataXML = xStreamForRequestPostData.toXML(xmlObj);
 
-        System.err.println("post data:"+postDataXML);
+//        System.err.println("post data:"+postDataXML);
         //得指明使用UTF-8编码，否则到API服务器XML的中文不能被成功识别
         StringEntity postEntity = new StringEntity(postDataXML, "UTF-8");
         httpPost.addHeader("Content-Type", "text/xml");
@@ -169,7 +169,7 @@ public class HttpsRequest implements IServiceRequest{
      * @param socketTimeout 连接时长，默认10秒
      */
     public void setSocketTimeout(int socketTimeout) {
-        socketTimeout = socketTimeout;
+        this.socketTimeout = socketTimeout;
         resetRequestConfig();
     }
 
@@ -179,7 +179,7 @@ public class HttpsRequest implements IServiceRequest{
      * @param connectTimeout 传输时长，默认30秒
      */
     public void setConnectTimeout(int connectTimeout) {
-        connectTimeout = connectTimeout;
+        this.connectTimeout = connectTimeout;
         resetRequestConfig();
     }
 
@@ -193,6 +193,6 @@ public class HttpsRequest implements IServiceRequest{
      * @param requestConfig 设置HttpsRequest的请求器配置
      */
     public void setRequestConfig(RequestConfig requestConfig) {
-        requestConfig = requestConfig;
+        this.requestConfig = requestConfig;
     }
 }

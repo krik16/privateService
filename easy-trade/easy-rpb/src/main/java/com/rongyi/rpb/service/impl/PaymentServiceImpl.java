@@ -301,7 +301,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
 		}
 		List<PaymentEntity> paymentEntityList = getPaymemtsByMoreOrderNum(paymentEntityVO);// 多个订单号生成多条记录对应一条付款单号
-		String oldPayNo = paymentEntityVO.getPayNo();//原订单号
+		String oldPayNo = paymentEntityVO.getPayNo();// 原订单号
 		payNo = paymentEntityList.get(0).getPayNo();// 新付款单号
 		paymentEntityVO.setPayNo(payNo);
 		if (StringUtils.isEmpty(paymentEntityVO.getTitle())) {
@@ -593,29 +593,35 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 	}
 
 	@Override
-	public void repeatPayToRefund(PaymentEntity paymentEntity, PaymentLogInfo paymentLogInfo) {
-		if (paymentEntity != null) {// 重复支付
-			PaymentEntity oldPaymentEntity = selectByPayNoAndPayChannelAndTradeType(paymentEntity.getPayNo(), paymentEntity.getPayChannel(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0,
-					Constants.PAYMENT_STATUS.STAUS0);
-			if (oldPaymentEntity != null)// 该支付方式的待支付状态记录是否已存在
-				BeanUtils.copyProperties(oldPaymentEntity, paymentEntity);
-			insertRepeatPay(paymentEntity, paymentLogInfo);// 增加重复付款记录
-			String payNo = getPayNo();
-			PaymentEntity refundPaymentEntity = new PaymentEntity();
-			BeanUtils.copyProperties(paymentEntity, refundPaymentEntity);
-			refundPaymentEntity.setId(null);
-			refundPaymentEntity.setFinishTime(null);
-			refundPaymentEntity.setPayNo(payNo);
-			refundPaymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE6);
-			refundPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
-			LOGGER.info(Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0 == paymentEntity.getPayChannel() ? "支付宝" : "微信" + "重复支付直接退款-->退款单号" + payNo);
-			if (Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1 == paymentEntity.getPayChannel()) {// 微信自动退款
-				boolean result = weixinPayService.weixinRefund(paymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), paymentEntity.getAmountMoney().doubleValue(), payNo);
-				if (result)
-					refundPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
+	public boolean repeatPayToRefund(PaymentEntity paymentEntity, PaymentLogInfo paymentLogInfo) {
+		try {
+			if (paymentEntity != null) {// 重复支付
+				PaymentEntity oldPaymentEntity = selectByPayNoAndPayChannelAndTradeType(paymentEntity.getPayNo(), paymentEntity.getPayChannel(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0,
+						Constants.PAYMENT_STATUS.STAUS0);
+				if (oldPaymentEntity != null)// 该支付方式的待支付状态记录是否已存在
+					BeanUtils.copyProperties(oldPaymentEntity, paymentEntity);
+				insertRepeatPay(paymentEntity, paymentLogInfo);// 增加重复付款记录
+				String payNo = getPayNo();
+				PaymentEntity refundPaymentEntity = new PaymentEntity();
+				BeanUtils.copyProperties(paymentEntity, refundPaymentEntity);
+				refundPaymentEntity.setId(null);
+				refundPaymentEntity.setFinishTime(null);
+				refundPaymentEntity.setPayNo(payNo);
+				refundPaymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE6);
+				refundPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
+				LOGGER.info(Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0 == paymentEntity.getPayChannel() ? "支付宝" : "微信" + "重复支付直接退款-->退款单号" + payNo);
+				if (Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1 == paymentEntity.getPayChannel()) {// 微信自动退款
+					boolean result = weixinPayService.weixinRefund(paymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), paymentEntity.getAmountMoney().doubleValue(), payNo);
+					if (result)
+						refundPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
+				}
+				insert(refundPaymentEntity);
+				return true;
 			}
-			insert(refundPaymentEntity);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		return false;
 	}
 
 	@Override
@@ -676,18 +682,18 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
 	@Override
 	public void updateRefundRejected(Integer id, Integer refundRejected) {
-		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
 		map.put("refundRejected", refundRejected);
-		this.getBaseDao().updateBySql(PAYMENTENTITY_NAMESPACE+".updateRefundRejected", map);
+		this.getBaseDao().updateBySql(PAYMENTENTITY_NAMESPACE + ".updateRefundRejected", map);
 	}
 
 	@Override
 	public List<PaymentEntity> valiadteStatus(String[] ids, Integer status) {
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("ids",ids);
-		map.put("status",status);
-		return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE+".valiadteStatus",map);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("ids", ids);
+		map.put("status", status);
+		return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".valiadteStatus", map);
 	}
 
 	@Override

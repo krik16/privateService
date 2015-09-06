@@ -87,18 +87,18 @@ public class RefundServiceImpl extends BaseServiceImpl implements RefundService 
 			if (hisPayEntity != null)// 此处把付款记录的付款单号放入退款明细，以便直接在第三方支付系统查询
 				tradeVO.setPayNo(hisPayEntity.getPayNo());
 			if (ConstantEnum.PAYMENT_ORDER_TYPE1.getCodeInt() == tradeVO.getOrderType()) {// 优惠券订单
-				CouponOrder couponOrder = roaCouponOrderService.findOneByOrderNo(tradeVO.getOrderNo());
-				if (couponOrder != null && couponOrder.getBuyerId() != null) {
-					try {
+				try {
+					CouponOrder couponOrder = roaCouponOrderService.findOneByOrderNo(tradeVO.getOrderNo());
+					if (couponOrder != null && couponOrder.getBuyerId() != null) {
+
 						MallLifeUserEntity mallLifeUserEntity = rOAMallLifeUserService.getEntityByUid(couponOrder.getBuyerId());
 						if (mallLifeUserEntity != null) {
 							tradeVO.setBuyerAccount(mallLifeUserEntity.getPhone());
 							tradeVO.setBuyerName(mallLifeUserEntity.getUserName());
 						}
-					} catch (Exception e) {
-						e.printStackTrace();
 					}
-
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 		}

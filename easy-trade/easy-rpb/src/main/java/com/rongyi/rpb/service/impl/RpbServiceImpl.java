@@ -225,11 +225,12 @@ public class RpbServiceImpl implements IRpbService {
 			}
 			LOGGER.info("支付宝订单状态-->" + queryOrderParamVO.getTrade_status());
 		} else if (Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1 == payChannel) {
-			WeixinQueryOrderParamVO weixinQueryOrderParamVO = weixinPayService.queryOrder(payNo);
-			if (weixinQueryOrderParamVO != null && 0 == weixinQueryOrderParamVO.getRet_code()) {
+			WeixinQueryOrderParamVO weixinQueryOrderParamVO = weixinPayService.queryOrder(tradeNo,payNo);
+			if (weixinQueryOrderParamVO != null && "SUCCESS".equals(weixinQueryOrderParamVO.getResult_code())
+					&& ("SUCCESS".equals(weixinQueryOrderParamVO.getTrade_state()) || "REFUND".equals(weixinQueryOrderParamVO.getTrade_state()))) {
 				return true;
 			}
-			LOGGER.info("微信订单-->" + (weixinQueryOrderParamVO.getRet_code() == 62623003) != null ? "订单不存在" : weixinQueryOrderParamVO.getRet_code());
+			LOGGER.info("微信订单支付未成功-->"+weixinQueryOrderParamVO.toString());
 		} else {
 			LOGGER.info("未找到对应付款方式-->payChannel=" + payChannel + ",tradeNo=" + tradeNo + ",payNo=" + payNo);
 		}
