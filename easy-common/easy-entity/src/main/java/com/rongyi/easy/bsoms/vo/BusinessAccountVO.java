@@ -20,8 +20,10 @@ public class BusinessAccountVO implements Serializable {
 	private Integer type;//商家类型
 	private Integer identity;//身份类型
 	private Integer groupId;//集团id
+	private String groupMid;//集团mid
 	private String groupName;//集团名称
 	private Integer brandId;//品牌id
+	private String brandMid;//品牌mid
 	private String brandName;//品牌名
 	private Integer mallId;//商场id
 	private String mallMid;//商场mid
@@ -247,6 +249,18 @@ public class BusinessAccountVO implements Serializable {
 	}
 	public void setShopMid(String shopMid) {
 		this.shopMid = shopMid;
+	}
+	public String getGroupMid() {
+		return groupMid;
+	}
+	public void setGroupMid(String groupMid) {
+		this.groupMid = groupMid;
+	}
+	public String getBrandMid() {
+		return brandMid;
+	}
+	public void setBrandMid(String brandMid) {
+		this.brandMid = brandMid;
 	}
 	
 }
