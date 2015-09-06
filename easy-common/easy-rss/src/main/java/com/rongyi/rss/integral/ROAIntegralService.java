@@ -42,7 +42,7 @@ public interface ROAIntegralService {
 	 * @param page
 	 * @return
 	 */
-	public JSONObject  getScoreRecord(String userid,ScoreRuleEnum scoreRuleEnum,ActionType actionType,int row,int page);
+	public JSONObject  getScoreRecord(String userid,int actionType,int row,int page);
 	/**
 	 * 根据订单号获取积分记录
 	 * @param orderSn
