@@ -93,6 +93,11 @@ public class RmmmCouponParam implements Serializable {
 	 * 每人每日限用张数
 	 */
 	private Integer limitUseCount;
+	
+	/**
+	 * [随时退,过期退,免预约”,”不可退”]  如对应[1,0,0,0]，是集合类型 ,0否 1是
+	 */
+	private List<Integer> afterSaleService;
 
 	public String getTitle() {
 		return title;
@@ -214,18 +219,22 @@ public class RmmmCouponParam implements Serializable {
 		this.limitUseCount = limitUseCount;
 	}
 
+	public List<Integer> getAfterSaleService() {
+		return afterSaleService;
+	}
+
+	public void setAfterSaleService(List<Integer> afterSaleService) {
+		this.afterSaleService = afterSaleService;
+	}
+
 	@Override
 	public String toString() {
-		return "RmmmCouponParam [title=" + title + ", totalCount=" + totalCount
-				+ ", limitCount=" + limitCount + ", originalPrice="
-				+ originalPrice + ", currentPrice=" + currentPrice
-				+ ", publishBeginDate=" + publishBeginDate
-				+ ", publishEndDate=" + publishEndDate + ", validBeginDate="
-				+ validBeginDate + ", validEndDate=" + validEndDate
-				+ ", useRestriction=" + useRestriction + ", useDescription="
-				+ useDescription + ", detailPicUrls=" + detailPicUrls
-				+ ", shopId=" + shopId + ", limitPublishCount="
-				+ limitPublishCount + ", limitUseCount=" + limitUseCount + "]";
+		return "RmmmCouponParam [title=" + title + ", totalCount=" + totalCount + ", limitCount=" + limitCount
+				+ ", originalPrice=" + originalPrice + ", currentPrice=" + currentPrice + ", publishBeginDate="
+				+ publishBeginDate + ", publishEndDate=" + publishEndDate + ", validBeginDate=" + validBeginDate
+				+ ", validEndDate=" + validEndDate + ", useRestriction=" + useRestriction + ", useDescription=" + useDescription
+				+ ", detailPicUrls=" + detailPicUrls + ", shopId=" + shopId + ", limitPublishCount=" + limitPublishCount
+				+ ", limitUseCount=" + limitUseCount + ", afterSaleService=" + afterSaleService + "]";
 	}
 
 }
