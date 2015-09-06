@@ -83,7 +83,16 @@ public interface RoaCouponOrderService {
      * @param orderNo
      * @return
      */
-    List<CouponOrderItem> findItemListByOrderNo(String orderNo);
+    List<CouponOrderItem> findOrderItemsByNo(String orderNo);
+
+
+    /**
+     * 根据订单Id查询订单项
+     *
+     * @param orderId
+     * @return
+     */
+    List<CouponOrderItem> findOrderItemsById(Long orderId);
 
     /**
      * 更新优惠券订单项
@@ -139,9 +148,10 @@ public interface RoaCouponOrderService {
      * @param orderNo   订单号
      * @param tradeWay  支付方式
      * @param paymentNo 支付单号
+     * @param payAccount 支付账户(例如支付宝账户)
      * @return
      */
-    boolean processCouponOrderForPayed(String orderNo, int tradeWay, String paymentNo);
+    Map<String,Object> processCouponOrderForPayed(String orderNo, int tradeWay, String paymentNo, String payAccount);
 
     /**
      * 优惠券立即购买
@@ -165,16 +175,13 @@ public interface RoaCouponOrderService {
 
 
     /**
-     * 根据卡券类型查询订单信息
-     *
+     * 优惠券列表（全部、未付款）
      * @param paramsMap
      * @param currentPage
      * @param pageSize
-     * @return Map<String,Object>    返回类型
-     * @Title: getCouponOrdersByType
-     * @Description: TODO(根据卡券类型查询我的订单列表)
+     * @return
      */
-    Map<String, Object> getCouponOrdersByType(Map<String, Object> paramsMap,
+    Map<String, Object> findAllOrdersByType(Map<String, Object> paramsMap,
                                               Integer currentPage, Integer pageSize);
 
     /**
@@ -187,13 +194,27 @@ public interface RoaCouponOrderService {
     List<CouponOrderItem> findItemListByOrderNoAndCouponType(String orderNo, String couponType);
 
     /**
+     * 优惠券列表（未消费、已退款、退款中）
      * @param paramsMap
      * @param currentPage
      * @param pageSize
-     * @return Map<String,Object>    返回类型
-     * @Title: getCouponOrderByStatus
-     * @Description: TODO(查询未消费或退款订单列表)
+     * @return
      */
-    Map<String, Object> getCouponOrderByStatus(Map<String, Object> paramsMap,
+    Map<String, Object> findOrdersByStatus(Map<String, Object> paramsMap,
                                                Integer currentPage, Integer pageSize);
+
+    /**
+     *
+     * @param orderNo
+     * @param number
+     * @param userId
+     * @return
+     */
+    Map<String, Object> calcRefundAmount(String orderNo, Integer number, String userId);
+    
+    /**
+    *
+    * @return
+    */
+   void closeUnpayOrder();
 }

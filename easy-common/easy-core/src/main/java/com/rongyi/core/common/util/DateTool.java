@@ -188,6 +188,8 @@ public class DateTool {
 		cal.add(Calendar.MONTH, num);
 		return cal.getTime();
 	}
+	
+	
 
 	/**
 	 * 添加天数。
@@ -212,6 +214,12 @@ public class DateTool {
 		return cal.getTime();
 	}
 
+	public static java.util.Date addTime(java.util.Date date,int num){
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		cal.add(Calendar.MINUTE, num);
+		return cal.getTime();
+	}
 	/**
 	 * 得到当年第一天的开始时间。
 	 *

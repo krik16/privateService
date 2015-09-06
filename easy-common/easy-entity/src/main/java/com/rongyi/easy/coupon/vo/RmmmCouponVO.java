@@ -1,10 +1,10 @@
-/** 
- * @Title: RmmmCouponQueryParam.java 
- * @Package com.rongyi.easy.coupon.param 
+/**
+ * @Title: RmmmCouponQueryParam.java
+ * @Package com.rongyi.easy.coupon.param
  * @Description: RMMM查询优惠券返回结果的封装
  * @author 郑亦梁  zhengyiliang@rongyi.com
- * @date 2015年4月23日 下午4:42:32 
- * @version V1.0   
+ * @date 2015年4月23日 下午4:42:32
+ * @version V1.0
  * Copyright (C),上海容易网电子商务有限公司
  */
 package com.rongyi.easy.coupon.vo;
@@ -70,7 +70,51 @@ public class RmmmCouponVO implements Serializable {
 	 */
 	private int  totalCount;
 
+	/**
+	 * true表示限购，false表示不限购
+	 */
+	private Boolean ifLimit;
 
+	/**
+	 * 店铺名称
+	 */
+    private String shopName;
+
+    /**
+	 * 商场名称
+	 */
+    private String mallName;
+
+	/**
+	 * @param  couponId 卡券Id
+	 * @param title 卡券名称
+	 * @param detailPicUrls 详图列表
+	 * @param shopNameList  店铺名列表
+	 * @param originalPrice 原价
+	 * @param currentPrice 现价
+	 * @param status 状态
+	 * @param usedAmount 已购数量
+	 * @param totalCount 总量
+	 * @param ifLimit true表示限购，false表示不限购
+	 * @param shopName 店铺名称
+	 * @param mallName 商场名称
+	 */
+	public RmmmCouponVO(String couponId, String title, List<String> detailPicUrls, List<String> shopNameList, Double originalPrice,
+						Double currentPrice, String status, int usedAmount, int totalCount, Boolean ifLimit, String shopName, String mallName) {
+		super();
+		this.couponId = couponId;
+		this.title = title;
+		this.detailPicUrls = detailPicUrls;
+		this.shopNameList = shopNameList;
+		this.originalPrice = originalPrice;
+		this.currentPrice = currentPrice;
+		this.status = status;
+		this.usedAmount = usedAmount;
+		this.totalCount  = totalCount;
+		this.ifLimit = ifLimit;
+		this.shopName = shopName;
+		this.mallName = mallName;
+	}
 
 	/**
 	 * @param  couponId 卡券Id
@@ -176,4 +220,29 @@ public class RmmmCouponVO implements Serializable {
 	public void setCouponId(String couponId) {
 		this.couponId = couponId;
 	}
+
+	public Boolean getIfLimit() {
+		return ifLimit;
+	}
+
+	public void setIfLimit(Boolean ifLimit) {
+		this.ifLimit = ifLimit;
+	}
+
+	public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+
+	public String getMallName() {
+		return mallName;
+	}
+
+	public void setMallName(String mallName) {
+		this.mallName = mallName;
+	}
+
 }

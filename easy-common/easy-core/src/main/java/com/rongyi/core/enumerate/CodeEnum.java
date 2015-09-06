@@ -9,7 +9,8 @@ public enum CodeEnum {
     SUCCESS("0", "正常"),
     
     /** 系统性错误 */
-    ERROR_ID_INVALID("-1", "调用者ID不存在或无效"),
+    //ERROR_ID_INVALID("-1", "调用者ID不存在或无效"),
+    ERROR_ID_INVALID("-1", "请重新登录"),
     ERROR_PASSWORD("-2", "调用者密码出错"),
     ERROR_ID_ILLEGAL("-3", "调用方ID不合法 "),
     ERROR_VARSION("-4", "版本不匹配"),
@@ -58,6 +59,9 @@ public enum CodeEnum {
     ERROR_NO_SHOP("-1122", "没有相关的店铺信息"),
     ERROR_INVALID_LETTER("-1123", "无效的首字母"),
     ERROR_NO_USER_SHOP("-1124", "该用户没有关联的店铺"),
+    ERROR_EXCLUSIVE_GUIDE("-1126","设置专属导购出错"),
+    ERROR_CANCEL_EXCLUSIVE_GUIDE("-1127","取消专属导购出错"),
+    ERROR_EXCLUSIVE_GUIDE_LIST("-1128","专属导购列表当前页无数据"),
     /** 密码修改 */
     ERROR_ORIGINAL_PASSOWRD("-1212", "原密码不正确"),
     ERROR_NEW_INVALID("-1213", "新密码无效"),
@@ -127,9 +131,10 @@ public enum CodeEnum {
     ERROR_APEAL_MAXOVER("-4001","维权次数已达上限"),
     /** 子订单评价错误提示*/
     ERROR_EVALUATE_EXIST("-5001","已评价"),
-    /** 现金券过期*/
+    /** 现金券优惠券错误提示*/
     ERROR_COUPON_OUTDATE("-6001","此现金券不可用"),
     ERROR_COUPON_REPEAT("-6002","一张现金券只能使用一次"),
+    ERROR_COUPON_PUBLISH_OVER("-6003","每日限量发行数填写错误"),
 
     ERROR_ACCOUNT_INSUFFICIENT_BALANCE("-7001","账户余额不足"),
     ERROR_ACCOUNT_NO_PERMISSION("-7002","账户被冻结或未授权"),
@@ -141,9 +146,20 @@ public enum CodeEnum {
     ERROR_DEBIT_NOTE("-9000","佣金小票上传失败，请重新上传"),
     ERROR_DEBIT_NOTE_STAUTS("-9001","佣金小票审核中，无法再次上传"),
     ERROR_NO_VALIDHISTORY("-9002","没有券码核销记录"),
-
-    ERROR_LOGIN_IN_INVALID("-2000","登录出错")
-    ;
+    ERROR_SWEEP_CODE("-9003","扫码验券失败"),
+    ERROR_VALID_CODE("-9004","验码失败"),
+    SUCCESS_VALID_CODE("-9005","优惠券码验证成功"),
+    
+    ERROR_LOGIN_IN_INVALID("-2000","登录出错"),
+    ERROR_UN_LOGIN("-10000", "尚未登陆或登陆出错，请重新登录"),
+    ERROR_TAG_NUM_OUT("-10001", "标签数目超过最大数目"),
+    
+    ERROR_CODE("-20001","券码有误"),
+    ERROR_CODE_USED("-20002","券码已使用"),
+    ERROR_CODE_OUTDATE("-20003","券码已过期或已失效"),
+    ERROR_CODE_REFUND("-20004","券码状态异常"),
+    ERROR_CODE_NOHEAR("-20005","本店暂未发行该类优惠券");
+    
     
     private String code; 
     private String message; 

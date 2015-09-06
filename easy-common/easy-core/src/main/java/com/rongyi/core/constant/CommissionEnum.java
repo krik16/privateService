@@ -12,7 +12,8 @@ public enum CommissionEnum {
 
 	COMMISSION_ISSUE(0, "佣金发放"),
 	COMMISSION_AWARD(1, "奖励佣金"),
-	COMMISSION_CHECK_FAIlURE(2, "佣金审核失败");
+	COMMISSION_CHECK_FAIlURE(2, "佣金审核失败"),
+	COMMISSION_VALID(3, "验码佣金");
 
 	private Integer code;
 

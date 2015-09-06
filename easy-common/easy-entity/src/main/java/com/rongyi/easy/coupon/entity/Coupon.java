@@ -1,10 +1,9 @@
 package com.rongyi.easy.coupon.entity;
 
-import org.apache.commons.lang.time.DateUtils;
-import org.mongodb.morphia.annotations.*;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,7 +11,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 卡券基类
+ * 卡券信息
+ * 类型：代金券、红包、抵扣券
  *
  * @author Breggor
  */
@@ -34,6 +34,12 @@ public class Coupon implements Serializable {
 
     @Property("limit_count")
     private Integer limitCount;// 每人限购数量
+
+    @Property("limit_publish_count")
+    private Integer limitPublishCount;// 每日限量发行张数
+
+    @Property("limit_use_count")
+    private Integer limitUseCount;// 每人每日限用张数
 
     @Property("receive_count")
     private Integer receiveCount = Integer.valueOf(0);// 已领取数
@@ -134,6 +140,11 @@ public class Coupon implements Serializable {
     @Property("sort_index")
     private Integer sortIndex = Integer.valueOf(0);//优惠券排序字段，目前作用是置顶
 
+    @Property("purchase_type")
+    private Integer purchaseType = Integer.valueOf(0);//购买类型 0正常购买类型 1抢购类型
+
+    private List<Integer> afterSaleService; // = CouponConst.AFTER_SALE_SERVICE;//[1,1,1,1] 1为支持，0为不支持。第一位：随时退、第二位：过期退 第三位： 免预约、第四位：不可退
+
     @Version
     private Long version; // 乐观锁
 
@@ -161,6 +172,14 @@ public class Coupon implements Serializable {
         this.couponType = couponType;
     }
 
+    public Integer getPurchaseType() {
+        return purchaseType;
+    }
+
+    public void setPurchaseType(Integer purchaseType) {
+        this.purchaseType = purchaseType;
+    }
+
     public Integer getTotalCount() {
         return (totalCount == null) ? Integer.valueOf(0) : totalCount;
     }
@@ -170,11 +189,27 @@ public class Coupon implements Serializable {
     }
 
     public Integer getLimitCount() {
-        return limitCount;
+        return (limitCount == null) ? Integer.valueOf(0) : limitCount;
     }
 
     public void setLimitCount(Integer limitCount) {
         this.limitCount = limitCount;
+    }
+
+    public Integer getLimitPublishCount() {
+        return (limitPublishCount == null) ? Integer.valueOf(0) : limitPublishCount;
+    }
+
+    public void setLimitPublishCount(Integer limitPublishCount) {
+        this.limitPublishCount = limitPublishCount;
+    }
+
+    public Integer getLimitUseCount() {
+        return (limitUseCount == null) ? Integer.valueOf(0) : limitPublishCount;
+    }
+
+    public void setLimitUseCount(Integer limitUseCount) {
+        this.limitUseCount = limitUseCount;
     }
 
     public Integer getReceiveCount() {
@@ -342,11 +377,11 @@ public class Coupon implements Serializable {
     }
 
     public void setPublishBeginDate(Date publishBeginDate) {
-        if (publishBeginDate != null) {
-            publishBeginDate = DateUtils.setHours(publishBeginDate, 0);
-            publishBeginDate = DateUtils.setMinutes(publishBeginDate, 0);
-            publishBeginDate = DateUtils.setSeconds(publishBeginDate, 0);
-        }
+//        if (publishBeginDate != null) {
+//            publishBeginDate = DateUtils.setHours(publishBeginDate, 0);
+//            publishBeginDate = DateUtils.setMinutes(publishBeginDate, 0);
+//            publishBeginDate = DateUtils.setSeconds(publishBeginDate, 0);
+//        }
         this.publishBeginDate = publishBeginDate;
     }
 
@@ -355,11 +390,11 @@ public class Coupon implements Serializable {
     }
 
     public void setPublishEndDate(Date publishEndDate) {
-        if (publishEndDate != null) {
-            publishEndDate = DateUtils.setHours(publishEndDate, 23);
-            publishEndDate = DateUtils.setMinutes(publishEndDate, 59);
-            publishEndDate = DateUtils.setSeconds(publishEndDate, 59);
-        }
+//        if (publishEndDate != null) {
+//            publishEndDate = DateUtils.setHours(publishEndDate, 23);
+//            publishEndDate = DateUtils.setMinutes(publishEndDate, 59);
+//            publishEndDate = DateUtils.setSeconds(publishEndDate, 59);
+//        }
         this.publishEndDate = publishEndDate;
     }
 
@@ -368,11 +403,11 @@ public class Coupon implements Serializable {
     }
 
     public void setValidBeginDate(Date validBeginDate) {
-        if (validBeginDate != null) {
-            validBeginDate = DateUtils.setHours(validBeginDate, 0);
-            validBeginDate = DateUtils.setMinutes(validBeginDate, 0);
-            validBeginDate = DateUtils.setSeconds(validBeginDate, 0);
-        }
+//        if (validBeginDate != null) {
+//            validBeginDate = DateUtils.setHours(validBeginDate, 0);
+//            validBeginDate = DateUtils.setMinutes(validBeginDate, 0);
+//            validBeginDate = DateUtils.setSeconds(validBeginDate, 0);
+//        }
         this.validBeginDate = validBeginDate;
     }
 
@@ -381,11 +416,11 @@ public class Coupon implements Serializable {
     }
 
     public void setValidEndDate(Date validEndDate) {
-        if (validEndDate != null) {
-            validEndDate = DateUtils.setHours(validEndDate, 23);
-            validEndDate = DateUtils.setMinutes(validEndDate, 59);
-            validEndDate = DateUtils.setSeconds(validEndDate, 59);
-        }
+//        if (validEndDate != null) {
+//            validEndDate = DateUtils.setHours(validEndDate, 23);
+//            validEndDate = DateUtils.setMinutes(validEndDate, 59);
+//            validEndDate = DateUtils.setSeconds(validEndDate, 59);
+//        }
         this.validEndDate = validEndDate;
     }
 
@@ -497,6 +532,14 @@ public class Coupon implements Serializable {
         if (this.detailPicUrls != null && !this.detailPicUrls.isEmpty())
             pic = this.detailPicUrls.get(0);
         return pic;
+    }
+
+    public List<Integer> getAfterSaleService() {
+        return afterSaleService;
+    }
+
+    public void setAfterSaleService(List<Integer> afterSaleService) {
+        this.afterSaleService = afterSaleService;
     }
 
     public static class CouponProduct implements Serializable {
@@ -708,47 +751,47 @@ public class Coupon implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", id)
-                .append("title", title)
-                .append("couponType", couponType)
-                .append("totalCount", totalCount)
-                .append("limitCount", limitCount)
-                .append("receiveCount", receiveCount)
-                .append("discount", discount)
-                .append("recommend", recommend)
-                .append("validateType", validateType)
-                .append("originalPrice", originalPrice)
-                .append("currentPrice", currentPrice)
-                .append("type", type)
-                .append("checkDescription", checkDescription)
-                .append("listPicUrl", listPicUrl)
-                .append("detailPicUrls", detailPicUrls)
-                .append("sourceTarget", sourceTarget)
-                .append("synTarget", synTarget)
-                .append("synStatus", synStatus)
-                .append("operateType", operateType)
-                .append("malls", malls)
-                .append("shops", shops)
-                .append("status", status)
-                .append("checkStatus", checkStatus)
-                .append("activityStatus", activityStatus)
-                .append("delStatus", delStatus)
-                .append("publishBeginDate", publishBeginDate)
-                .append("publishEndDate", publishEndDate)
-                .append("validBeginDate", validBeginDate)
-                .append("validEndDate", validEndDate)
-                .append("createUser", createUser)
-                .append("createDate", createDate)
-                .append("updateUser", updateUser)
-                .append("updateDate", updateDate)
-                .append("useRestriction", useRestriction)
-                .append("useDescription", useDescription)
-                .append("sourceMallId", sourceMallId)
-                .append("products", products)
-                .append("visitedCount", visitedCount)
-                .append("sortIndex", sortIndex)
-                .append("version", version)
-                .toString();
+        StringBuilder builder = new StringBuilder();
+        builder.append("Coupon [id=").append(id).append(", title=")
+                .append(title).append(", couponType=").append(couponType)
+                .append(", totalCount=").append(totalCount)
+                .append(", limitCount=").append(limitCount)
+                .append(", limitPublishCount=").append(limitPublishCount)
+                .append(", limitUseCount=").append(limitUseCount)
+                .append(", receiveCount=").append(receiveCount)
+                .append(", discount=").append(discount).append(", recommend=")
+                .append(recommend).append(", validateType=")
+                .append(validateType).append(", originalPrice=")
+                .append(originalPrice).append(", currentPrice=")
+                .append(currentPrice).append(", type=").append(type)
+                .append(", checkDescription=").append(checkDescription)
+                .append(", listPicUrl=").append(listPicUrl)
+                .append(", detailPicUrls=").append(detailPicUrls)
+                .append(", sourceTarget=").append(sourceTarget)
+                .append(", synTarget=").append(synTarget)
+                .append(", synStatus=").append(synStatus)
+                .append(", operateType=").append(operateType)
+                .append(", malls=").append(malls).append(", shops=")
+                .append(shops).append(", status=").append(status)
+                .append(", checkStatus=").append(checkStatus)
+                .append(", activityStatus=").append(activityStatus)
+                .append(", delStatus=").append(delStatus)
+                .append(", publishBeginDate=").append(publishBeginDate)
+                .append(", publishEndDate=").append(publishEndDate)
+                .append(", validBeginDate=").append(validBeginDate)
+                .append(", validEndDate=").append(validEndDate)
+                .append(", createUser=").append(createUser)
+                .append(", createDate=").append(createDate)
+                .append(", updateUser=").append(updateUser)
+                .append(", updateDate=").append(updateDate)
+                .append(", useRestriction=").append(useRestriction)
+                .append(", useDescription=").append(useDescription)
+                .append(", sourceMallId=").append(sourceMallId)
+                .append(", products=").append(products)
+                .append(", visitedCount=").append(visitedCount)
+                .append(", sortIndex=").append(sortIndex).append(", version=")
+                .append(version).append("]");
+        return builder.toString();
     }
+
 }

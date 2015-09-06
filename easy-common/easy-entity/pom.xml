@@ -7,7 +7,6 @@
 	</parent>
 	<artifactId>easy-entity</artifactId>
 	<packaging>jar</packaging>
-
 	<properties>
 		<tomcat7-maven-plugin-version>2.1</tomcat7-maven-plugin-version>
 		<!--这个是generatorConfig.xml的路径信息 -->
@@ -79,7 +78,6 @@
 
 	</dependencies>
 	<build>
-		<finalName>easy-entity</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.mybatis.generator</groupId>

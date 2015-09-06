@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Repository;
-
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
@@ -28,7 +27,7 @@ public class FlopgoActivity implements Serializable {
 	private String name;// 翻牌购名称
 	
 	@Property("status")
-	private Integer state;// 翻牌购状态 0代表关闭，1代表发布 默认关闭
+	private Integer state;// 翻牌购状态 0代表关闭，1代表发布  3草稿  4结束  默认草稿（2作为全部查询的状态） 
 	
 	
 	@Property("totol_count")
@@ -49,6 +48,10 @@ public class FlopgoActivity implements Serializable {
 	@Property("update_by")
 	private String updateUser;// 修改翻牌购的人
 	private Integer type;// 表示这个翻牌购是为新增还是修改类型，0表示新增（默认），1表示修改 2,表示删除
+	
+	@Property("source_target")
+	private String sourceTarget;//信息同步终端  0：容易逛    （默认）  1：互动屏   2：微信
+	
 	@Embedded("prizes")
 	private List<Prize> prizeList = new ArrayList<Prize>();
 
@@ -197,6 +200,14 @@ public class FlopgoActivity implements Serializable {
 
 	public void setIsUsed(Integer isUsed) {
 		this.isUsed = isUsed;
+	}
+
+	public String getSourceTarget() {
+		return sourceTarget;
+	}
+
+	public void setSourceTarget(String sourceTarget) {
+		this.sourceTarget = sourceTarget;
 	}
 
 }

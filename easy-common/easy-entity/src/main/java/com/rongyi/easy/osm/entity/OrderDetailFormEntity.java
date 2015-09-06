@@ -62,6 +62,17 @@ public class OrderDetailFormEntity implements Serializable{
     
     /** 返佣金额 */
     private BigDecimal commodityCommission;
+    
+    /** 退款时使用，指退款商品在支付阶段享受到的优惠，例如购买3件商品使用100积分，退款2件，则2件商品对应积分为(2/3)*100四舍五入(存json格式数据)   */
+    private String refundDiscountInfo;
+
+    public String getRefundDiscountInfo() {
+		return refundDiscountInfo;
+	}
+
+	public void setRefundDiscountInfo(String refundDiscountInfo) {
+		this.refundDiscountInfo = refundDiscountInfo;
+	}
 
     /**
      * 主键id

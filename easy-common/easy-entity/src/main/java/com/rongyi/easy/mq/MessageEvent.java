@@ -2,8 +2,10 @@ package com.rongyi.easy.mq;
 
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.JsonUtil;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**	
@@ -12,8 +14,12 @@ import java.util.Map;
  * @datetime:2015年5月11日下午6:59:13
  *
  **/
-public class MessageEvent {
+public class MessageEvent implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5884985566319453772L;
 	private String type;
 	private String source;
 	private Object body;

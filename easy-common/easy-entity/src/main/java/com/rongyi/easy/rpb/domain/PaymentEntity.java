@@ -1,9 +1,15 @@
 package com.rongyi.easy.rpb.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class PaymentEntity {
+public class PaymentEntity implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2516018941608003955L;
 
 	public PaymentEntity() {
 		
@@ -94,6 +100,11 @@ public class PaymentEntity {
 	 * 提现账号姓名
 	 */
 	private String payName;
+	
+	/**
+	 * 批量退款单号
+	 */
+	private String batchNo;
 
 	/**
 	 * 主键id
@@ -355,4 +366,14 @@ public class PaymentEntity {
 	public void setOrderType(Integer orderType) {
 		this.orderType = orderType;
 	}
+
+	public String getBatchNo() {
+		return batchNo;
+	}
+
+	public void setBatchNo(String batchNo) {
+		this.batchNo = batchNo;
+	}
+	
+	
 }

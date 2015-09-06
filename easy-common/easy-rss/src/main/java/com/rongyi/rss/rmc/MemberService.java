@@ -2,9 +2,11 @@ package com.rongyi.rss.rmc;
 
 import java.util.Map;
 
-import com.rongyi.core.bean.ResponseResult;
+import com.rongyi.core.framework.exception.RYServiceException;
+import com.rongyi.easy.domain.member.MallMember;
 import com.rongyi.easy.domain.member.UserLog;
-import com.rongyi.easy.roa.param.MemberInfoParam;
+import com.rongyi.easy.revc.param.ElectronicMemberParam;
+import com.rongyi.easy.rmc.param.MemberInfoParam;
 
 /**
  * ClassName: ISignInService <br/>
@@ -27,7 +29,7 @@ public interface MemberService {
    * @return
    * @since JDK 1.6
    */
-  ResponseResult signIn(MemberInfoParam memberInfoParam, String methodName);
+  Integer signIn(MemberInfoParam memberInfoParam) throws RYServiceException;
 
   void insertUserLog(UserLog userLog);
 
@@ -41,5 +43,30 @@ public interface MemberService {
    * @since JDK 1.6
    */
   int countUserSignIn(Map map);
+
+  /**
+   * 
+   * pullMember:会员查询. <br/>
+   * 
+   * @author bin.zhang
+   * @param memberInfoParam
+   * @param methodName
+   * @return
+   * @since JDK 1.6
+   */
+
+  MallMember pullMember(MemberInfoParam memberInfoParam) throws RYServiceException;
+
+  /**
+   * 
+   * register:注册. <br/>
+   * 
+   * @author bin.zhang
+   * @param electronicMemberParam
+   * @throws RYServiceException
+   * @since JDK 1.6
+   */
+  void register(ElectronicMemberParam electronicMemberParam) throws RYServiceException;
+
 
 }

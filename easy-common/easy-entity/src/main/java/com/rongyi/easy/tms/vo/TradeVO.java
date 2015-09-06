@@ -95,23 +95,31 @@ public class TradeVO implements Serializable {
 	private String mallName;
 
 	/**
-	 * 买家ID
-	 */
-	private String buyerId;
-
-	/**
 	 * 买家ID集合(查询使用)
 	 */
 	private String[] buyerIds;
 	/**
-	 * 买家账号
+	 * 买家ID（商品）
+	 */
+	private String buyerId;
+	/**
+	 * 买家账号(商品)
 	 */
 	private String buyerAccount;
 
 	/**
-	 * 买家姓名
+	 * 买家姓名（商品）
 	 */
 	private String buyerName;
+
+	/**
+	 * 买家ID(优惠券)
+	 */
+	private String couponBuyerId;
+	/**
+	 * 买家账号(优惠券)
+	 */
+	private String couponBuyerAccount;
 
 	/**
 	 * 卖家账号
@@ -137,6 +145,47 @@ public class TradeVO implements Serializable {
 	 * 卖家支付账号姓名
 	 */
 	private String sellerPayName;
+
+	/**
+	 * 优惠信息（积分，抵扣券信息，json格式）
+	 */
+	// private String integralDiscount;
+
+	/**
+	 * 商品订单优惠信息（积分，红包使用记录，json格式）
+	 */
+	private String orderDiscountInfo;
+
+	/**
+	 * 商品使用红包 券码
+	 */
+	private String orderCouponCode;
+
+	/**
+	 * 优惠券订单优惠信息（积分，红包使用记录，json格式）
+	 */
+	private String couponDiscuntInfo;
+
+	/**
+	 * 优惠券使用红包 券码
+	 */
+	private String couponCashCouponCode;
+
+	/**
+	 * 使用积分数
+	 */
+	private Integer integral;
+
+	/**
+	 * 使用优惠券金额
+	 */
+	// private Double couponDiscount;
+
+	/**
+	 * 优惠券金额整数
+	 */
+	private int couponDiscountInt;
+
 	/*----查询字段----*/
 	/**
 	 * 交易开始时间
@@ -167,6 +216,11 @@ public class TradeVO implements Serializable {
 	 * 订单用户Id
 	 */
 	private String orderUserId;
+
+	/**
+	 * 优惠方式
+	 */
+	private Integer favorType;
 
 	public Integer getId() {
 		return id;
@@ -430,5 +484,77 @@ public class TradeVO implements Serializable {
 
 	public void setOrderType(Integer orderType) {
 		this.orderType = orderType;
+	}
+
+	public Integer getIntegral() {
+		return integral;
+	}
+
+	public void setIntegral(Integer integral) {
+		this.integral = integral;
+	}
+
+	public String getOrderDiscountInfo() {
+		return orderDiscountInfo;
+	}
+
+	public void setOrderDiscountInfo(String orderDiscountInfo) {
+		this.orderDiscountInfo = orderDiscountInfo;
+	}
+
+	public String getOrderCouponCode() {
+		return orderCouponCode;
+	}
+
+	public void setOrderCouponCode(String orderCouponCode) {
+		this.orderCouponCode = orderCouponCode;
+	}
+
+	public String getCouponCashCouponCode() {
+		return couponCashCouponCode;
+	}
+
+	public void setCouponCashCouponCode(String couponCashCouponCode) {
+		this.couponCashCouponCode = couponCashCouponCode;
+	}
+
+	public String getCouponDiscuntInfo() {
+		return couponDiscuntInfo;
+	}
+
+	public void setCouponDiscuntInfo(String couponDiscuntInfo) {
+		this.couponDiscuntInfo = couponDiscuntInfo;
+	}
+
+	public Integer getFavorType() {
+		return favorType;
+	}
+
+	public void setFavorType(Integer favorType) {
+		this.favorType = favorType;
+	}
+
+	public int getCouponDiscountInt() {
+		return couponDiscountInt;
+	}
+
+	public void setCouponDiscountInt(int couponDiscountInt) {
+		this.couponDiscountInt = couponDiscountInt;
+	}
+
+	public String getCouponBuyerId() {
+		return couponBuyerId;
+	}
+
+	public void setCouponBuyerId(String couponBuyerId) {
+		this.couponBuyerId = couponBuyerId;
+	}
+
+	public String getCouponBuyerAccount() {
+		return couponBuyerAccount;
+	}
+
+	public void setCouponBuyerAccount(String couponBuyerAccount) {
+		this.couponBuyerAccount = couponBuyerAccount;
 	}
 }

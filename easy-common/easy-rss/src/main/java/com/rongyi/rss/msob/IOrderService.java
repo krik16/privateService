@@ -3,6 +3,7 @@ package com.rongyi.rss.msob;
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
+import com.rongyi.easy.rmmm.param.MaxIntegralParam;
 import com.rongyi.easy.rmmm.param.MyOrderParam;
 import com.rongyi.easy.rmmm.param.OrderDealedParam;
 import com.rongyi.easy.rmmm.param.RequestPaymentParam;
@@ -104,7 +105,7 @@ public interface IOrderService {
 	 * @return
 	 * @throws Exception
 	 */
-	public TransactionDetailVO getTransactionDetail(TransactionDetailParam param) throws Exception;
+	public TransactionDetailVO getTransactionDetail(TransactionDetailParam param,String mallUserMid) throws Exception;
 	
 	/**
 	 * 根据不同的事件，发送不同的数据
@@ -168,6 +169,15 @@ public interface IOrderService {
 	 * @throws Exception
 	 */
 	public ResponseResult commitOrder(SubmitOrderParam submitOrderParam, String buyerNum) throws Exception;
+	
+	/**
+	 * 获取商品生成订单最大使用积分
+	 * 
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public  Integer getMaxIntegral(MaxIntegralParam param, double limit, double moenyExchangeScore) throws Exception;
 	
 
 }

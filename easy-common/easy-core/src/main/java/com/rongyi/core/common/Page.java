@@ -1,15 +1,37 @@
 package com.rongyi.core.common;
 
-public class Page {
+import java.io.Serializable;
+
+/**
+ * 
+ * ClassName: Page <br/>
+ * Function: TODO ADD FUNCTION. <br/>
+ * Reason: 页面信息. <br/>
+ * date: 2015年7月20日 上午11:07:40 <br/>
+ * 
+ * @author bin.zhang
+ * @version
+ * @since JDK 1.6
+ */
+public class Page implements Serializable {
+  private static final long serialVersionUID = -7006923880930437506L;
   protected int pageNo = 1;// 第几页
   protected int pageSize = 20;// 默认是10
   protected int totalCount = -1;// 总条数
+  private int totalPage = 0;// 总页数
 
   public Page() {}
 
   public Page(int pageSize) {
     this.pageSize = pageSize;
   }
+
+
+  public int getTotalPage() {
+    int totalPage = (totalCount / pageSize) + 1;
+    return totalPage;
+  }
+
 
   public Page(int pageNo, int pageSize) {
     if (pageNo > 0) {
@@ -108,6 +130,7 @@ public class Page {
   public String toString() {
     return "Page [pageNo=" + pageNo + ", pageSize=" + pageSize + ", totalCount=" + totalCount + "]";
   }
+
 
 
 }
