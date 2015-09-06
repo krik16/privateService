@@ -1,8 +1,6 @@
 package com.rongyi.easy.coupon.old_vo;
 
 
-import com.rongyi.core.constant.CouponConst;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -38,7 +36,7 @@ public class OldCouponVO implements Serializable {
 
     private Integer limitPublishCount;// 每日限量发行张数
     private Integer limitUseCount;// 每人每日限用张数
-    private List<Integer> afterSaleService = CouponConst.AFTER_SALE_SERVICE; //[1,1,1] 1为支持，0为不支持。第一位：随时退、第二位：过期退 第三位： 免预约
+    private List<Integer> afterSaleService;//= CouponConst.AFTER_SALE_SERVICE; //[1,1,1] 1为支持，0为不支持。第一位：随时退、第二位：过期退 第三位： 免预约
 
     public String getDescription() {
         return description;

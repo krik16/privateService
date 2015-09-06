@@ -24,7 +24,11 @@ public enum ChannelType implements IEnum {
   /**
    * 微信
    */
-  WECHAT(2);
+  WECHAT(2),
+  /**
+   * 身份证
+   */
+  IDENTIFY(3);
 
   @Override
   public int getValue() {
@@ -39,6 +43,8 @@ public enum ChannelType implements IEnum {
         return MEMBER_NO;
       case 2:
         return WECHAT;
+      case 3:
+        return IDENTIFY;
       default:
         return null;
 

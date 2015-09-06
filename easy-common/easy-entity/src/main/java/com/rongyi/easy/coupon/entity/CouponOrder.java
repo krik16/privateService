@@ -105,6 +105,10 @@ public class CouponOrder implements Serializable {
      * 优惠详情，json格式，例如{“score”:”100”, "scoreDeduction":"1"}
      */
     private String discountInfo;
+    
+    private Date nextStatusTime;
+    
+    private Integer statusHold;
 
     public CouponOrder() {
 
@@ -358,6 +362,8 @@ public class CouponOrder implements Serializable {
                 .append("payAmount", payAmount)
                 .append("discountAmount", discountAmount)
                 .append("discountInfo", discountInfo)
+                .append("nextStatusTime", nextStatusTime)
+                .append("statusHold", statusHold)
                 .toString();
     }
 
@@ -369,5 +375,22 @@ public class CouponOrder implements Serializable {
 		this.itemList = itemList;
 	}
 
+	public Date getNextStatusTime() {
+		return nextStatusTime;
+	}
+
+	public void setNextStatusTime(Date nextStatusTime) {
+		this.nextStatusTime = nextStatusTime;
+	}
+
+	public Integer getStatusHold() {
+		return statusHold;
+	}
+
+	public void setStatusHold(Integer statusHold) {
+		this.statusHold = statusHold;
+	}
+
+	
 
 }

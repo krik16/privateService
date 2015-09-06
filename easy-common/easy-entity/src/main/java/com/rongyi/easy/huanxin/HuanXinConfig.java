@@ -36,10 +36,27 @@ public class HuanXinConfig {
         public static final  String CLIENT_ID = "YXA6pRWlIB40EeWKURM9hvIx6w";
 
         /** app的client_secret*/
-        public static final  String CLIENT_SECRET = "YXA6vluMZMRELS8dbtQQaPu8utAWj5g";
+        public static final  String CLIENT_SECRET = "YXA6vluMZMRELS8dbtQQaPu8utAWj5g";       
 
         /** 请求注册URL*/
         public static final String HUANXIN_REQUEST_URL = "https://a1.easemob.com/" + ORG_NAME + "/" + APP_NAME ;
+        
+        /**
+         * 验码成功发送弹窗账号
+         */
+        /** 同一”企业”下”app”唯一标识,开发者在环信开发者管理后台创建应用时填写的”应用名称” */
+        public static final  String APP_NAME1 = "evaluationmsg";
+
+        /** app的client_id*/
+        public static final  String CLIENT_ID1 = "YXA64_rY4EbpEeWRKEOxc0jZWQ";
+
+        /** app的client_secret*/
+        public static final  String CLIENT_SECRET1 = "YXA6I-nL_PCXOy8sF2yoCN2AvsuAdE0";
+        
+        /** 请求注册URL*/
+        public static final String HUANXIN_REQUEST_URL1 = "https://a1.easemob.com/" + ORG_NAME+ "/" + APP_NAME1 ;
+        
+        
 
         /** 请求注册URL 后缀*/
         public static final String REGISTE_URL_SUFFIX = "/users";

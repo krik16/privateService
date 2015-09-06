@@ -11,6 +11,8 @@ package com.rongyi.rss.rpb;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.mq.MessageEvent;
+import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.PayAccountUseTotal;
 import com.rongyi.easy.rpb.vo.QueryOrderParamVO;
@@ -34,7 +36,7 @@ public interface IRpbService {
     
     /**	
      * @Description: 根据交易流水号查询对应的付款记录
-     * @param id
+     * @param tradeNo
      * @return	
      * @Author:  柯军
      * @datetime:2015年6月11日下午3:48:36
@@ -57,7 +59,7 @@ public interface IRpbService {
 	 * @Author:  柯军
 	 * @datetime:2015年7月30日上午9:48:46
 	 **/
-	public boolean paySuccessNotify(String orderNo,Double totalAmount);
+	public Map<String,Object> paySuccessNotify(String orderNo,Double totalAmount);
 	
 	
 	/**	
@@ -70,9 +72,9 @@ public interface IRpbService {
 	
 	/**	
 	 * @Description: 查询订单在第三方系统中状态 
-	 * @param tradeNo交易流水号
-	 * @param payNo付款单号
-	 * @param payChannel付款方式(0:支付宝，1:微信)
+	 * @param tradeNo//交易流水号
+	 * @param payNo//付款单号
+	 * @param payChannel//付款方式(0:支付宝，1:微信)
 	 * @return	
 	 * @Author:  柯军
 	 * @datetime:2015年8月11日下午4:50:55
@@ -81,10 +83,32 @@ public interface IRpbService {
 	
 	/**	 
 	 * @Description: 查询支付账号购买次数 
-	 * @param map给定count参数查询大于该count的所有账号
+	 * @param map//给定count参数查询大于该count的所有账号
 	 * @return	
 	 * @Author:  柯军
 	 * @datetime:2015年8月12日上午11:46:46
 	 **/
 	public List<PayAccountUseTotal> selectPayAccountUseTotal(Map<String, Object> map);
+	
+
+	/**
+	 * @Description: 获取支付签名 
+	 * @param event
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年8月24日下午5:46:02
+	 **/
+	public Map<String, Object> getPaySign(MessageEvent event);
+	
+	/**	
+	 * @Description: TODO 
+	 * @param orderNum
+	 * @param tradeType
+	 * @param status
+	 * @param payChannel
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年8月26日上午9:55:55
+	 **/
+	public abstract PaymentEntity selectByOrderNumAndTradeType(String orderNum, Integer tradeType, Integer status,Integer payChannel);
 }

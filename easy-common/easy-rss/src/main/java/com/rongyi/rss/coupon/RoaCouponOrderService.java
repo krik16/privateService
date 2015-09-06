@@ -151,7 +151,7 @@ public interface RoaCouponOrderService {
      * @param payAccount 支付账户(例如支付宝账户)
      * @return
      */
-    boolean processCouponOrderForPayed(String orderNo, int tradeWay, String paymentNo, String payAccount);
+    Map<String,Object> processCouponOrderForPayed(String orderNo, int tradeWay, String paymentNo, String payAccount);
 
     /**
      * 优惠券立即购买
@@ -211,4 +211,10 @@ public interface RoaCouponOrderService {
      * @return
      */
     Map<String, Object> calcRefundAmount(String orderNo, Integer number, String userId);
+    
+    /**
+    *
+    * @return
+    */
+   void closeUnpayOrder();
 }

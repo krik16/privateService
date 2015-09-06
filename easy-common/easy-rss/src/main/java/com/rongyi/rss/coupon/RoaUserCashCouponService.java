@@ -81,4 +81,21 @@ public interface RoaUserCashCouponService {
      */
     public Double getCashCouponPrice(String couponCode);
 
+
+    /**
+     * 使用红包
+     *
+     * @param code
+     * @return
+     */
+    boolean useCashCoupon(String code);
+
+    /**
+     * 恢复红包
+     *
+     * @param code
+     * @return
+     */
+    boolean recoverCashCoupon(String code);
+
 }

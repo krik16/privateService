@@ -2,6 +2,8 @@ package com.rongyi.easy.rvc.entity;
 
 import java.util.Date;
 
+import com.rongyi.easy.domain.member.MemberType;
+
 public class IntegralHistory implements java.io.Serializable {
   /**
 	 * 
@@ -11,7 +13,7 @@ public class IntegralHistory implements java.io.Serializable {
   private Long id;
 
   /** 会员表member:ID */
-  private Long memberId;
+  private String memberId;
 
   /** 积分数量：>0加，<0减 */
   private Integer integralNum;
@@ -45,15 +47,17 @@ public class IntegralHistory implements java.io.Serializable {
 
   /** 服务商+商场ID */
   private String owner;
+  /**
+   * 会员类型：0，电子会员,1商场会员
+   */
+  private MemberType type;
 
-  /** 增减积分接口和返回积分记录加上type:-1减积分，1加积分 */
-  private Integer type;
   /**
    * 会员名
    */
   private String memberName;
   /**
-   * 礼品名称
+   * 礼品名
    */
   private String giftName;
 
@@ -95,7 +99,7 @@ public class IntegralHistory implements java.io.Serializable {
    * 
    * @return memberId
    */
-  public Long getMemberId() {
+  public String getMemberId() {
     return memberId;
   }
 
@@ -104,7 +108,7 @@ public class IntegralHistory implements java.io.Serializable {
    * 
    * @param memberId
    */
-  public void setMemberId(Long memberId) {
+  public void setMemberId(String memberId) {
     this.memberId = memberId;
   }
 
@@ -306,20 +310,13 @@ public class IntegralHistory implements java.io.Serializable {
     this.owner = owner;
   }
 
-  public Integer getType() {
+  public MemberType getType() {
     return type;
   }
 
-  public void setType(Integer type) {
+  public void setType(MemberType type) {
     this.type = type;
   }
 
-  @Override
-  public String toString() {
-    return "IntegralHistory [id=" + id + ", memberId=" + memberId + ", integralNum=" + integralNum
-        + ", giftNo=" + giftNo + ", giftCode=" + giftCode + ", giftNum=" + giftNum + ", memo="
-        + memo + ", status=" + status + ", insDt=" + insDt + ", updDt=" + updDt + ", channel="
-        + channel + ", mallId=" + mallId + ", owner=" + owner + ", type=" + type + "]";
-  }
 
 }

@@ -12,6 +12,7 @@ import com.rongyi.core.common.Page;
 import com.rongyi.core.common.PageList;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.framework.exception.RYServiceException;
+import com.rongyi.easy.domain.member.MemberType;
 import com.rongyi.easy.rvc.entity.IntegralHistory;
 import com.rongyi.easy.rvc.param.IntegralGiftParam;
 
@@ -52,8 +53,8 @@ public interface IntegralHistoryService {
    * @return
    * @since JDK 1.6
    */
-  public PagingVO<IntegralHistory> pagingMemberGift(String owner, String mallId, Long memberId,
-      Integer pageSize, Integer currentPage) throws Exception;
+  public PagingVO<IntegralHistory> pagingMemberGift(String owner, String mallId, String memberId,
+      Integer pageSize, Integer currentPage, MemberType memberType) throws Exception;
 
   /**
    * 
@@ -67,8 +68,8 @@ public interface IntegralHistoryService {
    * @return
    * @since JDK 1.6
    */
-  public List<IntegralHistory> queryIntegralHistoryBYCondition(Long memberId, String owner,
-      String mallId, String giftId);
+  public List<IntegralHistory> queryIntegralHistoryBYCondition(String memberId, String owner,
+      String mallId, String giftId, MemberType memberType);
 
   /**
    * 
@@ -80,7 +81,7 @@ public interface IntegralHistoryService {
    * @return
    * @since JDK 1.6
    */
-  public int countToday(Long memberId, String mallId);
+  public int countToday(String memberId, String mallId, MemberType memberType);
 
   /**
    * 
@@ -94,7 +95,7 @@ public interface IntegralHistoryService {
    * @throws Exception
    * @since JDK 1.6
    */
-  public PageList<IntegralGiftParam> getMemberGift(String mallId, Long memberId, Page page)
-      throws RYServiceException;
+  public PageList<IntegralGiftParam> getMemberGift(String mallId, String memberId, Page page,
+      MemberType memberType) throws RYServiceException;
 
 }

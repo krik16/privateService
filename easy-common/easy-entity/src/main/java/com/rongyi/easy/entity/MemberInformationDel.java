@@ -13,7 +13,7 @@ import java.util.Date;
  * @author baodk
  */
 @Entity(value = "rmc_member_info", noClassnameStored = true)
-public class MemberInformation implements Serializable {
+public class MemberInformationDel implements Serializable {
 
   /**
 	 * 

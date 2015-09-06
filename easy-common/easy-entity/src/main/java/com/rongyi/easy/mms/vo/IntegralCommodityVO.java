@@ -14,24 +14,25 @@ public class IntegralCommodityVO extends IntegralCommodity {
    */
   private Integer validStatus;
 
-  /**
-   * 大悦城礼品Code
-   */
-  private String joyCode;
-  public String getJoyCode() {
-	return joyCode;
-  }
-
-  public void setJoyCode(String joyCode) {
-	this.joyCode = joyCode;
-  }
+ 
 
 /**
    * 审核未通过理由
    */
   private String memo;
-
   /**
+   * 沈阳大悦城ID
+   */
+  private String joyCode;
+  public String getJoyCode() {
+	return joyCode;
+  }
+	
+  public void setJoyCode(String joyCode) {
+	this.joyCode = joyCode;
+  }
+
+/**
    * 用户等级积分列表
    */
   private List<UserGradeGiftVO> userGradeGiftVOList;

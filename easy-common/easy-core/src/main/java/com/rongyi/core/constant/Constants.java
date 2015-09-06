@@ -5,6 +5,12 @@ import com.rongyi.core.framework.spring.context.utils.SpringContextUtil;
 
 public interface Constants {
 
+
+    interface OrderPaytime {
+        Integer PAY_SECOND = 900; //订单支付最大时间（秒数）
+    }
+
+
     /**
      * 登录用户的session key
      */
@@ -593,5 +599,37 @@ public interface Constants {
     	 * 摩店
     	 */
     	Integer MALLSHOP = 2;
+    }
+    interface ValidCodeSuggest{
+    	/**
+    	 * 扫码验券建议
+    	 */
+    	String VALID_CODE_SUGGEST = "小提醒：如果遇到用户选择数量和本页面不一致的情况，建议采用单张验码的方式试试噢。问题反馈：400-040-8989";
+    }
+    interface ValidCodeNum{
+    	/**
+    	 * 验券的数量（默认值）
+    	 */
+    	Integer DEFAULT_VALID_CODE_NUM = 1;
+    }
+    /**
+     * 优惠券验证的异常状态描述
+     *
+     * @author Ventures
+     */
+    interface AbnormalMassage {
+
+    	String BEYONDLIMITS = "对不起，您今天已超出此类券的使用次数";
+        String CODEERROR = "对不起，您输入的券码有误。";
+        String REFUND = "对不起，您输入的券码状态异常";
+        String BEUSED = "对不起，您输入的券码已被使用。";
+        String OUTDATE = "对不起，您输入的券码已失效。";
+        String UNDUEDATE = "对不起，您输入券码的活动暂未开始。";
+        String NOPRINT = "抱歉，验证系统异常。";
+        String NOUSEMODE = "对不起，你输入的券码，不支持此方式验证。";
+        String TITLERROR = "对不起，您此次选择的优惠券名称有误，请重新选择。";
+        String NOHEAR = "抱歉，本店暂未发行该类优惠券";
+        String REPEAT = "您已经成功验证";
+        String NOTENOUGHNUM = "没有足够的可用券码";
     }
 }

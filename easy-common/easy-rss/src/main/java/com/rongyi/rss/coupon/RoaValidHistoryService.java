@@ -5,6 +5,7 @@ import java.util.Map;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.param.MMValidHistoryParam;
 import com.rongyi.easy.coupon.vo.CouponHistoryVO;
+import com.rongyi.easy.coupon.vo.ValidCommissionVO;
 import com.rongyi.easy.roa.entity.ValidHistory;
 /**
  * 优惠券验证历史记录相关
@@ -47,5 +48,12 @@ public interface RoaValidHistoryService {
       * @return
       */
 	int getDailyCount(String referenceId, String userId);
+
+	/**
+	 * 核销佣金列表（新需求）
+	 * @param params
+	 * @return
+	 */
+	ValidCommissionVO getValidCommissionPaging(MMValidHistoryParam params);
 	
 }

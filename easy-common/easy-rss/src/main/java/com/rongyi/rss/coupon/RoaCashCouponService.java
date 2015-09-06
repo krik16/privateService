@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *  给ROA提供现金券接口
+ * 给ROA提供现金券接口
  *
  * @author Breggor
  */
@@ -77,20 +77,40 @@ public interface RoaCashCouponService {
     /**
      * 根据卡券Id减少库存
      *
-     * @param coupongId
+     * @param couponId
+     * @param quantity
      * @return
      */
-    ResponseResult subtractCouponInventory(String coupongId);
+    boolean subtractInventory(String couponId, int quantity);
+
+
+    /**
+     * 根据卡券Id恢复库存
+     *
+     * @param couponId
+     * @param quantity
+     * @return
+     */
+    boolean recoverInventory(String couponId, int quantity);
 
 
     /**
      * 卡券返库
      * 库存量，券码状态
+     *
      * @param couponId
      * @param couponCode
      * @return
      */
-     boolean  restoreCouponInventory(String couponId,String couponCode);
+    boolean restoreCouponInventory(String couponId, String couponCode);
+
+    /**
+     * 根据卡券Id减少库存
+     *
+     * @param coupongId
+     * @return
+     */
+    ResponseResult subtractCouponInventory(String coupongId);
 
     /**
      * 根据卡券Id减少库存
@@ -98,7 +118,8 @@ public interface RoaCashCouponService {
      * @param coupongId amount
      * @return
      */
-    ResponseResult subtractCouponInventory(String coupongId, int amount);
+    ResponseResult subtractCouponInventory(String coupongId, int quantity);
+
 
     /**
      * 根据卡券码查询优惠券

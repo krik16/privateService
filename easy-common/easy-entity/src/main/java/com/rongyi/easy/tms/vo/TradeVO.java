@@ -95,23 +95,31 @@ public class TradeVO implements Serializable {
 	private String mallName;
 
 	/**
-	 * 买家ID
-	 */
-	private String buyerId;
-
-	/**
 	 * 买家ID集合(查询使用)
 	 */
 	private String[] buyerIds;
 	/**
-	 * 买家账号
+	 * 买家ID（商品）
+	 */
+	private String buyerId;
+	/**
+	 * 买家账号(商品)
 	 */
 	private String buyerAccount;
 
 	/**
-	 * 买家姓名
+	 * 买家姓名（商品）
 	 */
 	private String buyerName;
+
+	/**
+	 * 买家ID(优惠券)
+	 */
+	private String couponBuyerId;
+	/**
+	 * 买家账号(优惠券)
+	 */
+	private String couponBuyerAccount;
 
 	/**
 	 * 卖家账号
@@ -141,28 +149,28 @@ public class TradeVO implements Serializable {
 	/**
 	 * 优惠信息（积分，抵扣券信息，json格式）
 	 */
-//	private String integralDiscount;
-	
+	// private String integralDiscount;
+
 	/**
 	 * 商品订单优惠信息（积分，红包使用记录，json格式）
 	 */
 	private String orderDiscountInfo;
-	
+
 	/**
-	 *  商品使用红包 券码
+	 * 商品使用红包 券码
 	 */
 	private String orderCouponCode;
-	
+
 	/**
 	 * 优惠券订单优惠信息（积分，红包使用记录，json格式）
 	 */
 	private String couponDiscuntInfo;
-	
+
 	/**
 	 * 优惠券使用红包 券码
 	 */
 	private String couponCashCouponCode;
-	
+
 	/**
 	 * 使用积分数
 	 */
@@ -171,7 +179,7 @@ public class TradeVO implements Serializable {
 	/**
 	 * 使用优惠券金额
 	 */
-//	private Double couponDiscount;
+	// private Double couponDiscount;
 
 	/**
 	 * 优惠券金额整数
@@ -478,7 +486,6 @@ public class TradeVO implements Serializable {
 		this.orderType = orderType;
 	}
 
-
 	public Integer getIntegral() {
 		return integral;
 	}
@@ -487,7 +494,6 @@ public class TradeVO implements Serializable {
 		this.integral = integral;
 	}
 
-	
 	public String getOrderDiscountInfo() {
 		return orderDiscountInfo;
 	}
@@ -495,7 +501,6 @@ public class TradeVO implements Serializable {
 	public void setOrderDiscountInfo(String orderDiscountInfo) {
 		this.orderDiscountInfo = orderDiscountInfo;
 	}
-
 
 	public String getOrderCouponCode() {
 		return orderCouponCode;
@@ -521,7 +526,6 @@ public class TradeVO implements Serializable {
 		this.couponDiscuntInfo = couponDiscuntInfo;
 	}
 
-
 	public Integer getFavorType() {
 		return favorType;
 	}
@@ -538,4 +542,19 @@ public class TradeVO implements Serializable {
 		this.couponDiscountInt = couponDiscountInt;
 	}
 
+	public String getCouponBuyerId() {
+		return couponBuyerId;
+	}
+
+	public void setCouponBuyerId(String couponBuyerId) {
+		this.couponBuyerId = couponBuyerId;
+	}
+
+	public String getCouponBuyerAccount() {
+		return couponBuyerAccount;
+	}
+
+	public void setCouponBuyerAccount(String couponBuyerAccount) {
+		this.couponBuyerAccount = couponBuyerAccount;
+	}
 }
