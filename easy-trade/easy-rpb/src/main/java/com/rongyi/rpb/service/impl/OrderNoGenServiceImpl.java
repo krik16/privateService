@@ -23,6 +23,7 @@ public class OrderNoGenServiceImpl implements OrderNoGenService {
 	 * @datetime:2015年4月23日上午10:01:53
 	 **/
 	@Override
+	@Deprecated
 	public String getOrderNo() {
 		int machineId = 1;// 最大支持1-9个集群机器部署
 		int hashCodeV = UUID.randomUUID().toString().hashCode();

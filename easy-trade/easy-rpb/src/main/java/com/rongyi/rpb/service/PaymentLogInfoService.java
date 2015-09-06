@@ -64,7 +64,7 @@ public interface PaymentLogInfoService {
 	 * @Author: 柯军
 	 * @datetime:2015年6月26日下午4:48:41
 	 **/
-	public abstract void insertPayNotify(PaymentLogInfo paymentLogInfo, Integer tradeType, Integer status, String payChannel);
+	public abstract boolean insertPayNotify(PaymentLogInfo paymentLogInfo, Integer tradeType, Integer status, String payChannel);
 
 	/**
 	 * @Description: 支付成功发送通知消息
@@ -105,5 +105,15 @@ public interface PaymentLogInfoService {
 	 * @datetime:2015年9月2日下午3:13:09
 	 **/
 	public abstract boolean validateByTradeNoAndPayNo(String tradeNo,String payNo);
+	
+	
+	/**	
+	 * @Description: 微信异步通知结果转换 
+	 * @param map
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年9月2日下午4:17:06
+	 **/
+	public abstract PaymentLogInfo getByWeixinNotify(Map<String,Object> map);
 
 }

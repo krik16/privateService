@@ -1,23 +1,31 @@
 package service;
 
 import java.io.BufferedReader;
-import java.io.InputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.ConnectException;
-import java.net.URL;
+import java.security.KeyStore;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
-import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.conn.ssl.SSLContexts;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Description;
 import org.springframework.test.annotation.Rollback;
 import org.testng.annotations.Test;
 
@@ -25,26 +33,25 @@ import base.BaseTest;
 
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
+import com.rongyi.easy.rpb.vo.WeixinQueryOrderParamVO;
 import com.rongyi.rpb.common.util.orderSign.weixinSign.client.TenpayHttpClient;
-import com.rongyi.rpb.common.util.orderSign.weixinSign.util.WXUtil;
+import com.rongyi.rpb.common.v3.weixin.model.RefundQueryReqData;
 import com.rongyi.rpb.common.v3.weixin.model.RefundReqData;
+import com.rongyi.rpb.common.v3.weixin.model.RefundResData;
 import com.rongyi.rpb.common.v3.weixin.model.ReverseReqData;
-import com.rongyi.rpb.common.v3.weixin.model.ScanPayQueryReqData;
 import com.rongyi.rpb.common.v3.weixin.model.ScanPayReqData;
 import com.rongyi.rpb.common.v3.weixin.model.ScanPayService;
-import com.rongyi.rpb.common.v3.weixin.model.UnifedOrderReqData;
+import com.rongyi.rpb.common.v3.weixin.service.RefundQueryService;
 import com.rongyi.rpb.common.v3.weixin.service.RefundService;
 import com.rongyi.rpb.common.v3.weixin.service.ReverseService;
-import com.rongyi.rpb.common.v3.weixin.service.ScanPayQueryService;
 import com.rongyi.rpb.common.v3.weixin.service.UnifiedorderService;
-import com.rongyi.rpb.common.v3.weixin.util.MD5;
 import com.rongyi.rpb.common.v3.weixin.util.RandomStringGenerator;
 import com.rongyi.rpb.common.v3.weixin.util.Signature;
+import com.rongyi.rpb.common.v3.weixin.util.Util;
 import com.rongyi.rpb.constants.ConstantUtil;
 import com.rongyi.rpb.mq.Sender;
 import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rpb.service.WeixinPayService;
-import com.unionpay.acp.sdk.BaseHttpSSLSocketFactory.MyX509TrustManager;
 
 public class WeixinPayServiceTest extends BaseTest {
 
@@ -72,7 +79,7 @@ public class WeixinPayServiceTest extends BaseTest {
 
 	// @Test
 	public void testGetWeixinRefund() {
-		weixinPayService.weixinRefund("1000000364118778", 0.02, 0.02, "1000000364111231");
+		weixinPayService.weixinRefund("1000000384208367", 0.01, 0.01, "10000003840682312");
 		// weixinPayService.getAppWeXinSign("1000000197371298", 0.01);
 	}
 
@@ -122,15 +129,21 @@ public class WeixinPayServiceTest extends BaseTest {
 	 * @datetime:2015年6月25日下午1:57:08
 	 **/
 	// @Test
-	public void testWinxinScanQuery() {
+	public void testWinxinQuery() {
 		try {
 			// ScanPayQueryReqData scanPayQueryReqData = new
 			// ScanPayQueryReqData("1009290229201506250300791418","1000001753309557");
-			ScanPayQueryReqData scanPayQueryReqData = new ScanPayQueryReqData("1220588601201508126069022737", "1000001707022561");
-			ScanPayQueryService scanPayQueryService = new ScanPayQueryService();
-			// System.err.println(scanPayQueryReqData.toString());
-			String response = scanPayQueryService.request(scanPayQueryReqData);
-			System.err.println(response);
+			// ScanPayQueryReqData scanPayQueryReqData = new
+			// ScanPayQueryReqData("1220588601201508126069022737",
+			// "1000001707022561");
+			// PayQueryService scanPayQueryService = new PayQueryService();
+			// // System.err.println(scanPayQueryReqData.toString());
+			// String response =
+			// scanPayQueryService.request(scanPayQueryReqData);
+			// System.err.println(response);
+
+			WeixinQueryOrderParamVO weixinQueryOrderParamVO = weixinPayService.queryOrder(null, "10000017533095571");
+			System.err.println(weixinQueryOrderParamVO.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -192,7 +205,7 @@ public class WeixinPayServiceTest extends BaseTest {
 	// @Test
 	public void testQueryOrder2() {
 		System.err.println(ConstantUtil.CRET_DIRECTORY);
-		System.err.println(weixinPayService.queryOrder("10000002315977421").getRet_code());
+		// System.err.println(weixinPayService.queryOrder("10000002315977421").getRet_code());
 	}
 
 	// @Test
@@ -201,7 +214,7 @@ public class WeixinPayServiceTest extends BaseTest {
 		weixinPayService.batchTriggerWeixinRefund();
 	}
 
-	@Test
+	// @Test
 	public void testgetPaySignV3() {
 		try {
 			UnifiedorderService unifiedorderService = new UnifiedorderService();
@@ -210,10 +223,127 @@ public class WeixinPayServiceTest extends BaseTest {
 			e.printStackTrace();
 		}
 	}
+
+	// @Test
+	public void testGetWeixinPaySign() {
+		Map<String, Object> map = weixinPayService.getAppWeXinSign("1000001111211", 1d);
+		System.err.println(map.toString());
+	}
+
+//	@Test
+	public void testRefundV3() {
+		try {
+			RefundService refundService = new RefundService();
+			RefundReqData refundReqData = new RefundReqData(null, "1000001463574454", null, "1234131231231", 1, 1, ConstantUtil.PayWeiXin_V3.PARTNER, null);
+			String result = refundService.request(refundReqData);
+			System.err.println("result=" + result);
+			RefundResData refundResData = (RefundResData) Util.getObjectFromXML(result, RefundResData.class);
+			System.err.println(refundResData.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+//	@Test
+	public void testRefundV3_2() {
+		try {
+			testRefund_result();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	@Test
-	public void testGetWeixinPaySign(){
-		Map<String,Object> map = weixinPayService.getAppWeXinSign("1000001111211",1d);
-		System.err.println(map.toString());
+	@Description("微信退款查询")
+	public void testRefundQuery(){
+		try{
+		RefundQueryService refundQueryService = new RefundQueryService();
+		RefundQueryReqData refundQueryReqData = new RefundQueryReqData("1220588601201508316278769187",null, null, null, null);
+		String result = refundQueryService.request(refundQueryReqData);
+		System.err.println("result"+result);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+
+	public void testRefund_result() throws Exception {
+		RefundReqData refundReqData = new RefundReqData(null, "1000001463574454", null, "1234131231231", 1, 1, "1220588601", null);
+		SortedMap<Object, Object> parameters = new TreeMap<Object, Object>();
+		parameters.put("appid", refundReqData.getAppid());
+		parameters.put("mch_id", refundReqData.getMch_id());
+		parameters.put("nonce_str", refundReqData.getNonce_str());
+		// 在notify_url中解析微信返回的信息获取到 transaction_id，此项不是必填，详细请看上图文档
+		parameters.put("transaction_id", refundReqData.getTransaction_id());
+		parameters.put("out_trade_no", refundReqData.getOut_trade_no());
+		parameters.put("out_refund_no", refundReqData.getOut_refund_no()); // 我们自己设定的退款申请号，约束为UK
+		parameters.put("total_fee", refundReqData.getTotal_fee().toString()); // 单位为分
+		parameters.put("refund_fee", refundReqData.getRefund_fee().toString()); // 单位为分
+		parameters.put("op_user_id", refundReqData.getOp_user_id());
+		// String sign = createSign("utf-8", parameters);
+		parameters.put("sign", refundReqData.getSign());
+
+		String reuqestXml = getRequestXml(parameters);
+		KeyStore keyStore = KeyStore.getInstance("PKCS12");
+		FileInputStream instream = new FileInputStream(new File("F:\\etc\\rongyi\\easy-rpb-cert\\1220588601.pfx"));// 放退款证书的路径
+		try {
+			keyStore.load(instream, refundReqData.getMch_id().toCharArray());
+		} finally {
+			instream.close();
+		}
+
+		SSLContext sslcontext = SSLContexts.custom().loadKeyMaterial(keyStore, refundReqData.getMch_id().toCharArray()).build();
+		SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext, new String[] { "TLSv1" }, null, SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
+		CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
+		try {
+
+			HttpPost httpPost = new HttpPost("https://api.mch.weixin.qq.com/secapi/pay/refund");// 退款接口
+
+			System.out.println("executing request" + httpPost.getRequestLine());
+			StringEntity reqEntity = new StringEntity(reuqestXml);
+			// 设置类型
+			reqEntity.setContentType("application/x-www-form-urlencoded");
+			httpPost.setEntity(reqEntity);
+			CloseableHttpResponse response = httpclient.execute(httpPost);
+			try {
+				HttpEntity entity = response.getEntity();
+
+				System.out.println("----------------------------------------");
+				System.out.println(response.getStatusLine());
+				if (entity != null) {
+					System.out.println("Response content length: " + entity.getContentLength());
+					BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(entity.getContent(), "UTF-8"));
+					String text;
+					while ((text = bufferedReader.readLine()) != null) {
+						System.out.println(text);
+					}
+
+				}
+				EntityUtils.consume(entity);
+			} finally {
+				response.close();
+			}
+		} finally {
+			httpclient.close();
+		}
+	}
+
+	public static String getRequestXml(SortedMap<Object, Object> parameters) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<xml>");
+		Set es = parameters.entrySet();
+		Iterator it = es.iterator();
+		while (it.hasNext()) {
+			Map.Entry entry = (Map.Entry) it.next();
+			String k = (String) entry.getKey();
+			String v = (String) entry.getValue();
+			if ("attach".equalsIgnoreCase(k) || "body".equalsIgnoreCase(k) || "sign".equalsIgnoreCase(k)) {
+				sb.append("<" + k + ">" + "<![CDATA[" + v + "]]></" + k + ">");
+			} else {
+				sb.append("<" + k + ">" + v + "</" + k + ">");
+			}
+		}
+		sb.append("</xml>");
+		return sb.toString();
 	}
 }

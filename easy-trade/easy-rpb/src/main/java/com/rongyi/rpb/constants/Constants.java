@@ -134,4 +134,22 @@ public interface Constants {
 		int REFUND_REJECTED1 = 1;//拒绝退款
 	}
 
+	/**	
+	 * @Author:  柯军
+	 * @Description: 0:手机支付宝APP支付,1:手机支付宝网页支付,2:手机微信支付，3:手机银联支付,4:支付宝退款，5：微信退款，6：银联退款，7:异常支付打款给用户，8：打款给用户； 
+	 * @datetime:2015年9月2日下午4:37:31
+	 *
+	 **/
+	interface EVENT_TYPE{
+		int EVENT_TYPE0 = 0;
+		int EVENT_TYPE1 = 1;
+		int EVENT_TYPE2 = 2;
+		int EVENT_TYPE3 = 3;
+		int EVENT_TYPE4 = 4;
+		int EVENT_TYPE5 = 5;
+		int EVENT_TYPE6 = 6;
+		int EVENT_TYPE7 = 7;
+		int EVENT_TYPE8 = 8;
+		
+	}
 }

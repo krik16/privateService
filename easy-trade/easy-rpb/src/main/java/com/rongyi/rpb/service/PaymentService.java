@@ -180,7 +180,7 @@ public interface PaymentService {
 	 * @Author: 柯军
 	 * @datetime:2015年8月17日上午11:58:59
 	 **/
-	public  void repeatPayToRefund(PaymentEntity paymentEntity, PaymentLogInfo paymentLogInfo);
+	public  boolean repeatPayToRefund(PaymentEntity paymentEntity, PaymentLogInfo paymentLogInfo);
 	
 	/**	
 	 * @Description: 查询退款批量单号状态是否已存在 

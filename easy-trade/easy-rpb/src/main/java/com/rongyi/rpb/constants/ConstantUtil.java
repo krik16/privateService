@@ -143,6 +143,14 @@ public interface ConstantUtil {
 	 **/
 	interface PayWeiXin_V3{
 		
+		public static String APP_ID = propertyConfigurer.getProperty("WEIXIN.APP_ID").toString();
+		public static String APP_SECRET = propertyConfigurer.getProperty("WEIXIN.APP_SECRET").toString();
+		public static String APP_KEY = propertyConfigurer.getProperty("WEIXIN.APP_KEY").toString();
+		public static String PARTNER = propertyConfigurer.getProperty("WEIXIN.PARTNER").toString();
+		public static String PASSWORD = propertyConfigurer.getProperty("WEIXIN.PASSWORD").toString();
+		public static String PARTNER_KEY = propertyConfigurer.getProperty("WEIXIN.PARTNER_KEY").toString();
+		public static String TRACEID = propertyConfigurer.getProperty("WEIXIN.TRACEID").toString();
+
 		
 		String SPBILL_CREATE_IP = "127.0.0.1";//终端IP
 		
