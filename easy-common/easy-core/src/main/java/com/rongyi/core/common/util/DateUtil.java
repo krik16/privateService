@@ -438,13 +438,28 @@ public class DateUtil {
 	}
 	
 	/**
-	 * 格式化当前时间  返回格式yyyyMMdd
+	 * 格式化当前时间  返回格式yyyyMMddHHmmss
 	 * @return
 	 */
 	public static String getCurrentDateYYYYMMDD() {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
 		Date currentTime = new Date();
 		return formatter.format(currentTime);
+	}
+	
+	/**	
+	 * @Description: 格式化当前时间  返回格式yyyy-MM-dd HH:mm:ss:SSS
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年9月6日下午3:26:07
+	 **/
+	public static String getCurrentDateYYYYMMDDHHMMSSsss(){
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
+		Date currentTime = new Date();
+		return formatter.format(currentTime);
+	}
+	public static void main(String[] args) {
+		System.err.println(getCurrentDateYYYYMMDDHHMMSSsss());
 	}
 	public static boolean isYesterday(Date date){
 		
