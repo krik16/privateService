@@ -4,8 +4,6 @@ import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.CouponCode;
 import com.rongyi.easy.coupon.vo.CouponHistoryVO;
 
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -70,4 +68,23 @@ public interface RoaCouponCodeService {
      * @author yb
      */
     public void updateAllCouponCodeValid();
+
+
+    /**
+     * 获取卡券券码
+     *
+     * @param couponId 卡券Id
+     * @param quantity 数量
+     * @return
+     */
+    String[] acquireCode(String couponId, int quantity);
+
+    /**
+     * 恢复卡券券码
+     *
+     * @param couponId 卡券Id
+     * @param quantity 数量
+     * @return
+     */
+    boolean recoverCode(String couponId, int quantity);
 }

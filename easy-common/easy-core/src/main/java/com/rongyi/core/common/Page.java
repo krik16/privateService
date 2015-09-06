@@ -18,12 +18,20 @@ public class Page implements Serializable {
   protected int pageNo = 1;// 第几页
   protected int pageSize = 20;// 默认是10
   protected int totalCount = -1;// 总条数
+  private int totalPage = 0;// 总页数
 
   public Page() {}
 
   public Page(int pageSize) {
     this.pageSize = pageSize;
   }
+
+
+  public int getTotalPage() {
+    int totalPage = (totalCount / pageSize) + 1;
+    return totalPage;
+  }
+
 
   public Page(int pageNo, int pageSize) {
     if (pageNo > 0) {
@@ -122,6 +130,7 @@ public class Page implements Serializable {
   public String toString() {
     return "Page [pageNo=" + pageNo + ", pageSize=" + pageSize + ", totalCount=" + totalCount + "]";
   }
+
 
 
 }

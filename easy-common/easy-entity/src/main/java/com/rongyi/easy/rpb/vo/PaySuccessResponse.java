@@ -9,15 +9,16 @@
 package com.rongyi.easy.rpb.vo;
 
 import java.io.Serializable;
+import java.util.Map;
 
-/**	
- * @Author:  柯军
- * @Description: 支付成功通知订单系统消息返回结果 
+/**
+ * @Author: 柯军
+ * @Description: 支付成功通知订单系统消息返回结果
  * @datetime:2015年7月30日上午11:04:42
- *
+ * 
  **/
 
-public class PaySuccessResponse implements Serializable{
+public class PaySuccessResponse implements Serializable {
 
 	/**
 	 * 
@@ -25,15 +26,14 @@ public class PaySuccessResponse implements Serializable{
 	private static final long serialVersionUID = -422527996223906812L;
 
 	private String orderNo;
-	
-	private boolean result;
-	
-	
-	public PaySuccessResponse(){
-		
+
+	private Map<String, Object> result;
+
+	public PaySuccessResponse() {
+
 	}
 
-	public PaySuccessResponse(String orderNo, boolean result) {
+	public PaySuccessResponse(String orderNo, Map<String, Object> result) {
 		super();
 		this.orderNo = orderNo;
 		this.result = result;
@@ -47,14 +47,12 @@ public class PaySuccessResponse implements Serializable{
 		this.orderNo = orderNo;
 	}
 
-	public boolean isResult() {
+	public Map<String, Object> getResult() {
 		return result;
 	}
 
-	public void setResult(boolean result) {
+	public void setResult(Map<String, Object> result) {
 		this.result = result;
 	}
-	
-	
-	
+
 }

@@ -15,7 +15,7 @@ public class OldUserCode implements Serializable {
 
     private String thumbnail;//缩略图
 
-    private Integer status;//使用状态：1-未使用、2-已使用、3-退款中、已退款、已过期
+    private Integer status;//使用状态：1-未使用、2-已使用、3-退款中、4-已退款、5-已过期
 
     private String useTime;//使用时间
 
@@ -25,7 +25,7 @@ public class OldUserCode implements Serializable {
 
     private BigDecimal unit_price; // 单价
 
-    private int activitiesId; // 用户优惠券主键Id
+    private Integer activitiesId; // 用户优惠券主键Id
 
 
     public Integer getId() {
@@ -92,11 +92,11 @@ public class OldUserCode implements Serializable {
         this.endTime = endTime;
     }
 
-    public int getActivitiesId() {
+    public Integer getActivitiesId() {
         return activitiesId;
     }
 
-    public void setActivitiesId(int activitiesId) {
+    public void setActivitiesId(Integer activitiesId) {
         this.activitiesId = activitiesId;
     }
 

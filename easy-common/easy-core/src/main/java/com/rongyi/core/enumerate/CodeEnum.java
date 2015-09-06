@@ -146,11 +146,20 @@ public enum CodeEnum {
     ERROR_DEBIT_NOTE("-9000","佣金小票上传失败，请重新上传"),
     ERROR_DEBIT_NOTE_STAUTS("-9001","佣金小票审核中，无法再次上传"),
     ERROR_NO_VALIDHISTORY("-9002","没有券码核销记录"),
-
+    ERROR_SWEEP_CODE("-9003","扫码验券失败"),
+    ERROR_VALID_CODE("-9004","验码失败"),
+    SUCCESS_VALID_CODE("-9005","优惠券码验证成功"),
+    
     ERROR_LOGIN_IN_INVALID("-2000","登录出错"),
     ERROR_UN_LOGIN("-10000", "尚未登陆或登陆出错，请重新登录"),
-    ERROR_TAG_NUM_OUT("-10001", "标签数目超过最大数目")
-    ;
+    ERROR_TAG_NUM_OUT("-10001", "标签数目超过最大数目"),
+    
+    ERROR_CODE("-20001","券码有误"),
+    ERROR_CODE_USED("-20002","券码已使用"),
+    ERROR_CODE_OUTDATE("-20003","券码已过期或已失效"),
+    ERROR_CODE_REFUND("-20004","券码状态异常"),
+    ERROR_CODE_NOHEAR("-20005","本店暂未发行该类优惠券");
+    
     
     private String code; 
     private String message; 
