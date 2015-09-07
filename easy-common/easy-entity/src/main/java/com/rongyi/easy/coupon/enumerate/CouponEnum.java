@@ -47,7 +47,9 @@ public enum CouponEnum {
 	/** tab */
 	TAB_ALL("all","全部"), TAB_STICKED("sticked","已置顶"), TAB_UNCHECK("uncheck","待审核"), TAB_PASS("PASS","已审核"), TAB_PROCEEING("proceeing","进行中"),
 	
-	SUCCESS(1,"正常"), ERROR(0,"系统错误"), ERROR_PARAM(0,"参数不合法");
+	SUCCESS(1,"正常"), ERROR(0,"系统错误"), ERROR_PARAM(0,"参数不合法"),
+	
+	UPAIYUN_URL("http://rongyi.b0.upaiyun.com/system/coupon/","图片云路径");
 	
 	private Integer value;
 	

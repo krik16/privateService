@@ -69,4 +69,14 @@ public class CouponBrand implements Serializable{
     public void setBrandEname(String brandEname) {
         this.brandEname = brandEname;
     }
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("CouponBrand [id=").append(id).append(", couponId=").append(couponId).append(", brandId=")
+				.append(brandId).append(", brandCname=").append(brandCname).append(", brandEname=").append(brandEname)
+				.append("]");
+		return builder.toString();
+	}
+    
 }
