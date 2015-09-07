@@ -1,5 +1,7 @@
 package com.rongyi.easy.coupon.entity.mysql;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -43,17 +45,17 @@ public class Coupon implements Serializable {
     /**
      * 原价
      */
-    private Double origPrice;
+    private Integer origPrice;
 
     /**
      * 现价
      */
-    private Double currPrice;
+    private Integer currPrice;
 
     /**
      * 折扣价,属于红包字段
      */
-    private Double discount;
+    private Integer discount;
 
     /**
      * 大运营平台，平台代金券;展示区域：常规区域,活动区域;未选中[0]，选中[1] 例如 "1,1"表示都选中
@@ -227,7 +229,18 @@ public class Coupon implements Serializable {
      */
     private List<CouponShop> couponShops;
 
+    /**
+     * 关联的商场列表
+     */
+    private List<CouponMall> couponMalls;
 
+    public List<CouponMall> getCouponMalls() {
+        return couponMalls;
+    }
+
+    public void setCouponMalls(List<CouponMall> couponMalls) {
+        this.couponMalls = couponMalls;
+    }
 
     /**
      * 优惠方式 1：满减 ；2：立减。
@@ -293,27 +306,32 @@ public class Coupon implements Serializable {
         this.stockCount = stockCount;
     }
 
-    public Double getOrigPrice() {
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).append("id", id).append("name", name).append("couponType", couponType).append("validateType", validateType).append("totalCount", totalCount).append("stockCount", stockCount).append("origPrice", origPrice).append("currPrice", currPrice).append("discount", discount).append("displayRegion", displayRegion).append("afterSaleService", afterSaleService).append("publishStartAt", publishStartAt).append("publishEndAt", publishEndAt).append("validStartAt", validStartAt).append("validEndAt", validEndAt).append("limitDesc", limitDesc).append("usageDesc", usageDesc).append("recommend", recommend).append("remark", remark).append("listPicUrl", listPicUrl).append("detailPicUrl", detailPicUrl).append("relatedType", relatedType).append("limitCount", limitCount).append("limitUseCount", limitUseCount).append("limitPublishCount", limitPublishCount).append("synTarget", synTarget).append("publishChannel", publishChannel).append("status", status).append("inChannel", inChannel).append("outChannel", outChannel).append("sourceName", sourceName).append("createUser", createUser).append("createAt", createAt).append("updateUser", updateUser).append("updateAt", updateAt).append("isThird", isThird).append("isOffStock", isOffStock).append("isDeleted", isDeleted).append("couponCategory", couponCategory).append("couponGroup", couponGroup).append("couponBrand", couponBrand).append("couponMall", couponMall).append("couponShops", couponShops).append("couponMalls", couponMalls).append("preferentialType", preferentialType).append("rCommoditys", rCommoditys).toString();
+    }
+
+    public Integer getOrigPrice() {
         return origPrice;
     }
 
-    public void setOrigPrice(Double origPrice) {
+    public void setOrigPrice(Integer origPrice) {
         this.origPrice = origPrice;
     }
 
-    public Double getCurrPrice() {
+    public Integer getCurrPrice() {
         return currPrice;
     }
 
-    public void setCurrPrice(Double currPrice) {
+    public void setCurrPrice(Integer currPrice) {
         this.currPrice = currPrice;
     }
 
-    public Double getDiscount() {
+    public Integer getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Double discount) {
+    public void setDiscount(Integer discount) {
         this.discount = discount;
     }
 
@@ -595,13 +613,6 @@ public class Coupon implements Serializable {
 
     public void setrCommoditys(List<RedenvelopeCommodity> rCommoditys) {
         this.rCommoditys = rCommoditys;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Coupon [id=").append(id).append(", name=").append(name).append(", couponType=").append(couponType).append(", validateType=").append(validateType).append(", totalCount=").append(totalCount).append(", stockCount=").append(stockCount).append(", origPrice=").append(origPrice).append(", currPrice=").append(currPrice).append(", discount=").append(discount).append(", displayRegion=").append(displayRegion).append(", afterSaleService=").append(afterSaleService).append(", publishStartAt=").append(publishStartAt).append(", publishEndAt=").append(publishEndAt).append(", validStartAt=").append(validStartAt).append(", validEndAt=").append(validEndAt).append(", limitDesc=").append(limitDesc).append(", usageDesc=").append(usageDesc).append(", recommend=").append(recommend).append(", remark=").append(remark).append(", listPicUrl=").append(listPicUrl).append(", detailPicUrl=").append(detailPicUrl).append(", relatedType=").append(relatedType).append(", limitCount=").append(limitCount).append(", limitUseCount=").append(limitUseCount).append(", limitPublishCount=").append(limitPublishCount).append(", synTarget=").append(synTarget).append(", publishChannel=").append(publishChannel).append(", status=").append(status).append(", inChannel=").append(inChannel).append(", outChannel=").append(outChannel).append(", sourceName=").append(sourceName).append(", createUser=").append(createUser).append(", createAt=").append(createAt).append(", updateUser=").append(updateUser).append(", updateAt=").append(updateAt).append(", isThird=").append(isThird).append(", isOffStock=").append(isOffStock).append(", isDeleted=").append(isDeleted).append(", couponCategory=").append(couponCategory).append(", couponGroup=").append(couponGroup).append(", couponBrand=").append(couponBrand).append(", couponMall=").append(couponMall).append(", couponShops=").append(couponShops).append(", rCommoditys=").append(rCommoditys).append("]");
-        return builder.toString();
     }
 
 }
