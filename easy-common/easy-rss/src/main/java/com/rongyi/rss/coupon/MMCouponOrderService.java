@@ -193,5 +193,6 @@ public interface MMCouponOrderService {
     * 定时关闭未支付订单
     * @return
     */
+   @Deprecated
    void closeUnpayOrder();
 }

@@ -16,7 +16,7 @@ import java.util.Map;
  * 目的是最小代价将依赖从coupon-service切换过来
  *
  * @author liuhao
- * @date 2015/8/13
+ * @version  2015/8/13
  */
 public interface ProxyCouponOrderService {
 
