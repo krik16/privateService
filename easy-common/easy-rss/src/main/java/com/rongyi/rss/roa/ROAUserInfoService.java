@@ -1,4 +1,4 @@
-package com.rongyi.rss.bsoms;
+package com.rongyi.rss.roa;
 
 import java.util.List;
 import java.util.Map;
@@ -16,7 +16,7 @@ import com.rongyi.easy.va.vo.VirtualAccountVO;
  * @author hebo 2015/07/17
  *
  */
-public interface IUserInfoService {
+public interface ROAUserInfoService {
 
 	/**
 	 * 分页查询商家账户列表
