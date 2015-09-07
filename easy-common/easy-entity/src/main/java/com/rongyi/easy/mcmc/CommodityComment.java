@@ -26,7 +26,6 @@ public class CommodityComment implements Serializable {
 	private String username;// 评价人用户名
 	private String userlogo;// 评价人头像url地址
 	private String userid;// 评价人用户id（预留，暂未使用）
-	private String sonOrderId;// 子订单id
 
 	public String getUserid() {
 		return userid;
@@ -118,14 +117,6 @@ public class CommodityComment implements Serializable {
 
 	public void setUserlogo(String userlogo) {
 		this.userlogo = userlogo;
-	}
-
-	public String getSonOrderId() {
-		return sonOrderId;
-	}
-
-	public void setSonOrderId(String sonOrderId) {
-		this.sonOrderId = sonOrderId;
 	}
 
 }
