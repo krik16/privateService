@@ -82,6 +82,15 @@ public enum ConstantEnum {
     BONUS_TYPE3(3,"验码佣金奖励"),
     BONUS_TYPE4(4,"验码佣金惩罚"),
     
+    INVITE_COMMISSION_STATUS0(0,"待审核"),
+    INVITE_COMMISSION_STATUS1(1,"一级审核通过"),
+    INVITE_COMMISSION_STATUS2(2,"一级审核未通过"),
+    INVITE_COMMISSION_STATUS3(3,"二级审核通过"),
+    INVITE_COMMISSION_STATUS4(4,"二级审核未通过"),
+    
+    IS_DELETE_0(0,"正常"),
+    IS_DELETE_1(1,"标记删除"),
+    
     EXCEL_LIMIT_COUNT(5000,"交易明细报表导出限制总数");
     interface ACCOUNT_STATUS{
         int ACCOUNT_STATUS0 = 0;//登陆账号和支付账号正常
@@ -101,6 +110,17 @@ public enum ConstantEnum {
 
 
     /**	
+     * @Description: 获取code byte类型值,请确保该值可转换为byte值，否则会类型转换异常 
+     * @return	
+     * @Author:  柯军
+     * @datetime:2015年5月19日下午3:51:11
+     **/
+    public Byte getCodeByte() {
+        return Integer.valueOf(code.toString()).byteValue();
+    }
+
+    
+    /**	
      * @Description: 获取code int类型值,请确保该值可转换为int值，否则会类型转换异常 
      * @return	
      * @Author:  柯军
@@ -119,7 +139,15 @@ public enum ConstantEnum {
     public String getCodeStr() {
         return code.toString();
     }
-
+    /**	
+     * @Description:  获取value byte类型值,请确保该值可转换为byte值，否则会类型转换异常 
+     * @return	
+     * @Author:  柯军
+     * @datetime:2015年5月19日下午3:53:08
+     **/
+    public Byte getValueByte() {
+        return Integer.valueOf(value.toString()).byteValue();
+    }
 
     /**	
      * @Description:  获取value int类型值,请确保该值可转换为int值，否则会类型转换异常 
