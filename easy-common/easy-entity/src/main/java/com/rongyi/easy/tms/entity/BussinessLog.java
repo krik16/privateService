@@ -7,19 +7,19 @@ public class BussinessLog implements Serializable {
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 8775566725031788211L;
+	private static final long serialVersionUID = -2386539200988967202L;
 
 	private Integer id;
 
     private Integer bussinessId;
 
-    private Integer bussinessType;
+    private Byte bussinessType;
 
-    private String username;
+    private String createUserId;
 
-    private Date createAt;
+    private Date creadeAt;
 
-    private Integer deleted;
+    private Byte isDelete;
 
     private String memo;
 
@@ -39,36 +39,36 @@ public class BussinessLog implements Serializable {
         this.bussinessId = bussinessId;
     }
 
-    public Integer getBussinessType() {
+    public Byte getBussinessType() {
         return bussinessType;
     }
 
-    public void setBussinessType(Integer bussinessType) {
+    public void setBussinessType(Byte bussinessType) {
         this.bussinessType = bussinessType;
     }
 
-    public String getUsername() {
-        return username;
+    public String getCreateUserId() {
+        return createUserId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setCreateUserId(String createUserId) {
+        this.createUserId = createUserId;
     }
 
-    public Date getCreateAt() {
-        return createAt;
+    public Date getCreadeAt() {
+        return creadeAt;
     }
 
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
+    public void setCreadeAt(Date creadeAt) {
+        this.creadeAt = creadeAt;
     }
 
-    public Integer getDeleted() {
-        return deleted;
+    public Byte getIsDelete() {
+        return isDelete;
     }
 
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
+    public void setIsDelete(Byte isDelete) {
+        this.isDelete = isDelete;
     }
 
     public String getMemo() {
