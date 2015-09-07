@@ -38,8 +38,6 @@ public class Configurations implements Serializable {
 //	private long subOrderSafeguardWaitMax;
 	/* 官方介入超时时间 */
 	private long officialJudgementWaitMax = 0L;
-	/* 默认好评时间 */
-	private long defaultCommentWaitMax = 0L;
 	/* 评价关闭时间 */
 	private long commentCloseWaitMax = 0L;
 /*=======
@@ -148,14 +146,6 @@ public class Configurations implements Serializable {
 
 	public void setOfficialJudgementWaitMax(long officialJudgementWaitMax) {
 		this.officialJudgementWaitMax = officialJudgementWaitMax;
-	}
-
-	public long getDefaultCommentWaitMax() {
-		return defaultCommentWaitMax;
-	}
-
-	public void setDefaultCommentWaitMax(long defaultCommentWaitMax) {
-		this.defaultCommentWaitMax = defaultCommentWaitMax;
 	}
 
 	public long getCommentCloseWaitMax() {
