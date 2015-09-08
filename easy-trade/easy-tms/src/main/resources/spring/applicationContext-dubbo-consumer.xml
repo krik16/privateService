@@ -54,4 +54,10 @@
 	<dubbo:reference interface="com.rongyi.rss.coupon.MMUserCouponService" id="mmUserCouponService"  version="${dubbo.version}" check="false"/>
 	<!-- 黑名单列表 -->
 	<dubbo:reference interface="com.rongyi.rss.cheat.IAntiCheatService" id="antiCheatService"  version="${dubbo.version}" check="false"/>
+	<!-- 用户使用红包记录 -->	
+	<dubbo:reference interface="com.rongyi.rss.coupon.RoaUserCashCouponService" id="roaUserCashCouponService"  version="${dubbo.version}" check="false"/>
+	<!-- 用户优惠券记录 -->	
+	<dubbo:reference interface="com.rongyi.rss.coupon.RoaUserCouponService" id="roaUserCouponService"  version="${dubbo.version}" check="false"/>
+	<!-- 优惠券模板信息 -->
+	<dubbo:reference interface="com.rongyi.rss.coupon.RoaCouponService" id="roaCouponService"  version="${dubbo.version}" check="false"/>
 </beans>  

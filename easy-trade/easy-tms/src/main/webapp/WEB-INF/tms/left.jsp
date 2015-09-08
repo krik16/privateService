@@ -83,7 +83,8 @@ li ul li span.fancytree-title{
 				<sec:authorize ifAnyGranted="TMS_ORDER_VIEW">
 					<li class="folder expanded">订单管理
 						<ul>
-							<li><a href="${ctx}/orderManager/search?module=order" target="mainFrame">订单列表</a></li>
+							<li><a href="${ctx}/orderManager/search?module=order" target="mainFrame">商品订单</a></li>
+							<li><a href="${ctx}/couponOrder/search?currpage=1" target="mainFrame">优惠券订单</a></li>
 						</ul>
 					</li>
 				</sec:authorize>
