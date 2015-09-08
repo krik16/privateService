@@ -35,13 +35,13 @@ public class UserManagerParam implements Serializable{
     private String branchCompanyId;//分公司id
     private String userName;//用户姓名
     private String cardId;//身份证号
-    private Integer type;//商家类型：0商场、1品牌
+    private Integer type = 1;//商家类型：0商场、1品牌
     private Integer roleType=2;//角色类型
     private List<AccountParam> accountList;//账号信息
-    private Integer identity;//身份类型:0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购
-    private Integer isCooperation;//是否合作(给店长、导购用) 0否 1是
+    private Integer identity = 5;//身份类型:0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购
+    private Integer isCooperation = 0;//是否合作(给店长、导购用) 0否 1是
     private String memo;//备注
-    private Integer createSource;//账号创建来源：0大运营、1商家后台
+    private Integer createSource = 3;//账号创建来源：0大运营、1商家后台、3App
     private String stopReason;//停用原因
     private String creatingUserType;
     private Integer merUserId;//操作人id
