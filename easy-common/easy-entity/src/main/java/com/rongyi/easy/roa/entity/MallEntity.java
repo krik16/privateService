@@ -457,4 +457,6 @@ public class MallEntity implements Serializable {
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
+	
+	
 }

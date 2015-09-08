@@ -632,4 +632,12 @@ public interface Constants {
         String REPEAT = "您已经成功验证";
         String NOTENOUGHNUM = "没有足够的可用券码";
     }
+    
+    /**
+     * App标识
+     */
+    interface AppId{
+    	String MDC2C_IOS_APPId = "684748850";
+    	String RYG_IOS_APPId = "999209638";
+    }
 }

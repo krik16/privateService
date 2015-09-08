@@ -89,8 +89,9 @@ public class ParentOrderVO implements Serializable {
 	private String expressName;// 物流名称
 	private BigDecimal discountFee;// 商品折扣价
 
-	private String score;// 使用的积分
-	private String scoreDeduction;// 积分抵扣金额
+	private String score;// 使用的颜值
+	private String scoreDeduction;// 颜值抵扣金额
+	private String DeductCouponAmount;// 抵扣券实际抵扣价格
 
 	public BigDecimal getDiscountFee() {
 		return discountFee;
@@ -458,6 +459,14 @@ public class ParentOrderVO implements Serializable {
 
 	public void setScoreDeduction(String scoreDeduction) {
 		this.scoreDeduction = scoreDeduction;
+	}
+
+	public String getDeductCouponAmount() {
+		return DeductCouponAmount;
+	}
+
+	public void setDeductCouponAmount(String deductCouponAmount) {
+		DeductCouponAmount = deductCouponAmount;
 	}
 
 }
