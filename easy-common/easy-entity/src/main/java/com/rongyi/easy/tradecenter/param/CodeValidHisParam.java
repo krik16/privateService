@@ -70,7 +70,7 @@ public class CodeValidHisParam implements Serializable {
 	public String toString() {
 		return "CodeValidHisParam [shopId=" + shopId + ", orderBy=" + orderBy
 				+ ", orderVa=" + orderVa + ", pageSize=" + pageSize
-				+ ", currentPage=" + currentPage + ", sellerId=" + sellerId
+				+ ", currentPage=" + currentPage
 				+ "]";
 	}
 }
