@@ -119,7 +119,7 @@
 										<td>${item.title }</td>
 										<td>${item.validBeginDate } - ${item.validEndDate }</td>
 										<td>${item.discount }</td>
-										<td>${item.realDiscount }</td>
+										<td>${item.discount }</td>
 									</tr>
 								</c:forEach>
 							</c:when>

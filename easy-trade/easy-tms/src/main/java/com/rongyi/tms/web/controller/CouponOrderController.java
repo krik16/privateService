@@ -118,6 +118,7 @@ public class CouponOrderController extends BaseController {
 
 	@RequestMapping("/info")
 	public String getCouponOrderInfo(ModelMap model,Integer id) {
+		LOGGER.info("----- couponOrder info -----");
 		CouponOrderDetailVO couponOrderDetailVO = new CouponOrderDetailVO();
 		CouponOrderVO couponOrderVO = couponOrderService.selectById(id);
 		BeanUtils.copyProperties(couponOrderVO,couponOrderDetailVO);
