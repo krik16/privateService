@@ -92,10 +92,10 @@
 						<c:forEach var="item" items="${entity.couponList}">
 							<tr>
 								<td>${item.title }</td>
-								<td><fmt:formatDate value="${item.validBeginDate }" pattern="yyyy-MM-dd HH:mm:ss"/>-<fmt:formatDate value="${item.validEndDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+								<td><fmt:formatDate value="${item.validBeginDate}" pattern="yyyy-MM-dd HH:mm:ss"/> - <fmt:formatDate value="${item.validEndDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td>${item.originalPrice}</td>
 								<td>${item.count}</td>
-								<td>${item.realDiscount*item.count}</td>
+								<td>${item.originalPrice*item.count}</td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -112,7 +112,7 @@
 
 					<tr>
 						<c:choose>
-							<c:when test="${entity.hbList}">
+							<c:when test="${entity.hbList.size()>0}">
 								<c:forEach var="item" items="${entity.hbList}" varStatus="status">
 									<tr>
 										<td>现金券</td>

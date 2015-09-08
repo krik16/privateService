@@ -9,6 +9,7 @@
 package com.rongyi.tms.web.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -127,13 +128,17 @@ public class CouponOrderController extends BaseController {
 			CouponVO couponVO = couponOrderDetailVO.new CouponVO();
 			BeanUtils.copyProperties(coupon, couponVO);
 			couponVO.setCount(list.size());
-			couponOrderDetailVO.getCouponList().add(couponVO);
+			List<CouponVO> couponVOList = new ArrayList<CouponVO>();
+			couponVOList.add(couponVO);
+			couponOrderDetailVO.setCouponList(couponVOList);
 		}
 		// 红包信息
 		UserCouponVO userCouponVO = roaUserCashCouponService.getCashCoupon(couponOrderVO.getHbCode());
 		if (userCouponVO != null) {
 			BeanUtils.copyProperties(userCouponVO, couponOrderDetailVO);
-			couponOrderDetailVO.getHbList().add(userCouponVO);
+			List<UserCouponVO> userCouponVOlist = new ArrayList<UserCouponVO>();
+			userCouponVOlist.add(userCouponVO);
+			couponOrderDetailVO.setHbList(userCouponVOlist);
 		}
 		model.addAttribute("entity", couponOrderDetailVO);
 		return "/couponOrder/couponOrder_info";
