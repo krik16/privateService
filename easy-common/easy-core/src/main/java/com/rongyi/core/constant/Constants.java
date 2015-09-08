@@ -634,10 +634,18 @@ public interface Constants {
     }
     
     /**
-     * App标识
+     * App标识  来自于app store
      */
     interface AppId{
     	String MDC2C_IOS_APPId = "684748850";
     	String RYG_IOS_APPId = "999209638";
+    }
+    
+    /**
+     * App广告推广通道
+     */
+    interface AppAdvertChannel{
+    	String ZHIMENG_CHANNEL = "zhimeng";//指盟
+    	String WAPS_CHANNEL = "waps";//万普
     }
 }
