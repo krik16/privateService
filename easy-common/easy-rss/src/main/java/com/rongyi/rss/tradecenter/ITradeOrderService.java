@@ -41,8 +41,6 @@ public interface ITradeOrderService {
 
     List<Map<String, Object>> obtainCouponOrderForPayed(String orderNo);
 
-    void closeUnPayOrder();
-
     void updateOrderRefundedByNo(String orderNo);
 
     Map<String, Object> insertTradeOrder(TradeOrderCreateParam param);

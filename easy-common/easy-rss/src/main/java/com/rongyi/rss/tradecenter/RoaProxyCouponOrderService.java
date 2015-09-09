@@ -146,15 +146,6 @@ public interface RoaProxyCouponOrderService {
     Map<String, Object> processCouponOrderForPayed(String orderNo, int tradeWay, String paymentNo, String payAccount);
 
     /**
-     * 优惠券立即购买
-     *
-     * @param couponId
-     * @param userId
-     * @return
-     */
-    Map<String, Object> buyCoupon(String couponId, String userId);
-
-    /**
      * @param paramsMap
      * @param currentpage
      * @param pagesize

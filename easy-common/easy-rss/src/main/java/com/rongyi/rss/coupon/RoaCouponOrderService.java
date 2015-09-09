@@ -20,6 +20,7 @@ public interface RoaCouponOrderService {
      *
      * @param order
      */
+    @Deprecated
     void createCouponOrder(CouponOrder order);
 
     /**
@@ -27,10 +28,12 @@ public interface RoaCouponOrderService {
      *
      * @param order
      */
+    @Deprecated
     void updateCouponOrder(CouponOrder order);
 
     /**
      * 订单参数创建优惠订单
+     * 仅用于红包订单
      */
     ResponseResult createCouponOrder(CouponOrderParam param);
 
@@ -41,6 +44,7 @@ public interface RoaCouponOrderService {
      * @param orderNo
      * @return
      */
+    @Deprecated
     CouponOrder findOneByOrderNo(String orderNo);
 
     /**
@@ -49,6 +53,7 @@ public interface RoaCouponOrderService {
      * @param orderId
      * @return
      */
+    @Deprecated
     CouponOrder findCouponOrderById(Long orderId);
 
     /**
@@ -57,6 +62,7 @@ public interface RoaCouponOrderService {
      * @param param
      * @return
      */
+    @Deprecated
     Map<String, Object> createCouponOrderInfo(RoaCouponOrderParam param);
 
     /**
@@ -66,6 +72,7 @@ public interface RoaCouponOrderService {
      * @param userId
      * @return
      */
+    @Deprecated
     String updateTradeStatusDelete(String orderIdStr, String userId);
 
 
@@ -83,6 +90,7 @@ public interface RoaCouponOrderService {
      * @param orderNo
      * @return
      */
+    @Deprecated
     List<CouponOrderItem> findOrderItemsByNo(String orderNo);
 
 
@@ -92,6 +100,7 @@ public interface RoaCouponOrderService {
      * @param orderId
      * @return
      */
+    @Deprecated
     List<CouponOrderItem> findOrderItemsById(Long orderId);
 
     /**
@@ -99,6 +108,7 @@ public interface RoaCouponOrderService {
      *
      * @param item
      */
+    @Deprecated
     void updateCouponOrderItem(CouponOrderItem item);
 
     /**
@@ -112,6 +122,7 @@ public interface RoaCouponOrderService {
      * @param userId
      * @return Map<String,Object>    返回类型
      */
+    @Deprecated
     Map<String, Object> refundCoupons(String orderNo, Integer number, Double totalFee, String refundWay, String refundReason, String userId);
 
 
@@ -121,6 +132,7 @@ public interface RoaCouponOrderService {
      * @param orderNo
      * @return
      */
+    @Deprecated
     Map<String, Object> noPayCouponOrder(String orderNo, String userId);
 
 
@@ -132,6 +144,7 @@ public interface RoaCouponOrderService {
      * @param userName
      * @return
      */
+    @Deprecated
     Map<String, Object> submitCouponOrder(Map<String, Object> orderMap, String userId, String userName);
 
     /**
@@ -140,6 +153,7 @@ public interface RoaCouponOrderService {
      * @param orderId
      * @return
      */
+    @Deprecated
     List<Map<String, Object>> obtainCouponOrderForPayed(String orderId);
 
     /**
@@ -151,6 +165,7 @@ public interface RoaCouponOrderService {
      * @param payAccount 支付账户(例如支付宝账户)
      * @return
      */
+    @Deprecated
     Map<String,Object> processCouponOrderForPayed(String orderNo, int tradeWay, String paymentNo, String payAccount);
 
     /**
@@ -170,6 +185,7 @@ public interface RoaCouponOrderService {
      * @Title: getCouponOrders
      * @Description: TODO(分页查询订单信息)
      */
+    @Deprecated
     Map<String, Object> getCouponOrders(Map<String, Object> paramsMap,
                                         Integer currentpage, Integer pagesize);
 
@@ -181,6 +197,7 @@ public interface RoaCouponOrderService {
      * @param pageSize
      * @return
      */
+    @Deprecated
     Map<String, Object> findAllOrdersByType(Map<String, Object> paramsMap,
                                               Integer currentPage, Integer pageSize);
 
@@ -200,6 +217,7 @@ public interface RoaCouponOrderService {
      * @param pageSize
      * @return
      */
+    @Deprecated
     Map<String, Object> findOrdersByStatus(Map<String, Object> paramsMap,
                                                Integer currentPage, Integer pageSize);
 
@@ -210,11 +228,13 @@ public interface RoaCouponOrderService {
      * @param userId
      * @return
      */
+    @Deprecated
     Map<String, Object> calcRefundAmount(String orderNo, Integer number, String userId);
     
     /**
     *
     * @return
     */
-   void closeUnpayOrder();
+    @Deprecated
+    void closeUnpayOrder();
 }

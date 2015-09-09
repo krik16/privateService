@@ -19,7 +19,7 @@ public class TradeOrderCreateParam implements Serializable {
      * 3短信push
      * 4翻牌购
      */
-    private byte business;
+    private Byte business = 0;
     /**
      * 优惠券ID
      */
@@ -27,7 +27,7 @@ public class TradeOrderCreateParam implements Serializable {
     /**
      * 购买份数
      */
-    private Integer unitNum;
+    private Integer unitNum = 0;
     /**
      * 容易逛对应的用户ID，只用“容易逛”下单的用户，才需要记录用户ID
      */
@@ -47,15 +47,15 @@ public class TradeOrderCreateParam implements Serializable {
     /**
      * 积分
      */
-    private Integer score;
+    private Integer score = 0;
     /**
      * 积分抵扣金额 元
      */
-    private Double scoreDeduction;
+    private Double scoreDeduction = 0D;
     /**
      * 下单渠道, 0为容易逛，1为微网站，2为终端机，3其他
      */
-    private Integer orderSource;
+    private Integer orderSource = 0;
     /**
      * 1:手机用户登陆终端机领取优惠券状态
      */
@@ -104,9 +104,9 @@ public class TradeOrderCreateParam implements Serializable {
 
     private BigDecimal scoreDiscount = new BigDecimal(0);//积分抵扣金额 分
 
-    private Byte discountBitMap;
+    private Byte discountBitMap = 0;
 
-    private Integer statusHold;
+    private Integer statusHold = 0;
 
     private Date nextStatusTime;
     /**
@@ -153,7 +153,7 @@ public class TradeOrderCreateParam implements Serializable {
     }
 
     public Integer getOrderSource() {
-        return orderSource;
+        return this.orderSource;
     }
 
     public void setOrderSource(Integer orderSource) {
