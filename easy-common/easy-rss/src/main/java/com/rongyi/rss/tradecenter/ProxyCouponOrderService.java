@@ -1,4 +1,4 @@
-package com.rongyi.rss.coupon;
+package com.rongyi.rss.tradecenter;
 
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.easy.coupon.entity.CouponOrder;
@@ -10,11 +10,16 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 卡券订单接口：目前提供零支付订单
+ * Description:
+ * 现有coupon-service相关接口的代理实现，
+ * 和之前接口请求和返回类型一样，
+ * 目的是最小代价将依赖从coupon-service切换过来
  *
- * @author Breggor
+ * @author liuhao
+ * @version  2015/8/13
  */
-public interface RoaCouponOrderService {
+public interface ProxyCouponOrderService {
+
     /**
      * 创建优惠券订单
      *
@@ -32,8 +37,13 @@ public interface RoaCouponOrderService {
     void updateCouponOrder(CouponOrder order);
 
     /**
+     * 更新订单号更新订单状态为退款完成
+     * @param orderNo
+     */
+    void updateOrderRefundedByNo(String orderNo);
+
+    /**
      * 订单参数创建优惠订单
-     * 仅用于红包订单
      */
     ResponseResult createCouponOrder(CouponOrderParam param);
 
@@ -44,7 +54,6 @@ public interface RoaCouponOrderService {
      * @param orderNo
      * @return
      */
-    @Deprecated
     CouponOrder findOneByOrderNo(String orderNo);
 
     /**
@@ -53,7 +62,6 @@ public interface RoaCouponOrderService {
      * @param orderId
      * @return
      */
-    @Deprecated
     CouponOrder findCouponOrderById(Long orderId);
 
     /**
@@ -62,27 +70,24 @@ public interface RoaCouponOrderService {
      * @param param
      * @return
      */
-    @Deprecated
     Map<String, Object> createCouponOrderInfo(RoaCouponOrderParam param);
 
     /**
      * 优惠券批量订单删除（逻辑删除）
      *
-     * @param orderIdStr
+     * @param orderNoStr
      * @param userId
      * @return
      */
-    @Deprecated
-    String updateTradeStatusDelete(String orderIdStr, String userId);
-
+    String updateTradeStatusDelete(String orderNoStr, String userId);
 
     /**
      * 创建优惠券订单项
      *
      * @param item
      */
+    @Deprecated
     void createCouponOrderItem(CouponOrderItem item);
-
 
     /**
      * 根据订单号查询订单项
@@ -90,7 +95,6 @@ public interface RoaCouponOrderService {
      * @param orderNo
      * @return
      */
-    @Deprecated
     List<CouponOrderItem> findOrderItemsByNo(String orderNo);
 
 
@@ -100,16 +104,7 @@ public interface RoaCouponOrderService {
      * @param orderId
      * @return
      */
-    @Deprecated
     List<CouponOrderItem> findOrderItemsById(Long orderId);
-
-    /**
-     * 更新优惠券订单项
-     *
-     * @param item
-     */
-    @Deprecated
-    void updateCouponOrderItem(CouponOrderItem item);
 
     /**
      * 优惠券退款处理
@@ -122,7 +117,6 @@ public interface RoaCouponOrderService {
      * @param userId
      * @return Map<String,Object>    返回类型
      */
-    @Deprecated
     Map<String, Object> refundCoupons(String orderNo, Integer number, Double totalFee, String refundWay, String refundReason, String userId);
 
 
@@ -132,7 +126,6 @@ public interface RoaCouponOrderService {
      * @param orderNo
      * @return
      */
-    @Deprecated
     Map<String, Object> noPayCouponOrder(String orderNo, String userId);
 
 
@@ -144,7 +137,6 @@ public interface RoaCouponOrderService {
      * @param userName
      * @return
      */
-    @Deprecated
     Map<String, Object> submitCouponOrder(Map<String, Object> orderMap, String userId, String userName);
 
     /**
@@ -153,7 +145,6 @@ public interface RoaCouponOrderService {
      * @param orderId
      * @return
      */
-    @Deprecated
     List<Map<String, Object>> obtainCouponOrderForPayed(String orderId);
 
     /**
@@ -165,17 +156,7 @@ public interface RoaCouponOrderService {
      * @param payAccount 支付账户(例如支付宝账户)
      * @return
      */
-    @Deprecated
-    Map<String,Object> processCouponOrderForPayed(String orderNo, int tradeWay, String paymentNo, String payAccount);
-
-    /**
-     * 优惠券立即购买
-     *
-     * @param couponId
-     * @param userId
-     * @return
-     */
-    Map<String, Object> buyCoupon(String couponId, String userId);
+    Map<String, Object> processCouponOrderForPayed(String orderNo, int tradeWay, String paymentNo, String payAccount);
 
     /**
      * @param paramsMap
@@ -185,7 +166,6 @@ public interface RoaCouponOrderService {
      * @Title: getCouponOrders
      * @Description: TODO(分页查询订单信息)
      */
-    @Deprecated
     Map<String, Object> getCouponOrders(Map<String, Object> paramsMap,
                                         Integer currentpage, Integer pagesize);
 
@@ -197,18 +177,8 @@ public interface RoaCouponOrderService {
      * @param pageSize
      * @return
      */
-    @Deprecated
     Map<String, Object> findAllOrdersByType(Map<String, Object> paramsMap,
-                                              Integer currentPage, Integer pageSize);
-
-    /**
-     * 根据订单号，券类型查询
-     *
-     * @param orderNo
-     * @param couponType
-     * @return
-     */
-    List<CouponOrderItem> findItemListByOrderNoAndCouponType(String orderNo, String couponType);
+                                            Integer currentPage, Integer pageSize);
 
     /**
      * 优惠券列表（未消费、已退款、退款中）
@@ -217,9 +187,8 @@ public interface RoaCouponOrderService {
      * @param pageSize
      * @return
      */
-    @Deprecated
     Map<String, Object> findOrdersByStatus(Map<String, Object> paramsMap,
-                                               Integer currentPage, Integer pageSize);
+                                           Integer currentPage, Integer pageSize);
 
     /**
      *
@@ -228,13 +197,6 @@ public interface RoaCouponOrderService {
      * @param userId
      * @return
      */
-    @Deprecated
     Map<String, Object> calcRefundAmount(String orderNo, Integer number, String userId);
-    
-    /**
-    *
-    * @return
-    */
-    @Deprecated
-    void closeUnpayOrder();
+
 }

@@ -18,6 +18,14 @@ public class CouponOrderParam implements Serializable {
     private String couponCode;// 卡券码号
     private String userId;// 用户Id
     private String userSrc;// 用户渠道
+    /**
+     * 0普通单
+     * 1 “0元单”
+     * 2扫码领券
+     * 3短信push
+     * 4翻牌购
+     */
+    private Byte business;
 
     public CouponOrderParam() {
     }
@@ -84,5 +92,13 @@ public class CouponOrderParam implements Serializable {
 
     public void setUserSrc(String userSrc) {
         this.userSrc = userSrc;
+    }
+
+    public Byte getBusiness() {
+        return business;
+    }
+
+    public void setBusiness(Byte business) {
+        this.business = business;
     }
 }
