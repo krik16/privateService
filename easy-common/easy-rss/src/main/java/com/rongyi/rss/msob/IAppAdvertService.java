@@ -19,7 +19,7 @@ public interface IAppAdvertService {
 	 * @param entity
 	 * @throws Exception
 	 */
-	public void insertAppAdvert(AppAdvertParam param) throws Exception;
+	public void insertAppAdvert(String appid, String idfa, String channel) throws Exception;
 	
 	/**
 	 * 激活通知回调广告商接口
