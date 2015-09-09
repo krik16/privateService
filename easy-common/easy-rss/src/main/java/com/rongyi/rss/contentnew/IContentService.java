@@ -12,19 +12,19 @@ import com.rongyi.easy.contentnew.entity.vo.ForumHomeModelVo;
 import com.rongyi.easy.contentnew.entity.vo.ForumPostiomModelVo;
 
 /**
- * 内容管理的接口
+ * 页面用的接口
  * @author lijing
- * @time 2015-09-01
+ * @time 2015-09-07
  *
  */
-public interface ROAContentService {
-	
+public interface IContentService {
 	/**
 	 * 查询内容管理首页的信息
 	 * 
 	 */
 	public List<ForumHomeModelVo> findHomePage();
 	
+
 	/**
 	 * 通过id查询首页信息
 	 * @param id

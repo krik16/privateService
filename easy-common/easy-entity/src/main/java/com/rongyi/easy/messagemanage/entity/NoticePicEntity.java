@@ -1,21 +1,22 @@
 package com.rongyi.easy.messagemanage.entity;
 
 import java.io.Serializable;
-
+import java.util.Date;
 /**
  * 店铺公告图片
  * @author lijing
- * @time 2015-09-06
+ * @time 2015-09-09
  *
  */
-@SuppressWarnings("serial")
-public class ShopNoticePic implements Serializable {
-	/**店铺公告图片id*/
+public class NoticePicEntity implements Serializable{
+	/**id*/
     private Integer id;
-    /**店铺公告id*/
+    /**公告id*/
     private Integer noticeId;
-    /**图片  全路径*/
+    /**图片*/
     private String pic;
+    /**创建时间*/
+    private Date createAt;
 
     public Integer getId() {
         return id;
@@ -39,5 +40,13 @@ public class ShopNoticePic implements Serializable {
 
     public void setPic(String pic) {
         this.pic = pic;
+    }
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
     }
 }

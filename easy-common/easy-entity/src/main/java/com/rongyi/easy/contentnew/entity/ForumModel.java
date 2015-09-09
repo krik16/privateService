@@ -1,6 +1,7 @@
 package com.rongyi.easy.contentnew.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 /**
  * 内容管理模版
  * @author lijing
@@ -17,9 +18,40 @@ public class ForumModel implements Serializable {
     private String imagePixel;
     /**图片大小的显示 如 30   以K为单位*/
     private Integer imageSize;
-   
+    /**创建人*/
+    private String createUser;
+    /**创建时间*/
+    private Date createAt;
+    /**记录状态 0待发布、1已发布、2已关闭*/
+    private Integer status;
+
     
-    public Integer getId() {
+    
+    public String getCreateUser() {
+		return createUser;
+	}
+
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public Integer getId() {
         return id;
     }
 

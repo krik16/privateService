@@ -5,35 +5,37 @@ import java.util.Date;
 /**
  * 店铺公告实体
  * @author lijing
- * @time 2015-09-06
+ * @time 2015-09-09
+ *
  */
-@SuppressWarnings("serial")
-public class ShopNotice implements Serializable{
-	/**店铺公告id*/
+public class NoticeEntity implements Serializable{
+	/**id*/
     private Integer id;
-    /**店铺公告内容*/
+    /**公告内容*/
     private String content;
     /**店铺名字*/
     private String shopName;
     /**店铺id*/
     private String shopMid;
-    /**状态 0待审核 1审核通过 2 未通过*/
+    /**状态0待审核 1审核通过 2 未通过*/
     private Integer status;
-    /** 发布开始时间*/
+    /**发布时间*/
     private Date publishBeginAt;
-    /** 发布结束时间*/
+    /**结束时间*/
     private Date publishEndAt;
-    /**创建人*/
-    private String createUser;
+    /**创建人id*/
+    private String createUserid;
     /**创建时间*/
     private Date createAt;
     /**修改人*/
-    private String updateUser;
+    private String updateUserid;
+    /**版本*/
+    private Integer version;
     /**修改时间*/
     private Date updateAt;
-    /**是否删除  true  删除了   false没有删除*/
+    /**是否删除 false 没有删除   true 删除了*/
     private Boolean isDeleted;
-    
+
     public Integer getId() {
         return id;
     }
@@ -90,12 +92,12 @@ public class ShopNotice implements Serializable{
         this.publishEndAt = publishEndAt;
     }
 
-    public String getCreateUser() {
-        return createUser;
+    public String getCreateUserid() {
+        return createUserid;
     }
 
-    public void setCreateUser(String createUser) {
-        this.createUser = createUser;
+    public void setCreateUserid(String createUserid) {
+        this.createUserid = createUserid;
     }
 
     public Date getCreateAt() {
@@ -106,12 +108,20 @@ public class ShopNotice implements Serializable{
         this.createAt = createAt;
     }
 
-    public String getUpdateUser() {
-        return updateUser;
+    public String getUpdateUserid() {
+        return updateUserid;
     }
 
-    public void setUpdateUser(String updateUser) {
-        this.updateUser = updateUser;
+    public void setUpdateUserid(String updateUserid) {
+        this.updateUserid = updateUserid;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
     public Date getUpdateAt() {
