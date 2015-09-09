@@ -24,7 +24,7 @@ public interface ProxyCodeValidHisService {
      * @param paramMap
      * @return
      */
-     PagingVO<CouponHistoryVO> searchCouponCodeListAndCount(Map paramMap);
+     PagingVO<CouponHistoryVO> searchCouponCodeListAndCount(Map<String,Object> paramMap);
 
      /**
       * 
