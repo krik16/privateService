@@ -241,7 +241,7 @@
 		order by count desc
 	</select>
 	
-		<select id="validateByTradeNoAndPayNo" resultMap="java.lang.Integer"
+	<select id="validateByTradeNoAndPayNo" resultType="java.lang.Integer"
 		parameterType="java.lang.String">
 		select
 			count(pe.id)
