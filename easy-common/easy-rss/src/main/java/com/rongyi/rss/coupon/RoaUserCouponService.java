@@ -31,7 +31,6 @@ public interface RoaUserCouponService {
      * @param couponCode
      * @return
      */
-    @Deprecated
     UserCoupon getUserCoupon(String couponCode);
 
     /**
@@ -86,7 +85,6 @@ public interface RoaUserCouponService {
      * @param userId
      * @return
      */
-    @Deprecated
     int buyedCouponCount(String couponId, String userId);
 
     @Deprecated
@@ -98,7 +96,6 @@ public interface RoaUserCouponService {
 
     int changeCouponStatus(String couponCode, Integer status);
 
-    @Deprecated
     UserCoupon getUserCoupon(String couponCode, Date curDate);
 
     PagingVO<UserCoupon> findUserCouponByUserId(String userId,
