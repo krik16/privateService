@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class PageVo implements Serializable{
 	private Integer currentPage;
 	private Integer pageSize;
-	private Integer totalRecord;
+	private Integer totalCount;
 	
 	public PageVo(){
 		
@@ -22,11 +22,11 @@ public class PageVo implements Serializable{
 	public void setPageSize(Integer pageSize) {
 		this.pageSize = pageSize;
 	}
-	public Integer getTotalRecord() {
-		return totalRecord;
+	public Integer getTotalCount() {
+		return totalCount;
 	}
-	public void setTotalRecord(Integer totalRecord) {
-		this.totalRecord = totalRecord;
+	public void setTotalCount(Integer totalCount) {
+		this.totalCount = totalCount;
 	}
 	
 	
