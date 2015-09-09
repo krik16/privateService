@@ -2,6 +2,7 @@ package com.rongyi.rss.mcmc;
 
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.easy.mcmc.Commodity;
+import com.rongyi.easy.mcmc.CommodityShopInfo;
 import com.rongyi.easy.mcmc.vo.CommodityPageBuyerVO;
 import com.rongyi.easy.mcmc.vo.CommoditySpecVO;
 import com.rongyi.easy.mcmc.vo.CommodityVO;
@@ -23,7 +24,7 @@ public interface CommodityService {
 	public ResponseResult getCommodityById(String id,long shopId);
 	public ResponseResult getCommodityListByShopId(String id, int orderBy,String keyword,int currentpage,int pagesize);
 	
-	public String publishCommodity(CommodityVO commodityvo,long shopId,String shopMid,long brandId,long mallId,String mallMid,String brandName,String shopNum);
+	public String publishCommodity(CommodityVO commodityvo,long shopId,long brandId,long mallId,String mallMid,String brandName,String shopNum,CommodityShopInfo shopInfo);
 	
 	public ResponseResult commodityToShelves(String id,long shopId);
 	
