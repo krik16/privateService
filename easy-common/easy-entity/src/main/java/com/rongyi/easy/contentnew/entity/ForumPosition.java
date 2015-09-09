@@ -27,7 +27,9 @@ public class ForumPosition implements Serializable{
     private String updateUser;
     /**修改时间*/
     private Date updateAt;
-
+    /**0有效，1无效*/
+    private Integer status;
+    
     public Integer getId() {
         return id;
     }
@@ -99,4 +101,13 @@ public class ForumPosition implements Serializable{
     public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
     }
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+    
 }

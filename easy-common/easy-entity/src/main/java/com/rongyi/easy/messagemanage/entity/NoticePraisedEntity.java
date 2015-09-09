@@ -2,19 +2,19 @@ package com.rongyi.easy.messagemanage.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+
 /**
- * 店铺公告审核不通过记录
+ * 店铺公告点赞
  * @author lijing
- * @time 2015-09-06
+ * @time 2015-09-09
  */
-@SuppressWarnings("serial")
-public class ShopNoticeRecord implements Serializable{
+public class NoticePraisedEntity implements Serializable{
 	/**id*/
     private Integer id;
     /**店铺公告id*/
     private Integer noticeId;
-    /**不通过原因*/
-    private String reason;
+    /**点赞用户*/
+    private String userId;
     /**创建时间*/
     private Date createAt;
 
@@ -34,12 +34,12 @@ public class ShopNoticeRecord implements Serializable{
         this.noticeId = noticeId;
     }
 
-    public String getReason() {
-        return reason;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setReason(String reason) {
-        this.reason = reason;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public Date getCreateAt() {

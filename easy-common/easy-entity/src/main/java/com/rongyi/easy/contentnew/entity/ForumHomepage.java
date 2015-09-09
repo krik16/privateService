@@ -28,6 +28,9 @@ public class ForumHomepage implements Serializable {
     private Date updateAt;
     /**子模版个数*/
     private Integer positionCount;
+    
+    /**是否已经删除  true表示删除 flase 表示没有删除*/
+    private boolean isDeleted;
 
     public Integer getId() {
         return id;
@@ -108,4 +111,13 @@ public class ForumHomepage implements Serializable {
     public void setPositionCount(Integer positionCount) {
         this.positionCount = positionCount;
     }
+
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+    
 }
