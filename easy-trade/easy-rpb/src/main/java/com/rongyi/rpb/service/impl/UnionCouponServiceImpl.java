@@ -18,7 +18,7 @@ import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.entity.UnionActivityRegister;
 import com.rongyi.easy.rpb.entity.UnionCouponLogEntity;
 import com.rongyi.easy.rpb.vo.UnionCouponLogVO;
-import com.rongyi.rpb.common.util.orderSign.union.UnionUtil;
+import com.rongyi.rpb.common.pay.union.UnionUtil;
 import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.service.PaymentLogInfoService;

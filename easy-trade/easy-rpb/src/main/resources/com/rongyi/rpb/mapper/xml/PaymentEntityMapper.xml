@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.rongyi.rpb.mapper.PaymentEntityMapper">
-
 	<resultMap id="BaseResultMap" type="com.rongyi.easy.rpb.domain.PaymentEntity">
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="order_no" property="orderNum" jdbcType="VARCHAR" />
@@ -313,7 +312,7 @@
 		from payment_order
 		where pay_no = #{payNo,jdbcType=VARCHAR}
 		<if test="tradeType != null and tradeType != ''">
-			and	trade_type = #{tradeType,jdbcType=INTEGER}
+			and trade_type = #{tradeType,jdbcType=INTEGER}
 		</if>
 	</select>
 

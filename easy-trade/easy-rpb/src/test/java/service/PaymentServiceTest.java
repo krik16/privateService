@@ -46,7 +46,7 @@ public class PaymentServiceTest extends BaseTest {
 	@Autowired
 	RpbServiceImpl rpbServiceImpl;
 	
-	// @Test
+//	 @Test
 	public void testSelectPageListBySearch() {
 		Map<String, Object> searchValueMap = null;
 		searchValueMap = new HashMap<String, Object>();
@@ -113,7 +113,7 @@ public class PaymentServiceTest extends BaseTest {
 		paymentService.insertByOrderDetailNum(paymentEntity, "001,002");
 	}
 
-	// @Test
+//	 @Test
 	public void testSelectByPrimaryKey() {
 		PaymentEntity paymentEntity = paymentService.selectByPrimaryKey("80");
 		System.err.println(paymentEntity.getPayNo());
@@ -151,7 +151,7 @@ public class PaymentServiceTest extends BaseTest {
 
 	}
 
-	// @Test
+	 @Test
 	public void testValidateOrderNumExist() {
 		PaymentEntity paymentEntity = paymentService.validateOrderNumExist("1000000126496953,1000000272983889", 1, 1);
 		System.err.println("payNo=" + paymentEntity.getPayNo());

@@ -227,7 +227,7 @@
 	</update>
 
 	<select id="selectPayAccountUseTotal" resultMap="PayAccountUserTotalMap"
-		parameterType="java.lang.String">
+		parameterType="java.lang.Integer">
 		select buyer_email as pay_account,pay_channel as
 		pay_type,COUNT(buyer_email) as count from payment_event pe
 		left join

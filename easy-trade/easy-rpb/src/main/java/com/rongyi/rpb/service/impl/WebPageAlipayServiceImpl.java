@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
-import com.rongyi.rpb.common.util.orderSign.webPageAlipay.alipay.sign.AlipayConfig;
-import com.rongyi.rpb.common.util.orderSign.webPageAlipay.alipay.util.AlipayNotify;
-import com.rongyi.rpb.common.util.orderSign.webPageAlipay.alipay.util.AlipaySubmit;
-import com.rongyi.rpb.common.util.orderSign.webPageAlipay.alipay.util.UtilDate;
+import com.rongyi.rpb.common.pay.ali.sign.AlipayConfig;
+import com.rongyi.rpb.common.pay.ali.util.AlipayNotify;
+import com.rongyi.rpb.common.pay.ali.util.AlipaySubmit;
+import com.rongyi.rpb.common.pay.ali.util.UtilDate;
 import com.rongyi.rpb.constants.ConstantUtil;
 import com.rongyi.rpb.service.WebPageAlipayService;
 

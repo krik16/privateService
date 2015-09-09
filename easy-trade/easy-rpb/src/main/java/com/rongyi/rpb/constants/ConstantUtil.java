@@ -1,5 +1,7 @@
 package com.rongyi.rpb.constants;
 
+import java.io.File;
+
 import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.framework.spring.context.utils.SpringContextUtil;
 
@@ -26,12 +28,11 @@ public interface ConstantUtil {
 //		public static String PARTNER_KEY = "82f1d2fa5ed647323e0de6c2898c4a21";
 //		public static String TRACEID = "wxf379a9c3029f1f15";
 
+	
 		public static String APP_ID = propertyConfigurer.getProperty("WEIXIN.APP_ID").toString();
-		public static String APP_SECRET = propertyConfigurer.getProperty("WEIXIN.APP_SECRET").toString();
-		public static String APP_KEY = propertyConfigurer.getProperty("WEIXIN.APP_KEY").toString();
-		public static String PARTNER = propertyConfigurer.getProperty("WEIXIN.PARTNER").toString();
+		public static String KEY = propertyConfigurer.getProperty("WEIXIN.KEY").toString();
+		public static String MCH_ID = propertyConfigurer.getProperty("WEIXIN.MCH_ID").toString();
 		public static String PASSWORD = propertyConfigurer.getProperty("WEIXIN.PASSWORD").toString();
-		public static String PARTNER_KEY = propertyConfigurer.getProperty("WEIXIN.PARTNER_KEY").toString();
 		public static String TRACEID = propertyConfigurer.getProperty("WEIXIN.TRACEID").toString();
 
 		
@@ -144,12 +145,10 @@ public interface ConstantUtil {
 	interface PayWeiXin_V3{
 		
 		public static String APP_ID = propertyConfigurer.getProperty("WEIXIN.APP_ID").toString();
-		public static String APP_SECRET = propertyConfigurer.getProperty("WEIXIN.APP_SECRET").toString();
-		public static String APP_KEY = propertyConfigurer.getProperty("WEIXIN.APP_KEY").toString();
-		public static String PARTNER = propertyConfigurer.getProperty("WEIXIN.PARTNER").toString();
+		public static String KEY = propertyConfigurer.getProperty("WEIXIN.KEY").toString();
+		public static String MCH_ID = propertyConfigurer.getProperty("WEIXIN.MCH_ID").toString();
 		public static String PASSWORD = propertyConfigurer.getProperty("WEIXIN.PASSWORD").toString();
-		public static String PARTNER_KEY = propertyConfigurer.getProperty("WEIXIN.PARTNER_KEY").toString();
-		public static String TRACEID = propertyConfigurer.getProperty("WEIXIN.TRACEID").toString();
+
 
 		
 		String SPBILL_CREATE_IP = "127.0.0.1";//终端IP

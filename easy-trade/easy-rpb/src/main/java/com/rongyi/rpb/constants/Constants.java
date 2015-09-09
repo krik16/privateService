@@ -152,4 +152,9 @@ public interface Constants {
 		int EVENT_TYPE8 = 8;
 		
 	}
+	
+	interface RESULT{
+		String SUCCESS = "SUCCESS";
+		String FAIL = "FAIL";
+	}
 }

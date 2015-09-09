@@ -162,13 +162,9 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 			if (!StringUtils.isEmpty(tradeVo.getOrderDiscountInfo())) {
 				jsonObject = JSONObject.fromObject(tradeVo.getOrderDiscountInfo());
 			}
-		} else {
-			if (!StringUtils.isEmpty(tradeVo.getCouponDiscuntInfo())) {
-				jsonObject = JSONObject.fromObject(tradeVo.getCouponDiscuntInfo());
-			}
 		}
 		if (jsonObject != null && jsonObject.get("score") != null)
-			tradeVo.setIntegral(jsonObject.getInt("score"));
+			tradeVo.setScore(jsonObject.getInt("score"));
 		if (jsonObject != null && jsonObject.get("cashCouponDiscount") != null)
 			tradeVo.setCouponDiscountInt(Integer.valueOf(jsonObject.getString("cashCouponDiscount")));
 		return tradeVo;

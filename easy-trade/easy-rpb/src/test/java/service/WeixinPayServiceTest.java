@@ -34,20 +34,17 @@ import base.BaseTest;
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.vo.WeixinQueryOrderParamVO;
-import com.rongyi.rpb.common.util.orderSign.weixinSign.client.TenpayHttpClient;
-import com.rongyi.rpb.common.v3.weixin.model.RefundQueryReqData;
-import com.rongyi.rpb.common.v3.weixin.model.RefundReqData;
-import com.rongyi.rpb.common.v3.weixin.model.RefundResData;
-import com.rongyi.rpb.common.v3.weixin.model.ReverseReqData;
-import com.rongyi.rpb.common.v3.weixin.model.ScanPayReqData;
-import com.rongyi.rpb.common.v3.weixin.model.ScanPayService;
-import com.rongyi.rpb.common.v3.weixin.service.RefundQueryService;
-import com.rongyi.rpb.common.v3.weixin.service.RefundService;
-import com.rongyi.rpb.common.v3.weixin.service.ReverseService;
-import com.rongyi.rpb.common.v3.weixin.service.UnifiedorderService;
-import com.rongyi.rpb.common.v3.weixin.util.RandomStringGenerator;
-import com.rongyi.rpb.common.v3.weixin.util.Signature;
-import com.rongyi.rpb.common.v3.weixin.util.Util;
+import com.rongyi.rpb.common.pay.weixin.model.RefundQueryReqData;
+import com.rongyi.rpb.common.pay.weixin.model.RefundReqData;
+import com.rongyi.rpb.common.pay.weixin.model.RefundResData;
+import com.rongyi.rpb.common.pay.weixin.model.ReverseReqData;
+import com.rongyi.rpb.common.pay.weixin.model.ScanPayReqData;
+import com.rongyi.rpb.common.pay.weixin.model.ScanPayService;
+import com.rongyi.rpb.common.pay.weixin.service.RefundQueryService;
+import com.rongyi.rpb.common.pay.weixin.service.RefundService;
+import com.rongyi.rpb.common.pay.weixin.service.ReverseService;
+import com.rongyi.rpb.common.pay.weixin.service.UnifiedorderService;
+import com.rongyi.rpb.common.pay.weixin.util.Util;
 import com.rongyi.rpb.constants.ConstantUtil;
 import com.rongyi.rpb.mq.Sender;
 import com.rongyi.rpb.service.PaymentService;
@@ -79,7 +76,7 @@ public class WeixinPayServiceTest extends BaseTest {
 
 	// @Test
 	public void testGetWeixinRefund() {
-		weixinPayService.weixinRefund("1000000384208367", 0.01, 0.01, "10000003840682312");
+//		weixinPayService.weixinRefund("1000000384208367", 0.01, 0.01, "10000003840682312");
 		// weixinPayService.getAppWeXinSign("1000000197371298", 0.01);
 	}
 
@@ -178,35 +175,40 @@ public class WeixinPayServiceTest extends BaseTest {
 
 	// @Test
 	public void testQueryOrder() {
-		TenpayHttpClient httpClient = new TenpayHttpClient("UTF-8");
-		httpClient.setReqContent("https://api.mch.weixin.qq.com/pay/orderquery");
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("appid", "wxf379a9c3029f1f15");
-		map.put("mch_id", "1220588601");
-		map.put("transaction_id", "1220588601201508116025541515");
-		/* map.put("out_trade_no","1000001768287279"); */
-		// 随机字符串，不长于32 位
-		String nonce_str = RandomStringGenerator.getRandomStringByLength(32);
-		map.put("nonce_str", nonce_str);
-		// 根据API给的签名规则进行签名
-		String sign = Signature.getSign(map);
-		// map.put("sign", sign);
-		// String postDataXML = xStreamForRequestPostData.toXML(map);
-
-		String postDataXML = "<xml>" + "<appid>wxf379a9c3029f1f15</appid>" + "<mch_id>1220588601</mch_id>" + "<nonce_str>" + nonce_str + "</nonce_str>"
-		/* + "<out_trade_no>1000001768287279</out_trade_no>" */
-		+ "<transaction_id>1220588601201508116025541515</transaction_id>" + "<sign>" + sign + "</sign>" + "</xml>";
-		boolean bool = httpClient.callHttpPost("https://api.mch.weixin.qq.com/pay/orderquery", postDataXML);
-		System.err.println("bool=" + bool);
-		String resContent = httpClient.getResContent();
-		System.err.println(resContent);
+//		TenpayHttpClient httpClient = new TenpayHttpClient("UTF-8");
+//		httpClient.setReqContent("https://api.mch.weixin.qq.com/pay/orderquery");
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("appid", "wxf379a9c3029f1f15");
+//		map.put("mch_id", "1220588601");
+//		map.put("transaction_id", "1220588601201508116025541515");
+//		/* map.put("out_trade_no","1000001768287279"); */
+//		// 随机字符串，不长于32 位
+//		String nonce_str = RandomStringGenerator.getRandomStringByLength(32);
+//		map.put("nonce_str", nonce_str);
+//		// 根据API给的签名规则进行签名
+//		String sign = Signature.getSign(map);
+//		// map.put("sign", sign);
+//		// String postDataXML = xStreamForRequestPostData.toXML(map);
+//
+//		String postDataXML = "<xml>" + "<appid>wxf379a9c3029f1f15</appid>" + "<mch_id>1220588601</mch_id>" + "<nonce_str>" + nonce_str + "</nonce_str>"
+//		/* + "<out_trade_no>1000001768287279</out_trade_no>" */
+//		+ "<transaction_id>1220588601201508116025541515</transaction_id>" + "<sign>" + sign + "</sign>" + "</xml>";
+//		boolean bool = httpClient.callHttpPost("https://api.mch.weixin.qq.com/pay/orderquery", postDataXML);
+//		System.err.println("bool=" + bool);
+//		String resContent = httpClient.getResContent();
+//		System.err.println(resContent);
 	}
 
-	// @Test
+//	 @Test
 	public void testQueryOrder2() {
-		System.err.println(ConstantUtil.CRET_DIRECTORY);
-		// System.err.println(weixinPayService.queryOrder("10000002315977421").getRet_code());
+		 System.err.println(weixinPayService.queryOrder(null,"10000002315977421"));
 	}
+	
+//	@Test
+	public void testCloseOrder(){
+		weixinPayService.closeOrder("1231");
+	}
+	 
 
 	// @Test
 	@Rollback(false)
@@ -214,7 +216,7 @@ public class WeixinPayServiceTest extends BaseTest {
 		weixinPayService.batchTriggerWeixinRefund();
 	}
 
-	// @Test
+	 @Test
 	public void testgetPaySignV3() {
 		try {
 			UnifiedorderService unifiedorderService = new UnifiedorderService();
@@ -234,7 +236,7 @@ public class WeixinPayServiceTest extends BaseTest {
 	public void testRefundV3() {
 		try {
 			RefundService refundService = new RefundService();
-			RefundReqData refundReqData = new RefundReqData(null, "1000001463574454", null, "1234131231231", 1, 1, ConstantUtil.PayWeiXin_V3.PARTNER, null);
+			RefundReqData refundReqData = new RefundReqData(null, "1000001463574454", null, "1234131231231", 1, 1, ConstantUtil.PayWeiXin_V3.MCH_ID, null);
 			String result = refundService.request(refundReqData);
 			System.err.println("result=" + result);
 			RefundResData refundResData = (RefundResData) Util.getObjectFromXML(result, RefundResData.class);
@@ -253,8 +255,8 @@ public class WeixinPayServiceTest extends BaseTest {
 		}
 	}
 	
-	@Test
-	@Description("微信退款")
+//	@Test
+	@Description("微信退款查询")
 	public void testRefundQuery(){
 		try{
 		RefundQueryService refundQueryService = new RefundQueryService();

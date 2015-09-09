@@ -94,7 +94,7 @@ public class TradeServiceTest extends BaseTest{
         
     }
     
-//    @Test
+    @Test
     public void paySuccessToMessageTest(){
         List<PaymentEntity> list = new ArrayList<PaymentEntity>();
         list.add(paymentService.selectByPrimaryKey("4747"));
@@ -105,7 +105,7 @@ public class TradeServiceTest extends BaseTest{
         
     }
     
-    @Test
+//    @Test
     public void testSelectCoupon(){
     	CouponOrder couponOrder = roaCouponOrderService.findOneByOrderNo("2015071300350917");
     	System.err.println(couponOrder.getBuyerId());

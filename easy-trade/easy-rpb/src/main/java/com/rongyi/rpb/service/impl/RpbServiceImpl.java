@@ -107,7 +107,9 @@ public class RpbServiceImpl implements IRpbService {
 		PaymentEntity paymentEntity = paymentService.selectByPrimaryKey(id.toString());
 		PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
 				paymentEntity.getPayChannel());
-		if (weixinPayService.weixinRefund(oldPaymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), oldPaymentEntity.getAmountMoney().doubleValue(), paymentEntity.getPayNo())) {
+		Map<String, Object> refundResultMap = weixinPayService.weixinRefund(oldPaymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), oldPaymentEntity.getAmountMoney().doubleValue(),
+				paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
+		if (Constants.RESULT.SUCCESS.equals(refundResultMap.get("result"))) {
 			paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
 			paymentService.updateByPrimaryKeySelective(paymentEntity);
 			messageMap.put("success", true);
@@ -125,7 +127,7 @@ public class RpbServiceImpl implements IRpbService {
 			return messageMap;
 		}
 		messageMap.put("success", false);
-		messageMap.put("message", "微信退款失败");
+		messageMap.put("message", refundResultMap.get("message"));
 		return messageMap;
 	}
 
@@ -225,12 +227,12 @@ public class RpbServiceImpl implements IRpbService {
 			}
 			LOGGER.info("支付宝订单状态-->" + queryOrderParamVO.getTrade_status());
 		} else if (Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1 == payChannel) {
-			WeixinQueryOrderParamVO weixinQueryOrderParamVO = weixinPayService.queryOrder(tradeNo,payNo);
+			WeixinQueryOrderParamVO weixinQueryOrderParamVO = weixinPayService.queryOrder(tradeNo, payNo);
 			if (weixinQueryOrderParamVO != null && "SUCCESS".equals(weixinQueryOrderParamVO.getResult_code())
 					&& ("SUCCESS".equals(weixinQueryOrderParamVO.getTrade_state()) || "REFUND".equals(weixinQueryOrderParamVO.getTrade_state()))) {
 				return true;
 			}
-			LOGGER.info("微信订单支付未成功-->"+weixinQueryOrderParamVO.toString());
+			LOGGER.info("微信订单支付未成功-->" + weixinQueryOrderParamVO.toString());
 		} else {
 			LOGGER.info("未找到对应付款方式-->payChannel=" + payChannel + ",tradeNo=" + tradeNo + ",payNo=" + payNo);
 		}

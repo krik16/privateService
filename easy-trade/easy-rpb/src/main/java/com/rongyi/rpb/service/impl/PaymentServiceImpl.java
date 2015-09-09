@@ -611,8 +611,9 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 				refundPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
 				LOGGER.info(Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0 == paymentEntity.getPayChannel() ? "支付宝" : "微信" + "重复支付直接退款-->退款单号" + payNo);
 				if (Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1 == paymentEntity.getPayChannel()) {// 微信自动退款
-					boolean result = weixinPayService.weixinRefund(paymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), paymentEntity.getAmountMoney().doubleValue(), payNo);
-					if (result)
+					Map<String, Object> resultMap = weixinPayService.weixinRefund(paymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), paymentEntity.getAmountMoney().doubleValue(),
+							payNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE6);
+					if (Constants.RESULT.SUCCESS.equals(resultMap.get("result")))
 						refundPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
 				}
 				insert(refundPaymentEntity);
