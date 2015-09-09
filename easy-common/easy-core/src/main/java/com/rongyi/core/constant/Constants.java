@@ -637,8 +637,8 @@ public interface Constants {
      * App标识  来自于app store
      */
     interface AppId{
-    	String MDC2C_IOS_APPId = "684748850";
-    	String RYG_IOS_APPId = "999209638";
+    	String MDC2C_IOS_APPId = "999209638";
+    	String RYG_IOS_APPId = "684748850";
     }
     
     /**
