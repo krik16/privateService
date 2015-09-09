@@ -11,12 +11,26 @@ import java.io.Serializable;
  */
 public class UserInfoVo implements Serializable{
     private Integer id;
-    private Integer identity;
+    private Integer identity;//身份类型:0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购
     private String shopId;
     private String  mallId;
     private String groupId;
     private String brandId;
     private String branchCompanyId;
+    private String userName;
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).append("id", id).append("identity", identity).append("shopId", shopId).append("mallId", mallId).append("groupId", groupId).append("brandId", brandId).append("branchCompanyId", branchCompanyId).append("userName", userName).toString();
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public Integer getId() {
         return id;
@@ -74,8 +88,4 @@ public class UserInfoVo implements Serializable{
         this.identity = identity;
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this).append("id", id).append("identity", identity).append("shopId", shopId).append("mallId", mallId).append("groupId", groupId).append("brandId", brandId).append("branchCompanyId", branchCompanyId).toString();
-    }
 }

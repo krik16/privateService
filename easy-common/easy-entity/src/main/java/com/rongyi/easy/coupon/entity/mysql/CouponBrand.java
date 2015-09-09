@@ -78,5 +78,28 @@ public class CouponBrand implements Serializable{
 				.append("]");
 		return builder.toString();
 	}
-    
+
+    public CouponBrand(Integer couponId, String brandId, String brandCname) {
+        this.couponId = couponId;
+        this.brandId = brandId;
+        this.brandCname = brandCname;
+    }
+
+    public CouponBrand(Integer couponId, String brandId, String brandCname, String brandEname) {
+
+        this.couponId = couponId;
+        this.brandId = brandId;
+        this.brandCname = brandCname;
+        this.brandEname = brandEname;
+    }
+
+    public CouponBrand(Integer couponId, String brandId) {
+
+        this.couponId = couponId;
+        this.brandId = brandId;
+    }
+
+    public CouponBrand() {
+
+    }
 }

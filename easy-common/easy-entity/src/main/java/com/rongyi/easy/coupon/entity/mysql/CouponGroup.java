@@ -64,4 +64,18 @@ public class CouponGroup implements Serializable{
 				.append(groupId).append(", groupName=").append(groupName).append("]");
 		return builder.toString();
 	}
+
+    public CouponGroup() {
+    }
+
+    public CouponGroup(Integer couponId, String groupId) {
+        this.couponId = couponId;
+        this.groupId = groupId;
+    }
+
+    public CouponGroup(Integer couponId, String groupId, String groupName) {
+        this.couponId = couponId;
+        this.groupId = groupId;
+        this.groupName = groupName;
+    }
 }

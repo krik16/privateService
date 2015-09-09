@@ -34,7 +34,7 @@ public interface MerchantCouponServce {
      * @param coupon
      * @return
      */
-    public Boolean updateCoupon(Coupon coupon);
+    public Boolean updateCoupon(Coupon coupon,UserInfoVo userInfoVo);
 
     /**
      * 插入一条coupon

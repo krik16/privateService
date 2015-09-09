@@ -21,7 +21,7 @@ public class CouponParamVO implements Serializable {
 	
     private Integer limitCount;// 每人限购数量
  
-    private Double discount;// 折扣价
+    private Integer discount;// 折扣价
 
     private String recommend;// 推荐说明
     
@@ -81,11 +81,11 @@ public class CouponParamVO implements Serializable {
 		this.limitCount = limitCount;
 	}
 
-	public Double getDiscount() {
+	public Integer getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(Double discount) {
+	public void setDiscount(Integer discount) {
 		this.discount = discount;
 	}
 

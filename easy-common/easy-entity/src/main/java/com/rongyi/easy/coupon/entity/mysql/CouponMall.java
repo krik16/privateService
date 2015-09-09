@@ -2,13 +2,13 @@ package com.rongyi.easy.coupon.entity.mysql;
 
 import java.io.Serializable;
 
-public class CouponMall implements Serializable{
+public class CouponMall implements Serializable {
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	private Integer id;
+    private Integer id;
 
     /**
      * 卡券id
@@ -83,13 +83,41 @@ public class CouponMall implements Serializable{
         this.mallLogUrl = mallLogUrl;
     }
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("CouponMall [id=").append(id).append(", couponId=").append(couponId).append(", mallId=")
-				.append(mallId).append(", mallName=").append(mallName).append(", mallAddress=").append(mallAddress)
-				.append(", mallLogUrl=").append(mallLogUrl).append("]");
-		return builder.toString();
-	}
-    
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("CouponMall [id=").append(id).append(", couponId=").append(couponId).append(", mallId=").append(mallId).append(", mallName=").append(mallName).append(", mallAddress=").append(mallAddress).append(", mallLogUrl=").append(mallLogUrl).append("]");
+        return builder.toString();
+    }
+
+    public CouponMall(Integer couponId, String mallId, String mallName, String mallAddress, String mallLogUrl) {
+        this.couponId = couponId;
+        this.mallId = mallId;
+        this.mallName = mallName;
+        this.mallAddress = mallAddress;
+        this.mallLogUrl = mallLogUrl;
+    }
+
+    public CouponMall(Integer couponId, String mallId) {
+        this.couponId = couponId;
+        this.mallId = mallId;
+    }
+
+    public CouponMall(Integer couponId, String mallName, String mallId) {
+
+        this.couponId = couponId;
+        this.mallName = mallName;
+        this.mallId = mallId;
+    }
+
+    public CouponMall(Integer id, Integer couponId, String mallId) {
+
+        this.id = id;
+        this.couponId = couponId;
+        this.mallId = mallId;
+    }
+
+    public CouponMall() {
+
+    }
 }

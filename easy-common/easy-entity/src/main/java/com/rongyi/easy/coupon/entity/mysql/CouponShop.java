@@ -104,5 +104,23 @@ public class CouponShop implements Serializable{
 				.append(", shopLogoUrl=").append(shopLogoUrl).append(", shopBrand=").append(shopBrand).append("]");
 		return builder.toString();
 	}
-    
+
+    public CouponShop(Integer couponId, String shopId, String shopName, String shopMallName, String shopLogoUrl, String shopBrand) {
+        this.couponId = couponId;
+        this.shopId = shopId;
+        this.shopName = shopName;
+        this.shopMallName = shopMallName;
+        this.shopLogoUrl = shopLogoUrl;
+        this.shopBrand = shopBrand;
+    }
+
+    public CouponShop(Integer couponId, String shopId) {
+
+        this.couponId = couponId;
+        this.shopId = shopId;
+    }
+
+    public CouponShop() {
+
+    }
 }
