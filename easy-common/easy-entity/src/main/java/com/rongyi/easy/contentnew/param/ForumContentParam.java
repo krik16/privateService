@@ -1,4 +1,4 @@
-package com.rongyi.easy.contentnew.entity.param;
+package com.rongyi.easy.contentnew.param;
 
 import java.io.Serializable;
 import java.util.Date;

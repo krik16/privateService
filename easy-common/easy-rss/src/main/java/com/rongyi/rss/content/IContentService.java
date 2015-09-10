@@ -5,11 +5,11 @@ import java.util.List;
 import com.rongyi.easy.contentnew.entity.ForumContent;
 import com.rongyi.easy.contentnew.entity.ForumHomepage;
 import com.rongyi.easy.contentnew.entity.ForumPosition;
-import com.rongyi.easy.contentnew.entity.param.ForumContentParam;
-import com.rongyi.easy.contentnew.entity.param.ForumContentStatusDelParam;
-import com.rongyi.easy.contentnew.entity.vo.ForumContentListVo;
-import com.rongyi.easy.contentnew.entity.vo.ForumHomeModelVo;
-import com.rongyi.easy.contentnew.entity.vo.ForumPostiomModelVo;
+import com.rongyi.easy.contentnew.param.ForumContentParam;
+import com.rongyi.easy.contentnew.param.ForumContentStatusDelParam;
+import com.rongyi.easy.contentnew.vo.ForumContentListVo;
+import com.rongyi.easy.contentnew.vo.ForumHomeModelVo;
+import com.rongyi.easy.contentnew.vo.ForumPostiomModelVo;
 
 /**
  * 页面用的接口

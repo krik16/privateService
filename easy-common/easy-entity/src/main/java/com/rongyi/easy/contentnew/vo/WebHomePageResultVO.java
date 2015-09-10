@@ -1,20 +1,20 @@
-package com.rongyi.easy.contentnew.entity.vo;
+package com.rongyi.easy.contentnew.vo;
 
 import java.io.Serializable;
 import java.util.List;
 
 import org.apache.poi.ss.formula.functions.T;
 
-public class webHomePageResultVO implements Serializable{
+public class WebHomePageResultVO implements Serializable{
 	private List data;
 	
-	private PageVo page;
+	private PageVO page;
 
-	public webHomePageResultVO(){
+	public WebHomePageResultVO(){
 		
 	}
 	
-	public webHomePageResultVO(List data,PageVo page){
+	public WebHomePageResultVO(List data,PageVO page){
 		this.data=data;
 		this.page=page;
 	}
@@ -27,11 +27,11 @@ public class webHomePageResultVO implements Serializable{
 		this.data = data;
 	}
 
-	public PageVo getPage() {
+	public PageVO getPage() {
 		return page;
 	}
 
-	public void setPage(PageVo page) {
+	public void setPage(PageVO page) {
 		this.page = page;
 	}
 	

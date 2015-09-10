@@ -1,6 +1,6 @@
 package com.rongyi.rss.content;
 
-import com.rongyi.easy.contentnew.entity.vo.ForumVO;
+import com.rongyi.easy.contentnew.vo.ForumVO;
 /**
  * 得到app首页模块内容
  * @author lijing
