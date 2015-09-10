@@ -36,7 +36,6 @@ import com.rongyi.rpb.common.pay.weixin.service.RefundService;
 import com.rongyi.rpb.common.pay.weixin.service.ReverseService;
 import com.rongyi.rpb.common.pay.weixin.service.UnifiedorderService;
 import com.rongyi.rpb.common.pay.weixin.util.Util;
-import com.rongyi.rpb.common.pay.weixin.util.WXUtil;
 import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.ConstantUtil;
 import com.rongyi.rpb.constants.Constants;
@@ -88,7 +87,6 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 			BigDecimal totalFee = new BigDecimal(total_fee + "").multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
 			UnifiedorderService unifiedorderService = new UnifiedorderService();
 			map = unifiedorderService.getAppWeXinSign(payNo, totalFee.intValue(), "容易网商品");
-			map.put("timestamp", WXUtil.getTimeStamp());
 			map.put("code", 0);
 			map.put("totlePrice", total_fee);
 		} catch (Exception e) {
@@ -162,13 +160,16 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			RefundService refundService = new RefundService();
-			RefundReqData refundReqData = new RefundReqData(null, payNo, null, newPayNo, 1, 1, ConstantUtil.PayWeiXin_V3.MCH_ID, null);
+			BigDecimal bigTotalFee = new BigDecimal(totalFee + "").multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
+			BigDecimal bigRefundFee = new BigDecimal(refundFee + "").multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
+			RefundReqData refundReqData = new RefundReqData(null, payNo, null, newPayNo, bigTotalFee.intValue(),bigRefundFee.intValue(), ConstantUtil.PayWeiXin_V3.MCH_ID, null);
 			String result = refundService.request(refundReqData);
+			System.err.println(result);
 			RefundResData refundResData = (RefundResData) Util.getObjectFromXML(result, RefundResData.class);
 			if ("SUCCESS".equals(refundResData.getReturn_code()) && "SUCCESS".equals(refundResData.getResult_code())) {// 退款申请成功后查询退款结果
 				RefundQueryResData refundQueryResData = refundQuery(null, null, newPayNo);
 				map.put("result", refundQueryResData.getRefund_status_0());
-				if (ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getCodeStr().equals(refundQueryResData.getRefund_status_0()) && "PROCESSING".equals(refundQueryResData.getRefund_status_0())) {// 退款成功
+				if (ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getCodeStr().equals(refundQueryResData.getRefund_status_0()) || "PROCESSING".equals(refundQueryResData.getRefund_status_0())) {// 退款成功
 					LOGGER.info(ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getValueStr() + ",退款状态-->" + refundQueryResData.getRefund_status_0());
 					map.put("message", ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getValueStr());
 				} else if (ConstantEnum.WEIXIN_REFUND_RESULT_NOTSURE.getCodeStr().equals(refundQueryResData.getRefund_status_0())) {
@@ -299,7 +300,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 			RefundQueryReqData refundQueryReqData = new RefundQueryReqData(tradeNo, payNo, null, refundNo, null);
 			String result = refundQueryService.request(refundQueryReqData);
 			LOGGER.info("微信退款查询结果-->"+result);
-			refundQueryResData = (RefundQueryResData) Util.getObjectFromXML(result, RefundResData.class);
+			refundQueryResData = (RefundQueryResData) Util.getObjectFromXML(result, RefundQueryResData.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

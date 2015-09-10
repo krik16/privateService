@@ -151,7 +151,7 @@ public class PaymentServiceTest extends BaseTest {
 
 	}
 
-	 @Test
+//	 @Test
 	public void testValidateOrderNumExist() {
 		PaymentEntity paymentEntity = paymentService.validateOrderNumExist("1000000126496953,1000000272983889", 1, 1);
 		System.err.println("payNo=" + paymentEntity.getPayNo());
@@ -229,7 +229,7 @@ public class PaymentServiceTest extends BaseTest {
 		rpbServiceImpl.paySuccessNotify("0818930009601625", 0.00);
 	}
 
-//	@Test
+	@Test
 	public void testSelectByBatchNoAndStatus(){
 		System.err.println(paymentService.selectByBatchNoAndStatus("20150812192552139",2).size());
 	}

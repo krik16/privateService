@@ -173,35 +173,10 @@ public class WeixinPayServiceTest extends BaseTest {
 
 	}
 
-	// @Test
-	public void testQueryOrder() {
-//		TenpayHttpClient httpClient = new TenpayHttpClient("UTF-8");
-//		httpClient.setReqContent("https://api.mch.weixin.qq.com/pay/orderquery");
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("appid", "wxf379a9c3029f1f15");
-//		map.put("mch_id", "1220588601");
-//		map.put("transaction_id", "1220588601201508116025541515");
-//		/* map.put("out_trade_no","1000001768287279"); */
-//		// 随机字符串，不长于32 位
-//		String nonce_str = RandomStringGenerator.getRandomStringByLength(32);
-//		map.put("nonce_str", nonce_str);
-//		// 根据API给的签名规则进行签名
-//		String sign = Signature.getSign(map);
-//		// map.put("sign", sign);
-//		// String postDataXML = xStreamForRequestPostData.toXML(map);
-//
-//		String postDataXML = "<xml>" + "<appid>wxf379a9c3029f1f15</appid>" + "<mch_id>1220588601</mch_id>" + "<nonce_str>" + nonce_str + "</nonce_str>"
-//		/* + "<out_trade_no>1000001768287279</out_trade_no>" */
-//		+ "<transaction_id>1220588601201508116025541515</transaction_id>" + "<sign>" + sign + "</sign>" + "</xml>";
-//		boolean bool = httpClient.callHttpPost("https://api.mch.weixin.qq.com/pay/orderquery", postDataXML);
-//		System.err.println("bool=" + bool);
-//		String resContent = httpClient.getResContent();
-//		System.err.println(resContent);
-	}
 
-//	 @Test
-	public void testQueryOrder2() {
-		 System.err.println(weixinPayService.queryOrder(null,"10000002315977421"));
+	 @Test
+	public void testQueryOrder() {
+		 System.err.println(weixinPayService.queryOrder("1009290941201509100838184587",null));
 	}
 	
 //	@Test
@@ -216,11 +191,11 @@ public class WeixinPayServiceTest extends BaseTest {
 		weixinPayService.batchTriggerWeixinRefund();
 	}
 
-	 @Test
+//	 @Test
 	public void testgetPaySignV3() {
 		try {
 			UnifiedorderService unifiedorderService = new UnifiedorderService();
-			unifiedorderService.getAppWeXinSign("100000000011", 1, "test");
+			unifiedorderService.getAppWeXinSign("1000000000211", 1, "test");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -233,102 +208,34 @@ public class WeixinPayServiceTest extends BaseTest {
 	}
 
 //	@Test
-	public void testRefundV3() {
-		try {
-			RefundService refundService = new RefundService();
-			RefundReqData refundReqData = new RefundReqData(null, "1000001463574454", null, "1234131231231", 1, 1, ConstantUtil.PayWeiXin_V3.MCH_ID, null);
-			String result = refundService.request(refundReqData);
-			System.err.println("result=" + result);
-			RefundResData refundResData = (RefundResData) Util.getObjectFromXML(result, RefundResData.class);
-			System.err.println(refundResData.toString());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-//	@Test
-	public void testRefundV3_2() {
-		try {
-			testRefund_result();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public void testRefundV3() {
+//		try {
+//			RefundService refundService = new RefundService();
+//			RefundReqData refundReqData = new RefundReqData(null, "1000001463574454", null, "1234131231231", 1, 1, ConstantUtil.PayWeiXin_V3.MCH_ID, null);
+//			String result = refundService.request(refundReqData);
+//			System.err.println("result=" + result);
+//			RefundResData refundResData = (RefundResData) Util.getObjectFromXML(result, RefundResData.class);
+//			System.err.println(refundResData.toString());
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
-//	@Test
+	@Test
 	@Description("微信退款查询")
 	public void testRefundQuery(){
-		try{
-		RefundQueryService refundQueryService = new RefundQueryService();
-		RefundQueryReqData refundQueryReqData = new RefundQueryReqData("1220588601201508316278769187",null, null, null, null);
-		String result = refundQueryService.request(refundQueryReqData);
-		System.err.println("result"+result);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+		weixinPayService.weixinRefund("00910138391041614", 0.01, 0.01, "00910138391041615",1);
+//		try{
+//		RefundQueryService refundQueryService = new RefundQueryService();
+//		RefundQueryReqData refundQueryReqData = new RefundQueryReqData("1220588601201508316278769187",null, null, null, null);
+//		String result = refundQueryService.request(refundQueryReqData);
+//		System.err.println("result"+result);
+//		}catch(Exception e){
+//			e.printStackTrace();
+//		}
 	}
 	
 
-	public void testRefund_result() throws Exception {
-		RefundReqData refundReqData = new RefundReqData(null, "1000001463574454", null, "1234131231231", 1, 1, "1220588601", null);
-		SortedMap<Object, Object> parameters = new TreeMap<Object, Object>();
-		parameters.put("appid", refundReqData.getAppid());
-		parameters.put("mch_id", refundReqData.getMch_id());
-		parameters.put("nonce_str", refundReqData.getNonce_str());
-		// 在notify_url中解析微信返回的信息获取到 transaction_id，此项不是必填，详细请看上图文档
-		parameters.put("transaction_id", refundReqData.getTransaction_id());
-		parameters.put("out_trade_no", refundReqData.getOut_trade_no());
-		parameters.put("out_refund_no", refundReqData.getOut_refund_no()); // 我们自己设定的退款申请号，约束为UK
-		parameters.put("total_fee", refundReqData.getTotal_fee().toString()); // 单位为分
-		parameters.put("refund_fee", refundReqData.getRefund_fee().toString()); // 单位为分
-		parameters.put("op_user_id", refundReqData.getOp_user_id());
-		// String sign = createSign("utf-8", parameters);
-		parameters.put("sign", refundReqData.getSign());
-
-		String reuqestXml = getRequestXml(parameters);
-		KeyStore keyStore = KeyStore.getInstance("PKCS12");
-		FileInputStream instream = new FileInputStream(new File("F:\\etc\\rongyi\\easy-rpb-cert\\1220588601.pfx"));// 放退款证书的路径
-		try {
-			keyStore.load(instream, refundReqData.getMch_id().toCharArray());
-		} finally {
-			instream.close();
-		}
-
-		SSLContext sslcontext = SSLContexts.custom().loadKeyMaterial(keyStore, refundReqData.getMch_id().toCharArray()).build();
-		SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext, new String[] { "TLSv1" }, null, SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
-		CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
-		try {
-
-			HttpPost httpPost = new HttpPost("https://api.mch.weixin.qq.com/secapi/pay/refund");// 退款接口
-
-			System.out.println("executing request" + httpPost.getRequestLine());
-			StringEntity reqEntity = new StringEntity(reuqestXml);
-			// 设置类型
-			reqEntity.setContentType("application/x-www-form-urlencoded");
-			httpPost.setEntity(reqEntity);
-			CloseableHttpResponse response = httpclient.execute(httpPost);
-			try {
-				HttpEntity entity = response.getEntity();
-
-				System.out.println("----------------------------------------");
-				System.out.println(response.getStatusLine());
-				if (entity != null) {
-					System.out.println("Response content length: " + entity.getContentLength());
-					BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(entity.getContent(), "UTF-8"));
-					String text;
-					while ((text = bufferedReader.readLine()) != null) {
-						System.out.println(text);
-					}
-
-				}
-				EntityUtils.consume(entity);
-			} finally {
-				response.close();
-			}
-		} finally {
-			httpclient.close();
-		}
-	}
 
 	public static String getRequestXml(SortedMap<Object, Object> parameters) {
 		StringBuffer sb = new StringBuffer();
