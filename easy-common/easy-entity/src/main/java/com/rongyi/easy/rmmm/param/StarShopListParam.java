@@ -18,8 +18,6 @@ public class StarShopListParam implements Serializable{
 	
 	private String cityId;//城市id
 	private String cityName;//城市名称
-	private String currentPage; // 当前页
-	private String pageSize;  // 每页数据显示数量
 	private String jsessionid;//容易逛用户jsessionId
 	public String getCityId() {
 		return cityId;
@@ -32,18 +30,6 @@ public class StarShopListParam implements Serializable{
 	}
 	public void setCityName(String cityName) {
 		this.cityName = cityName;
-	}
-	public String getCurrentPage() {
-		return currentPage;
-	}
-	public void setCurrentPage(String currentPage) {
-		this.currentPage = currentPage;
-	}
-	public String getPageSize() {
-		return pageSize;
-	}
-	public void setPageSize(String pageSize) {
-		this.pageSize = pageSize;
 	}
 	public String getJsessionid() {
 		return jsessionid;
