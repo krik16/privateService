@@ -2,6 +2,7 @@ package com.rongyi.rss.notice;
 
 import com.rongyi.easy.notice.entity.NoticePraisedEntity;
 import com.rongyi.easy.notice.param.CNoticeParam;
+import com.rongyi.easy.notice.vo.NoticeOVo;
 
 /***
  * 消息管理的店铺公告的
@@ -68,4 +69,11 @@ public interface RoaNoticeService {
      * @throws Exception
      */
     public Boolean deleteNotice(Integer id,String updateUserId) throws Exception;
+    
+    /**
+     * 通过店铺公告id 查询
+     * @param id
+     * @return
+     */
+    public NoticeOVo findNoticePById(Integer id);
 }

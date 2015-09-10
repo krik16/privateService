@@ -1,6 +1,7 @@
 package com.rongyi.rss.notice;
 
 import com.rongyi.easy.notice.param.CNoticeParam;
+import com.rongyi.easy.notice.vo.NoticeOVo;
 
 public interface MMShopNoticeService {
     /**
@@ -27,4 +28,11 @@ public interface MMShopNoticeService {
      * @throws Exception
      */
     public Boolean deleteNotice(Integer id,String updateUserId) throws Exception;
+    
+    /**
+     * 通过店铺公告id 查询
+     * @param id
+     * @return
+     */
+    public NoticeOVo findNoticePById(Integer id) throws Exception;
 }
