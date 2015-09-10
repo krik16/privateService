@@ -8,7 +8,7 @@ import java.util.List;
  * @author lijing
  * @time 2015-09-10
  */
-public class NoticeParam implements Serializable{
+public class CNoticeParam implements Serializable{
 	 private Integer id;
 	    /**公告内容*/
 	    private String content;
