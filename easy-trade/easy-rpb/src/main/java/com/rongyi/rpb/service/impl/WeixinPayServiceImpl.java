@@ -36,7 +36,6 @@ import com.rongyi.rpb.common.pay.weixin.service.RefundService;
 import com.rongyi.rpb.common.pay.weixin.service.ReverseService;
 import com.rongyi.rpb.common.pay.weixin.service.UnifiedorderService;
 import com.rongyi.rpb.common.pay.weixin.util.Util;
-import com.rongyi.rpb.common.pay.weixin.util.WXUtil;
 import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.ConstantUtil;
 import com.rongyi.rpb.constants.Constants;
@@ -161,13 +160,16 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			RefundService refundService = new RefundService();
-			RefundReqData refundReqData = new RefundReqData(null, payNo, null, newPayNo, 1, 1, ConstantUtil.PayWeiXin_V3.MCH_ID, null);
+			BigDecimal bigTotalFee = new BigDecimal(totalFee + "").multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
+			BigDecimal bigRefundFee = new BigDecimal(refundFee + "").multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
+			RefundReqData refundReqData = new RefundReqData(null, payNo, null, newPayNo, bigTotalFee.intValue(),bigRefundFee.intValue(), ConstantUtil.PayWeiXin_V3.MCH_ID, null);
 			String result = refundService.request(refundReqData);
+			System.err.println(result);
 			RefundResData refundResData = (RefundResData) Util.getObjectFromXML(result, RefundResData.class);
 			if ("SUCCESS".equals(refundResData.getReturn_code()) && "SUCCESS".equals(refundResData.getResult_code())) {// 退款申请成功后查询退款结果
 				RefundQueryResData refundQueryResData = refundQuery(null, null, newPayNo);
 				map.put("result", refundQueryResData.getRefund_status_0());
-				if (ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getCodeStr().equals(refundQueryResData.getRefund_status_0()) && "PROCESSING".equals(refundQueryResData.getRefund_status_0())) {// 退款成功
+				if (ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getCodeStr().equals(refundQueryResData.getRefund_status_0()) || "PROCESSING".equals(refundQueryResData.getRefund_status_0())) {// 退款成功
 					LOGGER.info(ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getValueStr() + ",退款状态-->" + refundQueryResData.getRefund_status_0());
 					map.put("message", ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getValueStr());
 				} else if (ConstantEnum.WEIXIN_REFUND_RESULT_NOTSURE.getCodeStr().equals(refundQueryResData.getRefund_status_0())) {
@@ -298,106 +300,10 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 			RefundQueryReqData refundQueryReqData = new RefundQueryReqData(tradeNo, payNo, null, refundNo, null);
 			String result = refundQueryService.request(refundQueryReqData);
 			LOGGER.info("微信退款查询结果-->"+result);
-			refundQueryResData = (RefundQueryResData) Util.getObjectFromXML(result, RefundResData.class);
+			refundQueryResData = (RefundQueryResData) Util.getObjectFromXML(result, RefundQueryResData.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return refundQueryResData;
 	}
-//	
-//	private String genProductArgs() {
-//		StringBuffer xml = new StringBuffer();
-//
-//		try {
-//			String	nonceStr = RandomStringGenerator.getRandomStringByLength(32);
-//
-//
-//			xml.append("</xml>");
-//           List<NameValuePair> packageParams = new LinkedList<NameValuePair>();
-//			packageParams.add(new BasicNameValuePair("appid", "wxf6922aee3bcf0ae8"));
-//			packageParams.add(new BasicNameValuePair("body", "APP pay test"));
-//			packageParams.add(new BasicNameValuePair("mch_id", "1268956601"));
-//			packageParams.add(new BasicNameValuePair("nonce_str", nonceStr));
-//			packageParams.add(new BasicNameValuePair("notify_url", "http://121.40.35.3/test"));
-//			packageParams.add(new BasicNameValuePair("out_trade_no",genOutTradNo()));
-//			packageParams.add(new BasicNameValuePair("spbill_create_ip","127.0.0.1"));
-//			packageParams.add(new BasicNameValuePair("total_fee", "1"));
-//			packageParams.add(new BasicNameValuePair("trade_type", "APP"));
-//
-//
-//			String sign = genPackageSign(packageParams);
-//			packageParams.add(new BasicNameValuePair("sign", sign));
-//
-//
-//		   String xmlstring =toXml(packageParams);
-//
-//			return xmlstring;
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-//	}
-//	
-//
-//	private String toXml(List<NameValuePair> params) {
-//		StringBuilder sb = new StringBuilder();
-//		sb.append("<xml>");
-//		for (int i = 0; i < params.size(); i++) {
-//			sb.append("<"+params.get(i).getName()+">");
-//			sb.append(params.get(i).getValue());
-//			sb.append("</"+params.get(i).getName()+">");
-//		}
-//		sb.append("</xml>");
-//
-//		return sb.toString();
-//	}
-//
-//	
-//	private String genOutTradNo() {
-//		Random random = new Random();
-//		return getMessageDigest(String.valueOf(random.nextInt(10000)).getBytes());
-//	}
-//	
-//	
-//	/**
-//	 生成签名
-//	 */
-//
-//	private String genPackageSign(List<NameValuePair> params) {
-//		StringBuilder sb = new StringBuilder();
-//		
-//		for (int i = 0; i < params.size(); i++) {
-//			sb.append(params.get(i).getName());
-//			sb.append('=');
-//			sb.append(params.get(i).getValue());
-//			sb.append('&');
-//		}
-//		sb.append("key=");
-//		sb.append("b24aaabb1ea8a155c4572570cd260313");
-//		
-//
-//		String packageSign = getMessageDigest(sb.toString().getBytes()).toUpperCase();
-//		return packageSign;
-//	}
-//	
-//	public final static String getMessageDigest(byte[] buffer) {
-//		char hexDigits[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
-//		try {
-//			MessageDigest mdTemp = MessageDigest.getInstance("MD5");
-//			mdTemp.update(buffer);
-//			byte[] md = mdTemp.digest();
-//			int j = md.length;
-//			char str[] = new char[j * 2];
-//			int k = 0;
-//			for (int i = 0; i < j; i++) {
-//				byte byte0 = md[i];
-//				str[k++] = hexDigits[byte0 >>> 4 & 0xf];
-//				str[k++] = hexDigits[byte0 & 0xf];
-//			}
-//			return new String(str);
-//		} catch (Exception e) {
-//			return null;
-//		}
-//	}
 }

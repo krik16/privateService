@@ -175,7 +175,7 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
 		paymentLogInfo.setBuyer_type(0);// 买家账号
 		paymentLogInfo.setEventType(Constants.EVENT_TYPE.EVENT_TYPE2);
 		paymentLogInfo.setTotal_fee(Double.valueOf(map.get("total_fee").toString()) / 100);// 微信金额单位为分
-		paymentLogInfo.setResult(map.get("result_code").toString());
+		paymentLogInfo.setResult(map.get("return_code").toString());
 		paymentLogInfo.setBuyer_email(map.get("openid").toString());
 		paymentLogInfo.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
 		return paymentLogInfo;

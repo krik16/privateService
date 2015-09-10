@@ -1,6 +1,7 @@
 package com.rongyi.rpb.web.controller.v5;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.Date;
 import java.util.HashMap;
@@ -12,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,10 +28,8 @@ import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.rpb.common.pay.ali.util.AliAppPayNotify;
 import com.rongyi.rpb.common.pay.ali.util.AlipayNotify;
-import com.rongyi.rpb.common.pay.weixin.util.ResponseHandler;
 import com.rongyi.rpb.common.pay.weixin.util.XMLParser;
 import com.rongyi.rpb.common.pay.weixin.util.XMLUtil;
-import com.rongyi.rpb.constants.ConstantUtil;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.mq.Sender;
 import com.rongyi.rpb.service.PaymentLogInfoService;
@@ -327,29 +329,29 @@ public class WebPageAlipayController extends BaseController {
 	 * @Author: 柯军
 	 * @datetime:2015年9月2日下午4:48:21
 	 **/
-	@SuppressWarnings("unchecked")
 	@RequestMapping("/weixin/notify_url.htm")
 	public void weixinNotify(Model model, HttpServletRequest request, HttpServletResponse response) {
-		ResponseHandler resHandler = new ResponseHandler(request, response);
-		Map<String, Object> map = resHandler.getAllParameters();
-		LOGGER.info("微信异步通知参数列表"+map.toString());	
-		LOGGER.info("微信支付异步通知开始，交易流水号-->" + map.get("transaction_id"));
-		resHandler.setKey(ConstantUtil.PayWeiXin_V3.KEY);
-		if (!resHandler.isTenpaySign()) {
-			LOGGER.info("微信支付异步通知-->微信验证签名不通过，返回消息不是微信发出的合法消息!");
-			return;
-		}
-		if ("SUCCESS".equals(map.get("result_code"))) {
+//		ResponseHandler resHandler = new ResponseHandler(request, response);
+		Map<String, Object> requestMap = parseXml(request);
+//		Map<String, Object> map = resHandler.getAllParameters();
+		LOGGER.info("微信异步通知参数列表"+requestMap.toString());	
+//		LOGGER.info("微信支付异步通知开始，交易流水号-->" + map.get("transaction_id"));
+//		resHandler.setKey(ConstantUtil.PayWeiXin_V3.KEY);
+//		if (!resHandler.isTenpaySign()) {
+//			LOGGER.info("微信支付异步通知-->微信验证签名不通过，返回消息不是微信发出的合法消息!");
+//			return;
+//		}
+		if ("SUCCESS".equals(requestMap.get("result_code"))) {
 			Map<String, Object> responseMap = new HashMap<String, Object>();
 			responseMap.put("return_code", "SUCCESS");
 			responseMap.put("return_msg", "OK");
-			boolean bool = paymentLogInfoService.validateByTradeNoAndPayNo(map.get("transaction_id").toString(), map.get("out_trade_no").toString());
+			boolean bool = paymentLogInfoService.validateByTradeNoAndPayNo(requestMap.get("transaction_id").toString(), requestMap.get("out_trade_no").toString());
 			if (bool) {
 				LOGGER.info("重复通知");
 				setResponse(response, responseMap);
 				return;
 			}
-			PaymentLogInfo paymentLogInfo = paymentLogInfoService.getByWeixinNotify(map);
+			PaymentLogInfo paymentLogInfo = paymentLogInfoService.getByWeixinNotify(requestMap);
 			if (validateRepeatPay(paymentLogInfo.getOutTradeNo(), paymentLogInfo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1)) { // 验证是否是重复支付
 				setResponse(response, responseMap);
 				return;
@@ -358,8 +360,34 @@ public class WebPageAlipayController extends BaseController {
 				setResponse(response, responseMap);
 			LOGGER.info("<--微信支付异步通知结束");
 		} else {
-			LOGGER.info("支付未成功,通知内容-->" + map.toString());
+			LOGGER.info("支付未成功,通知内容-->" + requestMap.toString());
 		}
+	}
+	
+	/**
+	 * @Description: 解析微信异步通知中的xml元素值
+	 * @param request
+	 * @return
+	 * @Author: 柯军
+	 * @datetime:2015年8月11日下午3:33:45
+	 **/
+	@SuppressWarnings("unchecked")
+	private static Map<String, Object> parseXml(HttpServletRequest request) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			InputStream inputStream = request.getInputStream();
+			SAXReader reader = new SAXReader();
+			Document document = reader.read(inputStream);
+			Element root = document.getRootElement();
+			List<Element> elementList = root.elements();
+			for (Element e : elementList)
+				map.put(e.getName(), e.getText());
+			inputStream.close();
+		} catch (Exception e) {
+			LOGGER.error("解析微信返回结果xml失败");
+			e.printStackTrace();
+		}
+		return map;
 	}
 
 	/**
