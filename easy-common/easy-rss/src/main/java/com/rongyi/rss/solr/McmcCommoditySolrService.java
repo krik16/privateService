@@ -5,6 +5,7 @@ import java.util.List;
 import org.bson.types.ObjectId;
 
 import com.rongyi.easy.solr.McmcCommodityDocument;
+import com.rongyi.easy.solr.param.CommoditySearchParam;
 
 public interface McmcCommoditySolrService {
 
@@ -41,5 +42,26 @@ public interface McmcCommoditySolrService {
 	 * @return
 	 */
 	public boolean updateCommodityStatus(String id, Integer status);
+	
+	/**
+	 * 索引更新商品价格
+	 * 
+	 * @author ZhengYl
+	 * @date 2015年9月10日 下午4:40:58 
+	 * @param id
+	 * @param price
+	 * @return
+	 */
+	public boolean updateCommodityPrice(String id, Double price);
+	
+	/**
+	 * 商品检索·改
+	 * 
+	 * @author ZhengYl
+	 * @date 2015年9月10日 下午2:36:52 
+	 * @param param
+	 * @return
+	 */
+	public List<ObjectId> commoditySearch(CommoditySearchParam param);
 
 }
