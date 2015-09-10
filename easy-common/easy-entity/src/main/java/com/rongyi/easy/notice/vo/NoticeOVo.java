@@ -1,4 +1,4 @@
-package com.rongyi.easy.messagemanage.vo;
+package com.rongyi.easy.notice.vo;
 
 import java.io.Serializable;
 

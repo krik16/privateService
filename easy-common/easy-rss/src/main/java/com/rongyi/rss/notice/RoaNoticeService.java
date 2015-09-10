@@ -1,7 +1,7 @@
-package com.rongyi.rss.messagement;
+package com.rongyi.rss.notice;
 
-import com.rongyi.easy.messagemanage.entity.NoticePraisedEntity;
-import com.rongyi.easy.messagemanage.param.CNoticeParam;
+import com.rongyi.easy.notice.entity.NoticePraisedEntity;
+import com.rongyi.easy.notice.param.CNoticeParam;
 
 /***
  * 消息管理的店铺公告的

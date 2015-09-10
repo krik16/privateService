@@ -1,4 +1,4 @@
-package com.rongyi.rss.messagement;
+package com.rongyi.rss.notice;
 /**
  * 提供给mobile mallife
  * @author lijing
