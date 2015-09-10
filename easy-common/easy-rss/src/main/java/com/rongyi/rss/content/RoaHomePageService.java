@@ -8,7 +8,7 @@ import com.rongyi.core.bean.ResponseData;
  * 内容首页配置
  * Created by Breggor on 2015/9/10.
  */
-public interface ROAHomePageService {
+public interface RoaHomePageService {
 
 
     /**

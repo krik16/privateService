@@ -10,7 +10,7 @@ import com.rongyi.easy.notice.vo.NoticeOVo;
  * @time 2015-09-09
  *
  */
-public interface RoaNoticeService {
+public interface ROANoticeService {
 	/**
 	 * 点赞
 	 * @param ne
