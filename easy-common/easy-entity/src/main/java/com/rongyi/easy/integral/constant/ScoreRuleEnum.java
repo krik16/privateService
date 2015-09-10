@@ -12,7 +12,7 @@ public enum ScoreRuleEnum {
 	    SCORE_MALL_COMMENT(2,"评论店铺或商场"),
 	    SCORE_ORDER_COMMENT(3,"订单评论"),
 	    SCORE_SIGN_IN(4,"每日签到"),
- 	    SCORE_PAY_TIMEOUT_ROLLBACK(6,"退积分"),
+  	    SCORE_PAY_TIMEOUT_ROLLBACK(6,"退积分"),
  	    SCORE_COUPON_ADD(8,"验券成功加积分"),
 	    SCORE_PAY_SUCCESS_ADD(9,"交易成功加积分"),
 	    SCORE_TERMINAL(10,"终端签到"),

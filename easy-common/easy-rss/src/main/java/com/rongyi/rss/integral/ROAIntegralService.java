@@ -1,9 +1,7 @@
 package com.rongyi.rss.integral;
 
+import java.util.List;
 import net.sf.json.JSONObject;
-
-import com.rongyi.easy.integral.constant.ActionType;
-import com.rongyi.easy.integral.constant.ScoreRuleEnum;
 import com.rongyi.easy.integral.vo.IntegralRecordVO;
 
 public interface ROAIntegralService {
@@ -34,7 +32,7 @@ public interface ROAIntegralService {
 	 */
 	public JSONObject  getRuleRateByType(int scoreRuleEnum);
 	/**
-	 * 获取积分记录
+	 * 根据用户ID获取积分记录
 	 * @param userid
 	 * @param scoreRuleEnum
 	 * @param actionType
@@ -49,4 +47,16 @@ public interface ROAIntegralService {
 	 * @return
 	 */
 	public IntegralRecordVO getIntegralRecordByOrderSn(String orderSn);
+	
+	/**
+	 * 根据条件查询用户积分信息
+	 * @param userid
+	 * @param source
+	 * @param type
+	 * @param action
+	 * @param update_at
+	 * @return
+	 */
+	public JSONObject getScoreRecordByConditioin(String mobile, int source ,int type,int action ,String update_at,int page, int row);
+
 }

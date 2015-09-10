@@ -9,8 +9,10 @@ package com.rongyi.easy.integral.constant;
  */
 public interface ActionType {
 	
-	public static int ACTION_ADD = 1; //加积分
-	public static int ACTION_SUB = 2; //减积分
-	public static int Action_ALL = 0;  //全部
+	public static int ACTION_ADD = 1; //获取积分
+	public static int ACTION_SUB = 2; //消耗积分
+	public static int ACTIOIN_ALL = 0;  //全部
+	public static int ACTION_PRIZE = 3; //奖励积分
+	public static int ACTION_PUNISH = 4;//惩罚积分
 
 }
