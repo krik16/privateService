@@ -1,6 +1,6 @@
 package com.rongyi.rss.messagement;
 
-import com.rongyi.easy.messagemanage.param.NoticeParam;
+import com.rongyi.easy.messagemanage.param.CNoticeParam;
 
 public interface MMShopNoticeService {
     /**
@@ -9,7 +9,7 @@ public interface MMShopNoticeService {
      * @return
      * @throws Exception
      */
-    public Boolean saveNotice(NoticeParam np) throws Exception;
+    public Boolean saveNotice(CNoticeParam np) throws Exception;
     
     /**
      * 修改店铺公告
@@ -17,7 +17,7 @@ public interface MMShopNoticeService {
      * @return
      * @throws Exception
      */
-    public Boolean updateNotice(NoticeParam np) throws Exception;
+    public Boolean updateNotice(CNoticeParam np) throws Exception;
     
     /**
      * 删除店铺公告 通过id
