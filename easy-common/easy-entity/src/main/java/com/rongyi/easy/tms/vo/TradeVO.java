@@ -162,19 +162,20 @@ public class TradeVO implements Serializable {
 	private String orderCouponCode;
 
 	/**
-	 * 优惠券订单优惠信息（积分，红包使用记录，json格式）
+	 * 优惠券订单使用积分
 	 */
-	private String couponDiscuntInfo;
+	private Integer score;
+	
+	/**优惠券红包抵扣金额
+	 * 
+	 */
+	private Integer hbDiscount;
 
 	/**
 	 * 优惠券使用红包 券码
 	 */
 	private String couponCashCouponCode;
 
-	/**
-	 * 使用积分数
-	 */
-	private Integer integral;
 
 	/**
 	 * 使用优惠券金额
@@ -488,14 +489,6 @@ public class TradeVO implements Serializable {
 		this.orderType = orderType;
 	}
 
-	public Integer getIntegral() {
-		return integral;
-	}
-
-	public void setIntegral(Integer integral) {
-		this.integral = integral;
-	}
-
 	public String getOrderDiscountInfo() {
 		return orderDiscountInfo;
 	}
@@ -520,12 +513,21 @@ public class TradeVO implements Serializable {
 		this.couponCashCouponCode = couponCashCouponCode;
 	}
 
-	public String getCouponDiscuntInfo() {
-		return couponDiscuntInfo;
+
+	public Integer getScore() {
+		return score;
 	}
 
-	public void setCouponDiscuntInfo(String couponDiscuntInfo) {
-		this.couponDiscuntInfo = couponDiscuntInfo;
+	public void setScore(Integer score) {
+		this.score = score;
+	}
+
+	public Integer getHbDiscount() {
+		return hbDiscount;
+	}
+
+	public void setHbDiscount(Integer hbDiscount) {
+		this.hbDiscount = hbDiscount;
 	}
 
 	public Integer getFavorType() {
