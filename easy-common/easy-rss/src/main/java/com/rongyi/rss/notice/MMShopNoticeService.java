@@ -1,6 +1,6 @@
-package com.rongyi.rss.messagement;
+package com.rongyi.rss.notice;
 
-import com.rongyi.easy.messagemanage.param.CNoticeParam;
+import com.rongyi.easy.notice.param.CNoticeParam;
 
 public interface MMShopNoticeService {
     /**

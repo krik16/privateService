@@ -1,4 +1,4 @@
-package com.rongyi.easy.messagemanage.param;
+package com.rongyi.easy.notice.param;
 
 import java.io.Serializable;
 import java.util.Date;
