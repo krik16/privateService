@@ -46,6 +46,15 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private String commodityMallId;
 	@Field("commodityBrandId")
 	private String commodityBrandId;
+	@Field("price")
+	private double price;
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
 	public String getCommodityMallId() {
 		return commodityMallId;
 	}
