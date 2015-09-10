@@ -8,7 +8,7 @@ import com.rongyi.core.bean.ResponseData;
  * 内容首页配置
  * Created by Breggor on 2015/9/10.
  */
-public interface ROAHomePageService {
+public interface ROAHomePageContentService {
 
 
     /**
@@ -19,5 +19,5 @@ public interface ROAHomePageService {
      * @param userId 用户Id
      * @return
      */
-    ResponseData findHomePageBy(String cityId, String cityName, String userId);
+    ResponseData findHomePageContentBy(String cityId, String cityName, String userId);
 }

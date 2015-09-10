@@ -10,7 +10,7 @@ import com.rongyi.core.bean.ResponseData;
  * malllife简写ML
  * Created by Breggor on 2015/9/9.
  */
-public interface MLHomePageService {
+public interface MLHomePageContentService {
 
     /**
      * 根据城市与用户查询首页配置信息
@@ -20,5 +20,5 @@ public interface MLHomePageService {
      * @param userId 用户Id
      * @return
      */
-    ResponseData findHomePageBy(String cityId, String cityName, String userId);
+    ResponseData findHomePageContentBy(String cityId, String cityName, String userId);
 }

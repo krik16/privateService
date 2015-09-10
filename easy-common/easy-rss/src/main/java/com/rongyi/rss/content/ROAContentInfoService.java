@@ -1,6 +1,10 @@
 package com.rongyi.rss.content;
 
+import com.rongyi.easy.contentnew.vo.BannerVO;
 import com.rongyi.easy.contentnew.vo.ForumVO;
+
+import java.util.List;
+
 /**
  * 得到app首页模块内容
  * @author lijing
@@ -61,4 +65,6 @@ public interface ROAContentInfoService {
 	 * @return
 	 */
 	public ForumVO getFloatAD(String cityId,String provId);
+
+	List<BannerVO> findBannerList(String cityId, String cityName);
 }
