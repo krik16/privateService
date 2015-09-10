@@ -1,4 +1,4 @@
-package com.rongyi.rss.contentnew;
+package com.rongyi.rss.content;
 
 import java.util.List;
 
