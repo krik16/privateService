@@ -1214,36 +1214,70 @@ rule "订单关闭"
 	then
 		logger.info("[" + drools.getRule().getName() + "] OrderNo=" +
     		$orderNo + " 开始...");
-    		
+    	
+    	String currentStatus = $order.getStatus();
+		String nextStatus = OrderFormStatus.COMMENT_CLOSED;	
+		
+		OrderEventEntity entity = orderUtil.createOrderEventEntity(
+			$orderNo, currentStatus, "订单关闭", nextStatus,
+			OrderEventType.ORDER_CLOSED);
+			
+		// 插入订单历史事件数据库
+		int eventId = orderEventService.insertAndGetId(entity);
+		
+		// 改变订单状态
+		orderUtil.orderChangeStatus($order, nextStatus, eventId);
+		
+		// 设置时间相关的项
+		$order.setStatusHoldMs(orderConfig.getCommentCloseWaitMax() - orderConfig.getOrderCloseWaitMax());
+		$order.setNextStatusTime(orderUtil.getDateInFuture(orderConfig.getCommentCloseWaitMax() - orderConfig.getOrderCloseWaitMax()));
+		
+		// 入主数据库
+		orderFormService.updateStatusWithTime($order);
+		sessionUtil.update($order);
+    	
     	// 生成通知事件
 		OrderCloseEvent notification = new OrderCloseEvent();
-    	// 若用户未评价，默认评价
-		if ($order.getIsComment() != 1) {
-			$order.setIsComment(1);
-			orderFormService.updateIsComment($order);
-			notification.setDefaultComm("1");
-		} else {
-			notification.setDefaultComm("0");
-		}	
-		notification.setOrderNo($orderNo);
+   		notification.setOrderNo($orderNo);
 		notification.setOrderItemNo(null);
 		notification.setType(OrderEventType.ORDER_CLOSED);
 		notification.setSource("osm");
 		notification.setTarget("osm_event_listener");
 		
-		// 删除订单和子订单Fact
-//		for (Object application: $applicationList) {
-//			sessionUtil.delete(application);
-//		}
-		
-		for (Object orderDetail: $orderDetailList) {
-			sessionUtil.delete(orderDetail);
-		}
-		sessionUtil.delete($order);
-		
 		// 发送通知事件
 		orderUtil.sendEvent(notification);
 		
+		logger.debug("[" + drools.getRule().getName() + "] OrderNo=" +
+    		$orderNo + " 结束.");
+end
+
+rule "评价关闭"
+	when
+		Clock($currentDate: currentDate)
+		$order: OrderFormEntity($orderNo: orderNo, status == OrderFormStatus.CLOSED, 
+			$currentDate > nextStatusTime)
+		$orderDetailList: ArrayList()
+			from collect(OrderDetailFormEntity(orderNo == $orderNo))
+	then
+		logger.info("[" + drools.getRule().getName() + "] OrderNo=" +
+    		$orderNo + " 开始...");
+    		
+		// 若用户未评价，默认评价
+		if ($order.getIsComment() != 1) {
+			$order.setIsComment(1);
+
+			orderUtil。defaultComment($order,$orderDetailList);
+		}	
+		$order.setStatus(OrderFormStatus.COMMENT_CLOSED);
+		orderFormService.updateStatusWithTime($order);
+
+
+		for (Object orderDetail: $orderDetailList) {
+			sessionUtil.delete(orderDetail);
+		}
+
+		sessionUtil.delete($order);
+
 		logger.debug("[" + drools.getRule().getName() + "] OrderNo=" +
     		$orderNo + " 结束.");
 end
