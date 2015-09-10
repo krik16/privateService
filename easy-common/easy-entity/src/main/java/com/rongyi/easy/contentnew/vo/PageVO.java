@@ -1,13 +1,13 @@
-package com.rongyi.easy.contentnew.entity.vo;
+package com.rongyi.easy.contentnew.vo;
 
 import java.io.Serializable;
 
-public class PageVo implements Serializable{
+public class PageVO implements Serializable{
 	private Integer currentPage;
 	private Integer pageSize;
 	private Integer totalCount;
 	
-	public PageVo(){
+	public PageVO(){
 		
 	}
 	public Integer getCurrentPage() {

@@ -1,4 +1,4 @@
-package com.rongyi.easy.contentnew.entity.vo;
+package com.rongyi.easy.contentnew.vo;
 
 import java.io.Serializable;
 import java.util.Date;
