@@ -22,8 +22,8 @@ public class ShopNoticeParam implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String id;//公告id(修改公告时候使用)
 	private String content;//公告内容
-	private Date beginAt;//发布开始时间
-	private Date endAt;//发布结束时间
+	private String beginAt;//发布开始时间
+	private String endAt;//发布结束时间
 	private List<String> picList;//图片集合
 	
 	public String getId() {
@@ -38,16 +38,16 @@ public class ShopNoticeParam implements Serializable{
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getBeginAt() {
+	public String getBeginAt() {
 		return beginAt;
 	}
-	public void setBeginAt(Date beginAt) {
+	public void setBeginAt(String beginAt) {
 		this.beginAt = beginAt;
 	}
-	public Date getEndAt() {
+	public String getEndAt() {
 		return endAt;
 	}
-	public void setEndAt(Date endAt) {
+	public void setEndAt(String endAt) {
 		this.endAt = endAt;
 	}
 	public List<String> getPicList() {

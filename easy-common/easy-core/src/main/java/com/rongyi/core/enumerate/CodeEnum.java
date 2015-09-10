@@ -160,8 +160,11 @@ public enum CodeEnum {
     ERROR_CODE_REFUND("-20004","券码状态异常"),
     ERROR_CODE_NOHEAR("-20005","本店暂未发行该类优惠券"),
     
-    ERROR_NOTICE_TYPE("-30001","对店铺公告点赞或取消赞类型错误"),
-    ERROR_PRAISE_NOTICE("-30002","对店铺公告点赞或取消赞失败");
+    ERROR_NOTICE_TYPE("1063001","对店铺公告点赞或取消赞类型错误"),
+    ERROR_PRAISE_NOTICE("1063002","对店铺公告点赞或取消赞失败"),
+    ERROR_SAVE_NOTICE("1073003","新建店铺公告失败"),
+    ERROR_UPDATE_NOTICE("1073004","修改店铺公告失败"),
+    ERROR_DELETE_NOTICE("1073005","删除店铺公告失败");
     
     
     private String code; 
