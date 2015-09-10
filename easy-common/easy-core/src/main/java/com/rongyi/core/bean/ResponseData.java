@@ -226,8 +226,8 @@ public class ResponseData implements java.io.Serializable {
     }
 
     public static void main(String[] args) {
-        System.out.println(JSONObject.fromObject(ResponseData.success()).toString());
-        System.out.println(JSONObject.fromObject(ResponseData.success("处理成功：返回单个对象")).toString());
+        System.out.println(JSONObject.fromObject(ResponseData.success()));
+        System.out.println(JSONObject.fromObject(ResponseData.success("处理成功：返回单个对象")));
         System.out.println(JSONObject.fromObject(ResponseData.success("处理成功：返回对象集合List<Object>", 1, 10, 200)));
         System.out.println(JSONObject.fromObject(ResponseData.failure()));
         System.out.println(JSONObject.fromObject(ResponseData.failure(1020001, "业务出错")));
