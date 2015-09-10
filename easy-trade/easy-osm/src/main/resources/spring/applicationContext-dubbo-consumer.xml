@@ -19,6 +19,10 @@
     <dubbo:reference id="userCashCouponService" interface="com.rongyi.rss.coupon.RoaUserCashCouponService"  version="${dubbo.version}" check="false"/>
     <dubbo:reference id="roaOrderService" interface="com.rongyi.rss.mallshop.order.ROAOrderService"  version="${dubbo.version}" check="false"/>
     <dubbo:reference id="scoreService" interface="com.rongyi.rss.integral.IntegralService"  version="${dubbo.version}" check="false"/>
+    <dubbo:reference id="mallLifeUserService" interface="com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService"  version="${dubbo.version}" check="false"/>
+    <dubbo:reference id="commentService" interface="com.rongyi.rss.mcmc.CommentService"  version="${dubbo.version}" check="false"/>
+    <dubbo:reference id="personManagementService" interface="com.rongyi.rss.roa.ROAPersonManagementService"  version="${dubbo.version}" check="false"/>
+    <dubbo:reference id="orderEventService" interface="com.rongyi.rss.msob.IOrderEventService" version="${dubbo.version}" check="false"/>
 <!--     <bean id="demoController" class="com.rongyi.roa.web.controller.demo.DemoController"> 和本地服务一样使用远程服务 -->
 <!-- 	    <property name="memberService" ref="memberService" /> -->
 <!-- 	</bean> -->
