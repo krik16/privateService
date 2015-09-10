@@ -158,7 +158,10 @@ public enum CodeEnum {
     ERROR_CODE_USED("-20002","券码已使用"),
     ERROR_CODE_OUTDATE("-20003","券码已过期或已失效"),
     ERROR_CODE_REFUND("-20004","券码状态异常"),
-    ERROR_CODE_NOHEAR("-20005","本店暂未发行该类优惠券");
+    ERROR_CODE_NOHEAR("-20005","本店暂未发行该类优惠券"),
+    
+    ERROR_NOTICE_TYPE("-30001","对店铺公告点赞或取消赞类型错误"),
+    ERROR_PRAISE_NOTICE("-30002","对店铺公告点赞或取消赞失败");
     
     
     private String code; 
