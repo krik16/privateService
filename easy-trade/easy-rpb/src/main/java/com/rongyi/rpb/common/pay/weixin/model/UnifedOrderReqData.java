@@ -3,9 +3,10 @@ package com.rongyi.rpb.common.pay.weixin.model;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import com.rongyi.rpb.common.pay.weixin.util.Configure;
-import com.rongyi.rpb.common.pay.weixin.util.RandomStringGenerator;
+import com.rongyi.rpb.common.pay.weixin.util.MD5;
 import com.rongyi.rpb.common.pay.weixin.util.Signature;
 
 
@@ -54,7 +55,7 @@ public class UnifedOrderReqData {
         setMch_id(Configure.getMchid());
 
         //随机字符串，不长于32 位
-        setNonce_str(RandomStringGenerator.getRandomStringByLength(32));
+        setNonce_str(genNonceStr());
         
         //商品描述
         setBody(body);
@@ -79,6 +80,11 @@ public class UnifedOrderReqData {
         setSign(sign);//把签名数据设置到Sign这个属性中
 
     }
+    
+	private String genNonceStr() {
+		Random random = new Random();
+		return MD5.getMessageDigest(String.valueOf(random.nextInt(10000)).getBytes());
+	}
 
     public String getAppid() {
         return appid;

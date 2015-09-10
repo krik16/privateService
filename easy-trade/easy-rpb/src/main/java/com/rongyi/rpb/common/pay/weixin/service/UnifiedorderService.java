@@ -13,6 +13,8 @@ import java.util.Map;
 
 import com.rongyi.rpb.common.pay.weixin.model.UnifedOrderReqData;
 import com.rongyi.rpb.common.pay.weixin.util.Configure;
+import com.rongyi.rpb.common.pay.weixin.util.Signature;
+import com.rongyi.rpb.common.pay.weixin.util.WXUtil;
 import com.rongyi.rpb.common.pay.weixin.util.XMLParser;
 import com.rongyi.rpb.constants.ConstantUtil;
 
@@ -58,13 +60,18 @@ public class UnifiedorderService extends BaseService{
 		UnifedOrderReqData unifedOrderReqData = new UnifedOrderReqData(body,payNo, totalFee,ConstantUtil.PayWeiXin_V3.WEIXIN_NOTIFY_URL,ConstantUtil.PayWeiXin_V3.TRADE_TYPE);
 		try {
 			 String result = request(unifedOrderReqData);
+			 String timestamp = WXUtil.getTimeStamp();
 			Map<String,Object> resultMap = XMLParser.getMapFromXML(result);
 			if(resultMap != null){
-				map.put("app_signature", resultMap.get("sign"));
+				map.put("appid",ConstantUtil.PayWeiXin_V3.APP_ID);
+				map.put("partnerid",ConstantUtil.PayWeiXin_V3.MCH_ID);
+				map.put("package","Sign=WXPay");
 				map.put("prepayid", resultMap.get("prepay_id"));
 				map.put("noncestr", resultMap.get("nonce_str"));
+				map.put("timestamp",timestamp);
+				String sign =  Signature.getSign(map);
+				map.put("app_signature", sign);
 			}
-			 System.err.println(map.toString()); 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

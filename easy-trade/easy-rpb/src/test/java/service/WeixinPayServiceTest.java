@@ -220,7 +220,7 @@ public class WeixinPayServiceTest extends BaseTest {
 	public void testgetPaySignV3() {
 		try {
 			UnifiedorderService unifiedorderService = new UnifiedorderService();
-			unifiedorderService.getAppWeXinSign("100000000011", 1, "test");
+			unifiedorderService.getAppWeXinSign("1000000000211", 1, "test");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

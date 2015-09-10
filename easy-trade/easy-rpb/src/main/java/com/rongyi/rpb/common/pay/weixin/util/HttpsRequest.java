@@ -67,9 +67,6 @@ public class HttpsRequest implements IServiceRequest{
     private void init() throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
 
         KeyStore keyStore = KeyStore.getInstance("PKCS12");
-    	String classesPath = this.getClass().getClassLoader().getResource("").getFile();
-		classesPath += "cret/1268956601.p12";
-		Configure.setCertLocalPath(classesPath);
         FileInputStream instream = new FileInputStream(new File(Configure.getCertLocalPath()));//加载本地的证书进行https加密传输
         try {
             keyStore.load(instream, Configure.getCertPassword().toCharArray());//设置证书密码

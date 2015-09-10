@@ -334,7 +334,7 @@ public class WebPageAlipayController extends BaseController {
 		Map<String, Object> map = resHandler.getAllParameters();
 		LOGGER.info("微信异步通知参数列表"+map.toString());	
 		LOGGER.info("微信支付异步通知开始，交易流水号-->" + map.get("transaction_id"));
-		resHandler.setKey(ConstantUtil.PayWeiXin.KEY);
+		resHandler.setKey(ConstantUtil.PayWeiXin_V3.KEY);
 		if (!resHandler.isTenpaySign()) {
 			LOGGER.info("微信支付异步通知-->微信验证签名不通过，返回消息不是微信发出的合法消息!");
 			return;

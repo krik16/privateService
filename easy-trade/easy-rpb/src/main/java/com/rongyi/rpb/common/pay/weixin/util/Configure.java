@@ -25,7 +25,8 @@ public class Configure {
 	private static String subMchID = "";
 
 	//HTTPS证书的本地路径
-	private static String certLocalPath ="";
+	private static String certLocalPath =ConstantUtil.CRET_DIRECTORY;
+//	private static String certLocalPath ="F:/data/etc/projects/easy-rpb-cert/1268956601.p12";
 
 	//HTTPS证书密码，默认密码等于商户号MCHID
 	private static String certPassword =ConstantUtil.PayWeiXin_V3.MCH_ID;

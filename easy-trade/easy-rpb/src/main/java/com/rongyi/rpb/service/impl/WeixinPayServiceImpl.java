@@ -88,7 +88,6 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 			BigDecimal totalFee = new BigDecimal(total_fee + "").multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
 			UnifiedorderService unifiedorderService = new UnifiedorderService();
 			map = unifiedorderService.getAppWeXinSign(payNo, totalFee.intValue(), "容易网商品");
-			map.put("timestamp", WXUtil.getTimeStamp());
 			map.put("code", 0);
 			map.put("totlePrice", total_fee);
 		} catch (Exception e) {
@@ -305,4 +304,100 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 		}
 		return refundQueryResData;
 	}
+//	
+//	private String genProductArgs() {
+//		StringBuffer xml = new StringBuffer();
+//
+//		try {
+//			String	nonceStr = RandomStringGenerator.getRandomStringByLength(32);
+//
+//
+//			xml.append("</xml>");
+//           List<NameValuePair> packageParams = new LinkedList<NameValuePair>();
+//			packageParams.add(new BasicNameValuePair("appid", "wxf6922aee3bcf0ae8"));
+//			packageParams.add(new BasicNameValuePair("body", "APP pay test"));
+//			packageParams.add(new BasicNameValuePair("mch_id", "1268956601"));
+//			packageParams.add(new BasicNameValuePair("nonce_str", nonceStr));
+//			packageParams.add(new BasicNameValuePair("notify_url", "http://121.40.35.3/test"));
+//			packageParams.add(new BasicNameValuePair("out_trade_no",genOutTradNo()));
+//			packageParams.add(new BasicNameValuePair("spbill_create_ip","127.0.0.1"));
+//			packageParams.add(new BasicNameValuePair("total_fee", "1"));
+//			packageParams.add(new BasicNameValuePair("trade_type", "APP"));
+//
+//
+//			String sign = genPackageSign(packageParams);
+//			packageParams.add(new BasicNameValuePair("sign", sign));
+//
+//
+//		   String xmlstring =toXml(packageParams);
+//
+//			return xmlstring;
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return null;
+//		}
+//	}
+//	
+//
+//	private String toXml(List<NameValuePair> params) {
+//		StringBuilder sb = new StringBuilder();
+//		sb.append("<xml>");
+//		for (int i = 0; i < params.size(); i++) {
+//			sb.append("<"+params.get(i).getName()+">");
+//			sb.append(params.get(i).getValue());
+//			sb.append("</"+params.get(i).getName()+">");
+//		}
+//		sb.append("</xml>");
+//
+//		return sb.toString();
+//	}
+//
+//	
+//	private String genOutTradNo() {
+//		Random random = new Random();
+//		return getMessageDigest(String.valueOf(random.nextInt(10000)).getBytes());
+//	}
+//	
+//	
+//	/**
+//	 生成签名
+//	 */
+//
+//	private String genPackageSign(List<NameValuePair> params) {
+//		StringBuilder sb = new StringBuilder();
+//		
+//		for (int i = 0; i < params.size(); i++) {
+//			sb.append(params.get(i).getName());
+//			sb.append('=');
+//			sb.append(params.get(i).getValue());
+//			sb.append('&');
+//		}
+//		sb.append("key=");
+//		sb.append("b24aaabb1ea8a155c4572570cd260313");
+//		
+//
+//		String packageSign = getMessageDigest(sb.toString().getBytes()).toUpperCase();
+//		return packageSign;
+//	}
+//	
+//	public final static String getMessageDigest(byte[] buffer) {
+//		char hexDigits[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
+//		try {
+//			MessageDigest mdTemp = MessageDigest.getInstance("MD5");
+//			mdTemp.update(buffer);
+//			byte[] md = mdTemp.digest();
+//			int j = md.length;
+//			char str[] = new char[j * 2];
+//			int k = 0;
+//			for (int i = 0; i < j; i++) {
+//				byte byte0 = md[i];
+//				str[k++] = hexDigits[byte0 >>> 4 & 0xf];
+//				str[k++] = hexDigits[byte0 & 0xf];
+//			}
+//			return new String(str);
+//		} catch (Exception e) {
+//			return null;
+//		}
+//	}
 }
