@@ -1155,25 +1155,6 @@ rule "订单确认收货状态超时"
 		
 		logger.info("[Status] " + currentStatus + " -> " + nextStatus);
 		
-		// logger.info("[PaymentEvent] 打款给卖家: " + $order.getTotalAmount() + "元");
-		// 发送打款事件
-		// PaymentEvent pay = new PaymentEvent();
-		// pay.setType(PaymentEventType.PAYMENT);
-		// pay.setTotalAmount($order.getTotalAmount());
-		// pay.setPaymentIdList($order.getPaymentIdList());
-		// pay.setWeidianId($order.getWeidianId());
-		// pay.setOrderNo($orderNo);
-		// pay.setOrderItemNo(null);
-
-		// 记录退款响应需要进行的动作
-		// PaymentAction action = PaymentAction.create(pay.getType(),
-		// 	$order.getOrderNo(), null, $order.getPaymentIdList(), null);
-		// 缓存PaymentAction
-		// orderUtil.saveOrUpdatePaymentAction(action);
-		// insert(action);
-		
-		// msgSender.sendEvent(pay);
-		
 		// 插入订单历史事件数据库
 		int eventId = orderEventService.insertAndGetId(entity);
 		
@@ -1214,23 +1195,20 @@ rule "订单关闭"
 	then
 		logger.info("[" + drools.getRule().getName() + "] OrderNo=" +
     		$orderNo + " 开始...");
-    	
-    	String currentStatus = $order.getStatus();
-		String nextStatus = OrderFormStatus.COMMENT_CLOSED;	
 		
-		OrderEventEntity entity = orderUtil.createOrderEventEntity(
-			$orderNo, currentStatus, "订单关闭", nextStatus,
-			OrderEventType.ORDER_CLOSED);
-			
-		// 插入订单历史事件数据库
-		int eventId = orderEventService.insertAndGetId(entity);
-		
-		// 改变订单状态
-		orderUtil.orderChangeStatus($order, nextStatus, eventId);
-		
-		// 设置时间相关的项
-		$order.setStatusHoldMs(orderConfig.getCommentCloseWaitMax() - orderConfig.getOrderCloseWaitMax());
-		$order.setNextStatusTime(orderUtil.getDateInFuture(orderConfig.getCommentCloseWaitMax() - orderConfig.getOrderCloseWaitMax()));
+		//判断是否需要评价
+		if($order。getPaymentIdList() == null || $order.getIsComment() == 1){
+			for (Object orderDetail: $orderDetailList) {
+				sessionUtil.delete(orderDetail);
+			}
+	
+			sessionUtil.delete($order);
+		}
+		else{
+			// 设置时间相关的项
+			$order.setStatusHoldMs(orderConfig.getCommentCloseWaitMax() - orderConfig.getOrderCloseWaitMax());
+			$order.setNextStatusTime(orderUtil.getDateInFuture(orderConfig.getCommentCloseWaitMax() - orderConfig.getOrderCloseWaitMax()));
+		}
 		
 		// 入主数据库
 		orderFormService.updateStatusWithTime($order);
@@ -1268,7 +1246,6 @@ rule "评价关闭"
 
 			orderUtil。defaultComment($order,$orderDetailList);
 		}	
-		$order.setStatus(OrderFormStatus.COMMENT_CLOSED);
 		orderFormService.updateStatusWithTime($order);
 
 
