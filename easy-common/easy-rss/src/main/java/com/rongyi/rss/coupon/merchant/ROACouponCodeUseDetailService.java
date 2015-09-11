@@ -2,6 +2,7 @@ package com.rongyi.rss.coupon.merchant;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.vo.merchant.CouponCodeUseDetailVO;
+import com.rongyi.easy.coupon.vo.merchant.MerchantPaging;
 import com.rongyi.easy.page.QueryParam;
 
 /**
@@ -10,5 +11,5 @@ import com.rongyi.easy.page.QueryParam;
  * Created at 2015/9/10 19:46.
  */
 public interface ROACouponCodeUseDetailService {
-    public PagingVO<CouponCodeUseDetailVO> findUseDetailsByPage(QueryParam queryParam);
+    public MerchantPaging<CouponCodeUseDetailVO> findUseDetailsByPage(QueryParam queryParam);
 }
