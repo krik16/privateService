@@ -1197,7 +1197,7 @@ rule "订单关闭"
     		$orderNo + " 开始...");
 		
 		//判断是否需要评价
-		if($order。getPaymentIdList() == null || $order.getIsComment() == 1){
+		if($order.getPaymentIdList() == null || $order.getIsComment() == 1){
 			for (Object orderDetail: $orderDetailList) {
 				sessionUtil.delete(orderDetail);
 			}
@@ -1244,7 +1244,7 @@ rule "评价关闭"
 		if ($order.getIsComment() != 1) {
 			$order.setIsComment(1);
 
-			orderUtil。defaultComment($order,$orderDetailList);
+			orderUtil.defaultComment($order,$orderDetailList);
 		}	
 		orderFormService.updateStatusWithTime($order);
 
