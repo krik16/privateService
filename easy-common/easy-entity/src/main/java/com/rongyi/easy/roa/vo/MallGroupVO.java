@@ -1,12 +1,14 @@
 package com.rongyi.easy.roa.vo;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class MallGroupVO implements Serializable{
     private static final long serialVersionUID = 1L;
 	private String id;//集团ID
 	private String name;//集团名称
 	private Integer status;
+	private List<String> mallIds;
 	public String getId() {
 		return id;
 	}
@@ -25,7 +27,11 @@ public class MallGroupVO implements Serializable{
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	
-	
+	public List<String> getMallIds() {
+		return mallIds;
+	}
+	public void setMallIds(List<String> mallIds) {
+		this.mallIds = mallIds;
+	}
 	
 }
