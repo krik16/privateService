@@ -29,6 +29,7 @@ import com.rongyi.easy.rpb.vo.PaySuccessResponse;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
 import com.rongyi.easy.rpb.vo.QueryOrderParamVO;
 import com.rongyi.easy.rpb.vo.WeixinQueryOrderParamVO;
+import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.mq.Sender;
 import com.rongyi.rpb.nsynchronous.OrderFormNsyn;
@@ -103,17 +104,16 @@ public class RpbServiceImpl implements IRpbService {
 
 	@Override
 	public Map<String, Object> operateWeixinRefund(Integer id) {
-		Map<String, Object> messageMap = new HashMap<String, Object>();
+		LOGGER.info("微信退款人工操作，id="+id);
 		PaymentEntity paymentEntity = paymentService.selectByPrimaryKey(id.toString());
 		PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
 				paymentEntity.getPayChannel());
 		Map<String, Object> refundResultMap = weixinPayService.weixinRefund(oldPaymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), oldPaymentEntity.getAmountMoney().doubleValue(),
 				paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
-		if (Constants.RESULT.SUCCESS.equals(refundResultMap.get("result"))) {
+		if (Constants.RESULT.SUCCESS.equals(refundResultMap.get("result")) || ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr().equals(refundResultMap.get("result"))) {
 			paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
 			paymentService.updateByPrimaryKeySelective(paymentEntity);
-			messageMap.put("success", true);
-			messageMap.put("message", "微信退款成功");
+			refundResultMap.put("success", true);
 			String target = Constants.SOURCETYPE.OSM;
 			String orderDetailNum = "";
 			if (Constants.ORDER_TYPE.ORDER_TYPE_1 == oldPaymentEntity.getOrderType()) {
@@ -124,11 +124,10 @@ public class RpbServiceImpl implements IRpbService {
 			MessageEvent event = rpbEventService.getMessageEvent(paymentEntity.getPayNo(), paymentEntity.getOrderNum(), orderDetailNum, paymentEntity.getPayChannel().toString(), null,
 					Constants.SOURCETYPE.RPB, target, PaymentEventType.REFUND);
 			sender.convertAndSend(event);
-			return messageMap;
+		}else{
+			refundResultMap.put("success", false);
 		}
-		messageMap.put("success", false);
-		messageMap.put("message", refundResultMap.get("message"));
-		return messageMap;
+		return refundResultMap;
 	}
 
 	@Override

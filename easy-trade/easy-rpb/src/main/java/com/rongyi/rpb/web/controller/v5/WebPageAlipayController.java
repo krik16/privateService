@@ -254,72 +254,6 @@ public class WebPageAlipayController extends BaseController {
 		return "appwebpage/notify";
 	}
 
-	/**
-	 * @Description: 微信支付异步通知
-	 * @param model
-	 * @param request
-	 * @param response
-	 * @param bank_type
-	 * @param discount
-	 * @param fee_type
-	 * @param input_charset
-	 * @param notify_id
-	 * @param out_trade_no
-	 * @param product_fee
-	 * @param sign
-	 * @param sign_type
-	 * @param time_end
-	 * @param total_fee
-	 * @param trade_mode
-	 * @param trade_state
-	 * @param transaction_id
-	 * @param transport_fee
-	 * @return
-	 * @Author: 柯军
-	 * @datetime:2015年6月26日下午6:23:41
-	 **/
-
-	// @RequestMapping("/weixin/notify_url.htm")
-	// public String weixinNotify(Model model, HttpServletRequest request,
-	// HttpServletResponse response, String bank_type, String discount, String
-	// fee_type, String input_charset, String notify_id,
-	// String out_trade_no, String product_fee, String sign, String sign_type,
-	// String time_end, String total_fee, String trade_mode, String trade_state,
-	// String transaction_id,
-	// String transport_fee) {
-	// if (!"0".equals(trade_state))
-	// return "appwebpage/notify";
-	// ResponseHandler resHandler = new ResponseHandler(request, response);
-	// resHandler.setKey(ConstantUtil.PayWeiXin.PARTNER_KEY);
-	// if (!resHandler.isTenpaySign()) {
-	// LOGGER.info("微信支付异步通知-->微信验证签名不通过，返回消息不是财付通发出的合法消息!");
-	// return "appwebpage/notify";
-	// }
-	// try {
-	//
-	// PaymentLogInfo result =
-	// paymentLogInfoService.selectByPayTradeNo(transaction_id);
-	// if (result != null)// 重复通知
-	// return "appwebpage/notify";
-	// LOGGER.info("微信支付异步通知开始，交易流水号-->" + transaction_id);
-	// Map<String, String> requestMap = parseXml(request);
-	// PaymentLogInfo paymentLogInfo = getPaymentLogInfo(transaction_id,
-	// out_trade_no, notify_id, null, DateUtil.getCurrDateTime(), sign,
-	// sign_type, 0, 0, total_fee, requestMap.get("OpenId"),
-	// null, Constants.REPLAY_FLAG.REPLAY_FLAG3,
-	// Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
-	// if (validateRepeatPay(out_trade_no, paymentLogInfo,
-	// Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1)) // 验证是否是重复支付
-	// return "appwebpage/notify";
-	// paymentLogInfoService.insertPayNotify(paymentLogInfo,
-	// Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0,
-	// Constants.PAYMENT_STATUS.STAUS2, PaymentEventType.WEIXIN_PAY);
-	// LOGGER.info("<--微信支付异步通知结束");
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	// return "appwebpage/notify";
-	// }
 
 	/**
 	 * @Description: V3版本微信支付异步通知
@@ -333,12 +267,13 @@ public class WebPageAlipayController extends BaseController {
 	public void weixinNotify(Model model, HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> requestMap = parseXml(request);
 		if ("SUCCESS".equals(requestMap.get("result_code"))) {
+			LOGGER.info("<--微信支付异步通知开始");
 			Map<String, Object> responseMap = new HashMap<String, Object>();
-			responseMap.put("return_code", "SUCCESS");
+			responseMap.put("return_code", Constants.RESULT.SUCCESS);
 			responseMap.put("return_msg", "OK");
 			boolean bool = paymentLogInfoService.validateByTradeNoAndPayNo(requestMap.get("transaction_id").toString(), requestMap.get("out_trade_no").toString());
 			if (bool) {
-				LOGGER.info("微信支付结果重复通知");
+				LOGGER.info("微信支付结果已正确处理,应答微信支付结果处理成功");
 				setResponse(response, responseMap);
 				return;
 			}
@@ -347,8 +282,7 @@ public class WebPageAlipayController extends BaseController {
 				setResponse(response, responseMap);
 				return;
 			}
-			if (paymentLogInfoService.insertPayNotify(paymentLogInfo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, PaymentEventType.WEIXIN_PAY))// 支付通知正常处理
-				setResponse(response, responseMap);
+			paymentLogInfoService.insertPayNotify(paymentLogInfo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, PaymentEventType.WEIXIN_PAY);// 支付通知正常处理
 			LOGGER.info("<--微信支付异步通知结束");
 		} else {
 			LOGGER.info("支付未成功,通知内容-->" + requestMap.toString());
@@ -405,34 +339,6 @@ public class WebPageAlipayController extends BaseController {
 		}
 
 	}
-
-	/**
-	 * @Description: 解析微信异步通知中的xml元素值
-	 * @param request
-	 * @return
-	 * @Author: 柯军
-	 * @datetime:2015年8月11日下午3:33:45
-	 **/
-
-//	@SuppressWarnings("unchecked")
-//	private static Map<String, String> parseXml(HttpServletRequest request) {
-//		Map<String, String> map = new HashMap<String, String>();
-//
-//		try {
-//			InputStream inputStream = request.getInputStream();
-//			SAXReader reader = new SAXReader();
-//			Document document = reader.read(inputStream);
-//			Element root = document.getRootElement();
-//			List<Element> elementList = root.elements();
-//			for (Element e : elementList)
-//				map.put(e.getName(), e.getText());
-//			inputStream.close();
-//		} catch (Exception e) {
-//			LOGGER.error("解析微信返回结果xml失败");
-//			e.printStackTrace();
-//		}
-//		return map;
-//	}
 
 	/**
 	 * 支付失败时支付宝端回调接口

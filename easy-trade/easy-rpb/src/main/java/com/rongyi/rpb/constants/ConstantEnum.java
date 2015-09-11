@@ -49,6 +49,7 @@ public enum ConstantEnum {
 	ALI_QUERY_ORDER_ERROR_CODE("TRADE_NOT_EXIST","交易不存在！"),
 	
 	WEIXIN_REFUND_RESULT_SUCCESS("SUCCESS","退款成功!"),
+	WEIXIN_REFUND_RESULT_PROCESSING("PROCESSING","微信退款处理中!"),
 	WEIXIN_REFUND_RESULT_NOTSURE("NOTSURE","退款未确认,需重新发起退款!"),
 	WEIXIN_REFUND_RESULT_CHANGE("CHANGE","退款转入代发，退款到银行发现用户的卡作废或者冻结了，导致原路退款银行卡失败，资金回流到商户的现金帐号，需要商户人工干预，通过线下或者财付通转账的方式进行退款!"),
 	WEIXIN_REFUND_RESULT_FAIL("FAIL","退款失败!"),

@@ -162,14 +162,14 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 			RefundService refundService = new RefundService();
 			BigDecimal bigTotalFee = new BigDecimal(totalFee + "").multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
 			BigDecimal bigRefundFee = new BigDecimal(refundFee + "").multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
-			RefundReqData refundReqData = new RefundReqData(null, payNo, null, newPayNo, bigTotalFee.intValue(),bigRefundFee.intValue(), ConstantUtil.PayWeiXin_V3.MCH_ID, null);
+			RefundReqData refundReqData = new RefundReqData(null, payNo, null, newPayNo, bigTotalFee.intValue(), bigRefundFee.intValue(), ConstantUtil.PayWeiXin_V3.MCH_ID, null);
 			String result = refundService.request(refundReqData);
-			System.err.println(result);
 			RefundResData refundResData = (RefundResData) Util.getObjectFromXML(result, RefundResData.class);
-			if ("SUCCESS".equals(refundResData.getReturn_code()) && "SUCCESS".equals(refundResData.getResult_code())) {// 退款申请成功后查询退款结果
+			if (Constants.RESULT.SUCCESS.equals(refundResData.getReturn_code()) && Constants.RESULT.SUCCESS.equals(refundResData.getResult_code())) {// 退款申请成功后查询退款结果
 				RefundQueryResData refundQueryResData = refundQuery(null, null, newPayNo);
 				map.put("result", refundQueryResData.getRefund_status_0());
-				if (ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getCodeStr().equals(refundQueryResData.getRefund_status_0()) || "PROCESSING".equals(refundQueryResData.getRefund_status_0())) {// 退款成功
+				if (ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getCodeStr().equals(refundQueryResData.getRefund_status_0())
+						|| ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr().equals(refundQueryResData.getRefund_status_0())) {// 退款成功
 					LOGGER.info(ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getValueStr() + ",退款状态-->" + refundQueryResData.getRefund_status_0());
 					map.put("message", ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getValueStr());
 				} else if (ConstantEnum.WEIXIN_REFUND_RESULT_NOTSURE.getCodeStr().equals(refundQueryResData.getRefund_status_0())) {
@@ -181,12 +181,13 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 				} else if (ConstantEnum.WEIXIN_REFUND_RESULT_FAIL.getCodeStr().equals(refundQueryResData.getRefund_status_0())) {
 					LOGGER.info(ConstantEnum.WEIXIN_REFUND_RESULT_FAIL.getValueStr() + ",退款状态-->" + refundQueryResData.getRefund_status_0());
 					map.put("message", ConstantEnum.WEIXIN_REFUND_RESULT_FAIL.getValueStr());
-				}else{
-					LOGGER.info("未知错误,状态-->"+refundQueryResData.getRefund_status_0());
+				} else {
+					LOGGER.info("未知错误,状态-->" + refundQueryResData.getRefund_status_0());
 				}
 			} else {
 				LOGGER.info("退款失败，退款申请返回结果-->" + result);
 				map.put("result", "FAIL");
+				map.put("message",!StringUtils.isEmpty(refundResData.getErr_code_des())?refundResData.getErr_code_des():"退款失败");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -247,13 +248,14 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 	@Override
 	public WeixinQueryOrderParamVO queryOrder(String tradeNo, String payNo) {
 		WeixinQueryOrderParamVO weixinQueryOrderParamVO = new WeixinQueryOrderParamVO();
+		String result = null;
 		try {
 			PayQueryService payQueryService = new PayQueryService();
 			ScanPayQueryReqData scanPayQueryReqData = new ScanPayQueryReqData(tradeNo, payNo);
-			String result = payQueryService.request(scanPayQueryReqData);
-			LOGGER.info("微信订单查询结果-->" + result);
+			result = payQueryService.request(scanPayQueryReqData);
 			return (WeixinQueryOrderParamVO) Util.getObjectFromXML(result, WeixinQueryOrderParamVO.class);
 		} catch (Exception e) {
+			LOGGER.info("微信订单查询结果-->" + result);
 			e.printStackTrace();
 		}
 		return weixinQueryOrderParamVO;
@@ -299,7 +301,6 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 			RefundQueryService refundQueryService = new RefundQueryService();
 			RefundQueryReqData refundQueryReqData = new RefundQueryReqData(tradeNo, payNo, null, refundNo, null);
 			String result = refundQueryService.request(refundQueryReqData);
-			LOGGER.info("微信退款查询结果-->"+result);
 			refundQueryResData = (RefundQueryResData) Util.getObjectFromXML(result, RefundQueryResData.class);
 		} catch (Exception e) {
 			e.printStackTrace();
