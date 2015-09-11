@@ -901,7 +901,7 @@ public class OrderUtil {
 				OrderDetailFormEntity orderDetail = (OrderDetailFormEntity) entity;
 				commodityIds += orderDetail.getCommodityMid();
 			}
-			scoreVO.setComment_id(commodityIds);
+			scoreVO.setItem_id(commodityIds);
 			try {
 				integralService.addOrSubScore(scoreVO);
 			} catch (Exception e) {
