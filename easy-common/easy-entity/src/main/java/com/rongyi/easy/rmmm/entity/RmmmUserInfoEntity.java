@@ -62,6 +62,8 @@ public class RmmmUserInfoEntity implements Serializable{
 
     private String devId;//登录时获取当前设备Id
 
+    private String sharCode; //邀请码
+
     public Integer getId() {
         return id;
     }
@@ -212,5 +214,13 @@ public class RmmmUserInfoEntity implements Serializable{
 
     public void setDevId(String devId) {
         this.devId = devId;
+    }
+
+    public String getSharCode() {
+        return sharCode;
+    }
+
+    public void setSharCode(String sharCode) {
+        this.sharCode = sharCode;
     }
 }

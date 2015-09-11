@@ -1,5 +1,7 @@
 package com.rongyi.easy.rmmm.param.user;
 
+import com.rongyi.easy.rmmm.base.BaseParam;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,7 +15,7 @@ import java.util.List;
  * 俞志坚             2015/5/20              1.0            创建文件
  *
  */
-public class UserManagerParam implements Serializable{
+public class UserManagerParam extends BaseParam implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
