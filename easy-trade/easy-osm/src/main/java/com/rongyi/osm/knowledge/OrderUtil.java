@@ -1,9 +1,6 @@
 package com.rongyi.osm.knowledge;
 
 import java.math.BigDecimal;
-
-import net.sf.json.JSONArray;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -32,7 +29,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.rongyi.easy.malllife.common.util.JsonUtil;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.constant.Constants;
 import com.rongyi.core.constant.OrderEventType;
@@ -43,6 +39,7 @@ import com.rongyi.easy.integral.constant.ActionType;
 import com.rongyi.easy.integral.constant.ItemType;
 import com.rongyi.easy.integral.constant.ScoreRuleEnum;
 import com.rongyi.easy.integral.vo.IntegralRecordVO;
+import com.rongyi.easy.malllife.common.util.JsonUtil;
 import com.rongyi.easy.osm.entity.ApplicationFormEntity;
 import com.rongyi.easy.osm.entity.OrderDetailFormEntity;
 import com.rongyi.easy.osm.entity.OrderEventEntity;
@@ -61,8 +58,8 @@ import com.rongyi.osm.service.coupon.CouponStatusService;
 import com.rongyi.osm.service.mcmc.McmcStockService;
 import com.rongyi.rss.integral.IntegralService;
 import com.rongyi.rss.mallshop.order.ROAOrderService;
-import com.rongyi.osm.knowledge.OrderPriceResetEvent;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @Component
@@ -884,7 +881,7 @@ public class OrderUtil {
 				OrderDetailFormEntity orderDetail = (OrderDetailFormEntity) entity;
 				commodityIds += orderDetail.getCommodityMid();
 			}
-			scoreVO.setComment_id(commodityIds);
+			scoreVO.setItem_id(commodityIds);
 			try {
 				integralService.addOrSubScore(scoreVO);
 			} catch (Exception e) {
