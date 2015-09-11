@@ -331,23 +331,14 @@ public class WebPageAlipayController extends BaseController {
 	 **/
 	@RequestMapping("/weixin/notify_url.htm")
 	public void weixinNotify(Model model, HttpServletRequest request, HttpServletResponse response) {
-//		ResponseHandler resHandler = new ResponseHandler(request, response);
 		Map<String, Object> requestMap = parseXml(request);
-//		Map<String, Object> map = resHandler.getAllParameters();
-		LOGGER.info("微信异步通知参数列表"+requestMap.toString());	
-//		LOGGER.info("微信支付异步通知开始，交易流水号-->" + map.get("transaction_id"));
-//		resHandler.setKey(ConstantUtil.PayWeiXin_V3.KEY);
-//		if (!resHandler.isTenpaySign()) {
-//			LOGGER.info("微信支付异步通知-->微信验证签名不通过，返回消息不是微信发出的合法消息!");
-//			return;
-//		}
 		if ("SUCCESS".equals(requestMap.get("result_code"))) {
 			Map<String, Object> responseMap = new HashMap<String, Object>();
 			responseMap.put("return_code", "SUCCESS");
 			responseMap.put("return_msg", "OK");
 			boolean bool = paymentLogInfoService.validateByTradeNoAndPayNo(requestMap.get("transaction_id").toString(), requestMap.get("out_trade_no").toString());
 			if (bool) {
-				LOGGER.info("重复通知");
+				LOGGER.info("微信支付结果重复通知");
 				setResponse(response, responseMap);
 				return;
 			}
