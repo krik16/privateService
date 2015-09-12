@@ -16,13 +16,17 @@ public class StatisticsCountVO implements Serializable{
     private Integer done;
     /**待发布/待审核*/
     private Integer wait;
-    /**已结束/审核失败*/
-    private Integer over;
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this).append("total", total).append("done", done).append("wait", wait).append("over", over).toString();
+    public Integer getOvered() {
+        return overed;
     }
+
+    public void setOvered(Integer overed) {
+        this.overed = overed;
+    }
+
+    /**已结束/审核失败*/
+    private Integer overed;
 
     public Integer getTotal() {
         return total;
@@ -48,18 +52,18 @@ public class StatisticsCountVO implements Serializable{
         this.wait = wait;
     }
 
-    public Integer getOver() {
-        return over;
-    }
-
-    public void setOver(Integer over) {
-        this.over = over;
-    }
-
-    public StatisticsCountVO(Integer total, Integer done, Integer wait, Integer over) {
+    public StatisticsCountVO(Integer total, Integer done, Integer wait, Integer overed) {
         this.total = total;
         this.done = done;
         this.wait = wait;
-        this.over = over;
+        this.overed = overed;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).append("total", total).append("done", done).append("wait", wait).append("overed", overed).toString();
+    }
+
+    public StatisticsCountVO() {
     }
 }

@@ -3,6 +3,7 @@ package com.rongyi.rss.coupon.merchant;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.mysql.Coupon;
 import com.rongyi.easy.coupon.entity.mysql.CouponRejectRecord;
+import com.rongyi.easy.coupon.vo.merchant.MerchantPaging;
 import com.rongyi.easy.coupon.vo.merchant.StatisticsCountVO;
 import com.rongyi.easy.coupon.vo.merchant.UserInfoVo;
 import com.rongyi.easy.page.QueryParam;
@@ -27,14 +28,14 @@ public interface MerchantCouponServce {
      * @param queryParam
      * @return
      */
-    public PagingVO<Coupon> getCouponByPageMysql(QueryParam queryParam,UserInfoVo UserInfoVo);
+    public MerchantPaging<Coupon> getCouponByPageMysql(QueryParam queryParam,UserInfoVo UserInfoVo);
 
     /**
      * 商家优惠券，新增，修改，审核，删除等操作
      * @param coupon
      * @return
      */
-    public Boolean updateCoupon(Coupon coupon,UserInfoVo userInfoVo);
+    public Boolean updateCoupon(Coupon coupon,UserInfoVo userInfoVo) throws  Exception;
 
     /**
      * 插入一条coupon

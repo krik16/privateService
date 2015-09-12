@@ -10,6 +10,16 @@ import java.util.List;
  * Created at 2015/7/21 17:19.
  */
 public class QueryParam implements Serializable {
+    private Integer reserve;//预留字段
+
+    public Integer getReserve() {
+        return reserve;
+    }
+
+    public void setReserve(Integer reserve) {
+        this.reserve = reserve;
+    }
+
     private static final int PAGESIZE = 10;
     private static final int CURRENTPAGE = 1;
     /**

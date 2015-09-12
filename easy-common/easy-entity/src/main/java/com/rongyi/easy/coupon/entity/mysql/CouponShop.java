@@ -120,6 +120,12 @@ public class CouponShop implements Serializable{
         this.shopId = shopId;
     }
 
+    public CouponShop(Integer couponId, String shopId, String shopName) {
+        this.couponId = couponId;
+        this.shopId = shopId;
+        this.shopName = shopName;
+    }
+
     public CouponShop() {
 
     }
