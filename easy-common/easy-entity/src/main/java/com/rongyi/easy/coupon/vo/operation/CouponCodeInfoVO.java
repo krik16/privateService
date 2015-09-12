@@ -40,12 +40,12 @@ public class CouponCodeInfoVO {
 	/**
 	 * 领取时间
 	 */
-	private Date receive_dt;
+	private Date receive_at;
 	
 	/**
 	 * 使用时间
 	 */
-	private Date use_dt;
+	private Date use_at;
 
 	public String getCouponCode() {
 		return couponCode;
@@ -95,20 +95,20 @@ public class CouponCodeInfoVO {
 		this.channel = channel;
 	}
 
-	public Date getReceive_dt() {
-		return receive_dt;
+	public Date getReceive_at() {
+		return receive_at;
 	}
 
-	public void setReceive_dt(Date receive_dt) {
-		this.receive_dt = receive_dt;
+	public void setReceive_at(Date receive_at) {
+		this.receive_at = receive_at;
 	}
 
-	public Date getUse_dt() {
-		return use_dt;
+	public Date getUse_at() {
+		return use_at;
 	}
 
-	public void setUse_dt(Date use_dt) {
-		this.use_dt = use_dt;
+	public void setUse_at(Date use_at) {
+		this.use_at = use_at;
 	}
 
 	@Override
@@ -116,9 +116,8 @@ public class CouponCodeInfoVO {
 		StringBuilder builder = new StringBuilder();
 		builder.append("CouponCodeInfoVO [couponCode=").append(couponCode).append(", orderNo=").append(orderNo)
 				.append(", status=").append(status).append(", userAccount=").append(userAccount).append(", name=")
-				.append(name).append(", channel=").append(channel).append(", receive_dt=").append(receive_dt)
-				.append(", use_dt=").append(use_dt).append("]");
+				.append(name).append(", channel=").append(channel).append(", receive_at=").append(receive_at)
+				.append(", use_at=").append(use_at).append("]");
 		return builder.toString();
 	}
-	
 }
