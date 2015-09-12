@@ -105,6 +105,11 @@ public class VoucherCouponParam implements Serializable{
      * 置顶代金券：全部[all] 已置顶[sticked]
      */
     private String tabType;
+    
+    /**
+     * 展示区域：常规区域,活动区域;未选中[0]，选中[1] 例如 "1,1"表示都选中
+     */
+    private String displayRegion;
 
 	private Integer currentPage = CURRENTPAGE;
 
@@ -302,6 +307,14 @@ public class VoucherCouponParam implements Serializable{
 		this.cityId = StringUtils.isNotBlank(cityId) ? cityId.trim() : null;
 	}
 
+	public String getDisplayRegion() {
+		return displayRegion;
+	}
+
+	public void setDisplayRegion(String displayRegion) {
+		this.displayRegion = StringUtils.isNotBlank(displayRegion) ? displayRegion.trim() : null;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -313,8 +326,9 @@ public class VoucherCouponParam implements Serializable{
 				.append(", startDate=").append(startDate).append(", endDate=").append(endDate)
 				.append(", publishChannel=").append(publishChannel).append(", couponType=").append(couponType)
 				.append(", provinceId=").append(provinceId).append(", cityId=").append(cityId).append(", tabType=")
-				.append(tabType).append(", currentPage=").append(currentPage).append(", pageSize=").append(pageSize)
-				.append(", offset=").append(offset).append(", orderByClause=").append(orderByClause).append("]");
+				.append(tabType).append(", displayRegion=").append(displayRegion).append(", currentPage=")
+				.append(currentPage).append(", pageSize=").append(pageSize).append(", offset=").append(offset)
+				.append(", orderByClause=").append(orderByClause).append("]");
 		return builder.toString();
 	}
 

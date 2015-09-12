@@ -36,12 +36,12 @@ public class VoucherCouponVO implements Serializable {
     /**
      * 原价
      */
-    private Double origPrice;
+    private Integer origPrice;
 
     /**
      * 现价
      */
-    private Double currPrice;
+    private Integer currPrice;
 
     /**
      * 关联类型
@@ -115,6 +115,11 @@ public class VoucherCouponVO implements Serializable {
      * 排序值
      */
     private Integer sortIdx;
+    
+    /**
+     * 展示区域
+     */
+    private String displayRegion;
 
 	public Integer getId() {
 		return id;
@@ -156,19 +161,19 @@ public class VoucherCouponVO implements Serializable {
 		this.stockCount = stockCount;
 	}
 
-	public Double getOrigPrice() {
+	public Integer getOrigPrice() {
 		return origPrice;
 	}
 
-	public void setOrigPrice(Double origPrice) {
+	public void setOrigPrice(Integer origPrice) {
 		this.origPrice = origPrice;
 	}
 
-	public Double getCurrPrice() {
+	public Integer getCurrPrice() {
 		return currPrice;
 	}
 
-	public void setCurrPrice(Double currPrice) {
+	public void setCurrPrice(Integer currPrice) {
 		this.currPrice = currPrice;
 	}
 
@@ -284,6 +289,14 @@ public class VoucherCouponVO implements Serializable {
 		this.sortIdx = sortIdx;
 	}
 
+	public String getDisplayRegion() {
+		return displayRegion;
+	}
+
+	public void setDisplayRegion(String displayRegion) {
+		this.displayRegion = displayRegion;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -296,7 +309,7 @@ public class VoucherCouponVO implements Serializable {
 				.append(lv2Name).append(", rejectRecordList=").append(rejectRecordList).append(", couponSortId=")
 				.append(couponSortId).append(", provinceId=").append(provinceId).append(", provinceName=")
 				.append(provinceName).append(", cityId=").append(cityId).append(", cityName=").append(cityName)
-				.append(", sortIdx=").append(sortIdx).append("]");
+				.append(", sortIdx=").append(sortIdx).append(", displayRegion=").append(displayRegion).append("]");
 		return builder.toString();
 	}
 }
