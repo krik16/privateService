@@ -1,5 +1,7 @@
 package com.rongyi.easy.coupon.entity.mysql;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 
 public class CouponShop implements Serializable{
@@ -39,6 +41,39 @@ public class CouponShop implements Serializable{
      * 店铺品牌
      */
     private String shopBrand;
+
+    private String shopAddress;
+    private String shopBulding;
+    private String shopFloor;
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).append("id", id).append("couponId", couponId).append("shopId", shopId).append("shopName", shopName).append("shopMallName", shopMallName).append("shopLogoUrl", shopLogoUrl).append("shopBrand", shopBrand).append("shopAddress", shopAddress).append("shopBulding", shopBulding).append("shopFloor", shopFloor).toString();
+    }
+
+    public String getShopAddress() {
+        return shopAddress;
+    }
+
+    public void setShopAddress(String shopAddress) {
+        this.shopAddress = shopAddress;
+    }
+
+    public String getShopBulding() {
+        return shopBulding;
+    }
+
+    public void setShopBulding(String shopBulding) {
+        this.shopBulding = shopBulding;
+    }
+
+    public String getShopFloor() {
+        return shopFloor;
+    }
+
+    public void setShopFloor(String shopFloor) {
+        this.shopFloor = shopFloor;
+    }
 
     public Integer getId() {
         return id;
@@ -95,15 +130,6 @@ public class CouponShop implements Serializable{
     public void setShopBrand(String shopBrand) {
         this.shopBrand = shopBrand;
     }
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("CouponShop [id=").append(id).append(", couponId=").append(couponId).append(", shopId=")
-				.append(shopId).append(", shopName=").append(shopName).append(", shopMallName=").append(shopMallName)
-				.append(", shopLogoUrl=").append(shopLogoUrl).append(", shopBrand=").append(shopBrand).append("]");
-		return builder.toString();
-	}
 
     public CouponShop(Integer couponId, String shopId, String shopName, String shopMallName, String shopLogoUrl, String shopBrand) {
         this.couponId = couponId;
