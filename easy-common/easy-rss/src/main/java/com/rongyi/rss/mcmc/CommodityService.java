@@ -1,5 +1,9 @@
 package com.rongyi.rss.mcmc;
 
+import java.util.List;
+
+import org.bson.types.ObjectId;
+
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.easy.mcmc.Commodity;
 import com.rongyi.easy.mcmc.CommodityShopInfo;
@@ -7,10 +11,7 @@ import com.rongyi.easy.mcmc.vo.CommodityPageBuyerVO;
 import com.rongyi.easy.mcmc.vo.CommoditySpecVO;
 import com.rongyi.easy.mcmc.vo.CommodityVO;
 import com.rongyi.easy.mcmc.vo.CommodityWebVO;
-
-import org.bson.types.ObjectId;
-
-import java.util.List;
+import com.rongyi.easy.solr.param.CommoditySearchParam;
 
 
 
@@ -38,8 +39,7 @@ public interface CommodityService {
 
 	public ResponseResult getCategoryById(String id);
 
-	public ResponseResult searchCommodity(String keyword,String shopId,String brandId,String mallId, String categoryId,
-			int orderBy, int currentpage, int pagesize);
+	public ResponseResult searchCommodity(CommoditySearchParam param);
 
 	public ResponseResult getBrandCommodity(String brandId, String categoryId,
 			int orderBy, int currentpage, int pagesize);
