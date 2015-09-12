@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class HomePageContentVO {
     private List<BannerVO> banner;
-    private List<QuickEntryVO> quickEntry;
+    private QuickEntryVO quickEntry;
     private List<HotHeadlineVO> hotHeadline;
     private StarShopVO starShop;
     private List<ActivityRecommendVO> activityRecommend;
@@ -26,11 +26,11 @@ public class HomePageContentVO {
         this.banner = banner;
     }
 
-    public List<QuickEntryVO> getQuickEntry() {
+    public QuickEntryVO getQuickEntry() {
         return quickEntry;
     }
 
-    public void setQuickEntry(List<QuickEntryVO> quickEntry) {
+    public void setQuickEntry(QuickEntryVO quickEntry) {
         this.quickEntry = quickEntry;
     }
 
