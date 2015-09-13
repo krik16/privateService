@@ -3,6 +3,8 @@ package com.rongyi.rss.roa;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.roa.param.ShopAreaParams;
+import com.rongyi.easy.roa.vo.ShopAreaVO;
 import com.rongyi.easy.roa.vo.ShopVO;
 
 /**
@@ -41,4 +43,11 @@ public interface ROAShopService {
      * @throws Exception
      */
     public List<ShopVO> getShopDetailByFilialeId(String filialeId) throws Exception ;
+    
+    /**
+     * 获取集团、商场、品牌、店铺集合下所有店铺位置信息(省市)
+     * @param params
+     * @return
+     */
+    public List<ShopAreaVO> searchShopAreas(ShopAreaParams params) throws Exception;
 }
