@@ -5,6 +5,7 @@ import java.util.List;
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.mysql.Coupon;
+import com.rongyi.easy.coupon.entity.mysql.CouponChannel;
 import com.rongyi.easy.coupon.entity.mysql.CouponSort;
 import com.rongyi.easy.coupon.param.operation.VoucherCouponParam;
 import com.rongyi.easy.coupon.vo.operation.CouponCountVO;
@@ -155,6 +156,13 @@ public interface RoaVoucherCouponService {
 
 
 
+
 	/***********置顶代金券 end***************/
+	
+	/**
+	 * 查看卡券导入渠道和推广渠道
+	 * @return List<CouponChannel>
+	 */
+	List<CouponChannel> getCouponChannels();
 
 }
