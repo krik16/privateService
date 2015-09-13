@@ -30,4 +30,6 @@ public interface CouponCodeService {
      * @return
      */
     public int countByCouponId(String couponId);
+
+    public List<CouponCode> getCodesByCouponId(String couponId);
 }

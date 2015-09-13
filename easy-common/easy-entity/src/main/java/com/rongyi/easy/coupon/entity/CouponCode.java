@@ -102,7 +102,15 @@ public class CouponCode implements Serializable {
 
     private String inChannel;
 
+    private Boolean isThrid;
 
+    public Boolean getIsThrid() {
+        return isThrid;
+    }
+
+    public void setIsThrid(Boolean isThrid) {
+        this.isThrid = isThrid;
+    }
 
     public String getInChannel() {
         return inChannel;
