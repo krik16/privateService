@@ -73,7 +73,11 @@ public class MerchantCouponQueryParamParser {
             if (array[2].equals("VARCHAR")) {
                 filter.setValue(array[3]);
             } else if (array[2].equals("TIMESTAMP")) {
+            	if(array[3].contains("/")){
                 filter.setValue(DateTool.string2Date(array[3], DateTool.FORMAT_DATE_4));
+            	}else if(array[3].contains("-")){
+            		filter.setValue(DateTool.string2Date(array[3], DateTool.FORMAT_DATETIME2));
+            	}
             } else {
                 filter.setValue(Integer.parseInt(array[3]));
             }
