@@ -69,7 +69,7 @@
   
   <select id="selectNonClosedOrder" parameterType="java.util.Map" 
   	resultMap="OrderEntityMapper">
-  	select * from order_form where status != #{status} or (is_comment = 0 and payment_list is not null)  limit #{start},#{range};
+  	select * from order_form where status != #{status}  limit #{start},#{range};
   </select>
   
   <update id="updateTotalPrice" parameterType="com.rongyi.easy.osm.entity.OrderFormEntity">

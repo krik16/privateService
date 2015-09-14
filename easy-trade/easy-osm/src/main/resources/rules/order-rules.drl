@@ -1195,24 +1195,58 @@ rule "订单关闭"
 	then
 		logger.info("[" + drools.getRule().getName() + "] OrderNo=" +
     		$orderNo + " 开始...");
+			
+		String currentStatus = $order.getStatus();
+		String nextStatus = OrderFormStatus.TO_COMMENT;
 		
 		//判断是否需要评价
 		if($order.getPaymentIdList() == null || $order.getIsComment() == 1){
+			logger.info("commented...");
 			for (Object orderDetail: $orderDetailList) {
 				sessionUtil.delete(orderDetail);
 			}
-	
+			
 			sessionUtil.delete($order);
+			
+			nextStatus = OrderFormStatus.COMMENT_CLOSED;
+			
+			OrderEventEntity entity = orderUtil.createOrderEventEntity(
+				$orderNo, currentStatus, "订单关闭",nextStatus ,
+				OrderEventType.ORDER_CLOSED);
+			
+			$order.setStatusHoldMs(orderConfig.getCommentCloseWaitMax() - orderConfig.getOrderCloseWaitMax());
+			$order.setNextStatusTime(orderUtil.getDateInFuture(orderConfig.getCommentCloseWaitMax() - orderConfig.getOrderCloseWaitMax()));
+		
+			// 插入订单历史事件数据库
+			int eventId = orderEventService.insertAndGetId(entity);
+		
+			// 改变订单状态
+			orderUtil.orderChangeStatus($order, nextStatus, eventId);
+			
+			// 入主数据库
+			orderFormService.updateStatusWithTime($order);
 		}
 		else{
+			logger.info("not comment...");
 			// 设置时间相关的项
 			$order.setStatusHoldMs(orderConfig.getCommentCloseWaitMax() - orderConfig.getOrderCloseWaitMax());
 			$order.setNextStatusTime(orderUtil.getDateInFuture(orderConfig.getCommentCloseWaitMax() - orderConfig.getOrderCloseWaitMax()));
+			
+			OrderEventEntity entity = orderUtil.createOrderEventEntity(
+				$orderNo, currentStatus, "订单关闭",nextStatus ,
+				OrderEventType.ORDER_CLOSED);
+			
+			// 插入订单历史事件数据库
+			int eventId = orderEventService.insertAndGetId(entity);
+			
+			// 改变订单状态
+			orderUtil.orderChangeStatus($order, OrderFormStatus.TO_COMMENT, eventId);
+			
+			// 入主数据库
+			orderFormService.updateStatusWithTime($order);
+			
+			sessionUtil.update($order);
 		}
-		
-		// 入主数据库
-		orderFormService.updateStatusWithTime($order);
-		sessionUtil.update($order);
     	
     	// 生成通知事件
 		OrderCloseEvent notification = new OrderCloseEvent();
@@ -1232,7 +1266,7 @@ end
 rule "评价关闭"
 	when
 		Clock($currentDate: currentDate)
-		$order: OrderFormEntity($orderNo: orderNo, status == OrderFormStatus.CLOSED, 
+		$order: OrderFormEntity($orderNo: orderNo, status == OrderFormStatus.TO_COMMENT, 
 			$currentDate > nextStatusTime)
 		$orderDetailList: ArrayList()
 			from collect(OrderDetailFormEntity(orderNo == $orderNo))
@@ -1240,12 +1274,26 @@ rule "评价关闭"
 		logger.info("[" + drools.getRule().getName() + "] OrderNo=" +
     		$orderNo + " 开始...");
     		
+    	String currentStatus = $order.getStatus();
+		String nextStatus = OrderFormStatus.COMMENT_CLOSED;
+    		
 		// 若用户未评价，默认评价
 		if ($order.getIsComment() != 1) {
 			$order.setIsComment(1);
 
 			orderUtil.defaultComment($order,$orderDetailList);
 		}	
+		
+		OrderEventEntity entity = orderUtil.createOrderEventEntity(
+				$orderNo, currentStatus, "评价关闭",nextStatus ,
+				OrderEventType.COMMENT_CLOSE);
+			
+		// 插入订单历史事件数据库
+		int eventId = orderEventService.insertAndGetId(entity);
+		
+		// 改变订单状态
+		orderUtil.orderChangeStatus($order, OrderFormStatus.COMMENT_CLOSED, eventId);
+		
 		orderFormService.updateStatusWithTime($order);
 
 
@@ -1258,6 +1306,7 @@ rule "评价关闭"
 		logger.debug("[" + drools.getRule().getName() + "] OrderNo=" +
     		$orderNo + " 结束.");
 end
+
 
 
 rule "买家申请退款"
