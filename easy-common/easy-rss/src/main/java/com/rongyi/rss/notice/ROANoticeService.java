@@ -1,7 +1,12 @@
 package com.rongyi.rss.notice;
 
+import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.notice.entity.NoticePraisedEntity;
 import com.rongyi.easy.notice.param.CNoticeParam;
+import com.rongyi.easy.notice.param.MMNoticeParam;
+import com.rongyi.easy.notice.param.MSNoticeParam;
+import com.rongyi.easy.notice.vo.MMNoticeVO;
+import com.rongyi.easy.notice.vo.MSNoticeVO;
 import com.rongyi.easy.notice.vo.NoticeOVo;
 
 /***
@@ -76,4 +81,18 @@ public interface ROANoticeService {
      * @return
      */
     public NoticeOVo findNoticePById(Integer id);
+    
+    /**
+     * 容易逛查询店铺公告的的接口
+     * @param mmnotice
+     * @return
+     */
+    public PagingVO<MMNoticeVO> findNoticesByParam(MMNoticeParam mmnotice);
+    
+    /**
+     * 摩店查询店铺公告的接口
+     * @param msnotice
+     * @return
+     */
+    public PagingVO<MSNoticeVO> findNoticesByMSParam(MSNoticeParam msnotice);
 }
