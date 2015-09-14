@@ -59,7 +59,7 @@ public class AccountBlacklistController extends BaseController {
 			Map<String, Object> map = getJsonMap(request);
 			String currpage = (String) map.get("currpage");
 			Map<String, Object> resultMap = antiCheatService.getPageMap(Integer.valueOf(currpage), Constant.PAGE.PAGESIZE, map);
-			Integer pageTotle = (Integer) resultMap.get("count");
+			double pageTotle = Integer.valueOf(resultMap.get("count").toString()).doubleValue();
 			Integer rowContNum = (int) Math.ceil(pageTotle / Constant.PAGE.PAGESIZE);
 			model.addAttribute("rowCont", rowContNum);
 			model.addAttribute("currpage", currpage);
