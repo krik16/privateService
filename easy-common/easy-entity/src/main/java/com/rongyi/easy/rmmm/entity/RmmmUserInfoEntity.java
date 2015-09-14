@@ -58,17 +58,20 @@ public class RmmmUserInfoEntity implements Serializable{
     private String cardId;
     /** 环信用户账号 */
     private String userIMCount;
-
-
     private String devId;//登录时获取当前设备Id
-
-    private String sharCode; //邀请码
+    private Integer type;
+    private Integer identity;
+    private Integer isCooperation;
+    private String memo;
+    private Integer createSource;
+    private Integer stopReason;
+	private String sharCode; //邀请码
 
     public Integer getId() {
-        return id;
-    }
+		return id;
+	}
 
-    public void setId(Integer id) {
+	public void setId(Integer id) {
         this.id = id;
     }
 
@@ -207,7 +210,6 @@ public class RmmmUserInfoEntity implements Serializable{
     public void setUserIMCount(String userIMCount) {
         this.userIMCount = userIMCount;
     }
-
     public String getDevId() {
         return devId;
     }
@@ -216,11 +218,57 @@ public class RmmmUserInfoEntity implements Serializable{
         this.devId = devId;
     }
 
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	public Integer getIdentity() {
+		return identity;
+	}
+
+	public void setIdentity(Integer identity) {
+		this.identity = identity;
+	}
+
+	public Integer getIsCooperation() {
+		return isCooperation;
+	}
+
+	public void setIsCooperation(Integer isCooperation) {
+		this.isCooperation = isCooperation;
+	}
+
+	public String getMemo() {
+		return memo;
+	}
+
+	public void setMemo(String memo) {
+		this.memo = memo;
+	}
+
+	public Integer getCreateSource() {
+		return createSource;
+	}
+
+	public void setCreateSource(Integer createSource) {
+		this.createSource = createSource;
+	}
+
+	public Integer getStopReason() {
+		return stopReason;
+	}
+
+	public void setStopReason(Integer stopReason) {
+		this.stopReason = stopReason;
+	}
     public String getSharCode() {
         return sharCode;
     }
 
     public void setSharCode(String sharCode) {
         this.sharCode = sharCode;
-    }
-}
+    }}

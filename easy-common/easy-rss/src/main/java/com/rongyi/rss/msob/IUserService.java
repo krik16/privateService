@@ -210,6 +210,13 @@ public interface IUserService {
     public void save_im(Integer userId,String imId)throws  Exception;
     
     /**
+     * 修改个人信息
+     * @param paramsMap
+     * @return
+     */
+    public boolean updateUserInfo(Map<String, Object> paramsMap)throws  Exception;
+    
+    /**
 	 * 根据用户id查用户信息,不管是否禁用
 	 * @param id
 	 * @return

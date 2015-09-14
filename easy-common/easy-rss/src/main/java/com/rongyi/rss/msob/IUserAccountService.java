@@ -32,9 +32,7 @@ public interface IUserAccountService {
      * @throws MallShopException
      */
     public List<UserAccountDto> getUserAccountListByUserId(Integer userId, Integer type) throws MallShopException;
-
-
-    /**
+	/**
      * 修改/添加账号信息
      *
      * @param accountParam
@@ -57,7 +55,6 @@ public interface IUserAccountService {
      * @throws Exception
      */
     public UserAccountEntity findUserAccountDtoByCode(String code) throws Exception;
-
 //	/**
 //	 * 根据导购id获取导购账号信息
 //	 */

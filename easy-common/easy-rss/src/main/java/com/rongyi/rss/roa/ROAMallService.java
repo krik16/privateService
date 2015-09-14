@@ -28,5 +28,10 @@ public interface ROAMallService {
      */
     public Map<String,Object> getMalls(Map params, int currentpage, int pagesize) throws Exception;
 
-	List<MallEntity> getMallEntitysByGroupId(String groupId) throws Exception;
+    /**
+     * 查询集团下所属的商场
+     * @param groupId
+     * @return
+     */
+    public List<MallEntity> getMallEntitysByGroupId(String groupId) throws Exception;
 }

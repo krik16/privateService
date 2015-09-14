@@ -77,7 +77,6 @@ public interface IShopService{
 	public BrandShopDetailVO getBrandShopDetail(String shopId,UserInfoVO user) throws Exception;
 
 
-
 	public List<String> getSellerImIdByShopId(String shopId);
 
 	public ShopInfoEntity getShopByShopMId(String shopMId) throws RmmmException;
@@ -120,8 +119,7 @@ public interface IShopService{
 	 * @throws Exception
 	 */
 	public List<ShopInfoEntity> getShopListByShopName(String shopName,Integer mallId) throws Exception;
-	
-	/**
+/**
 	 * 根据店铺的mongoId获取店铺信息
 	 * @param shopMId
 	 * @return

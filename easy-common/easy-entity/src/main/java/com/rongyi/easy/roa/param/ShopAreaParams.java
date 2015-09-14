@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class ShopAreaParams implements Serializable{
 
-	/** 0：集团      1：品牌      2：商场       3：店铺集合 */
+	/** 0：集团      1：品牌       2：商场      3：店铺集合 */
 	private Integer type;
 	private String searchId;
 	private List<String> shops;
