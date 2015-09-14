@@ -20,6 +20,7 @@ public class ShopNoticeVO implements Serializable{
 	private String endTime;//结束时间
 	private String createTime;//创建时间
 	private Integer praiseCount;//点赞总数量
+	private String shopMId;//店铺mongoId
 	
 	public Integer getId() {
 		return id;
@@ -74,6 +75,12 @@ public class ShopNoticeVO implements Serializable{
 	}
 	public void setPraiseCount(Integer praiseCount) {
 		this.praiseCount = praiseCount;
+	}
+	public String getShopMId() {
+		return shopMId;
+	}
+	public void setShopMId(String shopMId) {
+		this.shopMId = shopMId;
 	}
 	
 }
