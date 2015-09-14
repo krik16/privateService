@@ -34,6 +34,7 @@ public class MMNoticeParam implements Serializable {
 	public String getShopId() {
 		return shopId;
 	}
+	
 
 	public void setShopId(String shopId) {
 		this.shopId = shopId;
