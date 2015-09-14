@@ -58,6 +58,7 @@ public class RmmmUserInfoEntity implements Serializable{
     private String cardId;
     /** 环信用户账号 */
     private String userIMCount;
+    private String devId;//登录时获取当前设备Id
     private Integer type;
     private Integer identity;
     private Integer isCooperation;
@@ -66,10 +67,11 @@ public class RmmmUserInfoEntity implements Serializable{
     private Integer stopReason;
 	private String sharCode; //邀请码
 
-        return id;
-		}
+    public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
+	public void setId(Integer id) {
         this.id = id;
     }
 
