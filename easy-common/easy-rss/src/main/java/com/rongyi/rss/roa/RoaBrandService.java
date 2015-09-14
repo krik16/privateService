@@ -25,8 +25,8 @@ public interface RoaBrandService {
 	 */
 	PagingVO<BrandVO> getBrandListByMap(Map<String, Object> params, Integer currentPage, Integer pageSize) throws Exception;
 
-	public List<BrandsCategoryVO> getCategories(String cateId) throws Exception;
+	/*public List<BrandsCategoryVO> getCategories(String cateId) throws Exception;*/
 
-		public BrandVO getBrandVoById(String id) throws Exception;
+		/*public BrandVO getBrandVoById(String id) throws Exception;*/
 
 }
