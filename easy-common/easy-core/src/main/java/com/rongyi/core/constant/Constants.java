@@ -9,7 +9,7 @@ public interface Constants {
     interface OrderPaytime {
         Integer PAY_SECOND = 900; //订单支付最大时间（秒数）
     }
-
+    String BS_COOKIE_NAME = "BSST";
 
     /**
      * 登录用户的session key

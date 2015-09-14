@@ -1,16 +1,30 @@
 package com.rongyi.easy.bsoms.entity;
 
-import com.rongyi.easy.bsoms.entity.UserInfo;
+public class SessionUserInfo {
+    
+	private Integer id;
 
-public class SessionUserInfo extends UserInfo{
+    private Integer type;
+
+    private Integer identity;
+
+    private Integer isCooperation;
+
+    private String userPhone;
+
+    private String userName;
+
+    private String userNickName;
+
+    private Integer createSource;
     
     private Integer brandId;
     
     private String brandMid;
 
-    private Integer ownerId;
+    private Integer groupId;
     
-    private String ownerMid;
+    private String groupMid;
 
     private Integer mallId;
     
@@ -20,13 +34,11 @@ public class SessionUserInfo extends UserInfo{
     
     private String shopMid;
     
-    private Integer branchCompanyId;
+    private Integer filialeId;
     
-    private String branchCompanyMid;
+    private String filialeMid;
 
-	public String getOwnerMid() {
-		return ownerMid;
-	}
+
 
 	public String getMallMid() {
 		return mallMid;
@@ -36,9 +48,7 @@ public class SessionUserInfo extends UserInfo{
 		this.mallMid = mallMid;
 	}
 
-	public void setOwnerMid(String ownerMid) {
-		this.ownerMid = ownerMid;
-	}
+
 
 	public String getBrandMid() {
 		return brandMid;
@@ -56,13 +66,7 @@ public class SessionUserInfo extends UserInfo{
 		this.brandId = brandId;
 	}
 
-	public Integer getOwnerId() {
-		return ownerId;
-	}
 
-	public void setOwnerId(Integer ownerId) {
-		this.ownerId = ownerId;
-	}
 
 	public Integer getMallId() {
 		return mallId;
@@ -88,27 +92,107 @@ public class SessionUserInfo extends UserInfo{
 		this.shopMid = shopMid;
 	}
 
-	public Integer getBranchCompanyId() {
-		return branchCompanyId;
+	public Integer getFilialeId() {
+		return filialeId;
 	}
 
-	public void setBranchCompanyId(Integer branchCompanyId) {
-		this.branchCompanyId = branchCompanyId;
+	public void setFilialeId(Integer filialeId) {
+		this.filialeId = filialeId;
+	}
+
+	public String getFilialeMid() {
+		return filialeMid;
+	}
+
+	public void setFilialeMid(String filialeMid) {
+		this.filialeMid = filialeMid;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	public Integer getIdentity() {
+		return identity;
+	}
+
+	public void setIdentity(Integer identity) {
+		this.identity = identity;
+	}
+
+	public Integer getIsCooperation() {
+		return isCooperation;
+	}
+
+	public void setIsCooperation(Integer isCooperation) {
+		this.isCooperation = isCooperation;
+	}
+
+	public String getUserPhone() {
+		return userPhone;
+	}
+
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserNickName() {
+		return userNickName;
+	}
+
+	public void setUserNickName(String userNickName) {
+		this.userNickName = userNickName;
 	}
 	
-	public String getBranchCompanyMid() {
-		return branchCompanyMid;
+	public Integer getGroupId() {
+		return groupId;
 	}
 
-	public void setBranchCompanyMid(String branchCompanyMid) {
-		this.branchCompanyMid = branchCompanyMid;
+	public void setGroupId(Integer groupId) {
+		this.groupId = groupId;
+	}
+
+	public String getGroupMid() {
+		return groupMid;
+	}
+
+	public void setGroupMid(String groupMid) {
+		this.groupMid = groupMid;
+	}
+
+	public Integer getCreateSource() {
+		return createSource;
+	}
+
+	public void setCreateSource(Integer createSource) {
+		this.createSource = createSource;
 	}
 
 	public Integer getBindingId(){
 //		return 6;//集团假数据
 //		return 36;//商场假数据
 		if(getIdentity() == 0){
-			return ownerId;
+			return groupId;
 		}else if(getIdentity() == 1){
 			return mallId;
 		}else if(getIdentity() == 2 || getIdentity() == 3 || getIdentity() == 4 || getIdentity() == 5){
@@ -121,7 +205,7 @@ public class SessionUserInfo extends UserInfo{
 //		return "52ca425821232f10a400065e";//商场假数据
 //		return "51f9d9e431d65584ab000c50";//品牌假数据
 		if(getIdentity() == 0){
-			return ownerMid;
+			return groupMid;
 		}else if(getIdentity() == 1){
 			return mallMid;
 		}else if(getIdentity() == 2 || getIdentity() == 3 || getIdentity() == 4 || getIdentity() == 5){
