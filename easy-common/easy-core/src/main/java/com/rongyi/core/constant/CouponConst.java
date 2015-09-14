@@ -63,5 +63,10 @@ public interface CouponConst {
      */
     List<Integer> AFTER_SALE_SERVICE = Arrays.asList(1, 0, 0, 0);
 
+    interface COUPON_TYPE
+    {
+        String COUPON = "02";//代金券
+        String CASHCOUPON = "03";//红包
+    }
 
 }

@@ -4,6 +4,9 @@ import java.util.Map;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.roa.vo.BrandVO;
+import com.rongyi.easy.roa.vo.BrandsCategoryVO;
+import java.util.List;
+
 
 
 /**
@@ -21,5 +24,9 @@ public interface RoaBrandService {
 	 * @return
 	 */
 	PagingVO<BrandVO> getBrandListByMap(Map<String, Object> params, Integer currentPage, Integer pageSize) throws Exception;
-	
+
+	public List<BrandsCategoryVO> getCategories(String cateId) throws Exception;
+
+		public BrandVO getBrandVoById(String id) throws Exception;
+
 }

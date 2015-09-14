@@ -85,6 +85,9 @@ public interface OrderEventType {
     /** 未支付提醒*/
     public static final String PAYMENT_DELAY_ALERT = "26";
     
+    /** 评价关闭*/
+    public static final String COMMENT_CLOSE = "27";
+    
     /** 重新加载订单 */
     public static final String DEBUG_RELOAD_ORDER = "Debug.Reload";
     

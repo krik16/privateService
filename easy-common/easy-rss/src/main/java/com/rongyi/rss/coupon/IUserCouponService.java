@@ -15,6 +15,7 @@ public interface IUserCouponService {
      * 修改用户券码的有效状态（定时任务）
      * Description
      */
+	@Deprecated
     public void updateUserCouponValidate();
     
 }

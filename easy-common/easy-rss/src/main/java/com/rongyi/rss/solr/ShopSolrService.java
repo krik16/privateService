@@ -9,8 +9,8 @@
 */
 package com.rongyi.rss.solr;
 
-import com.rongyi.easy.solr.retrival.PoiShopInput;
-import com.rongyi.easy.solr.retrival.result.ShopRetrivalResult;
+import com.rongyi.easy.solr.param.ShopSearchParam;
+import com.rongyi.easy.solr.result.ShopSearchResult;
 
 /**
  * @author ZhengYl
@@ -18,7 +18,7 @@ import com.rongyi.easy.solr.retrival.result.ShopRetrivalResult;
  */
 public interface ShopSolrService {
 	
-	public ShopRetrivalResult poiSearch(PoiShopInput input);
+	public ShopSearchResult poiSearch(ShopSearchParam input);
 
 	public boolean updatePoiStatus(String id, String mid, int status);
 }

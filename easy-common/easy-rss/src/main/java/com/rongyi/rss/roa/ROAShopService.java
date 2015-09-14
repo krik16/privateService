@@ -4,8 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.rongyi.easy.roa.param.ShopAreaParams;
-import com.rongyi.easy.roa.vo.ShopAreaVO;
-import com.rongyi.easy.roa.vo.ShopVO;
+import com.rongyi.easy.roa.vo.ShopAreaVO;import org.bson.types.ObjectId;import com.rongyi.easy.roa.vo.ShopVO;
 
 /**
  * 类ROAShopService.java的描述：TODO 类实现描述
@@ -36,7 +35,7 @@ public interface ROAShopService {
      */
     public ShopVO getShopsVOById(String id)throws Exception;
     
-    /**
+	/**
      * 通过分公司id查店铺
      * @param filialeId
      * @return
@@ -51,4 +50,10 @@ public interface ROAShopService {
      * @throws Exception
      */
 	List<ShopAreaVO> searchShopAreas(ShopAreaParams params) throws Exception;
-}
+
+	/**
+     * 通过ids查询店铺
+     * @param ids
+     * @return
+     */
+    public List<ShopVO> getShopsByIds(List<ObjectId> ids);}

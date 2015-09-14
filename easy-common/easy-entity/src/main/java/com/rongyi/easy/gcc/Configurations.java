@@ -38,6 +38,8 @@ public class Configurations implements Serializable {
 //	private long subOrderSafeguardWaitMax;
 	/* 官方介入超时时间 */
 	private long officialJudgementWaitMax = 0L;
+	/* 评价关闭时间 */
+	private long commentCloseWaitMax = 0L;
 /*=======
 	private int apealCountMax;
 	*//* 退款次数上限 *//*
@@ -144,6 +146,14 @@ public class Configurations implements Serializable {
 
 	public void setOfficialJudgementWaitMax(long officialJudgementWaitMax) {
 		this.officialJudgementWaitMax = officialJudgementWaitMax;
+	}
+
+	public long getCommentCloseWaitMax() {
+		return commentCloseWaitMax;
+	}
+
+	public void setCommentCloseWaitMax(long commentCloseWaitMax) {
+		this.commentCloseWaitMax = commentCloseWaitMax;
 	}
 
 }

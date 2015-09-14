@@ -45,6 +45,7 @@ public interface RoaUserCouponService {
      *
      * @param userCoupon
      */
+    @Deprecated
     void updateUserCoupon(UserCoupon userCoupon);
 
     /**
@@ -64,6 +65,7 @@ public interface RoaUserCouponService {
      * @param id
      * @return
      */
+    @Deprecated
     UserCoupon findUserCouponById(Long id);
 
 
@@ -85,6 +87,7 @@ public interface RoaUserCouponService {
      */
     int buyedCouponCount(String couponId, String userId);
 
+    @Deprecated
     List<UserCoupon> findUserCouponList(Long orderId, String couponId);
 
     Page findAllByPage(Map<String, Object> paramMap);
@@ -102,8 +105,9 @@ public interface RoaUserCouponService {
      * 修改用户券码的有效状态(定时任务)
      * Description
      */
+    @Deprecated
     public void updateUserCouponValidate();
 
-
+    @Deprecated
     void updateUserCouponStatusByIds(List<Long> userCouponIds, int status);
 }

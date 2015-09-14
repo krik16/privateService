@@ -6,6 +6,12 @@ import com.rongyi.core.framework.spring.context.utils.SpringContextUtil;
 public interface Constants {
 
 
+    interface FilterRelation {
+        String AND = "AND";
+        String OR = "OR";
+    }
+
+
     interface OrderPaytime {
         Integer PAY_SECOND = 900; //订单支付最大时间（秒数）
     }
@@ -631,5 +637,21 @@ public interface Constants {
         String NOHEAR = "抱歉，本店暂未发行该类优惠券";
         String REPEAT = "您已经成功验证";
         String NOTENOUGHNUM = "没有足够的可用券码";
+    }
+    
+    /**
+     * App标识  来自于app store
+     */
+    interface AppId{
+    	String MDC2C_IOS_APPId = "999209638";
+    	String RYG_IOS_APPId = "684748850";
+    }
+    
+    /**
+     * App广告推广通道
+     */
+    interface AppAdvertChannel{
+    	String ZHIMENG_CHANNEL = "zhimeng";//指盟
+    	String WAPS_CHANNEL = "waps";//万普
     }
 }

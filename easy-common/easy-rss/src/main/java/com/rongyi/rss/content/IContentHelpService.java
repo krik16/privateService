@@ -9,6 +9,10 @@ import com.rongyi.easy.content.entity.param.ContentHelpParam;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 废弃
+ */
+@Deprecated
 public interface IContentHelpService {
 	
 	public ResponseResult getContentInfoDetail(Integer helpId) throws Exception;

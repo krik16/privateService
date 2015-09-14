@@ -38,7 +38,13 @@ public class IntegralRecordVO implements Serializable {
   	private String device_id ; //设备ID
   	private String mall_id;  //商场id
   	private String shop_id; //店铺
-	 
+  	private String type_name;//类型名称；
+	public String getType_name() {
+		return type_name;
+	}
+	public void setType_name(String type_name) {
+		this.type_name = type_name;
+	}
 	public String getDevice_id() {
 		return device_id;
 	}

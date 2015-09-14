@@ -5,6 +5,10 @@ import java.util.Map;
 
 import com.rongyi.easy.content.entity.ContentSysMsg;
 
+/**
+ * 废弃
+ */
+@Deprecated
 public interface IContentSysMsgService {
 	
 	/**

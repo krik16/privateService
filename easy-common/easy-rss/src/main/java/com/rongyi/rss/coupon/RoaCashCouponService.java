@@ -112,6 +112,7 @@ public interface RoaCashCouponService {
      */
     ResponseResult subtractCouponInventory(String coupongId);
 
+
     /**
      * 根据卡券Id减少库存
      *

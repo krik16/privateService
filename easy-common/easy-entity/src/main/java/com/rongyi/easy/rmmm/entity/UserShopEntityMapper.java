@@ -1,9 +1,8 @@
 package com.rongyi.easy.rmmm.entity;
 
-import com.rongyi.easy.rmmm.entity.UserShopEntity;
-import com.rongyi.easy.rmmm.entity.UserShopEntityExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface UserShopEntityMapper {
     int countByExample(UserShopEntityExample example);

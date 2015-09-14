@@ -1,5 +1,7 @@
 package com.rongyi.easy.rmmm.param.user;
 
+import com.rongyi.easy.rmmm.base.BaseParam;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,7 +15,7 @@ import java.util.List;
  * 俞志坚             2015/5/20              1.0            创建文件
  *
  */
-public class UserManagerParam implements Serializable{
+public class UserManagerParam extends BaseParam implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
@@ -35,10 +37,9 @@ public class UserManagerParam implements Serializable{
     private String branchCompanyId;//分公司id
     private String userName;//用户姓名
     private String cardId;//身份证号
-    private Integer type = 1;//商家类型：0商场、1品牌
-    private Integer roleType=2;//角色类型
+	private Integer type = 1;//商家类型：0商场、1品牌    private Integer roleType=2;//角色类型
     private List<AccountParam> accountList;//账号信息
-    private Integer identity = 5;//身份类型:0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购
+	private Integer identity = 5;//身份类型:0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购
     private Integer isCooperation = 0;//是否合作(给店长、导购用) 0否 1是
     private String memo;//备注
     private Integer createSource = 3;//账号创建来源：0大运营、1商家后台、3App
@@ -48,7 +49,6 @@ public class UserManagerParam implements Serializable{
     public Integer getId() {
 		return id;
 	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -57,6 +57,7 @@ public class UserManagerParam implements Serializable{
 		return creatingUserType;
 	}
 
+    
 	public void setCreatingUserType(String creatingUserType) {
 		this.creatingUserType = creatingUserType;
 	}
@@ -200,8 +201,7 @@ public class UserManagerParam implements Serializable{
 	public void setAccountList(List<AccountParam> accountList) {
 		this.accountList = accountList;
 	}
-
-	public Integer getIdentity() {
+public Integer getIdentity() {
 		return identity;
 	}
 
@@ -270,7 +270,4 @@ public class UserManagerParam implements Serializable{
 
 	public void setMerUserId(Integer merUserId) {
 		this.merUserId = merUserId;
-	}
-	
-
-}
+	}}
