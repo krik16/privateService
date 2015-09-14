@@ -17,6 +17,7 @@ public class LoginUserVO implements Serializable{
 	 String name;//姓名
 	 String logo;//头像url
 	String shopMId;//商铺MID
+	String sharCode;
 
 	private String appCode= HuanXinConfig.IMCODE_SECOND;
 
@@ -108,5 +109,13 @@ public class LoginUserVO implements Serializable{
 
 	public void setAppCode(String appCode) {
 		this.appCode = appCode;
+	}
+
+	public String getSharCode() {
+		return sharCode;
+	}
+
+	public void setSharCode(String sharCode) {
+		this.sharCode = sharCode;
 	}
 }
