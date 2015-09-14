@@ -56,7 +56,7 @@ public class ParentOrderVO implements Serializable {
 
 	private String shopLogo;// 店铺logo
 
-	private String isComment;// 是否评价
+	private String isComment;// 是否评价  -1:表示不可以评价 0：表示未评价 1：表示已评价
 
 	private String closeType;// 父订单关闭类型 (0完成 1关闭)
 
