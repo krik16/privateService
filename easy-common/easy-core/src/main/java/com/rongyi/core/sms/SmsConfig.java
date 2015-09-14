@@ -33,7 +33,7 @@ public class SmsConfig implements Serializable{
     public static final String MALLLIFE_REGISTER="【容易逛】验证码：@，您正在注册容易逛， 10分钟内有效，请勿泄露";
     public static final String MALLLIFE_LOGIN="【容易逛】验证码：@，您正在手机快捷登录容易逛，10分钟有效，请勿泄露";
     public static final String MALLLIFE_BINDING="【容易逛】验证码：@，您正在绑定手机号。10分钟有效，请勿泄露。";
-
+    
     public static final String WEBCHAT_MALLLIFE_BINDING="【容易网】谢谢您使用容易网客户端，您当前的验证码：@";
 
     public static final String COUPON_VALID = "【容易逛】您购买的@于@验证@份，剩@份未消费，如有任何疑问请您与商家咨询：400-040-8989";
@@ -42,8 +42,7 @@ public class SmsConfig implements Serializable{
     public static final String LIMIT_EXCEPTION_MSG="亲你的手机,今天发送短信已达到上限,请明天再试!";
     public static final String LIMIT_MSG="Limit";
 
-
-
+ 
 
 
 
@@ -74,11 +73,12 @@ public class SmsConfig implements Serializable{
 
     /**
      * 发送渠道
-     * 1创世华信,2建周
+     * 1创世华信,2建周.3云通讯
      */
     public abstract class SEND_CHANNEL{
         public static final  int CHANNEL_CHUANGSHI=1;
         public static final  int CHANNEL_JIANZHOU=2;
+        public static final  int CHANNEL_YUNTONGXUN=101;
     }
 
 

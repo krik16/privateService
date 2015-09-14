@@ -181,6 +181,10 @@ public interface Constants {
          */
         String SEND_PHONE_VERIFY_CODE_MSG = "send.phone.verify.code.msg";
         /**
+         * 返回验证码的描述的电话内容
+         */
+        String CALL_PHONE_VERIFY_CODE_MSG = "call.phone.verify.code.msg";
+        /**
          * 商场mall icon
          */
         String UPAIYUN_URL_MALL_ICON = "http://rongyi.b0.upaiyun.com/system/mall/icon/";              // 云盘路径-商场icon
