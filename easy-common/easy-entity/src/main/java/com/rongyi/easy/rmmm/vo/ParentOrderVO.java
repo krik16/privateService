@@ -349,6 +349,7 @@ public class ParentOrderVO implements Serializable {
 		this.expressName = expressName;
 	}
 
+
 	public String getNickName() {
 		return nickName;
 	}

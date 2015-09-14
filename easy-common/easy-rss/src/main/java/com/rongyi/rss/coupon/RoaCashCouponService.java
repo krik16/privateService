@@ -112,6 +112,16 @@ public interface RoaCashCouponService {
      */
     ResponseResult subtractCouponInventory(String coupongId);
 
+
+    /**
+     * 卡券返库
+     * 库存量，券码状态
+     * @param couponId
+     * @param couponCode
+     * @return
+     */
+     boolean  restoreCouponInventory(String couponId,String couponCode);
+
     /**
      * 根据卡券Id减少库存
      *

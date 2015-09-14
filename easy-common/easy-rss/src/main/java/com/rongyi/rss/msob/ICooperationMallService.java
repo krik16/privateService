@@ -20,6 +20,7 @@ public interface ICooperationMallService {
 	 */
 	public MallEntity getMallEntityByMongoId(PrincipalAndCategoryParam param) throws Exception;
 
+	public List<MallCooperateEntity> getMallEntityByGroupId(Integer groupId) throws Exception;
 	/**
 	 * 插入商场信息 注：添加负责人使用
 	 * 
@@ -61,6 +62,14 @@ public interface ICooperationMallService {
 	 */
 	public MallCooperateEntity getCooperateMallByMongoId(String mongoId) throws Exception;
 
+	/**
+	 * rePackage
+	 * 閫氳繃mallMongoId寰楀埌rmmm搴撲腑鐨処nteger绫诲瀷mallId
+	 * @param mallMid
+	 * @return
+	 */
+	public Integer getAndSaveCooperateMallByMallMid(String mallMid) throws Exception ;
+	
 	/** 以下两个方法是 从rongyi.app.content 移过来的方法 */
 	public CooperateMallEntity selectMallInfoById(Integer id);
 
