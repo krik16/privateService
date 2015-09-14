@@ -6,6 +6,12 @@ import com.rongyi.core.framework.spring.context.utils.SpringContextUtil;
 public interface Constants {
 
 
+    interface FilterRelation {
+        String AND = "AND";
+        String OR = "OR";
+    }
+
+
     interface OrderPaytime {
         Integer PAY_SECOND = 900; //订单支付最大时间（秒数）
     }
