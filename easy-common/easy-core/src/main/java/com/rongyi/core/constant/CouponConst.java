@@ -69,5 +69,4 @@ public interface CouponConst {
         String CASHCOUPON = "03";//红包
     }
 
-
 }

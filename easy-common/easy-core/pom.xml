@@ -218,6 +218,11 @@
 			<artifactId>morphia</artifactId>
 		</dependency>
 		<!-- mongo end -->
+			<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+		</dependency>
+
 		<!--  Redis  Start-->
 		<dependency>
 			<groupId>org.springframework.data</groupId>

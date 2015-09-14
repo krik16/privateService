@@ -54,6 +54,13 @@ public interface IUserAccountService {
 	 */
 	public UserAccountEntity findUserAccountDtoByCode(String code)throws Exception;
 	
+	/**
+	 * 根据 账号返回账号信息
+	 * @param code
+	 * @return 返回账号信息
+	 * @throws Exception
+	 */
+	public UserAccountEntity findUserAccountDtoByCode(String code)throws Exception;
 //	/**
 //	 * 根据导购id获取导购账号信息
 //	 */

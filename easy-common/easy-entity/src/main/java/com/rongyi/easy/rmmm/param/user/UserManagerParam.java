@@ -19,6 +19,7 @@ public class UserManagerParam extends BaseParam implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
+    private Integer id;//账户id
     private String userLogo;//用户头像
     private String  phone; //验证号码是否可注册
     private String  checkCode;//验证码",
@@ -31,15 +32,46 @@ public class UserManagerParam extends BaseParam implements Serializable{
     private String shopId;//商铺Id
     private String mallId;//商场Id
     private String brandId;//品牌Id
+    private String ownerId;//集团Id
+    private Integer roleId; 
+    private String branchCompanyId;//分公司id
     private String userName;//用户姓名
     private String cardId;//身份证号
-    private Integer type = 0;
+    private Integer type;//商家类型：0商场、1品牌
     private Integer roleType=2;//角色类型
     private List<AccountParam> accountList;//账号信息
+    private Integer identity;//身份类型:0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购
+    private Integer isCooperation;//是否合作(给店长、导购用) 0否 1是
+    private String memo;//备注
+    private Integer createSource;//账号创建来源：0大运营、1商家后台
+    private String stopReason;//停用原因
+    private String creatingUserType;
+    
+    public Integer getId() {
+		return id;
+	}
 
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
+	public String getCreatingUserType() {
+		return creatingUserType;
+	}
 
-    public String getPhone() {
+	public void setCreatingUserType(String creatingUserType) {
+		this.creatingUserType = creatingUserType;
+	}
+
+	public Integer getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
+	}
+
+	public String getPhone() {
         return phone;
     }
 
@@ -147,13 +179,13 @@ public class UserManagerParam extends BaseParam implements Serializable{
 		return serialVersionUID;
 	}
 
-	public Integer getRoleType() {
+	/*public Integer getRoleType() {
 		return roleType;
 	}
 
 	public void setRoleType(Integer roleType) {
 		this.roleType = roleType;
-	}
+	}*/
 
 	public String getUserLogo() {
 		return userLogo;
@@ -170,5 +202,70 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	public void setAccountList(List<AccountParam> accountList) {
 		this.accountList = accountList;
 	}
-    
+
+	public Integer getIdentity() {
+		return identity;
+	}
+
+	public void setIdentity(Integer identity) {
+		this.identity = identity;
+	}
+
+	public Integer getIsCooperation() {
+		return isCooperation;
+	}
+
+	public void setIsCooperation(Integer isCooperation) {
+		this.isCooperation = isCooperation;
+	}
+
+	public String getMemo() {
+		return memo;
+	}
+
+	public void setMemo(String memo) {
+		this.memo = memo;
+	}
+
+	public Integer getCreateSource() {
+		return createSource;
+	}
+
+	public void setCreateSource(Integer createSource) {
+		this.createSource = createSource;
+	}
+
+	public String getStopReason() {
+		return stopReason;
+	}
+
+	public void setStopReason(String stopReason) {
+		this.stopReason = stopReason;
+	}
+
+	public String getOwnerId() {
+		return ownerId;
+	}
+
+	public void setOwnerId(String ownerId) {
+		this.ownerId = ownerId;
+	}
+
+	public String getBranchCompanyId() {
+		return branchCompanyId;
+	}
+
+	public void setBranchCompanyId(String branchCompanyId) {
+		this.branchCompanyId = branchCompanyId;
+	}
+
+	public Integer getRoleType() {
+		return roleType;
+	}
+
+	public void setRoleType(Integer roleType) {
+		this.roleType = roleType;
+	}
+	
+
 }

@@ -6,6 +6,8 @@
     <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
     <result column="invite_code_num" property="inviteCodeNum" jdbcType="INTEGER" />
     <result column="proposer_account" property="proposerAccount" jdbcType="VARCHAR" />
+    <result  column="create_account" property="createAccount" jdbcType="VARCHAR" />
+    <result  column="create_account_id" property="createAccountId" jdbcType="BIGINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >

@@ -2,6 +2,7 @@ package com.rongyi.easy.va.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class VirtualAccountEntity implements Serializable {
 
@@ -31,6 +32,10 @@ public class VirtualAccountEntity implements Serializable {
 
 	/** 是否冻结 */
 	private Boolean isSuspended;// false (0)未冻结
+	/** 冻结原因 */
+	private String stopReason;// false (0)未冻结
+	/** 冻结时间 */
+	private Date stopAt;// false (0)未冻结
 
 	public Integer getId() {
 		return id;
@@ -102,6 +107,22 @@ public class VirtualAccountEntity implements Serializable {
 
 	public void setIsSuspended(Boolean isSuspended) {
 		this.isSuspended = isSuspended;
+	}
+
+	public String getStopReason() {
+		return stopReason;
+	}
+
+	public void setStopReason(String stopReason) {
+		this.stopReason = stopReason;
+	}
+
+	public Date getStopAt() {
+		return stopAt;
+	}
+
+	public void setStopAt(Date stopAt) {
+		this.stopAt = stopAt;
 	}
 
 }

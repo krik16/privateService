@@ -24,7 +24,10 @@ public class UserShopEntity implements Serializable{
 
     /** 用户ID */
     private Integer userId;
-
+    
+    private Integer ownerId;
+    
+    private Integer branchCompanyId;
     /**
      * 主键
      * @return id
@@ -136,4 +139,21 @@ public class UserShopEntity implements Serializable{
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
+
+	public Integer getOwnerId() {
+		return ownerId;
+	}
+
+	public void setOwnerId(Integer ownerId) {
+		this.ownerId = ownerId;
+	}
+
+	public Integer getBranchCompanyId() {
+		return branchCompanyId;
+	}
+
+	public void setBranchCompanyId(Integer branchCompanyId) {
+		this.branchCompanyId = branchCompanyId;
+	}
+    
 }
