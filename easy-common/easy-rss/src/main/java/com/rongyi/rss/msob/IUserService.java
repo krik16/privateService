@@ -217,4 +217,20 @@ public interface IUserService {
 	 */
 	public RmmmUserInfoEntity getUserInfoById(Integer id) throws Exception;
 
+
+    /**
+     * 根据 用户ID 生成 邀请码
+     * @param userId
+     * @return
+     */
+    public String generationSharCode(Integer userId)throws Exception;
+
+    /**
+     * 判断 当前邀请码是否有效
+     * @param sharCode
+     * @return 存在 true 不存在 false
+     */
+    public Boolean sharCodeIsExist(String sharCode)throws Exception;
+
+
 }

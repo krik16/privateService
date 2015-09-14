@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class BaseParam implements Serializable{
     private static final long serialVersionUID = 1L;
 
-    private String  jsessionid;//用户信息
+    private String  jsessionid;//用户信息jsessionid
     private String  appVersion; //APP版本号
     private String  appType; // 0 表示 ios,1表示 android
 
