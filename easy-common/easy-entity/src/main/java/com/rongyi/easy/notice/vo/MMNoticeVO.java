@@ -32,7 +32,7 @@ public class MMNoticeVO implements Serializable{
     private String userIm;
      
     /**用户点赞总量*/
-    private Long praiseCount;
+    private Integer praiseCount;
     /**图片集合*/
     private List<String> picList;
 	public Integer getId() {
@@ -95,10 +95,10 @@ public class MMNoticeVO implements Serializable{
 	public void setUserIm(String userIm) {
 		this.userIm = userIm;
 	}
-	public Long getPraiseCount() {
+	public Integer getPraiseCount() {
 		return praiseCount;
 	}
-	public void setPraiseCount(Long praiseCount) {
+	public void setPraiseCount(Integer praiseCount) {
 		this.praiseCount = praiseCount;
 	}
 	public List<String> getPicList() {

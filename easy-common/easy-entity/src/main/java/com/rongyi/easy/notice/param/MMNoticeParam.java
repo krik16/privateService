@@ -10,12 +10,15 @@ public class MMNoticeParam implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String jsessionid;//用户登录的sessionId
-	
+
+	private int currentpage;
+
+
 	private String shopId;//店铺mongoId
 	
-	private Integer currentpage;//当前页
+
 	
-	private Integer pageSize;//每页显示的数量
+	
 
 	public String getJsessionid() {
 		return jsessionid;
@@ -25,6 +28,9 @@ public class MMNoticeParam implements Serializable {
 		this.jsessionid = jsessionid;
 	}
 
+	private int pageSize;
+
+
 	public String getShopId() {
 		return shopId;
 	}
@@ -33,19 +39,19 @@ public class MMNoticeParam implements Serializable {
 		this.shopId = shopId;
 	}
 
-	public Integer getCurrentpage() {
+	public int getCurrentpage() {
 		return currentpage;
 	}
 
-	public void setCurrentpage(Integer currentpage) {
+	public void setCurrentpage(int currentpage) {
 		this.currentpage = currentpage;
 	}
 
-	public Integer getPageSize() {
+	public int getPageSize() {
 		return pageSize;
 	}
 
-	public void setPageSize(Integer pageSize) {
+	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
 	
