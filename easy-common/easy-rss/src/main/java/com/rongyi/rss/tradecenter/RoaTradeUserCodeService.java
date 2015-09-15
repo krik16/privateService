@@ -8,4 +8,6 @@ import java.util.Map;
 public interface RoaTradeUserCodeService {
 
     Map<String, Object> findTradeUserCodeForStatistics(Map<String, Object> paramsMap);
+
+    Map<String, Object> findTradeUserCodeForStatisticsCounts(String couponId);
 }
