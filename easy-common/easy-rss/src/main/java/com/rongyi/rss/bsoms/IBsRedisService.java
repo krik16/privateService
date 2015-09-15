@@ -5,7 +5,7 @@ package com.rongyi.rss.bsoms;
  * @author kenny
  *
  */
-public interface IRedisService {
+public interface IBsRedisService {
 
 
     /**
