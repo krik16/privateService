@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 优惠券现金劵生成的券码
+ * 卡券券码
  *
  * @author Breggor
  */
@@ -26,19 +26,9 @@ public class CouponCode implements Serializable {
     private String code;
 
     /**
-     * 优惠、现金券ID
+     * 卡券ID
      */
     private String couponId;
-
-    /**
-     * 商场ID
-     */
-    private String mallId;
-
-    /**
-     * 店铺ID
-     */
-    private String shopId;
 
     /**
      * 券码类型
@@ -46,24 +36,19 @@ public class CouponCode implements Serializable {
     private String type;
 
     /**
-     * 状态 0:待领取 1:已领取 2:已使用 3:已过期。
+     * 状态 0:待发码 1:已发码
      */
     private Integer status;
 
     /**
-     * 领用券码用户ID
+     * 第三导入码渠道
      */
-    private String userId;
+    private String inChannel;
 
     /**
-     * 领用券码用户类型
+     * 是否第三方码
      */
-    private String userType;
-
-    /**
-     * 领用券码用户手机
-     */
-    private String mobile;
+    private Boolean isThrid;
 
     /**
      * 创建时间
@@ -71,39 +56,70 @@ public class CouponCode implements Serializable {
     private Date createdTime;
 
     /**
-     * 更新时间（验证时间）(废弃)
+     * 更新时间
      */
     private Date updatedTime;
 
     /**
-     * 编码是否被删除：n-没有删除 y-已删除
+     * 逻辑删除：N-未删除 Y-已删除
      */
     private String isDelete;
+
+
+    /**
+     * 商场ID
+     */
+//    @Deprecated
+//    private String mallId;
+
+    /**
+     * 店铺ID
+     */
+//    @Deprecated
+//    private String shopId;
+
+    /**
+     * 领用券码用户ID
+     */
+//    @Deprecated
+//    private String userId;
+
+    /**
+     * 领用券码用户类型
+     */
+//    @Deprecated
+//    private String userType;
+
+    /**
+     * 领用券码用户手机
+     */
+//    @Deprecated
+//    private String mobile;
+
 
     /**
      * 用户渠道：(废弃)
      */
-    private String userSrc;
+//    @Deprecated
+//    private String userSrc;
 
     /**
      * 有效期开始时间(废弃)
      */
-    private Date validBeginDate;
+//    @Deprecated
+//    private Date validBeginDate;
 
     /**
      * 有效期结束时间(废弃)
      */
-    private Date validEndDate;
+//    @Deprecated
+//    private Date validEndDate;
 
     /**
      * 抵扣金额 (废弃)
      */
-    private Double discount;
-
-    private String inChannel;
-
-    private Boolean isThrid;
-
+//    @Deprecated
+//    private Double discount;
     public Boolean getIsThrid() {
         return isThrid;
     }
@@ -120,37 +136,45 @@ public class CouponCode implements Serializable {
         this.inChannel = inChannel;
     }
 
-    public Date getValidBeginDate() {
-        return validBeginDate;
-    }
-
-    public void setValidBeginDate(Date validBeginDate) {
-        this.validBeginDate = validBeginDate;
-    }
-
-    public Date getValidEndDate() {
-        return validEndDate;
-    }
-
-    public void setValidEndDate(Date validEndDate) {
-        this.validEndDate = validEndDate;
-    }
-
-    public Double getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(Double discount) {
-        this.discount = discount;
-    }
-
-    public String getUserSrc() {
-        return userSrc;
-    }
-
-    public void setUserSrc(String userSrc) {
-        this.userSrc = userSrc;
-    }
+//    @Deprecated
+//    public Date getValidBeginDate() {
+//        return validBeginDate;
+//    }
+//
+//    @Deprecated
+//    public void setValidBeginDate(Date validBeginDate) {
+//        this.validBeginDate = validBeginDate;
+//    }
+//
+//    @Deprecated
+//    public Date getValidEndDate() {
+//        return validEndDate;
+//    }
+//
+//    @Deprecated
+//    public void setValidEndDate(Date validEndDate) {
+//        this.validEndDate = validEndDate;
+//    }
+//
+//    @Deprecated
+//    public Double getDiscount() {
+//        return discount;
+//    }
+//
+//    @Deprecated
+//    public void setDiscount(Double discount) {
+//        this.discount = discount;
+//    }
+//
+//    @Deprecated
+//    public String getUserSrc() {
+//        return userSrc;
+//    }
+//
+//    @Deprecated
+//    public void setUserSrc(String userSrc) {
+//        this.userSrc = userSrc;
+//    }
 
     public Long getId() {
         return id;
@@ -176,21 +200,25 @@ public class CouponCode implements Serializable {
         this.couponId = couponId;
     }
 
-    public String getMallId() {
-        return mallId;
-    }
-
-    public void setMallId(String mallId) {
-        this.mallId = mallId;
-    }
-
-    public String getShopId() {
-        return shopId;
-    }
-
-    public void setShopId(String shopId) {
-        this.shopId = shopId;
-    }
+//    @Deprecated
+//    public String getMallId() {
+//        return mallId;
+//    }
+//
+//    @Deprecated
+//    public void setMallId(String mallId) {
+//        this.mallId = mallId;
+//    }
+//
+//    @Deprecated
+//    public String getShopId() {
+//        return shopId;
+//    }
+//
+//    @Deprecated
+//    public void setShopId(String shopId) {
+//        this.shopId = shopId;
+//    }
 
     public String getType() {
         return type;
@@ -208,21 +236,25 @@ public class CouponCode implements Serializable {
         this.status = status;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
+//    @Deprecated
+//    public String getUserId() {
+//        return userId;
+//    }
+//
+//    @Deprecated
+//    public void setUserId(String userId) {
+//        this.userId = userId;
+//    }
+//
+//    @Deprecated
+//    public String getMobile() {
+//        return mobile;
+//    }
+//
+//    @Deprecated
+//    public void setMobile(String mobile) {
+//        this.mobile = mobile;
+//    }
 
     public Date getCreatedTime() {
         return createdTime;
@@ -248,13 +280,15 @@ public class CouponCode implements Serializable {
         this.isDelete = isDelete;
     }
 
-    public String getUserType() {
-        return userType;
-    }
-
-    public void setUserType(String userType) {
-        this.userType = userType;
-    }
+//    @Deprecated
+//    public String getUserType() {
+//        return userType;
+//    }
+//
+//    @Deprecated
+//    public void setUserType(String userType) {
+//        this.userType = userType;
+//    }
 
     public CouponCode() {
     }
@@ -272,6 +306,17 @@ public class CouponCode implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("id", id).append("code", code).append("couponId", couponId).append("mallId", mallId).append("shopId", shopId).append("type", type).append("status", status).append("userId", userId).append("userType", userType).append("mobile", mobile).append("createdTime", createdTime).append("updatedTime", updatedTime).append("isDelete", isDelete).append("userSrc", userSrc).append("validBeginDate", validBeginDate).append("validEndDate", validEndDate).append("discount", discount).append("inChannel", inChannel).toString();
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("code", code)
+                .append("couponId", couponId)
+                .append("type", type)
+                .append("status", status)
+                .append("inChannel", inChannel)
+                .append("isThrid", isThrid)
+                .append("createdTime", createdTime)
+                .append("updatedTime", updatedTime)
+                .append("isDelete", isDelete)
+                .toString();
     }
 }
