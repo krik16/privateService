@@ -109,4 +109,12 @@ public interface ROAUserInfoService {
 	 * @throws Exception
 	 */
 	public List<BAuthorities> getRoleAuthsByUserId(Integer userId) throws Exception;
+	
+	/**
+	 * 通过service ticket获取登录用户信息
+	 * @param bsst
+	 * @return
+	 * @throws Exception
+	 */
+	public Map getSessionUser(String bsst) throws Exception;
 }
