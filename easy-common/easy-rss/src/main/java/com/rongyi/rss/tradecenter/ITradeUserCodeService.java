@@ -24,4 +24,6 @@ public interface ITradeUserCodeService {
 
     Map<String, Object> findTradeUserCodeForStatistics(Map<String, Object> paramsMap);
 
+    Map<String, Object> findTradeUserCodeForStatisticsCounts(String couponId);
+
 }
