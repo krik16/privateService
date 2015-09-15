@@ -10,6 +10,7 @@
 package com.rongyi.va.service;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -122,10 +123,12 @@ public class VirtualAccountService extends BaseServiceImpl {
 	 * @param amount
 	 * @return
 	 */
-	public int updateSuspended(String userId, Boolean isSuspended) {
+	public int updateSuspended(String userId, Boolean isSuspended, String stopReason) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("userId", userId);
 		params.put("isSuspended", isSuspended);
+		params.put("stopReason", stopReason);
+		params.put("stopAt", new Date());
 		return this.getBaseDao().updateBySql(MAPPER_NAMESPACE + ".updateSuspended", params);
 	}
 }
