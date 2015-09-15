@@ -9,5 +9,5 @@ public interface RoaTradeUserCodeService {
 
     Map<String, Object> findTradeUserCodeForStatistics(Map<String, Object> paramsMap);
 
-    Map<String, Object> findTradeUserCodeForStatisticsCounts(String couponId);
+    Map<String, Object> findTradeUserCodeForStatisticsCounts(Map<String, Object> paramsMap);
 }
