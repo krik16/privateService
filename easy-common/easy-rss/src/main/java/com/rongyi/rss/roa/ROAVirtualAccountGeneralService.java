@@ -23,5 +23,5 @@ public interface ROAVirtualAccountGeneralService {
      * @author ZhangZp
      * @date 2015年5月30日
      */
-    public boolean setAccountSuspend(String userId, boolean isSuspended);
+    public boolean setAccountSuspend(String userId, boolean isSuspended, String stopReason);
 }
