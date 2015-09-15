@@ -2,14 +2,14 @@ package com.rongyi.rss.content;
 
 import java.util.List;
 
-import com.rongyi.easy.contentnew.entity.ForumContent;
-import com.rongyi.easy.contentnew.entity.ForumHomepage;
-import com.rongyi.easy.contentnew.entity.ForumPosition;
-import com.rongyi.easy.contentnew.param.ForumContentParam;
-import com.rongyi.easy.contentnew.param.ForumContentStatusDelParam;
-import com.rongyi.easy.contentnew.vo.ForumContentListVo;
-import com.rongyi.easy.contentnew.vo.ForumHomeModelVo;
-import com.rongyi.easy.contentnew.vo.ForumPostiomModelVo;
+import com.rongyi.easy.content_v2.entity.ForumContent;
+import com.rongyi.easy.content_v2.entity.ForumHomepage;
+import com.rongyi.easy.content_v2.entity.ForumPosition;
+import com.rongyi.easy.content_v2.param.ForumContentParam;
+import com.rongyi.easy.content_v2.param.ForumContentStatusDelParam;
+import com.rongyi.easy.content_v2.vo.ForumContentListVo;
+import com.rongyi.easy.content_v2.vo.ForumHomeModelVo;
+import com.rongyi.easy.content_v2.vo.ForumPostiomModelVo;
 
 /**
  * 页面用的接口

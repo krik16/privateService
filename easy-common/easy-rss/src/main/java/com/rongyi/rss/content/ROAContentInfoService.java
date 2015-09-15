@@ -1,6 +1,6 @@
 package com.rongyi.rss.content;
 
-import com.rongyi.easy.contentnew.vo.*;
+import com.rongyi.easy.content_v2.vo.*;
 
 import java.util.List;
 
