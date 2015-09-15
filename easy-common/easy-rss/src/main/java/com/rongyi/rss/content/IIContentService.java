@@ -1,7 +1,5 @@
 package com.rongyi.rss.content;
 
-import java.util.List;
-
 import com.rongyi.easy.content_v2.entity.ForumContent;
 import com.rongyi.easy.content_v2.entity.ForumHomepage;
 import com.rongyi.easy.content_v2.entity.ForumPosition;
@@ -11,13 +9,15 @@ import com.rongyi.easy.content_v2.vo.ForumContentListVo;
 import com.rongyi.easy.content_v2.vo.ForumHomeModelVo;
 import com.rongyi.easy.content_v2.vo.ForumPostiomModelVo;
 
+import java.util.List;
+
 /**
  * 页面用的接口
  * @author lijing
  * @time 2015-09-07
  *
  */
-public interface IContentService {
+public interface IIContentService {
 	/**
 	 * 查询内容管理首页的信息
 	 * 
