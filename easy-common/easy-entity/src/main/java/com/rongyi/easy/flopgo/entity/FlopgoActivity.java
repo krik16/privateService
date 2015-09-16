@@ -39,6 +39,10 @@ public class FlopgoActivity implements Serializable {
 	private Date validBeginDate;// 翻牌购有效期开始时间
 	@Property("end_time")
 	private Date validEndDate;// 翻牌购的有效期结束时间
+	@Property("mallId")
+	private String mallId;//商场id
+	@Property("rule")
+	private String rule;//翻牌规则
 	@Property("create_at")
 	private Date createDate;// 创建翻牌购时间
 	@Property("update_at")
@@ -208,6 +212,22 @@ public class FlopgoActivity implements Serializable {
 
 	public void setSourceTarget(String sourceTarget) {
 		this.sourceTarget = sourceTarget;
+	}
+
+	public String getMallId() {
+		return mallId;
+	}
+
+	public void setMallId(String mallId) {
+		this.mallId = mallId;
+	}
+
+	public String getRule() {
+		return rule;
+	}
+
+	public void setRule(String rule) {
+		this.rule = rule;
 	}
 
 }
