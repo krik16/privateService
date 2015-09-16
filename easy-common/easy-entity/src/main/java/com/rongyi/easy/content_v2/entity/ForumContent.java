@@ -1,69 +1,97 @@
 package com.rongyi.easy.content_v2.entity;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.Date;
+
 /**
  * 这是内容管理中的内容实体
+ *
  * @author lijing
  * @time 2015-08-28
  */
-public class ForumContent implements Serializable{
-	/** 主键id*/
+public class ForumContent implements Serializable {
+    /**
+     * 主键id
+     */
     private Integer id;
-    /**位置id */
+    /**
+     * 位置id
+     */
     private Integer positionId;
-    /**省份的id*/
+    /**
+     * 省份的id
+     */
     private String provId;
-    /**身份的名字*/
+    /**
+     * 身份的名字
+     */
     private String provName;
-    /**城市的id*/
+    /**
+     * 城市的id
+     */
     private String cityId;
-    /**城市的名字*/
+    /**
+     * 城市的名字
+     */
     private String cityName;
-    /**存放图片的全路径*/
+    /**
+     * 存放图片的全路径
+     */
     private String picUrls;
-    /**内容管理的详情的标题*/
+    /**
+     * 内容管理的详情的标题
+     */
     private String title;
-    /**活动的子标题*/
+    /**
+     * 活动的子标题
+     */
     private String subtitle;
-    /**模版id*/
-    private Integer modelId;
-    public Integer getModelId() {
-		return modelId;
-	}
-
-	public void setModelId(Integer modelId) {
-		this.modelId = modelId;
-	}
-
-	public void setDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
-	}
-
-	/**模版类型的名字  V1代表banner V2代表快捷入口   V3代表热点头条   V4代表卡卷推荐 V5代表活动推荐    V6代表明星店铺 */
-    private String modelName;
-    /**类型，如果模版类型为V1时 1.代表商场,2.店铺、3.品牌、4.商品、5.代金券、6.活动、7.文章、8.同城、9.优惠、10.外链（使用type_url字段）如果模版类型为V3时 1.代表商场,2.店铺、3.品牌、4.商品、5.代金券、6.活动、7.文章、8.同城、9.优惠、10.外链（使用type_url字段）如果模版类型为V4时 1.代表代金券、2.抵扣券如果模版类型为V5时 1.内链活动ID、2.外链活动（使用type_url字段）*/
+    /**
+     * 类型，如果模版类型为V1时 1.代表商场,2.店铺、3.品牌、4.商品、5.代金券、6.活动、7.文章、8.同城、9.优惠、10.外链（使用type_url字段）如果模版类型为V3时 1.代表商场,2.店铺、3.品牌、4.商品、5.代金券、6.活动、7.文章、8.同城、9.优惠、10.外链（使用type_url字段）如果模版类型为V4时 1.代表代金券、2.抵扣券如果模版类型为V5时 1.内链活动ID、2.外链活动（使用type_url字段）
+     */
     private Integer type;
-    /**id值 对应的是上面类型所对应的id      如类型为商场 则id是商场的id*/
+    /**
+     * id值 对应的是上面类型所对应的id      如类型为商场 则id是商场的id
+     */
     private String typeVal;
 
-    /**店铺ids*/
+    /**
+     * 店铺ids
+     */
     private String shopIds;
-    /**发布开始时间*/
+    /**
+     * 发布开始时间
+     */
     private Date publishBeginAt;
-    /**发布结束时间*/
+    /**
+     * 发布结束时间
+     */
     private Date publishEndAt;
-    /**创建人*/
+    /**
+     * 创建人
+     */
     private String createUser;
-    /**创建时间*/
+    /**
+     * 创建时间
+     */
     private Date createAt;
-    /**修改人*/
+    /**
+     * 修改人
+     */
     private String updateUser;
-    /**修改时间*/
+    /**
+     * 修改时间
+     */
     private Date updateAt;
-    /**是否已经删除  true表示删除 flase 表示没有删除*/
+    /**
+     * 是否已经删除  true表示删除 flase 表示没有删除
+     */
     private boolean isDeleted;
-    /**记录状态 0待发布、1已发布、2已关闭*/
+    /**
+     * 记录状态 0待发布、1已发布、2已关闭
+     */
     private Integer status;
 
     public Integer getId() {
@@ -138,14 +166,6 @@ public class ForumContent implements Serializable{
         this.subtitle = subtitle;
     }
 
-    public String getModelName() {
-        return modelName;
-    }
-
-    public void setModelName(String modelName) {
-        this.modelName = modelName;
-    }
-
     public Integer getType() {
         return type;
     }
@@ -154,17 +174,16 @@ public class ForumContent implements Serializable{
         this.type = type;
     }
 
-  
 
     public String getTypeVal() {
-		return typeVal;
-	}
+        return typeVal;
+    }
 
-	public void setTypeVal(String typeVal) {
-		this.typeVal = typeVal;
-	}
+    public void setTypeVal(String typeVal) {
+        this.typeVal = typeVal;
+    }
 
-	public String getShopIds() {
+    public String getShopIds() {
         return shopIds;
     }
 
@@ -228,6 +247,10 @@ public class ForumContent implements Serializable{
         this.isDeleted = isDeleted;
     }
 
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
     public Integer getStatus() {
         return status;
     }
@@ -236,6 +259,29 @@ public class ForumContent implements Serializable{
         this.status = status;
     }
 
-    
-    
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("positionId", positionId)
+                .append("provId", provId)
+                .append("provName", provName)
+                .append("cityId", cityId)
+                .append("cityName", cityName)
+                .append("picUrls", picUrls)
+                .append("title", title)
+                .append("subtitle", subtitle)
+                .append("type", type)
+                .append("typeVal", typeVal)
+                .append("shopIds", shopIds)
+                .append("publishBeginAt", publishBeginAt)
+                .append("publishEndAt", publishEndAt)
+                .append("createUser", createUser)
+                .append("createAt", createAt)
+                .append("updateUser", updateUser)
+                .append("updateAt", updateAt)
+                .append("isDeleted", isDeleted)
+                .append("status", status)
+                .toString();
+    }
 }

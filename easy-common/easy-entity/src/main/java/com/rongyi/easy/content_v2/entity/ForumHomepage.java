@@ -1,35 +1,69 @@
 package com.rongyi.easy.content_v2.entity;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.Date;
+
 /**
  * 这是内容管理的主页
+ *
  * @author lijing
  * @time 2015 08 31
  */
 public class ForumHomepage implements Serializable {
-    /**主键id*/
-	private Integer id;
-	/**模版类型的id  是ForumModel的id*/
-    private Integer modelId;
-    /**内容标题*/
+    /**
+     * 主键id
+     */
+    private Integer id;
+    /**
+     * 内容标题
+     */
     private String title;
-    /**状态 0代表启用，1代表关闭*/
+    /**
+     * 状态 0代表启用，1代表关闭
+     */
     private Integer status;
-    /**顺序（位置） 从1开始*/
+    /**
+     * 顺序（位置） 从1开始
+     */
     private Integer sortIdx;
-    /** 创建人*/
+    /**
+     * 图片的格式 如png jpg 如果有多个 用;隔开
+     */
+    private String imageFormat;
+    /**
+     * 图片像素大小的限制 如 500*500
+     */
+    private String imagePixel;
+    /**
+     * 图片大小的显示 如 30   以K为单位
+     */
+    private Integer imageSize;
+    /**
+     * 创建人
+     */
     private String createUser;
-    /** 创建时间*/
+    /**
+     * 创建时间
+     */
     private Date createAt;
-    /**修改人*/
+    /**
+     * 修改人
+     */
     private String updateUser;
-    /**修改时间*/
+    /**
+     * 修改时间
+     */
     private Date updateAt;
-    /**子模版个数*/
+    /**
+     * 子模版个数
+     */
     private Integer positionCount;
-    
-    /**是否已经删除  true表示删除 flase 表示没有删除*/
+
+    /**
+     * 是否已经删除  true表示删除 flase 表示没有删除
+     */
     private boolean isDeleted;
 
     public Integer getId() {
@@ -38,14 +72,6 @@ public class ForumHomepage implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getModelId() {
-        return modelId;
-    }
-
-    public void setModelId(Integer modelId) {
-        this.modelId = modelId;
     }
 
     public String getTitle() {
@@ -70,6 +96,30 @@ public class ForumHomepage implements Serializable {
 
     public void setSortIdx(Integer sortIdx) {
         this.sortIdx = sortIdx;
+    }
+
+    public String getImageFormat() {
+        return imageFormat;
+    }
+
+    public void setImageFormat(String imageFormat) {
+        this.imageFormat = imageFormat;
+    }
+
+    public String getImagePixel() {
+        return imagePixel;
+    }
+
+    public void setImagePixel(String imagePixel) {
+        this.imagePixel = imagePixel;
+    }
+
+    public Integer getImageSize() {
+        return imageSize;
+    }
+
+    public void setImageSize(Integer imageSize) {
+        this.imageSize = imageSize;
     }
 
     public String getCreateUser() {
@@ -112,12 +162,30 @@ public class ForumHomepage implements Serializable {
         this.positionCount = positionCount;
     }
 
-	public boolean isDeleted() {
-		return isDeleted;
-	}
+    public boolean isDeleted() {
+        return isDeleted;
+    }
 
-	public void setDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
-	}
-    
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("title", title)
+                .append("status", status)
+                .append("sortIdx", sortIdx)
+                .append("imageFormat", imageFormat)
+                .append("imagePixel", imagePixel)
+                .append("imageSize", imageSize)
+                .append("createUser", createUser)
+                .append("createAt", createAt)
+                .append("updateUser", updateUser)
+                .append("updateAt", updateAt)
+                .append("positionCount", positionCount)
+                .append("isDeleted", isDeleted)
+                .toString();
+    }
 }
