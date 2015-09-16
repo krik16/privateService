@@ -33,6 +33,8 @@ import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.tms.entity.DrawApply;
 import com.rongyi.easy.tms.entity.DrawVerifyLog;
+import com.rongyi.easy.va.entity.VirtualAccountEntity;
+import com.rongyi.rss.roa.ROAVirtualAccountGeneralService;
 import com.rongyi.tms.constants.CodeEnum;
 import com.rongyi.tms.constants.Constant;
 import com.rongyi.tms.moudle.vo.CheckParam;
@@ -55,6 +57,9 @@ public class DrawApplyController extends BaseController {
     
     @Autowired
     private DrawVerifyLogService drawVerifyLogService;
+    
+    @Autowired
+    ROAVirtualAccountGeneralService rOAVirtualAccountGeneralService;
     
     @RequestMapping("/search")
     public String searchIntegralComm(String module) {
@@ -139,7 +144,9 @@ public class DrawApplyController extends BaseController {
                 return Constant.VIEW_MSG.ERROR;
             }else{
                 DrawApply drawApply=drawService.getOneById(id);
+                VirtualAccountEntity vaEntity = rOAVirtualAccountGeneralService.selectByUserId(drawApply.getDrawUserId());
                 modelMap.addAttribute("apply", drawApply);
+                modelMap.addAttribute("balance",vaEntity.getBalance());
                 if(drawApply.getStatus()<0){
                     DrawVerifyLog verifyLog= drawVerifyLogService.getLogByApplyId(drawApply.getId());
                     modelMap.addAttribute("log",verifyLog);
