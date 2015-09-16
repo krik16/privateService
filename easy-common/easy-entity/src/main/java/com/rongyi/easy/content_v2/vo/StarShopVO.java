@@ -69,7 +69,7 @@ public class StarShopVO implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("title", title)
                 .append("provId", provId)
                 .append("cityId", cityId)
@@ -192,7 +192,7 @@ public class StarShopVO implements Serializable {
 
         @Override
         public String toString() {
-            return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+            return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                     .append("shopId", shopId)
                     .append("shopName", shopName)
                     .append("logo", logo)

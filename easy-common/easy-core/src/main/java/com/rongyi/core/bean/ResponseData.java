@@ -142,7 +142,7 @@ public class ResponseData implements java.io.Serializable {
 
         @Override
         public String toString() {
-            return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+            return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                     .append("page", page)
                     .append("data", data)
                     .toString();
@@ -172,7 +172,7 @@ public class ResponseData implements java.io.Serializable {
 
         @Override
         public String toString() {
-            return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+            return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                     .append("errno", errno)
                     .append("msg", msg)
                     .toString();
@@ -209,7 +209,7 @@ public class ResponseData implements java.io.Serializable {
 
         @Override
         public String toString() {
-            return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+            return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                     .append("currentPage", currentPage)
                     .append("pageSize", pageSize)
                     .append("totalCount", totalCount)
@@ -219,7 +219,7 @@ public class ResponseData implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("meta", meta)
                 .append("result", result)
                 .toString();
