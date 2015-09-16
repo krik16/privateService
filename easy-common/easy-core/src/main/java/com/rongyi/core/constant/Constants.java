@@ -16,6 +16,7 @@ public interface Constants {
         Integer PAY_SECOND = 900; //订单支付最大时间（秒数）
     }
     String BS_COOKIE_NAME = "BSST";
+    String RY_COOKIE_NAME = "RYST";
 
     /**
      * 登录用户的session key

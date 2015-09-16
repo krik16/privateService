@@ -112,6 +112,7 @@ public interface IUserInfoService {
 	
 	/**
 	 * 通过service ticket获取登录用户信息
+	 * 返回Map{userInfo:com.rongyi.easy.bsoms.entity.SessionUserInfo,authorities:List<String>}
 	 * @param bsst
 	 * @return
 	 * @throws Exception
