@@ -139,6 +139,9 @@ public class ResponseData implements java.io.Serializable {
             return data;
         }
 
+        public void setData(T data) {
+            this.data = data;
+        }
 
         @Override
         public String toString() {
