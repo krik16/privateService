@@ -20,6 +20,12 @@ public class ForumHomepage implements Serializable {
      * 内容标题
      */
     private String title;
+
+    /**
+     * 首页板块码（必须唯一）
+     */
+    private String forumCode;
+
     /**
      * 状态 0代表启用，1代表关闭
      */
@@ -81,6 +87,14 @@ public class ForumHomepage implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getForumCode() {
+        return forumCode;
+    }
+
+    public void setForumCode(String forumCode) {
+        this.forumCode = forumCode;
     }
 
     public Integer getStatus() {
@@ -176,16 +190,17 @@ public class ForumHomepage implements Serializable {
         return new ToStringBuilder(this)
                 .append("id", id)
                 .append("title", title)
+                .append("forumCode", forumCode)
                 .append("status", status)
                 .append("sortIdx", sortIdx)
                 .append("imageFormat", imageFormat)
                 .append("imagePixel", imagePixel)
                 .append("imageSize", imageSize)
+                .append("positionCount", positionCount)
                 .append("createUser", createUser)
                 .append("createAt", createAt)
                 .append("updateUser", updateUser)
                 .append("updateAt", updateAt)
-                .append("positionCount", positionCount)
                 .append("isDeleted", isDeleted)
                 .toString();
     }
