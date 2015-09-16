@@ -9,6 +9,7 @@
  */
 package com.rongyi.rss.va;
 
+import com.rongyi.easy.va.entity.VirtualAccountEntity;
 import com.rongyi.easy.va.vo.VirtualAccountVO;
 
 /**
@@ -40,5 +41,15 @@ public interface VirtualAccountGeneralService {
 	 * @return
 	 */
 	public boolean setAccountSuspend(String userId, boolean isSuspended, String stopReason);
+	
+	
+	/**	
+	 * @Description: 根据userId查找 
+	 * @param userId
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年9月16日下午4:06:43
+	 **/
+	public VirtualAccountEntity selectByUserId(String userId);
 
 }
