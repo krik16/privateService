@@ -15,6 +15,7 @@ public class FlopgoLookPrizesListVO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int currentPage;//当前页
 	private int totalPage;//总页数
+	private int isNewActivity;//是否是新的活动0表示不是  1表示是
 	
 	public int getCurrentPage() {
 		return currentPage;
@@ -40,6 +41,14 @@ public class FlopgoLookPrizesListVO implements Serializable{
 
 	public void setFloplookprizes(List<FlopgoLookPrizesVO> floplookprizes) {
 		this.floplookprizes = floplookprizes;
+	}
+
+	public int getIsNewActivity() {
+		return isNewActivity;
+	}
+
+	public void setIsNewActivity(int isNewActivity) {
+		this.isNewActivity = isNewActivity;
 	}
 	
 }

@@ -33,6 +33,12 @@ public class FlopPrizeListVo implements Serializable{
 	private Date updateDate;// 修改翻牌购时间
 
 	private String createUser;// 创建翻牌购的人
+	
+	private String mallId;//mallid
+	
+	private String mallName;//商场名字
+	
+	private String rule;//规则
 
 	private String updateUser;// 修改翻牌购的人
 	private Integer isUsed;// 代表是否有人参与了这个翻牌购活动，0为默认 没有参与 1为有人参与了这个活动
@@ -89,6 +95,8 @@ public class FlopPrizeListVo implements Serializable{
 		this.updateUser=flopa.getUpdateUser();
 		this.isUsed=flopa.getIsUsed();
 		this.sourceTarget=flopa.getSourceTarget();
+		this.mallId=flopa.getMallId();
+		this.rule=flopa.getRule();
 	}
 	
 	public String getSourceTarget() {
@@ -166,6 +174,25 @@ public class FlopPrizeListVo implements Serializable{
 	public void setPrizeList(List<FlopPrizeVO> prizeList) {
 		this.prizeList = prizeList;
 	}
+	public String getMallId() {
+		return mallId;
+	}
+	public void setMallId(String mallId) {
+		this.mallId = mallId;
+	}
+	public String getRule() {
+		return rule;
+	}
+	public void setRule(String rule) {
+		this.rule = rule;
+	}
+	public String getMallName() {
+		return mallName;
+	}
+	public void setMallName(String mallName) {
+		this.mallName = mallName;
+	}
+	
 	
 														
 }

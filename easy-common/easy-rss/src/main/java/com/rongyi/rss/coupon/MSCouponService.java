@@ -21,7 +21,7 @@ import com.rongyi.easy.solr.retrival.result.ActivityData;
  *
  * @author Breggor
  */
-public interface RmmmCouponService {
+public interface MSCouponService {
 
     /**
      * 创建优惠券

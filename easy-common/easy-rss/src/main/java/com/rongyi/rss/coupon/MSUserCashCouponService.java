@@ -10,7 +10,7 @@ import java.util.Map;
  *
  * @author Breggor
  */
-public interface RmmmUserCashCouponService {
+public interface MSUserCashCouponService {
 
     /**
      * 接口描述：用户现金券 (未使用/已使用) 列表查询

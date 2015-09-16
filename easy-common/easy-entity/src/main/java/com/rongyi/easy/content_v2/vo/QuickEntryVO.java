@@ -4,7 +4,6 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * 容易逛首页-快捷入口VO
@@ -12,15 +11,16 @@ import java.util.List;
  */
 public class QuickEntryVO implements Serializable {
 
-    private List<String> quickPics; //["快捷入口图标1","快捷入口图标2"]
+
+    private String quickPics; // 快捷入口图标，多个衣逗号分隔。例如："快捷入口图标1,快捷入口图标2"
     private String publishBeginAt;  //发布开始时间
     private String publishEndAt;  //发布结束时间
 
-    public List<String> getQuickPics() {
+    public String getQuickPics() {
         return quickPics;
     }
 
-    public void setQuickPics(List<String> quickPics) {
+    public void setQuickPics(String quickPics) {
         this.quickPics = quickPics;
     }
 
@@ -42,7 +42,7 @@ public class QuickEntryVO implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("quickPics", quickPics)
                 .append("publishBeginAt", publishBeginAt)
                 .append("publishEndAt", publishEndAt)

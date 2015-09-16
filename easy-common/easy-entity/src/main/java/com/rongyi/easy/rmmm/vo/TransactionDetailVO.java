@@ -51,6 +51,15 @@ public class TransactionDetailVO implements Serializable{
 	private String shopMId;//店铺mongoid
 	
 	private String shopName;//店铺名
+	
+	private String mallMId;// 商场mongoId
+
+	/** 返回的信息 */
+	private String msg;
+	/** 错误编码 */
+	private Integer errno;
+	/** 翻牌购拼接的url */
+	private String url;
 
 	public String getConsignee() {
 		return consignee;
@@ -219,5 +228,39 @@ public class TransactionDetailVO implements Serializable{
 	public void setImId(String imId) {
 		this.imId = imId;
 	}
+
+	public String getMallMId() {
+		return mallMId;
+	}
+
+	public void setMallMId(String mallMId) {
+		this.mallMId = mallMId;
+	}
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
+	public Integer getErrno() {
+		return errno;
+	}
+
+	public void setErrno(Integer errno) {
+		this.errno = errno;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
+	
 	
 }

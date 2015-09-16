@@ -104,4 +104,11 @@ public interface CMFlopgoService {
 	 * @return
 	 */
 	public FlopPrizeDEntity selectByFlopEntity(FlopPrizeDEntity f);
+	
+	/**
+	 * 通过商场id得到最新的翻牌购活动
+	 * @param mallId
+	 * @return
+	 */
+	public String getActivityIdByMallId(String mallId);
 }

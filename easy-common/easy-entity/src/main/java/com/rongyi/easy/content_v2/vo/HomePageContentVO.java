@@ -76,7 +76,7 @@ public class HomePageContentVO {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("banner", banner)
                 .append("quickEntry", quickEntry)
                 .append("hotHeadline", hotHeadline)
