@@ -41,6 +41,10 @@ public class ForumHomepage implements Serializable {
      */
     private Integer imageSize;
     /**
+     * 子模版个数
+     */
+    private Integer positionCount;
+    /**
      * 创建人
      */
     private String createUser;
@@ -56,10 +60,7 @@ public class ForumHomepage implements Serializable {
      * 修改时间
      */
     private Date updateAt;
-    /**
-     * 子模版个数
-     */
-    private Integer positionCount;
+
 
     /**
      * 是否已经删除  true表示删除 flase 表示没有删除
