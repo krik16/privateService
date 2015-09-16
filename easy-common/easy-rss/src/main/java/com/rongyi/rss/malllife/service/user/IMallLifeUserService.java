@@ -181,4 +181,11 @@ public interface IMallLifeUserService {
 	 */
 	public MallLifeUserEntity getUserById(ObjectId id) throws Exception;
 
+
+    /**
+     * 登录后修改相关信息 (登录时间，登录)
+     * @param malllifeUser
+     * @throws Exception
+     */
+    public void updatelogin(MalllifeUser malllifeUser) throws Exception;
 }
