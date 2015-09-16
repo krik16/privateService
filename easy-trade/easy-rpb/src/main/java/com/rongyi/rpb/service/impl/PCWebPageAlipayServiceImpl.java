@@ -152,8 +152,9 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 		try {
 			if (paymentEntity.getBatchNo() != null) {
 				List<PaymentEntity> list = paymentService.selectByBatchNoAndStatus(paymentEntity.getBatchNo(), Constants.PAYMENT_STATUS.STAUS2);
-				if (list.isEmpty())
+				if (list.isEmpty() && paymentEntity.getBatchNo().contains(DateUtil.getCurrentDateYYMMDD())){//检验批量单号是否是当天生成使用
 					batchNo = paymentEntity.getBatchNo();
+				}
 			}
 			LOGGER.info("批量单号-->" + batchNo);
 			if (paymentEntity.getBatchNo() == null || !batchNo.equals(paymentEntity.getBatchNo())) {
@@ -189,7 +190,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 			PaymentEntity paymentEntity = paymentService.selectByPrimaryKey(id);
 			if (paymentEntity.getBatchNo() != null) {
 				List<PaymentEntity> list = paymentService.selectByBatchNoAndStatus(paymentEntity.getBatchNo(), Constants.PAYMENT_STATUS.STAUS2);
-				if (list.isEmpty()) {
+				if (list.isEmpty() && paymentEntity.getBatchNo().contains(DateUtil.getCurrentDateYYMMDD())) {//验证批量单号是否是今天生成
 					batchNo = paymentEntity.getBatchNo();
 					break;
 				}
