@@ -1,6 +1,4 @@
 package com.rongyi.rss.integral;
-
-import java.util.List;
 import net.sf.json.JSONObject;
 import com.rongyi.easy.integral.vo.IntegralRecordVO;
 
@@ -57,6 +55,6 @@ public interface ROAIntegralService {
 	 * @param update_at
 	 * @return
 	 */
-	public JSONObject getScoreRecordByConditioin(String mobile, int source ,int type,int action ,String update_at,int page, int row);
+	public JSONObject getScoreRecordByConditioin(String userId, int source ,int type,int action ,String update_at,int page, int row);
 
 }
