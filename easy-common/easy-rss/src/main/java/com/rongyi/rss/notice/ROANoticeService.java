@@ -94,5 +94,5 @@ public interface ROANoticeService {
      * @param msnotice
      * @return
      */
-    public PagingVO<MSNoticeVO> findNoticesByMSParam(MSNoticeParam msnotice);
+    public PagingVO<MMNoticeVO> findNoticesByMSParam(MSNoticeParam msnotice);
 }

@@ -1,5 +1,7 @@
 package com.rongyi.easy.notice.vo;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -28,9 +30,6 @@ public class MMNoticeVO implements Serializable{
     private String createUserid;
     /**创建时间*/
     private Date createAt;
-    /**创建人IM账号*/
-    private String userIm;
-     
     /**用户点赞总量*/
     private Integer praiseCount;
     /**图片集合*/
@@ -89,12 +88,6 @@ public class MMNoticeVO implements Serializable{
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
-	public String getUserIm() {
-		return userIm;
-	}
-	public void setUserIm(String userIm) {
-		this.userIm = userIm;
-	}
 	public Integer getPraiseCount() {
 		return praiseCount;
 	}
@@ -107,7 +100,9 @@ public class MMNoticeVO implements Serializable{
 	public void setPicList(List<String> picList) {
 		this.picList = picList;
 	}
-    
-    
-    
+
+		@Override
+		public String toString() {
+				return new ToStringBuilder(this).append("id", id).append("content", content).append("shopName", shopName).append("shopMid", shopMid).append("status", status).append("publishBeginAt", publishBeginAt).append("publishEndAt", publishEndAt).append("createUserid", createUserid).append("createAt", createAt).append("praiseCount", praiseCount).append("picList", picList).toString();
+		}
 }
