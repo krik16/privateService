@@ -121,7 +121,7 @@ public class ResponseData implements java.io.Serializable {
         this.result = result;
     }
 
-    public static class Result<T> {
+    public static class Result<T> implements Serializable {
         private Page page;
         private T data;
 
