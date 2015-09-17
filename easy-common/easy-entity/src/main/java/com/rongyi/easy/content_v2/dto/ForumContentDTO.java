@@ -1,10 +1,6 @@
 package com.rongyi.easy.content_v2.dto;
 
-import com.sun.istack.internal.NotNull;
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 内容管理中的内容信息的新增修改操作对象
