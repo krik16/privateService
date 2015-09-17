@@ -15,7 +15,8 @@ public class StarShopVO implements Serializable {
     private String title;  //标题
     private String provId; //省份Id
     private String cityId;  //城市Id
-    private List<ShopVO> shops; //店铺
+    private List<ShopVO> shops; //店铺信息在roa处理
+    private String shopIds; //店铺Id
     private String publishBeginAt;  //发布开始时间"
     private String publishEndAt; //发布结束时间"
 
@@ -67,6 +68,14 @@ public class StarShopVO implements Serializable {
         this.publishEndAt = publishEndAt;
     }
 
+    public String getShopIds() {
+        return shopIds;
+    }
+
+    public void setShopIds(String shopIds) {
+        this.shopIds = shopIds;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
@@ -74,6 +83,7 @@ public class StarShopVO implements Serializable {
                 .append("provId", provId)
                 .append("cityId", cityId)
                 .append("shops", shops)
+                .append("shopIds", shopIds)
                 .append("publishBeginAt", publishBeginAt)
                 .append("publishEndAt", publishEndAt)
                 .toString();

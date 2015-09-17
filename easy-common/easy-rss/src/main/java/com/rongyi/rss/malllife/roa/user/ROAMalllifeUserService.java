@@ -135,4 +135,12 @@ public interface ROAMalllifeUserService {
 	 * @return
 	 */
 	public List<UserInfoVO> getUsersByNicknameUsername(String nickname, String username);
+
+
+	/**
+	 * 登录后修改相关信息 (登录时间，登录)
+	 * @param malllifeUser
+	 * @throws Exception
+	 */
+	public void updatelogin(MalllifeUser malllifeUser) throws Exception;
 }

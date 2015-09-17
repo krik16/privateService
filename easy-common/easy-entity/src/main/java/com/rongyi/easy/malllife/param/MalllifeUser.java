@@ -1,6 +1,7 @@
 package com.rongyi.easy.malllife.param;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /*
  * Copyright (C),上海容易网电子商务有限公司
@@ -30,13 +31,20 @@ public class MalllifeUser implements Serializable {
 
     private String openId;
 
-    private String channel;
+    private String channel;// 容易逛(MALLLIFE),其他第三方全民财富（QMCAIFU）
 
     private String devUuid;//设备uuid
 
     private String imId;
 
     private Integer isLoginRed;//登录领红包 0未领取 1已经领取
+
+    private String pushChanelId;
+
+    private Date lastSignInAt;
+
+    private String   lastSignInIp;//最新登录Ip地址
+
 
 
     public String getUserId() {
@@ -118,5 +126,29 @@ public class MalllifeUser implements Serializable {
 
     public void setIsLoginRed(Integer isLoginRed) {
         this.isLoginRed = isLoginRed;
+    }
+
+    public String getPushChanelId() {
+        return pushChanelId;
+    }
+
+    public void setPushChanelId(String pushChanelId) {
+        this.pushChanelId = pushChanelId;
+    }
+
+    public Date getLastSignInAt() {
+        return lastSignInAt;
+    }
+
+    public void setLastSignInAt(Date lastSignInAt) {
+        this.lastSignInAt = lastSignInAt;
+    }
+
+    public String getLastSignInIp() {
+        return lastSignInIp;
+    }
+
+    public void setLastSignInIp(String lastSignInIp) {
+        this.lastSignInIp = lastSignInIp;
     }
 }
