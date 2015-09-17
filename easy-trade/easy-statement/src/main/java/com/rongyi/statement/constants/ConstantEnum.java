@@ -18,9 +18,8 @@ package com.rongyi.statement.constants;
 public enum ConstantEnum {
 
 
+	PAGE_SIZE(15,"分页条数");
     
-    DRAWAPPLY_STATUS_0(0, "未审核");
-   
     private Object code;
 
     private Object value;
