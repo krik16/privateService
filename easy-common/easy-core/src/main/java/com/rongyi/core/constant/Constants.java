@@ -654,5 +654,9 @@ public interface Constants {
     interface AppAdvertChannel{
     	String ZHIMENG_CHANNEL = "zhimeng";//指盟
     	String WAPS_CHANNEL = "waps";//万普
+    	
+    }
+    interface Errno{
+    	int success=0;
     }
 }

@@ -1,0 +1,124 @@
+package com.rongyi.easy.mcmc.vo;
+
+
+import java.io.Serializable;
+import java.util.List;
+
+import org.bson.types.ObjectId;
+
+public class CommoditySpecVO2 implements  Serializable {
+	
+	private static final long serialVersionUID = -3491400779856182500L;
+	
+	private String id;
+	private String originalPrice;//原价
+	private String currentPrice;//现价
+	private List<String> columnIds;//规格id
+	private List<String> columnNames;//规格名字
+	private List<String> columnValues;//规格属性
+	private List<String> columnNotes;//规格备注	
+	private String systemNumber;//系统编号
+	private String shopMid;//对应商品所属店铺
+	private String shopName;//对应商品所属店铺
+	private String filialeMid;//店铺对应分公司
+	private String filialeName;//店铺对应分公司
+	private String pictureUrl;//规格图片
+	private int stock;//库存
+	private int remain;//剩余量
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getOriginalPrice() {
+		return originalPrice;
+	}
+	public void setOriginalPrice(String originalPrice) {
+		this.originalPrice = originalPrice;
+	}
+	public String getCurrentPrice() {
+		return currentPrice;
+	}
+	public void setCurrentPrice(String currentPrice) {
+		this.currentPrice = currentPrice;
+	}
+	public List<String> getColumnIds() {
+		return columnIds;
+	}
+	public void setColumnIds(List<String> columnIds) {
+		this.columnIds = columnIds;
+	}
+	public List<String> getColumnNames() {
+		return columnNames;
+	}
+	public void setColumnNames(List<String> columnNames) {
+		this.columnNames = columnNames;
+	}
+	public List<String> getColumnValues() {
+		return columnValues;
+	}
+	public void setColumnValues(List<String> columnValues) {
+		this.columnValues = columnValues;
+	}
+	public String getSystemNumber() {
+		return systemNumber;
+	}
+	public void setSystemNumber(String systemNumber) {
+		this.systemNumber = systemNumber;
+	}
+	
+	public String getShopName() {
+		return shopName;
+	}
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+	
+	
+	public String getFilialeName() {
+		return filialeName;
+	}
+	public void setFilialeName(String filialeName) {
+		this.filialeName = filialeName;
+	}
+	public String getPictureUrl() {
+		return pictureUrl;
+	}
+	public void setPictureUrl(String pictureUrl) {
+		this.pictureUrl = pictureUrl;
+	}
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+	public int getRemain() {
+		return remain;
+	}
+	public void setRemain(int remain) {
+		this.remain = remain;
+	}
+	public String getShopMid() {
+		return shopMid;
+	}
+	public void setShopMid(String shopMid) {
+		this.shopMid = shopMid;
+	}
+	public String getFilialeMid() {
+		return filialeMid;
+	}
+	public void setFilialeMid(String filialeMid) {
+		this.filialeMid = filialeMid;
+	}
+	public List<String> getColumnNotes() {
+		return columnNotes;
+	}
+	public void setColumnNotes(List<String> columnNotes) {
+		this.columnNotes = columnNotes;
+	}
+	
+	
+	
+}

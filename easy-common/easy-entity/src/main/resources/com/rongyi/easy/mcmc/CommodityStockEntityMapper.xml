@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongyi.easy.mcmc.entity.CommodityStockEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.rongyi.easy.mcmc.entity.CommodityStockEntity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="stock" property="stock" jdbcType="INTEGER" />
+    <result column="remain" property="remain" jdbcType="INTEGER" />
+    <result column="shop_mid" property="shopMid" jdbcType="CHAR" />
+    <result column="filiale_mid" property="filialeMid" jdbcType="CHAR" />
+    <result column="commodity_mid" property="commodityMid" jdbcType="CHAR" />
+    <result column="commodity_spec_mid" property="commoditySpecMid" jdbcType="CHAR" />
+    <result column="is_disabled" property="isDisabled" jdbcType="INTEGER" />
+    <result column="create_by" property="createBy" jdbcType="INTEGER" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="INTEGER" />
+    <result column="update_at" property="updateAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, stock, remain, shop_mid, filiale_mid, commodity_mid, commodity_spec_mid, is_disabled, 
+    create_by, create_at, update_by, update_at
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rongyi.easy.mcmc.entity.CommodityStockEntityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from commodity_stock
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from commodity_stock
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from commodity_stock
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rongyi.easy.mcmc.entity.CommodityStockEntityExample" >
+    delete from commodity_stock
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rongyi.easy.mcmc.entity.CommodityStockEntity" >
+    insert into commodity_stock (id, stock, remain, 
+      shop_mid, filiale_mid, commodity_mid, 
+      commodity_spec_mid, is_disabled, create_by, 
+      create_at, update_by, update_at
+      )
+    values (#{id,jdbcType=INTEGER}, #{stock,jdbcType=INTEGER}, #{remain,jdbcType=INTEGER}, 
+      #{shopMid,jdbcType=CHAR}, #{filialeMid,jdbcType=CHAR}, #{commodityMid,jdbcType=CHAR}, 
+      #{commoditySpecMid,jdbcType=CHAR}, #{isDisabled,jdbcType=INTEGER}, #{createBy,jdbcType=INTEGER}, 
+      #{createAt,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=INTEGER}, #{updateAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.rongyi.easy.mcmc.entity.CommodityStockEntity" >
+    insert into commodity_stock
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="stock != null" >
+        stock,
+      </if>
+      <if test="remain != null" >
+        remain,
+      </if>
+      <if test="shopMid != null" >
+        shop_mid,
+      </if>
+      <if test="filialeMid != null" >
+        filiale_mid,
+      </if>
+      <if test="commodityMid != null" >
+        commodity_mid,
+      </if>
+      <if test="commoditySpecMid != null" >
+        commodity_spec_mid,
+      </if>
+      <if test="isDisabled != null" >
+        is_disabled,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateAt != null" >
+        update_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="stock != null" >
+        #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="remain != null" >
+        #{remain,jdbcType=INTEGER},
+      </if>
+      <if test="shopMid != null" >
+        #{shopMid,jdbcType=CHAR},
+      </if>
+      <if test="filialeMid != null" >
+        #{filialeMid,jdbcType=CHAR},
+      </if>
+      <if test="commodityMid != null" >
+        #{commodityMid,jdbcType=CHAR},
+      </if>
+      <if test="commoditySpecMid != null" >
+        #{commoditySpecMid,jdbcType=CHAR},
+      </if>
+      <if test="isDisabled != null" >
+        #{isDisabled,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=INTEGER},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=INTEGER},
+      </if>
+      <if test="updateAt != null" >
+        #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rongyi.easy.mcmc.entity.CommodityStockEntityExample" resultType="java.lang.Integer" >
+    select count(*) from commodity_stock
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update commodity_stock
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.stock != null" >
+        stock = #{record.stock,jdbcType=INTEGER},
+      </if>
+      <if test="record.remain != null" >
+        remain = #{record.remain,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopMid != null" >
+        shop_mid = #{record.shopMid,jdbcType=CHAR},
+      </if>
+      <if test="record.filialeMid != null" >
+        filiale_mid = #{record.filialeMid,jdbcType=CHAR},
+      </if>
+      <if test="record.commodityMid != null" >
+        commodity_mid = #{record.commodityMid,jdbcType=CHAR},
+      </if>
+      <if test="record.commoditySpecMid != null" >
+        commodity_spec_mid = #{record.commoditySpecMid,jdbcType=CHAR},
+      </if>
+      <if test="record.isDisabled != null" >
+        is_disabled = #{record.isDisabled,jdbcType=INTEGER},
+      </if>
+      <if test="record.createBy != null" >
+        create_by = #{record.createBy,jdbcType=INTEGER},
+      </if>
+      <if test="record.createAt != null" >
+        create_at = #{record.createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null" >
+        update_by = #{record.updateBy,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateAt != null" >
+        update_at = #{record.updateAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update commodity_stock
+    set id = #{record.id,jdbcType=INTEGER},
+      stock = #{record.stock,jdbcType=INTEGER},
+      remain = #{record.remain,jdbcType=INTEGER},
+      shop_mid = #{record.shopMid,jdbcType=CHAR},
+      filiale_mid = #{record.filialeMid,jdbcType=CHAR},
+      commodity_mid = #{record.commodityMid,jdbcType=CHAR},
+      commodity_spec_mid = #{record.commoditySpecMid,jdbcType=CHAR},
+      is_disabled = #{record.isDisabled,jdbcType=INTEGER},
+      create_by = #{record.createBy,jdbcType=INTEGER},
+      create_at = #{record.createAt,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=INTEGER},
+      update_at = #{record.updateAt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rongyi.easy.mcmc.entity.CommodityStockEntity" >
+    update commodity_stock
+    <set >
+      <if test="stock != null" >
+        stock = #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="remain != null" >
+        remain = #{remain,jdbcType=INTEGER},
+      </if>
+      <if test="shopMid != null" >
+        shop_mid = #{shopMid,jdbcType=CHAR},
+      </if>
+      <if test="filialeMid != null" >
+        filiale_mid = #{filialeMid,jdbcType=CHAR},
+      </if>
+      <if test="commodityMid != null" >
+        commodity_mid = #{commodityMid,jdbcType=CHAR},
+      </if>
+      <if test="commoditySpecMid != null" >
+        commodity_spec_mid = #{commoditySpecMid,jdbcType=CHAR},
+      </if>
+      <if test="isDisabled != null" >
+        is_disabled = #{isDisabled,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=INTEGER},
+      </if>
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=INTEGER},
+      </if>
+      <if test="updateAt != null" >
+        update_at = #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rongyi.easy.mcmc.entity.CommodityStockEntity" >
+    update commodity_stock
+    set stock = #{stock,jdbcType=INTEGER},
+      remain = #{remain,jdbcType=INTEGER},
+      shop_mid = #{shopMid,jdbcType=CHAR},
+      filiale_mid = #{filialeMid,jdbcType=CHAR},
+      commodity_mid = #{commodityMid,jdbcType=CHAR},
+      commodity_spec_mid = #{commoditySpecMid,jdbcType=CHAR},
+      is_disabled = #{isDisabled,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=INTEGER},
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=INTEGER},
+      update_at = #{updateAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

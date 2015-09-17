@@ -25,7 +25,15 @@ public interface ICommodityService {
 	 */
 	public Long searchCommodityCount(Map<String,Object> paramMap);
 	
-	public boolean updateOrDeleteCommodity(List<ObjectId> ids,String type);
+	public void updateOrDeleteCommodity(List<ObjectId> ids,Integer type);
 	
 	public String insertCommodity(Commodity commodity);
+	/**
+	 * 根据商品id查询商品信息
+	 * @param commodityId
+	 * @return
+	 */
+	public Commodity findCommodityById(String commodityId);
+	
+	public void updateCommoditySpecList(Commodity commodity);
 }

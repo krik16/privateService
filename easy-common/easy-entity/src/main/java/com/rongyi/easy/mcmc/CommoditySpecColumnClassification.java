@@ -16,10 +16,10 @@ public class CommoditySpecColumnClassification implements  Serializable{
 	private static final long serialVersionUID = 9099780604289373639L;
 	@Id
 	private ObjectId id;
+	private String color;//颜色规格项对应的色系
 	private String name;//规格类名
 	private List<ObjectId> parentids;
 	private ObjectId parentid;
-	private int type;//规格项级别
 	public ObjectId getId() {
 		return id;
 	}
@@ -44,11 +44,11 @@ public class CommoditySpecColumnClassification implements  Serializable{
 	public void setParentid(ObjectId parentid) {
 		this.parentid = parentid;
 	}
-	public int getType() {
-		return type;
+	public String getColor() {
+		return color;
 	}
-	public void setType(int type) {
-		this.type = type;
+	public void setColor(String color) {
+		this.color = color;
 	}
 	
 }
