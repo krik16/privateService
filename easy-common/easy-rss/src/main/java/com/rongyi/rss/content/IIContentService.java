@@ -114,4 +114,11 @@ public interface IIContentService {
 	 * @throws Exception
 	 */
 	public Boolean updateContent(ForumContent fc)throws Exception;
+	
+	/**
+	 * 通过查询条件 查询位置下的内容 总数量
+	 * @param fcp
+	 * @return
+	 */
+	public Long findContentCountAllByParam(ForumContentParam fcp);
 }
