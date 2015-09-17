@@ -9,7 +9,7 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
 @Entity("mcmc_commodity")
-public class Commodity implements  Serializable {
+public class Commodity implements  Serializable,Cloneable{
 
 	 /**
 	 * 
@@ -319,5 +319,46 @@ public class Commodity implements  Serializable {
 	public void setStockStatus(int stockStatus) {
 		this.stockStatus = stockStatus;
 	}
-	
+	@Override
+	public Commodity clone() throws CloneNotSupportedException {
+		Commodity commodity=new Commodity();
+		commodity.setCategory(category);
+		commodity.setCategoryIds(categoryIds);
+		commodity.setCode(code);
+		commodity.setCurrentPrice(currentPrice);
+		commodity.setCustomCategory(customCategory);
+		commodity.setDescription(description);
+		commodity.setDistribution(distribution);
+		commodity.setFreight(freight);
+		commodity.setBrandName(brandName);
+		commodity.setBrandId(brandId);
+		commodity.setcPriceMax(cPriceMax);
+		commodity.setcPriceMin(cPriceMin);
+		commodity.setCreateAt(createAt);
+		commodity.setId(id);
+		commodity.setMallId(mallId);
+		commodity.setMallMid(mallMid);
+		commodity.setName(name);
+		commodity.setoPriceMax(oPriceMax);
+		commodity.setoPriceMin(oPriceMin);
+		commodity.setoPriceOfLowestCPrice(oPriceOfLowestCPrice);
+		commodity.setOriginalPrice(originalPrice);
+		commodity.setPicList(picList);
+		commodity.setPostage(postage);
+		commodity.setPrice(price);
+		commodity.setRegisterAt(registerAt);
+		commodity.setShopId(shopId);
+		commodity.setShopMid(shopMid);
+		commodity.setShopNum(shopNum);
+		commodity.setSold(sold);
+		commodity.setSource(source);
+		commodity.setSpecList(specList);
+		commodity.setStatus(status);
+		commodity.setStock(stock);
+		commodity.setStockStatus(stockStatus);
+		commodity.setTerminalType(terminalType);
+		commodity.setUpdate_by(update_by);
+		commodity.setUpdateAt(updateAt);
+		return commodity;
+	}
 }
