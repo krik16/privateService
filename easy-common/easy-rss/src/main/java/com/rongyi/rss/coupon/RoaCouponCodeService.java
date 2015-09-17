@@ -87,4 +87,6 @@ public interface RoaCouponCodeService {
      * @return
      */
     boolean recoverCode(String couponId, int quantity);
+
+    boolean hasEnoughCode(String couponId);
 }
