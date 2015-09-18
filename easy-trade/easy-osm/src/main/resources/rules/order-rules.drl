@@ -1111,7 +1111,7 @@ salience 100
 	when
 		$event: OrderIsCommentEvent($orderNo: orderNo)
 		$order: OrderFormEntity(orderNo == $orderNo, 
-			status == OrderFormStatus.CONFIRM_RECEIPT)
+			(status == OrderFormStatus.CONFIRM_RECEIPT || status == OrderFormStatus.TO_COMMENT || status == OrderFormStatus.CLOSED))
 	then
 		logger.info("[" + drools.getRule().getName() + "] OrderNo=" +
     		$orderNo + " 开始...");
@@ -1119,6 +1119,8 @@ salience 100
     	// 更新评价状态
     	$order.setIsComment(1);
 		orderFormService.updateIsComment($order);
+		
+		sessionUtil.update($order);
 		
 		orderUtil.sendResponse($event, EventErrorCode.SUCCESS, "买家评价成功");
 		logger.debug("[" + drools.getRule().getName() + "] OrderNo=" +
@@ -1213,6 +1215,9 @@ rule "订单关闭"
 			OrderEventEntity entity = orderUtil.createOrderEventEntity(
 				$orderNo, currentStatus, "订单关闭",nextStatus ,
 				OrderEventType.ORDER_CLOSED);
+			
+			logger.info("CommentCloseWaitMax:"+orderConfig.getCommentCloseWaitMax());
+			logger.info("OrderCloseWaitMax:"+orderConfig.getOrderCloseWaitMax());
 			
 			$order.setStatusHoldMs(orderConfig.getCommentCloseWaitMax() - orderConfig.getOrderCloseWaitMax());
 			$order.setNextStatusTime(orderUtil.getDateInFuture(orderConfig.getCommentCloseWaitMax() - orderConfig.getOrderCloseWaitMax()));

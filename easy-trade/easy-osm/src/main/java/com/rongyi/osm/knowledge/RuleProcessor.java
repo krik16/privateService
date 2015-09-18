@@ -94,6 +94,7 @@ public class RuleProcessor extends Thread {
 			conf.setRefundCountMax(conf.getRefundCountMax() * 1000);
 			conf.setSubOrderRefundWaitMax(conf.getSubOrderRefundWaitMax() * 1000);
 			conf.setOfficialJudgementWaitMax(conf.getOfficialJudgementWaitMax() * 1000);
+			conf.setCommentCloseWaitMax(conf.getCommentCloseWaitMax() * 1000);
 			
 			// 设置全局变量
 			kSession.setGlobal("logger", LoggerFactory.getLogger("OSMLogger"));
