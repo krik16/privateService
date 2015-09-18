@@ -3,7 +3,6 @@ package com.rongyi.rss.malllife.roa;
 import java.util.List;
 import java.util.Map;
 
-
 import com.rongyi.easy.malllife.vo.ShopVO;
 
 
@@ -23,5 +22,12 @@ public interface ROACategoriesService {
     
     public List<ShopVO> getSimilarShops(List<String> categoryIds, String mallId);
     
-
+    /**
+     * 获取排序选项列表（优惠/找店）
+     * 
+     * @author ZhengYl
+     * @date 2015年9月18日 下午1:57:22 
+     * @return
+     */
+    public List<Map<String, Object>> getSortByList();
 }
