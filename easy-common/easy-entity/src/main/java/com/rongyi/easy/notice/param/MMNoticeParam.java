@@ -13,7 +13,7 @@ public class MMNoticeParam implements Serializable {
 
     private String jsessionid;//用户登录的sessionId
 
-    private int currentpage;
+    private int currentPage;
 
     private String shopId;//店铺mongoId
 
@@ -36,12 +36,12 @@ public class MMNoticeParam implements Serializable {
         this.shopId = shopId;
     }
 
-    public int getCurrentpage() {
-        return currentpage;
+    public int getCurrentPage() {
+        return currentPage;
     }
 
-    public void setCurrentpage(int currentpage) {
-        this.currentpage = currentpage;
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
     }
 
     public int getPageSize() {
@@ -52,9 +52,9 @@ public class MMNoticeParam implements Serializable {
         this.pageSize = pageSize;
     }
 
-    public MMNoticeParam(String jsessionid, int currentpage, String shopId, int pageSize) {
+    public MMNoticeParam(String jsessionid, int currentPage, String shopId, int pageSize) {
         this.jsessionid = jsessionid;
-        this.currentpage = currentpage;
+        this.currentPage = currentPage;
         this.shopId = shopId;
         this.pageSize = pageSize;
     }
@@ -65,6 +65,6 @@ public class MMNoticeParam implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("jsessionid", jsessionid).append("currentpage", currentpage).append("shopId", shopId).append("pageSize", pageSize).toString();
+        return new ToStringBuilder(this).append("jsessionid", jsessionid).append("currentPage", currentPage).append("shopId", shopId).append("pageSize", pageSize).toString();
     }
 }
