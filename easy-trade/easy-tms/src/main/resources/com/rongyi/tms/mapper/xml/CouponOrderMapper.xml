@@ -56,16 +56,16 @@
 		parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column" />
-		from ry_trade2.trade_order
+		from ry_trade.trade_order
 		where id = #{id,jdbcType=INTEGER}
 	</select>
 	<select id="selectPageList" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column_List" />
-		from ry_trade2.trade_order as trade_order
+		from ry_trade.trade_order as trade_order
 		left join
-		ry_trade2.trade_user_code as trade_user_code on trade_order.id
+		ry_trade.trade_user_code as trade_user_code on trade_order.id
 		=
 		trade_user_code.order_id
 		<where>
@@ -81,9 +81,9 @@
 		resultType="java.lang.Integer">
 		select count(*) from (select
 		trade_order.id
-		from ry_trade2.trade_order
+		from ry_trade.trade_order
 		as trade_order
-		left join ry_trade2.trade_user_code as trade_user_code
+		left join ry_trade.trade_user_code as trade_user_code
 		on trade_order.id
 		= trade_user_code.order_id
 		<where>
