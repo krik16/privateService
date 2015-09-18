@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.rongyi.rss.tradecenter.RoaProxyCouponOrderService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -68,6 +69,9 @@ public class PaymentAbnormalController extends BaseController {
 
 	@Autowired
 	private RoaCouponOrderService roaCouponOrderService;
+
+	@Autowired
+	private RoaProxyCouponOrderService roaProxyCouponOrderService;
 
 	@RequestMapping("/search")
 	public String searchIntegralComm() {
@@ -149,7 +153,8 @@ public class PaymentAbnormalController extends BaseController {
 		try {
 			if (orderType.equals("1")) {
 				// 优惠券订单
-				order = roaCouponOrderService.findOneByOrderNo(params.getOrderNo());
+//				order = roaCouponOrderService.findOneByOrderNo(params.getOrderNo());
+				order = roaProxyCouponOrderService.findOneByOrderNo(params.getOrderNo());
 				if (order != null)
 					// 取订单中的用户Id
 					orderBuyerId = ((CouponOrder) order).getBuyerId();
