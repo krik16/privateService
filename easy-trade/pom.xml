@@ -13,7 +13,7 @@
 		<module>easy-tms</module>
 		<module>easy-virtual-account</module>
 		<module>easy-anti-cheat</module>
-		<module>easy-statement</module>
+		<module>easy-settle</module>
 		
 	</modules>
 	<properties>
