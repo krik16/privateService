@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rongyi.core.bean.ResponseData;
-import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.easy.statement.entity.StatementConfig;
 import com.rongyi.statement.constants.ConstantEnum;
 import com.rongyi.statement.service.StatementConfigService;
@@ -45,7 +44,6 @@ public class StatementConfigController {
 	 * @Author:  柯军
 	 * @datetime:2015年9月17日下午2:55:37
 	 **/
-	@SuppressWarnings("unchecked")
 	@RequestMapping("/list")
 	@ResponseBody
 	public ResponseData getPageList(HttpServletRequest request,@RequestBody Map<String, Object> map){
