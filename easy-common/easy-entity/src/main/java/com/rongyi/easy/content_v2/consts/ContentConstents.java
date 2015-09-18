@@ -22,7 +22,7 @@ public interface ContentConstents {
          */
         int BRAND = 3;
         /**
-         * 商铺
+         * 商品
          */
         int PRODUCT = 4;
         /**
@@ -30,32 +30,24 @@ public interface ContentConstents {
          */
         int VOUCHER = 5;
         /**
-         * 活动
+         * 内链活动
          */
-        int ACTIVITY = 6;
+        int INNER_LINK = 6;
         /**
          * 文章
          */
         int ARTICLE = 7;
         /**
-         * 同城
-         */
-        int SAME_CITY = 8;
-        /**
          * 优惠
          */
-        int SPECIAL_OFFER = 9;
+        int ACTIVITY = 8;
         /**
-         * 外链
+         * 外链活动
          */
-        int OUTER_LINK = 10;
-        /**
-         * 内链
-         */
-        int INNER_LINK = 11;
+        int OUTER_LINK = 9;
         /**
          * 抵扣券
          */
-        int REBATE = 12;
+        int REBATE = 10;
     }
 }
