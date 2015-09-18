@@ -1111,7 +1111,7 @@ salience 100
 	when
 		$event: OrderIsCommentEvent($orderNo: orderNo)
 		$order: OrderFormEntity(orderNo == $orderNo, 
-			status == OrderFormStatus.CONFIRM_RECEIPT)
+			(status == OrderFormStatus.CONFIRM_RECEIPT || status == OrderFormStatus.TO_COMMENT || status == OrderFormStatus.CLOSED))
 	then
 		logger.info("[" + drools.getRule().getName() + "] OrderNo=" +
     		$orderNo + " 开始...");
