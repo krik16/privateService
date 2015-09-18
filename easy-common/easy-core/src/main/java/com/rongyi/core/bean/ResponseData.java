@@ -4,6 +4,8 @@ import net.sf.json.JSONObject;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
+import java.io.Serializable;
+
 /*
 使用示例说明：
 {
@@ -119,7 +121,7 @@ public class ResponseData implements java.io.Serializable {
         this.result = result;
     }
 
-    public static class Result<T> {
+    public static class Result<T> implements Serializable {
         private Page page;
         private T data;
 
@@ -152,7 +154,7 @@ public class ResponseData implements java.io.Serializable {
         }
     }
 
-    public static class Meta {
+    public static class Meta implements Serializable {
         private int errno; //错误码
         private String msg;  //提示信息
 
@@ -182,7 +184,7 @@ public class ResponseData implements java.io.Serializable {
         }
     }
 
-    public static class Page {
+    public static class Page implements Serializable {
         private Integer currentPage;//当前页：统一从1开始
         private Integer pageSize = 10; //每页行数
         private Integer totalCount; //总行数

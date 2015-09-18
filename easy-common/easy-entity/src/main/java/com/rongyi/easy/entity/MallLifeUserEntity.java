@@ -70,6 +70,16 @@ public class MallLifeUserEntity implements Serializable {
 	@Property("last_sign_in_ip")
 	private String   lastSignInIp;//最新登录Ip地址
 
+	@Property("shar_code")
+	private String sharCode;//摩店邀请注册码
+
+	public String getSharCode() {
+		return sharCode;
+	}
+
+	public void setSharCode(String sharCode) {
+		this.sharCode = sharCode;
+	}
 
 	public ObjectId getId() {
 		return id;

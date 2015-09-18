@@ -3,12 +3,14 @@ package com.rongyi.easy.notice.param;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import java.io.Serializable;
+
 /**
  * Descriptions:
  * Created by 袁波
  * Created at 2015/9/16 18:19.
  */
-public class CheckParam {
+public class CheckParam implements Serializable {
     private Integer noticeId;
 
 
@@ -24,6 +26,13 @@ public class CheckParam {
 
     public CheckParam() {
 
+    }
+
+    public CheckParam(Integer noticeId, String jsession, Integer status, String reason) {
+        this.noticeId = noticeId;
+        this.jsession = jsession;
+        this.status = status;
+        this.reason = reason;
     }
 
     public String getJsession() {
@@ -61,12 +70,5 @@ public class CheckParam {
     @Override
     public String toString() {
         return new ToStringBuilder(this).append("noticeId", noticeId).append("jsession", jsession).append("status", status).append("reason", reason).toString();
-    }
-
-    public CheckParam(Integer noticeId, String jsession, Integer status, String reason) {
-        this.noticeId = noticeId;
-        this.jsession = jsession;
-        this.status = status;
-        this.reason = reason;
     }
 }

@@ -22,13 +22,13 @@ public class CommoditySpec implements  Serializable {
 	private String originalPrice;
 	private String currentPrice;
 	private List<ObjectId> columnIds;
-	private List<String> columnValues;
+	private List<String> columnValues;//规格属性
+	private List<String> columnNotes;//规格备注
 	private String extendColums;
 	private Date createAt;
 	private Date updateAt;
-	private String code;//商品编码
-	private String systemNumber;//系统编号
-	private String shopId;//对应商品所属店铺
+	private String updateBy;
+	private String pictureUrl;//规格图片
 	public List<ObjectId> getColumnIds() {
 		return columnIds;
 	}
@@ -83,23 +83,63 @@ public class CommoditySpec implements  Serializable {
 	public void setColumnValues(List<String> columnValues) {
 		this.columnValues = columnValues;
 	}
-	public String getCode() {
-		return code;
+	public String getUpdateBy() {
+		return updateBy;
 	}
-	public void setCode(String code) {
-		this.code = code;
+	public void setUpdateBy(String updateBy) {
+		this.updateBy = updateBy;
 	}
-	public String getSystemNumber() {
-		return systemNumber;
+	
+	public String getPictureUrl() {
+		return pictureUrl;
 	}
-	public void setSystemNumber(String systemNumber) {
-		this.systemNumber = systemNumber;
+	public void setPictureUrl(String pictureUrl) {
+		this.pictureUrl = pictureUrl;
 	}
-	public String getShopId() {
-		return shopId;
+	public List<String> getColumnNotes() {
+		return columnNotes;
 	}
-	public void setShopId(String shopId) {
-		this.shopId = shopId;
+	public void setColumnNotes(List<String> columnNotes) {
+		this.columnNotes = columnNotes;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((columnIds == null) ? 0 : columnIds.hashCode());
+		result = prime * result
+				+ ((columnNotes == null) ? 0 : columnNotes.hashCode());
+		result = prime * result
+				+ ((columnValues == null) ? 0 : columnValues.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CommoditySpec other = (CommoditySpec) obj;
+		if (columnIds == null) {
+			if (other.columnIds != null)
+				return false;
+		} else if (!columnIds.equals(other.columnIds))
+			return false;
+		if (columnNotes == null) {
+			if (other.columnNotes != null)
+				return false;
+		} else if (!columnNotes.equals(other.columnNotes))
+			return false;
+		if (columnValues == null) {
+			if (other.columnValues != null)
+				return false;
+		} else if (!columnValues.equals(other.columnValues))
+			return false;
+		return true;
+	}
+	
 	
 }

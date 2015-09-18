@@ -12,8 +12,7 @@ import java.util.Date;
 public class ForumContentListVo implements Serializable{
 	/**内容id*/
 	private Integer id;
-	/**模版id*/
-	private Integer modelId;
+	
 	/**位置id*/
 	private Integer positionId;
 	/**省份名称*/
@@ -43,13 +42,7 @@ public class ForumContentListVo implements Serializable{
 		this.id = id;
 	}
 
-	public Integer getModelId() {
-		return modelId;
-	}
-
-	public void setModelId(Integer modelId) {
-		this.modelId = modelId;
-	}
+	
 
 	public Integer getPositionId() {
 		return positionId;
