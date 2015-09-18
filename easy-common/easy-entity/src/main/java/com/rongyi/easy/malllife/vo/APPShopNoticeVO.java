@@ -20,6 +20,7 @@ public class APPShopNoticeVO implements Serializable{
 	private String userIm;//创建人IM账号
 	private String shopMId;//店铺mongoId
 	private String userId;//创建人id
+	private Integer status;//公告状态
 	public Integer getId() {
 		return id;
 	}
@@ -79,6 +80,12 @@ public class APPShopNoticeVO implements Serializable{
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 	
 }
