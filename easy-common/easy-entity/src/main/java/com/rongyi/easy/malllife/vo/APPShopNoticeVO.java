@@ -21,6 +21,7 @@ public class APPShopNoticeVO implements Serializable{
 	private String shopMId;//店铺mongoId
 	private String userId;//创建人id
 	private Integer status;//公告状态
+	private Boolean isParise;//true 是  false 否
 	public Integer getId() {
 		return id;
 	}
@@ -86,6 +87,12 @@ public class APPShopNoticeVO implements Serializable{
 	}
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+	public Boolean getIsParise() {
+		return isParise;
+	}
+	public void setIsParise(Boolean isParise) {
+		this.isParise = isParise;
 	}
 	
 }
