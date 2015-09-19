@@ -16,5 +16,5 @@ public interface IUserService {
 	 * @return
 	 * @throws Exception
 	 */
-	public Map getSessionUserFromRedis(String ryst) throws Exception;
+	public Map getSessionUserFromRedis(String ryst,boolean bConvertToObj) throws Exception;
 }
