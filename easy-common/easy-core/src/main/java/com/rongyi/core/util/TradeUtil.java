@@ -1,6 +1,8 @@
 package com.rongyi.core.util;
 
 
+import com.rongyi.core.constant.Constants;
+import com.rongyi.core.constant.CouponConst;
 import org.springframework.util.StringUtils;
 
 /**
@@ -9,7 +11,7 @@ import org.springframework.util.StringUtils;
 public class TradeUtil {
 
     public static boolean isTradeUserCode(String code) {
-        return !StringUtils.isEmpty(code) && code.startsWith("02");
+        return !StringUtils.isEmpty(code) && code.startsWith(CouponConst.COUPON_TYPE.COUPON);
 
     }
 }

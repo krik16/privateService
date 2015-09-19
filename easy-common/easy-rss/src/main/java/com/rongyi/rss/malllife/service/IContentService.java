@@ -3,6 +3,7 @@ package com.rongyi.rss.malllife.service;
 
 import com.rongyi.easy.malllife.domain.AppReference2DO;
 import com.rongyi.easy.malllife.domain.AppReferenceDO;
+import com.rongyi.easy.malllife.domain.ContentDDO;
 import com.rongyi.easy.malllife.domain.ContentDO;
 import com.rongyi.easy.malllife.pojo.ContentPojo;
 import com.rongyi.easy.malllife.vo.*;
@@ -281,4 +282,6 @@ public interface IContentService {
     public Integer updateParticipantsNumber(int participantsNumber, int id)throws Exception;
   
     public Integer init();
+    
+    public ContentDDO getFullById(Integer id);
 }

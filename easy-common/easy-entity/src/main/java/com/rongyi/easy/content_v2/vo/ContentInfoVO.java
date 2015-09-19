@@ -2,6 +2,8 @@ package com.rongyi.easy.content_v2.vo;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.rongyi.core.common.util.DateTool;
 /**
  * 返回给页面的内容详情
  * @author lijing
@@ -138,16 +140,16 @@ public class ContentInfoVO implements Serializable{
 		this.shopNames = shopNames;
 	}
 
-	public Date getPublishBeginAt() {
-		return publishBeginAt;
+	public String getPublishBeginAt() {
+		return DateTool.date2String(publishBeginAt, DateTool.FORMAT_DATETIME2);
 	}
 
 	public void setPublishBeginAt(Date publishBeginAt) {
 		this.publishBeginAt = publishBeginAt;
 	}
 
-	public Date getPublishEndAt() {
-		return publishEndAt;
+	public String getPublishEndAt() {
+		return DateTool.date2String(publishEndAt, DateTool.FORMAT_DATETIME2);
 	}
 
 	public void setPublishEndAt(Date publishEndAt) {
@@ -162,8 +164,8 @@ public class ContentInfoVO implements Serializable{
 		this.createUser = createUser;
 	}
 
-	public Date getCreateAt() {
-		return createAt;
+	public String getCreateAt() {
+		return DateTool.date2String(createAt, DateTool.FORMAT_DATETIME2);
 	}
 
 	public void setCreateAt(Date createAt) {
@@ -178,8 +180,8 @@ public class ContentInfoVO implements Serializable{
 		this.updateUser = updateUser;
 	}
 
-	public Date getUpdateAt() {
-		return updateAt;
+	public String getUpdateAt() {
+		return DateTool.date2String(updateAt, DateTool.FORMAT_DATETIME2);
 	}
 
 	public void setUpdateAt(Date updateAt) {
@@ -192,6 +194,19 @@ public class ContentInfoVO implements Serializable{
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	@Override
+	public String toString() {
+		return "ContentInfoVO [id=" + id + ", provName=" + provName
+				+ ", cityName=" + cityName + ", picUrls=" + picUrls
+				+ ", title=" + title + ", subtitle=" + subtitle
+				+ ", modelName=" + modelName + ", type=" + type + ", typeVal="
+				+ typeVal + ", shopIds=" + shopIds + ", shopNames=" + shopNames
+				+ ", publishBeginAt=" + publishBeginAt + ", publishEndAt="
+				+ publishEndAt + ", createUser=" + createUser + ", createAt="
+				+ createAt + ", updateUser=" + updateUser + ", updateAt="
+				+ updateAt + ", status=" + status + "]";
 	}
     
     

@@ -33,7 +33,7 @@ public interface ROAShopService {
      * @return
      * @throws Exception
      */
-    public ShopVO getShopsVOById(String id)throws Exception;
+    public ShopVO getShopVOById(String id)throws Exception;
     
 	/**
      * 通过分公司id查店铺
@@ -56,4 +56,4 @@ public interface ROAShopService {
      * @param ids
      * @return
      */
-    public List<ShopVO> getShopsByIds(List<ObjectId> ids);}
+    public List<ShopVO> getShopsByIds(List<ObjectId> ids) throws Exception;}

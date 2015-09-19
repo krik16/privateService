@@ -34,4 +34,12 @@ public interface ROAMallService {
      * @return
      */
     public List<MallEntity> getMallEntitysByGroupId(String groupId) throws Exception;
+
+    /**
+     * 查询商场信息
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    public MallEntity getMallEntityById(String id) throws Exception;
 }
