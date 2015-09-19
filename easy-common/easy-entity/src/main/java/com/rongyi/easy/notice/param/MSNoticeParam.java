@@ -22,6 +22,16 @@ public class MSNoticeParam implements Serializable {
      */
     private Integer pageSize;
 
+    public MSNoticeParam() {
+    }
+
+    public MSNoticeParam(String shopId, Integer status, Integer currentPage, Integer pageSize) {
+        this.shopId = shopId;
+        this.status = status;
+        this.currentPage = currentPage;
+        this.pageSize = pageSize;
+    }
+
     public String getShopId() {
         return shopId;
     }
@@ -45,14 +55,6 @@ public class MSNoticeParam implements Serializable {
     public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
     }
-    public MSNoticeParam() {
-    }
-    public MSNoticeParam(String shopId, Integer status, Integer currentPage, Integer pageSize) {
-        this.shopId = shopId;
-        this.status = status;
-        this.currentPage = currentPage;
-        this.pageSize = pageSize;
-    }
 
     @Override
     public String toString() {
@@ -60,7 +62,7 @@ public class MSNoticeParam implements Serializable {
     }
 
     public Integer getCurrentPage() {
-        return currentPage;
+        return currentPage == null ? 1 : currentPage;
     }
 
     public void setCurrentPage(Integer currentPage) {

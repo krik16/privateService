@@ -3,6 +3,7 @@ package com.rongyi.rss.malllife.roa;
 
 import com.rongyi.easy.malllife.domain.AppReference2DO;
 import com.rongyi.easy.malllife.domain.AppReferenceDO;
+import com.rongyi.easy.malllife.domain.ContentDDO;
 import com.rongyi.easy.malllife.domain.ContentDO;
 import com.rongyi.easy.malllife.pojo.ContentPojo;
 import com.rongyi.easy.malllife.vo.*;
@@ -285,4 +286,5 @@ public interface ROAContentService {
     
     public Integer init();
 
+    public ContentDDO getFullById(Integer id);
 }

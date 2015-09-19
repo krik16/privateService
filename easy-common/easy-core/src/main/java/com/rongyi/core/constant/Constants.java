@@ -659,4 +659,14 @@ public interface Constants {
     interface Errno{
     	int success=0;
     }
+    interface NoticeStatus{
+    	/** 未通过 */
+    	Integer NOPASSED = 0;
+    	/** 审核中 */
+    	Integer REVIEWING = 1;
+    	/** 发布中 */
+    	Integer RELEASEING = 2;
+    	/** 已过期 */
+    	Integer OVERDUE = 3;
+    }
 }

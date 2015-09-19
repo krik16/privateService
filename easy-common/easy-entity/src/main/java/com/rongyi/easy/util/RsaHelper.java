@@ -45,6 +45,6 @@ public class RsaHelper {
             }  
             stringBuilder.append(hv);  
         }  
-//        System.out.println(stringBuilder.toString());  
+        System.out.println(stringBuilder.toString());
     }
 }

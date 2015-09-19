@@ -25,6 +25,10 @@ public class ActivitySearchParam implements Serializable{
 	private String holder_id;       //优惠券持有者id
 	private boolean couponRequired; //是否只看优惠券
 	private List<String> shopList;    //终端机参数 店铺id List
+	
+	private String mallId; // mall Id for 终端屏
+	private String startLetter;  // 首字母 for 终端屏
+	
 	public String getKeyword() {
 		return keyword;
 	}
@@ -115,5 +119,30 @@ public class ActivitySearchParam implements Serializable{
 	public void setShopList(List<String> shopList) {
 		this.shopList = shopList;
 	}
+	/**
+	 * @return the mallId
+	 */
+	public String getMallId() {
+		return mallId;
+	}
+	/**
+	 * @param mallId the mallId to set
+	 */
+	public void setMallId(String mallId) {
+		this.mallId = mallId;
+	}
+	/**
+	 * @return the startLetter
+	 */
+	public String getStartLetter() {
+		return startLetter;
+	}
+	/**
+	 * @param startLetter the startLetter to set
+	 */
+	public void setStartLetter(String startLetter) {
+		this.startLetter = startLetter;
+	}
 
+	
 }

@@ -2,13 +2,10 @@ package com.rongyi.rss.notice;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.notice.entity.NoticePraisedEntity;
-import com.rongyi.easy.notice.param.CNoticeParam;
-import com.rongyi.easy.notice.param.CheckParam;
-import com.rongyi.easy.notice.param.MMNoticeParam;
-import com.rongyi.easy.notice.param.MSNoticeParam;
+import com.rongyi.easy.notice.param.*;
 import com.rongyi.easy.notice.vo.MMNoticeVO;
-import com.rongyi.easy.notice.vo.MSNoticeVO;
 import com.rongyi.easy.notice.vo.NoticeOVo;
+
 import java.util.List;
 /***
  * 消息管理的店铺公告的
@@ -110,4 +107,12 @@ public interface ROANoticeService {
      * @return
      */
     public Boolean checkNotice(CheckParam checkParam,String userId);
+
+    /**
+     * 后台查询店铺公告列表接口
+     *
+     * @param param
+     * @return
+     */
+    public PagingVO<MMNoticeVO> findNotices(NoticeQueryParam param);
 }

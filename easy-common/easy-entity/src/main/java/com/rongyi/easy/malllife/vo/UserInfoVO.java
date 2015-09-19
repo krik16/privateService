@@ -45,6 +45,9 @@ public class UserInfoVO implements Serializable {
 	private String channel;// 容易逛(MALLLIFE),其他第三方全民财富（QMCAIFU）
 
 
+	private String sharCode;//摩店邀请注册码
+
+
 	public String getPushChanelId() {
 		return pushChanelId;
 	}
@@ -237,4 +240,11 @@ public class UserInfoVO implements Serializable {
 		this.collectCommoditys = collectCommoditys;
 	}
 
+	public String getSharCode() {
+		return sharCode;
+	}
+
+	public void setSharCode(String sharCode) {
+		this.sharCode = sharCode;
+	}
 }

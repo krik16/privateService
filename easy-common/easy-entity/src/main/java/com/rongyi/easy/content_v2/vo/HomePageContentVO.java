@@ -3,14 +3,19 @@ package com.rongyi.easy.content_v2.vo;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * 容易逛首页-内容
  * Created by Breggor on 2015/9/10.
  */
-public class HomePageContentVO {
-    private List<BannerVO> banner;
+public class HomePageContentVO implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private List<BannerVO> banner;
     private QuickEntryVO quickEntry;
     private List<HotHeadlineVO> hotHeadline;
     private StarShopVO starShop;

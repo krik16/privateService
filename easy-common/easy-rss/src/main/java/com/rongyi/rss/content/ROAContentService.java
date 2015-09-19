@@ -114,4 +114,18 @@ public interface ROAContentService {
 	 * @throws Exception
 	 */
 	public Boolean updateContent(ForumContent fc)throws Exception;
+	
+	/**
+	 * 通过查询条件 查询位置下的内容 总数量
+	 * @param fcp
+	 * @return
+	 */
+	public Long findContentCountAllByParam(ForumContentParam fcp);
+
+	/**
+	 * 判断在同一位置、同一区域、同一发布时间段内是否有内容
+	 * @param fc
+	 * @return
+	 */
+	boolean hasContent(ForumContent fc);
 }

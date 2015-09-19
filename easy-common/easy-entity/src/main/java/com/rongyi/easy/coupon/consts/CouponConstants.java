@@ -1,4 +1,4 @@
-package com.rongyi.core.constant;
+package com.rongyi.easy.coupon.consts;
 
 import java.util.Arrays;
 import java.util.List;
@@ -7,7 +7,7 @@ import java.util.List;
  * 卡券状态常量
  * Created by Breggor on 2015/6/24.
  */
-public interface CouponConst {
+public interface CouponConstants {
 
     /**
      * 使用状态: 未使用[1],已使用[2],已过期[3],退款中[4],已退款:[5] 最后2项冗余优惠券订单状态
@@ -68,6 +68,5 @@ public interface CouponConst {
         String COUPON = "02";//代金券
         String CASHCOUPON = "03";//红包
     }
-
 
 }

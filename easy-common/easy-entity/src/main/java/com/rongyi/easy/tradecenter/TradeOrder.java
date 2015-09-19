@@ -143,7 +143,7 @@ public class TradeOrder implements Serializable {
         }
         if (this.score > 0)
         {
-            discountMap.put("score", new BigDecimal(this.score).divide(rate, 2, BigDecimal.ROUND_HALF_UP).doubleValue());
+            discountMap.put("score", this.score);
         }
         if (this.scoreDiscount > 0)
         {
