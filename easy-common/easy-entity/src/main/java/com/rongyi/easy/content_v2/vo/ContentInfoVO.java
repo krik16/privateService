@@ -23,7 +23,7 @@ public class ContentInfoVO implements Serializable{
     private String cityId;
     /**存放图片的全路径*/
     
-    private String picUrls;
+    private String picName;
     /**内容管理的详情的标题*/
     private String title;
     /**活动的子标题*/
@@ -78,13 +78,7 @@ public class ContentInfoVO implements Serializable{
 		this.cityName = cityName;
 	}
 
-	public String getPicUrls() {
-		return picUrls;
-	}
-
-	public void setPicUrls(String picUrls) {
-		this.picUrls = picUrls;
-	}
+	
 
 	public String getTitle() {
 		return title;
@@ -198,18 +192,7 @@ public class ContentInfoVO implements Serializable{
 		this.status = status;
 	}
 
-	@Override
-	public String toString() {
-		return "ContentInfoVO [id=" + id + ", provName=" + provName
-				+ ", cityName=" + cityName + ", picUrls=" + picUrls
-				+ ", title=" + title + ", subtitle=" + subtitle
-				+ ", modelName=" + modelName + ", type=" + type + ", typeVal="
-				+ typeVal + ", shopIds=" + shopIds + ", shopNames=" + shopNames
-				+ ", publishBeginAt=" + publishBeginAt + ", publishEndAt="
-				+ publishEndAt + ", createUser=" + createUser + ", createAt="
-				+ createAt + ", updateUser=" + updateUser + ", updateAt="
-				+ updateAt + ", status=" + status + "]";
-	}
+	
 
 	public String getProvId() {
 		return provId;
@@ -225,6 +208,28 @@ public class ContentInfoVO implements Serializable{
 
 	public void setCityId(String cityId) {
 		this.cityId = cityId;
+	}
+
+	public String getPicName() {
+		return picName;
+	}
+
+	public void setPicName(String picName) {
+		this.picName = picName;
+	}
+
+	@Override
+	public String toString() {
+		return "ContentInfoVO [id=" + id + ", provName=" + provName
+				+ ", provId=" + provId + ", cityName=" + cityName + ", cityId="
+				+ cityId + ", picName=" + picName + ", title=" + title
+				+ ", subtitle=" + subtitle + ", modelName=" + modelName
+				+ ", type=" + type + ", typeVal=" + typeVal + ", shopIds="
+				+ shopIds + ", shopNames=" + shopNames + ", publishBeginAt="
+				+ publishBeginAt + ", publishEndAt=" + publishEndAt
+				+ ", createUser=" + createUser + ", createAt=" + createAt
+				+ ", updateUser=" + updateUser + ", updateAt=" + updateAt
+				+ ", status=" + status + "]";
 	}
     
     
