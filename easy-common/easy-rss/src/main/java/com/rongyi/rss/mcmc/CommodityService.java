@@ -76,4 +76,6 @@ public interface CommodityService {
 	public List<String> listCommoditySpecColumns(String commodityId);
 
 	public List<String[]> listSpecColumnValues(String commodityId);
+	
+	public Commodity selectById(String id);
 }
