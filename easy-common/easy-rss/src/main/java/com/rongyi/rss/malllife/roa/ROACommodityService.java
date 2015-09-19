@@ -17,6 +17,7 @@ import org.bson.types.ObjectId;
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.easy.malllife.vo.CommodityBuyerVO;
 import com.rongyi.easy.malllife.vo.ShopCommodityVO;
+import com.rongyi.easy.mcmc.Commodity;
 import com.rongyi.easy.mcmc.vo.CommodityPageBuyerVO;
 import com.rongyi.easy.mcmc.vo.CommoditySpecVO;
 import com.rongyi.easy.mcmc.vo.CommodityVO;
@@ -90,4 +91,6 @@ public interface ROACommodityService {
 	public List<String> listCommoditySpecColumns(String commodityId);
 
 	public List<String[]> listSpecColumnValues(String commodityId);
+	
+	public Commodity selectById(String id);
 }
