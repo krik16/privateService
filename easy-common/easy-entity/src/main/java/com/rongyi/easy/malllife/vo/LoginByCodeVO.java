@@ -21,6 +21,13 @@ public class LoginByCodeVO implements Serializable{
     private String       pushChanelId;//百度推送服务ID app传给后台
     private String      lastSignInIp;//最新登录Ip地址
 
+    public String getShareCode() {
+        return shareCode;
+    }
+
+    public void setShareCode(String shareCode) {
+        this.shareCode = shareCode;
+    }
 
     public String getPhone() {
         return phone;

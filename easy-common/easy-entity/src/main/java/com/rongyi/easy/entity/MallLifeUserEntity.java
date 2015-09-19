@@ -258,4 +258,12 @@ public class MallLifeUserEntity implements Serializable {
 	public void setLastSignInIp(String lastSignInIp) {
 		this.lastSignInIp = lastSignInIp;
 	}
+
+	public String getShareCode() {
+		return shareCode;
+	}
+
+	public void setShareCode(String shareCode) {
+		this.shareCode = shareCode;
+	}
 }

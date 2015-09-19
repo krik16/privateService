@@ -44,6 +44,15 @@ public class UserInfoVO implements Serializable {
 	private String      lastSignInIp;//最新登录Ip地址
 	private String channel;// 容易逛(MALLLIFE),其他第三方全民财富（QMCAIFU）
 	private String shareCode;//摩店邀请注册码
+
+	public String getShareCode() {
+		return shareCode;
+	}
+
+	public void setShareCode(String shareCode) {
+		this.shareCode = shareCode;
+	}
+
 	public String getPushChanelId() {
 		return pushChanelId;
 	}
