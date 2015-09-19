@@ -121,4 +121,11 @@ public interface ROAContentService {
 	 * @return
 	 */
 	public Long findContentCountAllByParam(ForumContentParam fcp);
+
+	/**
+	 * 判断在同一位置、同一区域、同一发布时间段内是否有内容
+	 * @param fc
+	 * @return
+	 */
+	boolean hasContent(ForumContent fc);
 }
