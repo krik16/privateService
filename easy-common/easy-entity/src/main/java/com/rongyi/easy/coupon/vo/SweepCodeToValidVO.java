@@ -28,8 +28,15 @@ public class SweepCodeToValidVO implements Serializable{
 	private Integer codeNum;//验码数量
 	private String phone;//用户名
 	private String errorNo;
+	private String title;//券码名称
 	
 	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public String getErrorNo() {
 		return errorNo;
 	}
