@@ -1,10 +1,13 @@
 package com.rongyi.easy.ryoms.entity;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.Date;
 
-public class RyUserInfo {
-    private Integer id;
+public class RyUserInfo implements Serializable{
+	private static final long serialVersionUID = -1116795683637742868L;
+
+	private Integer id;
 
     private String username;
 
