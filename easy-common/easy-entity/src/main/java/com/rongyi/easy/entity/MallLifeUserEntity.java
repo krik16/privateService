@@ -170,7 +170,6 @@ public class MallLifeUserEntity implements Serializable {
 	}
 
 
-
 	public String getChannel() {
 		return channel;
 	}
