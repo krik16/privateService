@@ -11,6 +11,7 @@
     <result column="user_nick_name" property="userNickName" jdbcType="VARCHAR" />
     <result column="user_status" property="userStatus" jdbcType="INTEGER" />
     <result column="account_id" property="accountId" jdbcType="INTEGER" />
+    <result column="is_cooperation" property="isCooperation" jdbcType="INTEGER" />
     <result column="create_by" property="createBy" jdbcType="INTEGER" />
     <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
     <result column="update_by" property="updateBy" jdbcType="INTEGER" />
@@ -20,6 +21,7 @@
     <result column="device_uuid" property="deviceUuid" jdbcType="VARCHAR" />
     <result column="card_id" property="cardId" jdbcType="VARCHAR" />
     <result column="shar_code" property="sharCode" jdbcType="VARCHAR" />
+
 
   </resultMap>
   <sql id="Example_Where_Clause" >
