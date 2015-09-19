@@ -245,11 +245,5 @@ public class UserInfoVO implements Serializable {
 		this.collectCommoditys = collectCommoditys;
 	}
 
-	public String getSharCode() {
-		return shareCode;
-	}
 
-	public void setSharCode(String sharCode) {
-		this.shareCode = sharCode;
-	}
 }

@@ -73,13 +73,8 @@ public class MallLifeUserEntity implements Serializable {
 	@Property("share_code")
 	private String shareCode;//摩店邀请注册码
 
-	public String getSharCode() {
-		return shareCode;
-	}
-
-	public void setSharCode(String sharCode) {
-		this.shareCode = sharCode;
-	}
+	@Property("regist_in_ip")
+	private String   registInIp;//注册IP
 
 	public ObjectId getId() {
 		return id;
@@ -265,5 +260,13 @@ public class MallLifeUserEntity implements Serializable {
 
 	public void setShareCode(String shareCode) {
 		this.shareCode = shareCode;
+	}
+
+	public String getRegistInIp() {
+		return registInIp;
+	}
+
+	public void setRegistInIp(String registInIp) {
+		this.registInIp = registInIp;
 	}
 }

@@ -47,13 +47,8 @@ public class MalllifeUser implements Serializable {
 
     private String shareCode;//摩店邀请注册码
 
-    public String getSharCode() {
-        return shareCode;
-    }
+    private String registInIp;//注册IP
 
-    public void setSharCode(String sharCode) {
-        this.shareCode = sharCode;
-    }
 
     public String getUserId() {
         return userId;
@@ -166,5 +161,13 @@ public class MalllifeUser implements Serializable {
 
     public void setShareCode(String shareCode) {
         this.shareCode = shareCode;
+    }
+
+    public String getRegistInIp() {
+        return registInIp;
+    }
+
+    public void setRegistInIp(String registInIp) {
+        this.registInIp = registInIp;
     }
 }
