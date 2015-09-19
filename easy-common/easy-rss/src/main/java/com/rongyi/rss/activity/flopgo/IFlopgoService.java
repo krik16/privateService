@@ -1,11 +1,11 @@
-package com.rongyi.rss.roa;
-
-import java.util.List;
-import java.util.Map;
+package com.rongyi.rss.activity.flopgo;
 
 import com.rongyi.easy.flopgo.entity.FlopPrizeDEntity;
 import com.rongyi.easy.flopgo.entity.FlopgoActivity;
 import com.rongyi.easy.flopgo.vo.FlopSPrizeDailyVO;
+
+import java.util.List;
+import java.util.Map;
 
 public interface IFlopgoService {
 	/**

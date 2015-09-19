@@ -1,4 +1,4 @@
-package com.rongyi.rss.flopgo;
+package com.rongyi.rss.activity.flopgo;
 
 import com.rongyi.easy.flopgo.vo.FlopUserTimeVO;
 

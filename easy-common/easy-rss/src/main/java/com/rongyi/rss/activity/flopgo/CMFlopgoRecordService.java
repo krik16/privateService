@@ -1,10 +1,9 @@
-package com.rongyi.rss.flopgo;
+package com.rongyi.rss.activity.flopgo;
 
 import java.util.List;
 import java.util.Map;
 
 import com.rongyi.easy.flopgo.entity.FlopgoRecordEntity;
-import com.rongyi.easy.flopgo.vo.FlopRecordVo;
 
 public interface CMFlopgoRecordService {
 	/**
