@@ -18,9 +18,11 @@ public class ContentInfoVO implements Serializable{
     /**身份的名字*/
     private String provName;
     /**城市的id*/
-   
+   private String provId;
     private String cityName;
+    private String cityId;
     /**存放图片的全路径*/
+    
     private String picUrls;
     /**内容管理的详情的标题*/
     private String title;
@@ -207,6 +209,22 @@ public class ContentInfoVO implements Serializable{
 				+ publishEndAt + ", createUser=" + createUser + ", createAt="
 				+ createAt + ", updateUser=" + updateUser + ", updateAt="
 				+ updateAt + ", status=" + status + "]";
+	}
+
+	public String getProvId() {
+		return provId;
+	}
+
+	public void setProvId(String provId) {
+		this.provId = provId;
+	}
+
+	public String getCityId() {
+		return cityId;
+	}
+
+	public void setCityId(String cityId) {
+		this.cityId = cityId;
 	}
     
     
