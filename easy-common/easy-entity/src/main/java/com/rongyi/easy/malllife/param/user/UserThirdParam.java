@@ -22,6 +22,8 @@ public class UserThirdParam extends MalllifeBaseParam {
 
   private String channel; //请求渠道
 
+  private String couponId;//红包Id 优惠卷Id
+
 
     public String getData() {
         return data;
@@ -53,5 +55,13 @@ public class UserThirdParam extends MalllifeBaseParam {
 
     public void setChannel(String channel) {
         this.channel = channel;
+    }
+
+    public String getCouponId() {
+        return couponId;
+    }
+
+    public void setCouponId(String couponId) {
+        this.couponId = couponId;
     }
 }
