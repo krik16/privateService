@@ -130,11 +130,15 @@ public class OrderUtil {
 	 * @return
 	 */
 	public boolean setCouponStatus(OrderDetailFormEntity[] orderDetailList, int status, String guideId) {
+		logger.info("setCouponStatus:status={},guideId={}",status,guideId);
 		boolean result = true;
 		try {
 			for (OrderDetailFormEntity orderDetail : orderDetailList) {
+				logger.info("setCouponStatus:orderDetail={}",orderDetail.toString());
+				
 				String couponId = orderDetail.getCouponId();
 				if (couponId == null || couponId.isEmpty()) {
+					logger.info("couponId is null");
 					continue;
 				} else {
 					// 已领用 ->> 已使用
@@ -155,8 +159,11 @@ public class OrderUtil {
 						break;
 					}
 
+					logger.info("start to change status");
 					result = couponStatusService.setCouponStatusByCode(couponId, status, orderDetail.getOrderNo(),
 							Integer.parseInt(guideId));
+					logger.info("start to change status result={}",result);
+					
 					if (!result)
 						break;
 				}
