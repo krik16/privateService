@@ -198,6 +198,10 @@ public interface Constants {
          * 使用哪个短信通道,1:云短信通道 ，2：百悟短信通道 3：建周
          */
         String MESSAGE_CHANNEL = "message_channel";
+        /**
+         * 云通讯回调地址
+         */
+        String YTX_CALLBACK_URL="ytxCallBackUrl";
     }
     interface MongoTableName {
 

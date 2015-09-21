@@ -64,4 +64,12 @@ public interface McmcCommoditySolrService {
 	 */
 	public List<ObjectId> commoditySearch(CommoditySearchParam param);
 
+	/**
+	 * @author ZhengYl
+	 * @date 2015年9月21日 上午10:58:58 
+	 * @param id
+	 * @return
+	 */
+	public McmcCommodityDocument selectCommodityIndexById(String id);
+
 }
