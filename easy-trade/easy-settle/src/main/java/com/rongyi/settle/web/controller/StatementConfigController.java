@@ -8,7 +8,6 @@
 
 package com.rongyi.settle.web.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -52,5 +51,30 @@ public class StatementConfigController {
 		List<StatementConfig> list = statementConfigService.selectPageList(map, currentPage,ConstantEnum.PAGE_SIZE.getCodeInt());
 		Integer count = statementConfigService.selectPageListCount(map);
 		return ResponseData.success(list,currentPage, ConstantEnum.PAGE_SIZE.getCodeInt(), count);
-	} 
+	}
+	@RequestMapping("/add")
+	public ResponseData add(){
+		return null;
+	}
+	
+	@RequestMapping("/save")
+	public ResponseData save(){
+		return null;
+	}
+	
+	@RequestMapping("/update")
+	public ResponseData update(){
+		return null;
+	}
+	
+	@RequestMapping("/modify")
+	public ResponseData modify(){
+		return null;
+		
+	}
+	
+	@RequestMapping("/info")
+	public ResponseData info(){
+		return null;
+	}
 }

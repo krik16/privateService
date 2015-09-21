@@ -13,5 +13,5 @@
 	<import resource="applicationContext-mybatis-dao.xml" />
 	<import resource="applicationContext-mybatis-datasource.xml" />
 	<import resource="applicationContext-mybatis-tx.xml" />
-	<import resource="applicationContext-statement.xml" />
+	<import resource="applicationContext-settle.xml" />
 </beans>
