@@ -1,4 +1,4 @@
-package com.rongyi.easy.statement.entity;
+package com.rongyi.easy.settle.entity;
 
 import java.io.Serializable;
 import java.util.Date;
