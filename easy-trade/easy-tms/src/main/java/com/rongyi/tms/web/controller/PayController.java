@@ -198,14 +198,17 @@ public class PayController extends BaseController {
 	 **/
 	private List<TradeVO> buildList(List<TradeVO> list) {
 		try {
+			MallLifeUserEntity user = null;
 			for (TradeVO tradeVO : list) {
 				if (tradeVO.getBuyerId() != null) {
-					MallLifeUserEntity user = rOAMallLifeUserService.getEntityByUid(tradeVO.getBuyerId());
-					if (user != null) {
-						tradeVO.setBuyerId(user.getId().toString());
-						tradeVO.setBuyerAccount(user.getPhone());
-						tradeVO.setBuyerName(user.getUserName());
-					}
+					user = rOAMallLifeUserService.getEntityByUid(tradeVO.getBuyerId());
+				} else if (tradeVO.getCouponBuyerId() != null) {
+					user = rOAMallLifeUserService.getEntityByUid(tradeVO.getCouponBuyerId());
+				}
+				if (user != null) {
+					tradeVO.setBuyerId(user.getId().toString());
+					tradeVO.setBuyerAccount(user.getPhone());
+					tradeVO.setBuyerName(user.getUserName());
 				}
 			}
 		} catch (Exception e) {
@@ -243,17 +246,17 @@ public class PayController extends BaseController {
 		return "/pay/draw_apply_list";
 	}
 
-	/**	
-	 * @Description: 操作退款/付款前验证是否符合条件 
+	/**
+	 * @Description: 操作退款/付款前验证是否符合条件
 	 * @param paymentId
 	 * @param model
-	 * @return	
-	 * @Author:  柯军
+	 * @return
+	 * @Author: 柯军
 	 * @datetime:2015年9月1日下午2:40:13
 	 **/
 	@RequestMapping("/validatePay")
 	@ResponseBody
-	public ResponseResult validatePay(@RequestParam String ids[],@RequestParam Integer operateType, Model model) {
+	public ResponseResult validatePay(@RequestParam String ids[], @RequestParam Integer operateType, Model model) {
 		LOGGER.info("================操作退款/付款前验证是否符合条件 ====================");
 		ResponseResult result = new ResponseResult();
 		try {
@@ -265,7 +268,7 @@ public class PayController extends BaseController {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * @Description: 支付
 	 * @param paymentId
