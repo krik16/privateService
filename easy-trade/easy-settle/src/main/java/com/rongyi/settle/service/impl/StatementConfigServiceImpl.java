@@ -15,6 +15,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
+import com.rongyi.easy.settle.entity.BussinessInfo;
 import com.rongyi.easy.settle.entity.StatementConfig;
 import com.rongyi.settle.service.StatementConfigService;
 
@@ -28,6 +29,7 @@ import com.rongyi.settle.service.StatementConfigService;
 public class StatementConfigServiceImpl extends BaseServiceImpl implements StatementConfigService {
 
 	private static final String NAMESPACE = "com.rongyi.settle.mapper.xml.StatementConfigMapper";
+	
 
 	@Override
 	public List<StatementConfig> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
@@ -56,6 +58,12 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
 		return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectById", map);
+	}
+
+	@Override
+	public void saveStatementConfigAndInfo(StatementConfig statementConfig, BussinessInfo bussinessInfo) {
+		insert(statementConfig);
+		//TODO insert bussiness info
 	}
 
 }

@@ -40,10 +40,22 @@
   </sql>
   
   <sql id="Base_list_where_clause">
-		<!-- 交易流水号 -->
-		<!-- <if test="tradeNo != null and tradeNo != ''">
-			AND payment_event.trade_no = #{tradeNo}
-		</if> -->
+		<!-- 商户类型 -->
+		<if test="bussinessType != null">
+			AND bussiness_type = #{bussinessType}
+		</if>
+		<!-- 商户名称 -->
+		<if test="bussinessName != null and bussinessName != ''">
+			AND bussiness_name like
+			concat('%',#{bussinessName,jdbcType=VARCHAR},'%')
+		</if>
+		<!-- 创建时间 -->
+		<if test="createAtStart != null and createAtStart != ''">
+			AND create_at >=  #{createAtStart}
+		</if>
+		<if test="createAtEnd != null and createAtEnd != ''">
+			AND #{createAtEnd} >= create_at
+		</if>
  </sql>
   <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 

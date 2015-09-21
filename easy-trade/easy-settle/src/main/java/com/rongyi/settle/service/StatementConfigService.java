@@ -11,6 +11,7 @@ package com.rongyi.settle.service;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.settle.entity.BussinessInfo;
 import com.rongyi.easy.settle.entity.StatementConfig;
 
 /**	
@@ -65,5 +66,16 @@ public interface StatementConfigService {
 	 * @datetime:2015年9月17日上午11:24:15
 	 **/
 	public abstract StatementConfig selectById(Integer id);
+	
+	
+	/**	
+	 * @Description: 保存配置和商家信息 
+	 * @param statementConfig
+	 * @param bussinessInfo	
+	 * @Author:  柯军
+	 * @datetime:2015年9月21日下午4:26:16
+	 **/
+	public abstract void saveStatementConfigAndInfo(StatementConfig statementConfig,BussinessInfo bussinessInfo);
+	
 
 }
