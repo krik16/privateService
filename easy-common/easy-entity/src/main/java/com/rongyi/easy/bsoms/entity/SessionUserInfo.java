@@ -1,7 +1,11 @@
 package com.rongyi.easy.bsoms.entity;
 
-public class SessionUserInfo {
+import java.io.Serializable;
+
+public class SessionUserInfo implements Serializable{
     
+	private static final long serialVersionUID = 6383826849485417919L;
+
 	private Integer id;
 
     private Integer type;

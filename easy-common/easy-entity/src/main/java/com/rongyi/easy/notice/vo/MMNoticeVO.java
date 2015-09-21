@@ -34,6 +34,9 @@ public class MMNoticeVO implements Serializable{
     private Integer praiseCount;
     /**图片集合*/
     private List<String> picList;
+    /**修改时间*/
+    private Date updateAt;
+    
 	public Integer getId() {
 		return id;
 	}
@@ -101,8 +104,14 @@ public class MMNoticeVO implements Serializable{
 		this.picList = picList;
 	}
 
+		public Date getUpdateAt() {
+		return updateAt;
+	}
+	public void setUpdateAt(Date updateAt) {
+		this.updateAt = updateAt;
+	}
 		@Override
 		public String toString() {
-				return new ToStringBuilder(this).append("id", id).append("content", content).append("shopName", shopName).append("shopMid", shopMid).append("status", status).append("publishBeginAt", publishBeginAt).append("publishEndAt", publishEndAt).append("createUserid", createUserid).append("createAt", createAt).append("praiseCount", praiseCount).append("picList", picList).toString();
+				return new ToStringBuilder(this).append("id", id).append("content", content).append("shopName", shopName).append("shopMid", shopMid).append("status", status).append("publishBeginAt", publishBeginAt).append("publishEndAt", publishEndAt).append("createUserid", createUserid).append("createAt", createAt).append("praiseCount", praiseCount).append("picList", picList).append("updateAt",updateAt).toString();
 		}
 }

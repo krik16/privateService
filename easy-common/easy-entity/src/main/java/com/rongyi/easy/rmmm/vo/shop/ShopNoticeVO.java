@@ -18,7 +18,7 @@ public class ShopNoticeVO implements Serializable{
 	private List<String> picList;//图片集合
 	private String beginTime;//发布开始时间
 	private String endTime;//结束时间
-	private String createTime;//创建时间
+	private String createTime;//更新时间
 	private Integer praiseCount;//点赞总数量
 	private String shopMId;//店铺mongoId
 	

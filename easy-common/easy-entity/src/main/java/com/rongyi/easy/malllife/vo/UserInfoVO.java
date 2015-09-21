@@ -43,10 +43,15 @@ public class UserInfoVO implements Serializable {
 	private String       pushChanelId;//百度推送服务ID app传给后台
 	private String      lastSignInIp;//最新登录Ip地址
 	private String channel;// 容易逛(MALLLIFE),其他第三方全民财富（QMCAIFU）
+	private String shareCode;//摩店邀请注册码
 
+	public String getShareCode() {
+		return shareCode;
+	}
 
-	private String sharCode;//摩店邀请注册码
-
+	public void setShareCode(String shareCode) {
+		this.shareCode = shareCode;
+	}
 
 	public String getPushChanelId() {
 		return pushChanelId;
@@ -240,11 +245,5 @@ public class UserInfoVO implements Serializable {
 		this.collectCommoditys = collectCommoditys;
 	}
 
-	public String getSharCode() {
-		return sharCode;
-	}
 
-	public void setSharCode(String sharCode) {
-		this.sharCode = sharCode;
-	}
 }
