@@ -48,6 +48,9 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private String commodityBrandId;
 	@Field("price")
 	private double price;
+	@Field("commodityNameSubdiv")
+	private String commodityNameSubdiv;
+	
 	public double getPrice() {
 		return price;
 	}
@@ -156,6 +159,7 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.commodityName = doc.getFieldValue("commodityName").toString();
 		this.commodityCode = doc.getFieldValue("commodityCode").toString();
 		this.commodityShopId = doc.getFieldValue("commodityShopId").toString();
+		this.commodityNameSubdiv = doc.getFieldValue("commodityNameSubdiv").toString();
 	}
 	public String getId() {
 		return id;
@@ -192,6 +196,12 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	}
 	public void setCommodityName(String commodityName) {
 		this.commodityName = commodityName;
+	}
+	public String getCommodityNameSubdiv() {
+		return commodityNameSubdiv;
+	}
+	public void setCommodityNameSubdiv(String commodityNameSubdiv) {
+		this.commodityNameSubdiv = commodityNameSubdiv;
 	}
 
 }
