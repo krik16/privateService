@@ -198,15 +198,18 @@ public class PayController extends BaseController {
 	 **/
 	private List<TradeVO> buildList(List<TradeVO> list) {
 		try {
+			MallLifeUserEntity user = null;
 			for (TradeVO tradeVO : list) {
 				if (tradeVO.getBuyerId() != null) {
-					MallLifeUserEntity user = rOAMallLifeUserService.getEntityByUid(tradeVO.getBuyerId());
+					user = rOAMallLifeUserService.getEntityByUid(tradeVO.getBuyerId());
+				}else if(tradeVO.getCouponBuyerId() != null){
+					user = rOAMallLifeUserService.getEntityByUid(tradeVO.getCouponBuyerId());
+				}
 					if (user != null) {
 						tradeVO.setBuyerId(user.getId().toString());
 						tradeVO.setBuyerAccount(user.getPhone());
 						tradeVO.setBuyerName(user.getUserName());
 					}
-				}
 			}
 		} catch (Exception e) {
 			LOGGER.error("获取买家账号信息失败。。" + e.getMessage());
