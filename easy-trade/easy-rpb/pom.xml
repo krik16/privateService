@@ -235,12 +235,12 @@
 			<scope>provided</scope>
 		</dependency>
 
-			<dependency>
+		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 
 		<dependency>
 			<groupId>net.sf.json-lib</groupId>
@@ -443,6 +443,11 @@
 			<artifactId>core</artifactId>
 			<version>3.0.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.4.7</version>
+		</dependency>	
 	</dependencies>
 
 	<build>
@@ -456,9 +461,9 @@
 			</resource>
 		</resources>
 	</build>
-	
+
 	<properties>
-	  <excludePropertyFiles></excludePropertyFiles>
+		<excludePropertyFiles></excludePropertyFiles>
 	</properties>
 
 	<profiles>
