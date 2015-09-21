@@ -208,7 +208,7 @@ public class PayController extends BaseController {
 				if (user != null) {
 					tradeVO.setBuyerId(user.getId().toString());
 					tradeVO.setBuyerAccount(user.getPhone());
-					tradeVO.setBuyerName(user.getUserName());
+					tradeVO.setBuyerName(user.getNickname());
 				}
 			}
 		} catch (Exception e) {
