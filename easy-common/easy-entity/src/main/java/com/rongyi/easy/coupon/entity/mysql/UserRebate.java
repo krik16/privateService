@@ -4,68 +4,68 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * ÓÃ»§µÖ¿ÛÈ¯
+ * ç”¨æˆ·æŠµæ‰£åˆ¸
  */
 public class UserRebate implements Serializable {
     private Integer id;
 
     /**
-     * ÁìÓÃÈËid
+     * é¢†ç”¨äººid
      */
     private String userId;
 
     /**
-     * ÁìÓÃÈËĞÕÃû
+     * é¢†ç”¨äººå§“å
      */
     private String userName;
 
     /**
-     * µÖ¿ÛÈ¯id
+     * æŠµæ‰£åˆ¸id
      */
     private Integer couponId;
 
     /**
-     * µÖ¿ÛÈ¯È¯Âë
+     * æŠµæ‰£åˆ¸åˆ¸ç 
      */
     private String couponCode;
 
     /**
-     * µÖ¿Û½ğ¶î
+     * æŠµæ‰£é‡‘é¢
      */
     private Double discount;
 
     /**
-     * Î´Ê¹ÓÃ[0], ÒÑÊ¹ÓÃ[1]
+     * æœªä½¿ç”¨[0], å·²ä½¿ç”¨[1]
      */
     private Integer status;
 
     /**
-     * ÓÃ»§ÁìÓÃÕËºÅ
+     * ç”¨æˆ·é¢†ç”¨è´¦å·
      */
     private String userAccount;
 
     /**
-     * ÓÃ»§ÁìÈ¡µÖ¿ÛÈ¯Ê±¼ä
+     * ç”¨æˆ·é¢†å–æŠµæ‰£åˆ¸æ—¶é—´
      */
     private Date receiveAt;
 
     /**
-     * Ê¹ÓÃµÖ¿ÛÈ¯Ê±¼ä
+     * ä½¿ç”¨æŠµæ‰£åˆ¸æ—¶é—´
      */
     private Date useAt;
 
     /**
-     * ÁìÈ¡ÇşµÀ:ÈİÒ×¹ä[0] »¥¶¯ÆÁ[1] Î¢ĞÅ[2]
+     * é¢†å–æ¸ é“:å®¹æ˜“é€›[0] äº’åŠ¨å±[1] å¾®ä¿¡[2]
      */
     private Integer channel;
 
     /**
-     * µÖ¿ÛÈ¯Ê¹ÓÃ¹ºÂòÉÌÆ·µÄÉÌÆ·¶©µ¥
+     * æŠµæ‰£åˆ¸ä½¿ç”¨è´­ä¹°å•†å“çš„å•†å“è®¢å•
      */
     private String orderNo;
 
     /**
-     * ¹ıÆÚÊ±¼ä
+     * è¿‡æœŸæ—¶é—´
      */
     private Date validAt;
 

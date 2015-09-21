@@ -4,68 +4,68 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * ÓÃ»§µÖ¿ÛÈ¯
+ * ç”¨æˆ·æŠµæ‰£åˆ¸
  */
 public class UserRedenvelope implements Serializable {
     private Integer id;
 
     /**
-     * ÁìÓÃÈËid
+     * é¢†ç”¨äººid
      */
     private String userId;
 
     /**
-     * ÁìÓÃÈËĞÕÃû
+     * é¢†ç”¨äººå§“å
      */
     private String userName;
 
     /**
-     * ºì°üid
+     * çº¢åŒ…id
      */
     private Integer couponId;
 
     /**
-     * ºì°üÈ¯Âë
+     * çº¢åŒ…åˆ¸ç 
      */
     private String couponCode;
 
     /**
-     * µÖ¿Û¼Û¸ñ
+     * æŠµæ‰£ä»·æ ¼
      */
     private Double amount;
 
     /**
-     * Î´Ê¹ÓÃ[0], ÒÑÊ¹ÓÃ[1]
+     * æœªä½¿ç”¨[0], å·²ä½¿ç”¨[1]
      */
     private Integer status;
 
     /**
-     * ÓÃ»§ÁìÓÃÕËºÅ
+     * ç”¨æˆ·é¢†ç”¨è´¦å·
      */
     private String userAccount;
 
     /**
-     * ÓÃ»§ÁìÈ¡ºì°üÊ±¼ä
+     * ç”¨æˆ·é¢†å–çº¢åŒ…æ—¶é—´
      */
     private Date receiveAt;
 
     /**
-     * Ê¹ÓÃºì°üÊ±¼ä
+     * ä½¿ç”¨çº¢åŒ…æ—¶é—´
      */
     private Date useAt;
 
     /**
-     * ÁìÈ¡ÇşµÀ:ÈİÒ×¹ä[0] »¥¶¯ÆÁ[1] Î¢ÉÌ[2]
+     * é¢†å–æ¸ é“:å®¹æ˜“é€›[0] äº’åŠ¨å±[1] å¾®å•†[2]
      */
     private Integer channel;
 
     /**
-     * Ê¹ÓÃºì°ü¹ºÂòÉÌÆ·Ê±µÄÉÌÆ·¶©µ¥ºÅ
+     * ä½¿ç”¨çº¢åŒ…è´­ä¹°å•†å“æ—¶çš„å•†å“è®¢å•å·
      */
     private String orderNo;
 
     /**
-     * ¹ıÆÚÊ±¼ä
+     * è¿‡æœŸæ—¶é—´
      */
     private Date validAt;
 
