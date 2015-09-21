@@ -82,6 +82,8 @@ public class StatementConfigServiceTest extends BaseTest{
 	public void selectPageListTest(){
 		Map<String,Object> map = new HashMap<String,Object>();
 		//currentPage=0, pageSize=15
+		map.put("bussinessType", "0");
+		map.put("createAtstart", "2015-09-18");
 		List<StatementConfig> list = statementConfigService.selectPageList(map, 0,15);
 		System.err.println("list size="+list.size());
 	}

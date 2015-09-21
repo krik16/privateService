@@ -22,4 +22,7 @@
     <!-- 查询卖家信息 -->    
     <dubbo:reference interface="com.rongyi.rss.mallshop.user.ROAUserService" id="rOAUserService"  version="${dubbo.version}" check="false"/>    
   
+  	<!-- redis -->
+	<dubbo:reference interface="com.rongyi.rss.malllife.roa.ROARedisService" id="rOARedisService" version="${dubbo.version}" check="false" />
+	
 </beans>  
