@@ -140,7 +140,7 @@ public class SalesCommissionParam {
             paramsMap.put("shop",this.getShopName());
         }
         if(StringUtils.isNotBlank(this.getSellerName())){
-            paramsMap.put("sellerName", "%"+this.getSellerName()+"%");
+            paramsMap.put("sellerAccount", "%"+this.getSellerName()+"%");
         }
         if(StringUtils.isNotBlank(this.getUploadStartTime())){
             paramsMap.put("uploadStart", DateUtil.stringToDate(this.getUploadStartTime(), DateTool.FORMAT_DATETIME));
