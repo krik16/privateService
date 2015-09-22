@@ -53,8 +53,9 @@ public interface ROAIntegralService {
 	 * @param type
 	 * @param action
 	 * @param update_at
+	 * @param endTime 
 	 * @return
 	 */
-	public JSONObject getScoreRecordByConditioin(String userId, int source ,int type,int action ,String update_at,int page, int row);
+	public JSONObject getScoreRecordByConditioin(String userId, int source ,int type,int action ,String  beginTime,String endTime, int page, int row);
 
 }
