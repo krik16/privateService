@@ -73,7 +73,7 @@ public class SmsConfig implements Serializable{
 
     /**
      * 发送渠道
-     * 1创世华信,2建周.3云通讯
+     * 1创世华信,2建周.101云通讯
      */
     public abstract class SEND_CHANNEL{
         public static final  int CHANNEL_CHUANGSHI=1;
