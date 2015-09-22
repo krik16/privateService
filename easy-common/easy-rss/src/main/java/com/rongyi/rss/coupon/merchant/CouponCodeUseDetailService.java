@@ -4,6 +4,8 @@ import com.rongyi.easy.coupon.vo.merchant.CouponCodeUseDetailVO;
 import com.rongyi.easy.coupon.vo.merchant.MerchantPaging;
 import com.rongyi.easy.page.QueryParam;
 
+import java.util.List;
+
 /**
  * Descriptions:
  * Created by 袁波
@@ -12,4 +14,6 @@ import com.rongyi.easy.page.QueryParam;
 public interface CouponCodeUseDetailService {
 
     public MerchantPaging<CouponCodeUseDetailVO> findUseDetailsByPage(QueryParam queryParam);
+
+    public List<CouponCodeUseDetailVO> findUseDetailsByCouponId(Integer couponId);
 }
