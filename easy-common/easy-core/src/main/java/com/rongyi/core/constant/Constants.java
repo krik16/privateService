@@ -4,7 +4,8 @@ import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.framework.spring.context.utils.SpringContextUtil;
 
 public interface Constants {
-
+	String COOKIE_DOMAIN_RONGYI = ".rongyi.com";
+	String COOKIE_DOMAIN_RONGYIGUANG = ".rongyiguang.com";
 
     interface FilterRelation {
         String AND = "AND";
