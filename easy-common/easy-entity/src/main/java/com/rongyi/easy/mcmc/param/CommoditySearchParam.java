@@ -17,7 +17,7 @@ public class CommoditySearchParam {
 	private String name;//编号\商品名\商品编码
 	private int status;//状态 0下架 1上架 2是删除3待上架4待处理 -1表示所有
 	private int currpage;//当页数0表示第一页
-	
+	private String bsst;//用户登录凭据，从cookie中获取
 	public ObjectId getCategoryId() {
 		return categoryId;
 	}
@@ -66,4 +66,11 @@ public class CommoditySearchParam {
 	public void setCurrpage(int currpage) {
 		this.currpage = currpage;
 	}
+	public String getBsst() {
+		return bsst;
+	}
+	public void setBsst(String bsst) {
+		this.bsst = bsst;
+	}
+	
 }

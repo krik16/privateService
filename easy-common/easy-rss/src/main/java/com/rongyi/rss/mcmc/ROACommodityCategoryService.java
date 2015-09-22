@@ -29,4 +29,6 @@ public interface ROACommodityCategoryService {
 	 * @return
 	 */
 	public CommodityCategory selectCategoryById(String id);
+	
+	public CommodityCategory selectCategoryByName(String name);
 }

@@ -11,36 +11,38 @@ import com.rongyi.easy.mcmc.mvc.DateJson.JsonDateSerializer;
 
 @Entity("mcmc_commodity")
 public class CommodityVO2 implements  Serializable {
-
-	 /**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -3022699601318372490L;
 	
 	private String id;//系统编号
 	private String name;//商品名称
 	
-	private int status;//状态 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理 
+	private Integer status;//状态 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理 
 	private String code;//商品编码
-	private int stock;//商品库存（包括卖出的商品和锁定的商品）
-	private int remain;//商品剩余量
-	private int isNormalized;//0表示没有规格1表示有规格的
+	private Integer stock;//商品库存（包括卖出的商品和锁定的商品）
+	private Integer remain;//商品剩余量
+	private Integer isNormalized;//0表示没有规格1表示有规格的
 	private String originalPrice;//商品原价
 	private String currentPrice;//商品现价
 	private List<String> picList;//商品图片列表
 	private List<CommoditySpecVO1> specList;//商品规格列表
-	private List<CommoditySpecVO2> specVO2List;//商品规格列表
+	private List<CommoditySpecVO2> specVO2List;//商品规格店铺表
 	private List<String> categoryNames;//商品所属的品类列表
 	private List<String> customCategory;//自定义分类列表
 	private String description;//商品描述
-	private int distribution;//配送方式 1表示到店自提2快递3表示支持两种方式
+	private Integer distribution;//配送方式 1表示到店自提2快递3表示支持两种方式
+	private Integer freight;//1表示商家承担运费,0表示买家承担运费
+	private Integer terminalType;//上架终端：1.表示容易逛2.表示互动屏3.表示容易逛和互动屏4.表示微商5.微商,容易逛6.微商,互动屏7.容易逛, 互动屏, 微商(转换成二进制数个位1有容易逛第二位1有 互动屏第三位1有 微商)
+	private String postage;//商品邮费
+	private Integer source;//来源
+	
 	@JsonSerialize(using=JsonDateSerializer.class)
 	private Date updateAt;//数据更新日期
 	@JsonSerialize(using=JsonDateSerializer.class)
 	private Date registerAt;//上架时间
 	@JsonSerialize(using=JsonDateSerializer.class)
 	private Date soldOutAt;//下架时间
-	private int stockStatus;//0表示统一库存1表示分管库存
+	private Integer stockStatus;//0表示统一库存1表示分管库存
 	public String getId() {
 		return id;
 	}
@@ -53,10 +55,10 @@ public class CommodityVO2 implements  Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 	public String getCode() {
@@ -65,22 +67,22 @@ public class CommodityVO2 implements  Serializable {
 	public void setCode(String code) {
 		this.code = code;
 	}
-	public int getStock() {
+	public Integer getStock() {
 		return stock;
 	}
-	public void setStock(int stock) {
+	public void setStock(Integer stock) {
 		this.stock = stock;
 	}
-	public int getRemain() {
+	public Integer getRemain() {
 		return remain;
 	}
-	public void setRemain(int remain) {
+	public void setRemain(Integer remain) {
 		this.remain = remain;
 	}
-	public int getIsNormalized() {
+	public Integer getIsNormalized() {
 		return isNormalized;
 	}
-	public void setIsNormalized(int isNormalized) {
+	public void setIsNormalized(Integer isNormalized) {
 		this.isNormalized = isNormalized;
 	}
 	public String getOriginalPrice() {
@@ -95,13 +97,24 @@ public class CommodityVO2 implements  Serializable {
 	public void setCurrentPrice(String currentPrice) {
 		this.currentPrice = currentPrice;
 	}
+	public List<String> getPicList() {
+		return picList;
+	}
+	public void setPicList(List<String> picList) {
+		this.picList = picList;
+	}
 	public List<CommoditySpecVO1> getSpecList() {
 		return specList;
 	}
 	public void setSpecList(List<CommoditySpecVO1> specList) {
 		this.specList = specList;
 	}
-	
+	public List<CommoditySpecVO2> getSpecVO2List() {
+		return specVO2List;
+	}
+	public void setSpecVO2List(List<CommoditySpecVO2> specVO2List) {
+		this.specVO2List = specVO2List;
+	}
 	public List<String> getCategoryNames() {
 		return categoryNames;
 	}
@@ -120,12 +133,35 @@ public class CommodityVO2 implements  Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	public int getDistribution() {
+	public Integer getDistribution() {
 		return distribution;
 	}
-	public void setDistribution(int distribution) {
+	public void setDistribution(Integer distribution) {
 		this.distribution = distribution;
+	}
+	public Integer getFreight() {
+		return freight;
+	}
+	public void setFreight(Integer freight) {
+		this.freight = freight;
+	}
+	public Integer getTerminalType() {
+		return terminalType;
+	}
+	public void setTerminalType(Integer terminalType) {
+		this.terminalType = terminalType;
+	}
+	public String getPostage() {
+		return postage;
+	}
+	public void setPostage(String postage) {
+		this.postage = postage;
+	}
+	public Integer getSource() {
+		return source;
+	}
+	public void setSource(Integer source) {
+		this.source = source;
 	}
 	public Date getUpdateAt() {
 		return updateAt;
@@ -145,22 +181,10 @@ public class CommodityVO2 implements  Serializable {
 	public void setSoldOutAt(Date soldOutAt) {
 		this.soldOutAt = soldOutAt;
 	}
-	public int getStockStatus() {
+	public Integer getStockStatus() {
 		return stockStatus;
 	}
-	public void setStockStatus(int stockStatus) {
+	public void setStockStatus(Integer stockStatus) {
 		this.stockStatus = stockStatus;
-	}
-	public List<CommoditySpecVO2> getSpecVO2List() {
-		return specVO2List;
-	}
-	public void setSpecVO2List(List<CommoditySpecVO2> specVO2List) {
-		this.specVO2List = specVO2List;
-	}
-	public List<String> getPicList() {
-		return picList;
-	}
-	public void setPicList(List<String> picList) {
-		this.picList = picList;
 	}
 }

@@ -16,8 +16,9 @@ public class CommoditySpecParam implements  Serializable {
 	private List<ObjectId> columnIds;//规格id
 	private List<String> columnValues;//规格属性
 	private List<String> columnNotes;//规格备注
-	private String shopId;//对应商品所属店铺
-	private String filialeId;//店铺对应分公司
+	private int shopId;//对应商品所属店铺
+	private String shopMid;//对应商品所属店铺MongoId
+	private String filialeMid;//店铺对应分公司
 	private String pictureUrl;//规格图片
 	private int stock;//库存
 	private int remain;//剩余量
@@ -47,17 +48,24 @@ public class CommoditySpecParam implements  Serializable {
 	public void setColumnValues(List<String> columnValues) {
 		this.columnValues = columnValues;
 	}
-	public String getShopId() {
+	
+	public int getShopId() {
 		return shopId;
 	}
-	public void setShopId(String shopId) {
+	public void setShopId(int shopId) {
 		this.shopId = shopId;
 	}
-	public String getFilialeId() {
-		return filialeId;
+	public String getShopMid() {
+		return shopMid;
 	}
-	public void setFilialeId(String filialeId) {
-		this.filialeId = filialeId;
+	public void setShopMid(String shopMid) {
+		this.shopMid = shopMid;
+	}
+	public String getFilialeMid() {
+		return filialeMid;
+	}
+	public void setFilialeMid(String filialeMid) {
+		this.filialeMid = filialeMid;
 	}
 	public String getPictureUrl() {
 		return pictureUrl;

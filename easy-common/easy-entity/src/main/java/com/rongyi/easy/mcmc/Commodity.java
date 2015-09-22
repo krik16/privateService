@@ -11,9 +11,6 @@ import org.mongodb.morphia.annotations.Id;
 @Entity("mcmc_commodity")
 public class Commodity implements  Serializable,Cloneable{
 
-	 /**
-	 * 
-	 */
 	private static final long serialVersionUID = -3022699601318372490L;
 	
 	@Id
@@ -39,8 +36,8 @@ public class Commodity implements  Serializable,Cloneable{
 	private String code;//商品编码
 	private String description;//商品描述
 	private String postage;//商品邮费
-	private int stock;//商品库存
-	private int sold;//商品销量
+	private Integer stock;//商品库存
+	private Integer sold;//商品销量
 	private Date createAt;//数据创建日期
 	private Date updateAt;//数据更新日期
 	private String originalPrice;//商品原价
@@ -50,6 +47,7 @@ public class Commodity implements  Serializable,Cloneable{
 	private String mallMid;
 	private String shopNum;
 	private String update_by;//修改人
+
 	
 	private String brandMid;//品牌mongoId
 	
@@ -189,129 +187,34 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setoPriceOfLowestCPrice(String oPriceOfLowestCPrice) {
 		this.oPriceOfLowestCPrice = oPriceOfLowestCPrice;
 	}
+
 	private List<String> picList;//商品图片列表
 	private List<ObjectId> specList;//商品规格列表
 
-
-	private double price;//商品价格（现价最低价，用于排序）
+	
+	private Double price;//商品价格（现价最低价，用于排序）
 	private String brandId;//商品所属品牌id
 	private String mallId;//商品所属商场id
 	private List<ObjectId> categoryIds;//商品所属的品类列表
 	private List<String> customCategory;//自定义分类
 	
-	private int distribution;//配送方式 1表示到店自提2快递3表示支持两种方式
-	private int freight;//1表示商家承担运费,0表示买家承担运费
-	private int terminalType;//容易逛个位1 互动屏第二位1 微商第三位1
+	private Integer distribution;//配送方式 1表示到店自提2快递3表示支持两种方式
+	private Integer freight;//1表示商家承担运费,0表示买家承担运费
+	private Integer terminalType;//上架终端：1.表示容易逛2.表示互动屏3.表示容易逛和互动屏4.表示微商5.微商,容易逛6.微商,互动屏7.容易逛, 互动屏, 微商(转换成二进制数个位1有容易逛第二位1有 互动屏第三位1有 微商)
 	private Date registerAt;//上架时间
 	private Date soldOutAt;//下架时间
-	private int source;//来源
-	private int stockStatus;//0表示统一库存1表示分管库存
+	private Integer source;//来源
+	private Integer stockStatus;//0表示统一库存1表示分管库存
+	private String systemNumber;//系统编号
+	private String reason;//下架原因
 //	private int commentCount;
 //	private int highCommentCount;
 //	private int mediumCommentCount;
 //	private int lowCommentCount;
-	
-	public String getShopMid() {
-		return shopMid;
-	}
-	public void setShopMid(String shopMid) {
-		this.shopMid = shopMid;
-	}
-	//	public int getCommentCount() {
-//		return commentCount;
-//	}
-//	public void setCommentCount(int commentCount) {
-//		this.commentCount = commentCount;
-//	}
-//	public int getHighCommentCount() {
-//		return highCommentCount;
-//	}
-//	public void setHighCommentCount(int highCommentCount) {
-//		this.highCommentCount = highCommentCount;
-//	}
-//	public int getMediumCommentCount() {
-//		return mediumCommentCount;
-//	}
-//	public void setMediumCommentCount(int mediumCommentCount) {
-//		this.mediumCommentCount = mediumCommentCount;
-//	}
-//	public int getLowCommentCount() {
-//		return lowCommentCount;
-//	}
-//	public void setLowCommentCount(int lowCommentCount) {
-//		this.lowCommentCount = lowCommentCount;
-//	}
-	public double getPrice() {
-		return price;
-	}
-	public void setPrice(double price) {
-		this.price = price;
-	}
-	public String getBrandId() {
-		return brandId;
-	}
-	public void setBrandId(String brandId) {
-		this.brandId = brandId;
-	}
-	public String getMallId() {
-		return mallId;
-	}
-	public void setMallId(String mallId) {
-		this.mallId = mallId;
-	}
-	public List<ObjectId> getCategoryIds() {
-		return categoryIds;
-	}
-	public void setCategoryIds(List<ObjectId> categoryIds) {
-		this.categoryIds = categoryIds;
-	}
 	private String oPriceMax;//商品原最高价（用于买家版）
 	private String oPriceMin;//商品原最低价（用于买家版）
 	private String cPriceMax;//商品现最高价（用于买家版）
 	private String cPriceMin;//商品现最高价（用于买家版）
-	
-	public String getoPriceMax() {
-		return oPriceMax;
-	}
-	public void setoPriceMax(String oPriceMax) {
-		this.oPriceMax = oPriceMax;
-	}
-	public String getoPriceMin() {
-		return oPriceMin;
-	}
-	public void setoPriceMin(String oPriceMin) {
-		this.oPriceMin = oPriceMin;
-	}
-	public String getcPriceMax() {
-		return cPriceMax;
-	}
-	public void setcPriceMax(String cPriceMax) {
-		this.cPriceMax = cPriceMax;
-	}
-	public String getcPriceMin() {
-		return cPriceMin;
-	}
-	public void setcPriceMin(String cPriceMin) {
-		this.cPriceMin = cPriceMin;
-	}
-	public String getCode() {
-		return code;
-	}
-	public void setCode(String code) {
-		this.code = code;
-	}
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
-	public String getShopId() {
-		return shopId;
-	}
-	public void setShopId(String shopId) {
-		this.shopId = shopId;
-	}
 	public ObjectId getId() {
 		return id;
 	}
@@ -323,6 +226,36 @@ public class Commodity implements  Serializable,Cloneable{
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	public String getShopId() {
+		return shopId;
+	}
+	public void setShopId(String shopId) {
+		this.shopId = shopId;
+	}
+	public String getShopMid() {
+		return shopMid;
+	}
+	public void setShopMid(String shopMid) {
+		this.shopMid = shopMid;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
 	}
 	public String getDescription() {
 		return description;
@@ -336,16 +269,16 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setPostage(String postage) {
 		this.postage = postage;
 	}
-	public int getStock() {
+	public Integer getStock() {
 		return stock;
 	}
-	public void setStock(int stock) {
+	public void setStock(Integer stock) {
 		this.stock = stock;
 	}
-	public int getSold() {
+	public Integer getSold() {
 		return sold;
 	}
-	public void setSold(int sold) {
+	public void setSold(Integer sold) {
 		this.sold = sold;
 	}
 	public Date getCreateAt() {
@@ -372,6 +305,7 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setCurrentPrice(String currentPrice) {
 		this.currentPrice = currentPrice;
 	}
+	
 	public List<String> getPicList() {
 		return picList;
 	}
@@ -384,11 +318,29 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setSpecList(List<ObjectId> specList) {
 		this.specList = specList;
 	}
-	public String getCategory() {
-		return category;
+	public Double getPrice() {
+		return price;
 	}
-	public void setCategory(String category) {
-		this.category = category;
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	public String getBrandId() {
+		return brandId;
+	}
+	public void setBrandId(String brandId) {
+		this.brandId = brandId;
+	}
+	public String getMallId() {
+		return mallId;
+	}
+	public void setMallId(String mallId) {
+		this.mallId = mallId;
+	}
+	public List<ObjectId> getCategoryIds() {
+		return categoryIds;
+	}
+	public void setCategoryIds(List<ObjectId> categoryIds) {
+		this.categoryIds = categoryIds;
 	}
 	public List<String> getCustomCategory() {
 		return customCategory;
@@ -396,19 +348,23 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setCustomCategory(List<String> customCategory) {
 		this.customCategory = customCategory;
 	}
-	
-	public int getDistribution() {
+	public Integer getDistribution() {
 		return distribution;
 	}
-	public void setDistribution(int distribution) {
+	public void setDistribution(Integer distribution) {
 		this.distribution = distribution;
 	}
-	
-	public int getFreight() {
+	public Integer getFreight() {
 		return freight;
 	}
-	public void setFreight(int freight) {
+	public void setFreight(Integer freight) {
 		this.freight = freight;
+	}
+	public Integer getTerminalType() {
+		return terminalType;
+	}
+	public void setTerminalType(Integer terminalType) {
+		this.terminalType = terminalType;
 	}
 	public Date getRegisterAt() {
 		return registerAt;
@@ -422,24 +378,19 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setSoldOutAt(Date soldOutAt) {
 		this.soldOutAt = soldOutAt;
 	}
-	public int getSource() {
+	public Integer getSource() {
 		return source;
 	}
-	public void setSource(int source) {
+	public void setSource(Integer source) {
 		this.source = source;
 	}
-	public int getTerminalType() {
-		return terminalType;
-	}
-	public void setTerminalType(int terminalType) {
-		this.terminalType = terminalType;
-	}
-	public int getStockStatus() {
+	public Integer getStockStatus() {
 		return stockStatus;
 	}
-	public void setStockStatus(int stockStatus) {
+	public void setStockStatus(Integer stockStatus) {
 		this.stockStatus = stockStatus;
 	}
+
 
 	@Override
 	public Commodity clone() throws CloneNotSupportedException {
@@ -487,6 +438,10 @@ public class Commodity implements  Serializable,Cloneable{
 //		commodity.setActivityEndTime(activityEndTime);
 		return commodity;
 	}
+	
+	public String getSystemNumber() {
+		return systemNumber;
+	}
 
 	@Override
 	public int hashCode() {
@@ -529,4 +484,37 @@ public class Commodity implements  Serializable,Cloneable{
 //	public void setActivityEndTime(Date activityEndTime) {
 //		this.activityEndTime = activityEndTime;
 //	}
+	public void setSystemNumber(String systemNumber) {
+		this.systemNumber = systemNumber;
+	}
+	public String getoPriceMax() {
+		return oPriceMax;
+	}
+	public void setoPriceMax(String oPriceMax) {
+		this.oPriceMax = oPriceMax;
+	}
+	public String getoPriceMin() {
+		return oPriceMin;
+	}
+	public void setoPriceMin(String oPriceMin) {
+		this.oPriceMin = oPriceMin;
+	}
+	public String getcPriceMax() {
+		return cPriceMax;
+	}
+	public void setcPriceMax(String cPriceMax) {
+		this.cPriceMax = cPriceMax;
+	}
+	public String getcPriceMin() {
+		return cPriceMin;
+	}
+	public void setcPriceMin(String cPriceMin) {
+		this.cPriceMin = cPriceMin;
+	}
+	public String getReason() {
+		return reason;
+	}
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
 }

@@ -24,7 +24,7 @@ public class CommodityVO1 implements  Serializable {
 	
 	private String originalPrice;//商品原价
 	private String currentPrice;//商品现价
-	private List<CommoditySpecVO1> specList;//商品规格列表
+	private List<CommodityVOByColor> specList;//商品规格列表
 	private List<String> categoryIds;//商品所属的品类列表
 
 	private Date time;//相关时间
@@ -67,10 +67,10 @@ public class CommodityVO1 implements  Serializable {
 	public void setCurrentPrice(String currentPrice) {
 		this.currentPrice = currentPrice;
 	}
-	public List<CommoditySpecVO1> getSpecList() {
+	public List<CommodityVOByColor> getSpecList() {
 		return specList;
 	}
-	public void setSpecList(List<CommoditySpecVO1> specList) {
+	public void setSpecList(List<CommodityVOByColor> specList) {
 		this.specList = specList;
 	}
 	public List<String> getCategoryIds() {
