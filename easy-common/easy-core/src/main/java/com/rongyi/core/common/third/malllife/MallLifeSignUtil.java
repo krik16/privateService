@@ -16,10 +16,10 @@ import com.rongyi.core.common.third.param.user.UserThirdParam;
 
 public class MallLifeSignUtil {
 
-    public static Boolean verificationSign(UserThirdParam userThirdParam)throws ThirdException{
+    public static Boolean verificationSign(UserThirdParam userThirdParam,String token)throws ThirdException{
         Boolean istrue=false;
         try{
-            String str="data="+userThirdParam.getData()+"&timeStamp="+userThirdParam.getTimeStamp()+"&channel="+userThirdParam.getChannel()+"&token="+MallLifeThirdConfig.QMCAIFU_CHANNEL.TOKEN;
+            String str="data="+userThirdParam.getData()+"&timeStamp="+userThirdParam.getTimeStamp()+"&channel="+userThirdParam.getChannel()+"&token="+token;
             String md5Sign= Md5Util.GetMD5Code(str);
             if(md5Sign.equals(userThirdParam.getSign())){
                 istrue=true;
