@@ -2,6 +2,8 @@ package com.rongyi.easy.notice.vo;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import com.rongyi.easy.notice.entity.NoticeRecordEntity;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -36,6 +38,8 @@ public class MMNoticeVO implements Serializable{
     private List<String> picList;
     /**修改时间*/
     private Date updateAt;
+    /**ze*/
+    private List<NoticeRecordEntity> reasonSta;
     
 	public Integer getId() {
 		return id;
@@ -107,6 +111,13 @@ public class MMNoticeVO implements Serializable{
 		public Date getUpdateAt() {
 		return updateAt;
 	}
+		
+	public List<NoticeRecordEntity> getReasonSta() {
+			return reasonSta;
+		}
+		public void setReasonSta(List<NoticeRecordEntity> reasonSta) {
+			this.reasonSta = reasonSta;
+		}
 	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;
 	}
