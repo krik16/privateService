@@ -7,7 +7,8 @@ package com.rongyi.settle.constants;
  */
 public enum CodeEnum {
 
-	FIAL_CONFIG_LIST(1018001, "加载配置列表失败"), 
+	FIAL_CONFIG_LIST(1018001, "加载配置列表失败"),
+	FIAL_STATEMENT_LIST(1018002, "加载对账单列表失败"),
 	SUCCESS("0", "正常");
 
 	private Object code;
