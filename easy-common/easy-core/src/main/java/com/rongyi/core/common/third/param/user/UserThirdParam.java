@@ -1,4 +1,4 @@
-package com.rongyi.easy.malllife.param.user;/*
+package com.rongyi.core.common.third.param.user;/*
  * Copyright (C),上海容易网电子商务有限公司
  * Author:  俞志坚
  * Description:  
@@ -9,9 +9,8 @@ package com.rongyi.easy.malllife.param.user;/*
  *
  */
 
-import com.rongyi.easy.malllife.param.MalllifeBaseParam;
 
-public class UserThirdParam extends MalllifeBaseParam {
+public class UserThirdParam  {
 
 
   private String data;  //请求参数
