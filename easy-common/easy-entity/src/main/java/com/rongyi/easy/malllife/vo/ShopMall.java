@@ -1,6 +1,7 @@
 package com.rongyi.easy.malllife.vo;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -33,7 +34,7 @@ public class ShopMall implements Serializable{
     protected String shopOwn;
     @SerializedName("business_district")
     protected String businessDistrict;
-    protected float[] location;
+    protected List<Double> location;
     protected String distance;
     protected String label;
     protected String[] tags;
@@ -125,16 +126,16 @@ public class ShopMall implements Serializable{
     public void setBusinessDistrict(String businessDistrict) {
         this.businessDistrict = businessDistrict;
     }
+    
+    public List<Double> getLocation() {
+		return location;
+	}
 
-    public float[] getLocation() {
-        return location;
-    }
+	public void setLocation(List<Double> location) {
+		this.location = location;
+	}
 
-    public void setLocation(float[] location) {
-        this.location = location;
-    }
-
-    public String getDistance() {
+	public String getDistance() {
         return distance;
     }
 
