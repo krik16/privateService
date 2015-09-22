@@ -128,4 +128,10 @@ public interface IIContentService {
 	 * @return
 	 */
 	boolean hasContent(ForumContent fc);
+	/**
+	 * 修改 位置时间
+	 * @param fp
+	 * @return
+	 */
+	public Boolean updateOptionById(ForumPosition fp);
 }
