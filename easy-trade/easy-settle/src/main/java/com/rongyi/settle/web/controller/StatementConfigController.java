@@ -29,7 +29,6 @@ import com.rongyi.rss.malllife.roa.ROARedisService;
 import com.rongyi.settle.constants.CodeEnum;
 import com.rongyi.settle.constants.ConstantEnum;
 import com.rongyi.settle.service.StatementConfigService;
-import com.rongyi.settle.util.MapUtils;
 
 /**	
  * @Author:  柯军
@@ -64,7 +63,7 @@ public class StatementConfigController {
 			return ResponseData.success(list,currentPage, ConstantEnum.PAGE_SIZE.getCodeInt(), count);
 		}catch(Exception e){
 			e.printStackTrace();
-			return ResponseData.failure(CodeEnum.FIAL_LIST.getCodeInt(),CodeEnum.FIAL_LIST.getValueStr());
+			return ResponseData.failure(CodeEnum.FIAL_CONFIG_LIST.getCodeInt(),CodeEnum.FIAL_CONFIG_LIST.getValueStr());
 		}
 		
 	}
@@ -105,7 +104,7 @@ public class StatementConfigController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ResponseData.failure(CodeEnum.FIAL_LIST.getCodeInt(),CodeEnum.FIAL_LIST.getValueStr());
+		return ResponseData.failure(CodeEnum.FIAL_CONFIG_LIST.getCodeInt(),CodeEnum.FIAL_CONFIG_LIST.getValueStr());
 	}
 	
 	

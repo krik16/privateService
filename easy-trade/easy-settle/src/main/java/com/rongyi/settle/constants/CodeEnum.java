@@ -1,13 +1,15 @@
 package com.rongyi.settle.constants;
 
-/**
- * 错误码常量
- * 
- * @author baodk
- */
+/**	
+ * @Author:  柯军
+ * @Description: 错误码常量 
+ * @datetime:2015年9月22日下午6:47:25
+ *
+ **/
 public enum CodeEnum {
 
-	FIAL_LIST(1018001, "加载列表失败"), 
+	FIAL_CONFIG_LIST(1018001, "加载配置列表失败"),
+	FIAL_STATEMENT_LIST(1018002, "加载对账单列表失败"),
 	SUCCESS("0", "正常");
 
 	private Object code;

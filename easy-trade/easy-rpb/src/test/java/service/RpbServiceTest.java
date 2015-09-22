@@ -31,12 +31,13 @@ public class RpbServiceTest extends BaseTest{
 	@Autowired
 	IRpbService iRpbService;
 	
-//	@Test
+	@Test
 	public void testOperateWeixinRefund(){
-		iRpbService.operateWeixinRefund(32221);
+		Map<String,Object> map = iRpbService.operateWeixinRefund(14376);
+		System.err.println(map.toString());
 	}
 	
-	@Test
+//	@Test
 	public void testGetPaySign(){
 //		{"body":{"weidianId":"\"\"","title":"测四号",
 //			"orderType":"1","orderDetailNum":"\"\"","orderNum":"\"0909097646081639\"","totalPrice":0.01},"source":"coupon_order_queue","target":"rpb","timestamp":1441787979013,"type":"5"}
