@@ -121,8 +121,15 @@ public class MMNoticeVO implements Serializable{
 	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;
 	}
-		@Override
-		public String toString() {
-				return new ToStringBuilder(this).append("id", id).append("content", content).append("shopName", shopName).append("shopMid", shopMid).append("status", status).append("publishBeginAt", publishBeginAt).append("publishEndAt", publishEndAt).append("createUserid", createUserid).append("createAt", createAt).append("praiseCount", praiseCount).append("picList", picList).append("updateAt",updateAt).toString();
-		}
+	@Override
+	public String toString() {
+		return "MMNoticeVO [id=" + id + ", content=" + content + ", shopName="
+				+ shopName + ", shopMid=" + shopMid + ", status=" + status
+				+ ", publishBeginAt=" + publishBeginAt + ", publishEndAt="
+				+ publishEndAt + ", createUserid=" + createUserid
+				+ ", createAt=" + createAt + ", praiseCount=" + praiseCount
+				+ ", picList=" + picList + ", updateAt=" + updateAt
+				+ ", reasonSta=" + reasonSta + "]";
+	}
+	
 }

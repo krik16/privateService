@@ -69,4 +69,13 @@ public class NoticeRecordEntity implements Serializable{
     public void setStatus(Integer status) {
         this.status = status;
     }
+
+	@Override
+	public String toString() {
+		return "NoticeRecordEntity [id=" + id + ", noticeId=" + noticeId
+				+ ", reason=" + reason + ", createAt=" + createAt
+				+ ", createUser=" + createUser + ", status=" + status + "]";
+	}
+    
+    
 }
