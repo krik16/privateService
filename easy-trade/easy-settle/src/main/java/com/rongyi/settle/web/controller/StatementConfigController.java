@@ -13,19 +13,23 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.rongyi.core.bean.ObjectConvert;
 import com.rongyi.core.bean.ResponseData;
+import com.rongyi.core.common.util.DateUtil;
+import com.rongyi.easy.settle.entity.BussinessInfo;
 import com.rongyi.easy.settle.entity.StatementConfig;
-import com.rongyi.easy.settle.vo.StatementConfigVO;
 import com.rongyi.rss.malllife.roa.ROARedisService;
 import com.rongyi.settle.constants.CodeEnum;
 import com.rongyi.settle.constants.ConstantEnum;
 import com.rongyi.settle.service.StatementConfigService;
+import com.rongyi.settle.util.MapUtils;
 
 /**	
  * @Author:  柯军
@@ -60,7 +64,7 @@ public class StatementConfigController {
 			return ResponseData.success(list,currentPage, ConstantEnum.PAGE_SIZE.getCodeInt(), count);
 		}catch(Exception e){
 			e.printStackTrace();
-			return ResponseData.failure(CodeEnum.FIAL_CONFIG_LIST.getCodeInt(),CodeEnum.FIAL_CONFIG_LIST.getValueStr());
+			return ResponseData.failure(CodeEnum.FIAL_LIST.getCodeInt(),CodeEnum.FIAL_LIST.getValueStr());
 		}
 		
 	}
@@ -73,16 +77,11 @@ public class StatementConfigController {
 	 * @datetime:2015年9月21日下午2:55:32
 	 **/
 	@RequestMapping("/add")
-	public ResponseData add(HttpServletRequest request,@RequestBody Map<String, Object> map){
-//		BSR1509010001
-//		redisService.setObject("uploadFailList-" + random, getJSONString(readFailList));
-//		statementConfigService
-		return null;
+	@ResponseBody
+	public ResponseData add(HttpServletRequest request){
+		return ResponseData.success(getRuleCode());
 	}
 	
-//	private String getRuleCode(){
-//		"B"
-//	}
 	
 	/**	
 	 * @Description: 保存配置 
@@ -93,8 +92,20 @@ public class StatementConfigController {
 	 * @datetime:2015年9月21日下午2:57:11
 	 **/
 	@RequestMapping("/save")
-	public ResponseData save(HttpServletRequest request,@RequestBody StatementConfigVO statementConfigVO){
-		return null;
+	@ResponseBody
+	public ResponseData save(HttpServletRequest request,@RequestBody Map<String, Object> map){
+		try {
+//			StatementConfig statementConfig = new StatementConfig();
+			BussinessInfo bussinessInfo = new BussinessInfo();
+			StatementConfig statementConfig = (StatementConfig) ObjectConvert.convertFromMap(StatementConfig.class, map);
+//			MapUtils.toObject(statementConfig, map);
+//			MapUtils.toObject(bussinessInfo, map);
+			statementConfigService.saveStatementConfigAndInfo(statementConfig, bussinessInfo);
+			return ResponseData.success();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ResponseData.failure(CodeEnum.FIAL_LIST.getCodeInt(),CodeEnum.FIAL_LIST.getValueStr());
 	}
 	
 	
@@ -107,6 +118,7 @@ public class StatementConfigController {
 	 * @datetime:2015年9月21日下午2:59:22
 	 **/
 	@RequestMapping("/update")
+	@ResponseBody
 	public ResponseData update(HttpServletRequest request,@RequestBody Map<String, Object> map){
 		return null;
 	}
@@ -120,6 +132,7 @@ public class StatementConfigController {
 	 * @datetime:2015年9月21日下午2:59:34
 	 **/
 	@RequestMapping("/modify")
+	@ResponseBody
 	public ResponseData modify(HttpServletRequest request,@RequestBody Map<String, Object> map){
 		return null;
 		
@@ -135,6 +148,7 @@ public class StatementConfigController {
 	 * @datetime:2015年9月21日下午3:00:10
 	 **/
 	@RequestMapping("/info")
+	@ResponseBody
 	public ResponseData info(HttpServletRequest request,@RequestBody Map<String, Object> map){
 		return null;
 	}
@@ -148,7 +162,36 @@ public class StatementConfigController {
 	 * @datetime:2015年9月21日下午3:00:26
 	 **/
 	@RequestMapping("/verify")
+	@ResponseBody
 	public ResponseData verify(HttpServletRequest request,@RequestBody Map<String, Object> map){
 		return null;
+	}
+	
+	/**	
+	 * @Description: 生成规则编码 
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年9月22日下午3:37:03
+	 **/
+	private String getRuleCode(){
+		StringBuffer sb = new StringBuffer();
+		try {
+			sb.append("BSR");
+			sb.append(DateUtil.getCurrentDateYYMMDD());
+			String key = sb.toString();
+			String ruleCode = redisService.get(key);
+			if(StringUtils.isEmpty(ruleCode)){
+				sb.append("0001");
+			}else{
+				int num = Integer.valueOf(ruleCode.substring(10,14));
+				String str = String.format("%04d", ++num);  
+				sb.append(str);
+			}	
+			redisService.set(key,sb.toString());
+			redisService.expire(key,60*60*48);//两天后失效
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return sb.toString();
 	}
 }

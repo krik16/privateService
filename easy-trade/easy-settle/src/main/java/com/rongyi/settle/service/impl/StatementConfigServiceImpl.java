@@ -12,11 +12,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.settle.entity.BussinessInfo;
 import com.rongyi.easy.settle.entity.StatementConfig;
+import com.rongyi.settle.service.BussinessInfoService;
 import com.rongyi.settle.service.StatementConfigService;
 
 /**
@@ -30,7 +32,9 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 
 	private static final String NAMESPACE = "com.rongyi.settle.mapper.xml.StatementConfigMapper";
 	
-
+	@Autowired
+	BussinessInfoService bussinessInfoService;
+	
 	@Override
 	public List<StatementConfig> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
 		map.put("currentPage", currentPage * pageSize);
@@ -63,7 +67,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 	@Override
 	public void saveStatementConfigAndInfo(StatementConfig statementConfig, BussinessInfo bussinessInfo) {
 		insert(statementConfig);
-		//TODO insert bussiness info
+		bussinessInfoService.insert(bussinessInfo);
 	}
 
 }
