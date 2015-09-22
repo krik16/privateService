@@ -267,7 +267,7 @@ public class WebPageAlipayController extends BaseController {
 	public void weixinNotify(Model model, HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> requestMap = parseXml(request);
 		if ("SUCCESS".equals(requestMap.get("result_code"))) {
-			LOGGER.info("<--微信支付异步通知开始");
+			LOGGER.info("<--微信支付异步通知开始,交易流水号："+requestMap.get("transaction_id").toString());
 			Map<String, Object> responseMap = new HashMap<String, Object>();
 			responseMap.put("return_code", Constants.RESULT.SUCCESS);
 			responseMap.put("return_msg", "OK");
