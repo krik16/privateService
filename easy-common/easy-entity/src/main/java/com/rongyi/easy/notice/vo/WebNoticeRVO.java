@@ -54,5 +54,12 @@ public class WebNoticeRVO implements Serializable{
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+	@Override
+	public String toString() {
+		return "WebNoticeRVO [id=" + id + ", noticeId=" + noticeId
+				+ ", reason=" + reason + ", createAt=" + createAt
+				+ ", createUser=" + createUser + ", status=" + status + "]";
+	}
+	
     
 }
