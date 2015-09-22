@@ -106,7 +106,7 @@
 			</c:when>
 			<c:otherwise>
 				<tr>
-					<td style="text-align: center;" colspan="15">暂无记录</td>
+					<td style="text-align: center;" colspan="18">暂无记录</td>
 				</tr>
 			</c:otherwise>
 		</c:choose>

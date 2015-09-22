@@ -143,6 +143,9 @@
 		<if test="sellerName != null">
 			and seller_name like #{sellerName,jdbcType=VARCHAR}
 		</if>
+		<if test="sellerAccount != null">
+			and seller_account like #{sellerAccount,jdbcType=VARCHAR}
+		</if>
 		<if test="uploadStart != null">
 			and pic_upload_at >= #{uploadStart,jdbcType=TIMESTAMP}
 		</if>
@@ -199,6 +202,9 @@
 		</if>
 		<if test="sellerName != null">
 			and seller_name like #{sellerName,jdbcType=VARCHAR}
+		</if>
+		<if test="sellerAccount != null">
+			and seller_account like #{sellerAccount,jdbcType=VARCHAR}
 		</if>
 		<if test="uploadStart != null">
 			and pic_upload_at >= #{uploadStart,jdbcType=TIMESTAMP}

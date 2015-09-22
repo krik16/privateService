@@ -142,7 +142,7 @@ function getParamsJson(){
 	  var shopName = $("input[name='shopId']").val();
 	  var buyerAccount = $('#buyerAccount').val();
 	  var buyerName = $('#buyerName').val();
-	  var sellerName = $('#sellerName').val();
+	  var sellerAccount = $('#sellerAccount').val();
 	  var tradeType = $('#tradeType').val();
 	  var payChannel = $('#payChannel').val();
 	  var tradeStartTime = $('#tradeStartTime').val();
@@ -160,7 +160,7 @@ function getParamsJson(){
 		        'shopName':shopName,
 		        'buyerAccount':buyerAccount,
 		        'buyerName':buyerName,
-		        'sellerName':sellerName,
+		        'sellerAccount':sellerAccount,
 		        'tradeType':tradeType,
 		        'payChannel':payChannel,
 		        'tradeStartTime':tradeStartTime,

@@ -145,6 +145,11 @@
 			AND rmmm_user_info.user_name like
 			concat('%',#{sellerName,jdbcType=VARCHAR},'%')
 		</if>
+		<!-- 卖家账号 -->
+		<if test="sellerAccount != null and sellerName != ''">
+			AND rmmm_user_info.user_phone like
+			concat('%',#{sellerAccount,jdbcType=VARCHAR},'%')
+		</if>
 		<!-- 收支类型 -->
 		<!-- 收入 -->
 		<if test="tradeType == 0">

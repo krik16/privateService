@@ -91,7 +91,7 @@ a.btnsearch{
 				<li class="xiala">店铺：<input type="text" name="shopid" style="width: 120px"></input>
 				</li>
 				
-				<li>卖家姓名：<input id="name" type="text" style="width: 120px"></input>
+				<li>卖家账号：<input id="name" type="text" style="width: 120px"></input>
 				</li>
 				<li>打款方式：
 					

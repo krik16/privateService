@@ -151,7 +151,7 @@ public class DrawApplyPageParam {
             params.put("drawNO",this.getDrawNo());
         }
         if(StringUtils.isNotBlank(this.getSeller())){
-            params.put("sellerName","%"+this.getSeller()+"%");
+            params.put("sellerAccount","%"+this.getSeller()+"%");
         }
         if(StringUtils.isNotBlank(this.getStart())){
             params.put("start",DateUtil.stringToDate(this.getStart(), DateTool.FORMAT_DATETIME));
