@@ -28,7 +28,10 @@ public enum MallLifeErrorCode {
     DECRYPTION_FAILURE(1068115,"解码失败,加密格式不对"),
     /*  8200-8250 参数合法性验证 */
     MOBILE_NUMBER_ILLEGAL(1068201,"手机号码不合法"),
-    USER_PHONE_ISEXIST(1068205,"注册手机号已经存在")
+    USER_PHONE_ISEXIST(1068205,"注册手机号已经存在"),
+
+    /**toB业务 */
+    COUPON_IDS_ISEXIST(1069101,"优惠卷(红包)ID为空")
     ;
 
 

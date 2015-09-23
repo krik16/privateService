@@ -1,4 +1,5 @@
-package com.rongyi.core.common.third.malllife;/*
+package com.rongyi.core.common.third.malllife;
+/*
  * Copyright (C),上海容易网电子商务有限公司
  * Author:  俞志坚
  * Description:  签名验证
@@ -9,13 +10,20 @@ package com.rongyi.core.common.third.malllife;/*
  *
  */
 
-import com.rongyi.core.bean.ResponseData;
 import com.rongyi.core.common.third.exception.ThirdException;
 import com.rongyi.core.common.third.md5.Md5Util;
 import com.rongyi.core.common.third.param.user.UserThirdParam;
 
 public class MallLifeSignUtil {
 
+
+    /**
+     * 验证签名是否正确
+     * @param userThirdParam 请求参数
+     * @param token 约定token
+     * @return 错误 false; 正确 true
+     * @throws ThirdException
+     */
     public static Boolean verificationSign(UserThirdParam userThirdParam,String token)throws ThirdException{
         Boolean istrue=false;
         try{
