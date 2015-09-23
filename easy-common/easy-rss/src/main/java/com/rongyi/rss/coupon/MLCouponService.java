@@ -18,13 +18,6 @@ public interface MLCouponService {
      * @param ids
      * @return
      */
-    public List<OldCouponVO> findCouponDetailByIds(List<String> ids);
+    public List<OldCouponVO> findCouponVOByIds(List<String> ids);
 
-    /**
-     * id集合查询（优化）
-     *
-     * @param ids
-     * @return
-     */
-    public List<OldCouponVO> findCouponIndexByIds(List<String> ids);
 }
