@@ -44,6 +44,7 @@ public class OldCouponVO implements Serializable {
     private String use_restriction; // 使用限制
     private String description;//描述
     private String use_mode;        // 使用方式
+    private int inventoryQuantity;//剩余库存
 
     @Deprecated
     private List<OldShopVO> apply_shops;
@@ -323,5 +324,13 @@ public class OldCouponVO implements Serializable {
 
     public void setShops(List<OldShopVO> shops) {
         this.shops = shops;
+    }
+
+    public int getInventoryQuantity() {
+        return inventoryQuantity;
+    }
+
+    public void setInventoryQuantity(int inventoryQuantity) {
+        this.inventoryQuantity = inventoryQuantity;
     }
 }
