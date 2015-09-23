@@ -47,6 +47,25 @@ public class PaymentStatementController {
     public ResponseData list(@RequestBody Map<String, Object> map) {
         try {
             Integer currentPage = Integer.valueOf(map.get("currentPage").toString());
+            Integer searchType = Integer.valueOf(map.get("searchType").toString());
+            Integer searchStatus = Integer.valueOf(map.get("searchStatus").toString());
+            if (searchType == 0) {//查询对账单列表
+                if (searchStatus == 0) {
+                    map.put("searchStatus", null);
+                } else map.put("searchStatus", 5);
+            } else if (searchType == 1) {//查询对账单审核列表
+                if (searchStatus == 0) {
+                    map.put("searchStatus", 0);
+                } else map.put("searchStatus", 3);
+            } else if (searchType == 2) {//查询待付款列表
+                if (searchStatus == 0) {
+                    map.put("searchStatus", 4);
+                } else map.put("searchStatus", 6);
+            } else if (searchType == 3) {//查询付款列表
+                map.put("searchStatus", 6);
+            } else if (searchType == 4) {//查询付款记录列表
+                map.put("searchStatus", 11);
+            }
             List<PaymentStatementDto> list = paymentStatementService.selectPageList(map, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt());
             Integer count = paymentStatementService.selectPageListCount(map);
             return ResponseData.success(list, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt(), count);

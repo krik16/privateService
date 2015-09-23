@@ -157,7 +157,7 @@
   </resultMap>
 
   <sql id="list_where_clause">
-    <if test="searchStatus != null and searchStatus != 0">
+    <if test="searchStatus != null">
       and ps.status = #{searchStatus,jdbcType=TINYINT}
     </if>
     <if test="type != null">
