@@ -32,4 +32,15 @@ public interface ROACouponCodeService {
     public int countByCouponId(String couponId);
 
     public List<CouponCode> getCodesByCouponId(String couponId);
+
+
+    /**
+     * 更改券码状态 （推送用）
+     *
+     * @param couponCode
+     * @param status
+     * @return
+     */
+    public int updateStatusByCouponCode(String couponCode, Integer status);
+
 }

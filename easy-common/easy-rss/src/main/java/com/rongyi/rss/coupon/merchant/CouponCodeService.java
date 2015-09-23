@@ -32,4 +32,6 @@ public interface CouponCodeService {
     public int countByCouponId(String couponId);
 
     public List<CouponCode> getCodesByCouponId(String couponId);
+
+    public int updateStatusByCouponCode(String couponCode, Integer status);
 }
