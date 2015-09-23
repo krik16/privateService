@@ -17,7 +17,7 @@ public enum BsomsEnum {
     ERROR_CHANNEL_EMPTY(1080006, "[channel]参数为空"),
     
     /** 正常 但没有数据*/
-    ERROR_USER_NOFOUND(1080007, "用户不存在或未登录");
+    ERROR_USER_NOFOUND(1080401, "用户不存在或未登录");
     
     
     private Integer errno; 

@@ -119,4 +119,20 @@ public interface ROAUserInfoService {
 	 * @throws Exception
 	 */
 	public Map getSessionUser(String bsst,boolean bConvertToObj) throws Exception;
+	
+	/**
+	 * 判断当前用户是否具有指定角色权限
+	 * @param ryst
+	 * @param authority
+	 * @return
+	 */
+	public boolean hasRoleAuthority(String ryst,String authority) throws Exception;
+	
+	/**
+	 * 判断当前用户是否具有指定角色权限中的任何一个
+	 * @param request
+	 * @param roleAuthorities
+	 * @return
+	 */
+	public boolean hasAnyRoleAuthority(String ryst,List<String> authorities) throws Exception;
 }
