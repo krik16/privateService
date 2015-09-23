@@ -51,5 +51,5 @@ public interface ICodeValidService {
      * @param status
      * @return
      */
-    public boolean validateHagenCoupon(String couponCode, byte status);
+    public boolean validateHagenCoupon(String couponCodeMd5, byte status);
 }
