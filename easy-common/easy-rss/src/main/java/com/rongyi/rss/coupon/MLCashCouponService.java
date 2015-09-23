@@ -8,7 +8,7 @@ import com.rongyi.core.bean.ResponseResult;
  * @author Breggor
  *         mallshop:ms
  */
-public interface MSCashCouponService {
+public interface MLCashCouponService {
 
     /**
      * 根据用户ID及现金ID检查是否已领过现金券

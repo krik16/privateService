@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 用户现金券>服务接口
+ * 摩生活：用户现金券接口
  *
  * @author Breggor
  */
-public interface MSUserCashCouponService {
+public interface MLUserCashCouponService {
 
     /**
      * 接口描述：用户现金券 (未使用/已使用) 列表查询
@@ -58,6 +58,7 @@ public interface MSUserCashCouponService {
 
     /**
      * 通过couponCode改变优惠券当前状态
+     *
      * @param status
      * @return
      */
