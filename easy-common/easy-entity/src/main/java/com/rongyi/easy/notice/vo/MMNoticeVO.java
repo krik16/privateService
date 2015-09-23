@@ -1,6 +1,5 @@
 package com.rongyi.easy.notice.vo;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
 
 import com.rongyi.easy.notice.entity.NoticeRecordEntity;
 
@@ -40,6 +39,8 @@ public class MMNoticeVO implements Serializable{
     private Date updateAt;
     /**ze*/
     private List<NoticeRecordEntity> reasonSta;
+    /**创建人*/
+    private String createUser;
     
 	public Integer getId() {
 		return id;
@@ -121,6 +122,13 @@ public class MMNoticeVO implements Serializable{
 	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;
 	}
+	
+	public String getCreateUser() {
+		return createUser;
+	}
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
 	@Override
 	public String toString() {
 		return "MMNoticeVO [id=" + id + ", content=" + content + ", shopName="
@@ -129,7 +137,8 @@ public class MMNoticeVO implements Serializable{
 				+ publishEndAt + ", createUserid=" + createUserid
 				+ ", createAt=" + createAt + ", praiseCount=" + praiseCount
 				+ ", picList=" + picList + ", updateAt=" + updateAt
-				+ ", reasonSta=" + reasonSta + "]";
+				+ ", reasonSta=" + reasonSta + ", createUser=" + createUser
+				+ "]";
 	}
 	
 }
