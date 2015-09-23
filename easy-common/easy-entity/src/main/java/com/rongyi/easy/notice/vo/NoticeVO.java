@@ -10,7 +10,7 @@ import java.util.List;
  * @time 2015-09-10
  * 
  */
-public class NoticeOVo implements Serializable{
+public class NoticeVO implements Serializable{
 	/**id*/
     private Integer id;
     /**公告内容*/
