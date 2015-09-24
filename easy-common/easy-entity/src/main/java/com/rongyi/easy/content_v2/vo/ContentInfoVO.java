@@ -53,6 +53,11 @@ public class ContentInfoVO implements Serializable{
   
     /**记录状态 0待发布、1已发布、2已关闭*/
     private Integer status;
+    
+    /**
+     * 位置id
+     */
+    private Integer positionId;
 
 	public Integer getId() {
 		return id;
@@ -218,6 +223,8 @@ public class ContentInfoVO implements Serializable{
 		this.picName = picName;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "ContentInfoVO [id=" + id + ", provName=" + provName
@@ -229,7 +236,15 @@ public class ContentInfoVO implements Serializable{
 				+ publishBeginAt + ", publishEndAt=" + publishEndAt
 				+ ", createUser=" + createUser + ", createAt=" + createAt
 				+ ", updateUser=" + updateUser + ", updateAt=" + updateAt
-				+ ", status=" + status + "]";
+				+ ", status=" + status + ", positionId=" + positionId + "]";
+	}
+
+	public Integer getPositionId() {
+		return positionId;
+	}
+
+	public void setPositionId(Integer positionId) {
+		this.positionId = positionId;
 	}
     
     

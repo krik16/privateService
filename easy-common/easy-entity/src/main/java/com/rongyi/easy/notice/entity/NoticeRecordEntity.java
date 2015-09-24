@@ -19,7 +19,7 @@ public class NoticeRecordEntity implements Serializable{
     private Date createAt;
     /**创建人*/
     private String createUser;
-    /**状态	0有效，1无效*/
+    /**状态	1审核通过  2审核不通过*/
     private Integer status;
 
     public Integer getId() {
