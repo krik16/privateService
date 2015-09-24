@@ -271,7 +271,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 					paymentEntity.getPayChannel());
 			Map<String, Object> refundResultMap = weixinRefund(oldPaymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), oldPaymentEntity.getAmountMoney().doubleValue(),
 					paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
-			if (Constants.RESULT.SUCCESS.equals(refundResultMap.get("result"))) {
+			if (Constants.RESULT.SUCCESS.equals(refundResultMap.get("result")) || ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr().equals(equals(refundResultMap.get("result")))) {
 				paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
 				paymentService.updateByPrimaryKeySelective(paymentEntity);
 				String target = Constants.SOURCETYPE.OSM;
