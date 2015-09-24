@@ -1,7 +1,7 @@
 package com.rongyi.rss.content;
 
 
-import com.rongyi.core.bean.ResponseData;
+import com.rongyi.core.bean.ResponseVO;
 
 /**
  * 容易逛首页配置业务接口
@@ -20,5 +20,5 @@ public interface MLHomePageContentService {
      * @param userId 用户Id
      * @return
      */
-    ResponseData findHomePageContentBy(String cityId, String cityName, String userId);
+    ResponseVO findHomePageContentBy(String cityId, String cityName, String userId);
 }

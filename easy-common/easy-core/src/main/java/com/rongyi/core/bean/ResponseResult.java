@@ -5,7 +5,7 @@ package com.rongyi.core.bean;
  * 逐渐废弃
  *
  * @author baodk
- * @see ResponseData
+ * @see ResponseVO
  */
 @Deprecated
 public class ResponseResult implements java.io.Serializable {

@@ -29,7 +29,7 @@ import java.io.Serializable;
  *
  * @author Breggor
  */
-public class ResponseData implements java.io.Serializable {
+public class ResponseVO implements java.io.Serializable {
 
     private static final Meta SUCCESS = new Meta(0, "success"); //成功
     private static final Meta FAILURE = new Meta(1, "failure"); //失败
@@ -42,8 +42,8 @@ public class ResponseData implements java.io.Serializable {
      *
      * @return ResponseData
      */
-    public static ResponseData success() {
-        return new ResponseData(ResponseData.SUCCESS, null);
+    public static ResponseVO success() {
+        return new ResponseVO(ResponseVO.SUCCESS, null);
     }
 
     /**
@@ -52,8 +52,8 @@ public class ResponseData implements java.io.Serializable {
      * @param data 数据
      * @return ResponseData
      */
-    public static <T> ResponseData success(T data) {
-        return new ResponseData(ResponseData.SUCCESS, new Result(data, null));
+    public static <T> ResponseVO success(T data) {
+        return new ResponseVO(ResponseVO.SUCCESS, new Result(data, null));
     }
 
     /**
@@ -65,8 +65,8 @@ public class ResponseData implements java.io.Serializable {
      * @param totalCount  总行数
      * @return ResponseData
      */
-    public static <T> ResponseData success(T data, Integer currentPage, Integer pageSize, Integer totalCount) {
-        return new ResponseData(ResponseData.SUCCESS, data, currentPage, pageSize, totalCount);
+    public static <T> ResponseVO success(T data, Integer currentPage, Integer pageSize, Integer totalCount) {
+        return new ResponseVO(ResponseVO.SUCCESS, data, currentPage, pageSize, totalCount);
     }
 
 
@@ -75,8 +75,8 @@ public class ResponseData implements java.io.Serializable {
      *
      * @return ResponseData
      */
-    public static ResponseData failure() {
-        return new ResponseData(ResponseData.FAILURE, null);
+    public static ResponseVO failure() {
+        return new ResponseVO(ResponseVO.FAILURE, null);
     }
 
 
@@ -87,12 +87,12 @@ public class ResponseData implements java.io.Serializable {
      * @param msg
      * @return ResponseData
      */
-    public static ResponseData failure(int errno, String msg) {
-        return new ResponseData(new Meta(errno, msg), null);
+    public static ResponseVO failure(int errno, String msg) {
+        return new ResponseVO(new Meta(errno, msg), null);
     }
 
 
-    private <T> ResponseData(Meta meta, T data, Integer currentPage, Integer pageSize, Integer totalCount) {
+    private <T> ResponseVO(Meta meta, T data, Integer currentPage, Integer pageSize, Integer totalCount) {
         this.meta = meta;
         if (data != null && currentPage != null && pageSize != null && totalCount != null) {
             this.result = new Result(data, new Page(currentPage, pageSize, totalCount)); ;
@@ -100,7 +100,7 @@ public class ResponseData implements java.io.Serializable {
     }
 
 
-    private ResponseData(Meta meta, Result result) {
+    private ResponseVO(Meta meta, Result result) {
         this.meta = meta;
         this.result = result;
     }
@@ -231,10 +231,10 @@ public class ResponseData implements java.io.Serializable {
     }
 
     public static void main(String[] args) {
-        System.out.println(JSONObject.fromObject(ResponseData.success()));
-        System.out.println(JSONObject.fromObject(ResponseData.success("处理成功：返回单个对象")));
-        System.out.println(JSONObject.fromObject(ResponseData.success("处理成功：返回对象集合List<Object>", 1, 10, 200)));
-        System.out.println(JSONObject.fromObject(ResponseData.failure()));
-        System.out.println(JSONObject.fromObject(ResponseData.failure(1020001, "业务出错")));
+        System.out.println(JSONObject.fromObject(ResponseVO.success()));
+        System.out.println(JSONObject.fromObject(ResponseVO.success("处理成功：返回单个对象")));
+        System.out.println(JSONObject.fromObject(ResponseVO.success("处理成功：返回对象集合List<Object>", 1, 10, 200)));
+        System.out.println(JSONObject.fromObject(ResponseVO.failure()));
+        System.out.println(JSONObject.fromObject(ResponseVO.failure(1020001, "业务出错")));
     }
 }
