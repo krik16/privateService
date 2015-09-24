@@ -14,7 +14,7 @@ public class KillActivityListVO implements Serializable {
 
 	private String showTitle;//活动名称
 
-	private String continueTime;//持续时间
+	private Integer continueTime;//持续时间
 
 	private List<KillActivityVO> couponList;//代金券列表
 
@@ -26,11 +26,11 @@ public class KillActivityListVO implements Serializable {
 		this.showTitle = showTitle;
 	}
 
-	public String getContinueTime() {
+	public Integer getContinueTime() {
 		return continueTime;
 	}
 
-	public void setContinueTime(String continueTime) {
+	public void setContinueTime(Integer continueTime) {
 		this.continueTime = continueTime;
 	}
 
