@@ -20,6 +20,7 @@ public class CommodityListVO implements Serializable{
 	
 	private Long commodityBPCount;//待处理商品数量
 	
+	private Long commodityCheckCount;//待审核商品数量
 	
 	public List<CommodityVO1> getCommodityList() {
 		return commodityList;
@@ -77,4 +78,13 @@ public class CommodityListVO implements Serializable{
 		this.commodityBPCount = commodityBPCount;
 	}
 
+	public Long getCommodityCheckCount() {
+		return commodityCheckCount;
+	}
+
+	public void setCommodityCheckCount(Long commodityCheckCount) {
+		this.commodityCheckCount = commodityCheckCount;
+	}
+	
+	
 }

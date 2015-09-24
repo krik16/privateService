@@ -12,6 +12,8 @@ import com.rongyi.easy.mcmc.mvc.DateJson.DateJsonDeserializer;
 
 public class CommodityParam {
 	
+	private Integer type;//类型0表示只修改库存1表示修改山商品所有信息
+	
 	private String id;//系统编号
 	
 	private String name;//商品名称
@@ -253,5 +255,12 @@ public class CommodityParam {
 	public void setStock(Integer stock) {
 		this.stock = stock;
 	}
-	
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
 }

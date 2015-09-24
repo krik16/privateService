@@ -41,4 +41,6 @@ public interface ROATotalCommodityService {
 	public Long searchCommodityCount(Map<String,Object> paramMap);
 	
 	public void insertTotalCommodityList(List<TotalCommodity> toalCommodities);
+	
+	public List<TotalCommodity>  findByTotalCommodityCode(List<String> codes);
 }

@@ -27,6 +27,7 @@ public class CommodityVO2 implements  Serializable {
 	private List<String> picList;//商品图片列表
 	private List<CommoditySpecVO1> specList;//商品规格列表
 	private List<CommoditySpecVO2> specVO2List;//商品规格店铺表
+	private List<String> categoryIds;//商品所属的品类id
 	private List<String> categoryNames;//商品所属的品类列表
 	private List<String> customCategory;//自定义分类列表
 	private String description;//商品描述
@@ -187,4 +188,11 @@ public class CommodityVO2 implements  Serializable {
 	public void setStockStatus(Integer stockStatus) {
 		this.stockStatus = stockStatus;
 	}
+	public List<String> getCategoryIds() {
+		return categoryIds;
+	}
+	public void setCategoryIds(List<String> categoryIds) {
+		this.categoryIds = categoryIds;
+	}
+	
 }

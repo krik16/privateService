@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.bson.types.ObjectId;
 
-import com.rongyi.easy.mcmc.Commodity;
 import com.rongyi.easy.mcmc.TotalCommodity;
 
 
@@ -35,4 +34,6 @@ public interface ITotalCommodityService {
 	public Long searchCommodityCount(Map<String,Object> paramMap);
 	
 	public void insertTotalCommodityList(List<TotalCommodity> toalCommodities);
+	
+	List<TotalCommodity>  findByTotalCommodityCode(List<String> codes);
 }
