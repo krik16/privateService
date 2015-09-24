@@ -19,6 +19,7 @@ public class StarShopListParam implements Serializable{
 	private String cityId;//城市id
 	private String cityName;//城市名称
 	private String jsessionid;//容易逛用户jsessionId
+	private String version;//版本号
 	public String getCityId() {
 		return cityId;
 	}
@@ -36,6 +37,12 @@ public class StarShopListParam implements Serializable{
 	}
 	public void setJsessionid(String jsessionid) {
 		this.jsessionid = jsessionid;
+	}
+	public String getVersion() {
+		return version;
+	}
+	public void setVersion(String version) {
+		this.version = version;
 	}
 	
 }
