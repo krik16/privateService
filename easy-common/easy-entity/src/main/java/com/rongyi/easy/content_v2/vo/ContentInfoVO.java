@@ -58,6 +58,7 @@ public class ContentInfoVO implements Serializable{
      * 位置id
      */
     private Integer positionId;
+    
 
 	public Integer getId() {
 		return id;
