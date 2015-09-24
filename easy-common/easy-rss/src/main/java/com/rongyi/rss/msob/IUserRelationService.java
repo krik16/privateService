@@ -1,6 +1,7 @@
 package com.rongyi.rss.msob;
 
 import com.rongyi.easy.rmmm.entity.RmmmUserInfoEntity;
+import com.rongyi.easy.rmmm.entity.RmmmUserRelationEntity;
 import com.rongyi.easy.rmmm.param.ExclusiveGuideParam;
 import com.rongyi.easy.rmmm.vo.ExclusiveGuideListVO;
 
@@ -55,4 +56,13 @@ public interface IUserRelationService {
 	 * @throws Exception
 	 */
 	public ExclusiveGuideListVO getExclusiveGuideListVO(ExclusiveGuideParam param,String mallUserMid) throws Exception;
+	
+	/**
+	 * 通过买家id和店铺id查正常的专属导购信息
+	 * @param mallUserMid
+	 * @param shopId
+	 * @return
+	 * @throws Exception
+	 */
+	public RmmmUserRelationEntity getGuideInfoByMallUserIdAndShopIdAndStatus(String mallUserMid,Integer shopId) throws Exception;
 }
