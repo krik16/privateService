@@ -29,11 +29,13 @@ public class AlipayConfig {
 	}
 	//↓↓↓↓↓↓↓↓↓↓请在这里配置您的基本信息↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 	// 合作身份者ID，以2088开头由16位纯数字组成的字符串
-	public static final String partner = "2088701977493485";
+	public static final String partner = "2088021596388211";
 	
 	// 交易安全检验码，由数字和字母组成的32位字符串
 	// 如果签名方式设置为“MD5”时，请设置该参数
-	public static final String key = "1htrinnzcp1371s5hbbt9gr5p1wlgz2f";
+//	public static final String key = "1htrinnzcp1371s5hbbt9gr5p1wlgz2f";
+	//新账号密钥
+	public static final String key = "yr5mrlel9ec7hde155le39jaq7fy2td3";
 	
     // 商户的私钥
     // 如果签名方式设置为“0001”时，请设置该参数
