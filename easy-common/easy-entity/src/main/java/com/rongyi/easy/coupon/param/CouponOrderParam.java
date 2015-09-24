@@ -1,6 +1,7 @@
 package com.rongyi.easy.coupon.param;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 卡券订单参数
@@ -18,6 +19,9 @@ public class CouponOrderParam implements Serializable {
     private String couponCode;// 卡券码号
     private String userId;// 用户Id
     private String userSrc;// 用户渠道
+    private List<String> couponCodes;//券码列表。用于一个订单多张卡券（中秋哈根达斯活动）
+
+
     /**
      * 0普通单
      * 1 “0元单”
@@ -100,5 +104,13 @@ public class CouponOrderParam implements Serializable {
 
     public void setBusiness(Byte business) {
         this.business = business;
+    }
+
+    public List<String> getCouponCodes() {
+        return couponCodes;
+    }
+
+    public void setCouponCodes(List<String> couponCodes) {
+        this.couponCodes = couponCodes;
     }
 }
