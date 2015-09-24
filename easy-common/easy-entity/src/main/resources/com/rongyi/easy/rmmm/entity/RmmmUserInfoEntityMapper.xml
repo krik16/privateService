@@ -20,7 +20,7 @@
     <result column="is_disabled" property="isDisabled" jdbcType="INTEGER" />
     <result column="device_uuid" property="deviceUuid" jdbcType="VARCHAR" />
     <result column="card_id" property="cardId" jdbcType="VARCHAR" />
-    <result column="shar_code" property="sharCode" jdbcType="VARCHAR" />
+    <result column="share_code" property="sharCode" jdbcType="VARCHAR" />
 
 
   </resultMap>
@@ -85,7 +85,7 @@
   <sql id="Base_Column_List" >
     id, user_logo, role_id, user_phone, user_pwd, user_name, user_nick_name, user_status, 
     account_id, create_by, create_at, update_by, update_at, version, is_disabled, device_uuid,
-    card_id,shar_code
+    card_id,share_code
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rongyi.easy.rmmm.entity.RmmmUserInfoEntityExample" >
     select
@@ -123,7 +123,7 @@
       user_nick_name, user_status, account_id,
       create_by, create_at, update_by, 
       update_at, version, is_disabled, 
-      device_uuid, card_id,shar_code)
+      device_uuid, card_id,share_code)
     values (#{id,jdbcType=INTEGER}, #{userLogo,jdbcType=VARCHAR}, #{roleId,jdbcType=INTEGER}, 
       #{userPhone,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
       #{userNickName,jdbcType=VARCHAR}, #{userStatus,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, 
@@ -186,7 +186,7 @@
         card_id,
       </if>
       <if test="cardId != null" >
-        shar_code,
+        share_code,
       </if>
 
     </trim>

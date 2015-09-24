@@ -74,6 +74,7 @@ public class MalllifeRsaUtil {
 
             str= Base64Helper.encode(encodeUserName);
         }catch (Exception e){
+            e.printStackTrace();
             logger.info("====加密失败===");
             throw new ThirdException("加密失败");
         }
