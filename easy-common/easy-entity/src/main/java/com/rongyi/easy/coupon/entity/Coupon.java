@@ -16,6 +16,8 @@ import java.util.List;
  *
  * @author Breggor
  */
+
+@Deprecated
 @Entity(value = "coupon", noClassnameStored = true)
 public class Coupon implements Serializable {
 
