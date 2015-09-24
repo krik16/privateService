@@ -63,7 +63,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 		sParaTempToken.put("_input_charset", ConstantUtil.PayZhiFuBao.INPUT_CHARSET);
 		sParaTempToken.put("sign_type", ConstantUtil.PayZhiFuBao.SIGNTYPE);
 		sParaTempToken.put("notify_url", ConstantUtil.PCZhiFuBaoWebPage.NOTIFY_URL_ZHIFUBAO_PC_WEB);
-		sParaTempToken.put("account_name", "上海容易网电子商务有限公司");
+		sParaTempToken.put("account_name", ConstantUtil.PCZhiFuBaoWebPage.ACCOUNT_FULL_NAME);
 		sParaTempToken.put("detail_data", detail_data);
 		sParaTempToken.put("batch_no", getBatchNo(payNo));
 		sParaTempToken.put("batch_num", "1");
