@@ -264,9 +264,11 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 	@Override
 	public void batchTriggerWeixinRefund() {
 		List<String> failList = new ArrayList<String>();
+		List<String> successList = new ArrayList<String>();
 		List<PaymentEntity> list = paymentService.selectByTradeTypeAndRefundRejected(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1,
 				Constants.REFUND_REJECTED.REFUND_REJECTED0, Constants.PAYMENT_STATUS.STAUS0);
 		for (PaymentEntity paymentEntity : list) {
+			successList.add(paymentEntity.getPayNo());
 			PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
 					paymentEntity.getPayChannel());
 			Map<String, Object> refundResultMap = weixinRefund(oldPaymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), oldPaymentEntity.getAmountMoney().doubleValue(),
@@ -289,7 +291,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 			}
 		}
 		if (failList.isEmpty())
-			LOGGER.info("微信批量退款成功！");
+			LOGGER.info("微信批量退款成功 -->"+successList.toString());
 		else
 			LOGGER.info("微信批量退款失败单号-->" + failList.toString());
 	}
