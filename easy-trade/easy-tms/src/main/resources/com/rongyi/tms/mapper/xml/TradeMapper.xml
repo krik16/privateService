@@ -146,7 +146,7 @@
 			concat('%',#{sellerName,jdbcType=VARCHAR},'%')
 		</if>
 		<!-- 卖家账号 -->
-		<if test="sellerAccount != null and sellerName != ''">
+		<if test="sellerAccount != null and sellerAccount != ''">
 			AND rmmm_user_info.user_phone like
 			concat('%',#{sellerAccount,jdbcType=VARCHAR},'%')
 		</if>
@@ -158,7 +158,7 @@
 		</if>
 		<!-- 支出 -->
 		<if test="tradeType == 1 or tradeType == 4">
-			AND (payment_order.trade_type = 1 or
+			AND (payment_order.trade_type = 1 orRF
 			payment_order.trade_type = 4 or payment_order.trade_type = 6)
 		</if>
 
