@@ -20,6 +20,8 @@ public class StarShopListParam implements Serializable{
 	private String cityName;//城市名称
 	private String jsessionid;//容易逛用户jsessionId
 	private String version;//版本号
+	private String longitude;//当前经度
+	private String latitude;//当前纬度
 	public String getCityId() {
 		return cityId;
 	}
@@ -43,6 +45,18 @@ public class StarShopListParam implements Serializable{
 	}
 	public void setVersion(String version) {
 		this.version = version;
+	}
+	public String getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+	public String getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
 	}
 	
 }
