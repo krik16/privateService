@@ -20,7 +20,7 @@ public class CommodityParam {
 	
 	private String category;//商品品类id
 	
-	private String shopId;//店铺id
+	//private String shopId;//店铺id
 	
 	private Integer status;//状态 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理 
 	
@@ -95,14 +95,14 @@ public class CommodityParam {
 		this.category = category;
 	}
 
-	public String getShopId() {
+	/*public String getShopId() {
 		return shopId;
 	}
 
 	public void setShopId(String shopId) {
 		this.shopId = shopId;
 	}
-
+*/
 	public Integer getStatus() {
 		return status;
 	}
@@ -244,13 +244,13 @@ public class CommodityParam {
 		return bsst;
 	}
 
-	public void setBsst(String bsst) {
+	/*public void setBsst(String bsst) {
 		this.bsst = bsst;
 	}
 
 	public Integer getStock() {
 		return stock;
-	}
+	}*/
 
 	public void setStock(Integer stock) {
 		this.stock = stock;
