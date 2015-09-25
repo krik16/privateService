@@ -19,6 +19,8 @@ public class AppVersionVO implements Serializable {
 
 	private Boolean alisdk = false;// false不支持支付宝sdk,true支持
 
+	private Boolean aliweb = false;// false不支持支付宝web支付,true支持
+
 	public Boolean getIfUpdate() {
 		return ifUpdate;
 	}
@@ -49,6 +51,14 @@ public class AppVersionVO implements Serializable {
 
 	public void setAlisdk(Boolean alisdk) {
 		this.alisdk = alisdk;
+	}
+
+	public Boolean getAliweb() {
+		return aliweb;
+	}
+
+	public void setAliweb(Boolean aliweb) {
+		this.aliweb = aliweb;
 	}
 
 }
