@@ -263,12 +263,10 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 
 	@Override
 	public void batchTriggerWeixinRefund() {
-		LOGGER.info("11111");
 		List<String> failList = new ArrayList<String>();
 		List<String> successList = new ArrayList<String>();
 		List<PaymentEntity> list = paymentService.selectByTradeTypeAndRefundRejected(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1,
 				Constants.REFUND_REJECTED.REFUND_REJECTED0, Constants.PAYMENT_STATUS.STAUS0);
-		LOGGER.info("list size"+list.size());
 		for (PaymentEntity paymentEntity : list) {
 			successList.add(paymentEntity.getPayNo());
 			PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
