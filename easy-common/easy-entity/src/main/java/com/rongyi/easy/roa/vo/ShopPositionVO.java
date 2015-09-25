@@ -10,6 +10,9 @@ public class ShopPositionVO implements Serializable {
     private static final long serialVersionUID = 1L;
     private String pro;//
     private String city;
+    private String proId;
+    
+    private String cityId;
     private String area;
     private String business;
     private String mallId;
@@ -80,5 +83,22 @@ public class ShopPositionVO implements Serializable {
     public void setMallId(String mallId) {
         this.mallId = mallId;
     }
+
+	public String getProId() {
+		return proId;
+	}
+
+	public void setProId(String proId) {
+		this.proId = proId;
+	}
+
+	public String getCityId() {
+		return cityId;
+	}
+
+	public void setCityId(String cityId) {
+		this.cityId = cityId;
+	}
+    
 
 }
