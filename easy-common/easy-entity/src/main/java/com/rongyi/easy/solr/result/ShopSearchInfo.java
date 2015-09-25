@@ -30,6 +30,13 @@ public class ShopSearchInfo implements Serializable{
 	private List<String> tags;         //标签，和label一样，用了哪锅？两个都要了，要不你统一一下？
 	private int activityNum;           //优惠数量
 	private String brandId;  // 品牌id ，摩店用
+	private String appearance_pic;
+	public String getAppearance_pic() {
+		return appearance_pic;
+	}
+	public void setAppearance_pic(String appearance_pic) {
+		this.appearance_pic = appearance_pic;
+	}
 	public String getId() {
 		return id;
 	}
