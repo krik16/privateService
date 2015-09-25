@@ -12,6 +12,9 @@ import com.rongyi.easy.settle.dto.PaymentStatementDto;
 import com.rongyi.settle.constants.CodeEnum;
 import com.rongyi.settle.constants.ConstantEnum;
 import com.rongyi.settle.service.PaymentStatementService;
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +35,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("/paymentStatement")
 public class PaymentStatementController {
+
+    Logger logger = LoggerFactory.getLogger(PaymentStatementController.class);
 
     @Autowired
     private PaymentStatementService paymentStatementService;
@@ -102,7 +108,7 @@ public class PaymentStatementController {
     }
 
     /**
-     * @Description: 对账单审核
+     * @Description: 对账单审核（代付款）
      * @param request
      * @param map
      * @return
@@ -111,7 +117,31 @@ public class PaymentStatementController {
      **/
     @RequestMapping("/verify")
     public ResponseData verify(HttpServletRequest request, @RequestBody Map<String, Object> map) {
-        return null;
+        ResponseData result = null;
+        try {
+            logger.info("============ 对账/代付款批量审核 =============");
+            String idStr = map.containsKey("ids") ? map.get("ids").toString() : null;
+            Integer status = map.containsKey("status") ? Integer.valueOf(map.get("status").toString()) : null;
+            if (StringUtils.isBlank(idStr) || status==null){
+                return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt()
+                        ,CodeEnum.FIAL_PARAMS_ERROR.getValueStr()) ;
+            }
+            List<Integer> ids = new ArrayList<>();
+            for (String id : idStr.split(",")){
+                ids.add(Integer.valueOf(id.trim()));
+            }
+            if (paymentStatementService.updatePaymentStatusByIds(ids, status)) {
+                result = ResponseData.success();
+            }else{
+                result = ResponseData.failure(CodeEnum.FIAL_UPDATE_PAYMENT.getCodeInt()
+                        ,CodeEnum.FIAL_UPDATE_PAYMENT.getValueStr());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
+        }
+        logger.info(result.toString());
+        return result;
     }
 
     /**

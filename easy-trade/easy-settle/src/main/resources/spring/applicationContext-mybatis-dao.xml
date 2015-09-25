@@ -20,7 +20,7 @@
 			http://www.springframework.org/schema/util 
 			http://www.springframework.org/schema/util/spring-util-4.0.xsd">
 
-	<bean id="sqlSessionFactorySettle" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations">
 			<list>
@@ -29,10 +29,13 @@
 		</property>
 	</bean>
 
-	
-	<bean id="sqlSessionFactory" class="com.rongyi.settle.datasource.MutilSessionFactory">
-		<property name="sqlSessionFactory"><ref bean="sqlSessionFactorySettle"/></property>
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.rongyi.settle.mapper" />
 	</bean>
+
+	<!--<bean id="sqlSessionFactory" class="com.rongyi.settle.datasource.MutilSessionFactory">
+		<property name="sqlSessionFactory"><ref bean="sqlSessionFactorySettle"/></property>
+	</bean>-->
 	
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
 		<constructor-arg ref="sqlSessionFactory"/>
