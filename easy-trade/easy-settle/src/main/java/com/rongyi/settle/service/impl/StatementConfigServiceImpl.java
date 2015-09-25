@@ -8,6 +8,7 @@
 
 package com.rongyi.settle.service.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,4 +71,10 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 		bussinessInfoService.insert(bussinessInfo);
 	}
 
+	@Override
+	public List<StatementConfig> selectForSchedule() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("currentTime", new Date());
+		return this.getBaseDao().selectListBySql(NAMESPACE + ".selectForSchedule", map);
+	}
 }

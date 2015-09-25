@@ -76,6 +76,10 @@ public interface StatementConfigService {
 	 * @datetime:2015年9月21日下午4:26:16
 	 **/
 	public abstract void saveStatementConfigAndInfo(StatementConfig statementConfig,BussinessInfo bussinessInfo);
-	
 
+	/**
+	 * @Description: 定时任务查询符合条件的对账配置
+	 * @Author:  xgq
+	 **/
+	List<StatementConfig> selectForSchedule();
 }

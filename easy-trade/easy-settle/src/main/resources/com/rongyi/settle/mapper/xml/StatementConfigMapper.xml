@@ -209,4 +209,11 @@
 			<include refid="Base_list_where_clause" />
 		</where>
 	</select>
+
+  <select id="selectPageListCount" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from statement_config
+    where is_delete=0 AND #{currentTime,jdbcType=TIMESTAMP} BETWEEN effect_start_time AND effect_end_time
+  </select>
 </mapper>

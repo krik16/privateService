@@ -104,7 +104,7 @@ public class StatementConfigController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ResponseData.failure(CodeEnum.FIAL_CONFIG_LIST.getCodeInt(),CodeEnum.FIAL_CONFIG_LIST.getValueStr());
+		return ResponseData.failure(CodeEnum.FIAL_CONFIG_LIST.getCodeInt(), CodeEnum.FIAL_CONFIG_LIST.getValueStr());
 	}
 	
 	
@@ -192,5 +192,21 @@ public class StatementConfigController {
 			e.printStackTrace();
 		}
 		return sb.toString();
+	}
+
+	/**
+	 * @Description: 定时任务查询符合条件的对账配置
+	 * @Author:  xgq
+	 **/
+	@RequestMapping("/selectForSchedule")
+	@ResponseBody
+	public ResponseData selectForSchedule(){
+		try{
+			List<StatementConfig> list = statementConfigService.selectForSchedule();
+			return ResponseData.success(list);
+		}catch(Exception e){
+			e.printStackTrace();
+			return ResponseData.failure(CodeEnum.FIAL_CONFIG_LIST.getCodeInt(),CodeEnum.FIAL_CONFIG_LIST.getValueStr());
+		}
 	}
 }
