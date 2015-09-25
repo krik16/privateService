@@ -29,6 +29,7 @@ public class ShopSearchInfo implements Serializable{
 	private int rmmmShopStatus;        //合作商铺状态，0初始，1合作，2有货
 	private List<String> tags;         //标签，和label一样，用了哪锅？两个都要了，要不你统一一下？
 	private int activityNum;           //优惠数量
+	private String brandId;  // 品牌id ，摩店用
 	public String getId() {
 		return id;
 	}
@@ -142,6 +143,12 @@ public class ShopSearchInfo implements Serializable{
 	}
 	public void setActivityNum(int activityNum) {
 		this.activityNum = activityNum;
+	}
+	public String getBrandId() {
+		return brandId;
+	}
+	public void setBrandId(String brandId) {
+		this.brandId = brandId;
 	}
 
 	
