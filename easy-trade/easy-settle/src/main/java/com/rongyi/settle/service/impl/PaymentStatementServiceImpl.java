@@ -2,9 +2,12 @@ package com.rongyi.settle.service.impl;
 
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
+import com.rongyi.easy.settle.entity.PaymentStatement;
 import com.rongyi.settle.service.PaymentStatementService;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,5 +29,14 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
     @Override
     public Integer selectPageListCount(Map<String, Object> map) {
         return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectPageListCount", map);
+    }
+
+    @Override
+    public List<PaymentStatement> selectByCycleTime(Integer configId, Date yesterdayFirstSecond, Date yesterdayLastSecond) {
+        Map map = new HashMap();
+        map.put("configId", configId);
+        map.put("cycleStartTime", yesterdayFirstSecond);
+        map.put("cycleEndTime", yesterdayLastSecond);
+        return this.getBaseDao().selectListBySql(NAMESPACE + ".selectByCycleTime", map);
     }
 }

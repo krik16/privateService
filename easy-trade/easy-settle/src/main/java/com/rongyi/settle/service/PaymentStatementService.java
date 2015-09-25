@@ -1,7 +1,9 @@
 package com.rongyi.settle.service;
 
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
+import com.rongyi.easy.settle.entity.PaymentStatement;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -18,4 +20,6 @@ public interface PaymentStatementService {
     List<PaymentStatementDto> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize);
 
     Integer selectPageListCount(Map<String, Object> map);
+
+    List<PaymentStatement> selectByCycleTime(Integer configId, Date yesterdayFirstSecond, Date yesterdayLastSecond);
 }
