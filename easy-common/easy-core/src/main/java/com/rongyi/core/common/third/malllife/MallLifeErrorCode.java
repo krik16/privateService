@@ -18,7 +18,7 @@ package com.rongyi.core.common.third.malllife;/*
 public enum MallLifeErrorCode {
 
     SUCCESS(0, "正常"), //原系统都定义为正常情况 编码规则不变
-    FAILURE(-1, "系统异常"), //原系统都定义为正常情况 编码规则不变
+    FAILURE(-1, "请求失败"), //原系统都定义为正常情况 编码规则不变
 
     /** 外部渠道编码 后4位区间  8000---9000*/
     NECESSARY_PARAMETER_ISNULL(1068001,"必要参数不能为空"),
