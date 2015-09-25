@@ -2,6 +2,7 @@ package com.rongyi.rss.content;
 
 
 import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.easy.content_v2.param.HomePageParam;
 
 /**
  * 容易逛首页配置业务接口
@@ -15,10 +16,8 @@ public interface MLHomePageContentService {
     /**
      * 根据城市与用户查询首页配置信息
      *
-     * @param cityId 城市Id
-     * @param cityId 城市名
-     * @param userId 用户Id
-     * @return
+     * @param param
+     * @return ResponseVO
      */
-    ResponseVO findHomePageContentBy(String cityId, String cityName, String userId);
+    ResponseVO findHomePageContentBy(HomePageParam param);
 }
