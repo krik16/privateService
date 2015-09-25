@@ -73,7 +73,6 @@ public class PaymentStatementController {
                 map.put("searchStatus", 11);
             }
             List<PaymentStatementDto> list = paymentStatementService.selectPageList(map, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt());
-            logger.info(list.toString());
             Integer count = paymentStatementService.selectPageListCount(map);
             return ResponseData.success(list, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt(), count);
         } catch (Exception e) {

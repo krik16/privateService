@@ -5,6 +5,8 @@ import com.rongyi.easy.settle.dto.PaymentStatementDto;
 import com.rongyi.easy.settle.entity.PaymentStatement;
 import com.rongyi.settle.mapper.PaymentStatementMapper;
 import com.rongyi.settle.service.PaymentStatementService;
+import org.apache.commons.collections.CollectionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -18,7 +20,10 @@ import java.util.Map;
 @Service
 public class PaymentStatementServiceImpl extends BaseServiceImpl implements PaymentStatementService {
 
-    private static final String NAMESPACE = "com.rongyi.settle.mapper.xml.PaymentStatementMapper";
+    private static final String NAMESPACE = "com.rongyi.settle.mapper.PaymentStatementMapper";
+
+    @Autowired
+    private PaymentStatementMapper mapper;
 
     @Override
     public List<PaymentStatementDto> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
