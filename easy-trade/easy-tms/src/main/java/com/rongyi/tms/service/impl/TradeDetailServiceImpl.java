@@ -68,6 +68,8 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 
 	@Override
 	public List<TradeVO> selectTradePageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
+		LOGGER.info("test,map="+map);
+
 		if (pageSize != null && currentPage != null) {
 			map.put("currentPage", (currentPage - 1) * pageSize);
 			map.put("pageSize", pageSize);
@@ -102,6 +104,8 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 		}
 		if (!buyerIds.isEmpty())
 			map.put("buyerIds", buyerIds);
+		LOGGER.info("test,map="+map);
+
 		List<TradeVO> list = this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectTradePageList", map);
 		LOGGER.info("test,list="+list);
 		String buyerId = null;
