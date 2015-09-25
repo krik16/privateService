@@ -209,25 +209,35 @@
     limit #{currentPage,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
   </select>
 
-<select id="selectPageListCount" parameterType="java.util.Map" resultType="java.lang.Integer">
-    select count(ps.id) from payment_statement ps
-      join statement_config sc on ps.config_id=sc.id
-      join bussiness_info bi on bi.config_id=sc.id
-  <where>
-    <include refid="list_where_clause" />
-  </where>
-</select>
-  
-    <update id="updateStatusByIds" parameterType="map">
-      update payment_statement
-      set status=#{status, jdbcType=INTEGER}
-      <where>
-        <if test="ids != null">
-          AND id in
-          <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
-            #{item}
-          </foreach>
-        </if>
-      </where>
-    </update>
+  <select id="selectPageListCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+      select count(ps.id) from payment_statement ps
+        join statement_config sc on ps.config_id=sc.id
+        join bussiness_info bi on bi.config_id=sc.id
+    <where>
+      <include refid="list_where_clause" />
+    </where>
+  </select>
+
+  <select id="selectByCycleTime" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from payment_statement
+    where config_id = #{configId,jdbcType=INTEGER}
+    and cycle_start_time = #{cycleStartTime,jdbcType=TIMESTAMP}
+    and cycle_end_time = #{cycleEndTime,jdbcType=TIMESTAMP}
+  </select>
+
+  <update id="updateStatusByIds" parameterType="map">
+    update payment_statement
+    set status=#{status, jdbcType=INTEGER}
+    <where>
+      <if test="ids != null">
+        AND id in
+        <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+          #{item}
+        </foreach>
+      </if>
+    </where>
+  </update>
+
 </mapper>
