@@ -11,7 +11,6 @@ public class ShopPositionVO implements Serializable {
     private String pro;//
     private String city;
     private String proId;
-    
     private String cityId;
     private String area;
     private String business;
