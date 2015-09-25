@@ -103,13 +103,16 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 		if (!buyerIds.isEmpty())
 			map.put("buyerIds", buyerIds);
 		List<TradeVO> list = this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectTradePageList", map);
+		LOGGER.info("test,list="+list);
 		String buyerId = null;
 		for (TradeVO tradeVO : list) {
 			try {
+				LOGGER.info("test,tradeVO="+tradeVO);
 				buyerId = tradeVO.getBuyerId();
 				if (ConstantEnum.PAYMENT_ORDER_TYPE1.getCodeInt() == tradeVO.getOrderType()) {// 优惠券订单
 //					CouponOrder couponOrder = raoCouponOrderService.findOneByOrderNo(tradeVO.getOrderNo());
 					CouponOrder couponOrder = roaProxyCouponOrderService.findOneByOrderNo(tradeVO.getOrderNo());
+					LOGGER.info("test,couponOrder="+couponOrder);
 					if (couponOrder != null)
 						buyerId = couponOrder.getBuyerId();
 				}
@@ -130,6 +133,7 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 			}
 			setIntegralAndCouponDiscount(tradeVO);
 		}
+		LOGGER.info("test,list="+list);
 		return list;
 	}
 
