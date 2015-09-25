@@ -158,7 +158,7 @@
 		</if>
 		<!-- 支出 -->
 		<if test="tradeType == 1 or tradeType == 4">
-			AND (payment_order.trade_type = 1 orRF
+			AND (payment_order.trade_type = 1 or
 			payment_order.trade_type = 4 or payment_order.trade_type = 6)
 		</if>
 
