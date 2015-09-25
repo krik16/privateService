@@ -22,4 +22,11 @@ public interface PaymentStatementService {
     Integer selectPageListCount(Map<String, Object> map);
 
     List<PaymentStatement> selectByCycleTime(Integer configId, Date yesterdayFirstSecond, Date yesterdayLastSecond);
+
+    /**
+     * 批量修改对账单状态
+     * @param ids
+     * @return
+     */
+    boolean updatePaymentStatusByIds(List<Integer> ids, Integer status);
 }

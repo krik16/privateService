@@ -3,6 +3,7 @@ package com.rongyi.settle.service.impl;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
 import com.rongyi.easy.settle.entity.PaymentStatement;
+import com.rongyi.settle.mapper.PaymentStatementMapper;
 import com.rongyi.settle.service.PaymentStatementService;
 import org.springframework.stereotype.Service;
 
@@ -38,5 +39,18 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
         map.put("cycleStartTime", yesterdayFirstSecond);
         map.put("cycleEndTime", yesterdayLastSecond);
         return this.getBaseDao().selectListBySql(NAMESPACE + ".selectByCycleTime", map);
+    }
+
+    @Override
+    public boolean updatePaymentStatusByIds(List<Integer> ids, Integer status) {
+        boolean result = false;
+        if (CollectionUtils.isNotEmpty(ids) && status!=null){
+            Map<String, Object> paramsMap = new HashMap<>();
+            paramsMap.put("ids",ids);
+            paramsMap.put("status", status);
+            mapper.updateStatusByIds(paramsMap);
+            result = true;
+        }
+        return result;
     }
 }

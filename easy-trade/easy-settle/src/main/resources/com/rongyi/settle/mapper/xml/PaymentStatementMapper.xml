@@ -217,13 +217,4 @@
     <include refid="list_where_clause" />
   </where>
 </select>
-
-  <select id="selectByCycleTime" resultMap="BaseResultMap" parameterType="java.util.Map" >
-    select
-    <include refid="Base_Column_List" />
-    from payment_statement
-    where config_id = #{configId,jdbcType=INTEGER}
-    and cycle_start_time = #{cycleStartTime,jdbcType=TIMESTAMP}
-    and cycle_end_time = #{cycleEndTime,jdbcType=TIMESTAMP}
-  </select>
 </mapper>
