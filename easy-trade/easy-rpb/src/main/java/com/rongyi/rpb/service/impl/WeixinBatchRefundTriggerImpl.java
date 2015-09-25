@@ -27,6 +27,7 @@ public class WeixinBatchRefundTriggerImpl implements WeixinBatchRefundTrigger{
 	WeixinPayService weixinPayService;
 	@Override
 	public void batchRefundTrigger() {
+		System.err.println("batchRefundTrigger");
 		weixinPayService.batchTriggerWeixinRefund();
 	}
 
