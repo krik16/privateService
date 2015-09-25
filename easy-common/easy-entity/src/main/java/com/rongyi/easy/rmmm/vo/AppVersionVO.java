@@ -21,6 +21,8 @@ public class AppVersionVO implements Serializable {
 
 	private Boolean aliweb = false;// false不支持支付宝web支付,true支持
 
+	private String instruction;// 升级说明
+
 	public Boolean getIfUpdate() {
 		return ifUpdate;
 	}
@@ -59,6 +61,14 @@ public class AppVersionVO implements Serializable {
 
 	public void setAliweb(Boolean aliweb) {
 		this.aliweb = aliweb;
+	}
+
+	public String getInstruction() {
+		return instruction;
+	}
+
+	public void setInstruction(String instruction) {
+		this.instruction = instruction;
 	}
 
 }
