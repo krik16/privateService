@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.rss.tradecenter.RoaProxyCouponOrderService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,6 +48,9 @@ public class RefundServiceImpl extends BaseServiceImpl implements RefundService 
 
 	@Autowired
 	IRpbService rpbService;
+
+	@Autowired
+	RoaProxyCouponOrderService roaProxyCouponOrderService;
 
 	@Override
 	public List<TradeVO> selectRefundPageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
@@ -87,18 +91,19 @@ public class RefundServiceImpl extends BaseServiceImpl implements RefundService 
 			if (hisPayEntity != null)// 此处把付款记录的付款单号放入退款明细，以便直接在第三方支付系统查询
 				tradeVO.setPayNo(hisPayEntity.getPayNo());
 			if (ConstantEnum.PAYMENT_ORDER_TYPE1.getCodeInt() == tradeVO.getOrderType()) {// 优惠券订单
-				try {
-					CouponOrder couponOrder = roaCouponOrderService.findOneByOrderNo(tradeVO.getOrderNo());
-					if (couponOrder != null && couponOrder.getBuyerId() != null) {
-
+//				CouponOrder couponOrder = roaCouponOrderService.findOneByOrderNo(tradeVO.getOrderNo());
+				CouponOrder couponOrder = roaProxyCouponOrderService.findOneByOrderNo(tradeVO.getOrderNo());
+				if (couponOrder != null && couponOrder.getBuyerId() != null) {
+					try {
 						MallLifeUserEntity mallLifeUserEntity = rOAMallLifeUserService.getEntityByUid(couponOrder.getBuyerId());
 						if (mallLifeUserEntity != null) {
 							tradeVO.setBuyerAccount(mallLifeUserEntity.getPhone());
 							tradeVO.setBuyerName(mallLifeUserEntity.getUserName());
 						}
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
-				} catch (Exception e) {
-					e.printStackTrace();
+
 				}
 			}
 		}

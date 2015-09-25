@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.rss.tradecenter.RoaProxyCouponOrderService;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
@@ -62,6 +63,9 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 	@Autowired
 	ROAOrderFormService rOAOrderFormService;
 
+	@Autowired
+	RoaProxyCouponOrderService roaProxyCouponOrderService;
+
 	@Override
 	public List<TradeVO> selectTradePageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
 		if (pageSize != null && currentPage != null) {
@@ -104,7 +108,8 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 			try {
 				buyerId = tradeVO.getBuyerId();
 				if (ConstantEnum.PAYMENT_ORDER_TYPE1.getCodeInt() == tradeVO.getOrderType()) {// 优惠券订单
-					CouponOrder couponOrder = raoCouponOrderService.findOneByOrderNo(tradeVO.getOrderNo());
+//					CouponOrder couponOrder = raoCouponOrderService.findOneByOrderNo(tradeVO.getOrderNo());
+					CouponOrder couponOrder = roaProxyCouponOrderService.findOneByOrderNo(tradeVO.getOrderNo());
 					if (couponOrder != null)
 						buyerId = couponOrder.getBuyerId();
 				}
