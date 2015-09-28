@@ -8,7 +8,12 @@ import java.util.Date;
  */
 public class PaymentStatementDto implements Serializable {
 
-    private Integer id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5216265731481877728L;
+
+	private Integer id;
 
     private Byte type;
 
@@ -35,6 +40,8 @@ public class PaymentStatementDto implements Serializable {
     private Date statusUpdateTime;
 
     private Byte status;
+    
+    private Date createAt;
 
     public Integer getId() {
         return id;
@@ -147,4 +154,12 @@ public class PaymentStatementDto implements Serializable {
     public void setStatus(Byte status) {
         this.status = status;
     }
+
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
 }
