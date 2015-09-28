@@ -9,9 +9,15 @@ package com.rongyi.settle.web.controller;
 
 import com.rongyi.core.bean.ResponseData;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
+import com.rongyi.easy.settle.entity.PaymentStatement;
+import com.rongyi.easy.settle.entity.StatementConfig;
 import com.rongyi.settle.constants.CodeEnum;
 import com.rongyi.settle.constants.ConstantEnum;
+import com.rongyi.settle.constants.SettleConstant;
+import com.rongyi.settle.dto.PaymentStatementDetailDto;
 import com.rongyi.settle.service.PaymentStatementService;
+import com.rongyi.settle.service.StatementConfigService;
+import com.rongyi.settle.util.DateUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,9 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Author: 柯军
@@ -40,6 +44,9 @@ public class PaymentStatementController {
 
     @Autowired
     private PaymentStatementService paymentStatementService;
+
+    @Autowired
+    private StatementConfigService statementConfigService;
 
     /**
      * @Description: 对账单列表（包括所有列表，审核列表，商家对账单列表）
@@ -226,5 +233,52 @@ public class PaymentStatementController {
         return null;
     }
 
+    /**
+     * @Description: 定时任务调用生成对账单
+     * @Author: xgq
+     **/
+    @RequestMapping("/generateForSchedule")
+    public void generateForSchedule() {
+        try {
+            List<StatementConfig> statementConfigList = statementConfigService.selectForSchedule();
+            for (StatementConfig statementConfig : statementConfigList) {
+                if (SettleConstant.CountCycleType.DAY.equals(statementConfig.getCountCycle())) {
+                    Calendar instance = Calendar.getInstance();
+                    Date yesterdayFirstSecond = DateUtils.getYesterdayFirstSecond(instance);
+                    Date yesterdayLastSecond = DateUtils.getYesterdayLastSecond(instance);
+                    List<PaymentStatement> paymentStatements = paymentStatementService.selectByCycleTime(statementConfig.getId(), yesterdayFirstSecond, yesterdayLastSecond);
+                    if (paymentStatements == null) {
+                        PaymentStatement paymentStatement = new PaymentStatement();
+                        paymentStatement.setConfigId(statementConfig.getId());
+                        paymentStatement.setRuleCode(statementConfig.getRuleCode());
+                        paymentStatement.setCycleStartTime(yesterdayFirstSecond);
+                        paymentStatement.setCycleEndTime(yesterdayLastSecond);
+                        paymentStatement.setType(SettleConstant.PaymentStatementType.SHOP);
+                        paymentStatement.setBatchNo(getBatchNo(statementConfig.getBussinessCode(), instance));
+                        paymentStatement.setStatus(SettleConstant.PaymentStatementStatus.INIT);
+                        paymentStatement.setCreateAt(new Date());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String getBatchNo(String shopId, Calendar instance) {
+        return shopId + DateUtils.getYesterdayDateSimpleStr(instance) + "01";
+    }
+
+    private void createExcel(PaymentStatement paymentStatement, StatementConfig statementConfig) {
+        List<PaymentStatementDetailDto> paymentStatementDetailDtoList = new ArrayList<>();
+        if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.SHOP)) {
+            paymentStatementDetailDtoList =
+                    paymentStatementService.selectForStatementDetails(statementConfig.getBussinessId(), null, paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime());
+        } else if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.MALL)) {
+            paymentStatementDetailDtoList =
+                    paymentStatementService.selectForStatementDetails(null, statementConfig.getBussinessId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime());
+        }
+
+    }
 }
 

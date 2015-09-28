@@ -4,6 +4,7 @@ import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
 import com.rongyi.easy.settle.entity.OperationLog;
 import com.rongyi.easy.settle.entity.PaymentStatement;
+import com.rongyi.settle.dto.PaymentStatementDetailDto;
 import com.rongyi.settle.mapper.OperationLogMapper;
 import com.rongyi.settle.mapper.PaymentStatementMapper;
 import com.rongyi.settle.service.PaymentStatementService;
@@ -77,6 +78,18 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
         return result;
     }
 
+    @Override
+    public List<PaymentStatementDetailDto> selectForStatementDetails(String shopId, String mallId, Date startTime, Date endTime, Date cycleStartTime, Date cycleEndTime) {
+        Map map = new HashMap();
+        map.put("shopId", shopId);
+        map.put("mallId", mallId);
+        map.put("cycleStartTime", cycleStartTime);
+        map.put("cycleEndTime", cycleEndTime);
+        map.put("startTime", startTime);
+        map.put("endTime", endTime);
+        return this.getBaseDao().selectListBySql(NAMESPACE + ".selectForStatementDetails", map);
+    }
+
     /**
      * 插入日志记录
      * @param id
@@ -92,7 +105,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
         operatioLog.setOperationType(Byte.valueOf(status.toString()));
         operatioLog.setCreadeAt(new Date());
         operatioLog.setOperationId(id);
-        operatioLog.setIsDelete(Byte.valueOf((byte)0));
+        operatioLog.setIsDelete(Byte.valueOf((byte) 0));
         operationLogMapper.insertSelective(operatioLog);
     }
 }
