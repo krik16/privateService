@@ -53,5 +53,10 @@ public interface PaymentEventType {
 	 * 异常支付生成付款记录
 	 */
 	public static final String EXCE_PAY = "14";
+	
+	/**
+	 * 对账单付款
+	 */
+	public static final String STATEMENT_PAY = "15";
 
 }
