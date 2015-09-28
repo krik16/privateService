@@ -8,12 +8,14 @@
 
 package com.rongyi.rpb.service.impl;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import net.sf.json.JSONObject;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -27,6 +29,7 @@ import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.PayAccountUseTotal;
 import com.rongyi.easy.rpb.vo.PaySuccessResponse;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
+import com.rongyi.easy.rpb.vo.PaymentParamVO;
 import com.rongyi.easy.rpb.vo.QueryOrderParamVO;
 import com.rongyi.easy.rpb.vo.WeixinQueryOrderParamVO;
 import com.rongyi.rpb.constants.ConstantEnum;
@@ -305,6 +308,46 @@ public class RpbServiceImpl implements IRpbService {
 		}
 		map.put("success", true);
 		map.put("message", "验证通过");
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> generatePayment(PaymentParamVO paymentParamVO) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		try {
+			PaymentEntity oldPaymentEntity = paymentService.validateOrderNumExist(paymentParamVO.getOperateNo(), paymentParamVO.getPayChannel(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE7);
+			if (oldPaymentEntity != null && StringUtils.isNotEmpty(oldPaymentEntity.getPayNo())) {
+				LOGGER.info("单号已存在，返回历史付款单号" + oldPaymentEntity.getPayNo());
+			}
+			PaymentEntity paymentEntity = new PaymentEntity();
+			if (PaymentEventType.STATEMENT_PAY.equals(paymentParamVO.getOperateType())) {// 对账单付款
+				LOGGER.info("生成对账单付款记录，对账单号：" + paymentParamVO.getOperateNo());
+				paymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE7);
+				paymentEntity.setPayNo(paymentService.getPayNo());
+				paymentEntity.setOrderNum(paymentParamVO.getOperateNo());
+			} else {//无该类型的支付申请
+				LOGGER.info("无该类型的支付申请，请验证申请类型是否正确！");
+				map.put("success",false);
+				map.put("message", "未知支付申请类型");
+				return map;
+			}
+			if (paymentParamVO.getPayTotal() != null)
+				paymentEntity.setAmountMoney(BigDecimal.valueOf(Double.valueOf(paymentParamVO.getPayTotal())));
+			paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
+			paymentEntity.setCreateTime(paymentParamVO.getCreateAt());
+			paymentEntity.setPayChannel(paymentParamVO.getPayChannel());
+			paymentEntity.setOutAccount(paymentParamVO.getPayAccount());
+			paymentEntity.setPayName(paymentParamVO.getPayName());
+			paymentEntity.setDrawUserId(paymentParamVO.getUserId());
+			paymentService.insert(paymentEntity);
+			map.put("success", true);
+			map.put("message", "申请成功");
+		} catch (Exception e) {
+			map.put("success", false);
+			map.put("message", "申请异常");
+			e.printStackTrace();
+		}
+	
 		return map;
 	}
 }

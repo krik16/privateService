@@ -85,7 +85,7 @@ public interface PaymentService {
 	public abstract PaymentEntityVO insertOrderMessage(MessageEvent event);
 
 	/**
-	 * 验证订单号是否存在，如果已存在则是重复提交订单，直接返回直接生成的订单号(此处只有前端ROB支付时才需验证)
+	 * 验证订单号是否存在，如果已存在则是重复提交订单，直接返回直接生成的订单号
 	 * 
 	 * @param orderNum
 	 * @return 返回时null是证明不存在

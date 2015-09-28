@@ -12,11 +12,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.testng.annotations.Test;
 
 import base.BaseTest;
 
+import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.easy.mq.MessageEvent;
+import com.rongyi.easy.rpb.vo.PaymentParamVO;
 import com.rongyi.rss.rpb.IRpbService;
 
 /**	
@@ -31,7 +34,7 @@ public class RpbServiceTest extends BaseTest{
 	@Autowired
 	IRpbService iRpbService;
 	
-	@Test
+//	@Test
 	public void testOperateWeixinRefund(){
 		Map<String,Object> map = iRpbService.operateWeixinRefund(14376);
 		System.err.println(map.toString());
@@ -54,5 +57,21 @@ public class RpbServiceTest extends BaseTest{
 		map.put("totalPrice", "0.01");
 		event.setBody(map);
 		iRpbService.getPaySign(event);
+	}
+	
+	@Test
+	@Rollback(false)
+	public void testGeneratePayment(){
+		PaymentParamVO paymentParamVO = new PaymentParamVO();
+		paymentParamVO.setCreateAt(DateUtil.getCurrDateTime());
+		paymentParamVO.setOperateNo("1232131231");
+		paymentParamVO.setOperateType("15");
+		paymentParamVO.setPayAccount("13564452580");
+		paymentParamVO.setPayChannel(0);
+		paymentParamVO.setPayName("柯军");
+		paymentParamVO.setPayTotal(1d);
+		paymentParamVO.setUserId("superadmin");
+		Map<String,Object> map = iRpbService.generatePayment(paymentParamVO);
+		System.err.println(map.toString());
 	}
 }

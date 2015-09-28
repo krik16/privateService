@@ -54,6 +54,7 @@ public interface Constants {
 		int TRADE_TYPE4 = 4;// 异常支付
 		int TRADE_TYPE5 = 5;//重复支付
 		int TRADE_TYPE6 = 6;//重复支付退款
+		int TRADE_TYPE7 = 7;//对账单付款
 	}
 
 	interface PAYMENT_TRADE_TYPE_STR {
