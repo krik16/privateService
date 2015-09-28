@@ -19,6 +19,9 @@ public class CouponCodeExcelDto {
     private String buyerPhone;
     private String mallName;
     private String shopName;
+    private String buyerName;
+    private String guideName;
+    private String guidePhone;
 
     public String getOrderNo() {
         return orderNo;
@@ -138,5 +141,29 @@ public class CouponCodeExcelDto {
 
     public void setShopName(String shopName) {
         this.shopName = shopName;
+    }
+
+    public String getBuyerName() {
+        return buyerName;
+    }
+
+    public void setBuyerName(String buyerName) {
+        this.buyerName = buyerName;
+    }
+
+    public String getGuideName() {
+        return guideName;
+    }
+
+    public void setGuideName(String guideName) {
+        this.guideName = guideName;
+    }
+
+    public String getGuidePhone() {
+        return guidePhone;
+    }
+
+    public void setGuidePhone(String guidePhone) {
+        this.guidePhone = guidePhone;
     }
 }

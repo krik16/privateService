@@ -28,6 +28,9 @@ public class PaymentStatementDetailDto {
     private String shopName;
     private String mallId;
     private String mallName;
+    private String userName;
+    private String guidePhone;
+    private String guideName;
 
     public String getOrderNo() {
         return orderNo;
@@ -181,6 +184,30 @@ public class PaymentStatementDetailDto {
         this.mallName = mallName;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getGuidePhone() {
+        return guidePhone;
+    }
+
+    public void setGuidePhone(String guidePhone) {
+        this.guidePhone = guidePhone;
+    }
+
+    public String getGuideName() {
+        return guideName;
+    }
+
+    public void setGuideName(String guideName) {
+        this.guideName = guideName;
+    }
+
     public CouponCodeExcelDto toCouponCodeExcelDto() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         CouponCodeExcelDto dto = new CouponCodeExcelDto();
@@ -199,6 +226,9 @@ public class PaymentStatementDetailDto {
         dto.setBuyerPhone(getUserPhone());
         dto.setShopName(getShopName());
         dto.setMallName(getMallName());
+        dto.setBuyerName(getUserName());
+        dto.setGuideName(getGuideName());
+        dto.setGuidePhone(getGuidePhone());
         return dto;
     }
 }

@@ -9,6 +9,7 @@ public class CouponExcelDto {
     private Integer couponCount;
     private Integer couponPrice;
     private Integer couponTotalAmount;
+    private Integer couponPayAmount;
 
     public String getCouponName() {
         return couponName;
@@ -48,5 +49,13 @@ public class CouponExcelDto {
 
     public void setCouponTotalAmount(Integer couponTotalAmount) {
         this.couponTotalAmount = couponTotalAmount;
+    }
+
+    public Integer getCouponPayAmount() {
+        return couponPayAmount;
+    }
+
+    public void setCouponPayAmount(Integer couponPayAmount) {
+        this.couponPayAmount = couponPayAmount;
     }
 }
