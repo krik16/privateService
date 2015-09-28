@@ -126,4 +126,16 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
         operatioLog.setIsDelete(Byte.valueOf((byte) 0));
         operationLogMapper.insertSelective(operatioLog);
     }
+
+    @Override
+    public void cancel(Integer id) {
+        this.getBaseDao().updateBySql(NAMESPACE + ".cancel", id);
+    }
+
+    @Override
+    public PaymentStatement get(Integer id) {
+        Map map = new HashMap();
+        map.put("id", id);
+        return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectByPrimaryKey", map);
+    }
 }

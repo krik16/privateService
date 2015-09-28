@@ -97,19 +97,6 @@ public class PaymentStatementController {
     }
 
     /**
-     * @Description: 生成对账单
-     * @param request
-     * @param map
-     * @return
-     * @Author: 柯军
-     * @datetime:2015年9月21日下午3:02:46
-     **/
-    @RequestMapping("/generate")
-    public ResponseData generate(HttpServletRequest request, @RequestBody Map<String, Object> map) {
-        return null;
-    }
-
-    /**
      * @Description: 对账单明细
      * @param request
      * @param map
@@ -274,6 +261,20 @@ public class PaymentStatementController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * @param request
+     * @param map
+     * @Description: 生成对账单
+     **/
+    @RequestMapping("/generate")
+    public ResponseData generate(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+        Integer id = (Integer)map.get("id");
+        PaymentStatement paymentStatement = paymentStatementService.get(id);
+        paymentStatementService.cancel(id);
+        //TODO
+        return null;
     }
 
     private String getBatchNo(String shopId, Calendar instance) {

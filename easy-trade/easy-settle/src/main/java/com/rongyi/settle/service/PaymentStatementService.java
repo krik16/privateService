@@ -38,5 +38,7 @@ public interface PaymentStatementService {
 
     List<CouponExcelDto> selectForCouponExcelDto(String shopId, String mallId, Date startTime, Date endTime, Date cycleStartTime, Date cycleEndTime);
 
+    void cancel(Integer id);
 
+    PaymentStatement get(Integer id);
 }
