@@ -229,7 +229,8 @@
 
   <update id="updateStatusByIds" parameterType="map">
     update payment_statement
-    set status=#{status, jdbcType=INTEGER}
+    set status=#{status, jdbcType=INTEGER},
+        status_update_time = #{statusUpdateTime,jdbcType=TIMESTAMP}
     <where>
       <if test="ids != null">
         AND id in

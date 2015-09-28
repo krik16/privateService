@@ -12,7 +12,7 @@ public enum CodeEnum {
 	FIAL_CONFIG_LIST(1018001, "加载配置列表失败"),
 	FIAL_STATEMENT_LIST(1018002, "加载对账单列表失败"),
 	FIAL_PARAMS_ERROR(1018003, "参数传递错误"),
-	FIAL_UPDATE_PAYMENT(1018005, "修改对账单状态失败"),
+	FIAL_UPDATE_PAYMENT(1018005, "修改状态失败"),
 	SUCCESS("0", "正常");
 
 	private Object code;

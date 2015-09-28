@@ -28,5 +28,5 @@ public interface PaymentStatementService {
      * @param ids
      * @return
      */
-    boolean updatePaymentStatusByIds(List<Integer> ids, Integer status);
+    boolean updatePaymentStatusByIds(List<Integer> ids, Integer status, String desc, String userId);
 }
