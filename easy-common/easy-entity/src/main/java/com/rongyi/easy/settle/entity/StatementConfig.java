@@ -38,6 +38,11 @@ public class StatementConfig implements Serializable {
     private String bussinessCode;
 
     /**
+     * 商户mongoId
+     */
+    private String bussinessId;
+
+    /**
      * 商户名称
      */
     private String bussinessName;
@@ -374,5 +379,13 @@ public class StatementConfig implements Serializable {
 
     public void setCreateBy(String createBy) {
         this.createBy = createBy;
+    }
+
+    public String getBussinessId() {
+        return bussinessId;
+    }
+
+    public void setBussinessId(String bussinessId) {
+        this.bussinessId = bussinessId;
     }
 }
