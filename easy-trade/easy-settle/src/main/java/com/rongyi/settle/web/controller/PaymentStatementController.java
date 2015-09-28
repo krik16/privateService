@@ -119,9 +119,13 @@ public class PaymentStatementController {
     public ResponseData verify(HttpServletRequest request, @RequestBody Map<String, Object> map) {
         ResponseData result = null;
         try {
+            //获取用户
+            String userId = "1";
+
             logger.info("============ 对账/代付款批量审核 =============");
             String idStr = map.containsKey("ids") ? map.get("ids").toString() : null;
             Integer status = map.containsKey("status") ? Integer.valueOf(map.get("status").toString()) : null;
+            String desc = map.containsKey("desc") ? map.get("desc").toString() : null;
             if (StringUtils.isBlank(idStr) || status==null){
                 return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt()
                         ,CodeEnum.FIAL_PARAMS_ERROR.getValueStr()) ;
@@ -130,7 +134,7 @@ public class PaymentStatementController {
             for (String id : idStr.split(",")){
                 ids.add(Integer.valueOf(id.trim()));
             }
-            if (paymentStatementService.updatePaymentStatusByIds(ids, status)) {
+            if (paymentStatementService.updatePaymentStatusByIds(ids, status, desc,userId)) {
                 result = ResponseData.success();
             }else{
                 result = ResponseData.failure(CodeEnum.FIAL_UPDATE_PAYMENT.getCodeInt()

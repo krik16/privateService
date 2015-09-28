@@ -82,4 +82,14 @@ public interface StatementConfigService {
 	 * @Author:  xgq
 	 **/
 	List<StatementConfig> selectForSchedule();
+
+	/**
+	 * 批量对账单配置审核
+	 * @param ids
+	 * @param status
+	 * @param desc
+	 * @param userId
+	 * @return
+	 */
+	boolean updatePaymentStatusByIds(List<Integer> ids, Integer status, String desc, String userId);
 }
