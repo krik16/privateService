@@ -1,20 +1,18 @@
 package com.rongyi.settle.dto;
 
-import java.util.Date;
-
 /**
  * Created by xgq on 2015/9/25.
  */
 public class CouponCodeExcelDto {
     private String orderNo;
     private String payNo;
-    private Date validTime;
-    private Date orderTime;
+    private String validTime;
+    private String orderTime;
     private String couponCode;
     private String couponName;
     private String revenueType;
     private String payChannel;
-    private Double orderAmount;//
+    private Double origPrice;//
     private Double payAmount;//
     private Double hbAmount;//
     private Double discountAmount;//
@@ -38,19 +36,19 @@ public class CouponCodeExcelDto {
         this.payNo = payNo;
     }
 
-    public Date getValidTime() {
+    public String getValidTime() {
         return validTime;
     }
 
-    public void setValidTime(Date validTime) {
+    public void setValidTime(String validTime) {
         this.validTime = validTime;
     }
 
-    public Date getOrderTime() {
+    public String getOrderTime() {
         return orderTime;
     }
 
-    public void setOrderTime(Date orderTime) {
+    public void setOrderTime(String orderTime) {
         this.orderTime = orderTime;
     }
 
@@ -86,12 +84,12 @@ public class CouponCodeExcelDto {
         this.payChannel = payChannel;
     }
 
-    public Double getOrderAmount() {
-        return orderAmount;
+    public Double getOrigPrice() {
+        return origPrice;
     }
 
-    public void setOrderAmount(Double orderAmount) {
-        this.orderAmount = orderAmount;
+    public void setOrigPrice(Double origPrice) {
+        this.origPrice = origPrice;
     }
 
     public Double getPayAmount() {

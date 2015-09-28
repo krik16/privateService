@@ -272,4 +272,30 @@
       AND mc.mall_mid = #{mallId,jdbcType=VARCHAR}
     </if>
   </select>
+
+
+  <resultMap id="CouponExcelDtoMap" type="com.rongyi.settle.dto.CouponExcelDto" >
+    <result column="title" property="couponName" jdbcType="VARCHAR" />
+    <result column="pay_channel" property="revenueType" jdbcType="VARCHAR" />
+    <result column="orig_price" property="couponPrice" jdbcType="INTEGER" />
+    <result column="coupon_count" property="couponCount" jdbcType="INTEGER" />
+    <result column="total_amount" property="couponTotalAmount" jdbcType="INTEGER" />
+  </resultMap>
+
+  <select id="selectForCouponExcelDto" parameterType="java.util.Map" resultMap="CouponExcelDtoMap">
+    select tuc.title, '收入' as pay_channel,tuc.orig_price, sum(tuc.orig_price) as total_amount, count(tuc.coupon_id) as coupon_count
+    from ry_trade.trade_user_code tuc
+    join ry_trade.trade_order tor on tuc.order_id=tor.id
+    join ry_rmmm.shop_info rsi on rsi.shop_mid=tuc.shop_id
+    left join ry_rmmm.mall_cooperate mc on mc.id=rsi.mall_id
+    where tuc.status=2
+    and tuc.use_time between(#{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP})
+    and tuc.use_time between(#{cycleStartTime,jdbcType=TIMESTAMP}, #{cycleEndTime,jdbcType=TIMESTAMP})
+    <if test="shopId != null" >
+      AND tuc.shop_id = #{shopId,jdbcType=VARCHAR}
+    </if>
+    <if test="mallId != null" >
+      AND mc.mall_mid = #{mallId,jdbcType=VARCHAR}
+    </if>
+  </select>
 </mapper>

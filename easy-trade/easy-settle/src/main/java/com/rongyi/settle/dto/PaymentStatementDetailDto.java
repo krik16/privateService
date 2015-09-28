@@ -1,5 +1,8 @@
 package com.rongyi.settle.dto;
 
+import com.rongyi.settle.util.AmountUtil;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -176,5 +179,26 @@ public class PaymentStatementDetailDto {
 
     public void setMallName(String mallName) {
         this.mallName = mallName;
+    }
+
+    public CouponCodeExcelDto toCouponCodeExcelDto() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        CouponCodeExcelDto dto = new CouponCodeExcelDto();
+        dto.setOrderNo(getOrderNo());
+        dto.setPayNo(getPayNo());
+        dto.setValidTime(dateFormat.format(getUseTime()));
+        dto.setOrderTime(dateFormat.format(getCreateAt()));
+        dto.setCouponCode(getCouponCode());
+        dto.setCouponName(getTitle());
+        dto.setRevenueType(getRevenueType());
+        dto.setPayChannel(getPayChannel());
+        dto.setOrigPrice(AmountUtil.changFenToYuan(getOrigPrice()));
+        dto.setPayAmount(AmountUtil.changFenToYuan(getPayAmount()));
+        dto.setHbAmount(AmountUtil.changFenToYuan(getHbDiscount()));
+        dto.setDiscountAmount(AmountUtil.changFenToYuan(getDiscount()));
+        dto.setBuyerPhone(getUserPhone());
+        dto.setShopName(getShopName());
+        dto.setMallName(getMallName());
+        return dto;
     }
 }

@@ -9,12 +9,17 @@ package com.rongyi.settle.web.controller;
 
 import com.rongyi.core.bean.ResponseData;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
+import com.rongyi.easy.settle.entity.BussinessInfo;
 import com.rongyi.easy.settle.entity.PaymentStatement;
 import com.rongyi.easy.settle.entity.StatementConfig;
 import com.rongyi.settle.constants.CodeEnum;
 import com.rongyi.settle.constants.ConstantEnum;
 import com.rongyi.settle.constants.SettleConstant;
+import com.rongyi.settle.dto.CouponCodeExcelDto;
+import com.rongyi.settle.dto.CouponExcelDto;
 import com.rongyi.settle.dto.PaymentStatementDetailDto;
+import com.rongyi.settle.dto.PaymentStatementExcelDto;
+import com.rongyi.settle.service.BussinessInfoService;
 import com.rongyi.settle.service.PaymentStatementService;
 import com.rongyi.settle.service.StatementConfigService;
 import com.rongyi.settle.util.DateUtils;
@@ -47,6 +52,9 @@ public class PaymentStatementController {
 
     @Autowired
     private StatementConfigService statementConfigService;
+
+    @Autowired
+    private BussinessInfoService bussinessInfoService;
 
     /**
      * @Description: 对账单列表（包括所有列表，审核列表，商家对账单列表）
@@ -257,6 +265,8 @@ public class PaymentStatementController {
                         paymentStatement.setBatchNo(getBatchNo(statementConfig.getBussinessCode(), instance));
                         paymentStatement.setStatus(SettleConstant.PaymentStatementStatus.INIT);
                         paymentStatement.setCreateAt(new Date());
+                        paymentStatementService.insert(paymentStatement);
+                        createExcel(paymentStatement, statementConfig);
                     }
                 }
             }
@@ -270,15 +280,64 @@ public class PaymentStatementController {
     }
 
     private void createExcel(PaymentStatement paymentStatement, StatementConfig statementConfig) {
+        PaymentStatementExcelDto paymentStatementExcelDto = new PaymentStatementExcelDto();
         List<PaymentStatementDetailDto> paymentStatementDetailDtoList = new ArrayList<>();
+        List<CouponExcelDto> couponExcelDtoList = new ArrayList<>();
         if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.SHOP)) {
             paymentStatementDetailDtoList =
                     paymentStatementService.selectForStatementDetails(statementConfig.getBussinessId(), null, paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime());
+            couponExcelDtoList = paymentStatementService.selectForCouponExcelDto(statementConfig.getBussinessId(), null, paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime());
+            if (paymentStatementDetailDtoList != null && paymentStatementDetailDtoList.size() > 0) {
+                paymentStatementExcelDto.setShopName(paymentStatementDetailDtoList.get(0).getShopName());
+                paymentStatementExcelDto.setMallName(paymentStatementDetailDtoList.get(0).getMallName());
+            }
         } else if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.MALL)) {
             paymentStatementDetailDtoList =
                     paymentStatementService.selectForStatementDetails(null, statementConfig.getBussinessId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime());
+            couponExcelDtoList = paymentStatementService.selectForCouponExcelDto(null, statementConfig.getBussinessId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime());
+            if (paymentStatementDetailDtoList != null && paymentStatementDetailDtoList.size() > 0) {
+                paymentStatementExcelDto.setMallName(paymentStatementDetailDtoList.get(0).getMallName());
+            }
         }
 
+        List<CouponCodeExcelDto> couponCodeExcelDtoList = new ArrayList<>();
+        double total = 0;
+        double payTotal = 0;
+        for (PaymentStatementDetailDto paymentStatementDetailDto : paymentStatementDetailDtoList) {
+            CouponCodeExcelDto couponCodeExcelDto = paymentStatementDetailDto.toCouponCodeExcelDto();
+            couponCodeExcelDtoList.add(couponCodeExcelDto);
+            total += paymentStatementDetailDto.getOrigPrice();
+            payTotal += paymentStatementDetailDto.getPayAmount();
+        }
+        paymentStatementExcelDto.setBatchNo(paymentStatement.getBatchNo());
+        paymentStatementExcelDto.setCycleTime(DateUtils.getDateTimeStr(paymentStatement.getCycleStartTime()) + " - " + DateUtils.getDateTimeStr(paymentStatement.getCycleEndTime()));
+        paymentStatementExcelDto.setPayTotal(total);
+        paymentStatementExcelDto.setRongyiDiscount(total - payTotal);
+
+        BussinessInfo bussinessInfo = bussinessInfoService.selectByConfigId(statementConfig.getId());
+        paymentStatementExcelDto.setShopAccountName(bussinessInfo.getPayName());
+        paymentStatementExcelDto.setShopAccountNo(bussinessInfo.getPayAccount());
+        paymentStatementExcelDto.setShopBank(bussinessInfo.getBlankName());
+        paymentStatementExcelDto.setPayChannel(getPayChannelName(statementConfig.getPayChannel()));
+        paymentStatementExcelDto.setCouponExcelDtoList(couponExcelDtoList);
+        paymentStatementExcelDto.setCouponCodeExcelDtoList(couponCodeExcelDtoList);
+        //TODO 写excel
+    }
+
+    private String getPayChannelName(Byte payChannel) {
+        if (SettleConstant.PayChannel.ZHIFUBAO.equals(payChannel)) {
+            return "支付宝";
+        }
+        if (SettleConstant.PayChannel.WECHAT.equals(payChannel)) {
+            return "微信";
+        }
+        if (SettleConstant.PayChannel.UNION.equals(payChannel)) {
+            return "银联";
+        }
+        if (SettleConstant.PayChannel.CASH.equals(payChannel)) {
+            return "现金";
+        }
+        return "支付宝";
     }
 }
 
