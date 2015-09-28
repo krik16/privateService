@@ -35,11 +35,13 @@ import com.rongyi.core.constant.OrderEventType;
 import com.rongyi.core.constant.OrderEventType.EventErrorCode;
 import com.rongyi.core.constant.VirtualAccountEventType;
 import com.rongyi.core.constant.VirtualAccountEventTypeEnum;
+import com.rongyi.easy.entity.MallLifeUserEntity;
 import com.rongyi.easy.integral.constant.ActionType;
 import com.rongyi.easy.integral.constant.ItemType;
 import com.rongyi.easy.integral.constant.ScoreRuleEnum;
 import com.rongyi.easy.integral.vo.IntegralRecordVO;
 import com.rongyi.easy.malllife.common.util.JsonUtil;
+import com.rongyi.easy.mcmc.param.CommodityCommentParam;
 import com.rongyi.easy.osm.entity.ApplicationFormEntity;
 import com.rongyi.easy.osm.entity.OrderDetailFormEntity;
 import com.rongyi.easy.osm.entity.OrderEventEntity;
@@ -57,7 +59,11 @@ import com.rongyi.osm.service.PaymentActionService;
 import com.rongyi.osm.service.coupon.CouponStatusService;
 import com.rongyi.osm.service.mcmc.McmcStockService;
 import com.rongyi.rss.integral.IntegralService;
+import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.rss.mallshop.order.ROAOrderService;
+import com.rongyi.rss.mcmc.CommentService;
+import com.rongyi.rss.msob.IOrderEventService;
+import com.rongyi.rss.roa.ROAPersonManagementService;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -96,7 +102,21 @@ public class OrderUtil {
 
 	@Autowired
 	private IntegralService integralService;
+	
+	@Autowired
+	private CommentService commentService;
+	
+	@Autowired
+	private ROAMalllifeUserService mallLifeUserService;
 
+	@Autowired
+	private IOrderEventService orderEventService;
+	
+	@Autowired
+	private ROAPersonManagementService personManagementService;
+	
+	@Autowired
+	private ROAOrderService orderService;
 	/**
 	 * 用于停止定时器的最大时间（2038年1月1日 00:00:00）
 	 */
@@ -110,11 +130,15 @@ public class OrderUtil {
 	 * @return
 	 */
 	public boolean setCouponStatus(OrderDetailFormEntity[] orderDetailList, int status, String guideId) {
+		logger.info("setCouponStatus:status={},guideId={}",status,guideId);
 		boolean result = true;
 		try {
 			for (OrderDetailFormEntity orderDetail : orderDetailList) {
+				logger.info("setCouponStatus:orderDetail={}",orderDetail.toString());
+				
 				String couponId = orderDetail.getCouponId();
 				if (couponId == null || couponId.isEmpty()) {
+					logger.info("couponId is null");
 					continue;
 				} else {
 					// 已领用 ->> 已使用
@@ -135,8 +159,11 @@ public class OrderUtil {
 						break;
 					}
 
+					logger.info("start to change status");
 					result = couponStatusService.setCouponStatusByCode(couponId, status, orderDetail.getOrderNo(),
 							Integer.parseInt(guideId));
+					logger.info("start to change status result={}",result);
+					
 					if (!result)
 						break;
 				}
@@ -182,7 +209,7 @@ public class OrderUtil {
 		if(order.getDiscountInfo().length()>0 && order.getDiscountInfo()!=null){
 			Map map = JsonUtil.getMapFromJson(order.getDiscountInfo());
 			if (map.get("score") != null  && Integer.parseInt(map.get("score").toString()) > 0) {
-				Map<String, Object> mapObject=getMapByJson(ScoreRuleEnum.SCORE_ORDER_SUB.getCode());
+				Map<String, Object> mapObject=getMapByJson(ScoreRuleEnum.SCORE_GOODS_SUB.getCode());
 				double scoreExchangeMoney= Double.parseDouble(mapObject.get("scoreExchangeMoney").toString());
 				Double scoreInt = Double.parseDouble(map.get("score").toString()) * scoreExchangeMoney;
 				BigDecimal score = new BigDecimal(scoreInt);
@@ -259,7 +286,7 @@ public class OrderUtil {
 		if(order.getDiscountInfo()!=null  && order.getDiscountInfo().length()>0){
 			Map<String,Object> map = JsonUtil.getMapFromJson(order.getDiscountInfo());
 			if (map.get("score") != null  && Integer.parseInt(map.get("score").toString()) > 0) {
-				Map<String, Object> mapObject=getMapByJson(ScoreRuleEnum.SCORE_ORDER_SUB.getCode());
+				Map<String, Object> mapObject=getMapByJson(ScoreRuleEnum.SCORE_GOODS_SUB.getCode());
 				double scoreExchangeMoney= Double.parseDouble(mapObject.get("scoreExchangeMoney").toString());
 				BigDecimal ratio = new BigDecimal(mapObject.get("limit").toString());// 判断积分支付是否大于订单价格的10%参数
 				BigDecimal ratioTotal =total.multiply(ratio);// 支付金额的10%
@@ -931,11 +958,11 @@ public class OrderUtil {
 				if (mapObject.get("score") != null && Integer.parseInt(mapObject.get("score").toString()) > 0) {
 					IntegralRecordVO integralRecordVO = setIntegralRecordVOInfo(order,orderDetailList);
 					// 下单时验证前端传送积分抵扣金额
-					if (integralRecordVO.getType() == ScoreRuleEnum.SCORE_ORDER_SUB.getCode()) {
-						Map<String, Object> mapScoreExchangeMoney=getMapByJson(ScoreRuleEnum.SCORE_ORDER_SUB.getCode());
-						double scoreExchangeMoney= Double.parseDouble(mapScoreExchangeMoney.get("scoreExchangeMoney").toString());
-						BigDecimal scoreDeductionMoney = new BigDecimal(Double.parseDouble(mapObject.get("score").toString()) * scoreExchangeMoney); // 积分抵扣金额，100积分兑换1RMB
-						BigDecimal pageScoreDeductionMoney = new BigDecimal(Double.parseDouble(mapObject.get("scoreDeduction").toString())); // 前端传送积分抵扣金额
+					if (integralRecordVO.getType() == ScoreRuleEnum.SCORE_GOODS_SUB.getCode()) {
+						Map<String, Object> mapScoreExchangeMoney=getMapByJson(ScoreRuleEnum.SCORE_GOODS_SUB.getCode());
+						String scoreExchangeMoney= mapScoreExchangeMoney.get("scoreExchangeMoney").toString();
+						BigDecimal scoreDeductionMoney = new BigDecimal(mapObject.get("score").toString()).multiply(new BigDecimal(scoreExchangeMoney)).setScale(2, BigDecimal.ROUND_HALF_UP); // 积分抵扣金额，100积分兑换1RMB
+						BigDecimal pageScoreDeductionMoney = new BigDecimal(mapObject.get("scoreDeduction").toString()); // 前端传送积分抵扣金额
 						if (scoreDeductionMoney.compareTo(pageScoreDeductionMoney) != 0) {
 							logger.info("该积分与积分抵扣金额不一致");
 							return false;
@@ -967,8 +994,8 @@ public class OrderUtil {
 				integralRecordVO.setEvent_id(order.getBuyerId()+ActionType.ACTION_ADD+ScoreRuleEnum.SCORE_PAY_TIMEOUT_ROLLBACK.getCode()+System.currentTimeMillis());
 			} else {
 				integralRecordVO.setAction(ActionType.ACTION_SUB); // 操作类型 买家下单
-				integralRecordVO.setType(ScoreRuleEnum.SCORE_ORDER_SUB.getCode()); // 操作详情:下单
-				integralRecordVO.setEvent_id(order.getBuyerId()+ActionType.ACTION_SUB+ScoreRuleEnum.SCORE_ORDER_SUB.getCode()+System.currentTimeMillis());
+				integralRecordVO.setType(ScoreRuleEnum.SCORE_GOODS_SUB.getCode()); // 操作详情:下单
+				integralRecordVO.setEvent_id(order.getBuyerId()+ActionType.ACTION_SUB+ScoreRuleEnum.SCORE_GOODS_SUB.getCode()+System.currentTimeMillis());
 			}
 			if (order.getStatus().equals(OrderFormStatus.CLOSED)){
 				integralRecordVO.setReason("卖家关闭订单");
@@ -1095,7 +1122,7 @@ public class OrderUtil {
 			if (!StringUtils.isEmpty(order.getDiscountInfo())) {
 				jsonObject = JSONObject.fromObject(order.getDiscountInfo());
 				if (jsonObject.get("score") != null && StringUtils.isNotBlank(jsonObject.get("score").toString())) {
-					Map<String, Object> scoreMap = getMapByJson(ScoreRuleEnum.SCORE_ORDER_SUB.getCode());
+					Map<String, Object> scoreMap = getMapByJson(ScoreRuleEnum.SCORE_GOODS_SUB.getCode());
 					if (scoreMap != null && scoreMap.get("scoreExchangeMoney") != null) {
 						logger.info("rule_expression--->" + scoreMap.toString());
 						Double scoreExchangeMoney =Double.parseDouble(scoreMap.get("scoreExchangeMoney").toString()); // 积分兑换金额参数
@@ -1177,5 +1204,49 @@ public class OrderUtil {
 					}
 				}
 			}
+	}
+	    
+	public void defaultComment(OrderFormEntity order,List<OrderDetailFormEntity> detailList){
+		logger.info("defaultComment start,order={},detailList={}",order.toString(),detailList.toString());
+		
+		try{
+			List<CommodityCommentParam> resultList = new ArrayList<CommodityCommentParam>();
+			MallLifeUserEntity mallLifeUser = mallLifeUserService.getEntityByUid(order.getBuyerId());		
+			Date transDate = orderEventService.getOrderEventByType(OrderEventType.PAID, order.getOrderNo()).getCreateAt();
+			for (OrderDetailFormEntity detailEntity : detailList) {
+				if (detailEntity.getStatus().equals("0")) {
+					String sonId = String.valueOf(detailEntity.getId());
+					CommodityCommentParam comment = new CommodityCommentParam();
+					comment.setCommodityId(detailEntity.getCommodityMid());
+					if(StringUtils.isBlank(mallLifeUser.getNickname())){
+						comment.setNickname(mallLifeUser.getUserName());
+					}else{
+						comment.setNickname(mallLifeUser.getNickname());
+					}
+					comment.setSpecId(detailEntity.getCommoditySpecMid());
+					comment.setUserId(mallLifeUser.getId().toString());
+					comment.setCommentDetail(Constants.Comment.DEFAULT_PRAISE_WORDS);
+					comment.setCommentLevel(1);
+					comment.setCommentPicList(new ArrayList<String>());
+					comment.setSonOrderId(sonId);
+					resultList.add(comment);
+				}
+			}
+			commentService.commentCommodity(resultList, transDate);
+			
+			if(StringUtils.isNotBlank(order.getGuideId())){
+				Integer guideId = Integer.parseInt(order.getGuideId());
+				personManagementService.mark(order.getBuyerId(), 90, guideId);
+			}
+			
+			orderService.sendBodyByOrderEventType(new ObjectId(order.getBuyerId()), order.getOrderNo(), OrderEventType.CONFIRM_EVALUATE);
+
+			logger.info("defaultComment end,order={}",order.toString());
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			logger.info("defaultComment error,order={},return={}",order.toString(),e.getMessage());
+		}
+		
 	}
 }

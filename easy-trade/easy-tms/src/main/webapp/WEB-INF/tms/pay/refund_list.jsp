@@ -48,12 +48,21 @@
 						<td>${item.orderPrice}</td>
 						<c:choose>
 						<c:when test="${item.payChannel eq 0}">
-							<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><a href="${ctx}/pay/pay?paymentId=${item.id}&type=2&payChannel=${item.payChannel}" class="btnsearch" id="pay-button" target="_blank">付款</a></sec:authorize></td>
+							<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="morePay(${item.id},2, ${item.payChannel})" class="btnsearch" id="pay-button" target="_blank">付款</a></sec:authorize></td>
 						</c:when>
 						<c:otherwise>
-							<td><a href="javascript:void(0);" class="btnsearch checked" id="weixin-refund-button" onclick="weixinRefund(${item.id})">退款</a></td>
+							<td><a href="javascript:void(0);" class="btnsearch checked" id="weixin-refund-button" onclick="weixinRefund(${item.id},${item.refundRejected})">退款</a>
+							<c:choose>
+								<c:when test="${item.refundRejected eq 0}">
+									<a href="javascript:void(0);" class="btnsearch checked" id="weixin-refund-rejected-button" onclick="weixinRefundRejected(${item.id},1)">拒绝</a>
+								</c:when>
+								<c:otherwise>
+									<a href="javascript:void(0);" class="btnsearch checked" id="weixin-refund-agree-button" onclick="weixinRefundRejected(${item.id},0)">同意</a>
+								</c:otherwise>
+							</c:choose>
 						</c:otherwise>
 						</c:choose>
+						</td>
 			 		</td>
 					</tr>
 				</c:forEach>

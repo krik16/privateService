@@ -17,10 +17,11 @@
 		create_at,
 		update_at,`desc`
 	</sql>
-	
+
 	<sql id="page_list_where_clause">
 		<if test="payAccount != null and payAccount != ''">
-			AND pay_account = #{payAccount}
+			AND pay_account like
+			concat('%',#{payAccount,jdbcType=VARCHAR},'%')
 		</if>
 	</sql>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"

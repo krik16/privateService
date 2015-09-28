@@ -1,6 +1,8 @@
 package com.rongyi.rpb.web.controller.v5;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -24,11 +26,10 @@ import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.constant.PaymentEventType;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
-import com.rongyi.rpb.common.util.orderSign.webPageAlipay.alipay.util.AliAppPayNotify;
-import com.rongyi.rpb.common.util.orderSign.webPageAlipay.alipay.util.AlipayNotify;
-import com.rongyi.rpb.common.util.orderSign.weixinSign.ResponseHandler;
-import com.rongyi.rpb.common.util.orderSign.weixinSign.util.XMLUtil;
-import com.rongyi.rpb.constants.ConstantUtil;
+import com.rongyi.rpb.common.pay.ali.util.AliAppPayNotify;
+import com.rongyi.rpb.common.pay.ali.util.AlipayNotify;
+import com.rongyi.rpb.common.pay.weixin.util.XMLParser;
+import com.rongyi.rpb.common.pay.weixin.util.XMLUtil;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.mq.Sender;
 import com.rongyi.rpb.service.PaymentLogInfoService;
@@ -123,7 +124,7 @@ public class WebPageAlipayController extends BaseController {
 				LOGGER.info("支付宝订单查询结果是未支付状态");
 				return "zhifuFail";
 			}
-			String orderNums = paymentService.getOrderNumStrsByPayNo(out_trade_no,Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
+			String orderNums = paymentService.getOrderNumStrsByPayNo(out_trade_no, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
 			List<PaymentEntity> list = paymentService.selectByPayNoAndTradeType(out_trade_no, 0);
 			if (list != null && !list.isEmpty() && list.get(0).getStatus() != Constants.PAYMENT_STATUS.STAUS2) {
 				paymentService.updateListStatusBypayNo(out_trade_no, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);// 修改付款单状态
@@ -158,7 +159,7 @@ public class WebPageAlipayController extends BaseController {
 		try {
 			Map<String, Object> map = XMLUtil.doXMLParse(notify_data);
 			if (map.get("out_trade_no") != null) {
-				PaymentLogInfo result = paymentLogInfoService.selectByOutTradeNo(map.get("out_trade_no").toString(),null);
+				PaymentLogInfo result = paymentLogInfoService.selectByOutTradeNo(map.get("out_trade_no").toString(), null);
 				if (result != null)
 					return;
 				if (!validateTradeStatus(map.get("trade_status").toString()))
@@ -234,7 +235,8 @@ public class WebPageAlipayController extends BaseController {
 			return "appwebpage/notify";
 		PaymentLogInfo tradeNoResult = paymentLogInfoService.selectByPayTradeNo(trade_no);
 		if (tradeNoResult != null) {
-			LOGGER.info("交易流水号已存在，此笔交易通知不是支付成功通知，是退款成功订单状态变更通知，交易流水号为-->" + trade_no);
+			// LOGGER.info("交易流水号已存在，此笔交易通知不是支付成功通知，是退款成功订单状态变更通知，交易流水号为-->" +
+			// trade_no);
 			return "appwebpage/notify";
 		}
 		Map<String, String> verifyMap = beforeVerify(request);
@@ -252,61 +254,41 @@ public class WebPageAlipayController extends BaseController {
 		return "appwebpage/notify";
 	}
 
+
 	/**
-	 * @Description: 微信支付异步通知
+	 * @Description: V3版本微信支付异步通知
 	 * @param model
 	 * @param request
 	 * @param response
-	 * @param bank_type
-	 * @param discount
-	 * @param fee_type
-	 * @param input_charset
-	 * @param notify_id
-	 * @param out_trade_no
-	 * @param product_fee
-	 * @param sign
-	 * @param sign_type
-	 * @param time_end
-	 * @param total_fee
-	 * @param trade_mode
-	 * @param trade_state
-	 * @param transaction_id
-	 * @param transport_fee
-	 * @return
 	 * @Author: 柯军
-	 * @datetime:2015年6月26日下午6:23:41
+	 * @datetime:2015年9月2日下午4:48:21
 	 **/
 	@RequestMapping("/weixin/notify_url.htm")
-	public String weixinNotify(Model model, HttpServletRequest request, HttpServletResponse response, String bank_type, String discount, String fee_type, String input_charset, String notify_id,
-			String out_trade_no, String product_fee, String sign, String sign_type, String time_end, String total_fee, String trade_mode, String trade_state, String transaction_id,
-			String transport_fee) {
-		if (!"0".equals(trade_state))
-			return "appwebpage/notify";
-		ResponseHandler resHandler = new ResponseHandler(request, response);
-		resHandler.setKey(ConstantUtil.PayWeiXin.PARTNER_KEY);
-		if (!resHandler.isTenpaySign()) {
-			LOGGER.info("微信支付异步通知-->微信验证签名不通过，返回消息不是财付通发出的合法消息!");
-			return "appwebpage/notify";
-		}
-		try {
-
-			PaymentLogInfo result = paymentLogInfoService.selectByPayTradeNo(transaction_id);
-			if (result != null)// 重复通知
-				return "appwebpage/notify";
-			LOGGER.info("微信支付异步通知开始，交易流水号-->" + transaction_id);
-			Map<String, String> requestMap = parseXml(request);
-			PaymentLogInfo paymentLogInfo = getPaymentLogInfo(transaction_id, out_trade_no, notify_id, null, DateUtil.getCurrDateTime(), sign, sign_type, 0, 0, total_fee, requestMap.get("OpenId"),
-					null, Constants.REPLAY_FLAG.REPLAY_FLAG3, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
-			if (validateRepeatPay(out_trade_no, paymentLogInfo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1)) // 验证是否是重复支付
-				return "appwebpage/notify";
-			paymentLogInfoService.insertPayNotify(paymentLogInfo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, PaymentEventType.WEIXIN_PAY);
+	public void weixinNotify(Model model, HttpServletRequest request, HttpServletResponse response) {
+		Map<String, Object> requestMap = parseXml(request);
+		if ("SUCCESS".equals(requestMap.get("result_code"))) {
+			LOGGER.info("<--微信支付异步通知开始,交易流水号："+requestMap.get("transaction_id").toString());
+			Map<String, Object> responseMap = new HashMap<String, Object>();
+			responseMap.put("return_code", Constants.RESULT.SUCCESS);
+			responseMap.put("return_msg", "OK");
+			boolean bool = paymentLogInfoService.validateByTradeNoAndPayNo(requestMap.get("transaction_id").toString(), requestMap.get("out_trade_no").toString());
+			if (bool) {
+				LOGGER.info("微信支付结果已正确处理,应答微信支付结果处理成功");
+				setResponse(response, responseMap);
+				return;
+			}
+			PaymentLogInfo paymentLogInfo = paymentLogInfoService.getByWeixinNotify(requestMap);
+			if (validateRepeatPay(paymentLogInfo.getOutTradeNo(), paymentLogInfo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1)) { // 验证是否是重复支付
+				setResponse(response, responseMap);
+				return;
+			}
+			paymentLogInfoService.insertPayNotify(paymentLogInfo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, PaymentEventType.WEIXIN_PAY);// 支付通知正常处理
 			LOGGER.info("<--微信支付异步通知结束");
-		} catch (Exception e) {
-			e.printStackTrace();
+		} else {
+			LOGGER.info("支付未成功,通知内容-->" + requestMap.toString());
 		}
-		return "appwebpage/notify";
 	}
-
+	
 	/**
 	 * @Description: 解析微信异步通知中的xml元素值
 	 * @param request
@@ -315,9 +297,8 @@ public class WebPageAlipayController extends BaseController {
 	 * @datetime:2015年8月11日下午3:33:45
 	 **/
 	@SuppressWarnings("unchecked")
-	private static Map<String, String> parseXml(HttpServletRequest request) {
-		Map<String, String> map = new HashMap<String, String>();
-
+	private static Map<String, Object> parseXml(HttpServletRequest request) {
+		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			InputStream inputStream = request.getInputStream();
 			SAXReader reader = new SAXReader();
@@ -332,6 +313,31 @@ public class WebPageAlipayController extends BaseController {
 			e.printStackTrace();
 		}
 		return map;
+	}
+
+	/**
+	 * @Description: response 结果到微信
+	 * @param response
+	 * @param responseMap
+	 * @Author: 柯军
+	 * @datetime:2015年7月7日下午3:23:10
+	 **/
+	private void setResponse(HttpServletResponse response, Map<String, Object> responseMap) {
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json; charset=utf-8");
+		String xml = XMLParser.getXmlFormMap(responseMap, true);
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();
+			out.append(xml);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (out != null) {
+				out.close();
+			}
+		}
+
 	}
 
 	/**
@@ -374,7 +380,6 @@ public class WebPageAlipayController extends BaseController {
 		paymentLogInfo.setNotifyId(notifyId);
 		paymentLogInfo.setNotifyType(notifyType);
 		paymentLogInfo.setNotifyTime(notifyTime);
-		paymentLogInfo.setNotifyTime(DateUtil.getCurrDateTime());
 		paymentLogInfo.setReplayFlag(replayFlag);
 		paymentLogInfo.setSign(sign);
 		paymentLogInfo.setTradeMode("1");
@@ -382,7 +387,7 @@ public class WebPageAlipayController extends BaseController {
 		paymentLogInfo.setTimeEnd(DateUtil.getCurrDateTime());
 		paymentLogInfo.setBuyer_type(buyerType);// 买家账号
 		paymentLogInfo.setEventType(eventType);
-		paymentLogInfo.setTotal_fee(Double.valueOf(totalFee) / 100);// 微信金额单位为分
+		paymentLogInfo.setTotal_fee(Double.valueOf(totalFee));
 		paymentLogInfo.setResult("success");
 		paymentLogInfo.setBuyer_email(buyerEmail);
 		paymentLogInfo.setBuyer_id(buyerId);
@@ -394,8 +399,7 @@ public class WebPageAlipayController extends BaseController {
 		PaymentEntity paymentEntity = paymentService.validateRepeatPay(payNo, payChannel);
 		if (paymentEntity != null) {// 重复支付
 			paymentLogInfo.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE5);
-			paymentService.repeatPayToRefund(paymentEntity, paymentLogInfo);
-			return true;
+			return paymentService.repeatPayToRefund(paymentEntity, paymentLogInfo);
 		}
 		return false;
 	}

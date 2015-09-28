@@ -62,7 +62,7 @@
 				<li class="xiala">店铺：<input type="text" name="shopid" style="width: 120px"/>
 				</li>
 
-				<li>卖家姓名：<input id="name" type="text"  style="width: 110px"/>
+				<li>卖家账号：<input id="name" type="text"  style="width: 110px"/>
 				<li>打款方式：
 					<select id="channel"  style="width: 90px">
 						<option value="">--全部--</option>

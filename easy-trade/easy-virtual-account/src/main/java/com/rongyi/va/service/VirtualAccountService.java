@@ -10,6 +10,7 @@
 package com.rongyi.va.service;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,7 +33,7 @@ public class VirtualAccountService extends BaseServiceImpl {
 
 	@Autowired
 	private VirtualAccountDetailService virtualAccountDetailService;
-	
+
 	/**
 	 * 创建新的虚拟账户
 	 * 
@@ -58,12 +59,11 @@ public class VirtualAccountService extends BaseServiceImpl {
 		return this.getBaseDao().updateBySql(MAPPER_NAMESPACE + ".updateAccountInfo", virtualAccountEntity);
 	}
 
-
 	/**
 	 * 账户余额变更
 	 * 
 	 * @author ZhengYl
-	 * @date 2015年7月17日 下午6:26:14 
+	 * @date 2015年7月17日 下午6:26:14
 	 * @param userId
 	 * @param amount
 	 * @param detailEntity
@@ -77,7 +77,7 @@ public class VirtualAccountService extends BaseServiceImpl {
 		params.put("userId", userId);
 		params.put("amount", amount);
 		rowCount = this.getBaseDao().updateBySql(MAPPER_NAMESPACE + ".updateBalance", params);
-		if(rowCount > 0){
+		if (rowCount > 0) {
 			detailId = virtualAccountDetailService.insertAndGetId(detailEntity);
 		}
 		return detailId;
@@ -122,10 +122,26 @@ public class VirtualAccountService extends BaseServiceImpl {
 	 * @param amount
 	 * @return
 	 */
-	public int updateSuspended(String userId, Boolean isSuspended) {
+	public int updateSuspended(String userId, Boolean isSuspended, String stopReason) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("userId", userId);
 		params.put("isSuspended", isSuspended);
+		params.put("stopReason", stopReason);
+		params.put("stopAt", new Date());
 		return this.getBaseDao().updateBySql(MAPPER_NAMESPACE + ".updateSuspended", params);
 	}
+
+	/**	
+	 * @Description:删除提现 
+	 * @param drawNo
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年9月25日下午4:47:51
+	 **/
+	public int deleteByDrawNo(String drawNo) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("drawNo", drawNo);
+		return this.getBaseDao().updateBySql(MAPPER_NAMESPACE + ".deleteByDrawNo", params);
+	}
+
 }

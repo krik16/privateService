@@ -18,7 +18,7 @@ import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.entity.UnionActivityRegister;
 import com.rongyi.easy.rpb.entity.UnionCouponLogEntity;
 import com.rongyi.easy.rpb.vo.UnionCouponLogVO;
-import com.rongyi.rpb.common.util.orderSign.union.UnionUtil;
+import com.rongyi.rpb.common.pay.union.UnionUtil;
 import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.service.PaymentLogInfoService;
@@ -236,7 +236,7 @@ public class UnionCouponServiceImpl extends BaseServiceImpl implements UnionCoup
 		if (oldPaymentEntityList == null || oldPaymentEntityList.isEmpty())
 			LOGGER.error("付款单号-->" + unionCouponLogVO.getPayNo() + "未找到付款记录。");
 		PaymentEntity orderPaymentEntity = oldPaymentEntityList.get(0);
-		PaymentEntity paymentEntity = new PaymentEntity(orderNoGenService.getOrderNo(), orderPaymentEntity.getOrderNum(), Constants.ORDER_TYPE.ORDER_TYPE_0, orderPaymentEntity.getOrderPrice(),
+		PaymentEntity paymentEntity = new PaymentEntity(paymentService.getPayNo(), orderPaymentEntity.getOrderNum(), Constants.ORDER_TYPE.ORDER_TYPE_0, orderPaymentEntity.getOrderPrice(),
 				orderPaymentEntity.getTitle(), orderPaymentEntity.getAmountMoney(), Constants.PAYMENT_STATUS.STAUS2, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE2, DateUtil.getCurrDateTime(),
 				DateUtil.getCurrDateTime(), Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL2, null, null, null, null, null);
 		paymentService.insert(paymentEntity);// 生成退款记录

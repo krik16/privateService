@@ -23,6 +23,7 @@ import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.tms.mq.Sender;
 import com.rongyi.tms.service.CouponCommissionService;
 import com.rongyi.tms.service.DrawApplyService;
+import com.rongyi.tms.service.InviteCommissionService;
 import com.rongyi.tms.service.MqReceiverService;
 import com.rongyi.tms.service.SalesCommissionService;
 
@@ -45,6 +46,9 @@ public class MqReceiverServiceImpl implements MqReceiverService {
 
 	@Autowired
 	CouponCommissionService couponCommissionService;
+	
+	@Autowired
+	InviteCommissionService inviteCommissionService;
 	
 	@Autowired
 	Sender sender;
@@ -72,6 +76,9 @@ public class MqReceiverServiceImpl implements MqReceiverService {
 		} else if (TmsEventTypeEnum.COUPON_COMMISSION.getCode().equals(messageEvent.getType())){//优惠券佣金
 			LOGGER.info("优惠券佣金提审-->");
 			couponCommissionService.insertByMq(messageEvent);
+		}else if(TmsEventTypeEnum.INVITE_COMMISSION.getCode().equals(messageEvent.getType())){
+			LOGGER.info("邀请佣金提审-->");
+			inviteCommissionService.insertByMQ(messageEvent);
 		}
 	}
 

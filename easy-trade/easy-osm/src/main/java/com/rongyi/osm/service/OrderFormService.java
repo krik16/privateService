@@ -57,7 +57,7 @@ public class OrderFormService extends BaseServiceImpl {
 	}
 	public List<OrderFormEntity> selectNonClosedOrder(int start, int range) {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("status", OrderFormStatus.CLOSED);
+		params.put("status", OrderFormStatus.COMMENT_CLOSED);
 		params.put("start", start);
 		params.put("range", range);
 		return this.getBaseDao().selectListBySql(MAPPER_NAMESPACE + ".selectNonClosedOrder", params);

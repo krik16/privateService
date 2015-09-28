@@ -43,8 +43,6 @@ import com.rongyi.tms.service.SalesCommissionService;
 public class SalesCommissionController extends BaseController {
     private static final Log LOGGER = LogFactory.getLog(SalesCommissionController.class);
 
-    protected ResponseResult result = new ResponseResult();
-
     @Autowired
     private SalesCommissionService commissionService;
 
@@ -92,6 +90,7 @@ public class SalesCommissionController extends BaseController {
     @RequestMapping(value = "/check")
     @ResponseBody
     public ResponseResult checkCommission(CheckParam params, HttpSession session, HttpServletRequest request) {
+    	ResponseResult result = new ResponseResult();
         try {
             if (StringUtils.isBlank(params.getIds()) || params.getStatus() == null || (
                 params.getStatus() == -1 && StringUtils.isBlank(params.getReason()))) {
@@ -187,6 +186,7 @@ public class SalesCommissionController extends BaseController {
     @RequestMapping(value = "payingNow")
     @ResponseBody
     public ResponseResult payingToSellerNow() {
+    	ResponseResult result = new ResponseResult();
         try {
             commissionService.statisticsCommissionAmountTrigger();
         } catch (Exception e) {

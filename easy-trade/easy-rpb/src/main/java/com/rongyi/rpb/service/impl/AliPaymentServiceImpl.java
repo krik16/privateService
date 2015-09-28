@@ -17,9 +17,9 @@ import org.springframework.stereotype.Service;
 import com.rongyi.core.bean.ObjectConvert;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.rpb.vo.QueryOrderParamVO;
-import com.rongyi.rpb.common.util.orderSign.webPageAlipay.alipay.sign.RSA;
-import com.rongyi.rpb.common.util.orderSign.webPageAlipay.alipay.util.AlipaySubmit;
-import com.rongyi.rpb.common.util.orderSign.weixinSign.util.XMLUtil;
+import com.rongyi.rpb.common.pay.ali.sign.RSA;
+import com.rongyi.rpb.common.pay.ali.util.AlipaySubmit;
+import com.rongyi.rpb.common.pay.weixin.util.XMLUtil;
 import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.ConstantUtil;
 import com.rongyi.rpb.constants.ConstantUtil.PayZhiFuBao;
@@ -80,7 +80,8 @@ public class AliPaymentServiceImpl extends BaseServiceImpl implements AliPayment
 		sb.append(totlePrice); // totlePrice
 		sb.append("\"&notify_url=\"");
 		try {
-			sb.append(URLEncoder.encode(ConstantUtil.PayNetAdress.NOTIFY_URL_ZHIFUBAO_APP, "utf-8"));
+//			sb.append(URLEncoder.encode(ConstantUtil.PayNetAdress.NOTIFY_URL_ZHIFUBAO_APP, "utf-8"));
+			sb.append(ConstantUtil.PayNetAdress.NOTIFY_URL_ZHIFUBAO_APP);
 		} catch (Exception e) {
 			LOGGER.error(e);
 		}

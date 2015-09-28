@@ -227,7 +227,7 @@
 	</update>
 
 	<select id="selectPayAccountUseTotal" resultMap="PayAccountUserTotalMap"
-		parameterType="java.lang.String">
+		parameterType="java.lang.Integer">
 		select buyer_email as pay_account,pay_channel as
 		pay_type,COUNT(buyer_email) as count from payment_event pe
 		left join
@@ -240,5 +240,18 @@
 		</if>
 		order by count desc
 	</select>
+	
+	<select id="validateByTradeNoAndPayNo" resultType="java.lang.Integer"
+		parameterType="java.lang.String">
+		select
+			count(pe.id)
+		from payment_event pe
+		left join payment_order po
+		on pe.out_trade_no = po.pay_no
+		where trade_no = #{tradeNo,jdbcType=VARCHAR}
+		and
+		pay_no = #{payNo,jdbcType=VARCHAR}
+	</select>
+	
 
 </mapper>

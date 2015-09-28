@@ -21,7 +21,7 @@
 				<c:forEach var="item" items="${list}" varStatus="status">
 					<tr>
 						<td style="text-align: center;"><input type="checkbox" name="subBox" class="subBox" id="${item.id}" payChannel="${item.payChannel}"></td>
-						<td><a href="${ctx}/bs/detail?id=${item.drawApplyId}&module=merchant" target="mainFrame" style="text-decoration: underline;">${item.orderNo}</a></td>
+						<td><a href="${ctx}/bs/detail?id=${item.drawApplyId}&module=merchant" target="_blank" style="text-decoration: underline;">${item.orderNo}</a></td>
 						<td><fmt:formatDate value="${item.orderTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 						<c:choose>
 						<c:when test="${item.payChannel eq 0}">

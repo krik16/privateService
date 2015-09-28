@@ -31,12 +31,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import base.util.excel.ExcelWriter;
 
-import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.malllife.common.util.DateTool;
 import com.rongyi.easy.tms.entity.DrawApply;
 import com.rongyi.tms.constants.Constant;
-import com.rongyi.tms.moudle.vo.CheckParam;
 import com.rongyi.tms.moudle.vo.DrawApplyPageParam;
 import com.rongyi.tms.service.DrawApplyService;
 import com.rongyi.tms.service.DrawVerifyLogService;
@@ -50,7 +48,6 @@ import com.rongyi.tms.service.DrawVerifyLogService;
 @RequestMapping("/drawDetail")
 public class DrawApplyDetailController extends BaseController {
     private static final Log LOGGER = LogFactory.getLog(DrawApplyDetailController.class);
-    protected ResponseResult result = new ResponseResult();
     @Autowired
     private DrawApplyService drawService;
     
@@ -64,7 +61,7 @@ public class DrawApplyDetailController extends BaseController {
     @RequestMapping(value="/list")
     public String findByPage(@ModelAttribute("param")DrawApplyPageParam param,ModelMap modelMap){
         try{
-            Map params=param.toParamsMap();
+            Map<String,Object> params=param.toParamsMap();
             LOGGER.info("params:"+params);
             params.put("orderBy","-trade_at");
             PagingVO<DrawApply> pagingvos=drawService.findByPage(params);
@@ -96,7 +93,7 @@ public class DrawApplyDetailController extends BaseController {
     @RequestMapping(value="/output")
     public void outPutDetail(DrawApplyPageParam params,String temp,HttpSession session,HttpServletRequest request,HttpServletResponse response){
         try{
-            Map paramsMap=params.toParamsMap();
+            Map<String,Object> paramsMap=params.toParamsMap();
             paramsMap.put("size",5000);
             LOGGER.info("params:"+params);
             PagingVO<DrawApply> pagingvos=drawService.findByPage(paramsMap);
@@ -162,7 +159,6 @@ public class DrawApplyDetailController extends BaseController {
             excelWriter.setCell(9, "卖家持卡人姓名");
             excelWriter.setCell(10, "提现金额");
 
-            String status = "";
             int i = 1;
             for (DrawApply record : recordList) {
                 excelWriter.createRow(i);

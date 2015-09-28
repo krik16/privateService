@@ -59,6 +59,8 @@ public class VirtualAccountGeneralServiceImpl implements VirtualAccountGeneralSe
 		vaVO.setUserId(virtualAccountEntity.getUserId());
 		vaVO.setUserName(virtualAccountEntity.getUserName());
 		vaVO.setIsSuspended(virtualAccountEntity.getIsSuspended());
+		vaVO.setStopAt(virtualAccountEntity.getStopAt());
+		vaVO.setStopReason(virtualAccountEntity.getStopReason());
 
 		// 获取账号明细合计
 		VirtualAccountQuerySumVO sumVO = virtualAccountDetailService.selectAccountSumByUserId(userId);
@@ -91,12 +93,12 @@ public class VirtualAccountGeneralServiceImpl implements VirtualAccountGeneralSe
 	 * .lang.String, boolean)
 	 */
 	@Override
-	public boolean setAccountSuspend(String userId, boolean isSuspended) {
-		logger.info(">>>>>>账号变更，userId: " + userId + "动作: " + (isSuspended ? "冻结" : "解冻"));
+	public boolean setAccountSuspend(String userId, boolean isSuspended, String stopReason) {
+		logger.info(">>>>>>账号变更，userId: " + userId + "动作: " + (isSuspended ? "冻结" : "解冻") + " ,冻结原因" + stopReason);
 
 		boolean result = true;
 		try {
-			int rowCount = virtualAccountService.updateSuspended(userId, isSuspended);
+			int rowCount = virtualAccountService.updateSuspended(userId, isSuspended, stopReason);
 			if (rowCount != 1) {
 				result = false;
 			}
@@ -106,5 +108,10 @@ public class VirtualAccountGeneralServiceImpl implements VirtualAccountGeneralSe
 		}
 
 		return result;
+	}
+
+	@Override
+	public VirtualAccountEntity selectByUserId(String userId) {
+		return virtualAccountService.selectByUserId(userId);
 	}
 }

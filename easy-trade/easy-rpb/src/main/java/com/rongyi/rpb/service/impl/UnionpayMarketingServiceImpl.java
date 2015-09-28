@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.rpb.entity.UnionActivityRegister;
-import com.rongyi.rpb.common.util.orderSign.union.UnionUtil;
+import com.rongyi.rpb.common.pay.union.UnionUtil;
 import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.service.UnionpayMarketingService;
 import com.unionpay.acp.sdk.HttpClient;

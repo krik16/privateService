@@ -55,7 +55,6 @@ import com.rongyi.tms.service.RefundService;
 @RequestMapping("/pay")
 public class PayController extends BaseController {
 	private static final Log LOGGER = LogFactory.getLog(PayController.class);
-	protected ResponseResult result = new ResponseResult();
 	@Autowired
 	private PayService payService;
 
@@ -139,7 +138,7 @@ public class PayController extends BaseController {
 					LOGGER.error("roa接口未提供");
 					e.printStackTrace();
 				}
-				
+
 			}
 			double pageTotle = refundService.selectRefundPageListCount(map);
 			Integer rowContNum = (int) Math.ceil(pageTotle / Constant.PAGE.PAGESIZE);
@@ -199,14 +198,17 @@ public class PayController extends BaseController {
 	 **/
 	private List<TradeVO> buildList(List<TradeVO> list) {
 		try {
+			MallLifeUserEntity user = null;
 			for (TradeVO tradeVO : list) {
 				if (tradeVO.getBuyerId() != null) {
-					MallLifeUserEntity user = rOAMallLifeUserService.getEntityByUid(tradeVO.getBuyerId());
-					if (user != null) {
-						tradeVO.setBuyerId(user.getId().toString());
-						tradeVO.setBuyerAccount(user.getPhone());
-						tradeVO.setBuyerName(user.getUserName());
-					}
+					user = rOAMallLifeUserService.getEntityByUid(tradeVO.getBuyerId());
+				} else if (tradeVO.getCouponBuyerId() != null) {
+					user = rOAMallLifeUserService.getEntityByUid(tradeVO.getCouponBuyerId());
+				}
+				if (user != null) {
+					tradeVO.setBuyerId(user.getId().toString());
+					tradeVO.setBuyerAccount(user.getPhone());
+					tradeVO.setBuyerName(user.getNickname());
 				}
 			}
 		} catch (Exception e) {
@@ -242,6 +244,29 @@ public class PayController extends BaseController {
 			e.printStackTrace();
 		}
 		return "/pay/draw_apply_list";
+	}
+
+	/**
+	 * @Description: 操作退款/付款前验证是否符合条件
+	 * @param paymentId
+	 * @param model
+	 * @return
+	 * @Author: 柯军
+	 * @datetime:2015年9月1日下午2:40:13
+	 **/
+	@RequestMapping("/validatePay")
+	@ResponseBody
+	public ResponseResult validatePay(@RequestParam String ids[], @RequestParam Integer operateType, Model model) {
+		LOGGER.info("================操作退款/付款前验证是否符合条件 ====================");
+		ResponseResult result = new ResponseResult();
+		try {
+			Map<String, Object> resultMap = rpbService.validatePayHtml(ids, operateType);
+			result.setSuccess(Boolean.valueOf(resultMap.get("success").toString()));
+			result.setMessage(resultMap.get("message").toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	/**
@@ -285,8 +310,33 @@ public class PayController extends BaseController {
 	@ResponseBody
 	public ResponseResult weixinRefund(@RequestParam Integer paymentId, Model model) {
 		LOGGER.info("================微信手动操作退款====================");
+		ResponseResult result = new ResponseResult();
 		try {
 			Map<String, Object> resultMap = rpbService.operateWeixinRefund(paymentId);
+			result.setSuccess(Boolean.valueOf(resultMap.get("success").toString()));
+			result.setMessage(resultMap.get("message").toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	/**
+	 * @Description: 微信退款拒绝/同意操作
+	 * @param paymentId
+	 * @param refundRejected
+	 * @param model
+	 * @return
+	 * @Author: 柯军
+	 * @datetime:2015年8月28日上午10:58:17
+	 **/
+	@RequestMapping("/refundRejected")
+	@ResponseBody
+	public ResponseResult weixinRefundRejected(@RequestParam Integer paymentId, @RequestParam Integer refundRejected, Model model) {
+		LOGGER.info("================微信退款" + (refundRejected == 0 ? "同意" : "拒绝") + "操作====================");
+		ResponseResult result = new ResponseResult();
+		try {
+			Map<String, Object> resultMap = rpbService.weixinRefundRejected(paymentId, refundRejected);
 			result.setSuccess(Boolean.valueOf(resultMap.get("success").toString()));
 			result.setMessage(resultMap.get("message").toString());
 		} catch (Exception e) {
@@ -303,7 +353,6 @@ public class PayController extends BaseController {
 			desc = ConstantEnum.TRADE_TYPE_EXCE_PAY.getValueStr();
 		return desc;
 	}
-
 
 	private MessageEvent getMessageEvent(Integer operateType, Integer payChannel, String paymentId, String desc) {
 		MessageEvent event = new MessageEvent();
@@ -332,6 +381,7 @@ public class PayController extends BaseController {
 	@RequestMapping(value = "/validateAccount")
 	@ResponseBody
 	public ResponseResult validateAccount(String ids, HttpSession session, HttpServletRequest request) {
+		ResponseResult result = new ResponseResult();
 		// try {
 		// Map<Integer, String> map = rpbService.validateAccount(ids);
 		// result.setSuccess(false);

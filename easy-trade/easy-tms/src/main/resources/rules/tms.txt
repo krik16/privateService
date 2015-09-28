@@ -67,3 +67,16 @@ osm -> tms 佣金传入
   "timestamp": 1432204282347
 }
   
+tms 邀请佣金
+{
+type: '3',
+source:'tms',
+timestamp:12312414,
+body:
+	{guideId:'1',//导购ID(邀请码拥有者)
+	buyerId:'123',//注册用户ID
+	buyerAccount:'dad',//注册用户账号
+	commissionAmount:10.00(double),//佣金金额
+	}
+}  
+  

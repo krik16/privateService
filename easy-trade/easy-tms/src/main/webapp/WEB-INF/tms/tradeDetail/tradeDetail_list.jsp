@@ -55,13 +55,13 @@
 							${entity.payChannel eq '2' ? '银行卡 ' : ''}
 						</td>
 						<c:choose>
-							<c:when test="${entity.integral > 0 && (not empty entity.orderCouponCode || not empty entity.couponCashCouponCode)}">
+							<c:when test="${entity.score > 0 && (not empty entity.orderCouponCode || entity.hbDiscount > 0)}">
 								<td>红包加积分</td>
 							</c:when>
-							<c:when test="${entity.integral > 0 }">
+							<c:when test="${entity.score > 0 }">
 								<td>积分</td>
 							</c:when>
-							<c:when test="${not empty entity.orderCouponCode || not empty entity.couponCashCouponCode}">
+							<c:when test="${not empty entity.orderCouponCode || entity.hbDiscount > 0}">
 								<td>红包</td>
 							</c:when>
 							<c:otherwise>
@@ -106,7 +106,7 @@
 			</c:when>
 			<c:otherwise>
 				<tr>
-					<td style="text-align: center;" colspan="15">暂无记录</td>
+					<td style="text-align: center;" colspan="18">暂无记录</td>
 				</tr>
 			</c:otherwise>
 		</c:choose>

@@ -15,4 +15,10 @@ public interface OrderFormStatus {
 	
 	/* 订单关闭状态 */
 	public static final String CLOSED = "5";
+	
+	/* 评论状态 */
+	public static final String TO_COMMENT = "6";
+	
+	/* 评论关闭状态 */
+	public static final String COMMENT_CLOSED = "7";
 }

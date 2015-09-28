@@ -9,8 +9,8 @@ import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
-import com.rongyi.rpb.common.util.orderSign.webPageAlipay.alipay.sign.AlipayConfig;
-import com.rongyi.rpb.common.util.orderSign.webPageAlipay.alipay.util.AlipaySubmit;
+import com.rongyi.rpb.common.pay.ali.sign.AlipayConfig;
+import com.rongyi.rpb.common.pay.ali.util.AlipaySubmit;
 import com.rongyi.rpb.constants.ConstantUtil;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.nsynchronous.OrderFormNsyn;
@@ -63,7 +63,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 		sParaTempToken.put("_input_charset", ConstantUtil.PayZhiFuBao.INPUT_CHARSET);
 		sParaTempToken.put("sign_type", ConstantUtil.PayZhiFuBao.SIGNTYPE);
 		sParaTempToken.put("notify_url", ConstantUtil.PCZhiFuBaoWebPage.NOTIFY_URL_ZHIFUBAO_PC_WEB);
-		sParaTempToken.put("account_name", "上海容易网电子商务有限公司");
+		sParaTempToken.put("account_name", ConstantUtil.PCZhiFuBaoWebPage.ACCOUNT_FULL_NAME);
 		sParaTempToken.put("detail_data", detail_data);
 		sParaTempToken.put("batch_no", getBatchNo(payNo));
 		sParaTempToken.put("batch_num", "1");
@@ -152,8 +152,9 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 		try {
 			if (paymentEntity.getBatchNo() != null) {
 				List<PaymentEntity> list = paymentService.selectByBatchNoAndStatus(paymentEntity.getBatchNo(), Constants.PAYMENT_STATUS.STAUS2);
-				if (list.isEmpty())
+				if (list.isEmpty() && paymentEntity.getBatchNo().contains(DateUtil.getCurrentDateYYMMDD())){//检验批量单号是否是当天生成使用
 					batchNo = paymentEntity.getBatchNo();
+				}
 			}
 			LOGGER.info("批量单号-->" + batchNo);
 			if (paymentEntity.getBatchNo() == null || !batchNo.equals(paymentEntity.getBatchNo())) {
@@ -189,7 +190,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 			PaymentEntity paymentEntity = paymentService.selectByPrimaryKey(id);
 			if (paymentEntity.getBatchNo() != null) {
 				List<PaymentEntity> list = paymentService.selectByBatchNoAndStatus(paymentEntity.getBatchNo(), Constants.PAYMENT_STATUS.STAUS2);
-				if (list.isEmpty()) {
+				if (list.isEmpty() && paymentEntity.getBatchNo().contains(DateUtil.getCurrentDateYYMMDD())) {//验证批量单号是否是今天生成
 					batchNo = paymentEntity.getBatchNo();
 					break;
 				}

@@ -21,6 +21,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.coupon.entity.CouponOrder;
 import com.rongyi.easy.coupon.entity.UserCoupon;
@@ -67,6 +68,7 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 
 	@Override
 	public List<TradeVO> selectTradePageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
+
 		if (pageSize != null && currentPage != null) {
 			map.put("currentPage", (currentPage - 1) * pageSize);
 			map.put("pageSize", pageSize);
@@ -77,6 +79,7 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 		List<String> buyerIds = new ArrayList<String>();
 		if (map.get("buyerName") != null && StringUtils.isNotBlank(map.get("buyerName").toString())) {
 			try {
+				LOGGER.info("dubbo service rOAMallLifeUserService.getUserDetailByName(),服务请求时间-->"+DateUtil.getCurrentDateYYYYMMDDHHMMSSsss());
 				List<UserInfoVO> userVoList = rOAMallLifeUserService.getUserDetailByName(map.get("buyerName").toString());
 				for (UserInfoVO userVO : userVoList) {
 					buyerIds.add(userVO.getUserId());
@@ -88,6 +91,7 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 		}
 		if (map.get("buyerAccount") != null && StringUtils.isNotBlank(map.get("buyerAccount").toString())) {
 			try {
+				LOGGER.info("dubbo service rOAMallLifeUserService.getByPhone(),服务请求时间-->"+DateUtil.getCurrentDateYYYYMMDDHHMMSSsss());
 				UserInfoVO userInfoVO = rOAMallLifeUserService.getByPhone(map.get("buyerAccount").toString());
 				if (userInfoVO != null)
 					buyerIds.add(userInfoVO.getUserId());
@@ -99,6 +103,7 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 		}
 		if (!buyerIds.isEmpty())
 			map.put("buyerIds", buyerIds);
+
 		List<TradeVO> list = this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectTradePageList", map);
 		String buyerId = null;
 		for (TradeVO tradeVO : list) {
@@ -131,8 +136,9 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 	}
 
 	@Override
-	public Integer selectTradePageListCount(Map<String, Object> map) {
-		return this.getBaseDao().selectOneBySql(PAYMENTENTITY_NAMESPACE + ".selectTradePageListCount", map);
+	public int selectTradePageListCount(Map<String, Object> map) {
+		Integer count = this.getBaseDao().selectOneBySql(PAYMENTENTITY_NAMESPACE + ".selectTradePageListCount", map);
+		return count == null ? 0 : count;
 	}
 
 	@Override
@@ -163,13 +169,9 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 			if (!StringUtils.isEmpty(tradeVo.getOrderDiscountInfo())) {
 				jsonObject = JSONObject.fromObject(tradeVo.getOrderDiscountInfo());
 			}
-		} else {
-			if (!StringUtils.isEmpty(tradeVo.getCouponDiscuntInfo())) {
-				jsonObject = JSONObject.fromObject(tradeVo.getCouponDiscuntInfo());
-			}
 		}
 		if (jsonObject != null && jsonObject.get("score") != null)
-			tradeVo.setIntegral(jsonObject.getInt("score"));
+			tradeVo.setScore(jsonObject.getInt("score"));
 		if (jsonObject != null && jsonObject.get("cashCouponDiscount") != null)
 			tradeVo.setCouponDiscountInt(Integer.valueOf(jsonObject.getString("cashCouponDiscount")));
 		return tradeVo;

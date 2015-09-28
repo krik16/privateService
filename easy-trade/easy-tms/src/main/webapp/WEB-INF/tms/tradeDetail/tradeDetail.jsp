@@ -80,8 +80,8 @@ pageEncoding="UTF-8"%>
 						<!-- <li >买家姓名：
 								<input id="buyerName"  type="text"  class="detail" style="width:50px"></input>
 						</li> -->
-						<li>卖家姓名：
-								<input id="sellerName"  type="text"  class="detail" style="width:50px"></input>
+						<li>卖家账号：
+								<input id="sellerAccount"  type="text"  class="detail" style="width:100px"></input>
 							</li>
 					<!-- 	<div style="clear:both;height:0;width:0"></div>  -->
 						<li style="margin-top: 25px;">收支类型：

@@ -82,6 +82,8 @@
 								</c:if>
 									
 								<li class="li2">${apply.payName }</li>
+								<li class="li1" style="color: red; font-size: 16px;">账户余额：</li>
+								<li class="li2" style="color: red; font-size: 16px;">${balance}元</li>
 							</ul>
 							
 						</div>

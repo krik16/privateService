@@ -18,6 +18,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.rongyi.core.common.util.DateUtil;
+import com.rongyi.core.constant.PayEnum;
 import com.rongyi.core.constant.PaymentEventType;
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
@@ -28,6 +29,7 @@ import com.rongyi.easy.rpb.vo.PaySuccessResponse;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
 import com.rongyi.easy.rpb.vo.QueryOrderParamVO;
 import com.rongyi.easy.rpb.vo.WeixinQueryOrderParamVO;
+import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.mq.Sender;
 import com.rongyi.rpb.nsynchronous.OrderFormNsyn;
@@ -102,15 +104,16 @@ public class RpbServiceImpl implements IRpbService {
 
 	@Override
 	public Map<String, Object> operateWeixinRefund(Integer id) {
-		Map<String, Object> messageMap = new HashMap<String, Object>();
+		LOGGER.info("微信退款人工操作，id="+id);
 		PaymentEntity paymentEntity = paymentService.selectByPrimaryKey(id.toString());
 		PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
 				paymentEntity.getPayChannel());
-		if (weixinPayService.weixinRefund(oldPaymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), oldPaymentEntity.getAmountMoney().doubleValue(), paymentEntity.getPayNo())) {
+		Map<String, Object> refundResultMap = weixinPayService.weixinRefund(oldPaymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), oldPaymentEntity.getAmountMoney().doubleValue(),
+				paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
+		if (Constants.RESULT.SUCCESS.equals(refundResultMap.get("result")) || ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr().equals(refundResultMap.get("result"))) {
 			paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
 			paymentService.updateByPrimaryKeySelective(paymentEntity);
-			messageMap.put("success", true);
-			messageMap.put("message", "微信退款成功");
+			refundResultMap.put("success", true);
 			String target = Constants.SOURCETYPE.OSM;
 			String orderDetailNum = "";
 			if (Constants.ORDER_TYPE.ORDER_TYPE_1 == oldPaymentEntity.getOrderType()) {
@@ -121,11 +124,10 @@ public class RpbServiceImpl implements IRpbService {
 			MessageEvent event = rpbEventService.getMessageEvent(paymentEntity.getPayNo(), paymentEntity.getOrderNum(), orderDetailNum, paymentEntity.getPayChannel().toString(), null,
 					Constants.SOURCETYPE.RPB, target, PaymentEventType.REFUND);
 			sender.convertAndSend(event);
-			return messageMap;
+		}else{
+			refundResultMap.put("success", false);
 		}
-		messageMap.put("success", false);
-		messageMap.put("message", "微信退款失败");
-		return messageMap;
+		return refundResultMap;
 	}
 
 	@Override
@@ -150,7 +152,7 @@ public class RpbServiceImpl implements IRpbService {
 			return resultMap;
 		}
 
-		String orderNums = paymentService.getOrderNumStrsByPayNo(paymentEntity.getPayNo(),Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
+		String orderNums = paymentService.getOrderNumStrsByPayNo(paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
 		String payChannel = PaymentEventType.WEIXIN_PAY;
 		String payAccount = null;
 		if (paymentEntity.getPayChannel() == Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0) {
@@ -162,10 +164,15 @@ public class RpbServiceImpl implements IRpbService {
 			if (queryOrderPayStatus(null, paymentEntity.getPayNo(), paymentEntity.getPayChannel())) {
 				LOGGER.info("发送同步支付通知,订单号-->" + orderNo);
 				List<PaySuccessResponse> responseList = paymentLogInfoService.paySuccessToMessage(paymentEntity.getPayNo(), payAccount, orderNums, paymentEntity.getOrderType(), payChannel);
-				resultMap = responseList.get(0).getResult();
-				if ("0".equals(resultMap.get("errno"))) {
-					LOGGER.info("更新付款状态，付款单号-->" + paymentEntity.getPayNo());
-					paymentService.updateListStatusBypayNo(paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);// 修改付款单状态
+				if (!responseList.isEmpty()) {
+					resultMap = responseList.get(0).getResult();
+					if ("0".equals(resultMap.get("errno"))) {
+						LOGGER.info("更新付款状态，付款单号-->" + paymentEntity.getPayNo());
+						paymentService.updateListStatusBypayNo(paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);// 修改付款单状态
+					}
+				}else{
+					resultMap.put("errno", "10");
+					resultMap.put("errMsg", "订单系统处理异常");
 				}
 			}
 		} else {
@@ -224,11 +231,12 @@ public class RpbServiceImpl implements IRpbService {
 			}
 			LOGGER.info("支付宝订单状态-->" + queryOrderParamVO.getTrade_status());
 		} else if (Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1 == payChannel) {
-			WeixinQueryOrderParamVO weixinQueryOrderParamVO = weixinPayService.queryOrder(payNo);
-			if (weixinQueryOrderParamVO != null && 0 == weixinQueryOrderParamVO.getRet_code()) {
+			WeixinQueryOrderParamVO weixinQueryOrderParamVO = weixinPayService.queryOrder(tradeNo, payNo);
+			if (weixinQueryOrderParamVO != null && "SUCCESS".equals(weixinQueryOrderParamVO.getResult_code())
+					&& ("SUCCESS".equals(weixinQueryOrderParamVO.getTrade_state()) || "REFUND".equals(weixinQueryOrderParamVO.getTrade_state()))) {
 				return true;
 			}
-			LOGGER.info("微信订单-->" + (weixinQueryOrderParamVO.getRet_code() == 62623003) != null ? "订单不存在" : weixinQueryOrderParamVO.getRet_code());
+			LOGGER.info("微信订单支付未成功-->" + weixinQueryOrderParamVO.toString());
 		} else {
 			LOGGER.info("未找到对应付款方式-->payChannel=" + payChannel + ",tradeNo=" + tradeNo + ",payNo=" + payNo);
 		}
@@ -260,5 +268,43 @@ public class RpbServiceImpl implements IRpbService {
 	@Override
 	public PaymentEntity selectByOrderNumAndTradeType(String orderNum, Integer tradeType, Integer status, Integer payChannel) {
 		return paymentService.selectByOrderNumAndTradeType(orderNum, tradeType, status, payChannel);
+	}
+
+	@Override
+	public Map<String, Object> weixinRefundRejected(Integer paymentId, Integer refundRejected) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("success", true);
+		map.put("message", refundRejected == Constants.REFUND_REJECTED.REFUND_REJECTED0 ? "同意退款操作成功" : "拒绝退款操作成功");
+		try {
+			paymentService.updateRefundRejected(paymentId, refundRejected);
+		} catch (Exception e) {
+			map.put("success", false);
+			map.put("message", refundRejected == Constants.REFUND_REJECTED.REFUND_REJECTED0 ? "同意退款操作失败" : "拒绝退款操作失败");
+			e.printStackTrace();
+		}
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> validatePayHtml(String[] ids, Integer operateType) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<PaymentEntity> list = paymentService.valiadteStatus(ids, Constants.PAYMENT_STATUS.STAUS2);
+		if (!list.isEmpty()) {
+			map.put("success", false);
+			if (PayEnum.DRAW_APPLY_ONE.getCode().equals(operateType) || PayEnum.EXCE_PAY_ONE.getCode().equals(operateType))
+				map.put("message", "该条记录已完成支付,无法再次支付!请刷新页面后再次操作!");
+			else if (PayEnum.DRAW_APPLY_MORE.getCode().equals(operateType) || PayEnum.EXCE_PAY_MORE.getCode().equals(operateType))
+				map.put("message", "批量列表中存在已完成支付的记录,无法再次支付!请刷新页面后再次操作!");
+			else if (PayEnum.TRADE_REFUND_ONE.getCode().equals(operateType))
+				map.put("message", "该条退款记录已完成支付,无法再次支付!请刷新页面后再次操作!");
+			else if (PayEnum.TRADE_REFUND_MORE.getCode().equals(operateType))
+				map.put("message", "批量列表中存在已完成退款的记录,无法再次退款!请刷新页面后再次操作!");
+			else
+				map.put("message", "未知错误！");
+			return map;
+		}
+		map.put("success", true);
+		map.put("message", "验证通过");
+		return map;
 	}
 }

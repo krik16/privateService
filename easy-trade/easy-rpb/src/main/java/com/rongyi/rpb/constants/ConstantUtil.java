@@ -1,5 +1,7 @@
 package com.rongyi.rpb.constants;
 
+import java.io.File;
+
 import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.framework.spring.context.utils.SpringContextUtil;
 
@@ -26,12 +28,11 @@ public interface ConstantUtil {
 //		public static String PARTNER_KEY = "82f1d2fa5ed647323e0de6c2898c4a21";
 //		public static String TRACEID = "wxf379a9c3029f1f15";
 
+	
 		public static String APP_ID = propertyConfigurer.getProperty("WEIXIN.APP_ID").toString();
-		public static String APP_SECRET = propertyConfigurer.getProperty("WEIXIN.APP_SECRET").toString();
-		public static String APP_KEY = propertyConfigurer.getProperty("WEIXIN.APP_KEY").toString();
-		public static String PARTNER = propertyConfigurer.getProperty("WEIXIN.PARTNER").toString();
+		public static String KEY = propertyConfigurer.getProperty("WEIXIN.KEY").toString();
+		public static String MCH_ID = propertyConfigurer.getProperty("WEIXIN.MCH_ID").toString();
 		public static String PASSWORD = propertyConfigurer.getProperty("WEIXIN.PASSWORD").toString();
-		public static String PARTNER_KEY = propertyConfigurer.getProperty("WEIXIN.PARTNER_KEY").toString();
 		public static String TRACEID = propertyConfigurer.getProperty("WEIXIN.TRACEID").toString();
 
 		
@@ -60,6 +61,7 @@ public interface ConstantUtil {
 		String SELLER_ID = propertyConfigurer.getProperty("ALI.SELLER_ID").toString(); // 卖家支付宝帐号
 		String PRIVATE_KEY = propertyConfigurer.getProperty("ALI.PRIVATE_KEY").toString();
 		String ALI_PUBLIC_KEY = propertyConfigurer.getProperty("ALI.ALI_PUBLIC_KEY").toString();
+		String KEY = propertyConfigurer.getProperty("ALI.KEY").toString();
 
 		String SDK_SERVICE = "mobile.securitypay.pay";
 		String INPUT_CHARSET = "utf-8";
@@ -94,7 +96,7 @@ public interface ConstantUtil {
 		String RETURN_URL_ZHIFUBAO_PC_WEB = "http://" + NOTIFY_URL.innernetAddress + "/v5/PCWebPageAlipay/refund_call_back.htm";// 支付宝同步返回页面路径
 		String PAYMENT_TYPE = "1";// 支付类型
 		String ACCOUNT_NAME = "容易网";
-		String ACCOUNT_FULL_NAME = "上海容易网电子商务有限公司";
+		String ACCOUNT_FULL_NAME = "上海摩购电子商务有限公司";
 
 	}
 
@@ -132,5 +134,39 @@ public interface ConstantUtil {
 	 *证书目录 
 	 */
 	String CRET_DIRECTORY = NOTIFY_URL.cretDirectory;
+
 	
+	
+	/**	
+	 * @Author:  柯军
+	 * @Description: V3版本微信常量配置 
+	 * @datetime:2015年9月1日下午6:29:53
+	 *
+	 **/
+	interface PayWeiXin_V3{
+		
+		public static String APP_ID = propertyConfigurer.getProperty("WEIXIN.APP_ID").toString();
+		public static String KEY = propertyConfigurer.getProperty("WEIXIN.KEY").toString();
+		public static String MCH_ID = propertyConfigurer.getProperty("WEIXIN.MCH_ID").toString();
+		public static String PASSWORD = propertyConfigurer.getProperty("WEIXIN.PASSWORD").toString();
+
+
+		
+		String SPBILL_CREATE_IP = "127.0.0.1";//终端IP
+		
+		String TRADE_TYPE = "APP";//交易类型
+		
+		public static String UNIFIED_ORDER_URL = "https://api.mch.weixin.qq.com/pay/unifiedorder";//支付接口地址
+		
+		public static String  WEIXIN_NOTIFY_URL = "http://" + NOTIFY_URL.outernetAddress + "/v5/WebPageAlipay/weixin/notify_url.htm";//支付成功异步通知接口
+		
+		public static String QUERY_ORDER_URL = "https://api.mch.weixin.qq.com/pay/orderquery";//订单查询接口地址
+		
+		public static String CLOSE_ORDER_URL = "https://api.mch.weixin.qq.com/pay/closeorder";//订单关闭接口地址
+		
+		public static String REQUEST_REFUND_URL = "https://api.mch.weixin.qq.com/secapi/pay/refund";//订单查询接口
+		
+		public static String QUERY_REFUND_URL = "https://api.mch.weixin.qq.com/pay/refundquery";//查询退款接口
+		
+	}
 }

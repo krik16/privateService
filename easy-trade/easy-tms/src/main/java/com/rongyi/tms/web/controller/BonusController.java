@@ -68,7 +68,6 @@ import com.rongyi.tms.service.SalesCommissionService;
 public class BonusController extends BaseController {
     private static final Log LOGGER = LogFactory.getLog(BonusController.class);
 
-    protected ResponseResult result = new ResponseResult();
 
     @Autowired
     private BonusService bonusService;
@@ -126,6 +125,7 @@ public class BonusController extends BaseController {
     public ResponseResult updateBonus(BonusParam params, ModelMap modelMap, HttpServletRequest request,
             HttpServletResponse response, HttpSession session) {
         LOGGER.info("bonusParams:" + params);
+        ResponseResult result = new ResponseResult();
         try {
             BonusVO vo = params.paramsToVO();
             UserInfo userInfo = this.getSessionUser(request, session);
@@ -198,7 +198,8 @@ public class BonusController extends BaseController {
     @RequestMapping(value = "/check")
     @ResponseBody
     public ResponseResult checkCommission(CheckParam params, HttpSession session, HttpServletRequest request) {
-        try {
+    	ResponseResult result = new ResponseResult();
+    	try {
             if (StringUtils.isBlank(params.getIds()) || params.getStatus() == null
                     || (params.getStatus() == -1 && StringUtils.isBlank(params.getReason()))) {
                 result.setCode(CodeEnum.ERROR_PARAM.getActionCode());
@@ -242,7 +243,8 @@ public class BonusController extends BaseController {
 	@RequestMapping(value = "/uploadExcel")
     public String uploadExcel(@RequestParam(value = "file", required = false) MultipartFile file, HttpSession session,
             HttpServletRequest request, ModelMap model) {
-        try {
+    	ResponseResult result = new ResponseResult();
+    	try {
             String path = request.getSession().getServletContext().getRealPath("upload");
             String fileName = file.getOriginalFilename();
             File targetFile = new File(path, fileName);

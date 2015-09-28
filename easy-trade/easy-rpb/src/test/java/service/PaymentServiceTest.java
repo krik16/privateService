@@ -9,6 +9,7 @@ import junit.framework.Assert;
 import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.testng.annotations.Test;
 
 import base.BaseTest;
@@ -45,7 +46,7 @@ public class PaymentServiceTest extends BaseTest {
 	@Autowired
 	RpbServiceImpl rpbServiceImpl;
 	
-	// @Test
+//	 @Test
 	public void testSelectPageListBySearch() {
 		Map<String, Object> searchValueMap = null;
 		searchValueMap = new HashMap<String, Object>();
@@ -112,7 +113,7 @@ public class PaymentServiceTest extends BaseTest {
 		paymentService.insertByOrderDetailNum(paymentEntity, "001,002");
 	}
 
-	// @Test
+//	 @Test
 	public void testSelectByPrimaryKey() {
 		PaymentEntity paymentEntity = paymentService.selectByPrimaryKey("80");
 		System.err.println(paymentEntity.getPayNo());
@@ -150,7 +151,7 @@ public class PaymentServiceTest extends BaseTest {
 
 	}
 
-	// @Test
+//	 @Test
 	public void testValidateOrderNumExist() {
 		PaymentEntity paymentEntity = paymentService.validateOrderNumExist("1000000126496953,1000000272983889", 1, 1);
 		System.err.println("payNo=" + paymentEntity.getPayNo());
@@ -228,14 +229,33 @@ public class PaymentServiceTest extends BaseTest {
 		rpbServiceImpl.paySuccessNotify("0818930009601625", 0.00);
 	}
 
-//	@Test
+	@Test
 	public void testSelectByBatchNoAndStatus(){
 		System.err.println(paymentService.selectByBatchNoAndStatus("20150812192552139",2).size());
 	}
 	
-	@Test
+//	@Test
 	public void testSelectByTradeType(){
 		PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType("0825255175681151", Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE5, Constants.PAYMENT_STATUS.STAUS2,0);
 		System.err.println(paymentEntity.getId());
+	}
+	
+//	@Test
+	public void testBodyToEntity(){
+		String body = "{\"body\":{\"title\":\"c5555555\",\"orderDetailNum\":\"626676\",\"orderType\":\"1\",\"paymentId\":\"1000000459740290\","
+				+ "\"orderNum\":\"0827630333441716\",\"totalPrice\":\"0.01\"},\"source\":\"coupon_order_queue\",\"target\":\"rpb\",\"timestamp\":1440667020557,\"type\":\"2\"}";
+		paymentService.bodyToPaymentEntity(body, "2");
+	}
+	
+//	@Test
+	@Rollback(false)
+	public void testUpdateRefundRejected(){
+		paymentService.updateRefundRejected(4690,1);
+	}
+	
+	@Test
+	public void testValiadteStatus(){
+		String[] ids = new String[]{"1","2","3"};
+		paymentService.valiadteStatus(ids, 2);	
 	}
 }

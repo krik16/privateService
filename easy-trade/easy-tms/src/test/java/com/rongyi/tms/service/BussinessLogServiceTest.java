@@ -34,11 +34,6 @@ public class BussinessLogServiceTest extends BaseTest{
 	public void testInsert(){
 		BussinessLog bussinessLog = new BussinessLog();
 		bussinessLog.setBussinessId(1);
-		bussinessLog.setBussinessType(2);
-		bussinessLog.setCreateAt(new Date());
-		bussinessLog.setMemo("test");
-		bussinessLog.setUsername("test");
-		bussinessLog.setDeleted(0);
 		bussinessLogService.insert(bussinessLog);
 	}
 	

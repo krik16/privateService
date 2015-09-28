@@ -20,7 +20,7 @@ import base.BaseTest;
 import com.rongyi.easy.rmmm.vo.OrderCouponInfo;
 import com.rongyi.easy.rmmm.vo.OrderWithCouponInfoVO;
 import com.rongyi.easy.rpb.entity.UnionCouponLogEntity;
-import com.rongyi.rpb.common.util.orderSign.union.UnionUtil;
+import com.rongyi.rpb.common.pay.union.UnionUtil;
 import com.rongyi.rpb.service.UnionCouponService;
 import com.rongyi.rss.mallshop.order.ROAOrderFormServiceWithCouponInfo;
 import com.unionpay.acp.sdk.HttpClient;
@@ -65,7 +65,7 @@ public class UnionServiceTest extends BaseTest{
 		
 	}
 
-	@Test
+//	@Test
 	public void testSign() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("test1", "123");
@@ -74,7 +74,7 @@ public class UnionServiceTest extends BaseTest{
 		System.err.println(UnionUtil.getParamPlain(map));
 	}
 
-//	@Test
+	@Test
 	public void testSelectByMsgtxCodeAndTransNo(){
 		UnionCouponLogEntity unionCouponLogEntity = unionCouponService.selectByMsgtxCodeAndTransNo("002003", "1234567890");
 		System.err.println(unionCouponLogEntity.getId());
