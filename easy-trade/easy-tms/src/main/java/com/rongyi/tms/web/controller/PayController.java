@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.core.constant.PayEnum;
@@ -35,14 +34,17 @@ import com.rongyi.core.constant.PaymentEventType;
 import com.rongyi.easy.entity.MallLifeUserEntity;
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.osm.entity.OrderFormEntity;
+import com.rongyi.easy.settle.dto.PaymentStatementDto;
 import com.rongyi.easy.tms.vo.TradeVO;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.rss.mallshop.order.ROAOrderFormService;
 import com.rongyi.rss.rpb.IRpbService;
 import com.rongyi.tms.constants.Constant;
 import com.rongyi.tms.constants.ConstantEnum;
+import com.rongyi.tms.moudle.vo.ResponseResult;
 import com.rongyi.tms.mq.Sender;
 import com.rongyi.tms.service.PayService;
+import com.rongyi.tms.service.PaymentStatementService;
 import com.rongyi.tms.service.RefundService;
 
 /**
@@ -72,6 +74,9 @@ public class PayController extends BaseController {
 
 	@Autowired
 	ROAOrderFormService rOAOrderFormService;
+
+	@Autowired
+	PaymentStatementService paymentStatementService;
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String search(ModelMap model, String currentMallId, HttpServletRequest request, HttpServletResponse response, HttpSession session, String currpage) {
@@ -417,4 +422,21 @@ public class PayController extends BaseController {
 		return result;
 	}
 
+	@RequestMapping("/statementList")
+	public String statementList(ModelMap model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		try {
+			LOGGER.info("----statement list ------");
+			Map<String, Object> map = getJsonMap(request);
+			String currpage = (String) map.get("currpage");
+			List<PaymentStatementDto> list = paymentStatementService.selectPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE);
+			double pageTotle = paymentStatementService.selectPageListCount(map);
+			Integer rowContNum = (int) Math.ceil(pageTotle / Constant.PAGE.PAGESIZE);
+			model.addAttribute("rowCont", rowContNum);
+			model.addAttribute("currpage", currpage);
+			model.addAttribute("list", list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/pay/statement_list";
+	}
 }
