@@ -280,6 +280,15 @@ public class PaymentStatementController {
         return shopId + DateUtils.getYesterdayDateSimpleStr(instance) + "01";
     }
 
+    public static String getBatchNo(String batchNo) {
+        String endTwo = StringUtils.substring(batchNo, batchNo.length() - 2, batchNo.length());
+        Integer count = Integer.valueOf(endTwo);
+        count = count + 1;
+        if (count < 10) {
+            return StringUtils.substring(batchNo, 0, batchNo.length() - 2) + "0" + count;
+        } else return StringUtils.substring(batchNo, 0, batchNo.length() - 2) + count.toString();
+    }
+
     private void createExcel(PaymentStatement paymentStatement, StatementConfig statementConfig) {
         PaymentStatementExcelDto paymentStatementExcelDto = new PaymentStatementExcelDto();
         List<PaymentStatementDetailDto> paymentStatementDetailDtoList = new ArrayList<>();
