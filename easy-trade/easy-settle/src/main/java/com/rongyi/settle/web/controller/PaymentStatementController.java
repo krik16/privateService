@@ -265,6 +265,7 @@ public class PaymentStatementController {
                         paymentStatement.setBatchNo(getBatchNo(statementConfig.getBussinessCode(), instance));
                         paymentStatement.setStatus(SettleConstant.PaymentStatementStatus.INIT);
                         paymentStatement.setCreateAt(new Date());
+                        paymentStatement.setIsDelete(new Byte("0"));
                         paymentStatementService.insert(paymentStatement);
                         createExcel(paymentStatement, statementConfig);
                     }
