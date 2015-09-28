@@ -18,7 +18,8 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	
 	private String name;//商品名称
 	private String category;//商品品类id
-	private Integer status;//状态 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理 
+	private Integer status;//状态 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理5待审核 6审核失败7商家审核通过待容易网审核
+
 	private String code;//商品编码
 	private String description;//商品描述
 	private Double postage;//商品邮费
@@ -202,5 +203,4 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	public void setSpecList(List<ObjectId> specList) {
 		this.specList = specList;
 	}
-	
 }

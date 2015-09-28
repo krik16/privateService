@@ -22,6 +22,8 @@ public class CommodityListVO implements Serializable{
 	
 	private Long commodityCheckCount;//待审核商品数量
 	
+	private Long commodityCheckFailedCount;//审核失败数量
+	
 	public List<CommodityVO1> getCommodityList() {
 		return commodityList;
 	}
@@ -85,6 +87,13 @@ public class CommodityListVO implements Serializable{
 	public void setCommodityCheckCount(Long commodityCheckCount) {
 		this.commodityCheckCount = commodityCheckCount;
 	}
-	
+
+	public Long getCommodityCheckFailedCount() {
+		return commodityCheckFailedCount;
+	}
+
+	public void setCommodityCheckFailedCount(Long commodityCheckFailedCount) {
+		this.commodityCheckFailedCount = commodityCheckFailedCount;
+	}
 	
 }
