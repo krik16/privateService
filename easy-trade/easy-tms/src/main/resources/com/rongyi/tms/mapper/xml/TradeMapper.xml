@@ -146,7 +146,7 @@
 			concat('%',#{sellerName,jdbcType=VARCHAR},'%')
 		</if>
 		<!-- 卖家账号 -->
-		<if test="sellerAccount != null and sellerName != ''">
+		<if test="sellerAccount != null and sellerAccount != ''">
 			AND rmmm_user_info.user_phone like
 			concat('%',#{sellerAccount,jdbcType=VARCHAR},'%')
 		</if>

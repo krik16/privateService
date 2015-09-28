@@ -95,7 +95,7 @@ public class WithdrawApplyServiceImpl implements WithdrawApplyService {
 
 				// 发送事件，检查返回结果
 				ResponseEvent response = messageSender.sendRPCEvent(event);
-				if (response.getCode() != 0) {
+				if (response != null && response.getCode() != 0) {
 					// tms mq提现请求失败
 					logger.error(">>>>>>>>>提现申请tms返回失败结果：");
 					logger.error(response.getMessage());
@@ -103,7 +103,7 @@ public class WithdrawApplyServiceImpl implements WithdrawApplyService {
 					result.setCode(CodeEnum.ERROR_SYSTEM.getActionCode());
 					result.setMessage(CodeEnum.ERROR_SYSTEM.getMessage());
 					result.setSuccess(false);
-				} else {
+				} else if(response != null && response.getCode() == 0){
 					// 生成金额明细
 					VirtualAccountDetailEntity virtualAccountDetailEntity = new VirtualAccountDetailEntity();
 					virtualAccountDetailEntity.setUserId(userId);
@@ -121,6 +121,12 @@ public class WithdrawApplyServiceImpl implements WithdrawApplyService {
 					result.setCode(CodeEnum.SUCCESS.getActionCode());
 					result.setMessage("提现申请成功");
 					result.setSuccess(true);
+				}else{
+					logger.info("MQ消息未正确处理，删除错误提现申请，提现单号："+applicationNo);
+					virtualAccountService.deleteByDrawNo(applicationNo);
+					result.setCode(CodeEnum.ERROR_SYSTEM.getActionCode());
+					result.setMessage(CodeEnum.ERROR_SYSTEM.getMessage());
+					result.setSuccess(false);
 				}
 
 			} else if (permission == 1) {

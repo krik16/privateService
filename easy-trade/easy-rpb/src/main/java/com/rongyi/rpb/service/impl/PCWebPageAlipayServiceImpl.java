@@ -63,7 +63,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 		sParaTempToken.put("_input_charset", ConstantUtil.PayZhiFuBao.INPUT_CHARSET);
 		sParaTempToken.put("sign_type", ConstantUtil.PayZhiFuBao.SIGNTYPE);
 		sParaTempToken.put("notify_url", ConstantUtil.PCZhiFuBaoWebPage.NOTIFY_URL_ZHIFUBAO_PC_WEB);
-		sParaTempToken.put("account_name", "上海容易网电子商务有限公司");
+		sParaTempToken.put("account_name", ConstantUtil.PCZhiFuBaoWebPage.ACCOUNT_FULL_NAME);
 		sParaTempToken.put("detail_data", detail_data);
 		sParaTempToken.put("batch_no", getBatchNo(payNo));
 		sParaTempToken.put("batch_num", "1");
@@ -152,7 +152,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 		try {
 			if (paymentEntity.getBatchNo() != null) {
 				List<PaymentEntity> list = paymentService.selectByBatchNoAndStatus(paymentEntity.getBatchNo(), Constants.PAYMENT_STATUS.STAUS2);
-				if (list.isEmpty() && paymentEntity.getBatchNo().contains(DateUtil.getCurrentDateYYMMDD())) {// 检验批量单号是否是当天生成使用
+				if (list.isEmpty() && paymentEntity.getBatchNo().contains(DateUtil.getCurrentDateYYMMDD())){//检验批量单号是否是当天生成使用
 					batchNo = paymentEntity.getBatchNo();
 				}
 			}
@@ -190,7 +190,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 			PaymentEntity paymentEntity = paymentService.selectByPrimaryKey(id);
 			if (paymentEntity.getBatchNo() != null) {
 				List<PaymentEntity> list = paymentService.selectByBatchNoAndStatus(paymentEntity.getBatchNo(), Constants.PAYMENT_STATUS.STAUS2);
-				if (list.isEmpty() && paymentEntity.getBatchNo().contains(DateUtil.getCurrentDateYYMMDD())) {// 验证批量单号是否是今天生成
+				if (list.isEmpty() && paymentEntity.getBatchNo().contains(DateUtil.getCurrentDateYYMMDD())) {//验证批量单号是否是今天生成
 					batchNo = paymentEntity.getBatchNo();
 					break;
 				}
@@ -208,12 +208,11 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 			if (Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1 == paymentEntity.getTradeType())// 正常支付退款记录
 				historyPaymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
 						paymentEntity.getPayChannel());
-			else
-				// 重复支付退款记录
+			else// 重复支付退款记录
 				historyPaymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE5, Constants.PAYMENT_STATUS.STAUS2,
 						paymentEntity.getPayChannel());
 			if (historyPaymentEntity != null) {
-				PaymentLogInfo paymentLogInfo = paymentLogInfoService.selectByOutTradeNo(historyPaymentEntity.getPayNo(), historyPaymentEntity.getTradeType());
+				PaymentLogInfo paymentLogInfo = paymentLogInfoService.selectByOutTradeNo(historyPaymentEntity.getPayNo(),historyPaymentEntity.getTradeType());
 				if (paymentLogInfo == null)
 					throw new RuntimeException("此" + paymentEntity.getPayNo() + "付款单号不存在已付款记录");
 				buyerMap.put("tradeNo", paymentLogInfo.getTrade_no());
@@ -272,7 +271,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 		try {
 			messageMap = JsonUtil.getMapFromJson(event.getBody().toString());
 			Integer operateType = Integer.valueOf(messageMap.get("operateType").toString());
-			if (PayEnum.DRAW_APPLY_ONE.getCode().equals(operateType) || PayEnum.EXCE_PAY_ONE.getCode().equals(operateType) || PayEnum.STATEMENT_ONE.getCode().equals(operateType)) {
+			if (PayEnum.DRAW_APPLY_ONE.getCode().equals(operateType) || PayEnum.EXCE_PAY_ONE.getCode().equals(operateType)) {
 				LOGGER.info("单条支付");
 				PaymentEntity paymentEntity = paymentService.selectByPrimaryKey(messageMap.get("paymentId").toString());
 				map = getOnePayInfo(paymentEntity.getPayNo(), paymentEntity.getAmountMoney().toString(), paymentEntity.getOutAccount(), paymentEntity.getPayName(), messageMap.get("desc").toString());
@@ -287,17 +286,17 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 				if (Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1 == paymentEntity.getTradeType())// 正常付款记录退款
 					hisPayEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
 							paymentEntity.getPayChannel());// 根据退款单记录中的订单号找到对应的历史付款单记录（用来查找付款交易流水号）
-				else
-					// 重复支付退款记录
+				else// 重复支付退款记录
 					hisPayEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE5, Constants.PAYMENT_STATUS.STAUS2,
 							paymentEntity.getPayChannel());// 根据退款单记录中的订单号找到对应的历史付款单记录（用来查找付款交易流水号）
-				PaymentLogInfo paymentLogInfo = paymentLogInfoService.selectByOutTradeNo(hisPayEntity.getPayNo(), hisPayEntity.getTradeType());
+				PaymentLogInfo paymentLogInfo = paymentLogInfoService.selectByOutTradeNo(hisPayEntity.getPayNo(),hisPayEntity.getTradeType());
 				map = getRefunInfo(paymentEntity, "1", paymentEntity.getAmountMoney().toString(), paymentLogInfo.getTrade_no(), messageMap.get("desc").toString());
 			} else if (PayEnum.TRADE_REFUND_MORE.getCode().equals(operateType)) {
 				LOGGER.info("批量退款");
 				String[] idArray = messageMap.get("paymentId").toString().split("\\,");
 				map = getBatchRefunInfo(getBatchRefundBuyerMessage(idArray, messageMap.get("desc").toString()));
 			}
+
 		} catch (Exception e) {
 			map.put("code", "1");// 1：获取信息失败
 			map.put("message", "获取页面html信息失败");

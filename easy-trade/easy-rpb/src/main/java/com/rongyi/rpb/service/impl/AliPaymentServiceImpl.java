@@ -80,7 +80,8 @@ public class AliPaymentServiceImpl extends BaseServiceImpl implements AliPayment
 		sb.append(totlePrice); // totlePrice
 		sb.append("\"&notify_url=\"");
 		try {
-			sb.append(URLEncoder.encode(ConstantUtil.PayNetAdress.NOTIFY_URL_ZHIFUBAO_APP, "utf-8"));
+//			sb.append(URLEncoder.encode(ConstantUtil.PayNetAdress.NOTIFY_URL_ZHIFUBAO_APP, "utf-8"));
+			sb.append(ConstantUtil.PayNetAdress.NOTIFY_URL_ZHIFUBAO_APP);
 		} catch (Exception e) {
 			LOGGER.error(e);
 		}
