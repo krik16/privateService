@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
-<mapper namespace="com.rongyi.settle.mapper.xml.StatementConfigMapper" >
+<mapper namespace="com.rongyi.settle.mapper.StatementConfigMapper" >
   <resultMap id="BaseResultMap" type="com.rongyi.easy.settle.entity.StatementConfig" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="rule_code" property="ruleCode" jdbcType="VARCHAR" />
@@ -217,4 +217,17 @@
     from statement_config
     where is_delete=0 AND #{currentTime,jdbcType=TIMESTAMP} BETWEEN effect_start_time AND effect_end_time
   </select>
+
+  <update id="updateStatusByIds" parameterType="map">
+    update statement_config
+    set status=#{status, jdbcType=INTEGER}
+    <where>
+      <if test="ids != null">
+        AND id in
+        <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+          #{item}
+        </foreach>
+      </if>
+    </where>
+  </update>
 </mapper>
