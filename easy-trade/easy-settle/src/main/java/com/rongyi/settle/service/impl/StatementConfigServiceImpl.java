@@ -13,6 +13,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.settle.entity.OperationLog;
+import com.rongyi.settle.mapper.OperationLogMapper;
+import com.rongyi.settle.mapper.StatementConfigMapper;
+import org.apache.commons.collections.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,8 +37,16 @@ import com.rongyi.settle.service.StatementConfigService;
 @Service
 public class StatementConfigServiceImpl extends BaseServiceImpl implements StatementConfigService {
 
-	private static final String NAMESPACE = "com.rongyi.settle.mapper.xml.StatementConfigMapper";
-	
+	private static final String NAMESPACE = "com.rongyi.settle.mapper.StatementConfigMapper";
+
+	private Logger logger = LoggerFactory.getLogger(StatementConfigServiceImpl.class);
+
+	@Autowired
+	private OperationLogMapper operationLogMapper;
+
+	@Autowired
+	private StatementConfigMapper statementConfigMapper;
+
 	@Autowired
 	BussinessInfoService bussinessInfoService;
 	
@@ -76,5 +90,44 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("currentTime", new Date());
 		return this.getBaseDao().selectListBySql(NAMESPACE + ".selectForSchedule", map);
+	}
+
+	@Override
+	public boolean updatePaymentStatusByIds(List<Integer> ids, Integer status, String desc, String userId) {
+		boolean result = false;
+		try {
+			if (CollectionUtils.isNotEmpty(ids) && status!=null){
+				Map<String, Object> paramsMap = new HashMap<>();
+				paramsMap.put("ids", ids);
+				paramsMap.put("status", status);
+				statementConfigMapper.updateStatusByIds(paramsMap);
+				for (Integer id : ids){
+					saveOperationLog(id, status, desc, userId);
+				}
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info(e.getMessage());
+		}
+		return result;
+	}
+
+	/**
+	 * 插入日志记录
+	 * @param id
+	 * @param status
+	 * @param desc
+	 * @param userId
+	 */
+	private void saveOperationLog(Integer id,  Integer status, String desc, String userId) {
+		OperationLog operatioLog = new OperationLog();
+		operatioLog.setCreateUserId(userId);
+		operatioLog.setDesc(desc);
+		operatioLog.setOperationModel((byte) 0);
+		operatioLog.setOperationType(Byte.valueOf(status.toString()));
+		operatioLog.setCreadeAt(new Date());
+		operatioLog.setOperationId(id);
+		operationLogMapper.insertSelective(operatioLog);
 	}
 }

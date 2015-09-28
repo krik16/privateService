@@ -8,12 +8,15 @@
 
 package com.rongyi.settle.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,6 +42,8 @@ import com.rongyi.settle.service.StatementConfigService;
 @Controller
 @RequestMapping("/statementConfig")
 public class StatementConfigController {
+
+	Logger logger = LoggerFactory.getLogger(StatementConfigController.class);
 
 	@Autowired
 	StatementConfigService statementConfigService;
@@ -163,7 +168,35 @@ public class StatementConfigController {
 	@RequestMapping("/verify")
 	@ResponseBody
 	public ResponseData verify(HttpServletRequest request,@RequestBody Map<String, Object> map){
-		return null;
+		ResponseData result = null;
+		try {
+			//获取用户
+			String userId = "1";
+
+			logger.info("============ 对账配置批量审核 =============");
+			String idStr = map.containsKey("ids") ? map.get("ids").toString() : null;
+			Integer status = map.containsKey("status") ? Integer.valueOf(map.get("status").toString()) : null;
+			String desc = map.containsKey("desc") ? map.get("desc").toString() : null;
+			if (org.apache.commons.lang.StringUtils.isBlank(idStr) || status==null){
+				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt()
+						,CodeEnum.FIAL_PARAMS_ERROR.getValueStr()) ;
+			}
+			List<Integer> ids = new ArrayList<>();
+			for (String id : idStr.split(",")){
+				ids.add(Integer.valueOf(id.trim()));
+			}
+			if (statementConfigService.updatePaymentStatusByIds(ids, status, desc,userId)) {
+				result = ResponseData.success();
+			}else{
+				result = ResponseData.failure(CodeEnum.FIAL_UPDATE_PAYMENT.getCodeInt()
+						,CodeEnum.FIAL_UPDATE_PAYMENT.getValueStr());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
+		}
+		logger.info(result.toString());
+		return result;
 	}
 	
 	/**	

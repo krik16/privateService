@@ -2,6 +2,7 @@ package com.rongyi.settle.service;
 
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
 import com.rongyi.easy.settle.entity.PaymentStatement;
+import com.rongyi.settle.dto.PaymentStatementDetailDto;
 
 import java.util.Date;
 import java.util.List;
@@ -28,5 +29,8 @@ public interface PaymentStatementService {
      * @param ids
      * @return
      */
-    boolean updatePaymentStatusByIds(List<Integer> ids, Integer status);
+    boolean updatePaymentStatusByIds(List<Integer> ids, Integer status, String desc, String userId);
+
+    List<PaymentStatementDetailDto> selectForStatementDetails(String shopId, String mallId, Date startTime, Date endTime, Date cycleStartTime, Date cycleEndTime);
+
 }
