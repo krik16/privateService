@@ -294,7 +294,6 @@ public class PaymentStatementController {
     }
 
     /**
-     * @param request
      * @param map
      * @Description: 生成对账单
      **/
