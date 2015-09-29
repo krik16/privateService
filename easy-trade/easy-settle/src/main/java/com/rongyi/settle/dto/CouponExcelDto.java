@@ -7,9 +7,9 @@ public class CouponExcelDto {
     private String couponName;
     private String revenueType;
     private Integer couponCount;
-    private Integer couponPrice;
-    private Integer couponTotalAmount;
-    private Integer couponPayAmount;
+    private Double couponPrice;
+    private Double couponTotalAmount;
+    private Double couponPayAmount;
 
     public String getCouponName() {
         return couponName;
@@ -35,27 +35,27 @@ public class CouponExcelDto {
         this.couponCount = couponCount;
     }
 
-    public Integer getCouponPrice() {
+    public Double getCouponPrice() {
         return couponPrice;
     }
 
-    public void setCouponPrice(Integer couponPrice) {
+    public void setCouponPrice(Double couponPrice) {
         this.couponPrice = couponPrice;
     }
 
-    public Integer getCouponTotalAmount() {
+    public Double getCouponTotalAmount() {
         return couponTotalAmount;
     }
 
-    public void setCouponTotalAmount(Integer couponTotalAmount) {
+    public void setCouponTotalAmount(Double couponTotalAmount) {
         this.couponTotalAmount = couponTotalAmount;
     }
 
-    public Integer getCouponPayAmount() {
+    public Double getCouponPayAmount() {
         return couponPayAmount;
     }
 
-    public void setCouponPayAmount(Integer couponPayAmount) {
+    public void setCouponPayAmount(Double couponPayAmount) {
         this.couponPayAmount = couponPayAmount;
     }
 }

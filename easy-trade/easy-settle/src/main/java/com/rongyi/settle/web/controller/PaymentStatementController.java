@@ -8,6 +8,7 @@
 package com.rongyi.settle.web.controller;
 
 import com.rongyi.core.bean.ResponseData;
+import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
 import com.rongyi.easy.settle.entity.BussinessInfo;
 import com.rongyi.easy.settle.entity.PaymentStatement;
@@ -20,20 +21,27 @@ import com.rongyi.settle.dto.CouponExcelDto;
 import com.rongyi.settle.dto.PaymentStatementDetailDto;
 import com.rongyi.settle.dto.PaymentStatementExcelDto;
 import com.rongyi.settle.service.BussinessInfoService;
+import com.rongyi.settle.excel.ExportDataToExcel;
 import com.rongyi.settle.service.PaymentStatementService;
 import com.rongyi.settle.service.StatementConfigService;
 import com.rongyi.settle.util.DateUtils;
+import com.rongyi.settle.util.ExcelUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: 柯军
@@ -48,6 +56,9 @@ public class PaymentStatementController {
     Logger logger = LoggerFactory.getLogger(PaymentStatementController.class);
 
     @Autowired
+    private PropertyConfigurer propertyConfigurer;
+
+    @Autowired
     private PaymentStatementService paymentStatementService;
 
     @Autowired
@@ -55,6 +66,9 @@ public class PaymentStatementController {
 
     @Autowired
     private BussinessInfoService bussinessInfoService;
+
+    @Autowired
+    private ExportDataToExcel exportDataToExcel;
 
     /**
      * @Description: 对账单列表（包括所有列表，审核列表，商家对账单列表）
@@ -164,6 +178,28 @@ public class PaymentStatementController {
     }
 
     /**
+     * @Description: 导出付款清单（财务操作）
+     * @return
+     * @Author: 柯军
+     * @datetime:2015年9月21日下午3:03:26
+     **/
+    @RequestMapping("/exportPaymentExcel")
+    public ResponseData exportPaymentSchedule(Map<String, Object> map, HttpServletResponse response
+    , HttpServletRequest request) {
+        logger.info("导出付款清单参数>>>>>>>>>>>:map={}"+map);
+        String ids = map.get("ids")==null?"3":map.get("ids").toString();
+        ResponseData result;
+        if (StringUtils.isBlank(ids)) {
+           return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
+        }
+        exportDataToExcel.exportPaymentScheduleExcel(request,response,ids);
+        result = ResponseData.success();
+        return result;
+    }
+
+
+
+    /**
      * @Description: 作废
      * @param request
      * @param map
@@ -264,14 +300,11 @@ public class PaymentStatementController {
     }
 
     /**
-     * @param request
-     * @param map
      * @Description: 生成对账单
      **/
-    @RequestMapping("/generate")
-    public ResponseData generate(@RequestBody Map<String, Object> map) {
+    @RequestMapping("/generate/{id}")
+    public ResponseData generate(@PathVariable Integer id) {
         try {
-            Integer id = (Integer)map.get("id");
             PaymentStatement paymentStatement = paymentStatementService.get(id);
             StatementConfig statementConfig = statementConfigService.selectById(paymentStatement.getConfigId());
             paymentStatementService.cancel(id);
@@ -299,7 +332,7 @@ public class PaymentStatementController {
         return shopId + DateUtils.getYesterdayDateSimpleStr(instance) + "01";
     }
 
-    public static String getBatchNo(String batchNo) {
+    public String getBatchNo(String batchNo) {
         String endTwo = StringUtils.substring(batchNo, batchNo.length() - 2, batchNo.length());
         Integer count = Integer.valueOf(endTwo);
         count = count + 1;
@@ -350,7 +383,11 @@ public class PaymentStatementController {
         paymentStatementExcelDto.setPayChannel(getPayChannelName(statementConfig.getPayChannel()));
         paymentStatementExcelDto.setCouponExcelDtoList(couponExcelDtoList);
         paymentStatementExcelDto.setCouponCodeExcelDtoList(couponCodeExcelDtoList);
-        //TODO 写excel
+        ExcelUtils.write(propertyConfigurer.getProperty("settle.template.file"), propertyConfigurer.getProperty("settle.file.path"), getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime())), paymentStatementExcelDto);
+    }
+
+    private String getFileName(String name, String date) {
+        return "容易网商户对账单-" + name + "-" + date + ".xlsx";
     }
 
     private String getPayChannelName(Byte payChannel) {

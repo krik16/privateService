@@ -49,4 +49,9 @@ public class DateUtils {
         SimpleDateFormat dateFormat = new SimpleDateFormat(FORMAT_DATETIME);
         return dateFormat.format(date);
     }
+
+    public static String getDateStr(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(FORMAT_DATE);
+        return dateFormat.format(date);
+    }
 }
