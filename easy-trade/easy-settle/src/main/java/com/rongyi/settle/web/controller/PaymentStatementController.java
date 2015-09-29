@@ -269,12 +269,30 @@ public class PaymentStatementController {
      * @Description: 生成对账单
      **/
     @RequestMapping("/generate")
-    public ResponseData generate(HttpServletRequest request, @RequestBody Map<String, Object> map) {
-        Integer id = (Integer)map.get("id");
-        PaymentStatement paymentStatement = paymentStatementService.get(id);
-        paymentStatementService.cancel(id);
-        //TODO
-        return null;
+    public ResponseData generate(@RequestBody Map<String, Object> map) {
+        try {
+            Integer id = (Integer)map.get("id");
+            PaymentStatement paymentStatement = paymentStatementService.get(id);
+            StatementConfig statementConfig = statementConfigService.selectById(paymentStatement.getConfigId());
+            paymentStatementService.cancel(id);
+
+            PaymentStatement paymentStatementNew = new PaymentStatement();
+            paymentStatementNew.setConfigId(statementConfig.getId());
+            paymentStatementNew.setRuleCode(statementConfig.getRuleCode());
+            paymentStatementNew.setCycleStartTime(paymentStatement.getCycleStartTime());
+            paymentStatementNew.setCycleEndTime(paymentStatement.getCycleEndTime());
+            paymentStatementNew.setType(SettleConstant.PaymentStatementType.SHOP);
+            paymentStatementNew.setBatchNo(getBatchNo(paymentStatement.getBatchNo()));
+            paymentStatementNew.setStatus(SettleConstant.PaymentStatementStatus.INIT);
+            paymentStatementNew.setCreateAt(new Date());
+            paymentStatementNew.setIsDelete(new Byte("0"));
+            paymentStatementService.insert(paymentStatementNew);
+            createExcel(paymentStatementNew, statementConfig);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
+        }
+        return ResponseData.success();
     }
 
     private String getBatchNo(String shopId, Calendar instance) {
