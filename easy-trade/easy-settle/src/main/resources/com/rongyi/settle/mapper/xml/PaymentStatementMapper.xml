@@ -144,6 +144,7 @@
     <result column="type" property="type" jdbcType="TINYINT" />
     <result column="batch_no" property="batchNo" jdbcType="VARCHAR" />
     <result column="bussiness_type" property="bussinessType" jdbcType="TINYINT" />
+    <result column="bussiness_id" property="bussinessId" jdbcType="VARCHAR" />
     <result column="cycle_start_time" property="cycleStartTime" jdbcType="TIMESTAMP" />
     <result column="cycle_end_time" property="cycleEndTime" jdbcType="TIMESTAMP" />
     <result column="bussiness_name" property="bussinessName" jdbcType="VARCHAR" />
@@ -198,7 +199,7 @@
   <select id="selectPageList" resultMap="DtoResultMap" parameterType="java.util.Map">
     select
     ps.id, ps.type,ps.batch_no,sc.bussiness_type,ps.cycle_start_time,ps.cycle_end_time,
-    sc.bussiness_name,sc.pay_channel,bi.pay_account,bi.blank_name,
+    sc.bussiness_name,sc.bussiness_id, sc.pay_channel,bi.pay_account,bi.blank_name,
     ps.pay_total,bi.bussiness_email,ps.status_update_time,ps.status
     from payment_statement ps
     join statement_config sc on ps.config_id=sc.id
