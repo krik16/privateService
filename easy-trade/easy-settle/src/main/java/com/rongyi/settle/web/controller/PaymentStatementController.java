@@ -9,10 +9,21 @@ package com.rongyi.settle.web.controller;
 
 import com.rongyi.core.bean.ResponseData;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
+import com.rongyi.easy.settle.entity.BussinessInfo;
+import com.rongyi.easy.settle.entity.PaymentStatement;
+import com.rongyi.easy.settle.entity.StatementConfig;
 import com.rongyi.settle.constants.CodeEnum;
 import com.rongyi.settle.constants.ConstantEnum;
+import com.rongyi.settle.constants.SettleConstant;
+import com.rongyi.settle.dto.CouponCodeExcelDto;
+import com.rongyi.settle.dto.CouponExcelDto;
+import com.rongyi.settle.dto.PaymentStatementDetailDto;
+import com.rongyi.settle.dto.PaymentStatementExcelDto;
+import com.rongyi.settle.service.BussinessInfoService;
 import com.rongyi.settle.excel.ExportDataToExcel;
 import com.rongyi.settle.service.PaymentStatementService;
+import com.rongyi.settle.service.StatementConfigService;
+import com.rongyi.settle.util.DateUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +54,12 @@ public class PaymentStatementController {
 
     @Autowired
     private PaymentStatementService paymentStatementService;
+
+    @Autowired
+    private StatementConfigService statementConfigService;
+
+    @Autowired
+    private BussinessInfoService bussinessInfoService;
 
     @Autowired
     private ExportDataToExcel exportDataToExcel;
@@ -84,19 +102,6 @@ public class PaymentStatementController {
             e.printStackTrace();
             return ResponseData.failure(CodeEnum.FIAL_STATEMENT_LIST.getCodeInt(), CodeEnum.FIAL_STATEMENT_LIST.getValueStr());
         }
-    }
-
-    /**
-     * @Description: 生成对账单
-     * @param request
-     * @param map
-     * @return
-     * @Author: 柯军
-     * @datetime:2015年9月21日下午3:02:46
-     **/
-    @RequestMapping("/generate")
-    public ResponseData generate(HttpServletRequest request, @RequestBody Map<String, Object> map) {
-        return null;
     }
 
     /**
@@ -253,5 +258,145 @@ public class PaymentStatementController {
         return null;
     }
 
+    /**
+     * @Description: 定时任务调用生成对账单
+     * @Author: xgq
+     **/
+    @RequestMapping("/generateForSchedule")
+    public void generateForSchedule() {
+        try {
+            List<StatementConfig> statementConfigList = statementConfigService.selectForSchedule();
+            for (StatementConfig statementConfig : statementConfigList) {
+                if (SettleConstant.CountCycleType.DAY.equals(statementConfig.getCountCycle())) {
+                    Calendar instance = Calendar.getInstance();
+                    Date yesterdayFirstSecond = DateUtils.getYesterdayFirstSecond(instance);
+                    Date yesterdayLastSecond = DateUtils.getYesterdayLastSecond(instance);
+                    List<PaymentStatement> paymentStatements = paymentStatementService.selectByCycleTime(statementConfig.getId(), yesterdayFirstSecond, yesterdayLastSecond);
+                    if (paymentStatements == null) {
+                        PaymentStatement paymentStatement = new PaymentStatement();
+                        paymentStatement.setConfigId(statementConfig.getId());
+                        paymentStatement.setRuleCode(statementConfig.getRuleCode());
+                        paymentStatement.setCycleStartTime(yesterdayFirstSecond);
+                        paymentStatement.setCycleEndTime(yesterdayLastSecond);
+                        paymentStatement.setType(SettleConstant.PaymentStatementType.SHOP);
+                        paymentStatement.setBatchNo(getBatchNo(statementConfig.getBussinessCode(), instance));
+                        paymentStatement.setStatus(SettleConstant.PaymentStatementStatus.INIT);
+                        paymentStatement.setCreateAt(new Date());
+                        paymentStatement.setIsDelete(new Byte("0"));
+                        paymentStatementService.insert(paymentStatement);
+                        createExcel(paymentStatement, statementConfig);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * @param request
+     * @param map
+     * @Description: 生成对账单
+     **/
+    @RequestMapping("/generate")
+    public ResponseData generate(@RequestBody Map<String, Object> map) {
+        try {
+            Integer id = (Integer)map.get("id");
+            PaymentStatement paymentStatement = paymentStatementService.get(id);
+            StatementConfig statementConfig = statementConfigService.selectById(paymentStatement.getConfigId());
+            paymentStatementService.cancel(id);
+
+            PaymentStatement paymentStatementNew = new PaymentStatement();
+            paymentStatementNew.setConfigId(statementConfig.getId());
+            paymentStatementNew.setRuleCode(statementConfig.getRuleCode());
+            paymentStatementNew.setCycleStartTime(paymentStatement.getCycleStartTime());
+            paymentStatementNew.setCycleEndTime(paymentStatement.getCycleEndTime());
+            paymentStatementNew.setType(SettleConstant.PaymentStatementType.SHOP);
+            paymentStatementNew.setBatchNo(getBatchNo(paymentStatement.getBatchNo()));
+            paymentStatementNew.setStatus(SettleConstant.PaymentStatementStatus.INIT);
+            paymentStatementNew.setCreateAt(new Date());
+            paymentStatementNew.setIsDelete(new Byte("0"));
+            paymentStatementService.insert(paymentStatementNew);
+            createExcel(paymentStatementNew, statementConfig);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
+        }
+        return ResponseData.success();
+    }
+
+    private String getBatchNo(String shopId, Calendar instance) {
+        return shopId + DateUtils.getYesterdayDateSimpleStr(instance) + "01";
+    }
+
+    public static String getBatchNo(String batchNo) {
+        String endTwo = StringUtils.substring(batchNo, batchNo.length() - 2, batchNo.length());
+        Integer count = Integer.valueOf(endTwo);
+        count = count + 1;
+        if (count < 10) {
+            return StringUtils.substring(batchNo, 0, batchNo.length() - 2) + "0" + count;
+        } else return StringUtils.substring(batchNo, 0, batchNo.length() - 2) + count.toString();
+    }
+
+    private void createExcel(PaymentStatement paymentStatement, StatementConfig statementConfig) {
+        PaymentStatementExcelDto paymentStatementExcelDto = new PaymentStatementExcelDto();
+        List<PaymentStatementDetailDto> paymentStatementDetailDtoList = new ArrayList<>();
+        List<CouponExcelDto> couponExcelDtoList = new ArrayList<>();
+        if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.SHOP)) {
+            paymentStatementDetailDtoList =
+                    paymentStatementService.selectForStatementDetails(statementConfig.getBussinessId(), null, paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime());
+            couponExcelDtoList = paymentStatementService.selectForCouponExcelDto(statementConfig.getBussinessId(), null, paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime());
+            if (paymentStatementDetailDtoList != null && paymentStatementDetailDtoList.size() > 0) {
+                paymentStatementExcelDto.setShopName(paymentStatementDetailDtoList.get(0).getShopName());
+                paymentStatementExcelDto.setMallName(paymentStatementDetailDtoList.get(0).getMallName());
+            }
+        } else if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.MALL)) {
+            paymentStatementDetailDtoList =
+                    paymentStatementService.selectForStatementDetails(null, statementConfig.getBussinessId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime());
+            couponExcelDtoList = paymentStatementService.selectForCouponExcelDto(null, statementConfig.getBussinessId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime());
+            if (paymentStatementDetailDtoList != null && paymentStatementDetailDtoList.size() > 0) {
+                paymentStatementExcelDto.setMallName(paymentStatementDetailDtoList.get(0).getMallName());
+            }
+        }
+
+        List<CouponCodeExcelDto> couponCodeExcelDtoList = new ArrayList<>();
+        double total = 0;
+        double payTotal = 0;
+        for (PaymentStatementDetailDto paymentStatementDetailDto : paymentStatementDetailDtoList) {
+            CouponCodeExcelDto couponCodeExcelDto = paymentStatementDetailDto.toCouponCodeExcelDto();
+            couponCodeExcelDtoList.add(couponCodeExcelDto);
+            total += paymentStatementDetailDto.getOrigPrice();
+            payTotal += paymentStatementDetailDto.getPayAmount();
+        }
+        paymentStatementExcelDto.setBatchNo(paymentStatement.getBatchNo());
+        paymentStatementExcelDto.setCycleTime(DateUtils.getDateTimeStr(paymentStatement.getCycleStartTime()) + " - " + DateUtils.getDateTimeStr(paymentStatement.getCycleEndTime()));
+        paymentStatementExcelDto.setPayTotal(total);
+        paymentStatementExcelDto.setRongyiDiscount(total - payTotal);
+
+        BussinessInfo bussinessInfo = bussinessInfoService.selectByConfigId(statementConfig.getId());
+        paymentStatementExcelDto.setShopAccountName(bussinessInfo.getPayName());
+        paymentStatementExcelDto.setShopAccountNo(bussinessInfo.getPayAccount());
+        paymentStatementExcelDto.setShopBank(bussinessInfo.getBlankName());
+        paymentStatementExcelDto.setPayChannel(getPayChannelName(statementConfig.getPayChannel()));
+        paymentStatementExcelDto.setCouponExcelDtoList(couponExcelDtoList);
+        paymentStatementExcelDto.setCouponCodeExcelDtoList(couponCodeExcelDtoList);
+        //TODO 写excel
+    }
+
+    private String getPayChannelName(Byte payChannel) {
+        if (SettleConstant.PayChannel.ZHIFUBAO.equals(payChannel)) {
+            return "支付宝";
+        }
+        if (SettleConstant.PayChannel.WECHAT.equals(payChannel)) {
+            return "微信";
+        }
+        if (SettleConstant.PayChannel.UNION.equals(payChannel)) {
+            return "银联";
+        }
+        if (SettleConstant.PayChannel.CASH.equals(payChannel)) {
+            return "现金";
+        }
+        return "支付宝";
+    }
 }
 

@@ -960,9 +960,9 @@ public class OrderUtil {
 					// 下单时验证前端传送积分抵扣金额
 					if (integralRecordVO.getType() == ScoreRuleEnum.SCORE_GOODS_SUB.getCode()) {
 						Map<String, Object> mapScoreExchangeMoney=getMapByJson(ScoreRuleEnum.SCORE_GOODS_SUB.getCode());
-						double scoreExchangeMoney= Double.parseDouble(mapScoreExchangeMoney.get("scoreExchangeMoney").toString());
-						BigDecimal scoreDeductionMoney = new BigDecimal(Double.parseDouble(mapObject.get("score").toString()) * scoreExchangeMoney); // 积分抵扣金额，100积分兑换1RMB
-						BigDecimal pageScoreDeductionMoney = new BigDecimal(Double.parseDouble(mapObject.get("scoreDeduction").toString())); // 前端传送积分抵扣金额
+						String scoreExchangeMoney= mapScoreExchangeMoney.get("scoreExchangeMoney").toString();
+						BigDecimal scoreDeductionMoney = new BigDecimal(mapObject.get("score").toString()).multiply(new BigDecimal(scoreExchangeMoney)).setScale(2, BigDecimal.ROUND_HALF_UP); // 积分抵扣金额，100积分兑换1RMB
+						BigDecimal pageScoreDeductionMoney = new BigDecimal(mapObject.get("scoreDeduction").toString()); // 前端传送积分抵扣金额
 						if (scoreDeductionMoney.compareTo(pageScoreDeductionMoney) != 0) {
 							logger.info("该积分与积分抵扣金额不一致");
 							return false;

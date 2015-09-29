@@ -401,6 +401,7 @@
 		#{refundRejected,jdbcType=INTEGER}
 		and status =
 		#{status,jdbcType=INTEGER}
+		and #{today,jdbcType=TIMESTAMP} > create_at 
 	</select>
 	<update id="updateRefundRejected" parameterType="java.lang.Integer">
 		update payment_order

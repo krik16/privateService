@@ -21,7 +21,7 @@
     id, config_id, rule_code, cycle_start_time, cycle_end_time, `type`, batch_no, pay_total, 
     `status`, pay_time, pay_no, status_update_time, create_at, is_delete
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.util.Map" >
     select 
     <include refid="Base_Column_List" />
     from payment_statement
@@ -240,6 +240,10 @@
         </foreach>
       </if>
     </where>
+  </update>
+
+  <update id="cancel" parameterType="java.lang.Integer">
+    update payment_statement set status=8 where id=#{id, jdbcType=INTEGER}
   </update>
 
 </mapper>

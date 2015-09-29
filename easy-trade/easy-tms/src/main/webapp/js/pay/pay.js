@@ -149,6 +149,9 @@ function getParamsJson(){
 	  var tradeEndTime = $('#payEndTime').val();
 	  var minTotalPrice = $('#minTotalPrice').val();
 	  var maxTotalPrice = $('#maxTotalPrice').val();
+	  var batchNo = $('#batchNo').val();
+	  var bussinessType = $('#bussinessType').val();
+	  var bussinessName = $('#bussinessName').val();
 	  if(defalutCheck == 1){
 		  orderNo = $('#orderNo').val();
 	  }
@@ -165,7 +168,10 @@ function getParamsJson(){
 		        'tradeStartTime':tradeStartTime,
 		        'tradeEndTime':tradeEndTime,
 		        'minTotalPrice':minTotalPrice,
-		        'maxTotalPrice':maxTotalPrice
+		        'maxTotalPrice':maxTotalPrice,
+		        'batchNo':batchNo,
+		        'bussinessType':bussinessType,
+		        'bussinessName':bussinessName
 		    };
 	 return paramsJson_;
 }
@@ -263,6 +269,8 @@ function switchCheck(check) {
 		$("#exceTrade").removeClass("change-color");
 		$("#paySeller").addClass("now");
 		$("#paySeller").removeClass("change-color");
+		$("#statementPay").addClass("now");
+		$("#statementPay").removeClass("change-color");
 		
 		$("#search-payNo").css("display","none");
 		$("#search-drawNo").css("display","block");
@@ -270,6 +278,14 @@ function switchCheck(check) {
 		$("#search-sellerName").css("display","block");
 		$("#search-buyerName").css("display","none");
 		$("#search-buyerAccount").css("display","none");
+		
+		$("#search-mallId").css("display","block");
+		$("#search-shopId").css("display","block");
+		$("#search-sellerName").css("display","block");
+		
+		$("#search-batchNo").css("display","none");
+		$("#search-bussinessType").css("display","none");
+		$("#search-bussinessName").css("display","none");
 		
 		$("#search-price").html('提现金额：');
 		$("#search-time").html('提现申请时间段：');
@@ -286,6 +302,17 @@ function switchCheck(check) {
 		$("#exceTrade").removeClass("change-color");
 		$("#paySeller").addClass("now");
 		$("#paySeller").removeClass("change-color");
+		$("#statementPay").addClass("now");
+		$("#statementPay").removeClass("change-color");
+		
+		$("#search-mallId").css("display","block");
+		$("#search-shopId").css("display","block");
+		$("#search-sellerName").css("display","block");
+		
+		
+		$("#search-batchNo").css("display","none");
+		$("#search-bussinessType").css("display","none");
+		$("#search-bussinessName").css("display","none");
 		
 		$("#search-payNo").css("display","none");
 		$("#search-drawNo").css("display","none");
@@ -307,6 +334,17 @@ function switchCheck(check) {
 		$("#drawApply").removeClass("change-color");
 		$("#paySeller").addClass("now");
 		$("#paySeller").removeClass("change-color");
+		$("#statementPay").addClass("now");
+		$("#statementPay").removeClass("change-color");
+		
+		$("#search-mallId").css("display","block");
+		$("#search-shopId").css("display","block");
+		$("#search-sellerName").css("display","block");
+		
+		
+		$("#search-batchNo").css("display","none");
+		$("#search-bussinessType").css("display","none");
+		$("#search-bussinessName").css("display","none");
 		
 		$("#search-payNo").css("display","block");
 		$("#search-drawNo").css("display","none");
@@ -316,29 +354,35 @@ function switchCheck(check) {
 		$("#search-time").html('异常交易时间段：');
 		$("#search-price").html('异常付款金额：');
 		$("#search-price").width(86);
-	}else if (check == 3) {//打款给卖家
-		 url_ = "../pay/paySellerList";
-		$("#morePay").val(1);
-		$("#paySeller").addClass("change-color");
-		$("#paySeller").removeClass("now");
+	}else if (check == 3) {//对账单付款
 		
-		$("#drawApply").addClass("now");
-		$("#drawApply").removeClass("change-color");
-		$("#tradeRefund").addClass("now");
-		$("#tradeRefund").removeClass("change-color");
+		 url_ = "../pay/statementList";
+		$("#statementPay").addClass("change-color");
+		$("#statementPay").removeClass("now");
+		
 		$("#exceTrade").addClass("now");
 		$("#exceTrade").removeClass("change-color");
+		$("#tradeRefund").addClass("now");
+		$("#tradeRefund").removeClass("change-color");
+		$("#drawApply").addClass("now");
+		$("#drawApply").removeClass("change-color");
+		$("#paySeller").addClass("now");
+		$("#paySeller").removeClass("change-color");
 		
+		$("#morePay").val(6);
+		$("#search-batchNo").css("display","block");
+		$("#search-bussinessType").css("display","block");
+		$("#search-bussinessName").css("display","block");
+
 		$("#search-payNo").css("display","none");
-		$("#search-drawNo").css("display","block");
-		$("#search-orderNo").css("display","none");
-		$("#search-sellerName").css("display","block");
+		$("#search-drawNo").css("display","none");
+		$("#search-mallId").css("display","none");
+		$("#search-shopId").css("display","none");
+		$("#search-sellerName").css("display","none");
 		$("#search-buyerName").css("display","none");
-		
-		$("#search-drawNo-label").html('付款流水号:');
+		$("#search-orderNo").css("display","none");
+		$("#search-time").html('创建时间：');
 		$("#search-price").html('付款金额：');
-		$("#search-time").html('付款申请时间段：');
-		$("#search-price").width(60);
 	}
 	ajaxCommonSearch(url_, getParamsJson());
 }

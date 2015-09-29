@@ -1,6 +1,9 @@
 
 package com.rongyi.rpb.common.pay.ali.sign;
 
+import com.rongyi.core.common.PropertyConfigurer;
+import com.rongyi.core.framework.spring.context.utils.SpringContextUtil;
+
 /* *
  *类名：AlipayConfig
  *功能：基础配置类
@@ -27,21 +30,24 @@ public class AlipayConfig {
 	private AlipayConfig(){
 		
 	}
+	static PropertyConfigurer propertyConfigurer = (PropertyConfigurer) SpringContextUtil.getBean("propertyConfigurer");
 	//↓↓↓↓↓↓↓↓↓↓请在这里配置您的基本信息↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 	// 合作身份者ID，以2088开头由16位纯数字组成的字符串
-	public static final String partner = "2088701977493485";
+	public static final String partner = propertyConfigurer.getProperty("ALI.PARTNER").toString();
 	
 	// 交易安全检验码，由数字和字母组成的32位字符串
 	// 如果签名方式设置为“MD5”时，请设置该参数
-	public static final String key = "1htrinnzcp1371s5hbbt9gr5p1wlgz2f";
+//	public static final String key = "1htrinnzcp1371s5hbbt9gr5p1wlgz2f";
+	//新账号密钥
+	public static final String key =  propertyConfigurer.getProperty("ALI.KEY").toString();
 	
     // 商户的私钥
     // 如果签名方式设置为“0001”时，请设置该参数
-	public static final String private_key = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAKzzEv3f+2RSlEaXSlVEp2/ZRVa6EZavxfeqB6s71slX8wuSFrkdx2j2BWpMMhGYM0fld1ZD5MF4bFMAozH62TUHfRxswc/AFMf4tTV3jzchNeRCxDmnI+Fu6f0mTvw5lXcFoIyAb0pBXWDioB8/S5bchMLr3EUF9B890zTd4gBLAgMBAAECgYBCLgmYaDsUWp0unfntwwWnQSbNVwof9Ub1zHR+y7kW9rakONTFJWYG/g14bYvDO9BztJUDx5sjhWc+I8JO/8RZaxVClKUY9pGtC9Waa1Sy/77i+uyghf2Gvc7UvWzRLpdaEln8iPteTapKbM5XpSHemjjIAiWbSiiC6aGD/Kta0QJBAOBDKnmwcGa0CzRP0W+Ur9YAapTJvHeXk1tZnaG1Mqk4Tv5KVFQNXJlt6uOQCjB91z2ycAQPKkct3U9fgvL9hcUCQQDFbOMg0va9Sep2vwlAMZZ/1+Er+LKwyGH3/GPiawxaB9mshkU1odF4kEJAD3xO9OjhfLIObslzLMb7qCs1et7PAkBbtRu5h51vYlDyo3FR38vIB4OONLENdr6brJn5ds+ww4YKFvtFI/GqDHjxdgW0rsFGSaHlBw6S7P6DZtt14pbBAkAT18TgWLPaBKLfOoY4gINq6AzGuaFkKU/HeAOmDzJXnjBfqcMtB82g+4bdH3FUEkOR3lGbJ8FxpQ9+3cEyB957AkEAqaEy5vffZVfxS6oAFC4cL8M3n6bKkQbq2Q14irks38zPRhKLNayBr1QUlGgVQ1h5fS8/EOzo1fhaKtEhYpgzHA==";
+	public static final String private_key =propertyConfigurer.getProperty("ALI.PRIVATE_KEY").toString();
 
     // 支付宝的公钥
     // 如果签名方式设置为“0001”时，请设置该参数
-	public static final String ali_public_key = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnxj/9qwVfgoUh/y2W89L6BkRAFljhNhgPdyPuBV64bfQNN1PjbCzkIM6qRdKBoLPXmKKMiFYnkd6rAoprih3/PrQEB/VsW8OoM8fxn67UDYuyBTqA23MML9q1+ilIZwBC2AQ2UBVOrFXfFl75p6/B5KsiNG9zpgmLCUYuLkxpLQIDAQAB";
+	public static final String ali_public_key =propertyConfigurer.getProperty("ALI.ALI_PUBLIC_KEY").toString(); 
 
 	//↑↑↑↑↑↑↑↑↑↑请在这里配置您的基本信息↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 	

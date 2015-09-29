@@ -13,56 +13,59 @@
 	</parameterMap>
 
 	<sql id="Custom_Column_List">
-		id, user_id, user_name, shop_id, shop_name, balance, alipay_account,
+		id, user_id, user_name, shop_id, shop_name, balance,
+		alipay_account,
 		is_authenticated, is_suspended, stop_reason, stop_at
 	</sql>
-	
+
 	<insert id="insertAndGetId" parameterType="com.rongyi.easy.va.entity.VirtualAccountEntity"
 		useGeneratedKeys="true" keyProperty="id">
-    		insert into 
-    		virtual_account (
-    			id, 
-    			user_id, 
-    			user_name, 
-				shop_id, 
-				shop_name, 
-				balance, 
-				alipay_account, 
-				is_authenticated)
-			SELECT
-				#{id,jdbcType=INTEGER}, 
-				#{userId,jdbcType=VARCHAR}, 
-				#{userName,jdbcType=VARCHAR}, 
-      			#{shopId,jdbcType=VARCHAR}, 
-      			#{shopName,jdbcType=VARCHAR}, 
-      			#{balance,jdbcType=DECIMAL}, 
-      			#{alipayAccount,jdbcType=VARCHAR}, 
-      			#{isAuthenticated,jdbcType=BIT}
-      		FROM dual 
-			WHERE NOT EXISTS (SELECT * FROM virtual_account 
-			WHERE virtual_account.user_id = #{userId}); 
+		insert into
+		virtual_account (
+		id,
+		user_id,
+		user_name,
+		shop_id,
+		shop_name,
+		balance,
+		alipay_account,
+		is_authenticated)
+		SELECT
+		#{id,jdbcType=INTEGER},
+		#{userId,jdbcType=VARCHAR},
+		#{userName,jdbcType=VARCHAR},
+		#{shopId,jdbcType=VARCHAR},
+		#{shopName,jdbcType=VARCHAR},
+		#{balance,jdbcType=DECIMAL},
+		#{alipayAccount,jdbcType=VARCHAR},
+		#{isAuthenticated,jdbcType=BIT}
+		FROM dual
+		WHERE NOT EXISTS (SELECT * FROM virtual_account
+		WHERE virtual_account.user_id = #{userId});
 	</insert>
-	
+
 	<update id="updateAccountInfo" parameterType="com.rongyi.easy.va.entity.VirtualAccountEntity">
-		update virtual_account 
+		update
+		virtual_account
 		set
-			user_id = #{userId},
-			user_name = #{userName},
-			shop_id = #{shopId},
-			shop_name = #{shopName},
-			alipay_account = #{alipayAccount},
-			is_authenticated = #{isAuthenticated}
+		user_id = #{userId},
+		user_name = #{userName},
+		shop_id = #{shopId},
+		shop_name = #{shopName},
+		alipay_account = #{alipayAccount},
+		is_authenticated = #{isAuthenticated}
 		where id = #{id};
-  	</update>
+	</update>
 
 	<update id="updateBalance" parameterType="java.util.Map">
 		update virtual_account
 		set
-			balance = balance + #{amount}
+		balance = balance + #{amount}
 		where user_id = #{userId};
 	</update>
 
-	<select id="selectByUserId" resultMap="VirtualAccountMapper" parameterType="java.util.Map">
+	<select id="selectByUserId" resultMap="VirtualAccountMapper"
+		parameterType="java.util.Map">
 		select
 		<include refid="Custom_Column_List" />
 		from virtual_account
@@ -73,13 +76,19 @@
 		statementType="CALLABLE">
 		{CALL check_withdraw_permission(?, ?, ?, ?)}
 	</update>
-	
+
 	<update id="updateSuspended" parameterType="java.util.Map">
-		update virtual_account
+		update
+		virtual_account
 		set
-			is_suspended = #{isSuspended},
-			stop_reason = #{stopReason,jdbcType=VARCHAR},
-			stop_at = #{stopAt, jdbcType=TIMESTAMP}
+		is_suspended = #{isSuspended},
+		stop_reason = #{stopReason,jdbcType=VARCHAR},
+		stop_at = #{stopAt, jdbcType=TIMESTAMP}
 		where user_id = #{userId};
 	</update>
+	<delete id="deleteByDrawNo" parameterType="java.util.Map">
+		delete from
+		ry_rpb.draw_apply
+		where draw_no = #{drawNo};
+	</delete>
 </mapper>

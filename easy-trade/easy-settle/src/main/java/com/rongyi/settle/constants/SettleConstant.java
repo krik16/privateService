@@ -36,4 +36,16 @@ public interface SettleConstant {
         Byte PAY_UN_FROZEN = 10;//付款解冻
         Byte PAYED = 11;//已付款
     }
+
+    interface BussinessType {
+        Byte SHOP = 0;//店铺
+        Byte MALL = 1;//商场
+    }
+
+    interface PayChannel {
+        Byte ZHIFUBAO = 0;//支付宝
+        Byte WECHAT = 1;//微信
+        Byte UNION = 2;//银联
+        Byte CASH = 3;//现金
+    }
 }

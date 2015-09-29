@@ -59,7 +59,7 @@ pageEncoding="UTF-8"%>
 						onclick="switchCheck(0)">提现付款</a> 
 						|<a class="now" href="javascript:void(0);" id="tradeRefund" onclick="switchCheck(1)">交易退款</a>
 						|<a class="now" href="javascript:void(0);" id="exceTrade" onclick="switchCheck(2)">异常交易付款</a>
-						<!-- |<a class="now" href="javascript:void(0);" id="paySeller" onclick="switchCheck(3)">打款到卖家</a> -->
+						|<a class="now" href="javascript:void(0);" id="statementPay" onclick="switchCheck(3)">对账单付款</a>
 				</div>
 				<div class="memSuper-search" style="height: auto !important;min-height:140px; width: 100%">
 					<input type="hidden" value="1" name="pageNo" id="currpage">
@@ -82,10 +82,10 @@ pageEncoding="UTF-8"%>
 							<input id="orderNo"  class="orderNo" type="text" maxlength="50" style="width: 120px"/></input>
 						</li>
 						</div>
-						<li class="xiala">商场：
+						<li class="xiala" id="search-mallId">商场：
 							<input type="text" name="mallId" style="width: 110px"></input>
 						</li>
-						<li class="xiala">店铺：
+						<li class="xiala" id="search-shopId">店铺：
 							<input type="text" name="shopId" style="width: 110px">
 						</input>
 						</li>
@@ -94,16 +94,34 @@ pageEncoding="UTF-8"%>
 								<input id="sellerName"  type="text" style="width: 100px"></input>
 							</li>
 						</div>
-							<div style="display: none;" id ="search-buyerAccount">
+						<div style="display: none;" id ="search-buyerAccount">
 							<li>买家账号：
 								<input id="buyerAccount"  type="text" style="width: 100px"></input>
 							</li>
 						</div>
-						<!-- <div style="display: none;" id ="search-buyerName">
-							<li>买家姓名：
-								<input id="buyerName"  type="text" style="width: 100px"></input>
+						
+						<div style="display: none;" id ="search-batchNo">
+							<li>账单批次：
+								<input id="batchNo"  type="text" style="width: 100px"></input>
 							</li>
-						</div> -->
+						</div>
+						<div style="display: none;" id ="search-bussinessType">
+							<li>商户类型：
+								<select id="bussinessType" style="width: 100px">
+								<option value="">--全部--</option>
+								<option value="0">店铺</option>
+								<option value="1">商场</option> 
+								<option value="2">品牌</option>
+								<option value="3">分公司</option>
+								<option value="4">集团公司</option>
+							</select>
+							</li>
+						</div>
+						<div style="display: none;" id ="search-bussinessName">
+							<li>商户名称：
+								<input id="bussinessName"  type="text" style="width: 100px"></input>
+							</li>
+						</div>
 						<li>打款方式：
 							<select id="payChannel" style="width: 100px">
 								<option value="">--全部--</option>

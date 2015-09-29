@@ -45,12 +45,8 @@ public class DateUtils {
         return dateFormat.format(yesterday);
     }
 
-    public static void main(String[] args) {
-        try {
-            System.out.println(DateUtils.getYesterdayFirstSecond(Calendar.getInstance()));
-            System.out.println(DateUtils.getYesterdayLastSecond(Calendar.getInstance()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public static String getDateTimeStr(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(FORMAT_DATETIME);
+        return dateFormat.format(date);
     }
 }
