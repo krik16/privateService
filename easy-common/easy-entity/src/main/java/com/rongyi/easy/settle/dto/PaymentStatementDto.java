@@ -44,6 +44,8 @@ public class PaymentStatementDto implements Serializable {
     private Byte status;
     
     private Date createAt;
+    
+    private Integer paymentId;
 
     public Integer getId() {
         return id;
@@ -172,4 +174,13 @@ public class PaymentStatementDto implements Serializable {
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
+
+	public Integer getPaymentId() {
+		return paymentId;
+	}
+
+	public void setPaymentId(Integer paymentId) {
+		this.paymentId = paymentId;
+	}
+	
 }

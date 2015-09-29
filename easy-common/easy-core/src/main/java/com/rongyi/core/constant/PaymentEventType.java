@@ -58,5 +58,10 @@ public interface PaymentEventType {
 	 * 对账单付款
 	 */
 	public static final String STATEMENT_PAY = "15";
-
+	
+	/**
+	 * 对账单支付成功结果通知
+	 */
+	public static final String STATEMENT_PAY_NOTIFY = "16";
+	
 }
