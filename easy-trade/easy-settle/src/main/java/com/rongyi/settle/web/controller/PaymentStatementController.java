@@ -31,6 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -299,13 +300,11 @@ public class PaymentStatementController {
     }
 
     /**
-     * @param map
      * @Description: 生成对账单
      **/
-    @RequestMapping("/generate")
-    public ResponseData generate(@RequestBody Map<String, Object> map) {
+    @RequestMapping("/generate/{id}")
+    public ResponseData generate(@PathVariable Integer id) {
         try {
-            Integer id = (Integer)map.get("id");
             PaymentStatement paymentStatement = paymentStatementService.get(id);
             StatementConfig statementConfig = statementConfigService.selectById(paymentStatement.getConfigId());
             paymentStatementService.cancel(id);
@@ -384,7 +383,7 @@ public class PaymentStatementController {
         paymentStatementExcelDto.setPayChannel(getPayChannelName(statementConfig.getPayChannel()));
         paymentStatementExcelDto.setCouponExcelDtoList(couponExcelDtoList);
         paymentStatementExcelDto.setCouponCodeExcelDtoList(couponCodeExcelDtoList);
-        ExcelUtils.write(this.getClass().getClassLoader().getResource("").getPath() + "doc/temlate.xlsx", propertyConfigurer.getProperty("settle.file.path"), getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime())), paymentStatementExcelDto);
+        ExcelUtils.write(propertyConfigurer.getProperty("settle.template.file"), propertyConfigurer.getProperty("settle.file.path"), getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime())), paymentStatementExcelDto);
     }
 
     private String getFileName(String name, String date) {

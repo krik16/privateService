@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
  * @datetime:2015年9月16日下午6:56:12
  *
  **/
-@Component
+//@Component
 public class WorkThread extends Thread{
 	
 	private static final Logger LOGGER = Logger.getLogger(WorkThread.class);
