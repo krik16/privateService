@@ -24,13 +24,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rongyi.core.bean.ObjectConvert;
-import com.rongyi.core.bean.ResponseData;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.easy.settle.entity.BussinessInfo;
 import com.rongyi.easy.settle.entity.StatementConfig;
 import com.rongyi.rss.malllife.roa.ROARedisService;
 import com.rongyi.settle.constants.CodeEnum;
 import com.rongyi.settle.constants.ConstantEnum;
+import com.rongyi.settle.constants.ResponseData;
 import com.rongyi.settle.service.StatementConfigService;
 
 /**	
