@@ -8,6 +8,7 @@
 package com.rongyi.settle.web.controller;
 
 import com.rongyi.core.bean.ResponseData;
+import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
 import com.rongyi.easy.settle.entity.BussinessInfo;
 import com.rongyi.easy.settle.entity.PaymentStatement;
@@ -23,6 +24,7 @@ import com.rongyi.settle.service.BussinessInfoService;
 import com.rongyi.settle.service.PaymentStatementService;
 import com.rongyi.settle.service.StatementConfigService;
 import com.rongyi.settle.util.DateUtils;
+import com.rongyi.settle.util.ExcelUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,6 +48,9 @@ import java.util.*;
 public class PaymentStatementController {
 
     Logger logger = LoggerFactory.getLogger(PaymentStatementController.class);
+
+    @Autowired
+    private PropertyConfigurer propertyConfigurer;
 
     @Autowired
     private PaymentStatementService paymentStatementService;
@@ -264,7 +269,6 @@ public class PaymentStatementController {
     }
 
     /**
-     * @param request
      * @param map
      * @Description: 生成对账单
      **/
@@ -299,7 +303,7 @@ public class PaymentStatementController {
         return shopId + DateUtils.getYesterdayDateSimpleStr(instance) + "01";
     }
 
-    public static String getBatchNo(String batchNo) {
+    public String getBatchNo(String batchNo) {
         String endTwo = StringUtils.substring(batchNo, batchNo.length() - 2, batchNo.length());
         Integer count = Integer.valueOf(endTwo);
         count = count + 1;
@@ -350,7 +354,11 @@ public class PaymentStatementController {
         paymentStatementExcelDto.setPayChannel(getPayChannelName(statementConfig.getPayChannel()));
         paymentStatementExcelDto.setCouponExcelDtoList(couponExcelDtoList);
         paymentStatementExcelDto.setCouponCodeExcelDtoList(couponCodeExcelDtoList);
-        //TODO 写excel
+        ExcelUtils.write(this.getClass().getClassLoader().getResource("").getPath() + "doc/temlate.xlsx", propertyConfigurer.getProperty("settle.file.path"), getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime())), paymentStatementExcelDto);
+    }
+
+    private String getFileName(String name, String date) {
+        return "容易网商户对账单-" + name + "-" + date + ".xlsx";
     }
 
     private String getPayChannelName(Byte payChannel) {
