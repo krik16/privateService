@@ -21,6 +21,7 @@ import com.rongyi.settle.dto.CouponExcelDto;
 import com.rongyi.settle.dto.PaymentStatementDetailDto;
 import com.rongyi.settle.dto.PaymentStatementExcelDto;
 import com.rongyi.settle.service.BussinessInfoService;
+import com.rongyi.settle.excel.ExportDataToExcel;
 import com.rongyi.settle.service.PaymentStatementService;
 import com.rongyi.settle.service.StatementConfigService;
 import com.rongyi.settle.util.DateUtils;
@@ -36,6 +37,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: 柯军
@@ -60,6 +65,9 @@ public class PaymentStatementController {
 
     @Autowired
     private BussinessInfoService bussinessInfoService;
+
+    @Autowired
+    private ExportDataToExcel exportDataToExcel;
 
     /**
      * @Description: 对账单列表（包括所有列表，审核列表，商家对账单列表）
@@ -167,6 +175,28 @@ public class PaymentStatementController {
     public ResponseData exportFinanceExcel(HttpServletRequest request, @RequestBody Map<String, Object> map) {
         return null;
     }
+
+    /**
+     * @Description: 导出付款清单（财务操作）
+     * @return
+     * @Author: 柯军
+     * @datetime:2015年9月21日下午3:03:26
+     **/
+    @RequestMapping("/exportPaymentExcel")
+    public ResponseData exportPaymentSchedule(Map<String, Object> map, HttpServletResponse response
+    , HttpServletRequest request) {
+        logger.info("导出付款清单参数>>>>>>>>>>>:map={}"+map);
+        String ids = map.get("ids")==null?"3":map.get("ids").toString();
+        ResponseData result;
+        if (StringUtils.isBlank(ids)) {
+           return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
+        }
+        exportDataToExcel.exportPaymentScheduleExcel(request,response,ids);
+        result = ResponseData.success();
+        return result;
+    }
+
+
 
     /**
      * @Description: 作废
