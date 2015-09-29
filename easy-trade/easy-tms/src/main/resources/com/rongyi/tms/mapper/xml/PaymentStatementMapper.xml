@@ -43,10 +43,12 @@
     <result column="bussiness_email" property="bussinessEmail" jdbcType="VARCHAR" />
     <result column="status_update_time" property="statusUpdateTime" jdbcType="TIMESTAMP" />
     <result column="status" property="status" jdbcType="TINYINT" />
-     <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="payment_id" property="paymentId" jdbcType="INTEGER" />
   </resultMap>
 
   <sql id="list_where_clause">
+  	and po.trade_type = 7
     <if test="batchNo != null and batchNo != ''">
       and ps.batch_no = #{batchNo,jdbcType=VARCHAR}
     </if>
@@ -79,10 +81,11 @@
     select
     ps.id, ps.type,ps.batch_no,sc.bussiness_type,ps.cycle_start_time,ps.cycle_end_time,
     sc.bussiness_name,sc.pay_channel,bi.pay_account,bi.blank_name,
-    ps.pay_total,bi.bussiness_email,ps.status_update_time,ps.status,ps.create_at
+    ps.pay_total,bi.bussiness_email,ps.status_update_time,ps.status,ps.create_at,po.id as payment_id
     from payment_statement ps
     join statement_config sc on ps.config_id=sc.id
     join bussiness_info bi on bi.config_id=sc.id
+    join payment_order po on ps.pay_no = po.order_no 
     <where>
       <include refid="list_where_clause" />
     </where>
@@ -93,8 +96,23 @@
       select count(ps.id) from payment_statement ps
         join statement_config sc on ps.config_id=sc.id
         join bussiness_info bi on bi.config_id=sc.id
+         join payment_order po on ps.pay_no = po.order_no 
     <where>
       <include refid="list_where_clause" />
     </where>
   </select>
+  
+   <update id="updateByNotify" parameterType="java.util.Map" >
+    update payment_statement
+    set status = #{status,jdbcType=TINYINT},
+    <if test="payMemo != null and payMemo != ''">
+		AND  pay_memo = #{payMemo,jdbcType=VARCHAR}
+	</if>
+    pay_time = #{payTime,jdbcType=TIMESTAMP}
+    where pay_no in 
+    <foreach collection="statementList" index="index" item="item" open="("
+			separator="," close=")">
+			#{item.drawNo}
+	</foreach>
+  </update>
 </mapper>

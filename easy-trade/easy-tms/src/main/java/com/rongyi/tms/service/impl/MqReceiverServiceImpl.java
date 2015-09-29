@@ -25,6 +25,7 @@ import com.rongyi.tms.service.CouponCommissionService;
 import com.rongyi.tms.service.DrawApplyService;
 import com.rongyi.tms.service.InviteCommissionService;
 import com.rongyi.tms.service.MqReceiverService;
+import com.rongyi.tms.service.PaymentStatementService;
 import com.rongyi.tms.service.SalesCommissionService;
 
 /**
@@ -49,6 +50,9 @@ public class MqReceiverServiceImpl implements MqReceiverService {
 	
 	@Autowired
 	InviteCommissionService inviteCommissionService;
+	
+	@Autowired
+	PaymentStatementService paymentStatementService;
 	
 	@Autowired
 	Sender sender;
@@ -79,6 +83,10 @@ public class MqReceiverServiceImpl implements MqReceiverService {
 		}else if(TmsEventTypeEnum.INVITE_COMMISSION.getCode().equals(messageEvent.getType())){
 			LOGGER.info("邀请佣金提审-->");
 			inviteCommissionService.insertByMQ(messageEvent);
+		}else if(PaymentEventType.STATEMENT_PAY_NOTIFY.equals(messageEvent.getType())){
+			LOGGER.info("商家对账支付成功通知-->");
+			Map<String,Object> map = new HashMap<String,Object>();
+			paymentStatementService.updateByNotify(map);
 		}
 	}
 

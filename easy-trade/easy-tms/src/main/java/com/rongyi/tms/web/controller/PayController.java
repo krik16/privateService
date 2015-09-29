@@ -356,6 +356,8 @@ public class PayController extends BaseController {
 			desc = ConstantEnum.TRADE_TYPE_REFUND.getValueStr();
 		else if (PayEnum.EXCE_PAY_ONE.getCode() == type || PayEnum.EXCE_PAY_MORE.getCode() == type)
 			desc = ConstantEnum.TRADE_TYPE_EXCE_PAY.getValueStr();
+		else if(PayEnum.STATEMENT_ONE.getCode() == type)
+			desc = ConstantEnum.TRADE_TYPE_STATEMENT.getValueStr();
 		return desc;
 	}
 

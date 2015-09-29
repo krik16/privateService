@@ -44,6 +44,7 @@ public enum ConstantEnum {
     TRADE_TYPE_EXCE_PAY(4,"异常交易"),
     TRADE_TYPE_REPAY(5,"重复支付"),
     TRADE_TYPE_REPAY_REFUND(6,"重复支付退款"),
+    TRADE_TYPE_STATEMENT(7,"商家对账"),
     
     PAY_CHANNEL_ZHIFUBAO(0,"支付宝"),
     PAY_CHANNEL_WEIXIN(1,"微信"),

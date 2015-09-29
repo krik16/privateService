@@ -13,7 +13,9 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
+import com.rongyi.easy.rpb.vo.PayNotifyVO;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
 import com.rongyi.tms.service.PaymentStatementService;
 
@@ -40,5 +42,14 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 	    public Integer selectPageListCount(Map<String, Object> map) {
 	        return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectPageListCount", map);
 	    }
+
+		@Override
+		public void updateByNotify(Map<String,Object> map) {
+			map.put("status",12);
+			map.put("payTime",DateUtil.getCurrDateTime());
+			this.getBaseDao().updateBySql(NAMESPACE+".updateByNotify",map);
+		}
+	    
+	    
 
 }

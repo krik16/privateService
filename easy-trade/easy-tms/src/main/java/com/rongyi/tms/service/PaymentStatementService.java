@@ -42,4 +42,12 @@ public interface PaymentStatementService {
      * @datetime:2015年9月28日上午10:11:32
      **/
     Integer selectPageListCount(Map<String, Object> map);
+    
+    /**	
+     * @Description: 更新对账单状态 
+     * @param map	
+     * @Author:  柯军
+     * @datetime:2015年9月29日下午3:01:31
+     **/
+    void updateByNotify(Map<String,Object> map);
 }
