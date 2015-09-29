@@ -32,7 +32,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 
     @Autowired
     private PaymentStatementMapper paymentStatementMapper;
-    
+
     @Autowired
     private OperationLogMapper operationLogMapper;
 
@@ -66,13 +66,13 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
     public boolean updatePaymentStatusByIds(List<Integer> ids, Integer status, String desc, String userId) {
         boolean result = false;
         try {
-            if (CollectionUtils.isNotEmpty(ids) && status!=null){
+            if (CollectionUtils.isNotEmpty(ids) && status != null) {
                 Map<String, Object> paramsMap = new HashMap<>();
                 paramsMap.put("ids", ids);
                 paramsMap.put("status", status);
                 paramsMap.put("statusUpdateTime", new Date());
                 paymentStatementMapper.updateStatusByIds(paramsMap);
-                for (Integer id : ids){
+                for (Integer id : ids) {
                     saveOperationLog(id, status, desc, userId);
                 }
                 result = true;
@@ -110,12 +110,13 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 
     /**
      * 插入日志记录
+     *
      * @param id
      * @param status
      * @param desc
      * @param userId
      */
-    private void saveOperationLog(Integer id,  Integer status, String desc, String userId) {
+    private void saveOperationLog(Integer id, Integer status, String desc, String userId) {
         OperationLog operatioLog = new OperationLog();
         operatioLog.setCreateUserId(userId);
         operatioLog.setDesc(desc);
@@ -134,7 +135,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 
     @Override
     public PaymentStatement get(Integer id) {
-        Map map = new HashMap();
+        Map<String, Object> map = new HashMap();
         map.put("id", id);
         return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectByPrimaryKey", map);
     }
