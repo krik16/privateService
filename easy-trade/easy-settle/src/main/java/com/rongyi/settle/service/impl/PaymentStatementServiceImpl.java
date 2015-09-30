@@ -76,12 +76,16 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
                 paramsMap.put("ids", ids);
                 paramsMap.put("status", status);
                 paramsMap.put("statusUpdateTime", new Date());
-                for (Integer id : ids) {
+                for (int i=0; i<ids.size(); i++) {
                     if (status.intValue()==6){
                         //待付款审核通过，生成付款
-                        Map<String, Object> reMap =  generatePayment(id, userId);
+                        Map<String, Object> reMap =  generatePayment(ids.get(i), userId);
+                        if (!(boolean)reMap.get("success")){
+                            logger.info(ids.get(i)+"未生成付款，原因:"+reMap.get("message"));
+                            ids.remove(i);
+                        }
                     }
-                    saveOperationLog(id, status, desc, userId);
+                    saveOperationLog(ids.get(i), status, desc, userId);
                 }
                 paymentStatementMapper.updateStatusByIds(paramsMap);
                 result = true;
@@ -96,8 +100,15 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
     private Map<String, Object> generatePayment(Integer id, String userId) {
         PaymentParamVO param = new PaymentParamVO();
         param.setUserId(userId);
-
-        return null;
+        PaymentStatementDto dto = paymentStatementMapper.searchDtoById(id);
+        param.setCreateAt(new Date());
+        param.setOperateNo(dto.getPayNo());
+        param.setOperateType("15");
+        param.setPayAccount(dto.getPayAccount());
+        param.setPayChannel(Integer.valueOf(dto.getPayChannel().toString()));
+        param.setPayName(dto.getPayName());
+        param.setPayTotal(Double.valueOf(dto.getPayTotal().toString()));
+        return iRpbService.generatePayment(param);
     }
 
     @Override

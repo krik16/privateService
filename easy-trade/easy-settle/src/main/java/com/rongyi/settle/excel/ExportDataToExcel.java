@@ -76,7 +76,7 @@ public class ExportDataToExcel {
                 for(String businessId : businessIds){
                     List<PaymentStatementDto> sonDtoList = new ArrayList<>();
                     for (PaymentStatementDto p : payments){
-                        if (businessId.equals(p.getBussinessId())){
+                        if (businessId!=null && businessId.equals(p.getBussinessId())){
                             sonDtoList.add(p);
                         }
                     }

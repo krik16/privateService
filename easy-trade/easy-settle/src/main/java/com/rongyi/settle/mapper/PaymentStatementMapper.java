@@ -28,4 +28,11 @@ public interface PaymentStatementMapper {
 
 	List<PaymentStatementDto> selectPageList(Map<String, Object> paramsMap);
 	Integer selectPageListCount(Map<String, Object> paramsMap);
+
+	/**
+	 * 通过对账单id查询对账单信息
+	 * @param id
+	 * @return
+	 */
+	PaymentStatementDto searchDtoById(Integer id);
 }
