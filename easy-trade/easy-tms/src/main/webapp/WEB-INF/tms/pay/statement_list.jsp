@@ -63,25 +63,31 @@
 						<td>${item.blankName}</td>
 						<td>${item.payTotal}</td>
 						<td><fmt:formatDate value="${item.createAt}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-						<td>${item.status}</td>
+						<td>
 						<c:choose>
-						<c:when test="${item.payChannel eq 0}">
-							<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="morePay(${item.paymentId},6, ${item.payChannel})" class="btnsearch" id="pay-button" target="_blank">付款</a></sec:authorize></td>
-						</c:when>
-						<c:otherwise>
-							<td><a href="javascript:void(0);" class="btnsearch checked" id="weixin-refund-button" onclick="weixinRefund(${item.id},${item.refundRejected})">退款</a>
-							<c:choose>
-								<c:when test="${item.refundRejected eq 0}">
-									<a href="javascript:void(0);" class="btnsearch checked" id="weixin-refund-rejected-button" onclick="weixinRefundRejected(${item.id},1)">拒绝</a>
-								</c:when>
-								<c:otherwise>
-									<a href="javascript:void(0);" class="btnsearch checked" id="weixin-refund-agree-button" onclick="weixinRefundRejected(${item.id},0)">同意</a>
-								</c:otherwise>
-							</c:choose>
-						</c:otherwise>
+							<c:when test="${item.status eq 9}">
+								付款冻结
+							</c:when>
+							<c:otherwise>
+								待付款
+							</c:otherwise>
 						</c:choose>
 						</td>
-			 		</td>
+						<td>
+							<c:choose>
+								<c:when test="${item.status eq 9}">
+									<sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="payFreeze(${item.id},10)" class="btnsearch" id="pay-button" target="_blank">解冻</a></sec:authorize>
+								</c:when>
+								<c:when test="${item.status eq 6 or item.status eq 10}">
+									<sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="payFreeze(${item.id},9)" class="btnsearch" id="pay-button" target="_blank">冻结</a></sec:authorize>
+									<sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="statementPay(${item.paymentId},6, ${item.payChannel},${item.id})" class="btnsearch" id="pay-button" target="_blank">付款</a></sec:authorize>
+								</c:when>
+								<c:otherwise>
+								<sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="statementPay(${item.paymentId},6, ${item.payChannel},${item.id})" class="btnsearch" id="pay-button" target="_blank">付款</a></sec:authorize>
+								</c:otherwise>
+							</c:choose>
+						</td>
+						
 					</tr>
 				</c:forEach>
 			</c:when>

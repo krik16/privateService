@@ -48,7 +48,7 @@
   </resultMap>
 
   <sql id="list_where_clause">
-  	and po.trade_type = 7
+  	and po.trade_type = 7 and ps.status in(6,9,10,11)
     <if test="batchNo != null and batchNo != ''">
       and ps.batch_no = #{batchNo,jdbcType=VARCHAR}
     </if>
@@ -106,13 +106,26 @@
     update payment_bill
     set status = #{status,jdbcType=TINYINT},
     <if test="payMemo != null and payMemo != ''">
-		AND  pay_memo = #{payMemo,jdbcType=VARCHAR}
+		 pay_memo = #{payMemo,jdbcType=VARCHAR},
 	</if>
     pay_time = #{payTime,jdbcType=TIMESTAMP}
     where pay_no in 
     <foreach collection="statementList" index="index" item="item" open="("
 			separator="," close=")">
 			#{item.drawNo}
+	</foreach>
+  </update>
+    <update id="updateByOffPay" parameterType="java.util.Map" >
+    update payment_bill
+    set status = #{status,jdbcType=TINYINT},
+    <if test="payMemo != null and payMemo != ''">
+		pay_memo = #{payMemo,jdbcType=VARCHAR},
+	</if>
+    pay_time = #{payTime,jdbcType=TIMESTAMP}
+    where id in 
+    <foreach collection="ids" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
 	</foreach>
   </update>
 </mapper>

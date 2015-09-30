@@ -398,3 +398,66 @@ function clearSearch(){
 	$("input").val("");
 	$("#payChannel").val("");
 }
+
+/**
+ * 对账单付款操作
+ * @param ids
+ * @param type
+ * @param payChannel
+ */
+function statementPay(paymentIds, type,payChannel,ids){
+	if(payChannel == 3 || payChannel == 4){
+		offPay(ids);
+	}else{
+		morePay(paymentIds, type,payChannel);
+	}	
+}
+
+/**
+ * 线下退款
+ * @param ids
+ */
+function offPay(ids) {
+	confirmMSG(
+			"单号：<textarea rows='5' cols='42' id='payMemo' placeholder='请输入付款凭据单号'></textarea>",
+			function() {
+				var payMemo = $("#payMemo").val();
+				if (trimAll(payMemo) == '') {
+					_util.cmsTip("请输入付款凭据单号");
+					return;
+				} else {
+					if (payMemo.length > 100) {
+						_util.cmsTip("字数超过限制！");
+						return;
+					} else {
+						statementOffPay(ids,payMemo);
+					}
+			}
+	});
+}
+
+/**
+ * 
+ */
+function statementOffPay(ids,payMemo){
+	$.post("../pay/statementOffPay", {
+		ids:ids,
+		payMemo:payMemo
+	}, function(data) {
+		if (data.success == false)
+			_util.cmsTip(data.message);
+		else{
+			_util.cmsTip("操作成功");		
+		}
+	}, "json");
+}
+
+function payFreeze(id,status) {
+	$.post("../pay/freeze", {
+		id : id,
+		status:status
+	}, function(data) {
+		_util.cmsTip(data.message);
+		ajaxCommonSearch(url_,getParamsJson());
+	}, "json");
+}

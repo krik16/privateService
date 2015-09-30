@@ -50,4 +50,13 @@ public interface PaymentStatementService {
      * @datetime:2015年9月29日下午3:01:31
      **/
     void updateByNotify(Map<String,Object> map);
+    
+    /**	
+     * @Description: 更新线下付款状态 
+     * @param ids
+     * @param payMemo	
+     * @Author:  柯军
+     * @datetime:2015年9月30日下午4:21:10
+     **/
+    void updateByOffPay(String[] ids,String payMemo,Integer status);
 }

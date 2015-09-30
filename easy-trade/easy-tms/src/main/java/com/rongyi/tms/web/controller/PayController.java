@@ -424,6 +424,16 @@ public class PayController extends BaseController {
 		return result;
 	}
 
+	/**	
+	 * @Description: 对账单列表 
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年9月30日下午4:18:33
+	 **/
 	@RequestMapping("/statementList")
 	public String statementList(ModelMap model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		try {
@@ -440,5 +450,56 @@ public class PayController extends BaseController {
 			e.printStackTrace();
 		}
 		return "/pay/statement_list";
+	}
+	/**	
+	 * @Description: 线下付款更新状态 
+	 * @param ids
+	 * @param payMemo
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年9月30日下午4:31:25
+	 **/
+	@RequestMapping("/statementOffPay")
+	@ResponseBody
+	public ResponseResult statementOffPay(@RequestParam String ids,@RequestParam String payMemo){
+		ResponseResult responseResult = new ResponseResult();
+		try {
+			String[] idArray = ids.split(",");
+			paymentStatementService.updateByOffPay(idArray, payMemo,12);
+			responseResult.setSuccess(true);
+			responseResult.setMessage("操作成功");
+		} catch (Exception e) {
+			responseResult.setSuccess(false);
+			responseResult.setMessage("操作失败");
+			e.printStackTrace();
+		}
+		
+		return responseResult;
+	}
+	
+	/**	
+	 * @Description: 冻结/解冻付款 
+	 * @param id
+	 * @param status
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年9月30日下午5:39:03
+	 **/
+	@RequestMapping("/freeze")
+	@ResponseBody
+	public ResponseResult freeze(@RequestParam String id,@RequestParam Integer status){
+		ResponseResult responseResult = new ResponseResult();
+		try {
+			String[] idArray = id.split(",");
+			paymentStatementService.updateByOffPay(idArray, null,status);
+			responseResult.setSuccess(true);
+			responseResult.setMessage((status==9?"冻结":"解冻")+"成功");
+		} catch (Exception e) {
+			responseResult.setSuccess(false);
+			responseResult.setMessage("操作失败");
+			e.printStackTrace();
+		}
+		
+		return responseResult;
 	}
 }

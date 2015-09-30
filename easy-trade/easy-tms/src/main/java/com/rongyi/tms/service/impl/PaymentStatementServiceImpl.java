@@ -8,6 +8,7 @@
 
 package com.rongyi.tms.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
-import com.rongyi.easy.rpb.vo.PayNotifyVO;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
 import com.rongyi.tms.service.PaymentStatementService;
 
@@ -48,6 +48,17 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 			map.put("status",12);
 			map.put("payTime",DateUtil.getCurrDateTime());
 			this.getBaseDao().updateBySql(NAMESPACE+".updateByNotify",map);
+		}
+
+		@Override
+		public void updateByOffPay(String[] ids, String payMemo, Integer status) {
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("ids",ids);
+			map.put("payMemo",payMemo);
+			map.put("payTime",DateUtil.getCurrDateTime());
+			map.put("status",status);
+			this.getBaseDao().updateBySql(NAMESPACE+".updateByOffPay",map);
+			
 		}
 	    
 	    
