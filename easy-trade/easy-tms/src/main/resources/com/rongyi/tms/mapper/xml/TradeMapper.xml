@@ -129,7 +129,7 @@
 			concat('%',#{shopName,jdbcType=VARCHAR},'%')
 		</if>
 		<if test="buyerAccount != null and buyerAccount != ''">
-			AND (trade_order.coupon_buyer_account=#{buyerAccount}
+			AND (trade_order.user_phone=#{buyerAccount}
 			<!-- 买家id集合 -->
 			<if test="buyerIds != null and buyerIds != ''">
 				OR order_form.buyer_id in
