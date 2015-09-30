@@ -143,44 +143,46 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="type" property="type" jdbcType="TINYINT" />
     <result column="batch_no" property="batchNo" jdbcType="VARCHAR" />
-    <result column="bussiness_type" property="bussinessType" jdbcType="TINYINT" />
-    <result column="bussiness_id" property="bussinessId" jdbcType="VARCHAR" />
+    <result column="biz_type" property="bussinessType" jdbcType="TINYINT" />
+    <result column="biz_id" property="bussinessId" jdbcType="VARCHAR" />
     <result column="cycle_start_time" property="cycleStartTime" jdbcType="TIMESTAMP" />
     <result column="cycle_end_time" property="cycleEndTime" jdbcType="TIMESTAMP" />
-    <result column="bussiness_name" property="bussinessName" jdbcType="VARCHAR" />
+    <result column="biz_name" property="bussinessName" jdbcType="VARCHAR" />
     <result column="pay_channel" property="payChannel" jdbcType="TINYINT" />
     <result column="pay_account" property="payAccount" jdbcType="VARCHAR" />
     <result column="blank_name" property="blankName" jdbcType="VARCHAR" />
+    <result column="pay_no" property="payNo" jdbcType="VARCHAR" />
+    <result column="pay_name" property="payName" jdbcType="VARCHAR" />
     <result column="pay_total" property="payTotal" jdbcType="INTEGER" />
-    <result column="bussiness_email" property="bussinessEmail" jdbcType="VARCHAR" />
+    <result column="biz_email" property="bussinessEmail" jdbcType="VARCHAR" />
     <result column="status_update_time" property="statusUpdateTime" jdbcType="TIMESTAMP" />
     <result column="status" property="status" jdbcType="TINYINT" />
   </resultMap>
 
   <sql id="list_where_clause">
     <if test="searchStatus != null">
-      and ps.status = #{searchStatus,jdbcType=TINYINT}
+      and pb.status = #{searchStatus,jdbcType=TINYINT}
     </if>
     <if test="type != null">
-      and ps.type = #{type,jdbcType=TINYINT}
+      and pb.type = #{type,jdbcType=TINYINT}
     </if>
     <if test="bussinessType != null">
-      and sc.bussiness_type = #{bussinessType,jdbcType=TINYINT}
+      and pbc.biz_type = #{bussinessType,jdbcType=TINYINT}
     </if>
     <if test="bussinessName != null">
-      and sc.bussiness_name = #{bussinessName,jdbcType=VARCHAR}
+      and pbc.biz_name = #{bussinessName,jdbcType=VARCHAR}
     </if>
     <if test="createAtStart != null">
-      and ps.create_at &gt; #{createAtStart,jdbcType=TIMESTAMP}
+      and pb.create_at &gt; #{createAtStart,jdbcType=TIMESTAMP}
     </if>
     <if test="createAtEnd != null">
-      and ps.create_at &lt; #{createAtEnd,jdbcType=TIMESTAMP}
+      and pb.create_at &lt; #{createAtEnd,jdbcType=TIMESTAMP}
     </if>
     <if test="batchNo != null">
-      and ps.batch_no = #{batchNo,jdbcType=VARCHAR}
+      and pb.batch_no = #{batchNo,jdbcType=VARCHAR}
     </if>
     <if test="payChannel != null">
-      and sc.pay_channel = #{payChannel,jdbcType=TINYINT}
+      and pbc.pay_channel = #{payChannel,jdbcType=TINYINT}
     </if>
     <if test="payAccount != null">
       and bi.pay_account = #{payAccount,jdbcType=VARCHAR}
@@ -189,21 +191,22 @@
       and bi.blank_name = #{blankName,jdbcType=VARCHAR}
     </if>
     <if test="statusUpdateStartTime != null">
-      and ps.status_update_time &gt; #{statusUpdateStartTime,jdbcType=TIMESTAMP}
+      and pb.status_update_time &gt; #{statusUpdateStartTime,jdbcType=TIMESTAMP}
     </if>
     <if test="statusUpdateEndTime != null">
-      and ps.status_update_time &lt; #{statusUpdateEndTime,jdbcType=TIMESTAMP}
+      and pb.status_update_time &lt; #{statusUpdateEndTime,jdbcType=TIMESTAMP}
     </if>
   </sql>
 
   <select id="selectPageList" resultMap="DtoResultMap" parameterType="java.util.Map">
     select
-    ps.id, ps.type,ps.batch_no,sc.bussiness_type,ps.cycle_start_time,ps.cycle_end_time,
-    sc.bussiness_name,sc.bussiness_id, sc.pay_channel,bi.pay_account,bi.blank_name,
-    ps.pay_total,bi.bussiness_email,ps.status_update_time,ps.status
-    from payment_bill ps
-    join payment_bill_config sc on ps.config_id=sc.id
-    join biz_info bi on bi.config_id=sc.id
+      pb.id, pb.type, pb.batch_no, pb.cycle_start_time, pb.cycle_end_time, pb.pay_total, pb.status, pb.pay_no,
+      pb.status_update_time,
+      pbc.biz_name, pbc.biz_id, pbc.pay_channel, pbc.biz_type,
+      bi.biz_email, bi.pay_account, bi.blank_name, bi.pay_name
+    from payment_bill pb
+    join payment_bill_config pbc on pb.config_id=pbc.id
+    join biz_info bi on bi.config_id=pbc.id
     <where>
       <include refid="list_where_clause" />
     </where>
@@ -246,4 +249,16 @@
     update payment_bill set status=8 where id=#{id, jdbcType=INTEGER}
   </update>
 
+  <!-- 通过对账单id查询对账单信息 -->
+  <select id="searchDtoById" parameterType="int" resultMap="DtoResultMap">
+    select
+      pb.id, pb.type, pb.batch_no, pb.cycle_start_time, pb.cycle_end_time, pb.pay_total, pb.status, pb.pay_no,
+      pb.status_update_time,
+      pbc.biz_name, pbc.biz_id, pbc.pay_channel, pbc.biz_type,
+      bi.biz_email, bi.pay_account, bi.blank_name, bi.pay_name
+    from payment_bill pb
+         left join payment_bill_config pbc on pb.config_id = pbc.id
+         left join biz_info bi  on pbc.id = bi.config_id
+    where pb.id=#{id, jdbcType=INTEGER}
+  </select>
 </mapper>
