@@ -670,4 +670,8 @@ public interface Constants {
     	/** 已过期 */
     	Integer OVERDUE = 3;
     }
+    interface CouponPage{
+        Integer CURRENT_PAGE=1;
+        Integer PAGE_SIZE=10;
+    }
 }

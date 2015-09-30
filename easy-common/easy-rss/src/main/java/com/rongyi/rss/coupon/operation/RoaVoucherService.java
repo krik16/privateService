@@ -2,7 +2,7 @@ package com.rongyi.rss.coupon.operation;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.mysql.Coupon;
-import com.rongyi.easy.coupon.param.operation.VoucherParam;
+import com.rongyi.easy.coupon.param.CouponQueryParam;
 
 import java.util.Map;
 
@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public interface RoaVoucherService {
 
-    PagingVO<Coupon> findVouchers(VoucherParam param) throws Exception;
+    PagingVO<Coupon> findVouchers(CouponQueryParam param) throws Exception;
 
     Map<String, Object> getCouponList(Map<String, Object> map, int currentPage, int pageSize);
 
