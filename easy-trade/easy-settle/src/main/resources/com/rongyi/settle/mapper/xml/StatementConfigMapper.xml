@@ -5,16 +5,17 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="rule_code" property="ruleCode" jdbcType="VARCHAR" />
     <result column="cooperate_type" property="cooperateType" jdbcType="TINYINT" />
-    <result column="bussiness_type" property="bussinessType" jdbcType="TINYINT" />
-    <result column="bussiness_code" property="bussinessCode" jdbcType="VARCHAR" />
-    <result column="bussiness_name" property="bussinessName" jdbcType="VARCHAR" />
+    <result column="biz_id" property="bussinessId" jdbcType="VARCHAR" />
+    <result column="biz_type" property="bussinessType" jdbcType="TINYINT" />
+    <result column="biz_code" property="bussinessCode" jdbcType="VARCHAR" />
+    <result column="biz_name" property="bussinessName" jdbcType="VARCHAR" />
     <result column="count_cycle" property="countCycle" jdbcType="TINYINT" />
     <result column="cycle_start_time" property="cycleStartTime" jdbcType="TIMESTAMP" />
     <result column="cycle_end_time" property="cycleEndTime" jdbcType="TIMESTAMP" />
     <result column="is_loop" property="isLoop" jdbcType="TINYINT" />
     <result column="verify_type" property="verifyType" jdbcType="TINYINT" />
-    <result column="generate_header_time" property="generateHeaderTime" jdbcType="VARCHAR" />
-    <result column="generate_hm_time" property="generateHmTime" jdbcType="TIME" />
+    <result column="gen_header_time" property="generateHeaderTime" jdbcType="VARCHAR" />
+    <result column="gen_hm_time" property="generateHmTime" jdbcType="TIME" />
     <result column="send_time" property="sendTime" jdbcType="TIME" />
     <result column="datum_type" property="datumType" jdbcType="TINYINT" />
     <result column="pay_mode" property="payMode" jdbcType="TINYINT" />
@@ -25,28 +26,28 @@
     <result column="effect_end_time" property="effectEndTime" jdbcType="TIMESTAMP" />
     <result column="pay_channel" property="payChannel" jdbcType="TINYINT" />
     <result column="contract_no" property="contractNo" jdbcType="VARCHAR" />
-    <result column="linked_rule_code" property="linkedRuleCode" jdbcType="VARCHAR" />
+    <result column="link_rule_code" property="linkedRuleCode" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="TINYINT" />
     <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
     <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
     <result column="create_by" property="createBy" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, rule_code, cooperate_type, bussiness_type, bussiness_code, bussiness_name, count_cycle, 
-    cycle_start_time, cycle_end_time, is_loop, verify_type, generate_header_time, generate_hm_time, 
+    id, rule_code, cooperate_type, biz_type, biz_code, biz_name, count_cycle, 
+    cycle_start_time, cycle_end_time, is_loop, verify_type, gen_header_time, gen_hm_time, 
     send_time, datum_type, pay_mode, regular_day, roll_day, roll_type, effect_start_time, 
-    effect_end_time, pay_channel, contract_no, linked_rule_code, `status`, create_at, 
+    effect_end_time, pay_channel, contract_no, link_rule_code, `status`, create_at, 
     is_delete, create_by
   </sql>
   
   <sql id="Base_list_where_clause">
 		<!-- 商户类型 -->
 		<if test="bussinessType != null">
-			AND bussiness_type = #{bussinessType}
+			AND biz_type = #{bussinessType}
 		</if>
 		<!-- 商户名称 -->
 		<if test="bussinessName != null and bussinessName != ''">
-			AND bussiness_name like
+			AND biz_name like
 			concat('%',#{bussinessName,jdbcType=VARCHAR},'%')
 		</if>
 		<!-- 创建时间 -->
@@ -61,23 +62,23 @@
   <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from statement_config
+    from payment_bill_config
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="updateDelete" parameterType="java.lang.Integer" >
-    update statement_config
+    update payment_bill_config
     set is_delete = #{is_delete,jdbcType=INTEGER} 
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.rongyi.easy.settle.entity.StatementConfig" useGeneratedKeys="true" keyProperty="id" >
-    insert into statement_config (rule_code, cooperate_type, bussiness_type, 
-      bussiness_code, bussiness_name, count_cycle, 
+    insert into payment_bill_config (rule_code, cooperate_type, biz_type, 
+      biz_code, biz_name, count_cycle, 
       cycle_start_time, cycle_end_time, is_loop, 
-      verify_type, generate_header_time, generate_hm_time, 
+      verify_type, gen_header_time, gen_hm_time, 
       send_time, datum_type, pay_mode, 
       regular_day, roll_day, roll_type, 
       effect_start_time, effect_end_time, pay_channel, 
-      contract_no, linked_rule_code, `status`, 
+      contract_no, link_rule_code, `status`, 
       create_at, is_delete, create_by
       )
     values (#{ruleCode,jdbcType=VARCHAR}, #{cooperateType,jdbcType=TINYINT}, #{bussinessType,jdbcType=TINYINT}, 
@@ -93,7 +94,7 @@
   </insert>
  
   <update id="update" parameterType="com.rongyi.easy.settle.entity.StatementConfig" >
-    update statement_config
+    update payment_bill_config
     <set >
       <if test="ruleCode != null" >
         rule_code = #{ruleCode,jdbcType=VARCHAR},
@@ -102,13 +103,13 @@
         cooperate_type = #{cooperateType,jdbcType=TINYINT},
       </if>
       <if test="bussinessType != null" >
-        bussiness_type = #{bussinessType,jdbcType=TINYINT},
+        biz_type = #{bussinessType,jdbcType=TINYINT},
       </if>
       <if test="bussinessCode != null" >
-        bussiness_code = #{bussinessCode,jdbcType=VARCHAR},
+        biz_code = #{bussinessCode,jdbcType=VARCHAR},
       </if>
       <if test="bussinessName != null" >
-        bussiness_name = #{bussinessName,jdbcType=VARCHAR},
+        biz_name = #{bussinessName,jdbcType=VARCHAR},
       </if>
       <if test="countCycle != null" >
         count_cycle = #{countCycle,jdbcType=TINYINT},
@@ -126,10 +127,10 @@
         verify_type = #{verifyType,jdbcType=TINYINT},
       </if>
       <if test="generateHeaderTime != null" >
-        generate_header_time = #{generateHeaderTime,jdbcType=VARCHAR},
+        gen_header_time = #{generateHeaderTime,jdbcType=VARCHAR},
       </if>
       <if test="generateHmTime != null" >
-        generate_hm_time = #{generateHmTime,jdbcType=TIME},
+        gen_hm_time = #{generateHmTime,jdbcType=TIME},
       </if>
       <if test="sendTime != null" >
         send_time = #{sendTime,jdbcType=TIME},
@@ -162,7 +163,7 @@
         contract_no = #{contractNo,jdbcType=VARCHAR},
       </if>
       <if test="linkedRuleCode != null" >
-        linked_rule_code = #{linkedRuleCode,jdbcType=VARCHAR},
+        link_rule_code = #{linkedRuleCode,jdbcType=VARCHAR},
       </if>
       <if test="status != null" >
         `status` = #{status,jdbcType=TINYINT},
@@ -185,7 +186,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from
-		statement_config
+		payment_bill_config
 		<where>
 			<include refid="Base_list_where_clause" />
 		</where>
@@ -203,9 +204,9 @@
 	<select id="selectPageListCount" parameterType="java.util.Map"
 		resultType="java.lang.Integer">
 		select
-		count(statement_config.id)
+		count(payment_bill_config.id)
 		from
-		statement_config
+		payment_bill_config
 		<where>
 			<include refid="Base_list_where_clause" />
 		</where>
@@ -214,12 +215,12 @@
   <select id="selectForSchedule" parameterType="java.util.Map" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from statement_config
+    from payment_bill_config
     where is_delete=0 AND #{currentTime,jdbcType=TIMESTAMP} BETWEEN effect_start_time AND effect_end_time
   </select>
 
   <update id="updateStatusByIds" parameterType="map">
-    update statement_config
+    update payment_bill_config
     set status=#{status, jdbcType=INTEGER}
     <where>
       <if test="ids != null">

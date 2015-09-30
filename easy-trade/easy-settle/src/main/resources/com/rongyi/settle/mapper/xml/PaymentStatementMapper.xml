@@ -24,15 +24,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.util.Map" >
     select 
     <include refid="Base_Column_List" />
-    from payment_statement
+    from payment_bill
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from payment_statement
+    delete from payment_bill
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.rongyi.easy.settle.entity.PaymentStatement" useGeneratedKeys="true" keyProperty="id" >
-    insert into payment_statement (config_id, rule_code, cycle_start_time, 
+    insert into payment_bill (config_id, rule_code, cycle_start_time, 
       cycle_end_time, `type`, batch_no, 
       pay_total, `status`, pay_time, 
       pay_no, status_update_time, create_at, 
@@ -44,7 +44,7 @@
       #{isDelete,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.rongyi.easy.settle.entity.PaymentStatement" useGeneratedKeys="true" keyProperty="id" >
-    insert into payment_statement
+    insert into payment_bill
     <trim prefix="(" suffix=")" suffixOverrides="," >
       config_id,
       rule_code,
@@ -77,7 +77,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.rongyi.easy.settle.entity.PaymentStatement" >
-    update payment_statement
+    update payment_bill
     <set >
       <if test="configId != null" >
         config_id = #{configId,jdbcType=INTEGER},
@@ -122,7 +122,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.rongyi.easy.settle.entity.PaymentStatement" >
-    update payment_statement
+    update payment_bill
     set config_id = #{configId,jdbcType=INTEGER},
       rule_code = #{ruleCode,jdbcType=VARCHAR},
       cycle_start_time = #{cycleStartTime,jdbcType=TIMESTAMP},
@@ -201,7 +201,7 @@
     ps.id, ps.type,ps.batch_no,sc.bussiness_type,ps.cycle_start_time,ps.cycle_end_time,
     sc.bussiness_name,sc.bussiness_id, sc.pay_channel,bi.pay_account,bi.blank_name,
     ps.pay_total,bi.bussiness_email,ps.status_update_time,ps.status
-    from payment_statement ps
+    from payment_bill ps
     join statement_config sc on ps.config_id=sc.id
     join bussiness_info bi on bi.config_id=sc.id
     <where>
@@ -211,7 +211,7 @@
   </select>
 
   <select id="selectPageListCount" parameterType="java.util.Map" resultType="java.lang.Integer">
-      select count(ps.id) from payment_statement ps
+      select count(ps.id) from payment_bill ps
         join statement_config sc on ps.config_id=sc.id
         join bussiness_info bi on bi.config_id=sc.id
     <where>
@@ -222,14 +222,14 @@
   <select id="selectByCycleTime" resultMap="BaseResultMap" parameterType="java.util.Map" >
     select
     <include refid="Base_Column_List" />
-    from payment_statement
+    from payment_bill
     where config_id = #{configId,jdbcType=INTEGER}
     and cycle_start_time = #{cycleStartTime,jdbcType=TIMESTAMP}
     and cycle_end_time = #{cycleEndTime,jdbcType=TIMESTAMP}
   </select>
 
   <update id="updateStatusByIds" parameterType="map">
-    update payment_statement
+    update payment_bill
     set status=#{status, jdbcType=INTEGER},
         status_update_time = #{statusUpdateTime,jdbcType=TIMESTAMP}
     <where>
@@ -243,7 +243,7 @@
   </update>
 
   <update id="cancel" parameterType="java.lang.Integer">
-    update payment_statement set status=8 where id=#{id, jdbcType=INTEGER}
+    update payment_bill set status=8 where id=#{id, jdbcType=INTEGER}
   </update>
 
 </mapper>

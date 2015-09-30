@@ -9,11 +9,11 @@
 		<result column="blank_name" property="blankName" jdbcType="VARCHAR" />
 		<result column="blank_address" property="blankAddress"
 			jdbcType="VARCHAR" />
-		<result column="bussiness_address" property="bussinessAddress"
+		<result column="biz_address" property="bussinessAddress"
 			jdbcType="VARCHAR" />
-		<result column="bussiness_email" property="bussinessEmail"
+		<result column="biz_email" property="bussinessEmail"
 			jdbcType="VARCHAR" />
-		<result column="bussiness_account" property="bussinessAccount"
+		<result column="biz_account" property="bussinessAccount"
 			jdbcType="VARCHAR" />
 		<result column="contact_name" property="contactName" jdbcType="VARCHAR" />
 		<result column="contact_phone" property="contactPhone"
@@ -26,34 +26,34 @@
 	</resultMap>
 	<sql id="Base_Column_List">
 		id, config_id, pay_account, pay_name, blank_name, blank_address,
-		bussiness_address,
-		bussiness_email, bussiness_account, contact_name, contact_phone, contact_weixin,
+		biz_address,
+		biz_email, biz_account, contact_name, contact_phone, contact_weixin,
 		contact_qq, create_at, is_delete
 	</sql>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column_List" />
-		from bussiness_info
+		from biz_info
 		where id = #{id,jdbcType=INTEGER}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from bussiness_info
+		delete from biz_info
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 
 	<insert id="insert" parameterType="com.rongyi.easy.settle.entity.BussinessInfo"
 		useGeneratedKeys="true" keyProperty="id">
-		insert into bussiness_info
+		insert into biz_info
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			config_id,
 			pay_account,
 			pay_name,
 			blank_name,
 			blank_address,
-			bussiness_address,
-			bussiness_email,
-			bussiness_account,
+			biz_address,
+			biz_email,
+			biz_account,
 			contact_name,
 			contact_phone,
 			contact_weixin,
@@ -83,7 +83,7 @@
 		</trim>
 	</insert>
 	<update id="update" parameterType="com.rongyi.easy.settle.entity.BussinessInfo">
-		update bussiness_info
+		update biz_info
 		<set>
 			<if test="configId != null">
 				config_id = #{configId,jdbcType=INTEGER},
@@ -101,13 +101,13 @@
 				blank_address = #{blankAddress,jdbcType=VARCHAR},
 			</if>
 			<if test="bussinessAddress != null">
-				bussiness_address = #{bussinessAddress,jdbcType=VARCHAR},
+				biz_address = #{bussinessAddress,jdbcType=VARCHAR},
 			</if>
 			<if test="bussinessEmail != null">
-				bussiness_email = #{bussinessEmail,jdbcType=VARCHAR},
+				biz_email = #{bussinessEmail,jdbcType=VARCHAR},
 			</if>
 			<if test="bussinessAccount != null">
-				bussiness_account = #{bussinessAccount,jdbcType=VARCHAR},
+				biz_account = #{bussinessAccount,jdbcType=VARCHAR},
 			</if>
 			<if test="contactName != null">
 				contact_name = #{contactName,jdbcType=VARCHAR},
@@ -134,7 +134,7 @@
 		parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column_List" />
-		from bussiness_info
+		from biz_info
 		where config_id = #{configId,jdbcType=INTEGER}
 	</select>
 	</mapper>
