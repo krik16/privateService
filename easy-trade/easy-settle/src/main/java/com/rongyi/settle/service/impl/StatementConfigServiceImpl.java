@@ -128,6 +128,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 		operatioLog.setOperationType(Byte.valueOf(status.toString()));
 		operatioLog.setCreadeAt(new Date());
 		operatioLog.setOperationId(id);
+		operatioLog.setIsDelete(Byte.valueOf((byte) 0));
 		operationLogMapper.insertSelective(operatioLog);
 	}
 }
