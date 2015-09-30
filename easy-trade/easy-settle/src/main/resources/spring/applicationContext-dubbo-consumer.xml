@@ -24,5 +24,8 @@
   
   	<!-- redis -->
 	<dubbo:reference interface="com.rongyi.rss.malllife.roa.ROARedisService" id="rOARedisService" version="${dubbo.version}" check="false" />
+
+    <!-- 支付账单系统接口 -->
+	<dubbo:reference interface="com.rongyi.rss.rpb.IRpbService" id="iRpbService" version="${dubbo.version}" check="false" />
 	
 </beans>  

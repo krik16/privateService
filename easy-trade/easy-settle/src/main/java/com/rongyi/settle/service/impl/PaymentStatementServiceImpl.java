@@ -1,9 +1,11 @@
 package com.rongyi.settle.service.impl;
 
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
+import com.rongyi.easy.rpb.vo.PaymentParamVO;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
 import com.rongyi.easy.settle.entity.OperationLog;
 import com.rongyi.easy.settle.entity.PaymentStatement;
+import com.rongyi.rss.rpb.IRpbService;
 import com.rongyi.settle.dto.CouponExcelDto;
 import com.rongyi.settle.dto.PaymentStatementDetailDto;
 import com.rongyi.settle.mapper.OperationLogMapper;
@@ -35,6 +37,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 
     @Autowired
     private OperationLogMapper operationLogMapper;
+
+    @Autowired
+    IRpbService iRpbService;
 
     @Override
     public List<PaymentStatementDto> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
@@ -71,10 +76,14 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
                 paramsMap.put("ids", ids);
                 paramsMap.put("status", status);
                 paramsMap.put("statusUpdateTime", new Date());
-                paymentStatementMapper.updateStatusByIds(paramsMap);
                 for (Integer id : ids) {
+                    if (status.intValue()==6){
+                        //待付款审核通过，生成付款
+                        Map<String, Object> reMap =  generatePayment(id, userId);
+                    }
                     saveOperationLog(id, status, desc, userId);
                 }
+                paymentStatementMapper.updateStatusByIds(paramsMap);
                 result = true;
             }
         } catch (Exception e) {
@@ -82,6 +91,13 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
             logger.info(e.getMessage());
         }
         return result;
+    }
+
+    private Map<String, Object> generatePayment(Integer id, String userId) {
+        PaymentParamVO param = new PaymentParamVO();
+        param.setUserId(userId);
+
+        return null;
     }
 
     @Override
