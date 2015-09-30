@@ -24,7 +24,7 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from payment_statement
+    from payment_bill
     where id = #{id,jdbcType=INTEGER}
   </select>
 
@@ -32,15 +32,15 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="type" property="type" jdbcType="TINYINT" />
     <result column="batch_no" property="batchNo" jdbcType="VARCHAR" />
-    <result column="bussiness_type" property="bussinessType" jdbcType="TINYINT" />
+    <result column="biz_type" property="bussinessType" jdbcType="TINYINT" />
     <result column="cycle_start_time" property="cycleStartTime" jdbcType="TIMESTAMP" />
     <result column="cycle_end_time" property="cycleEndTime" jdbcType="TIMESTAMP" />
-    <result column="bussiness_name" property="bussinessName" jdbcType="VARCHAR" />
+    <result column="biz_name" property="bussinessName" jdbcType="VARCHAR" />
     <result column="pay_channel" property="payChannel" jdbcType="TINYINT" />
     <result column="pay_account" property="payAccount" jdbcType="VARCHAR" />
     <result column="blank_name" property="blankName" jdbcType="VARCHAR" />
     <result column="pay_total" property="payTotal" jdbcType="INTEGER" />
-    <result column="bussiness_email" property="bussinessEmail" jdbcType="VARCHAR" />
+    <result column="biz_email" property="bussinessEmail" jdbcType="VARCHAR" />
     <result column="status_update_time" property="statusUpdateTime" jdbcType="TIMESTAMP" />
     <result column="status" property="status" jdbcType="TINYINT" />
     <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
@@ -53,10 +53,10 @@
       and ps.batch_no = #{batchNo,jdbcType=VARCHAR}
     </if>
     <if test="bussinessType != null and bussinessType != ''">
-      and sc.bussiness_type = #{bussinessType,jdbcType=TINYINT}
+      and sc.biz_type = #{bussinessType,jdbcType=TINYINT}
     </if>
     <if test="bussinessName != null and bussinessName != ''">
-      and sc.bussiness_name 
+      and sc.biz_name 
       like concat('%',#{bussinessName,jdbcType=VARCHAR},'%')
     </if>
     <if test="payChannel != null and payChannel != ''">
@@ -79,12 +79,12 @@
 
   <select id="selectPageList" resultMap="DtoResultMap" parameterType="java.util.Map">
     select
-    ps.id, ps.type,ps.batch_no,sc.bussiness_type,ps.cycle_start_time,ps.cycle_end_time,
-    sc.bussiness_name,sc.pay_channel,bi.pay_account,bi.blank_name,
-    ps.pay_total,bi.bussiness_email,ps.status_update_time,ps.status,ps.create_at,po.id as payment_id
-    from payment_statement ps
-    join statement_config sc on ps.config_id=sc.id
-    join bussiness_info bi on bi.config_id=sc.id
+    ps.id, ps.type,ps.batch_no,sc.biz_type,ps.cycle_start_time,ps.cycle_end_time,
+    sc.biz_name,sc.pay_channel,bi.pay_account,bi.blank_name,
+    ps.pay_total,bi.biz_email,ps.status_update_time,ps.status,ps.create_at,po.id as payment_id
+    from payment_bill ps
+    join payment_bill_config sc on ps.config_id=sc.id
+    join biz_info bi on bi.config_id=sc.id
     join payment_order po on ps.pay_no = po.order_no 
     <where>
       <include refid="list_where_clause" />
@@ -93,9 +93,9 @@
   </select>
 
   <select id="selectPageListCount" parameterType="java.util.Map" resultType="java.lang.Integer">
-      select count(ps.id) from payment_statement ps
-        join statement_config sc on ps.config_id=sc.id
-        join bussiness_info bi on bi.config_id=sc.id
+      select count(ps.id) from payment_bill ps
+        join payment_bill_config sc on ps.config_id=sc.id
+        join biz_info bi on bi.config_id=sc.id
          join payment_order po on ps.pay_no = po.order_no 
     <where>
       <include refid="list_where_clause" />
@@ -103,7 +103,7 @@
   </select>
   
    <update id="updateByNotify" parameterType="java.util.Map" >
-    update payment_statement
+    update payment_bill
     set status = #{status,jdbcType=TINYINT},
     <if test="payMemo != null and payMemo != ''">
 		AND  pay_memo = #{payMemo,jdbcType=VARCHAR}
