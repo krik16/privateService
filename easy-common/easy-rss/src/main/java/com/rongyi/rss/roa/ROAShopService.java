@@ -72,4 +72,6 @@ public interface ROAShopService {
 
 	List<ShopVO> getShopVOsByBrandIds(List<ObjectId> list);
 
+     
+     public ShopVO getShopsVOById2(String id);
 }

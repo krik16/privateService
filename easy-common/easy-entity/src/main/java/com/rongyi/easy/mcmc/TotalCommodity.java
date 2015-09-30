@@ -46,6 +46,11 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private List<ObjectId> commodityIds;
 	private List<ObjectId> specList;//商品规格列表
 	private String reason;//下架原因
+	
+	private String brandMid;//品牌id
+	private String filialeMid;//分公司id
+	private String shopMid;//店铺id
+	
 	public ObjectId getId() {
 		return id;
 	}
@@ -203,4 +208,23 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	public void setSpecList(List<ObjectId> specList) {
 		this.specList = specList;
 	}
+	public String getBrandMid() {
+		return brandMid;
+	}
+	public void setBrandMid(String brandMid) {
+		this.brandMid = brandMid;
+	}
+	public String getFilialeMid() {
+		return filialeMid;
+	}
+	public void setFilialeMid(String filialeMid) {
+		this.filialeMid = filialeMid;
+	}
+	public String getShopMid() {
+		return shopMid;
+	}
+	public void setShopMid(String shopMid) {
+		this.shopMid = shopMid;
+	}
+	
 }

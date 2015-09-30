@@ -21,9 +21,9 @@ public class CommodityUpdateOrDeleteParam {
 	
 	private List<String> commodityIds;//商品id
 	
-	private int type;//type=0 下架 type=1 删除
+	private int type=1;//type=0 下架 type=1 删除
 	
-	private String reason;//原因
+	private String reason="";//原因
 
 	
 

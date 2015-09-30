@@ -67,8 +67,6 @@ public class CommodityParam {
 	
 	private List<CommoditySpecParam> commoditySpeceParams;
 	
-	private String bsst;//用户登录凭据，从cookie中获取
-	
 	private Integer stock;//总库存
 	
 	public String getId() {
@@ -240,14 +238,7 @@ public class CommodityParam {
 		this.commoditySpeceParams = commoditySpeceParams;
 	}
 
-	public String getBsst() {
-		return bsst;
-	}
-
-	/*public void setBsst(String bsst) {
-		this.bsst = bsst;
-	}
-
+	/*
 	public Integer getStock() {
 		return stock;
 	}*/

@@ -15,7 +15,7 @@ public interface ITotalCommodityService {
 	
 	public void updateTotalCommodity(TotalCommodity toalCommodity);
 	
-	public void updateOrDeleteCommodity(List<ObjectId> ids,Integer type,String reason);
+	public void updateOrDeleteCommodity(List<ObjectId> ids,Integer type,String reason,Integer userId);
 	
 	public String insertTotalCommodity(TotalCommodity toalCommodity);
 	

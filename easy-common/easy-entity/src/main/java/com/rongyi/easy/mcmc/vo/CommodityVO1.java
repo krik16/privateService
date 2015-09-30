@@ -4,7 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.mongodb.morphia.annotations.Entity;
+
+import com.rongyi.easy.mcmc.mvc.DateJson.DateJsonDeserializer;
+import com.rongyi.easy.mcmc.mvc.DateJson.JsonDateSerializer;
 
 @Entity("mcmc_commodity")
 public class CommodityVO1 implements  Serializable {
@@ -24,10 +28,11 @@ public class CommodityVO1 implements  Serializable {
 	private String currentPrice;//商品现价
 	private List<CommodityVOByColor> specList;//商品规格列表
 	private List<String> categoryIds;//商品所属的品类列表
-
+	@JsonSerialize(using=JsonDateSerializer.class)
 	private Date time;//相关时间
 	private String update_by;//修改人
 	private Integer source;//来源
+	private String reason;//审核失败原因
 	public String getId() {
 		return id;
 	}
@@ -100,6 +105,10 @@ public class CommodityVO1 implements  Serializable {
 	public void setSource(Integer source) {
 		this.source = source;
 	}
-
-	
+	public String getReason() {
+		return reason;
+	}
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
 }

@@ -25,7 +25,7 @@ public interface ICommodityService {
 	 */
 	public Long searchCommodityCount(Map<String,Object> paramMap);
 	
-	public void updateOrDeleteCommodity(List<String> ids,Integer type,String reason);
+	public void updateOrDeleteCommodity(List<String> ids,Integer type,String reason,Integer userId);
 	
 	public String insertCommodity(Commodity commodity);
 	/**
