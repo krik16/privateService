@@ -202,8 +202,8 @@
     sc.bussiness_name,sc.bussiness_id, sc.pay_channel,bi.pay_account,bi.blank_name,
     ps.pay_total,bi.bussiness_email,ps.status_update_time,ps.status
     from payment_bill ps
-    join statement_config sc on ps.config_id=sc.id
-    join bussiness_info bi on bi.config_id=sc.id
+    join payment_bill_config sc on ps.config_id=sc.id
+    join biz_info bi on bi.config_id=sc.id
     <where>
       <include refid="list_where_clause" />
     </where>
@@ -212,8 +212,8 @@
 
   <select id="selectPageListCount" parameterType="java.util.Map" resultType="java.lang.Integer">
       select count(ps.id) from payment_bill ps
-        join statement_config sc on ps.config_id=sc.id
-        join bussiness_info bi on bi.config_id=sc.id
+        join payment_bill_config sc on ps.config_id=sc.id
+        join biz_info bi on bi.config_id=sc.id
     <where>
       <include refid="list_where_clause" />
     </where>
