@@ -47,6 +47,12 @@ public class PaymentStatementDto implements Serializable {
     
     private Integer paymentId;
 
+    /**  付款单号 */
+    private String payNo;
+
+    /**  支付姓名 */
+    private String payName;
+
     public Integer getId() {
         return id;
     }
@@ -182,6 +188,20 @@ public class PaymentStatementDto implements Serializable {
 	public void setPaymentId(Integer paymentId) {
 		this.paymentId = paymentId;
 	}
-	
 
+    public String getPayNo() {
+        return payNo;
+    }
+
+    public void setPayNo(String payNo) {
+        this.payNo = payNo;
+    }
+
+    public String getPayName() {
+        return payName;
+    }
+
+    public void setPayName(String payName) {
+        this.payName = payName;
+    }
 }
