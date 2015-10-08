@@ -169,10 +169,10 @@ public class RpbServiceImpl implements IRpbService {
 				List<PaySuccessResponse> responseList = paymentLogInfoService.paySuccessToMessage(paymentEntity.getPayNo(), payAccount, orderNums, paymentEntity.getOrderType(), payChannel);
 				if (!responseList.isEmpty()) {
 					resultMap = responseList.get(0).getResult();
-					if ("0".equals(resultMap.get("errno"))) {
-						LOGGER.info("更新付款状态，付款单号-->" + paymentEntity.getPayNo());
-						paymentService.updateListStatusBypayNo(paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);// 修改付款单状态
-					}
+//					if ("0".equals(resultMap.get("errno"))) {
+//						LOGGER.info("更新付款状态，付款单号-->" + paymentEntity.getPayNo());
+//						paymentService.updateListStatusBypayNo(paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);// 修改付款单状态
+//					}
 				}else{
 					resultMap.put("errno", "10");
 					resultMap.put("errMsg", "订单系统处理异常");
