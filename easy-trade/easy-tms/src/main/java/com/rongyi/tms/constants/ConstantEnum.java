@@ -49,6 +49,8 @@ public enum ConstantEnum {
     PAY_CHANNEL_ZHIFUBAO(0,"支付宝"),
     PAY_CHANNEL_WEIXIN(1,"微信"),
     PAY_CHANNEL_YINLIAN(2,"银行卡"),
+    PAY_CHANNEL_CASH(3,"现金"),
+    PAY_CHANNEL_TRANSFER(4,"银行转账"),
     
     USER_ACCOUNT_TYPE_ZHIFUBAO(1,"支付宝"),
     USER_ACCOUNT_TYPE_YINLIAN(2,"银行卡"),
@@ -91,6 +93,12 @@ public enum ConstantEnum {
     
     IS_DELETE_0(0,"正常"),
     IS_DELETE_1(1,"标记删除"),
+    
+    STATEMENT_STATUE_6(6,"付款审核通过"),
+    STATEMENT_STATUE_9(9,"付款冻结"),
+    STATEMENT_STATUE_10(10,"付款解冻"),
+    STATEMENT_STATUE_11(11,"未下载"),
+    STATEMENT_STATUE_12(12,"以付款"),
     
     EXCEL_LIMIT_COUNT(5000,"交易明细报表导出限制总数");
     interface ACCOUNT_STATUS{

@@ -54,9 +54,9 @@ public interface PaymentStatementService {
     /**	
      * @Description: 更新线下付款状态 
      * @param ids
-     * @param payMemo	
+     * @param tradeNo	
      * @Author:  柯军
      * @datetime:2015年9月30日下午4:21:10
      **/
-    void updateByOffPay(String[] ids,String payMemo,Integer status);
+    void updateByOffPay(String[] ids,String tradeNo,Integer status);
 }
