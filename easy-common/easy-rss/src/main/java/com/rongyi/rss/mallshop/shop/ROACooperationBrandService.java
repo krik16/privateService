@@ -108,4 +108,12 @@ public interface ROACooperationBrandService {
 	 * @throws Exception
 	 */
 	public BrandInfoEntity selectBrandByMongoId(String mongoId) throws Exception;
+	
+	/**
+	 * 根据品类搜索品牌
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public BrandWallListVO getBrandWallListVO(String categoryId) throws Exception;
 }

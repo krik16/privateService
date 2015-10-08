@@ -104,6 +104,8 @@ public class WeixinQueryOrderParamVO implements Serializable {
 	 * 是换算成人民币之后的总金额，单位为分，一般看 total_fee 即可
 	 */
 	private String rmb_total_fee;
+	
+	private String result_code;
 
 	public Integer getRet_code() {
 		return ret_code;
@@ -263,6 +265,14 @@ public class WeixinQueryOrderParamVO implements Serializable {
 
 	public void setRmb_total_fee(String rmb_total_fee) {
 		this.rmb_total_fee = rmb_total_fee;
+	}
+
+	public String getResult_code() {
+		return result_code;
+	}
+
+	public void setResult_code(String result_code) {
+		this.result_code = result_code;
 	}
 
 }

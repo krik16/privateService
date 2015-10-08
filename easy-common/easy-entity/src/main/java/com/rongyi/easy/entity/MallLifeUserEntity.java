@@ -39,6 +39,7 @@ public class MallLifeUserEntity implements Serializable {
 	@Property("usual_address")
 	private String usualAddress;
 
+	@Property("channel")
 	private String channel;
 
 	private Integer sex;
@@ -60,6 +61,20 @@ public class MallLifeUserEntity implements Serializable {
 
 	@Property("created_at")
 	private Date createdAt;
+
+	@Property("push_channel_id")
+	private String pushChanelId;//百度推送Id
+
+	@Property("last_sign_in_at")
+	private Date lastSignInAt; //最新登录时间
+	@Property("last_sign_in_ip")
+	private String   lastSignInIp;//最新登录Ip地址
+
+	@Property("share_code")
+	private String shareCode;//摩店邀请注册码
+
+	@Property("regist_in_ip")
+	private String   registInIp;//注册IP
 
 	public ObjectId getId() {
 		return id;
@@ -150,7 +165,6 @@ public class MallLifeUserEntity implements Serializable {
 	}
 
 
-
 	public String getChannel() {
 		return channel;
 	}
@@ -214,5 +228,45 @@ public class MallLifeUserEntity implements Serializable {
 
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	public String getPushChanelId() {
+		return pushChanelId;
+	}
+
+	public void setPushChanelId(String pushChanelId) {
+		this.pushChanelId = pushChanelId;
+	}
+
+	public Date getLastSignInAt() {
+		return lastSignInAt;
+	}
+
+	public void setLastSignInAt(Date lastSignInAt) {
+		this.lastSignInAt = lastSignInAt;
+	}
+
+	public String getLastSignInIp() {
+		return lastSignInIp;
+	}
+
+	public void setLastSignInIp(String lastSignInIp) {
+		this.lastSignInIp = lastSignInIp;
+	}
+
+	public String getShareCode() {
+		return shareCode;
+	}
+
+	public void setShareCode(String shareCode) {
+		this.shareCode = shareCode;
+	}
+
+	public String getRegistInIp() {
+		return registInIp;
+	}
+
+	public void setRegistInIp(String registInIp) {
+		this.registInIp = registInIp;
 	}
 }

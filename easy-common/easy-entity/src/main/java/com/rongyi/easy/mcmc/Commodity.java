@@ -9,7 +9,7 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
 @Entity("mcmc_commodity")
-public class Commodity implements  Serializable {
+public class Commodity implements  Serializable,Cloneable{
 
 	 /**
 	 * 
@@ -77,18 +77,20 @@ public class Commodity implements  Serializable {
 	private String mallId;//商品所属商场id
 	private List<ObjectId> categoryIds;//商品所属的品类列表
 	private List<String> customCategory;//自定义分类
-	private String systemNumber;//系统编号
-	private byte distribution;//配送方式
-	private double freight;//运费 >0买家承担运费<0商家承担运费
+	
+	private int distribution;//配送方式 1表示到店自提2快递3表示支持两种方式
+	private int freight;//1表示商家承担运费,0表示买家承担运费
+	private int terminalType;//容易逛个位1 互动屏第二位1 微商第三位1
 	private Date registerAt;//上架时间
 	private Date soldOutAt;//下架时间
-
+	private int source;//来源
+	private int stockStatus;//0表示统一库存1表示分管库存
 //	private int commentCount;
 //	private int highCommentCount;
 //	private int mediumCommentCount;
 //	private int lowCommentCount;
 	
-public String getShopMid() {
+	public String getShopMid() {
 		return shopMid;
 	}
 	public void setShopMid(String shopMid) {
@@ -273,22 +275,18 @@ public String getShopMid() {
 	public void setCustomCategory(List<String> customCategory) {
 		this.customCategory = customCategory;
 	}
-	public String getSystemNumber() {
-		return systemNumber;
-	}
-	public void setSystemNumber(String systemNumber) {
-		this.systemNumber = systemNumber;
-	}
-	public byte getDistribution() {
+	
+	public int getDistribution() {
 		return distribution;
 	}
-	public void setDistribution(byte distribution) {
+	public void setDistribution(int distribution) {
 		this.distribution = distribution;
 	}
-	public double getFreight() {
+	
+	public int getFreight() {
 		return freight;
 	}
-	public void setFreight(double freight) {
+	public void setFreight(int freight) {
 		this.freight = freight;
 	}
 	public Date getRegisterAt() {
@@ -303,7 +301,64 @@ public String getShopMid() {
 	public void setSoldOutAt(Date soldOutAt) {
 		this.soldOutAt = soldOutAt;
 	}
-	
-	
-	
+	public int getSource() {
+		return source;
+	}
+	public void setSource(int source) {
+		this.source = source;
+	}
+	public int getTerminalType() {
+		return terminalType;
+	}
+	public void setTerminalType(int terminalType) {
+		this.terminalType = terminalType;
+	}
+	public int getStockStatus() {
+		return stockStatus;
+	}
+	public void setStockStatus(int stockStatus) {
+		this.stockStatus = stockStatus;
+	}
+	@Override
+	public Commodity clone() throws CloneNotSupportedException {
+		Commodity commodity=new Commodity();
+		commodity.setCategory(category);
+		commodity.setCategoryIds(categoryIds);
+		commodity.setCode(code);
+		commodity.setCurrentPrice(currentPrice);
+		commodity.setCustomCategory(customCategory);
+		commodity.setDescription(description);
+		commodity.setDistribution(distribution);
+		commodity.setFreight(freight);
+		commodity.setBrandName(brandName);
+		commodity.setBrandId(brandId);
+		commodity.setcPriceMax(cPriceMax);
+		commodity.setcPriceMin(cPriceMin);
+		commodity.setCreateAt(createAt);
+		commodity.setId(id);
+		commodity.setMallId(mallId);
+		commodity.setMallMid(mallMid);
+		commodity.setName(name);
+		commodity.setoPriceMax(oPriceMax);
+		commodity.setoPriceMin(oPriceMin);
+		commodity.setoPriceOfLowestCPrice(oPriceOfLowestCPrice);
+		commodity.setOriginalPrice(originalPrice);
+		commodity.setPicList(picList);
+		commodity.setPostage(postage);
+		commodity.setPrice(price);
+		commodity.setRegisterAt(registerAt);
+		commodity.setShopId(shopId);
+		commodity.setShopMid(shopMid);
+		commodity.setShopNum(shopNum);
+		commodity.setSold(sold);
+		commodity.setSource(source);
+		commodity.setSpecList(specList);
+		commodity.setStatus(status);
+		commodity.setStock(stock);
+		commodity.setStockStatus(stockStatus);
+		commodity.setTerminalType(terminalType);
+		commodity.setUpdate_by(update_by);
+		commodity.setUpdateAt(updateAt);
+		return commodity;
+	}
 }

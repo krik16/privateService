@@ -4,7 +4,9 @@ package com.rongyi.core.common;
  * 封装的json数据对象
  * 
  * @author jiejie 2014年6月19日 下午1:44:44
+ *
  */
+@Deprecated
 public class JsonResult<T> {
 
     private T        result;

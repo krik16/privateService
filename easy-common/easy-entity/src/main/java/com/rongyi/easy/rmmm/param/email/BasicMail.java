@@ -27,7 +27,7 @@ public class BasicMail implements Serializable {
     private String cc;
 
     //发送人地址
-    private String fromAddress;
+   // private String fromAddress;
 
     //接受者地址
     private List<String> toAddress;
@@ -66,14 +66,6 @@ public class BasicMail implements Serializable {
 
     public void setCc(String cc) {
         this.cc = cc;
-    }
-
-    public String getFromAddress() {
-        return fromAddress;
-    }
-
-    public void setFromAddress(String fromAddress) {
-        this.fromAddress = fromAddress;
     }
 
     public List<String> getToAddress() {

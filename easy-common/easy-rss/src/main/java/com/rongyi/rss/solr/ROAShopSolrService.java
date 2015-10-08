@@ -12,6 +12,8 @@ package com.rongyi.rss.solr;
 import java.util.List;
 import java.util.Map;
 
+import org.bson.types.ObjectId;
+
 /** 
  * 
  */
@@ -33,5 +35,7 @@ public interface ROAShopSolrService {
 	 * @throws Exception
 	 */
 	public List<String> getShops(Map params) throws Exception;
+
+	List<ObjectId> sortShopByLocation(List<ObjectId> idList, List<Double> position);
 
 }

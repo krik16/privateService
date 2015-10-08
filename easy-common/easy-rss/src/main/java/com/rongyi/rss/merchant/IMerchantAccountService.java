@@ -132,6 +132,8 @@ public interface IMerchantAccountService {
 	 * @throws Exception
 	 */
 	public List<ShopEntity> getShopEntityByMallName(String shopName,String mallMId) throws Exception;
+	
+	public Boolean updateSimpleUserInfo(Map<String, Object> paramMap,Integer optUserId) throws Exception;
 	/**
 	 * 修改商家账号相关信息
 	 * @param paraMap
@@ -139,7 +141,15 @@ public interface IMerchantAccountService {
 	 * @return
 	 * @throws Exception
 	 */
-	public Boolean updateMerAccountInfo(Map<String,Object> paraMap,Integer merUserId) throws Exception;
+	public Boolean updateMerAccountInfo(UserManagerParam param,Integer merUserId) throws Exception;
+	
+	/**
+	 * 修改个人信息
+	 * @param paramsMap
+	 * @return
+	 */
+	public Boolean updateUserInfo(Map<String, Object> paramsMap) throws Exception;
+	
 	/**
 	 * 模糊查询用户手机号码
 	 * @param userAccount

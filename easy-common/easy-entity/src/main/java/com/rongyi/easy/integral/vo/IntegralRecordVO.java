@@ -18,8 +18,8 @@ public class IntegralRecordVO implements Serializable {
 	private int action ; //1加积分，2减积分
 	private int type; //1.上传头像，2评论店铺或商场，3订单评论，4.每日签到，5.下单扣减，6支付超时恢复积分，7支付失败恢复积分，8验券成功加积分，9交易成功加积分10终端签到
 	private int use_score; //积分	
-	private BigDecimal pay_money; //支付金额
-	private BigDecimal total_money;//原结算金额
+	private BigDecimal pay_money; //支付金额 (验券中是本次验券的金额)
+	private BigDecimal total_money;//原结算金额(验券中是订单的总金额)
 	private BigDecimal preferential_deduction ; //使用优惠抵扣金额
 	private BigDecimal score_deduction; //积分抵扣金额
 	private BigDecimal post_money ; //邮费
@@ -38,7 +38,13 @@ public class IntegralRecordVO implements Serializable {
   	private String device_id ; //设备ID
   	private String mall_id;  //商场id
   	private String shop_id; //店铺
-	 
+  	private String type_name;//类型名称；
+	public String getType_name() {
+		return type_name;
+	}
+	public void setType_name(String type_name) {
+		this.type_name = type_name;
+	}
 	public String getDevice_id() {
 		return device_id;
 	}

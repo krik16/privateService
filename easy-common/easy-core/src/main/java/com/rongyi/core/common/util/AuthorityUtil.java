@@ -30,6 +30,11 @@ public class AuthorityUtil {
 	    return authorities;
 	}
 	
+	/**
+	 * 得到从认证中心获取的信息
+	 * @param request
+	 * @return
+	 */
 	public static Map<String, Object> getAttributes(HttpServletRequest request){
 		CasAuthenticationToken token = (CasAuthenticationToken) request.getUserPrincipal();
 	    AttributePrincipal principal = token.getAssertion().getPrincipal();
@@ -37,6 +42,12 @@ public class AuthorityUtil {
 	    return attributes;
 	}
 	
+	/**
+	 * 判断当前请求是否具有指定权限中的任何一个
+	 * @param request
+	 * @param roleAuthorities
+	 * @return
+	 */
 	public static boolean hasAnyRoleAuthority(HttpServletRequest request,List<String> roleAuthorities){
 		Collection<GrantedAuthority> authorities = getAuthorities(request);
 		if(roleAuthorities != null && roleAuthorities.size() > 0){
@@ -49,6 +60,12 @@ public class AuthorityUtil {
 		return false;
 	}
 	
+	/**
+	 * 判断当前请求是否具有指定权限
+	 * @param request
+	 * @param roleAuthority
+	 * @return
+	 */
 	public static boolean hasRoleAuthority(HttpServletRequest request,String roleAuthority){
 		Collection<GrantedAuthority> authorities = getAuthorities(request);
 		if(StringUtils.isNotBlank(roleAuthority)){

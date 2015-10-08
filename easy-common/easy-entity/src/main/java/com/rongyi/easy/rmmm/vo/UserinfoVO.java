@@ -44,7 +44,10 @@ public class UserinfoVO implements Serializable{
     private String shopName;//店铺名称
     
     private String customerId;//顾客表id
-    
+
+
+	private String sharCode;//邀请码
+	private String downUrl; //容易逛下载地址
 
 	public String getLogo() {
 		return logo;
@@ -157,5 +160,20 @@ public class UserinfoVO implements Serializable{
 	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
 	}
-	
+
+	public String getSharCode() {
+		return sharCode;
+	}
+
+	public void setSharCode(String sharCode) {
+		this.sharCode = sharCode;
+	}
+
+	public String getDownUrl() {
+		return downUrl;
+	}
+
+	public void setDownUrl(String downUrl) {
+		this.downUrl = downUrl;
+	}
 }

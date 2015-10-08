@@ -1,5 +1,8 @@
 package com.rongyi.easy.solr;
 
+import java.util.Date;
+import java.util.List;
+
 import org.apache.solr.client.solrj.beans.Field;
 import org.apache.solr.common.SolrDocument;
 
@@ -25,7 +28,108 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private String commodityCode;
 	@Field("commodityShopId")
 	private String commodityShopId;
+	@Field("zone_ids")
+	private List<String> zone_ids;
+	@Field("status")
+	private Integer status;
+	@Field("sold")
+	private Integer sold;
+	@Field("public_start")
+	private Date public_start;
+	@Field("position")
+	private String position;
+	@Field("brand_id")
+	private String brand_id;
+	@Field("category_ids")
+	private List<String> category_ids;
+	@Field("commodityMallId")
+	private String commodityMallId;
+	@Field("commodityBrandId")
+	private String commodityBrandId;
+	@Field("price")
+	private double price;
+	@Field("commodityNameSubdiv")
+	private String commodityNameSubdiv;
 	
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	public String getCommodityMallId() {
+		return commodityMallId;
+	}
+
+	public void setCommodityMallId(String commodityMallId) {
+		this.commodityMallId = commodityMallId;
+	}
+
+	public String getCommodityBrandId() {
+		return commodityBrandId;
+	}
+
+	public void setCommodityBrandId(String commodityBrandId) {
+		this.commodityBrandId = commodityBrandId;
+	}
+
+	public String getBrand_id() {
+		return brand_id;
+	}
+
+	public void setBrand_id(String brand_id) {
+		this.brand_id = brand_id;
+	}
+
+	public List<String> getCategory_ids() {
+		return category_ids;
+	}
+
+	public void setCategory_ids(List<String> category_ids) {
+		this.category_ids = category_ids;
+	}
+
+	public List<String> getZone_ids() {
+		return zone_ids;
+	}
+
+	public void setZone_ids(List<String> zone_ids) {
+		this.zone_ids = zone_ids;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public Integer getSold() {
+		return sold;
+	}
+
+	public void setSold(Integer sold) {
+		this.sold = sold;
+	}
+
+	public Date getPublic_start() {
+		return public_start;
+	}
+
+	public void setPublic_start(Date public_start) {
+		this.public_start = public_start;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
 	public String getCommodityCode() {
 		return commodityCode;
 	}
@@ -55,6 +159,7 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.commodityName = doc.getFieldValue("commodityName").toString();
 		this.commodityCode = doc.getFieldValue("commodityCode").toString();
 		this.commodityShopId = doc.getFieldValue("commodityShopId").toString();
+		this.commodityNameSubdiv = doc.getFieldValue("commodityNameSubdiv").toString();
 	}
 	public String getId() {
 		return id;
@@ -91,6 +196,12 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	}
 	public void setCommodityName(String commodityName) {
 		this.commodityName = commodityName;
+	}
+	public String getCommodityNameSubdiv() {
+		return commodityNameSubdiv;
+	}
+	public void setCommodityNameSubdiv(String commodityNameSubdiv) {
+		this.commodityNameSubdiv = commodityNameSubdiv;
 	}
 
 }

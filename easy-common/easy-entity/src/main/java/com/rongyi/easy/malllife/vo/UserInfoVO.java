@@ -40,6 +40,43 @@ public class UserInfoVO implements Serializable {
 
 	private Set<String> collectCommoditys;// 收藏的商品编号
 
+	private String       pushChanelId;//百度推送服务ID app传给后台
+	private String      lastSignInIp;//最新登录Ip地址
+	private String channel;// 容易逛(MALLLIFE),其他第三方全民财富（QMCAIFU）
+	private String shareCode;//摩店邀请注册码
+
+	public String getShareCode() {
+		return shareCode;
+	}
+
+	public void setShareCode(String shareCode) {
+		this.shareCode = shareCode;
+	}
+
+	public String getPushChanelId() {
+		return pushChanelId;
+	}
+
+	public void setPushChanelId(String pushChanelId) {
+		this.pushChanelId = pushChanelId;
+	}
+
+	public String getLastSignInIp() {
+		return lastSignInIp;
+	}
+
+	public void setLastSignInIp(String lastSignInIp) {
+		this.lastSignInIp = lastSignInIp;
+	}
+
+	public String getChannel() {
+		return channel;
+	}
+
+	public void setChannel(String channel) {
+		this.channel = channel;
+	}
+
 	public String getUserId() {
 		return userId;
 	}
@@ -207,5 +244,6 @@ public class UserInfoVO implements Serializable {
 	public void setCollectCommoditys(Set<String> collectCommoditys) {
 		this.collectCommoditys = collectCommoditys;
 	}
+
 
 }

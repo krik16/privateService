@@ -3,6 +3,7 @@ package com.rongyi.easy.tradecenter.param;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * ROA调用
@@ -84,6 +85,10 @@ public class TradeOrderCreateParam implements Serializable {
      * 活动名字 翻牌购
      */
     private String activityName;
+    /**
+     * 券码列表,用于一个订单多张卡券（中秋哈根达斯活动）
+     */
+    private List<String> couponCodes;
 
     /**
      * start
@@ -332,6 +337,14 @@ public class TradeOrderCreateParam implements Serializable {
         this.nextStatusTime = nextStatusTime;
     }
 
+    public List<String> getCouponCodes() {
+        return couponCodes;
+    }
+
+    public void setCouponCodes(List<String> couponCodes) {
+        this.couponCodes = couponCodes;
+    }
+
     @Override
     public String toString() {
         return "TradeOrderCreateParam{" +
@@ -352,6 +365,7 @@ public class TradeOrderCreateParam implements Serializable {
                 ", code='" + code + '\'' +
                 ", activityId='" + activityId + '\'' +
                 ", activityName='" + activityName + '\'' +
+                ", couponCodes=" + couponCodes +
                 ", useHb=" + useHb +
                 ", useScore=" + useScore +
                 ", discountWithOutScore=" + discountWithOutScore +

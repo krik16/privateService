@@ -17,8 +17,17 @@ public class LoginByCodeVO implements Serializable{
     private String       phone;//
     private String       code;//
     private String       dev_uuid; //设备uuid
+    private String       shareCode; //邀请码
+    private String       pushChanelId;//百度推送服务ID app传给后台
+    private String      lastSignInIp;//最新登录Ip地址
 
+    public String getShareCode() {
+        return shareCode;
+    }
 
+    public void setShareCode(String shareCode) {
+        this.shareCode = shareCode;
+    }
 
     public String getPhone() {
         return phone;
@@ -42,5 +51,29 @@ public class LoginByCodeVO implements Serializable{
 
     public void setDev_uuid(String dev_uuid) {
         this.dev_uuid = dev_uuid;
+    }
+
+    public String getSharCode() {
+        return shareCode;
+    }
+
+    public void setSharCode(String sharCode) {
+        this.shareCode = sharCode;
+    }
+
+    public String getPushChanelId() {
+        return pushChanelId;
+    }
+
+    public void setPushChanelId(String pushChanelId) {
+        this.pushChanelId = pushChanelId;
+    }
+
+    public String getLastSignInIp() {
+        return lastSignInIp;
+    }
+
+    public void setLastSignInIp(String lastSignInIp) {
+        this.lastSignInIp = lastSignInIp;
     }
 }

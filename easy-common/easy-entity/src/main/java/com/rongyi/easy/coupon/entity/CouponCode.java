@@ -6,211 +6,317 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 优惠券现金劵生成的券码
+ * 卡券券码
  *
  * @author Breggor
- *
  */
 
 public class CouponCode implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/** 券码ID */
-	private Long id;
+    /**
+     * 券码ID
+     */
+    private Long id;
 
-	/** 券码 */
-	private String code;
+    /**
+     * 券码
+     */
+    private String code;
 
-	/** 优惠、现金券ID */
-	private String couponId;
+    /**
+     * 卡券ID
+     */
+    private String couponId;
 
-	/** 商场ID */
-	private String mallId;
+    /**
+     * 券码类型
+     */
+    private String type;
 
-	/** 店铺ID */
-	private String shopId;
+    /**
+     * 状态 0:待发码 1:已发码
+     */
+    private Integer status;
 
-	/** 券码类型 */
-	private String type;
+    /**
+     * 第三导入码渠道
+     */
+    private String inChannel;
 
-	/** 状态 0:待领取 1:已领取 2:已使用 3:已过期。 */
-	private Integer status;
+    /**
+     * 是否第三方码
+     */
+    private Boolean isThrid;
 
-	/** 领用券码用户ID */
-	private String userId;
+    /**
+     * 创建时间
+     */
+    private Date createdTime;
 
-	/** 领用券码用户类型 */
-	private String userType;
+    /**
+     * 更新时间
+     */
+    private Date updatedTime;
 
-	/** 领用券码用户手机 */
-	private String mobile;
+    /**
+     * 逻辑删除：N-未删除 Y-已删除
+     */
+    private String isDelete;
 
-	/** 创建时间 */
-	private Date createdTime;
 
-	/** 更新时间（验证时间）(废弃) */
-	private Date updatedTime;
+    /**
+     * 商场ID
+     */
+//    @Deprecated
+//    private String mallId;
 
-	/** 编码是否被删除：n-没有删除 y-已删除 */
-	private String isDelete;
-	
-	/** 用户渠道：(废弃) */
-	private String userSrc;
-	
-	/** 有效期开始时间(废弃) */
-	private Date validBeginDate;
-	
-	/** 有效期结束时间(废弃) */
-	private Date validEndDate;
-	
-	/** 抵扣金额 (废弃)*/
-	private Double discount;
-	
-	
-	public Date getValidBeginDate() {
-		return validBeginDate;
-	}
+    /**
+     * 店铺ID
+     */
+//    @Deprecated
+//    private String shopId;
 
-	public void setValidBeginDate(Date validBeginDate) {
-		this.validBeginDate = validBeginDate;
-	}
+    /**
+     * 领用券码用户ID
+     */
+//    @Deprecated
+//    private String userId;
 
-	public Date getValidEndDate() {
-		return validEndDate;
-	}
+    /**
+     * 领用券码用户类型
+     */
+//    @Deprecated
+//    private String userType;
 
-	public void setValidEndDate(Date validEndDate) {
-		this.validEndDate = validEndDate;
-	}
+    /**
+     * 领用券码用户手机
+     */
+//    @Deprecated
+//    private String mobile;
 
-	public Double getDiscount() {
-		return discount;
-	}
 
-	public void setDiscount(Double discount) {
-		this.discount = discount;
-	}
+    /**
+     * 用户渠道：(废弃)
+     */
+//    @Deprecated
+//    private String userSrc;
 
-	public String getUserSrc() {
-		return userSrc;
-	}
+    /**
+     * 有效期开始时间(废弃)
+     */
+//    @Deprecated
+//    private Date validBeginDate;
 
-	public void setUserSrc(String userSrc) {
-		this.userSrc = userSrc;
-	}
+    /**
+     * 有效期结束时间(废弃)
+     */
+//    @Deprecated
+//    private Date validEndDate;
 
-	public Long getId() {
-		return id;
-	}
+    /**
+     * 抵扣金额 (废弃)
+     */
+//    @Deprecated
+//    private Double discount;
+    public Boolean getIsThrid() {
+        return isThrid;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setIsThrid(Boolean isThrid) {
+        this.isThrid = isThrid;
+    }
 
-	public String getCode() {
-		return code;
-	}
+    public String getInChannel() {
+        return inChannel;
+    }
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+    public void setInChannel(String inChannel) {
+        this.inChannel = inChannel;
+    }
 
-	public String getCouponId() {
-		return couponId;
-	}
+//    @Deprecated
+//    public Date getValidBeginDate() {
+//        return validBeginDate;
+//    }
+//
+//    @Deprecated
+//    public void setValidBeginDate(Date validBeginDate) {
+//        this.validBeginDate = validBeginDate;
+//    }
+//
+//    @Deprecated
+//    public Date getValidEndDate() {
+//        return validEndDate;
+//    }
+//
+//    @Deprecated
+//    public void setValidEndDate(Date validEndDate) {
+//        this.validEndDate = validEndDate;
+//    }
+//
+//    @Deprecated
+//    public Double getDiscount() {
+//        return discount;
+//    }
+//
+//    @Deprecated
+//    public void setDiscount(Double discount) {
+//        this.discount = discount;
+//    }
+//
+//    @Deprecated
+//    public String getUserSrc() {
+//        return userSrc;
+//    }
+//
+//    @Deprecated
+//    public void setUserSrc(String userSrc) {
+//        this.userSrc = userSrc;
+//    }
 
-	public void setCouponId(String couponId) {
-		this.couponId = couponId;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getMallId() {
-		return mallId;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setMallId(String mallId) {
-		this.mallId = mallId;
-	}
+    public String getCode() {
+        return code;
+    }
 
-	public String getShopId() {
-		return shopId;
-	}
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-	public void setShopId(String shopId) {
-		this.shopId = shopId;
-	}
+    public String getCouponId() {
+        return couponId;
+    }
 
-	public String getType() {
-		return type;
-	}
+    public void setCouponId(String couponId) {
+        this.couponId = couponId;
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+//    @Deprecated
+//    public String getMallId() {
+//        return mallId;
+//    }
+//
+//    @Deprecated
+//    public void setMallId(String mallId) {
+//        this.mallId = mallId;
+//    }
+//
+//    @Deprecated
+//    public String getShopId() {
+//        return shopId;
+//    }
+//
+//    @Deprecated
+//    public void setShopId(String shopId) {
+//        this.shopId = shopId;
+//    }
 
-	public Integer getStatus() {
-		return status;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	public String getUserId() {
-		return userId;
-	}
+    public Integer getStatus() {
+        return status;
+    }
 
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
-	public String getMobile() {
-		return mobile;
-	}
+//    @Deprecated
+//    public String getUserId() {
+//        return userId;
+//    }
+//
+//    @Deprecated
+//    public void setUserId(String userId) {
+//        this.userId = userId;
+//    }
+//
+//    @Deprecated
+//    public String getMobile() {
+//        return mobile;
+//    }
+//
+//    @Deprecated
+//    public void setMobile(String mobile) {
+//        this.mobile = mobile;
+//    }
 
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
+    public Date getCreatedTime() {
+        return createdTime;
+    }
 
-	public Date getCreatedTime() {
-		return createdTime;
-	}
+    public void setCreatedTime(Date createdTime) {
+        this.createdTime = createdTime;
+    }
 
-	public void setCreatedTime(Date createdTime) {
-		this.createdTime = createdTime;
-	}
+    public Date getUpdatedTime() {
+        return updatedTime;
+    }
 
-	public Date getUpdatedTime() {
-		return updatedTime;
-	}
+    public void setUpdatedTime(Date updatedTime) {
+        this.updatedTime = updatedTime;
+    }
 
-	public void setUpdatedTime(Date updatedTime) {
-		this.updatedTime = updatedTime;
-	}
+    public String getIsDelete() {
+        return isDelete;
+    }
 
-	public String getIsDelete() {
-		return isDelete;
-	}
+    public void setIsDelete(String isDelete) {
+        this.isDelete = isDelete;
+    }
 
-	public void setIsDelete(String isDelete) {
-		this.isDelete = isDelete;
-	}
+//    @Deprecated
+//    public String getUserType() {
+//        return userType;
+//    }
+//
+//    @Deprecated
+//    public void setUserType(String userType) {
+//        this.userType = userType;
+//    }
 
-	public String getUserType() {
-		return userType;
-	}
+    public CouponCode() {
+    }
 
-	public void setUserType(String userType) {
-		this.userType = userType;
-	}
+    public CouponCode(String code, String couponId) {
+        this.code = code;
+        this.couponId = couponId;
+    }
 
-	@Override
-	public String toString() {
-		return new ToStringBuilder(this).append("id", id).append("code", code).append("couponId", couponId)
-				.append("mallId", mallId).append("shopId", shopId).append("type", type).append("status", status)
-				.append("userId", userId).append("userType", userType).append("mobile", mobile)
-				.append("createdTime", createdTime).append("updatedTime", updatedTime).append("isDelete", isDelete)
-				.toString();
-	}
+    public CouponCode(String code, String couponId, String inChannel) {
+        this.code = code;
+        this.couponId = couponId;
+        this.inChannel = inChannel;
+    }
 
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("code", code)
+                .append("couponId", couponId)
+                .append("type", type)
+                .append("status", status)
+                .append("inChannel", inChannel)
+                .append("isThrid", isThrid)
+                .append("createdTime", createdTime)
+                .append("updatedTime", updatedTime)
+                .append("isDelete", isDelete)
+                .toString();
+    }
 }

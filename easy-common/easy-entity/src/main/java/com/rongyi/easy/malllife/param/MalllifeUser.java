@@ -1,6 +1,7 @@
 package com.rongyi.easy.malllife.param;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /*
  * Copyright (C),上海容易网电子商务有限公司
@@ -30,13 +31,23 @@ public class MalllifeUser implements Serializable {
 
     private String openId;
 
-    private String channel;
+    private String channel;// 容易逛(MALLLIFE),其他第三方全民财富（QMCAIFU） RONGYI_HTDR(容易后台导入)  HGDSLHJ   //哈根达斯—老虎机活动
 
     private String devUuid;//设备uuid
 
     private String imId;
 
     private Integer isLoginRed;//登录领红包 0未领取 1已经领取
+
+    private String pushChanelId;
+
+    private Date lastSignInAt;
+
+    private String   lastSignInIp;//最新登录Ip地址
+
+    private String shareCode;//摩店邀请注册码
+
+    private String registInIp;//注册IP
 
 
     public String getUserId() {
@@ -118,5 +129,45 @@ public class MalllifeUser implements Serializable {
 
     public void setIsLoginRed(Integer isLoginRed) {
         this.isLoginRed = isLoginRed;
+    }
+
+    public String getPushChanelId() {
+        return pushChanelId;
+    }
+
+    public void setPushChanelId(String pushChanelId) {
+        this.pushChanelId = pushChanelId;
+    }
+
+    public Date getLastSignInAt() {
+        return lastSignInAt;
+    }
+
+    public void setLastSignInAt(Date lastSignInAt) {
+        this.lastSignInAt = lastSignInAt;
+    }
+
+    public String getLastSignInIp() {
+        return lastSignInIp;
+    }
+
+    public void setLastSignInIp(String lastSignInIp) {
+        this.lastSignInIp = lastSignInIp;
+    }
+
+    public String getShareCode() {
+        return shareCode;
+    }
+
+    public void setShareCode(String shareCode) {
+        this.shareCode = shareCode;
+    }
+
+    public String getRegistInIp() {
+        return registInIp;
+    }
+
+    public void setRegistInIp(String registInIp) {
+        this.registInIp = registInIp;
     }
 }

@@ -210,11 +210,34 @@ public interface IUserService {
     public void save_im(Integer userId,String imId)throws  Exception;
     
     /**
+     * 修改个人信息
+     * @param paramsMap
+     * @return
+     */
+    public boolean updateUserInfo(Map<String, Object> paramsMap)throws  Exception;
+    
+    /**
 	 * 根据用户id查用户信息,不管是否禁用
 	 * @param id
 	 * @return
 	 * @throws Exception
 	 */
 	public RmmmUserInfoEntity getUserInfoById(Integer id) throws Exception;
+
+
+    /**
+     * 根据 用户ID 生成 邀请码
+     * @param userId
+     * @return
+     */
+    public String generationSharCode(Integer userId)throws Exception;
+
+    /**
+     * 判断 当前邀请码是否有效
+     * @param sharCode
+     * @return 存在 true 不存在 false
+     */
+    public Boolean sharCodeIsExist(String sharCode)throws Exception;
+
 
 }

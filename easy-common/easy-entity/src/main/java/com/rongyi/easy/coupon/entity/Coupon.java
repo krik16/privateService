@@ -16,6 +16,8 @@ import java.util.List;
  *
  * @author Breggor
  */
+
+@Deprecated
 @Entity(value = "coupon", noClassnameStored = true)
 public class Coupon implements Serializable {
 
@@ -205,7 +207,7 @@ public class Coupon implements Serializable {
     }
 
     public Integer getLimitUseCount() {
-        return (limitUseCount == null) ? Integer.valueOf(0) : limitPublishCount;
+        return (limitUseCount == null) ? Integer.valueOf(0) : limitUseCount;
     }
 
     public void setLimitUseCount(Integer limitUseCount) {

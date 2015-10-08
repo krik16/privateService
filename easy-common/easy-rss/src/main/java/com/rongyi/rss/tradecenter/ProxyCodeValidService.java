@@ -47,5 +47,13 @@ public interface ProxyCodeValidService {
      * @return
      */
     public String getUserMobile(String couponCode);
+    
+    /**
+     * 哈格达斯优惠券验证
+     * @param couponCode
+     * @param status
+     * @return
+     */
+    public boolean validateHagenCoupon(String couponCodeMd5, byte status);
 
 }

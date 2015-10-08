@@ -22,7 +22,7 @@ public class CommodityCategory  implements java.io.Serializable{
 	private List<ObjectId> parentids;
 	private ObjectId parentid;
 	private int type;
-	private List<ObjectId> columnIds;
+	private List<ObjectId> columnIds;//商品分类对应的规格项id
 	private int commodityCount;
 	public int getCommodityCount() {
 		return commodityCount;
@@ -78,6 +78,4 @@ public class CommodityCategory  implements java.io.Serializable{
 	public void setParentid(ObjectId parentid) {
 		this.parentid = parentid;
 	}
-	
-	 
 }

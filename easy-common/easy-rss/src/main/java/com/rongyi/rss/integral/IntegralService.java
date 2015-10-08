@@ -1,9 +1,6 @@
 package com.rongyi.rss.integral;
 
- import net.sf.json.JSONObject;
-
-import com.rongyi.easy.integral.constant.ActionType;
-import com.rongyi.easy.integral.constant.ScoreRuleEnum;
+import net.sf.json.JSONObject;
 import com.rongyi.easy.integral.vo.IntegralRecordVO;
 
 /**
@@ -50,7 +47,7 @@ public interface IntegralService {
 	 * @param page
 	 * @return
 	 */
-	public JSONObject  getScoreRecord(String userid,ScoreRuleEnum scoreRuleEnum,ActionType actionType,int row,int page);
+	public JSONObject  getScoreRecord(String userid,int actionType,int row,int page);
 	/**
 	 * 根据订单号获取积分记录
 	 * @param orderSn
@@ -58,4 +55,16 @@ public interface IntegralService {
 	 */
 	public IntegralRecordVO getIntegralRecordByOrderSn(String orderSn);
 	
+	/**
+	 * 根据条件查询用户积分信息
+	 * @param userid
+	 * @param source
+	 * @param type
+	 * @param action
+	 * @param update_at
+	 * @param endTime 
+	 * @return
+	 */
+	public JSONObject getScoreRecordByConditioin(String userid, int source ,int type,int action ,String  beginTime,String endTime, int page, int row);
+
 }

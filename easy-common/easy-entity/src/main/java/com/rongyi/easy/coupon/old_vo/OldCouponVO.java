@@ -10,13 +10,25 @@ import java.util.List;
 public class OldCouponVO implements Serializable {
     private static final long serialVersionUID = 3;
     private String id;
+    @Deprecated
     private String holder_id;//关联商场（店铺）的第一个商场（店铺）Id
+    @Deprecated
     private String holder_name;//holder_id对应的名称
+    @Deprecated
+    private String holder_type;//关联类型
+
+    private String mallName;//商场名
+    private String mallId; //商场Id
+    private String shopName;//店铺名
+    private String shopId;//店铺Id
+    private String relatedType;//卡券配置类型
+
     private String title;//团购名称
     private Integer recommend;//置顶
     private String groupon_price;//团购价格（优惠券当前价格）
     private String groupon_original;//团购原价（优惠前原价）
     private String groupon_num;//团购数量(优惠券总数量)
+
     private String user_quota;//购买限制
     private String start_time;//有效期开始
     private String end_time;//有效期结束
@@ -25,14 +37,18 @@ public class OldCouponVO implements Serializable {
     private String sale_start;//发售开始时间
     private String sale_end;//发售结束时间
     private String thumbnail;//列标图url
-    private String holder_type;//关联类型
+
     private List carouselImg;//详情图url集合
     private Integer buyed_amount;//已购买数量
     private String after_sale_service = "任何关于优惠券的使用，退款问题均可致电：400-040-8989";
     private String use_restriction; // 使用限制
     private String description;//描述
     private String use_mode;        // 使用方式
-    private List<OldShopVO> apply_shops;//券的商场信息
+    private int inventoryQuantity;//剩余库存
+
+    @Deprecated
+    private List<OldShopVO> apply_shops;
+    private List<OldShopVO> shops;//关联店铺列表
 
     private Integer limitPublishCount;// 每日限量发行张数
     private Integer limitUseCount;// 每人每日限用张数
@@ -54,10 +70,12 @@ public class OldCouponVO implements Serializable {
         this.id = id;
     }
 
+    @Deprecated
     public String getHolder_id() {
         return holder_id;
     }
 
+    @Deprecated
     public void setHolder_id(String holder_id) {
         this.holder_id = holder_id;
     }
@@ -166,10 +184,12 @@ public class OldCouponVO implements Serializable {
         this.thumbnail = thumbnail;
     }
 
+    @Deprecated
     public String getHolder_type() {
         return holder_type;
     }
 
+    @Deprecated
     public void setHolder_type(String holder_type) {
         this.holder_type = holder_type;
     }
@@ -182,11 +202,12 @@ public class OldCouponVO implements Serializable {
         this.carouselImg = carouselImg;
     }
 
-
+    @Deprecated
     public List<OldShopVO> getApply_shops() {
         return apply_shops;
     }
 
+    @Deprecated
     public void setApply_shops(List<OldShopVO> apply_shops) {
         this.apply_shops = apply_shops;
     }
@@ -223,10 +244,12 @@ public class OldCouponVO implements Serializable {
         this.use_mode = use_mode;
     }
 
+    @Deprecated
     public String getHolder_name() {
         return holder_name;
     }
 
+    @Deprecated
     public void setHolder_name(String holder_name) {
         this.holder_name = holder_name;
     }
@@ -255,4 +278,59 @@ public class OldCouponVO implements Serializable {
         this.afterSaleService = afterSaleService;
     }
 
+    public String getMallName() {
+        return mallName;
+    }
+
+    public void setMallName(String mallName) {
+        this.mallName = mallName;
+    }
+
+    public String getMallId() {
+        return mallId;
+    }
+
+    public void setMallId(String mallId) {
+        this.mallId = mallId;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
+
+    public String getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
+    }
+
+    public String getRelatedType() {
+        return relatedType;
+    }
+
+    public void setRelatedType(String relatedType) {
+        this.relatedType = relatedType;
+    }
+
+    public List<OldShopVO> getShops() {
+        return shops;
+    }
+
+    public void setShops(List<OldShopVO> shops) {
+        this.shops = shops;
+    }
+
+    public int getInventoryQuantity() {
+        return inventoryQuantity;
+    }
+
+    public void setInventoryQuantity(int inventoryQuantity) {
+        this.inventoryQuantity = inventoryQuantity;
+    }
 }

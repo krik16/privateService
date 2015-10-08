@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.rongyi.easy.mcmc.CommoditySpec;
-import com.rongyi.easy.mcmc.CommoditySpecColumn;
 
 
 public class CommoditySpecVO implements  Serializable {

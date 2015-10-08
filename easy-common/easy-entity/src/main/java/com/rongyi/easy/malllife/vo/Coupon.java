@@ -2,7 +2,7 @@ package com.rongyi.easy.malllife.vo;
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -40,10 +40,10 @@ public class Coupon extends ShopMall implements Serializable{
     protected String holderId;
     @SerializedName("holder_type")
     protected String holderType;
-    protected ArrayList<String> carouselImg;
+    protected List<String> carouselImg;
     @SerializedName("any_activity")
     protected boolean isActivity;
-    public ArrayList<String> getCarouselImg() {
+    public List<String> getCarouselImg() {
         return carouselImg;
     }
 
@@ -63,7 +63,7 @@ public class Coupon extends ShopMall implements Serializable{
         this.grouponOriginal = grouponOriginal;
     }
 
-    public void setCarouselImg(ArrayList<String> carouselImg) {
+    public void setCarouselImg(List<String> carouselImg) {
         this.carouselImg = carouselImg;
     }
 

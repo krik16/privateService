@@ -4,12 +4,20 @@ import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.framework.spring.context.utils.SpringContextUtil;
 
 public interface Constants {
+	String COOKIE_DOMAIN_RONGYI = ".rongyi.com";
+	String COOKIE_DOMAIN_RONGYIGUANG = ".rongyiguang.com";
+
+    interface FilterRelation {
+        String AND = "AND";
+        String OR = "OR";
+    }
 
 
     interface OrderPaytime {
         Integer PAY_SECOND = 900; //订单支付最大时间（秒数）
     }
-
+    String BS_COOKIE_NAME = "BSST";
+    String RY_COOKIE_NAME = "RYST";
 
     /**
      * 登录用户的session key
@@ -631,5 +639,35 @@ public interface Constants {
         String NOHEAR = "抱歉，本店暂未发行该类优惠券";
         String REPEAT = "您已经成功验证";
         String NOTENOUGHNUM = "没有足够的可用券码";
+    }
+    
+    /**
+     * App标识  来自于app store
+     */
+    interface AppId{
+    	String MDC2C_IOS_APPId = "999209638";
+    	String RYG_IOS_APPId = "684748850";
+    }
+    
+    /**
+     * App广告推广通道
+     */
+    interface AppAdvertChannel{
+    	String ZHIMENG_CHANNEL = "zhimeng";//指盟
+    	String WAPS_CHANNEL = "waps";//万普
+    	
+    }
+    interface Errno{
+    	int success=0;
+    }
+    interface NoticeStatus{
+    	/** 未通过 */
+    	Integer NOPASSED = 0;
+    	/** 审核中 */
+    	Integer REVIEWING = 1;
+    	/** 发布中 */
+    	Integer RELEASEING = 2;
+    	/** 已过期 */
+    	Integer OVERDUE = 3;
     }
 }

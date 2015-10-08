@@ -1,8 +1,10 @@
 package com.rongyi.rss.roa;
 
+import java.util.List;
 import java.util.Map;
 
-import com.rongyi.easy.roa.vo.ShopVO;
+import com.rongyi.easy.roa.param.ShopAreaParams;
+import com.rongyi.easy.roa.vo.ShopAreaVO;import org.bson.types.ObjectId;import com.rongyi.easy.roa.vo.ShopVO;
 
 /**
  * 类ROAShopService.java的描述：TODO 类实现描述
@@ -31,6 +33,27 @@ public interface ROAShopService {
      * @return
      * @throws Exception
      */
-    public ShopVO getShopsVOById(String id)throws Exception;
+    public ShopVO getShopVOById(String id)throws Exception;
     
-}
+	/**
+     * 通过分公司id查店铺
+     * @param filialeId
+     * @return
+     * @throws Exception
+     */
+    public List<ShopVO> getShopDetailByFilialeId(String filialeId) throws Exception ;
+
+    /**
+     * 查询集团、商场、品牌、店铺的地址信息（省市）
+     * @param params
+     * @return
+     * @throws Exception
+     */
+	List<ShopAreaVO> searchShopAreas(ShopAreaParams params) throws Exception;
+
+	/**
+     * 通过ids查询店铺
+     * @param ids
+     * @return
+     */
+    public List<ShopVO> getShopsByIds(List<ObjectId> ids) throws Exception;}

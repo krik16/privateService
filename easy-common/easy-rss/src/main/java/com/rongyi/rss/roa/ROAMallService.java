@@ -1,7 +1,9 @@
 package com.rongyi.rss.roa;
 
+import com.rongyi.easy.roa.entity.MallEntity;
 import com.rongyi.easy.roa.vo.MallVO;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,4 +27,19 @@ public interface ROAMallService {
      * @throws Exception
      */
     public Map<String,Object> getMalls(Map params, int currentpage, int pagesize) throws Exception;
+
+    /**
+     * 查询集团下所属的商场
+     * @param groupId
+     * @return
+     */
+    public List<MallEntity> getMallEntitysByGroupId(String groupId) throws Exception;
+
+    /**
+     * 查询商场信息
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    public MallEntity getMallEntityById(String id) throws Exception;
 }

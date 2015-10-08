@@ -9,7 +9,10 @@ package com.rongyi.easy.integral.constant;
  */
 public interface SourceType {
 
-	public static int SOURCE_APP = 1; //APP
-	public static int SOURCE_BACKSTRAGE=2; //后台操作
+	public static int SOURCE_APP = 1; //容易逛
+	public static int SOURCE_BACKSTRAGE = 2; //运营平台
+	public static int SOURCE_TERMINAL = 3;//互动屏
+	public static int SOURCE_WEIXIN = 4;//微信
+	public static int SOURCE_ALL = 0;//全部
  
 }
