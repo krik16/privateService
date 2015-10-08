@@ -41,7 +41,7 @@
 		<result column="create_by" property="createBy" jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		id, rule_code, cooperate_type, biz_type, biz_code, biz_name, count_cycle,
+		id, rule_code, cooperate_type, biz_id, biz_type, biz_code, biz_name, count_cycle,
 		cycle_start_time, cycle_end_time, is_loop, verify_type,
 		gen_header_time, gen_hm_time,
 		send_time, datum_type, pay_mode, regular_day, roll_day, roll_type,
