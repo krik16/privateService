@@ -11,15 +11,13 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.rongyi.easy.roa.vo.ShopVO;
+import com.rongyi.rss.roa.ROAShopService;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -76,6 +74,9 @@ public class PaymentStatementController {
 
     @Autowired
     private ExportDataToExcel exportDataToExcel;
+
+    @Autowired
+    private ROAShopService roaShopService;
 
     /**
      * @Description: 对账单列表（包括所有列表，审核列表，商家对账单列表）
@@ -328,7 +329,7 @@ public class PaymentStatementController {
             paymentStatementNew.setIsDelete(new Byte("0"));
             paymentStatementService.insert(paymentStatementNew);
             createExcel(paymentStatementNew, statementConfig);
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
         }
@@ -348,24 +349,30 @@ public class PaymentStatementController {
         } else return StringUtils.substring(batchNo, 0, batchNo.length() - 2) + count.toString();
     }
 
-    private void createExcel(PaymentStatement paymentStatement, StatementConfig statementConfig) {
+    private void createExcel(PaymentStatement paymentStatement, StatementConfig statementConfig) throws Exception {
         PaymentStatementExcelDto paymentStatementExcelDto = new PaymentStatementExcelDto();
         List<PaymentStatementDetailDto> paymentStatementDetailDtoList = new ArrayList<>();
         List<CouponExcelDto> couponExcelDtoList = new ArrayList<>();
         if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.SHOP)) {
+            ShopVO shopVO = roaShopService.getShopVOById(statementConfig.getBussinessId());
             paymentStatementDetailDtoList =
                     paymentStatementService.selectForStatementDetails(statementConfig.getBussinessId(), null, paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime());
             couponExcelDtoList = paymentStatementService.selectForCouponExcelDto(statementConfig.getBussinessId(), null, paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime());
             if (paymentStatementDetailDtoList != null && paymentStatementDetailDtoList.size() > 0) {
-                paymentStatementExcelDto.setShopName(paymentStatementDetailDtoList.get(0).getShopName());
-                paymentStatementExcelDto.setMallName(paymentStatementDetailDtoList.get(0).getMallName());
+                paymentStatementExcelDto.setShopName(shopVO.getName());
+                paymentStatementExcelDto.setMallName(shopVO.getPosition().getMall());
             }
         } else if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.MALL)) {
-            paymentStatementDetailDtoList =
-                    paymentStatementService.selectForStatementDetails(null, statementConfig.getBussinessId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime());
-            couponExcelDtoList = paymentStatementService.selectForCouponExcelDto(null, statementConfig.getBussinessId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime());
-            if (paymentStatementDetailDtoList != null && paymentStatementDetailDtoList.size() > 0) {
-                paymentStatementExcelDto.setMallName(paymentStatementDetailDtoList.get(0).getMallName());
+            Map map = new HashMap();
+            map.put("mallId", statementConfig.getBussinessId());
+            Map result = roaShopService.getShops(map, 0, 10000);
+            List<ShopVO> shopVOs = (List<ShopVO>)result.get("list");
+            for (ShopVO shopVO : shopVOs) {
+                paymentStatementDetailDtoList.addAll(paymentStatementService.selectForStatementDetails(shopVO.getId(), null, paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime()));
+                couponExcelDtoList.addAll(paymentStatementService.selectForCouponExcelDto(shopVO.getId(), null, paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime()));
+            }
+            if (shopVOs != null && shopVOs.size() > 0) {
+                paymentStatementExcelDto.setMallName(shopVOs.get(0).getPosition().getMall());
             }
         }
 

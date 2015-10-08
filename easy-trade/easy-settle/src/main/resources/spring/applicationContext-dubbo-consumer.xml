@@ -27,5 +27,8 @@
 
     <!-- 支付账单系统接口 -->
 	<dubbo:reference interface="com.rongyi.rss.rpb.IRpbService" id="iRpbService" version="${dubbo.version}" check="false" />
-	
+
+    <!-- mongo shop查询 -->
+	<dubbo:reference interface="com.rongyi.rss.roa.ROAShopService" id="roaShopService" version="${dubbo.version}" check="false" />
+
 </beans>  
