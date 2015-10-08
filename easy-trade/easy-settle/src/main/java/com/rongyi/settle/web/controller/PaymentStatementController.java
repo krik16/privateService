@@ -439,32 +439,6 @@ public class PaymentStatementController {
         out.close();
     }
 
-    /**
-     * 浏览器预览对账单
-     * @param id
-     * @param response
-     * @throws Exception
-     */
-    @RequestMapping("/view/{id}")
-    public void view(@PathVariable Integer id, HttpServletResponse response) throws Exception {
-        PaymentStatement paymentStatement = paymentStatementService.get(id);
-        StatementConfig statementConfig = statementConfigService.selectById(paymentStatement.getConfigId());
-        String fileName = getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime()));
-        File f = new File(propertyConfigurer.getProperty("settle.file.path") + fileName);
-        BufferedInputStream br = new BufferedInputStream(new FileInputStream(f));
-        byte[] buf = new byte[2048];
-        int len = 0;
-        response.reset();
-        response.setContentType("application/vnd.ms-excel");
-        response.setHeader("Content-Disposition", "inline; filename=" + toUTF8(f.getName()));
-        OutputStream out = response.getOutputStream();
-        while ((len = br.read(buf)) > 0)
-            out.write(buf, 0, len);
-        out.flush();
-        br.close();
-        out.close();
-    }
-
     public String toUTF8(String s) {
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < s.length(); i++) {
