@@ -1,13 +1,7 @@
-/**   
- * @Title: DrawApplyController.java 
- * @Package: com.rongyi.tms.web.controller 
- * @Description: TODO
- * @author user  
- * @date 2015年5月14日 下午2:34:57 
- */
 
 package com.rongyi.tms.web.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -440,6 +434,12 @@ public class PayController extends BaseController {
 			LOGGER.info("----statement list ------");
 			Map<String, Object> map = getJsonMap(request);
 			String currpage = (String) map.get("currpage");
+			List<Byte> statusList = new ArrayList<Byte>();
+			statusList.add(ConstantEnum.STATEMENT_STATUE_6.getCodeByte());
+			statusList.add(ConstantEnum.STATEMENT_STATUE_9.getCodeByte());
+			statusList.add(ConstantEnum.STATEMENT_STATUE_10.getCodeByte());
+			statusList.add(ConstantEnum.STATEMENT_STATUE_11.getCodeByte());
+			map.put("statusList", statusList);
 			List<PaymentStatementDto> list = paymentStatementService.selectPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE);
 			double pageTotle = paymentStatementService.selectPageListCount(map);
 			Integer rowContNum = (int) Math.ceil(pageTotle / Constant.PAGE.PAGESIZE);
@@ -461,11 +461,11 @@ public class PayController extends BaseController {
 	 **/
 	@RequestMapping("/statementOffPay")
 	@ResponseBody
-	public ResponseResult statementOffPay(@RequestParam String ids,@RequestParam String payMemo){
+	public ResponseResult statementOffPay(@RequestParam String ids,@RequestParam String tradeNo){
 		ResponseResult responseResult = new ResponseResult();
 		try {
 			String[] idArray = ids.split(",");
-			paymentStatementService.updateByOffPay(idArray, payMemo,12);
+			paymentStatementService.updateByOffPay(idArray, tradeNo,12);
 			responseResult.setSuccess(true);
 			responseResult.setMessage("操作成功");
 		} catch (Exception e) {

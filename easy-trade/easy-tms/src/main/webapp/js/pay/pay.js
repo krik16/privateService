@@ -419,18 +419,18 @@ function statementPay(paymentIds, type,payChannel,ids){
  */
 function offPay(ids) {
 	confirmMSG(
-			"单号：<textarea rows='5' cols='42' id='payMemo' placeholder='请输入付款凭据单号'></textarea>",
+			"单号：<textarea rows='5' cols='42' id='tradeNo' placeholder='请输入付款凭据单号'></textarea>",
 			function() {
-				var payMemo = $("#payMemo").val();
-				if (trimAll(payMemo) == '') {
+				var tradeNo = $("#tradeNo").val();
+				if (trimAll(tradeNo) == '') {
 					_util.cmsTip("请输入付款凭据单号");
 					return;
 				} else {
-					if (payMemo.length > 100) {
+					if (tradeNo.length > 100) {
 						_util.cmsTip("字数超过限制！");
 						return;
 					} else {
-						statementOffPay(ids,payMemo);
+						statementOffPay(ids,tradeNo);
 					}
 			}
 	});
@@ -439,10 +439,10 @@ function offPay(ids) {
 /**
  * 
  */
-function statementOffPay(ids,payMemo){
+function statementOffPay(ids,tradeNo){
 	$.post("../pay/statementOffPay", {
 		ids:ids,
-		payMemo:payMemo
+		tradeNo:tradeNo
 	}, function(data) {
 		if (data.success == false)
 			_util.cmsTip(data.message);
