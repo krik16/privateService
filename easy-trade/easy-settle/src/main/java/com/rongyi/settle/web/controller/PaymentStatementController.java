@@ -7,6 +7,10 @@
 
 package com.rongyi.settle.web.controller;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -407,6 +411,57 @@ public class PaymentStatementController {
             return "现金";
         }
         return "支付宝";
+    }
+
+    /**
+     * 浏览器下载对账单
+     * @param id
+     * @param response
+     * @throws Exception
+     */
+    @RequestMapping("/export/{id}")
+    public void export(@PathVariable Integer id, HttpServletResponse response) throws Exception {
+        PaymentStatement paymentStatement = paymentStatementService.get(id);
+        StatementConfig statementConfig = statementConfigService.selectById(paymentStatement.getConfigId());
+        String fileName = getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime()));
+        File f = new File(propertyConfigurer.getProperty("settle.file.path") + fileName);
+        BufferedInputStream br = new BufferedInputStream(new FileInputStream(f));
+        byte[] buf = new byte[2048];
+        int len = 0;
+        response.reset();
+        response.setContentType("application/x-msdownload");
+        response.setHeader("Content-Disposition", "attachment; filename=" + toUTF8(f.getName()));
+        OutputStream out = response.getOutputStream();
+        while ((len = br.read(buf)) > 0)
+            out.write(buf, 0, len);
+        out.flush();
+        br.close();
+        out.close();
+    }
+
+    public String toUTF8(String s) {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c >= 0 && c <= 255) {
+                sb.append(c);
+            } else {
+                byte[] b;
+                try {
+                    b = Character.toString(c).getBytes("utf-8");
+                } catch (Exception ex) {
+                    System.out.println(ex);
+                    b = new byte[0];
+                }
+                for (int j = 0; j < b.length; j++) {
+                    int k = b[j];
+                    if (k < 0)
+                        k += 256;
+                    sb.append("%" + Integer.toHexString(k).toUpperCase());
+                }
+            }
+        }
+        return sb.toString();
     }
 }
 
