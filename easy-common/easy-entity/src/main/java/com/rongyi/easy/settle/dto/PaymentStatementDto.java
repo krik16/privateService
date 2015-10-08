@@ -49,6 +49,10 @@ public class PaymentStatementDto implements Serializable {
 
     /**  付款单号 */
     private String payNo;
+    
+    private Date payTime;
+    
+    private String tradeNo;
 
     /**  支付姓名 */
     private String payName;
@@ -204,4 +208,21 @@ public class PaymentStatementDto implements Serializable {
     public void setPayName(String payName) {
         this.payName = payName;
     }
+
+	public String getTradeNo() {
+		return tradeNo;
+	}
+
+	public void setTradeNo(String tradeNo) {
+		this.tradeNo = tradeNo;
+	}
+
+	public Date getPayTime() {
+		return payTime;
+	}
+
+	public void setPayTime(Date payTime) {
+		this.payTime = payTime;
+	}
+    
 }
