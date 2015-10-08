@@ -49,7 +49,7 @@ public interface StatementConfigService {
 	 * @Author:  柯军
 	 * @datetime:2015年9月17日上午11:24:02
 	 **/
-	public abstract void insert(StatementConfig statementConfig);
+	public abstract int insert(StatementConfig statementConfig);
 	
 	/**	
 	 * @Description: 更新

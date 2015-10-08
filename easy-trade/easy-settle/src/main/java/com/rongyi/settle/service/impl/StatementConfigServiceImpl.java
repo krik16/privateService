@@ -63,8 +63,8 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 	}
 
 	@Override
-	public void insert(StatementConfig statementConfig) {
-		this.getBaseDao().insertBySql(NAMESPACE + ".insert", statementConfig);
+	public int insert(StatementConfig statementConfig) {
+		return this.getBaseDao().insertBySql(NAMESPACE + ".insert", statementConfig);
 	}
 
 	@Override
@@ -82,6 +82,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 	@Override
 	public void saveStatementConfigAndInfo(StatementConfig statementConfig, BussinessInfo bussinessInfo) {
 		insert(statementConfig);
+		bussinessInfo.setConfigId(statementConfig.getId());
 		bussinessInfoService.insert(bussinessInfo);
 	}
 

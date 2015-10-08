@@ -8,6 +8,7 @@
 
 package com.rongyi.settle.util;
 import java.lang.reflect.InvocationTargetException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -15,6 +16,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.ConversionException;
+import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.commons.beanutils.Converter;
+import org.apache.log4j.Logger;
 
 
 /**	
@@ -26,6 +31,8 @@ import org.apache.commons.beanutils.BeanUtils;
 
 
 public class MapUtils extends org.apache.commons.collections.MapUtils {
+	
+	private static final Logger LOGGER = Logger.getLogger(MapUtils.class);
 
 	/**
 	 * 将Map转换为Object
@@ -82,6 +89,7 @@ public class MapUtils extends org.apache.commons.collections.MapUtils {
 	public static <T, V> T toObject(T object, Map<String, V> map, boolean toCamelCase) throws InstantiationException, IllegalAccessException, InvocationTargetException {
 		if (toCamelCase)
 			map = toCamelCaseMap(map);
+		dataConvert(object,map);
 		BeanUtils.populate(object, map);
 		return object;
 	}
@@ -193,5 +201,49 @@ public class MapUtils extends org.apache.commons.collections.MapUtils {
 		return newMap;
 	}
 
+    /**	
+     * @param <V>
+     * @Description: 解决无法将string类型的时间字符串转换为date的问题 
+     * @param map
+     * @param obj	
+     * @Author:  柯军
+     * @datetime:2015年10月8日上午11:20:51
+     **/
+    public static <V> void dataConvert(Object obj,Map<String, V> map) {  
+        ConvertUtils.register(new Converter()  
+        {  
+            @SuppressWarnings("rawtypes")  
+            @Override  
+            public Object convert(Class arg0, Object arg1)  
+            {  
+                if(arg1 == null)  
+                {  
+                    return null;  
+                }  
+                if(!(arg1 instanceof String))  
+                {  
+                    throw new ConversionException("只支持字符串转换 !");  
+                }  
+                String str = (String)arg1;  
+                if(str.trim().equals(""))  
+                {  
+                    return null;  
+                }  
+                   
+                SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+                   
+                try{  
+                    return sd.parse(str);  
+                }  
+                catch(Exception e)  
+                {  
+                  LOGGER.error("无法转换字符串"+str+"为date类型");
+                  return null;
+                }  
+                   
+            }  
+               
+        }, java.util.Date.class);  
+    }
 }
 
