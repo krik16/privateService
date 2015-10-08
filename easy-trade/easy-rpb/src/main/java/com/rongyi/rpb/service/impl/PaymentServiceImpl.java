@@ -613,7 +613,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 				if (Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1 == paymentEntity.getPayChannel()) {// 微信自动退款
 					Map<String, Object> resultMap = weixinPayService.weixinRefund(paymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), paymentEntity.getAmountMoney().doubleValue(),
 							payNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE6);
-					if (Constants.RESULT.SUCCESS.equals(resultMap.get("result")))
+					if (Constants.RESULT.SUCCESS.equals(resultMap.get("result")) || ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr().equals(resultMap.get("result")))
 						refundPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
 				}
 				insert(refundPaymentEntity);
