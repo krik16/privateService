@@ -141,10 +141,10 @@ public class ExcelUtils {
                 discount.setCellValue(couponCodeExcelDto.getDiscountAmount());
 
                 XSSFCell buyerPhone = row15.createCell(13);
-                buyerPhone.setCellValue(couponCodeExcelDto.getBuyerPhone());
+                buyerPhone.setCellValue(encryptPhone(couponCodeExcelDto.getBuyerPhone()));
 
                 XSSFCell guidePhone = row15.createCell(14);
-                guidePhone.setCellValue(couponCodeExcelDto.getGuidePhone());
+                guidePhone.setCellValue(encryptPhone(couponCodeExcelDto.getGuidePhone()));
 
                 XSSFCell buyerName = row15.createCell(15);
                 buyerName.setCellValue(couponCodeExcelDto.getBuyerName());
@@ -165,6 +165,10 @@ public class ExcelUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static String encryptPhone(String phone) {
+        return phone.substring(0, 3) + "****" + phone.substring(7, phone.length());
     }
 
     public static void main(String[] args) {
