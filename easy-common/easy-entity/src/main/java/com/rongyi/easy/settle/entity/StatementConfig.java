@@ -80,7 +80,7 @@ public class StatementConfig implements Serializable {
     /**
      * 生成时间时分部分
      */
-    private Date generateHmTime;
+    private String generateHmTime;
 
     /**
      * 对账单发送时间
@@ -253,15 +253,15 @@ public class StatementConfig implements Serializable {
         this.generateHeaderTime = generateHeaderTime;
     }
 
-    public Date getGenerateHmTime() {
-        return generateHmTime;
-    }
+    public String getGenerateHmTime() {
+		return generateHmTime;
+	}
 
-    public void setGenerateHmTime(Date generateHmTime) {
-        this.generateHmTime = generateHmTime;
-    }
+	public void setGenerateHmTime(String generateHmTime) {
+		this.generateHmTime = generateHmTime;
+	}
 
-    public Date getSendTime() {
+	public Date getSendTime() {
         return sendTime;
     }
 
