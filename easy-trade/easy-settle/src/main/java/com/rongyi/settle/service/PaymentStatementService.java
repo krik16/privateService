@@ -34,9 +34,9 @@ public interface PaymentStatementService {
      */
     boolean updatePaymentStatusByIds(List<Integer> ids, Integer status, String desc, String userId);
 
-    List<PaymentStatementDetailDto> selectForStatementDetails(String shopId, String mallId, Date startTime, Date endTime, Date cycleStartTime, Date cycleEndTime);
+    List<PaymentStatementDetailDto> selectForStatementDetails(String shopId, Date startTime, Date endTime, Date cycleStartTime, Date cycleEndTime, String shopName, String mallId, String mallName);
 
-    List<CouponExcelDto> selectForCouponExcelDto(String shopId, String mallId, Date startTime, Date endTime, Date cycleStartTime, Date cycleEndTime);
+    List<CouponExcelDto> selectForCouponExcelDto(String shopId, Date startTime, Date endTime, Date cycleStartTime, Date cycleEndTime);
 
     void cancel(Integer id);
 

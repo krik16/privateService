@@ -279,6 +279,9 @@
     <result column="discount" property="discount" jdbcType="INTEGER" />
     <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
     <result column="shop_id" property="shopId" jdbcType="VARCHAR" />
+    <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
+    <result column="mall_id" property="mallId" jdbcType="VARCHAR" />
+    <result column="mall_name" property="mallName" jdbcType="VARCHAR" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="guide_name" property="guideName" jdbcType="VARCHAR" />
     <result column="guide_phone" property="guidePhone" jdbcType="VARCHAR" />
@@ -289,7 +292,7 @@
     (CASE tor.pay_channel WHEN 1 THEN '支付宝' WHEN 5 THEN '微信' WHEN 3 THEN '支付宝' ELSE '其他' END) as pay_channel,tuc.orig_price, ROUND(tor.pay_amount/tor.code_num, 0) as pay_amount, ROUND(tor.hb_discount/tor.code_num, 0) as hb_discount,
     ROUND(tor.score_discount/tor.code_num, 0) as score_discount,
     tuc.orig_price-tuc.unit_price discount,tuc.user_phone,tuc.shop_id,
-    tor.user_name,rui.user_name as guide_name,rui.user_phone as guide_phone
+    #{shopName,jdbcType=VARCHAR},#{mallId,jdbcType=VARCHAR},#{mallName,jdbcType=VARCHAR},tor.user_name,rui.user_name as guide_name,rui.user_phone as guide_phone
     from ry_trade.trade_user_code tuc
     join ry_trade.trade_order tor on tuc.order_id=tor.id
     left join ry_rmmm.rmmm_user_info rui on rui.id=tuc.checked_user_id

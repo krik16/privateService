@@ -112,22 +112,23 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
     }
 
     @Override
-    public List<PaymentStatementDetailDto> selectForStatementDetails(String shopId, String mallId, Date startTime, Date endTime, Date cycleStartTime, Date cycleEndTime) {
+    public List<PaymentStatementDetailDto> selectForStatementDetails(String shopId, Date startTime, Date endTime, Date cycleStartTime, Date cycleEndTime, String shopName, String mallId, String mallName) {
         Map map = new HashMap();
         map.put("shopId", shopId);
-        map.put("mallId", mallId);
         map.put("cycleStartTime", cycleStartTime);
         map.put("cycleEndTime", cycleEndTime);
         map.put("startTime", startTime);
         map.put("endTime", endTime);
+        map.put("shopName", shopName);
+        map.put("mallId", mallId);
+        map.put("mallName", mallName);
         return this.getBaseDao().selectListBySql(NAMESPACE + ".selectForStatementDetails", map);
     }
 
     @Override
-    public List<CouponExcelDto> selectForCouponExcelDto(String shopId, String mallId, Date startTime, Date endTime, Date cycleStartTime, Date cycleEndTime) {
+    public List<CouponExcelDto> selectForCouponExcelDto(String shopId, Date startTime, Date endTime, Date cycleStartTime, Date cycleEndTime) {
         Map map = new HashMap();
         map.put("shopId", shopId);
-        map.put("mallId", mallId);
         map.put("cycleStartTime", cycleStartTime);
         map.put("cycleEndTime", cycleEndTime);
         map.put("startTime", startTime);
