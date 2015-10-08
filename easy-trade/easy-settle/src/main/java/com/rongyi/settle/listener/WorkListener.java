@@ -19,9 +19,9 @@ public class WorkListener implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		logger.info("Starting listener ...");
-		WorkThread workThread = new WorkThread();
-		workThread.start();
+//		logger.info("Starting listener ...");
+//		WorkThread workThread = new WorkThread();
+//		workThread.start();
 	}
 
 	@Override

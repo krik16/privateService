@@ -53,7 +53,7 @@ public class StatementConfigServiceTest extends BaseTest{
 		statementConfig.setEffectStartTime(new Date());
 		statementConfig.setEffectEndTime(new Date());
 		statementConfig.setGenerateHeaderTime("23");
-		statementConfig.setGenerateHmTime(new Date());
+		statementConfig.setGenerateHmTime("11:00");
 		statementConfig.setLinkedRuleCode("abc123");
 		statementConfig.setPayChannel((byte)0);
 		statementConfig.setPayMode((byte)1);

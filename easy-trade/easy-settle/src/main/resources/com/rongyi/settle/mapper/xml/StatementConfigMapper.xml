@@ -1,46 +1,56 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
-<mapper namespace="com.rongyi.settle.mapper.StatementConfigMapper" >
-  <resultMap id="BaseResultMap" type="com.rongyi.easy.settle.entity.StatementConfig" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="rule_code" property="ruleCode" jdbcType="VARCHAR" />
-    <result column="cooperate_type" property="cooperateType" jdbcType="TINYINT" />
-    <result column="biz_id" property="bussinessId" jdbcType="VARCHAR" />
-    <result column="biz_type" property="bussinessType" jdbcType="TINYINT" />
-    <result column="biz_code" property="bussinessCode" jdbcType="VARCHAR" />
-    <result column="biz_name" property="bussinessName" jdbcType="VARCHAR" />
-    <result column="count_cycle" property="countCycle" jdbcType="TINYINT" />
-    <result column="cycle_start_time" property="cycleStartTime" jdbcType="TIMESTAMP" />
-    <result column="cycle_end_time" property="cycleEndTime" jdbcType="TIMESTAMP" />
-    <result column="is_loop" property="isLoop" jdbcType="TINYINT" />
-    <result column="verify_type" property="verifyType" jdbcType="TINYINT" />
-    <result column="gen_header_time" property="generateHeaderTime" jdbcType="VARCHAR" />
-    <result column="gen_hm_time" property="generateHmTime" jdbcType="TIME" />
-    <result column="send_time" property="sendTime" jdbcType="TIME" />
-    <result column="datum_type" property="datumType" jdbcType="TINYINT" />
-    <result column="pay_mode" property="payMode" jdbcType="TINYINT" />
-    <result column="regular_day" property="regularDay" jdbcType="VARCHAR" />
-    <result column="roll_day" property="rollDay" jdbcType="VARCHAR" />
-    <result column="roll_type" property="rollType" jdbcType="TINYINT" />
-    <result column="effect_start_time" property="effectStartTime" jdbcType="TIMESTAMP" />
-    <result column="effect_end_time" property="effectEndTime" jdbcType="TIMESTAMP" />
-    <result column="pay_channel" property="payChannel" jdbcType="TINYINT" />
-    <result column="contract_no" property="contractNo" jdbcType="VARCHAR" />
-    <result column="link_rule_code" property="linkedRuleCode" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="TINYINT" />
-    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
-    <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
-    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, rule_code, cooperate_type, biz_type, biz_code, biz_name, count_cycle, 
-    cycle_start_time, cycle_end_time, is_loop, verify_type, gen_header_time, gen_hm_time, 
-    send_time, datum_type, pay_mode, regular_day, roll_day, roll_type, effect_start_time, 
-    effect_end_time, pay_channel, contract_no, link_rule_code, `status`, create_at, 
-    is_delete, create_by
-  </sql>
-  
-  <sql id="Base_list_where_clause">
+<mapper namespace="com.rongyi.settle.mapper.StatementConfigMapper">
+	<resultMap id="BaseResultMap" type="com.rongyi.easy.settle.entity.StatementConfig">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="rule_code" property="ruleCode" jdbcType="VARCHAR" />
+		<result column="cooperate_type" property="cooperateType"
+			jdbcType="TINYINT" />
+		<result column="biz_id" property="bussinessId" jdbcType="VARCHAR" />
+		<result column="biz_type" property="bussinessType" jdbcType="TINYINT" />
+		<result column="biz_code" property="bussinessCode" jdbcType="VARCHAR" />
+		<result column="biz_name" property="bussinessName" jdbcType="VARCHAR" />
+		<result column="count_cycle" property="countCycle" jdbcType="TINYINT" />
+		<result column="cycle_start_time" property="cycleStartTime"
+			jdbcType="TIMESTAMP" />
+		<result column="cycle_end_time" property="cycleEndTime"
+			jdbcType="TIMESTAMP" />
+		<result column="is_loop" property="isLoop" jdbcType="TINYINT" />
+		<result column="verify_type" property="verifyType" jdbcType="TINYINT" />
+		<result column="gen_header_time" property="generateHeaderTime"
+			jdbcType="VARCHAR" />
+		<result column="gen_hm_time" property="generateHmTime"
+			jdbcType="VARCHAR" />
+		<result column="send_time" property="sendTime" jdbcType="TIME" />
+		<result column="datum_type" property="datumType" jdbcType="TINYINT" />
+		<result column="pay_mode" property="payMode" jdbcType="TINYINT" />
+		<result column="regular_day" property="regularDay" jdbcType="VARCHAR" />
+		<result column="roll_day" property="rollDay" jdbcType="VARCHAR" />
+		<result column="roll_type" property="rollType" jdbcType="TINYINT" />
+		<result column="effect_start_time" property="effectStartTime"
+			jdbcType="TIMESTAMP" />
+		<result column="effect_end_time" property="effectEndTime"
+			jdbcType="TIMESTAMP" />
+		<result column="pay_channel" property="payChannel" jdbcType="TINYINT" />
+		<result column="contract_no" property="contractNo" jdbcType="VARCHAR" />
+		<result column="link_rule_code" property="linkedRuleCode"
+			jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="TINYINT" />
+		<result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+		<result column="is_delete" property="isDelete" jdbcType="TINYINT" />
+		<result column="create_by" property="createBy" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, rule_code, cooperate_type, biz_type, biz_code, biz_name, count_cycle,
+		cycle_start_time, cycle_end_time, is_loop, verify_type,
+		gen_header_time, gen_hm_time,
+		send_time, datum_type, pay_mode, regular_day, roll_day, roll_type,
+		effect_start_time,
+		effect_end_time, pay_channel, contract_no, link_rule_code, `status`, create_at,
+		is_delete, create_by
+	</sql>
+
+	<sql id="Base_list_where_clause">
 		<!-- 商户类型 -->
 		<if test="bussinessType != null">
 			AND biz_type = #{bussinessType}
@@ -52,136 +62,157 @@
 		</if>
 		<!-- 创建时间 -->
 		<if test="createAtStart != null and createAtStart != ''">
-			AND create_at >=  #{createAtStart}
+			AND create_at >= #{createAtStart}
 		</if>
 		<if test="createAtEnd != null and createAtEnd != ''">
 			AND #{createAtEnd} >= create_at
 		</if>
-		
- </sql>
-  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from payment_bill_config
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="updateDelete" parameterType="java.lang.Integer" >
-    update payment_bill_config
-    set is_delete = #{is_delete,jdbcType=INTEGER} 
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.rongyi.easy.settle.entity.StatementConfig" useGeneratedKeys="true" keyProperty="id" >
-    insert into payment_bill_config (rule_code, cooperate_type, biz_type, 
-      biz_code, biz_name, count_cycle, 
-      cycle_start_time, cycle_end_time, is_loop, 
-      verify_type, gen_header_time, gen_hm_time, 
-      send_time, datum_type, pay_mode, 
-      regular_day, roll_day, roll_type, 
-      effect_start_time, effect_end_time, pay_channel, 
-      contract_no, link_rule_code, `status`, 
-      create_at, is_delete, create_by
-      )
-    values (#{ruleCode,jdbcType=VARCHAR}, #{cooperateType,jdbcType=TINYINT}, #{bussinessType,jdbcType=TINYINT}, 
-      #{bussinessCode,jdbcType=VARCHAR}, #{bussinessName,jdbcType=VARCHAR}, #{countCycle,jdbcType=TINYINT}, 
-      #{cycleStartTime,jdbcType=TIMESTAMP}, #{cycleEndTime,jdbcType=TIMESTAMP}, #{isLoop,jdbcType=TINYINT}, 
-      #{verifyType,jdbcType=TINYINT}, #{generateHeaderTime,jdbcType=VARCHAR}, #{generateHmTime,jdbcType=TIME}, 
-      #{sendTime,jdbcType=TIME}, #{datumType,jdbcType=TINYINT}, #{payMode,jdbcType=TINYINT}, 
-      #{regularDay,jdbcType=VARCHAR}, #{rollDay,jdbcType=VARCHAR}, #{rollType,jdbcType=TINYINT}, 
-      #{effectStartTime,jdbcType=TIMESTAMP}, #{effectEndTime,jdbcType=TIMESTAMP}, #{payChannel,jdbcType=TINYINT}, 
-      #{contractNo,jdbcType=VARCHAR}, #{linkedRuleCode,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
-      #{createAt,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=TINYINT}, #{createBy,jdbcType=VARCHAR}
-      )
-  </insert>
- 
-  <update id="update" parameterType="com.rongyi.easy.settle.entity.StatementConfig" >
-    update payment_bill_config
-    <set >
-      <if test="ruleCode != null" >
-        rule_code = #{ruleCode,jdbcType=VARCHAR},
-      </if>
-      <if test="cooperateType != null" >
-        cooperate_type = #{cooperateType,jdbcType=TINYINT},
-      </if>
-      <if test="bussinessType != null" >
-        biz_type = #{bussinessType,jdbcType=TINYINT},
-      </if>
-      <if test="bussinessCode != null" >
-        biz_code = #{bussinessCode,jdbcType=VARCHAR},
-      </if>
-      <if test="bussinessName != null" >
-        biz_name = #{bussinessName,jdbcType=VARCHAR},
-      </if>
-      <if test="countCycle != null" >
-        count_cycle = #{countCycle,jdbcType=TINYINT},
-      </if>
-      <if test="cycleStartTime != null" >
-        cycle_start_time = #{cycleStartTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="cycleEndTime != null" >
-        cycle_end_time = #{cycleEndTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isLoop != null" >
-        is_loop = #{isLoop,jdbcType=TINYINT},
-      </if>
-      <if test="verifyType != null" >
-        verify_type = #{verifyType,jdbcType=TINYINT},
-      </if>
-      <if test="generateHeaderTime != null" >
-        gen_header_time = #{generateHeaderTime,jdbcType=VARCHAR},
-      </if>
-      <if test="generateHmTime != null" >
-        gen_hm_time = #{generateHmTime,jdbcType=TIME},
-      </if>
-      <if test="sendTime != null" >
-        send_time = #{sendTime,jdbcType=TIME},
-      </if>
-      <if test="datumType != null" >
-        datum_type = #{datumType,jdbcType=TINYINT},
-      </if>
-      <if test="payMode != null" >
-        pay_mode = #{payMode,jdbcType=TINYINT},
-      </if>
-      <if test="regularDay != null" >
-        regular_day = #{regularDay,jdbcType=VARCHAR},
-      </if>
-      <if test="rollDay != null" >
-        roll_day = #{rollDay,jdbcType=VARCHAR},
-      </if>
-      <if test="rollType != null" >
-        roll_type = #{rollType,jdbcType=TINYINT},
-      </if>
-      <if test="effectStartTime != null" >
-        effect_start_time = #{effectStartTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="effectEndTime != null" >
-        effect_end_time = #{effectEndTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="payChannel != null" >
-        pay_channel = #{payChannel,jdbcType=TINYINT},
-      </if>
-      <if test="contractNo != null" >
-        contract_no = #{contractNo,jdbcType=VARCHAR},
-      </if>
-      <if test="linkedRuleCode != null" >
-        link_rule_code = #{linkedRuleCode,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        `status` = #{status,jdbcType=TINYINT},
-      </if>
-      <if test="createAt != null" >
-        create_at = #{createAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isDelete != null" >
-        is_delete = #{isDelete,jdbcType=TINYINT},
-      </if>
-      <if test="createBy != null" >
-        create_by = #{createBy,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
- 
- 	<select id="selectPageList" resultMap="BaseResultMap"
+
+	</sql>
+	<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from payment_bill_config
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="updateDelete" parameterType="java.lang.Integer">
+		update payment_bill_config
+		set is_delete = #{is_delete,jdbcType=INTEGER}
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.rongyi.easy.settle.entity.StatementConfig"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into payment_bill_config (rule_code, cooperate_type, biz_type,
+		biz_id,biz_code, biz_name, count_cycle,
+		cycle_start_time, cycle_end_time, is_loop,
+		verify_type, gen_header_time, gen_hm_time,
+		send_time, datum_type, pay_mode,
+		regular_day, roll_day, roll_type,
+		effect_start_time, effect_end_time, pay_channel,
+		contract_no, link_rule_code,
+		<if test="status != null">
+			`status`,
+		</if>
+		create_at,
+		<if test="isDelete != null">
+			is_delete,
+		</if>
+		create_by
+		)
+		values (#{ruleCode,jdbcType=VARCHAR}, #{cooperateType,jdbcType=TINYINT},
+		#{bussinessType,jdbcType=TINYINT},
+		#{bussinessId,jdbcType=INTEGER},
+		#{bussinessCode,jdbcType=VARCHAR}, #{bussinessName,jdbcType=VARCHAR}, #{countCycle,jdbcType=TINYINT},
+		#{cycleStartTime,jdbcType=TIMESTAMP},
+		#{cycleEndTime,jdbcType=TIMESTAMP}, #{isLoop,jdbcType=TINYINT},
+		#{verifyType,jdbcType=TINYINT},
+		#{generateHeaderTime,jdbcType=VARCHAR},
+		#{generateHmTime,jdbcType=TIME},
+		#{sendTime,jdbcType=TIME}, #{datumType,jdbcType=TINYINT}, #{payMode,jdbcType=TINYINT},
+		#{regularDay,jdbcType=VARCHAR}, #{rollDay,jdbcType=VARCHAR},
+		#{rollType,jdbcType=TINYINT},
+		#{effectStartTime,jdbcType=TIMESTAMP}, #{effectEndTime,jdbcType=TIMESTAMP}, #{payChannel,jdbcType=TINYINT},
+		#{contractNo,jdbcType=VARCHAR}, #{linkedRuleCode,jdbcType=VARCHAR},
+		<if test="status != null">
+			#{status,jdbcType=TINYINT},
+		</if>
+		#{createAt,jdbcType=TIMESTAMP},
+		<if test="isDelete != null">
+			is_delete = #{isDelete,jdbcType=TINYINT},
+		</if>
+		#{createBy,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.rongyi.easy.settle.entity.StatementConfig">
+		update payment_bill_config
+		<set>
+			<if test="ruleCode != null">
+				rule_code = #{ruleCode,jdbcType=VARCHAR},
+			</if>
+			<if test="cooperateType != null">
+				cooperate_type = #{cooperateType,jdbcType=TINYINT},
+			</if>
+			<if test="bussinessType != null">
+				biz_type = #{bussinessType,jdbcType=TINYINT},
+			</if>
+			<if test="bussinessCode != null">
+				biz_code = #{bussinessCode,jdbcType=VARCHAR},
+			</if>
+			<if test="bussinessName != null">
+				biz_name = #{bussinessName,jdbcType=VARCHAR},
+			</if>
+			<if test="countCycle != null">
+				count_cycle = #{countCycle,jdbcType=TINYINT},
+			</if>
+			<if test="cycleStartTime != null">
+				cycle_start_time = #{cycleStartTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="cycleEndTime != null">
+				cycle_end_time = #{cycleEndTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isLoop != null">
+				is_loop = #{isLoop,jdbcType=TINYINT},
+			</if>
+			<if test="verifyType != null">
+				verify_type = #{verifyType,jdbcType=TINYINT},
+			</if>
+			<if test="generateHeaderTime != null">
+				gen_header_time = #{generateHeaderTime,jdbcType=VARCHAR},
+			</if>
+			<if test="generateHmTime != null">
+				gen_hm_time = #{generateHmTime,jdbcType=VARCHAR},
+			</if>
+			<if test="sendTime != null">
+				send_time = #{sendTime,jdbcType=TIME},
+			</if>
+			<if test="datumType != null">
+				datum_type = #{datumType,jdbcType=TINYINT},
+			</if>
+			<if test="payMode != null">
+				pay_mode = #{payMode,jdbcType=TINYINT},
+			</if>
+			<if test="regularDay != null">
+				regular_day = #{regularDay,jdbcType=VARCHAR},
+			</if>
+			<if test="rollDay != null">
+				roll_day = #{rollDay,jdbcType=VARCHAR},
+			</if>
+			<if test="rollType != null">
+				roll_type = #{rollType,jdbcType=TINYINT},
+			</if>
+			<if test="effectStartTime != null">
+				effect_start_time = #{effectStartTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="effectEndTime != null">
+				effect_end_time = #{effectEndTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="payChannel != null">
+				pay_channel = #{payChannel,jdbcType=TINYINT},
+			</if>
+			<if test="contractNo != null">
+				contract_no = #{contractNo,jdbcType=VARCHAR},
+			</if>
+			<if test="linkedRuleCode != null">
+				link_rule_code = #{linkedRuleCode,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				`status` = #{status,jdbcType=TINYINT},
+			</if>
+			<if test="createAt != null">
+				create_at = #{createAt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isDelete != null">
+				is_delete = #{isDelete,jdbcType=TINYINT},
+			</if>
+			<if test="createBy != null">
+				create_by = #{createBy,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectPageList" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column_List" />
@@ -212,97 +243,118 @@
 		</where>
 	</select>
 
-  <select id="selectForSchedule" parameterType="java.util.Map" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from payment_bill_config
-    where is_delete=0 AND #{currentTime,jdbcType=TIMESTAMP} BETWEEN effect_start_time AND effect_end_time
-  </select>
+	<select id="selectForSchedule" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from payment_bill_config
+		where is_delete=0 AND #{currentTime,jdbcType=TIMESTAMP} BETWEEN
+		effect_start_time AND effect_end_time
+	</select>
 
-  <update id="updateStatusByIds" parameterType="map">
-    update payment_bill_config
-    set status=#{status, jdbcType=INTEGER}
-    <where>
-      <if test="ids != null">
-        AND id in
-        <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
-          #{item}
-        </foreach>
-      </if>
-    </where>
-  </update>
+	<update id="updateStatusByIds" parameterType="map">
+		update payment_bill_config
+		set status=#{status, jdbcType=INTEGER}
+		<where>
+			<if test="ids != null">
+				AND id in
+				<foreach item="item" index="index" collection="ids" open="("
+					separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</update>
 
-  <resultMap id="StatementDetailMap" type="com.rongyi.settle.dto.PaymentStatementDetailDto" >
-    <id column="order_no" property="orderNo" jdbcType="VARCHAR" />
-    <result column="pay_no" property="payNo" jdbcType="VARCHAR" />
-    <result column="use_time" property="useTime" jdbcType="TIMESTAMP" />
-    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
-    <result column="coupon_id" property="couponId" jdbcType="VARCHAR" />
-    <result column="coupon_code" property="couponCode" jdbcType="VARCHAR" />
-    <result column="title" property="title" jdbcType="VARCHAR" />
-    <result column="revenue_type" property="revenueType" jdbcType="VARCHAR" />
-    <result column="pay_channel" property="payChannel" jdbcType="VARCHAR" />
-    <result column="orig_price" property="origPrice" jdbcType="INTEGER" />
-    <result column="pay_amount" property="payAmount" jdbcType="INTEGER" />
-    <result column="hb_discount" property="hbDiscount" jdbcType="INTEGER" />
-    <result column="score_discount" property="scoreDiscount" jdbcType="INTEGER" />
-    <result column="discount" property="discount" jdbcType="INTEGER" />
-    <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
-    <result column="shop_id" property="shopId" jdbcType="VARCHAR" />
-    <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
-    <result column="mall_id" property="mallId" jdbcType="VARCHAR" />
-    <result column="mall_name" property="mallName" jdbcType="VARCHAR" />
-    <result column="user_name" property="userName" jdbcType="VARCHAR" />
-    <result column="guide_name" property="guideName" jdbcType="VARCHAR" />
-    <result column="guide_phone" property="guidePhone" jdbcType="VARCHAR" />
-  </resultMap>
+	<resultMap id="StatementDetailMap"
+		type="com.rongyi.settle.dto.PaymentStatementDetailDto">
+		<id column="order_no" property="orderNo" jdbcType="VARCHAR" />
+		<result column="pay_no" property="payNo" jdbcType="VARCHAR" />
+		<result column="use_time" property="useTime" jdbcType="TIMESTAMP" />
+		<result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+		<result column="coupon_id" property="couponId" jdbcType="VARCHAR" />
+		<result column="coupon_code" property="couponCode" jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="revenue_type" property="revenueType" jdbcType="VARCHAR" />
+		<result column="pay_channel" property="payChannel" jdbcType="VARCHAR" />
+		<result column="orig_price" property="origPrice" jdbcType="INTEGER" />
+		<result column="pay_amount" property="payAmount" jdbcType="INTEGER" />
+		<result column="hb_discount" property="hbDiscount" jdbcType="INTEGER" />
+		<result column="score_discount" property="scoreDiscount"
+			jdbcType="INTEGER" />
+		<result column="discount" property="discount" jdbcType="INTEGER" />
+		<result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+		<result column="shop_id" property="shopId" jdbcType="VARCHAR" />
+		<result column="shop_name" property="shopName" jdbcType="VARCHAR" />
+		<result column="mall_id" property="mallId" jdbcType="VARCHAR" />
+		<result column="mall_name" property="mallName" jdbcType="VARCHAR" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="guide_name" property="guideName" jdbcType="VARCHAR" />
+		<result column="guide_phone" property="guidePhone" jdbcType="VARCHAR" />
+	</resultMap>
 
-  <select id="selectForStatementDetails" parameterType="java.util.Map" resultMap="StatementDetailMap">
-    select tor.order_no,tor.pay_no,tuc.use_time,tor.create_at,tuc.coupon_id,tuc.coupon_code,tuc.title,'收入' as revenue_type,
-    (CASE tor.pay_channel WHEN 1 THEN '支付宝' WHEN 5 THEN '微信' WHEN 3 THEN '支付宝' ELSE '其他' END) as pay_channel,tuc.orig_price, ROUND(tor.pay_amount/tor.code_num, 0) as pay_amount, ROUND(tor.hb_discount/tor.code_num, 0) as hb_discount,
-    ROUND(tor.score_discount/tor.code_num, 0) as score_discount,
-    tuc.orig_price-tuc.unit_price discount,tuc.user_phone,tuc.shop_id,
-    rsi.shop_name,rsi.mall_id,mc.mall_name,tor.user_name,rui.user_name as guide_name,rui.user_phone as guide_phone
-    from ry_trade.trade_user_code tuc
-    join ry_trade.trade_order tor on tuc.order_id=tor.id
-    join ry_rmmm.shop_info rsi on rsi.shop_mid=tuc.shop_id
-    left join ry_rmmm.mall_cooperate mc on mc.id=rsi.mall_id
-    left join ry_rmmm.rmmm_user_info rui on rui.id=tuc.checked_user_id
-    where tuc.status=2
-    and tuc.use_time between(#{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP})
-    and tuc.use_time between(#{cycleStartTime,jdbcType=TIMESTAMP}, #{cycleEndTime,jdbcType=TIMESTAMP})
-    <if test="shopId != null" >
-      AND tuc.shop_id = #{shopId,jdbcType=VARCHAR}
-    </if>
-    <if test="mallId != null" >
-      AND mc.mall_mid = #{mallId,jdbcType=VARCHAR}
-    </if>
-  </select>
+	<select id="selectForStatementDetails" parameterType="java.util.Map"
+		resultMap="StatementDetailMap">
+		select
+		tor.order_no,tor.pay_no,tuc.use_time,tor.create_at,tuc.coupon_id,tuc.coupon_code,tuc.title,'收入'
+		as revenue_type,
+		(CASE tor.pay_channel WHEN 1 THEN '支付宝' WHEN 5 THEN '微信' WHEN 3 THEN '支付宝'
+		ELSE '其他' END) as pay_channel,tuc.orig_price,
+		ROUND(tor.pay_amount/tor.code_num, 0) as pay_amount,
+		ROUND(tor.hb_discount/tor.code_num, 0) as hb_discount,
+		ROUND(tor.score_discount/tor.code_num, 0) as score_discount,
+		tuc.orig_price-tuc.unit_price discount,tuc.user_phone,tuc.shop_id,
+		rsi.shop_name,rsi.mall_id,mc.mall_name,tor.user_name,rui.user_name as
+		guide_name,rui.user_phone as guide_phone
+		from ry_trade.trade_user_code tuc
+		join ry_trade.trade_order tor on tuc.order_id=tor.id
+		join ry_rmmm.shop_info rsi on rsi.shop_mid=tuc.shop_id
+		left join ry_rmmm.mall_cooperate mc on mc.id=rsi.mall_id
+		left join ry_rmmm.rmmm_user_info rui on rui.id=tuc.checked_user_id
+		where tuc.status=2
+		and tuc.use_time between(#{startTime,jdbcType=TIMESTAMP},
+		#{endTime,jdbcType=TIMESTAMP})
+		and tuc.use_time between(#{cycleStartTime,jdbcType=TIMESTAMP},
+		#{cycleEndTime,jdbcType=TIMESTAMP})
+		<if test="shopId != null">
+			AND tuc.shop_id = #{shopId,jdbcType=VARCHAR}
+		</if>
+		<if test="mallId != null">
+			AND mc.mall_mid = #{mallId,jdbcType=VARCHAR}
+		</if>
+	</select>
 
 
-  <resultMap id="CouponExcelDtoMap" type="com.rongyi.settle.dto.CouponExcelDto" >
-    <result column="title" property="couponName" jdbcType="VARCHAR" />
-    <result column="pay_channel" property="revenueType" jdbcType="VARCHAR" />
-    <result column="orig_price" property="couponPrice" jdbcType="INTEGER" />
-    <result column="coupon_count" property="couponCount" jdbcType="INTEGER" />
-    <result column="total_amount" property="couponTotalAmount" jdbcType="INTEGER" />
-    <result column="pay_amount" property="couponPayAmount" jdbcType="INTEGER" />
-  </resultMap>
+	<resultMap id="CouponExcelDtoMap" type="com.rongyi.settle.dto.CouponExcelDto">
+		<result column="title" property="couponName" jdbcType="VARCHAR" />
+		<result column="pay_channel" property="revenueType" jdbcType="VARCHAR" />
+		<result column="orig_price" property="couponPrice" jdbcType="INTEGER" />
+		<result column="coupon_count" property="couponCount" jdbcType="INTEGER" />
+		<result column="total_amount" property="couponTotalAmount"
+			jdbcType="INTEGER" />
+		<result column="pay_amount" property="couponPayAmount"
+			jdbcType="INTEGER" />
+	</resultMap>
 
-  <select id="selectForCouponExcelDto" parameterType="java.util.Map" resultMap="CouponExcelDtoMap">
-    select tuc.title, '收入' as pay_channel,tuc.orig_price, sum(tuc.orig_price) as total_amount, count(tuc.coupon_id) as coupon_count,, ROUND(sum(tor.pay_amount/tor.code_num),0) as pay_amount
-    from ry_trade.trade_user_code tuc
-    join ry_trade.trade_order tor on tuc.order_id=tor.id
-    join ry_rmmm.shop_info rsi on rsi.shop_mid=tuc.shop_id
-    left join ry_rmmm.mall_cooperate mc on mc.id=rsi.mall_id
-    where tuc.status=2
-    and tuc.use_time between(#{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP})
-    and tuc.use_time between(#{cycleStartTime,jdbcType=TIMESTAMP}, #{cycleEndTime,jdbcType=TIMESTAMP})
-    <if test="shopId != null" >
-      AND tuc.shop_id = #{shopId,jdbcType=VARCHAR}
-    </if>
-    <if test="mallId != null" >
-      AND mc.mall_mid = #{mallId,jdbcType=VARCHAR}
-    </if>
-  </select>
+	<select id="selectForCouponExcelDto" parameterType="java.util.Map"
+		resultMap="CouponExcelDtoMap">
+		select tuc.title, '收入' as pay_channel,tuc.orig_price,
+		sum(tuc.orig_price) as total_amount, count(tuc.coupon_id) as
+		coupon_count,, ROUND(sum(tor.pay_amount/tor.code_num),0) as pay_amount
+		from ry_trade.trade_user_code tuc
+		join ry_trade.trade_order tor on tuc.order_id=tor.id
+		join ry_rmmm.shop_info rsi on rsi.shop_mid=tuc.shop_id
+		left join ry_rmmm.mall_cooperate mc on mc.id=rsi.mall_id
+		where tuc.status=2
+		and tuc.use_time between(#{startTime,jdbcType=TIMESTAMP},
+		#{endTime,jdbcType=TIMESTAMP})
+		and tuc.use_time between(#{cycleStartTime,jdbcType=TIMESTAMP},
+		#{cycleEndTime,jdbcType=TIMESTAMP})
+		<if test="shopId != null">
+			AND tuc.shop_id = #{shopId,jdbcType=VARCHAR}
+		</if>
+		<if test="mallId != null">
+			AND mc.mall_mid = #{mallId,jdbcType=VARCHAR}
+		</if>
+	</select>
 </mapper>
