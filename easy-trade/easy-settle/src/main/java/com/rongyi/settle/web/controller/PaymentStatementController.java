@@ -7,10 +7,7 @@
 
 package com.rongyi.settle.web.controller;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -116,19 +113,6 @@ public class PaymentStatementController {
             e.printStackTrace();
             return ResponseData.failure(CodeEnum.FIAL_STATEMENT_LIST.getCodeInt(), CodeEnum.FIAL_STATEMENT_LIST.getValueStr());
         }
-    }
-
-    /**
-     * @Description: 对账单明细
-     * @param request
-     * @param map
-     * @return
-     * @Author: 柯军
-     * @datetime:2015年9月21日下午3:02:58
-     **/
-    @RequestMapping("/info")
-    public ResponseData info(HttpServletRequest request, @RequestBody Map<String, Object> map) {
-        return null;
     }
 
     /**
@@ -282,18 +266,17 @@ public class PaymentStatementController {
             List<StatementConfig> statementConfigList = statementConfigService.selectForSchedule();
             for (StatementConfig statementConfig : statementConfigList) {
                 if (SettleConstant.CountCycleType.DAY.equals(statementConfig.getCountCycle())) {
-                    Calendar instance = Calendar.getInstance();
-                    Date yesterdayFirstSecond = DateUtils.getYesterdayFirstSecond(instance);
-                    Date yesterdayLastSecond = DateUtils.getYesterdayLastSecond(instance);
+                    Date yesterdayFirstSecond = DateUtils.getYesterdayFirstSecond();
+                    Date yesterdayLastSecond = DateUtils.getYesterdayLastSecond();
                     List<PaymentStatement> paymentStatements = paymentStatementService.selectByCycleTime(statementConfig.getId(), yesterdayFirstSecond, yesterdayLastSecond);
-                    if (paymentStatements == null) {
+                    if (paymentStatements == null || paymentStatements.size() == 0) {
                         PaymentStatement paymentStatement = new PaymentStatement();
                         paymentStatement.setConfigId(statementConfig.getId());
                         paymentStatement.setRuleCode(statementConfig.getRuleCode());
                         paymentStatement.setCycleStartTime(yesterdayFirstSecond);
                         paymentStatement.setCycleEndTime(yesterdayLastSecond);
                         paymentStatement.setType(SettleConstant.PaymentStatementType.SHOP);
-                        paymentStatement.setBatchNo(getBatchNo(statementConfig.getBussinessCode(), instance));
+                        paymentStatement.setBatchNo(getBatchNoFirst(statementConfig.getBussinessCode()));
                         paymentStatement.setStatus(SettleConstant.PaymentStatementStatus.INIT);
                         paymentStatement.setCreateAt(new Date());
                         paymentStatement.setIsDelete(new Byte("0"));
@@ -310,9 +293,11 @@ public class PaymentStatementController {
     /**
      * @Description: 生成对账单
      **/
-    @RequestMapping("/generate/{id}")
-    public ResponseData generate(@PathVariable Integer id) {
+    @RequestMapping("/generate")
+    @ResponseBody
+    public ResponseData generate(@RequestBody Map<String, Object> map) {
         try {
+            Integer id = Integer.valueOf(map.get("id").toString());
             PaymentStatement paymentStatement = paymentStatementService.get(id);
             StatementConfig statementConfig = statementConfigService.selectById(paymentStatement.getConfigId());
             paymentStatementService.cancel(id);
@@ -336,8 +321,8 @@ public class PaymentStatementController {
         return ResponseData.success();
     }
 
-    private String getBatchNo(String shopId, Calendar instance) {
-        return shopId + DateUtils.getYesterdayDateSimpleStr(instance) + "01";
+    private String getBatchNoFirst(String shopId) {
+        return shopId + DateUtils.getYesterdayDateSimpleStr() + "01";
     }
 
     public String getBatchNo(String batchNo) {
@@ -358,10 +343,8 @@ public class PaymentStatementController {
             paymentStatementDetailDtoList =
                     paymentStatementService.selectForStatementDetails(statementConfig.getBussinessId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime(), shopVO.getName(), shopVO.getPosition().getMallId(), shopVO.getPosition().getMall());
             couponExcelDtoList = paymentStatementService.selectForCouponExcelDto(statementConfig.getBussinessId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime());
-            if (paymentStatementDetailDtoList != null && paymentStatementDetailDtoList.size() > 0) {
-                paymentStatementExcelDto.setShopName(shopVO.getName());
-                paymentStatementExcelDto.setMallName(shopVO.getPosition().getMall());
-            }
+            paymentStatementExcelDto.setShopName(shopVO.getName());
+            paymentStatementExcelDto.setMallName(shopVO.getPosition().getMall());
         } else if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.MALL)) {
             Map map = new HashMap();
             map.put("mallId", statementConfig.getBussinessId());
@@ -421,29 +404,34 @@ public class PaymentStatementController {
     }
 
     /**
-     * 浏览器下载对账单
-     * @param id
-     * @param response
-     * @throws Exception
-     */
-    @RequestMapping("/export/{id}")
-    public void export(@PathVariable Integer id, HttpServletResponse response) throws Exception {
-        PaymentStatement paymentStatement = paymentStatementService.get(id);
-        StatementConfig statementConfig = statementConfigService.selectById(paymentStatement.getConfigId());
-        String fileName = getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime()));
-        File f = new File(propertyConfigurer.getProperty("settle.file.path") + fileName);
-        BufferedInputStream br = new BufferedInputStream(new FileInputStream(f));
-        byte[] buf = new byte[2048];
-        int len = 0;
-        response.reset();
-        response.setContentType("application/x-msdownload");
-        response.setHeader("Content-Disposition", "attachment; filename=" + toUTF8(f.getName()));
-        OutputStream out = response.getOutputStream();
-        while ((len = br.read(buf)) > 0)
-            out.write(buf, 0, len);
-        out.flush();
-        br.close();
-        out.close();
+     * @Description: 对账单明细
+     * @param map
+     * @return
+     * @Author: xgq
+     **/
+    @RequestMapping("/info")
+    public void export(@RequestBody Map<String, Object> map, HttpServletResponse response) {
+        try {
+            Integer id = Integer.valueOf(map.get("id").toString());
+            PaymentStatement paymentStatement = paymentStatementService.get(id);
+            StatementConfig statementConfig = statementConfigService.selectById(paymentStatement.getConfigId());
+            String fileName = getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime()));
+            File f = new File(propertyConfigurer.getProperty("settle.file.path") + fileName);
+            BufferedInputStream br = new BufferedInputStream(new FileInputStream(f));
+            byte[] buf = new byte[2048];
+            int len = 0;
+            response.reset();
+            response.setContentType("application/x-msdownload");
+            response.setHeader("Content-Disposition", "attachment; filename=" + toUTF8(f.getName()));
+            OutputStream out = response.getOutputStream();
+            while ((len = br.read(buf)) > 0)
+                out.write(buf, 0, len);
+            out.flush();
+            br.close();
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public String toUTF8(String s) {

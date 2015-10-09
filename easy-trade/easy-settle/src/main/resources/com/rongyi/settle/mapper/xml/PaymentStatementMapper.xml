@@ -287,19 +287,19 @@
     <result column="guide_phone" property="guidePhone" jdbcType="VARCHAR" />
   </resultMap>
 
-  <select id="selectForStatementDetails" parameterType="java.util.Map" resultMap="StatementDetailMap">
+  <select id="selectForStatementDetails" parameterType="java.util.Map" resultMap="StatementDetailMap" statementType="STATEMENT">
     select tor.order_no,tor.pay_no,tuc.use_time,tor.create_at,tuc.coupon_id,tuc.coupon_code,tuc.title,'收入' as revenue_type,
     (CASE tor.pay_channel WHEN 1 THEN '支付宝' WHEN 5 THEN '微信' WHEN 3 THEN '支付宝' ELSE '其他' END) as pay_channel,tuc.orig_price, ROUND(tor.pay_amount/tor.code_num, 0) as pay_amount, ROUND(tor.hb_discount/tor.code_num, 0) as hb_discount,
     ROUND(tor.score_discount/tor.code_num, 0) as score_discount,
     tuc.orig_price-tuc.unit_price discount,tuc.user_phone,tuc.shop_id,
-    #{shopName,jdbcType=VARCHAR},#{mallId,jdbcType=VARCHAR},#{mallName,jdbcType=VARCHAR},tor.user_name,rui.user_name as guide_name,rui.user_phone as guide_phone
+    '${shopName}' as shop_name,'${mallId}' as mall_id,'${mallName}' as mall_name,tor.user_name,rui.user_name as guide_name,rui.user_phone as guide_phone
     from ry_trade.trade_user_code tuc
     join ry_trade.trade_order tor on tuc.order_id=tor.id
     left join ry_rmmm.rmmm_user_info rui on rui.id=tuc.checked_user_id
     where tuc.status=2
-    and tuc.use_time between(#{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP})
-    and tuc.use_time between(#{cycleStartTime,jdbcType=TIMESTAMP}, #{cycleEndTime,jdbcType=TIMESTAMP})
-    AND tuc.shop_id = #{shopId,jdbcType=VARCHAR}
+    and tuc.use_time between '${startTime}' AND '${endTime}'
+    and tuc.use_time between '${cycleStartTime}' AND '${cycleEndTime}'
+    AND tuc.shop_id = '${shopId}'
   </select>
 
 
@@ -313,12 +313,12 @@
   </resultMap>
 
   <select id="selectForCouponExcelDto" parameterType="java.util.Map" resultMap="CouponExcelDtoMap">
-    select tuc.title, '收入' as pay_channel,tuc.orig_price, sum(tuc.orig_price) as total_amount, count(tuc.coupon_id) as coupon_count,, ROUND(sum(tor.pay_amount/tor.code_num),0) as pay_amount
+    select tuc.title, '收入' as pay_channel,tuc.orig_price, sum(tuc.orig_price) as total_amount, count(tuc.coupon_id) as coupon_count, ROUND(sum(tor.pay_amount/tor.code_num),0) as pay_amount
     from ry_trade.trade_user_code tuc
     join ry_trade.trade_order tor on tuc.order_id=tor.id
     where tuc.status=2
-    and tuc.use_time between(#{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP})
-    and tuc.use_time between(#{cycleStartTime,jdbcType=TIMESTAMP}, #{cycleEndTime,jdbcType=TIMESTAMP})
+    and tuc.use_time between #{startTime,jdbcType=TIMESTAMP} AND #{endTime,jdbcType=TIMESTAMP}
+    and tuc.use_time between #{cycleStartTime,jdbcType=TIMESTAMP} AND #{cycleEndTime,jdbcType=TIMESTAMP}
     AND tuc.shop_id = #{shopId,jdbcType=VARCHAR}
   </select>
 </mapper>

@@ -18,7 +18,8 @@ public class DateUtils {
 
     public static final String lastSecond = " 23:59:59";
 
-    public static Date getYesterdayFirstSecond(Calendar instance) throws Exception {
+    public static Date getYesterdayFirstSecond() throws Exception {
+        Calendar instance = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat(FORMAT_DATE);
         instance.add(Calendar.DATE, -1);
         Date yesterday = instance.getTime();
@@ -28,7 +29,8 @@ public class DateUtils {
         return dateTimeFormat.parse(timeBegin);
     }
 
-    public static Date getYesterdayLastSecond(Calendar instance) throws Exception {
+    public static Date getYesterdayLastSecond() throws Exception {
+        Calendar instance = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat(FORMAT_DATE);
         instance.add(Calendar.DATE, -1);
         Date yesterday = instance.getTime();
@@ -38,7 +40,8 @@ public class DateUtils {
         return dateTimeFormat.parse(timeEnd);
     }
 
-    public static String getYesterdayDateSimpleStr(Calendar instance) {
+    public static String getYesterdayDateSimpleStr() {
+        Calendar instance = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat(FORMAT_DATE_SIMPLE);
         instance.add(Calendar.DATE, -1);
         Date yesterday = instance.getTime();
