@@ -61,5 +61,7 @@
 	<dubbo:reference interface="com.rongyi.rss.coupon.RoaUserCouponService" id="roaUserCouponService"  version="${dubbo.version}" check="false"/>
 	<!-- 优惠券模板信息 -->
 	<dubbo:reference interface="com.rongyi.rss.coupon.RoaCouponService" id="roaCouponService"  version="${dubbo.version}" check="false"/>
+	<!--交易中心-->
+	<dubbo:reference id="roaProxyCouponOrderService" interface="com.rongyi.rss.tradecenter.RoaProxyCouponOrderService" version="${dubbo.version}" check="false"/>
 	
 </beans>  

@@ -17,21 +17,23 @@
 		<result column="hb_code" property="hbCode" jdbcType="VARCHAR" />
 		<result column="score" property="score" jdbcType="INTEGER" />
 		<result column="rebate_code" property="rebateCode" jdbcType="VARCHAR" />
+		<result column="coupon_id" property="couponId" jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
 		trade_order.id, trade_order.order_no,trade_order.user_id,
 		trade_order.user_name,
-		trade_order.user_phone,trade_user_code.title,trade_order.`status`,ROUND(trade_order.total_amount/100,2)
+		trade_order.user_phone,trade_sub_order.unit_name as
+		title,trade_sub_order.unit_id as
+		coupon_id,trade_order.`status`,ROUND(trade_order.total_amount/100,2)
 		as total_amount,
 		trade_order.create_at,trade_order.pay_time,trade_order.discount_bitmap,trade_order.hb_code,trade_order.score,trade_order.rebate_code
 	</sql>
 	<sql id="Base_Column">
-		id, order_no,user_id,
-		user_name,
-		user_phone,`status`,ROUND(trade_order.total_amount/100,2)
-		as
-		total_amount,
-		create_at,pay_time,discount_bitmap,hb_code,score,rebate_code
+		trade_order.id, trade_order.order_no,user_id, user_name,
+		user_phone,trade_order.`status`,ROUND(trade_order.total_amount/100,2)
+		as total_amount,
+		trade_order.create_at,pay_time,trade_order.discount_bitmap,trade_order.hb_code,trade_order.score,trade_order.rebate_code,
+		trade_sub_order.unit_id as coupon_id
 	</sql>
 	<sql id="Base_where">
 		and trade_order.type = 1
@@ -57,7 +59,11 @@
 		select
 		<include refid="Base_Column" />
 		from ry_trade.trade_order
-		where id = #{id,jdbcType=INTEGER}
+		left join
+		ry_trade.trade_sub_order as
+		trade_sub_order on trade_order.id = trade_sub_order.order_id
+		where trade_order.id =
+		#{id,jdbcType=INTEGER}
 	</select>
 	<select id="selectPageList" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
@@ -65,9 +71,9 @@
 		<include refid="Base_Column_List" />
 		from ry_trade.trade_order as trade_order
 		left join
-		ry_trade.trade_user_code as trade_user_code on trade_order.id
+		ry_trade.trade_sub_order as trade_sub_order on trade_order.id
 		=
-		trade_user_code.order_id
+		trade_sub_order.order_id
 		<where>
 			<include refid="Base_where" />
 		</where>
@@ -82,10 +88,12 @@
 		select count(*) from (select
 		trade_order.id
 		from ry_trade.trade_order
-		as trade_order
-		left join ry_trade.trade_user_code as trade_user_code
-		on trade_order.id
-		= trade_user_code.order_id
+		as
+		trade_order
+		left join ry_trade.trade_sub_order as trade_sub_order
+		on
+		trade_order.id
+		= trade_sub_order.order_id
 		<where>
 			<include refid="Base_where" />
 		</where>

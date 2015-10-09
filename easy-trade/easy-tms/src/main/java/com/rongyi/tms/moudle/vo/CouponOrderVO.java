@@ -78,6 +78,8 @@ public class CouponOrderVO implements Serializable {
      */
     private String rebateCode;
     
+    private String couponId;
+    
 	public Long getId() {
 		return id;
 	}
@@ -189,4 +191,13 @@ public class CouponOrderVO implements Serializable {
 	public void setPayTime(Date payTime) {
 		this.payTime = payTime;
 	}
+
+	public String getCouponId() {
+		return couponId;
+	}
+
+	public void setCouponId(String couponId) {
+		this.couponId = couponId;
+	}
+	
 }

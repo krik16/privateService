@@ -8,6 +8,13 @@
 
 package com.rongyi.tms.service;
 
+import java.util.HashMap;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.annotations.Test;
+
+import com.rongyi.easy.settle.dto.PaymentStatementDto;
 import com.rongyi.tms.BaseTest;
 
 /**	
@@ -19,4 +26,16 @@ import com.rongyi.tms.BaseTest;
 
 public class PaymentStatemtServiceTest extends BaseTest{
 
+	@Autowired
+	PaymentStatementService paymentStatementService;
+	
+	@Test
+	public void testSelectPageList(){
+		List<PaymentStatementDto> list = paymentStatementService.selectPageList(new HashMap<String,Object>(), 0, 15);
+		System.err.println(list.size());
+		for (PaymentStatementDto paymentStatementDto : list) {
+			System.err.println(paymentStatementDto.getId());
+		}
+		System.err.println("count="+paymentStatementService.selectPageListCount(null));
+	}
 }
