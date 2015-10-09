@@ -270,7 +270,7 @@ public class PaymentStatementController {
                     Date yesterdayFirstSecond = DateUtils.getYesterdayFirstSecond(instance);
                     Date yesterdayLastSecond = DateUtils.getYesterdayLastSecond(instance);
                     List<PaymentStatement> paymentStatements = paymentStatementService.selectByCycleTime(statementConfig.getId(), yesterdayFirstSecond, yesterdayLastSecond);
-                    if (paymentStatements == null) {
+                    if (paymentStatements == null || paymentStatements.size() == 0) {
                         PaymentStatement paymentStatement = new PaymentStatement();
                         paymentStatement.setConfigId(statementConfig.getId());
                         paymentStatement.setRuleCode(statementConfig.getRuleCode());
