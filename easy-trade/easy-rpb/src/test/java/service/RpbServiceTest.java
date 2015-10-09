@@ -40,26 +40,26 @@ public class RpbServiceTest extends BaseTest{
 		System.err.println(map.toString());
 	}
 	
-//	@Test
+	@Test
 	public void testGetPaySign(){
-//		{"body":{"weidianId":"\"\"","title":"测四号",
-//			"orderType":"1","orderDetailNum":"\"\"","orderNum":"\"0909097646081639\"","totalPrice":0.01},"source":"coupon_order_queue","target":"rpb","timestamp":1441787979013,"type":"5"}
+//		{"body":{"weidianId":"\"\"","title":"测试优惠券 勿买","orderType":"1",
+//		"orderDetailNum":"\"\"","orderNum":"\"1009351119361126\"","totalPrice":0.01},"source":"coupon_order_queue","target":"rpb","timestamp":1444361283613,"type":"5"}
 		MessageEvent event = new MessageEvent();
 		event.setSource("coupon_order_queue");
 		event.setTarget("rpb");
 		event.setType("5");
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("weidianId", "");
-		map.put("title", "11");
+		map.put("weidianId","\"\"");
+		map.put("title", "测试优惠券 勿买");
 		map.put("orderType", "1");
-		map.put("orderDetailNum", "");
-		map.put("orderNum", "0909097646081639");
+		map.put("orderDetailNum", "\"\"");
+		map.put("orderNum", "1009351119361126");
 		map.put("totalPrice", "0.01");
 		event.setBody(map);
 		iRpbService.getPaySign(event);
 	}
 	
-	@Test
+//	@Test
 	@Rollback(false)
 	public void testGeneratePayment(){
 		PaymentParamVO paymentParamVO = new PaymentParamVO();

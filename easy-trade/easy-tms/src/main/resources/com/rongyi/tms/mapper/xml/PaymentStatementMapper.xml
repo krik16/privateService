@@ -105,9 +105,9 @@
 		po.id
 		as payment_id
 		from payment_bill ps
-		join payment_bill_config sc on ps.config_id=sc.id
-		join biz_info bi on bi.config_id=sc.id
-		join payment_order po on ps.pay_no = po.order_no
+		left join payment_bill_config sc on ps.config_id=sc.id
+		left join biz_info bi on bi.config_id=sc.id
+		left join payment_order po on ps.pay_no = po.order_no
 		<where>
 			<include refid="list_where_clause" />
 		</where>
