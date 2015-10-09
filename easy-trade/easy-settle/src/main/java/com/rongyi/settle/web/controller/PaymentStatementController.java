@@ -310,10 +310,11 @@ public class PaymentStatementController {
     /**
      * @Description: 生成对账单
      **/
-    @RequestMapping("/generate/{id}")
+    @RequestMapping("/generate")
     @ResponseBody
-    public ResponseData generate(@PathVariable Integer id) {
+    public ResponseData generate(@RequestBody Map<String, Object> map) {
         try {
+            Integer id = Integer.valueOf(map.get("id").toString());
             PaymentStatement paymentStatement = paymentStatementService.get(id);
             StatementConfig statementConfig = statementConfigService.selectById(paymentStatement.getConfigId());
             paymentStatementService.cancel(id);
