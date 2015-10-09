@@ -116,19 +116,6 @@ public class PaymentStatementController {
     }
 
     /**
-     * @Description: 对账单明细
-     * @param request
-     * @param map
-     * @return
-     * @Author: 柯军
-     * @datetime:2015年9月21日下午3:02:58
-     **/
-    @RequestMapping("/info")
-    public ResponseData info(HttpServletRequest request, @RequestBody Map<String, Object> map) {
-        return null;
-    }
-
-    /**
      * @Description: 对账单审核（代付款）
      * @param request
      * @param map
@@ -418,12 +405,11 @@ public class PaymentStatementController {
     }
 
     /**
-     * 浏览器下载对账单
-     *
+     * @Description: 对账单明细
      * @param map
-     * @param response
-     * @throws Exception
-     */
+     * @return
+     * @Author: xgq
+     **/
     @RequestMapping("/info")
     public void export(@RequestBody Map<String, Object> map, HttpServletResponse response) {
         try {
