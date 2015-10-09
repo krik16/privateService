@@ -266,9 +266,8 @@ public class PaymentStatementController {
             List<StatementConfig> statementConfigList = statementConfigService.selectForSchedule();
             for (StatementConfig statementConfig : statementConfigList) {
                 if (SettleConstant.CountCycleType.DAY.equals(statementConfig.getCountCycle())) {
-                    Calendar instance = Calendar.getInstance();
-                    Date yesterdayFirstSecond = DateUtils.getYesterdayFirstSecond(instance);
-                    Date yesterdayLastSecond = DateUtils.getYesterdayLastSecond(instance);
+                    Date yesterdayFirstSecond = DateUtils.getYesterdayFirstSecond();
+                    Date yesterdayLastSecond = DateUtils.getYesterdayLastSecond();
                     List<PaymentStatement> paymentStatements = paymentStatementService.selectByCycleTime(statementConfig.getId(), yesterdayFirstSecond, yesterdayLastSecond);
                     if (paymentStatements == null || paymentStatements.size() == 0) {
                         PaymentStatement paymentStatement = new PaymentStatement();
@@ -277,7 +276,7 @@ public class PaymentStatementController {
                         paymentStatement.setCycleStartTime(yesterdayFirstSecond);
                         paymentStatement.setCycleEndTime(yesterdayLastSecond);
                         paymentStatement.setType(SettleConstant.PaymentStatementType.SHOP);
-                        paymentStatement.setBatchNo(getBatchNo(statementConfig.getBussinessCode(), instance));
+                        paymentStatement.setBatchNo(getBatchNoFirst(statementConfig.getBussinessCode()));
                         paymentStatement.setStatus(SettleConstant.PaymentStatementStatus.INIT);
                         paymentStatement.setCreateAt(new Date());
                         paymentStatement.setIsDelete(new Byte("0"));
@@ -322,8 +321,8 @@ public class PaymentStatementController {
         return ResponseData.success();
     }
 
-    private String getBatchNo(String shopId, Calendar instance) {
-        return shopId + DateUtils.getYesterdayDateSimpleStr(instance) + "01";
+    private String getBatchNoFirst(String shopId) {
+        return shopId + DateUtils.getYesterdayDateSimpleStr() + "01";
     }
 
     public String getBatchNo(String batchNo) {
