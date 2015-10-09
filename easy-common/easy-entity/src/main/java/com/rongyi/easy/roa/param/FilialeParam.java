@@ -12,7 +12,7 @@ public class FilialeParam implements Serializable {
 	private static final long serialVersionUID = 5321646214285676988L;
 
 	private String id;
-	private String brandId;
+	private String brandMid;
 	private String name;
 	private Integer currentPage;
 	private Integer pageSize;
@@ -22,11 +22,11 @@ public class FilialeParam implements Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getBrandId() {
-		return brandId;
+	public String getBrandMid() {
+		return brandMid;
 	}
-	public void setBrandId(String brandId) {
-		this.brandId = brandId;
+	public void setBrandMid(String brandMid) {
+		this.brandMid = brandMid;
 	}
 	public String getName() {
 		return name;
