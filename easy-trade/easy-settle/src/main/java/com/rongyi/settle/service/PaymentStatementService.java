@@ -41,4 +41,6 @@ public interface PaymentStatementService {
     void cancel(Integer id);
 
     PaymentStatement get(Integer id);
+
+    void generate(Integer id) throws Exception;
 }
