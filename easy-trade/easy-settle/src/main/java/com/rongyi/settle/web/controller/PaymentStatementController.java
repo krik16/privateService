@@ -7,10 +7,7 @@
 
 package com.rongyi.settle.web.controller;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -422,28 +419,34 @@ public class PaymentStatementController {
 
     /**
      * 浏览器下载对账单
-     * @param id
+     *
+     * @param map
      * @param response
      * @throws Exception
      */
-    @RequestMapping("/export/{id}")
-    public void export(@PathVariable Integer id, HttpServletResponse response) throws Exception {
-        PaymentStatement paymentStatement = paymentStatementService.get(id);
-        StatementConfig statementConfig = statementConfigService.selectById(paymentStatement.getConfigId());
-        String fileName = getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime()));
-        File f = new File(propertyConfigurer.getProperty("settle.file.path") + fileName);
-        BufferedInputStream br = new BufferedInputStream(new FileInputStream(f));
-        byte[] buf = new byte[2048];
-        int len = 0;
-        response.reset();
-        response.setContentType("application/x-msdownload");
-        response.setHeader("Content-Disposition", "attachment; filename=" + toUTF8(f.getName()));
-        OutputStream out = response.getOutputStream();
-        while ((len = br.read(buf)) > 0)
-            out.write(buf, 0, len);
-        out.flush();
-        br.close();
-        out.close();
+    @RequestMapping("/info")
+    public void export(@RequestBody Map<String, Object> map, HttpServletResponse response) {
+        try {
+            Integer id = Integer.valueOf(map.get("id").toString());
+            PaymentStatement paymentStatement = paymentStatementService.get(id);
+            StatementConfig statementConfig = statementConfigService.selectById(paymentStatement.getConfigId());
+            String fileName = getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime()));
+            File f = new File(propertyConfigurer.getProperty("settle.file.path") + fileName);
+            BufferedInputStream br = new BufferedInputStream(new FileInputStream(f));
+            byte[] buf = new byte[2048];
+            int len = 0;
+            response.reset();
+            response.setContentType("application/x-msdownload");
+            response.setHeader("Content-Disposition", "attachment; filename=" + toUTF8(f.getName()));
+            OutputStream out = response.getOutputStream();
+            while ((len = br.read(buf)) > 0)
+                out.write(buf, 0, len);
+            out.flush();
+            br.close();
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public String toUTF8(String s) {
