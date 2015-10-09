@@ -1,5 +1,6 @@
 package com.rongyi.settle.service.impl;
 
+import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.rpb.vo.PaymentParamVO;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
@@ -115,10 +116,10 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
     public List<PaymentStatementDetailDto> selectForStatementDetails(String shopId, Date startTime, Date endTime, Date cycleStartTime, Date cycleEndTime, String shopName, String mallId, String mallName) {
         Map map = new HashMap();
         map.put("shopId", shopId);
-        map.put("cycleStartTime", cycleStartTime);
-        map.put("cycleEndTime", cycleEndTime);
-        map.put("startTime", startTime);
-        map.put("endTime", endTime);
+        map.put("cycleStartTime", DateUtil.dateToString(cycleStartTime));
+        map.put("cycleEndTime", DateUtil.dateToString(cycleEndTime));
+        map.put("startTime", DateUtil.dateToString(startTime));
+        map.put("endTime", DateUtil.dateToString(endTime));
         map.put("shopName", shopName);
         map.put("mallId", mallId);
         map.put("mallName", mallName);

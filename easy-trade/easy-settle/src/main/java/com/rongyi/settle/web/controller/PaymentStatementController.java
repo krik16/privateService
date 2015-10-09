@@ -311,6 +311,7 @@ public class PaymentStatementController {
      * @Description: 生成对账单
      **/
     @RequestMapping("/generate/{id}")
+    @ResponseBody
     public ResponseData generate(@PathVariable Integer id) {
         try {
             PaymentStatement paymentStatement = paymentStatementService.get(id);
@@ -358,10 +359,8 @@ public class PaymentStatementController {
             paymentStatementDetailDtoList =
                     paymentStatementService.selectForStatementDetails(statementConfig.getBussinessId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime(), shopVO.getName(), shopVO.getPosition().getMallId(), shopVO.getPosition().getMall());
             couponExcelDtoList = paymentStatementService.selectForCouponExcelDto(statementConfig.getBussinessId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime());
-            if (paymentStatementDetailDtoList != null && paymentStatementDetailDtoList.size() > 0) {
-                paymentStatementExcelDto.setShopName(shopVO.getName());
-                paymentStatementExcelDto.setMallName(shopVO.getPosition().getMall());
-            }
+            paymentStatementExcelDto.setShopName(shopVO.getName());
+            paymentStatementExcelDto.setMallName(shopVO.getPosition().getMall());
         } else if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.MALL)) {
             Map map = new HashMap();
             map.put("mallId", statementConfig.getBussinessId());
