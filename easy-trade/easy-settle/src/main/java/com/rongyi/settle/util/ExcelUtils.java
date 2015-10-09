@@ -89,14 +89,16 @@ public class ExcelUtils {
                 couponCount.setCellValue(couponExcelDto.getCouponCount());
 
                 XSSFCell origPrice = row15.getCell(7);
-                origPrice.setCellValue(AmountUtil.changFenToYuan(couponExcelDto.getCouponPrice().intValue()));
+                origPrice.setCellValue(couponExcelDto.getCouponPrice() == null ? 0 : AmountUtil.changFenToYuan(couponExcelDto.getCouponPrice().intValue()));
 
                 XSSFCell discount = row15.getCell(9);
-                Double discountValue = couponExcelDto.getCouponTotalAmount() - couponExcelDto.getCouponPayAmount();
-                discount.setCellValue(AmountUtil.changFenToYuan(discountValue.intValue()));
+                if (couponExcelDto.getCouponTotalAmount() != null && couponExcelDto.getCouponPayAmount() != null) {
+                    Double discountValue = couponExcelDto.getCouponTotalAmount() - couponExcelDto.getCouponPayAmount();
+                    discount.setCellValue(AmountUtil.changFenToYuan(discountValue.intValue()));
+                } else discount.setCellValue(0);
 
                 XSSFCell totalAmount = row15.getCell(11);
-                totalAmount.setCellValue(AmountUtil.changFenToYuan(couponExcelDto.getCouponTotalAmount().intValue()));
+                totalAmount.setCellValue(couponExcelDto.getCouponTotalAmount() == null ? 0 : AmountUtil.changFenToYuan(couponExcelDto.getCouponTotalAmount().intValue()));
             }
 
             XSSFSheet sheet1 = work.getSheetAt(1);
