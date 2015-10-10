@@ -220,14 +220,15 @@
     limit #{currentPage,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
   </select>
 
-  <select id="selectPageListCount" parameterType="java.util.Map" resultMap="DtoResultMap">
-      select pb.id from payment_bill pb
+  <select id="selectPageListCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+      select count(total.id) from  (select pb.id from payment_bill pb
        left join payment_bill_config pbc on pb.config_id=pbc.id
        left join biz_info bi on bi.config_id=pbc.id
     <where>
       <include refid="list_where_clause" />
     </where>
     group by pb.id
+    ) as total
   </select>
 
   <select id="selectByCycleTime" resultMap="BaseResultMap" parameterType="java.util.Map" >

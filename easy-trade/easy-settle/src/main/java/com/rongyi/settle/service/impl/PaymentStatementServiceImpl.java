@@ -73,7 +73,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 
     @Override
     public Integer selectPageListCount(Map<String, Object> map) {
-        return  this.getBaseDao().selectListBySql(NAMESPACE + ".selectPageListCount", map).size();
+        return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectPageListCount", map);
     }
 
     @Override

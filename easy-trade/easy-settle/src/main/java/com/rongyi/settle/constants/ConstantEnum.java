@@ -18,7 +18,7 @@ package com.rongyi.settle.constants;
 public enum ConstantEnum {
 
 
-	PAGE_SIZE(15,"分页条数");
+	PAGE_SIZE(10,"分页条数");
     
     private Object code;
 
