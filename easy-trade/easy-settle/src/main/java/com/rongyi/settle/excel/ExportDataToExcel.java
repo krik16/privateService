@@ -13,9 +13,7 @@ import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.ExcelUtil;
 import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
-import com.rongyi.easy.settle.entity.PaymentStatement;
-import com.rongyi.easy.tms.vo.TradeVO;
-import com.rongyi.settle.service.impl.PaymentStatementServiceImpl;
+import com.rongyi.settle.service.PaymentStatementService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.poi.xssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +21,6 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
 
@@ -38,7 +34,7 @@ import java.util.*;
 public class ExportDataToExcel {
 
     @Autowired
-    PaymentStatementServiceImpl paymentStatementService;
+    private PaymentStatementService paymentStatementService;
 
     @SuppressWarnings("unchecked")
     public Map<String, Object> getParamMap(HttpServletRequest request) {

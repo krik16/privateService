@@ -16,5 +16,5 @@
 
     <!-- 声明需要暴露的服务接口 -->
     <dubbo:service interface="com.rongyi.rss.settle.PaymentStatementGenerateService" version="${dubbo.version}" ref="paymentStatementGenerateService" />
-    <bean id="paymentStatementGenerateService" class="com.rongyi.settle.service.impl.PaymentStatementServiceImpl" />
+    <bean id="paymentStatementGenerateService" class="com.rongyi.settle.service.impl.PaymentStatementGenerateServiceImpl" />
 </beans>  

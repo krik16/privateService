@@ -12,7 +12,6 @@ import com.rongyi.easy.settle.entity.PaymentStatement;
 import com.rongyi.easy.settle.entity.StatementConfig;
 import com.rongyi.rss.roa.ROAShopService;
 import com.rongyi.rss.rpb.IRpbService;
-import com.rongyi.rss.settle.PaymentStatementGenerateService;
 import com.rongyi.settle.constants.SettleConstant;
 import com.rongyi.settle.dto.CouponCodeExcelDto;
 import com.rongyi.settle.dto.CouponExcelDto;
@@ -38,7 +37,7 @@ import java.util.*;
  * Created by xgq on 2015/9/22.
  */
 @Service
-public class PaymentStatementServiceImpl extends BaseServiceImpl implements PaymentStatementService, PaymentStatementGenerateService {
+public class PaymentStatementServiceImpl extends BaseServiceImpl implements PaymentStatementService {
 
     private static final String NAMESPACE = "com.rongyi.settle.mapper.PaymentStatementMapper";
 
@@ -219,36 +218,6 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
         if (count < 10) {
             return StringUtils.substring(batchNo, 0, batchNo.length() - 2) + "0" + count;
         } else return StringUtils.substring(batchNo, 0, batchNo.length() - 2) + count.toString();
-    }
-
-    @Override
-    public void generateForSchedule() throws Exception {
-        List<StatementConfig> statementConfigList = statementConfigService.selectForSchedule();
-        for (StatementConfig statementConfig : statementConfigList) {
-            if (SettleConstant.CountCycleType.DAY.equals(statementConfig.getCountCycle())) {
-                Date yesterdayFirstSecond = DateUtils.getYesterdayFirstSecond();
-                Date yesterdayLastSecond = DateUtils.getYesterdayLastSecond();
-                List<PaymentStatement> paymentStatements = selectByCycleTime(statementConfig.getId(), yesterdayFirstSecond, yesterdayLastSecond);
-                if (paymentStatements == null || paymentStatements.size() == 0) {
-                    PaymentStatement paymentStatement = new PaymentStatement();
-                    paymentStatement.setConfigId(statementConfig.getId());
-                    paymentStatement.setRuleCode(statementConfig.getRuleCode());
-                    paymentStatement.setCycleStartTime(yesterdayFirstSecond);
-                    paymentStatement.setCycleEndTime(yesterdayLastSecond);
-                    paymentStatement.setType(SettleConstant.PaymentStatementType.SHOP);
-                    paymentStatement.setBatchNo(getBatchNoFirst(statementConfig.getBussinessCode()));
-                    paymentStatement.setStatus(SettleConstant.PaymentStatementStatus.INIT);
-                    paymentStatement.setCreateAt(new Date());
-                    paymentStatement.setIsDelete(new Byte("0"));
-                    insert(paymentStatement);
-                    createExcel(paymentStatement, statementConfig);
-                }
-            }
-        }
-    }
-
-    private String getBatchNoFirst(String shopId) {
-        return shopId + DateUtils.getYesterdayDateSimpleStr() + "01";
     }
 
     private void createExcel(PaymentStatement paymentStatement, StatementConfig statementConfig) throws Exception {
