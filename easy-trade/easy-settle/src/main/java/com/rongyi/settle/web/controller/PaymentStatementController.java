@@ -89,7 +89,7 @@ public class PaymentStatementController {
             } else if (searchType == 1) {//查询对账单审核列表
                 if (searchStatus == 0) {
                     map.put("searchStatus", 0);
-                } else map.put("searchStatus", 3);
+                } else map.put("searchStatus", 1);
             } else if (searchType == 2) {//查询待付款列表
                 if (searchStatus == 0) {
                     map.put("searchStatus", 4);
