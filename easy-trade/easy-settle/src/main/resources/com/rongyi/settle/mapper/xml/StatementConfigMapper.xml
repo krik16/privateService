@@ -60,6 +60,11 @@
 			AND biz_name like
 			concat('%',#{bussinessName,jdbcType=VARCHAR},'%')
 		</if>
+		<!-- 规则编码-->
+		<if test="ruleCode != null and ruleCode != ''">
+			AND rule_code like
+			concat('%',#{ruleCode,jdbcType=VARCHAR},'%')
+		</if>
 		<!-- 创建时间 -->
 		<if test="createAtStart != null and createAtStart != ''">
 			AND create_at >= #{createAtStart}
