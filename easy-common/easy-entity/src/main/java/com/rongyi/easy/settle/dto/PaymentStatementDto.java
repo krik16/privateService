@@ -39,6 +39,8 @@ public class PaymentStatementDto implements Serializable {
 
     private String bussinessId;
 
+    private String desc;
+
     private Date statusUpdateTime;
 
     private Byte status;
@@ -224,5 +226,12 @@ public class PaymentStatementDto implements Serializable {
 	public void setPayTime(Date payTime) {
 		this.payTime = payTime;
 	}
-    
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
 }
