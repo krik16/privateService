@@ -1,4 +1,4 @@
-package com.rongyi.easy.coupon.entity;
+package com.rongyi.easy.coupon.entity.old;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -12,6 +12,7 @@ import java.util.Date;
  *
  * @author Breggor
  */
+@Deprecated
 public class UserCoupon implements Serializable {
 
     private Long id;

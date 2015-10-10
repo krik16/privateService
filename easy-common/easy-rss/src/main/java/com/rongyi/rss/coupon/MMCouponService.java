@@ -1,7 +1,7 @@
 package com.rongyi.rss.coupon;
 
 
-import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.coupon.entity.old.Coupon;
 import com.rongyi.easy.coupon.old_vo.OldCouponVO;
 import org.bson.types.ObjectId;
 

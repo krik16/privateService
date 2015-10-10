@@ -11,11 +11,10 @@
 package com.rongyi.easy.activity.entity.vo;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.coupon.entity.old.Coupon;
 
 /** 
  * @Description 传递给推送前台页面显示的卡券

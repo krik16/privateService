@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.rongyi.easy.coupon.entity.Coupon;
-import com.rongyi.easy.coupon.entity.Coupon.CouponProduct;
+import com.rongyi.easy.coupon.entity.old.Coupon;
+import com.rongyi.easy.coupon.entity.old.Coupon.CouponProduct;
 
 
 /**

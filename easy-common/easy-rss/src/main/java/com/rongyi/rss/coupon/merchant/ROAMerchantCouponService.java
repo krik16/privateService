@@ -1,8 +1,7 @@
 package com.rongyi.rss.coupon.merchant;
 
-import com.rongyi.core.common.PagingVO;
-import com.rongyi.easy.coupon.entity.mysql.Coupon;
-import com.rongyi.easy.coupon.entity.mysql.CouponRejectRecord;
+import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.coupon.entity.CouponRejectRecord;
 import com.rongyi.easy.coupon.vo.merchant.MerchantPaging;
 import com.rongyi.easy.coupon.vo.merchant.StatisticsCountVO;
 import com.rongyi.easy.coupon.vo.merchant.UserInfoVo;

@@ -1,8 +1,8 @@
 package com.rongyi.rss.coupon;
 
 import com.rongyi.core.bean.ResponseResult;
-import com.rongyi.easy.coupon.entity.CouponOrder;
-import com.rongyi.easy.coupon.entity.CouponOrderItem;
+import com.rongyi.easy.coupon.entity.old.CouponOrder;
+import com.rongyi.easy.coupon.entity.old.CouponOrderItem;
 import com.rongyi.easy.coupon.param.CouponOrderParam;
 import com.rongyi.easy.coupon.param.RoaCouponOrderParam;
 

@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
-import com.rongyi.easy.coupon.entity.mysql.Coupon;
-import com.rongyi.easy.coupon.entity.mysql.CouponChannel;
-import com.rongyi.easy.coupon.entity.mysql.CouponSort;
+import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.coupon.entity.CouponChannel;
+import com.rongyi.easy.coupon.entity.CouponSort;
 import com.rongyi.easy.coupon.param.operation.VoucherCouponParam;
 import com.rongyi.easy.coupon.vo.operation.CouponCountVO;
 import com.rongyi.easy.coupon.vo.operation.VoucherCouponVO;

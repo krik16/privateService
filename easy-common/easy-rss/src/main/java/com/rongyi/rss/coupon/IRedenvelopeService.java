@@ -1,10 +1,8 @@
 package com.rongyi.rss.coupon;
 
-import java.util.List;
-
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
-import com.rongyi.easy.coupon.entity.mysql.Coupon;
+import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.param.operation.RedenvelopeParam;
 import com.rongyi.easy.coupon.vo.operation.RedenvelopCouponVO;
 

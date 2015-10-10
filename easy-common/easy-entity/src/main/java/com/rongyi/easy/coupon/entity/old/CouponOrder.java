@@ -1,11 +1,11 @@
-package com.rongyi.easy.coupon.entity;
+package com.rongyi.easy.coupon.entity.old;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
-import org.apache.commons.lang.builder.ToStringBuilder;
-
+@Deprecated
 public class CouponOrder implements Serializable {
 
     private Long id;

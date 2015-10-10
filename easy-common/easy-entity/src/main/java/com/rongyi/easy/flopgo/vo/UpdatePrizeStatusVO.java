@@ -3,8 +3,8 @@ package com.rongyi.easy.flopgo.vo;
 import java.io.Serializable;
 import java.util.List;
 
-import com.rongyi.easy.coupon.entity.Coupon;
-import com.rongyi.easy.coupon.entity.Coupon.CouponProduct;
+import com.rongyi.easy.coupon.entity.old.Coupon;
+import com.rongyi.easy.coupon.entity.old.Coupon.CouponProduct;
 /**
  * 用户返回的是修改奖品状态的接口的vo
  * @author user

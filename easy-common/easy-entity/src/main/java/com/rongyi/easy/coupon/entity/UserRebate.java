@@ -1,4 +1,4 @@
-package com.rongyi.easy.coupon.entity.mysql;
+package com.rongyi.easy.coupon.entity;
 
 import java.io.Serializable;
 import java.util.Date;

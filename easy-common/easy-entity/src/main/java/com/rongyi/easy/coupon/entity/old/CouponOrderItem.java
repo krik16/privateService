@@ -1,4 +1,4 @@
-package com.rongyi.easy.coupon.entity;
+package com.rongyi.easy.coupon.entity.old;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -10,6 +10,7 @@ import java.util.Date;
  *
  * @author Breggor
  */
+@Deprecated
 public class CouponOrderItem implements Serializable {
 
     private static final long serialVersionUID = 1L;

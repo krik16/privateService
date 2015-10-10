@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import com.rongyi.easy.coupon.entity.mysql.CouponRejectRecord;
+import com.rongyi.easy.coupon.entity.CouponRejectRecord;
 
 public class RedenvelopCouponVO implements Serializable{
 

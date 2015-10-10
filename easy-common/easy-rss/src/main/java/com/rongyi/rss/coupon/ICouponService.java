@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.bson.types.ObjectId;
 
-import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.coupon.entity.old.Coupon;
 
 /**
  * 提供给vms/rmmm的接口：优惠券相关操作

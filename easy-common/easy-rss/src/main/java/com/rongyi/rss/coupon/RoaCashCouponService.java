@@ -2,7 +2,7 @@ package com.rongyi.rss.coupon;
 
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
-import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.coupon.entity.old.Coupon;
 import org.bson.types.ObjectId;
 
 import java.util.List;

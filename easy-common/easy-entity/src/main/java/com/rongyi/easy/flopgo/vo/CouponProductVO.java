@@ -3,7 +3,7 @@ package com.rongyi.easy.flopgo.vo;
 import java.io.Serializable;
 import java.util.List;
 
-import com.rongyi.easy.coupon.entity.Coupon.CouponProduct;
+import com.rongyi.easy.coupon.entity.old.Coupon.CouponProduct;
 
 /**
  * 做现金卷的信息封装返回

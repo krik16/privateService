@@ -1,7 +1,7 @@
 package com.rongyi.rss.coupon;
 
 import com.rongyi.core.common.PagingVO;
-import com.rongyi.easy.coupon.entity.UserCoupon;
+import com.rongyi.easy.coupon.entity.old.UserCoupon;
 import com.rongyi.easy.coupon.vo.MMUserCouponVO;
 import com.rongyi.easy.roa.entity.MallEntity;
 import com.rongyi.easy.roa.vo.ShopVO;

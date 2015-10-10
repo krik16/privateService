@@ -3,8 +3,7 @@ package com.rongyi.easy.coupon.vo.operation;
 import java.io.Serializable;
 import java.util.List;
 
-import com.rongyi.easy.coupon.entity.mysql.CouponRejectRecord;
-import com.rongyi.easy.coupon.entity.mysql.CouponSort;
+import com.rongyi.easy.coupon.entity.CouponRejectRecord;
 
 public class VoucherCouponVO implements Serializable {
 

@@ -4,10 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import org.bson.types.ObjectId;
-
-import com.rongyi.easy.coupon.entity.Coupon.CouponProduct;
-
 /**
  * 返回所有牌面显示的奖品的对象 上级为FlopgoLookPrizesListVO
  * @author user

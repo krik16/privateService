@@ -1,6 +1,6 @@
 package com.rongyi.rss.activity.push;
 import com.rongyi.core.bean.ResponseResult;
-import com.rongyi.easy.coupon.entity.UserCoupon;
+import com.rongyi.easy.coupon.entity.old.UserCoupon;
 import com.rongyi.easy.coupon.param.CouponOrderParam;
 
 

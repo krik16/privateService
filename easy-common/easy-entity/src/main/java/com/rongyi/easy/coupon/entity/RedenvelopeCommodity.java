@@ -1,45 +1,68 @@
-package com.rongyi.easy.coupon.entity.mysql;
+package com.rongyi.easy.coupon.entity;
 
 import java.io.Serializable;
+
 /**
- * @see 红包与商品的关联表
- * @author lijing 
- * @since 2015-08-10 
- * 
+ * 红包与商品的关联表
+ *
+ * @author lijing
+ * @since 2015-08-10
  */
-public class RedenvelopeCommodity implements Serializable{
-	
+public class RedenvelopeCommodity implements Serializable {
+
     /**
-	 * 序列化号
-	 */
-	private static final long serialVersionUID = 1L;
-	/**主键ID*/
-	private Integer id;
-	/**红包Id*/
+     * 序列化号
+     */
+    private static final long serialVersionUID = 1L;
+    /**
+     * 主键ID
+     */
+    private Integer id;
+    /**
+     * 红包Id
+     */
     private Integer couponId;
-    /**商品Id*/
+    /**
+     * 商品Id
+     */
     private String commodityId;
-    /**商品名称*/
+    /**
+     * 商品名称
+     */
     private String commodityName;
-    /**商品编码*/
+    /**
+     * 商品编码
+     */
     private String commodityCode;
-    /**商场名称*/
+    /**
+     * 商场名称
+     */
     private String mallName;
-    /**店铺名称*/
+    /**
+     * 店铺名称
+     */
     private String shopName;
-    /**商场ID*/
+    /**
+     * 商场ID
+     */
     private String mallId;
-    /**店铺ID*/
+    /**
+     * 店铺ID
+     */
     private String shopId;
-    /**商品图片用；隔开*/
+    /**
+     * 商品图片用；隔开
+     */
     private String pics;
-    /**商品状态 1上架   0下架*/
+    /**
+     * 商品状态 1上架   0下架
+     */
     private Integer status;
 
-    public RedenvelopeCommodity(){
-    	
+    public RedenvelopeCommodity() {
+
     }
-    
+
     public Integer getId() {
         return id;
     }
@@ -128,15 +151,15 @@ public class RedenvelopeCommodity implements Serializable{
         this.status = status;
     }
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("RedenvelopeCommodity [id=").append(id).append(", couponId=").append(couponId)
-				.append(", commodityId=").append(commodityId).append(", commodityName=").append(commodityName)
-				.append(", commodityCode=").append(commodityCode).append(", mallName=").append(mallName)
-				.append(", shopName=").append(shopName).append(", mallId=").append(mallId).append(", shopId=")
-				.append(shopId).append(", pics=").append(pics).append(", status=").append(status).append("]");
-		return builder.toString();
-	}
-    
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("RedenvelopeCommodity [id=").append(id).append(", couponId=").append(couponId)
+                .append(", commodityId=").append(commodityId).append(", commodityName=").append(commodityName)
+                .append(", commodityCode=").append(commodityCode).append(", mallName=").append(mallName)
+                .append(", shopName=").append(shopName).append(", mallId=").append(mallId).append(", shopId=")
+                .append(shopId).append(", pics=").append(pics).append(", status=").append(status).append("]");
+        return builder.toString();
+    }
+
 }

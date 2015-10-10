@@ -1,7 +1,7 @@
 package com.rongyi.rss.coupon;
 
-import com.rongyi.easy.coupon.entity.CouponOrder;
-import com.rongyi.easy.coupon.entity.CouponOrderItem;
+import com.rongyi.easy.coupon.entity.old.CouponOrder;
+import com.rongyi.easy.coupon.entity.old.CouponOrderItem;
 
 import java.util.List;
 import java.util.Map;
