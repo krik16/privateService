@@ -24,6 +24,7 @@
     <result column="internal_coupon_id" property="internalCouponId" jdbcType="VARCHAR" />
     <result column="guide_id" property="guideId" jdbcType="VARCHAR" />
     <result column="discount_info" property="discountInfo" jdbcType="VARCHAR" />
+    <result column="guide_type" property="guideType" jdbcType="TINYINT" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.rongyi.easy.osm.entity.OrderFormEntity" extends="BaseResultMap" >
     <result column="buyer_comment" property="buyerComment" typeHandler="com.rongyi.core.common.util.ConvertBlobTypeHandler" />
