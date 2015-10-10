@@ -210,22 +210,24 @@
       bi.biz_email, bi.pay_account, bi.blank_name, bi.pay_name,
       ol.desc
     from payment_bill pb
-    join payment_bill_config pbc on pb.config_id=pbc.id
-    join biz_info bi on bi.config_id=pbc.id
-    join op_log ol on ol.op_id=pb.id
+   left join payment_bill_config pbc on pb.config_id=pbc.id
+   left join biz_info bi on bi.config_id=pbc.id
+   left join op_log ol on ol.op_id=pb.id
     <where>
       <include refid="list_where_clause" />
     </where>
+    group by pb.id
     limit #{currentPage,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
   </select>
 
-  <select id="selectPageListCount" parameterType="java.util.Map" resultType="java.lang.Integer">
-      select count(pb.id) from payment_bill pb
-        join payment_bill_config pbc on pb.config_id=pbc.id
-        join biz_info bi on bi.config_id=pbc.id
+  <select id="selectPageListCount" parameterType="java.util.Map" resultMap="DtoResultMap">
+      select pb.id from payment_bill pb
+       left join payment_bill_config pbc on pb.config_id=pbc.id
+       left join biz_info bi on bi.config_id=pbc.id
     <where>
       <include refid="list_where_clause" />
     </where>
+    group by pb.id
   </select>
 
   <select id="selectByCycleTime" resultMap="BaseResultMap" parameterType="java.util.Map" >
