@@ -117,6 +117,7 @@ public class PaymentStatementController {
      * @datetime:2015年9月21日下午3:03:17
      **/
     @RequestMapping("/verify")
+    @ResponseBody
     public ResponseData verify(HttpServletRequest request, @RequestBody Map<String, Object> map) {
         ResponseData result = null;
         try {
