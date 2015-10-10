@@ -44,7 +44,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 
     @Override
     public List<PaymentStatementDto> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
-        map.put("currentPage", currentPage * pageSize);
+        map.put("currentPage", (currentPage-1) * pageSize);
         map.put("pageSize", pageSize);
         return this.getBaseDao().selectListBySql(NAMESPACE + ".selectPageList", map);
     }

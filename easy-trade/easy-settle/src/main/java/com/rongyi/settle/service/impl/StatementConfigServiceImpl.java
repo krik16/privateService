@@ -52,7 +52,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 	
 	@Override
 	public List<StatementConfig> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
-		map.put("currentPage", currentPage * pageSize);
+		map.put("currentPage", (currentPage-1) * pageSize);
 		map.put("pageSize", pageSize);
 		return this.getBaseDao().selectListBySql(NAMESPACE + ".selectPageList", map);
 	}
