@@ -197,6 +197,9 @@
     <if test="statusUpdateEndTime != null">
       and pb.status_update_time &lt; #{statusUpdateEndTime,jdbcType=TIMESTAMP}
     </if>
+    <if test="ids != null">
+      and pb.id in #{ids,jdbcType=VARCHAR}
+    </if>
   </sql>
 
   <select id="selectPageList" resultMap="DtoResultMap" parameterType="java.util.Map">
