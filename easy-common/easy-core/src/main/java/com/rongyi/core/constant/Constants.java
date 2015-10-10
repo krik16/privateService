@@ -670,4 +670,14 @@ public interface Constants {
     	/** 已过期 */
     	Integer OVERDUE = 3;
     }
+    
+    /**
+     *卖家类型
+     */
+    interface GuideType{
+    	/** 导购*/
+    	Integer GUIDE = 1;
+    	/** 买手*/
+    	Integer BULL = 2;
+    }
 }
