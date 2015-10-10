@@ -63,7 +63,7 @@ public class ExportDataToExcel {
             Map<String, Object> map = new HashMap<>();
             map.put("ids", "("+ids+")");
             map.put("searchStatus",11);
-            List<PaymentStatementDto> payments= paymentStatementService.selectPageList(map, 0, 10000);
+            List<PaymentStatementDto> payments= paymentStatementService.selectPageList(map, 1, 100000);
             Set<String> businessIds = null;
             if (CollectionUtils.isNotEmpty(payments)) {
                 businessIds = new HashSet<>();
@@ -106,10 +106,10 @@ public class ExportDataToExcel {
             bodyStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// 指定单元格垂直居中对齐
             if (CollectionUtils.isNotEmpty(parentsDtoList)){
                 for (List<PaymentStatementDto> sonDtoList : parentsDtoList){
-                    XSSFSheet sheet = wb.createSheet(sonDtoList.get(0).getBussinessName());
+                    XSSFSheet sheet = wb.createSheet(sonDtoList.get(0).getBussinessName()+"-"+System.currentTimeMillis());
                     for (int i = 0; i <= sonDtoList.size(); i++) {
                         sheet.createRow(i);
-                        for (int j = 0; j <= 9; j++) {
+                        for (int j = 0; j <= 10; j++) {
                             sheet.getRow(i).createCell(j);
                             if (i==0)
                                 sheet.getRow(i).getCell(j).setCellStyle(titleStyle);
@@ -126,9 +126,10 @@ public class ExportDataToExcel {
                             sheet.getRow(i).getCell(3).setCellValue("名称");
                             sheet.getRow(i).getCell(4).setCellValue("结算方式");
                             sheet.getRow(i).getCell(5).setCellValue("账户");
-                            sheet.getRow(i).getCell(6).setCellValue("开户行名称");
-                            sheet.getRow(i).getCell(7).setCellValue("应付总金额");
-                            sheet.getRow(i).getCell(8).setCellValue("对账单状态");
+                            sheet.getRow(i).getCell(5).setCellValue("账户姓名");
+                            sheet.getRow(i).getCell(7).setCellValue("开户行名称");
+                            sheet.getRow(i).getCell(8).setCellValue("应付总金额");
+                            sheet.getRow(i).getCell(9).setCellValue("对账单状态");
                         }else{
                             dto = sonDtoList.get(i-1);
                             sheet.getRow(i).getCell(0).setCellValue(dto.getBatchNo());
@@ -145,10 +146,11 @@ public class ExportDataToExcel {
                                     +"-"+DateTool.date2String(dto.getCycleEndTime(),DateTool.FORMAT_DATE_2));
                             sheet.getRow(i).getCell(3).setCellValue(dto.getBussinessName());
                             sheet.getRow(i).getCell(4).setCellValue("现金");
-                            sheet.getRow(i).getCell(5).setCellValue(dto.getBussinessName());
-                            sheet.getRow(i).getCell(6).setCellValue(dto.getBlankName());
-                            sheet.getRow(i).getCell(7).setCellValue(dto.getPayTotal());
-                            sheet.getRow(i).getCell(8).setCellValue("未下载");
+                            sheet.getRow(i).getCell(5).setCellValue(dto.getPayAccount());
+                            sheet.getRow(i).getCell(6).setCellValue(dto.getPayName());
+                            sheet.getRow(i).getCell(7).setCellValue(dto.getBlankName());
+                            sheet.getRow(i).getCell(8).setCellValue(dto.getPayTotal());
+                            sheet.getRow(i).getCell(9).setCellValue("未下载");
                         }
                     }
                 }

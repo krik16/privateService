@@ -172,7 +172,7 @@ public class PaymentStatementController {
     public ResponseData exportPaymentSchedule(Map<String, Object> map, HttpServletResponse response
             , HttpServletRequest request) {
         logger.info("导出付款清单参数>>>>>>>>>>>:map={}" + map);
-        String ids = map.get("ids") == null ? "3" : map.get("ids").toString();
+        String ids = map.get("ids") == null ? null : map.get("ids").toString();
         ResponseData result;
         if (StringUtils.isBlank(ids)) {
             return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
