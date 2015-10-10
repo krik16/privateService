@@ -157,6 +157,7 @@
     <result column="biz_email" property="bussinessEmail" jdbcType="VARCHAR" />
     <result column="status_update_time" property="statusUpdateTime" jdbcType="TIMESTAMP" />
     <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="desc" property="desc" jdbcType="VARCHAR" />
   </resultMap>
 
   <sql id="list_where_clause">
@@ -203,10 +204,12 @@
       pb.id, pb.type, pb.batch_no, pb.cycle_start_time, pb.cycle_end_time, pb.pay_total, pb.status, pb.pay_no,
       pb.status_update_time,
       pbc.biz_name, pbc.biz_id, pbc.pay_channel, pbc.biz_type,
-      bi.biz_email, bi.pay_account, bi.blank_name, bi.pay_name
+      bi.biz_email, bi.pay_account, bi.blank_name, bi.pay_name,
+      ol.desc
     from payment_bill pb
     join payment_bill_config pbc on pb.config_id=pbc.id
     join biz_info bi on bi.config_id=pbc.id
+    join op_log ol on ol.op_id=pb.id
     <where>
       <include refid="list_where_clause" />
     </where>
