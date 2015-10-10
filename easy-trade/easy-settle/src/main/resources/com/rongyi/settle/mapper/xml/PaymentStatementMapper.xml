@@ -220,9 +220,9 @@
   </select>
 
   <select id="selectPageListCount" parameterType="java.util.Map" resultType="java.lang.Integer">
-      select count(ps.id) from payment_bill ps
-        join payment_bill_config sc on ps.config_id=sc.id
-        join biz_info bi on bi.config_id=sc.id
+      select count(pb.id) from payment_bill pb
+        join payment_bill_config pbc on pb.config_id=pbc.id
+        join biz_info bi on bi.config_id=pbc.id
     <where>
       <include refid="list_where_clause" />
     </where>
