@@ -18,6 +18,7 @@ import java.io.Serializable;
                      "page":{                              //page 是可选项，data为数组时才会有page，也可以无page信息（不分页）。
                             "currentPage"":1 ,             //当前页,目前系统有从0或1开始。统一1开始
                             "pageSize":10,                 //分页的数量
+                            "totalPage":1,                 //总页数
                             "totalCount":10                //总行数
                         }
                    }
@@ -211,6 +212,20 @@ public class ResponseVO implements java.io.Serializable {
             return totalCount;
         }
 
+        /**
+         * 总页数
+         *
+         * @return
+         */
+        public Integer getTotalPage() {
+            int totalPage = 0;
+            if (totalCount % pageSize == 0) {
+                totalPage = totalCount / pageSize;
+            } else {
+                totalPage = totalCount / pageSize + 1;
+            }
+            return totalPage;
+        }
 
         @Override
         public String toString() {
