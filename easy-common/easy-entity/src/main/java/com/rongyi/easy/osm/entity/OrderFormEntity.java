@@ -76,7 +76,18 @@ public class OrderFormEntity implements Serializable{
     /** 买家备注 */
     private String buyerComment;
     
-    private JSONObject jsonDiscountInfo;   
+    private JSONObject jsonDiscountInfo;
+    
+    /** 1是导购 2是买手*/
+    private Integer guideType;
+
+	public Integer getGuideType() {
+		return guideType;
+	}
+
+	public void setGuideType(Integer guideType) {
+		this.guideType = guideType;
+	}
 
 	public JSONObject getJsonDiscountInfo() {
 		return jsonDiscountInfo;
