@@ -53,6 +53,12 @@ public class CommoditySearchParam implements Serializable {
 	
 	/** 坐标y */
 	private String coord_y;
+	
+	/** 买手id */
+	private String bullId;
+	
+	/** 直播id */
+	private String liveId;
 
 	/**
 	 * @return the keyword
@@ -193,6 +199,24 @@ public class CommoditySearchParam implements Serializable {
 	public void setCoord_y(String coord_y) {
 		this.coord_y = coord_y;
 	}
+
+	public String getBullId() {
+		return bullId;
+	}
+
+	public void setBullId(String bullId) {
+		this.bullId = bullId;
+	}
+
+	public String getLiveId() {
+		return liveId;
+	}
+
+	public void setLiveId(String liveId) {
+		this.liveId = liveId;
+	}
+	
+	
 	
 	
 
