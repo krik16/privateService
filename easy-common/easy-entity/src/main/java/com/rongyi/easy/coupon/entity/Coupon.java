@@ -255,6 +255,10 @@ public class Coupon implements Serializable {
      */
     private List<String> detailPicNames;
 
+    private Integer purchaseType = Integer.valueOf(0);//购买类型 0正常购买类型 1抢购类型
+
+    private Integer visitedCount = Integer.valueOf(0);//卡券详情浏览数
+
 
     public Integer getId() {
         return id;
@@ -639,6 +643,23 @@ public class Coupon implements Serializable {
 
     public void setRedenvelopeCommodities(List<RedenvelopeCommodity> redenvelopeCommodities) {
         this.redenvelopeCommodities = redenvelopeCommodities;
+    }
+
+    public Integer getPurchaseType() {
+        return purchaseType;
+    }
+
+    public void setPurchaseType(Integer purchaseType) {
+        this.purchaseType = purchaseType;
+    }
+
+
+    public Integer getVisitedCount() {
+        return visitedCount;
+    }
+
+    public void setVisitedCount(Integer visitedCount) {
+        this.visitedCount = visitedCount;
     }
 
     @Override

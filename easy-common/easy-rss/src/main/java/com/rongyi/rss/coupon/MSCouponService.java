@@ -17,7 +17,7 @@ import com.rongyi.easy.coupon.vo.RmmmCouponQueryListVO;
 import com.rongyi.easy.solr.retrival.result.ActivityData;
 
 /**
- * 功能描述： 摩店 优惠券操作接口
+ * 功能描述： 摩店(MS) 优惠券操作接口
  *
  * @author Breggor
  */
@@ -56,6 +56,7 @@ public interface MSCouponService {
 
     /**
      * solr搜索优惠券详情页
+     *
      * @param couponId
      * @return
      */
@@ -64,10 +65,21 @@ public interface MSCouponService {
 
     /**
      * 根据id查看优惠券是否存在
+     *
      * @param couponId
      * @return
      */
     boolean hasCoupon(String couponId);
+
+
+    /**
+     * 追加库存量
+     *
+     * @param couponId
+     * @param quantity
+     * @return
+     */
+    boolean appendInventory(Integer couponId, Integer quantity);
 
 }
 

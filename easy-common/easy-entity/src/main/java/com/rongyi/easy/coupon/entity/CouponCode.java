@@ -18,7 +18,7 @@ public class CouponCode implements Serializable {
     /**
      * 券码ID
      */
-    private Long id;
+    private Integer id;
 
     /**
      * 券码
@@ -176,11 +176,11 @@ public class CouponCode implements Serializable {
 //        this.userSrc = userSrc;
 //    }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -63,10 +63,26 @@ public interface CouponConstants {
      */
     List<Integer> AFTER_SALE_SERVICE = Arrays.asList(1, 0, 0, 0);
 
-    interface COUPON_TYPE
-    {
-        String COUPON = "02";//代金券
-        String CASHCOUPON = "03";//红包
+
+    /**
+     * 卡券类型:代金券[0], 抵扣券[1], 红包[2]
+     */
+    interface COUPON_TYPE {
+        //        String COUPON = "02";//代金券
+//        String CASHCOUPON = "03";//红包
+        int VOUCHER = 0;
+        int REBATE = 1;
+        int REDENVELOPE = 2;
+    }
+
+
+    /**
+     * 状态: 待审核[0], 审核未通过[1], 审核通过[2]
+     */
+    interface CouponStatus {
+        int NO_CHECK = 0;
+        int CHECK_FAILURE = 1;
+        int CHECK_SUCCESS = 2;
     }
 
 }

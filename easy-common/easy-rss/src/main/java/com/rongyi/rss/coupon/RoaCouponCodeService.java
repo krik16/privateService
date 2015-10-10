@@ -35,7 +35,7 @@ public interface RoaCouponCodeService {
      * @param status
      * @return
      */
-    public Boolean changeStatusById(Long id, Integer status);
+    public Boolean changeStatusById(Integer id, Integer status);
 
     /**
      * 根据券码Id查询
