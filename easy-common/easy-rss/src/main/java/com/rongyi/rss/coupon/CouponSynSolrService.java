@@ -1,6 +1,6 @@
 package com.rongyi.rss.coupon;
 
-import com.rongyi.easy.coupon.entity.old.Coupon;
+import com.rongyi.easy.coupon.entity.Coupon;
 
 /**
  * 优惠券数据同步到solr
@@ -22,5 +22,5 @@ public interface CouponSynSolrService {
      * @param couponId
      * @param status
      */
-    void updateSolrCouponStatus(String couponId, int status);
+    void updateSolrCouponStatus(Integer couponId, int status);
 }

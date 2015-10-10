@@ -1,12 +1,3 @@
-/**
- * @Title: CouponService.java
- * @Package com.rongyi.rss.coupon
- * @Description: RMMM优惠券接口
- * @author 郑亦梁  zhengyiliang@rongyi.com
- * @date 2015年4月23日 上午11:33:49
- * @version V1.0
- * Copyright (C),上海容易网电子商务有限公司
- */
 package com.rongyi.rss.coupon;
 
 import com.rongyi.core.bean.ResponseResult;
@@ -17,7 +8,7 @@ import com.rongyi.easy.coupon.vo.RmmmCouponQueryListVO;
 import com.rongyi.easy.solr.retrival.result.ActivityData;
 
 /**
- * 功能描述： 摩店(MS) 优惠券操作接口
+ * 功能描述： 摩店(MS) 代金券接口
  *
  * @author Breggor
  */
@@ -36,13 +27,13 @@ public interface MSCouponService {
     /**
      * 删除优惠券
      */
-    boolean removeCoupon(String couponId);
+    boolean removeCoupon(Integer couponId);
 
     /**
      * 更新优惠券状态
      * 目前修改优惠券下线状态，下线状态值：4
      */
-    boolean updateCouponStatus(String couponId, String status);
+    boolean updateCouponStatus(Integer couponId, String status);
 
 
     /**
@@ -51,7 +42,7 @@ public interface MSCouponService {
      * @param couponId
      * @return
      */
-    OldCouponVO getCouponDetail(String couponId);
+    OldCouponVO getCouponDetail(Integer couponId);
 
 
     /**

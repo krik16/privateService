@@ -8,6 +8,7 @@ import org.bson.types.ObjectId;
 import java.util.List;
 import java.util.Map;
 
+@Deprecated
 public interface RoaCouponService {
 
     /**
@@ -26,7 +27,7 @@ public interface RoaCouponService {
      * @param id
      * @return
      */
-    public Coupon getCouponById(ObjectId id);
+    public Coupon  getCouponById(ObjectId id);
 
     /**
      * 添加或更新优惠券
@@ -192,12 +193,13 @@ public interface RoaCouponService {
      * @Description: TODO(置顶优惠券)
      */
     public Boolean stickCoupon(ObjectId couponId, Integer sortIndex);
-    
+
     /**
      * 修改券码模板表中(0,1)已过期的状态(定时任务)
      * @Description
      * @author yb
      */
     public void updateAllCouponValid();
+
 
 }

@@ -15,6 +15,7 @@ import java.util.List;
  * @version @param <T>
  * @since JDK 1.6
  */
+@Deprecated
 public class PageList<T> implements Serializable {
 
   private static final long serialVersionUID = 1L;

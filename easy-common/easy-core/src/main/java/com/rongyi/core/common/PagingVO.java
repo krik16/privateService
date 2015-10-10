@@ -11,6 +11,7 @@ import java.util.List;
  * @since 2.0
  * @param <T>	实体对象
  */
+@Deprecated
 public class PagingVO<T> implements Serializable {
 
 	/**

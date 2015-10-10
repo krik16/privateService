@@ -18,6 +18,12 @@ public class Coupon implements Serializable {
     private Integer id;
 
     /**
+     * mongo老卡券Id
+     * mongoId
+     */
+    private String mongoId;
+
+    /**
      * 卡券名称
      */
     private String name;
@@ -76,6 +82,17 @@ public class Coupon implements Serializable {
      * 发布结束时间
      */
     private Date publishEndAt;
+
+
+    /**
+     * 销售开始时间
+     */
+    private Date saleStartAt;
+
+    /**
+     * 销售结束时间
+     */
+    private Date saleEndAt;
 
     /**
      * 有效期开始时间
@@ -222,7 +239,7 @@ public class Coupon implements Serializable {
     /**
      * 代金券关联的商场
      */
-    private CouponMall couponMall;
+//    private CouponMall couponMall;
 
     /**
      * 代金券关联的店铺
@@ -588,13 +605,13 @@ public class Coupon implements Serializable {
         this.couponBrand = couponBrand;
     }
 
-    public CouponMall getCouponMall() {
-        return couponMall;
-    }
-
-    public void setCouponMall(CouponMall couponMall) {
-        this.couponMall = couponMall;
-    }
+//    public CouponMall getCouponMall() {
+//        return couponMall;
+//    }
+//
+//    public void setCouponMall(CouponMall couponMall) {
+//        this.couponMall = couponMall;
+//    }
 
     public List<CouponShop> getCouponShops() {
         return couponShops;
@@ -662,6 +679,34 @@ public class Coupon implements Serializable {
         this.visitedCount = visitedCount;
     }
 
+    public Date getSaleStartAt() {
+        return saleStartAt;
+    }
+
+    public void setSaleStartAt(Date saleStartAt) {
+        this.saleStartAt = saleStartAt;
+    }
+
+    public Date getSaleEndAt() {
+        return saleEndAt;
+    }
+
+    public void setSaleEndAt(Date saleEndAt) {
+        this.saleEndAt = saleEndAt;
+    }
+
+    public Integer getSaledCount() {
+        return (totalCount - stockCount < 0) ? 0 : totalCount - stockCount;
+    }
+
+    public String getMongoId() {
+        return mongoId;
+    }
+
+    public void setMongoId(String mongoId) {
+        this.mongoId = mongoId;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -706,7 +751,7 @@ public class Coupon implements Serializable {
                 .append("couponCategory", couponCategory)
                 .append("couponGroup", couponGroup)
                 .append("couponBrand", couponBrand)
-                .append("couponMall", couponMall)
+//                .append("couponMall", couponMall)
                 .append("couponShops", couponShops)
                 .append("couponMalls", couponMalls)
                 .append("preferentialType", preferentialType)
@@ -715,4 +760,6 @@ public class Coupon implements Serializable {
                 .append("detailPicNames", detailPicNames)
                 .toString();
     }
+
+
 }
