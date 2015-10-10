@@ -5,8 +5,16 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans          
     http://www.springframework.org/schema/beans/spring-beans.xsd          
     http://code.alibabatech.com/schema/dubbo          
-    http://code.alibabatech.com/schema/dubbo/dubbo.xsd">  
-    
-    <!-- 声明需要暴露的服务接口  -->  
-      
+    http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="${dubbo.applicationName}" />
+    <dubbo:registry address="${dubbo.address}" file="${dubbo.applicationName}/dubbo.cache"/>
+    <dubbo:protocol host="${dubbo.host}" name="dubbo" port="${dubbo.port}" dispatcher="all" threadpool="fixed" threads="800"/>
+    <!-- 配置超时时间 -->
+    <dubbo:consumer timeout="${dubbo.timeout}" />
+    <dubbo:monitor protocol="registry"/>
+
+    <!-- 声明需要暴露的服务接口 -->
+    <dubbo:service interface="com.rongyi.rss.settle.PaymentStatementGenerateService" version="${dubbo.version}" ref="paymentStatementGenerateService" />
+    <bean id="paymentStatementGenerateService" class="com.rongyi.settle.service.impl.PaymentStatementServiceImpl" />
 </beans>  

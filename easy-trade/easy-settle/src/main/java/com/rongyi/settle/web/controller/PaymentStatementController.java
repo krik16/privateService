@@ -7,49 +7,42 @@
 
 package com.rongyi.settle.web.controller;
 
-import java.io.*;
-import java.util.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.rongyi.easy.roa.vo.ShopVO;
-import com.rongyi.rss.roa.ROAShopService;
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
-import com.rongyi.easy.settle.entity.BussinessInfo;
 import com.rongyi.easy.settle.entity.PaymentStatement;
 import com.rongyi.easy.settle.entity.StatementConfig;
+import com.rongyi.rss.roa.ROAShopService;
 import com.rongyi.settle.constants.CodeEnum;
 import com.rongyi.settle.constants.ConstantEnum;
 import com.rongyi.settle.constants.ResponseData;
-import com.rongyi.settle.constants.SettleConstant;
-import com.rongyi.settle.dto.CouponCodeExcelDto;
-import com.rongyi.settle.dto.CouponExcelDto;
-import com.rongyi.settle.dto.PaymentStatementDetailDto;
-import com.rongyi.settle.dto.PaymentStatementExcelDto;
 import com.rongyi.settle.excel.ExportDataToExcel;
 import com.rongyi.settle.service.BussinessInfoService;
 import com.rongyi.settle.service.PaymentStatementService;
 import com.rongyi.settle.service.StatementConfigService;
 import com.rongyi.settle.util.DateUtils;
-import com.rongyi.settle.util.ExcelUtils;
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: 柯军
  * @Description: 对账单列表
  * @datetime:2015年9月21日上午11:15:53
- *
  **/
 @Controller
 @RequestMapping("/paymentStatement")
@@ -76,9 +69,9 @@ public class PaymentStatementController {
     private ROAShopService roaShopService;
 
     /**
-     * @Description: 对账单列表（包括所有列表，审核列表，商家对账单列表）
      * @param map
      * @return
+     * @Description: 对账单列表（包括所有列表，审核列表，商家对账单列表）
      * @Author: 柯军
      * @datetime:2015年9月21日下午3:01:04
      **/
@@ -116,10 +109,10 @@ public class PaymentStatementController {
     }
 
     /**
-     * @Description: 对账单审核（代付款）
      * @param request
      * @param map
      * @return
+     * @Description: 对账单审核（代付款）
      * @Author: 柯军
      * @datetime:2015年9月21日下午3:03:17
      **/
@@ -134,19 +127,19 @@ public class PaymentStatementController {
             String idStr = map.containsKey("ids") ? map.get("ids").toString() : null;
             Integer status = map.containsKey("status") ? Integer.valueOf(map.get("status").toString()) : null;
             String desc = map.containsKey("desc") ? map.get("desc").toString() : null;
-            if (StringUtils.isBlank(idStr) || status==null){
+            if (StringUtils.isBlank(idStr) || status == null) {
                 return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt()
-                        ,CodeEnum.FIAL_PARAMS_ERROR.getValueStr()) ;
+                        , CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
             }
             List<Integer> ids = new ArrayList<>();
-            for (String id : idStr.split(",")){
+            for (String id : idStr.split(",")) {
                 ids.add(Integer.valueOf(id.trim()));
             }
-            if (paymentStatementService.updatePaymentStatusByIds(ids, status, desc,userId)) {
+            if (paymentStatementService.updatePaymentStatusByIds(ids, status, desc, userId)) {
                 result = ResponseData.success();
-            }else{
+            } else {
                 result = ResponseData.failure(CodeEnum.FIAL_UPDATE_PAYMENT.getCodeInt()
-                        ,CodeEnum.FIAL_UPDATE_PAYMENT.getValueStr());
+                        , CodeEnum.FIAL_UPDATE_PAYMENT.getValueStr());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -157,10 +150,10 @@ public class PaymentStatementController {
     }
 
     /**
-     * @Description: 导出对账单明细（财务操作）
      * @param request
      * @param map
      * @return
+     * @Description: 导出对账单明细（财务操作）
      * @Author: 柯军
      * @datetime:2015年9月21日下午3:03:26
      **/
@@ -170,32 +163,31 @@ public class PaymentStatementController {
     }
 
     /**
-     * @Description: 导出付款清单（财务操作）
      * @return
+     * @Description: 导出付款清单（财务操作）
      * @Author: 柯军
      * @datetime:2015年9月21日下午3:03:26
      **/
     @RequestMapping("/exportPaymentExcel")
     public ResponseData exportPaymentSchedule(Map<String, Object> map, HttpServletResponse response
-    , HttpServletRequest request) {
-        logger.info("导出付款清单参数>>>>>>>>>>>:map={}"+map);
-        String ids = map.get("ids")==null?"3":map.get("ids").toString();
+            , HttpServletRequest request) {
+        logger.info("导出付款清单参数>>>>>>>>>>>:map={}" + map);
+        String ids = map.get("ids") == null ? "3" : map.get("ids").toString();
         ResponseData result;
         if (StringUtils.isBlank(ids)) {
-           return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
+            return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
         }
-        exportDataToExcel.exportPaymentScheduleExcel(request,response,ids);
+        exportDataToExcel.exportPaymentScheduleExcel(request, response, ids);
         result = ResponseData.success();
         return result;
     }
 
 
-
     /**
-     * @Description: 作废
      * @param request
      * @param map
      * @return
+     * @Description: 作废
      * @Author: 柯军
      * @datetime:2015年9月21日下午3:04:09
      **/
@@ -205,10 +197,10 @@ public class PaymentStatementController {
     }
 
     /**
-     * @Description: 商品订单查询(商家操作)
      * @param request
      * @param map
      * @return
+     * @Description: 商品订单查询(商家操作)
      * @Author: 柯军
      * @datetime:2015年9月21日下午3:04:23
      **/
@@ -218,10 +210,10 @@ public class PaymentStatementController {
     }
 
     /**
-     * @Description: 导出商品订单明细(商家操作)
      * @param request
      * @param map
      * @return
+     * @Description: 导出商品订单明细(商家操作)
      * @Author: 柯军
      * @datetime:2015年9月21日下午3:04:46
      **/
@@ -231,10 +223,10 @@ public class PaymentStatementController {
     }
 
     /**
-     * @Description: 优惠券订单查询(商家操作)
      * @param request
      * @param map
      * @return
+     * @Description: 优惠券订单查询(商家操作)
      * @Author: 柯军
      * @datetime:2015年9月21日下午3:05:09
      **/
@@ -244,50 +236,16 @@ public class PaymentStatementController {
     }
 
     /**
-     * @Description: 导出优惠券订单明细(商家操作)
      * @param request
      * @param map
      * @return
+     * @Description: 导出优惠券订单明细(商家操作)
      * @Author: 柯军
      * @datetime:2015年9月21日下午3:05:30
      **/
     @RequestMapping("exportCouponExcel")
     public ResponseData exportCouponExcel(HttpServletRequest request, @RequestBody Map<String, Object> map) {
         return null;
-    }
-
-    /**
-     * @Description: 定时任务调用生成对账单
-     * @Author: xgq
-     **/
-    @RequestMapping("/generateForSchedule")
-    public void generateForSchedule() {
-        try {
-            List<StatementConfig> statementConfigList = statementConfigService.selectForSchedule();
-            for (StatementConfig statementConfig : statementConfigList) {
-                if (SettleConstant.CountCycleType.DAY.equals(statementConfig.getCountCycle())) {
-                    Date yesterdayFirstSecond = DateUtils.getYesterdayFirstSecond();
-                    Date yesterdayLastSecond = DateUtils.getYesterdayLastSecond();
-                    List<PaymentStatement> paymentStatements = paymentStatementService.selectByCycleTime(statementConfig.getId(), yesterdayFirstSecond, yesterdayLastSecond);
-                    if (paymentStatements == null || paymentStatements.size() == 0) {
-                        PaymentStatement paymentStatement = new PaymentStatement();
-                        paymentStatement.setConfigId(statementConfig.getId());
-                        paymentStatement.setRuleCode(statementConfig.getRuleCode());
-                        paymentStatement.setCycleStartTime(yesterdayFirstSecond);
-                        paymentStatement.setCycleEndTime(yesterdayLastSecond);
-                        paymentStatement.setType(SettleConstant.PaymentStatementType.SHOP);
-                        paymentStatement.setBatchNo(getBatchNoFirst(statementConfig.getBussinessCode()));
-                        paymentStatement.setStatus(SettleConstant.PaymentStatementStatus.INIT);
-                        paymentStatement.setCreateAt(new Date());
-                        paymentStatement.setIsDelete(new Byte("0"));
-                        paymentStatementService.insert(paymentStatement);
-                        createExcel(paymentStatement, statementConfig);
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -298,22 +256,7 @@ public class PaymentStatementController {
     public ResponseData generate(@RequestBody Map<String, Object> map) {
         try {
             Integer id = Integer.valueOf(map.get("id").toString());
-            PaymentStatement paymentStatement = paymentStatementService.get(id);
-            StatementConfig statementConfig = statementConfigService.selectById(paymentStatement.getConfigId());
-            paymentStatementService.cancel(id);
-
-            PaymentStatement paymentStatementNew = new PaymentStatement();
-            paymentStatementNew.setConfigId(statementConfig.getId());
-            paymentStatementNew.setRuleCode(statementConfig.getRuleCode());
-            paymentStatementNew.setCycleStartTime(paymentStatement.getCycleStartTime());
-            paymentStatementNew.setCycleEndTime(paymentStatement.getCycleEndTime());
-            paymentStatementNew.setType(SettleConstant.PaymentStatementType.SHOP);
-            paymentStatementNew.setBatchNo(getBatchNo(paymentStatement.getBatchNo()));
-            paymentStatementNew.setStatus(SettleConstant.PaymentStatementStatus.INIT);
-            paymentStatementNew.setCreateAt(new Date());
-            paymentStatementNew.setIsDelete(new Byte("0"));
-            paymentStatementService.insert(paymentStatementNew);
-            createExcel(paymentStatementNew, statementConfig);
+            paymentStatementService.generate(id);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
@@ -321,92 +264,14 @@ public class PaymentStatementController {
         return ResponseData.success();
     }
 
-    private String getBatchNoFirst(String shopId) {
-        return shopId + DateUtils.getYesterdayDateSimpleStr() + "01";
-    }
-
-    public String getBatchNo(String batchNo) {
-        String endTwo = StringUtils.substring(batchNo, batchNo.length() - 2, batchNo.length());
-        Integer count = Integer.valueOf(endTwo);
-        count = count + 1;
-        if (count < 10) {
-            return StringUtils.substring(batchNo, 0, batchNo.length() - 2) + "0" + count;
-        } else return StringUtils.substring(batchNo, 0, batchNo.length() - 2) + count.toString();
-    }
-
-    private void createExcel(PaymentStatement paymentStatement, StatementConfig statementConfig) throws Exception {
-        PaymentStatementExcelDto paymentStatementExcelDto = new PaymentStatementExcelDto();
-        List<PaymentStatementDetailDto> paymentStatementDetailDtoList = new ArrayList<>();
-        List<CouponExcelDto> couponExcelDtoList = new ArrayList<>();
-        if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.SHOP)) {
-            ShopVO shopVO = roaShopService.getShopVOById(statementConfig.getBussinessId());
-            paymentStatementDetailDtoList =
-                    paymentStatementService.selectForStatementDetails(statementConfig.getBussinessId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime(), shopVO.getName(), shopVO.getPosition().getMallId(), shopVO.getPosition().getMall());
-            couponExcelDtoList = paymentStatementService.selectForCouponExcelDto(statementConfig.getBussinessId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime());
-            paymentStatementExcelDto.setShopName(shopVO.getName());
-            paymentStatementExcelDto.setMallName(shopVO.getPosition().getMall());
-        } else if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.MALL)) {
-            Map map = new HashMap();
-            map.put("mallId", statementConfig.getBussinessId());
-            Map result = roaShopService.getShops(map, 0, 10000);
-            List<ShopVO> shopVOs = (List<ShopVO>)result.get("list");
-            for (ShopVO shopVO : shopVOs) {
-                paymentStatementDetailDtoList.addAll(paymentStatementService.selectForStatementDetails(shopVO.getId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime(), shopVO.getName(), shopVO.getPosition().getMallId(), shopVO.getPosition().getMall()));
-                couponExcelDtoList.addAll(paymentStatementService.selectForCouponExcelDto(shopVO.getId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime()));
-            }
-            if (shopVOs != null && shopVOs.size() > 0) {
-                paymentStatementExcelDto.setMallName(shopVOs.get(0).getPosition().getMall());
-            }
-        }
-
-        List<CouponCodeExcelDto> couponCodeExcelDtoList = new ArrayList<>();
-        double total = 0;
-        double payTotal = 0;
-        for (PaymentStatementDetailDto paymentStatementDetailDto : paymentStatementDetailDtoList) {
-            CouponCodeExcelDto couponCodeExcelDto = paymentStatementDetailDto.toCouponCodeExcelDto();
-            couponCodeExcelDtoList.add(couponCodeExcelDto);
-            total += paymentStatementDetailDto.getOrigPrice();
-            payTotal += paymentStatementDetailDto.getPayAmount();
-        }
-        paymentStatementExcelDto.setBatchNo(paymentStatement.getBatchNo());
-        paymentStatementExcelDto.setCycleTime(DateUtils.getDateTimeStr(paymentStatement.getCycleStartTime()) + " - " + DateUtils.getDateTimeStr(paymentStatement.getCycleEndTime()));
-        paymentStatementExcelDto.setPayTotal(total);
-        paymentStatementExcelDto.setRongyiDiscount(total - payTotal);
-
-        BussinessInfo bussinessInfo = bussinessInfoService.selectByConfigId(statementConfig.getId());
-        paymentStatementExcelDto.setShopAccountName(bussinessInfo.getPayName());
-        paymentStatementExcelDto.setShopAccountNo(bussinessInfo.getPayAccount());
-        paymentStatementExcelDto.setShopBank(bussinessInfo.getBlankName());
-        paymentStatementExcelDto.setPayChannel(getPayChannelName(statementConfig.getPayChannel()));
-        paymentStatementExcelDto.setCouponExcelDtoList(couponExcelDtoList);
-        paymentStatementExcelDto.setCouponCodeExcelDtoList(couponCodeExcelDtoList);
-        ExcelUtils.write(propertyConfigurer.getProperty("settle.template.file"), propertyConfigurer.getProperty("settle.file.path"), getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime())), paymentStatementExcelDto);
-    }
-
     private String getFileName(String name, String date) {
         return "容易网商户对账单-" + name + "-" + date + ".xlsx";
     }
 
-    private String getPayChannelName(Byte payChannel) {
-        if (SettleConstant.PayChannel.ZHIFUBAO.equals(payChannel)) {
-            return "支付宝";
-        }
-        if (SettleConstant.PayChannel.WECHAT.equals(payChannel)) {
-            return "微信";
-        }
-        if (SettleConstant.PayChannel.UNION.equals(payChannel)) {
-            return "银联";
-        }
-        if (SettleConstant.PayChannel.CASH.equals(payChannel)) {
-            return "现金";
-        }
-        return "支付宝";
-    }
-
     /**
-     * @Description: 对账单明细
      * @param map
      * @return
+     * @Description: 对账单明细
      * @Author: xgq
      **/
     @RequestMapping("/info")
