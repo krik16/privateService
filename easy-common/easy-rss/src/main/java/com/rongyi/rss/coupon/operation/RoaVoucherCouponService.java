@@ -157,17 +157,45 @@ public interface RoaVoucherCouponService {
      */
     List<CouponChannel> getCouponChannels();
 
-
+    /**
+     * 摩店：通用查询
+     *
+     * @param couponParam
+     * @return
+     */
     Page findAllByPage(CouponParam couponParam);
 
-    boolean updateOffStock(Integer couponId, boolean status);
+    /**
+     * 摩店：下架操作
+     *
+     * @param couponId
+     * @param status
+     * @return
+     */
+    boolean updateOffStock(String couponId, boolean status);
 
     /**
-     * 根据mongId查询
+     * 摩店：逻辑删除
      *
      * @param couponId
      * @return
      */
-    Coupon findOneByMongoId(String couponId);
+    boolean removeByBoId(String couponId);
 
+    /**
+     * 摩店：根据boId查询
+     *
+     * @param couponId
+     * @return
+     */
+    Coupon findCouponByBoId(String couponId);
+
+    /**
+     * 根据boId追加库存
+     *
+     * @param couponId
+     * @param quantity
+     * @return
+     */
+    boolean appendCouponCount(String couponId, Integer quantity);
 }

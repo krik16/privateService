@@ -27,13 +27,13 @@ public interface MSCouponService {
     /**
      * 删除优惠券
      */
-    boolean removeCoupon(Integer couponId);
+    boolean removeCoupon(String couponId);
 
     /**
      * 更新优惠券状态
      * 目前修改优惠券下线状态，下线状态值：4
      */
-    boolean updateCouponStatus(Integer couponId, String status);
+    boolean updateCouponStatus(String couponId, String status);
 
 
     /**
@@ -42,7 +42,7 @@ public interface MSCouponService {
      * @param couponId
      * @return
      */
-    OldCouponVO getCouponDetail(Integer couponId);
+    OldCouponVO getCouponDetail(String couponId);
 
 
     /**
@@ -70,7 +70,7 @@ public interface MSCouponService {
      * @param quantity
      * @return
      */
-    boolean appendInventory(Integer couponId, Integer quantity);
+    boolean appendInventory(String couponId, Integer quantity);
 
 }
 
