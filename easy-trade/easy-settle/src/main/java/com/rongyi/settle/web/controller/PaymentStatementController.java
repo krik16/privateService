@@ -100,7 +100,7 @@ public class PaymentStatementController {
 
 	private void setValdateMap(Map<String, Object> map) {
 		Integer searchType = Integer.valueOf(map.get("searchType").toString());
-		Integer searchStatus = null;
+		Integer searchStatus = -1;
 		if (map.get("searchStatus") != null)
 			searchStatus = Integer.valueOf(map.get("searchStatus").toString());
 		List<Byte> statusList = new ArrayList<Byte>();
