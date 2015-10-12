@@ -7,7 +7,7 @@ import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.entity.CouponChannel;
 import com.rongyi.easy.coupon.entity.CouponSort;
 import com.rongyi.easy.coupon.param.CouponParam;
-import com.rongyi.easy.coupon.param.operation.VoucherCouponParam;
+import com.rongyi.easy.coupon.param.VoucherCouponParam;
 import com.rongyi.easy.coupon.vo.operation.CouponCountVO;
 import com.rongyi.easy.coupon.vo.operation.VoucherCouponVO;
 
@@ -45,7 +45,7 @@ public interface RoaVoucherCouponService {
      * Description:根据id删除代金券
      * author:lqy
      */
-    boolean remove(Integer id);
+    boolean remove(String id);
 
     /**
      * param param 参数对象
@@ -71,7 +71,7 @@ public interface RoaVoucherCouponService {
      * Description:审核代金券
      * author:lqy
      */
-    boolean submitVerify(List<Integer> ids, Integer status,
+    boolean submitVerify(List<String> ids, Integer status,
                          String reason);
 
     /**
@@ -81,7 +81,7 @@ public interface RoaVoucherCouponService {
      * Description:下架代金券
      * author:lqy
      */
-    boolean submitOffStock(List<Integer> ids, String reason)
+    boolean submitOffStock(List<String> ids, String reason)
     ;
 
     /**
@@ -90,7 +90,7 @@ public interface RoaVoucherCouponService {
      * Description:根据id查询代金券
      * author:lqy
      */
-    Coupon findOneById(Integer id);
+    Coupon findOneById(String id);
 
     /**
      * param id    代金券id
@@ -99,7 +99,7 @@ public interface RoaVoucherCouponService {
      * Description:追加代金券
      * author:lqy
      */
-    boolean addCouponCount(Integer id, int count);
+    boolean addCouponCount(String id, int count);
 
     /**
      * param ids           卡券集合
@@ -108,7 +108,7 @@ public interface RoaVoucherCouponService {
      * Description:设置展示区域
      * author:lqy
      */
-    ResponseResult submitDeployRegion(List<Integer> ids, String displayRegion);
+    ResponseResult submitDeployRegion(List<String> ids, String displayRegion);
 
 
     /***********置顶代金券 start***************/
@@ -135,7 +135,7 @@ public interface RoaVoucherCouponService {
      * Description:代金券取消置顶
      * author:lqy
      */
-    boolean submitUnstick(Integer id);
+    boolean submitUnstick(String id);
 
     /**
      * param couponSortId 排序id
@@ -174,28 +174,6 @@ public interface RoaVoucherCouponService {
      */
     boolean updateOffStock(String couponId, boolean status);
 
-    /**
-     * 摩店：逻辑删除
-     *
-     * @param couponId
-     * @return
-     */
-    boolean removeByBoId(String couponId);
+    public boolean appendCouponCount(String couponId, Integer quantity);
 
-    /**
-     * 摩店：根据boId查询
-     *
-     * @param couponId
-     * @return
-     */
-    Coupon findCouponByBoId(String couponId);
-
-    /**
-     * 根据boId追加库存
-     *
-     * @param couponId
-     * @param quantity
-     * @return
-     */
-    boolean appendCouponCount(String couponId, Integer quantity);
 }

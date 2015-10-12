@@ -1,4 +1,4 @@
-package com.rongyi.easy.coupon.param.operation;
+package com.rongyi.easy.coupon.param;
 
 import java.io.Serializable;
 import java.util.Date;

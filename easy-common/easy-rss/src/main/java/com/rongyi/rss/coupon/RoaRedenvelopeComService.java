@@ -5,7 +5,7 @@ import java.util.List;
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.Coupon;
-import com.rongyi.easy.coupon.param.operation.RedenvelopeParam;
+import com.rongyi.easy.coupon.param.RedenvelopeParam;
 import com.rongyi.easy.coupon.vo.operation.RedenvelopCouponVO;
 
 public interface RoaRedenvelopeComService {
@@ -15,7 +15,7 @@ public interface RoaRedenvelopeComService {
      * @param id
      * @return
      */
-    Coupon findOne(int id);
+    Coupon findOne(String id);
 
     /**
      * 保存
@@ -39,7 +39,7 @@ public interface RoaRedenvelopeComService {
      * @param id
      * @return
      */
-    boolean remove(int id) throws Exception;
+    boolean remove(String id) throws Exception;
 
     /**
      * 返回所有数据
@@ -64,7 +64,7 @@ public interface RoaRedenvelopeComService {
      * @param checkDesc   审核说明
      * @return
      */
-    boolean checkCoupon(int id, int checkStatus, String checkDesc) throws Exception;
+    boolean checkCoupon(String id, int checkStatus, String checkDesc) throws Exception;
 
     /**
      * 配置现金券
@@ -106,5 +106,5 @@ public interface RoaRedenvelopeComService {
      * @param userId
      * @return
      */
-    Boolean addCouponCount(int couponId, Integer addCount, String userId) throws Exception;
+    Boolean addCouponCount(String couponId, Integer addCount, String userId) throws Exception;
 }

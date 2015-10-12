@@ -1,15 +1,15 @@
 package com.rongyi.rss.coupon.operation;
 
-import java.util.List;
-
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.entity.CouponChannel;
 import com.rongyi.easy.coupon.entity.CouponSort;
-import com.rongyi.easy.coupon.param.operation.VoucherCouponParam;
+import com.rongyi.easy.coupon.param.VoucherCouponParam;
 import com.rongyi.easy.coupon.vo.operation.CouponCountVO;
 import com.rongyi.easy.coupon.vo.operation.VoucherCouponVO;
+
+import java.util.List;
 
 /**
  * @Description:大运营平台代金券接口
@@ -40,7 +40,7 @@ public interface IVoucherCouponService {
 	 * @param id 代金券id
 	 * @return 成功：true 失败：false
 	 */
-	boolean remove(Integer id) throws Exception;
+	boolean remove(String id) throws Exception;
 
 	/**
 	 * @Description:多条件分页查询代金券
@@ -66,7 +66,7 @@ public interface IVoucherCouponService {
 	 * @param reason 未通过原因
 	 * @return 成功：true 失败：false
 	 */
-	boolean submitVerify(List<Integer> ids, Integer status,
+	boolean submitVerify(List<String> ids, Integer status,
 			String reason) throws Exception;
 
 	/**
@@ -77,7 +77,7 @@ public interface IVoucherCouponService {
 	 * @return 成功：true 失败：false
 	 * @throws Exception
 	 */
-	boolean submitOffStock(List<Integer> ids, String reason)
+	boolean submitOffStock(List<String> ids, String reason)
 			throws Exception;
 
 	/**
@@ -86,7 +86,7 @@ public interface IVoucherCouponService {
 	 * @param id 代金券id
 	 * @return 返回coupon
 	 */
-	Coupon findOneById(Integer id);
+	Coupon findOneById(String id);
 
 
 	/**
@@ -96,7 +96,7 @@ public interface IVoucherCouponService {
 	 * @param count 追加数量
 	 * @return
 	 */
-	boolean addCouponCount(Integer id, int count) throws Exception;
+	boolean addCouponCount(String id, int count) throws Exception;
 
 	/**
 	 * @Description:设置展示区域
@@ -105,7 +105,7 @@ public interface IVoucherCouponService {
 	 * @param displayRegion 展示区域： 常规区域,活动区域;未选中[0]，选中[1] 例如 "1,1"表示都选中
 	 * @return
 	 */
-	ResponseResult submitDeployRegion(List<Integer> ids, String displayRegion);
+	ResponseResult submitDeployRegion(List<String> ids, String displayRegion);
 
 
 
@@ -136,7 +136,7 @@ public interface IVoucherCouponService {
 	 * @return 成功返回true 失败返回false
 	 * @throws Exception 
 	 */
-	boolean submitUnstick(Integer id) throws Exception;
+	boolean submitUnstick(String id) throws Exception;
 
 	/**
 	 * @Description:置顶代金券排序
