@@ -174,6 +174,8 @@
 		<result column="status" property="status" jdbcType="TINYINT" />
 		<result column="desc" property="desc" jdbcType="VARCHAR" />
 		<result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+		<result column="down_load_user" property="downLoadUser" jdbcType="TIMESTAMP" />
+		<result column="download_time" property="downLoadTime" jdbcType="TIMESTAMP" />
 	</resultMap>
 
 	<sql id="list_where_clause">
@@ -236,6 +238,10 @@
 				#{item,jdbcType=TINYINT}
 			</foreach>
 		</if>
+		<if test="op_model != null">
+			and ol.op_model = #{op_model}
+			and op_type = #{status}
+		</if>
 	</sql>
 
 	<select id="selectPageList" resultMap="DtoResultMap"
@@ -246,7 +252,7 @@
 		pb.status_update_time,
 		pbc.biz_name, pbc.biz_id, pbc.pay_channel, pbc.biz_type,
 		bi.biz_email, bi.pay_account, bi.blank_name, bi.pay_name,
-		ol.desc
+		ol.desc,ol.create_user_id as download_user,ol.creade_at as download_time
 		from payment_bill pb
 		left join payment_bill_config pbc on pb.config_id=pbc.id
 		left join biz_info bi on bi.config_id=pbc.id

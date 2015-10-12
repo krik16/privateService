@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,6 +119,8 @@ public class PaymentStatementController {
 			payChannelList.add((byte) 3);
 			payChannelList.add((byte) 4);
 			map.put("payChannelList", payChannelList);
+			//操作日志查询
+			map.put("opLog",true);
 		case 5://商家付款单列表
 //			statusList.add()
 		default:

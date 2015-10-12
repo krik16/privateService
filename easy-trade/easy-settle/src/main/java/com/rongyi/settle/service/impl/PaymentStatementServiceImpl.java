@@ -175,7 +175,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		operatioLog.setCreateUserId(userId);
 		operatioLog.setDesc(desc);
 		operatioLog.setOperationModel((byte) 1);
-		operatioLog.setOperationType(Byte.valueOf(status.toString()));
+		operatioLog.setOperationType(status.byteValue());
 		operatioLog.setCreadeAt(new Date());
 		operatioLog.setOperationId(id);
 		operatioLog.setIsDelete(Byte.valueOf((byte) 0));

@@ -61,6 +61,7 @@ public class ExportDataToExcel {
 			map.put("idArray", idArray);
 			map.put("searchStatus", 6);
 			List<PaymentStatementDto> payments = paymentStatementService.selectPageList(map, null, null);
+			List<Integer> ids = new ArrayList<Integer>();
 			Set<String> businessIds = null;
 			if (CollectionUtils.isNotEmpty(payments)) {
 				businessIds = new HashSet<>();
@@ -129,6 +130,7 @@ public class ExportDataToExcel {
 							sheet.getRow(i).getCell(9).setCellValue("对账单状态");
 						} else {
 							dto = sonDtoList.get(i - 1);
+							ids.add(dto.getId());
 							sheet.getRow(i).getCell(0).setCellValue(dto.getBatchNo());
 							String businessType = "";
 							switch (dto.getBussinessType()) {
@@ -161,6 +163,9 @@ public class ExportDataToExcel {
 							sheet.getRow(i).getCell(9).setCellValue("已下载");
 						}
 					}
+					//更改付款单状态，记录操作日志
+					//TODO user_id需从request中取的
+					paymentStatementService.updatePaymentStatusByIds(ids,11, "下载对账单", "test");
 				}
 				String outFile = "付款清单_" + DateUtil.getCurrentDateYYYYMMDD() + ".xlsx";
 				ExcelUtil.exportExcel(response, wb, outFile);
