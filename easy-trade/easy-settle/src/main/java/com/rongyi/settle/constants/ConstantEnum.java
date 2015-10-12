@@ -18,6 +18,12 @@ package com.rongyi.settle.constants;
 public enum ConstantEnum {
 
 
+    PAY_CHANNEL_ZHIFUBAO(0,"支付宝"),
+    PAY_CHANNEL_WEIXIN(1,"微信"),
+    PAY_CHANNEL_YINLIAN(2,"银行卡"),
+    PAY_CHANNEL_CASH(3,"现金"),
+    PAY_CHANNEL_TRANSFER(4,"银行转账"),
+    
 	PAGE_SIZE(10,"分页条数");
     
     private Object code;

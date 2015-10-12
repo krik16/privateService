@@ -6,7 +6,7 @@
  *
  **/
 
-package com.rongyi.tms.excel;
+package com.rongyi.settle.excel;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;

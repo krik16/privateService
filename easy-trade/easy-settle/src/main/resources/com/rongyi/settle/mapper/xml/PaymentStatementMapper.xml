@@ -1,333 +1,382 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
-<mapper namespace="com.rongyi.settle.mapper.PaymentStatementMapper" >
-  <resultMap id="BaseResultMap" type="com.rongyi.easy.settle.entity.PaymentStatement" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="config_id" property="configId" jdbcType="INTEGER" />
-    <result column="rule_code" property="ruleCode" jdbcType="VARCHAR" />
-    <result column="cycle_start_time" property="cycleStartTime" jdbcType="TIMESTAMP" />
-    <result column="cycle_end_time" property="cycleEndTime" jdbcType="TIMESTAMP" />
-    <result column="type" property="type" jdbcType="TINYINT" />
-    <result column="batch_no" property="batchNo" jdbcType="VARCHAR" />
-    <result column="pay_total" property="payTotal" jdbcType="INTEGER" />
-    <result column="status" property="status" jdbcType="TINYINT" />
-    <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
-    <result column="pay_no" property="payNo" jdbcType="VARCHAR" />
-    <result column="status_update_time" property="statusUpdateTime" jdbcType="TIMESTAMP" />
-    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
-    <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, config_id, rule_code, cycle_start_time, cycle_end_time, `type`, batch_no, pay_total, 
-    `status`, pay_time, pay_no, status_update_time, create_at, is_delete
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.util.Map" >
-    select 
-    <include refid="Base_Column_List" />
-    from payment_bill
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from payment_bill
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.rongyi.easy.settle.entity.PaymentStatement" useGeneratedKeys="true" keyProperty="id" >
-    insert into payment_bill (config_id, rule_code, cycle_start_time, 
-      cycle_end_time, `type`, batch_no, 
-      pay_total, `status`, pay_time, 
-      pay_no, status_update_time, create_at, 
-      is_delete)
-    values (#{configId,jdbcType=INTEGER}, #{ruleCode,jdbcType=VARCHAR}, #{cycleStartTime,jdbcType=TIMESTAMP}, 
-      #{cycleEndTime,jdbcType=TIMESTAMP}, #{type,jdbcType=TINYINT}, #{batchNo,jdbcType=VARCHAR}, 
-      #{payTotal,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{payTime,jdbcType=TIMESTAMP}, 
-      #{payNo,jdbcType=VARCHAR}, #{statusUpdateTime,jdbcType=TIMESTAMP}, #{createAt,jdbcType=TIMESTAMP}, 
-      #{isDelete,jdbcType=TINYINT})
-  </insert>
-  <insert id="insertSelective" parameterType="com.rongyi.easy.settle.entity.PaymentStatement" useGeneratedKeys="true" keyProperty="id" >
-    insert into payment_bill
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      config_id,
-      rule_code,
-      cycle_start_time,
-      cycle_end_time,
-      `type`,
-      batch_no,
-      pay_total,
-      `status`,
-      pay_time,
-      pay_no,
-      status_update_time,
-      create_at,
-      is_delete,
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      #{configId,jdbcType=INTEGER},
-      #{ruleCode,jdbcType=VARCHAR},
-      #{cycleStartTime,jdbcType=TIMESTAMP},
-      #{cycleEndTime,jdbcType=TIMESTAMP},
-      #{type,jdbcType=TINYINT},
-      #{batchNo,jdbcType=VARCHAR},
-      #{payTotal,jdbcType=INTEGER},
-      #{status,jdbcType=TINYINT},
-      #{payTime,jdbcType=TIMESTAMP},
-      #{payNo,jdbcType=VARCHAR},
-      #{statusUpdateTime,jdbcType=TIMESTAMP},
-      #{createAt,jdbcType=TIMESTAMP},
-      #{isDelete,jdbcType=TINYINT},
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.rongyi.easy.settle.entity.PaymentStatement" >
-    update payment_bill
-    <set >
-      <if test="configId != null" >
-        config_id = #{configId,jdbcType=INTEGER},
-      </if>
-      <if test="ruleCode != null" >
-        rule_code = #{ruleCode,jdbcType=VARCHAR},
-      </if>
-      <if test="cycleStartTime != null" >
-        cycle_start_time = #{cycleStartTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="cycleEndTime != null" >
-        cycle_end_time = #{cycleEndTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="type != null" >
-        `type` = #{type,jdbcType=TINYINT},
-      </if>
-      <if test="batchNo != null" >
-        batch_no = #{batchNo,jdbcType=VARCHAR},
-      </if>
-      <if test="payTotal != null" >
-        pay_total = #{payTotal,jdbcType=INTEGER},
-      </if>
-      <if test="status != null" >
-        `status` = #{status,jdbcType=TINYINT},
-      </if>
-      <if test="payTime != null" >
-        pay_time = #{payTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="payNo != null" >
-        pay_no = #{payNo,jdbcType=VARCHAR},
-      </if>
-      <if test="statusUpdateTime != null" >
-        status_update_time = #{statusUpdateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createAt != null" >
-        create_at = #{createAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isDelete != null" >
-        is_delete = #{isDelete,jdbcType=TINYINT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.rongyi.easy.settle.entity.PaymentStatement" >
-    update payment_bill
-    set config_id = #{configId,jdbcType=INTEGER},
-      rule_code = #{ruleCode,jdbcType=VARCHAR},
-      cycle_start_time = #{cycleStartTime,jdbcType=TIMESTAMP},
-      cycle_end_time = #{cycleEndTime,jdbcType=TIMESTAMP},
-      `type` = #{type,jdbcType=TINYINT},
-      batch_no = #{batchNo,jdbcType=VARCHAR},
-      pay_total = #{payTotal,jdbcType=INTEGER},
-      `status` = #{status,jdbcType=TINYINT},
-      pay_time = #{payTime,jdbcType=TIMESTAMP},
-      pay_no = #{payNo,jdbcType=VARCHAR},
-      status_update_time = #{statusUpdateTime,jdbcType=TIMESTAMP},
-      create_at = #{createAt,jdbcType=TIMESTAMP},
-      is_delete = #{isDelete,jdbcType=TINYINT}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+<mapper namespace="com.rongyi.settle.mapper.PaymentStatementMapper">
+	<resultMap id="BaseResultMap"
+		type="com.rongyi.easy.settle.entity.PaymentStatement">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="config_id" property="configId" jdbcType="INTEGER" />
+		<result column="rule_code" property="ruleCode" jdbcType="VARCHAR" />
+		<result column="cycle_start_time" property="cycleStartTime"
+			jdbcType="TIMESTAMP" />
+		<result column="cycle_end_time" property="cycleEndTime"
+			jdbcType="TIMESTAMP" />
+		<result column="type" property="type" jdbcType="TINYINT" />
+		<result column="batch_no" property="batchNo" jdbcType="VARCHAR" />
+		<result column="pay_total" property="payTotal" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="TINYINT" />
+		<result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+		<result column="pay_no" property="payNo" jdbcType="VARCHAR" />
+		<result column="status_update_time" property="statusUpdateTime"
+			jdbcType="TIMESTAMP" />
+		<result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+		<result column="is_delete" property="isDelete" jdbcType="TINYINT" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, config_id, rule_code, cycle_start_time, cycle_end_time, `type`,
+		batch_no, pay_total,
+		`status`, pay_time, pay_no, status_update_time, create_at, is_delete
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from payment_bill
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from payment_bill
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.rongyi.easy.settle.entity.PaymentStatement"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into payment_bill (config_id, rule_code, cycle_start_time,
+		cycle_end_time, `type`, batch_no,
+		pay_total, `status`, pay_time,
+		pay_no, status_update_time, create_at,
+		is_delete)
+		values (#{configId,jdbcType=INTEGER}, #{ruleCode,jdbcType=VARCHAR},
+		#{cycleStartTime,jdbcType=TIMESTAMP},
+		#{cycleEndTime,jdbcType=TIMESTAMP}, #{type,jdbcType=TINYINT},
+		#{batchNo,jdbcType=VARCHAR},
+		#{payTotal,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{payTime,jdbcType=TIMESTAMP},
+		#{payNo,jdbcType=VARCHAR}, #{statusUpdateTime,jdbcType=TIMESTAMP},
+		#{createAt,jdbcType=TIMESTAMP},
+		#{isDelete,jdbcType=TINYINT})
+	</insert>
+	<insert id="insertSelective" parameterType="com.rongyi.easy.settle.entity.PaymentStatement"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into payment_bill
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			config_id,
+			rule_code,
+			cycle_start_time,
+			cycle_end_time,
+			`type`,
+			batch_no,
+			pay_total,
+			`status`,
+			pay_time,
+			pay_no,
+			status_update_time,
+			create_at,
+			is_delete,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{configId,jdbcType=INTEGER},
+			#{ruleCode,jdbcType=VARCHAR},
+			#{cycleStartTime,jdbcType=TIMESTAMP},
+			#{cycleEndTime,jdbcType=TIMESTAMP},
+			#{type,jdbcType=TINYINT},
+			#{batchNo,jdbcType=VARCHAR},
+			#{payTotal,jdbcType=INTEGER},
+			#{status,jdbcType=TINYINT},
+			#{payTime,jdbcType=TIMESTAMP},
+			#{payNo,jdbcType=VARCHAR},
+			#{statusUpdateTime,jdbcType=TIMESTAMP},
+			#{createAt,jdbcType=TIMESTAMP},
+			#{isDelete,jdbcType=TINYINT},
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.rongyi.easy.settle.entity.PaymentStatement">
+		update payment_bill
+		<set>
+			<if test="configId != null">
+				config_id = #{configId,jdbcType=INTEGER},
+			</if>
+			<if test="ruleCode != null">
+				rule_code = #{ruleCode,jdbcType=VARCHAR},
+			</if>
+			<if test="cycleStartTime != null">
+				cycle_start_time = #{cycleStartTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="cycleEndTime != null">
+				cycle_end_time = #{cycleEndTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="type != null">
+				`type` = #{type,jdbcType=TINYINT},
+			</if>
+			<if test="batchNo != null">
+				batch_no = #{batchNo,jdbcType=VARCHAR},
+			</if>
+			<if test="payTotal != null">
+				pay_total = #{payTotal,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				`status` = #{status,jdbcType=TINYINT},
+			</if>
+			<if test="payTime != null">
+				pay_time = #{payTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="payNo != null">
+				pay_no = #{payNo,jdbcType=VARCHAR},
+			</if>
+			<if test="statusUpdateTime != null">
+				status_update_time = #{statusUpdateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createAt != null">
+				create_at = #{createAt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isDelete != null">
+				is_delete = #{isDelete,jdbcType=TINYINT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.rongyi.easy.settle.entity.PaymentStatement">
+		update payment_bill
+		set config_id = #{configId,jdbcType=INTEGER},
+		rule_code = #{ruleCode,jdbcType=VARCHAR},
+		cycle_start_time = #{cycleStartTime,jdbcType=TIMESTAMP},
+		cycle_end_time = #{cycleEndTime,jdbcType=TIMESTAMP},
+		`type` = #{type,jdbcType=TINYINT},
+		batch_no = #{batchNo,jdbcType=VARCHAR},
+		pay_total = #{payTotal,jdbcType=INTEGER},
+		`status` = #{status,jdbcType=TINYINT},
+		pay_time = #{payTime,jdbcType=TIMESTAMP},
+		pay_no = #{payNo,jdbcType=VARCHAR},
+		status_update_time = #{statusUpdateTime,jdbcType=TIMESTAMP},
+		create_at = #{createAt,jdbcType=TIMESTAMP},
+		is_delete = #{isDelete,jdbcType=TINYINT}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
 
-  <resultMap id="DtoResultMap" type="com.rongyi.easy.settle.dto.PaymentStatementDto" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="type" property="type" jdbcType="TINYINT" />
-    <result column="batch_no" property="batchNo" jdbcType="VARCHAR" />
-    <result column="biz_type" property="bussinessType" jdbcType="TINYINT" />
-    <result column="biz_id" property="bussinessId" jdbcType="VARCHAR" />
-    <result column="cycle_start_time" property="cycleStartTime" jdbcType="TIMESTAMP" />
-    <result column="cycle_end_time" property="cycleEndTime" jdbcType="TIMESTAMP" />
-    <result column="biz_name" property="bussinessName" jdbcType="VARCHAR" />
-    <result column="pay_channel" property="payChannel" jdbcType="TINYINT" />
-    <result column="pay_account" property="payAccount" jdbcType="VARCHAR" />
-    <result column="blank_name" property="blankName" jdbcType="VARCHAR" />
-    <result column="pay_no" property="payNo" jdbcType="VARCHAR" />
-    <result column="pay_name" property="payName" jdbcType="VARCHAR" />
-    <result column="pay_total" property="payTotal" jdbcType="INTEGER" />
-    <result column="biz_email" property="bussinessEmail" jdbcType="VARCHAR" />
-    <result column="status_update_time" property="statusUpdateTime" jdbcType="TIMESTAMP" />
-    <result column="status" property="status" jdbcType="TINYINT" />
-    <result column="desc" property="desc" jdbcType="VARCHAR" />
-  </resultMap>
+	<resultMap id="DtoResultMap"
+		type="com.rongyi.easy.settle.dto.PaymentStatementDto">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="type" property="type" jdbcType="TINYINT" />
+		<result column="batch_no" property="batchNo" jdbcType="VARCHAR" />
+		<result column="biz_type" property="bussinessType" jdbcType="TINYINT" />
+		<result column="biz_id" property="bussinessId" jdbcType="VARCHAR" />
+		<result column="cycle_start_time" property="cycleStartTime"
+			jdbcType="TIMESTAMP" />
+		<result column="cycle_end_time" property="cycleEndTime"
+			jdbcType="TIMESTAMP" />
+		<result column="biz_name" property="bussinessName" jdbcType="VARCHAR" />
+		<result column="pay_channel" property="payChannel" jdbcType="TINYINT" />
+		<result column="pay_account" property="payAccount" jdbcType="VARCHAR" />
+		<result column="blank_name" property="blankName" jdbcType="VARCHAR" />
+		<result column="pay_no" property="payNo" jdbcType="VARCHAR" />
+		<result column="pay_name" property="payName" jdbcType="VARCHAR" />
+		<result column="pay_total" property="payTotal" jdbcType="INTEGER" />
+		<result column="biz_email" property="bussinessEmail" jdbcType="VARCHAR" />
+		<result column="status_update_time" property="statusUpdateTime"
+			jdbcType="TIMESTAMP" />
+		<result column="status" property="status" jdbcType="TINYINT" />
+		<result column="desc" property="desc" jdbcType="VARCHAR" />
+	</resultMap>
 
-  <sql id="list_where_clause">
-    <if test="searchStatus != null">
-      and pb.status = #{searchStatus,jdbcType=TINYINT}
-    </if>
-    <if test="type != null">
-      and pb.type = #{type,jdbcType=TINYINT}
-    </if>
-    <if test="bussinessType != null">
-      and pbc.biz_type = #{bussinessType,jdbcType=TINYINT}
-    </if>
-    <if test="bussinessName != null">
-      and pbc.biz_name = #{bussinessName,jdbcType=VARCHAR}
-    </if>
-    <if test="createAtStart != null">
-      and pb.create_at &gt; #{createAtStart,jdbcType=TIMESTAMP}
-    </if>
-    <if test="createAtEnd != null">
-      and pb.create_at &lt; #{createAtEnd,jdbcType=TIMESTAMP}
-    </if>
-    <if test="batchNo != null">
-      and pb.batch_no = #{batchNo,jdbcType=VARCHAR}
-    </if>
-    <if test="payChannel != null">
-      and pbc.pay_channel = #{payChannel,jdbcType=TINYINT}
-    </if>
-    <if test="payAccount != null">
-      and bi.pay_account = #{payAccount,jdbcType=VARCHAR}
-    </if>
-    <if test="blankName != null">
-      and bi.blank_name = #{blankName,jdbcType=VARCHAR}
-    </if>
-    <if test="statusUpdateStartTime != null">
-      and pb.status_update_time &gt; #{statusUpdateStartTime,jdbcType=TIMESTAMP}
-    </if>
-    <if test="statusUpdateEndTime != null">
-      and pb.status_update_time &lt; #{statusUpdateEndTime,jdbcType=TIMESTAMP}
-    </if>
-    <if test="ids != null">
-      and pb.id in #{ids,jdbcType=VARCHAR}
-    </if>
-  </sql>
+	<sql id="list_where_clause">
+		<if test="statusList != null and statusList != ''">
+			and pb.status in
+			<foreach collection="statusList" index="index" item="item"
+				open="(" separator="," close=")">
+				#{item,jdbcType=TINYINT}
+			</foreach>
+		</if>
+		
+		<if test="status != null and status">
+			and pb.status = #{status,jdbcType=TINYINT}
+		</if>
+		<if test="type != null">
+			and pb.type = #{type,jdbcType=TINYINT}
+		</if>
+		<if test="bussinessType != null">
+			and pbc.biz_type = #{bussinessType,jdbcType=TINYINT}
+		</if>
+		<if test="bussinessName != null">
+			and pbc.biz_name = #{bussinessName,jdbcType=VARCHAR}
+		</if>
+		<if test="createAtStart != null">
+			and pb.create_at &gt; #{createAtStart,jdbcType=TIMESTAMP}
+		</if>
+		<if test="createAtEnd != null">
+			and pb.create_at &lt; #{createAtEnd,jdbcType=TIMESTAMP}
+		</if>
+		<if test="batchNo != null">
+			and pb.batch_no = #{batchNo,jdbcType=VARCHAR}
+		</if>
+		<if test="payChannel != null">
+			and pbc.pay_channel = #{payChannel,jdbcType=TINYINT}
+		</if>
+		<if test="payAccount != null">
+			and bi.pay_account = #{payAccount,jdbcType=VARCHAR}
+		</if>
+		<if test="blankName != null">
+			and bi.blank_name = #{blankName,jdbcType=VARCHAR}
+		</if>
+		<if test="statusUpdateStartTime != null">
+			and pb.status_update_time &gt;
+			#{statusUpdateStartTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="statusUpdateEndTime != null">
+			and pb.status_update_time &lt; #{statusUpdateEndTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="ids != null">
+			and pb.id in #{ids,jdbcType=VARCHAR}
+		</if>
+	</sql>
 
-  <select id="selectPageList" resultMap="DtoResultMap" parameterType="java.util.Map">
-    select
-      pb.id, pb.type, pb.batch_no, pb.cycle_start_time, pb.cycle_end_time, pb.pay_total, pb.status, pb.pay_no,
-      pb.status_update_time,
-      pbc.biz_name, pbc.biz_id, pbc.pay_channel, pbc.biz_type,
-      bi.biz_email, bi.pay_account, bi.blank_name, bi.pay_name,
-      ol.desc
-    from payment_bill pb
-   left join payment_bill_config pbc on pb.config_id=pbc.id
-   left join biz_info bi on bi.config_id=pbc.id
-   left join op_log ol on ol.op_id=pb.id
-    <where>
-      <include refid="list_where_clause" />
-    </where>
-    group by pb.id
-    limit #{currentPage,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
-  </select>
+	<select id="selectPageList" resultMap="DtoResultMap"
+		parameterType="java.util.Map">
+		select
+		pb.id, pb.type, pb.batch_no, pb.cycle_start_time, pb.cycle_end_time,
+		pb.pay_total, pb.status, pb.pay_no,
+		pb.status_update_time,
+		pbc.biz_name, pbc.biz_id, pbc.pay_channel, pbc.biz_type,
+		bi.biz_email, bi.pay_account, bi.blank_name, bi.pay_name,
+		ol.desc
+		from payment_bill pb
+		left join payment_bill_config pbc on pb.config_id=pbc.id
+		left join biz_info bi on bi.config_id=pbc.id
+		left join op_log ol on ol.op_id=pb.id
+		<where>
+			<include refid="list_where_clause" />
+		</where>
+		group by pb.id
+		<if test="currentPage != null and pageSize != null">
+			limit #{currentPage,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+		</if>
+	</select>
 
-  <select id="selectPageListCount" parameterType="java.util.Map" resultType="java.lang.Integer">
-      select count(total.id) from  (select pb.id from payment_bill pb
-       left join payment_bill_config pbc on pb.config_id=pbc.id
-       left join biz_info bi on bi.config_id=pbc.id
-    <where>
-      <include refid="list_where_clause" />
-    </where>
-    group by pb.id
-    ) as total
-  </select>
+	<select id="selectPageListCount" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		select count(total.id) from (select pb.id from payment_bill pb
+		left join payment_bill_config pbc on pb.config_id=pbc.id
+		left join biz_info bi on bi.config_id=pbc.id
+		<where>
+			<include refid="list_where_clause" />
+		</where>
+		group by pb.id
+		) as total
+	</select>
 
-  <select id="selectByCycleTime" resultMap="BaseResultMap" parameterType="java.util.Map" >
-    select
-    <include refid="Base_Column_List" />
-    from payment_bill
-    where config_id = #{configId,jdbcType=INTEGER}
-    and cycle_start_time = #{cycleStartTime,jdbcType=TIMESTAMP}
-    and cycle_end_time = #{cycleEndTime,jdbcType=TIMESTAMP}
-  </select>
+	<select id="selectByCycleTime" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from payment_bill
+		where config_id = #{configId,jdbcType=INTEGER}
+		and cycle_start_time = #{cycleStartTime,jdbcType=TIMESTAMP}
+		and cycle_end_time = #{cycleEndTime,jdbcType=TIMESTAMP}
+	</select>
 
-  <update id="updateStatusByIds" parameterType="map">
-    update payment_bill
-    set status=#{status, jdbcType=INTEGER},
-        status_update_time = #{statusUpdateTime,jdbcType=TIMESTAMP}
-    <where>
-      <if test="ids != null">
-        AND id in
-        <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
-          #{item}
-        </foreach>
-      </if>
-    </where>
-  </update>
+	<update id="updateStatusByIds" parameterType="map">
+		update payment_bill
+		set status=#{status, jdbcType=INTEGER},
+		status_update_time = #{statusUpdateTime,jdbcType=TIMESTAMP}
+		<where>
+			<if test="ids != null">
+				AND id in
+				<foreach item="item" index="index" collection="ids" open="("
+					separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</update>
 
-  <update id="cancel" parameterType="java.lang.Integer">
-    update payment_bill set status=8 where id=#{id, jdbcType=INTEGER}
-  </update>
+	<update id="cancel" parameterType="java.lang.Integer">
+		update payment_bill set status=8 where id=#{id, jdbcType=INTEGER}
+	</update>
 
-  <!-- 通过对账单id查询对账单信息 -->
-  <select id="searchDtoById" parameterType="int" resultMap="DtoResultMap">
-    select
-      pb.id, pb.type, pb.batch_no, pb.cycle_start_time, pb.cycle_end_time, pb.pay_total, pb.status, pb.pay_no,
-      pb.status_update_time,
-      pbc.biz_name, pbc.biz_id, pbc.pay_channel, pbc.biz_type,
-      bi.biz_email, bi.pay_account, bi.blank_name, bi.pay_name
-    from payment_bill pb
-         left join payment_bill_config pbc on pb.config_id = pbc.id
-         left join biz_info bi  on pbc.id = bi.config_id
-    where pb.id=#{id, jdbcType=INTEGER}
-  </select>
+	<!-- 通过对账单id查询对账单信息 -->
+	<select id="searchDtoById" parameterType="int" resultMap="DtoResultMap">
+		select
+		pb.id, pb.type, pb.batch_no, pb.cycle_start_time, pb.cycle_end_time,
+		pb.pay_total, pb.status, pb.pay_no,
+		pb.status_update_time,
+		pbc.biz_name, pbc.biz_id, pbc.pay_channel, pbc.biz_type,
+		bi.biz_email, bi.pay_account, bi.blank_name, bi.pay_name
+		from payment_bill pb
+		left join payment_bill_config pbc on pb.config_id = pbc.id
+		left join biz_info bi on pbc.id = bi.config_id
+		where pb.id=#{id, jdbcType=INTEGER}
+	</select>
 
-  <resultMap id="StatementDetailMap" type="com.rongyi.settle.dto.PaymentStatementDetailDto" >
-    <id column="order_no" property="orderNo" jdbcType="VARCHAR" />
-    <result column="pay_no" property="payNo" jdbcType="VARCHAR" />
-    <result column="use_time" property="useTime" jdbcType="TIMESTAMP" />
-    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
-    <result column="coupon_id" property="couponId" jdbcType="VARCHAR" />
-    <result column="coupon_code" property="couponCode" jdbcType="VARCHAR" />
-    <result column="title" property="title" jdbcType="VARCHAR" />
-    <result column="revenue_type" property="revenueType" jdbcType="VARCHAR" />
-    <result column="pay_channel" property="payChannel" jdbcType="VARCHAR" />
-    <result column="orig_price" property="origPrice" jdbcType="INTEGER" />
-    <result column="pay_amount" property="payAmount" jdbcType="INTEGER" />
-    <result column="hb_discount" property="hbDiscount" jdbcType="INTEGER" />
-    <result column="score_discount" property="scoreDiscount" jdbcType="INTEGER" />
-    <result column="discount" property="discount" jdbcType="INTEGER" />
-    <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
-    <result column="shop_id" property="shopId" jdbcType="VARCHAR" />
-    <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
-    <result column="mall_id" property="mallId" jdbcType="VARCHAR" />
-    <result column="mall_name" property="mallName" jdbcType="VARCHAR" />
-    <result column="user_name" property="userName" jdbcType="VARCHAR" />
-    <result column="guide_name" property="guideName" jdbcType="VARCHAR" />
-    <result column="guide_phone" property="guidePhone" jdbcType="VARCHAR" />
-  </resultMap>
+	<resultMap id="StatementDetailMap"
+		type="com.rongyi.settle.dto.PaymentStatementDetailDto">
+		<id column="order_no" property="orderNo" jdbcType="VARCHAR" />
+		<result column="pay_no" property="payNo" jdbcType="VARCHAR" />
+		<result column="use_time" property="useTime" jdbcType="TIMESTAMP" />
+		<result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+		<result column="coupon_id" property="couponId" jdbcType="VARCHAR" />
+		<result column="coupon_code" property="couponCode" jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="revenue_type" property="revenueType" jdbcType="VARCHAR" />
+		<result column="pay_channel" property="payChannel" jdbcType="VARCHAR" />
+		<result column="orig_price" property="origPrice" jdbcType="INTEGER" />
+		<result column="pay_amount" property="payAmount" jdbcType="INTEGER" />
+		<result column="hb_discount" property="hbDiscount" jdbcType="INTEGER" />
+		<result column="score_discount" property="scoreDiscount"
+			jdbcType="INTEGER" />
+		<result column="discount" property="discount" jdbcType="INTEGER" />
+		<result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+		<result column="shop_id" property="shopId" jdbcType="VARCHAR" />
+		<result column="shop_name" property="shopName" jdbcType="VARCHAR" />
+		<result column="mall_id" property="mallId" jdbcType="VARCHAR" />
+		<result column="mall_name" property="mallName" jdbcType="VARCHAR" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="guide_name" property="guideName" jdbcType="VARCHAR" />
+		<result column="guide_phone" property="guidePhone" jdbcType="VARCHAR" />
+	</resultMap>
 
-  <select id="selectForStatementDetails" parameterType="java.util.Map" resultMap="StatementDetailMap" statementType="STATEMENT">
-    select tor.order_no,tor.pay_no,tuc.use_time,tor.create_at,tuc.coupon_id,tuc.coupon_code,tuc.title,'收入' as revenue_type,
-    (CASE tor.pay_channel WHEN 1 THEN '支付宝' WHEN 5 THEN '微信' WHEN 3 THEN '支付宝' ELSE '其他' END) as pay_channel,tuc.orig_price, ROUND(tor.pay_amount/tor.code_num, 0) as pay_amount, ROUND(tor.hb_discount/tor.code_num, 0) as hb_discount,
-    ROUND(tor.score_discount/tor.code_num, 0) as score_discount,
-    tuc.orig_price-tuc.unit_price discount,tuc.user_phone,tuc.shop_id,
-    '${shopName}' as shop_name,'${mallId}' as mall_id,'${mallName}' as mall_name,tor.user_name,rui.user_name as guide_name,rui.user_phone as guide_phone
-    from ry_trade.trade_user_code tuc
-    join ry_trade.trade_order tor on tuc.order_id=tor.id
-    left join ry_rmmm.rmmm_user_info rui on rui.id=tuc.checked_user_id
-    where tuc.status=2
-    and tuc.use_time between '${startTime}' AND '${endTime}'
-    and tuc.use_time between '${cycleStartTime}' AND '${cycleEndTime}'
-    AND tuc.shop_id = '${shopId}'
-  </select>
+	<select id="selectForStatementDetails" parameterType="java.util.Map"
+		resultMap="StatementDetailMap" statementType="STATEMENT">
+		select
+		tor.order_no,tor.pay_no,tuc.use_time,tor.create_at,tuc.coupon_id,tuc.coupon_code,tuc.title,'收入'
+		as revenue_type,
+		(CASE tor.pay_channel WHEN 1 THEN '支付宝' WHEN 5 THEN '微信' WHEN 3 THEN '支付宝'
+		ELSE '其他' END) as pay_channel,tuc.orig_price,
+		ROUND(tor.pay_amount/tor.code_num, 0) as pay_amount,
+		ROUND(tor.hb_discount/tor.code_num, 0) as hb_discount,
+		ROUND(tor.score_discount/tor.code_num, 0) as score_discount,
+		tuc.orig_price-tuc.unit_price discount,tuc.user_phone,tuc.shop_id,
+		'${shopName}' as shop_name,'${mallId}' as mall_id,'${mallName}' as
+		mall_name,tor.user_name,rui.user_name as guide_name,rui.user_phone as
+		guide_phone
+		from ry_trade.trade_user_code tuc
+		join ry_trade.trade_order tor on tuc.order_id=tor.id
+		left join ry_rmmm.rmmm_user_info rui on rui.id=tuc.checked_user_id
+		where tuc.status=2
+		and tuc.use_time between '${startTime}' AND '${endTime}'
+		and tuc.use_time between '${cycleStartTime}' AND '${cycleEndTime}'
+		AND tuc.shop_id = '${shopId}'
+	</select>
 
 
-  <resultMap id="CouponExcelDtoMap" type="com.rongyi.settle.dto.CouponExcelDto" >
-    <result column="title" property="couponName" jdbcType="VARCHAR" />
-    <result column="pay_channel" property="revenueType" jdbcType="VARCHAR" />
-    <result column="orig_price" property="couponPrice" jdbcType="INTEGER" />
-    <result column="coupon_count" property="couponCount" jdbcType="INTEGER" />
-    <result column="total_amount" property="couponTotalAmount" jdbcType="INTEGER" />
-    <result column="pay_amount" property="couponPayAmount" jdbcType="INTEGER" />
-  </resultMap>
+	<resultMap id="CouponExcelDtoMap" type="com.rongyi.settle.dto.CouponExcelDto">
+		<result column="title" property="couponName" jdbcType="VARCHAR" />
+		<result column="pay_channel" property="revenueType" jdbcType="VARCHAR" />
+		<result column="orig_price" property="couponPrice" jdbcType="INTEGER" />
+		<result column="coupon_count" property="couponCount" jdbcType="INTEGER" />
+		<result column="total_amount" property="couponTotalAmount"
+			jdbcType="INTEGER" />
+		<result column="pay_amount" property="couponPayAmount"
+			jdbcType="INTEGER" />
+	</resultMap>
 
-  <select id="selectForCouponExcelDto" parameterType="java.util.Map" resultMap="CouponExcelDtoMap">
-    select tuc.title, '收入' as pay_channel,tuc.orig_price, sum(tuc.orig_price) as total_amount, count(tuc.coupon_id) as coupon_count, ROUND(sum(tor.pay_amount/tor.code_num),0) as pay_amount
-    from ry_trade.trade_user_code tuc
-    join ry_trade.trade_order tor on tuc.order_id=tor.id
-    where tuc.status=2
-    and tuc.use_time between #{startTime,jdbcType=TIMESTAMP} AND #{endTime,jdbcType=TIMESTAMP}
-    and tuc.use_time between #{cycleStartTime,jdbcType=TIMESTAMP} AND #{cycleEndTime,jdbcType=TIMESTAMP}
-    AND tuc.shop_id = #{shopId,jdbcType=VARCHAR}
-  </select>
+	<select id="selectForCouponExcelDto" parameterType="java.util.Map"
+		resultMap="CouponExcelDtoMap">
+		select tuc.title, '收入' as pay_channel,tuc.orig_price, sum(tuc.orig_price) as
+		total_amount, count(tuc.coupon_id) as coupon_count,
+		ROUND(sum(tor.pay_amount/tor.code_num),0) as pay_amount
+		from ry_trade.trade_user_code tuc
+		join ry_trade.trade_order tor on tuc.order_id=tor.id
+		where tuc.status=2
+		and tuc.use_time between #{startTime,jdbcType=TIMESTAMP} AND
+		#{endTime,jdbcType=TIMESTAMP}
+		and tuc.use_time between #{cycleStartTime,jdbcType=TIMESTAMP} AND
+		#{cycleEndTime,jdbcType=TIMESTAMP}
+		AND tuc.shop_id = #{shopId,jdbcType=VARCHAR}
+	</select>
 </mapper>
