@@ -28,6 +28,7 @@ public class ExcelUtils {
             String pathname2 = targetFilePath + targetFileName;
             InputStream in = new FileInputStream(new File(pathname));
             XSSFWorkbook work = new XSSFWorkbook(in);
+            in.close();
             XSSFSheet sheet = work.getSheetAt(0);
             XSSFRow row3 = sheet.getRow(3);
             XSSFCell batchNo = row3.getCell(6);
