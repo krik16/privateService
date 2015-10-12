@@ -209,6 +209,13 @@
 		<if test="payChannel != null">
 			and pbc.pay_channel = #{payChannel,jdbcType=TINYINT}
 		</if>
+		<if test="payChannelList != null and payChannelList != ''">
+			and pbc.pay_channel in
+			<foreach collection="payChannelList" index="index" item="item"
+				open="(" separator="," close=")">
+				#{item,jdbcType=TINYINT}
+			</foreach>
+		</if>
 		<if test="payAccount != null">
 			and bi.pay_account = #{payAccount,jdbcType=VARCHAR}
 		</if>

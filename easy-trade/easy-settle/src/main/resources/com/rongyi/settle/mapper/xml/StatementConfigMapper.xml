@@ -51,6 +51,9 @@
 	</sql>
 
 	<sql id="Base_list_where_clause">
+		<if test="status != null">
+			AND status = #{status}
+		</if>
 		<!-- 商户类型 -->
 		<if test="bussinessType != null">
 			AND biz_type = #{bussinessType}
@@ -72,6 +75,7 @@
 		<if test="createAtEnd != null and createAtEnd != ''">
 			AND #{createAtEnd} >= create_at
 		</if>
+		
 
 	</sql>
 	<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">

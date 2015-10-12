@@ -87,8 +87,7 @@ public class PaymentStatementController {
 	public ResponseData list(@RequestBody Map<String, Object> map) {
 		try {
 			Integer currentPage = Integer.valueOf(map.get("currentPage").toString());
-			List<Byte> statusList = getStatusList(map);
-			map.put("statusList", statusList);
+			setValdateMap(map);
 			List<PaymentStatementDto> list = paymentStatementService.selectPageList(map, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt());
 			Integer count = paymentStatementService.selectPageListCount(map);
 			return ResponseData.success(list, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt(), count);
@@ -98,7 +97,7 @@ public class PaymentStatementController {
 		}
 	}
 
-	private List<Byte> getStatusList(Map<String, Object> map) {
+	private void setValdateMap(Map<String, Object> map) {
 		Integer searchType = Integer.valueOf(map.get("searchType").toString());
 		Integer searchStatus = Integer.valueOf(map.get("searchStatus").toString());
 		List<Byte> statusList = new ArrayList<Byte>();
@@ -111,14 +110,18 @@ public class PaymentStatementController {
 			statusList.add((byte) 0);
 		case 2:// 查询待付款审核列表
 			statusList.add((byte) 4);
-		case 3:// 查询付款列表
+		case 3:// 查询付款清单列表
 			statusList.add((byte) 6);
-		case 4:// 查询付款清单列表
-			statusList.add((byte) 6);
+			List<Byte> payChannelList = new ArrayList<Byte>();
+			payChannelList.add((byte)3);
+			payChannelList.add((byte)4);
+			map.put("payChannelList", payChannelList);
 		default:
 			break;
 		}
-		return statusList.isEmpty() ? null : statusList;
+		if (statusList != null)
+			map.put("statusList", statusList);
+		
 	}
 
 	/**
