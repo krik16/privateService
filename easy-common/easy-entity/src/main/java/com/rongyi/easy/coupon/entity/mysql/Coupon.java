@@ -158,9 +158,19 @@ public class Coupon implements Serializable {
     private Integer inChannel;
 
     /**
+     * 导入渠道名称
+     */
+    private String inChannelName;
+
+    /**
      * 推广渠道
      */
     private Integer outChannel;
+
+    /**
+     * 推广渠道名称
+     */
+    private String outChannelName;
 
     /**
      * 店铺对应的公司名
@@ -653,10 +663,77 @@ public class Coupon implements Serializable {
         this.isGeneral = isGeneral;
     }
 
+    public String getInChannelName() {
+        return inChannelName;
+    }
+
+    public void setInChannelName(String inChannelName) {
+        this.inChannelName = inChannelName;
+    }
+
+    public String getOutChannelName() {
+        return outChannelName;
+    }
+
+    public void setOutChannelName(String outChannelName) {
+        this.outChannelName = outChannelName;
+    }
+
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Coupon [id=").append(id).append(", name=").append(name).append(", couponType=").append(couponType).append(", validateType=").append(validateType).append(", totalCount=").append(totalCount).append(", stockCount=").append(stockCount).append(", origPrice=").append(origPrice).append(", currPrice=").append(currPrice).append(", discount=").append(discount).append(", displayRegion=").append(displayRegion).append(", afterSaleService=").append(afterSaleService).append(", publishStartAt=").append(publishStartAt).append(", publishEndAt=").append(publishEndAt).append(", validStartAt=").append(validStartAt).append(", validEndAt=").append(validEndAt).append(", limitDesc=").append(limitDesc).append(", usageDesc=").append(usageDesc).append(", recommend=").append(recommend).append(", remark=").append(remark).append(", listPicUrl=").append(listPicUrl).append(", detailPicUrl=").append(detailPicUrl).append(", relatedType=").append(relatedType).append(", limitCount=").append(limitCount).append(", limitUseCount=").append(limitUseCount).append(", limitPublishCount=").append(limitPublishCount).append(", synTarget=").append(synTarget).append(", publishChannel=").append(publishChannel).append(", status=").append(status).append(", inChannel=").append(inChannel).append(", outChannel=").append(outChannel).append(", sourceName=").append(sourceName).append(", createUser=").append(createUser).append(", createAt=").append(createAt).append(", updateUser=").append(updateUser).append(", updateAt=").append(updateAt).append(", isThird=").append(isThird).append(", isOffStock=").append(isOffStock).append(", isDeleted=").append(isDeleted).append(", couponCategory=").append(couponCategory).append(", couponGroup=").append(couponGroup).append(", couponBrand=").append(couponBrand).append(", couponMall=").append(couponMall).append(", couponShops=").append(couponShops).append(", couponMalls=").append(couponMalls).append(", preferentialType=").append(preferentialType).append(", rCommoditys=").append(rCommoditys).append(", listPicName=").append(listPicName).append(", detailPicNames=").append(detailPicNames).append("]");
-        return builder.toString();
+        final StringBuilder sb = new StringBuilder("Coupon{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", couponType=").append(couponType);
+        sb.append(", validateType=").append(validateType);
+        sb.append(", totalCount=").append(totalCount);
+        sb.append(", stockCount=").append(stockCount);
+        sb.append(", origPrice=").append(origPrice);
+        sb.append(", currPrice=").append(currPrice);
+        sb.append(", discount=").append(discount);
+        sb.append(", displayRegion='").append(displayRegion).append('\'');
+        sb.append(", afterSaleService='").append(afterSaleService).append('\'');
+        sb.append(", publishStartAt=").append(publishStartAt);
+        sb.append(", publishEndAt=").append(publishEndAt);
+        sb.append(", validStartAt=").append(validStartAt);
+        sb.append(", validEndAt=").append(validEndAt);
+        sb.append(", limitDesc='").append(limitDesc).append('\'');
+        sb.append(", usageDesc='").append(usageDesc).append('\'');
+        sb.append(", recommend='").append(recommend).append('\'');
+        sb.append(", remark='").append(remark).append('\'');
+        sb.append(", listPicUrl='").append(listPicUrl).append('\'');
+        sb.append(", detailPicUrl='").append(detailPicUrl).append('\'');
+        sb.append(", relatedType=").append(relatedType);
+        sb.append(", limitCount=").append(limitCount);
+        sb.append(", limitUseCount=").append(limitUseCount);
+        sb.append(", limitPublishCount=").append(limitPublishCount);
+        sb.append(", synTarget='").append(synTarget).append('\'');
+        sb.append(", publishChannel=").append(publishChannel);
+        sb.append(", status=").append(status);
+        sb.append(", inChannel=").append(inChannel);
+        sb.append(", inChannelName='").append(inChannelName).append('\'');
+        sb.append(", outChannel=").append(outChannel);
+        sb.append(", outChannelName='").append(outChannelName).append('\'');
+        sb.append(", sourceName='").append(sourceName).append('\'');
+        sb.append(", createUser='").append(createUser).append('\'');
+        sb.append(", createAt=").append(createAt);
+        sb.append(", updateUser='").append(updateUser).append('\'');
+        sb.append(", updateAt=").append(updateAt);
+        sb.append(", isThird=").append(isThird);
+        sb.append(", isOffStock=").append(isOffStock);
+        sb.append(", isDeleted=").append(isDeleted);
+        sb.append(", couponCategory=").append(couponCategory);
+        sb.append(", couponGroup=").append(couponGroup);
+        sb.append(", couponBrand=").append(couponBrand);
+        sb.append(", couponMall=").append(couponMall);
+        sb.append(", couponShops=").append(couponShops);
+        sb.append(", couponMalls=").append(couponMalls);
+        sb.append(", preferentialType=").append(preferentialType);
+        sb.append(", rCommoditys=").append(rCommoditys);
+        sb.append(", listPicName='").append(listPicName).append('\'');
+        sb.append(", detailPicNames=").append(detailPicNames);
+        sb.append(", isGeneral=").append(isGeneral);
+        sb.append('}');
+        return sb.toString();
     }
 }
