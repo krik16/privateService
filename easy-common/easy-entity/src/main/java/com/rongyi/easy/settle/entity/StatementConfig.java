@@ -157,6 +157,12 @@ public class StatementConfig implements Serializable {
      */
     private String createBy;
 
+    /**
+     * 支付账号
+     * 列表显示使用，待移除
+     */
+    private String payAccount;
+    
     public Integer getId() {
         return id;
     }
@@ -388,4 +394,13 @@ public class StatementConfig implements Serializable {
     public void setBussinessId(String bussinessId) {
         this.bussinessId = bussinessId;
     }
+
+	public String getPayAccount() {
+		return payAccount;
+	}
+
+	public void setPayAccount(String payAccount) {
+		this.payAccount = payAccount;
+	}
+    
 }
