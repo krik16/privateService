@@ -13,6 +13,7 @@ import java.util.Map;
  * @Description: TODO(卡券订单接口，提供给mall-shop的controller使用)
  * @date 2015年6月8日 下午5:07:12
  */
+@Deprecated
 public interface MMCouponOrderService {
 
     /**

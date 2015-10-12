@@ -16,6 +16,7 @@ import java.util.List;
  * @Description: TODO(用户券码接口，提供给mall-shop的controller使用)
  * @date 2015年6月8日 下午
  */
+@Deprecated
 public interface MMUserCouponService {
 
     /**

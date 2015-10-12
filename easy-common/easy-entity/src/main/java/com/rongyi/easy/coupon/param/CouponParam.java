@@ -1,7 +1,5 @@
 package com.rongyi.easy.coupon.param;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,10 +28,6 @@ public class CouponParam implements Serializable {
      */
     private Integer status;
 
-    /**
-     * 券码
-     */
-    private String couponCode;
 
     /**
      * 券Id
@@ -45,6 +39,11 @@ public class CouponParam implements Serializable {
      */
     private Boolean isOffStock;
 
+    /**
+     * 卡券类型
+     */
+    private Integer couponType;
+
     private Map<String, String> orderBy = new HashMap<>();
 
     public String getShopId() {
@@ -53,15 +52,6 @@ public class CouponParam implements Serializable {
 
     public void setShopId(String shopId) {
         this.shopId = shopId;
-    }
-
-
-    public String getCouponCode() {
-        return couponCode;
-    }
-
-    public void setCouponCode(String couponCode) {
-        this.couponCode = couponCode;
     }
 
     public String getCouponId() {
@@ -112,17 +102,11 @@ public class CouponParam implements Serializable {
         this.pageSize = pageSize;
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .append("currentPage", currentPage)
-                .append("pageSize", pageSize)
-                .append("shopId", shopId)
-                .append("status", status)
-                .append("couponCode", couponCode)
-                .append("couponId", couponId)
-                .append("isOffStock", isOffStock)
-                .append("orderBy", orderBy)
-                .toString();
+    public Integer getCouponType() {
+        return couponType;
+    }
+
+    public void setCouponType(Integer couponType) {
+        this.couponType = couponType;
     }
 }

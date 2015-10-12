@@ -7,6 +7,7 @@ import com.rongyi.core.bean.ResponseResult;
  * @author hebo 2015/07/07
  *
  */
+@Deprecated
 public interface MMValidCouponCodeService {
 
 	/**

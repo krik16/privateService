@@ -18,10 +18,9 @@ public class Coupon implements Serializable {
     private Integer id;
 
     /**
-     * mongo老卡券Id
-     * mongoId
+     * 业务对象Id(兼容mongoId)
      */
-    private String mongoId;
+    private String boId;
 
     /**
      * 卡券名称
@@ -699,18 +698,19 @@ public class Coupon implements Serializable {
         return (totalCount - stockCount < 0) ? 0 : totalCount - stockCount;
     }
 
-    public String getMongoId() {
-        return mongoId;
+    public String getBoId() {
+        return boId;
     }
 
-    public void setMongoId(String mongoId) {
-        this.mongoId = mongoId;
+    public void setBoId(String boId) {
+        this.boId = boId;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("id", id)
+                .append("boId", boId)
                 .append("name", name)
                 .append("couponType", couponType)
                 .append("validateType", validateType)
@@ -723,6 +723,8 @@ public class Coupon implements Serializable {
                 .append("afterSaleService", afterSaleService)
                 .append("publishStartAt", publishStartAt)
                 .append("publishEndAt", publishEndAt)
+                .append("saleStartAt", saleStartAt)
+                .append("saleEndAt", saleEndAt)
                 .append("validStartAt", validStartAt)
                 .append("validEndAt", validEndAt)
                 .append("limitDesc", limitDesc)
@@ -751,15 +753,14 @@ public class Coupon implements Serializable {
                 .append("couponCategory", couponCategory)
                 .append("couponGroup", couponGroup)
                 .append("couponBrand", couponBrand)
-//                .append("couponMall", couponMall)
                 .append("couponShops", couponShops)
                 .append("couponMalls", couponMalls)
                 .append("preferentialType", preferentialType)
                 .append("redenvelopeCommodities", redenvelopeCommodities)
                 .append("listPicName", listPicName)
                 .append("detailPicNames", detailPicNames)
+                .append("purchaseType", purchaseType)
+                .append("visitedCount", visitedCount)
                 .toString();
     }
-
-
 }
