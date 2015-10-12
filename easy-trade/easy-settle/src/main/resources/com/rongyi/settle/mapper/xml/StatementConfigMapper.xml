@@ -88,8 +88,8 @@
 	</sql>
 	<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		select
-		<include refid="Base_Column_List" />
-		from payment_bill_config
+		*
+		from payment_bill_config 
 		where id = #{id,jdbcType=INTEGER}
 	</select>
 	<delete id="updateDelete" parameterType="java.lang.Integer">
