@@ -240,7 +240,13 @@
 		</if>
 		<if test="op_model != null">
 			and ol.op_model = #{op_model}
-			and op_type = #{status}
+			<if test="statusList != null and statusList != ''">
+			and op_type in
+			<foreach collection="statusList" index="index" item="item"
+				open="(" separator="," close=")">
+				#{item,jdbcType=TINYINT}
+			</foreach>
+		</if>
 		</if>
 		<if test="minPayTotal != null and minPayTotal != ''">
 			and pb.pay_total &gt;= #{minPayTotal/100}

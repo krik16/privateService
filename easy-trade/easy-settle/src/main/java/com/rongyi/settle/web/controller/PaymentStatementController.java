@@ -110,34 +110,40 @@ public class PaymentStatementController {
 				statusList.add((byte) 5);
 			break;
 		case 1:// 查询对账单审核列表
-			if(searchStatus==0)
-			statusList.add((byte) 0);
-			if(searchStatus==1){
+			if (searchStatus == 0)
+				statusList.add((byte) 0);
+			if (searchStatus == 1) {
 				statusList.add((byte) 1);
 				statusList.add((byte) 2);
 			}
 			break;
 		case 2:// 查询待付款审核列表
-			statusList.add((byte) 4);
+			if (searchStatus == 0)
+				statusList.add((byte) 4);
+			else {
+				statusList.add((byte) 5);
+				statusList.add((byte) 6);
+			}
+			break;
 		case 3:// 查询付款清单列表
 			statusList.add((byte) 6);
-			statusList.add((byte)11);
+			statusList.add((byte) 11);
 			List<Byte> payChannelList = new ArrayList<Byte>();
 			payChannelList.add((byte) 3);
 			payChannelList.add((byte) 4);
 			map.put("payChannelList", payChannelList);
-			//操作日志查询
-			map.put("op_model",1);
+			// 操作日志查询
+			map.put("op_model", 1);
 			break;
-		case 5://商家付款单列表
-//			statusList.add()
+		case 5:// 商家付款单列表
+				// statusList.add()
 			break;
 		default:
 			break;
 		}
 		if (!statusList.isEmpty())
 			map.put("statusList", statusList);
-
+		// if(minPayTotal)
 	}
 
 	/**
@@ -189,7 +195,7 @@ public class PaymentStatementController {
 	 * @datetime:2015年9月21日下午3:03:26
 	 **/
 	@RequestMapping("/exportFinanceExcel")
-	public void exportFinanceExcel(HttpServletRequest request, HttpServletResponse response,@RequestParam Map<String, Object> map) {
+	public void exportFinanceExcel(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, Object> map) {
 		if (map == null)
 			map = new HashMap<String, Object>();
 		exportFinanceVerifyExcel.exportExcel(request, response, map);

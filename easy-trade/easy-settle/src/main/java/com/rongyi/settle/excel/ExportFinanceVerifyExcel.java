@@ -43,7 +43,7 @@ public class ExportFinanceVerifyExcel extends ExportBase {
 
 	public void exportExcel(HttpServletRequest request, HttpServletResponse response, Map<String, Object> map) {
 		try {
-			map.put("status", 4);
+			map.put("status", 0);
 			String path = request.getSession().getServletContext().getRealPath("/");
 			InputStream myxls = new FileInputStream(path + "excel/financeVerifyExcel.xlsx");
 			XSSFWorkbook wb = new XSSFWorkbook(myxls);
@@ -78,7 +78,7 @@ public class ExportFinanceVerifyExcel extends ExportBase {
 				if (paymentStatementDto.getPayTotal() != null)
 					sheet.getRow(i + 2).getCell(7).setCellValue(paymentStatementDto.getPayTotal() / 100);
 				sheet.getRow(i + 2).getCell(8).setCellValue(DateUtil.dateToString(paymentStatementDto.getCreateAt()));
-				sheet.getRow(i + 2).getCell(9).setCellValue("商家确认");
+				sheet.getRow(i + 2).getCell(9).setCellValue("初始状态");
 			}
 			String outFile = "对账审核记录_财务_" + DateUtil.getCurrentDateYYYYMMDD() + ".xlsx";
 			ExcelUtil.exportExcel(response, wb, outFile);
