@@ -71,10 +71,10 @@
 		</if>
 		<!-- 创建时间 -->
 		<if test="createAtStart != null and createAtStart != ''">
-			AND create_at >= #{createAtStart}
+			AND  pbc.create_at >= #{createAtStart}
 		</if>
 		<if test="createAtEnd != null and createAtEnd != ''">
-			AND #{createAtEnd} >= create_at
+			AND #{createAtEnd} >= pbc. create_at
 		</if>
 		
 
@@ -247,7 +247,7 @@
 		select
 		count(payment_bill_config.id)
 		from
-		payment_bill_config
+		payment_bill_config pbc
 		<where>
 			<include refid="Base_list_where_clause" />
 		</where>

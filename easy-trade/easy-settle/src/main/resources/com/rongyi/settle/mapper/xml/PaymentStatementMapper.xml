@@ -242,6 +242,12 @@
 			and ol.op_model = #{op_model}
 			and op_type = #{status}
 		</if>
+		<if test="minPayTotal != null and minPayTotal != ''">
+			and pb.pay_total &gt;= {minPayTotal/100}
+		</if>
+		<if test="maxPayTotal != null and maxPayTotal != ''">
+			and pb.pay_total &lt;= {maxPayTotal/100}
+		</if>
 	</sql>
 
 	<select id="selectPageList" resultMap="DtoResultMap"
