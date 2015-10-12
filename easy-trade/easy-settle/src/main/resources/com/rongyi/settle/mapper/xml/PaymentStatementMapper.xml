@@ -229,8 +229,12 @@
 		<if test="statusUpdateEndTime != null">
 			and pb.status_update_time &lt; #{statusUpdateEndTime,jdbcType=TIMESTAMP}
 		</if>
-		<if test="ids != null">
-			and pb.id in #{ids,jdbcType=VARCHAR}
+		<if test="idArray != null and idArray !=''">
+			and pb.id in 
+			<foreach collection="idArray" index="index" item="item"
+				open="(" separator="," close=")">
+				#{item,jdbcType=TINYINT}
+			</foreach>
 		</if>
 	</sql>
 
