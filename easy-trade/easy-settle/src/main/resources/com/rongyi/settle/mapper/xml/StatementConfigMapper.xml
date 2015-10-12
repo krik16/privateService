@@ -42,13 +42,13 @@
 		<result column="pay_account" property="payAccount" jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		id, rule_code, cooperate_type, biz_id, biz_type, biz_code, biz_name, count_cycle,
+		pbc.id, rule_code, cooperate_type, biz_id, biz_type, biz_code, biz_name, count_cycle,
 		cycle_start_time, cycle_end_time, is_loop, verify_type,
 		gen_header_time, gen_hm_time,
 		send_time, datum_type, pay_mode, regular_day, roll_day, roll_type,
 		effect_start_time,
-		effect_end_time, pay_channel, contract_no, link_rule_code, `status`, create_at,
-		is_delete, create_by,bi.pay_account
+		effect_end_time, pay_channel, contract_no, link_rule_code, `status`, pbc.create_at,
+		pbc.is_delete, pbc.create_by,bi.pay_account
 	</sql>
 
 	<sql id="Base_list_where_clause">
