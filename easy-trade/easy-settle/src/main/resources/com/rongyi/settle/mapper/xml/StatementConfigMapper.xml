@@ -52,11 +52,18 @@
 	</sql>
 
 	<sql id="Base_list_where_clause">
-		<if test="status != null">
+		<if test="statusList != null and statusList != ''">
+			and pbc.status in
+			<foreach collection="statusList" index="index" item="item"
+				open="(" separator="," close=")">
+				#{item,jdbcType=TINYINT}
+			</foreach>
+		</if>
+		<if test="status != null and status != ''">
 			AND status = #{status}
 		</if>
 		<!-- 商户类型 -->
-		<if test="bussinessType != null">
+		<if test="bussinessType != null and bussinessType != ''">
 			AND biz_type = #{bussinessType}
 		</if>
 		<!-- 商户名称 -->

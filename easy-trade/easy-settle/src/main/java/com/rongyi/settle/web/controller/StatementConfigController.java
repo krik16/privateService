@@ -88,6 +88,14 @@ public class StatementConfigController {
 	public ResponseData getPageList(HttpServletRequest request, @RequestBody Map<String, Object> map) {
 		try {
 			Integer currentPage = Integer.valueOf(map.get("currentPage").toString());
+			List<Byte> statusList = new ArrayList<Byte>();
+			if(map.get("searchStatus") != null && map.get("searchStatus").equals(0)){	
+				statusList.add((byte)0);
+			}else{
+				statusList.add((byte)1);
+				statusList.add((byte)1);
+			}
+			map.put("statusList", statusList);
 			List<StatementConfig> list = statementConfigService.selectPageList(map, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt());
 			Integer count = statementConfigService.selectPageListCount(map);
 			return ResponseData.success(list, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt(), count);
