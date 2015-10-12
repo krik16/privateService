@@ -188,17 +188,14 @@ public class PaymentStatementController {
 	 * @datetime:2015年9月21日下午3:03:26
 	 **/
 	@RequestMapping("/exportPaymentExcel")
-	public ResponseData exportPaymentSchedule(Map<String, Object> map, HttpServletResponse response, HttpServletRequest request) {
-		logger.info("导出付款清单参数>>>>>>>>>>>:map={}" + map);
-		String ids = map.get("ids") == null ? "" : map.get("ids").toString();
-		String[] idArray = ids.split("\\,");
-		ResponseData result;
+	public ResponseData exportPaymentSchedule(String ids, HttpServletResponse response, HttpServletRequest request) {
+		logger.info("导出付款清单参数>>>>>>>>>>>:ids={}" + ids);
 		if (StringUtils.isBlank(ids)) {
 			return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
 		}
+		String[] idArray = ids.split("\\,");
 		exportDataToExcel.exportPaymentScheduleExcel(request, response, idArray);
-		result = ResponseData.success();
-		return result;
+		return null;
 	}
 
 	/**
