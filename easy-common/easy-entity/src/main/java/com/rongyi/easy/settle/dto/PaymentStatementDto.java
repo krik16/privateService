@@ -58,6 +58,16 @@ public class PaymentStatementDto implements Serializable {
 
     /**  支付姓名 */
     private String payName;
+    
+    /**
+     * 下载人
+     */
+    private String downLoadUser;
+    
+    /**
+     * 下载时间
+     */
+    private Date downLoadTime;
 
     public Integer getId() {
         return id;
@@ -234,4 +244,21 @@ public class PaymentStatementDto implements Serializable {
     public void setDesc(String desc) {
         this.desc = desc;
     }
+
+	public String getDownLoadUser() {
+		return downLoadUser;
+	}
+
+	public void setDownLoadUser(String downLoadUser) {
+		this.downLoadUser = downLoadUser;
+	}
+
+	public Date getDownLoadTime() {
+		return downLoadTime;
+	}
+
+	public void setDownLoadTime(Date downLoadTime) {
+		this.downLoadTime = downLoadTime;
+	}
+    
 }
