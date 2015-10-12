@@ -9,11 +9,18 @@
 package com.rongyi.settle.web.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.rongyi.core.common.PagingVO;
+import com.rongyi.easy.roa.vo.BrandVO;
+import com.rongyi.easy.roa.vo.FilialeVo;
+import com.rongyi.easy.roa.vo.MallGroupVO;
+import com.rongyi.easy.roa.vo.ShopVO;
+import com.rongyi.rss.roa.*;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,6 +57,24 @@ public class StatementConfigController {
 
 	@Autowired
 	private ROARedisService redisService;
+
+	@Autowired
+	private ROAMallGroupService roaMallGroupService ;
+
+	@Autowired
+	private ROAMallService rOAMallService;
+
+//	@Autowired
+//	private ROAAreaService rOAAreaService ;
+
+	@Autowired
+	private RoaBrandService roaBrandService;
+
+	@Autowired
+	private ROAShopService roaShopService;
+
+	@Autowired
+	private ROAFilialeService rOAFilialeService;
 
 	/**
 	 * @Description: 分页查询配置列表
@@ -239,4 +264,68 @@ public class StatementConfigController {
 			return ResponseData.failure(CodeEnum.FIAL_CONFIG_LIST.getCodeInt(), CodeEnum.FIAL_CONFIG_LIST.getValueStr());
 		}
 	}
+
+	/**
+	 * @Description: 根据类型，名称模糊搜索
+	 * @Author: he
+	 **/
+	@RequestMapping("/relevance")
+	@ResponseBody
+	public ResponseData relevance(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+		ResponseData result = null;
+		try {
+			logger.info("============ 类型，名称模糊搜索 =============");
+			logger.info(map+"");
+			String name = map.containsKey("name") ? map.get("name").toString() : null;
+			Integer type = map.containsKey("type") ? Integer.valueOf(map.get("type").toString()) : null;
+			Integer currpage = map.get("currpage")!=null?Integer.parseInt(map.get("currpage").toString()):1;
+			Integer pagesize = 15;
+			if (org.apache.commons.lang.StringUtils.isBlank(name)) {
+				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
+			}
+			Map<String, Object> searchMap = new HashMap<>();
+			searchMap.put("currpage", currpage);
+			searchMap.put("pagesize", pagesize);
+			if (type.intValue()==0){//集团
+				searchMap.put("name", name);
+				List<MallGroupVO> list =  roaMallGroupService.getMallGroups(searchMap);
+				int count = 0;
+				if(currpage==1){
+					searchMap.put("currpage", null);
+					count = roaMallGroupService.getMallGroups(searchMap).size();
+ 				}
+				result = ResponseData.success(list, currpage, pagesize, count);
+			}else if(type.intValue()==1){//商场
+				searchMap.put("name", name);
+				Map<String, Object> resultMap = rOAMallService.getMalls(searchMap, currpage, pagesize);
+				//如果当前页为1 查询总记录数
+				int count = resultMap.containsKey("totalCount")?Integer.valueOf(resultMap.get("totalCount").toString()):0;
+				result = ResponseData.success(resultMap.get("list"), currpage, pagesize, count);
+			}else if(type.intValue()==2){//品牌
+				searchMap.put("cname", name);
+				PagingVO<BrandVO> brands = roaBrandService.getBrandListByMap(searchMap, currpage, pagesize);
+				logger.info("brandsCount" + brands.getRowCnt());
+				result = ResponseData.success(brands.getDataList(), currpage, pagesize, brands.getRowCnt());
+			}else if (type.intValue()==3){//分公司
+				searchMap.put("name", name);
+				List<FilialeVo> list = rOAFilialeService.getFilialeList(searchMap, currpage, pagesize);
+				int totalCount = rOAFilialeService.getFilialeList(searchMap, 0,0).size();
+				result = ResponseData.success(list, currpage, pagesize, totalCount);
+			}else if (type.intValue()==4){//店铺
+				searchMap.put("shopName", name);
+				searchMap.put("sort", "noSort");//暂未定排序字段
+				Map<String, Object> resultMap = roaShopService.getShops(searchMap, currpage, pagesize);
+				logger.info("此次查询关联店铺数"+resultMap.get("totalCount"));
+				List<ShopVO> list = (List<ShopVO>) resultMap.get("list");
+				int count = resultMap.containsKey("totalCount")?Integer.valueOf(resultMap.get("totalCount").toString()):0;
+				result = ResponseData.success(list, currpage, pagesize, count);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
+		}
+		logger.info(result.toString());
+		return result;
+	}
+
 }
