@@ -245,7 +245,7 @@
 	<select id="selectPageListCount" parameterType="java.util.Map"
 		resultType="java.lang.Integer">
 		select
-		count(payment_bill_config.id)
+		count(pbc.id)
 		from
 		payment_bill_config pbc
 		<where>
