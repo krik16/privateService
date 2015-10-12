@@ -115,6 +115,7 @@ public class PaymentStatementController {
 			statusList.add((byte) 4);
 		case 3:// 查询付款清单列表
 			statusList.add((byte) 6);
+			statusList.add((byte)11);
 			List<Byte> payChannelList = new ArrayList<Byte>();
 			payChannelList.add((byte) 3);
 			payChannelList.add((byte) 4);
