@@ -21,7 +21,7 @@ public class RedenvelopeCommodity implements Serializable {
     /**
      * 红包Id
      */
-    private Integer couponId;
+    private String couponId;
     /**
      * 商品Id
      */
@@ -71,11 +71,11 @@ public class RedenvelopeCommodity implements Serializable {
         this.id = id;
     }
 
-    public Integer getCouponId() {
+    public String getCouponId() {
         return couponId;
     }
 
-    public void setCouponId(Integer couponId) {
+    public void setCouponId(String couponId) {
         this.couponId = couponId;
     }
 

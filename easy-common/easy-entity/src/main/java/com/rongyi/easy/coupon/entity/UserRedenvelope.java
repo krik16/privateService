@@ -1,5 +1,7 @@
 package com.rongyi.easy.coupon.entity;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -9,6 +11,10 @@ import java.util.Date;
 public class UserRedenvelope implements Serializable {
     private Integer id;
 
+    /**
+     * 红包名称
+     */
+    private String name;
     /**
      * 领用人id
      */
@@ -20,9 +26,9 @@ public class UserRedenvelope implements Serializable {
     private String userName;
 
     /**
-     * 红包id
+     * 卡券Id
      */
-    private Integer couponId;
+    private String couponId;
 
     /**
      * 红包券码
@@ -93,11 +99,11 @@ public class UserRedenvelope implements Serializable {
         this.userName = userName;
     }
 
-    public Integer getCouponId() {
+    public String getCouponId() {
         return couponId;
     }
 
-    public void setCouponId(Integer couponId) {
+    public void setCouponId(String couponId) {
         this.couponId = couponId;
     }
 
@@ -171,5 +177,33 @@ public class UserRedenvelope implements Serializable {
 
     public void setValidAt(Date validAt) {
         this.validAt = validAt;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("name", name)
+                .append("userId", userId)
+                .append("userName", userName)
+                .append("couponId", couponId)
+                .append("couponCode", couponCode)
+                .append("amount", amount)
+                .append("status", status)
+                .append("userAccount", userAccount)
+                .append("receiveAt", receiveAt)
+                .append("useAt", useAt)
+                .append("channel", channel)
+                .append("orderNo", orderNo)
+                .append("validAt", validAt)
+                .toString();
     }
 }

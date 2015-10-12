@@ -15,7 +15,7 @@ public class CouponRejectRecord implements Serializable {
     /**
      * 卡券id
      */
-    private Integer couponId;
+    private String couponId;
 
     /**
      * 未通过或者下架原因
@@ -41,11 +41,11 @@ public class CouponRejectRecord implements Serializable {
         this.id = id;
     }
 
-    public Integer getCouponId() {
+    public String getCouponId() {
         return couponId;
     }
 
-    public void setCouponId(Integer couponId) {
+    public void setCouponId(String couponId) {
         this.couponId = couponId;
     }
 

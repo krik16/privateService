@@ -1,6 +1,8 @@
 package com.rongyi.core.bean;
 
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
@@ -32,8 +34,8 @@ import java.io.Serializable;
  */
 public class ResponseVO implements java.io.Serializable {
 
-    private static final Meta SUCCESS = new Meta(0, "success"); //成功
-    private static final Meta FAILURE = new Meta(1, "failure"); //失败
+    public static final Meta SUCCESS = new Meta(0, "success"); //成功
+    public static final Meta FAILURE = new Meta(1, "failure"); //失败
 
     private Meta meta; // errno=0：成功,errno=1:失败
     private Result result;//数据
@@ -177,6 +179,28 @@ public class ResponseVO implements java.io.Serializable {
 
 
         @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Meta meta = (Meta) o;
+
+            return new EqualsBuilder()
+                    .append(errno, meta.errno)
+                    .append(msg, meta.msg)
+                    .isEquals();
+        }
+
+        @Override
+        public int hashCode() {
+            return new HashCodeBuilder(17, 37)
+                    .append(errno)
+                    .append(msg)
+                    .toHashCode();
+        }
+
+        @Override
         public String toString() {
             return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                     .append("errno", errno)
@@ -189,6 +213,7 @@ public class ResponseVO implements java.io.Serializable {
         private Integer currentPage;//当前页：统一从1开始
         private Integer pageSize = 10; //每页行数
         private Integer totalCount; //总行数
+        private Integer totalPage = 0;//总页数
 
         private Page() {}
 
@@ -218,11 +243,12 @@ public class ResponseVO implements java.io.Serializable {
          * @return
          */
         public Integer getTotalPage() {
-            int totalPage = 0;
-            if (totalCount % pageSize == 0) {
-                totalPage = totalCount / pageSize;
-            } else {
-                totalPage = totalCount / pageSize + 1;
+            if (this.pageSize != null && this.pageSize > 0) {
+                if (totalCount % pageSize == 0) {
+                    totalPage = totalCount / pageSize;
+                } else {
+                    totalPage = totalCount / pageSize + 1;
+                }
             }
             return totalPage;
         }

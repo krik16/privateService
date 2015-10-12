@@ -13,7 +13,7 @@ public class CouponGroup implements Serializable{
     /**
      * 卡券id
      */
-    private Integer couponId;
+    private String couponId;
 
     /**
      * 集团id
@@ -33,11 +33,11 @@ public class CouponGroup implements Serializable{
         this.id = id;
     }
 
-    public Integer getCouponId() {
+    public String getCouponId() {
         return couponId;
     }
 
-    public void setCouponId(Integer couponId) {
+    public void setCouponId(String couponId) {
         this.couponId = couponId;
     }
 
@@ -68,12 +68,12 @@ public class CouponGroup implements Serializable{
     public CouponGroup() {
     }
 
-    public CouponGroup(Integer couponId, String groupId) {
+    public CouponGroup(String couponId, String groupId) {
         this.couponId = couponId;
         this.groupId = groupId;
     }
 
-    public CouponGroup(Integer couponId, String groupId, String groupName) {
+    public CouponGroup(String couponId, String groupId, String groupName) {
         this.couponId = couponId;
         this.groupId = groupId;
         this.groupName = groupName;

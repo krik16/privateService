@@ -13,7 +13,7 @@ public class CouponCategory implements Serializable{
     /**
      * 卡券id
      */
-    private Integer couponId;
+    private String couponId;
 
     /**
      * 一级分类id
@@ -43,11 +43,11 @@ public class CouponCategory implements Serializable{
         this.id = id;
     }
 
-    public Integer getCouponId() {
+    public String getCouponId() {
         return couponId;
     }
 
-    public void setCouponId(Integer couponId) {
+    public void setCouponId(String couponId) {
         this.couponId = couponId;
     }
 

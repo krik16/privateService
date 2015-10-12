@@ -15,7 +15,7 @@ public class CouponShop implements Serializable{
     /**
      * 卡券id
      */
-    private Integer couponId;
+    private String couponId;
 
     /**
      * 店铺id
@@ -83,11 +83,11 @@ public class CouponShop implements Serializable{
         this.id = id;
     }
 
-    public Integer getCouponId() {
+    public String getCouponId() {
         return couponId;
     }
 
-    public void setCouponId(Integer couponId) {
+    public void setCouponId(String couponId) {
         this.couponId = couponId;
     }
 
@@ -131,7 +131,7 @@ public class CouponShop implements Serializable{
         this.shopBrand = shopBrand;
     }
 
-    public CouponShop(Integer couponId, String shopId, String shopName, String shopMallName, String shopLogoUrl, String shopBrand) {
+    public CouponShop(String couponId, String shopId, String shopName, String shopMallName, String shopLogoUrl, String shopBrand) {
         this.couponId = couponId;
         this.shopId = shopId;
         this.shopName = shopName;
@@ -140,13 +140,13 @@ public class CouponShop implements Serializable{
         this.shopBrand = shopBrand;
     }
 
-    public CouponShop(Integer couponId, String shopId) {
+    public CouponShop(String couponId, String shopId) {
 
         this.couponId = couponId;
         this.shopId = shopId;
     }
 
-    public CouponShop(Integer couponId, String shopId, String shopName) {
+    public CouponShop(String couponId, String shopId, String shopName) {
         this.couponId = couponId;
         this.shopId = shopId;
         this.shopName = shopName;

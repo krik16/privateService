@@ -1,26 +1,23 @@
 package com.rongyi.easy.coupon.entity;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.ListUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import java.beans.Transient;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Coupon implements Serializable {
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
 
     /**
-     * 主键id
+     * 主键(兼容mongoId)
      */
-    private Integer id;
-
-    /**
-     * 业务对象Id(兼容mongoId)
-     */
-    private String boId;
+    private String id;
 
     /**
      * 卡券名称
@@ -276,11 +273,11 @@ public class Coupon implements Serializable {
     private Integer visitedCount = Integer.valueOf(0);//卡券详情浏览数
 
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -661,6 +658,18 @@ public class Coupon implements Serializable {
         this.redenvelopeCommodities = redenvelopeCommodities;
     }
 
+    @Transient
+    public List<String> getRedenvelopeCommodityIds() {
+        List<String> list = ListUtils.EMPTY_LIST;
+        if (CollectionUtils.isNotEmpty(this.redenvelopeCommodities)) {
+            list = new ArrayList<>();
+            for (RedenvelopeCommodity e : redenvelopeCommodities) {
+                list.add(e.getCommodityId());
+            }
+        }
+        return list;
+    }
+
     public Integer getPurchaseType() {
         return purchaseType;
     }
@@ -698,19 +707,11 @@ public class Coupon implements Serializable {
         return (totalCount - stockCount < 0) ? 0 : totalCount - stockCount;
     }
 
-    public String getBoId() {
-        return boId;
-    }
-
-    public void setBoId(String boId) {
-        this.boId = boId;
-    }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("id", id)
-                .append("boId", boId)
                 .append("name", name)
                 .append("couponType", couponType)
                 .append("validateType", validateType)
@@ -763,4 +764,6 @@ public class Coupon implements Serializable {
                 .append("visitedCount", visitedCount)
                 .toString();
     }
+
+
 }
