@@ -169,6 +169,7 @@ public interface IOrderService {
 	 * @throws Exception
 	 */
 	public  Integer getMaxIntegral(MaxIntegralParam param, double limit, double moenyExchangeScore) throws Exception;
-	
 
+
+	BuyerVO getCustomerInfo(String buyerId, String addressId);
 }

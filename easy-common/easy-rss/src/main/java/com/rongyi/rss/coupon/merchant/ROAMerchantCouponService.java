@@ -33,7 +33,7 @@ public interface ROAMerchantCouponService {
      * 插入一条coupon
      * @return coupon id
      */
-    public int insertCoupon(Integer inChannel);
+    public String insertCoupon(Integer inChannel);
 
     /**
      * 获取未通过列表
