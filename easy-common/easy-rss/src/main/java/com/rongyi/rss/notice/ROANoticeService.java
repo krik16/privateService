@@ -127,6 +127,13 @@ public interface ROANoticeService {
     public Boolean checkNotice(CheckParam checkParam, String userId);
 
     /**
+     * 下线店铺公告
+     * @param checkParam
+     * @param userId
+     * @return
+     */
+    public Boolean logOffNotice(CheckParam checkParam, String userId);
+    /**
      * 后台查询店铺公告列表接口
      *
      * @param param
