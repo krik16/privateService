@@ -57,4 +57,6 @@ public interface ROAMerchantCouponService {
      * @return
      */
     public StatisticsCountVO statisticsPublishCount(UserInfoVo userInfoVo) ;
+
+    public Coupon selectByPrimaryKey(Integer couponId);
 }
