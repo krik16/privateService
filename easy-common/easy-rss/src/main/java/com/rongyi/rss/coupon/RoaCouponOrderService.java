@@ -14,6 +14,7 @@ import java.util.Map;
  *
  * @author Breggor
  */
+@Deprecated
 public interface RoaCouponOrderService {
     /**
      * 创建优惠券订单

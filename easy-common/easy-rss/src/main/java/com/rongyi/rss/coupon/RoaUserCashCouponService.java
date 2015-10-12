@@ -10,6 +10,7 @@ import java.util.Map;
  *
  * @author Breggor
  */
+@Deprecated
 public interface RoaUserCashCouponService {
 
     /**

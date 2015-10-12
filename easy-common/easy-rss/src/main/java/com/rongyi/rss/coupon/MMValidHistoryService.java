@@ -11,6 +11,7 @@ import com.rongyi.easy.roa.entity.ValidHistory;
  * @author hebo 07/01
  *
  */
+@Deprecated
 public interface MMValidHistoryService {
 	
 	/**
