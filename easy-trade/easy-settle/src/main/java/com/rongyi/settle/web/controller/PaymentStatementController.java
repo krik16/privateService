@@ -110,7 +110,12 @@ public class PaymentStatementController {
 				statusList.add((byte) 5);
 			break;
 		case 1:// 查询对账单审核列表
+			if(searchStatus==0)
 			statusList.add((byte) 0);
+			if(searchStatus==1){
+				statusList.add((byte) 1);
+				statusList.add((byte) 2);
+			}
 		case 2:// 查询待付款审核列表
 			statusList.add((byte) 4);
 		case 3:// 查询付款清单列表
