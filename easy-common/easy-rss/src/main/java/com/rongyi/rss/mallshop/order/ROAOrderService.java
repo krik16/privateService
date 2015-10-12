@@ -127,15 +127,6 @@ public interface ROAOrderService {
 	public ShopMallVO getShopMallVOByOrderNum(String orderNum) throws Exception;
 	
 	/**
-	 * 根据买家id，收货地址id获取买家信息
-	 * @param orderNo
-	 * @param expressInfoId
-	 * @return
-	 * @throws Exception
-	 */
-	public BuyerVO getCustomerInfo(String buyerId, String addressId) throws Exception;
-	
-	/**
 	 * 根据订单号，物流id获取
 	 * @param orderNo
 	 * @param expressInfoId
