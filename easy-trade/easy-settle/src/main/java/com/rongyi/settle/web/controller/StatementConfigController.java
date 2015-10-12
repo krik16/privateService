@@ -93,7 +93,7 @@ public class StatementConfigController {
 				statusList.add((byte)0);
 			}else{
 				statusList.add((byte)1);
-				statusList.add((byte)1);
+				statusList.add((byte)2);
 			}
 			map.put("statusList", statusList);
 			List<StatementConfig> list = statementConfigService.selectPageList(map, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt());
