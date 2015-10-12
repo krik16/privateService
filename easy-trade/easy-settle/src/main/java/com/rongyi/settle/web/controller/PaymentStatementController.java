@@ -20,12 +20,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rongyi.core.common.PropertyConfigurer;
@@ -118,6 +120,8 @@ public class PaymentStatementController {
 			payChannelList.add((byte) 3);
 			payChannelList.add((byte) 4);
 			map.put("payChannelList", payChannelList);
+		case 5://商家付款单列表
+//			statusList.add()
 		default:
 			break;
 		}
@@ -175,7 +179,7 @@ public class PaymentStatementController {
 	 * @datetime:2015年9月21日下午3:03:26
 	 **/
 	@RequestMapping("/exportFinanceExcel")
-	public void exportFinanceExcel(HttpServletRequest request, HttpServletResponse response, Map<String, Object> map) {
+	public void exportFinanceExcel(HttpServletRequest request, HttpServletResponse response,@RequestParam Map<String, Object> map) {
 		if (map == null)
 			map = new HashMap<String, Object>();
 		exportFinanceVerifyExcel.exportExcel(request, response, map);
