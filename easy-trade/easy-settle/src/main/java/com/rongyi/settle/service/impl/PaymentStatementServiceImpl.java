@@ -132,7 +132,8 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		param.setPayAccount(dto.getPayAccount());
 		param.setPayChannel(Integer.valueOf(dto.getPayChannel().toString()));
 		param.setPayName(dto.getPayName());
-		param.setPayTotal(Double.valueOf(dto.getPayTotal().toString()));
+		if (dto.getPayTotal() != null)
+			param.setPayTotal(Double.valueOf(dto.getPayTotal().toString()));
 		return iRpbService.generatePayment(param);
 	}
 
