@@ -158,7 +158,7 @@ public class ExportDataToExcel {
 							sheet.getRow(i).getCell(7).setCellValue(dto.getBlankName());
 							if (dto.getPayTotal() != null)
 								sheet.getRow(i).getCell(8).setCellValue(dto.getPayTotal());
-							sheet.getRow(i).getCell(9).setCellValue("未下载");
+							sheet.getRow(i).getCell(9).setCellValue("已下载");
 						}
 					}
 				}

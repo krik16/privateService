@@ -99,7 +99,9 @@ public class PaymentStatementController {
 
 	private void setValdateMap(Map<String, Object> map) {
 		Integer searchType = Integer.valueOf(map.get("searchType").toString());
-		Integer searchStatus = Integer.valueOf(map.get("searchStatus").toString());
+		Integer searchStatus = null;
+		if (map.get("searchStatus") != null)
+			searchStatus = Integer.valueOf(map.get("searchStatus").toString());
 		List<Byte> statusList = new ArrayList<Byte>();
 		switch (searchType) {
 		case 0:// 查询对账单列表
@@ -113,15 +115,15 @@ public class PaymentStatementController {
 		case 3:// 查询付款清单列表
 			statusList.add((byte) 6);
 			List<Byte> payChannelList = new ArrayList<Byte>();
-			payChannelList.add((byte)3);
-			payChannelList.add((byte)4);
+			payChannelList.add((byte) 3);
+			payChannelList.add((byte) 4);
 			map.put("payChannelList", payChannelList);
 		default:
 			break;
 		}
 		if (!statusList.isEmpty())
 			map.put("statusList", statusList);
-		
+
 	}
 
 	/**
@@ -188,7 +190,7 @@ public class PaymentStatementController {
 	@RequestMapping("/exportPaymentExcel")
 	public ResponseData exportPaymentSchedule(Map<String, Object> map, HttpServletResponse response, HttpServletRequest request) {
 		logger.info("导出付款清单参数>>>>>>>>>>>:map={}" + map);
-		String ids = map.get("ids") == null ? "1,2,3" : map.get("ids").toString();
+		String ids = map.get("ids") == null ? "" : map.get("ids").toString();
 		String[] idArray = ids.split("\\,");
 		ResponseData result;
 		if (StringUtils.isBlank(ids)) {
