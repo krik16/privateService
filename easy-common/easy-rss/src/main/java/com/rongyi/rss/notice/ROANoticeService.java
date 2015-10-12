@@ -1,6 +1,7 @@
 package com.rongyi.rss.notice;
 
 import com.rongyi.core.common.PagingVO;
+import com.rongyi.easy.notice.entity.NoticeEntity;
 import com.rongyi.easy.notice.entity.NoticePraisedEntity;
 import com.rongyi.easy.notice.param.*;
 import com.rongyi.easy.notice.vo.MMNoticeVO;
@@ -148,4 +149,18 @@ public interface ROANoticeService {
      * @return
      */
     String findNoticeByShopId(String shopId);
+
+    /**
+     * 用于定时任务的
+     * @return
+     */
+    public List<NoticeEntity> findNoticesByTimer();
+
+    /**
+     * 定时任务审核店铺公告
+     *
+     * @param \
+     * @return
+     */
+    public Boolean checkNoticeTimer(Integer Id, Integer status, String userId);
 }

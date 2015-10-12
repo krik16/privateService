@@ -1,9 +1,12 @@
 package com.rongyi.rss.notice;
 
 import com.rongyi.core.common.PagingVO;
+import com.rongyi.easy.notice.entity.NoticeEntity;
 import com.rongyi.easy.notice.param.CheckParam;
 import com.rongyi.easy.notice.param.NoticeQueryParam;
 import com.rongyi.easy.notice.vo.MMNoticeVO;
+
+import java.util.List;
 
 /**
  * Descriptions: 后台页面接口类
@@ -34,4 +37,19 @@ public interface INoticeService {
      * @return
      */
     public PagingVO<MMNoticeVO> findNotices(NoticeQueryParam param);
+    /**
+     * 用于定时任务的   执行自动审核通过的
+     * @return
+     */
+    public List<NoticeEntity> findNoticesByTimer();
+
+    /**
+     * 用于定时任务审核店铺公告
+     *
+     * @param
+     * @return
+     */
+    public Boolean checkNoticeTimer(Integer Id, Integer status, String userId);
+
+
 }
