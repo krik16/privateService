@@ -39,6 +39,7 @@
 		<result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
 		<result column="is_delete" property="isDelete" jdbcType="TINYINT" />
 		<result column="create_by" property="createBy" jdbcType="VARCHAR" />
+		<result column="pay_account" property="payAccount" jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
 		id, rule_code, cooperate_type, biz_id, biz_type, biz_code, biz_name, count_cycle,
@@ -47,7 +48,7 @@
 		send_time, datum_type, pay_mode, regular_day, roll_day, roll_type,
 		effect_start_time,
 		effect_end_time, pay_channel, contract_no, link_rule_code, `status`, create_at,
-		is_delete, create_by
+		is_delete, create_by,bi.pay_account
 	</sql>
 
 	<sql id="Base_list_where_clause">
@@ -226,7 +227,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from
-		payment_bill_config
+		payment_bill_config pbc left join biz_info bi on pbc.id = bi.config_id
 		<where>
 			<include refid="Base_list_where_clause" />
 		</where>

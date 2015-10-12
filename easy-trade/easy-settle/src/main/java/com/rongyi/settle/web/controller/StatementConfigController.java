@@ -234,10 +234,10 @@ public class StatementConfigController {
 			sb.append(DateUtil.getCurrentDateYYMMDD());
 			String key = sb.toString();
 			String ruleCode = redisService.get(key);
-			if (StringUtils.isEmpty(ruleCode) || ruleCode.length() < 14) {
+			if (StringUtils.isEmpty(ruleCode) || ruleCode.length() < 13) {
 				sb.append("0001");
 			} else {
-				int num = Integer.valueOf(ruleCode.substring(10, 14));
+				int num = Integer.valueOf(ruleCode.substring(10, 13));
 				String str = String.format("%04d", ++num);
 				sb.append(str);
 			}
