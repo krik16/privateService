@@ -173,6 +173,7 @@
 			jdbcType="TIMESTAMP" />
 		<result column="status" property="status" jdbcType="TINYINT" />
 		<result column="desc" property="desc" jdbcType="VARCHAR" />
+		<result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
 	</resultMap>
 
 	<sql id="list_where_clause">
@@ -230,7 +231,7 @@
 		parameterType="java.util.Map">
 		select
 		pb.id, pb.type, pb.batch_no, pb.cycle_start_time, pb.cycle_end_time,
-		pb.pay_total, pb.status, pb.pay_no,
+		pb.pay_total, pb.status, pb.pay_no,pb.create_at,
 		pb.status_update_time,
 		pbc.biz_name, pbc.biz_id, pbc.pay_channel, pbc.biz_type,
 		bi.biz_email, bi.pay_account, bi.blank_name, bi.pay_name,

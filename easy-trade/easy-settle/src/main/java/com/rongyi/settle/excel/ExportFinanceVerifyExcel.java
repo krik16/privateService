@@ -41,7 +41,7 @@ public class ExportFinanceVerifyExcel extends ExportBase {
 	@Autowired
 	PaymentStatementService paymentStatementService;
 
-	public void exportExcel(HttpServletRequest request, HttpServletResponse response,Map<String,Object> map) {
+	public void exportExcel(HttpServletRequest request, HttpServletResponse response, Map<String, Object> map) {
 		try {
 			map.put("status", 4);
 			String path = request.getSession().getServletContext().getRealPath("/");
@@ -69,17 +69,18 @@ public class ExportFinanceVerifyExcel extends ExportBase {
 			for (int i = 0; i < statementList.size(); i++) {
 				paymentStatementDto = statementList.get(i);
 				sheet.getRow(i + 2).getCell(0).setCellValue(paymentStatementDto.getBatchNo());
-				sheet.getRow(i + 2).getCell(1).setCellValue(paymentStatementDto.getBussinessType());
-				sheet.getRow(i + 2).getCell(2).setCellValue(paymentStatementDto.getCycleStartTime()+" - "+paymentStatementDto.getCycleEndTime());
+				sheet.getRow(i + 2).getCell(1).setCellValue(getBizType(paymentStatementDto.getBussinessType()));
+				sheet.getRow(i + 2).getCell(2).setCellValue(DateUtil.dateToString(paymentStatementDto.getCycleStartTime()) + " - " + DateUtil.dateToString(paymentStatementDto.getCycleEndTime()));
 				sheet.getRow(i + 2).getCell(3).setCellValue(paymentStatementDto.getBussinessName());
 				sheet.getRow(i + 2).getCell(4).setCellValue(getPayChannel(paymentStatementDto.getPayChannel()));
 				sheet.getRow(i + 2).getCell(5).setCellValue(paymentStatementDto.getPayAccount());
 				sheet.getRow(i + 2).getCell(6).setCellValue(paymentStatementDto.getPayName());
-				sheet.getRow(i + 2).getCell(7).setCellValue(paymentStatementDto.getPayTotal()/100);
+				if (paymentStatementDto.getPayTotal() != null)
+					sheet.getRow(i + 2).getCell(7).setCellValue(paymentStatementDto.getPayTotal() / 100);
 				sheet.getRow(i + 2).getCell(8).setCellValue(DateUtil.dateToString(paymentStatementDto.getCreateAt()));
-				sheet.getRow(i + 2).getCell(8).setCellValue(paymentStatementDto.getStatus().equals(4)?"商家确认":"财务已审核");
+				sheet.getRow(i + 2).getCell(9).setCellValue("商家确认");
 			}
-			String outFile = "对账审核记录(财务)_" + DateUtil.getCurrentDateYYYYMMDD() + ".xlsx";
+			String outFile = "对账审核记录_财务_" + DateUtil.getCurrentDateYYYYMMDD() + ".xlsx";
 			ExcelUtil.exportExcel(response, wb, outFile);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -103,5 +104,17 @@ public class ExportFinanceVerifyExcel extends ExportBase {
 		else if (ConstantEnum.PAY_CHANNEL_CASH.getCodeByte().equals(payChannel))
 			return ConstantEnum.PAY_CHANNEL_CASH.getValueStr();
 		return ConstantEnum.PAY_CHANNEL_TRANSFER.getValueStr();
+	}
+
+	private String getBizType(Byte bizType) {
+		if (ConstantEnum.BIZ_TYPE0.getCodeByte().equals(bizType))
+			return ConstantEnum.BIZ_TYPE0.getValueStr();
+		else if (ConstantEnum.BIZ_TYPE1.getCodeByte().equals(bizType))
+			return ConstantEnum.BIZ_TYPE1.getValueStr();
+		else if (ConstantEnum.BIZ_TYPE2.getCodeByte().equals(bizType))
+			return ConstantEnum.BIZ_TYPE2.getValueStr();
+		else if (ConstantEnum.BIZ_TYPE3.getCodeByte().equals(bizType))
+			return ConstantEnum.BIZ_TYPE3.getValueStr();
+		return ConstantEnum.BIZ_TYPE4.getValueStr();
 	}
 }

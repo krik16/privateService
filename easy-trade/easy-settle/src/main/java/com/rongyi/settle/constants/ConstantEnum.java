@@ -23,6 +23,12 @@ public enum ConstantEnum {
     PAY_CHANNEL_YINLIAN(2,"银行卡"),
     PAY_CHANNEL_CASH(3,"现金"),
     PAY_CHANNEL_TRANSFER(4,"银行转账"),
+//    :店铺，1:商场，2:品牌，3:分公司，4:集团公司
+    BIZ_TYPE0(0,"店铺"),
+    BIZ_TYPE1(1,"商场"),
+    BIZ_TYPE2(2,"品牌"),
+    BIZ_TYPE3(3,"分公司"),
+    BIZ_TYPE4(4,"集团公司"),
     
 	PAGE_SIZE(10,"分页条数");
     
