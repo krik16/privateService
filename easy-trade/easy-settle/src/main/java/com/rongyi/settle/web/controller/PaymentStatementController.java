@@ -116,6 +116,7 @@ public class PaymentStatementController {
 				statusList.add((byte) 1);
 				statusList.add((byte) 2);
 			}
+			break;
 		case 2:// 查询待付款审核列表
 			statusList.add((byte) 4);
 		case 3:// 查询付款清单列表
@@ -126,9 +127,11 @@ public class PaymentStatementController {
 			payChannelList.add((byte) 4);
 			map.put("payChannelList", payChannelList);
 			//操作日志查询
-			map.put("opLog",true);
+			map.put("op_model",1);
+			break;
 		case 5://商家付款单列表
 //			statusList.add()
+			break;
 		default:
 			break;
 		}
