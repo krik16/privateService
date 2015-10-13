@@ -138,7 +138,7 @@ public class PaymentStatementController {
 				map.put("op_model", 1);
 				break;
 			case 5:// 商家付款单列表
-				responseData = accessService.check(request, "FUND_CHECK_MGR");
+				responseData = accessService.checkMerchant(request, "FUND_CHECK_MGR");
 				if (responseData.getMeta().getErrno() != 0) {
 					return responseData;
 				}
@@ -243,7 +243,7 @@ public class PaymentStatementController {
 					return responseData;
 				}
 			} else if (status == 4 || status == 5) {
-				responseData = accessService.check(request, "FUND_CHECK_MGR");
+				responseData = accessService.checkMerchant(request, "FUND_CHECK_MGR");
 				if (responseData.getMeta().getErrno() != 0) {
 					return responseData;
 				}
@@ -428,12 +428,15 @@ public class PaymentStatementController {
 	@RequestMapping("/info")
 	public ResponseData export(HttpServletRequest request, @RequestBody Map<String, Object> map, HttpServletResponse response) {
 		try {
-			ResponseData responseData = accessService.check(request, "FNC_STLBILL_DETAIL");
+			boolean isMerchant = map.containsKey("systemType") && map.get("systemType").toString().equals("merchant");
+			ResponseData responseData;
+			if (isMerchant) {
+				responseData = accessService.checkMerchant(request, "FUND_CHECK_MGR");
+			} else {
+				responseData = accessService.check(request, "FNC_STLBILL_DETAIL");
+			}
 			if (responseData.getMeta().getErrno() != 0) {
-				responseData = accessService.check(request, "FUND_CHECK_MGR");
-				if (responseData.getMeta().getErrno() != 0) {
-					return responseData;
-				}
+				return responseData;
 			}
 			Integer id = Integer.valueOf(map.get("id").toString());
 			PaymentStatement paymentStatement = paymentStatementService.get(id);

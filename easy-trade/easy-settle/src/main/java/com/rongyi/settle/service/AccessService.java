@@ -9,4 +9,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface AccessService {
     ResponseData check(HttpServletRequest request, String needAuthority) throws Exception;
+
+    ResponseData checkMerchant(HttpServletRequest request, String needAuthority) throws Exception;
 }

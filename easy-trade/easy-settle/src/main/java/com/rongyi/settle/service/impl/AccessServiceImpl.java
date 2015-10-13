@@ -32,6 +32,15 @@ public class AccessServiceImpl implements AccessService {
 
     @Override
     public ResponseData check(HttpServletRequest request, String needAuthority) throws Exception {
+        return checkUser(request, needAuthority, true);
+    }
+
+    @Override
+    public ResponseData checkMerchant(HttpServletRequest request, String needAuthority) throws Exception {
+        return checkUser(request, needAuthority, false);
+    }
+
+    private ResponseData checkUser(HttpServletRequest request, String needAuthority, boolean isMarketing) throws Exception {
         String ryst = "";
         String bsst = "";
         Cookie c[] = request.getCookies();
@@ -39,11 +48,11 @@ public class AccessServiceImpl implements AccessService {
             return ResponseData.failure(CodeEnum.FIAL_USER_PARAMS_PAYMENT.getCodeInt(), CodeEnum.FIAL_USER_PARAMS_PAYMENT.getValueStr());
         }
         for (int i = 0; i < c.length; i++) {
-            if ("RYST".equals(c[i].getName())) {
+            if (isMarketing && "RYST".equals(c[i].getName())) {
                 ryst = c[i].getValue();
                 break;
             }
-            if ("BSST".equals(c[i].getName())) {
+            if ((!isMarketing) && "BSST".equals(c[i].getName())) {
                 bsst = c[i].getValue();
                 break;
             }
