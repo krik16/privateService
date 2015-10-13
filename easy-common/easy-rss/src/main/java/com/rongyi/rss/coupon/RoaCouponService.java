@@ -33,4 +33,13 @@ public interface RoaCouponService {
      * @return
      */
     List<Coupon> findCouponListByIds(List<String> ids);
+
+    /**
+     * 追加卡券浏览次数
+     *
+     * @param couponId
+     * @param visitedCount
+     * @return
+     */
+    boolean addCouponVistiedCount(String couponId, int visitedCount);
 }

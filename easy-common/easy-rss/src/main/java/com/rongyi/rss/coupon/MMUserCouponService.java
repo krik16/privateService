@@ -41,6 +41,7 @@ public interface MMUserCouponService {
 
     /**
      * 根据id,用户Id查询优惠券
+     *
      * @param userCouponId
      * @param userId
      * @return
@@ -68,13 +69,14 @@ public interface MMUserCouponService {
 
     /**
      * 查询出现金券vo
+     *
      * @param couponCode
      * @return
      */
     MMUserCouponVO getUserCouponByCouponCode(String couponCode);
 
-	public List<MallEntity> searchMallsByIds(List<ObjectId> ids);
+    public List<MallEntity> searchMallsByIds(List<ObjectId> ids);
 
-	List<ShopVO> getShopsByIds(List<ObjectId> ids);
+    List<ShopVO> getShopsByIds(List<ObjectId> ids);
 
 }

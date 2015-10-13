@@ -14,7 +14,9 @@ import java.util.List;
  * @author hebo
  *         优惠券模板接口，提供给mall-shop的controller使用)
  * @date 2015年6月8日 下午
+ * @see MSCouponService
  */
+@Deprecated
 public interface MMCouponService {
 
 
@@ -24,6 +26,7 @@ public interface MMCouponService {
      * @param id
      * @return
      */
+    @Deprecated
     public Coupon findCouponById(ObjectId id);
 
     /**
@@ -32,6 +35,7 @@ public interface MMCouponService {
      * @param couponId
      * @return FavourableVO
      */
+    @Deprecated
     public void addCouponVistiedCount(String couponId, int visitedCount);
 
     /**
@@ -40,6 +44,7 @@ public interface MMCouponService {
      * @param ids
      * @return
      */
+    @Deprecated
     public List<OldCouponVO> findCouponDetailByIds(List<String> ids);
 
     /**
@@ -48,5 +53,6 @@ public interface MMCouponService {
      * @param ids
      * @return
      */
+    @Deprecated
     public List<OldCouponVO> findCouponIndexByIds(List<String> ids);
 }

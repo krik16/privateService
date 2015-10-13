@@ -350,6 +350,16 @@ public class Coupon implements Serializable {
         return afterSaleService;
     }
 
+    public List<Integer> getAfterSaleService2List() {
+        List<Integer> list = new ArrayList<>();
+        if (StringUtils.isNotBlank(afterSaleService)) {
+            for (String e : afterSaleService.split(",")) {
+                list.add(Integer.valueOf(e));
+            }
+        }
+        return list;
+    }
+
     public void setAfterSaleService(String afterSaleService) {
         this.afterSaleService = afterSaleService;
     }

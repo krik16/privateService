@@ -10,6 +10,7 @@ import java.util.Map;
  * 原接口名：RmmmUserCashCouponService
  *
  * @author Breggor
+ * @see MLUserRedenvelopeService
  */
 @Deprecated
 public interface MLUserCashCouponService {
@@ -71,6 +72,7 @@ public interface MLUserCashCouponService {
      *
      * @param couponCode
      * @return
+     * @see MLUserRedenvelopeService#getCashCouponDiscount(String)
      */
     public Double getCashCouponDiscount(String couponCode);
 
@@ -80,6 +82,7 @@ public interface MLUserCashCouponService {
      *
      * @param couponCode
      * @return
+     * @see MLUserRedenvelopeService#getCashCouponDiscount(String)
      */
     public Double getCashCouponPrice(String couponCode);
 

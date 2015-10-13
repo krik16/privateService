@@ -24,7 +24,7 @@ public interface RoaUserRedenvelopeService {
 
     UserRedenvelope findById(Integer id);
 
-    Map<String, List<UserCouponVO>> findUnusedRedenvelope(List<String> productIds, String userId);
+    Map<String, List<UserCouponVO>> findUnusedRedenvelopeList(List<String> productIds, String userId);
 
     UserRedenvelope findByCode(String couponCode);
 
