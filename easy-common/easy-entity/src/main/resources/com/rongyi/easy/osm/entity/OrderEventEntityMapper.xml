@@ -240,4 +240,26 @@
       type = #{type,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <insert id="insertAndGetId" parameterType="com.rongyi.easy.osm.entity.OrderEventEntity" useGeneratedKeys="true" keyProperty="id">
+  	insert into 
+	  	order_event (
+	  		id, 
+	  		order_no, 
+	  		orig_status, 
+	      	create_at, 
+	      	detail, 
+	      	status,
+	      	type
+	      )
+	    values (
+	    	#{id,jdbcType=INTEGER}, 
+	    	#{orderNo,jdbcType=INTEGER}, 
+	    	#{origStatus,jdbcType=INTEGER}, 
+	      	#{createAt,jdbcType=TIMESTAMP}, 
+	      	#{detail,jdbcType=VARCHAR}, 
+	      	#{status,jdbcType=VARCHAR},
+	      	#{type,jdbcType=VARCHAR}
+	      )
+  </insert>
 </mapper>

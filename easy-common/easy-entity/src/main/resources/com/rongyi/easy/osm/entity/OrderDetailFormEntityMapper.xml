@@ -415,4 +415,9 @@
       commodity_commission = #{commodityCommission,jdbcType=DECIMAL}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="queryListByOrderNo" parameterType="java.util.Map" resultType="BaseResultMap" >
+    select * from order_detail_form
+    where order_no = #{orderNo}
+  </select>
 </mapper>
