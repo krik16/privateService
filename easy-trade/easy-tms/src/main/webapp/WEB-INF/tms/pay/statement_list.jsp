@@ -22,7 +22,7 @@
 			<c:when test="${not empty list}">
 				<c:forEach var="item" items="${list}" varStatus="status">
 					<tr>
-						<td style="text-align: center;"><input type="checkbox" name="subBox" id="${item.id}" payChannel="${item.payChannel}" ></td>
+						<td style="text-align: center;"><input type="checkbox" name="subBox" id="${item.id}" payChannel="${item.payChannel}" paymentId="${item.paymentId}"></td>
 						<td>${item.batchNo}</td>
 						<td><c:choose>
 								<c:when test="${item.bussinessType eq 1}">

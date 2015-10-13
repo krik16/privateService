@@ -294,7 +294,7 @@ public class RpbServiceImpl implements IRpbService {
 		List<PaymentEntity> list = paymentService.valiadteStatus(ids, Constants.PAYMENT_STATUS.STAUS2);
 		if (!list.isEmpty()) {
 			map.put("success", false);
-			if (PayEnum.DRAW_APPLY_ONE.getCode().equals(operateType) || PayEnum.EXCE_PAY_ONE.getCode().equals(operateType))
+			if (PayEnum.DRAW_APPLY_ONE.getCode().equals(operateType) || PayEnum.EXCE_PAY_ONE.getCode().equals(operateType) || PayEnum.STATEMENT_ONE.getCode().equals(operateType))
 				map.put("message", "该条记录已完成支付,无法再次支付!请刷新页面后再次操作!");
 			else if (PayEnum.DRAW_APPLY_MORE.getCode().equals(operateType) || PayEnum.EXCE_PAY_MORE.getCode().equals(operateType))
 				map.put("message", "批量列表中存在已完成支付的记录,无法再次支付!请刷新页面后再次操作!");
@@ -302,6 +302,8 @@ public class RpbServiceImpl implements IRpbService {
 				map.put("message", "该条退款记录已完成支付,无法再次支付!请刷新页面后再次操作!");
 			else if (PayEnum.TRADE_REFUND_MORE.getCode().equals(operateType))
 				map.put("message", "批量列表中存在已完成退款的记录,无法再次退款!请刷新页面后再次操作!");
+			else if (PayEnum.STATEMENT_MORE.getCode().equals(operateType))
+				map.put("message", "批量列表中存在已完成支付的记录,无法再次支付!请刷新页面后再次操作!");
 			else
 				map.put("message", "未知错误！");
 			return map;
