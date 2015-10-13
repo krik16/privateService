@@ -64,4 +64,6 @@
 	<!--交易中心-->
 	<dubbo:reference id="roaProxyCouponOrderService" interface="com.rongyi.rss.tradecenter.RoaProxyCouponOrderService" version="${dubbo.version}" check="false"/>
 	
+	<dubbo:reference interface="com.rongyi.rss.tradecenter.RoaProxyUserCouponService" id="roaProxyUserCouponService"  version="${dubbo.version}" check="false"/>
+	
 </beans>  

@@ -9,6 +9,7 @@
 package com.rongyi.tms.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -21,6 +22,7 @@ import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.core.constant.PaymentEventType;
 import com.rongyi.core.constant.TmsEventTypeEnum;
 import com.rongyi.easy.mq.MessageEvent;
+import com.rongyi.easy.rpb.vo.PayNotifyVO;
 import com.rongyi.tms.mq.Sender;
 import com.rongyi.tms.service.CouponCommissionService;
 import com.rongyi.tms.service.DrawApplyService;

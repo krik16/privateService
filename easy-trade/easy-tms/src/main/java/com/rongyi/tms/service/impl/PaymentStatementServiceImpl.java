@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
+import com.rongyi.easy.rpb.vo.PayNotifyVO;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
 import com.rongyi.tms.constants.ConstantEnum;
 import com.rongyi.tms.service.PaymentStatementService;
@@ -46,11 +47,17 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectPageListCount", map);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void updateByNotify(Map<String, Object> map) {
+		List<PayNotifyVO> payNotifylist = (List<PayNotifyVO>) map.get("statementList");
 		map.put("status", ConstantEnum.STATEMENT_STATUE_12.getCodeByte());
 		map.put("payTime", DateUtil.getCurrDateTime());
-		this.getBaseDao().updateBySql(NAMESPACE + ".updateByNotify", map);
+		for (PayNotifyVO payNotifyVO : payNotifylist) {
+			map.put("payNo", payNotifyVO.getDrawNo());
+			map.put("tradeNo", payNotifyVO.getTradeNo());
+			this.getBaseDao().updateBySql(NAMESPACE + ".updateByNotify", map);
+		}
 	}
 
 	@Override
