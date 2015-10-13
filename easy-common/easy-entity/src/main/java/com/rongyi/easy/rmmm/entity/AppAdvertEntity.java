@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class AppAdvertEntity implements Serializable{
+	
     /** 主键 */
     private Integer id;
 
