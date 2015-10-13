@@ -1,19 +1,20 @@
 package com.rongyi.settle.constants;
 
-/**	
- * @Author:  柯军
- * @Description: 错误码常量 
+/**
+ * @Author: 柯军
+ * @Description: 错误码常量
  * @datetime:2015年9月22日下午6:47:25
- *
  **/
 public enum CodeEnum {
+	FIAL_USER_PARAMS_PAYMENT(1018401, "没有登录或登录信息错误"),//前台约定，没有登录统一后三位为401
+	FIAL_NO_AUTHORITY_PAYMENT(1018403, "没有访问该资源的权限"),//前台约定，没有权限统一后三位为403
 
 	ERROR_SYSTEM(1018004, "系统故障"),
 	FIAL_CONFIG_LIST(1018001, "加载配置列表失败"),
 	FIAL_STATEMENT_LIST(1018002, "加载对账单列表失败"),
 	FIAL_PARAMS_ERROR(1018003, "参数传递错误"),
 	FIAL_UPDATE_PAYMENT(1018005, "修改状态失败"),
-	SUCCESS("0", "正常");
+	SUCCESS("0", "正常"),;
 
 	private Object code;
 
@@ -25,8 +26,8 @@ public enum CodeEnum {
 	}
 
 	/**
-	 * @Description: 获取code byte类型值,请确保该值可转换为byte值，否则会类型转换异常
 	 * @return
+	 * @Description: 获取code byte类型值,请确保该值可转换为byte值，否则会类型转换异常
 	 * @Author: 柯军
 	 * @datetime:2015年5月19日下午3:51:11
 	 **/
@@ -35,8 +36,8 @@ public enum CodeEnum {
 	}
 
 	/**
-	 * @Description: 获取code int类型值,请确保该值可转换为int值，否则会类型转换异常
 	 * @return
+	 * @Description: 获取code int类型值,请确保该值可转换为int值，否则会类型转换异常
 	 * @Author: 柯军
 	 * @datetime:2015年5月19日下午3:51:11
 	 **/
@@ -45,8 +46,8 @@ public enum CodeEnum {
 	}
 
 	/**
-	 * @Description: 获取code String类型值
 	 * @return
+	 * @Description: 获取code String类型值
 	 * @Author: 柯军
 	 * @datetime:2015年5月19日下午3:53:36
 	 **/
@@ -55,8 +56,8 @@ public enum CodeEnum {
 	}
 
 	/**
-	 * @Description: 获取value byte类型值,请确保该值可转换为byte值，否则会类型转换异常
 	 * @return
+	 * @Description: 获取value byte类型值,请确保该值可转换为byte值，否则会类型转换异常
 	 * @Author: 柯军
 	 * @datetime:2015年5月19日下午3:53:08
 	 **/
@@ -65,8 +66,8 @@ public enum CodeEnum {
 	}
 
 	/**
-	 * @Description: 获取value int类型值,请确保该值可转换为int值，否则会类型转换异常
 	 * @return
+	 * @Description: 获取value int类型值,请确保该值可转换为int值，否则会类型转换异常
 	 * @Author: 柯军
 	 * @datetime:2015年5月19日下午3:53:08
 	 **/
@@ -75,8 +76,8 @@ public enum CodeEnum {
 	}
 
 	/**
-	 * @Description: 获取value String类型值
 	 * @return
+	 * @Description: 获取value String类型值
 	 * @Author: 柯军
 	 * @datetime:2015年5月19日下午3:53:21
 	 **/

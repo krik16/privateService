@@ -21,6 +21,7 @@ import com.rongyi.easy.roa.vo.FilialeVo;
 import com.rongyi.easy.roa.vo.MallGroupVO;
 import com.rongyi.easy.roa.vo.ShopVO;
 import com.rongyi.rss.roa.*;
+import com.rongyi.settle.service.AccessService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -76,6 +77,9 @@ public class StatementConfigController {
 	@Autowired
 	private ROAFilialeService rOAFilialeService;
 
+	@Autowired
+	private AccessService accessService;
+
 	/**
 	 * @Description: 分页查询配置列表
 	 * @param request
@@ -87,13 +91,29 @@ public class StatementConfigController {
 	@ResponseBody
 	public ResponseData getPageList(HttpServletRequest request, @RequestBody Map<String, Object> map) {
 		try {
+			if (map.containsKey("status")) {
+				ResponseData responseData = accessService.check(request, "FNC_STLCONF_VIEW");
+				if (responseData.getMeta().getErrno() != 0) {
+					return responseData;
+				}
+			} else {
+				ResponseData responseData = accessService.check(request, "FNC_STL_VIEW");
+				if (responseData.getMeta().getErrno() != 0) {
+					return responseData;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return  ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
+		}
+		try {
 			Integer currentPage = Integer.valueOf(map.get("currentPage").toString());
 			List<Byte> statusList = new ArrayList<Byte>();
-			if(map.get("searchStatus") != null && map.get("searchStatus").equals(0)){	
-				statusList.add((byte)0);
-			}else{
-				statusList.add((byte)1);
-				statusList.add((byte)2);
+			if (map.get("searchStatus") != null && map.get("searchStatus").equals(0)) {
+				statusList.add((byte) 0);
+			} else {
+				statusList.add((byte) 1);
+				statusList.add((byte) 2);
 			}
 			map.put("statusList", statusList);
 			List<StatementConfig> list = statementConfigService.selectPageList(map, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt());
@@ -132,6 +152,10 @@ public class StatementConfigController {
 	@ResponseBody
 	public ResponseData save(HttpServletRequest request, @RequestBody Map<String, Object> map) {
 		try {
+			ResponseData responseData = accessService.check(request, "FNC_STL_ADD");
+			if (responseData.getMeta().getErrno() != 0) {
+				return responseData;
+			}
 			StatementConfig statementConfig = new StatementConfig();
 			BussinessInfo bussinessInfo = new BussinessInfo();
 			MapUtils.toObject(statementConfig, map);
@@ -157,6 +181,15 @@ public class StatementConfigController {
 	@RequestMapping("/update")
 	@ResponseBody
 	public ResponseData update(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+		try {
+			ResponseData responseData = accessService.check(request, "FNC_STL_EDIT");
+			if (responseData.getMeta().getErrno() != 0) {
+				return responseData;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
+		}
 		return null;
 	}
 
@@ -171,8 +204,16 @@ public class StatementConfigController {
 	@RequestMapping("/modify")
 	@ResponseBody
 	public ResponseData modify(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+		try {
+			ResponseData responseData = accessService.check(request, "FNC_STL_CHANGE");
+			if (responseData.getMeta().getErrno() != 0) {
+				return responseData;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
+		}
 		return null;
-
 	}
 
 	/**
@@ -186,6 +227,15 @@ public class StatementConfigController {
 	@RequestMapping("/info")
 	@ResponseBody
 	public ResponseData info(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+		try {
+			ResponseData responseData = accessService.check(request, "FNC_STLCONF_VIEW");
+			if (responseData.getMeta().getErrno() != 0) {
+				return responseData;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
+		}
 		return null;
 	}
 
@@ -202,6 +252,10 @@ public class StatementConfigController {
 	public ResponseData verify(HttpServletRequest request, @RequestBody Map<String, Object> map) {
 		ResponseData result = null;
 		try {
+			ResponseData responseData = accessService.check(request, "FNC_STLCONF_VFY");
+			if (responseData.getMeta().getErrno() != 0) {
+				return responseData;
+			}
 			// 获取用户
 			String userId = "1";
 
@@ -255,22 +309,6 @@ public class StatementConfigController {
 			e.printStackTrace();
 		}
 		return sb.toString();
-	}
-
-	/**
-	 * @Description: 定时任务查询符合条件的对账配置
-	 * @Author: xgq
-	 **/
-	@RequestMapping("/selectForSchedule")
-	@ResponseBody
-	public ResponseData selectForSchedule() {
-		try {
-			List<StatementConfig> list = statementConfigService.selectForSchedule();
-			return ResponseData.success(list);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseData.failure(CodeEnum.FIAL_CONFIG_LIST.getCodeInt(), CodeEnum.FIAL_CONFIG_LIST.getValueStr());
-		}
 	}
 
 	/**

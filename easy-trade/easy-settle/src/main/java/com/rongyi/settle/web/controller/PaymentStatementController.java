@@ -19,6 +19,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.rongyi.settle.service.AccessService;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,13 +34,11 @@ import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
 import com.rongyi.easy.settle.entity.PaymentStatement;
 import com.rongyi.easy.settle.entity.StatementConfig;
-import com.rongyi.rss.roa.ROAShopService;
 import com.rongyi.settle.constants.CodeEnum;
 import com.rongyi.settle.constants.ConstantEnum;
 import com.rongyi.settle.constants.ResponseData;
 import com.rongyi.settle.excel.ExportDataToExcel;
 import com.rongyi.settle.excel.ExportFinanceVerifyExcel;
-import com.rongyi.settle.service.BussinessInfoService;
 import com.rongyi.settle.service.PaymentStatementService;
 import com.rongyi.settle.service.StatementConfigService;
 import com.rongyi.settle.util.DateUtils;
@@ -65,16 +64,13 @@ public class PaymentStatementController {
 	private StatementConfigService statementConfigService;
 
 	@Autowired
-	private BussinessInfoService bussinessInfoService;
-
-	@Autowired
 	private ExportDataToExcel exportDataToExcel;
 
 	@Autowired
-	private ROAShopService roaShopService;
+	ExportFinanceVerifyExcel exportFinanceVerifyExcel;
 
 	@Autowired
-	ExportFinanceVerifyExcel exportFinanceVerifyExcel;
+	private AccessService accessService;
 
 	/**
 	 * @param map
@@ -85,10 +81,88 @@ public class PaymentStatementController {
 	 **/
 	@RequestMapping("/list")
 	@ResponseBody
-	public ResponseData list(@RequestBody Map<String, Object> map) {
+	public ResponseData list(HttpServletRequest request, @RequestBody Map<String, Object> map) {
 		try {
 			Integer currentPage = Integer.valueOf(map.get("currentPage").toString());
-			setValdateMap(map);
+			Integer searchType = Integer.valueOf(map.get("searchType").toString());
+			Integer searchStatus = -1;
+			if (map.get("searchStatus") != null) searchStatus = Integer.valueOf(map.get("searchStatus").toString());
+			List<Byte> statusList = new ArrayList<Byte>();
+			ResponseData responseData;
+			switch (searchType) {
+				case 0:// 查询对账单列表
+					responseData = accessService.check(request, "FNC_STLBILL_VIEW");
+					if (responseData.getMeta().getErrno() != 0) {
+						return responseData;
+					}
+					if (searchStatus == 1)// 待确认列表
+						statusList.add((byte) 5);
+					break;
+				case 1:// 查询对账单审核列表
+					responseData = accessService.check(request, "FNC_STLBILLVFY_VIEW");
+					if (responseData.getMeta().getErrno() != 0) {
+						return responseData;
+					}
+					if (searchStatus == 0)
+						statusList.add((byte) 0);
+					if (searchStatus == 1) {
+						statusList.add((byte) 1);
+						statusList.add((byte) 2);
+					}
+					break;
+				case 2:// 查询待付款审核列表
+					responseData = accessService.check(request, "FNC_UNPVFY_VIEW");
+					if (responseData.getMeta().getErrno() != 0) {
+						return responseData;
+					}
+					if (searchStatus == 0)
+						statusList.add((byte) 4);
+					else {
+						statusList.add((byte) 5);
+						statusList.add((byte) 6);
+					}
+					break;
+				case 3:// 查询付款列表
+					responseData = accessService.check(request, "FNC_UNPVFY_VIEW");
+					if (responseData.getMeta().getErrno() != 0) {
+						return responseData;
+					}
+					statusList.add((byte) 6);
+					statusList.add((byte) 11);
+					List<Byte> payChannelList = new ArrayList<Byte>();
+					payChannelList.add((byte) 3);
+					payChannelList.add((byte) 4);
+					map.put("payChannelList", payChannelList);
+					// 操作日志查询
+					map.put("op_model", 1);
+					break;
+				case 5:// 商家付款单列表
+					responseData = accessService.check(request, "FUND_CHECK_MGR");
+					if (responseData.getMeta().getErrno() != 0) {
+						return responseData;
+					}
+					if (searchStatus == 0) {//全部
+						statusList.add((byte) 1);
+						statusList.add((byte) 3);
+						statusList.add((byte) 4);
+						statusList.add((byte) 5);
+					}else if (searchStatus == 1){//待确认
+						statusList.add((byte) 1);
+						statusList.add((byte) 3);
+					}else if (searchStatus == 2){//已确认
+						statusList.add((byte) 4);
+					}else if (searchStatus == 3){//不确认
+						statusList.add((byte) 5);
+					}
+					break;
+				default:
+					responseData = accessService.check(request, "NO");
+					if (responseData.getMeta().getErrno() != 0) {
+						return responseData;
+					}
+					break;
+			}
+			if (!statusList.isEmpty()) map.put("statusList", statusList);
 			List<PaymentStatementDto> list = paymentStatementService.selectPageList(map, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt());
 			Integer count = paymentStatementService.selectPageListCount(map);
 			return ResponseData.success(list, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt(), count);
@@ -96,66 +170,6 @@ public class PaymentStatementController {
 			e.printStackTrace();
 			return ResponseData.failure(CodeEnum.FIAL_STATEMENT_LIST.getCodeInt(), CodeEnum.FIAL_STATEMENT_LIST.getValueStr());
 		}
-	}
-
-	private void setValdateMap(Map<String, Object> map) {
-		Integer searchType = Integer.valueOf(map.get("searchType").toString());
-		Integer searchStatus = -1;
-		if (map.get("searchStatus") != null)
-			searchStatus = Integer.valueOf(map.get("searchStatus").toString());
-		List<Byte> statusList = new ArrayList<Byte>();
-		switch (searchType) {
-		case 0:// 查询对账单列表
-			if (searchStatus == 1)// 待确认列表
-				statusList.add((byte) 5);
-			break;
-		case 1:// 查询对账单审核列表
-			if (searchStatus == 0)
-				statusList.add((byte) 0);
-			if (searchStatus == 1) {
-				statusList.add((byte) 1);
-				statusList.add((byte) 2);
-			}
-			break;
-		case 2:// 查询待付款审核列表
-			if (searchStatus == 0)
-				statusList.add((byte) 4);
-			else {
-				statusList.add((byte) 5);
-				statusList.add((byte) 6);
-			}
-			break;
-		case 3:// 查询付款清单列表
-			statusList.add((byte) 6);
-			statusList.add((byte) 11);
-			List<Byte> payChannelList = new ArrayList<Byte>();
-			payChannelList.add((byte) 3);
-			payChannelList.add((byte) 4);
-			map.put("payChannelList", payChannelList);
-			// 操作日志查询
-			map.put("op_model", 1);
-			break;
-		case 5:// 商家付款单列表
-			if (searchStatus == 0) {//全部
-				statusList.add((byte) 1);
-				statusList.add((byte) 3);
-				statusList.add((byte) 4);
-				statusList.add((byte) 5);
-			}else if (searchStatus == 1){//待确认
-				statusList.add((byte) 1);
-				statusList.add((byte) 3);
-			}else if (searchStatus == 2){//已确认
-				statusList.add((byte) 4);
-			}else if (searchStatus == 3){//不确认
-				statusList.add((byte) 5);
-			}
-			break;
-		default:
-			break;
-		}
-		if (!statusList.isEmpty())
-			map.put("statusList", statusList);
-		// if(minPayTotal)
 	}
 
 	/**
@@ -180,6 +194,23 @@ public class PaymentStatementController {
 			String desc = map.containsKey("desc") ? map.get("desc").toString() : null;
 			if (StringUtils.isBlank(idStr) || status == null) {
 				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
+			}
+			ResponseData responseData;
+			if (status == 1 || status == 2) {
+				responseData = accessService.check(request, "FNC_STLCONF_VFY");
+				if (responseData.getMeta().getErrno() != 0) {
+					return responseData;
+				}
+			} else if (status == 4 || status == 5) {
+				responseData = accessService.check(request, "FUND_CHECK_MGR");
+				if (responseData.getMeta().getErrno() != 0) {
+					return responseData;
+				}
+			} else if (status == 6 || status == 7) {
+				responseData = accessService.check(request, "FNC_UNPVFY_VFY");
+				if (responseData.getMeta().getErrno() != 0) {
+					return responseData;
+				}
 			}
 			List<Integer> ids = new ArrayList<>();
 			for (String id : idStr.split(",")) {
@@ -207,10 +238,20 @@ public class PaymentStatementController {
 	 * @datetime:2015年9月21日下午3:03:26
 	 **/
 	@RequestMapping("/exportFinanceExcel")
-	public void exportFinanceExcel(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, Object> map) {
+	public ResponseData exportFinanceExcel(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, Object> map) {
+		try {
+			ResponseData responseData = accessService.check(request, "FNC_STLBILLVFY_EXPORT");
+			if (responseData.getMeta().getErrno() != 0) {
+				return responseData;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
+		}
 		if (map == null)
 			map = new HashMap<String, Object>();
 		exportFinanceVerifyExcel.exportExcel(request, response, map);
+		return null;
 	}
 
 	/**
@@ -221,6 +262,15 @@ public class PaymentStatementController {
 	 **/
 	@RequestMapping("/exportPaymentExcel")
 	public ResponseData exportPaymentSchedule(String ids, HttpServletResponse response, HttpServletRequest request) {
+		try {
+			ResponseData responseData = accessService.check(request, "FNC_PAYBILL_DWON");
+			if (responseData.getMeta().getErrno() != 0) {
+				return responseData;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
+		}
 		logger.info("导出付款清单参数>>>>>>>>>>>:ids={}" + ids);
 		if (StringUtils.isBlank(ids)) {
 			return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
@@ -240,6 +290,15 @@ public class PaymentStatementController {
 	 **/
 	@RequestMapping("/invalid")
 	public ResponseData invalid(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+		try {
+			ResponseData responseData = accessService.check(request, "FNC_UNPVFY_CANCEL");
+			if (responseData.getMeta().getErrno() != 0) {
+				return responseData;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
+		}
 		return null;
 	}
 
@@ -300,8 +359,12 @@ public class PaymentStatementController {
 	 **/
 	@RequestMapping("/generate")
 	@ResponseBody
-	public ResponseData generate(@RequestBody Map<String, Object> map) {
+	public ResponseData generate(HttpServletRequest request, @RequestBody Map<String, Object> map) {
 		try {
+			ResponseData responseData = accessService.check(request, "FNC_STLBILL_READD");
+			if (responseData.getMeta().getErrno() != 0) {
+				return responseData;
+			}
 			Integer id = Integer.valueOf(map.get("id").toString());
 			paymentStatementService.generate(id);
 		} catch (Exception e) {
@@ -322,8 +385,15 @@ public class PaymentStatementController {
 	 * @Author: xgq
 	 **/
 	@RequestMapping("/info")
-	public void export(@RequestBody Map<String, Object> map, HttpServletResponse response) {
+	public ResponseData export(HttpServletRequest request, @RequestBody Map<String, Object> map, HttpServletResponse response) {
 		try {
+			ResponseData responseData = accessService.check(request, "FNC_STLBILL_DETAIL");
+			if (responseData.getMeta().getErrno() != 0) {
+				responseData = accessService.check(request, "FUND_CHECK_MGR");
+				if (responseData.getMeta().getErrno() != 0) {
+					return responseData;
+				}
+			}
 			Integer id = Integer.valueOf(map.get("id").toString());
 			PaymentStatement paymentStatement = paymentStatementService.get(id);
 			StatementConfig statementConfig = statementConfigService.selectById(paymentStatement.getConfigId());
@@ -343,7 +413,9 @@ public class PaymentStatementController {
 			out.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+			return ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
 		}
+		return ResponseData.success();
 	}
 
 	public String toUTF8(String s) {
