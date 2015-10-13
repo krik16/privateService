@@ -66,7 +66,15 @@ public class CouponCode implements Serializable {
      */
     private String isDelete;
 
+    private String version;
 
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
     /**
      * 商场ID
      */
@@ -303,6 +311,13 @@ public class CouponCode implements Serializable {
         this.code = code;
         this.couponId = couponId;
         this.inChannel = inChannel;
+    }
+
+    public CouponCode(String code, String couponId, String inChannel, String version) {
+        this.code = code;
+        this.couponId = couponId;
+        this.inChannel = inChannel;
+        this.version = version;
     }
 
     @Override

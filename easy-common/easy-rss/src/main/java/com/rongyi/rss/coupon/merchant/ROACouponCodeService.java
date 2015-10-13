@@ -43,4 +43,12 @@ public interface ROACouponCodeService {
      */
     public int updateStatusByCouponCode(String couponCode, Integer status);
 
+    /**
+     * 通过版本号获取券码数量
+     * @param couponId
+     * @param version
+     * @return
+     */
+    public int countByVersion(String couponId, String version);
+
 }

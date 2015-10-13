@@ -34,4 +34,12 @@ public interface CouponCodeService {
     public List<CouponCode> getCodesByCouponId(String couponId);
 
     public int updateStatusByCouponCode(String couponCode, Integer status);
+
+    /**
+     * 通过版本号获取券码数量
+     * @param couponId
+     * @param version
+     * @return
+     */
+    int countByVersion(String couponId, String version);
 }
