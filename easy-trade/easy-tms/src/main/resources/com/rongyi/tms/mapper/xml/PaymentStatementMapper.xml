@@ -133,8 +133,8 @@
 			open="(" separator="," close=")">
 			update payment_bill
 			set status = #{status,jdbcType=TINYINT},
-			pay_time = #{payTime,jdbcType=TIMESTAMP}
-			trade_no = #{item.tradeNo},
+			pay_time = #{payTime,jdbcType=TIMESTAMP},
+			trade_no = #{item.tradeNo}
 			where pay_no =	#{item.drawNo}
 		</foreach>
 	</update>
