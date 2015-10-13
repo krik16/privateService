@@ -23,7 +23,8 @@ public enum PayEnum {
     TRADE_REFUND_MORE(3,"交易退款页面申请（多条退款）"),
     EXCE_PAY_ONE(4,"异常交易页面申请（单条付款）"),
     EXCE_PAY_MORE(5,"异常交易页面申请（单条付款）"),
-    STATEMENT_ONE(6,"对账单付款（单条付款）");
+    STATEMENT_ONE(6,"对账单付款（单条付款）"),
+    STATEMENT_MORE(7,"对账单付款（批量付款）");
     
 
     PayEnum(Integer code,String value){
