@@ -51,4 +51,11 @@ public interface ROACouponCodeService {
      */
     public int countByVersion(String couponId, String version);
 
+    /**
+     * 通过版本号获取券码列表
+     * @param couponId
+     * @param version
+     * @return
+     */
+    List<String> getCodeByVersion(String couponId, String version);
 }
