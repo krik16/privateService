@@ -9,6 +9,9 @@ import java.util.Date;
  * 用户抵扣券
  */
 public class UserRedenvelope implements Serializable {
+    public final static Integer STATUS_UNUSE = 0;//未使用
+    public final static Integer STATUS_USED = 1;//已使用
+
     private Integer id;
 
     /**
@@ -38,7 +41,7 @@ public class UserRedenvelope implements Serializable {
     /**
      * 抵扣价格
      */
-    private Double amount;
+    private Integer discount;
 
     /**
      * 未使用[0], 已使用[1]
@@ -74,6 +77,21 @@ public class UserRedenvelope implements Serializable {
      * 过期时间
      */
     private Date validAt;
+
+    public UserRedenvelope() {
+    }
+
+    public UserRedenvelope(String name, String userId, String couponId, String couponCode, Integer discount, Integer status, Date receiveAt, Integer channel, Date validAt) {
+        this.name = name;
+        this.userId = userId;
+        this.couponId = couponId;
+        this.couponCode = couponCode;
+        this.discount = discount;
+        this.status = status;
+        this.receiveAt = receiveAt;
+        this.channel = channel;
+        this.validAt = validAt;
+    }
 
     public Integer getId() {
         return id;
@@ -115,13 +133,6 @@ public class UserRedenvelope implements Serializable {
         this.couponCode = couponCode;
     }
 
-    public Double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Double amount) {
-        this.amount = amount;
-    }
 
     public Integer getStatus() {
         return status;
@@ -187,6 +198,14 @@ public class UserRedenvelope implements Serializable {
         this.name = name;
     }
 
+    public Integer getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Integer discount) {
+        this.discount = discount;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -196,7 +215,7 @@ public class UserRedenvelope implements Serializable {
                 .append("userName", userName)
                 .append("couponId", couponId)
                 .append("couponCode", couponCode)
-                .append("amount", amount)
+                .append("discount", discount)
                 .append("status", status)
                 .append("userAccount", userAccount)
                 .append("receiveAt", receiveAt)

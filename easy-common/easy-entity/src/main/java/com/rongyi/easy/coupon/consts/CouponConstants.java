@@ -102,4 +102,14 @@ public interface CouponConstants {
         Integer CHECK_SUCCESS = 2;
     }
 
+
+    /**
+     * 领取渠道:容易逛[0] 互动屏[1] 微商[2]
+     */
+    interface UserRedenvelopeChannel {
+        Integer APP = 0;
+        Integer TERMINAL = 1;
+        Integer WECHAT = 2;
+    }
+
 }

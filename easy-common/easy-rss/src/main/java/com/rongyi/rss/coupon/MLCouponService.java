@@ -7,13 +7,15 @@ import java.util.List;
 
 
 /**
- * 容易逛代金券接口
+ * 容易逛: 秒杀活动-代金券接口
+ *
+ * @author Breggor
  */
 public interface MLCouponService {
 
 
     /**
-     * id集合查询
+     * 根据id集合查询
      *
      * @param ids
      * @return

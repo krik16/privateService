@@ -8,6 +8,33 @@ import java.io.Serializable;
 public class UserRedenvelopeParam implements Serializable {
     private int pageSize = 10;
     private int currentPage = 0;
+    private String userId;
+    private String productId;
+    private String status;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public int getPageSize() {
         return pageSize;

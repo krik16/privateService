@@ -2,11 +2,13 @@ package com.rongyi.easy.coupon.entity;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.ListUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.beans.Transient;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -258,15 +260,6 @@ public class Coupon implements Serializable {
      */
     private List<RedenvelopeCommodity> redenvelopeCommodities;
 
-    /**
-     * 列表图名称
-     */
-    private String listPicName;
-
-    /**
-     * 详情图名称
-     */
-    private List<String> detailPicNames;
 
     private Integer purchaseType = Integer.valueOf(0);//购买类型 0正常购买类型 1抢购类型
 
@@ -435,6 +428,14 @@ public class Coupon implements Serializable {
 
     public String getDetailPicUrl() {
         return detailPicUrl;
+    }
+
+    public List<String> getDetailPicUrls() {
+        List<String> list = ListUtils.EMPTY_LIST;
+        if (StringUtils.isNotBlank(detailPicUrl)) {
+            list = Arrays.asList(detailPicUrl.split(";"));
+        }
+        return list;
     }
 
     public void setDetailPicUrl(String detailPicUrl) {
@@ -617,23 +618,6 @@ public class Coupon implements Serializable {
         this.couponShops = couponShops;
     }
 
-
-    public String getListPicName() {
-        return listPicName;
-    }
-
-    public void setListPicName(String listPicName) {
-        this.listPicName = listPicName;
-    }
-
-    public List<String> getDetailPicNames() {
-        return detailPicNames;
-    }
-
-    public void setDetailPicNames(List<String> detailPicNames) {
-        this.detailPicNames = detailPicNames;
-    }
-
     public List<CouponMall> getCouponMalls() {
         return couponMalls;
     }
@@ -758,8 +742,6 @@ public class Coupon implements Serializable {
                 .append("couponMalls", couponMalls)
                 .append("preferentialType", preferentialType)
                 .append("redenvelopeCommodities", redenvelopeCommodities)
-                .append("listPicName", listPicName)
-                .append("detailPicNames", detailPicNames)
                 .append("purchaseType", purchaseType)
                 .append("visitedCount", visitedCount)
                 .toString();
