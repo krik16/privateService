@@ -105,7 +105,7 @@ $(document).ready(function() {
 			return selection;
 		}
 	});
-	$("#morePay").click(function() {
+	/*$("#morePay").click(function() {
 		var ids = [];
 		var payChannels = [];
 		var payChannel = null;
@@ -130,7 +130,7 @@ $(document).ready(function() {
 			var payType = $("#morePay").val();
 			validateAccount(ids.join(","), payType,payChannel);
 		}
-	});
+	});*/
 });
 
 function getParamsJson(){
@@ -182,6 +182,37 @@ function selectAll() { // 全选or取消全选;
     } else {
         $('input[name="subBox"]').attr("checked", false);
     }
+}
+function morePayClick(){
+	var ids = [];
+	var payChannels = [];
+	var payChannel = null;
+	$(":checkbox[name='subBox']").each(function() {
+		if (this.checked == true) {
+			if($("#morePay").val() ==7){
+				ids.push(this.attributes['paymentId'].value);
+			}else{
+				ids.push(this.id);
+			}
+			payChannel = this.attributes['payChannel'].value;
+			if ($.inArray(payChannel, payChannels) == -1) {
+				payChannels.push(payChannel);
+			}
+		}
+	});
+	if (payChannels.length > 1) {
+		_util.cmsTip("您只能选择一种打款方式进行批量付款");
+		return;
+	}
+	if (ids.length <= 0) {
+		_util.cmsTip("您至少选中一条付款明细");
+		return;
+	}
+	if (ids.length != 0) {
+		var payType = $("#morePay").val();
+		validateAccount(ids.join(","), payType,payChannel);
+	}
+
 }
 
 /**
@@ -355,7 +386,7 @@ function switchCheck(check) {
 		$("#search-price").html('异常付款金额：');
 		$("#search-price").width(86);
 	}else if (check == 3) {//对账单付款
-		
+		$("#morePay").val(7);
 		 url_ = "../pay/statementList";
 		$("#statementPay").addClass("change-color");
 		$("#statementPay").removeClass("now");
@@ -369,7 +400,6 @@ function switchCheck(check) {
 		$("#paySeller").addClass("now");
 		$("#paySeller").removeClass("change-color");
 		
-		$("#morePay").val(6);
 		$("#search-batchNo").css("display","block");
 		$("#search-bussinessType").css("display","block");
 		$("#search-bussinessName").css("display","block");

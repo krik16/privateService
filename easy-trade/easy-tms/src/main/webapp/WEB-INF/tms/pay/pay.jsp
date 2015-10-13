@@ -143,7 +143,7 @@ pageEncoding="UTF-8"%>
 							<a href="javascript:void(0);" class="btnsearch checked" id="search-button">查询</a>
 						</li>
 						<li>
-							 <sec:authorize ifAnyGranted="TMS_F_PAY" ><a  href="javascript:void(0);" target="_parent" class="btnsearch" id="morePay"  style="border:0px;float: right;">批量付款</a></sec:authorize>
+							 <sec:authorize ifAnyGranted="TMS_F_PAY" ><a  href="javascript:void(0);" onclick="morePayClick()" target="_parent" class="btnsearch" id="morePay"  style="border:0px;float: right;">批量付款</a></sec:authorize>
 						</li>
 					</ur>
 				</div>
