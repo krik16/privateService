@@ -20,6 +20,23 @@ public class LiveSearchParam implements Serializable{
 	private int size = 50;         //一页数量
  	private String zone_id;   //区域id
  	private String mall_id;  //商场id 
+ 	private String city_name; //城市名（如  上海&上海市）
+ 	private String liveId;
+	public String getLiveId() {
+		return liveId;
+	}
+	public void setLiveId(String liveId) {
+		this.liveId = liveId;
+	}
+	public String getCity_name() {
+		return city_name;
+	}
+	public void setCity_name(String city_name) {
+		this.city_name = city_name;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	public String getCoord_x() {
 		return coord_x;
 	}
