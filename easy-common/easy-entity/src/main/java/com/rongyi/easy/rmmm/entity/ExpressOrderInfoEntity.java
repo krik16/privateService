@@ -1,8 +1,9 @@
 package com.rongyi.easy.rmmm.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ExpressOrderInfoEntity {
+public class ExpressOrderInfoEntity implements Serializable{
     /** 主键 */
     private Integer id;
 
