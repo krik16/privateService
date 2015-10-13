@@ -82,7 +82,7 @@ public class AccessServiceImpl implements AccessService {
             request.getSession().setAttribute("userName", sessionUserInfo.getUserName());
         }
         List<String> authorities = (List<String>) user.get("authorities");
-
+        logger.info("需要权限: " + needAuthority + " 拥有权限:" + authorities.toString());
         if (authorities.contains(needAuthority)) {
             return ResponseData.success();
         } else {
