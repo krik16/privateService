@@ -121,5 +121,6 @@ public interface HuanXinIMService {
      */
     public String generationIMid()throws HuanXinException;
 
+    public List<String> selectImIdByGuideId(Integer guideId);
 
 }
