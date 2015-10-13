@@ -233,4 +233,12 @@ public interface ROAUserService {
      * @return 存在 true 不存在 false
      */
     public Boolean sharCodeIsExist(String sharCode)throws Exception;
+    
+    /**
+     * 通过userId获取导购部分数据
+     * @param userId
+     * @return
+     * @throws Exception
+     */
+    public UserinfoVO selectRmmmUserInfoByUserId(Integer userId) throws Exception;
 }
