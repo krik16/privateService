@@ -86,83 +86,85 @@ public class PaymentStatementController {
 			Integer currentPage = Integer.valueOf(map.get("currentPage").toString());
 			Integer searchType = Integer.valueOf(map.get("searchType").toString());
 			Integer searchStatus = -1;
-			if (map.get("searchStatus") != null) searchStatus = Integer.valueOf(map.get("searchStatus").toString());
+			if (map.get("searchStatus") != null)
+				searchStatus = Integer.valueOf(map.get("searchStatus").toString());
 			List<Byte> statusList = new ArrayList<Byte>();
 			ResponseData responseData;
 			switch (searchType) {
-				case 0:// 查询对账单列表
-					responseData = accessService.check(request, "FNC_STLBILL_VIEW");
-					if (responseData.getMeta().getErrno() != 0) {
-						return responseData;
-					}
-					if (searchStatus == 1)// 待确认列表
-						statusList.add((byte) 5);
-					break;
-				case 1:// 查询对账单审核列表
-					responseData = accessService.check(request, "FNC_STLBILLVFY_VIEW");
-					if (responseData.getMeta().getErrno() != 0) {
-						return responseData;
-					}
-					if (searchStatus == 0)
-						statusList.add((byte) 0);
-					if (searchStatus == 1) {
-						statusList.add((byte) 1);
-						statusList.add((byte) 2);
-					}
-					break;
-				case 2:// 查询待付款审核列表
-					responseData = accessService.check(request, "FNC_UNPVFY_VIEW");
-					if (responseData.getMeta().getErrno() != 0) {
-						return responseData;
-					}
-					if (searchStatus == 0)
-						statusList.add((byte) 4);
-					else {
-						statusList.add((byte) 5);
-						statusList.add((byte) 6);
-					}
-					break;
-				case 3:// 查询付款列表
-					responseData = accessService.check(request, "FNC_UNPVFY_VIEW");
-					if (responseData.getMeta().getErrno() != 0) {
-						return responseData;
-					}
-					statusList.add((byte) 6);
-					statusList.add((byte) 11);
-					List<Byte> payChannelList = new ArrayList<Byte>();
-					payChannelList.add((byte) 3);
-					payChannelList.add((byte) 4);
-					map.put("payChannelList", payChannelList);
-					// 操作日志查询
-					map.put("op_model", 1);
-					break;
-				case 5:// 商家付款单列表
-					responseData = accessService.check(request, "FUND_CHECK_MGR");
-					if (responseData.getMeta().getErrno() != 0) {
-						return responseData;
-					}
-					if (searchStatus == 0) {//全部
-						statusList.add((byte) 1);
-						statusList.add((byte) 3);
-						statusList.add((byte) 4);
-						statusList.add((byte) 5);
-					}else if (searchStatus == 1){//待确认
-						statusList.add((byte) 1);
-						statusList.add((byte) 3);
-					}else if (searchStatus == 2){//已确认
-						statusList.add((byte) 4);
-					}else if (searchStatus == 3){//不确认
-						statusList.add((byte) 5);
-					}
-					break;
-				default:
-					responseData = accessService.check(request, "NO");
-					if (responseData.getMeta().getErrno() != 0) {
-						return responseData;
-					}
-					break;
+			case 0:// 查询对账单列表
+				responseData = accessService.check(request, "FNC_STLBILL_VIEW");
+				if (responseData.getMeta().getErrno() != 0) {
+					return responseData;
+				}
+				if (searchStatus == 1)// 待确认列表
+					statusList.add(ConstantEnum.STATUS_5.getCodeByte());
+				break;
+			case 1:// 查询对账单审核列表
+				responseData = accessService.check(request, "FNC_STLBILLVFY_VIEW");
+				if (responseData.getMeta().getErrno() != 0) {
+					return responseData;
+				}
+				if (searchStatus == 0)
+					statusList.add(ConstantEnum.STATUS_0.getCodeByte());
+				if (searchStatus == 1) {
+					statusList.add(ConstantEnum.STATUS_1.getCodeByte());
+					statusList.add(ConstantEnum.STATUS_2.getCodeByte());
+				}
+				break;
+			case 2:// 查询待付款审核列表
+				responseData = accessService.check(request, "FNC_UNPVFY_VIEW");
+				if (responseData.getMeta().getErrno() != 0) {
+					return responseData;
+				}
+				if (searchStatus == 0)
+					statusList.add(ConstantEnum.STATUS_4.getCodeByte());
+				else {
+					statusList.add(ConstantEnum.STATUS_5.getCodeByte());
+					statusList.add(ConstantEnum.STATUS_6.getCodeByte());
+				}
+				break;
+			case 3:// 查询付款列表
+				responseData = accessService.check(request, "FNC_UNPVFY_VIEW");
+				if (responseData.getMeta().getErrno() != 0) {
+					return responseData;
+				}
+				statusList.add(ConstantEnum.STATUS_6.getCodeByte());
+				statusList.add(ConstantEnum.STATUS_11.getCodeByte());
+				List<Byte> payChannelList = new ArrayList<Byte>();
+				payChannelList.add(ConstantEnum.STATUS_3.getCodeByte());
+				payChannelList.add(ConstantEnum.STATUS_4.getCodeByte());
+				map.put("payChannelList", payChannelList);
+				// 操作日志查询
+				map.put("op_model", 1);
+				break;
+			case 5:// 商家付款单列表
+				responseData = accessService.check(request, "FUND_CHECK_MGR");
+				if (responseData.getMeta().getErrno() != 0) {
+					return responseData;
+				}
+				if (searchStatus == 0) {// 全部
+					statusList.add(ConstantEnum.STATUS_1.getCodeByte());
+					statusList.add(ConstantEnum.STATUS_3.getCodeByte());
+					statusList.add(ConstantEnum.STATUS_4.getCodeByte());
+					statusList.add(ConstantEnum.STATUS_5.getCodeByte());
+				} else if (searchStatus == 1) {// 待确认
+					statusList.add(ConstantEnum.STATUS_1.getCodeByte());
+					statusList.add(ConstantEnum.STATUS_3.getCodeByte());
+				} else if (searchStatus == 2) {// 已确认
+					statusList.add(ConstantEnum.STATUS_4.getCodeByte());
+				} else if (searchStatus == 3) {// 不确认
+					statusList.add(ConstantEnum.STATUS_5.getCodeByte());
+				}
+				break;
+			default:
+				responseData = accessService.check(request, "NO");
+				if (responseData.getMeta().getErrno() != 0) {
+					return responseData;
+				}
+				break;
 			}
-			if (!statusList.isEmpty()) map.put("statusList", statusList);
+			if (!statusList.isEmpty())
+				map.put("statusList", statusList);
 			List<PaymentStatementDto> list = paymentStatementService.selectPageList(map, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt());
 			Integer count = paymentStatementService.selectPageListCount(map);
 			return ResponseData.success(list, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt(), count);
@@ -170,6 +172,45 @@ public class PaymentStatementController {
 			e.printStackTrace();
 			return ResponseData.failure(CodeEnum.FIAL_STATEMENT_LIST.getCodeInt(), CodeEnum.FIAL_STATEMENT_LIST.getValueStr());
 		}
+	}
+
+	/**
+	 * @Description: 商家对账单不同状态总数
+	 * @param request
+	 * @param map
+	 * @return
+	 * @Author: 柯军
+	 * @datetime:2015年10月13日上午11:51:35
+	 **/
+	@RequestMapping("/bizListTotal")
+	@ResponseBody
+	public ResponseData bizListTotal(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+		Map<String, Object> responseMap = new HashMap<String, Object>();
+		List<Byte> statusList = new ArrayList<Byte>();
+		statusList.add(ConstantEnum.STATUS_1.getCodeByte());
+		statusList.add(ConstantEnum.STATUS_3.getCodeByte());
+		statusList.add(ConstantEnum.STATUS_4.getCodeByte());
+		statusList.add(ConstantEnum.STATUS_5.getCodeByte());
+		map.put("statusList", statusList);
+		Integer allCount = paymentStatementService.selectPageListCount(map);// 全部
+		responseMap.put("allCount", allCount);
+		statusList.clear();
+		statusList.add(ConstantEnum.STATUS_1.getCodeByte());
+		statusList.add(ConstantEnum.STATUS_3.getCodeByte());
+		map.put("statusList", statusList);
+		Integer unSureCount = paymentStatementService.selectPageListCount(map);// 未确认
+		responseMap.put("unSureCount", unSureCount);
+		statusList.clear();
+		statusList.add(ConstantEnum.STATUS_4.getCodeByte());
+		map.put("statusList", statusList);
+		Integer yesSureCount = paymentStatementService.selectPageListCount(map);// 已确认
+		responseMap.put("yesSureCount", yesSureCount);
+		statusList.clear();
+		statusList.add(ConstantEnum.STATUS_5.getCodeByte());
+		map.put("statusList", statusList);
+		Integer noSureCount = paymentStatementService.selectPageListCount(map);// 未确认
+		responseMap.put("noSureCount", noSureCount);
+		return ResponseData.success(responseMap);
 	}
 
 	/**
