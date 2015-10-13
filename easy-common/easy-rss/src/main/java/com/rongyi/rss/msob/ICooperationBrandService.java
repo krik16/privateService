@@ -116,4 +116,13 @@ public interface ICooperationBrandService {
 	 * @throws Exception
 	 */
 	public BrandWallListVO getBrandWallListVO(String categoryId) throws Exception;
+	
+	/**
+	 * 通过mongoId获取mongo数据库中的品牌信息
+	 * 
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public BrandEntity getBrandEntityByMongoId(String brandMid) throws Exception;
 }
