@@ -136,7 +136,19 @@ public class PaymentStatementController {
 			map.put("op_model", 1);
 			break;
 		case 5:// 商家付款单列表
-				// statusList.add()
+			if (searchStatus == 0) {//全部
+				statusList.add((byte) 1);
+				statusList.add((byte) 3);
+				statusList.add((byte) 4);
+				statusList.add((byte) 5);
+			}else if (searchStatus == 1){//待确认
+				statusList.add((byte) 1);
+				statusList.add((byte) 3);
+			}else if (searchStatus == 2){//已确认
+				statusList.add((byte) 4);
+			}else if (searchStatus == 3){//不确认
+				statusList.add((byte) 5);
+			}
 			break;
 		default:
 			break;

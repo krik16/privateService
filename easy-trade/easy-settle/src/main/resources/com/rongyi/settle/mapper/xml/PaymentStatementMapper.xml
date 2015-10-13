@@ -200,10 +200,10 @@
 			and pbc.biz_name = #{bussinessName,jdbcType=VARCHAR}
 		</if>
 		<if test="createAtStart != null">
-			and pb.create_at &gt; #{createAtStart,jdbcType=TIMESTAMP}
+			and pb.cycle_start_time &gt; #{createAtStart,jdbcType=TIMESTAMP}
 		</if>
 		<if test="createAtEnd != null">
-			and pb.create_at &lt; #{createAtEnd,jdbcType=TIMESTAMP}
+			and pb.cycle_start_time &lt; #{createAtEnd,jdbcType=TIMESTAMP}
 		</if>
 		<if test="batchNo != null">
 			and pb.batch_no = #{batchNo,jdbcType=VARCHAR}
@@ -241,7 +241,7 @@
 		<if test="op_model != null">
 			and ol.op_model = #{op_model}
 			<if test="statusList != null and statusList != ''">
-			and op_type in
+			and op_type in 
 			<foreach collection="statusList" index="index" item="item"
 				open="(" separator="," close=")">
 				#{item,jdbcType=TINYINT}
