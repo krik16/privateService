@@ -1,5 +1,7 @@
 package com.rongyi.settle.service.impl;
 
+import com.rongyi.easy.bsoms.entity.SessionUserInfo;
+import com.rongyi.easy.ryoms.entity.RyUserInfo;
 import com.rongyi.rss.roa.ROAUserInfoService;
 import com.rongyi.rss.ryoms.ROARyUserService;
 import com.rongyi.settle.constants.CodeEnum;
@@ -63,13 +65,21 @@ public class AccessServiceImpl implements AccessService {
         }
         Map user;
         if (!StringUtils.isEmpty(ryst)) {
-            user = ryUserService.getSessionUser(ryst, false);
+            user = ryUserService.getSessionUser(ryst, true);
+            if (user == null || !user.containsKey("userInfo")) {
+                logger.error("没有找到运营后台登录用户信息。");
+                return ResponseData.failure(CodeEnum.FIAL_USER_PARAMS_PAYMENT.getCodeInt(), CodeEnum.FIAL_USER_PARAMS_PAYMENT.getValueStr());
+            }
+            RyUserInfo ryUserInfo = (RyUserInfo) user.get("userInfo");
+            request.getSession().setAttribute("userName", ryUserInfo.getName());
         } else {
             user = userInfoService.getSessionUser(bsst, true);
-        }
-        if (user == null || !user.containsKey("userInfo")) {
-            logger.error("没有找到登录用户信息。");
-            return ResponseData.failure(CodeEnum.FIAL_USER_PARAMS_PAYMENT.getCodeInt(), CodeEnum.FIAL_USER_PARAMS_PAYMENT.getValueStr());
+            if (user == null || !user.containsKey("userInfo")) {
+                logger.error("没有找到商家后台登录用户信息。");
+                return ResponseData.failure(CodeEnum.FIAL_USER_PARAMS_PAYMENT.getCodeInt(), CodeEnum.FIAL_USER_PARAMS_PAYMENT.getValueStr());
+            }
+            SessionUserInfo sessionUserInfo = (SessionUserInfo) user.get("userInfo");
+            request.getSession().setAttribute("userName", sessionUserInfo.getUserName());
         }
         List<String> authorities = (List<String>) user.get("authorities");
 
