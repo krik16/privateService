@@ -1,4 +1,4 @@
-package com.rongyi.rss.coupon;
+package com.rongyi.rss.coupon.operation;
 
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
