@@ -570,4 +570,18 @@
       discount_info = #{discountInfo,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectTimeoutOrderByStatus" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	select * from order_form where status = #{status} and now() &gt; next_Status_Time;
+  </select>
+  
+  <update id="updateStatusWithTime" parameterType="com.rongyi.easy.osm.entity.OrderFormEntity">
+    update order_form 
+    set 
+    	status = #{status}, 
+    	status_route = #{statusRoute}, 
+    	status_hold_ms = #{statusHoldMs}, 
+    	next_status_time = #{nextStatusTime,jdbcType=TIMESTAMP}
+    where order_no = #{orderNo}
+  </update>
 </mapper>
