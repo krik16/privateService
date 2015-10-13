@@ -1,6 +1,7 @@
 package com.rongyi.rss.coupon.mall.life;
 
 
+import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.old_vo.OldCouponVO;
 
 import java.util.List;
@@ -22,4 +23,11 @@ public interface MLCouponService {
      */
     public List<OldCouponVO> findCouponVOByIds(List<String> ids);
 
+    /**
+     * 根据id查询卡券信息
+     *
+     * @param couponId
+     * @return
+     */
+    Coupon findCouponById(String couponId);
 }

@@ -448,6 +448,19 @@ public class Coupon implements Serializable {
         return list;
     }
 
+    /**
+     * 优惠券缩略图
+     *
+     * @return
+     */
+    public String getThumbnail() {
+        String pic = "";
+        if (!this.getDetailPicUrls().isEmpty()) {
+            pic = this.getDetailPicUrls().get(0);
+        }
+        return pic;
+    }
+
     public void setDetailPicUrl(String detailPicUrl) {
         this.detailPicUrl = detailPicUrl;
     }
