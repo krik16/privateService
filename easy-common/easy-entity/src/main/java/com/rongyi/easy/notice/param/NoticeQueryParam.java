@@ -26,10 +26,11 @@ public class NoticeQueryParam implements Serializable {
     private String shopName;
     private Integer publishStatus;
     private Integer checkStatus;
+    private Integer noticeStatus;
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("currentPage", currentPage).append("pageSize", pageSize).append("offset", offset).append("shopId", shopId).append("shopName", shopName).append("publishStatus", publishStatus).append("checkStatus", checkStatus).append("whoUse", whoUse).toString();
+        return new ToStringBuilder(this).append("currentPage", currentPage).append("pageSize", pageSize).append("offset", offset).append("shopId", shopId).append("shopName", shopName).append("publishStatus", publishStatus).append("checkStatus", checkStatus).append("whoUse", whoUse).append("noticeStatus",noticeStatus).toString();
     }
 
     public Integer getWhoUse() {
@@ -104,6 +105,14 @@ public class NoticeQueryParam implements Serializable {
 
     public static int getCurrentpage() {
         return CURRENTPAGE;
+    }
+
+    public Integer getNoticeStatus() {
+        return noticeStatus;
+    }
+
+    public void setNoticeStatus(Integer noticeStatus) {
+        this.noticeStatus = noticeStatus;
     }
 
     public NoticeQueryParam() {
