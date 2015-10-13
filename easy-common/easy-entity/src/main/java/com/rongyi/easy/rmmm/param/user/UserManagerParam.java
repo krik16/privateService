@@ -47,6 +47,10 @@ public class UserManagerParam extends BaseParam implements Serializable{
     private String stopReason;//停用原因
     private String creatingUserType;
     private Integer merUserId;//操作人id
+
+
+
+
     public Integer getId() {
 		return id;
 	}
