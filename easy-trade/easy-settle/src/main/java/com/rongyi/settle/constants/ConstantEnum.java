@@ -29,6 +29,20 @@ public enum ConstantEnum {
     BIZ_TYPE2(2,"品牌"),
     BIZ_TYPE3(3,"分公司"),
     BIZ_TYPE4(4,"集团公司"),
+
+    STATUS_0(0,"初始状态"),
+    STATUS_1(1,"人工审核通过"),
+    STATUS_2(2,"人工审核不通过"),
+    STATUS_3(3,"系统审核通过"),
+    STATUS_4(4,"商家确认通过"),
+    STATUS_5(5,"确认异常"),
+    STATUS_6(6,"付款审核通过"),
+    STATUS_7(7,"付款审核不通过"),
+    STATUS_8(8,"作废"),
+    STATUS_9(9,"付款冻结"),
+    STATUS_10(10,"付款解冻"),
+    STATUS_11(11,"已下载"),
+    STATUS_12(12,"已付款"),
     
 	PAGE_SIZE(10,"分页条数");
     

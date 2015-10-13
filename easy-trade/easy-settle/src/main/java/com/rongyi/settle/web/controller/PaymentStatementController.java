@@ -97,7 +97,7 @@ public class PaymentStatementController {
 					return responseData;
 				}
 				if (searchStatus == 1)// 待确认列表
-					statusList.add((byte) 5);
+					statusList.add(ConstantEnum.STATUS_5.getCodeByte());
 				break;
 			case 1:// 查询对账单审核列表
 				responseData = accessService.check(request, "FNC_STLBILLVFY_VIEW");
@@ -105,10 +105,10 @@ public class PaymentStatementController {
 					return responseData;
 				}
 				if (searchStatus == 0)
-					statusList.add((byte) 0);
+					statusList.add(ConstantEnum.STATUS_0.getCodeByte());
 				if (searchStatus == 1) {
-					statusList.add((byte) 1);
-					statusList.add((byte) 2);
+					statusList.add(ConstantEnum.STATUS_1.getCodeByte());
+					statusList.add(ConstantEnum.STATUS_2.getCodeByte());
 				}
 				break;
 			case 2:// 查询待付款审核列表
@@ -117,10 +117,10 @@ public class PaymentStatementController {
 					return responseData;
 				}
 				if (searchStatus == 0)
-					statusList.add((byte) 4);
+					statusList.add(ConstantEnum.STATUS_4.getCodeByte());
 				else {
-					statusList.add((byte) 5);
-					statusList.add((byte) 6);
+					statusList.add(ConstantEnum.STATUS_5.getCodeByte());
+					statusList.add(ConstantEnum.STATUS_6.getCodeByte());
 				}
 				break;
 			case 3:// 查询付款列表
@@ -128,11 +128,11 @@ public class PaymentStatementController {
 				if (responseData.getMeta().getErrno() != 0) {
 					return responseData;
 				}
-				statusList.add((byte) 6);
-				statusList.add((byte) 11);
+				statusList.add(ConstantEnum.STATUS_6.getCodeByte());
+				statusList.add(ConstantEnum.STATUS_11.getCodeByte());
 				List<Byte> payChannelList = new ArrayList<Byte>();
-				payChannelList.add((byte) 3);
-				payChannelList.add((byte) 4);
+				payChannelList.add(ConstantEnum.STATUS_3.getCodeByte());
+				payChannelList.add(ConstantEnum.STATUS_4.getCodeByte());
 				map.put("payChannelList", payChannelList);
 				// 操作日志查询
 				map.put("op_model", 1);
@@ -143,17 +143,17 @@ public class PaymentStatementController {
 					return responseData;
 				}
 				if (searchStatus == 0) {// 全部
-					statusList.add((byte) 1);
-					statusList.add((byte) 3);
-					statusList.add((byte) 4);
-					statusList.add((byte) 5);
+					statusList.add(ConstantEnum.STATUS_1.getCodeByte());
+					statusList.add(ConstantEnum.STATUS_3.getCodeByte());
+					statusList.add(ConstantEnum.STATUS_4.getCodeByte());
+					statusList.add(ConstantEnum.STATUS_5.getCodeByte());
 				} else if (searchStatus == 1) {// 待确认
-					statusList.add((byte) 1);
-					statusList.add((byte) 3);
+					statusList.add(ConstantEnum.STATUS_1.getCodeByte());
+					statusList.add(ConstantEnum.STATUS_3.getCodeByte());
 				} else if (searchStatus == 2) {// 已确认
-					statusList.add((byte) 4);
+					statusList.add(ConstantEnum.STATUS_4.getCodeByte());
 				} else if (searchStatus == 3) {// 不确认
-					statusList.add((byte) 5);
+					statusList.add(ConstantEnum.STATUS_5.getCodeByte());
 				}
 				break;
 			default:
@@ -187,26 +187,26 @@ public class PaymentStatementController {
 	public ResponseData bizListTotal(HttpServletRequest request, @RequestBody Map<String, Object> map) {
 		Map<String, Object> responseMap = new HashMap<String, Object>();
 		List<Byte> statusList = new ArrayList<Byte>();
-		statusList.add((byte) 1);
-		statusList.add((byte) 3);
-		statusList.add((byte) 4);
-		statusList.add((byte) 5);
+		statusList.add(ConstantEnum.STATUS_1.getCodeByte());
+		statusList.add(ConstantEnum.STATUS_3.getCodeByte());
+		statusList.add(ConstantEnum.STATUS_4.getCodeByte());
+		statusList.add(ConstantEnum.STATUS_5.getCodeByte());
 		map.put("statusList", statusList);
 		Integer allCount = paymentStatementService.selectPageListCount(map);// 全部
 		responseMap.put("allCount", allCount);
 		statusList.clear();
-		statusList.add((byte) 1);
-		statusList.add((byte) 3);
+		statusList.add(ConstantEnum.STATUS_1.getCodeByte());
+		statusList.add(ConstantEnum.STATUS_3.getCodeByte());
 		map.put("statusList", statusList);
 		Integer unSureCount = paymentStatementService.selectPageListCount(map);// 未确认
 		responseMap.put("unSureCount", unSureCount);
 		statusList.clear();
-		statusList.add((byte) 4);
+		statusList.add(ConstantEnum.STATUS_4.getCodeByte());
 		map.put("statusList", statusList);
 		Integer yesSureCount = paymentStatementService.selectPageListCount(map);// 已确认
 		responseMap.put("yesSureCount", yesSureCount);
 		statusList.clear();
-		statusList.add((byte) 5);
+		statusList.add(ConstantEnum.STATUS_5.getCodeByte());
 		map.put("statusList", statusList);
 		Integer noSureCount = paymentStatementService.selectPageListCount(map);// 未确认
 		responseMap.put("noSureCount", noSureCount);
