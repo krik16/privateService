@@ -77,4 +77,9 @@ public interface ROACooperationMallService {
 	 * @throws Exception
 	 */
 	public List<MallCooperateEntity> getMallListByMallName(String mallName) throws Exception;
+	
+	/**
+	 * 通过店铺id查找商场的MongoId
+	 */
+	public String getMallMIdByshopId(Integer shopId) throws Exception;
 }
