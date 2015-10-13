@@ -81,6 +81,9 @@ public class OrderFormEntity implements Serializable{
     /** 1是导购 2是买手*/
     private Integer guideType;
 
+    /** 是否已提醒买家付款 0 未提醒 1 已提醒**/
+    private Integer isAlert;
+
 	public Integer getGuideType() {
 		return guideType;
 	}
@@ -89,7 +92,15 @@ public class OrderFormEntity implements Serializable{
 		this.guideType = guideType;
 	}
 
-	public JSONObject getJsonDiscountInfo() {
+    public Integer getIsAlert() {
+        return isAlert;
+    }
+
+    public void setIsAlert(Integer isAlert) {
+        this.isAlert = isAlert;
+    }
+
+    public JSONObject getJsonDiscountInfo() {
 		return jsonDiscountInfo;
 	}
 

@@ -8,7 +8,7 @@ package com.rongyi.easy.integral.constant;
 * @date 2015-7-17 下午4:45:55
  */
 public enum ScoreRuleEnum { 
-	    SCORE_UPLOAD_HEAD(1,"上传头像"),
+	    SCORE_UPLOAD_HEAD(1,"头像上传"),
 	    SCORE_MALL_COMMENT(2,"店铺评论"),
 	    SCORE_ORDER_COMMENT(3,"订单评价"),
 	    SCORE_SIGN_IN(4,"每日签到"),

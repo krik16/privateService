@@ -14,6 +14,7 @@ import com.rongyi.easy.rmmm.vo.BrandShopDetailVO;
 import com.rongyi.easy.rmmm.vo.BrandShopListVO;
 import com.rongyi.easy.rmmm.vo.ShopDetailVO;
 import com.rongyi.easy.rmmm.vo.ShopInfoVO;
+import com.rongyi.easy.rmmm.vo.ShopMallVO;
 
 public interface IShopService{
 	
@@ -150,4 +151,12 @@ public interface IShopService{
 	 * @throws Exception
 	 */
 	public void sendShopMessageToIMUser(final String userId, final String shopMid) throws Exception;
+	
+	/**
+	 * 通过店铺id 获得店铺、商场信息
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public ShopMallVO getShopMallVOByOrderNum(Integer shopId) throws Exception;
 }

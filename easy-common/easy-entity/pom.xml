@@ -64,7 +64,7 @@
 			<artifactId>fastjson</artifactId>
 		</dependency>
 
-	<!-- 	<dependency>
+	<!-- <dependency>
 			<groupId>com.sun.rt</groupId>
 			<artifactId>rt</artifactId>
 			<version>1.0.0</version>
