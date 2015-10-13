@@ -3,6 +3,7 @@ package com.rongyi.rss.coupon;
 
 import com.rongyi.easy.coupon.entity.old.Coupon;
 import com.rongyi.easy.coupon.old_vo.OldCouponVO;
+import com.rongyi.rss.coupon.mall.shop.MSCouponService;
 import org.bson.types.ObjectId;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.rongyi.rss.coupon;
+package com.rongyi.rss.coupon.mall.shop;
 
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.easy.coupon.entity.Coupon;

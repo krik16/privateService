@@ -1,4 +1,4 @@
-package com.rongyi.rss.coupon;
+package com.rongyi.rss.coupon.mall.life;
 
 
 import com.rongyi.easy.coupon.old_vo.OldCouponVO;

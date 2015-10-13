@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 用户卡券：优惠券/现金券信息
+ * 用户卡券：代金券信息
  *
  * @author Breggor
  */
