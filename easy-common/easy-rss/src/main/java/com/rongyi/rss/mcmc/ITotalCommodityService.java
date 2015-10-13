@@ -35,5 +35,7 @@ public interface ITotalCommodityService {
 	
 	public void insertTotalCommodityList(List<TotalCommodity> toalCommodities);
 	
-	List<TotalCommodity>  findByTotalCommodityCode(List<String> codes);
+	public List<TotalCommodity>  findByTotalCommodityCode(List<String> codes,String brandMid);
+	
+	public Long searchCommodityByCodeAndBrand(String code,String brandMid);
 }

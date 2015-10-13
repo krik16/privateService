@@ -22,7 +22,7 @@ public class CommoditySearchParam {
 	private Date endTime;//时间段结束
 	private String name;//编号\商品名\商品编码
 	private int status;//状态 0下架 1上架 2是删除3待上架4待处理 -1表示所有
-	private int currpage;//当页数0表示第一页
+	private int currpage;//当页数1表示第一页
 	private int pageSize;//每页大小
 	
 	public String getCategoryId() {
