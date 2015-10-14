@@ -185,6 +185,7 @@ public class PaymentStatementController {
 	@RequestMapping("/bizListTotal")
 	@ResponseBody
 	public ResponseData bizListTotal(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+		logger.info("====bizListTotal==== params="+map.toString());
 		Map<String, Object> responseMap = new HashMap<String, Object>();
 		List<Byte> statusList = new ArrayList<Byte>();
 		statusList.add(ConstantEnum.STATUS_1.getCodeByte());
