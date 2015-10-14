@@ -3,6 +3,7 @@ package com.rongyi.rss.tradecenter.osm;
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.easy.rmmm.param.*;
 import com.rongyi.easy.rmmm.vo.*;
+
 import org.bson.types.ObjectId;
 
 public interface IOrderService {
@@ -165,6 +166,14 @@ public interface IOrderService {
 	 * @throws Exception
 	 */
 	public  Integer getMaxIntegral(MaxIntegralParam param, double limit, double moenyExchangeScore) throws Exception;
+	
+	/**
+	 * 把评价状态设置为已评价
+	 * 
+	 * @param id
+	 * @throws Exception
+	 */
+	public ResponseResult updateOrderIsCommentById(Integer id) throws Exception;
 	
 
 }
