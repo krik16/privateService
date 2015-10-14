@@ -28,7 +28,7 @@ public class CommodityVO  implements  Serializable {
 	private String commodityCPriceMin;//我是最低现价”,
 	private String commodityOPOfLCP;//我是最低现价对应的原价
 	
-	private int commodityType;//渠道  0商家，1买手
+	private int commodityType;//渠道  1商家，2买手
 	private boolean isSpot;//是否现货	
 	
 	public int getCommodityType() {
