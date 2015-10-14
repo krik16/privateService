@@ -18,6 +18,7 @@ import com.rongyi.easy.rmmm.vo.ParentOrderListVO;
 import com.rongyi.easy.rmmm.vo.ParentOrderVO;
 import com.rongyi.easy.rmmm.vo.ShopMallVO;
 import com.rongyi.easy.rmmm.vo.TransactionDetailVO;
+import com.rongyi.easy.tradecenter.osm.OrderEventEntity;
 import com.rongyi.easy.tradecenter.osm.OrderFormEntity;
 
 /**
@@ -109,5 +110,14 @@ public interface IOrderQueryService {
 	public List<OrderDetailFormEntity> selectByParentNum(String parentNum) throws Exception;
 	
 	public PagingVO<OrderManagerVO> searchListByMap(Map<String, Object> paramsMap) throws Exception;
+	
+	/**
+	 * 根据事件类型查找订单事件
+	 * @param type
+	 * @param orderNum
+	 * @return
+	 * @throws Exception
+	 */
+	public OrderEventEntity getOrderEventByType(String type , String orderNum) throws Exception;
 
 }
