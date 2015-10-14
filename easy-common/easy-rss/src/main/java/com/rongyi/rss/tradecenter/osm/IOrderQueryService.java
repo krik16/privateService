@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.rongyi.core.common.PagingVO;
+import com.rongyi.easy.rmmm.param.MaxIntegralParam;
 import com.rongyi.easy.rmmm.param.MyOrderParam;
 import com.rongyi.easy.rmmm.param.TransactionDetailParam;
 import com.rongyi.easy.rmmm.vo.MyOrderCountVO;
@@ -118,5 +119,13 @@ public interface IOrderQueryService {
 	 * @throws Exception
 	 */
 	public OrderEventEntity getOrderEventByType(String type , String orderNum) throws Exception;
+	
+	/**
+	 * 获取商品生成订单最大使用积分
+	 * 
+	 * @param param
+	 * @return
+	 */
+	public  Integer getMaxIntegral(MaxIntegralParam param, double limit, double moenyExchangeScore);
 
 }
