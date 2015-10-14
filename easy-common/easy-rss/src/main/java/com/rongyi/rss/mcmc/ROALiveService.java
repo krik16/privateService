@@ -3,6 +3,7 @@ package com.rongyi.rss.mcmc;
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.mcmc.vo.AdviseShopVO;
 import com.rongyi.easy.mcmc.vo.LiveVO;
+import com.rongyi.easy.solr.param.LiveSearchParam;
 
 /**
  * 直播ROA服务接口
@@ -47,7 +48,7 @@ public interface ROALiveService {
 	 * @param param 搜索参数
 	 * @return 返回带LiveVO的ResponseVO
 	 */
-	ResponseVO searchLiveList(String param);
+	ResponseVO searchLiveList(LiveSearchParam param);
 	
 	/**
 	 * 建议商店
