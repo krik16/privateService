@@ -180,9 +180,19 @@ public class Coupon implements Serializable {
     private Integer inChannel;
 
     /**
+     * 导入渠道名称
+     */
+    private String inChannelName;
+
+    /**
      * 推广渠道
      */
     private Integer outChannel;
+
+    /**
+     * 推广渠道名称
+     */
+    private String outChannelName;
 
     /**
      * 店铺对应的公司名
@@ -733,6 +743,22 @@ public class Coupon implements Serializable {
         this.isGeneral = isGeneral;
     }
 
+    public String getInChannelName() {
+        return inChannelName;
+    }
+
+    public void setInChannelName(String inChannelName) {
+        this.inChannelName = inChannelName;
+    }
+
+    public String getOutChannelName() {
+        return outChannelName;
+    }
+
+    public void setOutChannelName(String outChannelName) {
+        this.outChannelName = outChannelName;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -767,7 +793,9 @@ public class Coupon implements Serializable {
                 .append("publishChannel", publishChannel)
                 .append("status", status)
                 .append("inChannel", inChannel)
+                .append("inChannelName", inChannelName)
                 .append("outChannel", outChannel)
+                .append("outChannelName", outChannelName)
                 .append("sourceName", sourceName)
                 .append("createUser", createUser)
                 .append("createAt", createAt)
@@ -785,7 +813,7 @@ public class Coupon implements Serializable {
                 .append("redenvelopeCommodities", redenvelopeCommodities)
                 .append("purchaseType", purchaseType)
                 .append("visitedCount", visitedCount)
+                .append("isGeneral", isGeneral)
                 .toString();
     }
-
 }
