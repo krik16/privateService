@@ -9,6 +9,7 @@ import com.rongyi.easy.rmmm.param.RefundParam;
 import com.rongyi.easy.rmmm.param.RequestRefundParam;
 import com.rongyi.easy.rmmm.vo.RefundDetailVO;
 import com.rongyi.easy.rmmm.vo.RefundVO;
+import com.rongyi.easy.tradecenter.osm.ApplicationFormEntity;
 
 public interface ROAApplicationFormService {
 	
@@ -63,5 +64,14 @@ public interface ROAApplicationFormService {
 	 * @throws Exception
 	 */
 	public ResponseResult cancelRefund(RefundParam param, ObjectId buyerNum) throws Exception;
+	
+	/**
+	 * 根据主键查询
+	 * 
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	public ApplicationFormEntity selectById(Integer id) throws Exception;
 
 }
