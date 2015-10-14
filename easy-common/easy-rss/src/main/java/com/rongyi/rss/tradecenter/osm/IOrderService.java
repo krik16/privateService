@@ -15,27 +15,12 @@ import com.rongyi.easy.rmmm.vo.ShopMallVO;
 public interface IOrderService {
 	
 	/**
-	 * 生成订单
-	 * @param submitOrderParam
-	 * @param buyerNum
-	 * @return
-	 */
-	public ResponseResult submitOrder(SubmitOrderParam submitOrderParam, String buyerNum);
-	
-	/**
 	 * 订单操作关闭订单API
-	 * 
+	 *
 	 * @param param
 	 * @return
 	 */
 	public ResponseResult orderColse(OrderDealedParam param);
-	
-	/**
-	 * 卖家修改订单价格
-	 * @param param
-	 * @return
-	 */
-	public ResponseResult orderPriceChange(OrderDealedParam param);
 	
 	/**
 	 * 卖家发货
