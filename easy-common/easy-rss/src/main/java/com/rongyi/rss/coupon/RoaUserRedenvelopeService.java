@@ -40,4 +40,8 @@ public interface RoaUserRedenvelopeService {
     int getCashCouponStatus(String couponId);
 
     boolean changeCashCouponStatus(String couponId, int cashCouponStatus, String orderNo, int i);
+
+    UserCouponVO getCashCoupon(String couponId);
+
+    Double getCashCouponDiscount(String couponId);
 }
