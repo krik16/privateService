@@ -156,6 +156,8 @@ public class DrawApplyServiceImpl extends BaseServiceImpl implements DrawApplySe
                 drawApply.setPayAccount(mqDrawParam.getPayAccount());
                 drawApply.setPayName(mqDrawParam.getPayName());
                 drawApply.setDrawAmount(mqDrawParam.getDrawAmount());
+                drawApply.setGuideType(mqDrawParam.getGuideType());
+
                 UserShopMallAccountDto user = rOAUserService.getUserShopMallAccountInfo(Integer.valueOf(mqDrawParam
                         .getUserId()));
                 if (user != null) {
