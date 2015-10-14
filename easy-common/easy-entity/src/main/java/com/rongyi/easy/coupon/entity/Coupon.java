@@ -12,6 +12,11 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 新版卡券基础数据
+ * mongo卡券信息
+ * @see OldCoupon
+ */
 public class Coupon implements Serializable {
 
     private static final long serialVersionUID = 1L;
