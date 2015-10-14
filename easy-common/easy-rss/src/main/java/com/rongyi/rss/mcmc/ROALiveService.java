@@ -46,7 +46,7 @@ public interface ROALiveService {
 	/**
 	 * 搜索直播
 	 * @param param 搜索参数
-	 * @return 返回带LiveVO的ResponseVO
+	 * @return 带List&lt;LiveVO&gt;的ResponseVO
 	 */
 	ResponseVO searchLiveList(LiveSearchParam param);
 	
@@ -66,5 +66,13 @@ public interface ROALiveService {
 	 * @return 带List&lt;LiveBrandVO&gt;的ResponseVO
 	 */
 	ResponseVO getBrandList(String bullId,String liveId,int page,int pageSize);
+	
+	/**
+	 * 通过直播id查询直播
+	 * @param id 直播id
+	 * @return 返回带LiveVO的ResponseVO
+	 */
+	ResponseVO getLiveById(String id);
+	
 	
 }
