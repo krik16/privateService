@@ -147,6 +147,7 @@ public class PaymentStatementController {
 					statusList.add(ConstantEnum.STATUS_3.getCodeByte());
 					statusList.add(ConstantEnum.STATUS_4.getCodeByte());
 					statusList.add(ConstantEnum.STATUS_5.getCodeByte());
+					statusList.add(ConstantEnum.STATUS_12.getCodeByte());
 				} else if (searchStatus == 1) {// 待确认
 					statusList.add(ConstantEnum.STATUS_1.getCodeByte());
 					statusList.add(ConstantEnum.STATUS_3.getCodeByte());
@@ -193,6 +194,7 @@ public class PaymentStatementController {
 		statusList.add(ConstantEnum.STATUS_3.getCodeByte());
 		statusList.add(ConstantEnum.STATUS_4.getCodeByte());
 		statusList.add(ConstantEnum.STATUS_5.getCodeByte());
+		statusList.add(ConstantEnum.STATUS_12.getCodeByte());
 		map.put("statusList", statusList);
 		Integer allCount = paymentStatementService.selectPageListCount(map);// 全部
 		responseMap.put("allCount", allCount);
