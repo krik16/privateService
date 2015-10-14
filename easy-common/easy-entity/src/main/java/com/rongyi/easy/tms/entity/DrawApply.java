@@ -110,6 +110,11 @@ public class DrawApply implements Serializable {
     private Date tradeAt;
 
     private String tradeNo;
+
+    /**
+     * 渠道：1-导购 2-买手
+     */
+    private Integer guideType;
     
     public String getTradeNo() {
         return tradeNo;
@@ -264,5 +269,13 @@ public class DrawApply implements Serializable {
 
     public Double getDrawAmount() {
         return drawAmount;
+    }
+
+    public Integer getGuideType() {
+        return guideType;
+    }
+
+    public void setGuideType(Integer guideType) {
+        this.guideType = guideType;
     }
 }
