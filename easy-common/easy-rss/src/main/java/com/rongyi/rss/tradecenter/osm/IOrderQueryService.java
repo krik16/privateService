@@ -127,5 +127,12 @@ public interface IOrderQueryService {
 	 * @return
 	 */
 	public  Integer getMaxIntegral(MaxIntegralParam param, double limit, double moenyExchangeScore);
+	
+	/**
+	 * 分解订单状态路径
+	 * @param statusRoute
+	 * @return
+	 */
+	public Map<String, String> getRouteByStatusRoute(String statusRoute);
 
 }
