@@ -265,6 +265,12 @@ public class Coupon implements Serializable {
 
     private Integer visitedCount = Integer.valueOf(0);//卡券详情浏览数
 
+    /**
+     * 是否是通用券，特指集团或商场发布的且只能在商场总台验券的券，例如：停车券等券
+     * 默认 false;
+     */
+    private Boolean isGeneral;
+
 
     public String getId() {
         return id;
@@ -714,6 +720,13 @@ public class Coupon implements Serializable {
         return (totalCount - stockCount < 0) ? 0 : totalCount - stockCount;
     }
 
+    public Boolean getIsGeneral() {
+        return isGeneral;
+    }
+
+    public void setIsGeneral(Boolean isGeneral) {
+        this.isGeneral = isGeneral;
+    }
 
     @Override
     public String toString() {

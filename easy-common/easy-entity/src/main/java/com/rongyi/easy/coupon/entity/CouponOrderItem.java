@@ -1,4 +1,4 @@
-package com.rongyi.easy.coupon.entity.old;
+package com.rongyi.easy.coupon.entity;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 

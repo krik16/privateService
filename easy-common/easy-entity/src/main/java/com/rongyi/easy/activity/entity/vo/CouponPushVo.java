@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.rongyi.easy.coupon.entity.old.Coupon;
+import com.rongyi.easy.coupon.entity.OldCoupon;
 
 /** 
  * @Description 传递给推送前台页面显示的卡券
@@ -123,7 +123,7 @@ public class CouponPushVo {
      * Description 
      */
     	
-    public CouponPushVo(Coupon coupon) {
+    public CouponPushVo(OldCoupon coupon) {
        
         super();
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:ss");

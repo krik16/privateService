@@ -4,8 +4,8 @@ import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.framework.spring.context.utils.SpringContextUtil;
 
 public interface Constants {
-	String COOKIE_DOMAIN_RONGYI = ".rongyi.com";
-	String COOKIE_DOMAIN_RONGYIGUANG = ".rongyiguang.com";
+    String COOKIE_DOMAIN_RONGYI = ".rongyi.com";
+    String COOKIE_DOMAIN_RONGYIGUANG = ".rongyiguang.com";
 
     interface FilterRelation {
         String AND = "AND";
@@ -16,6 +16,7 @@ public interface Constants {
     interface OrderPaytime {
         Integer PAY_SECOND = 900; //订单支付最大时间（秒数）
     }
+
     String BS_COOKIE_NAME = "BSST";
     String RY_COOKIE_NAME = "RYST";
 
@@ -36,24 +37,22 @@ public interface Constants {
         String API_NULL_FLOPUSER = "用户名参数没有";
         String API_NULL_FLOPCHANNEL = "用户渠道没有";
         String API_NULL_OBJECTFLOPGOID = "翻牌活动id没有";
-        String API_NULL_ACTIVITYID="最近没有活动";
+        String API_NULL_ACTIVITYID = "最近没有活动";
         String API_NULL_LISTTYPE = "列表类型没有";
         String API_NULL_PAGESize = "没有分页";
-        String API_NULL_USERPHONE="用户手机号为空";
+        String API_NULL_USERPHONE = "用户手机号为空";
         String API_NULL_COUPONID = "没有卷码";
         String API_NULL_ID = "没有奖品id";
-        String API_USER_NO="用户没有登录";
-        String API_USER_CHANNEL_ERROR="用户渠道错误 ";
+        String API_USER_NO = "用户没有登录";
+        String API_USER_CHANNEL_ERROR = "用户渠道错误 ";
     }
 
     interface SOME_TIME {
 
 
-
         int SESSION_REGIST_TIME = 30 * 60;//注册时的验证码有效期为30分钟
         int SESSION_LEFT_TIME = 60 * 60 * 24 * 30;//一个月的时间吧
     }
-
 
 
     /**
@@ -519,34 +518,34 @@ public interface Constants {
 
     /**
      * 魔生活魔店版本号
-     * @author user
      *
+     * @author user
      */
-    interface MallLifeVersion{
-    	Integer VERSION=1;
+    interface MallLifeVersion {
+        Integer VERSION = 1;
     }
 
     interface TMSTimeRangeType {
-    	int ALL = 0;
+        int ALL = 0;
         int DAY = 1;
         int WEEK = 2;
         int MONTH = 3;
     }
 
     /**
-    * @ClassName: DrawApplyStatus
-    * @Description: TODO(提现记录状态)
-    * @author lqy
-    * @date 2015年5月28日 下午4:09:48
-    *
-    */
-    interface DrawApplyStatus{
-    	int ALL = 0;//所有
-    	int SEND = 1;//已发放
-    	int PROCESSING = 2;//处理中
-    	int FAIL = 3;//失败
-    	String BONUS_DEFAULT_MSG = "优秀成交额外奖励";
+     * @author lqy
+     * @ClassName: DrawApplyStatus
+     * @Description: TODO(提现记录状态)
+     * @date 2015年5月28日 下午4:09:48
+     */
+    interface DrawApplyStatus {
+        int ALL = 0;//所有
+        int SEND = 1;//已发放
+        int PROCESSING = 2;//处理中
+        int FAIL = 3;//失败
+        String BONUS_DEFAULT_MSG = "优秀成交额外奖励";
     }
+
     interface VderStatus {
         int NOT_PAY = 0;//待付款
         int HAD_PAY = 1;//已付款
@@ -598,28 +597,32 @@ public interface Constants {
         String CONFIGURATIONS = "com.rongyi.easy.gcc.Configurations";
         String TRANS_CONFIGURATIONS = "com.rongyi.easy.gcc.TransConfigurations";
     }
-    interface AppType{
-    	/**
-    	 * 容易逛
-    	 */
-    	Integer MALLLIFE = 1;
-    	/**
-    	 * 摩店
-    	 */
-    	Integer MALLSHOP = 2;
+
+    interface AppType {
+        /**
+         * 容易逛
+         */
+        Integer MALLLIFE = 1;
+        /**
+         * 摩店
+         */
+        Integer MALLSHOP = 2;
     }
-    interface ValidCodeSuggest{
-    	/**
-    	 * 扫码验券建议
-    	 */
-    	String VALID_CODE_SUGGEST = "小提醒：如果遇到用户选择数量和本页面不一致的情况，建议采用单张验码的方式试试噢。问题反馈：400-040-8989";
+
+    interface ValidCodeSuggest {
+        /**
+         * 扫码验券建议
+         */
+        String VALID_CODE_SUGGEST = "小提醒：如果遇到用户选择数量和本页面不一致的情况，建议采用单张验码的方式试试噢。问题反馈：400-040-8989";
     }
-    interface ValidCodeNum{
-    	/**
-    	 * 验券的数量（默认值）
-    	 */
-    	Integer DEFAULT_VALID_CODE_NUM = 1;
+
+    interface ValidCodeNum {
+        /**
+         * 验券的数量（默认值）
+         */
+        Integer DEFAULT_VALID_CODE_NUM = 1;
     }
+
     /**
      * 优惠券验证的异常状态描述
      *
@@ -627,7 +630,7 @@ public interface Constants {
      */
     interface AbnormalMassage {
 
-    	String BEYONDLIMITS = "对不起，您今天已超出此类券的使用次数";
+        String BEYONDLIMITS = "对不起，您今天已超出此类券的使用次数";
         String CODEERROR = "对不起，您输入的券码有误。";
         String REFUND = "对不起，您输入的券码状态异常";
         String BEUSED = "对不起，您输入的券码已被使用。";
@@ -640,50 +643,65 @@ public interface Constants {
         String REPEAT = "您已经成功验证";
         String NOTENOUGHNUM = "没有足够的可用券码";
     }
-    
+
     /**
      * App标识  来自于app store
      */
-    interface AppId{
-    	String MDC2C_IOS_APPId = "999209638";
-    	String RYG_IOS_APPId = "684748850";
+    interface AppId {
+        String MDC2C_IOS_APPId = "999209638";
+        String RYG_IOS_APPId = "684748850";
     }
-    
+
     /**
      * App广告推广通道
      */
-    interface AppAdvertChannel{
-    	String ZHIMENG_CHANNEL = "zhimeng";//指盟
-    	String WAPS_CHANNEL = "waps";//万普
-    	
+    interface AppAdvertChannel {
+        String ZHIMENG_CHANNEL = "zhimeng";//指盟
+        String WAPS_CHANNEL = "waps";//万普
+
     }
-    interface Errno{
-    	int success=0;
+
+    interface Errno {
+        int success = 0;
     }
-    interface NoticeStatus{
-    	/** 未通过 */
-    	Integer NOPASSED = 0;
-    	/** 审核中 */
-    	Integer REVIEWING = 1;
-    	/** 发布中 */
-    	Integer RELEASEING = 2;
-    	/** 已过期 */
-    	Integer OVERDUE = 3;
+
+    interface NoticeStatus {
+        /**
+         * 未通过
+         */
+        Integer NOPASSED = 0;
+        /**
+         * 审核中
+         */
+        Integer REVIEWING = 1;
+        /**
+         * 发布中
+         */
+        Integer RELEASEING = 2;
+        /**
+         * 已过期
+         */
+        Integer OVERDUE = 3;
     }
-<<<<<<< HEAD
-    
+
+
     /**
-     *卖家类型
+     * 卖家类型
      */
-    interface GuideType{
-    	/** 导购*/
-    	Integer GUIDE = 1;
-    	/** 买手*/
-    	Integer BULL = 2;
-=======
-    interface CouponPage{
-        Integer CURRENT_PAGE=1;
-        Integer PAGE_SIZE=10;
->>>>>>> origin/easy-common-feature-1016
+    interface GuideType {
+        /**
+         * 导购
+         */
+        Integer GUIDE = 1;
+        /**
+         * 买手
+         */
+        Integer BULL = 2;
+    }
+
+    interface CouponPage {
+        Integer CURRENT_PAGE = 1;
+        Integer PAGE_SIZE = 10;
+
     }
 }
