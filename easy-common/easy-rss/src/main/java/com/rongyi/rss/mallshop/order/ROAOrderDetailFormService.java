@@ -2,7 +2,8 @@ package com.rongyi.rss.mallshop.order;
 
 import java.util.List;
 
-import com.rongyi.easy.osm.entity.OrderDetailFormEntity;
+import com.rongyi.easy.tradecenter.osm.OrderDetailFormEntity;
+
 
 public interface ROAOrderDetailFormService {
 	
