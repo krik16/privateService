@@ -164,8 +164,10 @@ public class StatementConfigController {
 			BussinessInfo bussinessInfo = new BussinessInfo();
 			MapUtils.toObject(statementConfig, map);
 			statementConfig.setCreateAt(DateUtil.getCurrDateTime());
-			if (request.getAttribute("userName") != null)
+			if (request.getAttribute("userName") != null){
+				logger.info("userName="+request.getAttribute("userName"));
 				statementConfig.setCreateBy(request.getAttribute("userName").toString());
+			}
 			MapUtils.toObject(bussinessInfo, map);
 			bussinessInfo.setCreateAt(DateUtil.getCurrDateTime());
 			statementConfigService.saveStatementConfigAndInfo(statementConfig, bussinessInfo);
