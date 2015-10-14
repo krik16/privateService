@@ -90,6 +90,7 @@ public class StatementConfigController {
 	@RequestMapping("/list")
 	@ResponseBody
 	public ResponseData getPageList(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+		logger.info("====config list==== params="+map.toString());
 		try {
 			if (map.containsKey("searchStatus")) {
 				ResponseData responseData = accessService.check(request, "FNC_STLCONF_VIEW");
@@ -138,6 +139,7 @@ public class StatementConfigController {
 	@RequestMapping("/add")
 	@ResponseBody
 	public ResponseData add(HttpServletRequest request) {
+		logger.info("====config add====");
 		return ResponseData.success(getRuleCode());
 	}
 
@@ -152,6 +154,7 @@ public class StatementConfigController {
 	@RequestMapping("/save")
 	@ResponseBody
 	public ResponseData save(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+		logger.info("====config save==== params="+map.toString());
 		try {
 			ResponseData responseData = accessService.check(request, "FNC_STL_ADD");
 			if (responseData.getMeta().getErrno() != 0) {
@@ -161,11 +164,13 @@ public class StatementConfigController {
 			BussinessInfo bussinessInfo = new BussinessInfo();
 			MapUtils.toObject(statementConfig, map);
 			statementConfig.setCreateAt(DateUtil.getCurrDateTime());
+			if (request.getAttribute("userName") != null)
+				statementConfig.setCreateBy(request.getAttribute("userName").toString());
 			MapUtils.toObject(bussinessInfo, map);
 			bussinessInfo.setCreateAt(DateUtil.getCurrDateTime());
 			statementConfigService.saveStatementConfigAndInfo(statementConfig, bussinessInfo);
 			String ruleCode = statementConfig.getRuleCode();
-			if (StringUtils.isNotBlank(ruleCode) && ruleCode.length()>10) {
+			if (StringUtils.isNotBlank(ruleCode) && ruleCode.length() > 10) {
 				redisService.set(ruleCode.substring(0, 9), ruleCode);
 				redisService.expire(ruleCode.substring(0, 9), 60 * 60 * 48);// 两天后失效
 			}
@@ -187,6 +192,7 @@ public class StatementConfigController {
 	@RequestMapping("/update")
 	@ResponseBody
 	public ResponseData update(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+		logger.info("====config update==== params="+map.toString());
 		try {
 			ResponseData responseData = accessService.check(request, "FNC_STL_EDIT");
 			if (responseData.getMeta().getErrno() != 0) {
@@ -210,6 +216,7 @@ public class StatementConfigController {
 	@RequestMapping("/modify")
 	@ResponseBody
 	public ResponseData modify(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+		logger.info("====config modify==== params="+map.toString());
 		try {
 			ResponseData responseData = accessService.check(request, "FNC_STL_CHANGE");
 			if (responseData.getMeta().getErrno() != 0) {
@@ -233,6 +240,7 @@ public class StatementConfigController {
 	@RequestMapping("/info")
 	@ResponseBody
 	public ResponseData info(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+		logger.info("====config info==== params="+map.toString());
 		try {
 			ResponseData responseData = accessService.check(request, "FNC_STLCONF_VIEW");
 			if (responseData.getMeta().getErrno() != 0) {
@@ -256,6 +264,7 @@ public class StatementConfigController {
 	@RequestMapping("/verify")
 	@ResponseBody
 	public ResponseData verify(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+		logger.info("====config verify==== params="+map.toString());
 		ResponseData result = null;
 		try {
 			ResponseData responseData = accessService.check(request, "FNC_STLCONF_VFY");

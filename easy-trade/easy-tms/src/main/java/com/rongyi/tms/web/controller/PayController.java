@@ -1,4 +1,3 @@
-
 package com.rongyi.tms.web.controller;
 
 import java.util.ArrayList;
@@ -259,7 +258,12 @@ public class PayController extends BaseController {
 		LOGGER.info("================操作退款/付款前验证是否符合条件 ====================");
 		ResponseResult result = new ResponseResult();
 		try {
-			Map<String, Object> resultMap = rpbService.validatePayHtml(ids, operateType);
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			if (PayEnum.STATEMENT_ONE.getCode().equals(operateType) || PayEnum.STATEMENT_MORE.getCode().equals(operateType)) {
+				resultMap = paymentStatementService.validatePay(ids, operateType);
+			} else {
+				resultMap = rpbService.validatePayHtml(ids, operateType);
+			}
 			result.setSuccess(Boolean.valueOf(resultMap.get("success").toString()));
 			result.setMessage(resultMap.get("message").toString());
 		} catch (Exception e) {
@@ -350,7 +354,7 @@ public class PayController extends BaseController {
 			desc = ConstantEnum.TRADE_TYPE_REFUND.getValueStr();
 		else if (PayEnum.EXCE_PAY_ONE.getCode() == type || PayEnum.EXCE_PAY_MORE.getCode() == type)
 			desc = ConstantEnum.TRADE_TYPE_EXCE_PAY.getValueStr();
-		else if(PayEnum.STATEMENT_ONE.getCode() == type || PayEnum.STATEMENT_MORE.getCode() == type)
+		else if (PayEnum.STATEMENT_ONE.getCode() == type || PayEnum.STATEMENT_MORE.getCode() == type)
 			desc = ConstantEnum.TRADE_TYPE_STATEMENT.getValueStr();
 		return desc;
 	}
@@ -418,14 +422,14 @@ public class PayController extends BaseController {
 		return result;
 	}
 
-	/**	
-	 * @Description: 对账单列表 
+	/**
+	 * @Description: 对账单列表
 	 * @param model
 	 * @param request
 	 * @param response
 	 * @param session
-	 * @return	
-	 * @Author:  柯军
+	 * @return
+	 * @Author: 柯军
 	 * @datetime:2015年9月30日下午4:18:33
 	 **/
 	@RequestMapping("/statementList")
@@ -451,21 +455,22 @@ public class PayController extends BaseController {
 		}
 		return "/pay/statement_list";
 	}
-	/**	
-	 * @Description: 线下付款更新状态 
+
+	/**
+	 * @Description: 线下付款更新状态
 	 * @param ids
 	 * @param payMemo
-	 * @return	
-	 * @Author:  柯军
+	 * @return
+	 * @Author: 柯军
 	 * @datetime:2015年9月30日下午4:31:25
 	 **/
 	@RequestMapping("/statementOffPay")
 	@ResponseBody
-	public ResponseResult statementOffPay(@RequestParam String ids,@RequestParam String tradeNo){
+	public ResponseResult statementOffPay(@RequestParam String ids, @RequestParam String tradeNo) {
 		ResponseResult responseResult = new ResponseResult();
 		try {
 			String[] idArray = ids.split(",");
-			paymentStatementService.updateByOffPay(idArray, tradeNo,12);
+			paymentStatementService.updateByOffPay(idArray, tradeNo, 12);
 			responseResult.setSuccess(true);
 			responseResult.setMessage("操作成功");
 		} catch (Exception e) {
@@ -473,33 +478,33 @@ public class PayController extends BaseController {
 			responseResult.setMessage("操作失败");
 			e.printStackTrace();
 		}
-		
+
 		return responseResult;
 	}
-	
-	/**	
-	 * @Description: 冻结/解冻付款 
+
+	/**
+	 * @Description: 冻结/解冻付款
 	 * @param id
 	 * @param status
-	 * @return	
-	 * @Author:  柯军
+	 * @return
+	 * @Author: 柯军
 	 * @datetime:2015年9月30日下午5:39:03
 	 **/
 	@RequestMapping("/freeze")
 	@ResponseBody
-	public ResponseResult freeze(@RequestParam String id,@RequestParam Integer status){
+	public ResponseResult freeze(@RequestParam String id, @RequestParam Integer status) {
 		ResponseResult responseResult = new ResponseResult();
 		try {
 			String[] idArray = id.split(",");
-			paymentStatementService.updateByOffPay(idArray, null,status);
+			paymentStatementService.updateByOffPay(idArray, null, status);
 			responseResult.setSuccess(true);
-			responseResult.setMessage((status==9?"冻结":"解冻")+"成功");
+			responseResult.setMessage((status == 9 ? "冻结" : "解冻") + "成功");
 		} catch (Exception e) {
 			responseResult.setSuccess(false);
 			responseResult.setMessage("操作失败");
 			e.printStackTrace();
 		}
-		
+
 		return responseResult;
 	}
 }

@@ -252,4 +252,13 @@ public interface PaymentService {
 	 * @datetime:2015年9月1日下午5:30:18
 	 **/
 	public abstract String getPayNo();
+	
+	/**	
+	 * @Description: 根据id更新
+	 * @param ids
+	 * @param map	
+	 * @Author:  柯军
+	 * @datetime:2015年10月14日下午6:53:35
+	 **/
+	public abstract void updateByIds(String[] ids,Map<String,Object> map);
 }

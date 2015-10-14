@@ -105,32 +105,6 @@ $(document).ready(function() {
 			return selection;
 		}
 	});
-	/*$("#morePay").click(function() {
-		var ids = [];
-		var payChannels = [];
-		var payChannel = null;
-		$(":checkbox[name='subBox']").each(function() {
-			if (this.checked == true) {
-				ids.push(this.id);
-				payChannel = this.attributes['payChannel'].value;
-				if ($.inArray(payChannel, payChannels) == -1) {
-					payChannels.push(payChannel);
-				}
-			}
-		});
-		if (payChannels.length > 1) {
-			_util.cmsTip("您只能选择一种打款方式进行批量付款");
-			return;
-		}
-		if (ids.length <= 0) {
-			_util.cmsTip("您至少选中一条付款明细");
-			return;
-		}
-		if (ids.length != 0) {
-			var payType = $("#morePay").val();
-			validateAccount(ids.join(","), payType,payChannel);
-		}
-	});*/
 });
 
 function getParamsJson(){
@@ -183,6 +157,9 @@ function selectAll() { // 全选or取消全选;
         $('input[name="subBox"]').attr("checked", false);
     }
 }
+/**
+ * 批量操作按钮点击事件
+ */
 function morePayClick(){
 	var ids = [];
 	var payChannels = [];
@@ -225,8 +202,10 @@ function validateAccount(ids,type,payChannel) {
 	}, function(data) {
 		if (data.success == false) {
 			_util.cmsTip(data.message);
-		} else{
+		} else if(payChannel == 0){
 			morePay(ids, type, payChannel);
+		}else{
+			offPay(ids);
 		}
 	}, "json");
 }

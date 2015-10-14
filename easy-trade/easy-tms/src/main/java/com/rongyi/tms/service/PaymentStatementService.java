@@ -52,6 +52,14 @@ public interface PaymentStatementService {
     void updateByNotify(Map<String,Object> map);
     
     /**	
+     * @Description: 根据id批量更新 
+     * @param map	
+     * @Author:  柯军
+     * @datetime:2015年10月14日下午5:30:56
+     **/
+    void updateByIds(Map<String,Object> map);
+    
+    /**	
      * @Description: 更新线下付款状态 
      * @param ids
      * @param tradeNo	
@@ -59,4 +67,14 @@ public interface PaymentStatementService {
      * @datetime:2015年9月30日下午4:21:10
      **/
     void updateByOffPay(String[] ids,String tradeNo,Integer status);
+    
+    /**	
+     * @Description: 验证是否是允许操作付款 
+     * @param ids
+     * @param operateType
+     * @return	
+     * @Author:  柯军
+     * @datetime:2015年10月14日上午10:50:19
+     **/
+    Map<String,Object> validatePay(String[] ids,Integer operateType);
 }
