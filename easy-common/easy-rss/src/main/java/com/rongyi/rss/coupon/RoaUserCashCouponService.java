@@ -63,6 +63,7 @@ public interface RoaUserCashCouponService {
      * @param status
      * @return
      */
+    @Deprecated
     public Boolean changeCashCouponStatus(String couponCode, Integer status, String orderNo, Integer sellerId);
 
     /**

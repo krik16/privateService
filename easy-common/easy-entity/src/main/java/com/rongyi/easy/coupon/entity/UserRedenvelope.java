@@ -3,6 +3,7 @@ package com.rongyi.easy.coupon.entity;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -200,6 +201,14 @@ public class UserRedenvelope implements Serializable {
 
     public Integer getDiscount() {
         return discount;
+    }
+
+    public double getDiscount2Double() {
+        double dis = 0D;
+        if (discount != null) {
+            dis = BigDecimal.valueOf(discount).divide(BigDecimal.valueOf(100.00D)).setScale(2).doubleValue();
+        }
+        return dis;
     }
 
     public void setDiscount(Integer discount) {

@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author lijing
  * @since 2015-08-10
  */
-public class RedenvelopeCommodity implements Serializable {
+public class CouponCommodity implements Serializable {
 
     /**
      * 序列化号
@@ -59,7 +59,7 @@ public class RedenvelopeCommodity implements Serializable {
      */
     private Integer status;
 
-    public RedenvelopeCommodity() {
+    public CouponCommodity() {
 
     }
 

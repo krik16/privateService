@@ -273,7 +273,7 @@ public class Coupon implements Serializable {
     /**
      * 红包关联的商品  related_type只有这个类型是1 并且coupon_type 为2 的时候  才有这个类型
      */
-    private List<RedenvelopeCommodity> redenvelopeCommodities;
+    private List<CouponCommodity> redenvelopeCommodities;
 
 
     private Integer purchaseType = Integer.valueOf(0);//购买类型 0正常购买类型 1抢购类型
@@ -678,11 +678,11 @@ public class Coupon implements Serializable {
         this.preferentialType = preferentialType;
     }
 
-    public List<RedenvelopeCommodity> getRedenvelopeCommodities() {
+    public List<CouponCommodity> getRedenvelopeCommodities() {
         return redenvelopeCommodities;
     }
 
-    public void setRedenvelopeCommodities(List<RedenvelopeCommodity> redenvelopeCommodities) {
+    public void setRedenvelopeCommodities(List<CouponCommodity> redenvelopeCommodities) {
         this.redenvelopeCommodities = redenvelopeCommodities;
     }
 
@@ -691,7 +691,7 @@ public class Coupon implements Serializable {
         List<String> list = ListUtils.EMPTY_LIST;
         if (CollectionUtils.isNotEmpty(this.redenvelopeCommodities)) {
             list = new ArrayList<>();
-            for (RedenvelopeCommodity e : redenvelopeCommodities) {
+            for (CouponCommodity e : redenvelopeCommodities) {
                 list.add(e.getCommodityId());
             }
         }

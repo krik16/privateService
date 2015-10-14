@@ -33,15 +33,58 @@ public interface RoaUserRedenvelopeService {
 
     boolean checkReceived(String couponId, String userId);
 
+    /**
+     * 根据用户Id查询用户红包
+     *
+     * @param userId
+     * @param currentPage
+     * @param pageSize
+     * @return
+     */
     PagingVO<UserRedenvelope> findUserCouponByUserId(String userId, Integer currentPage, Integer pageSize);
 
-    boolean validCashCoupon(String hbCode, Object o);
+    /**
+     * 根据券码与商品Id验证红包
+     *
+     * @param couponCode
+     * @param commodityId 商品Id
+     * @return
+     */
+    boolean validCashCoupon(String couponCode, String commodityId);
 
-    int getCashCouponStatus(String couponId);
+    /**
+     * 根据券码查询红包状态
+     *
+     * @param couponCode
+     * @return
+     */
+    Integer getCashCouponStatus(String couponCode);
 
-    boolean changeCashCouponStatus(String couponId, int cashCouponStatus, String orderNo, int i);
+    /**
+     * 修改红包状态
+     *
+     * @param couponCode
+     * @param status
+     * @param orderNo
+     * @param sellerId
+     * @return
+     */
+    boolean changeCashCouponStatus(String couponCode, Integer status, String orderNo, Integer sellerId);
 
-    UserCouponVO getCashCoupon(String couponId);
 
-    Double getCashCouponDiscount(String couponId);
+    /**
+     * 根据券码查询红包信息
+     *
+     * @param couponCode
+     * @return
+     */
+    UserCouponVO getCashCoupon(String couponCode);
+
+    /**
+     * 根据券码查询红包抵扣金额
+     *
+     * @param couponCode
+     * @return
+     */
+    Double getCashCouponDiscount(String couponCode);
 }
