@@ -34,4 +34,10 @@ public interface RoaUserRedenvelopeService {
     boolean checkReceived(String couponId, String userId);
 
     PagingVO<UserRedenvelope> findUserCouponByUserId(String userId, Integer currentPage, Integer pageSize);
+
+    boolean validCashCoupon(String hbCode, Object o);
+
+    int getCashCouponStatus(String couponId);
+
+    boolean changeCashCouponStatus(String couponId, int cashCouponStatus, String orderNo, int i);
 }
