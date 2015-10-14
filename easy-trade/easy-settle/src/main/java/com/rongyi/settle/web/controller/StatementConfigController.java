@@ -115,7 +115,7 @@ public class StatementConfigController {
 				statusList.add((byte) 1);
 				statusList.add((byte) 2);
 			}
-			if (statusList != null)
+			if (statusList.isEmpty())
 				map.put("statusList", statusList);
 			List<StatementConfig> list = statementConfigService.selectPageList(map, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt());
 			Integer count = statementConfigService.selectPageListCount(map);
