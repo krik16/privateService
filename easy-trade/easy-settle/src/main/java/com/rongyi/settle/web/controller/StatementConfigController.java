@@ -163,6 +163,11 @@ public class StatementConfigController {
 			MapUtils.toObject(bussinessInfo, map);
 			bussinessInfo.setCreateAt(DateUtil.getCurrDateTime());
 			statementConfigService.saveStatementConfigAndInfo(statementConfig, bussinessInfo);
+			String ruleCode = statementConfig.getRuleCode();
+			if (StringUtils.isNotBlank(ruleCode) && ruleCode.length()>10) {
+				redisService.set(ruleCode.substring(0, 9), ruleCode);
+				redisService.expire(ruleCode.substring(0, 9), 60 * 60 * 48);// 两天后失效
+			}
 			return ResponseData.success();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -303,8 +308,6 @@ public class StatementConfigController {
 				String str = String.format("%04d", ++num);
 				sb.append(str);
 			}
-			redisService.set(key, sb.toString());
-			redisService.expire(key, 60 * 60 * 48);// 两天后失效
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
