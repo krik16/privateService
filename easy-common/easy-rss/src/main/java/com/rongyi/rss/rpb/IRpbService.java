@@ -142,4 +142,14 @@ public interface IRpbService {
 	 **/
 	public abstract Map<String,Object> generatePayment(PaymentParamVO paymentParamVO);
 	
+	/**	
+	 * @Description: 更新付款单状态 
+	 * @param ids
+	 * @param status
+	 * @param tradeType	
+	 * @Author:  柯军
+	 * @datetime:2015年10月14日下午6:33:40
+	 **/
+	public abstract void updatePaymentStatus(String[] ids,Integer status,Integer tradeType);
+	
 }
