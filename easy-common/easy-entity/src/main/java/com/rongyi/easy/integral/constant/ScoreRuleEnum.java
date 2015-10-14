@@ -16,8 +16,9 @@ public enum ScoreRuleEnum {
   	    SCORE_PAY_TIMEOUT_ROLLBACK(6,"退积分"),
  	    SCORE_COUPON_ADD(8,"验券交易"),
 	    SCORE_PAY_SUCCESS_ADD(9,"平台交易"),
-	    SCORE_TERMINAL(10,"终端签到"),
-	    SCORE_GOODS_SUB(11,"商品订单");
+	    SCORE_TERMINAL(10,"终端机活动(签到)"),
+	    SCORE_GOODS_SUB(11,"商品订单"),
+	    SCORE_TERMINAL_DRAW(12,"终端机活动(翻牌购)");
 	    //SCORE_COUPON_SUB(12,"购买代金券抵现");
 	    
 	    
