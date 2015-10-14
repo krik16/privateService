@@ -7,6 +7,8 @@ import java.util.List;
 
 /**
  * 新版卡券接口
+ *
+ * @see RoaOldCouponService -- 老卡券接口
  */
 public interface RoaCouponService {
 
@@ -42,4 +44,5 @@ public interface RoaCouponService {
      * @return
      */
     boolean addCouponVistiedCount(String couponId, int visitedCount);
+
 }
