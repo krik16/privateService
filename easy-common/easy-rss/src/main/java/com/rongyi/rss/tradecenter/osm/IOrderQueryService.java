@@ -3,9 +3,11 @@
  */
 package com.rongyi.rss.tradecenter.osm;
 
+import java.util.List;
 import java.util.Map;
 
 import com.rongyi.core.common.PagingVO;
+import com.rongyi.easy.osm.entity.OrderDetailFormEntity;
 import com.rongyi.easy.rmmm.param.MyOrderParam;
 import com.rongyi.easy.rmmm.param.TransactionDetailParam;
 import com.rongyi.easy.rmmm.vo.BuyerVO;
@@ -98,6 +100,13 @@ public interface IOrderQueryService {
 	 * @throws Exception
 	 */
 	public OrderFormEntity getOrderFormByOrderId(Integer orderId) throws Exception;
+	
+	/**
+	 * 通过父订单号获得子订单集合
+	 * @param list
+	 * @return
+	 */
+	public List<OrderDetailFormEntity> selectByParentNum(String parentNum) throws Exception;
 	
 	public PagingVO<OrderManagerVO> searchListByMap(Map<String, Object> paramsMap) throws Exception;
 
