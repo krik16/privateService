@@ -226,8 +226,6 @@ public class PaymentStatementController {
 	public ResponseData verify(HttpServletRequest request, @RequestBody Map<String, Object> map) {
 		ResponseData result = null;
 		try {
-			// 获取用户
-			String userId = "1";
 
 			logger.info("============ 对账/代付款批量审核 =============");
 			String idStr = map.containsKey("ids") ? map.get("ids").toString() : null;
@@ -253,6 +251,8 @@ public class PaymentStatementController {
 					return responseData;
 				}
 			}
+			// 获取用户
+			String userId = request.getAttribute("userName") != null ? request.getAttribute("userName").toString() : null;
 			List<Integer> ids = new ArrayList<>();
 			for (String id : idStr.split(",")) {
 				ids.add(Integer.valueOf(id.trim()));

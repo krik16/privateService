@@ -164,8 +164,8 @@ public class ExportDataToExcel {
 						}
 					}
 					//更改付款单状态，记录操作日志
-					//TODO user_id需从request中取的
-					paymentStatementService.updatePaymentStatusByIds(ids,11, "下载对账单", "test");
+					String userName = request.getAttribute("userName") != null ? request.getAttribute("userName").toString() : null;
+					paymentStatementService.updatePaymentStatusByIds(ids,11, "下载对账单", userName);
 				}
 				String outFile = "付款清单_" + DateUtil.getCurrentDateYYYYMMDD() + ".xlsx";
 				ExcelUtil.exportExcel(response, wb, outFile);
