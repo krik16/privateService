@@ -26,20 +26,20 @@ public interface ICommodityCommissionService {
 	 */
 	public void sendBodyByOrderEventType(Map<String,String> map) throws Exception;
 	
-	/**
-	 * 我的交易金额列表
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public DetailVO getMyDealAmount(MyDealParam param) throws Exception;
-	
-	/**
-	 * 我的交易佣金列表
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public DetailVO getMyDealCommission(MyDealParam param) throws Exception;
+//	/**
+//	 * 我的交易金额列表
+//	 * 
+//	 * @return
+//	 * @throws Exception
+//	 */
+//	public DetailVO getMyDealAmount(MyDealParam param) throws Exception;
+//	
+//	/**
+//	 * 我的交易佣金列表
+//	 * 
+//	 * @return
+//	 * @throws Exception
+//	 */
+//	public DetailVO getMyDealCommission(MyDealParam param) throws Exception;
 
 }
