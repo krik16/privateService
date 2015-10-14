@@ -7,10 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.rongyi.core.common.PagingVO;
-import com.rongyi.easy.osm.entity.OrderDetailFormEntity;
+import com.rongyi.easy.rmmm.param.MaxIntegralParam;
 import com.rongyi.easy.rmmm.param.MyOrderParam;
 import com.rongyi.easy.rmmm.param.TransactionDetailParam;
-import com.rongyi.easy.rmmm.vo.BuyerVO;
 import com.rongyi.easy.rmmm.vo.MyOrderCountVO;
 import com.rongyi.easy.rmmm.vo.OrderManagerVO;
 import com.rongyi.easy.rmmm.vo.OrderVO;
@@ -18,6 +17,7 @@ import com.rongyi.easy.rmmm.vo.ParentOrderListVO;
 import com.rongyi.easy.rmmm.vo.ParentOrderVO;
 import com.rongyi.easy.rmmm.vo.ShopMallVO;
 import com.rongyi.easy.rmmm.vo.TransactionDetailVO;
+import com.rongyi.easy.tradecenter.osm.OrderDetailFormEntity;
 import com.rongyi.easy.tradecenter.osm.OrderEventEntity;
 import com.rongyi.easy.tradecenter.osm.OrderFormEntity;
 
@@ -119,5 +119,13 @@ public interface IOrderQueryService {
 	 * @throws Exception
 	 */
 	public OrderEventEntity getOrderEventByType(String type , String orderNum) throws Exception;
+	
+	/**
+	 * 获取商品生成订单最大使用积分
+	 * 
+	 * @param param
+	 * @return
+	 */
+	public  Integer getMaxIntegral(MaxIntegralParam param, double limit, double moenyExchangeScore);
 
 }

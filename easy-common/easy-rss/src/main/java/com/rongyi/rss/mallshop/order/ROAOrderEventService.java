@@ -1,6 +1,7 @@
 package com.rongyi.rss.mallshop.order;
 
-import com.rongyi.easy.osm.entity.OrderEventEntity;
+import com.rongyi.easy.tradecenter.osm.OrderEventEntity;
+
 
 public interface ROAOrderEventService {
 	
