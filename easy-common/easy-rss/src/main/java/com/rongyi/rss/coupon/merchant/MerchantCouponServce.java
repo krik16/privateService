@@ -48,7 +48,7 @@ public interface MerchantCouponServce {
      * @param type
      * @return
      */
-    public List<CouponRejectRecord> getUnpassReasons(Integer couponId,Integer type);
+    public List<CouponRejectRecord> getUnpassReasons(String couponId,Integer type);
 
     /**
      * 根据登录用户统计，该用户所对应集团/品牌/分公司/商场 下面优惠券的 审核状态的数量
