@@ -2,6 +2,7 @@ package com.rongyi.rss.coupon.operation;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.coupon.entity.OldCoupon;
 import com.rongyi.easy.coupon.param.CouponQueryParam;
 
 import java.util.Map;
@@ -16,11 +17,11 @@ public interface RoaVoucherService {
 
     Map<String, Object> getCouponList(Map<String, Object> map, int currentPage, int pageSize);
 
-    boolean saveOrUpdateCoupon(com.rongyi.easy.coupon.entity.Coupon oldCoupon);
+    boolean saveOrUpdateCoupon(OldCoupon oldCoupon);
 
-    com.rongyi.easy.coupon.entity.Coupon getCouponById(Integer id);
+    OldCoupon getCouponById(String id);
 
-    boolean deleteCoupon(Integer id);
+    boolean deleteCoupon(String id);
 
-    boolean updateCouponStatus(Integer id, String status);
+    boolean updateCouponStatus(String id, String status);
 }
