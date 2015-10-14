@@ -134,5 +134,9 @@ public interface IOrderQueryService {
 	 * @return
 	 */
 	public Map<String, String> getRouteByStatusRoute(String statusRoute);
+	
+	public List<OrderFormEntity> selectOrderList(Map param) throws Exception ;
+	
+	public int selectOrderListCount(String weidianId, String userId) throws Exception;
 
 }
