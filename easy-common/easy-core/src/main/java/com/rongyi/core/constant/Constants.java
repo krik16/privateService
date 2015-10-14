@@ -670,7 +670,7 @@ public interface Constants {
     	/** 已过期 */
     	Integer OVERDUE = 3;
     }
-<<<<<<< HEAD
+
     
     /**
      *卖家类型
@@ -680,10 +680,9 @@ public interface Constants {
     	Integer GUIDE = 1;
     	/** 买手*/
     	Integer BULL = 2;
-=======
+    }
     interface CouponPage{
         Integer CURRENT_PAGE=1;
         Integer PAGE_SIZE=10;
->>>>>>> origin/easy-common-feature-1016
     }
 }
