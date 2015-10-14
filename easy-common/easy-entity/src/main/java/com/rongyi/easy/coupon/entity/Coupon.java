@@ -273,7 +273,7 @@ public class Coupon implements Serializable {
     /**
      * 红包关联的商品  related_type只有这个类型是1 并且coupon_type 为2 的时候  才有这个类型
      */
-    private List<CouponCommodity> redenvelopeCommodities;
+    private List<CouponCommodity> couponCommodities;
 
 
     private Integer purchaseType = Integer.valueOf(0);//购买类型 0正常购买类型 1抢购类型
@@ -678,20 +678,20 @@ public class Coupon implements Serializable {
         this.preferentialType = preferentialType;
     }
 
-    public List<CouponCommodity> getRedenvelopeCommodities() {
-        return redenvelopeCommodities;
+    public List<CouponCommodity> getCouponCommodities() {
+        return couponCommodities;
     }
 
-    public void setRedenvelopeCommodities(List<CouponCommodity> redenvelopeCommodities) {
-        this.redenvelopeCommodities = redenvelopeCommodities;
+    public void setCouponCommodities(List<CouponCommodity> couponCommodities) {
+        this.couponCommodities = couponCommodities;
     }
 
     @Transient
-    public List<String> getRedenvelopeCommodityIds() {
+    public List<String> getCouponCommodityIds() {
         List<String> list = ListUtils.EMPTY_LIST;
-        if (CollectionUtils.isNotEmpty(this.redenvelopeCommodities)) {
+        if (CollectionUtils.isNotEmpty(couponCommodities)) {
             list = new ArrayList<>();
-            for (CouponCommodity e : redenvelopeCommodities) {
+            for (CouponCommodity e : couponCommodities) {
                 list.add(e.getCommodityId());
             }
         }
@@ -810,7 +810,7 @@ public class Coupon implements Serializable {
                 .append("couponShops", couponShops)
                 .append("couponMalls", couponMalls)
                 .append("preferentialType", preferentialType)
-                .append("redenvelopeCommodities", redenvelopeCommodities)
+                .append("couponCommodities", couponCommodities)
                 .append("purchaseType", purchaseType)
                 .append("visitedCount", visitedCount)
                 .append("isGeneral", isGeneral)
