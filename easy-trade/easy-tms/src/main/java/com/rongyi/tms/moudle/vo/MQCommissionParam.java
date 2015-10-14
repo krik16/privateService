@@ -40,6 +40,8 @@ public class MQCommissionParam implements Serializable {
     
     private String buyerId;
 
+    private Integer guideType;
+
     public String getGuideId() {
         return guideId;
     }
@@ -104,7 +106,15 @@ public class MQCommissionParam implements Serializable {
 		this.buyerId = buyerId;
 	}
 
-	public static MQCommissionParam mapToEntity(Map<String ,Object> map){
+    public Integer getGuideType() {
+        return guideType;
+    }
+
+    public void setGuideType(Integer guideType) {
+        this.guideType = guideType;
+    }
+
+    public static MQCommissionParam mapToEntity(Map<String ,Object> map){
     	MQCommissionParam mqCommissionParam = new MQCommissionParam();
         if(map != null){
             if(map.get("guideId") != null)
@@ -115,6 +125,9 @@ public class MQCommissionParam implements Serializable {
             	mqCommissionParam.setOrderNo(map.get("orderNum").toString());
             if(map.get("buyerId") != null)
             	mqCommissionParam.setBuyerId(map.get("buyerId").toString());
+            if (map.get("guideType") != null){
+                mqCommissionParam.setGuideType(Integer.valueOf(map.get("guideType").toString()));
+            }
         }
         return mqCommissionParam;
     }
