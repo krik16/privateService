@@ -47,11 +47,6 @@ public class LiveVO implements Serializable {
 	private int status;
 	
 	/**
-	 * 商品id列表
-	 */
-	private List<String> commodityIdList;
-	
-	/**
 	 * 商品列表
 	 */
 	private List<LiveCommodityVO> commodityList;
@@ -75,6 +70,12 @@ public class LiveVO implements Serializable {
 	 * 直播用户信息
 	 */
 	private LiveBullInfoVO bullInfo;
+	
+	/**
+	 * 距离
+	 */
+	private Double distance ;
+	
 
 	public String getId() {
 		return id;
@@ -132,14 +133,6 @@ public class LiveVO implements Serializable {
 		this.status = status;
 	}
 
-	public List<String> getCommodityIdList() {
-		return commodityIdList;
-	}
-
-	public void setCommodityIdList(List<String> commodityIdList) {
-		this.commodityIdList = commodityIdList;
-	}
-
 	public List<LiveCommodityVO> getCommodityList() {
 		return commodityList;
 	}
@@ -178,5 +171,13 @@ public class LiveVO implements Serializable {
 
 	public void setBullInfo(LiveBullInfoVO bullInfo) {
 		this.bullInfo = bullInfo;
+	}
+
+	public Double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(Double distance) {
+		this.distance = distance;
 	}
 }
