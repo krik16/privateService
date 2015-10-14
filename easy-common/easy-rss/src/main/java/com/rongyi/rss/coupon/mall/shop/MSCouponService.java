@@ -1,11 +1,14 @@
-package com.rongyi.rss.coupon;
+package com.rongyi.rss.coupon.mall.shop;
 
 import com.rongyi.core.bean.ResponseResult;
+import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.old_vo.OldCouponVO;
 import com.rongyi.easy.coupon.param.RmmmCouponParam;
 import com.rongyi.easy.coupon.param.RmmmCouponQueryParam;
 import com.rongyi.easy.coupon.vo.RmmmCouponQueryListVO;
 import com.rongyi.easy.solr.retrival.result.ActivityData;
+
+import java.util.List;
 
 /**
  * 功能描述： 摩店(MS) 代金券接口
@@ -72,6 +75,39 @@ public interface MSCouponService {
      * @return
      */
     boolean appendInventory(String couponId, Integer quantity);
+
+
+    /**
+     * 通过id查询优惠券
+     *
+     * @param id
+     * @return
+     */
+    public Coupon findCouponById(String id);
+
+    /**
+     * 老优惠:通过id修改优惠券详情浏览次数
+     *
+     * @param couponId
+     * @return FavourableVO
+     */
+    public void addCouponVistiedCount(String couponId, int visitedCount);
+
+    /**
+     * 通过ids得懂啊oldCOuponVO  List
+     *
+     * @param ids
+     * @return
+     */
+    public List<OldCouponVO> findCouponDetailByIds(List<String> ids);
+
+    /**
+     * 推荐优惠券首页（优化）
+     *
+     * @param ids
+     * @return
+     */
+    public List<OldCouponVO> findCouponIndexByIds(List<String> ids);
 
 }
 

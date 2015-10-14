@@ -1,5 +1,6 @@
 package com.rongyi.rss.coupon;
 
+import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.framework.mybatis.pojo.Page;
 import com.rongyi.easy.coupon.entity.UserRedenvelope;
 import com.rongyi.easy.coupon.param.UserRedenvelopeParam;
@@ -24,11 +25,13 @@ public interface RoaUserRedenvelopeService {
 
     UserRedenvelope findById(Integer id);
 
-    Map<String, List<UserCouponVO>> findUnusedRedenvelope(List<String> productIds, String userId);
+    Map<String, List<UserCouponVO>> findUnusedRedenvelopeList(List<String> productIds, String userId);
 
     UserRedenvelope findByCode(String couponCode);
 
     boolean updateStatus(String couponCode, Integer status);
 
     boolean checkReceived(String couponId, String userId);
+
+    PagingVO<UserRedenvelope> findUserCouponByUserId(String userId, Integer currentPage, Integer pageSize);
 }

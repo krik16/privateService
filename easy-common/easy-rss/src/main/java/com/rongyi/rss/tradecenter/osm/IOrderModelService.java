@@ -3,7 +3,7 @@
  */
 package com.rongyi.rss.tradecenter.osm;
 
-import com.rongyi.easy.tradecenter.osm.OrderModelEntity;
+import com.rongyi.easy.osm.entity.OrderModelEntity;
 import com.rongyi.easy.rmmm.param.OrderModelParam;
 import com.rongyi.easy.rmmm.vo.OrderModelVO;
 
@@ -17,14 +17,6 @@ import com.rongyi.easy.rmmm.vo.OrderModelVO;
  * chenjun            2015年5月19日               1.0              创建文件
  */
 public interface IOrderModelService {
-	
-	/**
-	 * 通过父模板id获取
-	 * @param orderModelId
-	 * @return
-	 * @throws Exception
-	 */
-	public OrderModelEntity getOrderModelById(Integer orderModelId)  throws Exception;
 	
 	/**
 	 * 生成订单模板 返回父模板id

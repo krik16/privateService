@@ -25,7 +25,8 @@ public enum MallShopErrorCode {
 
 
      /** 用户相关 后4位区间  1001---2000*/
-
+    ERROR_ID_INVALID(1071001,"请重新登录"),
+    
 
     /** 商品相关 后4位区间  2001---3000*/
 

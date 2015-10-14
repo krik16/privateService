@@ -1,6 +1,5 @@
-package com.rongyi.rss.coupon;
+package com.rongyi.rss.coupon.mall.life;
 
-import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.easy.coupon.vo.UserCouponVO;
 
 import java.util.List;
@@ -11,8 +10,10 @@ import java.util.Map;
  * 原接口名：RmmmUserCashCouponService
  *
  * @author Breggor
+ * @see MLUserRedenvelopeService
  */
-public interface MLUserRedenvelopeService {
+@Deprecated
+public interface MLUserCashCouponService {
 
     /**
      * 接口描述：用户现金券 (未使用/已使用) 列表查询
@@ -71,25 +72,19 @@ public interface MLUserRedenvelopeService {
      *
      * @param couponCode
      * @return
+     * @see MLUserRedenvelopeService#getCashCouponDiscount(String)
      */
     public Double getCashCouponDiscount(String couponCode);
 
     /**
-     * 根据用户ID及现金ID检查是否已领过现金券
+     * 通过couponCode获取现金券价格
+     * Author: ZhengYl 2015-05-18
      *
-     * @param couponId
-     * @param userId
+     * @param couponCode
      * @return
+     * @see MLUserRedenvelopeService#getCashCouponDiscount(String)
      */
-    boolean checkReceivedCashCoupon(String couponId, String userId);
+    public Double getCashCouponPrice(String couponCode);
 
-    /**
-     * 根据用户ID及现金ID领取现金券
-     *
-     * @param couponId
-     * @param userId
-     * @return ResponseResult{message:错误信息，info：boolean状态是否领取成功}
-     */
-    ResponseResult receiveCashCoupon(String couponId, String userId);
 
 }

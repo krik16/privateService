@@ -10,11 +10,10 @@ import java.util.Map;
 /**
  * @author lqy
  * @ClassName: MMCouponOrderService
- * @Description: TODO(卡券订单接口，提供给mall-shop的controller使用)
+ * @Description: (卡券订单接口，提供给mall-shop的controller使用)
  * @date 2015年6月8日 下午5:07:12
  */
-@Deprecated
-public interface MMCouponOrderService {
+public interface MSCouponOrderService {
 
     /**
      * @param orderNo      订单编号

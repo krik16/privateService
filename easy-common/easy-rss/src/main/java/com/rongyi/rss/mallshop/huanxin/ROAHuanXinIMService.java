@@ -3,6 +3,8 @@
  */
 package com.rongyi.rss.mallshop.huanxin;
 
+import java.util.List;
+
 /**
  * Copyright (C),上海容易网电子商务有限公司
  * author chenjun
@@ -20,5 +22,13 @@ public interface ROAHuanXinIMService {
      * @return
      */
     public String selectImIdByUserId(Integer userid);
+    
+    /**
+     * 通过商店id获得IM账号
+     * @param shopId
+     * @return
+     * @throws Exception
+     */
+    public List<String> getUserCount(Integer shopId) throws Exception;
 
 }

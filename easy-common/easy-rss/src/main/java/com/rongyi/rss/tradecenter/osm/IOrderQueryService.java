@@ -3,15 +3,22 @@
  */
 package com.rongyi.rss.tradecenter.osm;
 
+import java.util.List;
+import java.util.Map;
+
+import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.rmmm.param.MyOrderParam;
 import com.rongyi.easy.rmmm.param.TransactionDetailParam;
-import com.rongyi.easy.rmmm.vo.BuyerVO;
 import com.rongyi.easy.rmmm.vo.MyOrderCountVO;
+import com.rongyi.easy.rmmm.vo.OrderManagerVO;
 import com.rongyi.easy.rmmm.vo.OrderVO;
 import com.rongyi.easy.rmmm.vo.ParentOrderListVO;
 import com.rongyi.easy.rmmm.vo.ParentOrderVO;
 import com.rongyi.easy.rmmm.vo.ShopMallVO;
 import com.rongyi.easy.rmmm.vo.TransactionDetailVO;
+import com.rongyi.easy.tradecenter.osm.OrderDetailFormEntity;
+import com.rongyi.easy.tradecenter.osm.OrderEventEntity;
+import com.rongyi.easy.tradecenter.osm.OrderFormEntity;
 
 /**
  * Copyright (C),上海容易网电子商务有限公司
@@ -75,5 +82,41 @@ public interface IOrderQueryService {
 	 * @throws Exception
 	 */
 	public OrderVO getOrderInfo(String orderNo, String expressInfoId) throws Exception;
+	
+	/**
+	 * 通过父订单号获得
+	 * 
+	 * @param OrderNum
+	 * @return
+	 * @throws Exception
+	 */
+	public OrderFormEntity getOrderFormByOrderNum(String orderNum) throws Exception;
+	
+	/**
+	 * 根据父订单id获得父订单
+	 * 
+	 * @param orderId
+	 * @return
+	 * @throws Exception
+	 */
+	public OrderFormEntity getOrderFormByOrderId(Integer orderId) throws Exception;
+	
+	/**
+	 * 通过父订单号获得子订单集合
+	 * @param list
+	 * @return
+	 */
+	public List<OrderDetailFormEntity> selectByParentNum(String parentNum) throws Exception;
+	
+	public PagingVO<OrderManagerVO> searchListByMap(Map<String, Object> paramsMap) throws Exception;
+	
+	/**
+	 * 根据事件类型查找订单事件
+	 * @param type
+	 * @param orderNum
+	 * @return
+	 * @throws Exception
+	 */
+	public OrderEventEntity getOrderEventByType(String type , String orderNum) throws Exception;
 
 }

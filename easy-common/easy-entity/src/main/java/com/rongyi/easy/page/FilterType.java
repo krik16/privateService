@@ -9,7 +9,7 @@ import java.io.Serializable;
  */
 public enum FilterType implements Serializable {
 
-    LIKE,  EQUALS,  GREATETHAN,  GREATEEQUAL,  LESSTHAN,  LESSEQUAL,  NOTEQUAL,  IN,NIN,ISNULL,ISNOTNULL,REGEXP,BEQ;
+    LIKE,  EQUALS,  GREATETHAN,  GREATEEQUAL,  LESSTHAN,  LESSEQUAL,  NOTEQUAL,  IN,NIN,ISNULL,ISNOTNULL,REGEXP,BEQ ,EXISTS,NOTEXISTS;
     public static FilterType toType(String type)
     {
         if ("LIKE".equals(type)) {
@@ -50,6 +50,12 @@ public enum FilterType implements Serializable {
         }
         if ("REGEXP".equals(type)) {
             return REGEXP;
+        }
+        if ("EXISTS".equals(type)) {
+            return EXISTS;
+        }
+        if ("NOTEXISTS".equals(type)) {
+            return NOTEXISTS;
         }
         return null;
     }
@@ -94,6 +100,12 @@ public enum FilterType implements Serializable {
         }
         if (this == BEQ) {
             return "beq";
+        }
+        if (this == EXISTS) {
+            return "EXISTS";
+        }
+        if (this == NOTEXISTS) {
+            return "NOT EXISTS";
         }
         return "";
     }

@@ -1,25 +1,19 @@
-package com.rongyi.easy.coupon.entity;
+package com.rongyi.easy.coupon.entity.mysql;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.ListUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.builder.ToStringBuilder;
-
-import java.beans.Transient;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 public class Coupon implements Serializable {
-
+    /**
+     *
+     */
     private static final long serialVersionUID = 1L;
 
     /**
-     * 主键(兼容mongoId)
+     * 主键id
      */
-    private String id;
+    private Integer id;
 
     /**
      * 卡券名称
@@ -80,17 +74,6 @@ public class Coupon implements Serializable {
      * 发布结束时间
      */
     private Date publishEndAt;
-
-
-    /**
-     * 销售开始时间
-     */
-    private Date saleStartAt;
-
-    /**
-     * 销售结束时间
-     */
-    private Date saleEndAt;
 
     /**
      * 有效期开始时间
@@ -175,9 +158,19 @@ public class Coupon implements Serializable {
     private Integer inChannel;
 
     /**
+     * 导入渠道名称
+     */
+    private String inChannelName;
+
+    /**
      * 推广渠道
      */
     private Integer outChannel;
+
+    /**
+     * 推广渠道名称
+     */
+    private String outChannelName;
 
     /**
      * 店铺对应的公司名
@@ -237,7 +230,7 @@ public class Coupon implements Serializable {
     /**
      * 代金券关联的商场
      */
-//    private CouponMall couponMall;
+    private CouponMall couponMall;
 
     /**
      * 代金券关联的店铺
@@ -258,19 +251,29 @@ public class Coupon implements Serializable {
     /**
      * 红包关联的商品  related_type只有这个类型是1 并且coupon_type 为2 的时候  才有这个类型
      */
-    private List<RedenvelopeCommodity> redenvelopeCommodities;
+    private List<RedenvelopeCommodity> rCommoditys;
 
+    /**
+     * 列表图名称
+     */
+    private String listPicName;
 
-    private Integer purchaseType = Integer.valueOf(0);//购买类型 0正常购买类型 1抢购类型
+    /**
+     * 详情图名称
+     */
+    private List<String> detailPicNames;
 
-    private Integer visitedCount = Integer.valueOf(0);//卡券详情浏览数
+    /**
+     * 是否是通用券，特指集团或商场发布的且只能在商场总台验券的券，例如：停车券等券
+     * 默认 false;
+     */
+    private Boolean isGeneral;
 
-
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -314,6 +317,7 @@ public class Coupon implements Serializable {
         this.stockCount = stockCount;
     }
 
+
     public Integer getOrigPrice() {
         return origPrice;
     }
@@ -348,16 +352,6 @@ public class Coupon implements Serializable {
 
     public String getAfterSaleService() {
         return afterSaleService;
-    }
-
-    public List<Integer> getAfterSaleService2List() {
-        List<Integer> list = new ArrayList<>();
-        if (StringUtils.isNotBlank(afterSaleService)) {
-            for (String e : afterSaleService.split(",")) {
-                list.add(Integer.valueOf(e));
-            }
-        }
-        return list;
     }
 
     public void setAfterSaleService(String afterSaleService) {
@@ -416,6 +410,15 @@ public class Coupon implements Serializable {
         return recommend;
     }
 
+    public List<CouponMall> getCouponMalls() {
+        return couponMalls;
+    }
+
+    public void setCouponMalls(List<CouponMall> couponMalls) {
+        this.couponMalls = couponMalls;
+    }
+
+
     public void setRecommend(String recommend) {
         this.recommend = recommend;
     }
@@ -440,27 +443,6 @@ public class Coupon implements Serializable {
         return detailPicUrl;
     }
 
-    public List<String> getDetailPicUrls() {
-        List<String> list = ListUtils.EMPTY_LIST;
-        if (StringUtils.isNotBlank(detailPicUrl)) {
-            list = Arrays.asList(detailPicUrl.split(";"));
-        }
-        return list;
-    }
-
-    /**
-     * 优惠券缩略图
-     *
-     * @return
-     */
-    public String getThumbnail() {
-        String pic = "";
-        if (!this.getDetailPicUrls().isEmpty()) {
-            pic = this.getDetailPicUrls().get(0);
-        }
-        return pic;
-    }
-
     public void setDetailPicUrl(String detailPicUrl) {
         this.detailPicUrl = detailPicUrl;
     }
@@ -479,6 +461,14 @@ public class Coupon implements Serializable {
 
     public void setLimitCount(Integer limitCount) {
         this.limitCount = limitCount;
+    }
+
+    public Integer getPreferentialType() {
+        return preferentialType;
+    }
+
+    public void setPreferentialType(Integer preferentialType) {
+        this.preferentialType = preferentialType;
     }
 
     public Integer getLimitUseCount() {
@@ -625,13 +615,13 @@ public class Coupon implements Serializable {
         this.couponBrand = couponBrand;
     }
 
-//    public CouponMall getCouponMall() {
-//        return couponMall;
-//    }
-//
-//    public void setCouponMall(CouponMall couponMall) {
-//        this.couponMall = couponMall;
-//    }
+    public CouponMall getCouponMall() {
+        return couponMall;
+    }
+
+    public void setCouponMall(CouponMall couponMall) {
+        this.couponMall = couponMall;
+    }
 
     public List<CouponShop> getCouponShops() {
         return couponShops;
@@ -641,134 +631,109 @@ public class Coupon implements Serializable {
         this.couponShops = couponShops;
     }
 
-    public List<CouponMall> getCouponMalls() {
-        return couponMalls;
+    public List<RedenvelopeCommodity> getrCommoditys() {
+        return rCommoditys;
     }
 
-    public void setCouponMalls(List<CouponMall> couponMalls) {
-        this.couponMalls = couponMalls;
+    public void setrCommoditys(List<RedenvelopeCommodity> rCommoditys) {
+        this.rCommoditys = rCommoditys;
     }
 
-    public Integer getPreferentialType() {
-        return preferentialType;
+    public String getListPicName() {
+        return listPicName;
     }
 
-    public void setPreferentialType(Integer preferentialType) {
-        this.preferentialType = preferentialType;
+    public void setListPicName(String listPicName) {
+        this.listPicName = listPicName;
     }
 
-    public List<RedenvelopeCommodity> getRedenvelopeCommodities() {
-        return redenvelopeCommodities;
+    public List<String> getDetailPicNames() {
+        return detailPicNames;
     }
 
-    public void setRedenvelopeCommodities(List<RedenvelopeCommodity> redenvelopeCommodities) {
-        this.redenvelopeCommodities = redenvelopeCommodities;
+    public void setDetailPicNames(List<String> detailPicNames) {
+        this.detailPicNames = detailPicNames;
     }
 
-    @Transient
-    public List<String> getRedenvelopeCommodityIds() {
-        List<String> list = ListUtils.EMPTY_LIST;
-        if (CollectionUtils.isNotEmpty(this.redenvelopeCommodities)) {
-            list = new ArrayList<>();
-            for (RedenvelopeCommodity e : redenvelopeCommodities) {
-                list.add(e.getCommodityId());
-            }
-        }
-        return list;
+    public Boolean getIsGeneral() {
+        return isGeneral;
     }
 
-    public Integer getPurchaseType() {
-        return purchaseType;
+    public void setIsGeneral(Boolean isGeneral) {
+        this.isGeneral = isGeneral;
     }
 
-    public void setPurchaseType(Integer purchaseType) {
-        this.purchaseType = purchaseType;
+    public String getInChannelName() {
+        return inChannelName;
     }
 
-
-    public Integer getVisitedCount() {
-        return visitedCount;
+    public void setInChannelName(String inChannelName) {
+        this.inChannelName = inChannelName;
     }
 
-    public void setVisitedCount(Integer visitedCount) {
-        this.visitedCount = visitedCount;
+    public String getOutChannelName() {
+        return outChannelName;
     }
 
-    public Date getSaleStartAt() {
-        return saleStartAt;
+    public void setOutChannelName(String outChannelName) {
+        this.outChannelName = outChannelName;
     }
-
-    public void setSaleStartAt(Date saleStartAt) {
-        this.saleStartAt = saleStartAt;
-    }
-
-    public Date getSaleEndAt() {
-        return saleEndAt;
-    }
-
-    public void setSaleEndAt(Date saleEndAt) {
-        this.saleEndAt = saleEndAt;
-    }
-
-    public Integer getSaledCount() {
-        return (totalCount - stockCount < 0) ? 0 : totalCount - stockCount;
-    }
-
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", id)
-                .append("name", name)
-                .append("couponType", couponType)
-                .append("validateType", validateType)
-                .append("totalCount", totalCount)
-                .append("stockCount", stockCount)
-                .append("origPrice", origPrice)
-                .append("currPrice", currPrice)
-                .append("discount", discount)
-                .append("displayRegion", displayRegion)
-                .append("afterSaleService", afterSaleService)
-                .append("publishStartAt", publishStartAt)
-                .append("publishEndAt", publishEndAt)
-                .append("saleStartAt", saleStartAt)
-                .append("saleEndAt", saleEndAt)
-                .append("validStartAt", validStartAt)
-                .append("validEndAt", validEndAt)
-                .append("limitDesc", limitDesc)
-                .append("usageDesc", usageDesc)
-                .append("recommend", recommend)
-                .append("remark", remark)
-                .append("listPicUrl", listPicUrl)
-                .append("detailPicUrl", detailPicUrl)
-                .append("relatedType", relatedType)
-                .append("limitCount", limitCount)
-                .append("limitUseCount", limitUseCount)
-                .append("limitPublishCount", limitPublishCount)
-                .append("synTarget", synTarget)
-                .append("publishChannel", publishChannel)
-                .append("status", status)
-                .append("inChannel", inChannel)
-                .append("outChannel", outChannel)
-                .append("sourceName", sourceName)
-                .append("createUser", createUser)
-                .append("createAt", createAt)
-                .append("updateUser", updateUser)
-                .append("updateAt", updateAt)
-                .append("isThird", isThird)
-                .append("isOffStock", isOffStock)
-                .append("isDeleted", isDeleted)
-                .append("couponCategory", couponCategory)
-                .append("couponGroup", couponGroup)
-                .append("couponBrand", couponBrand)
-                .append("couponShops", couponShops)
-                .append("couponMalls", couponMalls)
-                .append("preferentialType", preferentialType)
-                .append("redenvelopeCommodities", redenvelopeCommodities)
-                .append("purchaseType", purchaseType)
-                .append("visitedCount", visitedCount)
-                .toString();
+        final StringBuilder sb = new StringBuilder("Coupon{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", couponType=").append(couponType);
+        sb.append(", validateType=").append(validateType);
+        sb.append(", totalCount=").append(totalCount);
+        sb.append(", stockCount=").append(stockCount);
+        sb.append(", origPrice=").append(origPrice);
+        sb.append(", currPrice=").append(currPrice);
+        sb.append(", discount=").append(discount);
+        sb.append(", displayRegion='").append(displayRegion).append('\'');
+        sb.append(", afterSaleService='").append(afterSaleService).append('\'');
+        sb.append(", publishStartAt=").append(publishStartAt);
+        sb.append(", publishEndAt=").append(publishEndAt);
+        sb.append(", validStartAt=").append(validStartAt);
+        sb.append(", validEndAt=").append(validEndAt);
+        sb.append(", limitDesc='").append(limitDesc).append('\'');
+        sb.append(", usageDesc='").append(usageDesc).append('\'');
+        sb.append(", recommend='").append(recommend).append('\'');
+        sb.append(", remark='").append(remark).append('\'');
+        sb.append(", listPicUrl='").append(listPicUrl).append('\'');
+        sb.append(", detailPicUrl='").append(detailPicUrl).append('\'');
+        sb.append(", relatedType=").append(relatedType);
+        sb.append(", limitCount=").append(limitCount);
+        sb.append(", limitUseCount=").append(limitUseCount);
+        sb.append(", limitPublishCount=").append(limitPublishCount);
+        sb.append(", synTarget='").append(synTarget).append('\'');
+        sb.append(", publishChannel=").append(publishChannel);
+        sb.append(", status=").append(status);
+        sb.append(", inChannel=").append(inChannel);
+        sb.append(", inChannelName='").append(inChannelName).append('\'');
+        sb.append(", outChannel=").append(outChannel);
+        sb.append(", outChannelName='").append(outChannelName).append('\'');
+        sb.append(", sourceName='").append(sourceName).append('\'');
+        sb.append(", createUser='").append(createUser).append('\'');
+        sb.append(", createAt=").append(createAt);
+        sb.append(", updateUser='").append(updateUser).append('\'');
+        sb.append(", updateAt=").append(updateAt);
+        sb.append(", isThird=").append(isThird);
+        sb.append(", isOffStock=").append(isOffStock);
+        sb.append(", isDeleted=").append(isDeleted);
+        sb.append(", couponCategory=").append(couponCategory);
+        sb.append(", couponGroup=").append(couponGroup);
+        sb.append(", couponBrand=").append(couponBrand);
+        sb.append(", couponMall=").append(couponMall);
+        sb.append(", couponShops=").append(couponShops);
+        sb.append(", couponMalls=").append(couponMalls);
+        sb.append(", preferentialType=").append(preferentialType);
+        sb.append(", rCommoditys=").append(rCommoditys);
+        sb.append(", listPicName='").append(listPicName).append('\'');
+        sb.append(", detailPicNames=").append(detailPicNames);
+        sb.append(", isGeneral=").append(isGeneral);
+        sb.append('}');
+        return sb.toString();
     }
-
-
 }

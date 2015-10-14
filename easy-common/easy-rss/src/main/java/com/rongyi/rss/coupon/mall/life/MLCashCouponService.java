@@ -1,10 +1,10 @@
-package com.rongyi.rss.coupon;
+package com.rongyi.rss.coupon.mall.life;
 
 import com.rongyi.core.bean.ResponseResult;
 
 /**
  * 功能描述：摩生活 用户登陆领红包接口
- *
+ * @see MLUserRedenvelopeService
  * @author Breggor
  *         mallshop:ms
  */

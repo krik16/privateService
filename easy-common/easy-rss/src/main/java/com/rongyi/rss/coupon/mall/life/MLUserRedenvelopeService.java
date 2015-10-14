@@ -1,5 +1,8 @@
-package com.rongyi.rss.coupon;
+package com.rongyi.rss.coupon.mall.life;
 
+import com.rongyi.core.bean.ResponseResult;
+import com.rongyi.core.common.PagingVO;
+import com.rongyi.easy.coupon.entity.UserRedenvelope;
 import com.rongyi.easy.coupon.vo.UserCouponVO;
 
 import java.util.List;
@@ -11,8 +14,22 @@ import java.util.Map;
  *
  * @author Breggor
  */
-@Deprecated
-public interface MLUserCashCouponService {
+public interface MLUserRedenvelopeService {
+
+
+    /**
+     * 根据Id查询优惠券
+     *
+     * @param userCouponId
+     * @return
+     */
+    UserRedenvelope findUserCouponById(Integer userCouponId);
+
+
+    public UserRedenvelope findUserCouponByCouponCode(String couponCode);
+
+    public PagingVO<UserRedenvelope> findUserCouponByUserId(String userId,
+                                                            Integer currentPage, Integer pageSize);
 
     /**
      * 接口描述：用户现金券 (未使用/已使用) 列表查询
@@ -75,13 +92,22 @@ public interface MLUserCashCouponService {
     public Double getCashCouponDiscount(String couponCode);
 
     /**
-     * 通过couponCode获取现金券价格
-     * Author: ZhengYl 2015-05-18
+     * 根据用户ID及现金ID检查是否已领过现金券
      *
-     * @param couponCode
+     * @param couponId
+     * @param userId
      * @return
      */
-    public Double getCashCouponPrice(String couponCode);
+    boolean checkReceivedCashCoupon(String couponId, String userId);
+
+    /**
+     * 根据用户ID及现金ID领取现金券
+     *
+     * @param couponId
+     * @param userId
+     * @return ResponseResult{message:错误信息，info：boolean状态是否领取成功}
+     */
+    ResponseResult receiveCashCoupon(String couponId, String userId);
 
 
 }
