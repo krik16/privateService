@@ -21,7 +21,7 @@ public class AccountParam implements Serializable {
     private String bankId;//开户行ID
     private String  accountName;//支付宝姓名/储蓄卡人姓名
     private Integer userId;
-    private String userType;//0导购 1买手
+    private String userType;//1和不传是导购 2买手
 
     public String getType() {
         return type;
