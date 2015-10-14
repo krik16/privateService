@@ -64,4 +64,6 @@ public interface MerchantCouponServce {
      */
     public StatisticsCountVO statisticsPublishCount(UserInfoVo userInfoVo) ;
 
+    public Coupon selectByPrimaryKey(Integer couponId);
+
 }

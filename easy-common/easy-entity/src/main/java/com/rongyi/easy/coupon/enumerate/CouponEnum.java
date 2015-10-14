@@ -34,7 +34,7 @@ public enum CouponEnum {
 	/** VoucherCouponParam start */
 	
 	/** 发布状态 publishStatus */
-	UNPUBLISH(0,"待发布"), PROCEEING(1,"进行中"), ENDED(2,"已结束"), OFF(3,"已下架"),
+	UNPUBLISH(0,"待发布"), PROCEEING(1,"进行中"), ENDED(2,"已结束"), OFF(3,"已下架"), EXPIRED(4,"已过期"),
 	
 	/** 时间类型 dateType  */
 	PUBLISH_START(0,"发布开始时间"), PUBLISH_END(1,"发布结束时间"), VALID_START(2,"有效期开始时间"), VALID_END(3,"有效期结束时间"),
