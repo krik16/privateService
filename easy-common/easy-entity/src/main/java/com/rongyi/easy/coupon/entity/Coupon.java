@@ -12,6 +12,11 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 新版卡券基础数据
+ * mongo卡券信息
+ * @see OldCoupon
+ */
 public class Coupon implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -264,6 +269,12 @@ public class Coupon implements Serializable {
     private Integer purchaseType = Integer.valueOf(0);//购买类型 0正常购买类型 1抢购类型
 
     private Integer visitedCount = Integer.valueOf(0);//卡券详情浏览数
+
+    /**
+     * 是否是通用券，特指集团或商场发布的且只能在商场总台验券的券，例如：停车券等券
+     * 默认 false;
+     */
+    private Boolean isGeneral;
 
 
     public String getId() {
@@ -714,6 +725,13 @@ public class Coupon implements Serializable {
         return (totalCount - stockCount < 0) ? 0 : totalCount - stockCount;
     }
 
+    public Boolean getIsGeneral() {
+        return isGeneral;
+    }
+
+    public void setIsGeneral(Boolean isGeneral) {
+        this.isGeneral = isGeneral;
+    }
 
     @Override
     public String toString() {

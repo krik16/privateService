@@ -1,7 +1,7 @@
 package com.rongyi.rss.coupon;
 
 
-import com.rongyi.easy.coupon.entity.old.Coupon;
+import com.rongyi.easy.coupon.entity.OldCoupon;
 import com.rongyi.easy.coupon.old_vo.OldCouponVO;
 import com.rongyi.rss.coupon.mall.shop.MSCouponService;
 import org.bson.types.ObjectId;
@@ -27,7 +27,7 @@ public interface MMCouponService {
      * @return
      */
     @Deprecated
-    public Coupon findCouponById(ObjectId id);
+    public OldCoupon findCouponById(ObjectId id);
 
     /**
      * 老优惠:通过id修改优惠券详情浏览次数

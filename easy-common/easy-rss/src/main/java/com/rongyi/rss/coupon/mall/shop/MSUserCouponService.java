@@ -1,6 +1,6 @@
 package com.rongyi.rss.coupon.mall.shop;
 
-import com.rongyi.easy.coupon.entity.old.UserCoupon;
+import com.rongyi.easy.coupon.entity.UserCoupon;
 
 /**
  * 摩店-代金券接口

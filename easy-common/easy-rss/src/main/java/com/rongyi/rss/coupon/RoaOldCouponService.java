@@ -1,6 +1,6 @@
 package com.rongyi.rss.coupon;
 
-import com.rongyi.easy.coupon.entity.old.Coupon;
+import com.rongyi.easy.coupon.entity.OldCoupon;
 import com.rongyi.easy.coupon.vo.UserCouponVO;
 import org.bson.types.ObjectId;
 
@@ -31,7 +31,7 @@ public interface RoaOldCouponService {
      * @param id
      * @return
      */
-    public Coupon getCouponById(ObjectId id);
+    public OldCoupon getCouponById(ObjectId id);
 
     /**
      * 添加或更新优惠券
@@ -39,7 +39,7 @@ public interface RoaOldCouponService {
      * @param coupon
      * @return
      */
-    public ObjectId saveOrUpdateCoupon(Coupon coupon);
+    public ObjectId saveOrUpdateCoupon(OldCoupon coupon);
 
     /**
      * 通过id删除优惠券
@@ -66,7 +66,7 @@ public interface RoaOldCouponService {
      * @param coupon
      * @return
      */
-    public Boolean verifyCoupons(Coupon coupon);
+    public Boolean verifyCoupons(OldCoupon coupon);
 
     /**
      * 关联商场
@@ -74,7 +74,7 @@ public interface RoaOldCouponService {
      * @param coupon
      * @return
      */
-    public Boolean relevanceMalls(Coupon coupon);
+    public Boolean relevanceMalls(OldCoupon coupon);
 
     /**
      * 关联店铺
@@ -82,7 +82,7 @@ public interface RoaOldCouponService {
      * @param coupon
      * @return
      */
-    public Boolean relevanceShops(Coupon coupon);
+    public Boolean relevanceShops(OldCoupon coupon);
 
     /**
      * 优惠券现金券关联活动和取消关联 activityStatus 1：关联翻牌购 2： 关联推送 0 : 取消关联
@@ -99,7 +99,7 @@ public interface RoaOldCouponService {
      * @param ids
      * @return
      */
-    public List<Coupon> getCouponByIds(List<ObjectId> ids);
+    public List<OldCoupon> getCouponByIds(List<ObjectId> ids);
 
     /**
      * 我的抵扣券列表(现金券)(未使用/已使用) 列表查询
@@ -160,7 +160,7 @@ public interface RoaOldCouponService {
      * @param coupon
      * @return
      */
-    public Boolean release(Coupon coupon);
+    public Boolean release(OldCoupon coupon);
 
 
     /**

@@ -1,7 +1,7 @@
 package com.rongyi.rss.coupon.operation;
 
 import com.rongyi.core.common.PagingVO;
-import com.rongyi.easy.coupon.entity.mysql.Coupon;
+import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.param.CouponQueryParam;
 
 import java.util.Map;

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import com.rongyi.easy.coupon.entity.old.Coupon;
+import com.rongyi.easy.coupon.entity.OldCoupon;
 
 public class FlopgoPrizeByTimesVO implements Serializable{
 	/**
@@ -51,7 +51,7 @@ public class FlopgoPrizeByTimesVO implements Serializable{
 			this.recommendation=flopprize.getRecommend();
 		}
 	}
-	public FlopgoPrizeByTimesVO(Coupon flopprize){
+	public FlopgoPrizeByTimesVO(OldCoupon flopprize){
 		if(flopprize!=null){
 			this._id=flopprize.getId().toString();
 			this.created_at=flopprize.getCreateDate();

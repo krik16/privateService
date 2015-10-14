@@ -1,4 +1,4 @@
-package com.rongyi.easy.coupon.entity.old;
+package com.rongyi.easy.coupon.entity;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -19,7 +19,7 @@ import java.util.List;
 
 @Deprecated
 @Entity(value = "coupon", noClassnameStored = true)
-public class Coupon implements Serializable {
+public class OldCoupon implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

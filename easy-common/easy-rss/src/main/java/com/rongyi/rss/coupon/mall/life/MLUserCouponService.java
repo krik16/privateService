@@ -1,6 +1,6 @@
 package com.rongyi.rss.coupon.mall.life;
 
-import com.rongyi.easy.coupon.entity.old.UserCoupon;
+import com.rongyi.easy.coupon.entity.UserCoupon;
 import com.rongyi.easy.roa.entity.MallEntity;
 import com.rongyi.easy.roa.vo.ShopVO;
 import org.bson.types.ObjectId;
