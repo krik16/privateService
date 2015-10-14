@@ -1,5 +1,7 @@
 package com.rongyi.rss.mallshop.order;
 
+import java.util.Map;
+
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
@@ -169,5 +171,12 @@ public interface ROAOrderService {
 	 * @throws Exception
 	 */
 	public  Integer getMaxIntegral(MaxIntegralParam param, double limit, double moenyExchangeScore) throws Exception;
+	
+	/**
+	 * 分解订单状态路径
+	 * @param statusRoute
+	 * @return
+	 */
+	public Map<String, String> getRouteByStatusRoute(String statusRoute);
 
 }
