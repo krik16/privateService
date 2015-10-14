@@ -7,6 +7,8 @@ import java.util.Date;
 
 /**
  * 卡券订单项
+ * 老订单项
+ * 下步废弃，移到交易中心
  *
  * @author Breggor
  */

@@ -9,7 +9,8 @@ import java.util.Date;
 
 /**
  * 用户卡券：代金券信息
- *
+ * 老用户代金券与红包
+ * @see UserRedenvelope --新用户红包
  * @author Breggor
  */
 @Deprecated

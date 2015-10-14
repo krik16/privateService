@@ -788,12 +788,4 @@ public class Coupon implements Serializable {
                 .toString();
     }
 
-
-    public void setInChannelName(String inChannelName) {
-
-    }
-
-    public void setOutChannelName(String outChannelName) {
-
-    }
 }
