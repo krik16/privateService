@@ -22,6 +22,7 @@ public class InvitationCodeVO {
 	private Date createAt;//申请时间
 	private int createAccountId;
 	private String createAccount;
+	private String channel ;//渠道  1商家  2买手
 	
 	public int getId() {
 		return id;
@@ -71,6 +72,12 @@ public class InvitationCodeVO {
 	}
 	public void setCreateAccount(String createAccount) {
 		this.createAccount = createAccount;
+	}
+	public String getChannel() {
+		return channel;
+	}
+	public void setChannel(String channel) {
+		this.channel = channel;
 	}
 	
 	
