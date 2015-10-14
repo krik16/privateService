@@ -8,8 +8,10 @@ import java.util.Map;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.rmmm.param.MaxIntegralParam;
+import com.rongyi.easy.rmmm.param.MyDealParam;
 import com.rongyi.easy.rmmm.param.MyOrderParam;
 import com.rongyi.easy.rmmm.param.TransactionDetailParam;
+import com.rongyi.easy.rmmm.vo.DetailVO;
 import com.rongyi.easy.rmmm.vo.MyOrderCountVO;
 import com.rongyi.easy.rmmm.vo.OrderManagerVO;
 import com.rongyi.easy.rmmm.vo.OrderVO;
@@ -138,5 +140,21 @@ public interface IOrderQueryService {
 	public List<OrderFormEntity> selectOrderList(Map param) throws Exception ;
 	
 	public int selectOrderListCount(String weidianId, String userId) throws Exception;
+	
+	/**
+	 * 我的交易金额列表
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public DetailVO getMyDealAmount(MyDealParam param) throws Exception;
+	
+	/**
+	 * 我的交易佣金列表
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public DetailVO getMyDealCommission(MyDealParam param) throws Exception;
 
 }
