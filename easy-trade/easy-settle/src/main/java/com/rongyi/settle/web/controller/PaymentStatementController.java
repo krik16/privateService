@@ -431,7 +431,7 @@ public class PaymentStatementController {
 	 **/
 	@RequestMapping("/info")
 	@ResponseBody
-	public ResponseData export(String systemType, String idStr, HttpServletRequest request, HttpServletResponse response) {
+	public ResponseData export(String systemType, Integer id, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			boolean isMerchant = systemType != null && systemType.equals("merchant");
 			ResponseData responseData;
@@ -443,7 +443,6 @@ public class PaymentStatementController {
 			if (responseData.getMeta().getErrno() != 0) {
 				return responseData;
 			}
-			Integer id = Integer.valueOf(idStr);
 			PaymentStatement paymentStatement = paymentStatementService.get(id);
 			StatementConfig statementConfig = statementConfigService.selectById(paymentStatement.getConfigId());
 			String fileName = getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime()));
