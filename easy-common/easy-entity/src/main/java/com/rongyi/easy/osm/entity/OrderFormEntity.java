@@ -80,6 +80,27 @@ public class OrderFormEntity implements Serializable{
     
     /** 1是导购 2是买手*/
     private Integer guideType;
+    /** 是否已提醒买家付款 0 未提醒 1 已提醒**/
+    private Byte isAlert;
+
+    /**除积分外优惠金额**/
+    private BigDecimal discountWithoutScore = null;
+
+	public Byte getIsAlert() {
+		return isAlert;
+	}
+
+	public void setIsAlert(Byte isAlert) {
+		this.isAlert = isAlert;
+	}
+
+	public BigDecimal getDiscountWithoutScore() {
+		return discountWithoutScore;
+	}
+
+	public void setDiscountWithoutScore(BigDecimal discountWithoutScore) {
+		this.discountWithoutScore = discountWithoutScore;
+	}
 
 	public Integer getGuideType() {
 		return guideType;
