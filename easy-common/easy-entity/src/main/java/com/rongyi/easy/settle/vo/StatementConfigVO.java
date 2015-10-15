@@ -84,6 +84,13 @@ public class StatementConfigVO extends StatementConfig{
      */
     private String contactQq;
 
+    
+	/**
+	 * 生成时间
+	 */
+	private String generateTime;
+	
+    
 	public Integer getConfigId() {
 		return configId;
 	}
@@ -182,6 +189,14 @@ public class StatementConfigVO extends StatementConfig{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getGenerateTime() {
+		return generateTime;
+	}
+
+	public void setGenerateTime(String generateTime) {
+		this.generateTime = generateTime;
 	}
     
     
