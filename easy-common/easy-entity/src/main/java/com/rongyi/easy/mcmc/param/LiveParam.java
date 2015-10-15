@@ -1,5 +1,9 @@
 package com.rongyi.easy.mcmc.param;
-
+/**
+ * 直播
+ * @author zzq
+ *
+ */
 public class LiveParam {
 	
 	String liveId;
