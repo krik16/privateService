@@ -90,6 +90,36 @@ public class CouponParam implements Serializable {
      */
     private Date validEndAt;
 
+    /**
+     * 关联活动类型： 未关联[0] 关联翻牌购[1] 关联推送[2]
+     */
+    private Integer activityType;
+
+    /**
+     * 商场名称
+     */
+    private String mallName;
+
+    /**
+     * 店铺名称
+     */
+    private String shopName;
+
+    /**
+     * 卡券发布渠道：大运营平台[0], 商家管理后台[1]
+     */
+    private Integer publishChannel;
+
+    /**
+     * 是否有库存
+     */
+    private Boolean hasStockCount;
+
+    /**
+     * ID集合
+     */
+    private List<String> ids;
+
     public String getShopId() {
         return shopId;
     }
@@ -217,5 +247,53 @@ public class CouponParam implements Serializable {
 
     public void setValidEndAt(Date validEndAt) {
         this.validEndAt = validEndAt;
+    }
+
+    public Integer getActivityType() {
+        return activityType;
+    }
+
+    public void setActivityType(Integer activityType) {
+        this.activityType = activityType;
+    }
+
+    public String getMallName() {
+        return mallName;
+    }
+
+    public void setMallName(String mallName) {
+        this.mallName = mallName;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
+
+    public Integer getPublishChannel() {
+        return publishChannel;
+    }
+
+    public void setPublishChannel(Integer publishChannel) {
+        this.publishChannel = publishChannel;
+    }
+
+    public Boolean getHasStockCount() {
+        return hasStockCount;
+    }
+
+    public void setHasStockCount(Boolean hasStockCount) {
+        this.hasStockCount = hasStockCount;
+    }
+
+    public List<String> getIds() {
+        return ids;
+    }
+
+    public void setIds(List<String> ids) {
+        this.ids = ids;
     }
 }

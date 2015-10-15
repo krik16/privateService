@@ -287,6 +287,10 @@ public class Coupon implements Serializable {
      */
     private Boolean isGeneral;
 
+    /**
+     * 关联活动类型： 未关联[0] 关联翻牌购[1] 关联推送[2]
+     */
+    private Integer activityType;
 
     public String getId() {
         return id;
@@ -784,6 +788,14 @@ public class Coupon implements Serializable {
         this.outChannelName = outChannelName;
     }
 
+    public Integer getActivityType() {
+        return activityType;
+    }
+
+    public void setActivityType(Integer activityType) {
+        this.activityType = activityType;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -839,6 +851,7 @@ public class Coupon implements Serializable {
                 .append("purchaseType", purchaseType)
                 .append("visitedCount", visitedCount)
                 .append("isGeneral", isGeneral)
+                .append("activityType", activityType)
                 .toString();
     }
 }

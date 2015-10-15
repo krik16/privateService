@@ -82,4 +82,13 @@ public interface RoaCouponService {
      * @return
      */
     boolean recoverInventory(String couponId, int quantity);
+
+    /**
+     * 修改卡券关联活动类型 未关联[0] 关联翻牌购[1] 关联推送[2]
+     * @param ids
+     * @param activityType
+     * @return
+     * @throws Exception
+     */
+    boolean updateActivityType(List<String> ids, Integer activityType) throws Exception;
 }
