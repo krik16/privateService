@@ -470,7 +470,6 @@ public class PayController extends BaseController {
 	public ResponseResult statementOffPay(@RequestParam String paymentIds,@RequestParam String statementIds, @RequestParam String tradeNo) {
 		ResponseResult responseResult = new ResponseResult();
 		try {
-			//TODO 线下付款更新对账单状态同时更新付款状态
 			String[] paymentIdsArray = paymentIds.split(",");
 			String[] statementIdsArray = statementIds.split(",");
 			paymentStatementService.updateByOffPay(paymentIdsArray,statementIdsArray, tradeNo, ConstantEnum.STATEMENT_STATUE_12.getCodeInt());
