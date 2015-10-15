@@ -26,13 +26,13 @@ public class OrderModelVO extends OrderModelParam implements Serializable {
 	private String mallName;// 商场名称
 	private String provinceName;// 省名称
 	private String cityName;// 市名称
-	private String guideType;// 1是导购 2是买手
+	private Integer guideType;// 1是导购 2是买手
 
-	public String getGuideType() {
+	public Integer getGuideType() {
 		return guideType;
 	}
 
-	public void setGuideType(String guideType) {
+	public void setGuideType(Integer guideType) {
 		this.guideType = guideType;
 	}
 
