@@ -68,6 +68,26 @@ public class PaymentStatementDto implements Serializable {
      * 下载时间
      */
     private Date downLoadTime;
+    
+    /**
+     * 预计付款时间
+     */
+    private Date predictPayTime;
+    
+    /**
+     * 付款模式
+     */
+    private Byte payMode;
+    
+    /**
+     * 滚动类型
+     */
+    private Byte rollType;
+    
+    /**
+     * 滚动日期
+     */
+    private String rollDay;
 
     public Integer getId() {
         return id;
@@ -259,6 +279,38 @@ public class PaymentStatementDto implements Serializable {
 
 	public void setDownLoadTime(Date downLoadTime) {
 		this.downLoadTime = downLoadTime;
+	}
+
+	public Date getPredictPayTime() {
+		return predictPayTime;
+	}
+
+	public void setPredictPayTime(Date predictPayTime) {
+		this.predictPayTime = predictPayTime;
+	}
+
+	public Byte getPayMode() {
+		return payMode;
+	}
+
+	public void setPayMode(Byte payMode) {
+		this.payMode = payMode;
+	}
+
+	public Byte getRollType() {
+		return rollType;
+	}
+
+	public void setRollType(Byte rollType) {
+		this.rollType = rollType;
+	}
+
+	public String getRollDay() {
+		return rollDay;
+	}
+
+	public void setRollDay(String rollDay) {
+		this.rollDay = rollDay;
 	}
     
 }
