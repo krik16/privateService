@@ -1,6 +1,8 @@
 package com.rongyi.easy.coupon.vo;
 
 import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.coupon.entity.CouponCommodity;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -89,7 +91,6 @@ public class TCCouponVO implements Serializable {
     private String status; // 状态(审核中[0]、已上线[1]、已使用[2]、已过期[3]、已下线[4]), 规则：比如100张优惠券有一张被领用将状态置为2，被领用后就不能对优惠券进行操作了
 
 
-
     private String checkStatus;// 审核状态 0：待审核 1：未通过 2：已通过
 
 
@@ -147,6 +148,7 @@ public class TCCouponVO implements Serializable {
 
 
     private Long version; // 乐观锁
+
 
     public String getId() {
         return id;
@@ -540,6 +542,107 @@ public class TCCouponVO implements Serializable {
 
     public void setAfterSaleService(List<Integer> afterSaleService) {
         this.afterSaleService = afterSaleService;
+    }
+
+    public void setConvertCouponType(Integer convertCouponType) {
+        if (convertCouponType != null) {
+            switch (convertCouponType) {
+                case 0:
+                    this.setCouponType("02"); break;
+                case 2:
+                    this.setCouponType("03"); break;
+            }
+        }
+    }
+
+    public void setConvertDelStatus(Boolean convertDelStatus) {
+        if (Boolean.TRUE.equals(convertDelStatus)) {
+            this.setDelStatus("Y");
+        }
+        if (Boolean.FALSE.equals(convertDelStatus)) {
+            this.setDelStatus("N");
+        }
+    }
+
+    public void setConvertMalls(List<com.rongyi.easy.coupon.entity.CouponMall> convertMalls) {
+        if (CollectionUtils.isNotEmpty(convertMalls)) {
+            List<CouponMall> malls = new ArrayList<>();
+            for (com.rongyi.easy.coupon.entity.CouponMall mall : convertMalls) {
+                if (mall != null) {
+                    CouponMall cmall = new CouponMall();
+                    cmall.setId(mall.getMallId());
+                    cmall.setMallAddress(mall.getMallAddress());
+                    cmall.setMallLogoUrl(mall.getMallLogUrl());
+                    cmall.setMallName(mall.getMallName());
+                    malls.add(cmall);
+                }
+            }
+            this.setMalls(malls);
+        }
+    }
+
+    public void setConvertProducts(List<CouponCommodity> convertProducts) {
+        if (CollectionUtils.isNotEmpty(convertProducts)) {
+            List<CouponProduct> prodList = new ArrayList<>();
+            for (CouponCommodity comm : convertProducts) {
+                if (comm != null) {
+                    CouponProduct prod = new CouponProduct();
+                    prod.setProductId(comm.getCommodityId());
+                    prod.setMarketName(comm.getMallName());
+                    prod.setPics(comm.getPics2List());
+                    prod.setProductName(comm.getCommodityName());
+                    prod.setProductNum(comm.getCommodityCode());
+                    prod.setShopName(comm.getShopName());
+                    prod.setStatus(comm.getStatus() != null ? comm.getStatus().toString() : "");
+                    prodList.add(prod);
+                }
+            }
+            this.setProducts(prodList);
+        }
+    }
+
+    public void setConvertShops(List<com.rongyi.easy.coupon.entity.CouponShop> convertShops) {
+        if (CollectionUtils.isNotEmpty(convertShops)) {
+            List<CouponShop> shops = new ArrayList<>();
+            for (com.rongyi.easy.coupon.entity.CouponShop shop : convertShops) {
+                if (shop != null) {
+                    CouponShop cshop = new CouponShop();
+                    cshop.setId(shop.getShopId());
+                    cshop.setBrandName(shop.getShopBrand());
+                    cshop.setMallName(shop.getShopMallName());
+                    cshop.setShopLogoUrl(shop.getShopLogoUrl());
+                    cshop.setShopName(shop.getShopName());
+                    shops.add(cshop);
+                }
+            }
+            this.setShops(shops);
+        }
+    }
+
+    public void setConvertType(Integer convertType) {
+        if (Integer.valueOf(2).equals(convertType))
+            this.setType("0");
+        if (Integer.valueOf(3).equals(convertType)) {
+            this.setType("1");
+        }
+        if (Integer.valueOf(0).equals(convertType))
+            this.setType("0");
+        if (Integer.valueOf(1).equals(convertType)) {
+            this.setType("1");
+        }
+    }
+
+    // 状态(审核中[0]、已上线[1]、已使用[2]、已过期[3]、已下线[4])
+    public void setConvertStatus(Integer status, Boolean isOffStock, Date publishEndAt) {
+        if (Integer.valueOf(0).equals(status) || Integer.valueOf(1).equals(status))
+            this.setStatus("0");
+        else if (Integer.valueOf(2).equals(status))
+            this.setStatus("1");
+        else if (Boolean.TRUE.equals(isOffStock))
+            this.setStatus("4");
+        else if (new Date().after(publishEndAt))
+            this.setStatus("3");
+
     }
 
     public static class CouponProduct implements Serializable {

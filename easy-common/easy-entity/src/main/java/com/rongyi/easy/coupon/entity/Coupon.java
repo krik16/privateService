@@ -372,6 +372,14 @@ public class Coupon implements Serializable {
         return discount;
     }
 
+    public double getDiscount2Double() {
+        double val = 0D;
+        if (discount != null) {
+            val = BigDecimal.valueOf(discount).divide(BigDecimal.valueOf(100.00D)).setScale(2).doubleValue();
+        }
+        return val;
+    }
+
     public void setDiscount(Integer discount) {
         this.discount = discount;
     }

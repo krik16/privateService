@@ -1,6 +1,11 @@
 package com.rongyi.easy.coupon.entity;
 
+import org.apache.commons.collections.ListUtils;
+import org.apache.commons.lang.StringUtils;
+
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 红包与商品的关联表
@@ -137,6 +142,14 @@ public class CouponCommodity implements Serializable {
 
     public String getPics() {
         return pics;
+    }
+
+    public List<String> getPics2List() {
+        List<String> list = ListUtils.EMPTY_LIST;
+        if (StringUtils.isNotBlank(pics)) {
+            list = Arrays.asList(pics.split(";"));
+        }
+        return list;
     }
 
     public void setPics(String pics) {

@@ -14,6 +14,14 @@ import java.util.List;
 public interface RoaCouponService {
 
     /**
+     * 交易中心-根据id查询卡券
+     *
+     * @param couponId
+     * @return
+     */
+    TCCouponVO findTCCouponById(String couponId);
+
+    /**
      * 减库存
      *
      * @param couponId
@@ -28,14 +36,6 @@ public interface RoaCouponService {
      * @return
      */
     Coupon findById(String couponId);
-
-    /**
-     * 交易中心-根据id查询卡券
-     *
-     * @param couponId
-     * @return
-     */
-    TCCouponVO findTCCouponById(String couponId);
 
 
     /**
