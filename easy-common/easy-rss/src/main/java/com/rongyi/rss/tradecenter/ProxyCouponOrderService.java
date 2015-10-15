@@ -199,5 +199,4 @@ public interface ProxyCouponOrderService {
      */
     Map<String, Object> calcRefundAmount(String orderNo, Integer number, String userId);
 
-    void closeUnpayOrder();
 }
