@@ -55,4 +55,11 @@ public interface RoaCouponService {
      */
     boolean addCouponVistiedCount(String couponId, int visitedCount);
 
+    /**
+     * 代金券下线
+     * @param id
+     * @param status
+     * @return
+     */
+    boolean updateCouponStatus(String id, String status);
 }
