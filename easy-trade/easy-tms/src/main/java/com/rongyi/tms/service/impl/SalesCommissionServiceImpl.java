@@ -2,10 +2,10 @@
  * @Title: SalesCommissionServiceImpl.java 
  * @Package com.rongyi.tms.service.impl 
  * @Description: TODO
- * @author 郑亦梁  zhengyiliang@rongyi.com
- * @date 2015年5月22日 下午3:48:12 
+ * @author 郑亦�?  zhengyiliang@rongyi.com
+ * @date 2015�?5�?22�? 下午3:48:12 
  * @version V1.0   
- * Copyright (C),上海容易网电子商务有限公司
+ * Copyright (C),上海容易网电子商务有限公�?
  */
 package com.rongyi.tms.service.impl;
 
@@ -138,15 +138,16 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 			if (bodyMap != null) {
 				MQCommissionParam mqCommissionParam = MQCommissionParam.mapToEntity(bodyMap);
 
-				// 检查数据库中是否有此订单的记录（因小票上传而产生）
+				// �?查数据库中是否有此订单的记录（因小票上传而产生）
 				SalesCommission salesCommission = selectByOrderNo(mqCommissionParam.getOrderNo());
 				if (salesCommission == null)
 					salesCommission = new SalesCommission();
 
-				// 传入的佣金数据
+				// 传入的佣金数�?
 				salesCommission.setCommissionAmount(mqCommissionParam.getCommissionAmount());
 				salesCommission.setGuideId(mqCommissionParam.getGuideId());
 				salesCommission.setOrderNo(mqCommissionParam.getOrderNo());
+				salesCommission.setGuideType(mqCommissionParam.getGuideType());
 				String buyerId = mqCommissionParam.getBuyerId();
 				LOGGER.debug("[Commission Add] buyerId: " + buyerId);
 				if (buyerId != null) {
@@ -157,10 +158,10 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 				}
 
 				if (salesCommission.getId() != null) {
-					// 记录存在，在佣金生成前已上传过小票
+					// 记录存在，在佣金生成前已上传过小�?
 					updateByOrderNo(salesCommission);
 				} else {
-					// 记录不存在，未传过小票
+					// 记录不存在，未传过小�?
 					salesCommission.setStatus(0);
 					insert(salesCommission);
 				}
@@ -178,7 +179,6 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 	 * 
 	 * @param params
 	 * @return
-	 * @see com.rongyi.tms.service.SalesCommissionService#findByPage(java.util.Map)
 	 */
 
 	@Override
@@ -196,7 +196,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 	 * 
 	 * @param id
 	 * @return
-	 * @see com.rongyi.tms.service.SalesCommissionService#selectOneById(int)
+	 * @see SalesCommissionService#selectOneById(int)
 	 */
 
 	@Override
@@ -209,16 +209,14 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 	/**
 	 * Description
 	 * 
-	 * @param commissions
 	 * @return
-	 * @see com.rongyi.tms.service.SalesCommissionService#UpdateBatch(java.util.List)
 	 */
 
 	@Override
 	public int updateBatch(CheckParam param, String user) {
 		Map<String, Object> paramsMap = param.paramToMap();
 		TransConfigurations transConf = rmmmSettingsService.getLatestTransConfigurations();
-		LOGGER.info("读取的参数为：" + transConf.getCommissionCountMax());
+		LOGGER.info("读取的参数为�?" + transConf.getCommissionCountMax());
 		paramsMap.put("max_commission_times", transConf.getCommissionCountMax() == 0 ? 5 : transConf.getCommissionCountMax());
 		LOGGER.info("MAP:" + paramsMap);
 		int result = this.getBaseDao().updateBySql(NAMESPACE_SALESCOMMISSION + ".batchUpdate", paramsMap);
@@ -233,7 +231,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 					auditLog.setMemo(param.getReason());
 				logService.createCommissionAuditLog(auditLog);
 			}
-			LOGGER.info(param.getStatus() > 0 ? param.getStatus() + "级审核操作通过" : (-param.getStatus() + "级审核未通过"));
+			LOGGER.info(param.getStatus() > 0 ? param.getStatus() + "级审核操作�?�过" : (-param.getStatus() + "级审核未通过"));
 			return 1;
 		} else {
 			return -1;
@@ -261,7 +259,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 	/**
 	 * Description
 	 * 
-	 * @see com.rongyi.tms.service.SalesCommissionService#statisticsCommissionAmountTrigger()
+	 * @see SalesCommissionService#statisticsCommissionAmountTrigger()
 	 */
 
 	@Override
@@ -269,7 +267,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 		List<CommissionAmountTotalVO> vos = this.getBaseDao().selectListBySql(NAMESPACE_SALESCOMMISSION + ".commissionAmountTotal");
 		LOGGER.info("查询到需要发送到  VA 的记录数为：" + vos.size());
 		if (!vos.isEmpty()) {
-			// 每次MQ 消息最多发送50条记录，超过50的话，分次发送
+			// 每次MQ 消息�?多发�?50条记录，超过50的话，分次发�?
 			int times = vos.size() % Constant.SENDSIZE.SIZE == 0 ? vos.size() / Constant.SENDSIZE.SIZE : (vos.size() / Constant.SENDSIZE.SIZE + 1);
 			LOGGER.info("times:" + times);
 			for (int i = 0; i < times; i++) {
@@ -299,11 +297,11 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 					MessageEvent event = MessageEvent.getMessageEvent(bodyMap, "tms", "va", VirtualAccountEventTypeEnum.COMMISSION_BATCH_POST.getCode());
 					sender.convertAndSend(event);
 				} else {
-					LOGGER.info("更新失败！");
+					LOGGER.info("更新失败�?");
 				}
 			}
 		} else {
-			LOGGER.info("定时查询总金额没有查询到数据！");
+			LOGGER.info("定时查询总金额没有查询到数据�?");
 		}
 
 	}
@@ -313,7 +311,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 	 * 
 	 * @param param
 	 * @return
-	 * @see com.rongyi.tms.service.SalesCommissionService#findBonusByPage(com.rongyi.tms.moudle.vo.BonusPageParam)
+	 * @see SalesCommissionService#findBonusByPage(BonusPageParam)
 	 */
 
 	@Override
@@ -327,7 +325,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 	 * 
 	 * @param id
 	 * @return
-	 * @see com.rongyi.tms.service.SalesCommissionService#getUserAccountById(java.lang.Integer)
+	 * @see SalesCommissionService#getUserAccountById(Integer)
 	 */
 
 	@Override
@@ -340,9 +338,9 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 	/**
 	 * Description
 	 * 
-	 * @param Account
+	 * @param account
 	 * @return
-	 * @see com.rongyi.tms.service.SalesCommissionService#getUserIdByUserAccount(java.lang.String)
+	 * @see SalesCommissionService#getUserIdByUserAccount(String)
 	 */
 
 	@Override
@@ -358,7 +356,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 	 * 
 	 * @param commission
 	 * @return
-	 * @see com.rongyi.tms.service.SalesCommissionService#updateBonus(com.rongyi.easy.tms.entity.SalesCommission)
+	 * @see SalesCommissionService#updateBonus(SalesCommission)
 	 */
 
 	@Override
