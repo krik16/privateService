@@ -16,8 +16,8 @@ public class BullInfoVO implements Serializable {
 	private String bullLogo;// 买手头像
 	private Double bullGrade;// 买手评级
 	private Integer bullFansNum;// 用户关注数（粉丝）
-	private Integer bullLiveNum;// 买手直播场次
-	private Integer bullCommodityNum;// 买手持有的商品总数
+	private Integer liveCount;// 买手直播场次
+	private Integer commodityCount;// 买手持有的商品总数
 	private Integer ifAttention = 0;// 是否已关注0否1是
 	private String bullIntroduction;// 买手简介
 	private String bullImId;// 买手环信id
@@ -62,20 +62,20 @@ public class BullInfoVO implements Serializable {
 		this.bullFansNum = bullFansNum;
 	}
 
-	public Integer getBullLiveNum() {
-		return bullLiveNum;
+	public Integer getLiveCount() {
+		return liveCount;
 	}
 
-	public void setBullLiveNum(Integer bullLiveNum) {
-		this.bullLiveNum = bullLiveNum;
+	public void setLiveCount(Integer liveCount) {
+		this.liveCount = liveCount;
 	}
 
-	public Integer getBullCommodityNum() {
-		return bullCommodityNum;
+	public Integer getCommodityCount() {
+		return commodityCount;
 	}
 
-	public void setBullCommodityNum(Integer bullCommodityNum) {
-		this.bullCommodityNum = bullCommodityNum;
+	public void setCommodityCount(Integer commodityCount) {
+		this.commodityCount = commodityCount;
 	}
 
 	public Integer getIfAttention() {
@@ -105,9 +105,8 @@ public class BullInfoVO implements Serializable {
 	@Override
 	public String toString() {
 		return "BullInfoVO [bullId=" + bullId + ", bullNickName=" + bullNickName + ", bullLogo=" + bullLogo + ", bullGrade="
-				+ bullGrade + ", bullFansNum=" + bullFansNum + ", bullLiveNum=" + bullLiveNum + ", bullCommodityNum="
-				+ bullCommodityNum + ", ifAttention=" + ifAttention + ", bullIntroduction=" + bullIntroduction + ", bullImId="
-				+ bullImId + "]";
+				+ bullGrade + ", bullFansNum=" + bullFansNum + ", liveCount=" + liveCount + ", commodityCount=" + commodityCount
+				+ ", ifAttention=" + ifAttention + ", bullIntroduction=" + bullIntroduction + ", bullImId=" + bullImId + "]";
 	}
 
 }
