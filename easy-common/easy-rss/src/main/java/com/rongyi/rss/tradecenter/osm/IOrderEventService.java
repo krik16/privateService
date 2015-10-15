@@ -1,6 +1,6 @@
 package com.rongyi.rss.tradecenter.osm;
 
-import com.rongyi.easy.tradecenter.osm.OrderEventEntity;
+import com.rongyi.easy.osm.entity.OrderEventEntity;
 
 public interface IOrderEventService {
 	
