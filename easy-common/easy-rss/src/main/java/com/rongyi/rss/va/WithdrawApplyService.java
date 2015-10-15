@@ -27,6 +27,6 @@ public interface WithdrawApplyService {
 	* @param accountType 提现账号类型  (0：支付宝，1：银行卡)
 	* @return 
 	*/
-	public ResponseResult withdrawApply(String userId, BigDecimal drawAmount, String accountNo, String accountName, String accountType, Integer guideType);
+	public ResponseResult withdrawApply(String userId, BigDecimal drawAmount, String accountNo, String accountName, String accountType);
 
 }
