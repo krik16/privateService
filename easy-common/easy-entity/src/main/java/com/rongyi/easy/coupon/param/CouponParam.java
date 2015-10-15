@@ -1,8 +1,6 @@
 package com.rongyi.easy.coupon.param;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class CouponParam implements Serializable {
@@ -44,7 +42,10 @@ public class CouponParam implements Serializable {
      */
     private Integer couponType;
 
-    private Map<String, String> orderBy = new HashMap<>();
+    /**
+     * 排序字段
+     */
+    private String orderBy;
 
     public String getShopId() {
         return shopId;
@@ -62,13 +63,6 @@ public class CouponParam implements Serializable {
         this.couponId = couponId;
     }
 
-    public Map<String, String> getOrderBy() {
-        return orderBy;
-    }
-
-    public void setOrderBy(Map<String, String> orderBy) {
-        this.orderBy = orderBy;
-    }
 
     public Integer getStatus() {
         return status;
@@ -108,5 +102,13 @@ public class CouponParam implements Serializable {
 
     public void setCouponType(Integer couponType) {
         this.couponType = couponType;
+    }
+
+    public String getOrderBy() {
+        return orderBy;
+    }
+
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
     }
 }
