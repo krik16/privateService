@@ -199,7 +199,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 	@Override
 	public void generate(Integer id) throws Exception {
 		PaymentStatement paymentStatement = get(id);
-		if (ConstantEnum.STATUS_8.equals(paymentStatement.getStatus())) {
+		if (ConstantEnum.STATUS_8.getCodeByte().equals(paymentStatement.getStatus())) {
 			logger.error("作废对账单不能重新生成。id=" + id);
 			throw new Exception("作废对账单不能重新生成。id=" + id);
 		}
@@ -279,7 +279,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		paymentStatementExcelDto.setPayChannel(getPayChannelName(statementConfig.getPayChannel()));
 		paymentStatementExcelDto.setCouponExcelDtoList(couponExcelDtoList);
 		paymentStatementExcelDto.setCouponCodeExcelDtoList(couponCodeExcelDtoList);
-		ExcelUtils.write(propertyConfigurer.getProperty("settle.template.file"), propertyConfigurer.getProperty("settle.file.path"),
+		ExcelUtils.write(propertyConfigurer.getProperty("settle.template.file"), propertyConfigurer.getProperty("settle.file.path"), statementConfig.getBussinessId(),
 				getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime())), paymentStatementExcelDto);
 	}
 
