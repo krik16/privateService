@@ -15,13 +15,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.rongyi.core.common.PagingVO;
-import com.rongyi.easy.roa.vo.BrandVO;
-import com.rongyi.easy.roa.vo.FilialeVo;
-import com.rongyi.easy.roa.vo.MallGroupVO;
-import com.rongyi.easy.roa.vo.ShopVO;
-import com.rongyi.rss.roa.*;
-import com.rongyi.settle.service.AccessService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,13 +24,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.common.util.DateUtil;
+import com.rongyi.easy.roa.vo.BrandVO;
+import com.rongyi.easy.roa.vo.FilialeVo;
+import com.rongyi.easy.roa.vo.MallGroupVO;
+import com.rongyi.easy.roa.vo.ShopVO;
 import com.rongyi.easy.settle.entity.BussinessInfo;
 import com.rongyi.easy.settle.entity.StatementConfig;
+import com.rongyi.easy.settle.vo.StatementConfigVO;
 import com.rongyi.rss.malllife.roa.ROARedisService;
+import com.rongyi.rss.roa.ROAFilialeService;
+import com.rongyi.rss.roa.ROAMallGroupService;
+import com.rongyi.rss.roa.ROAMallService;
+import com.rongyi.rss.roa.ROAShopService;
+import com.rongyi.rss.roa.RoaBrandService;
 import com.rongyi.settle.constants.CodeEnum;
 import com.rongyi.settle.constants.ConstantEnum;
 import com.rongyi.settle.constants.ResponseData;
+import com.rongyi.settle.service.AccessService;
 import com.rongyi.settle.service.StatementConfigService;
 import com.rongyi.settle.util.MapUtils;
 
@@ -118,7 +123,7 @@ public class StatementConfigController {
 			}
 			if (!statusList.isEmpty())
 				map.put("statusList", statusList);
-			List<StatementConfig> list = statementConfigService.selectPageList(map, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt());
+			List<StatementConfigVO> list = statementConfigService.selectPageList(map, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt());
 			Integer count = statementConfigService.selectPageListCount(map);
 			return ResponseData.success(list, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt(), count);
 		} catch (Exception e) {
@@ -164,10 +169,7 @@ public class StatementConfigController {
 			BussinessInfo bussinessInfo = new BussinessInfo();
 			MapUtils.toObject(statementConfig, map);
 			statementConfig.setCreateAt(DateUtil.getCurrDateTime());
-			if (request.getAttribute("userName") != null){
-				logger.info("userName="+request.getAttribute("userName"));
-				statementConfig.setCreateBy(request.getAttribute("userName").toString());
-			}
+			statementConfig.setCreateBy(getUserName(request));
 			MapUtils.toObject(bussinessInfo, map);
 			bussinessInfo.setCreateAt(DateUtil.getCurrDateTime());
 			statementConfigService.saveStatementConfigAndInfo(statementConfig, bussinessInfo);
@@ -274,7 +276,7 @@ public class StatementConfigController {
 				return responseData;
 			}
 			// 获取用户
-			String userId = "1";
+			String userId =getUserName(request);
 
 			logger.info("============ 对账配置批量审核 =============");
 			String idStr = map.containsKey("ids") ? map.get("ids").toString() : null;
@@ -330,6 +332,7 @@ public class StatementConfigController {
 	 * @Description: 根据类型，名称模糊搜索
 	 * @Author: he
 	 **/
+	@SuppressWarnings("unchecked")
 	@RequestMapping("/relevance")
 	@ResponseBody
 	public ResponseData relevance(HttpServletRequest request, @RequestBody Map<String, Object> map) {
@@ -387,6 +390,13 @@ public class StatementConfigController {
 		}
 		logger.info(result.toString());
 		return result;
+	}
+	
+	private String getUserName(HttpServletRequest request){
+		logger.info("userName="+request.getSession().getAttribute("userName"));
+		if(request.getSession().getAttribute("userName") != null)
+			return request.getSession().getAttribute("userName").toString();
+		return "";
 	}
 
 }

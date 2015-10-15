@@ -13,6 +13,7 @@ import java.util.Map;
 
 import com.rongyi.easy.settle.entity.BussinessInfo;
 import com.rongyi.easy.settle.entity.StatementConfig;
+import com.rongyi.easy.settle.vo.StatementConfigVO;
 
 /**	
  * @Author:  柯军
@@ -32,7 +33,7 @@ public interface StatementConfigService {
 	 * @Author:  柯军
 	 * @datetime:2015年9月17日上午11:23:43
 	 **/
-	public abstract List<StatementConfig> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize); 
+	public abstract List<StatementConfigVO> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize); 
 	
 	/**	
 	 * @Description: 分页总数 
