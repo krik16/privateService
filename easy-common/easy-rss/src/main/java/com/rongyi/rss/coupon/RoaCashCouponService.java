@@ -9,9 +9,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 给ROA提供现金券接口
+ * 给ROA提供红包接口
  *
  * @author Breggor
+ *         废弃，下步删除掉
+ * @see RoaUserRedenvelopeService
  */
 @Deprecated
 public interface RoaCashCouponService {
