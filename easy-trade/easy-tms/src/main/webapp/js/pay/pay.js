@@ -162,12 +162,14 @@ function selectAll() { // 全选or取消全选;
  */
 function morePayClick(){
 	var ids = [];
+	var statementIds = [];
 	var payChannels = [];
 	var payChannel = null;
 	$(":checkbox[name='subBox']").each(function() {
 		if (this.checked == true) {
 			if($("#morePay").val() ==7){
 				ids.push(this.attributes['paymentId'].value);
+				statementIds.push(this.id);
 			}else{
 				ids.push(this.id);
 			}
@@ -187,7 +189,7 @@ function morePayClick(){
 	}
 	if (ids.length != 0) {
 		var payType = $("#morePay").val();
-		validateAccount(ids.join(","), payType,payChannel);
+		validateAccount(ids.join(","),statementIds.join(","), payType,payChannel);
 	}
 
 }
@@ -196,7 +198,7 @@ function morePayClick(){
  * 验证账号合法性
  * @param ids
  */
-function validateAccount(ids,type,payChannel) {
+function validateAccount(ids,statementIds,type,payChannel) {
 	$.post("../pay/validateAccount", {
 		ids : ids
 	}, function(data) {
@@ -205,7 +207,7 @@ function validateAccount(ids,type,payChannel) {
 		} else if(payChannel == 0){
 			morePay(ids, type, payChannel);
 		}else{
-			offPay(ids);
+			offPay(ids,statementIds);
 		}
 	}, "json");
 }
@@ -260,6 +262,84 @@ function morePay(ids, type,payChannel) {
 		}
 	}, "json");
 	
+}
+
+
+function setDefaultTime(){
+	var curDate = new Date();
+	var startDate = curDate.getFullYear()+"/"+(curDate.getMonth()+1)+"/"+curDate.getDate();
+	$(".startTime").val(getFormatDate(new Date(startDate)));
+	$('.endTime').val(getFormatDate());
+}
+
+function clearSearch(){
+	$("input").val("");
+	$("#payChannel").val("");
+}
+
+/**
+ * 对账单付款操作
+ * @param ids
+ * @param type
+ * @param payChannel
+ */
+function statementPay(paymentIds, type,payChannel,statementIds){
+	if(payChannel == 3 || payChannel == 4){
+		offPay(paymentIds,statementIds);
+	}else{
+		morePay(paymentIds, type,payChannel);
+	}	
+}
+
+/**
+ * 线下退款
+ * @param ids
+ */
+function offPay(paymentIds,statementIds) {
+	confirmMSG(
+			"单号：<textarea rows='5' cols='42' id='tradeNo' placeholder='请输入付款凭据单号'></textarea>",
+			function() {
+				var tradeNo = $("#tradeNo").val();
+				if (trimAll(tradeNo) == '') {
+					_util.cmsTip("请输入付款凭据单号");
+					return;
+				} else {
+					if (tradeNo.length > 100) {
+						_util.cmsTip("字数超过限制！");
+						return;
+					} else {
+						statementOffPay(paymentIds,statementIds,tradeNo);
+					}
+			}
+	});
+}
+
+/**
+ * 
+ */
+function statementOffPay(paymentIds,statementIds,tradeNo){
+	$.post("../pay/statementOffPay", {
+		paymentIds:paymentIds,
+		statementIds:statementIds,
+		tradeNo:tradeNo
+	}, function(data) {
+		if (data.success == false)
+			_util.cmsTip(data.message);
+		else{
+			_util.cmsTip("操作成功");		
+			ajaxCommonSearch(url_,getParamsJson());
+		}
+	}, "json");
+}
+
+function payFreeze(id,status) {
+	$.post("../pay/freeze", {
+		id : id,
+		status:status
+	}, function(data) {
+		_util.cmsTip(data.message);
+		ajaxCommonSearch(url_,getParamsJson());
+	}, "json");
 }
 
 function switchCheck(check) {
@@ -394,79 +474,4 @@ function switchCheck(check) {
 		$("#search-price").html('付款金额：');
 	}
 	ajaxCommonSearch(url_, getParamsJson());
-}
-
-function setDefaultTime(){
-	var curDate = new Date();
-	var startDate = curDate.getFullYear()+"/"+(curDate.getMonth()+1)+"/"+curDate.getDate();
-	$(".startTime").val(getFormatDate(new Date(startDate)));
-	$('.endTime').val(getFormatDate());
-}
-
-function clearSearch(){
-	$("input").val("");
-	$("#payChannel").val("");
-}
-
-/**
- * 对账单付款操作
- * @param ids
- * @param type
- * @param payChannel
- */
-function statementPay(paymentIds, type,payChannel,ids){
-	if(payChannel == 3 || payChannel == 4){
-		offPay(ids);
-	}else{
-		morePay(paymentIds, type,payChannel);
-	}	
-}
-
-/**
- * 线下退款
- * @param ids
- */
-function offPay(ids) {
-	confirmMSG(
-			"单号：<textarea rows='5' cols='42' id='tradeNo' placeholder='请输入付款凭据单号'></textarea>",
-			function() {
-				var tradeNo = $("#tradeNo").val();
-				if (trimAll(tradeNo) == '') {
-					_util.cmsTip("请输入付款凭据单号");
-					return;
-				} else {
-					if (tradeNo.length > 100) {
-						_util.cmsTip("字数超过限制！");
-						return;
-					} else {
-						statementOffPay(ids,tradeNo);
-					}
-			}
-	});
-}
-
-/**
- * 
- */
-function statementOffPay(ids,tradeNo){
-	$.post("../pay/statementOffPay", {
-		ids:ids,
-		tradeNo:tradeNo
-	}, function(data) {
-		if (data.success == false)
-			_util.cmsTip(data.message);
-		else{
-			_util.cmsTip("操作成功");		
-		}
-	}, "json");
-}
-
-function payFreeze(id,status) {
-	$.post("../pay/freeze", {
-		id : id,
-		status:status
-	}, function(data) {
-		_util.cmsTip(data.message);
-		ajaxCommonSearch(url_,getParamsJson());
-	}, "json");
 }

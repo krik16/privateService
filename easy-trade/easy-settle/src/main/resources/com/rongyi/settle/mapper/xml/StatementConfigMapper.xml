@@ -40,17 +40,23 @@
 		<result column="is_delete" property="isDelete" jdbcType="TINYINT" />
 		<result column="create_by" property="createBy" jdbcType="VARCHAR" />
 		<result column="pay_account" property="payAccount" jdbcType="VARCHAR" />
-		<result column="generate_time" property="generateTime" jdbcType="VARCHAR" />
+		<result column="generate_time" property="generateTime"
+			jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		pbc.id, rule_code, cooperate_type, biz_id, biz_type, biz_code, biz_name, count_cycle,
-		cycle_start_time, cycle_end_time, is_loop, verify_type,
+		pbc.id, rule_code, cooperate_type, biz_id, biz_type,
+		biz_code, biz_name, count_cycle,
+		cycle_start_time, cycle_end_time,
+		is_loop, verify_type,
 		gen_header_time, gen_hm_time,
-		send_time, datum_type, pay_mode, regular_day, roll_day, roll_type,
+		send_time,
+		datum_type, pay_mode, regular_day, roll_day, roll_type,
 		effect_start_time,
-		effect_end_time, pay_channel, contract_no, link_rule_code, `status`, pbc.create_at,
-		pbc.is_delete, pbc.create_by,bi.pay_account,pbc.gen_hm_time as generate_time
-		</sql>
+		effect_end_time, pay_channel, contract_no,
+		link_rule_code, `status`, pbc.create_at,
+		pbc.is_delete,
+		pbc.create_by,bi.pay_account,pbc.gen_hm_time as generate_time
+	</sql>
 
 	<sql id="Base_list_where_clause">
 		<if test="statusList != null and statusList != ''">
@@ -72,42 +78,46 @@
 			AND biz_name like
 			concat('%',#{bussinessName,jdbcType=VARCHAR},'%')
 		</if>
-		<!-- 规则编码-->
+		<!-- 规则编码 -->
 		<if test="ruleCode != null and ruleCode != ''">
 			AND rule_code like
 			concat('%',#{ruleCode,jdbcType=VARCHAR},'%')
 		</if>
 		<!-- 创建时间 -->
 		<if test="createAtStart != null and createAtStart != ''">
-			AND  pbc.create_at >= #{createAtStart}
+			AND pbc.create_at >= #{createAtStart}
 		</if>
 		<if test="createAtEnd != null and createAtEnd != ''">
 			AND #{createAtEnd} >= pbc. create_at
 		</if>
-		
+
 
 	</sql>
 	<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		select
 		*
-		from payment_bill_config 
+		from payment_bill_config
 		where id = #{id,jdbcType=INTEGER}
 	</select>
 	<delete id="updateDelete" parameterType="java.lang.Integer">
-		update payment_bill_config
+		update
+		payment_bill_config
 		set is_delete = #{is_delete,jdbcType=INTEGER}
-		where id = #{id,jdbcType=INTEGER}
+		where
+		id = #{id,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.rongyi.easy.settle.entity.StatementConfig"
 		useGeneratedKeys="true" keyProperty="id">
 		insert into payment_bill_config (rule_code, cooperate_type, biz_type,
 		biz_id,biz_code, biz_name, count_cycle,
-		cycle_start_time, cycle_end_time, is_loop,
+		cycle_start_time,
+		cycle_end_time, is_loop,
 		verify_type, gen_header_time, gen_hm_time,
 		send_time, datum_type, pay_mode,
 		regular_day, roll_day, roll_type,
 		effect_start_time, effect_end_time, pay_channel,
-		contract_no, link_rule_code,
+		contract_no,
+		link_rule_code,
 		<if test="status != null">
 			`status`,
 		</if>
@@ -117,19 +127,23 @@
 		</if>
 		create_by
 		)
-		values (#{ruleCode,jdbcType=VARCHAR}, #{cooperateType,jdbcType=TINYINT},
+		values (#{ruleCode,jdbcType=VARCHAR},
+		#{cooperateType,jdbcType=TINYINT},
 		#{bussinessType,jdbcType=TINYINT},
 		#{bussinessId,jdbcType=INTEGER},
-		#{bussinessCode,jdbcType=VARCHAR}, #{bussinessName,jdbcType=VARCHAR}, #{countCycle,jdbcType=TINYINT},
+		#{bussinessCode,jdbcType=VARCHAR},
+		#{bussinessName,jdbcType=VARCHAR}, #{countCycle,jdbcType=TINYINT},
 		#{cycleStartTime,jdbcType=TIMESTAMP},
 		#{cycleEndTime,jdbcType=TIMESTAMP}, #{isLoop,jdbcType=TINYINT},
 		#{verifyType,jdbcType=TINYINT},
 		#{generateHeaderTime,jdbcType=VARCHAR},
 		#{generateHmTime,jdbcType=TIME},
-		#{sendTime,jdbcType=TIME}, #{datumType,jdbcType=TINYINT}, #{payMode,jdbcType=TINYINT},
+		#{sendTime,jdbcType=TIME},
+		#{datumType,jdbcType=TINYINT}, #{payMode,jdbcType=TINYINT},
 		#{regularDay,jdbcType=VARCHAR}, #{rollDay,jdbcType=VARCHAR},
 		#{rollType,jdbcType=TINYINT},
-		#{effectStartTime,jdbcType=TIMESTAMP}, #{effectEndTime,jdbcType=TIMESTAMP}, #{payChannel,jdbcType=TINYINT},
+		#{effectStartTime,jdbcType=TIMESTAMP},
+		#{effectEndTime,jdbcType=TIMESTAMP}, #{payChannel,jdbcType=TINYINT},
 		#{contractNo,jdbcType=VARCHAR}, #{linkedRuleCode,jdbcType=VARCHAR},
 		<if test="status != null">
 			#{status,jdbcType=TINYINT},
@@ -200,7 +214,8 @@
 				roll_type = #{rollType,jdbcType=TINYINT},
 			</if>
 			<if test="effectStartTime != null">
-				effect_start_time = #{effectStartTime,jdbcType=TIMESTAMP},
+				effect_start_time =
+				#{effectStartTime,jdbcType=TIMESTAMP},
 			</if>
 			<if test="effectEndTime != null">
 				effect_end_time = #{effectEndTime,jdbcType=TIMESTAMP},
@@ -235,7 +250,8 @@
 		select
 		<include refid="Base_Column_List" />
 		from
-		payment_bill_config pbc left join biz_info bi on pbc.id = bi.config_id
+		payment_bill_config pbc left join biz_info bi on pbc.id =
+		bi.config_id
 		<where>
 			<include refid="Base_list_where_clause" />
 		</where>
@@ -266,8 +282,10 @@
 		select
 		*
 		from payment_bill_config
-		where is_delete=0 AND #{currentTime,jdbcType=TIMESTAMP} BETWEEN
-		effect_start_time AND effect_end_time
+		where `status`=1 and is_delete=0 AND
+		#{currentTime,jdbcType=TIMESTAMP} BETWEEN
+		effect_start_time AND
+		effect_end_time
 	</select>
 
 	<update id="updateStatusByIds" parameterType="map">
@@ -283,4 +301,14 @@
 			</if>
 		</where>
 	</update>
+
+	<select id="selectByRuleCode" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		*
+		from payment_bill_config
+		where rule_code =
+		#{ruleCode,jdbcType=VARCHAR}
+	</select>
+
 </mapper>

@@ -12,6 +12,7 @@ import com.rongyi.easy.settle.entity.PaymentStatement;
 import com.rongyi.easy.settle.entity.StatementConfig;
 import com.rongyi.rss.roa.ROAShopService;
 import com.rongyi.rss.rpb.IRpbService;
+import com.rongyi.rss.rpb.OrderNoGenService;
 import com.rongyi.settle.constants.ConstantEnum;
 import com.rongyi.settle.constants.SettleConstant;
 import com.rongyi.settle.dto.CouponCodeExcelDto;
@@ -25,6 +26,7 @@ import com.rongyi.settle.service.PaymentStatementService;
 import com.rongyi.settle.service.StatementConfigService;
 import com.rongyi.settle.util.DateUtils;
 import com.rongyi.settle.util.ExcelUtils;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -64,6 +66,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 
 	@Autowired
 	private ROAShopService roaShopService;
+	
+	@Autowired
+	OrderNoGenService orderNoGenService;
 
 	@Override
 	public List<PaymentStatementDto> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
@@ -199,7 +204,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 	@Override
 	public void generate(Integer id) throws Exception {
 		PaymentStatement paymentStatement = get(id);
-		if (ConstantEnum.STATUS_8.equals(paymentStatement.getStatus())) {
+		if (ConstantEnum.STATUS_8.getCodeByte().equals(paymentStatement.getStatus())) {
 			logger.error("作废对账单不能重新生成。id=" + id);
 			throw new Exception("作废对账单不能重新生成。id=" + id);
 		}
@@ -216,6 +221,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		paymentStatementNew.setStatus(SettleConstant.PaymentStatementStatus.INIT);
 		paymentStatementNew.setCreateAt(new Date());
 		paymentStatementNew.setIsDelete(new Byte("0"));
+		paymentStatement.setPayNo(orderNoGenService.getOrderNo("3"));
 		insert(paymentStatementNew);
 		createExcel(paymentStatementNew, statementConfig);
 	}
@@ -279,7 +285,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		paymentStatementExcelDto.setPayChannel(getPayChannelName(statementConfig.getPayChannel()));
 		paymentStatementExcelDto.setCouponExcelDtoList(couponExcelDtoList);
 		paymentStatementExcelDto.setCouponCodeExcelDtoList(couponCodeExcelDtoList);
-		ExcelUtils.write(propertyConfigurer.getProperty("settle.template.file"), propertyConfigurer.getProperty("settle.file.path"),
+		ExcelUtils.write(propertyConfigurer.getProperty("settle.template.file"), propertyConfigurer.getProperty("settle.file.path"), statementConfig.getBussinessId(),
 				getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime())), paymentStatementExcelDto);
 	}
 

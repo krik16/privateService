@@ -7,6 +7,7 @@ import com.rongyi.easy.settle.entity.BussinessInfo;
 import com.rongyi.easy.settle.entity.PaymentStatement;
 import com.rongyi.easy.settle.entity.StatementConfig;
 import com.rongyi.rss.roa.ROAShopService;
+import com.rongyi.rss.rpb.OrderNoGenService;
 import com.rongyi.rss.settle.PaymentStatementGenerateService;
 import com.rongyi.settle.constants.SettleConstant;
 import com.rongyi.settle.dto.CouponCodeExcelDto;
@@ -18,6 +19,7 @@ import com.rongyi.settle.service.PaymentStatementService;
 import com.rongyi.settle.service.StatementConfigService;
 import com.rongyi.settle.util.DateUtils;
 import com.rongyi.settle.util.ExcelUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +45,9 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
 
     @Autowired
     private ROAShopService roaShopService;
+    
+    @Autowired
+    private OrderNoGenService orderNoGenService;
 
 
     @Override
@@ -64,6 +69,7 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
                     paymentStatement.setStatus(SettleConstant.PaymentStatementStatus.INIT);
                     paymentStatement.setCreateAt(new Date());
                     paymentStatement.setIsDelete(new Byte("0"));
+                    paymentStatement.setPayNo(orderNoGenService.getOrderNo("3"));
                     paymentStatementService.insert(paymentStatement);
                     createExcel(paymentStatement, statementConfig);
                 }
@@ -122,7 +128,7 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
         paymentStatementExcelDto.setPayChannel(getPayChannelName(statementConfig.getPayChannel()));
         paymentStatementExcelDto.setCouponExcelDtoList(couponExcelDtoList);
         paymentStatementExcelDto.setCouponCodeExcelDtoList(couponCodeExcelDtoList);
-        ExcelUtils.write(propertyConfigurer.getProperty("settle.template.file"), propertyConfigurer.getProperty("settle.file.path"), getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime())), paymentStatementExcelDto);
+        ExcelUtils.write(propertyConfigurer.getProperty("settle.template.file"), propertyConfigurer.getProperty("settle.file.path"), statementConfig.getBussinessId(), getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime())), paymentStatementExcelDto);
     }
 
     private String getPayChannelName(Byte payChannel) {

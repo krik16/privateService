@@ -93,4 +93,13 @@ public interface StatementConfigService {
 	 * @return
 	 */
 	boolean updatePaymentStatusByIds(List<Integer> ids, Integer status, String desc, String userId);
+
+	/**	
+	 * @Description: 根据规则编号查询记录 
+	 * @param string
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年10月15日上午10:52:29
+	 **/
+	public abstract StatementConfig selectByRuleCode(String ruleCode);
 }

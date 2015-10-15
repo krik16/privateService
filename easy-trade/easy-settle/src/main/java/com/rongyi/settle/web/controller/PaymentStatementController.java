@@ -430,9 +430,10 @@ public class PaymentStatementController {
 	 * @Author: xgq
 	 **/
 	@RequestMapping("/info")
-	public ResponseData export(HttpServletRequest request, @RequestBody Map<String, Object> map, HttpServletResponse response) {
+	@ResponseBody
+	public ResponseData export(String systemType, Integer id, HttpServletRequest request, HttpServletResponse response) {
 		try {
-			boolean isMerchant = map.containsKey("systemType") && map.get("systemType").toString().equals("merchant");
+			boolean isMerchant = systemType != null && systemType.equals("merchant");
 			ResponseData responseData;
 			if (isMerchant) {
 				responseData = accessService.checkMerchant(request, "FUND_CHECK_MGR");
@@ -442,11 +443,10 @@ public class PaymentStatementController {
 			if (responseData.getMeta().getErrno() != 0) {
 				return responseData;
 			}
-			Integer id = Integer.valueOf(map.get("id").toString());
 			PaymentStatement paymentStatement = paymentStatementService.get(id);
 			StatementConfig statementConfig = statementConfigService.selectById(paymentStatement.getConfigId());
 			String fileName = getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime()));
-			File f = new File(propertyConfigurer.getProperty("settle.file.path") + fileName);
+			File f = new File(propertyConfigurer.getProperty("settle.file.path") + statementConfig.getBussinessId() + "/" + fileName);
 			BufferedInputStream br = new BufferedInputStream(new FileInputStream(f));
 			byte[] buf = new byte[2048];
 			int len = 0;

@@ -458,7 +458,8 @@ public class PayController extends BaseController {
 
 	/**
 	 * @Description: 线下付款更新状态
-	 * @param ids
+	 * @param paymentIds 付款单id
+	 * @param statementIds  对账单id
 	 * @param payMemo
 	 * @return
 	 * @Author: 柯军
@@ -466,11 +467,12 @@ public class PayController extends BaseController {
 	 **/
 	@RequestMapping("/statementOffPay")
 	@ResponseBody
-	public ResponseResult statementOffPay(@RequestParam String ids, @RequestParam String tradeNo) {
+	public ResponseResult statementOffPay(@RequestParam String paymentIds,@RequestParam String statementIds, @RequestParam String tradeNo) {
 		ResponseResult responseResult = new ResponseResult();
 		try {
-			String[] idArray = ids.split(",");
-			paymentStatementService.updateByOffPay(idArray, tradeNo, 12);
+			String[] paymentIdsArray = paymentIds.split(",");
+			String[] statementIdsArray = statementIds.split(",");
+			paymentStatementService.updateByOffPay(paymentIdsArray,statementIdsArray, tradeNo, ConstantEnum.STATEMENT_STATUE_12.getCodeInt());
 			responseResult.setSuccess(true);
 			responseResult.setMessage("操作成功");
 		} catch (Exception e) {
@@ -492,11 +494,11 @@ public class PayController extends BaseController {
 	 **/
 	@RequestMapping("/freeze")
 	@ResponseBody
-	public ResponseResult freeze(@RequestParam String id, @RequestParam Integer status) {
+	public ResponseResult freeze(@RequestParam String statementIds, @RequestParam Integer status) {
 		ResponseResult responseResult = new ResponseResult();
 		try {
-			String[] idArray = id.split(",");
-			paymentStatementService.updateByOffPay(idArray, null, status);
+			String[] statementIdsArray = statementIds.split(",");
+			paymentStatementService.updateByOffPay(null,statementIdsArray, null, status);
 			responseResult.setSuccess(true);
 			responseResult.setMessage((status == 9 ? "冻结" : "解冻") + "成功");
 		} catch (Exception e) {
