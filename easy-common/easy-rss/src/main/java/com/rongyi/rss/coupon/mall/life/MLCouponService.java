@@ -30,4 +30,6 @@ public interface MLCouponService {
      * @return
      */
     Coupon findCouponById(String couponId);
+
+    boolean addCouponVistiedCount(String couponId, int visitedCount);
 }

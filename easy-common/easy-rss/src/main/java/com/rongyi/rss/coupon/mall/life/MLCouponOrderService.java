@@ -1,4 +1,4 @@
-package com.rongyi.rss.coupon;
+package com.rongyi.rss.coupon.mall.life;
 
 import com.rongyi.easy.coupon.entity.CouponOrder;
 import com.rongyi.easy.coupon.entity.CouponOrderItem;
@@ -13,7 +13,7 @@ import java.util.Map;
  * @Description: (卡券订单接口，提供给mall-shop的controller使用)
  * @date 2015年6月8日 下午5:07:12
  */
-public interface MSCouponOrderService {
+public interface MLCouponOrderService {
 
     /**
      * @param orderNo      订单编号

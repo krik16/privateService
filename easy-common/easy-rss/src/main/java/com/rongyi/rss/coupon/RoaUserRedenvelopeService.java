@@ -78,7 +78,7 @@ public interface RoaUserRedenvelopeService {
      * @param couponCode
      * @return
      */
-    UserCouponVO getCashCoupon(String couponCode);
+    UserCouponVO findCashCoupon(String couponCode);
 
     /**
      * 根据券码查询红包抵扣金额
