@@ -19,6 +19,10 @@ import com.rongyi.easy.rmmm.base.BaseParam;
 public class BullParam extends BaseParam implements Serializable{
 	
 	private Integer bullId;//买手id
+	private Integer currentPage = 1;//  从1开始
+	private Integer pageSize = 3;
+	private String liveId;//直播id
+	private String commodityType;//商品类型", 1所有商品2导购商品3买手商品
 
 	public Integer getBullId() {
 		return bullId;
@@ -27,5 +31,39 @@ public class BullParam extends BaseParam implements Serializable{
 	public void setBullId(Integer bullId) {
 		this.bullId = bullId;
 	}
+
+	public Integer getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(Integer currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public Integer getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public String getLiveId() {
+		return liveId;
+	}
+
+	public void setLiveId(String liveId) {
+		this.liveId = liveId;
+	}
+
+	public String getCommodityType() {
+		return commodityType;
+	}
+
+	public void setCommodityType(String commodityType) {
+		this.commodityType = commodityType;
+	}
+	
+	
 
 }
