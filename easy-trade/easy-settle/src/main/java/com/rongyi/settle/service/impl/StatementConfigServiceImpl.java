@@ -133,4 +133,11 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 		operatioLog.setIsDelete(Byte.valueOf((byte) 0));
 		operationLogMapper.insertSelective(operatioLog);
 	}
+
+	@Override
+	public StatementConfig selectByRuleCode(String ruleCode) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("ruleCode", ruleCode);
+		return this.getBaseDao().selectOneBySql(NAMESPACE+".selectByRuleCode");
+	}
 }

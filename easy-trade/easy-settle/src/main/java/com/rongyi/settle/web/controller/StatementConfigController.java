@@ -165,6 +165,10 @@ public class StatementConfigController {
 			if (responseData.getMeta().getErrno() != 0) {
 				return responseData;
 			}
+			StatementConfig oldStatementConfig = statementConfigService.selectByRuleCode(map.get("ruleCode").toString());
+			if(oldStatementConfig != null)
+				return ResponseData.failure(CodeEnum.FIAL_CONFIG_EXIST.getCodeInt(), CodeEnum.FIAL_CONFIG_EXIST.getValueStr());
+			
 			StatementConfig statementConfig = new StatementConfig();
 			BussinessInfo bussinessInfo = new BussinessInfo();
 			MapUtils.toObject(statementConfig, map);

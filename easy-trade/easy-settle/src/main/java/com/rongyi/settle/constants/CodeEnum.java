@@ -14,6 +14,7 @@ public enum CodeEnum {
 	FIAL_STATEMENT_LIST(1018002, "加载对账单列表失败"),
 	FIAL_PARAMS_ERROR(1018003, "参数传递错误"),
 	FIAL_UPDATE_PAYMENT(1018005, "修改状态失败"),
+	FIAL_CONFIG_EXIST(1018006,"该规则编号的配置记录已存在，请不要提交重复配置记录"),
 	SUCCESS("0", "正常"),;
 
 	private Object code;
