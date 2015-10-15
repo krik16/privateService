@@ -2,6 +2,7 @@ package com.rongyi.rss.coupon;
 
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.coupon.vo.TCCouponVO;
 
 import java.util.List;
 
@@ -27,6 +28,15 @@ public interface RoaCouponService {
      * @return
      */
     Coupon findById(String couponId);
+
+    /**
+     * 交易中心-根据id查询卡券
+     *
+     * @param couponId
+     * @return
+     */
+    TCCouponVO findTCCouponById(String couponId);
+
 
     /**
      * 根据id集合查询
