@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.rss.coupon.mall.life.MLUserCouponService;
 import com.rongyi.rss.tradecenter.RoaProxyCouponOrderService;
 import net.sf.json.JSONObject;
 
@@ -29,7 +30,6 @@ import com.rongyi.easy.entity.MallLifeUserEntity;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
 import com.rongyi.easy.osm.entity.OrderFormEntity;
 import com.rongyi.easy.tms.vo.TradeVO;
-import com.rongyi.rss.coupon.MMUserCouponService;
 import com.rongyi.rss.coupon.RoaCouponOrderService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.rss.mallshop.order.ROAOrderFormService;
@@ -58,7 +58,7 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 	RoaCouponOrderService raoCouponOrderService;
 
 	@Autowired
-	MMUserCouponService mmUserCouponService;
+	MLUserCouponService mmUserCouponService;
 
 	@Autowired
 	ROAOrderFormService rOAOrderFormService;

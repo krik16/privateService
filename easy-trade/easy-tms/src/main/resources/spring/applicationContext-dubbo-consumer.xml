@@ -38,7 +38,7 @@
 	<!-- rpb服务接口 -->
 	<dubbo:reference interface="com.rongyi.rss.rpb.IRpbService" id="rpbService"  version="${dubbo.version}" check="false"/>
 	<!-- 用户现金券  -->
-	<dubbo:reference interface="com.rongyi.rss.coupon.mall.shop.MSUserCouponService" id="mMUserCouponService"  version="${dubbo.version}" check="false"/>
+	<dubbo:reference interface="com.rongyi.rss.coupon.mall.life.MLUserCouponService" id="mMUserCouponService"  version="${dubbo.version}" check="false"/>
 	<dubbo:reference interface="com.rongyi.rss.roa.ROAVirtualAccountGeneralService" id="rOAVirtualAccountGeneralService" version="${dubbo.version}" check="false"/>
 
 	<!-- 获取系统参数 -->
