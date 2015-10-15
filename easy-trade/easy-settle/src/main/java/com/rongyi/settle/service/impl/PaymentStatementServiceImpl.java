@@ -12,6 +12,7 @@ import com.rongyi.easy.settle.entity.PaymentStatement;
 import com.rongyi.easy.settle.entity.StatementConfig;
 import com.rongyi.rss.roa.ROAShopService;
 import com.rongyi.rss.rpb.IRpbService;
+import com.rongyi.rss.rpb.OrderNoGenService;
 import com.rongyi.settle.constants.ConstantEnum;
 import com.rongyi.settle.constants.SettleConstant;
 import com.rongyi.settle.dto.CouponCodeExcelDto;
@@ -25,6 +26,7 @@ import com.rongyi.settle.service.PaymentStatementService;
 import com.rongyi.settle.service.StatementConfigService;
 import com.rongyi.settle.util.DateUtils;
 import com.rongyi.settle.util.ExcelUtils;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -64,6 +66,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 
 	@Autowired
 	private ROAShopService roaShopService;
+	
+	@Autowired
+	OrderNoGenService orderNoGenService;
 
 	@Override
 	public List<PaymentStatementDto> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
@@ -216,6 +221,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		paymentStatementNew.setStatus(SettleConstant.PaymentStatementStatus.INIT);
 		paymentStatementNew.setCreateAt(new Date());
 		paymentStatementNew.setIsDelete(new Byte("0"));
+		paymentStatement.setPayNo(orderNoGenService.getOrderNo("3"));
 		insert(paymentStatementNew);
 		createExcel(paymentStatementNew, statementConfig);
 	}
