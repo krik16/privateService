@@ -1,6 +1,7 @@
 package com.rongyi.rss.coupon.mall.shop;
 
 import com.rongyi.easy.coupon.entity.UserCoupon;
+import com.rongyi.easy.coupon.vo.MMUserCouponVO;
 
 /**
  * 摩店-代金券接口
@@ -14,4 +15,6 @@ public interface MSUserCouponService {
      * @return
      */
     UserCoupon findUserCouponByCode(String couponCode);
+
+    MMUserCouponVO getUserCouponByCouponCode(String couponCode);
 }
