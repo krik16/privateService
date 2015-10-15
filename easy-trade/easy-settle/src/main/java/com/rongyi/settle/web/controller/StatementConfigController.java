@@ -381,7 +381,6 @@ public class StatementConfigController {
 			} else if (type.intValue() == 3) {// 分公司
 				searchMap.put("name", name);
 				List<FilialeVo> list = rOAFilialeService.getFilialeList(searchMap, currpage, pagesize);
-				int totalCount = rOAFilialeService.getFilialeList(searchMap, 0, 0).size();
 				List<RelevanceVO> voList = new ArrayList();
 				if (CollectionUtils.isNotEmpty(list)){
 					for(FilialeVo filiale : list){
