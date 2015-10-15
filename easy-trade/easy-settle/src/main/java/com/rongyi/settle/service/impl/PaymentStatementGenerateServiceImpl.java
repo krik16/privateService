@@ -122,7 +122,7 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
         paymentStatementExcelDto.setPayChannel(getPayChannelName(statementConfig.getPayChannel()));
         paymentStatementExcelDto.setCouponExcelDtoList(couponExcelDtoList);
         paymentStatementExcelDto.setCouponCodeExcelDtoList(couponCodeExcelDtoList);
-        ExcelUtils.write(propertyConfigurer.getProperty("settle.template.file"), propertyConfigurer.getProperty("settle.file.path"), getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime())), paymentStatementExcelDto);
+        ExcelUtils.write(propertyConfigurer.getProperty("settle.template.file"), propertyConfigurer.getProperty("settle.file.path"), statementConfig.getBussinessId(), getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime())), paymentStatementExcelDto);
     }
 
     private String getPayChannelName(Byte payChannel) {

@@ -20,9 +20,10 @@ import com.rongyi.settle.dto.PaymentStatementExcelDto;
  */
 public class ExcelUtils {
 
-	public static void write(String templateFile, String targetFilePath, String targetFileName, PaymentStatementExcelDto excelDto) throws Exception {
+	public static void write(String templateFile, String targetFilePath, String folder, String targetFileName, PaymentStatementExcelDto excelDto) throws Exception {
 		String pathname = templateFile;
-		String pathname2 = targetFilePath + targetFileName;
+		String fileFolder = targetFilePath + folder;
+		String pathname2 = fileFolder + "/" + targetFileName;
 		InputStream in = new FileInputStream(new File(pathname));
 		XSSFWorkbook work = new XSSFWorkbook(in);
 		in.close();
@@ -162,6 +163,10 @@ public class ExcelUtils {
 			shopNameStr.setCellValue(couponCodeExcelDto.getShopName());
 		}
 
+		File file = new File(fileFolder);
+		if (!file.exists() && !file.isDirectory()) {
+			file.mkdir();
+		}
 		FileOutputStream out = new FileOutputStream(pathname2);
 		work.write(out);
 		out.close();
