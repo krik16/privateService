@@ -16,6 +16,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.rongyi.easy.coupon.vo.TCCouponVO;
 import org.apache.log4j.Logger;
 import org.bson.types.ObjectId;
 import org.springframework.beans.BeanUtils;
@@ -26,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.rongyi.core.common.util.JsonUtil;
-import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.entity.UserCoupon;
 import com.rongyi.easy.coupon.vo.UserCouponVO;
 import com.rongyi.rss.coupon.RoaCouponService;
@@ -125,7 +125,7 @@ public class CouponOrderController extends BaseController {
 		// 已购买的优惠券信息
 		List<UserCoupon> list = roaUserCouponService.findUserCouponList(id.longValue(), null);
 		if (!list.isEmpty()) {
-			Coupon coupon = roaCouponService.getCouponById(new ObjectId(list.get(0).getCouponId()));
+			TCCouponVO coupon = roaCouponService.findTCCouponById(list.get(0).getCouponId());
 			CouponVO couponVO = couponOrderDetailVO.new CouponVO();
 			BeanUtils.copyProperties(coupon, couponVO);
 			couponVO.setCount(list.size());
