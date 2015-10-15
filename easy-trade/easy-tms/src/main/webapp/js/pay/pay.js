@@ -327,6 +327,7 @@ function statementOffPay(paymentIds,statementIds,tradeNo){
 			_util.cmsTip(data.message);
 		else{
 			_util.cmsTip("操作成功");		
+			ajaxCommonSearch(url_,getParamsJson());
 		}
 	}, "json");
 }

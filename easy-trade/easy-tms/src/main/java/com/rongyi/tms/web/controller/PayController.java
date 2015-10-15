@@ -473,7 +473,7 @@ public class PayController extends BaseController {
 			//TODO 线下付款更新对账单状态同时更新付款状态
 			String[] paymentIdsArray = paymentIds.split(",");
 			String[] statementIdsArray = statementIds.split(",");
-			paymentStatementService.updateByOffPay(paymentIdsArray,statementIdsArray, tradeNo, 12);
+			paymentStatementService.updateByOffPay(paymentIdsArray,statementIdsArray, tradeNo, ConstantEnum.STATEMENT_STATUE_12.getCodeInt());
 			responseResult.setSuccess(true);
 			responseResult.setMessage("操作成功");
 		} catch (Exception e) {
