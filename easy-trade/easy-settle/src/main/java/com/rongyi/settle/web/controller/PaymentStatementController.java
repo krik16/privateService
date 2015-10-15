@@ -406,10 +406,10 @@ public class PaymentStatementController {
 	@ResponseBody
 	public ResponseData generate(HttpServletRequest request, @RequestBody Map<String, Object> map) {
 		try {
-//			ResponseData responseData = accessService.check(request, "FNC_STLBILL_READD");
-//			if (responseData.getMeta().getErrno() != 0) {
-//				return responseData;
-//			}
+			ResponseData responseData = accessService.check(request, "FNC_STLBILL_READD");
+			if (responseData.getMeta().getErrno() != 0) {
+				return responseData;
+			}
 			Integer id = Integer.valueOf(map.get("id").toString());
 			paymentStatementService.generate(id);
 		} catch (Exception e) {
