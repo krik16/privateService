@@ -70,7 +70,7 @@ public class RmmmUserInfoEntity implements Serializable{
 
     private String userDesc;//用户简介
 
-    private List<Integer> identityTypeList; //用户账号身份列表
+   // private List<Integer> identityTypeList; //用户账号身份列表
 
     public Integer getId() {
 		return id;
@@ -104,13 +104,6 @@ public class RmmmUserInfoEntity implements Serializable{
         this.roleId = roleId;
     }
 
-    public List<Integer> getIdentityTypeList() {
-        return identityTypeList;
-    }
-
-    public void setIdentityTypeList(List<Integer> identityTypeList) {
-        this.identityTypeList = identityTypeList;
-    }
 
     public String getUserPhone() {
         return userPhone;
