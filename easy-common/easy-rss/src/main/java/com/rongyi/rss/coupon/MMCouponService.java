@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 1.优惠券订单提交  2.查询优惠详情浏览次数
  * 优惠券模板接口，提供给mall-shop的controller使用)
- * 废弃不用
+ * 废弃不用，下步删除
  *
  * @see MSCouponService
  */
