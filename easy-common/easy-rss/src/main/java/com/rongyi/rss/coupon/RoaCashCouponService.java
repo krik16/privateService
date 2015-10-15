@@ -76,23 +76,28 @@ public interface RoaCashCouponService {
     boolean allocateCoupon(OldCoupon cashCoupon);
 
     /**
+     * 不能使用
      * 根据卡券Id减少库存
      *
      * @param couponId
      * @param quantity
      * @return
+     * @see RoaCouponService#subtractCouponInventory(String, int)
      */
-    boolean subtractInventory(String couponId, int quantity);
+//    @Deprecated
+//    boolean subtractInventory(String couponId, int quantity);
 
 
     /**
+     * 不能使用
      * 根据卡券Id恢复库存
      *
      * @param couponId
      * @param quantity
      * @return
      */
-    boolean recoverInventory(String couponId, int quantity);
+//    @Deprecated
+//    boolean recoverInventory(String couponId, int quantity);
 
 
     /**

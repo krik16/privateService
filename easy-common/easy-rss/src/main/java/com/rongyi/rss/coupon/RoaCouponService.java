@@ -19,7 +19,7 @@ public interface RoaCouponService {
      * @param couponId
      * @return
      */
-    ResponseVO subtractInventory(String couponId, Integer quantity);
+    ResponseVO subtractCouponInventory(String couponId, Integer quantity);
 
     /**
      * 根据id查询
@@ -57,9 +57,29 @@ public interface RoaCouponService {
 
     /**
      * 代金券下线
+     *
      * @param id
      * @param status
      * @return
      */
     boolean updateCouponStatus(String id, String status);
+
+    /**
+     * 根据卡券Id减少库存
+     *
+     * @param couponId
+     * @param quantity
+     * @return
+     */
+    boolean subtractInventory(String couponId, int quantity);
+
+
+    /**
+     * 根据卡券Id恢复库存
+     *
+     * @param couponId
+     * @param quantity
+     * @return
+     */
+    boolean recoverInventory(String couponId, int quantity);
 }
