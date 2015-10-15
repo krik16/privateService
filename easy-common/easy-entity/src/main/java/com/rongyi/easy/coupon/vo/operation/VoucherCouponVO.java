@@ -119,6 +119,7 @@ public class VoucherCouponVO implements Serializable {
 	
 	/** 卡券发布渠道：大运营平台[0], 商家管理后台[1] */
 	private Integer publishChannel;
+	
 
 	public Integer getPublishChannel() {
 		return publishChannel;
