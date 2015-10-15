@@ -96,7 +96,8 @@ public interface ConstantUtil {
 		String RETURN_URL_ZHIFUBAO_PC_WEB = "http://" + NOTIFY_URL.innernetAddress + "/v5/PCWebPageAlipay/refund_call_back.htm";// 支付宝同步返回页面路径
 		String PAYMENT_TYPE = "1";// 支付类型
 		String ACCOUNT_NAME = "容易网";
-		String ACCOUNT_FULL_NAME = "上海摩购电子商务有限公司";
+		String ACCOUNT_FULL_NAME = "上海容易网电子商务有限公司";
+//		String ACCOUNT_FULL_NAME = "上海摩购电子商务有限公司";
 
 	}
 
