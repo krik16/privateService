@@ -69,7 +69,7 @@ public class WithdrawApplyServiceImpl implements WithdrawApplyService {
 	 * @see com.rongyi.rss.va.WithdrawApplyService#withdrawApply(java.lang.String, java.math.BigDecimal, java.lang.String, java.lang.String, java.lang.String)
 	 */
 	public ResponseResult withdrawApply(String userId, BigDecimal drawAmount, String accountNo, String accountName,
-			String accountType, Integer guideType) {
+			String accountType) {
 		logger.info(">>>>>>>>>提现申请开始");
 
 		ResponseResult result = new ResponseResult();
@@ -85,7 +85,7 @@ public class WithdrawApplyServiceImpl implements WithdrawApplyService {
 				body.put("payAccount", accountNo);
 				body.put("payName", accountName);
 				body.put("applicationNo", applicationNo);
-				body.put("guideType",guideType);
+//				body.put("guideType",guideType);
 
 				BaseEvent event = new BaseEvent();
 				event.setBody(JSONObject.fromObject(body));
