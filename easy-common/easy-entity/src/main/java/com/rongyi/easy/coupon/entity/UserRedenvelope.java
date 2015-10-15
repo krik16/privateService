@@ -84,6 +84,16 @@ public class UserRedenvelope implements Serializable {
      */
     private Date validEndAt;
 
+    /**
+     * 活动Id：目前只有翻牌购
+     */
+    private String activityId;
+
+    /**
+     * 活动名称
+     */
+    private String activityName;
+
     public UserRedenvelope() {
     }
 
@@ -229,6 +239,22 @@ public class UserRedenvelope implements Serializable {
         this.discount = discount;
     }
 
+    public String getActivityId() {
+        return activityId;
+    }
+
+    public void setActivityId(String activityId) {
+        this.activityId = activityId;
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -247,6 +273,8 @@ public class UserRedenvelope implements Serializable {
                 .append("orderNo", orderNo)
                 .append("validStartAt", validStartAt)
                 .append("validEndAt", validEndAt)
+                .append("activityId", activityId)
+                .append("activityName", activityName)
                 .toString();
     }
 }
