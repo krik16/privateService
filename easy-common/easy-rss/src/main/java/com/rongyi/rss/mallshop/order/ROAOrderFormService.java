@@ -5,8 +5,8 @@ import java.util.Map;
 
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
+import com.rongyi.easy.osm.entity.OrderFormEntity;
 import com.rongyi.easy.rmmm.vo.OrderManagerVO;
-import com.rongyi.easy.tradecenter.osm.OrderFormEntity;
 
 public interface ROAOrderFormService {
 	

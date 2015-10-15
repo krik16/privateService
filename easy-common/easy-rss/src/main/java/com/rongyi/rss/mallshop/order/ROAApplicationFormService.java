@@ -3,13 +3,13 @@ package com.rongyi.rss.mallshop.order;
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
+import com.rongyi.easy.osm.entity.ApplicationFormEntity;
 import com.rongyi.easy.rmmm.param.AfterSaleParam;
 import com.rongyi.easy.rmmm.param.RefundDetailParam;
 import com.rongyi.easy.rmmm.param.RefundParam;
 import com.rongyi.easy.rmmm.param.RequestRefundParam;
 import com.rongyi.easy.rmmm.vo.RefundDetailVO;
 import com.rongyi.easy.rmmm.vo.RefundVO;
-import com.rongyi.easy.tradecenter.osm.ApplicationFormEntity;
 
 public interface ROAApplicationFormService {
 	

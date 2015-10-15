@@ -3,9 +3,9 @@
  */
 package com.rongyi.rss.tradecenter.osm;
 
+import com.rongyi.easy.osm.entity.ApplicationFormEntity;
 import com.rongyi.easy.rmmm.param.AfterSaleParam;
 import com.rongyi.easy.rmmm.vo.RefundVO;
-import com.rongyi.easy.tradecenter.osm.ApplicationFormEntity;
 
 /**
  * Copyright (C),上海容易网电子商务有限公司
