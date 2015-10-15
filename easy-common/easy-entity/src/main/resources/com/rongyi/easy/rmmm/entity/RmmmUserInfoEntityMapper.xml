@@ -21,7 +21,7 @@
     <result column="device_uuid" property="deviceUuid" jdbcType="VARCHAR" />
     <result column="card_id" property="cardId" jdbcType="VARCHAR" />
     <result column="share_code" property="sharCode" jdbcType="VARCHAR" />
-
+    <result column="user_desc" property="userDesc" jdbcType="VARCHAR" />
 
   </resultMap>
   <sql id="Example_Where_Clause" >

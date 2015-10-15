@@ -2,6 +2,7 @@ package com.rongyi.easy.rmmm.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 
 public class RmmmUserInfoEntity implements Serializable{
@@ -67,12 +68,24 @@ public class RmmmUserInfoEntity implements Serializable{
     private Integer stopReason;
 	private String sharCode; //邀请码
 
+    private String userDesc;//用户简介
+
+    private List<Integer> identityTypeList; //用户账号身份列表
+
     public Integer getId() {
 		return id;
 	}
 
 	public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getUserDesc() {
+        return userDesc;
+    }
+
+    public void setUserDesc(String userDesc) {
+        this.userDesc = userDesc;
     }
 
     public String getUserLogo() {
@@ -89,6 +102,14 @@ public class RmmmUserInfoEntity implements Serializable{
 
     public void setRoleId(Integer roleId) {
         this.roleId = roleId;
+    }
+
+    public List<Integer> getIdentityTypeList() {
+        return identityTypeList;
+    }
+
+    public void setIdentityTypeList(List<Integer> identityTypeList) {
+        this.identityTypeList = identityTypeList;
     }
 
     public String getUserPhone() {

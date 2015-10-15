@@ -259,4 +259,7 @@ public interface ROAUserService {
      * @throws Exception
      */
     public UserinfoVO selectRmmmUserInfoByUserId(Integer userId) throws Exception;
+
+
+    public Integer editUserDesc(Integer userId,String desc)throws MallShopException;
 }
