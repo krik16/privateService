@@ -29,7 +29,7 @@ public interface ROAOrderService {
 	 * @return
 	 * @throws Exception
 	 */
-	public ResponseResult submitOrder(SubmitOrderParam submitOrderParam, String buyerNum) throws Exception;
+//	public ResponseResult submitOrder(SubmitOrderParam submitOrderParam, String buyerNum) throws Exception;
 	
 	/**
 	 * 订单操作关闭订单API
@@ -46,7 +46,7 @@ public interface ROAOrderService {
 	 * @return
 	 * @throws Exception
 	 */
-	public ResponseResult orderPriceChange(OrderDealedParam param) throws Exception;
+//	public ResponseResult orderPriceChange(OrderDealedParam param) throws Exception;
 	
 	/**
 	 * 我的订单列表
