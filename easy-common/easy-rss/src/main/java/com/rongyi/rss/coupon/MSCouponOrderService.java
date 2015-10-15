@@ -98,13 +98,13 @@ public interface MSCouponOrderService {
     /**
      * 支付成功后处理订单状态
      *
-     * @param orderNo   订单号
-     * @param tradeWay  支付方式
-     * @param paymentNo 支付单号
+     * @param orderNo    订单号
+     * @param tradeWay   支付方式
+     * @param paymentNo  支付单号
      * @param payAccount 支付账户(例如支付宝账户)
      * @return
      */
-    Map<String,Object> processCouponOrderForPayed(String orderNo, int tradeWay, String paymentNo, String payAccount);
+    Map<String, Object> processCouponOrderForPayed(String orderNo, int tradeWay, String paymentNo, String payAccount);
 
     /**
      * 获取未支付订单及订单项
@@ -137,6 +137,7 @@ public interface MSCouponOrderService {
 
     /**
      * 根据订单Id查询订单
+     *
      * @param orderId
      * @return
      */
@@ -145,6 +146,7 @@ public interface MSCouponOrderService {
 
     /**
      * 根据单号查询订单
+     *
      * @param orderNo
      * @return
      */
@@ -152,13 +154,14 @@ public interface MSCouponOrderService {
 
     /**
      * 优惠券订单列表（全部、待付款）
+     *
      * @param paramsMap
      * @param currentPage
      * @param pageSize
      * @return
      */
     Map<String, Object> findAllOrdersByType(Map<String, Object> paramsMap,
-                                              Integer currentPage, Integer pageSize);
+                                            Integer currentPage, Integer pageSize);
 
     /**
      * 根据订单号，券类型查询
@@ -167,32 +170,34 @@ public interface MSCouponOrderService {
      * @param couponType
      * @return
      */
-    List<CouponOrderItem> findItemListByOrderNoAndCouponType(String orderNo, String couponType);
+//    List<CouponOrderItem> findItemListByOrderNoAndCouponType(String orderNo, String couponType);
 
 
     /**
      * 优惠券列表（未消费、已退款、退款中）
+     *
      * @param paramsMap
      * @param currentPage
      * @param pageSize
      * @return
      */
     Map<String, Object> findOrdersByStatus(Map<String, Object> paramsMap,
-                                               Integer currentPage, Integer pageSize);
-    
+                                           Integer currentPage, Integer pageSize);
+
     /**
-    * 本次可退最大金额
-    * @param orderNo
-    * @param number
-    * @param userId
-    * @return
-    */
-   Map<String, Object> calcRefundAmount(String orderNo, Integer number, String userId);
-   
-   /**
-    * 定时关闭未支付订单
-    * @return
-    */
-   @Deprecated
-   void closeUnpayOrder();
+     * 本次可退最大金额
+     *
+     * @param orderNo
+     * @param number
+     * @param userId
+     * @return
+     */
+    Map<String, Object> calcRefundAmount(String orderNo, Integer number, String userId);
+
+    /**
+     * 定时关闭未支付订单
+     *
+     * @return
+     */
+//    void closeUnpayOrder();
 }
