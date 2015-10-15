@@ -72,7 +72,8 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
     }
 
     private String getBatchNoFirst(String shopId) {
-        return (shopId != null) ? shopId : ""  + DateUtils.getYesterdayDateSimpleStr() + "01";
+//        return (shopId != null) ? shopId : ""  + DateUtils.getYesterdayDateSimpleStr() + "01";
+        return DateUtils.getYesterdayDateSimpleStr() + "01";
     }
 
     private void createExcel(PaymentStatement paymentStatement, StatementConfig statementConfig) throws Exception {
