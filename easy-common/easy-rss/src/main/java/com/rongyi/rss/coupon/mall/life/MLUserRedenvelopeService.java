@@ -39,7 +39,7 @@ public interface MLUserRedenvelopeService {
      *            :1}status 1是未使用 2包括已使用，已过期
      * @return
      */
-    public Map<String, Object> getCashCouponListByUserId(Map<String, Object> map);
+    public Map<String, Object> findCashCouponListByUserId(Map<String, Object> map);
 
     /**
      * 现金券 (未使用) 列表查询
@@ -48,7 +48,7 @@ public interface MLUserRedenvelopeService {
      * @param userId
      * @return {product:[],all:[]} 商品key=product，全场key=all
      */
-    public Map<String, List<UserCouponVO>> fetchUnusedCashCoupon(List<String> productIds, String userId);
+    public Map<String, List<UserCouponVO>> findUnusedCashCoupon(List<String> productIds, String userId);
 
     /**
      * 现金券 详情
@@ -56,7 +56,7 @@ public interface MLUserRedenvelopeService {
      * @param couponCode 现金券券码
      * @return UserCouponVO
      */
-    public UserCouponVO getCashCoupon(String couponCode);
+    public UserCouponVO findCashCoupon(String couponCode);
 
     /**
      * 判断现金券是否是有效的
