@@ -75,14 +75,19 @@ public class UserRedenvelope implements Serializable {
     private String orderNo;
 
     /**
-     * 过期时间
+     * 有效期开始时间
      */
-    private Date validAt;
+    private Date validStartAt;
+
+    /**
+     * 有效期结束时间
+     */
+    private Date validEndAt;
 
     public UserRedenvelope() {
     }
 
-    public UserRedenvelope(String name, String userId, String couponId, String couponCode, Integer discount, Integer status, Date receiveAt, Integer channel, Date validAt) {
+    public UserRedenvelope(String name, String userId, String couponId, String couponCode, Integer discount, Integer status, Date receiveAt, Integer channel, Date validStartAt, Date validEndAt) {
         this.name = name;
         this.userId = userId;
         this.couponId = couponId;
@@ -91,7 +96,8 @@ public class UserRedenvelope implements Serializable {
         this.status = status;
         this.receiveAt = receiveAt;
         this.channel = channel;
-        this.validAt = validAt;
+        this.validStartAt = validStartAt;
+        this.validEndAt = validEndAt;
     }
 
     public Integer getId() {
@@ -183,12 +189,20 @@ public class UserRedenvelope implements Serializable {
         this.orderNo = orderNo;
     }
 
-    public Date getValidAt() {
-        return validAt;
+    public Date getValidStartAt() {
+        return validStartAt;
     }
 
-    public void setValidAt(Date validAt) {
-        this.validAt = validAt;
+    public void setValidStartAt(Date validStartAt) {
+        this.validStartAt = validStartAt;
+    }
+
+    public Date getValidEndAt() {
+        return validEndAt;
+    }
+
+    public void setValidEndAt(Date validEndAt) {
+        this.validEndAt = validEndAt;
     }
 
     public String getName() {
@@ -231,7 +245,8 @@ public class UserRedenvelope implements Serializable {
                 .append("useAt", useAt)
                 .append("channel", channel)
                 .append("orderNo", orderNo)
-                .append("validAt", validAt)
+                .append("validStartAt", validStartAt)
+                .append("validEndAt", validEndAt)
                 .toString();
     }
 }

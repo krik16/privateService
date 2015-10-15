@@ -11,6 +11,7 @@ public class UserRedenvelopeParam implements Serializable {
     private String userId;
     private String productId;
     private String status;
+    private String orderBy;
 
     public String getUserId() {
         return userId;
@@ -50,5 +51,13 @@ public class UserRedenvelopeParam implements Serializable {
 
     public void setCurrentPage(int currentPage) {
         this.currentPage = currentPage;
+    }
+
+    public String getOrderBy() {
+        return orderBy;
+    }
+
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
     }
 }

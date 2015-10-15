@@ -7,6 +7,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.beans.Transient;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -339,12 +340,28 @@ public class Coupon implements Serializable {
         return origPrice;
     }
 
+    public double getOrigPrice2Double() {
+        double val = 0D;
+        if (origPrice != null) {
+            val = BigDecimal.valueOf(origPrice).divide(BigDecimal.valueOf(100.00D)).setScale(2).doubleValue();
+        }
+        return val;
+    }
+
     public void setOrigPrice(Integer origPrice) {
         this.origPrice = origPrice;
     }
 
     public Integer getCurrPrice() {
         return currPrice;
+    }
+
+    public double getCurrPrice2Double() {
+        double val = 0D;
+        if (currPrice != null) {
+            val = BigDecimal.valueOf(currPrice).divide(BigDecimal.valueOf(100.00D)).setScale(2).doubleValue();
+        }
+        return val;
     }
 
     public void setCurrPrice(Integer currPrice) {
