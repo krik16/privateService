@@ -10,7 +10,7 @@ public class VoucherCouponVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Integer id;
+	private String id;
 
     /**
      * 代金券名称
@@ -120,11 +120,11 @@ public class VoucherCouponVO implements Serializable {
      */
     private String displayRegion;
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

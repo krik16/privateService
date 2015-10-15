@@ -126,7 +126,7 @@ public class VoucherCouponParam implements Serializable{
 	}
 
 	public void setId(String id) {
-		this.id = id;
+		this.id = StringUtils.isNotBlank(id) ? id.trim() : null;
 	}
 
 	public String getName() {
