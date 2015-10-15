@@ -2,6 +2,7 @@ package com.rongyi.rss.coupon;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.framework.mybatis.pojo.Page;
+import com.rongyi.easy.coupon.entity.UserCoupon;
 import com.rongyi.easy.coupon.entity.UserRedenvelope;
 import com.rongyi.easy.coupon.param.UserRedenvelopeParam;
 import com.rongyi.easy.coupon.vo.UserCouponVO;
@@ -87,4 +88,12 @@ public interface RoaUserRedenvelopeService {
      * @return
      */
     Double getCashCouponDiscount(String couponCode);
+
+    /**
+     * 用户红包信息
+     *
+     * @param couponCode
+     * @return
+     */
+    UserCoupon findUserCouponByCode(String couponCode);
 }

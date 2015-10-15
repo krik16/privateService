@@ -8,12 +8,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 用户卡券：代金券信息
- * 老用户代金券与红包
- * @see UserRedenvelope --新用户红包
+ * 老用户代金券
+ * 红包移出去
+ *
  * @author Breggor
+ * @see UserRedenvelope --用户红包
  */
-@Deprecated
 public class UserCoupon implements Serializable {
 
     private Long id;
