@@ -12,6 +12,7 @@ import com.rongyi.easy.settle.entity.PaymentStatement;
 import com.rongyi.easy.settle.entity.StatementConfig;
 import com.rongyi.rss.roa.ROAShopService;
 import com.rongyi.rss.rpb.IRpbService;
+import com.rongyi.settle.constants.ConstantEnum;
 import com.rongyi.settle.constants.SettleConstant;
 import com.rongyi.settle.dto.CouponCodeExcelDto;
 import com.rongyi.settle.dto.CouponExcelDto;
@@ -198,6 +199,10 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 	@Override
 	public void generate(Integer id) throws Exception {
 		PaymentStatement paymentStatement = get(id);
+		if (ConstantEnum.STATUS_8.equals(paymentStatement.getStatus())) {
+			logger.error("作废对账单不能重新生成。id=" + id);
+			throw new Exception("作废对账单不能重新生成。id=" + id);
+		}
 		StatementConfig statementConfig = statementConfigService.selectById(paymentStatement.getConfigId());
 		cancel(id);
 

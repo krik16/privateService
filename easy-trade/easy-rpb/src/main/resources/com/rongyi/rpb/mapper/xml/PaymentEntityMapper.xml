@@ -423,5 +423,17 @@
 			#{item}
 		</foreach>
 	</select>
+	<update id="updateByIds" parameterType="java.lang.Integer">
+		update payment_order
+		<set>
+			status = #{status,jdbcType=INTEGER},
+		</set>
+		where id  in
+		<foreach item="item" index="index" collection="ids" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+	
 </mapper>
 

@@ -33,13 +33,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.common.util.DateUtil;
+import com.rongyi.easy.roa.vo.BrandVO;
+import com.rongyi.easy.roa.vo.FilialeVo;
+import com.rongyi.easy.roa.vo.MallGroupVO;
+import com.rongyi.easy.roa.vo.ShopVO;
 import com.rongyi.easy.settle.entity.BussinessInfo;
 import com.rongyi.easy.settle.entity.StatementConfig;
+import com.rongyi.easy.settle.vo.StatementConfigVO;
 import com.rongyi.rss.malllife.roa.ROARedisService;
+import com.rongyi.rss.roa.ROAFilialeService;
+import com.rongyi.rss.roa.ROAMallGroupService;
+import com.rongyi.rss.roa.ROAMallService;
+import com.rongyi.rss.roa.ROAShopService;
+import com.rongyi.rss.roa.RoaBrandService;
 import com.rongyi.settle.constants.CodeEnum;
 import com.rongyi.settle.constants.ConstantEnum;
 import com.rongyi.settle.constants.ResponseData;
+import com.rongyi.settle.service.AccessService;
 import com.rongyi.settle.service.StatementConfigService;
 import com.rongyi.settle.util.MapUtils;
 
@@ -62,13 +74,13 @@ public class StatementConfigController {
 	private ROARedisService redisService;
 
 	@Autowired
-	private ROAMallGroupService roaMallGroupService ;
+	private ROAMallGroupService roaMallGroupService;
 
 	@Autowired
 	private ROAMallService rOAMallService;
 
-//	@Autowired
-//	private ROAAreaService rOAAreaService ;
+	// @Autowired
+	// private ROAAreaService rOAAreaService ;
 
 	@Autowired
 	private RoaBrandService roaBrandService;
@@ -92,8 +104,9 @@ public class StatementConfigController {
 	@RequestMapping("/list")
 	@ResponseBody
 	public ResponseData getPageList(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+		logger.info("====config list==== params="+map.toString());
 		try {
-			if (map.containsKey("status")) {
+			if (map.containsKey("searchStatus")) {
 				ResponseData responseData = accessService.check(request, "FNC_STLCONF_VIEW");
 				if (responseData.getMeta().getErrno() != 0) {
 					return responseData;
@@ -106,19 +119,20 @@ public class StatementConfigController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return  ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
+			return ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
 		}
 		try {
 			Integer currentPage = Integer.valueOf(map.get("currentPage").toString());
 			List<Byte> statusList = new ArrayList<Byte>();
 			if (map.get("searchStatus") != null && map.get("searchStatus").equals(0)) {
 				statusList.add((byte) 0);
-			} else {
+			} else if (map.get("searchStatus") != null && map.get("searchStatus").equals(1)) {
 				statusList.add((byte) 1);
 				statusList.add((byte) 2);
 			}
-			map.put("statusList", statusList);
-			List<StatementConfig> list = statementConfigService.selectPageList(map, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt());
+			if (!statusList.isEmpty())
+				map.put("statusList", statusList);
+			List<StatementConfigVO> list = statementConfigService.selectPageList(map, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt());
 			Integer count = statementConfigService.selectPageListCount(map);
 			return ResponseData.success(list, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt(), count);
 		} catch (Exception e) {
@@ -138,6 +152,7 @@ public class StatementConfigController {
 	@RequestMapping("/add")
 	@ResponseBody
 	public ResponseData add(HttpServletRequest request) {
+		logger.info("====config add====");
 		return ResponseData.success(getRuleCode());
 	}
 
@@ -152,6 +167,7 @@ public class StatementConfigController {
 	@RequestMapping("/save")
 	@ResponseBody
 	public ResponseData save(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+		logger.info("====config save==== params="+map.toString());
 		try {
 			ResponseData responseData = accessService.check(request, "FNC_STL_ADD");
 			if (responseData.getMeta().getErrno() != 0) {
@@ -161,11 +177,12 @@ public class StatementConfigController {
 			BussinessInfo bussinessInfo = new BussinessInfo();
 			MapUtils.toObject(statementConfig, map);
 			statementConfig.setCreateAt(DateUtil.getCurrDateTime());
+			statementConfig.setCreateBy(getUserName(request));
 			MapUtils.toObject(bussinessInfo, map);
 			bussinessInfo.setCreateAt(DateUtil.getCurrDateTime());
 			statementConfigService.saveStatementConfigAndInfo(statementConfig, bussinessInfo);
 			String ruleCode = statementConfig.getRuleCode();
-			if (StringUtils.isNotBlank(ruleCode) && ruleCode.length()>10) {
+			if (StringUtils.isNotBlank(ruleCode) && ruleCode.length() > 10) {
 				redisService.set(ruleCode.substring(0, 9), ruleCode);
 				redisService.expire(ruleCode.substring(0, 9), 60 * 60 * 48);// 两天后失效
 			}
@@ -187,6 +204,7 @@ public class StatementConfigController {
 	@RequestMapping("/update")
 	@ResponseBody
 	public ResponseData update(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+		logger.info("====config update==== params="+map.toString());
 		try {
 			ResponseData responseData = accessService.check(request, "FNC_STL_EDIT");
 			if (responseData.getMeta().getErrno() != 0) {
@@ -210,6 +228,7 @@ public class StatementConfigController {
 	@RequestMapping("/modify")
 	@ResponseBody
 	public ResponseData modify(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+		logger.info("====config modify==== params="+map.toString());
 		try {
 			ResponseData responseData = accessService.check(request, "FNC_STL_CHANGE");
 			if (responseData.getMeta().getErrno() != 0) {
@@ -233,6 +252,7 @@ public class StatementConfigController {
 	@RequestMapping("/info")
 	@ResponseBody
 	public ResponseData info(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+		logger.info("====config info==== params="+map.toString());
 		try {
 			ResponseData responseData = accessService.check(request, "FNC_STLCONF_VIEW");
 			if (responseData.getMeta().getErrno() != 0) {
@@ -256,6 +276,7 @@ public class StatementConfigController {
 	@RequestMapping("/verify")
 	@ResponseBody
 	public ResponseData verify(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+		logger.info("====config verify==== params="+map.toString());
 		ResponseData result = null;
 		try {
 			ResponseData responseData = accessService.check(request, "FNC_STLCONF_VFY");
@@ -263,7 +284,7 @@ public class StatementConfigController {
 				return responseData;
 			}
 			// 获取用户
-			String userId = "1";
+			String userId =getUserName(request);
 
 			logger.info("============ 对账配置批量审核 =============");
 			String idStr = map.containsKey("ids") ? map.get("ids").toString() : null;
@@ -319,16 +340,17 @@ public class StatementConfigController {
 	 * @Description: 根据类型，名称模糊搜索
 	 * @Author: he
 	 **/
+	@SuppressWarnings("unchecked")
 	@RequestMapping("/relevance")
 	@ResponseBody
 	public ResponseData relevance(HttpServletRequest request, @RequestBody Map<String, Object> map) {
 		ResponseData result = null;
 		try {
 			logger.info("============ 类型，名称模糊搜索 =============");
-			logger.info(map+"");
+			logger.info(map + "");
 			String name = map.containsKey("name") ? map.get("name").toString() : null;
 			Integer type = map.containsKey("type") ? Integer.valueOf(map.get("type").toString()) : null;
-			Integer currpage = map.get("currpage")!=null?Integer.parseInt(map.get("currpage").toString()):1;
+			Integer currpage = map.get("currpage") != null ? Integer.parseInt(map.get("currpage").toString()) : 1;
 			Integer pagesize = 15;
 			if (org.apache.commons.lang.StringUtils.isBlank(name)) {
 				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
@@ -336,29 +358,30 @@ public class StatementConfigController {
 			Map<String, Object> searchMap = new HashMap<>();
 			searchMap.put("currpage", currpage);
 			searchMap.put("pagesize", pagesize);
-			if (type.intValue()==0){//集团
+			if (type.intValue() == 0) {// 集团
 				searchMap.put("name", name);
-				List<MallGroupVO> list =  roaMallGroupService.getMallGroups(searchMap);
+				List<MallGroupVO> list = roaMallGroupService.getMallGroups(searchMap);
 				int count = 0;
-				if(currpage==1){
+				if (currpage == 1) {
 					searchMap.put("currpage", null);
 					count = roaMallGroupService.getMallGroups(searchMap).size();
- 				}
+				}
 				result = ResponseData.success(list, currpage, pagesize, count);
-			}else if(type.intValue()==1){//商场
+			} else if (type.intValue() == 1) {// 商场
 				searchMap.put("name", name);
 				Map<String, Object> resultMap = rOAMallService.getMalls(searchMap, currpage, pagesize);
-				//如果当前页为1 查询总记录数
-				int count = resultMap.containsKey("totalCount")?Integer.valueOf(resultMap.get("totalCount").toString()):0;
+				// 如果当前页为1 查询总记录数
+				int count = resultMap.containsKey("totalCount") ? Integer.valueOf(resultMap.get("totalCount").toString()) : 0;
 				result = ResponseData.success(resultMap.get("list"), currpage, pagesize, count);
-			}else if(type.intValue()==2){//品牌
+			} else if (type.intValue() == 2) {// 品牌
 				searchMap.put("cname", name);
 				PagingVO<BrandVO> brands = roaBrandService.getBrandListByMap(searchMap, currpage, pagesize);
 				logger.info("brandsCount" + brands.getRowCnt());
 				result = ResponseData.success(brands.getDataList(), currpage, pagesize, brands.getRowCnt());
-			}else if (type.intValue()==3){//分公司
+			} else if (type.intValue() == 3) {// 分公司
 				searchMap.put("name", name);
 				List<FilialeVo> list = rOAFilialeService.getFilialeList(searchMap, currpage, pagesize);
+				int totalCount = rOAFilialeService.getFilialeList(searchMap, 0, 0).size();
 				List<RelevanceVO> voList = new ArrayList();
 				if (CollectionUtils.isNotEmpty(list)){
 					for(FilialeVo filiale : list){
@@ -370,13 +393,13 @@ public class StatementConfigController {
 				}
 				int totalCount = rOAFilialeService.getFilialeList(searchMap, 0,0).size();
 				result = ResponseData.success(list, currpage, pagesize, totalCount);
-			}else if (type.intValue()==4){//店铺
+			} else if (type.intValue() == 4) {// 店铺
 				searchMap.put("shopName", name);
-				searchMap.put("sort", "noSort");//暂未定排序字段
+				searchMap.put("sort", "noSort");// 暂未定排序字段
 				Map<String, Object> resultMap = roaShopService.getShops(searchMap, currpage, pagesize);
-				logger.info("此次查询关联店铺数"+resultMap.get("totalCount"));
+				logger.info("此次查询关联店铺数" + resultMap.get("totalCount"));
 				List<ShopVO> list = (List<ShopVO>) resultMap.get("list");
-				int count = resultMap.containsKey("totalCount")?Integer.valueOf(resultMap.get("totalCount").toString()):0;
+				int count = resultMap.containsKey("totalCount") ? Integer.valueOf(resultMap.get("totalCount").toString()) : 0;
 				result = ResponseData.success(list, currpage, pagesize, count);
 			}
 		} catch (Exception e) {
@@ -385,6 +408,13 @@ public class StatementConfigController {
 		}
 		logger.info(result.toString());
 		return result;
+	}
+	
+	private String getUserName(HttpServletRequest request){
+		logger.info("userName="+request.getSession().getAttribute("userName"));
+		if(request.getSession().getAttribute("userName") != null)
+			return request.getSession().getAttribute("userName").toString();
+		return "";
 	}
 
 }

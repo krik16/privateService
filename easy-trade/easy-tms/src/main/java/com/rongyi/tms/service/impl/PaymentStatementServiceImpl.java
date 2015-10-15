@@ -8,16 +8,20 @@
 
 package com.rongyi.tms.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rongyi.core.common.util.DateUtil;
+import com.rongyi.core.constant.PayEnum;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.rpb.vo.PayNotifyVO;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
+import com.rongyi.rss.rpb.IRpbService;
 import com.rongyi.tms.constants.ConstantEnum;
 import com.rongyi.tms.service.PaymentStatementService;
 
@@ -32,6 +36,10 @@ import com.rongyi.tms.service.PaymentStatementService;
 public class PaymentStatementServiceImpl extends BaseServiceImpl implements PaymentStatementService {
 
 	private static final String NAMESPACE = "com.rongyi.tms.mapper.PaymentStatementMapper";
+	
+	@Autowired
+	IRpbService rpbService;
+	
 
 	@Override
 	public List<PaymentStatementDto> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
@@ -68,7 +76,48 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		map.put("payTime", DateUtil.getCurrDateTime());
 		map.put("status", status);
 		this.getBaseDao().updateBySql(NAMESPACE + ".updateByOffPay", map);
+		rpbService.updatePaymentStatus(ids, ConstantEnum.TRADE_STATUS_PAY_YES.getCodeInt(), ConstantEnum.TRADE_TYPE_STATEMENT.getCodeInt());
+	}
+	
+	@Override
+	public void updateByIds(Map<String,Object> map){
+		this.getBaseDao().updateBySql(NAMESPACE + ".updateByIds", map);
+	}
 
+	@Override
+	public Map<String, Object> validatePay(String[] ids, Integer operateType) {
+		List<PaymentStatementDto> list = new ArrayList<PaymentStatementDto>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("ids", ids);
+		list = this.getBaseDao().selectListBySql(NAMESPACE + ".validatePay", map);
+		byte payChannel = 0;
+		if (!list.isEmpty())
+			payChannel = list.get(0).getPayChannel();
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("success", true);
+		resultMap.put("message", "验证通过");
+		for (PaymentStatementDto paymentStatementDto : list) {
+			if (PayEnum.STATEMENT_ONE.getCode().equals(operateType)) {// 单条付款
+				if (!ConstantEnum.PAY_CHANNEL_ZHIFUBAO.getCodeByte().equals(paymentStatementDto.getPayChannel())
+						&& !ConstantEnum.STATEMENT_STATUE_11.getCodeByte().equals(paymentStatementDto.getStatus())) {
+					resultMap.put("success", false);
+					resultMap.put("message", "对账单属于线下支付，尚未被下载，请下载付款后再操作");
+					break;
+				}
+			}
+			if (PayEnum.STATEMENT_MORE.getCode().equals(operateType)) {// 多条支付
+				if (!paymentStatementDto.getPayChannel().equals(payChannel)) {
+					resultMap.put("success", false);
+					resultMap.put("message", "您只能选择一种支付方式进行批量付款操作");
+					break;
+				}else if(ConstantEnum.STATEMENT_STATUE_9.getCodeByte().equals(paymentStatementDto.getStatus())){
+					resultMap.put("success", false);
+					resultMap.put("message", "批量付款列表中存在付款冻结记录，请重新选择操作");
+					break;
+				}
+			}
+		}
+		return resultMap;
 	}
 
 }

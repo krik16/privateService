@@ -703,4 +703,10 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 	public String getPayNo() {
 		return orderNoGenService.getOrderNo("0");
 	}
+
+	@Override
+	public void updateByIds(String[] ids, Map<String, Object> map) {
+		map.put("ids", ids);
+		this.getBaseDao().updateBySql(PAYMENTENTITY_NAMESPACE + ".updateByIds", map);
+	}
 }
