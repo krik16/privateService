@@ -446,7 +446,7 @@ public class PaymentStatementController {
 			PaymentStatement paymentStatement = paymentStatementService.get(id);
 			StatementConfig statementConfig = statementConfigService.selectById(paymentStatement.getConfigId());
 			String fileName = getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime()));
-			File f = new File(propertyConfigurer.getProperty("settle.file.path") + fileName);
+			File f = new File(propertyConfigurer.getProperty("settle.file.path") + statementConfig.getBussinessId() + "/" + fileName);
 			BufferedInputStream br = new BufferedInputStream(new FileInputStream(f));
 			byte[] buf = new byte[2048];
 			int len = 0;
