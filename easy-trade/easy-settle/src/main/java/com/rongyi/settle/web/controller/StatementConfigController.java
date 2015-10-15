@@ -22,6 +22,8 @@ import com.rongyi.easy.roa.vo.MallGroupVO;
 import com.rongyi.easy.roa.vo.ShopVO;
 import com.rongyi.rss.roa.*;
 import com.rongyi.settle.service.AccessService;
+import com.rongyi.settle.web.controller.vo.RelevanceVO;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -129,7 +131,6 @@ public class StatementConfigController {
 	/**
 	 * @Description: 增加配置
 	 * @param request
-	 * @param map
 	 * @return
 	 * @Author: 柯军
 	 * @datetime:2015年9月21日下午2:55:32
@@ -358,6 +359,15 @@ public class StatementConfigController {
 			}else if (type.intValue()==3){//分公司
 				searchMap.put("name", name);
 				List<FilialeVo> list = rOAFilialeService.getFilialeList(searchMap, currpage, pagesize);
+				List<RelevanceVO> voList = new ArrayList();
+				if (CollectionUtils.isNotEmpty(list)){
+					for(FilialeVo filiale : list){
+						RelevanceVO vo = new RelevanceVO();
+						vo.setId(filiale.getId().toString());
+						vo.setName(filiale.getName());
+						voList.add(vo);
+					}
+				}
 				int totalCount = rOAFilialeService.getFilialeList(searchMap, 0,0).size();
 				result = ResponseData.success(list, currpage, pagesize, totalCount);
 			}else if (type.intValue()==4){//店铺
