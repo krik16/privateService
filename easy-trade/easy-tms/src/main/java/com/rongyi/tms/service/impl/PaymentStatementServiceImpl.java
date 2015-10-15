@@ -69,14 +69,14 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 	}
 
 	@Override
-	public void updateByOffPay(String[] ids, String tradeNo, Integer status) {
+	public void updateByOffPay(String[] paymentIdsArray,String[] statementIdsArray, String tradeNo, Integer status) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("ids", ids);
+		map.put("ids", statementIdsArray);
 		map.put("tradeNo", tradeNo);
 		map.put("payTime", DateUtil.getCurrDateTime());
 		map.put("status", status);
 		this.getBaseDao().updateBySql(NAMESPACE + ".updateByOffPay", map);
-		rpbService.updatePaymentStatus(ids, ConstantEnum.TRADE_STATUS_PAY_YES.getCodeInt(), ConstantEnum.TRADE_TYPE_STATEMENT.getCodeInt());
+		rpbService.updatePaymentStatus(paymentIdsArray, ConstantEnum.TRADE_STATUS_PAY_YES.getCodeInt(), ConstantEnum.TRADE_TYPE_STATEMENT.getCodeInt());
 	}
 	
 	@Override
