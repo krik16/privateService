@@ -12,7 +12,7 @@ import com.rongyi.easy.rmmm.entity.ShopInfoEntity;
 import com.rongyi.easy.rmmm.vo.OrderManagerVO;
 import com.rongyi.easy.rmmm.vo.ParentOrderVO;
 import com.rongyi.easy.rmmm.vo.SonOrderVO;
-import com.rongyi.rss.coupon.MMUserCouponService;
+import com.rongyi.rss.coupon.mall.shop.MSUserCouponService;
 import com.rongyi.rss.malllife.roa.ROACommodityService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.rss.mallshop.order.ROAOrderDetailFormService;
@@ -71,7 +71,7 @@ public class OrderManagerController extends BaseController {
 	ROAMalllifeUserService roaMalllifeUserService;
 
 	@Autowired
-	MMUserCouponService mMUserCouponService;
+	MSUserCouponService mMUserCouponService;
 
 	@Autowired
 	ROACommodityService commodityService;

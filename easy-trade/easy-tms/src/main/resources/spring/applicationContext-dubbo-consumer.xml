@@ -38,7 +38,7 @@
 	<!-- rpb服务接口 -->
 	<dubbo:reference interface="com.rongyi.rss.rpb.IRpbService" id="rpbService"  version="${dubbo.version}" check="false"/>
 	<!-- 用户现金券  -->
-	<dubbo:reference interface="com.rongyi.rss.coupon.MMUserCouponService" id="mMUserCouponService"  version="${dubbo.version}" check="false"/>
+	<dubbo:reference interface="com.rongyi.rss.coupon.mall.shop.MSUserCouponService" id="mMUserCouponService"  version="${dubbo.version}" check="false"/>
 	<dubbo:reference interface="com.rongyi.rss.roa.ROAVirtualAccountGeneralService" id="rOAVirtualAccountGeneralService" version="${dubbo.version}" check="false"/>
 
 	<!-- 获取系统参数 -->
@@ -50,8 +50,6 @@
 	<dubbo:reference interface="com.rongyi.rss.malllife.roa.ROARedisService" id="rOARedisService" version="${dubbo.version}" check="false" />
 	<!-- 根据订单号查询优惠券信息 -->
 	<dubbo:reference interface="com.rongyi.rss.coupon.RoaCouponOrderService" id="roaCouponOrderService"  version="${dubbo.version}" check="false"/>
-	<!-- 获取用户订单使用优惠券记录 -->
-	<dubbo:reference interface="com.rongyi.rss.coupon.MMUserCouponService" id="mmUserCouponService"  version="${dubbo.version}" check="false"/>
 	<!-- 黑名单列表 -->
 	<dubbo:reference interface="com.rongyi.rss.cheat.IAntiCheatService" id="antiCheatService"  version="${dubbo.version}" check="false"/>
 	<!--交易中心-->
