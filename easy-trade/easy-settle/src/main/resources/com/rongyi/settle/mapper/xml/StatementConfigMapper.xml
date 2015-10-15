@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="com.rongyi.settle.mapper.StatementConfigMapper">
-	<resultMap id="BaseResultMap" type="com.rongyi.easy.settle.entity.StatementConfig">
+	<resultMap id="BaseResultMap" type="com.rongyi.easy.settle.vo.StatementConfigVO">
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="rule_code" property="ruleCode" jdbcType="VARCHAR" />
 		<result column="cooperate_type" property="cooperateType"
@@ -40,6 +40,7 @@
 		<result column="is_delete" property="isDelete" jdbcType="TINYINT" />
 		<result column="create_by" property="createBy" jdbcType="VARCHAR" />
 		<result column="pay_account" property="payAccount" jdbcType="VARCHAR" />
+		<result column="generate_time" property="generateTime" jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
 		pbc.id, rule_code, cooperate_type, biz_id, biz_type, biz_code, biz_name, count_cycle,
@@ -48,8 +49,8 @@
 		send_time, datum_type, pay_mode, regular_day, roll_day, roll_type,
 		effect_start_time,
 		effect_end_time, pay_channel, contract_no, link_rule_code, `status`, pbc.create_at,
-		pbc.is_delete, pbc.create_by,bi.pay_account
-	</sql>
+		pbc.is_delete, pbc.create_by,bi.pay_account,bi.gen_hm_time as generate_time
+		</sql>
 
 	<sql id="Base_list_where_clause">
 		<if test="statusList != null and statusList != ''">

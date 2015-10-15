@@ -19,8 +19,8 @@ import org.springframework.test.annotation.Rollback;
 import org.testng.annotations.Test;
 
 import com.rongyi.easy.settle.entity.StatementConfig;
+import com.rongyi.easy.settle.vo.StatementConfigVO;
 import com.rongyi.settle.BaseTest;
-import com.rongyi.settle.service.StatementConfigService;
 
 /**	
  * @Author:  柯军
@@ -84,7 +84,7 @@ public class StatementConfigServiceTest extends BaseTest{
 		//currentPage=0, pageSize=15
 		map.put("bussinessType", "0");
 		map.put("createAtstart", "2015-09-18");
-		List<StatementConfig> list = statementConfigService.selectPageList(map, 0,15);
+		List<StatementConfigVO> list = statementConfigService.selectPageList(map, 0,15);
 		System.err.println("list size="+list.size());
 	}
 	

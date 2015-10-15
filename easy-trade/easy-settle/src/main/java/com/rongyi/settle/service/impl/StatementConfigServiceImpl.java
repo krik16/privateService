@@ -13,9 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.rongyi.easy.settle.entity.OperationLog;
-import com.rongyi.settle.mapper.OperationLogMapper;
-import com.rongyi.settle.mapper.StatementConfigMapper;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +21,11 @@ import org.springframework.stereotype.Service;
 
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.settle.entity.BussinessInfo;
+import com.rongyi.easy.settle.entity.OperationLog;
 import com.rongyi.easy.settle.entity.StatementConfig;
+import com.rongyi.easy.settle.vo.StatementConfigVO;
+import com.rongyi.settle.mapper.OperationLogMapper;
+import com.rongyi.settle.mapper.StatementConfigMapper;
 import com.rongyi.settle.service.BussinessInfoService;
 import com.rongyi.settle.service.StatementConfigService;
 
@@ -51,7 +52,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 	BussinessInfoService bussinessInfoService;
 	
 	@Override
-	public List<StatementConfig> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
+	public List<StatementConfigVO> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
 		map.put("currentPage", (currentPage-1) * pageSize);
 		map.put("pageSize", pageSize);
 		return this.getBaseDao().selectListBySql(NAMESPACE + ".selectPageList", map);
