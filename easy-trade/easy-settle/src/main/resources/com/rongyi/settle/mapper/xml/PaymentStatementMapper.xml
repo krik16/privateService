@@ -228,11 +228,11 @@
 			and bi.blank_name = #{blankName,jdbcType=VARCHAR}
 		</if>
 		<if test="statusUpdateStartTime != null and statusUpdateStartTime != ''">
-			and pb.status_update_time &gt;
+			and pb.status_update_time &gt;=
 			#{statusUpdateStartTime,jdbcType=TIMESTAMP}
 		</if>
 		<if test="statusUpdateEndTime != null and statusUpdateEndTime != ''">
-			and pb.status_update_time &lt; #{statusUpdateEndTime,jdbcType=TIMESTAMP}
+			and pb.status_update_time &lt;= #{statusUpdateEndTime,jdbcType=TIMESTAMP}
 		</if>
 		<if test="idArray != null and idArray !=''">
 			and pb.id in 
