@@ -69,7 +69,7 @@ public class WithdrawApplyServiceImpl implements WithdrawApplyService {
 	 * @see com.rongyi.rss.va.WithdrawApplyService#withdrawApply(java.lang.String, java.math.BigDecimal, java.lang.String, java.lang.String, java.lang.String)
 	 */
 	public ResponseResult withdrawApply(String userId, BigDecimal drawAmount, String accountNo, String accountName,
-			String accountType) {
+			String accountType, Integer guideType) {//TODO guideType未处理
 		logger.info(">>>>>>>>>提现申请开始");
 
 		ResponseResult result = new ResponseResult();
