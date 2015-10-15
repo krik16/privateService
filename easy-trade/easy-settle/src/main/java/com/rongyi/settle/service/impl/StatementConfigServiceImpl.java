@@ -138,6 +138,6 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 	public StatementConfig selectByRuleCode(String ruleCode) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("ruleCode", ruleCode);
-		return this.getBaseDao().selectOneBySql(NAMESPACE+".selectByRuleCode");
+		return this.getBaseDao().selectOneBySql(NAMESPACE+".selectByRuleCode",map);
 	}
 }
