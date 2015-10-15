@@ -134,13 +134,11 @@ public interface HuanXinIMService {
 	 * @return
 	 * @throws Exception
 	 */
-	public void sendBodyByOrderEventType(final ObjectId buyerNum, final String orderNum, final String orderEventType)
-			throws Exception;
+	public void sendBodyByOrderEventType(final ObjectId buyerNum, final String orderNum, final String orderEventType);
 	
 	/**
 	 * 根据不同的事件，发送不同的数据（退款维权）
 	 */
-	public void sendBodyByOrderEventType(final Integer applicationId, final ObjectId buyerNum, final String orderEventType)
-			throws Exception;
+	public void sendBodyByOrderEventType(final Integer applicationId, final ObjectId buyerNum, final String orderEventType);
 
 }

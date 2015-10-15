@@ -22,6 +22,14 @@ public interface IExpressOrderInfoService {
 	 * @return
 	 * @throws Exception
 	 */
-	public ExpressOrderInfoEntity selectInfoById(Integer id) throws Exception;
+	ExpressOrderInfoEntity selectInfoById(Integer id) throws Exception;
+
+	/**
+	 * 添加物流信息，返回主键
+	 * @param entity
+	 * @return
+	 * @throws Exception
+	 */
+	Integer insertExpressInfo(ExpressOrderInfoEntity entity);
 
 }
