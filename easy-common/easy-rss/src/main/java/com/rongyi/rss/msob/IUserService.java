@@ -161,9 +161,18 @@ public interface IUserService {
     /**
      * 通过手机号查用户信息
      * @param phone
+     * @param identity
      * @return
      */
-    public RmmmUserInfoEntity getUsersEntityByPhone(String phone);
+    public RmmmUserInfoEntity getUsersEntityByPhone(String phone,String identity);
+
+
+    /**
+     * 手机号的List信息
+     * @param phone
+     * @return
+     */
+    public List<RmmmUserInfoEntity> getUserListByPhone(String phone)throws MallShopException;
 
     /**
      * 修改密码/昵称／手机／头像
@@ -172,12 +181,22 @@ public interface IUserService {
     public boolean editInfo(RmmmUserInfoEntity usersEntity);
 
     /**
+     * 用户信息修改
+     * @param paramStr 修改的参数
+     * @param phone 手机号
+     * @param flag 0修改手机号 1修改密码
+     * @return
+     * @throws MallShopException
+     */
+    public boolean updateByPhone(String paramStr,String phone,int flag)throws MallShopException;
+
+    /**
      * 根据用户昵称，用户UUID获取
      * @param flag  标识位
      * @param strName  0 查昵称 1查UUID
      * @return
      */
-    public RmmmUserInfoEntity getUsersEntityByStrName(int flag,String strName)throws MallShopException;
+    public RmmmUserInfoEntity getUsersEntityByStrName(int flag,String strName,String identity)throws MallShopException;
 
 
 

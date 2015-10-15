@@ -14,7 +14,7 @@ public class VoucherCouponParam implements Serializable{
 	private static final Integer PAGESIZE = 10;
 	private static final String ORDER_BY_CLAUSE = "create_at DESC";
 	
-	private Integer id;
+	private String id;
 
 	/**
 	 * 代金券名称
@@ -24,7 +24,6 @@ public class VoucherCouponParam implements Serializable{
 	/**
      * 关联类型
      * 代金券：集团[0],品牌[1], 商场 [2],店铺[3];
-     * 红包 ：全场[0],商品[1]
      */
     private Integer relatedType;
 
@@ -122,12 +121,12 @@ public class VoucherCouponParam implements Serializable{
 	 */
 	private String orderByClause = ORDER_BY_CLAUSE;
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId(String id) {
+		this.id = StringUtils.isNotBlank(id) ? id.trim() : null;
 	}
 
 	public String getName() {

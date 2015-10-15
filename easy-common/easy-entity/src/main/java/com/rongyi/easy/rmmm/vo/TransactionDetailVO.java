@@ -40,6 +40,8 @@ public class TransactionDetailVO implements Serializable{
 	
 	private String userPhone;//导购电话号码
 	
+	private Integer guideType;// 1是导购 2是买手
+	
 	private String integral;//积分
 	
 	private String imId;//导购环信id
@@ -60,6 +62,14 @@ public class TransactionDetailVO implements Serializable{
 	private Integer errno;
 	/** 翻牌购拼接的url */
 	private String url;
+
+	public Integer getGuideType() {
+		return guideType;
+	}
+
+	public void setGuideType(Integer guideType) {
+		this.guideType = guideType;
+	}
 
 	public String getConsignee() {
 		return consignee;

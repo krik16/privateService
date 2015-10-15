@@ -164,7 +164,8 @@ public enum CodeEnum {
     ERROR_PRAISE_NOTICE("1063002","对店铺公告点赞或取消赞失败"),
     ERROR_SAVE_NOTICE("1073003","新建店铺公告失败"),
     ERROR_UPDATE_NOTICE("1073004","修改店铺公告失败"),
-    ERROR_DELETE_NOTICE("1073005","删除店铺公告失败");
+    ERROR_DELETE_NOTICE("1073005","删除店铺公告失败"),
+    ERROR_OFFLINE_NOTICE("1073006","公告已强制下线");
     
     
     private String code; 

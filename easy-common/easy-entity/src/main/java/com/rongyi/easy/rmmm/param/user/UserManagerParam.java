@@ -47,6 +47,12 @@ public class UserManagerParam extends BaseParam implements Serializable{
     private String stopReason;//停用原因
     private String creatingUserType;
     private Integer merUserId;//操作人id
+
+
+	private int flag=0;//操作参数 1升级功能
+
+
+
     public Integer getId() {
 		return id;
 	}
@@ -61,6 +67,14 @@ public class UserManagerParam extends BaseParam implements Serializable{
     
 	public void setCreatingUserType(String creatingUserType) {
 		this.creatingUserType = creatingUserType;
+	}
+
+	public int getFlag() {
+		return flag;
+	}
+
+	public void setFlag(int flag) {
+		this.flag = flag;
 	}
 
 	public Integer getRoleId() {

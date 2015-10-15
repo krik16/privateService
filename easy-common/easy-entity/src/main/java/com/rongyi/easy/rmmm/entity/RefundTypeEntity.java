@@ -1,6 +1,8 @@
 package com.rongyi.easy.rmmm.entity;
 
-public class RefundTypeEntity {
+import java.io.Serializable;
+
+public class RefundTypeEntity implements Serializable{
     /** 主键 */
     private Integer id;
 

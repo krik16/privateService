@@ -38,6 +38,8 @@ public class UserAccountEntity implements Serializable{
     private Integer isDisabled;
     /** 用户Id **/
     private Integer userId;
+    /** 用户类型 0导购 1买手 */
+    private Integer userType;
 
     /**
      * 主键
@@ -222,4 +224,13 @@ public class UserAccountEntity implements Serializable{
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
+
+	public Integer getUserType() {
+		return userType;
+	}
+
+	public void setUserType(Integer userType) {
+		this.userType = userType;
+	}
+    
 }

@@ -31,7 +31,7 @@ public interface IUserAccountService {
      * @return
      * @throws MallShopException
      */
-    public List<UserAccountDto> getUserAccountListByUserId(Integer userId, Integer type) throws MallShopException;
+    public List<UserAccountDto> getUserAccountListByUserId(Integer userId, Integer type,Integer userType) throws MallShopException;
 	/**
      * 修改/添加账号信息
      *
