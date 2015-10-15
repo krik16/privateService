@@ -73,7 +73,7 @@ public class ParentOrderVO implements Serializable {
 	private String userName;// 导购姓名
 	private String userPhone;// 导购电话
 	private String guideId;// 导购id
-	private String guideType;// 1是导购 2是买手
+	private Integer guideType;// 1是导购 2是买手
 	private String receiveTime;// 确认收货时间
 	private String cancelTime;// 卖家取消订单时间
 	private String closeTime;// 订单关闭时间
@@ -94,11 +94,11 @@ public class ParentOrderVO implements Serializable {
 	private String scoreDeduction;// 颜值抵扣金额
 	private String DeductCouponAmount;// 抵扣券实际抵扣价格
 
-	public String getGuideType() {
+	public Integer getGuideType() {
 		return guideType;
 	}
 
-	public void setGuideType(String guideType) {
+	public void setGuideType(Integer guideType) {
 		this.guideType = guideType;
 	}
 
