@@ -61,11 +61,11 @@ public interface MLUserRedenvelopeService {
     /**
      * 判断现金券是否是有效的
      *
-     * @param couponCode 现金券模板id, productId 商品id
+     * @param couponCode 现金券模板id, commodityId 商品id
      * @return true 没过期 false 已过期
      * @throws Exception
      */
-    public Boolean validCashCoupon(String couponCode, String productId);
+    public Boolean validCashCoupon(String couponCode, String commodityId);
 
     /**
      * 通过couponCode 获取优惠券当前状态
