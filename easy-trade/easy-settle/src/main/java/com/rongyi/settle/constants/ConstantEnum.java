@@ -44,6 +44,12 @@ public enum ConstantEnum {
     STATUS_11(11,"已下载"),
     STATUS_12(12,"已付款"),
     
+    PAY_MODE_0(0,"固定日期"),
+    PAY_MODE_1(1,"滚动日期"),
+    
+    ROLL_TYPE_0(0,"天"),
+    ROLL_TYPE_1(1,"时"),
+    
 	PAGE_SIZE(10,"分页条数");
     
     private Object code;

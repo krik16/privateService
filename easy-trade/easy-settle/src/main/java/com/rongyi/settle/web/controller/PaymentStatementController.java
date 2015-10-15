@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.rongyi.settle.service.AccessService;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rongyi.core.common.PropertyConfigurer;
+import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
 import com.rongyi.easy.settle.entity.PaymentStatement;
 import com.rongyi.easy.settle.entity.StatementConfig;
@@ -167,6 +169,14 @@ public class PaymentStatementController {
 			if (!statusList.isEmpty())
 				map.put("statusList", statusList);
 			List<PaymentStatementDto> list = paymentStatementService.selectPageList(map, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt());
+			for (PaymentStatementDto paymentStatementDto : list) {
+				if (paymentStatementDto.getPayMode().equals(ConstantEnum.PAY_MODE_1.getCodeByte())) {// 滚动日期
+					if (paymentStatementDto.getRollType().equals(ConstantEnum.ROLL_TYPE_0.getCodeByte()) && paymentStatementDto.getRollDay() != null)// 天
+						paymentStatementDto.setPredictPayTime(DateUtil.getDaysInPast(paymentStatementDto.getCreateAt(), Integer.valueOf(paymentStatementDto.getRollDay())));
+					else//时
+						paymentStatementDto.setPredictPayTime(DateUtil.addHours(paymentStatementDto.getCreateAt(), Integer.valueOf(paymentStatementDto.getRollDay())));
+				}
+			}
 			Integer count = paymentStatementService.selectPageListCount(map);
 			return ResponseData.success(list, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt(), count);
 		} catch (Exception e) {
@@ -187,7 +197,7 @@ public class PaymentStatementController {
 	@ResponseBody
 	public ResponseData bizListTotal(HttpServletRequest request) {
 		logger.info("====bizListTotal====");
-		Map<String, Object> map = new HashMap<String,Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		Map<String, Object> responseMap = new HashMap<String, Object>();
 		List<Byte> statusList = new ArrayList<Byte>();
 		statusList.add(ConstantEnum.STATUS_1.getCodeByte());
