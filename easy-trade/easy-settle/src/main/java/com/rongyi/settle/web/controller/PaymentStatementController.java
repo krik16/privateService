@@ -171,9 +171,9 @@ public class PaymentStatementController {
 			List<PaymentStatementDto> list = paymentStatementService.selectPageList(map, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt());
 			for (PaymentStatementDto paymentStatementDto : list) {
 				if (paymentStatementDto.getPayMode().equals(ConstantEnum.PAY_MODE_1.getCodeByte())) {// 滚动日期
-					if (paymentStatementDto.getRollType().equals(ConstantEnum.ROLL_TYPE_0.getCodeByte()) && paymentStatementDto.getRollDay() != null)// 天
+					if (paymentStatementDto.getRollType().equals(ConstantEnum.ROLL_TYPE_0.getCodeByte()) && !StringUtils.isEmpty(paymentStatementDto.getRollDay()))// 天
 						paymentStatementDto.setPredictPayTime(DateUtil.getDaysInPast(paymentStatementDto.getCreateAt(), Integer.valueOf(paymentStatementDto.getRollDay())));
-					else//时
+					else if (paymentStatementDto.getRollType().equals(ConstantEnum.ROLL_TYPE_1.getCodeByte()) && !StringUtils.isEmpty(paymentStatementDto.getRollDay()))// 时
 						paymentStatementDto.setPredictPayTime(DateUtil.addHours(paymentStatementDto.getCreateAt(), Integer.valueOf(paymentStatementDto.getRollDay())));
 				}
 			}
