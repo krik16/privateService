@@ -63,7 +63,7 @@
 						</td>
 						<td>${item.payAccount}</td>
 						<td>${item.blankName}</td>
-						<td>${item.payTotal}</td>
+						<td>${item.payTotal/100}</td>
 						<td><fmt:formatDate value="${item.createAt}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 						<td>
 						<c:choose>
