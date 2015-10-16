@@ -216,7 +216,6 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 			throw new Exception("作废对账单不能重新生成。id=" + id);
 		}
 		StatementConfig statementConfig = statementConfigService.selectById(paymentStatement.getConfigId());
-		cancel(id);
 
 		PaymentStatement paymentStatementNew = new PaymentStatement();
 		paymentStatementNew.setConfigId(statementConfig.getId());
@@ -229,10 +228,10 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		paymentStatementNew.setCreateAt(new Date());
 		paymentStatementNew.setIsDelete(new Byte("0"));
 		paymentStatementNew.setPayNo(orderNoGenService.getOrderNo("3"));
-		createExcel(paymentStatementNew, statementConfig);
+		createExcel(id, paymentStatementNew, statementConfig);
 	}
 
-	private void createExcel(PaymentStatement paymentStatement, StatementConfig statementConfig) throws Exception {
+	private void createExcel(Integer id, PaymentStatement paymentStatement, StatementConfig statementConfig) throws Exception {
 		PaymentStatementExcelDto paymentStatementExcelDto = new PaymentStatementExcelDto();
 		List<PaymentStatementDetailDto> paymentStatementDetailDtoList = new ArrayList<>();
 		List<CouponExcelDto> couponExcelDtoList = new ArrayList<>();
@@ -266,8 +265,8 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		for (PaymentStatementDetailDto paymentStatementDetailDto : paymentStatementDetailDtoList) {
 			CouponCodeExcelDto couponCodeExcelDto = paymentStatementDetailDto.toCouponCodeExcelDto();
 			couponCodeExcelDtoList.add(couponCodeExcelDto);
-			total += paymentStatementDetailDto.getOrigPrice();
-			payTotal += paymentStatementDetailDto.getPayAmount();
+			total += couponCodeExcelDto.getOrigPrice();
+			payTotal += couponCodeExcelDto.getPayAmount();
 		}
 		paymentStatementExcelDto.setBatchNo(paymentStatement.getBatchNo());
 		paymentStatementExcelDto.setCycleTime(DateUtils.getDateTimeStr(paymentStatement.getCycleStartTime()) + " - " + DateUtils.getDateTimeStr(paymentStatement.getCycleEndTime()));
@@ -284,6 +283,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		ExcelUtils.write(propertyConfigurer.getProperty("settle.template.file"), propertyConfigurer.getProperty("settle.file.path"), statementConfig.getBussinessId(),
 				getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime())), paymentStatementExcelDto);
 		paymentStatement.setPayTotal(AmountUtil.changYuanToFen(total));
+		cancel(id);
 		insert(paymentStatement);
 	}
 

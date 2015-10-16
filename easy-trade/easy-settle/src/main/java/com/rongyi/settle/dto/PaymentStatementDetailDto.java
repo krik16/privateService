@@ -219,10 +219,10 @@ public class PaymentStatementDetailDto {
         dto.setCouponName(getTitle());
         dto.setRevenueType(getRevenueType());
         dto.setPayChannel(getPayChannel());
-        dto.setOrigPrice(AmountUtil.changFenToYuan(getOrigPrice()));
-        dto.setPayAmount(AmountUtil.changFenToYuan(getPayAmount()));
-        dto.setHbAmount(AmountUtil.changFenToYuan(getHbDiscount()));
-        dto.setDiscountAmount(AmountUtil.changFenToYuan(getDiscount()));
+        dto.setOrigPrice(getOrigPrice() == null ? 0.0 : AmountUtil.changFenToYuan(getOrigPrice()));
+        dto.setPayAmount(getPayAmount() == null ? 0.0 : AmountUtil.changFenToYuan(getPayAmount()));
+        dto.setHbAmount(getHbDiscount() == null ? 0.0 : AmountUtil.changFenToYuan(getHbDiscount()));
+        dto.setDiscountAmount(getDiscount() == null ? 0.0 : AmountUtil.changFenToYuan(getDiscount()));
         dto.setBuyerPhone(getUserPhone());
         dto.setShopName(getShopName());
         dto.setMallName(getMallName());

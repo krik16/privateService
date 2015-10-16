@@ -66,14 +66,14 @@ public class ExcelUtils {
 
 		XSSFRow row12 = sheet.getRow(12);
 		XSSFCell payTotal = row12.getCell(4);
-		payTotal.setCellValue(AmountUtil.changFenToYuan(excelDto.getPayTotal().intValue()));
+		payTotal.setCellValue(excelDto.getPayTotal());
 
 		XSSFRow row27 = sheet.getRow(27);
 		XSSFCell total = row27.getCell(10);
-		total.setCellValue(AmountUtil.changFenToYuan(excelDto.getPayTotal().intValue()));
+		total.setCellValue(excelDto.getPayTotal());
 
 		XSSFCell rongyiDiscount = row12.getCell(10);
-		rongyiDiscount.setCellValue(AmountUtil.changFenToYuan(excelDto.getRongyiDiscount().intValue()));
+		rongyiDiscount.setCellValue(excelDto.getRongyiDiscount());
 
 		for (int i = 0; i < excelDto.getCouponExcelDtoList().size(); i++) {
 			CouponExcelDto couponExcelDto = excelDto.getCouponExcelDtoList().get(i);
