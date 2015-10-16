@@ -292,7 +292,6 @@ public class Coupon implements Serializable {
      */
     private Boolean isRelatedActivity;
 
-    private Integer activityType;
 
     public String getId() {
         return id;
@@ -798,13 +797,6 @@ public class Coupon implements Serializable {
         this.isRelatedActivity = isRelatedActivity;
     }
 
-    public Integer getActivityType() {
-        return activityType;
-    }
-
-    public void setActivityType(Integer activityType) {
-        this.activityType = activityType;
-    }
 
     @Override
     public String toString() {
