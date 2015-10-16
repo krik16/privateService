@@ -9,9 +9,13 @@
 package com.rongyi.tms.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +25,7 @@ import com.rongyi.core.constant.PayEnum;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.rpb.vo.PayNotifyVO;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
+import com.rongyi.easy.tms.entity.DrawApply;
 import com.rongyi.rss.rpb.IRpbService;
 import com.rongyi.tms.constants.ConstantEnum;
 import com.rongyi.tms.service.PaymentStatementService;
@@ -55,10 +60,18 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectPageListCount", map);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void updateByNotify(Map<String, Object> map) {
-		List<PayNotifyVO> payNotifylist = (List<PayNotifyVO>) map.get("statementList");
+		 JSONObject responseJsonObject = JSONObject.fromObject(map);
+		JSONArray jsonArray =  responseJsonObject.getJSONArray("statementList");
+		List<PayNotifyVO> payNotifylist  = new ArrayList<PayNotifyVO>();
+		  for (int i = 0, length = jsonArray.size(); i < length; i++) {
+              JSONObject jsonObject = jsonArray.getJSONObject(i);
+              PayNotifyVO payNotifyVO = new PayNotifyVO();
+              payNotifyVO.setDrawNo(jsonObject.getString("drawNo"));
+              payNotifyVO.setTradeNo(jsonObject.getString("tradeNo"));
+              payNotifylist.add(payNotifyVO);
+          }
 		map.put("status", ConstantEnum.STATEMENT_STATUE_12.getCodeByte());
 		map.put("payTime", DateUtil.getCurrDateTime());
 		for (PayNotifyVO payNotifyVO : payNotifylist) {
