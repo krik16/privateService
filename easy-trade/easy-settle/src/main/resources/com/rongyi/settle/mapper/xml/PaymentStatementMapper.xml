@@ -204,10 +204,10 @@
 			and pbc.biz_name = #{bussinessName,jdbcType=VARCHAR}
 		</if>
 		<if test="createAtStart != null and createAtStart != ''">
-			and pb.cycle_start_time &gt; #{createAtStart,jdbcType=TIMESTAMP}
+			and pb.cycle_start_time &gt;= #{createAtStart,jdbcType=TIMESTAMP}
 		</if>
 		<if test="createAtEnd != null and createAtEnd != ''">
-			and pb.cycle_start_time &lt; #{createAtEnd,jdbcType=TIMESTAMP}
+			and pb.cycle_start_time &lt;= #{createAtEnd,jdbcType=TIMESTAMP}
 		</if>
 		<if test="batchNo != null and batchNo != ''">
 			and pb.batch_no = #{batchNo,jdbcType=VARCHAR}
