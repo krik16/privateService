@@ -11,6 +11,7 @@ package com.rongyi.rss.msob;/*
 
 import com.rongyi.easy.mallshop.MallShopException;
 import com.rongyi.easy.rmmm.dto.userlabel.LabelDto;
+import com.rongyi.easy.rmmm.entity.LabelInfoEntity;
 
 import java.util.List;
 
@@ -37,5 +38,5 @@ public interface ILabelService {
      * @param labelDto
      * @throws MallShopException
      */
-    public void saveLabelinfo(LabelDto labelDto)throws MallShopException;
+    public LabelInfoEntity saveLabelinfo(LabelDto labelDto)throws MallShopException;
 }
