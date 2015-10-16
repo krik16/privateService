@@ -35,6 +35,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -67,7 +68,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 
 	@Autowired
 	private ROAShopService roaShopService;
-	
+
 	@Autowired
 	OrderNoGenService orderNoGenService;
 
@@ -142,8 +143,10 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		param.setPayAccount(dto.getPayAccount());
 		param.setPayChannel(Integer.valueOf(dto.getPayChannel().toString()));
 		param.setPayName(dto.getPayName());
-		if (dto.getPayTotal() != null)
-			param.setPayTotal(Double.valueOf(dto.getPayTotal().toString()));
+		if (dto.getPayTotal() != null) {
+			BigDecimal bd = new BigDecimal(dto.getPayTotal() + "").divide(new BigDecimal(100)).setScale(2, BigDecimal.ROUND_HALF_UP);
+			param.setPayTotal(bd.doubleValue());
+		}
 		return iRpbService.generatePayment(param);
 	}
 
@@ -225,7 +228,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		paymentStatementNew.setStatus(SettleConstant.PaymentStatementStatus.INIT);
 		paymentStatementNew.setCreateAt(new Date());
 		paymentStatementNew.setIsDelete(new Byte("0"));
-		paymentStatement.setPayNo(orderNoGenService.getOrderNo("3"));
+		paymentStatementNew.setPayNo(orderNoGenService.getOrderNo("3"));
 		createExcel(paymentStatementNew, statementConfig);
 	}
 

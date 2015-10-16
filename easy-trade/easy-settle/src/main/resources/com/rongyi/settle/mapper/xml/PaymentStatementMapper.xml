@@ -179,6 +179,7 @@
 		<result column="roll_day" property="rollDay" jdbcType="VARCHAR" />
 		<result column="roll_type" property="rollType" jdbcType="TINYINT" />
 		<result column="pay_mode" property="payMode" jdbcType="TINYINT" />
+		<result column="predict_pay_time" property="predictPayTime" jdbcType="TIMESTAMP" />
 	</resultMap>
 
 	<sql id="list_where_clause">
@@ -203,10 +204,10 @@
 			and pbc.biz_name = #{bussinessName,jdbcType=VARCHAR}
 		</if>
 		<if test="createAtStart != null and createAtStart != ''">
-			and pb.cycle_start_time &gt; #{createAtStart,jdbcType=TIMESTAMP}
+			and pb.cycle_start_time &gt;= #{createAtStart,jdbcType=TIMESTAMP}
 		</if>
 		<if test="createAtEnd != null and createAtEnd != ''">
-			and pb.cycle_start_time &lt; #{createAtEnd,jdbcType=TIMESTAMP}
+			and pb.cycle_start_time &lt;= #{createAtEnd,jdbcType=TIMESTAMP}
 		</if>
 		<if test="batchNo != null and batchNo != ''">
 			and pb.batch_no = #{batchNo,jdbcType=VARCHAR}
@@ -267,7 +268,7 @@
 		pb.status_update_time,
 		pbc.biz_name, pbc.biz_id, pbc.pay_channel, pbc.biz_type,
 		bi.biz_email, bi.pay_account, bi.blank_name, bi.pay_name,
-		ol.desc,ol.create_user_id as download_user,ol.creade_at as download_time,pbc.roll_day,pbc.roll_type,pbc.pay_mode
+		ol.desc,ol.create_user_id as download_user,ol.creade_at as download_time,pbc.roll_day,pbc.roll_type,pbc.pay_mode,pb.create_at as predict_pay_time
 		from payment_bill pb
 		left join payment_bill_config pbc on pb.config_id=pbc.id
 		left join biz_info bi on bi.config_id=pbc.id

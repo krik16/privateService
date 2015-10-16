@@ -355,7 +355,7 @@ public class RpbServiceImpl implements IRpbService {
 
 	@Override
 	public void updatePaymentStatus(String[] ids, Integer status, Integer tradeType) {
-		if(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE7 == tradeType){
+		if(ids != null  && Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE7 == tradeType){
 			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("status", status);
 			paymentService.updateByIds(ids, map);
