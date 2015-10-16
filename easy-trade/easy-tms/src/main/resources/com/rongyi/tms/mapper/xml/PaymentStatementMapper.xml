@@ -103,7 +103,7 @@
 		ps.id,
 		ps.type,ps.batch_no,sc.biz_type,ps.cycle_start_time,ps.cycle_end_time,
 		sc.biz_name,sc.pay_channel,bi.pay_account,bi.pay_name,bi.blank_name,
-		ps.pay_total,bi.biz_email,ps.status_update_time,ps.status,ps.create_at,
+		ps.pay_total,bi.biz_email,ps.status_update_time,ps.status,po.create_at,
 		ps.pay_no,ps.trade_no,ps.pay_time,
 		po.id
 		as payment_id
