@@ -8,6 +8,7 @@
 
 package com.rongyi.settle.service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -94,5 +95,10 @@ public class StatementConfigServiceTest extends BaseTest{
 		Map<String,Object> map = new HashMap<String,Object>();
 		Integer count = statementConfigService.selectPageListCount(map);
 		System.err.println("count="+count);
+	}
+	
+	public static void main(String[] args) {
+				BigDecimal bi =new BigDecimal(11.5 + "").divide(new BigDecimal(100)).setScale(2, BigDecimal.ROUND_HALF_UP);
+				System.err.println(bi.doubleValue());
 	}
 }
