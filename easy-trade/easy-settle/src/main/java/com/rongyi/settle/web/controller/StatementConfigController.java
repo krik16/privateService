@@ -395,7 +395,7 @@ public class StatementConfigController {
 					}
 				}
 				int totalCount = rOAFilialeService.getFilialeList(searchMap, 0,0).size();
-				result = ResponseData.success(list, currpage, pagesize, totalCount);
+				result = ResponseData.success(voList, currpage, pagesize, totalCount);
 			} else if (type.intValue() == 4) {// 店铺
 				searchMap.put("shopName", name);
 				searchMap.put("sort", "noSort");// 暂未定排序字段
