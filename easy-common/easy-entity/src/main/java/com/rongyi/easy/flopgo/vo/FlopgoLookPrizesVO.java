@@ -1,5 +1,7 @@
 package com.rongyi.easy.flopgo.vo;
 
+import com.rongyi.easy.coupon.entity.CouponCommodity;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -26,7 +28,7 @@ public class FlopgoLookPrizesVO implements Serializable{
 	
 	private List<String> thumb_img;//缩略图
 	private List<String> detail_img;//详情图
-	private List<CouponProductVO> scope;//现金卷的使用范围
+	private List<CouponCommodity> scope;//现金卷的使用范围
 	private String recommendation;//推荐文案
 	public FlopgoLookPrizesVO(){
 		
@@ -62,10 +64,10 @@ public class FlopgoLookPrizesVO implements Serializable{
 		}
 	}
 	
-	public List<CouponProductVO> getScope() {
+	public List<CouponCommodity> getScope() {
 		return scope;
 	}
-	public void setScope(List<CouponProductVO> scope) {
+	public void setScope(List<CouponCommodity> scope) {
 		this.scope = scope;
 	}
 	public String get_id() {

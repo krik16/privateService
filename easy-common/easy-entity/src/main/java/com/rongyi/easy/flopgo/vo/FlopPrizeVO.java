@@ -1,14 +1,12 @@
 package com.rongyi.easy.flopgo.vo;
 
+import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.coupon.entity.CouponCommodity;
+
 import java.io.Serializable;
-
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import com.rongyi.easy.coupon.entity.OldCoupon;
-import com.rongyi.easy.coupon.entity.OldCoupon.CouponProduct;
 
 
 /**
@@ -49,14 +47,14 @@ public class FlopPrizeVO implements Serializable{
 	private String listPicUrl;// 列表图url
 	private String recommend;// 推荐说明
 	private List<String> detailPicUrls;// 详情图url
-	private List<CouponProduct> products = new ArrayList<CouponProduct>(); // 现金劵关联商品
+	private List<CouponCommodity> products = new ArrayList<CouponCommodity>(); // 现金劵关联商品
 	private Integer cardSurfaceIsShow;//牌面是否显示  0表示不显示 1表示显示
 	
-	public List<CouponProduct> getProducts() {
+	public List<CouponCommodity> getProducts() {
 		return products;
 	}
 
-	public void setProducts(List<CouponProduct> products) {
+	public void setProducts(List<CouponCommodity> products) {
 		this.products = products;
 	}
 
@@ -91,35 +89,33 @@ public class FlopPrizeVO implements Serializable{
 		this.recommend = recommend;
 	}
 
-	public FlopPrizeVO(OldCoupon coupon){
+	public FlopPrizeVO(Coupon coupon){
 		if(coupon!=null){
 			this.id=coupon.getId().toString();
-			this.title=coupon.getTitle();
+			this.title=coupon.getName();
 			this.totalCount=coupon.getTotalCount();
-			this.buyedCount=coupon.getReceiveCount();
-			if(coupon.getReceiveCount()==null){
-				this.restCount=coupon.getTotalCount();//这个是计算库存
-			}else{
-				this.restCount=coupon.getTotalCount()-coupon.getReceiveCount();//计算库存
-			}
-			this.activityStatus=coupon.getActivityStatus();
-			this.nowPrice=coupon.getCurrentPrice();
-			this.originalPrice=coupon.getOriginalPrice();
-			this.discount=coupon.getDiscount();
+			this.buyedCount=coupon.getTotalCount().intValue()-coupon.getStockCount().intValue();
+
+				this.restCount=coupon.getStockCount();//这个是计算库存
+
+//			this.activityStatus=coupon.getActivityType().toString();
+			this.nowPrice=coupon.getCurrPrice2Double();
+			this.originalPrice=coupon.getOrigPrice2Double();
+			this.discount=coupon.getDiscount2Double();
 			this.recommend=coupon.getRecommend();
-			this.updateDate=coupon.getUpdateDate();
-			this.createDate=coupon.getCreateDate();
-			this.useRestriction=coupon.getUseRestriction();
-			this.useDescription=coupon.getUseDescription();//优惠卷使用说明
-			this.validBeginDate=coupon.getValidBeginDate();
-			this.validEndDate=coupon.getValidEndDate();
-			this.publicStart=coupon.getPublishBeginDate();
-			this.publicEnd=coupon.getPublishEndDate();
-			this.checkStatus=coupon.getCheckStatus();
-			this.ticketType=coupon.getCouponType();
+			this.updateDate=coupon.getUpdateAt();
+			this.createDate=coupon.getCreateAt();
+			this.useRestriction=coupon.getLimitDesc();
+			this.useDescription=coupon.getUsageDesc();//优惠卷使用说明
+			this.validBeginDate=coupon.getValidStartAt();
+			this.validEndDate=coupon.getValidEndAt();
+			this.publicStart=coupon.getPublishStartAt();
+			this.publicEnd=coupon.getPublishEndAt();
+			this.checkStatus=coupon.getStatus().toString();
+			this.ticketType=coupon.getCouponType().toString();
 			this.listPicUrl=coupon.getListPicUrl();
 			this.detailPicUrls=coupon.getDetailPicUrls();
-			this.products=coupon.getProducts();
+			this.products=coupon.getCouponCommodities();
 			
 		}
 	}

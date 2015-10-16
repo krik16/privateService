@@ -90,6 +90,43 @@ public class CouponParam implements Serializable {
      */
     private Date validEndAt;
 
+    /**
+     * 是否已关联活动 已关联[true] 未关联[false]默认为false
+     */
+    private Boolean isRelatedActivity;
+
+    /**
+     * 商场名称
+     */
+    private String mallName;
+
+    /**
+     * 店铺名称
+     */
+    private String shopName;
+
+    /**
+     * 卡券发布渠道：大运营平台[0], 商家管理后台[1]
+     */
+    private Integer publishChannel;
+
+    /**
+     * 是否有库存
+     */
+    private Boolean hasStockCount;
+
+    /**
+     * ID集合
+     */
+    private List<String> ids;
+
+    /**
+     * 展示区域：常规区域,活动区域;未选中[0]，选中[1] 例如 "1,1"表示都选中
+     */
+    private String displayRegion;
+
+    private Integer activityType;
+
     public String getShopId() {
         return shopId;
     }
@@ -217,5 +254,69 @@ public class CouponParam implements Serializable {
 
     public void setValidEndAt(Date validEndAt) {
         this.validEndAt = validEndAt;
+    }
+
+    public Boolean getIsRelatedActivity() {
+        return isRelatedActivity;
+    }
+
+    public void setIsRelatedActivity(Boolean isRelatedActivity) {
+        this.isRelatedActivity = isRelatedActivity;
+    }
+
+    public String getMallName() {
+        return mallName;
+    }
+
+    public void setMallName(String mallName) {
+        this.mallName = mallName;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
+
+    public Integer getPublishChannel() {
+        return publishChannel;
+    }
+
+    public void setPublishChannel(Integer publishChannel) {
+        this.publishChannel = publishChannel;
+    }
+
+    public Boolean getHasStockCount() {
+        return hasStockCount;
+    }
+
+    public void setHasStockCount(Boolean hasStockCount) {
+        this.hasStockCount = hasStockCount;
+    }
+
+    public List<String> getIds() {
+        return ids;
+    }
+
+    public void setIds(List<String> ids) {
+        this.ids = ids;
+    }
+
+    public String getDisplayRegion() {
+        return displayRegion;
+    }
+
+    public void setDisplayRegion(String displayRegion) {
+        this.displayRegion = displayRegion;
+    }
+
+    public Integer getActivityType() {
+        return activityType;
+    }
+
+    public void setActivityType(Integer activityType) {
+        this.activityType = activityType;
     }
 }

@@ -1,4 +1,4 @@
-package com.rongyi.easy.mcmc.vo;
+package com.rongyi.easy.mcmc.param;
 
 import java.io.Serializable;
 
@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @author xiaob
  *
  */
-public class AdviseShopVO  implements Serializable{
+public class AdviseShopParam  implements Serializable{
 	private static final long serialVersionUID = 1L;
 	/**
 	 * 用户ID
