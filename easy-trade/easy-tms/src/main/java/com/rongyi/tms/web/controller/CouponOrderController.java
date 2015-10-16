@@ -17,6 +17,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.rongyi.easy.coupon.vo.TCCouponVO;
+import com.rongyi.rss.coupon.RoaUserRedenvelopeService;
+import com.rongyi.rss.tradecenter.ProxyUserCouponService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +57,13 @@ public class CouponOrderController extends BaseController {
 	RoaUserCashCouponService roaUserCashCouponService;
 
 	@Autowired
+	private RoaUserRedenvelopeService roaUserRedenvelopeService;
+
+	@Autowired
 	RoaUserCouponService roaUserCouponService;
+
+	@Autowired
+	private ProxyUserCouponService proxyUserCouponService;
 
 	@Autowired
 	RoaCouponService roaCouponService;
@@ -122,7 +130,8 @@ public class CouponOrderController extends BaseController {
 		CouponOrderVO couponOrderVO = couponOrderService.selectById(id);
 		BeanUtils.copyProperties(couponOrderVO,couponOrderDetailVO);
 		// 已购买的优惠券信息
-		List<UserCoupon> list = roaUserCouponService.findUserCouponList(id.longValue(), null);
+//		List<UserCoupon> list = roaUserCouponService.findUserCouponList(id.longValue(), null);
+		List<UserCoupon> list = proxyUserCouponService.findUserCouponList(id.longValue(), null);
 		if (!list.isEmpty()) {
 			TCCouponVO coupon = roaCouponService.findTCCouponById(list.get(0).getCouponId());
 			CouponVO couponVO = couponOrderDetailVO.new CouponVO();
@@ -133,7 +142,8 @@ public class CouponOrderController extends BaseController {
 			couponOrderDetailVO.setCouponList(couponVOList);
 		}
 		// 红包信息
-		UserCouponVO userCouponVO = roaUserCashCouponService.getCashCoupon(couponOrderVO.getHbCode());
+//		UserCouponVO userCouponVO = roaUserCashCouponService.getCashCoupon(couponOrderVO.getHbCode());
+		UserCouponVO userCouponVO = roaUserRedenvelopeService.findCashCoupon(couponOrderVO.getHbCode());
 		if (userCouponVO != null) {
 			BeanUtils.copyProperties(userCouponVO, couponOrderDetailVO);
 			List<UserCouponVO> userCouponVOlist = new ArrayList<UserCouponVO>();

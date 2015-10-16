@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.rongyi.rss.coupon.mall.life.MLUserCouponService;
+import com.rongyi.rss.coupon.mall.shop.MSUserCouponService;
 import com.rongyi.rss.tradecenter.RoaProxyCouponOrderService;
 import net.sf.json.JSONObject;
 
@@ -58,7 +58,7 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 	RoaCouponOrderService raoCouponOrderService;
 
 	@Autowired
-	MLUserCouponService mmUserCouponService;
+	MSUserCouponService mmUserCouponService;
 
 	@Autowired
 	ROAOrderFormService rOAOrderFormService;
@@ -155,7 +155,8 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 
 	@Override
 	public UserCoupon getCouponOrderRecordByOrderNo(String orderNo) {
-		CouponOrder couponOrder = raoCouponOrderService.findOneByOrderNo(orderNo);
+//		CouponOrder couponOrder = raoCouponOrderService.findOneByOrderNo(orderNo);
+		CouponOrder couponOrder = roaProxyCouponOrderService.findOneByOrderNo(orderNo);
 		UserCoupon userCoupon = null;
 		if (couponOrder != null)
 			userCoupon = mmUserCouponService.findUserCouponByCouponCode(couponOrder.getCashCouponCode());

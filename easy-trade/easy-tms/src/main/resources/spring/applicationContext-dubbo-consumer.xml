@@ -38,7 +38,7 @@
 	<!-- rpb服务接口 -->
 	<dubbo:reference interface="com.rongyi.rss.rpb.IRpbService" id="rpbService"  version="${dubbo.version}" check="false"/>
 	<!-- 用户现金券  -->
-	<dubbo:reference interface="com.rongyi.rss.coupon.mall.life.MLUserCouponService" id="mMUserCouponService"  version="${dubbo.version}" check="false"/>
+	<dubbo:reference interface="com.rongyi.rss.coupon.mall.shop.MSUserCouponService" id="mSUserCouponService"  version="${dubbo.version}" check="false"/>
 	<dubbo:reference interface="com.rongyi.rss.roa.ROAVirtualAccountGeneralService" id="rOAVirtualAccountGeneralService" version="${dubbo.version}" check="false"/>
 
 	<!-- 获取系统参数 -->
@@ -56,8 +56,12 @@
 	<dubbo:reference id="roaProxyCouponOrderService" interface="com.rongyi.rss.tradecenter.RoaProxyCouponOrderService" version="${dubbo.version}" check="false"/>
 	<!-- 用户使用红包记录 -->
 	<dubbo:reference interface="com.rongyi.rss.coupon.RoaUserCashCouponService" id="roaUserCashCouponService"  version="${dubbo.version}" check="false"/>
+	<dubbo:reference id="roaUserRedenvelopeService" interface="com.rongyi.rss.coupon.RoaUserRedenvelopeService" version="${dubbo.version}" check="false"/>
 	<!-- 用户优惠券记录 -->	
 	<dubbo:reference interface="com.rongyi.rss.coupon.RoaUserCouponService" id="roaUserCouponService"  version="${dubbo.version}" check="false"/>
+	<dubbo:reference interface="com.rongyi.rss.tradecenter.ProxyUserCouponService" id="proxyUserCouponService"  version="${dubbo.version}" check="false"/>
 	<!-- 优惠券模板信息 -->
 	<dubbo:reference interface="com.rongyi.rss.coupon.RoaCouponService" id="roaCouponService"  version="${dubbo.version}" check="false"/>
+
+
 </beans>  
