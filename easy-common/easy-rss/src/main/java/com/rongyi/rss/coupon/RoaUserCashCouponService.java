@@ -92,6 +92,7 @@ public interface RoaUserCashCouponService {
      * @param code
      * @return
      */
+    @Deprecated
     boolean useCashCoupon(String code);
 
     /**
@@ -100,6 +101,7 @@ public interface RoaUserCashCouponService {
      * @param code
      * @return
      */
+    @Deprecated
     boolean recoverCashCoupon(String code);
 
 }
