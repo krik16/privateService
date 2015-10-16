@@ -1,5 +1,6 @@
 package com.rongyi.rss.coupon;
 
+import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.vo.TCCouponVO;
@@ -27,7 +28,7 @@ public interface RoaCouponService {
      * @param couponId
      * @return
      */
-    ResponseVO subtractCouponInventory(String couponId, Integer quantity);
+    ResponseVO subtractInventoryReturnCode(String couponId, Integer quantity);
 
     /**
      * 根据id查询
@@ -85,10 +86,35 @@ public interface RoaCouponService {
 
     /**
      * 修改卡券关联活动类型 未关联[0] 关联翻牌购[1] 关联推送[2]
+     *
      * @param ids
      * @param activityType
      * @return
      * @throws Exception
      */
     boolean updateActivityType(List<String> ids, Integer activityType) throws Exception;
+
+    /**
+     * 减库存返回券码
+     *
+     * @param couponId
+     * @return
+     */
+    ResponseResult subtractInventoryReturnCode(String couponId);
+
+    /**
+     * 只减少库存
+     * @param couponId
+     * @param quantity
+     * @return
+     */
+    ResponseResult subtractCouponInventory(String couponId, int quantity);
+
+    /**
+     *  恢复券码
+     * @param couponId
+     * @param couponCode
+     * @return
+     */
+    boolean restoreCouponInventory(String couponId, String couponCode);
 }
