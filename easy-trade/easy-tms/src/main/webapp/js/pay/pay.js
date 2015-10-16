@@ -334,7 +334,7 @@ function statementOffPay(paymentIds,statementIds,tradeNo){
 
 function payFreeze(id,status) {
 	$.post("../pay/freeze", {
-		id : id,
+		statementIds : id,
 		status:status
 	}, function(data) {
 		_util.cmsTip(data.message);
