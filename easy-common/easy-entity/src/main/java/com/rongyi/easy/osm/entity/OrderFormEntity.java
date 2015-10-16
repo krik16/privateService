@@ -83,8 +83,8 @@ public class OrderFormEntity implements Serializable{
     /** 是否已提醒买家付款 0 未提醒 1 已提醒**/
     private Byte isAlert;
 
-    /**除积分外优惠金额**/
-    private BigDecimal discountWithoutScore = null;
+    /**订单总金额（不包括积分优惠）**/
+    private BigDecimal totalAmountWithoutScoreDiscount = null;
 
 	public Byte getIsAlert() {
 		return isAlert;
@@ -94,15 +94,15 @@ public class OrderFormEntity implements Serializable{
 		this.isAlert = isAlert;
 	}
 
-	public BigDecimal getDiscountWithoutScore() {
-		return discountWithoutScore;
-	}
+    public BigDecimal getTotalAmountWithoutScoreDiscount() {
+        return totalAmountWithoutScoreDiscount;
+    }
 
-	public void setDiscountWithoutScore(BigDecimal discountWithoutScore) {
-		this.discountWithoutScore = discountWithoutScore;
-	}
+    public void setTotalAmountWithoutScoreDiscount(BigDecimal totalAmountWithoutScoreDiscount) {
+        this.totalAmountWithoutScoreDiscount = totalAmountWithoutScoreDiscount;
+    }
 
-	public Integer getGuideType() {
+    public Integer getGuideType() {
 		return guideType;
 	}
 
