@@ -91,11 +91,10 @@ public class ExcelUtils {
 			origPrice.setCellValue(couponExcelDto.getCouponPrice() == null ? 0 : AmountUtil.changFenToYuan(couponExcelDto.getCouponPrice().intValue()));
 
 			XSSFCell discount = row15.getCell(9);
-			if (couponExcelDto.getCouponTotalAmount() != null && couponExcelDto.getCouponPayAmount() != null) {
-				Double discountValue = couponExcelDto.getCouponTotalAmount() - couponExcelDto.getCouponPayAmount();
-				discount.setCellValue(AmountUtil.changFenToYuan(discountValue.intValue()));
-			} else
-				discount.setCellValue(0);
+			Double couponTotalAmount = couponExcelDto.getCouponTotalAmount() == null ? 0.0 : couponExcelDto.getCouponTotalAmount();
+			Double couponPayAmount = couponExcelDto.getCouponPayAmount() == null ? 0.0 : couponExcelDto.getCouponPayAmount();
+			Double discountValue = couponTotalAmount - couponPayAmount;
+			discount.setCellValue(AmountUtil.changFenToYuan(discountValue.intValue()));
 
 			XSSFCell totalAmount = row15.getCell(11);
 			totalAmount.setCellValue(couponExcelDto.getCouponTotalAmount() == null ? 0 : AmountUtil.changFenToYuan(couponExcelDto.getCouponTotalAmount().intValue()));
