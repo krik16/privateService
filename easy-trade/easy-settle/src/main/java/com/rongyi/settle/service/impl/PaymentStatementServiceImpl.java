@@ -225,7 +225,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		paymentStatementNew.setStatus(SettleConstant.PaymentStatementStatus.INIT);
 		paymentStatementNew.setCreateAt(new Date());
 		paymentStatementNew.setIsDelete(new Byte("0"));
-		paymentStatement.setPayNo(orderNoGenService.getOrderNo("3"));
+		paymentStatementNew.setPayNo(orderNoGenService.getOrderNo("3"));
 		createExcel(paymentStatementNew, statementConfig);
 	}
 

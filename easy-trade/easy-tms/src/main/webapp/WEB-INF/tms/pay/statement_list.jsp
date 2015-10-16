@@ -7,6 +7,7 @@
 		<tr>
 		 <td style="text-align: center;"><input type="checkbox" id="select-all" onclick="selectAll()"/></td>
 			<td>对账单批次</td>
+			<td>付款单号</td>
 			<td>商户类型</td>
 			<td>结算账期</td>
 			<td>名称</td>
@@ -24,6 +25,7 @@
 					<tr>
 						<td style="text-align: center;"><input type="checkbox" name="subBox" id="${item.id}" payChannel="${item.payChannel}" paymentId="${item.paymentId}"></td>
 						<td>${item.batchNo}</td>
+						<td>${item.payNo}</td>
 						<td><c:choose>
 								<c:when test="${item.bussinessType eq 1}">
 									商场

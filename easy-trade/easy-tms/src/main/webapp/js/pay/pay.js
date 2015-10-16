@@ -362,6 +362,7 @@ function switchCheck(check) {
 		$("#statementPay").addClass("now");
 		$("#statementPay").removeClass("change-color");
 		
+		
 		$("#search-payNo").css("display","none");
 		$("#search-drawNo").css("display","block");
 		$("#search-orderNo").css("display","none");
@@ -463,7 +464,7 @@ function switchCheck(check) {
 		$("#search-bussinessType").css("display","block");
 		$("#search-bussinessName").css("display","block");
 
-		$("#search-payNo").css("display","none");
+		$("#search-payNo").css("display","block");
 		$("#search-drawNo").css("display","none");
 		$("#search-mallId").css("display","none");
 		$("#search-shopId").css("display","none");
