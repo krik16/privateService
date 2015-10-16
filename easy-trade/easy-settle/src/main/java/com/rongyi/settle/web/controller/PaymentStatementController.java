@@ -52,7 +52,7 @@ import com.rongyi.settle.util.DateUtils;
  **/
 @Controller
 @RequestMapping("/paymentStatement")
-public class PaymentStatementController extends BaseController{
+public class PaymentStatementController extends BaseController {
 
 	Logger logger = LoggerFactory.getLogger(PaymentStatementController.class);
 
@@ -169,12 +169,14 @@ public class PaymentStatementController extends BaseController{
 			if (!statusList.isEmpty())
 				map.put("statusList", statusList);
 			List<PaymentStatementDto> list = paymentStatementService.selectPageList(map, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt());
-			for (PaymentStatementDto paymentStatementDto : list) {
-				if (paymentStatementDto.getPayMode().equals(ConstantEnum.PAY_MODE_1.getCodeByte())) {// 滚动日期
-					if (paymentStatementDto.getRollType().equals(ConstantEnum.ROLL_TYPE_0.getCodeByte()) && !StringUtils.isEmpty(paymentStatementDto.getRollDay()))// 天
-						paymentStatementDto.setPredictPayTime(DateUtil.getDaysInPast(paymentStatementDto.getCreateAt(), Integer.valueOf(paymentStatementDto.getRollDay())));
-					else if (paymentStatementDto.getRollType().equals(ConstantEnum.ROLL_TYPE_1.getCodeByte()) && !StringUtils.isEmpty(paymentStatementDto.getRollDay()))// 时
-						paymentStatementDto.setPredictPayTime(DateUtil.addHours(paymentStatementDto.getCreateAt(), Integer.valueOf(paymentStatementDto.getRollDay())));
+			if (searchType == 5) {
+				for (PaymentStatementDto paymentStatementDto : list) {
+					if (paymentStatementDto.getPayMode() != null && paymentStatementDto.getPayMode().equals(ConstantEnum.PAY_MODE_1.getCodeByte())) {// 滚动日期
+						if (paymentStatementDto.getRollType().equals(ConstantEnum.ROLL_TYPE_0.getCodeByte()) && !StringUtils.isEmpty(paymentStatementDto.getRollDay()))// 天
+							paymentStatementDto.setPredictPayTime(DateUtil.getDaysInPast(paymentStatementDto.getCreateAt(), Integer.valueOf(paymentStatementDto.getRollDay())));
+						else if (paymentStatementDto.getRollType().equals(ConstantEnum.ROLL_TYPE_1.getCodeByte()) && !StringUtils.isEmpty(paymentStatementDto.getRollDay()))// 时
+							paymentStatementDto.setPredictPayTime(DateUtil.addHours(paymentStatementDto.getCreateAt(), Integer.valueOf(paymentStatementDto.getRollDay())));
+					}
 				}
 			}
 			Integer count = paymentStatementService.selectPageListCount(map);

@@ -101,5 +101,14 @@ public interface StatementConfigService {
 	 * @Author:  柯军
 	 * @datetime:2015年10月15日上午10:52:29
 	 **/
-	public abstract StatementConfig selectByRuleCode(String ruleCode);
+	StatementConfig selectByRuleCode(String ruleCode);
+	
+	/**	
+	 * @Description: 查询对账单配置相关信息 
+	 * @param id
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年10月16日下午7:12:25
+	 **/
+	StatementConfigVO selectConfigInfoById(	Integer id);
 }
