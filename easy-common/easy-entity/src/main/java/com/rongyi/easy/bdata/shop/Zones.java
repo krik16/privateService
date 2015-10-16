@@ -60,7 +60,7 @@ public class Zones implements Serializable {
 	/**
 	 * 父id列表
 	 */
-	private List<Object> parent_ids;
+	private List<ObjectId> parent_ids;
 	/**
 	 * 位置
 	 */
@@ -156,11 +156,11 @@ public class Zones implements Serializable {
 		this.parent_id = parent_id;
 	}
 
-	public List<Object> getParent_ids() {
+	public List<ObjectId> getParent_ids() {
 		return parent_ids;
 	}
 
-	public void setParent_ids(List<Object> parent_ids) {
+	public void setParent_ids(List<ObjectId> parent_ids) {
 		this.parent_ids = parent_ids;
 	}
 
