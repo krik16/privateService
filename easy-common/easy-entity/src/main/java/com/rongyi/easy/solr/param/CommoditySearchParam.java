@@ -11,6 +11,8 @@ package com.rongyi.easy.solr.param;
 
 import java.io.Serializable;
 
+import com.rongyi.easy.rmmm.base.BaseParam;
+
 /**
  * @author ZhengYl
  *
@@ -19,7 +21,7 @@ import java.io.Serializable;
  * @author ZhengYl
  *
  */
-public class CommoditySearchParam implements Serializable {
+public class CommoditySearchParam  extends BaseParam implements Serializable {
 
 	/**  */
 	private static final long serialVersionUID = -3577116644255163015L;
@@ -59,6 +61,17 @@ public class CommoditySearchParam implements Serializable {
 	
 	/** 直播id */
 	private String liveId;
+	
+	/** 商品类型 (直播：1 ，全部商品：0)*/
+	private String commodityType;
+
+	public String getCommodityType() {
+		return commodityType;
+	}
+
+	public void setCommodityType(String commodityType) {
+		this.commodityType = commodityType;
+	}
 
 	/**
 	 * @return the keyword
