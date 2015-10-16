@@ -91,9 +91,9 @@ public class CouponParam implements Serializable {
     private Date validEndAt;
 
     /**
-     * 关联活动类型： 未关联[0] 关联翻牌购[1] 关联推送[2]
+     * 是否已关联活动 已关联[true] 未关联[false]默认为false
      */
-    private Integer activityType;
+    private Boolean isRelatedActivity;
 
     /**
      * 商场名称
@@ -119,6 +119,13 @@ public class CouponParam implements Serializable {
      * ID集合
      */
     private List<String> ids;
+
+    /**
+     * 展示区域：常规区域,活动区域;未选中[0]，选中[1] 例如 "1,1"表示都选中
+     */
+    private String displayRegion;
+
+    private Integer activityType;
 
     public String getShopId() {
         return shopId;
@@ -249,12 +256,12 @@ public class CouponParam implements Serializable {
         this.validEndAt = validEndAt;
     }
 
-    public Integer getActivityType() {
-        return activityType;
+    public Boolean getIsRelatedActivity() {
+        return isRelatedActivity;
     }
 
-    public void setActivityType(Integer activityType) {
-        this.activityType = activityType;
+    public void setIsRelatedActivity(Boolean isRelatedActivity) {
+        this.isRelatedActivity = isRelatedActivity;
     }
 
     public String getMallName() {
@@ -295,5 +302,21 @@ public class CouponParam implements Serializable {
 
     public void setIds(List<String> ids) {
         this.ids = ids;
+    }
+
+    public String getDisplayRegion() {
+        return displayRegion;
+    }
+
+    public void setDisplayRegion(String displayRegion) {
+        this.displayRegion = displayRegion;
+    }
+
+    public Integer getActivityType() {
+        return activityType;
+    }
+
+    public void setActivityType(Integer activityType) {
+        this.activityType = activityType;
     }
 }

@@ -287,6 +287,12 @@ public class Coupon implements Serializable {
      */
     private Boolean isGeneral;
 
+    /**
+     * 是否已关联活动 已关联[true] 未关联[false]默认为false
+     */
+    private Boolean isRelatedActivity;
+
+    private Integer activityType;
 
     public String getId() {
         return id;
@@ -784,6 +790,21 @@ public class Coupon implements Serializable {
         this.outChannelName = outChannelName;
     }
 
+    public Boolean getIsRelatedActivity() {
+        return isRelatedActivity;
+    }
+
+    public void setIsRelatedActivity(Boolean isRelatedActivity) {
+        this.isRelatedActivity = isRelatedActivity;
+    }
+
+    public Integer getActivityType() {
+        return activityType;
+    }
+
+    public void setActivityType(Integer activityType) {
+        this.activityType = activityType;
+    }
 
     @Override
     public String toString() {
@@ -840,6 +861,7 @@ public class Coupon implements Serializable {
                 .append("purchaseType", purchaseType)
                 .append("visitedCount", visitedCount)
                 .append("isGeneral", isGeneral)
+                .append("isRelatedActivity", isRelatedActivity)
                 .toString();
     }
 }
