@@ -214,7 +214,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 
 	@Override
 	public PaymentStatement get(Integer id) {
-		Map<String, Object> map = new HashMap();
+		Map<String, Object> map = new HashMap<String,Object>();
 		map.put("id", id);
 		return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectByPrimaryKey", map);
 	}

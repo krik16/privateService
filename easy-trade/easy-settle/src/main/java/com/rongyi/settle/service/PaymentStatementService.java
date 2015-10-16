@@ -1,13 +1,13 @@
 package com.rongyi.settle.service;
 
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
 import com.rongyi.easy.settle.entity.PaymentStatement;
 import com.rongyi.settle.dto.CouponExcelDto;
 import com.rongyi.settle.dto.PaymentStatementDetailDto;
-
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by xgq on 2015/9/22.
@@ -43,5 +43,4 @@ public interface PaymentStatementService {
     PaymentStatement get(Integer id);
 
     void generate(Integer id) throws Exception;
-    
 }

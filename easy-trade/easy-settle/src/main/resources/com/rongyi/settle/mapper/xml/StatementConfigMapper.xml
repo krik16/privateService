@@ -95,9 +95,12 @@
 	</sql>
 	<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		select
-		*
-		from payment_bill_config
-		where id = #{id,jdbcType=INTEGER}
+			<include refid="Base_Column_List" />
+		from
+		payment_bill_config pbc left join biz_info bi on pbc.id =
+		bi.config_id
+		where pbc.id=
+		#{id,jdbcType=INTEGER}
 	</select>
 	<delete id="updateDelete" parameterType="java.lang.Integer">
 		update
@@ -310,5 +313,4 @@
 		where rule_code =
 		#{ruleCode,jdbcType=VARCHAR}
 	</select>
-
 </mapper>
