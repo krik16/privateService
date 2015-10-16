@@ -26,12 +26,13 @@ public enum MallShopErrorCode {
 
      /** 用户相关 后4位区间  1001---2000*/
     ERROR_ID_INVALID(1071001,"请重新登录"),
+    ERROR_NO_EMAIL(1071002,"客服没有设置邮箱，不能发送邮件"),
 
 
     BUYER_ROLE_ISEXITS(1071801,"您已经拥有买手身份，无需升级!重新登录即可"),
-    BUYER_DESC_ISLONGER(1071811,"简介内容过长，请重新编辑")
+    BUYER_DESC_ISLONGER(1071811,"简介内容过长，请重新编辑"),
     /** 商品相关 后4位区间  2001---3000*/
-
+    ERROR_REPORT_SHOP(1072001,"上报未找到的店铺失败")
 
 
     /** 订单相关  后4位区间  3001---4000*/
