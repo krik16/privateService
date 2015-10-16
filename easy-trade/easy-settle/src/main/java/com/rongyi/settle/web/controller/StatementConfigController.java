@@ -15,14 +15,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.rongyi.core.common.PagingVO;
-import com.rongyi.easy.roa.vo.BrandVO;
-import com.rongyi.easy.roa.vo.FilialeVo;
-import com.rongyi.easy.roa.vo.MallGroupVO;
-import com.rongyi.easy.roa.vo.ShopVO;
-import com.rongyi.rss.roa.*;
-import com.rongyi.settle.service.AccessService;
-import com.rongyi.settle.web.controller.vo.RelevanceVO;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -54,6 +46,7 @@ import com.rongyi.settle.constants.ResponseData;
 import com.rongyi.settle.service.AccessService;
 import com.rongyi.settle.service.StatementConfigService;
 import com.rongyi.settle.util.MapUtils;
+import com.rongyi.settle.web.controller.vo.RelevanceVO;
 
 /**
  * @Author: 柯军
@@ -63,7 +56,7 @@ import com.rongyi.settle.util.MapUtils;
  **/
 @Controller
 @RequestMapping("/statementConfig")
-public class StatementConfigController {
+public class StatementConfigController extends BaseController{
 
 	Logger logger = LoggerFactory.getLogger(StatementConfigController.class);
 
@@ -182,6 +175,7 @@ public class StatementConfigController {
 			MapUtils.toObject(statementConfig, map);
 			statementConfig.setCreateAt(DateUtil.getCurrDateTime());
 			statementConfig.setCreateBy(getUserName(request));
+			statementConfig.setBussinessId(statementConfig.getBussinessCode());
 			MapUtils.toObject(bussinessInfo, map);
 			bussinessInfo.setCreateAt(DateUtil.getCurrDateTime());
 			statementConfigService.saveStatementConfigAndInfo(statementConfig, bussinessInfo);
@@ -385,7 +379,7 @@ public class StatementConfigController {
 			} else if (type.intValue() == 3) {// 分公司
 				searchMap.put("name", name);
 				List<FilialeVo> list = rOAFilialeService.getFilialeList(searchMap, currpage, pagesize);
-				List<RelevanceVO> voList = new ArrayList();
+				List<RelevanceVO> voList = new ArrayList<RelevanceVO>();
 				if (CollectionUtils.isNotEmpty(list)){
 					for(FilialeVo filiale : list){
 						RelevanceVO vo = new RelevanceVO();
@@ -411,13 +405,6 @@ public class StatementConfigController {
 		}
 		logger.info(result.toString());
 		return result;
-	}
-	
-	private String getUserName(HttpServletRequest request){
-		logger.info("userName="+request.getSession().getAttribute("userName"));
-		if(request.getSession().getAttribute("userName") != null)
-			return request.getSession().getAttribute("userName").toString();
-		return "";
 	}
 
 }
