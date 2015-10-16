@@ -10,6 +10,7 @@ import com.rongyi.easy.settle.entity.BussinessInfo;
 import com.rongyi.easy.settle.entity.OperationLog;
 import com.rongyi.easy.settle.entity.PaymentStatement;
 import com.rongyi.easy.settle.entity.StatementConfig;
+import com.rongyi.rss.malllife.roa.ROARedisService;
 import com.rongyi.rss.roa.ROAShopService;
 import com.rongyi.rss.rpb.IRpbService;
 import com.rongyi.rss.rpb.OrderNoGenService;
@@ -29,7 +30,6 @@ import com.rongyi.settle.util.DateUtils;
 import com.rongyi.settle.util.ExcelUtils;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +70,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 	
 	@Autowired
 	OrderNoGenService orderNoGenService;
+
+	@Autowired
+	private ROARedisService redisService;
 
 	@Override
 	public List<PaymentStatementDto> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
@@ -218,22 +221,12 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		paymentStatementNew.setCycleStartTime(paymentStatement.getCycleStartTime());
 		paymentStatementNew.setCycleEndTime(paymentStatement.getCycleEndTime());
 		paymentStatementNew.setType(SettleConstant.PaymentStatementType.SHOP);
-		paymentStatementNew.setBatchNo(getBatchNo(paymentStatement.getBatchNo()));
+		paymentStatementNew.setBatchNo(getBatchNo());
 		paymentStatementNew.setStatus(SettleConstant.PaymentStatementStatus.INIT);
 		paymentStatementNew.setCreateAt(new Date());
 		paymentStatementNew.setIsDelete(new Byte("0"));
 		paymentStatement.setPayNo(orderNoGenService.getOrderNo("3"));
 		createExcel(paymentStatementNew, statementConfig);
-	}
-
-	public String getBatchNo(String batchNo) {
-		String endTwo = StringUtils.substring(batchNo, batchNo.length() - 2, batchNo.length());
-		Integer count = Integer.valueOf(endTwo);
-		count = count + 1;
-		if (count < 10) {
-			return StringUtils.substring(batchNo, 0, batchNo.length() - 2) + "0" + count;
-		} else
-			return StringUtils.substring(batchNo, 0, batchNo.length() - 2) + count.toString();
 	}
 
 	private void createExcel(PaymentStatement paymentStatement, StatementConfig statementConfig) throws Exception {
@@ -289,6 +282,26 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 				getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime())), paymentStatementExcelDto);
 		paymentStatement.setPayTotal(AmountUtil.changYuanToFen(total));
 		insert(paymentStatement);
+	}
+
+	private String getBatchNo() {
+		String dateStr = "";
+		String batchNo = "";
+		try {
+			dateStr = DateUtils.getYesterdayDateSimpleStr();
+			String key = "PAYMENT_STATEMENT_BATCH_NO_" + dateStr;
+			batchNo = redisService.get(key);
+			if (org.springframework.util.StringUtils.isEmpty(batchNo)) {
+				batchNo = "0001";
+			}
+			int num = Integer.valueOf(batchNo);
+			String nextBatchNo = String.format("%04d", ++num);
+			redisService.set(key, nextBatchNo);
+			redisService.expire(key, 60 * 60 * 48);// 两天后失效
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		return dateStr + batchNo;
 	}
 
 	private String getPayChannelName(Byte payChannel) {

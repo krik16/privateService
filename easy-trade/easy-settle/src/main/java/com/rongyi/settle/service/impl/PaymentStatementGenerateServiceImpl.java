@@ -6,6 +6,7 @@ import com.rongyi.easy.roa.vo.ShopVO;
 import com.rongyi.easy.settle.entity.BussinessInfo;
 import com.rongyi.easy.settle.entity.PaymentStatement;
 import com.rongyi.easy.settle.entity.StatementConfig;
+import com.rongyi.rss.malllife.roa.ROARedisService;
 import com.rongyi.rss.roa.ROAShopService;
 import com.rongyi.rss.rpb.OrderNoGenService;
 import com.rongyi.rss.settle.PaymentStatementGenerateService;
@@ -23,6 +24,7 @@ import com.rongyi.settle.util.ExcelUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.*;
 
@@ -50,6 +52,9 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
     @Autowired
     private OrderNoGenService orderNoGenService;
 
+    @Autowired
+    private ROARedisService redisService;
+
 
     @Override
     public void generateForSchedule() throws Exception {
@@ -66,7 +71,7 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
                     paymentStatement.setCycleStartTime(yesterdayFirstSecond);
                     paymentStatement.setCycleEndTime(yesterdayLastSecond);
                     paymentStatement.setType(SettleConstant.PaymentStatementType.SHOP);
-                    paymentStatement.setBatchNo(getBatchNoFirst(statementConfig.getBussinessCode()));
+                    paymentStatement.setBatchNo(getBatchNo());
                     paymentStatement.setStatus(SettleConstant.PaymentStatementStatus.INIT);
                     paymentStatement.setCreateAt(new Date());
                     paymentStatement.setIsDelete(new Byte("0"));
@@ -77,9 +82,24 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
         }
     }
 
-    private String getBatchNoFirst(String shopId) {
-//        return (shopId != null) ? shopId : ""  + DateUtils.getYesterdayDateSimpleStr() + "01";
-        return DateUtils.getYesterdayDateSimpleStr() + "01";
+    private String getBatchNo() {
+        String dateStr = "";
+        String batchNo = "";
+        try {
+            dateStr = DateUtils.getYesterdayDateSimpleStr();
+            String key = "PAYMENT_STATEMENT_BATCH_NO_" + dateStr;
+            batchNo = redisService.get(key);
+            if (StringUtils.isEmpty(batchNo)) {
+                batchNo = "0001";
+            }
+            int num = Integer.valueOf(batchNo);
+            String nextBatchNo = String.format("%04d", ++num);
+            redisService.set(key, nextBatchNo);
+            redisService.expire(key, 60 * 60 * 48);// 两天后失效
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return dateStr + batchNo;
     }
 
     private void createExcel(PaymentStatement paymentStatement, StatementConfig statementConfig) throws Exception {
