@@ -74,15 +74,14 @@ public class LiveVO implements Serializable {
 	/**
 	 * 距离
 	 */
-	private Double distance ;
-	
+	private Double distance ;	
 
-	public String getId() {
-		return id;
+	public String getLiveId() {
+		return liveId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setLiveId(String liveId) {
+		this.liveId = liveId;
 	}
 
 	public String getLiveName() {
