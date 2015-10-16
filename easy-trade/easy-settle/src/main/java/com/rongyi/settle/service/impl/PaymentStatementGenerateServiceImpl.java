@@ -17,6 +17,7 @@ import com.rongyi.settle.dto.PaymentStatementExcelDto;
 import com.rongyi.settle.service.BussinessInfoService;
 import com.rongyi.settle.service.PaymentStatementService;
 import com.rongyi.settle.service.StatementConfigService;
+import com.rongyi.settle.util.AmountUtil;
 import com.rongyi.settle.util.DateUtils;
 import com.rongyi.settle.util.ExcelUtils;
 
@@ -70,7 +71,6 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
                     paymentStatement.setCreateAt(new Date());
                     paymentStatement.setIsDelete(new Byte("0"));
                     paymentStatement.setPayNo(orderNoGenService.getOrderNo("3"));
-                    paymentStatementService.insert(paymentStatement);
                     createExcel(paymentStatement, statementConfig);
                 }
             }
@@ -129,6 +129,8 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
         paymentStatementExcelDto.setCouponExcelDtoList(couponExcelDtoList);
         paymentStatementExcelDto.setCouponCodeExcelDtoList(couponCodeExcelDtoList);
         ExcelUtils.write(propertyConfigurer.getProperty("settle.template.file"), propertyConfigurer.getProperty("settle.file.path"), statementConfig.getBussinessId(), getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime())), paymentStatementExcelDto);
+        paymentStatement.setPayTotal(AmountUtil.changYuanToFen(total));
+        paymentStatementService.insert(paymentStatement);
     }
 
     private String getPayChannelName(Byte payChannel) {
