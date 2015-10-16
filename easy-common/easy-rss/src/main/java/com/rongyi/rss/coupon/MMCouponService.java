@@ -1,7 +1,7 @@
 package com.rongyi.rss.coupon;
 
 
-import com.rongyi.easy.coupon.entity.old.Coupon;
+import com.rongyi.easy.coupon.entity.OldCoupon;
 import com.rongyi.easy.coupon.old_vo.OldCouponVO;
 import com.rongyi.rss.coupon.mall.shop.MSCouponService;
 import org.bson.types.ObjectId;
@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 1.优惠券订单提交  2.查询优惠详情浏览次数
  * 优惠券模板接口，提供给mall-shop的controller使用)
- * 废弃不用
+ * 废弃不用，下步删除
  *
  * @see MSCouponService
  */
@@ -27,7 +27,7 @@ public interface MMCouponService {
      * @return
      */
     @Deprecated
-    public Coupon findCouponById(ObjectId id);
+    public OldCoupon findCouponById(ObjectId id);
 
     /**
      * 老优惠:通过id修改优惠券详情浏览次数

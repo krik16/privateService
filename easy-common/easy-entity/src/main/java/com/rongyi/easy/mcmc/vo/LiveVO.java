@@ -74,7 +74,21 @@ public class LiveVO implements Serializable {
 	/**
 	 * 距离
 	 */
-	private Double distance ;	
+	private Double distance ;
+	
+	/**
+	 * sessionId
+	 */
+	private String jsessionId;
+
+	public String getJsessionId() {
+		return jsessionId;
+	}
+
+	public void setJsessionId(String jsessionId) {
+		this.jsessionId = jsessionId;
+	}
+
 
 	public String getLiveId() {
 		return liveId;

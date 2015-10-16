@@ -3,6 +3,7 @@
  */
 package com.rongyi.rss.tradecenter.osm;
 
+import com.rongyi.easy.osm.entity.ApplicationFormEntity;
 import com.rongyi.easy.rmmm.param.AfterSaleParam;
 import com.rongyi.easy.rmmm.vo.RefundVO;
 
@@ -24,5 +25,14 @@ public interface IOrderRefundQueryService {
 	 * @throws Exception
 	 */
 	public RefundVO getRefundVOById(AfterSaleParam param) throws Exception;
+	
+	/**
+	 * 根据主键查询
+	 * 
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	public ApplicationFormEntity selectById(Integer id) throws Exception;
 
 }

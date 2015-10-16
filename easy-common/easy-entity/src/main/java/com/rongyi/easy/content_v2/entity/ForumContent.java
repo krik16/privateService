@@ -93,6 +93,16 @@ public class ForumContent implements Serializable {
      * 记录状态 0待发布、1已发布、2已关闭
      */
     private Integer status;
+    /**
+     * 买手直播
+     */
+    private String buyerLive;
+    /**
+     *
+     */
+    private String iosVersion;
+
+    private String androidVersion;
 
     public Integer getId() {
         return id;

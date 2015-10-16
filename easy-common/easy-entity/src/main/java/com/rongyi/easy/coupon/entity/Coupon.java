@@ -7,11 +7,17 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.beans.Transient;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 新版卡券基础数据
+ *
+ * @see OldCoupon mongo卡券信息
+ */
 public class Coupon implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -175,9 +181,19 @@ public class Coupon implements Serializable {
     private Integer inChannel;
 
     /**
+     * 导入渠道名称
+     */
+    private String inChannelName;
+
+    /**
      * 推广渠道
      */
     private Integer outChannel;
+
+    /**
+     * 推广渠道名称
+     */
+    private String outChannelName;
 
     /**
      * 店铺对应的公司名
@@ -258,13 +274,23 @@ public class Coupon implements Serializable {
     /**
      * 红包关联的商品  related_type只有这个类型是1 并且coupon_type 为2 的时候  才有这个类型
      */
-    private List<RedenvelopeCommodity> redenvelopeCommodities;
+    private List<CouponCommodity> couponCommodities;
 
 
     private Integer purchaseType = Integer.valueOf(0);//购买类型 0正常购买类型 1抢购类型
 
     private Integer visitedCount = Integer.valueOf(0);//卡券详情浏览数
 
+    /**
+     * 是否是通用券，特指集团或商场发布的且只能在商场总台验券的券，例如：停车券等券
+     * 默认 false;
+     */
+    private Boolean isGeneral;
+
+    /**
+     * 关联活动类型： 未关联[0] 关联翻牌购[1] 关联推送[2]
+     */
+    private Integer activityType;
 
     public String getId() {
         return id;
@@ -318,6 +344,14 @@ public class Coupon implements Serializable {
         return origPrice;
     }
 
+    public double getOrigPrice2Double() {
+        double val = 0D;
+        if (origPrice != null) {
+            val = BigDecimal.valueOf(origPrice).divide(BigDecimal.valueOf(100.00D)).setScale(2).doubleValue();
+        }
+        return val;
+    }
+
     public void setOrigPrice(Integer origPrice) {
         this.origPrice = origPrice;
     }
@@ -326,12 +360,28 @@ public class Coupon implements Serializable {
         return currPrice;
     }
 
+    public double getCurrPrice2Double() {
+        double val = 0D;
+        if (currPrice != null) {
+            val = BigDecimal.valueOf(currPrice).divide(BigDecimal.valueOf(100.00D)).setScale(2).doubleValue();
+        }
+        return val;
+    }
+
     public void setCurrPrice(Integer currPrice) {
         this.currPrice = currPrice;
     }
 
     public Integer getDiscount() {
         return discount;
+    }
+
+    public double getDiscount2Double() {
+        double val = 0D;
+        if (discount != null) {
+            val = BigDecimal.valueOf(discount).divide(BigDecimal.valueOf(100.00D)).setScale(2).doubleValue();
+        }
+        return val;
     }
 
     public void setDiscount(Integer discount) {
@@ -657,20 +707,20 @@ public class Coupon implements Serializable {
         this.preferentialType = preferentialType;
     }
 
-    public List<RedenvelopeCommodity> getRedenvelopeCommodities() {
-        return redenvelopeCommodities;
+    public List<CouponCommodity> getCouponCommodities() {
+        return couponCommodities;
     }
 
-    public void setRedenvelopeCommodities(List<RedenvelopeCommodity> redenvelopeCommodities) {
-        this.redenvelopeCommodities = redenvelopeCommodities;
+    public void setCouponCommodities(List<CouponCommodity> couponCommodities) {
+        this.couponCommodities = couponCommodities;
     }
 
     @Transient
-    public List<String> getRedenvelopeCommodityIds() {
+    public List<String> getCouponCommodityIds() {
         List<String> list = ListUtils.EMPTY_LIST;
-        if (CollectionUtils.isNotEmpty(this.redenvelopeCommodities)) {
+        if (CollectionUtils.isNotEmpty(couponCommodities)) {
             list = new ArrayList<>();
-            for (RedenvelopeCommodity e : redenvelopeCommodities) {
+            for (CouponCommodity e : couponCommodities) {
                 list.add(e.getCommodityId());
             }
         }
@@ -714,6 +764,37 @@ public class Coupon implements Serializable {
         return (totalCount - stockCount < 0) ? 0 : totalCount - stockCount;
     }
 
+    public Boolean getIsGeneral() {
+        return isGeneral;
+    }
+
+    public void setIsGeneral(Boolean isGeneral) {
+        this.isGeneral = isGeneral;
+    }
+
+    public String getInChannelName() {
+        return inChannelName;
+    }
+
+    public void setInChannelName(String inChannelName) {
+        this.inChannelName = inChannelName;
+    }
+
+    public String getOutChannelName() {
+        return outChannelName;
+    }
+
+    public void setOutChannelName(String outChannelName) {
+        this.outChannelName = outChannelName;
+    }
+
+    public Integer getActivityType() {
+        return activityType;
+    }
+
+    public void setActivityType(Integer activityType) {
+        this.activityType = activityType;
+    }
 
     @Override
     public String toString() {
@@ -749,7 +830,9 @@ public class Coupon implements Serializable {
                 .append("publishChannel", publishChannel)
                 .append("status", status)
                 .append("inChannel", inChannel)
+                .append("inChannelName", inChannelName)
                 .append("outChannel", outChannel)
+                .append("outChannelName", outChannelName)
                 .append("sourceName", sourceName)
                 .append("createUser", createUser)
                 .append("createAt", createAt)
@@ -764,11 +847,11 @@ public class Coupon implements Serializable {
                 .append("couponShops", couponShops)
                 .append("couponMalls", couponMalls)
                 .append("preferentialType", preferentialType)
-                .append("redenvelopeCommodities", redenvelopeCommodities)
+                .append("couponCommodities", couponCommodities)
                 .append("purchaseType", purchaseType)
                 .append("visitedCount", visitedCount)
+                .append("isGeneral", isGeneral)
+                .append("activityType", activityType)
                 .toString();
     }
-
-
 }

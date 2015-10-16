@@ -36,6 +36,13 @@ public interface IInviteCodeService {
 	 * @throws MallShopException
 	 */
 	public Integer UpdateByCode(String inviteCode,Integer userId) throws Exception;
+	
+	/**
+	 * 根据邀请码 进行更新
+	 * @param inviteCode
+	 * @throws MallShopException
+	 */
+	public Integer UpdateByCode(String inviteCode,Integer userId,Integer type) throws Exception;
 
 	/**
 	 * 查邀请码申请记录表数据数量

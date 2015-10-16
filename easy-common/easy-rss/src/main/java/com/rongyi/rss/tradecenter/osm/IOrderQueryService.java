@@ -8,9 +8,13 @@ import java.util.Map;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.osm.entity.OrderDetailFormEntity;
+import com.rongyi.easy.osm.entity.OrderEventEntity;
+import com.rongyi.easy.osm.entity.OrderFormEntity;
+import com.rongyi.easy.rmmm.param.MaxIntegralParam;
+import com.rongyi.easy.rmmm.param.MyDealParam;
 import com.rongyi.easy.rmmm.param.MyOrderParam;
 import com.rongyi.easy.rmmm.param.TransactionDetailParam;
-import com.rongyi.easy.rmmm.vo.BuyerVO;
+import com.rongyi.easy.rmmm.vo.DetailVO;
 import com.rongyi.easy.rmmm.vo.MyOrderCountVO;
 import com.rongyi.easy.rmmm.vo.OrderManagerVO;
 import com.rongyi.easy.rmmm.vo.OrderVO;
@@ -18,8 +22,6 @@ import com.rongyi.easy.rmmm.vo.ParentOrderListVO;
 import com.rongyi.easy.rmmm.vo.ParentOrderVO;
 import com.rongyi.easy.rmmm.vo.ShopMallVO;
 import com.rongyi.easy.rmmm.vo.TransactionDetailVO;
-import com.rongyi.easy.tradecenter.osm.OrderEventEntity;
-import com.rongyi.easy.tradecenter.osm.OrderFormEntity;
 
 /**
  * Copyright (C),上海容易网电子商务有限公司
@@ -119,5 +121,40 @@ public interface IOrderQueryService {
 	 * @throws Exception
 	 */
 	public OrderEventEntity getOrderEventByType(String type , String orderNum) throws Exception;
+	
+	/**
+	 * 获取商品生成订单最大使用积分
+	 * 
+	 * @param param
+	 * @return
+	 */
+	public  Integer getMaxIntegral(MaxIntegralParam param, double limit, double moenyExchangeScore);
+	
+	/**
+	 * 分解订单状态路径
+	 * @param statusRoute
+	 * @return
+	 */
+	public Map<String, String> getRouteByStatusRoute(String statusRoute);
+	
+	public List<OrderFormEntity> selectOrderList(Map param) throws Exception ;
+	
+	public int selectOrderListCount(String weidianId, String userId) throws Exception;
+	
+	/**
+	 * 我的交易金额列表
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public DetailVO getMyDealAmount(MyDealParam param) throws Exception;
+	
+	/**
+	 * 我的交易佣金列表
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public DetailVO getMyDealCommission(MyDealParam param) throws Exception;
 
 }

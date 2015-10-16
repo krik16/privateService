@@ -2,7 +2,7 @@ package com.rongyi.rss.coupon;
 
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
-import com.rongyi.easy.coupon.entity.old.Coupon;
+import com.rongyi.easy.coupon.entity.OldCoupon;
 
 import org.bson.types.ObjectId;
 
@@ -23,7 +23,7 @@ public interface ICashCouponService {
      * @param id
      * @return
      */
-    Coupon findOne(String id);
+    OldCoupon findOne(String id);
 
     /**
      * 保存或更新
@@ -31,7 +31,7 @@ public interface ICashCouponService {
      * @param coupon
      * @return
      */
-    boolean saveOrUpdate(Coupon coupon);
+    boolean saveOrUpdate(OldCoupon coupon);
 
     /**
      * 逻辑删除
@@ -46,7 +46,7 @@ public interface ICashCouponService {
      *
      * @return
      */
-    List<Coupon> findAll();
+    List<OldCoupon> findAll();
 
     /**
      * 分页查询数据
@@ -56,7 +56,7 @@ public interface ICashCouponService {
      * @param pageSize
      * @return
      */
-    PagingVO<Coupon> findAllByPage(Map<String, Object> paramMap, int curPage, int pageSize);
+    PagingVO<OldCoupon> findAllByPage(Map<String, Object> paramMap, int curPage, int pageSize);
 
     /**
      * 审核现金劵
@@ -74,7 +74,7 @@ public interface ICashCouponService {
      * @param cashCoupon 关联商品
      * @return
      */
-    boolean allocateCoupon(Coupon cashCoupon);
+    boolean allocateCoupon(OldCoupon cashCoupon);
 
     /**
      * 追加券码

@@ -3,6 +3,7 @@ package com.rongyi.easy.coupon.entity;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -11,6 +12,11 @@ import java.util.Date;
 public class UserRedenvelope implements Serializable {
     public final static Integer STATUS_UNUSE = 0;//未使用
     public final static Integer STATUS_USED = 1;//已使用
+
+    public final static Integer CHANNEL_APP = 0;// 领取渠道:容易逛[0] 互动屏[1] 微商[2]
+    public final static Integer CHANNEL_TERMINAL = 1;// 领取渠道:容易逛[0] 互动屏[1] 微商[2]
+    public final static Integer CHANNEL_WECHAT = 2;// 领取渠道:容易逛[0] 互动屏[1] 微商[2]
+
 
     private Integer id;
 
@@ -74,14 +80,29 @@ public class UserRedenvelope implements Serializable {
     private String orderNo;
 
     /**
-     * 过期时间
+     * 有效期开始时间
      */
-    private Date validAt;
+    private Date validStartAt;
+
+    /**
+     * 有效期结束时间
+     */
+    private Date validEndAt;
+
+    /**
+     * 活动Id：目前支持：翻牌购、推送
+     */
+    private String activityId;
+
+    /**
+     * 活动名称：目前支持：翻牌购、推送
+     */
+    private String activityName;
 
     public UserRedenvelope() {
     }
 
-    public UserRedenvelope(String name, String userId, String couponId, String couponCode, Integer discount, Integer status, Date receiveAt, Integer channel, Date validAt) {
+    public UserRedenvelope( String name, String userId, String couponId, String couponCode, Integer discount, Integer status, Date receiveAt, Integer channel, Date validStartAt, Date validEndAt, String activityName) {
         this.name = name;
         this.userId = userId;
         this.couponId = couponId;
@@ -90,7 +111,28 @@ public class UserRedenvelope implements Serializable {
         this.status = status;
         this.receiveAt = receiveAt;
         this.channel = channel;
-        this.validAt = validAt;
+        this.validStartAt = validStartAt;
+        this.validEndAt = validEndAt;
+        this.activityName = activityName;
+    }
+
+    public UserRedenvelope( String name, String userId, String userName, String couponId, String couponCode, Integer discount, Integer status, String userAccount, Date receiveAt, Date useAt, Integer channel, String orderNo, Date validStartAt, Date validEndAt, String activityId, String activityName) {
+        this.name = name;
+        this.userId = userId;
+        this.userName = userName;
+        this.couponId = couponId;
+        this.couponCode = couponCode;
+        this.discount = discount;
+        this.status = status;
+        this.userAccount = userAccount;
+        this.receiveAt = receiveAt;
+        this.useAt = useAt;
+        this.channel = channel;
+        this.orderNo = orderNo;
+        this.validStartAt = validStartAt;
+        this.validEndAt = validEndAt;
+        this.activityId = activityId;
+        this.activityName = activityName;
     }
 
     public Integer getId() {
@@ -182,12 +224,20 @@ public class UserRedenvelope implements Serializable {
         this.orderNo = orderNo;
     }
 
-    public Date getValidAt() {
-        return validAt;
+    public Date getValidStartAt() {
+        return validStartAt;
     }
 
-    public void setValidAt(Date validAt) {
-        this.validAt = validAt;
+    public void setValidStartAt(Date validStartAt) {
+        this.validStartAt = validStartAt;
+    }
+
+    public Date getValidEndAt() {
+        return validEndAt;
+    }
+
+    public void setValidEndAt(Date validEndAt) {
+        this.validEndAt = validEndAt;
     }
 
     public String getName() {
@@ -202,8 +252,32 @@ public class UserRedenvelope implements Serializable {
         return discount;
     }
 
+    public double getDiscount2Double() {
+        double dis = 0D;
+        if (discount != null) {
+            dis = BigDecimal.valueOf(discount).divide(BigDecimal.valueOf(100.00D)).setScale(2).doubleValue();
+        }
+        return dis;
+    }
+
     public void setDiscount(Integer discount) {
         this.discount = discount;
+    }
+
+    public String getActivityId() {
+        return activityId;
+    }
+
+    public void setActivityId(String activityId) {
+        this.activityId = activityId;
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
     }
 
     @Override
@@ -222,7 +296,10 @@ public class UserRedenvelope implements Serializable {
                 .append("useAt", useAt)
                 .append("channel", channel)
                 .append("orderNo", orderNo)
-                .append("validAt", validAt)
+                .append("validStartAt", validStartAt)
+                .append("validEndAt", validEndAt)
+                .append("activityId", activityId)
+                .append("activityName", activityName)
                 .toString();
     }
 }

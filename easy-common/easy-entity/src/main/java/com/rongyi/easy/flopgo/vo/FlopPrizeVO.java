@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.rongyi.easy.coupon.entity.old.Coupon;
-import com.rongyi.easy.coupon.entity.old.Coupon.CouponProduct;
+import com.rongyi.easy.coupon.entity.OldCoupon;
+import com.rongyi.easy.coupon.entity.OldCoupon.CouponProduct;
 
 
 /**
@@ -91,7 +91,7 @@ public class FlopPrizeVO implements Serializable{
 		this.recommend = recommend;
 	}
 
-	public FlopPrizeVO(Coupon coupon){
+	public FlopPrizeVO(OldCoupon coupon){
 		if(coupon!=null){
 			this.id=coupon.getId().toString();
 			this.title=coupon.getTitle();

@@ -1,10 +1,15 @@
-package com.rongyi.easy.coupon.entity.old;
+package com.rongyi.easy.coupon.entity;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
+/**
+ * 老代金券订单
+ * 下步废弃，新的移到交易中心
+ */
 @Deprecated
 public class CouponOrder implements Serializable {
 
@@ -105,9 +110,9 @@ public class CouponOrder implements Serializable {
      * 优惠详情，json格式，例如{“score”:”100”, "scoreDeduction":"1"}
      */
     private String discountInfo;
-    
+
     private Date nextStatusTime;
-    
+
     private Integer statusHold;
 
     public CouponOrder() {
@@ -367,30 +372,29 @@ public class CouponOrder implements Serializable {
                 .toString();
     }
 
-	public List<CouponOrderItem> getItemList() {
-		return itemList;
-	}
+    public List<CouponOrderItem> getItemList() {
+        return itemList;
+    }
 
-	public void setItemList(List<CouponOrderItem> itemList) {
-		this.itemList = itemList;
-	}
+    public void setItemList(List<CouponOrderItem> itemList) {
+        this.itemList = itemList;
+    }
 
-	public Date getNextStatusTime() {
-		return nextStatusTime;
-	}
+    public Date getNextStatusTime() {
+        return nextStatusTime;
+    }
 
-	public void setNextStatusTime(Date nextStatusTime) {
-		this.nextStatusTime = nextStatusTime;
-	}
+    public void setNextStatusTime(Date nextStatusTime) {
+        this.nextStatusTime = nextStatusTime;
+    }
 
-	public Integer getStatusHold() {
-		return statusHold;
-	}
+    public Integer getStatusHold() {
+        return statusHold;
+    }
 
-	public void setStatusHold(Integer statusHold) {
-		this.statusHold = statusHold;
-	}
+    public void setStatusHold(Integer statusHold) {
+        this.statusHold = statusHold;
+    }
 
-	
 
 }

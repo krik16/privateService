@@ -3,8 +3,8 @@ package com.rongyi.easy.flopgo.vo;
 import java.io.Serializable;
 import java.util.List;
 
-import com.rongyi.easy.coupon.entity.old.Coupon;
-import com.rongyi.easy.coupon.entity.old.Coupon.CouponProduct;
+import com.rongyi.easy.coupon.entity.OldCoupon;
+import com.rongyi.easy.coupon.entity.OldCoupon.CouponProduct;
 /**
  * 用户返回的是修改奖品状态的接口的vo
  * @author user
@@ -45,7 +45,7 @@ public class UpdatePrizeStatusVO implements Serializable
 		this.id = id;
 	}
 
-	public UpdatePrizeStatusVO(Coupon coupon){
+	public UpdatePrizeStatusVO(OldCoupon coupon){
 		if(coupon!=null){
 			this.type=coupon.getCouponType();
 			this.title=coupon.getTitle();

@@ -2,6 +2,7 @@ package com.rongyi.rss.coupon;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.framework.mybatis.pojo.Page;
+import com.rongyi.easy.coupon.entity.UserCoupon;
 import com.rongyi.easy.coupon.entity.UserRedenvelope;
 import com.rongyi.easy.coupon.param.UserRedenvelopeParam;
 import com.rongyi.easy.coupon.vo.UserCouponVO;
@@ -33,5 +34,66 @@ public interface RoaUserRedenvelopeService {
 
     boolean checkReceived(String couponId, String userId);
 
+    /**
+     * 根据用户Id查询用户红包
+     *
+     * @param userId
+     * @param currentPage
+     * @param pageSize
+     * @return
+     */
     PagingVO<UserRedenvelope> findUserCouponByUserId(String userId, Integer currentPage, Integer pageSize);
+
+    /**
+     * 根据券码与商品Id验证红包
+     *
+     * @param couponCode
+     * @param commodityId 商品Id
+     * @return
+     */
+    boolean validCashCoupon(String couponCode, String commodityId);
+
+    /**
+     * 根据券码查询红包状态
+     *
+     * @param couponCode
+     * @return
+     */
+    Integer getCashCouponStatus(String couponCode);
+
+    /**
+     * 修改红包状态
+     *
+     * @param couponCode
+     * @param status
+     * @param orderNo
+     * @param sellerId
+     * @return
+     */
+    boolean changeCashCouponStatus(String couponCode, Integer status, String orderNo, Integer sellerId);
+
+
+    /**
+     * 根据券码查询红包信息
+     *
+     * @param couponCode
+     * @return
+     */
+    UserCouponVO findCashCoupon(String couponCode);
+
+    /**
+     * 根据券码查询红包抵扣金额
+     *
+     * @param couponCode
+     * @return
+     */
+    Double getCashCouponDiscount(String couponCode);
+
+    /**
+     * 用户红包信息
+     *
+     * @param couponCode
+     * @return
+     */
+    UserCoupon findUserCouponByCode(String couponCode);
 }

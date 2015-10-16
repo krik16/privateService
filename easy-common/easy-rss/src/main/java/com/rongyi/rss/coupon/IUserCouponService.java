@@ -7,6 +7,7 @@ import com.rongyi.easy.coupon.vo.UserCouponVO;
  * @author hebo 2015/06/23
  *
  */
+@Deprecated
 public interface IUserCouponService {
 	
 	UserCouponVO getUserCouponByCouponCode(String couponCode);

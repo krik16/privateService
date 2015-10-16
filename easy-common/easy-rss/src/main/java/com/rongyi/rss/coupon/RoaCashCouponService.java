@@ -2,16 +2,18 @@ package com.rongyi.rss.coupon;
 
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
-import com.rongyi.easy.coupon.entity.old.Coupon;
+import com.rongyi.easy.coupon.entity.OldCoupon;
 import org.bson.types.ObjectId;
 
 import java.util.List;
 import java.util.Map;
 
 /**
- * 给ROA提供现金券接口
+ * 给ROA提供红包接口
  *
  * @author Breggor
+ *         废弃，下步删除掉
+ * @see RoaUserRedenvelopeService
  */
 @Deprecated
 public interface RoaCashCouponService {
@@ -22,7 +24,7 @@ public interface RoaCashCouponService {
      * @param id
      * @return
      */
-    Coupon findOne(ObjectId id);
+    OldCoupon findOne(ObjectId id);
 
     /**
      * 保存或更新
@@ -30,7 +32,7 @@ public interface RoaCashCouponService {
      * @param coupon
      * @return
      */
-    boolean saveOrUpdate(Coupon coupon);
+    boolean saveOrUpdate(OldCoupon coupon);
 
     /**
      * 逻辑删除
@@ -45,7 +47,7 @@ public interface RoaCashCouponService {
      *
      * @return
      */
-    List<Coupon> findAll();
+    List<OldCoupon> findAll();
 
     /**
      * 分页查询
@@ -55,7 +57,7 @@ public interface RoaCashCouponService {
      * @param pageSize
      * @return
      */
-    PagingVO<Coupon> findAllByPage(Map<String, Object> paramMap, int curPage, int pageSize);
+    PagingVO<OldCoupon> findAllByPage(Map<String, Object> paramMap, int curPage, int pageSize);
 
     /**
      * 审核现金劵
@@ -73,26 +75,31 @@ public interface RoaCashCouponService {
      * @param cashCoupon 关联商品
      * @return
      */
-    boolean allocateCoupon(Coupon cashCoupon);
+    boolean allocateCoupon(OldCoupon cashCoupon);
 
     /**
+     * 不能使用
      * 根据卡券Id减少库存
      *
      * @param couponId
      * @param quantity
      * @return
+     * @see RoaCouponService#subtractCouponInventory(String, int)
      */
-    boolean subtractInventory(String couponId, int quantity);
+//    @Deprecated
+//    boolean subtractInventory(String couponId, int quantity);
 
 
     /**
+     * 不能使用
      * 根据卡券Id恢复库存
      *
      * @param couponId
      * @param quantity
      * @return
      */
-    boolean recoverInventory(String couponId, int quantity);
+//    @Deprecated
+//    boolean recoverInventory(String couponId, int quantity);
 
 
     /**
@@ -129,7 +136,7 @@ public interface RoaCashCouponService {
      * @param couponCode
      * @return
      */
-    Coupon getCouponByCode(String couponCode);
+    OldCoupon getCouponByCode(String couponCode);
 
     /**
      * 追加券码

@@ -49,6 +49,9 @@ public class UserManagerParam extends BaseParam implements Serializable{
     private Integer merUserId;//操作人id
 
 
+	private String userDesc;//买手描述
+	private int flag=0;//操作参数 1升级功能
+
 
 
     public Integer getId() {
@@ -58,6 +61,14 @@ public class UserManagerParam extends BaseParam implements Serializable{
 		this.id = id;
 	}
 
+	public String getUserDesc() {
+		return userDesc;
+	}
+
+	public void setUserDesc(String userDesc) {
+		this.userDesc = userDesc;
+	}
+
 	public String getCreatingUserType() {
 		return creatingUserType;
 	}
@@ -65,6 +76,14 @@ public class UserManagerParam extends BaseParam implements Serializable{
     
 	public void setCreatingUserType(String creatingUserType) {
 		this.creatingUserType = creatingUserType;
+	}
+
+	public int getFlag() {
+		return flag;
+	}
+
+	public void setFlag(int flag) {
+		this.flag = flag;
 	}
 
 	public Integer getRoleId() {

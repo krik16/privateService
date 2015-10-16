@@ -29,7 +29,20 @@ public class LiveSearchParam implements Serializable{
 	private String sort;      //排序规则（distance，null，couponRequired（commodityRequired），date）
 	private int from;         //页
 	private int size;         //一页数量
-
+	private String liveId;
+	private String jsessionid;
+	public String getJsessionid() {
+		return jsessionid;
+	}
+	public void setJsessionid(String jsessionid) {
+		this.jsessionid = jsessionid;
+	}
+	public String getLiveId() {
+		return liveId;
+	}
+	public void setLiveId(String liveId) {
+		this.liveId = liveId;
+	}
 	public String getKeyword() {
 		return keyword;
 	}

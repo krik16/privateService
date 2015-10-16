@@ -1,6 +1,6 @@
 package com.rongyi.rss.tradecenter;
 
-import com.rongyi.easy.coupon.entity.old.UserCoupon;
+import com.rongyi.easy.coupon.entity.UserCoupon;
 
 import java.util.List;
 

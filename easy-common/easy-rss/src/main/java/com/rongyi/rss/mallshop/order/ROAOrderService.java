@@ -1,5 +1,7 @@
 package com.rongyi.rss.mallshop.order;
 
+import java.util.Map;
+
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
@@ -27,7 +29,7 @@ public interface ROAOrderService {
 	 * @return
 	 * @throws Exception
 	 */
-	public ResponseResult submitOrder(SubmitOrderParam submitOrderParam, String buyerNum) throws Exception;
+//	public ResponseResult submitOrder(SubmitOrderParam submitOrderParam, String buyerNum) throws Exception;
 	
 	/**
 	 * 订单操作关闭订单API
@@ -44,7 +46,7 @@ public interface ROAOrderService {
 	 * @return
 	 * @throws Exception
 	 */
-	public ResponseResult orderPriceChange(OrderDealedParam param) throws Exception;
+//	public ResponseResult orderPriceChange(OrderDealedParam param) throws Exception;
 	
 	/**
 	 * 我的订单列表
@@ -169,5 +171,12 @@ public interface ROAOrderService {
 	 * @throws Exception
 	 */
 	public  Integer getMaxIntegral(MaxIntegralParam param, double limit, double moenyExchangeScore) throws Exception;
+	
+	/**
+	 * 分解订单状态路径
+	 * @param statusRoute
+	 * @return
+	 */
+	public Map<String, String> getRouteByStatusRoute(String statusRoute);
 
 }

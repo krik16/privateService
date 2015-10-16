@@ -1,4 +1,4 @@
-package com.rongyi.easy.coupon.entity.old;
+package com.rongyi.easy.coupon.entity;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -15,11 +15,12 @@ import java.util.List;
  * 类型：代金券、红包、抵扣券
  *
  * @author Breggor
+ * @see Coupon   --新卡券基础数据
  */
 
 @Deprecated
 @Entity(value = "coupon", noClassnameStored = true)
-public class Coupon implements Serializable {
+public class OldCoupon implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

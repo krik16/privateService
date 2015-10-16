@@ -4,8 +4,8 @@ import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.framework.spring.context.utils.SpringContextUtil;
 
 public interface Constants {
-	String COOKIE_DOMAIN_RONGYI = ".rongyi.com";
-	String COOKIE_DOMAIN_RONGYIGUANG = ".rongyiguang.com";
+    String COOKIE_DOMAIN_RONGYI = ".rongyi.com";
+    String COOKIE_DOMAIN_RONGYIGUANG = ".rongyiguang.com";
 
     interface FilterRelation {
         String AND = "AND";
@@ -36,14 +36,14 @@ public interface Constants {
         String API_NULL_FLOPUSER = "用户名参数没有";
         String API_NULL_FLOPCHANNEL = "用户渠道没有";
         String API_NULL_OBJECTFLOPGOID = "翻牌活动id没有";
-        String API_NULL_ACTIVITYID="最近没有活动";
+        String API_NULL_ACTIVITYID = "最近没有活动";
         String API_NULL_LISTTYPE = "列表类型没有";
         String API_NULL_PAGESize = "没有分页";
         String API_NULL_USERPHONE="用户手机号为空";
         String API_NULL_COUPONID = "没有卷码";
         String API_NULL_ID = "没有奖品id";
-        String API_USER_NO="用户没有登录";
-        String API_USER_CHANNEL_ERROR="用户渠道错误 ";
+        String API_USER_NO = "用户没有登录";
+        String API_USER_CHANNEL_ERROR = "用户渠道错误 ";
     }
 
     interface SOME_TIME {
@@ -519,7 +519,6 @@ public interface Constants {
 
     /**
      * 魔生活魔店版本号
-     * @author user
      *
      */
     interface MallLifeVersion{
@@ -660,24 +659,41 @@ public interface Constants {
     interface Errno{
     	int success=0;
     }
-    interface NoticeStatus{
-    	/** 未通过 */
-    	Integer NOPASSED = 0;
-    	/** 审核中 */
-    	Integer REVIEWING = 1;
-    	/** 发布中 */
-    	Integer RELEASEING = 2;
-    	/** 已过期 */
-    	Integer OVERDUE = 3;
+
+    interface NoticeStatus {
+        /**
+         * 未通过
+         */
+        Integer NOPASSED = 0;
+        /**
+         * 审核中
+         */
+        Integer REVIEWING = 1;
+        /**
+         * 发布中
+         */
+        Integer RELEASEING = 2;
+        /**
+         * 已过期
+         */
+        Integer OVERDUE = 3;
     }
-    
+
     /**
      *卖家类型
      */
-    interface GuideType{
-    	/** 导购*/
-    	Integer GUIDE = 1;
-    	/** 买手*/
-    	Integer BULL = 2;
+    interface GuideType {
+        /**
+         * 导购
+         */
+        Integer GUIDE = 1;
+        /**
+         * 买手
+         */
+        Integer BULL = 2;
+    }
+    interface CouponPage{
+        Integer CURRENT_PAGE=1;
+        Integer PAGE_SIZE=10;
     }
 }
