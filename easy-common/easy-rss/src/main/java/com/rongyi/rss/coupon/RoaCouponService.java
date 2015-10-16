@@ -1,8 +1,9 @@
 package com.rongyi.rss.coupon;
 
 import com.rongyi.core.bean.ResponseResult;
-import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.coupon.param.CouponParam;
 import com.rongyi.easy.coupon.vo.TCCouponVO;
 
 import java.util.List;
@@ -21,14 +22,6 @@ public interface RoaCouponService {
      * @return
      */
     TCCouponVO findTCCouponById(String couponId);
-
-    /**
-     * 减库存
-     *
-     * @param couponId
-     * @return
-     */
-    ResponseVO subtractInventoryReturnCode(String couponId, Integer quantity);
 
     /**
      * 根据id查询
@@ -104,6 +97,7 @@ public interface RoaCouponService {
 
     /**
      * 只减少库存
+     *
      * @param couponId
      * @param quantity
      * @return
@@ -111,10 +105,18 @@ public interface RoaCouponService {
     ResponseResult subtractCouponInventory(String couponId, int quantity);
 
     /**
-     *  恢复券码
+     * 恢复券码
+     *
      * @param couponId
      * @param couponCode
      * @return
      */
     boolean restoreCouponInventory(String couponId, String couponCode);
+
+    /**
+     *
+     * @param couponParam
+     * @return
+     */
+    PagingVO<Coupon> findAllByPage(CouponParam couponParam);
 }

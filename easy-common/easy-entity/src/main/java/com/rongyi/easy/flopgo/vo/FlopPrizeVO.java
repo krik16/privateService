@@ -1,16 +1,12 @@
 package com.rongyi.easy.flopgo.vo;
 
+import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.coupon.entity.CouponCommodity;
+
 import java.io.Serializable;
-
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import com.rongyi.easy.coupon.entity.Coupon;
-import com.rongyi.easy.coupon.entity.CouponCommodity;
-import com.rongyi.easy.coupon.entity.OldCoupon;
-import com.rongyi.easy.coupon.entity.OldCoupon.CouponProduct;
 
 
 /**
@@ -102,7 +98,7 @@ public class FlopPrizeVO implements Serializable{
 
 				this.restCount=coupon.getStockCount();//这个是计算库存
 
-			this.activityStatus=coupon.getActivityType().toString();
+//			this.activityStatus=coupon.getActivityType().toString();
 			this.nowPrice=coupon.getCurrPrice2Double();
 			this.originalPrice=coupon.getOrigPrice2Double();
 			this.discount=coupon.getDiscount2Double();
