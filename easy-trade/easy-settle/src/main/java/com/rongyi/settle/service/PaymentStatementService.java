@@ -43,4 +43,5 @@ public interface PaymentStatementService {
     PaymentStatement get(Integer id);
 
     void generate(Integer id) throws Exception;
+    
 }

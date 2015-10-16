@@ -52,7 +52,7 @@ import com.rongyi.settle.util.DateUtils;
  **/
 @Controller
 @RequestMapping("/paymentStatement")
-public class PaymentStatementController {
+public class PaymentStatementController extends BaseController{
 
 	Logger logger = LoggerFactory.getLogger(PaymentStatementController.class);
 
@@ -265,13 +265,11 @@ public class PaymentStatementController {
 					return responseData;
 				}
 			}
-			// 获取用户
-			String userId = request.getAttribute("userName") != null ? request.getAttribute("userName").toString() : null;
 			List<Integer> ids = new ArrayList<>();
 			for (String id : idStr.split(",")) {
 				ids.add(Integer.valueOf(id.trim()));
 			}
-			if (paymentStatementService.updatePaymentStatusByIds(ids, status, desc, userId)) {
+			if (paymentStatementService.updatePaymentStatusByIds(ids, status, desc, getUserName(request))) {
 				result = ResponseData.success();
 			} else {
 				result = ResponseData.failure(CodeEnum.FIAL_UPDATE_PAYMENT.getCodeInt(), CodeEnum.FIAL_UPDATE_PAYMENT.getValueStr());

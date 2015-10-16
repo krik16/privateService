@@ -1,5 +1,18 @@
 package com.rongyi.settle.service.impl;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
@@ -28,15 +41,6 @@ import com.rongyi.settle.service.StatementConfigService;
 import com.rongyi.settle.util.AmountUtil;
 import com.rongyi.settle.util.DateUtils;
 import com.rongyi.settle.util.ExcelUtils;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
-import java.util.*;
 
 /**
  * Created by xgq on 2015/9/22.
@@ -120,7 +124,14 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 							logger.info(ids.get(i) + "未生成付款，原因:" + reMap.get("message"));
 							ids.remove(i);
 						}
+					}else if(ConstantEnum.STATUS_4.getCodeInt().equals(status)){
+						PaymentStatement paymentStatement = get(ids.get(i));
+						if(paymentStatement.getPayTotal() == null || paymentStatement.getPayTotal() == 0){
+							paramsMap.put("status",ConstantEnum.STATUS_12.getCodeByte());
+							desc+=",0元商家审核确认，状态直接为已付款";
+						}
 					}
+					
 					saveOperationLog(ids.get(i), status, desc, userId);
 				}
 				paymentStatementMapper.updateStatusByIds(paramsMap);
