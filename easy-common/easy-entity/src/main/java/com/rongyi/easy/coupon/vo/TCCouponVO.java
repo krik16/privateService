@@ -1,7 +1,10 @@
 package com.rongyi.easy.coupon.vo;
 
 import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.coupon.entity.CouponBrand;
 import com.rongyi.easy.coupon.entity.CouponCommodity;
+import com.rongyi.easy.coupon.entity.CouponGroup;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -147,6 +150,21 @@ public class TCCouponVO implements Serializable {
     private List<Integer> afterSaleService; // = CouponConst.AFTER_SALE_SERVICE;//[1,1,1,1] 1为支持，0为不支持。第一位：随时退、第二位：过期退 第三位： 免预约、第四位：不可退
 
     private Boolean isGeneral;//是否是通用券
+    
+    /**
+     * 关联类型
+     * 代金券：集团[0],品牌[1], 商场 [2],店铺[3];
+     * 红包 ：全场[0],商品[1]
+     */
+    private Integer relatedType;
+    /**
+     * 代金券关联的品牌
+     */
+    private CouponBrand couponBrand;
+    /**
+     * 代金券关联的集团
+     */
+    private CouponGroup couponGroup;
 
     private Long version; // 乐观锁
 
@@ -159,12 +177,36 @@ public class TCCouponVO implements Serializable {
         this.id = id;
     }
 
-    public Boolean getIsGeneral() {
+    public Integer getRelatedType() {
+		return relatedType;
+	}
+
+	public void setRelatedType(Integer relatedType) {
+		this.relatedType = relatedType;
+	}
+
+	public Boolean getIsGeneral() {
 		return isGeneral;
 	}
 
 	public void setIsGeneral(Boolean isGeneral) {
 		this.isGeneral = isGeneral;
+	}
+
+	public CouponBrand getCouponBrand() {
+		return couponBrand;
+	}
+
+	public void setCouponBrand(CouponBrand couponBrand) {
+		this.couponBrand = couponBrand;
+	}
+
+	public CouponGroup getCouponGroup() {
+		return couponGroup;
+	}
+
+	public void setCouponGroup(CouponGroup couponGroup) {
+		this.couponGroup = couponGroup;
 	}
 
 	public String getTitle() {
