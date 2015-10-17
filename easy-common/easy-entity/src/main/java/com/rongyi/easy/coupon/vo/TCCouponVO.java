@@ -146,6 +146,7 @@ public class TCCouponVO implements Serializable {
 
     private List<Integer> afterSaleService; // = CouponConst.AFTER_SALE_SERVICE;//[1,1,1,1] 1为支持，0为不支持。第一位：随时退、第二位：过期退 第三位： 免预约、第四位：不可退
 
+    private Boolean isGeneral;//是否是通用券
 
     private Long version; // 乐观锁
 
@@ -158,7 +159,15 @@ public class TCCouponVO implements Serializable {
         this.id = id;
     }
 
-    public String getTitle() {
+    public Boolean getIsGeneral() {
+		return isGeneral;
+	}
+
+	public void setIsGeneral(Boolean isGeneral) {
+		this.isGeneral = isGeneral;
+	}
+
+	public String getTitle() {
         return title;
     }
 
