@@ -9,9 +9,8 @@
 */
 package com.rongyi.rss.solr;
 
-import java.util.List;
-
 import com.rongyi.easy.solr.param.ShopSearchParam;
+import com.rongyi.easy.solr.result.ShopSearchIdsResult;
 import com.rongyi.easy.solr.result.ShopSearchResult;
 
 /**
@@ -50,5 +49,5 @@ public interface ShopSolrService {
 	 * @param input
 	 * @return
 	 */
-	public List<String> selectShopIndexByName(ShopSearchParam input);
+	public ShopSearchIdsResult selectShopIndexByName(ShopSearchParam input);
 }
