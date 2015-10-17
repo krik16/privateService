@@ -3,6 +3,7 @@ package com.rongyi.rss.coupon;
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.coupon.entity.CouponActivity;
 import com.rongyi.easy.coupon.param.CouponParam;
 import com.rongyi.easy.coupon.vo.TCCouponVO;
 
@@ -82,10 +83,11 @@ public interface RoaCouponService {
      *
      * @param ids
      * @param isRelatedActivity
+     * @param couponActivity
      * @return
      * @throws Exception
      */
-    boolean updateRelatedActivity(List<String> ids, boolean isRelatedActivity) throws Exception;
+    boolean updateRelatedActivity(List<String> ids, boolean isRelatedActivity, CouponActivity couponActivity) throws Exception;
 
     /**
      * 减库存返回券码
