@@ -1,5 +1,7 @@
 package com.rongyi.easy.coupon.param;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -111,9 +113,9 @@ public class CouponParam implements Serializable {
     private Integer publishChannel;
 
     /**
-     * 是否有库存
+     * 库存
      */
-    private Boolean hasStockCount;
+    private Integer stockCount;
 
     /**
      * ID集合
@@ -125,7 +127,10 @@ public class CouponParam implements Serializable {
      */
     private String displayRegion;
 
-    private Integer activityType;
+    /**
+     * 卡券名称
+     */
+    private String name;
 
     public String getShopId() {
         return shopId;
@@ -142,7 +147,6 @@ public class CouponParam implements Serializable {
     public void setCouponId(String couponId) {
         this.couponId = couponId;
     }
-
 
     public Integer getStatus() {
         return status;
@@ -288,12 +292,12 @@ public class CouponParam implements Serializable {
         this.publishChannel = publishChannel;
     }
 
-    public Boolean getHasStockCount() {
-        return hasStockCount;
+    public Integer getStockCount() {
+        return stockCount;
     }
 
-    public void setHasStockCount(Boolean hasStockCount) {
-        this.hasStockCount = hasStockCount;
+    public void setStockCount(Integer stockCount) {
+        this.stockCount = stockCount;
     }
 
     public List<String> getIds() {
@@ -312,11 +316,41 @@ public class CouponParam implements Serializable {
         this.displayRegion = displayRegion;
     }
 
-    public Integer getActivityType() {
-        return activityType;
+    public String getName() {
+        return name;
     }
 
-    public void setActivityType(Integer activityType) {
-        this.activityType = activityType;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("currentPage", currentPage)
+                .append("pageSize", pageSize)
+                .append("shopId", shopId)
+                .append("status", status)
+                .append("couponId", couponId)
+                .append("isOffStock", isOffStock)
+                .append("couponType", couponType)
+                .append("orderBy", orderBy)
+                .append("mallId", mallId)
+                .append("synTarget", synTarget)
+                .append("publishStatusList", publishStatusList)
+                .append("relatedType", relatedType)
+                .append("publishStartAt", publishStartAt)
+                .append("publishEndAt", publishEndAt)
+                .append("validStartAt", validStartAt)
+                .append("validEndAt", validEndAt)
+                .append("isRelatedActivity", isRelatedActivity)
+                .append("mallName", mallName)
+                .append("shopName", shopName)
+                .append("publishChannel", publishChannel)
+                .append("stockCount", stockCount)
+                .append("ids", ids)
+                .append("displayRegion", displayRegion)
+                .append("name", name)
+                .toString();
     }
 }
