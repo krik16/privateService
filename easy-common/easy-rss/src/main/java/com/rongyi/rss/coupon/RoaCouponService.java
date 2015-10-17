@@ -78,14 +78,14 @@ public interface RoaCouponService {
     boolean recoverInventory(String couponId, int quantity);
 
     /**
-     * 修改卡券关联活动类型 未关联[0] 关联翻牌购[1] 关联推送[2]
+     * 修改卡券关联活动状态 关联[true] 取消关联[false]
      *
      * @param ids
-     * @param activityType
+     * @param isRelatedActivity
      * @return
      * @throws Exception
      */
-    boolean updateActivityType(List<String> ids, Integer activityType) throws Exception;
+    boolean updateRelatedActivity(List<String> ids, boolean isRelatedActivity) throws Exception;
 
     /**
      * 减库存返回券码
