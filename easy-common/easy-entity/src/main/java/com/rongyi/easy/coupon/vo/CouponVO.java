@@ -162,6 +162,19 @@ public class CouponVO implements Serializable {
         this.couponType = couponType;
     }
 
+    public void setConvertCouponType(Integer convertCouponType) {
+        if (convertCouponType != null) {
+            switch (convertCouponType) {
+                case 0:
+                    this.setCouponType("02"); break;
+                case 2:
+                    this.setCouponType("03"); break;
+                default:
+                    throw new IllegalArgumentException(String.format("couponType=%s,没匹配上", convertCouponType));
+            }
+        }
+    }
+
     public Integer getPurchaseType() {
         return purchaseType;
     }
@@ -346,6 +359,18 @@ public class CouponVO implements Serializable {
         this.status = status;
     }
 
+    // 状态(审核中[0]、已上线[1]、已使用[2]、已过期[3]、已下线[4])
+    public void setConvertStatus(Integer status, Boolean isOffStock, Date publishEndAt) {
+        if (Integer.valueOf(0).equals(status) || Integer.valueOf(1).equals(status))
+            this.setStatus("0");
+        else if (Integer.valueOf(2).equals(status))
+            this.setStatus("1");
+        else if (Boolean.TRUE.equals(isOffStock))
+            this.setStatus("4");
+        else if (new Date().after(publishEndAt))
+            this.setStatus("3");
+    }
+
     public String getActivityStatus() {
         return activityStatus;
     }
@@ -360,6 +385,15 @@ public class CouponVO implements Serializable {
 
     public void setDelStatus(String delStatus) {
         this.delStatus = delStatus;
+    }
+
+    public void setConvertDelStatus(Boolean convertDelStatus) {
+        if (Boolean.TRUE.equals(convertDelStatus)) {
+            this.setDelStatus("Y");
+        }
+        if (Boolean.FALSE.equals(convertDelStatus)) {
+            this.setDelStatus("N");
+        }
     }
 
     public Date getPublishBeginDate() {
@@ -570,6 +604,7 @@ public class CouponVO implements Serializable {
         public void setStatus(String status) {
             this.status = status;
         }
+
 
         public List<String> getPics() {
             return pics;

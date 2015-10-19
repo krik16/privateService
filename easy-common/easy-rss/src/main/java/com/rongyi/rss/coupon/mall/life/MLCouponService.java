@@ -1,8 +1,10 @@
 package com.rongyi.rss.coupon.mall.life;
 
 
+import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.old_vo.OldCouponVO;
+import com.rongyi.easy.coupon.vo.CouponVO;
 
 import java.util.List;
 
@@ -32,4 +34,20 @@ public interface MLCouponService {
     Coupon findCouponById(String couponId);
 
     boolean addCouponVistiedCount(String couponId, int visitedCount);
+
+    /**
+     * 根据Id查询基本信息
+     *
+     * @param couponId
+     * @return
+     */
+    CouponVO findCouponVOById(String couponId);
+
+    /**
+     * 减库存返回券码
+     *
+     * @param couponId
+     * @return
+     */
+    ResponseResult subtractInventoryReturnCode(String couponId);
 }
