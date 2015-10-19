@@ -161,8 +161,8 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
         for (PaymentStatementDetailDto paymentStatementDetailDto : paymentStatementDetailDtoList) {
             CouponCodeExcelDto couponCodeExcelDto = paymentStatementDetailDto.toCouponCodeExcelDto();
             couponCodeExcelDtoList.add(couponCodeExcelDto);
-            total += paymentStatementDetailDto.getOrigPrice();
-            payTotal += paymentStatementDetailDto.getPayAmount();
+            total += couponCodeExcelDto.getOrigPrice();
+            payTotal += couponCodeExcelDto.getPayAmount();
         }
         paymentStatementExcelDto.setBatchNo(paymentStatement.getBatchNo());
         paymentStatementExcelDto.setCycleTime(DateUtils.getDateTimeStr(paymentStatement.getCycleStartTime()) + " - " + DateUtils.getDateTimeStr(paymentStatement.getCycleEndTime()));
