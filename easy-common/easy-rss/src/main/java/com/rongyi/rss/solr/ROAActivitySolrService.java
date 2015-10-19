@@ -7,7 +7,7 @@ import java.util.List;
 public interface ROAActivitySolrService {
 
 //	public boolean updateActivity(SolrInputDocument doc);
-	public boolean updateActivity(CouponEntity entityTmp,String id,List<String> picList,List<String> categoryIds);
+	public boolean updateActivity(CouponEntity entityTmp,String id,List<String> picList,List<String> categoryIds,int limitCount);
 
 	public void updateActivityStatus(String couponId,int status);
 

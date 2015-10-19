@@ -11,10 +11,14 @@ import java.util.List;
  * History: 变更记录 <author> <time> <version> <desc> chenjun 2015年9月23日 1.0 创建文件
  */
 public class KillActivityListVO implements Serializable {
+	
+	private String showTime;
 
 	private String showTitle;//活动名称
 
 	private Integer continueTime;//持续时间
+	
+	private String message;//预留字段
 
 	private List<KillActivityVO> couponList;//代金券列表
 
@@ -41,11 +45,33 @@ public class KillActivityListVO implements Serializable {
 	public void setCouponList(List<KillActivityVO> couponList) {
 		this.couponList = couponList;
 	}
+	
+	
+
+	public String getShowTime() {
+		return showTime;
+	}
+
+	public void setShowTime(String showTime) {
+		this.showTime = showTime;
+	}
+	
+	
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
 
 	@Override
 	public String toString() {
-		return "KillActivityListVO [showTitle=" + showTitle + ", continueTime=" + continueTime + ", couponList=" + couponList
-				+ "]";
+		return "KillActivityListVO [showTime=" + showTime + ", showTitle=" + showTitle + ", continueTime=" + continueTime
+				+ ", message=" + message + ", couponList=" + couponList + "]";
 	}
+
+	
 
 }
