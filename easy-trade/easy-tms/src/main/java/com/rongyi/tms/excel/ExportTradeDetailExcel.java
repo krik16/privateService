@@ -11,6 +11,7 @@ package com.rongyi.tms.excel;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,8 +49,9 @@ public class ExportTradeDetailExcel {
     public Map<String, Object> getParamMap(HttpServletRequest request) {
         Map<String, Object> map = new HashMap<String, Object>();
         try {
-            String paramsJson = new String(request.getParameter("paramsJson").getBytes("iso8859-1"), "UTF-8");
-            map = JsonUtil.getMapFromJson(paramsJson);
+//            String paramsJson = new String(request.getParameter("paramsJson").getBytes("iso8859-1"), "UTF-8");
+        	String paramsJson = URLDecoder.decode(request.getParameter("paramsJson").trim(), "utf-8");
+        	map = JsonUtil.getMapFromJson(paramsJson);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
