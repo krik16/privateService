@@ -38,8 +38,11 @@ public interface SettleConstant {
     }
 
     interface BussinessType {
-        Byte SHOP = 0;//店铺
+        Byte GROUP = 0;//集团
         Byte MALL = 1;//商场
+        Byte BRAND = 2;//品牌
+        Byte COMPANY = 3;//分公司
+        Byte SHOP = 4;//店铺
     }
 
     interface PayChannel {
