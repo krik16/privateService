@@ -164,7 +164,7 @@ public class ExportDataToExcel {
 						}
 					}
 					//更改付款单状态，记录操作日志
-					String userName = request.getAttribute("userName") != null ? request.getAttribute("userName").toString() : null;
+					String userName = request.getSession().getAttribute("userName") != null ? request.getSession().getAttribute("userName").toString() : null;
 					paymentStatementService.updatePaymentStatusByIds(ids,11, "下载对账单", userName);
 				}
 				String outFile = "付款清单_" + DateUtil.getCurrentDateYYYYMMDD() + ".xlsx";
