@@ -22,6 +22,8 @@ import com.rongyi.settle.util.AmountUtil;
 import com.rongyi.settle.util.DateUtils;
 import com.rongyi.settle.util.ExcelUtils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -33,6 +35,8 @@ import java.util.*;
  */
 @Service
 public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl implements PaymentStatementGenerateService {
+
+    private static Logger logger = LoggerFactory.getLogger(PaymentStatementGenerateServiceImpl.class);
 
     @Autowired
     private StatementConfigService statementConfigService;
@@ -58,8 +62,10 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
 
     @Override
     public void generateForSchedule() throws Exception {
+        logger.info("定时任务-扫描对账单配置……");
         List<StatementConfig> statementConfigList = statementConfigService.selectForSchedule();
         for (StatementConfig statementConfig : statementConfigList) {
+            logger.info("定时任务-执行对战单配置id=" + statementConfig.getId());
             if (SettleConstant.CountCycleType.DAY.equals(statementConfig.getCountCycle())) {
                 Date yesterdayFirstSecond = DateUtils.getYesterdayFirstSecond();
                 Date yesterdayLastSecond = DateUtils.getYesterdayLastSecond();
