@@ -106,6 +106,8 @@ public class ForumContent implements Serializable {
      */
     private String androidVersion;
 
+    private String quickType;
+
     public Integer getId() {
         return id;
     }
