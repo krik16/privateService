@@ -10,6 +10,7 @@ package com.rongyi.settle.excel;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -43,7 +44,9 @@ public class ExportFinanceVerifyExcel extends ExportBase {
 
 	public void exportExcel(HttpServletRequest request, HttpServletResponse response, Map<String, Object> map) {
 		try {
-			map.put("status", 0);
+			List<Byte> statusList = new ArrayList<Byte>();
+			statusList.add( ConstantEnum.STATUS_0.getCodeByte());
+			map.put("statusList",statusList);
 			String path = request.getSession().getServletContext().getRealPath("/");
 			InputStream myxls = new FileInputStream(path + "excel/financeVerifyExcel.xlsx");
 			XSSFWorkbook wb = new XSSFWorkbook(myxls);

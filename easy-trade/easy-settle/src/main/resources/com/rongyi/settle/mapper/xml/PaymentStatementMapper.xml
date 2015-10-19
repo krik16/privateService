@@ -223,10 +223,13 @@
 			</foreach>
 		</if>
 		<if test="payAccount != null and payAccount != ''">
-			and bi.pay_account = #{payAccount,jdbcType=VARCHAR}
+			and bi.pay_account 
+			 like
+			concat('%',#{payAccount,jdbcType=VARCHAR},'%')
 		</if>
 		<if test="blankName != null and blankName != ''">
-			and bi.blank_name = #{blankName,jdbcType=VARCHAR}
+			and bi.blank_name like
+			concat('%',#{blankName,jdbcType=VARCHAR},'%')
 		</if>
 		<if test="statusUpdateStartTime != null and statusUpdateStartTime != ''">
 			and pb.status_update_time &gt;=

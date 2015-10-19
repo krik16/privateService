@@ -295,10 +295,10 @@ public class PaymentStatementController extends BaseController {
 	@RequestMapping("/exportFinanceExcel")
 	public ResponseData exportFinanceExcel(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, Object> map) {
 		try {
-			ResponseData responseData = accessService.check(request, "FNC_STLBILLVFY_EXPORT");
-			if (responseData.getMeta().getErrno() != 0) {
-				return responseData;
-			}
+//			ResponseData responseData = accessService.check(request, "FNC_STLBILLVFY_EXPORT");
+//			if (responseData.getMeta().getErrno() != 0) {
+//				return responseData;
+//			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());

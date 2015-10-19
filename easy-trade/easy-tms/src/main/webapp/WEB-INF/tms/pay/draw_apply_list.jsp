@@ -37,7 +37,7 @@
 						<td>${item.sellerAccount}</td>
 						<td>${item.sellerName}</td>
 						<td>${item.orderPrice}</td>
-						<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><a href="javascript:void(0);" onclick="validateAccount(${item.id},0,${item.payChannel})" class="btnsearch" id="pay-button" target="_blank">付款</a></sec:authorize></td>
+						<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><a href="javascript:void(0);" onclick="validateAccount(${item.id},null,0,${item.payChannel})" class="btnsearch" id="pay-button" target="_blank">付款</a></sec:authorize></td>
 			 		</td>
 					</tr>
 				</c:forEach>
