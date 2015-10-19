@@ -46,6 +46,8 @@ public class BusinessAccountVO implements Serializable {
 	private Date updateAt;
 	private String stopReason;
 	private Date stopAt;
+	private String virtualStopReason;   //资金账号停用理由 
+	private Date virtualStopAt;         //资金账号停用时间
 	public Integer getId() {
 		return id;
 	}
@@ -261,6 +263,18 @@ public class BusinessAccountVO implements Serializable {
 	}
 	public void setBrandMid(String brandMid) {
 		this.brandMid = brandMid;
+	}
+	public String getVirtualStopReason() {
+		return virtualStopReason;
+	}
+	public void setVirtualStopReason(String virtualStopReason) {
+		this.virtualStopReason = virtualStopReason;
+	}
+	public Date getVirtualStopAt() {
+		return virtualStopAt;
+	}
+	public void setVirtualStopAt(Date virtualStopAt) {
+		this.virtualStopAt = virtualStopAt;
 	}
 	
 }
