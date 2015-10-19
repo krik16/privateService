@@ -359,14 +359,13 @@ public class StatementConfigController extends BaseController{
 			Map<String, Object> searchMap = new HashMap<>();
 			searchMap.put("currpage", currpage);
 			searchMap.put("pagesize", pagesize);
-			if (type.intValue() == 0) {// 集团
-				searchMap.put("name", name);
-				List<MallGroupVO> list = roaMallGroupService.getMallGroups(searchMap);
-				int count = 0;
-				if (currpage == 1) {
-					searchMap.put("currpage", null);
-					count = roaMallGroupService.getMallGroups(searchMap).size();
-				}
+			if (type.intValue() == 0) {// 店铺
+				searchMap.put("shopName", name);
+				searchMap.put("sort", "noSort");// 暂未定排序字段
+				Map<String, Object> resultMap = roaShopService.getShops(searchMap, currpage, pagesize);
+				logger.info("此次查询关联店铺数" + resultMap.get("totalCount"));
+				List<ShopVO> list = (List<ShopVO>) resultMap.get("list");
+				int count = resultMap.containsKey("totalCount") ? Integer.valueOf(resultMap.get("totalCount").toString()) : 0;
 				result = ResponseData.success(list, currpage, pagesize, count);
 			} else if (type.intValue() == 1) {// 商场
 				searchMap.put("name", name);
@@ -393,13 +392,14 @@ public class StatementConfigController extends BaseController{
 				}
 				int totalCount = rOAFilialeService.getFilialeList(searchMap, 0,0).size();
 				result = ResponseData.success(voList, currpage, pagesize, totalCount);
-			} else if (type.intValue() == 4) {// 店铺
-				searchMap.put("shopName", name);
-				searchMap.put("sort", "noSort");// 暂未定排序字段
-				Map<String, Object> resultMap = roaShopService.getShops(searchMap, currpage, pagesize);
-				logger.info("此次查询关联店铺数" + resultMap.get("totalCount"));
-				List<ShopVO> list = (List<ShopVO>) resultMap.get("list");
-				int count = resultMap.containsKey("totalCount") ? Integer.valueOf(resultMap.get("totalCount").toString()) : 0;
+			} else if (type.intValue() == 4) {// 集团
+				searchMap.put("name", name);
+				List<MallGroupVO> list = roaMallGroupService.getMallGroups(searchMap);
+				int count = 0;
+				if (currpage == 1) {
+					searchMap.put("currpage", null);
+					count = roaMallGroupService.getMallGroups(searchMap).size();
+				}
 				result = ResponseData.success(list, currpage, pagesize, count);
 			}
 		} catch (Exception e) {
