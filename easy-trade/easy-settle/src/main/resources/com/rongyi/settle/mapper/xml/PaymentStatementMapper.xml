@@ -412,5 +412,6 @@
 		where tuc.status=2
 		and tuc.use_time between #{startTime,jdbcType=TIMESTAMP} AND #{endTime,jdbcType=TIMESTAMP}
 		AND tuc.shop_id = #{shopId,jdbcType=VARCHAR}
+		GROUP BY tuc.coupon_id
 	</select>
 </mapper>
