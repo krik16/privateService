@@ -66,24 +66,29 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
         List<StatementConfig> statementConfigList = statementConfigService.selectForSchedule();
         for (StatementConfig statementConfig : statementConfigList) {
             logger.info("定时任务-执行对账单配置id=" + statementConfig.getId());
-            if (SettleConstant.CountCycleType.DAY.equals(statementConfig.getCountCycle())) {
-                Date yesterdayFirstSecond = DateUtils.getYesterdayFirstSecond();
-                Date yesterdayLastSecond = DateUtils.getYesterdayLastSecond();
-                List<PaymentStatement> paymentStatements = paymentStatementService.selectByCycleTime(statementConfig.getId(), yesterdayFirstSecond, yesterdayLastSecond);
-                if (paymentStatements == null || paymentStatements.size() == 0) {
-                    PaymentStatement paymentStatement = new PaymentStatement();
-                    paymentStatement.setConfigId(statementConfig.getId());
-                    paymentStatement.setRuleCode(statementConfig.getRuleCode());
-                    paymentStatement.setCycleStartTime(yesterdayFirstSecond);
-                    paymentStatement.setCycleEndTime(yesterdayLastSecond);
-                    paymentStatement.setType(SettleConstant.PaymentStatementType.SHOP);
-                    paymentStatement.setBatchNo(getBatchNo());
-                    paymentStatement.setStatus(SettleConstant.PaymentStatementStatus.INIT);
-                    paymentStatement.setCreateAt(new Date());
-                    paymentStatement.setIsDelete(new Byte("0"));
-                    paymentStatement.setPayNo(orderNoGenService.getOrderNo("3"));
-                    createExcel(paymentStatement, statementConfig);
+            try {
+                if (SettleConstant.CountCycleType.DAY.equals(statementConfig.getCountCycle())) {
+                    Date yesterdayFirstSecond = DateUtils.getYesterdayFirstSecond();
+                    Date yesterdayLastSecond = DateUtils.getYesterdayLastSecond();
+                    List<PaymentStatement> paymentStatements = paymentStatementService.selectByCycleTime(statementConfig.getId(), yesterdayFirstSecond, yesterdayLastSecond);
+                    if (paymentStatements == null || paymentStatements.size() == 0) {
+                        PaymentStatement paymentStatement = new PaymentStatement();
+                        paymentStatement.setConfigId(statementConfig.getId());
+                        paymentStatement.setRuleCode(statementConfig.getRuleCode());
+                        paymentStatement.setCycleStartTime(yesterdayFirstSecond);
+                        paymentStatement.setCycleEndTime(yesterdayLastSecond);
+                        paymentStatement.setType(SettleConstant.PaymentStatementType.SHOP);
+                        paymentStatement.setBatchNo(getBatchNo());
+                        paymentStatement.setStatus(SettleConstant.PaymentStatementStatus.INIT);
+                        paymentStatement.setCreateAt(new Date());
+                        paymentStatement.setIsDelete(new Byte("0"));
+                        paymentStatement.setPayNo(orderNoGenService.getOrderNo("3"));
+                        createExcel(paymentStatement, statementConfig);
+                    }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+                logger.error("定时任务-执行对账单配置出错。id=" + statementConfig.getId());
             }
         }
     }
