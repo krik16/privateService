@@ -65,7 +65,7 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
         logger.info("定时任务-扫描对账单配置……");
         List<StatementConfig> statementConfigList = statementConfigService.selectForSchedule();
         for (StatementConfig statementConfig : statementConfigList) {
-            logger.info("定时任务-执行对战单配置id=" + statementConfig.getId());
+            logger.info("定时任务-执行对账单配置id=" + statementConfig.getId());
             if (SettleConstant.CountCycleType.DAY.equals(statementConfig.getCountCycle())) {
                 Date yesterdayFirstSecond = DateUtils.getYesterdayFirstSecond();
                 Date yesterdayLastSecond = DateUtils.getYesterdayLastSecond();
