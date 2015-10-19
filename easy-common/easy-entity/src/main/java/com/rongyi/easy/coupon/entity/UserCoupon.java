@@ -318,6 +318,18 @@ public class UserCoupon implements Serializable {
         return status;
     }
 
+
+    public Integer getConvertStatus() {
+        Integer val = null;
+        if (Integer.valueOf(1).equals(status)) {
+            val = Integer.valueOf(0);
+        }
+        if (Integer.valueOf(2).equals(status)) {
+            val = Integer.valueOf(1);
+        }
+        return val;
+    }
+
     public void setStatus(Integer status) {
         this.status = status;
     }
@@ -340,6 +352,10 @@ public class UserCoupon implements Serializable {
 
     public Double getDiscount() {
         return discount;
+    }
+
+    public Integer getDiscount2Int() {
+        return discount == null ? 0 : discount.intValue() * 100;
     }
 
     public void setDiscount(Double discount) {
@@ -462,4 +478,5 @@ public class UserCoupon implements Serializable {
                 .append("refundAmount", refundAmount)
                 .toString();
     }
+
 }

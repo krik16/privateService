@@ -119,7 +119,8 @@ public interface RoaVoucherCouponService {
 
     /**
      * 追加第三方券码数量，第三方券码是通过导入excel插入到coupon_code,该方法只修改coupon的总量和库存
-     * @param id 代金券
+     *
+     * @param id    代金券
      * @param count 追加的数量
      * @return
      */
@@ -185,4 +186,10 @@ public interface RoaVoucherCouponService {
 
     public boolean appendCouponCount(String couponId, Integer quantity);
 
+    /**
+     * 数据迁移
+     *
+     * @return
+     */
+    boolean dataMigration();
 }
