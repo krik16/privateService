@@ -40,7 +40,7 @@ public interface MerchantCouponServce {
      * 插入一条coupon
      * @return coupon id
      */
-    public String insertCoupon(Integer inChannel);
+    public String insertCoupon(Integer inChannel,UserInfoVo createUser);
 
     /**
      * 获取未通过列表

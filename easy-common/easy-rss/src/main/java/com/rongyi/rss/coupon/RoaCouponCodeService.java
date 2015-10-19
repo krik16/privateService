@@ -144,4 +144,6 @@ public interface RoaCouponCodeService {
      * @return
      */
     List<String> getCodeByVersion(String couponId, String version);
+
+    public List<CouponCode> getCouponCodesByCouponId(String couponId);
 }
