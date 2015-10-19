@@ -128,7 +128,9 @@ function validateExcelCount() {
  */
 function exportExcel() {
 	 var url = "../tradeDetail/exportExcel?paramsJson="+JSON.stringify(getParamsJson());
-	 window.open(url);
+	 var val = encodeURI(url);    
+	 val = encodeURI(val);
+	 window.open(val);
 }
 /**
  * 查询参数

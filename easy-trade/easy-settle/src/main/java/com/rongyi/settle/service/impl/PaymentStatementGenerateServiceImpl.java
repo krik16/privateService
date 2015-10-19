@@ -93,6 +93,21 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
         }
     }
 
+    private List<CouponExcelDto> adjustCouponExcelDtoList(List<CouponExcelDto> list) {
+        Map<String, CouponExcelDto> map = new HashMap();
+        for (CouponExcelDto couponExcelDto : list) {
+            CouponExcelDto existCouponExcelDto = map.get(couponExcelDto.getCouponId());
+            if (existCouponExcelDto == null) {
+                map.put(couponExcelDto.getCouponId(), couponExcelDto);
+            } else {
+                existCouponExcelDto.setCouponCount(existCouponExcelDto.getCouponCount() + couponExcelDto.getCouponCount());
+                existCouponExcelDto.setCouponPayAmount((existCouponExcelDto.getCouponPayAmount() == null ? 0 : existCouponExcelDto.getCouponPayAmount()) + (couponExcelDto.getCouponPayAmount() == null ? 0 : couponExcelDto.getCouponPayAmount()));
+                existCouponExcelDto.setCouponTotalAmount((existCouponExcelDto.getCouponTotalAmount() == null ? 0 : existCouponExcelDto.getCouponTotalAmount()) + (couponExcelDto.getCouponTotalAmount() == null ? 0 : couponExcelDto.getCouponTotalAmount()));
+            }
+        }
+        return new ArrayList(map.values());
+    }
+
     private String getBatchNo() {
         String dateStr = "";
         String batchNo = "";
@@ -136,6 +151,8 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
             if (shopVOs != null && shopVOs.size() > 0) {
                 paymentStatementExcelDto.setMallName(shopVOs.get(0).getPosition().getMall());
             }
+
+            adjustCouponExcelDtoList(couponExcelDtoList);
         }
 
         List<CouponCodeExcelDto> couponCodeExcelDtoList = new ArrayList<>();

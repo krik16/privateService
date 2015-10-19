@@ -162,12 +162,7 @@ public class TradeDetailController extends BaseController {
 	 */
 	@RequestMapping(value = "/exportExcel", method = RequestMethod.GET)
 	public void exportExcel(HttpServletRequest request, HttpServletResponse response) {
-		LOGGER.info("---导出交易明细报表---");
-		try {
-			request.setCharacterEncoding("utf-8");
-		} catch (UnsupportedEncodingException e1) {
-			LOGGER.error(e1);
-		}
+		LOGGER.info("---导出交易明细报表---"+request.getParameter(""));
 		exportTradeDetailExcel.exportExcel(request, response);
 	}
 

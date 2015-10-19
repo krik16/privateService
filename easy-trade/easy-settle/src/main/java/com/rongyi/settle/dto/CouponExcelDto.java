@@ -4,12 +4,21 @@ package com.rongyi.settle.dto;
  * Created by xgq on 2015/9/25.
  */
 public class CouponExcelDto {
+    private String couponId;
     private String couponName;
     private String revenueType;
     private Integer couponCount;
     private Double couponPrice;
     private Double couponTotalAmount;
     private Double couponPayAmount;
+
+    public String getCouponId() {
+        return couponId;
+    }
+
+    public void setCouponId(String couponId) {
+        this.couponId = couponId;
+    }
 
     public String getCouponName() {
         return couponName;

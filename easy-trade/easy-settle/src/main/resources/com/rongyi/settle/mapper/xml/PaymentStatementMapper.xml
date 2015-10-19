@@ -394,6 +394,7 @@
 
 
 	<resultMap id="CouponExcelDtoMap" type="com.rongyi.settle.dto.CouponExcelDto">
+		<result column="coupon_id" property="couponId" jdbcType="VARCHAR" />
 		<result column="title" property="couponName" jdbcType="VARCHAR" />
 		<result column="pay_channel" property="revenueType" jdbcType="VARCHAR" />
 		<result column="orig_price" property="couponPrice" jdbcType="INTEGER" />
@@ -406,7 +407,7 @@
 
 	<select id="selectForCouponExcelDto" parameterType="java.util.Map"
 		resultMap="CouponExcelDtoMap">
-		select tuc.title, '收入' as pay_channel,tuc.orig_price, sum(tuc.orig_price) as
+		select tuc.coupon_id,tuc.title, '收入' as pay_channel,tuc.orig_price, sum(tuc.orig_price) as
 		total_amount, count(tuc.coupon_id) as coupon_count,
 		ROUND(sum(tor.pay_amount/tor.code_num),0) as pay_amount
 		from ry_trade.trade_user_code tuc
