@@ -110,6 +110,21 @@ public interface RoaVoucherCouponService {
      */
     ResponseResult submitDeployRegion(List<String> ids, String displayRegion);
 
+    /**
+     * 查看卡券导入渠道和推广渠道
+     * <p/>
+     * return List<CouponChannel>
+     */
+    List<CouponChannel> getCouponChannels();
+
+    /**
+     * 追加第三方券码数量，第三方券码是通过导入excel插入到coupon_code,该方法只修改coupon的总量和库存
+     * @param id 代金券
+     * @param count 追加的数量
+     * @return
+     */
+    boolean addThirdCouponCount(String id, int count);
+
 
     /***********置顶代金券 start***************/
 
@@ -150,12 +165,6 @@ public interface RoaVoucherCouponService {
 
     /***********置顶代金券 end***************/
 
-    /**
-     * 查看卡券导入渠道和推广渠道
-     * <p/>
-     * return List<CouponChannel>
-     */
-    List<CouponChannel> getCouponChannels();
 
     /**
      * 摩店：通用查询
