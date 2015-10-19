@@ -1,11 +1,7 @@
 package com.rongyi.settle.service.impl;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
@@ -268,6 +264,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 			if (shopVOs != null && shopVOs.size() > 0) {
 				paymentStatementExcelDto.setMallName(shopVOs.get(0).getPosition().getMall());
 			}
+			adjustCouponExcelDtoList(couponExcelDtoList);
 		}
 
 		List<CouponCodeExcelDto> couponCodeExcelDtoList = new ArrayList<>();
@@ -296,6 +293,21 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		paymentStatement.setPayTotal(AmountUtil.changYuanToFen(total));
 		cancel(id);
 		insert(paymentStatement);
+	}
+
+	private List<CouponExcelDto> adjustCouponExcelDtoList(List<CouponExcelDto> list) {
+		Map<String, CouponExcelDto> map = new HashMap();
+		for (CouponExcelDto couponExcelDto : list) {
+			CouponExcelDto existCouponExcelDto = map.get(couponExcelDto.getCouponId());
+			if (existCouponExcelDto == null) {
+				map.put(couponExcelDto.getCouponId(), couponExcelDto);
+			} else {
+				existCouponExcelDto.setCouponCount(existCouponExcelDto.getCouponCount() + couponExcelDto.getCouponCount());
+				existCouponExcelDto.setCouponPayAmount((existCouponExcelDto.getCouponPayAmount() == null ? 0 : existCouponExcelDto.getCouponPayAmount()) + (couponExcelDto.getCouponPayAmount() == null ? 0 : couponExcelDto.getCouponPayAmount()));
+				existCouponExcelDto.setCouponTotalAmount((existCouponExcelDto.getCouponTotalAmount() == null ? 0 : existCouponExcelDto.getCouponTotalAmount()) + (couponExcelDto.getCouponTotalAmount() == null ? 0 : couponExcelDto.getCouponTotalAmount()));
+			}
+		}
+		return new ArrayList(map.values());
 	}
 
 	private String getBatchNo() {
