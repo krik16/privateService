@@ -26,11 +26,20 @@ public interface ROAUserLabelService {
 
     /**
      * 保存用户标签
-     * @param userLabelDtoList 用户列表信息
+     * @param userLabelNameList 用户列表信息
      * @param userId 用户Id
      * @param userType 用户类型 1导购，2买手
      * @throws com.rongyi.easy.mallshop.MallShopException
      */
-    public void saveUserLabel(List<UserLabelDto> userLabelDtoList,Integer userId,Integer userType)throws MallShopException;
+    public void saveUserLabel(List<String> userLabelNameList,Integer userId,Integer userType)throws MallShopException;
 
+
+    /**
+     * 删除用户对应的标签
+     * @param userId 用户id
+     * @param labelId 标签Id
+     * @return
+     * @throws MallShopException
+     */
+    public Integer deleteByUserId(Integer userId,Integer labelId)throws MallShopException;
 }

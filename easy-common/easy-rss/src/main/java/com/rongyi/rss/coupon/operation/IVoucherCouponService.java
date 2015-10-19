@@ -107,7 +107,19 @@ public interface IVoucherCouponService {
 	 */
 	ResponseResult submitDeployRegion(List<String> ids, String displayRegion);
 
+	/**
+	 * 获取卡券渠道
+	 * @return
+	 */
+	List<CouponChannel> getCouponChannels();
 
+	/**
+	 * 追加第三方券码数量，第三方券码是通过导入excel插入到coupon_code,该方法只修改coupon的总量和库存
+	 * @param id 代金券
+	 * @param count 追加的数量
+	 * @return
+	 */
+	boolean addThirdCouponCount(String id, int count);
 
 
 	/***********置顶代金券 start***************/
@@ -150,7 +162,5 @@ public interface IVoucherCouponService {
 
 
 	/***********置顶代金券 end***************/
-	
-	List<CouponChannel> getCouponChannels();
 
 }

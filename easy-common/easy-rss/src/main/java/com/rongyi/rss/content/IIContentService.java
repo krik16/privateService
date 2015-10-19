@@ -23,7 +23,12 @@ public interface IIContentService {
 	 * 
 	 */
 	public List<ForumHomeModelVo> findHomePage();
-	
+	/**
+	 * 插入位置
+	 * @param list
+	 * @return
+	 */
+	public Boolean savePostions(List<ForumPosition> list);
 
 	/**
 	 * 通过id查询首页信息

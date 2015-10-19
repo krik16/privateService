@@ -1,7 +1,10 @@
 package com.rongyi.rss.coupon;
 
-import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.core.bean.ResponseResult;
+import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.coupon.entity.CouponActivity;
+import com.rongyi.easy.coupon.param.CouponParam;
 import com.rongyi.easy.coupon.vo.TCCouponVO;
 
 import java.util.List;
@@ -20,14 +23,6 @@ public interface RoaCouponService {
      * @return
      */
     TCCouponVO findTCCouponById(String couponId);
-
-    /**
-     * 减库存
-     *
-     * @param couponId
-     * @return
-     */
-    ResponseVO subtractCouponInventory(String couponId, Integer quantity);
 
     /**
      * 根据id查询
@@ -84,11 +79,46 @@ public interface RoaCouponService {
     boolean recoverInventory(String couponId, int quantity);
 
     /**
-     * 修改卡券关联活动类型 未关联[0] 关联翻牌购[1] 关联推送[2]
+     * 修改卡券关联活动状态 关联[true] 取消关联[false]
+     *
      * @param ids
-     * @param activityType
+     * @param isRelatedActivity
+     * @param couponActivity
      * @return
      * @throws Exception
      */
-    boolean updateActivityType(List<String> ids, Integer activityType) throws Exception;
+    boolean updateRelatedActivity(List<String> ids, boolean isRelatedActivity, CouponActivity couponActivity) throws Exception;
+
+    /**
+     * 减库存返回券码
+     *
+     * @param couponId
+     * @return
+     */
+    ResponseResult subtractInventoryReturnCode(String couponId);
+
+    /**
+     * 只减少库存
+     *
+     * @param couponId
+     * @param quantity
+     * @return
+     */
+    ResponseResult subtractCouponInventory(String couponId, int quantity);
+
+    /**
+     * 恢复券码
+     *
+     * @param couponId
+     * @param couponCode
+     * @return
+     */
+    boolean restoreCouponInventory(String couponId, String couponCode);
+
+    /**
+     *
+     * @param couponParam
+     * @return
+     */
+    PagingVO<Coupon> findAllByPage(CouponParam couponParam);
 }

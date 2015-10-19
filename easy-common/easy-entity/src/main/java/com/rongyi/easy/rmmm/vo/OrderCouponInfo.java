@@ -12,8 +12,6 @@ package com.rongyi.easy.rmmm.vo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import org.bson.types.ObjectId;
-
 /**
  * @author ZhengYl
  *
@@ -28,7 +26,7 @@ public class OrderCouponInfo implements Serializable{
 	private String couponCode;
 	
 	/** 现金券模板ID */
-	private ObjectId couponId;
+	private String couponId;
 	
 	/** 现金券金额 */
 	private BigDecimal couponDiscount;
@@ -44,11 +42,11 @@ public class OrderCouponInfo implements Serializable{
 		this.couponCode = couponCode;
 	}
 
-	public ObjectId getCouponId() {
+	public String getCouponId() {
 		return couponId;
 	}
 
-	public void setCouponId(ObjectId couponId) {
+	public void setCouponId(String couponId) {
 		this.couponId = couponId;
 	}
 

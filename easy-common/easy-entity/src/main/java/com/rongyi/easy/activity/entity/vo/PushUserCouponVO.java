@@ -30,7 +30,7 @@ public class PushUserCouponVO implements Serializable{
     private String couponType;
     private String type;
     private String useRestriction;
-    private Double currentPrice;
+    private Integer currentPrice;
     private Date validBeginDate;
     private Date validEndDate;
     private String userPhone;
@@ -54,7 +54,7 @@ public class PushUserCouponVO implements Serializable{
      * @param validEndDate
      */
 
-    public PushUserCouponVO(String pushId, String pushName, String couponId, List<String> couponCodes, String couponTitle, String userId, String couponType, String type, String useRestriction, Double currentPrice, Date validBeginDate, Date validEndDate,String userPhone) {
+    public PushUserCouponVO(String pushId, String pushName, String couponId, List<String> couponCodes, String couponTitle, String userId, String couponType, String type, String useRestriction, Integer currentPrice, Date validBeginDate, Date validEndDate,String userPhone) {
         super();
         this.pushId = pushId;
         this.pushName = pushName;
@@ -162,11 +162,11 @@ public class PushUserCouponVO implements Serializable{
         this.useRestriction = useRestriction;
     }
 
-    public Double getCurrentPrice() {
+    public Integer getCurrentPrice() {
         return currentPrice;
     }
 
-    public void setCurrentPrice(Double currentPrice) {
+    public void setCurrentPrice(Integer currentPrice) {
         this.currentPrice = currentPrice;
     }
 

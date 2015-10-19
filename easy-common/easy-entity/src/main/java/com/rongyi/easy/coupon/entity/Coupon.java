@@ -68,7 +68,7 @@ public class Coupon implements Serializable {
     private Integer discount;
 
     /**
-     * 大运营平台，平台代金券;展示区域：常规区域,活动区域;未选中[0]，选中[1] 例如 "1,1"表示都选中
+     * 展示区域：常规区域,活动区域;未选中[0]，选中[1] 例如 "1,1"表示都选中
      */
     private String displayRegion;
 
@@ -288,9 +288,10 @@ public class Coupon implements Serializable {
     private Boolean isGeneral;
 
     /**
-     * 关联活动类型： 未关联[0] 关联翻牌购[1] 关联推送[2]
+     * 是否已关联活动 已关联[true] 未关联[false]默认为false
      */
-    private Integer activityType;
+    private Boolean isRelatedActivity;
+
 
     public String getId() {
         return id;
@@ -788,13 +789,14 @@ public class Coupon implements Serializable {
         this.outChannelName = outChannelName;
     }
 
-    public Integer getActivityType() {
-        return activityType;
+    public Boolean getIsRelatedActivity() {
+        return isRelatedActivity;
     }
 
-    public void setActivityType(Integer activityType) {
-        this.activityType = activityType;
+    public void setIsRelatedActivity(Boolean isRelatedActivity) {
+        this.isRelatedActivity = isRelatedActivity;
     }
+
 
     @Override
     public String toString() {
@@ -851,7 +853,7 @@ public class Coupon implements Serializable {
                 .append("purchaseType", purchaseType)
                 .append("visitedCount", visitedCount)
                 .append("isGeneral", isGeneral)
-                .append("activityType", activityType)
+                .append("isRelatedActivity", isRelatedActivity)
                 .toString();
     }
 }
