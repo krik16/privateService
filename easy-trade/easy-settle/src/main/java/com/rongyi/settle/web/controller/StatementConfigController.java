@@ -347,20 +347,20 @@ public class StatementConfigController extends BaseController{
 	public ResponseData relevance(HttpServletRequest request, @RequestBody Map<String, Object> map) {
 		ResponseData result = null;
 		try {
-			logger.info("============ 类型，名称模糊搜索 =============");
+			logger.info("============ 类型，id模糊搜索 =============");
 			logger.info(map + "");
-			String name = map.containsKey("name") ? map.get("name").toString() : null;
+			String id = map.containsKey("id") ? map.get("id").toString() : null;
 			Integer type = map.containsKey("type") ? Integer.valueOf(map.get("type").toString()) : null;
 			Integer currpage = map.get("currpage") != null ? Integer.parseInt(map.get("currpage").toString()) : 1;
 			Integer pagesize = 15;
-			if (org.apache.commons.lang.StringUtils.isBlank(name)) {
+			if (org.apache.commons.lang.StringUtils.isBlank(id)) {
 				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
 			}
 			Map<String, Object> searchMap = new HashMap<>();
 			searchMap.put("currpage", currpage);
 			searchMap.put("pagesize", pagesize);
 			if (type.intValue() == 0) {// 店铺
-				searchMap.put("shopName", name);
+				searchMap.put("id", id);
 				searchMap.put("sort", "noSort");// 暂未定排序字段
 				Map<String, Object> resultMap = roaShopService.getShops(searchMap, currpage, pagesize);
 				logger.info("此次查询关联店铺数" + resultMap.get("totalCount"));
@@ -368,18 +368,18 @@ public class StatementConfigController extends BaseController{
 				int count = resultMap.containsKey("totalCount") ? Integer.valueOf(resultMap.get("totalCount").toString()) : 0;
 				result = ResponseData.success(list, currpage, pagesize, count);
 			} else if (type.intValue() == 1) {// 商场
-				searchMap.put("name", name);
+				searchMap.put("mallId", id);
 				Map<String, Object> resultMap = rOAMallService.getMalls(searchMap, currpage, pagesize);
 				// 如果当前页为1 查询总记录数
 				int count = resultMap.containsKey("totalCount") ? Integer.valueOf(resultMap.get("totalCount").toString()) : 0;
 				result = ResponseData.success(resultMap.get("list"), currpage, pagesize, count);
 			} else if (type.intValue() == 2) {// 品牌
-				searchMap.put("cname", name);
+				searchMap.put("id", id);
 				PagingVO<BrandVO> brands = roaBrandService.getBrandListByMap(searchMap, currpage, pagesize);
 				logger.info("brandsCount" + brands.getRowCnt());
 				result = ResponseData.success(brands.getDataList(), currpage, pagesize, brands.getRowCnt());
 			} else if (type.intValue() == 3) {// 分公司
-				searchMap.put("name", name);
+				searchMap.put("id", id);
 				List<FilialeVo> list = rOAFilialeService.getFilialeList(searchMap, currpage, pagesize);
 				List<RelevanceVO> voList = new ArrayList<RelevanceVO>();
 				if (CollectionUtils.isNotEmpty(list)){
@@ -393,7 +393,7 @@ public class StatementConfigController extends BaseController{
 				int totalCount = rOAFilialeService.getFilialeList(searchMap, 0,0).size();
 				result = ResponseData.success(voList, currpage, pagesize, totalCount);
 			} else if (type.intValue() == 4) {// 集团
-				searchMap.put("name", name);
+				searchMap.put("id", id);
 				List<MallGroupVO> list = roaMallGroupService.getMallGroups(searchMap);
 				int count = 0;
 				if (currpage == 1) {

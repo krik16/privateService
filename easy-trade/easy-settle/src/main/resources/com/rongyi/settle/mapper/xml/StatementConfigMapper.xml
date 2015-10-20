@@ -10,6 +10,7 @@
 		<result column="biz_type" property="bussinessType" jdbcType="TINYINT" />
 		<result column="biz_code" property="bussinessCode" jdbcType="VARCHAR" />
 		<result column="biz_name" property="bussinessName" jdbcType="VARCHAR" />
+		<result column="biz_real_address" property="bussinessRealAddress" jdbcType="VARCHAR" />
 		<result column="count_cycle" property="countCycle" jdbcType="TINYINT" />
 		<result column="cycle_start_time" property="cycleStartTime"
 			jdbcType="TIMESTAMP" />
@@ -63,7 +64,7 @@
 	</resultMap>
 	<sql id="Base_Column_List">
 		pbc.id, rule_code, cooperate_type, biz_id, biz_type,
-		biz_code, biz_name, count_cycle,
+		biz_code, biz_name,biz_real_address, count_cycle,
 		cycle_start_time, cycle_end_time,
 		is_loop, verify_type,
 		gen_header_time, gen_hm_time,
@@ -131,7 +132,7 @@
 	<insert id="insert" parameterType="com.rongyi.easy.settle.entity.StatementConfig"
 		useGeneratedKeys="true" keyProperty="id">
 		insert into payment_bill_config (rule_code, cooperate_type, biz_type,
-		biz_id,biz_code, biz_name, count_cycle,
+		biz_id,biz_code, biz_name,biz_real_address, count_cycle,
 		cycle_start_time,
 		cycle_end_time, is_loop,
 		verify_type, gen_header_time, gen_hm_time,
@@ -154,7 +155,9 @@
 		#{bussinessType,jdbcType=TINYINT},
 		#{bussinessId,jdbcType=INTEGER},
 		#{bussinessCode,jdbcType=VARCHAR},
-		#{bussinessName,jdbcType=VARCHAR}, #{countCycle,jdbcType=TINYINT},
+		#{bussinessName,jdbcType=VARCHAR},
+		#{bussinessRealAddress,jdbcType=VARCHAR},
+		 #{countCycle,jdbcType=TINYINT},
 		#{cycleStartTime,jdbcType=TIMESTAMP},
 		#{cycleEndTime,jdbcType=TIMESTAMP}, #{isLoop,jdbcType=TINYINT},
 		#{verifyType,jdbcType=TINYINT},
@@ -195,6 +198,9 @@
 			</if>
 			<if test="bussinessName != null">
 				biz_name = #{bussinessName,jdbcType=VARCHAR},
+			</if>
+			<if test="bussinessRealAddress != null">
+				biz_real_address = #{bussinessRealAddress,jdbcType=VARCHAR},
 			</if>
 			<if test="countCycle != null">
 				count_cycle = #{countCycle,jdbcType=TINYINT},
