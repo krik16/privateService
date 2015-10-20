@@ -1,25 +1,24 @@
 package com.rongyi.core.enumerate.mcmc;
 
 /**
- * 商品类型
- * 
+ * 商品状态
  * @author xiaobo
  *
  */
-public enum CommodityType {
+public enum CommodityStatus {
 	/**
-	 * 导购
+	 * 上架
 	 */
-	GUIDE(1),
+	ON(0),
 
 	/**
-	 * 买手
+	 * 下架
 	 */
-	BULL(2);
+	OFF(1);	
 
 	private int value;
-
-	private CommodityType(int value) {
+	
+	private CommodityStatus(int value) {
 		this.value = value;
 	}
 
