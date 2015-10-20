@@ -106,7 +106,14 @@ public class ForumContent implements Serializable {
      */
     private String androidVersion;
 
+    /**
+     * 快捷入口的类型   方式为 12，13，10，10
+     */
     private String quickType;
+    /**
+     * 快捷入口的类型值    方式为 , , ,www.baidu.com
+     */
+    private String quickTypeVal;
 
     public Integer getId() {
         return id;
@@ -276,7 +283,8 @@ public class ForumContent implements Serializable {
     @Override
     public String toString() {
         return "ForumContent{" +
-                "id=" + id +
+                "quickTypeVal='" + quickTypeVal + '\'' +
+                ", id=" + id +
                 ", positionId=" + positionId +
                 ", provId='" + provId + '\'' +
                 ", provName='" + provName + '\'' +
@@ -299,6 +307,7 @@ public class ForumContent implements Serializable {
                 ", buyerLive='" + buyerLive + '\'' +
                 ", iosVersion='" + iosVersion + '\'' +
                 ", androidVersion='" + androidVersion + '\'' +
+                ", quickType='" + quickType + '\'' +
                 '}';
     }
 
@@ -324,5 +333,21 @@ public class ForumContent implements Serializable {
 
     public void setAndroidVersion(String androidVersion) {
         this.androidVersion = androidVersion;
+    }
+
+    public String getQuickType() {
+        return quickType;
+    }
+
+    public void setQuickType(String quickType) {
+        this.quickType = quickType;
+    }
+
+    public String getQuickTypeVal() {
+        return quickTypeVal;
+    }
+
+    public void setQuickTypeVal(String quickTypeVal) {
+        this.quickTypeVal = quickTypeVal;
     }
 }
