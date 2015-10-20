@@ -42,7 +42,7 @@ public class CouponParam implements Serializable {
     private Boolean isOffStock;
 
     /**
-     * 卡券类型
+     * 卡券类型:代金券[0], 抵扣券[1], 红包[2]
      */
     private Integer couponType;
 
