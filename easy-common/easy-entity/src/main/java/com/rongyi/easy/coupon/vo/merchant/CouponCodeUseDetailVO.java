@@ -13,7 +13,7 @@ import java.util.Date;
 public class CouponCodeUseDetailVO implements Serializable{
     private Integer codeId;//券码id
     private String code;//券码
-    private Integer couponId;//卡券id
+    private String couponId;//卡券id
     private String userId;//领用人id
     private String userAccount;//领用人账号
     private String userName;//领用人姓名
@@ -30,7 +30,7 @@ public class CouponCodeUseDetailVO implements Serializable{
     public CouponCodeUseDetailVO() {
     }
 
-    public CouponCodeUseDetailVO(Integer codeId, String code, Integer couponId, String userId, String userAccount, String userName, Integer codeStatus, Integer useStatus, Date receiveAt, Date useAt, Date validAt, String commodityOrderNo, String couponOrderNo, Integer rebatePrice, Integer channel) {
+    public CouponCodeUseDetailVO(Integer codeId, String code, String couponId, String userId, String userAccount, String userName, Integer codeStatus, Integer useStatus, Date receiveAt, Date useAt, Date validAt, String commodityOrderNo, String couponOrderNo, Integer rebatePrice, Integer channel) {
         this.codeId = codeId;
         this.code = code;
         this.couponId = couponId;
@@ -64,11 +64,11 @@ public class CouponCodeUseDetailVO implements Serializable{
         this.code = code;
     }
 
-    public Integer getCouponId() {
+    public String getCouponId() {
         return couponId;
     }
 
-    public void setCouponId(Integer couponId) {
+    public void setCouponId(String couponId) {
         this.couponId = couponId;
     }
 

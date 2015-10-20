@@ -22,7 +22,7 @@ public class UserRebate implements Serializable {
     /**
      * 抵扣券id
      */
-    private Integer couponId;
+    private String couponId;
 
     /**
      * 抵扣券券码
@@ -93,11 +93,11 @@ public class UserRebate implements Serializable {
         this.userName = userName;
     }
 
-    public Integer getCouponId() {
+    public String getCouponId() {
         return couponId;
     }
 
-    public void setCouponId(Integer couponId) {
+    public void setCouponId(String couponId) {
         this.couponId = couponId;
     }
 
