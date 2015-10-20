@@ -14,6 +14,7 @@ import com.rongyi.core.common.util.ExcelUtil;
 import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
 import com.rongyi.settle.service.PaymentStatementService;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.poi.xssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,9 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -124,7 +127,7 @@ public class ExportDataToExcel {
 							sheet.getRow(i).getCell(3).setCellValue("名称");
 							sheet.getRow(i).getCell(4).setCellValue("结算方式");
 							sheet.getRow(i).getCell(5).setCellValue("账户");
-							sheet.getRow(i).getCell(5).setCellValue("账户姓名");
+							sheet.getRow(i).getCell(6).setCellValue("账户姓名");
 							sheet.getRow(i).getCell(7).setCellValue("开户行名称");
 							sheet.getRow(i).getCell(8).setCellValue("应付总金额");
 							sheet.getRow(i).getCell(9).setCellValue("对账单状态");
@@ -158,8 +161,10 @@ public class ExportDataToExcel {
 							sheet.getRow(i).getCell(5).setCellValue(dto.getPayAccount());
 							sheet.getRow(i).getCell(6).setCellValue(dto.getPayName());
 							sheet.getRow(i).getCell(7).setCellValue(dto.getBlankName());
-							if (dto.getPayTotal() != null)
-								sheet.getRow(i).getCell(8).setCellValue(dto.getPayTotal());
+							if (dto.getPayTotal() != null){
+								BigDecimal totalFee = new BigDecimal(dto.getPayTotal() + "").divide(new BigDecimal(100)).setScale(2, BigDecimal.ROUND_HALF_UP);
+								sheet.getRow(i).getCell(8).setCellValue(totalFee.doubleValue());
+							}
 							sheet.getRow(i).getCell(9).setCellValue("已下载");
 						}
 					}

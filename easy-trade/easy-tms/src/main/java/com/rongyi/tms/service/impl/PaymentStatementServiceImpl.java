@@ -74,6 +74,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
           }
 		map.put("status", ConstantEnum.STATEMENT_STATUE_12.getCodeByte());
 		map.put("payTime", DateUtil.getCurrDateTime());
+		map.put("statusUpdateTime", DateUtil.getCurrDateTime());
 		for (PayNotifyVO payNotifyVO : payNotifylist) {
 			map.put("payNo", payNotifyVO.getDrawNo());
 			map.put("tradeNo", payNotifyVO.getTradeNo());
@@ -88,6 +89,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		map.put("tradeNo", tradeNo);
 		map.put("payTime", DateUtil.getCurrDateTime());
 		map.put("status", status);
+		map.put("statusUpdateTime", DateUtil.getCurrDateTime());
 		this.getBaseDao().updateBySql(NAMESPACE + ".updateByOffPay", map);
 		rpbService.updatePaymentStatus(paymentIdsArray, ConstantEnum.TRADE_STATUS_PAY_YES.getCodeInt(), ConstantEnum.TRADE_TYPE_STATEMENT.getCodeInt());
 	}

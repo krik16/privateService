@@ -174,7 +174,7 @@
 		<result column="status" property="status" jdbcType="TINYINT" />
 		<result column="desc" property="desc" jdbcType="VARCHAR" />
 		<result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
-		<result column="down_load_user" property="downLoadUser" jdbcType="TIMESTAMP" />
+		<result column="download_user" property="downLoadUser" jdbcType="TIMESTAMP" />
 		<result column="download_time" property="downLoadTime" jdbcType="TIMESTAMP" />
 		<result column="roll_day" property="rollDay" jdbcType="VARCHAR" />
 		<result column="roll_type" property="rollType" jdbcType="TINYINT" />
@@ -279,7 +279,7 @@
 		<where>
 			<include refid="list_where_clause" />
 		</where>
-		order by pb.create_at,ol.creade_at desc
+		order by pb.create_at,pb.status_update_time,ol.creade_at desc
 		) tb
 		group by tb.id
 		<if test="currentPage != null and pageSize != null">

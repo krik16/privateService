@@ -142,7 +142,10 @@
 			status = #{status,jdbcType=TINYINT},
 			pay_time =
 			#{payTime,jdbcType=TIMESTAMP},
-			trade_no = #{tradeNo,jdbcType=VARCHAR}
+			status_update_time =
+			#{statusUpdateTime,jdbcType=TIMESTAMP},
+			trade_no =
+			#{tradeNo,jdbcType=VARCHAR}
 		</set>
 		where pay_no = #{payNo,jdbcType=VARCHAR}
 	</update>
@@ -150,8 +153,10 @@
 		update payment_bill
 		<set>
 			status = #{status,jdbcType=TINYINT},
-			trade_no = #{tradeNo,jdbcType=VARCHAR},
-			pay_time = #{payTime,jdbcType=TIMESTAMP}
+			trade_no =
+			#{tradeNo,jdbcType=VARCHAR},
+			pay_time = #{payTime,jdbcType=TIMESTAMP},
+			status_update_time = #{statusUpdateTime,jdbcType=TIMESTAMP},
 		</set>
 		where id in
 		<foreach collection="ids" index="index" item="item" open="("
@@ -169,8 +174,10 @@
 		ps.pay_no,ps.trade_no,ps.pay_time
 		from payment_bill
 		ps
-		left join payment_bill_config sc on ps.config_id=sc.id
-		left join biz_info bi on bi.config_id=sc.id
+		left join
+		payment_bill_config sc on ps.config_id=sc.id
+		left join biz_info bi on
+		bi.config_id=sc.id
 		left join payment_order po
 		on po.order_no = ps.pay_no
 		where po.id in

@@ -10,6 +10,7 @@ package com.rongyi.settle.excel;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -78,8 +79,10 @@ public class ExportFinanceVerifyExcel extends ExportBase {
 				sheet.getRow(i + 2).getCell(4).setCellValue(getPayChannel(paymentStatementDto.getPayChannel()));
 				sheet.getRow(i + 2).getCell(5).setCellValue(paymentStatementDto.getPayAccount());
 				sheet.getRow(i + 2).getCell(6).setCellValue(paymentStatementDto.getPayName());
-				if (paymentStatementDto.getPayTotal() != null)
-					sheet.getRow(i + 2).getCell(7).setCellValue(paymentStatementDto.getPayTotal() / 100);
+				if (paymentStatementDto.getPayTotal() != null){
+					BigDecimal totalFee = new BigDecimal(paymentStatementDto.getPayTotal() + "").divide(new BigDecimal(100)).setScale(2, BigDecimal.ROUND_HALF_UP);
+					sheet.getRow(i + 2).getCell(7).setCellValue(totalFee.doubleValue());
+				}
 				sheet.getRow(i + 2).getCell(8).setCellValue(DateUtil.dateToString(paymentStatementDto.getCreateAt()));
 				sheet.getRow(i + 2).getCell(9).setCellValue("初始状态");
 			}
