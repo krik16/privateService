@@ -89,6 +89,16 @@ public class OldCoupon implements Serializable {
     @Embedded("shops")
     private List<CouponShop> shops = new ArrayList<CouponShop>();// 关联店铺集合
 
+    /**
+     * 代金券关联的品牌
+     */
+    private CouponBrand couponBrand;
+
+    /**
+     * 代金券关联的集团
+     */
+    private CouponGroup couponGroup;
+
     private String status; // 状态(审核中[0]、已上线[1]、已使用[2]、已过期[3]、已下线[4]), 规则：比如100张优惠券有一张被领用将状态置为2，被领用后就不能对优惠券进行操作了
 
 
@@ -349,6 +359,22 @@ public class OldCoupon implements Serializable {
 
     public void setShops(List<CouponShop> shops) {
         this.shops = shops;
+    }
+
+    public CouponBrand getCouponBrand() {
+        return couponBrand;
+    }
+
+    public void setCouponBrand(CouponBrand couponBrand) {
+        this.couponBrand = couponBrand;
+    }
+
+    public CouponGroup getCouponGroup() {
+        return couponGroup;
+    }
+
+    public void setCouponGroup(CouponGroup couponGroup) {
+        this.couponGroup = couponGroup;
     }
 
     public String getStatus() {
@@ -754,47 +780,53 @@ public class OldCoupon implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Coupon [id=").append(id).append(", title=")
-                .append(title).append(", couponType=").append(couponType)
-                .append(", totalCount=").append(totalCount)
-                .append(", limitCount=").append(limitCount)
-                .append(", limitPublishCount=").append(limitPublishCount)
-                .append(", limitUseCount=").append(limitUseCount)
-                .append(", receiveCount=").append(receiveCount)
-                .append(", discount=").append(discount).append(", recommend=")
-                .append(recommend).append(", validateType=")
-                .append(validateType).append(", originalPrice=")
-                .append(originalPrice).append(", currentPrice=")
-                .append(currentPrice).append(", type=").append(type)
-                .append(", checkDescription=").append(checkDescription)
-                .append(", listPicUrl=").append(listPicUrl)
-                .append(", detailPicUrls=").append(detailPicUrls)
-                .append(", sourceTarget=").append(sourceTarget)
-                .append(", synTarget=").append(synTarget)
-                .append(", synStatus=").append(synStatus)
-                .append(", operateType=").append(operateType)
-                .append(", malls=").append(malls).append(", shops=")
-                .append(shops).append(", status=").append(status)
-                .append(", checkStatus=").append(checkStatus)
-                .append(", activityStatus=").append(activityStatus)
-                .append(", delStatus=").append(delStatus)
-                .append(", publishBeginDate=").append(publishBeginDate)
-                .append(", publishEndDate=").append(publishEndDate)
-                .append(", validBeginDate=").append(validBeginDate)
-                .append(", validEndDate=").append(validEndDate)
-                .append(", createUser=").append(createUser)
-                .append(", createDate=").append(createDate)
-                .append(", updateUser=").append(updateUser)
-                .append(", updateDate=").append(updateDate)
-                .append(", useRestriction=").append(useRestriction)
-                .append(", useDescription=").append(useDescription)
-                .append(", sourceMallId=").append(sourceMallId)
-                .append(", products=").append(products)
-                .append(", visitedCount=").append(visitedCount)
-                .append(", sortIndex=").append(sortIndex).append(", version=")
-                .append(version).append("]");
-        return builder.toString();
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("title", title)
+                .append("couponType", couponType)
+                .append("totalCount", totalCount)
+                .append("limitCount", limitCount)
+                .append("limitPublishCount", limitPublishCount)
+                .append("limitUseCount", limitUseCount)
+                .append("receiveCount", receiveCount)
+                .append("discount", discount)
+                .append("recommend", recommend)
+                .append("validateType", validateType)
+                .append("originalPrice", originalPrice)
+                .append("currentPrice", currentPrice)
+                .append("type", type)
+                .append("checkDescription", checkDescription)
+                .append("listPicUrl", listPicUrl)
+                .append("detailPicUrls", detailPicUrls)
+                .append("sourceTarget", sourceTarget)
+                .append("synTarget", synTarget)
+                .append("synStatus", synStatus)
+                .append("operateType", operateType)
+                .append("malls", malls)
+                .append("shops", shops)
+                .append("couponBrand", couponBrand)
+                .append("couponGroup", couponGroup)
+                .append("status", status)
+                .append("checkStatus", checkStatus)
+                .append("activityStatus", activityStatus)
+                .append("delStatus", delStatus)
+                .append("publishBeginDate", publishBeginDate)
+                .append("publishEndDate", publishEndDate)
+                .append("validBeginDate", validBeginDate)
+                .append("validEndDate", validEndDate)
+                .append("createUser", createUser)
+                .append("createDate", createDate)
+                .append("updateUser", updateUser)
+                .append("updateDate", updateDate)
+                .append("useRestriction", useRestriction)
+                .append("useDescription", useDescription)
+                .append("sourceMallId", sourceMallId)
+                .append("products", products)
+                .append("visitedCount", visitedCount)
+                .append("sortIndex", sortIndex)
+                .append("purchaseType", purchaseType)
+                .append("afterSaleService", afterSaleService)
+                .append("version", version)
+                .toString();
     }
-
 }

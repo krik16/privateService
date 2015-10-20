@@ -68,6 +68,20 @@ public class CouponCommodity implements Serializable {
 
     }
 
+    public CouponCommodity(Integer id, String couponId, String commodityId, String commodityName, String commodityCode, String mallName, String shopName, String mallId, String shopId, String pics, Integer status) {
+        this.id = id;
+        this.couponId = couponId;
+        this.commodityId = commodityId;
+        this.commodityName = commodityName;
+        this.commodityCode = commodityCode;
+        this.mallName = mallName;
+        this.shopName = shopName;
+        this.mallId = mallId;
+        this.shopId = shopId;
+        this.pics = pics;
+        this.status = status;
+    }
+
     public Integer getId() {
         return id;
     }
