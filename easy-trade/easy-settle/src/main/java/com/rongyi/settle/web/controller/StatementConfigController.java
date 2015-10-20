@@ -249,15 +249,15 @@ public class StatementConfigController extends BaseController{
 	 **/
 	@RequestMapping("/info")
 	@ResponseBody
-	public ResponseData info(HttpServletRequest request,Integer id) {
-		logger.info("====config info==== params="+id);
+	public ResponseData info(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+		logger.info("====config info==== params="+map.toString());
 		StatementConfigVO statementConfigVO = new StatementConfigVO();
 		try {
 			ResponseData responseData = accessService.check(request, "FNC_STLCONF_VIEW");
 			if (responseData.getMeta().getErrno() != 0) {
 				return responseData;
 			}
-			statementConfigVO = statementConfigService.selectConfigInfoById(id);
+			statementConfigVO = statementConfigService.selectConfigInfoById(Integer.valueOf(map.get("id").toString()));
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -409,5 +409,5 @@ public class StatementConfigController extends BaseController{
 		logger.info(result.toString());
 		return result;
 	}
-
+	
 }

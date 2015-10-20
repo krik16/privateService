@@ -42,6 +42,24 @@
 		<result column="pay_account" property="payAccount" jdbcType="VARCHAR" />
 		<result column="generate_time" property="generateTime"
 			jdbcType="VARCHAR" />
+		<result column="pay_name" property="payName" jdbcType="VARCHAR" />
+		<result column="blank_name" property="blankName" jdbcType="VARCHAR" />
+		<result column="blank_address" property="blankAddress"
+			jdbcType="VARCHAR" />
+		<result column="biz_address" property="bussinessAddress"
+			jdbcType="VARCHAR" />
+		<result column="biz_email" property="bussinessEmail"
+			jdbcType="VARCHAR" />
+		<result column="biz_account" property="bussinessAccount"
+			jdbcType="VARCHAR" />
+		<result column="contact_name" property="contactName"
+			jdbcType="VARCHAR" />
+		<result column="contact_phone" property="contactPhone"
+			jdbcType="VARCHAR" />
+		<result column="contact_weixin" property="contactWeixin"
+			jdbcType="VARCHAR" />
+		<result column="contact_qq" property="contactQq"
+			jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
 		pbc.id, rule_code, cooperate_type, biz_id, biz_type,
@@ -55,7 +73,9 @@
 		effect_end_time, pay_channel, contract_no,
 		link_rule_code, `status`, pbc.create_at,
 		pbc.is_delete,
-		pbc.create_by,bi.pay_account,pbc.gen_hm_time as generate_time
+		pbc.create_by,bi.pay_account,pbc.gen_hm_time as
+		generate_time,bi.pay_name,bi.blank_name,bi.blank_address,bi.biz_address,bi.biz_email,
+		bi.biz_account,bi.contact_name,bi.contact_phone,bi.contact_weixin,bi.contact_qq
 	</sql>
 
 	<sql id="Base_list_where_clause">
@@ -95,9 +115,9 @@
 	</sql>
 	<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		select
-			*
+		*
 		from
-		payment_bill_config pbc 
+		payment_bill_config pbc
 		where pbc.id=
 		#{id,jdbcType=INTEGER}
 	</select>
@@ -284,7 +304,8 @@
 		select
 		*
 		from payment_bill_config
-		where `status`=1 and is_delete=0 AND
+		where `status`=1 and
+		is_delete=0 AND
 		#{currentTime,jdbcType=TIMESTAMP} BETWEEN
 		effect_start_time AND
 		effect_end_time
@@ -312,13 +333,14 @@
 		where rule_code =
 		#{ruleCode,jdbcType=VARCHAR}
 	</select>
-	
-	<select id="selectConfigInfoById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+
+	<select id="selectConfigInfoById" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
 		select
-			<include refid="Base_Column_List" />
+		<include refid="Base_Column_List" />
 		from
-		payment_bill_config pbc left join biz_info bi on pbc.id =
-		bi.config_id
+		payment_bill_config pbc left join biz_info bi on pbc.id
+		=bi.config_id
 		where pbc.id=
 		#{id,jdbcType=INTEGER}
 	</select>
