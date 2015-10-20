@@ -1,10 +1,12 @@
 package com.rongyi.easy.entity;
 
+import java.io.Serializable;
+
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
 @Entity("brands")
-public class BrandEntity {
+public class BrandEntity implements Serializable{
 	@Id
 	private String id;
 	private String icon;
