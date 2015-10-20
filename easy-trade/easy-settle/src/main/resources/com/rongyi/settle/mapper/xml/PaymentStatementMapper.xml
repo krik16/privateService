@@ -287,6 +287,9 @@
 		<if test="maxPayTotal != null and maxPayTotal != ''">
 			and pb.pay_total &lt;= #{maxPayTotal}*100
 		</if>
+		<if test="bussinessAccount != null and bussinessAccount != ''">
+			and bi.biz_account = #{bussinessAccount,jdbcType=VARCHAR}
+		</if>
 	</sql>
 
 	<select id="selectPageList" resultMap="DtoResultMap"

@@ -19,8 +19,10 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.rongyi.easy.settle.entity.BussinessInfo;
 import com.rongyi.settle.service.AccessService;
 
+import com.rongyi.settle.service.BussinessInfoService;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,6 +66,9 @@ public class PaymentStatementController extends BaseController {
 
 	@Autowired
 	private StatementConfigService statementConfigService;
+
+	@Autowired
+	private BussinessInfoService bussinessInfoService;
 
 	@Autowired
 	private ExportDataToExcel exportDataToExcel;
@@ -143,6 +148,7 @@ public class PaymentStatementController extends BaseController {
 				if (responseData.getMeta().getErrno() != 0) {
 					return responseData;
 				}
+				map.put("bussinessAccount", getUserName(request));
 				if (searchStatus == 0) {// 全部
 					statusList.add(ConstantEnum.STATUS_1.getCodeByte());
 					statusList.add(ConstantEnum.STATUS_3.getCodeByte());
@@ -249,6 +255,10 @@ public class PaymentStatementController extends BaseController {
 			if (StringUtils.isBlank(idStr) || status == null) {
 				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
 			}
+			List<Integer> ids = new ArrayList<>();
+			for (String id : idStr.split(",")) {
+				ids.add(Integer.valueOf(id.trim()));
+			}
 			ResponseData responseData;
 			if (status == 1 || status == 2) {
 				responseData = accessService.check(request, "FNC_STLCONF_VFY");
@@ -260,15 +270,19 @@ public class PaymentStatementController extends BaseController {
 				if (responseData.getMeta().getErrno() != 0) {
 					return responseData;
 				}
+				for (Integer id : ids) {
+					PaymentStatement paymentStatement = paymentStatementService.get(id);
+					BussinessInfo bussinessInfo = bussinessInfoService.selectByConfigId(paymentStatement.getConfigId());
+					if (!getUserName(request).equals(bussinessInfo.getBussinessAccount())) {
+						logger.error("商家账号只能审核对应的对账单。账号=" + getUserName(request) + " paymentStatementId=" + paymentStatement.getId());
+						return ResponseData.failure(CodeEnum.FIAL_NO_AUTHORITY_PAYMENT.getCodeInt(), CodeEnum.FIAL_NO_AUTHORITY_PAYMENT.getValueStr());
+					}
+				}
 			} else if (status == 6 || status == 7) {
 				responseData = accessService.check(request, "FNC_UNPVFY_VFY");
 				if (responseData.getMeta().getErrno() != 0) {
 					return responseData;
 				}
-			}
-			List<Integer> ids = new ArrayList<>();
-			for (String id : idStr.split(",")) {
-				ids.add(Integer.valueOf(id.trim()));
 			}
 			if (paymentStatementService.updatePaymentStatusByIds(ids, status, desc, getUserName(request))) {
 				result = ResponseData.success();
@@ -456,6 +470,11 @@ public class PaymentStatementController extends BaseController {
 			}
 			PaymentStatement paymentStatement = paymentStatementService.get(id);
 			StatementConfig statementConfig = statementConfigService.selectById(paymentStatement.getConfigId());
+			BussinessInfo bussinessInfo = bussinessInfoService.selectByConfigId(paymentStatement.getConfigId());
+			if (isMerchant && !getUserName(request).equals(bussinessInfo.getBussinessAccount())) {
+				logger.error("商家账号只能访问对应的对账单。账号=" + getUserName(request) + " paymentStatementId=" + paymentStatement.getId());
+				return ResponseData.failure(CodeEnum.FIAL_NO_AUTHORITY_PAYMENT.getCodeInt(), CodeEnum.FIAL_NO_AUTHORITY_PAYMENT.getValueStr());
+			}
 			String fileName = getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime()));
 			File f = new File(propertyConfigurer.getProperty("settle.file.path") + statementConfig.getBussinessId() + "/" + fileName);
 			BufferedInputStream br = new BufferedInputStream(new FileInputStream(f));
