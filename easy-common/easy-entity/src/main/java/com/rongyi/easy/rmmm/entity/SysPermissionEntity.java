@@ -1,7 +1,14 @@
 package com.rongyi.easy.rmmm.entity;
 
-public class SysPermissionEntity {
-    /** 主键 */
+import java.io.Serializable;
+
+public class SysPermissionEntity implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** 主键 */
     private Integer id;
 
     /** 是否禁用0正常 1禁用 */

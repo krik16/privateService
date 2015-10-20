@@ -1,9 +1,15 @@
 package com.rongyi.easy.rmmm.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ShoppingCartEntity {
-    /** 主键 */
+public class ShoppingCartEntity implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** 主键 */
     private Integer id;
 
     /** 买家 mongo id */

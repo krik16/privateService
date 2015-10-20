@@ -1,6 +1,14 @@
 package com.rongyi.easy.rmmm.entity;
-public class UserLabelEntity {
-    /** 用户Id */
+
+import java.io.Serializable;
+
+public class UserLabelEntity implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** 用户Id */
     private Integer userId;
 
     /** 标签Id */
