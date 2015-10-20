@@ -7,12 +7,12 @@
     <result column="op_id" property="operationId" jdbcType="INTEGER" />
     <result column="op_type" property="operationType" jdbcType="TINYINT" />
     <result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
-    <result column="creade_at" property="creadeAt" jdbcType="TIMESTAMP" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
     <result column="desc" property="desc" jdbcType="VARCHAR" />
     <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, op_model, op_id, op_type, create_user_id, creade_at, `desc`, 
+    id, op_model, op_id, op_type, create_user_id, create_at, `desc`, 
     is_delete
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -27,10 +27,10 @@
   </delete>
   <insert id="insert" parameterType="com.rongyi.easy.settle.entity.OperationLog" useGeneratedKeys="true" keyProperty="id" >
     insert into op_log (op_model, op_id, op_type, 
-      create_user_id, creade_at, `desc`, 
+      create_user_id, create_at, `desc`, 
       is_delete)
     values (#{operationModel,jdbcType=TINYINT}, #{operationId,jdbcType=INTEGER}, #{operationType,jdbcType=TINYINT}, 
-      #{createUserId,jdbcType=VARCHAR}, #{creadeAt,jdbcType=TIMESTAMP}, #{desc,jdbcType=VARCHAR}, 
+      #{createUserId,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, #{desc,jdbcType=VARCHAR}, 
       #{isDelete,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.rongyi.easy.settle.entity.OperationLog" useGeneratedKeys="true" keyProperty="id" >
@@ -40,7 +40,7 @@
       op_id,
       op_type,
       create_user_id,
-      creade_at,
+      create_at,
       `desc`,
       is_delete,
     </trim>
@@ -49,7 +49,7 @@
       #{operationId,jdbcType=INTEGER},
       #{operationType,jdbcType=TINYINT},
       #{createUserId,jdbcType=VARCHAR},
-      #{creadeAt,jdbcType=TIMESTAMP},
+      #{createAt,jdbcType=TIMESTAMP},
       #{desc,jdbcType=VARCHAR},
       #{isDelete,jdbcType=TINYINT},
     </trim>
@@ -69,8 +69,8 @@
       <if test="createUserId != null" >
         create_user_id = #{createUserId,jdbcType=VARCHAR},
       </if>
-      <if test="creadeAt != null" >
-        creade_at = #{creadeAt,jdbcType=TIMESTAMP},
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=TIMESTAMP},
       </if>
       <if test="desc != null" >
         `desc` = #{desc,jdbcType=VARCHAR},
@@ -87,7 +87,7 @@
       op_id = #{operationId,jdbcType=INTEGER},
       op_type = #{operationType,jdbcType=TINYINT},
       create_user_id = #{createUserId,jdbcType=VARCHAR},
-      creade_at = #{creadeAt,jdbcType=TIMESTAMP},
+      create_at = #{createAt,jdbcType=TIMESTAMP},
       `desc` = #{desc,jdbcType=VARCHAR},
       is_delete = #{isDelete,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
