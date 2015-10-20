@@ -321,36 +321,20 @@ public class CouponCode implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((code == null) ? 0 : code.hashCode());
-        result = prime * result
-            + ((couponId == null) ? 0 : couponId.hashCode());
-        return result;
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        CouponCode that = (CouponCode) o;
+        return Objects.equals(code, that.code) && Objects.equals(inChannel, that.inChannel);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        CouponCode other = (CouponCode) obj;
-        if (code == null) {
-            if (other.code != null)
-                return false;
-        } else if (!code.equals(other.code))
-            return false;
-        if (couponId == null) {
-            if (other.couponId != null)
-                return false;
-        } else if (!couponId.equals(other.couponId))
-            return false;
-        return true;
+    public int hashCode() {
+        return Objects.hash(code, inChannel);
     }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
