@@ -22,9 +22,11 @@
 		<result column="is_delete" property="isDelete" jdbcType="TINYINT" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		id, config_id, rule_code, cycle_start_time, cycle_end_time, `type`,
+		id, config_id, rule_code, cycle_start_time, cycle_end_time,
+		`type`,
 		batch_no, pay_total,
-		`status`, pay_time, pay_no, status_update_time, create_at, is_delete
+		`status`, pay_time, pay_no,
+		status_update_time, create_at, is_delete
 	</sql>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.util.Map">
@@ -34,21 +36,27 @@
 		where id = #{id,jdbcType=INTEGER}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from payment_bill
+		delete from
+		payment_bill
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.rongyi.easy.settle.entity.PaymentStatement"
 		useGeneratedKeys="true" keyProperty="id">
-		insert into payment_bill (config_id, rule_code, cycle_start_time,
-		cycle_end_time, `type`, batch_no,
+		insert into payment_bill
+		(config_id, rule_code, cycle_start_time,
+		cycle_end_time, `type`,
+		batch_no,
 		pay_total, `status`, pay_time,
-		pay_no, status_update_time, create_at,
+		pay_no, status_update_time,
+		create_at,
 		is_delete)
-		values (#{configId,jdbcType=INTEGER}, #{ruleCode,jdbcType=VARCHAR},
+		values (#{configId,jdbcType=INTEGER},
+		#{ruleCode,jdbcType=VARCHAR},
 		#{cycleStartTime,jdbcType=TIMESTAMP},
 		#{cycleEndTime,jdbcType=TIMESTAMP}, #{type,jdbcType=TINYINT},
 		#{batchNo,jdbcType=VARCHAR},
-		#{payTotal,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{payTime,jdbcType=TIMESTAMP},
+		#{payTotal,jdbcType=INTEGER},
+		#{status,jdbcType=TINYINT}, #{payTime,jdbcType=TIMESTAMP},
 		#{payNo,jdbcType=VARCHAR}, #{statusUpdateTime,jdbcType=TIMESTAMP},
 		#{createAt,jdbcType=TIMESTAMP},
 		#{isDelete,jdbcType=TINYINT})
@@ -121,7 +129,8 @@
 				pay_no = #{payNo,jdbcType=VARCHAR},
 			</if>
 			<if test="statusUpdateTime != null">
-				status_update_time = #{statusUpdateTime,jdbcType=TIMESTAMP},
+				status_update_time =
+				#{statusUpdateTime,jdbcType=TIMESTAMP},
 			</if>
 			<if test="createAt != null">
 				create_at = #{createAt,jdbcType=TIMESTAMP},
@@ -133,20 +142,29 @@
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.rongyi.easy.settle.entity.PaymentStatement">
-		update payment_bill
+		update
+		payment_bill
 		set config_id = #{configId,jdbcType=INTEGER},
-		rule_code = #{ruleCode,jdbcType=VARCHAR},
-		cycle_start_time = #{cycleStartTime,jdbcType=TIMESTAMP},
-		cycle_end_time = #{cycleEndTime,jdbcType=TIMESTAMP},
+		rule_code =
+		#{ruleCode,jdbcType=VARCHAR},
+		cycle_start_time =
+		#{cycleStartTime,jdbcType=TIMESTAMP},
+		cycle_end_time =
+		#{cycleEndTime,jdbcType=TIMESTAMP},
 		`type` = #{type,jdbcType=TINYINT},
 		batch_no = #{batchNo,jdbcType=VARCHAR},
-		pay_total = #{payTotal,jdbcType=INTEGER},
+		pay_total =
+		#{payTotal,jdbcType=INTEGER},
 		`status` = #{status,jdbcType=TINYINT},
 		pay_time = #{payTime,jdbcType=TIMESTAMP},
-		pay_no = #{payNo,jdbcType=VARCHAR},
-		status_update_time = #{statusUpdateTime,jdbcType=TIMESTAMP},
-		create_at = #{createAt,jdbcType=TIMESTAMP},
-		is_delete = #{isDelete,jdbcType=TINYINT}
+		pay_no =
+		#{payNo,jdbcType=VARCHAR},
+		status_update_time =
+		#{statusUpdateTime,jdbcType=TIMESTAMP},
+		create_at =
+		#{createAt,jdbcType=TIMESTAMP},
+		is_delete =
+		#{isDelete,jdbcType=TINYINT}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 
@@ -174,12 +192,15 @@
 		<result column="status" property="status" jdbcType="TINYINT" />
 		<result column="desc" property="desc" jdbcType="VARCHAR" />
 		<result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
-		<result column="download_user" property="downLoadUser" jdbcType="TIMESTAMP" />
-		<result column="download_time" property="downLoadTime" jdbcType="TIMESTAMP" />
+		<result column="download_user" property="downLoadUser"
+			jdbcType="TIMESTAMP" />
+		<result column="download_time" property="downLoadTime"
+			jdbcType="TIMESTAMP" />
 		<result column="roll_day" property="rollDay" jdbcType="VARCHAR" />
 		<result column="roll_type" property="rollType" jdbcType="TINYINT" />
 		<result column="pay_mode" property="payMode" jdbcType="TINYINT" />
-		<result column="predict_pay_time" property="predictPayTime" jdbcType="TIMESTAMP" />
+		<result column="predict_pay_time" property="predictPayTime"
+			jdbcType="TIMESTAMP" />
 	</resultMap>
 
 	<sql id="list_where_clause">
@@ -190,7 +211,7 @@
 				#{item,jdbcType=TINYINT}
 			</foreach>
 		</if>
-		
+
 		<if test="status != null and status != ''">
 			and pb.status = #{status,jdbcType=TINYINT}
 		</if>
@@ -201,13 +222,17 @@
 			and pbc.biz_type = #{bussinessType,jdbcType=TINYINT}
 		</if>
 		<if test="bussinessName != null and bussinessName != ''">
-			and pbc.biz_name = #{bussinessName,jdbcType=VARCHAR}
+			and pbc.biz_name
+			like
+			concat('%',#{bussinessName,jdbcType=VARCHAR},'%')
 		</if>
 		<if test="createAtStart != null and createAtStart != ''">
-			and pb.cycle_start_time &gt;= #{createAtStart,jdbcType=TIMESTAMP}
+			and pb.cycle_start_time &gt;=
+			#{createAtStart,jdbcType=TIMESTAMP}
 		</if>
 		<if test="createAtEnd != null and createAtEnd != ''">
-			and pb.cycle_start_time &lt;= #{createAtEnd,jdbcType=TIMESTAMP}
+			and pb.cycle_start_time &lt;=
+			#{createAtEnd,jdbcType=TIMESTAMP}
 		</if>
 		<if test="batchNo != null and batchNo != ''">
 			and pb.batch_no = #{batchNo,jdbcType=VARCHAR}
@@ -223,8 +248,8 @@
 			</foreach>
 		</if>
 		<if test="payAccount != null and payAccount != ''">
-			and bi.pay_account 
-			 like
+			and bi.pay_account
+			like
 			concat('%',#{payAccount,jdbcType=VARCHAR},'%')
 		</if>
 		<if test="blankName != null and blankName != ''">
@@ -236,24 +261,25 @@
 			#{statusUpdateStartTime,jdbcType=TIMESTAMP}
 		</if>
 		<if test="statusUpdateEndTime != null and statusUpdateEndTime != ''">
-			and pb.status_update_time &lt;= #{statusUpdateEndTime,jdbcType=TIMESTAMP}
+			and pb.status_update_time &lt;=
+			#{statusUpdateEndTime,jdbcType=TIMESTAMP}
 		</if>
 		<if test="idArray != null and idArray !=''">
-			and pb.id in 
-			<foreach collection="idArray" index="index" item="item"
-				open="(" separator="," close=")">
+			and pb.id in
+			<foreach collection="idArray" index="index" item="item" open="("
+				separator="," close=")">
 				#{item,jdbcType=TINYINT}
 			</foreach>
 		</if>
 		<if test="op_model != null and op_model != ''">
 			and ol.op_model = #{op_model}
 			<if test="statusList != null and statusList != ''">
-			and op_type in 
-			<foreach collection="statusList" index="index" item="item"
-				open="(" separator="," close=")">
-				#{item,jdbcType=TINYINT}
-			</foreach>
-		</if>
+				and op_type in
+				<foreach collection="statusList" index="index" item="item"
+					open="(" separator="," close=")">
+					#{item,jdbcType=TINYINT}
+				</foreach>
+			</if>
 		</if>
 		<if test="minPayTotal != null and minPayTotal != ''">
 			and pb.pay_total &gt;= #{minPayTotal}*100
@@ -266,14 +292,19 @@
 	<select id="selectPageList" resultMap="DtoResultMap"
 		parameterType="java.util.Map">
 		select * from (select
-		pb.id, pb.type, pb.batch_no, pb.cycle_start_time, pb.cycle_end_time,
+		pb.id, pb.type, pb.batch_no, pb.cycle_start_time,
+		pb.cycle_end_time,
 		pb.pay_total, pb.status, pb.pay_no,pb.create_at,
 		pb.status_update_time,
-		pbc.biz_name, pbc.biz_id, pbc.pay_channel, pbc.biz_type,
+		pbc.biz_name, pbc.biz_id, pbc.pay_channel,
+		pbc.biz_type,
 		bi.biz_email, bi.pay_account, bi.blank_name, bi.pay_name,
-		ol.desc,ol.create_user_id as download_user,ol.create_at as download_time,pbc.roll_day,pbc.roll_type,pbc.pay_mode,pb.create_at as predict_pay_time
+		ol.desc,ol.create_user_id as download_user,ol.create_at as
+		download_time,pbc.roll_day,pbc.roll_type,pbc.pay_mode,pb.create_at as
+		predict_pay_time
 		from payment_bill pb
-		left join payment_bill_config pbc on pb.config_id=pbc.id
+		left join payment_bill_config pbc
+		on pb.config_id=pbc.id
 		left join biz_info bi on bi.config_id=pbc.id
 		left join op_log ol on ol.op_id=pb.id
 		<where>
@@ -283,15 +314,18 @@
 		) tb
 		group by tb.id
 		<if test="currentPage != null and pageSize != null">
-			limit #{currentPage,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+			limit
+			#{currentPage,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
 		</if>
 	</select>
 
 	<select id="selectPageListCount" parameterType="java.util.Map"
 		resultType="java.lang.Integer">
 		select count(total.id) from (select pb.id from payment_bill pb
-		left join payment_bill_config pbc on pb.config_id=pbc.id
-		left join biz_info bi on bi.config_id=pbc.id
+		left
+		join payment_bill_config pbc on pb.config_id=pbc.id
+		left join biz_info
+		bi on bi.config_id=pbc.id
 		left join op_log ol on ol.op_id=pb.id
 		<where>
 			<include refid="list_where_clause" />
@@ -306,8 +340,10 @@
 		<include refid="Base_Column_List" />
 		from payment_bill
 		where config_id = #{configId,jdbcType=INTEGER}
-		and cycle_start_time = #{cycleStartTime,jdbcType=TIMESTAMP}
-		and cycle_end_time = #{cycleEndTime,jdbcType=TIMESTAMP}
+		and
+		cycle_start_time = #{cycleStartTime,jdbcType=TIMESTAMP}
+		and
+		cycle_end_time = #{cycleEndTime,jdbcType=TIMESTAMP}
 	</select>
 
 	<update id="updateStatusByIds" parameterType="map">
@@ -326,7 +362,8 @@
 	</update>
 
 	<update id="cancel" parameterType="java.lang.Integer">
-		update payment_bill set status=8 where id=#{id, jdbcType=INTEGER}
+		update payment_bill set
+		status=8 where id=#{id, jdbcType=INTEGER}
 	</update>
 
 	<!-- 通过对账单id查询对账单信息 -->
@@ -336,11 +373,15 @@
 		pb.pay_total, pb.status, pb.pay_no,
 		pb.status_update_time,
 		pbc.biz_name, pbc.biz_id, pbc.pay_channel, pbc.biz_type,
-		bi.biz_email, bi.pay_account, bi.blank_name, bi.pay_name
+		bi.biz_email,
+		bi.pay_account, bi.blank_name, bi.pay_name
 		from payment_bill pb
-		left join payment_bill_config pbc on pb.config_id = pbc.id
-		left join biz_info bi on pbc.id = bi.config_id
-		where pb.id=#{id, jdbcType=INTEGER}
+		left
+		join payment_bill_config pbc on pb.config_id = pbc.id
+		left join
+		biz_info bi on pbc.id = bi.config_id
+		where pb.id=#{id,
+		jdbcType=INTEGER}
 	</select>
 
 	<resultMap id="StatementDetailMap"
@@ -375,7 +416,8 @@
 		select
 		tor.order_no,tor.pay_no,tuc.use_time,tor.create_at,tuc.coupon_id,tuc.coupon_code,tuc.title,'收入'
 		as revenue_type,
-		(CASE tor.pay_channel WHEN 1 THEN '支付宝' WHEN 5 THEN '微信' WHEN 3 THEN '支付宝'
+		(CASE tor.pay_channel WHEN 1 THEN '支付宝' WHEN 5 THEN
+		'微信' WHEN 3 THEN '支付宝'
 		ELSE '其他' END) as pay_channel,tuc.orig_price,
 		ROUND(tor.pay_amount/tor.code_num, 0) as pay_amount,
 		ROUND(tor.hb_discount/tor.code_num, 0) as hb_discount,
@@ -385,10 +427,13 @@
 		mall_name,tor.user_name,rui.user_name as guide_name,rui.user_phone as
 		guide_phone
 		from ry_trade.trade_user_code tuc
-		join ry_trade.trade_order tor on tuc.order_id=tor.id
-		left join ry_rmmm.rmmm_user_info rui on rui.id=tuc.checked_user_id
+		join ry_trade.trade_order
+		tor on tuc.order_id=tor.id
+		left join ry_rmmm.rmmm_user_info rui on
+		rui.id=tuc.checked_user_id
 		where tuc.status=2
-		and tuc.use_time between '${startTime}' AND '${endTime}'
+		and tuc.use_time between
+		'${startTime}' AND '${endTime}'
 		AND tuc.shop_id = '${shopId}'
 	</select>
 
@@ -407,14 +452,20 @@
 
 	<select id="selectForCouponExcelDto" parameterType="java.util.Map"
 		resultMap="CouponExcelDtoMap">
-		select tuc.coupon_id,tuc.title, '收入' as pay_channel,tuc.orig_price, sum(tuc.orig_price) as
-		total_amount, count(tuc.coupon_id) as coupon_count,
+		select tuc.coupon_id,tuc.title, '收入' as
+		pay_channel,tuc.orig_price, sum(tuc.orig_price) as
+		total_amount,
+		count(tuc.coupon_id) as coupon_count,
 		ROUND(sum(tor.pay_amount/tor.code_num),0) as pay_amount
-		from ry_trade.trade_user_code tuc
-		join ry_trade.trade_order tor on tuc.order_id=tor.id
+		from
+		ry_trade.trade_user_code tuc
+		join ry_trade.trade_order tor on
+		tuc.order_id=tor.id
 		where tuc.status=2
-		and tuc.use_time between #{startTime,jdbcType=TIMESTAMP} AND #{endTime,jdbcType=TIMESTAMP}
-		AND tuc.shop_id = #{shopId,jdbcType=VARCHAR}
+		and tuc.use_time between
+		#{startTime,jdbcType=TIMESTAMP} AND #{endTime,jdbcType=TIMESTAMP}
+		AND
+		tuc.shop_id = #{shopId,jdbcType=VARCHAR}
 		GROUP BY tuc.coupon_id
 	</select>
 </mapper>
