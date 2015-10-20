@@ -65,13 +65,13 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
         logger.info("定时任务-扫描对账单配置……");
         List<StatementConfig> statementConfigList = statementConfigService.selectForSchedule();
         for (StatementConfig statementConfig : statementConfigList) {
-            logger.info("定时任务-执行对账单配置id=" + statementConfig.getId());
             try {
                 if (SettleConstant.CountCycleType.DAY.equals(statementConfig.getCountCycle())) {
                     Date yesterdayFirstSecond = DateUtils.getYesterdayFirstSecond();
                     Date yesterdayLastSecond = DateUtils.getYesterdayLastSecond();
                     List<PaymentStatement> paymentStatements = paymentStatementService.selectByCycleTime(statementConfig.getId(), yesterdayFirstSecond, yesterdayLastSecond);
                     if (paymentStatements == null || paymentStatements.size() == 0) {
+                        logger.info("定时任务-执行对账单配置id=" + statementConfig.getId());
                         PaymentStatement paymentStatement = new PaymentStatement();
                         paymentStatement.setConfigId(statementConfig.getId());
                         paymentStatement.setRuleCode(statementConfig.getRuleCode());
