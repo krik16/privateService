@@ -133,6 +133,7 @@ public class PaymentStatementController extends BaseController {
 				}
 				statusList.add(ConstantEnum.STATUS_6.getCodeByte());
 				statusList.add(ConstantEnum.STATUS_11.getCodeByte());
+				statusList.add(ConstantEnum.STATUS_12.getCodeByte());
 				List<Byte> payChannelList = new ArrayList<Byte>();
 				payChannelList.add(ConstantEnum.STATUS_3.getCodeByte());
 				payChannelList.add(ConstantEnum.STATUS_4.getCodeByte());
