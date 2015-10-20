@@ -63,6 +63,16 @@ public class Live implements  Serializable{
 	 */
 	private List<Double> location;
 	
+	/**
+	 * 品牌id列表
+	 */
+	private List<ObjectId> brandIds;
+	
+	/**
+	 * 品牌名称列表
+	 */
+	private List<String> brandNames;
+	
 	public ObjectId getId() {
 		return id;
 	}
@@ -128,6 +138,18 @@ public class Live implements  Serializable{
 	}
 	public void setLocation(List<Double> location) {
 		this.location = location;
+	}
+	public List<ObjectId> getBrandIds() {
+		return brandIds;
+	}
+	public void setBrandIds(List<ObjectId> brandIds) {
+		this.brandIds = brandIds;
+	}
+	public List<String> getBrandNames() {
+		return brandNames;
+	}
+	public void setBrandNames(List<String> brandNames) {
+		this.brandNames = brandNames;
 	}
 
 	

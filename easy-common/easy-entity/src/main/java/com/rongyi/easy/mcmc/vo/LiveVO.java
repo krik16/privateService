@@ -39,7 +39,7 @@ public class LiveVO implements Serializable {
 	/**
 	 * 创建时间
 	 */
-	private long createAt;
+	private long createTime;
 
 	/**
 	 * 直播状态 [0:发布/预热中，1:上线/进行中，2:下线(已过期)]
@@ -127,14 +127,14 @@ public class LiveVO implements Serializable {
 
 	public void setEndTime(long endTime) {
 		this.endTime = endTime;
+	}	
+
+	public long getCreateTime() {
+		return createTime;
 	}
 
-	public long getCreateAt() {
-		return createAt;
-	}
-
-	public void setCreateAt(long createAt) {
-		this.createAt = createAt;
+	public void setCreateTime(long createTime) {
+		this.createTime = createTime;
 	}
 
 	public int getStatus() {

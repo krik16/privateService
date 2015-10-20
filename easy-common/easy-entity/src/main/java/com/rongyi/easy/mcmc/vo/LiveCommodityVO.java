@@ -1,6 +1,7 @@
 package com.rongyi.easy.mcmc.vo;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 直播VO中的商品VO
@@ -34,5 +35,8 @@ public class LiveCommodityVO implements Serializable {
 
 	public void setCommodityPic(String commodityPic) {
 		this.commodityPic = commodityPic;
-	}	
+	}
+
+	
+	
 }
