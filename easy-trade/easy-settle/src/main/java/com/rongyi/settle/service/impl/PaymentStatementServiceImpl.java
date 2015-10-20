@@ -216,7 +216,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 	}
 
 	@Override
-	public void generate(Integer id) throws Exception {
+	public void generate(Integer id,String userId) throws Exception {
 		PaymentStatement paymentStatement = get(id);
 		if (ConstantEnum.STATUS_8.getCodeByte().equals(paymentStatement.getStatus())) {
 			logger.error("作废对账单不能重新生成。id=" + id);
@@ -235,10 +235,10 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		paymentStatementNew.setCreateAt(new Date());
 		paymentStatementNew.setIsDelete(new Byte("0"));
 		paymentStatementNew.setPayNo(orderNoGenService.getOrderNo("3"));
-		createExcel(id, paymentStatementNew, statementConfig);
+		createExcel(id, paymentStatementNew, statementConfig,userId);
 	}
 
-	private void createExcel(Integer id, PaymentStatement paymentStatement, StatementConfig statementConfig) throws Exception {
+	private void createExcel(Integer id, PaymentStatement paymentStatement, StatementConfig statementConfig,String userId) throws Exception {
 		PaymentStatementExcelDto paymentStatementExcelDto = new PaymentStatementExcelDto();
 		List<PaymentStatementDetailDto> paymentStatementDetailDtoList = new ArrayList<>();
 		List<CouponExcelDto> couponExcelDtoList = new ArrayList<>();
@@ -291,7 +291,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		ExcelUtils.write(propertyConfigurer.getProperty("settle.template.file"), propertyConfigurer.getProperty("settle.file.path"), statementConfig.getBussinessId(),
 				getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime())), paymentStatementExcelDto);
 		paymentStatement.setPayTotal(AmountUtil.changYuanToFen(total));
-		cancel(id);
+//		cancel(id);
+		List<Integer> ids = new ArrayList<Integer>();
+		updatePaymentStatusByIds(ids, ConstantEnum.STATUS_8.getCodeInt(), "重新生成或作废", userId);
 		insert(paymentStatement);
 	}
 

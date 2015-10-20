@@ -173,7 +173,7 @@ public class PaymentStatementController extends BaseController {
 				for (PaymentStatementDto paymentStatementDto : list) {
 					if (paymentStatementDto.getPayMode() != null && paymentStatementDto.getPayMode().equals(ConstantEnum.PAY_MODE_1.getCodeByte())) {// 滚动日期
 						if (paymentStatementDto.getRollType().equals(ConstantEnum.ROLL_TYPE_0.getCodeByte()) && !StringUtils.isEmpty(paymentStatementDto.getRollDay()))// 天
-							paymentStatementDto.setPredictPayTime(DateUtil.getDaysInPast(paymentStatementDto.getCreateAt(), Integer.valueOf(paymentStatementDto.getRollDay())));
+							paymentStatementDto.setPredictPayTime(DateUtil.getDaysInAdd(paymentStatementDto.getCreateAt(), Integer.valueOf(paymentStatementDto.getRollDay())));
 						else if (paymentStatementDto.getRollType().equals(ConstantEnum.ROLL_TYPE_1.getCodeByte()) && !StringUtils.isEmpty(paymentStatementDto.getRollDay()))// 时
 							paymentStatementDto.setPredictPayTime(DateUtil.addHours(paymentStatementDto.getCreateAt(), Integer.valueOf(paymentStatementDto.getRollDay())));
 					}
@@ -351,7 +351,7 @@ public class PaymentStatementController extends BaseController {
 				return responseData;
 			}
 			Integer id = Integer.valueOf(map.get("id").toString());
-			paymentStatementService.generate(id);
+			paymentStatementService.generate(id,getUserName(request));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
@@ -423,7 +423,7 @@ public class PaymentStatementController extends BaseController {
 				return responseData;
 			}
 			Integer id = Integer.valueOf(map.get("id").toString());
-			paymentStatementService.generate(id);
+			paymentStatementService.generate(id,getUserName(request));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
