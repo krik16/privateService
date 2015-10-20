@@ -19,8 +19,9 @@ public interface ShopService {
 	 * @param timeStamp 时间戳
 	 * @param sign 签名
 	 * @return 带ShopVO 的ResponseVO
+	 *
 	 */
-	ResponseVO searchShops(String keyword,int page,int pageSize,long timeStamp,String sign);
+	ResponseVO searchShops(String mallId, String keyword, String customCateId, int page,int pageSize,long timeStamp,String sign);
 	/**
 	 * 获取单个店铺详情
 	 * @param id 店铺id
@@ -60,4 +61,13 @@ public interface ShopService {
 	 * @return 带CustomCategory的ResponseVO
 	 */
 	ResponseVO getCustomCategoriesByMallId(String mallId,long timeStamp,String sign);
+
+	/**
+	 * 获取品牌信息
+	 * @param brndId 品牌id
+	 * @param timeStamp 时间戳
+	 * @param sign 签名
+	 * @return 带Brand的ResponseVO
+	 */
+	ResponseVO getBrandById(String brndId,long timeStamp,String sign);
 }

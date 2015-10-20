@@ -1,6 +1,7 @@
 package com.rongyi.easy.bdata.shop.vo;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import org.mongodb.morphia.annotations.Id;
@@ -27,7 +28,7 @@ public class FloorVO implements Serializable {
 	/**
 	 * 创建时间
 	 */
-	private long createdAt;
+	private Date createdAt;
 	/**
 	 * 描述
 	 */
@@ -40,14 +41,6 @@ public class FloorVO implements Serializable {
 	 * 名称
 	 */
 	private String name;
-	/**
-	 * 旧编号
-	 */
-	private String oldCode;
-	/**
-	 * 旧id
-	 */
-	private int oldId;
 	/**
 	 * 父id
 	 */
@@ -63,7 +56,7 @@ public class FloorVO implements Serializable {
 	/**
 	 * 更新时间
 	 */
-	private long updatedAt;
+	private Date updatedAt;
 	/**
 	 * 更新人id
 	 */
@@ -86,10 +79,10 @@ public class FloorVO implements Serializable {
 	public void setAppPicture(String appPicture) {
 		this.appPicture = appPicture;
 	}
-	public long getCreatedAt() {
+	public Date getCreatedAt() {
 		return createdAt;
 	}
-	public void setCreatedAt(long createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
 	public String getDescription() {
@@ -110,18 +103,6 @@ public class FloorVO implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getOldCode() {
-		return oldCode;
-	}
-	public void setOldCode(String oldCode) {
-		this.oldCode = oldCode;
-	}
-	public int getOldId() {
-		return oldId;
-	}
-	public void setOldId(int oldId) {
-		this.oldId = oldId;
-	}
 	public String getParentId() {
 		return parentId;
 	}
@@ -140,10 +121,10 @@ public class FloorVO implements Serializable {
 	public void setPosition(int position) {
 		this.position = position;
 	}
-	public long getUpdatedAt() {
+	public Date getUpdatedAt() {
 		return updatedAt;
 	}
-	public void setUpdatedAt(long updatedAt) {
+	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 	public int getUpdatedUserId() {

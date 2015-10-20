@@ -30,14 +30,6 @@ public class Categories implements Serializable {
 	 */
 	private String name;
 	/**
-	 * 旧编号
-	 */
-	private int old_code;
-	/**
-	 * 旧id
-	 */
-	private int old_id;
-	/**
 	 * 父id数组
 	 */
 	private List<ObjectId> parent_ids;
@@ -49,12 +41,7 @@ public class Categories implements Serializable {
 	 * 更新时间
 	 */
 	private Date updated_at;
-	
-	/**
-	 * 品牌id列表
-	 */
-	private List<ObjectId> brand_ids;
-	
+
 	/**
 	 * 父级id
 	 */
@@ -84,22 +71,6 @@ public class Categories implements Serializable {
 		this.name = name;
 	}
 
-	public int getOld_code() {
-		return old_code;
-	}
-
-	public void setOld_code(int old_code) {
-		this.old_code = old_code;
-	}
-
-	public int getOld_id() {
-		return old_id;
-	}
-
-	public void setOld_id(int old_id) {
-		this.old_id = old_id;
-	}
-
 	public List<ObjectId> getParent_ids() {
 		return parent_ids;
 	}
@@ -122,14 +93,6 @@ public class Categories implements Serializable {
 
 	public void setUpdated_at(Date updated_at) {
 		this.updated_at = updated_at;
-	}
-
-	public List<ObjectId> getBrand_ids() {
-		return brand_ids;
-	}
-
-	public void setBrand_ids(List<ObjectId> brand_ids) {
-		this.brand_ids = brand_ids;
 	}
 
 	public ObjectId getParent_id() {

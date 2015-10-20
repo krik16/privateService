@@ -1,6 +1,7 @@
 package com.rongyi.easy.bdata.shop.vo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 图片
@@ -17,7 +18,7 @@ public class PhotoVO implements Serializable {
 	/**
 	 * 创建时间
 	 */
-	private long createdAt;
+	private Date createdAt;
 	/**
 	 * 图片名
 	 */
@@ -41,7 +42,7 @@ public class PhotoVO implements Serializable {
 	/**
 	 * 更新时间
 	 */
-	private long updatedAt;
+	private Date updatedAt;
 	
 	/**
 	 * 图片路径
@@ -56,11 +57,11 @@ public class PhotoVO implements Serializable {
 		this.id = id;
 	}
 
-	public long getCreatedAt() {
+	public Date getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(long createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
 
@@ -104,11 +105,11 @@ public class PhotoVO implements Serializable {
 		this.status = status;
 	}
 
-	public long getUpdatedAt() {
+	public Date getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(long updatedAt) {
+	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 

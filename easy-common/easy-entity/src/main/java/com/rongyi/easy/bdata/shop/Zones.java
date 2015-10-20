@@ -46,14 +46,6 @@ public class Zones implements Serializable {
 	 */
 	private String name;
 	/**
-	 * 旧编号
-	 */
-	private String old_code;
-	/**
-	 * 旧id
-	 */
-	private int old_id;
-	/**
 	 * 父id
 	 */
 	private ObjectId parent_id;
@@ -130,22 +122,6 @@ public class Zones implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getOld_code() {
-		return old_code;
-	}
-
-	public void setOld_code(String old_code) {
-		this.old_code = old_code;
-	}
-
-	public int getOld_id() {
-		return old_id;
-	}
-
-	public void setOld_id(int old_id) {
-		this.old_id = old_id;
 	}
 
 	public ObjectId getParent_id() {

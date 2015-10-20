@@ -1,6 +1,7 @@
 package com.rongyi.easy.bdata.shop.vo;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 public class ShopVO implements Serializable {
@@ -37,6 +38,10 @@ public class ShopVO implements Serializable {
 	 * 分类id列表
 	 */
 	private List<String> categoryIds;
+	/**
+	 * 自定义分类id列表
+	 */
+	private List<String> customCategoryIds;
 
 	/**
 	 * 点评数
@@ -49,7 +54,7 @@ public class ShopVO implements Serializable {
 	/**
 	 * 创建时间
 	 */
-	private long createdAt;
+	private Date createdAt;
 	/**
 	 * 描述
 	 */
@@ -66,14 +71,6 @@ public class ShopVO implements Serializable {
 	private String name;
 
 	private String nameTemp;
-	/**
-	 * 旧编码
-	 */
-	private int oldCode;
-	/**
-	 * 旧id
-	 */
-	private int oldId;
 	/**
 	 * 操作人id
 	 */
@@ -118,7 +115,7 @@ public class ShopVO implements Serializable {
 	/**
 	 * 更新时间
 	 */
-	private long updatedAt;
+	private Date updatedAt;
 	/**
 	 * 有效状态
 	 */
@@ -202,6 +199,14 @@ public class ShopVO implements Serializable {
 		this.categoryIds = categoryIds;
 	}
 
+	public List<String> getCustomCategoryIds() {
+		return customCategoryIds;
+	}
+
+	public void setCustomCategoryIds(List<String> customCategoryIds) {
+		this.customCategoryIds = customCategoryIds;
+	}
+
 	public int getCommentCount() {
 		return commentCount;
 	}
@@ -218,11 +223,11 @@ public class ShopVO implements Serializable {
 		this.coordinate = coordinate;
 	}
 
-	public long getCreatedAt() {
+	public Date getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(long createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
 
@@ -264,22 +269,6 @@ public class ShopVO implements Serializable {
 
 	public void setNameTemp(String nameTemp) {
 		this.nameTemp = nameTemp;
-	}
-
-	public int getOldCode() {
-		return oldCode;
-	}
-
-	public void setOldCode(int oldCode) {
-		this.oldCode = oldCode;
-	}
-
-	public int getOldId() {
-		return oldId;
-	}
-
-	public void setOldId(int oldId) {
-		this.oldId = oldId;
 	}
 
 	public int getOperatorId() {
@@ -370,11 +359,11 @@ public class ShopVO implements Serializable {
 		this.terminalShop = terminalShop;
 	}
 
-	public long getUpdatedAt() {
+	public Date getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(long updatedAt) {
+	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 

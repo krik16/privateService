@@ -1,6 +1,7 @@
 package com.rongyi.easy.bdata.shop.vo;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -46,11 +47,11 @@ public class CustomCategoryVO implements Serializable {
 	/**
 	 * 创建时间
 	 */
-	private long createdAt;
+	private Date createdAt;
 	/**
 	 * 更新时间
 	 */
-	private long updatedAt;
+	private Date updatedAt;
 	/**
 	 * 创建人
 	 */
@@ -124,19 +125,19 @@ public class CustomCategoryVO implements Serializable {
 		this.categorysId = categorysId;
 	}
 
-	public long getCreatedAt() {
+	public Date getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(long createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
 
-	public long getUpdatedAt() {
+	public Date getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(long updatedAt) {
+	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 

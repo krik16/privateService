@@ -1,6 +1,7 @@
 package com.rongyi.easy.bdata.shop.vo;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,7 +43,7 @@ public class CategoriesVO implements Serializable {
 	/**
 	 * 更新时间
 	 */
-	private long updatedAt;
+	private Date updatedAt;
 
 	/**
 	 * 品牌id列表
@@ -78,22 +79,6 @@ public class CategoriesVO implements Serializable {
 		this.name = name;
 	}
 
-	public int getOldCode() {
-		return oldCode;
-	}
-
-	public void setOldCode(int oldCode) {
-		this.oldCode = oldCode;
-	}
-
-	public int getOldId() {
-		return oldId;
-	}
-
-	public void setOldId(int oldId) {
-		this.oldId = oldId;
-	}
-
 	public List<String> getParentIds() {
 		return parentIds;
 	}
@@ -110,20 +95,12 @@ public class CategoriesVO implements Serializable {
 		this.position = position;
 	}
 
-	public long getUpdatedAt() {
+	public Date getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(long updatedAt) {
+	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
-	}
-
-	public List<String> getBrandIds() {
-		return brandIds;
-	}
-
-	public void setBrandIds(List<String> brandIds) {
-		this.brandIds = brandIds;
 	}
 
 	public String getParentId() {
