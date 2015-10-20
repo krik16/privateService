@@ -154,6 +154,7 @@ public class PaymentStatementController extends BaseController {
 					statusList.add(ConstantEnum.STATUS_3.getCodeByte());
 				} else if (searchStatus == 2) {// 已确认
 					statusList.add(ConstantEnum.STATUS_4.getCodeByte());
+					statusList.add(ConstantEnum.STATUS_12.getCodeByte());
 				} else if (searchStatus == 3) {// 不确认
 					statusList.add(ConstantEnum.STATUS_5.getCodeByte());
 				}
