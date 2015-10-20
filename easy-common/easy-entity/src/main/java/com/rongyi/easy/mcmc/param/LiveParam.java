@@ -13,6 +13,34 @@ public class LiveParam {
 	String beginTime;
 	String endTime;
 	String liveStatus;
+	String jsessionid;
+	int commodityCount;
+	int page;
+	int pageSize;
+	public int getCommodityCount() {
+		return commodityCount;
+	}
+	public void setCommodityCount(int commodityCount) {
+		this.commodityCount = commodityCount;
+	}
+	public int getPage() {
+		return page;
+	}
+	public void setPage(int page) {
+		this.page = page;
+	}
+	public int getPageSize() {
+		return pageSize;
+	}
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+	public String getJsessionid() {
+		return jsessionid;
+	}
+	public void setJsessionid(String jsessionid) {
+		this.jsessionid = jsessionid;
+	}
 	public String getLiveId() {
 		return liveId;
 	}
