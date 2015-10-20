@@ -1,7 +1,11 @@
 package com.rongyi.settle.service.impl;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
@@ -293,6 +297,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		paymentStatement.setPayTotal(AmountUtil.changYuanToFen(total));
 //		cancel(id);
 		List<Integer> ids = new ArrayList<Integer>();
+		ids.add(id);
 		updatePaymentStatusByIds(ids, ConstantEnum.STATUS_8.getCodeInt(), "重新生成或作废", userId);
 		insert(paymentStatement);
 	}
