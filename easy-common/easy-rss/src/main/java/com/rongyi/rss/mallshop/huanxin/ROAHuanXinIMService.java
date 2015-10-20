@@ -5,6 +5,8 @@ package com.rongyi.rss.mallshop.huanxin;
 
 import java.util.List;
 
+import org.bson.types.ObjectId;
+
 /**
  * Copyright (C),上海容易网电子商务有限公司
  * author chenjun
@@ -30,5 +32,21 @@ public interface ROAHuanXinIMService {
      * @throws Exception
      */
     public List<String> getUserCount(Integer shopId) throws Exception;
+    
+    /**
+	 * 根据不同的事件，发送不同的数据（订单）
+	 * 
+	 * @param buyerNum
+	 * @param orderNum
+	 * @param orderEventType
+	 * @return
+	 * @throws Exception
+	 */
+	public void sendBodyByOrderEventType(final ObjectId buyerNum, final String orderNum, final String orderEventType);
+	
+	/**
+	 * 根据不同的事件，发送不同的数据（退款维权）
+	 */
+	public void sendBodyByOrderEventType(final Integer applicationId, final ObjectId buyerNum, final String orderEventType);
 
 }

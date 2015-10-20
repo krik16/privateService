@@ -118,7 +118,7 @@ public interface ROAOrderService {
 	 * @return
 	 * @throws Exception
 	 */
-	public void sendBodyByOrderEventType(ObjectId buyerNum, String orderNum, String orderEventType) throws Exception;
+//	public void sendBodyByOrderEventType(ObjectId buyerNum, String orderNum, String orderEventType) throws Exception;
 	
 	/**
 	 * 根据订单号查询订单所属店铺、商场，以及买家信息
