@@ -126,7 +126,9 @@ public class PaymentStatementController extends BaseController {
 				if (searchStatus == 0)
 					statusList.add(ConstantEnum.STATUS_4.getCodeByte());
 				else {
+					statusList.add(ConstantEnum.STATUS_5.getCodeByte());
 					statusList.add(ConstantEnum.STATUS_6.getCodeByte());
+					statusList.add(ConstantEnum.STATUS_8.getCodeByte());
 				}
 				break;
 			case 3:// 查询付款列表
@@ -136,6 +138,7 @@ public class PaymentStatementController extends BaseController {
 				}
 				statusList.add(ConstantEnum.STATUS_6.getCodeByte());
 				statusList.add(ConstantEnum.STATUS_11.getCodeByte());
+				statusList.add(ConstantEnum.STATUS_12.getCodeByte());
 				List<Byte> payChannelList = new ArrayList<Byte>();
 				payChannelList.add(ConstantEnum.STATUS_3.getCodeByte());
 				payChannelList.add(ConstantEnum.STATUS_4.getCodeByte());
