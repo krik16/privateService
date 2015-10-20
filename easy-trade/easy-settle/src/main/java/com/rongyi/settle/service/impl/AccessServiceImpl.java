@@ -59,7 +59,7 @@ public class AccessServiceImpl implements AccessService {
                 break;
             }
         }
-        logger.info("访问地址：" + request.getServletPath() + " RYST=" + ryst + " BSST=" + bsst);
+        logger.info("访问地址：" + request.getServletPath() + " RYST=" + ryst + " BSST=" + bsst + " needAuthority=" + needAuthority);
         if (StringUtils.isEmpty(ryst) && StringUtils.isEmpty(bsst)) {
             return ResponseData.failure(CodeEnum.FIAL_USER_PARAMS_PAYMENT.getCodeInt(), CodeEnum.FIAL_USER_PARAMS_PAYMENT.getValueStr());
         }
@@ -82,7 +82,7 @@ public class AccessServiceImpl implements AccessService {
             request.getSession().setAttribute("userName", sessionUserInfo.getUserName());
         }
         List<String> authorities = (List<String>) user.get("authorities");
-        logger.info("需要权限: " + needAuthority + " 拥有权限:" + authorities.toString());
+//        logger.info("需要权限: " + needAuthority + " 拥有权限:" + authorities.toString());
         if (authorities.contains(needAuthority)) {
             return ResponseData.success();
         } else {
