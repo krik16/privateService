@@ -271,7 +271,7 @@
 		pb.status_update_time,
 		pbc.biz_name, pbc.biz_id, pbc.pay_channel, pbc.biz_type,
 		bi.biz_email, bi.pay_account, bi.blank_name, bi.pay_name,
-		ol.desc,ol.create_user_id as download_user,ol.creade_at as download_time,pbc.roll_day,pbc.roll_type,pbc.pay_mode,pb.create_at as predict_pay_time
+		ol.desc,ol.create_user_id as download_user,ol.create_at as download_time,pbc.roll_day,pbc.roll_type,pbc.pay_mode,pb.create_at as predict_pay_time
 		from payment_bill pb
 		left join payment_bill_config pbc on pb.config_id=pbc.id
 		left join biz_info bi on bi.config_id=pbc.id
