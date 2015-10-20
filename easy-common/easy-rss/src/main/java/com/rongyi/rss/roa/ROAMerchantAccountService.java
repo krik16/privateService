@@ -151,6 +151,16 @@ public interface ROAMerchantAccountService {
      * @throws Exception
      */
     public Boolean validatePhoneOrNickName(String userPhone, String nickName) throws Exception;
+    
+    /**
+     * 验证用户手机昵称
+     * @param userPhone
+     * @param nickName
+     * @param type =2在买手列表中查   ！=2在非买手列表查
+     * @return
+     * @throws Exception
+     */
+    public Boolean validatePhoneOrNickName(String userPhone, String nickName,Integer type) throws Exception;
 
     /**
      * 根据商场名查商场  模糊查询
