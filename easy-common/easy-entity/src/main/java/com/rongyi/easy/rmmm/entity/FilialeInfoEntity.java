@@ -1,7 +1,14 @@
 package com.rongyi.easy.rmmm.entity;
 
-public class FilialeInfoEntity {
-    private Integer id;
+import java.io.Serializable;
+
+public class FilialeInfoEntity implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
 
     private String filialeMid;
 

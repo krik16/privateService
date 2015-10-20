@@ -2,12 +2,16 @@ package com.rongyi.easy.rmmm.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 
 public class RmmmUserInfoEntity implements Serializable{
 
-    /** 主键  */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** 主键  */
     private Integer id;
 
     /** 用户头像logo */
