@@ -46,6 +46,11 @@ public class StatementConfig implements Serializable {
      * 商户名称
      */
     private String bussinessName;
+    
+    /**
+     * 商户真实地址
+     */
+    private String bussinessRealAddress;
 
     /**
      * 计算周期（0:日，1:周，2:月，3:自定义）
@@ -389,5 +394,13 @@ public class StatementConfig implements Serializable {
     public void setBussinessId(String bussinessId) {
         this.bussinessId = bussinessId;
     }
+
+	public String getBussinessRealAddress() {
+		return bussinessRealAddress;
+	}
+
+	public void setBussinessRealAddress(String bussinessRealAddress) {
+		this.bussinessRealAddress = bussinessRealAddress;
+	}
     
 }
