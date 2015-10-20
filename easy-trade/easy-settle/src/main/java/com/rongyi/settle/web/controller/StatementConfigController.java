@@ -58,7 +58,7 @@ import com.rongyi.settle.web.controller.vo.RelevanceVO;
 @RequestMapping("/statementConfig")
 public class StatementConfigController extends BaseController{
 
-	Logger logger = LoggerFactory.getLogger(StatementConfigController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(StatementConfigController.class);
 
 	@Autowired
 	StatementConfigService statementConfigService;
@@ -97,7 +97,7 @@ public class StatementConfigController extends BaseController{
 	@RequestMapping("/list")
 	@ResponseBody
 	public ResponseData getPageList(HttpServletRequest request, @RequestBody Map<String, Object> map) {
-		logger.info("====config list==== params="+map.toString());
+		LOGGER.info("====configList map={}"+map);
 		try {
 			if (map.containsKey("searchStatus")) {
 				ResponseData responseData = accessService.check(request, "FNC_STLCONF_VIEW");
@@ -145,7 +145,7 @@ public class StatementConfigController extends BaseController{
 	@RequestMapping("/add")
 	@ResponseBody
 	public ResponseData add(HttpServletRequest request) {
-		logger.info("====config add====");
+		LOGGER.info("====config add====");
 		return ResponseData.success(getRuleCode());
 	}
 
@@ -160,7 +160,7 @@ public class StatementConfigController extends BaseController{
 	@RequestMapping("/save")
 	@ResponseBody
 	public ResponseData save(HttpServletRequest request, @RequestBody Map<String, Object> map) {
-		logger.info("====config save==== params="+map.toString());
+		LOGGER.info("====config save==== params={}",map.toString());
 		try {
 			ResponseData responseData = accessService.check(request, "FNC_STL_ADD");
 			if (responseData.getMeta().getErrno() != 0) {
@@ -202,7 +202,7 @@ public class StatementConfigController extends BaseController{
 	@RequestMapping("/update")
 	@ResponseBody
 	public ResponseData update(HttpServletRequest request, @RequestBody Map<String, Object> map) {
-		logger.info("====config update==== params="+map.toString());
+		LOGGER.info("====config update==== params={}",map.toString());
 		try {
 			ResponseData responseData = accessService.check(request, "FNC_STL_EDIT");
 			if (responseData.getMeta().getErrno() != 0) {
@@ -226,7 +226,7 @@ public class StatementConfigController extends BaseController{
 	@RequestMapping("/modify")
 	@ResponseBody
 	public ResponseData modify(HttpServletRequest request, @RequestBody Map<String, Object> map) {
-		logger.info("====config modify==== params="+map.toString());
+		LOGGER.info("====config modify==== params={}",map.toString());
 		try {
 			ResponseData responseData = accessService.check(request, "FNC_STL_CHANGE");
 			if (responseData.getMeta().getErrno() != 0) {
@@ -250,7 +250,7 @@ public class StatementConfigController extends BaseController{
 	@RequestMapping("/info")
 	@ResponseBody
 	public ResponseData info(HttpServletRequest request, @RequestBody Map<String, Object> map) {
-		logger.info("====config info==== params="+map.toString());
+		LOGGER.info("====config info==== params={}",map.toString());
 		StatementConfigVO statementConfigVO = new StatementConfigVO();
 		try {
 			ResponseData responseData = accessService.check(request, "FNC_STLCONF_VIEW");
@@ -277,7 +277,7 @@ public class StatementConfigController extends BaseController{
 	@RequestMapping("/verify")
 	@ResponseBody
 	public ResponseData verify(HttpServletRequest request, @RequestBody Map<String, Object> map) {
-		logger.info("====config verify==== params="+map.toString());
+		LOGGER.info("====config verify==== params={}",map.toString());
 		ResponseData result = null;
 		try {
 			ResponseData responseData = accessService.check(request, "FNC_STLCONF_VFY");
@@ -286,8 +286,6 @@ public class StatementConfigController extends BaseController{
 			}
 			// 获取用户
 			String userId =getUserName(request);
-
-			logger.info("============ 对账配置批量审核 =============");
 			String idStr = map.containsKey("ids") ? map.get("ids").toString() : null;
 			Integer status = map.containsKey("status") ? Integer.valueOf(map.get("status").toString()) : null;
 			String desc = map.containsKey("desc") ? map.get("desc").toString() : null;
@@ -307,7 +305,7 @@ public class StatementConfigController extends BaseController{
 			e.printStackTrace();
 			result = ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
 		}
-		logger.info(result.toString());
+		LOGGER.info(result.toString());
 		return result;
 	}
 
@@ -347,8 +345,7 @@ public class StatementConfigController extends BaseController{
 	public ResponseData relevance(HttpServletRequest request, @RequestBody Map<String, Object> map) {
 		ResponseData result = null;
 		try {
-			logger.info("============ 类型，id模糊搜索 =============");
-			logger.info(map + "");
+			LOGGER.info("relevance map={}",map);
 			String id = map.containsKey("id") ? map.get("id").toString() : null;
 			Integer type = map.containsKey("type") ? Integer.valueOf(map.get("type").toString()) : null;
 			Integer currpage = map.get("currpage") != null ? Integer.parseInt(map.get("currpage").toString()) : 1;
@@ -363,7 +360,6 @@ public class StatementConfigController extends BaseController{
 				searchMap.put("id", id);
 				searchMap.put("sort", "noSort");// 暂未定排序字段
 				Map<String, Object> resultMap = roaShopService.getShops(searchMap, currpage, pagesize);
-				logger.info("此次查询关联店铺数" + resultMap.get("totalCount"));
 				List<ShopVO> list = (List<ShopVO>) resultMap.get("list");
 				int count = resultMap.containsKey("totalCount") ? Integer.valueOf(resultMap.get("totalCount").toString()) : 0;
 				result = ResponseData.success(list, currpage, pagesize, count);
@@ -376,7 +372,6 @@ public class StatementConfigController extends BaseController{
 			} else if (type.intValue() == 2) {// 品牌
 				searchMap.put("id", id);
 				PagingVO<BrandVO> brands = roaBrandService.getBrandListByMap(searchMap, currpage, pagesize);
-				logger.info("brandsCount" + brands.getRowCnt());
 				result = ResponseData.success(brands.getDataList(), currpage, pagesize, brands.getRowCnt());
 			} else if (type.intValue() == 3) {// 分公司
 				searchMap.put("id", id);
@@ -406,7 +401,7 @@ public class StatementConfigController extends BaseController{
 			e.printStackTrace();
 			result = ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
 		}
-		logger.info(result.toString());
+		LOGGER.info("result={}"+result.toString());
 		return result;
 	}
 	

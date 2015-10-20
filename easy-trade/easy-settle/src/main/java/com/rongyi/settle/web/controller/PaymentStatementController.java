@@ -56,7 +56,7 @@ import com.rongyi.settle.util.DateUtils;
 @RequestMapping("/paymentStatement")
 public class PaymentStatementController extends BaseController {
 
-	Logger logger = LoggerFactory.getLogger(PaymentStatementController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(PaymentStatementController.class);
 
 	@Autowired
 	private PropertyConfigurer propertyConfigurer;
@@ -89,6 +89,7 @@ public class PaymentStatementController extends BaseController {
 	@RequestMapping("/list")
 	@ResponseBody
 	public ResponseData list(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+		LOGGER.info("list map={}",map);
 		try {
 			Integer currentPage = Integer.valueOf(map.get("currentPage").toString());
 			Integer searchType = Integer.valueOf(map.get("searchType").toString());
@@ -207,7 +208,7 @@ public class PaymentStatementController extends BaseController {
 	@RequestMapping("/bizListTotal")
 	@ResponseBody
 	public ResponseData bizListTotal(HttpServletRequest request) {
-		logger.info("====bizListTotal====");
+		LOGGER.info("====bizListTotal====");
 		ResponseData responseData;
 		try {
 			responseData = accessService.checkMerchant(request, "FUND_CHECK_MGR");
@@ -263,7 +264,7 @@ public class PaymentStatementController extends BaseController {
 		ResponseData result = null;
 		try {
 
-			logger.info("============ 对账/代付款批量审核 =============");
+			LOGGER.info("verify map={}",map);
 			String idStr = map.containsKey("ids") ? map.get("ids").toString() : null;
 			Integer status = map.containsKey("status") ? Integer.valueOf(map.get("status").toString()) : null;
 			String desc = map.containsKey("desc") ? map.get("desc").toString() : null;
@@ -289,7 +290,7 @@ public class PaymentStatementController extends BaseController {
 					PaymentStatement paymentStatement = paymentStatementService.get(id);
 					BussinessInfo bussinessInfo = bussinessInfoService.selectByConfigId(paymentStatement.getConfigId());
 					if (!getUserName(request).equals(bussinessInfo.getBussinessAccount())) {
-						logger.error("商家账号只能审核对应的对账单。账号=" + getUserName(request) + " paymentStatementId=" + paymentStatement.getId());
+						LOGGER.error("商家账号只能审核对应的对账单。账号=" + getUserName(request) + " paymentStatementId=" + paymentStatement.getId());
 						return ResponseData.failure(CodeEnum.FIAL_NO_AUTHORITY_PAYMENT.getCodeInt(), CodeEnum.FIAL_NO_AUTHORITY_PAYMENT.getValueStr());
 					}
 				}
@@ -308,7 +309,7 @@ public class PaymentStatementController extends BaseController {
 			e.printStackTrace();
 			result = ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
 		}
-		logger.info(result.toString());
+		LOGGER.info(result.toString());
 		return result;
 	}
 
@@ -322,6 +323,7 @@ public class PaymentStatementController extends BaseController {
 	 **/
 	@RequestMapping("/exportFinanceExcel")
 	public ResponseData exportFinanceExcel(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, Object> map) {
+		LOGGER.info("exportFinanceExcel map="+map);
 		try {
 			ResponseData responseData = accessService.check(request, "FNC_STLBILLVFY_EXPORT");
 			if (responseData.getMeta().getErrno() != 0) {
@@ -345,6 +347,7 @@ public class PaymentStatementController extends BaseController {
 	 **/
 	@RequestMapping("/exportPaymentExcel")
 	public ResponseData exportPaymentSchedule(String ids, HttpServletResponse response, HttpServletRequest request) {
+		LOGGER.info("exportPaymentExcel ids={}",ids);
 		try {
 			ResponseData responseData = accessService.check(request, "FNC_PAYBILL_DWON");
 			if (responseData.getMeta().getErrno() != 0) {
@@ -354,7 +357,6 @@ public class PaymentStatementController extends BaseController {
 			e.printStackTrace();
 			return ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
 		}
-		logger.info("导出付款清单参数>>>>>>>>>>>:ids={}" + ids);
 		if (StringUtils.isBlank(ids)) {
 			return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
 		}
@@ -373,6 +375,7 @@ public class PaymentStatementController extends BaseController {
 	 **/
 	@RequestMapping("/invalid")
 	public ResponseData invalid(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+		LOGGER.info("invalid map={}",map);
 		try {
 			ResponseData responseData = accessService.check(request, "FNC_UNPVFY_CANCEL");
 			if (responseData.getMeta().getErrno() != 0) {
@@ -445,6 +448,7 @@ public class PaymentStatementController extends BaseController {
 	@RequestMapping("/generate")
 	@ResponseBody
 	public ResponseData generate(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+		LOGGER.info("generate map={}",map);
 		try {
 			ResponseData responseData = accessService.check(request, "FNC_STLBILL_READD");
 			if (responseData.getMeta().getErrno() != 0) {
@@ -471,7 +475,8 @@ public class PaymentStatementController extends BaseController {
 	 **/
 	@RequestMapping("/info")
 	@ResponseBody
-	public ResponseData export(String systemType, Integer id, HttpServletRequest request, HttpServletResponse response) {
+	public ResponseData info(String systemType, Integer id, HttpServletRequest request, HttpServletResponse response) {
+		LOGGER.info("info systemType={},id={}",systemType,id);
 		try {
 			boolean isMerchant = systemType != null && systemType.equals("merchant");
 			ResponseData responseData;
@@ -487,7 +492,7 @@ public class PaymentStatementController extends BaseController {
 			StatementConfig statementConfig = statementConfigService.selectById(paymentStatement.getConfigId());
 			BussinessInfo bussinessInfo = bussinessInfoService.selectByConfigId(paymentStatement.getConfigId());
 			if (isMerchant && !getUserName(request).equals(bussinessInfo.getBussinessAccount())) {
-				logger.error("商家账号只能访问对应的对账单。账号=" + getUserName(request) + " paymentStatementId=" + paymentStatement.getId());
+				LOGGER.error("商家账号只能访问对应的对账单。账号=" + getUserName(request) + " paymentStatementId=" + paymentStatement.getId());
 				return ResponseData.failure(CodeEnum.FIAL_NO_AUTHORITY_PAYMENT.getCodeInt(), CodeEnum.FIAL_NO_AUTHORITY_PAYMENT.getValueStr());
 			}
 			String fileName = getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime()));
