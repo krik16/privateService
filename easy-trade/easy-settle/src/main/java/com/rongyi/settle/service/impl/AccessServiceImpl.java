@@ -79,8 +79,8 @@ public class AccessServiceImpl implements AccessService {
                 return ResponseData.failure(CodeEnum.FIAL_USER_PARAMS_PAYMENT.getCodeInt(), CodeEnum.FIAL_USER_PARAMS_PAYMENT.getValueStr());
             }
             SessionUserInfo sessionUserInfo = (SessionUserInfo) user.get("userInfo");
-            request.getSession().setAttribute("userName", sessionUserInfo.getUserName());
-            logger.info("当前登录账号=" + sessionUserInfo.getUserName() + " id=" + sessionUserInfo.getId() + " phone=" + sessionUserInfo.getUserPhone());
+            request.getSession().setAttribute("userName", sessionUserInfo.getUserPhone());
+            logger.info("当前登录账号=" + sessionUserInfo.getUserPhone());
         }
         List<String> authorities = (List<String>) user.get("authorities");
 //        logger.info("需要权限: " + needAuthority + " 拥有权限:" + authorities.toString());
