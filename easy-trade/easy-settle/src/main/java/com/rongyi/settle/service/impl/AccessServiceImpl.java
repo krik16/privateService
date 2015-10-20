@@ -80,6 +80,7 @@ public class AccessServiceImpl implements AccessService {
             }
             SessionUserInfo sessionUserInfo = (SessionUserInfo) user.get("userInfo");
             request.getSession().setAttribute("userName", sessionUserInfo.getUserName());
+            logger.info("当前登录账号=" + sessionUserInfo.getUserName());
         }
         List<String> authorities = (List<String>) user.get("authorities");
 //        logger.info("需要权限: " + needAuthority + " 拥有权限:" + authorities.toString());
