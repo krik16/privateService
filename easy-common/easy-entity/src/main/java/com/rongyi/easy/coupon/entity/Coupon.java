@@ -7,6 +7,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.beans.Transient;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -67,7 +68,7 @@ public class Coupon implements Serializable {
     private Integer discount;
 
     /**
-     * 大运营平台，平台代金券;展示区域：常规区域,活动区域;未选中[0]，选中[1] 例如 "1,1"表示都选中
+     * 展示区域：常规区域,活动区域;未选中[0]，选中[1] 例如 "1,1"表示都选中
      */
     private String displayRegion;
 
@@ -286,6 +287,11 @@ public class Coupon implements Serializable {
      */
     private Boolean isGeneral;
 
+    /**
+     * 是否已关联活动 已关联[true] 未关联[false]默认为false
+     */
+    private Boolean isRelatedActivity;
+
 
     public String getId() {
         return id;
@@ -339,6 +345,14 @@ public class Coupon implements Serializable {
         return origPrice;
     }
 
+    public double getOrigPrice2Double() {
+        double val = 0D;
+        if (origPrice != null) {
+            val = BigDecimal.valueOf(origPrice).divide(BigDecimal.valueOf(100.00D)).setScale(2).doubleValue();
+        }
+        return val;
+    }
+
     public void setOrigPrice(Integer origPrice) {
         this.origPrice = origPrice;
     }
@@ -347,12 +361,28 @@ public class Coupon implements Serializable {
         return currPrice;
     }
 
+    public double getCurrPrice2Double() {
+        double val = 0D;
+        if (currPrice != null) {
+            val = BigDecimal.valueOf(currPrice).divide(BigDecimal.valueOf(100.00D)).setScale(2).doubleValue();
+        }
+        return val;
+    }
+
     public void setCurrPrice(Integer currPrice) {
         this.currPrice = currPrice;
     }
 
     public Integer getDiscount() {
         return discount;
+    }
+
+    public double getDiscount2Double() {
+        double val = 0D;
+        if (discount != null) {
+            val = BigDecimal.valueOf(discount).divide(BigDecimal.valueOf(100.00D)).setScale(2).doubleValue();
+        }
+        return val;
     }
 
     public void setDiscount(Integer discount) {
@@ -759,6 +789,15 @@ public class Coupon implements Serializable {
         this.outChannelName = outChannelName;
     }
 
+    public Boolean getIsRelatedActivity() {
+        return isRelatedActivity;
+    }
+
+    public void setIsRelatedActivity(Boolean isRelatedActivity) {
+        this.isRelatedActivity = isRelatedActivity;
+    }
+
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -814,6 +853,7 @@ public class Coupon implements Serializable {
                 .append("purchaseType", purchaseType)
                 .append("visitedCount", visitedCount)
                 .append("isGeneral", isGeneral)
+                .append("isRelatedActivity", isRelatedActivity)
                 .toString();
     }
 }

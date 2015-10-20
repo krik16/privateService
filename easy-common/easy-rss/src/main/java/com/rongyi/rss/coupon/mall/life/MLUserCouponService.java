@@ -8,11 +8,9 @@ import org.bson.types.ObjectId;
 import java.util.List;
 
 /**
- * 1.获取优惠列表   (分页)  2.主键获取用户优惠
+ * 容易逛：代金券与红包统一处理接口
  *
- * @author hebo
- * @Description: (用户券码接口，提供给mall-life的controller使用)
- * @date 2015年6月8日 下午
+ * @author Breggor
  */
 public interface MLUserCouponService {
 
@@ -44,4 +42,11 @@ public interface MLUserCouponService {
 
     List<ShopVO> getShopsByIds(List<ObjectId> ids);
 
+    /**
+     * 
+     * @param couponId
+     * @param userId
+     * @return
+     */
+    int buyedCouponCount(String couponId, String userId);
 }

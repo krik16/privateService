@@ -56,4 +56,16 @@ public class SonOrderParam implements Serializable{
 	public void setOrderDetailModelId(String orderDetailModelId) {
 		this.orderDetailModelId = orderDetailModelId;
 	}
+
+	@Override
+	public String toString() {
+		return "SonOrderParam{" +
+				"specId='" + specId + '\'' +
+				", num='" + num + '\'' +
+				", commodityId='" + commodityId + '\'' +
+				", type='" + type + '\'' +
+				", couponCode='" + couponCode + '\'' +
+				", orderDetailModelId='" + orderDetailModelId + '\'' +
+				'}';
+	}
 }

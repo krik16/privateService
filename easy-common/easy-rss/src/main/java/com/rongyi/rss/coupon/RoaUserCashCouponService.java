@@ -37,7 +37,9 @@ public interface RoaUserCashCouponService {
      *
      * @param couponCode 现金券券码
      * @return UserCouponVO
+     * @see RoaUserRedenvelopeService#findCashCoupon(String)
      */
+    @Deprecated
     public UserCouponVO getCashCoupon(String couponCode);
 
     /**
@@ -90,6 +92,7 @@ public interface RoaUserCashCouponService {
      * @param code
      * @return
      */
+    @Deprecated
     boolean useCashCoupon(String code);
 
     /**
@@ -98,6 +101,7 @@ public interface RoaUserCashCouponService {
      * @param code
      * @return
      */
+    @Deprecated
     boolean recoverCashCoupon(String code);
 
 }

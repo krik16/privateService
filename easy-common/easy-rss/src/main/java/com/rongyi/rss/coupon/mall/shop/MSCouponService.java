@@ -12,7 +12,6 @@ import java.util.List;
 
 /**
  * 功能描述： 摩店(MS) 代金券接口
- * 兼容boId字段
  *
  * @author Breggor
  */

@@ -1,8 +1,11 @@
 package com.rongyi.rss.coupon;
 
+import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.framework.mybatis.pojo.Page;
+import com.rongyi.easy.coupon.entity.UserCoupon;
 import com.rongyi.easy.coupon.entity.UserRedenvelope;
+import com.rongyi.easy.coupon.param.CouponOrderParam;
 import com.rongyi.easy.coupon.param.UserRedenvelopeParam;
 import com.rongyi.easy.coupon.vo.UserCouponVO;
 
@@ -78,7 +81,7 @@ public interface RoaUserRedenvelopeService {
      * @param couponCode
      * @return
      */
-    UserCouponVO getCashCoupon(String couponCode);
+    UserCouponVO findCashCoupon(String couponCode);
 
     /**
      * 根据券码查询红包抵扣金额
@@ -87,4 +90,47 @@ public interface RoaUserRedenvelopeService {
      * @return
      */
     Double getCashCouponDiscount(String couponCode);
+
+    /**
+     * 用户红包信息
+     *
+     * @param couponCode
+     * @return
+     */
+    UserCoupon findUserCouponByCode(String couponCode);
+
+
+    /**
+     * 使用红包
+     *
+     * @param code
+     * @return
+     */
+    boolean useCashCoupon(String code);
+
+    /**
+     * 恢复红包
+     *
+     * @param code
+     * @return
+     */
+    boolean recoverCashCoupon(String code);
+
+
+    /**
+     * 用户红包领取数
+     *
+     * @param couponId
+     * @param userId
+     * @return
+     */
+    int receivedCount(String couponId, String userId);
+
+    /**
+     * 根据老参数领取红包
+     *
+     * @param param
+     * @return
+     */
+    ResponseResult createByCouponOrderParam(CouponOrderParam param);
 }

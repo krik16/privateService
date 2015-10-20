@@ -266,5 +266,12 @@ public interface IUserService {
      */
     public UserinfoVO selectRmmmUserInfoByUserId(Integer userId) throws Exception;
 
-
+    /**
+     * 编辑用户简介
+     * @param userId 用户id
+     * @param desc 用户描述
+     * @return
+     * @throws MallShopException
+     */
+    public Integer editUserDesc(Integer userId,String desc)throws MallShopException;
 }

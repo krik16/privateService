@@ -12,6 +12,7 @@ import java.util.List;
  * @param <T> 实体对象
  * @author 堵成杰
  * @since 2.0
+ * 重复定义，统一掉，尽快废弃
  */
 @Deprecated
 public class PagingVO<T> implements Serializable {
@@ -92,7 +93,7 @@ public class PagingVO<T> implements Serializable {
         this.rowCnt = _allRow;
         this.totalPage = (rowCnt - 1) / pageSize + 1;
         /*if(currentPage > totalPage){
-			currentPage = totalPage;
+            currentPage = totalPage;
 		}*/
         this.offset = pageSize * (currentPage - 1);
         buildPageNoList();

@@ -14,7 +14,7 @@ public class LiveVO implements Serializable {
 	/**
 	 * 直播id
 	 */
-	private String id;
+	private String liveId;
 
 	/**
 	 * 直播名
@@ -76,13 +76,26 @@ public class LiveVO implements Serializable {
 	 */
 	private Double distance ;
 	
+	/**
+	 * sessionId
+	 */
+	private String jsessionId;
 
-	public String getId() {
-		return id;
+	public String getJsessionId() {
+		return jsessionId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setJsessionId(String jsessionId) {
+		this.jsessionId = jsessionId;
+	}
+
+
+	public String getLiveId() {
+		return liveId;
+	}
+
+	public void setLiveId(String liveId) {
+		this.liveId = liveId;
 	}
 
 	public String getLiveName() {

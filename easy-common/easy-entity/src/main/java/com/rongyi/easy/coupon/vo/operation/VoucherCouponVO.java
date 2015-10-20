@@ -7,118 +7,127 @@ import com.rongyi.easy.coupon.entity.CouponRejectRecord;
 
 public class VoucherCouponVO implements Serializable {
 
-
 	private static final long serialVersionUID = 1L;
 
 	private String id;
 
-    /**
-     * 代金券名称
-     */
-    private String name;
+	/**
+	 * 代金券名称
+	 */
+	private String name;
 
-    /**
-     * 卡券类型:代金券[0], 抵扣券[1], 红包[2]
-     */
-    private Integer couponType;
+	/**
+	 * 卡券类型:代金券[0], 抵扣券[1], 红包[2]
+	 */
+	private Integer couponType;
 
-    /**
-     * 券码发行量
-     */
-    private Integer totalCount;
+	/**
+	 * 券码发行量
+	 */
+	private Integer totalCount;
 
-    /**
-     * 库存量
-     */
-    private Integer stockCount;
+	/**
+	 * 库存量
+	 */
+	private Integer stockCount;
 
-    /**
-     * 原价
-     */
-    private Integer origPrice;
+	/**
+	 * 原价
+	 */
+	private Integer origPrice;
 
-    /**
-     * 现价
-     */
-    private Integer currPrice;
+	/**
+	 * 现价
+	 */
+	private Integer currPrice;
 
-    /**
-     * 关联类型
-     * 代金券：集团[0],品牌[1], 商场 [2],店铺[3];
-     * 红包 ：全场[0],商品[1]
-     */
-    private Integer relatedType;
+	/**
+	 * 关联类型 代金券：集团[0],品牌[1], 商场 [2],店铺[3]; 红包 ：全场[0],商品[1]
+	 */
+	private Integer relatedType;
 
-    /**
-     * 状态: 待审核[0], 审核未通过[1], 审核通过[2]
-     */
-    private Integer status;
+	/**
+	 * 状态: 待审核[0], 审核未通过[1], 审核通过[2]
+	 */
+	private Integer status;
 
-    /**
-     * 发布状态：待发布[0] 进行中[1] 已结束[2] 已下架[3]
-	 *
+	/**
+	 * 发布状态：待发布[0] 进行中[1] 已结束[2] 已下架[3]
+	 * 
 	 */
 	private Integer publishStatus;
-	
+
 	/**
 	 * 置顶状态：未置顶[0] 已置顶[1]
 	 */
 	private Integer stickStatus;
 
-	 /**
-     * 是否是第三方券 否[false], 是[true], 默认不是第三方券fasle
-     */
-    private Boolean isThird;
+	/**
+	 * 是否是第三方券 否[false], 是[true], 默认不是第三方券fasle
+	 */
+	private Boolean isThird;
 
-    /**
-     * 一级分类name
-     */
-    private String lv1Name;
+	/**
+	 * 一级分类name
+	 */
+	private String lv1Name;
 
-    /**
-     * 一级分类name
-     */
-    private String lv2Name;
-    
-    /**
-     * 拒绝原因
-     */
-    private List<CouponRejectRecord> rejectRecordList;
-    
-    /**
-     * 排序id
-     */
-    private Integer couponSortId;
-    
-    /**
-     * 省id
-     */
-    private String provinceId;
-    
-    /**
-     * 省名
-     */
-    private String provinceName;
-    
-    /**
-     * 城市id
-     */
-    private String cityId;
-    
-    /**
-     * 城市名
-     */
-    private String cityName;
-    
-    /**
-     * 排序值
-     */
-    private Integer sortIdx;
-    
-    /**
-     * 展示区域
-     */
-    private String displayRegion;
+	/**
+	 * 一级分类name
+	 */
+	private String lv2Name;
+
+	/**
+	 * 拒绝原因
+	 */
+	private List<CouponRejectRecord> rejectRecordList;
+
+	/**
+	 * 排序id
+	 */
+	private Integer couponSortId;
+
+	/**
+	 * 省id
+	 */
+	private String provinceId;
+
+	/**
+	 * 省名
+	 */
+	private String provinceName;
+
+	/**
+	 * 城市id
+	 */
+	private String cityId;
+
+	/**
+	 * 城市名
+	 */
+	private String cityName;
+
+	/**
+	 * 排序值
+	 */
+	private Integer sortIdx;
+
+	/**
+	 * 展示区域
+	 */
+	private String displayRegion;
+	
+	/** 卡券发布渠道：大运营平台[0], 商家管理后台[1] */
+	private Integer publishChannel;
+	
+
+	public Integer getPublishChannel() {
+		return publishChannel;
+	}
+
+	public void setPublishChannel(Integer publishChannel) {
+		this.publishChannel = publishChannel;
+	}
 
 	public String getId() {
 		return id;
@@ -299,16 +308,25 @@ public class VoucherCouponVO implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("VoucherCouponVO [id=").append(id).append(", name=").append(name).append(", couponType=")
-				.append(couponType).append(", totalCount=").append(totalCount).append(", stockCount=")
-				.append(stockCount).append(", origPrice=").append(origPrice).append(", currPrice=").append(currPrice)
-				.append(", relatedType=").append(relatedType).append(", status=").append(status)
-				.append(", publishStatus=").append(publishStatus).append(", stickStatus=").append(stickStatus)
-				.append(", isThird=").append(isThird).append(", lv1Name=").append(lv1Name).append(", lv2Name=")
-				.append(lv2Name).append(", rejectRecordList=").append(rejectRecordList).append(", couponSortId=")
-				.append(couponSortId).append(", provinceId=").append(provinceId).append(", provinceName=")
-				.append(provinceName).append(", cityId=").append(cityId).append(", cityName=").append(cityName)
-				.append(", sortIdx=").append(sortIdx).append(", displayRegion=").append(displayRegion).append("]");
+		builder.append("VoucherCouponVO [id=").append(id).append(", name=")
+				.append(name).append(", couponType=").append(couponType)
+				.append(", totalCount=").append(totalCount)
+				.append(", stockCount=").append(stockCount)
+				.append(", origPrice=").append(origPrice)
+				.append(", currPrice=").append(currPrice)
+				.append(", relatedType=").append(relatedType)
+				.append(", status=").append(status).append(", publishStatus=")
+				.append(publishStatus).append(", stickStatus=")
+				.append(stickStatus).append(", isThird=").append(isThird)
+				.append(", lv1Name=").append(lv1Name).append(", lv2Name=")
+				.append(lv2Name).append(", rejectRecordList=")
+				.append(rejectRecordList).append(", couponSortId=")
+				.append(couponSortId).append(", provinceId=")
+				.append(provinceId).append(", provinceName=")
+				.append(provinceName).append(", cityId=").append(cityId)
+				.append(", cityName=").append(cityName).append(", sortIdx=")
+				.append(sortIdx).append(", displayRegion=")
+				.append(displayRegion).append("]");
 		return builder.toString();
 	}
 }

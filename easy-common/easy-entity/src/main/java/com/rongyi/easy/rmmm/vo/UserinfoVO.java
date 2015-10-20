@@ -1,6 +1,10 @@
 package com.rongyi.easy.rmmm.vo;
 
+import com.rongyi.easy.rmmm.dto.userlabel.UserLabelDto;
+
 import java.io.Serializable;
+import java.util.List;
+
 /**
  * 
 * @ClassName: UserinfoVO 
@@ -48,6 +52,13 @@ public class UserinfoVO implements Serializable{
 
 	private String sharCode;//邀请码
 	private String downUrl; //容易逛下载地址
+
+	List<Integer> identityType; //角色列表
+	String currentId;//当前角色状态
+
+	List<UserLabelDto> labelList;
+
+	String userDesc;//用户简介
 
 	public String getLogo() {
 		return logo;
@@ -175,5 +186,37 @@ public class UserinfoVO implements Serializable{
 
 	public void setDownUrl(String downUrl) {
 		this.downUrl = downUrl;
+	}
+
+	public String getUserDesc() {
+		return userDesc;
+	}
+
+	public void setUserDesc(String userDesc) {
+		this.userDesc = userDesc;
+	}
+
+	public String getCurrentId() {
+		return currentId;
+	}
+
+	public void setCurrentId(String currentId) {
+		this.currentId = currentId;
+	}
+
+	public List<Integer> getIdentityType() {
+		return identityType;
+	}
+
+	public void setIdentityType(List<Integer> identityType) {
+		this.identityType = identityType;
+	}
+
+	public List<UserLabelDto> getLabelList() {
+		return labelList;
+	}
+
+	public void setLabelList(List<UserLabelDto> labelList) {
+		this.labelList = labelList;
 	}
 }

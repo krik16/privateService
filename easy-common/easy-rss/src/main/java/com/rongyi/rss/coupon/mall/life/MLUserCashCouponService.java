@@ -84,7 +84,7 @@ public interface MLUserCashCouponService {
      * @return
      * @see MLUserRedenvelopeService#getCashCouponDiscount(String)
      */
-    public Double getCashCouponPrice(String couponCode);
+//    public Double getCashCouponPrice(String couponCode);
 
 
 }

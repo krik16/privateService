@@ -1,11 +1,11 @@
-package com.rongyi.rss.msob;/*
+package com.rongyi.rss.mallshop.user;/*
  * Copyright (C),上海容易网电子商务有限公司
  * Author:  俞志坚
- * Description:  用户标签信息关系表
- * time:  2015/10/13
+ * Description:  
+ * time:  2015/10/15
  * History: 变更记录
  * <author>           <time>             <version>        <desc>
- * 俞志坚             2015/10/13              1.0            创建文件
+ * 俞志坚             2015/10/15              1.0            创建文件
  *
  */
 
@@ -14,8 +14,7 @@ import com.rongyi.easy.rmmm.dto.userlabel.UserLabelDto;
 
 import java.util.List;
 
-public interface IUserLabelService {
-
+public interface ROAUserLabelService {
 
     /**
      * 根据用户ID返回 用户标签
@@ -30,7 +29,7 @@ public interface IUserLabelService {
      * @param userLabelNameList 用户列表信息
      * @param userId 用户Id
      * @param userType 用户类型 1导购，2买手
-     * @throws MallShopException
+     * @throws com.rongyi.easy.mallshop.MallShopException
      */
     public void saveUserLabel(List<String> userLabelNameList,Integer userId,Integer userType)throws MallShopException;
 
@@ -43,5 +42,4 @@ public interface IUserLabelService {
      * @throws MallShopException
      */
     public Integer deleteByUserId(Integer userId,Integer labelId)throws MallShopException;
-
 }

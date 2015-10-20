@@ -1,8 +1,8 @@
 package com.rongyi.rss.mcmc;
 
 import com.rongyi.core.bean.ResponseVO;
-import com.rongyi.easy.mcmc.vo.AdviseShopVO;
-import com.rongyi.easy.mcmc.vo.LiveVO;
+import com.rongyi.easy.mcmc.param.AdviseShopParam;
+import com.rongyi.easy.mcmc.param.LiveParam;
 import com.rongyi.easy.solr.param.LiveSearchParam;
 
 /**
@@ -17,7 +17,7 @@ public interface ROALiveService {
 	 * @param vo 直播实体
 	 * @return 返回带liveId 的 ResponseVO
 	 */
-	ResponseVO insertLive(LiveVO vo);
+	ResponseVO insertLive(LiveParam vo);
 	
 	/**
 	 * 通过买手id查询直播列表
@@ -55,7 +55,7 @@ public interface ROALiveService {
 	 * @param vo 建议商店实体
 	 * @return 带建议id的ResponseVO
 	 */
-	ResponseVO adviseShop(AdviseShopVO vo);
+	ResponseVO adviseShop(AdviseShopParam vo);
 	
 	/**
 	 * 获取品牌列表

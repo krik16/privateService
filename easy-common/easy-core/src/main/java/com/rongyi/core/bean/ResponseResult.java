@@ -7,7 +7,6 @@ package com.rongyi.core.bean;
  * @author baodk
  * @see ResponseVO
  */
-@Deprecated
 public class ResponseResult implements java.io.Serializable {
     private static final String SUCCESS = "200";
 

@@ -1,6 +1,7 @@
 package com.rongyi.easy.coupon.param;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 用户红包参数
@@ -10,7 +11,9 @@ public class UserRedenvelopeParam implements Serializable {
     private int currentPage = 0;
     private String userId;
     private String productId;
-    private String status;
+    private Integer status;
+    private String orderBy;
+    private List<Integer> statusList;
 
     public String getUserId() {
         return userId;
@@ -28,11 +31,11 @@ public class UserRedenvelopeParam implements Serializable {
         this.productId = productId;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -50,5 +53,22 @@ public class UserRedenvelopeParam implements Serializable {
 
     public void setCurrentPage(int currentPage) {
         this.currentPage = currentPage;
+    }
+
+    public String getOrderBy() {
+        return orderBy;
+    }
+
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
+    }
+
+
+    public List<Integer> getStatusList() {
+        return statusList;
+    }
+
+    public void setStatusList(List<Integer> statusList) {
+        this.statusList = statusList;
     }
 }
