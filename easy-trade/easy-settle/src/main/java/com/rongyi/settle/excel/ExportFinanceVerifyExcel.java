@@ -64,7 +64,7 @@ public class ExportFinanceVerifyExcel extends ExportBase {
 			List<PaymentStatementDto> statementList = paymentStatementService.selectPageList(map, null, null);
 			for (int i = 2; i <= statementList.size() + 2; i++) {
 				sheet.createRow(i);
-				for (int j = 0; j <= 9; j++) {
+				for (int j = 0; j <= 11; j++) {
 					sheet.getRow(i).createCell(j);
 					sheet.getRow(i).getCell(j).setCellStyle(bodyStyle);
 				}
@@ -77,14 +77,16 @@ public class ExportFinanceVerifyExcel extends ExportBase {
 				sheet.getRow(i + 2).getCell(2).setCellValue(DateUtil.dateToString(paymentStatementDto.getCycleStartTime()) + " - " + DateUtil.dateToString(paymentStatementDto.getCycleEndTime()));
 				sheet.getRow(i + 2).getCell(3).setCellValue(paymentStatementDto.getBussinessName());
 				sheet.getRow(i + 2).getCell(4).setCellValue(getPayChannel(paymentStatementDto.getPayChannel()));
-				sheet.getRow(i + 2).getCell(5).setCellValue(paymentStatementDto.getPayAccount());
-				sheet.getRow(i + 2).getCell(6).setCellValue(paymentStatementDto.getPayName());
+				sheet.getRow(i + 2).getCell(5).setCellValue(paymentStatementDto.getBlankName());
+				sheet.getRow(i + 2).getCell(6).setCellValue(paymentStatementDto.getPayAccount());
+				sheet.getRow(i + 2).getCell(7).setCellValue(paymentStatementDto.getPayName());
 				if (paymentStatementDto.getPayTotal() != null){
 					BigDecimal totalFee = new BigDecimal(paymentStatementDto.getPayTotal() + "").divide(new BigDecimal(100)).setScale(2, BigDecimal.ROUND_HALF_UP);
-					sheet.getRow(i + 2).getCell(7).setCellValue(totalFee.doubleValue());
+					sheet.getRow(i + 2).getCell(8).setCellValue(totalFee.doubleValue());
 				}
-				sheet.getRow(i + 2).getCell(8).setCellValue(DateUtil.dateToString(paymentStatementDto.getCreateAt()));
-				sheet.getRow(i + 2).getCell(9).setCellValue("初始状态");
+				sheet.getRow(i + 2).getCell(9).setCellValue(paymentStatementDto.getBussinessEmail());
+				sheet.getRow(i + 2).getCell(10).setCellValue(DateUtil.dateToString(paymentStatementDto.getCreateAt()));
+				sheet.getRow(i + 2).getCell(11).setCellValue("初始状态");
 			}
 			String outFile = "对账审核记录_财务_" + DateUtil.getCurrentDateYYYYMMDD() + ".xlsx";
 			ExcelUtil.exportExcel(response, wb, outFile);
