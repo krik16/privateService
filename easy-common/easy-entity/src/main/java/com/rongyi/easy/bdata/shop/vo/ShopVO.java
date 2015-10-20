@@ -37,6 +37,10 @@ public class ShopVO implements Serializable {
 	 * 分类id列表
 	 */
 	private List<String> categoryIds;
+	/**
+	 * 自定义分类id列表
+	 */
+	private List<String> customCategoryIds;
 
 	/**
 	 * 点评数
@@ -200,6 +204,14 @@ public class ShopVO implements Serializable {
 
 	public void setCategoryIds(List<String> categoryIds) {
 		this.categoryIds = categoryIds;
+	}
+
+	public List<String> getCustomCategoryIds() {
+		return customCategoryIds;
+	}
+
+	public void setCustomCategoryIds(List<String> customCategoryIds) {
+		this.customCategoryIds = customCategoryIds;
 	}
 
 	public int getCommentCount() {

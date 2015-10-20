@@ -50,7 +50,10 @@ public class Shop implements Serializable {
 	 * 分类id列表
 	 */
 	private List<ObjectId> category_ids;
-
+	/**
+	 * 自定义分类id
+	 */
+	private List<ObjectId> custom_category_ids;
 	/**
 	 * 点评数
 	 */
@@ -208,6 +211,15 @@ public class Shop implements Serializable {
 	public void setCategory_ids(List<ObjectId> category_ids) {
 		this.category_ids = category_ids;
 	}
+
+	public List<ObjectId> getCustom_category_ids() {
+		return custom_category_ids;
+	}
+
+	public void setCustom_category_ids(List<ObjectId> custom_category_ids) {
+		this.custom_category_ids = custom_category_ids;
+	}
+
 
 	public int getComment_count() {
 		return comment_count;
