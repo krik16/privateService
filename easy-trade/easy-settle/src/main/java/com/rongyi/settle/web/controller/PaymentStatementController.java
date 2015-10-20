@@ -205,7 +205,18 @@ public class PaymentStatementController extends BaseController {
 	@ResponseBody
 	public ResponseData bizListTotal(HttpServletRequest request) {
 		logger.info("====bizListTotal====");
+		ResponseData responseData;
+		try {
+			responseData = accessService.checkMerchant(request, "FUND_CHECK_MGR");
+			if (responseData.getMeta().getErrno() != 0) {
+				return responseData;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("bussinessAccount", getUserName(request));
 		Map<String, Object> responseMap = new HashMap<String, Object>();
 		List<Byte> statusList = new ArrayList<Byte>();
 		statusList.add(ConstantEnum.STATUS_1.getCodeByte());
