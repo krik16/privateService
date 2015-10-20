@@ -62,7 +62,7 @@ public class ExportDataToExcel {
 		try {
 			Map<String, Object> map = new HashMap<>();
 			map.put("idArray", idArray);
-			map.put("searchStatus", 6);
+			map.put("status", 6);
 			List<PaymentStatementDto> payments = paymentStatementService.selectPageList(map, null, null);
 			List<Integer> ids = new ArrayList<Integer>();
 			Set<String> businessIds = null;
