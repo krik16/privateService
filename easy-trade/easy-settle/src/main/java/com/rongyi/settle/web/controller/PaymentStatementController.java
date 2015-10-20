@@ -350,11 +350,13 @@ public class PaymentStatementController extends BaseController {
 			if (responseData.getMeta().getErrno() != 0) {
 				return responseData;
 			}
+			Integer id = Integer.valueOf(map.get("id").toString());
+			paymentStatementService.generate(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
 		}
-		return null;
+		return ResponseData.success();
 	}
 
 	/**
