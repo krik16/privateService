@@ -41,7 +41,7 @@ public class OperationLog implements Serializable {
     /**
      * 创建时间
      */
-    private Date creadeAt;
+    private Date createAt;
 
     /**
      * 备注(审核原因描述等)
@@ -93,15 +93,16 @@ public class OperationLog implements Serializable {
         this.createUserId = createUserId;
     }
 
-    public Date getCreadeAt() {
-        return creadeAt;
-    }
 
-    public void setCreadeAt(Date creadeAt) {
-        this.creadeAt = creadeAt;
-    }
+    public Date getCreateAt() {
+		return createAt;
+	}
 
-    public String getDesc() {
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+
+	public String getDesc() {
         return desc;
     }
 
