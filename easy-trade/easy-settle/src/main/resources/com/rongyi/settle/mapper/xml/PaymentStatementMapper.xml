@@ -350,6 +350,14 @@
 				#{item,jdbcType=TINYINT}
 			</foreach>
 		</if>
+		<if test="createAtStart != null and createAtStart != ''">
+			and pb.cycle_start_time &gt;=
+			#{createAtStart,jdbcType=TIMESTAMP}
+		</if>
+		<if test="createAtEnd != null and createAtEnd != ''">
+			and pb.cycle_start_time &lt;=
+			#{createAtEnd,jdbcType=TIMESTAMP}
+		</if>
 		order by pb.create_at,pb.status_update_time,ol.create_at desc
 		) tb
 		group by tb.id
@@ -391,6 +399,14 @@
 					 open="(" separator="," close=")">
 				#{item,jdbcType=TINYINT}
 			</foreach>
+		</if>
+		<if test="createAtStart != null and createAtStart != ''">
+			and pb.cycle_start_time &gt;=
+			#{createAtStart,jdbcType=TIMESTAMP}
+		</if>
+		<if test="createAtEnd != null and createAtEnd != ''">
+			and pb.cycle_start_time &lt;=
+			#{createAtEnd,jdbcType=TIMESTAMP}
 		</if>
 		group by pb.id
 		) as total
