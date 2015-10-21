@@ -167,6 +167,8 @@ public class PaymentStatementController extends BaseController {
 					// statusList.add(ConstantEnum.STATUS_12.getCodeByte());
 				} else if (searchStatus == 3) {// 不确认
 					statusList.add(ConstantEnum.STATUS_5.getCodeByte());
+					statusList.add(ConstantEnum.STATUS_7.getCodeByte());
+					statusList.add(ConstantEnum.STATUS_8.getCodeByte());
 				}
 				break;
 			default:
@@ -252,6 +254,8 @@ public class PaymentStatementController extends BaseController {
 		responseMap.put("yesSureCount", yesSureCount);
 		statusList.clear();
 		statusList.add(ConstantEnum.STATUS_5.getCodeByte());
+		statusList.add(ConstantEnum.STATUS_7.getCodeByte());
+		statusList.add(ConstantEnum.STATUS_8.getCodeByte());
 		map.put("statusList", statusList);
 		Integer noSureCount = paymentStatementService.selectPageListCountForMerchant(map);// 未确认
 		responseMap.put("noSureCount", noSureCount);
