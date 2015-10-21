@@ -64,7 +64,7 @@ public class RmmmUserInfoEntity implements Serializable{
     /** 环信用户账号 */
     private String userIMCount;
     private String devId;//登录时获取当前设备Id
-    private Integer type;
+    private Integer type;  // 1 导购 2买手
     private Integer identity;
     private Integer isCooperation;
     private String memo;
