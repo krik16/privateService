@@ -1,9 +1,15 @@
 package com.rongyi.easy.rmmm.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UsersShopEntity {
-    /**  */
+public class UsersShopEntity implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**  */
     private Long id;
 
     /** 品牌ID */

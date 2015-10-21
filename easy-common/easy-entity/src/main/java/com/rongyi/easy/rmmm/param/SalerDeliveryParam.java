@@ -69,4 +69,16 @@ public class SalerDeliveryParam implements Serializable {
 	public void setTicketPicList(String ticketPicList) {
 		this.ticketPicList = ticketPicList;
 	}
+
+	@Override
+	public String toString() {
+		return "SalerDeliveryParam{" +
+				"type='" + type + '\'' +
+				", orderNum='" + orderNum + '\'' +
+				", logisticsBillId='" + logisticsBillId + '\'' +
+				", expressName='" + expressName + '\'' +
+				", expressId='" + expressId + '\'' +
+				", ticketPicList='" + ticketPicList + '\'' +
+				'}';
+	}
 }

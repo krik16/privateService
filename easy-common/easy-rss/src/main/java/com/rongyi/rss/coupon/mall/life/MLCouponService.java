@@ -5,6 +5,7 @@ import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.old_vo.OldCouponVO;
 import com.rongyi.easy.coupon.vo.CouponVO;
+import com.rongyi.easy.solr.retrival.result.ActivityData;
 
 import java.util.List;
 
@@ -50,4 +51,21 @@ public interface MLCouponService {
      * @return
      */
     ResponseResult subtractInventoryReturnCode(String couponId);
+
+    /**
+     * 根据id查看优惠券是否存在
+     *
+     * @param couponId
+     * @return
+     */
+    boolean hasCoupon(String couponId);
+
+
+    /**
+     * solr搜索优惠券详情页
+     *
+     * @param couponId
+     * @return
+     */
+    ActivityData getCouponInfoForSolr(String couponId);
 }

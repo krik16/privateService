@@ -11,11 +11,13 @@ package com.rongyi.easy.solr.param;
 
 import java.io.Serializable;
 
+import com.rongyi.easy.rmmm.base.BaseParam;
+
 /**
  * @author ZhengYl
  *
  */
-public class LiveSearchParam implements Serializable{
+public class LiveSearchParam extends BaseParam implements Serializable{
 
 	/**  */
 	private static final long serialVersionUID = -8710679871751949024L;

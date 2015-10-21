@@ -6,7 +6,12 @@ import java.util.Date;
 
 public class RmmmUserInfoEntity implements Serializable{
 
-    /** 主键  */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** 主键  */
     private Integer id;
 
     /** 用户头像logo */

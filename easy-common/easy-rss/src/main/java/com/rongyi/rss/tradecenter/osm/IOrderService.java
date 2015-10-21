@@ -74,7 +74,7 @@ public interface IOrderService {
 	 * @param id
 	 * @throws Exception
 	 */
-	public ResponseResult updateOrderIsCommentById(Integer id) throws Exception;
+	public ResponseResult updateOrderIsCommentById(Integer id);
 	
 
 }

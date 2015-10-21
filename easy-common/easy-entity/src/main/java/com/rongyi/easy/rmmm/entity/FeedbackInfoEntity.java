@@ -1,9 +1,15 @@
 package com.rongyi.easy.rmmm.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class FeedbackInfoEntity {
-    /** 表主键 */
+public class FeedbackInfoEntity implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** 表主键 */
     private Integer id;
 
     /** 创建人 */

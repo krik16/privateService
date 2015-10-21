@@ -30,4 +30,11 @@ public class RequestPaymentParam implements Serializable{
 		this.paymentEventType = paymentEventType;
 	}
 
+	@Override
+	public String toString() {
+		return "RequestPaymentParam{" +
+				"orderNums=" + orderNums +
+				", paymentEventType='" + paymentEventType + '\'' +
+				'}';
+	}
 }

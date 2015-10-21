@@ -274,4 +274,11 @@ public interface IUserService {
      * @throws MallShopException
      */
     public Integer editUserDesc(Integer userId,String desc)throws MallShopException;
+    
+    /**
+     * 根据手机号和昵称查询用户
+     * @param map
+     * @return
+     */
+    public RmmmUserInfoEntity selectRmmmUserInfoByUserPhoneAndNickName(Map map);
 }

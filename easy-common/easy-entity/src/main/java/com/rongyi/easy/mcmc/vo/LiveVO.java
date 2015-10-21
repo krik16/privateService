@@ -39,43 +39,43 @@ public class LiveVO implements Serializable {
 	/**
 	 * 创建时间
 	 */
-	private long createAt;
+	private long createTime;
 
 	/**
 	 * 直播状态 [0:发布/预热中，1:上线/进行中，2:下线(已过期)]
 	 */
 	private int status;
-	
+
 	/**
 	 * 商品列表
 	 */
 	private List<LiveCommodityVO> commodityList;
-	
+
 	/**
 	 * 直播定点（该直播下商品最多的商场或者街边店）
 	 */
 	private String liveAddress;
-	
+
 	/**
 	 * 直播定点经纬度
 	 */
 	private List<Double> location;
-	
+
 	/**
 	 * 品牌列表，按商品数量排序
 	 */
 	private List<String> brandNames;
-		
+
 	/**
 	 * 直播用户信息
 	 */
 	private LiveBullInfoVO bullInfo;
-	
+
 	/**
 	 * 距离
 	 */
-	private Double distance ;
-	
+	private Double distance;
+
 	/**
 	 * sessionId
 	 */
@@ -88,7 +88,6 @@ public class LiveVO implements Serializable {
 	public void setJsessionId(String jsessionId) {
 		this.jsessionId = jsessionId;
 	}
-
 
 	public String getLiveId() {
 		return liveId;
@@ -128,14 +127,14 @@ public class LiveVO implements Serializable {
 
 	public void setEndTime(long endTime) {
 		this.endTime = endTime;
+	}	
+
+	public long getCreateTime() {
+		return createTime;
 	}
 
-	public long getCreateAt() {
-		return createAt;
-	}
-
-	public void setCreateAt(long createAt) {
-		this.createAt = createAt;
+	public void setCreateTime(long createTime) {
+		this.createTime = createTime;
 	}
 
 	public int getStatus() {
