@@ -9,12 +9,9 @@
 */
 package com.rongyi.rss.solr;
 
-import java.util.List;
-
-import org.bson.types.ObjectId;
-
 import com.rongyi.easy.solr.LiveSolrDocument;
 import com.rongyi.easy.solr.param.LiveSearchParam;
+import com.rongyi.easy.solr.result.LiveSearchResult;
 
 /**
  * @author ZhengYl
@@ -30,7 +27,7 @@ public interface LiveSolrService {
 	 * @param input
 	 * @return
 	 */
-	public List<ObjectId> liveSearch(LiveSearchParam input);
+	public LiveSearchResult liveSearch(LiveSearchParam input);
 	
 	/**
 	 * 更新直播索引
