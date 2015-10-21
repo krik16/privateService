@@ -382,6 +382,7 @@ public class PaymentStatementController extends BaseController {
 	 * @datetime:2015年9月21日下午3:04:09
 	 **/
 	@RequestMapping("/invalid")
+	@ResponseBody
 	public ResponseData invalid(HttpServletRequest request, @RequestBody Map<String, Object> map) {
 		LOGGER.info("invalid map={}", map);
 		try {
