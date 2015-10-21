@@ -16,7 +16,8 @@ import java.util.List;
 /**
  * 新版卡券基础数据
  *
- * @see OldCoupon mongo卡券信息
+ * @author Boreggor
+ * @version 2.0
  */
 public class Coupon implements Serializable {
 
