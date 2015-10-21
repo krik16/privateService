@@ -19,7 +19,7 @@ public class UserFansDto implements Serializable {
     private Integer sellerId;
 
     /** 买家ID */
-    private Integer buyerId;
+    private String buyerId;
 
     /** 用户类型 1 导购，2买手 */
     private Integer sellerType;
@@ -33,11 +33,11 @@ public class UserFansDto implements Serializable {
         this.sellerId = sellerId;
     }
 
-    public Integer getBuyerId() {
+    public String getBuyerId() {
         return buyerId;
     }
 
-    public void setBuyerId(Integer buyerId) {
+    public void setBuyerId(String buyerId) {
         this.buyerId = buyerId;
     }
 

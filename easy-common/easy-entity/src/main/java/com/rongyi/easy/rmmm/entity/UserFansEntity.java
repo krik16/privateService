@@ -13,7 +13,7 @@ public class UserFansEntity implements Serializable{
     private Integer sellerId;
 
     /** 买家ID */
-    private Integer buyerId;
+    private String buyerId;
 
     /** 用户类型 1 导购，2买手 */
     private Integer sellerType;
@@ -37,19 +37,11 @@ public class UserFansEntity implements Serializable{
         this.sellerId = sellerId;
     }
 
-    /**
-     * 买家ID
-     * @return buyerId
-     */
-    public Integer getBuyerId() {
+    public String getBuyerId() {
         return buyerId;
     }
 
-    /**
-     * 买家ID
-     * @param buyerId
-     */
-    public void setBuyerId(Integer buyerId) {
+    public void setBuyerId(String buyerId) {
         this.buyerId = buyerId;
     }
 
