@@ -87,10 +87,10 @@
 		</if>
 
 		<if test="minTotalPrice != null and minTotalPrice != ''">
-			AND pay_total &gt;= #{minTotalPrice}
+			AND pay_total &gt;= #{minTotalPrice}*100
 		</if>
 		<if test="maxTotalPrice != null and maxTotalPrice != ''">
-			AND pay_total &lt;= #{maxTotalPrice}
+			AND pay_total &lt;= #{maxTotalPrice}*100
 		</if>
 		<if test="payAccount != null and payAccount != ''">
 			and bi.pay_account = #{payAccount,jdbcType=TINYINT}
