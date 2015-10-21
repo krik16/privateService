@@ -239,6 +239,7 @@ public class PaymentStatementController extends BaseController {
 		responseMap.put("unSureCount", unSureCount);
 		statusList.clear();
 		statusList.add(ConstantEnum.STATUS_4.getCodeByte());
+		statusList.add(ConstantEnum.STATUS_12.getCodeByte());
 		map.put("statusList", statusList);
 		Integer yesSureCount = paymentStatementService.selectPageListCount(map);// 已确认
 		responseMap.put("yesSureCount", yesSureCount);
