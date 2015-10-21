@@ -24,16 +24,18 @@ public interface CommodityService {
 	
 	public ResponseResult getCommodityById(String id,long shopId);
 	public ResponseResult getCommodityListByShopId(String id, int orderBy,String keyword,int currentpage,int pagesize);
+	public ResponseResult getCommodityListByBuyerId(String buyerId, int orderBy,String keyword,int currentpage,int pagesize);
 	
 	public String publishCommodity(CommodityVO commodityvo,long shopId,long brandId,long mallId,String mallMid,String brandName,String shopNum,CommodityShopInfo shopInfo);
+	public String publishCommodityBuyer(CommodityVO commodityvo);
 	
-	public ResponseResult commodityToShelves(String id,long shopId);
+	public ResponseResult commodityToShelves(String id,long shopId, int identity);
 	
-	public ResponseResult commodityOffShelves(String id,long shopId);
+	public ResponseResult commodityOffShelves(String id,long shopId, int identity);
 	
 	public String editCommodity(CommodityVO commodityvo,long shopId);
 	
-	public ResponseResult updateCommodityPics(String id, List<String> picList,long shopId);
+	public ResponseResult updateCommodityPics(String id, List<String> picList,long shopId, int identity);
 	
 	public ResponseResult getCommodityCategory();
 
@@ -66,7 +68,7 @@ public interface CommodityService {
 			String mallMid, int currentpage, int pagesize);
 
 	public ResponseResult addCommoditySpecs(List<CommoditySpecVO> specvoList,
-			String commodityId, String shopId);
+			String commodityId, String shopId, int identity);
 
 	public List<String> getCommodityPicList(String commodityId);
 
