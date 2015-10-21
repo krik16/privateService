@@ -57,7 +57,7 @@ public interface RoaCouponService {
      * @param status
      * @return
      */
-    boolean updateCouponStatus(String id, String status);
+    boolean updateOffStock(String id, boolean status);
 
     /**
      * 根据卡券Id减少库存

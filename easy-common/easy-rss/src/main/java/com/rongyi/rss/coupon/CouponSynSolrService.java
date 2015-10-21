@@ -22,5 +22,5 @@ public interface CouponSynSolrService {
      * @param couponId
      * @param status
      */
-    void updateSolrCouponStatus(String couponId, int status);
+    boolean updateSolrCouponStatus(String couponId, int status);
 }
