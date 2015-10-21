@@ -50,10 +50,10 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 
 	@Autowired
 	BussinessInfoService bussinessInfoService;
-	
+
 	@Override
 	public List<StatementConfigVO> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
-		map.put("currentPage", (currentPage-1) * pageSize);
+		map.put("currentPage", (currentPage - 1) * pageSize);
 		map.put("pageSize", pageSize);
 		return this.getBaseDao().selectListBySql(NAMESPACE + ".selectPageList", map);
 	}
@@ -98,12 +98,12 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 	public boolean updatePaymentStatusByIds(List<Integer> ids, Integer status, String desc, String userId) {
 		boolean result = false;
 		try {
-			if (CollectionUtils.isNotEmpty(ids) && status!=null){
+			if (CollectionUtils.isNotEmpty(ids) && status != null) {
 				Map<String, Object> paramsMap = new HashMap<>();
 				paramsMap.put("ids", ids);
 				paramsMap.put("status", status);
 				statementConfigMapper.updateStatusByIds(paramsMap);
-				for (Integer id : ids){
+				for (Integer id : ids) {
 					saveOperationLog(id, status, desc, userId);
 				}
 				result = true;
@@ -117,12 +117,13 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 
 	/**
 	 * 插入日志记录
+	 * 
 	 * @param id
 	 * @param status
 	 * @param desc
 	 * @param userId
 	 */
-	private void saveOperationLog(Integer id,  Integer status, String desc, String userId) {
+	private void saveOperationLog(Integer id, Integer status, String desc, String userId) {
 		OperationLog operatioLog = new OperationLog();
 		operatioLog.setCreateUserId(userId);
 		operatioLog.setDesc(desc);
@@ -136,15 +137,28 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 
 	@Override
 	public StatementConfig selectByRuleCode(String ruleCode) {
-		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("ruleCode", ruleCode);
-		return this.getBaseDao().selectOneBySql(NAMESPACE+".selectByRuleCode",map);
+		return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectByRuleCode", map);
 	}
 
 	@Override
 	public StatementConfigVO selectConfigInfoById(Integer id) {
-		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
-		return this.getBaseDao().selectOneBySql(NAMESPACE+".selectConfigInfoById",map);
+		return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectConfigInfoById", map);
+	}
+
+	@Override
+	public boolean validateIsExist(byte cooperateType, byte bussinessType, String bussinessId, byte status, Date effectStartTime, Date effectEndTime) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cooperateType", cooperateType);
+		map.put("bussinessType", bussinessType);
+		map.put("bussinessId", bussinessId);
+		map.put("status", status);
+		map.put("effectStartTime", effectStartTime);
+		map.put("effectEndTime", effectEndTime);
+		int count = this.getBaseDao().selectOneBySql(NAMESPACE + ".validateIsExist", map);
+		return (count > 0);
 	}
 }

@@ -169,7 +169,6 @@ public class StatementConfigController extends BaseController{
 			StatementConfig oldStatementConfig = statementConfigService.selectByRuleCode(map.get("ruleCode").toString());
 			if(oldStatementConfig != null)
 				return ResponseData.failure(CodeEnum.FIAL_CONFIG_EXIST.getCodeInt(), CodeEnum.FIAL_CONFIG_EXIST.getValueStr());
-			
 			StatementConfig statementConfig = new StatementConfig();
 			BussinessInfo bussinessInfo = new BussinessInfo();
 			MapUtils.toObject(statementConfig, map);
@@ -178,6 +177,11 @@ public class StatementConfigController extends BaseController{
 			statementConfig.setBussinessId(statementConfig.getBussinessCode());
 			MapUtils.toObject(bussinessInfo, map);
 			bussinessInfo.setCreateAt(DateUtil.getCurrDateTime());
+			if(statementConfigService.validateIsExist(statementConfig.getCooperateType(), statementConfig.getBussinessType(), statementConfig.getBussinessId(), ConstantEnum.STATUS_2.getValueByte()
+					, statementConfig.getEffectStartTime(), statementConfig.getEffectEndTime())){
+				return ResponseData.failure(CodeEnum.FIAL_CONFIG_BIZ_EXIST.getCodeInt(), CodeEnum.FIAL_CONFIG_BIZ_EXIST.getValueStr());
+			}
+				
 			statementConfigService.saveStatementConfigAndInfo(statementConfig, bussinessInfo);
 			String ruleCode = statementConfig.getRuleCode();
 			if (StringUtils.isNotBlank(ruleCode) && ruleCode.length() > 10) {

@@ -10,7 +10,8 @@
 		<result column="biz_type" property="bussinessType" jdbcType="TINYINT" />
 		<result column="biz_code" property="bussinessCode" jdbcType="VARCHAR" />
 		<result column="biz_name" property="bussinessName" jdbcType="VARCHAR" />
-		<result column="biz_real_address" property="bussinessRealAddress" jdbcType="VARCHAR" />
+		<result column="biz_real_address" property="bussinessRealAddress"
+			jdbcType="VARCHAR" />
 		<result column="count_cycle" property="countCycle" jdbcType="TINYINT" />
 		<result column="cycle_start_time" property="cycleStartTime"
 			jdbcType="TIMESTAMP" />
@@ -49,23 +50,21 @@
 			jdbcType="VARCHAR" />
 		<result column="biz_address" property="bussinessAddress"
 			jdbcType="VARCHAR" />
-		<result column="biz_email" property="bussinessEmail"
-			jdbcType="VARCHAR" />
+		<result column="biz_email" property="bussinessEmail" jdbcType="VARCHAR" />
 		<result column="biz_account" property="bussinessAccount"
 			jdbcType="VARCHAR" />
-		<result column="contact_name" property="contactName"
-			jdbcType="VARCHAR" />
+		<result column="contact_name" property="contactName" jdbcType="VARCHAR" />
 		<result column="contact_phone" property="contactPhone"
 			jdbcType="VARCHAR" />
 		<result column="contact_weixin" property="contactWeixin"
 			jdbcType="VARCHAR" />
-		<result column="contact_qq" property="contactQq"
-			jdbcType="VARCHAR" />
+		<result column="contact_qq" property="contactQq" jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
 		pbc.id, rule_code, cooperate_type, biz_id, biz_type,
 		biz_code, biz_name,biz_real_address, count_cycle,
-		cycle_start_time, cycle_end_time,
+		cycle_start_time,
+		cycle_end_time,
 		is_loop, verify_type,
 		gen_header_time, gen_hm_time,
 		send_time,
@@ -135,9 +134,11 @@
 		biz_id,biz_code, biz_name,biz_real_address, count_cycle,
 		cycle_start_time,
 		cycle_end_time, is_loop,
-		verify_type, gen_header_time, gen_hm_time,
+		verify_type, gen_header_time,
+		gen_hm_time,
 		send_time, datum_type, pay_mode,
-		regular_day, roll_day, roll_type,
+		regular_day, roll_day,
+		roll_type,
 		effect_start_time, effect_end_time, pay_channel,
 		contract_no,
 		link_rule_code,
@@ -157,7 +158,7 @@
 		#{bussinessCode,jdbcType=VARCHAR},
 		#{bussinessName,jdbcType=VARCHAR},
 		#{bussinessRealAddress,jdbcType=VARCHAR},
-		 #{countCycle,jdbcType=TINYINT},
+		#{countCycle,jdbcType=TINYINT},
 		#{cycleStartTime,jdbcType=TIMESTAMP},
 		#{cycleEndTime,jdbcType=TIMESTAMP}, #{isLoop,jdbcType=TINYINT},
 		#{verifyType,jdbcType=TINYINT},
@@ -200,7 +201,8 @@
 				biz_name = #{bussinessName,jdbcType=VARCHAR},
 			</if>
 			<if test="bussinessRealAddress != null">
-				biz_real_address = #{bussinessRealAddress,jdbcType=VARCHAR},
+				biz_real_address =
+				#{bussinessRealAddress,jdbcType=VARCHAR},
 			</if>
 			<if test="countCycle != null">
 				count_cycle = #{countCycle,jdbcType=TINYINT},
@@ -349,5 +351,19 @@
 		=bi.config_id
 		where pbc.id=
 		#{id,jdbcType=INTEGER}
+	</select>
+	<select id="validateIsExist" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		select
+		count(*)
+		from
+		payment_bill_config pbc left join biz_info bi on pbc.id
+		=bi.config_id
+		where pbc.cooperate_type=#{cooperateType}
+		and pbc.biz_type = #{bussinessType}
+		and pbc.biz_id = #{bussinessId}
+		and pbc.status != #{status}
+		and  #{effectEndTime} > pbc.effect_start_time
+		and  pbc.effect_end_time > #{effectStartTime} 
 	</select>
 </mapper>

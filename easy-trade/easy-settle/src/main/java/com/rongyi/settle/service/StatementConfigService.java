@@ -8,6 +8,7 @@
 
 package com.rongyi.settle.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -111,4 +112,19 @@ public interface StatementConfigService {
 	 * @datetime:2015年10月16日下午7:12:25
 	 **/
 	StatementConfigVO selectConfigInfoById(	Integer id);
+	
+	
+	/**	
+	 * @Description: 验证对账单配置是否已存在 
+	 * @param cooperateType
+	 * @param bussinessType
+	 * @param bussinessId
+	 * @param status
+	 * @param effectStartTime
+	 * @param effectEndTime
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年10月21日下午2:38:48
+	 **/
+	boolean validateIsExist(byte cooperateType,byte bussinessType,String bussinessId,byte status,Date effectStartTime,Date  effectEndTime);
 }
