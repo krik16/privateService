@@ -18,6 +18,7 @@ public class QuickEntryNewVO implements Serializable {
     * 代金券  5
     * 直播    12（new）
      *特卖    13（new）
+     * 外链   9
    *快捷入口类型
      */
     private String quickType;
