@@ -89,7 +89,7 @@ public class PaymentStatementController extends BaseController {
 	@RequestMapping("/list")
 	@ResponseBody
 	public ResponseData list(HttpServletRequest request, @RequestBody Map<String, Object> map) {
-		LOGGER.info("list map={}",map);
+		LOGGER.info("list map={}", map);
 		try {
 			Integer currentPage = Integer.valueOf(map.get("currentPage").toString());
 			Integer searchType = Integer.valueOf(map.get("searchType").toString());
@@ -154,17 +154,17 @@ public class PaymentStatementController extends BaseController {
 				}
 				map.put("bussinessAccount", getUserName(request));
 				if (searchStatus == 0) {// 全部
-//					statusList.add(ConstantEnum.STATUS_1.getCodeByte());
-//					statusList.add(ConstantEnum.STATUS_3.getCodeByte());
-//					statusList.add(ConstantEnum.STATUS_4.getCodeByte());
-//					statusList.add(ConstantEnum.STATUS_5.getCodeByte());
-//					statusList.add(ConstantEnum.STATUS_12.getCodeByte());
+				// statusList.add(ConstantEnum.STATUS_1.getCodeByte());
+				// statusList.add(ConstantEnum.STATUS_3.getCodeByte());
+				// statusList.add(ConstantEnum.STATUS_4.getCodeByte());
+				// statusList.add(ConstantEnum.STATUS_5.getCodeByte());
+				// statusList.add(ConstantEnum.STATUS_12.getCodeByte());
 				} else if (searchStatus == 1) {// 待确认
 					statusList.add(ConstantEnum.STATUS_1.getCodeByte());
 					statusList.add(ConstantEnum.STATUS_3.getCodeByte());
 				} else if (searchStatus == 2) {// 已确认
 					statusList.add(ConstantEnum.STATUS_4.getCodeByte());
-//					statusList.add(ConstantEnum.STATUS_12.getCodeByte());
+					// statusList.add(ConstantEnum.STATUS_12.getCodeByte());
 				} else if (searchStatus == 3) {// 不确认
 					statusList.add(ConstantEnum.STATUS_5.getCodeByte());
 				}
@@ -213,7 +213,7 @@ public class PaymentStatementController extends BaseController {
 	 **/
 	@RequestMapping("/bizListTotal")
 	@ResponseBody
-	public ResponseData bizListTotal(HttpServletRequest request) {
+	public ResponseData bizListTotal(HttpServletRequest request, @RequestBody Map<String, Object> map) {
 		LOGGER.info("====bizListTotal====");
 		ResponseData responseData;
 		try {
@@ -225,16 +225,17 @@ public class PaymentStatementController extends BaseController {
 			e.printStackTrace();
 			return ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
 		}
-		Map<String, Object> map = new HashMap<String, Object>();
+		if (map == null)
+			map = new HashMap<String, Object>();
 		map.put("bussinessAccount", getUserName(request));
 		Map<String, Object> responseMap = new HashMap<String, Object>();
 		List<Byte> statusList = new ArrayList<Byte>();
-//		statusList.add(ConstantEnum.STATUS_1.getCodeByte());
-//		statusList.add(ConstantEnum.STATUS_3.getCodeByte());
-//		statusList.add(ConstantEnum.STATUS_4.getCodeByte());
-//		statusList.add(ConstantEnum.STATUS_5.getCodeByte());
-//		statusList.add(ConstantEnum.STATUS_12.getCodeByte());
-//		map.put("statusList", statusList);
+		// statusList.add(ConstantEnum.STATUS_1.getCodeByte());
+		// statusList.add(ConstantEnum.STATUS_3.getCodeByte());
+		// statusList.add(ConstantEnum.STATUS_4.getCodeByte());
+		// statusList.add(ConstantEnum.STATUS_5.getCodeByte());
+		// statusList.add(ConstantEnum.STATUS_12.getCodeByte());
+		// map.put("statusList", statusList);
 		Integer allCount = paymentStatementService.selectPageListCountForMerchant(map);// 全部
 		responseMap.put("allCount", allCount);
 		statusList.clear();
@@ -245,7 +246,7 @@ public class PaymentStatementController extends BaseController {
 		responseMap.put("unSureCount", unSureCount);
 		statusList.clear();
 		statusList.add(ConstantEnum.STATUS_4.getCodeByte());
-//		statusList.add(ConstantEnum.STATUS_12.getCodeByte());
+		// statusList.add(ConstantEnum.STATUS_12.getCodeByte());
 		map.put("statusList", statusList);
 		Integer yesSureCount = paymentStatementService.selectPageListCountForMerchant(map);// 已确认
 		responseMap.put("yesSureCount", yesSureCount);
@@ -271,7 +272,7 @@ public class PaymentStatementController extends BaseController {
 		ResponseData result = null;
 		try {
 
-			LOGGER.info("verify map={}",map);
+			LOGGER.info("verify map={}", map);
 			String idStr = map.containsKey("ids") ? map.get("ids").toString() : null;
 			Integer status = map.containsKey("status") ? Integer.valueOf(map.get("status").toString()) : null;
 			String desc = map.containsKey("desc") ? map.get("desc").toString() : null;
@@ -330,7 +331,7 @@ public class PaymentStatementController extends BaseController {
 	 **/
 	@RequestMapping("/exportFinanceExcel")
 	public ResponseData exportFinanceExcel(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, Object> map) {
-		LOGGER.info("exportFinanceExcel map="+map);
+		LOGGER.info("exportFinanceExcel map=" + map);
 		try {
 			ResponseData responseData = accessService.check(request, "FNC_STLBILLVFY_EXPORT");
 			if (responseData.getMeta().getErrno() != 0) {
@@ -354,7 +355,7 @@ public class PaymentStatementController extends BaseController {
 	 **/
 	@RequestMapping("/exportPaymentExcel")
 	public ResponseData exportPaymentSchedule(String ids, HttpServletResponse response, HttpServletRequest request) {
-		LOGGER.info("exportPaymentExcel ids={}",ids);
+		LOGGER.info("exportPaymentExcel ids={}", ids);
 		try {
 			ResponseData responseData = accessService.check(request, "FNC_PAYBILL_DWON");
 			if (responseData.getMeta().getErrno() != 0) {
@@ -382,14 +383,14 @@ public class PaymentStatementController extends BaseController {
 	 **/
 	@RequestMapping("/invalid")
 	public ResponseData invalid(HttpServletRequest request, @RequestBody Map<String, Object> map) {
-		LOGGER.info("invalid map={}",map);
+		LOGGER.info("invalid map={}", map);
 		try {
 			ResponseData responseData = accessService.check(request, "FNC_UNPVFY_CANCEL");
 			if (responseData.getMeta().getErrno() != 0) {
 				return responseData;
 			}
 			Integer id = Integer.valueOf(map.get("id").toString());
-			paymentStatementService.generate(id,getUserName(request));
+			paymentStatementService.generate(id, getUserName(request));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
@@ -455,14 +456,14 @@ public class PaymentStatementController extends BaseController {
 	@RequestMapping("/generate")
 	@ResponseBody
 	public ResponseData generate(HttpServletRequest request, @RequestBody Map<String, Object> map) {
-		LOGGER.info("generate map={}",map);
+		LOGGER.info("generate map={}", map);
 		try {
 			ResponseData responseData = accessService.check(request, "FNC_STLBILL_READD");
 			if (responseData.getMeta().getErrno() != 0) {
 				return responseData;
 			}
 			Integer id = Integer.valueOf(map.get("id").toString());
-			paymentStatementService.generate(id,getUserName(request));
+			paymentStatementService.generate(id, getUserName(request));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
@@ -483,7 +484,7 @@ public class PaymentStatementController extends BaseController {
 	@RequestMapping("/info")
 	@ResponseBody
 	public ResponseData info(String systemType, Integer id, HttpServletRequest request, HttpServletResponse response) {
-		LOGGER.info("info systemType={},id={}",systemType,id);
+		LOGGER.info("info systemType={},id={}", systemType, id);
 		try {
 			boolean isMerchant = systemType != null && systemType.equals("merchant");
 			ResponseData responseData;
