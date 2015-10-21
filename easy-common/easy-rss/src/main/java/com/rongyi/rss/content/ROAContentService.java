@@ -71,6 +71,13 @@ public interface ROAContentService {
 	 * @return
 	 */
 	public List<ForumPosition> findPositionAllByHomePId(Integer id);
+
+	/**
+	 * 批量插入内容
+	 * @param fcs
+	 * @return
+	 */
+	public Boolean saveContents(List<ForumContent> fcs);
 	
 	/**
 	 * 通过查询条件 查询位置下的内容
@@ -134,7 +141,7 @@ public interface ROAContentService {
 	 * @param fc
 	 * @return
 	 */
-	boolean hasContent(ForumContent fc);
+	List<String> hasContent(ForumContent fc);
 	
 	/**
 	 * 修改 位置时间
@@ -142,4 +149,11 @@ public interface ROAContentService {
 	 * @return
 	 */
 	public Boolean updateOptionById(ForumPosition fp);
+
+	/**
+	 * 判断在同一位置、同一区域是否有内容 买手直播
+	 * @param fc
+	 * @return
+	 */
+	public List<String> hasBuyerLive(ForumContent fc);
 }

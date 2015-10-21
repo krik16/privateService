@@ -39,7 +39,7 @@ public class LiveVO implements Serializable {
 	/**
 	 * 创建时间
 	 */
-	private long createTime;
+	private long createAt;
 
 	/**
 	 * 直播状态 [0:发布/预热中，1:上线/进行中，2:下线(已过期)]
