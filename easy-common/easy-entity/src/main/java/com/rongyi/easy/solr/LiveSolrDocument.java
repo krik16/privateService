@@ -59,9 +59,6 @@ public class LiveSolrDocument implements Serializable {
 	
 	@Field("position")
 	private String position;
-	
-	@Field("dest_text")
-	private String dest_text;
 
 	public String getName() {
 		return name;
@@ -150,14 +147,5 @@ public class LiveSolrDocument implements Serializable {
 	public void setPosition(String position) {
 		this.position = position;
 	}
-
-	public String getDest_text() {
-		return dest_text;
-	}
-
-	public void setDest_text(String dest_text) {
-		this.dest_text = dest_text;
-	}
-
 	
 }
