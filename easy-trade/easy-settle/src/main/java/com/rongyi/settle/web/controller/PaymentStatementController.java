@@ -229,30 +229,30 @@ public class PaymentStatementController extends BaseController {
 		map.put("bussinessAccount", getUserName(request));
 		Map<String, Object> responseMap = new HashMap<String, Object>();
 		List<Byte> statusList = new ArrayList<Byte>();
-		statusList.add(ConstantEnum.STATUS_1.getCodeByte());
-		statusList.add(ConstantEnum.STATUS_3.getCodeByte());
-		statusList.add(ConstantEnum.STATUS_4.getCodeByte());
-		statusList.add(ConstantEnum.STATUS_5.getCodeByte());
-		statusList.add(ConstantEnum.STATUS_12.getCodeByte());
-		map.put("statusList", statusList);
-		Integer allCount = paymentStatementService.selectPageListCount(map);// 全部
+//		statusList.add(ConstantEnum.STATUS_1.getCodeByte());
+//		statusList.add(ConstantEnum.STATUS_3.getCodeByte());
+//		statusList.add(ConstantEnum.STATUS_4.getCodeByte());
+//		statusList.add(ConstantEnum.STATUS_5.getCodeByte());
+//		statusList.add(ConstantEnum.STATUS_12.getCodeByte());
+//		map.put("statusList", statusList);
+		Integer allCount = paymentStatementService.selectPageListCountForMerchant(map);// 全部
 		responseMap.put("allCount", allCount);
 		statusList.clear();
 		statusList.add(ConstantEnum.STATUS_1.getCodeByte());
 		statusList.add(ConstantEnum.STATUS_3.getCodeByte());
 		map.put("statusList", statusList);
-		Integer unSureCount = paymentStatementService.selectPageListCount(map);// 未确认
+		Integer unSureCount = paymentStatementService.selectPageListCountForMerchant(map);// 未确认
 		responseMap.put("unSureCount", unSureCount);
 		statusList.clear();
 		statusList.add(ConstantEnum.STATUS_4.getCodeByte());
-		statusList.add(ConstantEnum.STATUS_12.getCodeByte());
+//		statusList.add(ConstantEnum.STATUS_12.getCodeByte());
 		map.put("statusList", statusList);
-		Integer yesSureCount = paymentStatementService.selectPageListCount(map);// 已确认
+		Integer yesSureCount = paymentStatementService.selectPageListCountForMerchant(map);// 已确认
 		responseMap.put("yesSureCount", yesSureCount);
 		statusList.clear();
 		statusList.add(ConstantEnum.STATUS_5.getCodeByte());
 		map.put("statusList", statusList);
-		Integer noSureCount = paymentStatementService.selectPageListCount(map);// 未确认
+		Integer noSureCount = paymentStatementService.selectPageListCountForMerchant(map);// 未确认
 		responseMap.put("noSureCount", noSureCount);
 		return ResponseData.success(responseMap);
 	}
