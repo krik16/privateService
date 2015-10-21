@@ -54,6 +54,8 @@ public interface ROACommodityService {
 	public ResponseResult commodityOffShelves(String id, long shopId, int identity);
 
 	public String editCommodity(CommodityVO commodityvo, long shopId);
+	
+	public String editCommodityBuyer(CommodityVO commodityvo);
 
 	public ResponseResult updateCommodityPics(String id, List<String> picList, long shopId, int identity);
 

@@ -20,6 +20,7 @@ public class Commodity implements  Serializable,Cloneable{
 	private ObjectId id;
 
 	private int type; // 渠道  1商家，2买手
+	private String liveId; // 直播Id
 	private boolean isSpot; // 是否现货	
 	private Date liveStartTime; // 直播开始时间
 	private Date liveEndTime; // 直播结束时间
@@ -44,7 +45,13 @@ public class Commodity implements  Serializable,Cloneable{
 	private String mallMid;
 	private String shopNum;
 	private String update_by;//修改人
-
+	
+	public String getLiveId() {
+		return liveId;
+	}
+	public void setLiveId(String liveId) {
+		this.liveId = liveId;
+	}
 	public int getType() {
 		return type;
 	}
