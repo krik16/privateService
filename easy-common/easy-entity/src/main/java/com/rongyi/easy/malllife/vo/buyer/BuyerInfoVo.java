@@ -30,6 +30,8 @@ public class BuyerInfoVo implements Serializable {
 
     private String  userDesc;//简介
 
+    private String  imUser;//环信号
+
     private Integer userFansCount;//粉丝数
 
     private Boolean isFans;//false 未关注；ture 已关注
@@ -152,5 +154,13 @@ public class BuyerInfoVo implements Serializable {
 
     public void setMark(Double mark) {
         this.mark = mark;
+    }
+
+    public String getImUser() {
+        return imUser;
+    }
+
+    public void setImUser(String imUser) {
+        this.imUser = imUser;
     }
 }
