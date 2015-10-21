@@ -165,10 +165,17 @@ public class PaymentStatementController extends BaseController {
 				} else if (searchStatus == 2) {// 已确认
 					statusList.add(ConstantEnum.STATUS_4.getCodeByte());
 					// statusList.add(ConstantEnum.STATUS_12.getCodeByte());
-				} else if (searchStatus == 3) {// 不确认
+				} else if (searchStatus == 3) {// 取消
 					statusList.add(ConstantEnum.STATUS_5.getCodeByte());
 					statusList.add(ConstantEnum.STATUS_7.getCodeByte());
 					statusList.add(ConstantEnum.STATUS_8.getCodeByte());
+				}else if(searchStatus == 4){//待付款
+					statusList.add(ConstantEnum.STATUS_6.getCodeByte());
+					statusList.add(ConstantEnum.STATUS_9.getCodeByte());
+					statusList.add(ConstantEnum.STATUS_10.getCodeByte());
+					statusList.add(ConstantEnum.STATUS_11.getCodeByte());
+				}else if(searchStatus == 5){//待付款
+					statusList.add(ConstantEnum.STATUS_12.getCodeByte());
 				}
 				break;
 			default:
@@ -248,7 +255,6 @@ public class PaymentStatementController extends BaseController {
 		responseMap.put("unSureCount", unSureCount);
 		statusList.clear();
 		statusList.add(ConstantEnum.STATUS_4.getCodeByte());
-		// statusList.add(ConstantEnum.STATUS_12.getCodeByte());
 		map.put("statusList", statusList);
 		Integer yesSureCount = paymentStatementService.selectPageListCountForMerchant(map);// 已确认
 		responseMap.put("yesSureCount", yesSureCount);
@@ -257,8 +263,21 @@ public class PaymentStatementController extends BaseController {
 		statusList.add(ConstantEnum.STATUS_7.getCodeByte());
 		statusList.add(ConstantEnum.STATUS_8.getCodeByte());
 		map.put("statusList", statusList);
-		Integer noSureCount = paymentStatementService.selectPageListCountForMerchant(map);// 未确认
+		Integer noSureCount = paymentStatementService.selectPageListCountForMerchant(map);// 取消
 		responseMap.put("noSureCount", noSureCount);
+		statusList.clear();
+		statusList.add(ConstantEnum.STATUS_6.getCodeByte());
+		statusList.add(ConstantEnum.STATUS_9.getCodeByte());
+		statusList.add(ConstantEnum.STATUS_10.getCodeByte());
+		statusList.add(ConstantEnum.STATUS_11.getCodeByte());
+		map.put("statusList", statusList);
+		Integer payingCount = paymentStatementService.selectPageListCountForMerchant(map);//待付款
+		responseMap.put("payingCount", payingCount);
+		statusList.clear();
+		statusList.add(ConstantEnum.STATUS_12.getCodeByte());
+		map.put("statusList", statusList);
+		Integer payedCount = paymentStatementService.selectPageListCountForMerchant(map);//已付款
+		responseMap.put("payedCount", payedCount);
 		return ResponseData.success(responseMap);
 	}
 
