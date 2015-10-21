@@ -1,9 +1,10 @@
 package com.rongyi.easy.mcmc.vo;
 
-import com.rongyi.easy.mcmc.Commodity;
-
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
+
+import com.rongyi.easy.mcmc.Commodity;
 
 
 public class CommodityVO  implements  Serializable {
@@ -30,7 +31,35 @@ public class CommodityVO  implements  Serializable {
 	
 	private int commodityType;//渠道  1商家，2买手
 	private boolean isSpot;//是否现货	
+	private Date liveStartTime; // 直播开始时间
+	private Date liveEndTime; // 直播结束时间
+	private String create_by; // 创建人 
+	private String liveId; // 直播Id
 	
+	public String getLiveId() {
+		return liveId;
+	}
+	public void setLiveId(String liveId) {
+		this.liveId = liveId;
+	}
+	public Date getLiveStartTime() {
+		return liveStartTime;
+	}
+	public void setLiveStartTime(Date liveStartTime) {
+		this.liveStartTime = liveStartTime;
+	}
+	public Date getLiveEndTime() {
+		return liveEndTime;
+	}
+	public void setLiveEndTime(Date liveEndTime) {
+		this.liveEndTime = liveEndTime;
+	}
+	public String getCreate_by() {
+		return create_by;
+	}
+	public void setCreate_by(String create_by) {
+		this.create_by = create_by;
+	}
 	public int getCommodityType() {
 		return commodityType;
 	}

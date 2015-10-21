@@ -48,6 +48,18 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private String commodityBrandId;
 	@Field("price")
 	private double price;
+	@Field("isSpot")
+	private boolean isSpot;
+	@Field("type")
+	private int type;
+	@Field("liveId")
+	private String liveId;
+	@Field("liveStartTime")
+	private Date liveStartTime;
+	@Field("liveEndTime")
+	private Date liveEndTime;
+	@Field("createBy")
+	private String createBy;
 	@Field("commodityNameSubdiv")
 	private String commodityNameSubdiv;
 	
@@ -202,6 +214,54 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	}
 	public void setCommodityNameSubdiv(String commodityNameSubdiv) {
 		this.commodityNameSubdiv = commodityNameSubdiv;
+	}
+
+	public boolean isSpot() {
+		return isSpot;
+	}
+
+	public void setSpot(boolean isSpot) {
+		this.isSpot = isSpot;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	public String getLiveId() {
+		return liveId;
+	}
+
+	public void setLiveId(String liveId) {
+		this.liveId = liveId;
+	}
+
+	public Date getLiveStartTime() {
+		return liveStartTime;
+	}
+
+	public void setLiveStartTime(Date liveStartTime) {
+		this.liveStartTime = liveStartTime;
+	}
+
+	public Date getLiveEndTime() {
+		return liveEndTime;
+	}
+
+	public void setLiveEndTime(Date liveEndTime) {
+		this.liveEndTime = liveEndTime;
+	}
+
+	public String getCreateBy() {
+		return createBy;
+	}
+
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
 	}
 
 }
