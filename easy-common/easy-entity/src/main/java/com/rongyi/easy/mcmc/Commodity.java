@@ -19,11 +19,17 @@ public class Commodity implements  Serializable,Cloneable{
 	@Id
 	private ObjectId id;
 
+	private int type; // 渠道  1商家，2买手
+	private boolean isSpot; // 是否现货	
+	private Date liveStartTime; // 直播开始时间
+	private Date liveEndTime; // 直播结束时间
+	private String create_by; // 创建人 
+	
 	private String name;//商品名称
 	private String category;//商品品类id
 	private String shopId;//店铺id
 	private String shopMid;//店铺的mongoid
-	private int status;//状态 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理 
+	private int status;//状态 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理   -1：非现货初始化
 	private String code;//商品编码
 	private String description;//商品描述
 	private String postage;//商品邮费
@@ -38,6 +44,37 @@ public class Commodity implements  Serializable,Cloneable{
 	private String mallMid;
 	private String shopNum;
 	private String update_by;//修改人
+
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
+	public boolean isSpot() {
+		return isSpot;
+	}
+	public void setSpot(boolean isSpot) {
+		this.isSpot = isSpot;
+	}
+	public Date getLiveStartTime() {
+		return liveStartTime;
+	}
+	public void setLiveStartTime(Date liveStartTime) {
+		this.liveStartTime = liveStartTime;
+	}
+	public Date getLiveEndTime() {
+		return liveEndTime;
+	}
+	public void setLiveEndTime(Date liveEndTime) {
+		this.liveEndTime = liveEndTime;
+	}
+	public String getCreate_by() {
+		return create_by;
+	}
+	public void setCreate_by(String create_by) {
+		this.create_by = create_by;
+	}
 	public String getUpdate_by() {
 		return update_by;
 	}
