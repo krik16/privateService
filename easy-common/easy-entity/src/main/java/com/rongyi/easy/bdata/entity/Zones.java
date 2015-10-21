@@ -1,4 +1,4 @@
-package com.rongyi.easy.bdata.shop;
+package com.rongyi.easy.bdata.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -65,6 +65,15 @@ public class Zones implements Serializable {
 	 * 更新人id
 	 */
 	private int updated_user_id;
+	/**
+	 * 楼层状态
+	 */
+	private int system_status;
+	/**
+	 * 楼层状态
+	 */
+	private int systemStatus;
+
 	
 	private List<ObjectId> watcher_ids;
 

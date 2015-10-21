@@ -1,4 +1,4 @@
-package com.rongyi.easy.bdata.shop;
+package com.rongyi.easy.bdata.entity;
 
 import java.io.Serializable;
 import java.util.Date;
