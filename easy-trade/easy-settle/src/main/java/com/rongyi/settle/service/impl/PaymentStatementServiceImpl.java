@@ -321,7 +321,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		String dateStr = "";
 		String batchNo = "";
 		try {
-			dateStr = DateUtils.getYesterdayDateSimpleStr();
+			dateStr = DateUtils.getDateSimpleStr();
 			String key = "PAYMENT_STATEMENT_BATCH_NO_" + dateStr;
 			batchNo = redisService.get(key);
 			if (org.springframework.util.StringUtils.isEmpty(batchNo)) {
