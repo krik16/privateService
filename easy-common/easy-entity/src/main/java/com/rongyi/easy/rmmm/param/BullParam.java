@@ -5,7 +5,7 @@ package com.rongyi.easy.rmmm.param;
 
 import java.io.Serializable;
 
-import com.rongyi.easy.rmmm.base.BaseParam;
+import com.rongyi.easy.malllife.param.MalllifeBaseParam;
 
 /**
  * Copyright (C),上海容易网电子商务有限公司
@@ -16,7 +16,7 @@ import com.rongyi.easy.rmmm.base.BaseParam;
  * <author>           <time>             <version>        <desc>
  * chenjun            2015年10月15日               1.0              创建文件
  */
-public class BullParam extends BaseParam implements Serializable{
+public class BullParam extends MalllifeBaseParam implements Serializable{
 	
 	private String bullId;//买手id
 	private Integer currentPage = 1;//  从1开始
