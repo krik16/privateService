@@ -15,6 +15,7 @@ public class HomePageParam implements Serializable {
     private String longitude;//经度
     private String latitude;//纬度
     private String version; //首页配置版本号
+    private int iosOrAndroid;//是安卓或者是ios   0安卓 1是ios
 
     public String getCityId() {
         return cityId;
@@ -64,6 +65,14 @@ public class HomePageParam implements Serializable {
         this.version = version;
     }
 
+    public int getIosOrAndroid() {
+        return iosOrAndroid;
+    }
+
+    public void setIosOrAndroid(int iosOrAndroid) {
+        this.iosOrAndroid = iosOrAndroid;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -73,6 +82,7 @@ public class HomePageParam implements Serializable {
                 .append("longitude", longitude)
                 .append("latitude", latitude)
                 .append("version", version)
+                .append("iosOrAndroid", iosOrAndroid)
                 .toString();
     }
 }
