@@ -41,20 +41,23 @@ public interface ROACommodityService {
 
 	public ResponseResult getCommodityById(String id, long shopId);
 
-	public ResponseResult getCommodityListByShopId(int identity, String shopId, String buyerId, int orderBy, String keyword,
-			int currentpage, int pagesize);
+	public ResponseResult getCommodityListByShopId(int identity, String shopId, String buyerId, int orderBy,
+			String keyword, int currentpage, int pagesize);
+
+	public ResponseResult getLiveCommodityList(int identity, String buyerId, int orderBy, int currentpage,
+			int pagesize);
 
 	public String publishCommodity(CommodityVO commodityvo, long shopId, String shopMid, long brandId, long mallId,
 			String mallMid, String brandName, String shopNum);
 
 	public String publishCommodityBuyer(CommodityVO commodityvo);
-	
+
 	public ResponseResult commodityToShelves(String id, long shopId, int identity);
 
 	public ResponseResult commodityOffShelves(String id, long shopId, int identity);
 
 	public String editCommodity(CommodityVO commodityvo, long shopId);
-	
+
 	public String editCommodityBuyer(CommodityVO commodityvo);
 
 	public ResponseResult updateCommodityPics(String id, List<String> picList, long shopId, int identity);
@@ -88,7 +91,8 @@ public interface ROACommodityService {
 	public CommodityPageBuyerVO searchCommodityByMids(String keyword, String shopMid, String mallMid, int currentpage,
 			int pagesize);
 
-	public ResponseResult addCommoditySpecs(List<CommoditySpecVO> specvoList, String commodityId, String shopId, int identity);
+	public ResponseResult addCommoditySpecs(List<CommoditySpecVO> specvoList, String commodityId, String shopId,
+			int identity);
 
 	public List<String> getCommodityPicList(String commodityId);
 
