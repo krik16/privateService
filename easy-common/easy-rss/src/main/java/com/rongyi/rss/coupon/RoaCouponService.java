@@ -84,7 +84,8 @@ public interface RoaCouponService {
      * @param ids
      * @param isRelatedActivity
      * @param couponActivity
-     * @return
+     * @return boolean
+     * @author lqy
      * @throws Exception
      */
     boolean updateRelatedActivity(List<String> ids, boolean isRelatedActivity, CouponActivity couponActivity) throws Exception;
@@ -121,4 +122,12 @@ public interface RoaCouponService {
      * @return
      */
     PagingVO<Coupon> findAllByPage(CouponParam couponParam);
+
+    /**
+     * 根据卡券ID查看卡券关联的活动列表
+     * @param couponId
+     * @return List<CouponActivity>
+     * @author lqy
+     */
+    List<CouponActivity> findCouponActivitiesByCouponId(String couponId);
 }
