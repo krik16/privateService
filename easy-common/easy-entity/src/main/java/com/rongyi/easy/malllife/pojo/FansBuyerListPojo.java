@@ -15,6 +15,8 @@ public class FansBuyerListPojo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private Integer userId;//用户（买手id)
+
     private String  userNickName;//买手呢称
 
     private String  userName; //名称
@@ -24,6 +26,14 @@ public class FansBuyerListPojo implements Serializable {
     private String  userDesc;//简介
 
     private Boolean isFans=true;//false 未关注；ture 已关注
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public String getUserNickName() {
         return userNickName;

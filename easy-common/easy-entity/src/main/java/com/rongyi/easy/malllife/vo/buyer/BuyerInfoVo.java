@@ -33,6 +33,12 @@ public class BuyerInfoVo implements Serializable {
     private Integer userFansCount;//粉丝数
 
     private Boolean isFans;//false 未关注；ture 已关注
+
+    /**
+     * 卖家评分
+     */
+    private Double mark;
+
     /**
      * 买手直播场次
      */
@@ -138,5 +144,13 @@ public class BuyerInfoVo implements Serializable {
 
     public void setCommodityCount(int commodityCount) {
         this.commodityCount = commodityCount;
+    }
+
+    public Double getMark() {
+        return mark;
+    }
+
+    public void setMark(Double mark) {
+        this.mark = mark;
     }
 }
