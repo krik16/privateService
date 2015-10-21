@@ -12,7 +12,7 @@ import org.mongodb.morphia.annotations.Id;
  *
  */
 @Entity("brands")
-public class Brand implements Serializable {
+public class LiveBrand implements Serializable {
 	private static final long serialVersionUID = 1L;
 	/**
 	 * mongo id
