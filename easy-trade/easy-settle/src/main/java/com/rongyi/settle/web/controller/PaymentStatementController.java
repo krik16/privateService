@@ -127,8 +127,8 @@ public class PaymentStatementController extends BaseController {
 				if (searchStatus == 0)
 					statusList.add(ConstantEnum.STATUS_4.getCodeByte());
 				else {
-					statusList.add(ConstantEnum.STATUS_5.getCodeByte());
 					statusList.add(ConstantEnum.STATUS_6.getCodeByte());
+					statusList.add(ConstantEnum.STATUS_7.getCodeByte());
 					statusList.add(ConstantEnum.STATUS_8.getCodeByte());
 				}
 				break;
