@@ -42,7 +42,7 @@ public class CouponParam implements Serializable {
     private Boolean isOffStock;
 
     /**
-     * 卡券类型
+     * 卡券类型:代金券[0], 抵扣券[1], 红包[2]
      */
     private Integer couponType;
 
@@ -69,6 +69,7 @@ public class CouponParam implements Serializable {
     /**
      * 关联类型
      * 代金券：集团[0],品牌[1], 商场 [2],店铺[3];
+     * 红包 ：全场[0],商品[1]
      */
     private Integer relatedType;
 
@@ -131,6 +132,18 @@ public class CouponParam implements Serializable {
      * 卡券名称
      */
     private String name;
+
+
+    /**
+     * 是否删除：否[false], 是[true], 默认为false未删除
+     */
+    private Boolean isDeleted;
+
+    /**
+     * 卡券关联商品Id
+     */
+    private String productId;
+
 
     public String getShopId() {
         return shopId;
@@ -324,6 +337,22 @@ public class CouponParam implements Serializable {
         this.name = name;
     }
 
+    public Boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -351,6 +380,8 @@ public class CouponParam implements Serializable {
                 .append("ids", ids)
                 .append("displayRegion", displayRegion)
                 .append("name", name)
+                .append("isDeleted", isDeleted)
+                .append("productId", productId)
                 .toString();
     }
 }

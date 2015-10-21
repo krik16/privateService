@@ -5,7 +5,12 @@ import java.util.Date;
 
 public class AppAdvertEntity implements Serializable{
 	
-    /** 主键 */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** 主键 */
     private Integer id;
 
     /** 设备类型 1:Android 2:IOS） */

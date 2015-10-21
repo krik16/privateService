@@ -1,9 +1,11 @@
 package com.rongyi.rss.coupon;
 
+import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.framework.mybatis.pojo.Page;
 import com.rongyi.easy.coupon.entity.UserCoupon;
 import com.rongyi.easy.coupon.entity.UserRedenvelope;
+import com.rongyi.easy.coupon.param.CouponOrderParam;
 import com.rongyi.easy.coupon.param.UserRedenvelopeParam;
 import com.rongyi.easy.coupon.vo.UserCouponVO;
 
@@ -114,4 +116,21 @@ public interface RoaUserRedenvelopeService {
      */
     boolean recoverCashCoupon(String code);
 
+
+    /**
+     * 用户红包领取数
+     *
+     * @param couponId
+     * @param userId
+     * @return
+     */
+    int receivedCount(String couponId, String userId);
+
+    /**
+     * 根据老参数领取红包
+     *
+     * @param param
+     * @return
+     */
+    ResponseResult createByCouponOrderParam(CouponOrderParam param);
 }

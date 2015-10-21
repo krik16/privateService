@@ -11,7 +11,7 @@ package com.rongyi.easy.solr.param;
 
 import java.io.Serializable;
 
-import com.rongyi.easy.rmmm.base.BaseParam;
+import com.rongyi.easy.malllife.param.MalllifeBaseParam;
 
 /**
  * @author ZhengYl
@@ -21,7 +21,7 @@ import com.rongyi.easy.rmmm.base.BaseParam;
  * @author ZhengYl
  *
  */
-public class CommoditySearchParam  extends BaseParam implements Serializable {
+public class CommoditySearchParam  extends MalllifeBaseParam implements Serializable {
 
 	/**  */
 	private static final long serialVersionUID = -3577116644255163015L;
@@ -45,10 +45,10 @@ public class CommoditySearchParam  extends BaseParam implements Serializable {
 	private String sortBy;
 	
 	/** 页 */
-	private int currentPage;
+	private Integer currentPage;
 	
 	/** 一页数量 */
-	private int pageSize;
+	private Integer pageSize;
 	
 	/** 坐标x */
 	private String coord_x;
@@ -160,28 +160,28 @@ public class CommoditySearchParam  extends BaseParam implements Serializable {
 	/**
 	 * @return the currentPage
 	 */
-	public int getCurrentPage() {
+	public Integer getCurrentPage() {
 		return currentPage;
 	}
 
 	/**
 	 * @param currentPage the currentPage to set
 	 */
-	public void setCurrentPage(int currentPage) {
+	public void setCurrentPage(Integer currentPage) {
 		this.currentPage = currentPage;
 	}
 
 	/**
 	 * @return the pageSize
 	 */
-	public int getPageSize() {
+	public Integer getPageSize() {
 		return pageSize;
 	}
 
 	/**
 	 * @param pageSize the pageSize to set
 	 */
-	public void setPageSize(int pageSize) {
+	public void setPageSize(Integer pageSize) {
 		this.pageSize = pageSize;
 	}
 

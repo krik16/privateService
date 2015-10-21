@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 老优惠券VO
  */
-public class OldCouponVO implements Serializable {
+public class   OldCouponVO implements Serializable {
     private static final long serialVersionUID = 3;
     private String id;
     @Deprecated

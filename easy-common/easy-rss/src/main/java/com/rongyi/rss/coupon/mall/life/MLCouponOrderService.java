@@ -1,7 +1,9 @@
 package com.rongyi.rss.coupon.mall.life;
 
+import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.easy.coupon.entity.CouponOrder;
 import com.rongyi.easy.coupon.entity.CouponOrderItem;
+import com.rongyi.easy.coupon.param.CouponOrderParam;
 
 import java.util.List;
 import java.util.Map;
@@ -193,6 +195,14 @@ public interface MLCouponOrderService {
      * @return
      */
     Map<String, Object> calcRefundAmount(String orderNo, Integer number, String userId);
+
+    /**
+     * 根据卡券类型购买代金券或领取红包
+     * @param param
+     * @param couponType
+     * @return
+     */
+    ResponseResult createCouponOrder(CouponOrderParam param, String couponType);
 
     /**
      * 定时关闭未支付订单

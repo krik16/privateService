@@ -118,4 +118,21 @@ public interface IUserInfoService {
 	 * @throws Exception
 	 */
 	public Map getSessionUserFromRedis(String bsst,boolean bConvertToObj) throws Exception;
+	
+	/**
+	 * 查询买手账号列表
+	 * @param map
+	 * @param currpage
+	 * @param pagesize
+	 * @return
+	 */
+	public PagingVO<BusinessAccountVO> getBuyerInfoListByMap(Map<String, Object>paramsMap,int currpage,int pageSize);
+	
+	/**
+	 * 查询买手账号详情
+	 * @param id 用户ID
+	 * @return
+	 */
+	public BusinessAccountVO getBuyerDetailById(Integer id);
+	
 }

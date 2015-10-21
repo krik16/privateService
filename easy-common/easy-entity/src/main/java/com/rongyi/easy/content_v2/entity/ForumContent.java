@@ -49,7 +49,7 @@ public class ForumContent implements Serializable {
      */
     private String subtitle;
     /**
-     * 类型，1.代表商场,2.店铺、3.品牌、4.商品、5.代金券、6.活动、7.文章、8.同城、9.优惠、10.外链、11.内链活动、12.抵扣卷
+     * 类型，	1.代表商场,2.店铺、3.品牌、4.商品、5.代金券、6.内链活动、7.文章、8.优惠、9.外链活动、10.抵扣卷 ,  11.商品推荐 （临时的）
      */
     private Integer type;
     /**
@@ -105,6 +105,15 @@ public class ForumContent implements Serializable {
      * 安卓版本号
      */
     private String androidVersion;
+
+    /**
+     * 快捷入口的类型   方式为 12，13，10，10
+     */
+    private String quickType;
+    /**
+     * 快捷入口的类型值    方式为 , , ,www.baidu.com
+     */
+    private String quickTypeVal;
 
     public Integer getId() {
         return id;
@@ -274,7 +283,8 @@ public class ForumContent implements Serializable {
     @Override
     public String toString() {
         return "ForumContent{" +
-                "id=" + id +
+                "quickTypeVal='" + quickTypeVal + '\'' +
+                ", id=" + id +
                 ", positionId=" + positionId +
                 ", provId='" + provId + '\'' +
                 ", provName='" + provName + '\'' +
@@ -297,6 +307,7 @@ public class ForumContent implements Serializable {
                 ", buyerLive='" + buyerLive + '\'' +
                 ", iosVersion='" + iosVersion + '\'' +
                 ", androidVersion='" + androidVersion + '\'' +
+                ", quickType='" + quickType + '\'' +
                 '}';
     }
 
@@ -322,5 +333,21 @@ public class ForumContent implements Serializable {
 
     public void setAndroidVersion(String androidVersion) {
         this.androidVersion = androidVersion;
+    }
+
+    public String getQuickType() {
+        return quickType;
+    }
+
+    public void setQuickType(String quickType) {
+        this.quickType = quickType;
+    }
+
+    public String getQuickTypeVal() {
+        return quickTypeVal;
+    }
+
+    public void setQuickTypeVal(String quickTypeVal) {
+        this.quickTypeVal = quickTypeVal;
     }
 }

@@ -36,7 +36,7 @@ public interface ROAMerchantCouponService {
      *
      * @return coupon id
      */
-    public String insertCoupon(Integer inChannel);
+    public String insertCoupon(Integer inChannel,UserInfoVo userInfoVo);
 
     /**
      * 获取未通过列表

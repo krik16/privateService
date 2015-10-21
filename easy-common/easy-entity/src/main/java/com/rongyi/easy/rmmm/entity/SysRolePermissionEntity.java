@@ -3,7 +3,12 @@ package com.rongyi.easy.rmmm.entity;
 import java.io.Serializable;
 
 public class SysRolePermissionEntity implements Serializable{
-    /** 主键 */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** 主键 */
     private Integer id;
 
     /** 角色ID */

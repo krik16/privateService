@@ -50,4 +50,12 @@ public interface CouponCodeService {
      * @return
      */
     List<String> getCodeByVersion(String couponId, String version);
+
+    /**
+     * 根据券id 查找券码列表，券码只返回code 和in_channel 字段
+     * @param couponId
+     * @return
+     */
+    public List<CouponCode> getCouponCodesByCouponId(String couponId);
+
 }
