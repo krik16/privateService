@@ -21,7 +21,11 @@ public interface PaymentStatementService {
      **/
     List<PaymentStatementDto> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize);
 
+    List<PaymentStatementDto> selectPageListForMerchant(Map<String, Object> map, Integer currentPage, Integer pageSize);
+
     Integer selectPageListCount(Map<String, Object> map);
+
+    Integer selectPageListCountForMerchant(Map<String, Object> map);
 
     void insert(PaymentStatement paymentStatement);
 

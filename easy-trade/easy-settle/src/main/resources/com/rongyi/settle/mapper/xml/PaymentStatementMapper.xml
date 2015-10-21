@@ -323,6 +323,43 @@
 		</if>
 	</select>
 
+	<select id="selectPageListForMerchant" resultMap="DtoResultMap"
+			parameterType="java.util.Map">
+		select * from (select
+		pb.id, pb.type, pb.batch_no, pb.cycle_start_time,
+		pb.cycle_end_time,
+		pb.pay_total, pb.status, pb.pay_no,pb.create_at,
+		pb.status_update_time,
+		pbc.biz_name, pbc.biz_id, pbc.pay_channel,
+		pbc.biz_type,
+		bi.biz_email, bi.pay_account, bi.blank_name, bi.pay_name,
+		ol.desc,ol.create_user_id as download_user,ol.create_at as
+		download_time,pbc.roll_day,pbc.roll_type,pbc.pay_mode,pb.create_at as
+		predict_pay_time
+		from payment_bill pb
+		left join payment_bill_config pbc
+		on pb.config_id=pbc.id
+		left join biz_info bi on bi.config_id=pbc.id
+		left join op_log ol on ol.op_id=pb.id
+		where pb.status != 0 and pb.status != 2 and bi.biz_account = #{bussinessAccount,jdbcType=VARCHAR}
+		and ((pb.status=8 and ol.create_user_id=#{bussinessAccount,jdbcType=VARCHAR}) or (pb.status != 8))
+		<if test="statusList != null and statusList != ''">
+			and pb.status in
+			<foreach collection="statusList" index="index" item="item"
+					 open="(" separator="," close=")">
+				#{item,jdbcType=TINYINT}
+			</foreach>
+		</if>
+		order by pb.create_at,pb.status_update_time,ol.create_at desc
+		) tb
+		group by tb.id
+		order by tb.create_at desc,tb.status_update_time desc,tb.create_at desc
+		<if test="currentPage != null and pageSize != null">
+			limit
+			#{currentPage,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+		</if>
+	</select>
+
 	<select id="selectPageListCount" parameterType="java.util.Map"
 		resultType="java.lang.Integer">
 		select count(total.id) from (select pb.id from payment_bill pb
@@ -334,6 +371,27 @@
 		<where>
 			<include refid="list_where_clause" />
 		</where>
+		group by pb.id
+		) as total
+	</select>
+
+	<select id="selectPageListCountForMerchant" parameterType="java.util.Map"
+			resultType="java.lang.Integer">
+		select count(total.id) from (select pb.id from payment_bill pb
+		left
+		join payment_bill_config pbc on pb.config_id=pbc.id
+		left join biz_info
+		bi on bi.config_id=pbc.id
+		left join op_log ol on ol.op_id=pb.id
+		where pb.status != 0 and pb.status != 2 and bi.biz_account = #{bussinessAccount,jdbcType=VARCHAR}
+		and ((pb.status=8 and ol.create_user_id=#{bussinessAccount,jdbcType=VARCHAR}) or (pb.status != 8))
+		<if test="statusList != null and statusList != ''">
+			and pb.status in
+			<foreach collection="statusList" index="index" item="item"
+					 open="(" separator="," close=")">
+				#{item,jdbcType=TINYINT}
+			</foreach>
+		</if>
 		group by pb.id
 		) as total
 	</select>

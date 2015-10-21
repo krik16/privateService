@@ -154,17 +154,17 @@ public class PaymentStatementController extends BaseController {
 				}
 				map.put("bussinessAccount", getUserName(request));
 				if (searchStatus == 0) {// 全部
-					statusList.add(ConstantEnum.STATUS_1.getCodeByte());
-					statusList.add(ConstantEnum.STATUS_3.getCodeByte());
-					statusList.add(ConstantEnum.STATUS_4.getCodeByte());
-					statusList.add(ConstantEnum.STATUS_5.getCodeByte());
-					statusList.add(ConstantEnum.STATUS_12.getCodeByte());
+//					statusList.add(ConstantEnum.STATUS_1.getCodeByte());
+//					statusList.add(ConstantEnum.STATUS_3.getCodeByte());
+//					statusList.add(ConstantEnum.STATUS_4.getCodeByte());
+//					statusList.add(ConstantEnum.STATUS_5.getCodeByte());
+//					statusList.add(ConstantEnum.STATUS_12.getCodeByte());
 				} else if (searchStatus == 1) {// 待确认
 					statusList.add(ConstantEnum.STATUS_1.getCodeByte());
 					statusList.add(ConstantEnum.STATUS_3.getCodeByte());
 				} else if (searchStatus == 2) {// 已确认
 					statusList.add(ConstantEnum.STATUS_4.getCodeByte());
-					statusList.add(ConstantEnum.STATUS_12.getCodeByte());
+//					statusList.add(ConstantEnum.STATUS_12.getCodeByte());
 				} else if (searchStatus == 3) {// 不确认
 					statusList.add(ConstantEnum.STATUS_5.getCodeByte());
 				}
@@ -178,8 +178,11 @@ public class PaymentStatementController extends BaseController {
 			}
 			if (!statusList.isEmpty())
 				map.put("statusList", statusList);
-			List<PaymentStatementDto> list = paymentStatementService.selectPageList(map, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt());
+			List<PaymentStatementDto> list = new ArrayList<>();
+			Integer count = 0;
 			if (searchType == 5) {
+				list = paymentStatementService.selectPageListForMerchant(map, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt());
+				count = paymentStatementService.selectPageListCountForMerchant(map);
 				for (PaymentStatementDto paymentStatementDto : list) {
 					if (paymentStatementDto.getPayMode() != null && paymentStatementDto.getPayMode().equals(ConstantEnum.PAY_MODE_1.getCodeByte())) {// 滚动日期
 						if (paymentStatementDto.getRollType().equals(ConstantEnum.ROLL_TYPE_0.getCodeByte()) && !StringUtils.isEmpty(paymentStatementDto.getRollDay()))// 天
@@ -188,8 +191,11 @@ public class PaymentStatementController extends BaseController {
 							paymentStatementDto.setPredictPayTime(DateUtil.addHours(paymentStatementDto.getCreateAt(), Integer.valueOf(paymentStatementDto.getRollDay())));
 					}
 				}
+			} else {
+				list = paymentStatementService.selectPageList(map, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt());
+				count = paymentStatementService.selectPageListCount(map);
 			}
-			Integer count = paymentStatementService.selectPageListCount(map);
+
 			return ResponseData.success(list, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt(), count);
 		} catch (Exception e) {
 			e.printStackTrace();
