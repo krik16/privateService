@@ -57,4 +57,10 @@ public class DateUtils {
         SimpleDateFormat dateFormat = new SimpleDateFormat(FORMAT_DATE);
         return dateFormat.format(date);
     }
+
+    public static String getDateSimpleStr() {
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat(FORMAT_DATE_SIMPLE);
+        return dateFormat.format(date);
+    }
 }
