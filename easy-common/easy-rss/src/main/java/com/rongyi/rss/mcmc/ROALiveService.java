@@ -22,19 +22,22 @@ public interface ROALiveService {
 	/**
 	 * 通过买手id查询直播列表
 	 * @param bullId 买手id
-	 * @param commodityCount 需要返回的商品个数，如果为0，返回全部商品。
+	 * @param liveStatus 直播状态 -1全部，0发布，1上线，2下线
+	 * @param commodityStatus 商品状态 -1全部，0下架，1上架
+	 * @param commodityCount 需要返回的商品个数，如果为-1，返回全部商品。
 	 * @param page 页数
 	 * @param pageSize 页大小
 	 * @return 带List&lt;LiveVO&gt;的ResponseVO
 	 */
-	ResponseVO getLiveList(String bullId,int commodityCount,int page,int pageSize);
+	ResponseVO getLiveList(String bullId,int liveStatus,int commodityStatus,int commodityCount,int page,int pageSize);
 	
 	/**
 	 * 获取直播详情
 	 * @param id 直播id
+	 * @param commodityStatus 商品状态 ，-1全部，0下架，1上架
 	 * @return 带LiveVO的ResponseVO
 	 */
-	ResponseVO getLiveDetail(String id);
+	ResponseVO getLiveDetail(String id,int commodityStatus);
 	
 	/**
 	 * 获取买手信息
@@ -66,13 +69,4 @@ public interface ROALiveService {
 	 * @return 带List&lt;LiveBrandVO&gt;的ResponseVO
 	 */
 	ResponseVO getBrandList(String bullId,String liveId,int page,int pageSize);
-	
-	/**
-	 * 通过直播id查询直播
-	 * @param id 直播id
-	 * @return 返回带LiveVO的ResponseVO
-	 */
-	ResponseVO getLiveById(String id);
-	
-	
 }
