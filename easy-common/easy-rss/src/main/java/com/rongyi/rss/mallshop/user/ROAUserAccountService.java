@@ -29,7 +29,7 @@ public interface ROAUserAccountService {
 	 * @return
 	 * @throws MallShopException
 	 */
-	public List<UserAccountDto> getUserAccountListByUserId(Integer userId,Integer type,Integer userType)throws MallShopException;
+	public List<UserAccountDto> getUserAccountListByUserId(Integer userId,Integer type)throws MallShopException;
 
 
 
