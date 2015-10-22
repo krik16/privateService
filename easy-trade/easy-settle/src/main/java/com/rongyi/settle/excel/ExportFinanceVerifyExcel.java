@@ -82,7 +82,7 @@ public class ExportFinanceVerifyExcel extends ExportBase {
 				sheet.getRow(i + 2).getCell(7).setCellValue(paymentStatementDto.getPayName());
 				if (paymentStatementDto.getPayTotal() != null){
 					BigDecimal totalFee = new BigDecimal(paymentStatementDto.getPayTotal() + "").divide(new BigDecimal(100)).setScale(2, BigDecimal.ROUND_HALF_UP);
-					sheet.getRow(i + 2).getCell(8).setCellValue(totalFee.doubleValue());
+					sheet.getRow(i + 2).getCell(8).setCellValue(totalFee.toString());
 				}
 				sheet.getRow(i + 2).getCell(9).setCellValue(paymentStatementDto.getBussinessEmail());
 				sheet.getRow(i + 2).getCell(10).setCellValue(DateUtil.dateToString(paymentStatementDto.getCreateAt()));

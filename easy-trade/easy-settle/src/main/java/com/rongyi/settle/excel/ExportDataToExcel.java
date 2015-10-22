@@ -176,7 +176,7 @@ public class ExportDataToExcel {
 							sheet.getRow(i).getCell(7).setCellValue(dto.getBlankName());
 							if (dto.getPayTotal() != null){
 								BigDecimal totalFee = new BigDecimal(dto.getPayTotal() + "").divide(new BigDecimal(100)).setScale(2, BigDecimal.ROUND_HALF_UP);
-								sheet.getRow(i).getCell(8).setCellValue(totalFee.doubleValue());
+								sheet.getRow(i).getCell(8).setCellValue(totalFee.toString());
 							}
 							sheet.getRow(i).getCell(9).setCellValue("已下载");
 						}
@@ -192,5 +192,4 @@ public class ExportDataToExcel {
 			e.printStackTrace();
 		}
 	}
-
 }
