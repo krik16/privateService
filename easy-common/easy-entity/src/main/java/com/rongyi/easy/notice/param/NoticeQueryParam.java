@@ -115,4 +115,8 @@ public class NoticeQueryParam implements Serializable {
         this.currentPage = currentPage;
         this.pageSize = pageSize;
     }
+
+    public void setNoticeStatus(int noticeStatus) {
+//        this.noticeStatus = noticeStatus;
+    }
 }

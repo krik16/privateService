@@ -1,8 +1,9 @@
 package com.rongyi.rss.coupon;
 
 
-import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.coupon.entity.OldCoupon;
 import com.rongyi.easy.coupon.old_vo.OldCouponVO;
+import com.rongyi.rss.coupon.mall.shop.MSCouponService;
 import org.bson.types.ObjectId;
 
 import java.util.List;
@@ -10,11 +11,12 @@ import java.util.List;
 
 /**
  * 1.优惠券订单提交  2.查询优惠详情浏览次数
+ * 优惠券模板接口，提供给mall-shop的controller使用)
+ * 废弃不用，下步删除
  *
- * @author hebo
- *         优惠券模板接口，提供给mall-shop的controller使用)
- * @date 2015年6月8日 下午
+ * @see MSCouponService
  */
+@Deprecated
 public interface MMCouponService {
 
 
@@ -24,7 +26,8 @@ public interface MMCouponService {
      * @param id
      * @return
      */
-    public Coupon findCouponById(ObjectId id);
+    @Deprecated
+    public OldCoupon findCouponById(ObjectId id);
 
     /**
      * 老优惠:通过id修改优惠券详情浏览次数
@@ -32,6 +35,7 @@ public interface MMCouponService {
      * @param couponId
      * @return FavourableVO
      */
+    @Deprecated
     public void addCouponVistiedCount(String couponId, int visitedCount);
 
     /**
@@ -40,6 +44,7 @@ public interface MMCouponService {
      * @param ids
      * @return
      */
+    @Deprecated
     public List<OldCouponVO> findCouponDetailByIds(List<String> ids);
 
     /**
@@ -48,5 +53,6 @@ public interface MMCouponService {
      * @param ids
      * @return
      */
+    @Deprecated
     public List<OldCouponVO> findCouponIndexByIds(List<String> ids);
 }

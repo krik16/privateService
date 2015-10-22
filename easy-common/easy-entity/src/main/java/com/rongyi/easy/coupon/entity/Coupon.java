@@ -1,233 +1,467 @@
 package com.rongyi.easy.coupon.entity;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.ListUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.bson.types.ObjectId;
-import org.mongodb.morphia.annotations.*;
 
+import java.beans.Transient;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 /**
- * 卡券信息
- * 类型：代金券、红包、抵扣券
+ * 新版卡券基础数据
  *
- * @author Breggor
+ * @author Boreggor
+ * @version 2.0
  */
-
-@Deprecated
-@Entity(value = "coupon", noClassnameStored = true)
 public class Coupon implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    private ObjectId id;// 券id
+    /**
+     * 主键(兼容mongoId)
+     */
+    private String id;
 
-    private String title;// 券名称
+    /**
+     * 卡券名称
+     */
+    private String name;
 
-    @Property("coupon_type")
-    private String couponType;// 券类型: 优惠券[02] 现金券[03]
+    /**
+     * 卡券类型:代金券[0], 抵扣券[1], 红包[2]
+     */
+    private Integer couponType;
 
-    @Property("total_count")
-    private Integer totalCount;// 总量
+    /**
+     * 验证方式：容易后验证[0], 互动屏票据[1], 两者兼容[2]
+     */
+    private Integer validateType;
 
-    @Property("limit_count")
-    private Integer limitCount;// 每人限购数量
+    /**
+     * 券码发行量
+     */
+    private Integer totalCount;
 
-    @Property("limit_publish_count")
-    private Integer limitPublishCount;// 每日限量发行张数
+    /**
+     * 库存量
+     */
+    private Integer stockCount;
 
-    @Property("limit_use_count")
-    private Integer limitUseCount;// 每人每日限用张数
+    /**
+     * 原价
+     */
+    private Integer origPrice;
 
-    @Property("receive_count")
-    private Integer receiveCount = Integer.valueOf(0);// 已领取数
+    /**
+     * 现价
+     */
+    private Integer currPrice;
 
-    private Double discount;// 折扣价
+    /**
+     * 折扣价,属于红包字段
+     */
+    private Integer discount;
 
-    private String recommend;// 推荐说明
+    /**
+     * 展示区域：常规区域,活动区域;未选中[0]，选中[1] 例如 "1,1"表示都选中
+     */
+    private String displayRegion;
 
-    @Property("validate_type")
-    private String validateType;// 验证方式 0：容易后验证 1:互动屏票据 2:两者兼容
+    /**
+     * 大运营平台，平台代金券 售后:随时退,过期退,免预约 ；未选中[0]，选中[1] 例如 "1,1,1"表示都选中
+     */
+    private String afterSaleService;
 
-    @Property("original_price")
-    private Double originalPrice;// 原价
+    /**
+     * 发布开始时间
+     */
+    private Date publishStartAt;
 
-    @Property("current_price")
-    private Double currentPrice;// 现价
-
-    private String type;// 配置类型 0:商场 1:店铺；现金券 0：全场，1：商品
-
-    @Property("check_description")
-    private String checkDescription;// 审核未通过信息描述
-
-    @Property("list_pic_url")
-    private String listPicUrl;// 列表图url
-
-    @Property("detail_pic_urls")
-    private List<String> detailPicUrls;// 详情图url
-
-    @Property("source_target")
-    private String sourceTarget;// 信息渠道 0：大运营管理平台 1：百货管理平台 2:摩店管理平台 3：摩店App
-
-    @Property("syn_target")
-    private String synTarget;// 信息同步终端包含“互动屏:0、微信:1、摩生活:2”。（考虑）
-
-    @Property("syn_status")
-    private String synStatus;// 同步状态 0： 待同步 1：已同步 审核已通过将状态置为 1 反之置为0
-
-    @Property("operate_type")
-    private String operateType;// 新增 [0] 修改[1] 删除[2] 用来百货今日重点显示用 信息渠道为1：百货管理平台
-
-    @Embedded("malls")
-    private List<CouponMall> malls = new ArrayList<CouponMall>();// 关联商场集合
-
-    @Embedded("shops")
-    private List<CouponShop> shops = new ArrayList<CouponShop>();// 关联店铺集合
-
-    private String status; // 状态(审核中[0]、已上线[1]、已使用[2]、已过期[3]、已下线[4]), 规则：比如100张优惠券有一张被领用将状态置为2，被领用后就不能对优惠券进行操作了
+    /**
+     * 发布结束时间
+     */
+    private Date publishEndAt;
 
 
-    @Property("check_status")
-    private String checkStatus;// 审核状态 0：待审核 1：未通过 2：已通过
+    /**
+     * 销售开始时间
+     */
+    private Date saleStartAt;
 
-    @Property("activity_status")
-    private String activityStatus;// 是否关联活动 未关联 [0] 关联翻牌购[1] 关联推送[2]
+    /**
+     * 销售结束时间
+     */
+    private Date saleEndAt;
 
-    @Property("del_status")
-    private String delStatus;// 是否删除 'Y' 删除 'N' 未删除
+    /**
+     * 有效期开始时间
+     */
+    private Date validStartAt;
 
-    @Property("publish_begin_date")
-    private Date publishBeginDate;// 发布开始时间
+    /**
+     * 有效期结束时间
+     */
+    private Date validEndAt;
 
-    @Property("publish_end_date")
-    private Date publishEndDate;// 发布结束时间
+    /**
+     * 使用限制
+     */
+    private String limitDesc;
 
-    @Property("valid_begin_date")
-    private Date validBeginDate;// 有效期开始时间
+    /**
+     * 使用说明
+     */
+    private String usageDesc;
 
-    @Property("valid_end_date")
-    private Date validEndDate;// 有效期结束时间
+    /**
+     * 推荐说明，属于红包字段
+     */
+    private String recommend;
 
-    @Property("create_user")
-    private String createUser;// 创建人id
+    /**
+     * 备注
+     */
+    private String remark;
 
-    @Property("create_date")
-    private Date createDate;// 创建时间
+    /**
+     * 列表图url,只有一张
+     */
+    private String listPicUrl;
 
-    @Property("update_user")
-    private String updateUser;// 修改人id
+    /**
+     * 详情图url，多张图以";"隔开
+     */
+    private String detailPicUrl;
 
-    @Property("update_date")
-    private Date updateDate;// 修改时间
+    /**
+     * 关联类型
+     * 代金券：集团[0],品牌[1], 商场 [2],店铺[3];
+     * 红包 ：全场[0],商品[1]
+     */
+    private Integer relatedType;
 
-    @Property("use_restriction")
-    private String useRestriction;// 使用限制
+    /**
+     * 每人限购数量
+     */
+    private Integer limitCount;
 
-    @Property("use_description")
-    private String useDescription;// 使用说明 对应老优惠券使用方式
+    /**
+     * 每人每日限用张数
+     */
+    private Integer limitUseCount;
 
-    @Property("source_mall_id")
-    private String sourceMallId;// 百货平台当前管理员所在的商场id
+    /**
+     * 每日最大发行张数
+     */
+    private Integer limitPublishCount;
 
-    @Embedded("products")
-    private List<CouponProduct> products = new ArrayList<CouponProduct>(); // 现金劵关联商品
+    /**
+     * 信息同步终端: 容易逛,互动屏,微信 [1,1,1]表示三个都没选中
+     */
+    private String synTarget;
 
-    @Property("visited_count")
-    private Integer visitedCount = Integer.valueOf(0);//卡券详情浏览数
+    /**
+     * 卡券发布渠道：大运营平台[0], 商家管理后台[1]
+     */
+    private Integer publishChannel;
 
-    @Property("sort_index")
-    private Integer sortIndex = Integer.valueOf(0);//优惠券排序字段，目前作用是置顶
+    /**
+     * 状态: 待审核[0], 审核未通过[1], 审核通过[2]
+     */
+    private Integer status;
 
-    @Property("purchase_type")
+    /**
+     * 导入渠道
+     */
+    private Integer inChannel;
+
+    /**
+     * 导入渠道名称
+     */
+    private String inChannelName;
+
+    /**
+     * 推广渠道
+     */
+    private Integer outChannel;
+
+    /**
+     * 推广渠道名称
+     */
+    private String outChannelName;
+
+    /**
+     * 店铺对应的公司名
+     */
+    private String sourceName;
+
+    /**
+     * 创建人
+     */
+    private String createUser;
+
+    /**
+     * 创建时间
+     */
+    private Date createAt;
+
+    /**
+     * 更新人
+     */
+    private String updateUser;
+
+    /**
+     * 更新时间
+     */
+    private Date updateAt;
+
+    /**
+     * 是否是第三方券 否[false], 是[true], 默认不是第三方券fasle
+     */
+    private Boolean isThird;
+
+    /**
+     * 是否已下架 初始状态[false]，已下架[true], 默认false
+     */
+    private Boolean isOffStock;
+
+    /**
+     * 是否删除：否[false], 是[true], 默认为false未删除
+     */
+    private Boolean isDeleted;
+
+    /**
+     * 代金券分类
+     */
+    private CouponCategory couponCategory;
+
+    /**
+     * 代金券关联的集团
+     */
+    private CouponGroup couponGroup;
+
+    /**
+     * 代金券关联的品牌
+     */
+    private CouponBrand couponBrand;
+
+    /**
+     * 代金券关联的商场
+     */
+//    private CouponMall couponMall;
+
+    /**
+     * 代金券关联的店铺
+     */
+    private List<CouponShop> couponShops;
+
+    /**
+     * 关联的商场列表
+     */
+    private List<CouponMall> couponMalls;
+
+
+    /**
+     * 优惠方式 1：满减 ；2：立减。
+     */
+    private Integer preferentialType;
+
+    /**
+     * 红包关联的商品  related_type只有这个类型是1 并且coupon_type 为2 的时候  才有这个类型
+     */
+    private List<CouponCommodity> couponCommodities;
+
+
     private Integer purchaseType = Integer.valueOf(0);//购买类型 0正常购买类型 1抢购类型
 
-    private List<Integer> afterSaleService; // = CouponConst.AFTER_SALE_SERVICE;//[1,1,1,1] 1为支持，0为不支持。第一位：随时退、第二位：过期退 第三位： 免预约、第四位：不可退
+    private Integer visitedCount = Integer.valueOf(0);//卡券详情浏览数
 
-    @Version
-    private Long version; // 乐观锁
+    /**
+     * 是否是通用券，特指集团或商场发布的且只能在商场总台验券的券，例如：停车券等券
+     * 默认 false;
+     */
+    private Boolean isGeneral;
 
-    public ObjectId getId() {
+    /**
+     * 是否已关联活动 已关联[true] 未关联[false]默认为false
+     */
+    private Boolean isRelatedActivity;
+
+
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getCouponType() {
+    public Integer getCouponType() {
         return couponType;
     }
 
-    public void setCouponType(String couponType) {
+    public void setCouponType(Integer couponType) {
         this.couponType = couponType;
     }
 
-    public Integer getPurchaseType() {
-        return purchaseType;
+    public Integer getValidateType() {
+        return validateType;
     }
 
-    public void setPurchaseType(Integer purchaseType) {
-        this.purchaseType = purchaseType;
+    public void setValidateType(Integer validateType) {
+        this.validateType = validateType;
     }
 
     public Integer getTotalCount() {
-        return (totalCount == null) ? Integer.valueOf(0) : totalCount;
+        return totalCount;
     }
 
     public void setTotalCount(Integer totalCount) {
         this.totalCount = totalCount;
     }
 
-    public Integer getLimitCount() {
-        return (limitCount == null) ? Integer.valueOf(0) : limitCount;
+    public Integer getStockCount() {
+        return stockCount;
     }
 
-    public void setLimitCount(Integer limitCount) {
-        this.limitCount = limitCount;
+    public void setStockCount(Integer stockCount) {
+        this.stockCount = stockCount;
     }
 
-    public Integer getLimitPublishCount() {
-        return (limitPublishCount == null) ? Integer.valueOf(0) : limitPublishCount;
+    public Integer getOrigPrice() {
+        return origPrice;
     }
 
-    public void setLimitPublishCount(Integer limitPublishCount) {
-        this.limitPublishCount = limitPublishCount;
+    public double getOrigPrice2Double() {
+        double val = 0D;
+        if (origPrice != null) {
+            val = BigDecimal.valueOf(origPrice).divide(BigDecimal.valueOf(100.00D)).setScale(2).doubleValue();
+        }
+        return val;
     }
 
-    public Integer getLimitUseCount() {
-        return (limitUseCount == null) ? Integer.valueOf(0) : limitUseCount;
+    public void setOrigPrice(Integer origPrice) {
+        this.origPrice = origPrice;
     }
 
-    public void setLimitUseCount(Integer limitUseCount) {
-        this.limitUseCount = limitUseCount;
+    public Integer getCurrPrice() {
+        return currPrice;
     }
 
-    public Integer getReceiveCount() {
-        return (receiveCount == null) ? Integer.valueOf(0) : receiveCount;
+    public double getCurrPrice2Double() {
+        double val = 0D;
+        if (currPrice != null) {
+            val = BigDecimal.valueOf(currPrice).divide(BigDecimal.valueOf(100.00D)).setScale(2).doubleValue();
+        }
+        return val;
     }
 
-    public void setReceiveCount(Integer receiveCount) {
-        this.receiveCount = receiveCount;
+    public void setCurrPrice(Integer currPrice) {
+        this.currPrice = currPrice;
     }
 
-    public Double getDiscount() {
-        return (discount == null) ? Double.valueOf(0.00D) : discount;
+    public Integer getDiscount() {
+        return discount;
     }
 
-    public void setDiscount(Double discount) {
+    public double getDiscount2Double() {
+        double val = 0D;
+        if (discount != null) {
+            val = BigDecimal.valueOf(discount).divide(BigDecimal.valueOf(100.00D)).setScale(2).doubleValue();
+        }
+        return val;
+    }
+
+    public void setDiscount(Integer discount) {
         this.discount = discount;
+    }
+
+    public String getDisplayRegion() {
+        return displayRegion;
+    }
+
+    public void setDisplayRegion(String displayRegion) {
+        this.displayRegion = displayRegion;
+    }
+
+    public String getAfterSaleService() {
+        return afterSaleService;
+    }
+
+    public List<Integer> getAfterSaleService2List() {
+        List<Integer> list = new ArrayList<>();
+        if (StringUtils.isNotBlank(afterSaleService)) {
+            for (String e : afterSaleService.split(",")) {
+                list.add(Integer.valueOf(e));
+            }
+        }
+        return list;
+    }
+
+    public void setAfterSaleService(String afterSaleService) {
+        this.afterSaleService = afterSaleService;
+    }
+
+    public Date getPublishStartAt() {
+        return publishStartAt;
+    }
+
+    public void setPublishStartAt(Date publishStartAt) {
+        this.publishStartAt = publishStartAt;
+    }
+
+    public Date getPublishEndAt() {
+        return publishEndAt;
+    }
+
+    public void setPublishEndAt(Date publishEndAt) {
+        this.publishEndAt = publishEndAt;
+    }
+
+    public Date getValidStartAt() {
+        return validStartAt;
+    }
+
+    public void setValidStartAt(Date validStartAt) {
+        this.validStartAt = validStartAt;
+    }
+
+    public Date getValidEndAt() {
+        return validEndAt;
+    }
+
+    public void setValidEndAt(Date validEndAt) {
+        this.validEndAt = validEndAt;
+    }
+
+    public String getLimitDesc() {
+        return limitDesc;
+    }
+
+    public void setLimitDesc(String limitDesc) {
+        this.limitDesc = limitDesc;
+    }
+
+    public String getUsageDesc() {
+        return usageDesc;
+    }
+
+    public void setUsageDesc(String usageDesc) {
+        this.usageDesc = usageDesc;
     }
 
     public String getRecommend() {
@@ -238,52 +472,12 @@ public class Coupon implements Serializable {
         this.recommend = recommend;
     }
 
-    public String getValidateType() {
-        return validateType;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setValidateType(String validateType) {
-        this.validateType = validateType;
-    }
-
-    public Double getOriginalPrice() {
-        return originalPrice;
-    }
-
-    public void setOriginalPrice(Double originalPrice) {
-        this.originalPrice = originalPrice;
-    }
-
-    public Double getCurrentPrice() {
-        return currentPrice;
-    }
-
-    public void setCurrentPrice(Double currentPrice) {
-        this.currentPrice = currentPrice;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getCheckStatus() {
-        return checkStatus;
-    }
-
-    public void setCheckStatus(String checkStatus) {
-        this.checkStatus = checkStatus;
-    }
-
-    public String getCheckDescription() {
-        return checkDescription;
-    }
-
-    public void setCheckDescription(String checkDescription) {
-        this.checkDescription = checkDescription;
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public String getListPicUrl() {
@@ -294,20 +488,65 @@ public class Coupon implements Serializable {
         this.listPicUrl = listPicUrl;
     }
 
+    public String getDetailPicUrl() {
+        return detailPicUrl;
+    }
+
     public List<String> getDetailPicUrls() {
-        return detailPicUrls;
+        List<String> list = ListUtils.EMPTY_LIST;
+        if (StringUtils.isNotBlank(detailPicUrl)) {
+            list = Arrays.asList(detailPicUrl.split(";"));
+        }
+        return list;
     }
 
-    public void setDetailPicUrls(List<String> detailPicUrls) {
-        this.detailPicUrls = detailPicUrls;
+    /**
+     * 优惠券缩略图
+     *
+     * @return
+     */
+    public String getThumbnail() {
+        String pic = "";
+        if (!this.getDetailPicUrls().isEmpty()) {
+            pic = this.getDetailPicUrls().get(0);
+        }
+        return pic;
     }
 
-    public String getSourceTarget() {
-        return sourceTarget;
+    public void setDetailPicUrl(String detailPicUrl) {
+        this.detailPicUrl = detailPicUrl;
     }
 
-    public void setSourceTarget(String sourceTarget) {
-        this.sourceTarget = sourceTarget;
+    public Integer getRelatedType() {
+        return relatedType;
+    }
+
+    public void setRelatedType(Integer relatedType) {
+        this.relatedType = relatedType;
+    }
+
+    public Integer getLimitCount() {
+        return limitCount;
+    }
+
+    public void setLimitCount(Integer limitCount) {
+        this.limitCount = limitCount;
+    }
+
+    public Integer getLimitUseCount() {
+        return limitUseCount;
+    }
+
+    public void setLimitUseCount(Integer limitUseCount) {
+        this.limitUseCount = limitUseCount;
+    }
+
+    public Integer getLimitPublishCount() {
+        return limitPublishCount;
+    }
+
+    public void setLimitPublishCount(Integer limitPublishCount) {
+        this.limitPublishCount = limitPublishCount;
     }
 
     public String getSynTarget() {
@@ -318,128 +557,60 @@ public class Coupon implements Serializable {
         this.synTarget = synTarget;
     }
 
-    public String getSynStatus() {
-        return synStatus;
+    public Integer getPublishChannel() {
+        return publishChannel;
     }
 
-    public void setSynStatus(String synStatus) {
-        this.synStatus = synStatus;
+    public void setPublishChannel(Integer publishChannel) {
+        this.publishChannel = publishChannel;
     }
 
-    public String getOperateType() {
-        return operateType;
-    }
-
-    public void setOperateType(String operateType) {
-        this.operateType = operateType;
-    }
-
-    public List<CouponMall> getMalls() {
-        return malls;
-    }
-
-    public void setMalls(List<CouponMall> malls) {
-        this.malls = malls;
-    }
-
-    public List<CouponShop> getShops() {
-        return shops;
-    }
-
-    public void setShops(List<CouponShop> shops) {
-        this.shops = shops;
-    }
-
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
-    public String getActivityStatus() {
-        return activityStatus;
+    public Integer getInChannel() {
+        return inChannel;
     }
 
-    public void setActivityStatus(String activityStatus) {
-        this.activityStatus = activityStatus;
+    public void setInChannel(Integer inChannel) {
+        this.inChannel = inChannel;
     }
 
-    public String getDelStatus() {
-        return delStatus;
+    public Integer getOutChannel() {
+        return outChannel;
     }
 
-    public void setDelStatus(String delStatus) {
-        this.delStatus = delStatus;
+    public void setOutChannel(Integer outChannel) {
+        this.outChannel = outChannel;
     }
 
-    public Date getPublishBeginDate() {
-        return publishBeginDate;
+    public String getSourceName() {
+        return sourceName;
     }
 
-    public void setPublishBeginDate(Date publishBeginDate) {
-//        if (publishBeginDate != null) {
-//            publishBeginDate = DateUtils.setHours(publishBeginDate, 0);
-//            publishBeginDate = DateUtils.setMinutes(publishBeginDate, 0);
-//            publishBeginDate = DateUtils.setSeconds(publishBeginDate, 0);
-//        }
-        this.publishBeginDate = publishBeginDate;
-    }
-
-    public Date getPublishEndDate() {
-        return publishEndDate;
-    }
-
-    public void setPublishEndDate(Date publishEndDate) {
-//        if (publishEndDate != null) {
-//            publishEndDate = DateUtils.setHours(publishEndDate, 23);
-//            publishEndDate = DateUtils.setMinutes(publishEndDate, 59);
-//            publishEndDate = DateUtils.setSeconds(publishEndDate, 59);
-//        }
-        this.publishEndDate = publishEndDate;
-    }
-
-    public Date getValidBeginDate() {
-        return validBeginDate;
-    }
-
-    public void setValidBeginDate(Date validBeginDate) {
-//        if (validBeginDate != null) {
-//            validBeginDate = DateUtils.setHours(validBeginDate, 0);
-//            validBeginDate = DateUtils.setMinutes(validBeginDate, 0);
-//            validBeginDate = DateUtils.setSeconds(validBeginDate, 0);
-//        }
-        this.validBeginDate = validBeginDate;
-    }
-
-    public Date getValidEndDate() {
-        return validEndDate;
-    }
-
-    public void setValidEndDate(Date validEndDate) {
-//        if (validEndDate != null) {
-//            validEndDate = DateUtils.setHours(validEndDate, 23);
-//            validEndDate = DateUtils.setMinutes(validEndDate, 59);
-//            validEndDate = DateUtils.setSeconds(validEndDate, 59);
-//        }
-        this.validEndDate = validEndDate;
+    public void setSourceName(String sourceName) {
+        this.sourceName = sourceName;
     }
 
     public String getCreateUser() {
-        return StringUtils.isBlank(createUser) ? "" : createUser;
+        return createUser;
     }
 
     public void setCreateUser(String createUser) {
         this.createUser = createUser;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public Date getCreateAt() {
+        return createAt;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
     }
 
     public String getUpdateUser() {
@@ -450,53 +621,122 @@ public class Coupon implements Serializable {
         this.updateUser = updateUser;
     }
 
-    public Date getUpdateDate() {
-        return updateDate;
+    public Date getUpdateAt() {
+        return updateAt;
     }
 
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
+    public void setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
     }
 
-    public String getUseRestriction() {
-        return useRestriction;
+    public Boolean getIsThird() {
+        return isThird;
     }
 
-    public void setUseRestriction(String useRestriction) {
-        this.useRestriction = useRestriction;
+    public void setIsThird(Boolean isThird) {
+        this.isThird = isThird;
     }
 
-    public String getUseDescription() {
-        return useDescription;
+    public Boolean getIsOffStock() {
+        return isOffStock;
     }
 
-    public void setUseDescription(String useDescription) {
-        this.useDescription = useDescription;
+    public void setIsOffStock(Boolean isOffStock) {
+        this.isOffStock = isOffStock;
     }
 
-    public String getSourceMallId() {
-        return sourceMallId;
+    public Boolean getIsDeleted() {
+        return isDeleted;
     }
 
-    public void setSourceMallId(String sourceMallId) {
-        this.sourceMallId = sourceMallId;
+    public void setIsDeleted(Boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
-    public List<CouponProduct> getProducts() {
-        return products;
+    public CouponCategory getCouponCategory() {
+        return couponCategory;
     }
 
-    public void setProducts(List<CouponProduct> products) {
-        this.products = products;
+    public void setCouponCategory(CouponCategory couponCategory) {
+        this.couponCategory = couponCategory;
     }
 
-    public Long getVersion() {
-        return version;
+    public CouponGroup getCouponGroup() {
+        return couponGroup;
     }
 
-    public void setVersion(Long version) {
-        this.version = version;
+    public void setCouponGroup(CouponGroup couponGroup) {
+        this.couponGroup = couponGroup;
     }
+
+    public CouponBrand getCouponBrand() {
+        return couponBrand;
+    }
+
+    public void setCouponBrand(CouponBrand couponBrand) {
+        this.couponBrand = couponBrand;
+    }
+
+//    public CouponMall getCouponMall() {
+//        return couponMall;
+//    }
+//
+//    public void setCouponMall(CouponMall couponMall) {
+//        this.couponMall = couponMall;
+//    }
+
+    public List<CouponShop> getCouponShops() {
+        return couponShops;
+    }
+
+    public void setCouponShops(List<CouponShop> couponShops) {
+        this.couponShops = couponShops;
+    }
+
+    public List<CouponMall> getCouponMalls() {
+        return couponMalls;
+    }
+
+    public void setCouponMalls(List<CouponMall> couponMalls) {
+        this.couponMalls = couponMalls;
+    }
+
+    public Integer getPreferentialType() {
+        return preferentialType;
+    }
+
+    public void setPreferentialType(Integer preferentialType) {
+        this.preferentialType = preferentialType;
+    }
+
+    public List<CouponCommodity> getCouponCommodities() {
+        return couponCommodities;
+    }
+
+    public void setCouponCommodities(List<CouponCommodity> couponCommodities) {
+        this.couponCommodities = couponCommodities;
+    }
+
+    @Transient
+    public List<String> getCouponCommodityIds() {
+        List<String> list = ListUtils.EMPTY_LIST;
+        if (CollectionUtils.isNotEmpty(couponCommodities)) {
+            list = new ArrayList<>();
+            for (CouponCommodity e : couponCommodities) {
+                list.add(e.getCommodityId());
+            }
+        }
+        return list;
+    }
+
+    public Integer getPurchaseType() {
+        return purchaseType;
+    }
+
+    public void setPurchaseType(Integer purchaseType) {
+        this.purchaseType = purchaseType;
+    }
+
 
     public Integer getVisitedCount() {
         return visitedCount;
@@ -506,294 +746,115 @@ public class Coupon implements Serializable {
         this.visitedCount = visitedCount;
     }
 
-    public Integer getSortIndex() {
-        return sortIndex;
+    public Date getSaleStartAt() {
+        return saleStartAt;
     }
 
-    public void setSortIndex(Integer sortIndex) {
-        this.sortIndex = sortIndex;
+    public void setSaleStartAt(Date saleStartAt) {
+        this.saleStartAt = saleStartAt;
     }
 
-    /**
-     * 剩余库存量
-     *
-     * @return
-     */
-    public int getRestAmount() {
-        int amount = this.getTotalCount() - this.getReceiveCount();
-        return (amount < 0) ? 0 : amount;
+    public Date getSaleEndAt() {
+        return saleEndAt;
     }
 
-    /**
-     * 优惠券缩略图
-     *
-     * @return
-     */
-    public String getThumbnail() {
-        String pic = "";
-        if (this.detailPicUrls != null && !this.detailPicUrls.isEmpty())
-            pic = this.detailPicUrls.get(0);
-        return pic;
+    public void setSaleEndAt(Date saleEndAt) {
+        this.saleEndAt = saleEndAt;
     }
 
-    public List<Integer> getAfterSaleService() {
-        return afterSaleService;
+    public Integer getSaledCount() {
+        return (totalCount - stockCount < 0) ? 0 : totalCount - stockCount;
     }
 
-    public void setAfterSaleService(List<Integer> afterSaleService) {
-        this.afterSaleService = afterSaleService;
+    public Boolean getIsGeneral() {
+        return isGeneral;
     }
 
-    public static class CouponProduct implements Serializable {
-
-        private static final long serialVersionUID = 1L;
-
-        @Property("product_id")
-        private String productId;
-
-        @Property("market_name")
-        private String marketName;
-
-        @Property("shop_name")
-        private String shopName;
-
-        @Property("product_num")
-        private String productNum;
-
-        @Property("product_name")
-        private String productName;
-
-        private List<String> pics;// 商品图片
-
-        private String status;
-
-        public String getProductId() {
-            return productId;
-        }
-
-        public void setProductId(String productId) {
-            this.productId = productId;
-        }
-
-        public String getMarketName() {
-            return marketName;
-        }
-
-        public void setMarketName(String marketName) {
-            this.marketName = marketName;
-        }
-
-        public String getShopName() {
-            return shopName;
-        }
-
-        public void setShopName(String shopName) {
-            this.shopName = shopName;
-        }
-
-        public String getProductNum() {
-            return productNum;
-        }
-
-        public void setProductNum(String productNum) {
-            this.productNum = productNum;
-        }
-
-        public String getProductName() {
-            return productName;
-        }
-
-        public void setProductName(String productName) {
-            this.productName = productName;
-        }
-
-        public String getStatus() {
-            return status;
-        }
-
-        public void setStatus(String status) {
-            this.status = status;
-        }
-
-        public List<String> getPics() {
-            return pics;
-        }
-
-        public void setPics(List<String> pics) {
-            this.pics = pics;
-        }
-
-        @Override
-        public String toString() {
-            return new ToStringBuilder(this).append("productId", productId).append("marketName", marketName)
-                    .append("shopName", shopName).append("productNum", productNum).append("productName", productName)
-                    .append("pics", pics).append("status", status).toString();
-        }
-
+    public void setIsGeneral(Boolean isGeneral) {
+        this.isGeneral = isGeneral;
     }
 
-    public static class CouponMall implements Serializable {
-
-        private static final long serialVersionUID = 1L;
-        private String id;
-
-        @Property("mall_name")
-        private String mallName;
-
-        @Property("mall_address")
-        private String mallAddress;
-
-        @Property("mall_logo_url")
-        private String mallLogoUrl;
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public String getMallName() {
-            return mallName;
-        }
-
-        public void setMallName(String mallName) {
-            this.mallName = mallName;
-        }
-
-        public String getMallAddress() {
-            return mallAddress;
-        }
-
-        public void setMallAddress(String mallAddress) {
-            this.mallAddress = mallAddress;
-        }
-
-        public String getMallLogoUrl() {
-            return mallLogoUrl;
-        }
-
-        public void setMallLogoUrl(String mallLogoUrl) {
-            this.mallLogoUrl = mallLogoUrl;
-        }
-
-        @Override
-        public String toString() {
-            return new ToStringBuilder(this).append("id", id).append("mallName", mallName)
-                    .append("mallAddress", mallAddress).append("mallLogoUrl", mallLogoUrl).toString();
-        }
-
+    public String getInChannelName() {
+        return inChannelName;
     }
 
-    public static class CouponShop implements Serializable {
-
-        private static final long serialVersionUID = 1L;
-        private String id;
-
-        @Property("shop_name")
-        private String shopName;
-
-        @Property("mall_name")
-        private String mallName;
-
-        @Property("shop_logo_url")
-        private String shopLogoUrl;
-
-        @Property("brand_name")
-        private String brandName;
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public String getShopName() {
-            return shopName;
-        }
-
-        public void setShopName(String shopName) {
-            this.shopName = shopName;
-        }
-
-        public String getMallName() {
-            return mallName;
-        }
-
-        public void setMallName(String mallName) {
-            this.mallName = mallName;
-        }
-
-        public String getShopLogoUrl() {
-            return shopLogoUrl;
-        }
-
-        public void setShopLogoUrl(String shopLogoUrl) {
-            this.shopLogoUrl = shopLogoUrl;
-        }
-
-        public String getBrandName() {
-            return brandName;
-        }
-
-        public void setBrandName(String brandName) {
-            this.brandName = brandName;
-        }
-
-        @Override
-        public String toString() {
-            return new ToStringBuilder(this).append("id", id).append("shopName", shopName).append("mallName", mallName)
-                    .append("shopLogoUrl", shopLogoUrl).append("brandName", brandName).toString();
-        }
-
+    public void setInChannelName(String inChannelName) {
+        this.inChannelName = inChannelName;
     }
+
+    public String getOutChannelName() {
+        return outChannelName;
+    }
+
+    public void setOutChannelName(String outChannelName) {
+        this.outChannelName = outChannelName;
+    }
+
+    public Boolean getIsRelatedActivity() {
+        return isRelatedActivity;
+    }
+
+    public void setIsRelatedActivity(Boolean isRelatedActivity) {
+        this.isRelatedActivity = isRelatedActivity;
+    }
+
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Coupon [id=").append(id).append(", title=")
-                .append(title).append(", couponType=").append(couponType)
-                .append(", totalCount=").append(totalCount)
-                .append(", limitCount=").append(limitCount)
-                .append(", limitPublishCount=").append(limitPublishCount)
-                .append(", limitUseCount=").append(limitUseCount)
-                .append(", receiveCount=").append(receiveCount)
-                .append(", discount=").append(discount).append(", recommend=")
-                .append(recommend).append(", validateType=")
-                .append(validateType).append(", originalPrice=")
-                .append(originalPrice).append(", currentPrice=")
-                .append(currentPrice).append(", type=").append(type)
-                .append(", checkDescription=").append(checkDescription)
-                .append(", listPicUrl=").append(listPicUrl)
-                .append(", detailPicUrls=").append(detailPicUrls)
-                .append(", sourceTarget=").append(sourceTarget)
-                .append(", synTarget=").append(synTarget)
-                .append(", synStatus=").append(synStatus)
-                .append(", operateType=").append(operateType)
-                .append(", malls=").append(malls).append(", shops=")
-                .append(shops).append(", status=").append(status)
-                .append(", checkStatus=").append(checkStatus)
-                .append(", activityStatus=").append(activityStatus)
-                .append(", delStatus=").append(delStatus)
-                .append(", publishBeginDate=").append(publishBeginDate)
-                .append(", publishEndDate=").append(publishEndDate)
-                .append(", validBeginDate=").append(validBeginDate)
-                .append(", validEndDate=").append(validEndDate)
-                .append(", createUser=").append(createUser)
-                .append(", createDate=").append(createDate)
-                .append(", updateUser=").append(updateUser)
-                .append(", updateDate=").append(updateDate)
-                .append(", useRestriction=").append(useRestriction)
-                .append(", useDescription=").append(useDescription)
-                .append(", sourceMallId=").append(sourceMallId)
-                .append(", products=").append(products)
-                .append(", visitedCount=").append(visitedCount)
-                .append(", sortIndex=").append(sortIndex).append(", version=")
-                .append(version).append("]");
-        return builder.toString();
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("name", name)
+                .append("couponType", couponType)
+                .append("validateType", validateType)
+                .append("totalCount", totalCount)
+                .append("stockCount", stockCount)
+                .append("origPrice", origPrice)
+                .append("currPrice", currPrice)
+                .append("discount", discount)
+                .append("displayRegion", displayRegion)
+                .append("afterSaleService", afterSaleService)
+                .append("publishStartAt", publishStartAt)
+                .append("publishEndAt", publishEndAt)
+                .append("saleStartAt", saleStartAt)
+                .append("saleEndAt", saleEndAt)
+                .append("validStartAt", validStartAt)
+                .append("validEndAt", validEndAt)
+                .append("limitDesc", limitDesc)
+                .append("usageDesc", usageDesc)
+                .append("recommend", recommend)
+                .append("remark", remark)
+                .append("listPicUrl", listPicUrl)
+                .append("detailPicUrl", detailPicUrl)
+                .append("relatedType", relatedType)
+                .append("limitCount", limitCount)
+                .append("limitUseCount", limitUseCount)
+                .append("limitPublishCount", limitPublishCount)
+                .append("synTarget", synTarget)
+                .append("publishChannel", publishChannel)
+                .append("status", status)
+                .append("inChannel", inChannel)
+                .append("inChannelName", inChannelName)
+                .append("outChannel", outChannel)
+                .append("outChannelName", outChannelName)
+                .append("sourceName", sourceName)
+                .append("createUser", createUser)
+                .append("createAt", createAt)
+                .append("updateUser", updateUser)
+                .append("updateAt", updateAt)
+                .append("isThird", isThird)
+                .append("isOffStock", isOffStock)
+                .append("isDeleted", isDeleted)
+                .append("couponCategory", couponCategory)
+                .append("couponGroup", couponGroup)
+                .append("couponBrand", couponBrand)
+                .append("couponShops", couponShops)
+                .append("couponMalls", couponMalls)
+                .append("preferentialType", preferentialType)
+                .append("couponCommodities", couponCommodities)
+                .append("purchaseType", purchaseType)
+                .append("visitedCount", visitedCount)
+                .append("isGeneral", isGeneral)
+                .append("isRelatedActivity", isRelatedActivity)
+                .toString();
     }
-
 }

@@ -56,6 +56,25 @@ public interface CouponConstants {
         int USED = 8;
     }
 
+    /**
+     * 关联类型
+     * 代金券：集团[0],品牌[1], 商场 [2],店铺[3];
+     */
+    interface CouponRelatedType {
+        Integer GROUP = 0;
+        Integer BRAND = 1;
+        Integer MALL = 2;
+        Integer SHOP = 3;
+    }
+
+    /**
+     * 购买类型 0正常购买类型 1抢购类型
+     */
+    interface CouponPurchaseType {
+        Integer NORMAL = 0;
+        Integer RUSH = 1;
+    }
+
 
     /**
      * 随时退/过期退/免预约
@@ -63,10 +82,26 @@ public interface CouponConstants {
      */
     List<Integer> AFTER_SALE_SERVICE = Arrays.asList(1, 0, 0, 0);
 
-    interface COUPON_TYPE
-    {
-        String COUPON = "02";//代金券
-        String CASHCOUPON = "03";//红包
+
+    /**
+     * 卡券类型:代金券[0], 抵扣券[1], 红包[2]
+     */
+    interface COUPON_TYPE {
+        //        String COUPON = "02";//代金券
+//        String CASHCOUPON = "03";//红包
+        Integer VOUCHER = 0;
+        Integer REBATE = 1;
+        Integer REDENVELOPE = 2;
+    }
+
+
+    /**
+     * 状态: 待审核[0], 审核未通过[1], 审核通过[2]
+     */
+    interface CouponStatus {
+        Integer NO_CHECK = 0;
+        Integer CHECK_FAILURE = 1;
+        Integer CHECK_SUCCESS = 2;
     }
 
 }

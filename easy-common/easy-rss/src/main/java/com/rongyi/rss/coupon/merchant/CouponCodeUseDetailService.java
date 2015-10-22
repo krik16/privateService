@@ -15,5 +15,5 @@ public interface CouponCodeUseDetailService {
 
     public MerchantPaging<CouponCodeUseDetailVO> findUseDetailsByPage(QueryParam queryParam);
 
-    public List<CouponCodeUseDetailVO> findUseDetailsByCouponId(Integer couponId);
+    public List<CouponCodeUseDetailVO> findUseDetailsByCouponId(String couponId);
 }

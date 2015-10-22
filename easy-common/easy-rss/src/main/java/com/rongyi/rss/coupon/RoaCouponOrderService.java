@@ -11,9 +11,10 @@ import java.util.Map;
 
 /**
  * 卡券订单接口：目前提供零支付订单
- *
+ * @see com.rongyi.rss.tradecenter.ProxyCouponOrderService
  * @author Breggor
  */
+@Deprecated
 public interface RoaCouponOrderService {
     /**
      * 创建优惠券订单

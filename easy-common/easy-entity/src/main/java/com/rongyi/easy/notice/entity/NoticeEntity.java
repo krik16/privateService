@@ -139,4 +139,8 @@ public class NoticeEntity implements Serializable{
     public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
+
+    public void setNoticeStatus(Integer noticeStatus) {
+//        this.noticeStatus = noticeStatus;
+    }
 }

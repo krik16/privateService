@@ -7,9 +7,12 @@ import java.util.Date;
 
 /**
  * 卡券订单项
+ * 老订单项
+ * 下步废弃，移到交易中心
  *
  * @author Breggor
  */
+
 public class CouponOrderItem implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -5,13 +5,14 @@ import java.util.Map;
 
 import org.bson.types.ObjectId;
 
-import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.coupon.entity.OldCoupon;
 
 /**
  * 提供给vms/rmmm的接口：优惠券相关操作
  *
  * @author Ventures
  */
+@Deprecated
 public interface ICouponService {
 
     /**
@@ -30,7 +31,7 @@ public interface ICouponService {
      * @return
      * @throws Exception
      */
-    public Coupon getCouponById(ObjectId id) throws Exception;
+    public OldCoupon getCouponById(ObjectId id) throws Exception;
 
     /**
      * 添加或更新优惠券
@@ -39,7 +40,7 @@ public interface ICouponService {
      * @return
      * @throws Exception
      */
-    public ObjectId saveOrUpdateCoupon(Coupon coupon) throws Exception;
+    public ObjectId saveOrUpdateCoupon(OldCoupon coupon) throws Exception;
 
     /**
      * 删除优惠券
@@ -70,7 +71,7 @@ public interface ICouponService {
      * @return
      * @throws Exception
      */
-    public Boolean verifyCoupons(Coupon coupon) throws Exception;
+    public Boolean verifyCoupons(OldCoupon coupon) throws Exception;
 
     /**
      * 优惠券关联商场
@@ -78,7 +79,7 @@ public interface ICouponService {
      * @param coupon
      * @return
      */
-    public Boolean relevanceMalls(Coupon coupon) throws Exception;
+    public Boolean relevanceMalls(OldCoupon coupon) throws Exception;
 
     /**
      * 优惠券关联店铺
@@ -86,7 +87,7 @@ public interface ICouponService {
      * @param coupon
      * @return
      */
-    public Boolean relevanceShops(Coupon coupon) throws Exception;
+    public Boolean relevanceShops(OldCoupon coupon) throws Exception;
 
     /**
      * 优惠券现金券关联活动和取消关联
@@ -106,7 +107,7 @@ public interface ICouponService {
      * @return
      * @throws Exception
      */
-    public List<Coupon> getCouponByIds(List<ObjectId> ids) throws Exception;
+    public List<OldCoupon> getCouponByIds(List<ObjectId> ids) throws Exception;
 
     /**
      * 我的抵扣券列表(未使用/已使用)
@@ -135,7 +136,7 @@ public interface ICouponService {
      * @param coupon
      * @return
      */
-    public Boolean release(Coupon coupon);
+    public Boolean release(OldCoupon coupon);
 
     /**
      * @param couponId
