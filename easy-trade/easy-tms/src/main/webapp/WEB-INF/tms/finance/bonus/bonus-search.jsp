@@ -55,10 +55,17 @@
 				<input type="hidden" value="1" name="pageNo" id="currpage">
 					<input type="hidden" value="0" id="isChecked" />
 				<ur>
-				<li>流水号:<input type="text" id="liushui-no"></input>
+				<li>流水号:<input type="text" id="liushui-no"/>
+				</li>
+				<li>渠道:
+					<select id="guideType"  style="width: 90px">
+						<option value="" selected>--全部--</option>
+						<option value="1">商家</option>
+						<option value="2">买手</option>
+					</select>
 				</li>
 				
-				<li>卖家账号：<input id="account" type="text"></input>
+				<li>卖家账号：<input id="account" type="text"/>
 				<li>类型：<select id="operateType">
 						<option value="">--全部--</option>
 						<option value="1">交易佣金</option>

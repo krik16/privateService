@@ -12,13 +12,14 @@ $(document).ready(function() {
 	$("#search").click(function(event) {
 		var status = $("#select-checked").val();
 		var adno = $("#liushui-no").val();
+		var guideType = $("#guideType").val();
 		var account = $('#account').val();
 		var type = $("#type").val();
 		var operateType = $("#operateType").val();
-		ajaxloadApplys(null, adno, account, type, status,operateType);
+		ajaxloadApplys(null, adno, guideType, account, type, status,operateType);
 	});
 });
-function ajaxloadApplys(page, adno, account, type, status,operateType) {
+function ajaxloadApplys(page, adno, guideType, account, type, status,operateType) {
 	var url_ = "../bonus/list";
 	var param = $("#isChecked").val();
 	var start = $("#startTime").val();
@@ -43,6 +44,7 @@ function ajaxloadApplys(page, adno, account, type, status,operateType) {
 				data : {
 					"id" : adno,
 					"sellerAccount" : account,
+					"guideType" : guideType,
 					"type" : type,
 					"createStartTime" : start,
 					"createEndTime" : end,

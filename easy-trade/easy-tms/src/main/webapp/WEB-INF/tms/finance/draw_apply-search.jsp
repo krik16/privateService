@@ -57,7 +57,7 @@
 				</li>
 				<li>渠道:
 					<select id="guideType"  style="width: 90px">
-						<option value="">--全部--</option>
+						<option value="" selected>--全部--</option>
 						<option value="1">商家</option>
 						<option value="2">买手</option>
 					</select>
