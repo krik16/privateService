@@ -10,7 +10,7 @@ package com.rongyi.tms.moudle.vo;
 
 import java.util.List;
 
-import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.coupon.vo.TCCouponVO;
 import com.rongyi.easy.coupon.vo.UserCouponVO;
 
 /**	
@@ -54,7 +54,7 @@ public class CouponOrderDetailVO extends CouponOrderVO{
 		this.hbList = hbList;
 	}
 	
-	public class CouponVO extends Coupon{
+	public class CouponVO extends TCCouponVO{
 		/**
 		 * 
 		 */

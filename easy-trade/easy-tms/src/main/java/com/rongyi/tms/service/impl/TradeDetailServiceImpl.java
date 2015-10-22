@@ -29,7 +29,7 @@ import com.rongyi.easy.entity.MallLifeUserEntity;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
 import com.rongyi.easy.osm.entity.OrderFormEntity;
 import com.rongyi.easy.tms.vo.TradeVO;
-import com.rongyi.rss.coupon.MMUserCouponService;
+import com.rongyi.rss.coupon.mall.shop.MSUserCouponService;
 import com.rongyi.rss.coupon.RoaCouponOrderService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.rss.mallshop.order.ROAOrderFormService;
@@ -58,7 +58,7 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 	RoaCouponOrderService raoCouponOrderService;
 
 	@Autowired
-	MMUserCouponService mmUserCouponService;
+	MSUserCouponService mmUserCouponService;
 
 	@Autowired
 	ROAOrderFormService rOAOrderFormService;
@@ -155,7 +155,7 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 
 	@Override
 	public UserCoupon getCouponOrderRecordByOrderNo(String orderNo) {
-		CouponOrder couponOrder = raoCouponOrderService.findOneByOrderNo(orderNo);
+		CouponOrder couponOrder = roaProxyCouponOrderService.findOneByOrderNo(orderNo);
 		UserCoupon userCoupon = null;
 		if (couponOrder != null)
 			userCoupon = mmUserCouponService.findUserCouponByCouponCode(couponOrder.getCashCouponCode());
