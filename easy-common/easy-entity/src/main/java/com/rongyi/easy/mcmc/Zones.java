@@ -79,6 +79,11 @@ public class Zones implements Serializable {
 	 */
 	private List<Double> location;
 	
+	/**
+	 * 分类ids
+	 */
+	private List<ObjectId> category_ids;
+	
 	private List<ObjectId> watcher_ids;
 
 	public ObjectId getId() {
@@ -207,6 +212,14 @@ public class Zones implements Serializable {
 
 	public void setLocation(List<Double> location) {
 		this.location = location;
+	}
+
+	public List<ObjectId> getCategory_ids() {
+		return category_ids;
+	}
+
+	public void setCategory_ids(List<ObjectId> category_ids) {
+		this.category_ids = category_ids;
 	}
 	
 }
