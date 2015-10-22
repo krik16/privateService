@@ -132,14 +132,14 @@ public class PaymentStatementController extends BaseController {
 					statusList.add(ConstantEnum.STATUS_8.getCodeByte());
 				}
 				break;
-			case 3:// 查询付款列表
+			case 3:// 查询付款清单列表
 				responseData = accessService.check(request, "FNC_UNPVFY_VIEW");
 				if (responseData.getMeta().getErrno() != 0) {
 					return responseData;
 				}
 				statusList.add(ConstantEnum.STATUS_6.getCodeByte());
 				statusList.add(ConstantEnum.STATUS_11.getCodeByte());
-				statusList.add(ConstantEnum.STATUS_12.getCodeByte());
+//				statusList.add(ConstantEnum.STATUS_12.getCodeByte());
 				List<Byte> payChannelList = new ArrayList<Byte>();
 				payChannelList.add(ConstantEnum.STATUS_3.getCodeByte());
 				payChannelList.add(ConstantEnum.STATUS_4.getCodeByte());
