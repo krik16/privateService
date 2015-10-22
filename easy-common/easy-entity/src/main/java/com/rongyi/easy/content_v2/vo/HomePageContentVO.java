@@ -17,7 +17,7 @@ public class HomePageContentVO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private List<BannerVO> banner;
     private QuickEntryVO quickEntry;
-    private List<QuickEntryNewVO> quickEntryNew;
+    private List<QuickEntryNewVO> quickEntries;
     private List<HotHeadlineVO> hotHeadline;
     private StarShopVO starShop;
     private List<ActivityRecommendVO> activityRecommend;
@@ -81,11 +81,11 @@ public class HomePageContentVO implements Serializable{
     }
 
     public List<QuickEntryNewVO> getQuickEntryNew() {
-        return quickEntryNew;
+        return quickEntries;
     }
 
-    public void setQuickEntryNew(List<QuickEntryNewVO> quickEntryNew) {
-        this.quickEntryNew = quickEntryNew;
+    public void setQuickEntryNew(List<QuickEntryNewVO> quickEntries) {
+        this.quickEntries = quickEntries;
     }
 
     @Override
@@ -93,7 +93,7 @@ public class HomePageContentVO implements Serializable{
         return new ToStringBuilder(this)
                 .append("banner", banner)
                 .append("quickEntry", quickEntry)
-                .append("quickEntryNew", quickEntryNew)
+                .append("quickEntryNew", quickEntries)
                 .append("hotHeadline", hotHeadline)
                 .append("starShop", starShop)
                 .append("activityRecommend", activityRecommend)
