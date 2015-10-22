@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.text.DecimalFormat;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -25,6 +26,7 @@ public class ExcelUtils {
 		String fileFolder = targetFilePath + folder;
 		String pathname2 = fileFolder + "/" + targetFileName;
 		InputStream in = new FileInputStream(new File(pathname));
+		 DecimalFormat df = new DecimalFormat("#.00");  
 		XSSFWorkbook work = new XSSFWorkbook(in);
 		in.close();
 		XSSFSheet sheet = work.getSheetAt(0);
@@ -66,11 +68,11 @@ public class ExcelUtils {
 
 		XSSFRow row12 = sheet.getRow(12);
 		XSSFCell payTotal = row12.getCell(4);
-		payTotal.setCellValue(excelDto.getPayTotal());
+		payTotal.setCellValue(df.format(excelDto.getPayTotal()));
 
 		XSSFRow row27 = sheet.getRow(27);
 		XSSFCell total = row27.getCell(10);
-		total.setCellValue(excelDto.getPayTotal());
+		total.setCellValue(df.format(excelDto.getPayTotal()));
 
 		XSSFCell rongyiDiscount = row12.getCell(10);
 		rongyiDiscount.setCellValue(excelDto.getRongyiDiscount());
@@ -88,16 +90,16 @@ public class ExcelUtils {
 			couponCount.setCellValue(couponExcelDto.getCouponCount());
 
 			XSSFCell origPrice = row15.getCell(7);
-			origPrice.setCellValue(couponExcelDto.getCouponPrice() == null ? 0 : AmountUtil.changFenToYuan(couponExcelDto.getCouponPrice().intValue()));
+			origPrice.setCellValue(df.format(couponExcelDto.getCouponPrice() == null ? 0 : AmountUtil.changFenToYuan(couponExcelDto.getCouponPrice().intValue())));
 
 			XSSFCell discount = row15.getCell(9);
 			Double couponTotalAmount = couponExcelDto.getCouponTotalAmount() == null ? 0.0 : couponExcelDto.getCouponTotalAmount();
 			Double couponPayAmount = couponExcelDto.getCouponPayAmount() == null ? 0.0 : couponExcelDto.getCouponPayAmount();
 			Double discountValue = couponTotalAmount - couponPayAmount;
-			discount.setCellValue(AmountUtil.changFenToYuan(discountValue.intValue()));
+			discount.setCellValue(df.format(AmountUtil.changFenToYuan(discountValue.intValue())));
 
 			XSSFCell totalAmount = row15.getCell(11);
-			totalAmount.setCellValue(couponExcelDto.getCouponTotalAmount() == null ? 0 : AmountUtil.changFenToYuan(couponExcelDto.getCouponTotalAmount().intValue()));
+			totalAmount.setCellValue(df.format(couponExcelDto.getCouponTotalAmount() == null ? 0 : AmountUtil.changFenToYuan(couponExcelDto.getCouponTotalAmount().intValue())));
 		}
 
 		XSSFSheet sheet1 = work.getSheetAt(1);
