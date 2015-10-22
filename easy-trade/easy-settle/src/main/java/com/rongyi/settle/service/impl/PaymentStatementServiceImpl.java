@@ -274,13 +274,14 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 			Map result = roaShopService.getShops(map, 0, 10000);
 			List<ShopVO> shopVOs = (List<ShopVO>) result.get("list");
 			for (ShopVO shopVO : shopVOs) {
-				logger.info("定时任务-生成对账单-商场类型配置，shopId="+shopVO.getId());
+				logger.info("重新生成对账单-商场类型配置，shopId="+shopVO.getId());
 				paymentStatementDetailDtoList.addAll(selectForStatementDetails(shopVO.getId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(),
 						statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime(), shopVO.getName(), shopVO.getPosition().getMallId(), shopVO.getPosition().getMall()));
 				couponExcelDtoList.addAll(selectForCouponExcelDto(shopVO.getId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(),
 						statementConfig.getCycleEndTime()));
 			}
 			if (shopVOs != null && shopVOs.size() > 0) {
+				logger.info("重新生成对账单-商场类型配置，没有找到对应的店铺。mallId="+statementConfig.getBussinessId());
 				paymentStatementExcelDto.setMallName(shopVOs.get(0).getPosition().getMall());
 			}
 			adjustCouponExcelDtoList(couponExcelDtoList);

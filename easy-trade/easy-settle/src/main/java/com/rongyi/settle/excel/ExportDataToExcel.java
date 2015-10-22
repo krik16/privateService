@@ -13,6 +13,7 @@ import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.ExcelUtil;
 import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
+import com.rongyi.settle.constants.ConstantEnum;
 import com.rongyi.settle.service.PaymentStatementService;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -58,7 +59,7 @@ public class ExportDataToExcel {
 	 * @param response
 	 * @param
 	 */
-	public boolean exportPaymentScheduleExcel(HttpServletRequest request, HttpServletResponse response, String[] idArray) {
+	public void exportPaymentScheduleExcel(HttpServletRequest request, HttpServletResponse response, String[] idArray) {
 		try {
 			Map<String, Object> map = new HashMap<>();
 			map.put("idArray", idArray);
@@ -72,18 +73,7 @@ public class ExportDataToExcel {
 					businessIds.add(dto.getBussinessId());
 				}
 			}
-			List<List<PaymentStatementDto>> parentsDtoList = new ArrayList<>();
-			if (CollectionUtils.isNotEmpty(businessIds)) {
-				for (String businessId : businessIds) {
-					List<PaymentStatementDto> sonDtoList = new ArrayList<>();
-					for (PaymentStatementDto p : payments) {
-						if (businessId != null && businessId.equals(p.getBussinessId())) {
-							sonDtoList.add(p);
-						}
-					}
-					parentsDtoList.add(sonDtoList);
-				}
-			}
+
 			XSSFWorkbook wb = new XSSFWorkbook();
 			XSSFFont titleFont = wb.createFont();
 			titleFont.setFontName("宋体");
@@ -105,6 +95,29 @@ public class ExportDataToExcel {
 			titleStyle.setWrapText(true);
 			bodyStyle.setAlignment(XSSFCellStyle.ALIGN_CENTER);// 指定单元格居中对齐
 			bodyStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// 指定单元格垂直居中对齐
+
+			List<List<PaymentStatementDto>> parentsDtoList = new ArrayList<>();
+			if (CollectionUtils.isNotEmpty(businessIds)) {
+				for (String businessId : businessIds) {
+					List<PaymentStatementDto> sonDtoList = new ArrayList<>();
+					for (PaymentStatementDto p : payments) {
+						if (businessId != null && businessId.equals(p.getBussinessId())) {
+							if (p.getStatus().equals(ConstantEnum.STATUS_11.getCodeByte())) {
+								XSSFSheet sheet = wb.createSheet(sonDtoList.get(0).getBussinessName() + "-" + System.currentTimeMillis());
+								sheet.createRow(0);
+								sheet.getRow(0).createCell(0);
+								sheet.getRow(0).getCell(0).setCellValue("存在重复下载数据，请刷新页面后再操作。");
+								String outFile = "付款清单_" + DateUtil.getCurrentDateYYYYMMDD() + ".xlsx";
+								ExcelUtil.exportExcel(response, wb, outFile);
+								return;
+							}
+							sonDtoList.add(p);
+						}
+					}
+					parentsDtoList.add(sonDtoList);
+				}
+			}
+
 			if (CollectionUtils.isNotEmpty(parentsDtoList)) {
 				for (List<PaymentStatementDto> sonDtoList : parentsDtoList) {
 					XSSFSheet sheet = wb.createSheet(sonDtoList.get(0).getBussinessName() + "-" + System.currentTimeMillis());
@@ -175,10 +188,8 @@ public class ExportDataToExcel {
 				String outFile = "付款清单_" + DateUtil.getCurrentDateYYYYMMDD() + ".xlsx";
 				ExcelUtil.exportExcel(response, wb, outFile);
 			}
-			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
 		}
 	}
 

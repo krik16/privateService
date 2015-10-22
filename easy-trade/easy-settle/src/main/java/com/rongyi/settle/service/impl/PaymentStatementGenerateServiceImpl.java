@@ -150,6 +150,7 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
                 couponExcelDtoList.addAll(paymentStatementService.selectForCouponExcelDto(shopVO.getId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime()));
             }
             if (shopVOs != null && shopVOs.size() > 0) {
+                logger.info("定时任务-生成对账单-商场类型配置，没有找到对应的店铺。mallId="+statementConfig.getBussinessId());
                 paymentStatementExcelDto.setMallName(shopVOs.get(0).getPosition().getMall());
             }
 
