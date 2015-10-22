@@ -141,13 +141,10 @@ public class BonusController extends BaseController {
                     result.setCode(CodeEnum.ERROR_DATA.getActionCode());
                 }
             } else {
-//                Map<String, Object> verifyResultMap = this.verifyAccount(params.getSellerAccount());
-//                if (verifyResultMap.get("code").equals("0")) {
-            	if (true) {
-//                    if (verifyResultMap.get("userId") != null) {
-                    	if (true) {
-//                        vo.setSellerId(verifyResultMap.get("userId") + "");
-                        vo.setSellerId("969");
+                Map<String, Object> verifyResultMap = this.verifyAccount(params.getSellerAccount());
+                if (verifyResultMap.get("code").equals("0")) {
+                    if (verifyResultMap.get("userId") != null) {
+                        vo.setSellerId(verifyResultMap.get("userId") + "");
                         if (vo.getId() != 0) {
                             vo.setUpdateUser(userInfo.getUsername());
                         } else {
@@ -161,13 +158,13 @@ public class BonusController extends BaseController {
                             result.setMessage(CodeEnum.ERROR_DATA.getMessage());
                             result.setCode(CodeEnum.ERROR_DATA.getActionCode());
                         }
-                    } /*else {
+                    }else {
                         LOGGER.info("未取到userid!");
-                    }*/
-                } /*else {
+                    }
+                } else {
                     result.setSuccess(false);
-//                    result.setCode((String) verifyResultMap.get("code"));
-                }*/
+                    result.setCode((String) verifyResultMap.get("code"));
+                }
             }
         } catch (Exception exception) {
             exception.printStackTrace();
