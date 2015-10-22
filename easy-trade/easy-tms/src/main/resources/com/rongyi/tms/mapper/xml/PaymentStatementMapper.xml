@@ -117,6 +117,7 @@
 		<where>
 			<include refid="list_where_clause" />
 		</where>
+		order by ps.pay_time desc
 		<if test="currentPage != null and pageSize != null">
 			limit
 			#{currentPage,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
