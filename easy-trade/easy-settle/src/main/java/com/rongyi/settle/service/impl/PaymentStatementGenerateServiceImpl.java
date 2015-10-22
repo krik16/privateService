@@ -142,7 +142,7 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
         } else if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.MALL)) {
             Map map = new HashMap();
             map.put("mallId", statementConfig.getBussinessId());
-            Map result = roaShopService.getShops(map, 0, 10000);
+            Map result = roaShopService.getShops(map, 1, 10000);
             List<ShopVO> shopVOs = (List<ShopVO>) result.get("list");
             for (ShopVO shopVO : shopVOs) {
                 logger.info("定时任务-生成对账单-商场类型配置，shopId="+shopVO.getId());
@@ -150,11 +150,10 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
                 couponExcelDtoList.addAll(paymentStatementService.selectForCouponExcelDto(shopVO.getId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime()));
             }
             if (shopVOs != null && shopVOs.size() > 0) {
-                logger.info("定时任务-生成对账单-商场类型配置，没有找到对应的店铺。mallId="+statementConfig.getBussinessId());
                 paymentStatementExcelDto.setMallName(shopVOs.get(0).getPosition().getMall());
             }
 
-            adjustCouponExcelDtoList(couponExcelDtoList);
+            couponExcelDtoList = adjustCouponExcelDtoList(couponExcelDtoList);
         }
 
         List<CouponCodeExcelDto> couponCodeExcelDtoList = new ArrayList<>();

@@ -184,10 +184,16 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		map.put("cycleEndTime", DateUtil.dateToString(cycleEndTime));
 		map.put("startTime", DateUtil.dateToString(startTime));
 		map.put("endTime", DateUtil.dateToString(endTime));
-		map.put("shopName", shopName);
-		map.put("mallId", mallId);
-		map.put("mallName", mallName);
-		return this.getBaseDao().selectListBySql(NAMESPACE + ".selectForStatementDetails", map);
+//		map.put("shopName", shopName);
+//		map.put("mallId", mallId);
+//		map.put("mallName", mallName);
+		List<PaymentStatementDetailDto> result = this.getBaseDao().selectListBySql(NAMESPACE + ".selectForStatementDetails", map);
+		for (PaymentStatementDetailDto paymentStatementDetailDto : result) {
+			paymentStatementDetailDto.setShopName(shopName);
+			paymentStatementDetailDto.setMallId(mallId);
+			paymentStatementDetailDto.setMallName(mallName);
+		}
+		return result;
 	}
 
 	@Override
@@ -271,7 +277,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		} else if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.MALL)) {
 			Map map = new HashMap();
 			map.put("mallId", statementConfig.getBussinessId());
-			Map result = roaShopService.getShops(map, 0, 10000);
+			Map result = roaShopService.getShops(map, 1, 10000);
 			List<ShopVO> shopVOs = (List<ShopVO>) result.get("list");
 			for (ShopVO shopVO : shopVOs) {
 				logger.info("重新生成对账单-商场类型配置，shopId="+shopVO.getId());
@@ -281,10 +287,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 						statementConfig.getCycleEndTime()));
 			}
 			if (shopVOs != null && shopVOs.size() > 0) {
-				logger.info("重新生成对账单-商场类型配置，没有找到对应的店铺。mallId="+statementConfig.getBussinessId());
 				paymentStatementExcelDto.setMallName(shopVOs.get(0).getPosition().getMall());
 			}
-			adjustCouponExcelDtoList(couponExcelDtoList);
+			couponExcelDtoList = adjustCouponExcelDtoList(couponExcelDtoList);
 		}
 
 		List<CouponCodeExcelDto> couponCodeExcelDtoList = new ArrayList<>();

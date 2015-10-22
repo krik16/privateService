@@ -501,8 +501,7 @@
 		ROUND(tor.hb_discount/tor.code_num, 0) as hb_discount,
 		ROUND(tor.score_discount/tor.code_num, 0) as score_discount,
 		tuc.orig_price-tuc.unit_price discount,tuc.user_phone,tuc.shop_id,
-		'${shopName}' as shop_name,'${mallId}' as mall_id,'${mallName}' as
-		mall_name,tor.user_name,rui.user_name as guide_name,rui.user_phone as
+		tor.user_name,rui.user_name as guide_name,rui.user_phone as
 		guide_phone
 		from ry_trade.trade_user_code tuc
 		join ry_trade.trade_order
