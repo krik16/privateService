@@ -383,35 +383,44 @@ public class BonusController extends BaseController {
     protected Map<String, Object> verifyAccount(String account) {
         Map<String, Object> resultMap = new HashMap<String, Object>();
         // 验证账号的正确性
-        if (StringUtils.isNotBlank(account)) {
-            RmmmUserInfoEntity userInfoVO = userService.getUsersEntityByPhone(account);
-            if (userInfoVO != null) {
-                //账号是否被停用
-                if(userInfoVO.getIsDisabled()==1){
-                    //账号被停用
-                    resultMap.put("code", CodeEnum.ERROR_ACCOUNT_TINGYONG.getActionCode());
-                }else{
-                    // 验证账号是否冻结
-                    VirtualAccountVO vaVO = vaService.queryVirtualAccount(userInfoVO.getId() + "");
-                    if (vaVO == null) {
-                        // 账户不存在
-                        resultMap.put("code", CodeEnum.ERROR_VITURAL_ACCOUNT.getActionCode());
-                    } else if (vaVO.getIsSuspended()) {
-                        // 账号被冻结
-                        resultMap.put("code", CodeEnum.ERROR_ACCOUNT_DONGJIE.getActionCode());
+        try {
+            if (StringUtils.isNotBlank(account)) {
+                List<RmmmUserInfoEntity> userInfoVOList = userService.getUserListByPhone(account);
+                for (RmmmUserInfoEntity userInfoVO : userInfoVOList){
+                    if (userInfoVO != null) {
+                        //账号是否被停用
+                        if(userInfoVO.getIsDisabled()==1){
+                            //账号被停用
+                            resultMap.put("code", CodeEnum.ERROR_ACCOUNT_TINGYONG.getActionCode());
+                        }else{
+                            // 验证账号是否冻结
+                            VirtualAccountVO vaVO = vaService.queryVirtualAccount(userInfoVO.getId() + "");
+                            if (vaVO == null) {
+                                // 账户不存在
+                                resultMap.put("code", CodeEnum.ERROR_VITURAL_ACCOUNT.getActionCode());
+                            } else if (vaVO.getIsSuspended()) {
+                                // 账号被冻结
+                                resultMap.put("code", CodeEnum.ERROR_ACCOUNT_DONGJIE.getActionCode());
+                            } else {
+                                resultMap.put("code", CodeEnum.SUCCESS.getActionCode());
+                                resultMap.put("userId", userInfoVO.getId());
+                                break;
+                            }
+                        }
                     } else {
-                        resultMap.put("code", CodeEnum.SUCCESS.getActionCode());
-                        resultMap.put("userId", userInfoVO.getId());
+                        // 您输入的账号有误，请重新输入
+                        resultMap.put("code", CodeEnum.ERROR_ACCOUNT.getActionCode());
                     }
                 }
+
             } else {
-                // 您输入的账号有误，请重新输入
-                resultMap.put("code", CodeEnum.ERROR_ACCOUNT.getActionCode());
+                // 参数传递有误
+                resultMap.put("code", CodeEnum.ERROR_PARAM.getActionCode());
             }
-        } else {
-            // 参数传递有误
-            resultMap.put("code", CodeEnum.ERROR_PARAM.getActionCode());
+        }catch (Exception e){
+            e.printStackTrace();
         }
+
         //TODO TEST
 //        resultMap.put("code", CodeEnum.SUCCESS.getActionCode());
 //        resultMap.put("userId", "123");
@@ -551,7 +560,6 @@ public class BonusController extends BaseController {
      * @Description
      * @author 袁波
      * @param out
-     * @param recordList
      * @throws Exception
      */
     protected void createRecordExcel(OutputStream out, List<BonusVO> vos) throws Exception {

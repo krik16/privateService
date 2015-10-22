@@ -105,8 +105,8 @@ public class WithdrawRequestEvent extends AccountEvent implements Cloneable {
 
 		WithdrawApplyServiceImpl virtualAccountService = (WithdrawApplyServiceImpl) ctx
 				.getBean("vaWithdrawApplyService");
-		virtualAccountService.withdrawApply(userId, drawAmount, outAccount, outName,
-				TmsEventTypeEnum.DRAWAPPLY.getCode());
+//		virtualAccountService.withdrawApply(userId, drawAmount, outAccount, outName,
+//				TmsEventTypeEnum.DRAWAPPLY.getCode());
 
 		// VirtualAccountGeneralService virtualAccountGeneralService =
 		// (VirtualAccountGeneralService) ctx
