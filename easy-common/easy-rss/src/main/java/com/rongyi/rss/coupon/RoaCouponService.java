@@ -81,14 +81,14 @@ public interface RoaCouponService {
     /**
      * 修改卡券关联活动状态 关联[true] 取消关联[false]
      *
-     * @param ids
+     * @param couponIds
      * @param isRelatedActivity
      * @param couponActivity
      * @return boolean
      * @author lqy
      * @throws Exception
      */
-    boolean updateRelatedActivity(List<String> ids, boolean isRelatedActivity, CouponActivity couponActivity) throws Exception;
+    boolean updateRelatedActivity(List<String> couponIds, boolean isRelatedActivity, CouponActivity couponActivity);
 
     /**
      * 减库存返回券码
@@ -117,7 +117,7 @@ public interface RoaCouponService {
     boolean restoreCouponInventory(String couponId, String couponCode);
 
     /**
-     *
+     * 分页查询卡券列表
      * @param couponParam
      * @return
      */
