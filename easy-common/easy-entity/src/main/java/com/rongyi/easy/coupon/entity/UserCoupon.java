@@ -14,6 +14,7 @@ import java.util.Date;
  * @author Breggor
  * @see UserRedenvelope --用户红包
  */
+@Deprecated
 public class UserCoupon implements Serializable {
 
     private Long id;
