@@ -15,6 +15,7 @@ import java.util.List;
  * 类型：代金券、红包、抵扣券
  *
  * @author Breggor
+ * @version 1.0
  * @see Coupon   --新卡券基础数据
  */
 
