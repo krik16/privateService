@@ -35,6 +35,10 @@ public class NoticeEntity implements Serializable{
     private Date updateAt;
     /**是否删除 false 没有删除   true 删除了*/
     private Boolean isDeleted;
+    /**公告状态   0正常  1已下线*/
+    private Integer noticeStatus;
+   /**自动审核时间*/
+    private Date autoCheckAt;
 
     public Integer getId() {
         return id;
@@ -140,7 +144,19 @@ public class NoticeEntity implements Serializable{
         this.isDeleted = isDeleted;
     }
 
+    public Integer getNoticeStatus() {
+        return noticeStatus;
+    }
+
     public void setNoticeStatus(Integer noticeStatus) {
-//        this.noticeStatus = noticeStatus;
+        this.noticeStatus = noticeStatus;
+    }
+
+    public Date getAutoCheckAt() {
+        return autoCheckAt;
+    }
+
+    public void setAutoCheckAt(Date autoCheckAt) {
+        this.autoCheckAt = autoCheckAt;
     }
 }
