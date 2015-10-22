@@ -1,19 +1,15 @@
 package com.rongyi.rss.tradecenter;
 
-import com.rongyi.core.common.PagingVO;
-import com.rongyi.core.framework.mybatis.pojo.Page;
 import com.rongyi.easy.coupon.entity.UserCoupon;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by xgq on 2015/8/26.
  */
 public interface RoaProxyUserCouponService {
     /**
-     * 根据券码查询用户优惠现金券
+     * 根据券码查询用户优惠红包
      *
      * @param couponCode
      * @return
@@ -21,7 +17,7 @@ public interface RoaProxyUserCouponService {
     UserCoupon getUserCoupon(String couponCode);
 
     /**
-     * 更新用户优惠现金券
+     * 更新用户优惠红包
      *
      * @param userCoupon
      */

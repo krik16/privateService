@@ -12,7 +12,7 @@ import com.rongyi.core.bean.ResponseResult;
 public interface MLCashCouponService {
 
     /**
-     * 根据用户ID及现金ID检查是否已领过现金券
+     * 根据用户ID及现金ID检查是否已领过红包
      * @see MLUserRedenvelopeService#checkReceivedCashCoupon(String, String)
      * @param couponId
      * @param userId
@@ -22,7 +22,7 @@ public interface MLCashCouponService {
     boolean checkReceivedCashCoupon(String couponId, String userId);
 
     /**
-     * 根据用户ID及现金ID领取现金券
+     * 根据用户ID及现金ID领取红包
      * @see MLUserRedenvelopeService#receiveCashCoupon(String, String)
      * @param couponId
      * @param userId

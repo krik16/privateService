@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 卡券订单参数
  * <p/>
- * 名词解释： 卡券：包括优惠券、现金券
+ * 名词解释： 卡券：包括优惠券、红包
  *
  * @author Breggor
  */

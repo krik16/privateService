@@ -70,12 +70,12 @@ public class UserCoupon implements Serializable {
     private Long itemId;
 
     /**
-     * 券类型: 优惠券[02] 现金券[03]
+     * 券类型: 优惠券[02] 红包[03]
      */
     private String couponType;
 
     /**
-     * 现金券: 0: 全场 1: 商品; 优惠券：0：商场 1：店铺
+     * 红包: 0: 全场 1: 商品; 优惠券：0：商场 1：店铺
      */
     private String type;
 
@@ -96,7 +96,7 @@ public class UserCoupon implements Serializable {
     private Integer status;
 
     /**
-     * 现金券 商品ids，多个以逗号分隔
+     * 红包 商品ids，多个以逗号分隔
      */
     private String productIds;
 

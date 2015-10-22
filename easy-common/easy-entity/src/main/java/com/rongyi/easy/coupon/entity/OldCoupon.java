@@ -31,7 +31,7 @@ public class OldCoupon implements Serializable {
     private String title;// 券名称
 
     @Property("coupon_type")
-    private String couponType;// 券类型: 优惠券[02] 现金券[03]
+    private String couponType;// 券类型: 优惠券[02] 红包[03]
 
     @Property("total_count")
     private Integer totalCount;// 总量
@@ -61,7 +61,7 @@ public class OldCoupon implements Serializable {
     @Property("current_price")
     private Double currentPrice;// 现价
 
-    private String type;// 配置类型 0:商场 1:店铺；现金券 0：全场，1：商品
+    private String type;// 配置类型 0:商场 1:店铺；红包 0：全场，1：商品
 
     @Property("check_description")
     private String checkDescription;// 审核未通过信息描述

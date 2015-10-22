@@ -37,7 +37,7 @@ public interface MSUserCouponService {
     public UserCoupon findUserCouponByCouponCode(String couponCode);
 
     /**
-     * 查询出现金券vo
+     * 查询出红包vo
      *
      * @param couponCode
      * @return

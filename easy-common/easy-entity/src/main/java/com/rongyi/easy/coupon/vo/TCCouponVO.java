@@ -33,7 +33,7 @@ public class TCCouponVO implements Serializable {
     private String title;// 券名称
 
 
-    private String couponType;// 券类型: 优惠券[02] 现金券[03]
+    private String couponType;// 券类型: 优惠券[02] 红包[03]
 
 
     private Integer totalCount;// 总量
@@ -62,7 +62,7 @@ public class TCCouponVO implements Serializable {
 
     private Double currentPrice;// 现价
 
-    private String type;// 配置类型 0:商场 1:店铺；现金券 0：全场，1：商品
+    private String type;// 配置类型 0:商场 1:店铺；红包 0：全场，1：商品
 
 
     private String checkDescription;// 审核未通过信息描述

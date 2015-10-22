@@ -90,7 +90,7 @@ public interface ICouponService {
     public Boolean relevanceShops(OldCoupon coupon) throws Exception;
 
     /**
-     * 优惠券现金券关联活动和取消关联
+     * 优惠券红包关联活动和取消关联
      * activityStatus 1：关联翻牌购   2： 关联推送  0 : 取消关联
      *
      * @param ids            券id集合
@@ -122,7 +122,7 @@ public interface ICouponService {
 
 
     /**
-     * 通过id获取现金券的金额
+     * 通过id获取红包的金额
      *
      * @param id
      * @return

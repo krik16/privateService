@@ -32,7 +32,7 @@ public interface MLUserRedenvelopeService {
                                                             Integer currentPage, Integer pageSize);
 
     /**
-     * 接口描述：用户现金券 (未使用/已使用) 列表查询
+     * 接口描述：用户红包 (未使用/已使用) 列表查询
      * 使用模块：摩生活-我的红包
      *
      * @param map 目前参数说明：{currentPage：0,pageSize:10,userId:1,productId:10,status
@@ -42,7 +42,7 @@ public interface MLUserRedenvelopeService {
     public Map<String, Object> findCashCouponListByUserId(Map<String, Object> map);
 
     /**
-     * 现金券 (未使用) 列表查询
+     * 红包 (未使用) 列表查询
      *
      * @param productIds
      * @param userId
@@ -51,17 +51,17 @@ public interface MLUserRedenvelopeService {
     public Map<String, List<UserCouponVO>> findUnusedCashCoupon(List<String> productIds, String userId);
 
     /**
-     * 现金券 详情
+     * 红包 详情
      *
-     * @param couponCode 现金券券码
+     * @param couponCode 红包券码
      * @return UserCouponVO
      */
     public UserCouponVO findCashCoupon(String couponCode);
 
     /**
-     * 判断现金券是否是有效的
+     * 判断红包是否是有效的
      *
-     * @param couponCode 现金券模板id, commodityId 商品id
+     * @param couponCode 红包模板id, commodityId 商品id
      * @return true 没过期 false 已过期
      * @throws Exception
      */
@@ -84,7 +84,7 @@ public interface MLUserRedenvelopeService {
     public Boolean changeCashCouponStatus(String couponCode, Integer status);
 
     /**
-     * 通过couponCode获取现金券折扣金额
+     * 通过couponCode获取红包折扣金额
      *
      * @param couponCode
      * @return
@@ -92,7 +92,7 @@ public interface MLUserRedenvelopeService {
     public Double getCashCouponDiscount(String couponCode);
 
     /**
-     * 根据用户ID及现金ID检查是否已领过现金券
+     * 根据用户ID及现金ID检查是否已领过红包
      *
      * @param couponId
      * @param userId
@@ -101,7 +101,7 @@ public interface MLUserRedenvelopeService {
     boolean checkReceivedCashCoupon(String couponId, String userId);
 
     /**
-     * 根据用户ID及现金ID领取现金券
+     * 根据用户ID及现金ID领取红包
      *
      * @param couponId
      * @param userId

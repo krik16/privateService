@@ -85,7 +85,7 @@ public interface RoaOldCouponService {
     public Boolean relevanceShops(OldCoupon coupon);
 
     /**
-     * 优惠券现金券关联活动和取消关联 activityStatus 1：关联翻牌购 2： 关联推送 0 : 取消关联
+     * 优惠券红包关联活动和取消关联 activityStatus 1：关联翻牌购 2： 关联推送 0 : 取消关联
      *
      * @param ids            券id集合
      * @param activityStatus 活动状态
@@ -102,7 +102,7 @@ public interface RoaOldCouponService {
     public List<OldCoupon> getCouponByIds(List<ObjectId> ids);
 
     /**
-     * 我的抵扣券列表(现金券)(未使用/已使用) 列表查询
+     * 我的抵扣券列表(红包)(未使用/已使用) 列表查询
      *
      * @param map
      * @return
@@ -110,19 +110,19 @@ public interface RoaOldCouponService {
     public Map<String, Object> getCouponCodeListById(Map<String, Object> map);
 
     /**
-     * 现金券 详情
+     * 红包 详情
      *
      * @param id
-     * @param id 现金券券码id
+     * @param id 红包券码id
      * @return
      * @throws Exception
      */
     public UserCouponVO getCouponCodeById(Long id);
 
     /**
-     * 判断现金券是否是有效的
+     * 判断红包是否是有效的
      *
-     * @param couponId 现金券模板id, productId 商品id
+     * @param couponId 红包模板id, productId 商品id
      * @return true 没过期 false 已过期
      * @throws Exception
      */
@@ -138,7 +138,7 @@ public interface RoaOldCouponService {
 
 
     /**
-     * 通过id获取现金券的金额
+     * 通过id获取红包的金额
      *
      * @param id
      * @return
@@ -147,7 +147,7 @@ public interface RoaOldCouponService {
 
 
     /**
-     * 通过券码获取现金券的金额
+     * 通过券码获取红包的金额
      *
      * @param code 券码
      * @return

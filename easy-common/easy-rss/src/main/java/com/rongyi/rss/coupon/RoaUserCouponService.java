@@ -27,7 +27,7 @@ public interface RoaUserCouponService {
     boolean checkReceivedUserCoupon(String couponId, String userId);
 
     /**
-     * 根据券码查询用户优惠现金券
+     * 根据券码查询用户优惠红包
      *
      * @param couponCode
      * @return
@@ -35,14 +35,14 @@ public interface RoaUserCouponService {
     UserCoupon getUserCoupon(String couponCode);
 
     /**
-     * 新增用户优惠现金券
+     * 新增用户优惠红包
      *
      * @param userCoupon
      */
     void saveUserCoupon(UserCoupon userCoupon);
 
     /**
-     * 更新用户优惠现金券
+     * 更新用户优惠红包
      *
      * @param userCoupon
      */
