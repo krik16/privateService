@@ -377,6 +377,7 @@ public class PaymentStatementController extends BaseController {
 	 * @datetime:2015年9月21日下午3:03:26
 	 **/
 	@RequestMapping("/exportPaymentExcel")
+	@ResponseBody
 	public ResponseData exportPaymentSchedule(String ids, HttpServletResponse response, HttpServletRequest request) {
 		LOGGER.info("exportPaymentExcel ids={}", ids);
 		try {
@@ -392,8 +393,12 @@ public class PaymentStatementController extends BaseController {
 			return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
 		}
 		String[] idArray = ids.split("\\,");
-		exportDataToExcel.exportPaymentScheduleExcel(request, response, idArray);
-		return null;
+		boolean result = exportDataToExcel.exportPaymentScheduleExcel(request, response, idArray);
+		if (result) {
+			return ResponseData.success();
+		} else {
+			return ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
+		}
 	}
 
 	/**

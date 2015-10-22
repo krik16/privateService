@@ -56,9 +56,9 @@ public class ExportDataToExcel {
 	 * 
 	 * @param request
 	 * @param response
-	 * @param ids
+	 * @param
 	 */
-	public void exportPaymentScheduleExcel(HttpServletRequest request, HttpServletResponse response, String[] idArray) {
+	public boolean exportPaymentScheduleExcel(HttpServletRequest request, HttpServletResponse response, String[] idArray) {
 		try {
 			Map<String, Object> map = new HashMap<>();
 			map.put("idArray", idArray);
@@ -175,9 +175,10 @@ public class ExportDataToExcel {
 				String outFile = "付款清单_" + DateUtil.getCurrentDateYYYYMMDD() + ".xlsx";
 				ExcelUtil.exportExcel(response, wb, outFile);
 			}
-
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
 		}
 	}
 
