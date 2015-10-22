@@ -73,6 +73,11 @@ public class Live implements  Serializable{
 	 */
 	private List<String> brandNames;
 	
+	/**
+	 * 位置类型 0商场 1街边店
+	 */
+	private int zoneType;
+	
 	public ObjectId getId() {
 		return id;
 	}
@@ -150,6 +155,12 @@ public class Live implements  Serializable{
 	}
 	public void setBrandNames(List<String> brandNames) {
 		this.brandNames = brandNames;
+	}
+	public int getZoneType() {
+		return zoneType;
+	}
+	public void setZoneType(int zoneType) {
+		this.zoneType = zoneType;
 	}
 
 	
