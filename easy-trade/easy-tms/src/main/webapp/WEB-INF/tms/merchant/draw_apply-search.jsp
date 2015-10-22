@@ -56,6 +56,13 @@
 				<ur>
 				<li>提现流水号:<input type="text" id="liushui-no"></input>
 				</li>
+				<li>渠道:
+					<select id="guideType"  style="width: 90px">
+						<option value="">--全部--</option>
+						<option value="1">商家</option>
+						<option value="2">买手</option>
+					</select>
+				</li>
 				<li class="xiala">商场：<input type="text" name='mallid' class="detail"></input>
 				</li>
 				<li class="xiala">店铺：<input type="text" name="shopid" class="detail"></input>

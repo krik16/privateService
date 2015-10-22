@@ -119,6 +119,9 @@
 		<if test="drawNO != null">
 			and draw_no=#{drawNO,jdbcType=INTEGER}
 		</if>
+		</if><if test="guideType != null">
+			and guide_type=#{guideType,jdbcType=INTEGER}
+		</if>
 		<if test="mall != null">
 			and mall_name=#{mall,jdbcType=VARCHAR}
 		</if>

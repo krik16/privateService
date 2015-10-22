@@ -35,7 +35,7 @@ import com.rongyi.tms.service.SalesCommissionService;
 
 /**
  * @author 袁波
- * @Description 提现申请 controller
+ * @Description 佣金 controller
  * @date 2015年5月25日 下午9:57:57
  */
 @Controller
