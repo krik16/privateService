@@ -16,7 +16,7 @@
     <dubbo:reference id="oSMMcmcCommodityService" interface="com.rongyi.rss.mcmc.StockService"  version="${dubbo.version}" check="false"/>
     <dubbo:reference id="cashCouponService" interface="com.rongyi.rss.coupon.RoaCashCouponService"  version="${dubbo.version}" check="false"/>
     <dubbo:reference id="roaCouponService" interface="com.rongyi.rss.coupon.RoaCouponService"  version="${dubbo.version}" check="false"/>
-    <dubbo:reference id="userCashCouponService" interface="com.rongyi.rss.coupon.RoaUserCashCouponService"  version="${dubbo.version}" check="false"/>
+    <dubbo:reference id="roaUserRedenvelopeService" interface="com.rongyi.rss.coupon.RoaUserRedenvelopeService"  version="${dubbo.version}" check="false"/>
     <dubbo:reference id="roaOrderService" interface="com.rongyi.rss.mallshop.order.ROAOrderService"  version="${dubbo.version}" check="false"/>
     <dubbo:reference id="scoreService" interface="com.rongyi.rss.integral.IntegralService"  version="${dubbo.version}" check="false"/>
     <dubbo:reference id="mallLifeUserService" interface="com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService"  version="${dubbo.version}" check="false"/>
