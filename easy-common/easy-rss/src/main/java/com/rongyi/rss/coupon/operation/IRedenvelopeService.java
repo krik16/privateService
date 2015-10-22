@@ -44,11 +44,10 @@ public interface IRedenvelopeService {
     /**
      * 分页查询
      *
-     * @param RedenvelopeParam
-     * @throws RuntimeExceptiona
+     * @param param
      * @return
      */
-    PagingVO<RedenvelopCouponVO> findAllByPage(RedenvelopeParam paramVo);
+    PagingVO<RedenvelopCouponVO> findAllByPage(RedenvelopeParam param);
 
     /**
      * 审核现金劵
