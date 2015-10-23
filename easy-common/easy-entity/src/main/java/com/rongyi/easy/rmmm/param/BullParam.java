@@ -19,8 +19,6 @@ import com.rongyi.easy.malllife.param.MalllifeBaseParam;
 public class BullParam extends MalllifeBaseParam implements Serializable{
 	
 	private String bullId;//买手id
-	private Integer currentPage = 1;//  从1开始
-	private Integer pageSize = 3000;
 	private String liveId;//直播id
 	private String commodityType;//商品类型", 1所有商品2导购商品3买手商品
 
@@ -30,22 +28,6 @@ public class BullParam extends MalllifeBaseParam implements Serializable{
 
 	public void setBullId(String bullId) {
 		this.bullId = bullId;
-	}
-
-	public Integer getCurrentPage() {
-		return currentPage;
-	}
-
-	public void setCurrentPage(Integer currentPage) {
-		this.currentPage = currentPage;
-	}
-
-	public Integer getPageSize() {
-		return pageSize;
-	}
-
-	public void setPageSize(Integer pageSize) {
-		this.pageSize = pageSize;
 	}
 
 	public String getLiveId() {
