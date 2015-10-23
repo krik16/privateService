@@ -1,26 +1,25 @@
 package com.rongyi.osm.service.coupon;
 
+import com.rongyi.rss.coupon.RoaUserRedenvelopeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.rongyi.rss.coupon.RoaUserCashCouponService;
 
 @Service
 public class CouponStatusService {
 
 	@Autowired
-	RoaUserCashCouponService userCashCouponService;
+	private RoaUserRedenvelopeService roaUserRedenvelopeService;
 
 	public int getCouponStatusByCode(String couponCode){
-		return userCashCouponService.getCashCouponStatus(couponCode);
+		return roaUserRedenvelopeService.getCashCouponStatus(couponCode);
 	}
 
 	public boolean setCouponStatusByCode(String couponCode, int status, String orderNo, Integer guideId){
-		return userCashCouponService.changeCashCouponStatus(couponCode, status, orderNo, guideId);
+		return roaUserRedenvelopeService.changeCashCouponStatus(couponCode, status, orderNo, guideId);
 	}
 
 	public Double getDiscountByCode(String couponCode){
-		return userCashCouponService.getCashCouponDiscount(couponCode);
+		return roaUserRedenvelopeService.getCashCouponDiscount(couponCode);
 	}
 
 }
