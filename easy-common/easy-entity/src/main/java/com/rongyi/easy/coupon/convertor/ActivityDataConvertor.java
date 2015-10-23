@@ -21,8 +21,8 @@ public abstract class ActivityDataConvertor {
         act.setTitle(coupon.getName());
         act.setThumbnail(coupon.getListPicUrl());
         act.setCarouselImg(coupon.getDetailPicUrls());
-        act.setGrouponPrice(String.valueOf(coupon.getCurrPrice()));
-        act.setGrouponOriginal(String.valueOf(coupon.getOrigPrice()));
+        act.setGrouponPrice(String.valueOf(coupon.getCurrPrice2Double()));
+        act.setGrouponOriginal(String.valueOf(coupon.getOrigPrice2Double()));
         act.setGrouponNum(String.valueOf(coupon.getTotalCount()));
         act.setStart_time(coupon.getValidStartAt());
         act.setEnd_time(coupon.getValidEndAt());
