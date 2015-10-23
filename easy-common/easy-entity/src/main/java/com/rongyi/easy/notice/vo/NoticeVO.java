@@ -21,6 +21,8 @@ public class NoticeVO implements Serializable{
     private String shopMid;
     /**状态0待审核 1审核通过 2 未通过*/
     private Integer status;
+	/**公告状态   0正常  1已下线*/
+	private Integer noticeStatus;
     /**发布时间*/
     private Date publishBeginAt;
     /**结束时间*/
@@ -93,6 +95,12 @@ public class NoticeVO implements Serializable{
 	public void setPicList(List<String> picList) {
 		this.picList = picList;
 	}
-    
-    
+
+	public Integer getNoticeStatus() {
+		return noticeStatus;
+	}
+
+	public void setNoticeStatus(Integer noticeStatus) {
+		this.noticeStatus = noticeStatus;
+	}
 }

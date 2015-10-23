@@ -283,7 +283,9 @@ public class DateUtil {
 
 	public static int dateDiff(Date dt1, Date dt2) {
 		long ldate1 = dt1.getTime();
+		//System.out.println(ldate1);
 		long ldate2 = dt2.getTime();
+		//System.out.println(ldate2);
 		return (int) ((ldate2 - ldate1) / (1000*60));
 	}
 	

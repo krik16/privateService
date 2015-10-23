@@ -15,7 +15,7 @@ public class CheckParam implements Serializable {
 
 
     private String jsession;
-    private Integer status;//1 :通过  ；2：未通过
+    private Integer status;//1 :通过  ；2：未通过    ； 3：下线
     private String reason;
 
     public CheckParam(String jsession, Integer status, String reason) {
