@@ -202,11 +202,11 @@ public interface ProxyCouponOrderService {
     Map<String, Object> calcRefundAmount(String orderNo, Integer number, String userId);
 
     /**
-     * 代金券购买前检查
+     * 代金券已购买数
      *
      * @param couponId
      * @param userId
      * @return
      */
-    Map<String, Object> buyCoupon(String couponId, String userId);
+    int buyedCount(String couponId, String userId);
 }

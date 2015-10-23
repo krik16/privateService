@@ -71,13 +71,13 @@ public interface MLCouponOrderService {
     List<CouponOrderItem> findOrderItemsById(Long orderId);
 
     /**
-     * 优惠券立即购买
+     * 用户已购买代金券数
      *
      * @param couponId
      * @param userId
      * @return
      */
-    Map<String, Object> buyCoupon(String couponId, String userId);
+    int buyedCount(String couponId, String userId);
 
     /**
      * 提交优惠券订单
