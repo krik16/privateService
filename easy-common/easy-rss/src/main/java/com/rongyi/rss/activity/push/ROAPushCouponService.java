@@ -38,4 +38,5 @@ public interface ROAPushCouponService {
     public ResponseResult subtractCouponInventory(String coupongId, int amount);
 
 
+    void createCouponOrder(CouponOrderParam param);
 }
