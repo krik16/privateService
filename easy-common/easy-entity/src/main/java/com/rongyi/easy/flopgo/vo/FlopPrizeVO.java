@@ -98,7 +98,7 @@ public class FlopPrizeVO implements Serializable{
 
 				this.restCount=coupon.getStockCount();//这个是计算库存
 
-			this.activityStatus=coupon.getIsRelatedActivity()?"1":"0";
+//			this.activityStatus=coupon.getIsRelatedActivity()?"1":"0";
 			this.nowPrice=coupon.getCurrPrice2Double();
 			this.originalPrice=coupon.getOrigPrice2Double();
 			this.discount=coupon.getDiscount2Double();
