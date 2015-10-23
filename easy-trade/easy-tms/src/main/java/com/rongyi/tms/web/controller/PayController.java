@@ -91,8 +91,8 @@ public class PayController extends BaseController {
     @RequestMapping(value = "/drawApplyList", method = RequestMethod.POST)
     public String list(ModelMap model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
         try {
-            LOGGER.info("----pay list ------");
             Map<String, Object> map = getJsonMap(request);
+            LOGGER.info("----pay list ------map="+map);
             String currpage = (String) map.get("currpage");
             List<TradeVO> list = payService.selectPayPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE);
             double pageTotle = payService.selectPayPageListCount(map);
@@ -119,8 +119,8 @@ public class PayController extends BaseController {
     @RequestMapping(value = "/refundList", method = RequestMethod.POST)
     public String refundList(ModelMap model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
         try {
-            LOGGER.info("----refund list ------");
             Map<String, Object> map = getJsonMap(request);
+            LOGGER.info("----refund list ------ map="+map);
             String currpage = (String) map.get("currpage");
             // map.put("status", ConstantEnum.TRADE_STATUS_PAY_NO.getCodeInt());
             map.put("tradeType", ConstantEnum.TRADE_TYPE_REFUND.getCodeInt());
@@ -162,8 +162,8 @@ public class PayController extends BaseController {
     @RequestMapping(value = "/exceList", method = RequestMethod.POST)
     public String exceList(ModelMap model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
         try {
-            LOGGER.info("----exce list ------");
             Map<String, Object> map = getJsonMap(request);
+            LOGGER.info("----exce list ------map="+map);
             String currpage = (String) map.get("currpage");
             map.put("status", ConstantEnum.TRADE_STATUS_PAY_NO.getCodeInt());
             map.put("tradeType", ConstantEnum.TRADE_TYPE_EXCE_PAY.getCodeInt());
@@ -228,8 +228,8 @@ public class PayController extends BaseController {
     @RequestMapping(value = "/paySellerList", method = RequestMethod.POST)
     public String paySellerList(ModelMap model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
         try {
-            LOGGER.info("----paySeller list ------");
-            Map<String, Object> map = getJsonMap(request);
+        	Map<String, Object> map = getJsonMap(request);
+            LOGGER.info("----paySeller list ------map="+map);
             map.put("tradeType", 2);
             String currpage = (String) map.get("currpage");
             List<TradeVO> list = payService.selectPayPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE);
@@ -255,7 +255,7 @@ public class PayController extends BaseController {
     @RequestMapping("/validatePay")
     @ResponseBody
     public ResponseResult validatePay(@RequestParam String ids[], @RequestParam Integer operateType, Model model) {
-        LOGGER.info("================操作退款/付款前验证是否符合条件 ====================");
+        LOGGER.info("================操作退款/付款前验证是否符合条件 ====================ids="+ids.toString()+"operateType="+operateType);
         ResponseResult result = new ResponseResult();
         try {
             Map<String, Object> resultMap = rpbService.validatePayHtml(ids, operateType);
@@ -307,7 +307,7 @@ public class PayController extends BaseController {
     @RequestMapping("/weixinRefund")
     @ResponseBody
     public ResponseResult weixinRefund(@RequestParam Integer paymentId, Model model) {
-        LOGGER.info("================微信手动操作退款====================");
+        LOGGER.info("================微信手动操作退款====================paymentId="+paymentId);
         ResponseResult result = new ResponseResult();
         try {
             Map<String, Object> resultMap = rpbService.operateWeixinRefund(paymentId);

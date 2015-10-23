@@ -39,7 +39,8 @@
 							<c:when test="${item.guideType eq 2}">
 								<td>买手</td>
 							</c:when>
-						</c:choose>choose
+							<c:otherwise><td></td></c:otherwise>
+						</c:choose>
 						<td><fmt:formatDate value="${item.orderTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 						<c:choose>
 						<c:when test="${item.payChannel eq 0}">

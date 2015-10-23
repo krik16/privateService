@@ -55,13 +55,13 @@ public class TradeDetailController extends BaseController {
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	public String list(ModelMap model, String currentMallId, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		try {
-			LOGGER.info("----- trade list -----");
 			try {
 				request.setCharacterEncoding("utf-8");
 			} catch (UnsupportedEncodingException e1) {
 				LOGGER.error(e1);
 			}
 			String paramsJson = request.getParameter("paramsJson");
+			LOGGER.info("----- trade list -----paramsJson="+paramsJson);
 			if (paramsJson == null) {
 				Map<String, Object> resultMap = new HashMap<String, Object>();
 				resultMap.put("msg", "参数为NULL，请关闭再重试！");

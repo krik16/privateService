@@ -42,13 +42,14 @@
                     <tr>
                         <td><a href="${ctx}/tradeDetail/info?id=${entity.id}&tradeNo=${entity.tradeNo}" target="_blank"
                                style="text-decoration: underline;">${entity.tradeNo}</a></td>
-                        <td>
+                        <td>${entity.payNo}</td>
+                         <td>
                             <c:choose>
                                 <c:when test="${entity.guideType eq 1}">商家</c:when>
                                 <c:when test="${entity.guideType eq 2}">买手</c:when>
+                                <c:otherwise></c:otherwise>
                             </c:choose>
                         </td>
-                        <td>${entity.payNo}</td>
                         <td><fmt:formatDate value="${entity.tradeTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                         <td>
                             <c:choose>

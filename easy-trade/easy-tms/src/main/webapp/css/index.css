@@ -2169,8 +2169,22 @@ audio,canvas,video {
 	*zoom: 1
 }
 
-audio:not ([controls] ) {
-	display: none
+audio
+:not
+ 
+(
+[
+controls
+]
+ 
+)
+{
+display
+:
+ 
+none
+
+
 } /* 代码整理：懒人之家 www.lanrenzhijia.com */
 table {
 	border-collapse: collapse;
@@ -2829,4 +2843,82 @@ a.btnsearch {
 
 .search table tr {
 	margin-top: 20px;
+}
+
+
+.form-inline {
+    width: 98%;
+}
+
+.p-list .form-inline {
+    margin-bottom: 5px;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+.form-group {
+	display: inline-block;
+	height: 30px;
+	margin-bottom: 15px;
+	margin-right: 10px;
+	vertical-align: middle;
+}
+
+label {
+	display: inline-block;
+	max-width: 100%;
+	margin-bottom: 5px;
+}
+
+.form-group .form-control {
+	display: inline-block;
+	padding: 0 10px;
+	width: auto;
+	height: 30px;
+	border-radius: 2px;
+	vertical-align: baseline;
+	background: #fff;
+	font-size: 12px;
+	color: #666;
+	box-shadow: none;
+	border: 1px solid #d9dadc;
+}
+
+.form-group select {
+	min-width: 100px
+}
+
+.form-group input[type=text] {
+	padding-left: 10px;
+	padding-right: 10px
+}
+
+.form-inline .form-group input[type=text][readonly] {
+	cursor: pointer
+}
+
+.form-group .input-group-btn .btn {
+	padding: 4px 8px
+}
+
+.form-inline .form-group .input-group {
+	display: inline-table;
+	margin-right: 10px;
+	vertical-align: middle
+}
+
+.form-inline .form-group .input-group .dropdown-menu {
+	padding: 5px
+}
+
+.form-inline .form-group .input-group .dropdown-menu .btn {
+	border: 0
+}
+
+.form-inline .form-group .cms-btn {
+	border-radius: 3px
+}
+
+.divBtn {
+	margin-bottom: 20px
 }

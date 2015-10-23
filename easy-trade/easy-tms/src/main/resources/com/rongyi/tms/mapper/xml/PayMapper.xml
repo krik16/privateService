@@ -94,7 +94,7 @@
         </if>
         <!-- 渠道 -->
         <if test="guideType != null and guideType != ''">
-            AND guide_type >= #{guideType}
+            AND guide_type = #{guideType}
         </if>
     </sql>
     <select id="selectPayPageList" resultMap="BaseResultMap"
