@@ -21,7 +21,7 @@ public class ActivityData extends Data implements Serializable {
     private String holder_type;
 
     private String thumbnail; //缩略图
-    private ArrayList<String> carouselImg = new ArrayList<String>(); //轮播图片
+    private List<String> carouselImg = new ArrayList<>(); //轮播图片
 
     private String vistedNum; //访问次数
     private String userQuota; // 用户限购数量
@@ -107,11 +107,11 @@ public class ActivityData extends Data implements Serializable {
         this.thumbnail = thumbnail;
     }
 
-    public ArrayList<String> getCarouselImg() {
+    public List<String> getCarouselImg() {
         return carouselImg;
     }
 
-    public void setCarouselImg(ArrayList<String> carouselImg) {
+    public void setCarouselImg(List<String> carouselImg) {
         this.carouselImg = carouselImg;
     }
 

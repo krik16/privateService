@@ -6,8 +6,6 @@ import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.solr.retrival.result.ActivityData;
 import org.apache.commons.collections.CollectionUtils;
 
-import java.util.ArrayList;
-
 /**
  * Created by Breggor on 2015/10/23.
  */
@@ -22,7 +20,7 @@ public abstract class ActivityDataConvertor {
         act.setId(coupon.getId());
         act.setTitle(coupon.getName());
         act.setThumbnail(coupon.getListPicUrl());
-        act.setCarouselImg((ArrayList<String>) coupon.getDetailPicUrls());
+        act.setCarouselImg(coupon.getDetailPicUrls());
         act.setGrouponPrice(String.valueOf(coupon.getCurrPrice()));
         act.setGrouponOriginal(String.valueOf(coupon.getOrigPrice()));
         act.setGrouponNum(String.valueOf(coupon.getTotalCount()));
