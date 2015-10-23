@@ -16,7 +16,7 @@ import java.util.Map;
  * 目的是最小代价将依赖从coupon-service切换过来
  *
  * @author liuhao
- * @version  2015/8/13
+ * @version 2015/8/13
  */
 public interface ProxyCouponOrderService {
 
@@ -38,6 +38,7 @@ public interface ProxyCouponOrderService {
 
     /**
      * 更新订单号更新订单状态为退款完成
+     *
      * @param orderNo
      */
     void updateOrderRefundedByNo(String orderNo);
@@ -150,9 +151,9 @@ public interface ProxyCouponOrderService {
     /**
      * 支付成功后处理订单状态
      *
-     * @param orderNo   订单号
-     * @param tradeWay  支付方式
-     * @param paymentNo 支付单号
+     * @param orderNo    订单号
+     * @param tradeWay   支付方式
+     * @param paymentNo  支付单号
      * @param payAccount 支付账户(例如支付宝账户)
      * @return
      */
@@ -172,6 +173,7 @@ public interface ProxyCouponOrderService {
 
     /**
      * 优惠券列表（全部、未付款）
+     *
      * @param paramsMap
      * @param currentPage
      * @param pageSize
@@ -182,6 +184,7 @@ public interface ProxyCouponOrderService {
 
     /**
      * 优惠券列表（未消费、已退款、退款中）
+     *
      * @param paramsMap
      * @param currentPage
      * @param pageSize
@@ -191,7 +194,6 @@ public interface ProxyCouponOrderService {
                                            Integer currentPage, Integer pageSize);
 
     /**
-     *
      * @param orderNo
      * @param number
      * @param userId
@@ -199,4 +201,12 @@ public interface ProxyCouponOrderService {
      */
     Map<String, Object> calcRefundAmount(String orderNo, Integer number, String userId);
 
+    /**
+     * 代金券购买前检查
+     *
+     * @param couponId
+     * @param userId
+     * @return
+     */
+    Map<String, Object> buyCoupon(String couponId, String userId);
 }
