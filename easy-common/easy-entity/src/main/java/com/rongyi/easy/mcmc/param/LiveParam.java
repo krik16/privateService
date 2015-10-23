@@ -1,11 +1,18 @@
 package com.rongyi.easy.mcmc.param;
+
+import java.io.Serializable;
+
 /**
  * 直播
  * @author zzq
  *
  */
-public class LiveParam {
+public class LiveParam implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String liveId;
 	String bullId;
 	String liveTitle;
@@ -15,8 +22,30 @@ public class LiveParam {
 	String liveStatus;
 	String jsessionid;
 	int commodityCount;
+	
 	int page;
 	int pageSize;
+	/**
+	 * 地址类型 0商场，1街边店
+	 */
+	private int zoneType;
+	/**
+	 * 定点位置id
+	 */
+	private String liveAddressId;
+	
+	public int getZoneType() {
+		return zoneType;
+	}
+	public void setZoneType(int zoneType) {
+		this.zoneType = zoneType;
+	}
+	public String getLiveAddressId() {
+		return liveAddressId;
+	}
+	public void setLiveAddressId(String liveAddressId) {
+		this.liveAddressId = liveAddressId;
+	}
 	public int getCommodityCount() {
 		return commodityCount;
 	}
