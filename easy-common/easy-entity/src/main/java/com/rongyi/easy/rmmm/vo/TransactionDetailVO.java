@@ -63,7 +63,17 @@ public class TransactionDetailVO implements Serializable{
 	/** 翻牌购拼接的url */
 	private String url;
 	
-	private String isCollection;//是否收藏了店铺
+	private String isCollection;//是否收藏了店铺 0否 1是
+	
+	private Integer ifAttention = 0;// 是否已关注0否1是
+
+	public Integer getIfAttention() {
+		return ifAttention;
+	}
+
+	public void setIfAttention(Integer ifAttention) {
+		this.ifAttention = ifAttention;
+	}
 
 	public String getIsCollection() {
 		return isCollection;
