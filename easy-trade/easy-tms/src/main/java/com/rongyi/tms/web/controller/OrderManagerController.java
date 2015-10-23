@@ -237,6 +237,7 @@ public class OrderManagerController extends BaseController {
 			String nickname = (String) paramsMap.get("nickname");
 			String username = (String) paramsMap.get("username");
 			String status = (String) paramsMap.get("status");
+			String guideType = paramsMap.containsKey("guideType")? paramsMap.get("guideType").toString():null;
 			//查询用户条件
 			List<UserInfoVO> users = null;
 			if (StringUtils.isNotBlank(nickname) || StringUtils.isNotBlank(username)) {
@@ -285,6 +286,9 @@ public class OrderManagerController extends BaseController {
 			}
 			if (StringUtils.isNotBlank((String) paramsMap.get("currpage"))) {
 				searchMap.put("currentPage", paramsMap.get("currpage"));
+			}
+			if(StringUtils.isNotBlank(guideType)){
+				searchMap.put("guideType", guideType);
 			}
 			PagingVO<OrderManagerVO> pagingVO = roaOrderFormService.searchListByMap(searchMap);
 			List<OrderManagerVO> orderForms = pagingVO.getDataList();

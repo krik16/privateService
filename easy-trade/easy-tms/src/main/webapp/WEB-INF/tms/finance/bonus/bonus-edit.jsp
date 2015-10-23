@@ -208,7 +208,7 @@ var originalGuideType = $("#guideType").val();
 			_util.cmsTip("账号不为空！");
 			return;
 		}
-		$.get("../bonus/update",{id:id,sellerAccount:sellerAccount,type:type,marks:marks,amount:amount,operateType:operateType,guideType:guideType},
+		$.post("../bonus/update",{id:id,sellerAccount:sellerAccount,type:type,marks:marks,amount:amount,operateType:operateType,guideType:guideType},
 			function(data){
 				if (data.success == true) {
 					_util.cmsTip("操作成功!");

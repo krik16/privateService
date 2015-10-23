@@ -42,6 +42,14 @@
 					<tr style="height: 50px;">
 						<td width="80"><span class="search-span">订单号：</span></td>
 						<td width="10%"><input id="orderNo" name="orderNo" type="text" class="min-input4" value="" maxlength="18" /></td>
+						<td width="80"><span class="search-span">渠道：</span></td>
+						<td width="10%">
+							<select id="guideType" class="search-input1"  style="width: 90px">
+								<option value="" selected>--全部--</option>
+								<option value="1">商家</option>
+								<option value="2">买手</option>
+							</select>
+						</td>
 						
 						<td width="60"><span class="search-span">商场：</span></td>
 						<td width="10%">
