@@ -34,7 +34,21 @@ public class LiveSearchParam extends BaseParam implements Serializable{
 	private String liveId;
 	private String locId; //直播对应的商场or店铺的Id
 	private String jsessionid;
+	private String bullName; // 买手昵称
+	private String bullId; // 买手id
 	
+	public String getBullName() {
+		return bullName;
+	}
+	public void setBullName(String bullName) {
+		this.bullName = bullName;
+	}
+	public String getBullId() {
+		return bullId;
+	}
+	public void setBullId(String bullId) {
+		this.bullId = bullId;
+	}
 	public String getLocId() {
 		return locId;
 	}

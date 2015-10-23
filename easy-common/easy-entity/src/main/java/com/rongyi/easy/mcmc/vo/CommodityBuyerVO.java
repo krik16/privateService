@@ -20,7 +20,17 @@ public class CommodityBuyerVO implements Serializable{
 	private int commodityType;//渠道  1商家，2买手
 
 	private List<String> shopIM;// 店铺可用IM账号
+	
+	private String bullId;//创建人
+	
+	
+	public String getBullId() {
+		return bullId;
+	}
 
+	public void setBullId(String bullId) {
+		this.bullId = bullId;
+	}
 
 	public int getCommodityType() {
 		return commodityType;
@@ -133,9 +143,12 @@ public class CommodityBuyerVO implements Serializable{
 		if(commodity.getBrandName() != null){
 			this.commodityBrandName = commodity.getBrandName();
 		}
-		
-		// 买手版渠道  1商家，2买手
+		if(commodity.getCreate_by() != null){
+			this.bullId = commodity.getCreate_by();//商品创建人
+		}
+		// 买手版渠道  0商家，1买手
 		this.commodityType = commodity.getType();
+		
 	}
 	
 	public List<String> getCommodityPicList() {

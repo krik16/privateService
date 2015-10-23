@@ -60,6 +60,29 @@ public class LiveSolrDocument implements Serializable {
 	@Field("position")
 	private String position;
 
+	@Field("bullId")
+	private String bullId;
+	
+	@Field("bullName")
+	private String bullName;
+	
+	
+	public String getBullId() {
+		return bullId;
+	}
+
+	public void setBullId(String bullId) {
+		this.bullId = bullId;
+	}
+
+	public String getBullName() {
+		return bullName;
+	}
+
+	public void setBullName(String bullName) {
+		this.bullName = bullName;
+	}
+
 	public String getName() {
 		return name;
 	}
