@@ -83,7 +83,7 @@ public interface LiveService {
 	/**
 	 * 通过直播id列表查询直播列表
 	 * @param ids 直播id列表
-	 * @param time 直播时间,null查询所有时间
+	 * @param time 直播时间,-1查询所有时间
 	 * @param commodityCount 需要返回的商品个数，如果为-1，返回全部商品。
 	 * @param liveStatus 直播状态 -1全部，0发布，1上线，2下线
 	 * @param commodityStatus 商品状态 -1全部，0下架，1上架
