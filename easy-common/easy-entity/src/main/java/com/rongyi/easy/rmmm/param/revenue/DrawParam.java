@@ -19,8 +19,7 @@ public class DrawParam implements Serializable {
 	private String accountName;
 	/** 提现账号类型  (0：支付宝，1：银行卡) */
 	private String accountType;
-	/** 用户类型  1导购 2买手*/
-	private Integer guideType;
+	
 	/** 提现金额 */
 	public BigDecimal getDrawAmount() {
 		return drawAmount;
@@ -52,12 +51,6 @@ public class DrawParam implements Serializable {
 	/** 提现账号类型  (0：支付宝，1：银行卡) */
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
-	}
-	public Integer getGuideType() {
-		return guideType;
-	}
-	public void setGuideType(Integer guideType) {
-		this.guideType = guideType;
 	}
 	
 }
