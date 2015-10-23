@@ -21,7 +21,7 @@ public class AccountBlackListServiceImplTest extends BaseTest {
 	IAntiCheatService iAntiCheatService;
 
 	 @Test
-	@Rollback(false)
+//	@Rollback(false)
 	public void testValadatePayAccount() {
 		blackRollService.valadatePayAccount(new HashMap<String, Object>());
 	}

@@ -11,6 +11,7 @@ package com.rongyi.cheat.service.impl;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -28,8 +29,11 @@ import com.rongyi.cheat.constants.Constant;
 import com.rongyi.cheat.constants.ConstantEnum;
 import com.rongyi.cheat.mail.MailService;
 import com.rongyi.cheat.service.AccountBlacklistService;
+import com.rongyi.cheat.util.SmsUtil;
+import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
+import com.rongyi.core.framework.spring.context.utils.SpringContextUtil;
 import com.rongyi.easy.cheat.AccountBlacklist;
 import com.rongyi.easy.rpb.vo.PayAccountUseTotal;
 import com.rongyi.rss.rpb.IRpbService;
@@ -49,6 +53,7 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 	@Autowired
 	MailService mailService;
 
+	
 	private static final String NAMESPACE = "com.rongyi.cheat.mapper.xml.AccountBlacklistMapper";
 
 	private static final Logger LOGGER = Logger.getLogger(AccountBlacklistServiceImpl.class);
@@ -83,7 +88,11 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 	@Override
 	public void valadatePayAccount(Map<String, Object> map) {
 		map.put("count", Constant.BLACKLIST_CONFIG.WARN_COUNT);
-		LOGGER.info("扫描是否有账号符合黑名单条件，购买次数大于" + Constant.BLACKLIST_CONFIG.WARN_COUNT);
+		Date endTime = DateUtil.getCurrDateTime();
+		Date startTime = getStartTime(endTime);
+		map.put("startTime", startTime);
+		map.put("endTime",endTime);
+		LOGGER.info("扫描是否有账号符合黑名单条件，购买次数大于" + Constant.BLACKLIST_CONFIG.WARN_COUNT+",map="+map);
 		List<PayAccountUseTotal> list = rpbService.selectPayAccountUseTotal(map);
 		List<AccountBlacklist> mailWranList = new ArrayList<AccountBlacklist>();
 		for (PayAccountUseTotal payAccountUseTotal : list) {
@@ -100,8 +109,28 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 					mailWranList.add(accountBlacklist);
 			}
 		}
-		if (!mailWranList.isEmpty())
-			sendWranEmail(mailWranList);
+		if (!mailWranList.isEmpty()){
+			sendWranEmail(mailWranList);//发送邮件
+			sendBlackListMs(mailWranList, startTime, endTime);//发送短信
+		}
+	}
+	private void sendBlackListMs(List<AccountBlacklist> mailWranList,Date startTime,Date endTime){
+		String phones = Constant.BLACKLIST_CONFIG.SEND_PHONE;
+		for (AccountBlacklist accountBlacklist : mailWranList) {
+			String payType = (accountBlacklist.getPayType() == 0) ? "支付宝" : "微信";
+			SmsUtil.sendMoreMsMessage(phones.split(","), accountBlacklist.getCount(), accountBlacklist.getPayAccount(), payType, startTime, endTime);
+		}
+	}
+	
+	private Date getStartTime(Date endTime){
+		try {
+			int blackHour = Integer.valueOf(Constant.BLACKLIST_CONFIG.BLACK_HOUR);
+			Date startTime = DateUtil.addHours(endTime, -blackHour);
+			return startTime;
+		} catch (Exception e) {
+			LOGGER.error("获取开始时间失败,"+e.getMessage());
+		}
+		return null;
 	}
 
 	@Override

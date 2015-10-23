@@ -12,6 +12,8 @@ public interface Constant {
 		String SEND_ADDRESS = propertyConfigurer.getProperty("SEND_ADDRESS").toString();//发送邮件地址
 		String TO_ADDRESS = propertyConfigurer.getProperty("TO_ADDRESS").toString();//接收邮件地址
 		String BLACKLIST_URL = propertyConfigurer.getProperty("BLACKLIST_URL").toString();//黑名单列表URL
+		String BLACK_HOUR = propertyConfigurer.getProperty("BLACK_HOUR").toString();//黑名单查询时间跨度
+		String SEND_PHONE = propertyConfigurer.getProperty("SEND_PHONE").toString();//发送短信手机号
 	}
 
 	
