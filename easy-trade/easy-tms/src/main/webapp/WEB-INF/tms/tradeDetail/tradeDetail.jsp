@@ -73,13 +73,13 @@
                 </select>
             </div>
             <div class="form-group">
-                <li class="xiala">
+                <li class="xiala" style="list-style-type:none;">
                     <label>商场：</label>
                     <input name="mallId" type="text" class="form-control ng-pristine ng-untouched ng-valid">
                 </li>
             </div>
             <div class="form-group">
-                <li class="xiala">
+                <li class="xiala" style="list-style-type:none;">
                     <label>店铺：</label>
                     <input name="shopId" type="text" class="form-control ng-pristine ng-untouched ng-valid">
                 </li>

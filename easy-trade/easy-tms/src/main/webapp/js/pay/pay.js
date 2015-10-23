@@ -267,12 +267,12 @@ function switchCheck(check) {
 		$("#paySeller").removeClass("change-color");
 		
 		$("#search-payNo").css("display","none");
-		$("#search-drawNo").css("display","block");
+		$("#search-drawNo").css("display","inline");
 		$("#search-orderNo").css("display","none");
-		$("#search-sellerName").css("display","block");
+		$("#search-sellerName").css("display","inline");
 		$("#search-buyerName").css("display","none");
 		$("#search-buyerAccount").css("display","none");
-		$("#search-guideType").css("display","block");
+		$("#search-guideType").css("display","inline");
 
 		
 		$("#search-price").html('提现金额：');
@@ -293,11 +293,11 @@ function switchCheck(check) {
 		
 		$("#search-payNo").css("display","none");
 		$("#search-drawNo").css("display","none");
-		$("#search-orderNo").css("display","block");
+		$("#search-orderNo").css("display","inline");
 		$("#search-sellerName").css("display","none");
-		$("#search-buyerName").css("display","block");
-		$("#search-buyerAccount").css("display","block");
-		$("#search-guideType").css("display","block");
+		$("#search-buyerName").css("display","inline");
+		$("#search-buyerAccount").css("display","inline");
+		$("#search-guideType").css("display","inline");
 		$("#search-price").html('退款金额：');
 		$("#search-time").html('退款申请时间段：');
 		$("#search-price").width(60);
@@ -313,11 +313,11 @@ function switchCheck(check) {
 		$("#paySeller").addClass("now");
 		$("#paySeller").removeClass("change-color");
 		
-		$("#search-payNo").css("display","block");
+		$("#search-payNo").css("display","inline");
 		$("#search-drawNo").css("display","none");
-		$("#search-orderNo").css("display","block");
+		$("#search-orderNo").css("display","inline");
 		$("#search-sellerName").css("display","none");
-		$("#search-buyerName").css("display","block");
+		$("#search-buyerName").css("display","inline");
 		$("#search-guideType").css("display","none");
 		$("#search-time").html('异常交易时间段：');
 		$("#search-price").html('异常付款金额：');
@@ -336,9 +336,9 @@ function switchCheck(check) {
 		$("#exceTrade").removeClass("change-color");
 		
 		$("#search-payNo").css("display","none");
-		$("#search-drawNo").css("display","block");
+		$("#search-drawNo").css("display","inline");
 		$("#search-orderNo").css("display","none");
-		$("#search-sellerName").css("display","block");
+		$("#search-sellerName").css("display","inline");
 		$("#search-buyerName").css("display","none");
 		$("#search-guideType").css("display","none");
 		

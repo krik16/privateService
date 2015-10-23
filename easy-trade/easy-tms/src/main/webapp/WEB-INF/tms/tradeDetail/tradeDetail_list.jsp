@@ -16,25 +16,25 @@
             <span style="font-size: 18px;color: gray;">${expenseTotal}笔</span>
         </div>
     </div>
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;">
         <tr>
-            <td>交易流水号</td>
-            <td>付款单号</td>
-            <td>渠道</td>
-            <td>交易时间</td>
-            <td>收支类型</td>
-            <td>打款方式</td>
-            <td>优惠方式</td>
-            <td>商场</td>
-            <td>店铺</td>
-            <td>订单号</td>
-            <td>订单类型</td>
-            <td>下单时间</td>
-            <td>买家账号</td>
-            <td>买家姓名</td>
-            <td>卖家账号</td>
-            <td>卖家姓名</td>
-            <td>交易金额</td>
+            <td width="15%">交易流水号</td>
+            <td width="9%">付款单号</td>
+            <td width="4%">渠道</td>
+            <td width="5%">交易时间</td>
+            <td width="4%">收支类型</td>
+            <td width="4%">打款方式</td>
+            <td width="4%">优惠方式</td>
+            <td width="6%">商场</td>
+            <td width="5%">店铺</td>
+            <td width="9%">订单号</td>
+            <td width="5%">订单类型</td>
+            <td width="5%">下单时间</td>
+            <td width="6%">买家账号</td>
+            <td width="4%">买家姓名</td>
+            <td width="6%">卖家账号</td>
+            <td width="4%">卖家姓名</td>
+            <td width="5%">交易金额</td>
         </tr>
         <c:choose>
             <c:when test="${not empty list}">
