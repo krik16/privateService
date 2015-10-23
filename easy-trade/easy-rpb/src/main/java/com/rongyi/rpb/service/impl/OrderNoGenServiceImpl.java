@@ -5,7 +5,10 @@ import java.util.Date;
 import java.util.UUID;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 
+import com.rongyi.core.common.PropertyConfigurer;
+import com.rongyi.core.framework.spring.context.utils.SpringContextUtil;
 import com.rongyi.rss.rpb.OrderNoGenService;
 
 /**
@@ -15,6 +18,8 @@ import com.rongyi.rss.rpb.OrderNoGenService;
  * 
  **/
 public class OrderNoGenServiceImpl implements OrderNoGenService {
+
+	private static final Logger LOGGER = Logger.getLogger(OrderNoGenServiceImpl.class);
 
 	/**
 	 * @Description: 生成随机订单号
@@ -44,7 +49,15 @@ public class OrderNoGenServiceImpl implements OrderNoGenService {
 		formatter = new SimpleDateFormat("HHmm");
 		String hhmm = formatter.format(date);
 		sb.append(mmdd);
-		IdGenService idGenService = new IdGenService(1l);
+		PropertyConfigurer propertyConfigurer = (PropertyConfigurer) SpringContextUtil.getBean("propertyConfigurer");
+		long wokerId = 1;
+		try {
+			wokerId = Long.valueOf(propertyConfigurer.getProperty("idgenService.workerId").toString());
+		} catch (Exception e) {
+			LOGGER.error("配置的wokerId出现异常，使用默认wokerId = 1," + e.getMessage());
+			e.printStackTrace();
+		}
+		IdGenService idGenService = new IdGenService(wokerId);
 		String randomString = idGenService.nextId(8);
 		sb.append(randomString);
 		sb.append(hhmm);
