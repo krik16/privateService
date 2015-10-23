@@ -24,7 +24,26 @@ public class IntegralCommodityVO extends IntegralCommodity {
    * 沈阳大悦城ID
    */
   private String joyCode;
-  public String getJoyCode() {
+  /**
+   * 返回的礼品编码
+   */
+  private String otherGiftCode;
+  
+  /**
+ * @return the otherGiftCode
+ */
+public String getOtherGiftCode() {
+	return otherGiftCode;
+}
+
+/**
+ * @param otherGiftCode the otherGiftCode to set
+ */
+public void setOtherGiftCode(String otherGiftCode) {
+	this.otherGiftCode = otherGiftCode;
+}
+
+public String getJoyCode() {
 	return joyCode;
   }
 	

@@ -93,5 +93,17 @@ public interface MallMemberService {
    */
   void registerEMemberAndBindMallMember(MallMember mallMember) throws RYServiceException,
       MallMemberNotFoundException;
+  /**
+   * 
+  * @Title: queryMemberByNo 
+  * @Description: 通过会员编码查询会员信息
+  * @param @param memberNo
+  * @param @return    设定文件 
+  * @return MallMember    返回类型 
+  * @author shaozhou 
+  * @date 2015年10月21日 上午10:27:23
+  * @throws
+   */
+  MallMember queryMemberByNo(MallMember mallMember);
 
 }
