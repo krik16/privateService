@@ -35,7 +35,7 @@
         `trade_type`,`payment_order`.`pay_channel` AS `pay_channel`,`draw_apply`.`id` AS
         `draw_apply_id`,`draw_apply`.`shop_id` AS `shop_id`,`draw_apply`.`shop_name` AS
         `shop_name`,`draw_apply`.`mall_id` AS `mall_id`,`draw_apply`.`mall_name` AS
-        `mall_name`,`draw_apply`.`seller_account` AS `seller_account`,`draw_apply`.`seller_name` AS `seller_name`，guide_type
+        `mall_name`,`draw_apply`.`seller_account` AS `seller_account`,`draw_apply`.`seller_name` AS `seller_name`,guide_type
     </sql>
     <sql id="Base_from">
         (`payment_order` left join `draw_apply` on((`draw_apply`.`draw_no` = `payment_order`.`order_no`)))
@@ -43,55 +43,59 @@
     <sql id="trade_list_where_clause">
         <!-- 订单号 -->
         <if test="orderNo != null and orderNo != ''">
-            AND order_no = #{orderNo}
+            AND payment_order.order_no = #{orderNo}
         </if>
         <!-- 商场名称 -->
         <if test="mallName != null and mallName != ''">
-            AND mall_name like
+            AND draw_apply.mall_name like
             concat('%',#{mallName,jdbcType=VARCHAR},'%')
         </if>
         <!-- 店铺名称 -->
         <if test="shopName != null and shopName != ''">
-            AND shop_name like
+            AND draw_apply.shop_name like
             concat('%',#{shopName,jdbcType=VARCHAR},'%')
         </if>
         <!-- 卖家姓名 -->
         <if test="sellerName != null and sellerName != ''">
-            AND seller_name like
+            AND draw_apply.seller_name like
             concat('%',#{sellerName,jdbcType=VARCHAR},'%')
         </if>
         <!-- 状态 -->
         <if test="status != null and status != ''">
-            AND status = #{status}
+            AND payment_order.status = #{status}
         </if>
 
         <!-- 交易类型 -->
         <if test="tradeType != null and tradeType != ''">
-            AND trade_type = #{tradeType}
+            AND payment_order.trade_type = #{tradeType}
         </if>
         <if test="tradeType == null || tradeType == ''">
-            AND trade_type = 3
+            AND payment_order.trade_type = 3
         </if>
         <!-- 付款方式-->
         <if test="payChannel != null and payChannel != ''">
-            AND pay_channel = #{payChannel}
+            AND payment_order.pay_channel = #{payChannel}
         </if>
 
         <!-- 提现申请时间 -->
         <if test="tradeStartTime != null and tradeStartTime != ''">
-            AND order_time >= #{tradeStartTime}
+            AND payment_order.create_at >= #{tradeStartTime}
         </if>
         <if test="tradeEndTime != null and tradeEndTime != ''">
-            AND #{tradeEndTime} >= order_time
+            AND #{tradeEndTime} >= payment_order.create_at
         </if>
         <!-- 交易金额 -->
         <if test="minTotalPrice != null and minTotalPrice != ''">
-            AND order_price >= #{minTotalPrice}
+            AND payment_order.pay_amount >= #{minTotalPrice}
         </if>
         <if test="maxTotalPrice != null and maxTotalPrice != ''">
-            AND #{maxTotalPrice} >= order_price
+            AND #{maxTotalPrice} >= payment_order.pay_amount
+            AND #{maxTotalPrice} >= payment_order.pay_amount
         </if>
-
+        <!-- 渠道 -->
+        <if test="guideType != null and guideType != ''">
+            AND guide_type >= #{guideType}
+        </if>
     </sql>
     <select id="selectPayPageList" resultMap="BaseResultMap"
             parameterType="java.lang.Integer">
@@ -107,14 +111,14 @@
         </if>
 
         <if test="orderby == null">
-            order by order_time desc
+            order by payment_order.create_at desc
         </if>
 
         limit #{currentPage,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
     </select>
     <select id="selectPayPageListCount" parameterType="java.util.Map"
             resultType="java.lang.Integer">
-        select count(id) from
+        select count(payment_order.id) from
         <include refid="Base_from"/>
         <where>
             <include refid="trade_list_where_clause"/>
