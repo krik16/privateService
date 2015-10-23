@@ -48,7 +48,7 @@ public class Live implements  Serializable{
 	/**
 	 * 商场或者街边店id
 	 */
-	private Object zoneId;
+	private ObjectId zoneId;
 	/**
 	 * 商场或者街边店名称
 	 */
@@ -120,10 +120,10 @@ public class Live implements  Serializable{
 	public void setDetail(String detail) {
 		this.detail = detail;
 	}
-	public Object getZoneId() {
+	public ObjectId getZoneId() {
 		return zoneId;
 	}
-	public void setZoneId(Object zoneId) {
+	public void setZoneId(ObjectId zoneId) {
 		this.zoneId = zoneId;
 	}
 	public String getZoneName() {

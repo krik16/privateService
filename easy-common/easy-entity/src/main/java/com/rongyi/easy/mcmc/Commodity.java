@@ -46,6 +46,15 @@ public class Commodity implements  Serializable,Cloneable{
 	private String shopNum;
 	private String update_by;//修改人
 	
+	private String brandMid;//品牌mongoId
+	
+	
+	public String getBrandMid() {
+		return brandMid;
+	}
+	public void setBrandMid(String brandMid) {
+		this.brandMid = brandMid;
+	}
 	public String getLiveId() {
 		return liveId;
 	}

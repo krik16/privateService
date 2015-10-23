@@ -224,6 +224,10 @@ public class TradeVO implements Serializable {
 	 * 优惠方式
 	 */
 	private Integer favorType;
+	/**
+	 * 渠道 1：导购，2：买手
+	 */
+	private Integer guideType;
 
 	public Integer getId() {
 		return id;
@@ -568,5 +572,13 @@ public class TradeVO implements Serializable {
 
 	public void setRefundRejected(Integer refundRejected) {
 		this.refundRejected = refundRejected;
+	}
+
+	public Integer getGuideType() {
+		return guideType;
+	}
+
+	public void setGuideType(Integer guideType) {
+		this.guideType = guideType;
 	}
 }

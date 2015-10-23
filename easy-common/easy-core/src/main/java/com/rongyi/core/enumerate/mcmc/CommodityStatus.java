@@ -9,12 +9,12 @@ public enum CommodityStatus {
 	/**
 	 * 上架
 	 */
-	ON(0),
+	ON(1),
 
 	/**
 	 * 下架
 	 */
-	OFF(1);	
+	OFF(0);	
 
 	private int value;
 	
