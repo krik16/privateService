@@ -6,10 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 public class ActivityData extends Data implements Serializable {
+    public  static final String  HOLDER_TYPE_MALL = "Mall";
+    public  static final String  HOLDER_TYPE_SHOP = "Shop";
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -7005312631637437963L;
     private String _id;
     private String title;
