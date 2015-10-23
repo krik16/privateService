@@ -134,5 +134,4 @@ public interface RoaUserRedenvelopeService {
      */
     ResponseResult createByCouponOrderParam(CouponOrderParam param);
 
-    Map<String, Object> findCashCouponListByUserId(UserRedenvelopeParam param);
 }
