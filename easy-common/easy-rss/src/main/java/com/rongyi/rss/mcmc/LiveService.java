@@ -1,6 +1,5 @@
 package com.rongyi.rss.mcmc;
 
-import java.util.Date;
 import java.util.List;
 
 import com.rongyi.core.bean.ResponseVO;
@@ -90,7 +89,7 @@ public interface LiveService {
 	 * @param commodityStatus 商品状态 -1全部，0下架，1上架
 	 * @return 带List&lt;LiveVO&gt;的ResponseVO
 	 */
-	ResponseVO getLiveByIdsAndTime(List<String> ids, Date time, int commodityCount, int liveStatus,
+	ResponseVO getLiveByIdsAndTime(List<String> ids, long time, int commodityCount, int liveStatus,
 			int commodityStatus);
 }
 
