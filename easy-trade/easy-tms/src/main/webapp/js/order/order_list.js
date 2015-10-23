@@ -92,11 +92,15 @@ function ajaxSearchOrderList() {
 	var username = $('#username').val();
 	var status = $('#status').val();
 	var currpage = $('#currpage').val();
+	var guideType = $("#guideType").val();
 
 	var paramsJson_ = { };
 	paramsJson_["currpage"] = currpage;
 	if(orderNo != ""){
 		paramsJson_["orderNo"] = orderNo;
+	}
+	if(guideType != ""){
+		paramsJson_["guideType"] = guideType;
 	}
 	if(mallId != ""){
 		paramsJson_["mallId"] = mallId;
