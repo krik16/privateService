@@ -38,8 +38,4 @@ public interface ROAPushCouponService {
     public ResponseResult subtractCouponInventory(String coupongId, int amount);
 
 
-    /**
-     * 订单参数创建优惠订单
-     */
-    public ResponseResult createCouponOrder(CouponOrderParam param);
 }
