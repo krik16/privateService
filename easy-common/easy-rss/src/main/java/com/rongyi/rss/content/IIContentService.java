@@ -127,7 +127,7 @@ public interface IIContentService {
 	 * @param fc
 	 * @return
 	 */
-	boolean hasContent(ForumContent fc);
+	List<String> hasContent(ForumContent fc);
 	/**
 	 * 修改 位置时间
 	 * @param fp
