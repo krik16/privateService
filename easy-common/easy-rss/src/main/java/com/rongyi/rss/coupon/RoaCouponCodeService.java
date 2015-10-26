@@ -67,7 +67,7 @@ public interface RoaCouponCodeService {
      * @Description（券码） 把未领取已经过期的券码状态改为过期状态（定时任务）
      * @author yb
      */
-    public void updateAllCouponCodeValid();
+//    public void updateAllCouponCodeValid();
 
 
     /**
