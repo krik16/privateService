@@ -104,4 +104,13 @@ public interface CouponConstants {
         Integer CHECK_SUCCESS = 2;
     }
 
+    /**
+     * 券码类型：抵扣券[01] 代金券[02] 红包[03]
+     */
+    interface CouponCodeType {
+        String REBATE = "01";
+        String VOUCHER = "02";
+        String REDENVELOPE = "03";
+    }
+
 }
