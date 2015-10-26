@@ -312,7 +312,6 @@ public class RpbServiceImpl implements IRpbService {
 		map.put("message", "验证通过");
 		return map;
 	}
-
 	@Override
 	public Map<String, Object> generatePayment(PaymentParamVO paymentParamVO) {
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -362,3 +361,4 @@ public class RpbServiceImpl implements IRpbService {
 		}
 	}
 }
+

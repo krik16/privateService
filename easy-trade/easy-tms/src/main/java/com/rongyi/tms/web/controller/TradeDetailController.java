@@ -162,7 +162,7 @@ public class TradeDetailController extends BaseController {
 	 */
 	@RequestMapping(value = "/exportExcel", method = RequestMethod.GET)
 	public void exportExcel(HttpServletRequest request, HttpServletResponse response) {
-		LOGGER.info("---导出交易明细报表---"+request.getParameter(""));
+		LOGGER.info("---导出交易明细报表---"+request.getParameter("paramsJson"));
 		exportTradeDetailExcel.exportExcel(request, response);
 	}
 
