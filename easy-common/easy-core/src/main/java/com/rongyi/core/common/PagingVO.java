@@ -1,5 +1,7 @@
 package com.rongyi.core.common;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -309,5 +311,19 @@ public class PagingVO<T> implements Serializable {
     public void setTotalSize(int totalSize) {
         this.totalSize = totalSize;
         this.totalPage = (totalSize - 1) / pageSize + 1;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("dataList", dataList)
+                .append("noList", noList)
+                .append("rowCnt", rowCnt)
+                .append("totalSize", totalSize)
+                .append("totalPage", totalPage)
+                .append("currentPage", currentPage)
+                .append("pageSize", pageSize)
+                .append("offset", offset)
+                .toString();
     }
 }
