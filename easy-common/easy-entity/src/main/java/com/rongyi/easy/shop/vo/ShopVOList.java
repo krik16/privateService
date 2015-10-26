@@ -22,6 +22,21 @@ public class ShopVOList {
 	
 	private Long shelvesNum;//下架数量
 	
+	private Long totalNum;//所有数量
+	
+	
+	
+	public ShopVOList() {
+		super();
+		processedNum=0L;
+		normalNum=0L;
+		waitingNum=0L;
+		suspendedNum=0L;
+		businessNum=0L;
+		shelvesNum=0L;
+		totalNum=0L;
+	}
+
 	public List<ShopVO> getShopVOs() {
 		return shopVOs;
 	}
@@ -77,6 +92,12 @@ public class ShopVOList {
 	public void setShelvesNum(Long shelvesNum) {
 		this.shelvesNum = shelvesNum;
 	}
-	
-	
+
+	public Long getTotalNum() {
+		return totalNum;
+	}
+
+	public void setTotalNum(Long totalNum) {
+		this.totalNum = totalNum;
+	}
 }
