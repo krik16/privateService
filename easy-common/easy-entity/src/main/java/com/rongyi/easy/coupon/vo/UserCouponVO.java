@@ -1,8 +1,10 @@
 package com.rongyi.easy.coupon.vo;
 
+import com.rongyi.easy.coupon.entity.UserRedenvelope;
 import com.rongyi.easy.mcmc.vo.CommodityBuyerVO;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -140,6 +142,17 @@ public class UserCouponVO implements Serializable {
 
     public void setCouponCode(String couponCode) {
         this.couponCode = couponCode;
+    }
+
+
+    // 券状态 0:未激活 1:已领用 2:已使用 3:已过期
+    public void setConvertStatus(Integer status, Date validEndAt) {
+        if (UserRedenvelope.STATUS_UNUSE.equals(status))
+            this.setStatus(0);
+        else if (UserRedenvelope.STATUS_USED.equals(status))
+            this.setStatus(2);
+        else if (new Date().after(validEndAt))
+            this.setStatus(3);
     }
 
 }

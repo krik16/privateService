@@ -448,6 +448,18 @@ public class UserCoupon implements Serializable {
         this.refundAmount = refundAmount;
     }
 
+
+    //    使用状态: 未使用[1],已使用[2],已过期[3]
+    public void setConvertStatus(Integer status, Date validEndAt) {
+        if (UserRedenvelope.STATUS_UNUSE.equals(status))
+            this.setStatus(1);
+        else if (UserRedenvelope.STATUS_USED.equals(status))
+            this.setStatus(2);
+        else if (new Date().after(validEndAt))
+            this.setStatus(3);
+    }
+
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
