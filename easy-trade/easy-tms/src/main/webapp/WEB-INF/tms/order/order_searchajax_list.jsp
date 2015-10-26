@@ -23,8 +23,8 @@
 			  		<tr>
 						<td><a href="${ctx}/orderManager/orderInfo?orderId=${orderForm.orderId}&module=order" style="text-decoration:underline" target="_blank">${orderForm.orderNo}</a></td>
 						<td>
-							<c:if test="${item.guideType==1}">商家</c:if>
-							<c:if test="${item.guideType==2}">买手</c:if>
+							<c:if test="${orderForm.guideType==1}">商家</c:if>
+							<c:if test="${orderForm.guideType==2}">买手</c:if>
 						</td>
 						<td>${orderForm.nickname}</td>
 						<td>${orderForm.username}</td>
