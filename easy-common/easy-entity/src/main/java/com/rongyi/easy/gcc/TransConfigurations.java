@@ -15,6 +15,16 @@ public class TransConfigurations implements Serializable{
 	private int SettleDateEarly = 0;//范围1-28   这个是月初结算日
 	private int SettleDateLate = 0;//范围1-28    这个是月末结算日
 	private int DrawCountMax = 0;//这个是同一天同一个卖家允许提现的次数
+	private BigDecimal MaiShouCommissionPirce = new BigDecimal(0);//买手返佣金额
+
+	public BigDecimal getMaiShouCommissionPirce() {
+		return MaiShouCommissionPirce;
+	}
+
+	public void setMaiShouCommissionPirce(BigDecimal maiShouCommissionPirce) {
+		MaiShouCommissionPirce = maiShouCommissionPirce;
+	}
+
 	public int getCommissionCountMax() {
 		return CommissionCountMax;
 	}

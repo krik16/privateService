@@ -21,6 +21,15 @@ public class OrderModelParam implements Serializable {
 	private String guideId;// 导购id
 	private String orderPrice;// 订单价格
 	private List<OrderDetailModelParam> ordeDetailModel;
+	private Integer guideType;//导购类型
+
+	public Integer getGuideType() {
+		return guideType;
+	}
+
+	public void setGuideType(Integer guideType) {
+		this.guideType = guideType;
+	}
 
 	public String getShopId() {
 		return shopId;
