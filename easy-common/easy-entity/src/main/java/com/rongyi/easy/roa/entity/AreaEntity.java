@@ -18,6 +18,7 @@ public class AreaEntity implements Serializable {
 	private String parent_id;
 	private List<String> parent_ids;
 	private String hotDistrict;
+	private String floor_name;//值从楼 栋 幢 座 取一
 	public String getId() {
 		return id;
 	}
@@ -54,7 +55,11 @@ public class AreaEntity implements Serializable {
 	public void setHotDistrict(String hotDistrict) {
 		this.hotDistrict = hotDistrict;
 	}
-
-
-
+	public String getFloor_name() {
+		return floor_name;
+	}
+	public void setFloor_name(String floor_name) {
+		this.floor_name = floor_name;
+	}
+	
 }
