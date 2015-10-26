@@ -20,7 +20,7 @@ public class HomePageContentVO implements Serializable{
     private QuickEntryVO quickEntry;
     private List<QuickEntryNewVO> quickEntries;
     private List<HotHeadlineVO> hotHeadline;
-    private StarShopVO starShop;
+    private List<StarShopVO> starShop;
     private List<ActivityRecommendVO> activityRecommend;
     private List<CouponRecommendVO> couponRecommend;
     private FloatAdVO floatAd;
@@ -50,11 +50,11 @@ public class HomePageContentVO implements Serializable{
         this.hotHeadline = hotHeadline;
     }
 
-    public StarShopVO getStarShop() {
+    public List<StarShopVO> getStarShop() {
         return starShop;
     }
 
-    public void setStarShop(StarShopVO starShop) {
+    public void setStarShop(List<StarShopVO> starShop) {
         this.starShop = starShop;
     }
 
