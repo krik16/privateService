@@ -2,6 +2,8 @@ package com.rongyi.rss.content;
 
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.content_v2.param.HomePageParam;
+import com.rongyi.easy.content_v2.vo.BuyerLiveVO;
+import com.rongyi.easy.content_v2.vo.PositonBuyer;
 
 import java.util.List;
 
@@ -27,5 +29,5 @@ public interface ROAHomePageContentService {
      * @param param
      * @return
      */
-    List<String> findHomePageBuyerLive(HomePageParam param);
+    List<PositonBuyer> findHomePageBuyerLive(HomePageParam param);
 }
