@@ -33,27 +33,6 @@ public class ForumContentListVo implements Serializable{
 	private Date createAt;
 	/**状态0待发布、1已发布、2已关闭*/
 	private Integer status;
-	/**
-	 * 买手直播
-	 */
-	private String buyerLive;
-	/**
-	 *iosVersion版本
-	 */
-	private String iosVersion;
-	/**
-	 * 安卓版本号
-	 */
-	private String androidVersion;
-
-	/**
-	 * 快捷入口的类型   方式为 12，13，10，10
-	 */
-	private String quickType;
-	/**
-	 * 快捷入口的类型值    方式为 , , ,www.baidu.com
-	 */
-	private String quickTypeVal;
 
 	public Integer getId() {
 		return id;
@@ -144,66 +123,5 @@ public class ForumContentListVo implements Serializable{
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-
-	public String getBuyerLive() {
-		return buyerLive;
-	}
-
-	public void setBuyerLive(String buyerLive) {
-		this.buyerLive = buyerLive;
-	}
-
-	public String getIosVersion() {
-		return iosVersion;
-	}
-
-	public void setIosVersion(String iosVersion) {
-		this.iosVersion = iosVersion;
-	}
-
-	public String getAndroidVersion() {
-		return androidVersion;
-	}
-
-	public void setAndroidVersion(String androidVersion) {
-		this.androidVersion = androidVersion;
-	}
-
-	public String getQuickType() {
-		return quickType;
-	}
-
-	public void setQuickType(String quickType) {
-		this.quickType = quickType;
-	}
-
-	public String getQuickTypeVal() {
-		return quickTypeVal;
-	}
-
-	public void setQuickTypeVal(String quickTypeVal) {
-		this.quickTypeVal = quickTypeVal;
-	}
-
-	@Override
-	public String toString() {
-		return "ForumContentListVo{" +
-				"id=" + id +
-				", positionId=" + positionId +
-				", provName='" + provName + '\'' +
-				", cityName='" + cityName + '\'' +
-				", picUrls='" + picUrls + '\'' +
-				", title='" + title + '\'' +
-				", publishBeginAt=" + publishBeginAt +
-				", publishEndAt=" + publishEndAt +
-				", createUser='" + createUser + '\'' +
-				", createAt=" + createAt +
-				", status=" + status +
-				", buyerLive='" + buyerLive + '\'' +
-				", iosVersion='" + iosVersion + '\'' +
-				", androidVersion='" + androidVersion + '\'' +
-				", quickType='" + quickType + '\'' +
-				", quickTypeVal='" + quickTypeVal + '\'' +
-				'}';
-	}
+	
 }

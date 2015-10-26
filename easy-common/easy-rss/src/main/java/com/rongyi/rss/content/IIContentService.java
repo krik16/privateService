@@ -23,12 +23,7 @@ public interface IIContentService {
 	 * 
 	 */
 	public List<ForumHomeModelVo> findHomePage();
-	/**
-	 * 插入位置
-	 * @param list
-	 * @return
-	 */
-	public Boolean savePostions(List<ForumPosition> list);
+	
 
 	/**
 	 * 通过id查询首页信息
@@ -112,14 +107,6 @@ public interface IIContentService {
 	 * @throws Exception
 	 */
 	public Boolean saveContent(ForumContent fc)throws Exception;
-
-	/**
-	 * 新增类容
-	 * @param fc
-	 * @return
-	 * @throws Exception
-	 */
-	public Boolean saveContents(List<ForumContent> fc)throws Exception;
 	/**
 	 * 删除内容
 	 * @param fc
@@ -147,9 +134,4 @@ public interface IIContentService {
 	 * @return
 	 */
 	public Boolean updateOptionById(ForumPosition fp);
-
-	/**
-	 * 判断买手id 是否在同一位置，同一区域有
-	 */
-	List<String> hasBuyerLive(ForumContent fc);
 }
