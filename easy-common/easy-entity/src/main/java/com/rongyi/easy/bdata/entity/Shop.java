@@ -28,6 +28,7 @@ public class Shop implements Serializable {
 	private List<ObjectId> category_ids;
 	private Integer comment_count;
 	private List<String> coordinate;
+	private List<String> door_coordinate;
 	private Date created_at;
 	private String crypted_password;
 	private String description;
@@ -369,4 +370,12 @@ public class Shop implements Serializable {
     public void setCustom_category_ids(List<ObjectId> custom_category_ids) {
         this.custom_category_ids = custom_category_ids;
     }
+
+	public List<String> getDoor_coordinate() {
+		return door_coordinate;
+	}
+
+	public void setDoor_coordinate(List<String> door_coordinate) {
+		this.door_coordinate = door_coordinate;
+	}
 }

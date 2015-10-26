@@ -26,6 +26,10 @@ public class ShopVO implements Serializable {
 	private List<Double> location;
 	private String filialeId;
 	private List<String> customCateIds;
+	private List<String> coordinate;
+	private List<String> doorCoordinate;
+	private String slug;
+	private String tags;
 
 	public String getId() {
 		return id;
@@ -193,5 +197,37 @@ public class ShopVO implements Serializable {
 
 	public void setCustomCateIds(List<String> customCateIds) {
 		this.customCateIds = customCateIds;
+	}
+
+	public List<String> getCoordinate() {
+		return coordinate;
+	}
+
+	public void setCoordinate(List<String> coordinate) {
+		this.coordinate = coordinate;
+	}
+
+	public List<String> getDoorCoordinate() {
+		return doorCoordinate;
+	}
+
+	public void setDoorCoordinate(List<String> doorCoordinate) {
+		this.doorCoordinate = doorCoordinate;
+	}
+
+	public String getSlug() {
+		return slug;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
+	}
+
+	public String getTags() {
+		return tags;
+	}
+
+	public void setTags(String tags) {
+		this.tags = tags;
 	}
 }

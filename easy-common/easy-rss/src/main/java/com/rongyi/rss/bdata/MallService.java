@@ -32,6 +32,16 @@ public interface MallService {
 
     /**
      *
+     * @param ids
+     * @param timeStamp
+     * @param channel
+     * @param sign
+     * @return
+     */
+    ResponseVO getFloorById(String ids, long timeStamp, String channel, String sign);
+
+    /**
+     *
      * @param timeStamp
      * @param channel
      * @param sign
