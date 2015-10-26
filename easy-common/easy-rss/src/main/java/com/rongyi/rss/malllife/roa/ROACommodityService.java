@@ -50,7 +50,8 @@ public interface ROACommodityService {
 	public String publishCommodity(CommodityVO commodityvo, long shopId, String shopMid, long brandId, long mallId,
 			String mallMid, String brandName, String shopNum);
 
-	public String publishCommodityBuyer(CommodityVO commodityvo);
+	public String publishCommodityBuyer(CommodityVO commodityvo, long brandId, long mallId, String mallMid,
+			String brandName, String shopNum);
 
 	public ResponseResult commodityToShelves(String id, long shopId, int identity);
 

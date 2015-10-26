@@ -35,7 +35,8 @@ public interface CommodityService {
 	public String publishCommodity(CommodityVO commodityvo, long shopId, long brandId, long mallId, String mallMid,
 			String brandName, String shopNum, CommodityShopInfo shopInfo);
 
-	public String publishCommodityBuyer(CommodityVO commodityvo);
+	public String publishCommodityBuyer(CommodityVO commodityvo, long brandId, long mallId, String mallMid,
+			String brandName, String shopNum);
 
 	public ResponseResult commodityToShelves(String id, long shopId, int identity);
 
