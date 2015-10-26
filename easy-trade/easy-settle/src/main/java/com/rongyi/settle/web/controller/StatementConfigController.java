@@ -192,7 +192,7 @@ public class StatementConfigController extends BaseController{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ResponseData.failure(CodeEnum.FIAL_CONFIG_LIST.getCodeInt(), CodeEnum.FIAL_CONFIG_LIST.getValueStr());
+		return ResponseData.failure(CodeEnum.FIAL_SAVE_CONFIG.getCodeInt(), CodeEnum.FIAL_SAVE_CONFIG.getValueStr());
 	}
 
 	/**
