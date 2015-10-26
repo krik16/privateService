@@ -3,6 +3,8 @@ package com.rongyi.rss.content;
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.content_v2.param.HomePageParam;
 
+import java.util.List;
+
 /**
  * 容易逛首页配置业务接口
  * 只提供给malllife使用
@@ -19,4 +21,11 @@ public interface ROAHomePageContentService {
      * @return
      */
     ResponseVO findHomePageContentBy(HomePageParam param);
+
+    /**
+     *根据城市Id查询买手直播信息得到买手直播Id集合
+     * @param param
+     * @return
+     */
+    List<String> findHomePageBuyerLive(HomePageParam param);
 }
