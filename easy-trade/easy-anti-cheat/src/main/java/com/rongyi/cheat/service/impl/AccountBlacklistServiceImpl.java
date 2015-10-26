@@ -30,10 +30,8 @@ import com.rongyi.cheat.constants.ConstantEnum;
 import com.rongyi.cheat.mail.MailService;
 import com.rongyi.cheat.service.AccountBlacklistService;
 import com.rongyi.cheat.util.SmsUtil;
-import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
-import com.rongyi.core.framework.spring.context.utils.SpringContextUtil;
 import com.rongyi.easy.cheat.AccountBlacklist;
 import com.rongyi.easy.rpb.vo.PayAccountUseTotal;
 import com.rongyi.rss.rpb.IRpbService;
@@ -53,7 +51,6 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 	@Autowired
 	MailService mailService;
 
-	
 	private static final String NAMESPACE = "com.rongyi.cheat.mapper.xml.AccountBlacklistMapper";
 
 	private static final Logger LOGGER = Logger.getLogger(AccountBlacklistServiceImpl.class);
@@ -91,8 +88,8 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 		Date endTime = DateUtil.getCurrDateTime();
 		Date startTime = getStartTime(endTime);
 		map.put("startTime", startTime);
-		map.put("endTime",endTime);
-		LOGGER.info("扫描是否有账号符合黑名单条件，购买次数大于" + Constant.BLACKLIST_CONFIG.WARN_COUNT+",map="+map);
+		map.put("endTime", endTime);
+		LOGGER.info("扫描是否有账号符合黑名单条件，购买次数大于" + Constant.BLACKLIST_CONFIG.WARN_COUNT + ",map=" + map);
 		List<PayAccountUseTotal> list = rpbService.selectPayAccountUseTotal(map);
 		List<AccountBlacklist> mailWranList = new ArrayList<AccountBlacklist>();
 		for (PayAccountUseTotal payAccountUseTotal : list) {
@@ -101,34 +98,41 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 				accountBlacklist = getAccountBlacklist(payAccountUseTotal);
 				insert(accountBlacklist);
 				mailWranList.add(accountBlacklist);
-			} else if (payAccountUseTotal.getCount() > accountBlacklist.getCount()) {
-				accountBlacklist.setCount(payAccountUseTotal.getCount());
-				accountBlacklist.setUpdateAt(DateUtil.getCurrDateTime());
-				update(accountBlacklist);
-				if (ConstantEnum.BLACK_ROLL_STATUS_0.getCodeByte().equals(accountBlacklist.getStatus()))
-					mailWranList.add(accountBlacklist);
+			} else {
+				map.clear();
+				map.put("count", Constant.BLACKLIST_CONFIG.WARN_COUNT);
+				map.put("payAccount", accountBlacklist.getPayAccount());
+				List<PayAccountUseTotal> newList = rpbService.selectPayAccountUseTotal(map);
+				if (newList != null && newList.isEmpty() && newList.get(0).getCount() > accountBlacklist.getCount()) {
+					accountBlacklist.setCount(payAccountUseTotal.getCount());
+					accountBlacklist.setUpdateAt(DateUtil.getCurrDateTime());
+					update(accountBlacklist);
+					if (ConstantEnum.BLACK_ROLL_STATUS_0.getCodeByte().equals(accountBlacklist.getStatus()))
+						mailWranList.add(accountBlacklist);
+				}
 			}
 		}
-		if (!mailWranList.isEmpty()){
-			sendWranEmail(mailWranList);//发送邮件
-			sendBlackListMs(mailWranList, startTime, endTime);//发送短信
+		if (!mailWranList.isEmpty()) {
+			sendWranEmail(mailWranList);// 发送邮件
+			sendBlackListMs(mailWranList, startTime, endTime);// 发送短信
 		}
 	}
-	private void sendBlackListMs(List<AccountBlacklist> mailWranList,Date startTime,Date endTime){
+
+	private void sendBlackListMs(List<AccountBlacklist> mailWranList, Date startTime, Date endTime) {
 		String phones = Constant.BLACKLIST_CONFIG.SEND_PHONE;
 		for (AccountBlacklist accountBlacklist : mailWranList) {
 			String payType = (accountBlacklist.getPayType() == 0) ? "支付宝" : "微信";
 			SmsUtil.sendMoreMsMessage(phones.split(","), accountBlacklist.getCount(), accountBlacklist.getPayAccount(), payType, startTime, endTime);
 		}
 	}
-	
-	private Date getStartTime(Date endTime){
+
+	private Date getStartTime(Date endTime) {
 		try {
 			int blackHour = Integer.valueOf(Constant.BLACKLIST_CONFIG.BLACK_HOUR);
 			Date startTime = DateUtil.addHours(endTime, -blackHour);
-			return startTime;
+			return DateUtil.dateToTimestamp(startTime);
 		} catch (Exception e) {
-			LOGGER.error("获取开始时间失败,"+e.getMessage());
+			LOGGER.error("获取开始时间失败," + e.getMessage());
 		}
 		return null;
 	}

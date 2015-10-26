@@ -192,8 +192,9 @@
 		from payment_event
 		where out_trade_no = #{outTradeNo,jdbcType=VARCHAR}
 		<if test="tradeType != null">
-		<!-- trade_type is null 兼容老数据trade_type为空-->
-		and (trade_type is null or trade_type = #{tradeType,jdbcType=INTEGER})
+			<!-- trade_type is null 兼容老数据trade_type为空 -->
+			and (trade_type is null or trade_type =
+			#{tradeType,jdbcType=INTEGER})
 		</if>
 	</select>
 	<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
@@ -234,24 +235,37 @@
 		payment_order po ON pe.out_trade_no = po.pay_no
 		where (buyer_email IS
 		NOT null and buyer_email != '')
+		<if test="startTime != null and startTime != ''">
+			and end_at >= #{startTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="endTime != null and endTime != ''">
+			and #{endTime,jdbcType=TIMESTAMP} >= end_at
+		</if>
+		<if test="payAccount != null and pay_account != ''">
+			and buyer_email = #{payAccount,jdbcType=VARCHAR}
+		</if>
 		GROUP BY buyer_email
 		<if test="count != null">
 			HAVING count >= #{count,jdbcType=INTEGER}
 		</if>
 		order by count desc
 	</select>
-	
+
 	<select id="validateByTradeNoAndPayNo" resultType="java.lang.Integer"
 		parameterType="java.lang.String">
 		select
-			count(pe.id)
+		count(pe.id)
 		from payment_event pe
-		left join payment_order po
-		on pe.out_trade_no = po.pay_no
-		where trade_no = #{tradeNo,jdbcType=VARCHAR}
+		left join
+		payment_order po
+		on pe.out_trade_no =
+		po.pay_no
+		where trade_no =
+		#{tradeNo,jdbcType=VARCHAR}
 		and
-		pay_no = #{payNo,jdbcType=VARCHAR}
+		pay_no =
+		#{payNo,jdbcType=VARCHAR}
 	</select>
-	
+
 
 </mapper>

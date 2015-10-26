@@ -21,9 +21,9 @@
 		<property name="host" value="smtp.rongyi.com" />
 		<property name="port" value="465" />
 		<!-- 发送方用户名 -->
-		<property name="username" value="kejun@rongyi.com" />
+		<property name="username" value="${SEND_ADDRESS}" />
 		<!-- 发送方密码 -->
-		<property name="password" value="rongyi@123" />
+		<property name="password" value="${SEND_PASSWORD}" />
         <property name="javaMailProperties">
             <props>
                 <prop key="mail.smtp.auth">true</prop>
