@@ -209,4 +209,13 @@ public interface ProxyCouponOrderService {
      * @return
      */
     int buyedCount(String couponId, String userId);
+
+    /**
+     * 买家已购买数量
+     *
+     * @param couponId
+     * @param userId
+     * @return
+     */
+    int dailyBuyCount(String couponId, String userId);
 }
