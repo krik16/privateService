@@ -195,11 +195,12 @@ public class PCWebPageAlipayController extends BaseController {
 		if (tradeType.equals(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE3)) {// 提现通知
 			event.setType(PaymentEventType.PAY_NOTIFY);
 			bodyMap.put("drawApplyList", payNotifylist);
-		} else if (tradeType.equals(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE7)) {//结算付款单更新
+		} else if (tradeType.equals(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE7)) {// 结算付款单更新
 			event.setType(PaymentEventType.STATEMENT_PAY_NOTIFY);
 			bodyMap.put("statementList", payNotifylist);
 		}
-		sender.convertAndSend(event);
+		if (!bodyMap.isEmpty())
+			sender.convertAndSend(event);
 	}
 
 	private PaymentLogInfo parsPayDetail(PaymentLogInfo paymentLogInfo, String details) {
