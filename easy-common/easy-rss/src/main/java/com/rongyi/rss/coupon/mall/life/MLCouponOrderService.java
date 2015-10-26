@@ -198,11 +198,21 @@ public interface MLCouponOrderService {
 
     /**
      * 根据卡券类型购买代金券或领取红包
+     *
      * @param param
      * @param couponType
      * @return
      */
     ResponseResult createCouponOrder(CouponOrderParam param, String couponType);
+
+    /**
+     * 买家已购买数量
+     *
+     * @param couponId
+     * @param userId
+     * @return
+     */
+    int dailyBuyCount(String couponId, String userId);
 
     /**
      * 定时关闭未支付订单
