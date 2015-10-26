@@ -10,12 +10,12 @@ public enum CommodityType {
 	/**
 	 * 导购
 	 */
-	GUIDE(1),
+	GUIDE(0),
 
 	/**
 	 * 买手
 	 */
-	BULL(2);
+	BULL(1);
 
 	private int value;
 
