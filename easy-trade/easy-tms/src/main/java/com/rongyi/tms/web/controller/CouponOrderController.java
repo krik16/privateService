@@ -29,8 +29,6 @@ import com.rongyi.easy.coupon.vo.TCCouponVO;
 import com.rongyi.easy.coupon.entity.UserCoupon;
 import com.rongyi.easy.coupon.vo.UserCouponVO;
 import com.rongyi.rss.coupon.RoaCouponService;
-import com.rongyi.rss.coupon.RoaUserCashCouponService;
-import com.rongyi.rss.coupon.RoaUserCouponService;
 import com.rongyi.tms.constants.Constant;
 import com.rongyi.tms.moudle.vo.CouponOrderDetailVO;
 import com.rongyi.tms.moudle.vo.CouponOrderDetailVO.CouponVO;
@@ -54,13 +52,7 @@ public class CouponOrderController extends BaseController {
 	CouponOrderService couponOrderService;
 
 	@Autowired
-	RoaUserCashCouponService roaUserCashCouponService;
-
-	@Autowired
 	private RoaUserRedenvelopeService roaUserRedenvelopeService;
-
-	@Autowired
-	RoaUserCouponService roaUserCouponService;
 
 	@Autowired
 	private ProxyUserCouponService proxyUserCouponService;

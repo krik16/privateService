@@ -30,7 +30,6 @@ import com.rongyi.easy.malllife.vo.UserInfoVO;
 import com.rongyi.easy.osm.entity.OrderFormEntity;
 import com.rongyi.easy.tms.vo.TradeVO;
 import com.rongyi.rss.coupon.mall.shop.MSUserCouponService;
-import com.rongyi.rss.coupon.RoaCouponOrderService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.rss.mallshop.order.ROAOrderFormService;
 import com.rongyi.tms.constants.ConstantEnum;
@@ -53,9 +52,6 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 
 	@Autowired
 	ROAMalllifeUserService rOAMallLifeUserService;
-
-	@Autowired
-	RoaCouponOrderService raoCouponOrderService;
 
 	@Autowired
 	MSUserCouponService mmUserCouponService;
@@ -110,7 +106,6 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 			try {
 				buyerId = tradeVO.getBuyerId();
 				if (ConstantEnum.PAYMENT_ORDER_TYPE1.getCodeInt() == tradeVO.getOrderType()) {// 优惠券订单
-//					CouponOrder couponOrder = raoCouponOrderService.findOneByOrderNo(tradeVO.getOrderNo());
 					CouponOrder couponOrder = roaProxyCouponOrderService.findOneByOrderNo(tradeVO.getOrderNo());
 					if (couponOrder != null)
 						buyerId = couponOrder.getBuyerId();
