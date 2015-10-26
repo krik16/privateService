@@ -1,10 +1,12 @@
 package com.rongyi.rss.mms;
 
+import java.util.List;
 import java.util.Map;
 
 import com.rongyi.core.common.Page;
 import com.rongyi.core.common.PageList;
 import com.rongyi.core.framework.exception.RYServiceException;
+import com.rongyi.easy.entity.IntegralCommodity;
 import com.rongyi.easy.mms.vo.IntegralCommodityVO;
 
 /**
@@ -56,4 +58,31 @@ public interface ROAIIntegralCommodityService {
    */
   public PageList<IntegralCommodityVO> queryIntegralCommList(Map params, Page page)
       throws RYServiceException;
+  /**
+   * 
+  * @Title: insertOrUpdateIntegralComm 
+  * @Description: 新增或修改礼品列表
+  * @param @param params
+  * @param @throws RYServiceException    设定文件 
+  * @return void    返回类型 
+  * @author shaozhou 
+  * @date 2015年10月14日 下午4:47:26
+  * @throws
+   */
+  public void insertOrUpdateIntegralComm(List<Map<String,Object>> params)throws RYServiceException;
+  /**
+   * 
+  * @Title: searchcommityByMap 
+  * @Description: 通过礼品部分数据获取礼品实体
+  * @param @param param
+  * @param @return
+  * @param @throws RYServiceException    设定文件 
+  * @return IntegralCommodity    返回类型 
+  * @author shaozhou 
+  * @date 2015年10月14日 下午7:01:54
+  * @throws
+   */
+  public long searchcommityIdByMap(Map<String,Object> param) throws RYServiceException;
+  
+  public String getGiftCodeByGiftId(Map<String,Object> param) throws RYServiceException;
 }
