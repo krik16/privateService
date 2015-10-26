@@ -29,7 +29,7 @@ public abstract class ActivityDataConvertor {
         act.setLimitPublishCount(coupon.getLimitPublishCount());
         act.setLimitUseCount(coupon.getLimitUseCount());
         act.setLimitCount(coupon.getLimitCount());// 用户限购数量
-        act.setBuyedAmount(coupon.getStockCount().toString());
+        act.setBuyedAmount(coupon.getSaledCount().toString());
         act.setUseMode(coupon.getUsageDesc());
         act.setUseRestriction(coupon.getLimitDesc());
         act.setAfterSaleService(coupon.getAfterSaleService2List());
