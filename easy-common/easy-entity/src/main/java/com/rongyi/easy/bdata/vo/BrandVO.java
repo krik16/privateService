@@ -1,7 +1,5 @@
 package com.rongyi.easy.bdata.vo;
 
-import com.rongyi.easy.bdata.vo.BrandsCategoryVO;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;

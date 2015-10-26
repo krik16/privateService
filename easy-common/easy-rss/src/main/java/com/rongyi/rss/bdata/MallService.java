@@ -69,4 +69,14 @@ public interface MallService {
      */
     ResponseVO getBrandById(String brndId, long timeStamp, String channel, String sign);
 
+    /**
+     *
+     * @param mallId
+     * @param timeStamp
+     * @param channel
+     * @param sign
+     * @return
+     */
+    ResponseVO getAds(String mallId, long timeStamp, String channel, String sign);
+
 }
