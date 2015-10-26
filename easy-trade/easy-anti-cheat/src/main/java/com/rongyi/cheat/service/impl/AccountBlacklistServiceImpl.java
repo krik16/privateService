@@ -89,7 +89,7 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 		Date startTime = getStartTime(endTime);
 		map.put("startTime", startTime);
 		map.put("endTime", endTime);
-		LOGGER.info("扫描是否有账号符合黑名单条件，购买次数大于" + Constant.BLACKLIST_CONFIG.WARN_COUNT + ",map=" + map);
+		map.put("notPayAccountList", getNoPayAccountList()); LOGGER.info("扫描是否有账号符合黑名单条件，购买次数大于" + Constant.BLACKLIST_CONFIG.WARN_COUNT + ",map=" + map);
 		List<PayAccountUseTotal> list = rpbService.selectPayAccountUseTotal(map);
 		List<AccountBlacklist> mailWranList = new ArrayList<AccountBlacklist>();
 		for (PayAccountUseTotal payAccountUseTotal : list) {
@@ -116,6 +116,18 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 			sendWranEmail(mailWranList);// 发送邮件
 			sendBlackListMs(mailWranList, startTime, endTime);// 发送短信
 		}
+	}
+	
+	/**	
+	 * @Description: 不扫描的支付账号列表 
+	 * @return	
+	 * @Author:  柯军
+	 * @datetime:2015年10月26日上午11:27:33
+	 **/
+	private List<String> getNoPayAccountList(){
+		List<String> notPayAccountList = new ArrayList<String>();
+		notPayAccountList.add("kehuzijinbu001@alipay.com");
+		return notPayAccountList;
 	}
 
 	private void sendBlackListMs(List<AccountBlacklist> mailWranList, Date startTime, Date endTime) {

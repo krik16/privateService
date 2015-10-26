@@ -244,6 +244,13 @@
 		<if test="payAccount != null and pay_account != ''">
 			and buyer_email = #{payAccount,jdbcType=VARCHAR}
 		</if>
+		<if test="notPayAccountList != null and notPayAccountList != ''">
+				and buyer_email  not in
+				<foreach collection="notPayAccountList" index="index" item="item"
+					open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
 		GROUP BY buyer_email
 		<if test="count != null">
 			HAVING count >= #{count,jdbcType=INTEGER}
