@@ -113,7 +113,7 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 			}
 		}
 		if (!mailWranList.isEmpty()) {
-			sendWranEmail(mailWranList);// 发送邮件
+			sendWranEmail(mailWranList,startTime, endTime);// 发送邮件
 			sendBlackListMs(mailWranList, startTime, endTime);// 发送短信
 		}
 	}
@@ -183,9 +183,13 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
 		return map;
 	}
 
-	private void sendWranEmail(List<AccountBlacklist> mailWranList) {
+	private void sendWranEmail(List<AccountBlacklist> mailWranList,Date startTime,Date endTime) {
 		StringBuffer sb = new StringBuffer();
-		sb.append("以下账号存在刷单风险：\n");
+		sb.append("以下账号存在刷单风险,在");
+		sb.append(startTime);
+		sb.append("至");
+		sb.append(endTime);
+		sb.append("此时间内:\n");
 		for (AccountBlacklist accountBlacklist : mailWranList) {
 			sb.append("账号：");
 			sb.append(accountBlacklist.getPayAccount());
