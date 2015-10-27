@@ -11,6 +11,7 @@ public class UserRedenvelopeParam implements Serializable {
     private int currentPage = 1;
     private int offset = 0;
     private String userId;
+    private String userName;
     private String productId;
     private Integer status;
     private String orderBy;
@@ -78,5 +79,13 @@ public class UserRedenvelopeParam implements Serializable {
 
     public void setOffset(int offset) {
         this.offset = offset;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }
