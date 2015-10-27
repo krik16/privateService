@@ -91,7 +91,25 @@ public class TransConfigurations implements Serializable{
 	public int getDrawCountMax() {
 		return DrawCountMax;
 	}
+
+	public int getMaiShouCommissionCountMax() {
+		return MaiShouCommissionCountMax;
+	}
+
+	public void setMaiShouCommissionCountMax(int maiShouCommissionCountMax) {
+		MaiShouCommissionCountMax = maiShouCommissionCountMax;
+	}
+
+	public int getMaiShouCashCouponUseMax() {
+		return MaiShouCashCouponUseMax;
+	}
+
+	public void setMaiShouCashCouponUseMax(int maiShouCashCouponUseMax) {
+		MaiShouCashCouponUseMax = maiShouCashCouponUseMax;
+	}
+
 	public void setDrawCountMax(int drawCountMax) {
+
 		DrawCountMax = drawCountMax;
 	}
 	
