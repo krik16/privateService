@@ -133,7 +133,7 @@ public class PaymentStatementController extends BaseController {
 				}
 				break;
 			case 3:// 查询付款清单列表
-				responseData = accessService.check(request, "FNC_UNPVFY_VIEW");
+				responseData = accessService.check(request, "FNC_PAYBILL_VIEW");
 				if (responseData.getMeta().getErrno() != 0) {
 					return responseData;
 				}
