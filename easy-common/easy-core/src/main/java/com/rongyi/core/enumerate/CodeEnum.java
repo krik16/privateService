@@ -32,6 +32,7 @@ public enum CodeEnum {
     ERROR_WECHAT("-1103", "微信号已注册"),
     ERROR_EMAIL("-1104", "邮箱已注册"),
     ERROR_NICKNAME("-1105","昵称已经存在不能注册"),
+    ERROR_UPGRADENICKNAME("-1106","已有相同昵称存在,请更换"),
     ERROR_TELEPHONEEXISIT("-1109","电话号码不能为空"),
     ERROR_PHONEEXISIT("-1110","手机号码已存在"),
     
