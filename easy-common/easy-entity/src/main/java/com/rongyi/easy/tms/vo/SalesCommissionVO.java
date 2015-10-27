@@ -104,12 +104,25 @@ public class SalesCommissionVO {
     private Date orderAt;
 
     private String reason;
+    /**
+     * 渠道：1-商家，2-买手
+     */
+    private Integer guideType;
 
     public String getReason() {
         return reason;
     }
 
-    public void setReason(String reason) {
+    
+    public Integer getGuideType() {
+		return guideType;
+	}
+
+	public void setGuideType(Integer guideType) {
+		this.guideType = guideType;
+	}
+
+	public void setReason(String reason) {
         this.reason = reason;
     }
 

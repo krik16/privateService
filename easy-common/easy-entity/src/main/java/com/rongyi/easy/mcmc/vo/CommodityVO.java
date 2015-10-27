@@ -117,11 +117,19 @@ public class CommodityVO  implements  Serializable {
 	private String commodityOriginalPrice;
 	private String commodityCurrentPrice;
 	private String shopId;
+	private String shopMid; // shop mongo id
 	private String commodityShopNumber;
 	private List<String> commodityPicList;
 	private List<CommoditySpecVO> commoditySpecList;
 	private String commodityCode;
 	private String commodityCommission;
+	
+	public String getShopMid() {
+		return shopMid;
+	}
+	public void setShopMid(String shopMid) {
+		this.shopMid = shopMid;
+	}
 	public String getCommodityCommission() {
 		return commodityCommission;
 	}
@@ -146,6 +154,11 @@ public class CommodityVO  implements  Serializable {
 	}
 	public CommodityVO(Commodity commodity){
 		this.shopId = commodity.getShopId();
+		this.shopMid = commodity.getShopMid();//店铺mongoId
+		this.create_by = commodity.getCreate_by();//创建人
+		this.liveId = commodity.getLiveId();//直播id
+		this.liveStartTime = commodity.getLiveStartTime();//直播开始时间
+		this.liveEndTime = commodity.getLiveEndTime();//直播结束时间
 		this.commodityId = commodity.getId().toString();
 		this.commodityName = commodity.getName();
 		this.commodityCategory = commodity.getCategory();

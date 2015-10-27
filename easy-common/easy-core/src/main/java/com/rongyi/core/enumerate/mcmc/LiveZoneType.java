@@ -1,25 +1,19 @@
 package com.rongyi.core.enumerate.mcmc;
 
-/**
- * 商品类型
- * 
- * @author xiaobo
- *
- */
-public enum CommodityType {
+public enum LiveZoneType {
 	/**
-	 * 导购
+	 * 商场
 	 */
-	GUIDE(0),
-
+	MALL(0),
+	
 	/**
-	 * 买手
+	 * 店铺
 	 */
-	BULL(1);
+	SHOP(1);
 
 	private int value;
-
-	private CommodityType(int value) {
+	
+	private LiveZoneType(int value) {
 		this.value = value;
 	}
 

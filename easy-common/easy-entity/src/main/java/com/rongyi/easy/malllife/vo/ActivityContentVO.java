@@ -29,14 +29,41 @@ public class ActivityContentVO implements Serializable{
     private String       refType;   // 关联类型
     private String       refId;     // 分享时关联的id， mall,shop
     private String       grouponId; //团购优惠券ID
+    private String description;//分享描述
     
     private String address; // 地址
+    private String shareUrl;//分享链接地址
+    private String picUrl;//分享需要的图片
     
-    public String getGrouponId() {
+    
+    public String getPicUrl() {
+		return picUrl;
+	}
+
+	public void setPicUrl(String picUrl) {
+		this.picUrl = picUrl;
+	}
+
+	public String getShareUrl() {
+		return shareUrl;
+	}
+
+	public void setShareUrl(String shareUrl) {
+		this.shareUrl = shareUrl;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getGrouponId() {
         return grouponId;
     }
 
-    
     public void setGrouponId(String grouponId) {
         this.grouponId = grouponId;
     }

@@ -33,6 +33,7 @@ public class SalesCommissionParam {
     private String commissionNo;
     private String mallName;
     private String shopName;
+    private String guideType;
     private String sellerName;
     private String uploadStartTime;
     private String uploadEndTime;
@@ -49,7 +50,13 @@ public class SalesCommissionParam {
      */
     private String vaStatus;
     
-    public String getCommissionNo() {
+    public String getGuideType() {
+		return guideType;
+	}
+	public void setGuideType(String guideType) {
+		this.guideType = guideType;
+	}
+	public String getCommissionNo() {
         return commissionNo;
     }
     public void setCommissionNo(String commissionNo) {
@@ -153,6 +160,9 @@ public class SalesCommissionParam {
         }
         if(NumberUtils.isNumber(this.getAmountEnd())){
             paramsMap.put("amountEnd", new BigDecimal(this.getAmountEnd()));
+        }
+        if(StringUtils.isNotBlank(this.getGuideType())){
+        	paramsMap.put("guideType", Integer.valueOf(this.getGuideType()));
         }
         List<Integer> checks=new ArrayList<Integer>();
         if(StringUtils.isNotBlank(this.getStatus())){

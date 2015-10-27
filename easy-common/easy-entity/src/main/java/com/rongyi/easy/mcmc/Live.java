@@ -1,8 +1,11 @@
 package com.rongyi.easy.mcmc;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import net.sf.json.JSONObject;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
@@ -77,6 +80,11 @@ public class Live implements  Serializable{
 	 * 位置类型 0商场 1街边店
 	 */
 	private int zoneType;
+	
+	/**
+	 * 买手名字
+	 */
+	private String bullName;
 	
 	public ObjectId getId() {
 		return id;
@@ -162,7 +170,11 @@ public class Live implements  Serializable{
 	public void setZoneType(int zoneType) {
 		this.zoneType = zoneType;
 	}
-
-	
+	public String getBullName() {
+		return bullName;
+	}
+	public void setBullName(String bullName) {
+		this.bullName = bullName;
+	}
 	
 }

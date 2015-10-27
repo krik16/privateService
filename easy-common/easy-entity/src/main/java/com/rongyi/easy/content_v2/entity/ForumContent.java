@@ -287,36 +287,7 @@ public class ForumContent implements Serializable {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "ForumContent{" +
-                "quickTypeVal='" + quickTypeVal + '\'' +
-                ", id=" + id +
-                ", positionId=" + positionId +
-                ", provId='" + provId + '\'' +
-                ", provName='" + provName + '\'' +
-                ", cityId='" + cityId + '\'' +
-                ", cityName='" + cityName + '\'' +
-                ", picUrls='" + picUrls + '\'' +
-                ", title='" + title + '\'' +
-                ", subtitle='" + subtitle + '\'' +
-                ", type=" + type +
-                ", typeVal='" + typeVal + '\'' +
-                ", shopIds='" + shopIds + '\'' +
-                ", publishBeginAt=" + publishBeginAt +
-                ", publishEndAt=" + publishEndAt +
-                ", createUser='" + createUser + '\'' +
-                ", createAt=" + createAt +
-                ", updateUser='" + updateUser + '\'' +
-                ", updateAt=" + updateAt +
-                ", isDeleted=" + isDeleted +
-                ", status=" + status +
-                ", buyerLive='" + buyerLive + '\'' +
-                ", iosVersion='" + iosVersion + '\'' +
-                ", androidVersion='" + androidVersion + '\'' +
-                ", quickType='" + quickType + '\'' +
-                '}';
-    }
+
 
     public String getBuyerLive() {
         return buyerLive;
@@ -356,5 +327,35 @@ public class ForumContent implements Serializable {
 
     public void setQuickTypeVal(String quickTypeVal) {
         this.quickTypeVal = quickTypeVal;
+    }
+    @Override
+    public String toString() {
+        return "ForumContent{" +
+                "quickTypeVal='" + quickTypeVal + '\'' +
+                ", id=" + id +
+                ", positionId=" + positionId +
+                ", provId='" + provId + '\'' +
+                ", provName='" + provName + '\'' +
+                ", cityId='" + cityId + '\'' +
+                ", cityName='" + cityName + '\'' +
+                ", picUrls='" + picUrls + '\'' +
+                ", title='" + title + '\'' +
+                ", subtitle='" + subtitle + '\'' +
+                ", type=" + type +
+                ", typeVal='" + typeVal + '\'' +
+                ", shopIds='" + shopIds + '\'' +
+                ", publishBeginAt=" + publishBeginAt +
+                ", publishEndAt=" + publishEndAt +
+                ", createUser='" + createUser + '\'' +
+                ", createAt=" + createAt +
+                ", updateUser='" + updateUser + '\'' +
+                ", updateAt=" + updateAt +
+                ", isDeleted=" + isDeleted +
+                ", status=" + status +
+                ", buyerLive='" + buyerLive + '\'' +
+                ", iosVersion='" + iosVersion + '\'' +
+                ", androidVersion='" + androidVersion + '\'' +
+                ", quickType='" + quickType + '\'' +
+                '}';
     }
 }

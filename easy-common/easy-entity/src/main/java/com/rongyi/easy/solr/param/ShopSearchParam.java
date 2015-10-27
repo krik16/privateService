@@ -22,7 +22,14 @@ public class ShopSearchParam implements Serializable{
 	private String shop_id;   //店铺id
 	private boolean commodityRequired; //是否只看有商品的店铺
 	private String mall_id;  //商场id
+	private String poi_type; //店铺：0 商场：1
 
+	public String getPoi_type() {
+		return poi_type;
+	}
+	public void setPoi_type(String poi_type) {
+		this.poi_type = poi_type;
+	}
 	public String getKeyword() {
 		return keyword;
 	}

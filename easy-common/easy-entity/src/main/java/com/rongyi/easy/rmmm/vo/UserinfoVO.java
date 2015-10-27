@@ -48,8 +48,10 @@ public class UserinfoVO implements Serializable{
     private String shopName;//店铺名称
     
     private String customerId;//顾客表id
+    
+    private Integer guideType;//1导购  2买手
 
-
+    private Integer ifAttention;//0否 1是
 	private String sharCode;//邀请码
 	private String downUrl; //容易逛下载地址
 
@@ -59,6 +61,23 @@ public class UserinfoVO implements Serializable{
 	List<UserLabelDto> labelList;
 
 	String userDesc;//用户简介
+
+	
+	public Integer getIfAttention() {
+		return ifAttention;
+	}
+
+	public void setIfAttention(Integer ifAttention) {
+		this.ifAttention = ifAttention;
+	}
+
+	public Integer getGuideType() {
+		return guideType;
+	}
+
+	public void setGuideType(Integer guideType) {
+		this.guideType = guideType;
+	}
 
 	public String getLogo() {
 		return logo;

@@ -10,6 +10,7 @@
 package com.rongyi.easy.solr.param;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import com.rongyi.easy.rmmm.base.BaseParam;
 
@@ -22,6 +23,7 @@ public class LiveSearchParam extends BaseParam implements Serializable{
 	/**  */
 	private static final long serialVersionUID = -8710679871751949024L;
 	
+	private String _id; // id
 	private String keyword;   //关键词，预留，暂时不用
 	private String coord_x;   //坐标x
 	private String coord_y;   //坐标y
@@ -36,7 +38,34 @@ public class LiveSearchParam extends BaseParam implements Serializable{
 	private String jsessionid;
 	private String bullName; // 买手昵称
 	private String bullId; // 买手id
+	private Date start_time; // 开始时间
+	private Date end_time; // 结束时间
+	private Integer status;
 	
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	public String get_id() {
+		return _id;
+	}
+	public void set_id(String _id) {
+		this._id = _id;
+	}
+	public Date getStart_time() {
+		return start_time;
+	}
+	public void setStart_time(Date start_time) {
+		this.start_time = start_time;
+	}
+	public Date getEnd_time() {
+		return end_time;
+	}
+	public void setEnd_time(Date end_time) {
+		this.end_time = end_time;
+	}
 	public String getBullName() {
 		return bullName;
 	}

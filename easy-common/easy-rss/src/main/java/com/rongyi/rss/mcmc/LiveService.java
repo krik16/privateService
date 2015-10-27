@@ -1,5 +1,7 @@
 package com.rongyi.rss.mcmc;
 
+import java.util.List;
+
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.mcmc.param.AdviseShopParam;
 import com.rongyi.easy.mcmc.param.LiveParam;
@@ -77,5 +79,61 @@ public interface LiveService {
 	 * @return 带List&lt;LiveBrandVO&gt;的ResponseVO
 	 */
 	ResponseVO getBrandList(String bullId,String liveId,int page,int pageSize);
+	
+	/**
+	 * 通过直播id列表查询直播列表
+	 * @param ids 直播id列表
+	 * @param time 直播时间,-1查询所有时间
+	 * @param commodityCount 需要返回的商品个数，如果为-1，返回全部商品。
+	 * @param liveStatus 直播状态 -1全部，0发布，1上线，2下线
+	 * @param commodityStatus 商品状态 -1全部，0下架，1上架
+	 * @return 带List&lt;LiveVO&gt;的ResponseVO
+	 */
+	ResponseVO getLiveByIdsAndTime(List<String> ids, long time, int commodityCount, int liveStatus,
+			int commodityStatus);
+	
+	/**
+	 * FE端搜索直播接口
+	 * @param liveName 直播名称
+	 * @param bullId 买手id
+	 * @param bullNickName 买手昵称
+	 * @param status 状态
+	 * @param beginTime 开始时间
+	 * @param endTime 结束时间
+	 * @param page 页数
+	 * @param pageSize 页大小
+	 * @return 带List&lt;LiveVO&gt;的ResponseVO
+	 */
+	ResponseVO searchFELiveList(String liveName,String bullId,String bullNickName,int status,long beginTime,long endTime,int page,int pageSize);
+    
+	/**
+	 * FE端通过直播id获取直播
+	 * @param liveId 直播id
+	 * @return 带LiveVO的ResponseVO
+	 */
+	ResponseVO getFELiveDetail(String liveId);
+
+	/**
+	 * FE端获取直播商品
+	 * @param liveId 直播id
+	 * @param page 页数
+	 * @param pageSize 页大小
+	 * @return 带list&lt;CommodityVO&gt;的ResponseVO
+	 */
+	ResponseVO getFECommodityByLiveId(String liveId,Integer page,Integer pageSize);
+	
+	/**
+	 * FE端直播停播
+	 * @param liveId 直播id
+	 * @return ResponseVO 只包括 meta
+	 */
+	ResponseVO feLiveStop(String liveId);
+	
+	/**
+	 * FE直播商品下架
+	 * @param commodityId
+	 * @return
+	 */
+	ResponseVO feCommodityOffShelves(String commodityId);
 }
 

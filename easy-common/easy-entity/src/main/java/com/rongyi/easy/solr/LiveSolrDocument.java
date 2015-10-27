@@ -66,7 +66,17 @@ public class LiveSolrDocument implements Serializable {
 	@Field("bullName")
 	private String bullName;
 	
+	@Field("mall")
+	private Integer mall;
 	
+	public String get_id() {
+		return _id;
+	}
+
+	public void set_id(String _id) {
+		this._id = _id;
+	}
+
 	public String getBullId() {
 		return bullId;
 	}
@@ -169,6 +179,14 @@ public class LiveSolrDocument implements Serializable {
 
 	public void setPosition(String position) {
 		this.position = position;
+	}
+
+	public Integer getMall() {
+		return mall;
+	}
+
+	public void setMall(Integer mall) {
+		this.mall = mall;
 	}
 	
 }

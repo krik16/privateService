@@ -15,7 +15,7 @@ public class LiveParam implements Serializable{
 	private static final long serialVersionUID = 1L;
 	String liveId;
 	String bullId;
-	String liveTitle;
+	String liveName;
 	String commodityIdList;
 	String beginTime;
 	String endTime;
@@ -82,11 +82,11 @@ public class LiveParam implements Serializable{
 	public void setBullId(String bullId) {
 		this.bullId = bullId;
 	}
-	public String getLiveTitle() {
-		return liveTitle;
+	public String getLiveName() {
+		return liveName;
 	}
-	public void setLiveTitle(String liveTitle) {
-		this.liveTitle = liveTitle;
+	public void setLiveName(String liveName) {
+		this.liveName = liveName;
 	}
 	public String getCommodityIdList() {
 		return commodityIdList;
