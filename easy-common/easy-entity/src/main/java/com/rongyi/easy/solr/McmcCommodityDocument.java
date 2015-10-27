@@ -48,8 +48,8 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private String commodityBrandId;
 	@Field("price")
 	private double price;
-	@Field("isSpot")
-	private boolean isSpot;
+	@Field("spot")
+	private boolean spot;
 	@Field("type")
 	private int type;
 	@Field("liveId")
@@ -217,11 +217,11 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	}
 
 	public boolean isSpot() {
-		return isSpot;
+		return spot;
 	}
 
-	public void setSpot(boolean isSpot) {
-		this.isSpot = isSpot;
+	public void setSpot(boolean spot) {
+		this.spot = spot;
 	}
 
 	public int getType() {
