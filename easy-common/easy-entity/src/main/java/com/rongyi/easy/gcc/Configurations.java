@@ -40,25 +40,31 @@ public class Configurations implements Serializable {
 	private long officialJudgementWaitMax = 0L;
 	/* 评价关闭时间 */
 	private long commentCloseWaitMax = 0L;
-/*=======
-	private int apealCountMax;
-	*//* 退款次数上限 *//*
-	private int refundCountMax;
-	*//* 子订单退款超时时间 *//*
-	private long subOrderRefundWaitMax;
-	*//* 订单关闭超时时间 *//*
-	private long orderCloseWaitMax;
-	*//* 订单买家收货确认超时时间 *//*
-	private long commodityCommitWaitMax;
-	*//* 订单卖家发货超时时间 *//*
-	private long commodityDeliverWaitMax;
-	*//* 订单买家付款超时时间 *//*
-	private long paymentWaitMax;
-//	*//* 子订单维权超时时间 *//*
-//	private long subOrderSafeguardWaitMax;
-	*//* 官方介入超时时间 *//*
-	private long officialJudgementWaitMax;
->>>>>>> 1164ac8a99afd3383b29ede121d74c11dd8bb2b4*/
+
+	/**
+	 * 以下是买手相关的配置
+	 */
+	/* 维权次数上限 */
+	private int maiShouApealCountMax = 0;
+	/* 退款次数上限 */
+	private int maiShouRefundCountMax = 0 ;
+	/* 子订单退款超时时间 */
+	private long maiShouSubOrderRefundWaitMax = 0L;
+	/* 订单关闭超时时间 */
+	private long maiShouOrderCloseWaitMax = 0L;
+	/* 订单买家收货确认超时时间 */
+	private long maiShouCommodityCommitWaitMax = 0L;
+	/* 订单卖家发货超时时间 */
+	private long maiShouCommodityDeliverWaitMax = 0L;
+	/* 订单买家付款超时时间 */
+	private long maiShouPaymentWaitMax = 0L;
+	//	/* 子订单维权超时时间 */
+//	private long maiShouSubOrderSafeguardWaitMax;
+	/* 官方介入超时时间 */
+	private long maiShouOfficialJudgementWaitMax = 0L;
+	/* 评价关闭时间 */
+	private long maiShouCommentCloseWaitMax = 0L;
+
 
 	public int getRefundCountMax() {
 		return refundCountMax;
@@ -156,4 +162,75 @@ public class Configurations implements Serializable {
 		this.commentCloseWaitMax = commentCloseWaitMax;
 	}
 
+	public int getMaiShouApealCountMax() {
+		return maiShouApealCountMax;
+	}
+
+	public void setMaiShouApealCountMax(int maiShouApealCountMax) {
+		this.maiShouApealCountMax = maiShouApealCountMax;
+	}
+
+	public int getMaiShouRefundCountMax() {
+		return maiShouRefundCountMax;
+	}
+
+	public void setMaiShouRefundCountMax(int maiShouRefundCountMax) {
+		this.maiShouRefundCountMax = maiShouRefundCountMax;
+	}
+
+	public long getMaiShouSubOrderRefundWaitMax() {
+		return maiShouSubOrderRefundWaitMax;
+	}
+
+	public void setMaiShouSubOrderRefundWaitMax(long maiShouSubOrderRefundWaitMax) {
+		this.maiShouSubOrderRefundWaitMax = maiShouSubOrderRefundWaitMax;
+	}
+
+	public long getMaiShouOrderCloseWaitMax() {
+		return maiShouOrderCloseWaitMax;
+	}
+
+	public void setMaiShouOrderCloseWaitMax(long maiShouOrderCloseWaitMax) {
+		this.maiShouOrderCloseWaitMax = maiShouOrderCloseWaitMax;
+	}
+
+	public long getMaiShouCommodityCommitWaitMax() {
+		return maiShouCommodityCommitWaitMax;
+	}
+
+	public void setMaiShouCommodityCommitWaitMax(long maiShouCommodityCommitWaitMax) {
+		this.maiShouCommodityCommitWaitMax = maiShouCommodityCommitWaitMax;
+	}
+
+	public long getMaiShouCommodityDeliverWaitMax() {
+		return maiShouCommodityDeliverWaitMax;
+	}
+
+	public void setMaiShouCommodityDeliverWaitMax(long maiShouCommodityDeliverWaitMax) {
+		this.maiShouCommodityDeliverWaitMax = maiShouCommodityDeliverWaitMax;
+	}
+
+	public long getMaiShouPaymentWaitMax() {
+		return maiShouPaymentWaitMax;
+	}
+
+	public void setMaiShouPaymentWaitMax(long maiShouPaymentWaitMax) {
+		this.maiShouPaymentWaitMax = maiShouPaymentWaitMax;
+	}
+
+	public long getMaiShouOfficialJudgementWaitMax() {
+		return maiShouOfficialJudgementWaitMax;
+	}
+
+	public void setMaiShouOfficialJudgementWaitMax(long maiShouOfficialJudgementWaitMax) {
+		this.maiShouOfficialJudgementWaitMax = maiShouOfficialJudgementWaitMax;
+	}
+
+	public long getMaiShouCommentCloseWaitMax() {
+		return maiShouCommentCloseWaitMax;
+	}
+
+	public void setMaiShouCommentCloseWaitMax(long maiShouCommentCloseWaitMax) {
+		this.maiShouCommentCloseWaitMax = maiShouCommentCloseWaitMax;
+	}
 }
