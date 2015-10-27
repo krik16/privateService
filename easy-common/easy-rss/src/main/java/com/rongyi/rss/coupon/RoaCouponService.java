@@ -16,6 +16,25 @@ import java.util.List;
  */
 public interface RoaCouponService {
 
+
+    /**
+     * 新建卡券
+     *
+     * @param coupon
+     * @return
+     */
+    boolean create(Coupon coupon);
+
+
+    /**
+     * 追加库存量
+     *
+     * @param couponId
+     * @param quantity
+     * @return
+     */
+    boolean addInventory(String couponId, Integer quantity);
+
     /**
      * 交易中心-根据id查询卡券
      *
@@ -85,8 +104,8 @@ public interface RoaCouponService {
      * @param isRelatedActivity
      * @param couponActivity
      * @return boolean
-     * @author lqy
      * @throws Exception
+     * @author lqy
      */
     boolean updateRelatedActivity(List<String> couponIds, boolean isRelatedActivity, CouponActivity couponActivity);
 
@@ -118,16 +137,27 @@ public interface RoaCouponService {
 
     /**
      * 分页查询卡券列表
+     *
      * @param couponParam
      * @return
      */
     PagingVO<Coupon> findAllByPage(CouponParam couponParam);
 
     /**
+     * boolean create(Coupon );
      * 根据卡券ID查看卡券关联的活动列表
+     *
      * @param couponId
      * @return List<CouponActivity>
      * @author lqy
      */
     List<CouponActivity> findCouponActivitiesByCouponId(String couponId);
+
+    /**
+     * 删除
+     *
+     * @param couponId
+     * @return
+     */
+    boolean remove(String couponId);
 }
