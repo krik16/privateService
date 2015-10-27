@@ -29,13 +29,36 @@ public class CommodityVO  implements  Serializable {
 	private String commodityCPriceMin;//我是最低现价”,
 	private String commodityOPOfLCP;//我是最低现价对应的原价
 	
-	private int commodityType;//渠道  1商家，2买手
+	private int commodityType;//渠道  0商家，1买手
 	private boolean isSpot;//是否现货	
 	private Date liveStartTime; // 直播开始时间
 	private Date liveEndTime; // 直播结束时间
 	private String create_by; // 创建人 
 	private String liveId; // 直播Id
+	private String commodityOriginalPrice;
+	private String commodityCurrentPrice;
+	private String shopId;
+	private String shopMid; // shop mongo id
+	private String commodityShopNumber;
+	private List<String> commodityPicList;
+	private List<CommoditySpecVO> commoditySpecList;
+	private String commodityCode;
+	private String commodityCommission;
+	private String brandMid;//品牌mongoId
+	private String mallMid;//商场mongoId
 	
+	public String getBrandMid() {
+		return brandMid;
+	}
+	public void setBrandMid(String brandMid) {
+		this.brandMid = brandMid;
+	}
+	public String getMallMid() {
+		return mallMid;
+	}
+	public void setMallMid(String mallMid) {
+		this.mallMid = mallMid;
+	}
 	public String getLiveId() {
 		return liveId;
 	}
@@ -114,15 +137,7 @@ public class CommodityVO  implements  Serializable {
 	public void setCommodityStatus(int commodityStatus) {
 		this.commodityStatus = commodityStatus;
 	}
-	private String commodityOriginalPrice;
-	private String commodityCurrentPrice;
-	private String shopId;
-	private String shopMid; // shop mongo id
-	private String commodityShopNumber;
-	private List<String> commodityPicList;
-	private List<CommoditySpecVO> commoditySpecList;
-	private String commodityCode;
-	private String commodityCommission;
+	
 	
 	public String getShopMid() {
 		return shopMid;
@@ -163,6 +178,8 @@ public class CommodityVO  implements  Serializable {
 		this.commodityName = commodity.getName();
 		this.commodityCategory = commodity.getCategory();
 		this.commodityDescription = commodity.getDescription();
+		this.brandMid = commodity.getBrandMid();//品牌mongoId
+		this.mallMid = commodity.getMallMid();//商场mongoId
 
 		if(commodity.getPostage() != null && !commodity.getPostage().isEmpty()){
 			try{
