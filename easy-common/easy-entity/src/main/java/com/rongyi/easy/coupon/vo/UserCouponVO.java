@@ -2,6 +2,7 @@ package com.rongyi.easy.coupon.vo;
 
 import com.rongyi.easy.coupon.entity.UserRedenvelope;
 import com.rongyi.easy.mcmc.vo.CommodityBuyerVO;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -39,6 +40,8 @@ public class UserCouponVO implements Serializable {
     private List<CommodityBuyerVO> commodityList;// 商品信息列表
 
     private String description;// 描述
+
+    private String couponType;
 
     public Integer getStatus() {
         return status;
@@ -144,6 +147,13 @@ public class UserCouponVO implements Serializable {
         this.couponCode = couponCode;
     }
 
+    public String getCouponType() {
+        return couponType;
+    }
+
+    public void setCouponType(String couponType) {
+        this.couponType = couponType;
+    }
 
     // 券状态 0:未激活 1:已领用 2:已使用 3:已过期
     public void setConvertStatus(Integer status, Date validEndAt) {
@@ -155,4 +165,23 @@ public class UserCouponVO implements Serializable {
             this.setStatus(3);
     }
 
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("couponCode", couponCode)
+                .append("title", title)
+                .append("discount", discount)
+                .append("validBeginDate", validBeginDate)
+                .append("validEndDate", validEndDate)
+                .append("status", status)
+                .append("type", type)
+                .append("productIds", productIds)
+                .append("useDescription", useDescription)
+                .append("recommend", recommend)
+                .append("shopName", shopName)
+                .append("commodityList", commodityList)
+                .append("description", description)
+                .append("couponType", couponType)
+                .toString();
+    }
 }
