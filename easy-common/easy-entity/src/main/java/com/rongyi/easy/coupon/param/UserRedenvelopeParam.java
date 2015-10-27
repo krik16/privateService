@@ -8,7 +8,8 @@ import java.util.Date;
  */
 public class UserRedenvelopeParam implements Serializable {
     private int pageSize = 10;
-    private int currentPage = 0;
+    private int currentPage = 1;
+    private int offset = 0;
     private String userId;
     private String productId;
     private Integer status;
@@ -69,5 +70,13 @@ public class UserRedenvelopeParam implements Serializable {
 
     public void setValidEndAt(Date validEndAt) {
         this.validEndAt = validEndAt;
+    }
+
+    public int getOffset() {
+        return this.currentPage * this.pageSize;
+    }
+
+    public void setOffset(int offset) {
+        this.offset = offset;
     }
 }
