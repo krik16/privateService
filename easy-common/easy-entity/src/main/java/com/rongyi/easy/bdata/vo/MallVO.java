@@ -5,8 +5,12 @@ package com.rongyi.easy.bdata.vo;
  * User: chris
  * Date: 2015/10/24 18:19
  */
+import com.rongyi.easy.bdata.entity.Categories;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MallVO implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -31,6 +35,10 @@ public class MallVO implements Serializable {
     private String terminalLogo;//终端机logo：终端机logourl地址
     private String wechatPic; //商场 微信展示图片：微信地址
     private String icon;//商场ICOn：图片logoURl
+    private String tags;
+    private Integer rank;
+    private String slug;
+    private Long shopNum;
 
     public String getId() {
         return id;
@@ -198,5 +206,37 @@ public class MallVO implements Serializable {
 
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
+
+    public Integer getRank() {
+        return rank;
+    }
+
+    public void setRank(Integer rank) {
+        this.rank = rank;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
+
+    public Long getShopNum() {
+        return shopNum;
+    }
+
+    public void setShopNum(Long shopNum) {
+        this.shopNum = shopNum;
     }
 }

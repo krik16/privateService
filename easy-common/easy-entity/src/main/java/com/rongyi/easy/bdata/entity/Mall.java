@@ -6,15 +6,16 @@ package com.rongyi.easy.bdata.entity;
  * Date: 2015/10/27 16:32
  */
 
-import com.rongyi.easy.roa.entity.CategoriesEntity;
 import com.rongyi.easy.roa.entity.ParkingEntity;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 
 @Entity(value ="zones", noClassnameStored = true)
@@ -27,12 +28,6 @@ public class Mall implements Serializable {
 
     private String _type;
     private Integer system_status;
-    public Integer getSystem_status() {
-        return system_status;
-    }
-    public void setSystem_status(Integer system_status) {
-        this.system_status = system_status;
-    }
     private String address;
     private List<String> aliases;
     private String appearance_pic;
@@ -42,7 +37,6 @@ public class Mall implements Serializable {
     private Date created_at;
     private Integer custom_category;
     private String description;
-    private Integer has_cms;
     private String icon;
     private String introduction_pic;
     private String traffic_pic;
@@ -64,10 +58,6 @@ public class Mall implements Serializable {
     private Date updated_at;
     private String weixin;
     private String wechat_pic;//微信图片
-    private String wechat_appId;//微信id
-    private String wechat_appSecret;//微信密钥
-    private String wechat_encodingAESKey;//微信加密解密密钥
-
     private String app_picture;
     private String show_cate;
     private String show_shop;
@@ -75,17 +65,15 @@ public class Mall implements Serializable {
     private Integer rank;
     private Integer systemStatus;
     private Integer hot_district;
-
-    private List<CategoriesEntity> main_categories;
     private Integer parking_count;
     private boolean has_building;
     private Integer position;
-    private String picture;
-
+    private String  picture;
     private Integer ry_ad_num;
     private Integer mall_ad_num;
     private Integer ry_banner_num;
     private Integer mall_banner_num;
+
 
     public ObjectId getId() {
         return id;
@@ -101,6 +89,14 @@ public class Mall implements Serializable {
 
     public void set_type(String _type) {
         this._type = _type;
+    }
+
+    public Integer getSystem_status() {
+        return system_status;
+    }
+
+    public void setSystem_status(Integer system_status) {
+        this.system_status = system_status;
     }
 
     public String getAddress() {
@@ -173,14 +169,6 @@ public class Mall implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Integer getHas_cms() {
-        return has_cms;
-    }
-
-    public void setHas_cms(Integer has_cms) {
-        this.has_cms = has_cms;
     }
 
     public String getIcon() {
@@ -351,30 +339,6 @@ public class Mall implements Serializable {
         this.wechat_pic = wechat_pic;
     }
 
-    public String getWechat_appId() {
-        return wechat_appId;
-    }
-
-    public void setWechat_appId(String wechat_appId) {
-        this.wechat_appId = wechat_appId;
-    }
-
-    public String getWechat_appSecret() {
-        return wechat_appSecret;
-    }
-
-    public void setWechat_appSecret(String wechat_appSecret) {
-        this.wechat_appSecret = wechat_appSecret;
-    }
-
-    public String getWechat_encodingAESKey() {
-        return wechat_encodingAESKey;
-    }
-
-    public void setWechat_encodingAESKey(String wechat_encodingAESKey) {
-        this.wechat_encodingAESKey = wechat_encodingAESKey;
-    }
-
     public String getApp_picture() {
         return app_picture;
     }
@@ -429,14 +393,6 @@ public class Mall implements Serializable {
 
     public void setHot_district(Integer hot_district) {
         this.hot_district = hot_district;
-    }
-
-    public List<CategoriesEntity> getMain_categories() {
-        return main_categories;
-    }
-
-    public void setMain_categories(List<CategoriesEntity> main_categories) {
-        this.main_categories = main_categories;
     }
 
     public Integer getParking_count() {

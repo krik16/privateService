@@ -19,20 +19,20 @@ public class Ad implements Serializable {
 
     @Id
     private ObjectId  id;
-    private String    mall_id;//商场id
+    private ObjectId  mall_id;//商场id
     private String    mall_name;//商场名字
     private Integer   holder;//所属  0容易网 1商家
     private Integer   position;//位置
     private Integer   type;//0全屏广告  1banner广告
     private Date      publish_start;
     private Date      publish_end;
-    private String    material_id;
+    private ObjectId  material_id;
     private Integer   material_detail_type;//详情素材（给banner广告用）0图片|1Url|2无
     private String    material_detail_url;//详情素材Url（给banner广告用）
-    private List<String> material_detail_ids;//详情素材关联id 图片（给banner广告用）
+    private List<ObjectId> material_detail_ids;//详情素材关联id 图片（给banner广告用）
     private Integer   valid;//系统状态
-    private Integer   verify_stu;
-    private Integer   published;
+    private Integer   verify_stu; //0未审核 1审核未通过 2审核通过
+    private Integer   published; // 0未发布 1发布失败 2发布成功
     private Date      created_at;
     private Date      updated_at;
 
@@ -44,11 +44,11 @@ public class Ad implements Serializable {
         this.id = id;
     }
 
-    public String getMall_id() {
+    public ObjectId getMall_id() {
         return mall_id;
     }
 
-    public void setMall_id(String mall_id) {
+    public void setMall_id(ObjectId mall_id) {
         this.mall_id = mall_id;
     }
 
@@ -100,11 +100,11 @@ public class Ad implements Serializable {
         this.publish_end = publish_end;
     }
 
-    public String getMaterial_id() {
+    public ObjectId getMaterial_id() {
         return material_id;
     }
 
-    public void setMaterial_id(String material_id) {
+    public void setMaterial_id(ObjectId material_id) {
         this.material_id = material_id;
     }
 
@@ -124,11 +124,11 @@ public class Ad implements Serializable {
         this.material_detail_url = material_detail_url;
     }
 
-    public List<String> getMaterial_detail_ids() {
+    public List<ObjectId> getMaterial_detail_ids() {
         return material_detail_ids;
     }
 
-    public void setMaterial_detail_ids(List<String> material_detail_ids) {
+    public void setMaterial_detail_ids(List<ObjectId> material_detail_ids) {
         this.material_detail_ids = material_detail_ids;
     }
 
