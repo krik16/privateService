@@ -5,7 +5,7 @@ import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.old_vo.OldCouponVO;
 import com.rongyi.easy.coupon.param.RmmmCouponParam;
 import com.rongyi.easy.coupon.param.RmmmCouponQueryParam;
-import com.rongyi.easy.coupon.vo.RmmmCouponQueryListVO;
+import com.rongyi.easy.coupon.vo.MSCouponQueryVO;
 import com.rongyi.easy.solr.retrival.result.ActivityData;
 
 import java.util.List;
@@ -25,7 +25,7 @@ public interface MSCouponService {
     /**
      * 查询优惠券
      */
-    RmmmCouponQueryListVO listCoupon(RmmmCouponQueryParam param);
+    MSCouponQueryVO listCoupon(RmmmCouponQueryParam param);
 
     /**
      * 删除优惠券
