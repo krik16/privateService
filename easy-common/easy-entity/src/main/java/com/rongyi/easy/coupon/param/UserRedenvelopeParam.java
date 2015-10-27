@@ -7,9 +7,8 @@ import java.util.Date;
  * 用户红包参数
  */
 public class UserRedenvelopeParam implements Serializable {
-    private int pageSize = 10;
-    private int currentPage = 1;
-    private int offset = 0;
+    private Integer pageSize = 10;
+    private Integer currentPage;
     private String userId;
     private String userName;
     private String productId;
@@ -41,19 +40,20 @@ public class UserRedenvelopeParam implements Serializable {
         this.status = status;
     }
 
-    public int getPageSize() {
+
+    public Integer getPageSize() {
         return pageSize;
     }
 
-    public void setPageSize(int pageSize) {
+    public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
     }
 
-    public int getCurrentPage() {
+    public Integer getCurrentPage() {
         return currentPage;
     }
 
-    public void setCurrentPage(int currentPage) {
+    public void setCurrentPage(Integer currentPage) {
         this.currentPage = currentPage;
     }
 
@@ -74,15 +74,12 @@ public class UserRedenvelopeParam implements Serializable {
     }
 
     public int getOffset() {
-        if(this.currentPage < 1) {
+        if (this.currentPage < 1) {
             this.currentPage = 1;
         }
         return (this.currentPage - 1) * this.pageSize;
     }
 
-    public void setOffset(int offset) {
-        this.offset = offset;
-    }
 
     public String getUserName() {
         return userName;
