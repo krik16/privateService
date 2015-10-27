@@ -17,7 +17,9 @@ public class FloorVO implements Serializable {
 	private String mallId;
 	
 	private String floorName;//楼层名字
-
+	
+	private int position;//位置 用于排序
+	
 	public String getMallId() {
 		return mallId;
 	}
@@ -48,6 +50,14 @@ public class FloorVO implements Serializable {
 
 	public void setFloorNumber(String floorNumber) {
 		this.floorNumber = floorNumber;
+	}
+
+	public int getPosition() {
+		return position;
+	}
+
+	public void setPosition(int position) {
+		this.position = position;
 	}
 	
 	

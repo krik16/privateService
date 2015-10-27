@@ -22,4 +22,10 @@ public interface IShopService {
 	public List<ShopEntity> searchShopForOperation(Map<String, Object> paramMap,int currpage, int pageSize);
 	
 	public Long searchShopCountForOperation(Map<String, Object> paramMap);
+	/**
+	 * 微信端查询店铺
+	 * @param paramMap
+	 * @return
+	 */
+	public List<ShopEntity> searchShop(Map<String,Object> paramMap);
 }

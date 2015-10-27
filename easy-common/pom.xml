@@ -602,7 +602,7 @@
         <snapshotRepository>
             <id>rongyi-snapshots</id>
             <name>Nexus Snapshot Repository</name>
-             <url>http://192.168.1.101:8081/nexus/content/groups/rongyi-repositories/</url>
+             <url>http://192.168.1.101:8081/nexus/content/repositories/rongyi-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 

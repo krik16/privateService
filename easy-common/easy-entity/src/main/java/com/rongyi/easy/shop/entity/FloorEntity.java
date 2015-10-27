@@ -14,7 +14,7 @@ public class FloorEntity implements Serializable{
 	@Id
 	private ObjectId id;
 	
-	private int operator_id;// 操作人
+	private Integer operator_id;// 操作人
 	private String _type;// 楼层类型
 	private String name;// 楼层名
 	
@@ -38,7 +38,7 @@ public class FloorEntity implements Serializable{
 	
 	private String show_cate;
 	private String show_shop;
-	private String has_building;
+	private boolean has_building;
 	
 	private String floor_number;//几号楼（楼栋幢座）
 	private Integer floor_type;//楼栋类型 0楼1栋2幢3座
@@ -49,10 +49,10 @@ public class FloorEntity implements Serializable{
 	public void setId(ObjectId id) {
 		this.id = id;
 	}
-	public int getOperator_id() {
+	public Integer getOperator_id() {
 		return operator_id;
 	}
-	public void setOperator_id(int operator_id) {
+	public void setOperator_id(Integer operator_id) {
 		this.operator_id = operator_id;
 	}
 	public String get_type() {
@@ -176,10 +176,11 @@ public class FloorEntity implements Serializable{
 	public void setShow_shop(String show_shop) {
 		this.show_shop = show_shop;
 	}
-	public String getHas_building() {
+	
+	public boolean isHas_building() {
 		return has_building;
 	}
-	public void setHas_building(String has_building) {
+	public void setHas_building(boolean has_building) {
 		this.has_building = has_building;
 	}
 	public String getFloor_number() {
