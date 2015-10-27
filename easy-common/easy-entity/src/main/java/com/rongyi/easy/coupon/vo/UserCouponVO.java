@@ -41,7 +41,11 @@ public class UserCouponVO implements Serializable {
 
     private String description;// 描述
 
-    private String couponType;
+    private String couponType;//卡券类型
+
+    private String couponId;//卡券ID
+
+    private Integer id;//用户红包主键
 
     public Integer getStatus() {
         return status;
@@ -155,6 +159,22 @@ public class UserCouponVO implements Serializable {
         this.couponType = couponType;
     }
 
+    public String getCouponId() {
+        return couponId;
+    }
+
+    public void setCouponId(String couponId) {
+        this.couponId = couponId;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     // 券状态 0:未激活 1:已领用 2:已使用 3:已过期
     public void setConvertStatus(Integer status, Date validEndAt) {
         if (UserRedenvelope.STATUS_UNUSE.equals(status))
@@ -182,6 +202,8 @@ public class UserCouponVO implements Serializable {
                 .append("commodityList", commodityList)
                 .append("description", description)
                 .append("couponType", couponType)
+                .append("couponId", couponId)
+                .append("id", id)
                 .toString();
     }
 }
