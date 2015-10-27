@@ -9,7 +9,11 @@ import java.io.Serializable;
  *
  */
 public class FloorVO implements Serializable {
-
+	
+	private Integer type;//0楼1栋2幢3座
+	
+	private String floorNumber;//楼栋信息
+	
 	private String mallId;
 	
 	private String floorName;//楼层名字
@@ -28,6 +32,22 @@ public class FloorVO implements Serializable {
 
 	public void setFloorName(String floorName) {
 		this.floorName = floorName;
+	}
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	public String getFloorNumber() {
+		return floorNumber;
+	}
+
+	public void setFloorNumber(String floorNumber) {
+		this.floorNumber = floorNumber;
 	}
 	
 	
