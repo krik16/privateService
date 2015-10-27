@@ -144,6 +144,10 @@ public class CouponParam implements Serializable {
      */
     private String productId;
 
+    /**
+     * 更新人
+     */
+    private String updateUser;
 
     public String getShopId() {
         return shopId;
@@ -351,6 +355,14 @@ public class CouponParam implements Serializable {
 
     public void setProductId(String productId) {
         this.productId = productId;
+    }
+
+    public String getUpdateUser() {
+        return updateUser;
+    }
+
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser;
     }
 
     @Override
