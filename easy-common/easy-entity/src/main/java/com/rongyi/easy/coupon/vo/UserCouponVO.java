@@ -158,7 +158,7 @@ public class UserCouponVO implements Serializable {
     // 券状态 0:未激活 1:已领用 2:已使用 3:已过期
     public void setConvertStatus(Integer status, Date validEndAt) {
         if (UserRedenvelope.STATUS_UNUSE.equals(status))
-            this.setStatus(0);
+            this.setStatus(1);
         else if (UserRedenvelope.STATUS_USED.equals(status))
             this.setStatus(2);
         else if (new Date().after(validEndAt))
