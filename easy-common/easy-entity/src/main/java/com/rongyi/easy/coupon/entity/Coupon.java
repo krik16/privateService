@@ -1,6 +1,5 @@
 package com.rongyi.easy.coupon.entity;
 
-import com.rongyi.core.framework.exception.IllegalParamterException;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.ListUtils;
 import org.apache.commons.lang.StringUtils;
@@ -759,7 +758,7 @@ public class Coupon implements Serializable {
 
     public Integer getSaledCount() {
         if (stockCount == null) {
-            throw new IllegalParamterException("stockCount is null");
+            stockCount = totalCount;
         }
         return (totalCount - stockCount < 0) ? 0 : totalCount - stockCount;
     }
