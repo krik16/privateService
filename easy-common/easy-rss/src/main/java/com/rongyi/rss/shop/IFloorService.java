@@ -16,5 +16,5 @@ public interface IFloorService {
 	 * 插入楼层
 	 * @param entity
 	 */
-	public void saveFloor(FloorEntity entity);
+	public String saveFloor(FloorEntity entity);
 }

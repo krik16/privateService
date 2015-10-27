@@ -17,5 +17,5 @@ public interface ROAFloorService {
 	 * 新增或者修改楼层
 	 * @param entity
 	 */
-	public void saveFloor(FloorEntity entity);
+	public String saveFloor(FloorEntity entity);
 }
