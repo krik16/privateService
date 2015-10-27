@@ -6,6 +6,7 @@ import org.mongodb.morphia.annotations.Id;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Desc: ad entity
@@ -17,20 +18,23 @@ public class Ad implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    private ObjectId id;
-    private ObjectId mall_id;
-    private String   mall_name;
-    private int      holder;
-    private int      position;
-    private int      type;
-    private Date     publish_start;
-    private Date     publish_end;
-    private ObjectId   material_id;
-    private int      valid;
-    private int      verify_stu;
-    private int      published;
-    private Date     created_at;
-    private Date     updated_at;
+    private ObjectId  id;
+    private String    mall_id;//商场id
+    private String    mall_name;//商场名字
+    private Integer   holder;//所属  0容易网 1商家
+    private Integer   position;//位置
+    private Integer   type;//0全屏广告  1banner广告
+    private Date      publish_start;
+    private Date      publish_end;
+    private String    material_id;
+    private Integer   material_detail_type;//详情素材（给banner广告用）0图片|1Url|2无
+    private String    material_detail_url;//详情素材Url（给banner广告用）
+    private List<String> material_detail_ids;//详情素材关联id 图片（给banner广告用）
+    private Integer   valid;//系统状态
+    private Integer   verify_stu;
+    private Integer   published;
+    private Date      created_at;
+    private Date      updated_at;
 
     public ObjectId getId() {
         return id;
@@ -40,11 +44,11 @@ public class Ad implements Serializable {
         this.id = id;
     }
 
-    public ObjectId getMall_id() {
+    public String getMall_id() {
         return mall_id;
     }
 
-    public void setMall_id(ObjectId mall_id) {
+    public void setMall_id(String mall_id) {
         this.mall_id = mall_id;
     }
 
@@ -56,27 +60,27 @@ public class Ad implements Serializable {
         this.mall_name = mall_name;
     }
 
-    public int getHolder() {
+    public Integer getHolder() {
         return holder;
     }
 
-    public void setHolder(int holder) {
+    public void setHolder(Integer holder) {
         this.holder = holder;
     }
 
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
-    public void setPosition(int position) {
+    public void setPosition(Integer position) {
         this.position = position;
     }
 
-    public int getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
@@ -96,35 +100,59 @@ public class Ad implements Serializable {
         this.publish_end = publish_end;
     }
 
-    public ObjectId getMaterial_id() {
+    public String getMaterial_id() {
         return material_id;
     }
 
-    public void setMaterial_id(ObjectId material_id) {
+    public void setMaterial_id(String material_id) {
         this.material_id = material_id;
     }
 
-    public int getValid() {
+    public Integer getMaterial_detail_type() {
+        return material_detail_type;
+    }
+
+    public void setMaterial_detail_type(Integer material_detail_type) {
+        this.material_detail_type = material_detail_type;
+    }
+
+    public String getMaterial_detail_url() {
+        return material_detail_url;
+    }
+
+    public void setMaterial_detail_url(String material_detail_url) {
+        this.material_detail_url = material_detail_url;
+    }
+
+    public List<String> getMaterial_detail_ids() {
+        return material_detail_ids;
+    }
+
+    public void setMaterial_detail_ids(List<String> material_detail_ids) {
+        this.material_detail_ids = material_detail_ids;
+    }
+
+    public Integer getValid() {
         return valid;
     }
 
-    public void setValid(int valid) {
+    public void setValid(Integer valid) {
         this.valid = valid;
     }
 
-    public int getVerify_stu() {
+    public Integer getVerify_stu() {
         return verify_stu;
     }
 
-    public void setVerify_stu(int verify_stu) {
+    public void setVerify_stu(Integer verify_stu) {
         this.verify_stu = verify_stu;
     }
 
-    public int getPublished() {
+    public Integer getPublished() {
         return published;
     }
 
-    public void setPublished(int published) {
+    public void setPublished(Integer published) {
         this.published = published;
     }
 

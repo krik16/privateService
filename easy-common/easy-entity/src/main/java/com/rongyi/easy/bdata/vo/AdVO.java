@@ -1,9 +1,8 @@
 package com.rongyi.easy.bdata.vo;
 
-import org.bson.types.ObjectId;
-
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Desc: ad vo
@@ -11,21 +10,23 @@ import java.util.Date;
  * Date: 2015/10/27 1:38
  */
 public class AdVO implements Serializable {
-    private String   id;
-    private String   mallId;
-    private String   mallName;
-    private int      holder;
-    private int      position;
-    private int      type;
-    private Date     publishStart;
-    private Date     publishEnd;
-    private ObjectId materialId;
-    private String   materialUrl;
-    private int      valid;
-    private int      verifyStu;
-    private int      published;
-    private Date     createdAt;
-    private Date     updatedAt;
+    private static final long serialVersionUID = 1L;
+    private String    id;
+    private String    mallId;//商场id
+    private String    mallName;//商场名字
+    private Integer   holder;//所属  0容易网 1商家
+    private Integer   position;//位置
+    private Integer   type;//0全屏广告  1banner广告
+    private Date      publishStart;
+    private Date      publishEnd;
+    private List<MaterialVO>  material;
+    private Integer   materialDetailType;//详情素材（给banner广告用）0图片|1Url|2无
+    private List<MaterialVO> materialDetails;//详情素材关联id 图片（给banner广告用）
+    private Integer   valid;//系统状态
+    private Integer   verifyStatus;
+    private Integer   published;
+    private Date      createdAt;
+    private Date      updatedAt;
 
     public String getId() {
         return id;
@@ -51,27 +52,27 @@ public class AdVO implements Serializable {
         this.mallName = mallName;
     }
 
-    public int getHolder() {
+    public Integer getHolder() {
         return holder;
     }
 
-    public void setHolder(int holder) {
+    public void setHolder(Integer holder) {
         this.holder = holder;
     }
 
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
-    public void setPosition(int position) {
+    public void setPosition(Integer position) {
         this.position = position;
     }
 
-    public int getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
@@ -91,43 +92,51 @@ public class AdVO implements Serializable {
         this.publishEnd = publishEnd;
     }
 
-    public ObjectId getMaterialId() {
-        return materialId;
+    public List<MaterialVO> getMaterial() {
+        return material;
     }
 
-    public void setMaterialId(ObjectId materialId) {
-        this.materialId = materialId;
+    public void setMaterial(List<MaterialVO> material) {
+        this.material = material;
     }
 
-    public String getMaterialUrl() {
-        return materialUrl;
+    public Integer getMaterialDetailType() {
+        return materialDetailType;
     }
 
-    public void setMaterialUrl(String materialUrl) {
-        this.materialUrl = materialUrl;
+    public void setMaterialDetailType(Integer materialDetailType) {
+        this.materialDetailType = materialDetailType;
     }
 
-    public int getValid() {
+    public List<MaterialVO> getMaterialDetails() {
+        return materialDetails;
+    }
+
+    public void setMaterialDetails(List<MaterialVO> materialDetails) {
+        this.materialDetails = materialDetails;
+    }
+
+    public Integer getValid() {
         return valid;
     }
 
-    public void setValid(int valid) {
+    public void setValid(Integer valid) {
         this.valid = valid;
     }
 
-    public int getVerifyStu() {
-        return verifyStu;
+    public Integer getVerifyStatus() {
+        return verifyStatus;
     }
 
-    public void setVerifyStu(int verifyStu) {
-        this.verifyStu = verifyStu;
+    public void setVerifyStatus(Integer verifyStatus) {
+        this.verifyStatus = verifyStatus;
     }
 
-    public int getPublished() {
+    public Integer getPublished() {
         return published;
     }
 
-    public void setPublished(int published) {
+    public void setPublished(Integer published) {
         this.published = published;
     }
 
@@ -146,5 +155,4 @@ public class AdVO implements Serializable {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
-
 }
