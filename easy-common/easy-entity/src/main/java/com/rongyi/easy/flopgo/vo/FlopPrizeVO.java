@@ -1,12 +1,14 @@
 package com.rongyi.easy.flopgo.vo;
 
-import com.rongyi.easy.coupon.entity.Coupon;
-import com.rongyi.easy.coupon.entity.CouponCommodity;
-
 import java.io.Serializable;
+
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.coupon.vo.CouponVO;
 
 
 /**
@@ -18,7 +20,7 @@ public class FlopPrizeVO implements Serializable{
 
 	private static final long serialVersionUID = -2482835233592807478L;
 	private String id;//券id
-	
+
 	private String title;//优惠券名称
 	private Integer totalCount;//总量
 	private Integer buyedCount;//已买数量
@@ -47,14 +49,14 @@ public class FlopPrizeVO implements Serializable{
 	private String listPicUrl;// 列表图url
 	private String recommend;// 推荐说明
 	private List<String> detailPicUrls;// 详情图url
-	private List<CouponCommodity> products = new ArrayList<CouponCommodity>(); // 现金劵关联商品
+	private List<CouponVO.CouponProduct> products = new ArrayList<CouponVO.CouponProduct>(); // 现金劵关联商品
 	private Integer cardSurfaceIsShow;//牌面是否显示  0表示不显示 1表示显示
-	
-	public List<CouponCommodity> getProducts() {
+
+	public List<CouponVO.CouponProduct> getProducts() {
 		return products;
 	}
 
-	public void setProducts(List<CouponCommodity> products) {
+	public void setProducts(List<CouponVO.CouponProduct> products) {
 		this.products = products;
 	}
 
@@ -67,7 +69,7 @@ public class FlopPrizeVO implements Serializable{
 	}
 
 	public FlopPrizeVO(){
-	
+
 	}
 
 //	public FlopPrizeVO(CouponEntity couponEntity){
@@ -89,34 +91,36 @@ public class FlopPrizeVO implements Serializable{
 		this.recommend = recommend;
 	}
 
-	public FlopPrizeVO(Coupon coupon){
+	public FlopPrizeVO(CouponVO coupon){
 		if(coupon!=null){
 			this.id=coupon.getId().toString();
-			this.title=coupon.getName();
+			this.title=coupon.getTitle();
 			this.totalCount=coupon.getTotalCount();
-			this.buyedCount=coupon.getTotalCount().intValue()-coupon.getStockCount().intValue();
-
-				this.restCount=coupon.getStockCount();//这个是计算库存
-
-//			this.activityStatus=coupon.getIsRelatedActivity()?"1":"0";
-			this.nowPrice=coupon.getCurrPrice2Double();
-			this.originalPrice=coupon.getOrigPrice2Double();
-			this.discount=coupon.getDiscount2Double();
+			this.buyedCount=coupon.getReceiveCount();
+			if(coupon.getReceiveCount()==null){
+				this.restCount=coupon.getTotalCount();//这个是计算库存
+			}else{
+				this.restCount=coupon.getTotalCount()-coupon.getReceiveCount();//计算库存
+			}
+			this.activityStatus=coupon.getActivityStatus();
+			this.nowPrice=coupon.getCurrentPrice();
+			this.originalPrice=coupon.getOriginalPrice();
+			this.discount=coupon.getDiscount();
 			this.recommend=coupon.getRecommend();
-			this.updateDate=coupon.getUpdateAt();
-			this.createDate=coupon.getCreateAt();
-			this.useRestriction=coupon.getLimitDesc();
-			this.useDescription=coupon.getUsageDesc();//优惠卷使用说明
-			this.validBeginDate=coupon.getValidStartAt();
-			this.validEndDate=coupon.getValidEndAt();
-			this.publicStart=coupon.getPublishStartAt();
-			this.publicEnd=coupon.getPublishEndAt();
-			this.checkStatus=coupon.getStatus().toString();
-			this.ticketType=coupon.getCouponType().toString();
+			this.updateDate=coupon.getUpdateDate();
+			this.createDate=coupon.getCreateDate();
+			this.useRestriction=coupon.getUseRestriction();
+			this.useDescription=coupon.getUseDescription();//优惠卷使用说明
+			this.validBeginDate=coupon.getValidBeginDate();
+			this.validEndDate=coupon.getValidEndDate();
+			this.publicStart=coupon.getPublishBeginDate();
+			this.publicEnd=coupon.getPublishEndDate();
+			this.checkStatus=coupon.getCheckStatus();
+			this.ticketType=coupon.getCouponType();
 			this.listPicUrl=coupon.getListPicUrl();
 			this.detailPicUrls=coupon.getDetailPicUrls();
-			this.products=coupon.getCouponCommodities();
-			
+			this.products=coupon.getProducts();
+
 		}
 	}
 
@@ -164,7 +168,7 @@ public class FlopPrizeVO implements Serializable{
 	public void setNowPrice(Double nowPrice) {
 		this.nowPrice = nowPrice;
 	}
-	
+
 	public Double getOriginalPrice() {
 		return originalPrice;
 	}
@@ -263,5 +267,5 @@ public class FlopPrizeVO implements Serializable{
 	public void setCardSurfaceIsShow(Integer cardSurfaceIsShow) {
 		this.cardSurfaceIsShow = cardSurfaceIsShow;
 	}
-	
+
 }
