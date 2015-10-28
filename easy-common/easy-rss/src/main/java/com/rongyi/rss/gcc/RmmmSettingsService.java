@@ -10,4 +10,9 @@ public interface RmmmSettingsService {
 
 
 	public TransConfigurations getLatestTransConfigurations();
+	/**
+	 * 获取买手微商城参数配置
+	 * @return
+	 */
+	public Configurations getLatestBuyerConfigurations();
 }
