@@ -28,4 +28,6 @@ public interface IShopService {
 	 * @return
 	 */
 	public List<ShopEntity> searchShop(Map<String,Object> paramMap);
+	
+	public void insertShopList(List<ShopEntity> shops);
 }

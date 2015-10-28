@@ -308,6 +308,7 @@ public interface Constants {
         String UPAIYUN_URL_BENEFITS = "system/benefits/"; // 云盘路径-会员权益
         String UPAIYUN_URL_INTEGRALRULES = "system/integralRules/"; // 云盘路径-积分规则
         String UPAIYUN_URL_INTEGRALCOMM = "system/mall/commodity/intrgral/"; // 云盘路径-积分商品
+        String UPAIYUN_URL_SHOPS = "system/photo/file/"; // 云盘路径-会员权益
     }
 
     /**
