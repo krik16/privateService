@@ -85,6 +85,7 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
         map.put("startTime", startTime);
         map.put("endTime", endTime);
         List<PayAccountUseTotal> list = getPayAccountUserTotalList(map);
+        LOGGER.info("符合黑名单条数，list.size="+list.size());
         List<AccountBlacklist> mailWranList = new ArrayList<AccountBlacklist>();
         for (PayAccountUseTotal payAccountUseTotal : list) {
             AccountBlacklist accountBlacklist = selectByPayAccount(payAccountUseTotal.getPayAccount(), Integer.valueOf(payAccountUseTotal.getPayType()).byteValue(), null);
@@ -97,7 +98,7 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
                 map.put("count", Constant.BLACKLIST_CONFIG.WARN_COUNT);
                 map.put("payAccount", accountBlacklist.getPayAccount());
                 List<PayAccountUseTotal> newList = rpbService.selectPayAccountUseTotal(map);
-                if (newList != null && newList.isEmpty() && newList.get(0).getCount() > accountBlacklist.getCount()) {
+                if (newList != null && !newList.isEmpty() && newList.get(0).getCount() > accountBlacklist.getCount()) {
                     accountBlacklist.setCount(payAccountUseTotal.getCount());
                     accountBlacklist.setUpdateAt(DateUtil.getCurrDateTime());
                     update(accountBlacklist);
