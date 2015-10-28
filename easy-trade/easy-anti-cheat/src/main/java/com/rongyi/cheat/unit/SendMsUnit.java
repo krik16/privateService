@@ -29,7 +29,7 @@ public class SendMsUnit {
                 otherMessage = "此账支付购买超出自动冻结上限,系统自动冻结该账号";
             }
             SmsUtil.sendMoreMsMessage(phones.split(","), accountBlacklist.getCount(), accountBlacklist.getPayAccount(), payType, startTime, endTime, otherMessage);
-        }
+        } 
     }
 
 }
