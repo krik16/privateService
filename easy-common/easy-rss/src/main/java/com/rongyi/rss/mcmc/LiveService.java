@@ -104,7 +104,7 @@ public interface LiveService {
 	 * @param pageSize 页大小
 	 * @return 带List&lt;LiveVO&gt;的ResponseVO
 	 */
-	ResponseVO searchFELiveList(String liveName,String bullId,String bullNickName,int status,long beginTime,long endTime,int page,int pageSize);
+	ResponseVO searchFELiveList(String liveName,String bullId,String bullNickName,Integer status,Long beginTime,Long endTime,Integer page,Integer pageSize);
     
 	/**
 	 * FE端通过直播id获取直播
