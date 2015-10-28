@@ -4,31 +4,10 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-<<<<<<< HEAD
-        <dependent-module archiveName="easy-entity-2.1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/easy-entity/easy-entity">
-=======
-        <dependent-module archiveName="easy-entity-2.0.0-SNAPSHOT-settle.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/easy-entity/easy-entity">
->>>>>>> refs/remotes/origin/develop
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-<<<<<<< HEAD
         <dependent-module archiveName="easy-core-2.1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/easy-core/easy-core">
-=======
-        <dependent-module archiveName="easy-core-2.0.0-SNAPSHOT-settle.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/easy-core/easy-core">
->>>>>>> refs/remotes/origin/develop
             <dependency-type>uses</dependency-type>
         </dependent-module>
-<<<<<<< HEAD
-        <dependent-module archiveName="easy-rss-2.1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/easy-rss/easy-rss">
-=======
-        <dependent-module archiveName="easy-rss-2.0.0-SNAPSHOT-settle.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/easy-rss/easy-rss">
->>>>>>> refs/remotes/origin/develop
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-<<<<<<< HEAD
-=======
-        <property name="java-output-path" value="/easy-cheat/src/main/webapp/WEB-INF/classes"/>
->>>>>>> refs/remotes/origin/develop
+
         <property name="context-root" value="easy-anti-cheat"/>
         <property name="java-output-path" value="/easy-anti-cheat/src/main/webapp/WEB-INF/classes"/>
     </wb-module>
