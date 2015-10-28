@@ -1,5 +1,6 @@
 package com.rongyi.easy.coupon.vo;
 
+import com.rongyi.easy.coupon.entity.UserRedenvelope;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
@@ -109,6 +110,16 @@ public class UserRedenvelopeVO implements Serializable {
      * 有效起止
      */
     private Date endTime;
+
+    // 券状态 0:未激活 1:已领用 2:已使用 3:已过期
+    public void setConvertStatus(Integer status, Date validEndAt) {
+        if (UserRedenvelope.STATUS_UNUSE.equals(status))
+            this.setStatus(1);
+        else if (UserRedenvelope.STATUS_USED.equals(status))
+            this.setStatus(2);
+        else if (new Date().after(validEndAt))
+            this.setStatus(3);
+    }
 
     public Long getId() {
         return id;
