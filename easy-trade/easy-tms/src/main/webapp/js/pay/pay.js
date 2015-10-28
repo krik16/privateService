@@ -366,20 +366,21 @@ function switchCheck(check) {
 		
 		
 		$("#search-payNo").css("display","none");
-		$("#search-drawNo").css("display","inline");
+		$("#search-drawNo").css("display","inline-block");
 		$("#search-orderNo").css("display","none");
-		$("#search-sellerName").css("display","inline");
+		$("#search-sellerName").css("display","inline-block");
 		$("#search-buyerName").css("display","none");
 		$("#search-buyerAccount").css("display","none");
-		$("#search-guideType").css("display","inline");
-		$("#search-mallId").css("display","block");
-		$("#search-shopId").css("display","block");
-		$("#search-sellerName").css("display","block");
+		$("#search-guideType").css("display","inline-block");
+		$("#search-mallId").css("display","inline-block");
+		$("#search-shopId").css("display","inline-block");
+		$("#search-sellerName").css("display","inline-block");
 		
 		$("#search-batchNo").css("display","none");
 		$("#search-bussinessType").css("display","none");
 		$("#search-bussinessName").css("display","none");
 		
+		$("#search-drawNo-label").html('提现流水号:');
 		$("#search-price").html('提现金额：');
 		$("#search-time").html('提现申请时间段：');
 		$("#search-price").width(60);
@@ -398,9 +399,9 @@ function switchCheck(check) {
 		$("#statementPay").addClass("now");
 		$("#statementPay").removeClass("change-color");
 		
-		$("#search-mallId").css("display","block");
-		$("#search-shopId").css("display","block");
-		$("#search-sellerName").css("display","block");
+		$("#search-mallId").css("display","inline-block");
+		$("#search-shopId").css("display","inline-block");
+		$("#search-sellerName").css("display","inline-block");
 		
 		
 		$("#search-batchNo").css("display","none");
@@ -409,11 +410,11 @@ function switchCheck(check) {
 		
 		$("#search-payNo").css("display","none");
 		$("#search-drawNo").css("display","none");
-		$("#search-orderNo").css("display","inline");
+		$("#search-orderNo").css("display","inline-block");
 		$("#search-sellerName").css("display","none");
-		$("#search-buyerName").css("display","inline");
-		$("#search-buyerAccount").css("display","inline");
-		$("#search-guideType").css("display","inline");
+		$("#search-buyerName").css("display","inline-block");
+		$("#search-buyerAccount").css("display","inline-block");
+		$("#search-guideType").css("display","inline-block");
 		$("#search-price").html('退款金额：');
 		$("#search-time").html('退款申请时间段：');
 		$("#search-price").width(60);
@@ -431,20 +432,20 @@ function switchCheck(check) {
 		$("#statementPay").addClass("now");
 		$("#statementPay").removeClass("change-color");
 		
-		$("#search-mallId").css("display","block");
-		$("#search-shopId").css("display","block");
-		$("#search-sellerName").css("display","block");
+		$("#search-mallId").css("display","inline-block");
+		$("#search-shopId").css("display","inline-block");
+		$("#search-sellerName").css("display","inline-block");
 		
 		
 		$("#search-batchNo").css("display","none");
 		$("#search-bussinessType").css("display","none");
 		$("#search-bussinessName").css("display","none");
 		
-		$("#search-payNo").css("display","inline");
+		$("#search-payNo").css("display","inline-block");
 		$("#search-drawNo").css("display","none");
-		$("#search-orderNo").css("display","inline");
+		$("#search-orderNo").css("display","inline-block");
 		$("#search-sellerName").css("display","none");
-		$("#search-buyerName").css("display","inline");
+		$("#search-buyerName").css("display","inline-block");
 		$("#search-guideType").css("display","none");
 		$("#search-time").html('异常交易时间段：');
 		$("#search-price").html('异常付款金额：');
@@ -465,14 +466,14 @@ function switchCheck(check) {
 		$("#paySeller").removeClass("change-color");
 		
 		$("#search-payNo").css("display","none");
-		$("#search-drawNo").css("display","inline");
+		$("#search-drawNo").css("display","inline-block");
 		$("#search-orderNo").css("display","none");
-		$("#search-sellerName").css("display","inline");
-		$("#search-batchNo").css("display","block");
-		$("#search-bussinessType").css("display","block");
-		$("#search-bussinessName").css("display","block");
+		$("#search-sellerName").css("display","inline-block");
+		$("#search-batchNo").css("display","inline-block");
+		$("#search-bussinessType").css("display","inline-block");
+		$("#search-bussinessName").css("display","inline-block");
 
-		$("#search-payNo").css("display","block");
+		$("#search-payNo").css("display","inline-block");
 		$("#search-drawNo").css("display","none");
 		$("#search-mallId").css("display","none");
 		$("#search-shopId").css("display","none");

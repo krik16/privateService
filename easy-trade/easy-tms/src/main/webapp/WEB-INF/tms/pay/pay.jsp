@@ -85,17 +85,13 @@
                     <option value="2">买手</option>
                 </select>
             </div>
-            <div class="form-group">
-                <li class="xiala" style="list-style-type:none;">
+            <div class="form-group" style="list-style-type:none;">
                     <label>商场：</label>
-                    <input name="mallId" type="text" class="form-control ng-pristine ng-untouched ng-valid">
-                </li>
+                    <input name="mallId" type="text" class="form-control ng-pristine ng-untouched ng-valid xiala">
             </div>
-            <div class="form-group">
-                <li class="xiala" style="list-style-type:none;">
+            <div class="form-group" style="list-style-type:none;">
                     <label>店铺：</label>
-                    <input name="shopId" type="text" class="form-control ng-pristine ng-untouched ng-valid">
-                </li>
+                    <input name="shopId" type="text" class="form-control ng-pristine ng-untouched ng-valid xiala">
             </div>
             <div class="form-group"  id="search-sellerName">
                 <label>卖家姓名：</label>
@@ -135,9 +131,8 @@
             <div class="form-group">
                 <label id="search-time">申请提现时间段:</label>
                 <input name="start" type="text" value=""
-                       class=" form-control ng-pristine ng-untouched ng-valid startTime" id="payStartTime"
-                       style="width:160px"/>
-                <label>至<label>
+                       class=" form-control ng-pristine ng-untouched ng-valid startTime" id="payStartTime"/>
+                <label>&nbsp;至&nbsp;<label>
                     <input name="end" type="text" value=""
                            class="form-control ng-pristine ng-untouched ng-valid endTime" id="payEndTime"
                            style="width:160px"/>
@@ -146,7 +141,7 @@
             <div class="form-group">
                 <label id="search-price">提现金额：</label>
                 <input type="text" id="minTotalPrice" class=" form-control ng-pristine ng-untouched ng-valid"/>
-                <label>至</label>
+                <label>&nbsp;至&nbsp;</label>
                 <input type="text" id="maxTotalPrice" class="form-control ng-pristine ng-untouched ng-valid"/>
             </div>
             <div class="form-group">
