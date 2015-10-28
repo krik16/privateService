@@ -35,7 +35,6 @@ import com.rongyi.rss.mallshop.order.ROAOrderFormService;
 import com.rongyi.rss.rpb.IRpbService;
 import com.rongyi.tms.constants.Constant;
 import com.rongyi.tms.constants.ConstantEnum;
-import com.rongyi.tms.moudle.vo.ResponseResult;
 import com.rongyi.tms.mq.Sender;
 import com.rongyi.tms.service.PayService;
 import com.rongyi.tms.service.PaymentStatementService;
