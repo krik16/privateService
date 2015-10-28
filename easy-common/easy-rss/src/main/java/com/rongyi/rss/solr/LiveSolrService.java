@@ -38,4 +38,14 @@ public interface LiveSolrService {
 	 * @return
 	 */
 	public boolean updateLiveIndex(LiveSolrDocument liveDocument);
+	
+	/**
+	 * 插入直播索引
+	 * 
+	 * @author ZhengYl
+	 * @date 2015年10月28日 上午10:57:45 
+	 * @param liveDocument
+	 * @return
+	 */
+	public boolean insertLiveIndex(LiveSolrDocument liveDocument);
 }

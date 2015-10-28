@@ -47,11 +47,11 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	@Field("commodityBrandId")
 	private String commodityBrandId;
 	@Field("price")
-	private double price;
+	private Double price;
 	@Field("spot")
-	private boolean spot;
+	private Boolean spot;
 	@Field("type")
-	private int type;
+	private Integer type;
 	@Field("liveId")
 	private String liveId;
 	@Field("liveStartTime")
@@ -63,11 +63,11 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	@Field("commodityNameSubdiv")
 	private String commodityNameSubdiv;
 	
-	public double getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 	public String getCommodityMallId() {
@@ -216,19 +216,19 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.commodityNameSubdiv = commodityNameSubdiv;
 	}
 
-	public boolean isSpot() {
+	public Boolean isSpot() {
 		return spot;
 	}
 
-	public void setSpot(boolean spot) {
+	public void setSpot(Boolean spot) {
 		this.spot = spot;
 	}
 
-	public int getType() {
+	public Integer getType() {
 		return type;
 	}
 
-	public void setType(int type) {
+	public void setType(Integer type) {
 		this.type = type;
 	}
 
