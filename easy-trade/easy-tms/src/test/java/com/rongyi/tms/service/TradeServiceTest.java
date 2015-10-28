@@ -9,11 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.testng.annotations.Test;
 
-import com.rongyi.easy.coupon.entity.CouponOrder;
 import com.rongyi.easy.coupon.entity.UserCoupon;
 import com.rongyi.easy.entity.MallLifeUserEntity;
 import com.rongyi.easy.tms.vo.TradeVO;
-import com.rongyi.rss.coupon.RoaCouponOrderService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.tms.BaseTest;
 import com.rongyi.tms.moudle.vo.TradeDetailCount;
@@ -25,9 +23,6 @@ public class TradeServiceTest extends BaseTest{
     
 //    @Autowired
     ROAMalllifeUserService rOAMallLifeUserService;
-    
-    @Autowired
-    RoaCouponOrderService roaCouponOrderService;
     
     @Rollback(true)
     @Test(description = "rpb接口调用--交易明细")
@@ -66,12 +61,6 @@ public class TradeServiceTest extends BaseTest{
 //    @Test(description = "根据ID查询")
     public void selectByIdTest(){
         tradeDetailService.selectById(3513);
-    }
-    
-//    @Test
-    public void testSelectCoupon(){
-    	CouponOrder couponOrder = roaCouponOrderService.findOneByOrderNo("2015071300350917");
-    	System.err.println("buyerId="+couponOrder.getBuyerId());
     }
     
 //    @Test
