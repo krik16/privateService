@@ -39,6 +39,7 @@ public class ShopEntity implements Serializable{
     private List<ObjectId> category_ids;//店铺所属分类
     @JsonSerialize(using=JsonListObjectIdSerializer.class)
     private List<ObjectId> exclusive_category_ids;//店铺所属专属分类
+    private List<String> photo_urls;//图片地址
     private String tags;//标签 自定义分类
     @JsonSerialize(using=JsonObjectIdSerializer.class)
     private ObjectId zone_id;//所在商场id
@@ -242,6 +243,12 @@ public class ShopEntity implements Serializable{
 	}
 	public void setFiliale_id(ObjectId filiale_id) {
 		this.filiale_id = filiale_id;
+	}
+	public List<String> getPhoto_urls() {
+		return photo_urls;
+	}
+	public void setPhoto_urls(List<String> photo_urls) {
+		this.photo_urls = photo_urls;
 	}
 	
 }

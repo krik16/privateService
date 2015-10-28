@@ -33,7 +33,7 @@ public class ShopVO implements Serializable {
 	private String shopNumber;// 铺位号
 	private String businessStatus;// 营业状态0正常营业 1即将营业 2暂停营业 3停止营业
 	private String businessHours;// 营业时间
-	private List<String> pictureUrls;//图片url集合
+	private List<String> photoUrls;//图片url集合
 	private String openedTime;// 开业时间
 	private String telephone;// 店铺电话
 	private String headName;// 店铺负责人名字
@@ -208,11 +208,12 @@ public class ShopVO implements Serializable {
 	public void setFilialeName(String filialeName) {
 		this.filialeName = filialeName;
 	}
-	public List<String> getPictureUrls() {
-		return pictureUrls;
+	public List<String> getPhotoUrls() {
+		return photoUrls;
 	}
-	public void setPictureUrls(List<String> pictureUrls) {
-		this.pictureUrls = pictureUrls;
+	public void setPhotoUrls(List<String> photoUrls) {
+		this.photoUrls = photoUrls;
 	}
+	
 	
 }
