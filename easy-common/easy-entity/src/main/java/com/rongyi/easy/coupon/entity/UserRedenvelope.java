@@ -1,9 +1,9 @@
 package com.rongyi.easy.coupon.entity;
 
+import com.rongyi.core.util.AmountConversion;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -255,7 +255,7 @@ public class UserRedenvelope implements Serializable {
     public double getDiscount2Double() {
         double dis = 0D;
         if (discount != null) {
-            dis = BigDecimal.valueOf(discount).divide(BigDecimal.valueOf(100.00D)).setScale(2).doubleValue();
+            dis = AmountConversion.fenToYuan(discount);
         }
         return dis;
     }

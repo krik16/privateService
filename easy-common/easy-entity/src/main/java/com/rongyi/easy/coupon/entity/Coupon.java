@@ -1,5 +1,6 @@
 package com.rongyi.easy.coupon.entity;
 
+import com.rongyi.core.util.AmountConversion;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.ListUtils;
 import org.apache.commons.lang.StringUtils;
@@ -7,7 +8,6 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.beans.Transient;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -343,7 +343,7 @@ public class Coupon implements Serializable {
     public double getOrigPrice2Double() {
         double val = 0D;
         if (origPrice != null) {
-            val = BigDecimal.valueOf(origPrice).divide(BigDecimal.valueOf(100.00D)).setScale(2).doubleValue();
+            val = AmountConversion.fenToYuan(origPrice);
         }
         return val;
     }
@@ -359,7 +359,7 @@ public class Coupon implements Serializable {
     public double getCurrPrice2Double() {
         double val = 0D;
         if (currPrice != null) {
-            val = BigDecimal.valueOf(currPrice).divide(BigDecimal.valueOf(100.00D)).setScale(2).doubleValue();
+            val = AmountConversion.fenToYuan(currPrice);
         }
         return val;
     }
@@ -375,7 +375,7 @@ public class Coupon implements Serializable {
     public double getDiscount2Double() {
         double val = 0D;
         if (discount != null) {
-            val = BigDecimal.valueOf(discount).divide(BigDecimal.valueOf(100.00D)).setScale(2).doubleValue();
+            val = AmountConversion.fenToYuan(discount);
         }
         return val;
     }
@@ -757,6 +757,9 @@ public class Coupon implements Serializable {
     }
 
     public Integer getSaledCount() {
+        if (stockCount == null) {
+            stockCount = totalCount;
+        }
         return (totalCount - stockCount < 0) ? 0 : totalCount - stockCount;
     }
 

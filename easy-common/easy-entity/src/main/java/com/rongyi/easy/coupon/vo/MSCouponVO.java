@@ -16,7 +16,7 @@ import java.util.List;
  * @author ZhengYl
  *
  */
-public class RmmmCouponVO implements Serializable {
+public class MSCouponVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -99,8 +99,8 @@ public class RmmmCouponVO implements Serializable {
 	 * @param shopName 店铺名称
 	 * @param mallName 商场名称
 	 */
-	public RmmmCouponVO(String couponId, String title, List<String> detailPicUrls, List<String> shopNameList, Double originalPrice,
-						Double currentPrice, String status, int usedAmount, int totalCount, Boolean ifLimit, String shopName, String mallName) {
+	public MSCouponVO(String couponId, String title, List<String> detailPicUrls, List<String> shopNameList, Double originalPrice,
+					  Double currentPrice, String status, int usedAmount, int totalCount, Boolean ifLimit, String shopName, String mallName) {
 		super();
 		this.couponId = couponId;
 		this.title = title;
@@ -127,8 +127,8 @@ public class RmmmCouponVO implements Serializable {
 	 * @param usedAmount 已购数量
 	 * @param totalCount 总量
 	 */
-	public RmmmCouponVO(String couponId, String title, List<String> detailPicUrls, List<String> shopNameList, Double originalPrice,
-						Double currentPrice, String status, int usedAmount, int totalCount) {
+	public MSCouponVO(String couponId, String title, List<String> detailPicUrls, List<String> shopNameList, Double originalPrice,
+					  Double currentPrice, String status, int usedAmount, int totalCount) {
 		super();
 		this.couponId = couponId;
 		this.title = title;

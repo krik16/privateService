@@ -18,18 +18,17 @@ import java.util.List;
  * @author ZhengYl
  *
  */
-public class RmmmCouponQueryListVO extends PageVO implements Serializable{
+public class MSCouponQueryVO extends PageVO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	List<RmmmCouponVO> rmmmCouponQueryVoList;
+	List<MSCouponVO> msCouponVOList;
 
-	public List<RmmmCouponVO> getRmmmCouponQueryVoList() {
-		return rmmmCouponQueryVoList;
+	public List<MSCouponVO> getRmmmCouponQueryVoList() {
+		return msCouponVOList;
 	}
 
 	public void setRmmmCouponQueryVoList(
-			List<RmmmCouponVO> rmmmCouponQueryVoList) {
-		this.rmmmCouponQueryVoList = rmmmCouponQueryVoList;
+			List<MSCouponVO> msCouponVOList) {
+		this.msCouponVOList = msCouponVOList;
 	}
-
 }

@@ -1,5 +1,7 @@
 package com.rongyi.easy.coupon.vo;
 
+import com.rongyi.easy.coupon.entity.CouponCommodity;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -735,6 +737,73 @@ public class CouponVO implements Serializable {
 
     }
 
+    public void setConvertMalls(List<com.rongyi.easy.coupon.entity.CouponMall> convertMalls) {
+        if (CollectionUtils.isNotEmpty(convertMalls)) {
+            List<CouponMall> malls = new ArrayList<>();
+            for (com.rongyi.easy.coupon.entity.CouponMall mall : convertMalls) {
+                if (mall != null) {
+                    CouponMall cmall = new CouponMall();
+                    cmall.setId(mall.getMallId());
+                    cmall.setMallAddress(mall.getMallAddress());
+                    cmall.setMallLogoUrl(mall.getMallLogUrl());
+                    cmall.setMallName(mall.getMallName());
+                    malls.add(cmall);
+                }
+            }
+            this.setMalls(malls);
+        }
+    }
+
+    public void setConvertProducts(List<CouponCommodity> convertProducts) {
+        if (CollectionUtils.isNotEmpty(convertProducts)) {
+            List<CouponProduct> prodList = new ArrayList<>();
+            for (CouponCommodity comm : convertProducts) {
+                if (comm != null) {
+                    CouponProduct prod = new CouponProduct();
+                    prod.setProductId(comm.getCommodityId());
+                    prod.setMarketName(comm.getMallName());
+                    prod.setPics(comm.getPics2List());
+                    prod.setProductName(comm.getCommodityName());
+                    prod.setProductNum(comm.getCommodityCode());
+                    prod.setShopName(comm.getShopName());
+                    prod.setStatus(comm.getStatus() != null ? comm.getStatus().toString() : "");
+                    prodList.add(prod);
+                }
+            }
+            this.setProducts(prodList);
+        }
+    }
+
+    public void setConvertShops(List<com.rongyi.easy.coupon.entity.CouponShop> convertShops) {
+        if (CollectionUtils.isNotEmpty(convertShops)) {
+            List<CouponShop> shops = new ArrayList<>();
+            for (com.rongyi.easy.coupon.entity.CouponShop shop : convertShops) {
+                if (shop != null) {
+                    CouponShop cshop = new CouponShop();
+                    cshop.setId(shop.getShopId());
+                    cshop.setBrandName(shop.getShopBrand());
+                    cshop.setMallName(shop.getShopMallName());
+                    cshop.setShopLogoUrl(shop.getShopLogoUrl());
+                    cshop.setShopName(shop.getShopName());
+                    shops.add(cshop);
+                }
+            }
+            this.setShops(shops);
+        }
+    }
+
+    public void setConvertType(Integer convertType) {
+        if (Integer.valueOf(2).equals(convertType))
+            this.setType("0");
+        if (Integer.valueOf(3).equals(convertType)) {
+            this.setType("1");
+        }
+        if (Integer.valueOf(0).equals(convertType))
+            this.setType("0");
+        if (Integer.valueOf(1).equals(convertType)) {
+            this.setType("1");
+        }
+    }
     @Override
     public String toString() {
         return new ToStringBuilder(this)

@@ -11,6 +11,7 @@
 package com.rongyi.easy.activity.entity.vo;
 
 import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.malllife.common.util.DateTool;
 
 import java.text.SimpleDateFormat;
 
@@ -147,39 +148,22 @@ public class CouponPushVo {
      */
 
     public CouponPushVo(Coupon coupon) {
-
         super();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:ss");
         if (coupon.getStatus() != null) {
             this.checkStatus = coupon.getStatus().equals(2) ? "已通过" : (coupon.getStatus().equals("0") ? "待审核" : "未通过");
         }
         if (coupon.getCouponType() != null) {
-            this.couponType = coupon.getCouponType().equals(0) ? "优惠券" : "现金券";
+            this.couponType = coupon.getCouponType()==0 ? "代金券" : (coupon.getCouponType()==2?"红包":"抵扣券");
         }
-//        if (StringUtils.isNotBlank(coupon.getStatus())) {
-//            this.status = coupon.getStatus().equals("0") ? "审核中" : (coupon.getStatus().equals("1") ? "已上线" : "不能使用");
-//        }
         this.currentPrice = coupon.getCurrPrice2Double();
         this.id = coupon.getId().toString();
-        this.publishEndTime = coupon.getPublishEndAt() == null ? "" : sdf.format(coupon.getPublishEndAt());
-        this.publishStartTime = coupon.getPublishStartAt() == null ? "" : sdf.format(coupon.getPublishStartAt());
-        this.validateStartTime = coupon.getValidStartAt() == null ? "" : sdf.format(coupon.getValidEndAt());
-        this.validateEndTime = coupon.getValidEndAt() == null ? "" : sdf.format(coupon.getValidEndAt());
+        this.publishEndTime = coupon.getPublishEndAt() == null ? "" : DateTool.date2String(coupon.getPublishEndAt(), DateTool.FORMAT_DATETIME);
+        this.publishStartTime = coupon.getPublishStartAt() == null ? "" : DateTool.date2String(coupon.getPublishStartAt(),DateTool.FORMAT_DATETIME);
+        this.validateStartTime = coupon.getValidStartAt() == null ? "" : DateTool.date2String(coupon.getValidEndAt(), DateTool.FORMAT_DATETIME);
+        this.validateEndTime = coupon.getValidEndAt() == null ? "" : DateTool.date2String(coupon.getValidEndAt(),DateTool.FORMAT_DATETIME);
         this.restCount = coupon.getStockCount();
-        if (coupon.getPublishChannel() == null) {
-            this.sourceTarget = "无";
-        } else {
-            if (coupon.getPublishChannel().equals("0")) {
-                this.sourceTarget = "大运营管理平台";
-            } else if (coupon.getPublishChannel().equals("1")) {
-                this.sourceTarget = "百货管理平台";
-            } else if (coupon.getPublishChannel().equals("2")) {
-                this.sourceTarget = "摩店管理平台";
-            } else if (coupon.getPublishChannel().equals("3")) {
-                this.sourceTarget = "摩店App";
-            }
-        }
-
+        this.sourceTarget=coupon.getPublishChannel()==null?"":(coupon.getPublishChannel()==0?"大运营平台":"商家管理后台");
         this.title = coupon.getName();
         this.discount = coupon.getDiscount() == null ? "0" : coupon.getDiscount2Double() + "";
     }

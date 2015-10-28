@@ -21,6 +21,11 @@ public class CouponParam implements Serializable {
     private Integer pageSize;
 
     /**
+     * 起始行数
+     */
+    private Integer offset;
+
+    /**
      * 店铺ID
      */
     private String shopId;
@@ -144,6 +149,10 @@ public class CouponParam implements Serializable {
      */
     private String productId;
 
+    /**
+     * 更新人
+     */
+    private String updateUser;
 
     public String getShopId() {
         return shopId;
@@ -351,6 +360,26 @@ public class CouponParam implements Serializable {
 
     public void setProductId(String productId) {
         this.productId = productId;
+    }
+
+    public String getUpdateUser() {
+        return updateUser;
+    }
+
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser;
+    }
+
+    public Integer getOffset() {
+        if (this.currentPage != null && this.pageSize != null
+                && this.currentPage > 0 && this.pageSize > 0) {
+            return (this.currentPage - 1) * pageSize;
+        }
+        return offset;
+    }
+
+    public void setOffset(Integer offset) {
+        this.offset = offset;
     }
 
     @Override
