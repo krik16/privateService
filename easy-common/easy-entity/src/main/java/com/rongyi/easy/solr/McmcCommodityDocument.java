@@ -216,7 +216,7 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.commodityNameSubdiv = commodityNameSubdiv;
 	}
 
-	public Boolean isSpot() {
+	public Boolean getSpot() {
 		return spot;
 	}
 
