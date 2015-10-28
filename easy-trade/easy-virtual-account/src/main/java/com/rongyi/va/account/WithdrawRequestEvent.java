@@ -15,9 +15,6 @@ import net.sf.json.JSONObject;
 
 import org.springframework.context.ApplicationContext;
 
-import com.rongyi.core.constant.TmsEventTypeEnum;
-import com.rongyi.va.service.impl.WithdrawApplyServiceImpl;
-
 /**
  * @author ZhengYl
  * 
@@ -103,10 +100,10 @@ public class WithdrawRequestEvent extends AccountEvent implements Cloneable {
 	@Override
 	public void process(ApplicationContext ctx) throws Exception {
 
-		WithdrawApplyServiceImpl virtualAccountService = (WithdrawApplyServiceImpl) ctx
-				.getBean("vaWithdrawApplyService");
-		virtualAccountService.withdrawApply(userId, drawAmount, outAccount, outName,
-				TmsEventTypeEnum.DRAWAPPLY.getCode());
+//		WithdrawApplyServiceImpl virtualAccountService = (WithdrawApplyServiceImpl) ctx
+//				.getBean("vaWithdrawApplyService");
+//		virtualAccountService.withdrawApply(userId, drawAmount, outAccount, outName,
+//				TmsEventTypeEnum.DRAWAPPLY.getCode());
 
 		// VirtualAccountGeneralService virtualAccountGeneralService =
 		// (VirtualAccountGeneralService) ctx

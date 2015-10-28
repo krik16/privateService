@@ -10,9 +10,6 @@ package com.rongyi.tms.excel;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +25,6 @@ import org.springframework.stereotype.Component;
 
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.ExcelUtil;
-import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.easy.tms.vo.TradeVO;
 import com.rongyi.tms.constants.ConstantEnum;
 import com.rongyi.tms.service.TradeDetailService;
@@ -40,23 +36,11 @@ import com.rongyi.tms.service.TradeDetailService;
  * 
  **/
 @Component
-public class ExportTradeDetailExcel {
+public class ExportTradeDetailExcel extends ExportBase{
 
     @Autowired
     TradeDetailService tradeDetailService;
 
-    @SuppressWarnings("unchecked")
-    public Map<String, Object> getParamMap(HttpServletRequest request) {
-        Map<String, Object> map = new HashMap<String, Object>();
-        try {
-//            String paramsJson = new String(request.getParameter("paramsJson").getBytes("iso8859-1"), "UTF-8");
-        	String paramsJson = URLDecoder.decode(request.getParameter("paramsJson").trim(), "utf-8");
-        	map = JsonUtil.getMapFromJson(paramsJson);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return map;
-    }
 
     public void exportExcel(HttpServletRequest request, HttpServletResponse response) {
         try {

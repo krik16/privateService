@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.QueryOrderParamVO;
@@ -27,6 +26,7 @@ import com.rongyi.rss.rpb.IRpbService;
 import com.rongyi.tms.constants.Constant;
 import com.rongyi.tms.constants.ConstantEnum;
 import com.rongyi.tms.excel.ExportTradeDetailExcel;
+import com.rongyi.tms.moudle.vo.ResponseResult;
 import com.rongyi.tms.moudle.vo.TradeDetailCount;
 import com.rongyi.tms.service.TradeDetailService;
 
