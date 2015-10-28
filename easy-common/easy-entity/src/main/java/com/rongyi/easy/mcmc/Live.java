@@ -11,13 +11,17 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
+import com.rongyi.core.enumerate.mcmc.LiveSortCode;
+import com.rongyi.core.enumerate.mcmc.LiveStatus;
+
 /**
  * 买手直播
+ * 
  * @author xiaobo
  *
  */
 @Entity("mcmc_live")
-public class Live implements  Serializable{	
+public class Live implements Serializable {
 	private static final long serialVersionUID = 1L;
 	/**
 	 * mongo id
@@ -60,121 +64,159 @@ public class Live implements  Serializable{
 	 * 创建时间
 	 */
 	private Date createTime;
-	
+
 	/**
 	 * 坐标
 	 */
 	private List<Double> location;
-	
+
 	/**
 	 * 品牌id列表
 	 */
 	private List<ObjectId> brandIds;
-	
+
 	/**
 	 * 品牌名称列表
 	 */
 	private List<String> brandNames;
-	
+
 	/**
 	 * 位置类型 0商场 1街边店
 	 */
 	private int zoneType;
-	
+
 	/**
 	 * 买手名字
 	 */
 	private String bullName;
-	
+
+	/**
+	 * 排序字段
+	 */
+	private int sort;
+
 	public ObjectId getId() {
 		return id;
 	}
+
 	public void setId(ObjectId id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public Date getBeginTime() {
 		return beginTime;
 	}
+
 	public void setBeginTime(Date beginTime) {
 		this.beginTime = beginTime;
 	}
+
 	public Date getEndTime() {
 		return endTime;
 	}
+
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
 	}
+
 	public String getBullId() {
 		return bullId;
 	}
+
 	public void setBullId(String bullId) {
 		this.bullId = bullId;
 	}
+
 	public int getStatus() {
 		return status;
 	}
+
 	public void setStatus(int status) {
 		this.status = status;
 	}
+
 	public String getDetail() {
 		return detail;
 	}
+
 	public void setDetail(String detail) {
 		this.detail = detail;
 	}
+
 	public ObjectId getZoneId() {
 		return zoneId;
 	}
+
 	public void setZoneId(ObjectId zoneId) {
 		this.zoneId = zoneId;
 	}
+
 	public String getZoneName() {
 		return zoneName;
 	}
+
 	public void setZoneName(String zoneName) {
 		this.zoneName = zoneName;
 	}
+
 	public Date getCreateTime() {
 		return createTime;
 	}
+
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
+
 	public List<Double> getLocation() {
 		return location;
 	}
+
 	public void setLocation(List<Double> location) {
 		this.location = location;
 	}
+
 	public List<ObjectId> getBrandIds() {
 		return brandIds;
 	}
+
 	public void setBrandIds(List<ObjectId> brandIds) {
 		this.brandIds = brandIds;
 	}
+
 	public List<String> getBrandNames() {
 		return brandNames;
 	}
+
 	public void setBrandNames(List<String> brandNames) {
 		this.brandNames = brandNames;
 	}
+
 	public int getZoneType() {
 		return zoneType;
 	}
+
 	public void setZoneType(int zoneType) {
 		this.zoneType = zoneType;
 	}
+
 	public String getBullName() {
 		return bullName;
 	}
+
 	public void setBullName(String bullName) {
 		this.bullName = bullName;
 	}
-	
+
+	public int getSort() {
+		return LiveSortCode.fromStatus(LiveStatus.fromValue(getStatus())).getValue();
+	}
+
 }
