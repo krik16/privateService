@@ -24,6 +24,13 @@ public class Coupon implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
+     * 展示区域：常规区域,活动区域;未选中[0]，选中[1] 例如 "1,1"表示都选中
+     */
+    public final static String DISPLAY_REGION_ALL = "1,1";
+    public final static String DISPLAY_REGION_NORMAL = "1,0";
+    public final static String DISPLAY_REGION_ACTIVITY = "0,1";
+
+    /**
      * 主键(兼容mongoId)
      */
     private String id;
@@ -386,6 +393,19 @@ public class Coupon implements Serializable {
 
     public String getDisplayRegion() {
         return displayRegion;
+    }
+
+    /**
+     * 卡券是否活动展示区域
+     *
+     * @return
+     */
+    public boolean isActivityDisplayRegion() {
+        boolean val = false;
+        if (StringUtils.isNotBlank(displayRegion) && Coupon.DISPLAY_REGION_ACTIVITY.equals(displayRegion)) {
+            val = true;
+        }
+        return val;
     }
 
     public void setDisplayRegion(String displayRegion) {
