@@ -199,4 +199,22 @@ public interface ProxyCouponOrderService {
      */
     Map<String, Object> calcRefundAmount(String orderNo, Integer number, String userId);
 
+    /**
+     * 代金券已购买数
+     *
+     * @param couponId
+     * @param userId
+     * @return
+     */
+    int buyedCount(String couponId, String userId);
+
+    /**
+     * 买家已购买数量
+     *
+     * @param couponId
+     * @param userId
+     * @return
+     */
+    int dailyBuyCount(String couponId, String userId);
+
 }
