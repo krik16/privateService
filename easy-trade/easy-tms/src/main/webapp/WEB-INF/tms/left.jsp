@@ -109,6 +109,9 @@ li ul li span.fancytree-title{
 					<sec:authorize ifAnyGranted="TMS_DRAW_VIEW" >
 						<li><a href="${ctx}/drawDetail/search" target="mainFrame">提现明细</a></li>
 					</sec:authorize>
+						<sec:authorize ifAnyGranted="TMS_TRADE_VIEW" >
+						<li><a href="${ctx}/statementDetail/search?currpage=1" target="mainFrame">结算明细</a></li>
+					</sec:authorize>
 					</ul>
 				</li>
 				</sec:authorize>

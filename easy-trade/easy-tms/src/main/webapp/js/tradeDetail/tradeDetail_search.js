@@ -127,8 +127,10 @@ function validateExcelCount() {
  * 导出报表
  */
 function exportExcel() {
-    var url = "../tradeDetail/exportExcel?paramsJson=" + JSON.stringify(getParamsJson());
-    window.open(url);
+	 var url = "../tradeDetail/exportExcel?paramsJson="+JSON.stringify(getParamsJson());
+	 var val = encodeURI(url);    
+	 val = encodeURI(val);
+	 window.open(val);
 }
 /**
  * 查询参数

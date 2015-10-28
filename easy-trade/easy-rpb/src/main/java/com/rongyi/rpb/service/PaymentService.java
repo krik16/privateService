@@ -85,7 +85,7 @@ public interface PaymentService {
 	public abstract PaymentEntityVO insertOrderMessage(MessageEvent event);
 
 	/**
-	 * 验证订单号是否存在，如果已存在则是重复提交订单，直接返回直接生成的订单号(此处只有前端ROB支付时才需验证)
+	 * 验证订单号是否存在，如果已存在则是重复提交订单，直接返回直接生成的订单号
 	 * 
 	 * @param orderNum
 	 * @return 返回时null是证明不存在
@@ -252,4 +252,13 @@ public interface PaymentService {
 	 * @datetime:2015年9月1日下午5:30:18
 	 **/
 	public abstract String getPayNo();
+	
+	/**	
+	 * @Description: 根据id更新
+	 * @param ids
+	 * @param map	
+	 * @Author:  柯军
+	 * @datetime:2015年10月14日下午6:53:35
+	 **/
+	public abstract void updateByIds(String[] ids,Map<String,Object> map);
 }

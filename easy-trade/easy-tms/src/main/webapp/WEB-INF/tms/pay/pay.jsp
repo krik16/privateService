@@ -61,7 +61,7 @@
                onclick="switchCheck(0)">提现付款</a>
             |<a class="now" href="javascript:void(0);" id="tradeRefund" onclick="switchCheck(1)">交易退款</a>
             |<a class="now" href="javascript:void(0);" id="exceTrade" onclick="switchCheck(2)">异常交易付款</a>
-            <!-- |<a class="now" href="javascript:void(0);" id="paySeller" onclick="switchCheck(3)">打款到卖家</a> -->
+            |<a class="now" href="javascript:void(0);" id="statementPay" onclick="switchCheck(3)">对账单付款</a>
         </div>
         <div class="form-inline ng-valid ng-dirty ng-valid-parse">
             <input type="hidden" value="1" name="pageNo" id="currpage">
@@ -70,7 +70,7 @@
                 <input id="drawNo" type="text" class="form-control ng-pristine ng-untouched ng-valid">
             </div>
             <div class="form-group" style="display: none;" id="search-payNo">
-                <label>异常交易号:</label>
+                <label>付款单号:</label>
                 <input id="payNo" type="text" class="form-control ng-pristine ng-untouched ng-valid">
             </div>
             <div class="form-group" style="display: none;" id="search-orderNo">
@@ -105,8 +105,27 @@
                 <label>买家账号：</label>
                 <input id="buyerAccount" type="text" class="form-control ng-pristine ng-untouched ng-valid">
             </div>
+            <div class="form-group" style="display: none;" id="search-batchNo">
+                <label>账单批次：</label>
+                <input id="batchNo" type="text" class="form-control ng-pristine ng-untouched ng-valid">
+            </div>
+            <div class="form-group" style="display: none;">
+                <label id="search-bussinessType">>商户类型：</label>
+                <select id="bussinessType" class="form-control ng-pristine ng-untouched ng-valid">
+                 		<option value="">--全部--</option>
+						<option value="0">店铺</option>
+						<option value="1">商场</option> 
+						<option value="2">品牌</option>
+						<option value="3">分公司</option>
+						<option value="4">集团公司</option>
+                </select>
+            </div>
+             <div class="form-group" style="display: none;" id ="search-bussinessName">
+                <label>商户名称：</label>
+                <input id="bussinessName" type="text" class="form-control ng-pristine ng-untouched ng-valid">
+            </div>
             <div class="form-group">
-                <label id="search-guideType-label">打款方式：：</label>
+                <label id="search-guideType-label">打款方式：</label>
                 <select id="guideType" class="form-control ng-pristine ng-untouched ng-valid">
                     <option value="">--全部--</option>
                     <option value="0">支付宝</option>
@@ -134,9 +153,11 @@
                 <a href="javascript:void(0);" class="btnsearch checked" id="search-button">查询</a>
             </div>
             <div class="form-group">
-                <sec:authorize ifAnyGranted="TMS_F_PAY"><a href="javascript:void(0);" target="_parent"
-                                                           class="btnsearch" id="morePay"
-                                                           style="border:0px;float: right;">批量付款</a></sec:authorize>
+                <sec:authorize ifAnyGranted="TMS_F_PAY" >
+                	<a  href="javascript:void(0);" onclick="morePayClick()" target="_parent" class="btnsearch" id="morePay"  style="border:0px;float: right;">
+                		批量付款
+                	</a>
+                </sec:authorize>
             </div>
         </div>
         <div id="result" style="margin: 0 30px;"></div>

@@ -4,18 +4,15 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-<<<<<<< HEAD
-=======
-        <dependent-module archiveName="easy-entity-1.1.1-820-SHAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/easy-entity/easy-entity">
+        <dependent-module archiveName="easy-entity-2.0.0-SNAPSHOT-settle.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/easy-entity/easy-entity">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="easy-core-1.1.1-820-SHAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/easy-core/easy-core">
+        <dependent-module archiveName="easy-core-2.0.0-SNAPSHOT-settle.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/easy-core/easy-core">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="easy-rss-1.1.1-820-SHAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/easy-rss/easy-rss">
+        <dependent-module archiveName="easy-rss-2.0.0-SNAPSHOT-settle.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/easy-rss/easy-rss">
             <dependency-type>uses</dependency-type>
         </dependent-module>
->>>>>>> origin/easy-trade-feature-924
         <property name="context-root" value="easy-virtual-account"/>
         <property name="java-output-path" value="/easy-virtual-account/src/main/webapp/WEB-INF/classes"/>
     </wb-module>

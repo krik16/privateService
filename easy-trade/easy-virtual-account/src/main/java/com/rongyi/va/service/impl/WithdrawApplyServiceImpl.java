@@ -86,7 +86,6 @@ public class WithdrawApplyServiceImpl implements WithdrawApplyService {
 				body.put("payName", accountName);
 				body.put("applicationNo", applicationNo);
 				body.put("guideType", guideType);
-
 				BaseEvent event = new BaseEvent();
 				event.setBody(JSONObject.fromObject(body));
 				event.setSource(Constants.MQRequestParam.REQUEST_QUEUENAME_VA);

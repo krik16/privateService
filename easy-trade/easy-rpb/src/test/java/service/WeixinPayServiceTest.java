@@ -191,7 +191,7 @@ public class WeixinPayServiceTest extends BaseTest {
 		weixinPayService.batchTriggerWeixinRefund();
 	}
 
-//	 @Test
+	 @Test
 	public void testgetPaySignV3() {
 		try {
 			UnifiedorderService unifiedorderService = new UnifiedorderService();
@@ -221,7 +221,7 @@ public class WeixinPayServiceTest extends BaseTest {
 //		}
 //	}
 	
-	@Test
+//	@Test
 	@Description("微信退款查询")
 	public void testRefundQuery(){
 		weixinPayService.weixinRefund("00910138391041614", 0.01, 0.01, "00910138391041615",1);

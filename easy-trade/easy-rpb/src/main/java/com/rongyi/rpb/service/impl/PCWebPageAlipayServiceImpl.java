@@ -63,7 +63,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 		sParaTempToken.put("_input_charset", ConstantUtil.PayZhiFuBao.INPUT_CHARSET);
 		sParaTempToken.put("sign_type", ConstantUtil.PayZhiFuBao.SIGNTYPE);
 		sParaTempToken.put("notify_url", ConstantUtil.PCZhiFuBaoWebPage.NOTIFY_URL_ZHIFUBAO_PC_WEB);
-		sParaTempToken.put("account_name", ConstantUtil.PCZhiFuBaoWebPage.ACCOUNT_FULL_NAME);
+		sParaTempToken.put("account_name", ConstantUtil.PayZhiFuBao.ACCOUNT_FULL_NAME);
 		sParaTempToken.put("detail_data", detail_data);
 		sParaTempToken.put("batch_no", getBatchNo(payNo));
 		sParaTempToken.put("batch_num", "1");
@@ -125,7 +125,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 		sParaTempToken.put("_input_charset", ConstantUtil.PayZhiFuBao.INPUT_CHARSET);
 		sParaTempToken.put("sign_type", ConstantUtil.PayZhiFuBao.SIGNTYPE);
 		sParaTempToken.put("notify_url", ConstantUtil.PCZhiFuBaoWebPage.NOTIFY_URL_ZHIFUBAO_PC_WEB);
-		sParaTempToken.put("account_name", ConstantUtil.PCZhiFuBaoWebPage.ACCOUNT_FULL_NAME);
+		sParaTempToken.put("account_name", ConstantUtil.PayZhiFuBao.ACCOUNT_FULL_NAME);
 		sParaTempToken.put("detail_data", detailData.toString());
 		sParaTempToken.put("batch_no", getBatchNo(null));
 		sParaTempToken.put("batch_num", Integer.toString(buyerList.size()));
@@ -271,11 +271,11 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 		try {
 			messageMap = JsonUtil.getMapFromJson(event.getBody().toString());
 			Integer operateType = Integer.valueOf(messageMap.get("operateType").toString());
-			if (PayEnum.DRAW_APPLY_ONE.getCode().equals(operateType) || PayEnum.EXCE_PAY_ONE.getCode().equals(operateType)) {
+			if (PayEnum.DRAW_APPLY_ONE.getCode().equals(operateType) || PayEnum.EXCE_PAY_ONE.getCode().equals(operateType) || PayEnum.STATEMENT_ONE.getCode().equals(operateType)) {
 				LOGGER.info("单条支付");
 				PaymentEntity paymentEntity = paymentService.selectByPrimaryKey(messageMap.get("paymentId").toString());
 				map = getOnePayInfo(paymentEntity.getPayNo(), paymentEntity.getAmountMoney().toString(), paymentEntity.getOutAccount(), paymentEntity.getPayName(), messageMap.get("desc").toString());
-			} else if (PayEnum.DRAW_APPLY_MORE.getCode().equals(operateType) || PayEnum.EXCE_PAY_MORE.getCode().equals(operateType)) {
+			} else if (PayEnum.DRAW_APPLY_MORE.getCode().equals(operateType) || PayEnum.EXCE_PAY_MORE.getCode().equals(operateType) || PayEnum.STATEMENT_MORE.getCode().equals(operateType)) {
 				LOGGER.info("批量支付");
 				String[] idArray = messageMap.get("paymentId").toString().split("\\,");
 				map = getBatchPayInfo(getBatchPayBuyerMessage(idArray, messageMap.get("desc").toString()));
