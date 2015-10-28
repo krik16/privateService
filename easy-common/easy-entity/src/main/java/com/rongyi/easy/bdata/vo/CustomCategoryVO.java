@@ -61,6 +61,11 @@ public class CustomCategoryVO implements Serializable {
 	 */
 	private int updatedBy;
 
+    /**
+     * 自定义分类下关联的店铺数
+     */
+	private Long shopNum;
+
 	public String getId() {
 		return id;
 	}
@@ -155,5 +160,13 @@ public class CustomCategoryVO implements Serializable {
 
 	public void setUpdatedBy(int updatedBy) {
 		this.updatedBy = updatedBy;
+	}
+
+	public Long getShopNum() {
+		return shopNum;
+	}
+
+	public void setShopNum(Long shopNum) {
+		this.shopNum = shopNum;
 	}
 }

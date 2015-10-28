@@ -79,4 +79,15 @@ public interface MallService {
      */
     ResponseVO getAds(String mallId, long timeStamp, String channel, String sign);
 
+
+    /**
+     * get communal facility
+     * @param floorId
+     * @param timeStamp
+     * @param channel
+     * @param sign
+     * @return
+     */
+    ResponseVO getCommunalFacility(String floorId, long timeStamp, String channel, String sign);
+
 }

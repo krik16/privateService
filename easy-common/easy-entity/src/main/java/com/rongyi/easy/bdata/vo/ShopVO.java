@@ -1,6 +1,7 @@
 package com.rongyi.easy.bdata.vo;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 public class ShopVO implements Serializable {
@@ -30,6 +31,8 @@ public class ShopVO implements Serializable {
 	private List<String> doorCoordinate;
 	private String slug;
 	private String tags;
+	private Date createdAt;
+	private Date updateAt;
 
 	public String getId() {
 		return id;
@@ -229,5 +232,21 @@ public class ShopVO implements Serializable {
 
 	public void setTags(String tags) {
 		this.tags = tags;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Date getUpdateAt() {
+		return updateAt;
+	}
+
+	public void setUpdateAt(Date updateAt) {
+		this.updateAt = updateAt;
 	}
 }
