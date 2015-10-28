@@ -21,6 +21,7 @@ public class AdVO implements Serializable {
     private Date      publishEnd;
     private List<MaterialVO>  material;
     private Integer   materialDetailType;//详情素材（给banner广告用）0图片|1Url|2无
+    private String    materialDetailUrl; //详情Url（给banner广告用）
     private List<MaterialVO> materialDetails;//详情素材关联id 图片（给banner广告用）
     private Integer   valid;//系统状态
     private Integer   verifyStatus;
@@ -106,6 +107,14 @@ public class AdVO implements Serializable {
 
     public void setMaterialDetailType(Integer materialDetailType) {
         this.materialDetailType = materialDetailType;
+    }
+
+    public String getMaterialDetailUrl() {
+        return materialDetailUrl;
+    }
+
+    public void setMaterialDetailUrl(String materialDetailUrl) {
+        this.materialDetailUrl = materialDetailUrl;
     }
 
     public List<MaterialVO> getMaterialDetails() {
