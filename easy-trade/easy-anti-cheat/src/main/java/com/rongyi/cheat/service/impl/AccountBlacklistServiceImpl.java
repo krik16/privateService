@@ -94,8 +94,6 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
                 insert(accountBlacklist);
                 mailWranList.add(accountBlacklist);
             } else {//黑名单列表有记录
-                map.clear();
-                map.put("count", Constant.BLACKLIST_CONFIG.WARN_COUNT);
                 map.put("payAccount", accountBlacklist.getPayAccount());
                 List<PayAccountUseTotal> newList = rpbService.selectPayAccountUseTotal(map);
                 if (newList != null && !newList.isEmpty() && newList.get(0).getCount() > accountBlacklist.getCount()) {
