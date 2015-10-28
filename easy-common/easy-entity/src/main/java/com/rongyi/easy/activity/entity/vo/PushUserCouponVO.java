@@ -34,6 +34,7 @@ public class PushUserCouponVO implements Serializable{
     private Date validBeginDate;
     private Date validEndDate;
     private String userPhone;
+    private String pushChannelId;
 
 
     /**
@@ -54,7 +55,7 @@ public class PushUserCouponVO implements Serializable{
      * @param validEndDate
      */
 
-    public PushUserCouponVO(String pushId, String pushName, String couponId, List<String> couponCodes, String couponTitle, String userId, Integer couponType, String type, String useRestriction, Integer currentPrice, Date validBeginDate, Date validEndDate,String userPhone) {
+    public PushUserCouponVO(String pushId, String pushName, String couponId, List<String> couponCodes, String couponTitle, String userId, Integer couponType, String type, String useRestriction, Integer currentPrice, Date validBeginDate, Date validEndDate,String userPhone,String pushChannelId) {
         super();
         this.pushId = pushId;
         this.pushName = pushName;
@@ -69,6 +70,7 @@ public class PushUserCouponVO implements Serializable{
         this.validBeginDate = validBeginDate;
         this.validEndDate = validEndDate;
         this.userPhone=userPhone;
+        this.pushChannelId=pushChannelId;
     }
 
     @Override
@@ -80,14 +82,23 @@ public class PushUserCouponVO implements Serializable{
             ", couponCodes=" + couponCodes +
             ", couponTitle='" + couponTitle + '\'' +
             ", userId='" + userId + '\'' +
-            ", couponType='" + couponType + '\'' +
+            ", couponType=" + couponType +
             ", type='" + type + '\'' +
             ", useRestriction='" + useRestriction + '\'' +
             ", currentPrice=" + currentPrice +
             ", validBeginDate=" + validBeginDate +
             ", validEndDate=" + validEndDate +
             ", userPhone='" + userPhone + '\'' +
+            ", pushChannelId='" + pushChannelId + '\'' +
             '}';
+    }
+
+    public String getPushChannelId() {
+        return pushChannelId;
+    }
+
+    public void setPushChannelId(String pushChannelId) {
+        this.pushChannelId = pushChannelId;
     }
 
     public String getPushId() {
