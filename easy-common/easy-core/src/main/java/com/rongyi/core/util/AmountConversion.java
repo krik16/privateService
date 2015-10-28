@@ -10,6 +10,12 @@ import java.math.BigDecimal;
 public abstract class AmountConversion {
 
 
+    /**
+     * 分转元
+     *
+     * @param fen
+     * @return 元单位金额
+     */
     public static double fenToYuan(int fen) {
         double val = 0D;
         if (fen > 0) {
@@ -22,7 +28,7 @@ public abstract class AmountConversion {
      * 元转分
      *
      * @param yuan
-     * @return
+     * @return 分单位金额
      */
     public static int yuanToFen(double yuan) {
         int val = 0;
