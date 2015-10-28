@@ -236,10 +236,10 @@
         where (buyer_email IS
         NOT null and buyer_email != '')
         <if test="startTime != null and startTime != ''">
-            and end_at >= #{startTime,jdbcType=TIMESTAMP}
+            and time_end >= #{startTime,jdbcType=TIMESTAMP}
         </if>
         <if test="endTime != null and endTime != ''">
-            and #{endTime,jdbcType=TIMESTAMP} >= end_at
+            and #{endTime,jdbcType=TIMESTAMP} >= time_end
         </if>
         <if test="payAccount != null and pay_account != ''">
             and buyer_email = #{payAccount,jdbcType=VARCHAR}
