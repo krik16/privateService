@@ -1,6 +1,7 @@
 package com.rongyi.easy.coupon.entity;
 
 import com.rongyi.core.util.AmountConversion;
+import com.rongyi.easy.coupon.enumerate.CouponEnum;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.ListUtils;
 import org.apache.commons.lang.StringUtils;
@@ -585,6 +586,21 @@ public class Coupon implements Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Integer getPublishStatus() {
+        if (Integer.valueOf(CouponEnum.PASS.getValue()).equals(status)) {
+            if (!isOffStock && new Date().before(publishStartAt)) {
+                return CouponEnum.UNPUBLISH.getValue();
+            } else if (!isOffStock && new Date().after(publishStartAt) && new Date().before(publishEndAt)) {
+                return CouponEnum.PROCEEING.getValue();
+            } else if (!isOffStock && new Date().after(publishEndAt)) {
+                return CouponEnum.ENDED.getValue();
+            } else if (isOffStock) {
+                return CouponEnum.OFF.getValue();
+            }
+        }
+        return null;
     }
 
     public Integer getInChannel() {

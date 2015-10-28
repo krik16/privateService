@@ -9,6 +9,8 @@
  */
 package com.rongyi.easy.coupon.vo;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -245,4 +247,22 @@ public class MSCouponVO implements Serializable {
 		this.mallName = mallName;
 	}
 
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append("couponId", couponId)
+				.append("title", title)
+				.append("listPicUrl", listPicUrl)
+				.append("detailPicUrls", detailPicUrls)
+				.append("shopNameList", shopNameList)
+				.append("originalPrice", originalPrice)
+				.append("currentPrice", currentPrice)
+				.append("status", status)
+				.append("usedAmount", usedAmount)
+				.append("totalCount", totalCount)
+				.append("ifLimit", ifLimit)
+				.append("shopName", shopName)
+				.append("mallName", mallName)
+				.toString();
+	}
 }
