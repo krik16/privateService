@@ -20,7 +20,6 @@ public class FilialeVo implements Serializable{
 	
 	private String brandName; //关联品牌名称
 
-	
 
 	public String getName() {
 		return name;
