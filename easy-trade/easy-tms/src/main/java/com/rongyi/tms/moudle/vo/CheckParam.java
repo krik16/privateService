@@ -28,12 +28,22 @@ public class CheckParam {
     private Integer status;
     private Integer operateBiz;
     private String reason;
+    private Integer guideType;
     public String getIds() {
         return ids;
     }
     public void setIds(String ids) {
         this.ids = ids;
     }
+
+    public Integer getGuideType() {
+        return guideType;
+    }
+
+    public void setGuideType(Integer guideType) {
+        this.guideType = guideType;
+    }
+
     public Integer getStatus() {
         return status;
     }
@@ -75,10 +85,15 @@ public class CheckParam {
         }
         return idsList;
     }
+
     @Override
     public String toString() {
-        return "CheckParam [ids=" + ids + ", status=" + status + ", operateBiz=" + operateBiz + ", reason=" + reason
-                + "]";
+        return "CheckParam{" +
+                "ids='" + ids + '\'' +
+                ", status=" + status +
+                ", operateBiz=" + operateBiz +
+                ", reason='" + reason + '\'' +
+                ", guideType=" + guideType +
+                '}';
     }
-    
 }
