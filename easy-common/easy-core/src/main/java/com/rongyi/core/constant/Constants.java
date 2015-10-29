@@ -597,6 +597,8 @@ public interface Constants {
         String CONFIGURATIONS = "com.rongyi.easy.gcc.Configurations";
         String TRANS_CONFIGURATIONS = "com.rongyi.easy.gcc.TransConfigurations";
         String BUYER_TRANS_CONFIGURATIONS = "com.rongyi.easy.gcc.BuyerTransConfigurations";
+        /** 微商城买手参数配置 */
+        String BUYER_CONFIGURATIONS = "com.rongyi.easy.gcc.BuyerConfigurations";
     }
     interface AppType{
     	/**

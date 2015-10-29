@@ -82,13 +82,7 @@ public class HomePageContentVO implements Serializable{
         this.floatAd = floatAd;
     }
 
-    public List<QuickEntryNewVO> getQuickEntryNew() {
-        return quickEntries;
-    }
 
-    public void setQuickEntryNew(List<QuickEntryNewVO> quickEntries) {
-        this.quickEntries = quickEntries;
-    }
 
     public List<AppBuyerLiveVO> getBuyerLives() {
         return buyerLives;

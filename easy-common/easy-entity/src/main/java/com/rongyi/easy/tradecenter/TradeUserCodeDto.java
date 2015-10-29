@@ -23,6 +23,8 @@ public class TradeUserCodeDto implements Serializable {
 
     private String userName;
 
+    private String userPhone;
+
     private String source;
 
     private Date payTime;
@@ -143,5 +145,13 @@ public class TradeUserCodeDto implements Serializable {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
     }
 }
