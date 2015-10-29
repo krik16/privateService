@@ -134,6 +134,17 @@ public class FlopgoRecordEntity implements Serializable{
 	public void setUserphone(String userphone) {
 		this.userphone = userphone;
 	}
+	@Override
+	public String toString() {
+		return "FlopgoRecordEntity [id=" + id + ", userName=" + userName
+				+ ", flopActivityId=" + flopActivityId + ", flopName="
+				+ flopName + ", prizeId=" + prizeId + ", prizeCode="
+				+ prizeCode + ", prizeName=" + prizeName + ", prizeType="
+				+ prizeType + ", flopTime=" + flopTime + ", userScr=" + userScr
+				+ ", type=" + type + ", receiveExpirationTime="
+				+ receiveExpirationTime + ", receiveTrue=" + receiveTrue
+				+ ", userphone=" + userphone + "]";
+	}
 	
 	
 }
