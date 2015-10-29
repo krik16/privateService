@@ -126,7 +126,7 @@ public class CouponVO implements Serializable {
 
     private Integer buyedNum; // 此商品被多少人购买过
 
-    private String name;// holder_id对应的名称
+    private String name;// holder_id对应的名称,代金券显示名
 
 
     private String grouponType; // 团购类型，3为外部导入码
@@ -323,6 +323,12 @@ public class CouponVO implements Serializable {
         this.shopIds = shopIds;
     }
 
+    public void addShopId(ObjectId shopId) {
+        if (this.shopIds == null)
+            this.shopIds = new ArrayList<>();
+        this.shopIds.add(shopId);
+    }
+
     public List<ObjectId> getMallIds() {
         return mallIds;
     }
@@ -331,12 +337,25 @@ public class CouponVO implements Serializable {
         this.mallIds = mallIds;
     }
 
+    public void addMallId(ObjectId mallId) {
+        if (this.mallIds == null)
+            this.mallIds = new ArrayList<>();
+        this.mallIds.add(mallId);
+    }
+
     public List<ObjectId> getZoneIds() {
         return zoneIds;
     }
 
     public void setZoneIds(List<ObjectId> zoneIds) {
         this.zoneIds = zoneIds;
+    }
+
+    public void addZoneIds(List<ObjectId> zoneIds) {
+        if (this.zoneIds == null) {
+            this.zoneIds = new ArrayList<>();
+        }
+        this.zoneIds.addAll(zoneIds);
     }
 
     public List<Double> getLocation() {
@@ -594,6 +613,13 @@ public class CouponVO implements Serializable {
     public void setBrandCateIds(List<String> brandCateIds) {
         this.brandCateIds = brandCateIds;
     }
+
+    public void addBrandCateIs(String brandCateId) {
+        if (this.brandCateIds == null)
+            this.brandCateIds = new ArrayList<>();
+        this.brandCateIds.add(brandCateId);
+    }
+
 
     public String getShowChannel() {
         return showChannel;
