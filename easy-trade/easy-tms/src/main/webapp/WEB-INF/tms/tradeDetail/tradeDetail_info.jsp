@@ -155,9 +155,9 @@ body {
 						<div class="line-heights shopsName">优惠方式:</div>
 						<div class="shopsData">
 							<p class="p_text" style="color: red;font-weight: bold;font-size: 14px">
-							<c:if test="${ not empty trade.integral && trade.integral > 0}">
+							<c:if test="${ not empty trade.score && trade.score > 0}">
 									积分 
-									(${trade.integral})
+									(${trade.score})
 									<c:if
 									test="${trade.couponDiscountInt > 0}">
 									、

@@ -106,7 +106,6 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
             }
             //购买超出自动冻结条数，自动冻结
             if (accountBlacklist.getCount() >= Integer.valueOf(Constant.BLACKLIST_CONFIG.FREEZE_COUNT)) {
-//                mailWranList.add(accountBlacklist);
                 accountBlacklist.setUpdateAt(DateUtil.getCurrDateTime());
                 accountBlacklist.setStatus(ConstantEnum.BLACK_ROLL_STATUS_1.getCodeByte());
                 update(accountBlacklist);
@@ -122,6 +121,7 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
     public List<PayAccountUseTotal> getPayAccountUserTotalList(Map<String,Object> map){
         map.put("count", Constant.BLACKLIST_CONFIG.WARN_COUNT);
         map.put("notPayAccountList", getNoPayAccountList());
+        map.put("orderType", Constant.BLACKLIST_CONFIG.ORDER_TYPE);
         LOGGER.info("扫描是否有账号符合黑名单条件，购买次数大于" + Constant.BLACKLIST_CONFIG.WARN_COUNT + ",map=" + map);
         return rpbService.selectPayAccountUseTotal(map);
     }

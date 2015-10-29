@@ -251,6 +251,9 @@
                 #{item}
             </foreach>
         </if>
+        <if test="orderType != 2 and orderType != ''">
+        	and po.order_type = #{orderType,jdbcType=INTEGER}
+        </if>
         GROUP BY buyer_email
         <if test="count != null">
             HAVING count >= #{count,jdbcType=INTEGER}
