@@ -62,6 +62,7 @@ public interface ConstantUtil {
 		String PRIVATE_KEY = propertyConfigurer.getProperty("ALI.PRIVATE_KEY").toString();
 		String ALI_PUBLIC_KEY = propertyConfigurer.getProperty("ALI.ALI_PUBLIC_KEY").toString();
 		String KEY = propertyConfigurer.getProperty("ALI.KEY").toString();
+		String ACCOUNT_FULL_NAME = propertyConfigurer.getProperty("ACCOUNT_FULL_NAME").toString();
 
 		String SDK_SERVICE = "mobile.securitypay.pay";
 		String INPUT_CHARSET = "utf-8";
@@ -96,7 +97,8 @@ public interface ConstantUtil {
 		String RETURN_URL_ZHIFUBAO_PC_WEB = "http://" + NOTIFY_URL.innernetAddress + "/v5/PCWebPageAlipay/refund_call_back.htm";// 支付宝同步返回页面路径
 		String PAYMENT_TYPE = "1";// 支付类型
 		String ACCOUNT_NAME = "容易网";
-		String ACCOUNT_FULL_NAME = "上海摩购电子商务有限公司";
+//		String ACCOUNT_FULL_NAME = "上海容易网电子商务有限公司";
+//		String ACCOUNT_FULL_NAME = "上海摩购电子商务有限公司";
 
 	}
 

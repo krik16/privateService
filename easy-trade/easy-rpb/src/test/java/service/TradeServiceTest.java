@@ -1,6 +1,6 @@
 /**
- * @Copyright (C),上海容易网电子商务有限公司	
- * @Author: 柯军 
+ * @Copyright (C),上海容易网电子商务有限公司
+ * @Author: 柯军
  * @datetime:2015年5月14日下午5:42:45
  * @Description: TODO
  *
@@ -19,15 +19,13 @@ import org.testng.annotations.Test;
 
 import base.BaseTest;
 
-import com.rongyi.easy.coupon.entity.CouponOrder;
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.rpb.service.impl.PCWebPageAlipayServiceImpl;
 import com.rongyi.rpb.service.impl.PaymentServiceImpl;
 import com.rongyi.rpb.web.controller.v5.PCWebPageAlipayController;
-import com.rongyi.rss.coupon.RoaCouponOrderService;
 
-/**	
+/**
  * @Author:  柯军
  * @Description: 交易
  * @datetime:2015年5月14日下午5:42:45
@@ -40,22 +38,19 @@ public class TradeServiceTest extends BaseTest{
 //    
 //    @Autowired
 //    ROAMallLifeUserService roaMallLifeUserService;
-    
-    
+
+
     @Autowired
     PCWebPageAlipayServiceImpl pcWebPageAlipayService;
-    
+
     @Autowired
     PCWebPageAlipayController pCWebPageAlipayController;
-    
+
     @Autowired
     PaymentServiceImpl paymentService;
-    
-    @Autowired
-    RoaCouponOrderService roaCouponOrderService;
-    
-    
-//    @Test
+
+
+    //    @Test
 //    public void selectTradePageListTest(){
 //        Map<String,Object> map = getParamMap();
 //        List<TradeVO> list = tradeService.selectTradePageList(map,1,10);
@@ -85,31 +80,26 @@ public class TradeServiceTest extends BaseTest{
     public void sendMessageTest(){
 //        messageSender.sendEvent(new RpbEvent());
     }
-    
-//    @Test
+
+    //    @Test
     public void pcWebPageAlipayServiceTest(){
         MessageEvent rpbEvent = new MessageEvent();
         rpbEvent.setBody("{\"paymentId\":\"655,656\",\"type\":\"2\"}");
         System.err.println(pcWebPageAlipayService.getHtmlMap(rpbEvent));
-        
+
     }
-    
-    @Test
-    public void paySuccessToMessageTest(){
-        List<PaymentEntity> list = new ArrayList<PaymentEntity>();
-        list.add(paymentService.selectByPrimaryKey("4747"));
-        list.add(paymentService.selectByPrimaryKey("4746"));
-        list.add(paymentService.selectByPrimaryKey("4745"));
-        list.add(paymentService.selectByPrimaryKey("4744"));
-        pCWebPageAlipayController.paySuccessToMessage(list);
-        
-    }
-    
+
 //    @Test
-    public void testSelectCoupon(){
-    	CouponOrder couponOrder = roaCouponOrderService.findOneByOrderNo("2015071300350917");
-    	System.err.println(couponOrder.getBuyerId());
-    }
+//    public void paySuccessToMessageTest(){
+//        List<PaymentEntity> list = new ArrayList<PaymentEntity>();
+//        list.add(paymentService.selectByPrimaryKey("4747"));
+//        list.add(paymentService.selectByPrimaryKey("4746"));
+//        list.add(paymentService.selectByPrimaryKey("4745"));
+//        list.add(paymentService.selectByPrimaryKey("4744"));
+//        pCWebPageAlipayController.paySuccessToMessage(list);
+//
+//    }
+
     private Map<String,Object> getParamMap(){
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("tradeNo", "2015050400001000240050459338");

@@ -42,7 +42,7 @@
 	
 	<select id="selectAccountSumByUserId" resultMap="VirtualAccountSum" parameterType="java.util.Map">
 	SELECT virtual_account.user_id AS user_id, 
-			SUM(CASE WHEN (item_type = 1 OR item_type = 2 OR item_type = 3) THEN amount * sign ELSE 0 END) AS income_total,
+			SUM(CASE WHEN (item_type = 1 OR item_type = 2 OR item_type = 3  OR item_type = 6) THEN amount * sign ELSE 0 END) AS income_total,
 			SUM(CASE WHEN item_type = 1 THEN amount * sign ELSE 0 END) AS commission_total,
 			SUM(CASE WHEN item_type = 2 THEN amount * sign ELSE 0 END) AS bonus_total,
 			SUM(CASE WHEN item_type = 3 THEN amount * sign ELSE 0 END) AS trade_total,

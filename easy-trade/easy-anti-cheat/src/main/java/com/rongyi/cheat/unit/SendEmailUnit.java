@@ -2,7 +2,9 @@ package com.rongyi.cheat.unit;
 
 import com.rongyi.cheat.constants.Constant;
 import com.rongyi.cheat.mail.MailService;
+import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.easy.cheat.AccountBlacklist;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
+
 import java.io.UnsupportedEncodingException;
 import java.util.*;
 
@@ -29,9 +32,9 @@ public class SendEmailUnit {
     public void sendWranEmail(List<AccountBlacklist> mailWranList, Date startTime, Date endTime) {
         StringBuffer sb = new StringBuffer();
         sb.append("以下账号存在刷单风险,在");
-        sb.append(startTime);
+        sb.append(DateUtil.dateToString(startTime));
         sb.append("至");
-        sb.append(endTime);
+        sb.append(DateUtil.dateToString(endTime));
         sb.append("此时间内:\n");
         for (AccountBlacklist accountBlacklist : mailWranList) {
             sb.append("账号：");
