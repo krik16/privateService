@@ -82,9 +82,6 @@ public class UserRedenvelopeParam implements Serializable {
 
 
     public int getOffset() {
-        if (this.currentPage < 1) {
-            this.currentPage = 1;
-        }
-        return (this.currentPage - 1) * this.pageSize;
+        return this.currentPage * this.pageSize;
     }
 }
