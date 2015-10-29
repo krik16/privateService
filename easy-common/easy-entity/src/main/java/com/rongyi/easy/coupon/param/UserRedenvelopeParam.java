@@ -79,4 +79,12 @@ public class UserRedenvelopeParam implements Serializable {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+
+    public int getOffset() {
+        if (this.currentPage < 1) {
+            this.currentPage = 1;
+        }
+        return (this.currentPage - 1) * this.pageSize;
+    }
 }
