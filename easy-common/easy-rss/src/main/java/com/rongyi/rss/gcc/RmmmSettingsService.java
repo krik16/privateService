@@ -8,7 +8,7 @@ public interface RmmmSettingsService {
 	
 	public Configurations getLatestConfigurations();
 	public TransConfigurations getLatestTransConfigurations(int type);
-	public TransConfigurations getLatestTransConfigurations();
+	//public TransConfigurations getLatestTransConfigurations();
 	/**
 	 * 获取买手微商城参数配置
 	 * @return
