@@ -149,6 +149,9 @@ public class CouponParam implements Serializable {
      */
     private String productId;
 
+//    是否是通用券
+    private Boolean isGeneral;
+
     /**
      * 更新人
      */
@@ -378,6 +381,14 @@ public class CouponParam implements Serializable {
         return offset;
     }
 
+    public Boolean getIsGeneral() {
+        return isGeneral;
+    }
+
+    public void setIsGeneral(Boolean isGeneral) {
+        this.isGeneral = isGeneral;
+    }
+
     public void setOffset(Integer offset) {
         this.offset = offset;
     }
@@ -411,6 +422,7 @@ public class CouponParam implements Serializable {
                 .append("name", name)
                 .append("isDeleted", isDeleted)
                 .append("productId", productId)
+                 .append("isGeneral", isGeneral)
                 .toString();
     }
 }
