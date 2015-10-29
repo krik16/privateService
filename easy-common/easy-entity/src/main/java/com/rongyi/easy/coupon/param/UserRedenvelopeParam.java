@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class UserRedenvelopeParam implements Serializable {
     private Integer pageSize = 10;
     private Integer currentPage;
+    private Integer totalPage;
     private String userId;
     private String userName;
     private String productId;
@@ -73,12 +74,15 @@ public class UserRedenvelopeParam implements Serializable {
     }
 
     public int getOffset() {
-        if (this.currentPage < 1) {
+        if (this.currentPage < 1 || this.currentPage > this.totalPage) {
             this.currentPage = 1;
         }
         return (this.currentPage - 1) * this.pageSize;
     }
 
+    public void setTotalCount(int totalCount) {
+        this.totalPage = totalCount % pageSize == 0 ? totalCount / pageSize : totalCount / pageSize + 1;
+    }
 
     public String getUserName() {
         return userName;
