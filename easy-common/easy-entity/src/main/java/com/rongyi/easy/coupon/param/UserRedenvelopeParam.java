@@ -1,7 +1,6 @@
 package com.rongyi.easy.coupon.param;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 用户红包参数
@@ -14,7 +13,7 @@ public class UserRedenvelopeParam implements Serializable {
     private String productId;
     private Integer status;
     private String orderBy;
-    private Date validEndAt;//验码截止时间
+    private Boolean isExpired;//是否过期
 
     public String getUserId() {
         return userId;
@@ -65,12 +64,12 @@ public class UserRedenvelopeParam implements Serializable {
         this.orderBy = orderBy;
     }
 
-    public Date getValidEndAt() {
-        return validEndAt;
+    public Boolean getIsExpired() {
+        return isExpired;
     }
 
-    public void setValidEndAt(Date validEndAt) {
-        this.validEndAt = validEndAt;
+    public void setIsExpired(Boolean isExpired) {
+        this.isExpired = isExpired;
     }
 
     public int getOffset() {
