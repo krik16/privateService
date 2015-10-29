@@ -596,6 +596,7 @@ public interface Constants {
     interface ConfigType {
         String CONFIGURATIONS = "com.rongyi.easy.gcc.Configurations";
         String TRANS_CONFIGURATIONS = "com.rongyi.easy.gcc.TransConfigurations";
+        String BUYER_TRANS_CONFIGURATIONS = "com.rongyi.easy.gcc.BuyerTransConfigurations";
     }
     interface AppType{
     	/**

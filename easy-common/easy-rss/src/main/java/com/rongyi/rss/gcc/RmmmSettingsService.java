@@ -9,5 +9,5 @@ public interface RmmmSettingsService {
 	public Configurations getLatestConfigurations();
 
 
-	public TransConfigurations getLatestTransConfigurations();
+	public TransConfigurations getLatestTransConfigurations(int type);
 }
