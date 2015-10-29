@@ -46,7 +46,14 @@ public class CommodityVO  implements  Serializable {
 	private String commodityCommission;
 	private String brandMid;//品牌mongoId
 	private String mallMid;//商场mongoId
+	private String shopName;//店铺名称
 	
+	public String getShopName() {
+		return shopName;
+	}
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
 	public String getBrandMid() {
 		return brandMid;
 	}
