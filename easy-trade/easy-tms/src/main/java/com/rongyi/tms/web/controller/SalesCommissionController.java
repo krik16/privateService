@@ -92,7 +92,8 @@ public class SalesCommissionController extends BaseController {
     public ResponseResult checkCommission(CheckParam params, HttpSession session, HttpServletRequest request) {
     	ResponseResult result = new ResponseResult();
         try {
-            if (StringUtils.isBlank(params.getIds()) || params.getStatus() == null || (
+            LOGGER.info("==== 审核参数："+params);
+            if (params.getGuideType()==null || StringUtils.isBlank(params.getIds()) || params.getStatus() == null || (
                 params.getStatus() == -1 && StringUtils.isBlank(params.getReason()))) {
                 result.setCode(CodeEnum.ERROR_PARAM.getActionCode());
                 result.setMessage(CodeEnum.ERROR_PARAM.getMessage());
@@ -105,7 +106,7 @@ public class SalesCommissionController extends BaseController {
                     if (updateResult > 0) {
                         if (params.getStatus() < 0) {
                             // 审核不通过时 向用户推送消息 add by ZhengYl 2015-06-03
-                            Map<String, String> map = new HashMap<String, String>();
+                            Map<String, String> map = new HashMap<>();
                             SalesCommissionVO salesCommissionVO =
                                 commissionService.selectOneById(Integer.parseInt(params.getIds()));
                             map.put("orderNumber", salesCommissionVO.getOrderNo());
@@ -141,7 +142,7 @@ public class SalesCommissionController extends BaseController {
 
     @RequestMapping(value = "/detail")
     public String checkDrawApply(int id, String module, HttpServletRequest request, ModelMap modelMap) {
-        String returnView = "";
+        String returnView;
         try {
             if (id == 0) {
                 request.setAttribute("msg", "参数传递有误！");
@@ -171,7 +172,7 @@ public class SalesCommissionController extends BaseController {
 
     @RequestMapping(value = "getReason")
     public void getUnPassReason(Integer id, Integer operate, HttpServletResponse response) {
-        Map<String, Object> resultMap = new HashMap<String, Object>();
+        Map<String, Object> resultMap = new HashMap<>();
         if (id == 0) {
             resultMap.put("msg", "");
         } else {

@@ -108,13 +108,14 @@ function ajaxloadApplys(page,status,commissionNo,guideType,name,mall,shop,amount
 
 
 
-function checkApplys(ids, status, reason) {
+function checkApplys(ids,guideType, status, reason) {
 	
 	$.ajax({ 
 		url: "../sc/check", 
 		type:"POST",
 		data:{
 			ids : ids,
+			guideType : guideType,
 			status : status,
 			operateBiz:1,
 			reason : reason
@@ -184,7 +185,7 @@ function switchCheck(check) {
 	ajaxloadApplys();
 }
 
-function checkUnpass(id) {
+function checkUnpass(id,guideType) {
 	confirmMSG(
 			"理由：<textarea rows='5' cols='42' id='reason' placeholder='请输入100字符以内未通过理由'></textarea>",
 			function() {
@@ -197,7 +198,7 @@ function checkUnpass(id) {
 						_util.cmsTip("字数超过限制！");
 						return -1;
 					} else {
-						checkApplys(id, -1, reason);
+						checkApplys(id, guideType, -1, reason);
 					}
 				}
 			});
