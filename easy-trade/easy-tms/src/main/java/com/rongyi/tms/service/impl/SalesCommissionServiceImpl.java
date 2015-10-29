@@ -221,7 +221,6 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 	public int updateBatch(CheckParam param, String user) {
 		Map<String, Object> paramsMap = param.paramToMap();
 		TransConfigurations transConf;
-		paramsMap.put("guideType", param.getGuideType());
 		if (param.getGuideType()==2) {
 			//买手
 			transConf = roaRedisService.get(Constants.ConfigType.BUYER_TRANS_CONFIGURATIONS,TransConfigurations.class);
@@ -229,10 +228,11 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 			//导购
 			transConf = roaRedisService.get(Constants.ConfigType.TRANS_CONFIGURATIONS,TransConfigurations.class);
 		}
-		if (transConf!=null) {
-			LOGGER.info("读取的参数为:" + transConf.getCommissionCountMax());
-			paramsMap.put("max_commission_times", transConf.getCommissionCountMax() == 0 ? 5 : transConf.getCommissionCountMax());
+		if (transConf==null) {
+			transConf = new TransConfigurations();
 		}
+		LOGGER.info("读取的参数为:" + transConf.getCommissionCountMax());
+		paramsMap.put("max_commission_times", transConf.getCommissionCountMax() == 0 ? 5 : transConf.getCommissionCountMax());
 		LOGGER.info("MAP:" + paramsMap);
 		int result = this.getBaseDao().updateBySql(NAMESPACE_SALESCOMMISSION + ".batchUpdate", paramsMap);
 		if (result > 0) {

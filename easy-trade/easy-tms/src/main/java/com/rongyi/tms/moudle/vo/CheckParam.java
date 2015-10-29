@@ -67,6 +67,7 @@ public class CheckParam {
         Map<String,Object> params=new HashMap<String,Object>();
         params.put("commission_ids",ids);
         params.put("check_status", status);
+        params.put("guideType", this.guideType);
         return params;
         
     }
