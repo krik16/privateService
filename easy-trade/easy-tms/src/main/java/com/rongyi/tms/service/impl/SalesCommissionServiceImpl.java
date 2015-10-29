@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import com.rongyi.core.constant.Constants;
+import com.rongyi.rss.malllife.roa.ROARedisService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -65,6 +67,9 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 
 	@Autowired
 	private RmmmSettingsService rmmmSettingsService;
+
+	@Autowired
+	private ROARedisService roaRedisService;
 
 	@Autowired
 	Sender sender;
@@ -215,14 +220,17 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 	@Override
 	public int updateBatch(CheckParam param, String user) {
 		Map<String, Object> paramsMap = param.paramToMap();
-		TransConfigurations transConf = rmmmSettingsService.getLatestTransConfigurations();
-		LOGGER.info("读取的参数为�?" + transConf.getCommissionCountMax());
+		TransConfigurations transConf;
 		paramsMap.put("guideType", param.getGuideType());
 		if (param.getGuideType()==2) {
 			//买手
-			paramsMap.put("max_commission_times", transConf.getMaiShouCommissionCountMax() == 0 ? 5 : transConf.getMaiShouCommissionCountMax());
+			transConf = roaRedisService.get(Constants.ConfigType.BUYER_TRANS_CONFIGURATIONS,TransConfigurations.class);
 		}else {
 			//导购
+			transConf = roaRedisService.get(Constants.ConfigType.TRANS_CONFIGURATIONS,TransConfigurations.class);
+		}
+		if (transConf!=null) {
+			LOGGER.info("读取的参数为:" + transConf.getCommissionCountMax());
 			paramsMap.put("max_commission_times", transConf.getCommissionCountMax() == 0 ? 5 : transConf.getCommissionCountMax());
 		}
 		LOGGER.info("MAP:" + paramsMap);
