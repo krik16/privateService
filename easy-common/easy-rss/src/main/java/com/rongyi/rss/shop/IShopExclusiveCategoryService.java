@@ -11,4 +11,6 @@ public interface IShopExclusiveCategoryService {
 	public List<ShopExclusiveCategoryEntity> getSubByTypeOrParentId(Integer type,String parentId,String mallId);
 	
 	public ShopExclusiveCategoryEntity getExclusiveCateogryById(String id);
+	
+	public List<String> insertShopExclusiveCategoryList(List<ShopExclusiveCategoryEntity> entities);
 }

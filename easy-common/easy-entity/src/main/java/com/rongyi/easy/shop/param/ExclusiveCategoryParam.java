@@ -1,6 +1,7 @@
 package com.rongyi.easy.shop.param;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 商家后台店铺管理实体类
@@ -11,7 +12,7 @@ public class ExclusiveCategoryParam implements Serializable {
 
 	private static final long serialVersionUID = 5321646214285676988L;
 	
-	private String name;//专属分类名字
+	private List<String> name;//专属分类名字
 	
 	private Integer  type;// 0一级分类1二级分类
 	
@@ -21,11 +22,13 @@ public class ExclusiveCategoryParam implements Serializable {
 	
 	private String mallId;//商场id
 	
-	public String getName() {
+	
+
+	public List<String> getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(List<String> name) {
 		this.name = name;
 	}
 
