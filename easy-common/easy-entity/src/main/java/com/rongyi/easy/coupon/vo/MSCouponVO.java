@@ -57,7 +57,7 @@ public class MSCouponVO implements Serializable {
 	private Double currentPrice;
 
 	/**
-	 * 状态(审核中、已上线、已过期、已下线、已使用)
+	 * 状态(审核中[0]、已上线[1]、已使用[2]、已过期[3]、已下线[4])
 	 */
 	private String status;
 
