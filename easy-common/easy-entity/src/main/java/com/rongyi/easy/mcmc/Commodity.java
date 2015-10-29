@@ -21,7 +21,7 @@ public class Commodity implements  Serializable,Cloneable{
 
 	private int type; // 渠道  1商家，2买手
 	private String liveId; // 直播Id
-	private boolean isSpot; // 是否现货	
+	private boolean isSpot; // 是否现货	0 否  1是
 	private Date liveStartTime; // 直播开始时间
 	private Date liveEndTime; // 直播结束时间
 	private String create_by; // 创建人 
