@@ -30,10 +30,7 @@ public class CouponMall implements Serializable {
      */
     private String mallAddress;
 
-    /**
-     * 商场logo
-     */
-    private String mallLogUrl;
+
 
     public Integer getId() {
         return id;
@@ -75,27 +72,18 @@ public class CouponMall implements Serializable {
         this.mallAddress = mallAddress;
     }
 
-    public String getMallLogUrl() {
-        return mallLogUrl;
-    }
-
-    public void setMallLogUrl(String mallLogUrl) {
-        this.mallLogUrl = mallLogUrl;
-    }
-
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("CouponMall [id=").append(id).append(", couponId=").append(couponId).append(", mallId=").append(mallId).append(", mallName=").append(mallName).append(", mallAddress=").append(mallAddress).append(", mallLogUrl=").append(mallLogUrl).append("]");
+        builder.append("CouponMall [id=").append(id).append(", couponId=").append(couponId).append(", mallId=").append(mallId).append(", mallName=").append(mallName).append(", mallAddress=").append(mallAddress).append("]");
         return builder.toString();
     }
 
-    public CouponMall(String couponId, String mallId, String mallName, String mallAddress, String mallLogUrl) {
+    public CouponMall(String couponId, String mallId, String mallName, String mallAddress) {
         this.couponId = couponId;
         this.mallId = mallId;
         this.mallName = mallName;
         this.mallAddress = mallAddress;
-        this.mallLogUrl = mallLogUrl;
     }
 
     public CouponMall(String couponId, String mallId) {

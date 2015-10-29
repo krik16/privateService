@@ -638,7 +638,7 @@ public class TCCouponVO implements Serializable {
                     CouponMall cmall = new CouponMall();
                     cmall.setId(mall.getMallId());
                     cmall.setMallAddress(mall.getMallAddress());
-                    cmall.setMallLogoUrl(mall.getMallLogUrl());
+                 /*   cmall.setMallLogoUrl(mall.getMallLogUrl());*/
                     cmall.setMallName(mall.getMallName());
                     malls.add(cmall);
                 }
@@ -674,9 +674,9 @@ public class TCCouponVO implements Serializable {
                 if (shop != null) {
                     CouponShop cshop = new CouponShop();
                     cshop.setId(shop.getShopId());
-                    cshop.setBrandName(shop.getShopBrand());
+            /*        cshop.setBrandName(shop.getShopBrand());
                     cshop.setMallName(shop.getShopMallName());
-                    cshop.setShopLogoUrl(shop.getShopLogoUrl());
+                    cshop.setShopLogoUrl(shop.getShopLogoUrl());*/
                     cshop.setShopName(shop.getShopName());
                     shops.add(cshop);
                 }
