@@ -144,6 +144,7 @@ public class FlopgoRecordEntity implements Serializable{
 				+ ", type=" + type + ", receiveExpirationTime="
 				+ receiveExpirationTime + ", receiveTrue=" + receiveTrue
 				+ ", userphone=" + userphone + "]";
+		
 	}
 	
 	
