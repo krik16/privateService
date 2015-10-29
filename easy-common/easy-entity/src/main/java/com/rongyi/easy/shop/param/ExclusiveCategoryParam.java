@@ -5,24 +5,23 @@ import java.util.List;
 
 /**
  * 商家后台店铺管理实体类
+ * 
  * @author wzh
  *
  */
 public class ExclusiveCategoryParam implements Serializable {
 
 	private static final long serialVersionUID = 5321646214285676988L;
-	
-	private List<String> name;//专属分类名字
-	
-	private Integer  type;// 0一级分类1二级分类
-	
-	private String parentid;//父类id（插入二级分类才有）
-	
+
+	private List<String> name;// 专属分类名字
+
+	private Integer type;// 0一级分类1二级分类
+
+	private String parentid;// 父类id（插入二级分类才有）
+
 	private String id;
-	
-	private String mallId;//商场id
-	
-	
+
+	private String mallId;// 商场id
 
 	public List<String> getName() {
 		return name;
@@ -64,7 +63,4 @@ public class ExclusiveCategoryParam implements Serializable {
 		this.mallId = mallId;
 	}
 
-	
-	
-	
 }
