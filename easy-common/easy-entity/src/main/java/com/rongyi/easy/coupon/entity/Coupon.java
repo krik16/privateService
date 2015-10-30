@@ -296,6 +296,11 @@ public class Coupon implements Serializable {
      */
     private Boolean isGeneral;
 
+    /**
+     * 卡券关联集团、品牌、店铺时如果没有选择下面的店铺则默认是关联该类型下所有的店铺，isRelatedAll=true
+     */
+    private Boolean isRelatedAll;
+
     public String getId() {
         return id;
     }
@@ -823,6 +828,14 @@ public class Coupon implements Serializable {
         this.outChannelName = outChannelName;
     }
 
+    public Boolean getIsRelatedAll() {
+        return isRelatedAll;
+    }
+
+    public void setIsRelatedAll(Boolean isRelatedAll) {
+        this.isRelatedAll = isRelatedAll;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -878,6 +891,7 @@ public class Coupon implements Serializable {
                 .append("purchaseType", purchaseType)
                 .append("visitedCount", visitedCount)
                 .append("isGeneral", isGeneral)
+                .append("isRelatedAll", isRelatedAll)
                 .toString();
     }
 }

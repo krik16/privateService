@@ -43,6 +43,8 @@ public interface ROAShopService {
      */
      List<ShopVO> getShopDetailByFilialeId(String filialeId) throws Exception ;
 
+    List<ShopVO> getShopVOByMallIds(List<ObjectId> mallIds);
+
     /**
      * 查询集团、商场、品牌、店铺的地址信息（省市）
      * @param params
