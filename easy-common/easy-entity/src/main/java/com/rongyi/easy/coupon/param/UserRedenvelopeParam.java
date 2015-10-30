@@ -14,6 +14,7 @@ public class UserRedenvelopeParam implements Serializable {
     private Integer status;
     private String orderBy;
     private Boolean isExpired;//是否过期
+    private Integer relatedType;// 全场[0] 商品[1]
 
     public String getUserId() {
         return userId;
@@ -80,6 +81,13 @@ public class UserRedenvelopeParam implements Serializable {
         this.userName = userName;
     }
 
+    public Integer getRelatedType() {
+        return relatedType;
+    }
+
+    public void setRelatedType(Integer relatedType) {
+        this.relatedType = relatedType;
+    }
 
     public int getOffset() {
         if (currentPage == null || currentPage < 0)

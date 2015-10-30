@@ -31,6 +31,9 @@ public interface MLUserRedenvelopeService {
     public PagingVO<UserRedenvelope> findUserCouponByUserId(String userId,
                                                             Integer currentPage, Integer pageSize);
 
+    PagingVO<UserRedenvelope> findUserCouponByUserIdFull(String userId,
+                                                         Integer currentPage, Integer pageSize);
+
     /**
      * 接口描述：用户红包 (未使用/已使用) 列表查询
      * 使用模块：摩生活-我的红包
