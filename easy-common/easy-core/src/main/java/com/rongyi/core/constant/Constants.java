@@ -23,6 +23,9 @@ public interface Constants {
      * 登录用户的session key
      */
     String USER_SESSION_KEY = "user_session_key"; //
+    
+    //商家账号初始密码
+  	String USER_INIT_PWD = "RYxyz123";
 
 
     String RESULT_SUCCES = "success"; //成功标志位

@@ -22,6 +22,9 @@ public class RmmmUserInfoEntity implements Serializable{
 
     /** 电话号码 */
     private String userPhone;
+    
+    /**  用户账号 */
+    private String userAccount;
 
     /** 密码 */
     private String userPwd;
@@ -283,7 +286,15 @@ public class RmmmUserInfoEntity implements Serializable{
 	public void setStopReason(Integer stopReason) {
 		this.stopReason = stopReason;
 	}
-    public String getSharCode() {
+    public String getUserAccount() {
+		return userAccount;
+	}
+
+	public void setUserAccount(String userAccount) {
+		this.userAccount = userAccount;
+	}
+
+	public String getSharCode() {
         return sharCode;
     }
 
