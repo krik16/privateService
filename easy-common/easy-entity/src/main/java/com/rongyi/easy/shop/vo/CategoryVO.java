@@ -1,6 +1,7 @@
 package com.rongyi.easy.shop.vo;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class CategoryVO implements Serializable{
 	
@@ -9,6 +10,9 @@ public class CategoryVO implements Serializable{
 	private String name;
 	
 	private String parName;//父类名字
+	
+	private List<CategoryVO> subCategoryVOs;
+	
 	public String getId() {
 		return id;
 	}
@@ -31,6 +35,14 @@ public class CategoryVO implements Serializable{
 
 	public void setParName(String parName) {
 		this.parName = parName;
+	}
+
+	public List<CategoryVO> getSubCategoryVOs() {
+		return subCategoryVOs;
+	}
+
+	public void setSubCategoryVOs(List<CategoryVO> subCategoryVOs) {
+		this.subCategoryVOs = subCategoryVOs;
 	}
 	
 	
