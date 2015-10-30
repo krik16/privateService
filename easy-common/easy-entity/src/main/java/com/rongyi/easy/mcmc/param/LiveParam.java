@@ -2,12 +2,13 @@ package com.rongyi.easy.mcmc.param;
 
 import java.io.Serializable;
 
+
 /**
  * 直播
  * @author zzq
  *
  */
-public class LiveParam implements Serializable{
+public class LiveParam  implements Serializable{
 	
 	/**
 	 * 
@@ -25,6 +26,13 @@ public class LiveParam implements Serializable{
 	
 	int page;
 	int pageSize;
+	public int getCurrentPage() {
+		return currentPage;
+	}
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+	int currentPage;
 	/**
 	 * 地址类型 0商场，1街边店
 	 */

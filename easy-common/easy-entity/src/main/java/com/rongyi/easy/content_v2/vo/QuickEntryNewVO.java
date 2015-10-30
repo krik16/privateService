@@ -23,7 +23,7 @@ public class QuickEntryNewVO implements Serializable {
      */
     private String quickType;
     private String quickTypeVal;//类型值
-    private String tilte;//标题
+    private String title;//标题
 
     public String getQuickPics() {
         return quickPics;
@@ -49,12 +49,12 @@ public class QuickEntryNewVO implements Serializable {
         this.quickTypeVal = quickTypeVal;
     }
 
-    public String getTilte() {
-        return tilte;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTilte(String tilte) {
-        this.tilte = tilte;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override
@@ -63,7 +63,7 @@ public class QuickEntryNewVO implements Serializable {
                 .append("quickPics", quickPics)
                 .append("quickType", quickType)
                 .append("quickTypeVal", quickTypeVal)
-                .append("tilte", tilte)
+                .append("title", title)
                 .toString();
     }
 }
