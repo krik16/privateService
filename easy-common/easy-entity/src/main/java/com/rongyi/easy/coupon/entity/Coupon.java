@@ -82,7 +82,8 @@ public class Coupon implements Serializable {
     private String displayRegion;
 
     /**
-     * 大运营平台，平台代金券 售后:随时退,过期退,免预约 ；未选中[0]，选中[1] 例如 "1,1,1"表示都选中,当随时退和过期退都未选中，则表示不可退
+     * 0为不支持。第一位：随时退、第二位：过期退 第三位：免预约、第四位：不可退
+     * 大运营平台，平台代金券 售后:随时退,过期退,免预约,不可退；未选中[0]，选中[1] 例如 "1,1,1,1"表示都选中,当随时退和过期退都未选中，则表示不可退
      */
     private String afterSaleService;
 
