@@ -36,6 +36,7 @@ public class LiveSearchParam extends BaseParam implements Serializable{
 	private String liveId;
 	private String locId; //直播对应的商场or店铺的Id
  	private String bullName; // 买手昵称
+
 	private String bullId; // 买手id
 	private Date start_time; // 开始时间
 	private Date end_time; // 结束时间
@@ -82,7 +83,8 @@ public class LiveSearchParam extends BaseParam implements Serializable{
 	}
 	public void setLocId(String locId) {
 		this.locId = locId;
-	}
+	}	
+
  
 	public String getLiveId() {
 		return liveId;
