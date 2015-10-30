@@ -11,7 +11,6 @@
 		<result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
 		<result column="pic_upload_at" property="picUploadAt" jdbcType="TIMESTAMP" />
 		<result column="buyer_account" property="buyerAccount" jdbcType="VARCHAR" />
-		<result column="guide_type" property="guideType" jdbcType="INTEGER" />
 	</resultMap>
 	<resultMap id="BonusMap" type="com.rongyi.tms.moudle.vo.BonusVO">
 		<id column="id" property="id" jdbcType="INTEGER" />
@@ -79,7 +78,7 @@
 	<sql id="Base_Column_List">
 		id, guide_id, order_no, commission_amount, `status`,
 		create_at,
-		pic_upload_at, buyer_account, guide_type
+		pic_upload_at, buyer_account
 	</sql>
 	<sql id="Blob_Column_List">
 		pic_urls
@@ -302,7 +301,6 @@
 		pic_upload_at,
 		pic_urls,
 		buyer_account,
-		guide_type,
 		version
 		)
 		VALUES (
@@ -314,7 +312,6 @@
 		#{picUploadAt,jdbcType=TIMESTAMP},
 		#{picUrls,jdbcType=LONGVARBINARY},
 		#{buyerAccount,jdbcType=VARCHAR},
-		#{guideType,jdbcType=INTEGER},
 		1
 		)
 	</insert>
@@ -477,9 +474,6 @@
 			</if>
 			<if test="buyerAccount != null">
 				buyer_Account = #{buyerAccount,jdbcType=VARCHAR},
-			</if>
-			<if test="guideType != null">
-				guide_type = #{guideType,jdbcType=INTEGER},
 			</if>
 		</set>
 		where order_no = #{orderNo,jdbcType=VARCHAR}
