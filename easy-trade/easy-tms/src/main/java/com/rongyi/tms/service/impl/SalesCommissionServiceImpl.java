@@ -271,15 +271,17 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 		return this.getBaseDao().selectOneBySql(NAMESPACE_SALESCOMMISSION + ".selectCommissionInfoByUserId", map);
 	}
 
-	/**
-	 * Description
-	 * 
-	 * @see SalesCommissionService#statisticsCommissionAmountTrigger()
-	 */
 
+	/**
+	 *
+	 * @param guideType: 渠道：买手-2\商家-1
+	 * @see SalesCommissionService#statisticsCommissionAmountTrigger(Integer guideType)
+	 */
 	@Override
-	public void statisticsCommissionAmountTrigger() {
-		List<CommissionAmountTotalVO> vos = this.getBaseDao().selectListBySql(NAMESPACE_SALESCOMMISSION + ".commissionAmountTotal");
+	public void statisticsCommissionAmountTrigger(Integer guideType) {
+		Map<String,Object> paramsMap = new HashMap<>();
+		paramsMap.put("guideType", guideType);
+		List<CommissionAmountTotalVO> vos = this.getBaseDao().selectListBySql(NAMESPACE_SALESCOMMISSION + ".commissionAmountTotal", paramsMap);
 		LOGGER.info("查询到需要发送到  VA 的记录数为：" + vos.size());
 		if (!vos.isEmpty()) {
 			// 每次MQ 消息�?多发�?50条记录，超过50的话，分次发�?
