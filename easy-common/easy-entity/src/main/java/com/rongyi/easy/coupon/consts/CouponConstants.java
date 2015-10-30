@@ -113,4 +113,12 @@ public interface CouponConstants {
         String REDENVELOPE = "03";
     }
 
+    /**
+     * 卡券发布渠道 大运营[0] 商家[1]
+     */
+    interface CouponPublishChannel {
+        Integer OPERATION = 0;
+        Integer MERCHANT = 1;
+    }
+
 }
