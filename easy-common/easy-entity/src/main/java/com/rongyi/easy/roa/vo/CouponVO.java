@@ -358,6 +358,14 @@ public class CouponVO implements Serializable {
         this.zoneIds.addAll(zoneIds);
     }
 
+    public void addZoneId(ObjectId zoneId) {
+        if (this.zoneIds == null) {
+            this.zoneIds = new ArrayList<>();
+        }
+        this.zoneIds.add(zoneId);
+    }
+
+
     public List<Double> getLocation() {
         return location;
     }
