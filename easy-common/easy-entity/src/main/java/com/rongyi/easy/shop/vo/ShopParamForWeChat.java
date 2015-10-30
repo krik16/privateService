@@ -10,6 +10,7 @@ public class ShopParamForWeChat {
 	private String number;//铺位号
 	private String floorId;//楼层id
 	private String mallId;//商场id
+	private String building;//楼栋
 	public String getName() {
 		return name;
 	}
@@ -33,6 +34,12 @@ public class ShopParamForWeChat {
 	}
 	public void setMallId(String mallId) {
 		this.mallId = mallId;
+	}
+	public String getBuilding() {
+		return building;
+	}
+	public void setBuilding(String building) {
+		this.building = building;
 	}
 	
 }
