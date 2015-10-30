@@ -20,6 +20,7 @@ public class UserManagerParam extends BaseParam implements Serializable{
     private static final long serialVersionUID = 1L;
 
     private Integer id;//账户id
+    private String userAccount ;//用户账号
     private String userLogo;//用户头像
     private String  phone; //验证号码是否可注册
     private String  checkCode;//验证码",
@@ -292,6 +293,12 @@ public Integer getIdentity() {
 		return merUserId;
 	}
 
+	public String getUserAccount() {
+		return userAccount;
+	}
+	public void setUserAccount(String userAccount) {
+		this.userAccount = userAccount;
+	}
 	public void setMerUserId(Integer merUserId) {
 		this.merUserId = merUserId;
 	}}
