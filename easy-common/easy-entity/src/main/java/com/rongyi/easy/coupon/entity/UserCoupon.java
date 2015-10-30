@@ -326,6 +326,8 @@ public class UserCoupon implements Serializable {
             val = Integer.valueOf(0);
         } else if (Integer.valueOf(2).equals(status)) {
             val = Integer.valueOf(1);
+        } else if (Integer.valueOf(3).equals(status)) {
+            val = Integer.valueOf(0);
         }
         return val;
     }
