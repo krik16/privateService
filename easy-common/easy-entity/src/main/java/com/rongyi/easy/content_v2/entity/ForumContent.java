@@ -107,13 +107,13 @@ public class ForumContent implements Serializable {
     private String androidVersion;
 
     /**
-     * 快捷入口的类型   商场    1
-     店铺    2
-     文章    7
-     商品    4
-     代金券  5
-     直播    12（new）
-     特卖    13（new）
+     * 快捷入口的类型   商场列表   14
+     店铺列表    15
+     文章列表    16
+     商品列表    17
+     代金券列表  18
+     直播列表    12（new）
+     特卖列表    13（new）
      外链     9
      */
     private String quickType;
