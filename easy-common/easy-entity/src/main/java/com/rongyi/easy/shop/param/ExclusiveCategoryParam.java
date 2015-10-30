@@ -22,7 +22,9 @@ public class ExclusiveCategoryParam implements Serializable {
 	private String id;
 
 	private String mallId;// 商场id
-
+	
+	private List<String> ids;//批量删除的ids集合
+	
 	public List<String> getName() {
 		return name;
 	}
@@ -63,4 +65,13 @@ public class ExclusiveCategoryParam implements Serializable {
 		this.mallId = mallId;
 	}
 
+	public List<String> getIds() {
+		return ids;
+	}
+
+	public void setIds(List<String> ids) {
+		this.ids = ids;
+	}
+	
+	
 }

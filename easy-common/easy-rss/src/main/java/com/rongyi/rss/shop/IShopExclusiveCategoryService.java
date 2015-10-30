@@ -2,6 +2,8 @@ package com.rongyi.rss.shop;
 
 import java.util.List;
 
+import org.bson.types.ObjectId;
+
 import com.rongyi.easy.shop.entity.ShopExclusiveCategoryEntity;
 
 public interface IShopExclusiveCategoryService {
@@ -13,4 +15,6 @@ public interface IShopExclusiveCategoryService {
 	public ShopExclusiveCategoryEntity getExclusiveCateogryById(String id);
 	
 	public List<String> insertShopExclusiveCategoryList(List<ShopExclusiveCategoryEntity> entities);
+	
+	public void deleteExclusiveCategoryList(List<ObjectId> ids);
 }
