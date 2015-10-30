@@ -53,7 +53,7 @@ public class ThreadLoadListener implements ApplicationListener<ContextRefreshedE
 		if (!initialized) {
 			logger.info("Start background working thread ...");
 			try {
-				TransConfigurations transConf = rmmmSettingsService.getLatestTransConfigurations();
+				TransConfigurations transConf = rmmmSettingsService.getLatestTransConfigurations(0);
 				drawApplyRules.setDrawApplyTimesLimit(transConf.getDrawCountMax());
 			} catch (Exception e) {
 				e.printStackTrace();
