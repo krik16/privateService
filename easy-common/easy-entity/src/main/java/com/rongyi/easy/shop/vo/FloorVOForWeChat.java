@@ -14,7 +14,11 @@ public class FloorVOForWeChat {
 
 	private String id;// 楼层id
 
-	private String name;// 楼层名/ 铺位号
+	private String buildingName;// 楼栋名
+
+	private String floorName;// 楼层名
+	
+	private String shopNumberName;// 铺位号
 
 	public String getId() {
 		return id;
@@ -24,12 +28,28 @@ public class FloorVOForWeChat {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getBuildingName() {
+		return buildingName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setBuildingName(String buildingName) {
+		this.buildingName = buildingName;
+	}
+
+	public String getFloorName() {
+		return floorName;
+	}
+
+	public void setFloorName(String floorName) {
+		this.floorName = floorName;
+	}
+
+	public String getShopNumberName() {
+		return shopNumberName;
+	}
+
+	public void setShopNumberName(String shopNumberName) {
+		this.shopNumberName = shopNumberName;
 	}
 
 }
