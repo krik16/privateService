@@ -90,4 +90,14 @@ public interface MallService {
      */
     ResponseVO getCommunalFacility(String floorId, long timeStamp, String channel, String sign);
 
+    /**
+     * get area info
+     * @param type
+     * @param timeStamp
+     * @param channel
+     * @param sign
+     * @return
+     */
+    ResponseVO getArea(Integer type, String parentId, long timeStamp, String channel, String sign);
+
 }
