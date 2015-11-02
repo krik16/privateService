@@ -91,9 +91,16 @@ public class Live implements Serializable {
 	private String bullName;
 
 	/**
+	 * 电话号
+	 */
+	private String phone;
+	
+	/**
 	 * 排序字段
 	 */
 	private int sort;
+	
+	
 
 	public ObjectId getId() {
 		return id;
@@ -215,8 +222,15 @@ public class Live implements Serializable {
 		this.bullName = bullName;
 	}
 
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	public int getSort() {
 		return LiveSortCode.fromStatus(LiveStatus.fromValue(getStatus())).getValue();
 	}
-
 }
