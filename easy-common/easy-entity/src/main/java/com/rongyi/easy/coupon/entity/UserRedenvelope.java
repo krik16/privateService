@@ -20,10 +20,7 @@ public class UserRedenvelope implements Serializable {
 
     private Integer id;
 
-    /**
-     * 红包名称
-     */
-    private String name;
+
     /**
      * 领用人id
      */
@@ -102,8 +99,7 @@ public class UserRedenvelope implements Serializable {
     public UserRedenvelope() {
     }
 
-    public UserRedenvelope( String name, String userId, String couponId, String couponCode, Integer discount, Integer status, Date receiveAt, Integer channel, Date validStartAt, Date validEndAt, String activityName) {
-        this.name = name;
+    public UserRedenvelope(String userId, String couponId, String couponCode, Integer discount, Integer status, Date receiveAt, Integer channel, Date validStartAt, Date validEndAt, String activityName) {
         this.userId = userId;
         this.couponId = couponId;
         this.couponCode = couponCode;
@@ -116,8 +112,7 @@ public class UserRedenvelope implements Serializable {
         this.activityName = activityName;
     }
 
-    public UserRedenvelope( String name, String userId, String userName, String couponId, String couponCode, Integer discount, Integer status, String userAccount, Date receiveAt, Date useAt, Integer channel, String orderNo, Date validStartAt, Date validEndAt, String activityId, String activityName) {
-        this.name = name;
+    public UserRedenvelope(String userId, String userName, String couponId, String couponCode, Integer discount, Integer status, String userAccount, Date receiveAt, Date useAt, Integer channel, String orderNo, Date validStartAt, Date validEndAt, String activityId, String activityName) {
         this.userId = userId;
         this.userName = userName;
         this.couponId = couponId;
@@ -240,13 +235,6 @@ public class UserRedenvelope implements Serializable {
         this.validEndAt = validEndAt;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public Integer getDiscount() {
         return discount;
@@ -284,7 +272,6 @@ public class UserRedenvelope implements Serializable {
     public String toString() {
         return new ToStringBuilder(this)
                 .append("id", id)
-                .append("name", name)
                 .append("userId", userId)
                 .append("userName", userName)
                 .append("couponId", couponId)
