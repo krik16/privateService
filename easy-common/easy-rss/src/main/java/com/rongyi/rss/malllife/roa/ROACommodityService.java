@@ -105,10 +105,6 @@ public interface ROACommodityService {
 	public List<String[]> listSpecColumnValues(String commodityId);
 
 	public Commodity selectById(String id);
-	/**
-	 * 帮别人加的
-	 * @param param
-	 * @return
-	 */
+ 
 	public ResponseResult searchCommodityBrand(CommodityBrandSearchParam param);
 }
