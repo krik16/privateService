@@ -47,7 +47,7 @@ public class Coupon implements Serializable {
     private Integer couponType;
 
     /**
-     * 验证方式：容易后验证[0], 互动屏票据[1], 两者兼容[2]
+     * 验证方式：容易后验证[0], 互动屏票据[1], 两者兼容[2]，商家验证[3](属于第三方导入券)
      */
     private Integer validateType;
 
