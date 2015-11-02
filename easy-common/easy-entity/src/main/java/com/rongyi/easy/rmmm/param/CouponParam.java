@@ -9,6 +9,28 @@ public class CouponParam extends BaseParam{
 	private String couponId;// 卡券Id
 	
 	private Integer num;//数量
+	
+	private Integer currentPage;
+	
+	private Integer pageSize;
+	
+	private String orderId;//订单号
+
+	public Integer getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(Integer currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public Integer getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
+	}
 
 	public Integer getNum() {
 		return num;
@@ -32,6 +54,20 @@ public class CouponParam extends BaseParam{
 
 	public void setCouponCode(String couponCode) {
 		this.couponCode = couponCode;
+	}
+
+	public String getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
+	}
+
+	@Override
+	public String toString() {
+		return "CouponParam [couponCode=" + couponCode + ", couponId=" + couponId + ", num=" + num + ", currentPage="
+				+ currentPage + ", pageSize=" + pageSize + ", orderId=" + orderId + "]";
 	}
 
 }
