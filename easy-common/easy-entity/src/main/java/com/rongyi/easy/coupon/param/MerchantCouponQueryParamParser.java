@@ -74,9 +74,9 @@ public class MerchantCouponQueryParamParser {
                 filter.setValue(array[3]);
             } else if (array[2].equals("TIMESTAMP")) {
             	if(array[3].contains("/")){
-                filter.setValue(DateTool.string2Date(array[3],"MM/dd/yyyy HH:mm:ss"));
+                filter.setValue(DateTool.string2Date(array[3],"yyyy/MM/dd HH:mm:ss"));
             	}else if(array[3].contains("-")){
-            		filter.setValue(DateTool.string2Date(array[3], "MM/dd/yyyy HH:mm:ss"));
+            		filter.setValue(DateTool.string2Date(array[3], "yyyy/MM/dd HH:mm:ss"));
             	}
             } else {
                 filter.setValue(Integer.parseInt(array[3]));
