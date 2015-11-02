@@ -48,7 +48,6 @@ public class Commodity implements  Serializable,Cloneable{
 	private String mallMid;
 	private String shopNum;
 	private String filialeMid;//分公司mongoId
-	private String filialeName;//分公司名字
 	private String update_by;//修改人
 
 	
@@ -527,12 +526,7 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setFilialeMid(String filialeMid) {
 		this.filialeMid = filialeMid;
 	}
-	public String getFilialeName() {
-		return filialeName;
-	}
-	public void setFilialeName(String filialeName) {
-		this.filialeName = filialeName;
-	}
+	
 	public String getBrandMid() {
 		return brandMid;
 	}
