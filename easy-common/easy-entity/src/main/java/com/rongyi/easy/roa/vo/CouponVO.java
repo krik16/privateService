@@ -1,5 +1,6 @@
 package com.rongyi.easy.roa.vo;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.bson.types.ObjectId;
 
@@ -326,7 +327,9 @@ public class CouponVO implements Serializable {
     public void addShopId(ObjectId shopId) {
         if (this.shopIds == null)
             this.shopIds = new ArrayList<>();
-        this.shopIds.add(shopId);
+        if (!shopIds.contains(shopId)) {
+            this.shopIds.add(shopId);
+        }
     }
 
     public List<ObjectId> getMallIds() {
@@ -340,7 +343,8 @@ public class CouponVO implements Serializable {
     public void addMallId(ObjectId mallId) {
         if (this.mallIds == null)
             this.mallIds = new ArrayList<>();
-        this.mallIds.add(mallId);
+        if (!this.mallIds.contains(mallId))
+            this.mallIds.add(mallId);
     }
 
     public List<ObjectId> getZoneIds() {
@@ -355,14 +359,19 @@ public class CouponVO implements Serializable {
         if (this.zoneIds == null) {
             this.zoneIds = new ArrayList<>();
         }
-        this.zoneIds.addAll(zoneIds);
+        if (CollectionUtils.isNotEmpty(zoneIds)) {
+            for (ObjectId id : zoneIds) {
+                addZoneId(id);
+            }
+        }
     }
 
     public void addZoneId(ObjectId zoneId) {
         if (this.zoneIds == null) {
             this.zoneIds = new ArrayList<>();
         }
-        this.zoneIds.add(zoneId);
+        if (!zoneIds.contains(zoneId))
+            this.zoneIds.add(zoneId);
     }
 
 
@@ -625,7 +634,8 @@ public class CouponVO implements Serializable {
     public void addBrandCateIs(String brandCateId) {
         if (this.brandCateIds == null)
             this.brandCateIds = new ArrayList<>();
-        this.brandCateIds.add(brandCateId);
+        if (!brandCateIds.contains(brandCateId))
+            this.brandCateIds.add(brandCateId);
     }
 
 
