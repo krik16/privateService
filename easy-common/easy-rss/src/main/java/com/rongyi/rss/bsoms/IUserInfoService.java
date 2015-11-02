@@ -129,6 +129,14 @@ public interface IUserInfoService {
 	public PagingVO<BusinessAccountVO> getBuyerInfoListByMap(Map<String, Object>paramsMap,int currpage,int pageSize);
 	
 	/**
+	 * 验证用户信息是否已存在
+	 * @param paramsMap
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean validateUserByUserParam(UserInfo userInfo)throws Exception;
+	
+	/**
 	 * 查询买手账号详情
 	 * @param id 用户ID
 	 * @return

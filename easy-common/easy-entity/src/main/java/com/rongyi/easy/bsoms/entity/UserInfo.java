@@ -18,6 +18,8 @@ public class UserInfo implements Serializable{
     private Integer roleId;
 
     private String userPhone;
+    
+    private String userAccount ; 
 
     private String userPwd;
 
@@ -97,7 +99,15 @@ public class UserInfo implements Serializable{
         this.identity = identity;
     }
 
-    public Integer getIsCooperation() {
+    public String getUserAccount() {
+		return userAccount;
+	}
+
+	public void setUserAccount(String userAccount) {
+		this.userAccount = userAccount;
+	}
+
+	public Integer getIsCooperation() {
         return isCooperation;
     }
 
