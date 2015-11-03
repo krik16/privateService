@@ -25,4 +25,12 @@ public interface ROAFloorService {
 	 * @return
 	 */
 	public FloorEntity getFloorById(String id);
+	
+	/**
+	 * 批量插入楼层有id的不插
+	 * @param entities
+	 * @return
+	 */
+	public List<String> saveFloors(List<FloorEntity> entities);
+	
 }

@@ -59,6 +59,13 @@ public class FloorVO implements Serializable {
 	public void setPosition(int position) {
 		this.position = position;
 	}
+
+	@Override
+	public String toString() {
+		return "FloorVO [type=" + type + ", floorNumber=" + floorNumber
+				+ ", mallId=" + mallId + ", floorName=" + floorName
+				+ ", position=" + position + "]";
+	}
 	
 	
 }
