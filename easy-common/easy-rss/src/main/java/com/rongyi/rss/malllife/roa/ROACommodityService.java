@@ -14,6 +14,7 @@ import java.util.List;
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.malllife.vo.CommodityBuyerVO;
 import com.rongyi.easy.malllife.vo.ShopCommodityVO;
 import com.rongyi.easy.mcmc.Commodity;
@@ -106,5 +107,5 @@ public interface ROACommodityService {
 
 	public Commodity selectById(String id);
  
-	public ResponseResult searchCommodityBrand(CommodityBrandSearchParam param);
+	public ResponseVO searchCommodityBrand(CommodityBrandSearchParam param);
 }
