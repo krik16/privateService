@@ -33,7 +33,6 @@ import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.CouponOrder;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
 import com.rongyi.easy.osm.entity.OrderFormEntity;
-import com.rongyi.rss.coupon.RoaCouponOrderService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.rss.mallshop.order.ROAOrderFormService;
 import com.rongyi.tms.constants.CodeEnum;
@@ -66,9 +65,6 @@ public class PaymentAbnormalController extends BaseController {
 
 	@Autowired
 	private PaymentAbnormalPayServiceImpl paymentAbnormalPayServiceImpl;
-
-	@Autowired
-	private RoaCouponOrderService roaCouponOrderService;
 
 	@Autowired
 	private RoaProxyCouponOrderService roaProxyCouponOrderService;
@@ -153,7 +149,6 @@ public class PaymentAbnormalController extends BaseController {
 		try {
 			if (orderType.equals("1")) {
 				// 优惠券订单
-//				order = roaCouponOrderService.findOneByOrderNo(params.getOrderNo());
 				order = roaProxyCouponOrderService.findOneByOrderNo(params.getOrderNo());
 				if (order != null)
 					// 取订单中的用户Id

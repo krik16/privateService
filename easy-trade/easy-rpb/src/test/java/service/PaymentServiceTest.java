@@ -24,15 +24,11 @@ import com.rongyi.rpb.service.PCWebPageAlipayService;
 import com.rongyi.rpb.service.PaymentItemService;
 import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rpb.service.impl.RpbServiceImpl;
-import com.rongyi.rss.coupon.RoaCouponOrderService;
 
 public class PaymentServiceTest extends BaseTest {
 
 	@Autowired
 	PaymentService paymentService;
-
-	@Autowired
-	RoaCouponOrderService roaCouponOrderService;
 	
 	@Autowired
 	PaymentItemService paymentItemService;
@@ -184,11 +180,6 @@ public class PaymentServiceTest extends BaseTest {
 		paymentEntity.setOrderNum("11111");
 		paymentEntity.setCreateTime(new Date());
 		paymentService.insert(paymentEntity);
-	}
-
-//	@Test
-	public void testRoaCouponOrder() {
-		roaCouponOrderService.findOneByOrderNo("");
 	}
 
 //	@Test

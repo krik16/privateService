@@ -187,4 +187,3 @@
 			#{item}
 		</foreach>
 	</select>
-</mapper>

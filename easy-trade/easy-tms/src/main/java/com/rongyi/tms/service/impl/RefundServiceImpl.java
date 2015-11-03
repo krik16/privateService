@@ -23,7 +23,6 @@ import com.rongyi.easy.entity.MallLifeUserEntity;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.tms.vo.TradeVO;
-import com.rongyi.rss.coupon.RoaCouponOrderService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.rss.rpb.IRpbService;
 import com.rongyi.tms.constants.ConstantEnum;
@@ -42,9 +41,6 @@ public class RefundServiceImpl extends BaseServiceImpl implements RefundService 
 
 	@Autowired
 	ROAMalllifeUserService rOAMallLifeUserService;
-
-	@Autowired
-	RoaCouponOrderService roaCouponOrderService;
 
 	@Autowired
 	IRpbService rpbService;
@@ -91,7 +87,6 @@ public class RefundServiceImpl extends BaseServiceImpl implements RefundService 
 			if (hisPayEntity != null)// 此处把付款记录的付款单号放入退款明细，以便直接在第三方支付系统查询
 				tradeVO.setPayNo(hisPayEntity.getPayNo());
 			if (ConstantEnum.PAYMENT_ORDER_TYPE1.getCodeInt() == tradeVO.getOrderType()) {// 优惠券订单
-//				CouponOrder couponOrder = roaCouponOrderService.findOneByOrderNo(tradeVO.getOrderNo());
 				CouponOrder couponOrder = roaProxyCouponOrderService.findOneByOrderNo(tradeVO.getOrderNo());
 				if (couponOrder != null && couponOrder.getBuyerId() != null) {
 					try {
