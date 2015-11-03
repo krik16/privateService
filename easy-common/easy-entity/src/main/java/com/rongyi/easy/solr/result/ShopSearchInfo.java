@@ -1,5 +1,7 @@
 package com.rongyi.easy.solr.result;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -158,5 +160,31 @@ public class ShopSearchInfo implements Serializable{
 		this.brandId = brandId;
 	}
 
-	
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append("id", id)
+				.append("name", name)
+				.append("addr", addr)
+				.append("pic_url", pic_url)
+				.append("location", location)
+				.append("description", description)
+				.append("rank", rank)
+				.append("city_name", city_name)
+				.append("shop_own", shop_own)
+				.append("label", label)
+				.append("type", type)
+				.append("business_district", business_district)
+				.append("shop_nature", shop_nature)
+				.append("any_activity", any_activity)
+				.append("any_coupon", any_coupon)
+				.append("cooperationShopId", cooperationShopId)
+				.append("rmmmShopStatus", rmmmShopStatus)
+				.append("tags", tags)
+				.append("activityNum", activityNum)
+				.append("brandId", brandId)
+				.append("appearance_pic", appearance_pic)
+				.toString();
+	}
 }

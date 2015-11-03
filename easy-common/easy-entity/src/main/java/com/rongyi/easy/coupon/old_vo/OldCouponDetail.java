@@ -37,7 +37,7 @@ public class OldCouponDetail implements Serializable {
 
     private Integer num;// 可使用商家数
 
-    private List<OldMallVO> mallvos;// 相关商家
+    private List<OldShopVO> mallvos;// 相关商家
 
     private String thumbnail;// 缩略图
 
@@ -155,11 +155,11 @@ public class OldCouponDetail implements Serializable {
         this.num = num;
     }
 
-    public List<OldMallVO> getMallvos() {
+    public List<OldShopVO> getMallvos() {
         return mallvos;
     }
 
-    public void setMallvos(List<OldMallVO> mallvos) {
+    public void setMallvos(List<OldShopVO> mallvos) {
         this.mallvos = mallvos;
     }
 

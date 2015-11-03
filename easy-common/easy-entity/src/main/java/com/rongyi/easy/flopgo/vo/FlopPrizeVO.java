@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.rongyi.easy.coupon.entity.Coupon;
-import com.rongyi.easy.coupon.entity.Coupon.CouponProduct;
+import com.rongyi.easy.coupon.vo.CouponVO;
 
 
 /**
@@ -20,7 +20,7 @@ public class FlopPrizeVO implements Serializable{
 
 	private static final long serialVersionUID = -2482835233592807478L;
 	private String id;//券id
-	
+
 	private String title;//优惠券名称
 	private Integer totalCount;//总量
 	private Integer buyedCount;//已买数量
@@ -49,14 +49,14 @@ public class FlopPrizeVO implements Serializable{
 	private String listPicUrl;// 列表图url
 	private String recommend;// 推荐说明
 	private List<String> detailPicUrls;// 详情图url
-	private List<CouponProduct> products = new ArrayList<CouponProduct>(); // 现金劵关联商品
+	private List<CouponVO.CouponProduct> products = new ArrayList<CouponVO.CouponProduct>(); // 现金劵关联商品
 	private Integer cardSurfaceIsShow;//牌面是否显示  0表示不显示 1表示显示
-	
-	public List<CouponProduct> getProducts() {
+
+	public List<CouponVO.CouponProduct> getProducts() {
 		return products;
 	}
 
-	public void setProducts(List<CouponProduct> products) {
+	public void setProducts(List<CouponVO.CouponProduct> products) {
 		this.products = products;
 	}
 
@@ -69,7 +69,7 @@ public class FlopPrizeVO implements Serializable{
 	}
 
 	public FlopPrizeVO(){
-	
+
 	}
 
 //	public FlopPrizeVO(CouponEntity couponEntity){
@@ -91,7 +91,7 @@ public class FlopPrizeVO implements Serializable{
 		this.recommend = recommend;
 	}
 
-	public FlopPrizeVO(Coupon coupon){
+	public FlopPrizeVO(CouponVO coupon){
 		if(coupon!=null){
 			this.id=coupon.getId().toString();
 			this.title=coupon.getTitle();
@@ -120,7 +120,7 @@ public class FlopPrizeVO implements Serializable{
 			this.listPicUrl=coupon.getListPicUrl();
 			this.detailPicUrls=coupon.getDetailPicUrls();
 			this.products=coupon.getProducts();
-			
+
 		}
 	}
 
@@ -168,7 +168,7 @@ public class FlopPrizeVO implements Serializable{
 	public void setNowPrice(Double nowPrice) {
 		this.nowPrice = nowPrice;
 	}
-	
+
 	public Double getOriginalPrice() {
 		return originalPrice;
 	}
@@ -267,5 +267,5 @@ public class FlopPrizeVO implements Serializable{
 	public void setCardSurfaceIsShow(Integer cardSurfaceIsShow) {
 		this.cardSurfaceIsShow = cardSurfaceIsShow;
 	}
-	
+
 }

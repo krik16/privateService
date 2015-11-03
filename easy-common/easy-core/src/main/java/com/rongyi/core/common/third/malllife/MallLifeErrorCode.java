@@ -14,6 +14,7 @@ package com.rongyi.core.common.third.malllife;/*
  * 第1位表示错误码类型，1表示透传错误码，错误提示(msg)直接用后端返回的,2表示需特殊处理的错误码
  * 第2、3位  固定为 06
  * 4、后4位表示子系统内的具体错误
+ * 容易逛内部错误编码 使用AppErrorCode.java
  */
 public enum MallLifeErrorCode {
 

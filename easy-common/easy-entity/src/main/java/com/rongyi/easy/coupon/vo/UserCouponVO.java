@@ -1,8 +1,11 @@
 package com.rongyi.easy.coupon.vo;
 
+import com.rongyi.easy.coupon.entity.UserRedenvelope;
 import com.rongyi.easy.mcmc.vo.CommodityBuyerVO;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,6 +40,12 @@ public class UserCouponVO implements Serializable {
     private List<CommodityBuyerVO> commodityList;// 商品信息列表
 
     private String description;// 描述
+
+    private String couponType;//卡券类型
+
+    private String couponId;//卡券ID
+
+    private Integer id;//用户红包主键
 
     public Integer getStatus() {
         return status;
@@ -142,4 +151,59 @@ public class UserCouponVO implements Serializable {
         this.couponCode = couponCode;
     }
 
+    public String getCouponType() {
+        return couponType;
+    }
+
+    public void setCouponType(String couponType) {
+        this.couponType = couponType;
+    }
+
+    public String getCouponId() {
+        return couponId;
+    }
+
+    public void setCouponId(String couponId) {
+        this.couponId = couponId;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    // 券状态 0:未激活 1:已领用 2:已使用 3:已过期
+    public void setConvertStatus(Integer status, Date validEndAt) {
+        if (UserRedenvelope.STATUS_UNUSE.equals(status) && new Date().before(validEndAt))
+            this.setStatus(1);
+        else if (UserRedenvelope.STATUS_USED.equals(status))
+            this.setStatus(2);
+        else if (UserRedenvelope.STATUS_UNUSE.equals(status) && new Date().after(validEndAt))
+            this.setStatus(3);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("couponCode", couponCode)
+                .append("title", title)
+                .append("discount", discount)
+                .append("validBeginDate", validBeginDate)
+                .append("validEndDate", validEndDate)
+                .append("status", status)
+                .append("type", type)
+                .append("productIds", productIds)
+                .append("useDescription", useDescription)
+                .append("recommend", recommend)
+                .append("shopName", shopName)
+                .append("commodityList", commodityList)
+                .append("description", description)
+                .append("couponType", couponType)
+                .append("couponId", couponId)
+                .append("id", id)
+                .toString();
+    }
 }

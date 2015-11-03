@@ -17,7 +17,7 @@ import com.rongyi.easy.rmmm.vo.OrderWithCouponInfoVO;
  */
 public interface ROAOrderFormServiceWithCouponInfo {
 	/**
-	 * 根据订单号查询订单和订单使用的现金券信息
+	 * 根据订单号查询订单和订单使用的红包信息
 	 * 
 	 * @author ZhengYl
 	 * @date 2015年7月7日 下午3:58:08 
