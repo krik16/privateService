@@ -5,13 +5,9 @@ import com.rongyi.easy.coupon.entity.Coupon;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
-<<<<<<< HEAD
-=======
 import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.vo.CouponVO;
 
->>>>>>> develop-yuzhijian
 public class FlopgoPrizeByTimesVO implements Serializable{
 	/**
 	 *
@@ -60,27 +56,18 @@ public class FlopgoPrizeByTimesVO implements Serializable{
 	public FlopgoPrizeByTimesVO(CouponVO flopprize){
 		if(flopprize!=null){
 			this._id=flopprize.getId().toString();
-<<<<<<< HEAD
-			this.created_at=flopprize.getCreateAt();
-			this.updated_at=flopprize.getUpdateAt();
-			this.type=flopprize.getCouponType().toString();
-			this.title=flopprize.getName();
-			this.restrictions=flopprize.getLimitDesc();
-	
-=======
 			this.created_at=flopprize.getCreateDate();
 			this.updated_at=flopprize.getUpdateDate();
 			this.type=flopprize.getCouponType();
 			this.title=flopprize.getTitle();
 			this.restrictions=flopprize.getUseRestriction();
 
->>>>>>> develop-yuzhijian
 			this.detail_img=flopprize.getDetailPicUrls();
 			if("02".equals(flopprize.getCouponType())){
-				this.actual_price=flopprize.getOrigPrice2Double();
-				this.discount_price=flopprize.getCurrPrice2Double();
+			//	this.actual_price=flopprize.getOrigPrice2Double();
+				//this.discount_price=flopprize.getCurrPrice2Double();
 				this.scope=null;
-				this.recommendation=flopprize.getUsageDesc();
+				//this.recommendation=flopprize.getUsageDesc();
 			}
 			if("03".equals(flopprize.getCouponType())){
 				this.discount_price=flopprize.getDiscount();

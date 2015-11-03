@@ -79,11 +79,8 @@ public class CouponMall implements Serializable {
         return builder.toString();
     }
 
-<<<<<<< HEAD:easy-common/easy-entity/src/main/java/com/rongyi/easy/coupon/entity/CouponMall.java
-    public CouponMall(String couponId, String mallId, String mallName, String mallAddress, String mallLogUrl) {
-=======
+
     public CouponMall(String couponId, String mallId, String mallName, String mallAddress) {
->>>>>>> develop-yuzhijian:easy-common/easy-entity/src/main/java/com/rongyi/easy/coupon/entity/CouponMall.java
         this.couponId = couponId;
         this.mallId = mallId;
         this.mallName = mallName;

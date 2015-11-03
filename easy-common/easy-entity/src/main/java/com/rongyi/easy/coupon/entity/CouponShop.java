@@ -91,35 +91,6 @@ public class CouponShop implements Serializable{
         this.shopName = shopName;
     }
 
-
-<<<<<<< HEAD:easy-common/easy-entity/src/main/java/com/rongyi/easy/coupon/entity/CouponShop.java
-    public String getShopLogoUrl() {
-        return shopLogoUrl;
-    }
-
-    public void setShopLogoUrl(String shopLogoUrl) {
-        this.shopLogoUrl = shopLogoUrl;
-    }
-
-    public String getShopBrand() {
-        return shopBrand;
-    }
-
-    public void setShopBrand(String shopBrand) {
-        this.shopBrand = shopBrand;
-    }
-
-    public CouponShop(String couponId, String shopId, String shopName, String shopMallName, String shopLogoUrl, String shopBrand) {
-        this.couponId = couponId;
-        this.shopId = shopId;
-        this.shopName = shopName;
-        this.shopMallName = shopMallName;
-        this.shopLogoUrl = shopLogoUrl;
-        this.shopBrand = shopBrand;
-    }
-=======
->>>>>>> develop-yuzhijian:easy-common/easy-entity/src/main/java/com/rongyi/easy/coupon/entity/CouponShop.java
-
     public CouponShop(String couponId, String shopId) {
 
         this.couponId = couponId;

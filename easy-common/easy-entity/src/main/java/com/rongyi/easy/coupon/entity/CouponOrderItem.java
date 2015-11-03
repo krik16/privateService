@@ -12,11 +12,7 @@ import java.util.Date;
  *
  * @author Breggor
  */
-<<<<<<< HEAD
-
-=======
 @Deprecated
->>>>>>> develop-yuzhijian
 public class CouponOrderItem implements Serializable {
 
     private static final long serialVersionUID = 1L;

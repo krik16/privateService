@@ -80,8 +80,7 @@ public class CouponBrand implements Serializable{
 		return builder.toString();
 	}
 
-<<<<<<< HEAD:easy-common/easy-entity/src/main/java/com/rongyi/easy/coupon/entity/CouponBrand.java
-=======
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -99,7 +98,6 @@ public class CouponBrand implements Serializable{
         return Objects.hash(couponId, brandId, brandCname);
     }
 
->>>>>>> develop-yuzhijian:easy-common/easy-entity/src/main/java/com/rongyi/easy/coupon/entity/CouponBrand.java
     public CouponBrand(String couponId, String brandId, String brandCname) {
         this.couponId = couponId;
         this.brandId = brandId;

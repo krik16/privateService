@@ -1,10 +1,7 @@
 package com.rongyi.easy.coupon.vo;
 
-<<<<<<< HEAD
-=======
 import com.rongyi.easy.coupon.entity.CouponCommodity;
 import org.apache.commons.collections.CollectionUtils;
->>>>>>> develop-yuzhijian
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -30,11 +27,7 @@ public class CouponVO implements Serializable {
     private String title;// 券名称
 
 
-<<<<<<< HEAD
-    private String couponType;// 券类型: 优惠券[02] 现金券[03]
-=======
     private String couponType;// 券类型: 优惠券[02] 红包[03]
->>>>>>> develop-yuzhijian
 
 
     private Integer totalCount;// 总量
@@ -64,11 +57,7 @@ public class CouponVO implements Serializable {
 
     private Double currentPrice;// 现价
 
-<<<<<<< HEAD
-    private String type;// 配置类型 0:商场 1:店铺；现金券 0：全场，1：商品
-=======
     private String type;// 配置类型 0:商场 1:店铺；红包 0：全场，1：商品
->>>>>>> develop-yuzhijian
 
 
     private String checkDescription;// 审核未通过信息描述
@@ -748,8 +737,6 @@ public class CouponVO implements Serializable {
 
     }
 
-<<<<<<< HEAD
-=======
     public void setConvertMalls(List<com.rongyi.easy.coupon.entity.CouponMall> convertMalls) {
         if (CollectionUtils.isNotEmpty(convertMalls)) {
             List<CouponMall> malls = new ArrayList<>();
@@ -817,7 +804,6 @@ public class CouponVO implements Serializable {
             this.setType("1");
         }
     }
->>>>>>> develop-yuzhijian
     @Override
     public String toString() {
         return new ToStringBuilder(this)

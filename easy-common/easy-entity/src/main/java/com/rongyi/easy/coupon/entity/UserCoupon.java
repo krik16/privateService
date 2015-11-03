@@ -321,14 +321,6 @@ public class UserCoupon implements Serializable {
 
 
     public Integer getConvertStatus() {
-<<<<<<< HEAD
-        Integer val = null;
-        if (Integer.valueOf(1).equals(status)) {
-            val = Integer.valueOf(0);
-        }
-        if (Integer.valueOf(2).equals(status)) {
-            val = Integer.valueOf(1);
-=======
         Integer val = status;
         if (Integer.valueOf(1).equals(status)) {
             val = Integer.valueOf(0);
@@ -336,7 +328,6 @@ public class UserCoupon implements Serializable {
             val = Integer.valueOf(1);
         } else if (Integer.valueOf(3).equals(status)) {
             val = Integer.valueOf(0);
->>>>>>> develop-yuzhijian
         }
         return val;
     }

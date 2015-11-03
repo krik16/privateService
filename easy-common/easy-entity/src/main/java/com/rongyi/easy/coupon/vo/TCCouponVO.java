@@ -31,13 +31,7 @@ public class TCCouponVO implements Serializable {
     private String id;// 券id
 
     private String title;// 券名称
-
-
-<<<<<<< HEAD
-    private String couponType;// 券类型: 优惠券[02] 现金券[03]
-=======
     private String couponType;// 券类型: 优惠券[02] 红包[03]
->>>>>>> develop-yuzhijian
 
 
     private Integer totalCount;// 总量
@@ -66,11 +60,8 @@ public class TCCouponVO implements Serializable {
 
     private Double currentPrice;// 现价
 
-<<<<<<< HEAD
-    private String type;// 配置类型 0:商场 1:店铺；现金券 0：全场，1：商品
-=======
+
     private String type;// 配置类型 0:商场 1:店铺；红包 0：全场，1：商品
->>>>>>> develop-yuzhijian
 
 
     private String checkDescription;// 审核未通过信息描述
@@ -174,14 +165,12 @@ public class TCCouponVO implements Serializable {
      */
     private CouponGroup couponGroup;
 
-<<<<<<< HEAD
-=======
+
     /**
      * 是否是第三方券 否[0], 是[1], 默认不是第三方券
      */
     private Boolean  isThird;
 
->>>>>>> develop-yuzhijian
     private Long version; // 乐观锁
 
 
@@ -193,8 +182,7 @@ public class TCCouponVO implements Serializable {
         this.id = id;
     }
 
-<<<<<<< HEAD
-=======
+
     public Boolean getIsThird() {
         return isThird;
     }
@@ -203,7 +191,6 @@ public class TCCouponVO implements Serializable {
         this.isThird = isThird;
     }
 
->>>>>>> develop-yuzhijian
     public Integer getRelatedType() {
         return relatedType;
     }
@@ -652,11 +639,8 @@ public class TCCouponVO implements Serializable {
                     CouponMall cmall = new CouponMall();
                     cmall.setId(mall.getMallId());
                     cmall.setMallAddress(mall.getMallAddress());
-<<<<<<< HEAD
-                    cmall.setMallLogoUrl(mall.getMallLogUrl());
-=======
+
                  /*   cmall.setMallLogoUrl(mall.getMallLogUrl());*/
->>>>>>> develop-yuzhijian
                     cmall.setMallName(mall.getMallName());
                     malls.add(cmall);
                 }
@@ -692,15 +676,10 @@ public class TCCouponVO implements Serializable {
                 if (shop != null) {
                     CouponShop cshop = new CouponShop();
                     cshop.setId(shop.getShopId());
-<<<<<<< HEAD
-                    cshop.setBrandName(shop.getShopBrand());
-                    cshop.setMallName(shop.getShopMallName());
-                    cshop.setShopLogoUrl(shop.getShopLogoUrl());
-=======
+
             /*        cshop.setBrandName(shop.getShopBrand());
                     cshop.setMallName(shop.getShopMallName());
                     cshop.setShopLogoUrl(shop.getShopLogoUrl());*/
->>>>>>> develop-yuzhijian
                     cshop.setShopName(shop.getShopName());
                     shops.add(cshop);
                 }

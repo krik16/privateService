@@ -102,8 +102,6 @@ public interface CouponConstants {
         Integer NO_CHECK = 0;
         Integer CHECK_FAILURE = 1;
         Integer CHECK_SUCCESS = 2;
-<<<<<<< HEAD
-=======
     }
 
     /**
@@ -121,7 +119,6 @@ public interface CouponConstants {
     interface CouponPublishChannel {
         Integer OPERATION = 0;
         Integer MERCHANT = 1;
->>>>>>> develop-yuzhijian
     }
 
 }

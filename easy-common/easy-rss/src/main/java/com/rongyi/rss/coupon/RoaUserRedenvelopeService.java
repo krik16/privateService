@@ -47,8 +47,6 @@ public interface RoaUserRedenvelopeService {
     PagingVO<UserRedenvelope> findUserCouponByUserId(String userId, Integer currentPage, Integer pageSize);
 
     /**
-<<<<<<< HEAD
-=======
      * 根据用户ID查询我的全场红包
      * @param userId
      * @param currentPage
@@ -58,7 +56,6 @@ public interface RoaUserRedenvelopeService {
     PagingVO<UserRedenvelope> findUserCouponByUserIdFull(String userId, Integer currentPage, Integer pageSize);
 
     /**
->>>>>>> develop-yuzhijian
      * 根据券码与商品Id验证红包
      *
      * @param couponCode
@@ -145,8 +142,4 @@ public interface RoaUserRedenvelopeService {
      * @return
      */
     ResponseResult createByCouponOrderParam(CouponOrderParam param);
-<<<<<<< HEAD
-=======
-
->>>>>>> develop-yuzhijian
 }

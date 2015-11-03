@@ -1,16 +1,10 @@
 package com.rongyi.easy.coupon.entity;
 
-<<<<<<< HEAD
-import org.apache.commons.lang.builder.ToStringBuilder;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-=======
 import com.rongyi.core.util.AmountConversion;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
->>>>>>> develop-yuzhijian
 import java.util.Date;
 
 /**
@@ -27,14 +21,6 @@ public class UserRedenvelope implements Serializable {
 
     private Integer id;
 
-<<<<<<< HEAD
-    /**
-     * 红包名称
-     */
-    private String name;
-=======
-
->>>>>>> develop-yuzhijian
     /**
      * 领用人id
      */
@@ -113,12 +99,8 @@ public class UserRedenvelope implements Serializable {
     public UserRedenvelope() {
     }
 
-<<<<<<< HEAD
-    public UserRedenvelope( String name, String userId, String couponId, String couponCode, Integer discount, Integer status, Date receiveAt, Integer channel, Date validStartAt, Date validEndAt, String activityName) {
-        this.name = name;
-=======
+
     public UserRedenvelope(String userId, String couponId, String couponCode, Integer discount, Integer status, Date receiveAt, Integer channel, Date validStartAt, Date validEndAt, String activityName) {
->>>>>>> develop-yuzhijian
         this.userId = userId;
         this.couponId = couponId;
         this.couponCode = couponCode;
@@ -131,12 +113,8 @@ public class UserRedenvelope implements Serializable {
         this.activityName = activityName;
     }
 
-<<<<<<< HEAD
-    public UserRedenvelope( String name, String userId, String userName, String couponId, String couponCode, Integer discount, Integer status, String userAccount, Date receiveAt, Date useAt, Integer channel, String orderNo, Date validStartAt, Date validEndAt, String activityId, String activityName) {
-        this.name = name;
-=======
+
     public UserRedenvelope(String userId, String userName, String couponId, String couponCode, Integer discount, Integer status, String userAccount, Date receiveAt, Date useAt, Integer channel, String orderNo, Date validStartAt, Date validEndAt, String activityId, String activityName) {
->>>>>>> develop-yuzhijian
         this.userId = userId;
         this.userName = userName;
         this.couponId = couponId;
@@ -259,16 +237,7 @@ public class UserRedenvelope implements Serializable {
         this.validEndAt = validEndAt;
     }
 
-<<<<<<< HEAD
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-=======
->>>>>>> develop-yuzhijian
 
     public Integer getDiscount() {
         return discount;
@@ -277,11 +246,8 @@ public class UserRedenvelope implements Serializable {
     public double getDiscount2Double() {
         double dis = 0D;
         if (discount != null) {
-<<<<<<< HEAD
-            dis = BigDecimal.valueOf(discount).divide(BigDecimal.valueOf(100.00D)).setScale(2).doubleValue();
-=======
+
             dis = AmountConversion.fenToYuan(discount);
->>>>>>> develop-yuzhijian
         }
         return dis;
     }
@@ -310,10 +276,6 @@ public class UserRedenvelope implements Serializable {
     public String toString() {
         return new ToStringBuilder(this)
                 .append("id", id)
-<<<<<<< HEAD
-                .append("name", name)
-=======
->>>>>>> develop-yuzhijian
                 .append("userId", userId)
                 .append("userName", userName)
                 .append("couponId", couponId)

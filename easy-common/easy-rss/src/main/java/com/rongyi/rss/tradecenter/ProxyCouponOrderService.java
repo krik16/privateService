@@ -218,8 +218,4 @@ public interface ProxyCouponOrderService {
      * @return
      */
     int dailyBuyCount(String couponId, String userId);
-<<<<<<< HEAD
-
-=======
->>>>>>> develop-yuzhijian
 }

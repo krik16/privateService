@@ -16,28 +16,6 @@ import java.util.List;
  */
 public interface RoaCouponService {
 
-<<<<<<< HEAD
-    /**
-     * 交易中心-根据id查询卡券
-     *
-     * @param couponId
-     * @return
-     */
-    TCCouponVO findTCCouponById(String couponId);
-
-    /**
-     * 根据id查询
-     *
-     * @param couponId
-     * @return
-     */
-    Coupon findById(String couponId);
-
-
-    /**
-     * 根据id集合查询
-=======
-
     /**
      * 新建卡券
      *
@@ -45,7 +23,6 @@ public interface RoaCouponService {
      * @return
      */
     boolean create(Coupon coupon);
-
 
     /**
      * 追加库存量
@@ -73,8 +50,12 @@ public interface RoaCouponService {
     Coupon findById(String couponId);
 
 
+
+
+
+
     /**
-     * 根据id集合查询
+     * 代金券下线
      *
      * @param ids
      * @return
@@ -92,26 +73,6 @@ public interface RoaCouponService {
 
     /**
      * 代金券下线
->>>>>>> develop-yuzhijian
-     *
-     * @param id
-     * @param status
-     * @return
-     */
-<<<<<<< HEAD
-    List<Coupon> findCouponListByIds(List<String> ids);
-
-    /**
-     * 追加卡券浏览次数
-     *
-     * @param couponId
-     * @param visitedCount
-     * @return
-     */
-    boolean addCouponVistiedCount(String couponId, int visitedCount);
-
-    /**
-     * 代金券下线
      *
      * @param id
      * @param status
@@ -119,20 +80,10 @@ public interface RoaCouponService {
      */
     boolean updateOffStock(String id, boolean status);
 
-    /**
-     * 根据卡券Id减少库存
-     *
-     * @param couponId
-     * @param quantity
-     * @return
-     */
-    boolean subtractInventory(String couponId, int quantity);
 
 
-    /**
-     * 根据卡券Id恢复库存
-=======
-    boolean updateOffStock(String id, boolean status);
+
+
 
     /**
      * 根据卡券Id减少库存
@@ -175,68 +126,12 @@ public interface RoaCouponService {
 
     /**
      * 只减少库存
->>>>>>> develop-yuzhijian
      *
      * @param couponId
      * @param quantity
      * @return
      */
-<<<<<<< HEAD
-    boolean recoverInventory(String couponId, int quantity);
 
-    /**
-     * 修改卡券关联活动状态 关联[true] 取消关联[false]
-     *
-     * @param ids
-     * @param isRelatedActivity
-     * @param couponActivity
-     * @return boolean
-     * @author lqy
-     * @throws Exception
-     */
-    boolean updateRelatedActivity(List<String> ids, boolean isRelatedActivity, CouponActivity couponActivity) throws Exception;
-
-    /**
-     * 减库存返回券码
-     *
-     * @param couponId
-     * @return
-     */
-    ResponseResult subtractInventoryReturnCode(String couponId);
-
-    /**
-     * 只减少库存
-     *
-     * @param couponId
-     * @param quantity
-     * @return
-     */
-    ResponseResult subtractCouponInventory(String couponId, int quantity);
-
-    /**
-     * 恢复券码
-     *
-     * @param couponId
-     * @param couponCode
-     * @return
-     */
-    boolean restoreCouponInventory(String couponId, String couponCode);
-
-    /**
-     *
-     * @param couponParam
-     * @return
-     */
-    PagingVO<Coupon> findAllByPage(CouponParam couponParam);
-
-    /**
-     * 根据卡券ID查看卡券关联的活动列表
-     * @param couponId
-     * @return List<CouponActivity>
-     * @author lqy
-     */
-    List<CouponActivity> findCouponActivitiesByCouponId(String couponId);
-=======
     ResponseResult subtractCouponInventory(String couponId, int quantity);
 
     /**
@@ -273,5 +168,4 @@ public interface RoaCouponService {
      * @return
      */
     boolean remove(String couponId);
->>>>>>> develop-yuzhijian
 }

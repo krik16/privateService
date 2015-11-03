@@ -34,10 +34,8 @@ public class PushUserCouponVO implements Serializable{
     private Date validBeginDate;
     private Date validEndDate;
     private String userPhone;
-<<<<<<< HEAD
-=======
+
     private String pushChannelId;
->>>>>>> develop-yuzhijian
 
 
     /**
@@ -58,11 +56,8 @@ public class PushUserCouponVO implements Serializable{
      * @param validEndDate
      */
 
-<<<<<<< HEAD
-    public PushUserCouponVO(String pushId, String pushName, String couponId, List<String> couponCodes, String couponTitle, String userId, String couponType, String type, String useRestriction, Integer currentPrice, Date validBeginDate, Date validEndDate,String userPhone) {
-=======
+
     public PushUserCouponVO(String pushId, String pushName, String couponId, List<String> couponCodes, String couponTitle, String userId, Integer couponType, String type, String useRestriction, Integer currentPrice, Date validBeginDate, Date validEndDate,String userPhone,String pushChannelId) {
->>>>>>> develop-yuzhijian
         super();
         this.pushId = pushId;
         this.pushName = pushName;
@@ -77,10 +72,8 @@ public class PushUserCouponVO implements Serializable{
         this.validBeginDate = validBeginDate;
         this.validEndDate = validEndDate;
         this.userPhone=userPhone;
-<<<<<<< HEAD
-=======
+
         this.pushChannelId=pushChannelId;
->>>>>>> develop-yuzhijian
     }
 
     @Override
@@ -99,10 +92,7 @@ public class PushUserCouponVO implements Serializable{
             ", validBeginDate=" + validBeginDate +
             ", validEndDate=" + validEndDate +
             ", userPhone='" + userPhone + '\'' +
-<<<<<<< HEAD
-=======
             ", pushChannelId='" + pushChannelId + '\'' +
->>>>>>> develop-yuzhijian
             '}';
     }
 

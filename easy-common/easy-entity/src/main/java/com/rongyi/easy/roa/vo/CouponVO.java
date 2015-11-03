@@ -1,9 +1,7 @@
 package com.rongyi.easy.roa.vo;
 
-<<<<<<< HEAD
-=======
+
 import org.apache.commons.collections.CollectionUtils;
->>>>>>> develop-yuzhijian
 import org.apache.commons.lang.StringUtils;
 import org.bson.types.ObjectId;
 
@@ -130,11 +128,8 @@ public class CouponVO implements Serializable {
 
     private Integer buyedNum; // 此商品被多少人购买过
 
-<<<<<<< HEAD
-    private String name;// holder_id对应的名称
-=======
+
     private String name;// holder_id对应的名称,代金券显示名
->>>>>>> develop-yuzhijian
 
 
     private String grouponType; // 团购类型，3为外部导入码
@@ -331,8 +326,7 @@ public class CouponVO implements Serializable {
         this.shopIds = shopIds;
     }
 
-<<<<<<< HEAD
-=======
+
     public void addShopId(ObjectId shopId) {
         if (this.shopIds == null)
             this.shopIds = new ArrayList<>();
@@ -341,7 +335,6 @@ public class CouponVO implements Serializable {
         }
     }
 
->>>>>>> develop-yuzhijian
     public List<ObjectId> getMallIds() {
         return mallIds;
     }
@@ -350,8 +343,7 @@ public class CouponVO implements Serializable {
         this.mallIds = mallIds;
     }
 
-<<<<<<< HEAD
-=======
+
     public void addMallId(ObjectId mallId) {
         if (this.mallIds == null)
             this.mallIds = new ArrayList<>();
@@ -359,7 +351,6 @@ public class CouponVO implements Serializable {
             this.mallIds.add(mallId);
     }
 
->>>>>>> develop-yuzhijian
     public List<ObjectId> getZoneIds() {
         return zoneIds;
     }
@@ -368,8 +359,7 @@ public class CouponVO implements Serializable {
         this.zoneIds = zoneIds;
     }
 
-<<<<<<< HEAD
-=======
+
     public void addZoneIds(List<ObjectId> zoneIds) {
         if (this.zoneIds == null) {
             this.zoneIds = new ArrayList<>();
@@ -390,7 +380,6 @@ public class CouponVO implements Serializable {
     }
 
 
->>>>>>> develop-yuzhijian
     public List<Double> getLocation() {
         return location;
     }
@@ -647,8 +636,7 @@ public class CouponVO implements Serializable {
         this.brandCateIds = brandCateIds;
     }
 
-<<<<<<< HEAD
-=======
+
     public void addBrandCateIs(String brandCateId) {
         if (this.brandCateIds == null)
             this.brandCateIds = new ArrayList<>();
@@ -657,7 +645,6 @@ public class CouponVO implements Serializable {
     }
 
 
->>>>>>> develop-yuzhijian
     public String getShowChannel() {
         return showChannel;
     }
