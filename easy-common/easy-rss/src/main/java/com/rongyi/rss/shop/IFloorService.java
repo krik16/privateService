@@ -17,4 +17,11 @@ public interface IFloorService {
 	 * @param entity
 	 */
 	public String saveFloor(FloorEntity entity);
+	
+	/**
+	 * 根据id查询楼层
+	 * @param id
+	 * @return
+	 */
+	public FloorEntity getFloorById(String id);
 }

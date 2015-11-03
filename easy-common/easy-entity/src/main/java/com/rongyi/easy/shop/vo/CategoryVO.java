@@ -9,9 +9,7 @@ public class CategoryVO implements Serializable{
 	
 	private String name;
 	
-	private String parName;//父类名字
-	
-	private List<CategoryVO> subCategoryVOs;
+	private List<CategoryVO> subCategoryVOs;//子类集合
 	
 	public String getId() {
 		return id;
@@ -27,14 +25,6 @@ public class CategoryVO implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getParName() {
-		return parName;
-	}
-
-	public void setParName(String parName) {
-		this.parName = parName;
 	}
 
 	public List<CategoryVO> getSubCategoryVOs() {

@@ -5,7 +5,10 @@ public class AreaVO {
 	private String id;
 	private String type;
 	private String name;
-
+	private String floorNumber;//几号楼（楼栋幢座）
+	private Integer floorType;//楼栋类型 0楼1栋2幢3座
+	private String floorName;//楼层
+	
 	public String getId() {
 		return id;
 	}
@@ -31,4 +34,29 @@ public class AreaVO {
 		this.name = name;
 	}
 
+	public String getFloorNumber() {
+		return floorNumber;
+	}
+
+	public void setFloorNumber(String floorNumber) {
+		this.floorNumber = floorNumber;
+	}
+
+	public Integer getFloorType() {
+		return floorType;
+	}
+
+	public void setFloorType(Integer floorType) {
+		this.floorType = floorType;
+	}
+
+	public String getFloorName() {
+		return floorName;
+	}
+
+	public void setFloorName(String floorName) {
+		this.floorName = floorName;
+	}
+	
+	
 }
