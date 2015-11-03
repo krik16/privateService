@@ -2,6 +2,7 @@ package com.rongyi.rss.mcmc;
 
 import java.util.List;
 
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.solr.param.CommodityBrandSearchParam;
 import org.bson.types.ObjectId;
 
@@ -91,5 +92,5 @@ public interface CommodityService {
 
 	public Commodity selectById(String id);
 
-	public ResponseResult searchCommodityBrand(CommodityBrandSearchParam param);
+	public ResponseVO searchCommodityBrand(CommodityBrandSearchParam param);
 }

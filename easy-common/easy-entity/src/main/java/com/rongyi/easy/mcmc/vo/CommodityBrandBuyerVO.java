@@ -10,7 +10,7 @@ public class CommodityBrandBuyerVO implements Serializable {
     private String name;
     private String icon;
 
-    public String getFullIcon() {
+    public String getLogo() {
         return "http://rongyi.b0.upaiyun.com/system/brand/icon/" + id + "/" + icon;
     }
 
