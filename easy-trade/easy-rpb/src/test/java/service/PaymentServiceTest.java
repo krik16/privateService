@@ -181,11 +181,6 @@ public class PaymentServiceTest extends BaseTest {
 		paymentService.insert(paymentEntity);
 	}
 
-<<<<<<< HEAD
-	//	@Test
-=======
-//	@Test
->>>>>>> refs/remotes/origin/develop
 	public void testSelectItemByPaymentId(){
 		List<PaymentItemEntity> list = paymentItemService.selectByPaymentId(2171);
 		System.err.println(list.get(0).getDetailNum());

@@ -30,11 +30,6 @@ import com.rongyi.easy.entity.MallLifeUserEntity;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
 import com.rongyi.easy.osm.entity.OrderFormEntity;
 import com.rongyi.easy.tms.vo.TradeVO;
-<<<<<<< HEAD
-import com.rongyi.rss.coupon.RoaCouponOrderService;
-=======
-import com.rongyi.rss.coupon.mall.shop.MSUserCouponService;
->>>>>>> refs/remotes/origin/develop
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.rss.mallshop.order.ROAOrderFormService;
 import com.rongyi.tms.constants.ConstantEnum;

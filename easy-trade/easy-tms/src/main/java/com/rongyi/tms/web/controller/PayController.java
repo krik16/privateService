@@ -509,3 +509,4 @@ public class PayController extends BaseController {
 
 		return responseResult;
 	}
+}
