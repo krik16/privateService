@@ -22,6 +22,7 @@
     <dubbo:reference id="commentService" interface="com.rongyi.rss.mcmc.CommentService"  version="${dubbo.version}" check="false"/>
     <dubbo:reference id="personManagementServicek" interface="com.rongyi.rss.roa.ROAPersonManagementService"  version="${dubbo.version}" check="false"/>
     <dubbo:reference id="msobOrderEventService" interface="com.rongyi.rss.msob.IOrderEventService" version="${dubbo.version}" check="false"/>
+    <dubbo:reference id="roaUserRedenvelopeService" interface="com.rongyi.rss.coupon.RoaUserRedenvelopeService" version="${dubbo.version}" check="false"/>
 <!--     <bean id="demoController" class="com.rongyi.roa.web.controller.demo.DemoController"> 和本地服务一样使用远程服务 -->
 <!-- 	    <property name="memberService" ref="memberService" /> -->
 <!-- 	</bean> -->

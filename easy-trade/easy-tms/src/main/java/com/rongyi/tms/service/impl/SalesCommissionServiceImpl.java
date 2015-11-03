@@ -152,7 +152,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 				salesCommission.setCommissionAmount(mqCommissionParam.getCommissionAmount());
 				salesCommission.setGuideId(mqCommissionParam.getGuideId());
 				salesCommission.setOrderNo(mqCommissionParam.getOrderNo());
-				salesCommission.setGuideType(mqCommissionParam.getGuideType());
+//				salesCommission.setGuideType(mqCommissionParam.getGuideType());
 				String buyerId = mqCommissionParam.getBuyerId();
 				LOGGER.debug("[Commission Add] buyerId: " + buyerId);
 				if (buyerId != null) {
@@ -184,6 +184,10 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 	 * 
 	 * @param params
 	 * @return
+<<<<<<< HEAD
+=======
+	 * @see com.rongyi.tms.service.SalesCommissionService#(java.util.Map)
+>>>>>>> refs/remotes/origin/develop
 	 */
 
 	@Override
@@ -215,6 +219,10 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 	 * Description
 	 * 
 	 * @return
+<<<<<<< HEAD
+=======
+	 * @see com.rongyi.tms.service.SalesCommissionService#(java.util.List)
+>>>>>>> refs/remotes/origin/develop
 	 */
 
 	@Override
@@ -355,7 +363,11 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 	/**
 	 * Description
 	 * 
+<<<<<<< HEAD
 	 * @param account
+=======
+	 * @param
+>>>>>>> refs/remotes/origin/develop
 	 * @return
 	 * @see SalesCommissionService#getUserIdByUserAccount(String)
 	 */

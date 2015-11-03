@@ -158,7 +158,7 @@ public class BonusController extends BaseController {
                             result.setMessage(CodeEnum.ERROR_DATA.getMessage());
                             result.setCode(CodeEnum.ERROR_DATA.getActionCode());
                         }
-                    }else {
+                    } else {
                         LOGGER.info("未取到userid!");
                     }
                 } else {
@@ -560,6 +560,7 @@ public class BonusController extends BaseController {
      * @Description
      * @author 袁波
      * @param out
+     * @param recordList
      * @throws Exception
      */
     protected void createRecordExcel(OutputStream out, List<BonusVO> vos) throws Exception {

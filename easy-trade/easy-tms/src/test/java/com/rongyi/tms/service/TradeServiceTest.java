@@ -24,6 +24,7 @@ public class TradeServiceTest extends BaseTest{
     //    @Autowired
     ROAMalllifeUserService rOAMallLifeUserService;
 
+
     @Rollback(true)
     @Test(description = "rpb接口调用--交易明细")
     public void rpbTradeDetailTest(){
@@ -62,8 +63,8 @@ public class TradeServiceTest extends BaseTest{
     public void selectByIdTest(){
         tradeDetailService.selectById(3513);
     }
-
-    //    @Test
+    
+//    @Test
     public void testGetUserCouponByOrderNo(){
         UserCoupon userCoupon = tradeDetailService.getCouponOrderRecordByOrderNo("2015071300350917");
         System.err.println("result="+userCoupon.getDiscount());

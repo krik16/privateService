@@ -29,12 +29,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.easy.coupon.entity.UserCoupon;
+import com.rongyi.easy.coupon.vo.TCCouponVO;
 import com.rongyi.easy.coupon.vo.UserCouponVO;
 import com.rongyi.rss.coupon.RoaCouponService;
-import com.rongyi.rss.coupon.RoaUserCashCouponService;
-import com.rongyi.rss.coupon.RoaUserCouponService;
-import com.rongyi.rss.tradecenter.RoaProxyUserCouponService;
-import com.rongyi.rss.tradecenter.RoaTradeUserCodeService;
+import com.rongyi.rss.coupon.RoaUserRedenvelopeService;
+import com.rongyi.rss.tradecenter.ProxyUserCouponService;
 import com.rongyi.tms.constants.Constant;
 import com.rongyi.tms.moudle.vo.CouponOrderDetailVO;
 import com.rongyi.tms.moudle.vo.CouponOrderDetailVO.CouponVO;
@@ -56,18 +55,12 @@ public class CouponOrderController extends BaseController {
 	CouponOrderService couponOrderService;
 
 	@Autowired
-	RoaUserCashCouponService roaUserCashCouponService;
-
-	@Autowired
 	private RoaUserRedenvelopeService roaUserRedenvelopeService;
 
 	@Autowired
-	RoaUserCouponService roaUserCouponService;
 
-	@Autowired
 	private ProxyUserCouponService proxyUserCouponService;
 
-	RoaProxyUserCouponService roaProxyUserCouponService;
 
 	@Autowired
 	RoaCouponService roaCouponService;
@@ -134,7 +127,7 @@ public class CouponOrderController extends BaseController {
 		CouponOrderVO couponOrderVO = couponOrderService.selectById(id);
 		BeanUtils.copyProperties(couponOrderVO,couponOrderDetailVO);
 		// 已购买的优惠券信息
-		List<UserCoupon> list = roaProxyUserCouponService.findUserCouponList(id.longValue(), couponOrderVO.getCouponId());
+		List<UserCoupon> list = proxyUserCouponService.findUserCouponList(id.longValue(), couponOrderVO.getCouponId());
 		if (!list.isEmpty()) {
 			TCCouponVO coupon = roaCouponService.findTCCouponById(list.get(0).getCouponId());
 			CouponVO couponVO = couponOrderDetailVO.new CouponVO();
@@ -145,7 +138,6 @@ public class CouponOrderController extends BaseController {
 			couponOrderDetailVO.setCouponList(couponVOList);
 		}
 		// 红包信息
-//		UserCouponVO userCouponVO = roaUserCashCouponService.getCashCoupon(couponOrderVO.getHbCode());
 		UserCouponVO userCouponVO = roaUserRedenvelopeService.findCashCoupon(couponOrderVO.getHbCode());
 		if (userCouponVO != null) {
 			BeanUtils.copyProperties(userCouponVO, couponOrderDetailVO);

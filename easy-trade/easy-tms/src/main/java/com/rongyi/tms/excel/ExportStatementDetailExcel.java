@@ -114,3 +114,4 @@ public class ExportStatementDetailExcel extends ExportBase {
 		return ConstantEnum.PAY_CHANNEL_TRANSFER.getValueStr();
 	}
 }
+

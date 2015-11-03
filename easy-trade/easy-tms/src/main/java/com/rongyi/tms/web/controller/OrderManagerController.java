@@ -494,6 +494,7 @@ public class OrderManagerController extends BaseController {
 		try {
 			List<String> picList = commodityService.getCommodityPicList(commodityId);
 			List<String> picListForEight = new ArrayList<String>();
+
 			if (picList != null && picList.size() > 8) {
 				for (int i = 0; i < 8; i++) {
 					picListForEight.add(picList.get(i));
