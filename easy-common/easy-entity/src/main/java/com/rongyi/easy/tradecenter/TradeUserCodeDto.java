@@ -13,6 +13,8 @@ public class TradeUserCodeDto implements Serializable {
 
     private Integer orderId;
 
+    private String orderNo;
+
     private Integer subOrderId;
 
     private Byte status;
@@ -21,6 +23,8 @@ public class TradeUserCodeDto implements Serializable {
 
     private String userName;
 
+    private String userPhone;
+
     private String source;
 
     private Date payTime;
@@ -28,6 +32,8 @@ public class TradeUserCodeDto implements Serializable {
     private Date useTime;
 
     private Date refundTime;
+
+    private Date endTime;
 
     public Integer getId() {
         return id;
@@ -123,5 +129,29 @@ public class TradeUserCodeDto implements Serializable {
 
     public void setRefundTime(Date refundTime) {
         this.refundTime = refundTime;
+    }
+
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
     }
 }

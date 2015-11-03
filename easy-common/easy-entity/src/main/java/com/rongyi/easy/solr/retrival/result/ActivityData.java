@@ -1,15 +1,16 @@
 package com.rongyi.easy.solr.retrival.result;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class ActivityData extends Data implements Serializable {
+    public  static final String  HOLDER_TYPE_MALL = "Mall";
+    public  static final String  HOLDER_TYPE_SHOP = "Shop";
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -7005312631637437963L;
     private String _id;
     private String title;
@@ -22,7 +23,7 @@ public class ActivityData extends Data implements Serializable {
     private String holder_type;
 
     private String thumbnail; //缩略图
-    private ArrayList<String> carouselImg = new ArrayList<String>(); //轮播图片
+    private List<String> carouselImg = new ArrayList<>(); //轮播图片
 
     private String vistedNum; //访问次数
     private String userQuota; // 用户限购数量
@@ -108,11 +109,11 @@ public class ActivityData extends Data implements Serializable {
         this.thumbnail = thumbnail;
     }
 
-    public ArrayList<String> getCarouselImg() {
+    public List<String> getCarouselImg() {
         return carouselImg;
     }
 
-    public void setCarouselImg(ArrayList<String> carouselImg) {
+    public void setCarouselImg(List<String> carouselImg) {
         this.carouselImg = carouselImg;
     }
 
@@ -258,5 +259,38 @@ public class ActivityData extends Data implements Serializable {
 
     public void setPayDownTime(Integer payDownTime) {
         this.payDownTime = payDownTime;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("_id", _id)
+                .append("title", title)
+                .append("start_time", start_time)
+                .append("end_time", end_time)
+                .append("updated_at", updated_at)
+                .append("shop_ids", shop_ids)
+                .append("mall_ids", mall_ids)
+                .append("holder_id", holder_id)
+                .append("holder_type", holder_type)
+                .append("thumbnail", thumbnail)
+                .append("carouselImg", carouselImg)
+                .append("vistedNum", vistedNum)
+                .append("userQuota", userQuota)
+                .append("grouponPrice", grouponPrice)
+                .append("grouponOriginal", grouponOriginal)
+                .append("grouponNum", grouponNum)
+                .append("buyedAmount", buyedAmount)
+                .append("restAmount", restAmount)
+                .append("useRestriction", useRestriction)
+                .append("useMode", useMode)
+                .append("grouponStyle", grouponStyle)
+                .append("type", type)
+                .append("limitPublishCount", limitPublishCount)
+                .append("limitUseCount", limitUseCount)
+                .append("limitCount", limitCount)
+                .append("afterSaleService", afterSaleService)
+                .append("payDownTime", payDownTime)
+                .toString();
     }
 }

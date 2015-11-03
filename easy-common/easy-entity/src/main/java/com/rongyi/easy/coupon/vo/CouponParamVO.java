@@ -3,9 +3,6 @@ package com.rongyi.easy.coupon.vo;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.bson.types.ObjectId;
-import org.mongodb.morphia.annotations.Property;
-
 public class CouponParamVO implements Serializable {
 
 	/**
@@ -13,7 +10,7 @@ public class CouponParamVO implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Integer id;// 券id
+	private String id;// 券id
 	  
 	private String title;// 券名称
 	
@@ -49,11 +46,11 @@ public class CouponParamVO implements Serializable {
     	
     }
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

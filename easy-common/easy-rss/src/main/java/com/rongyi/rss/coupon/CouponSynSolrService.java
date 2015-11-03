@@ -18,9 +18,9 @@ public interface CouponSynSolrService {
 
     /**
      * 更新优惠券solr状态
-     *
+     * 状态：上架[0],下架[1]
      * @param couponId
      * @param status
      */
-    void updateSolrCouponStatus(String couponId, int status);
+    boolean updateSolrCouponStatus(String couponId, int status);
 }

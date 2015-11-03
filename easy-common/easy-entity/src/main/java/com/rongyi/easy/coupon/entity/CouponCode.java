@@ -4,6 +4,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * 卡券券码
@@ -18,7 +19,7 @@ public class CouponCode implements Serializable {
     /**
      * 券码ID
      */
-    private Long id;
+    private Integer id;
 
     /**
      * 券码
@@ -65,7 +66,15 @@ public class CouponCode implements Serializable {
      */
     private String isDelete;
 
+    private String version;
 
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
     /**
      * 商场ID
      */
@@ -176,11 +185,11 @@ public class CouponCode implements Serializable {
 //        this.userSrc = userSrc;
 //    }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -302,6 +311,28 @@ public class CouponCode implements Serializable {
         this.code = code;
         this.couponId = couponId;
         this.inChannel = inChannel;
+    }
+
+    public CouponCode(String code, String couponId, String inChannel, String version) {
+        this.code = code;
+        this.couponId = couponId;
+        this.inChannel = inChannel;
+        this.version = version;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        CouponCode that = (CouponCode) o;
+        return Objects.equals(code, that.code) && Objects.equals(inChannel, that.inChannel);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(code, inChannel);
     }
 
     @Override

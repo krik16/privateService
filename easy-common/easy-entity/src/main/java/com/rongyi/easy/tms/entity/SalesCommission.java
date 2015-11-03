@@ -38,6 +38,8 @@ public class SalesCommission implements Serializable {
     
     private String buyerAccount;
 
+    private Integer guideType;
+
     public Integer getId() {
         return id;
     }
@@ -150,7 +152,15 @@ public class SalesCommission implements Serializable {
 		this.buyerAccount = buyerAccount;
 	}
 
-	@Override
+    public Integer getGuideType() {
+        return guideType;
+    }
+
+    public void setGuideType(Integer guideType) {
+        this.guideType = guideType;
+    }
+
+    @Override
     public String toString() {
         return "SalesCommission [id=" + id + ", guideId=" + guideId + ", orderNo=" + orderNo + ", commissionAmount="
                 + commissionAmount + ", status=" + status + ", createAt=" + createAt + ", picUploadAt=" + picUploadAt
