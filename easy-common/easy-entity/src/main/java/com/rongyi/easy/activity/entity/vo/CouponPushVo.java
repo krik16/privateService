@@ -11,6 +11,7 @@
 package com.rongyi.easy.activity.entity.vo;
 
 import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.malllife.common.util.DateTool;
 
 import java.text.SimpleDateFormat;
 
@@ -147,11 +148,15 @@ public class CouponPushVo {
      */
 
     public CouponPushVo(Coupon coupon) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> develop-yuzhijian
         super();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:ss");
         if (coupon.getStatus() != null) {
             this.checkStatus = coupon.getStatus().equals(2) ? "已通过" : (coupon.getStatus().equals("0") ? "待审核" : "未通过");
+<<<<<<< HEAD
         }
         if (coupon.getCouponType() != null) {
             this.couponType = coupon.getCouponType().equals(0) ? "优惠券" : "现金券";
@@ -180,6 +185,20 @@ public class CouponPushVo {
             }
         }
 
+=======
+        }
+        if (coupon.getCouponType() != null) {
+            this.couponType = coupon.getCouponType()==0 ? "代金券" : (coupon.getCouponType()==2?"红包":"抵扣券");
+        }
+        this.currentPrice = coupon.getCurrPrice2Double();
+        this.id = coupon.getId().toString();
+        this.publishEndTime = coupon.getPublishEndAt() == null ? "" : DateTool.date2String(coupon.getPublishEndAt(), DateTool.FORMAT_DATETIME);
+        this.publishStartTime = coupon.getPublishStartAt() == null ? "" : DateTool.date2String(coupon.getPublishStartAt(),DateTool.FORMAT_DATETIME);
+        this.validateStartTime = coupon.getValidStartAt() == null ? "" : DateTool.date2String(coupon.getValidEndAt(), DateTool.FORMAT_DATETIME);
+        this.validateEndTime = coupon.getValidEndAt() == null ? "" : DateTool.date2String(coupon.getValidEndAt(),DateTool.FORMAT_DATETIME);
+        this.restCount = coupon.getStockCount();
+        this.sourceTarget=coupon.getPublishChannel()==null?"":(coupon.getPublishChannel()==0?"大运营平台":"商家管理后台");
+>>>>>>> develop-yuzhijian
         this.title = coupon.getName();
         this.discount = coupon.getDiscount() == null ? "0" : coupon.getDiscount2Double() + "";
     }

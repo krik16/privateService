@@ -132,9 +132,9 @@ public enum CodeEnum {
     ERROR_APEAL_MAXOVER("-4001","维权次数已达上限"),
     /** 子订单评价错误提示*/
     ERROR_EVALUATE_EXIST("-5001","已评价"),
-    /** 现金券优惠券错误提示*/
-    ERROR_COUPON_OUTDATE("-6001","此现金券不可用"),
-    ERROR_COUPON_REPEAT("-6002","一张现金券只能使用一次"),
+    /** 红包优惠券错误提示*/
+    ERROR_COUPON_OUTDATE("-6001","此红包不可用"),
+    ERROR_COUPON_REPEAT("-6002","一张红包只能使用一次"),
     ERROR_COUPON_PUBLISH_OVER("-6003","每日限量发行数填写错误"),
 
     ERROR_ACCOUNT_INSUFFICIENT_BALANCE("-7001","账户余额不足"),

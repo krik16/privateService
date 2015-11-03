@@ -34,7 +34,7 @@ public interface RoaCouponRecordService {
 
 	/**
 	* @Title: updateRecordByUse
-	* @Description: TODO(使用红包时修改现金券领用记录)
+	* @Description: TODO(使用红包时修改红包领用记录)
 	* @param couponCode
 	* @param orderNo
 	* @param orderType 订单类型: 商品订单[0] 优惠券订单[1]

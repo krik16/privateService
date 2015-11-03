@@ -9,6 +9,8 @@
  */
 package com.rongyi.easy.coupon.vo;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -16,7 +18,7 @@ import java.util.List;
  * @author ZhengYl
  *
  */
-public class RmmmCouponVO implements Serializable {
+public class MSCouponVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -55,7 +57,7 @@ public class RmmmCouponVO implements Serializable {
 	private Double currentPrice;
 
 	/**
-	 * 状态(审核中、已上线、已过期、已下线、已使用)
+	 * 状态(审核中[0]、已上线[1]、已使用[2]、已过期[3]、已下线[4])
 	 */
 	private String status;
 
@@ -99,8 +101,8 @@ public class RmmmCouponVO implements Serializable {
 	 * @param shopName 店铺名称
 	 * @param mallName 商场名称
 	 */
-	public RmmmCouponVO(String couponId, String title, List<String> detailPicUrls, List<String> shopNameList, Double originalPrice,
-						Double currentPrice, String status, int usedAmount, int totalCount, Boolean ifLimit, String shopName, String mallName) {
+	public MSCouponVO(String couponId, String title, List<String> detailPicUrls, List<String> shopNameList, Double originalPrice,
+					  Double currentPrice, String status, int usedAmount, int totalCount, Boolean ifLimit, String shopName, String mallName) {
 		super();
 		this.couponId = couponId;
 		this.title = title;
@@ -127,8 +129,8 @@ public class RmmmCouponVO implements Serializable {
 	 * @param usedAmount 已购数量
 	 * @param totalCount 总量
 	 */
-	public RmmmCouponVO(String couponId, String title, List<String> detailPicUrls, List<String> shopNameList, Double originalPrice,
-						Double currentPrice, String status, int usedAmount, int totalCount) {
+	public MSCouponVO(String couponId, String title, List<String> detailPicUrls, List<String> shopNameList, Double originalPrice,
+					  Double currentPrice, String status, int usedAmount, int totalCount) {
 		super();
 		this.couponId = couponId;
 		this.title = title;
@@ -245,4 +247,22 @@ public class RmmmCouponVO implements Serializable {
 		this.mallName = mallName;
 	}
 
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append("couponId", couponId)
+				.append("title", title)
+				.append("listPicUrl", listPicUrl)
+				.append("detailPicUrls", detailPicUrls)
+				.append("shopNameList", shopNameList)
+				.append("originalPrice", originalPrice)
+				.append("currentPrice", currentPrice)
+				.append("status", status)
+				.append("usedAmount", usedAmount)
+				.append("totalCount", totalCount)
+				.append("ifLimit", ifLimit)
+				.append("shopName", shopName)
+				.append("mallName", mallName)
+				.toString();
+	}
 }

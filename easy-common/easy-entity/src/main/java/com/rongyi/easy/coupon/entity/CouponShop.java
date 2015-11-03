@@ -26,29 +26,13 @@ public class CouponShop implements Serializable{
      * 店铺名
      */
     private String shopName;
-
-    /**
-     * 店铺所在商场名
-     */
-    private String shopMallName;
-
-    /**
-     * 店铺logo
-     */
-    private String shopLogoUrl;
-
-    /**
-     * 店铺品牌
-     */
-    private String shopBrand;
-
     private String shopAddress;
     private String shopBulding;
     private String shopFloor;
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("id", id).append("couponId", couponId).append("shopId", shopId).append("shopName", shopName).append("shopMallName", shopMallName).append("shopLogoUrl", shopLogoUrl).append("shopBrand", shopBrand).append("shopAddress", shopAddress).append("shopBulding", shopBulding).append("shopFloor", shopFloor).toString();
+        return new ToStringBuilder(this).append("id", id).append("couponId", couponId).append("shopId", shopId).append("shopName", shopName).append("shopAddress", shopAddress).append("shopBulding", shopBulding).append("shopFloor", shopFloor).toString();
     }
 
     public String getShopAddress() {
@@ -107,14 +91,8 @@ public class CouponShop implements Serializable{
         this.shopName = shopName;
     }
 
-    public String getShopMallName() {
-        return shopMallName;
-    }
 
-    public void setShopMallName(String shopMallName) {
-        this.shopMallName = shopMallName;
-    }
-
+<<<<<<< HEAD:easy-common/easy-entity/src/main/java/com/rongyi/easy/coupon/entity/CouponShop.java
     public String getShopLogoUrl() {
         return shopLogoUrl;
     }
@@ -139,6 +117,8 @@ public class CouponShop implements Serializable{
         this.shopLogoUrl = shopLogoUrl;
         this.shopBrand = shopBrand;
     }
+=======
+>>>>>>> develop-yuzhijian:easy-common/easy-entity/src/main/java/com/rongyi/easy/coupon/entity/CouponShop.java
 
     public CouponShop(String couponId, String shopId) {
 

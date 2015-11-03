@@ -1,5 +1,7 @@
 package com.rongyi.easy.solr.result;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -283,4 +285,39 @@ public class ActivitySearchInfo implements Serializable {
 		this.payDownTime = payDownTime;
 	}
 
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append("id", id)
+				.append("name", name)
+				.append("addr", addr)
+				.append("pic_url", pic_url)
+				.append("location", location)
+				.append("description", description)
+				.append("city_name", city_name)
+				.append("shop_own", shop_own)
+				.append("title", title)
+				.append("start_time", start_time)
+				.append("end_time", end_time)
+				.append("holder_id", holder_id)
+				.append("holder_type", holder_type)
+				.append("thumbnail", thumbnail)
+				.append("carouselImg", carouselImg)
+				.append("vistedNum", vistedNum)
+				.append("userQuota", userQuota)
+				.append("grouponPrice", grouponPrice)
+				.append("grouponOriginal", grouponOriginal)
+				.append("grouponNum", grouponNum)
+				.append("buyedAmount", buyedAmount)
+				.append("restAmount", restAmount)
+				.append("useRestriction", useRestriction)
+				.append("useMode", useMode)
+				.append("grouponStyle", grouponStyle)
+				.append("limitPublishCount", limitPublishCount)
+				.append("limitUseCount", limitUseCount)
+				.append("limitCount", limitCount)
+				.append("afterSaleService", afterSaleService)
+				.append("payDownTime", payDownTime)
+				.toString();
+	}
 }

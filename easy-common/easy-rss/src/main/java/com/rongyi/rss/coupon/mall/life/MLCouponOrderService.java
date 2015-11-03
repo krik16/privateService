@@ -71,13 +71,13 @@ public interface MLCouponOrderService {
     List<CouponOrderItem> findOrderItemsById(Long orderId);
 
     /**
-     * 优惠券立即购买
+     * 用户已购买代金券数
      *
      * @param couponId
      * @param userId
      * @return
      */
-    Map<String, Object> buyCoupon(String couponId, String userId);
+    int buyedCount(String couponId, String userId);
 
     /**
      * 提交优惠券订单
@@ -198,6 +198,10 @@ public interface MLCouponOrderService {
 
     /**
      * 根据卡券类型购买代金券或领取红包
+<<<<<<< HEAD:easy-common/easy-rss/src/main/java/com/rongyi/rss/coupon/mall/life/MLCouponOrderService.java
+=======
+     *
+>>>>>>> develop-yuzhijian:easy-common/easy-rss/src/main/java/com/rongyi/rss/coupon/mall/life/MLCouponOrderService.java
      * @param param
      * @param couponType
      * @return
@@ -205,6 +209,18 @@ public interface MLCouponOrderService {
     ResponseResult createCouponOrder(CouponOrderParam param, String couponType);
 
     /**
+<<<<<<< HEAD:easy-common/easy-rss/src/main/java/com/rongyi/rss/coupon/mall/life/MLCouponOrderService.java
+=======
+     * 买家已购买数量
+     *
+     * @param couponId
+     * @param userId
+     * @return
+     */
+    int dailyBuyCount(String couponId, String userId);
+
+    /**
+>>>>>>> develop-yuzhijian:easy-common/easy-rss/src/main/java/com/rongyi/rss/coupon/mall/life/MLCouponOrderService.java
      * 定时关闭未支付订单
      *
      * @return

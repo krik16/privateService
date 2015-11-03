@@ -67,7 +67,7 @@ public interface RoaRedenvelopeComService {
     boolean checkCoupon(String id, int checkStatus, String checkDesc) throws Exception;
 
     /**
-     * 配置现金券
+     * 配置红包
      *
      * @param cashCoupon 关联商品
      * @return

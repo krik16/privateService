@@ -40,7 +40,7 @@ public interface CMFlopgoRecordService {
 	 * @param flopgoRecordEntity
 	 * @param State
 	 */
-	public void updateReceiveTrue(FlopgoRecordEntity flopgoRecordEntity,String State) throws Exception;
+	public int updateReceiveTrue(FlopgoRecordEntity flopgoRecordEntity,String State) throws Exception;
 	
 	/**
 	 * 通过用户id，渠道，奖品id，卷码得到详细的用户信息

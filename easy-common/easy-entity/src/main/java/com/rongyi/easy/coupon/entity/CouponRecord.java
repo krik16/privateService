@@ -10,7 +10,7 @@ import java.util.Date;
 
 /**
  * @author lqy
- *         现金券领用记录实体
+ *         红包领用记录实体
  */
 @Entity(value = "coupon_record", noClassnameStored = true)
 public class CouponRecord implements Serializable {
@@ -31,7 +31,7 @@ public class CouponRecord implements Serializable {
     private String title;
 
     /**
-     * 券类型: 优惠券[02] 现金券[03]
+     * 券类型: 优惠券[02] 红包[03]
      */
     @Property("coupon_type")
     private String couponType;

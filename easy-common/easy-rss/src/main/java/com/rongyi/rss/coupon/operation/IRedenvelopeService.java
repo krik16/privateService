@@ -44,11 +44,10 @@ public interface IRedenvelopeService {
     /**
      * 分页查询
      *
-     * @param RedenvelopeParam
-     * @throws RuntimeExceptiona
+     * @param param
      * @return
      */
-    PagingVO<RedenvelopCouponVO> findAllByPage(RedenvelopeParam paramVo);
+    PagingVO<RedenvelopCouponVO> findAllByPage(RedenvelopeParam param);
 
     /**
      * 审核现金劵
@@ -61,7 +60,7 @@ public interface IRedenvelopeService {
     boolean checkCoupon(String id, int checkStatus, String checkDesc) throws Exception;
 
     /**
-     * 配置现金券
+     * 配置红包
      *
      * @param cashCoupon 关联商品
      * @return

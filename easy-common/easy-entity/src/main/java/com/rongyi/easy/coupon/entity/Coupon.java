@@ -1,5 +1,10 @@
 package com.rongyi.easy.coupon.entity;
 
+<<<<<<< HEAD
+=======
+import com.rongyi.core.util.AmountConversion;
+import com.rongyi.easy.coupon.enumerate.CouponEnum;
+>>>>>>> develop-yuzhijian
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.ListUtils;
 import org.apache.commons.lang.StringUtils;
@@ -24,6 +29,7 @@ public class Coupon implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
+<<<<<<< HEAD
      * 主键(兼容mongoId)
      */
     private String id;
@@ -222,6 +228,214 @@ public class Coupon implements Serializable {
     private Date updateAt;
 
     /**
+=======
+     * 展示区域：常规区域,活动区域;未选中[0]，选中[1] 例如 "1,1"表示都选中
+     */
+    public final static String DISPLAY_REGION_ALL = "1,1";
+    public final static String DISPLAY_REGION_NORMAL = "1,0";
+    public final static String DISPLAY_REGION_ACTIVITY = "0,1";
+
+    /**
+     * 主键(兼容mongoId)
+     */
+    private String id;
+
+    /**
+     * 卡券名称
+     */
+    private String name;
+
+    /**
+     * 卡券类型:代金券[0], 抵扣券[1], 红包[2]
+     */
+    private Integer couponType;
+
+    /**
+     * 验证方式：容易后验证[0], 互动屏票据[1], 两者兼容[2]，商家验证[3](属于第三方导入券)
+     */
+    private Integer validateType;
+
+    /**
+     * 券码发行量
+     */
+    private Integer totalCount;
+
+    /**
+     * 库存量
+     */
+    private Integer stockCount;
+
+    /**
+     * 原价
+     */
+    private Integer origPrice;
+
+    /**
+     * 现价
+     */
+    private Integer currPrice;
+
+    /**
+     * 折扣价,属于红包字段
+     */
+    private Integer discount;
+
+    /**
+     * 展示区域：常规区域,活动区域;未选中[0]，选中[1] 例如 "1,1"表示都选中
+     */
+    private String displayRegion;
+
+    /**
+     * 0为不支持。第一位：随时退、第二位：过期退 第三位：免预约、第四位：不可退
+     * 大运营平台，平台代金券 售后:随时退,过期退,免预约,不可退；未选中[0]，选中[1] 例如 "1,1,1,1"表示都选中,当随时退和过期退都未选中，则表示不可退
+     */
+    private String afterSaleService;
+
+    /**
+     * 发布开始时间
+     */
+    private Date publishStartAt;
+
+    /**
+     * 发布结束时间
+     */
+    private Date publishEndAt;
+
+
+    /**
+     * 销售开始时间
+     */
+    private Date saleStartAt;
+
+    /**
+     * 销售结束时间
+     */
+    private Date saleEndAt;
+
+    /**
+     * 有效期开始时间
+     */
+    private Date validStartAt;
+
+    /**
+     * 有效期结束时间
+     */
+    private Date validEndAt;
+
+    /**
+     * 使用限制
+     */
+    private String limitDesc;
+
+    /**
+     * 使用说明
+     */
+    private String usageDesc;
+
+    /**
+     * 推荐说明，属于红包字段
+     */
+    private String recommend;
+
+    /**
+     * 备注
+     */
+    private String remark;
+
+    /**
+     * 列表图url,只有一张
+     */
+    private String listPicUrl;
+
+    /**
+     * 详情图url，多张图以";"隔开
+     */
+    private String detailPicUrl;
+
+    /**
+     * 关联类型
+     * 代金券：集团[0],品牌[1], 商场 [2],店铺[3];
+     * 红包 ：全场[0],商品[1]
+     */
+    private Integer relatedType;
+
+    /**
+     * 每人限购数量
+     */
+    private Integer limitCount;
+
+    /**
+     * 每人每日限用张数
+     */
+    private Integer limitUseCount;
+
+    /**
+     * 每日最大发行张数
+     */
+    private Integer limitPublishCount;
+
+    /**
+     * 信息同步终端: 容易逛,互动屏,微信 [1,1,1]表示三个都没选中
+     */
+    private String synTarget;
+
+    /**
+     * 卡券发布渠道：大运营平台[0], 商家管理后台[1]
+     */
+    private Integer publishChannel;
+
+    /**
+     * 状态: 待审核[0], 审核未通过[1], 审核通过[2]
+     */
+    private Integer status;
+
+    /**
+     * 导入渠道
+     */
+    private Integer inChannel;
+
+    /**
+     * 导入渠道名称
+     */
+    private String inChannelName;
+
+    /**
+     * 推广渠道
+     */
+    private Integer outChannel;
+
+    /**
+     * 推广渠道名称
+     */
+    private String outChannelName;
+
+    /**
+     * 店铺对应的公司名
+     */
+    private String sourceName;
+
+    /**
+     * 创建人
+     */
+    private String createUser;
+
+    /**
+     * 创建时间
+     */
+    private Date createAt;
+
+    /**
+     * 更新人
+     */
+    private String updateUser;
+
+    /**
+     * 更新时间
+     */
+    private Date updateAt;
+
+    /**
+>>>>>>> develop-yuzhijian
      * 是否是第三方券 否[false], 是[true], 默认不是第三方券fasle
      */
     private Boolean isThird;
@@ -287,12 +501,20 @@ public class Coupon implements Serializable {
      * 默认 false;
      */
     private Boolean isGeneral;
+<<<<<<< HEAD
 
     /**
      * 是否已关联活动 已关联[true] 未关联[false]默认为false
      */
     private Boolean isRelatedActivity;
 
+=======
+
+    /**
+     * 卡券关联集团、品牌、店铺时如果没有选择下面的店铺则默认是关联该类型下所有的店铺，isRelatedAll=true
+     */
+    private Boolean isRelatedAll;
+>>>>>>> develop-yuzhijian
 
     public String getId() {
         return id;
@@ -349,7 +571,11 @@ public class Coupon implements Serializable {
     public double getOrigPrice2Double() {
         double val = 0D;
         if (origPrice != null) {
+<<<<<<< HEAD
             val = BigDecimal.valueOf(origPrice).divide(BigDecimal.valueOf(100.00D)).setScale(2).doubleValue();
+=======
+            val = AmountConversion.fenToYuan(origPrice);
+>>>>>>> develop-yuzhijian
         }
         return val;
     }
@@ -360,6 +586,7 @@ public class Coupon implements Serializable {
 
     public Integer getCurrPrice() {
         return currPrice;
+<<<<<<< HEAD
     }
 
     public double getCurrPrice2Double() {
@@ -382,6 +609,30 @@ public class Coupon implements Serializable {
         double val = 0D;
         if (discount != null) {
             val = BigDecimal.valueOf(discount).divide(BigDecimal.valueOf(100.00D)).setScale(2).doubleValue();
+=======
+    }
+
+    public double getCurrPrice2Double() {
+        double val = 0D;
+        if (currPrice != null) {
+            val = AmountConversion.fenToYuan(currPrice);
+        }
+        return val;
+    }
+
+    public void setCurrPrice(Integer currPrice) {
+        this.currPrice = currPrice;
+    }
+
+    public Integer getDiscount() {
+        return discount;
+    }
+
+    public double getDiscount2Double() {
+        double val = 0D;
+        if (discount != null) {
+            val = AmountConversion.fenToYuan(discount);
+>>>>>>> develop-yuzhijian
         }
         return val;
     }
@@ -392,6 +643,160 @@ public class Coupon implements Serializable {
 
     public String getDisplayRegion() {
         return displayRegion;
+    }
+
+<<<<<<< HEAD
+    public void setDisplayRegion(String displayRegion) {
+        this.displayRegion = displayRegion;
+    }
+
+    public String getAfterSaleService() {
+        return afterSaleService;
+    }
+
+    public List<Integer> getAfterSaleService2List() {
+        List<Integer> list = new ArrayList<>();
+        if (StringUtils.isNotBlank(afterSaleService)) {
+            for (String e : afterSaleService.split(",")) {
+                list.add(Integer.valueOf(e));
+            }
+        }
+        return list;
+    }
+
+    public void setAfterSaleService(String afterSaleService) {
+        this.afterSaleService = afterSaleService;
+    }
+
+    public Date getPublishStartAt() {
+        return publishStartAt;
+    }
+
+    public void setPublishStartAt(Date publishStartAt) {
+        this.publishStartAt = publishStartAt;
+    }
+
+    public Date getPublishEndAt() {
+        return publishEndAt;
+    }
+
+    public void setPublishEndAt(Date publishEndAt) {
+        this.publishEndAt = publishEndAt;
+    }
+
+    public Date getValidStartAt() {
+        return validStartAt;
+    }
+
+    public void setValidStartAt(Date validStartAt) {
+        this.validStartAt = validStartAt;
+    }
+
+    public Date getValidEndAt() {
+        return validEndAt;
+    }
+
+    public void setValidEndAt(Date validEndAt) {
+        this.validEndAt = validEndAt;
+    }
+
+    public String getLimitDesc() {
+        return limitDesc;
+    }
+
+    public void setLimitDesc(String limitDesc) {
+        this.limitDesc = limitDesc;
+    }
+
+    public String getUsageDesc() {
+        return usageDesc;
+    }
+
+    public void setUsageDesc(String usageDesc) {
+        this.usageDesc = usageDesc;
+    }
+
+    public String getRecommend() {
+        return recommend;
+    }
+
+    public void setRecommend(String recommend) {
+        this.recommend = recommend;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getListPicUrl() {
+        return listPicUrl;
+    }
+
+    public void setListPicUrl(String listPicUrl) {
+        this.listPicUrl = listPicUrl;
+    }
+
+    public String getDetailPicUrl() {
+        return detailPicUrl;
+    }
+
+    public List<String> getDetailPicUrls() {
+        List<String> list = ListUtils.EMPTY_LIST;
+        if (StringUtils.isNotBlank(detailPicUrl)) {
+            list = Arrays.asList(detailPicUrl.split(";"));
+        }
+        return list;
+    }
+
+    /**
+     * 优惠券缩略图
+     *
+     * @return
+     */
+    public String getThumbnail() {
+        String pic = "";
+        if (!this.getDetailPicUrls().isEmpty()) {
+            pic = this.getDetailPicUrls().get(0);
+        }
+        return pic;
+    }
+
+    public void setDetailPicUrl(String detailPicUrl) {
+        this.detailPicUrl = detailPicUrl;
+    }
+
+    public Integer getRelatedType() {
+        return relatedType;
+    }
+
+    public void setRelatedType(Integer relatedType) {
+        this.relatedType = relatedType;
+    }
+
+    public Integer getLimitCount() {
+        return limitCount;
+    }
+
+    public void setLimitCount(Integer limitCount) {
+        this.limitCount = limitCount;
+    }
+
+=======
+    /**
+     * 卡券是否活动展示区域
+     *
+     * @return
+     */
+    public boolean isActivityDisplayRegion() {
+        boolean val = false;
+        if (StringUtils.isNotBlank(displayRegion) && Coupon.DISPLAY_REGION_ACTIVITY.equals(displayRegion)) {
+            val = true;
+        }
+        return val;
     }
 
     public void setDisplayRegion(String displayRegion) {
@@ -533,6 +938,7 @@ public class Coupon implements Serializable {
         this.limitCount = limitCount;
     }
 
+>>>>>>> develop-yuzhijian
     public Integer getLimitUseCount() {
         return limitUseCount;
     }
@@ -543,6 +949,7 @@ public class Coupon implements Serializable {
 
     public Integer getLimitPublishCount() {
         return limitPublishCount;
+<<<<<<< HEAD
     }
 
     public void setLimitPublishCount(Integer limitPublishCount) {
@@ -593,6 +1000,73 @@ public class Coupon implements Serializable {
         return sourceName;
     }
 
+=======
+    }
+
+    public void setLimitPublishCount(Integer limitPublishCount) {
+        this.limitPublishCount = limitPublishCount;
+    }
+
+    public String getSynTarget() {
+        return synTarget;
+    }
+
+    public void setSynTarget(String synTarget) {
+        this.synTarget = synTarget;
+    }
+
+    public Integer getPublishChannel() {
+        return publishChannel;
+    }
+
+    public void setPublishChannel(Integer publishChannel) {
+        this.publishChannel = publishChannel;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Integer getPublishStatus() {
+        if (Integer.valueOf(CouponEnum.PASS.getValue()).equals(status)) {
+            if (!isOffStock && new Date().before(publishStartAt)) {
+                return CouponEnum.UNPUBLISH.getValue();
+            } else if (!isOffStock && new Date().after(publishStartAt) && new Date().before(publishEndAt)) {
+                return CouponEnum.PROCEEING.getValue();
+            } else if (!isOffStock && new Date().after(publishEndAt)) {
+                return CouponEnum.ENDED.getValue();
+            } else if (isOffStock) {
+                return CouponEnum.OFF.getValue();
+            }
+        }
+        return null;
+    }
+
+    public Integer getInChannel() {
+        return inChannel;
+    }
+
+    public void setInChannel(Integer inChannel) {
+        this.inChannel = inChannel;
+    }
+
+    public Integer getOutChannel() {
+        return outChannel;
+    }
+
+    public void setOutChannel(Integer outChannel) {
+        this.outChannel = outChannel;
+    }
+
+    public String getSourceName() {
+        return sourceName;
+    }
+
+>>>>>>> develop-yuzhijian
     public void setSourceName(String sourceName) {
         this.sourceName = sourceName;
     }
@@ -763,6 +1237,12 @@ public class Coupon implements Serializable {
     }
 
     public Integer getSaledCount() {
+<<<<<<< HEAD
+=======
+        if (stockCount == null) {
+            stockCount = totalCount;
+        }
+>>>>>>> develop-yuzhijian
         return (totalCount - stockCount < 0) ? 0 : totalCount - stockCount;
     }
 
@@ -790,12 +1270,21 @@ public class Coupon implements Serializable {
         this.outChannelName = outChannelName;
     }
 
+<<<<<<< HEAD
     public Boolean getIsRelatedActivity() {
         return isRelatedActivity;
     }
 
     public void setIsRelatedActivity(Boolean isRelatedActivity) {
         this.isRelatedActivity = isRelatedActivity;
+=======
+    public Boolean getIsRelatedAll() {
+        return isRelatedAll;
+    }
+
+    public void setIsRelatedAll(Boolean isRelatedAll) {
+        this.isRelatedAll = isRelatedAll;
+>>>>>>> develop-yuzhijian
     }
 
 
@@ -854,7 +1343,11 @@ public class Coupon implements Serializable {
                 .append("purchaseType", purchaseType)
                 .append("visitedCount", visitedCount)
                 .append("isGeneral", isGeneral)
+<<<<<<< HEAD
                 .append("isRelatedActivity", isRelatedActivity)
+=======
+                .append("isRelatedAll", isRelatedAll)
+>>>>>>> develop-yuzhijian
                 .toString();
     }
 }

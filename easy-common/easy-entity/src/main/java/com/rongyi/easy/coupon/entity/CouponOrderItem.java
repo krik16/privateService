@@ -12,7 +12,11 @@ import java.util.Date;
  *
  * @author Breggor
  */
+<<<<<<< HEAD
 
+=======
+@Deprecated
+>>>>>>> develop-yuzhijian
 public class CouponOrderItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,7 +51,7 @@ public class CouponOrderItem implements Serializable {
     private String name;
 
     /**
-     * 卡券类型: 优惠券[02] 现金券[03]
+     * 卡券类型: 优惠券[02] 红包[03]
      */
     private String couponType;
 

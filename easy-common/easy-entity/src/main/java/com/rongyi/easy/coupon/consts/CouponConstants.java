@@ -102,6 +102,26 @@ public interface CouponConstants {
         Integer NO_CHECK = 0;
         Integer CHECK_FAILURE = 1;
         Integer CHECK_SUCCESS = 2;
+<<<<<<< HEAD
+=======
+    }
+
+    /**
+     * 券码类型：抵扣券[01] 代金券[02] 红包[03]
+     */
+    interface CouponCodeType {
+        String REBATE = "01";
+        String VOUCHER = "02";
+        String REDENVELOPE = "03";
+    }
+
+    /**
+     * 卡券发布渠道 大运营[0] 商家[1]
+     */
+    interface CouponPublishChannel {
+        Integer OPERATION = 0;
+        Integer MERCHANT = 1;
+>>>>>>> develop-yuzhijian
     }
 
 }

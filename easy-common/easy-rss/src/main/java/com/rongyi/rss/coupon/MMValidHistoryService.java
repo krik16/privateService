@@ -20,7 +20,11 @@ public interface MMValidHistoryService {
      * @param param
      * @return
      */
+<<<<<<< HEAD
     PagingVO<ValidHistory> getValidHostoryPage(MMValidHistoryParam params);
+=======
+    PagingVO<ValidHistory> getValidHostoryPage(MMValidHistoryParam param);
+>>>>>>> develop-yuzhijian
 
     /**
      * 分页查询核销佣金

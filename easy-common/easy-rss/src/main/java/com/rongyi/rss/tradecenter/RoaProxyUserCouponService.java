@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface RoaProxyUserCouponService {
     /**
-     * 根据券码查询用户优惠现金券
+     * 根据券码查询用户优惠红包
      *
      * @param couponCode
      * @return
@@ -17,7 +17,7 @@ public interface RoaProxyUserCouponService {
     UserCoupon getUserCoupon(String couponCode);
 
     /**
-     * 更新用户优惠现金券
+     * 更新用户优惠红包
      *
      * @param userCoupon
      */

@@ -67,7 +67,7 @@ public class CouponOrder implements Serializable {
     private Integer tradeWay;
 
     /**
-     * 现金券码
+     * 红包码
      */
     private String cashCouponCode;
 
