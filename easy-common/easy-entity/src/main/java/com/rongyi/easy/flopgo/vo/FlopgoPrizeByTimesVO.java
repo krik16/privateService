@@ -1,10 +1,9 @@
 package com.rongyi.easy.flopgo.vo;
 
-import com.rongyi.easy.coupon.entity.Coupon;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.vo.CouponVO;
 
@@ -64,10 +63,10 @@ public class FlopgoPrizeByTimesVO implements Serializable{
 
 			this.detail_img=flopprize.getDetailPicUrls();
 			if("02".equals(flopprize.getCouponType())){
-			//	this.actual_price=flopprize.getOrigPrice2Double();
-				//this.discount_price=flopprize.getCurrPrice2Double();
+				this.actual_price=flopprize.getOriginalPrice();
+				this.discount_price=flopprize.getCurrentPrice();
 				this.scope=null;
-				//this.recommendation=flopprize.getUsageDesc();
+				this.recommendation=flopprize.getUseDescription();
 			}
 			if("03".equals(flopprize.getCouponType())){
 				this.discount_price=flopprize.getDiscount();

@@ -1,8 +1,5 @@
 package com.rongyi.easy.flopgo.vo;
 
-import com.rongyi.easy.coupon.entity.Coupon;
-import com.rongyi.easy.coupon.entity.CouponCommodity;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -11,10 +8,9 @@ import com.rongyi.easy.coupon.vo.CouponVO;
 
 /**
  * 用户返回的是修改奖品状态的接口的vo
- *
  * @author user
+ *
  */
-
 public class UpdatePrizeStatusVO implements Serializable
 {
 
@@ -26,7 +22,6 @@ public class UpdatePrizeStatusVO implements Serializable
     private String username;//用户名
     private String channel;//用户渠道
     private String activityID;//活动id
-
     private String active_status="0";//券状态
     private String coupon_id;//卷码
     private String type;//卷类型
@@ -39,7 +34,6 @@ public class UpdatePrizeStatusVO implements Serializable
     private double discount_price;//折扣价格
     private List<String> thumb_img;//缩略图
     private List<String> detail_img;//详情图
-
     public UpdatePrizeStatusVO(){
 
     }
@@ -51,24 +45,27 @@ public class UpdatePrizeStatusVO implements Serializable
     public void setId(String id) {
         this.id = id;
     }
-    public UpdatePrizeStatusVO(CouponVO coupon){
-        if(coupon!=null) {
-            this.type = coupon.getCouponType();
-            this.title = coupon.getTitle();
-            this.restrictions = coupon.getUseDescription();
 
-            if ("02".equals(coupon.getCouponType())) {
-                this.actual_price = coupon.getOriginalPrice();
-                this.discount_price = coupon.getCurrentPrice();
-                this.scope = null;
-                this.recommendation = coupon.getUseDescription();
+    public UpdatePrizeStatusVO(CouponVO coupon){
+        if(coupon!=null){
+            this.type=coupon.getCouponType();
+            this.title=coupon.getTitle();
+            this.restrictions=coupon.getUseDescription();
+
+            if("02".equals(coupon.getCouponType())){
+                this.actual_price=coupon.getOriginalPrice();
+                this.discount_price=coupon.getCurrentPrice();
+                this.scope=null;
+                this.recommendation=coupon.getUseDescription();
             }
-            if ("03".equals(coupon.getCouponType())) {
-                this.discount_price = coupon.getDiscount();
-                this.scope = coupon.getProducts();
-                this.recommendation = coupon.getRecommend();
+            if("03".equals(coupon.getCouponType())){
+                this.discount_price=coupon.getDiscount();
+                this.scope=coupon.getProducts();
+                this.recommendation=coupon.getRecommend();
             }
-            this.detail_img = coupon.getDetailPicUrls();
+            this.detail_img=coupon.getDetailPicUrls();
+
+
         }
 
         }
