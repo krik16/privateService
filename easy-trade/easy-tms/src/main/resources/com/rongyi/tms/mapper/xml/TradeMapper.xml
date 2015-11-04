@@ -44,7 +44,7 @@
 			jdbcType="VARCHAR" />
 		<result column="score" property="score" jdbcType="INTEGER" />
 		<result column="hb_discount" property="hbDiscount" jdbcType="INTEGER" />
-		<result column="guide_type" property="guideType" jdbcType="VARCHAR" />
+		<result column="guide_type" property="guideType" jdbcType="INTEGER" />
 
 	</resultMap>
 
@@ -247,11 +247,11 @@
 		</if>
 			<!-- 订单类型 -->
 		<if test="guideType != null and guideType != ''">
-			AND payment_order.guide_type = #{guideType}
+			AND order_form.guide_type = #{guideType}
 		</if>
 	</sql>
 	<select id="selectTradePageList" resultMap="BaseResultMap"
-		parameterType="java.lang.Integer">
+		parameterType="map">
 		select
 		<include refid="Base_Column_List" />
 		from

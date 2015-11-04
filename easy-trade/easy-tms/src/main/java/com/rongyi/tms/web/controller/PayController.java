@@ -167,7 +167,7 @@ public class PayController extends BaseController {
 			map.put("status", ConstantEnum.TRADE_STATUS_PAY_NO.getCodeInt());
 			map.put("tradeType", ConstantEnum.TRADE_TYPE_EXCE_PAY.getCodeInt());
 			List<TradeVO> list = buildList(refundService.selectRefundPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE));
-			OrderFormEntity orderFormEntity = null;
+				OrderFormEntity orderFormEntity = null;
 			for (TradeVO tradeVO : list) {
 				orderFormEntity = rOAOrderFormService.getOrderFormByOrderNum(tradeVO.getOrderNo());
 				if (orderFormEntity != null) {
@@ -246,7 +246,6 @@ public class PayController extends BaseController {
 
 	/**
 	 * @Description: 操作退款/付款前验证是否符合条件
-	 * @param paymentId
 	 * @param model
 	 * @return
 	 * @Author: 柯军
@@ -302,8 +301,6 @@ public class PayController extends BaseController {
 	/**
 	 * @Description: 微信手动退款操作
 	 * @param paymentId
-	 * @param type
-	 * @param payChannel
 	 * @param model
 	 * @return
 	 * @Author: 柯军
@@ -376,7 +373,6 @@ public class PayController extends BaseController {
 
 	/**
 	 * @Description: 验证用户账号合法性
-	 * @param paymentId
 	 * @param session
 	 * @param request
 	 * @return
@@ -460,7 +456,6 @@ public class PayController extends BaseController {
 	 * @Description: 线下付款更新状态
 	 * @param paymentIds 付款单id
 	 * @param statementIds  对账单id
-	 * @param payMemo
 	 * @return
 	 * @Author: 柯军
 	 * @datetime:2015年9月30日下午4:31:25
@@ -486,7 +481,6 @@ public class PayController extends BaseController {
 
 	/**
 	 * @Description: 冻结/解冻付款
-	 * @param id
 	 * @param status
 	 * @return
 	 * @Author: 柯军

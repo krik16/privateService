@@ -350,6 +350,10 @@ function switchCheck(check) {
 	url_ = "../pay/drawApplyList";
 	defalutCheck = check;
 	$("#currpage").val(1);
+	$("#payChannel").empty().append("<option value=''>--全部--</option>" +
+									"<option value='0'>支付宝</option>" +
+									"<option value='1'>微信</option>" +
+									"<option value='2'>银行卡</option>");
 	if (check == 0) {//提现付款
 		$("#morePay").val(1);
 		$("#drawApply").addClass("change-color");
@@ -452,6 +456,7 @@ function switchCheck(check) {
 		$("#search-price").width(86);
 	}else if (check == 3) {//对账单付款
 		$("#morePay").val(7);
+		$("#payChannel").append("<option value='3'>现金</option>");
 		 url_ = "../pay/statementList";
 		$("#statementPay").addClass("change-color");
 		$("#statementPay").removeClass("now");

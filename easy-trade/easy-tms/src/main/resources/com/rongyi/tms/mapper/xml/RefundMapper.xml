@@ -26,7 +26,7 @@
                 jdbcType="VARCHAR"/>
         <result column="refund_rejected" property="refundRejected"
                 jdbcType="VARCHAR"/>
-        <result column="guide_type" property="guideType" jdbcType="VARCHAR"/>
+        <result column="guide_type" property="guideType" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
         `ry_rpb`.`payment_order`.`id` AS `id`,`ry_rpb`.`payment_order`.`create_at` AS
@@ -127,7 +127,7 @@
 
     </sql>
     <select id="selectPayPageList" resultMap="BaseResultMap"
-            parameterType="java.lang.Integer">
+            parameterType="map">
         select
         <include refid="Base_Column_List"/>
         from
