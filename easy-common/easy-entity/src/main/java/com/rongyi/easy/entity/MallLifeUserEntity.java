@@ -42,16 +42,18 @@ public class MallLifeUserEntity implements Serializable {
 	@Property("channel")
 	private String channel;
 
+	private String devUuid;//设备Id号 uuid
 
+	private String idfa; //
 
+	@Property("device_type")
+    private String deviceType; //设备型号
 
-
-
+	@Property("terminal_type")
+	private String terminalType;//终端平台 IOS || android
 
 
 	private Integer sex;
-
-	private String devUuid;//设备Id号
 
 	@Property("authentication_token")
 	private String token;
@@ -59,9 +61,6 @@ public class MallLifeUserEntity implements Serializable {
 
 	@Property("login_red")
 	private Integer isLoginRed;
-
-
-
 
 	@Property("updated_at")
 	private Date updatedAt;
@@ -275,5 +274,29 @@ public class MallLifeUserEntity implements Serializable {
 
 	public void setRegistInIp(String registInIp) {
 		this.registInIp = registInIp;
+	}
+
+	public String getIdfa() {
+		return idfa;
+	}
+
+	public void setIdfa(String idfa) {
+		this.idfa = idfa;
+	}
+
+	public String getDeviceType() {
+		return deviceType;
+	}
+
+	public void setDeviceType(String deviceType) {
+		this.deviceType = deviceType;
+	}
+
+	public String getTerminalType() {
+		return terminalType;
+	}
+
+	public void setTerminalType(String terminalType) {
+		this.terminalType = terminalType;
 	}
 }
