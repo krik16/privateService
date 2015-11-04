@@ -57,7 +57,7 @@ public class SystemConfig implements Serializable{
      */
     public static boolean isMobileNO(String mobiles){
        // Pattern p = Pattern.compile("^((13[0-9])|(17[0-9])|(15[^4,\\D])|(18[0-9]))\\d{8}$");
-        Pattern p = Pattern.compile("^1[345678]\\d{9}$");//只验证11位以1开头的手机号
+        Pattern p = Pattern.compile("^1[23456789]\\d{9}$");//只验证11位以1开头的手机号
         Matcher m = p.matcher(mobiles);
 //		System.out.println(m.matches()+"---");
         return m.matches();
@@ -72,7 +72,7 @@ public class SystemConfig implements Serializable{
     public static void main(String args[]){
 
         SystemConfig systemConfig = new SystemConfig();
-        System.out.println("test=="+systemConfig.isMobileNO("13712165941"));
+        System.out.println("test=="+systemConfig.isMobileNO("19712165941"));
 
     }
 

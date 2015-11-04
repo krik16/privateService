@@ -42,6 +42,13 @@ public class MallLifeUserEntity implements Serializable {
 	@Property("channel")
 	private String channel;
 
+
+
+
+
+
+
+
 	private Integer sex;
 
 	private String devUuid;//设备Id号
