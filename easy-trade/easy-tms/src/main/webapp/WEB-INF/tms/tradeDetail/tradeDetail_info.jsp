@@ -129,14 +129,9 @@ body {
 						</c:otherwise>
 
 					</c:choose>
-					<div class="line-heights shopsName" style="width: 20%">渠道:</div>
+					<div class="line-heights shopsName" style="width: 20%">优惠金额:</div>
 					<div class="shopsData" style="width: 70%">
-						<p class="p_text">
-							<c:choose>
-								<c:when test="${trade.guideType==1 }">商家</c:when>
-								<c:when test="${trade.guideType==2 }">买手</c:when>
-							</c:choose>
-						</p>
+						${trade.hbDiscount + trade.score/100 }（元）
 					</div>
 				</div>
 					<div class="shops-main-right">
@@ -163,7 +158,7 @@ body {
 						</div>
 						<div class="line-heights shopsName">优惠方式:</div>
 						<div class="shopsData">
-							<p class="p_text" style="color: red;font-weight: bold;font-size: 14px">
+							<p class="p_text" style="color: #ff4a8f;font-weight: bold;font-size: 14px">
 							<c:if test="${ not empty trade.score && trade.score > 0}">
 									积分 
 									(${trade.score})
@@ -208,6 +203,17 @@ body {
 						<c:otherwise>
 						</c:otherwise>
 					</c:choose>
+					<c:if test="${trade.guideType != null}">
+						<div class="line-heights shopsName" style="width: 20%">渠道:</div>
+						<div class="shopsData" style="width: 70%">
+							<p class="p_text">
+								<c:choose>
+									<c:when test="${trade.guideType==1 }">商家</c:when>
+									<c:when test="${trade.guideType==2 }">买手</c:when>
+								</c:choose>
+							</p>
+						</div>
+					</c:if>
 				</div>
 			</div>
 			<div class="shopsButton">
