@@ -17,7 +17,7 @@ public class ShopExclusiveCategoryEntity  implements java.io.Serializable{
 	@Id
 	private ObjectId id;
 	private String name;
-	private Date createAt;
+	private Date created_at;
 	private List<ObjectId> parent_ids;
 	private ObjectId parent_id;
 	private int type;//0表示一级分类 1表示二级分类
@@ -35,11 +35,12 @@ public class ShopExclusiveCategoryEntity  implements java.io.Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Date getCreateAt() {
-		return createAt;
+	
+	public Date getCreated_at() {
+		return created_at;
 	}
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
+	public void setCreated_at(Date created_at) {
+		this.created_at = created_at;
 	}
 	public List<ObjectId> getParent_ids() {
 		return parent_ids;
