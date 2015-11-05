@@ -82,4 +82,12 @@ public interface ROACooperationMallService {
 	 * 通过店铺id查找商场的MongoId
 	 */
 	public String getMallMIdByshopId(Integer shopId) throws Exception;
+	
+	/**
+	 * rePackage
+	 * 通过mallMongoId得到rmmm库中的Integer类型mallId
+	 * @param mallMid
+	 * @return
+	 */
+	public Integer getAndSaveCooperateMallByMallMid(String mallMid) throws Exception ;
 }

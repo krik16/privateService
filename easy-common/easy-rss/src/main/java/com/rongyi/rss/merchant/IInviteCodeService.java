@@ -15,6 +15,14 @@ public interface IInviteCodeService {
 	 * @throws Exception
 	 */
 	public boolean validationInviteCode(String code) throws Exception;
+	
+	/**
+	 * 验证邀请码
+	 * @param code
+	 * @throws Exception
+	 */
+	public boolean validationInviteCode(String code,Integer type) throws Exception;
+	
 	/**
 	 * 生成邀请码并将数据存入数据库
 	 * @param paramsMap
