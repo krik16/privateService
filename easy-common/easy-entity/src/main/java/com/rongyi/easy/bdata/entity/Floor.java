@@ -5,6 +5,8 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,6 +28,7 @@ public class Floor implements Serializable {
     private String navigation_pic;
     private String pathImg;
     private String picture;
+    private Date   created_at;
 
 
     public String getId() {
@@ -76,13 +79,23 @@ public class Floor implements Serializable {
         this.parent_id = parent_id;
     }
 
+    public Date getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
+    }
+
     public String getNavigation_pic() {
         return navigation_pic;
     }
 
     public String getFullNavigation_pic() {
         if (StringUtils.isNotBlank(navigation_pic)) {
-            return "http://rongyi.b0.upaiyun.com/system/mall_area/navigation_pic/2014/9/" + id + "/" + navigation_pic;
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(created_at);
+            return "http://rongyi.b0.upaiyun.com/system/mall_area/navigation_pic/" + calendar.get(Calendar.YEAR) + "/" + (calendar.get(Calendar.MONTH) + 1) + "/" + id + "/" + navigation_pic;
         } else {
             return null;
         }
