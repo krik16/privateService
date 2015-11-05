@@ -19,7 +19,7 @@ public class Commodity implements  Serializable,Cloneable{
 	@Id
 	private ObjectId id;
 
-	private int type; // 渠道  1商家，2买手
+	private int type; // 渠道  0商家，1买手
 	private String liveId; // 直播Id
 	private boolean isSpot; // 是否现货	0 否  1是
 	private Date liveStartTime; // 直播开始时间
