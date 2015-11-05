@@ -48,10 +48,11 @@ public class UserManagerParam extends BaseParam implements Serializable{
     private String stopReason;//停用原因
     private String creatingUserType;
     private Integer merUserId;//操作人id
-
+ 
 
 	private String userDesc;//买手描述
 	private int flag=0;//操作参数 1升级功能
+	private int isUpdate = 0;  //操作参数  （==1直接修改未合作店长为已合作店长 ）
 
 
 
@@ -295,6 +296,12 @@ public Integer getIdentity() {
 
 	public String getUserAccount() {
 		return userAccount;
+	}
+	public int getIsUpdate() {
+		return isUpdate;
+	}
+	public void setIsUpdate(int isUpdate) {
+		this.isUpdate = isUpdate;
 	}
 	public void setUserAccount(String userAccount) {
 		this.userAccount = userAccount;

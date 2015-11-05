@@ -55,8 +55,8 @@ public class CommodityWebVO implements Serializable{
 		this.code=commodity.getCode();
 		this.postage=commodity.getPostage();
 		this.descrite=commodity.getDescription();
-		this.typeName = (commodity.getType() == 2 ? "买手" : "商家");
-		if (commodity.getType() == 2) {
+		this.typeName = (commodity.getType() == 1 ? "买手" : "商家");
+		if (commodity.getType() == 1) {
 			this.spotName = (commodity.isSpot() ? "自采" : "非自采");
 		} else {
 			this.spotName = "";
