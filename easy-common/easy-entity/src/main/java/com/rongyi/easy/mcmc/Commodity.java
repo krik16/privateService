@@ -48,7 +48,15 @@ public class Commodity implements  Serializable,Cloneable{
 	
 	private String brandMid;//品牌mongoId
 	
+	private boolean supportCourierDeliver;//支持快递发货字段  true 是    false否
 	
+	
+	public boolean isSupportCourierDeliver() {
+		return supportCourierDeliver;
+	}
+	public void setSupportCourierDeliver(boolean supportCourierDeliver) {
+		this.supportCourierDeliver = supportCourierDeliver;
+	}
 	public String getBrandMid() {
 		return brandMid;
 	}
