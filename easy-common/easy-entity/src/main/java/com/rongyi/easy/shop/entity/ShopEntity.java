@@ -62,7 +62,7 @@ public class ShopEntity implements Serializable{
     private int moreFloors;//0不跨楼，1跨楼
     
     private String shop_number;//铺位号
-    private String business_status;//营业状态0正常营业 1即将营业 2暂停营业 3停止营业
+    private Integer business_status;//营业状态0正常营业 1即将营业 2暂停营业 3停止营业
     private String business_hours;//营业时间
     
     @JsonDeserialize(using=DateJsonDeserializer.class)
@@ -201,7 +201,13 @@ public class ShopEntity implements Serializable{
 		this.address = param.getAddress();
 		this.moreFloors = param.getMoreFloors();
 		this.shop_number = param.getShop_number();
-		this.business_status = param.getBusiness_status();
+		if(StringUtils.isNotBlank(param.getBusiness_status())){
+			if(param.getBusiness_status().matches("\\d"))
+				this.business_status =Integer.valueOf(param.getBusiness_status());
+			else
+				throw new Exception("营业状态不对");
+		}
+		
 		this.business_hours = param.getBusiness_hours();
 		this.opened_time = param.getOpened_time();
 		this.telephone = param.getTelephone();
@@ -321,12 +327,15 @@ public class ShopEntity implements Serializable{
 	public void setShop_number(String shop_number) {
 		this.shop_number = shop_number;
 	}
-	public String getBusiness_status() {
+	
+	public Integer getBusiness_status() {
 		return business_status;
 	}
-	public void setBusiness_status(String business_status) {
+
+	public void setBusiness_status(Integer business_status) {
 		this.business_status = business_status;
 	}
+
 	public String getBusiness_hours() {
 		return business_hours;
 	}
