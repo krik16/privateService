@@ -9,7 +9,7 @@ public class ShopSearchParam implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private String keyword;   //关键词
-	private Integer distance;     //距离筛选
+	private Integer distance;     //距离筛选,废弃
 	private String coord_x;   //坐标x
 	private String coord_y;   //坐标y
 	private String cat_id;    //0店铺1商场2品牌3分类（类似于美食）
@@ -18,7 +18,7 @@ public class ShopSearchParam implements Serializable{
 	private int from;         //页
 	private int size = 50;         //一页数量
 	private String brand_id;  //品牌id
-	private String zone_id;   //区域id
+	private String zone_id;   //区域id(长度24),或者距离(长度小于24，单位 米)
 	private String shop_id;   //店铺id
 	private boolean commodityRequired; //是否只看有商品的店铺
 	private String mall_id;  //商场id

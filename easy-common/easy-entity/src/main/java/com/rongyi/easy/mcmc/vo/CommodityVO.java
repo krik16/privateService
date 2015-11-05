@@ -47,7 +47,7 @@ public class CommodityVO  implements  Serializable {
 	private String brandMid;//品牌mongoId
 	private String mallMid;//商场mongoId
 	private String shopName;//店铺名称
-	private boolean supportCourierDeliver;//true是  false否 
+	private boolean supportCourierDeliver=true;//true是  false否
 	
 	public String getShopName() {
 		return shopName;
@@ -230,7 +230,7 @@ public class CommodityVO  implements  Serializable {
 		this.commodityCPriceMax = commodity.getcPriceMax();
 		this.commodityCPriceMin = commodity.getcPriceMin();
 		this.commodityOPOfLCP = commodity.getoPriceOfLowestCPrice();
-
+		this.supportCourierDeliver = commodity.isSupportCourierDeliver();
 
 	}
 	public String getCommodityId() {
