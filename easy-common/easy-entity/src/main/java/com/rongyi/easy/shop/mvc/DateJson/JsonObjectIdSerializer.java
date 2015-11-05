@@ -13,6 +13,9 @@ public class JsonObjectIdSerializer extends JsonSerializer<ObjectId> {
 	@Override
 	public void serialize(ObjectId id, JsonGenerator gen,SerializerProvider provider) 
 			throws IOException,JsonProcessingException {
-		gen.writeString(id.toString());
+		if(id!=null)
+			gen.writeString(id.toString());
+		else
+			gen.writeString("");
 	}
 }

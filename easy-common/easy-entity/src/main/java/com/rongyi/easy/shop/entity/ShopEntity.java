@@ -1,9 +1,12 @@
 package com.rongyi.easy.shop.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.bson.types.ObjectId;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -11,8 +14,9 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
 import com.rongyi.easy.mcmc.mvc.DateJson.DateJsonDeserializer;
-import com.rongyi.easy.shop.mvc.DateJson.JsonListObjectIdSerializer;
 import com.rongyi.easy.shop.mvc.DateJson.JsonObjectIdSerializer;
+import com.rongyi.easy.shop.mvc.DateJson.ObjectIdJsonDeserializer;
+import com.rongyi.easy.shop.param.ShopParam;
 
 
 /**
@@ -30,40 +34,197 @@ public class ShopEntity implements Serializable{
     private Integer shop_nature;//店铺性质 0商场店铺 1商场专柜 2街边店
     private String shop_type;//店铺类型 0普通店 1免税店 2专柜 3折扣店 4旗舰店
     private String number;//店铺编号
-    @JsonSerialize(using=JsonObjectIdSerializer.class)
+    
+   // @JsonDeserialize(using=ObjectIdJsonDeserializer.class)
     private ObjectId brand_id;//主品牌
-    @JsonSerialize(using=JsonListObjectIdSerializer.class)
+    
+    //@JsonDeserialize(using=ObjectIdJsonDeserializer.class)
     private List<ObjectId> brand_ids;//兼营品牌
+    
     private String icon;//logo
-    @JsonSerialize(using=JsonListObjectIdSerializer.class)
+    
+    //@JsonDeserialize(using=ObjectIdJsonDeserializer.class)
     private List<ObjectId> category_ids;//店铺所属分类
-    @JsonSerialize(using=JsonListObjectIdSerializer.class)
+    
+    //@JsonDeserialize(using=ObjectIdJsonDeserializer.class)
     private List<ObjectId> exclusive_category_ids;//店铺所属专属分类
+    
     private List<String> photo_urls;//图片地址
     private String tags;//标签 自定义分类
-    @JsonSerialize(using=JsonObjectIdSerializer.class)
+    
+    //@JsonDeserialize(using=ObjectIdJsonDeserializer.class)
     private ObjectId zone_id;//所在商场id
-    @JsonSerialize(using=JsonListObjectIdSerializer.class)
+    
+    //@JsonDeserialize(using=ObjectIdJsonDeserializer.class)
     private List<ObjectId> zone_ids;//所在商场
+    
     private String address;//详细地址
     private int moreFloors;//0不跨楼，1跨楼
     
     private String shop_number;//铺位号
     private String business_status;//营业状态0正常营业 1即将营业 2暂停营业 3停止营业
     private String business_hours;//营业时间
+    
     @JsonDeserialize(using=DateJsonDeserializer.class)
     private Date opened_time;//开业时间
+    
     private String telephone;//店铺电话
     private String head_name;//店铺负责人名字
     private String head_telephone;//店铺负责人电话
     private String description;//店铺描述
+    
+    @JsonDeserialize(using=DateJsonDeserializer.class)
     private Date created_at;
+    
+    @JsonDeserialize(using=DateJsonDeserializer.class)
     private Date updated_at;
+    
     private Integer created_by;
     private Integer updated_by;
     private Integer valid;//0正常显示1已隐藏2删除3待处理   4系统下架
     private String reason;//停业原因
+    
+    @JsonDeserialize(using=ObjectIdJsonDeserializer.class)
     private ObjectId filiale_id;//分公司id
+    
+	public ShopEntity() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public ShopEntity(ShopParam param) throws Exception {
+		
+		super();
+		if(StringUtils.isNotBlank(param.getId())){
+			if(param.getId().matches("[\\da-zA-Z]{24}"))
+				this.id = new ObjectId(param.getId());
+			else{
+				throw new Exception("id格式不对");
+			}
+		}
+		
+		this.name = param.getName();
+		
+		this.shop_nature = param.getShop_nature();
+		this.shop_type = param.getShop_type();
+		this.number = param.getNumber();
+		
+		//主品牌
+		if(StringUtils.isNotBlank(param.getBrand_id())){
+			if(param.getBrand_id().matches("[\\da-zA-Z]{24}"))
+				this.brand_id = new ObjectId(param.getBrand_id());
+			else{
+				throw new Exception("主品牌id格式不对");
+			}
+		}
+		
+		//兼营品牌
+		if(CollectionUtils.isNotEmpty(param.getBrand_ids())){
+			List<ObjectId> brand_ids=new ArrayList<ObjectId>();
+			for(String id:param.getBrand_ids()){
+				if(StringUtils.isNotBlank(id)){
+					if(id.matches("[\\da-zA-Z]{24}"))
+						brand_ids.add(new ObjectId(id));
+					else{
+						throw new Exception("兼营品牌id格式不对");
+					}
+				}else{
+					brand_ids.add(null);
+				}
+				
+			}
+			this.brand_ids = brand_ids;
+		}
+		
+		this.icon = param.getIcon();
+		
+		if(CollectionUtils.isNotEmpty(param.getCategory_ids())){
+			List<ObjectId> category_ids=new ArrayList<ObjectId>();
+			for(String id:param.getCategory_ids()){
+				if(StringUtils.isNotBlank(id)){
+					if(id.matches("[\\da-zA-Z]{24}"))
+						category_ids.add(new ObjectId(id));
+					else{
+						throw new Exception("品牌品牌id格式不对");
+					}
+				}else{
+					category_ids.add(null);
+				}
+			}
+			this.category_ids = category_ids;
+		}
+		
+		if(CollectionUtils.isNotEmpty(param.getExclusive_category_ids())){
+			List<ObjectId> exclusive_category_ids=new ArrayList<ObjectId>();
+			for(String id:param.getExclusive_category_ids()){
+				if(StringUtils.isNotBlank(id)){
+					if(id.matches("[\\da-zA-Z]{24}"))
+						exclusive_category_ids.add(new ObjectId(id));
+					else{
+						throw new Exception("品牌品牌id格式不对");
+					}
+				}else{
+					exclusive_category_ids.add(null);
+				}
+			}
+			this.exclusive_category_ids = exclusive_category_ids;
+		}
+		
+		this.photo_urls = photo_urls;
+		this.tags = tags;
+		
+		//楼层id
+		if(StringUtils.isNotBlank(param.getZone_id())){
+			if(param.getBrand_id().matches("[\\da-zA-Z]{24}"))
+				this.zone_id = new ObjectId(param.getZone_id());
+			else{
+				throw new Exception("楼层id格式不对");
+			}
+		}
+		
+		if(CollectionUtils.isNotEmpty(param.getZone_ids())){
+			List<ObjectId> zone_ids=new ArrayList<ObjectId>();
+			for(String id:param.getZone_ids()){
+				if(StringUtils.isNotBlank(id)){
+					if(id.matches("[\\da-zA-Z]{24}"))
+						zone_ids.add(new ObjectId(id));
+					else{
+						throw new Exception("品牌品牌id格式不对");
+					}
+				}else{
+					zone_ids.add(null);
+				}
+			}
+			this.zone_ids = zone_ids;
+		}
+		
+		this.address = param.getAddress();
+		this.moreFloors = param.getMoreFloors();
+		this.shop_number = param.getShop_number();
+		this.business_status = param.getBusiness_status();
+		this.business_hours = param.getBusiness_hours();
+		this.opened_time = param.getOpened_time();
+		this.telephone = param.getTelephone();
+		this.head_name = param.getHead_name();
+		this.head_telephone = param.getHead_telephone();
+		this.description = param.getDescription();
+		this.created_at = param.getCreated_at();
+		this.updated_at = param.getUpdated_at();
+		this.created_by = param.getCreated_by();
+		this.updated_by = param.getUpdated_by();
+		this.valid = param.getValid();
+		this.reason = param.getReason();
+		
+		//分公司id
+		if(StringUtils.isNotBlank(param.getFiliale_id())){
+			if(param.getFiliale_id().matches("[\\da-zA-Z]{24}"))
+				this.filiale_id = new ObjectId(param.getFiliale_id());
+			else{
+				throw new Exception("分公司id格式不对");
+			}
+		}
+	}
+	
 	public ObjectId getId() {
 		return id;
 	}

@@ -1,28 +1,31 @@
 package com.rongyi.easy.shop.mvc.DateJson;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
+import org.bson.types.ObjectId;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.DeserializationContext;
 import org.codehaus.jackson.map.JsonDeserializer;
-import org.springframework.util.StringUtils;
 
 
-public   class  ObjectIdJsonDeserializer  extends  JsonDeserializer<Date> {  
+public   class  ObjectIdJsonDeserializer  extends  JsonDeserializer<ObjectId> {  
     public   static   final  SimpleDateFormat format =  new  SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );  
     @Override   
-    public  Date deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)  throws  IOException, JsonProcessingException {   
-        try {
-        	if(StringUtils.isEmpty(jsonParser.getText()))
+    public  ObjectId deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)  throws  IOException, JsonProcessingException {   
+       try {
+    	   if(jsonParser==null||StringUtils.isBlank(jsonParser.getText())
+        		   ||!jsonParser.getText().matches("[\\da-zA-Z]{24}"))
         		return null;
-			return  format.parse(jsonParser.getText());
-		} catch (ParseException e) {
-			throw   new  RuntimeException(e);  
-		}  
-     
+           System.out.println(jsonParser.getText());
+        	return new ObjectId(jsonParser.getText().trim());
+	} catch (Exception e) {
+		e.printStackTrace();
+		throw e;
+	}
+    	
+    	
    }  
 }  
