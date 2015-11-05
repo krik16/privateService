@@ -170,8 +170,8 @@ public class ShopEntity implements Serializable{
 			this.exclusive_category_ids = exclusive_category_ids;
 		}
 		
-		this.photo_urls = photo_urls;
-		this.tags = tags;
+		this.photo_urls = param.getPhoto_urls();
+		this.tags = param.getTags();
 		
 		//楼层id
 		if(StringUtils.isNotBlank(param.getZone_id())){
