@@ -117,7 +117,7 @@ public interface ROALiveService {
 	 * @param commodityCount
 	 *            需要返回的商品个数，如果为-1，返回全部商品。
 	 * @param liveStatus
-	 *            直播状态 -1全部，0发布，1上线，2下线
+	 *            直播状态 -1 全部，-2 只有预热和上线，0预热，1上线，2下线
 	 * @param commodityStatus
 	 *            商品状态 -1全部，0下架，1上架
 	 * @return 带List&lt;LiveVO&gt;的ResponseVO
