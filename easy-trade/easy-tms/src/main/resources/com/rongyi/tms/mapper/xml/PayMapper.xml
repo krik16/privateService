@@ -55,7 +55,7 @@
             concat('%',#{sellerName,jdbcType=VARCHAR},'%')
         </if>
         <!-- 状态 -->
-        <if test="status != null and status != ''">
+        <if test="status != null">
             AND payment_order.status = #{status}
         </if>
 
