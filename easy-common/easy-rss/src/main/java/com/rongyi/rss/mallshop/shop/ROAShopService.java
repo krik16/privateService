@@ -169,4 +169,6 @@ public interface ROAShopService {
 	 * @throws Exception
 	 */
 	public ShopMallVO getShopMallVOByOrderNum(Integer shopId) throws Exception;
+	
+	public Integer insertCooperateShopByshopMid(String shopMid, Integer brandId, Integer mallId) throws Exception;
 }
