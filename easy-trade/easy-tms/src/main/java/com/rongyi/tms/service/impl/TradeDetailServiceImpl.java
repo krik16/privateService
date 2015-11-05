@@ -99,7 +99,7 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 			map.put("buyerIds", buyerIds);
 
 		List<TradeVO> list = this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectTradePageList", map);
-		String buyerId = null;
+		String buyerId;
 		for (TradeVO tradeVO : list) {
 			try {
 				buyerId = tradeVO.getBuyerId();

@@ -31,7 +31,7 @@
 						<c:when test="${item.payChannel eq 1}">
 							<td>微信</td>
 						</c:when>
-						<c:otherwise><td>银联</td></c:otherwise>	
+						<c:otherwise><td>银行卡</td></c:otherwise>
 						</c:choose>
 						<td>${item.mallName}</td>
 						<td>${item.shopName}</td>

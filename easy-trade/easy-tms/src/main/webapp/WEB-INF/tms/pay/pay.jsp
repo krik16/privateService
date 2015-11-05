@@ -121,10 +121,11 @@
                 <input id="bussinessName" type="text" class="form-control ng-pristine ng-untouched ng-valid">
             </div>
             <div class="form-group">
-                <label id="search-guideType-label">打款方式：</label>
-                <select id="guideType" class="form-control ng-pristine ng-untouched ng-valid">
+                <label id="search-payChannel-label">打款方式：</label>
+                <select id="payChannel" class="form-control ng-pristine ng-untouched ng-valid">
                     <option value="">--全部--</option>
                     <option value="0">支付宝</option>
+                    <option value="1">微信</option>
                     <option value="2">银行卡</option>
                 </select>
             </div>
@@ -133,9 +134,9 @@
                 <input name="start" type="text" value=""
                        class=" form-control ng-pristine ng-untouched ng-valid startTime" id="payStartTime"/>
                 <label>&nbsp;至&nbsp;<label>
-                    <input name="end" type="text" value=""
-                           class="form-control ng-pristine ng-untouched ng-valid endTime" id="payEndTime"
-                           style="width:160px"/>
+                <input name="end" type="text" value=""
+                       class="form-control ng-pristine ng-untouched ng-valid endTime" id="payEndTime"
+                       style="width:160px"/>
             </div>
 
             <div class="form-group">
