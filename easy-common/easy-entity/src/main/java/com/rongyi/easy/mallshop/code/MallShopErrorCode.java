@@ -28,6 +28,8 @@ public enum MallShopErrorCode {
     BUYER_PHONE_ISEXITS(1071011,"您注册的手机号已经存在，可登录后直接升级为买手"),
     ERROR_NO_EMAIL(1071002,"客服没有设置邮箱，不能发送邮件"),
 
+    ERROR_INVITE_CODE(1071012,"您输入的邀请码无效，请查证后输入!"),
+
 
     BUYER_ROLE_ISEXITS(1071801,"您已经拥有买手身份，无需升级!重新登录即可"),
     BUYER_DESC_ISLONGER(1071811,"简介内容过长，请重新编辑"),
