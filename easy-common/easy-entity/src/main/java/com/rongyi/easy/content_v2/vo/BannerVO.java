@@ -10,7 +10,7 @@ import java.io.Serializable;
  * Created by Breggor on 2015/9/10.
  */
 public class BannerVO implements Serializable {
-
+    private Integer id;//id
     private String title; //标题
     private String bannerPic; //banner图片地址
     private String provId;  //省份Id
@@ -84,9 +84,18 @@ public class BannerVO implements Serializable {
         this.publishEndAt = publishEndAt;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+        return new ToStringBuilder(this)
+                .append("id", id)
                 .append("title", title)
                 .append("bannerPic", bannerPic)
                 .append("provId", provId)

@@ -47,6 +47,7 @@ public class CommodityVO  implements  Serializable {
 	private String brandMid;//品牌mongoId
 	private String mallMid;//商场mongoId
 	private String shopName;//店铺名称
+	private boolean supportCourierDeliver;//true是  false否 
 	
 	public String getShopName() {
 		return shopName;
@@ -304,5 +305,11 @@ public class CommodityVO  implements  Serializable {
 	public void setCommoditySpecList(List<CommoditySpecVO> commoditySpecList) {
 		this.commoditySpecList = commoditySpecList;
 	}
-
+	public boolean isSupportCourierDeliver() {
+		return supportCourierDeliver;
+	}
+	public void setSupportCourierDeliver(boolean supportCourierDeliver) {
+		this.supportCourierDeliver = supportCourierDeliver;
+	}
+	
 }

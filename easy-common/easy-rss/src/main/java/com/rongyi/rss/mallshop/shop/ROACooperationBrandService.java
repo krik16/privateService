@@ -125,4 +125,11 @@ public interface ROACooperationBrandService {
 	 * @throws Exception
 	 */
 	public BrandEntity getBrandEntityByMongoId(String brandMid) throws Exception;
+	/**
+	 * 通过brandMongoId得到rmmm库中的Integer类型brandId
+	 * @param brandMid
+	 * @return
+	 * @throws Exception
+	 */
+	public Integer getAndSaveCooperateBrandByBrandMid(String brandMid) throws Exception;
 }
