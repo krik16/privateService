@@ -22,12 +22,6 @@
         <result column="guide_type" property="guideType" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
-        <!--id, order_time, `status`, draw_user_id, order_price,-->
-        <!--order_no, pay_no,-->
-        <!--shop_id,-->
-        <!--shop_name, mall_id, mall_name,-->
-        <!--seller_account,trade_type,-->
-        <!--seller_name,pay_channel,draw_apply_id-->
         `payment_order`.`id` AS `id`,`payment_order`.`create_at` AS `order_time`,`payment_order`.`status` AS
         `status`,`payment_order`.`draw_user_id` AS `draw_user_id`,`payment_order`.`pay_amount` AS
         `order_price`,`payment_order`.`order_no` AS `order_no`,`payment_order`.`order_type` AS

@@ -184,10 +184,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 	 * 
 	 * @param params
 	 * @return
-<<<<<<< HEAD
-=======
 	 * @see com.rongyi.tms.service.SalesCommissionService#(java.util.Map)
->>>>>>> refs/remotes/origin/develop
 	 */
 
 	@Override
@@ -219,10 +216,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 	 * Description
 	 * 
 	 * @return
-<<<<<<< HEAD
-=======
 	 * @see com.rongyi.tms.service.SalesCommissionService#(java.util.List)
->>>>>>> refs/remotes/origin/develop
 	 */
 
 	@Override

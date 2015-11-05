@@ -90,9 +90,10 @@ public class PayController extends BaseController {
 	@RequestMapping(value = "/drawApplyList", method = RequestMethod.POST)
 	public String list(ModelMap model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		try {
-			LOGGER.info("----pay list ------");
 			Map<String, Object> map = getJsonMap(request);
+			LOGGER.info("----drawApply list ------map="+map);
 			String currpage = (String) map.get("currpage");
+			map.put("status", ConstantEnum.TRADE_STATUS_PAY_NO.getCodeInt());
 			List<TradeVO> list = payService.selectPayPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE);
 			double pageTotle = payService.selectPayPageListCount(map);
 			Integer rowContNum = (int) Math.ceil(pageTotle / Constant.PAGE.PAGESIZE);
