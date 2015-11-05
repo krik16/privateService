@@ -59,7 +59,7 @@ public interface ROACommodityService {
 
 	public ResponseResult commodityOffShelves(String id, long shopId, int identity);
 
-	public String editCommodity(CommodityVO commodityvo, long shopId);
+	public String editCommodity(CommodityVO commodityvo, long shopId, long brandId);
 
 	public String editCommodityBuyer(CommodityVO commodityvo);
 

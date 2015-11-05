@@ -2,17 +2,17 @@ package com.rongyi.rss.mcmc;
 
 import java.util.List;
 
-import com.rongyi.core.bean.ResponseVO;
-import com.rongyi.easy.solr.param.CommodityBrandSearchParam;
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.mcmc.Commodity;
 import com.rongyi.easy.mcmc.CommodityShopInfo;
 import com.rongyi.easy.mcmc.vo.CommodityPageBuyerVO;
 import com.rongyi.easy.mcmc.vo.CommoditySpecVO;
 import com.rongyi.easy.mcmc.vo.CommodityVO;
 import com.rongyi.easy.mcmc.vo.CommodityWebVO;
+import com.rongyi.easy.solr.param.CommodityBrandSearchParam;
 import com.rongyi.easy.solr.param.CommoditySearchParam;
 
 public interface CommodityService {
@@ -44,7 +44,7 @@ public interface CommodityService {
 
 	public ResponseResult commodityOffShelves(String id, long shopId, int identity);
 
-	public String editCommodity(CommodityVO commodityvo, long shopId);
+	public String editCommodity(CommodityVO commodityvo, long shopId, long brandId);
 
 	public String editCommodityBuyer(CommodityVO commodityvo);
 
