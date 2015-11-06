@@ -16,7 +16,8 @@ import java.util.Map;
 
 import net.sf.json.JSONObject;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +42,7 @@ import com.rongyi.va.service.VirtualAccountService;
  */
 @Service
 public class WithdrawApplyServiceImpl implements WithdrawApplyService {
-	private Logger logger = Logger.getLogger(getClass());
+	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Autowired
 	private SpringAmqpSender messageSender;
@@ -70,15 +71,15 @@ public class WithdrawApplyServiceImpl implements WithdrawApplyService {
 	 */
 	public ResponseResult withdrawApply(String userId, BigDecimal drawAmount, String accountNo, String accountName,
 			String accountType, Integer guideType) {
-		logger.info(">>>>>>>>>提现申请开始");
+		logger.info(">>>>>>>>>提现申请开始,userId={},drawAmount={},accountNo={},accountName={},accountType={},guideType={}",userId,drawAmount,accountNo,accountName,accountType,guideType);
 
 		ResponseResult result = new ResponseResult();
 		try {
 			int permission = 0;
 			if (guideType==1) {
-				permission = virtualAccountService.checkWithdrawPermission(userId, drawAmount, drawApplyRules.getDrawApplyTimesLimit());
+				permission = virtualAccountService.validateWithdrawPermission(userId, drawAmount, drawApplyRules.getDrawApplyTimesLimit());
 			}else {
-				permission = virtualAccountService.checkWithdrawPermission(userId, drawAmount, drawApplyRules.getMaiShouDrawTimesLimit());
+				permission = virtualAccountService.validateWithdrawPermission(userId, drawAmount, drawApplyRules.getMaiShouDrawTimesLimit());
 			}
 			if (permission == 0) {
 				// 首先，向tms发送提现请求mq事件
@@ -153,7 +154,7 @@ public class WithdrawApplyServiceImpl implements WithdrawApplyService {
 			result.setSuccess(false);
 			result.setInfo(null);
 			e.printStackTrace();
-			logger.error(e, e);
+			logger.error(e.getMessage());
 		}
 		logger.debug(">>>>>>>>>提现申请结束");
 		return result;
