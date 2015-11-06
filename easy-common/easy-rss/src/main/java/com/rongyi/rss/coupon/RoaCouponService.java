@@ -168,4 +168,14 @@ public interface RoaCouponService {
      * @return
      */
     boolean remove(String couponId);
+
+    /**
+     * 根据卡券ID查询关联的店铺列表
+     * @param couponId 卡券id
+     * @param currentPage 起始页
+     * @param pageSize 每页行数
+     * @return pagingVO
+     * @author lqy
+     */
+    PagingVO getCouponShopsByCouponId(String couponId, Integer currentPage, Integer pageSize);
 }
