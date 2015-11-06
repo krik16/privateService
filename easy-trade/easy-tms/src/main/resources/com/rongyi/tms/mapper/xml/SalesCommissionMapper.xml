@@ -160,9 +160,9 @@
 		from
 		<include refid="View_From" />
 		<where>
-			<if test="id!=null">id = #{id,jdbcType=INTEGER}</if>
+			<if test="id!=null">sales_commission.id = #{id,jdbcType=INTEGER}</if>
 			<if test="ids!=null">
-				id in
+				sales_commission.id in
 				<foreach collection="ids" index="index" item="item" open="("
 					separator="," close=")">
 					#{item}
@@ -236,7 +236,7 @@
 				#{item}
 			</foreach>
 		</if>
-		order by sales_commission.${orderBy}
+		order by sales_commission.create_at desc
 		limit
 		#{begin,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
 	</select>
@@ -726,7 +726,7 @@
 		SELECT COUNT(1) FROM
 		<include refid="View_From" />
 		WHERE
-		guide_id=#{guideId,jdbcType=VARCHAR} AND
+		sales_commission.guide_id=#{guideId,jdbcType=VARCHAR} AND
 		sales_commission.guide_type = #{guideType,
 		jdbcType=INTEGER}
 		AND
