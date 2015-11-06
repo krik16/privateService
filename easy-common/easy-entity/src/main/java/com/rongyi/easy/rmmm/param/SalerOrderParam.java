@@ -74,4 +74,14 @@ public class SalerOrderParam implements Serializable {
 		this.guideType = guideType;
 	}
 
+	@Override
+	public String toString() {
+		return "SalerOrderParam{" +
+				"guideId='" + guideId + '\'' +
+				", status='" + status + '\'' +
+				", currentPage='" + currentPage + '\'' +
+				", pageSize='" + pageSize + '\'' +
+				", guideType=" + guideType +
+				'}';
+	}
 }

@@ -38,8 +38,6 @@ public class OrderModelParam implements Serializable {
 		this.guideId = guideId;
 	}
 
-	
-
 	public List<OrderDetailModelParam> getOrdeDetailModel() {
 		return ordeDetailModel;
 	}
@@ -58,7 +56,11 @@ public class OrderModelParam implements Serializable {
 
 	@Override
 	public String toString() {
-		return "OrderModelParam [shopId=" + shopId + ", guideId=" + guideId + ", orderDetailModel=" + ordeDetailModel + "]";
+		return "OrderModelParam{" +
+				"shopId='" + shopId + '\'' +
+				", guideId='" + guideId + '\'' +
+				", orderPrice='" + orderPrice + '\'' +
+				", ordeDetailModel=" + ordeDetailModel +
+				'}';
 	}
-
 }
