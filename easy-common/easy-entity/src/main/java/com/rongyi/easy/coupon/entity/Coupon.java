@@ -235,7 +235,6 @@ public class Coupon implements Serializable {
     private Date updateAt;
 
     /**
->>>>>>> develop-yuzhijian
      * 是否是第三方券 否[false], 是[true], 默认不是第三方券fasle
      */
     private Boolean isThird;
@@ -301,13 +300,6 @@ public class Coupon implements Serializable {
      * 默认 false;
      */
     private Boolean isGeneral;
-
-    /**
-     * 是否已关联活动 已关联[true] 未关联[false]默认为false
-     */
-    private Boolean isRelatedActivity;
-
-
 
     /**
      * 卡券关联集团、品牌、店铺时如果没有选择下面的店铺则默认是关联该类型下所有的店铺，isRelatedAll=true
