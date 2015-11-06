@@ -326,8 +326,8 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 				LOGGER.info(updateResult);
 				if (updateResult > 0) {
 					LOGGER.info("更新成功，发送消息到 va");
-					Map<String, Object> paramMap = new HashMap<String, Object>();
-					Map<String, Object> bodyMap = new HashMap<String, Object>();
+					Map<String, Object> paramMap = new HashMap<>();
+					Map<String, Object> bodyMap = new HashMap<>();
 					paramMap.put("version", version);
 					JSONArray array = new JSONArray();
 					List<CommissionAmountTotalVO> commissions = this.getBaseDao().selectListBySql(NAMESPACE_SALESCOMMISSION + ".commissionAmountTotalByVersion", paramMap);
