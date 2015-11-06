@@ -194,9 +194,21 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	public void setLiveId(String liveId) {
 		this.liveId = liveId;
 	}
-	
-	
-	
-	
 
+	@Override
+	public String toString() {
+		return "CommoditySearchParam{" +
+				"keyword='" + keyword + '\'' +
+				", shopId='" + shopId + '\'' +
+				", brandId='" + brandId + '\'' +
+				", mallId='" + mallId + '\'' +
+				", commodityCategory='" + commodityCategory + '\'' +
+				", sortBy='" + sortBy + '\'' +
+				", coord_x='" + coord_x + '\'' +
+				", coord_y='" + coord_y + '\'' +
+				", bullId='" + bullId + '\'' +
+				", liveId='" + liveId + '\'' +
+				", commodityType='" + commodityType + '\'' +
+				'}';
+	}
 }

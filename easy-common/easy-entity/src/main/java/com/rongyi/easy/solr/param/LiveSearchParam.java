@@ -146,4 +146,27 @@ public class LiveSearchParam extends BaseParam implements Serializable{
 	public void setZone_id(String zone_id) {
 		this.zone_id = zone_id;
 	}
+
+	@Override
+	public String toString() {
+		return "LiveSearchParam{" +
+				"_id='" + _id + '\'' +
+				", keyword='" + keyword + '\'' +
+				", coord_x='" + coord_x + '\'' +
+				", coord_y='" + coord_y + '\'' +
+				", cat_id='" + cat_id + '\'' +
+				", zone_id='" + zone_id + '\'' +
+				", city_name='" + city_name + '\'' +
+				", sort='" + sort + '\'' +
+				", from=" + from +
+				", size=" + size +
+				", liveId='" + liveId + '\'' +
+				", locId='" + locId + '\'' +
+				", bullName='" + bullName + '\'' +
+				", bullId='" + bullId + '\'' +
+				", start_time=" + start_time +
+				", end_time=" + end_time +
+				", status=" + status +
+				'}';
+	}
 }
