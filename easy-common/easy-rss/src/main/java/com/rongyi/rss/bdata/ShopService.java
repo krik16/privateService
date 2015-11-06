@@ -1,6 +1,10 @@
 package com.rongyi.rss.bdata;
 
+import java.util.List;
+import java.util.Map;
+
 import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.easy.bdata.entity.Shop;
 
 /**
  * 店铺服务
@@ -36,4 +40,11 @@ public interface ShopService {
 	 * @return 带List&lt;ShopVO&gt;的ResponseVO
 	 */
 	ResponseVO getShopsByIds(String ids, long timeStamp, String channel, String sign);
+	
+	/**
+	 * 根据楼栋信息查询店铺列表
+	 * @param paramMap
+	 * @return
+	 */
+	public List<Shop> searchShop(Map<String, Object> paramMap);
 }
