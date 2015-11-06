@@ -489,4 +489,58 @@ public class ParentOrderVO implements Serializable {
 		DeductCouponAmount = deductCouponAmount;
 	}
 
+	@Override
+	public String toString() {
+		return "ParentOrderVO{" +
+				"orderId='" + orderId + '\'' +
+				", mallName='" + mallName + '\'' +
+				", brandName='" + brandName + '\'' +
+				", shopName='" + shopName + '\'' +
+				", shopIM=" + shopIM +
+				", totalPrice='" + totalPrice + '\'' +
+				", parentOrderStatus='" + parentOrderStatus + '\'' +
+				", nextStatusTime='" + nextStatusTime + '\'' +
+				", sonOrderList=" + sonOrderList +
+				", consignee='" + consignee + '\'' +
+				", phone='" + phone + '\'' +
+				", address='" + address + '\'' +
+				", provinceName='" + provinceName + '\'' +
+				", cityName='" + cityName + '\'' +
+				", districtName='" + districtName + '\'' +
+				", commodityPostage='" + commodityPostage + '\'' +
+				", orderNum='" + orderNum + '\'' +
+				", comment='" + comment + '\'' +
+				", payTime='" + payTime + '\'' +
+				", commitOrderTime='" + commitOrderTime + '\'' +
+				", deliverTime='" + deliverTime + '\'' +
+				", shopId='" + shopId + '\'' +
+				", shopMid='" + shopMid + '\'' +
+				", shopLogo='" + shopLogo + '\'' +
+				", isComment='" + isComment + '\'' +
+				", closeType='" + closeType + '\'' +
+				", closeReason='" + closeReason + '\'' +
+				", originalTotalPrice='" + originalTotalPrice + '\'' +
+				", buyerNickName='" + buyerNickName + '\'' +
+				", buyerPhone='" + buyerPhone + '\'' +
+				", receiveType='" + receiveType + '\'' +
+				", nickName='" + nickName + '\'' +
+				", imId='" + imId + '\'' +
+				", userLogo='" + userLogo + '\'' +
+				", userName='" + userName + '\'' +
+				", userPhone='" + userPhone + '\'' +
+				", guideId='" + guideId + '\'' +
+				", guideType=" + guideType +
+				", receiveTime='" + receiveTime + '\'' +
+				", cancelTime='" + cancelTime + '\'' +
+				", closeTime='" + closeTime + '\'' +
+				", statusRoute='" + statusRoute + '\'' +
+				", expressBillId='" + expressBillId + '\'' +
+				", expressName='" + expressName + '\'' +
+				", discountFee=" + discountFee +
+				", score='" + score + '\'' +
+				", scoreDeduction='" + scoreDeduction + '\'' +
+				", DeductCouponAmount='" + DeductCouponAmount + '\'' +
+				", liveName='" + liveName + '\'' +
+				'}';
+	}
 }

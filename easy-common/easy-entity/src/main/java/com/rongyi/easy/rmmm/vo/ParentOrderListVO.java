@@ -30,4 +30,11 @@ public class ParentOrderListVO extends PageVO implements Serializable{
 		this.totalNum = totalNum;
 	}
 
+	@Override
+	public String toString() {
+		return "ParentOrderListVO{" +
+				"parentOrderList=" + parentOrderList +
+				", totalNum='" + totalNum + '\'' +
+				'}';
+	}
 }

@@ -346,6 +346,4 @@ public class SalerParentOrderVO implements Serializable {
 				+ ", ticketStatus=" + ticketStatus + ", refuseReason=" + refuseReason + ", expressName=" + expressName
 				+ ", ticketPicList=" + ticketPicList + "]";
 	}
-
-
 }
