@@ -223,11 +223,13 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 	@Override
 	public int updateBatch(CheckParam param, String user) {
 		TransConfigurations transConf;
-		if (param.getGuideType()==2) {
+		if (param.getGuideType()!=null&&param.getGuideType()==2) {
 			//买手
 			transConf = roaRedisService.get(Constants.ConfigType.BUYER_TRANS_CONFIGURATIONS,TransConfigurations.class);
 		}else {
-			//导购
+			//前端传0表表示无渠道类型，默认查商家类型
+			if (param.getGuideType()!=null && param.getGuideType()==0)
+				param.setGuideType(1);
 			transConf = roaRedisService.get(Constants.ConfigType.TRANS_CONFIGURATIONS,TransConfigurations.class);
 		}
 		if (transConf==null) {
@@ -270,7 +272,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 					auditLog.setMemo(param.getReason());
 				logService.createCommissionAuditLog(auditLog);
 			}
-			LOGGER.info(param.getStatus() > 0 ? param.getStatus() + "级审核操作�?�过" : (-param.getStatus() + "级审核未通过"));
+			LOGGER.info(param.getStatus() > 0 ? param.getStatus() + "级审核操作通过" : (-param.getStatus() + "级审核未通过"));
 			return 1;
 		} else {
 			return -1;
