@@ -153,7 +153,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 				salesCommission.setCommissionAmount(mqCommissionParam.getCommissionAmount());
 				salesCommission.setGuideId(mqCommissionParam.getGuideId());
 				salesCommission.setOrderNo(mqCommissionParam.getOrderNo());
-//				salesCommission.setGuideType(mqCommissionParam.getGuideType());
+				salesCommission.setGuideType(mqCommissionParam.getGuideType());
 				String buyerId = mqCommissionParam.getBuyerId();
 				LOGGER.debug("[Commission Add] buyerId: " + buyerId);
 				if (buyerId != null) {
@@ -164,10 +164,10 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 				}
 
 				if (salesCommission.getId() != null) {
-					// 记录存在，在佣金生成前已上传过小�?
+					// 记录存在，在佣金生成前已上传过小票
 					updateByOrderNo(salesCommission);
 				} else {
-					// 记录不存在，未传过小�?
+					// 记录不存在，未传过小票
 					salesCommission.setStatus(0);
 					insert(salesCommission);
 				}
