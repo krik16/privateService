@@ -19,6 +19,7 @@ public class CommodityBuyerVO implements Serializable{
 	private String commodityStock;
 	private int commodityStatus;
 	private int commodityType;//渠道  1商家，2买手
+	private boolean supportCourierDeliver;//导购：true是   false否；买手：默认true   
 
 	private List<String> shopIM;// 店铺可用IM账号
 	
@@ -149,6 +150,7 @@ public class CommodityBuyerVO implements Serializable{
 		}
 		// 买手版渠道  0商家，1买手
 		this.commodityType = commodity.getType();
+		this.supportCourierDeliver = commodity.isSupportCourierDeliver();
 		
 	}
 	
@@ -226,4 +228,13 @@ public class CommodityBuyerVO implements Serializable{
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
 	}
+
+	public boolean isSupportCourierDeliver() {
+		return supportCourierDeliver;
+	}
+
+	public void setSupportCourierDeliver(boolean supportCourierDeliver) {
+		this.supportCourierDeliver = supportCourierDeliver;
+	}
+	
 }
