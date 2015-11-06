@@ -152,10 +152,8 @@ public interface RoaCouponService {
     PagingVO<Coupon> findAllByPage(CouponParam couponParam);
 
     /**
-     * boolean create(Coupon );
      * 根据卡券ID查看卡券关联的活动列表
-     *
-     * @param couponId
+     * @param couponId 代金券ID
      * @return List<CouponActivity>
      * @author lqy
      */
@@ -178,4 +176,12 @@ public interface RoaCouponService {
      * @author lqy
      */
     PagingVO getCouponShopsByCouponId(String couponId, Integer currentPage, Integer pageSize);
+
+    /**
+     * 根据卡券ID获取卡券详情（提供给容易逛代金券详情使用）
+     * @param couponId 卡券ID
+     * @return coupon
+     * @author lqy
+     */
+    Coupon getCouponById(String couponId);
 }

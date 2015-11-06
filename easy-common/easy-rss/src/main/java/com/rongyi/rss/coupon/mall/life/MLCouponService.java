@@ -73,10 +73,18 @@ public interface MLCouponService {
     /**
      * 根据卡券ID查询关联的店铺列表
      * @param couponId 卡券id
-     * @param currentPage 起始页
+     * @param currentPage 起始页从1开始
      * @param pageSize 每页行数
      * @return pagingVO
      * @author lqy
      */
     PagingVO getCouponShopsByCouponId(String couponId, Integer currentPage, Integer pageSize);
+
+    /**
+     * 根据卡券ID获取卡券详情（提供给容易逛代金券详情使用）
+     * @param couponId 卡券ID
+     * @return coupon
+     * @author lqy
+     */
+    Coupon getCouponById(String couponId);
 }
