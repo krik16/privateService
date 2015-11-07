@@ -121,4 +121,23 @@ public class LiveParam  implements Serializable{
 		this.liveStatus = liveStatus;
 	}
 
+	@Override
+	public String toString() {
+		return "LiveParam{" +
+				"liveId='" + liveId + '\'' +
+				", bullId='" + bullId + '\'' +
+				", liveName='" + liveName + '\'' +
+				", commodityIdList='" + commodityIdList + '\'' +
+				", beginTime='" + beginTime + '\'' +
+				", endTime='" + endTime + '\'' +
+				", liveStatus='" + liveStatus + '\'' +
+				", jsessionid='" + jsessionid + '\'' +
+				", commodityCount=" + commodityCount +
+				", page=" + page +
+				", pageSize=" + pageSize +
+				", currentPage=" + currentPage +
+				", zoneType=" + zoneType +
+				", liveAddressId='" + liveAddressId + '\'' +
+				'}';
+	}
 }
