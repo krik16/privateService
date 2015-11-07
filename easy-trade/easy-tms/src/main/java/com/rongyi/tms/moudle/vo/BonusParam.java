@@ -28,13 +28,15 @@ public class BonusParam {
 	private Integer operateType;
 	private BigDecimal amount;
 	private String marks;
-	private String guideType;
+	private Integer guideType;
 
-	public String getGuideType() {
+
+
+	public Integer getGuideType() {
 		return guideType;
 	}
 
-	public void setGuideType(String guideType) {
+	public void setGuideType(Integer guideType) {
 		this.guideType = guideType;
 	}
 
@@ -86,9 +88,11 @@ public class BonusParam {
 		this.operateType = operateType;
 	}
 
+	
 	@Override
 	public String toString() {
-		return "BonusParam [id=" + id + ", sellerAccount=" + sellerAccount + ", type=" + type + ", amount=" + amount + ", marks=" + marks + "]";
+		return "BonusParam [id=" + id + ", sellerAccount=" + sellerAccount + ", type=" + type + ", operateType=" + operateType + ", amount=" + amount + ", marks=" + marks + ", guideType=" + guideType
+				+ "]";
 	}
 
 	public BonusVO paramsToVO() {
@@ -108,7 +112,7 @@ public class BonusParam {
 		if (StringUtils.isNotBlank(marks)) {
 			vo.setMarks(marks);
 		}
-		if(StringUtils.isNotBlank(this.getGuideType())){
+		if(this.getGuideType() != null){
 			vo.setGuideType(Integer.valueOf(this.getGuideType()));
 		}
 		return vo;
