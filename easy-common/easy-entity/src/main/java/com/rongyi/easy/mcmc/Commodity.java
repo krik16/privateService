@@ -49,8 +49,59 @@ public class Commodity implements  Serializable,Cloneable{
 	private String brandMid;//品牌mongoId
 	
 	private boolean supportCourierDeliver=true;//支持快递发货字段  true 是    false否
-	
-	
+
+	@Override
+	public String toString() {
+		return "Commodity{" +
+				"id=" + id +
+				", type=" + type +
+				", liveId='" + liveId + '\'' +
+				", isSpot=" + isSpot +
+				", liveStartTime=" + liveStartTime +
+				", liveEndTime=" + liveEndTime +
+				", create_by='" + create_by + '\'' +
+				", name='" + name + '\'' +
+				", category='" + category + '\'' +
+				", shopId='" + shopId + '\'' +
+				", shopMid='" + shopMid + '\'' +
+				", status=" + status +
+				", code='" + code + '\'' +
+				", description='" + description + '\'' +
+				", postage='" + postage + '\'' +
+				", stock=" + stock +
+				", sold=" + sold +
+				", createAt=" + createAt +
+				", updateAt=" + updateAt +
+				", originalPrice='" + originalPrice + '\'' +
+				", currentPrice='" + currentPrice + '\'' +
+				", oPriceOfLowestCPrice='" + oPriceOfLowestCPrice + '\'' +
+				", brandName='" + brandName + '\'' +
+				", mallMid='" + mallMid + '\'' +
+				", shopNum='" + shopNum + '\'' +
+				", update_by='" + update_by + '\'' +
+				", brandMid='" + brandMid + '\'' +
+				", supportCourierDeliver=" + supportCourierDeliver +
+				", picList=" + picList +
+				", specList=" + specList +
+				", price=" + price +
+				", brandId='" + brandId + '\'' +
+				", mallId='" + mallId + '\'' +
+				", categoryIds=" + categoryIds +
+				", customCategory=" + customCategory +
+				", distribution=" + distribution +
+				", freight=" + freight +
+				", terminalType=" + terminalType +
+				", registerAt=" + registerAt +
+				", soldOutAt=" + soldOutAt +
+				", source=" + source +
+				", stockStatus=" + stockStatus +
+				", oPriceMax='" + oPriceMax + '\'' +
+				", oPriceMin='" + oPriceMin + '\'' +
+				", cPriceMax='" + cPriceMax + '\'' +
+				", cPriceMin='" + cPriceMin + '\'' +
+				'}';
+	}
+
 	public boolean isSupportCourierDeliver() {
 		return supportCourierDeliver;
 	}
