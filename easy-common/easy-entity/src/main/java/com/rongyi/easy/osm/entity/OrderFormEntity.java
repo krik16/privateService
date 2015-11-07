@@ -485,4 +485,37 @@ public class OrderFormEntity implements Serializable{
     public void setBuyerComment(String buyerComment) {
         this.buyerComment = buyerComment;
     }
+
+    @Override
+    public String toString() {
+        return "OrderFormEntity{" +
+                "id=" + id +
+                ", orderNo='" + orderNo + '\'' +
+                ", totalAmount=" + totalAmount +
+                ", expressFee=" + expressFee +
+                ", disconntFee=" + disconntFee +
+                ", expressInfoId='" + expressInfoId + '\'' +
+                ", status='" + status + '\'' +
+                ", statusRoute='" + statusRoute + '\'' +
+                ", createAt=" + createAt +
+                ", statusHoldMs=" + statusHoldMs +
+                ", nextStatusTime=" + nextStatusTime +
+                ", buyerId='" + buyerId + '\'' +
+                ", weidianId='" + weidianId + '\'' +
+                ", paymentIdList='" + paymentIdList + '\'' +
+                ", isComment=" + isComment +
+                ", addressId='" + addressId + '\'' +
+                ", orderType=" + orderType +
+                ", orderSource=" + orderSource +
+                ", couponId='" + couponId + '\'' +
+                ", internalCouponId='" + internalCouponId + '\'' +
+                ", guideId='" + guideId + '\'' +
+                ", discountInfo='" + discountInfo + '\'' +
+                ", buyerComment='" + buyerComment + '\'' +
+                ", jsonDiscountInfo=" + jsonDiscountInfo +
+                ", guideType=" + guideType +
+                ", isAlert=" + isAlert +
+                ", totalAmountWithoutScoreDiscount=" + totalAmountWithoutScoreDiscount +
+                '}';
+    }
 }

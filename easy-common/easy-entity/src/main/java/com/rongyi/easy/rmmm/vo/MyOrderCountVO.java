@@ -45,4 +45,13 @@ public class MyOrderCountVO implements Serializable{
 		this.afterSaleCount = afterSaleCount;
 	}
 
+	@Override
+	public String toString() {
+		return "MyOrderCountVO{" +
+				"unPaidCount='" + unPaidCount + '\'' +
+				", unReceiveCount='" + unReceiveCount + '\'' +
+				", unEvalueCount='" + unEvalueCount + '\'' +
+				", afterSaleCount='" + afterSaleCount + '\'' +
+				'}';
+	}
 }

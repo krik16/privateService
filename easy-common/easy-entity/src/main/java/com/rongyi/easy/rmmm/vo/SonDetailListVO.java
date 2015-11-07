@@ -106,9 +106,16 @@ public class SonDetailListVO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "SonDetailListVO [num=" + num + ", specColumnValues=" + specColumnValues + ", commodityPic=" + commodityPic
-				+ ", commodityCurrentPrice=" + commodityCurrentPrice + ", commodityOriginalPrice=" + commodityOriginalPrice
-				+ ", commodityId=" + commodityId + ", commodityName=" + commodityName + ", sonOrderId=" + sonOrderId + "]";
+		return "SonDetailListVO{" +
+				"num='" + num + '\'' +
+				", specColumnValues=" + specColumnValues +
+				", commodityPic='" + commodityPic + '\'' +
+				", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +
+				", commodityOriginalPrice='" + commodityOriginalPrice + '\'' +
+				", commodityId='" + commodityId + '\'' +
+				", commodityName='" + commodityName + '\'' +
+				", sonOrderId='" + sonOrderId + '\'' +
+				", commodityCommission='" + commodityCommission + '\'' +
+				'}';
 	}
-
 }

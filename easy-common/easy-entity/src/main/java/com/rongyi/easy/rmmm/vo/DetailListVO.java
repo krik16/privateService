@@ -107,8 +107,17 @@ public class DetailListVO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "DetailListVO [date=" + date + ", amount=" + amount + ", orderId=" + orderId + ", orderNum=" + orderNum
-				+ ", commodityPostage=" + commodityPostage + ", sonOrderList=" + sonOrderList + "]";
+		return "DetailListVO{" +
+				"date='" + date + '\'' +
+				", amount='" + amount + '\'' +
+				", orderId='" + orderId + '\'' +
+				", orderNum='" + orderNum + '\'' +
+				", commodityPostage='" + commodityPostage + '\'' +
+				", status='" + status + '\'' +
+				", allCommodityCommission='" + allCommodityCommission + '\'' +
+				", ticketStatus='" + ticketStatus + '\'' +
+				", sonOrderList=" + sonOrderList +
+				", disconnt='" + disconnt + '\'' +
+				'}';
 	}
-
 }

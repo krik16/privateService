@@ -290,7 +290,39 @@ public class TransactionDetailVO implements Serializable{
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	
-	
-	
+
+
+	@Override
+	public String toString() {
+		return "TransactionDetailVO{" +
+				"consignee='" + consignee + '\'' +
+				", phone='" + phone + '\'' +
+				", address='" + address + '\'' +
+				", provinceName='" + provinceName + '\'' +
+				", cityName='" + cityName + '\'' +
+				", districtName='" + districtName + '\'' +
+				", commitOrderTime='" + commitOrderTime + '\'' +
+				", payTime='" + payTime + '\'' +
+				", orderNums=" + orderNums +
+				", userId=" + userId +
+				", userLogo='" + userLogo + '\'' +
+				", userScore=" + userScore +
+				", userNickName='" + userNickName + '\'' +
+				", userName='" + userName + '\'' +
+				", userPhone='" + userPhone + '\'' +
+				", guideType=" + guideType +
+				", integral='" + integral + '\'' +
+				", imId='" + imId + '\'' +
+				", isBelong=" + isBelong +
+				", shopId=" + shopId +
+				", shopMId='" + shopMId + '\'' +
+				", shopName='" + shopName + '\'' +
+				", mallMId='" + mallMId + '\'' +
+				", msg='" + msg + '\'' +
+				", errno=" + errno +
+				", url='" + url + '\'' +
+				", isCollection='" + isCollection + '\'' +
+				", ifAttention=" + ifAttention +
+				'}';
+	}
 }
