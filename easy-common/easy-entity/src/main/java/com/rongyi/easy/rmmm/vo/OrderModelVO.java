@@ -140,4 +140,23 @@ public class OrderModelVO extends OrderModelParam implements Serializable {
 		this.cityName = cityName;
 	}
 
+	@Override
+	public String toString() {
+		return "OrderModelVO{" +
+				"orderModelId='" + orderModelId + '\'' +
+				", provinceId='" + provinceId + '\'' +
+				", cityId='" + cityId + '\'' +
+				", nickName='" + nickName + '\'' +
+				", imId='" + imId + '\'' +
+				", paymentWaitMax='" + paymentWaitMax + '\'' +
+				", userLogo='" + userLogo + '\'' +
+				", userName='" + userName + '\'' +
+				", userPhone='" + userPhone + '\'' +
+				", shopName='" + shopName + '\'' +
+				", mallName='" + mallName + '\'' +
+				", provinceName='" + provinceName + '\'' +
+				", cityName='" + cityName + '\'' +
+				", guideType=" + guideType +
+				'}';
+	}
 }
