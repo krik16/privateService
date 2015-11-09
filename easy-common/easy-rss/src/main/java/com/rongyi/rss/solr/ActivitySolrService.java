@@ -37,5 +37,5 @@ public interface ActivitySolrService {
 	 * @param activityId 
 	 * @return
 	 */
-	public ActivityDetailSearchResult activityDetailSearch(String activityId);
+	public ActivityDetailSearchResult activityDetailSearch(String activityId, boolean isNew);
 }
