@@ -243,8 +243,8 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 		if (CollectionUtils.isNotEmpty(salesCommissionVOs)){
 			for (SalesCommissionVO vo : salesCommissionVOs){
 				Map<String, Object> paramsMap = param.paramToMap();
-				paramsMap.put("guide_id",vo.getGuideId());
-				paramsMap.put("buyer_id",vo.getBuyerId());
+				paramsMap.put("guideId",vo.getGuideId());
+				paramsMap.put("buyerId",vo.getBuyerId());
 				Integer dailyCount = this.getBaseDao().selectOneBySql(NAMESPACE_SALESCOMMISSION + ".selectDailyCount", paramsMap);
 				if (dailyCount==null)
 					dailyCount=0;

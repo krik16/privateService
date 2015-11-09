@@ -734,7 +734,7 @@
 		sales_commission.guide_type = #{guideType,
 		jdbcType=INTEGER}
 		AND
-		sales_commission.`status`=3 AND
+		sales_commission.`status`in (3,6) AND
 		TO_DAYS(sales_commission.create_at)=TO_DAYS(NOW())
 		AND
 		ry_osm.order_form.buyer_id=#{buyerId,jdbcType=VARCHAR} GROUP BY
