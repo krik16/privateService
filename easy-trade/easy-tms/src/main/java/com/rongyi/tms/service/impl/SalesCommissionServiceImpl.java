@@ -9,15 +9,12 @@
  */
 package com.rongyi.tms.service.impl;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import com.rongyi.core.constant.Constants;
-import com.rongyi.rss.malllife.roa.ROARedisService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -28,6 +25,7 @@ import org.springframework.stereotype.Service;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.common.util.JsonUtil;
+import com.rongyi.core.constant.Constants;
 import com.rongyi.core.constant.VirtualAccountEventTypeEnum;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.gcc.TransConfigurations;
@@ -38,6 +36,7 @@ import com.rongyi.easy.tms.entity.SalesCommissionAuditLog;
 import com.rongyi.easy.tms.vo.SalesCommissionParam;
 import com.rongyi.easy.tms.vo.SalesCommissionVO;
 import com.rongyi.rss.gcc.RmmmSettingsService;
+import com.rongyi.rss.malllife.roa.ROARedisService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.tms.constants.Constant;
 import com.rongyi.tms.moudle.vo.BonusPageParam;
@@ -255,7 +254,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 				}else {
 					searchMap.put("status", 5);
 				}
-				LOGGER.info("searchMap: "+searchMap);
+				LOGGER.info("searchMap: "+searchMap.toString());
 				int updateResult =  this.getBaseDao().updateBySql(NAMESPACE_SALESCOMMISSION + ".updateStatus", searchMap);
 				if (updateResult>0)
 					result++;
@@ -308,9 +307,9 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 		Map<String,Object> paramsMap = new HashMap<>();
 		paramsMap.put("guideType", guideType);
 		List<CommissionAmountTotalVO> vos = this.getBaseDao().selectListBySql(NAMESPACE_SALESCOMMISSION + ".commissionAmountTotal", paramsMap);
-		LOGGER.info("查询到需要发送到  VA 的记录数为：" + vos.size());
+		LOGGER.info("查询到需要发送到  VA 的记录数为：" + vos.size()+",guideType="+guideType);
 		if (!vos.isEmpty()) {
-			// 每次MQ 消息�?多发�?50条记录，超过50的话，分次发�?
+			// 每次MQ 消息发送多发，每次50条记录，超过50的话，分次发送
 			int times = vos.size() % Constant.SENDSIZE.SIZE == 0 ? vos.size() / Constant.SENDSIZE.SIZE : (vos.size() / Constant.SENDSIZE.SIZE + 1);
 			LOGGER.info("times:" + times);
 			for (int i = 0; i < times; i++) {
@@ -344,7 +343,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 				}
 			}
 		} else {
-			LOGGER.info("定时查询总金额没有查询到数据�?");
+			LOGGER.info("定时查询总金额没有查询到数据");
 		}
 
 	}

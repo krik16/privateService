@@ -59,7 +59,7 @@ public class SalesCommissionController extends BaseController {
 
 	@RequestMapping(value = "/list")
 	public String findByPage(@ModelAttribute("param") SalesCommissionParam params, String module, ModelMap modelMap, HttpServletRequest request) {
-		LOGGER.info("SalesCommissionController list param={}", params);
+		LOGGER.info("SalesCommissionController list param={}", params.toString());
 		try {
 			PagingVO<SalesCommissionVO> pagingvos = commissionService.findByPage(params);
 			request.setAttribute("list", pagingvos.getDataList());
