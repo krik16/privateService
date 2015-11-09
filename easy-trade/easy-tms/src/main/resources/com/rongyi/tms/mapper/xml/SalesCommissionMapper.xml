@@ -726,8 +726,8 @@
 	</select>
 
 
-	<select id="selectDailyCount" parameterType="map" resultType="int">
-		SELECT COUNT(1) FROM
+	<select id="selectDailyCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM
 		<include refid="View_From" />
 		WHERE
 		sales_commission.guide_id=#{guideId,jdbcType=VARCHAR} AND
