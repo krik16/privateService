@@ -115,6 +115,7 @@ public class RpbServiceImpl implements IRpbService {
 				paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
 		if (Constants.RESULT.SUCCESS.equals(refundResultMap.get("result")) || ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr().equals(refundResultMap.get("result"))) {
 			paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
+			paymentEntity.setFinishTime(DateUtil.getCurrDateTime());
 			paymentService.updateByPrimaryKeySelective(paymentEntity);
 			refundResultMap.put("success", true);
 			String target = Constants.SOURCETYPE.OSM;

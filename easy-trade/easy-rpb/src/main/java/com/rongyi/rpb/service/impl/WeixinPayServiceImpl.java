@@ -142,11 +142,11 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 		paymentEntity.setPayNo(newPayNo);
 		paymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
 		paymentEntity.setCreateTime(DateUtil.getCurrDateTime());
-		paymentEntity.setFinishTime(DateUtil.getCurrDateTime());
 		paymentEntity.setPayChannel(hisPayEntity.getPayChannel());
-		if (Constants.RESULT.SUCCESS.equals(result.get("result")))
+		if (Constants.RESULT.SUCCESS.equals(result.get("result"))){
 			paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
-		else {
+			paymentEntity.setFinishTime(DateUtil.getCurrDateTime());
+		}else {
 			paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
 			LOGGER.info("微信退款失败,生成支付款记录，但未生成付款成功事件！");
 		}
