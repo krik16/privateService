@@ -170,7 +170,7 @@ public class WebPageAlipayController extends BaseController {
 				if (validateRepeatPay(map.get("out_trade_no").toString(), paymentLogInfo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0)) // 重复支付
 					return;
 				paymentLogInfoService.insertPayNotify(paymentLogInfo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, PaymentEventType.PAYMENT);
-				LOGGER.info("<--支付宝手机网页支付异步通知结束");
+				LOGGER.info("支付宝手机网页支付异步通知结束");
 				model.addAttribute("content", "支付成功");
 			}
 		} catch (Exception e) {
@@ -216,7 +216,7 @@ public class WebPageAlipayController extends BaseController {
 			LOGGER.info("支付宝验证签名不通过，返回消息不是支付宝发出的合法消息!");
 			return "appwebpage/notify";
 		}
-		LOGGER.info("支付宝手机APP支付异步通知开始,交易流水号-->" + trade_no);
+		LOGGER.info("支付宝手机APP支付异步通知开始,交易流水号,trade_no={}",trade_no);
 		PaymentLogInfo paymentLogInfo = getPaymentLogInfo(trade_no, out_trade_no, notify_id, notify_type, DateUtil.getCurrDateTime(), sign, sign_type, 0, 0, total_fee, buyer_email, buyer_id,
 				Constants.REPLAY_FLAG.REPLAY_FLAG0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
 		if (validateRepeatPay(out_trade_no, paymentLogInfo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0)) // 验证是否是重复支付
@@ -239,7 +239,7 @@ public class WebPageAlipayController extends BaseController {
 	public void weixinNotify(Model model, HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> requestMap = parseXml(request);
 		if ("SUCCESS".equals(requestMap.get("result_code"))) {
-			LOGGER.info("<--微信支付异步通知开始,tradeNo={}"+requestMap.get("transaction_id").toString());
+			LOGGER.info("微信支付异步通知开始,tradeNo={}",requestMap.get("transaction_id").toString());
 			Map<String, Object> responseMap = new HashMap<String, Object>();
 			responseMap.put("return_code", Constants.RESULT.SUCCESS);
 			responseMap.put("return_msg", "OK");
