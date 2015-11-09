@@ -437,7 +437,9 @@
 		commission_amount,
 		create_at,
 		create_user,
-		remarks,status
+		remarks,
+		status,
+		guide_type
 		)
 		VALUES
 		<foreach collection="list" item="item" index="index"
@@ -449,7 +451,9 @@
 			#{item.amount,jdbcType=DECIMAL},
 			NOW(),
 			#{item.createUser,jdbcType=VARCHAR},
-			#{item.marks,jdbcType=LONGVARBINARY},#{item.status,jdbcType=TINYINT}
+			#{item.marks,jdbcType=LONGVARBINARY},
+			#{item.status,jdbcType=TINYINT},
+			#{item.guideType,jdbcType=INTEGER}
 			)
 		</foreach>
 	</insert>
