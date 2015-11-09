@@ -48,7 +48,7 @@ body {
 		<div class="role">
 			<div class="role-title">考核奖金> 导入考核明细</div>
 			<form style="padding-left:200px;height: 100%;" id="account_form" name="account_form" action="${ctx}/bonus/uploadExcel" method="post" enctype ="multipart/form-data" >
-				<input type="hidden" id="isSubmit" value="-1"></input>
+				<input type="hidden" id="isSubmit" value="-1"/>
 			<div class="role-main">
 				<div class="role-new">
 					
@@ -138,19 +138,6 @@ function isUsedFile(input)
 		$(input).next(".msg").css("color","#9c9c9c");
 		$("#isSubmit").val("1");
 	}
-	/* var ext = ['.xlsx'];
-	var s = src.toLowerCase();
-	var r = false;
-	for(var i = 0; i < ext.length; i++)
-	{
-		if (s.indexOf(ext[i]) > 0)
-		{
-			alert(ext[i]);
-			r = true;
-			break;
-		}
-	}	
-	return r; */
 }
 </script>
 </html>

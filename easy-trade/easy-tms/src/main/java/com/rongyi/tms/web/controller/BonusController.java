@@ -461,10 +461,16 @@ public class BonusController extends BaseController {
 					if (hssfRow.getCell(0).getCellType() == XSSFCell.CELL_TYPE_STRING) {
 						accountString = hssfRow.getCell(0).getStringCellValue();
 					} else if (hssfRow.getCell(0).getCellType() == XSSFCell.CELL_TYPE_NUMERIC) {
-						accountString = hssfRow.getCell(0).getStringCellValue().toString();
+						accountString = hssfRow.getCell(0).getStringCellValue();
 					}
 					bonusVO.setSellerAccount(accountString);
-					Map<String, Object> verifuResultMap = this.verifyAccount(accountString,1);//默认只能导入导购的奖金
+					Integer guideType = 0;
+					if ("商家".equals(hssfRow.getCell(4).getRawValue().trim())){
+						guideType = 1;
+					}else if ("买手".equals(hssfRow.getCell(4).getRawValue().trim())){
+						guideType = 2;
+					}
+					Map<String, Object> verifuResultMap = this.verifyAccount(accountString,guideType);
 					String code = (String) verifuResultMap.get("code");
 					if (code.contains("-")) {
 						// 账号验证不通过
@@ -498,9 +504,9 @@ public class BonusController extends BaseController {
 					}
 					Double amount = hssfRow.getCell(3).getNumericCellValue();
 					bonusVO.setAmount(new BigDecimal(amount));
-					XSSFCell cell = hssfRow.getCell(4);
+					XSSFCell cell = hssfRow.getCell(5);
 					if (cell != null) {
-						String marksString = hssfRow.getCell(4).getStringCellValue();
+						String marksString = hssfRow.getCell(5).getStringCellValue();
 						if (StringUtils.isNotBlank(marksString)) {
 							bonusVO.setMarks(marksString);
 						}
@@ -508,6 +514,7 @@ public class BonusController extends BaseController {
 					bonusVO.setCreateUser(user);
 					LOGGER.info("第" + rowNum + "行数据对象bonus:" + bonusVO);
 					bonusVO.setStatus(0);
+					bonusVO.setGuideType(guideType);
 					bonusVOs.add(bonusVO);
 				}
 			}
@@ -553,7 +560,7 @@ public class BonusController extends BaseController {
 	 * @Description
 	 * @author 袁波
 	 * @param out
-	 * @param recordList
+	 * @param vos
 	 * @throws Exception
 	 */
 	protected void createRecordExcel(OutputStream out, List<BonusVO> vos) throws Exception {
