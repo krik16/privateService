@@ -41,4 +41,12 @@ public class LiveBrandVO implements Serializable {
 		this.brandLogo = brandLogo;
 	}
 
+	@Override
+	public String toString() {
+		return "LiveBrandVO{" +
+				"brandId='" + brandId + '\'' +
+				", brandName='" + brandName + '\'' +
+				", brandLogo='" + brandLogo + '\'' +
+				'}';
+	}
 }
