@@ -198,10 +198,6 @@ public interface MLCouponOrderService {
 
     /**
      * 根据卡券类型购买代金券或领取红包
-<<<<<<< HEAD:easy-common/easy-rss/src/main/java/com/rongyi/rss/coupon/mall/life/MLCouponOrderService.java
-=======
-     *
->>>>>>> develop-yuzhijian:easy-common/easy-rss/src/main/java/com/rongyi/rss/coupon/mall/life/MLCouponOrderService.java
      * @param param
      * @param couponType
      * @return
@@ -209,8 +205,6 @@ public interface MLCouponOrderService {
     ResponseResult createCouponOrder(CouponOrderParam param, String couponType);
 
     /**
-<<<<<<< HEAD:easy-common/easy-rss/src/main/java/com/rongyi/rss/coupon/mall/life/MLCouponOrderService.java
-=======
      * 买家已购买数量
      *
      * @param couponId
@@ -220,7 +214,6 @@ public interface MLCouponOrderService {
     int dailyBuyCount(String couponId, String userId);
 
     /**
->>>>>>> develop-yuzhijian:easy-common/easy-rss/src/main/java/com/rongyi/rss/coupon/mall/life/MLCouponOrderService.java
      * 定时关闭未支付订单
      *
      * @return
