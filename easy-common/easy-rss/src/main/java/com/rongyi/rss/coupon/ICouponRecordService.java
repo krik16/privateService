@@ -13,7 +13,7 @@ import java.util.Map;
 public interface ICouponRecordService {
 
     /**
-     * 分页查询现金券领取记录
+     * 分页查询红包领取记录
      *
      * @param paramMap
      * @param curPage

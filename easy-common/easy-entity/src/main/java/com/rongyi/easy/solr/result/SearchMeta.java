@@ -1,5 +1,7 @@
 package com.rongyi.easy.solr.result;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 
 public class SearchMeta implements Serializable{
@@ -31,4 +33,12 @@ public class SearchMeta implements Serializable{
 		this.msg = msg;
 	}
 
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append("hitCount", hitCount)
+				.append("status", status)
+				.append("msg", msg)
+				.toString();
+	}
 }

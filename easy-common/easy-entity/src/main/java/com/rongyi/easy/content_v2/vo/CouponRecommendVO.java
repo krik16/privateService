@@ -17,8 +17,8 @@ public class CouponRecommendVO implements Serializable {
     private String cityId;//城市Id
     private int type;//卡券类型
     private String typeVal;//卡券Id
-    private double origPrice;//原价
-    private double currPrice;//现价
+    private Double origPrice;//原价
+    private Double currPrice;//现价
     private String publishBeginAt;//发布开始时间
     private String publishEndAt;//发布结束时间
 
@@ -70,19 +70,19 @@ public class CouponRecommendVO implements Serializable {
         this.typeVal = typeVal;
     }
 
-    public double getOrigPrice() {
+    public Double getOrigPrice() {
         return origPrice;
     }
 
-    public void setOrigPrice(double origPrice) {
+    public void setOrigPrice(Double origPrice) {
         this.origPrice = origPrice;
     }
 
-    public double getCurrPrice() {
+    public Double getCurrPrice() {
         return currPrice;
     }
 
-    public void setCurrPrice(double currPrice) {
+    public void setCurrPrice(Double currPrice) {
         this.currPrice = currPrice;
     }
 

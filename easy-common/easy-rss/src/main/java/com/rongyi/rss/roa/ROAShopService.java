@@ -25,7 +25,7 @@ public interface ROAShopService {
      * 			"totalCount"	总数
      * @throws Exception
      */
-    public Map getShops(Map params, int currentpage, int pagesize) throws Exception;
+     Map getShops(Map params, int currentpage, int pagesize) throws Exception;
     
     /**
      * 根据店铺id查询出店铺信息
@@ -33,7 +33,7 @@ public interface ROAShopService {
      * @return
      * @throws Exception
      */
-    public ShopVO getShopVOById(String id)throws Exception;
+    ShopVO getShopVOById(String id)throws Exception;
     
 	/**
      * 通过分公司id查店铺
@@ -41,7 +41,9 @@ public interface ROAShopService {
      * @return
      * @throws Exception
      */
-    public List<ShopVO> getShopDetailByFilialeId(String filialeId) throws Exception ;
+     List<ShopVO> getShopDetailByFilialeId(String filialeId) throws Exception ;
+
+    List<ShopVO> getShopVOByMallIds(List<ObjectId> mallIds);
 
     /**
      * 查询集团、商场、品牌、店铺的地址信息（省市）
@@ -56,4 +58,12 @@ public interface ROAShopService {
      * @param ids
      * @return
      */
-    public List<ShopVO> getShopsByIds(List<ObjectId> ids) throws Exception;}
+     List<ShopVO> getShopsByIds(List<ObjectId> ids) throws Exception;
+
+    /**
+     * 获取品牌下面所有店铺
+     * @param brandId 品牌id
+     * @return
+     */
+     List<ShopVO> getShopVOsByBrandId(String brandId);
+}

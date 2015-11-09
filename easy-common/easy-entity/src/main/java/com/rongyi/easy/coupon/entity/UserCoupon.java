@@ -8,10 +8,13 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 用户卡券：优惠券/现金券信息
+ * 老用户代金券
+ * 红包移出去
  *
  * @author Breggor
+ * @see UserRedenvelope --用户红包
  */
+@Deprecated
 public class UserCoupon implements Serializable {
 
     private Long id;
@@ -67,12 +70,12 @@ public class UserCoupon implements Serializable {
     private Long itemId;
 
     /**
-     * 券类型: 优惠券[02] 现金券[03]
+     * 券类型: 优惠券[02] 红包[03]
      */
     private String couponType;
 
     /**
-     * 现金券: 0: 全场 1: 商品; 优惠券：0：商场 1：店铺
+     * 红包: 0: 全场 1: 商品; 优惠券：0：商场 1：店铺
      */
     private String type;
 
@@ -93,7 +96,7 @@ public class UserCoupon implements Serializable {
     private Integer status;
 
     /**
-     * 现金券 商品ids，多个以逗号分隔
+     * 红包 商品ids，多个以逗号分隔
      */
     private String productIds;
 
@@ -316,6 +319,19 @@ public class UserCoupon implements Serializable {
         return status;
     }
 
+
+    public Integer getConvertStatus() {
+        Integer val = status;
+        if (Integer.valueOf(1).equals(status)) {
+            val = Integer.valueOf(0);
+        } else if (Integer.valueOf(2).equals(status)) {
+            val = Integer.valueOf(1);
+        } else if (Integer.valueOf(3).equals(status)) {
+            val = Integer.valueOf(0);
+        }
+        return val;
+    }
+
     public void setStatus(Integer status) {
         this.status = status;
     }
@@ -338,6 +354,10 @@ public class UserCoupon implements Serializable {
 
     public Double getDiscount() {
         return discount;
+    }
+
+    public Integer getDiscount2Int() {
+        return discount == null ? 0 : discount.intValue() * 100;
     }
 
     public void setDiscount(Double discount) {
@@ -429,6 +449,18 @@ public class UserCoupon implements Serializable {
         this.refundAmount = refundAmount;
     }
 
+
+    //    使用状态: 未使用[1],已使用[2],已过期[3]
+    public void setConvertStatus(Integer status, Date validEndAt) {
+        if (UserRedenvelope.STATUS_UNUSE.equals(status))
+            this.setStatus(1);
+        else if (UserRedenvelope.STATUS_USED.equals(status))
+            this.setStatus(2);
+        else if (new Date().after(validEndAt))
+            this.setStatus(3);
+    }
+
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -460,4 +492,5 @@ public class UserCoupon implements Serializable {
                 .append("refundAmount", refundAmount)
                 .toString();
     }
+
 }

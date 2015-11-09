@@ -6,13 +6,13 @@ import java.util.Date;
 import org.bson.types.ObjectId;
 
 public class FilialeVo implements Serializable{
-	private ObjectId id;     
+	private String id;     
 	
 	private String name;     //分公司名称
 	
 	private String manager;  //管理者
 	
-	private ObjectId brandId;   //关联品牌ID
+	private String brandId;   //关联品牌ID
 	
 	private Date createAt;
 	
@@ -20,11 +20,11 @@ public class FilialeVo implements Serializable{
 	
 	private String brandName; //关联品牌名称
 
-	public ObjectId getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(ObjectId id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -44,11 +44,11 @@ public class FilialeVo implements Serializable{
 		this.manager = manager;
 	}
 
-	public ObjectId getBrandId() {
+	public String getBrandId() {
 		return brandId;
 	}
 
-	public void setBrandId(ObjectId brandId) {
+	public void setBrandId(String brandId) {
 		this.brandId = brandId;
 	}
 

@@ -23,6 +23,8 @@ public class MMNoticeVO implements Serializable{
     private String shopMid;
     /**状态0待审核 1审核通过 2 未通过*/
     private Integer status;
+	/**公告状态   0正常  1已下线*/
+	private Integer noticeStatus;
     /**发布时间*/
     private Date publishBeginAt;
     /**结束时间*/
@@ -37,8 +39,10 @@ public class MMNoticeVO implements Serializable{
     private List<String> picList;
     /**修改时间*/
     private Date updateAt;
-    /**ze*/
+    /**审核不通过内容*/
     private List<NoticeRecordEntity> reasonSta;
+	/**下线内容*/
+	private List<NoticeRecordEntity> noticeReasonSta;
     /**创建人*/
     private String createUser;
     
@@ -93,6 +97,15 @@ public class MMNoticeVO implements Serializable{
 	public Date getCreateAt() {
 		return createAt;
 	}
+
+	public List<NoticeRecordEntity> getNoticeReasonSta() {
+		return noticeReasonSta;
+	}
+
+	public void setNoticeReasonSta(List<NoticeRecordEntity> noticeReasonSta) {
+		this.noticeReasonSta = noticeReasonSta;
+	}
+
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
@@ -129,6 +142,15 @@ public class MMNoticeVO implements Serializable{
 	public void setCreateUser(String createUser) {
 		this.createUser = createUser;
 	}
+
+	public Integer getNoticeStatus() {
+		return noticeStatus;
+	}
+
+	public void setNoticeStatus(Integer noticeStatus) {
+		this.noticeStatus = noticeStatus;
+	}
+
 	@Override
 	public String toString() {
 		return "MMNoticeVO [id=" + id + ", content=" + content + ", shopName="
@@ -137,7 +159,7 @@ public class MMNoticeVO implements Serializable{
 				+ publishEndAt + ", createUserid=" + createUserid
 				+ ", createAt=" + createAt + ", praiseCount=" + praiseCount
 				+ ", picList=" + picList + ", updateAt=" + updateAt
-				+ ", reasonSta=" + reasonSta + ", createUser=" + createUser
+				+ ", reasonSta=" + reasonSta + ",noticeStatus="+ noticeStatus +",noticeReasonSta="+ noticeReasonSta +", createUser=" + createUser
 				+ "]";
 	}
 	

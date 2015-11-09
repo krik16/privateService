@@ -37,7 +37,7 @@ public interface ROAPushTaskService {
 	 * 更新
 	 * @param push
 	 */
-	public boolean updatePushTask(PushTask push);
+	public String updatePushTask(PushTask push);
 	/**
 	 * 获取用户数量
 	 */
