@@ -16,6 +16,7 @@ import java.util.Map;
 
 import net.sf.json.JSONObject;
 
+import org.apache.poi.ss.formula.eval.PercentEval;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -148,6 +149,7 @@ public class WithdrawApplyServiceImpl implements WithdrawApplyService {
 				result.setMessage(CodeEnum.ERROR_ACCOUNT_DRAW_TIMES.getMessage());
 				result.setSuccess(false);
 			}
+			logger.debug("提现申请结束,result={},permission={}",result,permission);
 		} catch (Exception e) {
 			result.setCode(CodeEnum.ERROR_SYSTEM.getActionCode());
 			result.setMessage(CodeEnum.ERROR_SYSTEM.getMessage());
@@ -156,7 +158,6 @@ public class WithdrawApplyServiceImpl implements WithdrawApplyService {
 			e.printStackTrace();
 			logger.error(e.getMessage());
 		}
-		logger.debug(">>>>>>>>>提现申请结束");
 		return result;
 
 	}
