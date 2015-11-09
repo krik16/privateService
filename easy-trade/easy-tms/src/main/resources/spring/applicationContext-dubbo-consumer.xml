@@ -49,16 +49,13 @@
 	<!-- redis -->
 	<dubbo:reference interface="com.rongyi.rss.malllife.roa.ROARedisService" id="rOARedisService" version="${dubbo.version}" check="false" />
 	<!-- 根据订单号查询优惠券信息 -->
-	<dubbo:reference interface="com.rongyi.rss.coupon.RoaCouponOrderService" id="roaCouponOrderService"  version="${dubbo.version}" check="false"/>
 	<!-- 黑名单列表 -->
 	<dubbo:reference interface="com.rongyi.rss.cheat.IAntiCheatService" id="antiCheatService"  version="${dubbo.version}" check="false"/>
 	<!--交易中心-->
 	<dubbo:reference id="roaProxyCouponOrderService" interface="com.rongyi.rss.tradecenter.RoaProxyCouponOrderService" version="${dubbo.version}" check="false"/>
 	<!-- 用户使用红包记录 -->
-	<dubbo:reference interface="com.rongyi.rss.coupon.RoaUserCashCouponService" id="roaUserCashCouponService"  version="${dubbo.version}" check="false"/>
 	<dubbo:reference id="roaUserRedenvelopeService" interface="com.rongyi.rss.coupon.RoaUserRedenvelopeService" version="${dubbo.version}" check="false"/>
 	<!-- 用户优惠券记录 -->	
-	<dubbo:reference interface="com.rongyi.rss.coupon.RoaUserCouponService" id="roaUserCouponService"  version="${dubbo.version}" check="false"/>
 	<dubbo:reference interface="com.rongyi.rss.tradecenter.ProxyUserCouponService" id="proxyUserCouponService"  version="${dubbo.version}" check="false"/>
 	<!-- 优惠券模板信息 -->
 	<dubbo:reference interface="com.rongyi.rss.coupon.RoaCouponService" id="roaCouponService"  version="${dubbo.version}" check="false"/>
