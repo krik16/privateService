@@ -177,6 +177,7 @@ public class CommodityVO  implements  Serializable {
 		
 	}
 	public CommodityVO(Commodity commodity){
+		this.commodityType = commodity.getType();
 		this.shopId = commodity.getShopId();
 		this.shopMid = commodity.getShopMid();//店铺mongoId
 		this.create_by = commodity.getCreate_by();//创建人
