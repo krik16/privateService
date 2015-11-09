@@ -277,6 +277,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 					paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
 			if (Constants.RESULT.SUCCESS.equals(refundResultMap.get("result")) || ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr().equals(refundResultMap.get("result"))) {
 				paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
+				paymentEntity.setFinishTime(DateUtil.getCurrDateTime());
 				paymentService.updateByPrimaryKeySelective(paymentEntity);
 				String target = Constants.SOURCETYPE.OSM;
 				String orderDetailNum = "";
