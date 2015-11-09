@@ -30,4 +30,10 @@ public interface IShopService {
 	public List<ShopEntity> searchShop(Map<String,Object> paramMap);
 	
 	public void insertShopList(List<ShopEntity> shops);
+
+	/**根据系统编号查询
+	 * @param number brandMid
+	 * @return
+	 */
+	public ShopEntity serachShopByNumber(String number,String brandMid);
 }
