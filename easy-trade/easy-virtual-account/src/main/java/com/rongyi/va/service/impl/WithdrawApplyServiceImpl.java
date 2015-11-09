@@ -16,7 +16,6 @@ import java.util.Map;
 
 import net.sf.json.JSONObject;
 
-import org.apache.poi.ss.formula.eval.PercentEval;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -137,19 +136,19 @@ public class WithdrawApplyServiceImpl implements WithdrawApplyService {
 				}
 
 			} else if (permission == 1) {
-				result.setCode(CodeEnum.ERROR_ACCOUNT_NO_PERMISSION.getActionCode());
-				result.setMessage(CodeEnum.ERROR_ACCOUNT_NO_PERMISSION.getMessage());
+				result.setCode(CodeEnum.ERROR_ACCOUNT_DRAW_TIMES.getActionCode());
+				result.setMessage(CodeEnum.ERROR_ACCOUNT_DRAW_TIMES.getMessage());
 				result.setSuccess(false);
 			} else if (permission == 2) {
 				result.setCode(CodeEnum.ERROR_ACCOUNT_INSUFFICIENT_BALANCE.getActionCode());
 				result.setMessage(CodeEnum.ERROR_ACCOUNT_INSUFFICIENT_BALANCE.getMessage());
 				result.setSuccess(false);
 			}  else if (permission == 3) {
-				result.setCode(CodeEnum.ERROR_ACCOUNT_DRAW_TIMES.getActionCode());
-				result.setMessage(CodeEnum.ERROR_ACCOUNT_DRAW_TIMES.getMessage());
+				result.setCode(CodeEnum.ERROR_ACCOUNT_NO_PERMISSION.getActionCode());
+				result.setMessage(CodeEnum.ERROR_ACCOUNT_NO_PERMISSION.getMessage());
 				result.setSuccess(false);
 			}
-			logger.debug("提现申请结束,result={},permission={}",result,permission);
+			logger.info("提现申请结束,result={},permission={}",result,permission);
 		} catch (Exception e) {
 			result.setCode(CodeEnum.ERROR_SYSTEM.getActionCode());
 			result.setMessage(CodeEnum.ERROR_SYSTEM.getMessage());
