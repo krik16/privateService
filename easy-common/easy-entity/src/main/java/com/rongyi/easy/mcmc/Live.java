@@ -233,4 +233,92 @@ public class Live implements Serializable {
 	public int getSort() {
 		return LiveSortCode.fromStatus(LiveStatus.fromValue(getStatus())).getValue();
 	}
+
+	@Override
+	public String toString() {
+		return "Live{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", beginTime=" + beginTime +
+				", endTime=" + endTime +
+				", bullId='" + bullId + '\'' +
+				", status=" + status +
+				", detail='" + detail + '\'' +
+				", zoneId=" + zoneId +
+				", zoneName='" + zoneName + '\'' +
+				", createTime=" + createTime +
+				", location=" + location +
+				", brandIds=" + brandIds +
+				", brandNames=" + brandNames +
+				", zoneType=" + zoneType +
+				", bullName='" + bullName + '\'' +
+				", phone='" + phone + '\'' +
+				", sort=" + sort +
+				'}';
+	}
+
+	@Override
+	public int hashCode() {
+		return this.toString().hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return this.toString().equals(obj.toString());
+	}
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		Live live = new Live();
+		live.setId(id);
+		live.setName(name);
+		live.setBeginTime(beginTime);
+		live.setEndTime(endTime);
+		live.setBullId(bullId);
+		live.setStatus(status);
+		live.setDetail(detail);
+		live.setZoneId(zoneId);
+		live.setZoneName(zoneName);
+		live.setCreateTime(createTime);
+		live.setLocation(location);
+		live.setBrandIds(brandIds);
+		live.setBrandNames(brandNames);
+		live.setZoneType(zoneType);
+		live.setBullName(bullName);
+		live.setPhone(phone);
+		return live;
+	}
+
+	public static void main(String[] args) throws CloneNotSupportedException {
+		Live po = new Live();
+		Live apo = new Live();
+
+		Date date = new Date();
+		po.setBeginTime(date);
+		po.setBullId("123");
+		po.setName("abc");
+		po.setEndTime(date);
+		po.setStatus(1);
+
+		apo = (Live) po.clone();
+
+		po.setName("aaaaaaaaaaaaaaaaaaaaa");
+
+		List<Commodity> a = new ArrayList<>();
+		List<Commodity> b = new ArrayList<>();
+
+		Commodity aa = new Commodity();
+		aa.setId(new ObjectId("54d4b979e4b0a87d60ea2d23"));
+		Commodity bb = new Commodity();
+		bb.setId(new ObjectId("54d4b979e4b0a87d60ea2d23"));
+
+		a.add(aa);
+		b.add(bb);
+
+		System.out.println("========" + a.removeAll(b) + "|| a=" + a);
+		System.out.println("a toString:" + po.getName());
+		System.out.println("b toString:" + apo.getName());
+//		System.out.println("a hashcode:" + po.hashCode());
+//		System.out.println("b hashcode:" + apo.hashCode());
+	}
 }

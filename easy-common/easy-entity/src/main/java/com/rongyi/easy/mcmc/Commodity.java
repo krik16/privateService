@@ -431,6 +431,7 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setStockStatus(int stockStatus) {
 		this.stockStatus = stockStatus;
 	}
+
 	@Override
 	public Commodity clone() throws CloneNotSupportedException {
 		Commodity commodity=new Commodity();
@@ -472,5 +473,15 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setUpdate_by(update_by);
 		commodity.setUpdateAt(updateAt);
 		return commodity;
+	}
+
+	@Override
+	public int hashCode() {
+		return this.toString().hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return this.toString().equals(obj.toString());
 	}
 }
