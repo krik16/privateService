@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
 
 /** 
  * @ClassName: BuildingEntity 
@@ -19,6 +20,7 @@ import org.mongodb.morphia.annotations.Entity;
 @Entity("building")
 public class BuildingEntity implements Serializable{
 	
+	@Id
 	private ObjectId id;
 	
 	private Integer type;//楼栋类型 0楼1栋2幢3座
