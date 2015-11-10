@@ -730,12 +730,15 @@
 		SELECT COUNT(*) FROM
 		<include refid="View_From" />
 		WHERE
-		sales_commission.guide_id=#{guideId,jdbcType=VARCHAR}
-		AND sales_commission.guide_type = #{guideType, jdbcType=INTEGER}
-		AND sales_commission.`status`in (3,6)
-		AND TO_DAYS(sales_commission.create_at)=TO_DAYS(NOW())
-		AND ry_osm.order_form.buyer_id=#{buyerId,jdbcType=VARCHAR}
-		GROUP BY sales_commission.guide_id,sales_commission.buyer_account
+		sales_commission.guide_id=#{guideId,jdbcType=VARCHAR} AND
+		sales_commission.guide_type = #{guideType,
+		jdbcType=INTEGER}
+		AND
+		sales_commission.`status`in (3,6) AND
+		TO_DAYS(sales_commission.create_at)=TO_DAYS(NOW())
+		AND
+		ry_osm.order_form.buyer_id=#{buyerId,jdbcType=VARCHAR} GROUP BY
+		sales_commission.guide_id,sales_commission.buyer_account
 	</select>
 	<update id="updateStatus" parameterType="map">
 		UPDATE sales_commission

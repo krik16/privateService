@@ -64,7 +64,6 @@ public class SmsUtil {
 
 			//组织短信明文
 			StringBuffer sb = new StringBuffer();
-			sb.append("【容易网】");
 			sb.append(payType);
 			sb.append("支付账号：");
 			sb.append(payAccount);
