@@ -27,6 +27,11 @@ public class BuildingVO {
 	
 	private int valid;//0正常1隐藏2删除
 	
+	public BuildingVO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
 	public BuildingVO(BuildingEntity build) {
 		super();
 		if(build!=null){
