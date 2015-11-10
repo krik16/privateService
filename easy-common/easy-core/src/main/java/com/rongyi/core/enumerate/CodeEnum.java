@@ -140,6 +140,7 @@ public enum CodeEnum {
     ERROR_COUPON_OUTDATE("-6001","此红包不可用"),
     ERROR_COUPON_REPEAT("-6002","一张红包只能使用一次"),
     ERROR_COUPON_PUBLISH_OVER("-6003","每日限量发行数填写错误"),
+    ERROR_COUPON_PUBLISH_CHANNEL("-6004","亲，活动券你不能管理哦"),
 
     ERROR_ACCOUNT_INSUFFICIENT_BALANCE("-7001","账户余额不足"),
     ERROR_ACCOUNT_NO_PERMISSION("-7002","账户被冻结或未授权"),
