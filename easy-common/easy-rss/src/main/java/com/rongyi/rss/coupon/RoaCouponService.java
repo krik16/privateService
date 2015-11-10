@@ -49,7 +49,6 @@ public interface RoaCouponService {
      */
     Coupon findById(String couponId);
 
-
     /**
      * 代金券下线
      *
@@ -76,7 +75,6 @@ public interface RoaCouponService {
      */
     boolean updateOffStock(String id, boolean status);
 
-
     /**
      * 根据卡券Id减少库存
      *
@@ -85,7 +83,6 @@ public interface RoaCouponService {
      * @return
      */
     boolean subtractInventory(String couponId, int quantity);
-
 
     /**
      * 根据卡券Id恢复库存
