@@ -8,6 +8,7 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
+@SuppressWarnings("serial")
 @Entity("zones")
 public class FloorEntity implements Serializable{
 	

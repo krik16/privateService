@@ -24,6 +24,7 @@ import com.rongyi.easy.shop.param.ShopParam;
  * @author wzh
  *
  */
+@SuppressWarnings("serial")
 @Entity("shops")
 public class ShopEntity implements Serializable{
 	@JsonSerialize(using=JsonObjectIdSerializer.class)

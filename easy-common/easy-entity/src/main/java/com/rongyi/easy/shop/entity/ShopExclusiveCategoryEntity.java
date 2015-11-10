@@ -7,13 +7,14 @@ import org.bson.types.ObjectId;
 
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
+
+@SuppressWarnings("serial")
 @Entity("shop_exclusive_category")
 public class ShopExclusiveCategoryEntity  implements java.io.Serializable{
 
 	/**
 	 * 店铺专属分类
 	 */
-	private static final long serialVersionUID = -3491400779856182500L;
 	@Id
 	private ObjectId id;
 	private String name;
