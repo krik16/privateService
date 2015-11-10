@@ -30,26 +30,7 @@
   	<dubbo:reference id="roaCooperationMallService" interface="com.rongyi.rss.mallshop.shop.ROACooperationMallService"  version="${dubbo.version}" check="false"/>
   	<dubbo:reference id="roaShopService" interface="com.rongyi.rss.mallshop.shop.ROAShopService"  version="${dubbo.version}" check="false"/> 
   	<!-- 根据订单查询买家信息 -->
-  	<dubbo:reference id="roaOrderFormService" interface="com.rongyi.rss.mallshop.order.ROAOrderFormService"  version="${dubbo.version}" check="false"/> 
-  	<dubbo:reference id="roaOrderDetailFormService" interface="com.rongyi.rss.mallshop.order.ROAOrderDetailFormService"  version="${dubbo.version}" check="false"/> 
-  	<dubbo:reference id="rOAOrderService" interface="com.rongyi.rss.mallshop.order.ROAOrderService"  version="${dubbo.version}" check="false"/>
-  	<!-- 发送佣金变化状态 -->
 	<dubbo:reference id="rOACommodityCommissionService" interface="com.rongyi.rss.mallshop.order.ROACommodityCommissionService" version="${dubbo.version}" check="false" />
 	<!-- rpb服务接口 -->
 	<dubbo:reference interface="com.rongyi.rss.rpb.IRpbService" id="rpbService"  version="${dubbo.version}" check="false"/>
-	<!-- 用户现金券  -->
-	<dubbo:reference interface="com.rongyi.rss.coupon.IUserCouponService" id="iUserCouponService"  version="${dubbo.version}" check="false"/>
-	<dubbo:reference interface="com.rongyi.rss.roa.ROAVirtualAccountGeneralService" id="rOAVirtualAccountGeneralService" version="${dubbo.version}" check="false"/>
-
-	<!-- 获取系统参数 -->
-	<dubbo:reference interface="com.rongyi.rss.gcc.RmmmSettingsService" id="rmmmSettingsService" version="${dubbo.version}" check="false" />
-	
-	<!-- 商品信息 -->
-	<dubbo:reference interface="com.rongyi.rss.malllife.roa.ROACommodityService" id="rOACommodityService" version="${dubbo.version}" check="false" />
-	<!-- redis -->
-	<dubbo:reference interface="com.rongyi.rss.malllife.roa.ROARedisService" id="rOARedisService" version="${dubbo.version}" check="false" />
-	<!-- 根据订单号查询优惠券信息 -->
-	<dubbo:reference interface="com.rongyi.rss.coupon.RoaCouponOrderService" id="roaCouponOrderService"  version="${dubbo.version}" check="false"/>
-	<!-- 获取用户订单使用优惠券记录 -->
-	<dubbo:reference interface="com.rongyi.rss.coupon.mall.life.MLCouponService" id="mmUserCouponService"  version="${dubbo.version}" check="false"/>
 </beans>
