@@ -56,8 +56,8 @@
 						<li class="name">渠道</li>
 						<li class="line">|</li>
 						<li class="data max2">
-							<c:if test="${order.guideType==1 }">商家（<span style="color:red">直播：${order.liveName}</span>）</c:if>
-							<c:if test="${order.guideType==2 }">买手（<span style="color:red">直播：${order.liveName}</span>）</c:if>
+							<c:if test="${order.guideType==1 }">商家<c:if test="${order.liveName!=null}">（<span style="color:red">直播：${order.liveName}</span>）</c:if></c:if>
+							<c:if test="${order.guideType==2 }">买手<c:if test="${order.liveName!=null}">（<span style="color:red">直播：${order.liveName}</span>）</c:if></c:if>
 						</li>
 					</ul>
 				</div>
