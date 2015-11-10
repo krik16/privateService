@@ -78,7 +78,7 @@
             </div>
 
             <div class="form-group">
-                <label>渠道：</label>
+                <label>订单状态：</label>
                 <select id="status" class="form-control ng-pristine ng-untouched ng-valid">
                     <option value="0">-- 全部 --</option>
                     <option value="1">未付款</option>
