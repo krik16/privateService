@@ -151,7 +151,7 @@ public class OrderManagerController extends BaseController {
 				throw new RuntimeException("orderId is null or empty");
 			}
 			ParentOrderVO orderDetailVo = roaOrderService.getParentOrderVO(Integer.valueOf(orderId));
-			List<MMUserCouponVO> cashCoupons = new ArrayList<MMUserCouponVO>();
+			List<MMUserCouponVO> cashCoupons = new ArrayList<>();
 			List<SonOrderVO> sonOrderList = orderDetailVo.getSonOrderList();
 			BigDecimal discountTotal = new BigDecimal("0.00");//总红包（抵扣）
 			BigDecimal commidityTotalPice = new BigDecimal("0.00");//商品总价
@@ -215,21 +215,14 @@ public class OrderManagerController extends BaseController {
 	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/ajaxSearchOrderList")
-	public String ajaxSearchOrderList(HttpServletRequest request, HttpServletResponse response, HttpSession session,
-			ModelMap model, String paramsJson) {
+	public String ajaxSearchOrderList(HttpServletRequest request, ModelMap model, String paramsJson) {
 		try {
-			Map<String, Object> resultMap = new HashMap<String, Object>();
-			Map<String, Object> paramsMap = new HashMap<String, Object>();
-			Map<String, Object> searchMap = new HashMap<String, Object>();
+			Map<String, Object> paramsMap;
+			Map<String, Object> searchMap = new HashMap<>();
 			try {
 				request.setCharacterEncoding("utf-8");
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
-			}
-			if (StringUtils.isBlank(paramsJson)) {
-				resultMap.put("msg", "参数为NULL，请关闭再重试！");
-				resultMap.put("status", 0);
-				return null;
 			}
 			logger.info("paramsjson={}", paramsJson);
 			paramsMap = JsonUtil.getMapFromJson(paramsJson);
@@ -294,7 +287,7 @@ public class OrderManagerController extends BaseController {
 			}
 			PagingVO<OrderManagerVO> pagingVO = roaOrderFormService.searchListByMap(searchMap);
 			List<OrderManagerVO> orderForms = pagingVO.getDataList();
-			List<OrderManagerVO> orderFormList = new ArrayList<OrderManagerVO>();
+			List<OrderManagerVO> orderFormList = new ArrayList<>();
 			if (!CollectionUtils.isEmpty(orderForms)) {
 				for (OrderManagerVO orderManagerVO : orderForms) {
 					OrderManagerVO orderVo = setOrderTotalAmount(orderManagerVO);
@@ -343,7 +336,7 @@ public class OrderManagerController extends BaseController {
 	private List<String> getIdFromUser(List<UserInfoVO> users) {
 		List<String> list = new ArrayList<String>();
 		for (UserInfoVO user : users) {
-			String userId = null;
+			String userId;
 			if (user.getUserId() != null) {
 				userId = user.getUserId();
 				list.add(userId);
@@ -358,8 +351,8 @@ public class OrderManagerController extends BaseController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/ajaxGetMalls")
 	public String ajaxGetMalls(HttpServletRequest request, HttpServletResponse response, String paramsJson) {
-		Map<String, Object> result = new HashMap<String, Object>();
-		Map<String, Object> paramsMap = new HashMap<String, Object>();
+		Map<String, Object> result = new HashMap<>();
+		Map<String, Object> paramsMap;
 		try {
 			request.setCharacterEncoding("utf-8");
 			if (StringUtils.isBlank(paramsJson)) {
@@ -399,8 +392,8 @@ public class OrderManagerController extends BaseController {
 	@RequestMapping("/ajaxGetShops")
 	public String ajaxGetShops(HttpServletRequest request, HttpServletResponse response, String paramsJson)
 			{
-		Map<String, Object> paramsMap = new HashMap<String, Object>();
-		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, Object> paramsMap ;
+		Map<String, Object> result = new HashMap<>();
 		try {
 			request.setCharacterEncoding("utf-8");
 			if (StringUtils.isBlank(paramsJson)) {
@@ -418,7 +411,7 @@ public class OrderManagerController extends BaseController {
 			}
 			name = URLDecoder.decode(name, "utf-8");
 			mallId = URLDecoder.decode(mallId, "utf-8");
-			Map<String, Object> searchMap = new HashMap<String, Object>();
+			Map<String, Object> searchMap = new HashMap<>();
 			searchMap.put("mallId", mallId);
 			searchMap.put("name", name);
 			List<ShopInfoEntity> reList = roaShopService.getShopListByShopName(name, Integer.valueOf(mallId));
@@ -447,8 +440,8 @@ public class OrderManagerController extends BaseController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/ajaxGetUsers")
 	public String ajaxGetNickName(HttpServletRequest request, HttpServletResponse response, String paramsJson) {
-		Map<String, Object> paramsMap = new HashMap<String, Object>();
-		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, Object> paramsMap;
+		Map<String, Object> result = new HashMap<>();
 		List<UserInfoVO> reList = null;
 		try {
 			request.setCharacterEncoding("utf-8");
@@ -494,7 +487,7 @@ public class OrderManagerController extends BaseController {
 		logger.info(">>>commodity detail");
 		try {
 			List<String> picList = commodityService.getCommodityPicList(commodityId);
-			List<String> picListForEight = new ArrayList<String>();
+			List<String> picListForEight = new ArrayList<>();
 
 			if (picList != null && picList.size() > 8) {
 				for (int i = 0; i < 8; i++) {
