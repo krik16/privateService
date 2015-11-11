@@ -9,6 +9,12 @@ public class AreaVO {
 	private Integer floorType;//楼栋类型 0楼1栋2幢3座
 	private String floorName;//楼层
 	
+	
+	
+	public AreaVO() {
+		super();
+	}
+
 	public String getId() {
 		return id;
 	}
