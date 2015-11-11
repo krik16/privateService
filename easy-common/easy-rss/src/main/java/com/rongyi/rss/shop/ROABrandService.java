@@ -12,7 +12,7 @@ public interface ROABrandService {
 	 * @param pageSize
 	 * @return
 	 */
-	public List<BrandEntity> searchBrand(String name,int currpage,int pageSize);
+	public List<BrandEntity> searchBrand(String name,int type,int currpage,int pageSize);
 	
 	/**
 	 * 模糊查询品牌数量

@@ -20,7 +20,7 @@ public class ShopParamForSearch {
 	private Integer shopNature;// 店铺性质 0商场店铺 1商场专柜 2街边店-1表示所有
 	
 	private Integer status;//商家平台0正常营业 1即将营业 2暂停营业3待处理-1表示所有4表示系统下架 
-	                       //运营平台 店铺状态-2正常 0正常营业 1即将营业 2暂停营业 3停止营业4系统下架-1表示（ 0正常营业 1即将营业 2暂停营业）
+	                       //运营平台 店铺状态-1所有 0正常营业 1即将营业 2暂停营业 3停止营业4系统下架-2表示（ 0正常营业 1即将营业 2暂停营业）
 	
 	@JsonDeserialize(using=DateJsonDeserializer.class)
 	private Date updateTime;//最后修改时间(商家平台)
