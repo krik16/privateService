@@ -18,13 +18,11 @@ public class ShopVOList {
 	
 	private Long suspendedNum;//暂停营业
 	
-	private Long businessNum;//正常数量
+	private Long businessNum;//正常数量(正常营业+待营业+暂停营业)
 	
 	private Long shelvesNum;//下架数量
 	
 	private Long totalNum;//所有数量
-	
-	
 	
 	public ShopVOList() {
 		super();
