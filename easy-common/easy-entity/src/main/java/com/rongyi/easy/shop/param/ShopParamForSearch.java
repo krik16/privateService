@@ -23,9 +23,6 @@ public class ShopParamForSearch {
 	                       //运营平台 店铺状态-1所有 0正常营业 1即将营业 2暂停营业 3停止营业4系统下架-2表示（ 0正常营业 1即将营业 2暂停营业）
 	
 	@JsonDeserialize(using=DateJsonDeserializer.class)
-	private Date updateTime;//最后修改时间(商家平台)
-	
-	@JsonDeserialize(using=DateJsonDeserializer.class)
 	private Date startTime;//最后修改时间 时间区域开始(运营平台)
 	
 	@JsonDeserialize(using=DateJsonDeserializer.class)
@@ -61,14 +58,6 @@ public class ShopParamForSearch {
 
 	public void setStatus(Integer status) {
 		this.status = status;
-	}
-
-	public Date getUpdateTime() {
-		return updateTime;
-	}
-
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
 	}
 	
 	public String getName() {
