@@ -312,5 +312,43 @@ public class CommodityVO  implements  Serializable {
 	public void setSupportCourierDeliver(boolean supportCourierDeliver) {
 		this.supportCourierDeliver = supportCourierDeliver;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "CommodityVO{" +
+				"commodityId='" + commodityId + '\'' +
+				", commodityName='" + commodityName + '\'' +
+				", commodityCategory='" + commodityCategory + '\'' +
+				", commodityDescription='" + commodityDescription + '\'' +
+				", commodityPostage='" + commodityPostage + '\'' +
+				", commodityStock='" + commodityStock + '\'' +
+				", commoditySold='" + commoditySold + '\'' +
+				", commodityPubDate='" + commodityPubDate + '\'' +
+				", commodityStatus=" + commodityStatus +
+				", commodityOPriceMax='" + commodityOPriceMax + '\'' +
+				", commodityOPriceMin='" + commodityOPriceMin + '\'' +
+				", commodityCPriceMax='" + commodityCPriceMax + '\'' +
+				", commodityCPriceMin='" + commodityCPriceMin + '\'' +
+				", commodityOPOfLCP='" + commodityOPOfLCP + '\'' +
+				", commodityType=" + commodityType +
+				", isSpot=" + isSpot +
+				", liveStartTime=" + liveStartTime +
+				", liveEndTime=" + liveEndTime +
+				", create_by='" + create_by + '\'' +
+				", liveId='" + liveId + '\'' +
+				", commodityOriginalPrice='" + commodityOriginalPrice + '\'' +
+				", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +
+				", shopId='" + shopId + '\'' +
+				", shopMid='" + shopMid + '\'' +
+				", commodityShopNumber='" + commodityShopNumber + '\'' +
+				", commodityPicList=" + commodityPicList +
+				", commoditySpecList=" + commoditySpecList +
+				", commodityCode='" + commodityCode + '\'' +
+				", commodityCommission='" + commodityCommission + '\'' +
+				", brandMid='" + brandMid + '\'' +
+				", mallMid='" + mallMid + '\'' +
+				", shopName='" + shopName + '\'' +
+				", supportCourierDeliver=" + supportCourierDeliver +
+				'}';
+	}
 }

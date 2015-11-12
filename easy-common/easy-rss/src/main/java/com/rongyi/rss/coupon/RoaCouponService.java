@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 新版卡券接口
  *
- * @see RoaOldCouponService -- 老卡券接口
+ * @author Breggor
  */
 public interface RoaCouponService {
 
@@ -49,11 +49,6 @@ public interface RoaCouponService {
      */
     Coupon findById(String couponId);
 
-
-
-
-
-
     /**
      * 代金券下线
      *
@@ -80,11 +75,6 @@ public interface RoaCouponService {
      */
     boolean updateOffStock(String id, boolean status);
 
-
-
-
-
-
     /**
      * 根据卡券Id减少库存
      *
@@ -93,7 +83,6 @@ public interface RoaCouponService {
      * @return
      */
     boolean subtractInventory(String couponId, int quantity);
-
 
     /**
      * 根据卡券Id恢复库存
@@ -153,6 +142,7 @@ public interface RoaCouponService {
 
     /**
      * 根据卡券ID查看卡券关联的活动列表
+     *
      * @param couponId 代金券ID
      * @return List<CouponActivity>
      * @author lqy
@@ -169,9 +159,10 @@ public interface RoaCouponService {
 
     /**
      * 根据卡券ID查询关联的店铺列表
-     * @param couponId 卡券id
+     *
+     * @param couponId    卡券id
      * @param currentPage 起始页
-     * @param pageSize 每页行数
+     * @param pageSize    每页行数
      * @return pagingVO
      * @author lqy
      */
@@ -179,6 +170,7 @@ public interface RoaCouponService {
 
     /**
      * 根据卡券ID获取卡券详情（提供给容易逛代金券详情使用）
+     *
      * @param couponId 卡券ID
      * @return coupon
      * @author lqy
