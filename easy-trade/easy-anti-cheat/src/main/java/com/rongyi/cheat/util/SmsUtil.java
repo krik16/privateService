@@ -64,8 +64,9 @@ public class SmsUtil {
 
 			//组织短信明文
 			StringBuffer sb = new StringBuffer();
+			sb.append("【上海摩购】");
 			sb.append(payType);
-			sb.append("支付账号：");
+			sb.append("支付账号:");
 			sb.append(payAccount);
 			if(startTime != null && endTime != null){
 				sb.append(" ");
@@ -78,7 +79,7 @@ public class SmsUtil {
 			sb.append("一共支付");
 			sb.append(count);
 			sb.append("笔订单");
-			sb.append(",请注意检查该账号是否存在刷单行为;");
+			sb.append(",请注意检查该账号是否存在刷单行为。");
 			sb.append(otherMessage);
 			LOGGER.info("手机号为：" + sendPhone+",短信内容为:"+sb.toString());
 			//短信发送

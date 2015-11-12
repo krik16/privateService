@@ -26,7 +26,7 @@ public class SendMsUnit {
             String payType = (accountBlacklist.getPayType() == 0) ? "支付宝" : "微信";
             String otherMessage = "";
             if (accountBlacklist.getCount() >= Integer.valueOf(Constant.BLACKLIST_CONFIG.FREEZE_COUNT)) {
-                otherMessage = "此账号支付购买次数超出自动冻结上限,系统自动冻结该账号";
+                otherMessage = "此账号支付购买次数超出自动冻结上限,系统自动冻结该账号。";
             }
             SmsUtil.sendMoreMsMessage(phones.split(","), accountBlacklist.getCount(), accountBlacklist.getPayAccount(), payType, startTime, endTime, otherMessage);
         } 
