@@ -115,7 +115,7 @@ public interface RoaUserRedenvelopeService {
      * @param code
      * @return
      */
-    boolean useCashCoupon(String code);
+    boolean useCashCoupon(String code, String orderNo);
 
     /**
      * 恢复红包
