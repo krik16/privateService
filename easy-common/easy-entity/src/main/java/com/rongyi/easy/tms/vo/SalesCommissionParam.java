@@ -137,7 +137,7 @@ public class SalesCommissionParam {
 	public Map<String, Object> paramsToMap(){
         Map<String,Object> paramsMap=new HashMap<String, Object>();
         if(StringUtils.isNotBlank(this.getCommissionNo())){
-            paramsMap.put("commissionNo", Integer.parseInt(this.getCommissionNo()));
+            paramsMap.put("commissionNo", this.getCommissionNo());
         }
         if(StringUtils.isNotBlank(this.getMallName())){
             paramsMap.put("mall", this.getMallName());
@@ -194,4 +194,11 @@ public class SalesCommissionParam {
         
         return paramsMap;
     }
+	@Override
+	public String toString() {
+		return "SalesCommissionParam [commissionNo=" + commissionNo + ", mallName=" + mallName + ", shopName=" + shopName + ", guideType=" + guideType + ", sellerName=" + sellerName
+				+ ", uploadStartTime=" + uploadStartTime + ", uploadEndTime=" + uploadEndTime + ", amountStart=" + amountStart + ", amountEnd=" + amountEnd + ", status=" + status + ", page=" + page
+				+ ", pageSize=" + pageSize + ", pageStart=" + pageStart + ", vaStatus=" + vaStatus + "]";
+	}
+	
 }
