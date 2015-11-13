@@ -162,7 +162,7 @@ public class RpbServiceImpl implements IRpbService {
 		PaymentLogInfo paymentLogInfo = paymentLogInfoService.selectByOutTradeNo(paymentEntity.getPayNo(),null);
 		if (paymentEntity.getPayChannel() == Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0) {
 			payChannel = PaymentEventType.APP;
-			if(paymentLogInfo != null && paymentLogInfo.getEventType() == Constants.EVENT_TYPE.EVENT_TYPE1){
+			if(paymentLogInfo != null && paymentLogInfo.getEventType() != null && paymentLogInfo.getEventType() == Constants.EVENT_TYPE.EVENT_TYPE1){
 				payChannel = PaymentEventType.PAYMENT;
 			}
 			QueryOrderParamVO queryOrderParamVO = aliPaymentService.queryOrder(null, paymentEntity.getPayNo());
