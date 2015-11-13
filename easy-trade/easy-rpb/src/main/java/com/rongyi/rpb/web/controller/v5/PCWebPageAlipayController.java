@@ -74,6 +74,7 @@ public class PCWebPageAlipayController extends BaseController {
 	@RequestMapping("/pay_notify_url.htm")
 	public String notifyPay(Model model, String notify_time, String notify_type, String notify_id, String sign_type, String sign, String batch_no, String pay_user_id, String pay_user_name,
 			String pay_account_no, String success_details) {
+		Integer tradeType = null;
 		PaymentLogInfo result = paymentLogInfoService.selectByNotifyId(notify_id);
 		if (result != null)
 			return null;
@@ -95,14 +96,17 @@ public class PCWebPageAlipayController extends BaseController {
 				paymentLogInfo.setTimeEnd(DateUtil.getCurrDateTime());
 				paymentLogInfo.setEventType(2);
 				paymentLogInfo.setBuyer_type(1);
-				paymentLogInfoService.insertGetId(paymentLogInfo);
 				List<PaymentEntity> paymentList = paymentService.updateListStatusBypayNo(paymentLogInfo.getOutTradeNo(), null, Constants.PAYMENT_STATUS.STAUS2);// 修改打款状态(提现或打款给卖家)
-				if (paymentList != null && !paymentList.isEmpty())
+				if (paymentList != null && !paymentList.isEmpty()){
 					allList.add(paymentList.get(0));
+					tradeType = paymentList.get(0).getTradeType();
+				}
+				paymentLogInfo.setTradeType(tradeType);
+				paymentLogInfoService.insertGetId(paymentLogInfo);
 			}
 		}
 		if (!allList.isEmpty()) {
-			paySuccessToMessage(allList, allList.get(0).getTradeType());
+			paySuccessToMessage(allList, tradeType);
 		}
 		LOGGER.info("支付宝打款成功异步通知结束");
 		return "payManager/notify";
