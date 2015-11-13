@@ -43,6 +43,10 @@ public class SessionUserInfo implements Serializable{
     private Integer filialeId;
     
     private String filialeMid;
+    
+    private String logo = "../images/logo.png";  //logo图片地址
+    
+    private String theCompanyName;  //所属集团 or 商场 or 品牌名称
 
 
 
@@ -238,5 +242,21 @@ public class SessionUserInfo implements Serializable{
 		}
 		return null;
 	}
-    
+
+	public String getLogo() {
+		return logo;
+	}
+
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
+
+	public String getTheCompanyName() {
+		return theCompanyName;
+	}
+
+	public void setTheCompanyName(String theCompanyName) {
+		this.theCompanyName = theCompanyName;
+	}
+	
 }
