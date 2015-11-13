@@ -159,8 +159,12 @@ public class RpbServiceImpl implements IRpbService {
 		String orderNums = paymentService.getOrderNumStrsByPayNo(paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
 		String payChannel = PaymentEventType.WEIXIN_PAY;
 		String payAccount = null;
+		PaymentLogInfo paymentLogInfo = paymentLogInfoService.selectByOutTradeNo(paymentEntity.getPayNo(),null);
 		if (paymentEntity.getPayChannel() == Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0) {
 			payChannel = PaymentEventType.APP;
+			if(paymentLogInfo != null && paymentLogInfo.getEventType() == Constants.EVENT_TYPE.EVENT_TYPE1){
+				payChannel = PaymentEventType.PAYMENT;
+			}
 			QueryOrderParamVO queryOrderParamVO = aliPaymentService.queryOrder(null, paymentEntity.getPayNo());
 			payAccount = queryOrderParamVO.getBuyer_email();
 		}
@@ -170,10 +174,6 @@ public class RpbServiceImpl implements IRpbService {
 				List<PaySuccessResponse> responseList = paymentLogInfoService.paySuccessToMessage(paymentEntity.getPayNo(), payAccount, orderNums, paymentEntity.getOrderType(), payChannel);
 				if (!responseList.isEmpty()) {
 					resultMap = responseList.get(0).getResult();
-//					if ("0".equals(resultMap.get("errno"))) {
-//						LOGGER.info("更新付款状态，付款单号-->" + paymentEntity.getPayNo());
-//						paymentService.updateListStatusBypayNo(paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);// 修改付款单状态
-//					}
 				}else{
 					resultMap.put("errno", "10");
 					resultMap.put("errMsg", "订单系统处理异常");
