@@ -35,6 +35,16 @@ public class OrderDetailModelParam implements Serializable {
 	private String commodityName;// 商品名称
 
 	private String commodityPostage;// 邮费
+	
+	private boolean supportCourierDeliver;//支持快递发货字段  true 是    false否
+
+	public boolean isSupportCourierDeliver() {
+		return supportCourierDeliver;
+	}
+
+	public void setSupportCourierDeliver(boolean supportCourierDeliver) {
+		this.supportCourierDeliver = supportCourierDeliver;
+	}
 
 	public String getCommodityId() {
 		return commodityId;
@@ -124,4 +134,21 @@ public class OrderDetailModelParam implements Serializable {
 		this.commodityPostage = commodityPostage;
 	}
 
+	@Override
+	public String toString() {
+		return "OrderDetailModelParam{" +
+				"commodityId='" + commodityId + '\'' +
+				", specId='" + specId + '\'' +
+				", commodityCommission='" + commodityCommission + '\'' +
+				", orderDetailModelId='" + orderDetailModelId + '\'' +
+				", num='" + num + '\'' +
+				", specColumnValues=" + specColumnValues +
+				", commodityPic='" + commodityPic + '\'' +
+				", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +
+				", commodityOriginalPrice='" + commodityOriginalPrice + '\'' +
+				", commodityName='" + commodityName + '\'' +
+				", commodityPostage='" + commodityPostage + '\'' +
+				", supportCourierDeliver=" + supportCourierDeliver +
+				'}';
+	}
 }

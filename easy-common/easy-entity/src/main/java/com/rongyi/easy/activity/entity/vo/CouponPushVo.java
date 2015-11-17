@@ -152,6 +152,7 @@ public class CouponPushVo {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:ss");
         if (coupon.getStatus() != null) {
             this.checkStatus = coupon.getStatus().equals(2) ? "已通过" : (coupon.getStatus().equals("0") ? "待审核" : "未通过");
+
         }
         if (coupon.getCouponType() != null) {
             this.couponType = coupon.getCouponType()==0 ? "代金券" : (coupon.getCouponType()==2?"红包":"抵扣券");

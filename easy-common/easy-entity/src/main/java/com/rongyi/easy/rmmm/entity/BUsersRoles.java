@@ -1,7 +1,14 @@
 package com.rongyi.easy.rmmm.entity;
 
-public class BUsersRoles {
-    private Integer id;
+import java.io.Serializable;
+
+public class BUsersRoles implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
 
     private Integer userId;
 

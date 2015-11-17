@@ -35,6 +35,12 @@ public class MalllifeUser implements Serializable {
 
     private String devUuid;//设备uuid
 
+    private String idfa; //
+
+    private String deviceType; //设备型号
+
+    private String terminalType;//终端平台 IOS || android
+
     private String imId;
 
     private Integer isLoginRed;//登录领红包 0未领取 1已经领取
@@ -49,6 +55,29 @@ public class MalllifeUser implements Serializable {
 
     private String registInIp;//注册IP
 
+    public String getIdfa() {
+        return idfa;
+    }
+
+    public void setIdfa(String idfa) {
+        this.idfa = idfa;
+    }
+
+    public String getDeviceType() {
+        return deviceType;
+    }
+
+    public void setDeviceType(String deviceType) {
+        this.deviceType = deviceType;
+    }
+
+    public String getTerminalType() {
+        return terminalType;
+    }
+
+    public void setTerminalType(String terminalType) {
+        this.terminalType = terminalType;
+    }
 
     public String getUserId() {
         return userId;

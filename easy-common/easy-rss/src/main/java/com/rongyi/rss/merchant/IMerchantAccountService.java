@@ -118,6 +118,16 @@ public interface IMerchantAccountService {
 	 * @throws Exception
 	 */
 	public Boolean validatePhoneOrNickName(String userPhone,String nickName) throws Exception;
+	
+	/**
+	 * 验证用户手机  昵称
+	 * @param userPhone
+	 * @param nickName
+	 * @param type  2买手  其它非买手
+	 * @throws Exception
+	 */
+	public Boolean validatePhoneOrNickName(String userPhone,String nickName,Integer type) throws Exception;
+	
 	/**
 	 * 根据商场名查商场  模糊查询
 	 * @param mallName
@@ -157,4 +167,17 @@ public interface IMerchantAccountService {
 	 * @throws Exception
 	 */
 	public List<RmmmUserInfoEntity> selectUserPhoneByUserAccount(String userAccount) throws Exception;
+	
+	/**
+	 * 验证用户信息是否已存在
+	 * @param paramsMap
+	 *                userAccount 
+	 *                userNickName
+	 *                userPhone
+	 *                id
+	 *                type
+	 * @return   true 不存在相同的用户信息   
+	 * @throws Exception  
+	 */
+	public boolean validateUserByUserParam(Map<String, Object> paramsMap)throws Exception;
 }

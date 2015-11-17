@@ -41,4 +41,12 @@ public class OrderListParam implements Serializable {
 		this.num = num;
 	}
 
+	@Override
+	public String toString() {
+		return "OrderListParam{" +
+				"couponAmount=" + couponAmount +
+				", unitPrice=" + unitPrice +
+				", num=" + num +
+				'}';
+	}
 }

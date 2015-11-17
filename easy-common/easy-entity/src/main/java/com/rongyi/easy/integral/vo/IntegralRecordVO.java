@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.rongyi.easy.integral.constant.SourceType;
+
 /**
  * 积分记录
 * @Title: IntegralRecord.java 
@@ -14,7 +16,7 @@ import java.util.Date;
  */
 public class IntegralRecordVO implements Serializable {
 	private String user_id;
-	private int sourceType;//1:app,2:后台操作3终端
+	private int sourceType;//1:app,2:后台操作,3:终端
 	private int action ; //1加积分，2减积分
 	private int type; //1.上传头像，2评论店铺或商场，3订单评论，4.每日签到，5.下单扣减，6支付超时恢复积分，7支付失败恢复积分，8验券成功加积分，9交易成功加积分10终端签到
 	private int use_score; //积分	
@@ -105,6 +107,8 @@ public class IntegralRecordVO implements Serializable {
 	public int getSourceType() {
 		return sourceType;
 	}
+	public void setSourceType(SourceType sourceType){}
+	 
 	public void setSourceType(int sourceType) {
 		this.sourceType = sourceType;
 	}

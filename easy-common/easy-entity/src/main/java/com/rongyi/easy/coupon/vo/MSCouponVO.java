@@ -88,6 +88,11 @@ public class MSCouponVO implements Serializable {
     private String mallName;
 
 	/**
+	 * 大运营[0] 商家[1]
+	 */
+	private Integer couponPublishChannel;
+
+	/**
 	 * @param  couponId 卡券Id
 	 * @param title 卡券名称
 	 * @param detailPicUrls 详图列表
@@ -116,6 +121,39 @@ public class MSCouponVO implements Serializable {
 		this.ifLimit = ifLimit;
 		this.shopName = shopName;
 		this.mallName = mallName;
+	}
+
+	/**
+	 * @param  couponId 卡券Id
+	 * @param title 卡券名称
+	 * @param detailPicUrls 详图列表
+	 * @param shopNameList  店铺名列表
+	 * @param originalPrice 原价
+	 * @param currentPrice 现价
+	 * @param status 状态
+	 * @param usedAmount 已购数量
+	 * @param totalCount 总量
+	 * @param ifLimit true表示限购，false表示不限购
+	 * @param shopName 店铺名称
+	 * @param mallName 商场名称
+	 * @param couponPublishChannel 发布渠道
+	 */
+	public MSCouponVO(String couponId, String title, List<String> detailPicUrls, List<String> shopNameList, Double originalPrice,
+					  Double currentPrice, String status, int usedAmount, int totalCount, Boolean ifLimit, String shopName, String mallName, Integer couponPublishChannel) {
+		super();
+		this.couponId = couponId;
+		this.title = title;
+		this.detailPicUrls = detailPicUrls;
+		this.shopNameList = shopNameList;
+		this.originalPrice = originalPrice;
+		this.currentPrice = currentPrice;
+		this.status = status;
+		this.usedAmount = usedAmount;
+		this.totalCount  = totalCount;
+		this.ifLimit = ifLimit;
+		this.shopName = shopName;
+		this.mallName = mallName;
+		this.couponPublishChannel = couponPublishChannel;
 	}
 
 	/**
@@ -247,6 +285,14 @@ public class MSCouponVO implements Serializable {
 		this.mallName = mallName;
 	}
 
+	public Integer getCouponPublishChannel() {
+		return couponPublishChannel;
+	}
+
+	public void setCouponPublishChannel(Integer couponPublishChannel) {
+		this.couponPublishChannel = couponPublishChannel;
+	}
+
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this)
@@ -263,6 +309,7 @@ public class MSCouponVO implements Serializable {
 				.append("ifLimit", ifLimit)
 				.append("shopName", shopName)
 				.append("mallName", mallName)
+				.append("couponPublishChannel", couponPublishChannel)
 				.toString();
 	}
 }

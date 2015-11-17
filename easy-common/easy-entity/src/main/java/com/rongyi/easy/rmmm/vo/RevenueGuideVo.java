@@ -27,6 +27,16 @@ public class RevenueGuideVo implements Serializable {
 	 * 失败佣金
 	 */
 	private BigDecimal faleCommission;
+	
+	private Integer drawCountMax = 0;//这个是同一天同一个卖家允许提现的次数
+
+	public Integer getDrawCountMax() {
+		return drawCountMax;
+	}
+
+	public void setDrawCountMax(Integer drawCountMax) {
+		this.drawCountMax = drawCountMax;
+	}
 
 	public BigDecimal getAmountTotal() {
 		return amountTotal;

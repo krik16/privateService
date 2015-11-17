@@ -42,13 +42,21 @@ public class SonOrderVO implements Serializable{
 	private String discount;// 抵扣金额
 
 	private String description;// 全场红包/店铺红包
-
+	private String liveName;//直播名
 	public BigDecimal getRealAmount() {
 		return realAmount;
 	}
 
 	public void setRealAmount(BigDecimal realAmount) {
 		this.realAmount = realAmount;
+	}
+
+	public String getLiveName() {
+		return liveName;
+	}
+
+	public void setLiveName(String liveName) {
+		this.liveName = liveName;
 	}
 
 	public String getNum() {
@@ -177,5 +185,29 @@ public class SonOrderVO implements Serializable{
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	@Override
+	public String toString() {
+		return "SonOrderVO{" +
+				"num='" + num + '\'' +
+				", specColumnValues=" + specColumnValues +
+				", commodityPic='" + commodityPic + '\'' +
+				", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +
+				", commodityOriginalPrice='" + commodityOriginalPrice + '\'' +
+				", realAmount=" + realAmount +
+				", sonOrderStatus='" + sonOrderStatus + '\'' +
+				", refundStatus='" + refundStatus + '\'' +
+				", commodityId='" + commodityId + '\'' +
+				", commodityName='" + commodityName + '\'' +
+				", sonOrderId='" + sonOrderId + '\'' +
+				", applicationId='" + applicationId + '\'' +
+				", appealTimes='" + appealTimes + '\'' +
+				", refundTimes='" + refundTimes + '\'' +
+				", couponCode='" + couponCode + '\'' +
+				", discount='" + discount + '\'' +
+				", description='" + description + '\'' +
+				", liveName='" + liveName + '\'' +
+				'}';
 	}
 }

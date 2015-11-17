@@ -28,7 +28,14 @@ public class OrderManagerVO implements Serializable {
 	private Date createAt;
 	/** 折扣 */
 	private BigDecimal discountFee;
-	
+	private Integer guideType;
+
+	public Integer getGuideType() {
+		return guideType;
+	}
+	public void setGuideType(Integer guideType) {
+		this.guideType = guideType;
+	}
 	public BigDecimal getDiscountFee() {
 		return discountFee;
 	}

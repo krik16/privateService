@@ -27,6 +27,12 @@ public class OldMallVO implements Serializable{
 	private boolean has_watched;
 	/** 收藏数 */
 	private Integer collectionNum;
+
+	private String title;
+
+	private List<Double> location;
+	private String type;
+
 	public String getId() {
 		return id;
 	}
@@ -162,5 +168,28 @@ public class OldMallVO implements Serializable{
     public void setCollectionNum(Integer collectionNum) {
         this.collectionNum = collectionNum;
     }
-	
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public List<Double> getLocation() {
+		return location;
+	}
+
+	public void setLocation(List<Double> location) {
+		this.location = location;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 }

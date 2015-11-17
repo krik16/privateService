@@ -26,4 +26,16 @@ public interface ROAAreaService {
 	 */
 	
 	public List<AreaEntity> getSub(String type,String id) throws Exception;
+	
+	public List<AreaEntity> getSubByTypeOrParentId(String type,String parentId) throws Exception;
+	
+	public AreaEntity getAreaById(String id) ;
+	
+	/**
+	 * 根据地区类型和name(模糊)查询
+	 * @param name
+	 * @param type
+	 * @return
+	 */
+	public List<AreaEntity> getAreaByTypeAndName(String name,String type,String parentId);
 }

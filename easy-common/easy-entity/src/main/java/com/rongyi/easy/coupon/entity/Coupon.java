@@ -1,5 +1,6 @@
 package com.rongyi.easy.coupon.entity;
 
+
 import com.rongyi.core.util.AmountConversion;
 import com.rongyi.easy.coupon.enumerate.CouponEnum;
 import org.apache.commons.collections.CollectionUtils;
@@ -9,6 +10,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.beans.Transient;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -23,6 +25,8 @@ import java.util.List;
 public class Coupon implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+
 
     /**
      * 展示区域：常规区域,活动区域;未选中[0]，选中[1] 例如 "1,1"表示都选中
@@ -302,6 +306,36 @@ public class Coupon implements Serializable {
      */
     private Boolean isRelatedAll;
 
+    /**
+     * 平台促销券类型,注册[0] 常规[1]
+     */
+    private Integer type;
+
+    /**
+     * 平台促销券适用对象，商家/买手[0] 商家[1] 买手[2]
+     */
+    private Integer applyObject;
+
+    /**
+     * 平台促销券适用范围维度1,商品/代金券[0] 商品[1] 代金券[2]
+     */
+    private Integer applyGoods;
+
+    /**
+     * 平台促销券有效期天数,领取后设置的天数
+     */
+    private Integer validDays;
+
+    /**
+     * 平台促销券与代金券的关系
+     */
+    private List<CouponVoucher> couponVouchers;
+
+    /**
+     * 平台促销券商品分类
+     */
+    private List<CouponCommodityCategory> couponCommodityCategories;
+
     public String getId() {
         return id;
     }
@@ -357,6 +391,7 @@ public class Coupon implements Serializable {
     public double getOrigPrice2Double() {
         double val = 0D;
         if (origPrice != null) {
+
             val = AmountConversion.fenToYuan(origPrice);
         }
         return val;
@@ -401,7 +436,6 @@ public class Coupon implements Serializable {
     public String getDisplayRegion() {
         return displayRegion;
     }
-
     /**
      * 卡券是否活动展示区域
      *
@@ -829,12 +863,61 @@ public class Coupon implements Serializable {
         this.outChannelName = outChannelName;
     }
 
+
     public Boolean getIsRelatedAll() {
         return isRelatedAll;
     }
 
     public void setIsRelatedAll(Boolean isRelatedAll) {
         this.isRelatedAll = isRelatedAll;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public Integer getApplyObject() {
+        return applyObject;
+    }
+
+    public void setApplyObject(Integer applyObject) {
+        this.applyObject = applyObject;
+    }
+
+    public Integer getApplyGoods() {
+        return applyGoods;
+    }
+
+    public void setApplyGoods(Integer applyGoods) {
+        this.applyGoods = applyGoods;
+    }
+
+    public Integer getValidDays() {
+        return validDays;
+    }
+
+    public void setValidDays(Integer validDays) {
+        this.validDays = validDays;
+    }
+
+    public List<CouponVoucher> getCouponVouchers() {
+        return couponVouchers;
+    }
+
+    public void setCouponVouchers(List<CouponVoucher> couponVouchers) {
+        this.couponVouchers = couponVouchers;
+    }
+
+    public List<CouponCommodityCategory> getCouponCommodityCategories() {
+        return couponCommodityCategories;
+    }
+
+    public void setCouponCommodityCategories(List<CouponCommodityCategory> couponCommodityCategories) {
+        this.couponCommodityCategories = couponCommodityCategories;
     }
 
     @Override
@@ -893,6 +976,12 @@ public class Coupon implements Serializable {
                 .append("visitedCount", visitedCount)
                 .append("isGeneral", isGeneral)
                 .append("isRelatedAll", isRelatedAll)
+                .append("type", type)
+                .append("applyObject", applyObject)
+                .append("applyGoods", applyGoods)
+                .append("validDays", validDays)
+                .append("couponVouchers", couponVouchers)
+                .append("couponCommodityCategories", couponCommodityCategories)
                 .toString();
     }
 }

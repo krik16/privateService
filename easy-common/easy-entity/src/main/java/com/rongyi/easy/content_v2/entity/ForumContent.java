@@ -93,6 +93,34 @@ public class ForumContent implements Serializable {
      * 记录状态 0待发布、1已发布、2已关闭
      */
     private Integer status;
+    /**
+     * 买手直播
+     */
+    private String buyerLive;
+    /**
+     *iosVersion版本
+     */
+    private String iosVersion;
+    /**
+     * 安卓版本号
+     */
+    private String androidVersion;
+
+    /**
+     * 快捷入口的类型   商场列表   14
+     店铺列表    15
+     文章列表    16
+     商品列表    17
+     代金券列表  18
+     直播列表    12（new）
+     特卖列表    13（new）
+     外链     9
+     */
+    private String quickType;
+    /**
+     * 快捷入口的类型值    方式为 , , ,www.baidu.com
+     */
+    private String quickTypeVal;
 
     public Integer getId() {
         return id;
@@ -259,29 +287,75 @@ public class ForumContent implements Serializable {
         this.status = status;
     }
 
+
+
+    public String getBuyerLive() {
+        return buyerLive;
+    }
+
+    public void setBuyerLive(String buyerLive) {
+        this.buyerLive = buyerLive;
+    }
+
+    public String getIosVersion() {
+        return iosVersion;
+    }
+
+    public void setIosVersion(String iosVersion) {
+        this.iosVersion = iosVersion;
+    }
+
+    public String getAndroidVersion() {
+        return androidVersion;
+    }
+
+    public void setAndroidVersion(String androidVersion) {
+        this.androidVersion = androidVersion;
+    }
+
+    public String getQuickType() {
+        return quickType;
+    }
+
+    public void setQuickType(String quickType) {
+        this.quickType = quickType;
+    }
+
+    public String getQuickTypeVal() {
+        return quickTypeVal;
+    }
+
+    public void setQuickTypeVal(String quickTypeVal) {
+        this.quickTypeVal = quickTypeVal;
+    }
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", id)
-                .append("positionId", positionId)
-                .append("provId", provId)
-                .append("provName", provName)
-                .append("cityId", cityId)
-                .append("cityName", cityName)
-                .append("picUrls", picUrls)
-                .append("title", title)
-                .append("subtitle", subtitle)
-                .append("type", type)
-                .append("typeVal", typeVal)
-                .append("shopIds", shopIds)
-                .append("publishBeginAt", publishBeginAt)
-                .append("publishEndAt", publishEndAt)
-                .append("createUser", createUser)
-                .append("createAt", createAt)
-                .append("updateUser", updateUser)
-                .append("updateAt", updateAt)
-                .append("isDeleted", isDeleted)
-                .append("status", status)
-                .toString();
+        return "ForumContent{" +
+                "quickTypeVal='" + quickTypeVal + '\'' +
+                ", id=" + id +
+                ", positionId=" + positionId +
+                ", provId='" + provId + '\'' +
+                ", provName='" + provName + '\'' +
+                ", cityId='" + cityId + '\'' +
+                ", cityName='" + cityName + '\'' +
+                ", picUrls='" + picUrls + '\'' +
+                ", title='" + title + '\'' +
+                ", subtitle='" + subtitle + '\'' +
+                ", type=" + type +
+                ", typeVal='" + typeVal + '\'' +
+                ", shopIds='" + shopIds + '\'' +
+                ", publishBeginAt=" + publishBeginAt +
+                ", publishEndAt=" + publishEndAt +
+                ", createUser='" + createUser + '\'' +
+                ", createAt=" + createAt +
+                ", updateUser='" + updateUser + '\'' +
+                ", updateAt=" + updateAt +
+                ", isDeleted=" + isDeleted +
+                ", status=" + status +
+                ", buyerLive='" + buyerLive + '\'' +
+                ", iosVersion='" + iosVersion + '\'' +
+                ", androidVersion='" + androidVersion + '\'' +
+                ", quickType='" + quickType + '\'' +
+                '}';
     }
 }

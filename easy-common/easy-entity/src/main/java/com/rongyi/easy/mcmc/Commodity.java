@@ -19,11 +19,18 @@ public class Commodity implements  Serializable,Cloneable{
 	@Id
 	private ObjectId id;
 
+	private int type; // 渠道  0商家，1买手
+	private String liveId; // 直播Id
+	private boolean isSpot; // 是否现货	0 否  1是
+	private Date liveStartTime; // 直播开始时间
+	private Date liveEndTime; // 直播结束时间
+	private String create_by; // 创建人 
+	
 	private String name;//商品名称
 	private String category;//商品品类id
 	private String shopId;//店铺id
 	private String shopMid;//店铺的mongoid
-	private int status;//状态 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理 
+	private int status;//状态 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理   -1：非现货初始化
 	private String code;//商品编码
 	private String description;//商品描述
 	private String postage;//商品邮费
@@ -38,6 +45,111 @@ public class Commodity implements  Serializable,Cloneable{
 	private String mallMid;
 	private String shopNum;
 	private String update_by;//修改人
+	
+	private String brandMid;//品牌mongoId
+	
+	private boolean supportCourierDeliver=true;//支持快递发货字段  true 是    false否
+
+	@Override
+	public String toString() {
+		return "Commodity{" +
+				"id=" + id +
+				", type=" + type +
+				", liveId='" + liveId + '\'' +
+				", isSpot=" + isSpot +
+				", liveStartTime=" + liveStartTime +
+				", liveEndTime=" + liveEndTime +
+				", create_by='" + create_by + '\'' +
+				", name='" + name + '\'' +
+				", category='" + category + '\'' +
+				", shopId='" + shopId + '\'' +
+				", shopMid='" + shopMid + '\'' +
+				", status=" + status +
+				", code='" + code + '\'' +
+				", description='" + description + '\'' +
+				", postage='" + postage + '\'' +
+				", stock=" + stock +
+				", sold=" + sold +
+				", createAt=" + createAt +
+				", updateAt=" + updateAt +
+				", originalPrice='" + originalPrice + '\'' +
+				", currentPrice='" + currentPrice + '\'' +
+				", oPriceOfLowestCPrice='" + oPriceOfLowestCPrice + '\'' +
+				", brandName='" + brandName + '\'' +
+				", mallMid='" + mallMid + '\'' +
+				", shopNum='" + shopNum + '\'' +
+				", update_by='" + update_by + '\'' +
+				", brandMid='" + brandMid + '\'' +
+				", supportCourierDeliver=" + supportCourierDeliver +
+				", picList=" + picList +
+				", specList=" + specList +
+				", price=" + price +
+				", brandId='" + brandId + '\'' +
+				", mallId='" + mallId + '\'' +
+				", categoryIds=" + categoryIds +
+				", customCategory=" + customCategory +
+				", distribution=" + distribution +
+				", freight=" + freight +
+				", terminalType=" + terminalType +
+				", registerAt=" + registerAt +
+				", soldOutAt=" + soldOutAt +
+				", source=" + source +
+				", stockStatus=" + stockStatus +
+				", oPriceMax='" + oPriceMax + '\'' +
+				", oPriceMin='" + oPriceMin + '\'' +
+				", cPriceMax='" + cPriceMax + '\'' +
+				", cPriceMin='" + cPriceMin + '\'' +
+				'}';
+	}
+
+	public boolean isSupportCourierDeliver() {
+		return supportCourierDeliver;
+	}
+	public void setSupportCourierDeliver(boolean supportCourierDeliver) {
+		this.supportCourierDeliver = supportCourierDeliver;
+	}
+	public String getBrandMid() {
+		return brandMid;
+	}
+	public void setBrandMid(String brandMid) {
+		this.brandMid = brandMid;
+	}
+	public String getLiveId() {
+		return liveId;
+	}
+	public void setLiveId(String liveId) {
+		this.liveId = liveId;
+	}
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
+	public boolean isSpot() {
+		return isSpot;
+	}
+	public void setSpot(boolean isSpot) {
+		this.isSpot = isSpot;
+	}
+	public Date getLiveStartTime() {
+		return liveStartTime;
+	}
+	public void setLiveStartTime(Date liveStartTime) {
+		this.liveStartTime = liveStartTime;
+	}
+	public Date getLiveEndTime() {
+		return liveEndTime;
+	}
+	public void setLiveEndTime(Date liveEndTime) {
+		this.liveEndTime = liveEndTime;
+	}
+	public String getCreate_by() {
+		return create_by;
+	}
+	public void setCreate_by(String create_by) {
+		this.create_by = create_by;
+	}
 	public String getUpdate_by() {
 		return update_by;
 	}
@@ -319,6 +431,7 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setStockStatus(int stockStatus) {
 		this.stockStatus = stockStatus;
 	}
+
 	@Override
 	public Commodity clone() throws CloneNotSupportedException {
 		Commodity commodity=new Commodity();
@@ -360,5 +473,15 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setUpdate_by(update_by);
 		commodity.setUpdateAt(updateAt);
 		return commodity;
+	}
+
+	@Override
+	public int hashCode() {
+		return this.toString().hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return this.toString().equals(obj.toString());
 	}
 }

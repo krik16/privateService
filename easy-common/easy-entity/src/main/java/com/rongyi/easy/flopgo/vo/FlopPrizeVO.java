@@ -80,7 +80,7 @@ public class FlopPrizeVO implements Serializable{
 //		this.restCount=couponEntity.getRestCount();
 //		this.checkStatus=couponEntity.getCheckStatus();
 //		this.ticketType=couponEntity.getTicketType();
-//		
+//
 //	}
 
 	public String getRecommend() {

@@ -91,8 +91,6 @@ public class CouponShop implements Serializable{
         this.shopName = shopName;
     }
 
-
-
     public CouponShop(String couponId, String shopId) {
 
         this.couponId = couponId;

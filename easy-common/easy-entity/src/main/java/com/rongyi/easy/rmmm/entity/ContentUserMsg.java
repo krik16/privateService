@@ -1,7 +1,14 @@
 package com.rongyi.easy.rmmm.entity;
 
-public class ContentUserMsg {
-    /**  */
+import java.io.Serializable;
+
+public class ContentUserMsg implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**  */
     private Integer id;
 
     /** 系统消息id */

@@ -12,10 +12,9 @@ import java.util.List;
 /**
  * 新版卡券接口
  *
- * @see RoaOldCouponService -- 老卡券接口
+ * @author Breggor
  */
 public interface RoaCouponService {
-
 
     /**
      * 新建卡券
@@ -24,7 +23,6 @@ public interface RoaCouponService {
      * @return
      */
     boolean create(Coupon coupon);
-
 
     /**
      * 追加库存量
@@ -51,9 +49,8 @@ public interface RoaCouponService {
      */
     Coupon findById(String couponId);
 
-
     /**
-     * 根据id集合查询
+     * 代金券下线
      *
      * @param ids
      * @return
@@ -86,7 +83,6 @@ public interface RoaCouponService {
      * @return
      */
     boolean subtractInventory(String couponId, int quantity);
-
 
     /**
      * 根据卡券Id恢复库存
@@ -124,6 +120,7 @@ public interface RoaCouponService {
      * @param quantity
      * @return
      */
+
     ResponseResult subtractCouponInventory(String couponId, int quantity);
 
     /**
@@ -144,10 +141,9 @@ public interface RoaCouponService {
     PagingVO<Coupon> findAllByPage(CouponParam couponParam);
 
     /**
-     * boolean create(Coupon );
      * 根据卡券ID查看卡券关联的活动列表
      *
-     * @param couponId
+     * @param couponId 代金券ID
      * @return List<CouponActivity>
      * @author lqy
      */
@@ -160,4 +156,24 @@ public interface RoaCouponService {
      * @return
      */
     boolean remove(String couponId);
+
+    /**
+     * 根据卡券ID查询关联的店铺列表
+     *
+     * @param couponId    卡券id
+     * @param currentPage 起始页
+     * @param pageSize    每页行数
+     * @return pagingVO
+     * @author lqy
+     */
+    PagingVO getCouponShopsByCouponId(String couponId, Integer currentPage, Integer pageSize);
+
+    /**
+     * 根据卡券ID获取卡券详情（提供给容易逛代金券详情使用）
+     *
+     * @param couponId 卡券ID
+     * @return coupon
+     * @author lqy
+     */
+    Coupon getCouponById(String couponId);
 }

@@ -31,6 +31,7 @@ public interface MLUserRedenvelopeService {
     public PagingVO<UserRedenvelope> findUserCouponByUserId(String userId,
                                                             Integer currentPage, Integer pageSize);
 
+
     PagingVO<UserRedenvelope> findUserCouponByUserIdFull(String userId,
                                                          Integer currentPage, Integer pageSize);
 

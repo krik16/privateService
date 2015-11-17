@@ -334,18 +334,42 @@ public class SalerParentOrderVO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "SalerParentOrderVO [status=" + status + ", totalPrice=" + totalPrice + ", orderTime=" + orderTime
-				+ ", estimateNextStatusTime=" + estimateNextStatusTime + ", buyerName=" + buyerName + ", buyerIM=" + buyerIM
-				+ ", orderId=" + orderId + ", countId=" + countId + ", orderType=" + orderType + ", orderSource=" + orderSource
-				+ ", payTime=" + payTime + ", deliverTime=" + deliverTime + ", comment=" + comment + ", consignee=" + consignee
-				+ ", phone=" + phone + ", address=" + address + ", commodityPostage=" + commodityPostage + ", sonOrderList="
-				+ sonOrderList + ", isEvaluation=" + isEvaluation + ", closeType=" + closeType + ", orderNo=" + orderNo
-				+ ", closeReason=" + closeReason + ", provinceName=" + provinceName + ", cityName=" + cityName
-				+ ", districtName=" + districtName + ", buyerNickName=" + buyerNickName + ", orderOriginalPrice="
-				+ orderOriginalPrice + ", allCommodityCommission=" + allCommodityCommission + ", expressBillId=" + expressBillId
-				+ ", ticketStatus=" + ticketStatus + ", refuseReason=" + refuseReason + ", expressName=" + expressName
-				+ ", ticketPicList=" + ticketPicList + "]";
+		return "SalerParentOrderVO{" +
+				"status='" + status + '\'' +
+				", totalPrice='" + totalPrice + '\'' +
+				", orderTime='" + orderTime + '\'' +
+				", estimateNextStatusTime='" + estimateNextStatusTime + '\'' +
+				", buyerName='" + buyerName + '\'' +
+				", buyerIM='" + buyerIM + '\'' +
+				", orderId='" + orderId + '\'' +
+				", countId='" + countId + '\'' +
+				", orderType='" + orderType + '\'' +
+				", orderSource='" + orderSource + '\'' +
+				", payTime='" + payTime + '\'' +
+				", deliverTime='" + deliverTime + '\'' +
+				", comment='" + comment + '\'' +
+				", consignee='" + consignee + '\'' +
+				", phone='" + phone + '\'' +
+				", address='" + address + '\'' +
+				", commodityPostage='" + commodityPostage + '\'' +
+				", sonOrderList=" + sonOrderList +
+				", isEvaluation='" + isEvaluation + '\'' +
+				", closeType='" + closeType + '\'' +
+				", orderNo='" + orderNo + '\'' +
+				", closeReason='" + closeReason + '\'' +
+				", provinceName='" + provinceName + '\'' +
+				", cityName='" + cityName + '\'' +
+				", districtName='" + districtName + '\'' +
+				", buyerNickName='" + buyerNickName + '\'' +
+				", orderOriginalPrice='" + orderOriginalPrice + '\'' +
+				", allCommodityCommission='" + allCommodityCommission + '\'' +
+				", expressBillId='" + expressBillId + '\'' +
+				", ticketStatus='" + ticketStatus + '\'' +
+				", refuseReason='" + refuseReason + '\'' +
+				", expressName='" + expressName + '\'' +
+				", ticketPicList=" + ticketPicList +
+				", receiveTime='" + receiveTime + '\'' +
+				", buyerPhone='" + buyerPhone + '\'' +
+				'}';
 	}
-
-
 }

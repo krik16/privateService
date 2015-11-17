@@ -75,8 +75,49 @@ public class OrderFormEntity implements Serializable{
 
     /** 买家备注 */
     private String buyerComment;
+
+    /**促销券抵扣金额*/
+    private BigDecimal couponDiscount;
+
+    /**促销券来源 1：平台 2：商家*/
+    private Integer couponSource;
+
+    /**促销券类型 1：满减 2：立减*/
+    private Integer couponType;
     
-    private JSONObject jsonDiscountInfo;   
+    private JSONObject jsonDiscountInfo;
+    
+    /** 1是导购 2是买手*/
+    private Integer guideType;
+    /** 是否已提醒买家付款 0 未提醒 1 已提醒**/
+    private Byte isAlert;
+
+    /**订单总金额（不包括积分优惠）**/
+    private BigDecimal totalAmountWithoutScoreDiscount = null;
+
+	public Byte getIsAlert() {
+		return isAlert;
+	}
+
+	public void setIsAlert(Byte isAlert) {
+		this.isAlert = isAlert;
+	}
+
+    public BigDecimal getTotalAmountWithoutScoreDiscount() {
+        return totalAmountWithoutScoreDiscount;
+    }
+
+    public void setTotalAmountWithoutScoreDiscount(BigDecimal totalAmountWithoutScoreDiscount) {
+        this.totalAmountWithoutScoreDiscount = totalAmountWithoutScoreDiscount;
+    }
+
+    public Integer getGuideType() {
+		return guideType;
+	}
+
+	public void setGuideType(Integer guideType) {
+		this.guideType = guideType;
+	}
 
 	public JSONObject getJsonDiscountInfo() {
 		return jsonDiscountInfo;
@@ -452,5 +493,65 @@ public class OrderFormEntity implements Serializable{
      */
     public void setBuyerComment(String buyerComment) {
         this.buyerComment = buyerComment;
+    }
+
+    public BigDecimal getCouponDiscount() {
+        return couponDiscount;
+    }
+
+    public void setCouponDiscount(BigDecimal couponDiscount) {
+        this.couponDiscount = couponDiscount;
+    }
+
+    public Integer getCouponSource() {
+        return couponSource;
+    }
+
+    public void setCouponSource(Integer couponSource) {
+        this.couponSource = couponSource;
+    }
+
+    public Integer getCouponType() {
+        return couponType;
+    }
+
+    public void setCouponType(Integer couponType) {
+        this.couponType = couponType;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderFormEntity{" +
+                "id=" + id +
+                ", orderNo='" + orderNo + '\'' +
+                ", totalAmount=" + totalAmount +
+                ", expressFee=" + expressFee +
+                ", disconntFee=" + disconntFee +
+                ", expressInfoId='" + expressInfoId + '\'' +
+                ", status='" + status + '\'' +
+                ", statusRoute='" + statusRoute + '\'' +
+                ", createAt=" + createAt +
+                ", statusHoldMs=" + statusHoldMs +
+                ", nextStatusTime=" + nextStatusTime +
+                ", buyerId='" + buyerId + '\'' +
+                ", weidianId='" + weidianId + '\'' +
+                ", paymentIdList='" + paymentIdList + '\'' +
+                ", isComment=" + isComment +
+                ", addressId='" + addressId + '\'' +
+                ", orderType=" + orderType +
+                ", orderSource=" + orderSource +
+                ", couponId='" + couponId + '\'' +
+                ", internalCouponId='" + internalCouponId + '\'' +
+                ", guideId='" + guideId + '\'' +
+                ", discountInfo='" + discountInfo + '\'' +
+                ", buyerComment='" + buyerComment + '\'' +
+                ", jsonDiscountInfo=" + jsonDiscountInfo +
+                ", guideType=" + guideType +
+                ", isAlert=" + isAlert +
+                ", totalAmountWithoutScoreDiscount=" + totalAmountWithoutScoreDiscount +
+                ", couponDiscount=" + couponDiscount +
+                ", couponSource=" + couponSource +
+                ", couponType=" + couponType +
+                '}';
     }
 }

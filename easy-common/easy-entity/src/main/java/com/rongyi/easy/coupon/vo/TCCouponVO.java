@@ -31,8 +31,6 @@ public class TCCouponVO implements Serializable {
     private String id;// 券id
 
     private String title;// 券名称
-
-
     private String couponType;// 券类型: 优惠券[02] 红包[03]
 
 
@@ -61,6 +59,7 @@ public class TCCouponVO implements Serializable {
 
 
     private Double currentPrice;// 现价
+
 
     private String type;// 配置类型 0:商场 1:店铺；红包 0：全场，1：商品
 
@@ -166,6 +165,7 @@ public class TCCouponVO implements Serializable {
      */
     private CouponGroup couponGroup;
 
+
     /**
      * 是否是第三方券 否[0], 是[1], 默认不是第三方券
      */
@@ -181,6 +181,7 @@ public class TCCouponVO implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
+
 
     public Boolean getIsThird() {
         return isThird;
@@ -638,6 +639,7 @@ public class TCCouponVO implements Serializable {
                     CouponMall cmall = new CouponMall();
                     cmall.setId(mall.getMallId());
                     cmall.setMallAddress(mall.getMallAddress());
+
                  /*   cmall.setMallLogoUrl(mall.getMallLogUrl());*/
                     cmall.setMallName(mall.getMallName());
                     malls.add(cmall);
@@ -674,6 +676,7 @@ public class TCCouponVO implements Serializable {
                 if (shop != null) {
                     CouponShop cshop = new CouponShop();
                     cshop.setId(shop.getShopId());
+
             /*        cshop.setBrandName(shop.getShopBrand());
                     cshop.setMallName(shop.getShopMallName());
                     cshop.setShopLogoUrl(shop.getShopLogoUrl());*/

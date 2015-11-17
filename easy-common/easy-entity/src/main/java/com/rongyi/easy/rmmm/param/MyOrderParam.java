@@ -39,4 +39,12 @@ public class MyOrderParam implements Serializable{
 		this.status = status;
 	}
 
+	@Override
+	public String toString() {
+		return "MyOrderParam{" +
+				"status='" + status + '\'' +
+				", currentPage='" + currentPage + '\'' +
+				", pageSize='" + pageSize + '\'' +
+				'}';
+	}
 }

@@ -160,13 +160,23 @@ public class SalerSonOrderVO implements Serializable{
 
 	@Override
 	public String toString() {
-		return "SalerSonOrderVO [commodityId=" + commodityId + ", commodityName=" + commodityName + ", address=" + address
-				+ ", num=" + num + ", commodityPic=" + commodityPic + ", commodityCurrentPrice=" + commodityCurrentPrice
-				+ ", sonOrderId=" + sonOrderId + ", sonOrderStatus=" + sonOrderStatus + ", successRefund=" + successRefund
-				+ ", refundType=" + refundType + ", refundReason=" + refundReason + ", refundStatus=" + refundStatus
-				+ ", specColumnValues=" + specColumnValues + ", applicationId=" + applicationId + ", commodityCommission="
-				+ commodityCommission + "]";
+		return "SalerSonOrderVO{" +
+				"commodityId='" + commodityId + '\'' +
+				", commodityName='" + commodityName + '\'' +
+				", address='" + address + '\'' +
+				", num='" + num + '\'' +
+				", commodityPic='" + commodityPic + '\'' +
+				", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +
+				", sonOrderId='" + sonOrderId + '\'' +
+				", sonOrderStatus='" + sonOrderStatus + '\'' +
+				", successRefund='" + successRefund + '\'' +
+				", refundType='" + refundType + '\'' +
+				", refundReason='" + refundReason + '\'' +
+				", refundStatus='" + refundStatus + '\'' +
+				", specColumnValues=" + specColumnValues +
+				", applicationId='" + applicationId + '\'' +
+				", commodityCommission='" + commodityCommission + '\'' +
+				", commodityCode='" + commodityCode + '\'' +
+				'}';
 	}
-
-
 }

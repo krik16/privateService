@@ -80,6 +80,7 @@ public class CouponBrand implements Serializable{
 		return builder.toString();
 	}
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o)

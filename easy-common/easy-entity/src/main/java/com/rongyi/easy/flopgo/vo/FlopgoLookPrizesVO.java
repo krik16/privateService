@@ -12,6 +12,7 @@ import java.util.List;
  *
  * @author user
  */
+
 public class FlopgoLookPrizesVO implements Serializable {
     /**
      *

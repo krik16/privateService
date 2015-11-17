@@ -23,6 +23,9 @@ public interface Constants {
      * 登录用户的session key
      */
     String USER_SESSION_KEY = "user_session_key"; //
+    
+    //商家账号初始密码
+  	String USER_INIT_PWD = "RYxyz123";
 
 
     String RESULT_SUCCES = "success"; //成功标志位
@@ -305,8 +308,9 @@ public interface Constants {
         String UPAIYUN_URL_BENEFITS = "system/benefits/"; // 云盘路径-会员权益
         String UPAIYUN_URL_INTEGRALRULES = "system/integralRules/"; // 云盘路径-积分规则
         String UPAIYUN_URL_INTEGRALCOMM = "system/mall/commodity/intrgral/"; // 云盘路径-积分商品
+        String UPAIYUN_URL_SHOPS = "system/photo/file/"; // 云盘路径-会员权益
     }
-
+    
     /**
      * 是否绑定的会员
      */
@@ -596,6 +600,10 @@ public interface Constants {
     interface ConfigType {
         String CONFIGURATIONS = "com.rongyi.easy.gcc.Configurations";
         String TRANS_CONFIGURATIONS = "com.rongyi.easy.gcc.TransConfigurations";
+        /** 买手交易配置*/
+        String BUYER_TRANS_CONFIGURATIONS = "com.rongyi.easy.gcc.BuyerTransConfigurations";
+        /** 微商城买手参数配置 */
+        String BUYER_CONFIGURATIONS = "com.rongyi.easy.gcc.BuyerConfigurations";
     }
     interface AppType{
     	/**

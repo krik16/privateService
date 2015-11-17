@@ -164,9 +164,18 @@ public interface ROAUserService {
     /**
      * 通过手机号查用户信息
      * @param phone
+     * @param identity
      * @return
      */
-    public RmmmUserInfoEntity getUsersEntityByPhone(String phone);
+    public RmmmUserInfoEntity getUsersEntityByPhone(String phone,String identity);
+
+
+    /**
+     * 手机号的List信息
+     * @param phone
+     * @return
+     */
+    public List<RmmmUserInfoEntity> getUserListByPhone(String phone)throws MallShopException;
 
 
 
@@ -174,15 +183,16 @@ public interface ROAUserService {
      * 根据用户昵称，用户UUID获取
      * @param flag  标识位
      * @param strName  0 查昵称 1查UUID
+     * @PARam  identity 身份 2买手 其他导购
      * @return
      */
-    public RmmmUserInfoEntity getUsersEntityByStrName(int flag,String strName)throws MallShopException;;
+    public RmmmUserInfoEntity getUsersEntityByStrName(int flag,String strName,String identity)throws MallShopException;;
 
 
 
     /**
      * 注册并验证用户
-     * @param usersEntity
+     * @param userManagerParam
      * @return
      * @throws Exception
      */
@@ -193,8 +203,16 @@ public interface ROAUserService {
      *
      * */
     public boolean editInfo(RmmmUserInfoEntity usersEntity);
-    
-    
+
+    /**
+     * 用户信息修改
+     * @param paramStr 修改的参数
+     * @param phone 手机号
+     * @param flag 0修改手机号 1修改密码
+     * @return
+     * @throws MallShopException
+     */
+    public boolean updateByPhone(String paramStr,String phone,int flag)throws MallShopException;
     /**
 	 * 根据shopId查询导购列表
 	 * @param paraMap
@@ -233,4 +251,15 @@ public interface ROAUserService {
      * @return 存在 true 不存在 false
      */
     public Boolean sharCodeIsExist(String sharCode)throws Exception;
+    
+    /**
+     * 通过userId获取导购部分数据
+     * @param userId
+     * @return
+     * @throws Exception
+     */
+    public UserinfoVO selectRmmmUserInfoByUserId(Integer userId) throws Exception;
+
+
+    public Integer editUserDesc(Integer userId,String desc)throws MallShopException;
 }

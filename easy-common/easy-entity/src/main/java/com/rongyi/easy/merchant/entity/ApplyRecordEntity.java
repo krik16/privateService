@@ -26,6 +26,9 @@ public class ApplyRecordEntity implements Serializable{
     
     /** 创建人账号  **/
     private String createAccount;
+    
+    /**  渠道 1商家  2买手 **/
+    private String channel ;
 
     public Integer getId() {
         return id;
@@ -74,6 +77,13 @@ public class ApplyRecordEntity implements Serializable{
 	public void setCreateAccount(String createAccount) {
 		this.createAccount = createAccount;
 	}
-    
+
+	public String getChannel() {
+		return channel;
+	}
+
+	public void setChannel(String channel) {
+		this.channel = channel;
+	}
     
 }

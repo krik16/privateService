@@ -24,7 +24,7 @@ public interface ROAOrderModelService {
 	 * @return
 	 * @throws Exception
 	 */
-	public OrderModelEntity getOrderModelById(Integer orderModelId)  throws Exception;
+//	public OrderModelEntity getOrderModelById(Integer orderModelId)  throws Exception;
 	
 	/**
 	 * 卖家生成订单模板 返回父模板id
