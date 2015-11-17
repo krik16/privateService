@@ -14,7 +14,7 @@ public class ParentOrderParam implements Serializable {
 	private String orderModelId;// 父模板id
 	private String guideId;// 导购id
 	private JSONObject discountInfo;// {“score”:”使用积分”}
-	private String couponCode;//促销券code
+	private String platformRebateCode;//促销券code
 
 	public List<SonOrderParam> getSonOrderList() {
 		return sonOrderList;
@@ -72,12 +72,12 @@ public class ParentOrderParam implements Serializable {
 		this.discountInfo = discountInfo;
 	}
 
-	public String getCouponCode() {
-		return couponCode;
+	public String getPlatformRebateCode() {
+		return platformRebateCode;
 	}
 
-	public void setCouponCode(String couponCode) {
-		this.couponCode = couponCode;
+	public void setPlatformRebateCode(String platformRebateCode) {
+		this.platformRebateCode = platformRebateCode;
 	}
 
 	@Override
@@ -90,7 +90,7 @@ public class ParentOrderParam implements Serializable {
 				", orderModelId='" + orderModelId + '\'' +
 				", guideId='" + guideId + '\'' +
 				", discountInfo=" + discountInfo +
-				", couponCode=" + couponCode +
+				", platformRebateCode=" + platformRebateCode +
 				'}';
 	}
 }
