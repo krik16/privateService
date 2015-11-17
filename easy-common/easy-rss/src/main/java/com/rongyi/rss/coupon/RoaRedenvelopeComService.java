@@ -5,6 +5,7 @@ import java.util.List;
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.coupon.entity.RedenvelopVO;
 import com.rongyi.easy.coupon.param.RedenvelopeParam;
 import com.rongyi.easy.coupon.vo.operation.RedenvelopCouponVO;
 
@@ -49,12 +50,12 @@ public interface RoaRedenvelopeComService {
     List<Coupon> findAll();
 
     /**
-     * 分页查询
-     *
-     * @param RedenvelopeParam
-     * @return
+     * 分页查询促销券列表
+     * @param param
+     * @return pagingVO
+     * @author lqy
      */
-    PagingVO<RedenvelopCouponVO> findAllByPage(RedenvelopeParam paramVo);
+    PagingVO<RedenvelopVO> findAllByPage(RedenvelopeParam param);
 
     /**
      * 审核现金劵
