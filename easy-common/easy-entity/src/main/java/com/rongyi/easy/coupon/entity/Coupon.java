@@ -306,6 +306,36 @@ public class Coupon implements Serializable {
      */
     private Boolean isRelatedAll;
 
+    /**
+     * 平台促销券类型,注册[0] 常规[1]
+     */
+    private Integer type;
+
+    /**
+     * 平台促销券适用对象，商家/买手[0] 商家[1] 买手[2]
+     */
+    private Integer applyObject;
+
+    /**
+     * 平台促销券适用范围维度1,商品/代金券[0] 商品[1] 代金券[2]
+     */
+    private Integer applyGoods;
+
+    /**
+     * 平台促销券有效期天数,领取后设置的天数
+     */
+    private Integer validDays;
+
+    /**
+     * 平台促销券与代金券的关系
+     */
+    private List<CouponVoucher> couponVouchers;
+
+    /**
+     * 平台促销券商品分类
+     */
+    private List<CouponCommodityCategory> couponCommodityCategories;
+
     public String getId() {
         return id;
     }
@@ -842,6 +872,53 @@ public class Coupon implements Serializable {
         this.isRelatedAll = isRelatedAll;
     }
 
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public Integer getApplyObject() {
+        return applyObject;
+    }
+
+    public void setApplyObject(Integer applyObject) {
+        this.applyObject = applyObject;
+    }
+
+    public Integer getApplyGoods() {
+        return applyGoods;
+    }
+
+    public void setApplyGoods(Integer applyGoods) {
+        this.applyGoods = applyGoods;
+    }
+
+    public Integer getValidDays() {
+        return validDays;
+    }
+
+    public void setValidDays(Integer validDays) {
+        this.validDays = validDays;
+    }
+
+    public List<CouponVoucher> getCouponVouchers() {
+        return couponVouchers;
+    }
+
+    public void setCouponVouchers(List<CouponVoucher> couponVouchers) {
+        this.couponVouchers = couponVouchers;
+    }
+
+    public List<CouponCommodityCategory> getCouponCommodityCategories() {
+        return couponCommodityCategories;
+    }
+
+    public void setCouponCommodityCategories(List<CouponCommodityCategory> couponCommodityCategories) {
+        this.couponCommodityCategories = couponCommodityCategories;
+    }
 
     @Override
     public String toString() {
@@ -899,6 +976,12 @@ public class Coupon implements Serializable {
                 .append("visitedCount", visitedCount)
                 .append("isGeneral", isGeneral)
                 .append("isRelatedAll", isRelatedAll)
+                .append("type", type)
+                .append("applyObject", applyObject)
+                .append("applyGoods", applyGoods)
+                .append("validDays", validDays)
+                .append("couponVouchers", couponVouchers)
+                .append("couponCommodityCategories", couponCommodityCategories)
                 .toString();
     }
 }
