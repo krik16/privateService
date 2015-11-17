@@ -66,6 +66,15 @@ public class OrderDetailFormEntity implements Serializable{
     /** 退款时使用，指退款商品在支付阶段享受到的优惠，例如购买3件商品使用100积分，退款2件，则2件商品对应积分为(2/3)*100四舍五入(存json格式数据)   */
     private String refundDiscountInfo;
 
+    /**促销券抵扣金额*/
+    private BigDecimal couponDiscount;
+
+    /**促销券来源 1：平台 2：商家*/
+    private Integer couponSource;
+
+    /**促销券类型 1：满减 2：立减*/
+    private Integer couponType;
+
     public String getRefundDiscountInfo() {
 		return refundDiscountInfo;
 	}
@@ -362,12 +371,38 @@ public class OrderDetailFormEntity implements Serializable{
 		this.commodityCommission = commodityCommission;
 	}
 
-	@Override
+    public BigDecimal getCouponDiscount() {
+        return couponDiscount;
+    }
+
+    public void setCouponDiscount(BigDecimal couponDiscount) {
+        this.couponDiscount = couponDiscount;
+    }
+
+    public Integer getCouponSource() {
+        return couponSource;
+    }
+
+    public void setCouponSource(Integer couponSource) {
+        this.couponSource = couponSource;
+    }
+
+    public Integer getCouponType() {
+        return couponType;
+    }
+
+    public void setCouponType(Integer couponType) {
+        this.couponType = couponType;
+    }
+
+    @Override
 	public String toString() {
 		return "OrderDetailFormEntity [id=" + id + ", orderItemNo=" + orderItemNo + ", orderNo=" + orderNo + ", commodityMid="
 				+ commodityMid + ", unitPrice=" + unitPrice + ", quantity=" + quantity + ", refundAmount=" + refundAmount
 				+ ", realAmount=" + realAmount + ", status=" + status + ", appealTimes=" + appealTimes + ", refundTimes="
 				+ refundTimes + ", isRefunded=" + isRefunded + ", isJudged=" + isJudged + ", appealId=" + appealId
-				+ ", paymentIdList=" + paymentIdList + ", commoditySpecMid=" + commoditySpecMid + ", couponId=" + couponId + "]";
+                + "couponDiscount="+couponDiscount + ", couponSource=" + couponSource + ", couponType=" + couponType
+				+ ", paymentIdList=" + paymentIdList + ", commoditySpecMid=" + commoditySpecMid + ", couponId=" + couponId + "," +
+                " ]";
 	}
 }
