@@ -16,6 +16,10 @@ public class SubmitOrderParam implements Serializable {
 
 	private String devId;// 设备号
 
+	private String devType;// 设备类型（ios/android/wap）
+
+	private String source;//订单来源 0为容易逛，1为微网站，2为终端机，3其他
+
 	public List<ParentOrderParam> getParentOrderList() {
 		return parentOrderList;
 	}
