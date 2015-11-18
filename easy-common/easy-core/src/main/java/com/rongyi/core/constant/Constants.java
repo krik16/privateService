@@ -704,4 +704,10 @@ public interface Constants {
         Integer CURRENT_PAGE=1;
         Integer PAGE_SIZE=10;
     }
+    
+    interface UserOperate{
+    	String HONGBAO = "1";//红包
+    	String COUPON = "2";//代金券
+    	String REBATE = "3";//抵扣券
+    }
 }
