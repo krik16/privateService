@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.rongyi.rss.malllife.service;
+package com.rongyi.rss.malllife.roa;
 
 import com.rongyi.easy.entity.UserOperateEntity;
 
@@ -14,21 +14,13 @@ import com.rongyi.easy.entity.UserOperateEntity;
  * <author>           <time>             <version>        <desc>
  * chenjun            2015年11月18日               1.0              创建文件
  */
-public interface IUserOperatesService {
+public interface ROAUserOperatesService {
 	
 	/**
-	 * 修改操作记录
+	 * 更新操作记录
 	 * @param userId
 	 * @param type
 	 */
 	public void updateUserOperateEntity(String userId,String type)  throws Exception;
-	
-	/**
-	 * 查询操作记录
-	 * @param userId
-	 * @param type
-	 * @return
-	 */
-	public UserOperateEntity getUserOperateEntityByUserId(String userId,String type)  throws Exception;
 
 }
