@@ -36,6 +36,16 @@ public class RebateCouponVO implements Serializable{
 	private List<Double> location;//代金券所在位置
 	
 	private Double distance;//距离
+	
+	private Boolean ifLimit = false;//true表示限购，false表示不限购”(Boolean型)
+
+	public Boolean getIfLimit() {
+		return ifLimit;
+	}
+
+	public void setIfLimit(Boolean ifLimit) {
+		this.ifLimit = ifLimit;
+	}
 
 	public String getCouponId() {
 		return couponId;
