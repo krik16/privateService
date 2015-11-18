@@ -16,6 +16,7 @@ public class templateSale implements Serializable{
     private Integer activityTemplateId;
     /**banner 图片*/
     private String bannerPic;
+
     /**0关联商场 1关联店铺*/
     private Byte isMallShop;
     /**true 删除 false不删除*/
