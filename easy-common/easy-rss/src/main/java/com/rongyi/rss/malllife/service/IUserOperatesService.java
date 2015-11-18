@@ -3,6 +3,9 @@
  */
 package com.rongyi.rss.malllife.service;
 
+import java.util.Date;
+import java.util.Map;
+
 import com.rongyi.easy.entity.UserOperateEntity;
 
 /**
@@ -30,5 +33,13 @@ public interface IUserOperatesService {
 	 * @return
 	 */
 	public UserOperateEntity getUserOperateEntityByUserId(String userId,String type)  throws Exception;
+	
+	/**
+	 * 查询操作记录时间
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+	public Map<String,Date> getUserOperateDate(String userId) throws Exception ;
 
 }
