@@ -9,7 +9,7 @@ import java.util.Date;
  * 特卖模版列表
  * @author lijing 2015-11-17 16:20
  */
-public class TemplateSale12321 implements Serializable{
+public class TemplateSale implements Serializable{
     /**id*/
     private Integer id;
     /**活动模版id*/
