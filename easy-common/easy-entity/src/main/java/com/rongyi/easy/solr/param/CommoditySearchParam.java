@@ -56,7 +56,7 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	/** 直播id */
 	private String liveId;
 	
-	/** 商品类型 (直播：1 ，全部商品：0)*/
+	/** 商品类型 (直播：1 ，全部商品：0, 卖场：2)*/
 	private String commodityType;
 
 	public String getCommodityType() {
