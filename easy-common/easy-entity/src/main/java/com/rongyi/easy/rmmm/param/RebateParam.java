@@ -27,14 +27,24 @@ public class RebateParam extends MalllifeBaseParam implements Serializable{
 	
 	private String couponId;//代金券id
 	
-	private List<String> commodityIds;//商品编号集合
+	private Integer num;//代金券购买数量
+	
+	private Double couponUnitPrice;//代金券单价
 
-	public List<String> getCommodityIds() {
-		return commodityIds;
+	public Double getCouponUnitPrice() {
+		return couponUnitPrice;
 	}
 
-	public void setCommodityIds(List<String> commodityIds) {
-		this.commodityIds = commodityIds;
+	public void setCouponUnitPrice(Double couponUnitPrice) {
+		this.couponUnitPrice = couponUnitPrice;
+	}
+
+	public Integer getNum() {
+		return num;
+	}
+
+	public void setNum(Integer num) {
+		this.num = num;
 	}
 
 	public String getCouponId() {
