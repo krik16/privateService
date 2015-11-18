@@ -4,6 +4,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 活动模版
@@ -48,6 +49,21 @@ public class ActivityTemplate implements Serializable{
     private Integer version;
    /**是否删除 false 没有删除 true 删除*/
     private Boolean isDeleted;
+    /**这个是卡券商品模版信息*/
+    private TemplateCouponGood templateCouponGood;
+   /**这个是翻牌购模版信息*/
+    private TemplateFlop templateFlop;
+   /**这个模版标签关联商品卡券关联*/
+    private List<TemplateLabel> templateLabel;
+   /**这个是商品卡券关联表*/
+    private List<TemplateRelevantGoodsCoupon> templateRelevantGoodsCoupon;
+   /**特卖模版信息表*/
+    private TemplateSale templateSale;
+    /**店铺商场关联*/
+    private List<TemplateSaleShopMall>  templateSaleShopMalls;
+   /**签到送积分信息*/
+    private TemplateSigned templateSigned;
+
 
     public Integer getId() {
         return id;
@@ -193,6 +209,62 @@ public class ActivityTemplate implements Serializable{
         this.isDeleted = isDeleted;
     }
 
+    public TemplateCouponGood getTemplateCouponGood() {
+        return templateCouponGood;
+    }
+
+    public void setTemplateCouponGood(TemplateCouponGood templateCouponGood) {
+        this.templateCouponGood = templateCouponGood;
+    }
+
+    public TemplateFlop getTemplateFlop() {
+        return templateFlop;
+    }
+
+    public void setTemplateFlop(TemplateFlop templateFlop) {
+        this.templateFlop = templateFlop;
+    }
+
+    public List<TemplateLabel> getTemplateLabel() {
+        return templateLabel;
+    }
+
+    public void setTemplateLabel(List<TemplateLabel> templateLabel) {
+        this.templateLabel = templateLabel;
+    }
+
+    public List<TemplateRelevantGoodsCoupon> getTemplateRelevantGoodsCoupon() {
+        return templateRelevantGoodsCoupon;
+    }
+
+    public void setTemplateRelevantGoodsCoupon(List<TemplateRelevantGoodsCoupon> templateRelevantGoodsCoupon) {
+        this.templateRelevantGoodsCoupon = templateRelevantGoodsCoupon;
+    }
+
+    public TemplateSale getTemplateSale() {
+        return templateSale;
+    }
+
+    public void setTemplateSale(TemplateSale templateSale) {
+        this.templateSale = templateSale;
+    }
+
+    public List<TemplateSaleShopMall> getTemplateSaleShopMalls() {
+        return templateSaleShopMalls;
+    }
+
+    public void setTemplateSaleShopMalls(List<TemplateSaleShopMall> templateSaleShopMalls) {
+        this.templateSaleShopMalls = templateSaleShopMalls;
+    }
+
+    public TemplateSigned getTemplateSigned() {
+        return templateSigned;
+    }
+
+    public void setTemplateSigned(TemplateSigned templateSigned) {
+        this.templateSigned = templateSigned;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -214,6 +286,13 @@ public class ActivityTemplate implements Serializable{
                 .append("updateAt", updateAt)
                 .append("version", version)
                 .append("isDeleted", isDeleted)
+                .append("templateCouponGood", templateCouponGood)
+                .append("templateFlop", templateFlop)
+                .append("templateLabel", templateLabel)
+                .append("templateRelevantGoodsCoupon", templateRelevantGoodsCoupon)
+                .append("templateSale", templateSale)
+                .append("templateSaleShopMalls", templateSaleShopMalls)
+                .append("templateSigned", templateSigned)
                 .toString();
     }
 }
