@@ -44,12 +44,30 @@ public class SubmitOrderParam implements Serializable {
 		this.devId = devId;
 	}
 
+	public String getDevType() {
+		return devType;
+	}
+
+	public void setDevType(String devType) {
+		this.devType = devType;
+	}
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
 	@Override
 	public String toString() {
 		return "SubmitOrderParam{" +
 				"parentOrderList=" + parentOrderList +
 				", commodityCartIds=" + commodityCartIds +
 				", devId='" + devId + '\'' +
+				", devType='" + devType + '\'' +
+				", source='" + source + '\'' +
 				'}';
 	}
 }
