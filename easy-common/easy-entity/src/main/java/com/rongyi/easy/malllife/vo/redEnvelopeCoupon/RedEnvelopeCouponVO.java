@@ -1,6 +1,7 @@
 package com.rongyi.easy.malllife.vo.redEnvelopeCoupon;
 
 import java.io.Serializable;
+import java.util.List;
 /**
  * 可使用红包的代金券列表VO
  * @author user
@@ -15,12 +16,14 @@ public class RedEnvelopeCouponVO implements Serializable{
 	
 	private String shopName;//店铺名称   
 	private String voucherName;//代金券名称
+	private String voucherCode;//代金券券码
 	private Double origPrice;//代金券原价
 	private Double currPrice;//代金券现价
 	private Integer soldCount;//已售数量
-	private Boolean isLimitBuy;//是否限购
+	private Boolean isLimitBuy;//是否限购   false 否  true是
 	private String shopId;//店铺id
     private String picUrl;//代金券图片（取第一张）
+    private List<Double> location;//店铺的经，纬度
 	public String getShopName() {
 		return shopName;
 	}
@@ -32,6 +35,12 @@ public class RedEnvelopeCouponVO implements Serializable{
 	}
 	public void setVoucherName(String voucherName) {
 		this.voucherName = voucherName;
+	}
+	public String getVoucherCode() {
+		return voucherCode;
+	}
+	public void setVoucherCode(String voucherCode) {
+		this.voucherCode = voucherCode;
 	}
 	public Double getOrigPrice() {
 		return origPrice;
@@ -69,13 +78,19 @@ public class RedEnvelopeCouponVO implements Serializable{
 	public void setPicUrl(String picUrl) {
 		this.picUrl = picUrl;
 	}
-	
+	public List<Double> getLocation() {
+		return location;
+	}
+	public void setLocation(List<Double> location) {
+		this.location = location;
+	}
 	@Override
 	public String toString() {
 		return "RedEnvelopeCouponVO [shopName=" + shopName + ", voucherName="
-				+ voucherName + ", origPrice=" + origPrice + ", currPrice="
-				+ currPrice + ", soldCount=" + soldCount + ", isLimitBuy="
-				+ isLimitBuy + ", shopId=" + shopId + ", picUrl=" + picUrl
+				+ voucherName + ", voucherCode=" + voucherCode + ", origPrice="
+				+ origPrice + ", currPrice=" + currPrice + ", soldCount="
+				+ soldCount + ", isLimitBuy=" + isLimitBuy + ", shopId="
+				+ shopId + ", picUrl=" + picUrl + ", location=" + location
 				+ "]";
 	}
 	
