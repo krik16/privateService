@@ -4,6 +4,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /***
  * 模版标签关联商品卡券关联
@@ -38,6 +39,8 @@ public class TemplateLabel implements Serializable {
     private Date updateAt;
     /**版本*/
     private Integer version;
+    /**关联的卡券商品*/
+    private List<TemplateRelevantGoodsCoupon> templateRelevantGoodsCouponList;
 
     public Integer getId() {
         return id;
@@ -151,6 +154,14 @@ public class TemplateLabel implements Serializable {
         this.version = version;
     }
 
+    public List<TemplateRelevantGoodsCoupon> getTemplateRelevantGoodsCouponList() {
+        return templateRelevantGoodsCouponList;
+    }
+
+    public void setTemplateRelevantGoodsCouponList(List<TemplateRelevantGoodsCoupon> templateRelevantGoodsCouponList) {
+        this.templateRelevantGoodsCouponList = templateRelevantGoodsCouponList;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -168,6 +179,7 @@ public class TemplateLabel implements Serializable {
                 .append("createAt", createAt)
                 .append("updateAt", updateAt)
                 .append("version", version)
+                .append("templateRelevantGoodsCouponList", templateRelevantGoodsCouponList)
                 .toString();
     }
 }

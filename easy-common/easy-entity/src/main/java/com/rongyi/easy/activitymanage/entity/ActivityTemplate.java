@@ -55,8 +55,7 @@ public class ActivityTemplate implements Serializable{
     private TemplateFlop templateFlop;
    /**这个模版标签关联商品卡券关联*/
     private List<TemplateLabel> templateLabel;
-   /**这个是商品卡券关联表*/
-    private List<TemplateRelevantGoodsCoupon> templateRelevantGoodsCoupon;
+
    /**特卖模版信息表*/
     private TemplateSale templateSale;
     /**店铺商场关联*/
@@ -233,13 +232,7 @@ public class ActivityTemplate implements Serializable{
         this.templateLabel = templateLabel;
     }
 
-    public List<TemplateRelevantGoodsCoupon> getTemplateRelevantGoodsCoupon() {
-        return templateRelevantGoodsCoupon;
-    }
 
-    public void setTemplateRelevantGoodsCoupon(List<TemplateRelevantGoodsCoupon> templateRelevantGoodsCoupon) {
-        this.templateRelevantGoodsCoupon = templateRelevantGoodsCoupon;
-    }
 
     public TemplateSale getTemplateSale() {
         return templateSale;
@@ -289,7 +282,6 @@ public class ActivityTemplate implements Serializable{
                 .append("templateCouponGood", templateCouponGood)
                 .append("templateFlop", templateFlop)
                 .append("templateLabel", templateLabel)
-                .append("templateRelevantGoodsCoupon", templateRelevantGoodsCoupon)
                 .append("templateSale", templateSale)
                 .append("templateSaleShopMalls", templateSaleShopMalls)
                 .append("templateSigned", templateSigned)
