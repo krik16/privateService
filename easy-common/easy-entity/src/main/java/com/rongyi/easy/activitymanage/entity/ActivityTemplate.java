@@ -1,6 +1,7 @@
 package com.rongyi.easy.activitymanage.entity;
 
 import com.rongyi.core.constant.Const;
+import com.rongyi.easy.coupon.consts.CouponConstants;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
