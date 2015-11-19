@@ -23,6 +23,9 @@ public enum AppErrorCode {
     USER_ISNOT_LOGIN(21,"请重新登录"),
     PARAMETER_ISNULL(1060001,"必要参数不能为空"),
     ERROR_MALLLIFEEXCEPTION(1060011,""),
+    
+    /** 代金券相关  后4位区间  5001---6000*/
+    ERROR_COUPON_ORDER_PARAM(1065001,"亲~红包和抵扣券只能用一种喔~”"),
 
 
     ;
