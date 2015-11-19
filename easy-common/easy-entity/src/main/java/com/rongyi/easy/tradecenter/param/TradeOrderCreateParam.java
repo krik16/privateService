@@ -96,6 +96,16 @@ public class TradeOrderCreateParam implements Serializable {
     private String platformRebateCode;
 
     /**
+     * 促销券来源 1：平台 2：商家
+     */
+    private Byte hbSource = 2;
+
+    /**
+     * 促销券类型 1：满减 2：立减
+     */
+    private Byte hbType;
+
+    /**
      * start
      * 以下字段是内部处理流程时使用，非外部传入
      * 金额字段均为分
@@ -358,6 +368,22 @@ public class TradeOrderCreateParam implements Serializable {
 
     public void setPlatformRebateCode(String platformRebateCode) {
         this.platformRebateCode = platformRebateCode;
+    }
+
+    public Byte getHbSource() {
+        return hbSource;
+    }
+
+    public void setHbSource(Byte hbSource) {
+        this.hbSource = hbSource;
+    }
+
+    public Byte getHbType() {
+        return hbType;
+    }
+
+    public void setHbType(Byte hbType) {
+        this.hbType = hbType;
     }
 
     @Override
