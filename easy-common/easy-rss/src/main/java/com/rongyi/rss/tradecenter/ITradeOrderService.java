@@ -1,5 +1,6 @@
 package com.rongyi.rss.tradecenter;
 
+import com.rongyi.easy.rmmm.param.OrderListParam;
 import com.rongyi.easy.tradecenter.TradeOrder;
 import com.rongyi.easy.tradecenter.TradeSubOrder;
 import com.rongyi.easy.tradecenter.param.TradeOrderCreateParam;
@@ -44,4 +45,6 @@ public interface ITradeOrderService {
     void updateOrderRefundedByNo(String orderNo);
 
     Map<String, Object> insertTradeOrder(TradeOrderCreateParam param);
+
+    int getMaxIntegral(OrderListParam param, double limit, double scoreExchangeMoney,double platformRebateAmount) throws Exception;
 }
