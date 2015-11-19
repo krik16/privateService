@@ -1,6 +1,6 @@
-package com.rongyi.easy.activitymanage.entity;
+package com.rongyi.easy.activitymanage.vo;
 
-import com.rongyi.core.constant.Const;
+import com.rongyi.easy.activitymanage.entity.*;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
@@ -8,62 +8,47 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 活动模版
- * @author lijing 2015 11 17 15:12
+ * 查询列表返回的
+ * Created by lijing on 2015/11/19.
  */
-public class ActivityTemplate implements Serializable{
+public class ActivityTemplateVO implements Serializable{
     /**活动模版的id*/
     private Integer id;
-   /**活动规则的id*/
+    /**活动规则的id*/
     private Integer activityRuleId;
     /**活动规则的名字*/
     private String activityRuleName;
-  /**模版类型 1代表标准模版  2代表特殊模版*/
+    /**模版类型 1代表标准模版  2代表特殊模版*/
     private Byte templateType;
     /**活动名称*/
     private String name;
-   /**活动发布时间*/
+    /**活动发布时间*/
     private Date startAt;
-   /**活动结束时间*/
+    /**活动结束时间*/
     private Date endAt;
+
+    /**活动状态 1 未开始，2进行中 3已结束*/
+    private Integer activityStatus;
     /***
      * 活动最后生成的URl
      */
     private String activityUrl;
     /**活动类型 活动类型 0.商品类活动，1卡券类活动，2.抽奖类活动 3.卡券及商品类活动，4.签到送积分，5，特卖*/
     private Integer activityType;
-   /**模版类型 模版的选择：0.签到送积分-移动端 1.签到送积分-互动屏 2.抽奖类活动(翻牌购)-移动端 3.抽奖类活动(翻牌购)-互动屏 4.商品/卡券限时活动-移动端 5.商品/卡券限时活动-互动屏 6.商品/卡券通用活动-移动端 7.商品/卡券通用活动-互动端 8.闪购-移动端 9.特卖-移动端*/
+    /**模版类型 模版的选择：0.签到送积分-移动端 1.签到送积分-互动屏 2.抽奖类活动(翻牌购)-移动端 3.抽奖类活动(翻牌购)-互动屏 4.商品/卡券限时活动-移动端 5.商品/卡券限时活动-互动屏 6.商品/卡券通用活动-移动端 7.商品/卡券通用活动-互动端 8.闪购-移动端 9.特卖-移动端*/
     private Integer moduleType;
-   /**适用终端 0移动端，1互动屏，2，ipad*/
+    /**适用终端 0移动端，1互动屏，2，ipad*/
     private Byte publishTerminal;
     /**默认是false可以正常使用 true表示强制关闭*/
     private Boolean status;
-   /**创建人 */
+    /**创建人 */
     private String createUser;
-   /**创建时间*/
+    /**创建时间*/
     private Date createAt;
-  /**修改时间*/
+    /**修改时间*/
     private String updateUser;
-  /**修改时间*/
+    /**修改时间*/
     private Date updateAt;
-   /**版本*/
-    private Integer version;
-   /**是否删除 false 没有删除 true 删除*/
-    private Boolean isDeleted;
-    /**这个是卡券商品模版信息*/
-    private TemplateCouponGood templateCouponGood;
-   /**这个是翻牌购模版信息*/
-    private TemplateFlop templateFlop;
-   /**这个模版标签关联商品卡券关联*/
-    private List<TemplateLabel> templateLabel;
-
-   /**特卖模版信息表*/
-    private TemplateSale templateSale;
-    /**店铺商场关联*/
-    private List<TemplateSaleShopMall>  templateSaleShopMalls;
-   /**签到送积分信息*/
-    private TemplateSigned templateSigned;
-
 
     public Integer getId() {
         return id;
@@ -105,20 +90,28 @@ public class ActivityTemplate implements Serializable{
         this.name = name;
     }
 
-    public Date getStartAt() {
-        return startAt;
+    public Long getStartAt() {
+        return startAt.getTime();
     }
 
     public void setStartAt(Date startAt) {
         this.startAt = startAt;
     }
 
-    public Date getEndAt() {
-        return endAt;
+    public Long getEndAt() {
+        return endAt.getTime();
     }
 
     public void setEndAt(Date endAt) {
         this.endAt = endAt;
+    }
+
+    public Integer getActivityStatus() {
+        return activityStatus;
+    }
+
+    public void setActivityStatus(Integer activityStatus) {
+        this.activityStatus = activityStatus;
     }
 
     public String getActivityUrl() {
@@ -169,8 +162,8 @@ public class ActivityTemplate implements Serializable{
         this.createUser = createUser;
     }
 
-    public Date getCreateAt() {
-        return createAt;
+    public Long getCreateAt() {
+        return createAt.getTime();
     }
 
     public void setCreateAt(Date createAt) {
@@ -185,77 +178,12 @@ public class ActivityTemplate implements Serializable{
         this.updateUser = updateUser;
     }
 
-    public Date getUpdateAt() {
-        return updateAt;
+    public Long getUpdateAt() {
+        return updateAt.getTime();
     }
 
     public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
-    public Boolean getIsDeleted() {
-        return isDeleted;
-    }
-
-    public void setIsDeleted(Boolean isDeleted) {
-        this.isDeleted = isDeleted;
-    }
-
-    public TemplateCouponGood getTemplateCouponGood() {
-        return templateCouponGood;
-    }
-    public void setTemplateCouponGood(TemplateCouponGood templateCouponGood) {
-        this.templateCouponGood = templateCouponGood;
-    }
-
-    public TemplateFlop getTemplateFlop() {
-        return templateFlop;
-    }
-
-    public void setTemplateFlop(TemplateFlop templateFlop) {
-        this.templateFlop = templateFlop;
-    }
-
-    public List<TemplateLabel> getTemplateLabel() {
-        return templateLabel;
-    }
-
-    public void setTemplateLabel(List<TemplateLabel> templateLabel) {
-        this.templateLabel = templateLabel;
-    }
-
-
-
-    public TemplateSale getTemplateSale() {
-        return templateSale;
-    }
-
-    public void setTemplateSale(TemplateSale templateSale) {
-        this.templateSale = templateSale;
-    }
-
-    public List<TemplateSaleShopMall> getTemplateSaleShopMalls() {
-        return templateSaleShopMalls;
-    }
-
-    public void setTemplateSaleShopMalls(List<TemplateSaleShopMall> templateSaleShopMalls) {
-        this.templateSaleShopMalls = templateSaleShopMalls;
-    }
-
-    public TemplateSigned getTemplateSigned() {
-        return templateSigned;
-    }
-
-    public void setTemplateSigned(TemplateSigned templateSigned) {
-        this.templateSigned = templateSigned;
     }
 
     @Override
@@ -268,6 +196,7 @@ public class ActivityTemplate implements Serializable{
                 .append("name", name)
                 .append("startAt", startAt)
                 .append("endAt", endAt)
+                .append("activityStatus", activityStatus)
                 .append("activityUrl", activityUrl)
                 .append("activityType", activityType)
                 .append("moduleType", moduleType)
@@ -277,14 +206,6 @@ public class ActivityTemplate implements Serializable{
                 .append("createAt", createAt)
                 .append("updateUser", updateUser)
                 .append("updateAt", updateAt)
-                .append("version", version)
-                .append("isDeleted", isDeleted)
-                .append("templateCouponGood", templateCouponGood)
-                .append("templateFlop", templateFlop)
-                .append("templateLabel", templateLabel)
-                .append("templateSale", templateSale)
-                .append("templateSaleShopMalls", templateSaleShopMalls)
-                .append("templateSigned", templateSigned)
                 .toString();
     }
 }

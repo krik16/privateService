@@ -1,6 +1,11 @@
 package com.rongyi.rss.activitymanage;
 
+import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.activitymanage.entity.ActivityTemplate;
+import com.rongyi.easy.activitymanage.param.ActivityTemplateParam;
+import com.rongyi.easy.activitymanage.vo.ActivityTemplateVO;
+
+import java.util.List;
 
 /**
  * 活动模版接口
@@ -15,7 +20,6 @@ public interface RoaActivityTemplateService {
      */
     boolean saveActivityTemplate(ActivityTemplate activityTemplate);
 
-
     /***
      * 通过id得到
      * @param id
@@ -23,5 +27,13 @@ public interface RoaActivityTemplateService {
      */
     ActivityTemplate getTemplateById(Integer id);
 
-    
+    /***
+     * 查询活动模版列表
+     * @param activityTemplateParam
+     * @return  PagingVO<ActivityTemplateVO>
+     */
+    PagingVO<ActivityTemplateVO> selectTemplateListByParam(ActivityTemplateParam activityTemplateParam);
+
+
+
 }
