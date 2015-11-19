@@ -155,7 +155,7 @@ public class Coupon implements Serializable {
     /**
      * 关联类型
      * 代金券：集团[0],品牌[1], 商场 [2],店铺[3];
-     * 红包 ：全场[0],商品[1]
+     * 平台促销券 ：全场[0]，品牌[1]，商场[2]，店铺[3]、分类[4]，信息[5]
      */
     private Integer relatedType;
 

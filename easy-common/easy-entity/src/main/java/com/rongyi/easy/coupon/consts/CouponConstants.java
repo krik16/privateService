@@ -121,4 +121,42 @@ public interface CouponConstants {
         Integer MERCHANT = 1;
     }
 
+    /**
+     * 订单类型：商品订单[0] 代金券订单[1]
+     */
+    interface OrderType {
+        Integer COMMODITY = 0;
+        Integer VOUCHER = 1;
+    }
+
+    /**
+     * 适用对象:商家/买手[0] 商家[1] 买手[2]
+     */
+    interface ApplyObject {
+        Integer MERCHANT_AND_BUYER = 0;
+        Integer MERCHANT = 1;
+        Integer BUYER = 2;
+    }
+
+    /**
+     * 适用范围维度1,商品/代金券[0] 商品[1] 代金券[2]
+     */
+    interface ApplyGoods {
+        Integer COMMODITY_AND_VOUCHER = 0;
+        Integer COMMODITY = 1;
+        Integer VOUCHER = 2;
+    }
+
+    /**
+     * 适用范围
+     * 平台促销券：全场[0],品牌[1], 商场 [2],店铺[3]，分类[4],信息[5];
+     */
+    interface PlatFormRelatedType {
+        Integer ALL = 0;
+        Integer BRAND = 1;
+        Integer MALL = 2;
+        Integer SHOP = 3;
+        Integer CATEGORY = 4;
+        Integer INFORMATION = 5;
+    }
 }
