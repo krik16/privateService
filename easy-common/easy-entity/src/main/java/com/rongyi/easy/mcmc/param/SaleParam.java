@@ -61,4 +61,5 @@ public class SaleParam implements Serializable {
     public void setCommodityIds(List<String> commodityIds) {
         this.commodityIds = commodityIds;
     }
+
 }
