@@ -23,9 +23,34 @@ public class PlatformRebateParam implements Serializable {
     private List<Commodity> commodities = new ArrayList<>();
 
     /**
-     * 代金券集合
+     * 代金券id
      */
-    private List<Voucher> vouchers = new ArrayList<>();
+    private String voucherId;
+
+    /**
+     * 代金券金额
+     */
+    private Integer voucherAmount;
+
+    /**
+     * 用户id
+     */
+    private String userId;
+
+    /**
+     * 券状态：可使用[1] 已失效[2]
+     */
+    private Integer status;
+
+    /**
+     * 当前页从1开始
+     */
+    private Integer currentPage;
+
+    /**
+     * 每页行数
+     */
+    private Integer pageSize;
 
     public static class Commodity implements Serializable {
         /**
@@ -77,42 +102,6 @@ public class PlatformRebateParam implements Serializable {
         }
     }
 
-    public static class Voucher implements Serializable {
-        /**
-         * 代金券id
-         */
-        private String voucherId;
-
-        /**
-         * 商品金额
-         */
-        private Integer voucherAmount;
-
-        public String getVoucherId() {
-            return voucherId;
-        }
-
-        public void setVoucherId(String voucherId) {
-            this.voucherId = voucherId;
-        }
-
-        public Integer getVoucherAmount() {
-            return voucherAmount;
-        }
-
-        public void setVoucherAmount(Integer voucherAmount) {
-            this.voucherAmount = voucherAmount;
-        }
-
-        @Override
-        public String toString() {
-            return new ToStringBuilder(this)
-                    .append("voucherId", voucherId)
-                    .append("voucherAmount", voucherAmount)
-                    .toString();
-        }
-    }
-
     public String getCouponCode() {
         return couponCode;
     }
@@ -129,12 +118,59 @@ public class PlatformRebateParam implements Serializable {
         this.commodities = commodities;
     }
 
-    public List<Voucher> getVouchers() {
-        return vouchers;
+    public String getVoucherId() {
+        return voucherId;
     }
 
-    public void setVouchers(List<Voucher> vouchers) {
-        this.vouchers = vouchers;
+    public void setVoucherId(String voucherId) {
+        this.voucherId = voucherId;
+    }
+
+    public Integer getVoucherAmount() {
+        return voucherAmount;
+    }
+
+    public void setVoucherAmount(Integer voucherAmount) {
+        this.voucherAmount = voucherAmount;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Integer getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(Integer currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public Integer getOffset() {
+        if (this.currentPage == null || this.pageSize == null) {
+            return null;
+        }
+        return  (this.currentPage -1) * this.pageSize < 0 ? 0 : (this.currentPage -1) * this.pageSize;
     }
 
     @Override
@@ -142,7 +178,12 @@ public class PlatformRebateParam implements Serializable {
         return new ToStringBuilder(this)
                 .append("couponCode", couponCode)
                 .append("commodities", commodities)
-                .append("vouchers", vouchers)
+                .append("voucherId", voucherId)
+                .append("voucherAmount", voucherAmount)
+                .append("userId", userId)
+                .append("status", status)
+                .append("currentPage", currentPage)
+                .append("pageSize", pageSize)
                 .toString();
     }
 }
