@@ -46,5 +46,5 @@ public interface ITradeOrderService {
 
     Map<String, Object> insertTradeOrder(TradeOrderCreateParam param);
 
-    int getMaxIntegral(OrderListParam param, double limit, double scoreExchangeMoney,double platformRebateAmount) throws Exception;
+    int getMaxIntegral(OrderListParam param, double limit, double scoreExchangeMoney,double platformRebateAmount);
 }
