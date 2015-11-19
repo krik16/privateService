@@ -37,6 +37,10 @@ public class ForumContentLVO  implements Serializable{
 	 * 安卓版本号
 	 */
 	private String androidVersion;
+	/**
+	 * 是否置顶 0不置顶，1置顶
+	 */
+	private int stick;
 	public Integer getId() {
 		return id;
 	}
@@ -103,7 +107,18 @@ public class ForumContentLVO  implements Serializable{
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-
+	/**
+	 * @return the stick
+	 */
+	public int getStick() {
+		return stick;
+	}
+	/**
+	 * @param stick the stick to set
+	 */
+	public void setStick(int stick) {
+		this.stick = stick;
+	}
 	@Override
 	public String toString() {
 		return "ForumContentLVO{" +

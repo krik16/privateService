@@ -3,6 +3,7 @@ package com.rongyi.rss.content;
 import com.rongyi.easy.content_v2.entity.ForumContent;
 import com.rongyi.easy.content_v2.entity.ForumHomepage;
 import com.rongyi.easy.content_v2.entity.ForumPosition;
+import com.rongyi.easy.content_v2.entity.ForumStick;
 import com.rongyi.easy.content_v2.param.ForumContentParam;
 import com.rongyi.easy.content_v2.param.ForumContentStatusDelParam;
 import com.rongyi.easy.content_v2.vo.ForumContentListVo;
@@ -22,7 +23,7 @@ public interface IIContentService {
 	 * 查询内容管理首页的信息
 	 * 
 	 */
-	public List<ForumHomeModelVo> findHomePage();
+	public List<ForumHomeModelVo> findHomePage(int type);
 	/**
 	 * 插入位置
 	 * @param list
@@ -152,4 +153,8 @@ public interface IIContentService {
 	 * 判断买手id 是否在同一位置，同一区域有
 	 */
 	List<String> hasBuyerLive(ForumContent fc);
+	/**
+	 * 修改置顶状态
+	 */
+	public Boolean updateStickById(ForumStick fs);
 }

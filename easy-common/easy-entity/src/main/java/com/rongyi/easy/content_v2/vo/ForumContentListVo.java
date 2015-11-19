@@ -54,6 +54,10 @@ public class ForumContentListVo implements Serializable{
 	 * 快捷入口的类型值    方式为 , , ,www.baidu.com
 	 */
 	private String quickTypeVal;
+	/**
+	 * 是否置顶
+	 */
+	private int stick;
 
 	public Integer getId() {
 		return id;
@@ -183,6 +187,19 @@ public class ForumContentListVo implements Serializable{
 
 	public void setQuickTypeVal(String quickTypeVal) {
 		this.quickTypeVal = quickTypeVal;
+	}
+	/**
+	 * @return the stick
+	 */
+	public int getStick() {
+		return stick;
+	}
+
+	/**
+	 * @param stick the stick to set
+	 */
+	public void setStick(int stick) {
+		this.stick = stick;
 	}
 
 	@Override
