@@ -36,4 +36,24 @@ public interface IShopService {
 	 * @return
 	 */
 	public ShopEntity serachShopByNumber(String number,String brandMid);
+	
+	/**
+	 * 根据商场和店铺性质查询店铺
+	 * @param mallId
+	 * @param type
+	 * @param pageSize >0分页 <=0部分页
+	 * @param currpage
+	 * @return
+	 */
+	public List<ShopEntity> searchShopByMallAreaIdAndType(String mallId,
+			int type, int pageSize, int currpage);
+	
+	
+	/**
+	 * 根据商场和店铺性质查询店铺数量
+	 * @param mallId
+	 * @param type
+	 * @return
+	 */
+	public Long searchShopCountByMallAreaIdAndType(String mallId,int type);
 }
