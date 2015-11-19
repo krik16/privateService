@@ -28,8 +28,8 @@ public class Commodity implements  Serializable,Cloneable{
 
 	private Integer saleId; //特卖mysql id
 	private Integer flashSaleId; // 闪购mysql id
-	private Date activityStartTime; //特卖或闪购开始时间
-	private Date activityEndTime; //特卖或闪购结束时间
+//	private Date activityStartTime; //特卖或闪购开始时间
+//	private Date activityEndTime; //特卖或闪购结束时间
 	
 	private String name;//商品名称
 	private String category;//商品品类id
@@ -106,8 +106,8 @@ public class Commodity implements  Serializable,Cloneable{
 				", cPriceMin='" + cPriceMin + '\'' +
 				", saleId='" + saleId + '\'' +
 				", flashSaleId='" + flashSaleId + '\'' +
-				", activityStartTime='" + activityStartTime + '\'' +
-				", activityEndTime='" + activityEndTime + '\'' +
+//				", activityStartTime='" + activityStartTime + '\'' +
+//				", activityEndTime='" + activityEndTime + '\'' +
 				'}';
 	}
 
@@ -483,8 +483,8 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setUpdateAt(updateAt);
 		commodity.setSaleId(saleId);
 		commodity.setFlashSaleId(flashSaleId);
-		commodity.setActivityStartTime(activityStartTime);
-		commodity.setActivityEndTime(activityEndTime);
+//		commodity.setActivityStartTime(activityStartTime);
+//		commodity.setActivityEndTime(activityEndTime);
 		return commodity;
 	}
 
@@ -514,19 +514,19 @@ public class Commodity implements  Serializable,Cloneable{
 		this.flashSaleId = flashSaleId;
 	}
 
-	public Date getActivityStartTime() {
-		return activityStartTime;
-	}
-
-	public void setActivityStartTime(Date activityStartTime) {
-		this.activityStartTime = activityStartTime;
-	}
-
-	public Date getActivityEndTime() {
-		return activityEndTime;
-	}
-
-	public void setActivityEndTime(Date activityEndTime) {
-		this.activityEndTime = activityEndTime;
-	}
+//	public Date getActivityStartTime() {
+//		return activityStartTime;
+//	}
+//
+//	public void setActivityStartTime(Date activityStartTime) {
+//		this.activityStartTime = activityStartTime;
+//	}
+//
+//	public Date getActivityEndTime() {
+//		return activityEndTime;
+//	}
+//
+//	public void setActivityEndTime(Date activityEndTime) {
+//		this.activityEndTime = activityEndTime;
+//	}
 }
