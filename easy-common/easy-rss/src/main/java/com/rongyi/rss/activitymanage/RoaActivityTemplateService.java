@@ -14,4 +14,14 @@ public interface RoaActivityTemplateService {
      * @return true  or false
      */
     boolean saveActivityTemplate(ActivityTemplate activityTemplate);
+
+
+    /***
+     * 通过id得到
+     * @param id
+     * @return
+     */
+    ActivityTemplate getTemplateById(Integer id);
+
+    
 }
