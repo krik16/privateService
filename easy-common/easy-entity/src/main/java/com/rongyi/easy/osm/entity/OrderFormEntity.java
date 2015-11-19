@@ -84,6 +84,9 @@ public class OrderFormEntity implements Serializable{
 
     /**促销券类型 1：满减 2：立减*/
     private Integer couponType;
+
+    /**积分优惠金额*/
+    private BigDecimal scoreDiscount;
     
     private JSONObject jsonDiscountInfo;
     
@@ -91,6 +94,8 @@ public class OrderFormEntity implements Serializable{
     private Integer guideType;
     /** 是否已提醒买家付款 0 未提醒 1 已提醒**/
     private Byte isAlert;
+    //促销券能使用的最小订单金额
+    private BigDecimal couponRequirement;
 
     /**订单总金额（不包括积分优惠）**/
     private BigDecimal totalAmountWithoutScoreDiscount = null;
@@ -519,6 +524,22 @@ public class OrderFormEntity implements Serializable{
         this.couponType = couponType;
     }
 
+    public BigDecimal getCouponRequirement() {
+        return couponRequirement;
+    }
+
+    public void setCouponRequirement(BigDecimal couponRequirement) {
+        this.couponRequirement = couponRequirement;
+    }
+
+    public BigDecimal getScoreDiscount() {
+        return scoreDiscount;
+    }
+
+    public void setScoreDiscount(BigDecimal scoreDiscount) {
+        this.scoreDiscount = scoreDiscount;
+    }
+
     @Override
     public String toString() {
         return "OrderFormEntity{" +
@@ -551,6 +572,8 @@ public class OrderFormEntity implements Serializable{
                 ", totalAmountWithoutScoreDiscount=" + totalAmountWithoutScoreDiscount +
                 ", couponDiscount=" + couponDiscount +
                 ", couponSource=" + couponSource +
+                ", couponRequirement=" + couponRequirement +
+                ", scoreDiscount=" + scoreDiscount +
                 ", couponType=" + couponType +
                 '}';
     }

@@ -75,6 +75,16 @@ public class OrderDetailFormEntity implements Serializable{
     /**促销券类型 1：满减 2：立减*/
     private Integer couponType;
 
+    /**实际支付金额*/
+    private BigDecimal payAmount;
+
+    /**大订单改价分摊优惠金额*/
+    private BigDecimal orderDiscountFee;
+
+    /**大订单积分分摊优惠金额*/
+    private BigDecimal orderScoreDiscount;
+
+
     public String getRefundDiscountInfo() {
 		return refundDiscountInfo;
 	}
@@ -395,6 +405,30 @@ public class OrderDetailFormEntity implements Serializable{
         this.couponType = couponType;
     }
 
+    public BigDecimal getPayAmount() {
+        return payAmount;
+    }
+
+    public void setPayAmount(BigDecimal payAmount) {
+        this.payAmount = payAmount;
+    }
+
+    public BigDecimal getOrderDiscountFee() {
+        return orderDiscountFee;
+    }
+
+    public void setOrderDiscountFee(BigDecimal orderDiscountFee) {
+        this.orderDiscountFee = orderDiscountFee;
+    }
+
+    public BigDecimal getOrderScoreDiscount() {
+        return orderScoreDiscount;
+    }
+
+    public void setOrderScoreDiscount(BigDecimal orderScoreDiscount) {
+        this.orderScoreDiscount = orderScoreDiscount;
+    }
+
     @Override
 	public String toString() {
 		return "OrderDetailFormEntity [id=" + id + ", orderItemNo=" + orderItemNo + ", orderNo=" + orderNo + ", commodityMid="
@@ -402,7 +436,8 @@ public class OrderDetailFormEntity implements Serializable{
 				+ ", realAmount=" + realAmount + ", status=" + status + ", appealTimes=" + appealTimes + ", refundTimes="
 				+ refundTimes + ", isRefunded=" + isRefunded + ", isJudged=" + isJudged + ", appealId=" + appealId
                 + "couponDiscount="+couponDiscount + ", couponSource=" + couponSource + ", couponType=" + couponType
-				+ ", paymentIdList=" + paymentIdList + ", commoditySpecMid=" + commoditySpecMid + ", couponId=" + couponId + "," +
+				+ ", paymentIdList=" + paymentIdList + ", commoditySpecMid=" + commoditySpecMid + ", couponId=" + couponId + ","
+                + ", orderScoreDiscount=" + orderScoreDiscount + ", orderDiscountFee=" + orderDiscountFee + ", payAmount=" + payAmount + "," +
                 " ]";
 	}
 }
