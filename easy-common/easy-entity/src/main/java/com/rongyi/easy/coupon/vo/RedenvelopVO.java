@@ -197,6 +197,9 @@ public class RedenvelopVO implements Serializable{
      */
     private Boolean isRelatedAll;
 
+    private Integer visitedCount;
+
+
     /**
      * 平台促销券类型,注册[0] 常规[1]
      */
@@ -226,6 +229,10 @@ public class RedenvelopVO implements Serializable{
      * 红包关联的商品  related_type只有这个类型是1 并且coupon_type 为2 的时候  才有这个类型
      */
     private List<CouponCommodity> couponCommodities;
+    /**
+     * 备注
+     */
+    private String remark;
 
     public String getId() {
         return id;
@@ -281,6 +288,16 @@ public class RedenvelopVO implements Serializable{
 
     public void setOrigPrice(Integer origPrice) {
         this.origPrice = origPrice;
+    }
+
+
+
+    public Integer getVisitedCount() {
+        return visitedCount;
+    }
+
+    public void setVisitedCount(Integer visitedCount) {
+        this.visitedCount = visitedCount;
     }
 
     public Integer getCurrPrice() {
@@ -571,6 +588,14 @@ public class RedenvelopVO implements Serializable{
         this.couponCommodities = couponCommodities;
     }
 
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("RedenvelopVO{");
@@ -611,12 +636,14 @@ public class RedenvelopVO implements Serializable{
         sb.append(", couponShops=").append(couponShops);
         sb.append(", preferentialType=").append(preferentialType);
         sb.append(", isRelatedAll=").append(isRelatedAll);
+        sb.append(", visitedCount=").append(visitedCount);
         sb.append(", type=").append(type);
         sb.append(", applyObject=").append(applyObject);
         sb.append(", applyGoods=").append(applyGoods);
         sb.append(", validDays=").append(validDays);
         sb.append(", couponVouchers=").append(couponVouchers);
         sb.append(", couponCommodities=").append(couponCommodities);
+        sb.append(", remark='").append(remark).append('\'');
         sb.append('}');
         return sb.toString();
     }
