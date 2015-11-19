@@ -5,6 +5,7 @@ import java.util.List;
 import com.rongyi.easy.content_v2.entity.ForumContent;
 import com.rongyi.easy.content_v2.entity.ForumHomepage;
 import com.rongyi.easy.content_v2.entity.ForumPosition;
+import com.rongyi.easy.content_v2.entity.ForumStick;
 import com.rongyi.easy.content_v2.param.ForumContentParam;
 import com.rongyi.easy.content_v2.param.ForumContentStatusDelParam;
 import com.rongyi.easy.content_v2.vo.ForumContentListVo;
@@ -23,7 +24,7 @@ public interface ROAContentService {
 	 * 查询内容管理首页的信息
 	 * 
 	 */
-	public List<ForumHomeModelVo> findHomePage();
+	public List<ForumHomeModelVo> findHomePage(int type);
 
 	/**
 	 * 插入位置
@@ -156,4 +157,11 @@ public interface ROAContentService {
 	 * @return
 	 */
 	public List<String> hasBuyerLive(ForumContent fc);
+	/**
+	 * 修改是否置顶
+	 * @param fc
+	 * @return
+	 */
+	public Boolean updateStickById(ForumStick fs);
+	
 }
