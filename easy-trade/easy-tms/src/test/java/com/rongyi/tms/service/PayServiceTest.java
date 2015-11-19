@@ -34,9 +34,6 @@ public class PayServiceTest extends BaseTest{
     PayService payService;
     
     @Autowired
-    ROAMallService mallService;
-    
-    @Autowired
     RefundService refundService;
     
     
@@ -53,8 +50,8 @@ public class PayServiceTest extends BaseTest{
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("name", keywords);
         try{
-            Map<String, Object> result = mallService.getMalls(map, 1, 10);
-            System.err.println(result.toString());
+//            Map<String, Object> result = mallService.getMalls(map, 1, 10);
+//            System.err.println(result.toString());
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -66,6 +63,6 @@ public class PayServiceTest extends BaseTest{
     	map.put("tradeType", ConstantEnum.TRADE_TYPE_REFUND.getCodeInt());
     	map.put("tradeStartTime", "2015-08-25");
     	 List<TradeVO> list = refundService.selectRefundPageList(map, 1, Constant.PAGE.PAGESIZE);
-    	System.err.println(list.size());
+    	System.err.println("totalSize="+list.size());
     }
 }

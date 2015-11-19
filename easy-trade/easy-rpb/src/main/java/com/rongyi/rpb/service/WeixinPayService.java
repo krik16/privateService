@@ -23,12 +23,13 @@ public interface WeixinPayService {
 	 * 获取微信支付签名
 	 * 
 	 * @author kejun 2015年4月2日
-	 * @param total_fee
+	 * @param totalFee
 	 * @param payNo
+	 * @param timeStart
+	 * @param timeExpire
 	 * @return
-	 * @throws JSONException
 	 */
-	public abstract Map<String, Object> getAppWeXinSign(String payNo, double total_fee);
+	public abstract Map<String, Object> getAppWeXinSign(String payNo, double totalFee,String timeStart,String timeExpire);
 
 	/**
 	 * 验证是否是微信退款，是则返回true
@@ -50,7 +51,8 @@ public interface WeixinPayService {
 	/**
 	 * mq接收微信退款消息
 	 * 
-	 * @param rpbEvent
+	 * @param paymentEntityVO
+	 * @param hisPayEntity
 	 */
 	public abstract boolean messageToRefund(PaymentEntityVO paymentEntityVO, PaymentEntity hisPayEntity);
 
@@ -58,11 +60,11 @@ public interface WeixinPayService {
 	 * 
 	 * 微信退款
 	 * 
-	 * @param payNo历史付款单号
-	 * @param total_fee历史付款单总额
-	 * @param refund_fee退款总额
-	 * @param newPayNo付款单号
-	 * @param tradeType交易类型（0:购买 1:退款 2:打款给卖家 3:提现 4:异常支付 5:重复支付 6：重复支付退款）
+	 * @param payNo 历史付款单号
+	 * @param totalFee 历史付款单总额
+	 * @param refundFee 退款总额
+	 * @param newPayNo 付款单号
+	 * @param tradeType 交易类型（0:购买 1:退款 2:打款给卖家 3:提现 4:异常支付 5:重复支付 6：重复支付退款）
 	 */
 	public abstract Map<String,Object>  weixinRefund(String payNo, double refundFee, double totalFee, String newPayNo,Integer tradeType);
 
@@ -79,8 +81,8 @@ public interface WeixinPayService {
 
 	/**
 	 * @Description: 查询订单
-	 * @param tradeNo交易流水号
-	 * @param payNo付款单号
+	 * @param tradeNo 交易流水号
+	 * @param payNo 付款单号
 	 * @return
 	 * @Author: 柯军
 	 * @datetime:2015年8月10日下午2:28:05

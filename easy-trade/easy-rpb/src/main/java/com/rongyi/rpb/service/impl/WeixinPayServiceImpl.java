@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.rpb.unit.TimeExpireUnit;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
@@ -78,15 +79,19 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 	@Autowired
 	Sender sender;
 
+	@Autowired
+	TimeExpireUnit timeExpireUnit;
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(WeixinPayServiceImpl.class);
 
 	@Override
-	public Map<String, Object> getAppWeXinSign(String payNo, double total_fee) {
+	public Map<String, Object> getAppWeXinSign(String payNo, double total_fee,String timeStart,String timeExpire) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			BigDecimal totalFee = new BigDecimal(total_fee + "").multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
+			timeExpire = timeExpireUnit.weixinPayTimeExpire(timeStart,timeExpire);
 			UnifiedorderService unifiedorderService = new UnifiedorderService();
-			map = unifiedorderService.getAppWeXinSign(payNo, totalFee.intValue(), "容易网商品");
+			map = unifiedorderService.getAppWeXinSign(payNo, totalFee.intValue(), "容易网商品",timeStart,timeExpire);
 			map.put("code", 0);
 			map.put("totlePrice", total_fee);
 		} catch (Exception e) {

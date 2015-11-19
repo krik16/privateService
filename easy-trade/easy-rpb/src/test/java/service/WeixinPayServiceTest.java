@@ -195,7 +195,7 @@ public class WeixinPayServiceTest extends BaseTest {
 	public void testgetPaySignV3() {
 		try {
 			UnifiedorderService unifiedorderService = new UnifiedorderService();
-			unifiedorderService.getAppWeXinSign("1000000000211", 1, "test");
+//			unifiedorderService.getAppWeXinSign("1000000000211", 1, "test");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -203,7 +203,7 @@ public class WeixinPayServiceTest extends BaseTest {
 
 	// @Test
 	public void testGetWeixinPaySign() {
-		Map<String, Object> map = weixinPayService.getAppWeXinSign("1000001111211", 1d);
+		Map<String, Object> map = weixinPayService.getAppWeXinSign("1000001111211", 1d,"","");
 		System.err.println(map.toString());
 	}
 

@@ -55,9 +55,9 @@ public class UnifiedorderService extends BaseService{
 	 * @Author:  柯军
 	 * @datetime:2015年9月2日下午1:32:08
 	 **/
-	public Map<String,Object> getAppWeXinSign(String payNo, Integer totalFee, String body) {
+	public Map<String,Object> getAppWeXinSign(String payNo, Integer totalFee, String body,String timeStart,String timeExpire) {
 		Map<String,Object> map = new HashMap<String,Object>();
-		UnifedOrderReqData unifedOrderReqData = new UnifedOrderReqData(body,payNo, totalFee,ConstantUtil.PayWeiXin_V3.WEIXIN_NOTIFY_URL,ConstantUtil.PayWeiXin_V3.TRADE_TYPE);
+		UnifedOrderReqData unifedOrderReqData = new UnifedOrderReqData(body,payNo, totalFee,ConstantUtil.PayWeiXin_V3.WEIXIN_NOTIFY_URL,ConstantUtil.PayWeiXin_V3.TRADE_TYPE,timeStart,timeExpire);
 		try {
 			 String result = request(unifedOrderReqData);
 			 String timestamp = WXUtil.getTimeStamp();

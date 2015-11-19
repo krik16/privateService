@@ -71,7 +71,7 @@ public interface PaymentService {
 	/**
 	 * 生成mq同步通知信息
 	 * 
-	 * @param message
+	 * @param event
 	 * @return
 	 */
 	public abstract Map<String, Object> getSendMessage(MessageEvent event);
@@ -96,7 +96,7 @@ public interface PaymentService {
 	 * 商品价格为0时特殊处理
 	 * 
 	 * @author kejun 2015年4月2日
-	 * @param message
+	 * @param event
 	 * @return
 	 */
 	public abstract Map<String, Object> getZeroSendMessage(MessageEvent event,Map<String, Object> messageMap, PaymentEntityVO paymentEntityVO);
@@ -165,7 +165,7 @@ public interface PaymentService {
 	/**
 	 * @Description: 验证是否是重复付款
 	 * @param payNo
-	 * @param newPayChannel收到新支付通知中的支付方式
+	 * @param newPayChannel 收到新支付通知中的支付方式
 	 * @return
 	 * @Author: 柯军
 	 * @datetime:2015年8月17日上午11:24:04
@@ -218,7 +218,7 @@ public interface PaymentService {
 	 * @Description:  查询是否允许退款的记录
 	 * @param tradeType
 	 * @param payChannel
-	 * @param agreeRefund
+	 * @param status
 	 * @return	
 	 * @Author:  柯军
 	 * @datetime:2015年8月27日上午10:42:19  的                                                                                                                         
