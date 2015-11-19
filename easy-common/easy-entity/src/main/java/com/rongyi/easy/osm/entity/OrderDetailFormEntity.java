@@ -84,6 +84,9 @@ public class OrderDetailFormEntity implements Serializable{
     /**大订单积分分摊优惠金额*/
     private BigDecimal orderScoreDiscount;
 
+    /**大订单抵扣券分摊优惠金额*/
+    private BigDecimal orderCouponDiscount;
+
 
     public String getRefundDiscountInfo() {
 		return refundDiscountInfo;
@@ -429,12 +432,20 @@ public class OrderDetailFormEntity implements Serializable{
         this.orderScoreDiscount = orderScoreDiscount;
     }
 
+    public BigDecimal getOrderCouponDiscount() {
+        return orderCouponDiscount;
+    }
+
+    public void setOrderCouponDiscount(BigDecimal orderCouponDiscount) {
+        this.orderCouponDiscount = orderCouponDiscount;
+    }
+
     @Override
 	public String toString() {
 		return "OrderDetailFormEntity [id=" + id + ", orderItemNo=" + orderItemNo + ", orderNo=" + orderNo + ", commodityMid="
 				+ commodityMid + ", unitPrice=" + unitPrice + ", quantity=" + quantity + ", refundAmount=" + refundAmount
 				+ ", realAmount=" + realAmount + ", status=" + status + ", appealTimes=" + appealTimes + ", refundTimes="
-				+ refundTimes + ", isRefunded=" + isRefunded + ", isJudged=" + isJudged + ", appealId=" + appealId
+				+ refundTimes + ", isRefunded=" + isRefunded + ", isJudged=" + isJudged + ", appealId=" + appealId+ ", orderCouponDiscount=" + orderCouponDiscount
                 + "couponDiscount="+couponDiscount + ", couponSource=" + couponSource + ", couponType=" + couponType
 				+ ", paymentIdList=" + paymentIdList + ", commoditySpecMid=" + commoditySpecMid + ", couponId=" + couponId + ","
                 + ", orderScoreDiscount=" + orderScoreDiscount + ", orderDiscountFee=" + orderDiscountFee + ", payAmount=" + payAmount + "," +
