@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongyi.easy.rmmm.entity.MalllifeUserInfoEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.rongyi.easy.rmmm.entity.MalllifeUserInfoEntity" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="TINYINT" />
+    <result column="head_img" property="headImg" jdbcType="VARCHAR" />
+    <result column="open_id" property="openId" jdbcType="VARCHAR" />
+    <result column="im_id" property="imId" jdbcType="VARCHAR" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="channel" property="channel" jdbcType="VARCHAR" />
+    <result column="dev_uuid" property="devUuid" jdbcType="VARCHAR" />
+    <result column="idfa" property="idfa" jdbcType="VARCHAR" />
+    <result column="device_type" property="deviceType" jdbcType="VARCHAR" />
+    <result column="terminal_type" property="terminalType" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="CHAR" />
+    <result column="login_red" property="loginRed" jdbcType="TINYINT" />
+    <result column="update_at" property="updateAt" jdbcType="TIMESTAMP" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="push_id" property="pushId" jdbcType="VARCHAR" />
+    <result column="last_login_at" property="lastLoginAt" jdbcType="TIMESTAMP" />
+    <result column="last_login_ip" property="lastLoginIp" jdbcType="VARCHAR" />
+    <result column="share_code" property="shareCode" jdbcType="VARCHAR" />
+    <result column="regist_ip" property="registIp" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.rongyi.easy.rmmm.entity.MalllifeUserInfoEntity" >
+    insert into malllife_user_info (id, user_name, password, 
+      email, phone, version, 
+      head_img, open_id, im_id, 
+      nick_name, channel, dev_uuid, 
+      idfa, device_type, terminal_type, 
+      gender, login_red, update_at, 
+      create_at, push_id, last_login_at, 
+      last_login_ip, share_code, regist_ip
+      )
+    values (#{id,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{version,jdbcType=TINYINT}, 
+      #{headImg,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{imId,jdbcType=VARCHAR}, 
+      #{nickName,jdbcType=VARCHAR}, #{channel,jdbcType=VARCHAR}, #{devUuid,jdbcType=VARCHAR}, 
+      #{idfa,jdbcType=VARCHAR}, #{deviceType,jdbcType=VARCHAR}, #{terminalType,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=CHAR}, #{loginRed,jdbcType=TINYINT}, #{updateAt,jdbcType=TIMESTAMP}, 
+      #{createAt,jdbcType=TIMESTAMP}, #{pushId,jdbcType=VARCHAR}, #{lastLoginAt,jdbcType=TIMESTAMP}, 
+      #{lastLoginIp,jdbcType=VARCHAR}, #{shareCode,jdbcType=VARCHAR}, #{registIp,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.rongyi.easy.rmmm.entity.MalllifeUserInfoEntity" >
+    insert into malllife_user_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="headImg != null" >
+        head_img,
+      </if>
+      <if test="openId != null" >
+        open_id,
+      </if>
+      <if test="imId != null" >
+        im_id,
+      </if>
+      <if test="nickName != null" >
+        nick_name,
+      </if>
+      <if test="channel != null" >
+        channel,
+      </if>
+      <if test="devUuid != null" >
+        dev_uuid,
+      </if>
+      <if test="idfa != null" >
+        idfa,
+      </if>
+      <if test="deviceType != null" >
+        device_type,
+      </if>
+      <if test="terminalType != null" >
+        terminal_type,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="loginRed != null" >
+        login_red,
+      </if>
+      <if test="updateAt != null" >
+        update_at,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+      <if test="pushId != null" >
+        push_id,
+      </if>
+      <if test="lastLoginAt != null" >
+        last_login_at,
+      </if>
+      <if test="lastLoginIp != null" >
+        last_login_ip,
+      </if>
+      <if test="shareCode != null" >
+        share_code,
+      </if>
+      <if test="registIp != null" >
+        regist_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=TINYINT},
+      </if>
+      <if test="headImg != null" >
+        #{headImg,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null" >
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="imId != null" >
+        #{imId,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="devUuid != null" >
+        #{devUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="idfa != null" >
+        #{idfa,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType != null" >
+        #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalType != null" >
+        #{terminalType,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=CHAR},
+      </if>
+      <if test="loginRed != null" >
+        #{loginRed,jdbcType=TINYINT},
+      </if>
+      <if test="updateAt != null" >
+        #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pushId != null" >
+        #{pushId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginAt != null" >
+        #{lastLoginAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginIp != null" >
+        #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="shareCode != null" >
+        #{shareCode,jdbcType=VARCHAR},
+      </if>
+      <if test="registIp != null" >
+        #{registIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
