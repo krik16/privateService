@@ -4,13 +4,17 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
- * 平台抵扣券参数实体
+ * 平台抵扣券和红包参数实体
  * Created by lqy on 2015/11/18.
  */
-public class PlatformRebateParam implements Serializable {
+public class RebateAndRedenvelopParam implements Serializable {
+
+    public static String RECEIVE_AT_DESC = "receive_at desc";// 可使用列表排序(按领取时间排序)
+    public static String USE_VALID_AT_DESC = "use_valid_at desc";// 可使用列表排序(按过期及使用时间排序，最新过期或使用后的券优先排列)
 
     /**
      * 券码
@@ -38,9 +42,19 @@ public class PlatformRebateParam implements Serializable {
     private String userId;
 
     /**
-     * 券状态：可使用[0] 已失效[1]
+     * 券状态：可使用[true] 已失效[false](已失效包括已使用和已过期)
      */
-    private Integer status;
+    private Boolean isAvailable;
+
+    /**
+     * 领取券码时间
+     */
+    private Date receiveAt;
+
+    /**
+     * 使用规则：满减[0] 立减[1]
+     */
+    private Integer preferentialType;
 
     /**
      * 当前页从1开始
@@ -51,6 +65,11 @@ public class PlatformRebateParam implements Serializable {
      * 每页行数
      */
     private Integer pageSize;
+
+    /**
+     * 排序
+     */
+    private String orderBy;
 
     public static class Commodity implements Serializable {
         /**
@@ -142,12 +161,12 @@ public class PlatformRebateParam implements Serializable {
         this.userId = userId;
     }
 
-    public Integer getStatus() {
-        return status;
+    public Boolean getIsAvailable() {
+        return isAvailable;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setIsAvailable(Boolean isAvailable) {
+        this.isAvailable = isAvailable;
     }
 
     public Integer getCurrentPage() {
@@ -166,6 +185,34 @@ public class PlatformRebateParam implements Serializable {
         this.pageSize = pageSize;
     }
 
+    public String getOrderBy() {
+        return orderBy;
+    }
+
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
+    }
+
+    public Date getReceiveAt() {
+        return receiveAt;
+    }
+
+    public void setReceiveAt(Date receiveAt) {
+        this.receiveAt = receiveAt;
+    }
+
+    public Integer getPreferentialType() {
+        return preferentialType;
+    }
+
+    public void setPreferentialType(Integer preferentialType) {
+        this.preferentialType = preferentialType;
+    }
+
+    /**
+     * 分页起始行数
+     * @return
+     */
     public Integer getOffset() {
         if (this.currentPage == null || this.pageSize == null) {
             return null;
@@ -181,9 +228,12 @@ public class PlatformRebateParam implements Serializable {
                 .append("voucherId", voucherId)
                 .append("voucherAmount", voucherAmount)
                 .append("userId", userId)
-                .append("status", status)
+                .append("isAvailable", isAvailable)
+                .append("receiveAt", receiveAt)
+                .append("preferentialType", preferentialType)
                 .append("currentPage", currentPage)
                 .append("pageSize", pageSize)
+                .append("orderBy", orderBy)
                 .toString();
     }
 }

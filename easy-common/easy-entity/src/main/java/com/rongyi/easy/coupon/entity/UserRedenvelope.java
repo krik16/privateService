@@ -96,6 +96,41 @@ public class UserRedenvelope implements Serializable {
      */
     private String activityName;
 
+
+    /********************* coupon表模板表信息冗余 **********************/
+    /**
+     * 卡券名称
+     */
+    private String couponName;
+
+    /**
+     * 满多少可使用，满的金额（元）
+     */
+    private Integer origPrice;
+
+    /**
+     * 适用对象，商家/买手[0] 商家[1] 买手[2] （作用角色）
+     */
+    private Integer applyObject;
+
+    /**
+     * 适用范围维度1,商品/代金券[0] 商品[1] 代金券[2] （作用对象）
+     */
+    private Integer applyGoods;
+
+    /**
+     * 适用范围维度1 (作用范围)
+     * 全场[0]，品牌[1]，商场[2]，店铺[3]，分类[4]，信息[5]
+     */
+    private Integer relatedType;
+
+    /**
+     * 使用说明
+     */
+    private String usageDesc;
+
+    /********************* coupon表模板表信息冗余 **********************/
+
     public UserRedenvelope() {
     }
 
@@ -237,7 +272,13 @@ public class UserRedenvelope implements Serializable {
         this.validEndAt = validEndAt;
     }
 
+    public String getCouponName() {
+        return couponName;
+    }
 
+    public void setCouponName(String couponName) {
+        this.couponName = couponName;
+    }
 
     public Integer getDiscount() {
         return discount;
@@ -272,6 +313,46 @@ public class UserRedenvelope implements Serializable {
         this.activityName = activityName;
     }
 
+    public Integer getOrigPrice() {
+        return origPrice;
+    }
+
+    public void setOrigPrice(Integer origPrice) {
+        this.origPrice = origPrice;
+    }
+
+    public Integer getApplyObject() {
+        return applyObject;
+    }
+
+    public void setApplyObject(Integer applyObject) {
+        this.applyObject = applyObject;
+    }
+
+    public Integer getApplyGoods() {
+        return applyGoods;
+    }
+
+    public void setApplyGoods(Integer applyGoods) {
+        this.applyGoods = applyGoods;
+    }
+
+    public Integer getRelatedType() {
+        return relatedType;
+    }
+
+    public void setRelatedType(Integer relatedType) {
+        this.relatedType = relatedType;
+    }
+
+    public String getUsageDesc() {
+        return usageDesc;
+    }
+
+    public void setUsageDesc(String usageDesc) {
+        this.usageDesc = usageDesc;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -291,6 +372,12 @@ public class UserRedenvelope implements Serializable {
                 .append("validEndAt", validEndAt)
                 .append("activityId", activityId)
                 .append("activityName", activityName)
+                .append("couponName", couponName)
+                .append("origPrice", origPrice)
+                .append("applyObject", applyObject)
+                .append("applyGoods", applyGoods)
+                .append("relatedType", relatedType)
+                .append("usageDesc", usageDesc)
                 .toString();
     }
 }

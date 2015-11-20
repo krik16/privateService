@@ -1,7 +1,7 @@
 package com.rongyi.rss.coupon;
 
 import com.rongyi.core.common.PagingVO;
-import com.rongyi.easy.coupon.param.PlatformRebateParam;
+import com.rongyi.easy.coupon.param.RebateAndRedenvelopParam;
 import com.rongyi.easy.coupon.vo.PlatformRebateVO;
 
 /**
@@ -16,7 +16,7 @@ public interface RoaPlatformRebateService {
      * @return boolean
      * @author lqy
      */
-    boolean validPlatformRebate(PlatformRebateParam param);
+    boolean validPlatformRebate(RebateAndRedenvelopParam param);
 
     /**
      * 根据券码查询抵扣券的抵扣金额（元）
@@ -57,5 +57,21 @@ public interface RoaPlatformRebateService {
      * @return PagingVO
      * @author lqy
      */
-    PagingVO<PlatformRebateVO> getUserPlatformRebates(PlatformRebateParam param);
+    PagingVO<PlatformRebateVO> getUserPlatformRebates(RebateAndRedenvelopParam param);
+
+    /**
+     * 删除我的抵扣券
+     * @param couponCode 抵扣券券码
+     * @param userId 用户id
+     * @return Boolean
+     */
+    boolean removeUserPlatformRebate(String couponCode, String userId);
+
+    /**
+     * 获取用户在某个时间点以后领取到的可使用的抵扣券数量
+     * @param param 参数含 userId、receiveAt
+     * @return count 数量
+     * @author lqy
+     */
+    int getUserPlatformRebateCount(RebateAndRedenvelopParam param);
 }
