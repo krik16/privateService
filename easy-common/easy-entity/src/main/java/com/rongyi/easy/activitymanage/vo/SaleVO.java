@@ -52,28 +52,36 @@ public class SaleVO implements Serializable {
             if(activityTemplate.getTemplateSale() != null){
                 this.bannerPic= activityTemplate.getTemplateSale().getBannerPic();
                 this.isMallShop=(int)activityTemplate.getTemplateSale().getIsMallShop();
-            }
+
             if(CollectionUtils.isEmpty(activityTemplate.getTemplateSaleShopMalls())){
                 List<MallVO>  mallVOs=new ArrayList<MallVO>();
                 List<ShopVO> shopVOs=new ArrayList<ShopVO>();
-
-                for(TemplateSaleShopMall templateSaleShopMall:activityTemplate.getTemplateSaleShopMalls()){
-                        if(StringUtils.isNotBlank(templateSaleShopMall.getMallMid())){
-                            MallVO tempMall=new MallVO();
-                            tempMall.setMallId(templateSaleShopMall.getMallMid());
-                            tempMall.setMallName(templateSaleShopMall.getMallName());
+                    if(this.isMallShop == 0){
+                        if (activityTemplate.getTemplateSaleShopMalls().size() >=1){
+                            MallVO tempMall = new MallVO();
+                            tempMall.setMallId(activityTemplate.getTemplateSaleShopMalls().get(0).getMallMid());
+                            tempMall.setMallName(activityTemplate.getTemplateSaleShopMalls().get(0).getMallName());
                             mallVOs.add(tempMall);
                         }
-
-                        if(StringUtils.isNotBlank(templateSaleShopMall.getShopMid())){
-                            ShopVO tempShop=new ShopVO();
-                            tempShop.setShopId(templateSaleShopMall.getShopMid());
-                            tempShop.setShopName(templateSaleShopMall.getShopName());
-                            shopVOs.add(tempShop);
+                    }else {
+                        for (TemplateSaleShopMall templateSaleShopMall : activityTemplate.getTemplateSaleShopMalls()) {
+                            if (StringUtils.isNotBlank(templateSaleShopMall.getShopMid())) {
+                                ShopVO tempShop = new ShopVO();
+                                tempShop.setShopId(templateSaleShopMall.getShopMid());
+                                tempShop.setShopName(templateSaleShopMall.getShopName());
+                                shopVOs.add(tempShop);
+                            }
                         }
+                       if(activityTemplate.getTemplateSaleShopMalls().size()>1) {
+                           MallVO tempMall = new MallVO();
+                           tempMall.setMallId(activityTemplate.getTemplateSaleShopMalls().get(0).getMallMid());
+                           tempMall.setMallName(activityTemplate.getTemplateSaleShopMalls().get(0).getMallName());
+                           mallVOs.add(tempMall);
+                       }
+                    }
+                    this.mall=mallVOs;
+                    this.shop=shopVOs;
                 }
-                this.mall=mallVOs;
-                this.shop=shopVOs;
             }
         }
     }
