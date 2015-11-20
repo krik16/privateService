@@ -38,7 +38,7 @@ public class PlatformRebateParam implements Serializable {
     private String userId;
 
     /**
-     * 券状态：可使用[1] 已失效[2]
+     * 券状态：可使用[0] 已失效[1]
      */
     private Integer status;
 
