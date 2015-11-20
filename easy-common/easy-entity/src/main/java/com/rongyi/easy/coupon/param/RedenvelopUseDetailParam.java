@@ -26,7 +26,7 @@ public class RedenvelopUseDetailParam implements Serializable{
      */
     private String orderNo;
     /**
-     * 状态 0 :全部 ；1：未使用；2：已使用；3：已过期
+     * 状态 0：未使用；1：已使用；2：已过期
      */
     private Integer status;
     /**
