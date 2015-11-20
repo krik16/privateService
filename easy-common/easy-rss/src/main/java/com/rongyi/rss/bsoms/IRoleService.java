@@ -36,4 +36,24 @@ public interface IRoleService {
 
 	boolean updateAccountStatus(Integer id, int status, String reason,
 			Integer userId);
+	
+	
+	/**
+	 * 新建or修改角色（可选所属范围）
+	 * @param paramsMap
+	 * @param auths
+	 * @param optId
+	 * @return
+	 * @throws Exception
+	 */
+	Integer saveOrUpdateRole(Map<String, Object> paramsMap,List<String> auths,Integer optId) throws Exception;
+	
+	/**
+	 * 查询角色关联范围
+	 * @param roleIdentity
+	 * @param relationMids
+	 * @return
+	 * @throws Exception
+	 */
+	List<Object> getRoleScope(Integer roleIdentity,List<String> relationMids) throws Exception;
 }
