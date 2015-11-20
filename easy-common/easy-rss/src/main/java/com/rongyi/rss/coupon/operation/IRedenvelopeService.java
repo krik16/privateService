@@ -3,6 +3,7 @@ package com.rongyi.rss.coupon.operation;
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.coupon.entity.RedenvelopVO;
 import com.rongyi.easy.coupon.param.RedenvelopeParam;
 import com.rongyi.easy.coupon.vo.operation.RedenvelopCouponVO;
 

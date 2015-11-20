@@ -16,7 +16,15 @@ public interface RoaRedenvelopeComService {
      * @param id
      * @return
      */
-    RedenvelopVO findOne(String id);
+    Coupon findOne(String id);
+
+    /**
+     * 根据PK查询
+     *
+     * @param id
+     * @return
+     */
+    RedenvelopVO findRedenvelopById(String id);
 
     /**
      * 保存
