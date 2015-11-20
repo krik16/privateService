@@ -6,7 +6,9 @@ import com.rongyi.core.framework.mybatis.pojo.Page;
 import com.rongyi.easy.coupon.entity.UserCoupon;
 import com.rongyi.easy.coupon.entity.UserRedenvelope;
 import com.rongyi.easy.coupon.param.CouponOrderParam;
+import com.rongyi.easy.coupon.param.RedenvelopUseDetailParam;
 import com.rongyi.easy.coupon.param.UserRedenvelopeParam;
+import com.rongyi.easy.coupon.vo.RedenvelopCodeUseDetailVO;
 import com.rongyi.easy.coupon.vo.UserCouponVO;
 
 import java.util.List;
@@ -142,4 +144,13 @@ public interface RoaUserRedenvelopeService {
      * @return
      */
     ResponseResult createByCouponOrderParam(CouponOrderParam param);
+
+    /**
+     * 大运营平台查询券码详情接口接口
+     * @param param
+     * @return RedenvelopCodeUseDetailVO
+     * @auther 袁波
+     * @Time 2015/11/20 15:38
+     */
+    public RedenvelopCodeUseDetailVO selectCodeUseDetail(RedenvelopUseDetailParam param);
 }
