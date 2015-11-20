@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.rongyi.easy.mcmc.vo.CommodityBuyerVO;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class ClearanceCommodityVO implements Serializable {
 
@@ -11,7 +12,7 @@ public class ClearanceCommodityVO implements Serializable {
 
   private String title = "特惠商品";
   
-  private List<String> listPics;// 存放图片的全路径
+  private List<String> pics;// 存放图片的全路径
 
   public List<CommodityBuyerVO> getList() {
     return list;
@@ -29,13 +30,20 @@ public class ClearanceCommodityVO implements Serializable {
     this.title = title;
   }
 
-public List<String> getListPics() {
-	return listPics;
-}
+  public List<String> getPics() {
+    return pics;
+  }
 
-public void setListPics(List<String> listPics) {
-	this.listPics = listPics;
-}
-  
+  public void setPics(List<String> pics) {
+    this.pics = pics;
+  }
 
+  @Override
+  public String toString() {
+    return new ToStringBuilder(this)
+            .append("list", list)
+            .append("title", title)
+            .append("pics", pics)
+            .toString();
+  }
 }

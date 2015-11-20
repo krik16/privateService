@@ -23,11 +23,11 @@ public interface ROAFilialeService {
 	 */
 	public List<FilialeVo> getFilialeList(Map paramMap,int currpage,int pageSize);
 	
-	/**
+	public FilialeVo getFilialeById(String id);
+		/**
 	 * 根据MongoID查询分公司
 	 * @param id
 	 * @return
 	 */
 	public FilialeVo getFilialeVoByMongoId(String id);
-	
-}
+	}
