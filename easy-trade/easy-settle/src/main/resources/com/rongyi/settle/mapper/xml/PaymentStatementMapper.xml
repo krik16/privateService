@@ -497,7 +497,7 @@
 		(CASE tor.pay_channel WHEN 1 THEN '支付宝' WHEN 5 THEN
 		'微信' WHEN 3 THEN '支付宝'
 		ELSE '其他' END) as pay_channel,tuc.orig_price,
-		ROUND(tor.pay_amount/tor.code_num, 0) as pay_amount,
+		ROUND(tor.pay_amount/tor.code_num+tor.rebate_discount, 0) as pay_amount,
 		ROUND(tor.hb_discount/tor.code_num, 0) as hb_discount,
 		ROUND(tor.score_discount/tor.code_num, 0) as score_discount,
 		tuc.orig_price-tuc.unit_price discount,tuc.user_phone,tuc.shop_id,
@@ -533,7 +533,7 @@
 		pay_channel,tuc.orig_price, sum(tuc.orig_price) as
 		total_amount,
 		count(tuc.coupon_id) as coupon_count,
-		ROUND(sum(tor.pay_amount/tor.code_num),0) as pay_amount
+		ROUND(sum(tor.pay_amount/tor.code_num+tor.rebate_discount),0) as pay_amount
 		from
 		ry_trade.trade_user_code tuc
 		join ry_trade.trade_order tor on

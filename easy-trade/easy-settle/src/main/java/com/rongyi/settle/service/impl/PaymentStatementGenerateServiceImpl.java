@@ -129,9 +129,12 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
     }
 
     private void createExcel(PaymentStatement paymentStatement, StatementConfig statementConfig) throws Exception {
+        //总计
         PaymentStatementExcelDto paymentStatementExcelDto = new PaymentStatementExcelDto();
-        List<PaymentStatementDetailDto> paymentStatementDetailDtoList = new ArrayList<>();
+        //明细
         List<CouponExcelDto> couponExcelDtoList = new ArrayList<>();
+        //优惠券列表
+        List<PaymentStatementDetailDto> paymentStatementDetailDtoList = new ArrayList<>();
         if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.SHOP)) {
             ShopVO shopVO = roaShopService.getShopVOById(statementConfig.getBussinessId());
             paymentStatementDetailDtoList =
@@ -146,7 +149,9 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
             List<ShopVO> shopVOs = (List<ShopVO>) result.get("list");
             for (ShopVO shopVO : shopVOs) {
                 logger.info("定时任务-生成对账单-商场类型配置，shopId="+shopVO.getId());
+                //明细
                 paymentStatementDetailDtoList.addAll(paymentStatementService.selectForStatementDetails(shopVO.getId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime(), shopVO.getName(), shopVO.getPosition().getMallId(), shopVO.getPosition().getMall()));
+                //列表
                 couponExcelDtoList.addAll(paymentStatementService.selectForCouponExcelDto(shopVO.getId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime()));
             }
             if (shopVOs != null && shopVOs.size() > 0) {
@@ -158,6 +163,7 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
 
         List<CouponCodeExcelDto> couponCodeExcelDtoList = new ArrayList<>();
         double total = 0;
+        //总计
         double payTotal = 0;
         for (PaymentStatementDetailDto paymentStatementDetailDto : paymentStatementDetailDtoList) {
             CouponCodeExcelDto couponCodeExcelDto = paymentStatementDetailDto.toCouponCodeExcelDto();
