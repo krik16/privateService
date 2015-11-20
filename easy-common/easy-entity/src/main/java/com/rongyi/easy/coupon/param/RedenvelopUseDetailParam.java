@@ -1,8 +1,11 @@
 package com.rongyi.easy.coupon.param;
 
 import com.rongyi.core.constant.Constants;
+import com.rongyi.easy.malllife.common.util.DateTool;
+import org.apache.commons.lang.StringUtils;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Description:
@@ -53,6 +56,10 @@ public class RedenvelopUseDetailParam implements Serializable{
     private Integer pageSize;
 
     private Integer currentPage;
+
+    private Date startDate;
+
+    private Date endDate;
 
     /**
      * 查询起始查询行数
@@ -116,6 +123,8 @@ public class RedenvelopUseDetailParam implements Serializable{
     }
 
     public Integer getDateType() {
+        if(dateType==null)
+            return 1;
         return dateType;
     }
 
@@ -167,6 +176,28 @@ public class RedenvelopUseDetailParam implements Serializable{
     public RedenvelopUseDetailParam(String couponId, Integer currentPage) {
         this.couponId = couponId;
         this.currentPage = currentPage;
+    }
+
+    public Date getStartDate() {
+        if(StringUtils.isNotBlank(dateBucket)&&StringUtils.isNotBlank(dateBucket.split("-")[0])){
+            return DateTool.string2Date(dateBucket.split("-")[0],DateTool.FORMAT_DATETIME);
+        }
+        return null;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        if(StringUtils.isNotBlank(dateBucket)&&dateBucket.split("-").length==2&&StringUtils.isNotBlank(dateBucket.split("-")[1])){
+            return DateTool.string2Date(dateBucket.split("-")[1],DateTool.FORMAT_DATETIME);
+        }
+        return null;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     @Override
