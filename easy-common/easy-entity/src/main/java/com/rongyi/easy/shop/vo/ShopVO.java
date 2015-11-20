@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.rongyi.easy.roa.vo.BrandVO;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * 商家后台店铺管理实体类
@@ -26,6 +27,8 @@ public class ShopVO implements Serializable {
 	private List<CategoryVO> exclusiveCategories;// 店铺所属专属分类
 	private String tags;// 标签 自定义分类
 
+	private String mallName;
+	private String mallId;
 	private List<AreaVO> areaVOs;// 所在地区 省 市区 商圈 商场
 	private String address;// 详细地址
 	private int moreFloors;// 0不跨楼，1跨楼
@@ -277,6 +280,57 @@ public class ShopVO implements Serializable {
 	public void setCreatedAt(String createdAt) {
 		this.createdAt = createdAt;
 	}
-	
-	
+
+	public String getMallName() {
+		return mallName;
+	}
+
+	public void setMallName(String mallName) {
+		this.mallName = mallName;
+	}
+
+	public String getMallId() {
+		return mallId;
+	}
+
+	public void setMallId(String mallId) {
+		this.mallId = mallId;
+	}
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append("id", id)
+				.append("name", name)
+				.append("shopNature", shopNature)
+				.append("shopType", shopType)
+				.append("number", number)
+				.append("brand", brand)
+				.append("brands", brands)
+				.append("icon", icon)
+				.append("categories", categories)
+				.append("exclusiveCategories", exclusiveCategories)
+				.append("tags", tags)
+				.append("mallName", mallName)
+				.append("mallId", mallId)
+				.append("areaVOs", areaVOs)
+				.append("address", address)
+				.append("moreFloors", moreFloors)
+				.append("shopNumber", shopNumber)
+				.append("businessStatus", businessStatus)
+				.append("businessHours", businessHours)
+				.append("photoUrls", photoUrls)
+				.append("openedTime", openedTime)
+				.append("telephone", telephone)
+				.append("headName", headName)
+				.append("headTelephone", headTelephone)
+				.append("description", description)
+				.append("valid", valid)
+				.append("reason", reason)
+				.append("createdAt", createdAt)
+				.append("updateBy", updateBy)
+				.append("updatedAt", updatedAt)
+				.append("filialeName", filialeName)
+				.toString();
+	}
 }

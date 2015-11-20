@@ -37,6 +37,8 @@ public class RebateVO implements Serializable{
 	
 	private String description;//未满足使用条件
 	
+	private String applyScope;// 0都适用 1商品适用 2代金券适用
+	
 	private List<CommodityBuyerVO> commodityList;//可使用商品列表
 	
 	private List<RebateCouponVO> couponList;//可使用代金券列表

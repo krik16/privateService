@@ -24,7 +24,12 @@ public class Commodity implements  Serializable,Cloneable{
 	private boolean isSpot; // 是否现货	0 否  1是
 	private Date liveStartTime; // 直播开始时间
 	private Date liveEndTime; // 直播结束时间
-	private String create_by; // 创建人 
+	private String create_by; // 创建人
+
+	private Integer saleId; //特卖mysql id
+	private Integer flashSaleId; // 闪购mysql id
+//	private Date activityStartTime; //特卖或闪购开始时间
+//	private Date activityEndTime; //特卖或闪购结束时间
 	
 	private String name;//商品名称
 	private String category;//商品品类id
@@ -99,6 +104,10 @@ public class Commodity implements  Serializable,Cloneable{
 				", oPriceMin='" + oPriceMin + '\'' +
 				", cPriceMax='" + cPriceMax + '\'' +
 				", cPriceMin='" + cPriceMin + '\'' +
+				", saleId='" + saleId + '\'' +
+				", flashSaleId='" + flashSaleId + '\'' +
+//				", activityStartTime='" + activityStartTime + '\'' +
+//				", activityEndTime='" + activityEndTime + '\'' +
 				'}';
 	}
 
@@ -472,6 +481,10 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setTerminalType(terminalType);
 		commodity.setUpdate_by(update_by);
 		commodity.setUpdateAt(updateAt);
+		commodity.setSaleId(saleId);
+		commodity.setFlashSaleId(flashSaleId);
+//		commodity.setActivityStartTime(activityStartTime);
+//		commodity.setActivityEndTime(activityEndTime);
 		return commodity;
 	}
 
@@ -484,4 +497,36 @@ public class Commodity implements  Serializable,Cloneable{
 	public boolean equals(Object obj) {
 		return this.toString().equals(obj.toString());
 	}
+
+	public Integer getSaleId() {
+		return saleId;
+	}
+
+	public void setSaleId(Integer saleId) {
+		this.saleId = saleId;
+	}
+
+	public Integer getFlashSaleId() {
+		return flashSaleId;
+	}
+
+	public void setFlashSaleId(Integer flashSaleId) {
+		this.flashSaleId = flashSaleId;
+	}
+
+//	public Date getActivityStartTime() {
+//		return activityStartTime;
+//	}
+//
+//	public void setActivityStartTime(Date activityStartTime) {
+//		this.activityStartTime = activityStartTime;
+//	}
+//
+//	public Date getActivityEndTime() {
+//		return activityEndTime;
+//	}
+//
+//	public void setActivityEndTime(Date activityEndTime) {
+//		this.activityEndTime = activityEndTime;
+//	}
 }

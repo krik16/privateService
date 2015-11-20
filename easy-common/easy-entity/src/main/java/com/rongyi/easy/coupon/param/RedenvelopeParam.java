@@ -4,16 +4,21 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
+
 import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.entity.CouponBrand;
 import com.rongyi.easy.coupon.entity.CouponCategory;
 import com.rongyi.easy.coupon.entity.CouponCommodity;
+import com.rongyi.easy.coupon.entity.CouponCommodityCategory;
 import com.rongyi.easy.coupon.entity.CouponMall;
 import com.rongyi.easy.coupon.entity.CouponShop;
+import com.rongyi.easy.coupon.vo.operation.VoucherCouponVO;
 
 /**
  * 红包参数
  */
+@SuppressWarnings("serial")
 public class RedenvelopeParam implements Serializable {
 	private static final long serialVersionUID = 7422873726669964441L;
 	private String id;// 促销券id
@@ -35,16 +40,19 @@ public class RedenvelopeParam implements Serializable {
 	private String usageDesc;// 促销券促销券说明
 	private String synTarget;// 促销券同步终端(容易逛,互动屏,微信 “1,1,1”表示三个都选中“0,0,0”表示都没选中)
 	private Integer count;// 促销券追加数量50000以内
-	private Double origPrice;// 促销券规则(满多少减多少,满的价格)
+	private Integer origPrice;// 促销券规则(满多少减多少,满的价格)
 	private Integer totalCount;// 促销券发行量/分页记录总数
 	private List<String> couponIds;// 促销券id集合(下架/批量下架/通过/批量通过)
 	private String reason;// 促销券下架/审核未通过原因
 	private String relatedId;// 集团id/平牌id/商场id/店铺id
 	private String lv1Id;// 代金券分类一级id
 	private String brandId;// 品牌id
+	private String cateId;//品牌分类id
 	private String brandCname;// 品牌中文名称
 	private String brandEname;// 品牌英文名称
 	private String mallId;// 商场Id
+	private List<String> mallIds;// 商场Id
+	private String flag;//有效期类型 0:时间控件,1：天
 	private String zoneId;// 商圈
 	private Integer currentPage;// 当前页数
 	private Integer pageSize;// 分页数量
@@ -57,11 +65,14 @@ public class RedenvelopeParam implements Serializable {
 	private Integer receiveChannel;// 券码领用渠道(0:容易逛,1:互动屏,2:微信)
 	private Date receiveTime;// 券码领取时间
 	private List<CouponBrand> listCouponBrand;// 关联品牌
-	private List<CouponCategory> listCouponCategory;// 关联卡券/关联卡券分类
+	private List<String> brandIds;// 品牌id
 	private List<CouponMall> listCouponMall;// 关联商场
 	private List<CouponShop> listCouponShop;// 关联店铺
-	private List<Coupon> listCoupon;// 关联代金券
+	private List<VoucherCouponVO> listVoucherCouponVO;// 关联代金券
+	private List<CouponCategory> listCouponCategory;//关联卡券分类
 	private List<CouponCommodity> listCouponCommodity;// 关联商品
+	private List<CouponCommodityCategory> couponCommodityCategories;//商品分类
+	private boolean isRelatedAll;//是否关联品牌、或商场下所有店铺 0否 1是
 
 	public String getId() {
 		return id;
@@ -87,10 +98,25 @@ public class RedenvelopeParam implements Serializable {
 		this.type = type;
 	}
 
+	public String getFlag() {
+		return flag;
+	}
+	
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+	
+	public String getCateId() {
+		return cateId;
+	}
+
+	public void setCateId(String cateId) {
+		this.cateId = cateId;
+	}
+
 	public Integer getStatus() {
 		return status;
 	}
-
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
@@ -215,11 +241,11 @@ public class RedenvelopeParam implements Serializable {
 		this.count = count;
 	}
 
-	public Double getOrigPrice() {
+	public Integer getOrigPrice() {
 		return origPrice;
 	}
 
-	public void setOrigPrice(Double origPrice) {
+	public void setOrigPrice(Integer origPrice) {
 		this.origPrice = origPrice;
 	}
 
@@ -415,12 +441,12 @@ public class RedenvelopeParam implements Serializable {
 		this.listCouponShop = listCouponShop;
 	}
 
-	public List<Coupon> getListCoupon() {
-		return listCoupon;
+	public List<VoucherCouponVO> getListCoupon() {
+		return listVoucherCouponVO;
 	}
 
-	public void setListCoupon(List<Coupon> listCoupon) {
-		this.listCoupon = listCoupon;
+	public void setListCoupon(List<VoucherCouponVO> listVoucherCouponVO) {
+		this.listVoucherCouponVO = listVoucherCouponVO;
 	}
 
 	public List<CouponCommodity> getListCouponCommodity() {
@@ -430,4 +456,35 @@ public class RedenvelopeParam implements Serializable {
 	public void setListCouponCommodity(List<CouponCommodity> listCouponCommodity) {
 		this.listCouponCommodity = listCouponCommodity;
 	}
+	public List<String> getMallIds() {
+		return mallIds;
+	}
+
+	public void setMallIds(List<String> mallIds) {
+		this.mallIds = mallIds;
+	}
+	public List<String> getBrandIds() {
+		return brandIds;
+	}
+
+	public void setBrandIds(List<String> brandIds) {
+		this.brandIds = brandIds;
+	}
+
+	public List<CouponCommodityCategory> getCouponCommodityCategories() {
+		return couponCommodityCategories;
+	}
+
+	public void setCouponCommodityCategories(
+			List<CouponCommodityCategory> couponCommodityCategories) {
+		this.couponCommodityCategories = couponCommodityCategories;
+	}
+	public boolean getIsRelatedAll() {
+		return isRelatedAll;
+	}
+
+	public void setIsRelatedAll(boolean isRelatedAll) {
+		this.isRelatedAll = isRelatedAll;
+	}
+
 }

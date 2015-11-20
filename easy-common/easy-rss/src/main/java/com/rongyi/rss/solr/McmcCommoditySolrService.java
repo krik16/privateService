@@ -1,5 +1,6 @@
 package com.rongyi.rss.solr;
 
+import java.util.Date;
 import java.util.List;
 
 import org.bson.types.ObjectId;
@@ -71,5 +72,13 @@ public interface McmcCommoditySolrService {
 	 * @return
 	 */
 	public McmcCommodityDocument selectCommodityIndexById(String id);
+
+	public boolean updateCommoditySale(Integer shopId, Integer saleId, Date activityStartTime, Date activityEndTime);
+
+	public boolean cleanCommoditySale(Integer saleId);
+
+	public boolean cleanCommodityFlashSale(Integer flashSaleId);
+
+	public boolean updateCommodityFlashSale(String commodityId, Integer flashSaleId, Date activityStartTime, Date activityEndTime);
 
 }

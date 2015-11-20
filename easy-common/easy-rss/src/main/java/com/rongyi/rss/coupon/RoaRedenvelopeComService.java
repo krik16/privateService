@@ -1,13 +1,12 @@
 package com.rongyi.rss.coupon;
 
-import java.util.List;
-
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.Coupon;
-import com.rongyi.easy.coupon.entity.RedenvelopVO;
 import com.rongyi.easy.coupon.param.RedenvelopeParam;
-import com.rongyi.easy.coupon.vo.operation.RedenvelopCouponVO;
+import com.rongyi.easy.coupon.vo.RedenvelopVO;
+
+import java.util.List;
 
 public interface RoaRedenvelopeComService {
 	 /**
@@ -17,6 +16,14 @@ public interface RoaRedenvelopeComService {
      * @return
      */
     Coupon findOne(String id);
+
+    /**
+     * 根据PK查询
+     *
+     * @param id
+     * @return
+     */
+    RedenvelopVO findRedenvelopById(String id);
 
     /**
      * 保存
