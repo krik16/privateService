@@ -722,4 +722,7 @@ public interface Constants {
         int HDP=1;//互动屏
         int WX=2;//微信
     }
+    interface ExportSize{
+        int EXCEL_EXPORT_MAX_SIZE=50000;
+    }
 }

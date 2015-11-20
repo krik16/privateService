@@ -38,6 +38,10 @@ public class RedenvelopCodeUseDetailVO implements Serializable{
      */
     private Integer overdueCount;
 
+    private Integer currentPage;
+
+    private Integer pageSize;
+
     public List<UserRedenvelope> getUserRedenvelopes() {
         return userRedenvelopes;
     }
@@ -95,8 +99,26 @@ public class RedenvelopCodeUseDetailVO implements Serializable{
         sb.append(", unUsedCount=").append(unUsedCount);
         sb.append(", usedCount=").append(usedCount);
         sb.append(", overdueCount=").append(overdueCount);
+        sb.append(", currentPage=").append(currentPage);
+        sb.append(", pageSize=").append(pageSize);
         sb.append('}');
         return sb.toString();
+    }
+
+    public Integer getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(Integer currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
     }
 
     public RedenvelopCodeUseDetailVO() {
