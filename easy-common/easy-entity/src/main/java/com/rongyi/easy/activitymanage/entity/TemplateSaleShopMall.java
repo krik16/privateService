@@ -30,6 +30,8 @@ public class TemplateSaleShopMall implements Serializable{
     private Date updateAt;
     /**创建时间*/
     private Date createAt;
+    /**0表示没有修改  1表示新增 2表示删除  3表示修改*/
+    private int isShopU;
 
     public Integer getId() {
         return id;
@@ -111,6 +113,15 @@ public class TemplateSaleShopMall implements Serializable{
         this.createAt = createAt;
     }
 
+    public int getIsShopU() {
+        return isShopU;
+    }
+
+    public void setIsShopU(int isShopU) {
+        this.isShopU = isShopU;
+    }
+
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -124,6 +135,7 @@ public class TemplateSaleShopMall implements Serializable{
                 .append("createUser", createUser)
                 .append("updateAt", updateAt)
                 .append("createAt", createAt)
+                .append("isShopU",isShopU)
                 .toString();
     }
 }

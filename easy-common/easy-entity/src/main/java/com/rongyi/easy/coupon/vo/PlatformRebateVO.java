@@ -70,6 +70,11 @@ public class PlatformRebateVO implements Serializable {
     private Integer relatedType;
 
     /**
+     * 使用说明
+     */
+    private String usageDesc;
+
+    /**
      * 商品id集合
      */
     private List<String> commodityIds;
@@ -183,6 +188,14 @@ public class PlatformRebateVO implements Serializable {
         this.voucherVOs = voucherVOs;
     }
 
+    public String getUsageDesc() {
+        return usageDesc;
+    }
+
+    public void setUsageDesc(String usageDesc) {
+        this.usageDesc = usageDesc;
+    }
+
     // 券状态 0:未使用 1:已使用 2:已过期
     public void setConvertStatus(Integer status, Date validEndAt) {
         if (UserRedenvelope.STATUS_UNUSE.equals(status) && new Date().before(validEndAt))
@@ -207,6 +220,7 @@ public class PlatformRebateVO implements Serializable {
                 .append("applyObject", applyObject)
                 .append("applyGoods", applyGoods)
                 .append("relatedType", relatedType)
+                .append("usageDesc", usageDesc)
                 .append("commodityIds", commodityIds)
                 .append("voucherVOs", voucherVOs)
                 .toString();
