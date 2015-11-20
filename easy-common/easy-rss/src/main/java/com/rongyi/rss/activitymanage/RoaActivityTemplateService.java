@@ -21,7 +21,7 @@ public interface RoaActivityTemplateService {
     boolean saveActivityTemplate(ActivityTemplate activityTemplate);
 
     /***
-     * 通过id得到
+     * 通过id得到 查询url
      * @param id
      * @return
      */
@@ -35,5 +35,11 @@ public interface RoaActivityTemplateService {
     PagingVO<ActivityTemplateVO> selectTemplateListByParam(ActivityTemplateParam activityTemplateParam);
 
 
+    /**
+     * 通过Id得到活动模版详情
+     * @param id
+     * @return
+     */
+    ActivityTemplate getActivityDetailById(Integer id);
 
 }
