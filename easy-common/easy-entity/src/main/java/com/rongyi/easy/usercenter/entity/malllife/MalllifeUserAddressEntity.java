@@ -1,4 +1,4 @@
-package com.rongyi.easy.rmmm.entity;
+package com.rongyi.easy.usercenter.entity.malllife;
 
 import java.util.Date;
 
@@ -10,7 +10,7 @@ public class MalllifeUserAddressEntity {
     private String userId;
 
     /** 默认地址标识 1为默认，2为非默认 */
-    private Byte status;
+    private Integer status;
 
     /** 收货人电话 */
     private String phone;
@@ -40,7 +40,7 @@ public class MalllifeUserAddressEntity {
     private String districtName;
 
     /** 判断是否删除 0是 1否 */
-    private Byte isDelete;
+    private Integer isDelete;
 
     /** 创建时间 */
     private Date createAt;
@@ -84,7 +84,7 @@ public class MalllifeUserAddressEntity {
      * 默认地址标识 1为默认，2为非默认
      * @return status
      */
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
@@ -92,7 +92,7 @@ public class MalllifeUserAddressEntity {
      * 默认地址标识 1为默认，2为非默认
      * @param status
      */
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -244,7 +244,7 @@ public class MalllifeUserAddressEntity {
      * 判断是否删除 0是 1否
      * @return isDelete
      */
-    public Byte getIsDelete() {
+    public Integer getIsDelete() {
         return isDelete;
     }
 
@@ -252,7 +252,7 @@ public class MalllifeUserAddressEntity {
      * 判断是否删除 0是 1否
      * @param isDelete
      */
-    public void setIsDelete(Byte isDelete) {
+    public void setIsDelete(Integer isDelete) {
         this.isDelete = isDelete;
     }
 

@@ -1,6 +1,4 @@
-package com.rongyi.easy.rmmm.entity;
-
-import com.rongyi.easy.rmmm.entity.MalllifeUserAddressEntity;
+package com.rongyi.easy.usercenter.entity.malllife;
 
 public interface MalllifeUserAddressEntityMapper {
     int deleteByPrimaryKey(String id);

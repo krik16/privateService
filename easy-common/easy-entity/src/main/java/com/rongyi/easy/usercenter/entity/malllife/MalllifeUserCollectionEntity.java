@@ -1,8 +1,8 @@
-package com.rongyi.easy.rmmm.entity;
+package com.rongyi.easy.usercenter.entity.malllife;
 
 import java.util.Date;
 
-public class malllifeUserCollectionEntity {
+public class MalllifeUserCollectionEntity {
     /** 自增主键 */
     private Integer id;
 
@@ -13,10 +13,10 @@ public class malllifeUserCollectionEntity {
     private String collectionId;
 
     /** 是否禁用0收藏 1取消收藏 */
-    private Byte isDisable;
+    private Integer isDisable;
 
     /** 收藏类型  0商场 ， 1店铺，2品牌，3商品 */
-    private Byte collectionType;
+    private Integer collectionType;
 
     /** 收藏时间 */
     private Date createAt;
@@ -76,7 +76,7 @@ public class malllifeUserCollectionEntity {
      * 是否禁用0收藏 1取消收藏
      * @return isDisable
      */
-    public Byte getIsDisable() {
+    public Integer getIsDisable() {
         return isDisable;
     }
 
@@ -84,7 +84,7 @@ public class malllifeUserCollectionEntity {
      * 是否禁用0收藏 1取消收藏
      * @param isDisable
      */
-    public void setIsDisable(Byte isDisable) {
+    public void setIsDisable(Integer isDisable) {
         this.isDisable = isDisable;
     }
 
@@ -92,7 +92,7 @@ public class malllifeUserCollectionEntity {
      * 收藏类型  0商场 ， 1店铺，2品牌，3商品
      * @return collectionType
      */
-    public Byte getCollectionType() {
+    public Integer getCollectionType() {
         return collectionType;
     }
 
@@ -100,7 +100,7 @@ public class malllifeUserCollectionEntity {
      * 收藏类型  0商场 ， 1店铺，2品牌，3商品
      * @param collectionType
      */
-    public void setCollectionType(Byte collectionType) {
+    public void setCollectionType(Integer collectionType) {
         this.collectionType = collectionType;
     }
 

@@ -1,6 +1,4 @@
-package com.rongyi.easy.rmmm.entity;
-
-import com.rongyi.easy.rmmm.entity.MalllifeUserInfoEntity;
+package com.rongyi.easy.usercenter.entity.malllife;
 
 public interface MalllifeUserInfoEntityMapper {
     int insert(MalllifeUserInfoEntity record);

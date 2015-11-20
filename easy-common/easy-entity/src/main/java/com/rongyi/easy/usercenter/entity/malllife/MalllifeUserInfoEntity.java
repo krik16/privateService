@@ -1,8 +1,23 @@
-package com.rongyi.easy.rmmm.entity;
-
+package com.rongyi.easy.usercenter.entity.malllife;
+/*
+ * Copyright (C),上海容易网电子商务有限公司
+ * Author:  俞志坚
+ * Description:  用户中心---用户管理
+ * time:  2015/11/19
+ * History: 变更记录
+ * <author>           <time>             <version>        <desc>
+ * 俞志坚             2015/11/19            1.0            创建文件
+ *
+ */
+import java.io.Serializable;
 import java.util.Date;
 
-public class MalllifeUserInfoEntity {
+/**
+ *
+ */
+public class MalllifeUserInfoEntity  implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     /** 用户uuid */
     private String id;
 
@@ -19,7 +34,10 @@ public class MalllifeUserInfoEntity {
     private String phone;
 
     /** 版本号 */
-    private Byte version;
+    private Integer version;
+
+    /*是否禁用 0 正常*/
+    private Integer isDisable;
 
     /** 头像地址 */
     private String headImg;
@@ -33,7 +51,13 @@ public class MalllifeUserInfoEntity {
     /** 用户呢称 */
     private String nickName;
 
-    /** 注册渠道 */
+    /** 注册渠道
+    MALLLIFE 容易逛, 主要用于IOS
+    QMCAIFU  全民财富
+    RONGYI_HTDR 容易后台导入
+    HGDSLHJ 哈根达斯—老虎机活动
+
+     */
     private String channel;
 
     /** 设备ID */
@@ -52,7 +76,7 @@ public class MalllifeUserInfoEntity {
     private String gender;
 
     /** 是否领取红包 默认值0 未领取，1已领取 */
-    private Byte loginRed;
+    private Integer loginRed;
 
     /** 更新时间 */
     private Date updateAt;
@@ -159,7 +183,7 @@ public class MalllifeUserInfoEntity {
      * 版本号
      * @return version
      */
-    public Byte getVersion() {
+    public Integer getVersion() {
         return version;
     }
 
@@ -167,7 +191,7 @@ public class MalllifeUserInfoEntity {
      * 版本号
      * @param version
      */
-    public void setVersion(Byte version) {
+    public void setVersion(Integer version) {
         this.version = version;
     }
 
@@ -335,7 +359,7 @@ public class MalllifeUserInfoEntity {
      * 是否领取红包 默认值0 未领取，1已领取
      * @return loginRed
      */
-    public Byte getLoginRed() {
+    public Integer getLoginRed() {
         return loginRed;
     }
 
@@ -343,7 +367,7 @@ public class MalllifeUserInfoEntity {
      * 是否领取红包 默认值0 未领取，1已领取
      * @param loginRed
      */
-    public void setLoginRed(Byte loginRed) {
+    public void setLoginRed(Integer loginRed) {
         this.loginRed = loginRed;
     }
 
@@ -441,6 +465,14 @@ public class MalllifeUserInfoEntity {
      */
     public void setShareCode(String shareCode) {
         this.shareCode = shareCode;
+    }
+
+    public Integer getIsDisable() {
+        return isDisable;
+    }
+
+    public void setIsDisable(Integer isDisable) {
+        this.isDisable = isDisable;
     }
 
     /**
