@@ -62,6 +62,14 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private String createBy;
 	@Field("commodityNameSubdiv")
 	private String commodityNameSubdiv;
+	@Field("saleId")
+	private Integer saleId;
+	@Field("flashSaleId")
+	private Integer flashSaleId;
+	@Field("activityStartTime")
+	private Date activityStartTime;
+	@Field("activityEndTime")
+	private Date activityEndTime;
 	
 	public Double getPrice() {
 		return price;
@@ -264,4 +272,35 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.createBy = createBy;
 	}
 
+	public Integer getSaleId() {
+		return saleId;
+	}
+
+	public void setSaleId(Integer saleId) {
+		this.saleId = saleId;
+	}
+
+	public Integer getFlashSaleId() {
+		return flashSaleId;
+	}
+
+	public void setFlashSaleId(Integer flashSaleId) {
+		this.flashSaleId = flashSaleId;
+	}
+
+	public Date getActivityStartTime() {
+		return activityStartTime;
+	}
+
+	public void setActivityStartTime(Date activityStartTime) {
+		this.activityStartTime = activityStartTime;
+	}
+
+	public Date getActivityEndTime() {
+		return activityEndTime;
+	}
+
+	public void setActivityEndTime(Date activityEndTime) {
+		this.activityEndTime = activityEndTime;
+	}
 }

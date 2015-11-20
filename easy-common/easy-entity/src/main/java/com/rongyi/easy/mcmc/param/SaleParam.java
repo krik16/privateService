@@ -62,4 +62,15 @@ public class SaleParam implements Serializable {
         this.commodityIds = commodityIds;
     }
 
+    @Override
+    public String toString() {
+        return "SaleParam{" +
+                "id=" + id +
+                ", shopIds=" + shopIds +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", activityType=" + activityType +
+                ", commodityIds=" + commodityIds +
+                '}';
+    }
 }
