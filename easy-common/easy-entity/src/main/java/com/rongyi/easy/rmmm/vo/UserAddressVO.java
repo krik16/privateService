@@ -1,8 +1,9 @@
 package com.rongyi.easy.rmmm.vo;
 
+import com.rongyi.easy.usercenter.entity.malllife.MalllifeUserAddressEntity;
+
 import java.io.Serializable;
 
-import com.rongyi.easy.entity.UserAddressEntity;
 
 public class UserAddressVO implements Serializable{
 	private String defaultStatus;//1 为默认地址 ，2为非默认地址
@@ -87,9 +88,9 @@ public class UserAddressVO implements Serializable{
 	public UserAddressVO() {
 		super();
 	}
-	public UserAddressVO(UserAddressEntity entity) {
+	public UserAddressVO(MalllifeUserAddressEntity entity) {
 		super();
-		this.defaultStatus = entity.getDefaultStatus();
+		this.defaultStatus = String.valueOf(entity.getStatus());
 		this.id = entity.getId().toString();
 		this.address = entity.getDetailAddress();
 		this.phone = entity.getPhone();

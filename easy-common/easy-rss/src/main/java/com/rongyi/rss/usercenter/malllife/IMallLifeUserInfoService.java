@@ -188,7 +188,15 @@ public interface IMallLifeUserInfoService {
      */
     public void updatelogin(MalllifeUser malllifeUser) throws Exception;
 
-
+    /**
+     * 返回部分数据
+     * @param IdorPhone 用户Id 和手机号
+     * @param type 0用户ID 1手机号
+     * @param flag 0不返回收藏商品编号 1返回 兼容老接口
+     * @return
+     * @throws Exception
+     */
+    public MalllifeUserInfoDto getByIdorPhone(String IdorPhone,int type,int flag) throws Exception;
 
 
 }

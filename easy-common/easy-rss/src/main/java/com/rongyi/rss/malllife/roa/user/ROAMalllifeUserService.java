@@ -3,9 +3,11 @@ package com.rongyi.rss.malllife.roa.user;
 import java.util.List;
 import java.util.Set;
 
+import com.rongyi.easy.usercenter.dto.malllife.MalllifeUserInfoDto;
+import com.rongyi.easy.usercenter.entity.malllife.MalllifeUserInfoEntity;
 import org.bson.types.ObjectId;
 
-import com.rongyi.easy.entity.MallLifeUserEntity;
+
 import com.rongyi.easy.malllife.param.MalllifeUser;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
 import com.rongyi.easy.rmmm.dto.user.UserVO;
@@ -22,7 +24,7 @@ import com.rongyi.easy.rmmm.dto.user.UserVO;
  */
 public interface ROAMalllifeUserService {
 
-	public MallLifeUserEntity getEntityByUid(String userId) throws Exception;
+	public MalllifeUserInfoEntity getEntityByUid(String userId) throws Exception;
 
 	/**
 	 * 注册用户
@@ -50,6 +52,17 @@ public interface ROAMalllifeUserService {
 	 */
 	public UserInfoVO getByPhone(String phone) throws Exception;
 
+
+	/**
+	 * 返回部分数据
+	 * @param IdorPhone 用户Id 和手机号
+	 * @param type 0用户ID 1手机号
+	 * @param flag 0不返回收藏商品编号 1返回 兼容老接口
+	 * @return
+	 * @throws Exception
+	 */
+	public MalllifeUserInfoDto getByIdorPhone(String IdorPhone,int type,int flag) throws Exception;
+
 	/**
 	 * 根据im_id查询摩生活用户
 	 *
@@ -57,7 +70,7 @@ public interface ROAMalllifeUserService {
 	 * @return
 	 * @throws Exception
 	 */
-	public MallLifeUserEntity getUserByIMId(String imId) throws Exception;
+	public MalllifeUserInfoEntity getUserByIMId(String imId) throws Exception;
 
 	/**
 	 * 更新用户信息
@@ -104,12 +117,12 @@ public interface ROAMalllifeUserService {
 	 */
 	public Boolean isExistBydevUuid(String devuuid) throws Exception;
 
-	/**
+/*	*//**
 	 * @param collectCommoditys
 	 * @param userId
 	 * @throws Exception
-	 */
-	public void collectCommodity(Set<String> collectCommoditys, ObjectId userId) throws Exception;
+	 *//*
+	public void collectCommodity(Set<String> collectCommoditys, ObjectId userId) throws Exception;*/
 
 	/**
 	 * 根据买家姓名模糊查询买家信息
