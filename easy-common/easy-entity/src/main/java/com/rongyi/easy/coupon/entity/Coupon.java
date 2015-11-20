@@ -253,8 +253,17 @@ public class Coupon implements Serializable {
      * 代金券分类
      */
     private CouponCategory couponCategory;
+    private List<CouponCategory> couponCategorys;
 
-    /**
+    public List<CouponCategory> getCouponCategorys() {
+		return couponCategorys;
+	}
+
+	public void setCouponCategorys(List<CouponCategory> couponCategorys) {
+		this.couponCategorys = couponCategorys;
+	}
+
+	/**
      * 代金券关联的集团
      */
     private CouponGroup couponGroup;
@@ -263,13 +272,23 @@ public class Coupon implements Serializable {
      * 代金券关联的品牌
      */
     private CouponBrand couponBrand;
+    private List<CouponBrand> couponBrands;
+    
 
     /**
      * 代金券关联的商场
      */
 //    private CouponMall couponMall;
 
-    /**
+    public List<CouponBrand> getCouponBrands() {
+		return couponBrands;
+	}
+
+	public void setCouponBrands(List<CouponBrand> couponBrands) {
+		this.couponBrands = couponBrands;
+	}
+
+	/**
      * 代金券关联的店铺
      */
     private List<CouponShop> couponShops;

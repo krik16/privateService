@@ -96,6 +96,11 @@ public class TradeOrderCreateParam implements Serializable {
     private String platformRebateCode;
 
     /**
+     * 抵扣券金额
+     */
+    private Double rebateDiscount;
+
+    /**
      * 促销券来源 1：平台 2：商家
      */
     private Byte hbSource = 2;
@@ -113,6 +118,8 @@ public class TradeOrderCreateParam implements Serializable {
     private boolean useHb = false;//是否使用红包
 
     private boolean useScore = false;//是否使用积分
+
+    private boolean usePlatFormRebate = false;//是否使用抵扣券
 
     private BigDecimal discountWithOutScore = new BigDecimal(0);//除积分外优惠金额 分
 
@@ -384,6 +391,22 @@ public class TradeOrderCreateParam implements Serializable {
 
     public void setHbType(Byte hbType) {
         this.hbType = hbType;
+    }
+
+    public boolean isUsePlatFormRebate() {
+        return usePlatFormRebate;
+    }
+
+    public void setUsePlatFormRebate(boolean usePlatFormRebate) {
+        this.usePlatFormRebate = usePlatFormRebate;
+    }
+
+    public Double getRebateDiscount() {
+        return rebateDiscount;
+    }
+
+    public void setRebateDiscount(Double rebateDiscount) {
+        this.rebateDiscount = rebateDiscount;
     }
 
     @Override

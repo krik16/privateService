@@ -57,7 +57,7 @@ public interface ROAContentService {
 	 * 查询总条数
 	 * @return 
 	 */
-	public int findHomePageCount();
+	public int findHomePageCount(int type);
 	
 	/**
 	 * 修改位置表的修改人
