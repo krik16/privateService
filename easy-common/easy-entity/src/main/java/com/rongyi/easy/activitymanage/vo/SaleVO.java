@@ -28,6 +28,7 @@ public class SaleVO implements Serializable {
     private Integer publishTerminal;
     private String createUser;
     private String updateUser;
+
     private Long createAt;
     private Long updateAt;
     private String bannerPic;
