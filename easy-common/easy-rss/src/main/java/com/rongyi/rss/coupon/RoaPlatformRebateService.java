@@ -2,6 +2,7 @@ package com.rongyi.rss.coupon;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.param.RebateAndRedenvelopParam;
+import com.rongyi.easy.coupon.vo.PlatformRebateForOrderVO;
 import com.rongyi.easy.coupon.vo.PlatformRebateVO;
 
 /**
@@ -58,6 +59,14 @@ public interface RoaPlatformRebateService {
      * @author lqy
      */
     PagingVO<PlatformRebateVO> getUserPlatformRebates(RebateAndRedenvelopParam param);
+
+    /**
+     * 查询对订单可使用抵扣券和不可使用的抵扣券(不需要分页)
+     * @param param
+     * @return PlatformRebateForOrderVO
+     * @author lqy
+     */
+    PlatformRebateForOrderVO getUserPlatformRebatesForOrder(RebateAndRedenvelopParam param);
 
     /**
      * 删除我的抵扣券

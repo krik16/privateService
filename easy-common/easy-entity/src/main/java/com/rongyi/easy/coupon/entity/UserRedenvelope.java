@@ -317,6 +317,14 @@ public class UserRedenvelope implements Serializable {
         return origPrice;
     }
 
+    public double getOrigPrice2Double() {
+        double dis = 0D;
+        if (origPrice != null) {
+
+            dis = AmountConversion.fenToYuan(origPrice);
+        }
+        return dis;
+    }
     public void setOrigPrice(Integer origPrice) {
         this.origPrice = origPrice;
     }
@@ -351,6 +359,20 @@ public class UserRedenvelope implements Serializable {
 
     public void setUsageDesc(String usageDesc) {
         this.usageDesc = usageDesc;
+    }
+
+    /**
+     * 判断是否可使用
+     * @return
+     */
+    public boolean isUsable() {
+        if (UserRedenvelope.STATUS_UNUSE.equals(status) && new Date().before(validEndAt))
+            return true;
+        else if (UserRedenvelope.STATUS_USED.equals(status))
+            return false;
+        else if (UserRedenvelope.STATUS_UNUSE.equals(status) && new Date().after(validEndAt))
+            return false;
+        return false;
     }
 
     @Override

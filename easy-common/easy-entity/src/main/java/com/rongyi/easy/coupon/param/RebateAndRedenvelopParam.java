@@ -24,7 +24,7 @@ public class RebateAndRedenvelopParam implements Serializable {
     /**
      * 商品集合
      */
-    private List<Commodity> commodities = new ArrayList<>();
+    private List<OrderCommodity> orderCommodities = new ArrayList<>();
 
     /**
      * 代金券id
@@ -44,7 +44,7 @@ public class RebateAndRedenvelopParam implements Serializable {
     /**
      * 券状态：可使用[true] 已失效[false](已失效包括已使用和已过期)
      */
-    private Boolean isAvailable;
+    private Boolean isUsable;
 
     /**
      * 领取券码时间
@@ -71,7 +71,7 @@ public class RebateAndRedenvelopParam implements Serializable {
      */
     private String orderBy;
 
-    public static class Commodity implements Serializable {
+    public static class OrderCommodity implements Serializable {
         /**
          * 商品id
          */
@@ -129,12 +129,12 @@ public class RebateAndRedenvelopParam implements Serializable {
         this.couponCode = couponCode;
     }
 
-    public List<Commodity> getCommodities() {
-        return commodities;
+    public List<OrderCommodity> getOrderCommodities() {
+        return orderCommodities;
     }
 
-    public void setCommodities(List<Commodity> commodities) {
-        this.commodities = commodities;
+    public void setOrderCommodities(List<OrderCommodity> orderCommodities) {
+        this.orderCommodities = orderCommodities;
     }
 
     public String getVoucherId() {
@@ -161,12 +161,12 @@ public class RebateAndRedenvelopParam implements Serializable {
         this.userId = userId;
     }
 
-    public Boolean getIsAvailable() {
-        return isAvailable;
+    public Boolean getIsUsable() {
+        return isUsable;
     }
 
-    public void setIsAvailable(Boolean isAvailable) {
-        this.isAvailable = isAvailable;
+    public void setIsUsable(Boolean isUsable) {
+        this.isUsable = isUsable;
     }
 
     public Integer getCurrentPage() {
@@ -224,11 +224,11 @@ public class RebateAndRedenvelopParam implements Serializable {
     public String toString() {
         return new ToStringBuilder(this)
                 .append("couponCode", couponCode)
-                .append("commodities", commodities)
+                .append("orderCommodities", orderCommodities)
                 .append("voucherId", voucherId)
                 .append("voucherAmount", voucherAmount)
                 .append("userId", userId)
-                .append("isAvailable", isAvailable)
+                .append("isUsable", isUsable)
                 .append("receiveAt", receiveAt)
                 .append("preferentialType", preferentialType)
                 .append("currentPage", currentPage)
