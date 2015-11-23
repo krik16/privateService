@@ -1,7 +1,6 @@
 package com.rongyi.easy.malllife.param;
 
 import java.io.Serializable;
-import java.util.List;
 
 import com.rongyi.easy.rmmm.base.BaseParam;
 /*
@@ -21,24 +20,24 @@ public class NoUsedRedNevelopeParam extends BaseParam implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private List<String> commodityIds;//商品id集合
+	private String commodityId;//商品id
 	
-	private List<String> cashCouponIds;//代金券id集合
+	private String cashCouponId;//代金券id
 
-	public List<String> getCommodityIds() {
-		return commodityIds;
+	public String getCommodityId() {
+		return commodityId;
 	}
 
-	public void setCommodityIds(List<String> commodityIds) {
-		this.commodityIds = commodityIds;
+	public void setCommodityId(String commodityId) {
+		this.commodityId = commodityId;
 	}
 
-	public List<String> getCashCouponIds() {
-		return cashCouponIds;
+	public String getCashCouponId() {
+		return cashCouponId;
 	}
 
-	public void setCashCouponIds(List<String> cashCouponIds) {
-		this.cashCouponIds = cashCouponIds;
+	public void setCashCouponId(String cashCouponId) {
+		this.cashCouponId = cashCouponId;
 	}
 	
 }
