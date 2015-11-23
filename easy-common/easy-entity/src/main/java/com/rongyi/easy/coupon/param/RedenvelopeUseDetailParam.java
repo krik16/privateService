@@ -14,7 +14,7 @@ import java.util.Date;
  * Package:com.rongyi.easy.coupon.param
  * Project:easy-common
  */
-public class RedenvelopUseDetailParam implements Serializable{
+public class RedenvelopeUseDetailParam implements Serializable{
     /**
      * 平台促销券id
      */
@@ -170,10 +170,10 @@ public class RedenvelopUseDetailParam implements Serializable{
         this.couponId = couponId;
     }
 
-    public RedenvelopUseDetailParam() {
+    public RedenvelopeUseDetailParam() {
     }
 
-    public RedenvelopUseDetailParam(String couponId, Integer currentPage) {
+    public RedenvelopeUseDetailParam(String couponId, Integer currentPage) {
         this.couponId = couponId;
         this.currentPage = currentPage;
     }
@@ -202,7 +202,7 @@ public class RedenvelopUseDetailParam implements Serializable{
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("RedenvelopUseDetailParam{");
+        final StringBuffer sb = new StringBuffer("RedenvelopeUseDetailParam{");
         sb.append("couponId='").append(couponId).append('\'');
         sb.append(", code='").append(code).append('\'');
         sb.append(", orderNo='").append(orderNo).append('\'');

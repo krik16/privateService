@@ -3,7 +3,7 @@ package com.rongyi.easy.osm.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class OrderDetailFormEntity implements Serializable{
+public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDetailFormEntity>{
     /**
 	 * 
 	 */
@@ -451,4 +451,12 @@ public class OrderDetailFormEntity implements Serializable{
                 + ", orderScoreDiscount=" + orderScoreDiscount + ", orderDiscountFee=" + orderDiscountFee + ", payAmount=" + payAmount + "," +
                 " ]";
 	}
+
+    @Override
+    public int compareTo(OrderDetailFormEntity o) {
+        if(o == null){
+            return 1;
+        }
+        return this.getCommodityMid().compareTo(o.getCommodityMid());
+    }
 }

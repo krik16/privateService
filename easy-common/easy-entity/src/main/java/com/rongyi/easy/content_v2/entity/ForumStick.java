@@ -1,5 +1,6 @@
 package com.rongyi.easy.content_v2.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,7 +11,11 @@ import java.util.Date;
 * @date 2015年11月17日 下午4:23:19 
 *
  */
-public class ForumStick {
+public class ForumStick implements Serializable{
+	/** 
+	* @Fields serialVersionUID
+	*/ 
+	private static final long serialVersionUID = 1333475809937557149L;
 	/**
 	 * 主键
 	 */

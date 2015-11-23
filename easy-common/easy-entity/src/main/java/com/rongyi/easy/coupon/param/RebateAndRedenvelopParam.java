@@ -24,7 +24,17 @@ public class RebateAndRedenvelopParam implements Serializable {
     /**
      * 商品集合
      */
-    private List<OrderCommodity> orderCommodities = new ArrayList<>();
+    private List<OrderCommodity> orderCommodities;
+
+    /**
+     * 商品id
+     */
+    private String commodityId;
+
+    /**
+     * 适用对象: 商家[1] 买手[2]
+     */
+    private Integer applyObject;
 
     /**
      * 代金券id
@@ -209,6 +219,22 @@ public class RebateAndRedenvelopParam implements Serializable {
         this.preferentialType = preferentialType;
     }
 
+    public String getCommodityId() {
+        return commodityId;
+    }
+
+    public void setCommodityId(String commodityId) {
+        this.commodityId = commodityId;
+    }
+
+    public Integer getApplyObject() {
+        return applyObject;
+    }
+
+    public void setApplyObject(Integer applyObject) {
+        this.applyObject = applyObject;
+    }
+
     /**
      * 分页起始行数
      * @return
@@ -225,6 +251,8 @@ public class RebateAndRedenvelopParam implements Serializable {
         return new ToStringBuilder(this)
                 .append("couponCode", couponCode)
                 .append("orderCommodities", orderCommodities)
+                .append("commodityId", commodityId)
+                .append("applyObject", applyObject)
                 .append("voucherId", voucherId)
                 .append("voucherAmount", voucherAmount)
                 .append("userId", userId)

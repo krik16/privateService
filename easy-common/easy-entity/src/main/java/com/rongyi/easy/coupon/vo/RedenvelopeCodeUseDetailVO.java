@@ -12,7 +12,7 @@ import java.util.List;
  * Package:com.rongyi.coupon.web.vo
  * Project:easy-common
  */
-public class RedenvelopCodeUseDetailVO implements Serializable{
+public class RedenvelopeCodeUseDetailVO implements Serializable{
     /**
      * 数据列表
      */
@@ -92,7 +92,7 @@ public class RedenvelopCodeUseDetailVO implements Serializable{
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("RedenvelopCodeUseDetailVO{");
+        final StringBuffer sb = new StringBuffer("RedenvelopeCodeUseDetailVO{");
         sb.append("userRedenvelopes=").append(userRedenvelopes);
         sb.append(", totalCount=").append(totalCount);
         sb.append(", unReceiveCount=").append(unReceiveCount);
@@ -121,10 +121,10 @@ public class RedenvelopCodeUseDetailVO implements Serializable{
         this.pageSize = pageSize;
     }
 
-    public RedenvelopCodeUseDetailVO() {
+    public RedenvelopeCodeUseDetailVO() {
     }
 
-    public RedenvelopCodeUseDetailVO(List<UserRedenvelope> userRedenvelopes, Integer totalCount, Integer unReceiveCount, Integer unUsedCount, Integer usedCount, Integer overdueCount) {
+    public RedenvelopeCodeUseDetailVO(List<UserRedenvelope> userRedenvelopes, Integer totalCount, Integer unReceiveCount, Integer unUsedCount, Integer usedCount, Integer overdueCount) {
         this.userRedenvelopes = userRedenvelopes;
         this.totalCount = totalCount;
         this.unReceiveCount = unReceiveCount;
