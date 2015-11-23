@@ -59,7 +59,7 @@ public interface RoaActivityTemplateService {
      * @param type 查询的类型   1 为特卖  2为闪购
      * @return List<ActivityListVO>
      */
-    List<ActivityListVO> getActivityListByIds(List<Integer> ids,int type);
+    List<ActivityListVO> getActivityListByIds(List<Integer> ids,int type) throws  Exception;
 
 
 }

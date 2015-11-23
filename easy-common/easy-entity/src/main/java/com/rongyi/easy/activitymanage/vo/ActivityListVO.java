@@ -20,6 +20,16 @@ public class ActivityListVO implements Serializable{
 
     //商圈Id
     private String businessDistrictId;
+
+    public ActivityListVO(){
+
+    }
+    public ActivityListVO(TemplateListVO templateListVO){
+        if(templateListVO !=null){
+            this.id=templateListVO.getId();
+            this.activityUrl=templateListVO.getActivityUrl();
+        }
+    }
     public Integer getId() {
         return id;
     }

@@ -29,6 +29,8 @@ public class ShopVO implements Serializable {
 
 	private String mallName;
 	private String mallId;
+	private String businessDistrictId;//商圈id
+	private String businessDistrictName;
 	private List<AreaVO> areaVOs;// 所在地区 省 市区 商圈 商场
 	private String address;// 详细地址
 	private int moreFloors;// 0不跨楼，1跨楼
@@ -297,6 +299,22 @@ public class ShopVO implements Serializable {
 		this.mallId = mallId;
 	}
 
+	public String getBusinessDistrictId() {
+		return businessDistrictId;
+	}
+
+	public void setBusinessDistrictId(String businessDistrictId) {
+		this.businessDistrictId = businessDistrictId;
+	}
+
+	public String getBusinessDistrictName() {
+		return businessDistrictName;
+	}
+
+	public void setBusinessDistrictName(String businessDistrictName) {
+		this.businessDistrictName = businessDistrictName;
+	}
+
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this)
@@ -313,6 +331,8 @@ public class ShopVO implements Serializable {
 				.append("tags", tags)
 				.append("mallName", mallName)
 				.append("mallId", mallId)
+				.append("businessDistrictId", businessDistrictId)
+				.append("businessDistrictName", businessDistrictName)
 				.append("areaVOs", areaVOs)
 				.append("address", address)
 				.append("moreFloors", moreFloors)
