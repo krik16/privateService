@@ -130,7 +130,7 @@ public interface CouponConstants {
     }
 
     /**
-     * 适用对象:商家/买手[0] 商家[1] 买手[2]
+     * 平台促销券适用对象:商家/买手[0] 商家[1] 买手[2]
      */
     interface ApplyObject {
         Integer MERCHANT_AND_BUYER = 0;
@@ -139,7 +139,7 @@ public interface CouponConstants {
     }
 
     /**
-     * 适用范围维度1,商品/代金券[0] 商品[1] 代金券[2]
+     * 平台促销券适用范围维度1,商品/代金券[0] 商品[1] 代金券[2]
      */
     interface ApplyGoods {
         int COMMODITY_AND_VOUCHER = 0;
@@ -158,5 +158,14 @@ public interface CouponConstants {
         int SHOP = 3;
         int CATEGORY = 4;
         int INFORMATION = 5;
+    }
+
+    /**
+     * 平台促销券适用规则
+     * 满减[0] 立减[1]
+     */
+    interface PreferentialType {
+        Integer FULL_CUT = 0;
+        Integer STAND_CUT = 1;
     }
 }

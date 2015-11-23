@@ -300,7 +300,7 @@ public class Coupon implements Serializable {
 
 
     /**
-     * 优惠方式 1：满减 ；2：立减。
+     * 优惠方式 0：满减 ；1：立减。
      */
     private Integer preferentialType;
 

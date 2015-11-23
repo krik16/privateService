@@ -2,22 +2,21 @@ package com.rongyi.easy.activitymanage.vo;
 
 
 import com.rongyi.easy.activitymanage.entity.ActivityTemplate;
-import com.rongyi.easy.activitymanage.entity.TemplateSaleShopMall;
+import com.rongyi.easy.activitymanage.entity.TemplateRelevantGoodsCoupon;
+import com.rongyi.easy.coupon.param.RebateAndRedenvelopParam;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
- * Created by lijing on 2015/11/2013:51
+ * Created by lijing on 2015/11/22 22:34
  * .com.rongyi.easy.activitymanage.vo
  * easy-api
  */
-public class SaleVO implements Serializable {
+public class IflashBuyVO implements Serializable {
     private Integer id;
     private String name;
     private Long startAt;
@@ -32,14 +31,16 @@ public class SaleVO implements Serializable {
     private Long createAt;
     private Long updateAt;
     private String bannerPic;
-    private Integer isMallShop;
-    private List<MallVO> mall;
-    private List<ShopVO> shop;
+    private String subTitle;
 
-    public SaleVO(){}
+    private List<CommodityVO> commodityVOs;
 
-    public SaleVO(ActivityTemplate activityTemplate){
-        if(activityTemplate!=null){
+    public IflashBuyVO(){
+
+    }
+
+    public IflashBuyVO(ActivityTemplate activityTemplate){
+        if(activityTemplate != null){
             this.id=activityTemplate.getId();
             this.name=activityTemplate.getName();
             this.startAt=activityTemplate.getStartAt().getTime();
@@ -52,42 +53,31 @@ public class SaleVO implements Serializable {
             this.updateAt=activityTemplate.getUpdateAt().getTime();
             this.createUser=activityTemplate.getCreateUser();
             this.updateUser=activityTemplate.getUpdateUser();
-            if(activityTemplate.getTemplateSale() != null){
-                this.bannerPic= activityTemplate.getTemplateSale().getBannerPic();
-                this.isMallShop=(int)activityTemplate.getTemplateSale().getIsMallShop();
-
-            if(CollectionUtils.isEmpty(activityTemplate.getTemplateSaleShopMalls())){
-                List<MallVO>  mallVOs=new ArrayList<MallVO>();
-                List<ShopVO> shopVOs=new ArrayList<ShopVO>();
-                    if(this.isMallShop == 0){
-                        if (activityTemplate.getTemplateSaleShopMalls().size() >=1){
-                            MallVO tempMall = new MallVO();
-                            tempMall.setMallId(activityTemplate.getTemplateSaleShopMalls().get(0).getMallMid());
-                            tempMall.setMallName(activityTemplate.getTemplateSaleShopMalls().get(0).getMallName());
-                            mallVOs.add(tempMall);
-                        }
-                    }else {
-                        for (TemplateSaleShopMall templateSaleShopMall : activityTemplate.getTemplateSaleShopMalls()) {
-                            if (StringUtils.isNotBlank(templateSaleShopMall.getShopMid())) {
-                                ShopVO tempShop = new ShopVO();
-                                tempShop.setShopId(templateSaleShopMall.getShopMid());
-                                tempShop.setShopName(templateSaleShopMall.getShopName());
-                                shopVOs.add(tempShop);
-                            }
-                        }
-                       if(activityTemplate.getTemplateSaleShopMalls().size()>1) {
-                           MallVO tempMall = new MallVO();
-                           tempMall.setMallId(activityTemplate.getTemplateSaleShopMalls().get(0).getMallMid());
-                           tempMall.setMallName(activityTemplate.getTemplateSaleShopMalls().get(0).getMallName());
-                           mallVOs.add(tempMall);
-                       }
+            if(activityTemplate.getTemplateCouponGood() != null){
+                this.bannerPic=activityTemplate.getTemplateCouponGood().getBannerPic();
+                this.subTitle=activityTemplate.getTemplateCouponGood().getSubtitle();
+            }
+            List<CommodityVO> commodityVOsT=new ArrayList<CommodityVO>();
+            if(activityTemplate.getTemplateLabel() != null){
+                if(!CollectionUtils.isEmpty(activityTemplate.getTemplateLabel().get(0).getTemplateRelevantGoodsCouponList())){
+                    for(TemplateRelevantGoodsCoupon templateRelevantGoodsCoupon:activityTemplate.getTemplateLabel().get(0).getTemplateRelevantGoodsCouponList()){
+                        CommodityVO commodityVO=new CommodityVO();
+                        commodityVO.setCommoidtyId(templateRelevantGoodsCoupon.getCommodityId());
+                        commodityVO.setActivityPrice(templateRelevantGoodsCoupon.getActivityPrice());
+                        commodityVO.setTitle(templateRelevantGoodsCoupon.getTitle());
+                        commodityVO.setPic(templateRelevantGoodsCoupon.getPic());
+                        commodityVO.setCurrentTitle(templateRelevantGoodsCoupon.getCurrentTitle());
+                        commodityVO.setStockCount(templateRelevantGoodsCoupon.getStockCount());
+                        commodityVO.setRySubsidy(templateRelevantGoodsCoupon.getRySubsidy());
+                        commodityVO.setOrderPosition(templateRelevantGoodsCoupon.getOrderPosition());
+                        commodityVOsT.add(commodityVO);
                     }
-                    this.mall=mallVOs;
-                    this.shop=shopVOs;
+                    this.commodityVOs=commodityVOsT;
                 }
             }
         }
     }
+
     public Integer getId() {
         return id;
     }
@@ -192,36 +182,27 @@ public class SaleVO implements Serializable {
         this.bannerPic = bannerPic;
     }
 
-    public Integer getIsMallShop() {
-        return isMallShop;
+    public String getSubTitle() {
+        return subTitle;
     }
 
-    public void setIsMallShop(Integer isMallShop) {
-        this.isMallShop = isMallShop;
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
     }
 
-    public List<MallVO> getMall() {
-        return mall;
+    public List<CommodityVO> getCommodityVOs() {
+        return commodityVOs;
     }
 
-    public void setMall(List<MallVO> mall) {
-        this.mall = mall;
-    }
-
-    public List<ShopVO> getShop() {
-        return shop;
-    }
-
-    public void setShop(List<ShopVO> shop) {
-        this.shop = shop;
+    public void setCommodityVOs(List<CommodityVO> commodityVOs) {
+        this.commodityVOs = commodityVOs;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .append("shop", shop)
-                .append("mall", mall)
-                .append("isMallShop", isMallShop)
+                .append("commodityVOs", commodityVOs)
+                .append("subTitle", subTitle)
                 .append("bannerPic", bannerPic)
                 .append("updateAt", updateAt)
                 .append("createAt", createAt)

@@ -79,6 +79,6 @@ public interface McmcCommoditySolrService {
 
 	public boolean cleanCommodityFlashSale(Integer flashSaleId);
 
-	public boolean updateCommodityFlashSale(String commodityId, Integer flashSaleId, Date activityStartTime, Date activityEndTime);
+	public boolean updateCommodityFlashSale(String commodityId, Integer sortPosition, Integer flashSaleId, Date activityStartTime, Date activityEndTime);
 
 }

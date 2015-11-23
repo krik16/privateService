@@ -12,7 +12,7 @@ public class SaleParam implements Serializable {
     private long startTime; //特卖开始时间
     private long endTime; //特卖结束时间
     private int activityType; //活动类型 1为特卖  2为闪购
-    private List<String> commodityIds; // 闪购关联商品mongo id列表
+    private List<FlashSaleCommodityParam> commodityParams; // 闪购关联商品及排序数
 
     public Integer getId() {
         return id;
@@ -54,12 +54,12 @@ public class SaleParam implements Serializable {
         this.activityType = activityType;
     }
 
-    public List<String> getCommodityIds() {
-        return commodityIds;
+    public List<FlashSaleCommodityParam> getCommodityParams() {
+        return commodityParams;
     }
 
-    public void setCommodityIds(List<String> commodityIds) {
-        this.commodityIds = commodityIds;
+    public void setCommodityParams(List<FlashSaleCommodityParam> commodityParams) {
+        this.commodityParams = commodityParams;
     }
 
     @Override
@@ -70,7 +70,7 @@ public class SaleParam implements Serializable {
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
                 ", activityType=" + activityType +
-                ", commodityIds=" + commodityIds +
+                ", commodityParams=" + commodityParams +
                 '}';
     }
 }

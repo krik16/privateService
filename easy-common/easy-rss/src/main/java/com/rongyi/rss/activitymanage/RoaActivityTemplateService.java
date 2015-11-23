@@ -42,4 +42,13 @@ public interface RoaActivityTemplateService {
      */
     ActivityTemplate getActivityDetailById(Integer id);
 
+
+    /**
+     * 修改活动模版
+     *
+     * @param activityTemplate
+     * @return true  or false
+     */
+    boolean updateActivityTemplate(ActivityTemplate activityTemplate);
+
 }
