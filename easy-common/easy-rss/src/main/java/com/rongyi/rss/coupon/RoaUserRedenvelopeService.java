@@ -6,10 +6,13 @@ import com.rongyi.core.framework.mybatis.pojo.Page;
 import com.rongyi.easy.coupon.entity.UserCoupon;
 import com.rongyi.easy.coupon.entity.UserRedenvelope;
 import com.rongyi.easy.coupon.param.CouponOrderParam;
+import com.rongyi.easy.coupon.param.RebateAndRedenvelopParam;
 import com.rongyi.easy.coupon.param.RedenvelopeUseDetailParam;
 import com.rongyi.easy.coupon.param.UserRedenvelopeParam;
 import com.rongyi.easy.coupon.vo.RedenvelopeCodeUseDetailVO;
 import com.rongyi.easy.coupon.vo.UserCouponVO;
+import com.rongyi.easy.coupon.vo.UserRedPacketForOrderVO;
+import com.rongyi.easy.coupon.vo.UserRedPacketVO;
 
 import java.util.List;
 import java.util.Map;
@@ -113,19 +116,20 @@ public interface RoaUserRedenvelopeService {
 
     /**
      * 使用红包
-     *
-     * @param code
-     * @return
+     * @param couponCode 券码
+     * @param orderNo 订单号
+     * @return boolean
+     * @author lqy
      */
-    boolean useCashCoupon(String code, String orderNo);
+    boolean useCashCoupon(String couponCode, String orderNo);
 
     /**
      * 恢复红包
-     *
-     * @param code
+     * @param couponCode
      * @return
+     * @author lqy
      */
-    boolean recoverCashCoupon(String code);
+    boolean recoverCashCoupon(String couponCode);
 
 
     /**
@@ -153,4 +157,32 @@ public interface RoaUserRedenvelopeService {
      * @Time 2015/11/20 15:38
      */
     public RedenvelopeCodeUseDetailVO selectCodeUseDetail(RedenvelopeUseDetailParam param);
+
+
+
+
+
+    /**
+     * 根据券码查询抵红包详情
+     * @param couponCode 券码
+     * @return UserRedPacketVO
+     * @author lqy
+     */
+    UserRedPacketVO getUserRedPacket(String couponCode);
+
+    /**
+     * 分页查询我的可使用红包和已失效红包
+     * @param param
+     * @return PagingVO
+     * @author lqy
+     */
+    PagingVO<UserRedPacketVO> getUserRedPackets(RebateAndRedenvelopParam param);
+
+    /**
+     * 查询对订单可使用红包和不可使用的红包(不需要分页)
+     * @param param
+     * @return UserRedPacketForOrderVO
+     * @author lqy
+     */
+    UserRedPacketForOrderVO getUserRedPacketForOrder(RebateAndRedenvelopParam param);
 }
