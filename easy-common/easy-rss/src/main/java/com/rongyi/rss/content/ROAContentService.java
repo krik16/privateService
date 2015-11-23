@@ -163,5 +163,29 @@ public interface ROAContentService {
 	 * @return
 	 */
 	public Boolean updateStickById(ForumStick fs);
+	/**
+	 * 
+	* @Title: findContentCountAllByParamApp 
+	* @Description: app查询特卖列表总数 
+	* @param @param fcp
+	* @param @return    设定文件 
+	* @return Long    返回类型 
+	* @author shaozhou 
+	* @date 2015年11月22日 下午12:34:01
+	* @throws
+	 */
+	public Long findContentCountAllByParamApp(ForumContentParam fcp);
+	/**
+	 * 
+	* @Title: findContentAllByParamApp 
+	* @Description: 查询特卖列表list 
+	* @param @param par
+	* @param @return    设定文件 
+	* @return List<ForumContentListVo>    返回类型 
+	* @author shaozhou 
+	* @date 2015年11月22日 下午12:45:31
+	* @throws
+	 */
+	public List<ForumContentListVo> findContentAllByParamApp(ForumContentParam par);
 	
 }
