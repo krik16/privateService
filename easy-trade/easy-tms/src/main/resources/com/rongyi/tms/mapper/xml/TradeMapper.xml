@@ -97,7 +97,7 @@
 		LEFT JOIN ry_rmmm.shop_info AS shop_info ON shop_info.id = order_form.weidian_id
 		LEFT JOIN ry_rmmm.mall_cooperate AS mall_cooperate ON mall_cooperate.id = shop_info.mall_id
 		LEFT JOIN ry_rmmm.rmmm_user_info AS rmmm_user_info ON rmmm_user_info.id = order_form.guide_id
-		LEFT JOIN ry_rmmm.user_account AS user_account ON user_account.user_id = rmmm_user_info.id AND user_account.account_type = order_form.guide_id 
+		LEFT JOIN ry_rmmm.user_account AS user_account ON user_account.user_id = rmmm_user_info.id  
 		LEFT JOIN ry_trade.trade_order AS trade_order ON trade_order.order_no = payment_order.order_no
 	</sql>
 
