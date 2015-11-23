@@ -106,7 +106,7 @@ public interface ROALiveService {
 	 *            页大小
 	 * @return 带List&lt;LiveBrandVO&gt;的ResponseVO
 	 */
-	ResponseVO getBrandList( BullParam param);
+	ResponseVO getBrandList(BullParam param);
 
 	/**
 	 * 通过直播id列表查询直播列表
