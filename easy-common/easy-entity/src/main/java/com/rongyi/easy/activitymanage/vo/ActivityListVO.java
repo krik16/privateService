@@ -15,9 +15,11 @@ public class ActivityListVO implements Serializable{
     private Integer id;
    //活动的url
     private String activityUrl;
-    //品牌id
-    private String brandName;
+    //商圈名称
+    private String businessDistrictName;
 
+    //商圈Id
+    private String businessDistrictId;
     public Integer getId() {
         return id;
     }
@@ -34,20 +36,29 @@ public class ActivityListVO implements Serializable{
         this.activityUrl = activityUrl;
     }
 
-    public String getBrandName() {
-        return brandName;
+    public String getBusinessDistrictName() {
+        return businessDistrictName;
     }
 
-    public void setBrandName(String brandName) {
-        this.brandName = brandName;
+    public void setBusinessDistrictName(String businessDistrictName) {
+        this.businessDistrictName = businessDistrictName;
+    }
+
+    public String getBusinessDistrictId() {
+        return businessDistrictId;
+    }
+
+    public void setBusinessDistrictId(String businessDistrictId) {
+        this.businessDistrictId = businessDistrictId;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .append("brandName", brandName)
-                .append("activityUrl", activityUrl)
                 .append("id", id)
+                .append("activityUrl", activityUrl)
+                .append("businessDistrictName", businessDistrictName)
+                .append("businessDistrictId", businessDistrictId)
                 .toString();
     }
 }
