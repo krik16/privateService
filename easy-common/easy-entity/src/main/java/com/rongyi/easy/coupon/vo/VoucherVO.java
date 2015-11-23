@@ -1,5 +1,7 @@
 package com.rongyi.easy.coupon.vo;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 
 /**
@@ -52,6 +54,11 @@ public class VoucherVO implements Serializable {
      * 代金券所关联的第一家店铺id
      */
     private String shopId;
+
+    /**
+     * 每人限购数量
+     */
+    private Integer limitCount;
 
     public String getVoucherId() {
         return voucherId;
@@ -125,4 +132,27 @@ public class VoucherVO implements Serializable {
         this.shopId = shopId;
     }
 
+    public Integer getLimitCount() {
+        return limitCount;
+    }
+
+    public void setLimitCount(Integer limitCount) {
+        this.limitCount = limitCount;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("voucherId", voucherId)
+                .append("voucherName", voucherName)
+                .append("origPrice", origPrice)
+                .append("currPrice", currPrice)
+                .append("totalCount", totalCount)
+                .append("stockCount", stockCount)
+                .append("soldCount", soldCount)
+                .append("picUrl", picUrl)
+                .append("shopId", shopId)
+                .append("limitCount", limitCount)
+                .toString();
+    }
 }

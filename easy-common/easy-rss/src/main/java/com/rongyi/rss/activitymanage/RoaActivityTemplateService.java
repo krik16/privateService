@@ -3,6 +3,7 @@ package com.rongyi.rss.activitymanage;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.activitymanage.entity.ActivityTemplate;
 import com.rongyi.easy.activitymanage.param.ActivityTemplateParam;
+import com.rongyi.easy.activitymanage.vo.ActivityListVO;
 import com.rongyi.easy.activitymanage.vo.ActivityTemplateVO;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public interface RoaActivityTemplateService {
      * @param activityTemplate
      * @return true  or false
      */
-    boolean saveActivityTemplate(ActivityTemplate activityTemplate);
+    ActivityTemplate saveActivityTemplate(ActivityTemplate activityTemplate);
 
     /***
      * 通过id得到 查询url
@@ -49,10 +50,16 @@ public interface RoaActivityTemplateService {
      * @param activityTemplate
      * @return true  or false
      */
-    boolean updateActivityTemplate(ActivityTemplate activityTemplate);
+    ActivityTemplate updateActivityTemplate(ActivityTemplate activityTemplate);
 
 
-
+    /**
+     * 通过闪购或特卖id是查询出列表
+     * @param ids  ids
+     * @param type 查询的类型   1 为特卖  2为闪购
+     * @return List<ActivityListVO>
+     */
+    List<ActivityListVO> getActivityListByIds(List<Integer> ids,int type);
 
 
 }
