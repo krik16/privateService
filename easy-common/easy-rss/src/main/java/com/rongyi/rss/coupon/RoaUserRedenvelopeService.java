@@ -113,25 +113,6 @@ public interface RoaUserRedenvelopeService {
      */
     UserCoupon findUserCouponByCode(String couponCode);
 
-
-    /**
-     * 使用红包
-     * @param couponCode 券码
-     * @param orderNo 订单号
-     * @return boolean
-     * @author lqy
-     */
-    boolean useCashCoupon(String couponCode, String orderNo);
-
-    /**
-     * 恢复红包
-     * @param couponCode
-     * @return
-     * @author lqy
-     */
-    boolean recoverCashCoupon(String couponCode);
-
-
     /**
      * 用户红包领取数
      *
@@ -161,6 +142,39 @@ public interface RoaUserRedenvelopeService {
 
 
 
+
+    /**
+     * 使用红包
+     * @param couponCode 券码
+     * @param orderNo 订单号
+     * @return boolean
+     * @author lqy
+     */
+    boolean useCashCoupon(String couponCode, String orderNo);
+
+    /**
+     * 恢复红包
+     * @param couponCode 券码
+     * @return boolean
+     * @author lqy
+     */
+    boolean recoverCashCoupon(String couponCode);
+
+    /**
+     * 校验红包是否可用
+     * @param param 校验参数
+     * @return boolean
+     * @author lqy
+     */
+    boolean validCashCoupon(RebateAndRedenvelopParam param);
+
+    /**
+     * 根据红包券码获取红包名称
+     * @param couponCode 券码
+     * @return name
+     * @author lqy
+     */
+    String getRedPacketName(String couponCode);
 
     /**
      * 根据券码查询抵红包详情
