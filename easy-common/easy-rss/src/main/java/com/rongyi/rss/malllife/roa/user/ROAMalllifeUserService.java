@@ -1,16 +1,13 @@
 package com.rongyi.rss.malllife.roa.user;
 
 import java.util.List;
-import java.util.Set;
 
 import com.rongyi.easy.usercenter.dto.malllife.MalllifeUserInfoDto;
-import com.rongyi.easy.usercenter.entity.malllife.MalllifeUserInfoEntity;
-import org.bson.types.ObjectId;
+import com.rongyi.easy.usercenter.entity.MalllifeUserInfoEntity;
 
 
 import com.rongyi.easy.malllife.param.MalllifeUser;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
-import com.rongyi.easy.rmmm.dto.user.UserVO;
 
 /*
  * Copyright (C),上海容易网电子商务有限公司
@@ -156,4 +153,8 @@ public interface ROAMalllifeUserService {
 	 * @throws Exception
 	 */
 	public void updatelogin(MalllifeUser malllifeUser) throws Exception;
+
+
+
+
 }

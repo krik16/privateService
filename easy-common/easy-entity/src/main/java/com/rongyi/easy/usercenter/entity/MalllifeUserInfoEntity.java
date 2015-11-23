@@ -1,4 +1,4 @@
-package com.rongyi.easy.usercenter.entity.malllife;
+package com.rongyi.easy.usercenter.entity;
 /*
  * Copyright (C),上海容易网电子商务有限公司
  * Author:  俞志坚

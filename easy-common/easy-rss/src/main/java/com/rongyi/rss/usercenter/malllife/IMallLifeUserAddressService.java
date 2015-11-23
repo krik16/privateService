@@ -12,7 +12,7 @@ package com.rongyi.rss.usercenter.malllife;/*
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.easy.rmmm.param.OperateAddressParam;
 import com.rongyi.easy.rmmm.param.UserAddressListParam;
-import com.rongyi.easy.usercenter.entity.malllife.MalllifeUserAddressEntity;
+import com.rongyi.easy.usercenter.entity.MalllifeUserAddressEntity;
 
 public interface IMallLifeUserAddressService {
 

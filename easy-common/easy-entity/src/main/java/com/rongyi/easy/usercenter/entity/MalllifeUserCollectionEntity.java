@@ -1,8 +1,11 @@
-package com.rongyi.easy.usercenter.entity.malllife;
+package com.rongyi.easy.usercenter.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class MalllifeUserCollectionEntity {
+public class MalllifeUserCollectionEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     /** 自增主键 */
     private Integer id;
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.rongyi.easy.usercenter.entity.malllife.MalllifeUserCollectionEntityMapper" >
-  <resultMap id="BaseResultMap" type="com.rongyi.easy.usercenter.entity.malllife.MalllifeUserCollectionEntity" >
+<mapper namespace="com.rongyi.easy.usercenter.entity.MalllifeUserCollectionEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.rongyi.easy.usercenter.entity.MalllifeUserCollectionEntity" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="collection_id" property="collectionId" jdbcType="VARCHAR" />
@@ -23,7 +23,7 @@
     delete from malllife_user_collection
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.rongyi.easy.usercenter.entity.malllife.MalllifeUserCollectionEntity" >
+  <insert id="insert" parameterType="com.rongyi.easy.usercenter.entity.MalllifeUserCollectionEntity" >
     insert into malllife_user_collection (id, user_id, collection_id, 
       is_disable, collection_type, create_at, 
       update_at)
@@ -32,7 +32,7 @@
       #{updateAt,jdbcType=TIMESTAMP})
   </insert>
 
-  <update id="updateByPrimaryKey" parameterType="com.rongyi.easy.usercenter.entity.malllife.MalllifeUserCollectionEntity" >
+  <update id="updateByPrimaryKey" parameterType="com.rongyi.easy.usercenter.entity.MalllifeUserCollectionEntity" >
     update malllife_user_collection
     set user_id = #{userId,jdbcType=VARCHAR},
       collection_id = #{collectionId,jdbcType=VARCHAR},

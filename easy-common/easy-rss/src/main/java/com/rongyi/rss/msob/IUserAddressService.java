@@ -1,6 +1,6 @@
 package com.rongyi.rss.msob;
 
-import com.rongyi.easy.usercenter.entity.malllife.MalllifeUserAddressEntity;
+import com.rongyi.easy.usercenter.entity.MalllifeUserAddressEntity;
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.easy.rmmm.param.OperateAddressParam;
 import com.rongyi.easy.rmmm.param.UserAddressListParam;

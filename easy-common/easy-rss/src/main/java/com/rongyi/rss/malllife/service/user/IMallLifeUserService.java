@@ -4,7 +4,6 @@ package com.rongyi.rss.malllife.service.user;
 import com.rongyi.easy.malllife.param.MalllifeUser;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
 
-import com.rongyi.easy.usercenter.entity.malllife.MalllifeUserInfoEntity;
 import org.bson.types.ObjectId;
 
 import java.util.List;

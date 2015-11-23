@@ -1,6 +1,6 @@
 package com.rongyi.easy.rmmm.vo;
 
-import com.rongyi.easy.usercenter.entity.malllife.MalllifeUserAddressEntity;
+import com.rongyi.easy.usercenter.entity.MalllifeUserAddressEntity;
 
 import java.io.Serializable;
 

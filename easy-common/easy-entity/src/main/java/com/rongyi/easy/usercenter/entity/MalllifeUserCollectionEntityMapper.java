@@ -1,4 +1,4 @@
-package com.rongyi.easy.usercenter.entity.malllife;
+package com.rongyi.easy.usercenter.entity;
 
 public interface MalllifeUserCollectionEntityMapper {
     int deleteByPrimaryKey(Integer id);

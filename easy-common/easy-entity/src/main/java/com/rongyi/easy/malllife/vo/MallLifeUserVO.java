@@ -1,7 +1,7 @@
 package com.rongyi.easy.malllife.vo;
 
 
-import com.rongyi.easy.usercenter.entity.malllife.MalllifeUserInfoEntity;
+import com.rongyi.easy.usercenter.entity.MalllifeUserInfoEntity;
 
 import java.io.Serializable;
 

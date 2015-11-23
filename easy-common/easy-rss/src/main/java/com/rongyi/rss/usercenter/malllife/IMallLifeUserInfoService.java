@@ -12,7 +12,7 @@ package com.rongyi.rss.usercenter.malllife;/*
 import com.rongyi.easy.malllife.param.MalllifeUser;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
 import com.rongyi.easy.usercenter.dto.malllife.MalllifeUserInfoDto;
-import com.rongyi.easy.usercenter.entity.malllife.MalllifeUserInfoEntity;
+import com.rongyi.easy.usercenter.entity.MalllifeUserInfoEntity;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -115,14 +115,7 @@ public interface IMallLifeUserInfoService {
      */
     public MalllifeUserInfoEntity getUserByUserId(String userId) throws Exception ;
 
-    /**
-     * 返回用户信息
-     * @param userId 用户Id
-     * @param flag 0只返回用户信息 1返回收藏商品编号兼容之前接口
-     * @return
-     * @throws Exception
-     */
-    public MalllifeUserInfoDto getUserByInfo(String userId ,int flag)throws Exception;
+
 
     /**
      * 收藏商品和取消商品

@@ -1,7 +1,6 @@
 package com.rongyi.rss.mallshop.user;
 
-import com.rongyi.easy.usercenter.entity.malllife.MalllifeUserAddressEntity;
-import org.bson.types.ObjectId;
+import com.rongyi.easy.usercenter.entity.MalllifeUserAddressEntity;
 
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.easy.rmmm.param.OperateAddressParam;
