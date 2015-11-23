@@ -1,6 +1,7 @@
 package com.rongyi.rss.malllife.roa.user;
 
 import java.util.List;
+import java.util.Map;
 
 import com.rongyi.easy.usercenter.dto.malllife.MalllifeUserInfoDto;
 import com.rongyi.easy.usercenter.entity.MalllifeUserInfoEntity;
@@ -154,6 +155,13 @@ public interface ROAMalllifeUserService {
 	 */
 	public void updatelogin(MalllifeUser malllifeUser) throws Exception;
 
+
+	/**
+	 * 根据id列表批量取出用户信息
+	 * @param idList
+	 * @return
+	 */
+	public Map<String,UserInfoVO> getUserListByIdList(List<String> idList);
 
 
 
