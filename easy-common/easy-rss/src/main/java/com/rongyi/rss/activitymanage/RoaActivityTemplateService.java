@@ -18,7 +18,7 @@ public interface RoaActivityTemplateService {
      * @param activityTemplate
      * @return true  or false
      */
-    boolean saveActivityTemplate(ActivityTemplate activityTemplate);
+    ActivityTemplate saveActivityTemplate(ActivityTemplate activityTemplate);
 
     /***
      * 通过id得到 查询url
@@ -49,7 +49,7 @@ public interface RoaActivityTemplateService {
      * @param activityTemplate
      * @return true  or false
      */
-    boolean updateActivityTemplate(ActivityTemplate activityTemplate);
+    ActivityTemplate updateActivityTemplate(ActivityTemplate activityTemplate);
 
 
 
