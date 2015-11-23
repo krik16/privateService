@@ -129,6 +129,11 @@ public class UserRedenvelope implements Serializable {
      */
     private String usageDesc;
 
+    /**
+     * 适用规则 满减[0] 立减[1]
+     */
+    private Integer preferentialType;
+
     /********************* coupon表模板表信息冗余 **********************/
 
     public UserRedenvelope() {
@@ -361,6 +366,14 @@ public class UserRedenvelope implements Serializable {
         this.usageDesc = usageDesc;
     }
 
+    public Integer getPreferentialType() {
+        return preferentialType;
+    }
+
+    public void setPreferentialType(Integer preferentialType) {
+        this.preferentialType = preferentialType;
+    }
+
     /**
      * 判断是否可使用
      * @return
@@ -400,6 +413,7 @@ public class UserRedenvelope implements Serializable {
                 .append("applyGoods", applyGoods)
                 .append("relatedType", relatedType)
                 .append("usageDesc", usageDesc)
+                .append("preferentialType", preferentialType)
                 .toString();
     }
 }
