@@ -20,8 +20,16 @@ public class BullParam extends MalllifeBaseParam implements Serializable{
 	
 	private String bullId;//买手id
 	private String liveId;//直播id
-	private String commodityType;//商品类型", 1所有商品2导购商品3买手商品
+	private String flashSaleId; //4闪购、5卖场
+	private String commodityType;//商品类型", 1所有商品2导购商品3买手商品，4：闪购，5卖场
+	
+	public String getFlashSaleId() {
+		return flashSaleId;
+	}
 
+	public void setFlashSaleId(String flashSaleId) {
+		this.flashSaleId = flashSaleId;
+	}
 	public String getBullId() {
 		return bullId;
 	}
