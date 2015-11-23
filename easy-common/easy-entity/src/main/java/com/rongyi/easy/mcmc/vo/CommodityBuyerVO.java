@@ -25,7 +25,17 @@ public class CommodityBuyerVO implements Serializable{
 	
 	private String bullId;//创建人
 	
+	private Double distance = 0.0; //距离
 	
+	
+	public Double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(Double distance) {
+		this.distance = distance;
+	}
+
 	public String getBullId() {
 		return bullId;
 	}
