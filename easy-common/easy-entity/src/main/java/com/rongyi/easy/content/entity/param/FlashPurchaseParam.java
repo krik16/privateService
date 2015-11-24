@@ -1,6 +1,8 @@
 package com.rongyi.easy.content.entity.param;
 
 import java.io.Serializable;
+
+import com.rongyi.easy.malllife.param.MalllifeBaseParam;
 /**
  * 
 * @ClassName: FlashPurchaseParam 
@@ -9,7 +11,7 @@ import java.io.Serializable;
 * @date 2015年11月18日 下午8:28:24 
 *
  */
-public class FlashPurchaseParam implements Serializable{
+public class FlashPurchaseParam extends MalllifeBaseParam implements Serializable{
 	/** 
 	* @Fields serialVersionUID
 	*/ 
@@ -26,14 +28,6 @@ public class FlashPurchaseParam implements Serializable{
 	 * 区域名称
 	 */
 	private String cityName;
-	/**
-	 * 当前页
-	 */
-	private int currentPage;
-	/**
-	 * 页码
-	 */
-	private int pageSize;
 	/**
 	 * 排序
 	 */
@@ -81,30 +75,6 @@ public class FlashPurchaseParam implements Serializable{
 	 */
 	public void setCityName(String cityName) {
 		this.cityName = cityName;
-	}
-	/**
-	 * @return the currentPage
-	 */
-	public int getCurrentPage() {
-		return currentPage;
-	}
-	/**
-	 * @param currentPage the currentPage to set
-	 */
-	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
-	}
-	/**
-	 * @return the pageSize
-	 */
-	public int getPageSize() {
-		return pageSize;
-	}
-	/**
-	 * @param pageSize the pageSize to set
-	 */
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
 	}
 	/**
 	 * @return the sort

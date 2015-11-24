@@ -13,19 +13,21 @@ public interface RoaPlatformRebateService {
 
     /**
      * 校验抵扣券是否可用
-     * @param param 校验参数
+     * @param param
+     * 商品订单参数：couponCode、orderCommodities
+     * 代金券订单参数：couponCode、voucherId、voucherAmount
      * @return boolean
      * @author lqy
      */
     boolean validPlatformRebate(RebateAndRedenvelopParam param);
 
     /**
-     * 根据券码查询抵扣券的抵扣金额（元）
+     * 根据券码查询抵扣券的抵扣金额（元）和满多少金额（元）
      * @param couponCode 券码
-     * @return discount
+     * @return discount & origPrice
      * @author lqy
      */
-    Double getPlatformRebateDiscount(String couponCode);
+    PlatformRebateVO getPlatformRebateDiscountAndOrigPrice(String couponCode);
 
     /**
      * 根据券码查询抵扣券详情
@@ -54,7 +56,7 @@ public interface RoaPlatformRebateService {
 
     /**
      * 分页查询我的可使用抵扣券和已失效抵扣券
-     * @param param
+     * @param param 参数：userId、isUsable、currentPage、pageSize
      * @return PagingVO
      * @author lqy
      */
@@ -63,6 +65,8 @@ public interface RoaPlatformRebateService {
     /**
      * 查询对订单可使用抵扣券和不可使用的抵扣券(不需要分页)
      * @param param
+     * 商品订单参数：userId、orderCommodities
+     * 代金券订单参数：userId、voucherId
      * @return PlatformRebateForOrderVO
      * @author lqy
      */
@@ -78,7 +82,7 @@ public interface RoaPlatformRebateService {
 
     /**
      * 获取用户在某个时间点以后领取到的可使用的抵扣券数量
-     * @param param 参数含 userId、receiveAt
+     * @param param 参数： userId、receiveAt
      * @return count 数量
      * @author lqy
      */
