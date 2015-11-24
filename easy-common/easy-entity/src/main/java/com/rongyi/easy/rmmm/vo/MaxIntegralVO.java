@@ -15,9 +15,9 @@ public class MaxIntegralVO {
 
 	private int myIntegral;// 我的积分
 	
-	private Integer rebateNum;// 可使用抵扣券数量
+	private Integer rebateNum = 0;// 可使用抵扣券数量
 	
-	private Integer hongBaoNum;// 可使用红包数量
+	private Integer hongBaoNum = 0;// 可使用红包数量
 
 	public Integer getRebateNum() {
 		return rebateNum;
