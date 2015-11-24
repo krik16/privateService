@@ -162,7 +162,9 @@ public interface RoaUserRedenvelopeService {
 
     /**
      * 校验红包是否可用
-     * @param param 校验参数
+     * @param param
+     * 商品订单参数: couponCode、commodityId
+     * 代金券订单参数：couponCode、voucherId
      * @return boolean
      * @author lqy
      */
@@ -186,7 +188,7 @@ public interface RoaUserRedenvelopeService {
 
     /**
      * 分页查询我的可使用红包和已失效红包
-     * @param param
+     * @param param 参数：userId、isUsable、currentPage、pageSize
      * @return PagingVO
      * @author lqy
      */
@@ -195,6 +197,8 @@ public interface RoaUserRedenvelopeService {
     /**
      * 查询对订单可使用红包和不可使用的红包(不需要分页)
      * @param param
+     * 商品订单参数：commodityId
+     * 代金券订单参数：voucherId
      * @return UserRedPacketForOrderVO
      * @author lqy
      */
