@@ -14,7 +14,7 @@ public class CollectionsEntity implements Serializable{
 	@Id
 	private ObjectId id;// id
 	@Property("user_id")
-	private ObjectId userId;// 用户id
+	private String userId;// 用户id
 	@Property("collectable_id")
 	private String collectableId;// 收藏的内容的id
 	@Property("collectable_type")
@@ -32,11 +32,11 @@ public class CollectionsEntity implements Serializable{
 		this.id = id;
 	}
 
-	public ObjectId getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(ObjectId userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
