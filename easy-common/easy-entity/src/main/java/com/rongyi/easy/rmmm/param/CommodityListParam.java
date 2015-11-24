@@ -22,6 +22,17 @@ public class CommodityListParam implements Serializable{
 	
 	private Double commodityUnitPrice;//商品单价
 
+	public CommodityListParam() {
+		super();
+	}
+
+	public CommodityListParam(String commodityId, Integer num, Double commodityUnitPrice) {
+		super();
+		this.commodityId = commodityId;
+		this.num = num;
+		this.commodityUnitPrice = commodityUnitPrice;
+	}
+
 	public String getCommodityId() {
 		return commodityId;
 	}
