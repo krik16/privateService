@@ -1,6 +1,7 @@
 package com.rongyi.easy.mcmc.param;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,11 +9,11 @@ import java.util.List;
  */
 public class SaleParam implements Serializable {
     private Integer id; //特卖/闪购ID
-    private List<String> shopIds; //特卖关联特卖店铺MONGO ID列表
+    private List<String> shopIds = new ArrayList<>(); //特卖关联特卖店铺MONGO ID列表
     private long startTime; //特卖开始时间
     private long endTime; //特卖结束时间
     private int activityType; //活动类型 1为特卖  2为闪购
-    private List<FlashSaleCommodityParam> commodityParams; // 闪购关联商品及排序数
+    private List<ActivityCommodityParam> commodityParams = new ArrayList<>(); // 闪购或特卖关联商品及排序数
 
     public Integer getId() {
         return id;
@@ -54,11 +55,11 @@ public class SaleParam implements Serializable {
         this.activityType = activityType;
     }
 
-    public List<FlashSaleCommodityParam> getCommodityParams() {
+    public List<ActivityCommodityParam> getCommodityParams() {
         return commodityParams;
     }
 
-    public void setCommodityParams(List<FlashSaleCommodityParam> commodityParams) {
+    public void setCommodityParams(List<ActivityCommodityParam> commodityParams) {
         this.commodityParams = commodityParams;
     }
 

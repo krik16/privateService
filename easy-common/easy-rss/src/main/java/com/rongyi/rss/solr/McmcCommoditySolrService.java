@@ -81,4 +81,6 @@ public interface McmcCommoditySolrService {
 
 	public boolean updateCommodityFlashSale(String commodityId, Integer sortPosition, Integer flashSaleId, Date activityStartTime, Date activityEndTime);
 
+	public boolean updateCommoditySale(String commodityId, Integer sortPosition);
+
 }
