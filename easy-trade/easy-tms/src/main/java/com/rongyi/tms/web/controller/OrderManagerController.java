@@ -243,6 +243,12 @@ public class OrderManagerController extends BaseController {
 					username = URLDecoder.decode(username, "utf-8");
 				}
 				users = roaMalllifeUserService.getUsersByNicknameUsername(nickname, username);
+				if(users == null || users.isEmpty()){
+					model.addAttribute("orderForms", null);
+					model.addAttribute("rowCont", 0);
+					model.addAttribute("currpage", 1);
+					return "order/order_searchajax_list";
+				}
 			}
 			List<String> userList = null;
 			if (!CollectionUtils.isEmpty(users)) {

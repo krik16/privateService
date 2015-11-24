@@ -32,6 +32,7 @@
             <td width="5%">下单时间</td>
             <td width="6%">买家账号</td>
             <td width="4%">买家姓名</td>
+            <td width="5%">买家付款账号</td>
             <td width="6%">卖家账号</td>
             <td width="4%">卖家姓名</td>
             <td width="5%">交易金额</td>
@@ -102,6 +103,7 @@
                         <td><fmt:formatDate value="${entity.orderTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                         <td>${entity.buyerAccount}</td>
                         <td>${entity.buyerName}</td>
+                        <td>${entity.buyerPayAccount}</td>
                         <td>${entity.sellerAccount}</td>
                         <td>${entity.sellerName}</td>
                         <td>

@@ -13,6 +13,7 @@
 		<result column="transaction_id" property="transactionId"
 			jdbcType="VARCHAR" />
 		<result column="trade_time" property="tradeTime" jdbcType="TIMESTAMP" />
+		<result column="buyer_email" property="buyerPayAccount" jdbcType="TIMESTAMP" />
 		<result column="shop_id" property="shopId" jdbcType="VARCHAR" />
 		<result column="shop_name" property="shopName" jdbcType="VARCHAR" />
 		<result column="mall_id" property="mallId" jdbcType="VARCHAR" />
@@ -60,6 +61,7 @@
 		payment_event.transaction_id,
 		payment_event.time_end AS trade_time,
 		payment_event.event_type,
+		payment_event.buyer_email,
 		payment_order.create_at AS order_time,
 		payment_order.`status`,
 		payment_order.draw_user_id,
@@ -249,6 +251,11 @@
 		<if test="guideType != null and guideType != ''">
 			AND order_form.guide_type = #{guideType}
 		</if>
+		<!-- 支付账号 -->
+		<if test="buyerPayAccount != null and buyerPayAccount != ''">
+			AND payment_event.buyer_email = #{buyerPayAccount}
+		</if>
+		
 		<include refid="Base_group_by" />
 	</sql>
 	<select id="selectTradePageList" resultMap="BaseResultMap"
