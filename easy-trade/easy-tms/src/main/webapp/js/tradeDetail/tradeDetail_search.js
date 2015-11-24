@@ -154,6 +154,7 @@ function getParamsJson() {
     var orderType = $('#orderType').val();
     var favorType = $('#favorType').val();
     var guideType = $('#guideType').val();
+    var buyerPayAccount = $('#buyerPayAccount').val();
     var paramsJson = {
         'currpage': currpage,
         'tradeNo': tradeNo,
@@ -172,7 +173,8 @@ function getParamsJson() {
         'maxTotalPrice': maxTotalPrice,
         'orderType': orderType,
         'favorType': favorType,
-        'guideType': guideType
+        'guideType': guideType,
+        'buyerPayAccount':buyerPayAccount
     };
     return paramsJson;
 }

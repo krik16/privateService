@@ -89,10 +89,13 @@
                 <input id="buyerAccount" type="text" class="form-control ng-pristine ng-untouched ng-valid">
             </div>
             <div class="form-group">
+                <label>买家付款账号：</label>
+                <input id="buyerPayAccount" type="text" class="form-control ng-pristine ng-untouched ng-valid">
+            </div>
+            <div class="form-group">
                 <label>卖家账号：</label>
                 <input id="sellerAccount" type="text" class="form-control ng-pristine ng-untouched ng-valid">
             </div>
-
             <div class="form-group">
                 <label>收支类型：</label>
                 <select id="tradeType" class="form-control ng-pristine ng-untouched ng-valid">

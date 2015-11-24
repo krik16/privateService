@@ -217,8 +217,8 @@
         <include refid="Base_Column_List"/>
         from payment_event
         where trade_no = #{tradeNo,jdbcType=VARCHAR}
-        and
-        (event_type = 0 or event_type = 1)
+       <!--  and
+        (event_type = 0 or event_type = 1) -->
     </select>
     <update id="updateDeleteStatus" parameterType="map">
 		update
