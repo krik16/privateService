@@ -2,7 +2,11 @@ package com.rongyi.easy.malllife.vo.redEnvelopeCoupon;
 
 import java.io.Serializable;
 import java.util.List;
-
+/**
+ * 订单可使用与不可使用的红包返回
+ * @author user
+ *
+ */
 public class RedEnvelopeForOrderVO implements Serializable{
 
 	/**
