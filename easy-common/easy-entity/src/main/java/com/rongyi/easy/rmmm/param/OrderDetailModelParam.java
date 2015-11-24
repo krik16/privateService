@@ -37,6 +37,8 @@ public class OrderDetailModelParam implements Serializable {
 	private String commodityPostage;// 邮费
 	
 	private boolean supportCourierDeliver;//支持快递发货字段  true 是    false否
+	
+	private Integer hongBaoNum = 0;// 可使用红包数量
 
 	public boolean isSupportCourierDeliver() {
 		return supportCourierDeliver;
