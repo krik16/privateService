@@ -23,6 +23,16 @@ public class RebateCommodityParam extends MalllifeBaseParam implements Serializa
 	
 	private List<CommodityListParam> commoditys;//商品数据集合
 
+	public RebateCommodityParam() {
+		super();
+	}
+
+	public RebateCommodityParam(Double orderPrice, List<CommodityListParam> commoditys) {
+		super();
+		this.orderPrice = orderPrice;
+		this.commoditys = commoditys;
+	}
+
 	public Double getOrderPrice() {
 		return orderPrice;
 	}

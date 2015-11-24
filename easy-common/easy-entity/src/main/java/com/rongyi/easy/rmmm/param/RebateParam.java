@@ -33,6 +33,17 @@ public class RebateParam extends MalllifeBaseParam implements Serializable{
 	
 	private String status;//1 已使用 2已失效
 
+	public RebateParam() {
+		super();
+	}
+
+	public RebateParam(String couponId, Integer num, Double couponUnitPrice) {
+		super();
+		this.couponId = couponId;
+		this.num = num;
+		this.couponUnitPrice = couponUnitPrice;
+	}
+
 	public String getStatus() {
 		return status;
 	}
