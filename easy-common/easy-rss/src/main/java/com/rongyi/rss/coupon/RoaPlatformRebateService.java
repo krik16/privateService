@@ -20,12 +20,12 @@ public interface RoaPlatformRebateService {
     boolean validPlatformRebate(RebateAndRedenvelopParam param);
 
     /**
-     * 根据券码查询抵扣券的抵扣金额（元）
+     * 根据券码查询抵扣券的抵扣金额（元）和满多少金额（元）
      * @param couponCode 券码
-     * @return discount
+     * @return discount & origPrice
      * @author lqy
      */
-    Double getPlatformRebateDiscount(String couponCode);
+    PlatformRebateVO getPlatformRebateDiscountAndOrigPrice(String couponCode);
 
     /**
      * 根据券码查询抵扣券详情

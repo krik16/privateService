@@ -199,4 +199,12 @@ public interface RoaUserRedenvelopeService {
      * @author lqy
      */
     UserRedPacketForOrderVO getUserRedPacketForOrder(RebateAndRedenvelopParam param);
+
+    /**
+     * 获取用户在某个时间点以后领取到的可使用的红包数量
+     * @param param 参数含 userId、receiveAt
+     * @return count 数量
+     * @author lqy
+     */
+    int getUserRedPacketCount(RebateAndRedenvelopParam param);
 }

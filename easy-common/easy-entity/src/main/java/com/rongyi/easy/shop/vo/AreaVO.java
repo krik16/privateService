@@ -1,6 +1,8 @@
 package com.rongyi.easy.shop.vo;
 
-public class AreaVO {
+import java.io.Serializable;
+
+public class AreaVO implements Serializable {
 
 	private String id;
 	private String type;
