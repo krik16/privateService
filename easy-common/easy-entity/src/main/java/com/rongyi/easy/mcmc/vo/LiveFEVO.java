@@ -49,7 +49,12 @@ public class LiveFEVO implements Serializable {
 	 * 直播状态 [0:发布/预热中，1:上线/进行中，2:下线(已过期)]
 	 */
 	private int status;
-
+	
+	/**
+	 * 买手手机号
+	 */
+	private String bullPhone;
+	
 	public String getLiveId() {
 		return liveId;
 	}
@@ -114,4 +119,11 @@ public class LiveFEVO implements Serializable {
 		this.status = status;
 	}
 
+	public String getBullPhone() {
+		return bullPhone;
+	}
+
+	public void setBullPhone(String bullPhone) {
+		this.bullPhone = bullPhone;
+	}
 }
