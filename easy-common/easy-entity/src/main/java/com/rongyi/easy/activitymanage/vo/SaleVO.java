@@ -56,7 +56,7 @@ public class SaleVO implements Serializable {
                 this.bannerPic= activityTemplate.getTemplateSale().getBannerPic();
                 this.isMallShop=(int)activityTemplate.getTemplateSale().getIsMallShop();
 
-            if(CollectionUtils.isEmpty(activityTemplate.getTemplateSaleShopMalls())){
+            if(!CollectionUtils.isEmpty(activityTemplate.getTemplateSaleShopMalls())){
                 List<MallVO>  mallVOs=new ArrayList<MallVO>();
                 List<ShopVO> shopVOs=new ArrayList<ShopVO>();
                     if(this.isMallShop == 0){

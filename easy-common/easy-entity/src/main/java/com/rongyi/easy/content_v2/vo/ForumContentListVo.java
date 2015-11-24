@@ -58,6 +58,14 @@ public class ForumContentListVo implements Serializable{
 	 * 是否置顶
 	 */
 	private int stick;
+	/**
+	 * 类型
+	 */
+	private int type;
+	/**
+	 * 类型值
+	 */
+	private String typeVal;
 
 	public Integer getId() {
 		return id;
@@ -201,26 +209,49 @@ public class ForumContentListVo implements Serializable{
 	public void setStick(int stick) {
 		this.stick = stick;
 	}
+	/**
+	 * @return the type
+	 */
+	public int getType() {
+		return type;
+	}
 
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	/**
+	 * @return the typeVal
+	 */
+	public String getTypeVal() {
+		return typeVal;
+	}
+
+	/**
+	 * @param typeVal the typeVal to set
+	 */
+	public void setTypeVal(String typeVal) {
+		this.typeVal = typeVal;
+	}
+
+	/**(非 Javadoc)
+	* @Title: toString 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param @return    设定文件 
+	* @author shaozhou 
+	* @date 2015年11月24日 下午4:20:02
+	* @throws 
+	*/
 	@Override
 	public String toString() {
-		return "ForumContentListVo{" +
-				"id=" + id +
-				", positionId=" + positionId +
-				", provName='" + provName + '\'' +
-				", cityName='" + cityName + '\'' +
-				", picUrls='" + picUrls + '\'' +
-				", title='" + title + '\'' +
-				", publishBeginAt=" + publishBeginAt +
-				", publishEndAt=" + publishEndAt +
-				", createUser='" + createUser + '\'' +
-				", createAt=" + createAt +
-				", status=" + status +
-				", buyerLive='" + buyerLive + '\'' +
-				", iosVersion='" + iosVersion + '\'' +
-				", androidVersion='" + androidVersion + '\'' +
-				", quickType='" + quickType + '\'' +
-				", quickTypeVal='" + quickTypeVal + '\'' +
-				'}';
+		return "ForumContentListVo [id=" + id + ", positionId=" + positionId + ", provName=" + provName + ", cityName="
+				+ cityName + ", picUrls=" + picUrls + ", title=" + title + ", publishBeginAt=" + publishBeginAt
+				+ ", publishEndAt=" + publishEndAt + ", createUser=" + createUser + ", createAt=" + createAt
+				+ ", status=" + status + ", buyerLive=" + buyerLive + ", iosVersion=" + iosVersion + ", androidVersion="
+				+ androidVersion + ", quickType=" + quickType + ", quickTypeVal=" + quickTypeVal + ", stick=" + stick
+				+ ", type=" + type + ", typeVal=" + typeVal + "]";
 	}
 }
