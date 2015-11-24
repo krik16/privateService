@@ -92,11 +92,6 @@ public class RebateAndRedenvelopParam implements Serializable {
          */
         private Integer commodityAmount;
 
-        /**
-         * 适用对象: 商家[1] 买手[2]
-         */
-        private Integer applyObject;
-
         public String getCommodityId() {
             return commodityId;
         }
@@ -113,20 +108,11 @@ public class RebateAndRedenvelopParam implements Serializable {
             this.commodityAmount = commodityAmount;
         }
 
-        public Integer getApplyObject() {
-            return applyObject;
-        }
-
-        public void setApplyObject(Integer applyObject) {
-            this.applyObject = applyObject;
-        }
-
         @Override
         public String toString() {
             return new ToStringBuilder(this)
                     .append("commodityId", commodityId)
                     .append("commodityAmount", commodityAmount)
-                    .append("applyObject", applyObject)
                     .toString();
         }
     }
