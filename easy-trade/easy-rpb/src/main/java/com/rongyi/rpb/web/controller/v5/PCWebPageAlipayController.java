@@ -196,6 +196,9 @@ public class PCWebPageAlipayController extends BaseController {
 					PaymentLogInfo paymentLogInfo = new PaymentLogInfo();
 					String[] details = batchDetail[i].split("\\^");
 					if (details != null) {
+						PaymentLogInfo oldPaymentLogInfo = paymentLogInfoService.selectByPayTradeNo(details[0]);
+						if(oldPaymentLogInfo != null)
+							paymentLogInfo.setBuyer_email(oldPaymentLogInfo.getBuyer_email());
 						paymentLogInfo.setTrade_no(details[0]);// 交易流水号
 						paymentLogInfo.setTotal_fee(Double.valueOf(details[1]));
 						paymentLogInfo.setTransactionId(batch_no);

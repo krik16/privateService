@@ -13,6 +13,7 @@
 		<result column="transaction_id" property="transactionId"
 			jdbcType="VARCHAR" />
 		<result column="trade_time" property="tradeTime" jdbcType="TIMESTAMP" />
+		<result column="buyer_email" property="buyerPayAccount" jdbcType="TIMESTAMP" />
 		<result column="shop_id" property="shopId" jdbcType="VARCHAR" />
 		<result column="shop_name" property="shopName" jdbcType="VARCHAR" />
 		<result column="mall_id" property="mallId" jdbcType="VARCHAR" />
@@ -60,6 +61,7 @@
 		payment_event.transaction_id,
 		payment_event.time_end AS trade_time,
 		payment_event.event_type,
+		payment_event.buyer_email,
 		payment_order.create_at AS order_time,
 		payment_order.`status`,
 		payment_order.draw_user_id,
@@ -97,7 +99,7 @@
 		LEFT JOIN ry_rmmm.shop_info AS shop_info ON shop_info.id = order_form.weidian_id
 		LEFT JOIN ry_rmmm.mall_cooperate AS mall_cooperate ON mall_cooperate.id = shop_info.mall_id
 		LEFT JOIN ry_rmmm.rmmm_user_info AS rmmm_user_info ON rmmm_user_info.id = order_form.guide_id
-		LEFT JOIN ry_rmmm.user_account AS user_account ON user_account.user_id = rmmm_user_info.id
+		LEFT JOIN ry_rmmm.user_account AS user_account ON user_account.user_id = rmmm_user_info.id AND user_account.account_type = 1 
 		LEFT JOIN ry_trade.trade_order AS trade_order ON trade_order.order_no = payment_order.order_no
 	</sql>
 
@@ -249,6 +251,12 @@
 		<if test="guideType != null and guideType != ''">
 			AND order_form.guide_type = #{guideType}
 		</if>
+		<!-- 支付账号 -->
+		<if test="buyerPayAccount != null and buyerPayAccount != ''">
+			AND payment_event.buyer_email = #{buyerPayAccount}
+		</if>
+		
+		<include refid="Base_group_by" />
 	</sql>
 	<select id="selectTradePageList" resultMap="BaseResultMap"
 		parameterType="map">

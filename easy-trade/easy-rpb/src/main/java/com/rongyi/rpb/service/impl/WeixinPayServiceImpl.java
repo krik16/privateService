@@ -204,6 +204,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 	@Override
 	public void savePaymentLogInfo(RefundResData refundResData, Integer tradeType) {
 		LOGGER.info("refundResData"+refundResData.toString()+",tradeType="+tradeType);
+		PaymentLogInfo oldPaymentLogInfo = paymentLogInfoService.selectByPayTradeNo(refundResData.getTransaction_id());
 		PaymentLogInfo paymentLogInfo = new PaymentLogInfo();
 		paymentLogInfo.setNotifyTime(DateUtil.getCurrDateTime());
 		paymentLogInfo.setTimeEnd(DateUtil.getCurrDateTime());
@@ -219,6 +220,8 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 		paymentLogInfo.setReplayFlag(3);
 		paymentLogInfo.setEventType(Constants.EVENT_TYPE.EVENT_TYPE5);
 		paymentLogInfo.setTradeType(tradeType);
+		if(oldPaymentLogInfo != null)
+			paymentLogInfo.setBuyer_email(oldPaymentLogInfo.getBuyer_email());
 		paymentLogInfoService.insert(paymentLogInfo);
 	}
 

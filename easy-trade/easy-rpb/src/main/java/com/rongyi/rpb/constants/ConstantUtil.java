@@ -1,7 +1,5 @@
 package com.rongyi.rpb.constants;
 
-import java.io.File;
-
 import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.framework.spring.context.utils.SpringContextUtil;
 
@@ -150,7 +148,7 @@ public interface ConstantUtil {
 		public static String APP_ID = propertyConfigurer.getProperty("WEIXIN.APP_ID").toString();
 		public static String KEY = propertyConfigurer.getProperty("WEIXIN.KEY").toString();
 		public static String MCH_ID = propertyConfigurer.getProperty("WEIXIN.MCH_ID").toString();
-		public static String PASSWORD = propertyConfigurer.getProperty("WEIXIN.PASSWORD").toString();
+//		public static String PASSWORD = propertyConfigurer.getProperty("WEIXIN.PASSWORD").toString();
 
 
 		

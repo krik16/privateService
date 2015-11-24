@@ -177,7 +177,14 @@ body {
 						<div class="line-heights shopsName">店铺:</div>
 						<div class="shopsData">
 							<p class="p_text">
-								${trade.shopName}
+								${trade.shopName} 
+							</p>
+						</div>
+						<div style="clear: both;"></div>
+						<div class="line-heights shopsName">买家支付账号:</div>
+						<div class="shopsData">
+							<p class="p_text">
+								${trade.buyerPayAccount}
 							</p>
 						</div>
 						<div style="clear: both;"></div>

@@ -22,7 +22,6 @@ public class RefundService extends BaseService{
      */
     public String request(RefundReqData refundReqData) throws Exception {
     	
-    	System.err.println("TEST   ===="+refundReqData.toString());
         //--------------------------------------------------------------------
         //发送HTTPS的Post请求到API地址
         //--------------------------------------------------------------------
