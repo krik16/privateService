@@ -40,6 +40,14 @@ public class OrderDetailModelParam implements Serializable {
 	
 	private Integer hongBaoNum = 0;// 可使用红包数量
 
+	public Integer getHongBaoNum() {
+		return hongBaoNum;
+	}
+
+	public void setHongBaoNum(Integer hongBaoNum) {
+		this.hongBaoNum = hongBaoNum;
+	}
+
 	public boolean isSupportCourierDeliver() {
 		return supportCourierDeliver;
 	}
