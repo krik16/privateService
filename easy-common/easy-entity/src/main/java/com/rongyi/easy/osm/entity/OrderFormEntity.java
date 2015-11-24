@@ -99,6 +99,8 @@ public class OrderFormEntity implements Serializable{
 
     /**订单总金额（不包括积分优惠）**/
     private BigDecimal totalAmountWithoutScoreDiscount = null;
+    //设备类型
+    private Integer devType;
 
 	public Byte getIsAlert() {
 		return isAlert;
@@ -540,6 +542,14 @@ public class OrderFormEntity implements Serializable{
         this.scoreDiscount = scoreDiscount;
     }
 
+    public Integer getDevType() {
+        return devType;
+    }
+
+    public void setDevType(Integer devType) {
+        this.devType = devType;
+    }
+
     @Override
     public String toString() {
         return "OrderFormEntity{" +
@@ -574,6 +584,7 @@ public class OrderFormEntity implements Serializable{
                 ", couponSource=" + couponSource +
                 ", couponRequirement=" + couponRequirement +
                 ", scoreDiscount=" + scoreDiscount +
+                ", devType=" + devType +
                 ", couponType=" + couponType +
                 '}';
     }
