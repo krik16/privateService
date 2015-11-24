@@ -706,9 +706,9 @@ public interface Constants {
     }
     
     interface UserOperate{
-    	String HONGBAO = "1";//红包
-    	String COUPON = "2";//代金券
-    	String REBATE = "3";//抵扣券
+    	Integer HONGBAO = 1;//红包
+    	Integer COUPON = 2;//代金券
+    	Integer REBATE = 3;//抵扣券
     }
 
     interface RedenvelopStatus{
