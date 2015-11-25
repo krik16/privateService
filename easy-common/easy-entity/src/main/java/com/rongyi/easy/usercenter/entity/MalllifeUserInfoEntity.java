@@ -56,7 +56,7 @@ public class MalllifeUserInfoEntity  implements Serializable {
     QMCAIFU  全民财富
     RONGYI_HTDR 容易后台导入
     HGDSLHJ 哈根达斯—老虎机活动
-
+     As 表示终端翻牌
      */
     private String channel;
 
