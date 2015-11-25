@@ -48,6 +48,8 @@ public class CommodityVO  implements  Serializable {
 	private String mallMid;//商场mongoId
 	private String shopName;//店铺名称
 	private boolean supportCourierDeliver=true;//true是  false否
+	private Date registerAt;//上架时间
+	private Date soldOutAt;//下架时间
 	
 	public String getShopName() {
 		return shopName;
@@ -232,6 +234,8 @@ public class CommodityVO  implements  Serializable {
 		this.commodityCPriceMin = commodity.getcPriceMin();
 		this.commodityOPOfLCP = commodity.getoPriceOfLowestCPrice();
 		this.supportCourierDeliver = commodity.isSupportCourierDeliver();
+		this.registerAt=commodity.getRegisterAt();
+		this.soldOutAt=commodity.getSoldOutAt();
 
 	}
 	public String getCommodityId() {
@@ -313,6 +317,18 @@ public class CommodityVO  implements  Serializable {
 		this.supportCourierDeliver = supportCourierDeliver;
 	}
 
+	public Date getRegisterAt() {
+		return registerAt;
+	}
+	public void setRegisterAt(Date registerAt) {
+		this.registerAt = registerAt;
+	}
+	public Date getSoldOutAt() {
+		return soldOutAt;
+	}
+	public void setSoldOutAt(Date soldOutAt) {
+		this.soldOutAt = soldOutAt;
+	}
 	@Override
 	public String toString() {
 		return "CommodityVO{" +
