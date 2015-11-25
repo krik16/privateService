@@ -1,6 +1,7 @@
 package com.rongyi.easy.coupon.vo;
 
 import com.rongyi.easy.coupon.entity.*;
+import com.rongyi.easy.coupon.vo.operation.CouponCountVO;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -18,13 +19,31 @@ public class RedenvelopVO implements Serializable{
      * 主键(兼容mongoId)
      */
     private String id;
-
+    
     /**
      * 卡券名称
      */
     private String name;
+    
+    private List<String> unpassReasons;
+    private List<String> offShelfReasons;
+    public List<String> getOffShelfReasons() {
+		return offShelfReasons;
+	}
 
-    /**
+	public void setOffShelfReasons(List<String> offShelfReasons) {
+		this.offShelfReasons = offShelfReasons;
+	}
+
+	public List<String> getUnpassReasons() {
+		return unpassReasons;
+	}
+
+	public void setUnpassReasons(List<String> unpassReasons) {
+		this.unpassReasons = unpassReasons;
+	}
+
+	/**
      * 卡券类型:代金券[0], 抵扣券[1], 红包[2]
      */
     private Integer couponType;
@@ -33,7 +52,35 @@ public class RedenvelopVO implements Serializable{
      * 验证方式：容易后验证[0], 互动屏票据[1], 两者兼容[2]，商家验证[3](属于第三方导入券)
      */
     private Integer validateType;
+    
 
+	 public String getBrandCname() {
+		return brandCname;
+	}
+
+	public void setBrandCname(String brandCname) {
+		this.brandCname = brandCname;
+	}
+
+	public String getMallName() {
+		return mallName;
+	}
+
+	public void setMallName(String mallName) {
+		this.mallName = mallName;
+	}
+
+	public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+
+	private String brandCname;
+	 private String mallName;
+	 private String shopName;
     /**
      * 券码发行量
      */

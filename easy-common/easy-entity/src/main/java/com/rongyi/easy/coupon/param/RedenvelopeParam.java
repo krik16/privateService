@@ -22,6 +22,7 @@ import com.rongyi.easy.coupon.vo.operation.VoucherCouponVO;
 public class RedenvelopeParam implements Serializable {
 	private static final long serialVersionUID = 7422873726669964441L;
 	private String id;// 促销券id
+	private List<String> ids;// 促销券ids
 	private String name;// 促销券名称/商场名称/券码领用人名称
 	private Integer type;// 促销券类型(0:注册，1：常规)/商场对应商圈类型(0:省id,1:市.区.商圈id)
 	private Integer status;// 促销券状态(0:待审核，1:审核未通过，2:待发布，3:进行中，4:已结束，5:已下架)/券码状态(0:未使用、1:已使用、2:已过期)
@@ -46,6 +47,7 @@ public class RedenvelopeParam implements Serializable {
 	private String reason;// 促销券下架/审核未通过原因
 	private String relatedId;// 集团id/平牌id/商场id/店铺id
 	private String lv1Id;// 代金券分类一级id
+	private String lv2Id;//二级分类id
 	private String brandId;// 品牌id
 	private String cateId;//品牌分类id
 	private String brandCname;// 品牌中文名称
@@ -73,6 +75,93 @@ public class RedenvelopeParam implements Serializable {
 	private List<CouponCommodity> listCouponCommodity;// 关联商品
 	private List<CouponCommodityCategory> couponCommodityCategories;//商品分类
 	private boolean isRelatedAll;//是否关联品牌、或商场下所有店铺 0否 1是
+	private String orderByClause;
+	private String offset;
+	private String unpassReasons;
+	private Integer publishChannel;
+	private Integer dateType;//时间类型：发布开始时间[0] 发布结束时间[1] 有效期开始时间[2] 有效期结束时间[3]
+	private Date startDate;//时间范围的开始和结束时间
+	private Date endDate;//时间范围的开始和结束时间
+	private Integer couponType;//卡券类型: 代金券[0],抵扣券[1], 红包[2]
+    private String displayRegion;//展示区域：常规区域,活动区域;未选中[0]，选中[1] 例如 "1,1"表示都选中
+	public Integer getPublishChannel() {
+		return publishChannel;
+	}
+
+	public void setPublishChannel(Integer publishChannel) {
+		this.publishChannel = publishChannel;
+	}
+
+	public String getUnpassReasons() {
+		return unpassReasons;
+	}
+
+	public void setUnpassReasons(String unpassReasons) {
+		this.unpassReasons = unpassReasons;
+	}
+
+	public String getOffset() {
+		return offset;
+	}
+
+	public void setOffset(String offset) {
+		this.offset = offset;
+	}
+
+	public String getOrderByClause() {
+		return orderByClause;
+	}
+
+	public void setOrderByClause(String orderByClause) {
+		this.orderByClause = orderByClause;
+	}
+	
+	public Integer getCouponType() {
+		return couponType;
+	}
+
+	public void setCouponType(Integer couponType) {
+		this.couponType = couponType;
+	}
+
+	public String getLv2Id() {
+		return lv2Id;
+	}
+
+	public void setLv2Id(String lv2Id) {
+		this.lv2Id = lv2Id;
+	}
+	public List<String> getIds() {
+		return ids;
+	}
+
+	public void setIds(List<String> ids) {
+		this.ids = ids;
+	}
+
+	public Integer getDateType() {
+		return dateType;
+	}
+
+	public void setDateType(Integer dateType) {
+		this.dateType = dateType;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
 
 	public String getId() {
 		return id;
@@ -441,11 +530,11 @@ public class RedenvelopeParam implements Serializable {
 		this.listCouponShop = listCouponShop;
 	}
 
-	public List<VoucherCouponVO> getListCoupon() {
+	public List<VoucherCouponVO> getlListVoucherCouponVO() {
 		return listVoucherCouponVO;
 	}
 
-	public void setListCoupon(List<VoucherCouponVO> listVoucherCouponVO) {
+	public void setListVoucherCouponVO(List<VoucherCouponVO> listVoucherCouponVO) {
 		this.listVoucherCouponVO = listVoucherCouponVO;
 	}
 
