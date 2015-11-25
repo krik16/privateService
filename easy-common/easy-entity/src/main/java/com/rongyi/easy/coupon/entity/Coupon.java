@@ -253,14 +253,16 @@ public class Coupon implements Serializable {
      * 代金券分类
      */
     private CouponCategory couponCategory;
-    private List<CouponCategory> couponCategorys;
+    private List<CouponCategory> listCouponCategorys;
 
-    public List<CouponCategory> getCouponCategorys() {
-		return couponCategorys;
+    
+
+	public List<CouponCategory> getListCouponCategorys() {
+		return listCouponCategorys;
 	}
 
-	public void setCouponCategorys(List<CouponCategory> couponCategorys) {
-		this.couponCategorys = couponCategorys;
+	public void setListCouponCategorys(List<CouponCategory> listCouponCategorys) {
+		this.listCouponCategorys = listCouponCategorys;
 	}
 
 	/**
@@ -348,7 +350,7 @@ public class Coupon implements Serializable {
     /**
      * 平台促销券与代金券的关系
      */
-    private List<CouponVoucher> couponVouchers;
+    private List<CouponVoucher> listCouponVouchers;
 
     /**
      * 平台促销券商品分类
@@ -923,13 +925,7 @@ public class Coupon implements Serializable {
         this.validDays = validDays;
     }
 
-    public List<CouponVoucher> getCouponVouchers() {
-        return couponVouchers;
-    }
-
-    public void setCouponVouchers(List<CouponVoucher> couponVouchers) {
-        this.couponVouchers = couponVouchers;
-    }
+   
 
     public List<CouponCommodityCategory> getCouponCommodityCategories() {
         return couponCommodityCategories;
@@ -999,8 +995,16 @@ public class Coupon implements Serializable {
                 .append("applyObject", applyObject)
                 .append("applyGoods", applyGoods)
                 .append("validDays", validDays)
-                .append("couponVouchers", couponVouchers)
+                .append("listCouponVouchers", listCouponVouchers)
                 .append("couponCommodityCategories", couponCommodityCategories)
                 .toString();
     }
+
+	public List<CouponVoucher> getListCouponVouchers() {
+		return listCouponVouchers;
+	}
+
+	public void setListCouponVouchers(List<CouponVoucher> listCouponVouchers) {
+		this.listCouponVouchers = listCouponVouchers;
+	}
 }
