@@ -69,5 +69,10 @@ public class CouponShopVO implements Serializable {
 	public void setDistance(Double distance) {
 		this.distance = distance;
 	}
+	@Override
+	public String toString() {
+		return "CouponShopVO [id=" + id + ", address=" + address + ", location=" + location + ", type=" + type + ", icon=" + icon
+				+ ", title=" + title + ", telephone=" + telephone + ", distance=" + distance + "]";
+	}
     
 }
