@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by xgq on 2015/11/23.
  */
-public class FlashSaleCommodityParam implements Serializable {
+public class ActivityCommodityParam implements Serializable {
     private String commodityId; //商品Id
     private Integer sortPosition; //排序数
 
