@@ -21,14 +21,14 @@ public class VoucherVO implements Serializable {
     private String voucherName;
 
     /**
-     * 原价
+     * 原价(分)
      */
-    private Double origPrice;
+    private Integer origPrice;
 
     /**
-     * 现价
+     * 现价(分)
      */
-    private Double currPrice;
+    private Integer currPrice;
 
     /**
      * 券码发行量
@@ -80,19 +80,19 @@ public class VoucherVO implements Serializable {
         return picUrl;
     }
 
-    public Double getOrigPrice() {
+    public Integer getOrigPrice() {
         return origPrice;
     }
 
-    public void setOrigPrice(Double origPrice) {
+    public void setOrigPrice(Integer origPrice) {
         this.origPrice = origPrice;
     }
 
-    public Double getCurrPrice() {
+    public Integer getCurrPrice() {
         return currPrice;
     }
 
-    public void setCurrPrice(Double currPrice) {
+    public void setCurrPrice(Integer currPrice) {
         this.currPrice = currPrice;
     }
 

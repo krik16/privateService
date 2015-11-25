@@ -28,9 +28,9 @@ public class UserRedPacketVO implements Serializable {
     private String name;
 
     /**
-     * 抵扣金额(元)
+     * 抵扣金额(分)
      */
-    private Double discount;
+    private Integer discount;
 
     /**
      * 状态：未使用[0] 已使用[1] 已过期[2]
@@ -48,9 +48,9 @@ public class UserRedPacketVO implements Serializable {
     private Date validEndAt;
 
     /**
-     * 满多少可使用，满的金额（元）
+     * 满多少可使用，满的金额（分）
      */
-    private Double origPrice;
+    private Integer origPrice;
 
     /**
      * 平台促销券适用对象，商家/买手[0] 商家[1] 买手[2] （作用角色）
@@ -107,11 +107,11 @@ public class UserRedPacketVO implements Serializable {
         this.name = name;
     }
 
-    public Double getDiscount() {
+    public Integer getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Double discount) {
+    public void setDiscount(Integer discount) {
         this.discount = discount;
     }
 
@@ -139,11 +139,11 @@ public class UserRedPacketVO implements Serializable {
         this.validEndAt = validEndAt;
     }
 
-    public Double getOrigPrice() {
+    public Integer getOrigPrice() {
         return origPrice;
     }
 
-    public void setOrigPrice(Double origPrice) {
+    public void setOrigPrice(Integer origPrice) {
         this.origPrice = origPrice;
     }
 

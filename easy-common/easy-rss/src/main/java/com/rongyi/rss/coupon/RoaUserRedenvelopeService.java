@@ -98,12 +98,12 @@ public interface RoaUserRedenvelopeService {
     UserCouponVO findCashCoupon(String couponCode);
 
     /**
-     * 根据券码查询红包抵扣金额
+     * 根据券码查询红包抵扣金额(分)
      *
      * @param couponCode
      * @return
      */
-    Double getCashCouponDiscount(String couponCode);
+    Integer getCashCouponDiscount(String couponCode);
 
     /**
      * 用户红包信息
