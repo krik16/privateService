@@ -3,8 +3,11 @@ package com.rongyi.rss.roa;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.coupon.entity.CouponBrand;
 import com.rongyi.easy.roa.param.ShopAreaParams;
-import com.rongyi.easy.roa.vo.ShopAreaVO;import org.bson.types.ObjectId;import com.rongyi.easy.roa.vo.ShopVO;
+import com.rongyi.easy.roa.vo.ShopAreaVO;
+import org.bson.types.ObjectId;
+import com.rongyi.easy.roa.vo.ShopVO;
 
 /**
  * 类ROAShopService.java的描述：TODO 类实现描述
@@ -66,4 +69,7 @@ public interface ROAShopService {
      * @return
      */
      List<ShopVO> getShopVOsByBrandId(String brandId);
+
+	List<ShopVO> getShopVOsByBrandIds(List<ObjectId> list);
+
 }

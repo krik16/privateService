@@ -25,6 +25,13 @@ public interface ROARedisService {
      */
     public String set(String key, String value);
 
+    /**
+     *
+     * @param key
+     * @param value
+     * @return
+     */
+    public Long setnx(String key, String value)throws Exception;
 
     /**
      * 保存对象
