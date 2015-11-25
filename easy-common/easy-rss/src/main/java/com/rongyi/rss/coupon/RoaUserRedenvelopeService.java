@@ -211,4 +211,11 @@ public interface RoaUserRedenvelopeService {
      * @author lqy
      */
     int getUserRedPacketCount(RebateAndRedenvelopParam param);
+
+    /**
+     * 定时任务
+     * 推送3天内要过期的红包和抵扣券给用户
+     * @author lqy
+     */
+    void pushWillExpireTimerTask();
 }
