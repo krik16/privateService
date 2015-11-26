@@ -1,9 +1,11 @@
 package com.rongyi.rss.mcmc;
 
+import java.util.Date;
 import java.util.List;
 
 import com.rongyi.easy.coupon.param.CouponCommodityParam;
 import com.rongyi.easy.mcmc.param.SaleParam;
+
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
@@ -96,4 +98,14 @@ public interface CommodityService {
      * @auther:yuanbo
      */
     public ResponseVO searchCommodityByCouponParam(CouponCommodityParam param);
+    /**
+     * 处理商品上下架接口
+     * @param registerAt:上架时间  对应的输入状态应该是查找下架的商品，即为0
+     * @param soldOutAt:下架时间，对应的输入的状态是上架的商品，即为1
+     * @param status:商品的状态
+     * @param pagesize：分页的条数
+     */
+    
+    public void updateCommodityByRegisterAtAndSoldOutAt(Date registerAt,Date soldOutAt, String status, int pagesize);
+    
 }
