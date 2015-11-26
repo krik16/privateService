@@ -32,11 +32,7 @@ public class FlashSaleParam extends MalllifeBaseParam implements Serializable{
 	/**
 	 * 当前页数
 	 */
-	private Integer currentPage = 1;
-	/**
-	 * 每页条数
-	 */
-	private Integer pageSize = 20;
+
 	/**
 	 * 排序  0：按发布日期排序  1：按销量由高到低2：按价格由低到高3：按价格由高到低4：按距离由近到远5：按折扣由高到低6：按折扣由低到高
 	 */
@@ -101,18 +97,8 @@ public class FlashSaleParam extends MalllifeBaseParam implements Serializable{
 	public void setCityName(String cityName) {
 		this.cityName = cityName;
 	}
-	public Integer getCurrentPage() {
-		return currentPage;
-	}
-	public void setCurrentPage(Integer currentPage) {
-		this.currentPage = currentPage;
-	}
-	public Integer getPageSize() {
-		return pageSize;
-	}
-	public void setPageSize(Integer pageSize) {
-		this.pageSize = pageSize;
-	}
+
+
  
 	public String getLongitude() {
 		return longitude;
@@ -130,7 +116,6 @@ public class FlashSaleParam extends MalllifeBaseParam implements Serializable{
 	public String toString() {
 		return "FlashSaleParam [id=" + id + ", keywork=" + keywork
 				+ ", cityId=" + cityId + ", cityName=" + cityName
-				+ ", currentPage=" + currentPage + ", pageSize=" + pageSize
 				+ ", sortBy=" + sortBy + ", longitude=" + longitude
 				+ ", latitude=" + latitude + ", brandId=" + brandId
 				+ ", commodityCategory=" + commodityCategory + "]";

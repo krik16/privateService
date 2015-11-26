@@ -176,4 +176,11 @@ public interface RoaCouponService {
      * @author lqy
      */
     Coupon getCouponById(String couponId);
+
+    /**
+     * 根据卡券id判断该卡券是否可退款
+     * @param couponId 代金券id
+     * @return true:可退 | false：不可退
+     */
+    boolean isCanRefundCoupon(String couponId);
 }

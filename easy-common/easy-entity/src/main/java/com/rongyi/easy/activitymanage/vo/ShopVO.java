@@ -12,6 +12,8 @@ import java.io.Serializable;
 public class ShopVO implements Serializable {
     private String shopId;
     private String shopName;
+    private String mallId;
+    private String mallName;
 
     public String getShopId() {
         return shopId;
@@ -29,11 +31,29 @@ public class ShopVO implements Serializable {
         this.shopName = shopName;
     }
 
+    public String getMallId() {
+        return mallId;
+    }
+
+    public void setMallId(String mallId) {
+        this.mallId = mallId;
+    }
+
+    public String getMallName() {
+        return mallName;
+    }
+
+    public void setMallName(String mallName) {
+        this.mallName = mallName;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("shopId", shopId)
                 .append("shopName", shopName)
+                .append("mallId", mallId)
+                .append("mallName", mallName)
                 .toString();
     }
 }

@@ -56,6 +56,15 @@ public class RedenvelopeParam implements Serializable {
 	private List<String> mallIds;// 商场Id
 	private String flag;//有效期类型 0:时间控件,1：天
 	private String zoneId;// 商圈
+	private String zoneType;//商圈对应类型
+	public String getZoneType() {
+		return zoneType;
+	}
+
+	public void setZoneType(String zoneType) {
+		this.zoneType = zoneType;
+	}
+
 	private Integer currentPage;// 当前页数
 	private Integer pageSize;// 分页数量
 	private String commodityId;// 商品id/商品分类id

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.rongyi.easy.mcmc.Commodity;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class CommodityBuyerVO implements Serializable{
 
@@ -246,5 +247,33 @@ public class CommodityBuyerVO implements Serializable{
 	public void setSupportCourierDeliver(boolean supportCourierDeliver) {
 		this.supportCourierDeliver = supportCourierDeliver;
 	}
-	
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append("shopName", shopName)
+				.append("commodityPicList", commodityPicList)
+				.append("commodityId", commodityId)
+				.append("commodityCode", commodityCode)
+				.append("commodityStock", commodityStock)
+				.append("commodityStatus", commodityStatus)
+				.append("commodityType", commodityType)
+				.append("supportCourierDeliver", supportCourierDeliver)
+				.append("shopIM", shopIM)
+				.append("bullId", bullId)
+				.append("distance", distance)
+				.append("commodityOPriceMax", commodityOPriceMax)
+				.append("commodityOPriceMin", commodityOPriceMin)
+				.append("commodityCPriceMax", commodityCPriceMax)
+				.append("commodityCPriceMin", commodityCPriceMin)
+				.append("commodityOPOfLCP", commodityOPOfLCP)
+				.append("commodityBrandName", commodityBrandName)
+				.append("commodityPostage", commodityPostage)
+				.append("commodityDescription", commodityDescription)
+				.append("commodityName", commodityName)
+				.append("shopId", shopId)
+				.append("shopMid", shopMid)
+				.append("isCollected", isCollected)
+				.toString();
+	}
 }

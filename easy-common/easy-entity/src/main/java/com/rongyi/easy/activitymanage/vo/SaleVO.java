@@ -34,7 +34,7 @@ public class SaleVO implements Serializable {
     private String bannerPic;
     private Integer isMallShop;
     private List<MallVO> mall;
-    private List<ShopVO> shop;
+    private List<ShopVO> shops;
 
     public SaleVO(){}
 
@@ -72,10 +72,12 @@ public class SaleVO implements Serializable {
                                 ShopVO tempShop = new ShopVO();
                                 tempShop.setShopId(templateSaleShopMall.getShopMid());
                                 tempShop.setShopName(templateSaleShopMall.getShopName());
+                                tempShop.setMallId(templateSaleShopMall.getMallMid());
+                                tempShop.setMallName(templateSaleShopMall.getMallName());
                                 shopVOs.add(tempShop);
                             }
                         }
-                       if(activityTemplate.getTemplateSaleShopMalls().size()>1) {
+                       if(activityTemplate.getTemplateSaleShopMalls().size()>0) {
                            MallVO tempMall = new MallVO();
                            tempMall.setMallId(activityTemplate.getTemplateSaleShopMalls().get(0).getMallMid());
                            tempMall.setMallName(activityTemplate.getTemplateSaleShopMalls().get(0).getMallName());
@@ -83,7 +85,7 @@ public class SaleVO implements Serializable {
                        }
                     }
                     this.mall=mallVOs;
-                    this.shop=shopVOs;
+                    this.shops=shopVOs;
                 }
             }
         }
@@ -208,18 +210,18 @@ public class SaleVO implements Serializable {
         this.mall = mall;
     }
 
-    public List<ShopVO> getShop() {
-        return shop;
+    public List<ShopVO> getShops() {
+        return shops;
     }
 
-    public void setShop(List<ShopVO> shop) {
-        this.shop = shop;
+    public void setShops(List<ShopVO> shops) {
+        this.shops = shops;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .append("shop", shop)
+                .append("shops", shops)
                 .append("mall", mall)
                 .append("isMallShop", isMallShop)
                 .append("bannerPic", bannerPic)
