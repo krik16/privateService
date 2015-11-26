@@ -67,7 +67,7 @@ public class AreaVO  implements Comparable<AreaVO>{
 	@Override
 	public int compareTo(AreaVO o) {
 		
-		return -this.getName().compareTo(o.getName());
+		return this.getName().compareTo(o.getName());
 	}
 
 	
