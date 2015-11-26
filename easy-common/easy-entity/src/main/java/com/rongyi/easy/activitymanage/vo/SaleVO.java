@@ -72,6 +72,8 @@ public class SaleVO implements Serializable {
                                 ShopVO tempShop = new ShopVO();
                                 tempShop.setShopId(templateSaleShopMall.getShopMid());
                                 tempShop.setShopName(templateSaleShopMall.getShopName());
+                                tempShop.setMallId(templateSaleShopMall.getMallMid());
+                                tempShop.setMallName(templateSaleShopMall.getMallName());
                                 shopVOs.add(tempShop);
                             }
                         }
