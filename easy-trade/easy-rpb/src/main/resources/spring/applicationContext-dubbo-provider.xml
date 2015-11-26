@@ -12,6 +12,6 @@
 	<bean id="rpbService" class="com.rongyi.rpb.service.impl.RpbServiceImpl" />
 
 	<!-- 微信批量退款定时任务 -->
-	 <dubbo:service interface="com.rongyi.rss.service.trigger.WeixinBatchRefundTrigger" version="${dubbo.version}" ref="weixinBatchRefundTrigger" />	
+	 <dubbo:service interface="com.rongyi.rss.service.trigger.WeixinBatchRefundTrigger" version="${dubbo.version}" ref="weixinBatchRefundTrigger" retries="0"/>	
 	 <bean id="weixinBatchRefundTrigger" class="com.rongyi.rpb.service.impl.WeixinBatchRefundTriggerImpl" />
 </beans>  
