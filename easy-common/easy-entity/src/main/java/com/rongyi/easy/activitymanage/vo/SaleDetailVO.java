@@ -17,6 +17,7 @@ public class SaleDetailVO implements Serializable {
     private Integer id;
     private String bannerPic;
     private String name;
+    private String activityUrl;
     private List<CommodityBuyerVO> commodityList;
 
     public Integer getId() {
@@ -51,12 +52,21 @@ public class SaleDetailVO implements Serializable {
         this.commodityList = commodityList;
     }
 
+    public String getActivityUrl() {
+        return activityUrl;
+    }
+
+    public void setActivityUrl(String activityUrl) {
+        this.activityUrl = activityUrl;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("id", id)
                 .append("bannerPic", bannerPic)
                 .append("name", name)
+                .append("activityUrl", activityUrl)
                 .append("commodityList", commodityList)
                 .toString();
     }

@@ -20,6 +20,7 @@ public class IflashDetailVO implements Serializable {
     private String subtitle;
     private Long startAt;
     private Long endAt;
+    private String activityUrl;
 
     public Integer getId() {
         return id;
@@ -77,6 +78,14 @@ public class IflashDetailVO implements Serializable {
         this.endAt = endAt;
     }
 
+    public String getActivityUrl() {
+        return activityUrl;
+    }
+
+    public void setActivityUrl(String activityUrl) {
+        this.activityUrl = activityUrl;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -87,6 +96,7 @@ public class IflashDetailVO implements Serializable {
                 .append("subtitle", subtitle)
                 .append("startAt", startAt)
                 .append("endAt", endAt)
+                .append("activityUrl", activityUrl)
                 .toString();
     }
 }
