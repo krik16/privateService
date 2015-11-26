@@ -175,13 +175,13 @@ public class ShopEntity implements Serializable{
 		this.tags = param.getTags();
 		
 		//楼层id
-		if(StringUtils.isNotBlank(param.getZone_id())){
+		/*if(StringUtils.isNotBlank(param.getZone_id())){
 			if(param.getBrand_id().matches("[\\da-zA-Z]{24}"))
 				this.zone_id = new ObjectId(param.getZone_id());
 			else{
 				throw new Exception("楼层id格式不对");
 			}
-		}
+		}*/
 		
 		if(CollectionUtils.isNotEmpty(param.getZone_ids())){
 			List<ObjectId> zone_ids=new ArrayList<ObjectId>();
@@ -197,6 +197,7 @@ public class ShopEntity implements Serializable{
 				}
 			}
 			this.zone_ids = zone_ids;
+			this.zone_id=zone_ids.get(zone_ids.size()-1);//楼层id取最后一个
 		}
 		
 		this.address = param.getAddress();
