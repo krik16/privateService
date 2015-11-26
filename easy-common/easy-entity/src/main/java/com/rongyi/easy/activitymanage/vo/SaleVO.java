@@ -75,7 +75,7 @@ public class SaleVO implements Serializable {
                                 shopVOs.add(tempShop);
                             }
                         }
-                       if(activityTemplate.getTemplateSaleShopMalls().size()>1) {
+                       if(activityTemplate.getTemplateSaleShopMalls().size()>0) {
                            MallVO tempMall = new MallVO();
                            tempMall.setMallId(activityTemplate.getTemplateSaleShopMalls().get(0).getMallMid());
                            tempMall.setMallName(activityTemplate.getTemplateSaleShopMalls().get(0).getMallName());
