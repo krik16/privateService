@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.rongyi.easy.coupon.param.CouponCommodityParam;
+import com.rongyi.easy.mcmc.CommodityCategory;
 import com.rongyi.easy.mcmc.param.SaleParam;
 
 import org.bson.types.ObjectId;
@@ -108,4 +109,16 @@ public interface CommodityService {
     
     public void updateCommodityByRegisterAtAndSoldOutAt(Date registerAt,Date soldOutAt, String status, int pagesize);
     
+
+    /***
+     * 查询商品 一二三级分类
+     * type =1  parent Id 不传   是查询商品一级分类
+     * type =2 parentId 必须传入  查询的是二级分类 在一级分类下的
+     * type =3 parentId 必须传入  查询的是 三级分类  在二级分类下的
+     * @param parentId
+     * @Author lijing
+     * @param type   1代表查询1级分类   2代表查询2级分类  3代表查询3级分类
+     * @return List<CommodityCategory>
+     */
+    public List<CommodityCategory> getCommodityCategoryByTypeAndParentId(String parentId,int type);
 }
