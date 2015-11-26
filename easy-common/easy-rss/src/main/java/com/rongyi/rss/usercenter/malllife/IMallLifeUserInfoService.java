@@ -141,7 +141,7 @@ public interface IMallLifeUserInfoService {
      * @return true 可以注册 false不能注册
      * @throws Exception
      */
-    public Boolean isExistBydevUuid(String devuuid)throws Exception;
+    public Boolean isExistBydevUuid(String devuuid,String idfa)throws Exception;
 
 
 

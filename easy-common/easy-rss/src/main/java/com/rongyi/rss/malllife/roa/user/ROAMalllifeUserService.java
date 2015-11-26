@@ -108,12 +108,12 @@ public interface ROAMalllifeUserService {
 	/**
 	 * 判断当前设备号是否可以注册
 	 * 
-	 * @param devuuid
-	 *            设备uuid
+	 * @param devuuid 设备uuid
+	 *@param      idfa
 	 * @return true 可以注册 false不能注册
 	 * @throws Exception
 	 */
-	public Boolean isExistBydevUuid(String devuuid) throws Exception;
+	public Boolean isExistBydevUuid(String devuuid,String idfa) throws Exception;
 
 /*	*//**
 	 * @param collectCommoditys
