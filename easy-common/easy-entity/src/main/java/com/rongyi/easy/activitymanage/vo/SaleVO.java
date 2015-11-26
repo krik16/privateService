@@ -34,7 +34,7 @@ public class SaleVO implements Serializable {
     private String bannerPic;
     private Integer isMallShop;
     private List<MallVO> mall;
-    private List<ShopVO> shop;
+    private List<ShopVO> shops;
 
     public SaleVO(){}
 
@@ -83,7 +83,7 @@ public class SaleVO implements Serializable {
                        }
                     }
                     this.mall=mallVOs;
-                    this.shop=shopVOs;
+                    this.shops=shopVOs;
                 }
             }
         }
@@ -208,18 +208,18 @@ public class SaleVO implements Serializable {
         this.mall = mall;
     }
 
-    public List<ShopVO> getShop() {
-        return shop;
+    public List<ShopVO> getShops() {
+        return shops;
     }
 
-    public void setShop(List<ShopVO> shop) {
-        this.shop = shop;
+    public void setShops(List<ShopVO> shops) {
+        this.shops = shops;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .append("shop", shop)
+                .append("shops", shops)
                 .append("mall", mall)
                 .append("isMallShop", isMallShop)
                 .append("bannerPic", bannerPic)
