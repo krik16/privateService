@@ -30,7 +30,7 @@ public interface ConstantUtil {
 		public static String APP_ID = propertyConfigurer.getProperty("WEIXIN.APP_ID").toString();
 		public static String KEY = propertyConfigurer.getProperty("WEIXIN.KEY").toString();
 		public static String MCH_ID = propertyConfigurer.getProperty("WEIXIN.MCH_ID").toString();
-		public static String PASSWORD = propertyConfigurer.getProperty("WEIXIN.PASSWORD").toString();
+//		public static String PASSWORD = propertyConfigurer.getProperty("WEIXIN.PASSWORD").toString();
 		public static String TRACEID = propertyConfigurer.getProperty("WEIXIN.TRACEID").toString();
 
 		

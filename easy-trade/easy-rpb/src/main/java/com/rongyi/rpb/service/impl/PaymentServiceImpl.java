@@ -288,6 +288,9 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                 boolean bool = validateWeixinModifyPrice(event.getType(), paymentEntityVO, paymentEntity);// 验证是否微信修改价格
                 if (!bool) {
                     paymentEntityVO.setPayNo(payNo);
+                    paymentEntity.setAmountMoney(paymentEntityVO.getAmountMoney());
+                    paymentEntity.setCreateTime(DateUtil.getCurrDateTime());
+                    updateByPrimaryKeySelective(paymentEntity);
                     LOGGER.info("订单号已存在，返回历史付款单号" + payNo);
                     return paymentEntityVO;
                 } else if (paymentLogInfoService.selectByOutTradeNo(payNo, null) == null) {
