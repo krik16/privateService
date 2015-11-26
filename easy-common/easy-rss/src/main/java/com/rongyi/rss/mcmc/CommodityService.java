@@ -100,7 +100,7 @@ public interface CommodityService {
     public ResponseVO searchCommodityByCouponParam(CouponCommodityParam param);
     /**
      * 处理商品上下架接口
-     * @param registerAt:上架时间  对应的输入状态应该是查找下架的商品，即为0
+     * @param registerAt:上架时间  对应的输入状态应该是查找待下架的商品，即为3
      * @param soldOutAt:下架时间，对应的输入的状态是上架的商品，即为1
      * @param status:商品的状态
      * @param pagesize：分页的条数
