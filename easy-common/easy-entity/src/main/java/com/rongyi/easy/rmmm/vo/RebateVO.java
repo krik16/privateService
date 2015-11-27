@@ -27,6 +27,8 @@ public class RebateVO implements Serializable{
 	
 	private String validEndTime;//有效期结束时间
 	
+	private String title;//抵扣券名称
+	
 	private String platformRebateId;//抵扣券id
 	
 	private String platformRebateCode;//抵扣券券码
@@ -42,6 +44,14 @@ public class RebateVO implements Serializable{
 	private List<CommodityBuyerVO> commodityList;//可使用商品列表
 	
 	private List<RebateCouponVO> couponList;//可使用代金券列表
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
 	public Integer getApplyScope() {
 		return applyScope;
@@ -142,10 +152,12 @@ public class RebateVO implements Serializable{
 	@Override
 	public String toString() {
 		return "RebateVO [originalPrice=" + originalPrice + ", currentPrice=" + currentPrice + ", validStartTime="
-				+ validStartTime + ", validEndTime=" + validEndTime + ", platformRebateId=" + platformRebateId
-				+ ", platformRebateCode=" + platformRebateCode + ", useDescription=" + useDescription + ", status=" + status
-				+ ", desc=" + desc + ", applyScope=" + applyScope + ", commodityList=" + commodityList
+				+ validStartTime + ", validEndTime=" + validEndTime + ", title=" + title + ", platformRebateId="
+				+ platformRebateId + ", platformRebateCode=" + platformRebateCode + ", useDescription=" + useDescription
+				+ ", status=" + status + ", desc=" + desc + ", applyScope=" + applyScope + ", commodityList=" + commodityList
 				+ ", couponList=" + couponList + "]";
 	}
+
+	
 
 }
