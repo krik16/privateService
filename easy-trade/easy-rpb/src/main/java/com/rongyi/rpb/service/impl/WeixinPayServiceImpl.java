@@ -229,7 +229,12 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 
     @Override
     public void closeOrder(String payNo) {
-        weixinPayUnit.closeOrder(payNo);
+        try {
+            weixinPayUnit.closeOrder(payNo);
+            paymentService.deleteByPayNo(payNo);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
