@@ -102,6 +102,8 @@ public class TradeOrder implements Serializable {
 
     private Byte hbType;
 
+    private String idfa;
+
     /**
      * 元
      *
@@ -517,5 +519,13 @@ public class TradeOrder implements Serializable {
 
     public void setHbType(Byte hbType) {
         this.hbType = hbType;
+    }
+
+    public String getIdfa() {
+        return idfa;
+    }
+
+    public void setIdfa(String idfa) {
+        this.idfa = idfa;
     }
 }

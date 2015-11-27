@@ -111,6 +111,12 @@ public class TradeOrderCreateParam implements Serializable {
     private Byte hbType;
 
     /**
+     * 广告标志
+     */
+    private String idfa;
+
+
+    /**
      * start
      * 以下字段是内部处理流程时使用，非外部传入
      * 金额字段均为分
@@ -407,6 +413,14 @@ public class TradeOrderCreateParam implements Serializable {
 
     public void setRebateDiscount(Double rebateDiscount) {
         this.rebateDiscount = rebateDiscount;
+    }
+
+    public String getIdfa() {
+        return idfa;
+    }
+
+    public void setIdfa(String idfa) {
+        this.idfa = idfa;
     }
 
     @Override
