@@ -63,10 +63,7 @@ public class OrderListParam implements Serializable {
 
 	@Override
 	public String toString() {
-		return "OrderListParam{" +
-				"couponAmount=" + couponAmount +
-				", unitPrice=" + unitPrice +
-				", num=" + num +
-				'}';
+		return "OrderListParam [couponAmount=" + couponAmount + ", unitPrice=" + unitPrice + ", num=" + num
+				+ ", platformRebateAmount=" + platformRebateAmount + ", couponId=" + couponId + "]";
 	}
 }
