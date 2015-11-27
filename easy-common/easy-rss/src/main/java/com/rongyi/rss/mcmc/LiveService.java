@@ -102,9 +102,10 @@ public interface LiveService {
 	 * @param endTime 结束时间
 	 * @param page 页数
 	 * @param pageSize 页大小
+	 * @param type 0表示直播开始时间 1表示直播结束时间
 	 * @return 带List&lt;LiveVO&gt;的ResponseVO
 	 */
-	ResponseVO searchFELiveList(String liveName,String bullId,String bullNickName,Integer status,Long beginTime,Long endTime,Integer page,Integer pageSize);
+	ResponseVO searchFELiveList(String liveName,String bullId,String bullNickName,Integer status,Integer type,Long beginTime,Long endTime,Integer page,Integer pageSize);
     
 	/**
 	 * FE端通过直播id获取直播
