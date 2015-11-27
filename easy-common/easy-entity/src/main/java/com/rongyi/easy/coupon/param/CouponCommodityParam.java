@@ -3,6 +3,7 @@ package com.rongyi.easy.coupon.param;
 import com.rongyi.core.constant.Constants;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Description:红包关联商品，商品查询参数
@@ -19,6 +20,7 @@ public class CouponCommodityParam implements Serializable{
     private String shopId;
     private Integer pageSize;
     private Integer currentPage;
+    private List<String> shopMids;
 
     public Integer getPageSize() {
         return pageSize==null? Constants.CouponPage.PAGE_SIZE:pageSize;
@@ -74,6 +76,14 @@ public class CouponCommodityParam implements Serializable{
 
     public void setShopId(String shopId) {
         this.shopId = shopId;
+    }
+
+    public List<String> getShopMids() {
+        return shopMids;
+    }
+
+    public void setShopMids(List<String> shopMids) {
+        this.shopMids = shopMids;
     }
 
     @Override
