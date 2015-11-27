@@ -47,7 +47,8 @@ public class SessionUserInfo implements Serializable{
     private String logo = "../images/logo.png";  //logo图片地址
     
     private String theCompanyName;  //所属集团 or 商场 or 品牌名称
-
+    
+    private String address ;  //用户所属公司地址
 
 
 	public String getMallMid() {
@@ -257,6 +258,14 @@ public class SessionUserInfo implements Serializable{
 
 	public void setTheCompanyName(String theCompanyName) {
 		this.theCompanyName = theCompanyName;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 }

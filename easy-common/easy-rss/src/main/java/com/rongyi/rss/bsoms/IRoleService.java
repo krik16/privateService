@@ -19,7 +19,7 @@ public interface IRoleService {
 	 * @param id
 	 * @return
 	 */
-	MerchantRoleVO getRoleVOById(Integer id);
+	List<MerchantRoleVO> getRoleVOById(Integer id);
 	/**
 	 * 通过角色id获取改角色对应的权限
 	 * @param id
@@ -56,4 +56,5 @@ public interface IRoleService {
 	 * @throws Exception
 	 */
 	List<Object> getRoleScope(Integer roleIdentity,List<String> relationMids) throws Exception;
+	
 }
