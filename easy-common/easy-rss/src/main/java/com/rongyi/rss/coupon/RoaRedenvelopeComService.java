@@ -6,6 +6,7 @@ import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.param.RedenvelopeParam;
 import com.rongyi.easy.coupon.param.VoucherCouponParam;
 import com.rongyi.easy.coupon.vo.RedenvelopVO;
+import com.rongyi.easy.coupon.vo.UserVO;
 import com.rongyi.easy.coupon.vo.operation.CouponCountVO;
 
 import java.util.List;
@@ -49,7 +50,7 @@ public interface RoaRedenvelopeComService {
 	 * @param id
 	 * @return
 	 */
-	boolean remove(String id) throws Exception;
+	boolean remove(String id,UserVO userVO) throws Exception;
 
 	/**
 	 * 返回所有数据

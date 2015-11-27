@@ -1,9 +1,12 @@
 package com.rongyi.rss.mcmc;
 
+import java.util.Date;
 import java.util.List;
 
 import com.rongyi.easy.coupon.param.CouponCommodityParam;
+import com.rongyi.easy.mcmc.CommodityCategory;
 import com.rongyi.easy.mcmc.param.SaleParam;
+
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
@@ -96,4 +99,26 @@ public interface CommodityService {
      * @auther:yuanbo
      */
     public ResponseVO searchCommodityByCouponParam(CouponCommodityParam param);
+    /**
+     * 处理商品上下架接口
+     * @param registerAt:上架时间  对应的输入状态应该是查找待下架的商品，即为3
+     * @param soldOutAt:下架时间，对应的输入的状态是上架的商品，即为1
+     * @param status:商品的状态
+     * @param pagesize：分页的条数
+     */
+    
+    public void updateCommodityByRegisterAtAndSoldOutAt(Date registerAt,Date soldOutAt, String status, int pagesize);
+    
+
+    /***
+     * 查询商品 一二三级分类
+     * type =1  parent Id 不传   是查询商品一级分类
+     * type =2 parentId 必须传入  查询的是二级分类 在一级分类下的
+     * type =3 parentId 必须传入  查询的是 三级分类  在二级分类下的
+     * @param parentId
+     * @Author lijing
+     * @param type   1代表查询1级分类   2代表查询2级分类  3代表查询3级分类
+     * @return List<CommodityCategory>
+     */
+    public List<CommodityCategory> getCommodityCategoryByTypeAndParentId(String parentId,int type);
 }

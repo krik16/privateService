@@ -27,6 +27,8 @@ public class RebateVO implements Serializable{
 	
 	private String validEndTime;//有效期结束时间
 	
+	private String title;//抵扣券名称
+	
 	private String platformRebateId;//抵扣券id
 	
 	private String platformRebateCode;//抵扣券券码
@@ -35,13 +37,21 @@ public class RebateVO implements Serializable{
 	
 	private Integer status;//状态 ：0未使用 1已使用 2 已过期
 	
-	private String description;//未满足使用条件
+	private String desc;//未满足使用条件
 	
 	private Integer applyScope;// 0都适用 1商品适用 2代金券适用
 	
 	private List<CommodityBuyerVO> commodityList;//可使用商品列表
 	
 	private List<RebateCouponVO> couponList;//可使用代金券列表
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
 	public Integer getApplyScope() {
 		return applyScope;
@@ -115,12 +125,12 @@ public class RebateVO implements Serializable{
 		this.status = status;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getDesc() {
+		return desc;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 
 	public List<CommodityBuyerVO> getCommodityList() {
@@ -142,10 +152,12 @@ public class RebateVO implements Serializable{
 	@Override
 	public String toString() {
 		return "RebateVO [originalPrice=" + originalPrice + ", currentPrice=" + currentPrice + ", validStartTime="
-				+ validStartTime + ", validEndTime=" + validEndTime + ", platformRebateId=" + platformRebateId
-				+ ", platformRebateCode=" + platformRebateCode + ", useDescription=" + useDescription + ", status=" + status
-				+ ", description=" + description + ", applyScope=" + applyScope + ", commodityList=" + commodityList
+				+ validStartTime + ", validEndTime=" + validEndTime + ", title=" + title + ", platformRebateId="
+				+ platformRebateId + ", platformRebateCode=" + platformRebateCode + ", useDescription=" + useDescription
+				+ ", status=" + status + ", desc=" + desc + ", applyScope=" + applyScope + ", commodityList=" + commodityList
 				+ ", couponList=" + couponList + "]";
 	}
+
+	
 
 }
