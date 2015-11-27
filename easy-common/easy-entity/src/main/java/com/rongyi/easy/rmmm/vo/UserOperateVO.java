@@ -20,6 +20,13 @@ public class UserOperateVO implements Serializable{
 	private Integer newHongBao = 0;	//上次操作我的红包之后领取的红包数量
 	private Integer newRebate = 0;//上次操作我的抵扣券之后领取的抵扣券数量
 	private Integer newTempNum = 0;// 系统消息数量
+	private Integer myIntegral = 0;//我的容颜值
+	public Integer getMyIntegral() {
+		return myIntegral;
+	}
+	public void setMyIntegral(Integer myIntegral) {
+		this.myIntegral = myIntegral;
+	}
 	public Integer getNewCoupon() {
 		return newCoupon;
 	}
