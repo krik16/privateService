@@ -143,5 +143,14 @@ public interface RoaRedenvelopeComService {
 			String reason);
 	
 	PagingVO<RedenvelopVO> queryRedenvelopByPage(RedenvelopeParam param);
+
+	/**
+	 * 下架
+	 * @param ids
+	 * @param reason
+	 * @return
+	 * @throws Exception
+	 */
+	boolean submitOffStock(List<String> ids, String reason) throws Exception;
 	
 }

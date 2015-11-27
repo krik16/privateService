@@ -586,4 +586,45 @@ public class RedenvelopeParam implements Serializable {
 		this.isRelatedAll = isRelatedAll;
 	}
 
+	@Override
+	public String toString() {
+		return "RedenvelopeParam [id=" + id + ", ids=" + ids + ", name=" + name
+				+ ", type=" + type + ", status=" + status + ", applyGoods="
+				+ applyGoods + ", relatedType=" + relatedType
+				+ ", applyObject=" + applyObject + ", preferentialType="
+				+ preferentialType + ", publishStartAt=" + publishStartAt
+				+ ", discount=" + discount + ", publishEndAt=" + publishEndAt
+				+ ", validStartAt=" + validStartAt + ", validEndAt="
+				+ validEndAt + ", validDays=" + validDays + ", limitDesc="
+				+ limitDesc + ", remark=" + remark + ", usageDesc=" + usageDesc
+				+ ", synTarget=" + synTarget + ", count=" + count
+				+ ", origPrice=" + origPrice + ", totalCount=" + totalCount
+				+ ", couponIds=" + couponIds + ", reason=" + reason
+				+ ", relatedId=" + relatedId + ", lv1Id=" + lv1Id + ", lv2Id="
+				+ lv2Id + ", brandId=" + brandId + ", cateId=" + cateId
+				+ ", brandCname=" + brandCname + ", brandEname=" + brandEname
+				+ ", mallId=" + mallId + ", mallIds=" + mallIds + ", flag="
+				+ flag + ", zoneId=" + zoneId + ", zoneType=" + zoneType
+				+ ", currentPage=" + currentPage + ", pageSize=" + pageSize
+				+ ", commodityId=" + commodityId + ", commodityName="
+				+ commodityName + ", shopId=" + shopId + ", code=" + code
+				+ ", orderNo=" + orderNo + ", userPhone=" + userPhone
+				+ ", receiveChannel=" + receiveChannel + ", receiveTime="
+				+ receiveTime + ", listCouponBrand=" + listCouponBrand
+				+ ", brandIds=" + brandIds + ", listCouponMall="
+				+ listCouponMall + ", listCouponShop=" + listCouponShop
+				+ ", listVoucherCouponVO=" + listVoucherCouponVO
+				+ ", listCouponCategory=" + listCouponCategory
+				+ ", listCouponCommodity=" + listCouponCommodity
+				+ ", couponCommodityCategories=" + couponCommodityCategories
+				+ ", isRelatedAll=" + isRelatedAll + ", orderByClause="
+				+ orderByClause + ", offset=" + offset + ", unpassReasons="
+				+ unpassReasons + ", publishChannel=" + publishChannel
+				+ ", dateType=" + dateType + ", startDate=" + startDate
+				+ ", endDate=" + endDate + ", couponType=" + couponType
+				+ ", displayRegion=" + displayRegion + "]";
+	}
+	
+	
+
 }
