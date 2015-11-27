@@ -85,7 +85,7 @@ public class RedenvelopeParam implements Serializable {
 	private List<CouponCommodityCategory> couponCommodityCategories;//商品分类
 	private boolean isRelatedAll;//是否关联品牌、或商场下所有店铺 0否 1是
 	private String orderByClause;
-	private String offset;
+	private Integer offset;
 	private String unpassReasons;
 	private Integer publishChannel;
 	private Integer dateType;//时间类型：发布开始时间[0] 发布结束时间[1] 有效期开始时间[2] 有效期结束时间[3]
@@ -109,11 +109,12 @@ public class RedenvelopeParam implements Serializable {
 		this.unpassReasons = unpassReasons;
 	}
 
-	public String getOffset() {
+	public Integer getOffset() {
+		offset = (this.currentPage -1) * this.pageSize;
 		return offset;
 	}
 
-	public void setOffset(String offset) {
+	public void setOffset(Integer offset) {
 		this.offset = offset;
 	}
 
