@@ -29,6 +29,7 @@ public class FlashPurchaseContentVO  implements Serializable{
 	 * 详情url
 	 */
 	private String activityUrl;
+	private String name;
 	/**
 	 * @return the id
 	 */
@@ -64,5 +65,30 @@ public class FlashPurchaseContentVO  implements Serializable{
 	 */
 	public void setActivityUrl(String activityUrl) {
 		this.activityUrl = activityUrl;
+	}
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	/**(非 Javadoc)
+	* @Title: toString 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param @return    设定文件 
+	* @author shaozhou 
+	* @date 2015年11月27日 下午4:21:12
+	* @throws 
+	*/
+	@Override
+	public String toString() {
+		return "FlashPurchaseContentVO [id=" + id + ", bannerPic=" + bannerPic + ", activityUrl=" + activityUrl
+				+ ", name=" + name + "]";
 	}
 }
