@@ -258,7 +258,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                 bodyMap = webPageAlipayService.getToken(paymentEntityVO);
             } else if (PaymentEventType.WEIXIN_PAY.equals(event.getType())) {// 微信支付
                 LOGGER.info("微信支付");
-                bodyMap = weixinPayService.getAppWeXinSign(paymentEntityVO.getPayNo(), Double.valueOf(paymentEntityVO.getAmountMoney().toString()), paymentEntityVO.getTimeStart(), paymentEntityVO.getTimeExpire());
+                bodyMap = weixinPayService.getAppWeXinSign(paymentEntityVO.getPayNo(), Double.valueOf(paymentEntityVO.getAmountMoney().toString()), paymentEntityVO.getTimeStart(), paymentEntityVO.getTimeExpire(),paymentEntityVO.getOrderType());
             } else if (PaymentEventType.UNION_PAY.equals(event.getType())) {// 银联支付
                 LOGGER.info("银联支付");
                 bodyMap.put("unionOrderNum", ConstantEnum.UNION_COUPON_PREFIX.getValueStr() + paymentEntityVO.getPayNo());

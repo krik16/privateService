@@ -38,7 +38,7 @@ public class WebPageAlipayServiceImpl extends BaseServiceImpl implements WebPage
 	public Map<String, Object> getToken(PaymentEntityVO paymentEntityVO) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		//支付失效时间
-		String itBPay= timeExpireUnit.aliPayTimeExpire(paymentEntityVO.getTimeStart(), paymentEntityVO.getTimeExpire());
+		String itBPay= timeExpireUnit.aliPayTimeExpire(paymentEntityVO.getTimeStart(), paymentEntityVO.getTimeExpire(),paymentEntityVO.getOrderType());
 
 		// 把请求参数打包成数组
 		Map<String, String> sParaTempToken = new HashMap<String, String>();

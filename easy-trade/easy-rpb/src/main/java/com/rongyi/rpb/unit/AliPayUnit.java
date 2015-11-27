@@ -52,7 +52,7 @@ public class AliPayUnit {
                 throw new AliPayException(ConstantEnum.EXCEPTION_PARAM_NULL.getCodeStr(), ConstantEnum.EXCEPTION_PARAM_NULL.getValueStr());
             }
             //获取支付失效时长
-            String itBPay = timeExpireUnit.aliPayTimeExpire(paymentEntityVO.getTimeStart(), paymentEntityVO.getTimeExpire());
+            String itBPay = timeExpireUnit.aliPayTimeExpire(paymentEntityVO.getTimeStart(), paymentEntityVO.getTimeExpire(),paymentEntityVO.getOrderType());
             //获取需加密的签名串
             String signContent = assembleSign(paymentEntityVO.getPayNo(), title, totalPrice, itBPay);
             String rsaSign = RSA.sign(signContent, ConstantUtil.PayZhiFuBao.PRIVATE_KEY, ConstantUtil.PayZhiFuBao.INPUT_CHARSET);

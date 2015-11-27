@@ -29,7 +29,7 @@ public interface WeixinPayService {
 	 * @param timeExpire
 	 * @return
 	 */
-	public abstract Map<String, Object> getAppWeXinSign(String payNo, double totalFee,String timeStart,String timeExpire);
+	public abstract Map<String, Object> getAppWeXinSign(String payNo, double totalFee,String timeStart,String timeExpire,Integer orderType);
 
 	/**
 	 * 验证是否是微信退款，是则返回true

@@ -89,11 +89,11 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
     private static final Logger LOGGER = LoggerFactory.getLogger(WeixinPayServiceImpl.class);
 
     @Override
-    public Map<String, Object> getAppWeXinSign(String payNo, double total_fee, String timeStart, String timeExpire) {
+    public Map<String, Object> getAppWeXinSign(String payNo, double total_fee, String timeStart, String timeExpire,Integer orderType) {
         Map<String, Object> map = new HashMap<String, Object>();
         try {
             BigDecimal totalFee = new BigDecimal(total_fee + "").multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
-            timeExpire = timeExpireUnit.weixinPayTimeExpire(timeStart, timeExpire);
+            timeExpire = timeExpireUnit.weixinPayTimeExpire(timeStart, timeExpire,orderType);
             map = weixinPayUnit.getWeXinPaySign(payNo, totalFee.intValue(), "容易网商品", timeStart, timeExpire);
             map.put("code", 0);
             map.put("totlePrice", total_fee);

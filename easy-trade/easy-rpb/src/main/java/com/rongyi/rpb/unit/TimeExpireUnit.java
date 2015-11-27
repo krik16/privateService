@@ -1,6 +1,8 @@
 package com.rongyi.rpb.unit;
 
 import com.rongyi.core.common.util.DateUtil;
+import com.rongyi.rpb.constants.ConstantEnum;
+import com.rongyi.rpb.constants.Constants;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,9 +26,12 @@ public class TimeExpireUnit {
      * @Author: 柯军
      **/
 
-    public String aliPayTimeExpire(String timeStart, String timeExpire) {
-        //默认支付失效时间是30分钟
-        String itBPay = "30m";
+    public String aliPayTimeExpire(String timeStart, String timeExpire, int orderType) {
+        //默认支付失效时间分钟
+        String itBPay = ConstantEnum.ALI_PAY_TIME_EXPIRE_GOODS.getCodeStr();
+        if (Constants.ORDER_TYPE.ORDER_TYPE_1 == orderType) {
+            itBPay = ConstantEnum.ALI_PAY_TIME_EXPIRE_COUPONS.getCodeStr();
+        }
         try {
             if (StringUtils.isEmpty(timeStart) || StringUtils.isEmpty(timeExpire)) {
                 LOGGER.info("支付宝支付失效时间参数不合法,timeStart={},timeExpire={}", timeStart, timeExpire);
@@ -38,7 +43,7 @@ public class TimeExpireUnit {
                 itBPay = String.valueOf(DateUtil.dateDiff(DateUtil.stringToDate(timeStart), DateUtil.stringToDate(timeExpire)));
             }
         } catch (Exception e) {
-            LOGGER.warn("支付宝支付失效时间参数不合法,忽略，返回默认值,timeStart={},timeExpire={},exception={}", timeStart, timeExpire,e.getMessage());
+            LOGGER.warn("支付宝支付失效时间参数不合法,忽略，返回默认值,timeStart={},timeExpire={},exception={}", timeStart, timeExpire, e.getMessage());
         }
         return itBPay;
     }
@@ -49,25 +54,30 @@ public class TimeExpireUnit {
      * @Author: 柯军
      **/
 
-    public String weixinPayTimeExpire(String timeStart, String timeExpire) {
+    public String weixinPayTimeExpire(String timeStart, String timeExpire, int orderType) {
+        //默认支付失效时间分钟
+        int itBPay = ConstantEnum.WEIXIN_PAY_TIME_EXPIRE_GOODS.getCodeInt();
+        if (Constants.ORDER_TYPE.ORDER_TYPE_1 == orderType) {
+            itBPay = ConstantEnum.WEIXIN_PAY_TIME_EXPIRE_COUPONS.getCodeInt();
+        }
 
         try {
             if (StringUtils.isEmpty(timeStart) || StringUtils.isEmpty(timeExpire)) {
                 LOGGER.info("微信支付失效时间参数不合法,默认给予失效时间为30分钟，timeStart={},timeExpire={}", timeStart, timeExpire);
                 timeStart = DateUtil.getCurrDateTime().toString();
-                timeExpire = DateUtil.dateToString(DateUtil.addTime(DateUtil.stringToDate(timeStart), 30, Calendar.MINUTE), "yyyyMMddHHmmss");
+                timeExpire = DateUtil.dateToString(DateUtil.addTime(DateUtil.stringToDate(timeStart), itBPay, Calendar.MINUTE), "yyyyMMddHHmmss");
             } else if (DateUtil.dateDiff(DateUtil.stringToDate(timeStart), DateUtil.stringToDate(timeExpire)) < 5) {
                 LOGGER.info("微信支付失效时间间隔小于5分钟，默认给予失效时间为5分钟，timeStart={},timeExpire={}", timeStart, timeExpire);
                 timeExpire = DateUtil.dateToString(DateUtil.addTime(DateUtil.stringToDate(timeStart), 5, Calendar.MINUTE), "yyyyMMddHHmmss");
             } else if (DateUtil.dateDiff(DateUtil.stringToDate(timeStart), DateUtil.stringToDate(timeExpire)) > (15 * 24 * 60)) {
                 LOGGER.info("微信支付失效时间大于15天，属于无效条件，默认给予失效时间为30分钟，timeStart={},timeExpire={}", timeStart, timeExpire);
-                timeExpire = DateUtil.dateToString(DateUtil.addTime(DateUtil.stringToDate(timeStart), 30, Calendar.MINUTE), "yyyyMMddHHmmss");
+                timeExpire = DateUtil.dateToString(DateUtil.addTime(DateUtil.stringToDate(timeStart), itBPay, Calendar.MINUTE), "yyyyMMddHHmmss");
             }
-            return  DateUtil.dateToString(DateUtil.stringToDate(timeExpire),"yyyyMMddHHmmss");
+            return DateUtil.dateToString(DateUtil.stringToDate(timeExpire), "yyyyMMddHHmmss");
         } catch (Exception e) {
             LOGGER.warn("微信支付失效时间参数不合法,忽略，返回默认值,timeStart={},timeExpire={},exception={}", timeStart, timeExpire, e.getMessage());
         }
         //默认支付失效时间是30分钟
-        return DateUtil.dateToString(DateUtil.addTime(DateUtil.getCurrDateTime(), 30, Calendar.MINUTE), "yyyyMMddHHmmss");
+        return DateUtil.dateToString(DateUtil.addTime(DateUtil.getCurrDateTime(), itBPay, Calendar.MINUTE), "yyyyMMddHHmmss");
     }
 }
