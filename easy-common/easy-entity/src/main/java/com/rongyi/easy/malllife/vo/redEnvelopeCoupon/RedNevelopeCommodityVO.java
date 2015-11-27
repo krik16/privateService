@@ -20,6 +20,7 @@ public class RedNevelopeCommodityVO implements Serializable{
 	private String commodityOPriceMin;//我是最低原价”,
 	private String commodityCPriceMax;//我是最高现价”,
 	private String commodityCPriceMin;//我是最低现价”,
+	private String commodityOPOfLCP;//现价最低的规格对应的原价
 	private String commodityBrandName;
 	private int commodityType;//0 导购  1买手
 	private List<String> commodityPicList;
@@ -77,6 +78,12 @@ public class RedNevelopeCommodityVO implements Serializable{
 	public void setCommodityPicList(List<String> commodityPicList) {
 		this.commodityPicList = commodityPicList;
 	}
+	public String getCommodityOPOfLCP() {
+		return commodityOPOfLCP;
+	}
+	public void setCommodityOPOfLCP(String commodityOPOfLCP) {
+		this.commodityOPOfLCP = commodityOPOfLCP;
+	}
 	@Override
 	public String toString() {
 		return "RedNevelopeCommodityVO [commodityId=" + commodityId
@@ -84,8 +91,10 @@ public class RedNevelopeCommodityVO implements Serializable{
 				+ commodityOPriceMax + ", commodityOPriceMin="
 				+ commodityOPriceMin + ", commodityCPriceMax="
 				+ commodityCPriceMax + ", commodityCPriceMin="
-				+ commodityCPriceMin + ", commodityBrandName="
-				+ commodityBrandName + ", commodityType=" + commodityType
-				+ ", commodityPicList=" + commodityPicList + "]";
+				+ commodityCPriceMin + ", commodityOPOfLCP=" + commodityOPOfLCP
+				+ ", commodityBrandName=" + commodityBrandName
+				+ ", commodityType=" + commodityType + ", commodityPicList="
+				+ commodityPicList + "]";
 	}
+	
 }
