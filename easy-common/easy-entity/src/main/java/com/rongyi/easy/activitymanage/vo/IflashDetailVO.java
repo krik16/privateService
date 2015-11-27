@@ -19,6 +19,7 @@ public class IflashDetailVO implements Serializable {
     private List<CommodityBuyerVO> commodityList;
     private String subtitle;
     private Long startAt;
+    private Long nowAt;
     private Long endAt;
     private String activityUrl;
 
@@ -86,6 +87,14 @@ public class IflashDetailVO implements Serializable {
         this.activityUrl = activityUrl;
     }
 
+    public Long getNowAt() {
+        return nowAt;
+    }
+
+    public void setNowAt(Long nowAt) {
+        this.nowAt = nowAt;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -95,6 +104,7 @@ public class IflashDetailVO implements Serializable {
                 .append("commodityList", commodityList)
                 .append("subtitle", subtitle)
                 .append("startAt", startAt)
+                .append("nowAt", nowAt)
                 .append("endAt", endAt)
                 .append("activityUrl", activityUrl)
                 .toString();
