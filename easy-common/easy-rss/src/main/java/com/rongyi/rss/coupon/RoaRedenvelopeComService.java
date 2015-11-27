@@ -2,6 +2,7 @@ package com.rongyi.rss.coupon;
 
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
+import com.rongyi.core.framework.exception.RYServiceException;
 import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.param.RedenvelopeParam;
 import com.rongyi.easy.coupon.param.VoucherCouponParam;
@@ -50,7 +51,7 @@ public interface RoaRedenvelopeComService {
 	 * @param id
 	 * @return
 	 */
-	boolean remove(String id,UserVO userVO) throws Exception;
+	boolean remove(String id,UserVO userVO) throws RYServiceException;
 
 	/**
 	 * 返回所有数据
