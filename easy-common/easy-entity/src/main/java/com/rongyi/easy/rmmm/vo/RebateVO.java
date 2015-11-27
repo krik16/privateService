@@ -35,7 +35,7 @@ public class RebateVO implements Serializable{
 	
 	private Integer status;//状态 ：0未使用 1已使用 2 已过期
 	
-	private String description;//未满足使用条件
+	private String desc;//未满足使用条件
 	
 	private Integer applyScope;// 0都适用 1商品适用 2代金券适用
 	
@@ -115,12 +115,12 @@ public class RebateVO implements Serializable{
 		this.status = status;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getDesc() {
+		return desc;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 
 	public List<CommodityBuyerVO> getCommodityList() {
@@ -144,7 +144,7 @@ public class RebateVO implements Serializable{
 		return "RebateVO [originalPrice=" + originalPrice + ", currentPrice=" + currentPrice + ", validStartTime="
 				+ validStartTime + ", validEndTime=" + validEndTime + ", platformRebateId=" + platformRebateId
 				+ ", platformRebateCode=" + platformRebateCode + ", useDescription=" + useDescription + ", status=" + status
-				+ ", description=" + description + ", applyScope=" + applyScope + ", commodityList=" + commodityList
+				+ ", desc=" + desc + ", applyScope=" + applyScope + ", commodityList=" + commodityList
 				+ ", couponList=" + couponList + "]";
 	}
 
