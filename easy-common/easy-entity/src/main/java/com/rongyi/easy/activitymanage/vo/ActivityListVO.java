@@ -18,6 +18,8 @@ public class ActivityListVO implements Serializable{
     //商圈名称
     private String businessDistrictName;
 
+    private String name;
+
     //商圈Id
     private String businessDistrictId;
 
@@ -28,6 +30,7 @@ public class ActivityListVO implements Serializable{
         if(templateListVO !=null){
             this.id=templateListVO.getId();
             this.activityUrl=templateListVO.getActivityUrl();
+            this.name=templateListVO.getName();
         }
     }
     public Integer getId() {
@@ -62,12 +65,21 @@ public class ActivityListVO implements Serializable{
         this.businessDistrictId = businessDistrictId;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("id", id)
                 .append("activityUrl", activityUrl)
                 .append("businessDistrictName", businessDistrictName)
+                .append("name", name)
                 .append("businessDistrictId", businessDistrictId)
                 .toString();
     }
