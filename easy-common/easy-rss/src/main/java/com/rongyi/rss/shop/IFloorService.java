@@ -31,4 +31,6 @@ public interface IFloorService {
 	 * @return
 	 */
 	public List<String> saveFloors(List<FloorEntity> entities);
+	
+	public List<FloorEntity> findFloorByBuildingId(String buildingId);
 }

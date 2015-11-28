@@ -17,8 +17,8 @@ public class ShopVO implements Serializable {
 	private String id;
 	
 	private String name;// 店铺名称
-	private Integer shopNature;// 店铺性质 0商场店铺 1商场专柜 2街边店
-	private String shopType;// 店铺类型 0普通店 1免税店 2专柜 3折扣店 4旗舰店
+	private Integer shopNature;// 店铺类型 0普通店 1免税店 2专柜 3折扣店 4旗舰店
+	private String shopType;// 店铺性质 0商场店铺 1商场专柜 2街边店 
 	private String number;// 店铺编号
 	private BrandVO brand;// 主品牌
 	private List<BrandVO> brands;// 兼营品牌
