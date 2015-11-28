@@ -47,8 +47,8 @@ public class OrderNoGenServiceImpl implements OrderNoGenService {
 		SimpleDateFormat formatter = new SimpleDateFormat("MMdd");
 		String mmdd = formatter.format(date);
 //		formatter = new SimpleDateFormat("HHmm");
-		//单号生成改用分秒，防止重复
-		formatter = new SimpleDateFormat("mmss");
+		//单号生成改用时分秒，防止重复
+		formatter = new SimpleDateFormat("HHmmss");
 		String hhmm = formatter.format(date);
 		sb.append(mmdd);
 		PropertyConfigurer propertyConfigurer = (PropertyConfigurer) SpringContextUtil.getBean("propertyConfigurer");
