@@ -15,6 +15,7 @@ public class CommoditySpecVO implements  Serializable {
 	private String specId;
 	
 	private String specStock;
+	private String specTotalStock;
 	private String specOriginalPrice;
 	private String specCurrentPrice;
 	private List<CommoditySpecColumnVO> specColumnValues;
@@ -57,5 +58,11 @@ public class CommoditySpecVO implements  Serializable {
 	public void setSpecCurrentPrice(String specCurrentPrice) {
 		this.specCurrentPrice = specCurrentPrice;
 	}
-
+	public String getSpecTotalStock() {
+		return specTotalStock;
+	}
+	public void setSpecTotalStock(String specTotalStock) {
+		this.specTotalStock = specTotalStock;
+	}
+	
 }

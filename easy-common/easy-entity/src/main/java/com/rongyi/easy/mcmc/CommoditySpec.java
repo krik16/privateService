@@ -29,6 +29,7 @@ public class CommoditySpec implements  Serializable {
 	private Date updateAt;
 	private String updateBy;
 	private String pictureUrl;//规格图片
+	private String total;//规格商品总数
 	public List<ObjectId> getColumnIds() {
 		return columnIds;
 	}
@@ -140,6 +141,13 @@ public class CommoditySpec implements  Serializable {
 			return false;
 		return true;
 	}
+	public String getTotal() {
+		return total;
+	}
+	public void setTotal(String total) {
+		this.total = total;
+	}
+	
 	
 	
 }

@@ -3,6 +3,7 @@ package com.rongyi.rss.shop;
 import java.util.List;
 
 import com.rongyi.easy.entity.BrandEntity;
+import com.rongyi.easy.rmmm.entity.BrandInfoEntity;
 
 public interface IBrandService {
 	/**
@@ -26,4 +27,15 @@ public interface IBrandService {
 	 * @return
 	 */
 	public BrandEntity searchBrandById(String id);
+	
+	/**
+	 *
+	* @Title: selectBrandByMongoId 
+	* @Description: 查询品牌的mysql表信息
+	* @param @param brandMid
+	* @param @return    设定文件 
+	* @return BrandInfoEntity    返回类型 
+	* @throws
+	 */
+	public BrandInfoEntity selectBrandByMongoId(String brandMid);
 }

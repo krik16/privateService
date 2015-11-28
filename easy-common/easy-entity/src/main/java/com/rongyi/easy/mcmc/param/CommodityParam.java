@@ -69,6 +69,8 @@ public class CommodityParam {
 	
 	private Integer stock;//总库存
 	
+	private int hasSpec;//0表示无规格 1表示有规格
+	
 	public String getId() {
 		return id;
 	}
@@ -254,4 +256,14 @@ public class CommodityParam {
 	public void setType(Integer type) {
 		this.type = type;
 	}
+
+	public int getHasSpec() {
+		return hasSpec;
+	}
+
+	public void setHasSpec(int hasSpec) {
+		this.hasSpec = hasSpec;
+	}
+	
+	
 }

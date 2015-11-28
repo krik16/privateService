@@ -29,7 +29,8 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private Date updateAt;//数据更新日期
 	private Double originalPrice;//商品原价
 	private Double currentPrice;//商品现价
-	private Integer update_by;//修改人
+	private Integer updateBy;//修改人
+	private Integer createBy;//创建者
 	
 	private List<String> picList;//商品图片列表
 	
@@ -50,7 +51,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private String brandMid;//品牌id
 	private String filialeMid;//分公司id
 	private String shopMid;//店铺id
-	
+	private String brandId;//品牌mysqlId
 	public ObjectId getId() {
 		return id;
 	}
@@ -124,12 +125,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.currentPrice = currentPrice;
 	}
 	
-	public Integer getUpdate_by() {
-		return update_by;
-	}
-	public void setUpdate_by(Integer update_by) {
-		this.update_by = update_by;
-	}
+	
 	public List<String> getPicList() {
 		return picList;
 	}
@@ -226,5 +222,24 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	public void setShopMid(String shopMid) {
 		this.shopMid = shopMid;
 	}
+	public Integer getUpdateBy() {
+		return updateBy;
+	}
+	public void setUpdateBy(Integer updateBy) {
+		this.updateBy = updateBy;
+	}
+	public Integer getCreateBy() {
+		return createBy;
+	}
+	public void setCreateBy(Integer createBy) {
+		this.createBy = createBy;
+	}
+	public String getBrandId() {
+		return brandId;
+	}
+	public void setBrandId(String brandId) {
+		this.brandId = brandId;
+	}
+	
 	
 }
