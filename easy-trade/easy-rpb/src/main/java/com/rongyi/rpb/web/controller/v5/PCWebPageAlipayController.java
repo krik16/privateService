@@ -298,6 +298,6 @@ public class PCWebPageAlipayController extends BaseController {
 	 * @datetime:2015年4月24日上午10:47:02
 	 **/
 	private boolean validateTradeStatus(String tradeResult) {
-		return tradeResult.contains("TRADE_SUCCESS") || tradeResult.contains("SUCCESS");
+		return tradeResult.contains("TRADE_SUCCESS") || tradeResult.contains("SUCCESS") || tradeResult.contains("TRADE_CLOSED");
 	}
 }
