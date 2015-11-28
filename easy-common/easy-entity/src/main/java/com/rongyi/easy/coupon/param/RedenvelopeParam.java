@@ -70,7 +70,16 @@ public class RedenvelopeParam implements Serializable {
 	private String commodityId;// 商品id/商品分类id
 	private String commodityName;// 商品名称
 	private String shopId;// 店铺id
+	private String shopName;// 店铺名称
 	private String code;// 券码
+	public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+
 	private String orderNo;// 订单号
 	private String userPhone;// 券码领用账号
 	private Integer receiveChannel;// 券码领用渠道(0:容易逛,1:互动屏,2:微信)
