@@ -183,7 +183,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 					LOGGER.info(ConstantEnum.WEIXIN_REFUND_RESULT_FAIL.getValueStr() + ",退款状态-->" + refundQueryResData.getRefund_status_0());
 					map.put("message", ConstantEnum.WEIXIN_REFUND_RESULT_FAIL.getValueStr());
 				} else {
-					LOGGER.info("未知错误,状态-->" + refundQueryResData.getRefund_status_0());
+					LOGGER.info("未知错误,返回结果：" + refundQueryResData);
 				}
 			} else {
 				LOGGER.info("退款失败，退款申请返回结果-->" + result);
@@ -309,6 +309,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 			RefundQueryService refundQueryService = new RefundQueryService();
 			RefundQueryReqData refundQueryReqData = new RefundQueryReqData(tradeNo, payNo, null, refundNo, null);
 			String result = refundQueryService.request(refundQueryReqData);
+			LOGGER.info("refundQuery result="+result);
 			refundQueryResData = (RefundQueryResData) Util.getObjectFromXML(result, RefundQueryResData.class);
 		} catch (Exception e) {
 			e.printStackTrace();
