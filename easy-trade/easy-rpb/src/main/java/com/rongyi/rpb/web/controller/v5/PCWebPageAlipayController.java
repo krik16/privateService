@@ -213,7 +213,7 @@ public class PCWebPageAlipayController extends BaseController {
 						paymentLogInfo.setBuyer_type(0);// 买家账号
 						paymentLogInfo.setEventType(Constants.EVENT_TYPE.EVENT_TYPE4);
 						PaymentEntity refundPaymentEntity = getPaymentByPayTradeNo(paymentLogInfo.getTrade_no(), batch_no);
-						if (!validateTradeStatus(details[0])) {
+						if ("REFUND_TRADE_FEE_ERROR".equals(details[0])) {
 							LOGGER.info("退款状态返回异常，此退款未成功，忽略该笔退款，tradeNo={}", details[0]);
 						} else if (refundPaymentEntity != null) {
 							paymentLogInfo.setTradeType(refundPaymentEntity.getTradeType());
@@ -298,6 +298,6 @@ public class PCWebPageAlipayController extends BaseController {
 	 * @datetime:2015年4月24日上午10:47:02
 	 **/
 	private boolean validateTradeStatus(String tradeResult) {
-		return tradeResult.contains("TRADE_SUCCESS") || tradeResult.toLowerCase().contains("SUCCESS");
+		return tradeResult.contains("TRADE_SUCCESS") || tradeResult.contains("SUCCESS");
 	}
 }
