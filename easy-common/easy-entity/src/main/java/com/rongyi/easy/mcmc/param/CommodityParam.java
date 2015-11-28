@@ -22,7 +22,7 @@ public class CommodityParam {
 	
 	//private String shopId;//店铺id
 	
-	private Integer status;//状态 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理 
+	private Integer status;//状态 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理 5立即上架
 	
 	private String code;//商品编码
 	
