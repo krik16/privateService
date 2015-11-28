@@ -1,6 +1,7 @@
 package com.rongyi.tms.web.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,10 +68,11 @@ public class TradeDetailController extends BaseController {
 			double pageTotle = tradeDetailService.selectTradePageListCount(map);
 			Integer rowContNum = (int) Math.ceil(pageTotle / Constant.PAGE.PAGESIZE);
 			TradeDetailCount inocme = getTradeCount(map, 0);
-			model.addAttribute("inocmeAmount", inocme.getAmountCount());
+			DecimalFormat df = new DecimalFormat("0.00");
+			model.addAttribute("inocmeAmount", df.format(inocme.getAmountCount()));
 			model.addAttribute("inocmeTotal", inocme.getTotalCount());
 			TradeDetailCount expense = getTradeCount(map, 1);
-			model.addAttribute("expenseAmount", expense.getAmountCount());
+			model.addAttribute("expenseAmount", df.format(expense.getAmountCount()));
 			model.addAttribute("expenseTotal", expense.getTotalCount());
 			model.addAttribute("rowCont", rowContNum);
 			model.addAttribute("currpage", currpage);

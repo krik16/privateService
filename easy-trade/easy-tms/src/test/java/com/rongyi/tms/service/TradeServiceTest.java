@@ -1,20 +1,19 @@
 
 package com.rongyi.tms.service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.rongyi.easy.coupon.entity.UserCoupon;
+import com.rongyi.easy.tms.vo.TradeVO;
+import com.rongyi.easy.usercenter.entity.MalllifeUserInfoEntity;
+import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
+import com.rongyi.tms.BaseTest;
+import com.rongyi.tms.moudle.vo.TradeDetailCount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.testng.annotations.Test;
 
-import com.rongyi.easy.coupon.entity.UserCoupon;
-import com.rongyi.easy.entity.MallLifeUserEntity;
-import com.rongyi.easy.tms.vo.TradeVO;
-import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
-import com.rongyi.tms.BaseTest;
-import com.rongyi.tms.moudle.vo.TradeDetailCount;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TradeServiceTest extends BaseTest{
 
@@ -38,7 +37,7 @@ public class TradeServiceTest extends BaseTest{
 //    @Test(description = "roa接口调用--根据买家ID查询买家信息")
     public void roaGetUserByUserIdTest(){
         try {
-            MallLifeUserEntity user = rOAMallLifeUserService.getEntityByUid("51f9eb5b31d65584ab00f44a");
+            MalllifeUserInfoEntity user = rOAMallLifeUserService.getEntityByUid("51f9eb5b31d65584ab00f44a");
             System.err.println(user.getUserName());
         } catch (Exception e) {
             // TODO Auto-generated catch block

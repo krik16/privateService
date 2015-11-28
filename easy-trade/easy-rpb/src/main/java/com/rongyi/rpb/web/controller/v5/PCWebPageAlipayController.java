@@ -292,7 +292,7 @@ public class PCWebPageAlipayController extends BaseController {
 
 	/**
 	 * @Description: 验证支付宝订单状态
-	 * @param tradeStatus
+	 * @param tradeResult
 	 * @return
 	 * @Author: 柯军
 	 * @datetime:2015年4月24日上午10:47:02

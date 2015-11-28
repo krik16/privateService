@@ -35,14 +35,14 @@ public class CouponCommissionServiceTest extends BaseTest{
 	
 //	@Test
 	public void testSelectPageList(){
-		List<CouponCommission> list =  couponCommissionService.selectPageList(1,100,new HashMap<String,Object>());
-		System.err.println(list.get(0).getId());
-		int count = couponCommissionService.selectPageListCount(new HashMap<String,Object>());
-		System.err.println(count);
+//		List<CouponCommission> list =  couponCommissionService.selectPageList(1,100,new HashMap<String,Object>());
+//		System.err.println(list.get(0).getId());
+//		int count = couponCommissionService.selectPageListCount(new HashMap<String,Object>());
+//		System.err.println(count);
 	}
 	
 	@Test
 	public void testCouponCommissionTrigger(){
-		couponCommissionTrigger.couponCommissionTrigger();
+//		couponCommissionTrigger.couponCommissionTrigger();
 	}
 }

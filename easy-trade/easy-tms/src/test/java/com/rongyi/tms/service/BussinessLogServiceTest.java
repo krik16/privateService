@@ -40,6 +40,6 @@ public class BussinessLogServiceTest extends BaseTest{
 	@Test
 	public void testSelectByBussinessIdAndType(){
 		BussinessLog bussinessLog = bussinessLogService.selectByBussinessIdAndType(1,2);
-		System.err.println(bussinessLog.getId());
+		System.err.println(bussinessLog);
 	}
 }
