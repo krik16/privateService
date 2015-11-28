@@ -166,7 +166,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 			String result = refundService.request(refundReqData);
 			RefundResData refundResData = (RefundResData) Util.getObjectFromXML(result, RefundResData.class);
 			if (Constants.RESULT.SUCCESS.equals(refundResData.getReturn_code()) && Constants.RESULT.SUCCESS.equals(refundResData.getResult_code())) {// 退款申请成功后查询退款结果
-				RefundQueryResData refundQueryResData = refundQuery(null, payNo, null);
+				RefundQueryResData refundQueryResData = refundQuery(null, null, newPayNo);
 				map.put("result", refundQueryResData.getRefund_status_0());
 				if (ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getCodeStr().equals(refundQueryResData.getRefund_status_0())
 						|| ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr().equals(refundQueryResData.getRefund_status_0())) {// 退款成功
@@ -183,8 +183,9 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 					LOGGER.info(ConstantEnum.WEIXIN_REFUND_RESULT_FAIL.getValueStr() + ",退款状态-->" + refundQueryResData.getRefund_status_0());
 					map.put("message", ConstantEnum.WEIXIN_REFUND_RESULT_FAIL.getValueStr());
 				} else {
-					LOGGER.info("未知错误,返回结果：" + refundQueryResData.toString());
-					map.put("message",ConstantEnum.WEIXIN_REFUND_RESULT_FAIL.getValueStr());
+					LOGGER.info("退款成功，但是查询结果异常，忽略查询结果，查询结果内容=" + refundQueryResData.toString());
+					savePaymentLogInfo(refundResData, tradeType);
+					map.put("message",ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getValueStr());
 				}
 			} else {
 				LOGGER.info("退款失败，退款申请返回结果-->" + result);
