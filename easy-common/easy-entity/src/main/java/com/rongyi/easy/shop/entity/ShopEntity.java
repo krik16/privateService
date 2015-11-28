@@ -32,8 +32,8 @@ public class ShopEntity implements Serializable{
     private ObjectId id;
     
     private String name;//店铺名称
-    private Integer shop_nature;//店铺性质 0商场店铺 1商场专柜 2街边店
-    private String shop_type;//店铺类型 0普通店 1免税店 2专柜 3折扣店 4旗舰店
+    private Integer shop_nature;//店铺类型 0普通店 1免税店 2专柜 3折扣店 4旗舰店
+    private String shop_type;//店铺性质 0商场店铺 1商场专柜 2街边店 
     private String number;//店铺编号
     
    // @JsonDeserialize(using=ObjectIdJsonDeserializer.class)
@@ -175,13 +175,13 @@ public class ShopEntity implements Serializable{
 		this.tags = param.getTags();
 		
 		//楼层id
-		if(StringUtils.isNotBlank(param.getZone_id())){
+		/*if(StringUtils.isNotBlank(param.getZone_id())){
 			if(param.getBrand_id().matches("[\\da-zA-Z]{24}"))
 				this.zone_id = new ObjectId(param.getZone_id());
 			else{
 				throw new Exception("楼层id格式不对");
 			}
-		}
+		}*/
 		
 		if(CollectionUtils.isNotEmpty(param.getZone_ids())){
 			List<ObjectId> zone_ids=new ArrayList<ObjectId>();
@@ -197,6 +197,7 @@ public class ShopEntity implements Serializable{
 				}
 			}
 			this.zone_ids = zone_ids;
+			this.zone_id=zone_ids.get(zone_ids.size()-1);//楼层id取最后一个
 		}
 		
 		this.address = param.getAddress();
