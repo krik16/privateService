@@ -197,7 +197,6 @@ public class Commodity implements  Serializable,Cloneable{
 	private Double price;//商品价格（现价最低价，用于排序）
 	private String brandId;//商品所属品牌id
 	private String mallId;//商品所属商场id
-	private String brandMid;//商品所属品牌id
 	private List<ObjectId> categoryIds;//商品所属的品类列表
 	private List<String> customCategory;//自定义分类
 	
@@ -525,13 +524,6 @@ public class Commodity implements  Serializable,Cloneable{
 	}
 	public void setFilialeMid(String filialeMid) {
 		this.filialeMid = filialeMid;
-	}
-	
-	public String getBrandMid() {
-		return brandMid;
-	}
-	public void setBrandMid(String brandMid) {
-		this.brandMid = brandMid;
 	}
 	
 }
