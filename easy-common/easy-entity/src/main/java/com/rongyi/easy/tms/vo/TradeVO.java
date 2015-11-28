@@ -188,6 +188,11 @@ public class TradeVO implements Serializable {
 	private int couponDiscountInt;
 	
 	private Integer refundRejected;
+	
+	/**
+	 * 买家支付账号
+	 */
+	private String buyerPayAccount;
 
 	/*----查询字段----*/
 	/**
@@ -581,4 +586,13 @@ public class TradeVO implements Serializable {
 	public void setGuideType(Integer guideType) {
 		this.guideType = guideType;
 	}
+
+	public String getBuyerPayAccount() {
+		return buyerPayAccount;
+	}
+
+	public void setBuyerPayAccount(String buyerPayAccount) {
+		this.buyerPayAccount = buyerPayAccount;
+	}
+	
 }

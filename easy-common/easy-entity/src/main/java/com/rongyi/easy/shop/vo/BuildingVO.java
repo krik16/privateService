@@ -3,8 +3,6 @@
  */
 package com.rongyi.easy.shop.vo;
 
-import org.apache.commons.lang.StringUtils;
-
 import com.rongyi.easy.shop.entity.BuildingEntity;
 
 
@@ -15,7 +13,7 @@ import com.rongyi.easy.shop.entity.BuildingEntity;
  * @date 2015年11月9日 下午7:35:45 
  *  
  */
-public class BuildingVO {
+public class BuildingVO implements Comparable<BuildingVO>{
 	
 	private String id;
 	
@@ -82,6 +80,11 @@ public class BuildingVO {
 
 	public void setValid(int valid) {
 		this.valid = valid;
+	}
+
+	@Override
+	public int compareTo(BuildingVO o) {
+		return this.getName().compareTo(o.getName());
 	}
 	
 }

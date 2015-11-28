@@ -1,5 +1,7 @@
 package com.rongyi.easy.coupon.vo;
 
+import com.rongyi.easy.coupon.CommoditySpecWebVO;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -17,7 +19,7 @@ public class CommodityWebVO implements Serializable{
     private String brandName;
     private int count;
     private Double price;
-    List<String> specList;
+    List<CommoditySpecWebVO> specList;
     private String shopMid;
 
     public String getShopMid() {
@@ -76,11 +78,11 @@ public class CommodityWebVO implements Serializable{
         this.price = price;
     }
 
-    public List<String> getSpecList() {
+    public List<CommoditySpecWebVO> getSpecList() {
         return specList;
     }
 
-    public void setSpecList(List<String> specList) {
+    public void setSpecList(List<CommoditySpecWebVO> specList) {
         this.specList = specList;
     }
 
