@@ -176,7 +176,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
             weixinPayUnit.checkRefundQueryResult(null, null, newPayNo);
             //记录退款事件
             savePaymentLogInfo(refundResData, tradeType);
-            map.put("result", ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr());
+            map.put("result", ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getCodeStr());
             map.put("message", ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getValueStr());
         } catch (WeixinException e) {
             map.put("result", "FAIL");

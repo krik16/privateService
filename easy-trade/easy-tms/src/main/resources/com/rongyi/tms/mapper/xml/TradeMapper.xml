@@ -255,8 +255,8 @@
 		<if test="buyerPayAccount != null and buyerPayAccount != ''">
 			AND payment_event.buyer_email = #{buyerPayAccount}
 		</if>
-		
-		<include refid="Base_group_by" />
+		<!-- 加上会导致总记录数错误，无重复数据不加 -->
+		<!-- <include refid="Base_group_by" /> -->		
 	</sql>
 	<select id="selectTradePageList" resultMap="BaseResultMap"
 		parameterType="map">
