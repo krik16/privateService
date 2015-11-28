@@ -183,7 +183,8 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 					LOGGER.info(ConstantEnum.WEIXIN_REFUND_RESULT_FAIL.getValueStr() + ",退款状态-->" + refundQueryResData.getRefund_status_0());
 					map.put("message", ConstantEnum.WEIXIN_REFUND_RESULT_FAIL.getValueStr());
 				} else {
-					LOGGER.info("未知错误,返回结果：" + refundQueryResData);
+					LOGGER.info("未知错误,返回结果：" + refundQueryResData.toString());
+					map.put("message",ConstantEnum.WEIXIN_REFUND_RESULT_FAIL.getValueStr());
 				}
 			} else {
 				LOGGER.info("退款失败，退款申请返回结果-->" + result);
