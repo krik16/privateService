@@ -35,6 +35,7 @@ public class SaleVO implements Serializable {
     private Integer isMallShop;
     private List<MallVO> mall;
     private List<ShopVO> shops;
+    private List<SaleCommodityTopVO> commodities;
 
     public SaleVO(){}
 
@@ -218,25 +219,34 @@ public class SaleVO implements Serializable {
         this.shops = shops;
     }
 
+    public List<SaleCommodityTopVO> getCommodities() {
+        return commodities;
+    }
+
+    public void setCommodities(List<SaleCommodityTopVO> commodities) {
+        this.commodities = commodities;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .append("shops", shops)
-                .append("mall", mall)
-                .append("isMallShop", isMallShop)
-                .append("bannerPic", bannerPic)
-                .append("updateAt", updateAt)
-                .append("createAt", createAt)
-                .append("updateUser", updateUser)
-                .append("createUser", createUser)
-                .append("publishTerminal", publishTerminal)
-                .append("moduleType", moduleType)
-                .append("activityType", activityType)
-                .append("activityUrl", activityUrl)
-                .append("endAt", endAt)
-                .append("startAt", startAt)
-                .append("name", name)
                 .append("id", id)
+                .append("name", name)
+                .append("startAt", startAt)
+                .append("endAt", endAt)
+                .append("activityUrl", activityUrl)
+                .append("activityType", activityType)
+                .append("moduleType", moduleType)
+                .append("publishTerminal", publishTerminal)
+                .append("createUser", createUser)
+                .append("updateUser", updateUser)
+                .append("createAt", createAt)
+                .append("updateAt", updateAt)
+                .append("bannerPic", bannerPic)
+                .append("isMallShop", isMallShop)
+                .append("mall", mall)
+                .append("shops", shops)
+                .append("commodities", commodities)
                 .toString();
     }
 }
