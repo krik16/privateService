@@ -166,7 +166,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 			String result = refundService.request(refundReqData);
 			RefundResData refundResData = (RefundResData) Util.getObjectFromXML(result, RefundResData.class);
 			if (Constants.RESULT.SUCCESS.equals(refundResData.getReturn_code()) && Constants.RESULT.SUCCESS.equals(refundResData.getResult_code())) {// 退款申请成功后查询退款结果
-				RefundQueryResData refundQueryResData = refundQuery(null, payNo, null);
+				RefundQueryResData refundQueryResData = refundQuery(null, null, newPayNo);
 				map.put("result", refundQueryResData.getRefund_status_0());
 				if (ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getCodeStr().equals(refundQueryResData.getRefund_status_0())
 						|| ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr().equals(refundQueryResData.getRefund_status_0())) {// 退款成功
