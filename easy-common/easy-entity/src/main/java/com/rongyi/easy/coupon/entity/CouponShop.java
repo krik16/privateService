@@ -158,13 +158,6 @@ public class CouponShop implements Serializable{
         this.shopId = shopId;
         this.shopName = shopName;
     }
-    public CouponShop(String couponId, String shopId, String shopName,Object object1,Object object2) {
-        this.couponId = couponId;
-        this.shopId = shopId;
-        this.shopName = shopName;
-        this.object1=object1;
-        this.object2=object2;
-    }
 
     public CouponShop() {
 
