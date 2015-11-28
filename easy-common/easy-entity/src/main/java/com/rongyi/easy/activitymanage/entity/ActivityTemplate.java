@@ -65,6 +65,9 @@ public class ActivityTemplate implements Serializable{
    /**签到送积分信息*/
     private TemplateSigned templateSigned;
 
+    /**特卖的置顶商品*/
+    private List<SaleCommodityTop> saleCommodityTops;
+
 
     public Integer getId() {
         return id;
@@ -259,6 +262,14 @@ public class ActivityTemplate implements Serializable{
         this.templateSigned = templateSigned;
     }
 
+    public List<SaleCommodityTop> getSaleCommodityTops() {
+        return saleCommodityTops;
+    }
+
+    public void setSaleCommodityTops(List<SaleCommodityTop> saleCommodityTops) {
+        this.saleCommodityTops = saleCommodityTops;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -286,6 +297,7 @@ public class ActivityTemplate implements Serializable{
                 .append("templateSale", templateSale)
                 .append("templateSaleShopMalls", templateSaleShopMalls)
                 .append("templateSigned", templateSigned)
+                .append("saleCommodityTops", saleCommodityTops)
                 .toString();
     }
 }
