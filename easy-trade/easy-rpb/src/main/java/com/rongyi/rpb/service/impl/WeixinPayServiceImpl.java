@@ -185,6 +185,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 				} else {
 					LOGGER.info("退款成功，但是查询结果异常，忽略查询结果，查询结果内容=" + refundQueryResData.toString());
 					savePaymentLogInfo(refundResData, tradeType);
+					map.put("result", ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getCodeStr());
 					map.put("message",ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getValueStr());
 				}
 			} else {
