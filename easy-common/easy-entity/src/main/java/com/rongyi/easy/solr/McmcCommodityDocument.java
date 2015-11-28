@@ -70,7 +70,11 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private Date activityStartTime;
 	@Field("activityEndTime")
 	private Date activityEndTime;
-	
+	@Field("sortPosition")
+	private Integer sortPosition;
+	@Field("flashSortPosition")
+	private Integer flashSortPosition;
+
 	public Double getPrice() {
 		return price;
 	}
@@ -302,5 +306,21 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 	public void setActivityEndTime(Date activityEndTime) {
 		this.activityEndTime = activityEndTime;
+	}
+
+	public Integer getSortPosition() {
+		return sortPosition;
+	}
+
+	public void setSortPosition(Integer sortPosition) {
+		this.sortPosition = sortPosition;
+	}
+
+	public Integer getFlashSortPosition() {
+		return flashSortPosition;
+	}
+
+	public void setFlashSortPosition(Integer flashSortPosition) {
+		this.flashSortPosition = flashSortPosition;
 	}
 }
