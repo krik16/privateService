@@ -25,7 +25,7 @@ public interface ROACommodityService {
 	 */
 	public Long searchCommodityCount(Map<String,Object> paramMap);
 	
-	public void updateOrDeleteCommodity(List<String> ids,Integer type,String reason,Integer userId);
+	public boolean updateOrDeleteCommodity(List<String> ids,Integer type,String reason,Integer userId);
 	
 	public String insertCommodity(Commodity commodity);
 	
