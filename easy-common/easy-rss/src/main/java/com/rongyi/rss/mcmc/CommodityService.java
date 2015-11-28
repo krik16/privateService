@@ -3,16 +3,15 @@ package com.rongyi.rss.mcmc;
 import java.util.Date;
 import java.util.List;
 
+import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.param.CouponCommodityParam;
-import com.rongyi.easy.mcmc.CommodityCategory;
+import com.rongyi.easy.mcmc.*;
 import com.rongyi.easy.mcmc.param.SaleParam;
 
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.bean.ResponseVO;
-import com.rongyi.easy.mcmc.Commodity;
-import com.rongyi.easy.mcmc.CommodityShopInfo;
 import com.rongyi.easy.mcmc.vo.CommodityPageBuyerVO;
 import com.rongyi.easy.mcmc.vo.CommoditySpecVO;
 import com.rongyi.easy.mcmc.vo.CommodityVO;
@@ -98,7 +97,7 @@ public interface CommodityService {
      * @return
      * @auther:yuanbo
      */
-    public ResponseVO searchCommodityByCouponParam(CouponCommodityParam param);
+    public PagingVO<Commodity> searchCommodityByCouponParam(CouponCommodityParam param);
     /**
      * 处理商品上下架接口
      * @param registerAt:上架时间  对应的输入状态应该是查找待下架的商品，即为3
@@ -121,4 +120,10 @@ public interface CommodityService {
      * @return List<CommodityCategory>
      */
     public List<CommodityCategory> getCommodityCategoryByTypeAndParentId(String parentId,int type);
+
+    public CommodityCategory findCommodityCategoryById(ObjectId commodityCategoryId);
+
+    public CommoditySpec findCommoditySpecById(ObjectId id);
+
+    public CommoditySpecColumn findCommoditySpecColumnById(ObjectId id);
 }
