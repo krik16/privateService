@@ -22,13 +22,13 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 	private String code;//商品编码
 	private String description;//商品描述
-	private Double postage;//商品邮费
+	private String postage;//商品邮费
 	private Integer stock;//商品库存
 	
 	private Date createAt;//数据创建日期
 	private Date updateAt;//数据更新日期
-	private Double originalPrice;//商品原价
-	private Double currentPrice;//商品现价
+	private String originalPrice;//商品原价
+	private String currentPrice;//商品现价
 	private Integer updateBy;//修改人
 	private Integer createBy;//创建者
 	
@@ -88,10 +88,10 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Double getPostage() {
+	public String getPostage() {
 		return postage;
 	}
-	public void setPostage(Double postage) {
+	public void setPostage(String postage) {
 		this.postage = postage;
 	}
 	public Integer getStock() {
@@ -112,16 +112,16 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;
 	}
-	public Double getOriginalPrice() {
+	public String getOriginalPrice() {
 		return originalPrice;
 	}
-	public void setOriginalPrice(Double originalPrice) {
+	public void setOriginalPrice(String originalPrice) {
 		this.originalPrice = originalPrice;
 	}
-	public Double getCurrentPrice() {
+	public String getCurrentPrice() {
 		return currentPrice;
 	}
-	public void setCurrentPrice(Double currentPrice) {
+	public void setCurrentPrice(String currentPrice) {
 		this.currentPrice = currentPrice;
 	}
 	
