@@ -1,6 +1,7 @@
 package com.rongyi.easy.coupon.param;
 
 import com.rongyi.core.constant.Constants;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,6 +19,7 @@ public class CouponCommodityParam implements Serializable{
     private String categoryId;
     private String brandId;
     private String mallId;
+    private String temaiId;
     private String shopId;
     private Integer pageSize;
     private Integer currentPage;
@@ -85,18 +87,18 @@ public class CouponCommodityParam implements Serializable{
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("CouponCommodityParam{");
-        sb.append("commodityId='").append(commodityId).append('\'');
-        sb.append(", commodityName='").append(commodityName).append('\'');
-        sb.append(", categoryId='").append(categoryId).append('\'');
-        sb.append(", brandId='").append(brandId).append('\'');
-        sb.append(", mallId='").append(mallId).append('\'');
-        sb.append(", shopId='").append(shopId).append('\'');
-        sb.append(", pageSize=").append(pageSize);
-        sb.append(", currentPage=").append(currentPage);
-        sb.append(", shopMids=").append(shopMids);
-        sb.append('}');
-        return sb.toString();
+        return new ToStringBuilder(this)
+                .append("commodityId", commodityId)
+                .append("commodityName", commodityName)
+                .append("categoryId", categoryId)
+                .append("brandId", brandId)
+                .append("mallId", mallId)
+                .append("temaiId", temaiId)
+                .append("shopId", shopId)
+                .append("pageSize", pageSize)
+                .append("currentPage", currentPage)
+                .append("shopMids", shopMids)
+                .toString();
     }
 
     public String getMallId() {
@@ -120,5 +122,13 @@ public class CouponCommodityParam implements Serializable{
     }
 
     public CouponCommodityParam() {
+    }
+
+    public String getTemaiId() {
+        return temaiId;
+    }
+
+    public void setTemaiId(String temaiId) {
+        this.temaiId = temaiId;
     }
 }
