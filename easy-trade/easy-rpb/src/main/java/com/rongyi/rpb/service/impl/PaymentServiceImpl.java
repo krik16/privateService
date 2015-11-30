@@ -369,6 +369,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 					BeanUtils.copyProperties(list.get(0), newPaymentEntity);
 					newPaymentEntity.setId(null);
 					newPaymentEntity.setPayChannel(payChannel);
+					newPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
 					newPaymentEntity.setFinishTime(DateUtil.getCurrDateTime());
 					newPaymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE5);
 					insert(newPaymentEntity);
