@@ -62,7 +62,7 @@ public class IflashBuyVO implements Serializable {
                 if(!CollectionUtils.isEmpty(activityTemplate.getTemplateLabel().get(0).getTemplateRelevantGoodsCouponList())){
                     for(TemplateRelevantGoodsCoupon templateRelevantGoodsCoupon:activityTemplate.getTemplateLabel().get(0).getTemplateRelevantGoodsCouponList()){
                         CommodityVO commodityVO=new CommodityVO();
-                        commodityVO.setCommoidtyId(templateRelevantGoodsCoupon.getCommodityId());
+                        commodityVO.setCommodityId(templateRelevantGoodsCoupon.getCommodityId());
                         commodityVO.setActivityPrice(templateRelevantGoodsCoupon.getActivityPrice());
                         commodityVO.setTitle(templateRelevantGoodsCoupon.getTitle());
                         commodityVO.setPic(templateRelevantGoodsCoupon.getPic());
