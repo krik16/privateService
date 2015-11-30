@@ -28,11 +28,11 @@ public class CommodityParam {
 	
 	private String description;//商品描述
 	
-	private Double postage;//商品邮费
+	private String postage;//商品邮费
 	
-	private Double originalPrice;//商品原价
+	private String originalPrice;//商品原价
 	
-	private Double currentPrice;//商品现价
+	private String currentPrice;//商品现价
 	
 	private List<String> picList;//商品图片列表
 	
@@ -127,27 +127,27 @@ public class CommodityParam {
 		this.description = description;
 	}
 
-	public Double getPostage() {
+	public String getPostage() {
 		return postage;
 	}
 
-	public void setPostage(Double postage) {
+	public void setPostage(String postage) {
 		this.postage = postage;
 	}
 
-	public Double getOriginalPrice() {
+	public String getOriginalPrice() {
 		return originalPrice;
 	}
 
-	public void setOriginalPrice(Double originalPrice) {
+	public void setOriginalPrice(String originalPrice) {
 		this.originalPrice = originalPrice;
 	}
 
-	public Double getCurrentPrice() {
+	public String getCurrentPrice() {
 		return currentPrice;
 	}
 
-	public void setCurrentPrice(Double currentPrice) {
+	public void setCurrentPrice(String currentPrice) {
 		this.currentPrice = currentPrice;
 	}
 
