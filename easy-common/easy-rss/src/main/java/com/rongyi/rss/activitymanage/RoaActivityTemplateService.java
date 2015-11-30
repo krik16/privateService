@@ -62,4 +62,5 @@ public interface RoaActivityTemplateService {
     List<ActivityListVO> getActivityListByIds(List<Integer> ids,int type) throws  Exception;
 
 
+     int findActivityByMallShop(String mallMid,String shopMid);
 }
