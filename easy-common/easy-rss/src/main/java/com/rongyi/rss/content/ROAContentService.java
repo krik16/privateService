@@ -187,5 +187,18 @@ public interface ROAContentService {
 	* @throws
 	 */
 	public List<ForumContentListVo> findContentAllByParamApp(ForumContentParam par);
+	/**
+	 * 
+	* @Title: findHomePageApp 
+	* @Description: 根据type类型和code查询唯一的homePage
+	* @param @param i
+	* @param @param string
+	* @param @return    设定文件 
+	* @return ForumHomeModelVo    返回类型 
+	* @author shaozhou 
+	* @date 2015年11月30日 下午12:36:05
+	* @throws
+	 */
+	public ForumHomeModelVo findHomePageApp(int i, String string);
 	
 }
