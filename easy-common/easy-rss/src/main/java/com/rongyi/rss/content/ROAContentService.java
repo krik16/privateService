@@ -21,7 +21,7 @@ import com.rongyi.easy.content_v2.vo.ForumPostiomModelVo;
 public interface ROAContentService {
 	
 	/**
-	 * 查询内容管理首页的信息
+	 * 查询内容管理首页的信息 
 	 * 
 	 */
 	public List<ForumHomeModelVo> findHomePage(int type);
