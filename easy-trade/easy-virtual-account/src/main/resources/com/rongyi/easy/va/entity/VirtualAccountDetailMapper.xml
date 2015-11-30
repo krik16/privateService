@@ -85,5 +85,6 @@
 		<if test="monthRange != null">
 			AND MONTH(create_at) = MONTH(now())
 		</if>
+		AND YEAR(create_at) = YEAR (now())
 	</select>
 </mapper>
