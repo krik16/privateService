@@ -22,6 +22,8 @@ public class CommodityWebVO implements Serializable{
     List<CommoditySpecWebVO> specList;
     private String shopMid;
 
+    private String detailPic;
+
     public String getShopMid() {
         return shopMid;
     }
@@ -82,6 +84,14 @@ public class CommodityWebVO implements Serializable{
         return specList;
     }
 
+    public String getDetailPic() {
+        return detailPic;
+    }
+
+    public void setDetailPic(String detailPic) {
+        this.detailPic = detailPic;
+    }
+
     public void setSpecList(List<CommoditySpecWebVO> specList) {
         this.specList = specList;
     }
@@ -97,6 +107,7 @@ public class CommodityWebVO implements Serializable{
         sb.append(", price=").append(price);
         sb.append(", specList=").append(specList);
         sb.append(", shopMid='").append(shopMid).append('\'');
+        sb.append(", detailPic='").append(detailPic).append('\'');
         sb.append('}');
         return sb.toString();
     }

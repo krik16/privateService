@@ -17,6 +17,7 @@ public class CouponCommodityParam implements Serializable{
     private String commodityName;
     private String categoryId;
     private String brandId;
+    private String mallId;
     private String shopId;
     private Integer pageSize;
     private Integer currentPage;
@@ -82,10 +83,6 @@ public class CouponCommodityParam implements Serializable{
         return shopMids;
     }
 
-    public void setShopMids(List<String> shopMids) {
-        this.shopMids = shopMids;
-    }
-
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("CouponCommodityParam{");
@@ -93,9 +90,25 @@ public class CouponCommodityParam implements Serializable{
         sb.append(", commodityName='").append(commodityName).append('\'');
         sb.append(", categoryId='").append(categoryId).append('\'');
         sb.append(", brandId='").append(brandId).append('\'');
+        sb.append(", mallId='").append(mallId).append('\'');
         sb.append(", shopId='").append(shopId).append('\'');
+        sb.append(", pageSize=").append(pageSize);
+        sb.append(", currentPage=").append(currentPage);
+        sb.append(", shopMids=").append(shopMids);
         sb.append('}');
         return sb.toString();
+    }
+
+    public String getMallId() {
+        return mallId;
+    }
+
+    public void setMallId(String mallId) {
+        this.mallId = mallId;
+    }
+
+    public void setShopMids(List<String> shopMids) {
+        this.shopMids = shopMids;
     }
 
     public CouponCommodityParam(String commodityId, String commodityName, String categoryId, String brandId, String shopId) {
