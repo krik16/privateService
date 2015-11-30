@@ -2,12 +2,15 @@ package com.rongyi.rss.content;
 
 import java.util.List;
 
+import com.rongyi.easy.content.entity.param.SpecialCellParam;
 import com.rongyi.easy.content_v2.entity.ForumContent;
 import com.rongyi.easy.content_v2.entity.ForumHomepage;
 import com.rongyi.easy.content_v2.entity.ForumPosition;
 import com.rongyi.easy.content_v2.entity.ForumStick;
+import com.rongyi.easy.content_v2.param.FlashSellParam;
 import com.rongyi.easy.content_v2.param.ForumContentParam;
 import com.rongyi.easy.content_v2.param.ForumContentStatusDelParam;
+import com.rongyi.easy.content_v2.param.SpecailParam;
 import com.rongyi.easy.content_v2.vo.ForumContentListVo;
 import com.rongyi.easy.content_v2.vo.ForumHomeModelVo;
 import com.rongyi.easy.content_v2.vo.ForumPostiomModelVo;
@@ -165,30 +168,6 @@ public interface ROAContentService {
 	public Boolean updateStickById(ForumStick fs);
 	/**
 	 * 
-	* @Title: findContentCountAllByParamApp 
-	* @Description: app查询特卖列表总数 
-	* @param @param fcp
-	* @param @return    设定文件 
-	* @return Long    返回类型 
-	* @author shaozhou 
-	* @date 2015年11月22日 下午12:34:01
-	* @throws
-	 */
-	public Long findContentCountAllByParamApp(ForumContentParam fcp);
-	/**
-	 * 
-	* @Title: findContentAllByParamApp 
-	* @Description: 查询特卖列表list 
-	* @param @param par
-	* @param @return    设定文件 
-	* @return List<ForumContentListVo>    返回类型 
-	* @author shaozhou 
-	* @date 2015年11月22日 下午12:45:31
-	* @throws
-	 */
-	public List<ForumContentListVo> findContentAllByParamApp(ForumContentParam par);
-	/**
-	 * 
 	* @Title: findHomePageApp 
 	* @Description: 根据type类型和code查询唯一的homePage
 	* @param @param i
@@ -200,5 +179,53 @@ public interface ROAContentService {
 	* @throws
 	 */
 	public ForumHomeModelVo findHomePageApp(int i, String string);
+	/**
+	 * 
+	* @Title: findContentCountAllBySpecail 
+	* @Description: 查询特卖列表count
+	* @param @param param
+	* @param @return    设定文件 
+	* @return Long    返回类型 
+	* @author shaozhou 
+	* @date 2015年11月30日 下午4:33:46
+	* @throws
+	 */
+	public Long findContentCountAllBySpecail(SpecailParam par);
+	/**
+	 * 
+	* @Title: findContentAllBySpecail 
+	* @Description: 查询特卖列表list
+	* @param @param param
+	* @param @return    设定文件 
+	* @return List<ForumContentListVo>    返回类型 
+	* @author shaozhou 
+	* @date 2015年11月30日 下午4:42:24
+	* @throws
+	 */
+	public List<ForumContentListVo> findContentAllBySpecail(SpecailParam par);
+	/**
+	 * 
+	* @Title: findContentCountAllByParamFlush 
+	* @Description: app查询闪购推荐列表count
+	* @param @param par
+	* @param @return    设定文件 
+	* @return Long    返回类型 
+	* @author shaozhou 
+	* @date 2015年11月30日 下午5:10:55
+	* @throws
+	 */
+	public Long findContentCountAllByParamFlush(FlashSellParam par);
+	/**
+	 * 
+	* @Title: findContentAllByParamFlush 
+	* @Description: app查询闪购推荐列表list
+	* @param @param par
+	* @param @return    设定文件 
+	* @return List<ForumContentListVo>    返回类型 
+	* @author shaozhou 
+	* @date 2015年11月30日 下午5:11:14
+	* @throws
+	 */
+	public List<ForumContentListVo> findContentAllByParamFlush(FlashSellParam par);
 	
 }
