@@ -41,9 +41,29 @@ public class RebateVO implements Serializable{
 	
 	private Integer applyScope;// 0都适用 1商品适用 2代金券适用
 	
+	private Integer relatedType;//全场[0]，品牌[1]，商场[2]，店铺[3]，分类[4]，信息[5]
+	
 	private List<CommodityBuyerVO> commodityList;//可使用商品列表
 	
 	private List<RebateCouponVO> couponList;//可使用代金券列表
+	
+	private Integer preferentialType = 0;//优惠方式 0：满减 ；1：立减.
+
+	public Integer getPreferentialType() {
+		return preferentialType;
+	}
+
+	public void setPreferentialType(Integer preferentialType) {
+		this.preferentialType = preferentialType;
+	}
+
+	public Integer getRelatedType() {
+		return relatedType;
+	}
+
+	public void setRelatedType(Integer relatedType) {
+		this.relatedType = relatedType;
+	}
 
 	public String getTitle() {
 		return title;
@@ -154,10 +174,7 @@ public class RebateVO implements Serializable{
 		return "RebateVO [originalPrice=" + originalPrice + ", currentPrice=" + currentPrice + ", validStartTime="
 				+ validStartTime + ", validEndTime=" + validEndTime + ", title=" + title + ", platformRebateId="
 				+ platformRebateId + ", platformRebateCode=" + platformRebateCode + ", useDescription=" + useDescription
-				+ ", status=" + status + ", desc=" + desc + ", applyScope=" + applyScope + ", commodityList=" + commodityList
-				+ ", couponList=" + couponList + "]";
+				+ ", status=" + status + ", desc=" + desc + ", applyScope=" + applyScope + ", relatedType=" + relatedType
+				+ ", commodityList=" + commodityList + ", couponList=" + couponList + "]";
 	}
-
-	
-
 }

@@ -15,9 +15,9 @@ import com.rongyi.easy.mcmc.mvc.DateJson.DateJsonDeserializer;
  */
 public class ShopParamForSearch {
 
-	private Integer shopType;// 店铺类型 0普通店 1免税店 2专柜 3折扣店 4旗舰店-1表示所有
+	private Integer shopType;// 店铺性质 0商场店铺 1商场专柜 2街边店-1表示所有
 	
-	private Integer shopNature;// 店铺性质 0商场店铺 1商场专柜 2街边店-1表示所有
+	private Integer shopNature; // 店铺类型 0普通店 1免税店 2专柜 3折扣店 4旗舰店-1表示所有
 	
 	private Integer status;//商家平台0正常营业 1即将营业 2暂停营业3待处理-1表示所有4表示系统下架 
 	                       //运营平台 店铺状态-1所有 0正常营业 1即将营业 2暂停营业 3停止营业4系统下架-2表示（ 0正常营业 1即将营业 2暂停营业）

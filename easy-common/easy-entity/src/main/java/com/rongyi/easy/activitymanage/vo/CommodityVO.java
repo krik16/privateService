@@ -10,7 +10,7 @@ import java.io.Serializable;
  * easy-api
  */
 public class CommodityVO implements Serializable {
-    private String commoidtyId;
+    private String commodityId;
     private String pic;
     /**商品的现标题*/
     private String title;
@@ -20,13 +20,7 @@ public class CommodityVO implements Serializable {
     private Integer rySubsidy;
     private Integer activityPrice;
 
-    public String getCommoidtyId() {
-        return commoidtyId;
-    }
 
-    public void setCommoidtyId(String commoidtyId) {
-        this.commoidtyId = commoidtyId;
-    }
 
     public String getPic() {
         return pic;
@@ -84,17 +78,26 @@ public class CommodityVO implements Serializable {
         this.activityPrice = activityPrice;
     }
 
+    public String getCommodityId() {
+        return commodityId;
+    }
+
+    public void setCommodityId(String commodityId) {
+        this.commodityId = commodityId;
+    }
+
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .append("activityPrice", activityPrice)
-                .append("rySubsidy", rySubsidy)
-                .append("stockCount", stockCount)
-                .append("orderPosition", orderPosition)
-                .append("currentTitle", currentTitle)
-                .append("title", title)
+                .append("commodityId", commodityId)
                 .append("pic", pic)
-                .append("commoidtyId", commoidtyId)
+                .append("title", title)
+                .append("currentTitle", currentTitle)
+                .append("orderPosition", orderPosition)
+                .append("stockCount", stockCount)
+                .append("rySubsidy", rySubsidy)
+                .append("activityPrice", activityPrice)
                 .toString();
     }
 }

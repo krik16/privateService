@@ -24,24 +24,17 @@ public class RedenvelopVO implements Serializable{
      * 卡券名称
      */
     private String name;
-    
-    private List<String> unpassReasons;
-    private List<String> offShelfReasons;
-    public List<String> getOffShelfReasons() {
-		return offShelfReasons;
-	}
 
-	public void setOffShelfReasons(List<String> offShelfReasons) {
-		this.offShelfReasons = offShelfReasons;
-	}
+    /**
+     * 审核未通过原因
+     */
+    private List<CouponRejectRecord> unpassReasons;
 
-	public List<String> getUnpassReasons() {
-		return unpassReasons;
-	}
+    /**
+     * 下架原因
+     */
+    private List<CouponRejectRecord> offShelfReasons;
 
-	public void setUnpassReasons(List<String> unpassReasons) {
-		this.unpassReasons = unpassReasons;
-	}
 
 	/**
      * 卡券类型:代金券[0], 抵扣券[1], 红包[2]
@@ -641,6 +634,22 @@ public class RedenvelopVO implements Serializable{
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public List<CouponRejectRecord> getUnpassReasons() {
+        return unpassReasons;
+    }
+
+    public void setUnpassReasons(List<CouponRejectRecord> unpassReasons) {
+        this.unpassReasons = unpassReasons;
+    }
+
+    public List<CouponRejectRecord> getOffShelfReasons() {
+        return offShelfReasons;
+    }
+
+    public void setOffShelfReasons(List<CouponRejectRecord> offShelfReasons) {
+        this.offShelfReasons = offShelfReasons;
     }
 
     @Override

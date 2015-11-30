@@ -179,8 +179,8 @@ public class RedenvelopeUseDetailParam implements Serializable{
     }
 
     public Date getStartDate() {
-        if(StringUtils.isNotBlank(dateBucket)&&StringUtils.isNotBlank(dateBucket.split("-")[0])){
-            return DateTool.string2Date(dateBucket.split("-")[0],DateTool.FORMAT_DATETIME);
+        if(StringUtils.isNotBlank(dateBucket)&&StringUtils.isNumeric(dateBucket.split("-")[0])){
+            return new Date(Long.parseLong(dateBucket.split("-")[0]));
         }
         return null;
     }
@@ -190,8 +190,8 @@ public class RedenvelopeUseDetailParam implements Serializable{
     }
 
     public Date getEndDate() {
-        if(StringUtils.isNotBlank(dateBucket)&&dateBucket.split("-").length==2&&StringUtils.isNotBlank(dateBucket.split("-")[1])){
-            return DateTool.string2Date(dateBucket.split("-")[1],DateTool.FORMAT_DATETIME);
+        if(StringUtils.isNotBlank(dateBucket)&&dateBucket.split("-").length==2&&StringUtils.isNumeric(dateBucket.split("-")[1])){
+            return new Date(Long.parseLong(dateBucket.split("-")[1]));
         }
         return null;
     }

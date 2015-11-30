@@ -2,7 +2,7 @@ package com.rongyi.easy.shop.vo;
 
 import java.io.Serializable;
 
-public class AreaVO implements Serializable {
+public class AreaVO  implements Comparable<AreaVO>,Serializable{
 
 	private String id;
 	private String type;
@@ -65,6 +65,14 @@ public class AreaVO implements Serializable {
 	public void setFloorName(String floorName) {
 		this.floorName = floorName;
 	}
+
+	@Override
+	public int compareTo(AreaVO o) {
+		
+		return this.getName().compareTo(o.getName());
+	}
+
+	
 	
 	
 }

@@ -126,4 +126,6 @@ public interface CommodityService {
     public CommoditySpec findCommoditySpecById(ObjectId id);
 
     public CommoditySpecColumn findCommoditySpecColumnById(ObjectId id);
+
+    public List<Commodity> getCommodityByIds(List<ObjectId> ids);
 }

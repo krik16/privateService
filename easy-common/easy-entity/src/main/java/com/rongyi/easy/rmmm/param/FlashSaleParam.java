@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import com.rongyi.easy.base.param.BaseParam;
 import com.rongyi.easy.malllife.param.MalllifeBaseParam;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * 闪购获取卖场参数
@@ -53,6 +54,12 @@ public class FlashSaleParam extends MalllifeBaseParam implements Serializable{
 	 * 類別id
 	 */
 	private String commodityCategory;
+
+	/**
+	 * 给前端的随机数
+	 */
+	private Integer randomParam;
+
 	
 	
 	public String getId() {
@@ -98,8 +105,14 @@ public class FlashSaleParam extends MalllifeBaseParam implements Serializable{
 		this.cityName = cityName;
 	}
 
+	public Integer getRandomParam() {
+		return randomParam;
+	}
 
- 
+	public void setRandomParam(Integer randomParam) {
+		this.randomParam = randomParam;
+	}
+
 	public String getLongitude() {
 		return longitude;
 	}
@@ -112,14 +125,20 @@ public class FlashSaleParam extends MalllifeBaseParam implements Serializable{
 	public void setLatitude(String latitude) {
 		this.latitude = latitude;
 	}
+
 	@Override
 	public String toString() {
-		return "FlashSaleParam [id=" + id + ", keywork=" + keywork
-				+ ", cityId=" + cityId + ", cityName=" + cityName
-				+ ", sortBy=" + sortBy + ", longitude=" + longitude
-				+ ", latitude=" + latitude + ", brandId=" + brandId
-				+ ", commodityCategory=" + commodityCategory + "]";
+		return new ToStringBuilder(this)
+				.append("id", id)
+				.append("keywork", keywork)
+				.append("cityId", cityId)
+				.append("cityName", cityName)
+				.append("sortBy", sortBy)
+				.append("longitude", longitude)
+				.append("latitude", latitude)
+				.append("brandId", brandId)
+				.append("commodityCategory", commodityCategory)
+				.append("randomParam", randomParam)
+				.toString();
 	}
-	
-
 }

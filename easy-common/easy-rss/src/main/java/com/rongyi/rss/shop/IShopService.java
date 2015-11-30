@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.bson.types.ObjectId;
 
+import com.rongyi.easy.rmmm.entity.ShopInfoEntity;
 import com.rongyi.easy.shop.entity.ShopEntity;
 
 public interface IShopService {
@@ -56,4 +57,15 @@ public interface IShopService {
 	 * @return
 	 */
 	public Long searchShopCountByMallAreaIdAndType(String mallId,int type);
+	
+	/**
+	 * 
+	* @Title: selectByShopId 
+	* @Description: 查询店铺mysql表信息
+	* @param @param shopMid
+	* @param @return    设定文件 
+	* @return ShopInfoEntity    返回类型 
+	* @throws
+	 */
+	public ShopInfoEntity selectByShopId(String shopMid);
 }

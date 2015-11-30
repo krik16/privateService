@@ -20,6 +20,7 @@ public class CommoditySpecColumnClassification implements  Serializable{
 	private String name;//规格类名
 	private List<ObjectId> parentids;
 	private ObjectId parentid;
+	private Integer type;//
 	public ObjectId getId() {
 		return id;
 	}
@@ -50,5 +51,10 @@ public class CommoditySpecColumnClassification implements  Serializable{
 	public void setColor(String color) {
 		this.color = color;
 	}
-	
+	public Integer getType() {
+		return type;
+	}
+	public void setType(Integer type) {
+		this.type = type;
+	}
 }

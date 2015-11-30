@@ -6,7 +6,9 @@ import java.util.Map;
 import com.rongyi.easy.coupon.entity.CouponBrand;
 import com.rongyi.easy.roa.param.ShopAreaParams;
 import com.rongyi.easy.roa.vo.ShopAreaVO;
+
 import org.bson.types.ObjectId;
+
 import com.rongyi.easy.roa.vo.ShopVO;
 
 /**
@@ -72,4 +74,10 @@ public interface ROAShopService {
 
 	List<ShopVO> getShopVOsByBrandIds(List<ObjectId> list);
 
+     
+     public ShopVO getShopsVOById2(String id);
+     
+     public List<ShopVO> getShopsVOByShopMidOrFilialeMidOrBrandMid(String shopMid,String filialeMid,String brandMid);
+
+     public com.rongyi.easy.entity.ShopEntity getShopById(String id);
 }
