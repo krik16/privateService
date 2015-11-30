@@ -52,6 +52,11 @@ public class UserCouponVO implements Serializable {
     private Integer applyScope;//适用范围:商品/代金券[0] 商品[1] 代金券[2]
     
     private List<String> label;//标签
+
+    /**
+     * 抵扣券关联的代金券结合
+     */
+    private List<VoucherVO> voucherVOs;
     
     public List<String> getLabel() {
 		return label;
@@ -203,6 +208,14 @@ public class UserCouponVO implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public List<VoucherVO> getVoucherVOs() {
+        return voucherVOs;
+    }
+
+    public void setVoucherVOs(List<VoucherVO> voucherVOs) {
+        this.voucherVOs = voucherVOs;
     }
 
     // 券状态 0:未激活 1:已领用 2:已使用 3:已过期
