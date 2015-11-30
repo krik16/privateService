@@ -46,6 +46,16 @@ public class RebateVO implements Serializable{
 	private List<CommodityBuyerVO> commodityList;//可使用商品列表
 	
 	private List<RebateCouponVO> couponList;//可使用代金券列表
+	
+	private Integer preferentialType = 0;//优惠方式 0：满减 ；1：立减.
+
+	public Integer getPreferentialType() {
+		return preferentialType;
+	}
+
+	public void setPreferentialType(Integer preferentialType) {
+		this.preferentialType = preferentialType;
+	}
 
 	public Integer getRelatedType() {
 		return relatedType;
