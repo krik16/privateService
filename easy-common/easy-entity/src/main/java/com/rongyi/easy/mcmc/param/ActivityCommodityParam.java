@@ -24,4 +24,12 @@ public class ActivityCommodityParam implements Serializable {
     public void setSortPosition(Integer sortPosition) {
         this.sortPosition = sortPosition;
     }
+
+    @Override
+    public String toString() {
+        return "ActivityCommodityParam{" +
+                "commodityId='" + commodityId + '\'' +
+                ", sortPosition=" + sortPosition +
+                '}';
+    }
 }
