@@ -42,6 +42,10 @@ public class SpecialSellContentVO  implements Serializable{
 	 */
 	private String name;
 	/**
+	 * 
+	 */
+	private Integer contentId;
+	/**
 	 * @return the id
 	 */
 	public Integer getId() {
@@ -113,19 +117,30 @@ public class SpecialSellContentVO  implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
+	/**
+	 * @return the contentId
+	 */
+	public Integer getContentId() {
+		return contentId;
+	}
+	/**
+	 * @param contentId the contentId to set
+	 */
+	public void setContentId(Integer contentId) {
+		this.contentId = contentId;
+	}
 	/**(非 Javadoc)
 	* @Title: toString 
 	* @Description: TODO(这里用一句话描述这个方法的作用) 
 	* @param @return    设定文件 
 	* @author shaozhou 
-	* @date 2015年11月27日 下午4:10:02
+	* @date 2015年12月1日 下午5:20:25
 	* @throws 
 	*/
 	@Override
 	public String toString() {
 		return "SpecialSellContentVO [id=" + id + ", picUrls=" + picUrls + ", activityUrl=" + activityUrl
 				+ ", businessDistrictName=" + businessDistrictName + ", businessDistrictId=" + businessDistrictId
-				+ ", name=" + name + "]";
+				+ ", name=" + name + ", contentId=" + contentId + "]";
 	}
-	
 }

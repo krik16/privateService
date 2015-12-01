@@ -18,7 +18,7 @@ public class FlashPurchaseContentVO  implements Serializable{
 	*/ 
 	private static final long serialVersionUID = -5671906000929060540L;
 	/**
-	 * 闪购id
+	 * 特卖id
 	 */
 	private Integer id;
 	/**
@@ -29,7 +29,14 @@ public class FlashPurchaseContentVO  implements Serializable{
 	 * 详情url
 	 */
 	private String activityUrl;
+	/**
+	 * 名称
+	 */
 	private String name;
+	/**
+	 * 闪购id
+	 */
+	private Integer contentId;
 	/**
 	 * @return the id
 	 */
@@ -78,17 +85,29 @@ public class FlashPurchaseContentVO  implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
+	/**
+	 * @return the contentId
+	 */
+	public Integer getContentId() {
+		return contentId;
+	}
+	/**
+	 * @param contentId the contentId to set
+	 */
+	public void setContentId(Integer contentId) {
+		this.contentId = contentId;
+	}
 	/**(非 Javadoc)
 	* @Title: toString 
 	* @Description: TODO(这里用一句话描述这个方法的作用) 
 	* @param @return    设定文件 
 	* @author shaozhou 
-	* @date 2015年11月27日 下午4:21:12
+	* @date 2015年12月1日 下午5:21:06
 	* @throws 
 	*/
 	@Override
 	public String toString() {
 		return "FlashPurchaseContentVO [id=" + id + ", bannerPic=" + bannerPic + ", activityUrl=" + activityUrl
-				+ ", name=" + name + "]";
+				+ ", name=" + name + ", contentId=" + contentId + "]";
 	}
 }
