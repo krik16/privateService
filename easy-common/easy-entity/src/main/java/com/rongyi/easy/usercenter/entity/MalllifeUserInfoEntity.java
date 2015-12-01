@@ -100,6 +100,8 @@ public class MalllifeUserInfoEntity  implements Serializable {
     /** 注册IP */
     private String registIp;
 
+
+
     /**
      * 用户uuid
      * @return id
