@@ -11,6 +11,7 @@ public class OldMallVO implements Serializable{
 	private String address;
 	private List<MainCategoriesVO> main_categories;
 	private String telephone;
+	private String mobile;
 	private String transport_information;
 	private String business_hours;
 	private Double coord_x;
@@ -74,6 +75,12 @@ public class OldMallVO implements Serializable{
 	}
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
+	}
+	public String getMobile() {
+		return mobile;
+	}
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
 	public String getTransport_information() {
 		return transport_information;

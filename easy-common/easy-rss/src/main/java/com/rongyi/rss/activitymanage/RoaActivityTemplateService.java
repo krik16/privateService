@@ -2,6 +2,7 @@ package com.rongyi.rss.activitymanage;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.activitymanage.entity.ActivityTemplate;
+import com.rongyi.easy.activitymanage.entity.TemplateSaleShopMall;
 import com.rongyi.easy.activitymanage.param.ActivityTemplateParam;
 import com.rongyi.easy.activitymanage.vo.ActivityListVO;
 import com.rongyi.easy.activitymanage.vo.ActivityTemplateVO;
@@ -63,4 +64,12 @@ public interface RoaActivityTemplateService {
 
 
      int findActivityByMallShop(String mallMid,String shopMid);
+
+    /**
+     * 根据商场id查询特卖对应的商场店铺列表
+     * @param mallId 商场id
+     * @return List<TemplateSaleShopMall>
+     * @author lijin
+     */
+    List<TemplateSaleShopMall> findTemplateSaleShopMalls(String mallId);
 }
