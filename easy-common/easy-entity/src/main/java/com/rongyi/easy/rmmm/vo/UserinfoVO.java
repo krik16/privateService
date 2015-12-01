@@ -62,6 +62,8 @@ public class UserinfoVO implements Serializable{
 
 	String userDesc;//用户简介
 
+	String permission;//权限
+
 	
 	public Integer getIfAttention() {
 		return ifAttention;
@@ -237,5 +239,13 @@ public class UserinfoVO implements Serializable{
 
 	public void setLabelList(List<UserLabelDto> labelList) {
 		this.labelList = labelList;
+	}
+
+	public String getPermission() {
+		return permission;
+	}
+
+	public void setPermission(String permission) {
+		this.permission = permission;
 	}
 }
