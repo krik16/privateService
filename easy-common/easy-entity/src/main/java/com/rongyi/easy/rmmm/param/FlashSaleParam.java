@@ -59,15 +59,17 @@ public class FlashSaleParam extends MalllifeBaseParam implements Serializable{
 	 * 给前端的随机数
 	 */
 	private Integer randomParam;
-	
-	private String contentId;
+	/**
+	 * 内容id
+	 */
+	private Integer contentId;
 
 	
 	
-	public String getContentId() {
+	public Integer getContentId() {
 		return contentId;
 	}
-	public void setContentId(String contentId) {
+	public void setContentId(Integer contentId) {
 		this.contentId = contentId;
 	}
 	public String getId() {
