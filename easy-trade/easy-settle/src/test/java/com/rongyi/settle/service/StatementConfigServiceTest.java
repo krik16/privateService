@@ -78,7 +78,7 @@ public class StatementConfigServiceTest extends BaseTest{
 		statementConfigService.update(statementConfig);
 	}
 	
-	@Test
+//	@Test
 	@Description("分页查询")
 	public void selectPageListTest(){
 		Map<String,Object> map = new HashMap<String,Object>();

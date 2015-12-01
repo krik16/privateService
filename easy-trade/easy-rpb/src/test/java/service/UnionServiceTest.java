@@ -76,8 +76,8 @@ public class UnionServiceTest extends BaseTest{
 
 	@Test
 	public void testSelectByMsgtxCodeAndTransNo(){
-		UnionCouponLogEntity unionCouponLogEntity = unionCouponService.selectByMsgtxCodeAndTransNo("002003", "1234567890");
-		System.err.println(unionCouponLogEntity.getId());
+//		UnionCouponLogEntity unionCouponLogEntity = unionCouponService.selectByMsgtxCodeAndTransNo("002003", "1234567890");
+//		System.err.println(unionCouponLogEntity.getId());
 	}
 //	@Test
 	public void testHttpValidate() {
