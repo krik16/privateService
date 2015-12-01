@@ -157,4 +157,16 @@ public interface IIContentService {
 	 * 修改置顶状态
 	 */
 	public Boolean updateStickById(ForumStick fs);
+	/**
+	 * 
+	* @Title: findContentAllByParamSpecail 
+	* @Description: 特卖查询列表接口
+	* @param @param par
+	* @param @return    设定文件 
+	* @return List<ForumContentListVo>    返回类型 
+	* @author shaozhou 
+	* @date 2015年12月1日 下午2:36:46
+	* @throws
+	 */
+	public List<ForumContentListVo> findContentAllByParamSpecail(ForumContentParam par);
 }
