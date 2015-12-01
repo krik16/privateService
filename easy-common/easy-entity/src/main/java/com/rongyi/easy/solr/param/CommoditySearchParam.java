@@ -60,7 +60,7 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 
 	private Integer flashSaleId; // 闪购ID
 	
-	/** 商品类型 (直播 1，全部商品 0, 卖场 2, 闪购 3)*/
+	/** 商品类型 (直播 1，全部商品 0, te卖场 2, 闪购 3)*/
 	private String commodityType;
 
 	public String getCommodityType() {

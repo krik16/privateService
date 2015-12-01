@@ -59,9 +59,17 @@ public class FlashSaleParam extends MalllifeBaseParam implements Serializable{
 	 * 给前端的随机数
 	 */
 	private Integer randomParam;
+	
+	private String contentId;
 
 	
 	
+	public String getContentId() {
+		return contentId;
+	}
+	public void setContentId(String contentId) {
+		this.contentId = contentId;
+	}
 	public String getId() {
 		return id;
 	}
@@ -125,20 +133,14 @@ public class FlashSaleParam extends MalllifeBaseParam implements Serializable{
 	public void setLatitude(String latitude) {
 		this.latitude = latitude;
 	}
-
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this)
-				.append("id", id)
-				.append("keywork", keywork)
-				.append("cityId", cityId)
-				.append("cityName", cityName)
-				.append("sortBy", sortBy)
-				.append("longitude", longitude)
-				.append("latitude", latitude)
-				.append("brandId", brandId)
-				.append("commodityCategory", commodityCategory)
-				.append("randomParam", randomParam)
-				.toString();
+		return "FlashSaleParam [id=" + id + ", keywork=" + keywork
+				+ ", cityId=" + cityId + ", cityName=" + cityName + ", sortBy="
+				+ sortBy + ", longitude=" + longitude + ", latitude="
+				+ latitude + ", brandId=" + brandId + ", commodityCategory="
+				+ commodityCategory + ", randomParam=" + randomParam
+				+ ", contentId=" + contentId + "]";
 	}
+ 
 }
