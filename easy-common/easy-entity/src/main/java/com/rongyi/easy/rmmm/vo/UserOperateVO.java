@@ -21,6 +21,27 @@ public class UserOperateVO implements Serializable{
 	private Integer newRebate = 0;//上次操作我的抵扣券之后领取的抵扣券数量
 	private Integer newTempNum = 0;// 系统消息数量
 	private Integer myIntegral = 0;//我的容颜值
+	private Integer myCouponNum = 0;//我的代金券数量
+	private Integer myHongBaoNum = 0;//我的红包数量
+	private Integer myRebateNum = 0;//我的抵扣券数量
+	public Integer getMyCouponNum() {
+		return myCouponNum;
+	}
+	public void setMyCouponNum(Integer myCouponNum) {
+		this.myCouponNum = myCouponNum;
+	}
+	public Integer getMyHongBaoNum() {
+		return myHongBaoNum;
+	}
+	public void setMyHongBaoNum(Integer myHongBaoNum) {
+		this.myHongBaoNum = myHongBaoNum;
+	}
+	public Integer getMyRebateNum() {
+		return myRebateNum;
+	}
+	public void setMyRebateNum(Integer myRebateNum) {
+		this.myRebateNum = myRebateNum;
+	}
 	public Integer getMyIntegral() {
 		return myIntegral;
 	}
