@@ -13,12 +13,12 @@ public class WechatInfoVo {
 	private String appSecret;
 	private String encodingAESKey;
 	private Integer type;
-	private Integer mallId;
-	private String mallMid;
+	private String mallId;
 	private String mallName;
 	private String dockingType;
 	private Integer isMeiwei ;//是否接入美味不用等
 	private String meiweiId;  //美味不用等商场ID
+	private Integer isDeleted ;
 	public Integer getId() {
 		return id;
 	}
@@ -61,17 +61,11 @@ public class WechatInfoVo {
 	public void setType(Integer type) {
 		this.type = type;
 	}
-	public Integer getMallId() {
+	public String getMallId() {
 		return mallId;
 	}
-	public void setMallId(Integer mallId) {
+	public void setMallId(String mallId) {
 		this.mallId = mallId;
-	}
-	public String getMallMid() {
-		return mallMid;
-	}
-	public void setMallMid(String mallMid) {
-		this.mallMid = mallMid;
 	}
 	public String getMallName() {
 		return mallName;
@@ -96,6 +90,12 @@ public class WechatInfoVo {
 	}
 	public void setMeiweiId(String meiweiId) {
 		this.meiweiId = meiweiId;
+	}
+	public Integer getIsDeleted() {
+		return isDeleted;
+	}
+	public void setIsDeleted(Integer isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 	
 }
