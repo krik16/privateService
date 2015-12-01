@@ -227,5 +227,17 @@ public interface ROAContentService {
 	* @throws
 	 */
 	public List<ForumContentListVo> findContentAllByParamFlush(FlashSellParam par);
+	/**
+	 * 
+	* @Title: findContentAllByParamSpecail 
+	* @Description: 管理界面查询特卖列表接口
+	* @param @param par
+	* @param @return    设定文件 
+	* @return List<ForumContentListVo>    返回类型 
+	* @author shaozhou 
+	* @date 2015年12月1日 下午2:38:07
+	* @throws
+	 */
+	public List<ForumContentListVo> findContentAllByParamSpecail(ForumContentParam par);
 	
 }

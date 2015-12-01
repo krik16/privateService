@@ -29,6 +29,10 @@ public class ForumStick implements Serializable{
 	 */
 	private Date updateDate;
 	/**
+	 * 置顶时间
+	 */
+	private Date stickDate;
+	/**
 	 * 置顶：1，取消置顶：0
 	 */
 	private int stick;
@@ -79,5 +83,17 @@ public class ForumStick implements Serializable{
 	 */
 	public void setStick(int stick) {
 		this.stick = stick;
+	}
+	/**
+	 * @return the stickDate
+	 */
+	public Date getStickDate() {
+		return stickDate;
+	}
+	/**
+	 * @param stickDate the stickDate to set
+	 */
+	public void setStickDate(Date stickDate) {
+		this.stickDate = stickDate;
 	}
 }
