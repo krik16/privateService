@@ -21,6 +21,7 @@ public class LogParam implements Serializable {
     private  String content;//[内容]
     private  String clickNum;//[点击量]
     private  String type;//[展示、点击、debug类型等]
+    private  String timeStamp;//点击时间戳
 
     public String getPage() {
         return page;
@@ -68,5 +69,13 @@ public class LogParam implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
     }
 }
