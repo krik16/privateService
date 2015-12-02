@@ -7,6 +7,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 
 import com.rongyi.rpb.common.pay.weixin.util.Configure;
+import org.slf4j.Logger;
 
 /**
  * User: rizenguo
@@ -22,7 +23,11 @@ public class BaseService{
     //发请求的HTTPS请求器
     private IServiceRequest serviceRequest;
 
+    private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(UnifiedorderService.class);
+
+
     public BaseService(String api) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+        LOGGER.info("UnifiedorderService API={}", Configure.UNIFIED_ORDER_API);
         apiURL = api;
         Class c = Class.forName(Configure.HttpsRequestClassName);
         serviceRequest = (IServiceRequest) c.newInstance();
