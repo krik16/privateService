@@ -13,7 +13,7 @@ import com.rongyi.rss.settle.PaymentStatementGenerateService;
 import com.rongyi.settle.constants.SettleConstant;
 import com.rongyi.settle.dto.CouponCodeExcelDto;
 import com.rongyi.settle.dto.CouponExcelDto;
-import com.rongyi.settle.dto.PaymentStatementDetailDto;
+import com.rongyi.settle.dto.CouponStatementDetailDto;
 import com.rongyi.settle.dto.PaymentStatementExcelDto;
 import com.rongyi.settle.service.BussinessInfoService;
 import com.rongyi.settle.service.PaymentStatementService;
@@ -21,7 +21,6 @@ import com.rongyi.settle.service.StatementConfigService;
 import com.rongyi.settle.util.AmountUtil;
 import com.rongyi.settle.util.DateUtils;
 import com.rongyi.settle.util.ExcelUtils;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -130,11 +129,11 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
 
     private void createExcel(PaymentStatement paymentStatement, StatementConfig statementConfig) throws Exception {
         PaymentStatementExcelDto paymentStatementExcelDto = new PaymentStatementExcelDto();
-        List<PaymentStatementDetailDto> paymentStatementDetailDtoList = new ArrayList<>();
+        List<CouponStatementDetailDto> couponStatementDetailDtoList = new ArrayList<>();
         List<CouponExcelDto> couponExcelDtoList = new ArrayList<>();
         if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.SHOP)) {
             ShopVO shopVO = roaShopService.getShopVOById(statementConfig.getBussinessId());
-            paymentStatementDetailDtoList =
+            couponStatementDetailDtoList =
                     paymentStatementService.selectForStatementDetails(statementConfig.getBussinessId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime(), shopVO.getName(), shopVO.getPosition().getMallId(), shopVO.getPosition().getMall());
             couponExcelDtoList = paymentStatementService.selectForCouponExcelDto(statementConfig.getBussinessId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime());
             paymentStatementExcelDto.setShopName(shopVO.getName());
@@ -146,7 +145,7 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
             List<ShopVO> shopVOs = (List<ShopVO>) result.get("list");
             for (ShopVO shopVO : shopVOs) {
                 logger.info("定时任务-生成对账单-商场类型配置，shopId="+shopVO.getId());
-                paymentStatementDetailDtoList.addAll(paymentStatementService.selectForStatementDetails(shopVO.getId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime(), shopVO.getName(), shopVO.getPosition().getMallId(), shopVO.getPosition().getMall()));
+                couponStatementDetailDtoList.addAll(paymentStatementService.selectForStatementDetails(shopVO.getId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime(), shopVO.getName(), shopVO.getPosition().getMallId(), shopVO.getPosition().getMall()));
                 couponExcelDtoList.addAll(paymentStatementService.selectForCouponExcelDto(shopVO.getId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime()));
             }
             if (shopVOs != null && shopVOs.size() > 0) {
@@ -159,7 +158,7 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
         List<CouponCodeExcelDto> couponCodeExcelDtoList = new ArrayList<>();
         double total = 0;
         double payTotal = 0;
-        for (PaymentStatementDetailDto paymentStatementDetailDto : paymentStatementDetailDtoList) {
+        for (CouponStatementDetailDto paymentStatementDetailDto : couponStatementDetailDtoList) {
             CouponCodeExcelDto couponCodeExcelDto = paymentStatementDetailDto.toCouponCodeExcelDto();
             couponCodeExcelDtoList.add(couponCodeExcelDto);
             total += couponCodeExcelDto.getOrigPrice();
