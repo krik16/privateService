@@ -386,7 +386,7 @@ public class StatementConfigController extends BaseController{
 					}
 				}
 				int count = resultMap.containsKey("totalCount") ? Integer.valueOf(resultMap.get("totalCount").toString()) : 0;
-				result = ResponseData.success(resultMap.get("list"), currpage, pagesize, count);
+				result = ResponseData.success(reList, currpage, pagesize, count);
 			} else if (type == 2) {// 品牌
 				PagingVO<BrandVO> brands = roaBrandService.getBrandListByMap(searchMap, currpage, pagesize);
 				result = ResponseData.success(brands.getDataList(), currpage, pagesize, brands.getRowCnt());
