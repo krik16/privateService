@@ -11,6 +11,7 @@ import com.rongyi.easy.coupon.param.VoucherCouponParam;
 import com.rongyi.easy.coupon.vo.operation.CouponCountVO;
 import com.rongyi.easy.coupon.vo.operation.VoucherCouponVO;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -202,4 +203,6 @@ public interface RoaVoucherCouponService {
      * @return
      */
     boolean dataMigration();
+
+    List<String> selectRedenveByStartEndAt(Date startAt,Date endAt);
 }
