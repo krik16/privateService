@@ -68,7 +68,7 @@ public class WeixinPayUnit {
         } catch (WeixinException e){
             throw e;
         }catch (Exception e) {
-            LOGGER.error("getAppWeXinSign error. exception={}", e.getMessage());
+            e.printStackTrace();
             throw new WeixinException(ConstantEnum.EXCEPTION_WEIXIN_SIGN_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_SIGN_FAIL.getValueStr());
         }
         return map;
