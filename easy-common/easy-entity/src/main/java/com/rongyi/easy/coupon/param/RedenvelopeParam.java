@@ -21,6 +21,8 @@ import com.rongyi.easy.coupon.vo.operation.VoucherCouponVO;
 @SuppressWarnings("serial")
 public class RedenvelopeParam implements Serializable {
 	private static final long serialVersionUID = 7422873726669964441L;
+	private static final String ORDER_BY_CLAUSE = "create_at DESC";
+	private String orderByClause = ORDER_BY_CLAUSE;
 	private String id;// 促销券id
 	private List<String> ids;// 促销券ids
 	private String name;// 促销券名称/商场名称/券码领用人名称
@@ -57,14 +59,6 @@ public class RedenvelopeParam implements Serializable {
 	private String flag;//有效期类型 0:时间控件,1：天
 	private String zoneId;// 商圈
 	private String zoneType;//商圈对应类型
-	public String getZoneType() {
-		return zoneType;
-	}
-
-	public void setZoneType(String zoneType) {
-		this.zoneType = zoneType;
-	}
-
 	private Integer currentPage;// 当前页数
 	private Integer pageSize;// 分页数量
 	private String commodityId;// 商品id/商品分类id
@@ -72,14 +66,6 @@ public class RedenvelopeParam implements Serializable {
 	private String shopId;// 店铺id
 	private String shopName;// 店铺名称
 	private String code;// 券码
-	public String getShopName() {
-		return shopName;
-	}
-
-	public void setShopName(String shopName) {
-		this.shopName = shopName;
-	}
-
 	private String orderNo;// 订单号
 	private String userPhone;// 券码领用账号
 	private Integer receiveChannel;// 券码领用渠道(0:容易逛,1:互动屏,2:微信)
@@ -93,7 +79,6 @@ public class RedenvelopeParam implements Serializable {
 	private List<CouponCommodity> listCouponCommodity;// 关联商品
 	private List<CouponCommodityCategory> couponCommodityCategories;//商品分类
 	private boolean isRelatedAll;//是否关联品牌、或商场下所有店铺 0否 1是
-	private String orderByClause;
 	private Integer offset;
 	private String unpassReasons;
 	private Integer publishChannel;
@@ -594,7 +579,20 @@ public class RedenvelopeParam implements Serializable {
 	public void setIsRelatedAll(boolean isRelatedAll) {
 		this.isRelatedAll = isRelatedAll;
 	}
+	public String getZoneType() {
+		return zoneType;
+	}
 
+	public void setZoneType(String zoneType) {
+		this.zoneType = zoneType;
+	}
+	public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
 	@Override
 	public String toString() {
 		return "RedenvelopeParam [id=" + id + ", ids=" + ids + ", name=" + name
