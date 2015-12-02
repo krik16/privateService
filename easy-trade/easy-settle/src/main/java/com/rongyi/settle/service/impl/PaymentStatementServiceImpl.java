@@ -31,7 +31,7 @@ import com.rongyi.settle.constants.ConstantEnum;
 import com.rongyi.settle.constants.SettleConstant;
 import com.rongyi.settle.dto.CouponCodeExcelDto;
 import com.rongyi.settle.dto.CouponExcelDto;
-import com.rongyi.settle.dto.PaymentStatementDetailDto;
+import com.rongyi.settle.dto.CouponStatementDetailDto;
 import com.rongyi.settle.dto.PaymentStatementExcelDto;
 import com.rongyi.settle.mapper.OperationLogMapper;
 import com.rongyi.settle.mapper.PaymentStatementMapper;
@@ -176,7 +176,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 	}
 
 	@Override
-	public List<PaymentStatementDetailDto> selectForStatementDetails(String shopId, Date startTime, Date endTime, Date cycleStartTime, Date cycleEndTime, String shopName, String mallId,
+	public List<CouponStatementDetailDto> selectForStatementDetails(String shopId, Date startTime, Date endTime, Date cycleStartTime, Date cycleEndTime, String shopName, String mallId,
 			String mallName) {
 		Map map = new HashMap();
 		map.put("shopId", shopId);
@@ -187,11 +187,11 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 //		map.put("shopName", shopName);
 //		map.put("mallId", mallId);
 //		map.put("mallName", mallName);
-		List<PaymentStatementDetailDto> result = this.getBaseDao().selectListBySql(NAMESPACE + ".selectForStatementDetails", map);
-		for (PaymentStatementDetailDto paymentStatementDetailDto : result) {
-			paymentStatementDetailDto.setShopName(shopName);
-			paymentStatementDetailDto.setMallId(mallId);
-			paymentStatementDetailDto.setMallName(mallName);
+		List<CouponStatementDetailDto> result = this.getBaseDao().selectListBySql(NAMESPACE + ".selectForStatementDetails", map);
+		for (CouponStatementDetailDto couponStatementDetailDto : result) {
+			couponStatementDetailDto.setShopName(shopName);
+			couponStatementDetailDto.setMallId(mallId);
+			couponStatementDetailDto.setMallName(mallName);
 		}
 		return result;
 	}
@@ -264,11 +264,11 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 
 	private void createExcel(Integer id, PaymentStatement paymentStatement, StatementConfig statementConfig,String userId) throws Exception {
 		PaymentStatementExcelDto paymentStatementExcelDto = new PaymentStatementExcelDto();
-		List<PaymentStatementDetailDto> paymentStatementDetailDtoList = new ArrayList<>();
+		List<CouponStatementDetailDto> couponStatementDetailDtoList = new ArrayList<>();
 		List<CouponExcelDto> couponExcelDtoList = new ArrayList<>();
 		if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.SHOP)) {
 			ShopVO shopVO = roaShopService.getShopVOById(statementConfig.getBussinessId());
-			paymentStatementDetailDtoList = selectForStatementDetails(statementConfig.getBussinessId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(),
+			couponStatementDetailDtoList = selectForStatementDetails(statementConfig.getBussinessId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(),
 					statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime(), shopVO.getName(), shopVO.getPosition().getMallId(), shopVO.getPosition().getMall());
 			couponExcelDtoList = selectForCouponExcelDto(statementConfig.getBussinessId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(),
 					statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime());
@@ -281,7 +281,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 			List<ShopVO> shopVOs = (List<ShopVO>) result.get("list");
 			for (ShopVO shopVO : shopVOs) {
 				logger.info("重新生成对账单-商场类型配置，shopId="+shopVO.getId());
-				paymentStatementDetailDtoList.addAll(selectForStatementDetails(shopVO.getId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(),
+				couponStatementDetailDtoList.addAll(selectForStatementDetails(shopVO.getId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(),
 						statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime(), shopVO.getName(), shopVO.getPosition().getMallId(), shopVO.getPosition().getMall()));
 				couponExcelDtoList.addAll(selectForCouponExcelDto(shopVO.getId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(),
 						statementConfig.getCycleEndTime()));
@@ -295,8 +295,8 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		List<CouponCodeExcelDto> couponCodeExcelDtoList = new ArrayList<>();
 		double total = 0;
 		double payTotal = 0;
-		for (PaymentStatementDetailDto paymentStatementDetailDto : paymentStatementDetailDtoList) {
-			CouponCodeExcelDto couponCodeExcelDto = paymentStatementDetailDto.toCouponCodeExcelDto();
+		for (CouponStatementDetailDto couponStatementDetailDto : couponStatementDetailDtoList) {
+			CouponCodeExcelDto couponCodeExcelDto = couponStatementDetailDto.toCouponCodeExcelDto();
 			couponCodeExcelDtoList.add(couponCodeExcelDto);
 			total += couponCodeExcelDto.getOrigPrice();
 			payTotal += couponCodeExcelDto.getPayAmount();
