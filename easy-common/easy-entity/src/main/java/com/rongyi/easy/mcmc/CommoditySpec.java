@@ -29,6 +29,7 @@ public class CommoditySpec implements  Serializable {
 	private Date updateAt;
 	private String updateBy;
 	private String pictureUrl;//规格图片
+	private String lockedStock;//锁定库存
 	private String total;//规格商品总数
 	public List<ObjectId> getColumnIds() {
 		return columnIds;
@@ -146,6 +147,12 @@ public class CommoditySpec implements  Serializable {
 	}
 	public void setTotal(String total) {
 		this.total = total;
+	}
+	public String getLockedStock() {
+		return lockedStock;
+	}
+	public void setLockedStock(String lockedStock) {
+		this.lockedStock = lockedStock;
 	}
 	
 	

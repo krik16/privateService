@@ -21,6 +21,7 @@ public class CommodityVO2 implements  Serializable {
 	private String code;//商品编码
 	private Integer stock;//商品库存（包括卖出的商品和锁定的商品）
 	private Integer remain;//商品剩余量
+	private Integer lockedStock;//锁定库存
 	private Integer isNormalized;//0表示没有规格1表示有规格的
 	private String originalPrice;//商品原价
 	private String currentPrice;//商品现价
@@ -193,6 +194,12 @@ public class CommodityVO2 implements  Serializable {
 	}
 	public void setCategoryIds(List<String> categoryIds) {
 		this.categoryIds = categoryIds;
+	}
+	public Integer getLockedStock() {
+		return lockedStock;
+	}
+	public void setLockedStock(Integer lockedStock) {
+		this.lockedStock = lockedStock;
 	}
 	
 }

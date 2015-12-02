@@ -25,6 +25,7 @@ public class CommoditySpecVO2 implements  Serializable {
 	private String pictureUrl;//规格图片
 	private int stock;//库存
 	private int remain;//剩余量
+	private int lockedStock;//锁定库存
 	public String getId() {
 		return id;
 	}
@@ -118,6 +119,13 @@ public class CommoditySpecVO2 implements  Serializable {
 	public void setColumnNotes(List<String> columnNotes) {
 		this.columnNotes = columnNotes;
 	}
+	public int getLockedStock() {
+		return lockedStock;
+	}
+	public void setLockedStock(int lockedStock) {
+		this.lockedStock = lockedStock;
+	}
+	
 	
 	
 	

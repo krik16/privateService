@@ -39,6 +39,7 @@ public class Commodity implements  Serializable,Cloneable{
 	private String postage;//商品邮费
 	private Integer stock;//商品库存
 	private Integer sold;//商品销量
+	private Integer lockedStock;//锁定库存
 	private Date createAt;//数据创建日期
 	private Date updateAt;//数据更新日期
 	private String originalPrice;//商品原价
@@ -524,6 +525,14 @@ public class Commodity implements  Serializable,Cloneable{
 	}
 	public void setFilialeMid(String filialeMid) {
 		this.filialeMid = filialeMid;
+	}
+
+	public Integer getLockedStock() {
+		return lockedStock;
+	}
+
+	public void setLockedStock(Integer lockedStock) {
+		this.lockedStock = lockedStock;
 	}
 	
 }

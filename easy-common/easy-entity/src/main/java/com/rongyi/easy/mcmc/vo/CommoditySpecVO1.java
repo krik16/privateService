@@ -15,6 +15,7 @@ public class CommoditySpecVO1 implements  Serializable {
 	private List<String> columnNotes;//规格备注
 	private int stock;//初始库存
 	private int remain;//剩余量
+	private int locked;//锁定库存
 	private String systemNumber;//系统编号
 	private String pictureUrl;//规格图片
 	public String getOriginalPrice() {
@@ -74,6 +75,12 @@ public class CommoditySpecVO1 implements  Serializable {
 	}
 	public void setColumnNotes(List<String> columnNotes) {
 		this.columnNotes = columnNotes;
+	}
+	public int getLocked() {
+		return locked;
+	}
+	public void setLocked(int locked) {
+		this.locked = locked;
 	}
 	
 }
