@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * Created by xgq on 2015/9/28.
  */
-public class PaymentStatementDetailDto {
+public class CouponStatementDetailDto {
     private String orderNo;
     private String payNo;
     private Date useTime;

@@ -7,7 +7,7 @@ import java.util.Map;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
 import com.rongyi.easy.settle.entity.PaymentStatement;
 import com.rongyi.settle.dto.CouponExcelDto;
-import com.rongyi.settle.dto.PaymentStatementDetailDto;
+import com.rongyi.settle.dto.CouponStatementDetailDto;
 
 /**
  * Created by xgq on 2015/9/22.
@@ -38,7 +38,7 @@ public interface PaymentStatementService {
      */
     boolean updatePaymentStatusByIds(List<Integer> ids, Integer status, String desc, String userId);
 
-    List<PaymentStatementDetailDto> selectForStatementDetails(String shopId, Date startTime, Date endTime, Date cycleStartTime, Date cycleEndTime, String shopName, String mallId, String mallName);
+    List<CouponStatementDetailDto> selectForStatementDetails(String shopId, Date startTime, Date endTime, Date cycleStartTime, Date cycleEndTime, String shopName, String mallId, String mallName);
 
     List<CouponExcelDto> selectForCouponExcelDto(String shopId, Date startTime, Date endTime, Date cycleStartTime, Date cycleEndTime);
 
