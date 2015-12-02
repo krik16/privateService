@@ -139,6 +139,18 @@ public class CouponVO implements Serializable {
 
     private List<Integer> afterSaleService; // = CouponConst.AFTER_SALE_SERVICE;//[1,1,1,1] 1为支持，0为不支持。第一位：随时退、第二位：过期退 第三位： 免预约、第四位：不可退
 
+    /**
+     * 优惠方式 0：满减 ；1：立减。
+     */
+    private Integer preferentialType;
+
+    public Integer getPreferentialType() {
+        return preferentialType;
+    }
+
+    public void setPreferentialType(Integer preferentialType) {
+        this.preferentialType = preferentialType;
+    }
 
     public String getId() {
         return id;
