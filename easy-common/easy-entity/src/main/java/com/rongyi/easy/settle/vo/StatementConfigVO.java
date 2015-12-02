@@ -55,6 +55,26 @@ public class StatementConfigVO extends StatementConfig{
      */
     private String bussinessAddress;
 
+	/**
+	 * 关联店铺id集合（逗号分隔），-1表示包含所有，0表示本身
+	 */
+	private String linkShopId;
+
+	/**
+	 * 关联店铺操作(0:选择,1:排除)
+	 */
+	private Byte linkShopOp;
+
+	/**
+	 * 关联角色(0:全部,1:导购，2:买手)
+	 */
+	private Byte linkRole;
+
+	/**
+	 * 关联账号(多个账号逗号分隔)
+	 */
+	private String linkUserPhone;
+
     /**
      * 联系人邮箱(多个邮箱用分号分隔开)
      */
@@ -199,7 +219,44 @@ public class StatementConfigVO extends StatementConfig{
 	public void setGenerateTime(String generateTime) {
 		this.generateTime = generateTime;
 	}
-    
-    
 
+	@Override
+	public String getLinkShopId() {
+		return linkShopId;
+	}
+
+	@Override
+	public void setLinkShopId(String linkShopId) {
+		this.linkShopId = linkShopId;
+	}
+
+	@Override
+	public Byte getLinkShopOp() {
+		return linkShopOp;
+	}
+
+	@Override
+	public void setLinkShopOp(Byte linkShopOp) {
+		this.linkShopOp = linkShopOp;
+	}
+
+	@Override
+	public Byte getLinkRole() {
+		return linkRole;
+	}
+
+	@Override
+	public void setLinkRole(Byte linkRole) {
+		this.linkRole = linkRole;
+	}
+
+	@Override
+	public String getLinkUserPhone() {
+		return linkUserPhone;
+	}
+
+	@Override
+	public void setLinkUserPhone(String linkUserPhone) {
+		this.linkUserPhone = linkUserPhone;
+	}
 }

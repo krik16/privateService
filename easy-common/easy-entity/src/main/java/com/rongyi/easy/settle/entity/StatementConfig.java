@@ -4,19 +4,18 @@ package com.rongyi.easy.settle.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-/**	
- * @Author:  柯军
- * @Description: 对账配置表 
+/**
+ * @Author: 柯军
+ * @Description: 对账配置表
  * @datetime:2015年9月17日上午10:44:44
- *
  **/
 public class StatementConfig implements Serializable {
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = -6319099252654638886L;
+     *
+     */
+    private static final long serialVersionUID = -6319099252654638886L;
 
-	private Integer id;
+    private Integer id;
 
     /**
      * 规则编码
@@ -47,11 +46,31 @@ public class StatementConfig implements Serializable {
      * 商户名称
      */
     private String bussinessName;
-    
+
     /**
      * 商户真实地址
      */
     private String bussinessRealAddress;
+
+    /**
+     * 关联店铺id集合（逗号分隔），-1表示包含所有，0表示本身
+     */
+    private String linkShopId;
+
+    /**
+     * 关联店铺操作(0:选择,1:排除)
+     */
+    private Byte linkShopOp;
+
+    /**
+     * 关联角色(0:全部,1:导购，2:买手)
+     */
+    private Byte linkRole;
+
+    /**
+     * 关联账号(多个账号逗号分隔)
+     */
+    private String linkUserPhone;
 
     /**
      * 计算周期（0:日，1:周，2:月，3:自定义）
@@ -163,7 +182,7 @@ public class StatementConfig implements Serializable {
      */
     private String createBy;
 
-    
+
     public Integer getId() {
         return id;
     }
@@ -261,14 +280,14 @@ public class StatementConfig implements Serializable {
     }
 
     public String getGenerateHmTime() {
-		return generateHmTime;
-	}
+        return generateHmTime;
+    }
 
-	public void setGenerateHmTime(String generateHmTime) {
-		this.generateHmTime = generateHmTime;
-	}
+    public void setGenerateHmTime(String generateHmTime) {
+        this.generateHmTime = generateHmTime;
+    }
 
-	public Date getSendTime() {
+    public Date getSendTime() {
         return sendTime;
     }
 
@@ -396,12 +415,43 @@ public class StatementConfig implements Serializable {
         this.bussinessId = bussinessId;
     }
 
-	public String getBussinessRealAddress() {
-		return bussinessRealAddress;
-	}
+    public String getBussinessRealAddress() {
+        return bussinessRealAddress;
+    }
 
-	public void setBussinessRealAddress(String bussinessRealAddress) {
-		this.bussinessRealAddress = bussinessRealAddress;
-	}
-    
+    public void setBussinessRealAddress(String bussinessRealAddress) {
+        this.bussinessRealAddress = bussinessRealAddress;
+    }
+
+    public String getLinkShopId() {
+        return linkShopId;
+    }
+
+    public void setLinkShopId(String linkShopId) {
+        this.linkShopId = linkShopId;
+    }
+
+    public Byte getLinkShopOp() {
+        return linkShopOp;
+    }
+
+    public void setLinkShopOp(Byte linkShopOp) {
+        this.linkShopOp = linkShopOp;
+    }
+
+    public Byte getLinkRole() {
+        return linkRole;
+    }
+
+    public void setLinkRole(Byte linkRole) {
+        this.linkRole = linkRole;
+    }
+
+    public String getLinkUserPhone() {
+        return linkUserPhone;
+    }
+
+    public void setLinkUserPhone(String linkUserPhone) {
+        this.linkUserPhone = linkUserPhone;
+    }
 }
