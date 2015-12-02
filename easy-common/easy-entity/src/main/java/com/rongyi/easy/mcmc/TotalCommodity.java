@@ -18,7 +18,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	
 	private String name;//商品名称
 	private String category;//商品品类id
-	private Integer status;//状态 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理5待审核 6审核失败7商家审核通过待容易网审核
+	private Integer status;//状态 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架(当前时间在上架时间和下架时间之间)4待处理5待审核 6审核失败7商家审核通过待容易网审核
 
 	private String code;//商品编码
 	private String description;//商品描述
@@ -49,8 +49,8 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private String reason;//下架原因
 	
 	private String brandMid;//品牌id
-	private String filialeMid;//分公司id
-	private String shopMid;//店铺id
+	private List<String> filialeMids;//分公司id
+	private List<String> shopMids;//店铺id
 	private String brandId;//品牌mysqlId
 	public ObjectId getId() {
 		return id;
@@ -210,17 +210,18 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	public void setBrandMid(String brandMid) {
 		this.brandMid = brandMid;
 	}
-	public String getFilialeMid() {
-		return filialeMid;
+	
+	public List<String> getFilialeMids() {
+		return filialeMids;
 	}
-	public void setFilialeMid(String filialeMid) {
-		this.filialeMid = filialeMid;
+	public void setFilialeMids(List<String> filialeMids) {
+		this.filialeMids = filialeMids;
 	}
-	public String getShopMid() {
-		return shopMid;
+	public List<String> getShopMids() {
+		return shopMids;
 	}
-	public void setShopMid(String shopMid) {
-		this.shopMid = shopMid;
+	public void setShopMids(List<String> shopMids) {
+		this.shopMids = shopMids;
 	}
 	public Integer getUpdateBy() {
 		return updateBy;
