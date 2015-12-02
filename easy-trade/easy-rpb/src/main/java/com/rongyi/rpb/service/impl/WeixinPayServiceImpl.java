@@ -72,6 +72,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
         try {
             BigDecimal totalFee = new BigDecimal(total_fee + "").multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
             Map<String,String> timeExpireMap = timeExpireUnit.weixinPayTimeExpire(timeStart, timeExpire, orderType);
+            LOGGER.info("timeExpireMap={}",timeExpireMap);
             map = weixinPayUnit.getWeXinPaySign(payNo, totalFee.intValue(), "容易网商品", timeExpireMap.get("timeStart"), timeExpireMap.get("timeExpire"));
             map.put("code", 0);
             map.put("totlePrice", total_fee);

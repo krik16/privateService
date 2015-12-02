@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -75,6 +76,7 @@ public class TimeExpireUnit {
                 LOGGER.info("微信支付失效时间大于15天，属于无效条件，默认给予失效时间为{}分钟，timeStart={},timeExpire={}",itBPay, timeStart, timeExpire);
                 timeExpire = DateUtil.dateToString(DateUtil.addTime(DateUtil.stringToDate(timeStart), itBPay, Calendar.MINUTE), "yyyyMMddHHmmss");
             }
+            timeStart = DateUtil.dateToString(DateUtil.stringToDate(timeStart), "yyyyMMddHHmmss");
             timeExpire = DateUtil.dateToString(DateUtil.stringToDate(timeExpire), "yyyyMMddHHmmss");
         } catch (Exception e) {
             LOGGER.warn("微信支付失效时间参数不合法,忽略，返回默认值,timeStart={},timeExpire={},exception={}", timeStart, timeExpire, e.getMessage());
