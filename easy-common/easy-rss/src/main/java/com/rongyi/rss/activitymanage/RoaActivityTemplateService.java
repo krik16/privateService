@@ -72,4 +72,19 @@ public interface RoaActivityTemplateService {
      * @author lijin
      */
     List<TemplateSaleShopMall> findTemplateSaleShopMalls(String mallId);
+
+    /***
+     * 判断商场是否已经有了 true 为有  false 为没有
+     * @param mallId
+     * @return
+     */
+    boolean checkMall(String mallId);
+
+    /***
+     * 判断商场
+     * @param shops
+     * @return
+     */
+    boolean checkShops(List<String> shops);
+
 }
