@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by kejun on 2015/11/17.
@@ -54,7 +56,8 @@ public class TimeExpireUnit {
      * @Author: 柯军
      **/
 
-    public String weixinPayTimeExpire(String timeStart, String timeExpire, int orderType) {
+    public Map<String,String> weixinPayTimeExpire(String timeStart, String timeExpire, int orderType) {
+        Map<String,String> map = new HashMap<String,String>();
         //默认支付失效时间分钟
         int itBPay = ConstantEnum.WEIXIN_PAY_TIME_EXPIRE_GOODS.getCodeInt();
         if (Constants.ORDER_TYPE.ORDER_TYPE_1 == orderType) {
@@ -72,11 +75,15 @@ public class TimeExpireUnit {
                 LOGGER.info("微信支付失效时间大于15天，属于无效条件，默认给予失效时间为{}分钟，timeStart={},timeExpire={}",itBPay, timeStart, timeExpire);
                 timeExpire = DateUtil.dateToString(DateUtil.addTime(DateUtil.stringToDate(timeStart), itBPay, Calendar.MINUTE), "yyyyMMddHHmmss");
             }
-            return DateUtil.dateToString(DateUtil.stringToDate(timeExpire), "yyyyMMddHHmmss");
+            timeExpire = DateUtil.dateToString(DateUtil.stringToDate(timeExpire), "yyyyMMddHHmmss");
         } catch (Exception e) {
             LOGGER.warn("微信支付失效时间参数不合法,忽略，返回默认值,timeStart={},timeExpire={},exception={}", timeStart, timeExpire, e.getMessage());
+            timeExpire = DateUtil.dateToString(DateUtil.addTime(DateUtil.getCurrDateTime(), itBPay, Calendar.MINUTE), "yyyyMMddHHmmss");
         }
         //默认支付失效时间是30分钟
-        return DateUtil.dateToString(DateUtil.addTime(DateUtil.getCurrDateTime(), itBPay, Calendar.MINUTE), "yyyyMMddHHmmss");
+         map.put("timeStart",timeStart);
+         map.put("timeExpire",timeExpire);
+        return map;
+
     }
 }

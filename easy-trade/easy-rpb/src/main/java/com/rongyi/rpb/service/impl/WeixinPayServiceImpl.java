@@ -71,10 +71,8 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
         Map<String, Object> map = new HashMap<String, Object>();
         try {
             BigDecimal totalFee = new BigDecimal(total_fee + "").multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
-            if (Strings.isNullOrEmpty(timeStart))
-                timeStart = DateUtil.dateToString(new Date(), "yyyyMMddHHmmss");
-            timeExpire = timeExpireUnit.weixinPayTimeExpire(timeStart, timeExpire, orderType);
-            map = weixinPayUnit.getWeXinPaySign(payNo, totalFee.intValue(), "容易网商品", timeStart, timeExpire);
+            Map<String,String> timeExpireMap = timeExpireUnit.weixinPayTimeExpire(timeStart, timeExpire, orderType);
+            map = weixinPayUnit.getWeXinPaySign(payNo, totalFee.intValue(), "容易网商品", timeExpireMap.get("timeStart"), timeExpireMap.get("timeExpire"));
             map.put("code", 0);
             map.put("totlePrice", total_fee);
         } catch (WeixinException e) {
