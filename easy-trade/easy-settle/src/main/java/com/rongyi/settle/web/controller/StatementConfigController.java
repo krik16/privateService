@@ -116,7 +116,7 @@ public class StatementConfigController extends BaseController{
 		}
 		try {
 			Integer currentPage = Integer.valueOf(map.get("currentPage").toString());
-			List<Byte> statusList = new ArrayList<Byte>();
+			List<Byte> statusList = new ArrayList<>();
 			if (map.get("searchStatus") != null && map.get("searchStatus").equals(0)) {
 				statusList.add((byte) 0);
 			} else if (map.get("searchStatus") != null && map.get("searchStatus").equals(1)) {
@@ -137,14 +137,13 @@ public class StatementConfigController extends BaseController{
 
 	/**
 	 * @Description: 增加配置
-	 * @param request
 	 * @return
 	 * @Author: 柯军
 	 * @datetime:2015年9月21日下午2:55:32
 	 **/
 	@RequestMapping("/add")
 	@ResponseBody
-	public ResponseData add(HttpServletRequest request) {
+	public ResponseData add() {
 		LOGGER.info("====config add====");
 		return ResponseData.success(getRuleCode());
 	}
@@ -199,7 +198,7 @@ public class StatementConfigController extends BaseController{
 	 * @Description: 修改配置
 	 * @param request
 	 * @param map
-	 * @return
+	 * @return ResponseData
 	 * @Author: 柯军
 	 * @datetime:2015年9月21日下午2:59:22
 	 **/
@@ -282,7 +281,7 @@ public class StatementConfigController extends BaseController{
 	@ResponseBody
 	public ResponseData verify(HttpServletRequest request, @RequestBody Map<String, Object> map) {
 		LOGGER.info("====config verify==== params={}",map.toString());
-		ResponseData result = null;
+		ResponseData result;
 		try {
 			ResponseData responseData = accessService.check(request, "FNC_STLCONF_VFY");
 			if (responseData.getMeta().getErrno() != 0) {
@@ -346,12 +345,12 @@ public class StatementConfigController extends BaseController{
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/relevance")
 	@ResponseBody
-	public ResponseData relevance(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+	public ResponseData relevance(@RequestBody Map<String, Object> map) {
 		ResponseData result = null;
 		try {
 			LOGGER.info("relevance map={}",map);
 			String id = map.containsKey("id") ? map.get("id").toString() : null;
-			Integer type = map.containsKey("type") ? Integer.valueOf(map.get("type").toString()) : null;
+			int type = map.containsKey("type") ? Integer.valueOf(map.get("type").toString()) : 0;
 			Integer currpage = map.get("currpage") != null ? Integer.parseInt(map.get("currpage").toString()) : 1;
 			Integer pagesize = 15;
 			if (org.apache.commons.lang.StringUtils.isBlank(id)) {
@@ -360,38 +359,38 @@ public class StatementConfigController extends BaseController{
 			Map<String, Object> searchMap = new HashMap<>();
 			searchMap.put("currpage", currpage);
 			searchMap.put("pagesize", pagesize);
-			if (type.intValue() == 0) {// 店铺
+			if (type == 0) {// 店铺
 				searchMap.put("id", id);
 				searchMap.put("sort", "noSort");// 暂未定排序字段
 				Map<String, Object> resultMap = roaShopService.getShops(searchMap, currpage, pagesize);
 				List<ShopVO> list = (List<ShopVO>) resultMap.get("list");
 				int count = resultMap.containsKey("totalCount") ? Integer.valueOf(resultMap.get("totalCount").toString()) : 0;
 				result = ResponseData.success(list, currpage, pagesize, count);
-			} else if (type.intValue() == 1) {// 商场
+			} else if (type == 1) {// 商场
 				searchMap.put("mallId", id);
 				Map<String, Object> resultMap = rOAMallService.getMalls(searchMap, currpage, pagesize);
 				// 如果当前页为1 查询总记录数
 				int count = resultMap.containsKey("totalCount") ? Integer.valueOf(resultMap.get("totalCount").toString()) : 0;
 				result = ResponseData.success(resultMap.get("list"), currpage, pagesize, count);
-			} else if (type.intValue() == 2) {// 品牌
+			} else if (type == 2) {// 品牌
 				searchMap.put("id", id);
 				PagingVO<BrandVO> brands = roaBrandService.getBrandListByMap(searchMap, currpage, pagesize);
 				result = ResponseData.success(brands.getDataList(), currpage, pagesize, brands.getRowCnt());
-			} else if (type.intValue() == 3) {// 分公司
+			} else if (type == 3) {// 分公司
 				searchMap.put("id", id);
 				List<FilialeVo> list = rOAFilialeService.getFilialeList(searchMap, currpage, pagesize);
-				List<RelevanceVO> voList = new ArrayList<RelevanceVO>();
+				List<RelevanceVO> voList = new ArrayList<>();
 				if (CollectionUtils.isNotEmpty(list)){
 					for(FilialeVo filiale : list){
 						RelevanceVO vo = new RelevanceVO();
-						vo.setId(filiale.getId().toString());
+						vo.setId(filiale.getId());
 						vo.setName(filiale.getName());
 						voList.add(vo);
 					}
 				}
 				int totalCount = rOAFilialeService.getFilialeList(searchMap, 0,0).size();
 				result = ResponseData.success(voList, currpage, pagesize, totalCount);
-			} else if (type.intValue() == 4) {// 集团
+			} else if (type == 4) {// 集团
 				searchMap.put("id", id);
 				List<MallGroupVO> list = roaMallGroupService.getMallGroups(searchMap);
 				int count = 0;
@@ -405,7 +404,7 @@ public class StatementConfigController extends BaseController{
 			e.printStackTrace();
 			result = ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
 		}
-		LOGGER.info("result={}"+result.toString());
+		LOGGER.info("result={}"+result);
 		return result;
 	}
 	
