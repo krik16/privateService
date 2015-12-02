@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import com.rongyi.easy.roa.entity.AreaEntity;
 import com.rongyi.easy.roa.vo.*;
@@ -338,7 +337,6 @@ public class StatementConfigController extends BaseController{
 	 * @Description: 根据类型，名称模糊搜索
 	 * @Author: he
 	 **/
-	@SuppressWarnings("unchecked")
 	@RequestMapping("/relevance")
 	@ResponseBody
 	public ResponseData relevance(@RequestBody RelevanceParam params) {
@@ -355,7 +353,7 @@ public class StatementConfigController extends BaseController{
 			searchMap.put("currpage", currpage);
 			searchMap.put("pagesize", pagesize);
 			if (type == 0) {// 店铺
-				Map<String, Object> resultMap = roaShopService.getShops(searchMap, currpage, pagesize);
+				Map resultMap = roaShopService.getShops(searchMap, currpage, pagesize);
 				List<ShopVO> shopVOs = (List<ShopVO>) resultMap.get("list");
 				List<RelevanceVO> reList = new ArrayList<>();
 				if (CollectionUtils.isNotEmpty(shopVOs)) {
@@ -470,7 +468,7 @@ public class StatementConfigController extends BaseController{
 	}
 
 	@RequestMapping(value="getAreaList")
-	public void getAreaList(String type,String id,HttpServletResponse response){
+	public void getAreaList(String type,String id){
 		LOGGER.info("type={}, id={}",type, id);
 		List<AreaEntity> areaList = new ArrayList<>();
 		try {
@@ -486,4 +484,64 @@ public class StatementConfigController extends BaseController{
 			ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
 		}
 	}
+
+	/**
+	 * @Description: 根据类型，名称模糊搜索
+	 * @Author: he
+	 **/
+	@RequestMapping("/relevanceShop")
+	@ResponseBody
+	public ResponseData relevanceShop(@RequestBody RelevanceParam params) {
+		ResponseData result = null;
+		try {
+			LOGGER.info("================ 》》》》》》》》》》》》 relevance params={}", params);
+			if (params.getType() == null && StringUtils.isBlank(params.getId())) {
+				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
+			}
+			Integer currpage = params.getCurrPage() != null ? Integer.valueOf(params.getCurrPage().toString()) : 1;
+			Integer pagesize = params.getPageSize() != null ? Integer.valueOf(params.getPageSize().toString()) : 15;
+			Map<String, Object> searchMap = new HashMap<>();
+			searchMap.put("currpage", currpage);
+			searchMap.put("pagesize", pagesize);
+			Map resultMap = new HashMap();
+			switch (params.getType()){
+				case 0:
+					searchMap.put("id",params.getId());
+					resultMap = roaShopService.getShops(searchMap, currpage, pagesize);
+					break;
+				case 1:
+					searchMap.put("mallId",params.getId());
+					resultMap = roaShopService.getShops(searchMap, currpage, pagesize);
+					break;
+				case 2:
+					searchMap.put("brandId", params.getId());
+					resultMap = roaShopService.getShops(searchMap, currpage, pagesize);
+					break;
+				case 3:
+					break;
+				case 4:
+					break;
+				default:
+					return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
+			}
+			List<ShopVO> shopVOs = (List<ShopVO>) resultMap.get("list");
+			List<RelevanceVO> reList = new ArrayList<>();
+			if (CollectionUtils.isNotEmpty(shopVOs)) {
+				for (ShopVO shopVO : shopVOs){
+					RelevanceVO shop = new RelevanceVO();
+					shop.setId(shopVO.getId());
+					shop.setName(shopVO.getName());
+					shop.setPosition(shopVO.getPosition());
+					reList.add(shop);
+				}
+			}
+			int count = resultMap.containsKey("totalCount") ? Integer.valueOf(resultMap.get("totalCount").toString()) : 0;
+			result = ResponseData.success(reList, currpage, pagesize, count);
+		}catch (Exception e){
+			e.printStackTrace();
+			result = ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(),CodeEnum.ERROR_SYSTEM.getValueStr());
+		}
+		return result;
+	}
+
 }

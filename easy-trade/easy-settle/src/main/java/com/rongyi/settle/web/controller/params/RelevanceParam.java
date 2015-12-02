@@ -6,6 +6,16 @@ package com.rongyi.settle.web.controller.params;
  */
 public class RelevanceParam {
 
+    private String id;//关联id
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     private Integer currPage;
     private Integer pageSize;
     private Integer type;//类型（0:店铺，1:商场，2: 品牌，3: 分公司，4:集团公司）
@@ -145,7 +155,8 @@ public class RelevanceParam {
     @Override
     public String toString() {
         return "RelevanceParam{" +
-                "currPage=" + currPage +
+                "id=" + id +
+                ", currPage=" + currPage +
                 ", pageSize=" + pageSize +
                 ", type=" + type +
                 ", shopName='" + shopName + '\'' +
