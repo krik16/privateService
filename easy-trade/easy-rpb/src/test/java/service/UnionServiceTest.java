@@ -74,7 +74,7 @@ public class UnionServiceTest extends BaseTest{
 		System.err.println(UnionUtil.getParamPlain(map));
 	}
 
-	@Test
+//	@Test
 	public void testSelectByMsgtxCodeAndTransNo(){
 		UnionCouponLogEntity unionCouponLogEntity = unionCouponService.selectByMsgtxCodeAndTransNo("002003", "1234567890");
 		System.err.println(unionCouponLogEntity.getId());
@@ -107,7 +107,7 @@ public class UnionServiceTest extends BaseTest{
 		}
 	}
 	
-	@Test
+//	@Test
 	public void testRaoGetOrderCouponInfo(){
 		try {
 			OrderWithCouponInfoVO orderWithCouponInfoVO=rOAOrderFormServiceWithCouponInfoImpl.getOrderCouponInfo("1000000859432068");

@@ -99,7 +99,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 
     @Override
     public boolean messageToRefund(PaymentEntityVO paymentEntityVO, PaymentEntity hisPayEntity) {
-        LOGGER.info("申请退款，历史付款单号payNo={},历史付款订单号orderNo={}", hisPayEntity.getPayNo(), hisPayEntity.getOrderNum());
+        LOGGER.info("MQ消息申请退款，历史付款单号payNo={},历史付款订单号orderNo={}", hisPayEntity.getPayNo(), hisPayEntity.getOrderNum());
         String newPayNo = paymentService.getPayNo();
         Map<String, Object> result = weixinRefund(hisPayEntity.getPayNo(), paymentEntityVO.getAmountMoney().doubleValue(), hisPayEntity.getAmountMoney().doubleValue(), newPayNo,
                 Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);

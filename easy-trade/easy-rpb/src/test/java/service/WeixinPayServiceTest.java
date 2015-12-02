@@ -150,7 +150,7 @@ public class WeixinPayServiceTest extends BaseTest {
 	}
 
 
-	 @Test
+//	 @Test
 	public void testQueryOrder() {
 		 System.err.println(weixinPayService.queryOrder("1009290941201509100838184587",null));
 	}
