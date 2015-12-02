@@ -14,7 +14,6 @@ import com.rongyi.settle.constants.SettleConstant;
 import com.rongyi.settle.dto.CouponCodeExcelDto;
 import com.rongyi.settle.dto.CouponExcelDto;
 import com.rongyi.settle.dto.CouponStatementDetailDto;
-import com.rongyi.settle.dto.PaymentStatementDetailDto;
 import com.rongyi.settle.dto.PaymentStatementExcelDto;
 import com.rongyi.settle.service.BussinessInfoService;
 import com.rongyi.settle.service.PaymentStatementService;
@@ -22,7 +21,6 @@ import com.rongyi.settle.service.StatementConfigService;
 import com.rongyi.settle.util.AmountUtil;
 import com.rongyi.settle.util.DateUtils;
 import com.rongyi.settle.util.ExcelUtils;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
