@@ -14,8 +14,9 @@ public class CommoditySpecVO implements  Serializable {
 	private static final long serialVersionUID = -6630348930591836681L;
 	private String specId;
 	
-	private String specStock;
-	private String specTotalStock;
+	private String specStock;//库存
+	private String specTotalStock;//总库存
+	private String specLockedStock;//锁定库存
 	private String specOriginalPrice;
 	private String specCurrentPrice;
 	private List<CommoditySpecColumnVO> specColumnValues;
@@ -63,6 +64,12 @@ public class CommoditySpecVO implements  Serializable {
 	}
 	public void setSpecTotalStock(String specTotalStock) {
 		this.specTotalStock = specTotalStock;
+	}
+	public String getSpecLockedStock() {
+		return specLockedStock;
+	}
+	public void setSpecLockedStock(String specLockedStock) {
+		this.specLockedStock = specLockedStock;
 	}
 	
 }
