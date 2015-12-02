@@ -48,6 +48,16 @@ public class RebateVO implements Serializable{
 	private List<RebateCouponVO> couponList;//可使用代金券列表
 	
 	private Integer preferentialType = 0;//优惠方式 0：满减 ；1：立减.
+	
+	private Integer ifPostage = 0;//0：不包含邮费 ；1：包含邮费
+
+	public Integer getIfPostage() {
+		return ifPostage;
+	}
+
+	public void setIfPostage(Integer ifPostage) {
+		this.ifPostage = ifPostage;
+	}
 
 	public Integer getPreferentialType() {
 		return preferentialType;
