@@ -7,18 +7,18 @@ package com.rongyi.easy.ryoms.entity;
  */
 public class WechatInfoVo {
 	private Integer id;
-	private String name;
-	private String serviceName;
-	private String appId;
-	private String appSecret;
-	private String encodingAESKey;
-	private Integer type;
-	private String mallId;
-	private String mallName;
-	private String dockingType;
-	private Integer isMeiwei ;//是否接入美味不用等
-	private String meiweiId;  //美味不用等商场ID
-	private Integer isDeleted ;
+	private String name;              //微信名
+	private String serviceName;       //微信服务号
+	private String appId;             //应用Id
+	private String appSecret;         //(应用密钥
+	private String encodingAESKey;    //消息加密密钥
+	private Integer type;             //类型  1容易内部&代运营   2容易外部
+	private String mallId;            //商场monogId
+	private String mallName;          //商场名称
+	private String dockingType;       //对接方式  1B类 2C类
+	private Integer isMeiwei ;		//是否接入美味不用等
+	private String meiweiId;  		//美味不用等商场ID
+	private Integer isDeleted ;      //是否已删除  0正常 1已删除
 	public Integer getId() {
 		return id;
 	}
