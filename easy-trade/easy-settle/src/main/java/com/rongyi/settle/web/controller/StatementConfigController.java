@@ -14,8 +14,11 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import com.rongyi.easy.roa.entity.AreaEntity;
 import com.rongyi.easy.roa.vo.*;
+import com.rongyi.rss.roa.*;
 import com.rongyi.settle.web.controller.params.RelevanceParam;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -33,11 +36,6 @@ import com.rongyi.easy.settle.entity.BussinessInfo;
 import com.rongyi.easy.settle.entity.StatementConfig;
 import com.rongyi.easy.settle.vo.StatementConfigVO;
 import com.rongyi.rss.malllife.roa.ROARedisService;
-import com.rongyi.rss.roa.ROAFilialeService;
-import com.rongyi.rss.roa.ROAMallGroupService;
-import com.rongyi.rss.roa.ROAMallService;
-import com.rongyi.rss.roa.ROAShopService;
-import com.rongyi.rss.roa.RoaBrandService;
 import com.rongyi.settle.constants.CodeEnum;
 import com.rongyi.settle.constants.ConstantEnum;
 import com.rongyi.settle.constants.ResponseData;
@@ -70,8 +68,8 @@ public class StatementConfigController extends BaseController{
 	@Autowired
 	private ROAMallService rOAMallService;
 
-	// @Autowired
-	// private ROAAreaService rOAAreaService ;
+	 @Autowired
+	 private ROAAreaService rOAAreaService ;
 
 	@Autowired
 	private RoaBrandService roaBrandService;
@@ -471,4 +469,21 @@ public class StatementConfigController extends BaseController{
 		return reMap;
 	}
 
+	@RequestMapping(value="getAreaList")
+	public void getAreaList(String type,String id,HttpServletResponse response){
+		LOGGER.info("type={}, id={}",type, id);
+		List<AreaEntity> areaList = new ArrayList<>();
+		try {
+			//如果type不为空，查询市  区 商圈
+			if(StringUtils.isNotEmpty(type)){
+				areaList = rOAAreaService.getSub(type, id);
+			}else{  //查询省信息
+				areaList = rOAAreaService.getPro();
+			}
+			ResponseData.success(areaList);
+		} catch (Exception e) {
+			e.printStackTrace();
+			ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
+		}
+	}
 }
