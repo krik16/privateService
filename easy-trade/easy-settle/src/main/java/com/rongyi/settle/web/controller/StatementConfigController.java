@@ -15,6 +15,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.easy.roa.vo.*;
+import com.rongyi.settle.web.controller.params.RelevanceParam;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -27,10 +30,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.common.util.DateUtil;
-import com.rongyi.easy.roa.vo.BrandVO;
-import com.rongyi.easy.roa.vo.FilialeVo;
-import com.rongyi.easy.roa.vo.MallGroupVO;
-import com.rongyi.easy.roa.vo.ShopVO;
 import com.rongyi.easy.settle.entity.BussinessInfo;
 import com.rongyi.easy.settle.entity.StatementConfig;
 import com.rongyi.easy.settle.vo.StatementConfigVO;
@@ -345,53 +344,57 @@ public class StatementConfigController extends BaseController{
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/relevance")
 	@ResponseBody
-	public ResponseData relevance(@RequestBody Map<String, Object> map) {
+	public ResponseData relevance(@RequestBody RelevanceParam params) {
 		ResponseData result = null;
 		try {
-			LOGGER.info("relevance map={}",map);
-			String id = map.containsKey("id") ? map.get("id").toString() : null;
-			int type = map.containsKey("type") ? Integer.valueOf(map.get("type").toString()) : 0;
-			Integer currpage = map.get("currpage") != null ? Integer.parseInt(map.get("currpage").toString()) : 1;
-			Integer pagesize = 15;
-			if (org.apache.commons.lang.StringUtils.isBlank(id)) {
+			LOGGER.info("================ 》》》》》》》》》》》》 relevance params={}", params);
+			if (params.getType()==null){
 				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
 			}
-			Map<String, Object> searchMap = new HashMap<>();
+			int type = Integer.valueOf(params.getType().toString());
+			Integer currpage = params.getCurrPage() != null ? Integer.valueOf(params.getCurrPage().toString()) : 1;
+			Integer pagesize = params.getPageSize() != null ? Integer.valueOf(params.getPageSize().toString()) : 15;
+			Map<String, Object> searchMap = getSearchMapByParams(params);
 			searchMap.put("currpage", currpage);
 			searchMap.put("pagesize", pagesize);
 			if (type == 0) {// 店铺
-				searchMap.put("id", id);
-				searchMap.put("sort", "noSort");// 暂未定排序字段
 				Map<String, Object> resultMap = roaShopService.getShops(searchMap, currpage, pagesize);
-				List<ShopVO> list = (List<ShopVO>) resultMap.get("list");
+				List<ShopVO> shopVOs = (List<ShopVO>) resultMap.get("list");
+				List<RelevanceVO> reList = new ArrayList<>();
+				if (CollectionUtils.isNotEmpty(shopVOs)) {
+					for (ShopVO shopVO : shopVOs){
+                        RelevanceVO shop = new RelevanceVO();
+                        shop.setId(shopVO.getId());
+                        shop.setName(shopVO.getName());
+                        shop.setPosition(shopVO.getPosition());
+                        reList.add(shop);
+                    }
+				}
 				int count = resultMap.containsKey("totalCount") ? Integer.valueOf(resultMap.get("totalCount").toString()) : 0;
-				result = ResponseData.success(list, currpage, pagesize, count);
+				result = ResponseData.success(reList, currpage, pagesize, count);
 			} else if (type == 1) {// 商场
-				searchMap.put("mallId", id);
 				Map<String, Object> resultMap = rOAMallService.getMalls(searchMap, currpage, pagesize);
-				// 如果当前页为1 查询总记录数
+				List<MallVO> mallVOs = (List<MallVO>) resultMap.get("list");
+				List<RelevanceVO> reList = new ArrayList<>();
+				if (CollectionUtils.isNotEmpty(mallVOs)) {
+					for (MallVO mallVO : mallVOs){
+						RelevanceVO mall = new RelevanceVO();
+						mall.setId(mallVO.getId());
+						mall.setName(mallVO.getName());
+						mall.setMallAddress(mallVO.getMallAddress());
+						reList.add(mall);
+					}
+				}
 				int count = resultMap.containsKey("totalCount") ? Integer.valueOf(resultMap.get("totalCount").toString()) : 0;
 				result = ResponseData.success(resultMap.get("list"), currpage, pagesize, count);
 			} else if (type == 2) {// 品牌
-				searchMap.put("id", id);
 				PagingVO<BrandVO> brands = roaBrandService.getBrandListByMap(searchMap, currpage, pagesize);
 				result = ResponseData.success(brands.getDataList(), currpage, pagesize, brands.getRowCnt());
 			} else if (type == 3) {// 分公司
-				searchMap.put("id", id);
 				List<FilialeVo> list = rOAFilialeService.getFilialeList(searchMap, currpage, pagesize);
-				List<RelevanceVO> voList = new ArrayList<>();
-				if (CollectionUtils.isNotEmpty(list)){
-					for(FilialeVo filiale : list){
-						RelevanceVO vo = new RelevanceVO();
-						vo.setId(filiale.getId());
-						vo.setName(filiale.getName());
-						voList.add(vo);
-					}
-				}
 				int totalCount = rOAFilialeService.getFilialeList(searchMap, 0,0).size();
-				result = ResponseData.success(voList, currpage, pagesize, totalCount);
+				result = ResponseData.success(list, currpage, pagesize, totalCount);
 			} else if (type == 4) {// 集团
-				searchMap.put("id", id);
 				List<MallGroupVO> list = roaMallGroupService.getMallGroups(searchMap);
 				int count = 0;
 				if (currpage == 1) {
@@ -407,5 +410,66 @@ public class StatementConfigController extends BaseController{
 		LOGGER.info("result={}"+result);
 		return result;
 	}
-	
+
+	private Map<String, Object> getSearchMapByParams(RelevanceParam params) {
+		Map<String, Object> reMap = new HashMap<>();
+		switch (params.getType()){
+			case 0:
+				if (StringUtils.isNotBlank(params.getShopId())) {
+					reMap.put("id", params.getShopId());
+				}
+				if (StringUtils.isNotBlank(params.getShopName())){
+					reMap.put("shopName", params.getShopName());
+				}
+				if (StringUtils.isNotBlank(params.getZoneId())){
+					reMap.put("zoneId", params.getZoneId());
+				}
+				reMap.put("sort", "noSort");// 暂未定排序字段
+				break;
+			case 1:
+				if (StringUtils.isNotBlank(params.getZoneId())){
+					reMap.put("zoneId", params.getZoneId());
+				}
+				if (StringUtils.isNotBlank(params.getMallId())){
+					reMap.put("mallId", params.getMallId());
+				}
+				if (StringUtils.isNotBlank(params.getMallName())){
+					reMap.put("name", params.getMallName());
+				}
+				break;
+			case 2:
+				if (StringUtils.isNotBlank(params.getBrandId())){
+					reMap.put("brandId", params.getBrandId());
+				}
+				if (StringUtils.isNotBlank(params.getBrandNameC())){
+					reMap.put("cname", params.getBrandNameC());
+				}
+				if (StringUtils.isNotBlank(params.getBrandNameE())){
+					reMap.put("ename", params.getBrandNameE());
+				}
+				break;
+			case 3:
+				if (StringUtils.isNotBlank(params.getFilialeId())){
+					reMap.put("id", params.getFilialeId());
+				}
+				if (StringUtils.isNotBlank(params.getFilialeName())){
+					reMap.put("name", params.getFilialeName());
+				}
+				if (StringUtils.isNotBlank(params.getBrandId())){
+					reMap.put("brandId", params.getBrandId());
+				}
+				break;
+			case 4:
+				if (StringUtils.isNotBlank(params.getGroupId())){
+					reMap.put("id", params.getGroupId());
+				}
+				if (StringUtils.isNotBlank(params.getGroupName())){
+					reMap.put("name", params.getGroupName());
+				}
+				break;
+		}
+
+		return reMap;
+	}
+
 }
