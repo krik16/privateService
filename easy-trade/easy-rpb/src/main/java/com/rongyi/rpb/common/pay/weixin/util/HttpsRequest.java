@@ -75,7 +75,7 @@ public class HttpsRequest implements IServiceRequest {
         String cretFilePath = Configure.getCertLocalPath();
         if (Strings.isNullOrEmpty(cretFilePath)) {
             cretFilePath = "/data/etc/projects/easy-rpb-cert/1268956601.p12";
-            LOGGER.info("证书路径错误，设置默认证书路径，certFilePath={}", cretFilePath);
+            LOGGER.info("设置默认证书路径，certFilePath={}", cretFilePath);
         }
         FileInputStream instream = new FileInputStream(new File(cretFilePath));//加载本地的证书进行https加密传输
         try {
