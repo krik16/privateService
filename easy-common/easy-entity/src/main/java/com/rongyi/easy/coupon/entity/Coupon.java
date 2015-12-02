@@ -997,6 +997,7 @@ public class Coupon implements Serializable {
                 .append("validDays", validDays)
                 .append("listCouponVouchers", listCouponVouchers)
                 .append("couponCommodityCategories", couponCommodityCategories)
+                .append("couponBrands", couponBrands)
                 .toString();
     }
 
