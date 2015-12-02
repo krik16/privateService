@@ -11,7 +11,7 @@ import com.rongyi.easy.mcmc.vo.CommodityBuyerVO;
 /**
  * Copyright (C),上海容易网电子商务有限公司
  * author chenjun
- * Description ：
+ * Description ：抵扣券列表字段
  * time ：2015年11月18日
  * History: 变更记录
  * <author>           <time>             <version>        <desc>
@@ -42,10 +42,6 @@ public class RebateVO implements Serializable{
 	private Integer applyScope;// 0都适用 1商品适用 2代金券适用
 	
 	private Integer relatedType;//全场[0]，品牌[1]，商场[2]，店铺[3]，分类[4]，信息[5]
-	
-	private List<CommodityBuyerVO> commodityList;//可使用商品列表
-	
-	private List<RebateCouponVO> couponList;//可使用代金券列表
 	
 	private Integer preferentialType = 0;//优惠方式 0：满减 ；1：立减.
 	
@@ -163,28 +159,12 @@ public class RebateVO implements Serializable{
 		this.desc = desc;
 	}
 
-	public List<CommodityBuyerVO> getCommodityList() {
-		return commodityList;
-	}
-
-	public void setCommodityList(List<CommodityBuyerVO> commodityList) {
-		this.commodityList = commodityList;
-	}
-
-	public List<RebateCouponVO> getCouponList() {
-		return couponList;
-	}
-
-	public void setCouponList(List<RebateCouponVO> couponList) {
-		this.couponList = couponList;
-	}
-
 	@Override
 	public String toString() {
 		return "RebateVO [originalPrice=" + originalPrice + ", currentPrice=" + currentPrice + ", validStartTime="
 				+ validStartTime + ", validEndTime=" + validEndTime + ", title=" + title + ", platformRebateId="
 				+ platformRebateId + ", platformRebateCode=" + platformRebateCode + ", useDescription=" + useDescription
 				+ ", status=" + status + ", desc=" + desc + ", applyScope=" + applyScope + ", relatedType=" + relatedType
-				+ ", commodityList=" + commodityList + ", couponList=" + couponList + "]";
+				+ ", preferentialType=" + preferentialType + ", ifPostage=" + ifPostage + "]";
 	}
 }
