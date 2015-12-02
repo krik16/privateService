@@ -57,6 +57,27 @@ public class RedenvelopeUseDetailParam implements Serializable{
 
     private Integer currentPage;
 
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("RedenvelopeUseDetailParam{");
+        sb.append("couponId='").append(couponId).append('\'');
+        sb.append(", code='").append(code).append('\'');
+        sb.append(", orderNo='").append(orderNo).append('\'');
+        sb.append(", status=").append(status);
+        sb.append(", reciveAccount='").append(reciveAccount).append('\'');
+        sb.append(", userName='").append(userName).append('\'');
+        sb.append(", reciveChannel=").append(reciveChannel);
+        sb.append(", dateBucket='").append(dateBucket).append('\'');
+        sb.append(", dateType=").append(dateType);
+        sb.append(", pageSize=").append(pageSize);
+        sb.append(", currentPage=").append(currentPage);
+        sb.append(", startDate=").append(startDate);
+        sb.append(", endDate=").append(endDate);
+        sb.append(", start=").append(start);
+        sb.append('}');
+        return sb.toString();
+    }
+
     private Date startDate;
 
     private Date endDate;
@@ -200,22 +221,4 @@ public class RedenvelopeUseDetailParam implements Serializable{
         this.endDate = endDate;
     }
 
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("RedenvelopeUseDetailParam{");
-        sb.append("couponId='").append(couponId).append('\'');
-        sb.append(", code='").append(code).append('\'');
-        sb.append(", orderNo='").append(orderNo).append('\'');
-        sb.append(", status=").append(status);
-        sb.append(", reciveAccount='").append(reciveAccount).append('\'');
-        sb.append(", userName='").append(userName).append('\'');
-        sb.append(", reciveChannel=").append(reciveChannel);
-        sb.append(", dateBucket='").append(dateBucket).append('\'');
-        sb.append(", dateType=").append(dateType);
-        sb.append(", pageSize=").append(this.getPageSize());
-        sb.append(", currentPage=").append(this.getCurrentPage());
-        sb.append(", start=").append(this.getStart());
-        sb.append('}');
-        return sb.toString();
-    }
 }
