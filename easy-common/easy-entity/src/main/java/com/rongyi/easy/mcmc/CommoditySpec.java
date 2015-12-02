@@ -8,7 +8,7 @@ import java.util.List;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
-@Entity("mcmc_commodity_spec")
+@Entity(value="mcmc_commodity_spec",noClassnameStored=true)
 public class CommoditySpec implements  Serializable {
 
 	/**

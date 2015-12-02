@@ -9,7 +9,7 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
 @SuppressWarnings("serial")
-@Entity("zones")
+@Entity(value="zones",noClassnameStored=true)
 public class FloorEntity implements Serializable{
 	
 	@Id

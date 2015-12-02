@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * 图片信息
  */
-@Entity("photos")
+@Entity(value="photos",noClassnameStored=true)
 public class PhotoEntity {
 
     @Id

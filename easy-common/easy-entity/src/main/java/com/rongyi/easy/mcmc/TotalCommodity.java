@@ -8,7 +8,7 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
-@Entity("mcmc_total_commodity")
+@Entity(value="mcmc_total_commodity",noClassnameStored=true)
 public class TotalCommodity implements  Serializable,Cloneable{
 	
 	private static final long serialVersionUID = -3022699601318372490L;

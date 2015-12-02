@@ -20,7 +20,7 @@ import com.rongyi.core.enumerate.mcmc.LiveStatus;
  * @author xiaobo
  *
  */
-@Entity("mcmc_live")
+@Entity(value="mcmc_live",noClassnameStored=true)
 public class Live implements Serializable {
 	private static final long serialVersionUID = 1L;
 	/**

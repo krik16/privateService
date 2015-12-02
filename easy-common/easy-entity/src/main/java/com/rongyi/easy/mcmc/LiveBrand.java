@@ -12,7 +12,7 @@ import org.mongodb.morphia.annotations.Id;
  * @author xiaobo
  *
  */
-@Entity("brands")
+@Entity(value="brands",noClassnameStored=true)
 public class LiveBrand implements Serializable {
 	private static final long serialVersionUID = 1L;
 	/**
