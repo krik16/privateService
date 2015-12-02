@@ -24,6 +24,33 @@ public class CouponCommodityParam implements Serializable{
     private Integer pageSize;
     private Integer currentPage;
     private List<String> shopMids;
+    private Integer type;
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("CouponCommodityParam{");
+        sb.append("commodityId='").append(commodityId).append('\'');
+        sb.append(", commodityName='").append(commodityName).append('\'');
+        sb.append(", categoryId='").append(categoryId).append('\'');
+        sb.append(", brandId='").append(brandId).append('\'');
+        sb.append(", mallId='").append(mallId).append('\'');
+        sb.append(", temaiId='").append(temaiId).append('\'');
+        sb.append(", shopId='").append(shopId).append('\'');
+        sb.append(", pageSize=").append(pageSize);
+        sb.append(", currentPage=").append(currentPage);
+        sb.append(", shopMids=").append(shopMids);
+        sb.append(", type=").append(type);
+        sb.append('}');
+        return sb.toString();
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
 
     public Integer getPageSize() {
         return pageSize==null? Constants.CouponPage.PAGE_SIZE:pageSize;
@@ -83,22 +110,6 @@ public class CouponCommodityParam implements Serializable{
 
     public List<String> getShopMids() {
         return shopMids;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .append("commodityId", commodityId)
-                .append("commodityName", commodityName)
-                .append("categoryId", categoryId)
-                .append("brandId", brandId)
-                .append("mallId", mallId)
-                .append("temaiId", temaiId)
-                .append("shopId", shopId)
-                .append("pageSize", pageSize)
-                .append("currentPage", currentPage)
-                .append("shopMids", shopMids)
-                .toString();
     }
 
     public String getMallId() {
