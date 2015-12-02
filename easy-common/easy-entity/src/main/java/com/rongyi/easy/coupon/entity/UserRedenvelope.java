@@ -379,7 +379,7 @@ public class UserRedenvelope implements Serializable {
      * @return
      */
     public boolean isUsable() {
-        if (UserRedenvelope.STATUS_UNUSE.equals(status) && new Date().before(validEndAt))
+        if (UserRedenvelope.STATUS_UNUSE.equals(status) && new Date().before(validEndAt) && new Date().after(validStartAt))
             return true;
         else if (UserRedenvelope.STATUS_USED.equals(status))
             return false;
