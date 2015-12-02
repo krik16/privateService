@@ -43,7 +43,7 @@ public class RedenvelopeUseDetailParam implements Serializable{
     /**
      * 领取渠道 0 :全部 ；1：容易逛；2：互动屏；3：微信
      */
-    private Integer reciveChannel;
+    private Integer receiveChannel;
     /**
      * 时间段，eg:2015-11-11 11:11:11-2015-12-12 12:12:12
      */
@@ -66,7 +66,7 @@ public class RedenvelopeUseDetailParam implements Serializable{
         sb.append(", status=").append(status);
         sb.append(", reciveAccount='").append(reciveAccount).append('\'');
         sb.append(", userName='").append(userName).append('\'');
-        sb.append(", reciveChannel=").append(reciveChannel);
+        sb.append(", reciveChannel=").append(receiveChannel);
         sb.append(", dateBucket='").append(dateBucket).append('\'');
         sb.append(", dateType=").append(dateType);
         sb.append(", pageSize=").append(pageSize);
@@ -127,12 +127,12 @@ public class RedenvelopeUseDetailParam implements Serializable{
         this.userName = userName;
     }
 
-    public Integer getReciveChannel() {
-        return reciveChannel;
+    public Integer getReceiveChannel() {
+        return receiveChannel;
     }
 
-    public void setReciveChannel(Integer reciveChannel) {
-        this.reciveChannel = reciveChannel;
+    public void setReceiveChannel(Integer receiveChannel) {
+        this.receiveChannel = receiveChannel;
     }
 
     public String getDateBucket() {
