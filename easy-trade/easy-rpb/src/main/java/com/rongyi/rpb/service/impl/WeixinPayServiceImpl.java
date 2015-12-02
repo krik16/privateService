@@ -1,23 +1,6 @@
 package com.rongyi.rpb.service.impl;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.rongyi.rpb.Exception.WeixinException;
-import com.rongyi.rpb.unit.TimeExpireUnit;
-import com.rongyi.rpb.unit.WeixinPayUnit;
-import net.sf.json.JSONObject;
-
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import com.google.common.base.Strings;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.constant.PaymentEventType;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
@@ -27,29 +10,31 @@ import com.rongyi.easy.rpb.domain.PaymentItemEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
 import com.rongyi.easy.rpb.vo.WeixinQueryOrderParamVO;
+import com.rongyi.rpb.Exception.WeixinException;
 import com.rongyi.rpb.common.pay.weixin.model.RefundQueryReqData;
 import com.rongyi.rpb.common.pay.weixin.model.RefundQueryResData;
-import com.rongyi.rpb.common.pay.weixin.model.RefundReqData;
 import com.rongyi.rpb.common.pay.weixin.model.RefundResData;
-import com.rongyi.rpb.common.pay.weixin.model.ReverseReqData;
 import com.rongyi.rpb.common.pay.weixin.model.ScanPayQueryReqData;
 import com.rongyi.rpb.common.pay.weixin.service.PayQueryService;
 import com.rongyi.rpb.common.pay.weixin.service.RefundQueryService;
-import com.rongyi.rpb.common.pay.weixin.service.RefundService;
-import com.rongyi.rpb.common.pay.weixin.service.ReverseService;
-import com.rongyi.rpb.common.pay.weixin.service.UnifiedorderService;
 import com.rongyi.rpb.common.pay.weixin.util.Util;
 import com.rongyi.rpb.constants.ConstantEnum;
-import com.rongyi.rpb.constants.ConstantUtil;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.mq.Sender;
-import com.rongyi.rpb.service.PCWebPageAlipayService;
-import com.rongyi.rpb.service.PaymentItemService;
-import com.rongyi.rpb.service.PaymentLogInfoService;
-import com.rongyi.rpb.service.PaymentService;
-import com.rongyi.rpb.service.RpbEventService;
-import com.rongyi.rpb.service.WeixinPayService;
+import com.rongyi.rpb.service.*;
+import com.rongyi.rpb.unit.TimeExpireUnit;
+import com.rongyi.rpb.unit.WeixinPayUnit;
 import com.rongyi.rss.rpb.OrderNoGenService;
+import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.util.*;
 
 /**
  * @Author: 柯军
@@ -94,7 +79,10 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
         try {
             BigDecimal totalFee = new BigDecimal(total_fee + "").multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
             timeExpire = timeExpireUnit.weixinPayTimeExpire(timeStart, timeExpire,orderType);
-            timeStart = DateUtil.dateToString(DateUtil.stringToDate(timeStart), "yyyyMMddHHmmss");
+            if(Strings.isNullOrEmpty(timeStart))
+                 timeStart = DateUtil.dateToString(DateUtil.stringToDate(timeStart), "yyyyMMddHHmmss");
+            else
+                timeStart = DateUtil.dateToString(new Date(), "yyyyMMddHHmmss");
 
             map = weixinPayUnit.getWeXinPaySign(payNo, totalFee.intValue(), "容易网商品", timeStart, timeExpire);
             map.put("code", 0);
