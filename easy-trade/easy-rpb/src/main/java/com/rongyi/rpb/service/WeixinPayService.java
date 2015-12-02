@@ -39,14 +39,6 @@ public interface WeixinPayService {
 	 */
 	public abstract boolean validateIsWeixinPay(MessageEvent event);
 
-	/**
-	 * @Description: 获取微信退款发送消息
-	 * @param event
-	 * @return
-	 * @Author: 柯军
-	 * @datetime:2015年7月9日下午4:42:39
-	 **/
-	public abstract Map<String, Object> getRefundMessageMap(MessageEvent event);
 
 	/**
 	 * mq接收微信退款消息
@@ -69,10 +61,6 @@ public interface WeixinPayService {
 	public abstract Map<String,Object>  weixinRefund(String payNo, double refundFee, double totalFee, String newPayNo,Integer tradeType);
 
 	public void savePaymentLogInfo(RefundResData refundResData, Integer tradeType);
-
-	public abstract String getResultMessage(String message);
-
-	public abstract String getPennyByMoney(double totalFee);
 
 	/**
 	 * 微信关闭订单
@@ -97,15 +85,5 @@ public interface WeixinPayService {
 	 **/
 	public void batchTriggerWeixinRefund();
 	
-	/**	
-	 * @Description: 微信退款结果查询 
-	 * @param tradeNo 是微信系统为每一笔支付交易分配的订单号，通过这个订单号可以标识这笔交易，它由支付订单API支付成功时返回的数据里面获取到。建议优先使用
-     * @param payNo 商户系统内部的订单号,tradeNo 、payNo 二选一，如果同时存在优先级：tradeNo>payNo
-     * @param refundNo 商户系统内部的退款单号，商户系统内部唯一，同一退款单号多次请求只退一笔
-     * @param refundNo、payNo 、tradeNo 三个参数必填一个，如果同时存在优先级为：refundNo>tradeNo>payNo
-	 * @return	
-	 * @Author:  柯军
-	 * @datetime:2015年9月9日上午11:18:18
-	 **/
-	public RefundQueryResData refundQuery(String tradeNo,String payNo,String refundNo);
+
 }

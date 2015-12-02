@@ -1,54 +1,27 @@
 package service;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.security.KeyStore;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.SortedMap;
-import java.util.TreeMap;
-
-import javax.net.ssl.SSLContext;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.conn.ssl.SSLContexts;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
+import base.BaseTest;
+import com.rongyi.easy.mq.MessageEvent;
+import com.rongyi.easy.rpb.domain.PaymentEntity;
+import com.rongyi.easy.rpb.vo.WeixinQueryOrderParamVO;
+import com.rongyi.rpb.common.pay.weixin.model.RefundReqData;
+import com.rongyi.rpb.common.pay.weixin.model.ReverseReqData;
+import com.rongyi.rpb.common.pay.weixin.model.ScanPayReqData;
+import com.rongyi.rpb.common.pay.weixin.model.ScanPayService;
+import com.rongyi.rpb.common.pay.weixin.service.RefundService;
+import com.rongyi.rpb.common.pay.weixin.service.ReverseService;
+import com.rongyi.rpb.common.pay.weixin.service.UnifiedorderService;
+import com.rongyi.rpb.mq.Sender;
+import com.rongyi.rpb.service.PaymentService;
+import com.rongyi.rpb.service.WeixinPayService;
+import com.rongyi.rpb.unit.WeixinPayUnit;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Description;
 import org.springframework.test.annotation.Rollback;
 import org.testng.annotations.Test;
 
-import base.BaseTest;
-
-import com.rongyi.easy.mq.MessageEvent;
-import com.rongyi.easy.rpb.domain.PaymentEntity;
-import com.rongyi.easy.rpb.vo.WeixinQueryOrderParamVO;
-import com.rongyi.rpb.common.pay.weixin.model.RefundQueryReqData;
-import com.rongyi.rpb.common.pay.weixin.model.RefundReqData;
-import com.rongyi.rpb.common.pay.weixin.model.RefundResData;
-import com.rongyi.rpb.common.pay.weixin.model.ReverseReqData;
-import com.rongyi.rpb.common.pay.weixin.model.ScanPayReqData;
-import com.rongyi.rpb.common.pay.weixin.model.ScanPayService;
-import com.rongyi.rpb.common.pay.weixin.service.RefundQueryService;
-import com.rongyi.rpb.common.pay.weixin.service.RefundService;
-import com.rongyi.rpb.common.pay.weixin.service.ReverseService;
-import com.rongyi.rpb.common.pay.weixin.service.UnifiedorderService;
-import com.rongyi.rpb.common.pay.weixin.util.Util;
-import com.rongyi.rpb.constants.ConstantUtil;
-import com.rongyi.rpb.mq.Sender;
-import com.rongyi.rpb.service.PaymentService;
-import com.rongyi.rpb.service.WeixinPayService;
+import java.util.*;
 
 public class WeixinPayServiceTest extends BaseTest {
 
@@ -57,10 +30,13 @@ public class WeixinPayServiceTest extends BaseTest {
 
 	@Autowired
 	PaymentService paymentService;
+//
+//	@Autowired
+//	Sender sender;
 
 	@Autowired
-	Sender sender;
-
+	@Qualifier("weixinPayUnit")
+	WeixinPayUnit weixinPayUnit;
 	// @Test
 	public void testSelectByPrimaryKey() {
 		// weixinPayService.getWeixinRefund("1000001898510594" ,0.01, 0.01);
@@ -92,7 +68,7 @@ public class WeixinPayServiceTest extends BaseTest {
 	public void testGetWeixinPay() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("test", "test");
-		sender.convertSendAndReceive("coupon_order_queue", map);
+//		sender.convertSendAndReceive("coupon_order_queue", map);
 		// System.err.println(weixinPayService.getAppWeXinSign("10000011111",
 		// 0.01));
 	}
@@ -203,8 +179,8 @@ public class WeixinPayServiceTest extends BaseTest {
 
 	// @Test
 	public void testGetWeixinPaySign() {
-		Map<String, Object> map = weixinPayService.getAppWeXinSign("1000001111211", 1d,"","");
-		System.err.println(map.toString());
+//		Map<String, Object> map = weixinPayService.getAppWeXinSign("1000001111211", 1d,"","");
+//		System.err.println(map.toString());
 	}
 
 //	@Test
@@ -224,15 +200,8 @@ public class WeixinPayServiceTest extends BaseTest {
 //	@Test
 	@Description("微信退款查询")
 	public void testRefundQuery(){
-		weixinPayService.weixinRefund("00910138391041614", 0.01, 0.01, "00910138391041615",1);
-//		try{
-//		RefundQueryService refundQueryService = new RefundQueryService();
-//		RefundQueryReqData refundQueryReqData = new RefundQueryReqData("1220588601201508316278769187",null, null, null, null);
-//		String result = refundQueryService.request(refundQueryReqData);
-//		System.err.println("result"+result);
-//		}catch(Exception e){
-//			e.printStackTrace();
-//		}
+		weixinPayUnit.checkRefundQueryResult(null, null, "0120288450816163215");
+
 	}
 	
 

@@ -11,13 +11,7 @@ import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
 import com.rongyi.easy.rpb.vo.WeixinQueryOrderParamVO;
 import com.rongyi.rpb.Exception.WeixinException;
-import com.rongyi.rpb.common.pay.weixin.model.RefundQueryReqData;
-import com.rongyi.rpb.common.pay.weixin.model.RefundQueryResData;
 import com.rongyi.rpb.common.pay.weixin.model.RefundResData;
-import com.rongyi.rpb.common.pay.weixin.model.ScanPayQueryReqData;
-import com.rongyi.rpb.common.pay.weixin.service.PayQueryService;
-import com.rongyi.rpb.common.pay.weixin.service.RefundQueryService;
-import com.rongyi.rpb.common.pay.weixin.util.Util;
 import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.mq.Sender;
@@ -25,8 +19,6 @@ import com.rongyi.rpb.service.*;
 import com.rongyi.rpb.unit.TimeExpireUnit;
 import com.rongyi.rpb.unit.WeixinPayUnit;
 import com.rongyi.rss.rpb.OrderNoGenService;
-import net.sf.json.JSONObject;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -74,16 +66,14 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
     private static final Logger LOGGER = LoggerFactory.getLogger(WeixinPayServiceImpl.class);
 
     @Override
-    public Map<String, Object> getAppWeXinSign(String payNo, double total_fee, String timeStart, String timeExpire,Integer orderType) {
+    public Map<String, Object> getAppWeXinSign(String payNo, double total_fee, String timeStart, String timeExpire, Integer orderType) {
+        LOGGER.info("获取微信支付签名 getAppWeXinSign,payNo={},total_fee={}，timeStart={},timeExpire={},orderType={}", payNo, total_fee, timeStart, timeExpire, orderType);
         Map<String, Object> map = new HashMap<String, Object>();
         try {
             BigDecimal totalFee = new BigDecimal(total_fee + "").multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
-            timeExpire = timeExpireUnit.weixinPayTimeExpire(timeStart, timeExpire,orderType);
-            if(Strings.isNullOrEmpty(timeStart))
-                 timeStart = DateUtil.dateToString(DateUtil.stringToDate(timeStart), "yyyyMMddHHmmss");
-            else
+            if (Strings.isNullOrEmpty(timeStart))
                 timeStart = DateUtil.dateToString(new Date(), "yyyyMMddHHmmss");
-
+            timeExpire = timeExpireUnit.weixinPayTimeExpire(timeStart, timeExpire, orderType);
             map = weixinPayUnit.getWeXinPaySign(payNo, totalFee.intValue(), "容易网商品", timeStart, timeExpire);
             map.put("code", 0);
             map.put("totlePrice", total_fee);
@@ -95,30 +85,6 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
         return map;
     }
 
-    @Override
-    public Map<String, Object> getRefundMessageMap(MessageEvent event) {
-        PaymentEntityVO paymentEntityVO = paymentService.bodyToPaymentEntity(event.getBody(), null);
-        PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntityVO.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
-                Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);
-        if (messageToRefund(paymentEntityVO, paymentEntity)) {
-            return weixinRefundMessage(event, paymentEntityVO, paymentEntity.getPayNo());
-        }
-        return null;
-    }
-
-    private Map<String, Object> weixinRefundMessage(MessageEvent event, PaymentEntityVO paymentEntityVO, String payNo) {
-        Map<String, Object> messageMap = new HashMap<String, Object>();
-        messageMap.put("timestamp", DateUtil.getCurrDateTime().getTime());
-        messageMap.put("source", Constants.SOURCETYPE.RPB);
-        messageMap.put("type", event.getType());
-        Map<String, Object> bodyMap = new HashMap<String, Object>();
-        bodyMap.put("orderDetailNum", paymentEntityVO.getOrderDetailNumArray());
-        bodyMap.put("paymentId", payNo);
-        bodyMap.put("orderNum", paymentEntityVO.getOrderNum());
-        bodyMap.put("totalPrice", paymentEntityVO.getAmountMoney());
-        messageMap.put("body", JSONObject.fromObject(bodyMap));
-        return messageMap;
-    }
 
     @Override
     public boolean validateIsWeixinPay(MessageEvent event) {
@@ -156,12 +122,14 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 
     @Override
     public Map<String, Object> weixinRefund(String payNo, double refundFee, double totalFee, String newPayNo, Integer tradeType) {
-        LOGGER.info("weixinRefund payNo={},refundFee={},totalFee={},newPayNo={},tradeType={}", payNo, refundFee, totalFee, newPayNo, tradeType);
+        LOGGER.info("申请微信退款  weixinRefund payNo={},refundFee={},totalFee={},newPayNo={},tradeType={}", payNo, refundFee, totalFee, newPayNo, tradeType);
 
         Map<String, Object> map = new HashMap<String, Object>();
         try {
             //微信退款
             RefundResData refundResData = weixinPayUnit.weixinRefund(payNo, refundFee, totalFee, newPayNo);
+            //退款成功后睡眠1秒钟后查询结果，否则微信端可能未处理完退款申请，导致查询结果错误
+            Thread.sleep(1000);
             //退款查询结果验证是否成功退款
             weixinPayUnit.checkRefundQueryResult(null, null, newPayNo);
             //记录退款事件
@@ -181,7 +149,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 
     @Override
     public void savePaymentLogInfo(RefundResData refundResData, Integer tradeType) {
-        LOGGER.info("refundResData" + refundResData.toString() + ",tradeType=" + tradeType);
+        LOGGER.info("退款成功保存退款事件 savePaymentLogInfo");
         PaymentLogInfo oldPaymentLogInfo = paymentLogInfoService.selectByPayTradeNo(refundResData.getTransaction_id());
         PaymentLogInfo paymentLogInfo = new PaymentLogInfo();
         paymentLogInfo.setNotifyTime(DateUtil.getCurrDateTime());
@@ -203,93 +171,54 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
         paymentLogInfoService.insert(paymentLogInfo);
     }
 
-    @Override
-    public String getResultMessage(String message) {
-        if (StringUtils.isNotEmpty(message))
-            return message;
-        else
-            return "success";
-    }
-
-    @Override
-    public String getPennyByMoney(double totalFee) {
-        BigDecimal bgTotalFee = new BigDecimal(totalFee + "").multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
-        return bgTotalFee.toString();
-    }
 
     @Override
     public void closeOrder(String payNo) {
-        try {
-            weixinPayUnit.closeOrder(payNo);
-            paymentService.deleteByPayNo(payNo);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        weixinPayUnit.closeOrder(payNo);
+        paymentService.deleteByPayNo(payNo);
     }
 
     @Override
     public WeixinQueryOrderParamVO queryOrder(String tradeNo, String payNo) {
-        WeixinQueryOrderParamVO weixinQueryOrderParamVO = new WeixinQueryOrderParamVO();
-        String result = null;
-        try {
-            PayQueryService payQueryService = new PayQueryService();
-            ScanPayQueryReqData scanPayQueryReqData = new ScanPayQueryReqData(tradeNo, payNo);
-            result = payQueryService.request(scanPayQueryReqData);
-            return (WeixinQueryOrderParamVO) Util.getObjectFromXML(result, WeixinQueryOrderParamVO.class);
-        } catch (Exception e) {
-            LOGGER.info("微信订单查询结果-->" + result);
-            e.printStackTrace();
-        }
-        return weixinQueryOrderParamVO;
+        return weixinPayUnit.queryOrder(tradeNo, payNo);
     }
 
     @Override
     public void batchTriggerWeixinRefund() {
-        List<String> failList = new ArrayList<String>();
-        List<String> successList = new ArrayList<String>();
-        List<PaymentEntity> list = paymentService.selectByTradeTypeAndRefundRejected(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1,
-                Constants.REFUND_REJECTED.REFUND_REJECTED0, Constants.PAYMENT_STATUS.STAUS0);
-        for (PaymentEntity paymentEntity : list) {
-            successList.add(paymentEntity.getPayNo());
-            PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
-                    paymentEntity.getPayChannel());
-            Map<String, Object> refundResultMap = weixinRefund(oldPaymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), oldPaymentEntity.getAmountMoney().doubleValue(),
-                    paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
-            if (Constants.RESULT.SUCCESS.equals(refundResultMap.get("result")) || ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr().equals(refundResultMap.get("result"))) {
-                paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
-                paymentEntity.setFinishTime(DateUtil.getCurrDateTime());
-                paymentService.updateByPrimaryKeySelective(paymentEntity);
-                String target = Constants.SOURCETYPE.OSM;
-                String orderDetailNum = "";
-                if (Constants.ORDER_TYPE.ORDER_TYPE_1 == oldPaymentEntity.getOrderType()) {
-                    target = Constants.SOURCETYPE.COUPON;
-                    List<PaymentItemEntity> itemList = paymentItemService.selectByPaymentId(paymentEntity.getId());
-                    orderDetailNum = paymentItemService.getDetailNum(itemList);
-                }
-                MessageEvent event = rpbEventService.getMessageEvent(paymentEntity.getPayNo(), paymentEntity.getOrderNum(), orderDetailNum, paymentEntity.getPayChannel().toString(), null,
-                        Constants.SOURCETYPE.RPB, target, PaymentEventType.REFUND);
-                sender.convertAndSend(event);
-            } else {
-                failList.add(paymentEntity.getPayNo());
-            }
-        }
-        if (failList.isEmpty())
-            LOGGER.info("微信批量退款成功 -->" + successList.toString());
-        else
-            LOGGER.info("微信批量退款失败单号-->" + failList.toString());
-    }
-
-    @Override
-    public RefundQueryResData refundQuery(String tradeNo, String payNo, String refundNo) {
-        RefundQueryResData refundQueryResData = new RefundQueryResData();
+        LOGGER.info("微信批量退款定时任务启动");
         try {
-            RefundQueryService refundQueryService = new RefundQueryService();
-            RefundQueryReqData refundQueryReqData = new RefundQueryReqData(tradeNo, payNo, null, refundNo, null);
-            String result = refundQueryService.request(refundQueryReqData);
-            refundQueryResData = (RefundQueryResData) Util.getObjectFromXML(result, RefundQueryResData.class);
+            List<String> failList = new ArrayList<String>();
+            List<String> successList = new ArrayList<String>();
+            List<PaymentEntity> list = paymentService.selectByTradeTypeAndRefundRejected(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1,
+                    Constants.REFUND_REJECTED.REFUND_REJECTED0, Constants.PAYMENT_STATUS.STAUS0);
+            for (PaymentEntity paymentEntity : list) {
+                successList.add(paymentEntity.getPayNo());
+                PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
+                        paymentEntity.getPayChannel());
+                Map<String, Object> refundResultMap = weixinRefund(oldPaymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), oldPaymentEntity.getAmountMoney().doubleValue(),
+                        paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
+                if (Constants.RESULT.SUCCESS.equals(refundResultMap.get("result")) || ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr().equals(refundResultMap.get("result"))) {
+                    paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
+                    paymentEntity.setFinishTime(DateUtil.getCurrDateTime());
+                    paymentService.updateByPrimaryKeySelective(paymentEntity);
+                    String target = Constants.SOURCETYPE.OSM;
+                    String orderDetailNum = "";
+                    if (Constants.ORDER_TYPE.ORDER_TYPE_1 == oldPaymentEntity.getOrderType()) {
+                        target = Constants.SOURCETYPE.COUPON;
+                        List<PaymentItemEntity> itemList = paymentItemService.selectByPaymentId(paymentEntity.getId());
+                        orderDetailNum = paymentItemService.getDetailNum(itemList);
+                    }
+                    MessageEvent event = rpbEventService.getMessageEvent(paymentEntity.getPayNo(), paymentEntity.getOrderNum(), orderDetailNum, paymentEntity.getPayChannel().toString(), null,
+                            Constants.SOURCETYPE.RPB, target, PaymentEventType.REFUND);
+                    sender.convertAndSend(event);
+                } else {
+                    failList.add(paymentEntity.getPayNo());
+                }
+            }
+            LOGGER.info("微信批量退款定时任务结束,failList={}", failList);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return refundQueryResData;
     }
+
 }
