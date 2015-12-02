@@ -7,7 +7,7 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
-@Entity("mcmc_commodity_spec_column_classification")
+@Entity(value="mcmc_commodity_spec_column_classification",noClassnameStored=true)
 public class CommoditySpecColumnClassification implements  Serializable{
 
 	/**

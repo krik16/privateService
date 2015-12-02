@@ -22,10 +22,9 @@ import com.rongyi.easy.shop.param.ShopParam;
 /**
  * 商家后台店铺管理实体类
  * @author wzh
- *
  */
 @SuppressWarnings("serial")
-@Entity("shops")
+@Entity(value="shops",noClassnameStored=true)
 public class ShopEntity implements Serializable{
 	@JsonSerialize(using=JsonObjectIdSerializer.class)
 	@Id
