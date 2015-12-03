@@ -154,6 +154,10 @@ public class TradeOrder implements Serializable {
         if (this.scoreDiscount > 0) {
             discountMap.put("scoreDiscount", new BigDecimal(this.scoreDiscount).divide(rate, 2, BigDecimal.ROUND_HALF_UP).doubleValue());
         }
+        if(this.rebateDiscount > 0){
+            discountMap.put("platformRebateAmount", new BigDecimal(this.rebateDiscount).divide(rate, 2, BigDecimal.ROUND_HALF_UP).doubleValue());
+        }
+
 
         if (discountMap.keySet().size() > 0) {
             return JsonUtil.getJSONString(discountMap);
