@@ -366,8 +366,9 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                     return newPaymentEntity;
                 }
                 if (!payChannel.equals(list.get(0).getPayChannel())) {
-                    LOGGER.info("用户更改支付方式，支付方式由" + list.get(0).getPayChannel() + "-->" + payChannel);
-                    modifyPayChannelByMoreRequest(list, payChannel);
+                    LOGGER.info("订单支付方式payChannel={}已存在，新建新的支付方式newPayChannel={}类型的付款单" ,list.get(0).getPayChannel(), payChannel);
+                    return  null;
+//                    modifyPayChannelByMoreRequest(list, payChannel);
                 }
                 return list.get(0);
             }
