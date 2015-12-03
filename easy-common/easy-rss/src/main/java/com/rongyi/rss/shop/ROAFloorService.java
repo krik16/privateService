@@ -33,4 +33,6 @@ public interface ROAFloorService {
 	 */
 	public List<String> saveFloors(List<FloorEntity> entities);
 	
+	public List<FloorEntity> findFloorByBuildingId(String buildingId);
+	
 }
