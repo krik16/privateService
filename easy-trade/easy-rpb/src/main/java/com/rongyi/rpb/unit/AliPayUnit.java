@@ -45,7 +45,7 @@ public class AliPayUnit {
      **/
 
     public Map<String, Object> getPaySign(String totalPrice, PaymentEntityVO paymentEntityVO, String title) {
-        LOGGER.info("getPaySign totalPrice={},payNo={},title={}", totalPrice, paymentEntityVO.getPayNo(), title);
+        LOGGER.info("获取支付宝签名,getPaySign totalPrice={},payNo={},title={}", totalPrice, paymentEntityVO.getPayNo(), title);
         Map<String, Object> resultMap = new HashMap<String, Object>();
         try {
             if (Strings.isNullOrEmpty(totalPrice) || Strings.isNullOrEmpty(paymentEntityVO.getPayNo()) || Strings.isNullOrEmpty(title)) {
@@ -120,7 +120,7 @@ public class AliPayUnit {
      * @datetime:2015年8月5日上午9:34:52
      **/
     public QueryOrderParamVO queryOrder(String tradeNo, String payNo) {
-        LOGGER.info("queryOrder tradeNo={},payNo={}", tradeNo, payNo);
+        LOGGER.info("查询支付宝订单状态,queryOrder tradeNo={},payNo={}", tradeNo, payNo);
         int status = 200;
         try {
             if (Strings.isNullOrEmpty(tradeNo) && Strings.isNullOrEmpty(payNo)) {

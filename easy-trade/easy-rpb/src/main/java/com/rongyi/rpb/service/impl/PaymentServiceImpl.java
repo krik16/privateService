@@ -80,13 +80,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
             currpage = Integer.valueOf(searchValueMap.get("currpage").toString());
         searchValueMap.put("currentPage", (currpage - 1) * Constants.PAGE.pageSize);
         searchValueMap.put("pageSize", Constants.PAGE.pageSize);
-        // List<PaymentEntity> list =
-        // this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE +
-        // ".selectPageListBySearch", searchValueMap);
         List<PaymentEntityVO> listVO = new ArrayList<PaymentEntityVO>();
-        // for (PaymentEntity paymentEntity : list) {
-        // listVO.add(entityToVo(paymentEntity));
-        // }
         return listVO;
     }
 
@@ -208,7 +202,6 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
             return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectByPayNo", params);
 
         } catch (Exception e) {
-            LOGGER.error("-----------exception :");
             e.printStackTrace();
         }
         return null;
