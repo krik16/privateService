@@ -15,6 +15,7 @@ public class BrandVO implements Serializable {
 	private String description;// 品牌描述
 	private String cname;
 	private String ename;
+	private String merlog_pic;//商家后台logo图片
 	public String getId() {
 		return id;
 	}
@@ -39,7 +40,12 @@ public class BrandVO implements Serializable {
 	public void setEname(String ename) {
 		this.ename = ename;
 	}
-	public String getIcon() {
+	public String getMerlog_pic() {
+		return merlog_pic;
+	}
+	public void setMerlog_pic(String merlog_pic) {
+		this.merlog_pic = merlog_pic;
+	}	public String getIcon() {
 		return icon;
 	}
 	public void setIcon(String icon) {
@@ -50,6 +56,4 @@ public class BrandVO implements Serializable {
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	
-}
+	}}

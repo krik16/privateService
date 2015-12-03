@@ -78,6 +78,8 @@ public class MallEntity implements Serializable {
 	private String picture;
 
 	private String idStr;
+	
+	private String merlog_pic;  //商家后台Logo
 
 	public String getIdStr(){
 		return this.id.toString();
@@ -502,6 +504,12 @@ public class MallEntity implements Serializable {
 	}
 	public void setBusinesstype(String businesstype) {
 		this.businesstype = businesstype;
+	}
+	public String getMerlog_pic() {
+		return merlog_pic;
+	}
+	public void setMerlog_pic(String merlog_pic) {
+		this.merlog_pic = merlog_pic;
 	}
 	
 }
