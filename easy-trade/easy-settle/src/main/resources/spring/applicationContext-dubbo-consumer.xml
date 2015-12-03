@@ -28,6 +28,8 @@
 
     <!-- 商家后台用户权限查询 -->
     <dubbo:reference interface="com.rongyi.rss.roa.ROAUserInfoService" id="userInfoService" version="${dubbo.version}" check="false" />
+    <!-- 商家账号查询 -->
+    <dubbo:reference interface="com.rongyi.rss.bsoms.IUserInfoService" id="iUserInfoService" version="${dubbo.version}" check="false" />
 
     <!-- 关联集团接口 -->
     <dubbo:reference id="roaMallGroupService" interface="com.rongyi.rss.roa.ROAMallGroupService" version="${dubbo.version}" check="false" />
