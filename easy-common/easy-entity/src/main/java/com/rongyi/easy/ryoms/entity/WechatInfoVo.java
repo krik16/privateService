@@ -8,6 +8,10 @@ import java.io.Serializable;
  *
  */
 public class WechatInfoVo implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4187816482111761950L;
 	private Integer id;
 	private String name;              //微信名
 	private String serviceName;       //微信服务号
