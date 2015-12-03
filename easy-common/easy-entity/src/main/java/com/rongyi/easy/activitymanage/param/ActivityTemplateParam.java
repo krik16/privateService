@@ -12,7 +12,7 @@ import java.util.Date;
 public class ActivityTemplateParam implements Serializable {
     private static final Integer CURRENTPAGE = 1;
     private static final Integer PAGESIZE = 10;
-    private static final String ORDER_BY_CLAUSE = "create_at";
+    private static final String ORDER_BY_CLAUSE = "create_at desc";
    /**活动模版id*/
     private Integer id;
     /**活动模版名称*/
