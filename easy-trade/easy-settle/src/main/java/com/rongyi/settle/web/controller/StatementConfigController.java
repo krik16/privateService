@@ -472,7 +472,7 @@ public class StatementConfigController extends BaseController{
 	@RequestMapping(value="getAreaList")
 	public void getAreaList(String type,String id){
 		LOGGER.info("type={}, id={}",type, id);
-		List<AreaEntity> areaList = new ArrayList<>();
+		List<AreaEntity> areaList;
 		try {
 			//如果type不为空，查询市  区 商圈
 			if(StringUtils.isNotEmpty(type)){
@@ -491,10 +491,10 @@ public class StatementConfigController extends BaseController{
 	 * @Description: 根据类型，名称模糊搜索
 	 * @Author: he
 	 **/
-	@RequestMapping("/relevanceShop")
+	@RequestMapping("/linkShop")
 	@ResponseBody
 	public ResponseData relevanceShop(@RequestBody RelevanceParam params) {
-		ResponseData result = null;
+		ResponseData result;
 		try {
 			LOGGER.info("================ 》》》》》》》》》》》》 relevance params={}", params);
 			if (params.getType() == null && StringUtils.isBlank(params.getId())) {
@@ -505,7 +505,7 @@ public class StatementConfigController extends BaseController{
 			Map<String, Object> searchMap = new HashMap<>();
 			searchMap.put("currpage", currpage);
 			searchMap.put("pagesize", pagesize);
-			Map resultMap = new HashMap();
+			Map resultMap;
 			switch (params.getType()){
 				case 0:
 					if (StringUtils.isNotBlank(params.getShopId()) && !params.getId().equals(params.getShopId())){
