@@ -15,11 +15,13 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.rongyi.easy.malllife.vo.Id;
+import com.rongyi.easy.bsoms.entity.UserInfo;
 import com.rongyi.easy.roa.entity.AreaEntity;
 import com.rongyi.easy.roa.entity.MallEntity;
 import com.rongyi.easy.roa.vo.*;
+import com.rongyi.rss.bsoms.IUserInfoService;
 import com.rongyi.rss.roa.*;
+import com.rongyi.settle.web.controller.params.FindAccountParam;
 import com.rongyi.settle.web.controller.params.RelevanceParam;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -84,6 +86,8 @@ public class StatementConfigController extends BaseController{
 	@Autowired
 	private AccessService accessService;
 
+	@Autowired
+	private IUserInfoService iUserInfoService;
 	/**
 	 * @Description: 分页查询配置列表
 	 * @param request
@@ -470,7 +474,7 @@ public class StatementConfigController extends BaseController{
 	}
 
 	@RequestMapping(value="getAreaList")
-	public void getAreaList(String type,String id){
+	public ResponseData getAreaList(String type,String id){
 		LOGGER.info("type={}, id={}",type, id);
 		List<AreaEntity> areaList;
 		try {
@@ -480,10 +484,10 @@ public class StatementConfigController extends BaseController{
 			}else{  //查询省信息
 				areaList = rOAAreaService.getPro();
 			}
-			ResponseData.success(areaList);
+			return ResponseData.success(areaList);
 		} catch (Exception e) {
 			e.printStackTrace();
-			ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
+			return ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
 		}
 	}
 
@@ -497,7 +501,7 @@ public class StatementConfigController extends BaseController{
 		ResponseData result;
 		try {
 			LOGGER.info("================ 》》》》》》》》》》》》 relevance params={}", params);
-			if (params.getType() == null && StringUtils.isBlank(params.getId())) {
+			if (params.getType() == null || StringUtils.isBlank(params.getId())) {
 				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
 			}
 			Integer currpage = params.getCurrPage() != null ? Integer.valueOf(params.getCurrPage().toString()) : 1;
@@ -564,6 +568,50 @@ public class StatementConfigController extends BaseController{
 			result = ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(),CodeEnum.ERROR_SYSTEM.getValueStr());
 		}
 		return result;
+	}
+
+	@RequestMapping(value="findAccount")
+	public ResponseData findAccount(@RequestBody FindAccountParam params){
+		try {
+			LOGGER.info("================ 》》》》》》》》》》》》 relevance params={}", params);
+			if (params.getType() == null || StringUtils.isBlank(params.getId())
+					|| params.getGuideType()==null || params.getIsOneself()==null) {
+				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
+			}
+			Map<String, Object> paramsMap = new HashMap<>();
+			paramsMap.put("isDisabled", 0);
+			if (params.getIsOneself()==1){
+				switch (params.getType()){
+					case 0: paramsMap.put("shopId", params.getId()); break;
+					case 1: paramsMap.put("mallId", params.getId()); break;
+					case 2: paramsMap.put("brandId", params.getId()); break;
+					case 3: paramsMap.put("filialeId", params.getId()); break;
+					case 4: paramsMap.put("groupId", params.getId()); break;
+					default: return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
+				}
+			}else if (params.getIsOneself()==0){
+				if (params.getGuideType()==1) {
+					paramsMap.put("identity", 5);
+				}
+				if (params.getGuideType()==2){
+					paramsMap.put("identity" ,6);
+				}
+				paramsMap.put("shopId", params.getId());
+			} else {
+				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
+			}
+			List<UserInfo> userInfos = iUserInfoService.getFullUserInfoByRelevanceId(paramsMap);
+			List<String> userAccounts = new ArrayList<>();
+			if (CollectionUtils.isNotEmpty(userAccounts)){
+				for (UserInfo userInfo :userInfos){
+					userAccounts.add(userInfo.getUserAccount());
+				}
+			}
+			return ResponseData.success(userAccounts);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
+		}
 	}
 
 }

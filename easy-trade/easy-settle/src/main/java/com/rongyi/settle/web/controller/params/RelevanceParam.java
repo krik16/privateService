@@ -1,10 +1,12 @@
 package com.rongyi.settle.web.controller.params;
 
+import java.io.Serializable;
+
 /**
  * Created by Ventures on 2015/12/2.
  * 关联参数
  */
-public class RelevanceParam {
+public class RelevanceParam implements Serializable{
 
     private String id;//关联id
 
