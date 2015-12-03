@@ -71,8 +71,8 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
         Map<String, Object> map = new HashMap<String, Object>();
         try {
             BigDecimal totalFee = new BigDecimal(total_fee + "").multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
-            Map<String,String> timeExpireMap = timeExpireUnit.weixinPayTimeExpire(timeStart, timeExpire, orderType);
-            LOGGER.info("timeExpireMap={}",timeExpireMap);
+            Map<String, String> timeExpireMap = timeExpireUnit.weixinPayTimeExpire(timeStart, timeExpire, orderType);
+            LOGGER.info("timeExpireMap={}", timeExpireMap);
             map = weixinPayUnit.getWeXinPaySign(payNo, totalFee.intValue(), "容易网商品", timeExpireMap.get("timeStart"), timeExpireMap.get("timeExpire"));
             map.put("code", 0);
             map.put("totlePrice", total_fee);
@@ -187,15 +187,15 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
         LOGGER.info("微信批量退款定时任务启动");
         try {
             List<String> failList = new ArrayList<String>();
-            List<String> successList = new ArrayList<String>();
             List<PaymentEntity> list = paymentService.selectByTradeTypeAndRefundRejected(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1,
                     Constants.REFUND_REJECTED.REFUND_REJECTED0, Constants.PAYMENT_STATUS.STAUS0);
             for (PaymentEntity paymentEntity : list) {
-                successList.add(paymentEntity.getPayNo());
-                PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
-                        paymentEntity.getPayChannel());
-                Map<String, Object> refundResultMap = weixinRefund(oldPaymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), oldPaymentEntity.getAmountMoney().doubleValue(),
-                        paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
+                PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, paymentEntity.getPayChannel());
+                if(oldPaymentEntity == null){
+                    LOGGER.info("付款记录不存在,忽略该条退款，继续后面退款,orderNo={}",paymentEntity.getOrderNum());
+                    continue;
+                }
+                Map<String, Object> refundResultMap = weixinRefund(oldPaymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), oldPaymentEntity.getAmountMoney().doubleValue(), paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
                 if (Constants.RESULT.SUCCESS.equals(refundResultMap.get("result")) || ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr().equals(refundResultMap.get("result"))) {
                     paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
                     paymentEntity.setFinishTime(DateUtil.getCurrDateTime());

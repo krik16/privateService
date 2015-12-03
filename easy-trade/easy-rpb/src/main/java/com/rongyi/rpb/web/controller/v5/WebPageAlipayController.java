@@ -255,7 +255,7 @@ public class WebPageAlipayController extends BaseController {
 				return;
 			}
 			paymentLogInfoService.insertPayNotify(paymentLogInfo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, PaymentEventType.WEIXIN_PAY);// 支付通知正常处理
-			LOGGER.info("微信支付异步通知结束");
+			LOGGER.info("微信支付异步通知结束,tradeNo={}",paymentLogInfo.getTrade_no());
 		} else {
 			LOGGER.info("支付未成功,通知内容" + requestMap.toString());
 		}

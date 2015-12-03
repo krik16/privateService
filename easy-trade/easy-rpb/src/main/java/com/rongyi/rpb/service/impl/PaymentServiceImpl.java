@@ -355,14 +355,15 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
             if (list != null && !list.isEmpty()) {
                 if (Constants.PAYMENT_STATUS.STAUS2 == list.get(0).getStatus() && payChannel==list.get(0).getPayChannel() && payChannel == Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0) {// 订单已完成支付后重新发起支付请求
                     LOGGER.info("此订单已成功支付,此次请求属于订单重复支付请求,无需处理，返回已付款记录给用户，第三方系统会自动提示，订单号-->" + orderNum);
-//                    PaymentEntity newPaymentEntity = new PaymentEntity();
-//                    BeanUtils.copyProperties(list.get(0), newPaymentEntity);
-//                    newPaymentEntity.setId(null);
-//                    newPaymentEntity.setPayChannel(payChannel);
-//                    newPaymentEntity.setFinishTime(DateUtil.getCurrDateTime());
-//                    newPaymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE5);
-//                    insert(newPaymentEntity);
-//                    return newPaymentEntity;
+                    PaymentEntity newPaymentEntity = new PaymentEntity();
+                    BeanUtils.copyProperties(list.get(0), newPaymentEntity);
+                    newPaymentEntity.setId(null);
+                    newPaymentEntity.setPayChannel(payChannel);
+					newPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
+                    newPaymentEntity.setFinishTime(DateUtil.getCurrDateTime());
+                    newPaymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE5);
+                    insert(newPaymentEntity);
+                    return newPaymentEntity;
                 }
                 if (!payChannel.equals(list.get(0).getPayChannel())) {
                     LOGGER.info("用户更改支付方式，支付方式由" + list.get(0).getPayChannel() + "-->" + payChannel);
