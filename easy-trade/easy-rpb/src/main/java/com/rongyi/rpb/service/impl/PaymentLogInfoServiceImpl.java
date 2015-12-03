@@ -101,18 +101,22 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
     @Override
     public boolean insertPayNotify(PaymentLogInfo paymentLogInfo, Integer tradeType, Integer status, String payChannel) {
         Integer realPayChannel = paymentService.getRealPayChannel(Integer.valueOf(payChannel));
-        LOGGER.info("第三方支付成功通知更新付款状态并记录付款事件,insertPayNotify payNo={},tradeNo={},payChannel={},realPayChannel={}", paymentLogInfo.getOutTradeNo(), paymentLogInfo.getTrade_no(), payChannel,realPayChannel);
+        LOGGER.info("第三方支付成功通知更新付款状态并记录付款事件,insertPayNotify payNo={},tradeNo={},payChannel={},realPayChannel={}", paymentLogInfo.getOutTradeNo(), paymentLogInfo.getTrade_no(), payChannel, realPayChannel);
         try {
             PaymentEntity paymentEntity = paymentService.selectByPayNoAndPayChannelAndTradeType(paymentLogInfo.getOutTradeNo(), realPayChannel, tradeType, Constants.PAYMENT_STATUS.STAUS0);
             if (paymentEntity != null) {
                 //获取行锁
                 PaymentEntity withLockPaymentEntity = paymentService.selectByWithLock(paymentEntity.getId());
+                if (validateRepeatPay(withLockPaymentEntity.getPayNo(), paymentLogInfo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1)) { // 验证是否是重复支付
+                    LOGGER.info("重复支付");
+                    return false;
+                }
                 if (withLockPaymentEntity != null && Constants.PAYMENT_STATUS.STAUS2 != withLockPaymentEntity.getStatus()) {
                     paymentService.updateListStatus(paymentLogInfo.getOutTradeNo(), tradeType, status, realPayChannel);// 修改付款单状态
                     String orderNums = paymentService.getOrderNumStrsByPayNo(paymentLogInfo.getOutTradeNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
                     paySuccessToMessage(paymentLogInfo.getOutTradeNo(), paymentLogInfo.getBuyer_email(), orderNums, withLockPaymentEntity.getOrderType(), payChannel);
                     insertGetId(paymentLogInfo);
-                    LOGGER.info("更新付款单状态，记录事件结束，payNo={}", withLockPaymentEntity.getPayNo());
+                    LOGGER.info("更新付款单状态，记录付款事件成功，payNo={}", withLockPaymentEntity.getPayNo());
                     return true;
                 }
             }
@@ -122,6 +126,17 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
         }
         return false;
     }
+
+    private boolean validateRepeatPay(String payNo, PaymentLogInfo paymentLogInfo, Integer payChannel) {
+        PaymentEntity paymentEntity = paymentService.validateRepeatPay(payNo, payChannel);
+        if (paymentEntity != null) {// 重复支付
+            paymentLogInfo.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE5);
+            return paymentService.repeatPayToRefund(paymentEntity, paymentLogInfo);
+        }
+        return false;
+    }
+
+
 
     @SuppressWarnings("unchecked")
     @Override

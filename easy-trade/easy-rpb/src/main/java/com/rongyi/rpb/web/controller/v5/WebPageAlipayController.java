@@ -167,8 +167,6 @@ public class WebPageAlipayController extends BaseController {
 				paymentLogInfo.setEventType(Constants.EVENT_TYPE.EVENT_TYPE1);
 				paymentLogInfo.setResult(map.get("trade_status").toString());
 				paymentLogInfo.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
-				if (validateRepeatPay(map.get("out_trade_no").toString(), paymentLogInfo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0)) // 重复支付
-					return;
 				paymentLogInfoService.insertPayNotify(paymentLogInfo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, PaymentEventType.PAYMENT);
 				LOGGER.info("支付宝手机网页支付异步通知结束,tradeNo={}", notify_data,map.get("trade_no"));
 				model.addAttribute("content", "支付成功");
@@ -219,8 +217,6 @@ public class WebPageAlipayController extends BaseController {
 		LOGGER.info("支付宝手机APP支付异步通知开始,交易流水号,trade_no={}",trade_no);
 		PaymentLogInfo paymentLogInfo = getPaymentLogInfo(trade_no, out_trade_no, notify_id, notify_type, DateUtil.getCurrDateTime(), sign, sign_type, 0, Constants.EVENT_TYPE.EVENT_TYPE0, total_fee, buyer_email, buyer_id,
 				Constants.REPLAY_FLAG.REPLAY_FLAG0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
-		if (validateRepeatPay(out_trade_no, paymentLogInfo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0)) // 验证是否是重复支付
-			return "appwebpage/notify";
 		paymentLogInfoService.insertPayNotify(paymentLogInfo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, PaymentEventType.APP);
 		LOGGER.info("支付宝手机APP支付异步通知结束,交易流水号,trade_no={}",trade_no);
 		return "appwebpage/notify";
@@ -250,10 +246,6 @@ public class WebPageAlipayController extends BaseController {
 				return;
 			}
 			PaymentLogInfo paymentLogInfo = paymentLogInfoService.getByWeixinNotify(requestMap);
-			if (validateRepeatPay(paymentLogInfo.getOutTradeNo(), paymentLogInfo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1)) { // 验证是否是重复支付
-				setResponse(response, responseMap);
-				return;
-			}
 			paymentLogInfoService.insertPayNotify(paymentLogInfo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, PaymentEventType.WEIXIN_PAY);// 支付通知正常处理
 			LOGGER.info("微信支付异步通知结束,tradeNo={}",paymentLogInfo.getTrade_no());
 		} else {
@@ -365,15 +357,6 @@ public class WebPageAlipayController extends BaseController {
 		paymentLogInfo.setBuyer_id(buyerId);
 		paymentLogInfo.setTradeType(tradeType);
 		return paymentLogInfo;
-	}
-
-	private boolean validateRepeatPay(String payNo, PaymentLogInfo paymentLogInfo, Integer payChannel) {
-		PaymentEntity paymentEntity = paymentService.validateRepeatPay(payNo, payChannel);
-		if (paymentEntity != null) {// 重复支付
-			paymentLogInfo.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE5);
-			return paymentService.repeatPayToRefund(paymentEntity, paymentLogInfo);
-		}
-		return false;
 	}
 
 	/**
