@@ -174,13 +174,4 @@ public interface IVoucherCouponService {
 
     /***********置顶代金券 end***************/
 
-
-    /**
-     * 这个方法是 类型为注册时候去查询这个时间段有没有数据
-     * @author lijing
-     * @param startAt
-     * @param endAt
-     * @return
-     */
-    List<String> selectRedenveByStartEndAt(Date startAt,Date endAt);
 }

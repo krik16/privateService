@@ -204,5 +204,4 @@ public interface RoaVoucherCouponService {
      */
     boolean dataMigration();
 
-    List<String> selectRedenveByStartEndAt(Date startAt,Date endAt);
 }

@@ -10,6 +10,7 @@ import com.rongyi.easy.coupon.vo.RedenvelopVO;
 import com.rongyi.easy.coupon.vo.UserVO;
 import com.rongyi.easy.coupon.vo.operation.CouponCountVO;
 
+import java.util.Date;
 import java.util.List;
 
 public interface RoaRedenvelopeComService {
@@ -152,5 +153,12 @@ public interface RoaRedenvelopeComService {
 	 * @throws Exception
 	 */
 	boolean submitOffStock(List<String> ids, String reason) throws Exception;
-	
+
+	/**
+	 * 校验在同一发布时间段是否有注册类型红包
+	 * @param startAt
+	 * @param endAt
+	 * @return
+	 */
+	List<String> selectRedenveByStartEndAt(Date startAt, Date endAt);
 }
