@@ -15,7 +15,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.rongyi.easy.malllife.vo.Id;
 import com.rongyi.easy.roa.entity.AreaEntity;
+import com.rongyi.easy.roa.entity.MallEntity;
 import com.rongyi.easy.roa.vo.*;
 import com.rongyi.rss.roa.*;
 import com.rongyi.settle.web.controller.params.RelevanceParam;
@@ -506,24 +508,44 @@ public class StatementConfigController extends BaseController{
 			Map resultMap = new HashMap();
 			switch (params.getType()){
 				case 0:
+					if (StringUtils.isNotBlank(params.getShopId()) && !params.getId().equals(params.getShopId())){
+						return ResponseData.success(null, currpage, pagesize, 0);
+					}
 					searchMap.put("id",params.getId());
-					resultMap = roaShopService.getShops(searchMap, currpage, pagesize);
 					break;
 				case 1:
 					searchMap.put("mallId",params.getId());
-					resultMap = roaShopService.getShops(searchMap, currpage, pagesize);
 					break;
 				case 2:
 					searchMap.put("brandId", params.getId());
-					resultMap = roaShopService.getShops(searchMap, currpage, pagesize);
 					break;
 				case 3:
+					searchMap.put("filialeId", params.getFilialeId());
 					break;
 				case 4:
+					List<MallEntity> mallEntities = rOAMallService.getMallEntitysByGroupId(params.getGroupId());
+					List<String> mallIds = new ArrayList<>();
+					if (CollectionUtils.isNotEmpty(mallEntities)){
+						for (MallEntity mallEntity : mallEntities){
+							mallIds.add(mallEntity.getId().toString());
+						}
+					}
+					searchMap.put("zoneIds", mallIds);
 					break;
 				default:
 					return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
 			}
+			if (StringUtils.isNotBlank(params.getShopId())) {
+				searchMap.put("id", params.getShopId());
+			}
+			if (StringUtils.isNotBlank(params.getShopName())){
+				searchMap.put("shopName", params.getShopName());
+			}
+			if (StringUtils.isNotBlank(params.getZoneId())){
+				searchMap.put("zoneId", params.getZoneId());
+			}
+			searchMap.put("sort", "noSort");// 暂未定排序字段
+			resultMap = roaShopService.getShops(searchMap, currpage, pagesize);
 			List<ShopVO> shopVOs = (List<ShopVO>) resultMap.get("list");
 			List<RelevanceVO> reList = new ArrayList<>();
 			if (CollectionUtils.isNotEmpty(shopVOs)) {
