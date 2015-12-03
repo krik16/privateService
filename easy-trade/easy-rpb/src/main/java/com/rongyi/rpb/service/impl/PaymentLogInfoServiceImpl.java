@@ -103,7 +103,7 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
         Integer realPayChannel = paymentService.getRealPayChannel(Integer.valueOf(payChannel));
         LOGGER.info("第三方支付成功通知更新付款状态并记录付款事件,insertPayNotify payNo={},tradeNo={},payChannel={},realPayChannel={}", paymentLogInfo.getOutTradeNo(), paymentLogInfo.getTrade_no(), payChannel, realPayChannel);
         try {
-            PaymentEntity paymentEntity = paymentService.selectByPayNoAndPayChannelAndTradeType(paymentLogInfo.getOutTradeNo(), realPayChannel, tradeType, Constants.PAYMENT_STATUS.STAUS0);
+            PaymentEntity paymentEntity = paymentService.selectByPayNoAndPayChannelAndTradeType(paymentLogInfo.getOutTradeNo(), realPayChannel, tradeType,null);
             if (paymentEntity != null) {
                 //获取行锁
                 PaymentEntity withLockPaymentEntity = paymentService.selectByWithLock(paymentEntity.getId());
