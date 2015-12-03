@@ -1,11 +1,13 @@
 package com.rongyi.easy.ryoms.entity;
 
+import java.io.Serializable;
+
 /**
  * 微信 
  * @author 苏娟
  *
  */
-public class WechatInfoVo {
+public class WechatInfoVo implements Serializable{
 	private Integer id;
 	private String name;              //微信名
 	private String serviceName;       //微信服务号
