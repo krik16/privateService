@@ -47,7 +47,7 @@ public class RedenvelopeParam implements Serializable {
 	private Integer totalCount;// 促销券发行量/分页记录总数
 	private List<String> couponIds;// 促销券id集合(下架/批量下架/通过/批量通过)
 	private String reason;// 促销券下架/审核未通过原因
-	private String relatedId;// 集团id/平牌id/商场id/店铺id
+	private String relatedTypeId;// 集团id/平牌id/商场id/店铺id
 	private String lv1Id;// 代金券分类一级id
 	private String lv2Id;//二级分类id
 	private String brandId;// 品牌id
@@ -366,12 +366,12 @@ public class RedenvelopeParam implements Serializable {
 		this.reason = reason;
 	}
 
-	public String getRelatedId() {
-		return relatedId;
+	public String getRelatedTypeId() {
+		return relatedTypeId;
 	}
 
-	public void setRelatedId(String relatedId) {
-		this.relatedId = relatedId;
+	public void setRelatedTypeId(String relatedTypeId) {
+		this.relatedTypeId = relatedTypeId;
 	}
 
 	public String getLv1Id() {
@@ -607,7 +607,7 @@ public class RedenvelopeParam implements Serializable {
 				+ ", synTarget=" + synTarget + ", count=" + count
 				+ ", origPrice=" + origPrice + ", totalCount=" + totalCount
 				+ ", couponIds=" + couponIds + ", reason=" + reason
-				+ ", relatedId=" + relatedId + ", lv1Id=" + lv1Id + ", lv2Id="
+				+ ", relatedTypeId=" + relatedTypeId + ", lv1Id=" + lv1Id + ", lv2Id="
 				+ lv2Id + ", brandId=" + brandId + ", cateId=" + cateId
 				+ ", brandCname=" + brandCname + ", brandEname=" + brandEname
 				+ ", mallId=" + mallId + ", mallIds=" + mallIds + ", flag="
@@ -631,7 +631,4 @@ public class RedenvelopeParam implements Serializable {
 				+ ", endDate=" + endDate + ", couponType=" + couponType
 				+ ", displayRegion=" + displayRegion + "]";
 	}
-	
-	
-
 }
