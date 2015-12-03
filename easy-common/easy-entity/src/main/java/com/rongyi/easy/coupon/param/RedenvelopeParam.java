@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 
 import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.entity.CouponBrand;
@@ -371,7 +372,7 @@ public class RedenvelopeParam implements Serializable {
 	}
 
 	public void setRelatedTypeId(String relatedTypeId) {
-		this.relatedTypeId = relatedTypeId;
+		this.relatedTypeId = StringUtils.isNotBlank(relatedTypeId)?relatedTypeId.trim() : null;
 	}
 
 	public String getLv1Id() {
