@@ -317,10 +317,10 @@ public class RpbServiceImpl implements IRpbService {
 	public Map<String, Object> generatePayment(PaymentParamVO paymentParamVO) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		try {
-			PaymentEntity oldPaymentEntity = paymentService.validateOrderNumExist(paymentParamVO.getOperateNo(), paymentParamVO.getPayChannel(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE7);
-			if (oldPaymentEntity != null && StringUtils.isNotEmpty(oldPaymentEntity.getPayNo())) {
-				LOGGER.info("单号已存在，返回历史付款单号" + oldPaymentEntity.getPayNo());
-			}
+//			PaymentEntity oldPaymentEntity = paymentService.validateOrderNumExist(paymentParamVO.getOperateNo(), paymentParamVO.getPayChannel(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE7);
+//			if (oldPaymentEntity != null && StringUtils.isNotEmpty(oldPaymentEntity.getPayNo())) {
+//				LOGGER.info("单号已存在，返回历史付款单号" + oldPaymentEntity.getPayNo());
+//			}
 			PaymentEntity paymentEntity = new PaymentEntity();
 			if (PaymentEventType.STATEMENT_PAY.equals(paymentParamVO.getOperateType())) {// 对账单付款
 				LOGGER.info("生成对账单付款记录，对账单号：" + paymentParamVO.getOperateNo());

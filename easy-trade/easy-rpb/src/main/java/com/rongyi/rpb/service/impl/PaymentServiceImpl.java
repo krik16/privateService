@@ -251,7 +251,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                 bodyMap = webPageAlipayService.getToken(paymentEntityVO);
             } else if (PaymentEventType.WEIXIN_PAY.equals(event.getType())) {// 微信支付
                 LOGGER.info("微信支付");
-                bodyMap = weixinPayService.getAppWeXinSign(paymentEntityVO.getPayNo(), Double.valueOf(paymentEntityVO.getAmountMoney().toString()), paymentEntityVO.getTimeStart(), paymentEntityVO.getTimeExpire(),paymentEntityVO.getOrderType());
+                bodyMap = weixinPayService.getAppWeXinSign(paymentEntityVO.getPayNo(), Double.valueOf(paymentEntityVO.getAmountMoney().toString()), paymentEntityVO.getTimeStart(), paymentEntityVO.getTimeExpire(), paymentEntityVO.getOrderType());
             } else if (PaymentEventType.UNION_PAY.equals(event.getType())) {// 银联支付
                 LOGGER.info("银联支付");
                 bodyMap.put("unionOrderNum", ConstantEnum.UNION_COUPON_PREFIX.getValueStr() + paymentEntityVO.getPayNo());
@@ -353,24 +353,22 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         for (int i = 0; i < orderNumArray.length; i++) {
             List<PaymentEntity> list = selectByOrderNum(orderNumArray[i], tradeType);
             if (list != null && !list.isEmpty()) {
-                if (Constants.PAYMENT_STATUS.STAUS2 == list.get(0).getStatus() && payChannel==list.get(0).getPayChannel() && payChannel == Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0) {// 订单已完成支付后重新发起支付请求
+                PaymentEntity newPaymentEntity = new PaymentEntity();
+                BeanUtils.copyProperties(list.get(0), newPaymentEntity);
+                newPaymentEntity.setId(null);
+                newPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
+                newPaymentEntity.setFinishTime(DateUtil.getCurrDateTime());
+                if (Constants.PAYMENT_STATUS.STAUS2 == list.get(0).getStatus() && payChannel == list.get(0).getPayChannel() && payChannel == Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0) {// 订单已完成支付后重新发起支付请求
                     LOGGER.info("此订单已成功支付,此次请求属于订单重复支付请求,订单号-->" + orderNum);
-                    PaymentEntity newPaymentEntity = new PaymentEntity();
-                    BeanUtils.copyProperties(list.get(0), newPaymentEntity);
-                    newPaymentEntity.setId(null);
-                    newPaymentEntity.setPayChannel(payChannel);
-					newPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
-                    newPaymentEntity.setFinishTime(DateUtil.getCurrDateTime());
                     newPaymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE5);
-                    insert(newPaymentEntity);
-                    return newPaymentEntity;
                 }
                 if (!payChannel.equals(list.get(0).getPayChannel())) {
-                    LOGGER.info("订单支付方式payChannel={}已存在，新建新的支付方式newPayChannel={}类型的付款单" ,list.get(0).getPayChannel(), payChannel);
-                    return  null;
-//                    modifyPayChannelByMoreRequest(list, payChannel);
+                    LOGGER.info("订单支付方式payChannel={}已存在，新建新的支付方式newPayChannel={}类型的付款单", list.get(0).getPayChannel(), payChannel);
+                    newPaymentEntity.setPayChannel(payChannel);
+                    newPaymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
                 }
-                return list.get(0);
+                insert(newPaymentEntity);
+                return newPaymentEntity;
             }
         }
         return null;
@@ -485,10 +483,10 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         try {
             Map<String, Object> bodyMap = JsonUtil.getMapFromJson(event.getBody().toString());
             MQDrawParam mqDrawParam = MQDrawParam.mapToEntity(bodyMap);
-            PaymentEntity oldPaymentEntity = validateOrderNumExist(mqDrawParam.getDrawNo(), mqDrawParam.getPayType(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE3);
-            if (oldPaymentEntity != null && StringUtils.isNotEmpty(oldPaymentEntity.getPayNo())) {
-                LOGGER.info("提现单号已存在，返回历史付款单号" + oldPaymentEntity.getPayNo());
-            }
+//            PaymentEntity oldPaymentEntity = validateOrderNumExist(mqDrawParam.getDrawNo(), mqDrawParam.getPayType(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE3);
+//            if (oldPaymentEntity != null && StringUtils.isNotEmpty(oldPaymentEntity.getPayNo())) {
+//                LOGGER.info("提现单号已存在，返回历史付款单号" + oldPaymentEntity.getPayNo());
+//            }
             if (mqDrawParam.getOrderType() != null)
                 paymentEntity.setOrderType(mqDrawParam.getOrderType());
             if (mqDrawParam.getDrawAmount() != null)
