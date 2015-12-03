@@ -5,6 +5,8 @@ import com.rongyi.easy.usercenter.entity.MalllifeUserInfoEntity;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * Created by xgq on 2015/7/24.
  */
@@ -90,12 +92,13 @@ public class MallLifeUserVO implements Serializable {
         mallLifeUserVO.setIMId(mallLifeUserEntity.getImId());
         mallLifeUserVO.setNickname(mallLifeUserEntity.getNickName());
         mallLifeUserVO.setPhone(mallLifeUserEntity.getPhone());
-         if(mallLifeUserEntity.getGender().equals("M")){
-             mallLifeUserVO.setSex(0);
-         }else {
-             mallLifeUserVO.setSex(1);
-         }
-
+        if(StringUtils.isNotBlank(mallLifeUserEntity.getGender())){
+        	if(mallLifeUserEntity.getGender().equals("M")){
+                mallLifeUserVO.setSex(0);
+            }else {
+                mallLifeUserVO.setSex(1);
+            }
+        }
         return mallLifeUserVO;
     }
 }
