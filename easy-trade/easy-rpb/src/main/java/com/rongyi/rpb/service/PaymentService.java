@@ -261,4 +261,12 @@ public interface PaymentService {
 	 * @datetime:2015年10月14日下午6:53:35
 	 **/
 	public abstract void updateByIds(String[] ids,Map<String,Object> map);
+
+	/**
+	 * @Description: 查询付款单(加锁)
+	 * @param:
+	 * @Author:  柯军
+	 **/
+
+	public abstract PaymentEntity selectByWithLock(Integer id);
 }

@@ -170,7 +170,7 @@ public class WebPageAlipayController extends BaseController {
 				if (validateRepeatPay(map.get("out_trade_no").toString(), paymentLogInfo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0)) // 重复支付
 					return;
 				paymentLogInfoService.insertPayNotify(paymentLogInfo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, PaymentEventType.PAYMENT);
-				LOGGER.info("支付宝手机网页支付异步通知结束");
+				LOGGER.info("支付宝手机网页支付异步通知结束,tradeNo={}", notify_data,map.get("trade_no"));
 				model.addAttribute("content", "支付成功");
 			}
 		} catch (Exception e) {
@@ -222,7 +222,7 @@ public class WebPageAlipayController extends BaseController {
 		if (validateRepeatPay(out_trade_no, paymentLogInfo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0)) // 验证是否是重复支付
 			return "appwebpage/notify";
 		paymentLogInfoService.insertPayNotify(paymentLogInfo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, PaymentEventType.APP);
-		LOGGER.info("支付宝手机APP支付异步通知结束");
+		LOGGER.info("支付宝手机APP支付异步通知结束,交易流水号,trade_no={}",trade_no);
 		return "appwebpage/notify";
 	}
 
@@ -245,7 +245,7 @@ public class WebPageAlipayController extends BaseController {
 			responseMap.put("return_msg", "OK");
 			boolean bool = paymentLogInfoService.validateByTradeNoAndPayNo(requestMap.get("transaction_id").toString(), requestMap.get("out_trade_no").toString());
 			if (bool) {
-				LOGGER.info("微信支付结果已正确处理,应答微信支付结果处理成功");
+				LOGGER.info("微信支付结果已正确处理,应答微信支付结果处理成功tradeNo={}",requestMap.get("transaction_id").toString());
 				setResponse(response, responseMap);
 				return;
 			}

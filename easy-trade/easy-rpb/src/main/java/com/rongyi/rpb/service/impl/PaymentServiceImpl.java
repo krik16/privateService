@@ -354,7 +354,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
             List<PaymentEntity> list = selectByOrderNum(orderNumArray[i], tradeType);
             if (list != null && !list.isEmpty()) {
                 if (Constants.PAYMENT_STATUS.STAUS2 == list.get(0).getStatus() && payChannel==list.get(0).getPayChannel() && payChannel == Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0) {// 订单已完成支付后重新发起支付请求
-                    LOGGER.info("此订单已成功支付,此次请求属于订单重复支付请求,无需处理，返回已付款记录给用户，第三方系统会自动提示，订单号-->" + orderNum);
+                    LOGGER.info("此订单已成功支付,此次请求属于订单重复支付请求,订单号-->" + orderNum);
                     PaymentEntity newPaymentEntity = new PaymentEntity();
                     BeanUtils.copyProperties(list.get(0), newPaymentEntity);
                     newPaymentEntity.setId(null);
@@ -580,6 +580,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         BeanUtils.copyProperties(paymentEntity, newPaymentEntity);
         newPaymentEntity.setId(null);
         newPaymentEntity.setPayChannel(newPayChannel);
+        newPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
         newPaymentEntity.setFinishTime(DateUtil.getCurrDateTime());
         newPaymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE5);
         return newPaymentEntity;
@@ -701,5 +702,12 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     public void updateByIds(String[] ids, Map<String, Object> map) {
         map.put("ids", ids);
         this.getBaseDao().updateBySql(PAYMENTENTITY_NAMESPACE + ".updateByIds", map);
+    }
+
+    @Override
+    public PaymentEntity selectByWithLock(Integer id) {
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("id", id);
+        return this.getBaseDao().selectOneBySql(PAYMENTENTITY_NAMESPACE + ".selectByWithLock", params);
     }
 }

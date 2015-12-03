@@ -63,6 +63,8 @@ public enum ConstantEnum {
 	EXCEPTION_WEIXIN_ORDER_CLOSE("1019107","微信订单关闭失败"),
 	EXCEPTION_WEIXIN_QUERY_ORDER("1019108","微信订单查询失败"),
 
+	EXCEPTION_PAYMENT_NOT_EXIST("1019109","付款记录不存在"),
+
 	ALI_PAY_TIME_EXPIRE_GOODS("60m","商品支付宝支付默认超时时间"),
 	ALI_PAY_TIME_EXPIRE_COUPONS("15m","代金券支付宝支付默认超时时间"),
 	WEIXIN_PAY_TIME_EXPIRE_GOODS(60,"商品微信支付默认超时时间"),
