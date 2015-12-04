@@ -576,19 +576,19 @@ public class StatementConfigController extends BaseController{
 	public ResponseData findAccount(@RequestBody FindAccountParam params){
 		try {
 			LOGGER.info("================ 》》》》》》》》》》》》 findAccount params={}", params);
-			if (params.getType() == null || StringUtils.isBlank(params.getId())
-					|| params.getIsOneself()==null || (params.getIsOneself()==1 && params.getGuideType()==null) ) {
+			if (params.getGuideType() == null || StringUtils.isBlank(params.getId())
+					|| params.getIsOneself()==null || (params.getIsOneself()==1 && params.getType()==null) ) {
 				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
 			}
 			Map<String, Object> paramsMap = new HashMap<>();
 			paramsMap.put("isDisabled", 0);
 			if (params.getIsOneself()==1){
 				switch (params.getType()){
-					case 0: paramsMap.put("shopId", params.getId()); break;
-					case 1: paramsMap.put("mallId", params.getId()); break;
-					case 2: paramsMap.put("brandId", params.getId()); break;
-					case 3: paramsMap.put("filialeId", params.getId()); break;
-					case 4: paramsMap.put("groupId", params.getId()); break;
+					case 0: paramsMap.put("shopId", params.getId()); paramsMap.put("identity", 4); break;
+					case 1: paramsMap.put("mallId", params.getId()); paramsMap.put("identity", 1); break;
+					case 2: paramsMap.put("brandId", params.getId()); paramsMap.put("identity", 2); break;
+					case 3: paramsMap.put("filialeId", params.getId()); paramsMap.put("identity", 3); break;
+					case 4: paramsMap.put("groupId", params.getId()); paramsMap.put("identity", 0); break;
 					default: return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
 				}
 			}else if (params.getIsOneself()==0){
