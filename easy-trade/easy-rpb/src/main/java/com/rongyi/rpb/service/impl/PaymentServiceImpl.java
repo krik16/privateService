@@ -352,17 +352,17 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     public PaymentEntity validateOrderNumExist(String orderNum, Integer payChannel, Integer tradeType) {
         if (orderNum == null)
             return null;
-        Integer realPayChannel = getRealPayChannel(payChannel);
         String[] orderNumArray = orderNum.split("\\,");
         for (int i = 0; i < orderNumArray.length; i++) {
-            LOGGER.info("orderNum={},tradeType={},payChannel={}",orderNumArray[i], tradeType,realPayChannel);
-            List<PaymentEntity> list = selectByOrderNum(orderNumArray[i], tradeType,realPayChannel);
+            LOGGER.info("orderNum={},tradeType={},payChannel={}",orderNumArray[i], tradeType,payChannel);
+            List<PaymentEntity> list = selectByOrderNum(orderNumArray[i], tradeType,payChannel);
             if (list != null && !list.isEmpty()) {
+                LOGGER.info("list size={},payChannel={}",list.size(),payChannel);
                 PaymentEntity newPaymentEntity = new PaymentEntity();
                 BeanUtils.copyProperties(list.get(0), newPaymentEntity);
                 newPaymentEntity.setId(null);
                 newPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
-                if (Constants.PAYMENT_STATUS.STAUS2 == list.get(0).getStatus() && realPayChannel == list.get(0).getPayChannel()) {// 订单已完成支付后重新发起支付请求
+                if (Constants.PAYMENT_STATUS.STAUS2 == list.get(0).getStatus() && payChannel == list.get(0).getPayChannel()) {// 订单已完成支付后重新发起支付请求
                     LOGGER.info("此订单已成功支付,此次请求属于订单重复支付请求,订单号-->" + orderNum);
                     newPaymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE5);
                     insert(newPaymentEntity);
