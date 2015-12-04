@@ -464,7 +464,7 @@ public class RedenvelopeParam implements Serializable {
 	}
 
 	public void setShopId(String shopId) {
-		this.shopId = shopId;
+		this.shopId = StringUtils.isNotBlank(shopId)?shopId.trim():null;
 	}
 
 	public String getCode() {
@@ -596,7 +596,7 @@ public class RedenvelopeParam implements Serializable {
 	}
 
 	public void setShopName(String shopName) {
-		this.shopName = shopName;
+		this.shopName = StringUtils.isNotBlank(shopName)?shopName.trim():null;
 	}
 	@Override
 	public String toString() {
