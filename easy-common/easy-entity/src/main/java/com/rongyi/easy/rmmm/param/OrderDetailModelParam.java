@@ -37,6 +37,8 @@ public class OrderDetailModelParam implements Serializable {
 	private String commodityPostage;// 邮费
 	
 	private boolean supportCourierDeliver;//支持快递发货字段  true 是    false否
+
+	private boolean supportSelfPickup;//支持到店自提  true 是    false否
 	
 	private Integer hongBaoNum = 0;// 可使用红包数量
 
@@ -144,6 +146,14 @@ public class OrderDetailModelParam implements Serializable {
 		this.commodityPostage = commodityPostage;
 	}
 
+	public boolean isSupportSelfPickup() {
+		return supportSelfPickup;
+	}
+
+	public void setSupportSelfPickup(boolean supportSelfPickup) {
+		this.supportSelfPickup = supportSelfPickup;
+	}
+
 	@Override
 	public String toString() {
 		return "OrderDetailModelParam{" +
@@ -159,6 +169,7 @@ public class OrderDetailModelParam implements Serializable {
 				", commodityName='" + commodityName + '\'' +
 				", commodityPostage='" + commodityPostage + '\'' +
 				", supportCourierDeliver=" + supportCourierDeliver +
+				", supportSelfPickup=" + supportSelfPickup +
 				'}';
 	}
 }
