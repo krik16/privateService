@@ -474,8 +474,11 @@ public class StatementConfigController extends BaseController{
 	}
 
 	@RequestMapping(value="getAreaList")
-	public ResponseData getAreaList(String type,String id){
-		LOGGER.info("type={}, id={}",type, id);
+	@ResponseBody
+	public ResponseData getAreaList(@RequestBody Map<String, Object> map){
+		LOGGER.info("======================== getAreaList param:"+map);
+		String type = map.containsKey("type")? map.get("type").toString() : "";
+		String id = map.containsKey("id") ? map.get("id").toString() : "";
 		List<AreaEntity> areaList;
 		try {
 			//如果type不为空，查询市  区 商圈
@@ -571,6 +574,7 @@ public class StatementConfigController extends BaseController{
 	}
 
 	@RequestMapping(value="findAccount")
+	@ResponseBody
 	public ResponseData findAccount(@RequestBody FindAccountParam params){
 		try {
 			LOGGER.info("================ 》》》》》》》》》》》》 relevance params={}", params);
