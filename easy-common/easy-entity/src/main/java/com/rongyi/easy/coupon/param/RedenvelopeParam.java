@@ -15,6 +15,7 @@ import com.rongyi.easy.coupon.entity.CouponCommodity;
 import com.rongyi.easy.coupon.entity.CouponCommodityCategory;
 import com.rongyi.easy.coupon.entity.CouponMall;
 import com.rongyi.easy.coupon.entity.CouponShop;
+import com.rongyi.easy.coupon.entity.CouponVoucher;
 import com.rongyi.easy.coupon.vo.operation.VoucherCouponVO;
 
 /**
@@ -77,6 +78,7 @@ public class RedenvelopeParam implements Serializable {
 	private List<CouponMall> listCouponMall;// 关联商场
 	private List<CouponShop> listCouponShop;// 关联店铺
 	private List<VoucherCouponVO> listVoucherCouponVO;// 关联代金券
+	private List<CouponVoucher> listCouponVouchers;// 关联代金券
 	private List<CouponCategory> listCouponCategory;//关联卡券分类
 	private List<CouponCommodity> listCouponCommodity;// 关联商品
 	private List<CouponCommodityCategory> couponCommodityCategories;//商品分类
@@ -571,6 +573,13 @@ public class RedenvelopeParam implements Serializable {
 
 	public List<CouponCommodityCategory> getCouponCommodityCategories() {
 		return couponCommodityCategories;
+	}
+	public List<CouponVoucher> getListCouponVouchers() {
+		return listCouponVouchers;
+	}
+
+	public void setListCouponVouchers(List<CouponVoucher> listCouponVouchers) {
+		this.listCouponVouchers = listCouponVouchers;
 	}
 
 	public void setCouponCommodityCategories(
