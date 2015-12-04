@@ -375,10 +375,10 @@
         <include refid="Base_Column_List"/>
         from payment_order
         where pay_no = #{payNo,jdbcType=VARCHAR}
+        and trade_type = #{tradeType,jdbcType=INTEGER}
         <if test="payChannel != null">
             and pay_channel = #{payChannel,jdbcType=INTEGER}
         </if>
-        and trade_type = #{tradeType,jdbcType=INTEGER}
         <if test="status != null">
             and status =
             #{status,jdbcType=INTEGER}

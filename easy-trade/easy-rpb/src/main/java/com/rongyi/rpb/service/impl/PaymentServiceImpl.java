@@ -354,8 +354,8 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
             return null;
         String[] orderNumArray = orderNum.split("\\,");
         for (int i = 0; i < orderNumArray.length; i++) {
-            LOGGER.info("orderNum={},tradeType={},payChannel={}",orderNumArray[i], tradeType,payChannel);
-            List<PaymentEntity> list = selectByOrderNum(orderNumArray[i], tradeType,payChannel);
+            LOGGER.info("orderNum={},tradeType={},payChannel={}", orderNumArray[i], tradeType, payChannel);
+            List<PaymentEntity> list = selectByOrderNum(orderNumArray[i], tradeType, payChannel);
             if (list != null && !list.isEmpty()) {
                 PaymentEntity newPaymentEntity = new PaymentEntity();
                 BeanUtils.copyProperties(list.get(0), newPaymentEntity);
@@ -372,6 +372,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 //                    newPaymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
 //                    insert(newPaymentEntity);
 //                }
+                LOGGER.info("该订单付款记录已存在，返回原付款记录");
                 return newPaymentEntity;
             }
         }
@@ -458,7 +459,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     }
 
     @Override
-    public List<PaymentEntity> selectByOrderNum(String orderNum, Integer tradeType,Integer payChannel) {
+    public List<PaymentEntity> selectByOrderNum(String orderNum, Integer tradeType, Integer payChannel) {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("orderNum", orderNum);
         params.put("tradeType", tradeType);

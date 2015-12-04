@@ -248,9 +248,15 @@ public class PaymentServiceTest extends BaseTest {
 		paymentService.valiadteStatus(ids, 2);
 	}
 
-	@Test
+//	@Test
 	public void testselectByOrderNum(){
 		List<PaymentEntity> list = paymentService.selectByOrderNum("120468903680153834", 0, 0);
-		System.err.println("listSize="+list.size());
+		System.err.println("listSize=" + list.size());
+	}
+
+	@Test
+	public void testselectByPayNoAndPayChannelAndTradeType(){
+		PaymentEntity paymentEntity = paymentService.selectByPayNoAndPayChannelAndTradeType("0120419209728164658",null,0,2);
+		System.err.println("payNo={}"+paymentEntity.getPayNo());
 	}
 }
