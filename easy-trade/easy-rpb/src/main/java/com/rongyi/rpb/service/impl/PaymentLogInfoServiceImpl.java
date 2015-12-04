@@ -107,7 +107,7 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
             if (paymentEntity != null) {
                 //获取行锁
                 PaymentEntity withLockPaymentEntity = paymentService.selectByWithLock(paymentEntity.getId());
-                if (validateRepeatPay(withLockPaymentEntity.getPayNo(), paymentLogInfo, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1)) { // 验证是否是重复支付
+                if (validateRepeatPay(withLockPaymentEntity.getPayNo(), paymentLogInfo,realPayChannel)) { // 验证是否是重复支付
                     LOGGER.info("重复支付");
                     return false;
                 }
