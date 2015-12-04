@@ -648,9 +648,10 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
     @Override
     public void updateListStatus(String payNo, Integer tradeType, Integer status, Integer payChannel) {
-        PaymentEntity paymentEntity = selectByPayNoAndPayChannelAndTradeType(payNo, payChannel, tradeType, status);
+        PaymentEntity paymentEntity = selectByPayNoAndPayChannelAndTradeType(payNo, payChannel, tradeType, null);
         paymentEntity.setFinishTime(DateUtil.getCurrDateTime());
         paymentEntity.setPayChannel(payChannel);
+        paymentEntity.setStatus(status);
         updateByPrimaryKeySelective(paymentEntity);// 修改打款状态
     }
 
