@@ -375,6 +375,7 @@ public class CommodityVO  implements  Serializable {
 				", mallMid='" + mallMid + '\'' +
 				", shopName='" + shopName + '\'' +
 				", supportCourierDeliver=" + supportCourierDeliver +
+				", distribution=" + distribution +
 				'}';
 	}
 	public Integer getSource() {
