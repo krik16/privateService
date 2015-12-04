@@ -39,6 +39,10 @@ public class ResponseVO implements java.io.Serializable {
 
     private Meta meta; // errno=0：成功,errno=1:失败
     private Result result;//数据
+    
+    public ResponseVO(){
+    	
+    }
 
     /**
      * 成功返回值对象

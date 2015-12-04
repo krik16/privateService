@@ -1,6 +1,6 @@
 package com.rongyi.easy.shop.vo;
 
-public class AreaVO {
+public class AreaVO  implements Comparable<AreaVO>{
 
 	private String id;
 	private String type;
@@ -63,6 +63,14 @@ public class AreaVO {
 	public void setFloorName(String floorName) {
 		this.floorName = floorName;
 	}
+
+	@Override
+	public int compareTo(AreaVO o) {
+		
+		return this.getName().compareTo(o.getName());
+	}
+
+	
 	
 	
 }
