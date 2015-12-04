@@ -188,7 +188,7 @@ public class PaymentServiceTest extends BaseTest {
 
 	//	@Test
 	public void testQueryOrder(){
-		System.err.println(aliPaymentService.queryOrder("1000001063768572","2015080700001000480061032614").toString());
+		System.err.println(aliPaymentService.queryOrder("1000001063768572", "2015080700001000480061032614").toString());
 	}
 
 	public MessageEvent getRpbEvent(String soruce, String type) {
@@ -220,7 +220,7 @@ public class PaymentServiceTest extends BaseTest {
 
 	@Test
 	public void testSelectByBatchNoAndStatus(){
-		System.err.println(paymentService.selectByBatchNoAndStatus("20150812192552139",2).size());
+		System.err.println(paymentService.selectByBatchNoAndStatus("20150812192552139", 2).size());
 	}
 
 	//	@Test
@@ -239,12 +239,18 @@ public class PaymentServiceTest extends BaseTest {
 	//	@Test
 	@Rollback(false)
 	public void testUpdateRefundRejected(){
-		paymentService.updateRefundRejected(4690,1);
+		paymentService.updateRefundRejected(4690, 1);
 	}
 
-	@Test
+//	@Test
 	public void testValiadteStatus(){
 		String[] ids = new String[]{"1","2","3"};
 		paymentService.valiadteStatus(ids, 2);
+	}
+
+	@Test
+	public void testselectByOrderNum(){
+		List<PaymentEntity> list = paymentService.selectByOrderNum("120468903680153834", 0, 0);
+		System.err.println("listSize="+list.size());
 	}
 }

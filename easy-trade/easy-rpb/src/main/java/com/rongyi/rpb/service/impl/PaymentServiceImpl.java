@@ -357,7 +357,6 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
             LOGGER.info("orderNum={},tradeType={},payChannel={}",orderNumArray[i], tradeType,payChannel);
             List<PaymentEntity> list = selectByOrderNum(orderNumArray[i], tradeType,payChannel);
             if (list != null && !list.isEmpty()) {
-                LOGGER.info("list size={},payChannel={}",list.size(),payChannel);
                 PaymentEntity newPaymentEntity = new PaymentEntity();
                 BeanUtils.copyProperties(list.get(0), newPaymentEntity);
                 newPaymentEntity.setId(null);
