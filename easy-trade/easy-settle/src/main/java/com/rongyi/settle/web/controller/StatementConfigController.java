@@ -398,10 +398,8 @@ public class StatementConfigController extends BaseController{
 			} else if (type == 4) {// 集团
 				List<MallGroupVO> list = roaMallGroupService.getMallGroups(searchMap);
 				int count = 0;
-				if (currpage == 1) {
-					searchMap.put("currpage", null);
-					count = roaMallGroupService.getMallGroups(searchMap).size();
-				}
+				searchMap.put("currpage", null);
+				count = roaMallGroupService.getMallGroups(searchMap).size();
 				result = ResponseData.success(list, currpage, pagesize, count);
 			}
 		} catch (Exception e) {
@@ -573,13 +571,13 @@ public class StatementConfigController extends BaseController{
 		return result;
 	}
 
-	@RequestMapping(value="findAccount")
+	@RequestMapping("/findAccount")
 	@ResponseBody
 	public ResponseData findAccount(@RequestBody FindAccountParam params){
 		try {
-			LOGGER.info("================ 》》》》》》》》》》》》 relevance params={}", params);
+			LOGGER.info("================ 》》》》》》》》》》》》 findAccount params={}", params);
 			if (params.getType() == null || StringUtils.isBlank(params.getId())
-					|| params.getGuideType()==null || params.getIsOneself()==null) {
+					|| params.getIsOneself()==null || (params.getIsOneself()==1 && params.getGuideType()==null) ) {
 				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
 			}
 			Map<String, Object> paramsMap = new HashMap<>();
@@ -606,7 +604,7 @@ public class StatementConfigController extends BaseController{
 			}
 			List<UserInfo> userInfos = iUserInfoService.getFullUserInfoByRelevanceId(paramsMap);
 			List<String> userAccounts = new ArrayList<>();
-			if (CollectionUtils.isNotEmpty(userAccounts)){
+			if (CollectionUtils.isNotEmpty(userInfos)){
 				for (UserInfo userInfo :userInfos){
 					userAccounts.add(userInfo.getUserAccount());
 				}

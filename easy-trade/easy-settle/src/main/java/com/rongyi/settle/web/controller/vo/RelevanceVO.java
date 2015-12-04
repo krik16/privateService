@@ -56,6 +56,7 @@ public class RelevanceVO implements Serializable{
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", position=" + position +
+                ", mallAddress=" + mallAddress +
                 '}';
     }
 }

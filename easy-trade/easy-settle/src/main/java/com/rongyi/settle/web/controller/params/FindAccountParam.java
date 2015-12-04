@@ -43,4 +43,14 @@ public class FindAccountParam implements Serializable{
     public void setIsOneself(Integer isOneself) {
         this.isOneself = isOneself;
     }
+
+    @Override
+    public String toString() {
+        return "FindAccountParam{" +
+                "id='" + id + '\'' +
+                ", type=" + type +
+                ", guideType=" + guideType +
+                ", isOneself=" + isOneself +
+                '}';
+    }
 }
