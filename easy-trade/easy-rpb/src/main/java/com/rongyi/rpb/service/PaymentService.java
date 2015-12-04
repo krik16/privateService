@@ -211,7 +211,7 @@ public interface PaymentService {
 	 * @Author:  柯军
 	 * @datetime:2015年8月24日下午4:14:11
 	 **/
-	public List<PaymentEntity> updateListStatus(String payNo, Integer type, Integer status,Integer payChannel);
+	public void updateListStatus(String payNo, Integer type, Integer status,Integer payChannel);
 	
 	
 	/**	

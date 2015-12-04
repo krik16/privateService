@@ -10,6 +10,7 @@ import com.rongyi.easy.rpb.domain.PaymentItemEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
 import com.rongyi.easy.tms.vo.MQDrawParam;
+import com.rongyi.rpb.Exception.TradeException;
 import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.mq.Sender;
@@ -325,17 +326,19 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
             paymentEntity.setTradeType(0);// 默认支付
             if (PaymentEventType.PAY_TO_SELLER.equals(event.getType())) {// 打款给卖家
                 LOGGER.info("打款给卖家");
-                paymentEntity.setTradeType(2);
+                paymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE2);
             } else if (PaymentEventType.REFUND.equals(event.getType())) {// 后端退款
                 LOGGER.info("买家申请退款");
-                paymentEntity.setTradeType(1);
-                List<PaymentEntity> historyList = selectByPayNoAndTradeType(oldPayNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
-                if (!historyList.isEmpty()) // 退款时根据付款单号找到对应付款记录中的付款方式
-                    paymentEntity.setPayChannel(historyList.get(0).getPayChannel());
+                paymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
+                // 退款时根据付款单号找到对应付款记录中的付款方式
+                PaymentEntity historyPayment = selectByPayNoAndPayChannelAndTradeType(oldPayNo, null, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);
+                if (historyPayment == null)
+                    throw new TradeException(ConstantEnum.EXCEPTION_PAYMENT_NOT_EXIST.getCodeStr(), ConstantEnum.EXCEPTION_PAYMENT_NOT_EXIST.getValueStr());
+                paymentEntity.setPayChannel(historyPayment.getPayChannel());
             }
             paymentEntity.setTitle(paymentEntityVO.getTitle());
             if (paymentEntityVO.getAmountMoney() == null || isZero(paymentEntityVO.getAmountMoney())) {// 支付款是0元是直接设置支付状态为已支付
-                paymentEntity.setStatus(2);
+                paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
                 paymentEntity.setFinishTime(DateUtil.getCurrDateTime());
             }
             if (paymentEntityVO.getAmountMoney().doubleValue() == 0)
@@ -357,7 +360,6 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                 BeanUtils.copyProperties(list.get(0), newPaymentEntity);
                 newPaymentEntity.setId(null);
                 newPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
-                newPaymentEntity.setFinishTime(DateUtil.getCurrDateTime());
                 if (Constants.PAYMENT_STATUS.STAUS2 == list.get(0).getStatus() && payChannel == list.get(0).getPayChannel() && payChannel == Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0) {// 订单已完成支付后重新发起支付请求
                     LOGGER.info("此订单已成功支付,此次请求属于订单重复支付请求,订单号-->" + orderNum);
                     newPaymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE5);
@@ -579,7 +581,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         BeanUtils.copyProperties(paymentEntity, newPaymentEntity);
         newPaymentEntity.setId(null);
         newPaymentEntity.setPayChannel(newPayChannel);
-        newPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
+        newPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
         newPaymentEntity.setFinishTime(DateUtil.getCurrDateTime());
         newPaymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE5);
         return newPaymentEntity;
@@ -589,10 +591,10 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     public boolean repeatPayToRefund(PaymentEntity paymentEntity, PaymentLogInfo paymentLogInfo) {
         try {
             if (paymentEntity != null) {// 重复支付
-                PaymentEntity oldPaymentEntity = selectByPayNoAndPayChannelAndTradeType(paymentEntity.getPayNo(), paymentEntity.getPayChannel(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0,
-                        Constants.PAYMENT_STATUS.STAUS0);
-                if (oldPaymentEntity != null)// 该支付方式的待支付状态记录是否已存在
-                    BeanUtils.copyProperties(oldPaymentEntity, paymentEntity);
+//                PaymentEntity oldPaymentEntity = selectByPayNoAndPayChannelAndTradeType(paymentEntity.getPayNo(), paymentEntity.getPayChannel(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0,
+//                        Constants.PAYMENT_STATUS.STAUS0);
+//                if (oldPaymentEntity != null)// 该支付方式的待支付状态记录是否已存在
+//                    BeanUtils.copyProperties(oldPaymentEntity, paymentEntity);
                 insertRepeatPay(paymentEntity, paymentLogInfo);// 增加重复付款记录
                 String payNo = getPayNo();
                 PaymentEntity refundPaymentEntity = new PaymentEntity();
@@ -645,8 +647,11 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     }
 
     @Override
-    public List<PaymentEntity> updateListStatus(String payNo, Integer type, Integer status, Integer payChannel) {
-        return updateListStatusBypayNoAndPayChannel(payNo, type, status, payChannel);
+    public void updateListStatus(String payNo, Integer tradeType, Integer status, Integer payChannel) {
+        PaymentEntity paymentEntity = selectByPayNoAndPayChannelAndTradeType(payNo, payChannel, tradeType, status);
+        paymentEntity.setFinishTime(DateUtil.getCurrDateTime());
+        paymentEntity.setPayChannel(payChannel);
+        updateByPrimaryKeySelective(paymentEntity);// 修改打款状态
     }
 
     private List<PaymentEntity> updateListStatusBypayNoAndPayChannel(String payNo, Integer type, Integer status, Integer payChannel) {
