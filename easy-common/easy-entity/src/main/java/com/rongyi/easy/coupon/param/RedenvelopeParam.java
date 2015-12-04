@@ -492,7 +492,7 @@ public class RedenvelopeParam implements Serializable {
 	}
 
 	public Integer getReceiveChannel() {
-		return receiveChannel;
+		return receiveChannel; 
 	}
 
 	public void setReceiveChannel(Integer receiveChannel) {
