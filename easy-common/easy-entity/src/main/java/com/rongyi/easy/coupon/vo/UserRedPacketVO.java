@@ -74,6 +74,11 @@ public class UserRedPacketVO implements Serializable {
     private String usageDesc;
 
     /**
+     * 使用规则
+     */
+    private String limitDesc;
+
+    /**
      * 商品id集合
      */
     private List<String> commodityIds;
@@ -195,6 +200,14 @@ public class UserRedPacketVO implements Serializable {
         this.usageDesc = usageDesc;
     }
 
+    public String getLimitDesc() {
+        return limitDesc;
+    }
+
+    public void setLimitDesc(String limitDesc) {
+        this.limitDesc = limitDesc;
+    }
+
     // 券状态 0:未使用 1:已使用 2:已过期
     public void setConvertStatus(Integer status, Date validEndAt) {
         if (UserRedenvelope.STATUS_UNUSE.equals(status) && new Date().before(validEndAt))
@@ -220,6 +233,7 @@ public class UserRedPacketVO implements Serializable {
                 .append("applyGoods", applyGoods)
                 .append("relatedType", relatedType)
                 .append("usageDesc", usageDesc)
+                .append("limitDesc", limitDesc)
                 .append("commodityIds", commodityIds)
                 .append("voucherVOs", voucherVOs)
                 .toString();
