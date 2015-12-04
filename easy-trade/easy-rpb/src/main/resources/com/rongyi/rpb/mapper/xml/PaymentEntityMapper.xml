@@ -332,6 +332,9 @@
         <if test="tradeType != null and tradeType != ''">
             and trade_type = #{tradeType,jdbcType=INTEGER}
         </if>
+        <if test="payChannel != null and payChannel != ''">
+            and pay_channel = #{payChannel,jdbcType=INTEGER}
+        </if>
 
     </select>
     <select id="selectByOrderNumAndTradeType" resultMap="BaseResultMap"

@@ -354,7 +354,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
             return null;
         String[] orderNumArray = orderNum.split("\\,");
         for (int i = 0; i < orderNumArray.length; i++) {
-            List<PaymentEntity> list = selectByOrderNum(orderNumArray[i], tradeType);
+            List<PaymentEntity> list = selectByOrderNum(orderNumArray[i], tradeType,payChannel);
             if (list != null && !list.isEmpty()) {
                 PaymentEntity newPaymentEntity = new PaymentEntity();
                 BeanUtils.copyProperties(list.get(0), newPaymentEntity);
@@ -363,13 +363,14 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                 if (Constants.PAYMENT_STATUS.STAUS2 == list.get(0).getStatus() && payChannel == list.get(0).getPayChannel() && payChannel == Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0) {// 订单已完成支付后重新发起支付请求
                     LOGGER.info("此订单已成功支付,此次请求属于订单重复支付请求,订单号-->" + orderNum);
                     newPaymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE5);
+                    insert(newPaymentEntity);
                 }
                 if (!payChannel.equals(list.get(0).getPayChannel())) {
                     LOGGER.info("订单支付方式payChannel={}已存在，新建新的支付方式newPayChannel={}类型的付款单", list.get(0).getPayChannel(), payChannel);
                     newPaymentEntity.setPayChannel(payChannel);
                     newPaymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
+                    insert(newPaymentEntity);
                 }
-                insert(newPaymentEntity);
                 return newPaymentEntity;
             }
         }
@@ -456,10 +457,11 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     }
 
     @Override
-    public List<PaymentEntity> selectByOrderNum(String orderNum, Integer tradeType) {
+    public List<PaymentEntity> selectByOrderNum(String orderNum, Integer tradeType,Integer payChannel) {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("orderNum", orderNum);
         params.put("tradeType", tradeType);
+        params.put("payChannel", payChannel);
         return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectByOrderNum", params);
     }
 

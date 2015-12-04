@@ -1,12 +1,12 @@
 package com.rongyi.rpb.service;
 
-import java.util.List;
-import java.util.Map;
-
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: 柯军
@@ -109,7 +109,7 @@ public interface PaymentService {
 
 	public abstract PaymentEntity selectByPrimaryKey(String id);
 
-	public abstract List<PaymentEntity> selectByOrderNum(String orderNum,Integer tradeType);
+	public abstract List<PaymentEntity> selectByOrderNum(String orderNum,Integer tradeType,Integer payChannel);
 
 	public abstract PaymentEntity selectByOrderNumAndTradeType(String orderNum, Integer tradeType, Integer status,Integer payChannel);
 	

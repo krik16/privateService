@@ -8,17 +8,6 @@
 
 package com.rongyi.rpb.service.impl;
 
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import net.sf.json.JSONObject;
-
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.constant.PayEnum;
 import com.rongyi.core.constant.PaymentEventType;
@@ -26,23 +15,21 @@ import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentItemEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
-import com.rongyi.easy.rpb.vo.PayAccountUseTotal;
-import com.rongyi.easy.rpb.vo.PaySuccessResponse;
-import com.rongyi.easy.rpb.vo.PaymentEntityVO;
-import com.rongyi.easy.rpb.vo.PaymentParamVO;
-import com.rongyi.easy.rpb.vo.QueryOrderParamVO;
-import com.rongyi.easy.rpb.vo.WeixinQueryOrderParamVO;
+import com.rongyi.easy.rpb.vo.*;
 import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.mq.Sender;
 import com.rongyi.rpb.nsynchronous.OrderFormNsyn;
-import com.rongyi.rpb.service.AliPaymentService;
-import com.rongyi.rpb.service.PaymentItemService;
-import com.rongyi.rpb.service.PaymentLogInfoService;
-import com.rongyi.rpb.service.PaymentService;
-import com.rongyi.rpb.service.RpbEventService;
-import com.rongyi.rpb.service.WeixinPayService;
+import com.rongyi.rpb.service.*;
 import com.rongyi.rss.rpb.IRpbService;
+import net.sf.json.JSONObject;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: 柯军
@@ -141,7 +128,7 @@ public class RpbServiceImpl implements IRpbService {
 		resultMap.put("errno", "0");
 		resultMap.put("errMsg", "支付成功");
 		if (totalAmount == 0) {
-			List<PaymentEntity> list = paymentService.selectByOrderNum(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
+			List<PaymentEntity> list = paymentService.selectByOrderNum(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0,null);
 			// TODO 兼容老版本APP0元支付不走签名，在下个强制更新版本后此代码需删除
 			if (list.isEmpty()) {
 				insertZeroOrder(orderNo, totalAmount);
