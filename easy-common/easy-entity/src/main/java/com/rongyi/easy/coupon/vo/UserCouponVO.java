@@ -2,6 +2,7 @@ package com.rongyi.easy.coupon.vo;
 
 import com.rongyi.easy.coupon.entity.UserRedenvelope;
 import com.rongyi.easy.mcmc.vo.CommodityBuyerVO;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
@@ -52,13 +53,25 @@ public class UserCouponVO implements Serializable {
     private Integer applyScope;//适用范围:商品/代金券[0] 商品[1] 代金券[2]
     
     private List<String> label;//标签
+    /**
+     * 使用规则
+     */
+    private String limitDesc;
 
     /**
      * 抵扣券关联的代金券结合
      */
     private List<VoucherVO> voucherVOs;
     
-    public List<String> getLabel() {
+    public String getLimitDesc() {
+		return limitDesc;
+	}
+
+	public void setLimitDesc(String limitDesc) {
+		this.limitDesc = limitDesc;
+	}
+
+	public List<String> getLabel() {
 		return label;
 	}
 
