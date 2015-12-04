@@ -365,12 +365,12 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                     newPaymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE5);
                     insert(newPaymentEntity);
                 }
-                if (!payChannel.equals(list.get(0).getPayChannel())) {
-                    LOGGER.info("订单支付方式payChannel={}已存在，新建新的支付方式newPayChannel={}类型的付款单", list.get(0).getPayChannel(), payChannel);
-                    newPaymentEntity.setPayChannel(payChannel);
-                    newPaymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
-                    insert(newPaymentEntity);
-                }
+//                if (!payChannel.equals(list.get(0).getPayChannel())) {
+//                    LOGGER.info("订单支付方式payChannel={}已存在，新建新的支付方式newPayChannel={}类型的付款单", list.get(0).getPayChannel(), payChannel);
+//                    newPaymentEntity.setPayChannel(payChannel);
+//                    newPaymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
+//                    insert(newPaymentEntity);
+//                }
                 return newPaymentEntity;
             }
         }
@@ -593,10 +593,6 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     public boolean repeatPayToRefund(PaymentEntity paymentEntity, PaymentLogInfo paymentLogInfo) {
         try {
             if (paymentEntity != null) {// 重复支付
-//                PaymentEntity oldPaymentEntity = selectByPayNoAndPayChannelAndTradeType(paymentEntity.getPayNo(), paymentEntity.getPayChannel(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0,
-//                        Constants.PAYMENT_STATUS.STAUS0);
-//                if (oldPaymentEntity != null)// 该支付方式的待支付状态记录是否已存在
-//                    BeanUtils.copyProperties(oldPaymentEntity, paymentEntity);
                 insertRepeatPay(paymentEntity, paymentLogInfo);// 增加重复付款记录
                 String payNo = getPayNo();
                 PaymentEntity refundPaymentEntity = new PaymentEntity();
