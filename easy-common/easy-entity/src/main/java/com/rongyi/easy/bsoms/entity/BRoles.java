@@ -35,6 +35,8 @@ public class BRoles implements Serializable{
     private String stopReason;
     
     private BBelongRelation belongRelation; 
+    
+    private Integer canUpdate ;//是否能编辑  0能 1不能
 
     public Integer getId() {
         return id;
@@ -161,6 +163,14 @@ public class BRoles implements Serializable{
 
 	public void setStopReason(String stopReason) {
 		this.stopReason = stopReason;
+	}
+
+	public Integer getCanUpdate() {
+		return canUpdate;
+	}
+
+	public void setCanUpdate(Integer canUpdate) {
+		this.canUpdate = canUpdate;
 	}
     
 }

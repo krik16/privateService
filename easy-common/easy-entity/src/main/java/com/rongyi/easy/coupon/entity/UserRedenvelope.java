@@ -130,6 +130,11 @@ public class UserRedenvelope implements Serializable {
     private String usageDesc;
 
     /**
+     * 使用规则
+     */
+    private String limitDesc;
+
+    /**
      * 适用规则 满减[0] 立减[1]
      */
     private Integer preferentialType;
@@ -374,6 +379,14 @@ public class UserRedenvelope implements Serializable {
         this.preferentialType = preferentialType;
     }
 
+    public String getLimitDesc() {
+        return limitDesc;
+    }
+
+    public void setLimitDesc(String limitDesc) {
+        this.limitDesc = limitDesc;
+    }
+
     /**
      * 判断是否可使用
      * @return
@@ -413,6 +426,7 @@ public class UserRedenvelope implements Serializable {
                 .append("applyGoods", applyGoods)
                 .append("relatedType", relatedType)
                 .append("usageDesc", usageDesc)
+                .append("limitDesc", limitDesc)
                 .append("preferentialType", preferentialType)
                 .toString();
     }
