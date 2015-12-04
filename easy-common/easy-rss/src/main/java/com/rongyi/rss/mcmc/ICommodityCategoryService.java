@@ -30,4 +30,6 @@ public interface ICommodityCategoryService {
 	public CommodityCategory selectCategoryById(String id);
 	
 	public CommodityCategory selectCategoryByName(String name);
+	
+	public CommodityCategory selectCategoryByNameAndParent(String name,String parentId);
 }
