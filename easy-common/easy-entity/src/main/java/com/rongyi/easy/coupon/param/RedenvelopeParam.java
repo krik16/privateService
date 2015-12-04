@@ -1,6 +1,7 @@
 package com.rongyi.easy.coupon.param;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -86,6 +87,9 @@ public class RedenvelopeParam implements Serializable {
 	private Integer dateType;//时间类型：发布开始时间[0] 发布结束时间[1] 有效期开始时间[2] 有效期结束时间[3]
 	private Date startDate;//时间范围的开始和结束时间
 	private Date endDate;//时间范围的开始和结束时间
+//	public static void main(String[] args) {
+//		SimpleDateFormat sFormat = new SimpleDateFormat("");
+//	}
 	private Integer couponType;//卡券类型: 代金券[0],抵扣券[1], 红包[2]
     private String displayRegion;//展示区域：常规区域,活动区域;未选中[0]，选中[1] 例如 "1,1"表示都选中
 	public Integer getPublishChannel() {
@@ -173,7 +177,7 @@ public class RedenvelopeParam implements Serializable {
 	}
 
 	public void setid(String id) {
-		this.id = id;
+		this.id =StringUtils.isNotBlank(id)?id.trim():null;
 	}
 
 	public String getName() {
@@ -181,7 +185,7 @@ public class RedenvelopeParam implements Serializable {
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.name = StringUtils.isNotBlank(name)?name.trim():null;
 	}
 
 	public Integer getType() {
