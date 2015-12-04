@@ -246,7 +246,7 @@ public class CommodityVO  implements  Serializable {
 		this.supportCourierDeliver = commodity.isSupportCourierDeliver();
 		this.registerAt=commodity.getRegisterAt();
 		this.soldOutAt=commodity.getSoldOutAt();
-
+		this.distribution = commodity.getDistribution();
 	}
 	public String getCommodityId() {
 		return commodityId;
