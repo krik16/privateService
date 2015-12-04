@@ -25,7 +25,7 @@ public class UserCouponVO implements Serializable {
 
     private String validEndDate;// 有效期结束时间
 
-    private Integer status;// 券状态 0:未激活 1:已领用 2:已使用 3:已过期
+    private Integer status;// 券状态： 未使用[0] 已使用[1] 已过期[2]
 
     private String type;// 0: 全场抵扣券 1: 商品抵扣券
 
