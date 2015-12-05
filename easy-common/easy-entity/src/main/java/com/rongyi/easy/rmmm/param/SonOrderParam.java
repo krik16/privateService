@@ -7,6 +7,7 @@ public class SonOrderParam implements Serializable{
 	private String num;// 下单数量
 	private String commodityId;// 我是商品编号
 	private String couponCode;// 卡券码
+	private String type;//
 	private String orderDetailModelId;// 子模板id
 
 	public String getSpecId() {
