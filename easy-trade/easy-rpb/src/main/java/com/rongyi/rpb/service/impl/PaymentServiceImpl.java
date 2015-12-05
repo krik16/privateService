@@ -375,7 +375,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                             LOGGER.info("此订单payChannel={}支付方式未支付单不存在，新增新付款方式同支付单号待付款记录,orderNum={}", payChannel, orderNumArray[i]);
                             newPaymentEntity.setCreateTime(DateUtil.getCurrDateTime());
                             newPaymentEntity.setPayChannel(payChannel);
-                            insert(paymentEntity);
+                            insert(newPaymentEntity);
                         }
                         break;
                     }
