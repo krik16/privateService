@@ -363,45 +363,25 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                     if (Constants.PAYMENT_STATUS.STAUS2 == list.get(0).getStatus() && payChannel == list.get(0).getPayChannel()) {// 订单已完成支付后重新发起支付请求
                         throw new RuntimeException("此订单已成功支付,此次请求属于订单重复支付请求,请重新下单，订单号-->" + orderNum);
                     }
+                    BeanUtils.copyProperties(list.get(0), newPaymentEntity);
+                    newPaymentEntity.setId(null);
+                    newPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
                     if (paymentEntity.getPayChannel().equals(payChannel)) {
-                        LOGGER.info("此订单{}支付方式未支付单已存在，直接返回此笔付款单记录,orderNum={}", paymentEntity.getPayChannel(), orderNumArray[i]);
-                        BeanUtils.copyProperties(list.get(0), newPaymentEntity);
-                        newPaymentEntity.setId(null);
-                        newPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
+                        LOGGER.info("此订单payChannel={}支付方式未支付单已存在，直接返回此笔付款单记录,orderNum={}", paymentEntity.getPayChannel(), orderNumArray[i]);
                         break;
                     } else {
-                        LOGGER.info("此订单{}支付方式未支付单已存在，直接返回此笔付款单记录,orderNum={}", paymentEntity.getPayChannel(), orderNumArray[i]);
-                        BeanUtils.copyProperties(list.get(0), newPaymentEntity);
-                        newPaymentEntity.setId(null);
-                        newPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
-                        newPaymentEntity.setCreateTime(DateUtil.getCurrDateTime());
-                        newPaymentEntity.setPayChannel(payChannel);
-                        insert(paymentEntity);
+                        PaymentEntity oldPaymentEntity = selectByPayNoAndPayChannelAndTradeType(paymentEntity.getPayNo(), payChannel, tradeType, Constants.PAYMENT_STATUS.STAUS0);
+                        if (oldPaymentEntity == null) {
+                            LOGGER.info("此订单payChannel={}支付方式未支付单不存在，新增新付款方式同支付单号待付款记录,orderNum={}", payChannel, orderNumArray[i]);
+                            newPaymentEntity.setCreateTime(DateUtil.getCurrDateTime());
+                            newPaymentEntity.setPayChannel(payChannel);
+                            insert(paymentEntity);
+                        }
                         break;
                     }
                 }
                 return newPaymentEntity;
             }
-
-//            if (list != null && !list.isEmpty()) {
-//                PaymentEntity newPaymentEntity = new PaymentEntity();
-//                BeanUtils.copyProperties(list.get(0), newPaymentEntity);
-//                newPaymentEntity.setId(null);
-//                newPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
-//                if (Constants.PAYMENT_STATUS.STAUS2 == list.get(0).getStatus() && payChannel == list.get(0).getPayChannel()) {// 订单已完成支付后重新发起支付请求
-//                    LOGGER.info("此订单已成功支付,此次请求属于订单重复支付请求,订单号-->" + orderNum);
-//                    newPaymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE5);
-//                    insert(newPaymentEntity);
-//                }
-////                if (!payChannel.equals(list.get(0).getPayChannel())) {
-////                    LOGGER.info("订单支付方式payChannel={}已存在，新建新的支付方式newPayChannel={}类型的付款单", list.get(0).getPayChannel(), payChannel);
-////                    newPaymentEntity.setPayChannel(payChannel);
-////                    newPaymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
-////                    insert(newPaymentEntity);
-////                }
-//                LOGGER.info("该订单付款记录已存在，返回原付款记录");
-//                return newPaymentEntity;
-//            }
         }
         return null;
     }
