@@ -21,7 +21,7 @@ public class CommodityUpdateOrDeleteParam {
 	
 	private List<String> commodityIds;//商品id
 	
-	private int type=1;//type=0 下架 type=1 删除
+	private Integer type;//type=0 下架 type=1 删除
 	
 	private String reason="";//原因
 
@@ -35,11 +35,11 @@ public class CommodityUpdateOrDeleteParam {
 		this.commodityIds = commodityIds;
 	}
 
-	public int getType() {
+	public Integer getType() {
 		return type;
 	}
 
-	public void setType(int type) {
+	public void setType(Integer type) {
 		this.type = type;
 	}
 
