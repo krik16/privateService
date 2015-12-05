@@ -93,7 +93,7 @@
 							<tr>
 								<td>${item.title }</td>
 								<td><fmt:formatDate value="${item.validBeginDate}" pattern="yyyy-MM-dd HH:mm:ss"/> - <fmt:formatDate value="${item.validEndDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-								<td>${item.originalPrice/100}</td>
+								<td>${item.originalPrice}</td>
 								<td>${item.count}</td>
 								<td>${item.originalPrice*item.count/100}</td>
 							</tr>
