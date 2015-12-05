@@ -669,19 +669,6 @@ public class RedenvelopVO implements Serializable{
         }
 
     }
-    /*CASE
-    WHEN c.status = 0 THEN 0
-    WHEN c.status = 1 THEN 1
-    WHEN c.status = 2 AND
-    c.is_off_stock = TRUE THEN 5
-    WHEN c.status = 2 AND c.publish_start_at
-    &gt; NOW() THEN 2
-    WHEN c.status = 2 AND NOW() BETWEEN
-    c.publish_start_at AND
-    c.publish_end_at THEN 3
-    WHEN c.status = 2 AND
-    c.publish_end_at &lt; NOW() THEN 4
-    END status,*/
 
     @Override
     public String toString() {
