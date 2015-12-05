@@ -652,6 +652,37 @@ public class RedenvelopVO implements Serializable{
         this.offShelfReasons = offShelfReasons;
     }
 
+    // 促销券状态(0:待审核，1:审核未通过，2:待发布，3:进行中，4:已结束，5:已下架)
+    public void setConvertStatus(Integer status, Boolean isOffStock, Date publishStartAt, Date publishEndAt) {
+        if (Integer.valueOf(0).equals(status)) {
+            this.setStatus(0);
+        } else if (Integer.valueOf(1).equals(status)){
+            this.setStatus(1);
+        } else if (Integer.valueOf(2).equals(status) && Boolean.TRUE.equals(isOffStock)) {
+            this.setStatus(5);
+        } else if (Integer.valueOf(2).equals(status) &&  new Date().before(publishStartAt)) {
+            this.setStatus(2);
+        } else if(Integer.valueOf(2).equals(status) && new Date().after(publishStartAt) && new Date().before(publishEndAt)) {
+            this.setStatus(3);
+        } else if(Integer.valueOf(2).equals(status) && new Date().after(publishEndAt)) {
+            this.setStatus(4);
+        }
+
+    }
+    /*CASE
+    WHEN c.status = 0 THEN 0
+    WHEN c.status = 1 THEN 1
+    WHEN c.status = 2 AND
+    c.is_off_stock = TRUE THEN 5
+    WHEN c.status = 2 AND c.publish_start_at
+    &gt; NOW() THEN 2
+    WHEN c.status = 2 AND NOW() BETWEEN
+    c.publish_start_at AND
+    c.publish_end_at THEN 3
+    WHEN c.status = 2 AND
+    c.publish_end_at &lt; NOW() THEN 4
+    END status,*/
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("RedenvelopVO{");
