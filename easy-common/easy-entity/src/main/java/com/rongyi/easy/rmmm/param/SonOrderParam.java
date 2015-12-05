@@ -10,6 +10,14 @@ public class SonOrderParam implements Serializable{
 	private String type;//
 	private String orderDetailModelId;// 子模板id
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	public String getSpecId() {
 		return specId;
 	}
