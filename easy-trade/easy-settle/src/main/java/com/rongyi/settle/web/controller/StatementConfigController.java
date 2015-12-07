@@ -23,6 +23,7 @@ import com.rongyi.rss.bsoms.IUserInfoService;
 import com.rongyi.rss.roa.*;
 import com.rongyi.settle.web.controller.params.FindAccountParam;
 import com.rongyi.settle.web.controller.params.RelevanceParam;
+import com.rongyi.settle.web.controller.vo.UserInfoVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -603,10 +604,13 @@ public class StatementConfigController extends BaseController{
 				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
 			}
 			List<UserInfo> userInfos = iUserInfoService.getFullUserInfoByRelevanceId(paramsMap);
-			List<String> userAccounts = new ArrayList<>();
+			List<UserInfoVo> userAccounts = new ArrayList<>();
 			if (CollectionUtils.isNotEmpty(userInfos)){
 				for (UserInfo userInfo :userInfos){
-					userAccounts.add(userInfo.getUserAccount());
+					UserInfoVo userInfoVo = new UserInfoVo();
+					userInfoVo.setId(userInfo.getId());
+					userInfoVo.setUserAccount(userInfo.getUserAccount());
+					userAccounts.add(userInfoVo);
 				}
 			}
 			return ResponseData.success(userAccounts);
