@@ -33,7 +33,6 @@ import com.rongyi.rss.rpb.IRpbService;
  * @Author: 柯军
  * @Description: 黑名单列表接口实现
  * @datetime:2015年8月12日上午10:27:10
- *
  **/
 @Service
 public class AccountBlacklistServiceImpl extends BaseServiceImpl implements AccountBlacklistService {
@@ -85,7 +84,7 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
         map.put("startTime", startTime);
         map.put("endTime", endTime);
         List<PayAccountUseTotal> list = getPayAccountUserTotalList(map);
-        LOGGER.info("符合黑名单条数，list.size="+list.size());
+        LOGGER.info("符合黑名单条数，list.size=" + list.size());
         List<AccountBlacklist> mailWranList = new ArrayList<AccountBlacklist>();
         for (PayAccountUseTotal payAccountUseTotal : list) {
             AccountBlacklist accountBlacklist = selectByPayAccount(payAccountUseTotal.getPayAccount(), Integer.valueOf(payAccountUseTotal.getPayType()).byteValue(), null);
@@ -93,32 +92,30 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
                 accountBlacklist = getAccountBlacklist(payAccountUseTotal);
                 insert(accountBlacklist);
                 mailWranList.add(accountBlacklist);
-            } else {//黑名单列表有记录
-                map.put("payAccount", accountBlacklist.getPayAccount());
-                List<PayAccountUseTotal> newList = rpbService.selectPayAccountUseTotal(map);
-                if (newList != null && !newList.isEmpty() && newList.get(0).getCount() > accountBlacklist.getCount()) {
-                    accountBlacklist.setCount(payAccountUseTotal.getCount());
-                    accountBlacklist.setUpdateAt(DateUtil.getCurrDateTime());
-                    update(accountBlacklist);
-                    if (ConstantEnum.BLACK_ROLL_STATUS_0.getCodeByte().equals(accountBlacklist.getStatus()))
-                        mailWranList.add(accountBlacklist);
-                }
+            } else if(payAccountUseTotal.getCount() > accountBlacklist.getCount()){//黑名单列表有记录
+                accountBlacklist.setCount(payAccountUseTotal.getCount());
+                accountBlacklist.setUpdateAt(DateUtil.getCurrDateTime());
+                update(accountBlacklist);
+                if (ConstantEnum.BLACK_ROLL_STATUS_0.getCodeByte().equals(accountBlacklist.getStatus()))
+                    mailWranList.add(accountBlacklist);
+
             }
             //购买超出自动冻结条数，自动冻结
-            if (accountBlacklist.getCount() >= Integer.valueOf(Constant.BLACKLIST_CONFIG.FREEZE_COUNT)) {
+            if (payAccountUseTotal.getCount() >= Integer.valueOf(Constant.BLACKLIST_CONFIG.FREEZE_COUNT)) {
                 accountBlacklist.setUpdateAt(DateUtil.getCurrDateTime());
                 accountBlacklist.setStatus(ConstantEnum.BLACK_ROLL_STATUS_1.getCodeByte());
                 update(accountBlacklist);
             }
         }
         if (!mailWranList.isEmpty()) {
+            LOGGER.info("mailWranList size ="+mailWranList.size());
             sendEmailUnit.sendWranEmail(mailWranList, startTime, endTime);// 发送邮件
             sendMsUnit.sendBlackListMs(mailWranList, startTime, endTime);// 发送短信
         }
     }
 
     @Override
-    public List<PayAccountUseTotal> getPayAccountUserTotalList(Map<String,Object> map){
+    public List<PayAccountUseTotal> getPayAccountUserTotalList(Map<String, Object> map) {
         map.put("count", Constant.BLACKLIST_CONFIG.WARN_COUNT);
         map.put("notPayAccountList", getNoPayAccountList());
         map.put("orderType", Constant.BLACKLIST_CONFIG.ORDER_TYPE);
@@ -127,8 +124,8 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
     }
 
     /**
-     * @Description: 不扫描的支付账号列表
      * @return
+     * @Description: 不扫描的支付账号列表
      * @Author: 柯军
      * @datetime:2015年10月26日上午11:27:33
      **/
@@ -183,9 +180,6 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
         }
         return map;
     }
-
-
-
 
 
     private AccountBlacklist getAccountBlacklist(PayAccountUseTotal payAccountUseTotal) {
