@@ -13,8 +13,8 @@
         <result column="biz_real_address" property="bussinessRealAddress"
                 jdbcType="VARCHAR"/>
         <result column="link_shop_op" property="linkShopOp" jdbcType="TINYINT"/>
-        <result column="link_role" property="linkRole" jdbcType="TINYINT"/>
-        <result column="link_user_phone" property="linkUserPhone" jdbcType="VARCHAR"/>
+        <result column="link_user_id" property="linkUserId" jdbcType="TINYINT"/>
+        <result column="link_account" property="linkAccount" jdbcType="VARCHAR"/>
         <result column="count_cycle" property="countCycle" jdbcType="TINYINT"/>
         <result column="cycle_start_time" property="cycleStartTime"
                 jdbcType="TIMESTAMP"/>
@@ -68,7 +68,7 @@
     </resultMap>
     <sql id="Base_Column_List">
         pbc.id, rule_code, cooperate_type, biz_id, biz_type,
-        biz_code, biz_name,biz_real_address,link_shop_id,link_shop_op,link_role,link_user_phone, count_cycle,
+        biz_code, biz_name,biz_real_address,link_shop_id,link_shop_op,link_user_id,link_account, count_cycle,
         cycle_start_time,
         cycle_end_time,
         is_loop, verify_type,
@@ -137,7 +137,7 @@
     <insert id="insert" parameterType="com.rongyi.easy.settle.entity.StatementConfig"
             useGeneratedKeys="true" keyProperty="id">
         insert into payment_bill_config (rule_code, cooperate_type, biz_type,
-        biz_id,biz_code, biz_name,biz_real_address,link_shop_id,link_shop_op,link_role,link_user_phone, count_cycle,
+        biz_id,biz_code, biz_name,biz_real_address,link_shop_id,link_shop_op,link_user_id,link_account, count_cycle,
         cycle_start_time,
         cycle_end_time, is_loop,
         verify_type, gen_header_time,
@@ -166,8 +166,8 @@
         #{bussinessRealAddress,jdbcType=VARCHAR},
         #{linkShopId,jdbcType=LONGVARCHAR}
         #{linkShopOp,jdbcType=TINYINT},
-        #{linkRole,jdbcType=TINYINT},
-        #{linkUserPhone,jdbcType=VARCHAR},
+        #{linkUserId,jdbcType=TINYINT},
+        #{linkAccount,jdbcType=VARCHAR},
         #{countCycle,jdbcType=TINYINT},
         #{cycleStartTime,jdbcType=TIMESTAMP},
         #{cycleEndTime,jdbcType=TIMESTAMP}, #{isLoop,jdbcType=TINYINT},
@@ -217,11 +217,11 @@
             <if test="linkShopOp != null" >
                 link_shop_op = #{linkShopOp,jdbcType=TINYINT},
             </if>
-            <if test="linkRole != null" >
-                link_role = #{linkRole,jdbcType=TINYINT},
+            <if test="linkUserId != null" >
+                link_user_id = #{linkUserId,jdbcType=TINYINT},
             </if>
-            <if test="linkUserPhone != null" >
-                link_user_phone = #{linkUserPhone,jdbcType=VARCHAR},
+            <if test="linkAccount != null" >
+                link_account = #{linkAccount,jdbcType=VARCHAR},
             </if>
             <if test="linkShopId != null" >
                 link_shop_id = #{linkShopId,jdbcType=LONGVARCHAR},
