@@ -108,6 +108,7 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
             }
         }
         if (!mailWranList.isEmpty()) {
+            LOGGER.info("mailWranList size ="+mailWranList.size());
             sendEmailUnit.sendWranEmail(mailWranList, startTime, endTime);// 发送邮件
             sendMsUnit.sendBlackListMs(mailWranList, startTime, endTime);// 发送短信
         }
