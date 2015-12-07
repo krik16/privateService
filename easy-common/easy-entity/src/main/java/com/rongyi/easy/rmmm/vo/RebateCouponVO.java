@@ -23,8 +23,6 @@ public class RebateCouponVO implements Serializable{
 	
 	private String shopName;//店铺名称
 	
-	private String mallName;//商场名称
-	
 	private Double currentPrice;//现价
 
 	private Double originalPrice;//原价
@@ -69,14 +67,6 @@ public class RebateCouponVO implements Serializable{
 
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
-	}
-
-	public String getMallName() {
-		return mallName;
-	}
-
-	public void setMallName(String mallName) {
-		this.mallName = mallName;
 	}
 
 	public Double getCurrentPrice() {
@@ -129,8 +119,8 @@ public class RebateCouponVO implements Serializable{
 
 	@Override
 	public String toString() {
-		return "RebateCouponVO [couponId=" + couponId + ", title=" + title + ", shopName=" + shopName + ", mallName=" + mallName
-				+ ", currentPrice=" + currentPrice + ", originalPrice=" + originalPrice + ", sold=" + sold + ", thumbnail="
+		return "RebateCouponVO [couponId=" + couponId + ", title=" + title + ", shopName=" + shopName + 
+				", currentPrice=" + currentPrice + ", originalPrice=" + originalPrice + ", sold=" + sold + ", thumbnail="
 				+ thumbnail + ", location=" + location + ", distance=" + distance + "]";
 	}
 
