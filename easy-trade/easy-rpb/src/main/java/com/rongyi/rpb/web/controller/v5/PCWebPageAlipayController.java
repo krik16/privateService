@@ -221,7 +221,10 @@ public class PCWebPageAlipayController extends BaseController {
 							paymentLogInfoService.insertGetId(paymentLogInfo);
 							LOGGER.info("更改退款项状态 0--->2,退款单号={}", refundPaymentEntity.getPayNo());
 							paymentService.updateListStatusBypayNo(refundPaymentEntity.getPayNo(), refundPaymentEntity.getTradeType(), Constants.PAYMENT_STATUS.STAUS2);// 修改打款状态
-							refundNotifyMq(refundPaymentEntity);
+							//正常退款的才会发送退款消息，重复支付的退款无需发送退款通知
+							if(refundPaymentEntity.getTradeType() == Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1) {
+								refundNotifyMq(refundPaymentEntity);
+							}
 						} else {
 							LOGGER.info("订单不存在，退款状态更新失败,tradeNo={},batchNo={}", paymentLogInfo.getTrade_no(), batch_no);
 						}
