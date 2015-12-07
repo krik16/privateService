@@ -90,4 +90,12 @@ public interface ROACooperationMallService {
 	 * @return
 	 */
 	public Integer getAndSaveCooperateMallByMallMid(String mallMid) throws Exception ;
+	
+	/**
+	 * 通过mongoId获取mongo数据库中的商场信息
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public MallEntity getMallEntityByMongoId(String mallId) throws Exception;
 }
