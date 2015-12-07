@@ -63,14 +63,14 @@ public class StatementConfig implements Serializable {
     private Byte linkShopOp;
 
     /**
-     * 关联角色(0:全部,1:导购，2:买手)
+     * 账号id（多个以都好分隔）
      */
-    private Byte linkRole;
+    private Integer linkUserId;
 
     /**
      * 关联账号(多个账号逗号分隔)
      */
-    private String linkUserPhone;
+    private String linkAccount;
 
     /**
      * 计算周期（0:日，1:周，2:月，3:自定义）
@@ -439,19 +439,19 @@ public class StatementConfig implements Serializable {
         this.linkShopOp = linkShopOp;
     }
 
-    public Byte getLinkRole() {
-        return linkRole;
+    public Integer getLinkUserId() {
+        return linkUserId;
     }
 
-    public void setLinkRole(Byte linkRole) {
-        this.linkRole = linkRole;
+    public void setLinkUserId(Integer linkUserId) {
+        this.linkUserId = linkUserId;
     }
 
-    public String getLinkUserPhone() {
-        return linkUserPhone;
+    public String getLinkAccount() {
+        return linkAccount;
     }
 
-    public void setLinkUserPhone(String linkUserPhone) {
-        this.linkUserPhone = linkUserPhone;
+    public void setLinkAccount(String linkAccount) {
+        this.linkAccount = linkAccount;
     }
 }
