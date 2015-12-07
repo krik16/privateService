@@ -105,7 +105,7 @@ public class AccountBlacklistServiceImpl extends BaseServiceImpl implements Acco
                 }
             }
             //购买超出自动冻结条数，自动冻结
-            if (payAccountUseTotal.getCount() >= Integer.valueOf(Constant.BLACKLIST_CONFIG.FREEZE_COUNT)) {
+            if (accountBlacklist.getCount() >= Integer.valueOf(Constant.BLACKLIST_CONFIG.FREEZE_COUNT)) {
                 accountBlacklist.setUpdateAt(DateUtil.getCurrDateTime());
                 accountBlacklist.setStatus(ConstantEnum.BLACK_ROLL_STATUS_1.getCodeByte());
                 update(accountBlacklist);
