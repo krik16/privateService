@@ -22,6 +22,23 @@ public class BullParam extends MalllifeBaseParam implements Serializable{
 	private String liveId;//直播id
 	private String flashSaleId; //commodityType为4则flashSaleId为闪购ID、commodityType为5则flashSaleId为特卖ID
 	private String commodityType;//商品类型", 1所有商品 2导购商品 3买手商品 4闪购 5卖场
+	private String keyword;
+	private String categoryId;
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public String getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(String categoryId) {
+		this.categoryId = categoryId;
+	}
 
 	public String getFlashSaleId() {
 		return flashSaleId;
