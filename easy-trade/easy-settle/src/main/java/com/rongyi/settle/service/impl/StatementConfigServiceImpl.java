@@ -8,12 +8,15 @@
 
 package com.rongyi.settle.service.impl;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import com.rongyi.easy.roa.entity.MallEntity;
+import com.rongyi.easy.roa.vo.ShopVO;
+import com.rongyi.rss.roa.ROAMallGroupService;
+import com.rongyi.rss.roa.ROAMallService;
+import com.rongyi.rss.roa.ROAShopService;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +53,28 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 
 	@Autowired
 	BussinessInfoService bussinessInfoService;
+
+	@Autowired
+	ROAShopService roaShopService;
+	@Autowired
+	private ROAMallService rOAMallService;
+	/**
+	 * 判断账号打款配置
+	 *
+	 * @param id          : 关联id
+	 * @param userAccount ： 账号
+	 * @return
+	 */
+	@Override
+	public boolean checkUserAccountConfig(String id, String userAccount) throws Exception {
+		boolean result = false;
+		ShopVO shopVO = roaShopService.getShopVOById(id);
+		if (shopVO!=null){//判断所有
+//			String
+		}
+
+		return result;
+	}
 
 	@Override
 	public List<StatementConfigVO> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
@@ -150,15 +175,74 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 	}
 
 	@Override
-	public boolean validateIsExist(byte cooperateType, byte bussinessType, String bussinessId, byte status, Date effectStartTime, Date effectEndTime) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("cooperateType", cooperateType);
-		map.put("bussinessType", bussinessType);
-		map.put("bussinessId", bussinessId);
-		map.put("status", status);
-		map.put("effectStartTime", effectStartTime);
-		map.put("effectEndTime", effectEndTime);
-		int count = this.getBaseDao().selectOneBySql(NAMESPACE + ".validateIsExist", map);
-		return (count > 0);
+	public boolean validateIsExist(byte cooperateType, byte bussinessType, String bussinessId, byte status, Date effectStartTime, Date effectEndTime, String linkShopId) throws Exception {
+		boolean result = false;
+		if (StringUtils.isBlank(linkShopId)){
+			result = true;
+		}else {
+			if ("-1".equals(linkShopId)){
+				List<ShopVO> shopVOs = getShopIdByParam(bussinessType, bussinessId);
+				List<String> shopIds = new ArrayList<>();
+				if (CollectionUtils.isNotEmpty(shopVOs)){
+					for (ShopVO shopVO : shopVOs) {
+						shopIds.add(shopVO.getId());
+					}
+				}
+				for (String shopId : shopIds){
+					if (checkShopExist(shopId)){
+						result = true;
+						break;
+					}
+				}
+			}
+			Map<String, Object> map = new HashMap<>();
+			map.put("cooperateType", cooperateType);
+			map.put("bussinessType", bussinessType);
+			map.put("bussinessId", bussinessId);
+			map.put("status", status);
+			map.put("effectStartTime", effectStartTime);
+			map.put("effectEndTime", effectEndTime);
+			int count = this.getBaseDao().selectOneBySql(NAMESPACE + ".validateIsExist", map);
+			if (count > 0){
+				result = true;
+//				break;
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * 验证单签店铺id的对账配置的合法性
+	 * @param shopId
+	 * @return
+	 */
+	private boolean checkShopExist(String shopId) {
+		return false;
+	}
+
+	private List<ShopVO> getShopIdByParam(byte bussinessType, String bussinessId) throws Exception {
+		Map<String, Object> searchMap = new HashMap<>() ;
+		Map reMap;
+		List<ShopVO> shopVOs = new ArrayList<>();
+		switch (bussinessType){
+			case 0: searchMap.put("id", bussinessId); break;
+			case 1: searchMap.put("mallId", bussinessId); break;
+			case 2: searchMap.put("brandId", bussinessId); break;
+			case 3: searchMap.put("filialeId", bussinessId); break;
+			case 4:
+				List<MallEntity> mallEntities = rOAMallService.getMallEntitysByGroupId(bussinessId);
+				List<String> mallIds = new ArrayList<>();
+				if (CollectionUtils.isNotEmpty(mallEntities)){
+					for (MallEntity mallEntity : mallEntities){
+						mallIds.add(mallEntity.getId().toString());
+					}
+				}
+				searchMap.put("zoneIds", mallIds);
+				break;
+			default: return shopVOs;
+		}
+		reMap = roaShopService.getShops(searchMap,1,1000);
+		shopVOs = (List<ShopVO>) reMap.get("list");
+		return shopVOs;
 	}
 }

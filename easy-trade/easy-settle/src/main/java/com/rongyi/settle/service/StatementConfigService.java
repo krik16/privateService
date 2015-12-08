@@ -24,6 +24,14 @@ import com.rongyi.easy.settle.vo.StatementConfigVO;
  **/
 
 public interface StatementConfigService {
+
+	/**
+	 * 判断账号打款配置
+	 * @param id : 关联id
+	 * @param userAccount ： 账号
+	 * @return
+	 */
+	boolean checkUserAccountConfig(String id, String userAccount) throws Exception;
 	
 	/**	
 	 * @Description: 分页查询
@@ -34,7 +42,7 @@ public interface StatementConfigService {
 	 * @Author:  柯军
 	 * @datetime:2015年9月17日上午11:23:43
 	 **/
-	public abstract List<StatementConfigVO> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize); 
+	List<StatementConfigVO> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize);
 	
 	/**	
 	 * @Description: 分页总数 
@@ -43,7 +51,7 @@ public interface StatementConfigService {
 	 * @Author:  柯军
 	 * @datetime:2015年9月17日上午11:23:51
 	 **/
-	public abstract Integer selectPageListCount(Map<String,Object> map);
+	Integer selectPageListCount(Map<String,Object> map);
 	
 	/**	
 	 * @Description: 插入 
@@ -51,7 +59,7 @@ public interface StatementConfigService {
 	 * @Author:  柯军
 	 * @datetime:2015年9月17日上午11:24:02
 	 **/
-	public abstract int insert(StatementConfig statementConfig);
+	int insert(StatementConfig statementConfig);
 	
 	/**	
 	 * @Description: 更新
@@ -59,7 +67,7 @@ public interface StatementConfigService {
 	 * @Author:  柯军
 	 * @datetime:2015年9月17日上午11:24:08
 	 **/
-	public abstract void update(StatementConfig statementConfig);
+	void update(StatementConfig statementConfig);
 	
 	/**	
 	 * @Description: 根据id查询 
@@ -67,7 +75,7 @@ public interface StatementConfigService {
 	 * @Author:  柯军
 	 * @datetime:2015年9月17日上午11:24:15
 	 **/
-	public abstract StatementConfig selectById(Integer id);
+	StatementConfig selectById(Integer id);
 	
 	
 	/**	
@@ -77,7 +85,7 @@ public interface StatementConfigService {
 	 * @Author:  柯军
 	 * @datetime:2015年9月21日下午4:26:16
 	 **/
-	public abstract void saveStatementConfigAndInfo(StatementConfig statementConfig,BussinessInfo bussinessInfo);
+	void saveStatementConfigAndInfo(StatementConfig statementConfig,BussinessInfo bussinessInfo);
 
 	/**
 	 * @Description: 定时任务查询符合条件的对账配置
@@ -97,7 +105,7 @@ public interface StatementConfigService {
 
 	/**	
 	 * @Description: 根据规则编号查询记录 
-	 * @param string
+	 * @param ruleCode
 	 * @return	
 	 * @Author:  柯军
 	 * @datetime:2015年10月15日上午10:52:29
@@ -126,5 +134,5 @@ public interface StatementConfigService {
 	 * @Author:  柯军
 	 * @datetime:2015年10月21日下午2:38:48
 	 **/
-	boolean validateIsExist(byte cooperateType,byte bussinessType,String bussinessId,byte status,Date effectStartTime,Date  effectEndTime);
+	boolean validateIsExist(byte cooperateType,byte bussinessType,String bussinessId,byte status,Date effectStartTime,Date  effectEndTime, String linkShopId) throws Exception;
 }

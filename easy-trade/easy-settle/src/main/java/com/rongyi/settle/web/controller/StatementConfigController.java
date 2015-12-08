@@ -179,7 +179,7 @@ public class StatementConfigController extends BaseController{
 			MapUtils.toObject(bussinessInfo, map);
 			bussinessInfo.setCreateAt(DateUtil.getCurrDateTime());
 			if(statementConfigService.validateIsExist(statementConfig.getCooperateType(), statementConfig.getBussinessType(), statementConfig.getBussinessId(), ConstantEnum.STATUS_2.getCodeByte()
-					, statementConfig.getEffectStartTime(), statementConfig.getEffectEndTime())){
+					, statementConfig.getEffectStartTime(), statementConfig.getEffectEndTime(), statementConfig.getLinkShopId())){
 				return ResponseData.failure(CodeEnum.FIAL_CONFIG_BIZ_EXIST.getCodeInt(), CodeEnum.FIAL_CONFIG_BIZ_EXIST.getValueStr());
 			}
 				
@@ -398,7 +398,7 @@ public class StatementConfigController extends BaseController{
 				result = ResponseData.success(list, currpage, pagesize, totalCount);
 			} else if (type == 4) {// 集团
 				List<MallGroupVO> list = roaMallGroupService.getMallGroups(searchMap);
-				int count = 0;
+				int count;
 				searchMap.put("currpage", null);
 				count = roaMallGroupService.getMallGroups(searchMap).size();
 				result = ResponseData.success(list, currpage, pagesize, count);
@@ -502,7 +502,7 @@ public class StatementConfigController extends BaseController{
 	public ResponseData relevanceShop(@RequestBody RelevanceParam params) {
 		ResponseData result;
 		try {
-			LOGGER.info("================ 》》》》》》》》》》》》 relevance params={}", params);
+			LOGGER.info("================ relevance params={}", params);
 			if (params.getType() == null || StringUtils.isBlank(params.getId())) {
 				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
 			}
@@ -576,7 +576,7 @@ public class StatementConfigController extends BaseController{
 	@ResponseBody
 	public ResponseData findAccount(@RequestBody FindAccountParam params){
 		try {
-			LOGGER.info("================ 》》》》》》》》》》》》 findAccount params={}", params);
+			LOGGER.info("================ findAccount params={}", params);
 			if (params.getGuideType() == null || StringUtils.isBlank(params.getId())
 					|| params.getIsOneself()==null || (params.getIsOneself()==1 && params.getType()==null) ) {
 				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
