@@ -22,13 +22,14 @@ public class RedEnvelopeForOrderVO implements Serializable{
     private String validEndDate;// 有效期结束时间
     private Integer status;// 券状态 0:未激活 1:已领用 2:已使用 3:已过期
     private List<String> label;//标签
-    private Integer relateType;//关联类型
+    private String type;//关联类型
     
-	public Integer getRelateType() {
-		return relateType;
+	
+	public String getType() {
+		return type;
 	}
-	public void setRelateType(Integer relateType) {
-		this.relateType = relateType;
+	public void setType(String type) {
+		this.type = type;
 	}
 	public String getTitle() {
 		return title;
