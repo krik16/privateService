@@ -567,7 +567,7 @@ public class StatementConfigController extends BaseController{
 					shop.setPosition(shopVO.getPosition());
 					//查询店铺关联账号信息
 					paramsMap.put("shopId", shopVO.getId());
-					paramsMap.put("identity", 6);
+					paramsMap.put("identity", 5);//目前只差导购
 					List<UserInfo> userInfos = iUserInfoService.getFullUserInfoByRelevanceId(paramsMap);
 					List<UserInfoVo> userAccounts = new ArrayList<>();
 					if (CollectionUtils.isNotEmpty(userInfos)){
