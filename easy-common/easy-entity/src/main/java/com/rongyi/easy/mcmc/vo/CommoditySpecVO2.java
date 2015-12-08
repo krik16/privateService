@@ -22,49 +22,64 @@ public class CommoditySpecVO2 implements  Serializable {
 	private String shopName;//对应商品所属店铺
 	private String filialeMid;//店铺对应分公司
 	private String filialeName;//店铺对应分公司
+	private String position;//地理位置
 	private String pictureUrl;//规格图片
 	private int stock;//库存
 	private int remain;//剩余量
 	private int lockedStock;//锁定库存
+	
 	public String getId() {
 		return id;
 	}
+	
 	public void setId(String id) {
 		this.id = id;
 	}
+	
 	public String getOriginalPrice() {
 		return originalPrice;
 	}
+	
 	public void setOriginalPrice(String originalPrice) {
 		this.originalPrice = originalPrice;
 	}
+	
 	public String getCurrentPrice() {
 		return currentPrice;
 	}
+	
 	public void setCurrentPrice(String currentPrice) {
 		this.currentPrice = currentPrice;
 	}
+	
 	public List<String> getColumnIds() {
 		return columnIds;
 	}
+	
 	public void setColumnIds(List<String> columnIds) {
 		this.columnIds = columnIds;
 	}
+	
 	public List<String> getColumnNames() {
 		return columnNames;
 	}
+	
 	public void setColumnNames(List<String> columnNames) {
 		this.columnNames = columnNames;
 	}
+	
 	public List<String> getColumnValues() {
 		return columnValues;
 	}
+	
 	public void setColumnValues(List<String> columnValues) {
 		this.columnValues = columnValues;
 	}
+	
 	public String getSystemNumber() {
 		return systemNumber;
 	}
+	
 	public void setSystemNumber(String systemNumber) {
 		this.systemNumber = systemNumber;
 	}
@@ -72,6 +87,7 @@ public class CommoditySpecVO2 implements  Serializable {
 	public String getShopName() {
 		return shopName;
 	}
+	
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
 	}
@@ -80,53 +96,72 @@ public class CommoditySpecVO2 implements  Serializable {
 	public String getFilialeName() {
 		return filialeName;
 	}
+	
 	public void setFilialeName(String filialeName) {
 		this.filialeName = filialeName;
 	}
+	
 	public String getPictureUrl() {
 		return pictureUrl;
 	}
+	
 	public void setPictureUrl(String pictureUrl) {
 		this.pictureUrl = pictureUrl;
 	}
+	
 	public int getStock() {
 		return stock;
 	}
+	
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
+	
 	public int getRemain() {
 		return remain;
 	}
+	
 	public void setRemain(int remain) {
 		this.remain = remain;
 	}
+	
 	public String getShopMid() {
 		return shopMid;
 	}
+	
 	public void setShopMid(String shopMid) {
 		this.shopMid = shopMid;
 	}
+	
 	public String getFilialeMid() {
 		return filialeMid;
 	}
+	
 	public void setFilialeMid(String filialeMid) {
 		this.filialeMid = filialeMid;
 	}
+	
 	public List<String> getColumnNotes() {
 		return columnNotes;
 	}
+	
 	public void setColumnNotes(List<String> columnNotes) {
 		this.columnNotes = columnNotes;
 	}
+	
 	public int getLockedStock() {
 		return lockedStock;
 	}
+	
 	public void setLockedStock(int lockedStock) {
 		this.lockedStock = lockedStock;
 	}
 	
+	public String getPosition() {
+		return position;
+	}
 	
-	
-	
+	public void setPosition(String position) {
+		this.position = position;
+	}
 }
