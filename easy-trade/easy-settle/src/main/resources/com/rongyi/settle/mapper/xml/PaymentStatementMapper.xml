@@ -463,7 +463,7 @@
 	</select>
 
 	<resultMap id="StatementDetailMap"
-		type="com.rongyi.settle.dto.PaymentStatementDetailDto">
+		type="com.rongyi.settle.dto.CouponStatementDetailDto">
 		<id column="order_no" property="orderNo" jdbcType="VARCHAR" />
 		<result column="pay_no" property="payNo" jdbcType="VARCHAR" />
 		<result column="use_time" property="useTime" jdbcType="TIMESTAMP" />
