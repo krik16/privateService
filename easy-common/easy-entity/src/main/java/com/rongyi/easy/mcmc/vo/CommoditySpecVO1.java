@@ -18,6 +18,8 @@ public class CommoditySpecVO1 implements  Serializable {
 	private int locked;//锁定库存
 	private String systemNumber;//系统编号
 	private String pictureUrl;//规格图片
+	private String sku;
+	
 	public String getOriginalPrice() {
 		return originalPrice;
 	}
@@ -82,5 +84,12 @@ public class CommoditySpecVO1 implements  Serializable {
 	public void setLocked(int locked) {
 		this.locked = locked;
 	}
+	public String getSku() {
+		return sku;
+	}
+	public void setSku(String sku) {
+		this.sku = sku;
+	}
+	
 	
 }

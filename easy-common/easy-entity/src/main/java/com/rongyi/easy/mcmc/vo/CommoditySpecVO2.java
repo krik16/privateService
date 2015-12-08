@@ -27,6 +27,7 @@ public class CommoditySpecVO2 implements  Serializable {
 	private int stock;//库存
 	private int remain;//剩余量
 	private int lockedStock;//锁定库存
+	private String sku;
 	
 	public String getId() {
 		return id;
@@ -164,4 +165,14 @@ public class CommoditySpecVO2 implements  Serializable {
 	public void setPosition(String position) {
 		this.position = position;
 	}
+
+	public String getSku() {
+		return sku;
+	}
+
+	public void setSku(String sku) {
+		this.sku = sku;
+	}
+	
+	
 }

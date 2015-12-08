@@ -31,63 +31,84 @@ public class CommoditySpec implements  Serializable {
 	private String pictureUrl;//规格图片
 	private String lockedStock;//锁定库存
 	private String total;//规格商品总数
+	private String sku;
+	
 	public List<ObjectId> getColumnIds() {
 		return columnIds;
 	}
+	
 	public void setColumnIds(List<ObjectId> columnIds) {
 		this.columnIds = columnIds;
 	}
+	
 	public Date getCreateAt() {
 		return createAt;
 	}
+	
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
+	
 	public Date getUpdateAt() {
 		return updateAt;
 	}
+	
 	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;
 	}
+	
 	public ObjectId getId() {
 		return id;
 	}
+	
 	public void setId(ObjectId id) {
 		this.id = id;
 	}
+	
 	public String getExtendColums() {
 		return extendColums;
 	}
+	
 	public void setExtendColums(String extendColums) {
 		this.extendColums = extendColums;
 	}
+	
 	public String getStock() {
 		return stock;
 	}
+	
 	public void setStock(String stock) {
 		this.stock = stock;
 	}
+	
 	public String getOriginalPrice() {
 		return originalPrice;
 	}
+	
 	public void setOriginalPrice(String originalPrice) {
 		this.originalPrice = originalPrice;
 	}
+	
 	public String getCurrentPrice() {
 		return currentPrice;
 	}
+	
 	public void setCurrentPrice(String currentPrice) {
 		this.currentPrice = currentPrice;
 	}
+	
 	public List<String> getColumnValues() {
 		return columnValues;
 	}
+	
 	public void setColumnValues(List<String> columnValues) {
 		this.columnValues = columnValues;
 	}
+	
 	public String getUpdateBy() {
 		return updateBy;
 	}
+	
 	public void setUpdateBy(String updateBy) {
 		this.updateBy = updateBy;
 	}
@@ -95,15 +116,19 @@ public class CommoditySpec implements  Serializable {
 	public String getPictureUrl() {
 		return pictureUrl;
 	}
+	
 	public void setPictureUrl(String pictureUrl) {
 		this.pictureUrl = pictureUrl;
 	}
+	
 	public List<String> getColumnNotes() {
 		return columnNotes;
 	}
+	
 	public void setColumnNotes(List<String> columnNotes) {
 		this.columnNotes = columnNotes;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -116,6 +141,7 @@ public class CommoditySpec implements  Serializable {
 				+ ((columnValues == null) ? 0 : columnValues.hashCode());
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -142,17 +168,29 @@ public class CommoditySpec implements  Serializable {
 			return false;
 		return true;
 	}
+	
 	public String getTotal() {
 		return total;
 	}
+	
 	public void setTotal(String total) {
 		this.total = total;
 	}
+	
 	public String getLockedStock() {
 		return lockedStock;
 	}
+	
 	public void setLockedStock(String lockedStock) {
 		this.lockedStock = lockedStock;
+	}
+	
+	public String getSku() {
+		return sku;
+	}
+	
+	public void setSku(String sku) {
+		this.sku = sku;
 	}
 	
 	
