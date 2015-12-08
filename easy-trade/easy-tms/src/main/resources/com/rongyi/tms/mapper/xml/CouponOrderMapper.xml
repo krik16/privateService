@@ -77,7 +77,6 @@
 		<where>
 			<include refid="Base_where" />
 		</where>
-		group by trade_order.id
 		order by trade_order.create_at desc
 		limit
 		#{currentPage,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
@@ -97,7 +96,7 @@
 		<where>
 			<include refid="Base_where" />
 		</where>
-		group by trade_order.id) as total
+		) as total
 	</select>
 
 </mapper>
