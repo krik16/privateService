@@ -221,16 +221,6 @@ public class StatementConfigVO extends StatementConfig{
 	}
 
 	@Override
-	public String getLinkShopId() {
-		return linkShopId;
-	}
-
-	@Override
-	public void setLinkShopId(String linkShopId) {
-		this.linkShopId = linkShopId;
-	}
-
-	@Override
 	public Byte getLinkShopOp() {
 		return linkShopOp;
 	}
