@@ -240,23 +240,4 @@ public class StatementConfigVO extends StatementConfig{
 		this.linkShopOp = linkShopOp;
 	}
 
-	@Override
-	public Byte getLinkRole() {
-		return linkRole;
-	}
-
-	@Override
-	public void setLinkRole(Byte linkRole) {
-		this.linkRole = linkRole;
-	}
-
-	@Override
-	public String getLinkUserPhone() {
-		return linkUserPhone;
-	}
-
-	@Override
-	public void setLinkUserPhone(String linkUserPhone) {
-		this.linkUserPhone = linkUserPhone;
-	}
 }
