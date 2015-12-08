@@ -134,5 +134,5 @@ public interface StatementConfigService {
 	 * @Author:  柯军
 	 * @datetime:2015年10月21日下午2:38:48
 	 **/
-	boolean validateIsExist(byte cooperateType,byte bussinessType,String bussinessId,byte status,Date effectStartTime,Date  effectEndTime, String linkShopId) throws Exception;
+	boolean validateIsExist(byte cooperateType,byte bussinessType,String bussinessId,byte status,Date effectStartTime,Date  effectEndTime, Integer lintType) throws Exception;
 }

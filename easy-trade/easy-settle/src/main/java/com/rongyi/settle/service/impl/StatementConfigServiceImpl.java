@@ -175,12 +175,21 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 	}
 
 	@Override
-	public boolean validateIsExist(byte cooperateType, byte bussinessType, String bussinessId, byte status, Date effectStartTime, Date effectEndTime, String linkShopId) throws Exception {
+	public boolean validateIsExist(byte cooperateType, byte bussinessType, String bussinessId, byte status, Date effectStartTime, Date effectEndTime, Integer lintType) throws Exception {
 		boolean result = false;
-		if (StringUtils.isBlank(linkShopId)){
+		if (lintType==null){
 			result = true;
 		}else {
-			if ("-1".equals(linkShopId)){
+			if (lintType==0){
+				//全部: 1、验自身
+				if (bussinessType==1 || bussinessType==4){//商场、集团
+
+				}else {
+					logger.info("bussinessType==1 || bussinessType==4 is error ");
+					return true;
+				}
+
+				//2、全部店铺
 				List<ShopVO> shopVOs = getShopIdByParam(bussinessType, bussinessId);
 				List<String> shopIds = new ArrayList<>();
 				if (CollectionUtils.isNotEmpty(shopVOs)){
@@ -188,13 +197,13 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 						shopIds.add(shopVO.getId());
 					}
 				}
-				for (String shopId : shopIds){
-					if (checkShopExist(shopId)){
-						result = true;
-						break;
-					}
-				}
+//				if (CollectionUtils.isNotEmpty(shopIds) && checkShopExist(shopIds, effectStartTime, effectEndTime)){
+//					return  true;
+//				}
 			}
+//			else {
+//
+//			}
 			Map<String, Object> map = new HashMap<>();
 			map.put("cooperateType", cooperateType);
 			map.put("bussinessType", bussinessType);
@@ -213,10 +222,13 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 
 	/**
 	 * 验证单签店铺id的对账配置的合法性
-	 * @param shopId
+	 * @param shopIds
 	 * @return
 	 */
-	private boolean checkShopExist(String shopId) {
+	private boolean checkShopExist(List<String> shopIds) {
+		for (String shopId : shopIds){
+
+		}
 		return false;
 	}
 
