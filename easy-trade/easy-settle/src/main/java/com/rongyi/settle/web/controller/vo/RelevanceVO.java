@@ -4,6 +4,7 @@ import com.rongyi.easy.roa.vo.MallAddressVO;
 import com.rongyi.easy.roa.vo.ShopPositionVO;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 临时VO
@@ -17,6 +18,15 @@ public class RelevanceVO implements Serializable{
     private ShopPositionVO position;
 
     private MallAddressVO mallAddress;
+    List<UserInfoVo> userAccounts;
+
+    public List<UserInfoVo> getUserAccounts() {
+        return userAccounts;
+    }
+
+    public void setUserAccounts(List<UserInfoVo> userAccounts) {
+        this.userAccounts = userAccounts;
+    }
 
     public MallAddressVO getMallAddress() {
         return mallAddress;

@@ -555,11 +555,26 @@ public class StatementConfigController extends BaseController{
 			List<ShopVO> shopVOs = (List<ShopVO>) resultMap.get("list");
 			List<RelevanceVO> reList = new ArrayList<>();
 			if (CollectionUtils.isNotEmpty(shopVOs)) {
+				Map<String, Object> paramsMap = new HashMap<>();
 				for (ShopVO shopVO : shopVOs){
 					RelevanceVO shop = new RelevanceVO();
 					shop.setId(shopVO.getId());
 					shop.setName(shopVO.getName());
 					shop.setPosition(shopVO.getPosition());
+					//查询店铺关联账号信息
+					paramsMap.put("shopId", shopVO.getId());
+					paramsMap.put("identity", 6);
+					List<UserInfo> userInfos = iUserInfoService.getFullUserInfoByRelevanceId(paramsMap);
+					List<UserInfoVo> userAccounts = new ArrayList<>();
+					if (CollectionUtils.isNotEmpty(userInfos)){
+						for (UserInfo userInfo :userInfos){
+							UserInfoVo userInfoVo = new UserInfoVo();
+							userInfoVo.setId(userInfo.getId());
+							userInfoVo.setUserAccount(userInfo.getUserAccount());
+							userAccounts.add(userInfoVo);
+						}
+					}
+					shop.setUserAccounts(userAccounts);
 					reList.add(shop);
 				}
 			}
