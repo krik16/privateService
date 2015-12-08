@@ -401,9 +401,13 @@ public class StatementConfigController extends BaseController{
 				int count;
 				searchMap.put("currpage", null);
 				count = roaMallGroupService.getMallGroups(searchMap).size();
-					result = ResponseData.success(list, currpage, pagesize, count);
+				result = ResponseData.success(list, currpage, pagesize, count);
 			}
-		} catch (Exception e) {
+		} catch (RuntimeException e){
+			result = ResponseData.success(null, 1, 10, 0);
+			LOGGER.info(e.getMessage());
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 			result = ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
 		}
