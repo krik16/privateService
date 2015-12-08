@@ -30,7 +30,7 @@ public class RelevanceParam implements Serializable{
     private String filialeId;//分公司id（分公司查询使用）
     private String brandId;//品牌id（分公司 / 品牌查询使用）
     private String brandNameC;//品牌中文名称（品牌查询使用）
-    private String BrandNameE;//品牌中文名（品牌查询使用）
+    private String brandNameE;//品牌中文名（品牌查询使用）
     private String groupId;//集团id（集团查询使用）
     private String groupName;//集团名称（集团查询使用）
 
@@ -131,11 +131,11 @@ public class RelevanceParam implements Serializable{
     }
 
     public String getBrandNameE() {
-        return BrandNameE;
+        return brandNameE;
     }
 
     public void setBrandNameE(String brandNameE) {
-        BrandNameE = brandNameE;
+        this.brandNameE = brandNameE;
     }
 
     public String getGroupId() {
@@ -170,7 +170,7 @@ public class RelevanceParam implements Serializable{
                 ", filialeId='" + filialeId + '\'' +
                 ", brandId='" + brandId + '\'' +
                 ", brandNameC='" + brandNameC + '\'' +
-                ", BrandNameE='" + BrandNameE + '\'' +
+                ", brandNameE='" + brandNameE + '\'' +
                 ", groupId='" + groupId + '\'' +
                 ", groupName='" + groupName + '\'' +
                 '}';

@@ -401,7 +401,7 @@ public class StatementConfigController extends BaseController{
 				int count;
 				searchMap.put("currpage", null);
 				count = roaMallGroupService.getMallGroups(searchMap).size();
-				result = ResponseData.success(list, currpage, pagesize, count);
+					result = ResponseData.success(list, currpage, pagesize, count);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -439,7 +439,7 @@ public class StatementConfigController extends BaseController{
 				break;
 			case 2:
 				if (StringUtils.isNotBlank(params.getBrandId())){
-					reMap.put("brandId", params.getBrandId());
+					reMap.put("id", params.getBrandId());
 				}
 				if (StringUtils.isNotBlank(params.getBrandNameC())){
 					reMap.put("cname", params.getBrandNameC());
