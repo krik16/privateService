@@ -64,6 +64,8 @@ public class UserinfoVO implements Serializable{
 
 	String permission;//权限
 
+	private Integer isDisabled=0; //0 默认,禁用 1
+
 	
 	public Integer getIfAttention() {
 		return ifAttention;
@@ -247,5 +249,13 @@ public class UserinfoVO implements Serializable{
 
 	public void setPermission(String permission) {
 		this.permission = permission;
+	}
+
+	public Integer getIsDisabled() {
+		return isDisabled;
+	}
+
+	public void setIsDisabled(Integer isDisabled) {
+		this.isDisabled = isDisabled;
 	}
 }
