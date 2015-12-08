@@ -55,7 +55,9 @@ public class Commodity implements  Serializable,Cloneable{
 	private String brandMid;//品牌mongoId
 	
 	private boolean supportCourierDeliver=true;//支持快递发货字段  true 是    false否
-
+	
+	private boolean supportSelfPickup;//支持到店自提  true 是    false否
+	
 	@Override
 	public String toString() {
 		return "Commodity{" +
@@ -94,7 +96,7 @@ public class Commodity implements  Serializable,Cloneable{
 				", mallId='" + mallId + '\'' +
 				", categoryIds=" + categoryIds +
 				", customCategory=" + customCategory +
-				", distribution=" + distribution +
+				//", distribution=" + distribution +
 				", freight=" + freight +
 				", terminalType=" + terminalType +
 				", registerAt=" + registerAt +
@@ -201,7 +203,7 @@ public class Commodity implements  Serializable,Cloneable{
 	private List<ObjectId> categoryIds;//商品所属的品类列表
 	private List<String> customCategory;//自定义分类
 	
-	private Integer distribution;//配送方式 1表示到店自提2快递3表示支持两种方式
+	//private Integer distribution;//配送方式 1表示到店自提2快递3表示支持两种方式
 	private Integer freight;//1表示商家承担运费,0表示买家承担运费
 	private Integer terminalType;//上架终端：1.表示容易逛2.表示互动屏3.表示容易逛和互动屏4.表示微商5.微商,容易逛6.微商,互动屏7.容易逛, 互动屏, 微商(转换成二进制数个位1有容易逛第二位1有 互动屏第三位1有 微商)
 	private Date registerAt;//上架时间
@@ -351,12 +353,12 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setCustomCategory(List<String> customCategory) {
 		this.customCategory = customCategory;
 	}
-	public Integer getDistribution() {
+	/*public Integer getDistribution() {
 		return distribution;
 	}
 	public void setDistribution(Integer distribution) {
 		this.distribution = distribution;
-	}
+	}*/
 	public Integer getFreight() {
 		return freight;
 	}
@@ -404,7 +406,7 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setCurrentPrice(currentPrice);
 		commodity.setCustomCategory(customCategory);
 		commodity.setDescription(description);
-		commodity.setDistribution(distribution);
+		//commodity.setDistribution(distribution);
 		commodity.setFreight(freight);
 		commodity.setBrandName(brandName);
 		commodity.setBrandId(brandId);
@@ -534,5 +536,14 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setLockedStock(Integer lockedStock) {
 		this.lockedStock = lockedStock;
 	}
+
+	public boolean isSupportSelfPickup() {
+		return supportSelfPickup;
+	}
+
+	public void setSupportSelfPickup(boolean supportSelfPickup) {
+		this.supportSelfPickup = supportSelfPickup;
+	}
+	
 	
 }
