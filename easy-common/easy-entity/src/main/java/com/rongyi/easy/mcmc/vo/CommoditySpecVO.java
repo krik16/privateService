@@ -20,6 +20,8 @@ public class CommoditySpecVO implements  Serializable {
 	private String specOriginalPrice;
 	private String specCurrentPrice;
 	private String specPictureUrl;//规格图片
+	private String sku;
+	
 	private List<CommoditySpecColumnVO> specColumnValues;
 	
 	public List<CommoditySpecColumnVO> getSpecColumnValues() {
@@ -95,5 +97,13 @@ public class CommoditySpecVO implements  Serializable {
 
 	public void setSpecPictureUrl(String specPictureUrl) {
 		this.specPictureUrl = specPictureUrl;
+	}
+
+	public String getSku() {
+		return sku;
+	}
+
+	public void setSku(String sku) {
+		this.sku = sku;
 	}
 }
