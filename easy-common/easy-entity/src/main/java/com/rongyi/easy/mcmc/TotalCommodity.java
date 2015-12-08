@@ -37,7 +37,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private List<ObjectId> categoryIds;//商品所属的品类列表
 	private List<String> customCategory;//自定义分类
 	
-	private Integer distribution;//配送方式 1表示到店自提2快递3表示支持两种方式
+	//private Integer distribution;//配送方式 1表示到店自提2快递3表示支持两种方式
 	private Integer freight;//1表示商家承担运费,0表示买家承担运费
 	private Integer terminalType;//上架终端：1.表示容易逛2.表示互动屏3.表示容易逛和互动屏4.表示微商5.微商,容易逛6.微商,互动屏7.容易逛, 互动屏, 微商(转换成二进制数个位1有容易逛第二位1有 互动屏第三位1有 微商)
 	private Date registerAt;//上架时间
@@ -52,161 +52,213 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private List<String> filialeMids;//分公司id
 	private List<String> shopMids;//店铺id
 	private String brandId;//品牌mysqlId
+	
+	private boolean supportCourierDeliver=true;//支持快递发货字段  true 是    false否
+	
+	private boolean supportSelfPickup=true;//支持到店自提  true 是    false否
+	
 	public ObjectId getId() {
 		return id;
 	}
+	
 	public void setId(ObjectId id) {
 		this.id = id;
 	}
+	
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	public String getCategory() {
 		return category;
 	}
+	
 	public void setCategory(String category) {
 		this.category = category;
 	}
+	
 	public Integer getStatus() {
 		return status;
 	}
+	
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+	
 	public String getCode() {
 		return code;
 	}
+	
 	public void setCode(String code) {
 		this.code = code;
 	}
+	
 	public String getDescription() {
 		return description;
 	}
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
 	public String getPostage() {
 		return postage;
 	}
+	
 	public void setPostage(String postage) {
 		this.postage = postage;
 	}
+	
 	public Integer getStock() {
 		return stock;
 	}
+	
 	public void setStock(Integer stock) {
 		this.stock = stock;
 	}
+	
 	public Date getCreateAt() {
 		return createAt;
 	}
+	
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
+	
 	public Date getUpdateAt() {
 		return updateAt;
 	}
+	
 	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;
 	}
+	
 	public String getOriginalPrice() {
 		return originalPrice;
 	}
+	
 	public void setOriginalPrice(String originalPrice) {
 		this.originalPrice = originalPrice;
 	}
+	
 	public String getCurrentPrice() {
 		return currentPrice;
 	}
+	
 	public void setCurrentPrice(String currentPrice) {
 		this.currentPrice = currentPrice;
 	}
 	
-	
 	public List<String> getPicList() {
 		return picList;
 	}
+	
 	public void setPicList(List<String> picList) {
 		this.picList = picList;
 	}
+	
 	public List<ObjectId> getCategoryIds() {
 		return categoryIds;
 	}
+	
 	public void setCategoryIds(List<ObjectId> categoryIds) {
 		this.categoryIds = categoryIds;
 	}
+	
 	public List<String> getCustomCategory() {
 		return customCategory;
 	}
+	
 	public void setCustomCategory(List<String> customCategory) {
 		this.customCategory = customCategory;
 	}
-	public Integer getDistribution() {
+	/*public Integer getDistribution() {
 		return distribution;
 	}
 	public void setDistribution(Integer distribution) {
 		this.distribution = distribution;
-	}
+	}*/
+	
 	public Integer getFreight() {
 		return freight;
 	}
+	
 	public void setFreight(Integer freight) {
 		this.freight = freight;
 	}
+	
 	public Integer getTerminalType() {
 		return terminalType;
 	}
+	
 	public void setTerminalType(Integer terminalType) {
 		this.terminalType = terminalType;
 	}
+	
 	public Date getRegisterAt() {
 		return registerAt;
 	}
+	
 	public void setRegisterAt(Date registerAt) {
 		this.registerAt = registerAt;
 	}
+	
 	public Date getSoldOutAt() {
 		return soldOutAt;
 	}
+	
 	public void setSoldOutAt(Date soldOutAt) {
 		this.soldOutAt = soldOutAt;
 	}
+	
 	public Integer getSource() {
 		return source;
 	}
+	
 	public void setSource(Integer source) {
 		this.source = source;
 	}
+	
 	public Integer getStockStatus() {
 		return stockStatus;
 	}
+	
 	public void setStockStatus(Integer stockStatus) {
 		this.stockStatus = stockStatus;
 	}
+	
 	public List<ObjectId> getCommodityIds() {
 		return commodityIds;
 	}
+	
 	public void setCommodityIds(List<ObjectId> commodityIds) {
 		this.commodityIds = commodityIds;
 	}
+	
 	public String getReason() {
 		return reason;
 	}
+	
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
+	
 	public List<ObjectId> getSpecList() {
 		return specList;
 	}
+	
 	public void setSpecList(List<ObjectId> specList) {
 		this.specList = specList;
 	}
+	
 	public String getBrandMid() {
 		return brandMid;
 	}
+	
 	public void setBrandMid(String brandMid) {
 		this.brandMid = brandMid;
 	}
@@ -214,32 +266,57 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	public List<String> getFilialeMids() {
 		return filialeMids;
 	}
+	
 	public void setFilialeMids(List<String> filialeMids) {
 		this.filialeMids = filialeMids;
 	}
+	
 	public List<String> getShopMids() {
 		return shopMids;
 	}
+	
 	public void setShopMids(List<String> shopMids) {
 		this.shopMids = shopMids;
 	}
+	
 	public Integer getUpdateBy() {
 		return updateBy;
 	}
+	
 	public void setUpdateBy(Integer updateBy) {
 		this.updateBy = updateBy;
 	}
+	
 	public Integer getCreateBy() {
 		return createBy;
 	}
+	
 	public void setCreateBy(Integer createBy) {
 		this.createBy = createBy;
 	}
+	
 	public String getBrandId() {
 		return brandId;
 	}
+	
 	public void setBrandId(String brandId) {
 		this.brandId = brandId;
+	}
+	
+	public boolean isSupportCourierDeliver() {
+		return supportCourierDeliver;
+	}
+	
+	public void setSupportCourierDeliver(boolean supportCourierDeliver) {
+		this.supportCourierDeliver = supportCourierDeliver;
+	}
+	
+	public boolean isSupportSelfPickup() {
+		return supportSelfPickup;
+	}
+	
+	public void setSupportSelfPickup(boolean supportSelfPickup) {
+		this.supportSelfPickup = supportSelfPickup;
 	}
 	
 	
