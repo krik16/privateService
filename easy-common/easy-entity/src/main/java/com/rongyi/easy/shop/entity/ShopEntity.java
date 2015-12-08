@@ -189,10 +189,8 @@ public class ShopEntity implements Serializable{
 					if(id.matches("[\\da-zA-Z]{24}"))
 						zone_ids.add(new ObjectId(id));
 					else{
-						throw new Exception("品牌品牌id格式不对");
+						throw new Exception("地区id格式不对");
 					}
-				}else{
-					zone_ids.add(null);
 				}
 			}
 			this.zone_ids = zone_ids;
