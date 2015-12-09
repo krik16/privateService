@@ -8,17 +8,16 @@
 
 package com.rongyi.settle.web.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.easy.bsoms.entity.UserInfo;
 import com.rongyi.easy.roa.entity.AreaEntity;
 import com.rongyi.easy.roa.entity.MallEntity;
 import com.rongyi.easy.roa.vo.*;
+import com.rongyi.easy.settle.entity.ConfigShop;
 import com.rongyi.rss.bsoms.IUserInfoService;
 import com.rongyi.rss.roa.*;
 import com.rongyi.settle.web.controller.params.FindAccountParam;
@@ -178,12 +177,18 @@ public class StatementConfigController extends BaseController{
 			statementConfig.setBussinessId(statementConfig.getBussinessCode());
 			MapUtils.toObject(bussinessInfo, map);
 			bussinessInfo.setCreateAt(DateUtil.getCurrDateTime());
-			if(statementConfigService.validateIsExist(statementConfig.getCooperateType(), statementConfig.getBussinessType(), statementConfig.getBussinessId(), ConstantEnum.STATUS_2.getCodeByte()
-					, statementConfig.getEffectStartTime(), statementConfig.getEffectEndTime(), statementConfig.getLinkType())){
+			Map linkMap = null;
+			if (map.containsKey("linkId")) {
+				linkMap = JsonUtil.getMapFromJson(map.get("linkId").toString());
+			}
+			Map<String,Object> checkMap = statementConfigService.validateIsExist(statementConfig.getCooperateType(), statementConfig.getBussinessType(), statementConfig.getBussinessId(), ConstantEnum.CONFIG_STATUS_1.getCodeByte()
+					, statementConfig.getEffectStartTime(), statementConfig.getEffectEndTime(), statementConfig.getLinkType(), linkMap, statementConfig.getLinkShopOp());
+			boolean checkResult = (boolean) checkMap.get("result");
+			if(checkResult){
 				return ResponseData.failure(CodeEnum.FIAL_CONFIG_BIZ_EXIST.getCodeInt(), CodeEnum.FIAL_CONFIG_BIZ_EXIST.getValueStr());
 			}
-				
-			statementConfigService.saveStatementConfigAndInfo(statementConfig, bussinessInfo);
+			List<ConfigShop> shopConfigs = (List<ConfigShop>) checkMap.get("shopConfigs");
+			statementConfigService.saveStatementConfigAndInfo(statementConfig, bussinessInfo, shopConfigs);
 			String ruleCode = statementConfig.getRuleCode();
 			if (StringUtils.isNotBlank(ruleCode) && ruleCode.length() > 10) {
 				redisService.set(ruleCode.substring(0, 9), ruleCode);
@@ -600,38 +605,7 @@ public class StatementConfigController extends BaseController{
 					|| params.getIsOneself()==null || (params.getIsOneself()==1 && params.getType()==null) ) {
 				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
 			}
-			Map<String, Object> paramsMap = new HashMap<>();
-			paramsMap.put("isDisabled", 0);
-			if (params.getIsOneself()==1){
-				switch (params.getType()){
-					case 0: paramsMap.put("shopId", params.getId()); paramsMap.put("identity", 4); break;
-					case 1: paramsMap.put("mallId", params.getId()); paramsMap.put("identity", 1); break;
-					case 2: paramsMap.put("brandId", params.getId()); paramsMap.put("identity", 2); break;
-					case 3: paramsMap.put("filialeId", params.getId()); paramsMap.put("identity", 3); break;
-					case 4: paramsMap.put("groupId", params.getId()); paramsMap.put("identity", 0); break;
-					default: return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
-				}
-			}else if (params.getIsOneself()==0){
-				if (params.getGuideType()==1) {
-					paramsMap.put("identity", 5);
-				}
-				if (params.getGuideType()==2){
-					paramsMap.put("identity" ,6);
-				}
-				paramsMap.put("shopId", params.getId());
-			} else {
-				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
-			}
-			List<UserInfo> userInfos = iUserInfoService.getFullUserInfoByRelevanceId(paramsMap);
-			List<UserInfoVo> userAccounts = new ArrayList<>();
-			if (CollectionUtils.isNotEmpty(userInfos)){
-				for (UserInfo userInfo :userInfos){
-					UserInfoVo userInfoVo = new UserInfoVo();
-					userInfoVo.setId(userInfo.getId());
-					userInfoVo.setUserAccount(userInfo.getUserAccount());
-					userAccounts.add(userInfoVo);
-				}
-			}
+			List<UserInfoVo> userAccounts = statementConfigService.getAccountInfoByParam(params.getIsOneself(), params.getType(), params.getGuideType(), params.getId());
 			return ResponseData.success(userAccounts);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -13,8 +13,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.rongyi.easy.settle.entity.BussinessInfo;
+import com.rongyi.easy.settle.entity.ConfigShop;
 import com.rongyi.easy.settle.entity.StatementConfig;
 import com.rongyi.easy.settle.vo.StatementConfigVO;
+import com.rongyi.settle.web.controller.vo.UserInfoVo;
 
 /**	
  * @Author:  柯军
@@ -85,7 +87,7 @@ public interface StatementConfigService {
 	 * @Author:  柯军
 	 * @datetime:2015年9月21日下午4:26:16
 	 **/
-	void saveStatementConfigAndInfo(StatementConfig statementConfig,BussinessInfo bussinessInfo);
+	void saveStatementConfigAndInfo(StatementConfig statementConfig,BussinessInfo bussinessInfo, List<ConfigShop> shopConfigs);
 
 	/**
 	 * @Description: 定时任务查询符合条件的对账配置
@@ -134,6 +136,9 @@ public interface StatementConfigService {
 	 * @Author:  柯军
 	 * @datetime:2015年10月21日下午2:38:48
 	 **/
+	Map<String, Object> validateIsExist(byte cooperateType,byte bussinessType,String bussinessId,byte status,Date effectStartTime,Date  effectEndTime, Byte lintType, Map linkId, Byte linkShopOp) throws Exception;
+
+	List<UserInfoVo> getAccountInfoByParam(Integer isOneself, Integer type, Integer guideType, String id);
 	boolean validateIsExist(byte cooperateType,byte bussinessType,String bussinessId,byte status,Date effectStartTime,Date  effectEndTime, Byte lintType) throws Exception;
 
 	/**

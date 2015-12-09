@@ -43,13 +43,19 @@ public enum ConstantEnum {
     STATUS_10(10,"付款解冻"),
     STATUS_11(11,"已下载"),
     STATUS_12(12,"已付款"),
-    
+
+    CONFIG_STATUS_0(0, "待审核"),
+    CONFIG_STATUS_1(1, "已通过"),
+    CONFIG_STATUS_2(2, "未通过"),
+    CONFIG_STATUS_3(3, "变更待审核中"),
+    CONFIG_STATUS_4(4, "停用"),
+
     PAY_MODE_0(0,"固定日期"),
     PAY_MODE_1(1,"滚动日期"),
-    
+
     ROLL_TYPE_0(0,"天"),
     ROLL_TYPE_1(1,"时"),
-    
+
 	PAGE_SIZE(10,"分页条数");
     
     private Object code;
