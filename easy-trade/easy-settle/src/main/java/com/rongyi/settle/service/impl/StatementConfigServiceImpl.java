@@ -17,6 +17,7 @@ import com.rongyi.easy.settle.entity.ConfigShop;
 import com.rongyi.rss.bsoms.IUserInfoService;
 import com.rongyi.rss.roa.ROAMallService;
 import com.rongyi.rss.roa.ROAShopService;
+import com.rongyi.settle.service.ConfigShopService;
 import com.rongyi.settle.web.controller.vo.UserInfoVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -64,6 +65,9 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 
 	@Autowired
 	private IUserInfoService iUserInfoService;
+
+	@Autowired
+	private ConfigShopService configShopService;
 	/**
 	 * 判断账号打款配置
 	 *
@@ -115,6 +119,10 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 		insert(statementConfig);
 		bussinessInfo.setConfigId(statementConfig.getId());
 		bussinessInfoService.insert(bussinessInfo);
+		for (ConfigShop configShop :shopConfigs){
+			configShop.setConfigId(statementConfig.getId());
+			configShopService.insert(configShop);
+		}
 	}
 
 	@Override
