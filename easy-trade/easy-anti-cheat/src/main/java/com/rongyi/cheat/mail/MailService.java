@@ -1,20 +1,5 @@
 package com.rongyi.cheat.mail;
 
-import java.io.File;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
-import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeUtility;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +9,15 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.util.*;
 
 /**
  * @Author: 柯军
@@ -43,7 +37,7 @@ public class MailService {
 
 	private long retryInterval = 60_000;
 
-	public void sendAttachmentEmail() throws AddressException, MessagingException, UnsupportedEncodingException {
+	public void sendAttachmentEmail() throws  MessagingException, UnsupportedEncodingException {
 		Set<String> toAdrs = new HashSet<String>();
 		toAdrs.add("kejun@rongyi.com");
 		List<String> filenames = new ArrayList<String>();
