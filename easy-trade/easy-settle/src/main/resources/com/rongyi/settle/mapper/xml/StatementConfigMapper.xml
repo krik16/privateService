@@ -318,6 +318,36 @@
             #{currentPage,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
         </if>
     </select>
+    <select id="validateIsExist" parameterType="java.util.Map"
+            resultType="java.lang.Integer">
+        select
+        count(1)
+        from  payment_bill_config pbc
+        left join biz_info bi on pbc.id=bi.config_id
+        left join shop_config sc on pbc.id=sc.config_id
+        <where>
+            <if test="cooperateType!=null">
+                and pbc.cooperate_type=#{cooperateType}
+            </if>
+            <if test="bussinessType!=null">
+                and pbc.biz_type = #{bussinessType}
+            </if>
+            <if test="bussinessId!=null">
+                and pbc.biz_id = #{bussinessId}
+            </if>
+            <if test="status!=null">
+                and pbc.status != #{status}
+            </if>
+            <if test="effectEndTime!=null and effectStartTime!=null">
+                and #{effectEndTime} > pbc.effect_start_time
+                and pbc.effect_end_time > #{effectStartTime}
+            </if>
+            <if test="shopId!=null">
+                and sc.shop_id=#{shopId}
+            </if>
+        </where>
+    </select>
+
     <select id="selectPageListCount" parameterType="java.util.Map"
             resultType="java.lang.Integer">
         select
@@ -363,7 +393,6 @@
         where rule_code =
         #{ruleCode,jdbcType=VARCHAR}
     </select>
-
     <select id="selectConfigInfoById" resultMap="ResultMapWithBLOBs"
             parameterType="java.lang.Integer">
         select
@@ -373,19 +402,5 @@
         =bi.config_id
         where pbc.id=
         #{id,jdbcType=INTEGER}
-    </select>
-    <select id="validateIsExist" parameterType="java.util.Map"
-            resultType="java.lang.Integer">
-        select
-        count(*)
-        from
-        payment_bill_config pbc left join biz_info bi on pbc.id
-        =bi.config_id
-        where pbc.cooperate_type=#{cooperateType}
-        and pbc.biz_type = #{bussinessType}
-        and pbc.biz_id = #{bussinessId}
-        and pbc.status != #{status}
-        and #{effectEndTime} > pbc.effect_start_time
-        and pbc.effect_end_time > #{effectStartTime}
     </select>
 </mapper>
