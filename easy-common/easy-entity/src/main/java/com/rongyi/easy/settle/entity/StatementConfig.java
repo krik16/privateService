@@ -52,25 +52,16 @@ public class StatementConfig implements Serializable {
      */
     private String bussinessRealAddress;
 
-    /**
-     * 关联店铺id集合（逗号分隔），-1表示包含所有，0表示本身
-     */
-    private String linkShopId;
+    /** 0:所有,1:自身,2:部分 */
+    private Byte linkType;
+    
+    /** 关联角色(0:全部,1:导购，2:买手) */
+    private Byte linkRole;
 
     /**
      * 关联店铺操作(0:选择,1:排除)
      */
     private Byte linkShopOp;
-
-    /**
-     * 账号id（多个以都好分隔）
-     */
-    private Integer linkUserId;
-
-    /**
-     * 关联账号(多个账号逗号分隔)
-     */
-    private String linkAccount;
 
     /**
      * 计算周期（0:日，1:周，2:月，3:自定义）
@@ -423,14 +414,6 @@ public class StatementConfig implements Serializable {
         this.bussinessRealAddress = bussinessRealAddress;
     }
 
-    public String getLinkShopId() {
-        return linkShopId;
-    }
-
-    public void setLinkShopId(String linkShopId) {
-        this.linkShopId = linkShopId;
-    }
-
     public Byte getLinkShopOp() {
         return linkShopOp;
     }
@@ -439,19 +422,33 @@ public class StatementConfig implements Serializable {
         this.linkShopOp = linkShopOp;
     }
 
-    public Integer getLinkUserId() {
-        return linkUserId;
-    }
+	/**
+	 * @return the linkType
+	 */
+	public Byte getLinkType() {
+		return linkType;
+	}
 
-    public void setLinkUserId(Integer linkUserId) {
-        this.linkUserId = linkUserId;
-    }
+	/**
+	 * @param linkType the linkType to set
+	 */
+	public void setLinkType(Byte linkType) {
+		this.linkType = linkType;
+	}
 
-    public String getLinkAccount() {
-        return linkAccount;
-    }
+	/**
+	 * @return the linkRole
+	 */
+	public Byte getLinkRole() {
+		return linkRole;
+	}
 
-    public void setLinkAccount(String linkAccount) {
-        this.linkAccount = linkAccount;
-    }
+	/**
+	 * @param linkRole the linkRole to set
+	 */
+	public void setLinkRole(Byte linkRole) {
+		this.linkRole = linkRole;
+	}
+
+
 }
