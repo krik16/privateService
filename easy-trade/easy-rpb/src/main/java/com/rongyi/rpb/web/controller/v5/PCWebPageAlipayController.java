@@ -78,6 +78,9 @@ public class PCWebPageAlipayController extends BaseController {
 		if (result != null)
 			return null;
 		LOGGER.info("支付宝打款成功异步通知开始,success_details={}", success_details);
+		if(success_details == null){
+			throw  new RuntimeException("支付宝打款操作未成功，忽略此次通知，请检查支付宝账号和姓名是否正确匹配，确认后请重新操作");
+		}
 		List<PaymentEntity> allList = new ArrayList<PaymentEntity>();
 		String[] detailList = success_details.split("\\|");
 		if (detailList != null && detailList.length > 0) {
