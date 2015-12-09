@@ -175,7 +175,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 	}
 
 	@Override
-	public boolean validateIsExist(byte cooperateType, byte bussinessType, String bussinessId, byte status, Date effectStartTime, Date effectEndTime, Integer lintType) throws Exception {
+	public boolean validateIsExist(byte cooperateType, byte bussinessType, String bussinessId, byte status, Date effectStartTime, Date effectEndTime, Byte lintType) throws Exception {
 		boolean result = false;
 		if (lintType==null){
 			result = true;
