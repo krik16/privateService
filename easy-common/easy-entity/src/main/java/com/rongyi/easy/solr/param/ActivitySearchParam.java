@@ -28,6 +28,8 @@ public class ActivitySearchParam implements Serializable{
 	
 	private String mallId; // mall Id for 终端屏
 	private String startLetter;  // 首字母 for 终端屏
+
+	private String showChannel;//展示渠道  APP：4，互动屏：5, 微信：6    不填时默认app
 	
 	public String getKeyword() {
 		return keyword;
@@ -144,6 +146,14 @@ public class ActivitySearchParam implements Serializable{
 		this.startLetter = startLetter;
 	}
 
+	public String getShowChannel() {
+		return showChannel;
+	}
+
+	public void setShowChannel(String showChannel) {
+		this.showChannel = showChannel;
+	}
+
 	@Override
 	public String toString() {
 		return "ActivitySearchParam{" +
@@ -164,6 +174,7 @@ public class ActivitySearchParam implements Serializable{
 				", shopList=" + shopList +
 				", mallId='" + mallId + '\'' +
 				", startLetter='" + startLetter + '\'' +
+				", showChannel='" + showChannel + '\'' +
 				'}';
 	}
 }
