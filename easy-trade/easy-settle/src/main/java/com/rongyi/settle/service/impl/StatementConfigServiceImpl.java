@@ -220,6 +220,11 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 		return result;
 	}
 
+	@Override
+	public boolean validateNeedPay(String shopId, String userId, Integer guideType) {
+		return false;
+	}
+
 	/**
 	 * 验证单签店铺id的对账配置的合法性
 	 * @param shopIds

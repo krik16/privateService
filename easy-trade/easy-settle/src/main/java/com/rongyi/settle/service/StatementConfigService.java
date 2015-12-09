@@ -135,4 +135,15 @@ public interface StatementConfigService {
 	 * @datetime:2015年10月21日下午2:38:48
 	 **/
 	boolean validateIsExist(byte cooperateType,byte bussinessType,String bussinessId,byte status,Date effectStartTime,Date  effectEndTime, Byte lintType) throws Exception;
+
+	/**
+	 * @Description:验证是否需要打款到买家虚拟账号
+	 * @param:shopId 店铺ID
+	 * @param:userId 用户ID
+	 * @param:gradeType 用户角色(1:导购,2:买手)
+	 * @return true	打款，false 不打款
+	 * @Author:  柯军
+	 **/
+
+	boolean validateNeedPay(String shopId,String userId,Integer gradeType);
 }
