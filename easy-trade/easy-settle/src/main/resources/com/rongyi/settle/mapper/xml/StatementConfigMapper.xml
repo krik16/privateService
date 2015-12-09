@@ -63,12 +63,9 @@
                 jdbcType="VARCHAR"/>
         <result column="contact_qq" property="contactQq" jdbcType="VARCHAR"/>
     </resultMap>
-    <resultMap id="ResultMapWithBLOBs" type="com.rongyi.easy.settle.vo.StatementConfigVO" extends="BaseResultMap">
-        <result column="link_shop_id" property="linkShopId" jdbcType="LONGVARCHAR"/>
-    </resultMap>
     <sql id="Base_Column_List">
         pbc.id, rule_code, cooperate_type, biz_id, biz_type,
-        biz_code, biz_name,biz_real_address,link_shop_id,link_shop_op,link_role,link_type, count_cycle,
+        biz_code, biz_name,biz_real_address,link_shop_op,link_role,link_type, count_cycle,
         cycle_start_time,
         cycle_end_time,
         is_loop, verify_type,
@@ -119,7 +116,7 @@
 
 
     </sql>
-    <select id="selectById" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         *
         from
@@ -137,7 +134,7 @@
     <insert id="insert" parameterType="com.rongyi.easy.settle.entity.StatementConfig"
             useGeneratedKeys="true" keyProperty="id">
         insert into payment_bill_config (rule_code, cooperate_type, biz_type,
-        biz_id,biz_code, biz_name,biz_real_address,link_shop_id,link_shop_op,link_role,link_type, count_cycle,
+        biz_id,biz_code, biz_name,biz_real_address,link_shop_op,link_role,link_type, count_cycle,
         cycle_start_time,
         cycle_end_time, is_loop,
         verify_type, gen_header_time,
@@ -164,7 +161,6 @@
         #{bussinessCode,jdbcType=VARCHAR},
         #{bussinessName,jdbcType=VARCHAR},
         #{bussinessRealAddress,jdbcType=VARCHAR},
-        #{linkShopId,jdbcType=LONGVARCHAR}
         #{linkShopOp,jdbcType=TINYINT},
         #{linkRole,jdbcType=TINYINT},
         #{linkType,jdbcType=TINYINT},
@@ -222,9 +218,6 @@
             </if>
             <if test="linkType != null" >
                 link_type = #{linkType,jdbcType=TINYINT},
-            </if>
-            <if test="linkShopId != null" >
-                link_shop_id = #{linkShopId,jdbcType=LONGVARCHAR},
             </if>
             <if test="countCycle != null">
                 count_cycle = #{countCycle,jdbcType=TINYINT},
@@ -297,7 +290,7 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
-    <select id="selectPageList" resultMap="ResultMapWithBLOBs"
+    <select id="selectPageList" resultMap="BaseResultMap"
             parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -323,8 +316,8 @@
         select
         count(1)
         from  payment_bill_config pbc
-        left join biz_info bi on pbc.id=bi.config_id
-        left join shop_config sc on pbc.id=sc.config_id
+        join biz_info bi on pbc.id=bi.config_id
+        join config_shop  sc on pbc.id=sc.config_id
         <where>
             <if test="cooperateType!=null">
                 and pbc.cooperate_type=#{cooperateType}
@@ -360,7 +353,7 @@
     </select>
 
     <select id="selectForSchedule" parameterType="java.util.Map"
-            resultMap="ResultMapWithBLOBs">
+            resultMap="BaseResultMap">
         select
         *
         from payment_bill_config
@@ -386,14 +379,14 @@
     </update>
 
     <select id="selectByRuleCode" parameterType="java.util.Map"
-            resultMap="ResultMapWithBLOBs">
+            resultMap="BaseResultMap">
         select
         *
         from payment_bill_config
         where rule_code =
         #{ruleCode,jdbcType=VARCHAR}
     </select>
-    <select id="selectConfigInfoById" resultMap="ResultMapWithBLOBs"
+    <select id="selectConfigInfoById" resultMap="BaseResultMap"
             parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>

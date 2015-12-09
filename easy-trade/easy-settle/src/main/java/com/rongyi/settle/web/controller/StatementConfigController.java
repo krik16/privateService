@@ -162,10 +162,10 @@ public class StatementConfigController extends BaseController{
 	public ResponseData save(HttpServletRequest request, @RequestBody Map<String, Object> map) {
 		LOGGER.info("====config save==== params={}",map.toString());
 		try {
-			ResponseData responseData = accessService.check(request, "FNC_STL_ADD");
-			if (responseData.getMeta().getErrno() != 0) {
-				return responseData;
-			}
+//			ResponseData responseData = accessService.check(request, "FNC_STL_ADD");
+//			if (responseData.getMeta().getErrno() != 0) {
+//				return responseData;
+//			}
 			StatementConfig oldStatementConfig = statementConfigService.selectByRuleCode(map.get("ruleCode").toString());
 			if(oldStatementConfig != null)
 				return ResponseData.failure(CodeEnum.FIAL_CONFIG_EXIST.getCodeInt(), CodeEnum.FIAL_CONFIG_EXIST.getValueStr());

@@ -322,7 +322,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 				}
 				if (CollectionUtils.isNotEmpty(allUser)) {
 					String realUser = allUser.toString();
-					shopConfig.setRealUserList(realUser.substring(1,realUser.length()-2));
+					shopConfig.setRealUserList(realUser.substring(1,realUser.length()-1));
 				}
 			}
 		}
