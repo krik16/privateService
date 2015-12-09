@@ -67,7 +67,7 @@ public class StatementConfigServiceTest extends BaseTest{
 		statementConfig.setIsLoop((byte)0);
 		statementConfig.setIsDelete((byte)0);
 		statementConfig.setRollDay("day");
-		statementConfig.setLinkShopId("111");
+//		statementConfig.setLinkShopId("111");
 
 		statementConfigService.insert(statementConfig);
 	}
