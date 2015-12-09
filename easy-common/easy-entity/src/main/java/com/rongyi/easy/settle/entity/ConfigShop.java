@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by Ventures on 2015/12/8.
  */
-public class ShopConfig implements Serializable{
+public class ConfigShop implements Serializable{
     private Integer id;
     private Integer configId;
     private String shopId;
