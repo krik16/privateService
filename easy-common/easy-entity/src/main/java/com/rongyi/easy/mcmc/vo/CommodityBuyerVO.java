@@ -1,6 +1,7 @@
 package com.rongyi.easy.mcmc.vo;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import com.rongyi.easy.mcmc.Commodity;
@@ -20,6 +21,7 @@ public class CommodityBuyerVO implements Serializable{
 	private String commodityCode;
 	private String commodityStock;
 	private int commodityStatus;
+	private int commodityAppStatus;// 商品APP显示状态 (0下架  1上架  3待上架)
 	private int commodityType;//渠道  1商家，2买手
 	private boolean supportCourierDeliver;//导购：true是   false否；买手：默认true   
 
@@ -166,7 +168,21 @@ public class CommodityBuyerVO implements Serializable{
 		// 买手版渠道  0商家，1买手
 		this.commodityType = commodity.getType();
 		this.supportCourierDeliver = commodity.isSupportCourierDeliver();
-		
+
+		// 商品待上架且上架时间大于当前时间，app商品状态为 待上架
+		//商品上架或待上架，且上架时间小于当前时间，且下架时间大于当前时间，app商品状态为 上架
+		//其他 下架
+		if (this.commodityStatus == 3 && (commodity.getRegisterAt() != null && commodity.getRegisterAt().getTime() - new Date().getTime() > 0)) {
+			this.commodityAppStatus = 3;
+		} else if ((commodityStatus == 1 || commodityStatus == 3)
+				&& (commodity.getRegisterAt() != null && commodity.getRegisterAt().getTime() - new Date().getTime() <= 0)
+				&& (commodity.getSoldOutAt() != null && commodity.getSoldOutAt().getTime() - new Date().getTime() > 0)) {
+			this.commodityAppStatus = 1;
+		} else {
+			this.commodityAppStatus = 0;
+		}
+
+
 	}
 	
 	public List<String> getCommodityPicList() {
@@ -250,6 +266,14 @@ public class CommodityBuyerVO implements Serializable{
 
 	public void setSupportCourierDeliver(boolean supportCourierDeliver) {
 		this.supportCourierDeliver = supportCourierDeliver;
+	}
+
+	public int getCommodityAppStatus() {
+		return commodityAppStatus;
+	}
+
+	public void setCommodityAppStatus(int commodityAppStatus) {
+		this.commodityAppStatus = commodityAppStatus;
 	}
 
 	@Override
