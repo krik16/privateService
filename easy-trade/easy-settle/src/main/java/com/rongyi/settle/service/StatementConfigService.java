@@ -139,7 +139,6 @@ public interface StatementConfigService {
 	Map<String, Object> validateIsExist(byte cooperateType,byte bussinessType,String bussinessId,byte status,Date effectStartTime,Date  effectEndTime, Byte lintType, Map linkId, Byte linkShopOp) throws Exception;
 
 	List<UserInfoVo> getAccountInfoByParam(Integer isOneself, Integer type, Integer guideType, String id);
-	boolean validateIsExist(byte cooperateType,byte bussinessType,String bussinessId,byte status,Date effectStartTime,Date  effectEndTime, Byte lintType) throws Exception;
 
 	/**
 	 * @Description:验证是否需要打款到买家虚拟账号
