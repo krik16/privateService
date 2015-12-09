@@ -17,7 +17,7 @@ import com.rongyi.easy.bsoms.entity.UserInfo;
 import com.rongyi.easy.roa.entity.AreaEntity;
 import com.rongyi.easy.roa.entity.MallEntity;
 import com.rongyi.easy.roa.vo.*;
-import com.rongyi.easy.settle.entity.ShopConfig;
+import com.rongyi.easy.settle.entity.ConfigShop;
 import com.rongyi.rss.bsoms.IUserInfoService;
 import com.rongyi.rss.roa.*;
 import com.rongyi.settle.web.controller.params.FindAccountParam;
@@ -187,7 +187,7 @@ public class StatementConfigController extends BaseController{
 			if(checkResult){
 				return ResponseData.failure(CodeEnum.FIAL_CONFIG_BIZ_EXIST.getCodeInt(), CodeEnum.FIAL_CONFIG_BIZ_EXIST.getValueStr());
 			}
-			List<ShopConfig> shopConfigs = (List<ShopConfig>) checkMap.get("shopConfigs");
+			List<ConfigShop> shopConfigs = (List<ConfigShop>) checkMap.get("shopConfigs");
 			statementConfigService.saveStatementConfigAndInfo(statementConfig, bussinessInfo, shopConfigs);
 			String ruleCode = statementConfig.getRuleCode();
 			if (StringUtils.isNotBlank(ruleCode) && ruleCode.length() > 10) {
