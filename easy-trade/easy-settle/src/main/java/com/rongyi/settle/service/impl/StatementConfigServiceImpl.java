@@ -13,7 +13,7 @@ import java.util.*;
 import com.rongyi.easy.bsoms.entity.UserInfo;
 import com.rongyi.easy.roa.entity.MallEntity;
 import com.rongyi.easy.roa.vo.ShopVO;
-import com.rongyi.easy.settle.entity.ShopConfig;
+import com.rongyi.easy.settle.entity.ConfigShop;
 import com.rongyi.rss.bsoms.IUserInfoService;
 import com.rongyi.rss.roa.ROAMallService;
 import com.rongyi.rss.roa.ROAShopService;
@@ -111,7 +111,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 	}
 
 	@Override
-	public void saveStatementConfigAndInfo(StatementConfig statementConfig, BussinessInfo bussinessInfo,List<ShopConfig> shopConfigs) {
+	public void saveStatementConfigAndInfo(StatementConfig statementConfig, BussinessInfo bussinessInfo,List<ConfigShop> shopConfigs) {
 		insert(statementConfig);
 		bussinessInfo.setConfigId(statementConfig.getId());
 		bussinessInfoService.insert(bussinessInfo);
@@ -184,7 +184,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 		boolean result = false;
 		int isOneself;
 		linkShopOp = linkShopOp==null?0:linkShopOp;
-		List<ShopConfig> shopConfigs = new ArrayList<>();
+		List<ConfigShop> shopConfigs = new ArrayList<>();
 		Map<String, Object> ReMap = new HashMap<>();
 		Map<String, Object> map = new HashMap<>();
 		map.put("cooperateType", cooperateType);
@@ -273,8 +273,8 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 		return ReMap;
 	}
 
-	private ShopConfig convertToShopConfig(int isOneself, String id, Byte businessType, Byte linkShopOp, String userAccounts, List<ShopConfig> shopConfigs) {
-		ShopConfig shopConfig = null;
+	private ConfigShop convertToShopConfig(int isOneself, String id, Byte businessType, Byte linkShopOp, String userAccounts, List<ConfigShop> shopConfigs) {
+		ConfigShop shopConfig = null;
 		String accounts = "";
 		if (isOneself==1){
 			//自身
@@ -288,18 +288,18 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 						accounts += ", "+ userInfoVo.getUserAccount();
 					}
 				}
-				shopConfig = new ShopConfig();
+				shopConfig = new ConfigShop();
 				shopConfig.setUserList(accounts);
 				shopConfig.setRealUserList(accounts);
 			}
 		}else if (isOneself==0){
 			if (linkShopOp.intValue()==0){
-				shopConfig = new ShopConfig();
+				shopConfig = new ConfigShop();
 				shopConfig.setUserList(userAccounts);
 				shopConfig.setRealUserList(userAccounts);
 				shopConfig.setShopId(id);
 			}else if (linkShopOp.intValue()==1){
-				shopConfig = new ShopConfig();
+				shopConfig = new ConfigShop();
 				shopConfig.setUserList(userAccounts);
 				shopConfig.setShopId(id);
 				List<UserInfoVo> userInfoVos =  getAccountInfoByParam(isOneself, null, 5, id);//目前只有导购

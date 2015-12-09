@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.rongyi.easy.settle.entity.BussinessInfo;
-import com.rongyi.easy.settle.entity.ShopConfig;
+import com.rongyi.easy.settle.entity.ConfigShop;
 import com.rongyi.easy.settle.entity.StatementConfig;
 import com.rongyi.easy.settle.vo.StatementConfigVO;
 import com.rongyi.settle.web.controller.vo.UserInfoVo;
@@ -87,7 +87,7 @@ public interface StatementConfigService {
 	 * @Author:  柯军
 	 * @datetime:2015年9月21日下午4:26:16
 	 **/
-	void saveStatementConfigAndInfo(StatementConfig statementConfig,BussinessInfo bussinessInfo, List<ShopConfig> shopConfigs);
+	void saveStatementConfigAndInfo(StatementConfig statementConfig,BussinessInfo bussinessInfo, List<ConfigShop> shopConfigs);
 
 	/**
 	 * @Description: 定时任务查询符合条件的对账配置
