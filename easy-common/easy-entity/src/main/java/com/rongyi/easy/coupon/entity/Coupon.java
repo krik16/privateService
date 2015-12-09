@@ -155,7 +155,7 @@ public class Coupon implements Serializable {
     /**
      * 关联类型
      * 代金券：集团[0],品牌[1], 商场 [2],店铺[3];
-     * 红包 ：全场[0],商品[1]
+     * 平台促销券 ：全场[0]，品牌[1]，商场[2]，店铺[3]、分类[4]，信息[5]
      */
     private Integer relatedType;
 
@@ -253,8 +253,19 @@ public class Coupon implements Serializable {
      * 代金券分类
      */
     private CouponCategory couponCategory;
+    private List<CouponCategory> listCouponCategorys;
 
-    /**
+    
+
+	public List<CouponCategory> getListCouponCategorys() {
+		return listCouponCategorys;
+	}
+
+	public void setListCouponCategorys(List<CouponCategory> listCouponCategorys) {
+		this.listCouponCategorys = listCouponCategorys;
+	}
+
+	/**
      * 代金券关联的集团
      */
     private CouponGroup couponGroup;
@@ -263,13 +274,23 @@ public class Coupon implements Serializable {
      * 代金券关联的品牌
      */
     private CouponBrand couponBrand;
+    private List<CouponBrand> couponBrands;
+    
 
     /**
      * 代金券关联的商场
      */
 //    private CouponMall couponMall;
 
-    /**
+    public List<CouponBrand> getCouponBrands() {
+		return couponBrands;
+	}
+
+	public void setCouponBrands(List<CouponBrand> couponBrands) {
+		this.couponBrands = couponBrands;
+	}
+
+	/**
      * 代金券关联的店铺
      */
     private List<CouponShop> couponShops;
@@ -281,7 +302,7 @@ public class Coupon implements Serializable {
 
 
     /**
-     * 优惠方式 1：满减 ；2：立减。
+     * 优惠方式 0：满减 ；1：立减。
      */
     private Integer preferentialType;
 
@@ -305,6 +326,36 @@ public class Coupon implements Serializable {
      * 卡券关联集团、品牌、店铺时如果没有选择下面的店铺则默认是关联该类型下所有的店铺，isRelatedAll=true
      */
     private Boolean isRelatedAll;
+
+    /**
+     * 平台促销券类型,注册[0] 常规[1]
+     */
+    private Integer type;
+
+    /**
+     * 平台促销券适用对象，商家/买手[0] 商家[1] 买手[2]
+     */
+    private Integer applyObject;
+
+    /**
+     * 平台促销券适用范围维度1,商品/代金券[0] 商品[1] 代金券[2]
+     */
+    private Integer applyGoods;
+
+    /**
+     * 平台促销券有效期天数,领取后设置的天数
+     */
+    private Integer validDays;
+
+    /**
+     * 平台促销券与代金券的关系
+     */
+    private List<CouponVoucher> listCouponVouchers;
+
+    /**
+     * 平台促销券商品分类
+     */
+    private List<CouponCommodityCategory> couponCommodityCategories;
 
     public String getId() {
         return id;
@@ -842,6 +893,47 @@ public class Coupon implements Serializable {
         this.isRelatedAll = isRelatedAll;
     }
 
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public Integer getApplyObject() {
+        return applyObject;
+    }
+
+    public void setApplyObject(Integer applyObject) {
+        this.applyObject = applyObject;
+    }
+
+    public Integer getApplyGoods() {
+        return applyGoods;
+    }
+
+    public void setApplyGoods(Integer applyGoods) {
+        this.applyGoods = applyGoods;
+    }
+
+    public Integer getValidDays() {
+        return validDays;
+    }
+
+    public void setValidDays(Integer validDays) {
+        this.validDays = validDays;
+    }
+
+   
+
+    public List<CouponCommodityCategory> getCouponCommodityCategories() {
+        return couponCommodityCategories;
+    }
+
+    public void setCouponCommodityCategories(List<CouponCommodityCategory> couponCommodityCategories) {
+        this.couponCommodityCategories = couponCommodityCategories;
+    }
 
     @Override
     public String toString() {
@@ -899,6 +991,21 @@ public class Coupon implements Serializable {
                 .append("visitedCount", visitedCount)
                 .append("isGeneral", isGeneral)
                 .append("isRelatedAll", isRelatedAll)
+                .append("type", type)
+                .append("applyObject", applyObject)
+                .append("applyGoods", applyGoods)
+                .append("validDays", validDays)
+                .append("listCouponVouchers", listCouponVouchers)
+                .append("couponCommodityCategories", couponCommodityCategories)
+                .append("couponBrands", couponBrands)
                 .toString();
     }
+
+	public List<CouponVoucher> getListCouponVouchers() {
+		return listCouponVouchers;
+	}
+
+	public void setListCouponVouchers(List<CouponVoucher> listCouponVouchers) {
+		this.listCouponVouchers = listCouponVouchers;
+	}
 }

@@ -67,8 +67,6 @@ public class SystemConfig implements Serializable{
 
 
 
-
-
     public static void main(String args[]){
 
         SystemConfig systemConfig = new SystemConfig();

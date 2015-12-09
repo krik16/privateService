@@ -1,3 +1,4 @@
+/*
 package com.rongyi.easy.entity;
 
 import java.io.Serializable;
@@ -9,11 +10,12 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Property;
 
-/**
+*
  * 类UserAddressPojo.java的实现描述：TODO 类实现描述
  * 
  * @author Lc 2015年2月12日 下午2:12:03
- */
+
+
 @Entity(value = "user_address", noClassnameStored = true)
 public class UserAddressEntity implements Serializable {
 
@@ -22,58 +24,72 @@ public class UserAddressEntity implements Serializable {
 	@Id
 	private ObjectId id;
 
-	/** 默认地址标识 1为默认，2为非默认 */
+* 默认地址标识 1为默认，2为非默认
+
 	@Property("default_status")
 	private String defaultStatus;
 
-	/** 最新更新时间 */
+* 最新更新时间
+
 	@Property("updated_at")
 	private Date updatedAt;
 
-	/** 创建时间 */
+* 创建时间
+
 	@Property("create_at")
 	private Date createAt;
-	/** 收货人电话 */
+* 收货人电话
+
 	@Property("phone")
 	private String phone;
 
-	/** 收货人姓名 */
+* 收货人姓名
+
 	@Property("consignee")
 	private String consignee;
 
-	/** 详细地址 */
+* 详细地址
+
 	@Property("detail_address")
 	private String detailAddress;
 
-	/** 省ID */
+* 省ID
+
 	@Property("province_id")
 	private ObjectId provinceId;
 
-	/** 市ID */
+* 市ID
+
 	@Property("city_id")
 	private ObjectId cityId;
 
-	/** 区ID */
+* 区ID
+
 	@Property("district_id")
 	private ObjectId districtId;
 
-	/** 省名称 */
+* 省名称
+
 	@Property("province_name")
 	private String provinceName;
 
-	/** 市名称 */
+* 市名称
+
 	@Property("city_name")
 	private String cityName;
 
-	/** 区名称 */
+* 区名称
+
 	@Property("district_name")
 	private String districtName;
 
-	/** 用户ID */
+* 用户ID
+
 	@Property("user_id")
 	private ObjectId userId;
 
-	/**判断是否删除 0是 1否*/
+*判断是否删除 0是 1否
+
 	@Property("is_delete")
 	private String isDelete;
 
@@ -198,3 +214,4 @@ public class UserAddressEntity implements Serializable {
 	}
 
 }
+*/

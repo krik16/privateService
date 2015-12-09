@@ -11,5 +11,7 @@ public interface StockService {
 	public int getStock(String commodityId, String specId);
 
 	public boolean increaseSold(String commodityId, int num);
+	
+	public boolean increaseStockForBusinessBackground(String commodityId,String specId,int total,int stock);
 
 }

@@ -142,12 +142,12 @@ public class MessageManger {
                 messageChannel = propertyConfigurer.getProperty(Constants.Common.MESSAGE_CHANNEL).toString();
             }
             //  messageChannel = "3";
-            if("1".equals(messageChannel)) {
-                result = sendYunSmsMessage(phone, message);
-            }else if("2".equals(messageChannel)) {
-                result = sendBaiwutongSmsMessage(phone, message);
-            }else if("3".equals(messageChannel)) {
-                //建周需要自己添加签名
+                if("1".equals(messageChannel)) {
+                    result = sendYunSmsMessage(phone, message);
+                }else if("2".equals(messageChannel)) {
+                    result = sendBaiwutongSmsMessage(phone, message);
+                }else if("3".equals(messageChannel)) {
+                    //建周需要自己添加签名
                 message+="【容易网】";
                 result = sendJianZhouSmsMessage(phone, message);
             }

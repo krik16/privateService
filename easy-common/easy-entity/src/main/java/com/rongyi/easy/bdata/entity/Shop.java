@@ -58,7 +58,7 @@ public class Shop implements Serializable {
 	private List<ObjectId> parent_ids;
 	private String filiale_id;
     private List<ObjectId> custom_category_ids;
-
+    private String qrcode_pic;
     public ObjectId getId() {
         return id;
     }
@@ -378,4 +378,13 @@ public class Shop implements Serializable {
     public void setCustom_category_ids(List<ObjectId> custom_category_ids) {
         this.custom_category_ids = custom_category_ids;
     }
+
+	public String getQrcode_pic() {
+		return qrcode_pic;
+	}
+
+	public void setQrcode_pic(String qrcode_pic) {
+		this.qrcode_pic = qrcode_pic;
+	}
+    
 }

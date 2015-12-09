@@ -96,6 +96,14 @@ public interface IUserInfoService {
 	UserInfo getUserByMap(Map<String, Object> paramsMap);
 	
 	/**
+	 * 得到用户的所有权限值
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+	public List<String> getAuthsValueByUserId(Integer userId) throws Exception;
+	
+	/**
 	 * 得到用户的特殊权限
 	 * @param userId
 	 * @return

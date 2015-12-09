@@ -75,6 +75,18 @@ public class OrderFormEntity implements Serializable{
 
     /** 买家备注 */
     private String buyerComment;
+
+    /**促销券抵扣金额*/
+    private BigDecimal couponDiscount;
+
+    /**促销券来源 1：平台 2：商家*/
+    private Integer couponSource;
+
+    /**促销券类型 1：满减 2：立减*/
+    private Integer couponType;
+
+    /**积分优惠金额*/
+    private BigDecimal scoreDiscount;
     
     private JSONObject jsonDiscountInfo;
     
@@ -82,9 +94,13 @@ public class OrderFormEntity implements Serializable{
     private Integer guideType;
     /** 是否已提醒买家付款 0 未提醒 1 已提醒**/
     private Byte isAlert;
+    //促销券能使用的最小订单金额
+    private BigDecimal couponRequirement;
 
     /**订单总金额（不包括积分优惠）**/
     private BigDecimal totalAmountWithoutScoreDiscount = null;
+    //设备类型
+    private Integer devType;
 
 	public Byte getIsAlert() {
 		return isAlert;
@@ -486,6 +502,54 @@ public class OrderFormEntity implements Serializable{
         this.buyerComment = buyerComment;
     }
 
+    public BigDecimal getCouponDiscount() {
+        return couponDiscount;
+    }
+
+    public void setCouponDiscount(BigDecimal couponDiscount) {
+        this.couponDiscount = couponDiscount;
+    }
+
+    public Integer getCouponSource() {
+        return couponSource;
+    }
+
+    public void setCouponSource(Integer couponSource) {
+        this.couponSource = couponSource;
+    }
+
+    public Integer getCouponType() {
+        return couponType;
+    }
+
+    public void setCouponType(Integer couponType) {
+        this.couponType = couponType;
+    }
+
+    public BigDecimal getCouponRequirement() {
+        return couponRequirement;
+    }
+
+    public void setCouponRequirement(BigDecimal couponRequirement) {
+        this.couponRequirement = couponRequirement;
+    }
+
+    public BigDecimal getScoreDiscount() {
+        return scoreDiscount;
+    }
+
+    public void setScoreDiscount(BigDecimal scoreDiscount) {
+        this.scoreDiscount = scoreDiscount;
+    }
+
+    public Integer getDevType() {
+        return devType;
+    }
+
+    public void setDevType(Integer devType) {
+        this.devType = devType;
+    }
+
     @Override
     public String toString() {
         return "OrderFormEntity{" +
@@ -516,6 +580,12 @@ public class OrderFormEntity implements Serializable{
                 ", guideType=" + guideType +
                 ", isAlert=" + isAlert +
                 ", totalAmountWithoutScoreDiscount=" + totalAmountWithoutScoreDiscount +
+                ", couponDiscount=" + couponDiscount +
+                ", couponSource=" + couponSource +
+                ", couponRequirement=" + couponRequirement +
+                ", scoreDiscount=" + scoreDiscount +
+                ", devType=" + devType +
+                ", couponType=" + couponType +
                 '}';
     }
 }

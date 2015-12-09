@@ -35,6 +35,7 @@ public enum CodeEnum {
     ERROR_UPGRADENICKNAME("-1106","已有相同昵称存在,请更换"),
     ERROR_TELEPHONEEXISIT("-1109","电话号码不能为空"),
     ERROR_PHONEEXISIT("-1110","手机号码已存在"),
+    ERROR_USERSTATUS("-1111","400-040-8989"),
     
     /**扫码错误信息*/
     ERROR_RECEIVECOUPONMSG("-1125","亲，手慢了，奖品被抢光了……"),

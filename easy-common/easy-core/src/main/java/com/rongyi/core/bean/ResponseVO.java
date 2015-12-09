@@ -44,6 +44,7 @@ public class ResponseVO implements java.io.Serializable {
     	
     }
 
+
     /**
      * 成功返回值对象
      *

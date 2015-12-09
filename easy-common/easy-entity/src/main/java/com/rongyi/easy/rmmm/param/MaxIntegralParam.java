@@ -16,6 +16,8 @@ public class MaxIntegralParam implements Serializable {
 
 	private Double expressFee;
 
+	private Double platformRebateAmount;
+
 	private List<OrderListParam> orderList;
 
 	public Double getOrderPrice() {
@@ -42,12 +44,21 @@ public class MaxIntegralParam implements Serializable {
 		this.orderList = orderList;
 	}
 
+	public Double getPlatformRebateAmount() {
+		return platformRebateAmount;
+	}
+
+	public void setPlatformRebateAmount(Double platformRebateAmount) {
+		this.platformRebateAmount = platformRebateAmount;
+	}
+
 	@Override
 	public String toString() {
 		return "MaxIntegralParam{" +
 				"orderPrice=" + orderPrice +
 				", expressFee=" + expressFee +
 				", orderList=" + orderList +
+				", platformRebateAmount=orderList" + platformRebateAmount +
 				'}';
 	}
 }

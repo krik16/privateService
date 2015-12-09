@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.rongyi.easy.mcmc.Commodity;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class CommodityBuyerVO implements Serializable{
 
@@ -25,7 +27,17 @@ public class CommodityBuyerVO implements Serializable{
 	
 	private String bullId;//创建人
 	
+	private Double distance = 0.0; //距离
 	
+	
+	public Double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(Double distance) {
+		this.distance = distance;
+	}
+
 	public String getBullId() {
 		return bullId;
 	}
@@ -138,6 +150,9 @@ public class CommodityBuyerVO implements Serializable{
 			this.shopMid = commodity.getShopMid();
 		}
 		this.commodityOPOfLCP = commodity.getoPriceOfLowestCPrice();
+		if (StringUtils.isBlank(this.commodityOPOfLCP)) {
+			this.commodityOPOfLCP = "0.0";
+		}
 		this.commodityCode = commodity.getCode();
 		this.commodityStatus = commodity.getStatus();
 		this.commodityStock = String.valueOf(commodity.getStock());
@@ -236,5 +251,33 @@ public class CommodityBuyerVO implements Serializable{
 	public void setSupportCourierDeliver(boolean supportCourierDeliver) {
 		this.supportCourierDeliver = supportCourierDeliver;
 	}
-	
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append("shopName", shopName)
+				.append("commodityPicList", commodityPicList)
+				.append("commodityId", commodityId)
+				.append("commodityCode", commodityCode)
+				.append("commodityStock", commodityStock)
+				.append("commodityStatus", commodityStatus)
+				.append("commodityType", commodityType)
+				.append("supportCourierDeliver", supportCourierDeliver)
+				.append("shopIM", shopIM)
+				.append("bullId", bullId)
+				.append("distance", distance)
+				.append("commodityOPriceMax", commodityOPriceMax)
+				.append("commodityOPriceMin", commodityOPriceMin)
+				.append("commodityCPriceMax", commodityCPriceMax)
+				.append("commodityCPriceMin", commodityCPriceMin)
+				.append("commodityOPOfLCP", commodityOPOfLCP)
+				.append("commodityBrandName", commodityBrandName)
+				.append("commodityPostage", commodityPostage)
+				.append("commodityDescription", commodityDescription)
+				.append("commodityName", commodityName)
+				.append("shopId", shopId)
+				.append("shopMid", shopMid)
+				.append("isCollected", isCollected)
+				.toString();
+	}
 }

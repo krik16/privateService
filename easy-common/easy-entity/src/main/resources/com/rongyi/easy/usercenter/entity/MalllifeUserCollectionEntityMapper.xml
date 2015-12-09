@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongyi.easy.usercenter.entity.MalllifeUserCollectionEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.rongyi.easy.usercenter.entity.MalllifeUserCollectionEntity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="collection_id" property="collectionId" jdbcType="VARCHAR" />
+    <result column="is_disable" property="isDisable" jdbcType="TINYINT" />
+    <result column="collection_type" property="collectionType" jdbcType="TINYINT" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="update_at" property="updateAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, collection_id, is_disable, collection_type, create_at, update_at
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from malllife_user_collection
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from malllife_user_collection
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rongyi.easy.usercenter.entity.MalllifeUserCollectionEntity" >
+    insert into malllife_user_collection (id, user_id, collection_id, 
+      is_disable, collection_type, create_at, 
+      update_at)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{collectionId,jdbcType=VARCHAR}, 
+      #{isDisable,jdbcType=TINYINT}, #{collectionType,jdbcType=TINYINT}, #{createAt,jdbcType=TIMESTAMP}, 
+      #{updateAt,jdbcType=TIMESTAMP})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.rongyi.easy.usercenter.entity.MalllifeUserCollectionEntity" >
+    update malllife_user_collection
+    set user_id = #{userId,jdbcType=VARCHAR},
+      collection_id = #{collectionId,jdbcType=VARCHAR},
+      is_disable = #{isDisable,jdbcType=TINYINT},
+      collection_type = #{collectionType,jdbcType=TINYINT},
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      update_at = #{updateAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

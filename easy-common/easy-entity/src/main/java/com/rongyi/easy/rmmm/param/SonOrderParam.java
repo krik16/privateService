@@ -6,9 +6,17 @@ public class SonOrderParam implements Serializable{
 	private String specId;// 我是规格编号
 	private String num;// 下单数量
 	private String commodityId;// 我是商品编号
-	private String type;// 0: 全场抵扣券 1: 商品抵扣券
 	private String couponCode;// 卡券码
+	private String type;//
 	private String orderDetailModelId;// 子模板id
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	public String getSpecId() {
 		return specId;
@@ -34,14 +42,6 @@ public class SonOrderParam implements Serializable{
 		this.commodityId = commodityId;
 	}
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
 	public String getCouponCode() {
 		return couponCode;
 	}
@@ -63,7 +63,6 @@ public class SonOrderParam implements Serializable{
 				"specId='" + specId + '\'' +
 				", num='" + num + '\'' +
 				", commodityId='" + commodityId + '\'' +
-				", type='" + type + '\'' +
 				", couponCode='" + couponCode + '\'' +
 				", orderDetailModelId='" + orderDetailModelId + '\'' +
 				'}';
