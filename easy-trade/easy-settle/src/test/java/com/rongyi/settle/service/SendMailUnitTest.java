@@ -20,7 +20,7 @@ public class SendMailUnitTest extends BaseTest{
 //    @Autowired
 //    private  PaymentStatementMapper paymentStatementMapper;
 
-    @Test
+//    @Test
     public void sendEmailTest(){
 //        PaymentStatementDto paymentStatementDto = paymentStatementMapper.searchDtoById(1);
         PaymentStatementDto paymentStatementDto =new PaymentStatementDto();

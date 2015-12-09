@@ -332,6 +332,11 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 		return shopConfig;
 	}
 
+	@Override
+	public boolean validateNeedPay(String shopId, String userId, Integer guideType) {
+		return false;
+	}
+
 	/**
 	 * 判断对账配置是否存在
 	 * @param paramsMap

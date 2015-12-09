@@ -139,4 +139,15 @@ public interface StatementConfigService {
 	Map<String, Object> validateIsExist(byte cooperateType,byte bussinessType,String bussinessId,byte status,Date effectStartTime,Date  effectEndTime, Byte lintType, Map linkId, Byte linkShopOp) throws Exception;
 
 	List<UserInfoVo> getAccountInfoByParam(Integer isOneself, Integer type, Integer guideType, String id);
+
+	/**
+	 * @Description:验证是否需要打款到买家虚拟账号
+	 * @param:shopId 店铺ID
+	 * @param:userId 用户ID
+	 * @param:gradeType 用户角色(1:导购,2:买手)
+	 * @return true	打款，false 不打款
+	 * @Author:  柯军
+	 **/
+
+	boolean validateNeedPay(String shopId,String userId,Integer gradeType);
 }
