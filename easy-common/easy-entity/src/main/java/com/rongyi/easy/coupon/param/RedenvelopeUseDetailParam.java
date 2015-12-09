@@ -194,9 +194,10 @@ public class RedenvelopeUseDetailParam implements Serializable{
     public RedenvelopeUseDetailParam() {
     }
 
-    public RedenvelopeUseDetailParam(String couponId, Integer currentPage) {
+    public RedenvelopeUseDetailParam(String couponId, Integer currentPage,Integer pageSize) {
         this.couponId = couponId;
         this.currentPage = currentPage;
+        this.pageSize=pageSize;
     }
 
     public Date getStartDate() {
