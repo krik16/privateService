@@ -349,7 +349,7 @@
                 and sc.real_user_list like concat('%', #{userId}, '%')
             </if>
             <if test="nowTime!=null">
-                and #{noewTime} > pbc.effect_start_time and pbc.effect_end_time > #{nowTime}
+                and #{nowTime} > pbc.effect_start_time and pbc.effect_end_time > #{nowTime}
             </if>
         </where>
     </select>

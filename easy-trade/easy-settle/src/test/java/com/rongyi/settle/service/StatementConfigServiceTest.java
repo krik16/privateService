@@ -14,10 +14,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.rss.settle.GoodPayService;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Description;
 import org.springframework.test.annotation.Rollback;
-import org.testng.annotations.Test;
 
 import com.rongyi.easy.settle.entity.StatementConfig;
 import com.rongyi.easy.settle.vo.StatementConfigVO;
@@ -34,6 +35,10 @@ public class StatementConfigServiceTest extends BaseTest{
 
 	@Autowired
 	StatementConfigService statementConfigService;
+
+	@Autowired
+	GoodPayService goodPayService;
+
 	
 //	@Test
 	@Rollback(false)
@@ -88,7 +93,7 @@ public class StatementConfigServiceTest extends BaseTest{
 		map.put("bussinessType", "0");
 		map.put("createAtstart", "2015-09-18");
 		List<StatementConfigVO> list = statementConfigService.selectPageList(map, 0,15);
-		System.err.println("list size="+list.size());
+		System.err.println("list size=" + list.size());
 	}
 	
 //	@Test
@@ -98,7 +103,12 @@ public class StatementConfigServiceTest extends BaseTest{
 		Integer count = statementConfigService.selectPageListCount(map);
 		System.err.println("count="+count);
 	}
-	
+
+	@Test
+	public void validateNeedPayTest(){
+		System.err.println(goodPayService.validateNeedPay("536c46a821232f447e0005af", "169", 1));
+	}
+
 	public static void main(String[] args) {
 				BigDecimal bi =new BigDecimal(11.5 + "").divide(new BigDecimal(100)).setScale(2, BigDecimal.ROUND_HALF_UP);
 				System.err.println(bi.doubleValue());
