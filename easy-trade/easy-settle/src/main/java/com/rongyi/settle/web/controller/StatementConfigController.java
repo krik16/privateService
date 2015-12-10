@@ -181,7 +181,10 @@ public class StatementConfigController extends BaseController{
 			if (map.containsKey("linkId")) {
 				linkMap = JsonUtil.getMapFromJson(map.get("linkId").toString());
 			}
-			Map<String,Object> checkMap = statementConfigService.validateIsExist(statementConfig.getCooperateType(), statementConfig.getBussinessType(), statementConfig.getBussinessId(), ConstantEnum.CONFIG_STATUS_1.getCodeByte()
+			List<Byte> statuses = new ArrayList<>();
+			statuses.add(ConstantEnum.CONFIG_STATUS_1.getCodeByte());
+			statuses.add(ConstantEnum.CONFIG_STATUS_0.getCodeByte());
+			Map<String,Object> checkMap = statementConfigService.validateIsExist(statementConfig.getCooperateType(), statementConfig.getBussinessType(), statementConfig.getBussinessId(), statuses
 					, statementConfig.getEffectStartTime(), statementConfig.getEffectEndTime(), statementConfig.getLinkType(), linkMap, statementConfig.getLinkShopOp());
 			LOGGER.info("=========================== checkMap"+checkMap);
 			boolean checkResult = (boolean) checkMap.get("result");

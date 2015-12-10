@@ -174,7 +174,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 	}
 
 	@Override
-	public Map<String, Object> validateIsExist(byte cooperateType, byte bussinessType, String bussinessId, byte status, Date effectStartTime, Date effectEndTime, Byte lintType, Map linkMap, Byte linkShopOp ) throws Exception {
+	public Map<String, Object> validateIsExist(byte cooperateType, byte bussinessType, String bussinessId, List<Byte> statuses, Date effectStartTime, Date effectEndTime, Byte lintType, Map linkMap, Byte linkShopOp ) throws Exception {
 		boolean result = false;
 		int isOneself;
 		linkShopOp = linkShopOp==null?0:linkShopOp;
@@ -184,7 +184,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 		map.put("cooperateType", cooperateType);
 		map.put("bussinessType", bussinessType);
 		map.put("bussinessId", bussinessId);
-		map.put("status", status);
+		map.put("statuses", statuses);
 		map.put("effectStartTime", effectStartTime);
 		map.put("effectEndTime", effectEndTime);
 		if (lintType==null){
