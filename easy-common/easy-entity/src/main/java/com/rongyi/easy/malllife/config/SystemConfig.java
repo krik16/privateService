@@ -20,6 +20,8 @@ import java.util.regex.Pattern;
 public class SystemConfig implements Serializable{
 
 
+    //
+
     /**  配置网盘路径  **/
     private static final  String UPAIYUN_ADDRESS="http://rongyi.b0.upaiyun.com/";  //整路径
 

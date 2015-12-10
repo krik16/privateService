@@ -66,6 +66,8 @@ public class UserinfoVO implements Serializable{
 
 	private Integer isDisabled=0; //0 默认,禁用 1
 
+	private String telPhone;//客服电话
+
 	
 	public Integer getIfAttention() {
 		return ifAttention;
@@ -257,5 +259,13 @@ public class UserinfoVO implements Serializable{
 
 	public void setIsDisabled(Integer isDisabled) {
 		this.isDisabled = isDisabled;
+	}
+
+	public String getTelPhone() {
+		return telPhone;
+	}
+
+	public void setTelPhone(String telPhone) {
+		this.telPhone = telPhone;
 	}
 }

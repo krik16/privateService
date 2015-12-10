@@ -650,7 +650,7 @@ public class Coupon implements Serializable {
     }
 
     public Integer getPublishStatus() {
-        if (Integer.valueOf(CouponEnum.PASS.getValue()).equals(status)) {
+        if (publishStartAt != null && publishEndAt != null && Integer.valueOf(CouponEnum.PASS.getValue()).equals(status)) {
             if (!isOffStock && new Date().before(publishStartAt)) {
                 return CouponEnum.UNPUBLISH.getValue();
             } else if (!isOffStock && new Date().after(publishStartAt) && new Date().before(publishEndAt)) {
