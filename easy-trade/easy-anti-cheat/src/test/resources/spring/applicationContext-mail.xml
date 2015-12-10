@@ -35,6 +35,6 @@
 
 	<bean id="templateMessage" class="org.springframework.mail.SimpleMailMessage">
 		<!-- 发送方用户名 -->
-		<property name="from" value="kejun@rongyi.com" />
+		<property name="from" value="${SEND_ADDRESS}" />
 	</bean>
 </beans>

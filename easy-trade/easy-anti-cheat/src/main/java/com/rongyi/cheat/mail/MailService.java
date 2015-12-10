@@ -42,7 +42,7 @@ public class MailService {
 		toAdrs.add("kejun@rongyi.com");
 		List<String> filenames = new ArrayList<String>();
 		// filenames.add("d://my.log");
-		this.sendAttachmentEmail("测试邮件", "kejun@rongyi.com", toAdrs, "发送于： " + new Date(), filenames);
+		this.sendAttachmentEmail("测试邮件", "cwjs@rongyi.com", toAdrs, "发送于： " + new Date(), filenames);
 	}
 
 	// 发送带附件的邮件
