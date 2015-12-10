@@ -409,7 +409,7 @@
         where pbc.id=
         #{id,jdbcType=INTEGER}
     </select>
-    <select id="selectStatementConfigByMap" parameterType="map" resultType="BaseResultMap">
+    <select id="selectStatementConfigByMap" parameterType="map" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"/>
         from payment_bill_config
         <where>
