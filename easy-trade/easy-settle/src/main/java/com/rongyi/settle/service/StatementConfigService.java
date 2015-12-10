@@ -27,14 +27,7 @@ import com.rongyi.settle.web.controller.vo.UserInfoVo;
 
 public interface StatementConfigService {
 
-	/**
-	 * 判断账号打款配置
-	 * @param id : 关联id
-	 * @param userAccount ： 账号
-	 * @return
-	 */
-	boolean checkUserAccountConfig(String id, String userAccount) throws Exception;
-	
+
 	/**	
 	 * @Description: 分页查询
 	 * @param map

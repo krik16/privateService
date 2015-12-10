@@ -338,6 +338,12 @@
             <if test="shopId!=null">
                 and sc.shop_id=#{shopId}
             </if>
+            <if test="userId!=null">
+                and sc.real_userList like concat('%', #{userId}, '%')
+            </if>
+            <if test="nowTime!=null">
+                and #{noewTime} > pbc.effect_start_time and pbc.effect_end_time > #{nowTime}
+            </if>
         </where>
     </select>
 

@@ -18,6 +18,7 @@ import com.rongyi.rss.bsoms.IUserInfoService;
 import com.rongyi.rss.roa.ROAMallService;
 import com.rongyi.rss.roa.ROAShopService;
 import com.rongyi.settle.constants.CodeEnum;
+import com.rongyi.settle.constants.ConstantEnum;
 import com.rongyi.settle.service.ConfigShopService;
 import com.rongyi.settle.web.controller.vo.UserInfoVo;
 import org.apache.commons.collections.CollectionUtils;
@@ -69,22 +70,6 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 
 	@Autowired
 	private ConfigShopService configShopService;
-	/**
-	 * 判断账号打款配置
-	 *
-	 * @param id          : 关联id
-	 * @param userAccount ： 账号
-	 * @return
-	 */
-	@Override
-	public boolean checkUserAccountConfig(String id, String userAccount) throws Exception {
-		boolean result = false;
-		ShopVO shopVO = roaShopService.getShopVOById(id);
-		if (shopVO!=null){//判断所有
-			result = true;
-		}
-		return result;
-	}
 
 	@Override
 	public List<StatementConfigVO> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
@@ -302,10 +287,10 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 			if (CollectionUtils.isNotEmpty(userInfoVos)){
 				for (UserInfoVo userInfoVo : userInfoVos){
 					if (StringUtils.isBlank(accounts)){
-						accounts += userInfoVo.getUserAccount();
+						accounts += userInfoVo.getId();
 					}
 					else {
-						accounts += ", "+ userInfoVo.getUserAccount();
+						accounts += ", "+ userInfoVo.getId();
 					}
 				}
 				shopConfig = new ConfigShop();
@@ -350,7 +335,13 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 
 	@Override
 	public boolean validateNeedPay(String shopId, String userId, Integer guideType) {
-		return false;
+		Map<String, Object> map = new HashMap<>();
+		map.put("shopId", shopId);
+		map.put("status", ConstantEnum.CONFIG_STATUS_1.getCodeInt());
+		map.put("nowTime", new Date());
+		map.put("userId", userId);
+		map.put("linkRole", guideType);//
+		return checkConfigExist(map);
 	}
 
 	/**
