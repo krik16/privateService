@@ -24,6 +24,7 @@ public class BrandEntity implements Serializable{
     private List<ObjectId> category_ids;
     private Integer valid;
     private String key_tags;
+    private String merlog_pic; //商家后台Logo图片
 
     public String getKey_tags() {
 		return key_tags;
@@ -117,4 +118,12 @@ public class BrandEntity implements Serializable{
     public void setValid(Integer valid) {
         this.valid = valid;
     }
+
+	public String getMerlog_pic() {
+		return merlog_pic;
+	}
+
+	public void setMerlog_pic(String merlog_pic) {
+		this.merlog_pic = merlog_pic;
+	}
 }

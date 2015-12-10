@@ -34,6 +34,11 @@ public class MerchantRoleVO implements Serializable{
 	private String stopReason;
 	private Date stopTime;
 	private Integer createSource;
+	//分公司的MongoId
+	private String filialeId;
+	//店铺的MongoId
+	private String shopId;
+	
 	public Integer getType() {
 		return type;
 	}
@@ -147,6 +152,18 @@ public class MerchantRoleVO implements Serializable{
 	}
 	public void setCreateSource(Integer createSource) {
 		this.createSource = createSource;
+	}
+	public String getFilialeId() {
+		return filialeId;
+	}
+	public void setFilialeId(String filialeId) {
+		this.filialeId = filialeId;
+	}
+	public String getShopId() {
+		return shopId;
+	}
+	public void setShopId(String shopId) {
+		this.shopId = shopId;
 	}
 	
 }

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.bsoms.entity.BAuthorities;
+import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 import com.rongyi.easy.bsoms.entity.UserInfo;
 import com.rongyi.easy.bsoms.vo.BusinessAccountVO;
 import com.rongyi.easy.mallshop.MallShopException;
@@ -130,7 +131,7 @@ public interface IUserInfoService {
 
 	/**
 	 * 验证用户信息是否已存在
-	 * @param userInfo
+	 * @param paramsMap
 	 * @return
 	 * @throws Exception
 	 */
@@ -142,6 +143,13 @@ public interface IUserInfoService {
 	 * @return
 	 */
 	public BusinessAccountVO getBuyerDetailById(Integer id);
+	
+	/**
+	 * 根据角色ID查询关联账号
+	 * @return
+	 */
+	public List<SessionUserInfo> getRelationUserListByRoleId(Map<String, Object> paramMap);
+	
 
 	/**
 	 * 通过关联id（shopId,mallId,filialeId,brandId,shopId...）条件查询商家用户账户
