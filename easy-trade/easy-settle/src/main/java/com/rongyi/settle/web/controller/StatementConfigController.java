@@ -185,6 +185,9 @@ public class StatementConfigController extends BaseController{
 					, statementConfig.getEffectStartTime(), statementConfig.getEffectEndTime(), statementConfig.getLinkType(), linkMap, statementConfig.getLinkShopOp());
 			boolean checkResult = (boolean) checkMap.get("result");
 			if(checkResult){
+				if (checkMap.containsKey("errorNo")){
+					return ResponseData.failure(Integer.valueOf(checkMap.get("errorNo").toString()), checkMap.get("errorMsg").toString());
+				}
 				return ResponseData.failure(CodeEnum.FIAL_CONFIG_BIZ_EXIST.getCodeInt(), CodeEnum.FIAL_CONFIG_BIZ_EXIST.getValueStr());
 			}
 			List<ConfigShop> shopConfigs = (List<ConfigShop>) checkMap.get("shopConfigs");

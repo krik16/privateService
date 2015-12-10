@@ -17,6 +17,7 @@ import com.rongyi.easy.settle.entity.ConfigShop;
 import com.rongyi.rss.bsoms.IUserInfoService;
 import com.rongyi.rss.roa.ROAMallService;
 import com.rongyi.rss.roa.ROAShopService;
+import com.rongyi.settle.constants.CodeEnum;
 import com.rongyi.settle.service.ConfigShopService;
 import com.rongyi.settle.web.controller.vo.UserInfoVo;
 import org.apache.commons.collections.CollectionUtils;
@@ -212,7 +213,13 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 						return ReMap;
 					}
 					isOneself = 1;
-					convertToShopConfig(isOneself, bussinessId, bussinessType,linkShopOp, null, shopConfigs);
+					ConfigShop configShop = convertToShopConfig(isOneself, bussinessId, bussinessType,linkShopOp, null, shopConfigs);
+					if (configShop==null){
+						ReMap.put("result", true);
+						ReMap.put("errorMsg", CodeEnum.FIAL_CONFIG_NO_ACCOUNT.getValueStr());
+						ReMap.put("errorNo", CodeEnum.FIAL_CONFIG_NO_ACCOUNT.getCodeInt());
+						return ReMap;
+					}
 				}
 				//2、全部店铺
 				List<ShopVO> shopVOs = getShopIdByParam(bussinessType, bussinessId);
@@ -236,8 +243,13 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 						return ReMap;
 					}
 					isOneself = 1;
-					convertToShopConfig(isOneself, bussinessId, bussinessType,linkShopOp, null, shopConfigs);
-
+					ConfigShop configShop = convertToShopConfig(isOneself, bussinessId, bussinessType,linkShopOp, null, shopConfigs);
+					if (configShop==null){
+						ReMap.put("result", true);
+						ReMap.put("errorMsg", CodeEnum.FIAL_CONFIG_NO_ACCOUNT.getValueStr());
+						ReMap.put("errorNo", CodeEnum.FIAL_CONFIG_NO_ACCOUNT.getCodeInt());
+						return ReMap;
+					}
 					if (linkMap!=null) {
 						Set<String> shopIds = linkMap.keySet();
 						for (String shopId : shopIds){
@@ -287,7 +299,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 		if (isOneself==1){
 			//自身
 			List<UserInfoVo> userInfoVos =  getAccountInfoByParam(isOneself, Integer.valueOf(businessType), null, id);
-			if (CollectionUtils.isEmpty(userInfoVos)){
+			if (CollectionUtils.isNotEmpty(userInfoVos)){
 				for (UserInfoVo userInfoVo : userInfoVos){
 					if (StringUtils.isBlank(accounts)){
 						accounts += userInfoVo.getUserAccount();
@@ -299,6 +311,8 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 				shopConfig = new ConfigShop();
 				shopConfig.setUserList(accounts);
 				shopConfig.setRealUserList(accounts);
+			}else {
+				logger.info("================== 查自身 没有账户");
 			}
 		}else if (isOneself==0){
 			if (linkShopOp.intValue()==0){
@@ -324,6 +338,8 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 					String realUser = allUser.toString();
 					shopConfig.setRealUserList(realUser.substring(1,realUser.length()-1));
 				}
+			}else {
+				logger.info(" linkShopOp is error:" +linkShopOp);
 			}
 		}
 		if (shopConfig!=null){
