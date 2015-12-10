@@ -143,4 +143,6 @@ public interface StatementConfigService {
 	 **/
 
 	boolean validateNeedPay(String shopId,String userId,Integer gradeType);
+
+	List<StatementConfig> checkeffectStart(Map<String, Object> paramsMap);
 }

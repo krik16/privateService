@@ -329,7 +329,7 @@
                 and pbc.biz_id = #{bussinessId}
             </if>
             <if test="status!=null">
-                and pbc.status == #{status}
+                and pbc.status = #{status}
             </if>
             <if test="statuses!=null">
                 and pbc.status in

@@ -313,6 +313,9 @@ public class StatementConfigController extends BaseController{
 			for (String id : idStr.split(",")) {
 				ids.add(Integer.valueOf(id.trim()));
 			}
+			Map<String, Object> paramsMap = new HashMap<>();
+			paramsMap.put("ids", ids);
+			List<StatementConfig> statementConfigs = statementConfigService.checkeffectStart(paramsMap);
 			if (statementConfigService.updatePaymentStatusByIds(ids, status, desc, userId)) {
 				result = ResponseData.success();
 			} else {

@@ -190,7 +190,8 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 		if (lintType==null){
 			result = true;
 		}else {
-			if (lintType==0){
+			if (lintType==0)
+			{
 				//全部: 1、验自身
 				if (bussinessType==1 || bussinessType==4)
 				{//商场、集团
@@ -222,7 +223,8 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 					}
 				}
 			}
-			else if (lintType==1){
+			else if (lintType==1)
+			{
 				//自身
 				if (bussinessType==1 || bussinessType==4){//商场、集团
 					if (checkConfigExist(map)) {
@@ -256,7 +258,8 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 					return ReMap;
 				}
 			}
-			else if (lintType==2){
+			else if (lintType==2)
+			{
 				//部分
 				if (linkMap!=null) {
 					Set<String> shopIds = linkMap.keySet();
@@ -348,6 +351,12 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 		map.put("userId", userId);
 		map.put("linkRole", guideType);//
 		return !checkConfigExist(map);
+	}
+
+	@Override
+	public List<StatementConfig> checkeffectStart(Map<String, Object> paramsMap) {
+
+		return null;
 	}
 
 	/**
