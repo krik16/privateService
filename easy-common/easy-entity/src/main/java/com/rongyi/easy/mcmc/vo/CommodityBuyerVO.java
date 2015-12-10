@@ -172,17 +172,18 @@ public class CommodityBuyerVO implements Serializable{
 		// 商品待上架且上架时间大于当前时间，app商品状态为 待上架
 		//商品上架或待上架，且上架时间小于当前时间，且下架时间大于当前时间，app商品状态为 上架
 		//其他 下架
+		//状态 -1：非现货初始化(直播使用） 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理5待审核 6审核失败
 		if (this.commodityStatus == 3 && (commodity.getRegisterAt() != null && commodity.getRegisterAt().getTime() - new Date().getTime() > 0)) {
 			this.commodityAppStatus = 3;
 		} else if ((commodityStatus == 1 || commodityStatus == 3)
 				&& (commodity.getRegisterAt() != null && commodity.getRegisterAt().getTime() - new Date().getTime() <= 0)
 				&& (commodity.getSoldOutAt() != null && commodity.getSoldOutAt().getTime() - new Date().getTime() > 0)) {
 			this.commodityAppStatus = 1;
-		} else {
+		} else if (commodityAppStatus != 0 && commodityAppStatus != 1 && commodityAppStatus != 3) {
 			this.commodityAppStatus = 0;
+		} else {
+			this.commodityAppStatus = this.commodityStatus;
 		}
-
-
 	}
 	
 	public List<String> getCommodityPicList() {
