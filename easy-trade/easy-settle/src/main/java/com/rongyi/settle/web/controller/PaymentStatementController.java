@@ -285,7 +285,7 @@ public class PaymentStatementController extends BaseController {
 	 * @param request
 	 * @param map
 	 * @return
-	 * @Description: 对账单审核（代付款）
+	 * @Description: 对账单审核（待付款）
 	 * @Author: 柯军
 	 * @datetime:2015年9月21日下午3:03:17
 	 **/
@@ -500,7 +500,6 @@ public class PaymentStatementController extends BaseController {
 	}
 
 	/**
-	 * @param map
 	 * @return
 	 * @Description: 对账单明细
 	 * @Author: xgq

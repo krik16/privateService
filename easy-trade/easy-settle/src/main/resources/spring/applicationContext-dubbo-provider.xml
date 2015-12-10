@@ -17,4 +17,8 @@
     <!-- 声明需要暴露的服务接口 -->
     <dubbo:service interface="com.rongyi.rss.settle.PaymentStatementGenerateService" version="${dubbo.version}" ref="paymentStatementGenerateService" retries="0" />
     <bean id="paymentStatementGenerateService" class="com.rongyi.settle.service.impl.PaymentStatementGenerateServiceImpl"/>
+
+    <!--是否打款验证接口-->
+    <dubbo:service interface="com.rongyi.rss.settle.GoodPayService" version="${dubbo.version}" ref="goodPayService" retries="0" />
+    <bean id="goodPayService" class="com.rongyi.settle.service.dubbo.GoodPayServiceImpl"/>
 </beans>  

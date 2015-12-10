@@ -21,19 +21,19 @@ public interface BussinessInfoService {
 	
 	/**	
 	 * @Description: 插入 
-	 * @param bussiness	
+	 * @param bussinessInfo
 	 * @Author:  柯军
 	 * @datetime:2015年9月22日下午4:47:29
 	 **/
-	public abstract void insert(BussinessInfo bussinessInfo);
+	void insert(BussinessInfo bussinessInfo);
 	
 	/**	
 	 * @Description: 更新 
-	 * @param bussiness	
+	 * @param bussinessInfo
 	 * @Author:  柯军
 	 * @datetime:2015年9月22日下午4:48:09
 	 **/
-	public abstract void update(BussinessInfo bussinessInfo);
+	void update(BussinessInfo bussinessInfo);
 	
 	/**	
 	 * @Description: 根据对账配置ID查询 
@@ -42,5 +42,5 @@ public interface BussinessInfoService {
 	 * @Author:  柯军
 	 * @datetime:2015年9月22日下午4:48:50
 	 **/
-	public abstract BussinessInfo selectByConfigId(Integer configId);
+	BussinessInfo selectByConfigId(Integer configId);
 }

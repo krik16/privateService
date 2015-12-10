@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.settle.unit.SendEmailUnit;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -82,6 +83,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 	@Autowired
 	private ROARedisService redisService;
 
+	@Autowired
+	private SendEmailUnit sendEmailUnit;
+
 	@Override
 	public List<PaymentStatementDto> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
 		if (currentPage != null && pageSize != null) {
@@ -151,6 +155,12 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 					}
 
 					saveOperationLog(ids.get(i), status, desc, userId);
+					//检查是否需要发送对账单邮件
+					if(ConstantEnum.STATUS_1.getCodeByte().equals(status) || ConstantEnum.STATUS_3.getCodeByte().equals(status)){
+						PaymentStatementDto paymentStatementDto = paymentStatementMapper.searchDtoById(ids.get(i));
+							sendEmailUnit.sendMail(paymentStatementDto);
+					}
+
 				}
 				paymentStatementMapper.updateStatusByIds(paramsMap);
 				result = true;

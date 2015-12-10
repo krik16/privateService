@@ -13,8 +13,8 @@
         <result column="biz_real_address" property="bussinessRealAddress"
                 jdbcType="VARCHAR"/>
         <result column="link_shop_op" property="linkShopOp" jdbcType="TINYINT"/>
-        <result column="link_user_id" property="linkUserId" jdbcType="TINYINT"/>
-        <result column="link_account" property="linkAccount" jdbcType="VARCHAR"/>
+        <result column="link_role" property="linkRole" jdbcType="TINYINT"/>
+        <result column="link_type" property="linkType" jdbcType="TINYINT"/>
         <result column="count_cycle" property="countCycle" jdbcType="TINYINT"/>
         <result column="cycle_start_time" property="cycleStartTime"
                 jdbcType="TIMESTAMP"/>
@@ -63,12 +63,9 @@
                 jdbcType="VARCHAR"/>
         <result column="contact_qq" property="contactQq" jdbcType="VARCHAR"/>
     </resultMap>
-    <resultMap id="ResultMapWithBLOBs" type="com.rongyi.easy.settle.vo.StatementConfigVO" extends="BaseResultMap">
-        <result column="link_shop_id" property="linkShopId" jdbcType="LONGVARCHAR"/>
-    </resultMap>
     <sql id="Base_Column_List">
         pbc.id, rule_code, cooperate_type, biz_id, biz_type,
-        biz_code, biz_name,biz_real_address,link_shop_id,link_shop_op,link_user_id,link_account, count_cycle,
+        biz_code, biz_name,biz_real_address,link_shop_op,link_role,link_type, count_cycle,
         cycle_start_time,
         cycle_end_time,
         is_loop, verify_type,
@@ -119,7 +116,7 @@
 
 
     </sql>
-    <select id="selectById" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         *
         from
@@ -137,7 +134,7 @@
     <insert id="insert" parameterType="com.rongyi.easy.settle.entity.StatementConfig"
             useGeneratedKeys="true" keyProperty="id">
         insert into payment_bill_config (rule_code, cooperate_type, biz_type,
-        biz_id,biz_code, biz_name,biz_real_address,link_shop_id,link_shop_op,link_user_id,link_account, count_cycle,
+        biz_id,biz_code, biz_name,biz_real_address,link_shop_op,link_role,link_type, count_cycle,
         cycle_start_time,
         cycle_end_time, is_loop,
         verify_type, gen_header_time,
@@ -164,10 +161,9 @@
         #{bussinessCode,jdbcType=VARCHAR},
         #{bussinessName,jdbcType=VARCHAR},
         #{bussinessRealAddress,jdbcType=VARCHAR},
-        #{linkShopId,jdbcType=LONGVARCHAR}
         #{linkShopOp,jdbcType=TINYINT},
-        #{linkUserId,jdbcType=TINYINT},
-        #{linkAccount,jdbcType=VARCHAR},
+        #{linkRole,jdbcType=TINYINT},
+        #{linkType,jdbcType=TINYINT},
         #{countCycle,jdbcType=TINYINT},
         #{cycleStartTime,jdbcType=TIMESTAMP},
         #{cycleEndTime,jdbcType=TIMESTAMP}, #{isLoop,jdbcType=TINYINT},
@@ -217,14 +213,11 @@
             <if test="linkShopOp != null" >
                 link_shop_op = #{linkShopOp,jdbcType=TINYINT},
             </if>
-            <if test="linkUserId != null" >
-                link_user_id = #{linkUserId,jdbcType=TINYINT},
+            <if test="linkRole != null" >
+                link_role = #{linkRole,jdbcType=TINYINT},
             </if>
-            <if test="linkAccount != null" >
-                link_account = #{linkAccount,jdbcType=VARCHAR},
-            </if>
-            <if test="linkShopId != null" >
-                link_shop_id = #{linkShopId,jdbcType=LONGVARCHAR},
+            <if test="linkType != null" >
+                link_type = #{linkType,jdbcType=TINYINT},
             </if>
             <if test="countCycle != null">
                 count_cycle = #{countCycle,jdbcType=TINYINT},
@@ -297,7 +290,7 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
-    <select id="selectPageList" resultMap="ResultMapWithBLOBs"
+    <select id="selectPageList" resultMap="BaseResultMap"
             parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -318,6 +311,49 @@
             #{currentPage,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
         </if>
     </select>
+    <select id="validateIsExist" parameterType="java.util.Map"
+            resultType="java.lang.Integer">
+        select
+        count(1)
+        from  payment_bill_config pbc
+        join biz_info bi on pbc.id=bi.config_id
+        join config_shop  sc on pbc.id=sc.config_id
+        <where>
+            <if test="cooperateType!=null">
+                and pbc.cooperate_type=#{cooperateType}
+            </if>
+            <if test="bussinessType!=null">
+                and pbc.biz_type = #{bussinessType}
+            </if>
+            <if test="bussinessId!=null">
+                and pbc.biz_id = #{bussinessId}
+            </if>
+            <if test="status!=null">
+                and pbc.status = #{status}
+            </if>
+            <if test="statuses!=null">
+                and pbc.status in
+                <foreach collection="statuses" item="item" open="(" separator="," close=")">#{item}</foreach>
+            </if>
+            <if test="linkRole!=null">
+                and pbc.link_role = #{linkRole}
+            </if>
+            <if test="effectEndTime!=null and effectStartTime!=null">
+                and #{effectEndTime} > pbc.effect_start_time
+                and pbc.effect_end_time > #{effectStartTime}
+            </if>
+            <if test="shopId!=null">
+                and sc.shop_id=#{shopId}
+            </if>
+            <if test="userId!=null">
+                and sc.real_user_list like concat('%', #{userId}, '%')
+            </if>
+            <if test="nowTime!=null">
+                and #{nowTime} > pbc.effect_start_time and pbc.effect_end_time > #{nowTime}
+            </if>
+        </where>
+    </select>
+
     <select id="selectPageListCount" parameterType="java.util.Map"
             resultType="java.lang.Integer">
         select
@@ -330,7 +366,7 @@
     </select>
 
     <select id="selectForSchedule" parameterType="java.util.Map"
-            resultMap="ResultMapWithBLOBs">
+            resultMap="BaseResultMap">
         select
         *
         from payment_bill_config
@@ -356,15 +392,14 @@
     </update>
 
     <select id="selectByRuleCode" parameterType="java.util.Map"
-            resultMap="ResultMapWithBLOBs">
+            resultMap="BaseResultMap">
         select
         *
         from payment_bill_config
         where rule_code =
         #{ruleCode,jdbcType=VARCHAR}
     </select>
-
-    <select id="selectConfigInfoById" resultMap="ResultMapWithBLOBs"
+    <select id="selectConfigInfoById" resultMap="BaseResultMap"
             parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -374,18 +409,20 @@
         where pbc.id=
         #{id,jdbcType=INTEGER}
     </select>
-    <select id="validateIsExist" parameterType="java.util.Map"
-            resultType="java.lang.Integer">
+    <select id="selectStatementConfigByMap" parameterType="map" resultMap="BaseResultMap">
         select
-        count(*)
-        from
-        payment_bill_config pbc left join biz_info bi on pbc.id
-        =bi.config_id
-        where pbc.cooperate_type=#{cooperateType}
-        and pbc.biz_type = #{bussinessType}
-        and pbc.biz_id = #{bussinessId}
-        and pbc.status != #{status}
-        and #{effectEndTime} > pbc.effect_start_time
-        and pbc.effect_end_time > #{effectStartTime}
+        <include refid="Base_Column_List"/>
+        from payment_bill_config pbc left join biz_info bi on pbc.id = bi.config_id
+        <where>
+            <if test="ids!=null">
+                and pbc.id in
+                <foreach collection="ids" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="checkEffectStart!=null">
+                and now() > pbc.effect_start_time
+            </if>
+        </where>
     </select>
 </mapper>
