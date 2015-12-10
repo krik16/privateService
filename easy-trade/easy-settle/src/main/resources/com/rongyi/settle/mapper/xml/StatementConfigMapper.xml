@@ -409,7 +409,7 @@
         where pbc.id=
         #{id,jdbcType=INTEGER}
     </select>
-    <select id="selectStatementConfigByMap" parameterType="map" resultType="BseeResultMap">
+    <select id="selectStatementConfigByMap" parameterType="map" resultType="BaseResultMap">
         select <include refid="Base_Column_List"/>
         from payment_bill_config
         <where>
@@ -418,6 +418,9 @@
                 <foreach collection="ids" item="item" open="(" separator="," close=")">
                     #{item}
                 </foreach>
+            </if>
+            <if test="checkEffectStart!=null">
+                and now() > effect_start_time
             </if>
         </where>
     </select>

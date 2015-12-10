@@ -315,6 +315,7 @@ public class StatementConfigController extends BaseController{
 			}
 			Map<String, Object> paramsMap = new HashMap<>();
 			paramsMap.put("ids", ids);
+			paramsMap.put("checkEffectStart", new Date());
 			List<StatementConfig> statementConfigs = statementConfigService.checkeffectStart(paramsMap);
 			if (CollectionUtils.isNotEmpty(statementConfigs)){
 				StringBuffer ruleCode = null;
