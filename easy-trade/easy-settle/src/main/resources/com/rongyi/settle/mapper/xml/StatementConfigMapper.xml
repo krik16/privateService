@@ -336,7 +336,7 @@
                 <foreach collection="statuses" item="item" open="(" separator="," close=")">#{item}</foreach>
             </if>
             <if test="linkRole!=null">
-                and pbc.link_role != #{linkRole}
+                and pbc.link_role = #{linkRole}
             </if>
             <if test="effectEndTime!=null and effectStartTime!=null">
                 and #{effectEndTime} > pbc.effect_start_time
@@ -408,5 +408,17 @@
         =bi.config_id
         where pbc.id=
         #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectStatementConfigByMap" parameterType="map" resultType="BseeResultMap">
+        select <include refid="Base_Column_List"/>
+        from payment_bill_config
+        <where>
+            <if test="ids!=null">
+                and id in
+                <foreach collection="ids" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
     </select>
 </mapper>

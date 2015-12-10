@@ -355,8 +355,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 
 	@Override
 	public List<StatementConfig> checkeffectStart(Map<String, Object> paramsMap) {
-
-		return null;
+		return this.getBaseDao().selectListBySql(NAMESPACE + ".selectStatementConfigByMap", paramsMap);
 	}
 
 	/**

@@ -316,11 +316,25 @@ public class StatementConfigController extends BaseController{
 			Map<String, Object> paramsMap = new HashMap<>();
 			paramsMap.put("ids", ids);
 			List<StatementConfig> statementConfigs = statementConfigService.checkeffectStart(paramsMap);
-			if (statementConfigService.updatePaymentStatusByIds(ids, status, desc, userId)) {
-				result = ResponseData.success();
-			} else {
-				result = ResponseData.failure(CodeEnum.FIAL_UPDATE_PAYMENT.getCodeInt(), CodeEnum.FIAL_UPDATE_PAYMENT.getValueStr());
+			if (CollectionUtils.isNotEmpty(statementConfigs)){
+				StringBuffer ruleCode = null;
+				for (StatementConfig config : statementConfigs){
+					if (ruleCode == null){
+						ruleCode = new StringBuffer();
+						ruleCode.append(config.getRuleCode());
+					}else {
+						ruleCode.append(", ").append(config.getRuleCode());
+					}
+				}
+				result = ResponseData.failure(CodeEnum.FIAL_CONFIG_EFFECT_START.getCodeInt(),ruleCode + " " + CodeEnum.FIAL_CONFIG_EFFECT_START.getValueStr());
+			}else {
+				if (statementConfigService.updatePaymentStatusByIds(ids, status, desc, userId)) {
+					result = ResponseData.success();
+				} else {
+					result = ResponseData.failure(CodeEnum.FIAL_UPDATE_PAYMENT.getCodeInt(), CodeEnum.FIAL_UPDATE_PAYMENT.getValueStr());
+				}
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
