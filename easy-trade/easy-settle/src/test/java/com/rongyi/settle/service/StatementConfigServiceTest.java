@@ -9,10 +9,7 @@
 package com.rongyi.settle.service;
 
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.rongyi.rss.settle.GoodPayService;
 import org.junit.Test;
@@ -107,6 +104,19 @@ public class StatementConfigServiceTest extends BaseTest{
 	@Test
 	public void validateNeedPayTest(){
 		System.err.println(goodPayService.validateNeedPay("536c46a821232f447e0005af", "169", 1));
+	}
+
+	@Test
+	public void checkeffectStartTest(){
+		Map<String,Object> paramsMap = new HashMap<>();
+		List<Integer> ids = new ArrayList<>();
+		ids.add(61);
+		ids.add(62);
+		paramsMap.put("ids", ids);
+		paramsMap.put("checkEffectStart", new Date());
+		List list = statementConfigService.checkeffectStart(paramsMap);
+		System.err.println("=============================== >>>>>>>>>>>>>>>>>>>>>>>>"+list.size());
+		System.err.println("=============================== >>>>>>>>>>>>>>>>>>>>>>>>"+list);
 	}
 
 	public static void main(String[] args) {

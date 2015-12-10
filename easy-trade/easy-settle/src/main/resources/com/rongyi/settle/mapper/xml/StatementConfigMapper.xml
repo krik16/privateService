@@ -410,17 +410,18 @@
         #{id,jdbcType=INTEGER}
     </select>
     <select id="selectStatementConfigByMap" parameterType="map" resultMap="BaseResultMap">
-        select <include refid="Base_Column_List"/>
-        from payment_bill_config
+        select
+        <include refid="Base_Column_List"/>
+        from payment_bill_config pbc left join biz_info bi on pbc.id = bi.config_id
         <where>
             <if test="ids!=null">
-                and id in
+                and pbc.id in
                 <foreach collection="ids" item="item" open="(" separator="," close=")">
                     #{item}
                 </foreach>
             </if>
             <if test="checkEffectStart!=null">
-                and now() > effect_start_time
+                and now() > pbc.effect_start_time
             </if>
         </where>
     </select>
