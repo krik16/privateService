@@ -69,6 +69,8 @@ public class CommodityParam {
 	
 	private Integer stock;//总库存
 	
+	private Integer remain;//剩余总量
+	
 	private int hasSpec;//0表示无规格 1表示有规格
 	
 	public String getId() {
@@ -240,10 +242,10 @@ public class CommodityParam {
 		this.commoditySpeceParams = commoditySpeceParams;
 	}
 
-	/*
+	
 	public Integer getStock() {
 		return stock;
-	}*/
+	}
 
 	public void setStock(Integer stock) {
 		this.stock = stock;
@@ -263,6 +265,14 @@ public class CommodityParam {
 
 	public void setHasSpec(int hasSpec) {
 		this.hasSpec = hasSpec;
+	}
+
+	public Integer getRemain() {
+		return remain;
+	}
+
+	public void setRemain(Integer remain) {
+		this.remain = remain;
 	}
 	
 	

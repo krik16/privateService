@@ -56,7 +56,7 @@ public class Commodity implements  Serializable,Cloneable{
 	
 	private boolean supportCourierDeliver=true;//支持快递发货字段  true 是    false否
 	
-	private boolean supportSelfPickup;//支持到店自提  true 是    false否
+	private boolean supportSelfPickup=true;//支持到店自提  true 是    false否
 	
 	@Override
 	public String toString() {

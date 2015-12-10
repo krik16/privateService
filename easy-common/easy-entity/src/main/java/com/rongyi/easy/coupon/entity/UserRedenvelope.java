@@ -135,6 +135,11 @@ public class UserRedenvelope implements Serializable {
     private String limitDesc;
 
     /**
+     * 推荐说明
+     */
+    private String recommend;
+
+    /**
      * 适用规则 满减[0] 立减[1]
      */
     private Integer preferentialType;
@@ -385,6 +390,14 @@ public class UserRedenvelope implements Serializable {
 
     public void setLimitDesc(String limitDesc) {
         this.limitDesc = limitDesc;
+    }
+
+    public String getRecommend() {
+        return recommend;
+    }
+
+    public void setRecommend(String recommend) {
+        this.recommend = recommend;
     }
 
     /**
