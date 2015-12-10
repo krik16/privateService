@@ -1,12 +1,5 @@
 /easy-trade/easy-rpb/.sonar
-.settings
-.classpath
-.project
-classes
-target
-*.iml*.properties
-.idea
-*.iml
-.gitignore
-!/.gitignore
-*.wst.common.component
+/easy-trade/easy-rpb/*.iml
+/easy-trade/easy-settle/*.iml
+/easy-trade/easy-tms/easy-tms.iml
+/easy-trade/easy-virtual-account/*.iml
