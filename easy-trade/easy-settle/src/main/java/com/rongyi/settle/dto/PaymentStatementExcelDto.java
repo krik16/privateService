@@ -23,9 +23,124 @@ public class PaymentStatementExcelDto {
 
     private Double payTotal;
     private Double rongyiDiscount;
+    
+    private Double payTotalCoupon;
+    private Double rongyiDiscountCoupon;
+    
+    private Byte unitType;
+    
+    /**
+	 * @return the unitType
+	 */
+	public Byte getUnitType() {
+		return unitType;
+	}
 
+	/**
+	 * @param unitType the unitType to set
+	 */
+	public void setUnitType(Byte unitType) {
+		this.unitType = unitType;
+	}
+
+	/**
+	 * @return the payTotal
+	 */
+	public Double getPayTotal() {
+		return payTotal;
+	}
+
+	/**
+	 * @param payTotal the payTotal to set
+	 */
+	public void setPayTotal(Double payTotal) {
+		this.payTotal = payTotal;
+	}
+
+	/**
+	 * @return the rongyiDiscount
+	 */
+	public Double getRongyiDiscount() {
+		return rongyiDiscount;
+	}
+
+	/**
+	 * @param rongyiDiscount the rongyiDiscount to set
+	 */
+	public void setRongyiDiscount(Double rongyiDiscount) {
+		this.rongyiDiscount = rongyiDiscount;
+	}
+
+	/**
+	 * @return the payTotalCoupon
+	 */
+	public Double getPayTotalCoupon() {
+		return payTotalCoupon;
+	}
+
+	/**
+	 * @param payTotalCoupon the payTotalCoupon to set
+	 */
+	public void setPayTotalCoupon(Double payTotalCoupon) {
+		this.payTotalCoupon = payTotalCoupon;
+	}
+
+	/**
+	 * @return the rongyiDiscountCoupon
+	 */
+	public Double getRongyiDiscountCoupon() {
+		return rongyiDiscountCoupon;
+	}
+
+	/**
+	 * @param rongyiDiscountCoupon the rongyiDiscountCoupon to set
+	 */
+	public void setRongyiDiscountCoupon(Double rongyiDiscountCoupon) {
+		this.rongyiDiscountCoupon = rongyiDiscountCoupon;
+	}
+
+	private Double payTotalOrder;
+    private Double rongyiDiscountOrder;
+
+    /**
+	 * @return the payTotalOrder
+	 */
+	public Double getPayTotalOrder() {
+		return payTotalOrder;
+	}
+
+	/**
+	 * @param payTotalOrder the payTotalOrder to set
+	 */
+	public void setPayTotalOrder(Double payTotalOrder) {
+		this.payTotalOrder = payTotalOrder;
+	}
+
+	/**
+	 * @return the rongyiDiscountOrder
+	 */
+	public Double getRongyiDiscountOrder() {
+		return rongyiDiscountOrder;
+	}
+
+	/**
+	 * @param rongyiDiscountOrder the rongyiDiscountOrder to set
+	 */
+	public void setRongyiDiscountOrder(Double rongyiDiscountOrder) {
+		this.rongyiDiscountOrder = rongyiDiscountOrder;
+	}
+
+	/** 优惠券表头 */
     private List<CouponExcelDto> couponExcelDtoList;
+    
+    /** 优惠券明细 */
     private List<CouponCodeExcelDto> couponCodeExcelDtoList;
+    
+    /** 商品订单表头 */
+    private List<OrderSettlementTopDto> orderSettlementTopDtoList;
+    
+    /** 商品订单明细 */
+    private List<OrderSettlementDetailVO> orderSettlementDetailVOList;
 
     public String getBatchNo() {
         return batchNo;
@@ -123,22 +238,6 @@ public class PaymentStatementExcelDto {
         this.payChannel = payChannel;
     }
 
-    public Double getPayTotal() {
-        return payTotal;
-    }
-
-    public void setPayTotal(Double payTotal) {
-        this.payTotal = payTotal;
-    }
-
-    public Double getRongyiDiscount() {
-        return rongyiDiscount;
-    }
-
-    public void setRongyiDiscount(Double rongyiDiscount) {
-        this.rongyiDiscount = rongyiDiscount;
-    }
-
     public List<CouponExcelDto> getCouponExcelDtoList() {
         return couponExcelDtoList;
     }
@@ -154,4 +253,34 @@ public class PaymentStatementExcelDto {
     public void setCouponCodeExcelDtoList(List<CouponCodeExcelDto> couponCodeExcelDtoList) {
         this.couponCodeExcelDtoList = couponCodeExcelDtoList;
     }
+
+	/**
+	 * @return the orderSettlementTopDtoList
+	 */
+	public List<OrderSettlementTopDto> getOrderSettlementTopDtoList() {
+		return orderSettlementTopDtoList;
+	}
+
+	/**
+	 * @param orderSettlementTopDtoList the orderSettlementTopDtoList to set
+	 */
+	public void setOrderSettlementTopDtoList(List<OrderSettlementTopDto> orderSettlementTopDtoList) {
+		this.orderSettlementTopDtoList = orderSettlementTopDtoList;
+	}
+
+	/**
+	 * @return the orderSettlementDetailVOList
+	 */
+	public List<OrderSettlementDetailVO> getOrderSettlementDetailVOList() {
+		return orderSettlementDetailVOList;
+	}
+
+	/**
+	 * @param orderSettlementDetailVOList the orderSettlementDetailVOList to set
+	 */
+	public void setOrderSettlementDetailVOList(List<OrderSettlementDetailVO> orderSettlementDetailVOList) {
+		this.orderSettlementDetailVOList = orderSettlementDetailVOList;
+	}
+    
+    
 }

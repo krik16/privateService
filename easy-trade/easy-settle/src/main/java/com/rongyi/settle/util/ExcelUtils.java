@@ -12,8 +12,11 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.util.StringUtils;
 
+import com.rongyi.settle.constants.SettleConstant;
 import com.rongyi.settle.dto.CouponCodeExcelDto;
 import com.rongyi.settle.dto.CouponExcelDto;
+import com.rongyi.settle.dto.OrderSettlementDetailVO;
+import com.rongyi.settle.dto.OrderSettlementTopDto;
 import com.rongyi.settle.dto.PaymentStatementExcelDto;
 
 /**
@@ -26,7 +29,7 @@ public class ExcelUtils {
 		String fileFolder = targetFilePath + folder;
 		String pathname2 = fileFolder + "/" + targetFileName;
 		InputStream in = new FileInputStream(new File(pathname));
-		 DecimalFormat df = new DecimalFormat("#.00");  
+		DecimalFormat df = new DecimalFormat("#.00");
 		XSSFWorkbook work = new XSSFWorkbook(in);
 		in.close();
 		XSSFSheet sheet = work.getSheetAt(0);
@@ -43,8 +46,18 @@ public class ExcelUtils {
 		cycleTime.setCellValue(excelDto.getCycleTime());
 
 		XSSFRow row6 = sheet.getRow(6);
-		XSSFCell mallName = row6.getCell(6);
-		mallName.setCellValue(excelDto.getMallName());
+		XSSFCell unitName = row6.getCell(6);
+		unitName.setCellValue(excelDto.getMallName());
+		if (excelDto.getUnitType().equals(SettleConstant.BussinessType.BRAND)) {
+			XSSFCell unitTitle = row6.getCell(5);
+			unitTitle.setCellValue("品牌：");
+		} else if (excelDto.getUnitType().equals(SettleConstant.BussinessType.BRANCH)) {
+			XSSFCell unitTitle = row6.getCell(5);
+			unitTitle.setCellValue("分公司：");
+		} else if (excelDto.getUnitType().equals(SettleConstant.BussinessType.GROUP)) {
+			XSSFCell unitTitle = row6.getCell(5);
+			unitTitle.setCellValue("集团公司：");
+		}
 
 		XSSFRow row8 = sheet.getRow(8);
 		XSSFCell shopAccountName = row8.getCell(6);
@@ -66,17 +79,7 @@ public class ExcelUtils {
 		String payChannelBegin = payChannel.getStringCellValue();
 		payChannel.setCellValue(payChannelBegin + excelDto.getPayChannel());
 
-		XSSFRow row12 = sheet.getRow(12);
-		XSSFCell payTotal = row12.getCell(4);
-		payTotal.setCellValue(df.format(excelDto.getPayTotal()));
-
-		XSSFRow row27 = sheet.getRow(27);
-		XSSFCell total = row27.getCell(10);
-		total.setCellValue(df.format(excelDto.getPayTotal()));
-
-		XSSFCell rongyiDiscount = row12.getCell(10);
-		rongyiDiscount.setCellValue(excelDto.getRongyiDiscount());
-
+		// 券汇总数据
 		for (int i = 0; i < excelDto.getCouponExcelDtoList().size(); i++) {
 			CouponExcelDto couponExcelDto = excelDto.getCouponExcelDtoList().get(i);
 			XSSFRow row15 = sheet.getRow(15 + i);
@@ -89,23 +92,54 @@ public class ExcelUtils {
 			XSSFCell couponCount = row15.getCell(5);
 			couponCount.setCellValue(couponExcelDto.getCouponCount());
 
-			XSSFCell origPrice = row15.getCell(7);
-			origPrice.setCellValue(df.format(couponExcelDto.getCouponPrice() == null ? 0 : AmountUtil.changFenToYuan(couponExcelDto.getCouponPrice().intValue())));
+			XSSFCell hbPrice = row15.getCell(7);
+			hbPrice.setCellValue(df.format(couponExcelDto.getCouponHbTotal() == null ? 0 : AmountUtil.changFenToYuan(couponExcelDto.getCouponHbTotal().intValue())));
 
-			XSSFCell discount = row15.getCell(9);
-			Double couponTotalAmount = couponExcelDto.getCouponTotalAmount() == null ? 0.0 : couponExcelDto.getCouponTotalAmount();
-			Double couponPayAmount = couponExcelDto.getCouponPayAmount() == null ? 0.0 : couponExcelDto.getCouponPayAmount();
-			Double discountValue = couponTotalAmount - couponPayAmount;
-			discount.setCellValue(df.format(AmountUtil.changFenToYuan(discountValue.intValue())));
+			XSSFCell scorePrice = row15.getCell(9);
+			scorePrice.setCellValue(
+					df.format(couponExcelDto.getCouponScoreTotal() == null ? 0 : AmountUtil.changFenToYuan(couponExcelDto.getCouponScoreTotal().intValue())));
 
-			XSSFCell totalAmount = row15.getCell(11);
-			totalAmount.setCellValue(df.format(couponExcelDto.getCouponTotalAmount() == null ? 0 : AmountUtil.changFenToYuan(couponExcelDto.getCouponTotalAmount().intValue())));
+			XSSFCell dicountPrice = row15.getCell(11);
+			dicountPrice.setCellValue(
+					df.format(couponExcelDto.getCouponDiscountTotal() == null ? 0 : AmountUtil.changFenToYuan(couponExcelDto.getCouponDiscountTotal().intValue())));
+
+			XSSFCell totalPrice = row15.getCell(13);
+			totalPrice.setCellValue(
+					df.format(couponExcelDto.getCouponPriceTotal() == null ? 0 : AmountUtil.changFenToYuan(couponExcelDto.getCouponPriceTotal().intValue())));
 		}
 
+		// 商品订单汇总数据
+		for (int i = 0; i < excelDto.getOrderSettlementTopDtoList().size(); i++) {
+			OrderSettlementTopDto orderTop = excelDto.getOrderSettlementTopDtoList().get(i);
+			XSSFRow row26 = sheet.getRow(26 + i);
+			XSSFCell orderType = row26.getCell(1);
+			orderType.setCellValue(orderTop.getOrderType());
+
+			XSSFCell revenueType = row26.getCell(3);
+			revenueType.setCellValue(orderTop.getIncomeType());
+
+			XSSFCell orderCount = row26.getCell(5);
+			orderCount.setCellValue(orderTop.getOrderCount());
+
+			XSSFCell hbPrice = row26.getCell(7);
+			hbPrice.setCellValue(df.format(orderTop.getHbDiscountTotal() == null ? 0 : orderTop.getHbDiscountTotal().intValue()));
+
+			XSSFCell scorePrice = row26.getCell(9);
+			scorePrice.setCellValue(df.format(orderTop.getScoreDiscountTotal() == null ? 0 : orderTop.getScoreDiscountTotal().intValue()));
+
+			XSSFCell dicountPrice = row26.getCell(11);
+			dicountPrice.setCellValue(df.format(orderTop.getOrderDiscountTotal() == null ? 0 : orderTop.getOrderDiscountTotal().intValue()));
+
+			XSSFCell totalPrice = row26.getCell(13);
+			totalPrice.setCellValue(df.format(orderTop.getOrderAmountTotal() == null ? 0 : orderTop.getOrderAmountTotal().intValue()));
+		}
+
+		// sheet1: 券明细数据
 		XSSFSheet sheet1 = work.getSheetAt(1);
 		for (int i = 0; i < excelDto.getCouponCodeExcelDtoList().size(); i++) {
 			CouponCodeExcelDto couponCodeExcelDto = excelDto.getCouponCodeExcelDtoList().get(i);
 			XSSFRow row15 = sheet1.createRow(1 + i);
+			
 			XSSFCell orderNo = row15.createCell(0);
 			orderNo.setCellValue(couponCodeExcelDto.getOrderNo());
 
@@ -162,6 +196,58 @@ public class ExcelUtils {
 
 			XSSFCell shopNameStr = row15.createCell(18);
 			shopNameStr.setCellValue(couponCodeExcelDto.getShopName());
+		}
+
+		// sheet2: 商品订单明细数据
+		XSSFSheet sheet2 = work.getSheetAt(2);
+		for (int i = 0; i < excelDto.getOrderSettlementDetailVOList().size(); i++) {
+			OrderSettlementDetailVO orderDetail = excelDto.getOrderSettlementDetailVOList().get(i);
+			XSSFRow rowOrder = sheet2.createRow(1 + i);
+			
+			XSSFCell orderDate = rowOrder.createCell(0);
+			orderDate.setCellValue(orderDetail.getCreateAt());
+			
+			XSSFCell orderStatus = rowOrder.createCell(1);
+			orderStatus.setCellValue(orderDetail.getOrderStatus());
+			
+			XSSFCell orderNo = rowOrder.createCell(2);
+			orderNo.setCellValue(orderDetail.getOrderNo());
+			
+			XSSFCell commodity = rowOrder.createCell(3);
+			commodity.setCellValue(orderDetail.getCommodityName());
+			
+			XSSFCell mall = rowOrder.createCell(4);
+			mall.setCellValue(orderDetail.getMallName());
+			
+			XSSFCell shop = rowOrder.createCell(5);
+			shop.setCellValue(orderDetail.getShopName());
+			
+			XSSFCell price = rowOrder.createCell(6);
+			price.setCellValue(orderDetail.getOrigPrice());
+			
+			XSSFCell pay = rowOrder.createCell(7);
+			pay.setCellValue(orderDetail.getPayAmount());
+			
+			XSSFCell score = rowOrder.createCell(8);
+			score.setCellValue(orderDetail.getScoreDiscount());
+			
+			XSSFCell hb = rowOrder.createCell(9);
+			hb.setCellValue(orderDetail.getHbDiscount());
+			
+			XSSFCell channel = rowOrder.createCell(10);
+			channel.setCellValue(orderDetail.getPaymentChannel());
+			
+			XSSFCell payTime = rowOrder.createCell(11);
+			payTime.setCellValue(orderDetail.getPaymentTime());
+			
+			XSSFCell dlvTime = rowOrder.createCell(12);
+			dlvTime.setCellValue(orderDetail.getDeliveryTime());
+			
+			XSSFCell rcptTime = rowOrder.createCell(13);
+			rcptTime.setCellValue(orderDetail.getReceiptTime());
+			
+			XSSFCell phone = rowOrder.createCell(14);
+			phone.setCellValue(orderDetail.getBuyerPhone());
 		}
 
 		File file = new File(fileFolder);
