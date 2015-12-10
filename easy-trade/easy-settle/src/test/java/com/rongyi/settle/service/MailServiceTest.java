@@ -14,7 +14,7 @@ public class MailServiceTest extends BaseTest {
 	@Autowired
 	MailService mailService;
 	
-//	@Test
+	@Test
 	public void testSendMail(){
 		try {
 			mailService.sendAttachmentEmail();

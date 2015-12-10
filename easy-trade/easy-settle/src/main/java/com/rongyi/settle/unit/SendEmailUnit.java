@@ -2,9 +2,11 @@ package com.rongyi.settle.unit;
 
 
 import com.rongyi.core.common.PropertyConfigurer;
+import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
 import com.rongyi.settle.mail.MailService;
 import com.rongyi.settle.util.DateUtils;
+import com.rongyi.settle.util.ReportFilesUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,18 +37,19 @@ public class SendEmailUnit {
     public void sendMail(PaymentStatementDto paymentStatementDto) {
         StringBuffer sb = new StringBuffer();
         sb.append("您好:\n");
-        sb.append("&nbsp; &nbsp;");
-        sb.append("附件为批次号:");
-        sb.append(paymentStatementDto.getBatchNo());
-        sb.append("的对账单，对账单日期为:");
-        sb.append(paymentStatementDto.getCycleStartTime());
+        sb.append(" ");
+        sb.append("附件为");
+        sb.append(DateUtil.dateToString(paymentStatementDto.getCycleStartTime()));
         sb.append("至");
-        sb.append(paymentStatementDto.getCycleEndTime());
-        sb.append("。");
+        sb.append(DateUtil.dateToString(paymentStatementDto.getCycleEndTime()));
+        sb.append("的对账单，请您查收。");
         sb.append("如无问题,请您及时登录商家后台确认。");
         try {
             LOGGER.info("发送对账单邮件，收件人列表={}", paymentStatementDto.getBussinessEmail());
-            mailService.sendAttachmentEmail("商户对账单", propertyConfigurer.getProperty("SEND_ADDRESS"), getToAddress(paymentStatementDto.getBussinessEmail()), sb.toString(), getFileName(paymentStatementDto));
+            String fileName = ReportFilesUtil.getSettlememtExcelFilePath(paymentStatementDto.getBussinessName(),paymentStatementDto.getCycleStartTime(),propertyConfigurer,paymentStatementDto.getBussinessId());
+            List<String> fileNameList = new ArrayList<String>();
+            fileNameList.add(fileName);
+            mailService.sendAttachmentEmail("商户对账单", propertyConfigurer.getProperty("SEND_ADDRESS"), getToAddress(paymentStatementDto.getBussinessEmail()), sb.toString(), fileNameList);
         } catch (AddressException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
@@ -81,6 +84,7 @@ public class SendEmailUnit {
         sb.append("容易网商户对账单-");
         sb.append(paymentStatementDto.getBussinessName());
         sb.append(DateUtils.getDateStr(paymentStatementDto.getCycleStartTime()));
+        sb.append(".xlsx");
         List<String> fileNameList = new ArrayList<String>();
         fileNameList.add(sb.toString());
         return fileNameList;
