@@ -194,6 +194,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 				//全部: 1、验自身
 				if (bussinessType==1 || bussinessType==4){//商场、集团
 					if (checkConfigExist(map)) {
+						logger.info("全部: 1、验自身 ---配置已有");
 						ReMap.put("result", true);
 						return ReMap;
 					}

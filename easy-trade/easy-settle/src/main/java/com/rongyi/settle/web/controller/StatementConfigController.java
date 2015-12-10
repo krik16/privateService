@@ -183,6 +183,7 @@ public class StatementConfigController extends BaseController{
 			}
 			Map<String,Object> checkMap = statementConfigService.validateIsExist(statementConfig.getCooperateType(), statementConfig.getBussinessType(), statementConfig.getBussinessId(), ConstantEnum.CONFIG_STATUS_1.getCodeByte()
 					, statementConfig.getEffectStartTime(), statementConfig.getEffectEndTime(), statementConfig.getLinkType(), linkMap, statementConfig.getLinkShopOp());
+			LOGGER.info("=========================== checkMap"+checkMap);
 			boolean checkResult = (boolean) checkMap.get("result");
 			if(checkResult){
 				if (checkMap.containsKey("errorNo")){
