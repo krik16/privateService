@@ -331,6 +331,9 @@
             <if test="status!=null">
                 and pbc.status != #{status}
             </if>
+            <if test="linkRole!=null">
+                and pbc.link_role != #{linkRole}
+            </if>
             <if test="effectEndTime!=null and effectStartTime!=null">
                 and #{effectEndTime} > pbc.effect_start_time
                 and pbc.effect_end_time > #{effectStartTime}
@@ -339,7 +342,7 @@
                 and sc.shop_id=#{shopId}
             </if>
             <if test="userId!=null">
-                and sc.real_userList like concat('%', #{userId}, '%')
+                and sc.real_user_list like concat('%', #{userId}, '%')
             </if>
             <if test="nowTime!=null">
                 and #{noewTime} > pbc.effect_start_time and pbc.effect_end_time > #{nowTime}
