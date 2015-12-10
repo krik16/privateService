@@ -24,8 +24,19 @@ public class RedenvelopVO implements Serializable{
      * 卡券名称
      */
     private String name;
+    
+    //活动名称
+    private List<String> activityNames; 
 
-    /**
+    public List<String> getActivityNames() {
+		return activityNames;
+	}
+
+	public void setActivityNames(List<String> activityNames) {
+		this.activityNames = activityNames;
+	}
+
+	/**
      * 审核未通过原因
      */
     private List<CouponRejectRecord> unpassReasons;
