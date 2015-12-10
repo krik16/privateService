@@ -192,7 +192,8 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 		}else {
 			if (lintType==0){
 				//全部: 1、验自身
-				if (bussinessType==1 || bussinessType==4){//商场、集团
+				if (bussinessType==1 || bussinessType==4)
+				{//商场、集团
 					if (checkConfigExist(map)) {
 						logger.info("全部: 1、验自身 ---配置已有");
 						ReMap.put("result", true);
@@ -269,6 +270,10 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                         String userAccounts = linkMap.get(shopId).toString();
                         convertToShopConfig(isOneself, shopId, bussinessType,linkShopOp, userAccounts, shopConfigs );
                     }
+				}else {
+					logger.info(" lintType==2 参数错误  //自身");
+					ReMap.put("result", true);
+					return ReMap;
 				}
 			}else {
 				result = true;
@@ -342,7 +347,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 		map.put("nowTime", new Date());
 		map.put("userId", userId);
 		map.put("linkRole", guideType);//
-		return checkConfigExist(map);
+		return !checkConfigExist(map);
 	}
 
 	/**
