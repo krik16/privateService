@@ -156,9 +156,8 @@ public interface RoaRedenvelopeComService {
 
 	/**
 	 * 校验在同一发布时间段是否有注册类型红包
-	 * @param startAt
-	 * @param endAt
+	 * @param param
 	 * @return
 	 */
-	List<String> selectRedenveByStartEndAt(Date startAt, Date endAt);
+	List<String> selectRedenveByStartEndAt(RedenvelopeParam param);
 }
