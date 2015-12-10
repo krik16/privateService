@@ -121,27 +121,19 @@ public class ActivitySearchParam implements Serializable{
 	public void setShopList(List<String> shopList) {
 		this.shopList = shopList;
 	}
-	/**
-	 * @return the mallId
-	 */
+
 	public String getMallId() {
 		return mallId;
 	}
-	/**
-	 * @param mallId the mallId to set
-	 */
+
 	public void setMallId(String mallId) {
 		this.mallId = mallId;
 	}
-	/**
-	 * @return the startLetter
-	 */
+
 	public String getStartLetter() {
 		return startLetter;
 	}
-	/**
-	 * @param startLetter the startLetter to set
-	 */
+
 	public void setStartLetter(String startLetter) {
 		this.startLetter = startLetter;
 	}
