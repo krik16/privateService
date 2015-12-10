@@ -96,6 +96,11 @@ public class UserRedenvelope implements Serializable {
      */
     private String activityName;
 
+    /**
+     * 是否删除
+     */
+    private Boolean isDeleted;
+
 
     /********************* coupon表模板表信息冗余 **********************/
     /**
@@ -400,6 +405,14 @@ public class UserRedenvelope implements Serializable {
         this.recommend = recommend;
     }
 
+    public Boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
     /**
      * 判断是否可使用
      * @return
@@ -441,6 +454,7 @@ public class UserRedenvelope implements Serializable {
                 .append("usageDesc", usageDesc)
                 .append("limitDesc", limitDesc)
                 .append("preferentialType", preferentialType)
+                .append("isDeleted", isDeleted)
                 .toString();
     }
 }
