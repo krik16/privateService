@@ -703,7 +703,8 @@ public class TCCouponVO implements Serializable {
 
     // 状态: 进行中[1] 非进行中[0]
     public void setConvertStatus(Integer status, Boolean isOffStock, Date publishStartAt, Date publishEndAt) {
-        if (Integer.valueOf(2).equals(status) && !isOffStock && new Date().after(publishStartAt) && new Date().before(publishEndAt)) {
+        if (publishStartAt != null && publishEndAt != null && Integer.valueOf(2).equals(status)
+                && !isOffStock && new Date().after(publishStartAt) && new Date().before(publishEndAt)) {
             this.setStatus("1");
         } else {
             this.setStatus("0");
