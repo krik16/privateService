@@ -155,10 +155,10 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 					}
 
 					saveOperationLog(ids.get(i), status, desc, userId);
-					//检查是否需要发送对账单邮件
-					if(ConstantEnum.STATUS_1.getCodeByte().equals(status) || ConstantEnum.STATUS_3.getCodeByte().equals(status)){
+					// 检查是否需要发送对账单邮件
+					if (ConstantEnum.STATUS_1.getCodeByte().equals(status) || ConstantEnum.STATUS_3.getCodeByte().equals(status)) {
 						PaymentStatementDto paymentStatementDto = paymentStatementMapper.searchDtoById(ids.get(i));
-							sendEmailUnit.sendMail(paymentStatementDto);
+						sendEmailUnit.sendMail(paymentStatementDto);
 					}
 
 				}
@@ -214,7 +214,11 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 	@Override
 	public List<CouponStatementDetailDto> selectForStatementDetailsByUsers(String userIds, Date startTime, Date endTime) {
 		Map map = new HashMap();
-		map.put("userIds", userIds);
+		if (userIds != null && !userIds.isEmpty()) {
+			map.put("userIds", userIds.split(","));
+		} else {
+			return null;
+		}
 		map.put("startTime", DateUtil.dateToString(startTime));
 		map.put("endTime", DateUtil.dateToString(endTime));
 		List<CouponStatementDetailDto> result = this.getBaseDao().selectListBySql(NAMESPACE + ".selectForStatementDetailsByUsers", map);
@@ -277,7 +281,11 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 	@Override
 	public List<CouponExcelDto> selectForCouponExcelDtoByUsers(String userIds, Date startTime, Date endTime) {
 		Map map = new HashMap();
-		map.put("userIds", userIds);
+		if (userIds != null && !userIds.isEmpty()) {
+			map.put("userIds", userIds.split(","));
+		} else {
+			return null;
+		}
 		map.put("startTime", startTime);
 		map.put("endTime", endTime);
 		return this.getBaseDao().selectListBySql(NAMESPACE + ".selectForCouponExcelDtoByUsers", map);
@@ -308,7 +316,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		map.put("mallId", mallId);
 		map.put("brandId", brandId);
 		map.put("shopId", shopId);
-		map.put("userIds", userIds);
+		if (userIds != null && !userIds.isEmpty()) {
+			map.put("userIds", userIds.split(","));
+		}
 		map.put("startTime", startTime);
 		map.put("endTime", endTime);
 		return this.getBaseDao().selectListBySql(NAMESPACE + ".selectForOrderTopDto", map);
@@ -329,7 +339,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		map.put("mallId", mallId);
 		map.put("brandId", brandId);
 		map.put("shopId", shopId);
-		map.put("userIds", userIds);
+		if (userIds != null && !userIds.isEmpty()) {
+			map.put("userIds", userIds.split(","));
+		}
 		map.put("startTime", startTime);
 		map.put("endTime", endTime);
 		return this.getBaseDao().selectListBySql(NAMESPACE + ".selectForOrderDetailDto", map);
@@ -464,13 +476,28 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 			// part
 			List<String> userIds = selectForConfigShops(statementConfig.getId());
 			for (String idStr : userIds) {
-				couponStatementDetailDtoList.addAll(selectForStatementDetailsByUsers(idStr, statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime()));
+				List<CouponStatementDetailDto> couponStatementDetailDtos = selectForStatementDetailsByUsers(idStr, statementConfig.getCycleStartTime(),
+						statementConfig.getCycleEndTime());
+				if (couponStatementDetailDtos != null) {
+					couponStatementDetailDtoList.addAll(couponStatementDetailDtos);
+				}
 
-				couponExcelDtoList.addAll(selectForCouponExcelDtoByUsers(idStr, statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime()));
+				List<CouponExcelDto> couponExcelDtos = selectForCouponExcelDtoByUsers(idStr, statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime());
+				if (couponExcelDtos != null) {
+					couponExcelDtoList.addAll(couponExcelDtos);
+				}
 
-				orderTopDtoList.addAll(selectForOrderTopDto(null, null, null, idStr, paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime()));
+				List<OrderSettlementTopDto> orderSettlementTopDtos = selectForOrderTopDto(null, null, null, idStr, paymentStatement.getCycleStartTime(),
+						paymentStatement.getCycleEndTime());
+				if (orderSettlementTopDtos != null) {
+					orderTopDtoList.addAll(orderSettlementTopDtos);
+				}
 
-				orderDetailDtoList.addAll(selectForOrderDetailDto(null, null, null, idStr, paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime()));
+				List<OrderSettlementDetailDto> orderSettlementDetailDtos = selectForOrderDetailDto(null, null, null, idStr, paymentStatement.getCycleStartTime(),
+						paymentStatement.getCycleEndTime());
+				if (orderSettlementDetailDtos != null) {
+					orderDetailDtoList.addAll(orderSettlementDetailDtos);
+				}
 
 			}
 			if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.SHOP)) {
