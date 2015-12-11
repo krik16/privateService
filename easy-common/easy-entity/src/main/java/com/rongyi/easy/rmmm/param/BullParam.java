@@ -20,8 +20,33 @@ public class BullParam extends MalllifeBaseParam implements Serializable{
 	
 	private String bullId;//买手id
 	private String liveId;//直播id
-	private String commodityType;//商品类型", 1所有商品2导购商品3买手商品
+	private String flashSaleId; //commodityType为4则flashSaleId为闪购ID、commodityType为5则flashSaleId为特卖ID
+	private String commodityType;//商品类型", 1所有商品 2导购商品 3买手商品 4闪购 5卖场
+	private String keyword;
+	private String categoryId;
+	public String getKeyword() {
+		return keyword;
+	}
 
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public String getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(String categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public String getFlashSaleId() {
+		return flashSaleId;
+	}
+
+	public void setFlashSaleId(String flashSaleId) {
+		this.flashSaleId = flashSaleId;
+	}
 	public String getBullId() {
 		return bullId;
 	}
@@ -45,7 +70,14 @@ public class BullParam extends MalllifeBaseParam implements Serializable{
 	public void setCommodityType(String commodityType) {
 		this.commodityType = commodityType;
 	}
-	
-	
 
+	@Override
+	public String toString() {
+		return "BullParam{" +
+				"bullId='" + bullId + '\'' +
+				", liveId='" + liveId + '\'' +
+				", flashSaleId='" + flashSaleId + '\'' +
+				", commodityType='" + commodityType + '\'' +
+				'}';
+	}
 }

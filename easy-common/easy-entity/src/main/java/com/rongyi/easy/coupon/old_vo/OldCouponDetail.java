@@ -66,12 +66,22 @@ public class OldCouponDetail implements Serializable {
     private Double orderPrice;//订单总价
 
     private int refundNum;//最大退款数量
+    
+    private Double platformRebateAmount;//抵扣券抵扣券金额
 
 
     private List<Integer> afterSaleService;
 
 
-    public double getCurrentPrice() {
+    public Double getPlatformRebateAmount() {
+		return platformRebateAmount;
+	}
+
+	public void setPlatformRebateAmount(Double platformRebateAmount) {
+		this.platformRebateAmount = platformRebateAmount;
+	}
+
+	public double getCurrentPrice() {
         return currentPrice;
     }
 

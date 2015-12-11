@@ -32,6 +32,7 @@ public enum MallLifeErrorCode {
     USER_PHONE_ISEXIST(1068205,"注册手机号已经存在"),
 
     /**toB业务 */
+    COUPON_OPENID_ISEXIST(1069111,"用户不存在"),
     COUPON_IDS_ISEXIST(1069101,"优惠卷(红包)ID为空")
     ;
 

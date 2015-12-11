@@ -1,3 +1,5 @@
+/*
+
 package com.rongyi.easy.entity;
 
 
@@ -30,7 +32,10 @@ public class MallLifeUserEntity implements Serializable {
 	private String openId;
 	@Property("collect_commoditys")
 	private Set<String> collectCommoditys;// 收藏的商品编号
-	/** 环信账户ID */
+
+    /*/
+/* 环信账户ID
+
 	@Property("im_id")
 	private String IMId;
 	@Property("nickname")
@@ -300,3 +305,5 @@ public class MallLifeUserEntity implements Serializable {
 		this.terminalType = terminalType;
 	}
 }
+
+*/

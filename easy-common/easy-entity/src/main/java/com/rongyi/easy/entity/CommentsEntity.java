@@ -42,7 +42,7 @@ public class CommentsEntity implements Serializable {
     private Date updated_at;
 
     @Property("user_id")
-    private ObjectId userId;
+    private String userId;
 
 
     public ObjectId getId() {
@@ -109,11 +109,11 @@ public class CommentsEntity implements Serializable {
         this.updated_at = updated_at;
     }
 
-    public ObjectId getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(ObjectId userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

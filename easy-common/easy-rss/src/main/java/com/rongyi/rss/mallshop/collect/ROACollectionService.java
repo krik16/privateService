@@ -14,7 +14,7 @@ public interface ROACollectionService {
 	 * @param userId
 	 * @throws Exception
 	 */
-	public void deleteCollection(CollectionParam param, ObjectId userId,String collectableType) throws Exception;
+	public void deleteCollection(CollectionParam param, String userId,String collectableType) throws Exception;
 	
 	/**
 	 * 判断是否收藏
@@ -23,7 +23,7 @@ public interface ROACollectionService {
 	 * @return
 	 * @throws Exception
 	 */
-	public boolean getFav(CollectionParam param, ObjectId userId,String collectableType) throws Exception;
+	public boolean getFav(CollectionParam param, String userId,String collectableType) throws Exception;
 	
 	/**
 	 * 收藏(添加数据)
@@ -31,7 +31,7 @@ public interface ROACollectionService {
 	 * @param userId
 	 * @throws Exception
 	 */
-	public void insertCollection(CollectionParam param, ObjectId userId,String collectableType) throws Exception;
+	public void insertCollection(CollectionParam param, String userId,String collectableType) throws Exception;
 	
 	/**
 	 * 我的收藏，品牌收藏列表
@@ -40,7 +40,7 @@ public interface ROACollectionService {
 	 * @return
 	 * @throws Exception
 	 */
-	public MyFavBrandListVO getMyFavList(MyCollectionTypeParam param, ObjectId userId,String collectableType) throws Exception;
+	public MyFavBrandListVO getMyFavList(MyCollectionTypeParam param, String userId,String collectableType) throws Exception;
 	/**
      * 验证商场是否被用户关注
      * 

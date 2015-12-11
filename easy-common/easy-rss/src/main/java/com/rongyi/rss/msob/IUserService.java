@@ -175,6 +175,15 @@ public interface IUserService {
     public List<RmmmUserInfoEntity> getUserListByPhone(String phone)throws MallShopException;
 
     /**
+     *
+     * @param phone
+     * @param flag 1 全部状态
+     * @return
+     * @throws MallShopException
+     */
+    public List<RmmmUserInfoEntity> getUserAllListByPhone(String phone,int flag)throws MallShopException;
+
+    /**
      * 修改密码/昵称／手机／头像
      *
      * */

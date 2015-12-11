@@ -73,6 +73,10 @@ public class TradeSubOrder implements Serializable {
 
     private Date updateAt;
 
+    private Byte hbType;
+
+    private Byte hbSource;
+
     public Integer getId() {
         return id;
     }
@@ -347,5 +351,21 @@ public class TradeSubOrder implements Serializable {
 
     public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
+    }
+
+    public Byte getHbType() {
+        return hbType;
+    }
+
+    public void setHbType(Byte hbType) {
+        this.hbType = hbType;
+    }
+
+    public Byte getHbSource() {
+        return hbSource;
+    }
+
+    public void setHbSource(Byte hbSource) {
+        this.hbSource = hbSource;
     }
 }

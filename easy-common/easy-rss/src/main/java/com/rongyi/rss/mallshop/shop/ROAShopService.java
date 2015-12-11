@@ -183,4 +183,10 @@ public interface ROAShopService {
      * @throws Exception
      */
     public List<CouponShopVO> getShopsByIds(List<ObjectId> ids,List<Double> userLocation)  throws Exception;
+    
+    /**
+	 * 品牌查询店铺
+	 * @return
+	 */
+    public List<ShopEntity> getShopsByBrandId(String brandId) throws Exception;
 }

@@ -98,8 +98,15 @@ public class TradeOrder implements Serializable {
 
     private List<TradeSubOrder> subOrderList;
 
+    private Byte hbSource;
+
+    private Byte hbType;
+
+    private String idfa;
+
     /**
      * 元
+     *
      * @return
      */
     public Double getTotalAmount_Y() {
@@ -133,22 +140,24 @@ public class TradeOrder implements Serializable {
 
     /**
      * 元
+     *
      * @return
      */
     public String getDiscountInfo_Y() {
         Map<String, Object> discountMap = new HashMap<>();
-        if (this.hbDiscount > 0)
-        {
+        if (this.hbDiscount > 0) {
             discountMap.put("cashCouponDiscount", new BigDecimal(this.hbDiscount).divide(rate, 2, BigDecimal.ROUND_HALF_UP).doubleValue());
         }
-        if (this.score > 0)
-        {
+        if (this.score > 0) {
             discountMap.put("score", this.score);
         }
-        if (this.scoreDiscount > 0)
-        {
+        if (this.scoreDiscount > 0) {
             discountMap.put("scoreDiscount", new BigDecimal(this.scoreDiscount).divide(rate, 2, BigDecimal.ROUND_HALF_UP).doubleValue());
         }
+        if(this.rebateDiscount != null && this.rebateDiscount > 0){
+            discountMap.put("platformRebateAmount", new BigDecimal(this.rebateDiscount).divide(rate, 2, BigDecimal.ROUND_HALF_UP).doubleValue());
+        }
+
 
         if (discountMap.keySet().size() > 0) {
             return JsonUtil.getJSONString(discountMap);
@@ -498,5 +507,29 @@ public class TradeOrder implements Serializable {
 
     public void setSubOrderList(List<TradeSubOrder> subOrderList) {
         this.subOrderList = subOrderList;
+    }
+
+    public Byte getHbSource() {
+        return hbSource;
+    }
+
+    public void setHbSource(Byte hbSource) {
+        this.hbSource = hbSource;
+    }
+
+    public Byte getHbType() {
+        return hbType;
+    }
+
+    public void setHbType(Byte hbType) {
+        this.hbType = hbType;
+    }
+
+    public String getIdfa() {
+        return idfa;
+    }
+
+    public void setIdfa(String idfa) {
+        this.idfa = idfa;
     }
 }

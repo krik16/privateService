@@ -17,7 +17,7 @@ import org.mongodb.morphia.annotations.Id;
  *  
  */
 @SuppressWarnings("serial")
-@Entity("building")
+@Entity(value="building",noClassnameStored=true)
 public class BuildingEntity implements Serializable{
 	
 	@Id

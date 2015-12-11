@@ -6,6 +6,7 @@ import java.util.Map;
 import com.rongyi.easy.flopgo.entity.FlopPrizeDEntity;
 import com.rongyi.easy.flopgo.entity.FlopgoActivity;
 import com.rongyi.easy.flopgo.vo.FlopSPrizeDailyVO;
+import org.bson.types.ObjectId;
 
 public interface CMFlopgoService {
 	/**
@@ -111,4 +112,11 @@ public interface CMFlopgoService {
 	 * @return
 	 */
 	public String getActivityIdByMallId(String mallId);
+
+	/***
+	 * 通过活动ids 查询活动信息
+	 * @param params
+	 * @return
+	 */
+	public List<FlopgoActivity> getFlopgoActivityByIds(List<ObjectId> params);
 }

@@ -35,7 +35,7 @@ public class ShopEntity implements Serializable{
 //    private Integer shop_nature;
     private String shop_number;
 //    private String shop_numble;
-//    private String shop_type;
+    private String shop_type;
     private String shop_icon;
 //    private String slug;
 //    private String subtitle;
@@ -187,12 +187,12 @@ public class ShopEntity implements Serializable{
 //	public void setShop_numble(String shop_numble) {
 //		this.shop_numble = shop_numble;
 //	}
-//	public String getShop_type() {
-//		return shop_type;
-//	}
-//	public void setShop_type(String shop_type) {
-//		this.shop_type = shop_type;
-//	}
+	public String getShop_type() {
+		return shop_type;
+	}
+	public void setShop_type(String shop_type) {
+		this.shop_type = shop_type;
+	}
 //	public String getSlug() {
 //		return slug;
 //	}
