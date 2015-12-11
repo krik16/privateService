@@ -608,7 +608,12 @@
 				LEFT JOIN ry_rmmm.shop_info AS SI ON SI.id = US.shop_id
 		WHERE tuc.status=2
 			AND tuc.use_time BETWEEN #{startTime,jdbcType=TIMESTAMP} AND #{endTime,jdbcType=TIMESTAMP}
-			AND tuc.checked_user_id IN #{userIds,jdbcType=VARCHAR}
+			AND tuc.checked_user_id IN 
+			<foreach item="item" index="index" collection="userIds" open="("  separator="," close=")">  
+            	#{item}  
+        	</foreach>  
+			
+			(#{userIds,jdbcType=VARCHAR})
 	</select>
 
 	<resultMap id="CouponExcelDtoMap" type="com.rongyi.settle.dto.CouponExcelDto">
@@ -710,7 +715,10 @@
 			AND UC.use_time BETWEEN
 				#{startTime,jdbcType=TIMESTAMP} AND #{endTime,jdbcType=TIMESTAMP}
 			AND
-				UC.checked_user_id IN #{userIds,jdbcType=VARCHAR}
+				UC.checked_user_id IN
+				<foreach item="item" index="index" collection="userIds" open="("  separator="," close=")">  
+	            	#{item}  
+	        	</foreach>  
 		GROUP BY tuc.coupon_id
 	</select>
 
@@ -798,7 +806,10 @@
 				AND SI.shop_mid = #{shopId,jdbcType=VARCHAR}
 			</if>
 			<if test="userIds != null">
-				AND OF.guide_id IN #{userIds,jdbcType=VARCHAR}
+				AND OF.guide_id IN
+				<foreach item="item" index="index" collection="userIds" open="("  separator="," close=")">  
+	            	#{item}  
+	        	</foreach>  
 			</if>
 	</select>
 	
@@ -854,7 +865,10 @@
 				AND E.shop_mid = #{shopId,jdbcType=VARCHAR}
 			</if>
 			<if test="userIds != null">
-				AND A.guide_id IN #{userIds,jdbcType=VARCHAR}
+				AND A.guide_id IN
+				<foreach item="item" index="index" collection="userIds" open="("  separator="," close=")">  
+	            	#{item}  
+	        	</foreach>
 			</if>
 		GROUP BY
 			A.order_no;
