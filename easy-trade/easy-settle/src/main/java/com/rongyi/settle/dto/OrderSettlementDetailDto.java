@@ -15,61 +15,61 @@ import java.util.Date;
  * @author ZhengYl
  *
  */
-public class OrderSettlementDetailDto{
+public class OrderSettlementDetailDto {
 
 	/** 订单生成时间 */
 	private Date createAt;
-	
+
 	/** 订单号 */
 	private String orderNo;
-	
+
 	/** 订单状态 */
 	private String orderStatus;
-	
+
 	/** 商品Id */
 	private String commodityId;
-	
+
 	/** 商品名称 */
 	private String commodityName;
-	
-    /** 店铺Id */
-    private String shopId;
-    
-    /** 店铺名称 */
-    private String shopName;
-    
-    /** 商场Id */
-    private String mallId;
-    
-    /** 商场名称 */
-    private String mallName;
-    
-    /** 原价 */
-    private Double origPrice;
-    
-    /** 支付金额 */
-    private Double payAmount;
-    
-    /** 红包抵扣金额 */
-    private Double hbDiscount;
-    
-    /** 积分抵扣金额 */
-    private Double scoreDiscount;
-    
-    /** 付款渠道 */
-    private String paymentChannel;
-    
-    /** 付款时间 */
-    private Date paymentTime;
-    
-    /** 发货时间 */
-    private Date deliveryTime;
-    
-    /** 收货时间 */
-    private Date receiptTime;
-    
-    /** 买家手机号 */
-    private String buyerPhone;
+
+	/** 店铺Id */
+	private String shopId;
+
+	/** 店铺名称 */
+	private String shopName;
+
+	/** 商场Id */
+	private String mallId;
+
+	/** 商场名称 */
+	private String mallName;
+
+	/** 原价 */
+	private Double origPrice;
+
+	/** 支付金额 */
+	private Double payAmount;
+
+	/** 红包抵扣金额 */
+	private Double hbDiscount;
+
+	/** 积分抵扣金额 */
+	private Double scoreDiscount;
+
+	/** 付款渠道 */
+	private String paymentChannel;
+
+	/** 付款时间 */
+	private Date paymentTime;
+
+	/** 发货时间 */
+	private Date deliveryTime;
+
+	/** 收货时间 */
+	private Date receiptTime;
+
+	/** 买家手机号 */
+	private String buyerPhone;
 
 	/**
 	 * @return the createAt
@@ -79,7 +79,8 @@ public class OrderSettlementDetailDto{
 	}
 
 	/**
-	 * @param createAt the createAt to set
+	 * @param createAt
+	 *            the createAt to set
 	 */
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
@@ -93,7 +94,8 @@ public class OrderSettlementDetailDto{
 	}
 
 	/**
-	 * @param orderNo the orderNo to set
+	 * @param orderNo
+	 *            the orderNo to set
 	 */
 	public void setOrderNo(String orderNo) {
 		this.orderNo = orderNo;
@@ -107,7 +109,8 @@ public class OrderSettlementDetailDto{
 	}
 
 	/**
-	 * @param orderStatus the orderStatus to set
+	 * @param orderStatus
+	 *            the orderStatus to set
 	 */
 	public void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
@@ -121,7 +124,8 @@ public class OrderSettlementDetailDto{
 	}
 
 	/**
-	 * @param commodityId the commodityId to set
+	 * @param commodityId
+	 *            the commodityId to set
 	 */
 	public void setCommodityId(String commodityId) {
 		this.commodityId = commodityId;
@@ -135,7 +139,8 @@ public class OrderSettlementDetailDto{
 	}
 
 	/**
-	 * @param commodityName the commodityName to set
+	 * @param commodityName
+	 *            the commodityName to set
 	 */
 	public void setCommodityName(String commodityName) {
 		this.commodityName = commodityName;
@@ -149,7 +154,8 @@ public class OrderSettlementDetailDto{
 	}
 
 	/**
-	 * @param shopId the shopId to set
+	 * @param shopId
+	 *            the shopId to set
 	 */
 	public void setShopId(String shopId) {
 		this.shopId = shopId;
@@ -163,7 +169,8 @@ public class OrderSettlementDetailDto{
 	}
 
 	/**
-	 * @param shopName the shopName to set
+	 * @param shopName
+	 *            the shopName to set
 	 */
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
@@ -177,7 +184,8 @@ public class OrderSettlementDetailDto{
 	}
 
 	/**
-	 * @param mallId the mallId to set
+	 * @param mallId
+	 *            the mallId to set
 	 */
 	public void setMallId(String mallId) {
 		this.mallId = mallId;
@@ -191,7 +199,8 @@ public class OrderSettlementDetailDto{
 	}
 
 	/**
-	 * @param mallName the mallName to set
+	 * @param mallName
+	 *            the mallName to set
 	 */
 	public void setMallName(String mallName) {
 		this.mallName = mallName;
@@ -205,7 +214,8 @@ public class OrderSettlementDetailDto{
 	}
 
 	/**
-	 * @param origPrice the origPrice to set
+	 * @param origPrice
+	 *            the origPrice to set
 	 */
 	public void setOrigPrice(Double origPrice) {
 		this.origPrice = origPrice;
@@ -219,7 +229,8 @@ public class OrderSettlementDetailDto{
 	}
 
 	/**
-	 * @param payAmount the payAmount to set
+	 * @param payAmount
+	 *            the payAmount to set
 	 */
 	public void setPayAmount(Double payAmount) {
 		this.payAmount = payAmount;
@@ -233,7 +244,8 @@ public class OrderSettlementDetailDto{
 	}
 
 	/**
-	 * @param hbDiscount the hbDiscount to set
+	 * @param hbDiscount
+	 *            the hbDiscount to set
 	 */
 	public void setHbDiscount(Double hbDiscount) {
 		this.hbDiscount = hbDiscount;
@@ -247,7 +259,8 @@ public class OrderSettlementDetailDto{
 	}
 
 	/**
-	 * @param scoreDiscount the scoreDiscount to set
+	 * @param scoreDiscount
+	 *            the scoreDiscount to set
 	 */
 	public void setScoreDiscount(Double scoreDiscount) {
 		this.scoreDiscount = scoreDiscount;
@@ -261,7 +274,8 @@ public class OrderSettlementDetailDto{
 	}
 
 	/**
-	 * @param paymentChannel the paymentChannel to set
+	 * @param paymentChannel
+	 *            the paymentChannel to set
 	 */
 	public void setPaymentChannel(String paymentChannel) {
 		this.paymentChannel = paymentChannel;
@@ -275,7 +289,8 @@ public class OrderSettlementDetailDto{
 	}
 
 	/**
-	 * @param paymentTime the paymentTime to set
+	 * @param paymentTime
+	 *            the paymentTime to set
 	 */
 	public void setPaymentTime(Date paymentTime) {
 		this.paymentTime = paymentTime;
@@ -289,7 +304,8 @@ public class OrderSettlementDetailDto{
 	}
 
 	/**
-	 * @param deliveryTime the deliveryTime to set
+	 * @param deliveryTime
+	 *            the deliveryTime to set
 	 */
 	public void setDeliveryTime(Date deliveryTime) {
 		this.deliveryTime = deliveryTime;
@@ -303,7 +319,8 @@ public class OrderSettlementDetailDto{
 	}
 
 	/**
-	 * @param receiptTime the receiptTime to set
+	 * @param receiptTime
+	 *            the receiptTime to set
 	 */
 	public void setReceiptTime(Date receiptTime) {
 		this.receiptTime = receiptTime;
@@ -317,33 +334,40 @@ public class OrderSettlementDetailDto{
 	}
 
 	/**
-	 * @param buyerPhone the buyerPhone to set
+	 * @param buyerPhone
+	 *            the buyerPhone to set
 	 */
 	public void setBuyerPhone(String buyerPhone) {
 		this.buyerPhone = buyerPhone;
 	}
 
-    public OrderSettlementDetailVO toVO() {
-    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    	
-    	OrderSettlementDetailVO vo = new OrderSettlementDetailVO();
-    	
-    	vo.setCreateAt(dateFormat.format(getCreateAt()));
-    	vo.setOrderNo(getOrderNo());
-    	vo.setOrderStatus(getOrderStatus());
-    	vo.setCommodityName(getCommodityName());
-    	vo.setShopName(getShopName());
-    	vo.setMallName(getMallName());
-    	vo.setOrigPrice(getOrigPrice());
-    	vo.setPayAmount(getPayAmount());
-    	vo.setHbDiscount(getHbDiscount());
-    	vo.setScoreDiscount(getScoreDiscount());
-    	vo.setPaymentChannel(getPaymentChannel());
-    	vo.setPaymentTime(dateFormat.format(getPaymentTime()));
-    	vo.setDeliveryTime(dateFormat.format(getDeliveryTime()));
-    	vo.setReceiptTime(dateFormat.format(getReceiptTime()));
-    	vo.setBuyerPhone(getBuyerPhone());
-    	
-    	return vo;
+	public OrderSettlementDetailVO toVO() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+		OrderSettlementDetailVO vo = new OrderSettlementDetailVO();
+
+		vo.setCreateAt(dateFormat.format(getCreateAt()));
+		vo.setOrderNo(getOrderNo());
+		vo.setOrderStatus(getOrderStatus());
+		vo.setCommodityName(getCommodityName());
+		vo.setShopName(getShopName());
+		vo.setMallName(getMallName());
+		vo.setOrigPrice(getOrigPrice());
+		vo.setPayAmount(getPayAmount());
+		vo.setHbDiscount(getHbDiscount());
+		vo.setScoreDiscount(getScoreDiscount());
+		vo.setPaymentChannel(getPaymentChannel());
+		if (getPaymentTime() != null) {
+			vo.setPaymentTime(dateFormat.format(getPaymentTime()));
+		}
+		if (getDeliveryTime() != null) {
+			vo.setDeliveryTime(dateFormat.format(getDeliveryTime()));
+		}
+		if (getReceiptTime() != null) {
+			vo.setReceiptTime(dateFormat.format(getReceiptTime()));
+		}
+		vo.setBuyerPhone(getBuyerPhone());
+
+		return vo;
 	}
 }
