@@ -13,6 +13,7 @@ import java.security.cert.CertificateException;
 
 import javax.net.ssl.SSLContext;
 
+import com.google.common.base.Strings;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.config.RequestConfig;
@@ -30,13 +31,17 @@ import com.rongyi.rpb.common.pay.weixin.service.IServiceRequest;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.io.xml.XmlFriendlyNameCoder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * User: rizenguo
  * Date: 2014/10/29
  * Time: 14:36
  */
-public class HttpsRequest implements IServiceRequest{
+public class HttpsRequest implements IServiceRequest {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(HttpsRequest.class);
 
     public interface ResultListener {
 
@@ -67,7 +72,12 @@ public class HttpsRequest implements IServiceRequest{
     private void init() throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
 
         KeyStore keyStore = KeyStore.getInstance("PKCS12");
-        FileInputStream instream = new FileInputStream(new File(Configure.getCertLocalPath()));//加载本地的证书进行https加密传输
+        String cretFilePath = Configure.getCertLocalPath();
+        if (Strings.isNullOrEmpty(cretFilePath)) {
+            cretFilePath = "/data/etc/projects/easy-rpb-cert/1268956601.p12";
+            LOGGER.info("设置默认证书路径，certFilePath={}", cretFilePath);
+        }
+        FileInputStream instream = new FileInputStream(new File(cretFilePath));//加载本地的证书进行https加密传输
         try {
             keyStore.load(instream, Configure.getCertPassword().toCharArray());//设置证书密码
         } catch (CertificateException e) {
@@ -145,16 +155,16 @@ public class HttpsRequest implements IServiceRequest{
             result = EntityUtils.toString(entity, "UTF-8");
 
         } catch (ConnectionPoolTimeoutException e) {
-           e.printStackTrace();
+            e.printStackTrace();
 
         } catch (ConnectTimeoutException e) {
-        	e.printStackTrace();
+            e.printStackTrace();
 
         } catch (SocketTimeoutException e) {
-        	e.printStackTrace();
+            e.printStackTrace();
 
         } catch (Exception e) {
-        	e.printStackTrace();
+            e.printStackTrace();
 
         } finally {
             httpPost.abort();
@@ -183,7 +193,7 @@ public class HttpsRequest implements IServiceRequest{
         resetRequestConfig();
     }
 
-    private void resetRequestConfig(){
+    private void resetRequestConfig() {
         requestConfig = RequestConfig.custom().setSocketTimeout(socketTimeout).setConnectTimeout(connectTimeout).build();
     }
 

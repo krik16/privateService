@@ -1,5 +1,7 @@
 package com.rongyi.rpb.service;
 
+import com.rongyi.easy.rpb.vo.PaymentEntityVO;
+
 import java.util.Map;
 /**	
  * @Author:  柯军
@@ -12,10 +14,10 @@ public interface WebPageAlipayService {
 	/**
 	 * 通过基本参数和业务参数获取支付宝令牌token (支付宝网页支付后台流程第一步)
 	 * 
-	 * @param orderId
+	 * @param paymentEntityVO
 	 * @return token
 	 */
-	public abstract Map<String, Object> getToken(String payNo, String totalFee, String itemName);
+	public abstract Map<String, Object> getToken(PaymentEntityVO paymentEntityVO);
 
 	/**
 	 * 得到所要加载在跳转支付宝收银台之前页面的form表单

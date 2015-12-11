@@ -1,12 +1,12 @@
 package com.rongyi.rpb.service;
 
-import java.util.List;
-import java.util.Map;
-
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: 柯军
@@ -71,7 +71,7 @@ public interface PaymentService {
 	/**
 	 * 生成mq同步通知信息
 	 * 
-	 * @param message
+	 * @param event
 	 * @return
 	 */
 	public abstract Map<String, Object> getSendMessage(MessageEvent event);
@@ -96,7 +96,7 @@ public interface PaymentService {
 	 * 商品价格为0时特殊处理
 	 * 
 	 * @author kejun 2015年4月2日
-	 * @param message
+	 * @param event
 	 * @return
 	 */
 	public abstract Map<String, Object> getZeroSendMessage(MessageEvent event,Map<String, Object> messageMap, PaymentEntityVO paymentEntityVO);
@@ -109,7 +109,7 @@ public interface PaymentService {
 
 	public abstract PaymentEntity selectByPrimaryKey(String id);
 
-	public abstract List<PaymentEntity> selectByOrderNum(String orderNum,Integer tradeType);
+	public abstract List<PaymentEntity> selectByOrderNum(String orderNum,Integer tradeType,Integer payChannel);
 
 	public abstract PaymentEntity selectByOrderNumAndTradeType(String orderNum, Integer tradeType, Integer status,Integer payChannel);
 	
@@ -165,7 +165,7 @@ public interface PaymentService {
 	/**
 	 * @Description: 验证是否是重复付款
 	 * @param payNo
-	 * @param newPayChannel收到新支付通知中的支付方式
+	 * @param newPayChannel 收到新支付通知中的支付方式
 	 * @return
 	 * @Author: 柯军
 	 * @datetime:2015年8月17日上午11:24:04
@@ -211,14 +211,14 @@ public interface PaymentService {
 	 * @Author:  柯军
 	 * @datetime:2015年8月24日下午4:14:11
 	 **/
-	public List<PaymentEntity> updateListStatus(String payNo, Integer type, Integer status,Integer payChannel);
+	public void updateListStatus(String payNo, Integer type, Integer status,Integer payChannel);
 	
 	
 	/**	
 	 * @Description:  查询是否允许退款的记录
 	 * @param tradeType
 	 * @param payChannel
-	 * @param agreeRefund
+	 * @param status
 	 * @return	
 	 * @Author:  柯军
 	 * @datetime:2015年8月27日上午10:42:19  的                                                                                                                         
@@ -261,4 +261,12 @@ public interface PaymentService {
 	 * @datetime:2015年10月14日下午6:53:35
 	 **/
 	public abstract void updateByIds(String[] ids,Map<String,Object> map);
+
+	/**
+	 * @Description: 查询付款单(加锁)
+	 * @param:
+	 * @Author:  柯军
+	 **/
+
+	public abstract PaymentEntity selectByWithLock(Integer id);
 }

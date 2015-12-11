@@ -8,33 +8,30 @@
 
 package com.rongyi.tms.service.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
+import com.rongyi.easy.coupon.entity.CouponOrder;
+import com.rongyi.easy.coupon.entity.UserCoupon;
+import com.rongyi.easy.malllife.vo.UserInfoVO;
+import com.rongyi.easy.osm.entity.OrderFormEntity;
+import com.rongyi.easy.tms.vo.TradeVO;
+import com.rongyi.easy.usercenter.entity.MalllifeUserInfoEntity;
 import com.rongyi.rss.coupon.mall.shop.MSUserCouponService;
+import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
+import com.rongyi.rss.mallshop.order.ROAOrderFormService;
 import com.rongyi.rss.tradecenter.RoaProxyCouponOrderService;
+import com.rongyi.tms.constants.ConstantEnum;
+import com.rongyi.tms.moudle.vo.TradeDetailCount;
+import com.rongyi.tms.service.TradeDetailService;
 import net.sf.json.JSONObject;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rongyi.core.common.util.DateUtil;
-import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
-import com.rongyi.easy.coupon.entity.CouponOrder;
-import com.rongyi.easy.coupon.entity.UserCoupon;
-import com.rongyi.easy.entity.MallLifeUserEntity;
-import com.rongyi.easy.malllife.vo.UserInfoVO;
-import com.rongyi.easy.osm.entity.OrderFormEntity;
-import com.rongyi.easy.tms.vo.TradeVO;
-import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
-import com.rongyi.rss.mallshop.order.ROAOrderFormService;
-import com.rongyi.tms.constants.ConstantEnum;
-import com.rongyi.tms.moudle.vo.TradeDetailCount;
-import com.rongyi.tms.service.TradeDetailService;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: 柯军
@@ -109,7 +106,7 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 						buyerId = couponOrder.getBuyerId();
 				}
 				if (StringUtils.isNotEmpty(buyerId)) {
-					MallLifeUserEntity mallLifeUserEntity = rOAMallLifeUserService.getEntityByUid(buyerId);
+					MalllifeUserInfoEntity mallLifeUserEntity = rOAMallLifeUserService.getEntityByUid(buyerId);
 					if (mallLifeUserEntity != null) {
 						tradeVO.setBuyerAccount(mallLifeUserEntity.getPhone());
 						tradeVO.setBuyerName(mallLifeUserEntity.getUserName());

@@ -7,6 +7,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 
 import com.rongyi.rpb.common.pay.weixin.util.Configure;
+import org.slf4j.Logger;
 
 /**
  * User: rizenguo

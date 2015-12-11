@@ -4,6 +4,9 @@ import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.rongyi.easy.rpb.vo.PaymentEntityVO;
+import com.rongyi.rpb.unit.TimeExpireUnit;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.dubbo.common.logger.Logger;
@@ -28,9 +31,15 @@ public class WebPageAlipayServiceImpl extends BaseServiceImpl implements WebPage
 	private static final Logger LOGGER = LoggerFactory.getLogger(WebPageAlipayServiceImpl.class);
 	private static String requestToken;
 
+	@Autowired
+	TimeExpireUnit timeExpireUnit;
+
 	@Override
-	public Map<String, Object> getToken(String payNo, String totalFee, String itemName) {
+	public Map<String, Object> getToken(PaymentEntityVO paymentEntityVO) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		//支付失效时间
+		String itBPay= timeExpireUnit.aliPayTimeExpire(paymentEntityVO.getTimeStart(), paymentEntityVO.getTimeExpire(),paymentEntityVO.getOrderType());
+
 		// 把请求参数打包成数组
 		Map<String, String> sParaTempToken = new HashMap<String, String>();
 		sParaTempToken.put("service", ConstantUtil.ZhiFuBaoWebPage.AUTHORIZATION_SERVICE);
@@ -40,7 +49,7 @@ public class WebPageAlipayServiceImpl extends BaseServiceImpl implements WebPage
 		sParaTempToken.put("format", ConstantUtil.ZhiFuBaoWebPage.FORMAT);
 		sParaTempToken.put("v", ConstantUtil.ZhiFuBaoWebPage.VERSION);
 		sParaTempToken.put("req_id", UtilDate.getOrderNum());
-		sParaTempToken.put("req_data", getRequestDataToken(payNo, totalFee, itemName));
+		sParaTempToken.put("req_data", getRequestDataToken(paymentEntityVO.getPayNo(), paymentEntityVO.getAmountMoney().toString(), paymentEntityVO.getTitle(),itBPay));
 		try {
 			// 建立请求
 			String sHtmlTextToken = AlipaySubmit.buildRequest(ConstantUtil.ZhiFuBaoWebPage.ALIPAY_GATEWAY_NEW, "", "", sParaTempToken);
@@ -82,7 +91,7 @@ public class WebPageAlipayServiceImpl extends BaseServiceImpl implements WebPage
 	 * @param orderId
 	 * @return
 	 */
-	private String getRequestDataToken(String orderId, String totalFee, String itemName) {
+	private String getRequestDataToken(String orderId, String totalFee, String itemName,String itBPay) {
 
 		StringBuilder reqDataToken = new StringBuilder();
 
@@ -115,6 +124,11 @@ public class WebPageAlipayServiceImpl extends BaseServiceImpl implements WebPage
 		reqDataToken.append("<total_fee>");
 		reqDataToken.append(totalFee);
 		reqDataToken.append("</total_fee>");
+
+		reqDataToken.append("<it_b_pay>");
+		reqDataToken.append(itBPay);//支付超时时间
+		reqDataToken.append("</it_b_pay>");
+
 
 		reqDataToken.append("</direct_trade_create_req>");
 

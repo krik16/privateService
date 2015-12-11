@@ -39,7 +39,7 @@ public class CouponOrderServiceTest extends BaseTest{
 	
 	@Test
 	public void testSelectById(){
-		System.err.println(couponOrderService.selectById(57786).getId());
+		System.err.println(couponOrderService.selectById(57786));
 	}
 	
 }

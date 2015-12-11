@@ -8,25 +8,24 @@
 
 package com.rongyi.tms.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
+import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
+import com.rongyi.easy.coupon.entity.CouponOrder;
+import com.rongyi.easy.malllife.vo.UserInfoVO;
+import com.rongyi.easy.rpb.domain.PaymentEntity;
+import com.rongyi.easy.tms.vo.TradeVO;
+import com.rongyi.easy.usercenter.entity.MalllifeUserInfoEntity;
+import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
+import com.rongyi.rss.rpb.IRpbService;
 import com.rongyi.rss.tradecenter.RoaProxyCouponOrderService;
+import com.rongyi.tms.constants.ConstantEnum;
+import com.rongyi.tms.service.RefundService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
-import com.rongyi.easy.coupon.entity.CouponOrder;
-import com.rongyi.easy.entity.MallLifeUserEntity;
-import com.rongyi.easy.malllife.vo.UserInfoVO;
-import com.rongyi.easy.rpb.domain.PaymentEntity;
-import com.rongyi.easy.tms.vo.TradeVO;
-import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
-import com.rongyi.rss.rpb.IRpbService;
-import com.rongyi.tms.constants.ConstantEnum;
-import com.rongyi.tms.service.RefundService;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: 柯军
@@ -90,7 +89,7 @@ public class RefundServiceImpl extends BaseServiceImpl implements RefundService 
 				CouponOrder couponOrder = roaProxyCouponOrderService.findOneByOrderNo(tradeVO.getOrderNo());
 				if (couponOrder != null && couponOrder.getBuyerId() != null) {
 					try {
-						MallLifeUserEntity mallLifeUserEntity = rOAMallLifeUserService.getEntityByUid(couponOrder.getBuyerId());
+						MalllifeUserInfoEntity mallLifeUserEntity = rOAMallLifeUserService.getEntityByUid(couponOrder.getBuyerId());
 						if (mallLifeUserEntity != null) {
 							tradeVO.setBuyerAccount(mallLifeUserEntity.getPhone());
 							tradeVO.setBuyerName(mallLifeUserEntity.getUserName());

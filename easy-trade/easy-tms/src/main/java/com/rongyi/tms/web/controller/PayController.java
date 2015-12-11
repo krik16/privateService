@@ -1,14 +1,24 @@
 package com.rongyi.tms.web.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import com.rongyi.core.bean.ResponseResult;
+import com.rongyi.core.common.util.DateUtil;
+import com.rongyi.core.common.util.JsonUtil;
+import com.rongyi.core.constant.PayEnum;
+import com.rongyi.core.constant.PaymentEventType;
+import com.rongyi.easy.mq.MessageEvent;
+import com.rongyi.easy.osm.entity.OrderFormEntity;
+import com.rongyi.easy.settle.dto.PaymentStatementDto;
+import com.rongyi.easy.tms.vo.TradeVO;
+import com.rongyi.easy.usercenter.entity.MalllifeUserInfoEntity;
+import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
+import com.rongyi.rss.mallshop.order.ROAOrderFormService;
+import com.rongyi.rss.rpb.IRpbService;
+import com.rongyi.tms.constants.Constant;
+import com.rongyi.tms.constants.ConstantEnum;
+import com.rongyi.tms.mq.Sender;
+import com.rongyi.tms.service.PayService;
+import com.rongyi.tms.service.PaymentStatementService;
+import com.rongyi.tms.service.RefundService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,25 +30,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.rongyi.core.bean.ResponseResult;
-import com.rongyi.core.common.util.DateUtil;
-import com.rongyi.core.common.util.JsonUtil;
-import com.rongyi.core.constant.PayEnum;
-import com.rongyi.core.constant.PaymentEventType;
-import com.rongyi.easy.entity.MallLifeUserEntity;
-import com.rongyi.easy.mq.MessageEvent;
-import com.rongyi.easy.osm.entity.OrderFormEntity;
-import com.rongyi.easy.settle.dto.PaymentStatementDto;
-import com.rongyi.easy.tms.vo.TradeVO;
-import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
-import com.rongyi.rss.mallshop.order.ROAOrderFormService;
-import com.rongyi.rss.rpb.IRpbService;
-import com.rongyi.tms.constants.Constant;
-import com.rongyi.tms.constants.ConstantEnum;
-import com.rongyi.tms.mq.Sender;
-import com.rongyi.tms.service.PayService;
-import com.rongyi.tms.service.PaymentStatementService;
-import com.rongyi.tms.service.RefundService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: 柯军
@@ -196,7 +194,7 @@ public class PayController extends BaseController {
 	 **/
 	private List<TradeVO> buildList(List<TradeVO> list) {
 		try {
-			MallLifeUserEntity user = null;
+			MalllifeUserInfoEntity user = null;
 			for (TradeVO tradeVO : list) {
 				if (tradeVO.getBuyerId() != null) {
 					user = rOAMallLifeUserService.getEntityByUid(tradeVO.getBuyerId());
@@ -206,7 +204,7 @@ public class PayController extends BaseController {
 				if (user != null) {
 					tradeVO.setBuyerId(user.getId().toString());
 					tradeVO.setBuyerAccount(user.getPhone());
-					tradeVO.setBuyerName(user.getNickname());
+					tradeVO.setBuyerName(user.getNickName());
 				}
 			}
 		} catch (Exception e) {
