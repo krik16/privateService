@@ -89,21 +89,21 @@ public class ExcelUtils {
 			XSSFCell revenueType = row15.getCell(3);
 			revenueType.setCellValue(couponExcelDto.getRevenueType());
 
-			XSSFCell couponCount = row15.getCell(5);
+			XSSFCell couponCount = row15.getCell(4);
 			couponCount.setCellValue(couponExcelDto.getCouponCount());
 
-			XSSFCell hbPrice = row15.getCell(7);
+			XSSFCell hbPrice = row15.getCell(6);
 			hbPrice.setCellValue(df.format(couponExcelDto.getCouponHbTotal() == null ? 0 : AmountUtil.changFenToYuan(couponExcelDto.getCouponHbTotal().intValue())));
 
-			XSSFCell scorePrice = row15.getCell(9);
+			XSSFCell scorePrice = row15.getCell(8);
 			scorePrice.setCellValue(
 					df.format(couponExcelDto.getCouponScoreTotal() == null ? 0 : AmountUtil.changFenToYuan(couponExcelDto.getCouponScoreTotal().intValue())));
 
-			XSSFCell dicountPrice = row15.getCell(11);
+			XSSFCell dicountPrice = row15.getCell(10);
 			dicountPrice.setCellValue(
 					df.format(couponExcelDto.getCouponDiscountTotal() == null ? 0 : AmountUtil.changFenToYuan(couponExcelDto.getCouponDiscountTotal().intValue())));
 
-			XSSFCell totalPrice = row15.getCell(13);
+			XSSFCell totalPrice = row15.getCell(12);
 			totalPrice.setCellValue(
 					df.format(couponExcelDto.getCouponPriceTotal() == null ? 0 : AmountUtil.changFenToYuan(couponExcelDto.getCouponPriceTotal().intValue())));
 		}
@@ -118,19 +118,19 @@ public class ExcelUtils {
 			XSSFCell revenueType = row26.getCell(3);
 			revenueType.setCellValue(orderTop.getIncomeType());
 
-			XSSFCell orderCount = row26.getCell(5);
+			XSSFCell orderCount = row26.getCell(4);
 			orderCount.setCellValue(orderTop.getOrderCount());
 
-			XSSFCell hbPrice = row26.getCell(7);
+			XSSFCell hbPrice = row26.getCell(6);
 			hbPrice.setCellValue(df.format(orderTop.getHbDiscountTotal() == null ? 0 : orderTop.getHbDiscountTotal().intValue()));
 
-			XSSFCell scorePrice = row26.getCell(9);
+			XSSFCell scorePrice = row26.getCell(8);
 			scorePrice.setCellValue(df.format(orderTop.getScoreDiscountTotal() == null ? 0 : orderTop.getScoreDiscountTotal().intValue()));
 
-			XSSFCell dicountPrice = row26.getCell(11);
+			XSSFCell dicountPrice = row26.getCell(10);
 			dicountPrice.setCellValue(df.format(orderTop.getOrderDiscountTotal() == null ? 0 : orderTop.getOrderDiscountTotal().intValue()));
 
-			XSSFCell totalPrice = row26.getCell(13);
+			XSSFCell totalPrice = row26.getCell(12);
 			totalPrice.setCellValue(df.format(orderTop.getOrderAmountTotal() == null ? 0 : orderTop.getOrderAmountTotal().intValue()));
 		}
 

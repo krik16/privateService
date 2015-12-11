@@ -8,16 +8,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.settle.entity.PaymentStatement;
 import com.rongyi.easy.settle.entity.StatementConfig;
-import com.rongyi.rss.malllife.roa.ROARedisService;
-import com.rongyi.rss.roa.ROAShopService;
 import com.rongyi.rss.rpb.OrderNoGenService;
 import com.rongyi.rss.settle.PaymentStatementGenerateService;
 import com.rongyi.settle.constants.SettleConstant;
-import com.rongyi.settle.service.BussinessInfoService;
 import com.rongyi.settle.service.PaymentStatementService;
 import com.rongyi.settle.service.StatementConfigService;
 import com.rongyi.settle.util.DateUtils;
@@ -38,21 +34,8 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
     private PaymentStatementService paymentStatementService;
 
     @Autowired
-    private BussinessInfoService bussinessInfoService;
-
-    @Autowired
-    private PropertyConfigurer propertyConfigurer;
-
-    @Autowired
-    private ROAShopService roaShopService;
-    
-    @Autowired
     private OrderNoGenService orderNoGenService;
-
-    @Autowired
-    private ROARedisService redisService;
-
-
+    
     @Override
     public void generateForSchedule() throws Exception {
         logger.info("定时任务-扫描对账单配置……");
