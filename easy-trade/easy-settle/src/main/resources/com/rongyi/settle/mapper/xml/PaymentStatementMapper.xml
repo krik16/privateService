@@ -480,7 +480,7 @@
 		<result column="guide_phone" property="guidePhone" jdbcType="VARCHAR" />
 	</resultMap>
 
-	<select id="selectForStatementDetails" parameterType="java.util.Map" resultMap="StatementDetailMap" statementType="STATEMENT">
+	<select id="selectForStatementDetails" parameterType="java.util.Map" resultMap="StatementDetailMap">
 		select
 		tor.order_no,tor.pay_no,tuc.use_time,tor.create_at,tuc.coupon_id,tuc.coupon_code,tuc.title,'收入'
 		as revenue_type,
@@ -506,7 +506,7 @@
 		AND tuc.shop_id = #{shopId,jdbcType=VARCHAR}
 	</select>
 	
-	<select id="selectForStatementDetailsByMid" parameterType="java.util.Map" resultMap="StatementDetailMap" statementType="STATEMENT">
+	<select id="selectForStatementDetailsByMid" parameterType="java.util.Map" resultMap="StatementDetailMap">
 		SELECT
 			tor.order_no,
 			tor.pay_no,
@@ -538,7 +538,7 @@
 			tor.user_name,
 			rui.user_name AS guide_name,
 			rui.user_phone AS guide_phone,
-			US.shop_id
+			US.shop_id,
 			US.mall_id,
 			SI.shop_name,
 			MC.mall_name
@@ -563,7 +563,7 @@
 			</if>
 	</select>
 
-	<select id="selectForStatementDetailsByUsers" parameterType="java.util.Map" resultMap="StatementDetailMap" statementType="STATEMENT">
+	<select id="selectForStatementDetailsByUsers" parameterType="java.util.Map" resultMap="StatementDetailMap">
 		SELECT
 			tor.order_no,
 			tor.pay_no,
@@ -595,7 +595,7 @@
 			tor.user_name,
 			rui.user_name AS guide_name,
 			rui.user_phone AS guide_phone,
-			US.shop_id
+			US.shop_id,
 			US.mall_id,
 			SI.shop_name,
 			MC.mall_name
@@ -824,7 +824,7 @@
 		 	H2.create_at AS payment_time,
 		 	H3.create_at AS delivery_time,
 		 	H4.create_at AS receipt_time,
-		 	M.phone AS buyer_phone
+		 	MUA.phone AS buyer_phone
 		FROM
 			ry_osm.order_form A
 				LEFT JOIN ry_osm.order_detail_form B ON A.order_no = B.order_no
@@ -839,9 +839,9 @@
 				LEFT JOIN ry_osm.order_event H4 ON A.order_no = H4.order_no AND H4.type = 4
 				LEFT JOIN ry_rpb.sales_commission I ON A.order_no = I.order_no
 				LEFT JOIN ry_rpb.sales_commission_audit_log J ON I.id = J.sales_commission_id AND J.operate_biz = 1
-				LEFT JOIN ry_data.m_user_address M ON A.address_id = M.mid
-				LEFT JOIN ry_data.m_mcmc_commodity N ON B.commodity_mid = N.mid
 				LEFT JOIN ry_rpb.payment_order O ON A.order_no = O.order_no AND O.trade_type = 0
+				LEFT JOIN ry_data.m_mcmc_commodity N ON B.commodity_mid = N.mid
+				LEFT JOIN ry_user.malllife_user_address MUA ON MUA.user_id = A.buyer_id
 		WHERE H3.create_at BETWEEN #{startTime,jdbcType=TIMESTAMP} AND #{endTime,jdbcType=TIMESTAMP}
 			AND A.`status` &gt; 2
 			<if test="brandId != null">

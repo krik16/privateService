@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.rongyi.settle.unit.SendEmailUnit;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,6 +41,7 @@ import com.rongyi.settle.mapper.PaymentStatementMapper;
 import com.rongyi.settle.service.BussinessInfoService;
 import com.rongyi.settle.service.PaymentStatementService;
 import com.rongyi.settle.service.StatementConfigService;
+import com.rongyi.settle.unit.SendEmailUnit;
 import com.rongyi.settle.util.AmountUtil;
 import com.rongyi.settle.util.DateUtils;
 import com.rongyi.settle.util.ExcelUtils;
@@ -401,7 +401,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 
 		boolean dataLoad = false;
 
-		logger.info("对账单获取数据开始，BusinessId = " + statementConfig.getBussinessId() + "BusinessType = " + statementConfig.getBussinessType());
+		logger.info("对账单获取数据开始，BusinessId = " + statementConfig.getBussinessId() + " BusinessType = " + statementConfig.getBussinessType());
 		if (statementConfig.getLinkType().equals(SettleConstant.LinkType.ALL)) {
 			if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.MALL)) {
 				// 商场 & all
