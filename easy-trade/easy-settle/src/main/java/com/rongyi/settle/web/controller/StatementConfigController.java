@@ -379,7 +379,7 @@ public class StatementConfigController extends BaseController{
 	public ResponseData relevance(@RequestBody RelevanceParam params) {
 		ResponseData result = null;
 		try {
-			LOGGER.info("================ 》》》》》》》》》》》》 relevance params={}", params);
+			LOGGER.info("================  relevance params={}", params);
 			if (params.getType()==null){
 				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
 			}
@@ -399,7 +399,11 @@ public class StatementConfigController extends BaseController{
                         shop.setId(shopVO.getId());
                         shop.setName(shopVO.getName());
                         shop.setPosition(shopVO.getPosition());
-                        reList.add(shop);
+						shop.setBrandName(shopVO.getBrandName());
+						if (shopVO.getPosition()!=null) {
+							shop.setMallName(shopVO.getPosition().getMall());
+						}
+						reList.add(shop);
                     }
 				}
 				int count = resultMap.containsKey("totalCount") ? Integer.valueOf(resultMap.get("totalCount").toString()) : 0;

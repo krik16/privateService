@@ -14,6 +14,8 @@ public class RelevanceVO implements Serializable{
 
     private String id;
     private String name;
+    private String mallName;
+    private String brandName;
 
     private ShopPositionVO position;
 
@@ -58,6 +60,22 @@ public class RelevanceVO implements Serializable{
 
     public void setPosition(ShopPositionVO position) {
         this.position = position;
+    }
+
+    public String getMallName() {
+        return mallName;
+    }
+
+    public void setMallName(String mallName) {
+        this.mallName = mallName;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
     }
 
     @Override

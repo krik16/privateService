@@ -113,7 +113,18 @@
         <if test="createAtEnd != null and createAtEnd != ''">
             AND #{createAtEnd} >= pbc. create_at
         </if>
-
+        <!-- 生效开始 -->
+        <if test="effectBegin != null and effectBegin != ''">
+            AND pbc.effect_start_time >= #{effectBegin}
+        </if>
+        <!-- 生效结束 -->
+        <if test="effectEnd != null and effectEnd != ''">
+            AND #{effectEnd} >= pbc.effect_start_time
+        </if>
+        <!-- 名称 -->
+        <if test="businessName != null and businessName != ''">
+            AND pbc.biz_name = #{businessName}
+        </if>
 
     </sql>
     <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">

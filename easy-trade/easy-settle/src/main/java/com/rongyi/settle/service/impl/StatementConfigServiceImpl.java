@@ -412,8 +412,12 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 				default: return null;
 			}
 		}else if (isOneself==0){
-			if (guideType==1) {
-				paramsMap.put("identity", 5);
+			if (guideType==1) //产品确认该情况（店长+导购）
+            {
+                List<Integer> identitys = new ArrayList<>();
+                identitys.add(5);
+                identitys.add(4);
+				paramsMap.put("identitys", identitys);
 			}
 			if (guideType==2){
 				paramsMap.put("identity" ,6);
