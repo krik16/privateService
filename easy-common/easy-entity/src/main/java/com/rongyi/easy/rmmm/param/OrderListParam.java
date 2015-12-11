@@ -16,6 +16,26 @@ public class OrderListParam implements Serializable {
 	private Double unitPrice;// 单价
 
 	private Double num;// 数量
+	
+	private Double platformRebateAmount;// 抵扣券抵扣金额
+	
+	private String couponId;// 代金券id
+
+	public Double getPlatformRebateAmount() {
+		return platformRebateAmount;
+	}
+
+	public void setPlatformRebateAmount(Double platformRebateAmount) {
+		this.platformRebateAmount = platformRebateAmount;
+	}
+
+	public String getCouponId() {
+		return couponId;
+	}
+
+	public void setCouponId(String couponId) {
+		this.couponId = couponId;
+	}
 
 	public Double getCouponAmount() {
 		return couponAmount;
@@ -43,10 +63,7 @@ public class OrderListParam implements Serializable {
 
 	@Override
 	public String toString() {
-		return "OrderListParam{" +
-				"couponAmount=" + couponAmount +
-				", unitPrice=" + unitPrice +
-				", num=" + num +
-				'}';
+		return "OrderListParam [couponAmount=" + couponAmount + ", unitPrice=" + unitPrice + ", num=" + num
+				+ ", platformRebateAmount=" + platformRebateAmount + ", couponId=" + couponId + "]";
 	}
 }

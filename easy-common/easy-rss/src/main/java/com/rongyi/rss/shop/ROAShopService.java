@@ -6,6 +6,7 @@ import java.util.Map;
 import org.bson.types.ObjectId;
 
 import com.rongyi.easy.shop.entity.ShopEntity;
+import com.rongyi.easy.shop.vo.ShopVO;
 
 public interface ROAShopService {
 	
@@ -37,4 +38,24 @@ public interface ROAShopService {
 	 * @return
 	 */
 	public ShopEntity serachShopByNumber(String number,String brandMid);
+	
+	/**
+	 * 根据商场和店铺性质查询店铺
+	 * @param mallId
+	 * @param type
+	 * @param pageSize >0分页 <=0部分页
+	 * @param currpage
+	 * @return
+	 */
+	public List<ShopVO> searchShopByMallAreaIdAndType(String mallId,
+			int type, int pageSize, int currpage);
+	
+	
+	/**
+	 * 根据商场和店铺性质查询店铺数量
+	 * @param mallId
+	 * @param type
+	 * @return
+	 */
+	public Long searchShopCountByMallAreaIdAndType(String mallId,int type);
 }

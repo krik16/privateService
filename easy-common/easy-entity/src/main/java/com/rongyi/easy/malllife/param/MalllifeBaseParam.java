@@ -60,4 +60,5 @@ public class MalllifeBaseParam implements Serializable {
     public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
     }
+    
 }

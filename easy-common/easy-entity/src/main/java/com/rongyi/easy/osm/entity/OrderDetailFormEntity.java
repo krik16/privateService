@@ -3,7 +3,7 @@ package com.rongyi.easy.osm.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class OrderDetailFormEntity implements Serializable{
+public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDetailFormEntity>{
     /**
 	 * 
 	 */
@@ -65,6 +65,28 @@ public class OrderDetailFormEntity implements Serializable{
     
     /** 退款时使用，指退款商品在支付阶段享受到的优惠，例如购买3件商品使用100积分，退款2件，则2件商品对应积分为(2/3)*100四舍五入(存json格式数据)   */
     private String refundDiscountInfo;
+
+    /**促销券抵扣金额*/
+    private BigDecimal couponDiscount;
+
+    /**促销券来源 1：平台 2：商家*/
+    private Integer couponSource;
+
+    /**促销券类型 1：满减 2：立减*/
+    private Integer couponType;
+
+    /**实际支付金额*/
+    private BigDecimal payAmount;
+
+    /**大订单改价分摊优惠金额*/
+    private BigDecimal orderDiscountFee;
+
+    /**大订单积分分摊优惠金额*/
+    private BigDecimal orderScoreDiscount;
+
+    /**大订单抵扣券分摊优惠金额*/
+    private BigDecimal orderCouponDiscount;
+
 
     public String getRefundDiscountInfo() {
 		return refundDiscountInfo;
@@ -362,12 +384,79 @@ public class OrderDetailFormEntity implements Serializable{
 		this.commodityCommission = commodityCommission;
 	}
 
-	@Override
+    public BigDecimal getCouponDiscount() {
+        return couponDiscount;
+    }
+
+    public void setCouponDiscount(BigDecimal couponDiscount) {
+        this.couponDiscount = couponDiscount;
+    }
+
+    public Integer getCouponSource() {
+        return couponSource;
+    }
+
+    public void setCouponSource(Integer couponSource) {
+        this.couponSource = couponSource;
+    }
+
+    public Integer getCouponType() {
+        return couponType;
+    }
+
+    public void setCouponType(Integer couponType) {
+        this.couponType = couponType;
+    }
+
+    public BigDecimal getPayAmount() {
+        return payAmount;
+    }
+
+    public void setPayAmount(BigDecimal payAmount) {
+        this.payAmount = payAmount;
+    }
+
+    public BigDecimal getOrderDiscountFee() {
+        return orderDiscountFee;
+    }
+
+    public void setOrderDiscountFee(BigDecimal orderDiscountFee) {
+        this.orderDiscountFee = orderDiscountFee;
+    }
+
+    public BigDecimal getOrderScoreDiscount() {
+        return orderScoreDiscount;
+    }
+
+    public void setOrderScoreDiscount(BigDecimal orderScoreDiscount) {
+        this.orderScoreDiscount = orderScoreDiscount;
+    }
+
+    public BigDecimal getOrderCouponDiscount() {
+        return orderCouponDiscount;
+    }
+
+    public void setOrderCouponDiscount(BigDecimal orderCouponDiscount) {
+        this.orderCouponDiscount = orderCouponDiscount;
+    }
+
+    @Override
 	public String toString() {
 		return "OrderDetailFormEntity [id=" + id + ", orderItemNo=" + orderItemNo + ", orderNo=" + orderNo + ", commodityMid="
 				+ commodityMid + ", unitPrice=" + unitPrice + ", quantity=" + quantity + ", refundAmount=" + refundAmount
 				+ ", realAmount=" + realAmount + ", status=" + status + ", appealTimes=" + appealTimes + ", refundTimes="
-				+ refundTimes + ", isRefunded=" + isRefunded + ", isJudged=" + isJudged + ", appealId=" + appealId
-				+ ", paymentIdList=" + paymentIdList + ", commoditySpecMid=" + commoditySpecMid + ", couponId=" + couponId + "]";
+				+ refundTimes + ", isRefunded=" + isRefunded + ", isJudged=" + isJudged + ", appealId=" + appealId+ ", orderCouponDiscount=" + orderCouponDiscount
+                + "couponDiscount="+couponDiscount + ", couponSource=" + couponSource + ", couponType=" + couponType
+				+ ", paymentIdList=" + paymentIdList + ", commoditySpecMid=" + commoditySpecMid + ", couponId=" + couponId + ","
+                + ", orderScoreDiscount=" + orderScoreDiscount + ", orderDiscountFee=" + orderDiscountFee + ", payAmount=" + payAmount + "," +
+                " ]";
 	}
+
+    @Override
+    public int compareTo(OrderDetailFormEntity o) {
+        if(o == null){
+            return 1;
+        }
+        return this.getCommodityMid().compareTo(o.getCommodityMid());
+    }
 }

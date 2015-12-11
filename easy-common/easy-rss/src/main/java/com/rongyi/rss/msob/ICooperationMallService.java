@@ -88,5 +88,13 @@ public interface ICooperationMallService {
 	 * 通过店铺id查找商场的MongoId
 	 */
 	public String getMallMIdByshopId(Integer shopId) throws Exception;
+	
+	/**
+	 * 通过mongoId获取mongo数据库中的商场信息
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public MallEntity getMallEntityByMongoId(String mallId) throws Exception;
 
 }

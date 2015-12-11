@@ -102,6 +102,8 @@ public class HttpUtil {
 			con.setDoOutput(true);
 			con.setDoInput(true);
 			con.setUseCaches(false);
+			con.setConnectTimeout(20000);
+			con.setReadTimeout(30000);
 			con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 			OutputStreamWriter osw = new OutputStreamWriter(con.getOutputStream(), "UTF-8");
 			osw.write(param);

@@ -6,7 +6,7 @@ import java.util.List;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
-@Entity("mcmc_commodity_category_history")
+@Entity(value="mcmc_commodity_category_history",noClassnameStored=true)
 public class CommodityCategoryHistory  implements java.io.Serializable{
 
 	/**

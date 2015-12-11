@@ -9,6 +9,9 @@ package com.rongyi.core.common.third.malllife;/*
  *
  */
 
+import com.rongyi.core.common.third.md5.Md5Util;
+import com.rongyi.core.common.third.rsa.MalllifeRsaUtil;
+
 public class MallLifeThirdConfig {
 
 
@@ -48,4 +51,45 @@ public class MallLifeThirdConfig {
         public static final String TOKEN="ec037d3911591c55b84b8e0918890989";
     }
 
+
+    /**
+     * TO_B业务
+     * 微信-翻盘购
+     */
+    public abstract class TOB_WECHAT_CHANNEL{
+        public static final String CHANNEL="WECHATFPG";//微信-翻盘购
+        public static final String TOKEN="we037d3911591c55b84b8e09188909yu";
+    }
+
+
+
+
+
+    public  static void main(String args[]){
+
+        try {
+
+            long times=System.currentTimeMillis();
+            // String jsonStr="{'phone':'15821659415','passWd':'111111','uuid':'testId','regiTime':'"+times+"','couponId':'111'}";
+            String jsonStr="{'openId':'15821659415'}";
+
+            String  data=  MalllifeRsaUtil.encryptionStr(jsonStr, MallLifeThirdConfig.TOB_RSACODER.PUBLIC_KEY_STR);
+
+            String str="data="+data+"&timeStamp="+times+"&channel="+MallLifeThirdConfig.TOB_WECHAT_CHANNEL.CHANNEL+"&token="+MallLifeThirdConfig.TOB_WECHAT_CHANNEL.TOKEN;
+            String md5Sign= Md5Util.GetMD5Code(str);
+            System.out.println("dd=" + data);
+            System.out.println("md5Sign="+md5Sign);
+            System.out.println("times=" + times);
+
+
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }
+
+
+
+    }
 }

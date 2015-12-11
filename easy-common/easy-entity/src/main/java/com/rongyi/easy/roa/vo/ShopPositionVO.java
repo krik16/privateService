@@ -14,6 +14,7 @@ public class ShopPositionVO implements Serializable {
     private String cityId;
     private String area;
     private String business;
+    private String bussinessId;
     private String mallId;
     private String mall;
     private String floor;
@@ -83,7 +84,15 @@ public class ShopPositionVO implements Serializable {
         this.mallId = mallId;
     }
 
-	public String getProId() {
+    public String getBussinessId() {
+        return bussinessId;
+    }
+
+    public void setBussinessId(String bussinessId) {
+        this.bussinessId = bussinessId;
+    }
+
+    public String getProId() {
 		return proId;
 	}
 

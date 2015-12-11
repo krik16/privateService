@@ -6,6 +6,7 @@ import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.entity.CouponActivity;
 import com.rongyi.easy.coupon.param.CouponParam;
 import com.rongyi.easy.coupon.vo.TCCouponVO;
+import com.rongyi.easy.coupon.vo.VoucherRelatedObjectVO;
 
 import java.util.List;
 
@@ -158,15 +159,15 @@ public interface RoaCouponService {
     boolean remove(String couponId);
 
     /**
-     * 根据卡券ID查询关联的店铺列表
-     *
-     * @param couponId    卡券id
+     * 根据卡券ID查询关联的商场或店铺集合
+     * 容易逛我的代金券详情使用，当该券是通用券时返回malls否则返回shops
+     * @param couponId 卡券id
      * @param currentPage 起始页
-     * @param pageSize    每页行数
-     * @return pagingVO
+     * @param pageSize 每页行数
+     * @return VoucherRelatedObjectVO
      * @author lqy
      */
-    PagingVO getCouponShopsByCouponId(String couponId, Integer currentPage, Integer pageSize);
+    VoucherRelatedObjectVO getVoucherRelatedList(String couponId, Integer currentPage, Integer pageSize);
 
     /**
      * 根据卡券ID获取卡券详情（提供给容易逛代金券详情使用）
@@ -176,4 +177,11 @@ public interface RoaCouponService {
      * @author lqy
      */
     Coupon getCouponById(String couponId);
+
+    /**
+     * 根据卡券id判断该卡券是否可退款
+     * @param couponId 代金券id
+     * @return true:可退 | false：不可退
+     */
+    boolean isCanRefundCoupon(String couponId);
 }
