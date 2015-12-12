@@ -3,7 +3,6 @@ package com.rongyi.rss.roa;
 import java.util.List;
 import java.util.Map;
 
-import com.rongyi.easy.roa.entity.FilialeEntity;
 import com.rongyi.easy.roa.param.FilialeParam;
 import com.rongyi.easy.roa.vo.FilialeVo;
 
