@@ -31,7 +31,10 @@ public class FilialeEntity implements Serializable{
 	 
 	private String address;   //详细地址 
 	
-	private List<ObjectId> zone_ids;  
+	private List<ObjectId> zone_ids;
+	
+	@Property("valid")
+	private int valid;//0 运营中 1已停运
 	
 	public ObjectId getId() {
 		return id;
@@ -87,6 +90,16 @@ public class FilialeEntity implements Serializable{
 	public void setZone_ids(List<ObjectId> zone_ids) {
 		this.zone_ids = zone_ids;
 	}
-	
-	
+	/**
+	 * @return the valid
+	 */
+	public int getValid() {
+		return valid;
+	}
+	/**
+	 * @param valid the valid to set
+	 */
+	public void setValid(int valid) {
+		this.valid = valid;
+	}
 }

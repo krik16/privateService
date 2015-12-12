@@ -59,6 +59,10 @@ public class FilialeParam implements Serializable {
 	 */
 	private Integer pageSize;
 	/**
+	 * 状态
+	 */
+	private Integer valid;
+	/**
 	 * @return the id
 	 */
 	public String getId() {
@@ -201,5 +205,33 @@ public class FilialeParam implements Serializable {
 	 */
 	public void setPageSize(Integer pageSize) {
 		this.pageSize = pageSize;
+	}
+	
+	/**
+	 * @return the valid
+	 */
+	public Integer getValid() {
+		return valid;
+	}
+	/**
+	 * @param valid the valid to set
+	 */
+	public void setValid(Integer valid) {
+		this.valid = valid;
+	}
+	/**(非 Javadoc)
+	* @Title: toString 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param @return    设定文件 
+	* @author shaozhou 
+	* @date 2015年12月12日 下午5:04:10
+	* @throws 
+	*/
+	@Override
+	public String toString() {
+		return "FilialeParam [id=" + id + ", brandMid=" + brandMid + ", name=" + name + ", manager=" + manager
+				+ ", telephone=" + telephone + ", proId=" + proId + ", cityId=" + cityId + ", areaId=" + areaId
+				+ ", address=" + address + ", shopIds=" + shopIds + ", currentPage=" + currentPage + ", pageSize="
+				+ pageSize + ", valid=" + valid + "]";
 	}
 }
