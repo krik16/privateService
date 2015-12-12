@@ -3,6 +3,7 @@ package com.rongyi.rss.roa;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.roa.entity.FilialeEntity;
 import com.rongyi.easy.roa.vo.FilialeVo;
 
 /**
@@ -30,4 +31,12 @@ public interface ROAFilialeService {
 	 * @return
 	 */
 	public FilialeVo getFilialeVoByMongoId(String id);
+	
+	/**
+	 * 新建or修改分公司
+	 * @param entity
+	 * @return
+	 */
+	public String saveOrUpdate(FilialeEntity entity) throws Exception;
+	
 	}
