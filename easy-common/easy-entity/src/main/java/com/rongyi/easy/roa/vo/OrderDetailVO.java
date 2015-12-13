@@ -33,7 +33,7 @@ public class OrderDetailVO implements Serializable {
 
     private Coupon coupon; //卡券信息
 
-    private List<ActivityDetailVO> activityDetailVOs; // 本订单所含的优惠券信息
+    private List<ActivityDetailVO> codeList; // 本订单所含的优惠券信息
 
     public Integer getTradeStatus() {
         return tradeStatus;
@@ -64,7 +64,7 @@ public class OrderDetailVO implements Serializable {
     }
 
     public List<ActivityDetailVO> getActivityDetailVOs() {
-        return activityDetailVOs;
+        return codeList;
     }
 
     public void setTradeStatus(Integer tradeStatus) {
@@ -95,8 +95,14 @@ public class OrderDetailVO implements Serializable {
         this.itemName = itemName;
     }
 
-    public void setActivityDetailVOs(List<ActivityDetailVO> activityDetailVOs) {
-        this.activityDetailVOs = activityDetailVOs;
+
+
+    public List<ActivityDetailVO> getCodeList() {
+        return codeList;
+    }
+
+    public void setCodeList(List<ActivityDetailVO> codeList) {
+        this.codeList = codeList;
     }
 
     public Coupon getCoupon() {
