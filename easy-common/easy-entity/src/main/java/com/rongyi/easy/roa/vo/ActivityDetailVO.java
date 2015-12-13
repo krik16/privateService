@@ -19,6 +19,17 @@ public class ActivityDetailVO implements Serializable{
 
 	private Date endTime; // 有效期止
 
+    /**
+     * 原价
+     */
+    private double origPrice;
+
+    /**
+     * 现价
+     */
+    private double currPrice;
+
+
 	public Integer getActivityDetailId() {
 		return activityDetailId;
 	}
@@ -67,4 +78,19 @@ public class ActivityDetailVO implements Serializable{
 		this.itemName = itemName;
 	}
 
+    public double getOrigPrice() {
+        return origPrice;
+    }
+
+    public void setOrigPrice(double origPrice) {
+        this.origPrice = origPrice;
+    }
+
+    public double getCurrPrice() {
+        return currPrice;
+    }
+
+    public void setCurrPrice(double currPrice) {
+        this.currPrice = currPrice;
+    }
 }
