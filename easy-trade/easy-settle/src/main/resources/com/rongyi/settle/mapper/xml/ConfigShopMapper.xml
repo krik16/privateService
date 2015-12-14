@@ -7,9 +7,11 @@
     <result column="shop_id" property="shopId" jdbcType="VARCHAR" />
     <result column="user_list" property="userList" jdbcType="VARCHAR" />
     <result column="real_user_list" property="realUserList" jdbcType="VARCHAR" />
+    <result column="account_list" property="accountList" jdbcType="VARCHAR" />
+    <result column="real_account_list" property="realAccountList" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, config_id, shop_id, user_list, real_user_list
+    id, config_id, shop_id, user_list, real_user_list, account_list, real_account_list
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -23,9 +25,9 @@
   </delete>
   <insert id="insert" parameterType="com.rongyi.easy.settle.entity.ConfigShop" useGeneratedKeys="true" keyProperty="id" >
     insert into config_shop (config_id, shop_id, user_list, 
-      real_user_list)
+      real_user_list, account_list, real_account_list)
     values (#{configId,jdbcType=INTEGER}, #{shopId,jdbcType=VARCHAR}, #{userList,jdbcType=VARCHAR}, 
-      #{realUserList,jdbcType=VARCHAR})
+      #{realUserList,jdbcType=VARCHAR}, #{accountList,jdbcType=VARCHAR}, #{realAccountList,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.rongyi.easy.settle.entity.ConfigShop" useGeneratedKeys="true" keyProperty="id" >
     insert into config_shop
@@ -57,6 +59,12 @@
       <if test="realUserList != null" >
         real_user_list = #{realUserList,jdbcType=VARCHAR},
       </if>
+      <if test="accountList != null" >
+        account_list = #{accountList,jdbcType=VARCHAR},
+      </if>
+      <if test="realAccountList != null" >
+        real_account_list = #{realAccountList,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -65,7 +73,9 @@
     set config_id = #{configId,jdbcType=INTEGER},
       shop_id = #{shopId,jdbcType=VARCHAR},
       user_list = #{userList,jdbcType=VARCHAR},
-      real_user_list = #{realUserList,jdbcType=VARCHAR}
+      real_user_list = #{realUserList,jdbcType=VARCHAR},
+      account_list = #{accountList,jdbcType=VARCHAR},
+      real_account_list = #{realAccountList,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
