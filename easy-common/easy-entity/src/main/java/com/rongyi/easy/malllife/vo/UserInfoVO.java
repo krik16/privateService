@@ -23,7 +23,7 @@ public class UserInfoVO implements Serializable {
 
 	private String usualAddress;
 	private boolean hasBindingPhone = false;
-	private int sex;
+	private int sex; //0 男 1女 -1未知
 	private long credit;
 
 	private String devUuid;
@@ -38,12 +38,14 @@ public class UserInfoVO implements Serializable {
 
 	private String devId;// 登录时设备的ID
 
-	private Set<String> collectCommoditys;// 收藏的商品编号
+	//private Set<String> collectCommoditys;// 收藏的商品编号
 
 	private String       pushChanelId;//百度推送服务ID app传给后台
 	private String      lastSignInIp;//最新登录Ip地址
 	private String channel;// 容易逛(MALLLIFE),其他第三方全民财富（QMCAIFU）
 	private String shareCode;//摩店邀请注册码
+
+	private Integer isDisable;//是否禁用  0,正常，1禁用
 
 	public String getShareCode() {
 		return shareCode;
@@ -237,13 +239,14 @@ public class UserInfoVO implements Serializable {
 		this.devId = devId;
 	}
 
-	public Set<String> getCollectCommoditys() {
-		return collectCommoditys;
+	public Integer getIsDisable() {
+		return isDisable;
 	}
 
-	public void setCollectCommoditys(Set<String> collectCommoditys) {
-		this.collectCommoditys = collectCommoditys;
+	public void setIsDisable(Integer isDisable) {
+		this.isDisable = isDisable;
 	}
+
 
 
 }

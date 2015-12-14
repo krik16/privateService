@@ -78,7 +78,7 @@ public class ParentOrderVO implements Serializable {
 	private String cancelTime;// 卖家取消订单时间
 	private String closeTime;// 订单关闭时间
 	private String statusRoute;// 状态路径
-
+	private String platformRebateAmount;//用户使用抵扣券后对该订单实际抵扣的金额
 	/*
 	 * private String expressBillId;// 物流单号ID
 	 * 
@@ -489,6 +489,14 @@ public class ParentOrderVO implements Serializable {
 		DeductCouponAmount = deductCouponAmount;
 	}
 
+	public String getPlatformRebateAmount() {
+		return platformRebateAmount;
+	}
+
+	public void setPlatformRebateAmount(String platformRebateAmount) {
+		this.platformRebateAmount = platformRebateAmount;
+	}
+
 	@Override
 	public String toString() {
 		return "ParentOrderVO{" +
@@ -541,6 +549,7 @@ public class ParentOrderVO implements Serializable {
 				", scoreDeduction='" + scoreDeduction + '\'' +
 				", DeductCouponAmount='" + DeductCouponAmount + '\'' +
 				", liveName='" + liveName + '\'' +
+				", platformRebateAmount='" + platformRebateAmount + '\'' +
 				'}';
 	}
 }

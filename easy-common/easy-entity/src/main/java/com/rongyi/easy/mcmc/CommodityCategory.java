@@ -3,11 +3,12 @@ package com.rongyi.easy.mcmc;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.bson.types.ObjectId;
 
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
-@Entity("mcmc_commodity_category")
+@Entity(value="mcmc_commodity_category",noClassnameStored=true)
 public class CommodityCategory  implements java.io.Serializable{
 
 	/**
@@ -77,5 +78,20 @@ public class CommodityCategory  implements java.io.Serializable{
 	}
 	public void setParentid(ObjectId parentid) {
 		this.parentid = parentid;
+	}
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append("id", id)
+				.append("name", name)
+				.append("logoUrl", logoUrl)
+				.append("createAt", createAt)
+				.append("parentids", parentids)
+				.append("parentid", parentid)
+				.append("type", type)
+				.append("columnIds", columnIds)
+				.append("commodityCount", commodityCount)
+				.toString();
 	}
 }

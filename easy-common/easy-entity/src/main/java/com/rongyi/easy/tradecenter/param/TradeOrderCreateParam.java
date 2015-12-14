@@ -91,6 +91,32 @@ public class TradeOrderCreateParam implements Serializable {
     private List<String> couponCodes;
 
     /**
+     * 抵扣券券码
+     */
+    private String platformRebateCode;
+
+    /**
+     * 抵扣券金额
+     */
+    private Double rebateDiscount;
+
+    /**
+     * 促销券来源 1：平台 2：商家
+     */
+    private Byte hbSource = 2;
+
+    /**
+     * 促销券类型 1：满减 2：立减
+     */
+    private Byte hbType;
+
+    /**
+     * 广告标志
+     */
+    private String idfa;
+
+
+    /**
      * start
      * 以下字段是内部处理流程时使用，非外部传入
      * 金额字段均为分
@@ -98,6 +124,8 @@ public class TradeOrderCreateParam implements Serializable {
     private boolean useHb = false;//是否使用红包
 
     private boolean useScore = false;//是否使用积分
+
+    private boolean usePlatFormRebate = false;//是否使用抵扣券
 
     private BigDecimal discountWithOutScore = new BigDecimal(0);//除积分外优惠金额 分
 
@@ -114,6 +142,7 @@ public class TradeOrderCreateParam implements Serializable {
     private Integer statusHold = 0;
 
     private Date nextStatusTime;
+
     /**
      * end
      */
@@ -125,6 +154,7 @@ public class TradeOrderCreateParam implements Serializable {
     public void setBusiness(Byte business) {
         this.business = business;
     }
+
     public String getUnitId() {
         return unitId;
     }
@@ -345,6 +375,54 @@ public class TradeOrderCreateParam implements Serializable {
         this.couponCodes = couponCodes;
     }
 
+    public String getPlatformRebateCode() {
+        return platformRebateCode;
+    }
+
+    public void setPlatformRebateCode(String platformRebateCode) {
+        this.platformRebateCode = platformRebateCode;
+    }
+
+    public Byte getHbSource() {
+        return hbSource;
+    }
+
+    public void setHbSource(Byte hbSource) {
+        this.hbSource = hbSource;
+    }
+
+    public Byte getHbType() {
+        return hbType;
+    }
+
+    public void setHbType(Byte hbType) {
+        this.hbType = hbType;
+    }
+
+    public boolean isUsePlatFormRebate() {
+        return usePlatFormRebate;
+    }
+
+    public void setUsePlatFormRebate(boolean usePlatFormRebate) {
+        this.usePlatFormRebate = usePlatFormRebate;
+    }
+
+    public Double getRebateDiscount() {
+        return rebateDiscount;
+    }
+
+    public void setRebateDiscount(Double rebateDiscount) {
+        this.rebateDiscount = rebateDiscount;
+    }
+
+    public String getIdfa() {
+        return idfa;
+    }
+
+    public void setIdfa(String idfa) {
+        this.idfa = idfa;
+    }
+
     @Override
     public String toString() {
         return "TradeOrderCreateParam{" +
@@ -376,6 +454,7 @@ public class TradeOrderCreateParam implements Serializable {
                 ", discountBitMap=" + discountBitMap +
                 ", statusHold=" + statusHold +
                 ", nextStatusTime=" + nextStatusTime +
+                ", platformRebateCode=" + platformRebateCode +
                 '}';
     }
 }

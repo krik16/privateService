@@ -1,8 +1,11 @@
 package com.rongyi.easy.malllife.vo;
 
-import com.rongyi.easy.entity.MallLifeUserEntity;
+
+import com.rongyi.easy.usercenter.entity.MalllifeUserInfoEntity;
 
 import java.io.Serializable;
+
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Created by xgq on 2015/7/24.
@@ -81,15 +84,21 @@ public class MallLifeUserVO implements Serializable {
         this.sex = sex;
     }
 
-    public static MallLifeUserVO fromMallLifeUserEntity(MallLifeUserEntity mallLifeUserEntity) {
+     public static MallLifeUserVO fromMallLifeUserEntity(MalllifeUserInfoEntity mallLifeUserEntity) {
         MallLifeUserVO mallLifeUserVO = new MallLifeUserVO();
-        mallLifeUserVO.setId(mallLifeUserEntity.getId().toHexString());
+        mallLifeUserVO.setId(mallLifeUserEntity.getId());
         mallLifeUserVO.setEmail(mallLifeUserEntity.getEmail());
         mallLifeUserVO.setHeadImg(mallLifeUserEntity.getHeadImg());
-        mallLifeUserVO.setIMId(mallLifeUserEntity.getIMId());
-        mallLifeUserVO.setNickname(mallLifeUserEntity.getNickname());
+        mallLifeUserVO.setIMId(mallLifeUserEntity.getImId());
+        mallLifeUserVO.setNickname(mallLifeUserEntity.getNickName());
         mallLifeUserVO.setPhone(mallLifeUserEntity.getPhone());
-        mallLifeUserVO.setSex(mallLifeUserEntity.getSex());
+        if(StringUtils.isNotBlank(mallLifeUserEntity.getGender())){
+        	if(mallLifeUserEntity.getGender().equals("M")){
+                mallLifeUserVO.setSex(0);
+            }else {
+                mallLifeUserVO.setSex(1);
+            }
+        }
         return mallLifeUserVO;
     }
 }

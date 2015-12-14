@@ -13,7 +13,7 @@ import org.mongodb.morphia.annotations.Id;
  *
  */
 @SuppressWarnings("serial")
-@Entity("mall_groups")
+@Entity(value="mall_groups",noClassnameStored=true)
 public class GroupEntity implements Serializable{
 	
 	

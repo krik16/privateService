@@ -1,5 +1,7 @@
 package com.rongyi.easy.mcmc.vo;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -40,4 +42,13 @@ public class CommodityPageBuyerVO implements Serializable{
 		this.commodityList = commodityList;
 	}
 
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append("totalPage", totalPage)
+				.append("pageSize", pageSize)
+				.append("currentPage", currentPage)
+				.append("commodityList", commodityList)
+				.toString();
+	}
 }

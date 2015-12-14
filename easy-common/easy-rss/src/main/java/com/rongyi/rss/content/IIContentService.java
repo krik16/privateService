@@ -3,6 +3,7 @@ package com.rongyi.rss.content;
 import com.rongyi.easy.content_v2.entity.ForumContent;
 import com.rongyi.easy.content_v2.entity.ForumHomepage;
 import com.rongyi.easy.content_v2.entity.ForumPosition;
+import com.rongyi.easy.content_v2.entity.ForumStick;
 import com.rongyi.easy.content_v2.param.ForumContentParam;
 import com.rongyi.easy.content_v2.param.ForumContentStatusDelParam;
 import com.rongyi.easy.content_v2.vo.ForumContentListVo;
@@ -22,7 +23,7 @@ public interface IIContentService {
 	 * 查询内容管理首页的信息
 	 * 
 	 */
-	public List<ForumHomeModelVo> findHomePage();
+	public List<ForumHomeModelVo> findHomePage(int type);
 	/**
 	 * 插入位置
 	 * @param list
@@ -54,7 +55,7 @@ public interface IIContentService {
 	 * 查询总条数
 	 * @return 
 	 */
-	public int findHomePageCount();
+	public int findHomePageCount(int type);
 	
 	/**
 	 * 修改位置表的修改人
@@ -152,4 +153,20 @@ public interface IIContentService {
 	 * 判断买手id 是否在同一位置，同一区域有
 	 */
 	List<String> hasBuyerLive(ForumContent fc);
+	/**
+	 * 修改置顶状态
+	 */
+	public Boolean updateStickById(ForumStick fs);
+	/**
+	 * 
+	* @Title: findContentAllByParamSpecail 
+	* @Description: 特卖查询列表接口
+	* @param @param par
+	* @param @return    设定文件 
+	* @return List<ForumContentListVo>    返回类型 
+	* @author shaozhou 
+	* @date 2015年12月1日 下午2:36:46
+	* @throws
+	 */
+	public List<ForumContentListVo> findContentAllByParamSpecail(ForumContentParam par);
 }

@@ -31,7 +31,8 @@ public class ShopVO implements Serializable {
     private String filiale_id;
     private String brand_id;
     private List<ObjectId> zone_ids;
-
+    private String filialeId;
+	private String filialeName;
 
     public String getId() {
         return id;
@@ -216,4 +217,18 @@ public class ShopVO implements Serializable {
     public void setZone_ids(List<ObjectId> zone_ids) {
         this.zone_ids = zone_ids;
     }
+	
+	
+	public String getFilialeId() {
+		return filialeId;
+	}
+	public void setFilialeId(String filialeId) {
+		this.filialeId = filialeId;
+	}
+	public String getFilialeName() {
+		return filialeName;
+	}
+	public void setFilialeName(String filialeName) {
+		this.filialeName = filialeName;
+	}
 }

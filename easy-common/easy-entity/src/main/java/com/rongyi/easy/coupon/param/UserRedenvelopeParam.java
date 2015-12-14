@@ -97,4 +97,21 @@ public class UserRedenvelopeParam implements Serializable {
             this.currentPage = 0;
         return this.currentPage * this.pageSize;
     }
+
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("UserRedenvelopeParam{");
+        sb.append("pageSize=").append(pageSize);
+        sb.append(", currentPage=").append(currentPage);
+        sb.append(", userId='").append(userId).append('\'');
+        sb.append(", userName='").append(userName).append('\'');
+        sb.append(", productId='").append(productId).append('\'');
+        sb.append(", status=").append(status);
+        sb.append(", orderBy='").append(orderBy).append('\'');
+        sb.append(", isExpired=").append(isExpired);
+        sb.append(", relatedType=").append(relatedType);
+        sb.append('}');
+        return sb.toString();
+    }
 }

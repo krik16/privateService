@@ -28,4 +28,11 @@ public interface ITradeUserCodeService {
 
     int dailyBuyCount(String couponId, String userId);
 
+    /**
+     * 条件查询用户券码数量
+     * @param paramsMap
+     * @return
+     */
+    int getUserCodeNumByMap(Map<String, Object> paramsMap);
+
 }
