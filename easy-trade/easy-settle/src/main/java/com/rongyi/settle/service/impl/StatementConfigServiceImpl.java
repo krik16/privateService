@@ -11,9 +11,11 @@ package com.rongyi.settle.service.impl;
 import java.util.*;
 
 import com.rongyi.easy.bsoms.entity.UserInfo;
+import com.rongyi.easy.entity.ShopEntity;
 import com.rongyi.easy.roa.entity.MallEntity;
 import com.rongyi.easy.roa.vo.ShopVO;
 import com.rongyi.easy.settle.entity.ConfigShop;
+import com.rongyi.easy.settle.vo.ConfigShopVO;
 import com.rongyi.rss.bsoms.IUserInfoService;
 import com.rongyi.rss.roa.ROAMallService;
 import com.rongyi.rss.roa.ROAShopService;
@@ -172,7 +174,17 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 		map.put("id", id);
         StatementConfigVO vo = this.getBaseDao().selectOneBySql(NAMESPACE + ".selectConfigInfoById", map);
         List<ConfigShop> configShops = configShopService.getConfigShopsByConfigId(vo.getId());
-        vo.setConfigShops(configShops);
+        List<ConfigShopVO> vos = new ArrayList<>();
+        for (ConfigShop configShop : configShops){
+            ConfigShopVO configShopVO = new ConfigShopVO();
+            configShopVO.setShopId(configShop.getShopId());
+            configShopVO.setAccountList(configShop.getAccountList());
+            ShopEntity shop = roaShopService.getShopById(configShop.getShopId());
+            if (shop != null) {
+                configShopVO.setShopName(shop.getName());
+            }
+        }
+        vo.setConfigShops(vos);
         return vo;
 	}
 
