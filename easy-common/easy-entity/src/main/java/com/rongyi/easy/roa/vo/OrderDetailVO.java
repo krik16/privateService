@@ -15,7 +15,7 @@ public class OrderDetailVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String orderNo;
+    private String orderNo;//订单号
 
     private Integer tradeStatus;// 交易状态
 
@@ -33,30 +33,19 @@ public class OrderDetailVO implements Serializable {
 
     private String couponId; //卡券Id
 
-    private String couponName;
-    /**
-     * 原价
-     */
-    private double origPrice;
+    private String couponName;//卡券名称
 
-    /**
-     * 现价
-     */
-    private double currPrice;
+    private double origPrice;// 原价
+
+    private double currPrice;//现价
 
     private String afterSaleService;
 
     private String listPicUrl;
 
-    /**
-     * 使用限制
-     */
-    private String limitDesc;
+    private String limitDesc;//使用限制
 
-    /**
-     * 使用说明
-     */
-    private String usageDesc;
+    private String usageDesc;//使用说明
 
     private List<ActivityDetailVO> codeList; // 本订单所含的优惠券信息
 
@@ -88,8 +77,15 @@ public class OrderDetailVO implements Serializable {
         return itemName;
     }
 
+
+    @Deprecated
     public List<ActivityDetailVO> getActivityDetailVOs() {
         return codeList;
+    }
+
+    @Deprecated
+    public void setActivityDetailVOs(List<ActivityDetailVO> codeList) {
+        this.codeList = codeList;
     }
 
     public void setTradeStatus(Integer tradeStatus) {

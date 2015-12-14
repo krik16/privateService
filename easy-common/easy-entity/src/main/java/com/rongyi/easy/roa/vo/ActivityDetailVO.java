@@ -7,11 +7,11 @@ public class ActivityDetailVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer activityDetailId; // 优惠Id
+    private Integer detailId; // 优惠Id
 
-    private String activityCode; // 优惠券码
+    private String code; // 优惠券码
 
-    private String itemName; // 优惠券名称 ， 商品名称，团购中对应团购名称 title 字段
+    private String itemName; // 优惠券名称
 
     private Integer status; // 使用状态
 
@@ -20,31 +20,30 @@ public class ActivityDetailVO implements Serializable {
     private Date endTime; // 有效期止
 
     private String couponId;//卡券Id
-    /**
-     * 原价
-     */
-    private double origPrice;
 
-    /**
-     * 现价
-     */
-    private double currPrice;
+    private double origPrice; //原价
+
+    private double currPrice;//现价
 
 
+    @Deprecated
     public Integer getActivityDetailId() {
-        return activityDetailId;
+        return detailId;
     }
 
+    @Deprecated
     public void setActivityDetailId(Integer activityDetailId) {
-        this.activityDetailId = activityDetailId;
+        this.detailId = activityDetailId;
     }
 
+    @Deprecated
     public String getActivityCode() {
-        return activityCode;
+        return code;
     }
 
+    @Deprecated
     public void setActivityCode(String activityCode) {
-        this.activityCode = activityCode;
+        this.code = activityCode;
     }
 
     public Integer getStatus() {
@@ -101,5 +100,21 @@ public class ActivityDetailVO implements Serializable {
 
     public void setCouponId(String couponId) {
         this.couponId = couponId;
+    }
+
+    public Integer getDetailId() {
+        return detailId;
+    }
+
+    public void setDetailId(Integer detailId) {
+        this.detailId = detailId;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }
