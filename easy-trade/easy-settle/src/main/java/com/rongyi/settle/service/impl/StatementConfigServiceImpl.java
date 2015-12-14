@@ -173,7 +173,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 		Map<String, Object> map = new HashMap<>();
 		map.put("id", id);
         StatementConfigVO vo = this.getBaseDao().selectOneBySql(NAMESPACE + ".selectConfigInfoById", map);
-        List<ConfigShop> configShops = configShopService.getConfigShopsByConfigId(vo.getId());
+        List<ConfigShop> configShops = configShopService.getConfigShopsByConfigId(id);
         List<ConfigShopVO> vos = new ArrayList<>();
         for (ConfigShop configShop : configShops){
             ConfigShopVO configShopVO = new ConfigShopVO();
@@ -183,6 +183,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
             if (shop != null) {
                 configShopVO.setShopName(shop.getName());
             }
+            vos.add(configShopVO);
         }
         vo.setConfigShops(vos);
         return vo;
