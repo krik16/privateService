@@ -189,27 +189,31 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 	}
 
 	@Override
-	public Map<String, Object> validateIsExist(byte cooperateType, byte bussinessType, String bussinessId, List<Byte> statuses, Date effectStartTime, Date effectEndTime, Byte lintType, Map linkId,Map linkAccount, Byte linkShopOp ) throws Exception {
+	public Map<String, Object> validateIsExist(StatementConfig statementConfig, List<Byte> statuses, Map linkId,Map linkAccount) throws Exception {
 		boolean result = false;
 		int isOneself;
-		linkShopOp = linkShopOp==null?0:linkShopOp;
-		List<ConfigShop> shopConfigs = new ArrayList<>();
+        Byte bussinessType = statementConfig.getBussinessType();
+        String bussinessId = statementConfig.getBussinessId();
+        Byte linkShopOp = statementConfig.getLinkShopOp()==null?0:statementConfig.getLinkShopOp();
+        Byte lintType = statementConfig.getLinkType();
+
+        List<ConfigShop> shopConfigs = new ArrayList<>();
 		Map<String, Object> ReMap = new HashMap<>();
 		Map<String, Object> map = new HashMap<>();
-		map.put("cooperateType", cooperateType);
+		map.put("cooperateType", statementConfig.getCooperateType());
 		map.put("bussinessType", bussinessType);
 		map.put("bussinessId", bussinessId);
 		map.put("statuses", statuses);
-		map.put("effectStartTime", effectStartTime);
-		map.put("effectEndTime", effectEndTime);
+		map.put("effectStartTime", statementConfig.getEffectStartTime());
+		map.put("effectEndTime", statementConfig.getEffectEndTime());
 		if (lintType==null){
 			result = true;
 		}else {
 			if (lintType==0)
 			{
 				//全部: 1、验自身
-				if (bussinessType==1 || bussinessType==4)
-				{//商场、集团
+				if (bussinessType==1 || bussinessType==4)//商场、集团
+				{
 					if (checkConfigExist(map)) {
 						logger.info("全部: 1、验自身 ---配置已有");
 						ReMap.put("result", true);
