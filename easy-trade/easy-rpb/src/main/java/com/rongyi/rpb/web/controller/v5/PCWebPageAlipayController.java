@@ -78,6 +78,9 @@ public class PCWebPageAlipayController extends BaseController {
 		if (result != null)
 			return null;
 		LOGGER.info("支付宝打款成功异步通知开始,success_details={}", success_details);
+		if(success_details == null){
+			throw  new RuntimeException("支付宝打款操作未成功，忽略此次通知，请检查支付宝账号和姓名是否正确匹配，确认后请重新操作");
+		}
 		List<PaymentEntity> allList = new ArrayList<PaymentEntity>();
 		String[] detailList = success_details.split("\\|");
 		if (detailList != null && detailList.length > 0) {
@@ -221,7 +224,10 @@ public class PCWebPageAlipayController extends BaseController {
 							paymentLogInfoService.insertGetId(paymentLogInfo);
 							LOGGER.info("更改退款项状态 0--->2,退款单号={}", refundPaymentEntity.getPayNo());
 							paymentService.updateListStatusBypayNo(refundPaymentEntity.getPayNo(), refundPaymentEntity.getTradeType(), Constants.PAYMENT_STATUS.STAUS2);// 修改打款状态
-							refundNotifyMq(refundPaymentEntity);
+							//正常退款的才会发送退款消息，重复支付的退款无需发送退款通知
+							if(refundPaymentEntity.getTradeType() == Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1) {
+								refundNotifyMq(refundPaymentEntity);
+							}
 						} else {
 							LOGGER.info("订单不存在，退款状态更新失败,tradeNo={},batchNo={}", paymentLogInfo.getTrade_no(), batch_no);
 						}
@@ -292,7 +298,7 @@ public class PCWebPageAlipayController extends BaseController {
 
 	/**
 	 * @Description: 验证支付宝订单状态
-	 * @param tradeStatus
+	 * @param tradeResult
 	 * @return
 	 * @Author: 柯军
 	 * @datetime:2015年4月24日上午10:47:02

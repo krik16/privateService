@@ -35,10 +35,11 @@ public class BussinessLogServiceImpl extends BaseServiceImpl implements Bussines
 
 	@Override
 	public BussinessLog selectByBussinessIdAndType(Integer bussinessId, Integer bussinessType) {
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("bussinessId", bussinessId);
-		map.put("bussinessType", bussinessType);
-		return this.getBaseDao().selectOneBySql(NAMESPACE+".selectByBussinessIdAndType",map);
+//		Map<String,Object> map = new HashMap<String,Object>();
+//		map.put("bussinessId", bussinessId);
+//		map.put("bussinessType", bussinessType);
+//		return this.getBaseDao().selectOneBySql(NAMESPACE+".selectByBussinessIdAndType",map);
+		return null;
 
 	}
 

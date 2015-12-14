@@ -54,7 +54,6 @@ public class Sender {
     /**
      * @Description: 消息发送
      * @param event 封装对象
-     * @param routingKey
      * @Author: 柯军
      * @datetime:2015年6月2日上午10:01:58
      **/
@@ -65,7 +64,7 @@ public class Sender {
     private  void toConvertAndSend(Object messageBody, String routingKey) {
         String message = JSONObject.fromObject(messageBody).toString();
         LOGGER.info("发送消息到" + routingKey + ",消息内容：" + message);
-        template.convertAndSend(routingKey, (Object) message.getBytes());
+        template.convertAndSend(routingKey, message.getBytes());
     }
 
     /**
@@ -103,8 +102,9 @@ public class Sender {
 
     /**
      * @Description: rpc调用，同步返回信息
+     * @param messageMap
      * @param message
-     * @param map
+     * @param channel
      * @Author: 柯军
      * @datetime:2015年6月1日下午6:11:37
      **/

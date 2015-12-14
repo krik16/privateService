@@ -47,7 +47,7 @@ public class UnifedOrderReqData {
      * @datetime:2015年9月2日
      *
      **/
-    public UnifedOrderReqData(String body,String outTradeNo,Integer totalFee,String notifyUrl,String tradeType){
+    public UnifedOrderReqData(String body,String outTradeNo,Integer totalFee,String notifyUrl,String tradeType,String timeStart,String timeExpire){
         //微信分配的公众号ID（开通公众号之后可以获取到）
         setAppid(Configure.getAppid());
 
@@ -74,7 +74,13 @@ public class UnifedOrderReqData {
         
         //交易类型
         setTrade_type(tradeType);
-        
+
+		//交易起始时间
+		setTime_start(timeStart);
+
+		//交易失效时间
+		setTime_expire(timeExpire);
+
         //根据API给的签名规则进行签名
         String sign = Signature.getSign(toMap());
         setSign(sign);//把签名数据设置到Sign这个属性中

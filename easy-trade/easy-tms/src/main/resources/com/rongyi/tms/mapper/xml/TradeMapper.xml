@@ -110,6 +110,7 @@
 	<sql id="trade_list_where_clause">
 		(payment_event.trade_type = payment_order.trade_type or
 		payment_event.trade_type is null)
+		and payment_order.status=2
 		<!-- 交易流水号 -->
 		<if test="tradeNo != null and tradeNo != ''">
 			AND payment_event.trade_no = #{tradeNo}

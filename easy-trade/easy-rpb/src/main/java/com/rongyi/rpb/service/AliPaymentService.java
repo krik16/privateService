@@ -10,6 +10,7 @@ package com.rongyi.rpb.service;
 
 import java.util.Map;
 
+import com.rongyi.easy.rpb.vo.PaymentEntityVO;
 import com.rongyi.easy.rpb.vo.QueryOrderParamVO;
 
 /**	
@@ -24,12 +25,12 @@ public interface AliPaymentService {
 	/**	
 	 * @Description: 获得支付宝签名 
 	 * @param orderMaps
-	 * @param payNo
+	 * @param paymentEntityVO
 	 * @return	
 	 * @Author:  柯军
 	 * @datetime:2015年6月25日下午4:07:08
 	 **/
-	public abstract Map<String, Object> getZhiFuBaoSign(Map<String, Object> orderMaps, String payNo);
+	public abstract Map<String, Object> getZhiFuBaoSign(Map<String, Object> orderMaps, PaymentEntityVO paymentEntityVO);
 	
 	/**	
 	 * @Description: 查询支付宝订单支付状态 
