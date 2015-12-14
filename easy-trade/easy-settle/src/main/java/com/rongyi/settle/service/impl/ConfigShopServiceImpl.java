@@ -6,6 +6,8 @@ import com.rongyi.settle.service.ConfigShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by Ventures on 2015/12/9.
  * hebo
@@ -20,5 +22,10 @@ public class ConfigShopServiceImpl implements ConfigShopService{
     @Override
     public void insert(ConfigShop configShop) {
         mapper.insert(configShop);
+    }
+
+    @Override
+    public List<ConfigShop> getConfigShopsByConfigId(Integer configId) {
+        return mapper.getConfigShopsByConfigId(configId);
     }
 }

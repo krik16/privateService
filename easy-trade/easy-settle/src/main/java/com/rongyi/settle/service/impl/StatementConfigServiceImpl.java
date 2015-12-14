@@ -170,7 +170,10 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 	public StatementConfigVO selectConfigInfoById(Integer id) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("id", id);
-		return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectConfigInfoById", map);
+        StatementConfigVO vo = this.getBaseDao().selectOneBySql(NAMESPACE + ".selectConfigInfoById", map);
+        List<ConfigShop> configShops = configShopService.getConfigShopsByConfigId(vo.getId());
+        vo.setConfigShops(configShops);
+        return vo;
 	}
 
 	@Override
@@ -340,7 +343,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 					String realUser = allUserId.toString();
 					shopConfig.setRealUserList(realUser.substring(1,realUser.length()-1));
                     realUser = allUserAccount.toString();
-                    shopConfig.setRealAccountList(realUser.substring(1,realUser.length()-1));
+                    shopConfig.setRealAccountList(realUser.substring(1, realUser.length() - 1));
 				}
 			}else {
 				logger.info(" linkShopOp is error:" +linkShopOp);
