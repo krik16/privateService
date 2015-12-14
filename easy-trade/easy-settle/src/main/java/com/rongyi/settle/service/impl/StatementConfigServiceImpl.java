@@ -11,9 +11,11 @@ package com.rongyi.settle.service.impl;
 import java.util.*;
 
 import com.rongyi.easy.bsoms.entity.UserInfo;
+import com.rongyi.easy.entity.ShopEntity;
 import com.rongyi.easy.roa.entity.MallEntity;
 import com.rongyi.easy.roa.vo.ShopVO;
 import com.rongyi.easy.settle.entity.ConfigShop;
+import com.rongyi.easy.settle.vo.ConfigShopVO;
 import com.rongyi.rss.bsoms.IUserInfoService;
 import com.rongyi.rss.roa.ROAMallService;
 import com.rongyi.rss.roa.ROAShopService;
@@ -170,31 +172,48 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 	public StatementConfigVO selectConfigInfoById(Integer id) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("id", id);
-		return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectConfigInfoById", map);
+        StatementConfigVO vo = this.getBaseDao().selectOneBySql(NAMESPACE + ".selectConfigInfoById", map);
+        List<ConfigShop> configShops = configShopService.getConfigShopsByConfigId(id);
+        List<ConfigShopVO> vos = new ArrayList<>();
+        for (ConfigShop configShop : configShops){
+            ConfigShopVO configShopVO = new ConfigShopVO();
+            configShopVO.setShopId(configShop.getShopId());
+            configShopVO.setAccountList(configShop.getAccountList());
+            ShopEntity shop = roaShopService.getShopById(configShop.getShopId());
+            if (shop != null) {
+                configShopVO.setShopName(shop.getName());
+            }
+            vos.add(configShopVO);
+        }
+        vo.setConfigShops(vos);
+        return vo;
 	}
 
 	@Override
-	public Map<String, Object> validateIsExist(byte cooperateType, byte bussinessType, String bussinessId, List<Byte> statuses, Date effectStartTime, Date effectEndTime, Byte lintType, Map linkId,Map linkAccount, Byte linkShopOp ) throws Exception {
+	public Map<String, Object> validateIsExist(StatementConfig statementConfig, List<Byte> statuses, Map linkId,Map linkAccount) throws Exception {
 		boolean result = false;
 		int isOneself;
-		linkShopOp = linkShopOp==null?0:linkShopOp;
-		List<ConfigShop> shopConfigs = new ArrayList<>();
+        Byte bussinessType = statementConfig.getBussinessType();
+        String bussinessId = statementConfig.getBussinessId();
+        Byte linkShopOp = statementConfig.getLinkShopOp()==null?0:statementConfig.getLinkShopOp();
+        Byte lintType = statementConfig.getLinkType();
+
+        List<ConfigShop> shopConfigs = new ArrayList<>();
 		Map<String, Object> ReMap = new HashMap<>();
 		Map<String, Object> map = new HashMap<>();
-		map.put("cooperateType", cooperateType);
+		map.put("cooperateType", statementConfig.getCooperateType());
 		map.put("bussinessType", bussinessType);
 		map.put("bussinessId", bussinessId);
 		map.put("statuses", statuses);
-		map.put("effectStartTime", effectStartTime);
-		map.put("effectEndTime", effectEndTime);
+		map.put("effectStartTime", statementConfig.getEffectStartTime());
+		map.put("effectEndTime", statementConfig.getEffectEndTime());
 		if (lintType==null){
 			result = true;
 		}else {
-			if (lintType==0)
+			if (lintType==0)//全部: 1、自身（商场/集团）  2、全部店铺
 			{
-				//全部: 1、验自身
 				if (bussinessType==1 || bussinessType==4)
-				{//商场、集团
+				{
 					if (checkConfigExist(map)) {
 						logger.info("全部: 1、验自身 ---配置已有");
 						ReMap.put("result", true);
@@ -223,10 +242,9 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 					}
 				}
 			}
-			else if (lintType==1)
+			else if (lintType==1)//  自身(商场/集团)
 			{
-				//自身
-				if (bussinessType==1 || bussinessType==4){//商场、集团
+				if (bussinessType==1 || bussinessType==4){
 					if (checkConfigExist(map)) {
 						ReMap.put("result", true);
 						return ReMap;
@@ -257,9 +275,8 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 					return ReMap;
 				}
 			}
-			else if (lintType==2)
+			else if (lintType==2)//部分
 			{
-				//部分
 				if (linkId!=null) {
 					Set<String> shopIds = linkId.keySet();
 					for (String shopId : shopIds){
@@ -340,7 +357,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 					String realUser = allUserId.toString();
 					shopConfig.setRealUserList(realUser.substring(1,realUser.length()-1));
                     realUser = allUserAccount.toString();
-                    shopConfig.setRealAccountList(realUser.substring(1,realUser.length()-1));
+                    shopConfig.setRealAccountList(realUser.substring(1, realUser.length() - 1));
 				}
 			}else {
 				logger.info(" linkShopOp is error:" +linkShopOp);

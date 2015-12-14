@@ -188,8 +188,7 @@ public class StatementConfigController extends BaseController{
 			List<Byte> statuses = new ArrayList<>();
 			statuses.add(ConstantEnum.CONFIG_STATUS_1.getCodeByte());
 			statuses.add(ConstantEnum.CONFIG_STATUS_0.getCodeByte());
-			Map<String,Object> checkMap = statementConfigService.validateIsExist(statementConfig.getCooperateType(), statementConfig.getBussinessType(), statementConfig.getBussinessId(), statuses
-					, statementConfig.getEffectStartTime(), statementConfig.getEffectEndTime(), statementConfig.getLinkType(), linkIdMap, linkAccountMap, statementConfig.getLinkShopOp());
+			Map<String,Object> checkMap = statementConfigService.validateIsExist(statementConfig, statuses, linkIdMap, linkAccountMap);
 			LOGGER.info("=========================== checkMap"+checkMap);
 			boolean checkResult = (boolean) checkMap.get("result");
 			if(checkResult){
@@ -279,7 +278,7 @@ public class StatementConfigController extends BaseController{
 				return responseData;
 			}
 			statementConfigVO = statementConfigService.selectConfigInfoById(Integer.valueOf(map.get("id").toString()));
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());

@@ -78,4 +78,9 @@
       real_account_list = #{realAccountList,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getConfigShopsByConfigId" parameterType="int" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from config_shop where config_id=#{configId, jdbcType=INTEGER}
+  </select>
 </mapper>
