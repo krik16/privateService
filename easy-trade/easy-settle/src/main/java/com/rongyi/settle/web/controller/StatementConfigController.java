@@ -600,21 +600,7 @@ public class StatementConfigController extends BaseController{
 					shop.setName(shopVO.getName());
 					shop.setPosition(shopVO.getPosition());
 					//查询店铺关联账号信息
-					paramsMap.put("shopId", shopVO.getId());
-					List<Integer> identitys = new ArrayList<>();
-					identitys.add(5);
-					identitys.add(4);
-					paramsMap.put("identitys", identitys);
-					List<UserInfo> userInfos = iUserInfoService.getFullUserInfoByRelevanceId(paramsMap);
-					List<UserInfoVo> userAccounts = new ArrayList<>();
-					if (CollectionUtils.isNotEmpty(userInfos)){
-						for (UserInfo userInfo :userInfos){
-							UserInfoVo userInfoVo = new UserInfoVo();
-							userInfoVo.setId(userInfo.getId());
-							userInfoVo.setUserAccount(userInfo.getUserAccount());
-							userAccounts.add(userInfoVo);
-						}
-					}
+					List<UserInfoVo> userAccounts = statementConfigService.getAccountInfoByParam(0, 0, 1, shopVO.getId());
 					shop.setUserAccounts(userAccounts);
 					reList.add(shop);
 				}
