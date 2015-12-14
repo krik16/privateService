@@ -704,4 +704,25 @@ public interface Constants {
         Integer CURRENT_PAGE=1;
         Integer PAGE_SIZE=10;
     }
+    
+    interface UserOperate{
+    	Integer HONGBAO = 1;//红包
+    	Integer COUPON = 2;//代金券
+    	Integer REBATE = 3;//抵扣券
+    }
+
+    interface RedenvelopStatus{
+        int UNUSED=0;
+        int USED=1;
+        int OVERDUE=2;
+    }
+    //容易逛[0] 互动屏[1] 微商[2]
+    interface CouponChannel{
+        int RYG=0;//容易逛
+        int HDP=1;//互动屏
+        int WX=2;//微信
+    }
+    interface ExportSize{
+        int EXCEL_EXPORT_MAX_SIZE=50000;
+    }
 }

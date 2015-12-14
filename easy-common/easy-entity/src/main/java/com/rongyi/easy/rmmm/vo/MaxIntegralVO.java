@@ -14,6 +14,26 @@ public class MaxIntegralVO {
 	private double integralRatio;// 积分抵扣比例
 
 	private int myIntegral;// 我的积分
+	
+	private Integer rebateNum = 0;// 可使用抵扣券数量
+	
+	private Integer hongBaoNum = 0;// 可使用红包数量
+
+	public Integer getRebateNum() {
+		return rebateNum;
+	}
+
+	public void setRebateNum(Integer rebateNum) {
+		this.rebateNum = rebateNum;
+	}
+
+	public Integer getHongBaoNum() {
+		return hongBaoNum;
+	}
+
+	public void setHongBaoNum(Integer hongBaoNum) {
+		this.hongBaoNum = hongBaoNum;
+	}
 
 	public int getMaxIntegral() {
 		return maxIntegral;

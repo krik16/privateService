@@ -9,7 +9,7 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
-@Entity("mcmc_shop_brand_category")
+@Entity(value="mcmc_shop_brand_category",noClassnameStored=true)
 public class CommodityCategoryFilter implements  Serializable{
 
 	/**

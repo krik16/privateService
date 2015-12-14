@@ -22,6 +22,7 @@ public class LoginUserVO implements Serializable{
 	List<Integer> identityType; //角色列表
 	String currentId;//当前角色状态
 
+	private Integer isDisabled=0; //0 默认,禁用 1 用于标识非当前状态登录账号的状态
 
 
 	private String appCode= HuanXinConfig.IMCODE_SECOND;
@@ -138,5 +139,13 @@ public class LoginUserVO implements Serializable{
 
 	public void setCurrentId(String currentId) {
 		this.currentId = currentId;
+	}
+
+	public Integer getIsDisabled() {
+		return isDisabled;
+	}
+
+	public void setIsDisabled(Integer isDisabled) {
+		this.isDisabled = isDisabled;
 	}
 }

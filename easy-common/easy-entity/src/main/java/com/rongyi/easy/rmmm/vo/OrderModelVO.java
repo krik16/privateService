@@ -27,6 +27,15 @@ public class OrderModelVO extends OrderModelParam implements Serializable {
 	private String provinceName;// 省名称
 	private String cityName;// 市名称
 	private Integer guideType;// 1是导购 2是买手
+	private Integer rebateNum = 0;// 可使用抵扣券数量
+
+	public Integer getRebateNum() {
+		return rebateNum;
+	}
+
+	public void setRebateNum(Integer rebateNum) {
+		this.rebateNum = rebateNum;
+	}
 
 	public Integer getGuideType() {
 		return guideType;

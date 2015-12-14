@@ -13,7 +13,7 @@ public interface ROACollectCommodityService {
 	 * @param userId
 	 * @throws Exception
 	 */
-	public void collectCommodity(CollectCommodityParam param,ObjectId userId) throws Exception;
+	public void collectCommodity(CollectCommodityParam param,String userId) throws Exception;
 	
 	/**
 	 * 取消收藏商品
@@ -21,5 +21,5 @@ public interface ROACollectCommodityService {
 	 * @param userId
 	 * @throws Exception
 	 */
-	public void cancelcollectCommodity(CollectCommodityParam param,ObjectId userId) throws Exception;
+	public void cancelcollectCommodity(CollectCommodityParam param,String userId) throws Exception;
 }

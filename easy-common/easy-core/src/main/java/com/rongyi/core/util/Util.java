@@ -11,6 +11,8 @@ import java.util.List;
 import com.rongyi.core.common.third.md5.Md5Util;
 import com.rongyi.core.constant.Const;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * 签名公共方法
  * 
@@ -62,4 +64,7 @@ public class Util {
 			return false;
 		}
 	}
+
+
+
 }

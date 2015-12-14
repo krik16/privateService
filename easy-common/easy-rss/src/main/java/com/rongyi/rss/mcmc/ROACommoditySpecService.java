@@ -13,4 +13,6 @@ public interface ROACommoditySpecService {
 	public List<CommoditySpec> insertList(List<CommoditySpec> commoditySpecs);
 	
 	public CommoditySpec findById(String id);
+	
+	public String insert(CommoditySpec commoditySpec);
 }

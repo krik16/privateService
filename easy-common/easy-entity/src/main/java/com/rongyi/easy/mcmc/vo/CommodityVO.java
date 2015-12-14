@@ -48,7 +48,20 @@ public class CommodityVO  implements  Serializable {
 	private String mallMid;//商场mongoId
 	private String shopName;//店铺名称
 	private boolean supportCourierDeliver=true;//true是  false否
-	
+	private boolean supportSelfPickup=true;//支持到店自提  true 是    false否
+	private Date registerAt;//上架时间
+	private Date soldOutAt;//下架时间
+	private Integer source;//来源0表示页面添加1表示批量导入2表示app添加的商品
+	//private Integer distribution;//配送方式 1表示到店自提2快递3表示支持两种方式
+	private Integer freight;//1表示商家承担运费,0表示买家承担运费
+	private Integer terminalType;//上架终端：1.表示容易逛2.表示互动屏3.表示容易逛和互动屏4.表示微商5.微商,容易逛6.微商,互动屏7.容易逛, 互动屏, 微商(转换成二进制数个位1有容易逛第二位1有 互动屏第三位1有 微商)
+	private Integer stockStatus;//0表示统一库存1表示分管库存
+	private String reason;//下架原因
+	private String mallId;//商场mysql Id
+	private String brandName;
+	private String shopNum;
+	private int brandId;//品牌mysqlId
+	private String filialeMid;//分公司id
 	public String getShopName() {
 		return shopName;
 	}
@@ -232,7 +245,9 @@ public class CommodityVO  implements  Serializable {
 		this.commodityCPriceMin = commodity.getcPriceMin();
 		this.commodityOPOfLCP = commodity.getoPriceOfLowestCPrice();
 		this.supportCourierDeliver = commodity.isSupportCourierDeliver();
-
+		this.registerAt=commodity.getRegisterAt();
+		this.soldOutAt=commodity.getSoldOutAt();
+		this.supportSelfPickup = commodity.isSupportSelfPickup();
 	}
 	public String getCommodityId() {
 		return commodityId;
@@ -313,6 +328,18 @@ public class CommodityVO  implements  Serializable {
 		this.supportCourierDeliver = supportCourierDeliver;
 	}
 
+	public Date getRegisterAt() {
+		return registerAt;
+	}
+	public void setRegisterAt(Date registerAt) {
+		this.registerAt = registerAt;
+	}
+	public Date getSoldOutAt() {
+		return soldOutAt;
+	}
+	public void setSoldOutAt(Date soldOutAt) {
+		this.soldOutAt = soldOutAt;
+	}
 	@Override
 	public String toString() {
 		return "CommodityVO{" +
@@ -349,6 +376,80 @@ public class CommodityVO  implements  Serializable {
 				", mallMid='" + mallMid + '\'' +
 				", shopName='" + shopName + '\'' +
 				", supportCourierDeliver=" + supportCourierDeliver +
+				", supportSelfPickup=" + supportSelfPickup +
 				'}';
 	}
+	public Integer getSource() {
+		return source;
+	}
+	public void setSource(Integer source) {
+		this.source = source;
+	}
+	/*public Integer getDistribution() {
+		return distribution;
+	}
+	public void setDistribution(Integer distribution) {
+		this.distribution = distribution;
+	}*/
+	public Integer getFreight() {
+		return freight;
+	}
+	public boolean isSupportSelfPickup() {
+		return supportSelfPickup;
+	}
+	public void setSupportSelfPickup(boolean supportSelfPickup) {
+		this.supportSelfPickup = supportSelfPickup;
+	}
+	public void setFreight(Integer freight) {
+		this.freight = freight;
+	}
+	public Integer getTerminalType() {
+		return terminalType;
+	}
+	public void setTerminalType(Integer terminalType) {
+		this.terminalType = terminalType;
+	}
+	public Integer getStockStatus() {
+		return stockStatus;
+	}
+	public void setStockStatus(Integer stockStatus) {
+		this.stockStatus = stockStatus;
+	}
+	public String getReason() {
+		return reason;
+	}
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+	public String getMallId() {
+		return mallId;
+	}
+	public void setMallId(String mallId) {
+		this.mallId = mallId;
+	}
+	public String getBrandName() {
+		return brandName;
+	}
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
+	}
+	public String getShopNum() {
+		return shopNum;
+	}
+	public void setShopNum(String shopNum) {
+		this.shopNum = shopNum;
+	}
+	public int getBrandId() {
+		return brandId;
+	}
+	public void setBrandId(int brandId) {
+		this.brandId = brandId;
+	}
+	public String getFilialeMid() {
+		return filialeMid;
+	}
+	public void setFilialeMid(String filialeMid) {
+		this.filialeMid = filialeMid;
+	}
+	
 }
