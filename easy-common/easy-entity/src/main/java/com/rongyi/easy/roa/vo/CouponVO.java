@@ -188,6 +188,18 @@ public class CouponVO implements Serializable {
      */
     private String remark;
 
+
+    /**
+     * 每人每日限用张数
+     */
+    private Integer limitUseCount;
+
+    /**
+     * 每日最大发行张数
+     */
+    private Integer limitPublishCount;
+
+
     public String getSynFlag() {
         return synFlag;
     }
@@ -747,5 +759,21 @@ public class CouponVO implements Serializable {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public Integer getLimitUseCount() {
+        return limitUseCount;
+    }
+
+    public void setLimitUseCount(Integer limitUseCount) {
+        this.limitUseCount = limitUseCount;
+    }
+
+    public Integer getLimitPublishCount() {
+        return limitPublishCount;
+    }
+
+    public void setLimitPublishCount(Integer limitPublishCount) {
+        this.limitPublishCount = limitPublishCount;
     }
 }
