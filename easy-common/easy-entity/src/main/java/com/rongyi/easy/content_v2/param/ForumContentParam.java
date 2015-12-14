@@ -2,6 +2,7 @@ package com.rongyi.easy.content_v2.param;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -42,6 +43,8 @@ public class ForumContentParam implements Serializable{
 	private Integer orderByDesc;
 	/**位置id*/
 	private Integer positionId;
+	
+	private List<Integer> positionIds;
 	
 	public ForumContentParam(){
 		
@@ -143,7 +146,19 @@ public class ForumContentParam implements Serializable{
 	public void setOrderByDesc(Integer orderByDesc) {
 		this.orderByDesc = orderByDesc;
 	}
-	
+	/**
+	 * @return the positionIds
+	 */
+	public List<Integer> getPositionIds() {
+		return positionIds;
+	}
+
+	/**
+	 * @param positionIds the positionIds to set
+	 */
+	public void setPositionIds(List<Integer> positionIds) {
+		this.positionIds = positionIds;
+	}
 	public String toString(){
 		StringBuilder sb=new StringBuilder();
 		sb.append("ForumContent {").append("provId:").append(this.provId).append(" cityId:").append(this.cityId).append(" title:").append(this.title)

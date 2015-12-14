@@ -32,7 +32,7 @@ public class MallEntity implements java.io.Serializable {
     private String icon;
 //    private String introduction_pic;
 //    private String traffic_pic;
-//    private List<Double> location;
+    private List<Double> location;
 //    private Integer mall_valid;
 //    private String mobile;
 //    private String mold;
@@ -55,6 +55,12 @@ public class MallEntity implements java.io.Serializable {
 //    private String wechat_encodingAESKey;//微信加密解密密钥
     private String tags;
 	
+	public List<Double> getLocation() {
+		return location;
+	}
+	public void setLocation(List<Double> location) {
+		this.location = location;
+	}
 	public ObjectId getId() {
 		return id;
 	}

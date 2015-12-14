@@ -4,289 +4,325 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class PaymentEntityVO {
-	/** 主键id */
-	private Integer id;
+    /**
+     * 主键id
+     */
+    private Integer id;
 
-	/**
-	 * osm退款传递过来的id
-	 */
-	private Integer paymentId;
+    /**
+     * osm退款传递过来的id
+     */
+    private Integer paymentId;
 
-	/** 大订单号 */
-	private String orderNum;
+    /**
+     * 大订单号
+     */
+    private String orderNum;
 
-	/**
+    /**
      * 订单类型(0:商品订单，1:优惠券订单)
      */
     private Integer orderType;
 
 
-	private String payNo;
-	
-	/** 子订单号（如果是大订单则不填） */
-	/*
+    private String payNo;
+
+    /** 子订单号（如果是大订单则不填） */
+    /*
 	 * private Integer orderDetailNum;
 	 */
 
-	/** 订单名称 */
-	private String title;
+    /**
+     * 订单名称
+     */
+    private String title;
 
-	/** 子订单号（如果是大订单则不填,多个子订单Id用逗号分隔开） */
-	private String orderDetailNumArray;
+    /**
+     * 子订单号（如果是大订单则不填,多个子订单Id用逗号分隔开）
+     */
+    private String orderDetailNumArray;
 
-	/** 金额 */
-	private BigDecimal amountMoney;
+    /**
+     * 金额
+     */
+    private BigDecimal amountMoney;
 
-	/** 状态（款已打/款已到） */
-	private Integer status;
+    /**
+     * 状态（款已打/款已到）
+     */
+    private Integer status;
 
-	private String statusStr;
+    private String statusStr;
 
-	/** 交易类型（购买/退款） */
-	private Integer tradeType;
+    /**
+     * 交易类型（购买/退款）
+     */
+    private Integer tradeType;
 
-	private String tradeTypeStr;
+    private String tradeTypeStr;
 
-	/** 创建时间 */
-	private Date createTime;
+    /**
+     * 创建时间
+     */
+    private Date createTime;
 
-	private String createTimeStr;
+    private String createTimeStr;
 
-	/** 完成时间 */
-	private Date finishTime;
+    /**
+     * 完成时间
+     */
+    private Date finishTime;
 
-	private String finishTimeStr;
+    private String finishTimeStr;
 
-	/** 支付工具（银行/支付宝等） */
-	private Integer payChannel;
+    /**
+     * 支付工具（银行/支付宝等）
+     */
+    private Integer payChannel;
 
-	private String payChannelStr;
+    private String payChannelStr;
 
-	/** 转出账号 */
-	private String outAccount;
+    /**
+     * 转出账号
+     */
+    private String outAccount;
 
-	/** 转入账号 */
-	private String inAccount;
+    /**
+     * 转入账号
+     */
+    private String inAccount;
 
-	/**
-	 * 退款原因
-	 */
-	private String desc;
+    /**
+     * 退款原因
+     */
+    private String desc;
 
-	/**
-	 * 卖家店铺ID
-	 */
-	private Integer showNum;
+    /**
+     * 卖家店铺ID
+     */
+    private Integer showNum;
 
-	/**
-	 * 主键id
-	 * 
-	 * @return id
-	 */
-	public Integer getId() {
-		return id;
-	}
+    /**
+     * 支付开始时间
+     **/
 
-	/**
-	 * 主键id
-	 * 
-	 * @param id
-	 */
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    private String timeStart;
 
-	public Integer getPaymentId() {
-		return paymentId;
-	}
+    /**
+     * 支付失效时间
+     */
+    private String timeExpire;
 
-	public void setPaymentId(Integer paymentId) {
-		this.paymentId = paymentId;
-	}
 
-	public String getOrderNum() {
-		return orderNum;
-	}
+    /**
+     * 主键id
+     *
+     * @return id
+     */
+    public Integer getId() {
+        return id;
+    }
 
-	public void setOrderNum(String orderNum) {
-		this.orderNum = orderNum;
-	}
+    /**
+     * 主键id
+     *
+     * @param id
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	/**
-	 * 订单名称
-	 */
-	public String getTitle() {
-		return title;
-	}
+    public Integer getPaymentId() {
+        return paymentId;
+    }
 
-	/**
-	 * 订单名称
-	 * 
-	 * @param title
-	 */
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setPaymentId(Integer paymentId) {
+        this.paymentId = paymentId;
+    }
 
-	public String getOrderDetailNumArray() {
-		return orderDetailNumArray;
-	}
+    public String getOrderNum() {
+        return orderNum;
+    }
 
-	public void setOrderDetailNumArray(String orderDetailNumArray) {
-		this.orderDetailNumArray = orderDetailNumArray;
-	}
+    public void setOrderNum(String orderNum) {
+        this.orderNum = orderNum;
+    }
 
-	/**
-	 * 金额
-	 * 
-	 * @return amountMoney
-	 */
-	public BigDecimal getAmountMoney() {
-		return amountMoney;
-	}
+    /**
+     * 订单名称
+     */
+    public String getTitle() {
+        return title;
+    }
 
-	/**
-	 * 金额
-	 * 
-	 * @param amountMoney
-	 */
-	public void setAmountMoney(BigDecimal amountMoney) {
-		this.amountMoney = amountMoney;
-	}
+    /**
+     * 订单名称
+     *
+     * @param title
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	/**
-	 * 状态（款已打/款已到）
-	 * 
-	 * @return status
-	 */
-	public Integer getStatus() {
-		return status;
-	}
+    public String getOrderDetailNumArray() {
+        return orderDetailNumArray;
+    }
 
-	/**
-	 * 状态（款已打/款已到）
-	 * 
-	 * @param status
-	 */
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
+    public void setOrderDetailNumArray(String orderDetailNumArray) {
+        this.orderDetailNumArray = orderDetailNumArray;
+    }
 
-	/**
-	 * 交易类型（购买/退款）
-	 * 
-	 * @return tradeType
-	 */
-	public Integer getTradeType() {
-		return tradeType;
-	}
+    /**
+     * 金额
+     *
+     * @return amountMoney
+     */
+    public BigDecimal getAmountMoney() {
+        return amountMoney;
+    }
 
-	/**
-	 * 交易类型（购买/退款）
-	 * 
-	 * @param tradeType
-	 */
-	public void setTradeType(Integer tradeType) {
-		this.tradeType = tradeType;
-	}
+    /**
+     * 金额
+     *
+     * @param amountMoney
+     */
+    public void setAmountMoney(BigDecimal amountMoney) {
+        this.amountMoney = amountMoney;
+    }
 
-	/**
-	 * 创建时间
-	 * 
-	 * @return createTime
-	 */
-	public Date getCreateTime() {
-		return createTime;
-	}
+    /**
+     * 状态（款已打/款已到）
+     *
+     * @return status
+     */
+    public Integer getStatus() {
+        return status;
+    }
 
-	/**
-	 * 创建时间
-	 * 
-	 * @param createTime
-	 */
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
+    /**
+     * 状态（款已打/款已到）
+     *
+     * @param status
+     */
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
-	/**
-	 * 完成时间
-	 * 
-	 * @return finishTime
-	 */
-	public Date getFinishTime() {
-		return finishTime;
-	}
+    /**
+     * 交易类型（购买/退款）
+     *
+     * @return tradeType
+     */
+    public Integer getTradeType() {
+        return tradeType;
+    }
 
-	/**
-	 * 完成时间
-	 * 
-	 * @param finishTime
-	 */
-	public void setFinishTime(Date finishTime) {
-		this.finishTime = finishTime;
-	}
+    /**
+     * 交易类型（购买/退款）
+     *
+     * @param tradeType
+     */
+    public void setTradeType(Integer tradeType) {
+        this.tradeType = tradeType;
+    }
 
-	/**
-	 * 支付工具（银行/支付宝等）
-	 * 
-	 * @return payChannel
-	 */
-	public Integer getPayChannel() {
-		return payChannel;
-	}
+    /**
+     * 创建时间
+     *
+     * @return createTime
+     */
+    public Date getCreateTime() {
+        return createTime;
+    }
 
-	/**
-	 * 支付工具（银行/支付宝等）
-	 * 
-	 * @param payChannel
-	 */
-	public void setPayChannel(Integer payChannel) {
-		this.payChannel = payChannel;
-	}
+    /**
+     * 创建时间
+     *
+     * @param createTime
+     */
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
-	/**
-	 * 转出账号
-	 * 
-	 * @return outAccount
-	 */
-	public String getOutAccount() {
-		return outAccount;
-	}
+    /**
+     * 完成时间
+     *
+     * @return finishTime
+     */
+    public Date getFinishTime() {
+        return finishTime;
+    }
 
-	/**
-	 * 转出账号
-	 * 
-	 * @param outAccount
-	 */
-	public void setOutAccount(String outAccount) {
-		this.outAccount = outAccount;
-	}
+    /**
+     * 完成时间
+     *
+     * @param finishTime
+     */
+    public void setFinishTime(Date finishTime) {
+        this.finishTime = finishTime;
+    }
 
-	/**
-	 * 转入账号
-	 * 
-	 * @return inAccount
-	 */
-	public String getInAccount() {
-		return inAccount;
-	}
+    /**
+     * 支付工具（银行/支付宝等）
+     *
+     * @return payChannel
+     */
+    public Integer getPayChannel() {
+        return payChannel;
+    }
 
-	/**
-	 * 转入账号
-	 * 
-	 * @param inAccount
-	 */
-	public void setInAccount(String inAccount) {
-		this.inAccount = inAccount;
-	}
+    /**
+     * 支付工具（银行/支付宝等）
+     *
+     * @param payChannel
+     */
+    public void setPayChannel(Integer payChannel) {
+        this.payChannel = payChannel;
+    }
 
-	public String getDesc() {
-		return desc;
-	}
+    /**
+     * 转出账号
+     *
+     * @return outAccount
+     */
+    public String getOutAccount() {
+        return outAccount;
+    }
 
-	public void setDesc(String desc) {
-		this.desc = desc;
-	}
+    /**
+     * 转出账号
+     *
+     * @param outAccount
+     */
+    public void setOutAccount(String outAccount) {
+        this.outAccount = outAccount;
+    }
+
+    /**
+     * 转入账号
+     *
+     * @return inAccount
+     */
+    public String getInAccount() {
+        return inAccount;
+    }
+
+    /**
+     * 转入账号
+     *
+     * @param inAccount
+     */
+    public void setInAccount(String inAccount) {
+        this.inAccount = inAccount;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
 
 	/*
 	 * public Integer getOrderDetailNum() { return orderDetailNum; }
@@ -295,61 +331,77 @@ public class PaymentEntityVO {
 	 * this.orderDetailNum = orderDetailNum; }
 	 */
 
-	public String getCreateTimeStr() {
-		return createTimeStr;
-	}
+    public String getCreateTimeStr() {
+        return createTimeStr;
+    }
 
-	public void setCreateTimeStr(String createTimeStr) {
-		this.createTimeStr = createTimeStr;
-	}
+    public void setCreateTimeStr(String createTimeStr) {
+        this.createTimeStr = createTimeStr;
+    }
 
-	public String getFinishTimeStr() {
-		return finishTimeStr;
-	}
+    public String getFinishTimeStr() {
+        return finishTimeStr;
+    }
 
-	public void setFinishTimeStr(String finishTimeStr) {
-		this.finishTimeStr = finishTimeStr;
-	}
+    public void setFinishTimeStr(String finishTimeStr) {
+        this.finishTimeStr = finishTimeStr;
+    }
 
-	public String getStatusStr() {
-		return statusStr;
-	}
+    public String getStatusStr() {
+        return statusStr;
+    }
 
-	public void setStatusStr(String statusStr) {
-		this.statusStr = statusStr;
-	}
+    public void setStatusStr(String statusStr) {
+        this.statusStr = statusStr;
+    }
 
-	public String getTradeTypeStr() {
-		return tradeTypeStr;
-	}
+    public String getTradeTypeStr() {
+        return tradeTypeStr;
+    }
 
-	public void setTradeTypeStr(String tradeTypeStr) {
-		this.tradeTypeStr = tradeTypeStr;
-	}
+    public String getTimeExpire() {
+        return timeExpire;
+    }
 
-	public String getPayChannelStr() {
-		return payChannelStr;
-	}
+    public void setTimeExpire(String timeExpire) {
+        this.timeExpire = timeExpire;
+    }
 
-	public void setPayChannelStr(String payChannelStr) {
-		this.payChannelStr = payChannelStr;
-	}
+    public String getTimeStart() {
+        return timeStart;
+    }
 
-	public Integer getShowNum() {
-		return showNum;
-	}
+    public void setTimeStart(String timeStart) {
+        this.timeStart = timeStart;
+    }
 
-	public void setShowNum(Integer showNum) {
-		this.showNum = showNum;
-	}
+    public void setTradeTypeStr(String tradeTypeStr) {
+        this.tradeTypeStr = tradeTypeStr;
+    }
 
-	public String getPayNo() {
-		return payNo;
-	}
+    public String getPayChannelStr() {
+        return payChannelStr;
+    }
 
-	public void setPayNo(String payNo) {
-		this.payNo = payNo;
-	}
+    public void setPayChannelStr(String payChannelStr) {
+        this.payChannelStr = payChannelStr;
+    }
+
+    public Integer getShowNum() {
+        return showNum;
+    }
+
+    public void setShowNum(Integer showNum) {
+        this.showNum = showNum;
+    }
+
+    public String getPayNo() {
+        return payNo;
+    }
+
+    public void setPayNo(String payNo) {
+        this.payNo = payNo;
+    }
 
 
     public Integer getOrderType() {
@@ -359,4 +411,6 @@ public class PaymentEntityVO {
     public void setOrderType(Integer orderType) {
         this.orderType = orderType;
     }
+
+
 }

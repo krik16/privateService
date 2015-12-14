@@ -34,7 +34,6 @@ public class SonOrderVO implements Serializable{
 
 	private String appealTimes;// 维权次数
 
-
 	private String refundTimes;// 退款次数
 
 	private String couponCode;// 卡券码

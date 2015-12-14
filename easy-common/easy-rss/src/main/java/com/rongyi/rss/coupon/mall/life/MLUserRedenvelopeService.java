@@ -3,7 +3,10 @@ package com.rongyi.rss.coupon.mall.life;
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.UserRedenvelope;
+import com.rongyi.easy.coupon.param.RebateAndRedenvelopParam;
 import com.rongyi.easy.coupon.vo.UserCouponVO;
+import com.rongyi.easy.coupon.vo.UserRedPacketForOrderVO;
+import com.rongyi.easy.coupon.vo.UserRedPacketVO;
 
 import java.util.List;
 import java.util.Map;
@@ -114,4 +117,37 @@ public interface MLUserRedenvelopeService {
     ResponseResult receiveCashCoupon(String couponId, String userId);
 
 
+
+
+    /**
+     * 根据券码查询抵红包详情
+     * @param couponCode 券码
+     * @return UserRedPacketVO
+     * @author lqy
+     */
+    UserRedPacketVO getUserRedPacket(String couponCode);
+
+    /**
+     * 分页查询我的可使用红包和已失效红包
+     * @param param
+     * @return PagingVO
+     * @author lqy
+     */
+    PagingVO<UserRedPacketVO> getUserRedPackets(RebateAndRedenvelopParam param);
+
+    /**
+     * 查询对订单可使用红包和不可使用的红包(不需要分页)
+     * @param param
+     * @return UserRedPacketForOrderVO
+     * @author lqy
+     */
+    UserRedPacketForOrderVO getUserRedPacketForOrder(RebateAndRedenvelopParam param);
+
+    /**
+     * 获取用户在某个时间点以后领取到的可使用的红包数量
+     * @param param 参数含 userId、receiveAt
+     * @return count 数量
+     * @author lqy
+     */
+    int getUserRedPacketCount(RebateAndRedenvelopParam param);
 }

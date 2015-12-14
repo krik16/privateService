@@ -139,6 +139,18 @@ public class CouponVO implements Serializable {
 
     private List<Integer> afterSaleService; // = CouponConst.AFTER_SALE_SERVICE;//[1,1,1,1] 1为支持，0为不支持。第一位：随时退、第二位：过期退 第三位： 免预约、第四位：不可退
 
+    /**
+     * 优惠方式 0：满减 ；1：立减。
+     */
+    private Integer preferentialType;
+
+    public Integer getPreferentialType() {
+        return preferentialType;
+    }
+
+    public void setPreferentialType(Integer preferentialType) {
+        this.preferentialType = preferentialType;
+    }
 
     public String getId() {
         return id;
@@ -361,16 +373,14 @@ public class CouponVO implements Serializable {
         this.status = status;
     }
 
-    // 状态(审核中[0]、已上线[1]、已使用[2]、已过期[3]、已下线[4])
-    public void setConvertStatus(Integer status, Boolean isOffStock, Date publishEndAt) {
-        if (Integer.valueOf(0).equals(status) || Integer.valueOf(1).equals(status))
-            this.setStatus("0");
-        else if (Integer.valueOf(2).equals(status))
+    // 状态: 进行中[1] 非进行中[0]
+    public void setConvertStatus(Integer status, Boolean isOffStock, Date publishStartAt, Date publishEndAt) {
+        if (publishStartAt != null && publishEndAt != null && Integer.valueOf(2).equals(status)
+                && !isOffStock && new Date().after(publishStartAt) && new Date().before(publishEndAt)) {
             this.setStatus("1");
-        else if (Boolean.TRUE.equals(isOffStock))
-            this.setStatus("4");
-        else if (new Date().after(publishEndAt))
-            this.setStatus("3");
+        } else {
+            this.setStatus("0");
+        }
     }
 
     public String getActivityStatus() {

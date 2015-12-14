@@ -2,6 +2,7 @@ package com.rongyi.easy.coupon.vo;
 
 import com.rongyi.easy.coupon.entity.UserRedenvelope;
 import com.rongyi.easy.mcmc.vo.CommodityBuyerVO;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
@@ -25,7 +26,7 @@ public class UserCouponVO implements Serializable {
 
     private String validEndDate;// 有效期结束时间
 
-    private Integer status;// 券状态 0:未激活 1:已领用 2:已使用 3:已过期
+    private Integer status;// 券状态： 未使用[0] 已使用[1] 已过期[2]
 
     private String type;// 0: 全场抵扣券 1: 商品抵扣券
 
@@ -46,8 +47,55 @@ public class UserCouponVO implements Serializable {
     private String couponId;//卡券ID
 
     private Integer id;//用户红包主键
+    
+    private Integer applyObject;//适用对象 :商家/买手[0] 商家[1] 买手[2]
+    
+    private Integer applyScope;//适用范围:商品/代金券[0] 商品[1] 代金券[2]
+    
+    private List<String> label;//标签
+    /**
+     * 使用规则
+     */
+    private String limitDesc;
 
-    public Integer getStatus() {
+    /**
+     * 抵扣券关联的代金券结合
+     */
+    private List<VoucherVO> voucherVOs;
+    
+    public String getLimitDesc() {
+		return limitDesc;
+	}
+
+	public void setLimitDesc(String limitDesc) {
+		this.limitDesc = limitDesc;
+	}
+
+	public List<String> getLabel() {
+		return label;
+	}
+
+	public void setLabel(List<String> label) {
+		this.label = label;
+	}
+
+	public Integer getApplyObject() {
+		return applyObject;
+	}
+
+	public void setApplyObject(Integer applyObject) {
+		this.applyObject = applyObject;
+	}
+
+	public Integer getApplyScope() {
+		return applyScope;
+	}
+
+	public void setApplyScope(Integer applyScope) {
+		this.applyScope = applyScope;
+	}
+
+	public Integer getStatus() {
         return status;
     }
 
@@ -173,6 +221,14 @@ public class UserCouponVO implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public List<VoucherVO> getVoucherVOs() {
+        return voucherVOs;
+    }
+
+    public void setVoucherVOs(List<VoucherVO> voucherVOs) {
+        this.voucherVOs = voucherVOs;
     }
 
     // 券状态 0:未激活 1:已领用 2:已使用 3:已过期

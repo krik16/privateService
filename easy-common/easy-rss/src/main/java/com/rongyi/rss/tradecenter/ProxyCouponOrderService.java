@@ -5,6 +5,7 @@ import com.rongyi.easy.coupon.entity.CouponOrder;
 import com.rongyi.easy.coupon.entity.CouponOrderItem;
 import com.rongyi.easy.coupon.param.CouponOrderParam;
 import com.rongyi.easy.coupon.param.RoaCouponOrderParam;
+import com.rongyi.easy.rmmm.param.OrderListParam;
 
 import java.util.List;
 import java.util.Map;
@@ -218,4 +219,16 @@ public interface ProxyCouponOrderService {
      * @return
      */
     int dailyBuyCount(String couponId, String userId);
+
+    /**
+     * 获取代金券生成订单最大使用积分
+     *
+     * @param param
+     * @param limit 积分抵扣限制
+     * @param scoreExchangeMoney 积分抵扣金额
+     * @param platformRebateAmount 满减抵扣券抵扣价格
+     * @return
+     * @throws Exception
+     */
+    int getMaxIntegral(OrderListParam param, double limit, double scoreExchangeMoney,double platformRebateAmount);
 }

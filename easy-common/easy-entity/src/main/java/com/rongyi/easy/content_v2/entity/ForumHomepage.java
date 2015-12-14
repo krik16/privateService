@@ -66,7 +66,10 @@ public class ForumHomepage implements Serializable {
      * 修改时间
      */
     private Date updateAt;
-
+    /**
+     * 类型 首页为1，特卖为2
+     */
+    private int type;
 
     /**
      * 是否已经删除  true表示删除 flase 表示没有删除
@@ -184,24 +187,34 @@ public class ForumHomepage implements Serializable {
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
+    /**
+	 * @return the type
+	 */
+	public int getType() {
+		return type;
+	}
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", id)
-                .append("title", title)
-                .append("forumCode", forumCode)
-                .append("status", status)
-                .append("sortIdx", sortIdx)
-                .append("imageFormat", imageFormat)
-                .append("imagePixel", imagePixel)
-                .append("imageSize", imageSize)
-                .append("positionCount", positionCount)
-                .append("createUser", createUser)
-                .append("createAt", createAt)
-                .append("updateUser", updateUser)
-                .append("updateAt", updateAt)
-                .append("isDeleted", isDeleted)
-                .toString();
-    }
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	/**(非 Javadoc)
+	* @Title: toString 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param @return    设定文件 
+	* @author shaozhou 
+	* @date 2015年11月17日 下午2:11:55
+	* @throws 
+	*/
+	@Override
+	public String toString() {
+		return "ForumHomepage [id=" + id + ", title=" + title + ", forumCode=" + forumCode + ", status=" + status
+				+ ", sortIdx=" + sortIdx + ", imageFormat=" + imageFormat + ", imagePixel=" + imagePixel
+				+ ", imageSize=" + imageSize + ", positionCount=" + positionCount + ", createUser=" + createUser
+				+ ", createAt=" + createAt + ", updateUser=" + updateUser + ", updateAt=" + updateAt + ", type=" + type
+				+ ", isDeleted=" + isDeleted + "]";
+	}
 }

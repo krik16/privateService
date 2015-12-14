@@ -15,6 +15,7 @@ public class CommoditySpecColumnVO implements  Serializable{
 	private String columnId;
 	private String columnName;
 	private String columnValue;
+	private String columnNote;//规格备注
 	private boolean isRequired;
 	
 	public CommoditySpecColumnVO(){
@@ -59,4 +60,11 @@ public class CommoditySpecColumnVO implements  Serializable{
 				", isRequired=" + isRequired +
 				'}';
 	}
+	public String getColumnNote() {
+		return columnNote;
+	}
+	public void setColumnNote(String columnNote) {
+		this.columnNote = columnNote;
+	}
+	
 }
