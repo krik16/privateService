@@ -1,8 +1,6 @@
 package com.rongyi.easy.roa.vo;
 
 
-import com.rongyi.easy.coupon.entity.Coupon;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
@@ -31,7 +29,32 @@ public class OrderDetailVO implements Serializable {
 
     private String itemName; // 商品名称
 
-    private Coupon coupon; //卡券信息
+    private String couponId; //卡券Id
+
+    private String couponName;
+    /**
+     * 原价
+     */
+    private double origPrice;
+
+    /**
+     * 现价
+     */
+    private double currPrice;
+
+    private String afterSaleService;
+
+    private String listPicUrl;
+
+    /**
+     * 使用限制
+     */
+    private String limitDesc;
+
+    /**
+     * 使用说明
+     */
+    private String usageDesc;
 
     private List<ActivityDetailVO> codeList; // 本订单所含的优惠券信息
 
@@ -96,7 +119,6 @@ public class OrderDetailVO implements Serializable {
     }
 
 
-
     public List<ActivityDetailVO> getCodeList() {
         return codeList;
     }
@@ -105,11 +127,67 @@ public class OrderDetailVO implements Serializable {
         this.codeList = codeList;
     }
 
-    public Coupon getCoupon() {
-        return coupon;
+    public String getCouponId() {
+        return couponId;
     }
 
-    public void setCoupon(Coupon coupon) {
-        this.coupon = coupon;
+    public void setCouponId(String couponId) {
+        this.couponId = couponId;
+    }
+
+    public String getCouponName() {
+        return couponName;
+    }
+
+    public void setCouponName(String couponName) {
+        this.couponName = couponName;
+    }
+
+    public double getOrigPrice() {
+        return origPrice;
+    }
+
+    public void setOrigPrice(double origPrice) {
+        this.origPrice = origPrice;
+    }
+
+    public double getCurrPrice() {
+        return currPrice;
+    }
+
+    public void setCurrPrice(double currPrice) {
+        this.currPrice = currPrice;
+    }
+
+    public String getAfterSaleService() {
+        return afterSaleService;
+    }
+
+    public void setAfterSaleService(String afterSaleService) {
+        this.afterSaleService = afterSaleService;
+    }
+
+    public String getListPicUrl() {
+        return listPicUrl;
+    }
+
+    public void setListPicUrl(String listPicUrl) {
+        this.listPicUrl = listPicUrl;
+    }
+
+    public String getLimitDesc() {
+        return limitDesc;
+    }
+
+    public void setLimitDesc(String limitDesc) {
+        this.limitDesc = limitDesc;
+    }
+
+    public String getUsageDesc() {
+        return usageDesc;
+    }
+
+    public void setUsageDesc(String usageDesc) {
+        this.usageDesc = usageDesc;
     }
 }
