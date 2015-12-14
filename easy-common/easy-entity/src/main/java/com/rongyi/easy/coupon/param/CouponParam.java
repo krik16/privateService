@@ -21,14 +21,11 @@ public class CouponParam implements Serializable {
     private Integer pageSize;
 
     /**
-<<<<<<< HEAD
-=======
      * 起始行数
      */
     private Integer offset;
 
     /**
->>>>>>> develop-yuzhijian
      * 店铺ID
      */
     private String shopId;
@@ -159,6 +156,11 @@ public class CouponParam implements Serializable {
      * 更新人
      */
     private String updateUser;
+
+    /**
+     * 是否已被领取 是[true] 否[false]
+     */
+    private Boolean hasReceived;
 
     public String getShopId() {
         return shopId;
@@ -397,6 +399,14 @@ public class CouponParam implements Serializable {
         this.offset = offset;
     }
 
+    public Boolean getHasReceived() {
+        return hasReceived;
+    }
+
+    public void setHasReceived(Boolean hasReceived) {
+        this.hasReceived = hasReceived;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -426,7 +436,8 @@ public class CouponParam implements Serializable {
                 .append("name", name)
                 .append("isDeleted", isDeleted)
                 .append("productId", productId)
-                 .append("isGeneral", isGeneral)
+                .append("isGeneral", isGeneral)
+                .append("hasReceived", hasReceived)
                 .toString();
     }
 }
