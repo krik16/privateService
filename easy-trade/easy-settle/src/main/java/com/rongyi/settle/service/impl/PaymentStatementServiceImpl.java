@@ -451,10 +451,11 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 
 				dataLoad = true;
 			} else if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.SHOP)) {
+				logger.info("生成店铺对账单数据");
 				// 店铺 & all
 				couponStatementDetailDtoList = selectForStatementDetails(null, null, statementConfig.getBussinessId(), paymentStatement.getCycleStartTime(),
 						paymentStatement.getCycleEndTime());
-
+				logger.info("couponStatementDetailDtoList size=",couponStatementDetailDtoList.size());
 				couponExcelDtoList = selectForCouponExcelDto(null, null, statementConfig.getBussinessId(), paymentStatement.getCycleStartTime(),
 						paymentStatement.getCycleEndTime());
 
