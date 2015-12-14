@@ -9,7 +9,10 @@
 
 package com.rongyi.easy.settle.vo;
 
+import com.rongyi.easy.settle.entity.ConfigShop;
 import com.rongyi.easy.settle.entity.StatementConfig;
+
+import java.util.List;
 
 /**	
  * @Author:  柯军
@@ -55,10 +58,6 @@ public class StatementConfigVO extends StatementConfig{
      */
     private String bussinessAddress;
 
-	/**
-	 * 关联店铺id集合（逗号分隔），-1表示包含所有，0表示本身
-	 */
-	private String linkShopId;
 
 	/**
 	 * 关联店铺操作(0:选择,1:排除)
@@ -66,14 +65,13 @@ public class StatementConfigVO extends StatementConfig{
 	private Byte linkShopOp;
 
 	/**
-	 * 关联角色(0:全部,1:导购，2:买手)
+	 * 关联账号类型(1:导购,2:买手)
 	 */
 	private Byte linkRole;
-
 	/**
-	 * 关联账号(多个账号逗号分隔)
+	 * 关联类型（0:所有,1:自身,2:部分）
 	 */
-	private String linkUserPhone;
+	private Byte linkType;
 
     /**
      * 联系人邮箱(多个邮箱用分号分隔开)
@@ -110,7 +108,11 @@ public class StatementConfigVO extends StatementConfig{
 	 * 生成时间
 	 */
 	private String generateTime;
-	
+
+	/**
+	 * 关联店铺
+	 */
+	private List<ConfigShop> configShops;
     
 	public Integer getConfigId() {
 		return configId;
@@ -230,4 +232,31 @@ public class StatementConfigVO extends StatementConfig{
 		this.linkShopOp = linkShopOp;
 	}
 
+	@Override
+	public Byte getLinkType() {
+		return linkType;
+	}
+
+	@Override
+	public void setLinkType(Byte linkType) {
+		this.linkType = linkType;
+	}
+
+	@Override
+	public Byte getLinkRole() {
+		return linkRole;
+	}
+
+	@Override
+	public void setLinkRole(Byte linkRole) {
+		this.linkRole = linkRole;
+	}
+
+	public List<ConfigShop> getConfigShops() {
+		return configShops;
+	}
+
+	public void setConfigShops(List<ConfigShop> configShops) {
+		this.configShops = configShops;
+	}
 }
