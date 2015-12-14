@@ -99,5 +99,17 @@ public interface MallService {
      * @return
      */
     ResponseVO getArea(Integer type, String parentId, long timeStamp, String channel, String sign);
+    
+    /**
+     * 根据商场名称 模糊匹配查询商场列表
+     * @param mallName		商场名称
+     * @param page			当前页
+     * @param pageSize		每页显示条数
+     * @param timeStamp		请求时间
+     * @param channel		Token值
+     * @param sign			MD5码
+     * @return	ResponseVO 对象
+     */
+    ResponseVO getMallList(String mallName, int page, int pageSize, long timeStamp, String channel, String sign);
 
 }
