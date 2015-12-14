@@ -13,12 +13,10 @@ import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 
 import com.rongyi.core.common.util.JsonUtil;
-import com.rongyi.easy.bsoms.entity.UserInfo;
 import com.rongyi.easy.roa.entity.AreaEntity;
 import com.rongyi.easy.roa.entity.MallEntity;
 import com.rongyi.easy.roa.vo.*;
 import com.rongyi.easy.settle.entity.ConfigShop;
-import com.rongyi.rss.bsoms.IUserInfoService;
 import com.rongyi.rss.roa.*;
 import com.rongyi.settle.web.controller.params.FindAccountParam;
 import com.rongyi.settle.web.controller.params.RelevanceParam;
@@ -86,8 +84,6 @@ public class StatementConfigController extends BaseController{
 	@Autowired
 	private AccessService accessService;
 
-	@Autowired
-	private IUserInfoService iUserInfoService;
 	/**
 	 * @Description: 分页查询配置列表
 	 * @param request
@@ -313,9 +309,6 @@ public class StatementConfigController extends BaseController{
 			for (String id : idStr.split(",")) {
 				ids.add(Integer.valueOf(id.trim()));
 			}
-			Map<String, Object> paramsMap = new HashMap<>();
-			paramsMap.put("ids", ids);
-			paramsMap.put("checkEffectStart", new Date());
 			if (statementConfigService.updatePaymentStatusByIds(ids, status, desc, userId)) {
 				result = ResponseData.success();
 			} else {
