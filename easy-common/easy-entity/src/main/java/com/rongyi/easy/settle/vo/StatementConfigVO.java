@@ -9,7 +9,6 @@
 
 package com.rongyi.easy.settle.vo;
 
-import com.rongyi.easy.settle.entity.ConfigShop;
 import com.rongyi.easy.settle.entity.StatementConfig;
 
 import java.util.List;
@@ -112,7 +111,7 @@ public class StatementConfigVO extends StatementConfig{
 	/**
 	 * 关联店铺
 	 */
-	private List<ConfigShop> configShops;
+	private List<ConfigShopVO> configShops;
     
 	public Integer getConfigId() {
 		return configId;
@@ -252,11 +251,11 @@ public class StatementConfigVO extends StatementConfig{
 		this.linkRole = linkRole;
 	}
 
-	public List<ConfigShop> getConfigShops() {
+	public List<ConfigShopVO> getConfigShops() {
 		return configShops;
 	}
 
-	public void setConfigShops(List<ConfigShop> configShops) {
+	public void setConfigShops(List<ConfigShopVO> configShops) {
 		this.configShops = configShops;
 	}
 }
