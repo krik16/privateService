@@ -56,7 +56,9 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private boolean supportCourierDeliver=true;//支持快递发货字段  true 是    false否
 	
 	private boolean supportSelfPickup=true;//支持到店自提  true 是    false否
-	
+
+	private int identity = -1;//0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购
+
 	public ObjectId getId() {
 		return id;
 	}
@@ -318,6 +320,12 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	public void setSupportSelfPickup(boolean supportSelfPickup) {
 		this.supportSelfPickup = supportSelfPickup;
 	}
-	
-	
+
+	public int getIdentity() {
+		return identity;
+	}
+
+	public void setIdentity(int identity) {
+		this.identity = identity;
+	}
 }
