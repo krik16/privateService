@@ -15,6 +15,8 @@ public class OrderDetailVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private String orderNo;
+
     private Integer tradeStatus;// 交易状态
 
     private String orderTime;// 下单时间
@@ -189,5 +191,13 @@ public class OrderDetailVO implements Serializable {
 
     public void setUsageDesc(String usageDesc) {
         this.usageDesc = usageDesc;
+    }
+
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
     }
 }
