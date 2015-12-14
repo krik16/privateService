@@ -129,7 +129,7 @@ public interface StatementConfigService {
 	 * @Author:  柯军
 	 * @datetime:2015年10月21日下午2:38:48
 	 **/
-	Map<String, Object> validateIsExist(byte cooperateType,byte bussinessType,String bussinessId,List<Byte> statuses,Date effectStartTime,Date  effectEndTime, Byte lintType, Map linkId, Byte linkShopOp) throws Exception;
+	Map<String, Object> validateIsExist(byte cooperateType,byte bussinessType,String bussinessId,List<Byte> statuses,Date effectStartTime,Date  effectEndTime, Byte lintType, Map linkId, Map linkAccount, Byte linkShopOp) throws Exception;
 
 	List<UserInfoVo> getAccountInfoByParam(Integer isOneself, Integer type, Integer guideType, String id);
 

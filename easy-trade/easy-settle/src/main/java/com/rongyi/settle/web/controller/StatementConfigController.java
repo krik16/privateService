@@ -179,15 +179,17 @@ public class StatementConfigController extends BaseController{
 			statementConfig.setBussinessId(statementConfig.getBussinessCode());
 			MapUtils.toObject(bussinessInfo, map);
 			bussinessInfo.setCreateAt(DateUtil.getCurrDateTime());
-			Map linkMap = null;
+			Map linkIdMap = null;
+			Map linkAccountMap = null;
 			if (map.containsKey("linkId")) {
-				linkMap = JsonUtil.getMapFromJson(map.get("linkId").toString());
+				linkIdMap = JsonUtil.getMapFromJson(map.get("linkId").toString());
+				linkAccountMap = JsonUtil.getMapFromJson(map.get("linkAccount").toString());
 			}
 			List<Byte> statuses = new ArrayList<>();
 			statuses.add(ConstantEnum.CONFIG_STATUS_1.getCodeByte());
 			statuses.add(ConstantEnum.CONFIG_STATUS_0.getCodeByte());
 			Map<String,Object> checkMap = statementConfigService.validateIsExist(statementConfig.getCooperateType(), statementConfig.getBussinessType(), statementConfig.getBussinessId(), statuses
-					, statementConfig.getEffectStartTime(), statementConfig.getEffectEndTime(), statementConfig.getLinkType(), linkMap, statementConfig.getLinkShopOp());
+					, statementConfig.getEffectStartTime(), statementConfig.getEffectEndTime(), statementConfig.getLinkType(), linkIdMap, linkAccountMap, statementConfig.getLinkShopOp());
 			LOGGER.info("=========================== checkMap"+checkMap);
 			boolean checkResult = (boolean) checkMap.get("result");
 			if(checkResult){
