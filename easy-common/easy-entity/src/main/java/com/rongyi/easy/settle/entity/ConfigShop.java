@@ -11,6 +11,9 @@ public class ConfigShop implements Serializable{
     private String shopId;
     private String userList;
     private String realUserList;
+    private String accountList;
+    private String realAccountList;
+
 
     public Integer getId() {
         return id;
@@ -50,5 +53,21 @@ public class ConfigShop implements Serializable{
 
     public void setRealUserList(String realUserList) {
         this.realUserList = realUserList;
+    }
+
+    public String getAccountList() {
+        return accountList;
+    }
+
+    public void setAccountList(String accountList) {
+        this.accountList = accountList;
+    }
+
+    public String getRealAccountList() {
+        return realAccountList;
+    }
+
+    public void setRealAccountList(String realAccountList) {
+        this.realAccountList = realAccountList;
     }
 }
