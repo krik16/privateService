@@ -45,6 +45,45 @@ public class ActivitySearchInfo implements Serializable {
 
 	private Integer payDownTime; //支付剩余时间(单位是秒)
 
+	/**
+	 * 使用限制
+	 */
+	private String limitDesc;
+
+	/**
+	 * 使用说明
+	 */
+	private String usageDesc;
+
+	/**
+	 * 备注
+	 */
+	private String remark;
+
+	public String getLimitDesc() {
+		return limitDesc;
+	}
+
+	public void setLimitDesc(String limitDesc) {
+		this.limitDesc = limitDesc;
+	}
+
+	public String getUsageDesc() {
+		return usageDesc;
+	}
+
+	public void setUsageDesc(String usageDesc) {
+		this.usageDesc = usageDesc;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
 	public String getId() {
 		return id;
 	}
