@@ -54,36 +54,10 @@ public class RefundServiceImpl extends BaseServiceImpl implements RefundService 
     public List<TradeVO> selectRefundPageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
         LOGGER.info("selectRefundPageList map={}", map);
         List<TradeVO> tradeVOList = new ArrayList<TradeVO>();
-        List<String> buyerIds = new ArrayList<String>();
-        if (map.get("buyerName") != null && StringUtils.isNotBlank(map.get("buyerName").toString())) {
-            LOGGER.info("查找买家姓名");
-            try {
-                List<UserInfoVO> userVoList = rOAMallLifeUserService.getUserDetailByName(map.get("buyerName").toString());
-                for (UserInfoVO userVO : userVoList) {
-                    buyerIds.add(userVO.getUserId());
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        if (map.get("buyerAccount") != null && StringUtils.isNotBlank(map.get("buyerAccount").toString())) {
-            LOGGER.info("查找买家账号");
-            try {
-                UserInfoVO userInfoVO = rOAMallLifeUserService.getByPhone(map.get("buyerAccount").toString());
-                if (userInfoVO != null)
-                    buyerIds.add(userInfoVO.getUserId());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        if (!buyerIds.isEmpty())
-            map.put("buyerIds", buyerIds);
         map.put("currentPage", (currentPage - 1) * pageSize);
         map.put("pageSize", pageSize);
-        LOGGER.info("查询可退款记录,map={}", map);
         tradeVOList = this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectPayPageList", map);
         if (tradeVOList != null && !tradeVOList.isEmpty())
-            LOGGER.info("可退款记录总数size={}", tradeVOList.size());
         for (TradeVO tradeVO : tradeVOList) {
             PaymentEntity hisPayEntity = null;
             if (ConstantEnum.TRADE_TYPE_REFUND.getCodeInt() == tradeVO.getTradeType())// 正常付款记录退款
@@ -94,25 +68,7 @@ public class RefundServiceImpl extends BaseServiceImpl implements RefundService 
                         tradeVO.getPayChannel());
             if (hisPayEntity != null)// 此处把付款记录的付款单号放入退款明细，以便直接在第三方支付系统查询
                 tradeVO.setPayNo(hisPayEntity.getPayNo());
-            if (ConstantEnum.PAYMENT_ORDER_TYPE1.getCodeInt() == tradeVO.getOrderType()) {// 优惠券订单
-                CouponOrder couponOrder = roaProxyCouponOrderService.findOneByOrderNo(tradeVO.getOrderNo());
-                LOGGER.info("查询优惠券订单");
-                if (couponOrder != null && couponOrder.getBuyerId() != null) {
-                    try {
-                        MalllifeUserInfoEntity mallLifeUserEntity = rOAMallLifeUserService.getEntityByUid(couponOrder.getBuyerId());
-                        LOGGER.info("查询mallLifeUserEntity");
-                        if (mallLifeUserEntity != null) {
-                            tradeVO.setBuyerAccount(mallLifeUserEntity.getPhone());
-                            tradeVO.setBuyerName(mallLifeUserEntity.getUserName());
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            }
         }
-        LOGGER.info("返回查询结果");
         return tradeVOList;
     }
 

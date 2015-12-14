@@ -121,23 +121,8 @@ public class PayController extends BaseController {
             Map<String, Object> map = getJsonMap(request);
             LOGGER.info("----refund list ------ map=" + map);
             String currpage = (String) map.get("currpage");
-            // map.put("status", ConstantEnum.TRADE_STATUS_PAY_NO.getCodeInt());
             map.put("tradeType", ConstantEnum.TRADE_TYPE_REFUND.getCodeInt());
-            List<TradeVO> list = buildList(refundService.selectRefundPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE));
-            OrderFormEntity orderFormEntity = null;
-            try {
-                for (TradeVO tradeVO : list) {
-                    orderFormEntity = rOAOrderFormService.getOrderFormByOrderNum(tradeVO.getOrderNo());
-                        LOGGER.info("查询订单信息");
-                    if (orderFormEntity != null) {
-                        tradeVO.setOrderId(orderFormEntity.getId().toString());
-                        tradeVO.setOrderUserId(orderFormEntity.getBuyerId());
-                    }
-                }
-            } catch (Exception e) {
-                LOGGER.error("roa接口未提供");
-                e.printStackTrace();
-            }
+            List<TradeVO> list = refundService.selectRefundPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE);
             double pageTotle = refundService.selectRefundPageListCount(map);
             Integer rowContNum = (int) Math.ceil(pageTotle / Constant.PAGE.PAGESIZE);
             model.addAttribute("rowCont", rowContNum);
@@ -168,15 +153,16 @@ public class PayController extends BaseController {
             String currpage = (String) map.get("currpage");
             map.put("status", ConstantEnum.TRADE_STATUS_PAY_NO.getCodeInt());
             map.put("tradeType", ConstantEnum.TRADE_TYPE_EXCE_PAY.getCodeInt());
-            List<TradeVO> list = buildList(refundService.selectRefundPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE));
-            OrderFormEntity orderFormEntity = null;
-            for (TradeVO tradeVO : list) {
-                orderFormEntity = rOAOrderFormService.getOrderFormByOrderNum(tradeVO.getOrderNo());
-                if (orderFormEntity != null) {
-                    tradeVO.setOrderId(orderFormEntity.getId().toString());
-                    tradeVO.setOrderUserId(orderFormEntity.getBuyerId());
-                }
-            }
+//            List<TradeVO> list = buildList(refundService.selectRefundPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE));
+            List<TradeVO> list = refundService.selectRefundPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE);
+//            OrderFormEntity orderFormEntity = null;
+//            for (TradeVO tradeVO : list) {
+//                orderFormEntity = rOAOrderFormService.getOrderFormByOrderNum(tradeVO.getOrderNo());
+//                if (orderFormEntity != null) {
+//                    tradeVO.setOrderId(orderFormEntity.getId().toString());
+//                    tradeVO.setOrderUserId(orderFormEntity.getBuyerId());
+//                }
+//            }
             double pageTotle = refundService.selectRefundPageListCount(map);
             Integer rowContNum = (int) Math.ceil(pageTotle / Constant.PAGE.PAGESIZE);
             model.addAttribute("rowCont", rowContNum);
@@ -195,28 +181,28 @@ public class PayController extends BaseController {
      * @Author: 柯军
      * @datetime:2015年6月10日上午11:45:24
      **/
-    private List<TradeVO> buildList(List<TradeVO> list) {
-        try {
-            MalllifeUserInfoEntity user = null;
-            for (TradeVO tradeVO : list) {
-                LOGGER.info("查询买家账号信息，id={},listSize={}",tradeVO.getId(),list.size());
-                if (tradeVO.getBuyerId() != null) {
-                    user = rOAMallLifeUserService.getEntityByUid(tradeVO.getBuyerId());
-                } else if (tradeVO.getCouponBuyerId() != null) {
-                    user = rOAMallLifeUserService.getEntityByUid(tradeVO.getCouponBuyerId());
-                }
-                LOGGER.info("已获取买家账号");
-                if (user != null) {
-                    tradeVO.setBuyerId(user.getId().toString());
-                    tradeVO.setBuyerAccount(user.getPhone());
-                    tradeVO.setBuyerName(user.getNickName());
-                }
-            }
-        } catch (Exception e) {
-            LOGGER.error("获取买家账号信息失败。。" + e.getMessage());
-        }
-        return list;
-    }
+//    private List<TradeVO> buildList(List<TradeVO> list) {
+//        try {
+//            MalllifeUserInfoEntity user = null;
+//            for (TradeVO tradeVO : list) {
+//                LOGGER.info("查询买家账号信息，id={},listSize={}",tradeVO.getId(),list.size());
+//                if (tradeVO.getBuyerId() != null) {
+//                    user = rOAMallLifeUserService.getEntityByUid(tradeVO.getBuyerId());
+//                } else if (tradeVO.getCouponBuyerId() != null) {
+//                    user = rOAMallLifeUserService.getEntityByUid(tradeVO.getCouponBuyerId());
+//                }
+//                LOGGER.info("已获取买家账号");
+//                if (user != null) {
+//                    tradeVO.setBuyerId(user.getId().toString());
+//                    tradeVO.setBuyerAccount(user.getPhone());
+//                    tradeVO.setBuyerName(user.getNickName());
+//                }
+//            }
+//        } catch (Exception e) {
+//            LOGGER.error("获取买家账号信息失败。。" + e.getMessage());
+//        }
+//        return list;
+//    }
 
     /**
      * @param model
