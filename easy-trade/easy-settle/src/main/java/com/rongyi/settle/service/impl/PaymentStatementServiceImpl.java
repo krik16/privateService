@@ -474,6 +474,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		}
 
 		if (!dataLoad) {
+			logger.info("dataLoad="+dataLoad);
 			// part
 			List<String> userIds = selectForConfigShops(statementConfig.getId());
 			for (String idStr : userIds) {
@@ -565,7 +566,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		paymentStatementExcelDto.setOrderSettlementDetailVOList(orderSettlementDetailVOs);
 
 		paymentStatementExcelDto.setUnitType(statementConfig.getBussinessType());
-
+		logger.info("paymentStatementExcelDto="+paymentStatementExcelDto.getPayTotal());
 		// 生成excel文件
 		ExcelUtils.write(propertyConfigurer.getProperty("settle.template.file"), propertyConfigurer.getProperty("settle.file.path"), statementConfig.getBussinessId(),
 				getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime())), paymentStatementExcelDto);
