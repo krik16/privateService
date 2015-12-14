@@ -17,12 +17,15 @@ import com.rongyi.easy.roa.entity.AreaEntity;
 import com.rongyi.easy.roa.entity.MallEntity;
 import com.rongyi.easy.roa.vo.*;
 import com.rongyi.easy.settle.entity.ConfigShop;
+import com.rongyi.easy.shop.entity.ShopEntity;
 import com.rongyi.rss.roa.*;
+import com.rongyi.rss.shop.IShopService;
 import com.rongyi.settle.web.controller.params.FindAccountParam;
 import com.rongyi.settle.web.controller.params.RelevanceParam;
 import com.rongyi.settle.web.controller.vo.UserInfoVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,7 +87,10 @@ public class StatementConfigController extends BaseController{
 	@Autowired
 	private AccessService accessService;
 
-	/**
+	@Autowired
+	private IShopService iShopService;
+
+ 	/**
 	 * @Description: 分页查询配置列表
 	 * @param request
 	 * @return
@@ -528,7 +534,18 @@ public class StatementConfigController extends BaseController{
 			Map<String, Object> searchMap = new HashMap<>();
 			searchMap.put("currpage", currpage);
 			searchMap.put("pagesize", pagesize);
+			if (StringUtils.isNotBlank(params.getShopId())) {
+				searchMap.put("id", params.getShopId());
+			}
+			if (StringUtils.isNotBlank(params.getShopName())){
+				searchMap.put("shopName", params.getShopName());
+			}
+			if (StringUtils.isNotBlank(params.getZoneId())){
+				searchMap.put("zoneId", params.getZoneId());
+			}
+			searchMap.put("sort", "noSort");// 暂未定排序字段
 			Map resultMap;
+			List<ShopVO> shopVOs = null;
 			switch (params.getType()){
 				case 0:
 					if (StringUtils.isNotBlank(params.getShopId()) && !params.getId().equals(params.getShopId())){
@@ -543,7 +560,19 @@ public class StatementConfigController extends BaseController{
 					searchMap.put("brandId", params.getId());
 					break;
 				case 3:
-					searchMap.put("filialeId", params.getFilialeId());
+					shopVOs = new ArrayList<>();
+					searchMap.put("filiale_id", new ObjectId(params.getFilialeId()));
+					List<ShopEntity> shopEntities = iShopService.searchShop(searchMap, currpage, pagesize);
+					List<ObjectId> shopIds = null;
+					if (CollectionUtils.isNotEmpty(shopEntities)){
+						shopIds = new ArrayList<>();
+						for (ShopEntity shopEntity : shopEntities){
+							shopIds.add(shopEntity.getId());
+						}
+					}
+					if (CollectionUtils.isNotEmpty(shopIds)){
+						shopVOs = roaShopService.getShopsByIds(shopIds);
+					}
 					break;
 				case 4:
 					List<MallEntity> mallEntities = rOAMallService.getMallEntitysByGroupId(params.getGroupId());
@@ -558,21 +587,13 @@ public class StatementConfigController extends BaseController{
 				default:
 					return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
 			}
-			if (StringUtils.isNotBlank(params.getShopId())) {
-				searchMap.put("id", params.getShopId());
-			}
-			if (StringUtils.isNotBlank(params.getShopName())){
-				searchMap.put("shopName", params.getShopName());
-			}
-			if (StringUtils.isNotBlank(params.getZoneId())){
-				searchMap.put("zoneId", params.getZoneId());
-			}
-			searchMap.put("sort", "noSort");// 暂未定排序字段
+
 			resultMap = roaShopService.getShops(searchMap, currpage, pagesize);
-			List<ShopVO> shopVOs = (List<ShopVO>) resultMap.get("list");
+			if (CollectionUtils.isEmpty(shopVOs)) {
+				shopVOs = (List<ShopVO>) resultMap.get("list");
+			}
 			List<RelevanceVO> reList = new ArrayList<>();
 			if (CollectionUtils.isNotEmpty(shopVOs)) {
-				Map<String, Object> paramsMap = new HashMap<>();
 				for (ShopVO shopVO : shopVOs){
 					RelevanceVO shop = new RelevanceVO();
 					shop.setId(shopVO.getId());
