@@ -34,6 +34,26 @@ public class OrderDetailVO implements Serializable {
     private String couponId; //卡券Id
 
     private String couponName;//卡券名称
+    /**
+     * 券码发行量
+     */
+    private Integer totalCount;
+
+    /**
+     * 每人每日限用张数
+     */
+    private Integer limitUseCount;
+
+    /**
+     * 每日最大发行张数
+     */
+    private Integer limitPublishCount;
+
+    /**
+     * 每人限购数量
+     */
+    private Integer limitCount;
+
 
     private double origPrice;// 原价
 
@@ -195,5 +215,37 @@ public class OrderDetailVO implements Serializable {
 
     public void setOrderNo(String orderNo) {
         this.orderNo = orderNo;
+    }
+
+    public Integer getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(Integer totalCount) {
+        this.totalCount = totalCount;
+    }
+
+    public Integer getLimitUseCount() {
+        return limitUseCount;
+    }
+
+    public void setLimitUseCount(Integer limitUseCount) {
+        this.limitUseCount = limitUseCount;
+    }
+
+    public Integer getLimitPublishCount() {
+        return limitPublishCount;
+    }
+
+    public void setLimitPublishCount(Integer limitPublishCount) {
+        this.limitPublishCount = limitPublishCount;
+    }
+
+    public Integer getLimitCount() {
+        return limitCount;
+    }
+
+    public void setLimitCount(Integer limitCount) {
+        this.limitCount = limitCount;
     }
 }
