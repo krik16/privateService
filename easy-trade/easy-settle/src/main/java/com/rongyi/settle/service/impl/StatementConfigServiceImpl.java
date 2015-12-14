@@ -209,10 +209,9 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 		if (lintType==null){
 			result = true;
 		}else {
-			if (lintType==0)
+			if (lintType==0)//全部: 1、自身（商场/集团）  2、全部店铺
 			{
-				//全部: 1、验自身
-				if (bussinessType==1 || bussinessType==4)//商场、集团
+				if (bussinessType==1 || bussinessType==4)
 				{
 					if (checkConfigExist(map)) {
 						logger.info("全部: 1、验自身 ---配置已有");
@@ -242,10 +241,9 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 					}
 				}
 			}
-			else if (lintType==1)
+			else if (lintType==1)//  自身(商场/集团)
 			{
-				//自身
-				if (bussinessType==1 || bussinessType==4){//商场、集团
+				if (bussinessType==1 || bussinessType==4){
 					if (checkConfigExist(map)) {
 						ReMap.put("result", true);
 						return ReMap;
@@ -276,9 +274,8 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 					return ReMap;
 				}
 			}
-			else if (lintType==2)
+			else if (lintType==2)//部分
 			{
-				//部分
 				if (linkId!=null) {
 					Set<String> shopIds = linkId.keySet();
 					for (String shopId : shopIds){
