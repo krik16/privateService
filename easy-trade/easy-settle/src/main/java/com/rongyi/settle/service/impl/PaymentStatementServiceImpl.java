@@ -411,109 +411,143 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		List<OrderSettlementTopDto> orderTopDtoList = new ArrayList<>();
 		List<OrderSettlementDetailDto> orderDetailDtoList = new ArrayList<>();
 
-		boolean dataLoad = false;
+		// boolean dataLoad = false;
 
 		logger.info("对账单获取数据开始，BusinessId = " + statementConfig.getBussinessId() + " BusinessType = " + statementConfig.getBussinessType());
-		if (statementConfig.getLinkType().equals(SettleConstant.LinkType.ALL)) {
-			if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.MALL)) {
-				// 商场 & all
-				couponStatementDetailDtoList = selectForStatementDetails(statementConfig.getBussinessId(), null, null, paymentStatement.getCycleStartTime(),
-						paymentStatement.getCycleEndTime());
+		// if
+		// (statementConfig.getLinkType().equals(SettleConstant.LinkType.ALL)) {
+		// if
+		// (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.MALL))
+		// {
+		// // 商场 & all
+		// couponStatementDetailDtoList =
+		// selectForStatementDetails(statementConfig.getBussinessId(), null,
+		// null, paymentStatement.getCycleStartTime(),
+		// paymentStatement.getCycleEndTime());
+		//
+		// couponExcelDtoList =
+		// selectForCouponExcelDto(statementConfig.getBussinessId(), null, null,
+		// paymentStatement.getCycleStartTime(),
+		// paymentStatement.getCycleEndTime());
+		//
+		// orderTopDtoList = selectForOrderTopDto(null,
+		// statementConfig.getBussinessId(), null, null,
+		// paymentStatement.getCycleStartTime(),
+		// paymentStatement.getCycleEndTime());
+		//
+		// orderDetailDtoList = selectForOrderDetailDto(null,
+		// statementConfig.getBussinessId(), null, null,
+		// paymentStatement.getCycleStartTime(),
+		// paymentStatement.getCycleEndTime());
+		//
+		// paymentStatementExcelDto.setMallName(statementConfig.getBussinessName());
+		//
+		// dataLoad = true;
+		//
+		// } else if
+		// (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.BRAND))
+		// {
+		// // 品牌 & all
+		// couponStatementDetailDtoList = selectForStatementDetails(null,
+		// statementConfig.getBussinessId(), null,
+		// paymentStatement.getCycleStartTime(),
+		// paymentStatement.getCycleEndTime());
+		//
+		// couponExcelDtoList = selectForCouponExcelDto(null,
+		// statementConfig.getBussinessId(), null,
+		// paymentStatement.getCycleStartTime(),
+		// paymentStatement.getCycleEndTime());
+		//
+		// orderTopDtoList = selectForOrderTopDto(null, null,
+		// statementConfig.getBussinessId(), null,
+		// paymentStatement.getCycleStartTime(),
+		// paymentStatement.getCycleEndTime());
+		//
+		// orderDetailDtoList = selectForOrderDetailDto(null, null,
+		// statementConfig.getBussinessId(), null,
+		// paymentStatement.getCycleStartTime(),
+		// paymentStatement.getCycleEndTime());
+		//
+		// paymentStatementExcelDto.setMallName(statementConfig.getBussinessName());
+		//
+		// dataLoad = true;
+		// } else if
+		// (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.SHOP))
+		// {
+		// logger.info("生成店铺对账单数据");
+		// // 店铺 & all
+		// couponStatementDetailDtoList = selectForStatementDetails(null, null,
+		// statementConfig.getBussinessId(),
+		// paymentStatement.getCycleStartTime(),
+		// paymentStatement.getCycleEndTime());
+		// logger.info("couponStatementDetailDtoList
+		// size=",couponStatementDetailDtoList.size());
+		// couponExcelDtoList = selectForCouponExcelDto(null, null,
+		// statementConfig.getBussinessId(),
+		// paymentStatement.getCycleStartTime(),
+		// paymentStatement.getCycleEndTime());
+		//
+		// orderTopDtoList =
+		// selectForOrderTopDto(statementConfig.getBussinessId(), null, null,
+		// null, paymentStatement.getCycleStartTime(),
+		// paymentStatement.getCycleEndTime());
+		//
+		// orderDetailDtoList =
+		// selectForOrderDetailDto(statementConfig.getBussinessId(), null, null,
+		// null, paymentStatement.getCycleStartTime(),
+		// paymentStatement.getCycleEndTime());
+		//
+		// ShopVO shopVO =
+		// roaShopService.getShopVOById(statementConfig.getBussinessId());
+		// paymentStatementExcelDto.setShopName(shopVO.getName());
+		// paymentStatementExcelDto.setMallName(shopVO.getPosition().getMall());
+		//
+		// dataLoad = true;
+		// }
+		// }
 
-				couponExcelDtoList = selectForCouponExcelDto(statementConfig.getBussinessId(), null, null, paymentStatement.getCycleStartTime(),
-						paymentStatement.getCycleEndTime());
-
-				orderTopDtoList = selectForOrderTopDto(null, statementConfig.getBussinessId(), null, null, paymentStatement.getCycleStartTime(),
-						paymentStatement.getCycleEndTime());
-
-				orderDetailDtoList = selectForOrderDetailDto(null, statementConfig.getBussinessId(), null, null, paymentStatement.getCycleStartTime(),
-						paymentStatement.getCycleEndTime());
-
-				paymentStatementExcelDto.setMallName(statementConfig.getBussinessName());
-
-				dataLoad = true;
-
-			} else if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.BRAND)) {
-				// 品牌 & all
-				couponStatementDetailDtoList = selectForStatementDetails(null, statementConfig.getBussinessId(), null, paymentStatement.getCycleStartTime(),
-						paymentStatement.getCycleEndTime());
-
-				couponExcelDtoList = selectForCouponExcelDto(null, statementConfig.getBussinessId(), null, paymentStatement.getCycleStartTime(),
-						paymentStatement.getCycleEndTime());
-
-				orderTopDtoList = selectForOrderTopDto(null, null, statementConfig.getBussinessId(), null, paymentStatement.getCycleStartTime(),
-						paymentStatement.getCycleEndTime());
-
-				orderDetailDtoList = selectForOrderDetailDto(null, null, statementConfig.getBussinessId(), null, paymentStatement.getCycleStartTime(),
-						paymentStatement.getCycleEndTime());
-
-				paymentStatementExcelDto.setMallName(statementConfig.getBussinessName());
-
-				dataLoad = true;
-			} else if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.SHOP)) {
-				logger.info("生成店铺对账单数据");
-				// 店铺 & all
-				couponStatementDetailDtoList = selectForStatementDetails(null, null, statementConfig.getBussinessId(), paymentStatement.getCycleStartTime(),
-						paymentStatement.getCycleEndTime());
-				logger.info("couponStatementDetailDtoList size=",couponStatementDetailDtoList.size());
-				couponExcelDtoList = selectForCouponExcelDto(null, null, statementConfig.getBussinessId(), paymentStatement.getCycleStartTime(),
-						paymentStatement.getCycleEndTime());
-
-				orderTopDtoList = selectForOrderTopDto(statementConfig.getBussinessId(), null, null, null, paymentStatement.getCycleStartTime(),
-						paymentStatement.getCycleEndTime());
-
-				orderDetailDtoList = selectForOrderDetailDto(statementConfig.getBussinessId(), null, null, null, paymentStatement.getCycleStartTime(),
-						paymentStatement.getCycleEndTime());
-
-				ShopVO shopVO = roaShopService.getShopVOById(statementConfig.getBussinessId());
-				paymentStatementExcelDto.setShopName(shopVO.getName());
-				paymentStatementExcelDto.setMallName(shopVO.getPosition().getMall());
-
-				dataLoad = true;
+		// if (!dataLoad) {
+		// part
+		List<String> userIds = selectForConfigShops(statementConfig.getId());
+		for (String idStr : userIds) {
+			if (idStr == null || idStr.isEmpty())
+				continue;
+			List<CouponStatementDetailDto> couponStatementDetailDtos = selectForStatementDetailsByUsers(idStr, paymentStatement.getCycleStartTime(),
+					paymentStatement.getCycleEndTime());
+			if (couponStatementDetailDtos != null) {
+				couponStatementDetailDtoList.addAll(couponStatementDetailDtos);
 			}
+
+			List<CouponExcelDto> couponExcelDtos = selectForCouponExcelDtoByUsers(idStr, paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime());
+			if (couponExcelDtos != null) {
+				couponExcelDtoList.addAll(couponExcelDtos);
+			}
+
+			List<OrderSettlementTopDto> orderSettlementTopDtos = selectForOrderTopDto(null, null, null, idStr, paymentStatement.getCycleStartTime(),
+					paymentStatement.getCycleEndTime());
+			if (orderSettlementTopDtos != null) {
+				orderTopDtoList.addAll(orderSettlementTopDtos);
+			}
+
+			List<OrderSettlementDetailDto> orderSettlementDetailDtos = selectForOrderDetailDto(null, null, null, idStr, paymentStatement.getCycleStartTime(),
+					paymentStatement.getCycleEndTime());
+			if (orderSettlementDetailDtos != null) {
+				orderDetailDtoList.addAll(orderSettlementDetailDtos);
+			}
+
 		}
-
-		if (!dataLoad) {
-			logger.info("dataLoad="+dataLoad);
-			// part
-			List<String> userIds = selectForConfigShops(statementConfig.getId());
-			for (String idStr : userIds) {
-				List<CouponStatementDetailDto> couponStatementDetailDtos = selectForStatementDetailsByUsers(idStr, paymentStatement.getCycleStartTime(),
-						paymentStatement.getCycleEndTime());
-				if (couponStatementDetailDtos != null) {
-					couponStatementDetailDtoList.addAll(couponStatementDetailDtos);
-				}
-
-				List<CouponExcelDto> couponExcelDtos = selectForCouponExcelDtoByUsers(idStr, paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime());
-				if (couponExcelDtos != null) {
-					couponExcelDtoList.addAll(couponExcelDtos);
-				}
-
-				List<OrderSettlementTopDto> orderSettlementTopDtos = selectForOrderTopDto(null, null, null, idStr, paymentStatement.getCycleStartTime(),
-						paymentStatement.getCycleEndTime());
-				if (orderSettlementTopDtos != null) {
-					orderTopDtoList.addAll(orderSettlementTopDtos);
-				}
-
-				List<OrderSettlementDetailDto> orderSettlementDetailDtos = selectForOrderDetailDto(null, null, null, idStr, paymentStatement.getCycleStartTime(),
-						paymentStatement.getCycleEndTime());
-				if (orderSettlementDetailDtos != null) {
-					orderDetailDtoList.addAll(orderSettlementDetailDtos);
-				}
-
-			}
-			if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.SHOP)) {
-				ShopVO shopVO = roaShopService.getShopVOById(statementConfig.getBussinessId());
-				paymentStatementExcelDto.setShopName(shopVO.getName());
-				paymentStatementExcelDto.setMallName(shopVO.getPosition().getMall());
-			} else {
-				paymentStatementExcelDto.setMallName(statementConfig.getBussinessName());
-			}
-			// 汇总券对账单的汇总信息（对账单第一页）
-			couponExcelDtoList = adjustCouponExcelDtoList(couponExcelDtoList);
-			// 汇总商品对账单的汇总信息（对账单第一页）
-			orderTopDtoList = adjustOrderExcelDtoList(orderTopDtoList);
+		if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.SHOP)) {
+			ShopVO shopVO = roaShopService.getShopVOById(statementConfig.getBussinessId());
+			paymentStatementExcelDto.setShopName(shopVO.getName());
+			paymentStatementExcelDto.setMallName(shopVO.getPosition().getMall());
+		} else {
+			paymentStatementExcelDto.setMallName(statementConfig.getBussinessName());
 		}
+		// 汇总券对账单的汇总信息（对账单第一页）
+		couponExcelDtoList = adjustCouponExcelDtoList(couponExcelDtoList);
+		// 汇总商品对账单的汇总信息（对账单第一页）
+		orderTopDtoList = adjustOrderExcelDtoList(orderTopDtoList);
+		// }
 
 		List<CouponCodeExcelDto> couponCodeExcelDtoList = new ArrayList<>();
 		List<OrderSettlementDetailVO> orderSettlementDetailVOs = new ArrayList<>();
@@ -566,7 +600,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		paymentStatementExcelDto.setOrderSettlementDetailVOList(orderSettlementDetailVOs);
 
 		paymentStatementExcelDto.setUnitType(statementConfig.getBussinessType());
-		logger.info("paymentStatementExcelDto="+paymentStatementExcelDto.getPayTotal());
+		logger.info("paymentStatementExcelDto=" + paymentStatementExcelDto.getPayTotal());
 		// 生成excel文件
 		ExcelUtils.write(propertyConfigurer.getProperty("settle.template.file"), propertyConfigurer.getProperty("settle.file.path"), statementConfig.getBussinessId(),
 				getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime())), paymentStatementExcelDto);
