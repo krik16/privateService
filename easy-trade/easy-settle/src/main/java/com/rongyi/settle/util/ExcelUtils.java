@@ -308,7 +308,7 @@ public class ExcelUtils {
 			rcptTime.setCellValue(orderDetail.getReceiptTime());
 
 			XSSFCell phone = rowOrder.createCell(14);
-			phone.setCellValue(orderDetail.getBuyerPhone());
+			phone.setCellValue(encryptPhone(orderDetail.getBuyerPhone()));
 		}
 
 		File file = new File(fileFolder);
