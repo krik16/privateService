@@ -451,10 +451,11 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 
 				dataLoad = true;
 			} else if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.SHOP)) {
+				logger.info("生成店铺对账单数据");
 				// 店铺 & all
 				couponStatementDetailDtoList = selectForStatementDetails(null, null, statementConfig.getBussinessId(), paymentStatement.getCycleStartTime(),
 						paymentStatement.getCycleEndTime());
-
+				logger.info("couponStatementDetailDtoList size=",couponStatementDetailDtoList.size());
 				couponExcelDtoList = selectForCouponExcelDto(null, null, statementConfig.getBussinessId(), paymentStatement.getCycleStartTime(),
 						paymentStatement.getCycleEndTime());
 
@@ -473,16 +474,17 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		}
 
 		if (!dataLoad) {
+			logger.info("dataLoad="+dataLoad);
 			// part
 			List<String> userIds = selectForConfigShops(statementConfig.getId());
 			for (String idStr : userIds) {
-				List<CouponStatementDetailDto> couponStatementDetailDtos = selectForStatementDetailsByUsers(idStr, statementConfig.getCycleStartTime(),
-						statementConfig.getCycleEndTime());
+				List<CouponStatementDetailDto> couponStatementDetailDtos = selectForStatementDetailsByUsers(idStr, paymentStatement.getCycleStartTime(),
+						paymentStatement.getCycleEndTime());
 				if (couponStatementDetailDtos != null) {
 					couponStatementDetailDtoList.addAll(couponStatementDetailDtos);
 				}
 
-				List<CouponExcelDto> couponExcelDtos = selectForCouponExcelDtoByUsers(idStr, statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime());
+				List<CouponExcelDto> couponExcelDtos = selectForCouponExcelDtoByUsers(idStr, paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime());
 				if (couponExcelDtos != null) {
 					couponExcelDtoList.addAll(couponExcelDtos);
 				}
@@ -564,7 +566,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		paymentStatementExcelDto.setOrderSettlementDetailVOList(orderSettlementDetailVOs);
 
 		paymentStatementExcelDto.setUnitType(statementConfig.getBussinessType());
-
+		logger.info("paymentStatementExcelDto="+paymentStatementExcelDto.getPayTotal());
 		// 生成excel文件
 		ExcelUtils.write(propertyConfigurer.getProperty("settle.template.file"), propertyConfigurer.getProperty("settle.file.path"), statementConfig.getBussinessId(),
 				getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime())), paymentStatementExcelDto);
