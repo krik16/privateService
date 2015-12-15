@@ -42,7 +42,7 @@ public interface ROAFilialeService {
 	* @date 2015年12月12日 下午12:15:29
 	* @throws
 	 */
-	public void saveOrUpdate(FilialeParam param);
+	public void saveOrUpdate(FilialeParam param) throws Exception;
 	/**
 	 * 
 	* @Title: filialeById 
