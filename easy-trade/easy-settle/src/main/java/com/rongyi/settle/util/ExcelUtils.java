@@ -114,19 +114,19 @@ public class ExcelUtils {
 			couponCountSum += couponExcelDto.getCouponCount();
 
 			XSSFCell hbPrice = row15.getCell(6);
-			hbPrice.setCellValue(df.format(AmountUtil.changFenToYuan(couponExcelDto.getCouponHbTotal())));
+			hbPrice.setCellValue(AmountUtil.changFenToYuan(couponExcelDto.getCouponHbTotal()));
 			couponHbSum += AmountUtil.changFenToYuan(couponExcelDto.getCouponHbTotal());
 
 			XSSFCell scorePrice = row15.getCell(8);
-			scorePrice.setCellValue(df.format(AmountUtil.changFenToYuan(couponExcelDto.getCouponScoreTotal())));
+			scorePrice.setCellValue(AmountUtil.changFenToYuan(couponExcelDto.getCouponScoreTotal()));
 			couponScoreSum += AmountUtil.changFenToYuan(couponExcelDto.getCouponScoreTotal());
 
 			XSSFCell disCountPrice = row15.getCell(10);
-			disCountPrice.setCellValue(df.format(AmountUtil.changFenToYuan(couponExcelDto.getCouponDiscountTotal())));
+			disCountPrice.setCellValue(AmountUtil.changFenToYuan(couponExcelDto.getCouponDiscountTotal()));
 			couponDiscountSum += AmountUtil.changFenToYuan(couponExcelDto.getCouponDiscountTotal());
 
 			XSSFCell totalPrice = row15.getCell(12);
-			totalPrice.setCellValue(df.format(AmountUtil.changFenToYuan(couponExcelDto.getCouponPriceTotal())));
+			totalPrice.setCellValue(AmountUtil.changFenToYuan(couponExcelDto.getCouponPriceTotal()));
 			couponPriceSum += AmountUtil.changFenToYuan(couponExcelDto.getCouponPriceTotal());
 		}
 		// 券小计
@@ -157,19 +157,19 @@ public class ExcelUtils {
 			orderCountSum += orderTop.getOrderCount() == null ? 0 : orderTop.getOrderCount();
 
 			XSSFCell hbPrice = row26.getCell(6);
-			hbPrice.setCellValue(df.format(orderTop.getHbDiscountTotal() == null ? 0 : orderTop.getHbDiscountTotal()));
+			hbPrice.setCellValue(orderTop.getHbDiscountTotal() == null ? 0 : orderTop.getHbDiscountTotal());
 			orderHbSum += orderTop.getHbDiscountTotal() == null ? 0 : orderTop.getHbDiscountTotal();
 
 			XSSFCell scorePrice = row26.getCell(8);
-			scorePrice.setCellValue(df.format(orderTop.getScoreDiscountTotal() == null ? 0 : orderTop.getScoreDiscountTotal()));
+			scorePrice.setCellValue(orderTop.getScoreDiscountTotal() == null ? 0 : orderTop.getScoreDiscountTotal());
 			orderScoreSum += orderTop.getScoreDiscountTotal() == null ? 0 : orderTop.getScoreDiscountTotal();
 
 			XSSFCell disCountPrice = row26.getCell(10);
-			disCountPrice.setCellValue(df.format(orderTop.getOrderDiscountTotal() == null ? 0 : orderTop.getOrderDiscountTotal()));
+			disCountPrice.setCellValue(orderTop.getOrderDiscountTotal() == null ? 0 : orderTop.getOrderDiscountTotal());
 			orderDiscountSum += orderTop.getOrderDiscountTotal() == null ? 0 : orderTop.getOrderDiscountTotal();
 
 			XSSFCell totalPrice = row26.getCell(12);
-			totalPrice.setCellValue(df.format(orderTop.getOrderAmountTotal() == null ? 0 : orderTop.getOrderAmountTotal()));
+			totalPrice.setCellValue(orderTop.getOrderAmountTotal() == null ? 0 : orderTop.getOrderAmountTotal());
 			orderPriceSum += orderTop.getOrderAmountTotal() == null ? 0 : orderTop.getOrderAmountTotal();
 		}
 		// 商品小计
