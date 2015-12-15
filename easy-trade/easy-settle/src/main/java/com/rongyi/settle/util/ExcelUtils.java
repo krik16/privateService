@@ -62,22 +62,30 @@ public class ExcelUtils {
 		XSSFRow row8 = sheet.getRow(8);
 		XSSFCell shopAccountName = row8.getCell(6);
 		String shopAccountNameBegin = shopAccountName.getStringCellValue();
-		shopAccountName.setCellValue(shopAccountNameBegin + excelDto.getShopAccountName());
+		if (excelDto.getShopAccountName() != null) {
+			shopAccountName.setCellValue(shopAccountNameBegin + excelDto.getShopAccountName());
+		}
 
 		XSSFRow row9 = sheet.getRow(9);
 		XSSFCell shopAccountNo = row9.getCell(6);
 		String shopAccountNoBegin = shopAccountNo.getStringCellValue();
-		shopAccountNo.setCellValue(shopAccountNoBegin + excelDto.getShopAccountNo());
-
+		if (excelDto.getShopAccountNo() != null) {
+			shopAccountNo.setCellValue(shopAccountNoBegin + excelDto.getShopAccountNo());
+		}
+		
 		XSSFRow row10 = sheet.getRow(10);
 		XSSFCell shopBank = row10.getCell(6);
 		String shopBankBegin = shopBank.getStringCellValue();
-		shopBank.setCellValue(shopBankBegin + excelDto.getShopBank());
+		if (excelDto.getShopBank() != null) {
+			shopBank.setCellValue(shopBankBegin + excelDto.getShopBank());
+		}
 
 		XSSFRow row11 = sheet.getRow(11);
 		XSSFCell payChannel = row11.getCell(6);
 		String payChannelBegin = payChannel.getStringCellValue();
-		payChannel.setCellValue(payChannelBegin + excelDto.getPayChannel());
+		if (excelDto.getPayChannel() != null) {
+			payChannel.setCellValue(payChannelBegin + excelDto.getPayChannel());
+		}
 
 		int couponCountSum = 0;
 		double couponHbSum = 0;
@@ -308,7 +316,7 @@ public class ExcelUtils {
 			rcptTime.setCellValue(orderDetail.getReceiptTime());
 
 			XSSFCell phone = rowOrder.createCell(14);
-			phone.setCellValue(orderDetail.getBuyerPhone());
+			phone.setCellValue(encryptPhone(orderDetail.getBuyerPhone()));
 		}
 
 		File file = new File(fileFolder);

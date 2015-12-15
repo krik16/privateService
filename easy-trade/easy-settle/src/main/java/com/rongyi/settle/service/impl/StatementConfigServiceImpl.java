@@ -13,6 +13,7 @@ import java.util.*;
 import com.rongyi.easy.bsoms.entity.UserInfo;
 import com.rongyi.easy.entity.ShopEntity;
 import com.rongyi.easy.roa.entity.MallEntity;
+import com.rongyi.easy.roa.vo.ShopPositionVO;
 import com.rongyi.easy.roa.vo.ShopVO;
 import com.rongyi.easy.settle.entity.ConfigShop;
 import com.rongyi.easy.settle.vo.ConfigShopVO;
@@ -173,23 +174,32 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 		Map<String, Object> map = new HashMap<>();
 		map.put("id", id);
         StatementConfigVO vo = this.getBaseDao().selectOneBySql(NAMESPACE + ".selectConfigInfoById", map);
-        List<ConfigShop> configShops = configShopService.getConfigShopsByConfigId(id);
-        List<ConfigShopVO> vos = new ArrayList<>();
-        for (ConfigShop configShop : configShops){
-            ConfigShopVO configShopVO = new ConfigShopVO();
-            configShopVO.setShopId(configShop.getShopId());
-            configShopVO.setAccountList(configShop.getAccountList());
-            ShopEntity shop = roaShopService.getShopById(configShop.getShopId());
-            if (shop != null) {
-                configShopVO.setShopName(shop.getName());
-            }
-            vos.add(configShopVO);
-        }
-        vo.setConfigShops(vos);
         return vo;
 	}
 
-	@Override
+    @Override
+    public List<ConfigShopVO> selectConfigShopsPage(Map<String, Object> paramsMap, int currPage, int pageSize) throws Exception {
+        paramsMap.put("startRecord", (currPage-1)*pageSize);
+        paramsMap.put("pageSize", pageSize);
+        List<ConfigShopVO> configShops = configShopService.getConfigShopsPage(paramsMap);
+        for (ConfigShopVO vo : configShops){
+            ShopVO shop = roaShopService.getShopVOById(vo.getShopId());
+            if (shop != null) {
+                vo.setBizName(shop.getName());
+                ShopPositionVO positionVo = shop.getPosition();
+                String address = "["+positionVo.getPro()+","+positionVo.getCity()+","+positionVo.getArea()+"] "+positionVo.getBusiness()+positionVo.getFloor();
+                vo.setBizRealAddress(address);
+            }
+        }
+        return configShops;
+    }
+
+    @Override
+    public int selectConfigShopsPageCount(Map<String, Object> paramsMap) {
+        return configShopService.selectConfigShopsPageCount(paramsMap);
+    }
+
+    @Override
 	public Map<String, Object> validateIsExist(StatementConfig statementConfig, List<Byte> statuses, Map linkId,Map linkAccount) throws Exception {
 		boolean result = false;
 		int isOneself;
@@ -385,7 +395,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 		return this.getBaseDao().selectListBySql(NAMESPACE + ".selectStatementConfigByMap", paramsMap);
 	}
 
-	/**
+    /**
 	 * 判断对账配置是否存在
 	 * @param paramsMap
 	 * @return

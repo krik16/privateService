@@ -17,6 +17,7 @@ import com.rongyi.easy.roa.entity.AreaEntity;
 import com.rongyi.easy.roa.entity.MallEntity;
 import com.rongyi.easy.roa.vo.*;
 import com.rongyi.easy.settle.entity.ConfigShop;
+import com.rongyi.easy.settle.vo.ConfigShopVO;
 import com.rongyi.easy.shop.entity.ShopEntity;
 import com.rongyi.rss.roa.*;
 import com.rongyi.rss.shop.IShopService;
@@ -164,10 +165,10 @@ public class StatementConfigController extends BaseController{
 	public ResponseData save(HttpServletRequest request, @RequestBody Map<String, Object> map) {
 		LOGGER.info("====config save==== params={}",map.toString());
 		try {
-//			ResponseData responseData = accessService.check(request, "FNC_STL_ADD");
-//			if (responseData.getMeta().getErrno() != 0) {
-//				return responseData;
-//			}
+			ResponseData responseData = accessService.check(request, "FNC_STL_ADD");
+			if (responseData.getMeta().getErrno() != 0) {
+				return responseData;
+			}
 			StatementConfig oldStatementConfig = statementConfigService.selectByRuleCode(map.get("ruleCode").toString());
 			if(oldStatementConfig != null)
 				return ResponseData.failure(CodeEnum.FIAL_CONFIG_EXIST.getCodeInt(), CodeEnum.FIAL_CONFIG_EXIST.getValueStr());
@@ -284,6 +285,42 @@ public class StatementConfigController extends BaseController{
 			ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
 		}
 		return ResponseData.success(statementConfigVO);
+	}
+
+	/**
+	 * @Description: 账号详情（分页）
+	 * @param request
+	 * @param map
+	 * @return
+	 * @Author: 柯军
+	 * @datetime:2015年9月21日下午3:00:10
+	 **/
+	@RequestMapping("/accountInfo")
+	@ResponseBody
+	public ResponseData accountInfo(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+		LOGGER.info("====accountInfo==== params={}",map.toString());
+		List<ConfigShopVO> configShopVOs = new ArrayList<>();
+		ResponseData result = null;
+		try {
+			ResponseData responseData = accessService.check(request, "FNC_STLCONF_VIEW");
+			if (responseData.getMeta().getErrno() != 0) {
+				return responseData;
+			}
+			if (!map.containsKey("id")){
+				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
+			}
+			int currPage = map.containsKey("currPage")?Integer.valueOf(map.get("currPage").toString()):1;
+			int pageSize = map.containsKey("pageSize")?Integer.valueOf(map.get("pageSize").toString()):10;
+			Map<String, Object> paramsMap = new HashMap<>();
+			paramsMap.put("configId", Integer.valueOf(map.get("id").toString()));
+			configShopVOs = statementConfigService.selectConfigShopsPage(paramsMap, currPage, pageSize);
+			int totalCount = statementConfigService.selectConfigShopsPageCount(paramsMap);
+			result = ResponseData.success(configShopVOs,currPage,pageSize,totalCount);
+		} catch (Exception e) {
+			e.printStackTrace();
+			ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
+		}
+		return result;
 	}
 
 	/**

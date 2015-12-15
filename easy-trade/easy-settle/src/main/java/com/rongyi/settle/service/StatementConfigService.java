@@ -15,6 +15,7 @@ import java.util.Map;
 import com.rongyi.easy.settle.entity.BussinessInfo;
 import com.rongyi.easy.settle.entity.ConfigShop;
 import com.rongyi.easy.settle.entity.StatementConfig;
+import com.rongyi.easy.settle.vo.ConfigShopVO;
 import com.rongyi.easy.settle.vo.StatementConfigVO;
 import com.rongyi.settle.web.controller.vo.UserInfoVo;
 
@@ -143,4 +144,9 @@ public interface StatementConfigService {
 	boolean validateNeedPay(String shopId,String userId,Integer gradeType);
 
 	List<StatementConfig> checkeffectStart(Map<String, Object> paramsMap);
+
+
+	List<ConfigShopVO> selectConfigShopsPage(Map<String, Object> paramsMap, int currPage, int pageSize) throws Exception;
+
+	int selectConfigShopsPageCount(Map<String, Object> paramsMap);
 }
