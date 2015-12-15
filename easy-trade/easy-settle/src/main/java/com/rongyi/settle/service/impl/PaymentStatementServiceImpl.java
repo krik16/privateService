@@ -478,13 +478,13 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 			// part
 			List<String> userIds = selectForConfigShops(statementConfig.getId());
 			for (String idStr : userIds) {
-				List<CouponStatementDetailDto> couponStatementDetailDtos = selectForStatementDetailsByUsers(idStr, statementConfig.getCycleStartTime(),
-						statementConfig.getCycleEndTime());
+				List<CouponStatementDetailDto> couponStatementDetailDtos = selectForStatementDetailsByUsers(idStr, paymentStatement.getCycleStartTime(),
+						paymentStatement.getCycleEndTime());
 				if (couponStatementDetailDtos != null) {
 					couponStatementDetailDtoList.addAll(couponStatementDetailDtos);
 				}
 
-				List<CouponExcelDto> couponExcelDtos = selectForCouponExcelDtoByUsers(idStr, statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime());
+				List<CouponExcelDto> couponExcelDtos = selectForCouponExcelDtoByUsers(idStr, paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime());
 				if (couponExcelDtos != null) {
 					couponExcelDtoList.addAll(couponExcelDtos);
 				}
