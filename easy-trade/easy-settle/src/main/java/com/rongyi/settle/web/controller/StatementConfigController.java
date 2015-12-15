@@ -599,7 +599,10 @@ public class StatementConfigController extends BaseController{
 					break;
 				case 3:
 					shopVOs = new ArrayList<>();
-					searchMap.put("filiale_id", new ObjectId(params.getFilialeId()));
+					if (ObjectId.isValid(params.getId()))
+						searchMap.put("filiale_id", new ObjectId(params.getId()));
+					else
+						break;
 					List<ShopEntity> shopEntities = iShopService.searchShop(searchMap, currpage, pagesize);
 					List<ObjectId> shopIds = null;
 					if (CollectionUtils.isNotEmpty(shopEntities)){
