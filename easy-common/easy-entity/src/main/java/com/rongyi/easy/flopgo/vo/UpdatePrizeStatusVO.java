@@ -67,6 +67,8 @@ public class UpdatePrizeStatusVO implements Serializable
                     this.recommendation = coupon.getRecommend();
                 }else if(StringUtils.isNotBlank(coupon.getUseRestriction())){
                     this.recommendation = coupon.getUseRestriction();
+                }else if(StringUtils.isNotBlank(coupon.getUseDescription())){
+                    this.recommendation = coupon.getUseDescription();
                 }
 
             }

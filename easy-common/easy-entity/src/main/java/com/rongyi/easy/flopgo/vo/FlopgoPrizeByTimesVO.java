@@ -78,6 +78,8 @@ public class FlopgoPrizeByTimesVO implements Serializable{
 					this.recommendation=flopprize.getRecommend();
 				}else if(StringUtils.isNotBlank(flopprize.getUseRestriction())){
 					this.recommendation=flopprize.getUseRestriction();
+				}else if(StringUtils.isNotBlank(flopprize.getUseDescription())){
+					this.recommendation=flopprize.getUseDescription();
 				}
 
 			}
