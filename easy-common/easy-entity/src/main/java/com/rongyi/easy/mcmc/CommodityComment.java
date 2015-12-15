@@ -9,7 +9,7 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
-@Entity("mcmc_commodity_comment")
+@Entity(value="mcmc_commodity_comment",noClassnameStored=true)
 public class CommodityComment implements Serializable {
 
 	/**

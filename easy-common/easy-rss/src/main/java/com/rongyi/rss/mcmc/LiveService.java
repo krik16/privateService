@@ -5,6 +5,7 @@ import java.util.List;
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.mcmc.param.AdviseShopParam;
 import com.rongyi.easy.mcmc.param.LiveParam;
+import com.rongyi.easy.rmmm.param.BullParam;
 import com.rongyi.easy.solr.param.LiveSearchParam;
 
 /**
@@ -72,13 +73,9 @@ public interface LiveService {
 	
 	/**
 	 * 获取品牌列表
-	 * @param bullId 买手id
-	 * @param liveId 直播id
-	 * @param page 页数
-	 * @param pageSize 页大小
 	 * @return 带List&lt;LiveBrandVO&gt;的ResponseVO
 	 */
-	ResponseVO getBrandList(String bullId,String liveId,int page,int pageSize);
+	ResponseVO getBrandList(BullParam param);
 	
 	/**
 	 * 通过直播id列表查询直播列表
@@ -102,9 +99,10 @@ public interface LiveService {
 	 * @param endTime 结束时间
 	 * @param page 页数
 	 * @param pageSize 页大小
+	 * @param type 0表示直播开始时间 1表示直播结束时间
 	 * @return 带List&lt;LiveVO&gt;的ResponseVO
 	 */
-	ResponseVO searchFELiveList(String liveName,String bullId,String bullNickName,Integer status,Long beginTime,Long endTime,Integer page,Integer pageSize);
+	ResponseVO searchFELiveList(String liveName,String bullId,String bullNickName,Integer status,Integer type,Long beginTime,Long endTime,Integer page,Integer pageSize);
     
 	/**
 	 * FE端通过直播id获取直播

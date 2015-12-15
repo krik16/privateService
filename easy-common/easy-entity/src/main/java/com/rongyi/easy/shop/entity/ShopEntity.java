@@ -22,18 +22,17 @@ import com.rongyi.easy.shop.param.ShopParam;
 /**
  * 商家后台店铺管理实体类
  * @author wzh
- *
  */
 @SuppressWarnings("serial")
-@Entity("shops")
+@Entity(value="shops",noClassnameStored=true)
 public class ShopEntity implements Serializable{
 	@JsonSerialize(using=JsonObjectIdSerializer.class)
 	@Id
     private ObjectId id;
     
     private String name;//店铺名称
-    private Integer shop_nature;//店铺性质 0商场店铺 1商场专柜 2街边店
-    private String shop_type;//店铺类型 0普通店 1免税店 2专柜 3折扣店 4旗舰店
+    private String shop_nature;//店铺类型 0普通店 1免税店 2专柜 3折扣店 4旗舰店
+    private String shop_type;//店铺性质 0商场店铺 1商场专柜 2街边店 
     private String number;//店铺编号
     
    // @JsonDeserialize(using=ObjectIdJsonDeserializer.class)
@@ -105,8 +104,8 @@ public class ShopEntity implements Serializable{
 		}
 		
 		this.name = param.getName();
-		
-		this.shop_nature = param.getShop_nature();
+		if(param.getShop_nature()!=null)
+			this.shop_nature = param.getShop_nature().toString();
 		this.shop_type = param.getShop_type();
 		this.number = param.getNumber();
 		
@@ -175,13 +174,13 @@ public class ShopEntity implements Serializable{
 		this.tags = param.getTags();
 		
 		//楼层id
-		if(StringUtils.isNotBlank(param.getZone_id())){
+		/*if(StringUtils.isNotBlank(param.getZone_id())){
 			if(param.getBrand_id().matches("[\\da-zA-Z]{24}"))
 				this.zone_id = new ObjectId(param.getZone_id());
 			else{
 				throw new Exception("楼层id格式不对");
 			}
-		}
+		}*/
 		
 		if(CollectionUtils.isNotEmpty(param.getZone_ids())){
 			List<ObjectId> zone_ids=new ArrayList<ObjectId>();
@@ -190,13 +189,12 @@ public class ShopEntity implements Serializable{
 					if(id.matches("[\\da-zA-Z]{24}"))
 						zone_ids.add(new ObjectId(id));
 					else{
-						throw new Exception("品牌品牌id格式不对");
+						throw new Exception("地区id格式不对");
 					}
-				}else{
-					zone_ids.add(null);
 				}
 			}
 			this.zone_ids = zone_ids;
+			this.zone_id=zone_ids.get(zone_ids.size()-1);//楼层id取最后一个
 		}
 		
 		this.address = param.getAddress();
@@ -244,10 +242,10 @@ public class ShopEntity implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Integer getShop_nature() {
+	public String getShop_nature() {
 		return shop_nature;
 	}
-	public void setShop_nature(Integer shop_nature) {
+	public void setShop_nature(String shop_nature) {
 		this.shop_nature = shop_nature;
 	}
 	public String getShop_type() {

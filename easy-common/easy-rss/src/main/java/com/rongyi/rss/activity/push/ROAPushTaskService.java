@@ -41,5 +41,5 @@ public interface ROAPushTaskService {
 	/**
 	 * 获取用户数量
 	 */
-	public Long getUserCount();
+	//public Long getUserCount();
 }

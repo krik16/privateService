@@ -33,7 +33,8 @@ public class ShopVO implements Serializable {
 	private String tags;
 	private Date createdAt;
 	private Date updateAt;
-
+	private String qrcodePic;
+	
 	public String getId() {
 		return id;
 	}
@@ -249,4 +250,13 @@ public class ShopVO implements Serializable {
 	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;
 	}
+
+	public String getQrcodePic() {
+		return qrcodePic;
+	}
+
+	public void setQrcodePic(String qrcodePic) {
+		this.qrcodePic = qrcodePic;
+	}
+	
 }

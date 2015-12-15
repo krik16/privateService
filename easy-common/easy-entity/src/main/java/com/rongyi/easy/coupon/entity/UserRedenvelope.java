@@ -96,6 +96,61 @@ public class UserRedenvelope implements Serializable {
      */
     private String activityName;
 
+    /**
+     * 是否删除
+     */
+    private Boolean isDeleted;
+
+
+    /********************* coupon表模板表信息冗余 **********************/
+    /**
+     * 卡券名称
+     */
+    private String couponName;
+
+    /**
+     * 满多少可使用，满的金额（元）
+     */
+    private Integer origPrice;
+
+    /**
+     * 适用对象，商家/买手[0] 商家[1] 买手[2] （作用角色）
+     */
+    private Integer applyObject;
+
+    /**
+     * 适用范围维度1,商品/代金券[0] 商品[1] 代金券[2] （作用对象）
+     */
+    private Integer applyGoods;
+
+    /**
+     * 适用范围维度1 (作用范围)
+     * 全场[0]，品牌[1]，商场[2]，店铺[3]，分类[4]，信息[5]
+     */
+    private Integer relatedType;
+
+    /**
+     * 使用说明
+     */
+    private String usageDesc;
+
+    /**
+     * 使用规则
+     */
+    private String limitDesc;
+
+    /**
+     * 推荐说明
+     */
+    private String recommend;
+
+    /**
+     * 适用规则 满减[0] 立减[1]
+     */
+    private Integer preferentialType;
+
+    /********************* coupon表模板表信息冗余 **********************/
+
     public UserRedenvelope() {
     }
 
@@ -237,7 +292,13 @@ public class UserRedenvelope implements Serializable {
         this.validEndAt = validEndAt;
     }
 
+    public String getCouponName() {
+        return couponName;
+    }
 
+    public void setCouponName(String couponName) {
+        this.couponName = couponName;
+    }
 
     public Integer getDiscount() {
         return discount;
@@ -272,6 +333,100 @@ public class UserRedenvelope implements Serializable {
         this.activityName = activityName;
     }
 
+    public Integer getOrigPrice() {
+        return origPrice;
+    }
+
+    public double getOrigPrice2Double() {
+        double dis = 0D;
+        if (origPrice != null) {
+
+            dis = AmountConversion.fenToYuan(origPrice);
+        }
+        return dis;
+    }
+    public void setOrigPrice(Integer origPrice) {
+        this.origPrice = origPrice;
+    }
+
+    public Integer getApplyObject() {
+        return applyObject;
+    }
+
+    public void setApplyObject(Integer applyObject) {
+        this.applyObject = applyObject;
+    }
+
+    public Integer getApplyGoods() {
+        return applyGoods;
+    }
+
+    public void setApplyGoods(Integer applyGoods) {
+        this.applyGoods = applyGoods;
+    }
+
+    public Integer getRelatedType() {
+        return relatedType;
+    }
+
+    public void setRelatedType(Integer relatedType) {
+        this.relatedType = relatedType;
+    }
+
+    public String getUsageDesc() {
+        return usageDesc;
+    }
+
+    public void setUsageDesc(String usageDesc) {
+        this.usageDesc = usageDesc;
+    }
+
+    public Integer getPreferentialType() {
+        return preferentialType;
+    }
+
+    public void setPreferentialType(Integer preferentialType) {
+        this.preferentialType = preferentialType;
+    }
+
+    public String getLimitDesc() {
+        return limitDesc;
+    }
+
+    public void setLimitDesc(String limitDesc) {
+        this.limitDesc = limitDesc;
+    }
+
+    public String getRecommend() {
+        return recommend;
+    }
+
+    public void setRecommend(String recommend) {
+        this.recommend = recommend;
+    }
+
+    public Boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    /**
+     * 判断是否可使用
+     * @return
+     */
+    public boolean isUsable() {
+        if (UserRedenvelope.STATUS_UNUSE.equals(status) && new Date().before(validEndAt) && new Date().after(validStartAt))
+            return true;
+        else if (UserRedenvelope.STATUS_USED.equals(status))
+            return false;
+        else if (UserRedenvelope.STATUS_UNUSE.equals(status) && new Date().after(validEndAt))
+            return false;
+        return false;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -291,6 +446,15 @@ public class UserRedenvelope implements Serializable {
                 .append("validEndAt", validEndAt)
                 .append("activityId", activityId)
                 .append("activityName", activityName)
+                .append("couponName", couponName)
+                .append("origPrice", origPrice)
+                .append("applyObject", applyObject)
+                .append("applyGoods", applyGoods)
+                .append("relatedType", relatedType)
+                .append("usageDesc", usageDesc)
+                .append("limitDesc", limitDesc)
+                .append("preferentialType", preferentialType)
+                .append("isDeleted", isDeleted)
                 .toString();
     }
 }

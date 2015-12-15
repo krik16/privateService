@@ -145,7 +145,7 @@ public class CouponVO implements Serializable {
 
     private List<String> brandCateIds;
 
-    private String showChannel; // 展示渠道
+    private String showChannel; // 展示渠道信息同步终端: 容易逛,互动屏,微信 [1,1,1]表示三个都选中
 
     private List<String> carouselImg = new ArrayList<>(); //轮播图片
 

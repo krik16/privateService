@@ -6,6 +6,7 @@ import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.old_vo.OldCouponVO;
 import com.rongyi.easy.coupon.vo.CouponVO;
+import com.rongyi.easy.coupon.vo.VoucherRelatedObjectVO;
 import com.rongyi.easy.solr.retrival.result.ActivityData;
 
 import java.util.List;
@@ -71,14 +72,15 @@ public interface MLCouponService {
     ActivityData getCouponInfoForSolr(String couponId);
 
     /**
-     * 根据卡券ID查询关联的店铺列表
+     * 根据卡券ID查询关联的商场或店铺集合
+     * 容易逛我的代金券详情使用，当该券是通用券时返回malls否则返回shops
      * @param couponId 卡券id
-     * @param currentPage 起始页从1开始
+     * @param currentPage 起始页
      * @param pageSize 每页行数
-     * @return pagingVO
+     * @return VoucherRelatedObjectVO
      * @author lqy
      */
-    PagingVO getCouponShopsByCouponId(String couponId, Integer currentPage, Integer pageSize);
+    VoucherRelatedObjectVO getVoucherRelatedList(String couponId, Integer currentPage, Integer pageSize);
 
     /**
      * 根据卡券ID获取卡券详情（提供给容易逛代金券详情使用）

@@ -177,7 +177,14 @@ public interface ROAUserService {
      */
     public List<RmmmUserInfoEntity> getUserListByPhone(String phone)throws MallShopException;
 
-
+    /**
+     *
+     * @param phone
+     * @param flag 1全部状态
+     * @return
+     * @throws MallShopException
+     */
+    public List<RmmmUserInfoEntity> getUserAllListByPhone(String phone,int flag)throws MallShopException;
 
     /**
      * 根据用户昵称，用户UUID获取

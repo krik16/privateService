@@ -9,7 +9,7 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
 @SuppressWarnings("serial")
-@Entity("custom_category")
+@Entity(value="custom_category",noClassnameStored=true)
 public class MallCustomCategoryEntity  implements java.io.Serializable{
 
 	/**

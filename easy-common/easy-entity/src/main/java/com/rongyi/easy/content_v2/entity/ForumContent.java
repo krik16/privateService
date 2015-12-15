@@ -49,7 +49,7 @@ public class ForumContent implements Serializable {
      */
     private String subtitle;
     /**
-     * 类型，	1.代表商场,2.店铺、3.品牌、4.商品、5.代金券、6.内链活动、7.文章、8.优惠、9.外链活动、10.抵扣卷 ,  11.商品推荐 （临时的）
+     * 类型，	1.代表商场,2.店铺、3.品牌、4.商品、5.代金券、6.内链活动、7.文章、8.优惠、9.外链活动、10.抵扣卷 ,  11.商品推荐 （临时的） 19 特卖id
      */
     private Integer type;
     /**

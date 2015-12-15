@@ -22,6 +22,21 @@ public interface ROAFilialeService {
 	 * @return
 	 */
 	public List<FilialeVo> getFilialeList(Map paramMap,int currpage,int pageSize);
-	
+
+	/**
+	 * 
+	* @Title: getFilialeById 
+	* @Description: 根据分公司id查询分公司信息
+	* @param @param id
+	* @param @return    设定文件 
+	* @return FilialeVo    返回类型 
+	* @throws
+	 */
 	public FilialeVo getFilialeById(String id);
-}
+		/**
+	 * 根据MongoID查询分公司
+	 * @param id
+	 * @return
+	 */
+	public FilialeVo getFilialeVoByMongoId(String id);
+	}

@@ -62,6 +62,12 @@ public class UserinfoVO implements Serializable{
 
 	String userDesc;//用户简介
 
+	String permission;//权限
+
+	private Integer isDisabled=0; //0 默认,禁用 1
+
+	private String telPhone;//客服电话
+
 	
 	public Integer getIfAttention() {
 		return ifAttention;
@@ -237,5 +243,29 @@ public class UserinfoVO implements Serializable{
 
 	public void setLabelList(List<UserLabelDto> labelList) {
 		this.labelList = labelList;
+	}
+
+	public String getPermission() {
+		return permission;
+	}
+
+	public void setPermission(String permission) {
+		this.permission = permission;
+	}
+
+	public Integer getIsDisabled() {
+		return isDisabled;
+	}
+
+	public void setIsDisabled(Integer isDisabled) {
+		this.isDisabled = isDisabled;
+	}
+
+	public String getTelPhone() {
+		return telPhone;
+	}
+
+	public void setTelPhone(String telPhone) {
+		this.telPhone = telPhone;
 	}
 }

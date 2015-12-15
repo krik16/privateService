@@ -5,6 +5,7 @@ import java.util.List;
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.mcmc.param.AdviseShopParam;
 import com.rongyi.easy.mcmc.param.LiveParam;
+import com.rongyi.easy.rmmm.param.BullParam;
 import com.rongyi.easy.solr.param.LiveSearchParam;
 
 /**
@@ -105,7 +106,7 @@ public interface ROALiveService {
 	 *            页大小
 	 * @return 带List&lt;LiveBrandVO&gt;的ResponseVO
 	 */
-	ResponseVO getBrandList(String bullId, String liveId, int page, int pageSize);
+	ResponseVO getBrandList(BullParam param);
 
 	/**
 	 * 通过直播id列表查询直播列表

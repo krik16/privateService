@@ -1,14 +1,14 @@
 package com.rongyi.rss.malllife.roa.user;
 
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
-import org.bson.types.ObjectId;
+import com.rongyi.easy.usercenter.dto.malllife.MalllifeUserInfoDto;
+import com.rongyi.easy.usercenter.entity.MalllifeUserInfoEntity;
 
-import com.rongyi.easy.entity.MallLifeUserEntity;
+
 import com.rongyi.easy.malllife.param.MalllifeUser;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
-import com.rongyi.easy.rmmm.dto.user.UserVO;
 
 /*
  * Copyright (C),上海容易网电子商务有限公司
@@ -22,7 +22,7 @@ import com.rongyi.easy.rmmm.dto.user.UserVO;
  */
 public interface ROAMalllifeUserService {
 
-	public MallLifeUserEntity getEntityByUid(String userId) throws Exception;
+	public MalllifeUserInfoEntity getEntityByUid(String userId) throws Exception;
 
 	/**
 	 * 注册用户
@@ -50,6 +50,17 @@ public interface ROAMalllifeUserService {
 	 */
 	public UserInfoVO getByPhone(String phone) throws Exception;
 
+
+	/**
+	 * 返回部分数据
+	 * @param IdorPhone 用户Id 和手机号
+	 * @param type 0用户ID 1手机号
+	 * @param flag 0不返回收藏商品编号 1返回 兼容老接口
+	 * @return
+	 * @throws Exception
+	 */
+	public MalllifeUserInfoDto getByIdorPhone(String IdorPhone,int type,int flag) throws Exception;
+
 	/**
 	 * 根据im_id查询摩生活用户
 	 *
@@ -57,7 +68,7 @@ public interface ROAMalllifeUserService {
 	 * @return
 	 * @throws Exception
 	 */
-	public MallLifeUserEntity getUserByIMId(String imId) throws Exception;
+	public MalllifeUserInfoEntity getUserByIMId(String imId) throws Exception;
 
 	/**
 	 * 更新用户信息
@@ -97,19 +108,19 @@ public interface ROAMalllifeUserService {
 	/**
 	 * 判断当前设备号是否可以注册
 	 * 
-	 * @param devuuid
-	 *            设备uuid
+	 * @param devuuid 设备uuid
+	 *@param      idfa
 	 * @return true 可以注册 false不能注册
 	 * @throws Exception
 	 */
-	public Boolean isExistBydevUuid(String devuuid) throws Exception;
+	public Boolean isExistBydevUuid(String devuuid,String idfa) throws Exception;
 
-	/**
+/*	*//**
 	 * @param collectCommoditys
 	 * @param userId
 	 * @throws Exception
-	 */
-	public void collectCommodity(Set<String> collectCommoditys, ObjectId userId) throws Exception;
+	 *//*
+	public void collectCommodity(Set<String> collectCommoditys, ObjectId userId) throws Exception;*/
 
 	/**
 	 * 根据买家姓名模糊查询买家信息
@@ -143,4 +154,15 @@ public interface ROAMalllifeUserService {
 	 * @throws Exception
 	 */
 	public void updatelogin(MalllifeUser malllifeUser) throws Exception;
+
+
+	/**
+	 * 根据id列表批量取出用户信息
+	 * @param idList
+	 * @return
+	 */
+	public Map<String,UserInfoVO> getUserListByIdList(List<String> idList);
+
+
+
 }

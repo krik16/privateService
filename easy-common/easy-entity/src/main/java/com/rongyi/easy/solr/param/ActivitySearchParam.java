@@ -144,5 +144,26 @@ public class ActivitySearchParam implements Serializable{
 		this.startLetter = startLetter;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "ActivitySearchParam{" +
+				"keyword='" + keyword + '\'' +
+				", distance=" + distance +
+				", coord_x='" + coord_x + '\'' +
+				", coord_y='" + coord_y + '\'' +
+				", cat_id='" + cat_id + '\'' +
+				", city_name='" + city_name + '\'' +
+				", sort='" + sort + '\'' +
+				", from=" + from +
+				", size=" + size +
+				", brand_id='" + brand_id + '\'' +
+				", zone_id='" + zone_id + '\'' +
+				", shop_id='" + shop_id + '\'' +
+				", holder_id='" + holder_id + '\'' +
+				", couponRequired=" + couponRequired +
+				", shopList=" + shopList +
+				", mallId='" + mallId + '\'' +
+				", startLetter='" + startLetter + '\'' +
+				'}';
+	}
 }

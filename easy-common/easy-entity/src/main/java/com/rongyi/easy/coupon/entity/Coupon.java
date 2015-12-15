@@ -155,7 +155,7 @@ public class Coupon implements Serializable {
     /**
      * 关联类型
      * 代金券：集团[0],品牌[1], 商场 [2],店铺[3];
-     * 红包 ：全场[0],商品[1]
+     * 平台促销券 ：全场[0]，品牌[1]，商场[2]，店铺[3]、分类[4]，信息[5]
      */
     private Integer relatedType;
 
@@ -253,8 +253,19 @@ public class Coupon implements Serializable {
      * 代金券分类
      */
     private CouponCategory couponCategory;
+    private List<CouponCategory> listCouponCategorys;
 
-    /**
+    
+
+	public List<CouponCategory> getListCouponCategorys() {
+		return listCouponCategorys;
+	}
+
+	public void setListCouponCategorys(List<CouponCategory> listCouponCategorys) {
+		this.listCouponCategorys = listCouponCategorys;
+	}
+
+	/**
      * 代金券关联的集团
      */
     private CouponGroup couponGroup;
@@ -263,13 +274,23 @@ public class Coupon implements Serializable {
      * 代金券关联的品牌
      */
     private CouponBrand couponBrand;
+    private List<CouponBrand> couponBrands;
+    
 
     /**
      * 代金券关联的商场
      */
 //    private CouponMall couponMall;
 
-    /**
+    public List<CouponBrand> getCouponBrands() {
+		return couponBrands;
+	}
+
+	public void setCouponBrands(List<CouponBrand> couponBrands) {
+		this.couponBrands = couponBrands;
+	}
+
+	/**
      * 代金券关联的店铺
      */
     private List<CouponShop> couponShops;
@@ -281,7 +302,7 @@ public class Coupon implements Serializable {
 
 
     /**
-     * 优惠方式 1：满减 ；2：立减。
+     * 优惠方式 0：满减 ；1：立减。
      */
     private Integer preferentialType;
 
@@ -329,7 +350,7 @@ public class Coupon implements Serializable {
     /**
      * 平台促销券与代金券的关系
      */
-    private List<CouponVoucher> couponVouchers;
+    private List<CouponVoucher> listCouponVouchers;
 
     /**
      * 平台促销券商品分类
@@ -629,7 +650,7 @@ public class Coupon implements Serializable {
     }
 
     public Integer getPublishStatus() {
-        if (Integer.valueOf(CouponEnum.PASS.getValue()).equals(status)) {
+        if (publishStartAt != null && publishEndAt != null && Integer.valueOf(CouponEnum.PASS.getValue()).equals(status)) {
             if (!isOffStock && new Date().before(publishStartAt)) {
                 return CouponEnum.UNPUBLISH.getValue();
             } else if (!isOffStock && new Date().after(publishStartAt) && new Date().before(publishEndAt)) {
@@ -904,13 +925,7 @@ public class Coupon implements Serializable {
         this.validDays = validDays;
     }
 
-    public List<CouponVoucher> getCouponVouchers() {
-        return couponVouchers;
-    }
-
-    public void setCouponVouchers(List<CouponVoucher> couponVouchers) {
-        this.couponVouchers = couponVouchers;
-    }
+   
 
     public List<CouponCommodityCategory> getCouponCommodityCategories() {
         return couponCommodityCategories;
@@ -980,8 +995,17 @@ public class Coupon implements Serializable {
                 .append("applyObject", applyObject)
                 .append("applyGoods", applyGoods)
                 .append("validDays", validDays)
-                .append("couponVouchers", couponVouchers)
+                .append("listCouponVouchers", listCouponVouchers)
                 .append("couponCommodityCategories", couponCommodityCategories)
+                .append("couponBrands", couponBrands)
                 .toString();
     }
+
+	public List<CouponVoucher> getListCouponVouchers() {
+		return listCouponVouchers;
+	}
+
+	public void setListCouponVouchers(List<CouponVoucher> listCouponVouchers) {
+		this.listCouponVouchers = listCouponVouchers;
+	}
 }

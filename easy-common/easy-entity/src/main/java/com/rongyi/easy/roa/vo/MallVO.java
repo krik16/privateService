@@ -26,6 +26,7 @@ public class MallVO implements Serializable{
 	private String terminal_logo;//终端机logo：终端机logourl地址
 	private String wechat_pic; //商场 微信展示图片：微信地址
 	private String icon;//商场ICOn：图片logoURl
+	private String merlog_pic ;//商家后台Logo
 	
 	public String getIcon() {
 		return icon;
@@ -154,5 +155,11 @@ public class MallVO implements Serializable{
     public void setWechat_pic(String wechat_pic) {
         this.wechat_pic = wechat_pic;
     }
+	public String getMerlog_pic() {
+		return merlog_pic;
+	}
+	public void setMerlog_pic(String merlog_pic) {
+		this.merlog_pic = merlog_pic;
+	}
 	
 }
