@@ -302,14 +302,14 @@ public class StatementConfigController extends BaseController{
 		List<ConfigShopVO> configShopVOs = new ArrayList<>();
 		ResponseData result = null;
 		try {
-//			ResponseData responseData = accessService.check(request, "FNC_STLCONF_VIEW");
-//			if (responseData.getMeta().getErrno() != 0) {
-//				return responseData;
-//			}
+			ResponseData responseData = accessService.check(request, "FNC_STLCONF_VIEW");
+			if (responseData.getMeta().getErrno() != 0) {
+				return responseData;
+			}
 			if (!map.containsKey("id")){
 				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
 			}
-			int currPage = map.containsKey("currpage")?Integer.valueOf(map.get("currpage").toString()):1;
+			int currPage = map.containsKey("currPage")?Integer.valueOf(map.get("currPage").toString()):1;
 			int pageSize = map.containsKey("pageSize")?Integer.valueOf(map.get("pageSize").toString()):10;
 			Map<String, Object> paramsMap = new HashMap<>();
 			paramsMap.put("configId", Integer.valueOf(map.get("id").toString()));
