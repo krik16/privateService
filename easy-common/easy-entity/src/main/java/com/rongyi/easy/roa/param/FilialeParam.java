@@ -140,4 +140,11 @@ public class FilialeParam implements Serializable {
 	public void setValid(Integer valid) {
 		this.valid = valid;
 	}
+	@Override
+	public String toString() {
+		return "FilialeParam [id=" + id + ", brandMid=" + brandMid + ", name=" + name + ", manager=" + manager
+				+ ", telephone=" + telephone + ", proId=" + proId + ", cityId=" + cityId + ", areaId=" + areaId
+				+ ", zoneId=" + zoneId + ", address=" + address + ", shopIds=" + shopIds + ", currentPage="
+				+ currentPage + ", pageSize=" + pageSize + ", valid=" + valid + "]";
+	}
 }
