@@ -612,8 +612,6 @@
 			<foreach item="item" index="index" collection="userIds" open="("  separator="," close=")">  
             	#{item}  
         	</foreach>  
-			
-			(#{userIds,jdbcType=VARCHAR})
 	</select>
 
 	<resultMap id="CouponExcelDtoMap" type="com.rongyi.settle.dto.CouponExcelDto">
@@ -719,7 +717,7 @@
 				<foreach item="item" index="index" collection="userIds" open="("  separator="," close=")">  
 	            	#{item}  
 	        	</foreach>  
-		GROUP BY tuc.coupon_id
+		GROUP BY UC.coupon_id
 	</select>
 
 	<select id="selectForConfigShopsById" parameterType="java.util.Map" resultType="String">
@@ -728,7 +726,7 @@
 		FROM
 			ry_rpb.config_shop
 		WHERE
-			id = #{configId,jdbcType=INTEGER}
+			config_id = #{configId,jdbcType=INTEGER}
 	</select>
 
 	<select id="selectForCouponExcelDtoByMid" parameterType="java.util.Map" resultMap="CouponExcelDtoMap">
