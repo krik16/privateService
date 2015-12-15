@@ -7,6 +7,7 @@
 
 package com.rongyi.tms.service.impl;
 
+import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.coupon.entity.CouponOrder;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
@@ -25,6 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -56,7 +58,12 @@ public class RefundServiceImpl extends BaseServiceImpl implements RefundService 
         List<TradeVO> tradeVOList = new ArrayList<TradeVO>();
         map.put("currentPage", (currentPage - 1) * pageSize);
         map.put("pageSize", pageSize);
+        Date startTime = DateUtil.getCurrDateTime();
+        LOGGER.info("startTime=" + startTime);
         tradeVOList = this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectPayPageList", map);
+        Date endTime = DateUtil.getCurrDateTime();
+        LOGGER.info("endTime=" + endTime);
+        LOGGER.info("time="+(endTime.getTime()-startTime.getTime()));
         if (tradeVOList != null && !tradeVOList.isEmpty())
         for (TradeVO tradeVO : tradeVOList) {
             PaymentEntity hisPayEntity = null;

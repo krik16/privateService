@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.framework.spring.context.utils.SpringContextUtil;
 import com.rongyi.rss.rpb.OrderNoGenService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @Author: 柯军
@@ -18,6 +19,9 @@ import com.rongyi.rss.rpb.OrderNoGenService;
  * 
  **/
 public class OrderNoGenServiceImpl implements OrderNoGenService {
+
+	@Autowired
+	IdGenService idGenService;
 
 	private static final Logger LOGGER = Logger.getLogger(OrderNoGenServiceImpl.class);
 
@@ -59,7 +63,6 @@ public class OrderNoGenServiceImpl implements OrderNoGenService {
 			LOGGER.error("配置的wokerId出现异常，使用默认wokerId = 1," + e.getMessage());
 			e.printStackTrace();
 		}
-		IdGenService idGenService = new IdGenService(wokerId);
 		String randomString = idGenService.nextId(8);
 		sb.append(randomString);
 		sb.append(hhmm);
