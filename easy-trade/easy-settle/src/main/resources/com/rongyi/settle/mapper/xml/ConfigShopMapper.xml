@@ -83,4 +83,18 @@
     select <include refid="Base_Column_List" />
     from config_shop where config_id=#{configId, jdbcType=INTEGER}
   </select>
+
+  <select id="getConfigShopsPage" parameterType="map" resultType="com.rongyi.easy.settle.vo.ConfigShopVO">
+    select cs.shop_id shopId, cs.account_list accountList,
+           pbc.biz_real_address bizRealAddress, pbc.biz_name bizName, pbc.link_shop_op linkShopOp, pbc.link_role linkRole,link_type linkType
+    from config_shop cs join payment_bill_config pbc on cs.config_id = pbc.id
+    <where>
+      <if test="configId!=null">
+        cs.config_id = #{configId}
+      </if>
+    </where>
+    <if test="startRecord!=null">
+      limit #{startRecord}, #{pageSize, jdbcType=INTEGER}
+    </if>
+  </select>
 </mapper>

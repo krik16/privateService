@@ -1,8 +1,10 @@
 package com.rongyi.settle.mapper;
 
 import com.rongyi.easy.settle.entity.ConfigShop;
+import com.rongyi.easy.settle.vo.ConfigShopVO;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ConfigShopMapper {
 	int deleteByPrimaryKey(Integer id);
@@ -20,4 +22,6 @@ public interface ConfigShopMapper {
 
 
 	List<ConfigShop> getConfigShopsByConfigId(Integer configId);
+
+	List<ConfigShopVO> getConfigShopsPage(Map<String, Object> paramsMap);
 }
