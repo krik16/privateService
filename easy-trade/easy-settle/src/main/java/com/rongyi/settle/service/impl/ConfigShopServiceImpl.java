@@ -35,4 +35,9 @@ public class ConfigShopServiceImpl implements ConfigShopService{
     public List<ConfigShopVO> getConfigShopsPage(Map<String, Object> paramsMap) {
         return mapper.getConfigShopsPage(paramsMap);
     }
+
+    @Override
+    public int selectConfigShopsPageCount(Map<String, Object> paramsMap) {
+        return mapper.selectConfigShopsPageCount(paramsMap);
+    }
 }

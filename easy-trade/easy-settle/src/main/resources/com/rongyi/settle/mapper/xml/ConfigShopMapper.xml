@@ -97,4 +97,13 @@
       limit #{startRecord}, #{pageSize, jdbcType=INTEGER}
     </if>
   </select>
+  <select id="selectConfigShopsPageCount" parameterType="map" resultType="int">
+    select count(1)
+    from config_shop cs join payment_bill_config pbc on cs.config_id = pbc.id
+    <where>
+      <if test="configId!=null">
+        cs.config_id = #{configId}
+      </if>
+    </where>
+  </select>
 </mapper>

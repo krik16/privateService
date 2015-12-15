@@ -300,11 +300,12 @@ public class StatementConfigController extends BaseController{
 	public ResponseData accountInfo(HttpServletRequest request, @RequestBody Map<String, Object> map) {
 		LOGGER.info("====accountInfo==== params={}",map.toString());
 		List<ConfigShopVO> configShopVOs = new ArrayList<>();
+		ResponseData result = null;
 		try {
-			ResponseData responseData = accessService.check(request, "FNC_STLCONF_VIEW");
-			if (responseData.getMeta().getErrno() != 0) {
-				return responseData;
-			}
+//			ResponseData responseData = accessService.check(request, "FNC_STLCONF_VIEW");
+//			if (responseData.getMeta().getErrno() != 0) {
+//				return responseData;
+//			}
 			if (!map.containsKey("id")){
 				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
 			}
@@ -313,12 +314,13 @@ public class StatementConfigController extends BaseController{
 			Map<String, Object> paramsMap = new HashMap<>();
 			paramsMap.put("configId", Integer.valueOf(map.get("id").toString()));
 			configShopVOs = statementConfigService.selectConfigShopsPage(paramsMap, currPage, pageSize);
-
+			int totalCount = statementConfigService.selectConfigShopsPageCount(paramsMap);
+			result = ResponseData.success(configShopVOs,currPage,pageSize,totalCount);
 		} catch (Exception e) {
 			e.printStackTrace();
 			ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
 		}
-		return ResponseData.success(configShopVOs);
+		return result;
 	}
 
 	/**

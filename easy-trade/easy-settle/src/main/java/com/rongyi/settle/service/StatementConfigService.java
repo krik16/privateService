@@ -147,4 +147,6 @@ public interface StatementConfigService {
 
 
 	List<ConfigShopVO> selectConfigShopsPage(Map<String, Object> paramsMap, int currPage, int pageSize) throws Exception;
+
+	int selectConfigShopsPageCount(Map<String, Object> paramsMap);
 }

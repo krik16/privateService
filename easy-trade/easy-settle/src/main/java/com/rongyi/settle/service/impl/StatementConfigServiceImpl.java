@@ -194,7 +194,12 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
         return configShops;
     }
 
-	@Override
+    @Override
+    public int selectConfigShopsPageCount(Map<String, Object> paramsMap) {
+        return configShopService.selectConfigShopsPageCount(paramsMap);
+    }
+
+    @Override
 	public Map<String, Object> validateIsExist(StatementConfig statementConfig, List<Byte> statuses, Map linkId,Map linkAccount) throws Exception {
 		boolean result = false;
 		int isOneself;
