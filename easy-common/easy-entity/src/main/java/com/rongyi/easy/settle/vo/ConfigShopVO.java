@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 public class ConfigShopVO implements Serializable{
     private String shopId;
-    private String shopName;
+//    private String shopName;
     private String accountList;
     private String bizRealAddress;//商户地址
     private String bizName;
@@ -67,13 +67,13 @@ public class ConfigShopVO implements Serializable{
         this.shopId = shopId;
     }
 
-    public String getShopName() {
-        return shopName;
-    }
-
-    public void setShopName(String shopName) {
-        this.shopName = shopName;
-    }
+//    public String getShopName() {
+//        return shopName;
+//    }
+//
+//    public void setShopName(String shopName) {
+//        this.shopName = shopName;
+//    }
 
     public String getAccountList() {
         return accountList;
