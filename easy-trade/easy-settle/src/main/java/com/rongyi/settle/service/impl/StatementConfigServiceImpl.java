@@ -339,35 +339,42 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 				logger.info("================== 查自身 没有账户");
 			}
 		}else if (isOneself==0){
+            List<UserInfoVo> userInfoVos =  getAccountInfoByParam(isOneself, null, 1, id);
+            List<String> allUserId = new ArrayList<>();
+            List<String> allUserAccount = new ArrayList<>();
+            if (CollectionUtils.isNotEmpty(userInfoVos)){
+                for (UserInfoVo user : userInfoVos){
+                    allUserId.add(user.getId().toString());
+                    allUserAccount.add(user.getUserAccount());
+                }
+            }
+            String realUser = allUserId.toString();
+            String realAccount = allUserAccount.toString();
 			if (linkShopOp.intValue()==0){
                 shopConfig = new ConfigShop();
-                shopConfig.setUserList(userLists);
-                shopConfig.setRealUserList(userLists);
                 shopConfig.setShopId(id);
-                shopConfig.setAccountList(userAccounts);
-                shopConfig.setRealAccountList(userAccounts);
+                if (userLists==null && userAccounts==null) {
+                    shopConfig.setUserList(realUser.substring(1,realUser.length()-1));
+                    shopConfig.setAccountList(realAccount.substring(1, realUser.length() - 1));
+                    shopConfig.setRealUserList(realUser.substring(1,realUser.length()-1));
+                    shopConfig.setRealAccountList(realAccount.substring(1, realUser.length() - 1));
+                }else {
+                    shopConfig.setUserList(userLists);
+                    shopConfig.setRealUserList(userLists);
+                    shopConfig.setAccountList(userAccounts);
+                    shopConfig.setRealAccountList(userAccounts);
+                }
             }else if (linkShopOp.intValue()==1){
-                List<UserInfoVo> userInfoVos =  getAccountInfoByParam(isOneself, null, 1, id);
                 shopConfig = new ConfigShop();
 				shopConfig.setUserList(userLists);
 				shopConfig.setShopId(id);
-				List<String> allUserId = new ArrayList<>();
-				List<String> allUserAccount = new ArrayList<>();
-				if (CollectionUtils.isNotEmpty(userInfoVos)){
-					for (UserInfoVo user : userInfoVos){
-						allUserId.add(user.getId().toString());
-                        allUserAccount.add(user.getUserAccount());
-					}
-				}
 				if (StringUtils.isNotBlank(userLists)) {
 					allUserId.removeAll(Arrays.asList(userLists.split(",")));
                     allUserAccount.removeAll(Arrays.asList(userAccounts.split(",")));
 				}
 				if (CollectionUtils.isNotEmpty(allUserId)) {
-					String realUser = allUserId.toString();
 					shopConfig.setRealUserList(realUser.substring(1,realUser.length()-1));
-                    realUser = allUserAccount.toString();
-                    shopConfig.setRealAccountList(realUser.substring(1, realUser.length() - 1));
+                    shopConfig.setRealAccountList(realAccount.substring(1, realUser.length() - 1));
 				}
 			}else {
 				logger.info(" linkShopOp is error:" +linkShopOp);
