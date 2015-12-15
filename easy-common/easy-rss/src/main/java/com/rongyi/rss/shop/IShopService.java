@@ -68,4 +68,11 @@ public interface IShopService {
 	* @throws
 	 */
 	public ShopInfoEntity selectByShopId(String shopMid);
+	
+	/**
+	 * 根据分公司Id查询店铺
+	 * @param filialeId 分公司mongoId
+	 * @return
+	 */
+	public List<ShopEntity> searchShopByFilialeId(String filialeId);
 }
