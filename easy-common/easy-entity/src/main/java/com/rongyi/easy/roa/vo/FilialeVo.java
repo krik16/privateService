@@ -27,7 +27,7 @@ public class FilialeVo implements Serializable{
 	
 	private String brandName; //关联品牌名称
 	
-	private String proId;//省id
+	//private String proId;//省id
 	/*private String proName;//省名称
 	private String cityId;//市id
 	private String cityName;//市名称
@@ -79,12 +79,6 @@ public class FilialeVo implements Serializable{
 	}
 	public void setBrandName(String brandName) {
 		this.brandName = brandName;
-	}
-	public String getProId() {
-		return proId;
-	}
-	public void setProId(String proId) {
-		this.proId = proId;
 	}
 	public List<AreaVO> getAreaVo() {
 		return areaVo;
