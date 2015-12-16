@@ -376,8 +376,10 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                     allUserAccount.removeAll(Arrays.asList(userAccounts.split(",")));
 				}
 				if (CollectionUtils.isNotEmpty(allUserId)) {
+                    realUser = allUserId.toString();
+                    realAccount = allUserAccount.toString();
 					shopConfig.setRealUserList(realUser.substring(1,realUser.length()-1));
-                    shopConfig.setRealAccountList(realAccount.substring(1, realUser.length() - 1));
+                    shopConfig.setRealAccountList(realAccount.substring(1, realAccount.length() - 1));
 				}
 			}else {
 				logger.info(" linkShopOp is error:" +linkShopOp);
