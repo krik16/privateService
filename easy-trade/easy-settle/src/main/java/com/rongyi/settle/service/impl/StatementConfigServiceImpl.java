@@ -231,12 +231,12 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 					}
 					isOneself = 1;
 					ConfigShop configShop = convertToShopConfig(isOneself, bussinessId, bussinessType,linkShopOp, null,  null, shopConfigs);
-					if (configShop==null){
-						ReMap.put("result", true);
-						ReMap.put("errorMsg", CodeEnum.FIAL_CONFIG_NO_ACCOUNT.getValueStr());
-						ReMap.put("errorNo", CodeEnum.FIAL_CONFIG_NO_ACCOUNT.getCodeInt());
-						return ReMap;
-					}
+//					if (configShop==null){
+//						ReMap.put("result", true);
+//						ReMap.put("errorMsg", CodeEnum.FIAL_CONFIG_NO_ACCOUNT.getValueStr());
+//						ReMap.put("errorNo", CodeEnum.FIAL_CONFIG_NO_ACCOUNT.getCodeInt());
+//						return ReMap;
+//					}
 				}
 				//2、全部店铺
 				List<ShopVO> shopVOs = getShopIdByParam(bussinessType, bussinessId);
@@ -261,12 +261,12 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 					}
 					isOneself = 1;
 					ConfigShop configShop = convertToShopConfig(isOneself, bussinessId, bussinessType,linkShopOp, null,  null, shopConfigs);
-					if (configShop==null){
-						ReMap.put("result", true);
-						ReMap.put("errorMsg", CodeEnum.FIAL_CONFIG_NO_ACCOUNT.getValueStr());
-						ReMap.put("errorNo", CodeEnum.FIAL_CONFIG_NO_ACCOUNT.getCodeInt());
-						return ReMap;
-					}
+//					if (configShop==null){
+//						ReMap.put("result", true);
+//						ReMap.put("errorMsg", CodeEnum.FIAL_CONFIG_NO_ACCOUNT.getValueStr());
+//						ReMap.put("errorNo", CodeEnum.FIAL_CONFIG_NO_ACCOUNT.getCodeInt());
+//						return ReMap;
+//					}
 					if (linkId!=null) {
 						Set<String> shopIds = linkId.keySet();
 						for (String shopId : shopIds){
@@ -353,11 +353,14 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 			if (linkShopOp.intValue()==0){
                 shopConfig = new ConfigShop();
                 shopConfig.setShopId(id);
-                if (userLists==null && userAccounts==null) {
+                if (userLists==null && userAccounts==null) {//关联全部
+                    if (CollectionUtils.isNotEmpty(allUserId)){
+                        logger.info("===================>>>>>>>>>>>>>>>>> realUser: "+ realUser+" realAccount: "+realAccount);
+                    }
                     shopConfig.setUserList(realUser.substring(1,realUser.length()-1));
-                    shopConfig.setAccountList(realAccount.substring(1, realUser.length() - 1));
+                    shopConfig.setAccountList(realAccount.substring(1, realAccount.length() - 1));
                     shopConfig.setRealUserList(realUser.substring(1,realUser.length()-1));
-                    shopConfig.setRealAccountList(realAccount.substring(1, realUser.length() - 1));
+                    shopConfig.setRealAccountList(realAccount.substring(1, realAccount.length() - 1));
                 }else {
                     shopConfig.setUserList(userLists);
                     shopConfig.setRealUserList(userLists);
