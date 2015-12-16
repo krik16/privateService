@@ -358,9 +358,9 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                         logger.info("===================>>>>>>>>>>>>>>>>> realUser: "+ realUser+" realAccount: "+realAccount);
                     }
                     shopConfig.setUserList(realUser.substring(1,realUser.length()-1));
-                    shopConfig.setAccountList(realAccount.substring(1, realUser.length() - 1));
+                    shopConfig.setAccountList(realAccount.substring(1, realAccount.length() - 1));
                     shopConfig.setRealUserList(realUser.substring(1,realUser.length()-1));
-                    shopConfig.setRealAccountList(realAccount.substring(1, realUser.length() - 1));
+                    shopConfig.setRealAccountList(realAccount.substring(1, realAccount.length() - 1));
                 }else {
                     shopConfig.setUserList(userLists);
                     shopConfig.setRealUserList(userLists);
