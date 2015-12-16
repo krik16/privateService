@@ -59,7 +59,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 	private int identity = 5;//0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购,6买手
 
-
+	private boolean immediateOn = false;//true表示设置是立即上架
 
 	public ObjectId getId() {
 		return id;
@@ -321,5 +321,13 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 	public void setIdentity(int identity) {
 		this.identity = identity;
+	}
+
+	public boolean isImmediateOn() {
+		return immediateOn;
+	}
+
+	public void setImmediateOn(boolean immediateOn) {
+		this.immediateOn = immediateOn;
 	}
 }
