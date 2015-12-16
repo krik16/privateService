@@ -11,7 +11,6 @@ package com.rongyi.settle.service.impl;
 import java.util.*;
 
 import com.rongyi.easy.bsoms.entity.UserInfo;
-import com.rongyi.easy.entity.ShopEntity;
 import com.rongyi.easy.roa.entity.MallEntity;
 import com.rongyi.easy.roa.vo.ShopPositionVO;
 import com.rongyi.easy.roa.vo.ShopVO;
@@ -20,12 +19,13 @@ import com.rongyi.easy.settle.vo.ConfigShopVO;
 import com.rongyi.rss.bsoms.IUserInfoService;
 import com.rongyi.rss.roa.ROAMallService;
 import com.rongyi.rss.roa.ROAShopService;
-import com.rongyi.settle.constants.CodeEnum;
+import com.rongyi.rss.shop.IShopService;
 import com.rongyi.settle.constants.ConstantEnum;
 import com.rongyi.settle.service.ConfigShopService;
 import com.rongyi.settle.web.controller.vo.UserInfoVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +73,8 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 
 	@Autowired
 	private ConfigShopService configShopService;
+    @Autowired
+    private IShopService iShopService;
 
 	@Override
 	public List<StatementConfigVO> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
@@ -429,7 +431,23 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 			case 0: searchMap.put("id", bussinessId); break;
 			case 1: searchMap.put("mallId", bussinessId); break;
 			case 2: searchMap.put("brandId", bussinessId); break;
-			case 3: searchMap.put("filialeId", bussinessId); break;
+			case 3:
+                if (ObjectId.isValid(bussinessId))
+                    searchMap.put("filiale_id", new ObjectId(bussinessId));
+                else
+                    break;
+                List<com.rongyi.easy.shop.entity.ShopEntity> shopEntities = iShopService.searchShop(searchMap, 1, 2000);
+                List<ObjectId> shopIds = null;
+                if (CollectionUtils.isNotEmpty(shopEntities)){
+                    shopIds = new ArrayList<>();
+                    for (com.rongyi.easy.shop.entity.ShopEntity shopEntity : shopEntities){
+                        shopIds.add(shopEntity.getId());
+                    }
+                }
+                if (CollectionUtils.isNotEmpty(shopIds)){
+                    shopVOs = roaShopService.getShopsByIds(shopIds);
+                }
+                return shopVOs;
 			case 4:
 				List<MallEntity> mallEntities = rOAMallService.getMallEntitysByGroupId(bussinessId);
 				List<String> mallIds = new ArrayList<>();
