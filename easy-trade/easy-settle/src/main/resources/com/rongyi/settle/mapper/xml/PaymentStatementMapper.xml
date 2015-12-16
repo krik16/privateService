@@ -842,13 +842,9 @@
 				LEFT JOIN ry_rmmm.mall_cooperate D ON C.mall_id = D.id
 				LEFT JOIN ry_rmmm.shop_info E ON C.shop_id = E.id
 				LEFT JOIN ry_rmmm.brand_info BI ON BI.id = E.brand_id
-				LEFT JOIN ry_rmmm.invite_code F ON A.guide_id = F.used_by
-				LEFT JOIN ry_rmmm.invite_apply_record G ON F.apply_id = G.id
 				INNER JOIN ry_osm.order_event H2 ON A.order_no = H2.order_no AND H2.`status` = 2
 				INNER JOIN ry_osm.order_event H3 ON A.order_no = H3.order_no AND H3.`status` = 3
 				LEFT JOIN ry_osm.order_event H4 ON A.order_no = H4.order_no AND H4.`status` = 4
-				LEFT JOIN ry_rpb.sales_commission I ON A.order_no = I.order_no
-				LEFT JOIN ry_rpb.sales_commission_audit_log J ON I.id = J.sales_commission_id AND J.operate_biz = 1
 				LEFT JOIN ry_rpb.payment_order O ON A.order_no = O.order_no AND O.trade_type = 0
 				LEFT JOIN ry_data.m_mcmc_commodity N ON B.commodity_mid = N.mid
 				LEFT JOIN ry_user.malllife_user_address MUA ON MUA.user_id = A.buyer_id
