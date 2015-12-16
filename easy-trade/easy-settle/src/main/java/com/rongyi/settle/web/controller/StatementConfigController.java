@@ -166,10 +166,10 @@ public class StatementConfigController extends BaseController{
 	public ResponseData save(HttpServletRequest request, @RequestBody Map<String, Object> map) {
 		LOGGER.info("====config save==== params={}",map.toString());
 		try {
-//			ResponseData responseData = accessService.check(request, "FNC_STL_ADD");
-//			if (responseData.getMeta().getErrno() != 0) {
-//				return responseData;
-//			}
+			ResponseData responseData = accessService.check(request, "FNC_STL_ADD");
+			if (responseData.getMeta().getErrno() != 0) {
+				return responseData;
+			}
 			StatementConfig oldStatementConfig = statementConfigService.selectByRuleCode(map.get("ruleCode").toString());
 			if(oldStatementConfig != null)
 				return ResponseData.failure(CodeEnum.FIAL_CONFIG_EXIST.getCodeInt(), CodeEnum.FIAL_CONFIG_EXIST.getValueStr());
@@ -195,7 +195,7 @@ public class StatementConfigController extends BaseController{
 			statuses.add(ConstantEnum.CONFIG_STATUS_1.getCodeByte());
 			statuses.add(ConstantEnum.CONFIG_STATUS_0.getCodeByte());
 			Map<String,Object> checkMap = statementConfigService.validateIsExist(statementConfig, statuses, linkIdMap, linkAccountMap);
-//			LOGGER.info("=========================== checkMap"+checkMap);
+			LOGGER.info("=========================== checkMap"+checkMap);
 			boolean checkResult = (boolean) checkMap.get("result");
 			if(checkResult){
 				if (checkMap.containsKey("errorNo")){
