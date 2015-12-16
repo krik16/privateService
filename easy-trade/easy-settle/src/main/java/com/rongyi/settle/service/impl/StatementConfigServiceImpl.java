@@ -353,7 +353,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 			if (linkShopOp.intValue()==0){
                 shopConfig = new ConfigShop();
                 shopConfig.setShopId(id);
-                if (userLists==null && userAccounts==null) {
+                if (userLists==null && userAccounts==null) {//关联全部
                     shopConfig.setUserList(realUser.substring(1,realUser.length()-1));
                     shopConfig.setAccountList(realAccount.substring(1, realUser.length() - 1));
                     shopConfig.setRealUserList(realUser.substring(1,realUser.length()-1));

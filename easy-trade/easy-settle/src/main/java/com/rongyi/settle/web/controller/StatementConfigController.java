@@ -12,6 +12,7 @@ import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.rongyi.core.common.util.DateTool;
 import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.easy.roa.entity.AreaEntity;
 import com.rongyi.easy.roa.entity.MallEntity;
@@ -178,6 +179,10 @@ public class StatementConfigController extends BaseController{
 			statementConfig.setCreateAt(DateUtil.getCurrDateTime());
 			statementConfig.setCreateBy(getUserName(request));
 			statementConfig.setBussinessId(statementConfig.getBussinessCode());
+			if (map.containsKey("effectStartTime") && map.containsKey("effectEndTime")){
+				statementConfig.setEffectStartTime(DateTool.string2Date(map.get("effectStartTime").toString(), DateTool.FORMAT_DATE));
+				statementConfig.setEffectEndTime(DateTool.string2Date(map.get("effectEndTime").toString(), DateTool.FORMAT_DATE));
+			}
 			MapUtils.toObject(bussinessInfo, map);
 			bussinessInfo.setCreateAt(DateUtil.getCurrDateTime());
 			Map linkIdMap = null;
@@ -299,7 +304,7 @@ public class StatementConfigController extends BaseController{
 	@ResponseBody
 	public ResponseData accountInfo(HttpServletRequest request, @RequestBody Map<String, Object> map) {
 		LOGGER.info("====accountInfo==== params={}",map.toString());
-		List<ConfigShopVO> configShopVOs = new ArrayList<>();
+		List<ConfigShopVO> configShopVOs;
 		ResponseData result = null;
 		try {
 			ResponseData responseData = accessService.check(request, "FNC_STLCONF_VIEW");
