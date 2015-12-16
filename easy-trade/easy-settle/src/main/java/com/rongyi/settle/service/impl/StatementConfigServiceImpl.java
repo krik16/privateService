@@ -354,6 +354,9 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                 shopConfig = new ConfigShop();
                 shopConfig.setShopId(id);
                 if (userLists==null && userAccounts==null) {//关联全部
+                    if (CollectionUtils.isNotEmpty(allUserId)){
+                        logger.info("===================>>>>>>>>>>>>>>>>> realUser: "+ realUser+" realAccount: "+realAccount);
+                    }
                     shopConfig.setUserList(realUser.substring(1,realUser.length()-1));
                     shopConfig.setAccountList(realAccount.substring(1, realUser.length() - 1));
                     shopConfig.setRealUserList(realUser.substring(1,realUser.length()-1));
