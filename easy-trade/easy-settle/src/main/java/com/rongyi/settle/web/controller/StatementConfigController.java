@@ -166,10 +166,10 @@ public class StatementConfigController extends BaseController{
 	public ResponseData save(HttpServletRequest request, @RequestBody Map<String, Object> map) {
 		LOGGER.info("====config save==== params={}",map.toString());
 		try {
-			ResponseData responseData = accessService.check(request, "FNC_STL_ADD");
-			if (responseData.getMeta().getErrno() != 0) {
-				return responseData;
-			}
+//			ResponseData responseData = accessService.check(request, "FNC_STL_ADD");
+//			if (responseData.getMeta().getErrno() != 0) {
+//				return responseData;
+//			}
 			StatementConfig oldStatementConfig = statementConfigService.selectByRuleCode(map.get("ruleCode").toString());
 			if(oldStatementConfig != null)
 				return ResponseData.failure(CodeEnum.FIAL_CONFIG_EXIST.getCodeInt(), CodeEnum.FIAL_CONFIG_EXIST.getValueStr());
@@ -603,7 +603,6 @@ public class StatementConfigController extends BaseController{
 					searchMap.put("brandId", params.getId());
 					break;
 				case 3:
-					shopVOs = new ArrayList<>();
 					if (ObjectId.isValid(params.getId()))
 						searchMap.put("filiale_id", new ObjectId(params.getId()));
 					else
@@ -611,15 +610,13 @@ public class StatementConfigController extends BaseController{
 					if (StringUtils.isNotBlank(params.getZoneId())){
 						searchMap.put("zone_id", params.getZoneId());
 					}
-					List<ShopEntity> shopEntities = iShopService.searchShop(searchMap, currpage, pagesize);
+					List<ShopEntity> shopEntities = iShopService.searchShop(searchMap, currpage-1, pagesize);
 					List<ObjectId> shopIds = null;
 					if (CollectionUtils.isNotEmpty(shopEntities)){
 						shopIds = new ArrayList<>();
 						for (ShopEntity shopEntity : shopEntities){
 							shopIds.add(shopEntity.getId());
 						}
-					}
-					if (CollectionUtils.isNotEmpty(shopIds)){
 						shopVOs = roaShopService.getShopsByIds(shopIds);
 					}
 					break;
