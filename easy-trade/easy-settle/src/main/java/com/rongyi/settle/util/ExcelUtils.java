@@ -10,7 +10,6 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.util.StringUtils;
 
 import com.rongyi.settle.constants.SettleConstant;
 import com.rongyi.settle.dto.CouponCodeExcelDto;
@@ -72,7 +71,7 @@ public class ExcelUtils {
 		if (excelDto.getShopAccountNo() != null) {
 			shopAccountNo.setCellValue(shopAccountNoBegin + excelDto.getShopAccountNo());
 		}
-		
+
 		XSSFRow row10 = sheet.getRow(10);
 		XSSFCell shopBank = row10.getCell(6);
 		String shopBankBegin = shopBank.getStringCellValue();
@@ -328,8 +327,20 @@ public class ExcelUtils {
 		out.close();
 	}
 
+	/**
+	 * 加密手机号，中间四位显示为*
+	 * 
+	 * @param phone
+	 * @return
+	* @author erliang
+	* @date 2015年12月16日
+	 */
 	private static String encryptPhone(String phone) {
-		return StringUtils.isEmpty(phone) ? "" : phone.substring(0, 3) + "****" + phone.substring(7, phone.length());
+		if (phone != null && phone.length() > 8) {
+			return phone.substring(0, 3) + "****" + phone.substring(7, phone.length());
+		} else {
+			return phone;
+		}
 	}
 
 }
