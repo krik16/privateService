@@ -608,6 +608,9 @@ public class StatementConfigController extends BaseController{
 						searchMap.put("filiale_id", new ObjectId(params.getId()));
 					else
 						break;
+					if (StringUtils.isNotBlank(params.getZoneId())){
+						searchMap.put("zone_id", params.getZoneId());
+					}
 					List<ShopEntity> shopEntities = iShopService.searchShop(searchMap, currpage, pagesize);
 					List<ObjectId> shopIds = null;
 					if (CollectionUtils.isNotEmpty(shopEntities)){
