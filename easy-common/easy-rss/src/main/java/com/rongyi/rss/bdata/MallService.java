@@ -110,6 +110,6 @@ public interface MallService {
      * @param sign			MD5码
      * @return	ResponseVO 对象
      */
-    ResponseVO getMallList(String mallName, int page, int pageSize, long timeStamp, String channel, String sign);
+    ResponseVO getMallList(String mallName, Integer page, Integer pageSize, Long timeStamp, String channel, String sign);
 
 }
