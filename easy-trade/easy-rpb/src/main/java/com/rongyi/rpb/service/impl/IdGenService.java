@@ -1,5 +1,7 @@
 package com.rongyi.rpb.service.impl;
 
+import org.springframework.stereotype.Service;
+
 import java.util.*;
 
 /**
@@ -11,6 +13,7 @@ import java.util.*;
  * @date 2015/7/22
  * @Description
  */
+@Service
 public class IdGenService {
     private final long workerId;
     private final static long twepoch = 1361753741828L;
