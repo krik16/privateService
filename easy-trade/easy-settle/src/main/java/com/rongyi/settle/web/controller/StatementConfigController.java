@@ -603,6 +603,7 @@ public class StatementConfigController extends BaseController{
 					searchMap.put("brandId", params.getId());
 					break;
 				case 3:
+					shopVOs = new ArrayList<>();
 					if (ObjectId.isValid(params.getId()))
 						searchMap.put("filiale_id", new ObjectId(params.getId()));
 					else
@@ -635,7 +636,7 @@ public class StatementConfigController extends BaseController{
 			}
 
 			resultMap = roaShopService.getShops(searchMap, currpage, pagesize);
-			if (CollectionUtils.isEmpty(shopVOs)) {
+			if (shopVOs == null) {
 				shopVOs = (List<ShopVO>) resultMap.get("list");
 			}
 			List<RelevanceVO> reList = new ArrayList<>();
