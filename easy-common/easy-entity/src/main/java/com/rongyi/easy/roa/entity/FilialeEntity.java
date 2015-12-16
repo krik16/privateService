@@ -21,10 +21,10 @@ public class FilialeEntity implements Serializable{
 	@Property("brand_id")
 	private ObjectId brandId;   //关联品牌ID
 	
-	@Property("create_at")
+	@Property("created_at")
 	private Date createAt;
 	
-	@Property("update_at")
+	@Property("updated_at")
 	private Date updateAt;
 	
 	private String telephone;  //联系电话
