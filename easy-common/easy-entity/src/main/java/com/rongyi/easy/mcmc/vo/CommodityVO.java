@@ -62,6 +62,8 @@ public class CommodityVO  implements  Serializable {
 	private String shopNum;
 	private int brandId;//品牌mysqlId
 	private String filialeMid;//分公司id
+	private int identity = 5;//-1表示定时任务0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购6买手
+
 	public String getShopName() {
 		return shopName;
 	}
@@ -451,5 +453,12 @@ public class CommodityVO  implements  Serializable {
 	public void setFilialeMid(String filialeMid) {
 		this.filialeMid = filialeMid;
 	}
-	
+
+	public int getIdentity() {
+		return identity;
+	}
+
+	public void setIdentity(int identity) {
+		this.identity = identity;
+	}
 }

@@ -51,13 +51,15 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private String brandMid;//品牌id
 	private List<String> filialeMids;//分公司id
 	private List<String> shopMids;//店铺id
-	private String brandId;//品牌mysqlId
+	//private String brandId;//品牌mysqlId
 	
 	private boolean supportCourierDeliver=true;//支持快递发货字段  true 是    false否
 	
 	private boolean supportSelfPickup=true;//支持到店自提  true 是    false否
 
-	private int identity = -1;//0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购
+	private int identity = 5;//0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购,6买手
+
+
 
 	public ObjectId getId() {
 		return id;
@@ -295,14 +297,6 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	
 	public void setCreateBy(Integer createBy) {
 		this.createBy = createBy;
-	}
-	
-	public String getBrandId() {
-		return brandId;
-	}
-	
-	public void setBrandId(String brandId) {
-		this.brandId = brandId;
 	}
 	
 	public boolean isSupportCourierDeliver() {

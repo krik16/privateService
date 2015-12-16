@@ -58,7 +58,7 @@ public class Commodity implements  Serializable,Cloneable{
 	
 	private boolean supportSelfPickup=true;//支持到店自提  true 是    false否
 
-	private int identity = -1;//0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购
+	private int identity = 5;//0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购6买手
 
 	@Override
 	public String toString() {
@@ -210,7 +210,7 @@ public class Commodity implements  Serializable,Cloneable{
 	private Integer terminalType;//上架终端：1.表示容易逛2.表示互动屏3.表示容易逛和互动屏4.表示微商5.微商,容易逛6.微商,互动屏7.容易逛, 互动屏, 微商(转换成二进制数个位1有容易逛第二位1有 互动屏第三位1有 微商)
 	private Date registerAt;//上架时间
 	private Date soldOutAt;//下架时间
-	private Integer source;//来源0表示页面添加1表示批量导入
+	private Integer source;//来源0表示页面添加1表示批量导入2app创建商品
 	private Integer stockStatus;//0表示统一库存1表示分管库存
 	private String systemNumber;//系统编号
 	private String reason;//下架原因
