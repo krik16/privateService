@@ -66,7 +66,7 @@ public class SendEmailUnit {
      **/
 
     private Set<String> getToAddress(String address) {
-        String[] arrays = address.split(",");
+        String[] arrays = address.split(";");
         return new HashSet(Arrays.asList(arrays));
     }
 
