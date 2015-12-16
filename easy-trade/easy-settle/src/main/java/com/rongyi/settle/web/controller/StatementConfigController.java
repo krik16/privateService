@@ -195,7 +195,7 @@ public class StatementConfigController extends BaseController{
 			statuses.add(ConstantEnum.CONFIG_STATUS_1.getCodeByte());
 			statuses.add(ConstantEnum.CONFIG_STATUS_0.getCodeByte());
 			Map<String,Object> checkMap = statementConfigService.validateIsExist(statementConfig, statuses, linkIdMap, linkAccountMap);
-			LOGGER.info("=========================== checkMap"+checkMap);
+//			LOGGER.info("=========================== checkMap"+checkMap);
 			boolean checkResult = (boolean) checkMap.get("result");
 			if(checkResult){
 				if (checkMap.containsKey("errorNo")){
