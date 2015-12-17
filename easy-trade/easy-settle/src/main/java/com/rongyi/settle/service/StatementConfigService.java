@@ -130,7 +130,7 @@ public interface StatementConfigService {
 	 **/
 	Map<String, Object> validateIsExist(StatementConfig statementConfig, List<Byte> statuses, Map linkId, Map linkAccount) throws Exception;
 
-	List<UserInfoVo> getAccountInfoByParam(Integer isOneself, Integer type, Integer guideType, String id);
+	List<UserInfoVo> getAccountInfoByParam(Integer isOneself, Integer type, Integer guideType, String id, String userAccount);
 
 	/**
 	 * @Description:验证是否需要打款到买家虚拟账号

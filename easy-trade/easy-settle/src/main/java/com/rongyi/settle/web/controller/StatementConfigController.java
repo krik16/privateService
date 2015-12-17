@@ -170,9 +170,16 @@ public class StatementConfigController extends BaseController{
 			if (responseData.getMeta().getErrno() != 0) {
 				return responseData;
 			}
+			if (!map.containsKey("bussinessType") || !map.containsKey("bussinessCode") || !map.containsKey("bussinessAccount") || !map.containsKey("ruleCode")){
+				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
+			}
 			StatementConfig oldStatementConfig = statementConfigService.selectByRuleCode(map.get("ruleCode").toString());
-			if(oldStatementConfig != null)
+			if(oldStatementConfig != null) {
 				return ResponseData.failure(CodeEnum.FIAL_CONFIG_EXIST.getCodeInt(), CodeEnum.FIAL_CONFIG_EXIST.getValueStr());
+			}
+			//验证商家财务账户
+			if (CollectionUtils.isEmpty(statementConfigService.getAccountInfoByParam(1,Integer.valueOf(map.get("bussinessType").toString()), null, map.get("bussinessCode").toString(),map.get("bussinessAccount").toString())))
+				return ResponseData.failure(CodeEnum.FIAL_CONFIG_BIZ_NOACCOUNT.getCodeInt(), CodeEnum.FIAL_CONFIG_BIZ_NOACCOUNT.getValueStr());
 			StatementConfig statementConfig = new StatementConfig();
 			BussinessInfo bussinessInfo = new BussinessInfo();
 			MapUtils.toObject(statementConfig, map);
@@ -650,7 +657,7 @@ public class StatementConfigController extends BaseController{
 					shop.setName(shopVO.getName());
 					shop.setPosition(shopVO.getPosition());
 					//查询店铺关联账号信息
-					List<UserInfoVo> userAccounts = statementConfigService.getAccountInfoByParam(0, 0, 1, shopVO.getId());
+					List<UserInfoVo> userAccounts = statementConfigService.getAccountInfoByParam(0, 0, 1, shopVO.getId(), null);
 					shop.setUserAccounts(userAccounts);
 					reList.add(shop);
 				}
@@ -672,7 +679,7 @@ public class StatementConfigController extends BaseController{
 					|| params.getIsOneself()==null || (params.getIsOneself()==1 && params.getType()==null) ) {
 				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
 			}
-			List<UserInfoVo> userAccounts = statementConfigService.getAccountInfoByParam(params.getIsOneself(), params.getType(), params.getGuideType(), params.getId());
+			List<UserInfoVo> userAccounts = statementConfigService.getAccountInfoByParam(params.getIsOneself(), params.getType(), params.getGuideType(), params.getId(), null);
 			return ResponseData.success(userAccounts);
 		} catch (Exception e) {
 			e.printStackTrace();

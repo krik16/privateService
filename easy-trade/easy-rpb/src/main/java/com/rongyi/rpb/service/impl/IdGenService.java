@@ -1,5 +1,7 @@
 package com.rongyi.rpb.service.impl;
 
+import org.springframework.stereotype.Service;
+
 import java.util.*;
 
 /**
@@ -7,6 +9,7 @@ import java.util.*;
  * 测试8位ID 200W内不重复
  * 注意分布式环境下 需要传入不同的workerId
  * 后续考虑作为单独服务
+ *
  * @author liuhao
  * @date 2015/7/22
  * @Description
@@ -40,17 +43,13 @@ public class IdGenService {
             if (this.sequence == 0) {
                 timestamp = this.tilNextMillis(this.lastTimestamp);
             }
-        }
-        else
-        {
+        } else {
             this.sequence = 0;
         }
 
         if (timestamp < this.lastTimestamp) {
             nextId = 0L;
-        }
-        else
-        {
+        } else {
             this.lastTimestamp = timestamp;
             nextId = ((timestamp - twepoch << timestampLeftShift))
                     | (this.workerId << this.workerIdShift) | (this.sequence);
@@ -74,14 +73,13 @@ public class IdGenService {
     }
 
 
-
     public static void main(String[] args) throws InterruptedException {
         Map<Object, Object> m1 = new HashMap<Object, Object>();
         Map<Object, Object> m2 = new HashMap<Object, Object>();
         IdGenService tdi1 = new IdGenService(2);
         IdGenService tdi2 = new IdGenService(3);
-        T1 t1 = new T1(m1,"t1", (long)Math.random()*10, tdi1);
-        T1 t2 = new T1(m2, "t2", (long)Math.random()*10, tdi2);
+        T1 t1 = new T1(m1, "t1", (long) Math.random() * 10, tdi1);
+        T1 t2 = new T1(m2, "t2", (long) Math.random() * 10, tdi2);
         Thread tt1 = new Thread(t1);
         Thread tt2 = new Thread(t2);
         tt1.start();
@@ -95,19 +93,17 @@ public class IdGenService {
 //        workByKeySet(m2);
 //        System.out.println("");
         System.out.println("diff start");
-        diff(m1,m2);
+        diff(m1, m2);
     }
 
 
-    static class T1 implements Runnable
-    {
+    static class T1 implements Runnable {
         String name;
         long seed;
         private Map<Object, Object> m1 = new HashMap<Object, Object>();
         IdGenService worker;
 
-        public T1(Map<Object, Object> mm1, String name, long seed, IdGenService worker)
-        {
+        public T1(Map<Object, Object> mm1, String name, long seed, IdGenService worker) {
             this.m1 = mm1;
             this.name = name;
             this.seed = seed;
@@ -130,13 +126,13 @@ public class IdGenService {
                     m1.put(a, a);
                 }
             }
-            System.out.println(name+ " end:" + b + " ||" + new Date().getTime());
+            System.out.println(name + " end:" + b + " ||" + new Date().getTime());
         }
     }
 
     public static void workByKeySet(Map<Object, Object> map) {
         Set<Object> key = map.keySet();
-        for (Iterator it = key.iterator(); it.hasNext();) {
+        for (Iterator it = key.iterator(); it.hasNext(); ) {
             String s = (String) it.next();
             System.out.print(map.get(s) + "|");
         }
@@ -145,10 +141,9 @@ public class IdGenService {
     public static void diff(Map<Object, Object> map1, Map<Object, Object> map2) {
         int d = 0;
         Set<Object> key = map1.keySet();
-        for (Iterator it = key.iterator(); it.hasNext();) {
+        for (Iterator it = key.iterator(); it.hasNext(); ) {
             String s = (String) it.next();
-            if (map2.get(s) != null)
-            {
+            if (map2.get(s) != null) {
 //               System.out.println(s);
                 d++;
             }
