@@ -20,6 +20,7 @@ import com.rongyi.rss.bsoms.IUserInfoService;
 import com.rongyi.rss.roa.ROAMallService;
 import com.rongyi.rss.roa.ROAShopService;
 import com.rongyi.rss.shop.IShopService;
+import com.rongyi.settle.constants.CodeEnum;
 import com.rongyi.settle.constants.ConstantEnum;
 import com.rongyi.settle.service.ConfigShopService;
 import com.rongyi.settle.web.controller.vo.UserInfoVo;
@@ -232,13 +233,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 						return ReMap;
 					}
 					isOneself = 1;
-					ConfigShop configShop = convertToShopConfig(isOneself, bussinessId, bussinessType,linkShopOp, null,  null, shopConfigs);
-//					if (configShop==null){
-//						ReMap.put("result", true);
-//						ReMap.put("errorMsg", CodeEnum.FIAL_CONFIG_NO_ACCOUNT.getValueStr());
-//						ReMap.put("errorNo", CodeEnum.FIAL_CONFIG_NO_ACCOUNT.getCodeInt());
-//						return ReMap;
-//					}
+					convertToShopConfig(isOneself, bussinessId, bussinessType,linkShopOp, null,  null, shopConfigs);
 				}
 				//2、全部店铺
 				List<ShopVO> shopVOs = getShopIdByParam(bussinessType, bussinessId);
@@ -263,12 +258,12 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 					}
 					isOneself = 1;
 					ConfigShop configShop = convertToShopConfig(isOneself, bussinessId, bussinessType,linkShopOp, null,  null, shopConfigs);
-//					if (configShop==null){
-//						ReMap.put("result", true);
-//						ReMap.put("errorMsg", CodeEnum.FIAL_CONFIG_NO_ACCOUNT.getValueStr());
-//						ReMap.put("errorNo", CodeEnum.FIAL_CONFIG_NO_ACCOUNT.getCodeInt());
-//						return ReMap;
-//					}
+					if (configShop==null){
+						ReMap.put("result", true);
+						ReMap.put("errorMsg", CodeEnum.FIAL_CONFIG_NO_ACCOUNT.getValueStr());
+						ReMap.put("errorNo", CodeEnum.FIAL_CONFIG_NO_ACCOUNT.getCodeInt());
+						return ReMap;
+					}
 					if (linkId!=null) {
 						Set<String> shopIds = linkId.keySet();
 						for (String shopId : shopIds){
