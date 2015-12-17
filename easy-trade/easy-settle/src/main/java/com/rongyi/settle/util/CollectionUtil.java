@@ -1,14 +1,11 @@
 package com.rongyi.settle.util;
 
 import java.util.List;
-import java.util.Map;
-
 /**
  * Created by Ventures on 2015/12/17.
+ * 集合工具类
  */
 public class CollectionUtil {
-
-    private static final boolean SEP1 = false;
 
 //    /**
 //     * List转换String
