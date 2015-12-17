@@ -19,10 +19,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.rongyi.easy.settle.entity.BussinessInfo;
-import com.rongyi.settle.service.AccessService;
-
-import com.rongyi.settle.service.BussinessInfoService;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
+import com.rongyi.easy.settle.entity.BussinessInfo;
 import com.rongyi.easy.settle.entity.PaymentStatement;
 import com.rongyi.easy.settle.entity.StatementConfig;
 import com.rongyi.settle.constants.CodeEnum;
@@ -43,8 +40,11 @@ import com.rongyi.settle.constants.ConstantEnum;
 import com.rongyi.settle.constants.ResponseData;
 import com.rongyi.settle.excel.ExportDataToExcel;
 import com.rongyi.settle.excel.ExportFinanceVerifyExcel;
+import com.rongyi.settle.service.AccessService;
+import com.rongyi.settle.service.BussinessInfoService;
 import com.rongyi.settle.service.PaymentStatementService;
 import com.rongyi.settle.service.StatementConfigService;
+import com.rongyi.settle.service.impl.PaymentStatementServiceImpl.SettleConfigNotFoundException;
 import com.rongyi.settle.util.DateUtils;
 
 /**
@@ -139,7 +139,7 @@ public class PaymentStatementController extends BaseController {
 				}
 				statusList.add(ConstantEnum.STATUS_6.getCodeByte());
 				statusList.add(ConstantEnum.STATUS_11.getCodeByte());
-//				statusList.add(ConstantEnum.STATUS_12.getCodeByte());
+				// statusList.add(ConstantEnum.STATUS_12.getCodeByte());
 				List<Byte> payChannelList = new ArrayList<Byte>();
 				payChannelList.add(ConstantEnum.STATUS_3.getCodeByte());
 				payChannelList.add(ConstantEnum.STATUS_4.getCodeByte());
@@ -154,11 +154,11 @@ public class PaymentStatementController extends BaseController {
 				}
 				map.put("bussinessAccount", getUserName(request));
 				if (searchStatus == 0) {// 全部
-				// statusList.add(ConstantEnum.STATUS_1.getCodeByte());
-				// statusList.add(ConstantEnum.STATUS_3.getCodeByte());
-				// statusList.add(ConstantEnum.STATUS_4.getCodeByte());
-				// statusList.add(ConstantEnum.STATUS_5.getCodeByte());
-				// statusList.add(ConstantEnum.STATUS_12.getCodeByte());
+					// statusList.add(ConstantEnum.STATUS_1.getCodeByte());
+					// statusList.add(ConstantEnum.STATUS_3.getCodeByte());
+					// statusList.add(ConstantEnum.STATUS_4.getCodeByte());
+					// statusList.add(ConstantEnum.STATUS_5.getCodeByte());
+					// statusList.add(ConstantEnum.STATUS_12.getCodeByte());
 				} else if (searchStatus == 1) {// 待确认
 					statusList.add(ConstantEnum.STATUS_1.getCodeByte());
 					statusList.add(ConstantEnum.STATUS_3.getCodeByte());
@@ -169,12 +169,12 @@ public class PaymentStatementController extends BaseController {
 					statusList.add(ConstantEnum.STATUS_5.getCodeByte());
 					statusList.add(ConstantEnum.STATUS_7.getCodeByte());
 					statusList.add(ConstantEnum.STATUS_8.getCodeByte());
-				}else if(searchStatus == 4){//待付款
+				} else if (searchStatus == 4) {// 待付款
 					statusList.add(ConstantEnum.STATUS_6.getCodeByte());
 					statusList.add(ConstantEnum.STATUS_9.getCodeByte());
 					statusList.add(ConstantEnum.STATUS_10.getCodeByte());
 					statusList.add(ConstantEnum.STATUS_11.getCodeByte());
-				}else if(searchStatus == 5){//待付款
+				} else if (searchStatus == 5) {// 待付款
 					statusList.add(ConstantEnum.STATUS_12.getCodeByte());
 				}
 				break;
@@ -195,9 +195,12 @@ public class PaymentStatementController extends BaseController {
 				for (PaymentStatementDto paymentStatementDto : list) {
 					if (paymentStatementDto.getPayMode() != null && paymentStatementDto.getPayMode().equals(ConstantEnum.PAY_MODE_1.getCodeByte())) {// 滚动日期
 						if (paymentStatementDto.getRollType().equals(ConstantEnum.ROLL_TYPE_0.getCodeByte()) && !StringUtils.isEmpty(paymentStatementDto.getRollDay()))// 天
-							paymentStatementDto.setPredictPayTime(DateUtil.getDaysInAdd(paymentStatementDto.getCreateAt(), Integer.valueOf(paymentStatementDto.getRollDay())));
-						else if (paymentStatementDto.getRollType().equals(ConstantEnum.ROLL_TYPE_1.getCodeByte()) && !StringUtils.isEmpty(paymentStatementDto.getRollDay()))// 时
-							paymentStatementDto.setPredictPayTime(DateUtil.addHours(paymentStatementDto.getCreateAt(), Integer.valueOf(paymentStatementDto.getRollDay())));
+							paymentStatementDto
+									.setPredictPayTime(DateUtil.getDaysInAdd(paymentStatementDto.getCreateAt(), Integer.valueOf(paymentStatementDto.getRollDay())));
+						else if (paymentStatementDto.getRollType().equals(ConstantEnum.ROLL_TYPE_1.getCodeByte())
+								&& !StringUtils.isEmpty(paymentStatementDto.getRollDay()))// 时
+							paymentStatementDto
+									.setPredictPayTime(DateUtil.addHours(paymentStatementDto.getCreateAt(), Integer.valueOf(paymentStatementDto.getRollDay())));
 					}
 				}
 			} else {
@@ -271,12 +274,12 @@ public class PaymentStatementController extends BaseController {
 		statusList.add(ConstantEnum.STATUS_10.getCodeByte());
 		statusList.add(ConstantEnum.STATUS_11.getCodeByte());
 		map.put("statusList", statusList);
-		Integer payingCount = paymentStatementService.selectPageListCountForMerchant(map);//待付款
+		Integer payingCount = paymentStatementService.selectPageListCountForMerchant(map);// 待付款
 		responseMap.put("payingCount", payingCount);
 		statusList.clear();
 		statusList.add(ConstantEnum.STATUS_12.getCodeByte());
 		map.put("statusList", statusList);
-		Integer payedCount = paymentStatementService.selectPageListCountForMerchant(map);//已付款
+		Integer payedCount = paymentStatementService.selectPageListCountForMerchant(map);// 已付款
 		responseMap.put("payedCount", payedCount);
 		return ResponseData.success(responseMap);
 	}
@@ -488,11 +491,14 @@ public class PaymentStatementController extends BaseController {
 			}
 			Integer id = Integer.valueOf(map.get("id").toString());
 			paymentStatementService.generate(id, getUserName(request));
+		} catch (SettleConfigNotFoundException sce) {
+			return ResponseData.failure(CodeEnum.FIAL_CONFIG_NOT_FOUND.getCodeInt(), CodeEnum.FIAL_CONFIG_NOT_FOUND.getValueStr());
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
 		}
 		return ResponseData.success();
+
 	}
 
 	private String getFileName(String name, String date) {

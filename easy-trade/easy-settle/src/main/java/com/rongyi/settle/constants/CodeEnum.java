@@ -19,6 +19,7 @@ public enum CodeEnum {
 	FIAL_CONFIG_NO_ACCOUNT(1018009,"未查到自身账号"),
 	FIAL_CONFIG_EFFECT_START(1018010,"账号生效时间大于此刻审核时间"),
 	FIAL_SAVE_CONFIG(1018008,"保存对账单配置失败"),
+	FIAL_CONFIG_NOT_FOUND(1018011, "对账单配置没有找到"),
 	SUCCESS("0", "正常"),;
 
 	private Object code;

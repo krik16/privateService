@@ -389,6 +389,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		}
 		StatementConfig statementConfig = statementConfigService.selectById(paymentStatement.getConfigId());
 
+		if (statementConfig == null) {
+			throw new SettleConfigNotFoundException();
+		}
 		PaymentStatement paymentStatementNew = new PaymentStatement();
 		paymentStatementNew.setConfigId(statementConfig.getId());
 		paymentStatementNew.setRuleCode(statementConfig.getRuleCode());
@@ -721,5 +724,10 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 
 	private String getFileName(String name, String date) {
 		return "容易网商户对账单-" + name + "-" + date + ".xlsx";
+	}
+	
+	public static class SettleConfigNotFoundException extends Exception {
+		/**  */
+		private static final long serialVersionUID = 3667148117489758392L;
 	}
 }
