@@ -530,7 +530,7 @@
 			) AS pay_channel,
 			tuc.orig_price,
 			ROUND(tor.pay_amount / tor.code_num, 0) AS pay_amount,
-			ROUND(tor.hb_discount / tor.code_num, 0) AS hb_discount,
+			ROUND((tor.hb_discount + tor.rebate_discount)s / tor.code_num, 0) AS hb_discount,
 			ROUND(tor.score_discount / tor.code_num, 0) AS score_discount,
 			tuc.orig_price - tuc.unit_price discount,
 			tuc.user_phone,
@@ -587,7 +587,7 @@
 			) AS pay_channel,
 			tuc.orig_price,
 			ROUND(tor.pay_amount / tor.code_num, 0) AS pay_amount,
-			ROUND(tor.hb_discount / tor.code_num, 0) AS hb_discount,
+			ROUND((tor.hb_discount + tor.rebate_discount) / tor.code_num, 0) AS hb_discount,
 			ROUND(tor.score_discount / tor.code_num, 0) AS score_discount,
 			tuc.orig_price - tuc.unit_price discount,
 			tuc.user_phone,
@@ -666,7 +666,7 @@
 			,MAX(UC.orig_price) AS coupon_price
 			,SUM(UC.orig_price) AS total_price
 			,SUM(UC.orig_price - UC.unit_price) AS total_discount
-			,SUM(IFNULL((CO.hb_discount / COI.unit_count), 0)) AS total_hb
+			,SUM(IFNULL(((CO.hb_discount + CO.rebate_discount) / COI.unit_count), 0)) AS total_hb
 			,SUM(IFNULL((CO.score_discount / COI.unit_count), 0)) AS total_score
 		FROM ry_trade.trade_user_code UC
 			LEFT JOIN
@@ -696,7 +696,7 @@
 			,MAX(UC.orig_price) AS coupon_price
 			,SUM(UC.orig_price) AS total_price
 			,SUM(UC.orig_price - UC.unit_price) AS total_discount
-			,SUM(IFNULL((CO.hb_discount / COI.unit_count), 0)) AS total_hb
+			,SUM(IFNULL(((CO.hb_discount + CO.rebate_discount) / COI.unit_count), 0)) AS total_hb
 			,SUM(IFNULL((CO.score_discount / COI.unit_count), 0)) AS total_score
 		FROM ry_trade.trade_user_code UC
 			LEFT JOIN
