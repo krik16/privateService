@@ -62,4 +62,9 @@ public class FilialeShopSearchParam implements Serializable {
 	public void setPageSize(Integer pageSize) {
 		this.pageSize = pageSize;
 	}
+	@Override
+	public String toString() {
+		return "FilialeShopSearchParam [id=" + id + ", name=" + name + ", zoneId=" + zoneId + ", currentPage="
+				+ currentPage + ", pageSize=" + pageSize + "]";
+	}
 }
