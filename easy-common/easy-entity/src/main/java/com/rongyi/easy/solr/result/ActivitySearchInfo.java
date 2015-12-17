@@ -29,7 +29,8 @@ public class ActivitySearchInfo implements Serializable {
 	private String thumbnail; //缩略图
 	private List<String> carouselImg; //详情图
 	private String vistedNum; //访问量
-	private String userQuota; //这是啥 这里你们加的，你问我？（一脸无辜）用户限购数量
+	@Deprecated
+	private String userQuota; //每人限购数（废弃）
 	private String grouponPrice; //现价
 	private String grouponOriginal; //原价
 	private String grouponNum; //优惠券数量
@@ -38,10 +39,10 @@ public class ActivitySearchInfo implements Serializable {
 	private String useRestriction; //使用限制
 	private String useMode; //使用方式
 	private String grouponStyle; //这是啥 优惠券类型 0是优惠券，不传就是普通优惠
-	private Integer limitPublishCount; //貌似不要
-	private Integer limitUseCount; //貌似不要
-	private Integer limitCount; //貌似不要
-	private List<Integer> afterSaleService;//貌似不要
+	private Integer limitPublishCount; //每天限发放数
+	private Integer limitUseCount; //每人限用数
+	private Integer limitCount; //每人限购数
+	private List<Integer> afterSaleService;//售后服务
 
 	private Integer payDownTime; //支付剩余时间(单位是秒)
 
@@ -212,10 +213,12 @@ public class ActivitySearchInfo implements Serializable {
 		this.vistedNum = vistedNum;
 	}
 
+	@Deprecated
 	public String getUserQuota() {
 		return userQuota;
 	}
 
+	@Deprecated
 	public void setUserQuota(String userQuota) {
 		this.userQuota = userQuota;
 	}
