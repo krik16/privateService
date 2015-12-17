@@ -158,7 +158,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 					// 检查是否需要发送对账单邮件
 					if (ConstantEnum.STATUS_1.getCodeInt().equals(status) || ConstantEnum.STATUS_3.getCodeInt().equals(status)) {
 						PaymentStatementDto paymentStatementDto = paymentStatementMapper.searchDtoById(ids.get(i));
-						sendEmailUnit.sendMail(paymentStatementDto);
+						sendEmailUnit.sendMailNysn(paymentStatementDto);
 					}
 
 				}
