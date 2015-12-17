@@ -23,6 +23,7 @@ import com.rongyi.rss.shop.IShopService;
 import com.rongyi.settle.constants.CodeEnum;
 import com.rongyi.settle.constants.ConstantEnum;
 import com.rongyi.settle.service.ConfigShopService;
+import com.rongyi.settle.util.CollectionUtil;
 import com.rongyi.settle.web.controller.vo.UserInfoVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -323,7 +324,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                         accounts += userInfoVo.getUserAccount();
 					}
 					else {
-						userIds += ", "+ userInfoVo.getId();
+						userIds += ","+ userInfoVo.getId();
                         accounts += "," + userInfoVo.getUserAccount();
 					}
 				}
@@ -345,19 +346,17 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                     allUserAccount.add(user.getUserAccount());
                 }
             }
-            String realUser = allUserId.toString();
-            String realAccount = allUserAccount.toString();
 			if (linkShopOp.intValue()==0){
                 shopConfig = new ConfigShop();
                 shopConfig.setShopId(id);
                 if (userLists==null && userAccounts==null) {//关联全部
                     if (CollectionUtils.isNotEmpty(allUserId)){
-                        logger.info("===================>>>>>>>>>>>>>>>>> realUser: "+ realUser+" realAccount: "+realAccount);
+                        logger.info("===================>>>>>>>>>>>>>>>>> realUser: "+ allUserId+" realAccount: "+allUserId.toString());
                     }
-                    shopConfig.setUserList(realUser.substring(1,realUser.length()-1));
-                    shopConfig.setAccountList(realAccount.substring(1, realAccount.length() - 1));
-                    shopConfig.setRealUserList(realUser.substring(1,realUser.length()-1));
-                    shopConfig.setRealAccountList(realAccount.substring(1, realAccount.length() - 1));
+                    shopConfig.setUserList(CollectionUtil.listToString(allUserId, ","));
+                    shopConfig.setAccountList(CollectionUtil.listToString(allUserAccount, ","));
+                    shopConfig.setRealUserList(CollectionUtil.listToString(allUserId, ","));
+                    shopConfig.setRealAccountList(CollectionUtil.listToString(allUserAccount, ","));
                 }else {
                     shopConfig.setUserList(userLists);
                     shopConfig.setRealUserList(userLists);
@@ -373,10 +372,8 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                     allUserAccount.removeAll(Arrays.asList(userAccounts.split(",")));
 				}
 				if (CollectionUtils.isNotEmpty(allUserId)) {
-                    realUser = allUserId.toString();
-                    realAccount = allUserAccount.toString();
-					shopConfig.setRealUserList(realUser.substring(1,realUser.length()-1));
-                    shopConfig.setRealAccountList(realAccount.substring(1, realAccount.length() - 1));
+					shopConfig.setRealUserList(CollectionUtil.listToString(allUserId, ","));
+                    shopConfig.setRealAccountList(CollectionUtil.listToString(allUserAccount, ","));
 				}
 			}else {
 				logger.info(" linkShopOp is error:" +linkShopOp);

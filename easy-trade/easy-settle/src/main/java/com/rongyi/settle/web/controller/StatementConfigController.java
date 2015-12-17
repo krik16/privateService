@@ -589,6 +589,7 @@ public class StatementConfigController extends BaseController{
 			searchMap.put("sort", "noSort");// 暂未定排序字段
 			Map resultMap;
 			List<ShopVO> shopVOs = null;
+			int count = 0;
 			switch (params.getType()){
 				case 0:
 					if (StringUtils.isNotBlank(params.getShopId()) && !params.getId().equals(params.getShopId())){
@@ -638,6 +639,7 @@ public class StatementConfigController extends BaseController{
 			resultMap = roaShopService.getShops(searchMap, currpage, pagesize);
 			if (shopVOs == null) {
 				shopVOs = (List<ShopVO>) resultMap.get("list");
+				count = resultMap.containsKey("totalCount") ? Integer.valueOf(resultMap.get("totalCount").toString()) : 0;
 			}
 			List<RelevanceVO> reList = new ArrayList<>();
 			if (CollectionUtils.isNotEmpty(shopVOs)) {
@@ -652,7 +654,6 @@ public class StatementConfigController extends BaseController{
 					reList.add(shop);
 				}
 			}
-			int count = resultMap.containsKey("totalCount") ? Integer.valueOf(resultMap.get("totalCount").toString()) : 0;
 			result = ResponseData.success(reList, currpage, pagesize, count);
 		}catch (Exception e){
 			e.printStackTrace();
