@@ -316,7 +316,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 		String accounts = "";
 		if (isOneself==1){
 			//自身
-			List<UserInfoVo> userInfoVos =  getAccountInfoByParam(isOneself, Integer.valueOf(businessType), null, id);
+			List<UserInfoVo> userInfoVos =  getAccountInfoByParam(isOneself, Integer.valueOf(businessType), null, id, null);
 			if (CollectionUtils.isNotEmpty(userInfoVos)){
 				for (UserInfoVo userInfoVo : userInfoVos){
 					if (StringUtils.isBlank(userIds)){
@@ -337,7 +337,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 				logger.info("================== 查自身 没有账户");
 			}
 		}else if (isOneself==0){
-            List<UserInfoVo> userInfoVos =  getAccountInfoByParam(isOneself, null, 1, id);
+            List<UserInfoVo> userInfoVos =  getAccountInfoByParam(isOneself, null, 1, id, null);
             List<String> allUserId = new ArrayList<>();
             List<String> allUserAccount = new ArrayList<>();
             if (CollectionUtils.isNotEmpty(userInfoVos)){
@@ -455,9 +455,12 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 	}
 
 	@Override
-	public List<UserInfoVo> getAccountInfoByParam(Integer isOneself, Integer type, Integer guideType, String id ){
+	public List<UserInfoVo> getAccountInfoByParam(Integer isOneself, Integer type, Integer guideType, String id, String userAccount ){
 		Map<String, Object> paramsMap = new HashMap<>();
 		paramsMap.put("isDisabled", 0);
+        if (StringUtils.isNotBlank(userAccount)){
+            paramsMap.put("userAccount", userAccount);
+        }
 		if (isOneself==1){
 			switch (type){
 				case 0: paramsMap.put("shopId", id); paramsMap.put("identity", 4); break;
@@ -482,7 +485,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 		}
 		List<UserInfo> userInfos = iUserInfoService.getFullUserInfoByRelevanceId(paramsMap);
 		List<UserInfoVo> userAccounts = new ArrayList<>();
-		if (CollectionUtils.isNotEmpty(userInfos)){
+        if (CollectionUtils.isNotEmpty(userInfos)){
 			for (UserInfo userInfo :userInfos){
 				UserInfoVo userInfoVo = new UserInfoVo();
 				userInfoVo.setId(userInfo.getId());
