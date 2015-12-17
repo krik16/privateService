@@ -350,7 +350,7 @@
                 and pbc.effect_end_time > #{effectStartTime}
             </if>
             <if test="shopMysqlId!=null">
-                and si.id=#{shopId}
+                and si.id=#{shopMysqlId}
             </if>
             <if test="shopId!=null">
                 and si.shop_mid=#{shopId}
