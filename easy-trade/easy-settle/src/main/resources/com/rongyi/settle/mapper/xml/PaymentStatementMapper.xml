@@ -650,7 +650,7 @@
 		<result column="pay_amount" property="payAmount" jdbcType="DOUBLE" />
 		<result column="coupon_discount" property="hbDiscount" jdbcType="DOUBLE" />
 		<result column="score_discount" property="scoreDiscount" jdbcType="DOUBLE" />
-		<result column="payment_channel" property="paymentChannel" jdbcType="VARCHAR" />
+		<result column="pay_channel" property="paymentChannel" jdbcType="VARCHAR" />
 		<result column="payment_time" property="paymentTime" jdbcType="TIMESTAMP" />
 		<result column="delivery_time" property="deliveryTime" jdbcType="TIMESTAMP" />
 		<result column="receipt_time" property="receiptTime" jdbcType="TIMESTAMP" />
