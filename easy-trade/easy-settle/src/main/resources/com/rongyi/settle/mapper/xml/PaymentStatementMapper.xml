@@ -847,7 +847,7 @@
 				LEFT JOIN ry_osm.order_event H4 ON A.order_no = H4.order_no AND H4.`status` = 4
 				LEFT JOIN ry_rpb.payment_order O ON A.order_no = O.order_no AND O.trade_type = 0
 				LEFT JOIN ry_data.m_mcmc_commodity N ON B.commodity_mid = N.mid
-				LEFT JOIN ry_user.malllife_user_address MUA ON MUA.user_id = A.buyer_id
+				LEFT JOIN ry_user.malllife_user_info MUA ON MUA.id = A.buyer_id
 		WHERE H3.create_at BETWEEN #{startTime,jdbcType=TIMESTAMP} AND #{endTime,jdbcType=TIMESTAMP}
 			AND A.`status` &gt; 2
 			AND A.is_pay_va = 0
