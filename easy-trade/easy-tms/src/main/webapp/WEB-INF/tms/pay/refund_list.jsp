@@ -29,7 +29,7 @@
 								<td><a href="${ctx}/orderManager/orderInfo?orderId=${item.orderId}&userId=${item.orderUserId}&module=order&type=tradeDetail" target="_parent"  style="text-decoration:underline" >${item.orderNo}</a></td>
 							</c:when>
 							<c:otherwise>
-								<td>${item.orderNo}</a></td>
+								<td><a>${item.orderNo}</a></td>
 							</c:otherwise>
 						</c:choose>
 						<c:choose>

@@ -195,7 +195,7 @@ public class StatementConfigController extends BaseController{
 			statuses.add(ConstantEnum.CONFIG_STATUS_1.getCodeByte());
 			statuses.add(ConstantEnum.CONFIG_STATUS_0.getCodeByte());
 			Map<String,Object> checkMap = statementConfigService.validateIsExist(statementConfig, statuses, linkIdMap, linkAccountMap);
-			LOGGER.info("=========================== checkMap"+checkMap);
+//			LOGGER.info("=========================== checkMap"+checkMap);
 			boolean checkResult = (boolean) checkMap.get("result");
 			if(checkResult){
 				if (checkMap.containsKey("errorNo")){
@@ -589,6 +589,7 @@ public class StatementConfigController extends BaseController{
 			searchMap.put("sort", "noSort");// 暂未定排序字段
 			Map resultMap;
 			List<ShopVO> shopVOs = null;
+			int count = 0;
 			switch (params.getType()){
 				case 0:
 					if (StringUtils.isNotBlank(params.getShopId()) && !params.getId().equals(params.getShopId())){
@@ -608,15 +609,17 @@ public class StatementConfigController extends BaseController{
 						searchMap.put("filiale_id", new ObjectId(params.getId()));
 					else
 						break;
-					List<ShopEntity> shopEntities = iShopService.searchShop(searchMap, currpage, pagesize);
-					List<ObjectId> shopIds = null;
+					if (StringUtils.isNotBlank(params.getZoneId())){
+						searchMap.put("zone_id", params.getZoneId());
+					}
+					List<ShopEntity> shopEntities = iShopService.searchShop(searchMap, currpage-1, pagesize);
+					count = iShopService.searchShopCount(searchMap).intValue();
+					List<ObjectId> shopIds;
 					if (CollectionUtils.isNotEmpty(shopEntities)){
 						shopIds = new ArrayList<>();
 						for (ShopEntity shopEntity : shopEntities){
 							shopIds.add(shopEntity.getId());
 						}
-					}
-					if (CollectionUtils.isNotEmpty(shopIds)){
 						shopVOs = roaShopService.getShopsByIds(shopIds);
 					}
 					break;
@@ -635,8 +638,9 @@ public class StatementConfigController extends BaseController{
 			}
 
 			resultMap = roaShopService.getShops(searchMap, currpage, pagesize);
-			if (CollectionUtils.isEmpty(shopVOs)) {
+			if (shopVOs == null) {
 				shopVOs = (List<ShopVO>) resultMap.get("list");
+				count = resultMap.containsKey("totalCount") ? Integer.valueOf(resultMap.get("totalCount").toString()) : 0;
 			}
 			List<RelevanceVO> reList = new ArrayList<>();
 			if (CollectionUtils.isNotEmpty(shopVOs)) {
@@ -651,7 +655,6 @@ public class StatementConfigController extends BaseController{
 					reList.add(shop);
 				}
 			}
-			int count = resultMap.containsKey("totalCount") ? Integer.valueOf(resultMap.get("totalCount").toString()) : 0;
 			result = ResponseData.success(reList, currpage, pagesize, count);
 		}catch (Exception e){
 			e.printStackTrace();

@@ -3,6 +3,8 @@ package com.rongyi.settle.unit;
 
 import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.common.util.DateUtil;
+import com.rongyi.easy.osm.entity.OrderFormEntity;
+import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
 import com.rongyi.settle.mail.MailService;
 import com.rongyi.settle.util.DateUtils;
@@ -33,6 +35,28 @@ public class SendEmailUnit {
 
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SendEmailUnit.class);
+
+    /**
+     * @Description: 异步发送邮件
+     * @param:
+     * @Author:  柯军
+     **/
+
+    public void sendMailNysn(final PaymentStatementDto paymentStatementDto) {
+        final Thread thread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    sendMail(paymentStatementDto);
+                } catch (Exception e) {
+                    LOGGER.error("对账单邮件发送失败");
+                    e.printStackTrace();
+                }
+
+            }
+        };
+        thread.start();
+    }
 
     public void sendMail(PaymentStatementDto paymentStatementDto) {
         StringBuffer sb = new StringBuffer();

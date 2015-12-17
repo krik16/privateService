@@ -185,6 +185,10 @@ function morePayClick(){
 		_util.cmsTip("您只能选择一种打款方式进行批量付款");
 		return;
 	}
+	if(payChannel==1){
+		_util.cmsTip("抱歉！微信不允许批量退款");
+		return;
+	}
 	if (ids.length <= 0) {
 		_util.cmsTip("您至少选中一条付款明细");
 		return;

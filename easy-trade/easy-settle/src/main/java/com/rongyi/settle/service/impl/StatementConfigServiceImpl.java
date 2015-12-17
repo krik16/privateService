@@ -11,7 +11,6 @@ package com.rongyi.settle.service.impl;
 import java.util.*;
 
 import com.rongyi.easy.bsoms.entity.UserInfo;
-import com.rongyi.easy.entity.ShopEntity;
 import com.rongyi.easy.roa.entity.MallEntity;
 import com.rongyi.easy.roa.vo.ShopPositionVO;
 import com.rongyi.easy.roa.vo.ShopVO;
@@ -20,12 +19,15 @@ import com.rongyi.easy.settle.vo.ConfigShopVO;
 import com.rongyi.rss.bsoms.IUserInfoService;
 import com.rongyi.rss.roa.ROAMallService;
 import com.rongyi.rss.roa.ROAShopService;
+import com.rongyi.rss.shop.IShopService;
 import com.rongyi.settle.constants.CodeEnum;
 import com.rongyi.settle.constants.ConstantEnum;
 import com.rongyi.settle.service.ConfigShopService;
+import com.rongyi.settle.util.CollectionUtil;
 import com.rongyi.settle.web.controller.vo.UserInfoVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +75,8 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 
 	@Autowired
 	private ConfigShopService configShopService;
+    @Autowired
+    private IShopService iShopService;
 
 	@Override
 	public List<StatementConfigVO> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
@@ -230,13 +234,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 						return ReMap;
 					}
 					isOneself = 1;
-					ConfigShop configShop = convertToShopConfig(isOneself, bussinessId, bussinessType,linkShopOp, null,  null, shopConfigs);
-//					if (configShop==null){
-//						ReMap.put("result", true);
-//						ReMap.put("errorMsg", CodeEnum.FIAL_CONFIG_NO_ACCOUNT.getValueStr());
-//						ReMap.put("errorNo", CodeEnum.FIAL_CONFIG_NO_ACCOUNT.getCodeInt());
-//						return ReMap;
-//					}
+					convertToShopConfig(isOneself, bussinessId, bussinessType,linkShopOp, null,  null, shopConfigs);
 				}
 				//2、全部店铺
 				List<ShopVO> shopVOs = getShopIdByParam(bussinessType, bussinessId);
@@ -261,12 +259,12 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 					}
 					isOneself = 1;
 					ConfigShop configShop = convertToShopConfig(isOneself, bussinessId, bussinessType,linkShopOp, null,  null, shopConfigs);
-//					if (configShop==null){
-//						ReMap.put("result", true);
-//						ReMap.put("errorMsg", CodeEnum.FIAL_CONFIG_NO_ACCOUNT.getValueStr());
-//						ReMap.put("errorNo", CodeEnum.FIAL_CONFIG_NO_ACCOUNT.getCodeInt());
-//						return ReMap;
-//					}
+					if (configShop==null){
+						ReMap.put("result", true);
+						ReMap.put("errorMsg", CodeEnum.FIAL_CONFIG_NO_ACCOUNT.getValueStr());
+						ReMap.put("errorNo", CodeEnum.FIAL_CONFIG_NO_ACCOUNT.getCodeInt());
+						return ReMap;
+					}
 					if (linkId!=null) {
 						Set<String> shopIds = linkId.keySet();
 						for (String shopId : shopIds){
@@ -326,7 +324,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                         accounts += userInfoVo.getUserAccount();
 					}
 					else {
-						userIds += ", "+ userInfoVo.getId();
+						userIds += ","+ userInfoVo.getId();
                         accounts += "," + userInfoVo.getUserAccount();
 					}
 				}
@@ -348,19 +346,17 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                     allUserAccount.add(user.getUserAccount());
                 }
             }
-            String realUser = allUserId.toString();
-            String realAccount = allUserAccount.toString();
 			if (linkShopOp.intValue()==0){
                 shopConfig = new ConfigShop();
                 shopConfig.setShopId(id);
                 if (userLists==null && userAccounts==null) {//关联全部
                     if (CollectionUtils.isNotEmpty(allUserId)){
-                        logger.info("===================>>>>>>>>>>>>>>>>> realUser: "+ realUser+" realAccount: "+realAccount);
+                        logger.info("===================>>>>>>>>>>>>>>>>> realUser: "+ allUserId+" realAccount: "+allUserId.toString());
                     }
-                    shopConfig.setUserList(realUser.substring(1,realUser.length()-1));
-                    shopConfig.setAccountList(realAccount.substring(1, realAccount.length() - 1));
-                    shopConfig.setRealUserList(realUser.substring(1,realUser.length()-1));
-                    shopConfig.setRealAccountList(realAccount.substring(1, realAccount.length() - 1));
+                    shopConfig.setUserList(CollectionUtil.listToString(allUserId, ","));
+                    shopConfig.setAccountList(CollectionUtil.listToString(allUserAccount, ","));
+                    shopConfig.setRealUserList(CollectionUtil.listToString(allUserId, ","));
+                    shopConfig.setRealAccountList(CollectionUtil.listToString(allUserAccount, ","));
                 }else {
                     shopConfig.setUserList(userLists);
                     shopConfig.setRealUserList(userLists);
@@ -376,8 +372,8 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                     allUserAccount.removeAll(Arrays.asList(userAccounts.split(",")));
 				}
 				if (CollectionUtils.isNotEmpty(allUserId)) {
-					shopConfig.setRealUserList(realUser.substring(1,realUser.length()-1));
-                    shopConfig.setRealAccountList(realAccount.substring(1, realUser.length() - 1));
+					shopConfig.setRealUserList(CollectionUtil.listToString(allUserId, ","));
+                    shopConfig.setRealAccountList(CollectionUtil.listToString(allUserAccount, ","));
 				}
 			}else {
 				logger.info(" linkShopOp is error:" +linkShopOp);
@@ -392,7 +388,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 	@Override
 	public boolean validateNeedPay(String shopId, String userId, Integer guideType) {
 		Map<String, Object> map = new HashMap<>();
-		map.put("shopId", shopId);
+		map.put("shopMysqlId", shopId);
 		map.put("status", ConstantEnum.CONFIG_STATUS_1.getCodeInt());
 		map.put("nowTime", new Date());
 		map.put("userId", userId);
@@ -427,7 +423,20 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 			case 0: searchMap.put("id", bussinessId); break;
 			case 1: searchMap.put("mallId", bussinessId); break;
 			case 2: searchMap.put("brandId", bussinessId); break;
-			case 3: searchMap.put("filialeId", bussinessId); break;
+			case 3:
+                searchMap.put("filiale_id", new ObjectId(bussinessId));
+                List<com.rongyi.easy.shop.entity.ShopEntity> shopEntities = iShopService.searchShop(searchMap, 0, 2000);
+                List<ObjectId> shopIds = null;
+                if (CollectionUtils.isNotEmpty(shopEntities)){
+                    shopIds = new ArrayList<>();
+                    for (com.rongyi.easy.shop.entity.ShopEntity shopEntity : shopEntities){
+                        shopIds.add(shopEntity.getId());
+                    }
+                }
+                if (CollectionUtils.isNotEmpty(shopIds)){
+                    shopVOs = roaShopService.getShopsByIds(shopIds);
+                }
+                return shopVOs;
 			case 4:
 				List<MallEntity> mallEntities = rOAMallService.getMallEntitysByGroupId(bussinessId);
 				List<String> mallIds = new ArrayList<>();
