@@ -324,6 +324,7 @@
         from  payment_bill_config pbc
         join biz_info bi on pbc.id=bi.config_id
         join config_shop  sc on pbc.id=sc.config_id
+        join ry_rmmm.shop_info si on sc.shop_id=si.shop_mid
         <where>
             <if test="cooperateType!=null">
                 and pbc.cooperate_type=#{cooperateType}
@@ -349,7 +350,7 @@
                 and pbc.effect_end_time > #{effectStartTime}
             </if>
             <if test="shopId!=null">
-                and sc.shop_id=#{shopId}
+                and si.id=#{shopId}
             </if>
             <if test="userId!=null">
                 and sc.real_user_list like concat('%', #{userId}, '%')
