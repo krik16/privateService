@@ -1,15 +1,14 @@
 package com.rongyi.tms.web.controller;
 
 import com.rongyi.core.bean.ResponseResult;
+import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.core.constant.PayEnum;
 import com.rongyi.core.constant.PaymentEventType;
 import com.rongyi.easy.mq.MessageEvent;
-import com.rongyi.easy.osm.entity.OrderFormEntity;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
 import com.rongyi.easy.tms.vo.TradeVO;
-import com.rongyi.easy.usercenter.entity.MalllifeUserInfoEntity;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.rss.mallshop.order.ROAOrderFormService;
 import com.rongyi.rss.rpb.IRpbService;
@@ -19,8 +18,6 @@ import com.rongyi.tms.mq.Sender;
 import com.rongyi.tms.service.PayService;
 import com.rongyi.tms.service.PaymentStatementService;
 import com.rongyi.tms.service.RefundService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +66,9 @@ public class PayController extends BaseController {
 
     @Autowired
     PaymentStatementService paymentStatementService;
+
+    @Autowired
+    PropertyConfigurer propertyConfigurer;
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String search(ModelMap model, String currentMallId, HttpServletRequest request, HttpServletResponse response, HttpSession session, String currpage) {
@@ -248,6 +248,7 @@ public class PayController extends BaseController {
         ResponseResult result = new ResponseResult();
         try {
             Map<String, Object> resultMap = new HashMap<String, Object>();
+            //对账单付款
             if (PayEnum.STATEMENT_ONE.getCode().equals(operateType) || PayEnum.STATEMENT_MORE.getCode().equals(operateType)) {
                 resultMap = paymentStatementService.validatePay(ids, operateType);
             } else {
@@ -274,7 +275,7 @@ public class PayController extends BaseController {
     @SuppressWarnings("unchecked")
     @RequestMapping("/pay")
     public String pay(@RequestParam String paymentId, @RequestParam Integer type, @RequestParam Integer payChannel, Model model) {
-        LOGGER.info("================支付开始====================");
+        LOGGER.info("支付开始 pay,paymentId={}，type={}，payChannel={}",paymentId,type,payChannel);
         try {
             MessageEvent messageEvent = getMessageEvent(type, payChannel, paymentId, getDesc(type));
             String result = sender.convertSendAndReceive(messageEvent);
@@ -403,7 +404,6 @@ public class PayController extends BaseController {
         // result.setMessage("验证用户账号是否合法失败");
         // e.printStackTrace();
         // }
-        // TODO test
         result.setSuccess(true);
         return result;
     }
@@ -492,5 +492,12 @@ public class PayController extends BaseController {
         }
 
         return responseResult;
+    }
+
+    private List<TradeVO> validateAllowOpPay(List<TradeVO> list){
+        for (TradeVO tradeVO : list){
+//            if(propertyConfigurer.getProperty("RE_PAY_TIME") != )
+        }
+        return list;
     }
 }

@@ -73,48 +73,58 @@ public class PCWebPageAlipayController extends BaseController {
 	 */
 	@RequestMapping("/pay_notify_url.htm")
 	public String notifyPay(Model model, String notify_time, String notify_type, String notify_id, String sign_type, String sign, String batch_no, String pay_user_id, String pay_user_name,
-			String pay_account_no, String success_details) {
+			String pay_account_no, String success_details,String fail_details) {
 		PaymentLogInfo result = paymentLogInfoService.selectByNotifyId(notify_id);
 		if (result != null)
 			return null;
-		LOGGER.info("支付宝打款成功异步通知开始,success_details={}", success_details);
-		if(success_details == null){
-			throw  new RuntimeException("支付宝打款操作未成功，忽略此次通知，请检查支付宝账号和姓名是否正确匹配，确认后请重新操作");
-		}
 		List<PaymentEntity> allList = new ArrayList<PaymentEntity>();
-		String[] detailList = success_details.split("\\|");
-		if (detailList != null && detailList.length > 0) {
-			for (String details : detailList) {
-				PaymentLogInfo paymentLogInfo = new PaymentLogInfo();
-				parsPayDetail(paymentLogInfo, details);
-				paymentLogInfo.setNotifyId(notify_id);
-				paymentLogInfo.setNotifyType(notify_type);
-				paymentLogInfo.setNotifyTime(DateUtil.stringToDate(notify_time));
-				paymentLogInfo.setReplayFlag(2);
-				paymentLogInfo.setResult("success");
-				paymentLogInfo.setSign(sign);
-				paymentLogInfo.setTradeMode("1");
-				paymentLogInfo.setSignType(sign_type);
-				paymentLogInfo.setTimeEnd(DateUtil.getCurrDateTime());
-				paymentLogInfo.setBuyer_type(1);
-				List<PaymentEntity> paymentList = paymentService.updateListStatusBypayNo(paymentLogInfo.getOutTradeNo(), null, Constants.PAYMENT_STATUS.STAUS2);// 修改打款状态(提现或打款给卖家)
-				if (paymentList != null && !paymentList.isEmpty()) {
-					allList.add(paymentList.get(0));
-					paymentLogInfo.setTradeType(paymentList.get(0).getTradeType());
-					if (paymentList.get(0).getTradeType() == Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE3) {
-						paymentLogInfo.setEventType(Constants.EVENT_TYPE.EVENT_TYPE8);
-					} else if (paymentList.get(0).getTradeType() == Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE7) {
-						paymentLogInfo.setEventType(Constants.EVENT_TYPE.EVENT_TYPE9);
+		if(success_details != null){
+			LOGGER.info("支付宝打款成功记录,success_details={}", success_details);
+			String[] detailList = success_details.split("\\|");
+			if (detailList != null && detailList.length > 0) {
+				for (String details : detailList) {
+					PaymentLogInfo paymentLogInfo = new PaymentLogInfo();
+					parsPayDetail(paymentLogInfo, details);
+					paymentLogInfo.setNotifyId(notify_id);
+					paymentLogInfo.setNotifyType(notify_type);
+					paymentLogInfo.setNotifyTime(DateUtil.stringToDate(notify_time));
+					paymentLogInfo.setReplayFlag(2);
+					paymentLogInfo.setResult("success");
+					paymentLogInfo.setSign(sign);
+					paymentLogInfo.setTradeMode("1");
+					paymentLogInfo.setSignType(sign_type);
+					paymentLogInfo.setTimeEnd(DateUtil.getCurrDateTime());
+					paymentLogInfo.setBuyer_type(1);
+					List<PaymentEntity> paymentList = paymentService.updateListStatusBypayNo(paymentLogInfo.getOutTradeNo(), null, Constants.PAYMENT_STATUS.STAUS2);// 修改打款状态(提现或打款给卖家)
+					if (paymentList != null && !paymentList.isEmpty()) {
+						allList.add(paymentList.get(0));
+						paymentLogInfo.setTradeType(paymentList.get(0).getTradeType());
+						if (paymentList.get(0).getTradeType() == Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE3) {
+							paymentLogInfo.setEventType(Constants.EVENT_TYPE.EVENT_TYPE8);
+						} else if (paymentList.get(0).getTradeType() == Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE7) {
+							paymentLogInfo.setEventType(Constants.EVENT_TYPE.EVENT_TYPE9);
+						}
 					}
-				}
 
-				paymentLogInfoService.insertGetId(paymentLogInfo);
+					paymentLogInfoService.insertGetId(paymentLogInfo);
+				}
+			}
+		}
+		if(fail_details != null){
+			LOGGER.info("支付宝打款失败记录,失败账号fail_details={}", fail_details);
+			String[] failDetailsList = fail_details.split("\\|");
+			if (failDetailsList != null && failDetailsList.length > 0) {
+				for (String details : failDetailsList) {
+					PaymentLogInfo paymentLogInfo = new PaymentLogInfo();
+					parsPayDetail(paymentLogInfo, details);
+					paymentService.updateListStatusBypayNo(paymentLogInfo.getOutTradeNo(), null, Constants.PAYMENT_STATUS.STAUS0);// 修改打款状态(提现或打款给卖家)
+				}
 			}
 		}
 		if (!allList.isEmpty()) {
 			paySuccessToMessage(allList, allList.get(0).getTradeType());
 		}
-		LOGGER.info("支付宝打款成功异步通知结束");
+		LOGGER.info("支付宝打款异步通知结束");
 		return "payManager/notify";
 	}
 
@@ -216,9 +226,7 @@ public class PCWebPageAlipayController extends BaseController {
 						paymentLogInfo.setBuyer_type(0);// 买家账号
 						paymentLogInfo.setEventType(Constants.EVENT_TYPE.EVENT_TYPE4);
 						PaymentEntity refundPaymentEntity = getPaymentByPayTradeNo(paymentLogInfo.getTrade_no(), batch_no);
-						if ("REFUND_TRADE_FEE_ERROR".equals(details[0])) {
-							LOGGER.info("退款状态返回异常，此退款未成功，忽略该笔退款，tradeNo={}", details[0]);
-						} else if (refundPaymentEntity != null) {
+						if (refundPaymentEntity != null) {
 							paymentLogInfo.setTradeType(refundPaymentEntity.getTradeType());
 							paymentLogInfo.setOutTradeNo(refundPaymentEntity.getPayNo());
 							paymentLogInfoService.insertGetId(paymentLogInfo);
@@ -231,6 +239,8 @@ public class PCWebPageAlipayController extends BaseController {
 						} else {
 							LOGGER.info("订单不存在，退款状态更新失败,tradeNo={},batchNo={}", paymentLogInfo.getTrade_no(), batch_no);
 						}
+					}else if(details != null){//退款失败处理，更新付款状态为待付款
+						LOGGER.info("支付宝退款失败，不更新退款状态,result_details={}",result_details);
 					}
 				}
 

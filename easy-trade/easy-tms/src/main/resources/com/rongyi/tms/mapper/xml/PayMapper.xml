@@ -20,6 +20,7 @@
         <result column="pay_channel" property="payChannel" jdbcType="INTEGER"/>
         <result column="draw_apply_id" property="drawApplyId" jdbcType="INTEGER"/>
         <result column="guide_type" property="guideType" jdbcType="INTEGER"/>
+        <result column="op_time" property="opTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
         `payment_order`.`id` AS `id`,`payment_order`.`create_at` AS `order_time`,`payment_order`.`status` AS
@@ -29,10 +30,13 @@
         `trade_type`,`payment_order`.`pay_channel` AS `pay_channel`,`draw_apply`.`id` AS
         `draw_apply_id`,`draw_apply`.`shop_id` AS `shop_id`,`draw_apply`.`shop_name` AS
         `shop_name`,`draw_apply`.`mall_id` AS `mall_id`,`draw_apply`.`mall_name` AS
-        `mall_name`,`draw_apply`.`seller_account` AS `seller_account`,`draw_apply`.`seller_name` AS `seller_name`,guide_type
+        `mall_name`,`draw_apply`.`seller_account` AS `seller_account`,`draw_apply`.`seller_name` AS `seller_name`,guide_type,
+         op.op_time
     </sql>
     <sql id="Base_from">
-        (`payment_order` left join `draw_apply` on((`draw_apply`.`draw_no` = `payment_order`.`order_no`)))
+        payment_order
+        left join draw_apply on draw_apply.draw_no = payment_order.order_no
+        left join payment_order_op op on op.payment_id = payment_order.id
     </sql>
     <sql id="trade_list_where_clause">
         <!-- 订单号 -->

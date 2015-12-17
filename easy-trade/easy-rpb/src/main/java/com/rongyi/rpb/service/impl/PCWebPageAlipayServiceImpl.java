@@ -1,7 +1,6 @@
 package com.rongyi.rpb.service.impl;
 
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
+
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.core.constant.PayEnum;
@@ -9,17 +8,22 @@ import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
+import com.rongyi.easy.rpb.domain.PaymentOrderOp;
 import com.rongyi.rpb.common.pay.ali.sign.AlipayConfig;
 import com.rongyi.rpb.common.pay.ali.util.AlipaySubmit;
+import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.ConstantUtil;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.nsynchronous.OrderFormNsyn;
 import com.rongyi.rpb.service.PCWebPageAlipayService;
 import com.rongyi.rpb.service.PaymentLogInfoService;
+import com.rongyi.rpb.service.PaymentOrderOpService;
 import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rss.mallshop.user.ROAUserService;
 
 import org.drools.core.util.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,6 +56,10 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 	@Autowired
 	OrderFormNsyn orderFormNsyn;
 
+	@Autowired
+	PaymentOrderOpService paymentOrderOpService;
+
+
 	@Override
 	public Map<String, Object> getOnePayInfo(String payNo, String totalFee, String buyerEmail, String buyerName, String desc) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -77,7 +85,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 			sHtmlTextToken = URLDecoder.decode(sHtmlTextToken, AlipayConfig.input_charset);
 			map.put("sHtmlText", sHtmlTextToken);
 		} catch (Exception e) {
-			LOGGER.error(e);
+			e.printStackTrace();
 			map.put("Exception", e.getMessage());
 		}
 		return map;
@@ -139,7 +147,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 			sHtmlTextToken = URLDecoder.decode(sHtmlTextToken, AlipayConfig.input_charset);
 			map.put("sHtmlText", sHtmlTextToken);
 		} catch (Exception e) {
-			LOGGER.error(e);
+			e.printStackTrace();
 			map.put("Exception", e.getMessage());
 		}
 		return map;
@@ -176,7 +184,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 			String sHtmlText = AlipaySubmit.buildRequest(sParaTemp, "get", "确认");
 			map.put("sHtmlText", sHtmlText);
 		} catch (Exception e) {
-			LOGGER.error(e);
+			e.printStackTrace();
 			map.put("Exception", e.getMessage());
 		}
 		return map;
@@ -257,7 +265,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 			String sHtmlText = AlipaySubmit.buildRequest(sParaTemp, "get", "确认");
 			map.put("sHtmlText", sHtmlText);
 		} catch (Exception e) {
-			LOGGER.error(e);
+			e.printStackTrace();
 			map.put("Exception", e.getMessage());
 		}
 		return map;
@@ -270,6 +278,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 		Map<String, Object> messageMap = null;
 		try {
 			messageMap = JsonUtil.getMapFromJson(event.getBody().toString());
+			String[] idArray = messageMap.get("paymentId").toString().split("\\,");
 			Integer operateType = Integer.valueOf(messageMap.get("operateType").toString());
 			if (PayEnum.DRAW_APPLY_ONE.getCode().equals(operateType) || PayEnum.EXCE_PAY_ONE.getCode().equals(operateType) || PayEnum.STATEMENT_ONE.getCode().equals(operateType)) {
 				LOGGER.info("单条支付");
@@ -277,7 +286,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 				map = getOnePayInfo(paymentEntity.getPayNo(), paymentEntity.getAmountMoney().toString(), paymentEntity.getOutAccount(), paymentEntity.getPayName(), messageMap.get("desc").toString());
 			} else if (PayEnum.DRAW_APPLY_MORE.getCode().equals(operateType) || PayEnum.EXCE_PAY_MORE.getCode().equals(operateType) || PayEnum.STATEMENT_MORE.getCode().equals(operateType)) {
 				LOGGER.info("批量支付");
-				String[] idArray = messageMap.get("paymentId").toString().split("\\,");
+
 				map = getBatchPayInfo(getBatchPayBuyerMessage(idArray, messageMap.get("desc").toString()));
 			} else if (PayEnum.TRADE_REFUND_ONE.getCode().equals(operateType)) {
 				LOGGER.info("单条退款");
@@ -293,9 +302,10 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 				map = getRefunInfo(paymentEntity, "1", paymentEntity.getAmountMoney().toString(), paymentLogInfo.getTrade_no(), messageMap.get("desc").toString());
 			} else if (PayEnum.TRADE_REFUND_MORE.getCode().equals(operateType)) {
 				LOGGER.info("批量退款");
-				String[] idArray = messageMap.get("paymentId").toString().split("\\,");
 				map = getBatchRefunInfo(getBatchRefundBuyerMessage(idArray, messageMap.get("desc").toString()));
 			}
+			//记录操作动作
+			insertOp(idArray,String.valueOf(messageMap.get("userId")));
 
 		} catch (Exception e) {
 			map.put("code", "1");// 1：获取信息失败
@@ -316,6 +326,36 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 		else
 			batchNo.append(payNo);
 		return batchNo.toString();
+	}
+
+	/**
+	 * @Description:付款操作记录
+	 * @param:
+	 * @Author:  柯军
+	 **/
+
+	private void insertOp(String[] paymentIds,String userId){
+		try{
+			for (String paymentId : paymentIds){
+				PaymentOrderOp paymentOrderOp =paymentOrderOpService.selectByPaymentId(Integer.valueOf(paymentId));
+				if(paymentOrderOp == null){
+					paymentOrderOp = new PaymentOrderOp();
+					paymentOrderOp.setCreateAt(DateUtil.getCurrDateTime());
+					paymentOrderOp.setIsDelete(ConstantEnum.IS_DELETE_0.getCodeByte());
+					paymentOrderOp.setPaymentId(Integer.valueOf(paymentId));
+				}
+				paymentOrderOp.setOpTime(DateUtil.getCurrDateTime());
+				paymentOrderOp.setOpUser(userId);
+				if(paymentOrderOp.getId() == null){
+					paymentOrderOpService.insert(paymentOrderOp);
+				}else{
+					paymentOrderOpService.update(paymentOrderOp);
+				}
+			}
+		}catch (Exception e){
+			LOGGER.error("记录付款操作日志失败，忽略此异常，errorMessage={}",e.getMessage());
+		}
+
 	}
 
 }
