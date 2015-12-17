@@ -244,25 +244,28 @@ public class ExcelUtils {
 			XSSFCell hbDiscount = row15.createCell(11);
 			hbDiscount.setCellValue(couponCodeExcelDto.getHbAmount());
 
-			XSSFCell discount = row15.createCell(12);
+			XSSFCell scoreDiscount = row15.createCell(12);
+			scoreDiscount.setCellValue(couponCodeExcelDto.getScoreAmount());
+			
+			XSSFCell discount = row15.createCell(13);
 			discount.setCellValue(couponCodeExcelDto.getDiscountAmount());
 
-			XSSFCell buyerPhone = row15.createCell(13);
+			XSSFCell buyerPhone = row15.createCell(14);
 			buyerPhone.setCellValue(encryptPhone(couponCodeExcelDto.getBuyerPhone()));
 
-			XSSFCell guidePhone = row15.createCell(14);
+			XSSFCell guidePhone = row15.createCell(15);
 			guidePhone.setCellValue(encryptPhone(couponCodeExcelDto.getGuidePhone()));
 
-			XSSFCell buyerName = row15.createCell(15);
+			XSSFCell buyerName = row15.createCell(16);
 			buyerName.setCellValue(couponCodeExcelDto.getBuyerName());
 
-			XSSFCell guideName = row15.createCell(16);
+			XSSFCell guideName = row15.createCell(17);
 			guideName.setCellValue(couponCodeExcelDto.getGuideName());
 
-			XSSFCell mallNameStr = row15.createCell(17);
+			XSSFCell mallNameStr = row15.createCell(18);
 			mallNameStr.setCellValue(couponCodeExcelDto.getMallName());
 
-			XSSFCell shopNameStr = row15.createCell(18);
+			XSSFCell shopNameStr = row15.createCell(19);
 			shopNameStr.setCellValue(couponCodeExcelDto.getShopName());
 		}
 

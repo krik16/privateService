@@ -1,9 +1,9 @@
 package com.rongyi.settle.dto;
 
-import com.rongyi.settle.util.AmountUtil;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import com.rongyi.settle.util.AmountUtil;
 
 /**
  * Created by xgq on 2015/9/28.
@@ -223,6 +223,7 @@ public class CouponStatementDetailDto {
         dto.setPayAmount(getPayAmount() == null ? 0.0 : AmountUtil.changFenToYuan(getPayAmount()));
         dto.setHbAmount(getHbDiscount() == null ? 0.0 : AmountUtil.changFenToYuan(getHbDiscount()));
         dto.setDiscountAmount(getDiscount() == null ? 0.0 : AmountUtil.changFenToYuan(getDiscount()));
+        dto.setScoreAmount(getScoreDiscount() == null ? 0.0 : AmountUtil.changFenToYuan(getScoreDiscount()));
         dto.setBuyerPhone(getUserPhone());
         dto.setShopName(getShopName());
         dto.setMallName(getMallName());

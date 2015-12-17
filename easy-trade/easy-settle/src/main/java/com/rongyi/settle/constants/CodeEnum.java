@@ -16,9 +16,11 @@ public enum CodeEnum {
 	FIAL_UPDATE_PAYMENT(1018005, "修改状态失败"),
 	FIAL_CONFIG_EXIST(1018006,"该规则编号的配置记录已存在，请不要提交重复配置记录"),
 	FIAL_CONFIG_BIZ_EXIST(1018007,"该商家生效时间内配置已存在，请修改后重新提交"),
+	FIAL_CONFIG_BIZ_NOACCOUNT(1018012,"没有此商家财务联系人ID"),
 	FIAL_CONFIG_NO_ACCOUNT(1018009,"未查到自身账号"),
 	FIAL_CONFIG_EFFECT_START(1018010,"账号生效时间大于此刻审核时间"),
 	FIAL_SAVE_CONFIG(1018008,"保存对账单配置失败"),
+	FIAL_CONFIG_NOT_FOUND(1018011, "对账单配置没有找到"),
 	SUCCESS("0", "正常"),;
 
 	private Object code;

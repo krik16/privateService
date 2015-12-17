@@ -170,9 +170,16 @@ public class StatementConfigController extends BaseController{
 			if (responseData.getMeta().getErrno() != 0) {
 				return responseData;
 			}
+			if (!map.containsKey("bussinessType") || !map.containsKey("bussinessCode") || !map.containsKey("bussinessAccount") || !map.containsKey("ruleCode")){
+				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
+			}
 			StatementConfig oldStatementConfig = statementConfigService.selectByRuleCode(map.get("ruleCode").toString());
-			if(oldStatementConfig != null)
+			if(oldStatementConfig != null) {
 				return ResponseData.failure(CodeEnum.FIAL_CONFIG_EXIST.getCodeInt(), CodeEnum.FIAL_CONFIG_EXIST.getValueStr());
+			}
+			//验证商家财务账户
+			if (CollectionUtils.isEmpty(statementConfigService.getAccountInfoByParam(1,Integer.valueOf(map.get("bussinessType").toString()), null, map.get("bussinessCode").toString(),map.get("bussinessAccount").toString())))
+				return ResponseData.failure(CodeEnum.FIAL_CONFIG_BIZ_NOACCOUNT.getCodeInt(), CodeEnum.FIAL_CONFIG_BIZ_NOACCOUNT.getValueStr());
 			StatementConfig statementConfig = new StatementConfig();
 			BussinessInfo bussinessInfo = new BussinessInfo();
 			MapUtils.toObject(statementConfig, map);
@@ -589,6 +596,7 @@ public class StatementConfigController extends BaseController{
 			searchMap.put("sort", "noSort");// 暂未定排序字段
 			Map resultMap;
 			List<ShopVO> shopVOs = null;
+			int count = 0;
 			switch (params.getType()){
 				case 0:
 					if (StringUtils.isNotBlank(params.getShopId()) && !params.getId().equals(params.getShopId())){
@@ -612,7 +620,8 @@ public class StatementConfigController extends BaseController{
 						searchMap.put("zone_id", params.getZoneId());
 					}
 					List<ShopEntity> shopEntities = iShopService.searchShop(searchMap, currpage-1, pagesize);
-					List<ObjectId> shopIds = null;
+					count = iShopService.searchShopCount(searchMap).intValue();
+					List<ObjectId> shopIds;
 					if (CollectionUtils.isNotEmpty(shopEntities)){
 						shopIds = new ArrayList<>();
 						for (ShopEntity shopEntity : shopEntities){
@@ -638,6 +647,7 @@ public class StatementConfigController extends BaseController{
 			resultMap = roaShopService.getShops(searchMap, currpage, pagesize);
 			if (shopVOs == null) {
 				shopVOs = (List<ShopVO>) resultMap.get("list");
+				count = resultMap.containsKey("totalCount") ? Integer.valueOf(resultMap.get("totalCount").toString()) : 0;
 			}
 			List<RelevanceVO> reList = new ArrayList<>();
 			if (CollectionUtils.isNotEmpty(shopVOs)) {
@@ -647,12 +657,11 @@ public class StatementConfigController extends BaseController{
 					shop.setName(shopVO.getName());
 					shop.setPosition(shopVO.getPosition());
 					//查询店铺关联账号信息
-					List<UserInfoVo> userAccounts = statementConfigService.getAccountInfoByParam(0, 0, 1, shopVO.getId());
+					List<UserInfoVo> userAccounts = statementConfigService.getAccountInfoByParam(0, 0, 1, shopVO.getId(), null);
 					shop.setUserAccounts(userAccounts);
 					reList.add(shop);
 				}
 			}
-			int count = resultMap.containsKey("totalCount") ? Integer.valueOf(resultMap.get("totalCount").toString()) : 0;
 			result = ResponseData.success(reList, currpage, pagesize, count);
 		}catch (Exception e){
 			e.printStackTrace();
@@ -670,7 +679,7 @@ public class StatementConfigController extends BaseController{
 					|| params.getIsOneself()==null || (params.getIsOneself()==1 && params.getType()==null) ) {
 				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
 			}
-			List<UserInfoVo> userAccounts = statementConfigService.getAccountInfoByParam(params.getIsOneself(), params.getType(), params.getGuideType(), params.getId());
+			List<UserInfoVo> userAccounts = statementConfigService.getAccountInfoByParam(params.getIsOneself(), params.getType(), params.getGuideType(), params.getId(), null);
 			return ResponseData.success(userAccounts);
 		} catch (Exception e) {
 			e.printStackTrace();

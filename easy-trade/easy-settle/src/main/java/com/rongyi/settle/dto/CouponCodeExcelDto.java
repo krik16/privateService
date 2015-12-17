@@ -2,6 +2,7 @@ package com.rongyi.settle.dto;
 
 /**
  * Created by xgq on 2015/9/25.
+ * Modified by erliang
  */
 public class CouponCodeExcelDto {
     private String orderNo;
@@ -22,8 +23,25 @@ public class CouponCodeExcelDto {
     private String buyerName;
     private String guideName;
     private String guidePhone;
+    
+    /** 使用积分金额 */
+    private Double scoreAmount;
 
-    public String getOrderNo() {
+    /**
+	 * @return the scoreAmount
+	 */
+	public Double getScoreAmount() {
+		return scoreAmount;
+	}
+
+	/**
+	 * @param scoreAmount the scoreAmount to set
+	 */
+	public void setScoreAmount(Double scoreAmount) {
+		this.scoreAmount = scoreAmount;
+	}
+
+	public String getOrderNo() {
         return orderNo;
     }
 
