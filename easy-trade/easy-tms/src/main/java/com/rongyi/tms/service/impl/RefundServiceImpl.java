@@ -11,10 +11,12 @@ import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.coupon.entity.CouponOrder;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
+import com.rongyi.easy.osm.entity.OrderFormEntity;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.tms.vo.TradeVO;
 import com.rongyi.easy.usercenter.entity.MalllifeUserInfoEntity;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
+import com.rongyi.rss.mallshop.order.ROAOrderFormService;
 import com.rongyi.rss.rpb.IRpbService;
 import com.rongyi.rss.tradecenter.RoaProxyCouponOrderService;
 import com.rongyi.tms.constants.ConstantEnum;
@@ -52,6 +54,9 @@ public class RefundServiceImpl extends BaseServiceImpl implements RefundService 
     @Autowired
     RoaProxyCouponOrderService roaProxyCouponOrderService;
 
+    @Autowired
+    ROAOrderFormService rOAOrderFormService;
+
     @Override
     public List<TradeVO> selectRefundPageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
         LOGGER.info("selectRefundPageList map={}", map);
@@ -75,6 +80,15 @@ public class RefundServiceImpl extends BaseServiceImpl implements RefundService 
                         tradeVO.getPayChannel());
             if (hisPayEntity != null)// 此处把付款记录的付款单号放入退款明细，以便直接在第三方支付系统查询
                 tradeVO.setPayNo(hisPayEntity.getPayNo());
+            try {
+                OrderFormEntity orderFormEntity = rOAOrderFormService.getOrderFormByOrderNum(tradeVO.getOrderNo());
+                if (orderFormEntity != null) {
+                    tradeVO.setOrderId(orderFormEntity.getId().toString());
+                    tradeVO.setOrderUserId(orderFormEntity.getBuyerId());
+                }
+            } catch (Exception e) {
+                LOGGER.error(" roa inteface no provider error!" + e.getMessage());
+            }
         }
         return tradeVOList;
     }
