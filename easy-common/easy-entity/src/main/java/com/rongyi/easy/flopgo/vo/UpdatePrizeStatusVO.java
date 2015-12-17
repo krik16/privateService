@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.vo.CouponVO;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * 用户返回的是修改奖品状态的接口的vo
@@ -34,6 +35,7 @@ public class UpdatePrizeStatusVO implements Serializable
     private double discount_price;//折扣价格
     private List<String> thumb_img;//缩略图
     private List<String> detail_img;//详情图
+    private String isRebate;//0表示不是抵扣券  1表示是抵扣券
     public UpdatePrizeStatusVO(){
 
     }
@@ -61,7 +63,14 @@ public class UpdatePrizeStatusVO implements Serializable
             if("03".equals(coupon.getCouponType())){
                 this.discount_price=coupon.getDiscount();
                 this.scope=coupon.getProducts();
-                this.recommendation=coupon.getRecommend();
+                if(StringUtils.isNotBlank(coupon.getRecommend())) {
+                    this.recommendation = coupon.getRecommend();
+                }else if(StringUtils.isNotBlank(coupon.getUseRestriction())){
+                    this.recommendation = coupon.getUseRestriction();
+                }else if(StringUtils.isNotBlank(coupon.getUseDescription())){
+                    this.recommendation = coupon.getUseDescription();
+                }
+
             }
             this.detail_img=coupon.getDetailPicUrls();
 
@@ -160,5 +169,11 @@ public class UpdatePrizeStatusVO implements Serializable
         this.detail_img = detail_img;
     }
 
+    public String getIsRebate() {
+        return isRebate;
+    }
 
+    public void setIsRebate(String isRebate) {
+        this.isRebate = isRebate;
+    }
 }

@@ -35,6 +35,8 @@ public class Ad implements Serializable {
     private Integer   published; // 0未发布 1发布失败 2发布成功
     private Date      created_at;
     private Date      updated_at;
+    private String adTime;
+    private String adOrder;
 
     public ObjectId getId() {
         return id;
@@ -171,4 +173,20 @@ public class Ad implements Serializable {
     public void setUpdated_at(Date updated_at) {
         this.updated_at = updated_at;
     }
+
+	public String getAdTime() {
+		return adTime;
+	}
+
+	public void setAdTime(String adTime) {
+		this.adTime = adTime;
+	}
+
+	public String getAdOrder() {
+		return adOrder;
+	}
+
+	public void setAdOrder(String adOrder) {
+		this.adOrder = adOrder;
+	}
 }

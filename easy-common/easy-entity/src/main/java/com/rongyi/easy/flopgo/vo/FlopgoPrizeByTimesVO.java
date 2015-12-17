@@ -6,6 +6,8 @@ import java.util.List;
 
 import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.vo.CouponVO;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class FlopgoPrizeByTimesVO implements Serializable{
 	/**
@@ -29,6 +31,7 @@ public class FlopgoPrizeByTimesVO implements Serializable{
 	private List<CouponProductVO> scope;//现金卷的使用范围
 	private String recommendation;//推荐文案
 	private String activityId;//翻牌购的id
+	private String isRebate;//0 不是抵扣券  1是抵扣券
 	public FlopgoPrizeByTimesVO(){
 
 	}
@@ -69,8 +72,16 @@ public class FlopgoPrizeByTimesVO implements Serializable{
 				this.recommendation=flopprize.getUseDescription();
 			}
 			if("03".equals(flopprize.getCouponType())){
+				this.actual_price=flopprize.getOriginalPrice();//这是抵扣券用的 满多少的价格
 				this.discount_price=flopprize.getDiscount();
-				this.recommendation=flopprize.getRecommend();
+				if(StringUtils.isNotBlank(flopprize.getRecommend())){
+					this.recommendation=flopprize.getRecommend();
+				}else if(StringUtils.isNotBlank(flopprize.getUseRestriction())){
+					this.recommendation=flopprize.getUseRestriction();
+				}else if(StringUtils.isNotBlank(flopprize.getUseDescription())){
+					this.recommendation=flopprize.getUseDescription();
+				}
+
 			}
 		}
 	}
@@ -177,4 +188,34 @@ public class FlopgoPrizeByTimesVO implements Serializable{
 		this.recommendation = recommendation;
 	}
 
+	public String getIsRebate() {
+		return isRebate;
+	}
+
+	public void setIsRebate(String isRebate) {
+		this.isRebate = isRebate;
+	}
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append("_id", _id)
+				.append("created_at", created_at)
+				.append("updated_at", updated_at)
+				.append("type", type)
+				.append("title", title)
+				.append("deadlines", deadlines)
+				.append("restrictions", restrictions)
+				.append("actual_price", actual_price)
+				.append("discount_price", discount_price)
+				.append("active_status", active_status)
+				.append("coupon_id", coupon_id)
+				.append("thumb_img", thumb_img)
+				.append("detail_img", detail_img)
+				.append("scope", scope)
+				.append("recommendation", recommendation)
+				.append("activityId", activityId)
+				.append("isRebate", isRebate)
+				.toString();
+	}
 }

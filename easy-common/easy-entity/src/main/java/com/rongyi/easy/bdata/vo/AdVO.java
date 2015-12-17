@@ -28,7 +28,8 @@ public class AdVO implements Serializable {
     private Integer   published;
     private Date      createdAt;
     private Date      updatedAt;
-
+    private Integer adTime;
+    private Integer adOrder;
     public String getId() {
         return id;
     }
@@ -164,4 +165,20 @@ public class AdVO implements Serializable {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+	public Integer getAdTime() {
+		return adTime;
+	}
+
+	public void setAdTime(Integer adTime) {
+		this.adTime = adTime;
+	}
+
+	public Integer getAdOrder() {
+		return adOrder;
+	}
+
+	public void setAdOrder(Integer adOrder) {
+		this.adOrder = adOrder;
+	}
 }
