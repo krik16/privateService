@@ -613,7 +613,8 @@ public class StatementConfigController extends BaseController{
 						searchMap.put("zone_id", params.getZoneId());
 					}
 					List<ShopEntity> shopEntities = iShopService.searchShop(searchMap, currpage-1, pagesize);
-					List<ObjectId> shopIds = null;
+					count = iShopService.searchShopCount(searchMap).intValue();
+					List<ObjectId> shopIds;
 					if (CollectionUtils.isNotEmpty(shopEntities)){
 						shopIds = new ArrayList<>();
 						for (ShopEntity shopEntity : shopEntities){
