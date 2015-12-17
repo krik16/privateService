@@ -197,7 +197,7 @@ public class PCWebPageAlipayController extends BaseController {
 				for (int i = 0; i < batchDetail.length; i++) {
 					PaymentLogInfo paymentLogInfo = new PaymentLogInfo();
 					String[] details = batchDetail[i].split("\\^");
-					if (details != null) {
+					if (details != null && validateTradeStatus(details[2])) {
 						PaymentLogInfo oldPaymentLogInfo = paymentLogInfoService.selectByPayTradeNo(details[0]);
 						if (oldPaymentLogInfo != null)
 							paymentLogInfo.setBuyer_email(oldPaymentLogInfo.getBuyer_email());
@@ -304,6 +304,6 @@ public class PCWebPageAlipayController extends BaseController {
 	 * @datetime:2015年4月24日上午10:47:02
 	 **/
 	private boolean validateTradeStatus(String tradeResult) {
-		return tradeResult.contains("TRADE_SUCCESS") || tradeResult.contains("SUCCESS");
+		return tradeResult.contains("TRADE_SUCCESS") || tradeResult.contains("SUCCESS") || tradeResult.contains("success");
 	}
 }

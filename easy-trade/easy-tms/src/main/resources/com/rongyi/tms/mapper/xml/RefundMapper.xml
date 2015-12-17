@@ -40,10 +40,21 @@
         `mail_id`,`ry_rmmm`.`mall_cooperate`.`mall_name` AS `mall_name`,
         `ry_rmmm`.`rmmm_user_info`.`user_phone` AS `seller_account`,`ry_rmmm`.`rmmm_user_info`.`user_name` AS
         `seller_name`,
-        buyer_info.id AS buyer_id,
-        buyer_info.phone AS buyer_account,
-        buyer_info.nick_name AS buyer_name,
-        `ry_osm`.`order_form`.`guide_type` AS `guide_type`
+        `ry_osm`.`order_form`.`guide_type` AS `guide_type`,
+        CASE WHEN
+        `ry_rpb`.`payment_order`.order_type = 1
+        THEN
+        buyer_info.phone
+        else
+        buyer_info2.phone
+        END as buyer_account,
+        CASE WHEN
+        `ry_rpb`.`payment_order`.order_type = 1
+        THEN
+        buyer_info.nick_name
+        else
+        buyer_info2.nick_name
+        END as buyer_name
     </sql>
     <sql id="Base_From">
         `ry_rpb`.`payment_order` left join `ry_osm`.`order_form` on`ry_osm`.`order_form`.`order_no` =
@@ -52,8 +63,8 @@
         `ry_rmmm`.`shop_info`.`mall_id` left join `ry_rmmm`.`rmmm_user_info` on `ry_rmmm`.`rmmm_user_info`.`id` =
         `ry_rpb`.`payment_order`.`draw_user_id` left join `ry_trade`.`trade_order`
         on `ry_rpb`.`payment_order`.`order_no` = `ry_trade`.`trade_order`.`order_no`
-        left join ry_user.malllife_user_info buyer_info on buyer_info.id = `ry_trade`.`trade_order`.`user_id` or
-        buyer_info.id = `ry_osm`.`order_form`.`buyer_id`
+        left join ry_user.malllife_user_info buyer_info on buyer_info.id = `ry_trade`.`trade_order`.`user_id`
+        left join ry_user.malllife_user_info  buyer_info2 on buyer_info2.id = `ry_osm`.`order_form`.`buyer_id`
     </sql>
     <sql id="trade_list_where_clause">
 
