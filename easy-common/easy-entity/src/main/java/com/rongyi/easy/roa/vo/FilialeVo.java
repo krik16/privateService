@@ -38,6 +38,7 @@ public class FilialeVo implements Serializable{
 	private int valid;//0运营中  1已停运
 	private String address; //详细地址
 	private List<ShopVO> shopList;
+	private String telephone;//电话
 	public String getId() {
 		return id;
 	}
@@ -103,5 +104,18 @@ public class FilialeVo implements Serializable{
 	}
 	public void setShopList(List<ShopVO> shopList) {
 		this.shopList = shopList;
+	}
+	public String getTelephone() {
+		return telephone;
+	}
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+	@Override
+	public String toString() {
+		return "FilialeVo [id=" + id + ", name=" + name + ", manager=" + manager + ", brandId=" + brandId
+				+ ", createAt=" + createAt + ", updateAt=" + updateAt + ", brandName=" + brandName + ", areaVo="
+				+ areaVo + ", valid=" + valid + ", address=" + address + ", shopList=" + shopList + ", telephone="
+				+ telephone + "]";
 	}
 }
