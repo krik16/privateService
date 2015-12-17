@@ -432,11 +432,8 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 			case 1: searchMap.put("mallId", bussinessId); break;
 			case 2: searchMap.put("brandId", bussinessId); break;
 			case 3:
-                if (ObjectId.isValid(bussinessId))
-                    searchMap.put("filiale_id", new ObjectId(bussinessId));
-                else
-                    return shopVOs;
-                List<com.rongyi.easy.shop.entity.ShopEntity> shopEntities = iShopService.searchShop(searchMap, 1, 2000);
+                searchMap.put("filiale_id", new ObjectId(bussinessId));
+                List<com.rongyi.easy.shop.entity.ShopEntity> shopEntities = iShopService.searchShop(searchMap, 0, 2000);
                 List<ObjectId> shopIds = null;
                 if (CollectionUtils.isNotEmpty(shopEntities)){
                     shopIds = new ArrayList<>();

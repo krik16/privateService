@@ -176,10 +176,6 @@ function morePayClick(){
 				ids.push(this.id);
 			}
 			payChannel = this.attributes['payChannel'].value;
-			if(payChannel==1){
-				_util.cmsTip("抱歉！微信不允许批量退款");
-				return;
-			}
 			if ($.inArray(payChannel, payChannels) == -1) {
 				payChannels.push(payChannel);
 			}
@@ -187,6 +183,10 @@ function morePayClick(){
 	});
 	if (payChannels.length > 1) {
 		_util.cmsTip("您只能选择一种打款方式进行批量付款");
+		return;
+	}
+	if(payChannel==1){
+		_util.cmsTip("抱歉！微信不允许批量退款");
 		return;
 	}
 	if (ids.length <= 0) {

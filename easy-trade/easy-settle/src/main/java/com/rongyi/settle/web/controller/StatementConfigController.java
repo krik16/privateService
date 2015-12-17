@@ -611,15 +611,13 @@ public class StatementConfigController extends BaseController{
 					if (StringUtils.isNotBlank(params.getZoneId())){
 						searchMap.put("zone_id", params.getZoneId());
 					}
-					List<ShopEntity> shopEntities = iShopService.searchShop(searchMap, currpage, pagesize);
+					List<ShopEntity> shopEntities = iShopService.searchShop(searchMap, currpage-1, pagesize);
 					List<ObjectId> shopIds = null;
 					if (CollectionUtils.isNotEmpty(shopEntities)){
 						shopIds = new ArrayList<>();
 						for (ShopEntity shopEntity : shopEntities){
 							shopIds.add(shopEntity.getId());
 						}
-					}
-					if (CollectionUtils.isNotEmpty(shopIds)){
 						shopVOs = roaShopService.getShopsByIds(shopIds);
 					}
 					break;
@@ -638,7 +636,7 @@ public class StatementConfigController extends BaseController{
 			}
 
 			resultMap = roaShopService.getShops(searchMap, currpage, pagesize);
-			if (CollectionUtils.isEmpty(shopVOs)) {
+			if (shopVOs == null) {
 				shopVOs = (List<ShopVO>) resultMap.get("list");
 			}
 			List<RelevanceVO> reList = new ArrayList<>();
