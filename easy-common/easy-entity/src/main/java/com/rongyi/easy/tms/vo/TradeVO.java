@@ -234,6 +234,11 @@ public class TradeVO implements Serializable {
 	 */
 	private Integer guideType;
 
+	/**
+	 * 操作时间
+	 */
+	private Date opTime;
+
 	public Integer getId() {
 		return id;
 	}
@@ -594,5 +599,12 @@ public class TradeVO implements Serializable {
 	public void setBuyerPayAccount(String buyerPayAccount) {
 		this.buyerPayAccount = buyerPayAccount;
 	}
-	
+
+	public Date getOpTime() {
+		return opTime;
+	}
+
+	public void setOpTime(Date opTime) {
+		this.opTime = opTime;
+	}
 }
