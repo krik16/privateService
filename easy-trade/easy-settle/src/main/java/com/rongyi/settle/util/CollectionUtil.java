@@ -7,35 +7,39 @@ import java.util.List;
  */
 public class CollectionUtil {
 
-//    /**
-//     * List转换String
-//     *
-//     * @param list
-//     *            :需要转换的List
-//     * @return String转换后的字符串
-//     */
-//    public static String ListToString(List<?> list) {
-//        StringBuffer sb = new StringBuffer();
-//        if (list != null && list.size() > 0) {
-//            for (int i = 0; i < list.size(); i++) {
-//                if (list.get(i) == null || list.get(i) == "") {
-//                    continue;
-//                }
-//                // 如果值是list类型则调用自己
-//                if (list.get(i) instanceof List) {
-//                    sb.append(ListToString((List<?>) list.get(i)));
-//                    sb.append(SEP1);
-//                } else if (list.get(i) instanceof Map) {
+    /**
+     * List转换String
+     *
+     * @param list
+     *            :需要转换的List
+     * @return String转换后的字符串
+     */
+    public static String ListToStringAll(List<?> list, String decollator) {
+        StringBuilder sb = new StringBuilder();
+        boolean flag = false;
+        if (list != null && list.size() > 0) {
+            for (Object aList : list) {
+                if (aList == null || aList == "") {
+                    continue;
+                }
+                if (flag)
+                    sb.append(decollator);
+                else
+                    flag = true;
+                // 如果值是list类型则调用自己
+                if (aList instanceof List) {
+                    sb.append(ListToStringAll((List<?>) aList, decollator));
+                }
+//                else if (list.get(i) instanceof Map) {
 //                    sb.append(MapToString((Map<?, ?>) list.get(i)));
-//                    sb.append(SEP1);
-//                } else {
-//                    sb.append(list.get(i));
-//                    sb.append(SEP1);
 //                }
-//            }
-//        }
-//        return "L" + EspUtils.EncodeBase64(sb.toString());
-//    }
+                else {
+                    sb.append(aList);
+                }
+            }
+        }
+        return sb.toString();
+    }
 
     /**
      * list转String
