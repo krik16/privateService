@@ -2,6 +2,7 @@ package com.rongyi.easy.flopgo.vo;
 
 import com.rongyi.easy.coupon.entity.CouponCommodity;
 import com.rongyi.easy.coupon.vo.CouponVO;
+import org.apache.commons.lang.StringUtils;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -32,6 +33,7 @@ public class FlopgoLookPrizesVO implements Serializable {
     private List<String> detail_img;//详情图
     private List<CouponVO.CouponProduct> scope;//现金卷的使用范围
     private String recommendation;//推荐文案
+    private String isRebate;// 0不是抵扣券 1是抵扣券
 
     public FlopgoLookPrizesVO() {
 
@@ -53,7 +55,7 @@ public class FlopgoLookPrizesVO implements Serializable {
         this.type = flopprize.getTicketType();
         this.title = flopprize.getTitle();
         this.restrictions = flopprize.getUseRestriction();
-
+        this.isRebate = flopprize.getIsRebate();
         this.detail_img = flopprize.getDetailPicUrls();
         if ("02".equals(flopprize.getTicketType())) {
             this.actual_price = flopprize.getOriginalPrice();
@@ -63,7 +65,15 @@ public class FlopgoLookPrizesVO implements Serializable {
         }
         if ("03".equals(flopprize.getTicketType())) {
             this.discount_price = flopprize.getDiscount();
-            this.recommendation = flopprize.getRecommend();
+            if(StringUtils.isNotBlank(flopprize.getRecommend())){
+                this.recommendation = flopprize.getRecommend();
+            }else if(StringUtils.isNotBlank(flopprize.getUseRestriction())){
+                this.recommendation= flopprize.getUseRestriction();
+            }else if(StringUtils.isNotBlank(flopprize.getUseDescription())){
+                this.recommendation = flopprize.getUseDescription();
+            }
+
+
         }
     }
 
@@ -163,5 +173,11 @@ public class FlopgoLookPrizesVO implements Serializable {
         this.detail_img = detail_img;
     }
 
+    public String getIsRebate() {
+        return isRebate;
+    }
 
+    public void setIsRebate(String isRebate) {
+        this.isRebate = isRebate;
+    }
 }
