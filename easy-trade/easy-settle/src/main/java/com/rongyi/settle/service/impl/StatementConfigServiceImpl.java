@@ -388,7 +388,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 	@Override
 	public boolean validateNeedPay(String shopId, String userId, Integer guideType) {
 		Map<String, Object> map = new HashMap<>();
-		map.put("shopId", shopId);
+		map.put("shopMysqlId", shopId);
 		map.put("status", ConstantEnum.CONFIG_STATUS_1.getCodeInt());
 		map.put("nowTime", new Date());
 		map.put("userId", userId);

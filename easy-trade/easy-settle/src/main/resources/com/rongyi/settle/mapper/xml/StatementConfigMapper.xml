@@ -349,8 +349,11 @@
                 and #{effectEndTime} > pbc.effect_start_time
                 and pbc.effect_end_time > #{effectStartTime}
             </if>
-            <if test="shopId!=null">
+            <if test="shopMysqlId!=null">
                 and si.id=#{shopId}
+            </if>
+            <if test="shopId!=null">
+                and si.shop_mid=#{shopId}
             </if>
             <if test="userId!=null">
                 and sc.real_user_list like concat('%', #{userId}, '%')
