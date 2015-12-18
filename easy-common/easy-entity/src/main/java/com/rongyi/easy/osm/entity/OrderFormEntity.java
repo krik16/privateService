@@ -163,7 +163,7 @@ public class OrderFormEntity implements Serializable {
     private Integer devType;
 
     //0:未打款，1:对私(打款到导购虚拟账号)，2:对公(通过对账单结算)
-    private byte isVaPay;
+    private byte isPayVa;
 
     public Byte getIsAlert() {
         return isAlert;
@@ -659,12 +659,12 @@ public class OrderFormEntity implements Serializable {
         this.devType = devType;
     }
 
-    public byte getIsVaPay() {
-        return isVaPay;
+    public byte getIsPayVa() {
+        return isPayVa;
     }
 
-    public void setIsVaPay(byte isVaPay) {
-        this.isVaPay = isVaPay;
+    public void setIsPayVa(byte isPayVa) {
+        this.isPayVa = isPayVa;
     }
 
     @Override
@@ -703,7 +703,7 @@ public class OrderFormEntity implements Serializable {
                 ", scoreDiscount=" + scoreDiscount +
                 ", devType=" + devType +
                 ", couponType=" + couponType +
-                ", isVaPay=" + isVaPay +
+                ", isPayVa=" + isPayVa +
                 '}';
     }
 }
