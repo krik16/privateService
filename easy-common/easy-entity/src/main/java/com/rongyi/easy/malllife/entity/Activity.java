@@ -1,9 +1,14 @@
 package com.rongyi.easy.malllife.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Activity {
-    private Integer id;
+import com.rongyi.easy.malllife.param.MalllifeBaseParam;
+
+public class Activity  extends MalllifeBaseParam  implements Serializable {
+
+
+	private Integer id;
 
     private String userId;
 
@@ -11,7 +16,7 @@ public class Activity {
 
     private Integer type;
 
-    private Float discountAmount;
+    private Integer discountAmount;
 
     private Date createAt;
 
@@ -21,7 +26,7 @@ public class Activity {
 
     private String nickName;
 
-    private Float totalDiscountAmount;
+    private Integer totalDiscountAmount;
 
     private Integer status;
 
@@ -57,11 +62,11 @@ public class Activity {
         this.type = type;
     }
 
-    public Float getDiscountAmount() {
+    public Integer getDiscountAmount() {
         return discountAmount;
     }
 
-    public void setDiscountAmount(Float discountAmount) {
+    public void setDiscountAmount(Integer discountAmount) {
         this.discountAmount = discountAmount;
     }
 
@@ -97,11 +102,11 @@ public class Activity {
         this.nickName = nickName;
     }
 
-    public Float getTotalDiscountAmount() {
+    public Integer getTotalDiscountAmount() {
         return totalDiscountAmount;
     }
 
-    public void setTotalDiscountAmount(Float totalDiscountAmount) {
+    public void setTotalDiscountAmount(Integer totalDiscountAmount) {
         this.totalDiscountAmount = totalDiscountAmount;
     }
 
@@ -112,4 +117,13 @@ public class Activity {
     public void setStatus(Integer status) {
         this.status = status;
     }
+    @Override
+	public String toString() {
+		return "Activity [id=" + id + ", userId=" + userId + ", commodityId="
+				+ commodityId + ", type=" + type + ", discountAmount="
+				+ discountAmount + ", createAt=" + createAt + ", friendId="
+				+ friendId + ", headUrl=" + headUrl + ", nickName=" + nickName
+				+ ", totalDiscountAmount=" + totalDiscountAmount + ", status="
+				+ status + "]";
+	}
 }
