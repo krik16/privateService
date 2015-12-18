@@ -61,6 +61,8 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 	private boolean immediateOn = false;//true表示设置是立即上架
 
+	private List<String> skus;//规格sku集合
+
 	public ObjectId getId() {
 		return id;
 	}
@@ -329,5 +331,13 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 	public void setImmediateOn(boolean immediateOn) {
 		this.immediateOn = immediateOn;
+	}
+
+	public List<String> getSkus() {
+		return skus;
+	}
+
+	public void setSkus(List<String> skus) {
+		this.skus = skus;
 	}
 }
