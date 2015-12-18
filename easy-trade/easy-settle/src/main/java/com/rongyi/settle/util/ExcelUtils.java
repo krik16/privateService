@@ -100,6 +100,10 @@ public class ExcelUtils {
 
 		// 券汇总数据
 		for (int i = 0; i < excelDto.getCouponExcelDtoList().size(); i++) {
+			if (i > 10)
+				break;
+			//TODO 这里有问题 后续券种类大于8种时需要解决
+			
 			CouponExcelDto couponExcelDto = excelDto.getCouponExcelDtoList().get(i);
 			XSSFRow row15 = sheet.getRow(15 + i);
 			XSSFCell couponName = row15.getCell(1);
@@ -129,7 +133,7 @@ public class ExcelUtils {
 			couponPriceSum += AmountUtil.changFenToYuan(couponExcelDto.getCouponPriceTotal());
 		}
 		// 券小计
-		XSSFRow row24 = sheet.getRow(24);
+		XSSFRow row24 = sheet.getRow(26);
 		XSSFCell couponCountSumCell = row24.getCell(4);
 		couponCountSumCell.setCellValue(couponCountSum);
 		XSSFCell couponHbSumCell = row24.getCell(6);
@@ -144,7 +148,7 @@ public class ExcelUtils {
 		// 商品订单汇总数据
 		for (int i = 0; i < excelDto.getOrderSettlementTopDtoList().size(); i++) {
 			OrderSettlementTopDto orderTop = excelDto.getOrderSettlementTopDtoList().get(i);
-			XSSFRow row26 = sheet.getRow(26 + i);
+			XSSFRow row26 = sheet.getRow(28 + i);
 			XSSFCell orderType = row26.getCell(1);
 			orderType.setCellValue(orderTop.getOrderType());
 
@@ -172,7 +176,7 @@ public class ExcelUtils {
 			orderPriceSum += orderTop.getOrderAmountTotal() == null ? 0 : orderTop.getOrderAmountTotal();
 		}
 		// 商品小计
-		XSSFRow row29 = sheet.getRow(29);
+		XSSFRow row29 = sheet.getRow(31);
 		XSSFCell orderCountSumCell = row29.getCell(4);
 		orderCountSumCell.setCellValue(orderCountSum);
 		XSSFCell orderHbSumCell = row29.getCell(6);
@@ -185,7 +189,7 @@ public class ExcelUtils {
 		orderPriceSumCell.setCellValue(orderPriceSum);
 
 		// 合计
-		XSSFRow row30 = sheet.getRow(30);
+		XSSFRow row30 = sheet.getRow(32);
 		XSSFCell hbSumCell = row30.getCell(6);
 		hbSumCell.setCellValue(orderHbSum + couponHbSum);
 		XSSFCell scoreSumCell = row30.getCell(8);
@@ -246,7 +250,7 @@ public class ExcelUtils {
 
 			XSSFCell scoreDiscount = row15.createCell(12);
 			scoreDiscount.setCellValue(couponCodeExcelDto.getScoreAmount());
-			
+
 			XSSFCell discount = row15.createCell(13);
 			discount.setCellValue(couponCodeExcelDto.getDiscountAmount());
 
@@ -335,8 +339,8 @@ public class ExcelUtils {
 	 * 
 	 * @param phone
 	 * @return
-	* @author erliang
-	* @date 2015年12月16日
+	 * @author erliang
+	 * @date 2015年12月16日
 	 */
 	private static String encryptPhone(String phone) {
 		if (phone != null && phone.length() > 8) {

@@ -95,7 +95,8 @@
 								<td><fmt:formatDate value="${item.validBeginDate}" pattern="yyyy-MM-dd HH:mm:ss"/> - <fmt:formatDate value="${item.validEndDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td>${item.currentPrice}</td>
 								<td>${item.count}</td>
-								<td>${item.currentPrice*item.count}</td>
+								<td><fmt:formatNumber value="${item.currentPrice*item.count}" pattern="##.##" minFractionDigits="2" ></fmt:formatNumber>
+								</td>
 							</tr>
 						</c:forEach>
 					</table>

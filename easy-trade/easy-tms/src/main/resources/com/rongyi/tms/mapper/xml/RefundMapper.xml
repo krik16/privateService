@@ -22,11 +22,12 @@
         <result column="order_type" property="orderType" jdbcType="INTEGER"/>
         <result column="coupon_buyer_id" property="couponBuyerId"
                 jdbcType="VARCHAR"/>
-        <result column="coupon_buyer_account" property="couponBuyerAccount"
+        <result column="buyer_account" property="buyerAccount"
                 jdbcType="VARCHAR"/>
         <result column="refund_rejected" property="refundRejected"
                 jdbcType="VARCHAR"/>
         <result column="guide_type" property="guideType" jdbcType="INTEGER"/>
+        <result column="buyer_name" property="buyerName" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
         `ry_rpb`.`payment_order`.`id` AS `id`,`ry_rpb`.`payment_order`.`create_at` AS
@@ -36,21 +37,37 @@
         `pay_no`,`ry_rpb`.`payment_order`.`trade_type` AS `trade_type`,`ry_rpb`.`payment_order`.`pay_channel` AS
         `pay_channel`,`ry_rpb`.`payment_order`.`refund_rejected` AS `refund_rejected`,`ry_rmmm`.`shop_info`.`id` AS
         `shop_id`,`ry_rmmm`.`shop_info`.`shop_name` AS `shop_name`,`ry_rmmm`.`mall_cooperate`.`id` AS
-        `mail_id`,`ry_rmmm`.`mall_cooperate`.`mall_name` AS `mall_name`,`ry_osm`.`order_form`.`buyer_id` AS
-        `buyer_id`,`ry_rmmm`.`rmmm_user_info`.`user_phone` AS `seller_account`,`ry_rmmm`.`rmmm_user_info`.`user_name` AS
-        `seller_name`,`ry_trade`.`trade_order`.`user_id` AS `coupon_buyer_id`,`ry_trade`.`trade_order`.`user_phone` AS
-        `coupon_buyer_account`,`ry_osm`.`order_form`.`guide_type` AS `guide_type`
+        `mail_id`,`ry_rmmm`.`mall_cooperate`.`mall_name` AS `mall_name`,
+        `ry_rmmm`.`rmmm_user_info`.`user_phone` AS `seller_account`,`ry_rmmm`.`rmmm_user_info`.`user_name` AS
+        `seller_name`,
+        `ry_osm`.`order_form`.`guide_type` AS `guide_type`,
+        CASE WHEN
+        `ry_rpb`.`payment_order`.order_type = 1
+        THEN
+        buyer_info.phone
+        else
+        buyer_info2.phone
+        END as buyer_account,
+        CASE WHEN
+        `ry_rpb`.`payment_order`.order_type = 1
+        THEN
+        buyer_info.nick_name
+        else
+        buyer_info2.nick_name
+        END as buyer_name
     </sql>
     <sql id="Base_From">
-        (((((`ry_rpb`.`payment_order` left join `ry_osm`.`order_form` on((`ry_osm`.`order_form`.`order_no` =
-        `ry_rpb`.`payment_order`.`order_no`))) left join `ry_rmmm`.`shop_info` on((`ry_rmmm`.`shop_info`.`id` =
-        `ry_osm`.`order_form`.`weidian_id`))) left join `ry_rmmm`.`mall_cooperate` on((`ry_rmmm`.`mall_cooperate`.`id` =
-        `ry_rmmm`.`shop_info`.`mall_id`))) left join `ry_rmmm`.`rmmm_user_info` on((`ry_rmmm`.`rmmm_user_info`.`id` =
-        `ry_rpb`.`payment_order`.`draw_user_id`))) left join `ry_trade`.`trade_order`
-        on((`ry_rpb`.`payment_order`.`order_no` = `ry_trade`.`trade_order`.`order_no`)))
+        `ry_rpb`.`payment_order` left join `ry_osm`.`order_form` on`ry_osm`.`order_form`.`order_no` =
+        `ry_rpb`.`payment_order`.`order_no` left join `ry_rmmm`.`shop_info` on`ry_rmmm`.`shop_info`.`id` =
+        `ry_osm`.`order_form`.`weidian_id` left join `ry_rmmm`.`mall_cooperate` on`ry_rmmm`.`mall_cooperate`.`id` =
+        `ry_rmmm`.`shop_info`.`mall_id` left join `ry_rmmm`.`rmmm_user_info` on `ry_rmmm`.`rmmm_user_info`.`id` =
+        `ry_rpb`.`payment_order`.`draw_user_id` left join `ry_trade`.`trade_order`
+        on `ry_rpb`.`payment_order`.`order_no` = `ry_trade`.`trade_order`.`order_no`
+        left join ry_user.malllife_user_info buyer_info on buyer_info.id = `ry_trade`.`trade_order`.`user_id`
+        left join ry_user.malllife_user_info  buyer_info2 on buyer_info2.id = `ry_osm`.`order_form`.`buyer_id`
     </sql>
     <sql id="trade_list_where_clause">
-        
+
         ((`ry_rpb`.`payment_order`.`status` = 0) and ((`ry_rpb`.`payment_order`.`trade_type` = 1) or
         (`ry_rpb`.`payment_order`.`trade_type` = 4) or (`ry_rpb`.`payment_order`.`trade_type` = 6)))
         <!-- 付款单号 -->
@@ -71,17 +88,15 @@
             AND shop_info.shop_name like
             concat('%',#{shopName,jdbcType=VARCHAR},'%')
         </if>
-        <!-- 买家id集合 -->
+
+        <!--买家账号-->
         <if test="buyerAccount != null and buyerAccount != ''">
-            AND (trade_order.user_phone=#{buyerAccount}
-            <if test="buyerIds != null and buyerIds != ''">
-                OR buyer_id in
-                <foreach collection="buyerIds" index="index" item="item"
-                         open="(" separator="," close=")">
-                    #{item}
-                </foreach>
-            </if>
-            )
+            AND buyer_info.phone = #{buyerAccount}
+        </if>
+        <!--买家姓名-->
+        <if test="buyerName != null and buyerName != ''">
+            AND buyer_info.nike_name like
+            concat('%',#{buyerName,jdbcType=VARCHAR},'%')
         </if>
 
         <!-- 卖家姓名 -->
