@@ -239,6 +239,11 @@ public class TradeVO implements Serializable {
 	 */
 	private Date opTime;
 
+	/**
+	 * 是否允许继续操作付款
+	 */
+	private boolean rePay=true;
+
 	public Integer getId() {
 		return id;
 	}
@@ -606,5 +611,13 @@ public class TradeVO implements Serializable {
 
 	public void setOpTime(Date opTime) {
 		this.opTime = opTime;
+	}
+
+	public boolean isRePay() {
+		return rePay;
+	}
+
+	public void setRePay(boolean rePay) {
+		this.rePay = rePay;
 	}
 }
