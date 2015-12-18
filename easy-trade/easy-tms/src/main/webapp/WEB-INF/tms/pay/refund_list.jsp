@@ -22,14 +22,22 @@
 			<c:when test="${not empty list}">
 				<c:forEach var="item" items="${list}" varStatus="status">
 					<tr>
-						<td style="text-align: center;"><input type="checkbox" name="subBox" id="${item.id}" payChannel="${item.payChannel}" ></td>
+						<c:choose>
+							<c:when test="${item.rePay}">
+								<td style="text-align: center;"><input type="checkbox" name="subBox" id="${item.id}" payChannel="${item.payChannel}" ></td>
+							</c:when>
+							<c:otherwise>
+								<td style="text-align: center;"><input type="checkbox" name="subBox" id="${item.id}" payChannel="${item.payChannel}" disabled="disabled"></td>
+							</c:otherwise>
+						</c:choose>
+
 						<td>${item.payNo}</td>
 						<c:choose>
 							<c:when test="${item.orderType eq 0}">
 								<td><a href="${ctx}/orderManager/orderInfo?orderId=${item.orderId}&userId=${item.orderUserId}&module=order&type=tradeDetail" target="_parent"  style="text-decoration:underline" >${item.orderNo}</a></td>
 							</c:when>
 							<c:otherwise>
-								<td>${item.orderNo}</a></td>
+								<td>${item.orderNo}</td>
 							</c:otherwise>
 						</c:choose>
 						<c:choose>

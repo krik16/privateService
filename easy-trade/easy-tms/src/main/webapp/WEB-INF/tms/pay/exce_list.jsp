@@ -21,7 +21,15 @@
 			<c:when test="${not empty list}">
 				<c:forEach var="item" items="${list}" varStatus="status">
 					<tr>
-						<td style="text-align: center;"><input type="checkbox" name="subBox" id="${item.id}" payChannel="${item.payChannel}"></td>
+						<c:choose>
+							<c:when test="${item.rePay}">
+								<td style="text-align: center;"><input type="checkbox" name="subBox" id="${item.id}" payChannel="${item.payChannel}"></td>
+							</c:when>
+							<c:otherwise>
+								<td style="text-align: center;"><input type="checkbox" name="subBox" id="${item.id}" payChannel="${item.payChannel}" disabled="disabled"></td>
+							</c:otherwise>
+						</c:choose>
+
 						<td>${item.payNo}</td>
 						<c:choose>
 							<c:when test="${item.orderType eq 0}">
@@ -44,8 +52,16 @@
 						<td>${item.buyerAccount}</td>
 						<td>${item.buyerName}</td>
 						<td>${item.orderPrice}</td>
-						<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="morePay(${item.id},4, ${item.payChannel})"  class="btnsearch" id="pay-button" target="_blank">付款</a></sec:authorize></td>
-			 		</td>
+						<c:choose>
+							<c:when test="${item.rePay}">
+								<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="morePay(${item.id},4, ${item.payChannel})"  class="btnsearch" id="pay-button" target="_blank">付款</a></sec:authorize></td>
+							</c:when>
+							<c:otherwise>
+								<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><button class="btnsearch" disabled="disabled">付款</button></sec:authorize></td>
+							</c:otherwise>
+						</c:choose>
+
+						</td>
 					</tr>
 				</c:forEach>
 			</c:when>

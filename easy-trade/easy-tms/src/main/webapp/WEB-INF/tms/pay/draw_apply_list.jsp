@@ -21,7 +21,15 @@
 			<c:when test="${not empty list}">
 				<c:forEach var="item" items="${list}" varStatus="status">
 					<tr>
-						<td style="text-align: center;"><input type="checkbox" name="subBox" class="subBox" id="${item.id}" payChannel="${item.payChannel}"></td>
+						<c:choose>
+							<c:when test="${item.rePay}">
+								<td style="text-align: center;"><input type="checkbox" name="subBox" class="subBox" id="${item.id}" payChannel="${item.payChannel}"></td>
+							</c:when>
+							<c:otherwise>
+								<td style="text-align: center;"><input type="checkbox" name="subBox" class="subBox" id="${item.id}" payChannel="${item.payChannel}"  disabled="disabled"></td>
+							</c:otherwise>
+						</c:choose>
+
 						<td><a href="${ctx}/bs/detail?id=${item.drawApplyId}&module=merchant" target="_blank" style="text-decoration: underline;">${item.orderNo}</a></td>
 						<c:choose>
 							<c:when test="${item.guideType eq 1}">

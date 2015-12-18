@@ -335,6 +335,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 	 **/
 
 	private void insertOp(String[] paymentIds,String userId){
+		LOGGER.info("记录操作日志 insertOp paymentIds={},userId={}",paymentIds,userId);
 		try{
 			for (String paymentId : paymentIds){
 				PaymentOrderOp paymentOrderOp =paymentOrderOpService.selectByPaymentId(Integer.valueOf(paymentId));
