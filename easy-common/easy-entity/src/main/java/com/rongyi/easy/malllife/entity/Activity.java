@@ -3,11 +3,9 @@ package com.rongyi.easy.malllife.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.rongyi.easy.malllife.param.MalllifeBaseParam;
+public class Activity   implements Serializable {
 
-public class Activity  extends MalllifeBaseParam  implements Serializable {
-
-
+ 
 	private Integer id;
 
     private String userId;
@@ -29,8 +27,11 @@ public class Activity  extends MalllifeBaseParam  implements Serializable {
     private Integer totalDiscountAmount;
 
     private Integer status;
+    
+ 
 
-    public Integer getId() {
+ 
+	public Integer getId() {
         return id;
     }
 

@@ -32,6 +32,13 @@ public interface IKanjiaService {
 	 * @return
 	 */
 	public JSONObject discountInfo(Activity activity);
+	
+	/**
+	 * 好友帮
+	 * @param activity
+	 * @return
+	 */
+	ResponseVO helpFriend(Activity activity);
  
 
 }
