@@ -38,5 +38,6 @@ public interface ROAKanjiaService {
 	public JSONObject discountInfo(Activity activity);
  
 	ResponseVO helpFriend(Activity activity);
+	public Activity selectActivityId(Activity activity);
 
 }

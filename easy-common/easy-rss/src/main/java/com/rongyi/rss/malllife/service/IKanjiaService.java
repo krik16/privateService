@@ -39,6 +39,11 @@ public interface IKanjiaService {
 	 * @return
 	 */
 	ResponseVO helpFriend(Activity activity);
- 
+ /**
+  * 查询活动信息id
+  * @param activity
+  * @return
+  */
+	public Activity selectActivityId(Activity activity);
 
 }

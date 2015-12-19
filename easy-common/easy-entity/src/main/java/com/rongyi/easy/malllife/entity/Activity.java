@@ -3,7 +3,10 @@ package com.rongyi.easy.malllife.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Activity   implements Serializable {
+
+import com.rongyi.easy.malllife.param.MalllifeBaseParam;
+
+public class Activity  extends MalllifeBaseParam  implements Serializable {
 
  
 	private Integer id;
@@ -27,10 +30,24 @@ public class Activity   implements Serializable {
     private Integer totalDiscountAmount;
 
     private Integer status;
-    
- 
+    private String activityId;
+    private Integer isMaster; //0 自己砍价，1好友砍价
+    public Integer getIsMaster() {
+		return isMaster;
+	}
 
- 
+	public void setIsMaster(Integer isMaster) {
+		this.isMaster = isMaster;
+	}
+
+	public String getActivityId() {
+		return activityId;
+	}
+
+	public void setActivityId(String activityId) {
+		this.activityId = activityId;
+	}
+
 	public Integer getId() {
         return id;
     }
@@ -118,13 +135,15 @@ public class Activity   implements Serializable {
     public void setStatus(Integer status) {
         this.status = status;
     }
-    @Override
+
+	@Override
 	public String toString() {
 		return "Activity [id=" + id + ", userId=" + userId + ", commodityId="
 				+ commodityId + ", type=" + type + ", discountAmount="
 				+ discountAmount + ", createAt=" + createAt + ", friendId="
 				+ friendId + ", headUrl=" + headUrl + ", nickName=" + nickName
 				+ ", totalDiscountAmount=" + totalDiscountAmount + ", status="
-				+ status + "]";
+				+ status + ", activityId=" + activityId + "]";
 	}
+ 
 }
