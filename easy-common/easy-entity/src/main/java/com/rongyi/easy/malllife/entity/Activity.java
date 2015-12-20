@@ -33,7 +33,15 @@ public class Activity  extends MalllifeBaseParam  implements Serializable {
     private Integer status;
     private String activityId;
     private String mobile;
- 
+    private int isSelf;
+
+	public int getIsSelf() {
+		return isSelf;
+	}
+
+	public void setIsSelf(int isSelf) {
+		this.isSelf = isSelf;
+	}
 
 	public String getMobile() {
 		return mobile;
