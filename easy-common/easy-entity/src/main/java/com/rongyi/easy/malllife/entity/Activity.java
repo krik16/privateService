@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 
+
 import com.rongyi.easy.malllife.param.MalllifeBaseParam;
 
 public class Activity  extends MalllifeBaseParam  implements Serializable {
@@ -28,16 +29,18 @@ public class Activity  extends MalllifeBaseParam  implements Serializable {
     private String nickName;
 
     private Integer totalDiscountAmount;
-
+    
     private Integer status;
     private String activityId;
-    private Integer isMaster; //0 自己砍价，1好友砍价
-    public Integer getIsMaster() {
-		return isMaster;
+    private String mobile;
+ 
+
+	public String getMobile() {
+		return mobile;
 	}
 
-	public void setIsMaster(Integer isMaster) {
-		this.isMaster = isMaster;
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
 
 	public String getActivityId() {
@@ -145,5 +148,7 @@ public class Activity  extends MalllifeBaseParam  implements Serializable {
 				+ ", totalDiscountAmount=" + totalDiscountAmount + ", status="
 				+ status + ", activityId=" + activityId + "]";
 	}
+
+ 
  
 }
