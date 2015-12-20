@@ -155,7 +155,7 @@ public class CouponOrderParam implements Serializable {
                 .append("couponCodes", couponCodes)
                 .append("business", business)
                 .append("discount", discount)
-                .append("commodityId", business)
+                .append("commodityId", commodityId)
                 .toString();
     }
 }
