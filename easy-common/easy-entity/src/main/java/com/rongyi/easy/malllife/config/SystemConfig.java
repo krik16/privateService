@@ -22,6 +22,13 @@ public class SystemConfig implements Serializable{
 
     //
 
+    public static final  String  USER_DISABLED_MSG="[自动回复]抱歉，卖家休息中，请您换个卖家看看吧~";
+
+
+
+
+
+
     /**  配置网盘路径  **/
     private static final  String UPAIYUN_ADDRESS="http://rongyi.b0.upaiyun.com/";  //整路径
 

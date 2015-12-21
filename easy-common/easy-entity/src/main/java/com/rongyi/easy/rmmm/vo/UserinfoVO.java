@@ -68,6 +68,8 @@ public class UserinfoVO implements Serializable{
 
 	private String telPhone;//客服电话
 
+	String userMsg;//导购 买手禁用提示信息
+
 	
 	public Integer getIfAttention() {
 		return ifAttention;
@@ -267,5 +269,13 @@ public class UserinfoVO implements Serializable{
 
 	public void setTelPhone(String telPhone) {
 		this.telPhone = telPhone;
+	}
+
+	public String getUserMsg() {
+		return userMsg;
+	}
+
+	public void setUserMsg(String userMsg) {
+		this.userMsg = userMsg;
 	}
 }
