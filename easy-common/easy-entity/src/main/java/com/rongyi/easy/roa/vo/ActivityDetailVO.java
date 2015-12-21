@@ -3,68 +3,118 @@ package com.rongyi.easy.roa.vo;
 import java.io.Serializable;
 import java.util.Date;
 
-public class ActivityDetailVO implements Serializable{
+public class ActivityDetailVO implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private Integer activityDetailId; // 优惠Id
+    private Integer detailId; // 优惠Id
 
-	private String activityCode; // 优惠券码
+    private String code; // 优惠券码
 
-	private String itemName; // 优惠券名称 ， 商品名称，团购中对应团购名称 title 字段
+    private String itemName; // 优惠券名称
 
-	private Integer status; // 使用状态
+    private Integer status; // 使用状态
 
-	private Date startTime; // 有效期始
+    private Date startTime; // 有效期始
 
-	private Date endTime; // 有效期止
+    private Date endTime; // 有效期止
 
-	public Integer getActivityDetailId() {
-		return activityDetailId;
-	}
+    private String couponId;//卡券Id
 
-	public void setActivityDetailId(Integer activityDetailId) {
-		this.activityDetailId = activityDetailId;
-	}
+    private double origPrice; //原价
 
-	public String getActivityCode() {
-		return activityCode;
-	}
+    private double currPrice;//现价
 
-	public void setActivityCode(String activityCode) {
-		this.activityCode = activityCode;
-	}
 
-	public Integer getStatus() {
-		return status;
-	}
+    @Deprecated
+    public Integer getActivityDetailId() {
+        return detailId;
+    }
 
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
+    @Deprecated
+    public void setActivityDetailId(Integer activityDetailId) {
+        this.detailId = activityDetailId;
+    }
 
-	public Date getStartTime() {
-		return startTime;
-	}
+    @Deprecated
+    public String getActivityCode() {
+        return code;
+    }
 
-	public void setStartTime(Date startTime) {
-		this.startTime = startTime;
-	}
+    @Deprecated
+    public void setActivityCode(String activityCode) {
+        this.code = activityCode;
+    }
 
-	public Date getEndTime() {
-		return endTime;
-	}
+    public Integer getStatus() {
+        return status;
+    }
 
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
-	}
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
-	public String getItemName() {
-		return itemName;
-	}
+    public Date getStartTime() {
+        return startTime;
+    }
 
-	public void setItemName(String itemName) {
-		this.itemName = itemName;
-	}
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
 
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public double getOrigPrice() {
+        return origPrice;
+    }
+
+    public void setOrigPrice(double origPrice) {
+        this.origPrice = origPrice;
+    }
+
+    public double getCurrPrice() {
+        return currPrice;
+    }
+
+    public void setCurrPrice(double currPrice) {
+        this.currPrice = currPrice;
+    }
+
+    public String getCouponId() {
+        return couponId;
+    }
+
+    public void setCouponId(String couponId) {
+        this.couponId = couponId;
+    }
+
+    public Integer getDetailId() {
+        return detailId;
+    }
+
+    public void setDetailId(Integer detailId) {
+        this.detailId = detailId;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 }

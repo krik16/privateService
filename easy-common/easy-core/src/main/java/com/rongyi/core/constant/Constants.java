@@ -725,4 +725,14 @@ public interface Constants {
     interface ExportSize{
         int EXCEL_EXPORT_MAX_SIZE=50000;
     }
+
+
+    /**
+     * 对账类型
+     */
+    interface IS_PAY_VA{
+        byte IS_PAY_VA_0 = 0;//初始值，未结算
+        byte IS_PAY_VA_1 = 1;//对私(打款到导购虚拟账号
+        byte IS_PAY_VA_2 = 2;//对公(通过对账单结算)'
+    }
 }
