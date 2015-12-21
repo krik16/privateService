@@ -181,7 +181,12 @@ public class StatementConfigController extends BaseController{
 			MapUtils.toObject(statementConfig, map);
 			statementConfig.setCreateAt(DateUtil.getCurrDateTime());
 			statementConfig.setCreateBy(getUserName(request));
-			statementConfig.setRuleCode(getRuleCode());
+			String ruleCode = getRuleCode();
+			if (StringUtils.isNotBlank(ruleCode) && ruleCode.length() > 10) {
+				redisService.set(ruleCode.substring(0, 9), ruleCode);
+				redisService.expire(ruleCode.substring(0, 9), 60 * 60 * 48);// 两天后失效
+			}
+			statementConfig.setRuleCode(ruleCode);
 			statementConfig.setBussinessId(statementConfig.getBussinessCode());
 			if (map.containsKey("effectStartTime") && map.containsKey("effectEndTime")){
 				statementConfig.setEffectStartTime(DateTool.string2Date(map.get("effectStartTime").toString(), DateTool.FORMAT_DATETIME));
@@ -209,11 +214,6 @@ public class StatementConfigController extends BaseController{
 			}
 			List<ConfigShop> shopConfigs = (List<ConfigShop>) checkMap.get("shopConfigs");
 			statementConfigService.saveStatementConfigAndInfo(statementConfig, bussinessInfo, shopConfigs);
-			String ruleCode = statementConfig.getRuleCode();
-			if (StringUtils.isNotBlank(ruleCode) && ruleCode.length() > 10) {
-				redisService.set(ruleCode.substring(0, 9), ruleCode);
-				redisService.expire(ruleCode.substring(0, 9), 60 * 60 * 48);// 两天后失效
-			}
 			return ResponseData.success();
 		} catch (Exception e) {
 			e.printStackTrace();
