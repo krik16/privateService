@@ -425,7 +425,7 @@ public class PayController extends BaseController {
             statusList.add(ConstantEnum.STATEMENT_STATUE_10.getCodeByte());
             statusList.add(ConstantEnum.STATEMENT_STATUE_11.getCodeByte());
             map.put("statusList", statusList);
-            List<PaymentStatementDto> list = paymentStatementService.selectPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE);
+            List<PaymentStatementDto> list = validateBillAllowOpPay(paymentStatementService.selectPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE));
             double pageTotle = paymentStatementService.selectPageListCount(map);
             Integer rowContNum = (int) Math.ceil(pageTotle / Constant.PAGE.PAGESIZE);
             model.addAttribute("rowCont", rowContNum);
@@ -487,6 +487,27 @@ public class PayController extends BaseController {
         }
 
         return responseResult;
+    }
+
+    /**
+     * @Description:检查对账单是否允许用户再次操作
+     * @param:
+     * @Author:  柯军
+     **/
+
+    private  List<PaymentStatementDto> validateBillAllowOpPay( List<PaymentStatementDto> list){
+        Integer rePayTime = 10;
+        try{
+            rePayTime = Integer.valueOf(propertyConfigurer.getProperty("RE_PAY_TIME"));
+        }catch (Exception e){
+            LOGGER.error("获取重新支付时间间隔失败，设置默认值rePayTime={}", rePayTime);
+        }
+        for (PaymentStatementDto paymentStatementDto : list){
+            if(paymentStatementDto.getOpTime() != null && DateUtil.dateDiff(paymentStatementDto.getOpTime(), DateUtil.getCurrDateTime()) < rePayTime){
+                paymentStatementDto.setRePay(false);
+            }
+        }
+        return list;
     }
 
     /**

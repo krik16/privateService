@@ -26,6 +26,7 @@
 		<result column="status" property="status" jdbcType="TINYINT" />
 		<result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
 		<result column="payment_id" property="paymentId" jdbcType="INTEGER" />
+		<result column="op_time" property="opTime" jdbcType="TIMESTAMP" />
 	</resultMap>
 	<sql id="Base_Column_List">
 		id, config_id, rule_code, cycle_start_time, cycle_end_time,
@@ -105,8 +106,7 @@
 		sc.biz_name,sc.pay_channel,bi.pay_account,bi.pay_name,bi.blank_name,
 		ps.pay_total,bi.biz_email,ps.status_update_time,ps.status,po.create_at,
 		ps.pay_no,ps.trade_no,ps.pay_time,
-		po.id
-		as payment_id
+		po.id as payment_id,op.op_time
 		from payment_bill
 		ps
 		left join payment_bill_config sc on ps.config_id=sc.id
@@ -114,6 +114,7 @@
 		biz_info bi on bi.config_id=sc.id
 		left join payment_order po on
 		ps.pay_no = po.order_no
+		left join payment_order_op op on op.payment_id = po.id
 		<where>
 			<include refid="list_where_clause" />
 		</where>

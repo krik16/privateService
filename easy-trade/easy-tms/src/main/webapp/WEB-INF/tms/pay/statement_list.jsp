@@ -23,7 +23,14 @@
 			<c:when test="${not empty list}">
 				<c:forEach var="item" items="${list}" varStatus="status">
 					<tr>
-						<td style="text-align: center;"><input type="checkbox" name="subBox" id="${item.id}" payChannel="${item.payChannel}" paymentId="${item.paymentId}"></td>
+						<c:choose>
+							<c:when test="${item.rePay}">
+								<td style="text-align: center;"><input type="checkbox" name="subBox" id="${item.id}" payChannel="${item.payChannel}" paymentId="${item.paymentId}"></td>
+							</c:when>
+							<c:otherwise>
+								<td style="text-align: center;"><input type="checkbox" name="subBox" id="${item.id}" payChannel="${item.payChannel}" paymentId="${item.paymentId}" disabled="disabled"></td>
+							</c:otherwise>
+						</c:choose>
 						<td>${item.batchNo}</td>
 						<td>${item.payNo}</td>
 						<td><c:choose>
@@ -75,17 +82,25 @@
 							</c:otherwise>
 						</c:choose>
 						</td>
-						<td>
+
 							<c:choose>
 								<c:when test="${item.status eq 9}">
-									<sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="payFreeze(${item.id},10)" class="btnsearch" id="pay-button" target="_blank">解冻</a></sec:authorize>
+									<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="payFreeze(${item.id},10)" class="btnsearch" id="pay-button" target="_blank">解冻</a></sec:authorize>
 								</c:when>
-								<c:when test="${item.status eq 6 or item.status eq 10}">
-									<sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="payFreeze(${item.id},9)" class="btnsearch" id="pay-button" target="_blank">冻结</a></sec:authorize>
+								<c:when test="${(item.status eq 6 or item.status eq 10) and item.rePay }">
+									<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="payFreeze(${item.id},9)" class="btnsearch" id="pay-button" target="_blank">冻结</a></sec:authorize>
 									<sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="statementPay(${item.paymentId},6, ${item.payChannel},${item.id})" class="btnsearch" id="pay-button" target="_blank">付款</a></sec:authorize>
 								</c:when>
+
+								<c:when test="${(item.status eq 6 or item.status eq 10) and !item.rePay }">
+									<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="payFreeze(${item.id},9)" class="btnsearch" id="pay-button" target="_blank">冻结</a></sec:authorize>
+									<sec:authorize ifAnyGranted="TMS_F_PAY" ><button class="btn-class" disabled="disabled">付款</button></sec:authorize>
+								</c:when>
+								<c:when test="${item.rePay}">
+									<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="statementPay(${item.paymentId},6, ${item.payChannel},${item.id})" class="btnsearch" id="pay-button" target="_blank">付款</a></sec:authorize>
+								</c:when>
 								<c:otherwise>
-								<sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="statementPay(${item.paymentId},6, ${item.payChannel},${item.id})" class="btnsearch" id="pay-button" target="_blank">付款</a></sec:authorize>
+									<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><button class="btn-class" disabled="disabled">付款</button></sec:authorize>
 								</c:otherwise>
 							</c:choose>
 						</td>
