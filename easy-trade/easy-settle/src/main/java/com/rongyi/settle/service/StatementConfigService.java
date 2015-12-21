@@ -8,13 +8,15 @@
 
 package com.rongyi.settle.service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import com.rongyi.easy.settle.entity.BussinessInfo;
+import com.rongyi.easy.settle.entity.ConfigShop;
 import com.rongyi.easy.settle.entity.StatementConfig;
+import com.rongyi.easy.settle.vo.ConfigShopVO;
 import com.rongyi.easy.settle.vo.StatementConfigVO;
+import com.rongyi.settle.web.controller.vo.UserInfoVo;
 
 /**	
  * @Author:  柯军
@@ -24,7 +26,8 @@ import com.rongyi.easy.settle.vo.StatementConfigVO;
  **/
 
 public interface StatementConfigService {
-	
+
+
 	/**	
 	 * @Description: 分页查询
 	 * @param map
@@ -34,7 +37,7 @@ public interface StatementConfigService {
 	 * @Author:  柯军
 	 * @datetime:2015年9月17日上午11:23:43
 	 **/
-	public abstract List<StatementConfigVO> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize); 
+	List<StatementConfigVO> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize);
 	
 	/**	
 	 * @Description: 分页总数 
@@ -43,7 +46,7 @@ public interface StatementConfigService {
 	 * @Author:  柯军
 	 * @datetime:2015年9月17日上午11:23:51
 	 **/
-	public abstract Integer selectPageListCount(Map<String,Object> map);
+	Integer selectPageListCount(Map<String,Object> map);
 	
 	/**	
 	 * @Description: 插入 
@@ -51,7 +54,7 @@ public interface StatementConfigService {
 	 * @Author:  柯军
 	 * @datetime:2015年9月17日上午11:24:02
 	 **/
-	public abstract int insert(StatementConfig statementConfig);
+	int insert(StatementConfig statementConfig);
 	
 	/**	
 	 * @Description: 更新
@@ -59,7 +62,7 @@ public interface StatementConfigService {
 	 * @Author:  柯军
 	 * @datetime:2015年9月17日上午11:24:08
 	 **/
-	public abstract void update(StatementConfig statementConfig);
+	void update(StatementConfig statementConfig);
 	
 	/**	
 	 * @Description: 根据id查询 
@@ -67,7 +70,7 @@ public interface StatementConfigService {
 	 * @Author:  柯军
 	 * @datetime:2015年9月17日上午11:24:15
 	 **/
-	public abstract StatementConfig selectById(Integer id);
+	StatementConfig selectById(Integer id);
 	
 	
 	/**	
@@ -77,7 +80,7 @@ public interface StatementConfigService {
 	 * @Author:  柯军
 	 * @datetime:2015年9月21日下午4:26:16
 	 **/
-	public abstract void saveStatementConfigAndInfo(StatementConfig statementConfig,BussinessInfo bussinessInfo);
+	void saveStatementConfigAndInfo(StatementConfig statementConfig,BussinessInfo bussinessInfo, List<ConfigShop> shopConfigs);
 
 	/**
 	 * @Description: 定时任务查询符合条件的对账配置
@@ -97,7 +100,7 @@ public interface StatementConfigService {
 
 	/**	
 	 * @Description: 根据规则编号查询记录 
-	 * @param string
+	 * @param ruleCode
 	 * @return	
 	 * @Author:  柯军
 	 * @datetime:2015年10月15日上午10:52:29
@@ -116,15 +119,33 @@ public interface StatementConfigService {
 	
 	/**	
 	 * @Description: 验证对账单配置是否已存在 
-	 * @param cooperateType
-	 * @param bussinessType
-	 * @param bussinessId
-	 * @param status
-	 * @param effectStartTime
-	 * @param effectEndTime
-	 * @return	
+	 * @param statementConfig
+	 * @param linkId
+	 * @param linkAccount
+	 * @param statuses
+	 * @return
 	 * @Author:  柯军
 	 * @datetime:2015年10月21日下午2:38:48
 	 **/
-	boolean validateIsExist(byte cooperateType,byte bussinessType,String bussinessId,byte status,Date effectStartTime,Date  effectEndTime);
+	Map<String, Object> validateIsExist(StatementConfig statementConfig, List<Byte> statuses, Map linkId, Map linkAccount) throws Exception;
+
+	List<UserInfoVo> getAccountInfoByParam(Integer isOneself, Integer type, Integer guideType, String id, String userAccount);
+
+	/**
+	 * @Description:验证是否需要打款到买家虚拟账号
+	 * @param:shopId 店铺ID
+	 * @param:userId 用户ID
+	 * @param:gradeType 用户角色(1:导购,2:买手)
+	 * @return true	打款，false 不打款
+	 * @Author:  柯军
+	 **/
+
+	boolean validateNeedPay(String shopId,String userId,Integer gradeType);
+
+	List<StatementConfig> checkeffectStart(Map<String, Object> paramsMap);
+
+
+	List<ConfigShopVO> selectConfigShopsPage(Map<String, Object> paramsMap, int currPage, int pageSize) throws Exception;
+
+	int selectConfigShopsPageCount(Map<String, Object> paramsMap);
 }

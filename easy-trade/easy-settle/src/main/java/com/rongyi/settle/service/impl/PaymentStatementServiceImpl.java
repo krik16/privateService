@@ -31,19 +31,23 @@ import com.rongyi.settle.constants.ConstantEnum;
 import com.rongyi.settle.constants.SettleConstant;
 import com.rongyi.settle.dto.CouponCodeExcelDto;
 import com.rongyi.settle.dto.CouponExcelDto;
-import com.rongyi.settle.dto.PaymentStatementDetailDto;
+import com.rongyi.settle.dto.CouponStatementDetailDto;
+import com.rongyi.settle.dto.OrderSettlementDetailDto;
+import com.rongyi.settle.dto.OrderSettlementDetailVO;
+import com.rongyi.settle.dto.OrderSettlementTopDto;
 import com.rongyi.settle.dto.PaymentStatementExcelDto;
 import com.rongyi.settle.mapper.OperationLogMapper;
 import com.rongyi.settle.mapper.PaymentStatementMapper;
 import com.rongyi.settle.service.BussinessInfoService;
 import com.rongyi.settle.service.PaymentStatementService;
 import com.rongyi.settle.service.StatementConfigService;
+import com.rongyi.settle.unit.SendEmailUnit;
 import com.rongyi.settle.util.AmountUtil;
 import com.rongyi.settle.util.DateUtils;
 import com.rongyi.settle.util.ExcelUtils;
 
 /**
- * Created by xgq on 2015/9/22.
+ * Created by xgq on 2015/9/22. Modified by ZhengYl on 2015/12/08
  */
 @Service
 public class PaymentStatementServiceImpl extends BaseServiceImpl implements PaymentStatementService {
@@ -79,6 +83,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 	@Autowired
 	private ROARedisService redisService;
 
+	@Autowired
+	private SendEmailUnit sendEmailUnit;
+
 	@Override
 	public List<PaymentStatementDto> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
 		if (currentPage != null && pageSize != null) {
@@ -108,10 +115,11 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 	}
 
 	@Override
-	public void insert(PaymentStatement paymentStatement) {
-		this.getBaseDao().insertBySql(NAMESPACE + ".insert", paymentStatement);
+	public Integer insert(PaymentStatement paymentStatement) {
+		return this.getBaseDao().insertBySql(NAMESPACE + ".insert", paymentStatement);
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public List<PaymentStatement> selectByCycleTime(Integer configId, Date yesterdayFirstSecond, Date yesterdayLastSecond) {
 		Map map = new HashMap();
@@ -138,15 +146,21 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 							logger.info(ids.get(i) + "未生成付款，原因:" + reMap.get("message"));
 							ids.remove(i);
 						}
-					}else if(ConstantEnum.STATUS_4.getCodeInt().equals(status)){
+					} else if (ConstantEnum.STATUS_4.getCodeInt().equals(status)) {
 						PaymentStatement paymentStatement = get(ids.get(i));
-						if(paymentStatement.getPayTotal() == null || paymentStatement.getPayTotal() == 0){
-							paramsMap.put("status",ConstantEnum.STATUS_12.getCodeByte());
-							desc+=",0元商家审核确认，状态直接为已付款";
+						if (paymentStatement.getPayTotal() == null || paymentStatement.getPayTotal() == 0) {
+							paramsMap.put("status", ConstantEnum.STATUS_12.getCodeByte());
+							desc += ",0元商家审核确认，状态直接为已付款";
 						}
 					}
-					
+
 					saveOperationLog(ids.get(i), status, desc, userId);
+					// 检查是否需要发送对账单邮件
+					if (ConstantEnum.STATUS_1.getCodeInt().equals(status) || ConstantEnum.STATUS_3.getCodeInt().equals(status)) {
+						PaymentStatementDto paymentStatementDto = paymentStatementMapper.searchDtoById(ids.get(i));
+						sendEmailUnit.sendMailNysn(paymentStatementDto);
+					}
+
 				}
 				paymentStatementMapper.updateStatusByIds(paramsMap);
 				result = true;
@@ -175,36 +189,162 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		return iRpbService.generatePayment(param);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.rongyi.settle.service.PaymentStatementService#
+	 * selectForStatementDetails(java.lang.String, java.lang.String,
+	 * java.lang.String, java.util.Date, java.util.Date)
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public List<PaymentStatementDetailDto> selectForStatementDetails(String shopId, Date startTime, Date endTime, Date cycleStartTime, Date cycleEndTime, String shopName, String mallId,
-			String mallName) {
+	public List<CouponStatementDetailDto> selectForStatementDetails(String mallId, String brandId, String shopId, Date startTime, Date endTime) {
+		Map map = new HashMap();
+		map.put("mallId", mallId);
+		map.put("brandId", brandId);
+		map.put("shopId", shopId);
+		map.put("startTime", DateUtil.dateToString(startTime));
+		map.put("endTime", DateUtil.dateToString(endTime));
+		List<CouponStatementDetailDto> result = this.getBaseDao().selectListBySql(NAMESPACE + ".selectForStatementDetailsByMid", map);
+
+		return result;
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public List<CouponStatementDetailDto> selectForStatementDetailsByUsers(String userIds, Date startTime, Date endTime) {
+		Map map = new HashMap();
+		if (userIds != null && !userIds.isEmpty()) {
+			map.put("userIds", userIds.split(","));
+		} else {
+			return null;
+		}
+		map.put("startTime", DateUtil.dateToString(startTime));
+		map.put("endTime", DateUtil.dateToString(endTime));
+		List<CouponStatementDetailDto> result = this.getBaseDao().selectListBySql(NAMESPACE + ".selectForStatementDetailsByUsers", map);
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.rongyi.settle.service.PaymentStatementService#selectForConfigShops(
+	 * java.lang.String)
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public List<String> selectForConfigShops(Integer configId) {
+		Map map = new HashMap();
+		map.put("configId", configId);
+		List<String> result = this.getBaseDao().selectListBySql(NAMESPACE + ".selectForConfigShopsById", map);
+
+		return result;
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public List<CouponStatementDetailDto> selectForStatementDetails(String shopId, Date startTime, Date endTime, Date cycleStartTime, Date cycleEndTime, String shopName,
+			String mallId, String mallName) {
 		Map map = new HashMap();
 		map.put("shopId", shopId);
 		map.put("cycleStartTime", DateUtil.dateToString(cycleStartTime));
 		map.put("cycleEndTime", DateUtil.dateToString(cycleEndTime));
 		map.put("startTime", DateUtil.dateToString(startTime));
 		map.put("endTime", DateUtil.dateToString(endTime));
-//		map.put("shopName", shopName);
-//		map.put("mallId", mallId);
-//		map.put("mallName", mallName);
-		List<PaymentStatementDetailDto> result = this.getBaseDao().selectListBySql(NAMESPACE + ".selectForStatementDetails", map);
-		for (PaymentStatementDetailDto paymentStatementDetailDto : result) {
-			paymentStatementDetailDto.setShopName(shopName);
-			paymentStatementDetailDto.setMallId(mallId);
-			paymentStatementDetailDto.setMallName(mallName);
+		// map.put("shopName", shopName);
+		// map.put("mallId", mallId);
+		// map.put("mallName", mallName);
+		List<CouponStatementDetailDto> result = this.getBaseDao().selectListBySql(NAMESPACE + ".selectForStatementDetails", map);
+		for (CouponStatementDetailDto couponStatementDetailDto : result) {
+			couponStatementDetailDto.setShopName(shopName);
+			couponStatementDetailDto.setMallId(mallId);
+			couponStatementDetailDto.setMallName(mallName);
 		}
 		return result;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public List<CouponExcelDto> selectForCouponExcelDto(String shopId, Date startTime, Date endTime, Date cycleStartTime, Date cycleEndTime) {
+	public List<CouponExcelDto> selectForCouponExcelDto(String mallId, String brandId, String shopId, Date startTime, Date endTime) {
+		Map map = new HashMap();
+		map.put("mallId", mallId);
+		map.put("brandId", brandId);
+		map.put("shopId", shopId);
+		map.put("startTime", startTime);
+		map.put("endTime", endTime);
+		return this.getBaseDao().selectListBySql(NAMESPACE + ".selectForCouponExcelDtoByMid", map);
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public List<CouponExcelDto> selectForCouponExcelDtoByUsers(String userIds, Date startTime, Date endTime) {
+		Map map = new HashMap();
+		if (userIds != null && !userIds.isEmpty()) {
+			map.put("userIds", userIds.split(","));
+		} else {
+			return null;
+		}
+		map.put("startTime", startTime);
+		map.put("endTime", endTime);
+		return this.getBaseDao().selectListBySql(NAMESPACE + ".selectForCouponExcelDtoByUsers", map);
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public List<CouponExcelDto> selectForCouponExcelDto(String shopId, Date startTime, Date endTime) {
 		Map map = new HashMap();
 		map.put("shopId", shopId);
-		map.put("cycleStartTime", cycleStartTime);
-		map.put("cycleEndTime", cycleEndTime);
 		map.put("startTime", startTime);
 		map.put("endTime", endTime);
 		return this.getBaseDao().selectListBySql(NAMESPACE + ".selectForCouponExcelDto", map);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.rongyi.settle.service.PaymentStatementService#selectForOrderTopDto(
+	 * java.lang.String, java.lang.String, java.lang.String, java.lang.String,
+	 * java.util.Date, java.util.Date)
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public List<OrderSettlementTopDto> selectForOrderTopDto(String shopId, String mallId, String brandId, String userIds, Date startTime, Date endTime) {
+		Map map = new HashMap();
+		map.put("mallId", mallId);
+		map.put("brandId", brandId);
+		map.put("shopId", shopId);
+		if (userIds != null && !userIds.isEmpty()) {
+			map.put("userIds", userIds.split(","));
+		}
+		map.put("startTime", startTime);
+		map.put("endTime", endTime);
+		return this.getBaseDao().selectListBySql(NAMESPACE + ".selectForOrderTopDto", map);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.rongyi.settle.service.PaymentStatementService#selectForOrderDetailDto
+	 * (java.lang.String, java.lang.String, java.lang.String, java.lang.String,
+	 * java.util.Date, java.util.Date)
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public List<OrderSettlementDetailDto> selectForOrderDetailDto(String shopId, String mallId, String brandId, String userIds, Date startTime, Date endTime) {
+		Map map = new HashMap();
+		map.put("mallId", mallId);
+		map.put("brandId", brandId);
+		map.put("shopId", shopId);
+		if (userIds != null && !userIds.isEmpty()) {
+			map.put("userIds", userIds.split(","));
+		}
+		map.put("startTime", startTime);
+		map.put("endTime", endTime);
+		return this.getBaseDao().selectListBySql(NAMESPACE + ".selectForOrderDetailDto", map);
 	}
 
 	/**
@@ -234,13 +374,14 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 
 	@Override
 	public PaymentStatement get(Integer id) {
-		Map<String, Object> map = new HashMap<String,Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
 		return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectByPrimaryKey", map);
 	}
 
 	@Override
-	public void generate(Integer id,String userId) throws Exception {
+	public void generate(Integer id, String userId) throws Exception {
+		logger.info("重新生成对账单开始，id= " + id + "userId: " + userId);
 		PaymentStatement paymentStatement = get(id);
 		if (ConstantEnum.STATUS_8.getCodeByte().equals(paymentStatement.getStatus())) {
 			logger.error("作废对账单不能重新生成。id=" + id);
@@ -248,6 +389,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		}
 		StatementConfig statementConfig = statementConfigService.selectById(paymentStatement.getConfigId());
 
+		if (statementConfig == null) {
+			throw new SettleConfigNotFoundException();
+		}
 		PaymentStatement paymentStatementNew = new PaymentStatement();
 		paymentStatementNew.setConfigId(statementConfig.getId());
 		paymentStatementNew.setRuleCode(statementConfig.getRuleCode());
@@ -259,70 +403,229 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 		paymentStatementNew.setCreateAt(new Date());
 		paymentStatementNew.setIsDelete(new Byte("0"));
 		paymentStatementNew.setPayNo(orderNoGenService.getOrderNo("3"));
-		createExcel(id, paymentStatementNew, statementConfig,userId);
+		createExcel(id, paymentStatementNew, statementConfig, userId);
 	}
 
-	private void createExcel(Integer id, PaymentStatement paymentStatement, StatementConfig statementConfig,String userId) throws Exception {
+	@Override
+	public void createExcel(Integer id, PaymentStatement paymentStatement, StatementConfig statementConfig, String userId) throws Exception {
 		PaymentStatementExcelDto paymentStatementExcelDto = new PaymentStatementExcelDto();
-		List<PaymentStatementDetailDto> paymentStatementDetailDtoList = new ArrayList<>();
+		List<CouponStatementDetailDto> couponStatementDetailDtoList = new ArrayList<>();
 		List<CouponExcelDto> couponExcelDtoList = new ArrayList<>();
+		List<OrderSettlementTopDto> orderTopDtoList = new ArrayList<>();
+		List<OrderSettlementDetailDto> orderDetailDtoList = new ArrayList<>();
+
+		// boolean dataLoad = false;
+
+		logger.info("对账单获取数据开始，BusinessId = " + statementConfig.getBussinessId() + " BusinessType = " + statementConfig.getBussinessType());
+		// if
+		// (statementConfig.getLinkType().equals(SettleConstant.LinkType.ALL)) {
+		// if
+		// (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.MALL))
+		// {
+		// // 商场 & all
+		// couponStatementDetailDtoList =
+		// selectForStatementDetails(statementConfig.getBussinessId(), null,
+		// null, paymentStatement.getCycleStartTime(),
+		// paymentStatement.getCycleEndTime());
+		//
+		// couponExcelDtoList =
+		// selectForCouponExcelDto(statementConfig.getBussinessId(), null, null,
+		// paymentStatement.getCycleStartTime(),
+		// paymentStatement.getCycleEndTime());
+		//
+		// orderTopDtoList = selectForOrderTopDto(null,
+		// statementConfig.getBussinessId(), null, null,
+		// paymentStatement.getCycleStartTime(),
+		// paymentStatement.getCycleEndTime());
+		//
+		// orderDetailDtoList = selectForOrderDetailDto(null,
+		// statementConfig.getBussinessId(), null, null,
+		// paymentStatement.getCycleStartTime(),
+		// paymentStatement.getCycleEndTime());
+		//
+		// paymentStatementExcelDto.setMallName(statementConfig.getBussinessName());
+		//
+		// dataLoad = true;
+		//
+		// } else if
+		// (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.BRAND))
+		// {
+		// // 品牌 & all
+		// couponStatementDetailDtoList = selectForStatementDetails(null,
+		// statementConfig.getBussinessId(), null,
+		// paymentStatement.getCycleStartTime(),
+		// paymentStatement.getCycleEndTime());
+		//
+		// couponExcelDtoList = selectForCouponExcelDto(null,
+		// statementConfig.getBussinessId(), null,
+		// paymentStatement.getCycleStartTime(),
+		// paymentStatement.getCycleEndTime());
+		//
+		// orderTopDtoList = selectForOrderTopDto(null, null,
+		// statementConfig.getBussinessId(), null,
+		// paymentStatement.getCycleStartTime(),
+		// paymentStatement.getCycleEndTime());
+		//
+		// orderDetailDtoList = selectForOrderDetailDto(null, null,
+		// statementConfig.getBussinessId(), null,
+		// paymentStatement.getCycleStartTime(),
+		// paymentStatement.getCycleEndTime());
+		//
+		// paymentStatementExcelDto.setMallName(statementConfig.getBussinessName());
+		//
+		// dataLoad = true;
+		// } else if
+		// (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.SHOP))
+		// {
+		// logger.info("生成店铺对账单数据");
+		// // 店铺 & all
+		// couponStatementDetailDtoList = selectForStatementDetails(null, null,
+		// statementConfig.getBussinessId(),
+		// paymentStatement.getCycleStartTime(),
+		// paymentStatement.getCycleEndTime());
+		// logger.info("couponStatementDetailDtoList
+		// size=",couponStatementDetailDtoList.size());
+		// couponExcelDtoList = selectForCouponExcelDto(null, null,
+		// statementConfig.getBussinessId(),
+		// paymentStatement.getCycleStartTime(),
+		// paymentStatement.getCycleEndTime());
+		//
+		// orderTopDtoList =
+		// selectForOrderTopDto(statementConfig.getBussinessId(), null, null,
+		// null, paymentStatement.getCycleStartTime(),
+		// paymentStatement.getCycleEndTime());
+		//
+		// orderDetailDtoList =
+		// selectForOrderDetailDto(statementConfig.getBussinessId(), null, null,
+		// null, paymentStatement.getCycleStartTime(),
+		// paymentStatement.getCycleEndTime());
+		//
+		// ShopVO shopVO =
+		// roaShopService.getShopVOById(statementConfig.getBussinessId());
+		// paymentStatementExcelDto.setShopName(shopVO.getName());
+		// paymentStatementExcelDto.setMallName(shopVO.getPosition().getMall());
+		//
+		// dataLoad = true;
+		// }
+		// }
+
+		// if (!dataLoad) {
+		// part
+		List<String> userIds = selectForConfigShops(statementConfig.getId());
+		for (String idStr : userIds) {
+			if (idStr == null || idStr.isEmpty())
+				continue;
+			List<CouponStatementDetailDto> couponStatementDetailDtos = selectForStatementDetailsByUsers(idStr, paymentStatement.getCycleStartTime(),
+					paymentStatement.getCycleEndTime());
+			if (couponStatementDetailDtos != null) {
+				couponStatementDetailDtoList.addAll(couponStatementDetailDtos);
+			}
+
+			List<CouponExcelDto> couponExcelDtos = selectForCouponExcelDtoByUsers(idStr, paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime());
+			if (couponExcelDtos != null) {
+				couponExcelDtoList.addAll(couponExcelDtos);
+			}
+
+			List<OrderSettlementTopDto> orderSettlementTopDtos = selectForOrderTopDto(null, null, null, idStr, paymentStatement.getCycleStartTime(),
+					paymentStatement.getCycleEndTime());
+			if (orderSettlementTopDtos != null) {
+				orderTopDtoList.addAll(orderSettlementTopDtos);
+			}
+
+			List<OrderSettlementDetailDto> orderSettlementDetailDtos = selectForOrderDetailDto(null, null, null, idStr, paymentStatement.getCycleStartTime(),
+					paymentStatement.getCycleEndTime());
+			if (orderSettlementDetailDtos != null) {
+				orderDetailDtoList.addAll(orderSettlementDetailDtos);
+			}
+
+		}
 		if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.SHOP)) {
 			ShopVO shopVO = roaShopService.getShopVOById(statementConfig.getBussinessId());
-			paymentStatementDetailDtoList = selectForStatementDetails(statementConfig.getBussinessId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(),
-					statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime(), shopVO.getName(), shopVO.getPosition().getMallId(), shopVO.getPosition().getMall());
-			couponExcelDtoList = selectForCouponExcelDto(statementConfig.getBussinessId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(),
-					statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime());
 			paymentStatementExcelDto.setShopName(shopVO.getName());
 			paymentStatementExcelDto.setMallName(shopVO.getPosition().getMall());
-		} else if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.MALL)) {
-			Map map = new HashMap();
-			map.put("mallId", statementConfig.getBussinessId());
-			Map result = roaShopService.getShops(map, 1, 10000);
-			List<ShopVO> shopVOs = (List<ShopVO>) result.get("list");
-			for (ShopVO shopVO : shopVOs) {
-				logger.info("重新生成对账单-商场类型配置，shopId="+shopVO.getId());
-				paymentStatementDetailDtoList.addAll(selectForStatementDetails(shopVO.getId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(),
-						statementConfig.getCycleStartTime(), statementConfig.getCycleEndTime(), shopVO.getName(), shopVO.getPosition().getMallId(), shopVO.getPosition().getMall()));
-				couponExcelDtoList.addAll(selectForCouponExcelDto(shopVO.getId(), paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime(), statementConfig.getCycleStartTime(),
-						statementConfig.getCycleEndTime()));
-			}
-			if (shopVOs != null && shopVOs.size() > 0) {
-				paymentStatementExcelDto.setMallName(shopVOs.get(0).getPosition().getMall());
-			}
-			couponExcelDtoList = adjustCouponExcelDtoList(couponExcelDtoList);
+		} else {
+			paymentStatementExcelDto.setMallName(statementConfig.getBussinessName());
 		}
+		// 汇总券对账单的汇总信息（对账单第一页）
+		couponExcelDtoList = adjustCouponExcelDtoList(couponExcelDtoList);
+		// 汇总商品对账单的汇总信息（对账单第一页）
+		orderTopDtoList = adjustOrderExcelDtoList(orderTopDtoList);
+		// }
 
 		List<CouponCodeExcelDto> couponCodeExcelDtoList = new ArrayList<>();
+		List<OrderSettlementDetailVO> orderSettlementDetailVOs = new ArrayList<>();
 		double total = 0;
-		double payTotal = 0;
-		for (PaymentStatementDetailDto paymentStatementDetailDto : paymentStatementDetailDtoList) {
-			CouponCodeExcelDto couponCodeExcelDto = paymentStatementDetailDto.toCouponCodeExcelDto();
+		double totalCoupon = 0;
+		double payTotalCoupon = 0;
+		for (CouponStatementDetailDto couponStatementDetailDto : couponStatementDetailDtoList) {
+			CouponCodeExcelDto couponCodeExcelDto = couponStatementDetailDto.toCouponCodeExcelDto();
 			couponCodeExcelDtoList.add(couponCodeExcelDto);
-			total += couponCodeExcelDto.getOrigPrice();
-			payTotal += couponCodeExcelDto.getPayAmount();
+			totalCoupon += couponCodeExcelDto.getOrigPrice();
+			payTotalCoupon += couponCodeExcelDto.getPayAmount();
 		}
+
+		double totalOrder = 0;
+		double payTotalOrder = 0;
+		for (OrderSettlementDetailDto orderSettlementDetailDto : orderDetailDtoList) {
+			OrderSettlementDetailVO orderDetailVO = orderSettlementDetailDto.toVO();
+			orderSettlementDetailVOs.add(orderDetailVO);
+			totalOrder += orderDetailVO.getOrigPrice();
+			payTotalOrder += orderDetailVO.getPayAmount();
+		}
+
 		paymentStatementExcelDto.setBatchNo(paymentStatement.getBatchNo());
-		paymentStatementExcelDto.setCycleTime(DateUtils.getDateTimeStr(paymentStatement.getCycleStartTime()) + " - " + DateUtils.getDateTimeStr(paymentStatement.getCycleEndTime()));
+		paymentStatementExcelDto
+				.setCycleTime(DateUtils.getDateTimeStr(paymentStatement.getCycleStartTime()) + " - " + DateUtils.getDateTimeStr(paymentStatement.getCycleEndTime()));
+
+		paymentStatementExcelDto.setPayTotalCoupon(totalCoupon);
+		paymentStatementExcelDto.setRongyiDiscountCoupon(totalCoupon - payTotalCoupon);
+
+		paymentStatementExcelDto.setPayTotalOrder(totalOrder);
+		paymentStatementExcelDto.setRongyiDiscountOrder(totalOrder - payTotalOrder);
+
+		total = totalOrder + totalCoupon;
 		paymentStatementExcelDto.setPayTotal(total);
-		paymentStatementExcelDto.setRongyiDiscount(total - payTotal);
+		paymentStatementExcelDto.setRongyiDiscount(total - payTotalCoupon - payTotalOrder);
 
 		BussinessInfo bussinessInfo = bussinessInfoService.selectByConfigId(statementConfig.getId());
 		paymentStatementExcelDto.setShopAccountName(bussinessInfo.getPayName());
 		paymentStatementExcelDto.setShopAccountNo(bussinessInfo.getPayAccount());
 		paymentStatementExcelDto.setShopBank(bussinessInfo.getBlankName());
 		paymentStatementExcelDto.setPayChannel(getPayChannelName(statementConfig.getPayChannel()));
+
+		// 券总计
 		paymentStatementExcelDto.setCouponExcelDtoList(couponExcelDtoList);
+		// 券明细
 		paymentStatementExcelDto.setCouponCodeExcelDtoList(couponCodeExcelDtoList);
+		// 商品总计
+		paymentStatementExcelDto.setOrderSettlementTopDtoList(orderTopDtoList);
+		// 商品明细
+		paymentStatementExcelDto.setOrderSettlementDetailVOList(orderSettlementDetailVOs);
+
+		paymentStatementExcelDto.setUnitType(statementConfig.getBussinessType());
+		logger.info("paymentStatementExcelDto=" + paymentStatementExcelDto.getPayTotal());
+		// 生成excel文件
 		ExcelUtils.write(propertyConfigurer.getProperty("settle.template.file"), propertyConfigurer.getProperty("settle.file.path"), statementConfig.getBussinessId(),
 				getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime())), paymentStatementExcelDto);
+
+		// 插入生成记录
 		paymentStatement.setPayTotal(AmountUtil.changYuanToFen(total));
-//		cancel(id);
-		List<Integer> ids = new ArrayList<Integer>();
-		ids.add(id);
-		updatePaymentStatusByIds(ids, ConstantEnum.STATUS_8.getCodeInt(), "重新生成或作废", userId);
-		insert(paymentStatement);
+		if (id != null) {
+			List<Integer> ids = new ArrayList<Integer>();
+			ids.add(id);
+			updatePaymentStatusByIds(ids, ConstantEnum.STATUS_8.getCodeInt(), "重新生成或作废", userId);
+		}
+		id = insert(paymentStatement);
+		logger.info("对账单生成完毕, id: " + id);
 	}
 
+	/**
+	 * 券订单汇总数据再汇总
+	 * 
+	 * @param list
+	 *            原始数据
+	 * @return 再汇总后的数据
+	 */
 	private List<CouponExcelDto> adjustCouponExcelDtoList(List<CouponExcelDto> list) {
 		Map<String, CouponExcelDto> map = new HashMap();
 		for (CouponExcelDto couponExcelDto : list) {
@@ -330,15 +633,61 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 			if (existCouponExcelDto == null) {
 				map.put(couponExcelDto.getCouponId(), couponExcelDto);
 			} else {
+				// 汇总数量
 				existCouponExcelDto.setCouponCount(existCouponExcelDto.getCouponCount() + couponExcelDto.getCouponCount());
-				existCouponExcelDto.setCouponPayAmount((existCouponExcelDto.getCouponPayAmount() == null ? 0 : existCouponExcelDto.getCouponPayAmount()) + (couponExcelDto.getCouponPayAmount() == null ? 0 : couponExcelDto.getCouponPayAmount()));
-				existCouponExcelDto.setCouponTotalAmount((existCouponExcelDto.getCouponTotalAmount() == null ? 0 : existCouponExcelDto.getCouponTotalAmount()) + (couponExcelDto.getCouponTotalAmount() == null ? 0 : couponExcelDto.getCouponTotalAmount()));
+				// 汇总券面额（应付金额）
+				existCouponExcelDto.setCouponPriceTotal((existCouponExcelDto.getCouponPriceTotal() == null ? 0 : existCouponExcelDto.getCouponPriceTotal())
+						+ (couponExcelDto.getCouponPriceTotal() == null ? 0 : couponExcelDto.getCouponPriceTotal()));
+				// 汇总券补贴金额
+				existCouponExcelDto.setCouponDiscountTotal((existCouponExcelDto.getCouponDiscountTotal() == null ? 0 : existCouponExcelDto.getCouponDiscountTotal())
+						+ (couponExcelDto.getCouponDiscountTotal() == null ? 0 : couponExcelDto.getCouponDiscountTotal()));
+				// 汇总购券使用红包总金额
+				existCouponExcelDto.setCouponHbTotal((existCouponExcelDto.getCouponHbTotal() == null ? 0 : existCouponExcelDto.getCouponHbTotal())
+						+ (couponExcelDto.getCouponHbTotal() == null ? 0 : couponExcelDto.getCouponHbTotal()));
+				// 汇总购券使用积分总金额
+				existCouponExcelDto.setCouponScoreTotal((existCouponExcelDto.getCouponScoreTotal() == null ? 0 : existCouponExcelDto.getCouponScoreTotal())
+						+ (couponExcelDto.getCouponScoreTotal() == null ? 0 : couponExcelDto.getCouponScoreTotal()));
 			}
 		}
 		return new ArrayList(map.values());
 	}
 
-	private String getBatchNo() {
+	/**
+	 * 商品订单汇总数据再汇总，用于多家（店铺/导购）的数据汇总到一张（商场、品牌的）报表中
+	 * 商品订单汇总数据不拆分到具体的商品类型；仅根据订单类型（商品订单，退货订单等）进行合并
+	 * 
+	 * @param list
+	 *            原始数据
+	 * @return 再汇总后的数据
+	 */
+	private List<OrderSettlementTopDto> adjustOrderExcelDtoList(List<OrderSettlementTopDto> list) {
+		Map<String, OrderSettlementTopDto> map = new HashMap();
+		for (OrderSettlementTopDto orderTopDto : list) {
+			OrderSettlementTopDto existOrderTopDto = map.get(orderTopDto.getOrderType());
+			if (existOrderTopDto == null) {
+				map.put(orderTopDto.getOrderType(), orderTopDto);
+			} else {
+				// 汇总订单数量
+				existOrderTopDto.setOrderCount(existOrderTopDto.getOrderCount() + orderTopDto.getOrderCount());
+				// 汇总红包抵扣金额
+				existOrderTopDto.setHbDiscountTotal((existOrderTopDto.getHbDiscountTotal() == null ? 0 : existOrderTopDto.getHbDiscountTotal())
+						+ (orderTopDto.getHbDiscountTotal() == null ? 0 : orderTopDto.getHbDiscountTotal()));
+				// 汇总积分抵扣金额
+				existOrderTopDto.setScoreDiscountTotal((existOrderTopDto.getScoreDiscountTotal() == null ? 0 : existOrderTopDto.getScoreDiscountTotal())
+						+ (orderTopDto.getScoreDiscountTotal() == null ? 0 : orderTopDto.getScoreDiscountTotal()));
+				// 汇总订单总金额
+				existOrderTopDto.setOrderAmountTotal((existOrderTopDto.getOrderAmountTotal() == null ? 0 : existOrderTopDto.getOrderAmountTotal())
+						+ (orderTopDto.getOrderAmountTotal() == null ? 0 : orderTopDto.getOrderAmountTotal()));
+				// 汇总订单补贴金额
+				existOrderTopDto.setOrderDiscountTotal((existOrderTopDto.getOrderDiscountTotal() == null ? 0 : existOrderTopDto.getOrderDiscountTotal())
+						+ (orderTopDto.getOrderDiscountTotal() == null ? 0 : orderTopDto.getOrderDiscountTotal()));
+			}
+		}
+		return new ArrayList(map.values());
+	}
+
+	@Override
+	public String getBatchNo() {
 		String dateStr = "";
 		String batchNo = "";
 		try {
@@ -376,5 +725,10 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 
 	private String getFileName(String name, String date) {
 		return "容易网商户对账单-" + name + "-" + date + ".xlsx";
+	}
+	
+	public static class SettleConfigNotFoundException extends Exception {
+		/**  */
+		private static final long serialVersionUID = 3667148117489758392L;
 	}
 }
