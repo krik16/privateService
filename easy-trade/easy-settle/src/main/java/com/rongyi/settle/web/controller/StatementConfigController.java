@@ -170,7 +170,7 @@ public class StatementConfigController extends BaseController{
 			if (responseData.getMeta().getErrno() != 0) {
 				return responseData;
 			}
-			if (!map.containsKey("bussinessType") || !map.containsKey("bussinessCode") || !map.containsKey("bussinessAccount") || !map.containsKey("ruleCode")){
+			if (!map.containsKey("bussinessType") || !map.containsKey("bussinessCode") || !map.containsKey("bussinessAccount")){
 				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
 			}
 			//验证商家财务账户

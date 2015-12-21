@@ -351,7 +351,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                 shopConfig.setShopId(id);
                 if (userLists==null && userAccounts==null) {//关联全部
                     if (CollectionUtils.isNotEmpty(allUserId)){
-                        logger.info("===================>>>>>>>>>>>>>>>>> realUser: "+ allUserId+" realAccount: "+allUserId.toString());
+                        logger.info("===================>>>>>>>>>>>>>>>>> realUser: "+ allUserId+" realAccount: "+allUserAccount.toString());
                     }
                     shopConfig.setUserList(CollectionUtil.listToString(allUserId, ","));
                     shopConfig.setAccountList(CollectionUtil.listToString(allUserAccount, ","));
