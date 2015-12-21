@@ -4,19 +4,18 @@ package com.rongyi.easy.settle.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-/**	
- * @Author:  柯军
- * @Description: 对账配置表 
+/**
+ * @Author: 柯军
+ * @Description: 对账配置表
  * @datetime:2015年9月17日上午10:44:44
- *
  **/
 public class StatementConfig implements Serializable {
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = -6319099252654638886L;
+     *
+     */
+    private static final long serialVersionUID = -6319099252654638886L;
 
-	private Integer id;
+    private Integer id;
 
     /**
      * 规则编码
@@ -47,11 +46,22 @@ public class StatementConfig implements Serializable {
      * 商户名称
      */
     private String bussinessName;
-    
+
     /**
      * 商户真实地址
      */
     private String bussinessRealAddress;
+
+    /** 0:所有,1:自身,2:部分 */
+    private Byte linkType;
+    
+    /** 关联角色(0:全部,1:导购，2:买手) */
+    private Byte linkRole;
+
+    /**
+     * 关联店铺操作(0:选择,1:排除)
+     */
+    private Byte linkShopOp;
 
     /**
      * 计算周期（0:日，1:周，2:月，3:自定义）
@@ -163,7 +173,7 @@ public class StatementConfig implements Serializable {
      */
     private String createBy;
 
-    
+
     public Integer getId() {
         return id;
     }
@@ -261,14 +271,14 @@ public class StatementConfig implements Serializable {
     }
 
     public String getGenerateHmTime() {
-		return generateHmTime;
-	}
+        return generateHmTime;
+    }
 
-	public void setGenerateHmTime(String generateHmTime) {
-		this.generateHmTime = generateHmTime;
-	}
+    public void setGenerateHmTime(String generateHmTime) {
+        this.generateHmTime = generateHmTime;
+    }
 
-	public Date getSendTime() {
+    public Date getSendTime() {
         return sendTime;
     }
 
@@ -396,12 +406,49 @@ public class StatementConfig implements Serializable {
         this.bussinessId = bussinessId;
     }
 
-	public String getBussinessRealAddress() {
-		return bussinessRealAddress;
+    public String getBussinessRealAddress() {
+        return bussinessRealAddress;
+    }
+
+    public void setBussinessRealAddress(String bussinessRealAddress) {
+        this.bussinessRealAddress = bussinessRealAddress;
+    }
+
+    public Byte getLinkShopOp() {
+        return linkShopOp;
+    }
+
+    public void setLinkShopOp(Byte linkShopOp) {
+        this.linkShopOp = linkShopOp;
+    }
+
+	/**
+	 * @return the linkType
+	 */
+	public Byte getLinkType() {
+		return linkType;
 	}
 
-	public void setBussinessRealAddress(String bussinessRealAddress) {
-		this.bussinessRealAddress = bussinessRealAddress;
+	/**
+	 * @param linkType the linkType to set
+	 */
+	public void setLinkType(Byte linkType) {
+		this.linkType = linkType;
 	}
-    
+
+	/**
+	 * @return the linkRole
+	 */
+	public Byte getLinkRole() {
+		return linkRole;
+	}
+
+	/**
+	 * @param linkRole the linkRole to set
+	 */
+	public void setLinkRole(Byte linkRole) {
+		this.linkRole = linkRole;
+	}
+
+
 }

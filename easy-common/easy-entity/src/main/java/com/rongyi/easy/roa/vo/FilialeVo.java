@@ -8,32 +8,32 @@ import com.rongyi.easy.shop.vo.AreaVO;
 import com.rongyi.easy.shop.vo.ShopVO;
 
 public class FilialeVo implements Serializable{
-	/** 
-	* @Fields serialVersionUID
-	*/ 
+	/**
+	 * @Fields serialVersionUID
+	 */
 	private static final long serialVersionUID = 3867267911089519944L;
 
-	private String id;     
-	
+	private String id;
+
 	private String name;     //分公司名称
-	
+
 	private String manager;  //管理者
-	
+
 	private String brandId;   //关联品牌ID
-	
+
 	private Date createAt;
-	
+
 	private Date updateAt;
-	
+
 	private String brandName; //关联品牌名称
-	
+
 	//private String proId;//省id
 	/*private String proName;//省名称
 	private String cityId;//市id
 	private String cityName;//市名称
 	private String areaId;//区域id
 	private String areaName;//区域名称
-*/	
+*/
 	private List<AreaVO> areaVo;
 	private int valid;//0运营中  1已停运
 	private String address; //详细地址
