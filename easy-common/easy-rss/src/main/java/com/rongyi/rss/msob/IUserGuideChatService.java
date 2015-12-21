@@ -11,7 +11,7 @@ public interface IUserGuideChatService {
      * @param userId
      * @throws Exception
      */
-    public void insert(String mallUserId,Integer userId) throws Exception;
+    public int insert(String mallUserId,Integer userId) throws Exception;
     
     /**
      * 获取默认导购id
