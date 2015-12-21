@@ -187,8 +187,8 @@ public class StatementConfigController extends BaseController{
 			statementConfig.setCreateBy(getUserName(request));
 			statementConfig.setBussinessId(statementConfig.getBussinessCode());
 			if (map.containsKey("effectStartTime") && map.containsKey("effectEndTime")){
-				statementConfig.setEffectStartTime(DateTool.string2Date(map.get("effectStartTime").toString(), DateTool.FORMAT_DATE));
-				statementConfig.setEffectEndTime(DateTool.string2Date(map.get("effectEndTime").toString(), DateTool.FORMAT_DATE));
+				statementConfig.setEffectStartTime(DateTool.string2Date(map.get("effectStartTime").toString(), DateTool.FORMAT_DATETIME));
+				statementConfig.setEffectEndTime(DateTool.string2Date(map.get("effectEndTime").toString(), DateTool.FORMAT_DATETIME));
 			}
 			MapUtils.toObject(bussinessInfo, map);
 			bussinessInfo.setCreateAt(DateUtil.getCurrDateTime());
