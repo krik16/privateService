@@ -23,7 +23,7 @@ public class ShowCartCommodityVO implements Serializable{
 	private String commodityPic;// 商品图片
 	private String commodityStock;// 商品库存
 	private String commodityPostage;// 邮费
-	private String commodityAppStatus;// 商品状态 0下架 1上架 3待上架
+	private int commodityAppStatus;// 商品状态 0下架 1上架 3待上架
 	private String supportWay;//1仅支持自提 2仅支持快递 3都支持
 	public Integer getShopCartId() {
 		return shopCartId;
@@ -92,10 +92,10 @@ public class ShowCartCommodityVO implements Serializable{
 		this.commodityPostage = commodityPostage;
 	}
 	
-	public String getCommodityAppStatus() {
+	public int getCommodityAppStatus() {
 		return commodityAppStatus;
 	}
-	public void setCommodityAppStatus(String commodityAppStatus) {
+	public void setCommodityAppStatus(int commodityAppStatus) {
 		this.commodityAppStatus = commodityAppStatus;
 	}
 	public String getSupportWay() {
