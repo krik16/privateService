@@ -2,6 +2,7 @@ package com.rongyi.easy.rmmm.vo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 public class ParentOrderVO implements Serializable {
@@ -95,6 +96,18 @@ public class ParentOrderVO implements Serializable {
 	private String DeductCouponAmount;// 抵扣券实际抵扣价格
 
 	private String liveName;//直播名
+
+	private BigDecimal orderScoreDiscount;//购物车分摊的积分优惠
+
+	private BigDecimal orderRebateDiscount;//购物车分摊的抵扣券优惠
+
+	private Date createAt;//创建时间
+
+	private String changePriceFlag;//改价标志（0没改价,1改价,2改价影响抵扣券）
+
+	private Integer shopNum;//店铺数量
+
+	private BigDecimal totalHongBaoAmount;//红包实际抵扣数量
 
 	public String getLiveName() {
 		return liveName;
@@ -497,6 +510,54 @@ public class ParentOrderVO implements Serializable {
 		this.platformRebateAmount = platformRebateAmount;
 	}
 
+	public BigDecimal getOrderScoreDiscount() {
+		return orderScoreDiscount;
+	}
+
+	public void setOrderScoreDiscount(BigDecimal orderScoreDiscount) {
+		this.orderScoreDiscount = orderScoreDiscount;
+	}
+
+	public BigDecimal getOrderRebateDiscount() {
+		return orderRebateDiscount;
+	}
+
+	public void setOrderRebateDiscount(BigDecimal orderRebateDiscount) {
+		this.orderRebateDiscount = orderRebateDiscount;
+	}
+
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+
+	public String getChangePriceFlag() {
+		return changePriceFlag;
+	}
+
+	public void setChangePriceFlag(String changePriceFlag) {
+		this.changePriceFlag = changePriceFlag;
+	}
+
+	public Integer getShopNum() {
+		return shopNum;
+	}
+
+	public void setShopNum(Integer shopNum) {
+		this.shopNum = shopNum;
+	}
+
+	public BigDecimal getTotalHongBaoAmount() {
+		return totalHongBaoAmount;
+	}
+
+	public void setTotalHongBaoAmount(BigDecimal totalHongBaoAmount) {
+		this.totalHongBaoAmount = totalHongBaoAmount;
+	}
+
 	@Override
 	public String toString() {
 		return "ParentOrderVO{" +
@@ -550,6 +611,12 @@ public class ParentOrderVO implements Serializable {
 				", DeductCouponAmount='" + DeductCouponAmount + '\'' +
 				", liveName='" + liveName + '\'' +
 				", platformRebateAmount='" + platformRebateAmount + '\'' +
+				", orderScoreDiscount='" + orderScoreDiscount + '\'' +
+				", orderRebateDiscount='" + orderRebateDiscount + '\'' +
+				", createAt='" + createAt + '\'' +
+				", changePriceFlag='" + changePriceFlag + '\'' +
+				", shopNum='" + shopNum + '\'' +
+				", totalHongBaoAmount='" + totalHongBaoAmount + '\'' +
 				'}';
 	}
 }

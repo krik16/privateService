@@ -1,6 +1,7 @@
 package com.rongyi.easy.rmmm.vo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -50,6 +51,8 @@ public class SalerParentOrderVO implements Serializable {
 	private List<String> ticketPicList;// 小票URL集合
 	private String receiveTime;// 收货时间
 	private String buyerPhone;// 买家手机号
+
+	private BigDecimal rebateDiscount;//商家抵扣券金额
 
 	public String getStatus() {
 		return status;
@@ -332,6 +335,14 @@ public class SalerParentOrderVO implements Serializable {
 		this.buyerPhone = buyerPhone;
 	}
 
+	public BigDecimal getRebateDiscount() {
+		return rebateDiscount;
+	}
+
+	public void setRebateDiscount(BigDecimal rebateDiscount) {
+		this.rebateDiscount = rebateDiscount;
+	}
+
 	@Override
 	public String toString() {
 		return "SalerParentOrderVO{" +
@@ -370,6 +381,7 @@ public class SalerParentOrderVO implements Serializable {
 				", ticketPicList=" + ticketPicList +
 				", receiveTime='" + receiveTime + '\'' +
 				", buyerPhone='" + buyerPhone + '\'' +
+				", rebateDiscount='" + rebateDiscount + '\'' +
 				'}';
 	}
 }
