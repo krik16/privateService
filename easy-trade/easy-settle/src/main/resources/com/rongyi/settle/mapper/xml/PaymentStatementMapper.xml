@@ -659,7 +659,7 @@
 
 	<select id="selectForCouponExcelDto" parameterType="java.util.Map" resultMap="CouponExcelDtoMap">
 		SELECT SQL_NO_CACHE
-			UC.id AS coupon_id
+			UC.coupon_id AS coupon_id
 			,IFNULL(UC.title, '其他') AS title
 			,'收入' AS pay_channel
 			,COUNT(1) AS coupon_count
@@ -689,7 +689,7 @@
 	
 	<select id="selectForCouponExcelDtoByUsers" parameterType="java.util.Map" resultMap="CouponExcelDtoMap">
 		SELECT SQL_NO_CACHE
-			UC.id AS coupon_id
+			UC.coupon_id AS coupon_id
 			,IFNULL(UC.title, '其他') AS title
 			,'收入' AS pay_channel
 			,COUNT(1) AS coupon_count
@@ -731,7 +731,7 @@
 
 	<select id="selectForCouponExcelDtoByMid" parameterType="java.util.Map" resultMap="CouponExcelDtoMap">
 		SELECT SQL_NO_CACHE
-			UC.id AS coupon_id
+			UC.coupon_id AS coupon_id
 			,IFNULL(UC.title, '其他') AS title
 			,'收入' AS pay_channel
 			,COUNT(1) AS coupon_count
