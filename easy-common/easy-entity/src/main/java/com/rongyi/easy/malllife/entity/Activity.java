@@ -154,9 +154,10 @@ public class Activity  extends MalllifeBaseParam  implements Serializable {
 				+ discountAmount + ", createAt=" + createAt + ", friendId="
 				+ friendId + ", headUrl=" + headUrl + ", nickName=" + nickName
 				+ ", totalDiscountAmount=" + totalDiscountAmount + ", status="
-				+ status + ", activityId=" + activityId + "]";
+				+ status + ", activityId=" + activityId + ", mobile=" + mobile
+				+ ", isSelf=" + isSelf + "]";
 	}
-
+ 
  
  
 }
