@@ -1,9 +1,19 @@
-package com.rongyi.rss.msob;
+package com.rongyi.rss.mallshop.user;
 
 import com.rongyi.easy.rmmm.entity.UserGuideChatEntity;
 import com.rongyi.easy.rmmm.vo.UserinfoVO;
 
-public interface IUserGuideChatService {
+/*
+ * Copyright (C),上海容易网电子商务有限公司
+ * Author:  zhangZhengPing
+ * Description:  用户店铺相关
+ * time:  2015/12/21
+ * History: 变更记录
+ * <author>           <time>             <version>        <desc>
+ * zhangZhengPing           2015/12/21              1.0            创建文件
+ *
+ */
+public interface ROAUserGuideChatService {
 	
 	/**
      * 插入用户与导购聊天的记录
