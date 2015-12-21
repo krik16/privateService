@@ -49,5 +49,23 @@ public interface ROAShoppingCartService {
 	 * @throws Exception
 	 */
 	public ResponseVO addShopCart(ShoppingCartParam param)  throws Exception;
+	
+	/**
+	 * 我的购物车列表
+	 * 
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+	public ShowCartDetailVO getShopCartList(String userId) throws Exception;
+	
+	/**
+	 * 获取我的购物车sku
+	 * 
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+	public Integer getMyShopCartCount(String userId) throws Exception;
 
 }

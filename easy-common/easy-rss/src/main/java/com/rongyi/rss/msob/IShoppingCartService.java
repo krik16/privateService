@@ -2,6 +2,7 @@ package com.rongyi.rss.msob;
 
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.rmmm.param.ShoppingCartParam;
+import com.rongyi.easy.rmmm.vo.ShowCartDetailVO;
 
 public interface IShoppingCartService {
 	/**
@@ -29,6 +30,7 @@ public interface IShoppingCartService {
 	public int editShopCartGuide(ShoppingCartParam param)  throws Exception;
 	
 	/**
+	 * 编辑购物车
 	 * @param userId 用户id
 	 * @param shopCartId 购物车主键id
 	 * @param commodityCount 商品数量  
@@ -43,5 +45,23 @@ public interface IShoppingCartService {
 	 * @throws Exception
 	 */
 	public ResponseVO addShopCart(ShoppingCartParam param)  throws Exception;
+	
+	/**
+	 * 我的购物车列表
+	 * 
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+	public ShowCartDetailVO getShopCartList(String userId) throws Exception;
+	
+	/**
+	 * 获取我的购物车sku
+	 * 
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+	public Integer getMyShopCartCount(String userId) throws Exception;
 
 }
