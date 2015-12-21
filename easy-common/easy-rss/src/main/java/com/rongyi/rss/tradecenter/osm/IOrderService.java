@@ -1,5 +1,6 @@
 package com.rongyi.rss.tradecenter.osm;
 
+import com.rongyi.easy.osm.entity.OrderFormEntity;
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
@@ -75,6 +76,13 @@ public interface IOrderService {
 	 * @throws Exception
 	 */
 	public ResponseResult updateOrderIsCommentById(Integer id);
+
+	/**
+	 * @Description: 更新订单是否已付款到导购的虚拟账号
+	 * @param: isPayVa 0:未打款(默认)，1:对私(打款到导购虚拟账号)，2:对公(通过对账单结算)
+	 * @Author:  柯军
+	 **/
+	public ResponseResult updateOrderIsPayVa(Integer id,byte isPayVa);
 	
 
 }
