@@ -6,109 +6,172 @@ import java.util.Date;
 
 import net.sf.json.JSONObject;
 
-public class OrderFormEntity implements Serializable{
-    /** 主键id */
+public class OrderFormEntity implements Serializable {
+    /**
+     * 主键id
+     */
     private Integer id;
 
-    /** 大订单号 */
+    /**
+     * 大订单号
+     */
     private String orderNo;
 
-    /** 总价（总价=子订单实价总和 + 邮费 - 折扣 */
+    /**
+     * 总价（总价=子订单实价总和 + 邮费 - 折扣
+     */
     private BigDecimal totalAmount;
 
-    /** 邮费 */
+    /**
+     * 邮费
+     */
     private BigDecimal expressFee;
 
-    /** 折扣 */
+    /**
+     * 折扣
+     */
     private BigDecimal disconntFee;
 
-    /** 物流信息主键id */
+    /**
+     * 物流信息主键id
+     */
     private String expressInfoId;
 
-    /** 状态 (1未付款 2待发货 3已发货 4确认收货 5已关闭) */
+    /**
+     * 状态 (1未付款 2待发货 3已发货 4确认收货 5已关闭)
+     */
     private String status;
 
-    /** 状态路径 */
+    /**
+     * 状态路径
+     */
     private String statusRoute;
 
-    /** 订单创建时间 */
+    /**
+     * 订单创建时间
+     */
     private Date createAt;
 
-    /** 状态保持剩余时间(毫秒) */
+    /**
+     * 状态保持剩余时间(毫秒)
+     */
     private Long statusHoldMs;
 
-    /** 预计转入下一状态时间 */
+    /**
+     * 预计转入下一状态时间
+     */
     private Date nextStatusTime;
 
-    /** 买家id */
+    /**
+     * 买家id
+     */
     private String buyerId;
 
-    /** 微店id */
+    /**
+     * 微店id
+     */
     private String weidianId;
 
-    /** 支付款id列表，多个id之间用逗号隔开 */
+    /**
+     * 支付款id列表，多个id之间用逗号隔开
+     */
     private String paymentIdList;
 
-    /** 是否已评价 (0否 1是) */
+    /**
+     * 是否已评价 (0否 1是)
+     */
     private Integer isComment;
 
-    /** 邮寄地址id */
+    /**
+     * 邮寄地址id
+     */
     private String addressId;
 
-    /** 订单类型 1直接付款 2担保交易 */
+    /**
+     * 订单类型 1直接付款 2担保交易
+     */
     private Integer orderType;
 
-    /** 订单渠道 1APP 2终端机 */
+    /**
+     * 订单渠道 1APP 2终端机
+     */
     private Integer orderSource;
 
-    /** 抵扣券ID */
+    /**
+     * 抵扣券ID
+     */
     private String couponId;
 
-    /** 容易网活动抵扣券ID */
+    /**
+     * 容易网活动抵扣券ID
+     */
     private String internalCouponId;
 
-    /** 导购id */
+    /**
+     * 导购id
+     */
     private String guideId;
 
-    /** 本订单享受到的优惠(存json格式数据，方便后续扩展) */
+    /**
+     * 本订单享受到的优惠(存json格式数据，方便后续扩展)
+     */
     private String discountInfo;
 
-    /** 买家备注 */
+    /**
+     * 买家备注
+     */
     private String buyerComment;
 
-    /**促销券抵扣金额*/
+    /**
+     * 促销券抵扣金额
+     */
     private BigDecimal couponDiscount;
 
-    /**促销券来源 1：平台 2：商家*/
+    /**
+     * 促销券来源 1：平台 2：商家
+     */
     private Integer couponSource;
 
-    /**促销券类型 1：满减 2：立减*/
+    /**
+     * 促销券类型 1：满减 2：立减
+     */
     private Integer couponType;
 
-    /**积分优惠金额*/
+    /**
+     * 积分优惠金额
+     */
     private BigDecimal scoreDiscount;
-    
+
     private JSONObject jsonDiscountInfo;
-    
-    /** 1是导购 2是买手*/
+
+    /**
+     * 1是导购 2是买手
+     */
     private Integer guideType;
-    /** 是否已提醒买家付款 0 未提醒 1 已提醒**/
+    /**
+     * 是否已提醒买家付款 0 未提醒 1 已提醒
+     **/
     private Byte isAlert;
     //促销券能使用的最小订单金额
     private BigDecimal couponRequirement;
 
-    /**订单总金额（不包括积分优惠）**/
+    /**
+     * 订单总金额（不包括积分优惠）
+     **/
     private BigDecimal totalAmountWithoutScoreDiscount = null;
     //设备类型
     private Integer devType;
 
-	public Byte getIsAlert() {
-		return isAlert;
-	}
+    //0:未打款，1:对私(打款到导购虚拟账号)，2:对公(通过对账单结算)
+    private byte isPayVa;
 
-	public void setIsAlert(Byte isAlert) {
-		this.isAlert = isAlert;
-	}
+    public Byte getIsAlert() {
+        return isAlert;
+    }
+
+    public void setIsAlert(Byte isAlert) {
+        this.isAlert = isAlert;
+    }
 
     public BigDecimal getTotalAmountWithoutScoreDiscount() {
         return totalAmountWithoutScoreDiscount;
@@ -119,23 +182,24 @@ public class OrderFormEntity implements Serializable{
     }
 
     public Integer getGuideType() {
-		return guideType;
-	}
+        return guideType;
+    }
 
-	public void setGuideType(Integer guideType) {
-		this.guideType = guideType;
-	}
+    public void setGuideType(Integer guideType) {
+        this.guideType = guideType;
+    }
 
-	public JSONObject getJsonDiscountInfo() {
-		return jsonDiscountInfo;
-	}
+    public JSONObject getJsonDiscountInfo() {
+        return jsonDiscountInfo;
+    }
 
-	public void setJsonDiscountInfo(JSONObject jsonDiscountInfo) {
-		this.jsonDiscountInfo = jsonDiscountInfo;
-	}
+    public void setJsonDiscountInfo(JSONObject jsonDiscountInfo) {
+        this.jsonDiscountInfo = jsonDiscountInfo;
+    }
 
     /**
      * 主键id
+     *
      * @return id
      */
     public Integer getId() {
@@ -144,6 +208,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 主键id
+     *
      * @param id
      */
     public void setId(Integer id) {
@@ -152,6 +217,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 大订单号
+     *
      * @return orderNo
      */
     public String getOrderNo() {
@@ -160,6 +226,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 大订单号
+     *
      * @param orderNo
      */
     public void setOrderNo(String orderNo) {
@@ -168,6 +235,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 总价（总价=子订单实价总和 + 邮费 - 折扣
+     *
      * @return totalAmount
      */
     public BigDecimal getTotalAmount() {
@@ -176,6 +244,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 总价（总价=子订单实价总和 + 邮费 - 折扣
+     *
      * @param totalAmount
      */
     public void setTotalAmount(BigDecimal totalAmount) {
@@ -184,6 +253,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 邮费
+     *
      * @return expressFee
      */
     public BigDecimal getExpressFee() {
@@ -192,6 +262,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 邮费
+     *
      * @param expressFee
      */
     public void setExpressFee(BigDecimal expressFee) {
@@ -200,6 +271,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 折扣
+     *
      * @return disconntFee
      */
     public BigDecimal getDisconntFee() {
@@ -208,6 +280,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 折扣
+     *
      * @param disconntFee
      */
     public void setDisconntFee(BigDecimal disconntFee) {
@@ -216,6 +289,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 物流信息主键id
+     *
      * @return expressInfoId
      */
     public String getExpressInfoId() {
@@ -224,6 +298,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 物流信息主键id
+     *
      * @param expressInfoId
      */
     public void setExpressInfoId(String expressInfoId) {
@@ -232,6 +307,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 状态 (1未付款 2待发货 3已发货 4确认收货 5已关闭)
+     *
      * @return status
      */
     public String getStatus() {
@@ -240,6 +316,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 状态 (1未付款 2待发货 3已发货 4确认收货 5已关闭)
+     *
      * @param status
      */
     public void setStatus(String status) {
@@ -248,6 +325,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 状态路径
+     *
      * @return statusRoute
      */
     public String getStatusRoute() {
@@ -256,6 +334,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 状态路径
+     *
      * @param statusRoute
      */
     public void setStatusRoute(String statusRoute) {
@@ -264,6 +343,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 订单创建时间
+     *
      * @return createAt
      */
     public Date getCreateAt() {
@@ -272,6 +352,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 订单创建时间
+     *
      * @param createAt
      */
     public void setCreateAt(Date createAt) {
@@ -280,6 +361,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 状态保持剩余时间(毫秒)
+     *
      * @return statusHoldMs
      */
     public Long getStatusHoldMs() {
@@ -288,6 +370,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 状态保持剩余时间(毫秒)
+     *
      * @param statusHoldMs
      */
     public void setStatusHoldMs(Long statusHoldMs) {
@@ -296,6 +379,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 预计转入下一状态时间
+     *
      * @return nextStatusTime
      */
     public Date getNextStatusTime() {
@@ -304,6 +388,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 预计转入下一状态时间
+     *
      * @param nextStatusTime
      */
     public void setNextStatusTime(Date nextStatusTime) {
@@ -312,6 +397,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 买家id
+     *
      * @return buyerId
      */
     public String getBuyerId() {
@@ -320,6 +406,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 买家id
+     *
      * @param buyerId
      */
     public void setBuyerId(String buyerId) {
@@ -328,6 +415,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 微店id
+     *
      * @return weidianId
      */
     public String getWeidianId() {
@@ -336,6 +424,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 微店id
+     *
      * @param weidianId
      */
     public void setWeidianId(String weidianId) {
@@ -344,6 +433,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 支付款id列表，多个id之间用逗号隔开
+     *
      * @return paymentIdList
      */
     public String getPaymentIdList() {
@@ -352,6 +442,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 支付款id列表，多个id之间用逗号隔开
+     *
      * @param paymentIdList
      */
     public void setPaymentIdList(String paymentIdList) {
@@ -360,6 +451,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 是否已评价 (0否 1是)
+     *
      * @return isComment
      */
     public Integer getIsComment() {
@@ -368,6 +460,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 是否已评价 (0否 1是)
+     *
      * @param isComment
      */
     public void setIsComment(Integer isComment) {
@@ -376,6 +469,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 邮寄地址id
+     *
      * @return addressId
      */
     public String getAddressId() {
@@ -384,6 +478,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 邮寄地址id
+     *
      * @param addressId
      */
     public void setAddressId(String addressId) {
@@ -392,6 +487,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 订单类型 1直接付款 2担保交易
+     *
      * @return orderType
      */
     public Integer getOrderType() {
@@ -400,6 +496,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 订单类型 1直接付款 2担保交易
+     *
      * @param orderType
      */
     public void setOrderType(Integer orderType) {
@@ -408,6 +505,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 订单渠道 1APP 2终端机
+     *
      * @return orderSource
      */
     public Integer getOrderSource() {
@@ -416,6 +514,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 订单渠道 1APP 2终端机
+     *
      * @param orderSource
      */
     public void setOrderSource(Integer orderSource) {
@@ -424,6 +523,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 抵扣券ID
+     *
      * @return couponId
      */
     public String getCouponId() {
@@ -432,6 +532,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 抵扣券ID
+     *
      * @param couponId
      */
     public void setCouponId(String couponId) {
@@ -440,6 +541,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 容易网活动抵扣券ID
+     *
      * @return internalCouponId
      */
     public String getInternalCouponId() {
@@ -448,6 +550,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 容易网活动抵扣券ID
+     *
      * @param internalCouponId
      */
     public void setInternalCouponId(String internalCouponId) {
@@ -456,6 +559,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 导购id
+     *
      * @return guideId
      */
     public String getGuideId() {
@@ -464,6 +568,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 导购id
+     *
      * @param guideId
      */
     public void setGuideId(String guideId) {
@@ -472,6 +577,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 本订单享受到的优惠(存json格式数据，方便后续扩展)
+     *
      * @return discountInfo
      */
     public String getDiscountInfo() {
@@ -480,6 +586,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 本订单享受到的优惠(存json格式数据，方便后续扩展)
+     *
      * @param discountInfo
      */
     public void setDiscountInfo(String discountInfo) {
@@ -488,6 +595,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 买家备注
+     *
      * @return buyerComment
      */
     public String getBuyerComment() {
@@ -496,6 +604,7 @@ public class OrderFormEntity implements Serializable{
 
     /**
      * 买家备注
+     *
      * @param buyerComment
      */
     public void setBuyerComment(String buyerComment) {
@@ -550,6 +659,14 @@ public class OrderFormEntity implements Serializable{
         this.devType = devType;
     }
 
+    public byte getIsPayVa() {
+        return isPayVa;
+    }
+
+    public void setIsPayVa(byte isPayVa) {
+        this.isPayVa = isPayVa;
+    }
+
     @Override
     public String toString() {
         return "OrderFormEntity{" +
@@ -586,6 +703,7 @@ public class OrderFormEntity implements Serializable{
                 ", scoreDiscount=" + scoreDiscount +
                 ", devType=" + devType +
                 ", couponType=" + couponType +
+                ", isPayVa=" + isPayVa +
                 '}';
     }
 }
