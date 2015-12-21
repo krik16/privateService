@@ -173,10 +173,6 @@ public class StatementConfigController extends BaseController{
 			if (!map.containsKey("bussinessType") || !map.containsKey("bussinessCode") || !map.containsKey("bussinessAccount") || !map.containsKey("ruleCode")){
 				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
 			}
-			StatementConfig oldStatementConfig = statementConfigService.selectByRuleCode(map.get("ruleCode").toString());
-			if(oldStatementConfig != null) {
-				return ResponseData.failure(CodeEnum.FIAL_CONFIG_EXIST.getCodeInt(), CodeEnum.FIAL_CONFIG_EXIST.getValueStr());
-			}
 			//验证商家财务账户
 			if (CollectionUtils.isEmpty(statementConfigService.getAccountInfoByParam(1,Integer.valueOf(map.get("bussinessType").toString()), null, map.get("bussinessCode").toString(),map.get("bussinessAccount").toString())))
 				return ResponseData.failure(CodeEnum.FIAL_CONFIG_BIZ_NOACCOUNT.getCodeInt(), CodeEnum.FIAL_CONFIG_BIZ_NOACCOUNT.getValueStr());
@@ -185,6 +181,7 @@ public class StatementConfigController extends BaseController{
 			MapUtils.toObject(statementConfig, map);
 			statementConfig.setCreateAt(DateUtil.getCurrDateTime());
 			statementConfig.setCreateBy(getUserName(request));
+			statementConfig.setRuleCode(getRuleCode());
 			statementConfig.setBussinessId(statementConfig.getBussinessCode());
 			if (map.containsKey("effectStartTime") && map.containsKey("effectEndTime")){
 				statementConfig.setEffectStartTime(DateTool.string2Date(map.get("effectStartTime").toString(), DateTool.FORMAT_DATETIME));
