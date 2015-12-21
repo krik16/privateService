@@ -165,6 +165,14 @@ public class OrderFormEntity implements Serializable {
     //0:未打款，1:对私(打款到导购虚拟账号)，2:对公(通过对账单结算)
     private byte isPayVa;
 
+    private BigDecimal orderScoreDiscount;//购物车订单积分分摊优惠金额
+
+    private BigDecimal orderCouponDiscount;//购物车订单抵扣券分摊优惠金额
+
+    private byte changePriceFlag;//用户改价通知 0未改价 1 改价 2 改价且恢复抵扣券
+
+    private Integer cartId;//购物车id 0表示不使用购物车
+
     public Byte getIsAlert() {
         return isAlert;
     }
@@ -667,6 +675,38 @@ public class OrderFormEntity implements Serializable {
         this.isPayVa = isPayVa;
     }
 
+    public BigDecimal getOrderScoreDiscount() {
+        return orderScoreDiscount;
+    }
+
+    public void setOrderScoreDiscount(BigDecimal orderScoreDiscount) {
+        this.orderScoreDiscount = orderScoreDiscount;
+    }
+
+    public BigDecimal getOrderCouponDiscount() {
+        return orderCouponDiscount;
+    }
+
+    public void setOrderCouponDiscount(BigDecimal orderCouponDiscount) {
+        this.orderCouponDiscount = orderCouponDiscount;
+    }
+
+    public byte getChangePriceFlag() {
+        return changePriceFlag;
+    }
+
+    public void setChangePriceFlag(byte changePriceFlag) {
+        this.changePriceFlag = changePriceFlag;
+    }
+
+    public Integer getCartId() {
+        return cartId;
+    }
+
+    public void setCartId(Integer cartId) {
+        this.cartId = cartId;
+    }
+
     @Override
     public String toString() {
         return "OrderFormEntity{" +
@@ -704,6 +744,10 @@ public class OrderFormEntity implements Serializable {
                 ", devType=" + devType +
                 ", couponType=" + couponType +
                 ", isPayVa=" + isPayVa +
+                ", orderScoreDiscount=" + orderScoreDiscount +
+                ", orderCouponDiscount=" + orderCouponDiscount +
+                ", changePriceFlag=" + changePriceFlag +
+                ", cartId=" + cartId +
                 '}';
     }
 }
