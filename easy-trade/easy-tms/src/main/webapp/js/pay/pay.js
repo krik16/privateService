@@ -153,11 +153,22 @@ function getParamsJson(){
 }
 
 function selectAll() { // 全选or取消全选;
-    if ($("#select-all").attr("checked") == 'checked') {
-        $('input[name="subBox"]').attr("checked", true);
-    } else {
-        $('input[name="subBox"]').attr("checked", false);
-    }
+	$('#select-all').each(function(){
+			if($(this).prop('checked')){
+				$(':checkbox').each(function(){
+					if(!$(this).is(':disabled')){
+
+						$(this).prop('checked',true);
+					}
+				})
+
+			}else{
+				$(":checkbox").each(function(){
+					$(this).prop('checked',false);
+
+				})
+			}
+	})
 }
 /**
  * 批量操作按钮点击事件
@@ -262,6 +273,7 @@ function morePay(ids, type,payChannel) {
 			var url = '../pay/pay?paymentId=' + ids + '&type=' + type+'&payChannel=' + payChannel;
 			 window.open(url);			
 		}
+		ajaxCommonSearch(url_,getParamsJson());
 	}, "json");
 	
 }
@@ -334,10 +346,31 @@ function statementOffPay(paymentIds,statementIds,tradeNo){
 	}, "json");
 }
 
+/**
+ * 退款冻结
+ * @param id
+ * @param status
+ */
 function payFreeze(id,status) {
 	$.post("../pay/freeze", {
 		statementIds : id,
 		status:status
+	}, function(data) {
+		_util.cmsTip(data.message);
+		ajaxCommonSearch(url_,getParamsJson());
+	}, "json");
+}
+
+/**
+ * 异常付款取消
+ * @param id
+ * @param refundRejected
+ */
+function excePayCancel(id,refundRejected){
+
+	$.post("../pay/excePayCancel", {
+		paymentId : id,
+		refundRejected:refundRejected
 	}, function(data) {
 		_util.cmsTip(data.message);
 		ajaxCommonSearch(url_,getParamsJson());

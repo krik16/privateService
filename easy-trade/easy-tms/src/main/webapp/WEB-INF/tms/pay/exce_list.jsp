@@ -23,7 +23,7 @@
 					<tr>
 						<c:choose>
 							<c:when test="${item.rePay}">
-								<td style="text-align: center;"><input type="checkbox" name="subBox" id="${item.id}" payChannel="${item.payChannel}"></td>
+								<td style="text-align: center;"><input type="checkbox" name="subBox" id="${item.id}"  payChannel="${item.payChannel}"></td>
 							</c:when>
 							<c:otherwise>
 								<td style="text-align: center;"><input type="checkbox" name="subBox" id="${item.id}" payChannel="${item.payChannel}" disabled="disabled"></td>
@@ -52,16 +52,19 @@
 						<td>${item.buyerAccount}</td>
 						<td>${item.buyerName}</td>
 						<td>${item.orderPrice}</td>
-						<c:choose>
-							<c:when test="${item.rePay}">
-								<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="morePay(${item.id},4, ${item.payChannel})"  class="btnsearch" id="pay-button" target="_blank">付款</a></sec:authorize></td>
-							</c:when>
-							<c:otherwise>
-								<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><button class="btnsearch" disabled="disabled">付款</button></sec:authorize></td>
-							</c:otherwise>
-						</c:choose>
 
-						</td>
+						<if test="${item.refundRejected == 0}">
+							<c:choose>
+								<c:when test="${item.rePay}">
+									<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="morePay(${item.id},4, ${item.payChannel})"  class="btnsearch" id="pay-button" target="_blank">付款</a></sec:authorize>
+								</c:when>
+								<c:otherwise>
+									<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><button class="btn-class" disabled="disabled">付款</button></sec:authorize>
+								</c:otherwise>
+							</c:choose>
+								<sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="excePayCancel(${item.id},1)" class="btnsearch" id="cancePay" >取消</a></sec:authorize>
+							</td>
+						</if>
 					</tr>
 				</c:forEach>
 			</c:when>

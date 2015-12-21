@@ -33,7 +33,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: 柯军
@@ -151,16 +154,7 @@ public class PayController extends BaseController {
             String currpage = (String) map.get("currpage");
             map.put("status", ConstantEnum.TRADE_STATUS_PAY_NO.getCodeInt());
             map.put("tradeType", ConstantEnum.TRADE_TYPE_EXCE_PAY.getCodeInt());
-//            List<TradeVO> list = buildList(refundService.selectRefundPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE));
             List<TradeVO> list = validateAllowOpPay(refundService.selectRefundPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE));
-//            OrderFormEntity orderFormEntity = null;
-//            for (TradeVO tradeVO : list) {
-//                orderFormEntity = rOAOrderFormService.getOrderFormByOrderNum(tradeVO.getOrderNo());
-//                if (orderFormEntity != null) {
-//                    tradeVO.setOrderId(orderFormEntity.getId().toString());
-//                    tradeVO.setOrderUserId(orderFormEntity.getBuyerId());
-//                }
-//            }
             double pageTotle = refundService.selectRefundPageListCount(map);
             Integer rowContNum = (int) Math.ceil(pageTotle / Constant.PAGE.PAGESIZE);
             model.addAttribute("rowCont", rowContNum);
@@ -336,6 +330,7 @@ public class PayController extends BaseController {
         return result;
     }
 
+
     private String getDesc(Integer type) {
         String desc = ConstantEnum.TRADE_TYPE_TO_DRAW_APPLY.getValueStr();
         if (PayEnum.TRADE_REFUND_ONE.getCode() == type || PayEnum.TRADE_REFUND_MORE.getCode() == type)
@@ -505,13 +500,37 @@ public class PayController extends BaseController {
         try{
             rePayTime = Integer.valueOf(propertyConfigurer.getProperty("RE_PAY_TIME"));
         }catch (Exception e){
-            LOGGER.error("获取重新支付时间间隔失败，设置默认值rePayTime={}",rePayTime);
+            LOGGER.error("获取重新支付时间间隔失败，设置默认值rePayTime={}", rePayTime);
         }
         for (TradeVO tradeVO : list){
-            if(DateUtil.dateDiff(tradeVO.getOpTime(), DateUtil.getCurrDateTime()) < rePayTime){
+            if(tradeVO.getOpTime() != null && DateUtil.dateDiff(tradeVO.getOpTime(), DateUtil.getCurrDateTime()) < rePayTime){
                 tradeVO.setRePay(false);
             }
         }
         return list;
+    }
+
+    /**
+     * @param paymentId
+     * @param refundRejected
+     * @param model
+     * @return
+     * @Description: 异常交易取消付款
+     * @Author: 柯军
+     * @datetime:2015年8月28日上午10:58:17
+     **/
+    @RequestMapping("/excePayCancel")
+    @ResponseBody
+    public ResponseResult excePayCancel(@RequestParam Integer paymentId, @RequestParam Integer refundRejected, Model model) {
+        LOGGER.info("异常交易取消付款 excePayCancel paymentId={},refundRejected={}",paymentId,refundRejected);
+        ResponseResult result = new ResponseResult();
+        try {
+            Map<String, Object> resultMap = rpbService.exceCancelPay(paymentId, refundRejected);
+            result.setSuccess(Boolean.valueOf(resultMap.get("success").toString()));
+            result.setMessage(resultMap.get("message").toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }
