@@ -9,15 +9,13 @@
 package com.rongyi.settle.service;
 
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import com.rongyi.rss.settle.GoodPayService;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Description;
 import org.springframework.test.annotation.Rollback;
-import org.testng.annotations.Test;
 
 import com.rongyi.easy.settle.entity.StatementConfig;
 import com.rongyi.easy.settle.vo.StatementConfigVO;
@@ -34,6 +32,10 @@ public class StatementConfigServiceTest extends BaseTest{
 
 	@Autowired
 	StatementConfigService statementConfigService;
+
+	@Autowired
+	GoodPayService goodPayService;
+
 	
 //	@Test
 	@Rollback(false)
@@ -67,6 +69,8 @@ public class StatementConfigServiceTest extends BaseTest{
 		statementConfig.setIsLoop((byte)0);
 		statementConfig.setIsDelete((byte)0);
 		statementConfig.setRollDay("day");
+//		statementConfig.setLinkShopId("111");
+
 		statementConfigService.insert(statementConfig);
 	}
 //	@Test
@@ -78,7 +82,7 @@ public class StatementConfigServiceTest extends BaseTest{
 		statementConfigService.update(statementConfig);
 	}
 	
-	@Test
+//	@Test
 	@Description("分页查询")
 	public void selectPageListTest(){
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -86,7 +90,7 @@ public class StatementConfigServiceTest extends BaseTest{
 		map.put("bussinessType", "0");
 		map.put("createAtstart", "2015-09-18");
 		List<StatementConfigVO> list = statementConfigService.selectPageList(map, 0,15);
-		System.err.println("list size="+list.size());
+		System.err.println("list size=" + list.size());
 	}
 	
 //	@Test
@@ -96,7 +100,25 @@ public class StatementConfigServiceTest extends BaseTest{
 		Integer count = statementConfigService.selectPageListCount(map);
 		System.err.println("count="+count);
 	}
-	
+
+	@Test
+	public void validateNeedPayTest(){
+		System.err.println(goodPayService.validateNeedPay("5478adcfe4b0d2aff10082e7", "1507", 1));
+	}
+
+//	@Test
+	public void checkeffectStartTest(){
+		Map<String,Object> paramsMap = new HashMap<>();
+		List<Integer> ids = new ArrayList<>();
+		ids.add(61);
+		ids.add(62);
+		paramsMap.put("ids", ids);
+		paramsMap.put("checkEffectStart", new Date());
+		List list = statementConfigService.checkeffectStart(paramsMap);
+		System.err.println("=============================== >>>>>>>>>>>>>>>>>>>>>>>>"+list.size());
+		System.err.println("=============================== >>>>>>>>>>>>>>>>>>>>>>>>"+list);
+	}
+
 	public static void main(String[] args) {
 				BigDecimal bi =new BigDecimal(11.5 + "").divide(new BigDecimal(100)).setScale(2, BigDecimal.ROUND_HALF_UP);
 				System.err.println(bi.doubleValue());
