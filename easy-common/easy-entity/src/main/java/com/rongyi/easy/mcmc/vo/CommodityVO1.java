@@ -33,6 +33,9 @@ public class CommodityVO1 implements  Serializable {
 	private String update_by;//修改人
 	private Integer source;//来源
 	private String reason;//审核失败原因
+
+	private int identity = 5;//0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购6买手
+
 	public String getId() {
 		return id;
 	}
@@ -110,5 +113,13 @@ public class CommodityVO1 implements  Serializable {
 	}
 	public void setReason(String reason) {
 		this.reason = reason;
+	}
+
+	public int getIdentity() {
+		return identity;
+	}
+
+	public void setIdentity(int identity) {
+		this.identity = identity;
 	}
 }
