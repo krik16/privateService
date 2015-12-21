@@ -30,7 +30,7 @@ public interface PaymentStatementService {
 
 	Integer selectPageListCountForMerchant(Map<String, Object> map);
 
-	void insert(PaymentStatement paymentStatement);
+	Integer insert(PaymentStatement paymentStatement);
 
 	List<PaymentStatement> selectByCycleTime(Integer configId, Date yesterdayFirstSecond, Date yesterdayLastSecond);
 

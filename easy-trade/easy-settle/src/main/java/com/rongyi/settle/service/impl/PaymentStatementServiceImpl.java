@@ -115,8 +115,8 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 	}
 
 	@Override
-	public void insert(PaymentStatement paymentStatement) {
-		this.getBaseDao().insertBySql(NAMESPACE + ".insert", paymentStatement);
+	public Integer insert(PaymentStatement paymentStatement) {
+		return this.getBaseDao().insertBySql(NAMESPACE + ".insert", paymentStatement);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -615,7 +615,8 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 			ids.add(id);
 			updatePaymentStatusByIds(ids, ConstantEnum.STATUS_8.getCodeInt(), "重新生成或作废", userId);
 		}
-		insert(paymentStatement);
+		id = insert(paymentStatement);
+		logger.info("对账单生成完毕, id: " + id);
 	}
 
 	/**
