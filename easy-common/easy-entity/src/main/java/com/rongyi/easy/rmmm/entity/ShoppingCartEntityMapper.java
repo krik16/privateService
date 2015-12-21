@@ -1,4 +1,4 @@
-package com.rongyi.easy.rmmm.entity;
+/*package com.rongyi.easy.rmmm.entity;
 
 import com.rongyi.easy.rmmm.entity.ShoppingCartEntity;
 import com.rongyi.easy.rmmm.entity.ShoppingCartEntityExample;
@@ -27,4 +27,4 @@ public interface ShoppingCartEntityMapper {
     int updateByPrimaryKeySelective(ShoppingCartEntity record);
 
     int updateByPrimaryKey(ShoppingCartEntity record);
-}
+}*/

@@ -1,4 +1,4 @@
-package com.rongyi.easy.rmmm.entity;
+/*package com.rongyi.easy.rmmm.entity;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -708,4 +708,4 @@ public class ShoppingCartEntityExample {
             this(condition, value, secondValue, null);
         }
     }
-}
+}*/
