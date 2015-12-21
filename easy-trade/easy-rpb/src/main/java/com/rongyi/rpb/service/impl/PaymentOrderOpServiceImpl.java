@@ -22,7 +22,7 @@ public class PaymentOrderOpServiceImpl extends BaseServiceImpl implements Paymen
 
     @Override
     public void update(PaymentOrderOp paymentOrderOp) {
-        this.getBaseDao().updateBySql(NAMESPACE + ".update", paymentOrderOp);
+        this.getBaseDao().updateBySql(NAMESPACE + ".updateByPrimaryKey", paymentOrderOp);
     }
 
     @Override
