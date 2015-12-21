@@ -27,6 +27,11 @@ public enum AppErrorCode {
     /** 代金券相关  后4位区间  5001---6000*/
     ERROR_COUPON_ORDER_PARAM(1065001,"亲~红包和抵扣券只能用一种喔~”"),
 
+    /** 购物车相关  后4位区间  6001---7000*/
+    ERROR_COMMODITY_NOTFOUND(1066001,"商品不存在"),
+    ERROR_COMMODITY_OVER(1066002,"商品库存不足"),
+    ERROR_COMMODITY_MORE(1066003,"购物车商品不能超过999"),
+    ERROR_SHOPPINGCART_OVER(1066004,"你的购物车已经满满的啦,买掉一些再来添加呗"),
 
     ;
 
