@@ -40,11 +40,16 @@ public class CommodityVO2 implements  Serializable {
 	
 	@JsonSerialize(using=JsonDateSerializer.class)
 	private Date updateAt;//数据更新日期
+
 	@JsonSerialize(using=JsonDateSerializer.class)
 	private Date registerAt;//上架时间
+
 	@JsonSerialize(using=JsonDateSerializer.class)
 	private Date soldOutAt;//下架时间
+
 	private Integer stockStatus;//0表示统一库存1表示分管库存
+
+	private boolean immediateOn = false;//true表示设置是立即上架
 	public String getId() {
 		return id;
 	}
@@ -201,5 +206,12 @@ public class CommodityVO2 implements  Serializable {
 	public void setLockedStock(Integer lockedStock) {
 		this.lockedStock = lockedStock;
 	}
-	
+
+	public boolean isImmediateOn() {
+		return immediateOn;
+	}
+
+	public void setImmediateOn(boolean immediateOn) {
+		this.immediateOn = immediateOn;
+	}
 }
