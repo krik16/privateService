@@ -145,11 +145,11 @@ public interface HuanXinIMService {
 	 * 根据不同的事件，发送不同的数据（购物车订单）
 	 * 
 	 * @param buyerNum
-	 * @param orderNum
+	 * @param orderNum（购物车大订单号） 生成订单、2分钟未支付 、支付成功
 	 * @param orderEventType
 	 * @return
 	 * @throws Exception
 	 */
-	public void sendBodyByShoppingCartOrder(final String buyerNum, final String orderNum, final String orderEventType);
+	public void sendBodyByShoppingCartOrder(Map<String,Object> map);
 
 }
