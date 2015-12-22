@@ -27,7 +27,7 @@ public class ForumContentLVO  implements Serializable{
 	private String createUser;
 	/**创建时间*/
 	private Date createAt;
-	/**状态0待发布、1已发布、2已关闭*/
+	/**状态0待发布、1已发布、2已关闭 4已结束*/
 	private Integer status;
 	/**
 	 *iosVersion版本
