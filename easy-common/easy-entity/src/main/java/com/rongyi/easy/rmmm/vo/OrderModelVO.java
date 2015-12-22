@@ -28,7 +28,7 @@ public class OrderModelVO extends OrderModelParam implements Serializable {
 	private String cityName;// 市名称
 	private Integer guideType;// 1是导购 2是买手
 	private Integer rebateNum = 0;// 可使用抵扣券数量
-	private String commodityStatus;//商品状态 0下架 1上架
+	private String commodityAppStatus;//商品状态 0下架 1上架
 	private Integer commodityStock;//商品库存
 
 	public Integer getRebateNum() {
@@ -151,12 +151,12 @@ public class OrderModelVO extends OrderModelParam implements Serializable {
 		this.cityName = cityName;
 	}
 
-	public String getCommodityStatus() {
-		return commodityStatus;
+	public String getCommodityAppStatus() {
+		return commodityAppStatus;
 	}
 
-	public void setCommodityStatus(String commodityStatus) {
-		this.commodityStatus = commodityStatus;
+	public void setCommodityAppStatus(String commodityAppStatus) {
+		this.commodityAppStatus = commodityAppStatus;
 	}
 
 	public Integer getCommodityStock() {
@@ -184,7 +184,7 @@ public class OrderModelVO extends OrderModelParam implements Serializable {
 				", provinceName='" + provinceName + '\'' +
 				", cityName='" + cityName + '\'' +
 				", guideType=" + guideType +
-				", commodityStatus='" + commodityStatus + '\'' +
+				", commodityAppStatus='" + commodityAppStatus + '\'' +
 				", commodityStock=" + commodityStock +
 				'}';
 	}
