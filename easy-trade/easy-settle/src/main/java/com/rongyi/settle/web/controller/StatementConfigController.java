@@ -170,12 +170,8 @@ public class StatementConfigController extends BaseController{
 			if (responseData.getMeta().getErrno() != 0) {
 				return responseData;
 			}
-			if (!map.containsKey("bussinessType") || !map.containsKey("bussinessCode") || !map.containsKey("bussinessAccount") || !map.containsKey("ruleCode")){
+			if (!map.containsKey("bussinessType") || !map.containsKey("bussinessCode") || !map.containsKey("bussinessAccount")){
 				return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
-			}
-			StatementConfig oldStatementConfig = statementConfigService.selectByRuleCode(map.get("ruleCode").toString());
-			if(oldStatementConfig != null) {
-				return ResponseData.failure(CodeEnum.FIAL_CONFIG_EXIST.getCodeInt(), CodeEnum.FIAL_CONFIG_EXIST.getValueStr());
 			}
 			//验证商家财务账户
 			if (CollectionUtils.isEmpty(statementConfigService.getAccountInfoByParam(1,Integer.valueOf(map.get("bussinessType").toString()), null, map.get("bussinessCode").toString(),map.get("bussinessAccount").toString())))
@@ -211,12 +207,13 @@ public class StatementConfigController extends BaseController{
 				return ResponseData.failure(CodeEnum.FIAL_CONFIG_BIZ_EXIST.getCodeInt(), CodeEnum.FIAL_CONFIG_BIZ_EXIST.getValueStr());
 			}
 			List<ConfigShop> shopConfigs = (List<ConfigShop>) checkMap.get("shopConfigs");
-			statementConfigService.saveStatementConfigAndInfo(statementConfig, bussinessInfo, shopConfigs);
-			String ruleCode = statementConfig.getRuleCode();
+			String ruleCode = getRuleCode();
 			if (StringUtils.isNotBlank(ruleCode) && ruleCode.length() > 10) {
 				redisService.set(ruleCode.substring(0, 9), ruleCode);
 				redisService.expire(ruleCode.substring(0, 9), 60 * 60 * 48);// 两天后失效
 			}
+			statementConfig.setRuleCode(ruleCode);
+			statementConfigService.saveStatementConfigAndInfo(statementConfig, bussinessInfo, shopConfigs);
 			return ResponseData.success();
 		} catch (Exception e) {
 			e.printStackTrace();

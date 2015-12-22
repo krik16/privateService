@@ -351,7 +351,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                 shopConfig.setShopId(id);
                 if (userLists==null && userAccounts==null) {//关联全部
                     if (CollectionUtils.isNotEmpty(allUserId)){
-                        logger.info("===================>>>>>>>>>>>>>>>>> realUser: "+ allUserId+" realAccount: "+allUserId.toString());
+                        logger.info("===================>>>>>>>>>>>>>>>>> realUser: "+ allUserId+" realAccount: "+allUserAccount.toString());
                     }
                     shopConfig.setUserList(CollectionUtil.listToString(allUserId, ","));
                     shopConfig.setAccountList(CollectionUtil.listToString(allUserAccount, ","));
@@ -449,8 +449,18 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 				break;
 			default: return shopVOs;
 		}
-		reMap = roaShopService.getShops(searchMap,1,1000);
-		shopVOs = (List<ShopVO>) reMap.get("list");
+		int pagesize = 50;
+		int currpage = 1;
+		while (pagesize==50){
+			reMap = roaShopService.getShops(searchMap,currpage,50);
+			currpage++;
+			List<ShopVO> vos = (List<ShopVO>) reMap.get("list");
+			if (CollectionUtils.isNotEmpty(vos)){
+				pagesize = vos.size();
+				shopVOs.addAll(vos);
+			}else
+				pagesize=0;
+		}
 		return shopVOs;
 	}
 
