@@ -71,7 +71,7 @@
   <sql id="Base_Column_List">
     id, mall_user_id, guide_id, shop_mid, create_at, update_at, shop_id
   </sql>
-  <select id="selectByExample" parameterType="com.rongyi.easy.malllife.entity.UserGuideChatEntityExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.rongyi.easy.rmmm.entity.UserGuideChatEntityExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -95,13 +95,13 @@
     delete from user_guide_chat
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.rongyi.easy.malllife.entity.UserGuideChatEntityExample">
+  <delete id="deleteByExample" parameterType="com.rongyi.easy.rmmm.entity.UserGuideChatEntityExample">
     delete from user_guide_chat
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.rongyi.easy.malllife.entity.UserGuideChatEntity">
+  <insert id="insert" parameterType="com.rongyi.easy.rmmm.entity.UserGuideChatEntity">
     insert into user_guide_chat (id, mall_user_id, guide_id, 
       shop_mid, create_at, update_at, 
       shop_id)
@@ -109,7 +109,7 @@
       #{shopMid,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, #{updateAt,jdbcType=TIMESTAMP}, 
       #{shopId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.rongyi.easy.malllife.entity.UserGuideChatEntity">
+  <insert id="insertSelective" parameterType="com.rongyi.easy.rmmm.entity.UserGuideChatEntity">
     insert into user_guide_chat
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -158,7 +158,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.rongyi.easy.malllife.entity.UserGuideChatEntityExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.rongyi.easy.rmmm.entity.UserGuideChatEntityExample" resultType="java.lang.Integer">
     select count(*) from user_guide_chat
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -206,7 +206,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.rongyi.easy.malllife.entity.UserGuideChatEntity">
+  <update id="updateByPrimaryKeySelective" parameterType="com.rongyi.easy.rmmm.entity.UserGuideChatEntity">
     update user_guide_chat
     <set>
       <if test="mallUserId != null">
@@ -230,7 +230,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.rongyi.easy.malllife.entity.UserGuideChatEntity">
+  <update id="updateByPrimaryKey" parameterType="com.rongyi.easy.rmmm.entity.UserGuideChatEntity">
     update user_guide_chat
     set mall_user_id = #{mallUserId,jdbcType=VARCHAR},
       guide_id = #{guideId,jdbcType=INTEGER},
