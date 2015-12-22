@@ -47,10 +47,10 @@ public interface IOrderModelService {
 
 	/**
 	 * 购物车订单批量创建模板
-	 * @param param 模板参数集合
+	 * @param paramList 模板参数集合
 	 * @return id集合
 	 */
-	List<Integer> submitOrderModelForCart(List<OrderModelParam> param);
+	List<Integer> submitOrderModelForCart(List<OrderModelParam> paramList) throws Exception;
 
 	/**
 	 * 批量查询模板信息
