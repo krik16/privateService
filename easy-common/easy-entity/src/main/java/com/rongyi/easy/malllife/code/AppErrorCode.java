@@ -33,6 +33,7 @@ public enum AppErrorCode {
     ERROR_COMMODITY_OVER(1066002,"商品库存不足"),
     ERROR_COMMODITY_MORE(1066003,"购物车商品不能超过999"),
     ERROR_SHOPPINGCART_OVER(1066004,"你的购物车已经满满的啦,买掉一些再来添加呗"),
+    ERROR_COMMODITY_LOWER(1066005,"购买商品数量小于1"),
 
     ;
 
