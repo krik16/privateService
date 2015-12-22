@@ -449,8 +449,16 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 				break;
 			default: return shopVOs;
 		}
-		reMap = roaShopService.getShops(searchMap,1,1000);
-		shopVOs = (List<ShopVO>) reMap.get("list");
+		int size = 50;
+		while (size==50){
+			reMap = roaShopService.getShops(searchMap,1,50);
+			List<ShopVO> vos = (List<ShopVO>) reMap.get("list");
+			if (CollectionUtils.isNotEmpty(vos)){
+				size = vos.size();
+				shopVOs.addAll(vos);
+			}else
+				size=0;
+		}
 		return shopVOs;
 	}
 
