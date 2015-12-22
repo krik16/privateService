@@ -47,6 +47,7 @@ public class ShopEntity implements Serializable{
     private Integer valid;
     private String zone_id;
     private List<String> zone_ids;//依次是省、市、区、商圈、商场、楼层
+    private String filiale_id ;  //分公司ID
 //    private Integer recommend;
 //    private String business_hours;
 	public String getId() {
@@ -270,6 +271,12 @@ public class ShopEntity implements Serializable{
 	}
 	public void setShop_icon(String shop_icon) {
 		this.shop_icon = shop_icon;
+	}
+	public String getFiliale_id() {
+		return filiale_id;
+	}
+	public void setFiliale_id(String filiale_id) {
+		this.filiale_id = filiale_id;
 	}
 	
 }
