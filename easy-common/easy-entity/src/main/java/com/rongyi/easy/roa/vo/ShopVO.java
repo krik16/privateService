@@ -1,9 +1,9 @@
 package com.rongyi.easy.roa.vo;
 
-import org.bson.types.ObjectId;
-
 import java.io.Serializable;
 import java.util.List;
+
+import org.bson.types.ObjectId;
 
 public class ShopVO implements Serializable {
 
@@ -33,6 +33,7 @@ public class ShopVO implements Serializable {
     private List<ObjectId> zone_ids;
     private String filialeId;
 	private String filialeName;
+	private List<ObjectId> exclusive_category_ids;
 
     public String getId() {
         return id;
@@ -230,5 +231,19 @@ public class ShopVO implements Serializable {
 	}
 	public void setFilialeName(String filialeName) {
 		this.filialeName = filialeName;
+	}
+
+	/**
+	 * @return the exclusive_category_ids
+	 */
+	public List<ObjectId> getExclusive_category_ids() {
+		return exclusive_category_ids;
+	}
+
+	/**
+	 * @param exclusive_category_ids the exclusive_category_ids to set
+	 */
+	public void setExclusive_category_ids(List<ObjectId> exclusive_category_ids) {
+		this.exclusive_category_ids = exclusive_category_ids;
 	}
 }

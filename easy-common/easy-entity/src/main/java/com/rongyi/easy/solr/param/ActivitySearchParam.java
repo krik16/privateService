@@ -15,6 +15,8 @@ public class ActivitySearchParam implements Serializable{
 	private String coord_x;   //坐标x
 	private String coord_y;   //坐标y
 	private String cat_id;           //0店铺1商场2品牌3分类（类似于美食）
+	/** 自定义分类id */
+	private String custom_cat_id;
 	private String city_name; //城市名（如  上海&上海市）
 	private String sort;      //排序规则（distance，null，couponRequired（commodityRequired），date）
 	private int from;         //页
@@ -146,6 +148,18 @@ public class ActivitySearchParam implements Serializable{
 		this.showChannel = showChannel;
 	}
 
+	/**
+	 * @return the custom_cat_id
+	 */
+	public String getCustom_cat_id() {
+		return custom_cat_id;
+	}
+	/**
+	 * @param custom_cat_id the custom_cat_id to set
+	 */
+	public void setCustom_cat_id(String custom_cat_id) {
+		this.custom_cat_id = custom_cat_id;
+	}
 	@Override
 	public String toString() {
 		return "ActivitySearchParam{" +
