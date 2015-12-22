@@ -2,6 +2,8 @@ package com.rongyi.rss.roa;
 
 import java.util.List;
 
+import org.bson.types.ObjectId;
+
 import com.rongyi.easy.roa.entity.AreaEntity;
 
 
@@ -38,4 +40,6 @@ public interface ROAAreaService {
 	 * @return
 	 */
 	public List<AreaEntity> getAreaByTypeAndName(String name,String type,String parentId);
+	
+	public List<AreaEntity> getAreaListByIds(List<ObjectId> ids);
 }

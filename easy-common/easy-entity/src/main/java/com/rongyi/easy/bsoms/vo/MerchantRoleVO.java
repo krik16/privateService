@@ -39,6 +39,9 @@ public class MerchantRoleVO implements Serializable{
 	//店铺的MongoId
 	private String shopId;
 	
+	/** 分公司名称 */
+	private String filialeName; 
+	
 	public Integer getType() {
 		return type;
 	}
@@ -164,6 +167,12 @@ public class MerchantRoleVO implements Serializable{
 	}
 	public void setShopId(String shopId) {
 		this.shopId = shopId;
+	}
+	public String getFilialeName() {
+		return filialeName;
+	}
+	public void setFilialeName(String filialeName) {
+		this.filialeName = filialeName;
 	}
 	
 }

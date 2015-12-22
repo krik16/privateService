@@ -2,6 +2,7 @@ package com.rongyi.easy.roa.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
@@ -20,11 +21,20 @@ public class FilialeEntity implements Serializable{
 	@Property("brand_id")
 	private ObjectId brandId;   //关联品牌ID
 	
-	@Property("create_at")
+	@Property("created_at")
 	private Date createAt;
 	
-	@Property("update_at")
+	@Property("updated_at")
 	private Date updateAt;
+	
+	private String telephone;  //联系电话
+	 
+	private String address;   //详细地址 
+	
+	private List<ObjectId> zone_ids;
+	
+	@Property("valid")
+	private int valid;//0 运营中 1已停运
 	
 	public ObjectId getId() {
 		return id;
@@ -62,6 +72,34 @@ public class FilialeEntity implements Serializable{
 	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;
 	}
-	
-	
+	public String getTelephone() {
+		return telephone;
+	}
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public List<ObjectId> getZone_ids() {
+		return zone_ids;
+	}
+	public void setZone_ids(List<ObjectId> zone_ids) {
+		this.zone_ids = zone_ids;
+	}
+	/**
+	 * @return the valid
+	 */
+	public int getValid() {
+		return valid;
+	}
+	/**
+	 * @param valid the valid to set
+	 */
+	public void setValid(int valid) {
+		this.valid = valid;
+	}
 }
