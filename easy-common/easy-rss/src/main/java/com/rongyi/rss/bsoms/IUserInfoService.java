@@ -38,7 +38,7 @@ public interface IUserInfoService {
 
 	/**
 	 * 根据id修改账户状态：启用/停用
-	 * @param paraMap
+	 * @param id
 	 */
 	boolean updateAccountStatus(int id, int accountStatus, String stopReason, Integer userId);
 	
@@ -130,13 +130,13 @@ public interface IUserInfoService {
 	
 	/**
 	 * 查询买手账号列表
-	 * @param map
+	 * @param paramsMap
 	 * @param currpage
-	 * @param pagesize
+	 * @param pageSize
 	 * @return
 	 */
-	public PagingVO<BusinessAccountVO> getBuyerInfoListByMap(Map<String, Object>paramsMap,int currpage,int pageSize);
-	
+	 PagingVO<BusinessAccountVO> getBuyerInfoListByMap(Map<String, Object>paramsMap,int currpage,int pageSize);
+
 	/**
 	 * 验证用户信息是否已存在
 	 * @param paramsMap
@@ -158,4 +158,11 @@ public interface IUserInfoService {
 	 */
 	public List<SessionUserInfo> getRelationUserListByRoleId(Map<String, Object> paramMap);
 	
+
+	/**
+	 * 通过关联id（shopId,mallId,filialeId,brandId,shopId...）条件查询商家用户账户
+	 * @param paramsMap
+	 * @return
+	 */
+	List<UserInfo> getFullUserInfoByRelevanceId(Map<String, Object> paramsMap);
 }

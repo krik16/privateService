@@ -164,6 +164,42 @@ public class CouponVO implements Serializable {
 
     private String synFlag; //新老优惠券同步标识
 
+
+    /**
+     * 0为不支持。第一位：随时退、第二位：过期退 第三位：免预约、第四位：不可退
+     * 大运营平台，平台代金券 售后:随时退,过期退,免预约,不可退；未选中[0]，选中[1] 例如 "1,1,1,1"表示都选中,当随时退和过期退都未选中，则表示不可退
+     */
+    private String afterSaleService;
+
+
+
+    /**
+     * 使用限制
+     */
+    private String limitDesc;
+
+    /**
+     * 使用说明
+     */
+    private String usageDesc;
+
+    /**
+     * 备注
+     */
+    private String remark;
+
+
+    /**
+     * 每人每日限用张数
+     */
+    private Integer limitUseCount;
+
+    /**
+     * 每日最大发行张数
+     */
+    private Integer limitPublishCount;
+
+
     public String getSynFlag() {
         return synFlag;
     }
@@ -691,5 +727,53 @@ public class CouponVO implements Serializable {
 
     public void setWechatIcon(String wechatIcon) {
         this.wechatIcon = wechatIcon;
+    }
+
+    public String getAfterSaleService() {
+        return afterSaleService;
+    }
+
+    public void setAfterSaleService(String afterSaleService) {
+        this.afterSaleService = afterSaleService;
+    }
+
+    public String getLimitDesc() {
+        return limitDesc;
+    }
+
+    public void setLimitDesc(String limitDesc) {
+        this.limitDesc = limitDesc;
+    }
+
+    public String getUsageDesc() {
+        return usageDesc;
+    }
+
+    public void setUsageDesc(String usageDesc) {
+        this.usageDesc = usageDesc;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public Integer getLimitUseCount() {
+        return limitUseCount;
+    }
+
+    public void setLimitUseCount(Integer limitUseCount) {
+        this.limitUseCount = limitUseCount;
+    }
+
+    public Integer getLimitPublishCount() {
+        return limitPublishCount;
+    }
+
+    public void setLimitPublishCount(Integer limitPublishCount) {
+        this.limitPublishCount = limitPublishCount;
     }
 }
