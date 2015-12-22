@@ -276,7 +276,7 @@ function morePay(ids, type,payChannel) {
 		else{
 			var url = '../pay/pay?paymentId=' + ids + '&type=' + type+'&payChannel=' + payChannel;
 			 window.open(url);
-			ajaxCommonSearch(url_,getParamsJson());
+			setTimeout('ajaxCommonSearch(url_,getParamsJson());', 1000);
 		}
 	}, "json");
 	

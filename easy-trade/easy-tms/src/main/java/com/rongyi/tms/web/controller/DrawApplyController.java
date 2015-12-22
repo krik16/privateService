@@ -23,6 +23,7 @@ import com.rongyi.easy.tms.vo.DrawApplyDetailVO;
 import com.rongyi.easy.tms.vo.DrawApplyListVO;
 import com.rongyi.easy.tms.vo.DrawApplySearchParam;
 import com.rongyi.rss.tms.DrawApplySearchService;
+import com.rongyi.tms.constants.ConstantEnum;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
@@ -156,16 +157,17 @@ public class DrawApplyController extends BaseController {
                 DrawApply drawApply=drawService.getOneById(id);
                 BigDecimal balance = new BigDecimal(0);
                 VirtualAccountEntity vaEntity = rOAVirtualAccountGeneralService.selectByUserId(drawApply.getDrawUserId());
-                balance.add(vaEntity.getBalance());
+                balance = balance.add(vaEntity.getBalance());
                 DrawApplySearchParam drawApplySearchParam = new DrawApplySearchParam();
                 drawApplySearchParam.setUserId(drawApply.getDrawUserId());
                 drawApplySearchParam.setCurrentPage(0);
                 drawApplySearchParam.setPageSize(10000);
                 drawApplySearchParam.setStatus(Constants.DrawApplyStatus.PROCESSING);
+                drawApplySearchParam.setTimeRange(Constants.TMSTimeRangeType.ALL);
                 DrawApplyListVO drawApplyListVO= tmsDrawApplySearchService.drawApplySearch(drawApplySearchParam);
                 if(drawApplyListVO != null && drawApplyListVO.getDrawApplyDetailList() != null) {
                     for (DrawApplyDetailVO drawApplyDetailVO :drawApplyListVO.getDrawApplyDetailList()){
-                        balance.add(drawApplyDetailVO.getDrawAmount());
+                        balance = balance.add(drawApplyDetailVO.getDrawAmount());
                     }
                 }
                 modelMap.addAttribute("apply", drawApply);
@@ -177,7 +179,7 @@ public class DrawApplyController extends BaseController {
             }
             return module+"/draw_apply-detail";
         }catch(Exception e){
-            LOGGER.error(e);
+           e.printStackTrace();
             request.setAttribute(Constant.VIEW_MSG.MSG, "获取数据失败");
             request.setAttribute(Constant.VIEW_MSG.DETAIL, e.getMessage());
             return Constant.VIEW_MSG.ERROR;

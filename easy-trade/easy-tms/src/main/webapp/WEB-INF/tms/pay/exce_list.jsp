@@ -15,6 +15,7 @@
 			<td>买家账号</td>
 			<td>买家姓名</td>
 			<td>异常交易金额</td>
+			<td>状态</td>
 			<td>操作</td>
 		</tr>
 		<c:choose>
@@ -52,19 +53,28 @@
 						<td>${item.buyerAccount}</td>
 						<td>${item.buyerName}</td>
 						<td>${item.orderPrice}</td>
-
-						<if test="${item.refundRejected == 0}">
+							<c:choose>
+								<c:when test="${item.refundRejected eq 0}">
+									<td>待付款
+								</c:when>
+								<c:otherwise>
+									<td>取消付款
+								</c:otherwise>
+							</c:choose>
+						</td>
+						<td>
+						<c:if test="${item.refundRejected eq 0}">
 							<c:choose>
 								<c:when test="${item.rePay}">
-									<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="morePay(${item.id},4, ${item.payChannel})"  class="btnsearch" id="pay-button" target="_blank">付款</a></sec:authorize>
+									<sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="morePay(${item.id},4, ${item.payChannel})"  class="btnsearch" id="pay-button" target="_blank">付款</a></sec:authorize>
 								</c:when>
 								<c:otherwise>
 									<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><button class="btn-class" disabled="disabled">付款</button></sec:authorize>
 								</c:otherwise>
 							</c:choose>
 								<sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="excePayCancel(${item.id},1)" class="btnsearch" id="cancePay" >取消</a></sec:authorize>
-							</td>
-						</if>
+						</c:if>
+						</td>
 					</tr>
 				</c:forEach>
 			</c:when>
