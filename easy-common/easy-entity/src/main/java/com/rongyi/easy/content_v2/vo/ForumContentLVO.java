@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.rongyi.core.common.util.DateTool;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class ForumContentLVO  implements Serializable{
 	/**内容id*/
@@ -29,6 +30,10 @@ public class ForumContentLVO  implements Serializable{
 	private Date createAt;
 	/**状态0待发布、1已发布、2已关闭 4已结束*/
 	private Integer status;
+	/**
+	 * 类型
+	 */
+	private int type;
 	/**
 	 *iosVersion版本
 	 */
@@ -107,6 +112,15 @@ public class ForumContentLVO  implements Serializable{
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
 	/**
 	 * @return the stick
 	 */
@@ -119,24 +133,7 @@ public class ForumContentLVO  implements Serializable{
 	public void setStick(int stick) {
 		this.stick = stick;
 	}
-	@Override
-	public String toString() {
-		return "ForumContentLVO{" +
-				"id=" + id +
-				", positionId=" + positionId +
-				", provName='" + provName + '\'' +
-				", cityName='" + cityName + '\'' +
-				", picUrls='" + picUrls + '\'' +
-				", title='" + title + '\'' +
-				", publishBeginAt=" + publishBeginAt +
-				", publishEndAt=" + publishEndAt +
-				", createUser='" + createUser + '\'' +
-				", createAt=" + createAt +
-				", status=" + status +
-				", iosVersion='" + iosVersion + '\'' +
-				", androidVersion='" + androidVersion + '\'' +
-				'}';
-	}
+
 
 	public String getIosVersion() {
 		return iosVersion;
@@ -152,5 +149,26 @@ public class ForumContentLVO  implements Serializable{
 
 	public void setAndroidVersion(String androidVersion) {
 		this.androidVersion = androidVersion;
+	}
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append("id", id)
+				.append("positionId", positionId)
+				.append("provName", provName)
+				.append("cityName", cityName)
+				.append("picUrls", picUrls)
+				.append("title", title)
+				.append("publishBeginAt", publishBeginAt)
+				.append("publishEndAt", publishEndAt)
+				.append("createUser", createUser)
+				.append("createAt", createAt)
+				.append("status", status)
+				.append("type", type)
+				.append("iosVersion", iosVersion)
+				.append("androidVersion", androidVersion)
+				.append("stick", stick)
+				.toString();
 	}
 }

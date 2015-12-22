@@ -9,6 +9,7 @@ import com.rongyi.easy.content_v2.param.ForumContentStatusDelParam;
 import com.rongyi.easy.content_v2.vo.ForumContentListVo;
 import com.rongyi.easy.content_v2.vo.ForumHomeModelVo;
 import com.rongyi.easy.content_v2.vo.ForumPostiomModelVo;
+import com.rongyi.easy.content_v2.vo.ForumTemplateVO;
 
 import java.util.List;
 
@@ -169,4 +170,18 @@ public interface IIContentService {
 	* @throws
 	 */
 	public List<ForumContentListVo> findContentAllByParamSpecail(ForumContentParam par);
+
+	/**
+	 * 查询模版列表
+	 * @return
+	 */
+	public List<ForumTemplateVO> findTemplateList();
+
+
+	/**
+	 * 判断在同一位置、同一区域、同一发布时间段内是否有内容
+	 * @param fc
+	 * @return
+	 */
+	int hasContentNoTitle(ForumContent fc);
 }

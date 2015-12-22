@@ -14,6 +14,7 @@ import com.rongyi.easy.content_v2.param.SpecailParam;
 import com.rongyi.easy.content_v2.vo.ForumContentListVo;
 import com.rongyi.easy.content_v2.vo.ForumHomeModelVo;
 import com.rongyi.easy.content_v2.vo.ForumPostiomModelVo;
+import com.rongyi.easy.content_v2.vo.ForumTemplateVO;
 
 /**
  * 内容管理的接口
@@ -239,5 +240,13 @@ public interface ROAContentService {
 	* @throws
 	 */
 	public List<ForumContentListVo> findContentAllByParamSpecail(ForumContentParam par);
+
+	/***
+	 * 查询模版列表
+	 * @return
+	 */
+	public List<ForumTemplateVO> findTemplateList();
+
+	public int hasContentNotitle(ForumContent fc);
 	
 }
