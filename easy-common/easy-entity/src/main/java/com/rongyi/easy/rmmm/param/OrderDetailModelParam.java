@@ -24,6 +24,9 @@ public class OrderDetailModelParam implements Serializable {
 	private String commodityCommission;// 商品佣金
 	private String orderDetailModelId;// 子模板id
 	private String num;// 商品数量
+	private String commodityAppStatus;//商品状态 0下架 1上架
+	private Integer commodityStock;//商品库存
+
 	private List<CommoditySpecColumnVO> specColumnValues;// 规格参数
 
 	private String commodityPic;// 商品图片
@@ -154,6 +157,22 @@ public class OrderDetailModelParam implements Serializable {
 		this.supportSelfPickup = supportSelfPickup;
 	}
 
+	public String getCommodityAppStatus() {
+		return commodityAppStatus;
+	}
+
+	public void setCommodityAppStatus(String commodityAppStatus) {
+		this.commodityAppStatus = commodityAppStatus;
+	}
+
+	public Integer getCommodityStock() {
+		return commodityStock;
+	}
+
+	public void setCommodityStock(Integer commodityStock) {
+		this.commodityStock = commodityStock;
+	}
+
 	@Override
 	public String toString() {
 		return "OrderDetailModelParam{" +
@@ -170,6 +189,8 @@ public class OrderDetailModelParam implements Serializable {
 				", commodityPostage='" + commodityPostage + '\'' +
 				", supportCourierDeliver=" + supportCourierDeliver +
 				", supportSelfPickup=" + supportSelfPickup +
+				", commodityAppStatus=" + commodityAppStatus +
+				", commodityStock=" + commodityStock +
 				'}';
 	}
 }
