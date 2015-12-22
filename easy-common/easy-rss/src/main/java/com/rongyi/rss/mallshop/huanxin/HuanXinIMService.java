@@ -140,5 +140,16 @@ public interface HuanXinIMService {
 	 * 根据不同的事件，发送不同的数据（退款维权）
 	 */
 	public void sendBodyByOrderEventType(final Integer applicationId, final String buyerNum, final String orderEventType);
+	
+	/**
+	 * 根据不同的事件，发送不同的数据（购物车订单）
+	 * 
+	 * @param buyerNum
+	 * @param orderNum
+	 * @param orderEventType
+	 * @return
+	 * @throws Exception
+	 */
+	public void sendBodyByShoppingCartOrder(final String buyerNum, final String orderNum, final String orderEventType);
 
 }
