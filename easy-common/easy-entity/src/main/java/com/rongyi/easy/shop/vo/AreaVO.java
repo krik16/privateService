@@ -72,7 +72,9 @@ public class AreaVO  implements Comparable<AreaVO>,Serializable{
 		return this.getName().compareTo(o.getName());
 	}
 
-	
-	
-	
+	@Override
+	public String toString() {
+		return "AreaVO [id=" + id + ", type=" + type + ", name=" + name + ", floorNumber=" + floorNumber
+				+ ", floorType=" + floorType + ", floorName=" + floorName + "]";
+	}
 }

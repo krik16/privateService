@@ -22,4 +22,11 @@ public interface IFilialeService {
 	 * @return
 	 */
 	public FilialeInfoEntity getFilialeById(Integer id);
+	
+	/**
+	 * 通过mongoId查询sqlId 
+	 * @param mongoId
+	 * @return
+	 */
+	public Integer getSqlIdByMongoId(String mongoId);
 }
