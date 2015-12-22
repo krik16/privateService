@@ -37,7 +37,7 @@ public interface IShoppingCartService {
 	 * @param param
 	 * @throws Exception
 	 */
-	public int editShopCart(ShoppingCartParam param)  throws Exception;
+	public ResponseVO editShopCart(ShoppingCartParam param)  throws Exception;
 	
 	/**
 	 * 加入购物车

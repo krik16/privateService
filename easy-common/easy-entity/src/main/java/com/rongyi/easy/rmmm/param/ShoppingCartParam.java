@@ -32,7 +32,7 @@ public class ShoppingCartParam extends MalllifeBaseParam implements Serializable
 	
 	private String specId;//商品规格
 	
-	private String type;//是否更新时间 1是 0否
+	private String type;//1删除单个购物车 2清空购物车
 
 	public String getType() {
 		return type;
