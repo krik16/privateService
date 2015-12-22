@@ -57,19 +57,19 @@ public interface IOrderModelService {
 	 * @param idList 模板id集合
 	 * @return 模板集合
 	 */
-	List<OrderModelVO> getOrderModelForCart(List<Integer> idList);
+	List<OrderModelVO> getOrderModelForCart(List<Integer> idList)  throws Exception;
 
 	/**
 	 * 删除商品模板
 	 * @param idList 模板id集合
 	 * @return 是否成功
 	 */
-	boolean delOrderdetailModel(List<Integer> idList);
+	boolean delOrderdetailModel(List<Integer> idList)  throws Exception;
 
 	/**
 	 * 调整商品模板的购买数量，至库存最大
 	 * @param detailModelId 模板id集合
 	 * @return 是否成功
 	 */
-	boolean adjustDetailModelBuyNum(List<Integer> detailModelId);
+	boolean adjustDetailModelBuyNum(List<Integer> detailModelId)  throws Exception;
 }
