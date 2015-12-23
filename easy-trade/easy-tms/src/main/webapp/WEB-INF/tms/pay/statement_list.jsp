@@ -93,7 +93,7 @@
 								</c:when>
 
 								<c:when test="${(item.status eq 6 or item.status eq 10) and !item.rePay }">
-									<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="payFreeze(${item.id},9)" class="btnsearch" id="pay-button" target="_blank">冻结</a></sec:authorize>
+									<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><button class="btn-class" disabled="disabled">冻结</button></sec:authorize>
 									<sec:authorize ifAnyGranted="TMS_F_PAY" ><button class="btn-class" disabled="disabled">付款</button></sec:authorize>
 								</c:when>
 								<c:when test="${item.rePay}">
