@@ -48,4 +48,14 @@ public interface ShopService {
 	 * @return
 	 */
 	public List<Shop> searchShop(Map<String, Object> paramMap);
+	
+	/**
+	 * 根据商场ID || 店铺名称获取店铺列表
+	 * @param mallId		商场ID
+	 * @param shopName		店铺名称
+	 * @param page			当前页
+	 * @param pageSize		分页条数
+	 * @return
+	 */
+	public ResponseVO getShopListForName(String mallId, String shopName, Integer page, Integer pageSize);
 }
