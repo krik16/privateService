@@ -34,7 +34,17 @@ public class CommodityBuyerVO implements Serializable{
 	private String bullId;//创建人
 	
 	private Double distance = 0.0; //距离
-	
+
+	private int saleShopCount; //销售店铺数，小于等于1为单店销售，大于1为多店销售
+
+	public int getSaleShopCount() {
+		return saleShopCount;
+	}
+
+	public void setSaleShopCount(int saleShopCount) {
+		this.saleShopCount = saleShopCount;
+	}
+
 	public boolean isOfflinePayment() {
 		return offlinePayment;
 	}
@@ -340,7 +350,7 @@ public class CommodityBuyerVO implements Serializable{
 				+ ", commodityBrandName=" + commodityBrandName
 				+ ", commodityPostage=" + commodityPostage
 				+ ", commodityDescription=" + commodityDescription
-				+ ", commodityName=" + commodityName + ", shopId=" + shopId
+				+ ", commodityName=" + commodityName + ", shopId=" + shopId + ", saleShopCount=" + saleShopCount
 				+ ", shopMid=" + shopMid + ", isCollected=" + isCollected + "]";
 	}
 
