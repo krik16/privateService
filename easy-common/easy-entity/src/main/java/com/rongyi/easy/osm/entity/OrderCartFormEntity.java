@@ -43,6 +43,15 @@ public class OrderCartFormEntity implements Serializable {
 
     private byte status;//状态 1未支付 2已支付 3超时关闭 4买家关闭 5失效
 
+    private byte isAlert;//是否已发送支付提醒 (0否 1是)
+
+    public byte getIsAlert() {
+        return isAlert;
+    }
+
+    public void setIsAlert(byte isAlert) {
+        this.isAlert = isAlert;
+    }
 
     public Integer getId() {
         return id;
