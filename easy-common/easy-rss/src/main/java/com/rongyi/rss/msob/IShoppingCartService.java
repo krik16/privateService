@@ -1,5 +1,7 @@
 package com.rongyi.rss.msob;
 
+import java.util.List;
+
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.rmmm.param.ShoppingCartParam;
 import com.rongyi.easy.rmmm.vo.ShowCartDetailVO;
@@ -63,5 +65,16 @@ public interface IShoppingCartService {
 	 * @throws Exception
 	 */
 	public Integer getMyShopCartCount(String userId) throws Exception;
+	
+	/**
+	 * 删除购物车
+	 * 
+	 * @param userId
+	 *            用户 id
+	 * @param guideIds
+	 *            导购、买手id集合
+	 * @throws Exception
+	 */
+	public int deleteShopCartByGuideIds(String userId, List<Integer> guideIds) throws Exception;
 
 }

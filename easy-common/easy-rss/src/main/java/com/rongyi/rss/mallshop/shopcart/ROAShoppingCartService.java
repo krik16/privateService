@@ -1,5 +1,7 @@
 package com.rongyi.rss.mallshop.shopcart;
 
+import java.util.List;
+
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
@@ -67,5 +69,16 @@ public interface ROAShoppingCartService {
 	 * @throws Exception
 	 */
 	public Integer getMyShopCartCount(String userId) throws Exception;
+	
+	/**
+	 * 删除购物车
+	 * 
+	 * @param userId
+	 *            用户 id
+	 * @param guideIds
+	 *            导购、买手id集合
+	 * @throws Exception
+	 */
+	public int deleteShopCartByGuideIds(String userId, List<Integer> guideIds) throws Exception;
 
 }
