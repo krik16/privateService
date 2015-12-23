@@ -156,7 +156,7 @@ public class DrawApplyDetailController extends BaseController {
                     }
                 }
                 LOGGER.info(drawApply.getCreateAt());
-                modelMap.addAttribute("balance",balance);
+                modelMap.addAttribute("balance",balance.setScale(2,BigDecimal.ROUND_HALF_UP));
                 modelMap.addAttribute("apply", drawApply);
             }
             return "accountCheck/draw_apply-detail";
