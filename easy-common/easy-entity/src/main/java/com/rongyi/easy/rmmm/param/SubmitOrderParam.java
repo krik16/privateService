@@ -5,7 +5,9 @@ import net.sf.json.JSONObject;
 import java.io.Serializable;
 import java.util.List;
 
-public class SubmitOrderParam implements Serializable {
+import com.rongyi.easy.malllife.param.MalllifeBaseParam;
+
+public class SubmitOrderParam extends MalllifeBaseParam implements Serializable {
 
 	/**
 	 * 
@@ -26,7 +28,7 @@ public class SubmitOrderParam implements Serializable {
 
 	private JSONObject discountInfo;// {“score”:”使用积分”} 购物车使用积分
 
-	private Boolean ifCart;//是否购物车订单
+	private Boolean ifCart = true;//是否购物车订单
 
 	public List<ParentOrderParam> getParentOrderList() {
 		return parentOrderList;
