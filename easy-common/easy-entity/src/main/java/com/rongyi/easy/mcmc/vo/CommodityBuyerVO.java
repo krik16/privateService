@@ -7,7 +7,6 @@ import java.util.List;
 import com.rongyi.easy.mcmc.Commodity;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class CommodityBuyerVO implements Serializable{
 
@@ -24,7 +23,7 @@ public class CommodityBuyerVO implements Serializable{
 	private int commodityStatus;
 	private int commodityAppStatus;// 商品APP显示状态 (0下架  1上架  3待上架)
 	private int commodityType;//渠道  1商家，2买手
-	private boolean supportCourierDeliver;//导购：true是   false否；买手：默认true   
+	private boolean supportCourierDeliver;//支持快递发货    导购：true是   false否；买手：默认true   
 	private boolean supportSelfPickup;//支持到店自提  true 是    false否
 	private boolean offlinePayment;// 线下支付
 	private boolean onlinePayment;// 线上支付
