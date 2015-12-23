@@ -30,6 +30,8 @@ public class AdVO implements Serializable {
     private Date      updatedAt;
     private Integer adTime;
     private Integer adOrder;
+    private Integer adGroup;
+    private String adRules;
     public String getId() {
         return id;
     }
@@ -180,5 +182,21 @@ public class AdVO implements Serializable {
 
 	public void setAdOrder(Integer adOrder) {
 		this.adOrder = adOrder;
+	}
+
+	public Integer getAdGroup() {
+		return adGroup;
+	}
+
+	public void setAdGroup(Integer adGroup) {
+		this.adGroup = adGroup;
+	}
+
+	public String getAdRules() {
+		return adRules;
+	}
+
+	public void setAdRules(String adRules) {
+		this.adRules = adRules;
 	}
 }
