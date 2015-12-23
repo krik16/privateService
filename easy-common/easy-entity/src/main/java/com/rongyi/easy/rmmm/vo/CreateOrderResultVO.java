@@ -15,6 +15,12 @@ public class CreateOrderResultVO extends PageVO implements Serializable{
 
 	private List<String[]> commodityDetailList;//0：shopid、1：商品id、2：导购id、3：规则id
 
+	private String commodityName;//商品名称
+
+	private Integer commodityNum;//商品数量
+
+	private List<Integer> detailModelIds;//要删除的或修改的子模板id集合
+
 	public List<String> getOrderNo() {
 		return orderNo;
 	}
@@ -31,10 +37,37 @@ public class CreateOrderResultVO extends PageVO implements Serializable{
 		this.commodityDetailList = commodityDetailList;
 	}
 
+	public String getCommodityName() {
+		return commodityName;
+	}
+
+	public void setCommodityName(String commodityName) {
+		this.commodityName = commodityName;
+	}
+
+	public Integer getCommodityNum() {
+		return commodityNum;
+	}
+
+	public void setCommodityNum(Integer commodityNum) {
+		this.commodityNum = commodityNum;
+	}
+
+	public List<Integer> getDetailModelIds() {
+		return detailModelIds;
+	}
+
+	public void setDetailModelIds(List<Integer> detailModelIds) {
+		this.detailModelIds = detailModelIds;
+	}
+
 	@Override
 	public String toString() {
 		return "CreateOrderResultVO{" +
 				"orderNo=" + orderNo +
+				"commodityName=" + commodityName +
+				"commodityNum=" + commodityNum +
+				"detailModelIds=" + detailModelIds +
 				", commodityDetailList='" + commodityDetailList + '\'' +
 				'}';
 	}
