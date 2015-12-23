@@ -111,15 +111,7 @@ public class PCWebPageAlipayController extends BaseController {
 			}
 		}
 		if(fail_details != null){
-			LOGGER.info("支付宝打款失败记录,失败账号fail_details={}", fail_details);
-			String[] failDetailsList = fail_details.split("\\|");
-			if (failDetailsList != null && failDetailsList.length > 0) {
-				for (String details : failDetailsList) {
-					PaymentLogInfo paymentLogInfo = new PaymentLogInfo();
-					parsPayDetail(paymentLogInfo, details);
-					paymentService.updateListStatusBypayNo(paymentLogInfo.getOutTradeNo(), null, Constants.PAYMENT_STATUS.STAUS0);// 修改打款状态(提现或打款给卖家)
-				}
-			}
+			LOGGER.info("支付宝打款失败记录,不更新打款状态，fail_details={}", fail_details);
 		}
 		if (!allList.isEmpty()) {
 			paySuccessToMessage(allList, allList.get(0).getTradeType());
