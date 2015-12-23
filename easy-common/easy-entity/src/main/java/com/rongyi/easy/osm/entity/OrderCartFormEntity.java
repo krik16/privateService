@@ -15,9 +15,9 @@ public class OrderCartFormEntity implements Serializable {
 
     private BigDecimal rebateDiscount;//抵扣金额
 
-    private byte rebateSource;//促销券来源 1：平台 2：商家
+    private Byte rebateSource;//促销券来源 1：平台 2：商家
 
-    private byte rebateType;//促销券类型 1：满减 2：立减
+    private Byte rebateType;//促销券类型 1：满减 2：立减
 
     private BigDecimal couponRequirement;//抵扣满金额
 
@@ -41,17 +41,9 @@ public class OrderCartFormEntity implements Serializable {
 
     private Date updateAt;//订单更新时间
 
-    private byte status;//状态 1未支付 2已支付 3超时关闭 4买家关闭 5失效
+    private Byte status;//状态 1未支付 2已支付 3超时关闭 4买家关闭 5失效
 
-    private byte isAlert;//是否已发送支付提醒 (0否 1是)
-
-    public byte getIsAlert() {
-        return isAlert;
-    }
-
-    public void setIsAlert(byte isAlert) {
-        this.isAlert = isAlert;
-    }
+    private Byte isAlert;//是否已发送支付提醒 (0否 1是)
 
     public Integer getId() {
         return id;
@@ -77,28 +69,44 @@ public class OrderCartFormEntity implements Serializable {
         this.rebateCode = rebateCode;
     }
 
+    public Byte getRebateSource() {
+        return rebateSource;
+    }
+
+    public void setRebateSource(Byte rebateSource) {
+        this.rebateSource = rebateSource;
+    }
+
+    public Byte getRebateType() {
+        return rebateType;
+    }
+
+    public void setRebateType(Byte rebateType) {
+        this.rebateType = rebateType;
+    }
+
+    public Byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
+    }
+
+    public Byte getIsAlert() {
+        return isAlert;
+    }
+
+    public void setIsAlert(Byte isAlert) {
+        this.isAlert = isAlert;
+    }
+
     public BigDecimal getRebateDiscount() {
         return rebateDiscount;
     }
 
     public void setRebateDiscount(BigDecimal rebateDiscount) {
         this.rebateDiscount = rebateDiscount;
-    }
-
-    public byte getRebateSource() {
-        return rebateSource;
-    }
-
-    public void setRebateSource(byte rebateSource) {
-        this.rebateSource = rebateSource;
-    }
-
-    public byte getRebateType() {
-        return rebateType;
-    }
-
-    public void setRebateType(byte rebateType) {
-        this.rebateType = rebateType;
     }
 
     public BigDecimal getCouponRequirement() {
@@ -187,14 +195,6 @@ public class OrderCartFormEntity implements Serializable {
 
     public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
-    }
-
-    public byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(byte status) {
-        this.status = status;
     }
 
     @Override
