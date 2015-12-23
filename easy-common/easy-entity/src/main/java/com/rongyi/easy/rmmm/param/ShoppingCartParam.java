@@ -4,6 +4,7 @@
 package com.rongyi.easy.rmmm.param;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.rongyi.easy.malllife.param.MalllifeBaseParam;
 
@@ -32,7 +33,17 @@ public class ShoppingCartParam extends MalllifeBaseParam implements Serializable
 	
 	private String specId;//商品规格
 	
-	private String type;//1删除单个购物车 2清空购物车
+	private String type;//1删除单个购物车 2清空购物车 3根据导购id集合删除购物车
+	
+	private List<Integer> guideIds;//导购、买手id集合
+
+	public List<Integer> getGuideIds() {
+		return guideIds;
+	}
+
+	public void setGuideIds(List<Integer> guideIds) {
+		this.guideIds = guideIds;
+	}
 
 	public String getType() {
 		return type;

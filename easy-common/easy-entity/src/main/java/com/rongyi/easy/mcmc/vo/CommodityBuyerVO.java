@@ -5,8 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import com.rongyi.easy.mcmc.Commodity;
+
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class CommodityBuyerVO implements Serializable{
 
@@ -23,15 +23,50 @@ public class CommodityBuyerVO implements Serializable{
 	private int commodityStatus;
 	private int commodityAppStatus;// 商品APP显示状态 (0下架  1上架  3待上架)
 	private int commodityType;//渠道  1商家，2买手
-	private boolean supportCourierDeliver;//导购：true是   false否；买手：默认true   
-
+	private boolean supportCourierDeliver;//支持快递发货    导购：true是   false否；买手：默认true   
+	private boolean supportSelfPickup;//支持到店自提  true 是    false否
+	private boolean offlinePayment;// 线下支付
+	private boolean onlinePayment;// 线上支付
+	private boolean offlineRefund;// 线下退款
+	private boolean onlineRefund;// 线上退款
 	private List<String> shopIM;// 店铺可用IM账号
 	
 	private String bullId;//创建人
 	
 	private Double distance = 0.0; //距离
 	
-	
+	public boolean isOfflinePayment() {
+		return offlinePayment;
+	}
+
+	public void setOfflinePayment(boolean offlinePayment) {
+		this.offlinePayment = offlinePayment;
+	}
+
+	public boolean isOnlinePayment() {
+		return onlinePayment;
+	}
+
+	public void setOnlinePayment(boolean onlinePayment) {
+		this.onlinePayment = onlinePayment;
+	}
+
+	public boolean isOfflineRefund() {
+		return offlineRefund;
+	}
+
+	public void setOfflineRefund(boolean offlineRefund) {
+		this.offlineRefund = offlineRefund;
+	}
+
+	public boolean isOnlineRefund() {
+		return onlineRefund;
+	}
+
+	public void setOnlineRefund(boolean onlineRefund) {
+		this.onlineRefund = onlineRefund;
+	}
+
 	public Double getDistance() {
 		return distance;
 	}
@@ -168,6 +203,7 @@ public class CommodityBuyerVO implements Serializable{
 		// 买手版渠道  0商家，1买手
 		this.commodityType = commodity.getType();
 		this.supportCourierDeliver = commodity.isSupportCourierDeliver();
+		this.supportSelfPickup = commodity.isSupportSelfPickup();
 
 		// 商品待上架且上架时间大于当前时间，app商品状态为 待上架
 		//商品上架或待上架，且上架时间小于当前时间，且下架时间大于当前时间，app商品状态为 上架
@@ -268,6 +304,14 @@ public class CommodityBuyerVO implements Serializable{
 	public void setSupportCourierDeliver(boolean supportCourierDeliver) {
 		this.supportCourierDeliver = supportCourierDeliver;
 	}
+	
+	public boolean isSupportSelfPickup() {
+		return supportSelfPickup;
+	}
+
+	public void setSupportSelfPickup(boolean supportSelfPickup) {
+		this.supportSelfPickup = supportSelfPickup;
+	}
 
 	public int getCommodityAppStatus() {
 		return commodityAppStatus;
@@ -279,30 +323,25 @@ public class CommodityBuyerVO implements Serializable{
 
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this)
-				.append("shopName", shopName)
-				.append("commodityPicList", commodityPicList)
-				.append("commodityId", commodityId)
-				.append("commodityCode", commodityCode)
-				.append("commodityStock", commodityStock)
-				.append("commodityStatus", commodityStatus)
-				.append("commodityType", commodityType)
-				.append("supportCourierDeliver", supportCourierDeliver)
-				.append("shopIM", shopIM)
-				.append("bullId", bullId)
-				.append("distance", distance)
-				.append("commodityOPriceMax", commodityOPriceMax)
-				.append("commodityOPriceMin", commodityOPriceMin)
-				.append("commodityCPriceMax", commodityCPriceMax)
-				.append("commodityCPriceMin", commodityCPriceMin)
-				.append("commodityOPOfLCP", commodityOPOfLCP)
-				.append("commodityBrandName", commodityBrandName)
-				.append("commodityPostage", commodityPostage)
-				.append("commodityDescription", commodityDescription)
-				.append("commodityName", commodityName)
-				.append("shopId", shopId)
-				.append("shopMid", shopMid)
-				.append("isCollected", isCollected)
-				.toString();
+		return "CommodityBuyerVO [shopName=" + shopName + ", commodityPicList="
+				+ commodityPicList + ", commodityId=" + commodityId
+				+ ", commodityCode=" + commodityCode + ", commodityStock="
+				+ commodityStock + ", commodityStatus=" + commodityStatus
+				+ ", commodityAppStatus=" + commodityAppStatus
+				+ ", commodityType=" + commodityType
+				+ ", supportCourierDeliver=" + supportCourierDeliver
+				+ ", supportSelfPickup=" + supportSelfPickup + ", shopIM="
+				+ shopIM + ", bullId=" + bullId + ", distance=" + distance
+				+ ", commodityOPriceMax=" + commodityOPriceMax
+				+ ", commodityOPriceMin=" + commodityOPriceMin
+				+ ", commodityCPriceMax=" + commodityCPriceMax
+				+ ", commodityCPriceMin=" + commodityCPriceMin
+				+ ", commodityOPOfLCP=" + commodityOPOfLCP
+				+ ", commodityBrandName=" + commodityBrandName
+				+ ", commodityPostage=" + commodityPostage
+				+ ", commodityDescription=" + commodityDescription
+				+ ", commodityName=" + commodityName + ", shopId=" + shopId
+				+ ", shopMid=" + shopMid + ", isCollected=" + isCollected + "]";
 	}
+
 }

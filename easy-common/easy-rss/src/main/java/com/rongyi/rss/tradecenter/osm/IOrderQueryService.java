@@ -42,7 +42,7 @@ public interface IOrderQueryService {
 	 * @return
 	 * @throws Exception
 	 */
-	ParentOrderVO getParentOrderVO(Integer orderId) throws Exception;
+	ParentOrderVO getParentOrderVO(Integer orderId,boolean cartOrder) throws Exception;
 	
 	/**
 	 * 我的订单数量
@@ -155,14 +155,14 @@ public interface IOrderQueryService {
      * @param buyerId 买家id
      * @return
      */
-    ParentOrderListVO getMyOrderListForCart(MyOrderParam param,String buyerId);
+    ParentOrderListVO getMyOrderListForCart(MyOrderParam param,String buyerId) throws Exception;
 
     /**
      * 查询购物车订单详情
      * @param orderNo 订单号
      * @return 订单详情
      */
-    CartOrderDetailVO getMyOrderDetailForCart(String orderNo);
+    CartOrderDetailVO getMyOrderDetailForCart(String orderNo) throws Exception;
 
     /**
      * 购物车最大使用积分查询接口
@@ -173,4 +173,6 @@ public interface IOrderQueryService {
      * @return 最大可用积分
      */
     Integer getMaxIntegralForCart(List<MaxIntegralParam> paramList,double limit,double moenyExchangeScore,double platformRebateAmount);
+
+
 }
