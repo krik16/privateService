@@ -15,13 +15,13 @@ public class OrderCartFormEntity implements Serializable {
 
     private BigDecimal rebateDiscount;//抵扣金额
 
-    private byte rebateSource;//促销券来源 1：平台 2：商家
+    private Integer rebateSource;//促销券来源 1：平台 2：商家
 
-    private byte rebateType;//促销券类型 1：满减 2：立减
+    private Integer rebateType;//促销券类型 1：满减 2：立减
 
     private BigDecimal couponRequirement;//抵扣满金额
 
-    private JSONObject discountInfo;//积分
+    private String discountInfo;//积分
 
     private BigDecimal scoreDiscount;//积分抵扣金额
 
@@ -42,6 +42,8 @@ public class OrderCartFormEntity implements Serializable {
     private Date updateAt;//订单更新时间
 
     private byte status;//状态 1未支付 2已支付 3超时关闭 4买家关闭 5失效
+
+    private BigDecimal expressFee;
 
 
     public Integer getId() {
@@ -76,19 +78,19 @@ public class OrderCartFormEntity implements Serializable {
         this.rebateDiscount = rebateDiscount;
     }
 
-    public byte getRebateSource() {
+    public Integer getRebateSource() {
         return rebateSource;
     }
 
-    public void setRebateSource(byte rebateSource) {
+    public void setRebateSource(Integer rebateSource) {
         this.rebateSource = rebateSource;
     }
 
-    public byte getRebateType() {
+    public Integer getRebateType() {
         return rebateType;
     }
 
-    public void setRebateType(byte rebateType) {
+    public void setRebateType(Integer rebateType) {
         this.rebateType = rebateType;
     }
 
@@ -100,11 +102,11 @@ public class OrderCartFormEntity implements Serializable {
         this.couponRequirement = couponRequirement;
     }
 
-    public JSONObject getDiscountInfo() {
+    public String getDiscountInfo() {
         return discountInfo;
     }
 
-    public void setDiscountInfo(JSONObject discountInfo) {
+    public void setDiscountInfo(String discountInfo) {
         this.discountInfo = discountInfo;
     }
 
@@ -186,6 +188,14 @@ public class OrderCartFormEntity implements Serializable {
 
     public void setStatus(byte status) {
         this.status = status;
+    }
+
+    public BigDecimal getExpressFee() {
+        return expressFee;
+    }
+
+    public void setExpressFee(BigDecimal expressFee) {
+        this.expressFee = expressFee;
     }
 
     @Override
