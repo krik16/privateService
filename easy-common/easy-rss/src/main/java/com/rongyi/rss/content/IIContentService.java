@@ -1,9 +1,6 @@
 package com.rongyi.rss.content;
 
-import com.rongyi.easy.content_v2.entity.ForumContent;
-import com.rongyi.easy.content_v2.entity.ForumHomepage;
-import com.rongyi.easy.content_v2.entity.ForumPosition;
-import com.rongyi.easy.content_v2.entity.ForumStick;
+import com.rongyi.easy.content_v2.entity.*;
 import com.rongyi.easy.content_v2.param.ForumContentParam;
 import com.rongyi.easy.content_v2.param.ForumContentStatusDelParam;
 import com.rongyi.easy.content_v2.vo.ForumContentListVo;
@@ -184,4 +181,11 @@ public interface IIContentService {
 	 * @return
 	 */
 	int hasContentNoTitle(ForumContent fc);
+
+	/**
+	 * 通过模版id 查询模版详情
+	 * @param id
+	 * @return
+	 */
+	public ForumTemplate findTemplateById(Integer id);
 }

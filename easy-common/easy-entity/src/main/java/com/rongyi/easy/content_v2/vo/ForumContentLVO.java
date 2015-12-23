@@ -46,6 +46,11 @@ public class ForumContentLVO  implements Serializable{
 	 * 是否置顶 0不置顶，1置顶
 	 */
 	private int stick;
+
+	/**
+	 * 类型值
+	 */
+	private String typeVal;
 	public Integer getId() {
 		return id;
 	}
@@ -151,6 +156,16 @@ public class ForumContentLVO  implements Serializable{
 		this.androidVersion = androidVersion;
 	}
 
+	public String getTypeVal() {
+		return typeVal;
+	}
+
+	public void setTypeVal(String typeVal) {
+		this.typeVal = typeVal;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this)
@@ -169,6 +184,7 @@ public class ForumContentLVO  implements Serializable{
 				.append("iosVersion", iosVersion)
 				.append("androidVersion", androidVersion)
 				.append("stick", stick)
+				.append("typeVal", typeVal)
 				.toString();
 	}
 }

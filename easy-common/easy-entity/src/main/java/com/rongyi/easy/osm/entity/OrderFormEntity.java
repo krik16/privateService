@@ -6,7 +6,7 @@ import java.util.Date;
 
 import net.sf.json.JSONObject;
 
-public class OrderFormEntity implements Serializable {
+public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity>{
     /**
      * 主键id
      */
@@ -749,5 +749,13 @@ public class OrderFormEntity implements Serializable {
                 ", changePriceFlag=" + changePriceFlag +
                 ", cartId=" + cartId +
                 '}';
+    }
+
+    @Override
+    public int compareTo(OrderFormEntity o) {
+        if(o == null){
+            return 1;
+        }
+        return this.getOrderNo().compareTo(o.getOrderNo());
     }
 }

@@ -108,6 +108,10 @@ public class ParentOrderVO implements Serializable {
 	private Integer shopNum;//店铺数量
 
 	private BigDecimal totalHongBaoAmount;//红包实际抵扣数量
+	/**
+	 *是否是购物车订单
+	 */
+	private boolean isCartOrder;
 
 	public String getLiveName() {
 		return liveName;
@@ -558,6 +562,14 @@ public class ParentOrderVO implements Serializable {
 		this.totalHongBaoAmount = totalHongBaoAmount;
 	}
 
+	public boolean isCartOrder() {
+		return isCartOrder;
+	}
+
+	public void setIsCartOrder(boolean isCartOrder) {
+		this.isCartOrder = isCartOrder;
+	}
+
 	@Override
 	public String toString() {
 		return "ParentOrderVO{" +
@@ -603,6 +615,7 @@ public class ParentOrderVO implements Serializable {
 				", cancelTime='" + cancelTime + '\'' +
 				", closeTime='" + closeTime + '\'' +
 				", statusRoute='" + statusRoute + '\'' +
+				", platformRebateAmount='" + platformRebateAmount + '\'' +
 				", expressBillId='" + expressBillId + '\'' +
 				", expressName='" + expressName + '\'' +
 				", discountFee=" + discountFee +
@@ -610,13 +623,13 @@ public class ParentOrderVO implements Serializable {
 				", scoreDeduction='" + scoreDeduction + '\'' +
 				", DeductCouponAmount='" + DeductCouponAmount + '\'' +
 				", liveName='" + liveName + '\'' +
-				", platformRebateAmount='" + platformRebateAmount + '\'' +
-				", orderScoreDiscount='" + orderScoreDiscount + '\'' +
-				", orderRebateDiscount='" + orderRebateDiscount + '\'' +
-				", createAt='" + createAt + '\'' +
+				", orderScoreDiscount=" + orderScoreDiscount +
+				", orderRebateDiscount=" + orderRebateDiscount +
+				", createAt=" + createAt +
 				", changePriceFlag='" + changePriceFlag + '\'' +
-				", shopNum='" + shopNum + '\'' +
-				", totalHongBaoAmount='" + totalHongBaoAmount + '\'' +
+				", shopNum=" + shopNum +
+				", totalHongBaoAmount=" + totalHongBaoAmount +
+				", isCartOrder=" + isCartOrder +
 				'}';
 	}
 }
