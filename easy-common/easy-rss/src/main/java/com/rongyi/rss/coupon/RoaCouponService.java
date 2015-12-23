@@ -184,4 +184,11 @@ public interface RoaCouponService {
      * @return true:可退 | false：不可退
      */
     boolean isCanRefundCoupon(String couponId);
+
+    /**
+     * 获取shopId集合中关联了进行中的代金券的shopId
+     * @param shopIds
+     * @return 关联代金券的店铺id集合
+     */
+    List<String> getVoucherShopIds(List<String> shopIds);
 }
