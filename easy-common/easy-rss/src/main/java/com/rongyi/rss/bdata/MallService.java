@@ -11,14 +11,12 @@ import com.rongyi.core.bean.ResponseVO;
 public interface MallService {
     /**
      * 获取商场详情
-     * @param mallId
-     * @param channel
-     * @param timeStamp
-     * @param sign
+     * @param mallId	商场ID
      * @return
+     * @throws Exception 
      */
 
-    ResponseVO getMall(String mallId, String channel, long timeStamp, String sign);
+    ResponseVO getMall(String mallId);
 
     /**
      * 获取商场楼层
