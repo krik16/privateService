@@ -5,7 +5,7 @@ package com.rongyi.rss.mallshop.order;
 
 import java.util.List;
 
-import com.rongyi.easy.osm.entity.OrderModelEntity;
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.rmmm.param.OrderModelParam;
 import com.rongyi.easy.rmmm.vo.OrderModelVO;
 
@@ -58,7 +58,7 @@ public interface ROAOrderModelService {
 	 * @param paramList 模板参数集合
 	 * @return id集合
 	 */
-	List<Integer> submitOrderModelForCart(List<OrderModelParam> paramList) throws Exception;
+	ResponseVO submitOrderModelForCart(List<OrderModelParam> paramList) throws Exception;
 
 	/**
 	 * 批量查询模板信息
