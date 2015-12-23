@@ -93,5 +93,16 @@ public interface IShoppingCartService {
 	 * @throws Exception
 	 */
 	public ShoppingCartEntity getShopCartById(Integer shopCartId) throws Exception;
+	
+	/**
+	 * 删除购物车
+	 * 
+	 * @param userId
+	 *            用户 id
+	 * @param shoppingCartParams
+	 *            导购、商品编号、商品规格集合
+	 * @throws Exception
+	 */
+	public int deleteShopCartByModel(String userId, List<ShoppingCartParam> shoppingCartParams) throws Exception;
 
 }
