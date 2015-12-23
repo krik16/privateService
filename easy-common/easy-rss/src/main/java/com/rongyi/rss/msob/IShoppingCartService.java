@@ -5,6 +5,7 @@ import java.util.List;
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.rmmm.param.ShoppingCartParam;
 import com.rongyi.easy.rmmm.vo.ShowCartDetailVO;
+import com.rongyi.easy.usercenter.entity.ShoppingCartEntity;
 
 public interface IShoppingCartService {
 	/**
@@ -76,5 +77,21 @@ public interface IShoppingCartService {
 	 * @throws Exception
 	 */
 	public int deleteShopCartByGuideIds(String userId, List<Integer> guideIds) throws Exception;
+	
+	/**
+	 * 根据主键id集合查询
+	 * @param shopCartId
+	 * @return
+	 * @throws Exception
+	 */
+	public List<ShoppingCartEntity> getShopCartByIds(List<Integer> shopCartIds) throws Exception;
+	
+	/**
+	 * 根据主键id查询
+	 * @param shopCartId
+	 * @return
+	 * @throws Exception
+	 */
+	public ShoppingCartEntity getShopCartById(Integer shopCartId) throws Exception;
 
 }
