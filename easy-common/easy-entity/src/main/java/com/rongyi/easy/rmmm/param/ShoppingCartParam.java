@@ -37,6 +37,18 @@ public class ShoppingCartParam extends MalllifeBaseParam implements Serializable
 	
 	private List<Integer> guideIds;//导购、买手id集合
 
+	public ShoppingCartParam() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public ShoppingCartParam(String userId, String shopId, Integer guideId) {
+		super();
+		this.userId = userId;
+		this.shopId = shopId;
+		this.guideId = guideId;
+	}
+
 	public List<Integer> getGuideIds() {
 		return guideIds;
 	}
