@@ -57,7 +57,15 @@ public interface ProxyCouponOrderService {
      * @param orderNo
      * @return
      */
-    CouponOrderVO findOneByOrderNo(String orderNo);
+    CouponOrder findOneByOrderNo(String orderNo);
+
+    /**
+     * 根据订单号查询订单详情
+     *
+     * @param orderNo
+     * @return
+     */
+    CouponOrderVO findOrderDetailByOrderNo(String orderNo);
 
     /**
      * 根据订单PK查询
