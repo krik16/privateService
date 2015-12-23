@@ -171,7 +171,7 @@ public class DrawApplyController extends BaseController {
                     }
                 }
                 modelMap.addAttribute("apply", drawApply);
-                modelMap.addAttribute("balance",balance);
+                modelMap.addAttribute("balance",balance.setScale(2,BigDecimal.ROUND_HALF_UP));
                 if(drawApply.getStatus()<0){
                     DrawVerifyLog verifyLog= drawVerifyLogService.getLogByApplyId(drawApply.getId());
                     modelMap.addAttribute("log",verifyLog);
