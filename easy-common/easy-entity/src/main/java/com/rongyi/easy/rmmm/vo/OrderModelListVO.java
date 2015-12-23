@@ -21,9 +21,9 @@ public class OrderModelListVO implements Serializable{
 	
 	private String supportWay;//1仅支持自提 2仅支持快递 3都支持
 	
-	private Integer totalCommodityNum;//
+	private Integer totalCommodityNum;//订单sku数量
 	
-	private String totalOrderPrice;//1仅支持自提 2仅支持快递 3都支持
+	private String totalOrderPrice;//订单价格
 	
 	private String paymentWaitMax;// 付款超时,取消订单的时长
 	

@@ -44,6 +44,23 @@ public class OrderDetailModelParam implements Serializable {
 	private boolean supportSelfPickup;//支持到店自提  true 是    false否
 	
 	private Integer hongBaoNum = 0;// 可使用红包数量
+	
+	private String supportWay;//1仅支持自提 2仅支持快递 3都支持
+
+	public String getSupportWay(boolean supportCourierDeliver,boolean supportSelfPickup) {
+		if(supportCourierDeliver && supportSelfPickup){
+			return "3";
+		}else if(supportCourierDeliver && !supportSelfPickup){
+			return "2";
+		}else if(!supportCourierDeliver && supportSelfPickup){
+			return "1";
+		}
+		return "0";
+	}
+
+	public void setSupportWay(String supportWay) {
+		this.supportWay = supportWay;
+	}
 
 	public Integer getHongBaoNum() {
 		return hongBaoNum;
