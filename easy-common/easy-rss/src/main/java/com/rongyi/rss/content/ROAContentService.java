@@ -3,10 +3,7 @@ package com.rongyi.rss.content;
 import java.util.List;
 
 import com.rongyi.easy.content.entity.param.SpecialCellParam;
-import com.rongyi.easy.content_v2.entity.ForumContent;
-import com.rongyi.easy.content_v2.entity.ForumHomepage;
-import com.rongyi.easy.content_v2.entity.ForumPosition;
-import com.rongyi.easy.content_v2.entity.ForumStick;
+import com.rongyi.easy.content_v2.entity.*;
 import com.rongyi.easy.content_v2.param.FlashSellParam;
 import com.rongyi.easy.content_v2.param.ForumContentParam;
 import com.rongyi.easy.content_v2.param.ForumContentStatusDelParam;
@@ -248,5 +245,12 @@ public interface ROAContentService {
 	public List<ForumTemplateVO> findTemplateList();
 
 	public int hasContentNotitle(ForumContent fc);
+
+	/**
+	 * 通过模版id 查询模版详情
+	 * @param id
+	 * @return
+	 */
+	public ForumTemplate findTemplateById(Integer id);
 	
 }

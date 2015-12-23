@@ -157,6 +157,7 @@ public class ForumPosition implements Serializable {
         this.templateImagePixel = templateImagePixel;
     }
 
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
