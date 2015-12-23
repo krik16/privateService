@@ -252,5 +252,19 @@ public interface ROAContentService {
 	 * @return
 	 */
 	public ForumTemplate findTemplateById(Integer id);
+
+	/**
+	 * 设置模版
+	 * @param forumTemplate
+	 * @return
+	 */
+	public boolean updateTemplateByParam(ForumTemplate forumTemplate);
+
+	/**
+	 * 通过模版id查询位置信息
+	 * @param id
+	 * @return
+	 */
+	public List<ForumPosition> findPositionByTemplateId(Integer id);
 	
 }
