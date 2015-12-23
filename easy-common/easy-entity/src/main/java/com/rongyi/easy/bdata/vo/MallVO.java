@@ -5,12 +5,8 @@ package com.rongyi.easy.bdata.vo;
  * User: chris
  * Date: 2015/10/24 18:19
  */
-import com.rongyi.easy.bdata.entity.Categories;
-
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class MallVO implements Serializable {
     private static final long serialVersionUID = 1L;

@@ -37,7 +37,8 @@ public class Ad implements Serializable {
     private Date      updated_at;
     private String adTime;
     private String adOrder;
-
+    private String adGroup;
+    private String adRules;
     public ObjectId getId() {
         return id;
     }
@@ -188,5 +189,21 @@ public class Ad implements Serializable {
 
 	public void setAdOrder(String adOrder) {
 		this.adOrder = adOrder;
+	}
+
+	public String getAdGroup() {
+		return adGroup;
+	}
+
+	public void setAdGroup(String adGroup) {
+		this.adGroup = adGroup;
+	}
+
+	public String getAdRules() {
+		return adRules;
+	}
+
+	public void setAdRules(String adRules) {
+		this.adRules = adRules;
 	}
 }
