@@ -42,7 +42,7 @@ public interface IOrderQueryService {
 	 * @return
 	 * @throws Exception
 	 */
-	ParentOrderVO getParentOrderVO(Integer orderId) throws Exception;
+	ParentOrderVO getParentOrderVO(Integer orderId,boolean cartOrder) throws Exception;
 	
 	/**
 	 * 我的订单数量
