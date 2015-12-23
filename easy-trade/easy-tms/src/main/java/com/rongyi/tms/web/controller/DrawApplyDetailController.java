@@ -140,20 +140,21 @@ public class DrawApplyDetailController extends BaseController {
                 return Constant.VIEW_MSG.ERROR;
             }else{
                 DrawApply drawApply=drawService.getOneById(id);
+                BigDecimal balance = new BigDecimal(0);
                 VirtualAccountEntity vaEntity = rOAVirtualAccountGeneralService.selectByUserId(drawApply.getDrawUserId());
+                balance = balance.add(vaEntity.getBalance());
                 DrawApplySearchParam drawApplySearchParam = new DrawApplySearchParam();
                 drawApplySearchParam.setUserId(drawApply.getDrawUserId());
                 drawApplySearchParam.setCurrentPage(0);
                 drawApplySearchParam.setPageSize(10000);
                 drawApplySearchParam.setStatus(Constants.DrawApplyStatus.PROCESSING);
+                drawApplySearchParam.setTimeRange(Constants.TMSTimeRangeType.ALL);
                 DrawApplyListVO drawApplyListVO= tmsDrawApplySearchService.drawApplySearch(drawApplySearchParam);
-                BigDecimal balance = new BigDecimal(0);
                 if(drawApplyListVO != null && drawApplyListVO.getDrawApplyDetailList() != null) {
                     for (DrawApplyDetailVO drawApplyDetailVO :drawApplyListVO.getDrawApplyDetailList()){
-                        balance.add(drawApplyDetailVO.getDrawAmount());
+                        balance = balance.add(drawApplyDetailVO.getDrawAmount());
                     }
                 }
-                balance.add(vaEntity.getBalance());
                 LOGGER.info(drawApply.getCreateAt());
                 modelMap.addAttribute("balance",balance);
                 modelMap.addAttribute("apply", drawApply);
