@@ -21,7 +21,17 @@ public class RebateCommodityParam extends MalllifeBaseParam implements Serializa
 	
 	private Double orderPrice;//"订单总价"（不包含邮费）
 	
+	private Double shopPostage = 0.0;// 店铺级别订单总价"（快递邮费）
+	
 	private List<CommodityListParam> commoditys;//商品数据集合
+
+	public Double getShopPostage() {
+		return shopPostage;
+	}
+
+	public void setShopPostage(Double shopPostage) {
+		this.shopPostage = shopPostage;
+	}
 
 	public RebateCommodityParam() {
 		super();
@@ -51,7 +61,8 @@ public class RebateCommodityParam extends MalllifeBaseParam implements Serializa
 
 	@Override
 	public String toString() {
-		return "RebateCommodityParam [orderPrice=" + orderPrice + ", commoditys=" + commoditys + "]";
+		return "RebateCommodityParam [orderPrice=" + orderPrice + ", shopPostage=" + shopPostage + ", commoditys=" + commoditys
+				+ "]";
 	}
 
 }
