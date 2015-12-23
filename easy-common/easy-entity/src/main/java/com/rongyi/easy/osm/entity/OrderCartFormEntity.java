@@ -45,6 +45,15 @@ public class OrderCartFormEntity implements Serializable {
 
     private BigDecimal expressFee;
 
+    private byte isAlert;//是否已发送支付提醒 (0否 1是)
+
+    public byte getIsAlert() {
+        return isAlert;
+    }
+
+    public void setIsAlert(byte isAlert) {
+        this.isAlert = isAlert;
+    }
 
     public Integer getId() {
         return id;
