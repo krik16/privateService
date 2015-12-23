@@ -28,6 +28,25 @@ public class OrderModelVO extends OrderModelParam implements Serializable {
 	private String cityName;// 市名称
 	private Integer guideType;// 1是导购 2是买手
 	private Integer rebateNum = 0;// 可使用抵扣券数量
+	
+	private String shopPostage;// 店铺快递邮费
+	private String supportWay;//1仅支持自提 2仅支持快递 3都支持
+
+	public String getShopPostage() {
+		return shopPostage;
+	}
+
+	public void setShopPostage(String shopPostage) {
+		this.shopPostage = shopPostage;
+	}
+
+	public String getSupportWay() {
+		return supportWay;
+	}
+
+	public void setSupportWay(String supportWay) {
+		this.supportWay = supportWay;
+	}
 
 	public Integer getRebateNum() {
 		return rebateNum;
