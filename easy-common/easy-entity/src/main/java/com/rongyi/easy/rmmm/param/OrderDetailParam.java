@@ -15,6 +15,7 @@ public class OrderDetailParam extends MalllifeBaseParam implements Serializable{
 
 	private String orderNum;//订单号
 
+	
 	public String getOrderNum() {
 		return orderNum;
 	}
@@ -22,6 +23,7 @@ public class OrderDetailParam extends MalllifeBaseParam implements Serializable{
 	public void setOrderNum(String orderNum) {
 		this.orderNum = orderNum;
 	}
+
 
 	public String getOrderId() {
 		return orderId;
