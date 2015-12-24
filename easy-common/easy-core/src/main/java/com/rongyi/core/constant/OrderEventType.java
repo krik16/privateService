@@ -87,6 +87,9 @@ public interface OrderEventType {
     
     /** 评价关闭*/
     public static final String COMMENT_CLOSE = "27";
+
+    /** 买家关闭订单*/
+    public static final String CANCEL_BY_BUYER = "28";
     
     /** 重新加载订单 */
     public static final String DEBUG_RELOAD_ORDER = "Debug.Reload";

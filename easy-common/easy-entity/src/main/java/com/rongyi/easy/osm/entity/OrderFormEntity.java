@@ -36,7 +36,7 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     /**
      * 折扣
      */
-    private BigDecimal disconntFee;
+    private BigDecimal disconntFee = BigDecimal.ZERO;;
 
     /**
      * 物流信息主键id
@@ -171,9 +171,9 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     //0:未打款，1:对私(打款到导购虚拟账号)，2:对公(通过对账单结算)
     private byte isPayVa;
 
-    private BigDecimal orderScoreDiscount;//购物车订单积分分摊优惠金额
+    private BigDecimal orderScoreDiscount = BigDecimal.ZERO;;//购物车订单积分分摊优惠金额
 
-    private BigDecimal orderCouponDiscount;//购物车订单抵扣券分摊优惠金额
+    private BigDecimal orderCouponDiscount = BigDecimal.ZERO;;//购物车订单抵扣券分摊优惠金额
 
     private byte changePriceFlag;//用户改价通知 0未改价 1 改价 2 改价且恢复抵扣券
 
