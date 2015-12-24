@@ -207,4 +207,22 @@ public interface IIContentService {
 	 * @return
 	 */
 	public List<TemplateListVO> findTemplateCityByCityId(List<String> ids);
+
+	/**
+	 * 通过模版列表判断城市是否存在
+	 * @param templateId
+	 * @param ids
+	 * @return
+	 */
+	public List<ForumTemplateCity> hasTemplateCity(Integer templateId, List<String> ids);
+
+	/**
+	 * 关联城市
+	 * @param templateId
+	 * @param forumTemplateCities
+	 * @param userName
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean renvelCiyt(Integer templateId, List<ForumTemplateCity> forumTemplateCities, String userName) throws Exception;
 }
