@@ -3,10 +3,7 @@ package com.rongyi.rss.content;
 import com.rongyi.easy.content_v2.entity.*;
 import com.rongyi.easy.content_v2.param.ForumContentParam;
 import com.rongyi.easy.content_v2.param.ForumContentStatusDelParam;
-import com.rongyi.easy.content_v2.vo.ForumContentListVo;
-import com.rongyi.easy.content_v2.vo.ForumHomeModelVo;
-import com.rongyi.easy.content_v2.vo.ForumPostiomModelVo;
-import com.rongyi.easy.content_v2.vo.ForumTemplateVO;
+import com.rongyi.easy.content_v2.vo.*;
 
 import java.util.List;
 
@@ -203,4 +200,11 @@ public interface IIContentService {
 	 * @return
 	 */
 	public List<ForumPosition> findPositionByTemplateId(Integer  id);
+
+	/**
+	 * 通过城市id查询
+	 * @param ids
+	 * @return
+	 */
+	public List<TemplateListVO> findTemplateCityByCityId(List<String> ids);
 }

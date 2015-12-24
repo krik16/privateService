@@ -8,10 +8,7 @@ import com.rongyi.easy.content_v2.param.FlashSellParam;
 import com.rongyi.easy.content_v2.param.ForumContentParam;
 import com.rongyi.easy.content_v2.param.ForumContentStatusDelParam;
 import com.rongyi.easy.content_v2.param.SpecailParam;
-import com.rongyi.easy.content_v2.vo.ForumContentListVo;
-import com.rongyi.easy.content_v2.vo.ForumHomeModelVo;
-import com.rongyi.easy.content_v2.vo.ForumPostiomModelVo;
-import com.rongyi.easy.content_v2.vo.ForumTemplateVO;
+import com.rongyi.easy.content_v2.vo.*;
 
 /**
  * 内容管理的接口
@@ -266,5 +263,12 @@ public interface ROAContentService {
 	 * @return
 	 */
 	public List<ForumPosition> findPositionByTemplateId(Integer id);
+
+	/**
+	 * 通过城市id查询
+	 * @param ids
+	 * @return
+	 */
+	public List<TemplateListVO> findTemplateCityByCityId(List<String> ids);
 	
 }
