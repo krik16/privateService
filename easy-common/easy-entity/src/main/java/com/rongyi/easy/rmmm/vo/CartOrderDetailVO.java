@@ -24,6 +24,215 @@ public class CartOrderDetailVO extends PageVO implements Serializable{
 	private BigDecimal realAmount;// 总价
 
 	private BigDecimal payAmount;// 应付价
+	
+	
+	private String orderNum;// 订单编号
+	private String consignee;// 收件人姓名
+	private String phone;// 收件人电话
+	private String address;// 邮寄地址
+	private String provinceName;// 省名称
+	private String cityName;// 市名称
+	private String districtName;// 区名称
+	private BigDecimal commodityTotalPostage;// 合计运费
+	private String receiveTime;// 确认收货时间
+	private String cancelTime;// 卖家取消订单时间
+	private String closeTime;// 订单关闭时间
+	private String payTime;// 付款时间
+	private String commitOrderTime;// 提交订单时间
+	private String deliverTime;// 发货时间
+	private String nextStatusTime;// 预计进入下一状态的时间
+	private String expressBillId;// 物流单号ID
+	private String expressName;// 物流名称
+	private String orderStatus;// 1未付款 5已关闭
+	private String isComment;// 是否评价  -1:表示不可以评价 0：表示未评价 1：表示已评价	
+	private boolean ifDeleteOrder;//true表示可以删除订单 false
+	private BigDecimal totalHongBaoAmount;//红包合计抵现
+    private Integer changePriceFlag = 0;//0没有再次改价1表示有商家再次修改价格 2改价影响了抵扣券
+	private String message;
+
+	public String getOrderNum() {
+		return orderNum;
+	}
+
+	public void setOrderNum(String orderNum) {
+		this.orderNum = orderNum;
+	}
+
+	public String getConsignee() {
+		return consignee;
+	}
+
+	public void setConsignee(String consignee) {
+		this.consignee = consignee;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getProvinceName() {
+		return provinceName;
+	}
+
+	public void setProvinceName(String provinceName) {
+		this.provinceName = provinceName;
+	}
+
+	public String getCityName() {
+		return cityName;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+
+	public String getDistrictName() {
+		return districtName;
+	}
+
+	public void setDistrictName(String districtName) {
+		this.districtName = districtName;
+	}
+
+	public BigDecimal getCommodityTotalPostage() {
+		return commodityTotalPostage;
+	}
+
+	public void setCommodityTotalPostage(BigDecimal commodityTotalPostage) {
+		this.commodityTotalPostage = commodityTotalPostage;
+	}
+
+	public String getReceiveTime() {
+		return receiveTime;
+	}
+
+	public void setReceiveTime(String receiveTime) {
+		this.receiveTime = receiveTime;
+	}
+
+	public String getCancelTime() {
+		return cancelTime;
+	}
+
+	public void setCancelTime(String cancelTime) {
+		this.cancelTime = cancelTime;
+	}
+
+	public String getCloseTime() {
+		return closeTime;
+	}
+
+	public void setCloseTime(String closeTime) {
+		this.closeTime = closeTime;
+	}
+
+	public String getPayTime() {
+		return payTime;
+	}
+
+	public void setPayTime(String payTime) {
+		this.payTime = payTime;
+	}
+
+	public String getCommitOrderTime() {
+		return commitOrderTime;
+	}
+
+	public void setCommitOrderTime(String commitOrderTime) {
+		this.commitOrderTime = commitOrderTime;
+	}
+
+	public String getDeliverTime() {
+		return deliverTime;
+	}
+
+	public void setDeliverTime(String deliverTime) {
+		this.deliverTime = deliverTime;
+	}
+
+	public String getNextStatusTime() {
+		return nextStatusTime;
+	}
+
+	public void setNextStatusTime(String nextStatusTime) {
+		this.nextStatusTime = nextStatusTime;
+	}
+
+	public String getExpressBillId() {
+		return expressBillId;
+	}
+
+	public void setExpressBillId(String expressBillId) {
+		this.expressBillId = expressBillId;
+	}
+
+	public String getExpressName() {
+		return expressName;
+	}
+
+	public void setExpressName(String expressName) {
+		this.expressName = expressName;
+	}
+
+	public String getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(String orderStatus) {
+		this.orderStatus = orderStatus;
+	}
+
+	public String getIsComment() {
+		return isComment;
+	}
+
+	public void setIsComment(String isComment) {
+		this.isComment = isComment;
+	}
+
+	public boolean isIfDeleteOrder() {
+		return ifDeleteOrder;
+	}
+
+	public void setIfDeleteOrder(boolean ifDeleteOrder) {
+		this.ifDeleteOrder = ifDeleteOrder;
+	}
+
+	public BigDecimal getTotalHongBaoAmount() {
+		return totalHongBaoAmount;
+	}
+
+	public void setTotalHongBaoAmount(BigDecimal totalHongBaoAmount) {
+		this.totalHongBaoAmount = totalHongBaoAmount;
+	}
+
+	public Integer getChangePriceFlag() {
+		return changePriceFlag;
+	}
+
+	public void setChangePriceFlag(Integer changePriceFlag) {
+		this.changePriceFlag = changePriceFlag;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
 
 	public List<ParentOrderVO> getOrderList() {
 		return orderList;
