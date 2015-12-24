@@ -35,6 +35,8 @@ public enum AppErrorCode {
     ERROR_COMMODITY_MORE(1066003,"购物车商品不能超过999"),
     ERROR_SHOPPINGCART_OVER(1066004,"你的购物车已经满满的啦,买掉一些再来添加呗"),
     ERROR_COMMODITY_LOWER(1066005,"购买商品数量小于1"),
+    ERROR_COMMODITY_NOT_REGISTER(1066006,"商品下架"),
+    ERROR_COMMODITY_ALL_SOLDOUT(1066007,"商品均已下架"),
 
     ;
 
