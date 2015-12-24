@@ -33,7 +33,7 @@ public class ShopVO implements Serializable {
     private List<ObjectId> zone_ids;
     private String filialeId;
 	private String filialeName;
-	private List<ObjectId> exclusive_category_ids;
+	private List<ObjectId> custom_category_ids;
 
     public String getId() {
         return id;
@@ -234,16 +234,18 @@ public class ShopVO implements Serializable {
 	}
 
 	/**
-	 * @return the exclusive_category_ids
+	 * @return the custom_category_ids
 	 */
-	public List<ObjectId> getExclusive_category_ids() {
-		return exclusive_category_ids;
+	public List<ObjectId> getCustom_category_ids() {
+		return custom_category_ids;
 	}
 
 	/**
-	 * @param exclusive_category_ids the exclusive_category_ids to set
+	 * @param custom_category_ids the custom_category_ids to set
 	 */
-	public void setExclusive_category_ids(List<ObjectId> exclusive_category_ids) {
-		this.exclusive_category_ids = exclusive_category_ids;
+	public void setCustom_category_ids(List<ObjectId> custom_category_ids) {
+		this.custom_category_ids = custom_category_ids;
 	}
+
+
 }
