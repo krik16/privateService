@@ -37,6 +37,26 @@ public class CommodityBuyerVO implements Serializable{
 
 	private int saleShopCount; //销售店铺数，小于等于1为单店销售，大于1为多店销售
 
+	private boolean watching = false; //是否正在看
+
+	private List<Double> location; //经纬度
+
+	public List<Double> getLocation() {
+		return location;
+	}
+
+	public void setLocation(List<Double> location) {
+		this.location = location;
+	}
+
+	public boolean isWatching() {
+		return watching;
+	}
+
+	public void setWatching(boolean watching) {
+		this.watching = watching;
+	}
+
 	public int getSaleShopCount() {
 		return saleShopCount;
 	}
@@ -170,7 +190,7 @@ public class CommodityBuyerVO implements Serializable{
 	public CommodityBuyerVO(){
 		
 	}
-	
+
 	public CommodityBuyerVO(Commodity commodity){
 		this.commodityId = commodity.getId().toString();
 		this.commodityPicList = commodity.getPicList();
@@ -351,6 +371,7 @@ public class CommodityBuyerVO implements Serializable{
 				+ ", commodityPostage=" + commodityPostage
 				+ ", commodityDescription=" + commodityDescription
 				+ ", commodityName=" + commodityName + ", shopId=" + shopId + ", saleShopCount=" + saleShopCount
+				+ ", watching=" + watching + ", location=" + location.toString()
 				+ ", shopMid=" + shopMid + ", isCollected=" + isCollected + "]";
 	}
 
