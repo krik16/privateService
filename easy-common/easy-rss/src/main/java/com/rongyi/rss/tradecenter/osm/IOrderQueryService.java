@@ -159,10 +159,10 @@ public interface IOrderQueryService {
 
     /**
      * 查询购物车订单详情
-     * @param orderId 订单id
+     * @param orderNo 订单号
      * @return 订单详情
      */
-	public CartOrderDetailVO getMyOrderDetailForCart(Integer orderId) throws Exception;
+	public CartOrderDetailVO getMyOrderDetailForCart(String orderNo) throws Exception;
 
     /**
      * 购物车最大使用积分查询接口
