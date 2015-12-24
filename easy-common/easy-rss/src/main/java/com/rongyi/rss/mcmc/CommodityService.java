@@ -8,14 +8,11 @@ import com.rongyi.easy.coupon.param.CouponCommodityParam;
 import com.rongyi.easy.mcmc.*;
 import com.rongyi.easy.mcmc.param.SaleParam;
 
+import com.rongyi.easy.mcmc.vo.*;
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.bean.ResponseVO;
-import com.rongyi.easy.mcmc.vo.CommodityPageBuyerVO;
-import com.rongyi.easy.mcmc.vo.CommoditySpecVO;
-import com.rongyi.easy.mcmc.vo.CommodityVO;
-import com.rongyi.easy.mcmc.vo.CommodityWebVO;
 import com.rongyi.easy.solr.param.CommodityBrandSearchParam;
 import com.rongyi.easy.solr.param.CommoditySearchParam;
 
@@ -128,4 +125,6 @@ public interface CommodityService {
     public CommoditySpecColumn findCommoditySpecColumnById(ObjectId id);
 
     public List<Commodity> getCommodityByIds(List<ObjectId> ids);
+
+    public List<CommodityBuyerVO> getCommodityBySPU(String commodityId, String spu);
 }
