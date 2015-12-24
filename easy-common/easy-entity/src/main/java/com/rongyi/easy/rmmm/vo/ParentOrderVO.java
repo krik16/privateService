@@ -112,6 +112,20 @@ public class ParentOrderVO implements Serializable {
 	 *是否是购物车订单
 	 */
 	private boolean isCartOrder;
+	
+	private boolean ifDeleteOrder;//true表示可以删除订单 false
+
+	public boolean isIfDeleteOrder() {
+		return ifDeleteOrder;
+	}
+
+	public void setIfDeleteOrder(boolean ifDeleteOrder) {
+		this.ifDeleteOrder = ifDeleteOrder;
+	}
+
+	public void setCartOrder(boolean isCartOrder) {
+		this.isCartOrder = isCartOrder;
+	}
 
 	public String getLiveName() {
 		return liveName;
