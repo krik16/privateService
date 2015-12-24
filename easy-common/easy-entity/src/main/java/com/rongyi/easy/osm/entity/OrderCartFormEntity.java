@@ -45,9 +45,9 @@ public class OrderCartFormEntity implements Serializable {
 
     private BigDecimal expressFee;
 
-    private byte isAlert;//是否已发送支付提醒 (0否 1是)
+    private BigDecimal discountFee = BigDecimal.ZERO;
 
-    private BigDecimal hbAmount = BigDecimal.ZERO;
+    private byte isAlert;//是否已发送支付提醒 (0否 1是)
 
     public byte getIsAlert() {
         return isAlert;
@@ -209,14 +209,14 @@ public class OrderCartFormEntity implements Serializable {
         this.expressFee = expressFee;
     }
 
-    public BigDecimal getHbAmount()
+    public BigDecimal getDiscountFee()
     {
-        return hbAmount;
+        return discountFee;
     }
 
-    public void setHbAmount(BigDecimal hbAmount)
+    public void setDiscountFee(BigDecimal discountFee)
     {
-        this.hbAmount = hbAmount;
+        this.discountFee = discountFee;
     }
 
     @Override
@@ -240,7 +240,6 @@ public class OrderCartFormEntity implements Serializable {
                 ", discountInfo='" + discountInfo + '\'' +
                 ", couponRequirement=" + couponRequirement +
                 ", scoreDiscount=" + scoreDiscount +
-                ", hbAmount=" + hbAmount +
                 '}';
     }
 }

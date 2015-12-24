@@ -179,6 +179,10 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
 
     private Integer cartId;//购物车id 0表示不使用购物车
 
+    private int buyerDeleteFlag = 0;//买家删除标志 0 未删除 1 删除
+
+    private int sellerDeleteFlag = 0;//卖家删除标志 0 未删除 1 删除
+
     private List<OrderDetailFormEntity> detailOrderList;
 
     public Byte getIsAlert() {
@@ -618,6 +622,26 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
         return buyerComment;
     }
 
+    public int getBuyerDeleteFlag()
+    {
+        return buyerDeleteFlag;
+    }
+
+    public void setBuyerDeleteFlag(int buyerDeleteFlag)
+    {
+        this.buyerDeleteFlag = buyerDeleteFlag;
+    }
+
+    public int getSellerDeleteFlag()
+    {
+        return sellerDeleteFlag;
+    }
+
+    public void setSellerDeleteFlag(int sellerDeleteFlag)
+    {
+        this.sellerDeleteFlag = sellerDeleteFlag;
+    }
+
     /**
      * 买家备注
      *
@@ -772,6 +796,8 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
                 ", orderCouponDiscount=" + orderCouponDiscount +
                 ", changePriceFlag=" + changePriceFlag +
                 ", cartId=" + cartId +
+                ", buyerDeleteFlag=" + buyerDeleteFlag +
+                ", sellerDeleteFlag=" + sellerDeleteFlag +
                 '}';
     }
 
