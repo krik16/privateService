@@ -41,6 +41,16 @@ public class CommodityBuyerVO implements Serializable{
 
 	private List<Double> location; //经纬度
 
+	private String systemNumber; //商品SPU
+
+	public String getSystemNumber() {
+		return systemNumber;
+	}
+
+	public void setSystemNumber(String systemNumber) {
+		this.systemNumber = systemNumber;
+	}
+
 	public List<Double> getLocation() {
 		return location;
 	}
@@ -250,6 +260,7 @@ public class CommodityBuyerVO implements Serializable{
 		} else {
 			this.commodityAppStatus = this.commodityStatus;
 		}
+		this.systemNumber = commodity.getSystemNumber();
 	}
 	
 	public List<String> getCommodityPicList() {
@@ -371,7 +382,7 @@ public class CommodityBuyerVO implements Serializable{
 				+ ", commodityPostage=" + commodityPostage
 				+ ", commodityDescription=" + commodityDescription
 				+ ", commodityName=" + commodityName + ", shopId=" + shopId + ", saleShopCount=" + saleShopCount
-				+ ", watching=" + watching + ", location=" + location.toString()
+				+ ", watching=" + watching + ", location=" + location.toString() + ", systemNumber=" + systemNumber
 				+ ", shopMid=" + shopMid + ", isCollected=" + isCollected + "]";
 	}
 
