@@ -45,7 +45,7 @@ public class CartOrderDetailVO extends PageVO implements Serializable{
 	private String expressName;// 物流名称
 	private String orderStatus;// 购物车订单状态  1未支付 2已支付 3超时关闭 4买家关闭 5失效
 	private String isComment;// 是否评价  -1:表示不可以评价 0：表示未评价 1：表示已评价	
-	private boolean ifDeleteOrder;//true表示可以删除订单 false
+	private boolean ifDeleteOrder = false;//true表示可以删除订单 false
 	private BigDecimal totalHongBaoAmount;//红包合计抵现
     private Integer changePriceFlag = 0;//0没有再次改价1表示有商家再次修改价格 2改价影响了抵扣券
 	private String message;
