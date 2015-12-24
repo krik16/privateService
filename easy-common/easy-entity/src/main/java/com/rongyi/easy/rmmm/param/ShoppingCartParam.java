@@ -48,6 +48,15 @@ public class ShoppingCartParam extends MalllifeBaseParam implements Serializable
 		this.shopId = shopId;
 		this.guideId = guideId;
 	}
+	
+	
+
+	public ShoppingCartParam(Integer guideId, String commodityId, String specId) {
+		super();
+		this.guideId = guideId;
+		this.commodityId = commodityId;
+		this.specId = specId;
+	}
 
 	public List<Integer> getGuideIds() {
 		return guideIds;
