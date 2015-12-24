@@ -3,6 +3,7 @@ package com.rongyi.easy.osm.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import net.sf.json.JSONObject;
 
@@ -21,6 +22,11 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
      * 总价（总价=子订单实价总和 + 邮费 - 折扣
      */
     private BigDecimal totalAmount;
+
+    /**
+     * 实际价（总价=子订单实价总和）
+     */
+    private BigDecimal realAmount = BigDecimal.ZERO;
 
     /**
      * 邮费
@@ -172,6 +178,8 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private byte changePriceFlag;//用户改价通知 0未改价 1 改价 2 改价且恢复抵扣券
 
     private Integer cartId;//购物车id 0表示不使用购物车
+
+    private List<OrderDetailFormEntity> detailOrderList;
 
     public Byte getIsAlert() {
         return isAlert;
@@ -705,6 +713,22 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
 
     public void setCartId(Integer cartId) {
         this.cartId = cartId;
+    }
+
+    public List<OrderDetailFormEntity> getDetailOrderList() {
+        return detailOrderList;
+    }
+
+    public void setDetailOrderList(List<OrderDetailFormEntity> detailOrderList) {
+        this.detailOrderList = detailOrderList;
+    }
+
+    public BigDecimal getRealAmount() {
+        return realAmount;
+    }
+
+    public void setRealAmount(BigDecimal realAmount) {
+        this.realAmount = realAmount;
     }
 
     @Override

@@ -42,7 +42,7 @@ public interface IOrderQueryService {
 	 * @return
 	 * @throws Exception
 	 */
-	ParentOrderVO getParentOrderVO(Integer orderId,boolean cartOrder) throws Exception;
+	ParentOrderVO getParentOrderVO(Integer orderId) throws Exception;
 	
 	/**
 	 * 我的订单数量
@@ -160,10 +160,9 @@ public interface IOrderQueryService {
     /**
      * 查询购物车订单详情
      * @param orderId 订单id
-     * @param isCartOrder 是否是购物车订单
      * @return 订单详情
      */
-	public CartOrderDetailVO getMyOrderDetailForCart(Integer orderId, boolean isCartOrder) throws Exception;
+	public CartOrderDetailVO getMyOrderDetailForCart(Integer orderId) throws Exception;
 
     /**
      * 购物车最大使用积分查询接口
