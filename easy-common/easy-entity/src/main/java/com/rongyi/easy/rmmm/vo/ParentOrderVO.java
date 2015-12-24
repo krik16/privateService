@@ -113,7 +113,7 @@ public class ParentOrderVO implements Serializable {
 	 */
 	private boolean isCartOrder;
 	
-	private boolean ifDeleteOrder;//true表示可以删除订单 false
+	private boolean ifDeleteOrder = false;//true表示可以删除订单 false
 
 	public boolean isIfDeleteOrder() {
 		return ifDeleteOrder;
