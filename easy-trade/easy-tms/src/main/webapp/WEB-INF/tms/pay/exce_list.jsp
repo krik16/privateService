@@ -67,12 +67,13 @@
 							<c:choose>
 								<c:when test="${item.rePay}">
 									<sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="morePay(${item.id},4, ${item.payChannel})"  class="btnsearch" id="pay-button" target="_blank">付款</a></sec:authorize>
+									<sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="excePayCancel(${item.id},1)" class="btnsearch" id="cancePay" >取消</a></sec:authorize>
 								</c:when>
 								<c:otherwise>
 									<sec:authorize ifAnyGranted="TMS_F_PAY" ><button class="btn-class" disabled="disabled">付款</button></sec:authorize>
+									<sec:authorize ifAnyGranted="TMS_F_PAY" ><button class="btn-class" disabled="disabled">取消</button></sec:authorize>
 								</c:otherwise>
 							</c:choose>
-								<sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="excePayCancel(${item.id},1)" class="btnsearch" id="cancePay" >取消</a></sec:authorize>
 						</c:if>
 						</td>
 					</tr>
