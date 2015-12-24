@@ -11,7 +11,7 @@ public class CheckOrderStatusVO extends PageVO implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private List<Integer> closeOrderNums;//已关闭订单号集合
+	private List<String> closeOrderNums;//已关闭订单号集合
 
 	private Integer shopId;//店铺id
 
@@ -19,12 +19,12 @@ public class CheckOrderStatusVO extends PageVO implements Serializable{
 
 	private Integer guideType;//1是导购 2是买手
 
-	public List<Integer> getCloseOrderNums()
+	public List<String> getCloseOrderNums()
 	{
 		return closeOrderNums;
 	}
 
-	public void setCloseOrderNums(List<Integer> closeOrderNums)
+	public void setCloseOrderNums(List<String> closeOrderNums)
 	{
 		this.closeOrderNums = closeOrderNums;
 	}
