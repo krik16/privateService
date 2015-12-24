@@ -67,7 +67,7 @@ public interface ROAOrderService {
 	 * @return
 	 * @throws Exception
 	 */
-	public ParentOrderVO getParentOrderVO(Integer orderId,boolean cartOrder) throws Exception;
+	public ParentOrderVO getParentOrderVO(Integer orderId) throws Exception;
 	
 	/**
 	 * 卖家发货
