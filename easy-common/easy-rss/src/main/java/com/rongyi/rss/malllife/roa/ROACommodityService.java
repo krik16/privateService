@@ -109,4 +109,6 @@ public interface ROACommodityService {
 	public Commodity selectById(String id);
  
 	public ResponseVO searchCommodityBrand(CommodityBrandSearchParam param);
+	
+	public List<com.rongyi.easy.mcmc.vo.CommodityBuyerVO> getCommodityBySPU(String commodityId, String spu);
 }
