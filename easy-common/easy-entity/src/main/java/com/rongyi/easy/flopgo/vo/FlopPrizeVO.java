@@ -37,6 +37,7 @@ public class FlopPrizeVO implements Serializable{
 	private Date publicStart;//发布开始时间
 	private Date publicEnd;//发布结束时间
 	private String checkStatus;//审核状态 0：待审核 1：未通过 2：已通过
+	private String isRebate;//0代表不是抵扣券 1代表是抵扣券
 	private String activityStatus;
 	public String getActivityStatus() {
 		return activityStatus;
@@ -268,4 +269,11 @@ public class FlopPrizeVO implements Serializable{
 		this.cardSurfaceIsShow = cardSurfaceIsShow;
 	}
 
+	public String getIsRebate() {
+		return isRebate;
+	}
+
+	public void setIsRebate(String isRebate) {
+		this.isRebate = isRebate;
+	}
 }
