@@ -143,9 +143,9 @@ public interface HuanXinIMService {
 	
 	/**
 	 * 根据不同的事件，发送不同的数据（购物车订单）
-	 * 
-	 * @param buyerNum
-	 * @param orderNum（购物车大订单号） 生成订单、2分钟未支付 、支付成功
+	 * @param orderShopNum 中订单号
+	 * @param buyerNum 
+	 * @param orderNum 购物车订单号
 	 * @param orderEventType
 	 * @return
 	 * @throws Exception
