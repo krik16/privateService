@@ -1,87 +1,111 @@
 package com.rongyi.core.bean;
 
 /**
- * 统一返回对象
- * 逐渐废弃
+ * 统一返回对象 逐渐废弃
  *
  * @author baodk
  * @see ResponseVO
  */
 public class ResponseResult implements java.io.Serializable {
-    private static final String SUCCESS = "200";
+	private static final long serialVersionUID = 1L;
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
+	/** 成功消息Code **/
+	private static final String SUCCESS = "200";
+	/** 是否成功 **/
+	private boolean success = true;
+	/** 返回对象类型数据 **/
+	private Object info;
+	/** 信息编码 **/
+	private String code;
+	/** 提升信息 **/
+	private String message;
 
-    /**
-     * 是否成功
-     */
-    private boolean success = true;
+	/**
+	 * 构造函数 - 默认success
+	 */
+	public ResponseResult() {
+		this.success = true;
+		this.code = SUCCESS;
+	}
+	
+	/**
+	 * Error 
+	 * @param errorCode	错误码
+	 * @param message	消息
+	 * @return
+	 */
+	public ResponseResult error(String errorCode, String message) {
+		this.success = false;
+		this.code = errorCode;
+		this.message = message;
+		return this;
+	}
+	
+	/**
+	 * Success 
+	 * @param info		返回值信息
+	 * @param message	消息
+	 * @return
+	 */
+	public ResponseResult Success(Object info, String message) {
+		this.success = true;
+		this.code = SUCCESS;
+		this.message = message;
+		this.info = info;
+		return this;
+	}
 
-    /**
-     * 返回对象类型数据
-     */
-    private Object info;
+	/**
+	 * 判断成功
+	 * @return
+	 */
+	public boolean isSuccess() {
+		return success;
+	}
+	
+	/**
+	 * 判断失败
+	 * @return
+	 */
+	public boolean isError() {
+		return !success;
+	}
 
-    /**
-     * 信息编码
-     */
-    private String code;
+	public ResponseResult setSuccess(boolean success) {
+		this.success = success;
+		return this;
+	}
 
-    /**
-     * 提升信息
-     */
-    private String message;
+	public Object getInfo() {
+		return info;
+	}
 
-    /**
-     * Creates a new instance of ResponseResult.
-     */
+	public ResponseResult setInfo(Object info) {
+		this.info = info;
+		return this;
+	}
 
-    public ResponseResult() {
+	public String getCode() {
+		return code;
+	}
 
-        this.success = true;
-        this.code = SUCCESS;
-    }
+	public ResponseResult setCode(String code) {
+		this.code = code;
+		return this;
+	}
 
-    public boolean isSuccess() {
-        return success;
-    }
+	public String getMessage() {
+		return message;
+	}
 
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
+	public ResponseResult setMessage(String message) {
+		this.message = message;
+		return this;
+	}
 
-    public Object getInfo() {
-        return info;
-    }
-
-    public void setInfo(Object info) {
-        this.info = info;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    @Override
-    public String toString() {
-        return "ResponseResult [success=" + success + ", info=" + info + ", code=" + code
-                + ", message=" + message + "]";
-    }
+	@Override
+	public String toString() {
+		return "ResponseResult [success=" + success + ", info=" + info + ", code=" + code + ", message=" + message + "]";
+	}
 
 }

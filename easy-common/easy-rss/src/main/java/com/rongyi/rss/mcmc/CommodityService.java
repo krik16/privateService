@@ -23,7 +23,7 @@ public interface CommodityService {
     public List<Commodity> getCommodityListByShopIds(List<String> shopIds);
 
     public CommodityVO getCommoditySpecInfoById(String commodityId, String specId);
-
+    
     public ResponseResult getCommodityById(String id, long shopId);
 
     public ResponseResult getCommodityListByShopId(String id, int orderBy, String keyword, int currentpage, int pagesize);
