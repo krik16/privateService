@@ -58,7 +58,7 @@ public class Commodity implements  Serializable,Cloneable{
 	
 	private boolean supportSelfPickup=true;//支持到店自提  true 是    false否
 
-	private int identity = 5;//0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购6买手
+	private int identity = -100;//-100 默认值，老数据，不处理权限 0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购6买手
 
 	@Override
 	public String toString() {
