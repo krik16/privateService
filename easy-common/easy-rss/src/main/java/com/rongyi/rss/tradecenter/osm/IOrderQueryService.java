@@ -38,11 +38,11 @@ public interface IOrderQueryService {
 	/**
 	 * 通过父订单id,获得父订单详情
 	 * 
-	 * @param orderNo
+	 * @param orderId
 	 * @return
 	 * @throws Exception
 	 */
-	ParentOrderVO getParentOrderVO(String orderNo) throws Exception;
+	ParentOrderVO getParentOrderVO(Integer orderId) throws Exception;
 	
 	/**
 	 * 我的订单数量
