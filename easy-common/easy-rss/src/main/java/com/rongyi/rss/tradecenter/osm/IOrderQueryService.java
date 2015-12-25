@@ -179,5 +179,5 @@ public interface IOrderQueryService {
 	 * @param cartOrderNo 购物车订单号
 	 * @return 中订单号集合
 	 */
-	List<String> getShopOrderNoByCartNo(String cartOrderNo);
+	List<OrderFormEntity> getShopOrderNoByCartNo(String cartOrderNo);
 }
