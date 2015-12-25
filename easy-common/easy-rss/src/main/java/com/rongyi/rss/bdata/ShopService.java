@@ -28,19 +28,15 @@ public interface ShopService {
 	/**
 	 * 获取单个店铺详情
 	 * @param id 店铺id
-	 * @param timeStamp 时间戳
-	 * @param sign 签名
 	 * @return 带ShopVO 的ResponseVO
 	 */
-	ResponseVO getShopById(String id, long timeStamp, String channel, String sign);
+	ResponseVO getShopById(String id);
 	/**
 	 * 通过店铺id列表获取店铺列表
 	 * @param ids 店铺id列表
-	 * @param timeStamp 时间戳
-	 * @param sign 签名
 	 * @return 带List&lt;ShopVO&gt;的ResponseVO
 	 */
-	ResponseVO getShopsByIds(String ids, long timeStamp, String channel, String sign);
+	ResponseVO getShopsByIds(String ids);
 	
 	/**
 	 * 根据楼栋信息查询店铺列表
