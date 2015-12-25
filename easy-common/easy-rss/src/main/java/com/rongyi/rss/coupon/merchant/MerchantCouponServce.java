@@ -23,11 +23,19 @@ public interface MerchantCouponServce {
     public PagingVO<Coupon> getCouponByPage(QueryParam queryParam);*/
 
     /**
-     *卡券通用查询接口
+     *商家卡券通用查询接口
      * @param queryParam
      * @return
      */
     public MerchantPaging<Coupon> getCouponByPageMysql(QueryParam queryParam,UserInfoVo UserInfoVo);
+    /**
+     * 商家卡券通用查询接口
+     * @param queryParam 查询参数
+     * @param UserInfoVo
+     * @param requiredCount 是否需要统计数据
+     * @return
+     */
+    public MerchantPaging<Coupon> getCouponByPageMysql(QueryParam queryParam,UserInfoVo UserInfoVo,Boolean requiredCount);
 
     /**
      * 商家优惠券，新增，修改，审核，删除等操作

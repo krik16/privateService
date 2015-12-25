@@ -18,7 +18,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	
 	private String name;//商品名称
 	private String category;//商品品类id
-	private Integer status;//状态 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架(当前时间在上架时间和下架时间之间)4待处理5待审核 6审核失败7商家审核通过待容易网审核
+	private Integer status;//状态  0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理5待审核 6审核失败
 
 	private String code;//商品编码
 	private String description;//商品描述
@@ -51,12 +51,18 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private String brandMid;//品牌id
 	private List<String> filialeMids;//分公司id
 	private List<String> shopMids;//店铺id
-	private String brandId;//品牌mysqlId
+	//private String brandId;//品牌mysqlId
 	
 	private boolean supportCourierDeliver=true;//支持快递发货字段  true 是    false否
 	
 	private boolean supportSelfPickup=true;//支持到店自提  true 是    false否
-	
+
+	private Integer identity = 4;//0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购,6买手
+
+	private boolean immediateOn = false;//true表示设置是立即上架
+
+	private List<String> skus;//规格sku集合
+
 	public ObjectId getId() {
 		return id;
 	}
@@ -295,14 +301,6 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.createBy = createBy;
 	}
 	
-	public String getBrandId() {
-		return brandId;
-	}
-	
-	public void setBrandId(String brandId) {
-		this.brandId = brandId;
-	}
-	
 	public boolean isSupportCourierDeliver() {
 		return supportCourierDeliver;
 	}
@@ -318,6 +316,28 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	public void setSupportSelfPickup(boolean supportSelfPickup) {
 		this.supportSelfPickup = supportSelfPickup;
 	}
-	
-	
+
+	public Integer getIdentity() {
+		return identity;
+	}
+
+	public void setIdentity(Integer identity) {
+		this.identity = identity;
+	}
+
+	public boolean isImmediateOn() {
+		return immediateOn;
+	}
+
+	public void setImmediateOn(boolean immediateOn) {
+		this.immediateOn = immediateOn;
+	}
+
+	public List<String> getSkus() {
+		return skus;
+	}
+
+	public void setSkus(List<String> skus) {
+		this.skus = skus;
+	}
 }
