@@ -112,6 +112,7 @@ public class PCWebPageAlipayController extends BaseController {
 		}
 		if(fail_details != null){
 			LOGGER.info("支付宝打款失败记录,不更新打款状态，fail_details={}", fail_details);
+
 		}
 		if (!allList.isEmpty()) {
 			paySuccessToMessage(allList, allList.get(0).getTradeType());
