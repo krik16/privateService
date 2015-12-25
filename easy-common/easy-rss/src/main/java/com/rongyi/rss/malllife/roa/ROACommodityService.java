@@ -71,6 +71,8 @@ public interface ROACommodityService {
 	public ResponseResult getCategoryById(String id);
 
 	public ResponseResult searchCommodity(CommoditySearchParam param);
+	
+	public ResponseResult searchCommodityForMallLife(CommoditySearchParam param);
 
 	public ResponseResult getBrandCommodity(String brandId, String categoryId, int orderBy, int currentpage,
 			int pagesize);
