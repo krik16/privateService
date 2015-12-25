@@ -25,9 +25,15 @@ public class OrderCartFormEntity implements Serializable {
 
     private BigDecimal scoreDiscount;//积分抵扣金额
 
-    private BigDecimal payAmount;//实付价
-
     private BigDecimal realAmount;//总价
+
+    private BigDecimal discountAmount;//原价-卖家优惠
+
+    private BigDecimal rebateAmount;//discount_amount-红包抵扣券
+
+    private BigDecimal scoreAmount;//rebate_amount - 积分
+
+    private BigDecimal payAmount;//实付价
 
     private Long statusHoldMs;//下一次状态时间
 
@@ -44,8 +50,6 @@ public class OrderCartFormEntity implements Serializable {
     private byte status;//状态 1未支付 2已支付 3超时关闭 4买家关闭 5失效
 
     private BigDecimal expressFee;
-
-    private BigDecimal discountFee = BigDecimal.ZERO;
 
     private byte isAlert;//是否已发送支付提醒 (0否 1是)
 
@@ -209,14 +213,34 @@ public class OrderCartFormEntity implements Serializable {
         this.expressFee = expressFee;
     }
 
-    public BigDecimal getDiscountFee()
+    public BigDecimal getDiscountAmount()
     {
-        return discountFee;
+        return discountAmount;
     }
 
-    public void setDiscountFee(BigDecimal discountFee)
+    public void setDiscountAmount(BigDecimal discountAmount)
     {
-        this.discountFee = discountFee;
+        this.discountAmount = discountAmount;
+    }
+
+    public BigDecimal getRebateAmount()
+    {
+        return rebateAmount;
+    }
+
+    public void setRebateAmount(BigDecimal rebateAmount)
+    {
+        this.rebateAmount = rebateAmount;
+    }
+
+    public BigDecimal getScoreAmount()
+    {
+        return scoreAmount;
+    }
+
+    public void setScoreAmount(BigDecimal scoreAmount)
+    {
+        this.scoreAmount = scoreAmount;
     }
 
     @Override
@@ -240,6 +264,10 @@ public class OrderCartFormEntity implements Serializable {
                 ", discountInfo='" + discountInfo + '\'' +
                 ", couponRequirement=" + couponRequirement +
                 ", scoreDiscount=" + scoreDiscount +
+                ", discountAmount=" + discountAmount +
+                ", rebateAmount=" + rebateAmount +
+                ", scoreAmount=" + scoreAmount +
+
                 '}';
     }
 }

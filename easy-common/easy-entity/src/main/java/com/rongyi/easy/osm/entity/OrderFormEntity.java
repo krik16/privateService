@@ -24,11 +24,6 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private BigDecimal totalAmount;
 
     /**
-     * 实际价（总价=子订单实价总和）
-     */
-    private BigDecimal realAmount = BigDecimal.ZERO;
-
-    /**
      * 邮费
      */
     private BigDecimal expressFee;
@@ -161,10 +156,6 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     //促销券能使用的最小订单金额
     private BigDecimal couponRequirement;
 
-    /**
-     * 订单总金额（不包括积分优惠）
-     **/
-    private BigDecimal totalAmountWithoutScoreDiscount = null;
     //设备类型
     private Integer devType;
 
@@ -183,6 +174,14 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
 
     private int sellerDeleteFlag = 0;//卖家删除标志 0 未删除 1 删除
 
+    private BigDecimal realAmount;//原价
+
+    private BigDecimal discountAmount;//原价-卖家优惠
+
+    private BigDecimal rebateAmount;//discount_amount-红包抵扣券
+
+    private BigDecimal scoreAmount;//rebate_amount - 积分
+
     private List<OrderDetailFormEntity> detailOrderList;
 
     public Byte getIsAlert() {
@@ -193,13 +192,6 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
         this.isAlert = isAlert;
     }
 
-    public BigDecimal getTotalAmountWithoutScoreDiscount() {
-        return totalAmountWithoutScoreDiscount;
-    }
-
-    public void setTotalAmountWithoutScoreDiscount(BigDecimal totalAmountWithoutScoreDiscount) {
-        this.totalAmountWithoutScoreDiscount = totalAmountWithoutScoreDiscount;
-    }
 
     public Integer getGuideType() {
         return guideType;
@@ -755,6 +747,36 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
         this.realAmount = realAmount;
     }
 
+    public BigDecimal getDiscountAmount()
+    {
+        return discountAmount;
+    }
+
+    public void setDiscountAmount(BigDecimal discountAmount)
+    {
+        this.discountAmount = discountAmount;
+    }
+
+    public BigDecimal getRebateAmount()
+    {
+        return rebateAmount;
+    }
+
+    public void setRebateAmount(BigDecimal rebateAmount)
+    {
+        this.rebateAmount = rebateAmount;
+    }
+
+    public BigDecimal getScoreAmount()
+    {
+        return scoreAmount;
+    }
+
+    public void setScoreAmount(BigDecimal scoreAmount)
+    {
+        this.scoreAmount = scoreAmount;
+    }
+
     @Override
     public String toString() {
         return "OrderFormEntity{" +
@@ -784,7 +806,6 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
                 ", jsonDiscountInfo=" + jsonDiscountInfo +
                 ", guideType=" + guideType +
                 ", isAlert=" + isAlert +
-                ", totalAmountWithoutScoreDiscount=" + totalAmountWithoutScoreDiscount +
                 ", couponDiscount=" + couponDiscount +
                 ", couponSource=" + couponSource +
                 ", couponRequirement=" + couponRequirement +
@@ -798,6 +819,10 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
                 ", cartId=" + cartId +
                 ", buyerDeleteFlag=" + buyerDeleteFlag +
                 ", sellerDeleteFlag=" + sellerDeleteFlag +
+                ", realAmount=" + realAmount +
+                ", discountAmount=" + discountAmount +
+                ", rebateAmount=" + rebateAmount +
+                ", scoreAmount=" + scoreAmount +
                 '}';
     }
 
