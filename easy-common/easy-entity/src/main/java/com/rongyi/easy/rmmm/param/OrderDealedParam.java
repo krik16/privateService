@@ -12,6 +12,15 @@ public class OrderDealedParam implements Serializable {
 	private String commodityPostage;// 运费
 	private String orderNo;// 大订单号
 	private String orderPrice;// 订单价格
+	private Integer userId;//卖家用户id
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 
 	public String getOrderId() {
 		return orderId;
