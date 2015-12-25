@@ -15,13 +15,22 @@
 			<td>买家账号</td>
 			<td>买家姓名</td>
 			<td>异常交易金额</td>
+			<td>状态</td>
 			<td>操作</td>
 		</tr>
 		<c:choose>
 			<c:when test="${not empty list}">
 				<c:forEach var="item" items="${list}" varStatus="status">
 					<tr>
-						<td style="text-align: center;"><input type="checkbox" name="subBox" id="${item.id}" payChannel="${item.payChannel}"></td>
+						<c:choose>
+							<c:when test="${item.rePay}">
+								<td style="text-align: center;"><input type="checkbox" name="subBox" id="${item.id}"  payChannel="${item.payChannel}"></td>
+							</c:when>
+							<c:otherwise>
+								<td style="text-align: center;"><input type="checkbox" name="subBox" id="${item.id}" payChannel="${item.payChannel}" disabled="disabled"></td>
+							</c:otherwise>
+						</c:choose>
+
 						<td>${item.payNo}</td>
 						<c:choose>
 							<c:when test="${item.orderType eq 0}">
@@ -44,8 +53,29 @@
 						<td>${item.buyerAccount}</td>
 						<td>${item.buyerName}</td>
 						<td>${item.orderPrice}</td>
-						<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="morePay(${item.id},4, ${item.payChannel})"  class="btnsearch" id="pay-button" target="_blank">付款</a></sec:authorize></td>
-			 		</td>
+							<c:choose>
+								<c:when test="${item.refundRejected eq 0}">
+									<td>待付款
+								</c:when>
+								<c:otherwise>
+									<td>取消付款
+								</c:otherwise>
+							</c:choose>
+						</td>
+						<td>
+						<c:if test="${item.refundRejected eq 0}">
+							<c:choose>
+								<c:when test="${item.rePay}">
+									<sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="morePay(${item.id},4, ${item.payChannel})"  class="btnsearch" id="pay-button" target="_blank">付款</a></sec:authorize>
+									<sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="excePayCancel(${item.id},1)" class="btnsearch" id="cancePay" >取消</a></sec:authorize>
+								</c:when>
+								<c:otherwise>
+									<sec:authorize ifAnyGranted="TMS_F_PAY" ><button class="btn-class" disabled="disabled">付款</button></sec:authorize>
+									<sec:authorize ifAnyGranted="TMS_F_PAY" ><button class="btn-class" disabled="disabled">取消</button></sec:authorize>
+								</c:otherwise>
+							</c:choose>
+						</c:if>
+						</td>
 					</tr>
 				</c:forEach>
 			</c:when>

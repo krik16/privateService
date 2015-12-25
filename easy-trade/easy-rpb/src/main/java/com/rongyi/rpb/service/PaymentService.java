@@ -126,7 +126,7 @@ public interface PaymentService {
 
 	public abstract Map<String, Object> getBodyMap(String payNo, String orderNum, String orderDetailNum, String source, String target, String type);
 
-	public abstract List<PaymentEntity> updateListStatusBypayNo(String payNo, Integer tradeTsype, Integer status);
+	public abstract List<PaymentEntity> updateListStatusBypayNo(String payNo, Integer tradeType, Integer status);
 
 	public abstract void deleteByPayNo(String payNo);
 	

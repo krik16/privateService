@@ -254,9 +254,18 @@ public class PaymentServiceTest extends BaseTest {
 		System.err.println("listSize=" + list.size());
 	}
 
-	@Test
+//	@Test
 	public void testselectByPayNoAndPayChannelAndTradeType(){
-		PaymentEntity paymentEntity = paymentService.selectByPayNoAndPayChannelAndTradeType("0120419209728164658",null,0,2);
+		PaymentEntity paymentEntity = paymentService.selectByPayNoAndPayChannelAndTradeType("0120419209728164658", null, 0, 2);
 		System.err.println("payNo={}"+paymentEntity.getPayNo());
+	}
+
+	public static void main(String[] args){
+		String id="1";
+		String ids="1,2";
+		String[] idArray = id.split(",");
+		System.err.println("id="+idArray.toString());
+		idArray = ids.split(",");
+		System.err.println("ids="+idArray.toString());
 	}
 }

@@ -208,7 +208,7 @@ public class RpbServiceImpl implements IRpbService {
 
 	/**
 	 * @Description: 查询订单在第三方交易系统中状态
-	 * @param paymentEntity
+	 * @param tradeNo
 	 * @return
 	 * @Author: 柯军
 	 * @datetime:2015年8月11日下午4:17:19
@@ -347,6 +347,21 @@ public class RpbServiceImpl implements IRpbService {
 			map.put("status", status);
 			paymentService.updateByIds(ids, map);
 		}
+	}
+
+	@Override
+	public Map<String, Object> exceCancelPay(Integer paymentId, Integer refundRejected) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("success", true);
+		map.put("message", "取消异常付款操作成功");
+		try {
+			paymentService.updateRefundRejected(paymentId, refundRejected);
+		} catch (Exception e) {
+			map.put("success", false);
+			map.put("message", "取消异常付款操作失败");
+			e.printStackTrace();
+		}
+		return map;
 	}
 }
 

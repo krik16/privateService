@@ -1,26 +1,24 @@
 package com.rongyi.tms.web.controller;
 
 import com.rongyi.core.bean.ResponseResult;
+import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.core.constant.PayEnum;
 import com.rongyi.core.constant.PaymentEventType;
 import com.rongyi.easy.mq.MessageEvent;
-import com.rongyi.easy.osm.entity.OrderFormEntity;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
 import com.rongyi.easy.tms.vo.TradeVO;
-import com.rongyi.easy.usercenter.entity.MalllifeUserInfoEntity;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.rss.mallshop.order.ROAOrderFormService;
 import com.rongyi.rss.rpb.IRpbService;
 import com.rongyi.tms.constants.Constant;
 import com.rongyi.tms.constants.ConstantEnum;
+import com.rongyi.tms.moudle.vo.UserInfo;
 import com.rongyi.tms.mq.Sender;
 import com.rongyi.tms.service.PayService;
 import com.rongyi.tms.service.PaymentStatementService;
 import com.rongyi.tms.service.RefundService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +68,9 @@ public class PayController extends BaseController {
     @Autowired
     PaymentStatementService paymentStatementService;
 
+    @Autowired
+    PropertyConfigurer propertyConfigurer;
+
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String search(ModelMap model, String currentMallId, HttpServletRequest request, HttpServletResponse response, HttpSession session, String currpage) {
         model.addAttribute("currpage", currpage);
@@ -93,7 +94,7 @@ public class PayController extends BaseController {
             LOGGER.info("----drawApply list ------map=" + map);
             String currpage = (String) map.get("currpage");
             map.put("status", ConstantEnum.TRADE_STATUS_PAY_NO.getCodeInt());
-            List<TradeVO> list = payService.selectPayPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE);
+            List<TradeVO> list = validateAllowOpPay(payService.selectPayPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE));
             double pageTotle = payService.selectPayPageListCount(map);
             Integer rowContNum = (int) Math.ceil(pageTotle / Constant.PAGE.PAGESIZE);
             model.addAttribute("rowCont", rowContNum);
@@ -122,7 +123,7 @@ public class PayController extends BaseController {
             LOGGER.info("----refund list ------ map=" + map);
             String currpage = (String) map.get("currpage");
             map.put("tradeType", ConstantEnum.TRADE_TYPE_REFUND.getCodeInt());
-            List<TradeVO> list = refundService.selectRefundPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE);
+            List<TradeVO> list = validateAllowOpPay(refundService.selectRefundPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE));
             double pageTotle = refundService.selectRefundPageListCount(map);
             Integer rowContNum = (int) Math.ceil(pageTotle / Constant.PAGE.PAGESIZE);
             model.addAttribute("rowCont", rowContNum);
@@ -153,16 +154,7 @@ public class PayController extends BaseController {
             String currpage = (String) map.get("currpage");
             map.put("status", ConstantEnum.TRADE_STATUS_PAY_NO.getCodeInt());
             map.put("tradeType", ConstantEnum.TRADE_TYPE_EXCE_PAY.getCodeInt());
-//            List<TradeVO> list = buildList(refundService.selectRefundPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE));
-            List<TradeVO> list = refundService.selectRefundPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE);
-//            OrderFormEntity orderFormEntity = null;
-//            for (TradeVO tradeVO : list) {
-//                orderFormEntity = rOAOrderFormService.getOrderFormByOrderNum(tradeVO.getOrderNo());
-//                if (orderFormEntity != null) {
-//                    tradeVO.setOrderId(orderFormEntity.getId().toString());
-//                    tradeVO.setOrderUserId(orderFormEntity.getBuyerId());
-//                }
-//            }
+            List<TradeVO> list = validateAllowOpPay(refundService.selectRefundPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE));
             double pageTotle = refundService.selectRefundPageListCount(map);
             Integer rowContNum = (int) Math.ceil(pageTotle / Constant.PAGE.PAGESIZE);
             model.addAttribute("rowCont", rowContNum);
@@ -222,7 +214,7 @@ public class PayController extends BaseController {
             LOGGER.info("----paySeller list ------map=" + map);
             map.put("tradeType", 2);
             String currpage = (String) map.get("currpage");
-            List<TradeVO> list = payService.selectPayPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE);
+            List<TradeVO> list = validateAllowOpPay(payService.selectPayPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE));
             double pageTotle = payService.selectPayPageListCount(map);
             Integer rowContNum = (int) Math.ceil(pageTotle / Constant.PAGE.PAGESIZE);
             model.addAttribute("rowCont", rowContNum);
@@ -248,6 +240,7 @@ public class PayController extends BaseController {
         ResponseResult result = new ResponseResult();
         try {
             Map<String, Object> resultMap = new HashMap<String, Object>();
+            //对账单付款
             if (PayEnum.STATEMENT_ONE.getCode().equals(operateType) || PayEnum.STATEMENT_MORE.getCode().equals(operateType)) {
                 resultMap = paymentStatementService.validatePay(ids, operateType);
             } else {
@@ -273,10 +266,12 @@ public class PayController extends BaseController {
      **/
     @SuppressWarnings("unchecked")
     @RequestMapping("/pay")
-    public String pay(@RequestParam String paymentId, @RequestParam Integer type, @RequestParam Integer payChannel, Model model) {
-        LOGGER.info("================支付开始====================");
+    public String pay(@RequestParam String paymentId, @RequestParam Integer type, @RequestParam Integer payChannel, Model model, HttpSession session, HttpServletRequest request) {
+        LOGGER.info("支付开始 pay,paymentId={}，type={}，payChannel={}",paymentId,type,payChannel);
         try {
-            MessageEvent messageEvent = getMessageEvent(type, payChannel, paymentId, getDesc(type));
+
+            UserInfo userInfo = this.getSessionUser(request, session);
+            MessageEvent messageEvent = getMessageEvent(type, payChannel, paymentId, getDesc(type),userInfo);
             String result = sender.convertSendAndReceive(messageEvent);
             Map<String, Object> resultMap = JsonUtil.getMapFromJson(result);
             model.addAttribute("content", resultMap.get("sHtmlText"));
@@ -335,6 +330,7 @@ public class PayController extends BaseController {
         return result;
     }
 
+
     private String getDesc(Integer type) {
         String desc = ConstantEnum.TRADE_TYPE_TO_DRAW_APPLY.getValueStr();
         if (PayEnum.TRADE_REFUND_ONE.getCode() == type || PayEnum.TRADE_REFUND_MORE.getCode() == type)
@@ -346,13 +342,13 @@ public class PayController extends BaseController {
         return desc;
     }
 
-    private MessageEvent getMessageEvent(Integer operateType, Integer payChannel, String paymentId, String desc) {
+    private MessageEvent getMessageEvent(Integer operateType, Integer payChannel, String paymentId, String desc, UserInfo userInfo) {
         MessageEvent event = new MessageEvent();
         Map<String, Object> bodyMap = new HashMap<String, Object>();
         bodyMap.put("paymentId", paymentId);// 多个id用逗号分隔
         bodyMap.put("operateType", operateType);
-        // bodyMap.put("payChannel", payChannel);
         bodyMap.put("desc", desc);
+        bodyMap.put("userId",userInfo.getUsername());
         event.setBody(bodyMap);
         event.setSource(ConstantEnum.MESSAGE_EVENT_TMS.getCodeStr());
         event.setTarget(ConstantEnum.MESSAGE_EVENT_RPB.getCodeStr());
@@ -403,7 +399,6 @@ public class PayController extends BaseController {
         // result.setMessage("验证用户账号是否合法失败");
         // e.printStackTrace();
         // }
-        // TODO test
         result.setSuccess(true);
         return result;
     }
@@ -430,7 +425,7 @@ public class PayController extends BaseController {
             statusList.add(ConstantEnum.STATEMENT_STATUE_10.getCodeByte());
             statusList.add(ConstantEnum.STATEMENT_STATUE_11.getCodeByte());
             map.put("statusList", statusList);
-            List<PaymentStatementDto> list = paymentStatementService.selectPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE);
+            List<PaymentStatementDto> list = validateBillAllowOpPay(paymentStatementService.selectPageList(map, Integer.valueOf(currpage), Constant.PAGE.PAGESIZE));
             double pageTotle = paymentStatementService.selectPageListCount(map);
             Integer rowContNum = (int) Math.ceil(pageTotle / Constant.PAGE.PAGESIZE);
             model.addAttribute("rowCont", rowContNum);
@@ -492,5 +487,71 @@ public class PayController extends BaseController {
         }
 
         return responseResult;
+    }
+
+    /**
+     * @Description:检查对账单是否允许用户再次操作
+     * @param:
+     * @Author:  柯军
+     **/
+
+    private  List<PaymentStatementDto> validateBillAllowOpPay( List<PaymentStatementDto> list){
+        Integer rePayTime = 10;
+        try{
+            rePayTime = Integer.valueOf(propertyConfigurer.getProperty("RE_PAY_TIME"));
+        }catch (Exception e){
+            LOGGER.error("获取重新支付时间间隔失败，设置默认值rePayTime={}", rePayTime);
+        }
+        for (PaymentStatementDto paymentStatementDto : list){
+            if(paymentStatementDto.getOpTime() != null && DateUtil.dateDiff(paymentStatementDto.getOpTime(), DateUtil.getCurrDateTime()) < rePayTime){
+                paymentStatementDto.setRePay(false);
+            }
+        }
+        return list;
+    }
+
+    /**
+     * @Description:检查是否允许用户再次操作
+     * @param:
+     * @Author:  柯军
+     **/
+
+    private List<TradeVO> validateAllowOpPay(List<TradeVO> list){
+        Integer rePayTime = 10;
+        try{
+            rePayTime = Integer.valueOf(propertyConfigurer.getProperty("RE_PAY_TIME"));
+        }catch (Exception e){
+            LOGGER.error("获取重新支付时间间隔失败，设置默认值rePayTime={}", rePayTime);
+        }
+        for (TradeVO tradeVO : list){
+            if(tradeVO.getOpTime() != null && DateUtil.dateDiff(tradeVO.getOpTime(), DateUtil.getCurrDateTime()) < rePayTime){
+                tradeVO.setRePay(false);
+            }
+        }
+        return list;
+    }
+
+    /**
+     * @param paymentId
+     * @param refundRejected
+     * @param model
+     * @return
+     * @Description: 异常交易取消付款
+     * @Author: 柯军
+     * @datetime:2015年8月28日上午10:58:17
+     **/
+    @RequestMapping("/excePayCancel")
+    @ResponseBody
+    public ResponseResult excePayCancel(@RequestParam Integer paymentId, @RequestParam Integer refundRejected, Model model) {
+        LOGGER.info("异常交易取消付款 excePayCancel paymentId={},refundRejected={}",paymentId,refundRejected);
+        ResponseResult result = new ResponseResult();
+        try {
+            Map<String, Object> resultMap = rpbService.exceCancelPay(paymentId, refundRejected);
+            result.setSuccess(Boolean.valueOf(resultMap.get("success").toString()));
+            result.setMessage(resultMap.get("message").toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

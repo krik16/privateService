@@ -22,14 +22,22 @@
 			<c:when test="${not empty list}">
 				<c:forEach var="item" items="${list}" varStatus="status">
 					<tr>
-						<td style="text-align: center;"><input type="checkbox" name="subBox" id="${item.id}" payChannel="${item.payChannel}" ></td>
+						<c:choose>
+							<c:when test="${item.rePay}">
+								<td style="text-align: center;"><input type="checkbox" name="subBox" id="${item.id}" payChannel="${item.payChannel}" ></td>
+							</c:when>
+							<c:otherwise>
+								<td style="text-align: center;"><input type="checkbox" name="subBox" id="${item.id}" payChannel="${item.payChannel}" disabled="disabled"></td>
+							</c:otherwise>
+						</c:choose>
+
 						<td>${item.payNo}</td>
 						<c:choose>
 							<c:when test="${item.orderType eq 0}">
 								<td><a href="${ctx}/orderManager/orderInfo?orderId=${item.orderId}&userId=${item.orderUserId}&module=order&type=tradeDetail" target="_parent"  style="text-decoration:underline" >${item.orderNo}</a></td>
 							</c:when>
 							<c:otherwise>
-								<td><a>${item.orderNo}</a></td>
+								<td>${item.orderNo}</td>
 							</c:otherwise>
 						</c:choose>
 						<c:choose>
@@ -49,7 +57,7 @@
 						<c:when test="${item.payChannel eq 1}">
 							<td>微信</td>
 						</c:when>
-						<c:otherwise><td>一行卡</td></c:otherwise>
+						<c:otherwise><td>银行卡</td></c:otherwise>
 						</c:choose>
 						<td>${item.mallName}</td>
 						<td>${item.shopName}</td>
@@ -57,11 +65,25 @@
 						<td>${item.buyerName}</td>
 						<td>${item.orderPrice}</td>
 						<c:choose>
-						<c:when test="${item.payChannel eq 0}">
+						<c:when test="${item.payChannel eq 0 && item.rePay}">
 							<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><a onclick="morePay(${item.id},2, ${item.payChannel})" class="btnsearch" id="pay-button" target="_blank">付款</a></sec:authorize></td>
 						</c:when>
-						<c:otherwise>
+						<c:when test="${item.payChannel eq 0 && !item.rePay}">
+							<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><button class="btn-class" disabled="disabled">付款</button></sec:authorize>
+						</c:when>
+						<c:when test="${item.payChannel eq 1 && item.rePay}">
 							<td><a href="javascript:void(0);" class="btnsearch checked" id="weixin-refund-button" onclick="weixinRefund(${item.id},${item.refundRejected})">退款</a>
+								<c:choose>
+								<c:when test="${item.refundRejected eq 0}">
+								<a href="javascript:void(0);" class="btnsearch checked" id="weixin-refund-rejected-button" onclick="weixinRefundRejected(${item.id},1)">拒绝</a>
+								</c:when>
+								<c:otherwise>
+								<a href="javascript:void(0);" class="btnsearch checked" id="weixin-refund-agree-button" onclick="weixinRefundRejected(${item.id},0)">同意</a>
+								</c:otherwise>
+								</c:choose>
+						</c:when>
+						<c:otherwise>
+						<td><sec:authorize ifAnyGranted="TMS_F_PAY" ><button class="btn-class" disabled="disabled">退款</button></sec:authorize>
 							<c:choose>
 								<c:when test="${item.refundRejected eq 0}">
 									<a href="javascript:void(0);" class="btnsearch checked" id="weixin-refund-rejected-button" onclick="weixinRefundRejected(${item.id},1)">拒绝</a>
@@ -72,7 +94,6 @@
 							</c:choose>
 						</c:otherwise>
 						</c:choose>
-						</td>
 			 		</td>
 					</tr>
 				</c:forEach>

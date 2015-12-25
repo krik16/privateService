@@ -10,6 +10,7 @@
 
 package com.rongyi.tms.web.controller;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,6 +18,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.rongyi.core.constant.Constants;
+import com.rongyi.easy.tms.vo.DrawApplyDetailVO;
+import com.rongyi.easy.tms.vo.DrawApplyListVO;
+import com.rongyi.easy.tms.vo.DrawApplySearchParam;
+import com.rongyi.rss.tms.DrawApplySearchService;
+import com.rongyi.tms.constants.ConstantEnum;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
@@ -60,7 +67,11 @@ public class DrawApplyController extends BaseController {
     
     @Autowired
     ROAVirtualAccountGeneralService rOAVirtualAccountGeneralService;
-    
+
+    @Autowired
+    DrawApplySearchService tmsDrawApplySearchService;
+
+
     @RequestMapping("/search")
     public String searchIntegralComm(String module) {
         return module+"/draw_apply-search";
@@ -144,9 +155,23 @@ public class DrawApplyController extends BaseController {
                 return Constant.VIEW_MSG.ERROR;
             }else{
                 DrawApply drawApply=drawService.getOneById(id);
+                BigDecimal balance = new BigDecimal(0);
                 VirtualAccountEntity vaEntity = rOAVirtualAccountGeneralService.selectByUserId(drawApply.getDrawUserId());
+                balance = balance.add(vaEntity.getBalance());
+                DrawApplySearchParam drawApplySearchParam = new DrawApplySearchParam();
+                drawApplySearchParam.setUserId(drawApply.getDrawUserId());
+                drawApplySearchParam.setCurrentPage(0);
+                drawApplySearchParam.setPageSize(10000);
+                drawApplySearchParam.setStatus(Constants.DrawApplyStatus.PROCESSING);
+                drawApplySearchParam.setTimeRange(Constants.TMSTimeRangeType.ALL);
+                DrawApplyListVO drawApplyListVO= tmsDrawApplySearchService.drawApplySearch(drawApplySearchParam);
+                if(drawApplyListVO != null && drawApplyListVO.getDrawApplyDetailList() != null) {
+                    for (DrawApplyDetailVO drawApplyDetailVO :drawApplyListVO.getDrawApplyDetailList()){
+                        balance = balance.add(drawApplyDetailVO.getDrawAmount());
+                    }
+                }
                 modelMap.addAttribute("apply", drawApply);
-                modelMap.addAttribute("balance",vaEntity.getBalance());
+                modelMap.addAttribute("balance",balance.setScale(2,BigDecimal.ROUND_HALF_UP));
                 if(drawApply.getStatus()<0){
                     DrawVerifyLog verifyLog= drawVerifyLogService.getLogByApplyId(drawApply.getId());
                     modelMap.addAttribute("log",verifyLog);
@@ -154,7 +179,7 @@ public class DrawApplyController extends BaseController {
             }
             return module+"/draw_apply-detail";
         }catch(Exception e){
-            LOGGER.error(e);
+           e.printStackTrace();
             request.setAttribute(Constant.VIEW_MSG.MSG, "获取数据失败");
             request.setAttribute(Constant.VIEW_MSG.DETAIL, e.getMessage());
             return Constant.VIEW_MSG.ERROR;

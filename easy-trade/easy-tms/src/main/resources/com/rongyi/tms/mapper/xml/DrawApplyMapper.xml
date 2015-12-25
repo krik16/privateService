@@ -347,7 +347,7 @@
 			</foreach>
 		</if>
 		<if test="dayRange != null">
-			AND DAY(create_at) = DAY(now())
+			AND TO_DAYS(create_at) = TO_DAYS(now())
 		</if>
 		<if test="weekRange != null">
 			AND WEEK(create_at) = WEEK(now())
@@ -355,6 +355,7 @@
 		<if test="monthRange != null">
 			AND MONTH(create_at) = MONTH(now())
 		</if>
+		AND YEAR(create_at) = YEAR (now())
 		ORDER BY create_at DESC
 		LIMIT #{pageStart,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
 	</select>
@@ -371,7 +372,7 @@
 			</foreach>
 		</if>
 		<if test="dayRange != null">
-			AND DAY(create_at) = DAY(now())
+			AND TO_DAYS(create_at) = TO_DAYS(now())
 		</if>
 		<if test="weekRange != null">
 			AND WEEK(create_at) = WEEK(now())
@@ -379,5 +380,6 @@
 		<if test="monthRange != null">
 			AND MONTH(create_at) = MONTH(now())
 		</if>
+		AND YEAR(create_at) = YEAR (now())
 	</select>
 </mapper>

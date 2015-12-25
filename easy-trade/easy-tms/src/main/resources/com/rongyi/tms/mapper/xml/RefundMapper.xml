@@ -28,6 +28,7 @@
                 jdbcType="VARCHAR"/>
         <result column="guide_type" property="guideType" jdbcType="INTEGER"/>
         <result column="buyer_name" property="buyerName" jdbcType="VARCHAR"/>
+        <result column="op_time" property="opTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
         `ry_rpb`.`payment_order`.`id` AS `id`,`ry_rpb`.`payment_order`.`create_at` AS
@@ -40,7 +41,7 @@
         `mail_id`,`ry_rmmm`.`mall_cooperate`.`mall_name` AS `mall_name`,
         `ry_rmmm`.`rmmm_user_info`.`user_phone` AS `seller_account`,`ry_rmmm`.`rmmm_user_info`.`user_name` AS
         `seller_name`,
-        `ry_osm`.`order_form`.`guide_type` AS `guide_type`,
+        `ry_osm`.`order_form`.`guide_type` AS `guide_type`,op.op_time,
         CASE WHEN
         `ry_rpb`.`payment_order`.order_type = 1
         THEN
@@ -65,6 +66,7 @@
         on `ry_rpb`.`payment_order`.`order_no` = `ry_trade`.`trade_order`.`order_no`
         left join ry_user.malllife_user_info buyer_info on buyer_info.id = `ry_trade`.`trade_order`.`user_id`
         left join ry_user.malllife_user_info  buyer_info2 on buyer_info2.id = `ry_osm`.`order_form`.`buyer_id`
+        left join payment_order_op op on op.payment_id = payment_order.id
     </sql>
     <sql id="trade_list_where_clause">
 
