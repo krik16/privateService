@@ -270,5 +270,14 @@ public interface ROAContentService {
 	 * @return
 	 */
 	public List<TemplateListVO> findTemplateCityByCityId(List<String> ids);
-	
+
+	/**
+	 * 通过模版id和城市ids查询这个些城市是否存在了
+	 * @param templateId
+	 * @param ids
+	 * @return
+	 */
+	public List<ForumTemplateCity> hasTemplateCity(Integer templateId,List<String> ids);
+
+	public boolean renvelCiyt(Integer templateId,List<ForumTemplateCity> forumTemplateCities,String userName) throws Exception;
 }
