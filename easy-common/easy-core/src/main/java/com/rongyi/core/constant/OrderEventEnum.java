@@ -5,7 +5,8 @@ package com.rongyi.core.constant;
  * 母订单事件
  */
 public enum  OrderEventEnum {
-    ORDERCART_PAY_OVERTIME("30", "母订单支付超时超时");
+    ORDERCART_BUYER_CLOSE("28", "买家关闭母订单"),
+    ORDERCART_PAY_OVERTIME("30", "母订单支付超时");
     private String code;
     private String message;
 
