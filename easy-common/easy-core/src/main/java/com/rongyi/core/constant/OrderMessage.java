@@ -108,5 +108,12 @@ public interface OrderMessage {
 	/** 验码佣金 */
 	public static final String COMMISSION_VALID1 = "官方已审核通过您的验码佣金，验码佣金";
 	public static final String COMMISSION_VALID2 = "元正常发放到您的账户，请注意查收。";
+	
+	/** 卖家关闭订单 */
+	public static final String MANUAL_CLOSED1 = "您于";
+	public static final String MANUAL_CLOSED2 = "，下单购买";
+	public static final String MANUAL_CLOSED3 = "店铺的商品（订单号：";
+	public static final String MANUAL_CLOSED4 = "），现订单价格发生改变，请注意查看。";
+	public static final String MANUAL_CLOSED5 = "），现订单价格发生改变，导致使用的抵扣券未满足使用条件，已重新计算订单总价并返还选用的抵扣券，请注意查看。";
 
 }

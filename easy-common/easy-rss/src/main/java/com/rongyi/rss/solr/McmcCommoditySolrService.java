@@ -2,6 +2,7 @@ package com.rongyi.rss.solr;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.rongyi.easy.mcmc.param.ActivityCommodityParam;
 import org.bson.types.ObjectId;
@@ -65,6 +66,16 @@ public interface McmcCommoditySolrService {
 	 * @return
 	 */
 	public List<ObjectId> commoditySearch(CommoditySearchParam param);
+
+	/**
+	 * 商品检索 - 容易逛商品聚合
+	 *
+	 * @author xgq
+	 * @date 2015年12月24日 下午2:36:52
+	 * @param param
+	 * @return
+	 */
+	public Map searchCommodityForMallLife(CommoditySearchParam param);
 
 	/**
 	 * @author ZhengYl

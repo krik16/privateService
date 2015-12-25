@@ -52,6 +52,8 @@ public interface CommodityService {
 
     public ResponseResult searchCommodity(CommoditySearchParam param);
 
+    public ResponseResult searchCommodityForMallLife(CommoditySearchParam param);
+
     public ResponseResult getBrandCommodity(String brandId, String categoryId, int orderBy, int currentpage, int pagesize);
 
     public ResponseResult getShopCommodity(String shopId, String categoryId, int orderBy, int currentpage, int pagesize);

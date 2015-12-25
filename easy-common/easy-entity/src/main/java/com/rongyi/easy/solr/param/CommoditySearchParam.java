@@ -68,6 +68,16 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	 */
 	private String systemNumber;
 
+	private Integer from = 0; // 从0开始 偏移量，商品聚合分页使用
+
+	public Integer getFrom() {
+		return from;
+	}
+
+	public void setFrom(Integer from) {
+		this.from = from;
+	}
+
 	public String getCommodityType() {
 		return commodityType;
 	}
@@ -245,6 +255,7 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 				", saleId='" + saleId + '\'' +
 				", flashSaleId='" + flashSaleId + '\'' +
 				", systemNumber='" + systemNumber + '\'' +
+				", from='" + from + '\'' +
 				'}';
 	}
 }

@@ -38,11 +38,11 @@ public interface IOrderQueryService {
 	/**
 	 * 通过父订单id,获得父订单详情
 	 * 
-	 * @param orderNo
+	 * @param orderId
 	 * @return
 	 * @throws Exception
 	 */
-	ParentOrderVO getParentOrderVO(String orderNo) throws Exception;
+	ParentOrderVO getParentOrderVO(Integer orderId) throws Exception;
 	
 	/**
 	 * 我的订单数量
@@ -174,5 +174,10 @@ public interface IOrderQueryService {
      */
     Integer getMaxIntegralForCart(List<MaxIntegralParam> paramList,double limit,double moenyExchangeScore,double platformRebateAmount);
 
-
+	/**
+	 * 根据购物车订单号 查询中订单号集合
+	 * @param cartOrderNo 购物车订单号
+	 * @return 中订单号集合
+	 */
+	List<OrderFormEntity> getShopOrderNoByCartNo(String cartOrderNo);
 }
