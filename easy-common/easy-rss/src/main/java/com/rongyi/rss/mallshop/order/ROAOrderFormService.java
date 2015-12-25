@@ -35,8 +35,15 @@ public interface ROAOrderFormService {
 	
 	public PagingVO<OrderManagerVO> searchListByMap(Map<String, Object> paramsMap) throws Exception;
 	
-public List<OrderFormEntity> selectOrderList(Map param) throws Exception ;
+    public List<OrderFormEntity> selectOrderList(Map param) throws Exception ;
 	
 	public int selectOrderListCount(String weidianId, String userId) throws Exception;
+	
+	/**
+	 * 根据购物车订单号 查询中订单号集合
+	 * @param cartOrderNo 购物车订单号
+	 * @return 中订单号集合
+	 */
+	List<OrderFormEntity> getShopOrderNoByCartNo(String cartOrderNo);
 
 }
