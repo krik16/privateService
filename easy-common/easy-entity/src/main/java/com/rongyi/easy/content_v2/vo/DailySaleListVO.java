@@ -28,6 +28,7 @@ public class DailySaleListVO implements Serializable {
     /**图片*/
     private String dailyPic;
 
+
     public Integer getType() {
         return type;
     }

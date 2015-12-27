@@ -18,7 +18,7 @@ public class DailySaleVO implements Serializable {
     private List<DailySaleListVO> dailySaleList;
 
     public Long getNowDate() {
-        return this.nowDate == null ? new Date().getTime() : this.getNowDate() ;
+        return this.nowDate == null ? new Date().getTime() : this.nowDate ;
     }
 
     public void setNowDate(Long nowDate) {
