@@ -23,6 +23,7 @@ public class BenefitListVO implements Serializable {
     private String publishEndAt;
     private String title;
     private String subtitle;
+    private String templateImagePixel;
 
 
     public Integer getId() {
@@ -121,6 +122,14 @@ public class BenefitListVO implements Serializable {
         this.subtitle = subtitle;
     }
 
+    public String getTemplateImagePixel() {
+        return templateImagePixel;
+    }
+
+    public void setTemplateImagePixel(String templateImagePixel) {
+        this.templateImagePixel = templateImagePixel;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -136,6 +145,7 @@ public class BenefitListVO implements Serializable {
                 .append("publishEndAt", publishEndAt)
                 .append("title", title)
                 .append("subtitle", subtitle)
+                .append("templateImagePixel", templateImagePixel)
                 .toString();
     }
 }
