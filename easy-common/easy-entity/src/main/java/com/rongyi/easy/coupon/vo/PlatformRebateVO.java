@@ -15,7 +15,7 @@ public class PlatformRebateVO implements Serializable {
 
     public final static String UNUSABLE_REASON_SCOPE = "未满足使用范围条件";
 
-    public final static String UNUSABLE_REASON_PRICE = "差d%元可用该券";
+    public final static String UNUSABLE_REASON_PRICE = "差%.2f元可用该券";
 
     /**
      * 券id
