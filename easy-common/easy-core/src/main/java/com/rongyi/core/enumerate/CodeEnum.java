@@ -180,9 +180,9 @@ public enum CodeEnum {
     ERROR_OFFLINE_NOTICE("1073006",					"公告已强制下线"),
     
     //操作权限错误(BO：分公司、SM：店长、SG：导购)
-    ERROR_AUTH_BO_SHOP_UP("1101101",				"分公司只能上架分同一个店铺的商品"),
-    ERROR_AUTH_BO_SHOP_DOWN("1101102",				"分公司只能下架分同一个店铺的商品"),
-    ERROR_AUTH_BO_SHOP_EDIT("1101103",				"分公司只能修改分同一个店铺的商品"),
+    ERROR_AUTH_BO_SHOP_UP("1101101",				"分公司只能上架分公司同一个店铺的商品"),
+    ERROR_AUTH_BO_SHOP_DOWN("1101102",				"分公司只能下架分公司同一个店铺的商品"),
+    ERROR_AUTH_BO_SHOP_EDIT("1101103",				"分公司只能修改分公司同一个店铺的商品"),
 	ERROR_AUTH_SM_SHOP_UP("1101104",				"店长只能上架所属店铺的商品"),
 	ERROR_AUTH_SM_SHOP_DOWN("1101105",				"店长只能下架所属店铺的商品"),
 	ERROR_AUTH_SM_SHOP_EDIT("1101106",				"店长只能修改所属店铺的商品"),
