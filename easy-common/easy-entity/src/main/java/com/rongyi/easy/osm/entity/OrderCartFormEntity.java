@@ -1,7 +1,5 @@
 package com.rongyi.easy.osm.entity;
 
-import net.sf.json.JSONObject;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -53,7 +51,7 @@ public class OrderCartFormEntity implements Serializable {
 
     private byte isAlert;//是否已发送支付提醒 (0否 1是)
 
-    private byte payChannel;////1支付宝网页  3支付宝app  5微信
+    private byte payChannel;//1支付宝网页  3支付宝app  5微信
 
     public byte getIsAlert() {
         return isAlert;
