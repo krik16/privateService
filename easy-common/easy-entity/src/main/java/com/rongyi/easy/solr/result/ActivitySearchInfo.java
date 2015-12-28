@@ -1,10 +1,10 @@
 package com.rongyi.easy.solr.result;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class ActivitySearchInfo implements Serializable {
 
@@ -45,6 +45,7 @@ public class ActivitySearchInfo implements Serializable {
 	private List<Integer> afterSaleService;//售后服务
 
 	private Integer payDownTime; //支付剩余时间(单位是秒)
+	private List<String	> customCategoryIds; //卡券对应店铺的自定义分类
 
 	/**
 	 * 使用限制
@@ -325,6 +326,20 @@ public class ActivitySearchInfo implements Serializable {
 
 	public void setPayDownTime(Integer payDownTime) {
 		this.payDownTime = payDownTime;
+	}
+
+	/**
+	 * @return the customCategoryIds
+	 */
+	public List<String> getCustomCategoryIds() {
+		return customCategoryIds;
+	}
+
+	/**
+	 * @param customCategoryIds the customCategoryIds to set
+	 */
+	public void setCustomCategoryIds(List<String> customCategoryIds) {
+		this.customCategoryIds = customCategoryIds;
 	}
 
 	@Override
