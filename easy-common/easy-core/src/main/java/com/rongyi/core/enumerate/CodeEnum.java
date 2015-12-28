@@ -197,7 +197,11 @@ public enum CodeEnum {
 	ERROR_AUTH_SM_LEVEL_EDIT("1101115",				"此商品只允许店长及以上级别修改"),
 	ERROR_AUTH_SG_LEVEL_UP("1101116",				"此商品只允许导购及以上级别上架"),
 	ERROR_AUTH_SG_LEVEL_DOWN("1101117",				"此商品只允许导购及以上级别下架"),
-	ERROR_AUTH_SG_LEVEL_EDIT("1101118",				"此商品只允许导购及以上级别修改");
+	ERROR_AUTH_SG_LEVEL_EDIT("1101118",				"此商品只允许导购及以上级别修改"),
+	
+	ERROR_ROLE_BO_EDIT("1201101", 					"你无权限操作，如需修改请联系分公司管理员"),
+	ERROR_ROLE_SG_EDIT("1201102", 					"你无权限操作，如需修改请联系导购"),
+	ERROR_ROLE_SM_EDIT("1201103", 					"你无权限操作，如需修改请联系店长");
 	
     private String code; 
     private String message; 
