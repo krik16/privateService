@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-
 import net.sf.json.JSONObject;
 
 public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity>{
@@ -183,7 +182,7 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private BigDecimal scoreAmount;//rebate_amount - 积分
 
     private List<OrderDetailFormEntity> detailOrderList;
-    private List<OrderFormExtraEntity> orderExtra;
+    private OrderFormExtraEntity orderExtra;
 
     public Byte getIsAlert() {
         return isAlert;
@@ -210,11 +209,11 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
         this.jsonDiscountInfo = jsonDiscountInfo;
     }
 
-    public List<OrderFormExtraEntity> getOrderExtra() {
+    public OrderFormExtraEntity getOrderExtra() {
         return orderExtra;
     }
 
-    public void setOrderExtra(List<OrderFormExtraEntity> orderExtra) {
+    public void setOrderExtra(OrderFormExtraEntity orderExtra) {
         this.orderExtra = orderExtra;
     }
 
