@@ -46,6 +46,36 @@ public class OrderDetailModelParam implements Serializable {
 	private Integer hongBaoNum = 0;// 可使用红包数量
 	
 	private String supportWay;//1仅支持自提 2仅支持快递 3都支持
+	
+	private String couponCode;//红包券码
+	
+	private String couponName;//红包名称
+	
+	private Double discount;// 红包抵扣金额
+
+	public String getCouponCode() {
+		return couponCode;
+	}
+
+	public void setCouponCode(String couponCode) {
+		this.couponCode = couponCode;
+	}
+
+	public String getCouponName() {
+		return couponName;
+	}
+
+	public void setCouponName(String couponName) {
+		this.couponName = couponName;
+	}
+
+	public Double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Double discount) {
+		this.discount = discount;
+	}
 
 	public String getSupportWay() {
 		if(supportCourierDeliver && supportSelfPickup){
