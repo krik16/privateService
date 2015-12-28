@@ -183,6 +183,7 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private BigDecimal scoreAmount;//rebate_amount - 积分
 
     private List<OrderDetailFormEntity> detailOrderList;
+    private List<OrderFormExtraEntity> orderExtra;
 
     public Byte getIsAlert() {
         return isAlert;
@@ -207,6 +208,14 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
 
     public void setJsonDiscountInfo(JSONObject jsonDiscountInfo) {
         this.jsonDiscountInfo = jsonDiscountInfo;
+    }
+
+    public List<OrderFormExtraEntity> getOrderExtra() {
+        return orderExtra;
+    }
+
+    public void setOrderExtra(List<OrderFormExtraEntity> orderExtra) {
+        this.orderExtra = orderExtra;
     }
 
     /**
