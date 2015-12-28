@@ -5,6 +5,7 @@ package com.rongyi.easy.rmmm.param;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import com.rongyi.easy.malllife.param.MalllifeBaseParam;
 
@@ -27,22 +28,14 @@ public class OrderModelForCartParam  extends MalllifeBaseParam implements Serial
 	
 	private List<Integer> detailModelIds;//要删除的或修改的子模板id集合
 	
-	public class CartParam implements Serializable{
-		
-		private List<Integer> shopCartIds;//购物车id集合
+	private Map<String,String> detailModelMap;// key=子模板id value=红包券码
 
-		public List<Integer> getShopCartIds() {
-			return shopCartIds;
-		}
+	public Map<String, String> getDetailModelMap() {
+		return detailModelMap;
+	}
 
-		public void setShopCartIds(List<Integer> shopCartIds) {
-			this.shopCartIds = shopCartIds;
-		}
-
-		@Override
-		public String toString() {
-			return "CartParam [shopCartIds=" + shopCartIds + "]";
-		}
+	public void setDetailModelMap(Map<String, String> detailModelMap) {
+		this.detailModelMap = detailModelMap;
 	}
 
 	public List<CartParam> getShopCart() {
