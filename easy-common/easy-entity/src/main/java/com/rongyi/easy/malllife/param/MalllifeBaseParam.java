@@ -9,6 +9,8 @@ package com.rongyi.easy.malllife.param;/*
  *
  */
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 
 public class MalllifeBaseParam implements Serializable {
@@ -60,5 +62,15 @@ public class MalllifeBaseParam implements Serializable {
     public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
     }
-    
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("jsessionid", jsessionid)
+                .append("appVersion", appVersion)
+                .append("appType", appType)
+                .append("currentPage", currentPage)
+                .append("pageSize", pageSize)
+                .toString();
+    }
 }

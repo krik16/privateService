@@ -30,4 +30,13 @@ public interface ROAHomePageContentService {
      * @return
      */
     List<PositonBuyer> findHomePageBuyerLive(HomePageParam param);
+
+    /**
+     * 根据城市与用户查询新版首页配置信息
+     *
+     * @param param
+     * @return
+     */
+
+    ResponseVO findHomePageContentNewBy(HomePageParam param);
 }

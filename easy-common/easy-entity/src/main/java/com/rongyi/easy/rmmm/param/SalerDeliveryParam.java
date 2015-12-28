@@ -22,6 +22,16 @@ public class SalerDeliveryParam implements Serializable {
 
 	private String ticketPicList;// 小票上传的图片凭证,用“;”隔开
 
+	private Integer userId;//卖家用户id
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
 	public String getType() {
 		return type;
 	}
