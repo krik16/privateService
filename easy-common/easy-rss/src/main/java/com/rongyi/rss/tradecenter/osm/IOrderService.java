@@ -6,6 +6,7 @@ import com.rongyi.easy.rmmm.param.OrderDealedParam;
 import com.rongyi.easy.rmmm.param.RequestPaymentParam;
 import com.rongyi.easy.rmmm.param.SalerDeliveryParam;
 import com.rongyi.easy.rmmm.param.SubmitOrderParam;
+import com.rongyi.easy.rmmm.param.user.OrderAddressParam;
 
 import java.util.List;
 
@@ -117,15 +118,8 @@ public interface IOrderService {
 
 	/**
 	 * 修改买家收货地址
-	 * @param orderNo 订单号
-	 * @param city 城市
-	 * @param province 省市
-	 * @param district 区县
-	 * @param address 具体地址
-	 * @param name 收货人名称
-	 * @param phone 收货人手机
+	 * @param param
 	 * @return ResponseVO
 	 */
-	ResponseVO changeBuyerAddress(String orderNo,String city,String province,
-								  String district,String address,String name,String phone);
+	ResponseVO changeBuyerAddress(OrderAddressParam param);
 }

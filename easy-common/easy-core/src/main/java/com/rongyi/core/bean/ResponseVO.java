@@ -1,12 +1,13 @@
 package com.rongyi.core.bean;
 
+import java.io.Serializable;
+
 import net.sf.json.JSONObject;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-
-import java.io.Serializable;
 
 /*
 使用示例说明：
@@ -97,6 +98,17 @@ public class ResponseVO implements java.io.Serializable {
      */
     public static ResponseVO failure(int errno, String msg) {
         return new ResponseVO(new Meta(errno, msg), null);
+    }
+    
+    /**
+     * 失败码/失败信息回值对象
+     *
+     * @param errno
+     * @param msg
+     * @return ResponseData
+     */
+    public static <T> ResponseVO failure(int errno, String msg, T data) {
+        return new ResponseVO(new Meta(errno, msg), new Result(data, null));
     }
 
 
