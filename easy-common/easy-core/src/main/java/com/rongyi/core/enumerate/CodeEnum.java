@@ -180,28 +180,31 @@ public enum CodeEnum {
     ERROR_OFFLINE_NOTICE("1073006",					"公告已强制下线"),
     
     //操作权限错误(BO：分公司、SM：店长、SG：导购)
+    //分公司
     ERROR_AUTH_BO_SHOP_UP("1101101",				"分公司只能上架分公司同一个店铺的商品"),
     ERROR_AUTH_BO_SHOP_DOWN("1101102",				"分公司只能下架分公司同一个店铺的商品"),
     ERROR_AUTH_BO_SHOP_EDIT("1101103",				"分公司只能修改分公司同一个店铺的商品"),
+    ERROR_AUTH_BO_OWNER_EDIT("1101110",				"分公司只能修改自己创建的商品"),
+	//店长
+	ERROR_AUTH_SM_OWNER_EDIT("1101111",				"店长只能修改自己创建的商品"),
 	ERROR_AUTH_SM_SHOP_UP("1101104",				"店长只能上架所属店铺的商品"),
 	ERROR_AUTH_SM_SHOP_DOWN("1101105",				"店长只能下架所属店铺的商品"),
 	ERROR_AUTH_SM_SHOP_EDIT("1101106",				"店长只能修改所属店铺的商品"),
+	ERROR_AUTH_SM_LEVEL_UP("1101113",				"此商品只允许店长以上级别上架"),
+	ERROR_AUTH_SM_LEVEL_DOWN("1101114",				"此商品只允许店长以上级别下架"),
+	ERROR_AUTH_SM_LEVEL_EDIT("1101115",				"此商品只允许店长以上级别修改"),
+	//导购
+	ERROR_AUTH_SG_OWNER_EDIT("1101112",				"导购只能修改自己创建的商品"),
+	ERROR_AUTH_SG_LEVEL_UP("1101116",				"此商品只允许导购以上级别上架"),
+	ERROR_AUTH_SG_LEVEL_DOWN("1101117",				"此商品只允许导购以上级别下架"),
+	ERROR_AUTH_SG_LEVEL_EDIT("1101118",				"此商品只允许导购以上级别修改"),
 	ERROR_AUTH_SG_SHOP_UP("1101107",				"导购只能上架自己店铺的商品"),
 	ERROR_AUTH_SG_SHOP_DOWN("1101108",				"导购只能下架自己店铺的商品"),
 	ERROR_AUTH_SG_SHOP_EDIT("1101109",				"导购只能修改自己店铺的商品"),
-	ERROR_AUTH_BO_OWNER_EDIT("1101110",				"分公司只能修改自己创建的商品"),
-	ERROR_AUTH_SM_OWNER_EDIT("1101111",				"店长只能修改自己创建的商品"),
-	ERROR_AUTH_SG_OWNER_EDIT("1101112",				"导购只能修改自己创建的商品"),
-	ERROR_AUTH_SM_LEVEL_UP("1101113",				"此商品只允许店长及以上级别上架"),
-	ERROR_AUTH_SM_LEVEL_DOWN("1101114",				"此商品只允许店长及以上级别下架"),
-	ERROR_AUTH_SM_LEVEL_EDIT("1101115",				"此商品只允许店长及以上级别修改"),
-	ERROR_AUTH_SG_LEVEL_UP("1101116",				"此商品只允许导购及以上级别上架"),
-	ERROR_AUTH_SG_LEVEL_DOWN("1101117",				"此商品只允许导购及以上级别下架"),
-	ERROR_AUTH_SG_LEVEL_EDIT("1101118",				"此商品只允许导购及以上级别修改"),
 	
-	ERROR_ROLE_BO_EDIT("1201101", 					"你无权限操作，如需修改请联系分公司管理员"),
-	ERROR_ROLE_SG_EDIT("1201102", 					"你无权限操作，如需修改请联系导购"),
-	ERROR_ROLE_SM_EDIT("1201103", 					"你无权限操作，如需修改请联系店长");
+	ERROR_ROLE_BO_EDIT("1201101", 					"您无权限操作，如需修改请联系分公司管理员"),
+	ERROR_ROLE_SG_EDIT("1201102", 					"您无权限操作，如需修改请联系导购"),
+	ERROR_ROLE_SM_EDIT("1201103", 					"您无权限操作，如需修改请联系店长");
 	
     private String code; 
     private String message; 
