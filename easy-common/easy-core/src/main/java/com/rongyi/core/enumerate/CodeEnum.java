@@ -1,5 +1,7 @@
 package com.rongyi.core.enumerate;
 
+import java.util.HashMap;
+
 import com.rongyi.core.sms.SmsConfig;
 
 /**
@@ -215,5 +217,24 @@ public enum CodeEnum {
     
     public String getMessage(){
         return message;
+    }
+    
+    /**
+     * Code枚举字典
+     */
+    private static HashMap<String, CodeEnum> codeEnumDic = new HashMap<String, CodeEnum>();
+    static {
+	    for (CodeEnum ce : CodeEnum.values()) {
+			codeEnumDic.put(ce.getActionCode(), ce);
+		}
+    }
+    
+    /**
+     * 根据Code获取CodeEnum对象
+     * @param codeCode
+     * @return
+     */
+    public static CodeEnum getCodeEnum(String code) {
+    	return codeEnumDic.get(code);
     }
 }
