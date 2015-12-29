@@ -30,18 +30,21 @@ public class CommodityBuyerVO implements Serializable{
 	private boolean offlineRefund;// 线下退款
 	private boolean onlineRefund;// 线上退款
 	private List<String> shopIM;// 店铺可用IM账号
-	
 	private String bullId;//创建人
-	
 	private Double distance = 0.0; //距离
-
 	private int saleShopCount; //销售店铺数，小于等于1为单店销售，大于1为多店销售
-
 	private boolean watching = false; //是否正在看
-
 	private List<Double> location; //经纬度
-
 	private String systemNumber; //商品SPU
+	private String activityType;	//活动状态[闪购1、特卖2]
+
+	public String getActivityType() {
+		return activityType;
+	}
+
+	public void setActivityType(String activityType) {
+		this.activityType = activityType;
+	}
 
 	public String getSystemNumber() {
 		return systemNumber;
@@ -261,6 +264,16 @@ public class CommodityBuyerVO implements Serializable{
 			this.commodityAppStatus = this.commodityStatus;
 		}
 		this.systemNumber = commodity.getSystemNumber();
+		
+		//闪购 || 特卖
+		if (commodity.getSaleId() != null) {
+			this.activityType = "2";
+		} else if (commodity.getFlashSaleId() != null) {
+			this.activityType = "1";
+		} else {
+			//其他
+			this.activityType = "0";
+		}
 	}
 	
 	public List<String> getCommodityPicList() {

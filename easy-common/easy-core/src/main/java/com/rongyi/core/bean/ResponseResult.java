@@ -35,9 +35,21 @@ public class ResponseResult implements java.io.Serializable {
 	 * @return
 	 */
 	public ResponseResult error(String errorCode, String message) {
+		return error(errorCode, message, null);
+	}
+	
+	/**
+	 * Error 
+	 * @param errorCode	错误码
+	 * @param message	消息
+	 * @param info		info
+	 * @return
+	 */
+	public ResponseResult error(String errorCode, String message, Object info) {
 		this.success = false;
 		this.code = errorCode;
 		this.message = message;
+		this.info = info;
 		return this;
 	}
 	
