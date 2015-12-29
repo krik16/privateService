@@ -20,52 +20,52 @@ public class ResponseResult implements java.io.Serializable {
 	/** 提升信息 **/
 	private String message;
 
-	/**
-	 * 构造函数 - 默认success
-	 */
-	public ResponseResult() {
-		this.success = true;
-		this.code = SUCCESS;
-	}
-	
-	/**
-	 * Error 
-	 * @param errorCode	错误码
-	 * @param message	消息
-	 * @return
-	 */
-	public ResponseResult error(String errorCode, String message) {
-		return error(errorCode, message, null);
-	}
-	
-	/**
-	 * Error 
-	 * @param errorCode	错误码
-	 * @param message	消息
-	 * @param info		info
-	 * @return
-	 */
-	public ResponseResult error(String errorCode, String message, Object info) {
-		this.success = false;
-		this.code = errorCode;
-		this.message = message;
-		this.info = info;
-		return this;
-	}
-	
-	/**
-	 * Success 
-	 * @param info		返回值信息
-	 * @param message	消息
-	 * @return
-	 */
-	public ResponseResult Success(Object info, String message) {
-		this.success = true;
-		this.code = SUCCESS;
-		this.message = message;
-		this.info = info;
-		return this;
-	}
+//	/**
+//	 * 构造函数 - 默认success
+//	 */
+//	public ResponseResult() {
+//		this.success = true;
+//		this.code = SUCCESS;
+//	}
+//	
+//	/**
+//	 * Error 
+//	 * @param errorCode	错误码
+//	 * @param message	消息
+//	 * @return
+//	 */
+//	public ResponseResult error(String errorCode, String message) {
+//		return error(errorCode, message, null);
+//	}
+//	
+//	/**
+//	 * Error 
+//	 * @param errorCode	错误码
+//	 * @param message	消息
+//	 * @param info		info
+//	 * @return
+//	 */
+//	public ResponseResult error(String errorCode, String message, Object info) {
+//		this.success = false;
+//		this.code = errorCode;
+//		this.message = message;
+//		this.info = info;
+//		return this;
+//	}
+//	
+//	/**
+//	 * Success 
+//	 * @param info		返回值信息
+//	 * @param message	消息
+//	 * @return
+//	 */
+//	public ResponseResult Success(Object info, String message) {
+//		this.success = true;
+//		this.code = SUCCESS;
+//		this.message = message;
+//		this.info = info;
+//		return this;
+//	}
 
 	/**
 	 * 判断成功
