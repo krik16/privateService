@@ -7,6 +7,7 @@ import java.util.List;
 import com.rongyi.easy.mcmc.Commodity;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class CommodityBuyerVO implements Serializable{
 
@@ -377,26 +378,41 @@ public class CommodityBuyerVO implements Serializable{
 
 	@Override
 	public String toString() {
-		return "CommodityBuyerVO [shopName=" + shopName + ", commodityPicList="
-				+ commodityPicList + ", commodityId=" + commodityId
-				+ ", commodityCode=" + commodityCode + ", commodityStock="
-				+ commodityStock + ", commodityStatus=" + commodityStatus
-				+ ", commodityAppStatus=" + commodityAppStatus
-				+ ", commodityType=" + commodityType
-				+ ", supportCourierDeliver=" + supportCourierDeliver
-				+ ", supportSelfPickup=" + supportSelfPickup + ", shopIM="
-				+ shopIM + ", bullId=" + bullId + ", distance=" + distance
-				+ ", commodityOPriceMax=" + commodityOPriceMax
-				+ ", commodityOPriceMin=" + commodityOPriceMin
-				+ ", commodityCPriceMax=" + commodityCPriceMax
-				+ ", commodityCPriceMin=" + commodityCPriceMin
-				+ ", commodityOPOfLCP=" + commodityOPOfLCP
-				+ ", commodityBrandName=" + commodityBrandName
-				+ ", commodityPostage=" + commodityPostage
-				+ ", commodityDescription=" + commodityDescription
-				+ ", commodityName=" + commodityName + ", shopId=" + shopId + ", saleShopCount=" + saleShopCount
-				+ ", watching=" + watching + ", location=" + location.toString() + ", systemNumber=" + systemNumber
-				+ ", shopMid=" + shopMid + ", isCollected=" + isCollected + "]";
+		return new ToStringBuilder(this)
+				.append("shopName", shopName)
+				.append("commodityPicList", commodityPicList)
+				.append("commodityId", commodityId)
+				.append("commodityCode", commodityCode)
+				.append("commodityStock", commodityStock)
+				.append("commodityStatus", commodityStatus)
+				.append("commodityAppStatus", commodityAppStatus)
+				.append("commodityType", commodityType)
+				.append("supportCourierDeliver", supportCourierDeliver)
+				.append("supportSelfPickup", supportSelfPickup)
+				.append("offlinePayment", offlinePayment)
+				.append("onlinePayment", onlinePayment)
+				.append("offlineRefund", offlineRefund)
+				.append("onlineRefund", onlineRefund)
+				.append("shopIM", shopIM)
+				.append("bullId", bullId)
+				.append("distance", distance)
+				.append("saleShopCount", saleShopCount)
+				.append("watching", watching)
+				.append("location", location)
+				.append("systemNumber", systemNumber)
+				.append("activityType", activityType)
+				.append("commodityOPriceMax", commodityOPriceMax)
+				.append("commodityOPriceMin", commodityOPriceMin)
+				.append("commodityCPriceMax", commodityCPriceMax)
+				.append("commodityCPriceMin", commodityCPriceMin)
+				.append("commodityOPOfLCP", commodityOPOfLCP)
+				.append("commodityBrandName", commodityBrandName)
+				.append("commodityPostage", commodityPostage)
+				.append("commodityDescription", commodityDescription)
+				.append("commodityName", commodityName)
+				.append("shopId", shopId)
+				.append("shopMid", shopMid)
+				.append("isCollected", isCollected)
+				.toString();
 	}
-
 }
