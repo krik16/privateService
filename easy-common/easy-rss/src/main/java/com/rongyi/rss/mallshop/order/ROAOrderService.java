@@ -3,6 +3,7 @@ package com.rongyi.rss.mallshop.order;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.rmmm.param.user.OrderAddressParam;
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
@@ -254,7 +255,6 @@ public interface ROAOrderService {
 	 * @param phone 收货人手机
 	 * @return ResponseVO
 	 */
-	ResponseVO changeBuyerAddress(String orderNo,String city,String province,
-								  String district,String address,String name,String phone);
+	ResponseVO changeBuyerAddress(OrderAddressParam orderAddressParam);
 
 }

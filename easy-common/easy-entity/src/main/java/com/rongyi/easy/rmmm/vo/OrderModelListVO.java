@@ -23,8 +23,6 @@ public class OrderModelListVO implements Serializable{
 	
 	private Integer totalCommodityNum;//订单sku数量
 	
-	private String totalOrderPrice;//订单价格
-	
 	private String paymentWaitMax;// 付款超时,取消订单的时长
 	
 	private Integer rebateNum = 0;// 可使用抵扣券数量
@@ -53,14 +51,6 @@ public class OrderModelListVO implements Serializable{
 		this.totalCommodityNum = totalCommodityNum;
 	}
 
-	public String getTotalOrderPrice() {
-		return totalOrderPrice;
-	}
-
-	public void setTotalOrderPrice(String totalOrderPrice) {
-		this.totalOrderPrice = totalOrderPrice;
-	}
-
 	public String getPaymentWaitMax() {
 		return paymentWaitMax;
 	}
@@ -80,7 +70,7 @@ public class OrderModelListVO implements Serializable{
 	@Override
 	public String toString() {
 		return "OrderModelListVO [orderModelList=" + orderModelList + ", supportWay=" + supportWay + ", totalCommodityNum="
-				+ totalCommodityNum + ", totalOrderPrice=" + totalOrderPrice + ", paymentWaitMax=" + paymentWaitMax
+				+ totalCommodityNum + ", paymentWaitMax=" + paymentWaitMax
 				+ ", rebateNum=" + rebateNum + "]";
 	}
 

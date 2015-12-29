@@ -133,6 +133,8 @@ public class ResponseVO implements java.io.Serializable {
         this.meta = new Meta(errno, msg);
     }
 
+    public void setMeta(Meta meta) {this.meta=meta;}
+
     public Result getResult() {
         return result;
     }
@@ -156,6 +158,9 @@ public class ResponseVO implements java.io.Serializable {
             return page;
         }
 
+        public void setPage(Page page) {
+            this.page = page;
+        }
 
         public T getData() {
             return data;
@@ -182,6 +187,14 @@ public class ResponseVO implements java.io.Serializable {
 
         private Meta(int errno, String msg) {
             this.errno = errno;
+            this.msg = msg;
+        }
+
+        public void setErrno(int errno) {
+            this.errno = errno;
+        }
+
+        public void setMsg(String msg) {
             this.msg = msg;
         }
 
@@ -238,6 +251,22 @@ public class ResponseVO implements java.io.Serializable {
             this.currentPage = currentPage;
             this.pageSize = pageSize;
             this.totalCount = totalCount;
+        }
+
+        public void setCurrentPage(Integer currentPage) {
+            this.currentPage = currentPage;
+        }
+
+        public void setPageSize(Integer pageSize) {
+            this.pageSize = pageSize;
+        }
+
+        public void setTotalCount(Integer totalCount) {
+            this.totalCount = totalCount;
+        }
+
+        public void setTotalPage(Integer totalPage) {
+            this.totalPage = totalPage;
         }
 
         public Integer getCurrentPage() {
