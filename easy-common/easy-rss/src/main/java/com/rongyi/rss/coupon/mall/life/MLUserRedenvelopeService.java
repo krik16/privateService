@@ -151,6 +151,16 @@ public interface MLUserRedenvelopeService {
      * @author lqy
      */
     int getUserRedPacketCount(RebateAndRedenvelopParam param);
+    /**
+     * 判断是否可以继续砍价(之前领用的红包是否已经使用)
+     * @param couponOrderParam
+     * @return
+     */
     boolean checkEnvelopeIsUse(CouponOrderParam couponOrderParam);
+    /**
+     * 发送砍价红包
+     * @param couponOrderParam
+     * @return
+     */
     boolean sendEnvelope(CouponOrderParam couponOrderParam);
 }
