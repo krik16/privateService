@@ -1,0 +1,81 @@
+package com.rongyi.easy.mallshop.param;/*
+ * Copyright (C),上海容易网电子商务有限公司
+ * Author:  俞志坚
+ * Description:  
+ * time:  2015/11/30
+ * History: 变更记录
+ * <author>           <time>             <version>        <desc>
+ * 俞志坚             2015/11/30              1.0            创建文件
+ *
+ */
+
+import java.io.Serializable;
+
+public class LogParam implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+   private  String page;//[页面]
+    private  String  forum;//[版块]
+    private  String position;//[位置]
+    private  String content;//[内容]
+    private  String clickNum;//[点击量]
+    private  String type;//[展示、点击、debug类型等]
+    private  String timeStamp;//点击时间戳
+
+    public String getPage() {
+        return page;
+    }
+
+    public void setPage(String page) {
+        this.page = page;
+    }
+
+    public String getForum() {
+        return forum;
+    }
+
+    public void setForum(String forum) {
+        this.forum = forum;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getClickNum() {
+        return clickNum;
+    }
+
+    public void setClickNum(String clickNum) {
+        this.clickNum = clickNum;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+}

@@ -42,7 +42,7 @@ public class ResponseResult implements java.io.Serializable {
 	 * Error 
 	 * @param errorCode	错误码
 	 * @param message	消息
-	 * @param info		内容对象info
+	 * @param info		info
 	 * @return
 	 */
 	public ResponseResult error(String errorCode, String message, Object info) {
