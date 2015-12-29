@@ -69,4 +69,11 @@ public interface ShopSolrService {
 	 * @return
 	 */
 	public boolean updateShopIndex(ShopDocument shopDocument);
+
+	/**
+	 * 根据商场ID || 店铺名称 获取店铺列表
+	 * @param param
+	 * @return
+	 */
+	public ShopSearchIdsResult getShopListByName(ShopSearchParam param);
 }
