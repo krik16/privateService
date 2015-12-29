@@ -59,6 +59,8 @@
 	<dubbo:reference interface="com.rongyi.rss.tradecenter.ProxyUserCouponService" id="proxyUserCouponService"  version="${dubbo.version}" check="false"/>
 	<!-- 优惠券模板信息 -->
 	<dubbo:reference interface="com.rongyi.rss.coupon.RoaCouponService" id="roaCouponService"  version="${dubbo.version}" check="false"/>
+	<!-- 优惠券模板信息 -->
+	<dubbo:reference interface=" com.rongyi.rss.tradecenter.osm.IOrderCartService" id="iOrderCartService"  version="${dubbo.version}" check="false"/>
 	
 	<dubbo:reference interface="com.rongyi.rss.tradecenter.RoaProxyUserCouponService" id="roaProxyUserCouponService"  version="${dubbo.version}" check="false"/>
 </beans>  

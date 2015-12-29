@@ -7,6 +7,7 @@ import com.rongyi.easy.malllife.vo.UserInfoVO;
 import com.rongyi.easy.mcmc.vo.CommodityWebVO;
 import com.rongyi.easy.osm.entity.OrderDetailFormEntity;
 import com.rongyi.easy.osm.entity.OrderFormEntity;
+import com.rongyi.easy.osm.vo.OrderCartFormVO;
 import com.rongyi.easy.rmmm.entity.MallCooperateEntity;
 import com.rongyi.easy.rmmm.entity.ShopInfoEntity;
 import com.rongyi.easy.rmmm.vo.OrderManagerVO;
@@ -21,6 +22,8 @@ import com.rongyi.rss.mallshop.order.ROAOrderService;
 import com.rongyi.rss.mallshop.shop.ROACooperationMallService;
 import com.rongyi.rss.mallshop.shop.ROAShopService;
 
+import com.rongyi.rss.tradecenter.osm.IOrderCartService;
+import com.rongyi.tms.moudle.vo.ParentOrderCartVO;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -33,7 +36,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
@@ -75,6 +77,68 @@ public class OrderManagerController extends BaseController {
 
 	@Autowired
 	ROACommodityService commodityService;
+
+	@Autowired
+	IOrderCartService iOrderCartService;
+
+	@RequestMapping("/orderCartSearch")
+	public String orderCartSearch() {
+		return "order/order_cart_search";
+	}
+
+	@RequestMapping("/ajaxOrderCartList")
+	public String ajaxOrderCartList(ModelMap model, String paramsJson) {
+		try {
+			Map paramsMap = JsonUtil.getMapFromJson(paramsJson);
+			if (paramsMap.containsKey("userAccount")){
+				String phone = paramsMap.get("userAccount").toString();
+				UserInfoVO userInfo = roaMalllifeUserService.getByPhone(phone);
+				if (userInfo==null){
+					model.addAttribute("orderCartForms", null);
+					model.addAttribute("currpage", 1);
+					model.addAttribute("rowCont", 0);
+					return "order/order_cart_list";
+				}
+				paramsMap.put("buyerId", userInfo.getUserId());
+			}
+			PagingVO<OrderCartFormVO> page = iOrderCartService.searchListByMap(paramsMap);
+			int currPage = paramsMap.containsKey("currPage")?Integer.valueOf(paramsMap.get("currPage").toString()):1;
+			List<ParentOrderCartVO> orderCartVOs = convertToOrderCart(page.getDataList());
+			model.addAttribute("orderCartForms", orderCartVOs);
+			model.addAttribute("currpage", currPage);
+			model.addAttribute("rowCont", page.getRowCnt());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "order/order_cart_list";
+	}
+
+	private List<ParentOrderCartVO> convertToOrderCart(List<OrderCartFormVO> dataList) throws Exception {
+		if (CollectionUtils.isEmpty(dataList)){
+			return null;
+		}
+		List<ParentOrderCartVO> orderCartVOs = new ArrayList<>();
+		for (OrderCartFormVO orderCartVO : dataList){
+			ParentOrderCartVO orderCart = new ParentOrderCartVO();
+			orderCart.setId(orderCartVO.getId());
+			orderCart.setOrderNo(orderCartVO.getOrderNo());
+			orderCart.setRealAmount(orderCartVO.getRealAmount());
+			orderCart.setPayAmount(orderCartVO.getPayAmount());
+			orderCart.setStatus(orderCartVO.getStatus());
+			orderCart.setOrderSource(0);
+			orderCart.setPayChannel(orderCartVO.getPayChannel());
+			orderCart.setCreateAt(orderCartVO.getCreateAt());
+			orderCart.setPayAt(orderCartVO.getPayAt());
+			UserInfoVO userInfo = roaMalllifeUserService.getByUid(orderCartVO.getBuyerId());
+			if (userInfo!=null){
+				orderCart.setBuyerAccount(userInfo.getUserPhone());
+				orderCart.setBuyerPhone(userInfo.getUserPhone());
+				orderCart.setBuyerName(userInfo.getUserName());
+			}
+			orderCartVOs.add(orderCart);
+		}
+		return orderCartVOs;
+	}
 
 	@RequestMapping("/orderInfo")
 	public String orderInfo(String orderId, String module, ModelMap model, String type) {
@@ -142,7 +206,7 @@ public class OrderManagerController extends BaseController {
 
 
 	@RequestMapping("/infoDetails")
-	public String orderInfoDetail(String orderId, String module, String type, HttpServletRequest request, ModelMap model) {
+	public String orderInfoDetail(String orderId, String module, String type, ModelMap model) {
 		logger.info("==================== infoDetails ====================");
 		logger.info("orderId={}, module={}, type={}", orderId, module, type);
 
@@ -340,7 +404,7 @@ public class OrderManagerController extends BaseController {
 	}
 
 	private List<String> getIdFromUser(List<UserInfoVO> users) {
-		List<String> list = new ArrayList<String>();
+		List<String> list = new ArrayList<>();
 		for (UserInfoVO user : users) {
 			String userId;
 			if (user.getUserId() != null) {
@@ -417,9 +481,6 @@ public class OrderManagerController extends BaseController {
 			}
 			name = URLDecoder.decode(name, "utf-8");
 			mallId = URLDecoder.decode(mallId, "utf-8");
-			Map<String, Object> searchMap = new HashMap<>();
-			searchMap.put("mallId", mallId);
-			searchMap.put("name", name);
 			List<ShopInfoEntity> reList = roaShopService.getShopListByShopName(name, Integer.valueOf(mallId));
 			result.put("msg", reList);
 			result.put("status", 1);
@@ -478,9 +539,6 @@ public class OrderManagerController extends BaseController {
 
 	/**
 	 * 商品详情(暂时在这)
-	 * @param request
-	 * @param response
-	 * @param session
 	 * @param model
 	 * @param commodityId
 	 * @param shopId
@@ -488,8 +546,7 @@ public class OrderManagerController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/commodityDetail")
-	public String commodityDetail(HttpServletRequest request, HttpServletResponse response, HttpSession session,
-			ModelMap model, String commodityId, String shopId, String currpage) {
+	public String commodityDetail(ModelMap model, String commodityId, String shopId, String currpage) {
 		logger.info(">>>commodity detail");
 		try {
 			List<String> picList = commodityService.getCommodityPicList(commodityId);
