@@ -168,6 +168,19 @@ public class UserRedenvelope implements Serializable {
         this.activityName = activityName;
     }
 
+    public UserRedenvelope(String userId, String couponId, String couponCode, Integer discount, Integer status, Date receiveAt, Integer channel, Date validStartAt, Date validEndAt, String activityId, String activityName) {
+        this.userId = userId;
+        this.couponId = couponId;
+        this.couponCode = couponCode;
+        this.discount = discount;
+        this.status = status;
+        this.receiveAt = receiveAt;
+        this.channel = channel;
+        this.validStartAt = validStartAt;
+        this.validEndAt = validEndAt;
+        this.activityId = activityId;
+        this.activityName = activityName;
+    }
 
     public UserRedenvelope(String userId, String userName, String couponId, String couponCode, Integer discount, Integer status, String userAccount, Date receiveAt, Date useAt, Integer channel, String orderNo, Date validStartAt, Date validEndAt, String activityId, String activityName) {
         this.userId = userId;

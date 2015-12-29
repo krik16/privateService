@@ -53,6 +53,7 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	private String userDesc;//买手描述
 	private int flag=0;//操作参数 1升级功能
 	private int isUpdate = 0;  //操作参数  （==1直接修改未合作店长为已合作店长 ）
+	private int defaultAccount ;  //资金账号默认   1默认支付宝  2默认银行卡
 
 
 
@@ -308,4 +309,12 @@ public Integer getIdentity() {
 	}
 	public void setMerUserId(Integer merUserId) {
 		this.merUserId = merUserId;
-	}}
+	}
+	public int getDefaultAccount() {
+		return defaultAccount;
+	}
+	public void setDefaultAccount(int defaultAccount) {
+		this.defaultAccount = defaultAccount;
+	}
+	
+	}
