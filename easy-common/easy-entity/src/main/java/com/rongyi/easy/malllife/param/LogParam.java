@@ -23,6 +23,8 @@ public class LogParam implements Serializable {
     private  String type;//[展示、点击、debug类型等]
     private  String timeStamp;//点击时间戳
 
+    private String opRole;// 操作角色
+
     public String getPage() {
         return page;
     }
@@ -77,5 +79,13 @@ public class LogParam implements Serializable {
 
     public void setTimeStamp(String timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    public String getOpRole() {
+        return opRole;
+    }
+
+    public void setOpRole(String opRole) {
+        this.opRole = opRole;
     }
 }
