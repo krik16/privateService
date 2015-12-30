@@ -2,6 +2,7 @@ package com.rongyi.tms.web.controller;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.common.util.JsonUtil;
+import com.rongyi.easy.bsoms.entity.UserInfo;
 import com.rongyi.easy.coupon.vo.MMUserCouponVO;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
 import com.rongyi.easy.mcmc.vo.CommodityWebVO;
@@ -13,6 +14,7 @@ import com.rongyi.easy.rmmm.entity.ShopInfoEntity;
 import com.rongyi.easy.rmmm.vo.OrderManagerVO;
 import com.rongyi.easy.rmmm.vo.ParentOrderVO;
 import com.rongyi.easy.rmmm.vo.SonOrderVO;
+import com.rongyi.rss.bsoms.IUserInfoService;
 import com.rongyi.rss.coupon.mall.shop.MSUserCouponService;
 import com.rongyi.rss.malllife.roa.ROACommodityService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
@@ -22,6 +24,7 @@ import com.rongyi.rss.mallshop.order.ROAOrderService;
 import com.rongyi.rss.mallshop.shop.ROACooperationMallService;
 import com.rongyi.rss.mallshop.shop.ROAShopService;
 
+import com.rongyi.rss.solr.McmcCommoditySolrService;
 import com.rongyi.rss.tradecenter.osm.IOrderCartService;
 import com.rongyi.tms.moudle.vo.ParentOrderCartVO;
 import org.apache.commons.collections.CollectionUtils;
@@ -77,6 +80,11 @@ public class OrderManagerController extends BaseController {
 
 	@Autowired
 	IOrderCartService iOrderCartService;
+	@Autowired
+	McmcCommoditySolrService mcmcCommoditySolrService;
+
+	@Autowired
+	private IUserInfoService iUserInfoService;
 
 	@RequestMapping("/orderCartSearch")
 	public String orderCartSearch() {
@@ -351,7 +359,6 @@ public class OrderManagerController extends BaseController {
 			if (StringUtils.isNotBlank(status) && !"0".equals(status)) {
 				if ("6".equals(status)) {
 					searchMap.put("statusRoute", ">|<4,");
-//					searchMap.put("status", 5);
 				} else {
 					searchMap.put("status", status);
 				}
@@ -364,6 +371,23 @@ public class OrderManagerController extends BaseController {
 			}
 			if(StringUtils.isNotBlank(guideType)){
 				searchMap.put("guideType", guideType);
+			}
+			if(paramsMap.containsKey("commodityNo")){
+				searchMap.put("commodityIds", mcmcCommoditySolrService.selectCommodityIndexByNameCode(paramsMap.get("commodityNo").toString(), null));
+			}
+			if (paramsMap.containsKey("payChannel")){
+				searchMap.put("payChannel", paramsMap.get("payChannel").toString());
+			}
+			if (paramsMap.containsKey("orderCartNo")){
+				searchMap.put("orderCartNo", paramsMap.get("orderCartNo").toString());
+			}
+			if (paramsMap.containsKey("sellerAccount")){
+				Map<String, Object> map = new HashMap<>();
+				map.put("userAccount",paramsMap.get("sellerAccount").toString());
+				map.put("isDisabled", 0);
+				UserInfo userInfo = iUserInfoService.getUserByMap(map);
+				if (userInfo!=null)
+				searchMap.put("guideId",userInfo.getId());
 			}
 			PagingVO<OrderManagerVO> pagingVO = roaOrderFormService.searchListByMap(searchMap);
 			List<OrderManagerVO> orderForms = pagingVO.getDataList();
