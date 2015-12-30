@@ -40,10 +40,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 订单管理
@@ -89,7 +86,8 @@ public class OrderManagerController extends BaseController {
 	@RequestMapping("/ajaxOrderCartList")
 	public String ajaxOrderCartList(ModelMap model, String paramsJson) {
 		try {
-			Map paramsMap = JsonUtil.getMapFromJson(paramsJson);
+			logger.info("orderCart params = {}", paramsJson);
+			Map<String, Object> paramsMap = JsonUtil.getMapFromJson(paramsJson);
 			if (paramsMap.containsKey("userAccount")){
 				String phone = paramsMap.get("userAccount").toString();
 				UserInfoVO userInfo = roaMalllifeUserService.getByPhone(phone);
@@ -107,6 +105,18 @@ public class OrderManagerController extends BaseController {
 			model.addAttribute("orderCartForms", orderCartVOs);
 			model.addAttribute("currpage", currPage);
 			model.addAttribute("rowCont", page.getRowCnt());
+//			List<OrderCartFormVO> dataList = new ArrayList<>();
+//			OrderCartFormVO vo = new OrderCartFormVO();
+//			vo.setOrderNo("123321123");
+//			vo.setCreateAt(new Date());
+//			vo.setPayAt(new Date());
+//			vo.setPayChannel((byte) 5);
+//			vo.setPayAmount(new BigDecimal(100));
+//			dataList.add(vo);
+// 			List<ParentOrderCartVO> orderCartVOs = convertToOrderCart(dataList);
+			model.addAttribute("orderCartForms", orderCartVOs);
+			model.addAttribute("currpage", 1);
+			model.addAttribute("rowCont", 2);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
