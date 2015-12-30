@@ -159,7 +159,20 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private Integer devType;
 
     //0:未打款，1:对私(打款到导购虚拟账号)，2:对公(通过对账单结算)
-    private byte isPayVa;
+    private byte isPayVa;//0:未打款，1:对私(打款到导购虚拟账号)，2:对公(通过对账单结算)
+    /**
+     * 支付方式 1支付宝网页  3支付宝app  5微信
+     */
+    private byte payChannel;
+    private String orderCartNo;//购物车订单号
+
+    public byte getPayChannel() {
+        return payChannel;
+    }
+
+    public void setPayChannel(byte payChannel) {
+        this.payChannel = payChannel;
+    }
 
     private BigDecimal orderScoreDiscount = BigDecimal.ZERO;;//购物车订单积分分摊优惠金额
 

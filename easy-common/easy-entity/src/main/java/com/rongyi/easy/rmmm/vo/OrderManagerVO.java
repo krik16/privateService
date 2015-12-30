@@ -29,6 +29,15 @@ public class OrderManagerVO implements Serializable {
 	/** 折扣 */
 	private BigDecimal discountFee;
 	private Integer guideType;
+	private Byte payChannel;
+
+	public Byte getPayChannel() {
+		return payChannel;
+	}
+
+	public void setPayChannel(Byte payChannel) {
+		this.payChannel = payChannel;
+	}
 
 	public Integer getGuideType() {
 		return guideType;
