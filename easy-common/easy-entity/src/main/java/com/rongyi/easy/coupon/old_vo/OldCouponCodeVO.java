@@ -14,7 +14,12 @@ public class OldCouponCodeVO implements Serializable {
     private Double origPrice; //原价
     private Double currPrice; //现价
     private String thumbnail; //列表图
+    private String holderId;
 
+    private String holderType;
+    
+    private String holderName;
+    
     public String getActivityId() {
         return activityId;
     }
@@ -103,6 +108,48 @@ public class OldCouponCodeVO implements Serializable {
 	 */
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
+	}
+
+	/**
+	 * @return the holderId
+	 */
+	public String getHolderId() {
+		return holderId;
+	}
+
+	/**
+	 * @param holderId the holderId to set
+	 */
+	public void setHolderId(String holderId) {
+		this.holderId = holderId;
+	}
+
+	/**
+	 * @return the holderType
+	 */
+	public String getHolderType() {
+		return holderType;
+	}
+
+	/**
+	 * @param holderType the holderType to set
+	 */
+	public void setHolderType(String holderType) {
+		this.holderType = holderType;
+	}
+
+	/**
+	 * @return the holderName
+	 */
+	public String getHolderName() {
+		return holderName;
+	}
+
+	/**
+	 * @param holderName the holderName to set
+	 */
+	public void setHolderName(String holderName) {
+		this.holderName = holderName;
 	}
 
 }
