@@ -1,4 +1,4 @@
-package com.rongyi.easy.malllife.param;/*
+package com.rongyi.easy.mallshop.param;/*
  * Copyright (C),上海容易网电子商务有限公司
  * Author:  俞志坚
  * Description:  
@@ -22,8 +22,6 @@ public class LogParam implements Serializable {
     private  String clickNum;//[点击量]
     private  String type;//[展示、点击、debug类型等]
     private  String timeStamp;//点击时间戳
-
-    private String opRole;// 操作角色
 
     public String getPage() {
         return page;
@@ -79,13 +77,5 @@ public class LogParam implements Serializable {
 
     public void setTimeStamp(String timeStamp) {
         this.timeStamp = timeStamp;
-    }
-
-    public String getOpRole() {
-        return opRole;
-    }
-
-    public void setOpRole(String opRole) {
-        this.opRole = opRole;
     }
 }

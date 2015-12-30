@@ -64,9 +64,17 @@ public class CommodityVO  implements  Serializable {
 	private int brandId;//品牌mysqlId
 	private String filialeMid;//分公司id
 	private int identity = 5;//-1表示定时任务0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购6买手
-
 	private Integer processIdentity;//当前登录人的身份
+	private String activityType;	//活动状态[闪购1、特卖2、秒杀3]
 
+	public String getActivityType() {
+		return activityType;
+	}
+
+	public void setActivityType(String activityType) {
+		this.activityType = activityType;
+	}
+	
 	public int getCommodityAppStatus() {
 		return commodityAppStatus;
 	}
@@ -285,6 +293,16 @@ public class CommodityVO  implements  Serializable {
 			this.commodityAppStatus = 0;
 		} else {
 			this.commodityAppStatus = this.commodityStatus;
+		}
+		
+		//闪购 || 特卖 || 秒杀
+		if (commodity.getSaleId() != null) {
+			this.activityType = "2";
+		} else if (commodity.getFlashSaleId() != null) {
+			this.activityType = "1";
+		} else {
+			//其他
+			this.activityType = "0";
 		}
 	}
 	public String getCommodityId() {

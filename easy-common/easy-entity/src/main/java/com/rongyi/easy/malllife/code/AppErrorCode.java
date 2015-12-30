@@ -25,7 +25,7 @@ public enum AppErrorCode {
     ERROR_MALLLIFEEXCEPTION(1060011,""),
     /** 用户导购聊天记录  */
     ERROR_SAVE_USERGUIDECHAT(1062001,"修改或者插入用户导购聊天记录失败"),
-    ERROR_GUIDE_ISDISABLED(1062002,"导购账号停用"),
+    ERROR_GUIDE_ISDISABLED(1062002,"此店铺休息中，无法为您服务"),
     /** 代金券相关  后4位区间  5001---6000*/
     ERROR_COUPON_ORDER_PARAM(1065001,"亲~红包和抵扣券只能用一种喔~”"),
 

@@ -1,10 +1,8 @@
 package com.rongyi.rss.tradecenter.osm;
 
 import com.rongyi.core.common.PagingVO;
-import com.rongyi.easy.osm.entity.OrderCartFormEntity;
-import org.apache.poi.ss.formula.functions.Count;
+import com.rongyi.easy.osm.vo.OrderCartFormVO;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,5 +17,5 @@ public interface IOrderCartService {
       * @return
       * @throws Exception
       */
-     PagingVO<OrderCartFormEntity> searchListByMap(Map<String, Object> paramsMap) throws Exception;
+     PagingVO<OrderCartFormVO> searchListByMap(Map<String, Object> paramsMap) throws Exception;
 }
