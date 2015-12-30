@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.rongyi.core.common.util.DateTool;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class ForumHomeVO implements Serializable{
 	 /**主键id*/
@@ -21,6 +22,7 @@ public class ForumHomeVO implements Serializable{
     private Date updateAt;
     /**子模版个数*/
     private Integer positionCount;
+	private String forumCode;
 	public Integer getId() {
 		return id;
 	}
@@ -63,14 +65,26 @@ public class ForumHomeVO implements Serializable{
 	public void setPositionCount(Integer positionCount) {
 		this.positionCount = positionCount;
 	}
+
+	public String getForumCode() {
+		return forumCode;
+	}
+
+	public void setForumCode(String forumCode) {
+		this.forumCode = forumCode;
+	}
+
 	@Override
 	public String toString() {
-		return "ForumHomeVO [id=" + id + ", title=" + title + ", status="
-				+ status + ", sortIdx=" + sortIdx + ", updateUser="
-				+ updateUser + ", updateAt=" + updateAt + ", positionCount="
-				+ positionCount + "]";
+		return new ToStringBuilder(this)
+				.append("id", id)
+				.append("title", title)
+				.append("status", status)
+				.append("sortIdx", sortIdx)
+				.append("updateUser", updateUser)
+				.append("updateAt", updateAt)
+				.append("positionCount", positionCount)
+				.append("forumCode", forumCode)
+				.toString();
 	}
-    
-    
-    
 }

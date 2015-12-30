@@ -37,7 +37,7 @@ public class CommodityBuyerVO implements Serializable{
 	private boolean watching = false; //是否正在看
 	private List<Double> location; //经纬度
 	private String systemNumber; //商品SPU
-	private String activityType;	//活动状态[闪购1、特卖2]
+	private String activityType;	//活动状态[闪购1、特卖2、秒杀3]
 
 	public String getActivityType() {
 		return activityType;
@@ -266,7 +266,7 @@ public class CommodityBuyerVO implements Serializable{
 		}
 		this.systemNumber = commodity.getSystemNumber();
 		
-		//闪购 || 特卖
+		//闪购 || 特卖 || 秒杀
 		if (commodity.getSaleId() != null) {
 			this.activityType = "2";
 		} else if (commodity.getFlashSaleId() != null) {
