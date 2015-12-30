@@ -196,5 +196,5 @@ public interface RoaCouponService {
      *                                         errno=1020833, msg="您无权限操作，如需修改请联系商场管理员"
      * @author lqy
      */
-    ResponseVO checkMallShopAuthority(String userId, String couponId);
+    ResponseVO checkMallShopAuthority(Integer userId, String couponId);
 }
