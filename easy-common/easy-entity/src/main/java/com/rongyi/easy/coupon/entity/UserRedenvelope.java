@@ -1,11 +1,12 @@
 package com.rongyi.easy.coupon.entity;
 
 
-import com.rongyi.core.util.AmountConversion;
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import java.io.Serializable;
 import java.util.Date;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.rongyi.core.util.AmountConversion;
 
 /**
  * 用户抵扣券
@@ -168,6 +169,19 @@ public class UserRedenvelope implements Serializable {
         this.activityName = activityName;
     }
 
+    public UserRedenvelope(String userId, String couponId, String couponCode, Integer discount, Integer status, Date receiveAt, Integer channel, Date validStartAt, Date validEndAt, String activityId, String activityName) {
+        this.userId = userId;
+        this.couponId = couponId;
+        this.couponCode = couponCode;
+        this.discount = discount;
+        this.status = status;
+        this.receiveAt = receiveAt;
+        this.channel = channel;
+        this.validStartAt = validStartAt;
+        this.validEndAt = validEndAt;
+        this.activityId = activityId;
+        this.activityName = activityName;
+    }
 
     public UserRedenvelope(String userId, String userName, String couponId, String couponCode, Integer discount, Integer status, String userAccount, Date receiveAt, Date useAt, Integer channel, String orderNo, Date validStartAt, Date validEndAt, String activityId, String activityName) {
         this.userId = userId;

@@ -10,6 +10,7 @@
 package com.rongyi.rss.solr;
 
 import com.rongyi.easy.solr.PoiDocument;
+import com.rongyi.easy.solr.ShopDocument;
 import com.rongyi.easy.solr.param.ShopSearchParam;
 import com.rongyi.easy.solr.result.ShopSearchIdsResult;
 import com.rongyi.easy.solr.result.ShopSearchResult;
@@ -61,4 +62,18 @@ public interface ShopSolrService {
 	 * @return
 	 */
 	public boolean updatePoiIndex(PoiDocument poiDocument);
+	
+	/**
+	 * 店铺管理后台更新shop索引
+	 * @param shopDocument	店铺索引doc对象
+	 * @return
+	 */
+	public boolean updateShopIndex(ShopDocument shopDocument);
+
+	/**
+	 * 根据商场ID || 店铺名称 获取店铺列表
+	 * @param param
+	 * @return
+	 */
+	public ShopSearchIdsResult getShopListByName(ShopSearchParam param);
 }
