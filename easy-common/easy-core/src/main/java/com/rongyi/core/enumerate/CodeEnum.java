@@ -202,7 +202,9 @@ public enum CodeEnum {
 	
 	ERROR_ROLE_BO_EDIT("1201101", "你无权限操作，如需修改请联系分公司管理员"),
 	ERROR_ROLE_SG_EDIT("1201102", "你无权限操作，如需修改请联系导购"),
-	ERROR_ROLE_SM_EDIT("1201103", "你无权限操作，如需修改请联系店长");
+	ERROR_ROLE_SM_EDIT("1201103", "你无权限操作，如需修改请联系店长"),
+	
+	ERROR_GUIDE_ISDISABLED("1062002","此店铺休息中，无法为您服务");
 
     private String code; 
     private String message; 
