@@ -11,6 +11,9 @@ public class OldCouponCodeVO implements Serializable {
     private Integer status;//使用状态：1-未使用、2-已使用、3-退款中、已退款、已过期
     private String startTime;//有效期始
     private String endTime;//有效期止
+    private Double origPrice; //原价
+    private Double currPrice; //现价
+    private String thumbnail; //列表图
 
     public String getActivityId() {
         return activityId;
@@ -59,5 +62,47 @@ public class OldCouponCodeVO implements Serializable {
     public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
+
+	/**
+	 * @return the origPrice
+	 */
+	public Double getOrigPrice() {
+		return origPrice;
+	}
+
+	/**
+	 * @param origPrice the origPrice to set
+	 */
+	public void setOrigPrice(Double origPrice) {
+		this.origPrice = origPrice;
+	}
+
+	/**
+	 * @return the currPrice
+	 */
+	public Double getCurrPrice() {
+		return currPrice;
+	}
+
+	/**
+	 * @param currPrice the currPrice to set
+	 */
+	public void setCurrPrice(Double currPrice) {
+		this.currPrice = currPrice;
+	}
+
+	/**
+	 * @return the thumbnail
+	 */
+	public String getThumbnail() {
+		return thumbnail;
+	}
+
+	/**
+	 * @param thumbnail the thumbnail to set
+	 */
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
 
 }
