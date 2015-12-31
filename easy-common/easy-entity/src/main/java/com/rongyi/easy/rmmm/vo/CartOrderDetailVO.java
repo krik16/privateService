@@ -51,6 +51,15 @@ public class CartOrderDetailVO extends PageVO implements Serializable{
 	private String message;
 	private String parentOrderStatus;// 父订单状态 1未付款 2待发货 3已发货 4确认收货 5已关闭
 	private Integer totalCommodityNum;//订单sku数量
+	private String orderId;// 订单id
+
+	public String getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
+	}
 
 	public Integer getTotalCommodityNum() {
 		return totalCommodityNum;
