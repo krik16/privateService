@@ -15,6 +15,7 @@ import java.util.List;
 public class DailySaleVO implements Serializable {
     private Long nowDate = new Date().getTime(); //当前时间
     private Integer currentPosition = 1;//当前位置 从1开始
+    private String dailySaleUrl;
     private List<DailySaleListVO> dailySaleList;
 
     public Long getNowDate() {
@@ -41,11 +42,20 @@ public class DailySaleVO implements Serializable {
         this.dailySaleList = dailySaleList;
     }
 
+    public String getDailySaleUrl() {
+        return dailySaleUrl;
+    }
+
+    public void setDailySaleUrl(String dailySaleUrl) {
+        this.dailySaleUrl = dailySaleUrl;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("nowDate", nowDate)
                 .append("currentPosition", currentPosition)
+                .append("dailySaleUrl", dailySaleUrl)
                 .append("dailySaleList", dailySaleList)
                 .toString();
     }
