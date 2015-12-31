@@ -166,6 +166,14 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private byte payChannel;
     private String orderCartNo;//购物车订单号
 
+    public String getOrderCartNo() {
+        return orderCartNo;
+    }
+
+    public void setOrderCartNo(String orderCartNo) {
+        this.orderCartNo = orderCartNo;
+    }
+
     public byte getPayChannel() {
         return payChannel;
     }
