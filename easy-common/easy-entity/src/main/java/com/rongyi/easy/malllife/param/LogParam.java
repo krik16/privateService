@@ -25,6 +25,9 @@ public class LogParam implements Serializable {
 
     private String opRole;// 操作角色
 
+    private String opType;//操作功能类型 createShopCart 创建，操作购物车 orderShopCart 生成购物车订单
+    private String userId;//操作人的Id
+
     public String getPage() {
         return page;
     }
@@ -87,5 +90,21 @@ public class LogParam implements Serializable {
 
     public void setOpRole(String opRole) {
         this.opRole = opRole;
+    }
+
+    public String getOpType() {
+        return opType;
+    }
+
+    public void setOpType(String opType) {
+        this.opType = opType;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

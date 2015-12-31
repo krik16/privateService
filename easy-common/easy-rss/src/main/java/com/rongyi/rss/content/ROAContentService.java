@@ -280,4 +280,11 @@ public interface ROAContentService {
 	public List<ForumTemplateCity> hasTemplateCity(Integer templateId,List<String> ids);
 
 	public boolean renvelCiyt(Integer templateId,List<ForumTemplateCity> forumTemplateCities,String userName) throws Exception;
+
+	/**
+	 * 通过模版id 查询城市列表
+	 * @param id
+	 * @return
+	 */
+	public  List<TemplateCityVO> findTemplateCityList(Integer id);
 }

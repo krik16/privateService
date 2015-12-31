@@ -159,7 +159,7 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private Integer devType;
 
     //0:未打款，1:对私(打款到导购虚拟账号)，2:对公(通过对账单结算)
-    private byte isPayVa;
+    private byte isPayVa;//0:未打款，1:对私(打款到导购虚拟账号)，2:对公(通过对账单结算)
 
     private BigDecimal orderScoreDiscount = BigDecimal.ZERO;;//购物车订单积分分摊优惠金额
 
