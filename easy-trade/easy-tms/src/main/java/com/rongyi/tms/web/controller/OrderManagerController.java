@@ -308,13 +308,10 @@ public class OrderManagerController extends BaseController {
 			}
 			logger.info("paramsjson={}", paramsJson);
 			paramsMap = JsonUtil.getMapFromJson(paramsJson);
-			String orderNo = (String) paramsMap.get("orderNo");
 			String mallId = (String) paramsMap.get("mallId");
 			String shopName = (String) paramsMap.get("shopName");
 			String nickname = (String) paramsMap.get("nickname");
 			String username = (String) paramsMap.get("username");
-			String status = (String) paramsMap.get("status");
-			String guideType = paramsMap.containsKey("guideType")? paramsMap.get("guideType").toString():null;
 			//查询用户条件
 			List<UserInfoVO> users = null;
 			if (StringUtils.isNotBlank(nickname) || StringUtils.isNotBlank(username)) {
@@ -348,55 +345,51 @@ public class OrderManagerController extends BaseController {
 			}
 			if (searchMap.containsKey("mallId") || searchMap.containsKey("shopName")) {
 				shopList = roaShopService.getAllShopIdBuMallId(searchMap);
-			}
-			searchMap.clear();
-			if (!CollectionUtils.isEmpty(userList)) {
-				searchMap.put("userList", userList);
-			}
-			if (!CollectionUtils.isEmpty(shopList)) {
-				searchMap.put("shopList", shopList);
-			}
-			if (StringUtils.isNotBlank(status) && !"0".equals(status)) {
-				if ("6".equals(status)) {
-					searchMap.put("statusRoute", ">|<4,");
-				} else {
-					searchMap.put("status", status);
+				if (CollectionUtils.isEmpty(shopList)){
+					model.addAttribute("orderForms", null);
+					model.addAttribute("rowCont", 0);
+					model.addAttribute("currpage", 1);
+					return "order/order_searchajax_list";
 				}
 			}
-			if (StringUtils.isNotBlank(orderNo)) {
-				searchMap.put("orderNo", orderNo);
+			if (!CollectionUtils.isEmpty(userList)) {
+				paramsMap.put("userList", userList);
 			}
-			if (StringUtils.isNotBlank((String) paramsMap.get("currpage"))) {
-				searchMap.put("currentPage", paramsMap.get("currpage"));
+			if (!CollectionUtils.isEmpty(shopList)) {
+				paramsMap.put("shopList", shopList);
 			}
-			if(StringUtils.isNotBlank(guideType)){
-				searchMap.put("guideType", guideType);
-			}
+//			if (StringUtils.isNotBlank(orderNo)) {
+//				searchMap.put("orderNo", orderNo);
+//			}
+//			if (StringUtils.isNotBlank((String) paramsMap.get("currpage"))) {
+//				searchMap.put("currentPage", paramsMap.get("currpage"));
+//			}
+//			if(StringUtils.isNotBlank(guideType)){
+//				searchMap.put("guideType", guideType);
+//			}
 			if(paramsMap.containsKey("commodityNo")){
-				searchMap.put("commodityIds", mcmcCommoditySolrService.selectCommodityIndexByNameCode(paramsMap.get("commodityNo").toString(), null));
+				paramsMap.put("commodityIds", mcmcCommoditySolrService.selectCommodityIndexByNameCode(paramsMap.get("commodityNo").toString(), null));
 			}
-			if (paramsMap.containsKey("payChannel")){
-				searchMap.put("payChannel", paramsMap.get("payChannel").toString());
-			}
-			if (paramsMap.containsKey("orderCartNo")){
-				searchMap.put("orderCartNo", paramsMap.get("orderCartNo").toString());
-			}
+//			if (paramsMap.containsKey("payChannel")){
+//				searchMap.put("payChannel", paramsMap.get("payChannel").toString());
+//			}
+//			if (paramsMap.containsKey("orderCartNo")){
+//				searchMap.put("orderCartNo", paramsMap.get("orderCartNo").toString());
+//			}
 			if (paramsMap.containsKey("sellerAccount")){
 				Map<String, Object> map = new HashMap<>();
 				map.put("userAccount",paramsMap.get("sellerAccount").toString());
 				map.put("isDisabled", 0);
 				UserInfo userInfo = iUserInfoService.getUserByMap(map);
 				if (userInfo!=null)
-					searchMap.put("guideId",userInfo.getId());
+					paramsMap.put("guideId",userInfo.getId());
 			}
-			PagingVO<OrderManagerVO> pagingVO = roaOrderFormService.searchListByMap(searchMap);
+			PagingVO<OrderManagerVO> pagingVO = roaOrderFormService.searchListByMap(paramsMap);
 			List<OrderManagerVO> orderForms = pagingVO.getDataList();
 			List<OrderManagerVO> orderFormList = new ArrayList<>();
 			if (!CollectionUtils.isEmpty(orderForms)) {
 				for (OrderManagerVO orderManagerVO : orderForms) {
 					OrderManagerVO orderVo = setOrderTotalAmount(orderManagerVO);
-					if (StringUtils.isNotBlank(status) && !"0".equals(status))
-						orderVo.setStatus(status);
 					orderFormList.add(orderVo);
 				}
 			}
@@ -425,15 +418,6 @@ public class OrderManagerController extends BaseController {
 			}
 		}
 		orderManagerVO.setOrderTotalAmount(orderTotalAmount);
-		if (StringUtils.isNotBlank(orderManagerVO.getStatus())&&
-				("6".equals(orderManagerVO.getStatus())||"7".equals(orderManagerVO.getStatus()))){
-			orderManagerVO.setStatus("5");
-		}
-		//包含（">|<4,"）就是正常关闭
-		if (StringUtils.isNotBlank(orderManagerVO.getStatusRoute())
-				&& orderManagerVO.getStatusRoute().contains(">|<4,")) {
-			orderManagerVO.setStatus("6");
-		}
 		return orderManagerVO;
 	}
 
