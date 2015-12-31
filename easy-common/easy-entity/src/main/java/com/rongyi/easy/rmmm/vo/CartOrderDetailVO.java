@@ -50,6 +50,15 @@ public class CartOrderDetailVO extends PageVO implements Serializable{
     private Integer changePriceFlag = 0;//0没有再次改价1表示有商家再次修改价格 2改价影响了抵扣券
 	private String message;
 	private String parentOrderStatus;// 父订单状态 1未付款 2待发货 3已发货 4确认收货 5已关闭
+	private Integer totalCommodityNum;//订单sku数量
+
+	public Integer getTotalCommodityNum() {
+		return totalCommodityNum;
+	}
+
+	public void setTotalCommodityNum(Integer totalCommodityNum) {
+		this.totalCommodityNum = totalCommodityNum;
+	}
 
 	public String getParentOrderStatus() {
 		return parentOrderStatus;
