@@ -387,7 +387,7 @@ public class OrderManagerController extends BaseController {
 				map.put("isDisabled", 0);
 				UserInfo userInfo = iUserInfoService.getUserByMap(map);
 				if (userInfo!=null)
-				searchMap.put("guideId",userInfo.getId());
+					searchMap.put("guideId",userInfo.getId());
 			}
 			PagingVO<OrderManagerVO> pagingVO = roaOrderFormService.searchListByMap(searchMap);
 			List<OrderManagerVO> orderForms = pagingVO.getDataList();
