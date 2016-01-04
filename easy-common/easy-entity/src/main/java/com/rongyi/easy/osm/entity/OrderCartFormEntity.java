@@ -45,19 +45,19 @@ public class OrderCartFormEntity implements Serializable {
 
     private Date updateAt;//订单更新时间
 
-    private byte status;//状态 1未支付 2已支付 3超时关闭 4买家关闭 5失效
+    private Byte status;//状态 1未支付 2已支付 3超时关闭 4买家关闭 5失效
 
     private BigDecimal expressFee;
 
-    private byte isAlert;//是否已发送支付提醒 (0否 1是)
+    private Byte isAlert;//是否已发送支付提醒 (0否 1是)
 
-    private byte payChannel;//1支付宝网页  3支付宝app  5微信
+    private Byte payChannel;//1支付宝网页  3支付宝app  5微信
 
-    public byte getIsAlert() {
+    public Byte getIsAlert() {
         return isAlert;
     }
 
-    public void setIsAlert(byte isAlert) {
+    public void setIsAlert(Byte isAlert) {
         this.isAlert = isAlert;
     }
 
@@ -197,11 +197,11 @@ public class OrderCartFormEntity implements Serializable {
         this.updateAt = updateAt;
     }
 
-    public byte getStatus() {
+    public Byte getStatus() {
         return status;
     }
 
-    public void setStatus(byte status) {
+    public void setStatus(Byte status) {
         this.status = status;
     }
 
@@ -243,12 +243,12 @@ public class OrderCartFormEntity implements Serializable {
         this.scoreAmount = scoreAmount;
     }
 
-    public byte getPayChannel()
+    public Byte getPayChannel()
     {
         return payChannel;
     }
 
-    public void setPayChannel(byte payChannel)
+    public void setPayChannel(Byte payChannel)
     {
         this.payChannel = payChannel;
     }

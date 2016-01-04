@@ -10,6 +10,7 @@ import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.osm.entity.OrderDetailFormEntity;
 import com.rongyi.easy.osm.entity.OrderEventEntity;
 import com.rongyi.easy.osm.entity.OrderFormEntity;
+import com.rongyi.easy.osm.entity.OrderFormExtraEntity;
 import com.rongyi.easy.rmmm.param.MaxIntegralParam;
 import com.rongyi.easy.rmmm.param.MyDealParam;
 import com.rongyi.easy.rmmm.param.MyOrderParam;
@@ -180,4 +181,11 @@ public interface IOrderQueryService {
 	 * @return 中订单号集合
 	 */
 	List<OrderFormEntity> getShopOrderNoByCartNo(String cartOrderNo);
+
+	/**
+	 * 根据订单号查询订单收货地址
+	 * @param orderNo
+	 * @return
+	 */
+	OrderFormExtraEntity getNewAddressByOrderNo(String orderNo);
 }

@@ -23,6 +23,8 @@ public class CouponOrderParam implements Serializable {
     private String userId;// 用户Id
     private String userPhone;// 用户手机号
     private String userSrc;// 用户渠道
+    private String commodityId;// 商品id
+    private Integer discount;// 折扣价,属于红包字段 精确到分
     private List<String> couponCodes;//券码列表。用于一个订单多张卡券（中秋哈根达斯活动）
 
 
@@ -125,6 +127,21 @@ public class CouponOrderParam implements Serializable {
     public void setUserPhone(String userPhone) {
         this.userPhone = userPhone;
     }
+    public String getCommodityId() {
+        return commodityId;
+    }
+
+    public void setCommodityId(String commodityId) {
+        this.commodityId = commodityId;
+    }
+
+    public Integer getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Integer discount) {
+        this.discount = discount;
+    }
 
     @Override
     public String toString() {
@@ -137,6 +154,8 @@ public class CouponOrderParam implements Serializable {
                 .append("userSrc", userSrc)
                 .append("couponCodes", couponCodes)
                 .append("business", business)
+                .append("discount", discount)
+                .append("commodityId", commodityId)
                 .toString();
     }
 }
