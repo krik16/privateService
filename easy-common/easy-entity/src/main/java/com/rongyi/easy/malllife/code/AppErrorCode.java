@@ -28,6 +28,7 @@ public enum AppErrorCode {
     ERROR_GUIDE_ISDISABLED(1062002,"此店铺休息中，无法为您服务"),
     /** 代金券相关  后4位区间  5001---6000*/
     ERROR_COUPON_ORDER_PARAM(1065001,"亲~红包和抵扣券只能用一种喔~”"),
+    ERROR_RECEIVED_REBATE(1065002, "您已领取过了暖冬礼盒"),
 
     /** 购物车相关  后4位区间  6001---7000*/
     ERROR_COMMODITY_NOTFOUND(1066001,"商品不存在"),

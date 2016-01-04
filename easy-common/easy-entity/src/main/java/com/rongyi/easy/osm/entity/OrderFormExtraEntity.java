@@ -23,6 +23,12 @@ public class OrderFormExtraEntity implements Serializable {
 
     private String receiverDistrictName;//收货区县
 
+    private String provinceId;
+
+    private String cityId;
+
+    private String districtId;
+
     public Integer getId() {
         return id;
     }
@@ -85,6 +91,36 @@ public class OrderFormExtraEntity implements Serializable {
 
     public void setReceiverDistrictName(String receiverDistrictName) {
         this.receiverDistrictName = receiverDistrictName;
+    }
+
+    public String getProvinceId()
+    {
+        return provinceId;
+    }
+
+    public void setProvinceId(String provinceId)
+    {
+        this.provinceId = provinceId;
+    }
+
+    public String getCityId()
+    {
+        return cityId;
+    }
+
+    public void setCityId(String cityId)
+    {
+        this.cityId = cityId;
+    }
+
+    public String getDistrictId()
+    {
+        return districtId;
+    }
+
+    public void setDistrictId(String districtId)
+    {
+        this.districtId = districtId;
     }
 
     @Override
