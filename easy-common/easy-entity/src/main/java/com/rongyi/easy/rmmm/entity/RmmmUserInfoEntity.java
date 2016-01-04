@@ -77,6 +77,8 @@ public class RmmmUserInfoEntity implements Serializable{
 
     private String userDesc;//用户简介
 
+    private String pushId;//消息推送Id
+
    // private List<Integer> identityTypeList; //用户账号身份列表
 
     public Integer getId() {
@@ -300,4 +302,14 @@ public class RmmmUserInfoEntity implements Serializable{
 
     public void setSharCode(String sharCode) {
         this.sharCode = sharCode;
-    }}
+    }
+
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
+    }
+}
+

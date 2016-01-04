@@ -297,4 +297,14 @@ public interface IUserService {
      * @return
      */
     public RmmmUserInfoEntity selectRmmmUserInfoByUserParam(Map<String, Object> paramsMap);
+
+
+    /**
+     * 登录时记录 pushId
+     * @param pushId
+     * @param userPhone
+     * @return
+    * @throws Exception
+     */
+    public boolean updatePushId(String pushId,String userPhone) throws Exception;
 }
