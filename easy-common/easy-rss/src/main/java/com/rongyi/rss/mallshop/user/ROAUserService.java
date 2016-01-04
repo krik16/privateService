@@ -269,4 +269,6 @@ public interface ROAUserService {
 
 
     public Integer editUserDesc(Integer userId,String desc)throws MallShopException;
+
+    public boolean updatePushId(String pushId,String userPhone) throws Exception;
 }
