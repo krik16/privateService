@@ -225,4 +225,11 @@ public interface IIContentService {
 	 * @throws Exception
 	 */
 	public boolean renvelCiyt(Integer templateId, List<ForumTemplateCity> forumTemplateCities, String userName) throws Exception;
+
+	/**
+	 * 通过模版id 查询城市信息
+	 * @param id
+	 * @return
+	 */
+	public List<TemplateCityVO> findTemplateCityList(Integer id);
 }

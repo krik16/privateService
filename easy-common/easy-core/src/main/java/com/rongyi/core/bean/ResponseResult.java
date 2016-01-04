@@ -27,7 +27,7 @@ public class ResponseResult implements java.io.Serializable {
 		this.success = true;
 		this.code = SUCCESS;
 	}
-	
+
 	/**
 	 * Error 
 	 * @param errorCode	错误码
@@ -37,7 +37,7 @@ public class ResponseResult implements java.io.Serializable {
 	public ResponseResult error(String errorCode, String message) {
 		return error(errorCode, message, null);
 	}
-	
+
 	/**
 	 * Error 
 	 * @param errorCode	错误码
@@ -52,7 +52,7 @@ public class ResponseResult implements java.io.Serializable {
 		this.info = info;
 		return this;
 	}
-	
+
 	/**
 	 * Success 
 	 * @param info		返回值信息
@@ -74,7 +74,7 @@ public class ResponseResult implements java.io.Serializable {
 	public boolean isSuccess() {
 		return success;
 	}
-	
+
 	/**
 	 * 判断失败
 	 * @return
