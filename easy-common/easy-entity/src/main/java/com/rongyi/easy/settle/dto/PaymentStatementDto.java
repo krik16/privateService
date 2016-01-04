@@ -89,16 +89,6 @@ public class PaymentStatementDto implements Serializable {
      */
     private String rollDay;
 
-    /**
-     * 操作时间
-     */
-    private Date opTime;
-
-    /**
-     * 再次支付
-     */
-    private boolean rePay = true;
-
     public Integer getId() {
         return id;
     }
@@ -322,20 +312,5 @@ public class PaymentStatementDto implements Serializable {
 	public void setRollDay(String rollDay) {
 		this.rollDay = rollDay;
 	}
-
-    public Date getOpTime() {
-        return opTime;
-    }
-
-    public void setOpTime(Date opTime) {
-        this.opTime = opTime;
-    }
-
-    public boolean isRePay() {
-        return rePay;
-    }
-
-    public void setRePay(boolean rePay) {
-        this.rePay = rePay;
-    }
+    
 }

@@ -218,6 +218,4 @@ public interface RoaUserRedenvelopeService {
      * @author lqy
      */
     void pushWillExpireTimerTask();
-    boolean checkEnvelopeIsUse(CouponOrderParam couponOrderParam);
-    boolean sendEnvelope(CouponOrderParam couponOrderParam);   
 }

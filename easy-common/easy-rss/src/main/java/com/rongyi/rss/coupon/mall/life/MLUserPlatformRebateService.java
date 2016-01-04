@@ -2,7 +2,6 @@ package com.rongyi.rss.coupon.mall.life;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.param.RebateAndRedenvelopParam;
-import com.rongyi.easy.coupon.param.UserRebateParam;
 import com.rongyi.easy.coupon.vo.PlatformRebateForOrderVO;
 import com.rongyi.easy.coupon.vo.PlatformRebateVO;
 
@@ -53,11 +52,4 @@ public interface MLUserPlatformRebateService {
      */
     PlatformRebateForOrderVO getUserPlatformRebatesForOrder(RebateAndRedenvelopParam param);
 
-    /**
-     * 领取抵扣券
-     * @param param 用户抵扣券参数
-     * @return true | false
-     * @author lqy
-     */
-    boolean receiveRebates(UserRebateParam param);
 }

@@ -234,16 +234,6 @@ public class TradeVO implements Serializable {
 	 */
 	private Integer guideType;
 
-	/**
-	 * 操作时间
-	 */
-	private Date opTime;
-
-	/**
-	 * 是否允许继续操作付款
-	 */
-	private boolean rePay=true;
-
 	public Integer getId() {
 		return id;
 	}
@@ -604,20 +594,5 @@ public class TradeVO implements Serializable {
 	public void setBuyerPayAccount(String buyerPayAccount) {
 		this.buyerPayAccount = buyerPayAccount;
 	}
-
-	public Date getOpTime() {
-		return opTime;
-	}
-
-	public void setOpTime(Date opTime) {
-		this.opTime = opTime;
-	}
-
-	public boolean isRePay() {
-		return rePay;
-	}
-
-	public void setRePay(boolean rePay) {
-		this.rePay = rePay;
-	}
+	
 }

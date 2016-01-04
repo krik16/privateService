@@ -61,4 +61,16 @@ public class OrderDealedParam implements Serializable {
 	public void setOrderPrice(String orderPrice) {
 		this.orderPrice = orderPrice;
 	}
+
+	@Override
+	public String toString() {
+		return "OrderDealedParam{" +
+				"orderId='" + orderId + '\'' +
+				", discount='" + discount + '\'' +
+				", commodityPostage='" + commodityPostage + '\'' +
+				", orderNo='" + orderNo + '\'' +
+				", orderPrice='" + orderPrice + '\'' +
+				", userId=" + userId +
+				'}';
+	}
 }

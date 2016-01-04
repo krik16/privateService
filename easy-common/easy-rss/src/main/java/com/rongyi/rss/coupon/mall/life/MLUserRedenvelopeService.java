@@ -3,7 +3,6 @@ package com.rongyi.rss.coupon.mall.life;
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.UserRedenvelope;
-import com.rongyi.easy.coupon.param.CouponOrderParam;
 import com.rongyi.easy.coupon.param.RebateAndRedenvelopParam;
 import com.rongyi.easy.coupon.vo.UserCouponVO;
 import com.rongyi.easy.coupon.vo.UserRedPacketForOrderVO;
@@ -151,16 +150,4 @@ public interface MLUserRedenvelopeService {
      * @author lqy
      */
     int getUserRedPacketCount(RebateAndRedenvelopParam param);
-    /**
-     * 判断是否可以继续砍价(之前领用的红包是否已经使用)
-     * @param couponOrderParam
-     * @return
-     */
-    boolean checkEnvelopeIsUse(CouponOrderParam couponOrderParam);
-    /**
-     * 发送砍价红包
-     * @param couponOrderParam
-     * @return
-     */
-    boolean sendEnvelope(CouponOrderParam couponOrderParam);
 }

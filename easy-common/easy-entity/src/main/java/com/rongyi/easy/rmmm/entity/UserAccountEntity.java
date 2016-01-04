@@ -43,9 +43,6 @@ public class UserAccountEntity implements Serializable{
     private Integer isDisabled;
     /** 用户Id **/
     private Integer userId;
-    
-    /** 是否为默认资金账号  0是  1否  **/
-    private Integer isDefault ;
 
     /**
      * 主键
@@ -230,13 +227,5 @@ public class UserAccountEntity implements Serializable{
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
-
-	public Integer getIsDefault() {
-		return isDefault;
-	}
-
-	public void setIsDefault(Integer isDefault) {
-		this.isDefault = isDefault;
-	}
     
 }

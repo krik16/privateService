@@ -23,16 +23,6 @@ public class IflashDetailVO implements Serializable {
     private Long endAt;
     private String activityUrl;
     private String contentUrl;
-    /** 商品类型 (买手 1， 全部商品 0, 特卖场 2, 闪购 3，导购商品 4)*/
-    private String commodityType = "3";
-
-    public String getCommodityType() {
-		return commodityType;
-	}
-
-	public void setCommodityType(String commodityType) {
-		this.commodityType = commodityType;
-	}
 
 	public Integer getId() {
         return id;

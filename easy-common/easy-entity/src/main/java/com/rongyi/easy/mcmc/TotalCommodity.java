@@ -57,7 +57,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	
 	private boolean supportSelfPickup=true;//支持到店自提  true 是    false否
 
-	private Integer identity = 4;//0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购,6买手
+	private Integer identity;//0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购,6买手
 
 	private boolean immediateOn = false;//true表示设置是立即上架
 

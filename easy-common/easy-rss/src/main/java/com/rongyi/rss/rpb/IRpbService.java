@@ -151,15 +151,5 @@ public interface IRpbService {
 	 * @datetime:2015年10月14日下午6:33:40
 	 **/
 	public abstract void updatePaymentStatus(String[] ids,Integer status,Integer tradeType);
-
-	/**
-	 * @Description: 取消/同意 异常支付
-	 * @param paymentId
-	 * @param refundRejected
-	 * @return
-	 * @Author:  柯军
-	 * @datetime:2015年8月28日上午10:38:48
-	 **/
-	public abstract Map<String,Object> exceCancelPay(Integer paymentId,Integer refundRejected);
 	
 }

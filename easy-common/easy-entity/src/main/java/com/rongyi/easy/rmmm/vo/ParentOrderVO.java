@@ -21,7 +21,7 @@ public class ParentOrderVO implements Serializable {
 
 	private String totalPrice;// 总价
 
-	private String parentOrderStatus;// 父订单状态
+	private String parentOrderStatus;// 父订单状态 1未付款 2待发货 3已发货 4确认收货 5已关闭
 
 	private String nextStatusTime;// 预计进入下一状态的时间
 
