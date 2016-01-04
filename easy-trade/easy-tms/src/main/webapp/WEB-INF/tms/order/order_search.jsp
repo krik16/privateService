@@ -88,7 +88,6 @@
                 <input id="nickname" name="nickname" type="text" class="form-control ng-pristine ng-untouched ng-valid"/>
                 <input id="userId" type="hidden" value=""/>
             </div>
-
 --%>
             <div class="form-group">
                 <label>买家账号：</label>
@@ -128,12 +127,10 @@
                 <label>订单来源：</label>
                 <select id="orderSource" class="form-control ng-pristine ng-untouched ng-valid" title="">
                     <option value="">-- 全部 --</option>
-                    <option value="1">未付款</option>
-                    <option value="2">待发货</option>
-                    <option value="3">已发货</option>
-                    <option value="4">已完成</option>
-                    <option value="5">已关闭</option>
-                    <option value="8">已退款</option>
+                    <option value="0">容易逛</option>
+                    <option value="1">微网站</option>
+                    <option value="2">终端机</option>
+                    <option value="3">其他</option>
                 </select>
             </div>
 
