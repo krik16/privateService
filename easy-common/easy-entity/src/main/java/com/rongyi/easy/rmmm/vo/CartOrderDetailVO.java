@@ -52,6 +52,15 @@ public class CartOrderDetailVO extends PageVO implements Serializable{
 	private String parentOrderStatus;// 父订单状态 1未付款 2待发货 3已发货 4确认收货 5已关闭
 	private Integer totalCommodityNum;//订单sku数量
 	private String orderId;// 订单id
+	private String receiveType;// 收货方式 0快递 1无需快递
+
+	public String getReceiveType() {
+		return receiveType;
+	}
+
+	public void setReceiveType(String receiveType) {
+		this.receiveType = receiveType;
+	}
 
 	public String getOrderId() {
 		return orderId;
