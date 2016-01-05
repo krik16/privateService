@@ -502,11 +502,11 @@ public class PayController extends BaseController {
         }catch (Exception e){
             LOGGER.error("获取重新支付时间间隔失败，设置默认值rePayTime={}", rePayTime);
         }
-//        for (PaymentStatementDto paymentStatementDto : list){
-//            if(paymentStatementDto.getOpTime() != null && DateUtil.dateDiff(paymentStatementDto.getOpTime(), DateUtil.getCurrDateTime()) < rePayTime){
-//                paymentStatementDto.setRePay(false);
-//            }
-//        }
+        for (PaymentStatementDto paymentStatementDto : list){
+            if(paymentStatementDto.getOpTime() != null && DateUtil.dateDiff(paymentStatementDto.getOpTime(), DateUtil.getCurrDateTime()) < rePayTime){
+                paymentStatementDto.setRePay(false);
+            }
+        }
         return list;
     }
 
@@ -523,11 +523,11 @@ public class PayController extends BaseController {
         }catch (Exception e){
             LOGGER.error("获取重新支付时间间隔失败，设置默认值rePayTime={}", rePayTime);
         }
-//        for (TradeVO tradeVO : list){
-//            if(tradeVO.getOpTime() != null && DateUtil.dateDiff(tradeVO.getOpTime(), DateUtil.getCurrDateTime()) < rePayTime){
-//                tradeVO.setRePay(false);
-//            }
-//        }
+        for (TradeVO tradeVO : list){
+            if(tradeVO.getOpTime() != null && DateUtil.dateDiff(tradeVO.getOpTime(), DateUtil.getCurrDateTime()) < rePayTime){
+                tradeVO.setRePay(false);
+            }
+        }
         return list;
     }
 
@@ -546,9 +546,9 @@ public class PayController extends BaseController {
         LOGGER.info("异常交易取消付款 excePayCancel paymentId={},refundRejected={}",paymentId,refundRejected);
         ResponseResult result = new ResponseResult();
         try {
-//            Map<String, Object> resultMap = rpbService.exceCancelPay(paymentId, refundRejected);
-//            result.setSuccess(Boolean.valueOf(resultMap.get("success").toString()));
-//            result.setMessage(resultMap.get("message").toString());
+            Map<String, Object> resultMap = rpbService.exceCancelPay(paymentId, refundRejected);
+            result.setSuccess(Boolean.valueOf(resultMap.get("success").toString()));
+            result.setMessage(resultMap.get("message").toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
