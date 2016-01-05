@@ -18,6 +18,7 @@ public class OrderAddressParam implements Serializable{
     private String provinceId;//省Id
     private String cityId;//城市Id
     private String districtId;//区县
+    private Integer source = 1;//操作平台 1摩店 2商家后台
 
     public String getOrderNo() {
         return OrderNo;
@@ -105,6 +106,16 @@ public class OrderAddressParam implements Serializable{
         this.districtId = districtId;
     }
 
+    public Integer getSource()
+    {
+        return source;
+    }
+
+    public void setSource(Integer source)
+    {
+        this.source = source;
+    }
+
     @Override
     public String toString() {
         return "OrderAddressParam{" +
@@ -115,6 +126,7 @@ public class OrderAddressParam implements Serializable{
                 ", address='" + address + '\'' +
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
+                ", source='" + source + '\'' +
                 '}';
     }
 }
