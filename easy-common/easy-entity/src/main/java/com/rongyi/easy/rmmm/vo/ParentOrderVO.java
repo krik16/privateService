@@ -19,7 +19,7 @@ public class ParentOrderVO implements Serializable {
 
 	private List<String> shopIM;// 店铺可用IM账号
 
-	private String totalPrice;// 总价
+	private String totalPrice = "0";// 总价
 
 	private String parentOrderStatus;// 父订单状态 1未付款 2待发货 3已发货 4确认收货 5已关闭
 
@@ -39,7 +39,7 @@ public class ParentOrderVO implements Serializable {
 
 	private String districtName;// 区名称
 
-	private String commodityPostage;// 运费
+	private String commodityPostage = "0";// 运费
 
 	private String orderNum;// 订单编号
 
@@ -63,7 +63,7 @@ public class ParentOrderVO implements Serializable {
 
 	private String closeReason;// 关闭原因
 
-	private String originalTotalPrice;// 原来的总价
+	private String originalTotalPrice  = "0";// 原来的总价
 
 	private String buyerNickName;// 收货人昵称
 	private String buyerPhone;// 买家手机号（买家账号）
@@ -79,7 +79,7 @@ public class ParentOrderVO implements Serializable {
 	private String cancelTime;// 卖家取消订单时间
 	private String closeTime;// 订单关闭时间
 	private String statusRoute;// 状态路径
-	private String platformRebateAmount;//用户使用抵扣券后对该订单实际抵扣的金额
+	private String platformRebateAmount = "0";//用户使用抵扣券后对该订单实际抵扣的金额
 	/*
 	 * private String expressBillId;// 物流单号ID
 	 * 
@@ -89,25 +89,25 @@ public class ParentOrderVO implements Serializable {
 	private String expressBillId;// 物流单号ID
 
 	private String expressName;// 物流名称
-	private BigDecimal discountFee;// 商品折扣价
+	private BigDecimal discountFee = BigDecimal.valueOf(0.0);// 商品折扣价
 
-	private String score;// 使用的颜值
-	private String scoreDeduction;// 颜值抵扣金额
-	private String DeductCouponAmount;// 抵扣券实际抵扣价格
+	private String score = "0";// 使用的颜值
+	private String scoreDeduction = "0";// 颜值抵扣金额
+	private String DeductCouponAmount = "0";// 抵扣券实际抵扣价格
 
 	private String liveName;//直播名
 
-	private BigDecimal orderScoreDiscount;//购物车分摊的积分优惠
+	private BigDecimal orderScoreDiscount = BigDecimal.valueOf(0.0);//购物车分摊的积分优惠
 
-	private BigDecimal orderRebateDiscount;//购物车分摊的抵扣券优惠
+	private BigDecimal orderRebateDiscount = BigDecimal.valueOf(0.0);//购物车分摊的抵扣券优惠
 
 	private Date createAt;//创建时间
 
 	private String changePriceFlag;//改价标志（0没改价,1改价,2改价影响抵扣券）
 
-	private Integer shopNum;//店铺数量
+	private Integer shopNum = 0;//店铺数量
 
-	private BigDecimal totalHongBaoAmount;//红包实际抵扣数量
+	private BigDecimal totalHongBaoAmount = BigDecimal.valueOf(0.0);//红包实际抵扣价格
 	/**
 	 *是否是购物车订单
 	 */
