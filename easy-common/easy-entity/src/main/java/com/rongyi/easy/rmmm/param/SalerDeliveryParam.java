@@ -26,6 +26,8 @@ public class SalerDeliveryParam implements Serializable {
 	
 	private String expressInfoId;//物流信息主键id
 
+	private Integer source = 1;//操作平台 1摩店 2商家后台
+
 	public String getExpressInfoId() {
 		return expressInfoId;
 	}
@@ -90,10 +92,20 @@ public class SalerDeliveryParam implements Serializable {
 		this.ticketPicList = ticketPicList;
 	}
 
+	public Integer getSource()
+	{
+		return source;
+	}
+
+	public void setSource(Integer source)
+	{
+		this.source = source;
+	}
+
 	@Override
 	public String toString() {
 		return "SalerDeliveryParam [type=" + type + ", orderNum=" + orderNum + ", logisticsBillId=" + logisticsBillId
 				+ ", expressName=" + expressName + ", expressId=" + expressId + ", ticketPicList=" + ticketPicList + ", userId="
-				+ userId + ", expressInfoId=" + expressInfoId + "]";
+				+ userId + ", expressInfoId=" + expressInfoId + ",source"+source+"]";
 	}
 }

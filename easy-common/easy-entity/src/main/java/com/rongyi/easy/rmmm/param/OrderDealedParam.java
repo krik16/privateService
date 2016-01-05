@@ -13,6 +13,7 @@ public class OrderDealedParam implements Serializable {
 	private String orderNo;// 大订单号
 	private String orderPrice;// 订单价格
 	private Integer userId;//卖家用户id
+	private Integer source = 1;//操作平台 1摩店 2商家后台
 
 	public Integer getUserId() {
 		return userId;
@@ -62,6 +63,16 @@ public class OrderDealedParam implements Serializable {
 		this.orderPrice = orderPrice;
 	}
 
+	public Integer getSource()
+	{
+		return source;
+	}
+
+	public void setSource(Integer source)
+	{
+		this.source = source;
+	}
+
 	@Override
 	public String toString() {
 		return "OrderDealedParam{" +
@@ -71,6 +82,7 @@ public class OrderDealedParam implements Serializable {
 				", orderNo='" + orderNo + '\'' +
 				", orderPrice='" + orderPrice + '\'' +
 				", userId=" + userId +
+				", source=" + source +
 				'}';
 	}
 }
