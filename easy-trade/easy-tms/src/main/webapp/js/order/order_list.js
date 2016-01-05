@@ -109,10 +109,10 @@ function ajaxSearchOrderList() {
 		shopName = encodeURI(shopName);
 		paramsJson_["shopName"] = shopName;
 	}
-	if(nickname != ""){
+	/*if(nickname != ""){
 		nickname = encodeURI(nickname);
 		paramsJson_["nickname"] = nickname;
-	}
+	}*/
 	if(username != ""){
 		username = encodeURI(username);
 		paramsJson_["username"] = username;

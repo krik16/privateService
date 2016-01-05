@@ -314,10 +314,10 @@ public class OrderManagerController extends BaseController {
 			String username = (String) paramsMap.get("username");
 			//查询用户条件
 			List<UserInfoVO> users = null;
-			if (StringUtils.isNotBlank(nickname) || StringUtils.isNotBlank(username)) {
-				if (StringUtils.isNotBlank(nickname)) {
-					nickname = URLDecoder.decode(nickname, "utf-8");
-				}
+			if (StringUtils.isNotBlank(username)) {
+//				if (StringUtils.isNotBlank(nickname)) {
+//					nickname = URLDecoder.decode(nickname, "utf-8");
+//				}
 				if (StringUtils.isNotBlank(username)) {
 					username = URLDecoder.decode(username, "utf-8");
 				}
