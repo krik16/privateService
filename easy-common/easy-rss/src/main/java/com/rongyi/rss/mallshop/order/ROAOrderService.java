@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.rongyi.easy.rmmm.param.user.OrderAddressParam;
+
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
@@ -256,5 +257,13 @@ public interface ROAOrderService {
 	 * @return ResponseVO
 	 */
 	ResponseVO changeBuyerAddress(OrderAddressParam orderAddressParam);
+	
+	/**
+	 * 我的订单数量
+	 *
+	 * @return
+	 * @throws Exception
+	 */
+	MyOrderCountVO getMyOrderCountForCart(String buyerNum) throws Exception;
 
 }
