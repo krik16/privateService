@@ -78,8 +78,7 @@
                 <label>支付方式：</label>
                 <select id="payChannel" class="form-control ng-pristine ng-untouched ng-valid" title="">
                     <option value="">-- 全部 --</option>
-                    <option value="1">支付宝网页</option>
-                    <option value="3">支付宝app</option>
+                    <option value="1">支付宝</option>
                     <option value="5">微信</option>
                 </select>
             </div>

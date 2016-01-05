@@ -85,19 +85,52 @@ $(document).ready(function() {
 //ajax查询订单列表信息
 function ajaxSearchOrderList() {
 	var url_ = "../orderManager/ajaxSearchOrderList";
+	var orderCartNo = $('#orderCartNo').val();
 	var orderNo = $('#orderNo').val();
+	var guideType = $("#guideType").val();
 	var mallId = $('#mallId').val();
 	var shopName = $('#shop').val();
-	var nickname = $('#nickname').val();
+	var sellerAccount = $('#sellerAccount').val();
+	var payChannel = $('#payChannel').val();
+	/*var nickname = $('#nickname').val();*/
 	var username = $('#username').val();
+	var commodityNo = $('#commodityNo').val();
+	var timeBegin = $('#timeBegin').val();
+	var timeEnd = $('#timeEnd').val();
+	var amountBegin = $('#amountBegin').val();
+	var amountEnd = $('#amountEnd').val();
 	var status = $('#status').val();
+	var orderSource = $('#orderSource').val();
 	var currpage = $('#currpage').val();
-	var guideType = $("#guideType").val();
 
 	var paramsJson_ = { };
 	paramsJson_["currpage"] = currpage;
 	if(orderNo != ""){
 		paramsJson_["orderNo"] = orderNo;
+	}
+	if(orderCartNo != ""){
+		paramsJson_["orderCartNo"] = orderCartNo;
+	}
+	if(sellerAccount != ""){
+		paramsJson_["sellerAccount"] = sellerAccount;
+	}
+	if(payChannel != ""){
+		paramsJson_["payChannel"] = payChannel;
+	}
+	if(commodityNo != ""){
+		paramsJson_["commodityNo"] = commodityNo;
+	}
+	if(timeBegin != ""){
+		paramsJson_["createAtBegin"] = timeBegin;
+	}
+	if(timeEnd != ""){
+		paramsJson_["createAtBegin"] = timeEnd;
+	}
+	if(amountBegin != ""){
+		paramsJson_["payBegin"] = amountBegin;
+	}
+	if(amountEnd != ""){
+		paramsJson_["payEnd"] = amountEnd;
 	}
 	if(guideType != ""){
 		paramsJson_["guideType"] = guideType;
@@ -119,6 +152,9 @@ function ajaxSearchOrderList() {
 	}
 	if(status != ""){
 		paramsJson_["status"] = status;
+	}
+	if(orderSource != ""){
+		paramsJson_["orderSource"] = orderSource;
 	}
 	$.ajax({
 		url: url_,
