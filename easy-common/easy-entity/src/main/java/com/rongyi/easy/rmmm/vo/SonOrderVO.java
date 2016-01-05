@@ -14,11 +14,11 @@ public class SonOrderVO implements Serializable{
 
 	private String commodityPic;// 商品图片
 
-	private String commodityCurrentPrice;// 商品现价
+	private String commodityCurrentPrice = "0";// 商品现价
 
-	private String commodityOriginalPrice;// 商品原价
+	private String commodityOriginalPrice = "0";// 商品原价
 	
-	private BigDecimal realAmount;// 子订单实际价格
+	private BigDecimal realAmount = BigDecimal.valueOf(0.0);// 子订单实际价格
 
 	private String sonOrderStatus;// 子订单状态（含有维权状态）
 
@@ -38,7 +38,7 @@ public class SonOrderVO implements Serializable{
 
 	private String couponCode;// 卡券码
 
-	private String discount;// 抵扣金额
+	private String discount = "0";// 抵扣金额
 
 	private String description;// 全场红包/店铺红包
 	private String liveName;//直播名
