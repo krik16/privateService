@@ -13,17 +13,17 @@ public class CartOrderDetailVO extends PageVO implements Serializable{
 
 	private List<ParentOrderVO> orderList;//中订单详情列表
 
-	private BigDecimal rebateDiscount;// 抵扣券金额
+	private BigDecimal rebateDiscount = BigDecimal.valueOf(0.0);// 抵扣券金额
 
 	private String rebateName;// 抵扣券名称
 
-	private BigDecimal scoreDiscount;// 积分抵扣金额
+	private BigDecimal scoreDiscount = BigDecimal.valueOf(0.0);// 积分抵扣金额
 
-	private Integer score;// 使用积分
+	private Integer score = 0;// 使用积分
 
-	private BigDecimal realAmount;// 总价
+	private BigDecimal realAmount  = BigDecimal.valueOf(0.0);// 总价
 
-	private BigDecimal payAmount;// 应付价
+	private BigDecimal payAmount = BigDecimal.valueOf(0.0);// 应付价
 	
 	
 	private String orderNum;// 订单编号
@@ -33,7 +33,7 @@ public class CartOrderDetailVO extends PageVO implements Serializable{
 	private String provinceName;// 省名称
 	private String cityName;// 市名称
 	private String districtName;// 区名称
-	private BigDecimal commodityTotalPostage;// 合计运费
+	private BigDecimal commodityTotalPostage  = BigDecimal.valueOf(0.0);// 合计运费
 	private String receiveTime;// 确认收货时间
 	private String cancelTime;// 卖家取消订单时间
 	private String closeTime;// 订单关闭时间
@@ -46,11 +46,11 @@ public class CartOrderDetailVO extends PageVO implements Serializable{
 	private String orderStatus;// 购物车订单状态  1未支付 2已支付 3超时关闭 4买家关闭 5失效
 	private String isComment;// 是否评价  -1:表示不可以评价 0：表示未评价 1：表示已评价	
 	private boolean ifDeleteOrder = false;//true表示可以删除订单 false
-	private BigDecimal totalHongBaoAmount;//红包合计抵现
+	private BigDecimal totalHongBaoAmount  = BigDecimal.valueOf(0.0);//红包合计抵现
     private Integer changePriceFlag = 0;//0没有再次改价1表示有商家再次修改价格 2改价影响了抵扣券
 	private String message;
 	private String parentOrderStatus;// 父订单状态 1未付款 2待发货 3已发货 4确认收货 5已关闭
-	private Integer totalCommodityNum;//订单sku数量
+	private Integer totalCommodityNum = 0;//订单sku数量
 	private String orderId;// 订单id
 	private String receiveType;// 收货方式 0快递 1无需快递
 
