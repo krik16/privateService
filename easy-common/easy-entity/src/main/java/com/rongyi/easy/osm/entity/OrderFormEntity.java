@@ -155,6 +155,10 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     //促销券能使用的最小订单金额
     private BigDecimal couponRequirement;
 
+    /**
+     * 订单总金额（不包括积分优惠）
+     **/
+    private BigDecimal totalAmountWithoutScoreDiscount = null;
     //设备类型
     private Integer devType;
 
@@ -192,6 +196,13 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
         this.isAlert = isAlert;
     }
 
+    public BigDecimal getTotalAmountWithoutScoreDiscount() {
+        return totalAmountWithoutScoreDiscount;
+    }
+
+    public void setTotalAmountWithoutScoreDiscount(BigDecimal totalAmountWithoutScoreDiscount) {
+        this.totalAmountWithoutScoreDiscount = totalAmountWithoutScoreDiscount;
+    }
 
     public Integer getGuideType() {
         return guideType;
@@ -814,6 +825,7 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
                 ", jsonDiscountInfo=" + jsonDiscountInfo +
                 ", guideType=" + guideType +
                 ", isAlert=" + isAlert +
+                ", totalAmountWithoutScoreDiscount=" + totalAmountWithoutScoreDiscount +
                 ", couponDiscount=" + couponDiscount +
                 ", couponSource=" + couponSource +
                 ", couponRequirement=" + couponRequirement +
