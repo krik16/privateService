@@ -114,6 +114,16 @@ public class ParentOrderVO implements Serializable {
 	private boolean isCartOrder;
 	
 	private boolean ifDeleteOrder = false;//true表示可以删除订单 false
+	
+	private boolean ifOnDisplay = false;//true表示横着显示 false表示竖着显示
+
+	public boolean isIfOnDisplay() {
+		return ifOnDisplay;
+	}
+
+	public void setIfOnDisplay(boolean ifOnDisplay) {
+		this.ifOnDisplay = ifOnDisplay;
+	}
 
 	public boolean isIfDeleteOrder() {
 		return ifDeleteOrder;
