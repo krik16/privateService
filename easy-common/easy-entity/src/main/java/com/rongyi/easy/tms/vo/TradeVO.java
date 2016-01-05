@@ -6,8 +6,8 @@ import java.util.Date;
 
 public class TradeVO implements Serializable {
 	/**
-     * 
-     */
+	 *
+	 */
 	private static final long serialVersionUID = -1736356668329781965L;
 
 	private Integer id;
@@ -165,9 +165,9 @@ public class TradeVO implements Serializable {
 	 * 优惠券订单使用积分
 	 */
 	private Integer score;
-	
+
 	/**优惠券红包抵扣金额
-	 * 
+	 *
 	 */
 	private Integer hbDiscount;
 
@@ -186,9 +186,9 @@ public class TradeVO implements Serializable {
 	 * 优惠券金额整数
 	 */
 	private int couponDiscountInt;
-	
+
 	private Integer refundRejected;
-	
+
 	/**
 	 * 买家支付账号
 	 */
@@ -233,6 +233,16 @@ public class TradeVO implements Serializable {
 	 * 渠道 1：导购，2：买手
 	 */
 	private Integer guideType;
+
+	/**
+	 * 操作时间
+	 */
+	private Date opTime;
+
+	/**
+	 * 是否允许继续操作付款
+	 */
+	private boolean rePay=true;
 
 	public Integer getId() {
 		return id;
@@ -594,5 +604,20 @@ public class TradeVO implements Serializable {
 	public void setBuyerPayAccount(String buyerPayAccount) {
 		this.buyerPayAccount = buyerPayAccount;
 	}
-	
+
+	public Date getOpTime() {
+		return opTime;
+	}
+
+	public void setOpTime(Date opTime) {
+		this.opTime = opTime;
+	}
+
+	public boolean isRePay() {
+		return rePay;
+	}
+
+	public void setRePay(boolean rePay) {
+		this.rePay = rePay;
+	}
 }
