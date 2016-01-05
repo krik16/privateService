@@ -18,7 +18,7 @@ public class OrderAddressParam implements Serializable{
     private String provinceId;//省Id
     private String cityId;//城市Id
     private String districtId;//区县
-    private String userId;//操作人id
+    private Integer userId;//操作人id
     private Integer source = 1;//操作平台 1摩店 2商家后台
 
     public String getOrderNo() {
@@ -117,12 +117,12 @@ public class OrderAddressParam implements Serializable{
         this.source = source;
     }
 
-    public String getUserId()
+    public Integer getUserId()
     {
         return userId;
     }
 
-    public void setUserId(String userId)
+    public void setUserId(Integer userId)
     {
         this.userId = userId;
     }
