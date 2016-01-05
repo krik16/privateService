@@ -22,7 +22,7 @@ public class SonOrderVO implements Serializable{
 
 	private String sonOrderStatus;// 子订单状态（含有维权状态）
 
-	private String refundStatus;// 退款状态
+	private String refundStatus = "0";// 退款状态
 
 	private String commodityId;// 商品编号
 

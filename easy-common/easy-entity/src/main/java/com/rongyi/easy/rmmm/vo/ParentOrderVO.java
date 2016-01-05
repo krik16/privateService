@@ -57,9 +57,9 @@ public class ParentOrderVO implements Serializable {
 
 	private String shopLogo;// 店铺logo
 
-	private String isComment;// 是否评价  -1:表示不可以评价 0：表示未评价 1：表示已评价
+	private String isComment = "-1";// 是否评价  -1:表示不可以评价 0：表示未评价 1：表示已评价
 
-	private String closeType;// 父订单关闭类型 (0完成 1关闭)
+	private String closeType = "0";// 父订单关闭类型 (0完成 1关闭)
 
 	private String closeReason;// 关闭原因
 
@@ -67,7 +67,7 @@ public class ParentOrderVO implements Serializable {
 
 	private String buyerNickName;// 收货人昵称
 	private String buyerPhone;// 买家手机号（买家账号）
-	private String receiveType;// 收货方式 0快递 1无需快递
+	private String receiveType = "1";// 收货方式 0快递 1无需快递
 	private String nickName;// 导购昵称
 	private String imId;// 导购环信账号
 	private String userLogo;// 导购logo
