@@ -52,6 +52,14 @@ public interface IOrderQueryService {
 	 * @throws Exception
 	 */
 	MyOrderCountVO getMyOrderCount(String buyerNum) throws Exception;
+
+	/**
+	 * 我的订单数量
+	 *
+	 * @return
+	 * @throws Exception
+	 */
+	MyOrderCountVO getMyOrderCountForCart(String buyerNum) throws Exception;
 	
 	/**
 	 * 交易详情
