@@ -58,7 +58,7 @@ public class MaxIntegralParam implements Serializable {
 				"orderPrice=" + orderPrice +
 				", expressFee=" + expressFee +
 				", orderList=" + orderList +
-				", platformRebateAmount=" + platformRebateAmount +
+				", platformRebateAmount=orderList" + platformRebateAmount +
 				'}';
 	}
 }
