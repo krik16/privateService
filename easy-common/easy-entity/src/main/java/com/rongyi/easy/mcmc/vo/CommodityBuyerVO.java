@@ -271,6 +271,8 @@ public class CommodityBuyerVO implements Serializable{
 			this.activityType = "2";
 		} else if (commodity.getFlashSaleId() != null) {
 			this.activityType = "1";
+		} else if (StringUtils.isNotBlank(commodity.getSecKillSign())) {
+			this.activityType = "3";
 		} else {
 			//其他
 			this.activityType = "0";

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.rongyi.easy.mcmc.Commodity;
+import org.apache.commons.lang.StringUtils;
 
 
 public class CommodityVO  implements  Serializable {
@@ -300,6 +301,8 @@ public class CommodityVO  implements  Serializable {
 			this.activityType = "2";
 		} else if (commodity.getFlashSaleId() != null) {
 			this.activityType = "1";
+		} else if (StringUtils.isNotBlank(commodity.getSecKillSign())) {
+			this.activityType = "3";
 		} else {
 			//其他
 			this.activityType = "0";
