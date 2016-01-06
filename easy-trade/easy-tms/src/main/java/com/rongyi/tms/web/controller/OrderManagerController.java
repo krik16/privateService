@@ -113,18 +113,6 @@ public class OrderManagerController extends BaseController {
 			model.addAttribute("orderCartForms", orderCartVOs);
 			model.addAttribute("currpage", currPage);
 			model.addAttribute("rowCont", page.getRowCnt());
-//			List<OrderCartFormVO> dataList = new ArrayList<>();
-//			OrderCartFormVO vo = new OrderCartFormVO();
-//			vo.setOrderNo("123321123");
-//			vo.setCreateAt(new Date());
-//			vo.setPayAt(new Date());
-//			vo.setPayChannel((byte) 5);
-//			vo.setPayAmount(new BigDecimal(100));
-//			dataList.add(vo);
-// 			List<ParentOrderCartVO> orderCartVOs = convertToOrderCart(dataList);
-//			model.addAttribute("orderCartForms", orderCartVOs);
-//			model.addAttribute("currpage", 1);
-//			model.addAttribute("rowCont", 2);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

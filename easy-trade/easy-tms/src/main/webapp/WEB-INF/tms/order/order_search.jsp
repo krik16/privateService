@@ -6,10 +6,13 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>优惠券管理系统</title>
-    <link href="${ctx}/css/index4.css" type="text/css" rel="stylesheet"/>
+    <%--<link href="${ctx}/css/index4.css" type="text/css" rel="stylesheet"/>--%>
     <link href="${ctx}/css/index.css" type="text/css" rel="stylesheet"/>
     <link href="${ctx}/css/poshytip/tip-yellowsimple/tip-yellowsimple.css" type="text/css" rel="stylesheet"/>
     <link href="${ctx}/js/util/bootstrap/bootstrap.css" type="text/css" rel="stylesheet"/>
+    <link href="${ctx}/css/jquery-ui.css" type="text/css" rel="stylesheet" />
+    <link href="${ctx}/css/jquery.timepicker.css" type="text/css" rel="stylesheet" />
+
 
     <script src="${ctx}/js/jquery/jquery.js" type="text/javascript"></script>
     <script src="${ctx}/js/jquery/jquery-ui.js" type="text/javascript"></script>
@@ -99,16 +102,20 @@
             </div>
 
             <div class="form-group">
-                <label>下单时间段：</label>
-                <input name="timeBegin" type="text" value="" class="min bg2 startTime" id="timeBegin"/>
-                <span style="margin: 0 -55px 0 -15px">至</span>
-                <input name="timeEnd" type="text" value="" class="min bg2 endTime" id="timeEnd"  style="margin-right: 20px;"/>
+                <div class="memSuper-search">
+                    <label>下单时间段：</label>
+                    <input name="timeBegin" type="text" value="" class="min bg2 startTime" id="timeBegin"/>
+                    <span style="margin: 0 -55px 0 -15px">至</span>
+                    <input name="timeEnd" type="text" value="" class="min bg2 endTime" id="timeEnd"  style="margin-right: 20px;"/>
+                </div>
             </div>
             <div class="form-group">
-                <label>支付金额：</label>
-                <input name="amountBegin" type="text" value="" class="min bg2 startTime" id="amountBegin"/>
-                <span style="margin: 0 -55px 0 -15px">至</span>
-                <input name="amountEnd" type="text" value="" class="min bg2 endTime" id="amountEnd"  style="margin-right: 20px;"/>
+                <div class="memSuper-search">
+                    <label>支付金额：</label>
+                    <input name="amountBegin" type="text" value="" class="detail" id="amountBegin"/>
+                    <span style="margin: 0 -55px 0 -15px">至</span>
+                    <input name="amountEnd" type="text" value="" class="detail" id="amountEnd"  style="margin-right: 20px;"/>
+                </div>
             </div>
             <div class="form-group">
                 <label>订单状态：</label>

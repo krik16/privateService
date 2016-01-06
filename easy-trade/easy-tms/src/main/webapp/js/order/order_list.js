@@ -6,7 +6,25 @@ $(document).ready(function() {
 		$("#currpage").val("1");
 		ajaxSearchOrderList();
 	});
-	
+
+	$('.startTime').datetimepicker({
+		timeFormat : "HH:mm:ss",
+		dateFormat : "yy-mm-dd",
+		onSelect : function(dateText, inst) {
+			var dt = new Date(Date.parse(dateText.replace(/-/g, "/")));
+			$('#tradeStartTime').val(dt);
+		}
+	});
+	$('.endTime').datetimepicker({
+		timeFormat : "HH:mm:ss",
+		dateFormat : "yy-mm-dd",
+		onSelect : function(dateText, inst) {
+			var dt = new Date(Date.parse(dateText.replace(/-/g, "/")));
+			$('#tradeEndTime').val(dt);
+
+		}
+	});
+
 	$('#mall').typeahead({
         source: function (query, process) {
         	$("#mallId").val("");
@@ -104,7 +122,7 @@ function ajaxSearchOrderList() {
 	var currpage = $('#currpage').val();
 
 	var paramsJson_ = { };
-	paramsJson_["currpage"] = currpage;
+	paramsJson_["currentPage"] = currpage;
 	if(orderNo != ""){
 		paramsJson_["orderNo"] = orderNo;
 	}
@@ -124,7 +142,7 @@ function ajaxSearchOrderList() {
 		paramsJson_["createAtBegin"] = timeBegin;
 	}
 	if(timeEnd != ""){
-		paramsJson_["createAtBegin"] = timeEnd;
+		paramsJson_["createAtEnd"] = timeEnd;
 	}
 	if(amountBegin != ""){
 		paramsJson_["payBegin"] = amountBegin;

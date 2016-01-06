@@ -17,7 +17,7 @@ public class ParentOrderCartVO implements Serializable{
     private BigDecimal payAmount;//支付金额
     private Byte status;//状态 1未支付 2已支付 3超时关闭 4买家关闭 5失效
     private Integer orderSource;//订单来源： 0为容易逛，1为微网站，2为终端机，3其他
-    private byte payChannel;//1支付宝网页  3支付宝app  5微信
+    private Byte payChannel;//1支付宝网页  3支付宝app  5微信
     private Date createAt;
     private Date payAt;
     private String buyerName;
@@ -79,11 +79,11 @@ public class ParentOrderCartVO implements Serializable{
         this.orderSource = orderSource;
     }
 
-    public byte getPayChannel() {
+    public Byte getPayChannel() {
         return payChannel;
     }
 
-    public void setPayChannel(byte payChannel) {
+    public void setPayChannel(Byte payChannel) {
         this.payChannel = payChannel;
     }
 

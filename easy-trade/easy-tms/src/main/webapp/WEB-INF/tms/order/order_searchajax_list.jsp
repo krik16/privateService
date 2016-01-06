@@ -48,9 +48,9 @@
 								<c:when test="${orderForm.status == 1}"> 未付款     </c:when>
 								<c:when test="${orderForm.status == 2}"> 待发货     </c:when>
 								<c:when test="${orderForm.status == 3}"> 已发货     </c:when>
-								<c:when test="${orderForm.status == 4}"> 确收货 	 </c:when>
+								<c:when test="${orderForm.status == 4}"> 已完成 	 </c:when>
 								<c:when test="${orderForm.status == 5}"> 已关闭     </c:when>
-								<c:when test="${orderForm.status == 8}"> 已取消 	 </c:when>
+								<c:when test="${orderForm.status == 8}"> 已退款 	 </c:when>
 							</c:choose>
 						</td>
 						<td>

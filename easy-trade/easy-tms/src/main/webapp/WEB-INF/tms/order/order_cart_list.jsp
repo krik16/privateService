@@ -29,9 +29,9 @@
 						<td>
 							<c:choose>
 								<c:when test="${orderCart.status == 1}"> 未付款    </c:when>
-								<c:when test="${orderCart.status == 2}"> 已支付    </c:when>
+								<c:when test="${orderCart.status == 2}"> 已付款    </c:when>
 								<c:when test="${orderCart.status == 3}"> 超时关闭  </c:when>
-								<c:when test="${orderCart.status == 4}"> 确认收货 	</c:when>
+								<c:when test="${orderCart.status == 4}"> 买家关闭 	</c:when>
 								<c:when test="${orderCart.status == 5}"> 失效      </c:when>
 							</c:choose>
 						</td>

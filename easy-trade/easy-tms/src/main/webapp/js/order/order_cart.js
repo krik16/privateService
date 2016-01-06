@@ -6,6 +6,24 @@ $(document).ready(function() {
 		$("#currpage").val("1");
 		ajaxSearchOrderCartList();
 	});
+
+	$('.startTime').datetimepicker({
+		timeFormat : "HH:mm:ss",
+		dateFormat : "yy-mm-dd",
+		onSelect : function(dateText, inst) {
+			var dt = new Date(Date.parse(dateText.replace(/-/g, "/")));
+			$('#tradeStartTime').val(dt);
+		}
+	});
+	$('.endTime').datetimepicker({
+		timeFormat : "HH:mm:ss",
+		dateFormat : "yy-mm-dd",
+		onSelect : function(dateText, inst) {
+			var dt = new Date(Date.parse(dateText.replace(/-/g, "/")));
+			$('#tradeEndTime').val(dt);
+
+		}
+	});
 	
 });
 	
@@ -23,7 +41,7 @@ function ajaxSearchOrderCartList() {
 	var amountType = $("#amountType").val();
 	var amountBegin = $("#amountBegin").val();
 	var amountEnd = $("#amountEnd").val();
-	var currPage = $("currpage").val();
+	var currPage = $("#currpage").val();
 	var pageSize = 10;
 	var paramsJson_ = { };
 	paramsJson_["currPage"] = currPage;
@@ -60,14 +78,14 @@ function ajaxSearchOrderCartList() {
 		paramsJson_["status"] = status;
 	}
 	if(amountBegin != ""){
-		if(amountType=1){
+		if(amountType==1){
 			paramsJson_["realAmountBegin"] = amountBegin;
 		}else if(amountType==2){
 			paramsJson_["payAmountBegin"] = amountBegin;
 		}
 	}
 	if(amountEnd != ""){
-		if(amountType=1){
+		if(amountType==1){
 			paramsJson_["realAmountEnd"] = amountEnd;
 		}else if(amountType==2){
 			paramsJson_["payAmountEnd"] = amountEnd;
@@ -89,7 +107,7 @@ function ajaxSearchOrderCartList() {
 					$("#currpage").val(currpageVal - 1);
 				}
 				$("#jumpPage").val("");
-				ajaxSearchOrderList();
+				ajaxSearchOrderCartList();
 			});
 
 			$("#downPage").click(function(){
@@ -101,7 +119,7 @@ function ajaxSearchOrderCartList() {
 					$("#currpage").val(currpageVal + 1);
 				}
 				$("#jumpPage").val("");
-				ajaxSearchOrderList();
+				ajaxSearchOrderCartList();
 			});
 
 			$("#gopage").click(function(){
@@ -109,22 +127,22 @@ function ajaxSearchOrderCartList() {
 				if (temppage != "" && temppage != undefined && !isNaN(temppage)) {
 					if (temppage >= 1 && temppage <= totalPage) {
 						$("#currpage").val(temppage);
-						ajaxSearchOrderList();
+						ajaxSearchOrderCartList();
 					} else if(temppage > totalPage){
 						temppage = totalPage;
 						$("#jumpPage").val(totalPage);$("#currpage").val(totalPage);
-						ajaxSearchOrderList();
+						ajaxSearchOrderCartList();
 					}else if(temppage == 0){
 						temppage = 1;
 						$("#jumpPage").val(1);$("#currpage").val(1);
-						ajaxSearchOrderList();
+						ajaxSearchOrderCartList();
 					} else{
 						_util.cmsTip("请输入大于0的数字!");
 					}
 				} else if (temppage == 0) {
 					temppage = 1;
 					$("#jumpPage").val(1);$("#currpage").val(1);
-					ajaxSearchOrderList();
+					ajaxSearchOrderCartList();
 				} else {
 					_util.cmsTip("请输入数字!");
 				}
