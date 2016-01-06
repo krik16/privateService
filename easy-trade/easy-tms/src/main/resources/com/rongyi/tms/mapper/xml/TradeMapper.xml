@@ -133,6 +133,10 @@
 			AND shop_info.shop_name like
 			concat('%',#{shopName,jdbcType=VARCHAR},'%')
 		</if>
+		<!-- 街边店铺id -->
+		<if test="curbshopId != null and curbshopId != ''">
+			AND shop_info.shop_mid = #{curbshopId}
+		</if>
 		<if test="buyerAccount != null and buyerAccount != ''">
 			AND (trade_order.user_phone=#{buyerAccount}
 			<!-- 买家id集合 -->

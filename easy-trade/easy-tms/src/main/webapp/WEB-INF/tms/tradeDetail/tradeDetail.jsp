@@ -50,8 +50,6 @@
     <div class="p-list">
         <div class="form-inline ng-valid ng-dirty ng-valid-parse">
             <input id="currpage" type="hidden" name="currpage" value="${currpage}"/>
-            <input type="hidden" value="1" name="pageNo" id="currpage">
-
             <div class="form-group">
                 <label>交易流水号:</label>
                 <input id="tradeNo" type="text" class="form-control ng-pristine ng-untouched ng-valid">
@@ -82,6 +80,13 @@
                 <li class="xiala" style="list-style-type:none;">
                     <label>店铺：</label>
                     <input name="shopId" type="text" class="form-control ng-pristine ng-untouched ng-valid">
+                </li>
+            </div>
+            <div class="form-group">
+                <li class="xiala" style="list-style-type:none;">
+                    <label>街边店：</label>
+                    <input name="curbshopName" type="text" class="form-control ng-pristine ng-untouched ng-valid">
+                    <input id="curbshopId" type="hidden" value=""/>
                 </li>
             </div>
             <div class="form-group">
@@ -138,14 +143,13 @@
                 <input name="start" type="text" value=""
                        class=" form-control ng-pristine ng-untouched ng-valid startTime" id="tradeStartTime"
                        style="width:160px"/>
-                <label>至<label>
+                <label>至</label>
                     <input name="end" type="text" value=""
                            class="form-control ng-pristine ng-untouched ng-valid endTime" id="tradeEndTime"
                            style="width:160px"/>
-            </div>
-
+              </div>
             <div class="form-group">
-                <label>提现金额：</label>
+                <label>交易金额：</label>
                 <input type="text" id="minTotalPrice" class=" form-control ng-pristine ng-untouched ng-valid"/>
                 <label>至</label>
                 <input type="text" id="maxTotalPrice" class="form-control ng-pristine ng-untouched ng-valid"/>

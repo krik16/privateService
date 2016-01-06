@@ -72,7 +72,7 @@ public class PayController extends BaseController {
     PropertyConfigurer propertyConfigurer;
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public String search(ModelMap model, String currentMallId, HttpServletRequest request, HttpServletResponse response, HttpSession session, String currpage) {
+    public String search(ModelMap model, String currpage) {
         model.addAttribute("currpage", currpage);
         return "/pay/pay";
     }
@@ -80,15 +80,13 @@ public class PayController extends BaseController {
     /**
      * @param model
      * @param request
-     * @param response
-     * @param session
      * @return
      * @Description: 提现付款列表
      * @Author: 柯军
      * @datetime:2015年5月25日下午1:33:32
      **/
     @RequestMapping(value = "/drawApplyList", method = RequestMethod.POST)
-    public String list(ModelMap model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+    public String list(ModelMap model, HttpServletRequest request) {
         try {
             Map<String, Object> map = getJsonMap(request);
             LOGGER.info("----drawApply list ------map=" + map);

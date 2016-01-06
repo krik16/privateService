@@ -36,6 +36,7 @@
     <sql id="Base_from">
         payment_order
         left join draw_apply on draw_apply.draw_no = payment_order.order_no
+        LEFT JOIN ry_rmmm.shop_info shop_info on shop_info.id = draw_apply.shop_id
         left join payment_order_op op on op.payment_id = payment_order.id
     </sql>
     <sql id="trade_list_where_clause">
@@ -52,6 +53,10 @@
         <if test="shopName != null and shopName != ''">
             AND draw_apply.shop_name like
             concat('%',#{shopName,jdbcType=VARCHAR},'%')
+        </if>
+        <!-- 街边店铺id -->
+        <if test="curbshopId != null and curbshopId != ''">
+            AND shop_info.shop_mid = #{curbshopId}
         </if>
         <!-- 卖家姓名 -->
         <if test="sellerName != null and sellerName != ''">
