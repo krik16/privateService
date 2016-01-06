@@ -15,6 +15,7 @@ public class BizzValidHistoryParam implements Serializable{
     private Integer pageSize = 15;//默认15(传-1不分页)
     private Integer currentPage = 1;//当前页（后台处理）
     private Integer checkUserId;//核销人id
+    private String checkNickName;//核销人昵称
     private String title;//券名称
     private String couponCode;//券码
     private String userPhone;//买家手机号
@@ -58,6 +59,14 @@ public class BizzValidHistoryParam implements Serializable{
 
     public Integer getDateStatus() {
         return dateStatus;
+    }
+
+    public String getCheckNickName() {
+        return checkNickName;
+    }
+
+    public void setCheckNickName(String checkNickName) {
+        this.checkNickName = checkNickName;
     }
 
     public void setDateStatus(Integer dateStatus) {
