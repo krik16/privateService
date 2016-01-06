@@ -4,6 +4,7 @@
 package com.rongyi.easy.malllife.vo;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
  */
 public class KillActivityListVO implements Serializable {
 	
-	private String showTime;
+	private String showTime;//格式 2015-12-14 11:00
 
 	private String showTitle;//活动名称
 
@@ -21,6 +22,16 @@ public class KillActivityListVO implements Serializable {
 	private String message;//预留字段
 
 	private List<KillActivityVO> couponList;//代金券列表
+	
+	private Date showDate;
+
+	public Date getShowDate() {
+		return showDate;
+	}
+
+	public void setShowDate(Date showDate) {
+		this.showDate = showDate;
+	}
 
 	public String getShowTitle() {
 		return showTitle;
@@ -69,9 +80,7 @@ public class KillActivityListVO implements Serializable {
 	@Override
 	public String toString() {
 		return "KillActivityListVO [showTime=" + showTime + ", showTitle=" + showTitle + ", continueTime=" + continueTime
-				+ ", message=" + message + ", couponList=" + couponList + "]";
+				+ ", message=" + message + ", couponList=" + couponList + ", showDate=" + showDate + "]";
 	}
-
-	
 
 }
