@@ -120,6 +120,15 @@ public interface ROAContentService {
 	 * @throws Exception
 	 */
 	public Boolean saveContent(ForumContent fc)throws Exception;
+
+	/**
+	 * 保存每日秒杀的内容
+	 * @param fc
+	 * @return
+	 * @throws Exception
+	 */
+	public ForumContent saveContentDailySale(ForumContent fc) throws Exception;
+
 	/**
 	 * 删除内容
 	 * @param fc

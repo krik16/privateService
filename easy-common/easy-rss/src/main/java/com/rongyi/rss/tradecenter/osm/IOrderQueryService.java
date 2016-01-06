@@ -69,6 +69,15 @@ public interface IOrderQueryService {
 	 * @throws Exception
 	 */
 	TransactionDetailVO getTransactionDetail(TransactionDetailParam param, String mallUserMid) throws Exception;
+
+	/**
+	 * 交易详情
+	 *
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	List<TransactionDetailVO> getTransactionDetailForCart(TransactionDetailParam param, String mallUserMid) throws Exception;
 	
 	/**
 	 * 根据订单号查询订单所属店铺、商场，以及买家信息

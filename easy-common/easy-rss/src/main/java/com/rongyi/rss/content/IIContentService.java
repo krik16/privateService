@@ -232,4 +232,13 @@ public interface IIContentService {
 	 * @return
 	 */
 	public List<TemplateCityVO> findTemplateCityList(Integer id);
+
+	/**
+	 * 每日秒杀的保存
+	 * @param fc
+	 * @return
+	 * @throws Exception
+	 */
+	public ForumContent saveContentDailySale(ForumContent fc) throws Exception;
+
 }

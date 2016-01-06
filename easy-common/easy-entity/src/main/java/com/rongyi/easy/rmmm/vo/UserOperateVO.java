@@ -24,6 +24,8 @@ public class UserOperateVO implements Serializable{
 	private Integer myCouponNum = 0;//我的代金券数量
 	private Integer myHongBaoNum = 0;//我的红包数量
 	private Integer myRebateNum = 0;//我的抵扣券数量
+	private Integer nonPayment = 0;//待付款订单数量
+	private Integer nonReceived = 0;//待收货订单数量
 	public Integer getMyCouponNum() {
 		return myCouponNum;
 	}
@@ -72,6 +74,17 @@ public class UserOperateVO implements Serializable{
 	public void setNewTempNum(Integer newTempNum) {
 		this.newTempNum = newTempNum;
 	}
+	public Integer getNonPayment() {
+		return nonPayment;
+	}
+	public void setNonPayment(Integer nonPayment) {
+		this.nonPayment = nonPayment;
+	}
+	public Integer getNonReceived() {
+		return nonReceived;
+	}
+	public void setNonReceived(Integer nonReceived) {
+		this.nonReceived = nonReceived;
+	}
 	
-
 }
