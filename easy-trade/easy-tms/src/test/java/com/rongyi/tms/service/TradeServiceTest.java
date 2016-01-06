@@ -2,12 +2,16 @@
 package com.rongyi.tms.service;
 
 import com.rongyi.easy.coupon.entity.UserCoupon;
+import com.rongyi.easy.roa.vo.ShopVO;
 import com.rongyi.easy.tms.vo.TradeVO;
 import com.rongyi.easy.usercenter.entity.MalllifeUserInfoEntity;
+import com.rongyi.rss.bdata.ShopService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
+import com.rongyi.rss.roa.ROAShopService;
 import com.rongyi.tms.BaseTest;
 import com.rongyi.tms.moudle.vo.TradeDetailCount;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.annotation.Rollback;
 import org.testng.annotations.Test;
 
@@ -22,6 +26,9 @@ public class TradeServiceTest extends BaseTest{
 
     //    @Autowired
     ROAMalllifeUserService rOAMallLifeUserService;
+
+    @Autowired
+    ROAShopService shopService;
 
 
     @Rollback(true)
@@ -66,6 +73,20 @@ public class TradeServiceTest extends BaseTest{
 //    @Test
     public void testGetUserCouponByOrderNo(){
         UserCoupon userCoupon = tradeDetailService.getCouponOrderRecordByOrderNo("2015071300350917");
-        System.err.println("result="+userCoupon.getDiscount());
+        System.err.println("result=" + userCoupon.getDiscount());
+    }
+
+    @Test
+    public void testGetShops(){
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("shopName", "五角场巴黎春天特卖场");
+        Map<String, Object> result = null;
+        try {
+            result = shopService.getShops(map, 1, 10);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        List<ShopVO> shops = (List<ShopVO>) result.get("list");
+        System.err.println("shops="+shops.toString());
     }
 }
