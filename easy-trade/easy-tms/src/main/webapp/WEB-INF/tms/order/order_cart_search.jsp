@@ -53,22 +53,10 @@
             </div>
 
             <div class="form-group">
-                <label>订单来源：</label>
-                <select id="orderSource" class="form-control ng-pristine ng-untouched ng-valid">
-                    <option value="">--全部--</option>
-                    <option value="0">容易逛</option>
-                    <option value="1">微网站</option>
-                    <option value="2">终端机</option>
-                    <option value="3">其它</option>
-                </select>
-            </div>
-
-            <div class="form-group">
                 <label>支付方式：</label>
                 <select id="payChannel" class="form-control ng-pristine ng-untouched ng-valid">
                     <option value="">--全部--</option>
-                    <option value="1">支付宝网页</option>
-                    <option value="3">支付宝APP</option>
+                    <option value="1,3">支付宝</option>
                     <option value="5">微信</option>
                 </select>
             </div>

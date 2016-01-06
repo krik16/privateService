@@ -96,6 +96,9 @@ public class OrderManagerController extends BaseController {
 		try {
 			logger.info("orderCart params = {}", paramsJson);
 			Map<String, Object> paramsMap = JsonUtil.getMapFromJson(paramsJson);
+			if (paramsMap.containsKey("payChannel")){
+				paramsMap.put("payChannels", paramsMap.get("payChannel").toString().split(","));
+			}
 			if (paramsMap.containsKey("userAccount")){
 				String phone = paramsMap.get("userAccount").toString();
 				UserInfoVO userInfo = roaMalllifeUserService.getByPhone(phone);

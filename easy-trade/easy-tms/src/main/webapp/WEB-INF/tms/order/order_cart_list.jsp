@@ -12,7 +12,6 @@
 			<td>订单金额（元）</td>
 			<td>支付金额（元）</td>
 			<td>订单状态</td>
-			<td>订单来源</td>
 			<td>支付方式</td>
 			<td>下单时间</td>
 			<td>支付时间</td>
@@ -37,16 +36,7 @@
 						</td>
 						<td>
 							<c:choose>
-								<c:when test="${orderCart.orderSource == 0}"> 容易逛   </c:when>
-								<c:when test="${orderCart.orderSource == 1}"> 微网站   </c:when>
-								<c:when test="${orderCart.orderSource == 2}"> 终端机   </c:when>
-								<c:when test="${orderCart.orderSource == 3}"> 其它     </c:when>
-							</c:choose>
-						</td>
-						<td>
-							<c:choose>
-								<c:when test="${orderCart.payChannel == 1}"> 支付宝网页  </c:when>
-								<c:when test="${orderCart.payChannel == 3}"> 支付宝app   </c:when>
+								<c:when test="${orderCart.payChannel==1 or orderCart.payChannel==3}"> 支付宝  </c:when>
 								<c:when test="${orderCart.payChannel == 5}"> 微信        </c:when>
 							</c:choose>
 						</td>

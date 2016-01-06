@@ -32,7 +32,6 @@ function ajaxSearchOrderCartList() {
 	var url_ = "../orderManager/ajaxOrderCartList";
 	var orderNo = $('#orderNo').val();
 	var userAccount = $('#userAccount').val();
-	var orderSource = $('#orderSource').val();
 	var payChannel = $('#payChannel').val();
 	var timeType = $('#timeType').val();
 	var timeBegin = $('#timeBegin').val();
@@ -51,9 +50,6 @@ function ajaxSearchOrderCartList() {
 	}
 	if(userAccount != ""){
 		paramsJson_["userAccount"] = userAccount;
-	}
-	if(orderSource != ""){
-		paramsJson_["orderSource"] = orderSource;
 	}
 	if(payChannel!=""){
 		paramsJson_["payChannel"] = payChannel;
