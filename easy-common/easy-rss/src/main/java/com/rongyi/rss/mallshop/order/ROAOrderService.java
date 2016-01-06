@@ -265,5 +265,14 @@ public interface ROAOrderService {
 	 * @throws Exception
 	 */
 	MyOrderCountVO getMyOrderCountForCart(String buyerNum) throws Exception;
+	
+	/**
+	 * 交易详情
+	 *
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	List<TransactionDetailVO> getTransactionDetailForCart(TransactionDetailParam param, String mallUserMid) throws Exception;
 
 }
