@@ -120,7 +120,14 @@ public interface IOrderQueryService {
 	 * @return
 	 */
 	List<OrderDetailFormEntity> selectByParentNum(String parentNum) throws Exception;
-	
+
+	/**
+	 * 大运营订单详情
+	 * @param orderId
+	 * @return
+	 * @throws Exception
+	 */
+	ParentOrderVO searchRYOrderDetail(Integer orderId) throws Exception;
 	PagingVO<OrderManagerVO> searchListByMap(Map<String, Object> paramsMap) throws Exception;
 	
 	/**

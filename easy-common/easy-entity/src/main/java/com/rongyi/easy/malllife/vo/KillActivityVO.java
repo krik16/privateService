@@ -126,7 +126,7 @@ public class KillActivityVO implements Serializable {
 		return "KillActivityVO [couponId=" + couponId + ", title=" + title + ", currentPrice=" + currentPrice
 				+ ", originalPrice=" + originalPrice + ", picUrl=" + picUrl + ", shopName=" + shopName + ", mallName=" + mallName
 				+ ", limitPublishCount=" + limitPublishCount + ", limitCount=" + limitCount + ", location=" + location
-				+ ", couponNum=" + couponNum + "]";
+				+ ", couponNum=" + couponNum + ", type=" + type + "]";
 	}
 
 }
