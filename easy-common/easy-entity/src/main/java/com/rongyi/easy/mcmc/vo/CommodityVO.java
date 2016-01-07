@@ -66,7 +66,7 @@ public class CommodityVO  implements  Serializable {
 	private String filialeMid;//分公司id
 	private int identity = 5;//-1表示定时任务0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购6买手
 	private Integer processIdentity;//当前登录人的身份
-	private String activityType;	//活动状态[闪购1、特卖2、秒杀3]
+	private String activityType = "0";	//活动状态[闪购1、特卖2、秒杀3]
 
 	public String getActivityType() {
 		return activityType;
