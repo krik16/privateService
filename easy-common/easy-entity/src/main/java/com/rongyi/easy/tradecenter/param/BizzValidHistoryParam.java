@@ -142,7 +142,6 @@ public class BizzValidHistoryParam implements Serializable{
                 ", userPhone='" + userPhone + '\'' +
                 ", useTimeBegin=" + useTimeBegin +
                 ", useTimeEnd=" + useTimeEnd +
-                ", couponIds=" + couponIds +
                 ", recordStart=" + recordStart +
                 '}';
     }
