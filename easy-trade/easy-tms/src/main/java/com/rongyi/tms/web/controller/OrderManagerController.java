@@ -87,7 +87,8 @@ public class OrderManagerController extends BaseController {
 	private IUserInfoService iUserInfoService;
 
 	@RequestMapping("/orderCartSearch")
-	public String orderCartSearch() {
+	public String orderCartSearch(String orderCartNo, ModelMap model) {
+		model.addAttribute("orderCartNo", orderCartNo);
 		return "order/order_cart_search";
 	}
 
@@ -262,7 +263,7 @@ public class OrderManagerController extends BaseController {
 			//订单过程包含（">|<4,"）就是正常关闭
 			if(StringUtils.isNotBlank(orderDetailVo.getStatusRoute()) 
 					&& orderDetailVo.getStatusRoute().contains(">|<4,")){
-				orderDetailVo.setParentOrderStatus("6");
+				orderDetailVo.setParentOrderStatus("4");
 			}
 			model.addAttribute("order", orderDetailVo);
 			model.addAttribute("cashCoupons", cashCoupons);

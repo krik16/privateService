@@ -44,7 +44,12 @@
 
             <div class="form-group">
                 <label>订单号：</label>
-                <input id="orderNo" name="orderNo" type="text" class="form-control ng-pristine ng-untouched ng-valid">
+                <c:if test="${orderCartNo!=null}">
+                    <input id="orderNo" value="${orderCartNo}" readonly="true" type="text" class="form-control ng-pristine ng-untouched ng-valid">
+                </c:if>
+                <c:if test="${orderCartNo==null}">
+                    <input id="orderNo" value="" type="text" class="form-control ng-pristine ng-untouched ng-valid">
+                </c:if>
             </div>
 
             <div class="form-group">
