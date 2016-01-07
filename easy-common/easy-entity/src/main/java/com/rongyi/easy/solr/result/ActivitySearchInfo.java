@@ -46,6 +46,7 @@ public class ActivitySearchInfo implements Serializable {
 
 	private Integer payDownTime; //支付剩余时间(单位是秒)
 	private List<String	> customCategoryIds; //卡券对应店铺的自定义分类
+	private Integer apply_shops_count; // 卡券支持的店铺数量
 
 	/**
 	 * 使用限制
@@ -342,6 +343,20 @@ public class ActivitySearchInfo implements Serializable {
 		this.customCategoryIds = customCategoryIds;
 	}
 
+	/**
+	 * @return the apply_shops_count
+	 */
+	public Integer getApply_shops_count() {
+		return apply_shops_count;
+	}
+
+	/**
+	 * @param apply_shops_count the apply_shops_count to set
+	 */
+	public void setApply_shops_count(Integer apply_shops_count) {
+		this.apply_shops_count = apply_shops_count;
+	}
+
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this)
@@ -375,6 +390,8 @@ public class ActivitySearchInfo implements Serializable {
 				.append("limitCount", limitCount)
 				.append("afterSaleService", afterSaleService)
 				.append("payDownTime", payDownTime)
+				.append("customCategoryIds", customCategoryIds)
+				.append("apply_shops_count", apply_shops_count)
 				.toString();
 	}
 }
