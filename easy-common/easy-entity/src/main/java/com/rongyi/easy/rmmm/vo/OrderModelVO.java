@@ -23,6 +23,7 @@ public class OrderModelVO extends OrderModelParam implements Serializable {
 	private String userName;// 导购姓名
 	private String userPhone;// 导购电话
 	private String shopName;// 店铺名称
+	private String shopLogo;//店铺logo
 	private String mallName;// 商场名称
 	private String provinceName;// 省名称
 	private String cityName;// 市名称
@@ -142,6 +143,14 @@ public class OrderModelVO extends OrderModelParam implements Serializable {
 
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
+	}
+	
+	public String getShopLogo() {
+		return shopLogo;
+	}
+
+	public void setShopLogo(String shopLogo) {
+		this.shopLogo = shopLogo;
 	}
 
 	public String getMallName() {
