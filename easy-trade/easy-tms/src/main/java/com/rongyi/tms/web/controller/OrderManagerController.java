@@ -20,12 +20,12 @@ import com.rongyi.rss.malllife.roa.ROACommodityService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.rss.mallshop.order.ROAOrderDetailFormService;
 import com.rongyi.rss.mallshop.order.ROAOrderFormService;
-import com.rongyi.rss.mallshop.order.ROAOrderService;
 import com.rongyi.rss.mallshop.shop.ROACooperationMallService;
 import com.rongyi.rss.mallshop.shop.ROAShopService;
 
 import com.rongyi.rss.solr.McmcCommoditySolrService;
 import com.rongyi.rss.tradecenter.osm.IOrderCartService;
+import com.rongyi.rss.tradecenter.osm.IOrderQueryService;
 import com.rongyi.tms.moudle.vo.ParentOrderCartVO;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -67,7 +67,7 @@ public class OrderManagerController extends BaseController {
 	ROAOrderDetailFormService roaOrderDetailFormService;
 
 	@Autowired
-	ROAOrderService roaOrderService;
+	IOrderQueryService iOrderQueryService;
 
 	@Autowired
 	ROAMalllifeUserService roaMalllifeUserService;
@@ -224,7 +224,7 @@ public class OrderManagerController extends BaseController {
 			if (StringUtils.isBlank(orderId)) {
 				throw new RuntimeException("orderId is null or empty");
 			}
-			ParentOrderVO orderDetailVo = roaOrderService.getParentOrderVO(Integer.valueOf(orderId));
+			ParentOrderVO orderDetailVo = iOrderQueryService.searchRYOrderDetail(Integer.valueOf(orderId));
 			List<MMUserCouponVO> cashCoupons = new ArrayList<>();
 			List<SonOrderVO> sonOrderList = orderDetailVo.getSonOrderList();
 			BigDecimal discountTotal = new BigDecimal("0.00");//总红包（抵扣）
