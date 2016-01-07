@@ -13,6 +13,7 @@ public class ParentOrderVO implements Serializable {
 	private String orderCartNo;// 购物车订单号
 	private String paymentIdList;// 支付流水号
 	private String couponCodes;// 券码（多个逗号隔开）
+	private Byte payChannel;// 券码（多个逗号隔开）
 
 	private String mallName;// 商场名称
 
@@ -125,6 +126,14 @@ public class ParentOrderVO implements Serializable {
 
 	public void setPaymentIdList(String paymentIdList) {
 		this.paymentIdList = paymentIdList;
+	}
+
+	public Byte getPayChannel() {
+		return payChannel;
+	}
+
+	public void setPayChannel(Byte payChannel) {
+		this.payChannel = payChannel;
 	}
 
 	public String getCouponCodes() {
