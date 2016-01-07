@@ -18,24 +18,24 @@
     </div>
     <table width="100%" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;">
         <tr>
-            <td width="15%">交易流水号</td>
-            <td width="9%">付款单号</td>
+            <td width="17%">交易流水号</td>
+            <td width="11%">付款单号</td>
             <td width="4%">渠道</td>
-            <td width="5%">交易时间</td>
+            <td width="7%">交易时间</td>
             <td width="4%">收支类型</td>
             <td width="4%">打款方式</td>
-            <td width="4%">优惠方式</td>
-            <td width="6%">商场</td>
-            <td width="5%">店铺</td>
-            <td width="9%">订单号</td>
+            <td width="6%">优惠方式</td>
+           <%-- <td width="6%">商场</td>
+            <td width="5%">店铺</td>--%>
+            <td width="11%">订单号</td>
             <td width="5%">订单类型</td>
-            <td width="5%">下单时间</td>
-            <td width="6%">买家账号</td>
-            <td width="4%">买家姓名</td>
-            <td width="5%">买家付款账号</td>
-            <td width="6%">卖家账号</td>
-            <td width="4%">卖家姓名</td>
-            <td width="5%">交易金额</td>
+            <td width="7%">下单时间</td>
+            <td width="8%">买家账号</td>
+            <td width="7%">买家姓名</td>
+            <td width="7%">买家付款账号</td>
+       <%--     <td width="6%">卖家账号</td>
+            <td width="4%">卖家姓名</td>--%>
+            <td width="7%">交易金额</td>
         </tr>
         <c:choose>
             <c:when test="${not empty list}">
@@ -80,8 +80,8 @@
                             </c:otherwise>
                         </c:choose>
 
-                        <td>${entity.mallName}</td>
-                        <td>${entity.shopName}</td>
+                      <%--  <td>${entity.mallName}</td>
+                        <td>${entity.shopName}</td>--%>
                         <c:choose>
                             <c:when test="${entity.orderType eq 0}">
                                 <td>
@@ -104,8 +104,8 @@
                         <td>${entity.buyerAccount}</td>
                         <td>${entity.buyerName}</td>
                         <td>${entity.buyerPayAccount}</td>
-                        <td>${entity.sellerAccount}</td>
-                        <td>${entity.sellerName}</td>
+                       <%-- <td>${entity.sellerAccount}</td>
+                        <td>${entity.sellerName}</td>--%>
                         <td>
                             <c:if test="${not empty entity.orderPrice}">
                                 <c:choose>

@@ -72,7 +72,7 @@
                     <option value="2">买手</option>
                 </select>
             </div>
-            <div class="form-group">
+        <%--    <div class="form-group">
                 <li class="xiala" style="list-style-type:none;">
                     <label>商场：</label>
                     <input name="mallId" type="text" class="form-control ng-pristine ng-untouched ng-valid">
@@ -83,7 +83,7 @@
                     <label>店铺：</label>
                     <input name="shopId" type="text" class="form-control ng-pristine ng-untouched ng-valid">
                 </li>
-            </div>
+            </div>--%>
             <div class="form-group">
                 <label>买家账号：</label>
                 <input id="buyerAccount" type="text" class="form-control ng-pristine ng-untouched ng-valid">
@@ -92,10 +92,10 @@
                 <label>买家付款账号：</label>
                 <input id="buyerPayAccount" type="text" class="form-control ng-pristine ng-untouched ng-valid">
             </div>
-            <div class="form-group">
+            <%--<div class="form-group">
                 <label>卖家账号：</label>
                 <input id="sellerAccount" type="text" class="form-control ng-pristine ng-untouched ng-valid">
-            </div>
+            </div>--%>
             <div class="form-group">
                 <label>收支类型：</label>
                 <select id="tradeType" class="form-control ng-pristine ng-untouched ng-valid">
@@ -138,7 +138,7 @@
                 <input name="start" type="text" value=""
                        class=" form-control ng-pristine ng-untouched ng-valid startTime" id="tradeStartTime"
                        style="width:160px"/>
-                <label>至<label>
+                <label>至</label>
                     <input name="end" type="text" value=""
                            class="form-control ng-pristine ng-untouched ng-valid endTime" id="tradeEndTime"
                            style="width:160px"/>
