@@ -94,7 +94,8 @@ public class MallEntity implements Serializable {
 	private String aliasename;
 	private String aliasname;
 	private String businesstype;
-	
+	private String simpleFloorName;//新增的floorName
+    private ObjectId building_id;//关联的楼栋幢座id
 	public ObjectId getId() {
 		return id;
 	}
@@ -511,5 +512,16 @@ public class MallEntity implements Serializable {
 	public void setMerlog_pic(String merlog_pic) {
 		this.merlog_pic = merlog_pic;
 	}
-	
+	public String getSimpleFloorName() {
+		return simpleFloorName;
+	}
+	public void setSimpleFloorName(String simpleFloorName) {
+		this.simpleFloorName = simpleFloorName;
+	}
+	public ObjectId getBuilding_id() {
+		return building_id;
+	}
+	public void setBuilding_id(ObjectId building_id) {
+		this.building_id = building_id;
+	}
 }
