@@ -48,13 +48,15 @@
 							<c:if test="${order.receiveTime==null}">--</c:if>
 						</li>
 
-						<%--<li class="name">快递公司</li>
-						<li class="line">|</li>
-						<li class="data max2">${order.expressName }</li>--%>
-
 						<li class="name">支付方式</li>
 						<li class="line">|</li>
-						<li class="data max2">${order.expressName }</li>
+						<li class="data max2">
+							<c:choose>
+								<c:when test="${order.payChannel==1 or order.payChannel==3 }">支付宝</c:when>
+								<c:when test="${order.payChannel==5 }">微信</c:when>
+								<c:otherwise>--</c:otherwise>
+							</c:choose>
+						</li>
 
 					</ul>
 				</div>
@@ -133,7 +135,7 @@
 						<td>${sonOrder.commodityAmount }</td>
 						<td>${sonOrder.hbDiscount }</td>
 						<td>${sonOrder.voucherDiscount }</td>
-						<td>${sonOrder.integeralDiscount }</td>
+						<td>${sonOrder.integralDiscount }</td>
 						<td>${sonOrder.realAmount }</td>
 						</tr>
 					</c:forEach>
@@ -145,7 +147,7 @@
 				<div class="mallNew-main-left">
 					<ul>
 						<li class="w_100 lvse size-14">抵用积分</li>
-						
+
 						<li class="name">抵扣积分</li>
 						<li class="line">|</li>
 						<li class="data max2">
@@ -153,7 +155,7 @@
 							<c:if test="${order.score!=null }">${order.score }</c:if>
 						</li>
 					</ul>
-					
+
 					<ul>
 						<li class="w_100 lvse size-14">订单信息</li>
 
@@ -189,7 +191,7 @@
 							<c:if test="${order.scoreDeduction==null }">0.00</c:if>
 							<c:if test="${order.scoreDeduction!=null }">${0-order.scoreDeduction }</c:if>（元）
 						</li>
-						
+
 						<li class="name">买家应付金额</li>
 						<li class="line">|</li>
 						<li class="data max2">${order.totalPrice }（元）</li>
@@ -283,7 +285,7 @@
 				<c:choose>
 					<c:when test="${type eq 'tradeDetail'}">
 						<div class="shopsButton shopsButton_w_160">
-							<a href="javascript:history.go(-1);" target="_parent" class="Button checked" id="returnButton">返回</a>		
+							<a href="javascript:history.go(-1);" target="_parent" class="Button checked" id="returnButton">返回</a>
 						</div>
 					</c:when>
 					<c:otherwise>
