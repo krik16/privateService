@@ -37,7 +37,7 @@ public class CommodityBuyerVO implements Serializable{
 	private boolean watching = false; //是否正在看
 	private List<Double> location; //经纬度
 	private String systemNumber; //商品SPU
-	private String activityType;	//活动状态[闪购1、特卖2、秒杀3]
+	private String activityType = "0";	//活动状态[0其他 闪购1、特卖2、秒杀3]
 
 	public String getActivityType() {
 		return activityType;
