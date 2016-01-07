@@ -266,7 +266,7 @@ public class OrderManagerController extends BaseController {
 //				orderDetailVo.setParentOrderStatus("4");
 //			}
 			model.addAttribute("order", orderDetailVo);
-			model.addAttribute("cashCoupons", cashCoupons);
+//			model.addAttribute("cashCoupons", cashCoupons);
 			model.addAttribute("discountTotal", discountTotal);
 			model.addAttribute("type", type);
 			model.addAttribute("commidityTotalPice", commidityTotalPice);

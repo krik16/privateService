@@ -20,6 +20,186 @@
 			<div class="mallNew-main">
 				<div class="mallNew-main-left">
 					<ul>
+						<li class="w_100 lvse size-14">订单信息</li>
+
+						<li class="name">父订单号</li>
+						<li class="line">|</li>
+						<li class="data max2">${order.orderCartNo }</li>
+
+						<li class="name">子订单号</li>
+						<li class="line">|</li>
+						<li class="data max2">${order.orderNum }</li>
+
+						<li class="name">下单时间</li>
+						<li class="line">|</li>
+						<li class="data max2">${order.commitOrderTime}</li>
+
+						<li class="name">发货时间</li>
+						<li class="line">|</li>
+						<li class="data max2">
+							<c:if test="${order.deliverTime!=null}">${order.deliverTime}</c:if>
+							<c:if test="${order.deliverTime==null}">--</c:if>
+						</li>
+
+						<li class="name">收货时间</li>
+						<li class="line">|</li>
+						<li class="data max2">
+							<c:if test="${order.receiveTime!=null}">${order.receiveTime}</c:if>
+							<c:if test="${order.receiveTime==null}">--</c:if>
+						</li>
+
+						<%--<li class="name">快递公司</li>
+						<li class="line">|</li>
+						<li class="data max2">${order.expressName }</li>--%>
+
+						<li class="name">支付方式</li>
+						<li class="line">|</li>
+						<li class="data max2">${order.expressName }</li>
+
+					</ul>
+				</div>
+
+				<div class="mallNew-main-left">
+					<ul>
+						<li class="w_100 lvse size-14"></li>
+
+						<li class="name">订单状态</li>
+						<li class="line">|</li>
+						<li class="data max2">
+							<c:choose>
+								<c:when test="${order.parentOrderStatus == 1}"> 未付款     </c:when>
+								<c:when test="${order.parentOrderStatus == 2}"> 待发货     </c:when>
+								<c:when test="${order.parentOrderStatus == 3}"> 已发货 （<span class="lvse">发货人：${order.userName }</span>） </c:when>
+								<c:when test="${order.parentOrderStatus == 4}"> 已完成 （<span class="lvse">发货人：${order.userName }</span>） </c:when>
+								<c:when test="${order.parentOrderStatus == 5}"> 已关闭 （<span class="lvse">发货人：${order.userName }</span>） </c:when>
+								<c:when test="${order.parentOrderStatus == 8}"> 已退款   	</c:when>
+							</c:choose>
+						</li>
+
+						<li class="name">付款时间</li>
+						<li class="line">|</li>
+						<li class="data max2">
+							<c:if test="${order.payTime!=null}">${order.payTime}</c:if>
+							<c:if test="${order.payTime==null}">--</c:if>
+						</li>
+
+						<li class="name">发货方式</li>
+						<li class="line">|</li>
+						<li class="data max2">
+							<c:if test="${order.receiveType==0 }" >快递（<span style="color: red">${order.expressName }【${order.expressBillId }】</span>）</c:if>
+							<c:if test="${order.receiveType==1 }" >无需快递</c:if>
+						</li>
+
+						<li class="name">支付流水号</li>
+						<li class="line">|</li>
+						<li class="data max2">${order.paymentIdList }</li>
+
+						<li class="name">券码</li>
+						<li class="line">|</li>
+						<li class="data max2">${order.couponCodes }</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="mallNew-main">
+				<table class="accounttable max" width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td>商品图片</td>
+						<td>商品名称</td>
+						<td>商品规格</td>
+						<td>单价（元）</td>
+						<td>数量</td>
+						<td>商品总价（元）</td>
+						<td>红包</td>
+						<td>平台促销券（元）</td>
+						<td>容颜值抵扣（元）</td>
+						<td>商品实收（元）</td>
+					</tr>
+					<c:forEach var="sonOrder" items="${order.sonOrderList }" >
+						<tr>
+						<td>
+							<div class="pic ">
+								<img src="${sonOrder.commodityPic }">
+							</div>
+						</td>
+						<td><a href="${ctx }/orderManager/commodityDetail?commodityId=${sonOrder.commodityId }&shopId=&currpage=1" target="_parent">${sonOrder.commodityName }</a></td>
+						<td>
+							<c:forEach var="specColumnValue" items="${sonOrder.specColumnValues }" >
+								${specColumnValue.columnName }:${specColumnValue.columnValue } &nbsp;
+							</c:forEach>
+						</td>
+						<td>${sonOrder.commodityCurrentPrice }</td>
+						<td>${sonOrder.num }</td>
+						<td>${sonOrder.commodityAmount }</td>
+						<td>${sonOrder.hbDiscount }</td>
+						<td>${sonOrder.voucherDiscount }</td>
+						<td>${sonOrder.integeralDiscount }</td>
+						<td>${sonOrder.realAmount }</td>
+						</tr>
+					</c:forEach>
+				</table>
+
+			</div>
+
+			<div class="mallNew-main">
+				<div class="mallNew-main-left">
+					<ul>
+						<li class="w_100 lvse size-14">抵用积分</li>
+						
+						<li class="name">抵扣积分</li>
+						<li class="line">|</li>
+						<li class="data max2">
+							<c:if test="${order.score==null }">0</c:if>
+							<c:if test="${order.score!=null }">${order.score }</c:if>
+						</li>
+					</ul>
+					
+					<ul>
+						<li class="w_100 lvse size-14">订单信息</li>
+
+						<li class="name">商品合计总价</li>
+						<li class="line">|</li>
+						<li class="data max2">
+							<c:choose>
+								<c:when test="${(commidityTotalPice - order.discountFee)<0}">0.00（元）</c:when>
+								<c:otherwise>${commidityTotalPice - order.discountFee}（元）</c:otherwise>
+							</c:choose>
+						</li>
+
+						<li class="name">运费</li>
+						<li class="line">|</li>
+						<li class="data max2">${order.commodityPostage }（元）</li>
+
+						<li class="name">订单总价</li>
+						<li class="line">|</li>
+						<li class="data max2">
+							<c:choose>
+								<c:when test="${(commidityTotalPice - order.discountFee)<0}">${order.commodityPostage }（元）</c:when>
+								<c:otherwise>${commidityTotalPice - order.discountFee + order.commodityPostage}（元）</c:otherwise>
+							</c:choose>
+						</li>
+
+						<li class="name">卡券抵扣金额</li>
+						<li class="line">|</li>
+						<li class="data max2">${0-discountTotal }（元）</li>
+
+						<li class="name">积分抵扣金额</li>
+						<li class="line">|</li>
+						<li class="data max2">
+							<c:if test="${order.scoreDeduction==null }">0.00</c:if>
+							<c:if test="${order.scoreDeduction!=null }">${0-order.scoreDeduction }</c:if>（元）
+						</li>
+						
+						<li class="name">买家应付金额</li>
+						<li class="line">|</li>
+						<li class="data max2">${order.totalPrice }（元）</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="mallNew-main">
+				<div class="mallNew-main-left">
+					<ul>
 						<li class="w_100 lvse size-14">卖家信息</li>
 
 						<li class="name">商场</li>
@@ -31,13 +211,13 @@
 							</c:choose>
 						</li>
 
-						<li class="name">昵称</li>
-						<li class="line">|</li>
-						<li class="data max2">${order.nickName }</li>
-
-						<li class="name">联系方式</li>
+						<li class="name">卖家联系方式</li>
 						<li class="line">|</li>
 						<li class="data max2">${order.userPhone }</li>
+
+						<li class="name">卖家姓名</li>
+						<li class="line">|</li>
+						<li class="data max2">${order.userName }</li>
 					</ul>
 				</div>
 
@@ -49,10 +229,10 @@
 						<li class="line">|</li>
 						<li class="data max2">${order.shopName }</li>
 
-						<li class="name">真实姓名</li>
+						<li class="name">卖家昵称</li>
 						<li class="line">|</li>
-						<li class="data max2">${order.userName }</li>
-						
+						<li class="data max2">${order.nickName }</li>
+
 						<li class="name">渠道</li>
 						<li class="line">|</li>
 						<li class="data max2" style="line-height: 17px">
@@ -100,206 +280,6 @@
 				</div>
 			</div>
 
-			<div class="mallNew-main">
-				<div class="mallNew-main-left">
-					<ul>
-						<li class="w_100 lvse size-14">订单信息</li>
-
-						<li class="name">订单号</li>
-						<li class="line">|</li>
-						<li class="data max2">${order.orderNum }</li>
-						<li class="name">下单时间</li>
-						<li class="line">|</li>
-						<li class="data max2">${order.commitOrderTime}</li>
-
-						<li class="name">发货时间</li>
-						<li class="line">|</li>
-						<li class="data max2">
-							<c:if test="${order.deliverTime!=null}">${order.deliverTime}</c:if>
-							<c:if test="${order.deliverTime==null}">--</c:if>
-						</li>
-
-						<li class="name">快递公司</li>
-						<li class="line">|</li>
-						<li class="data max2">${order.expressName }</li>
-					</ul>
-				</div>
-
-				<div class="mallNew-main-left">
-					<ul>
-						<li class="w_100 lvse size-14"></li>
-
-						<li class="name">订单状态</li>
-						<li class="line">|</li>
-						<li class="data max2">
-							<c:choose>
-								<c:when test="${order.parentOrderStatus == 1}"> 未付款     </c:when>
-								<c:when test="${order.parentOrderStatus == 2}"> 待发货     </c:when>
-								<c:when test="${order.parentOrderStatus == 3}"> 已发货 （<span class="lvse">发货人：${order.userName }</span>） </c:when>
-								<c:when test="${order.parentOrderStatus == 4}"> 已完成 （<span class="lvse">发货人：${order.userName }</span>） </c:when>
-								<c:when test="${order.parentOrderStatus == 5}"> 已关闭 （<span class="lvse">发货人：${order.userName }</span>） </c:when>
-								<c:when test="${order.parentOrderStatus == 8}"> 已退款   	</c:when>
-							</c:choose>
-						</li>
-
-						<li class="name">付款时间</li>
-						<li class="line">|</li>
-						<li class="data max2">
-							<c:if test="${order.payTime!=null}">${order.payTime}</c:if>
-							<c:if test="${order.payTime==null}">--</c:if>
-						</li>
-
-						<li class="name">发货方式</li>
-						<li class="line">|</li>
-						<li class="data max2">
-							<c:if test="${order.receiveType==0 }" >快递</c:if>
-							<c:if test="${order.receiveType==1 }" >无需快递</c:if>
-						</li>
-
-						<li class="name">快递单号</li>
-						<li class="line">|</li>
-						<li class="data max2">${order.expressBillId }</li>
-					</ul>
-				</div>
-			</div>
-
-			<div class="mallNew-main">
-				<table class="accounttable max" width="100%" border="0" cellspacing="0" cellpadding="0">
-					<tr>
-						<td>商品图片</td>
-						<td>商品名称</td>
-						<td>商品规格</td>
-						<td>子状态</td>
-						<td>单价（元）</td>
-						<td>数量</td>
-						<td>商品总价（元）</td>
-					</tr>
-					<c:forEach var="sonOrder" items="${order.sonOrderList }" >
-						<tr>
-						<td>
-							<div class="pic ">
-								<img src="${sonOrder.commodityPic }">
-								<!-- <a href="#" class="icon_close"></a> -->
-							</div>
-						</td>
-						<td><a href="${ctx }/orderManager/commodityDetail?commodityId=${sonOrder.commodityId }&shopId=&currpage=1" target="_parent">${sonOrder.commodityName }</a></td>
-						<td>
-							<c:forEach var="specColumnValue" items="${sonOrder.specColumnValues }" >
-								${specColumnValue.columnName }:${specColumnValue.columnValue } &nbsp;
-							</c:forEach>
-						</td>
-						<td>
-							<c:choose>
-								<c:when test="${sonOrder.sonOrderStatus == 0}">
-									<c:choose>
-										<c:when test="${order.parentOrderStatus == 1}"> 未付款     </c:when>
-										<c:when test="${order.parentOrderStatus == 2}"> 待发货     </c:when>
-										<c:when test="${order.parentOrderStatus == 3}"> 已发货     </c:when>
-										<c:when test="${order.parentOrderStatus == 4}"> 已完成   	</c:when>
-										<c:when test="${order.parentOrderStatus == 5}"> 已关闭     </c:when>
-										<c:when test="${order.parentOrderStatus == 8}"> 已退款  	</c:when>
-									</c:choose>
-								</c:when>
-								<c:when test="${sonOrder.sonOrderStatus == 2}"> 待退款     </c:when>
-								<c:when test="${sonOrder.sonOrderStatus == 3}"> 已关闭    </c:when>
-								<c:when test="${sonOrder.sonOrderStatus == 4}"> 维权中 </c:when>
-							</c:choose>
-						</td>
-						<td>${sonOrder.commodityCurrentPrice }</td>
-						<td>${sonOrder.num }</td>
-						<td>${sonOrder.realAmount }</td>
-						</tr>
-					</c:forEach>
-				</table>
-
-				<p class="lvse m-b-10 m-t-10 size-14">抵用卡卷信息</p>
-				<table class="accounttable" width="100%" border="0" cellspacing="0" cellpadding="0">
-					<tr>
-						<td>卡卷类型</td>
-						<td>卡卷名称</td>
-						<td>有效期</td>
-						<td>面值（元）</td>
-						<td>抵扣金额（元）</td>
-					</tr>
-
-					<tr>
-						<c:choose>
-							<c:when test="${not empty cashCoupons}">
-								<c:forEach var="item" items="${cashCoupons}" varStatus="status">
-									<tr>
-										<td>现金券</td>
-										<td>${item.title }</td>
-										<td>${item.validBeginDate } - ${item.validEndDate }</td>
-										<td>${item.discount }</td>
-										<td>${item.realDiscount }</td>
-									</tr>
-								</c:forEach>
-							</c:when>
-							<c:otherwise>
-								<tr>
-									<td style="text-align: center;" colspan="9">暂无记录</td>
-								</tr>
-							</c:otherwise>
-						</c:choose>
-					</tr>
-				</table>
-			</div>
-
-			<div class="mallNew-main">
-				<div class="mallNew-main-left">
-					<ul>
-						<li class="w_100 lvse size-14">抵用积分</li>
-						
-						<li class="name">抵扣积分</li>
-						<li class="line">|</li>
-						<li class="data max2">
-							<c:if test="${order.score==null }">0</c:if>
-							<c:if test="${order.score!=null }">${order.score }</c:if>
-						</li>
-					</ul>
-					
-					<ul>
-						<li class="w_100 lvse size-14">订单信息</li>
-
-						<li class="name">商品实际总价</li>
-						<li class="line">|</li>
-						<li class="data max2">
-							<c:choose>
-								<c:when test="${(commidityTotalPice - order.discountFee)<0}">0.00（元）</c:when>
-								<c:otherwise>${commidityTotalPice - order.discountFee}（元）</c:otherwise>
-							</c:choose>
-						</li>
-
-						<li class="name">运费</li>
-						<li class="line">|</li>
-						<li class="data max2">${order.commodityPostage }（元）</li>
-
-						<li class="name">订单总价</li>
-						<li class="line">|</li>
-						<li class="data max2">
-							<c:choose>
-								<c:when test="${(commidityTotalPice - order.discountFee)<0}">${order.commodityPostage }（元）</c:when>
-								<c:otherwise>${commidityTotalPice - order.discountFee + order.commodityPostage}（元）</c:otherwise>
-							</c:choose>
-						</li>
-
-						<li class="name">卡券抵扣金额</li>
-						<li class="line">|</li>
-						<li class="data max2">${0-discountTotal }（元）</li>
-
-						<li class="name">积分抵扣金额</li>
-						<li class="line">|</li>
-						<li class="data max2">
-							<c:if test="${order.scoreDeduction==null }">0.00</c:if>
-							<c:if test="${order.scoreDeduction!=null }">${0-order.scoreDeduction }</c:if>（元）
-						</li>
-						
-						<li class="name">买家应付金额</li>
-						<li class="line">|</li>
-						<li class="data max2">${order.totalPrice }（元）</li>
-					</ul>
-				</div>
-			</div>
 				<c:choose>
 					<c:when test="${type eq 'tradeDetail'}">
 						<div class="shopsButton shopsButton_w_160">
@@ -312,7 +292,6 @@
 						</div>
 					</c:otherwise>
 				</c:choose>
-
 			</div>
 	</div>
 
