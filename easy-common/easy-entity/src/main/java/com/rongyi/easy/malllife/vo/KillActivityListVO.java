@@ -22,16 +22,6 @@ public class KillActivityListVO implements Serializable {
 	private String message;//预留字段
 
 	private List<KillActivityVO> couponList;//代金券列表
-	
-	private Date showDate;
-
-	public Date getShowDate() {
-		return showDate;
-	}
-
-	public void setShowDate(Date showDate) {
-		this.showDate = showDate;
-	}
 
 	public String getShowTitle() {
 		return showTitle;
@@ -80,7 +70,7 @@ public class KillActivityListVO implements Serializable {
 	@Override
 	public String toString() {
 		return "KillActivityListVO [showTime=" + showTime + ", showTitle=" + showTitle + ", continueTime=" + continueTime
-				+ ", message=" + message + ", couponList=" + couponList + ", showDate=" + showDate + "]";
+				+ ", message=" + message + ", couponList=" + couponList + "]";
 	}
 
 }
