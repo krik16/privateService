@@ -21,7 +21,7 @@ public class KillVO implements Serializable{
 	
 	private String currentTime;//格式 2015-12-14 11:00:00
 	
-	private String displayType = "hour";//页面显示样式  hour day 默认hour
+	private String displayType;//页面显示样式  hour day 默认hour
 	
 	private String hdRule;//活动规则
 	 
