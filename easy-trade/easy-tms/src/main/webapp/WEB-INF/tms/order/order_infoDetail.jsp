@@ -135,10 +135,10 @@
 							<c:choose>
 								<c:when test="${order.parentOrderStatus == 1}"> 未付款     </c:when>
 								<c:when test="${order.parentOrderStatus == 2}"> 待发货     </c:when>
-								<c:when test="${order.parentOrderStatus == 3}"> 已发货  （<span class="lvse">发货人：${order.userName }</span>）   </c:when>
-								<c:when test="${order.parentOrderStatus == 4}"> 确认收货 （<span class="lvse">发货人：${order.userName }</span>） </c:when>
-								<c:when test="${order.parentOrderStatus == 6}"> 已完成  （<span class="lvse">发货人：${order.userName }</span>） </c:when>
-								<c:when test="${order.parentOrderStatus == 5}"> 已关闭    （<span class="lvse">发货人：${order.userName }</span>） </c:when>
+								<c:when test="${order.parentOrderStatus == 3}"> 已发货 （<span class="lvse">发货人：${order.userName }</span>） </c:when>
+								<c:when test="${order.parentOrderStatus == 4}"> 已完成 （<span class="lvse">发货人：${order.userName }</span>） </c:when>
+								<c:when test="${order.parentOrderStatus == 5}"> 已关闭 （<span class="lvse">发货人：${order.userName }</span>） </c:when>
+								<c:when test="${order.parentOrderStatus == 8}"> 已退款   	</c:when>
 							</c:choose>
 						</li>
 
@@ -192,12 +192,12 @@
 							<c:choose>
 								<c:when test="${sonOrder.sonOrderStatus == 0}">
 									<c:choose>
-										<c:when test="${order.parentOrderStatus == 1}"> 未付款      </c:when>
-										<c:when test="${order.parentOrderStatus == 2}"> 待发货      </c:when>
-										<c:when test="${order.parentOrderStatus == 3}"> 已发货      </c:when>
-										<c:when test="${order.parentOrderStatus == 4}"> 确认收货   </c:when>
-										<c:when test="${order.parentOrderStatus == 6}"> 已完成  </c:when>
-										<c:when test="${order.parentOrderStatus == 5}"> 已关闭       </c:when>
+										<c:when test="${order.parentOrderStatus == 1}"> 未付款     </c:when>
+										<c:when test="${order.parentOrderStatus == 2}"> 待发货     </c:when>
+										<c:when test="${order.parentOrderStatus == 3}"> 已发货     </c:when>
+										<c:when test="${order.parentOrderStatus == 4}"> 已完成   	</c:when>
+										<c:when test="${order.parentOrderStatus == 5}"> 已关闭     </c:when>
+										<c:when test="${order.parentOrderStatus == 8}"> 已退款  	</c:when>
 									</c:choose>
 								</c:when>
 								<c:when test="${sonOrder.sonOrderStatus == 2}"> 待退款     </c:when>

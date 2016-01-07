@@ -260,11 +260,11 @@ public class OrderManagerController extends BaseController {
 			if (StringUtils.isNotBlank(orderDetailVo.getPayTime())) {
 				orderDetailVo.setPayTime(orderDetailVo.getPayTime().substring(0, 16));
 			}
-			//订单过程包含（">|<4,"）就是正常关闭
-			if(StringUtils.isNotBlank(orderDetailVo.getStatusRoute()) 
-					&& orderDetailVo.getStatusRoute().contains(">|<4,")){
-				orderDetailVo.setParentOrderStatus("4");
-			}
+//			//订单过程包含（">|<4,"）就是正常关闭
+//			if(StringUtils.isNotBlank(orderDetailVo.getStatusRoute())
+//					&& orderDetailVo.getStatusRoute().contains(">|<4,")){
+//				orderDetailVo.setParentOrderStatus("4");
+//			}
 			model.addAttribute("order", orderDetailVo);
 			model.addAttribute("cashCoupons", cashCoupons);
 			model.addAttribute("discountTotal", discountTotal);
