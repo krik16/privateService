@@ -17,6 +17,8 @@ import java.util.List;
  */
 public class KillVO implements Serializable{
 	
+	private String key;//
+	
 	private String currentTime;//格式 2015-12-14 11:00:00
 	
 	private String displayType = "hour";//页面显示样式  hour day 默认hour
@@ -24,6 +26,14 @@ public class KillVO implements Serializable{
 	private String hdRule;//活动规则
 	 
 	private List<KillActivityListVO> list;
+
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
 
 	public String getCurrentTime() {
 		return currentTime;
@@ -59,8 +69,8 @@ public class KillVO implements Serializable{
 
 	@Override
 	public String toString() {
-		return "KillVO [currentTime=" + currentTime + ", displayType=" + displayType + ", hdRule=" + hdRule + ", list=" + list
-				+ "]";
+		return "KillVO [key=" + key + ", currentTime=" + currentTime + ", displayType=" + displayType + ", hdRule=" + hdRule
+				+ ", list=" + list + "]";
 	}
 
 }
