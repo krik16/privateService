@@ -157,7 +157,7 @@ function ajaxSearchOrderList() {
 	if(mallId != ""){
 		paramsJson_["mallId"] = mallId;
 	}
-	if(mallId!="" && shopName!=""){
+	if(shopName!=""){
 		shopName = encodeURI(shopName);
 		paramsJson_["shopName"] = shopName;
 	}
