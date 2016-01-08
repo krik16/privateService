@@ -116,7 +116,7 @@ public class OrderManagerController extends BaseController {
 			List<ParentOrderCartVO> orderCartVOs = convertToOrderCart(page.getDataList());
 			model.addAttribute("orderCartForms", orderCartVOs);
 			model.addAttribute("currpage", currPage);
-			model.addAttribute("rowCont", page.getRowCnt());
+			model.addAttribute("rowCont", page.getTotalPage());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
