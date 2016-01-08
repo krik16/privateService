@@ -30,7 +30,15 @@ public class CouponMall implements Serializable {
      */
     private String mallAddress;
 
+    private Integer isRelateAll;
 
+    public Integer getIsRelateAll() {
+        return isRelateAll;
+    }
+
+    public void setIsRelateAll(Integer isRelateAll) {
+        this.isRelateAll = isRelateAll;
+    }
 
     public Integer getId() {
         return id;
