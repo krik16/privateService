@@ -7,21 +7,21 @@
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		<tbody>
 		<tr>
-			<td>母订单号</td>
-			<td>订单号</td>
-			<td>卖家账号</td>
-			<td>买家账号</td>
-			<td>商场</td>
-			<td>店铺</td>
-			<td>订单金额（元）</td>
-			<td>平台促销券（元）</td>
-			<td>积分（元）</td>
-			<td>支付金额（元）</td>
-			<td>订单状态</td>
-			<td>订单来源</td>
-			<td>支付方式</td>
-			<td>下单时间</td>
-			<td>渠道</td>
+			<td width="7%">母订单号</td>
+			<td width="7%">订单号</td>
+			<td width="6%">卖家账号</td>
+			<td width="6%">买家账号</td>
+			<td width="8%">商场</td>
+			<td width="8%">店铺</td>
+			<td width="6%">订单金额（元）</td>
+			<td width="7%">平台促销券（元）</td>
+			<td width="6%">积分（元）</td>
+			<td width="6%">支付金额（元）</td>
+			<td width="6%">订单状态</td>
+			<td width="6%">订单来源</td>
+			<td width="6%">支付方式</td>
+			<td width="10%">下单时间</td>
+			<td width="5%">渠道</td>
 		</tr>
 		<c:choose>
 			<c:when test="${not empty orderForms}">
