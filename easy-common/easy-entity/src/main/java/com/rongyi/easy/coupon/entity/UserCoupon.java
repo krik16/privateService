@@ -499,7 +499,8 @@ public class UserCoupon implements Serializable {
     
     private String holderName;
 
-
+    private Integer apply_shops_count; // 可用店铺数
+    
 	/**
 	 * @return the holderId
 	 */
@@ -540,6 +541,20 @@ public class UserCoupon implements Serializable {
 	 */
 	public void setHolderName(String holderName) {
 		this.holderName = holderName;
+	}
+
+	/**
+	 * @return the apply_shops_count
+	 */
+	public Integer getApply_shops_count() {
+		return apply_shops_count;
+	}
+
+	/**
+	 * @param apply_shops_count the apply_shops_count to set
+	 */
+	public void setApply_shops_count(Integer apply_shops_count) {
+		this.apply_shops_count = apply_shops_count;
 	}
     
     
