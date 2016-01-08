@@ -123,6 +123,7 @@ function ajaxSearchOrderList() {
 
 	var paramsJson_ = { };
 	paramsJson_["currentPage"] = currpage;
+	paramsJson_["pageSize"] = 10;
 	if(orderNo != ""){
 		paramsJson_["orderNo"] = orderNo;
 	}
