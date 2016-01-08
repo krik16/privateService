@@ -482,6 +482,8 @@ function switchCheck(check) {
 		$("#search-batchNo").css("display","none");
 		$("#search-bussinessType").css("display","none");
 		$("#search-bussinessName").css("display","none");
+		$("#search-mallId").css("display","none");
+		$("#search-shopId").css("display","none");
 		
 		$("#search-payNo").css("display","none");
 		$("#search-drawNo").css("display","none");

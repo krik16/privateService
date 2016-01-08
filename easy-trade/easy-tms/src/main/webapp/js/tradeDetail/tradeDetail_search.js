@@ -29,7 +29,7 @@ $(document).ready(function () {
 
         }
     });
-    $('input[name="mallId"]').typeahead({
+  /*  $('input[name="mallId"]').typeahead({
         source: function (query, process) {
             $("input[name='mallId']").attr("id", "");
             m_names = [];
@@ -104,40 +104,7 @@ $(document).ready(function () {
             $("input[name='shopId']").val(selection);
             return selection;
         }
-    });
-
-    $('input[name="curbshopName"]').typeahead({
-        source: function (query, process) {
-            $("#curbshopId").val("");
-            m_names = [];
-            map = {};
-            var paramsJson = {};
-            paramsJson['keywords'] = query;
-            paramsJson['timeStamp_'] = new Date().getTime();
-            $.ajax({
-                url: '../main/ajaxGetShops',
-                type: 'post',
-                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-                data: {
-                    "paramsJson": JSON.stringify(paramsJson)
-                },
-                success: function (data) {
-                    if (data.msg != undefined) {
-                        $.each(data.msg, function (i, shop) {
-                            map[shop.name] = shop.id;
-                            m_names.push(shop.name);
-                        });
-                        process(m_names);
-                    }
-                }
-            });
-        },
-        items: 20,
-        updater: function (selection) {
-            $('#curbshopId').val(map[selection]);
-            return selection;
-        }
-    });
+    });*/
 });
 
 /**
@@ -173,12 +140,11 @@ function getParamsJson() {
     var tradeNo = $('#tradeNo').val();
     var payNo = $('#payNo').val();
     var orderNo = $('#orderNo').val();
-    var mallName = $("input[name='mallId']").val();
-    var shopName = $("input[name='shopId']").val();
-    var curbshopId = $('#curbshopId').val();
+  /*  var mallName = $("input[name='mallId']").val();
+    var shopName = $("input[name='shopId']").val();*/
     var buyerAccount = $('#buyerAccount').val();
     var buyerName = $('#buyerName').val();
-    var sellerAccount = $('#sellerAccount').val();
+    /*var sellerAccount = $('#sellerAccount').val();*/
     var tradeType = $('#tradeType').val();
     var payChannel = $('#payChannel').val();
     var tradeStartTime = $('#tradeStartTime').val();
@@ -194,12 +160,11 @@ function getParamsJson() {
         'tradeNo': tradeNo,
         'payNo': payNo,
         'orderNo': orderNo,
-        'mallName': mallName,
-        'shopName': shopName,
-        'curbshopId':curbshopId,
+       /* 'mallName': mallName,
+        'shopName': shopName,*/
         'buyerAccount': buyerAccount,
         'buyerName': buyerName,
-        'sellerAccount': sellerAccount,
+        /*'sellerAccount': sellerAccount,*/
         'tradeType': tradeType,
         'payChannel': payChannel,
         'tradeStartTime': tradeStartTime,

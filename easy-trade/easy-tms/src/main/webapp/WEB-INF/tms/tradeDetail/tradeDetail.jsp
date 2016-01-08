@@ -62,15 +62,15 @@
                 <label>付款单号:</label>
                 <input id="payNo" type="text" class="form-control ng-pristine ng-untouched ng-valid">
             </div>
-            <div class="form-group">
+          <%--  <div class="form-group">
                 <label>渠道：</label>
                 <select id="guideType" class="form-control ng-pristine ng-untouched ng-valid">
                     <option value="">--全部--</option>
                     <option value="1">商家</option>
                     <option value="2">买手</option>
                 </select>
-            </div>
-            <div class="form-group">
+            </div>--%>
+        <%--    <div class="form-group">
                 <li class="xiala" style="list-style-type:none;">
                     <label>商场：</label>
                     <input name="mallId" type="text" class="form-control ng-pristine ng-untouched ng-valid">
@@ -81,7 +81,7 @@
                     <label>店铺：</label>
                     <input name="shopId" type="text" class="form-control ng-pristine ng-untouched ng-valid">
                 </li>
-            </div>
+            </div>--%>
             <div class="form-group">
                 <li class="xiala" style="list-style-type:none;">
                     <label>街边店：</label>
@@ -97,10 +97,10 @@
                 <label>买家付款账号：</label>
                 <input id="buyerPayAccount" type="text" class="form-control ng-pristine ng-untouched ng-valid">
             </div>
-            <div class="form-group">
+            <%--<div class="form-group">
                 <label>卖家账号：</label>
                 <input id="sellerAccount" type="text" class="form-control ng-pristine ng-untouched ng-valid">
-            </div>
+            </div>--%>
             <div class="form-group">
                 <label>收支类型：</label>
                 <select id="tradeType" class="form-control ng-pristine ng-untouched ng-valid">
@@ -135,6 +135,8 @@
                     <option value="1">红包</option>
                     <option value="2">积分</option>
                     <option value="3">红包加积分</option>
+                    <option value="4">抵扣券</option>
+                    <option value="5">抵扣券加积分</option>
                 </select>
             </div>
 

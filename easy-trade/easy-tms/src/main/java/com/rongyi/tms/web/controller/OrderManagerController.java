@@ -486,12 +486,17 @@ public class OrderManagerController extends BaseController {
 			paramsMap = JsonUtil.getMapFromJson(paramsJson);
 			String mallId = (String) paramsMap.get("mallId");
 			String name = (String) paramsMap.get("keywords");
-			if (StringUtils.isBlank(mallId)) {
-				throw new RuntimeException("mallId为空");
-			}
+//			if (StringUtils.isBlank(mallId)) {
+//				throw new RuntimeException("mallId为空");
+//			}
 			name = URLDecoder.decode(name, "utf-8");
-			mallId = URLDecoder.decode(mallId, "utf-8");
-			List<ShopInfoEntity> reList = roaShopService.getShopListByShopName(name, Integer.valueOf(mallId));
+			List<ShopInfoEntity> reList = roaShopService.getShopListByShopName(name,Integer.valueOf(mallId));
+			if(mallId == null) {
+				for (ShopInfoEntity shopInfoEntity : reList) {
+					shopInfoEntity.setShopName(shopInfoEntity.getShopName()+"-"+shopInfoEntity.getShopMid());
+				}
+			}
+
 			result.put("msg", reList);
 			result.put("status", 1);
 		} catch (UnsupportedEncodingException e) {

@@ -190,7 +190,7 @@ public class MainController extends BaseController {
     @RequestMapping(value = "/ajaxGetShops")
     public String ajaxGetShops(HttpServletRequest request, HttpServletResponse response, String paramsJson)
             throws Exception {
-        Map<String, Object> resultMap = new HashMap();
+        Map<String, Object> resultMap = new HashMap<String, Object>();
         try {
             request.setCharacterEncoding("utf-8");
         } catch (UnsupportedEncodingException e1) {
@@ -206,29 +206,19 @@ public class MainController extends BaseController {
         }
         paramsMap = JsonUtil.getMapFromJson(paramsJson);
         String mallId = (String) paramsMap.get("mallId");
-        String keywords = (String) paramsMap.get("keywords");
-        Map<String, Object> map = new HashMap();
-        if (StringUtils.isNotBlank(mallId)) {
+        if (StringUtils.isNotEmpty(mallId)) {
+            String keywords = (String) paramsMap.get("keywords");
+            Map<String, Object> map = new HashMap<String, Object>();
             map.put("mallId", mallId);
-        } else {
-            map.put("sort", "noSort");
-
-        }
-        map.put("name", keywords);
-        Map<String, Object> result = shopService.getShops(map, 1, 10);
-        if (result != null && result.get("list") != null) {
-            List<ShopVO> shops = (List<ShopVO>) result.get("list");
-            if (StringUtils.isBlank(mallId)) {
-                for (ShopVO shopVO : shops) {
-                    shopVO.setName(shopVO.getName() + "-" + shopVO.getId());
-                }
+            map.put("name", keywords);
+            Map<String, Object> result = shopService.getShops(map, 1, 10);
+            if (result != null && result.get("list") != null) {
+                List<ShopVO> malls = (List<ShopVO>) result.get("list");
+                resultMap.put("msg", malls);
             }
-            resultMap.put("msg", shops);
         }
         String json = JsonUtil.getJSONString(resultMap);
         responseJson(json, response);
         return null;
     }
-
-
 }

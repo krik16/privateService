@@ -69,7 +69,7 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 		if (map.get("tradeType") == null || StringUtils.isEmpty(map.get("tradeType").toString())) {
 			map.remove("tradeType");
 		}
-		List<String> buyerIds = new ArrayList<String>();
+		List<String> buyerIds = new ArrayList<>();
 		if (map.get("buyerName") != null && StringUtils.isNotBlank(map.get("buyerName").toString())) {
 			try {
 				List<UserInfoVO> userVoList = rOAMallLifeUserService.getUserDetailByName(map.get("buyerName").toString());

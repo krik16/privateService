@@ -16,6 +16,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.rongyi.easy.usercenter.entity.MalllifeUserInfoEntity;
+import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
+import org.apache.commons.lang.StringUtils;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -30,9 +33,9 @@ import com.rongyi.tms.constants.ConstantEnum;
 import com.rongyi.tms.service.TradeDetailService;
 
 /**
- * @Author: 柯军
- * @Description: 导出交易明细
- * @datetime:2015年5月27日下午5:17:58
+ * Author: 柯军
+ * Description: 导出交易明细
+ * datetime:2015年5月27日下午5:17:58
  * 
  **/
 @Component
@@ -40,6 +43,9 @@ public class ExportTradeDetailExcel extends ExportBase{
 
     @Autowired
     TradeDetailService tradeDetailService;
+
+    @Autowired
+    ROAMalllifeUserService rOAMallLifeUserService;
 
 
     public void exportExcel(HttpServletRequest request, HttpServletResponse response) {
@@ -66,32 +72,37 @@ public class ExportTradeDetailExcel extends ExportBase{
                     sheet.getRow(i).getCell(j).setCellStyle(bodyStyle);
                 }
             }
-            TradeVO tradeVO = new TradeVO();
+            TradeVO tradeVO;
             for (int i = 0; i < tradeList.size(); i++) {
                 tradeVO = tradeList.get(i);
                 sheet.getRow(i + 2).getCell(0).setCellValue(tradeVO.getTradeNo());
                 sheet.getRow(i + 2).getCell(1).setCellValue(DateUtil.dateToString(tradeVO.getTradeTime()));
                 sheet.getRow(i + 2).getCell(2).setCellValue((tradeVO.getTradeType() != null && tradeVO.getTradeType() == 0) ? "收入" : "支出");
                 sheet.getRow(i + 2).getCell(3).setCellValue(getPayChannel(tradeVO.getPayChannel()));
-                sheet.getRow(i + 2).getCell(4).setCellValue(tradeVO.getMallName());
-                sheet.getRow(i + 2).getCell(5).setCellValue(tradeVO.getShopName());
-                sheet.getRow(i + 2).getCell(6).setCellValue(tradeVO.getOrderNo());
-                sheet.getRow(i + 2).getCell(7).setCellValue(DateUtil.dateToString(tradeVO.getOrderTime()));
-                //TODO 买家账号需从mongo中单独查询
-                sheet.getRow(i + 2).getCell(8).setCellValue(tradeVO.getBuyerAccount());
-                sheet.getRow(i + 2).getCell(9).setCellValue(tradeVO.getBuyerName());
-                sheet.getRow(i + 2).getCell(10).setCellValue(tradeVO.getSellerAccount());
-                sheet.getRow(i + 2).getCell(11).setCellValue(tradeVO.getSellerName());
-                if(ConstantEnum.USER_ACCOUNT_TYPE_ZHIFUBAO.getCodeInt().equals(tradeVO.getSellerPayType())){
-                    sheet.getRow(i + 2).getCell(12).setCellValue(tradeVO.getSellerPayAccount());// 支付宝账号
-                    sheet.getRow(i + 2).getCell(13).setCellValue(tradeVO.getSellerPayName());//支付宝姓名
-                }else if(ConstantEnum.USER_ACCOUNT_TYPE_YINLIAN.getCodeInt().equals(tradeVO.getSellerPayType())){
-                    sheet.getRow(i + 2).getCell(14).setCellValue("");// TODO 银行卡开户行，暂无
-                    sheet.getRow(i + 2).getCell(15).setCellValue(tradeVO.getSellerPayAccount());// 银行卡号
-                    sheet.getRow(i + 2).getCell(16).setCellValue(tradeVO.getSellerPayName());//持卡人姓名
+         /*       sheet.getRow(i + 2).getCell(4).setCellValue(tradeVO.getMallName());
+                sheet.getRow(i + 2).getCell(5).setCellValue(tradeVO.getShopName());*/
+                sheet.getRow(i + 2).getCell(4).setCellValue(tradeVO.getOrderNo());
+                sheet.getRow(i + 2).getCell(5).setCellValue(DateUtil.dateToString(tradeVO.getOrderTime()));
+
+                if (StringUtils.isNotEmpty(tradeVO.getBuyerId())) {
+                    MalllifeUserInfoEntity mallLifeUserEntity = rOAMallLifeUserService.getEntityByUid(tradeVO.getBuyerId());
+                    if (mallLifeUserEntity != null) {
+                        sheet.getRow(i + 2).getCell(6).setCellValue(mallLifeUserEntity.getPhone());
+                        sheet.getRow(i + 2).getCell(7).setCellValue(mallLifeUserEntity.getUserName());
+                    }
                 }
+//                sheet.getRow(i + 2).getCell(10).setCellValue(tradeVO.getSellerAccount());
+//                sheet.getRow(i + 2).getCell(11).setCellValue(tradeVO.getSellerName());
+//                if(ConstantEnum.USER_ACCOUNT_TYPE_ZHIFUBAO.getCodeInt().equals(tradeVO.getSellerPayType())){
+//                    sheet.getRow(i + 2).getCell(12).setCellValue(tradeVO.getSellerPayAccount());// 支付宝账号
+//                    sheet.getRow(i + 2).getCell(13).setCellValue(tradeVO.getSellerPayName());//支付宝姓名
+//                }else if(ConstantEnum.USER_ACCOUNT_TYPE_YINLIAN.getCodeInt().equals(tradeVO.getSellerPayType())){
+//                    sheet.getRow(i + 2).getCell(14).setCellValue("");
+//                    sheet.getRow(i + 2).getCell(15).setCellValue(tradeVO.getSellerPayAccount());// 银行卡号
+//                    sheet.getRow(i + 2).getCell(16).setCellValue(tradeVO.getSellerPayName());//持卡人姓名
+//                }
                 if (tradeVO.getOrderPrice() != null)
-                    sheet.getRow(i + 2).getCell(17).setCellValue(tradeVO.getOrderPrice().toString());
+                    sheet.getRow(i + 2).getCell(8).setCellValue(tradeVO.getOrderPrice().toString());
             }
             String outFile = "交易明细记录_"+DateUtil.getCurrentDateYYYYMMDD()+".xlsx";
             ExcelUtil.exportExcel(response, wb, outFile);
@@ -101,11 +112,11 @@ public class ExportTradeDetailExcel extends ExportBase{
     }
 
     /**
-     * @Description: 付款方式
-     * @param payChannel
-     * @return
-     * @Author: 柯军
-     * @datetime:2015年5月27日下午7:36:22
+     * Description: 付款方式
+     * param payChannel
+     * return
+     * Author: 柯军
+     * datetime:2015年5月27日下午7:36:22
      **/
     private String getPayChannel(Integer payChannel) {
         if (ConstantEnum.PAY_CHANNEL_ZHIFUBAO.getCodeInt().equals(payChannel))
