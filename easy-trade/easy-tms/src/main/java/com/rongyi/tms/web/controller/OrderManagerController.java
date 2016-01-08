@@ -484,13 +484,16 @@ public class OrderManagerController extends BaseController {
 			}
 			logger.info("paramsJson={} ", URLDecoder.decode(paramsJson, "utf-8"));
 			paramsMap = JsonUtil.getMapFromJson(paramsJson);
-			String mallId = (String) paramsMap.get("mallId");
+			Integer mallId = null;
+			if(paramsMap.get("mallId") != null && StringUtils.isNotBlank(paramsMap.get("mallId").toString())) {
+				mallId = Integer.valueOf(paramsMap.get("mallId").toString());
+			}
 			String name = (String) paramsMap.get("keywords");
 //			if (StringUtils.isBlank(mallId)) {
 //				throw new RuntimeException("mallId为空");
 //			}
 			name = URLDecoder.decode(name, "utf-8");
-			List<ShopInfoEntity> reList = roaShopService.getShopListByShopName(name,Integer.valueOf(mallId));
+			List<ShopInfoEntity> reList = roaShopService.getShopListByShopName(name,mallId);
 			if(mallId == null) {
 				for (ShopInfoEntity shopInfoEntity : reList) {
 					shopInfoEntity.setShopName(shopInfoEntity.getShopName()+"-"+shopInfoEntity.getShopMid());
