@@ -166,6 +166,11 @@ public class TradeVO implements Serializable {
 	 */
 	private Integer score;
 
+	/**
+	 * 优惠方式(0:红包，1:优惠券)
+	 */
+	private Integer rebateType;
+
 	/**优惠券红包抵扣金额
 	 *
 	 */
@@ -193,6 +198,7 @@ public class TradeVO implements Serializable {
 	 * 买家支付账号
 	 */
 	private String buyerPayAccount;
+
 
 	/*----查询字段----*/
 	/**
@@ -619,5 +625,13 @@ public class TradeVO implements Serializable {
 
 	public void setRePay(boolean rePay) {
 		this.rePay = rePay;
+	}
+
+	public Integer getRebateType() {
+		return rebateType;
+	}
+
+	public void setRebateType(Integer rebateType) {
+		this.rebateType = rebateType;
 	}
 }
