@@ -22,6 +22,8 @@ public class BizzValidHistoryParam implements Serializable{
     private Date useTimeBegin;//验证开始时间
     private Date useTimeEnd;//验证结束时间
     private List<String> couponIds;
+    private List<String> mallMids;
+    private List<String> shopMids;
 
     private Integer recordStart;
     private Integer dateStatus;//记录统计参数     0:所有  1：当天  2：当周...
@@ -83,6 +85,23 @@ public class BizzValidHistoryParam implements Serializable{
 
     public Integer getCheckUserId() {
         return checkUserId;
+    }
+
+    public List<String> getShopMids() {
+        return shopMids;
+    }
+
+    public void setShopMids(List<String> shopMids) {
+        this.shopMids = shopMids;
+    }
+
+    public List<String> getMallMids() {
+
+        return mallMids;
+    }
+
+    public void setMallMids(List<String> mallMids) {
+        this.mallMids = mallMids;
     }
 
     public void setCheckUserId(Integer checkUserId) {
