@@ -85,11 +85,11 @@
                     <option value="2">买手</option>
                 </select>
             </div>
-            <div class="form-group" style="list-style-type:none;">
+            <div class="form-group" style="list-style-type:none;" id="search-mallId">
                     <label>商场：</label>
                     <input name="mallId" type="text" class="form-control ng-pristine ng-untouched ng-valid xiala">
             </div>
-            <div class="form-group" style="list-style-type:none;">
+            <div class="form-group" style="list-style-type:none;" id="search-shopId">
                     <label>店铺：</label>
                     <input name="shopId" type="text" class="form-control ng-pristine ng-untouched ng-valid xiala">
             </div>

@@ -20,10 +20,10 @@
         <tr>
             <td width="17%">交易流水号</td>
             <td width="11%">付款单号</td>
-            <td width="4%">渠道</td>
+           <%-- <td width="4%">渠道</td>--%>
             <td width="7%">交易时间</td>
-            <td width="4%">收支类型</td>
-            <td width="4%">打款方式</td>
+            <td width="6%">收支类型</td>
+            <td width="6%">打款方式</td>
             <td width="6%">优惠方式</td>
            <%-- <td width="6%">商场</td>
             <td width="5%">店铺</td>--%>
@@ -44,13 +44,13 @@
                         <td><a href="${ctx}/tradeDetail/info?id=${entity.id}&tradeNo=${entity.tradeNo}" target="_blank"
                                style="text-decoration: underline;">${entity.tradeNo}</a></td>
                         <td>${entity.payNo}</td>
-                         <td>
+                        <%-- <td>
                             <c:choose>
                                 <c:when test="${entity.guideType eq 1}">商家</c:when>
                                 <c:when test="${entity.guideType eq 2}">买手</c:when>
                                 <c:otherwise></c:otherwise>
                             </c:choose>
-                        </td>
+                        </td>--%>
                         <td><fmt:formatDate value="${entity.tradeTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                         <td>
                             <c:choose>
@@ -66,17 +66,23 @@
                                 ${entity.payChannel eq '2' ? '银行卡 ' : ''}
                         </td>
                         <c:choose>
-                            <c:when test="${entity.score > 0 && (not empty entity.orderCouponCode || entity.hbDiscount > 0)}">
+                            <c:when test="${entity.score > 0 &&  entity.rebateType eq 0}">
                                 <td>红包加积分</td>
                             </c:when>
-                            <c:when test="${entity.score > 0 }">
+                            <c:when test="${entity.score > 0 && entity.rebateType eq 1}">
+                                <td>抵扣券加积分</td>
+                            </c:when>
+                            <c:when test="${entity.score > 0  && entity.rebateType eq -1}">
                                 <td>积分</td>
                             </c:when>
-                            <c:when test="${not empty entity.orderCouponCode || entity.hbDiscount > 0}">
+                            <c:when test="${entity.score <= 0  && entity.rebateType eq 0}">
                                 <td>红包</td>
                             </c:when>
+                            <c:when test="${entity.score <= 0 && entity.rebateType eq 1}">
+                                <td>抵扣券</td>
+                            </c:when>
                             <c:otherwise>
-                                <td></td>
+                                <td>未使用优惠</td>
                             </c:otherwise>
                         </c:choose>
 

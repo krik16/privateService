@@ -209,9 +209,8 @@ public class MainController extends BaseController {
         if (StringUtils.isNotEmpty(mallId)) {
             String keywords = (String) paramsMap.get("keywords");
             Map<String, Object> map = new HashMap<String, Object>();
-//            map.put("mallId", mallId);
-//            map.put("name", keywords);
-            map.put("name", "五角场巴黎春天特卖场");
+            map.put("mallId", mallId);
+            map.put("name", keywords);
             Map<String, Object> result = shopService.getShops(map, 1, 10);
             if (result != null && result.get("list") != null) {
                 List<ShopVO> malls = (List<ShopVO>) result.get("list");
