@@ -46,13 +46,13 @@ $(document).ready(function() {
         items: 20,
         minLength: 1,
         updater: function(selection){
-            $('#mallId').val(map[selection]);
-            return selection;
-        }
-    });
+				$('#mallId').val(map[selection]);
+				return selection;
+			}
+		});
 	$('#shop').typeahead({
 		source: function (query, process) {
-			$("shopId").val("");
+			$("#shopId").val("");
 			m_names = [];
 			map = {};
 			var paramsJson = {};
@@ -106,6 +106,7 @@ function ajaxSearchOrderList() {
 	var orderCartNo = $('#orderCartNo').val();
 	var orderNo = $('#orderNo').val();
 	var guideType = $("#guideType").val();
+	var mall =  $('#mall').val();
 	var mallId = $('#mallId').val();
 	var shopName = $('#shop').val();
 	var sellerAccount = $('#sellerAccount').val();
@@ -154,7 +155,7 @@ function ajaxSearchOrderList() {
 	if(guideType != ""){
 		paramsJson_["guideType"] = guideType;
 	}
-	if(mallId != ""){
+	if(mallId != "" && mall != ""){
 		paramsJson_["mallId"] = mallId;
 	}
 	if(shopName!=""){

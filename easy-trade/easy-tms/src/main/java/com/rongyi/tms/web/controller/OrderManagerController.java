@@ -331,9 +331,10 @@ public class OrderManagerController extends BaseController {
 				searchMap.put("mallId", mallId);
 			}
 			//搜索店铺必须是指定商场下的店铺
-			if (StringUtils.isNotBlank(shopName) && StringUtils.isNotBlank(mallId)) {
+			if (StringUtils.isNotBlank(shopName)) {
 				shopName = URLDecoder.decode(shopName, "utf-8");
-				searchMap.put("shopName", shopName);
+				String[] shopNames = shopName.split("-");
+				searchMap.put("shopName", shopNames[0]);
 			}
 			if (searchMap.containsKey("mallId") || searchMap.containsKey("shopName")) {
 				shopList = roaShopService.getAllShopIdBuMallId(searchMap);
