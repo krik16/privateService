@@ -22,7 +22,7 @@ public class SystemConfig implements Serializable{
 
     //
 
-    public static final  String  USER_DISABLED_MSG="[自动回复]抱歉，卖家休息中，请您换个卖家看看吧~";
+    public static final  String  USER_DISABLED_MSG="抱歉，卖家休息中，请您换个卖家看看吧~";
 
 
 

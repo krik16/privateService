@@ -10,6 +10,10 @@ public class ParentOrderVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String orderId;// 大订单id
+	private String orderCartNo;// 购物车订单号
+	private String paymentIdList;// 支付流水号
+	private String couponCodes;// 券码（多个逗号隔开）
+	private Byte payChannel;// 券码（多个逗号隔开）
 
 	private String mallName;// 商场名称
 
@@ -72,6 +76,7 @@ public class ParentOrderVO implements Serializable {
 	private String imId;// 导购环信账号
 	private String userLogo;// 导购logo
 	private String userName;// 导购姓名
+	private String userAccount;// 导购账号
 	private String userPhone;// 导购电话
 	private String guideId;// 导购id
 	private Integer guideType;// 1是导购 2是买手
@@ -102,6 +107,50 @@ public class ParentOrderVO implements Serializable {
 	private BigDecimal orderRebateDiscount = BigDecimal.valueOf(0.0);//购物车分摊的抵扣券优惠
 
 	private Date createAt;//创建时间
+
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	public String getOrderCartNo() {
+		return orderCartNo;
+	}
+
+	public void setOrderCartNo(String orderCartNo) {
+		this.orderCartNo = orderCartNo;
+	}
+
+	public String getPaymentIdList() {
+		return paymentIdList;
+	}
+
+	public void setPaymentIdList(String paymentIdList) {
+		this.paymentIdList = paymentIdList;
+	}
+
+	public Byte getPayChannel() {
+		return payChannel;
+	}
+
+	public void setPayChannel(Byte payChannel) {
+		this.payChannel = payChannel;
+	}
+
+	public String getCouponCodes() {
+		return couponCodes;
+	}
+
+	public void setCouponCodes(String couponCodes) {
+		this.couponCodes = couponCodes;
+	}
+
+	public String getUserAccount() {
+		return userAccount;
+	}
+
+	public void setUserAccount(String userAccount) {
+		this.userAccount = userAccount;
+	}
 
 	private String changePriceFlag;//改价标志（0没改价,1改价,2改价影响抵扣券）
 

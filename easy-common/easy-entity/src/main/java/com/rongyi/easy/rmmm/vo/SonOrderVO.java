@@ -10,6 +10,11 @@ public class SonOrderVO implements Serializable{
 
 	private String num;// 下单数量
 
+	private BigDecimal integralDiscount;//积分抵扣
+	private BigDecimal commodityAmount;//子订单商品总价
+	private BigDecimal voucherDiscount;//平台促销券抵扣
+	private BigDecimal hbDiscount;//红包抵扣
+
 	private List<CommoditySpecColumnVO> specColumnValues;// 规格参数
 
 	private String commodityPic;// 商品图片
@@ -96,6 +101,39 @@ public class SonOrderVO implements Serializable{
 
 	public void setCommodityOriginalPrice(String commodityOriginalPrice) {
 		this.commodityOriginalPrice = commodityOriginalPrice;
+	}
+
+
+	public BigDecimal getVoucherDiscount() {
+		return voucherDiscount;
+	}
+
+	public BigDecimal getIntegralDiscount() {
+		return integralDiscount;
+	}
+
+	public void setIntegralDiscount(BigDecimal integralDiscount) {
+		this.integralDiscount = integralDiscount;
+	}
+
+	public BigDecimal getCommodityAmount() {
+		return commodityAmount;
+	}
+
+	public void setCommodityAmount(BigDecimal commodityAmount) {
+		this.commodityAmount = commodityAmount;
+	}
+
+	public void setVoucherDiscount(BigDecimal voucherDiscount) {
+		this.voucherDiscount = voucherDiscount;
+	}
+
+	public BigDecimal getHbDiscount() {
+		return hbDiscount;
+	}
+
+	public void setHbDiscount(BigDecimal hbDiscount) {
+		this.hbDiscount = hbDiscount;
 	}
 
 	public String getSonOrderStatus() {
