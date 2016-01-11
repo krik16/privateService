@@ -4,6 +4,7 @@
 package com.rongyi.easy.rmmm.vo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import com.rongyi.easy.rmmm.param.OrderModelParam;
 
@@ -32,6 +33,15 @@ public class OrderModelVO extends OrderModelParam implements Serializable {
 	
 	private String shopPostage;// 店铺快递邮费
 	private String supportWay;//1仅支持自提 2仅支持快递 3都支持
+	private Double couponTotalDiscount;//店铺红包抵扣金额
+
+	public Double getCouponTotalDiscount() {
+		return couponTotalDiscount;
+	}
+
+	public void setCouponTotalDiscount(Double couponTotalDiscount) {
+		this.couponTotalDiscount = couponTotalDiscount;
+	}
 
 	public String getShopPostage() {
 		return shopPostage;
@@ -179,21 +189,11 @@ public class OrderModelVO extends OrderModelParam implements Serializable {
 
 	@Override
 	public String toString() {
-		return "OrderModelVO{" +
-				"orderModelId='" + orderModelId + '\'' +
-				", provinceId='" + provinceId + '\'' +
-				", cityId='" + cityId + '\'' +
-				", nickName='" + nickName + '\'' +
-				", imId='" + imId + '\'' +
-				", paymentWaitMax='" + paymentWaitMax + '\'' +
-				", userLogo='" + userLogo + '\'' +
-				", userName='" + userName + '\'' +
-				", userPhone='" + userPhone + '\'' +
-				", shopName='" + shopName + '\'' +
-				", mallName='" + mallName + '\'' +
-				", provinceName='" + provinceName + '\'' +
-				", cityName='" + cityName + '\'' +
-				", guideType=" + guideType +
-				'}';
+		return "OrderModelVO [orderModelId=" + orderModelId + ", provinceId=" + provinceId + ", cityId=" + cityId + ", nickName="
+				+ nickName + ", imId=" + imId + ", paymentWaitMax=" + paymentWaitMax + ", userLogo=" + userLogo + ", userName="
+				+ userName + ", userPhone=" + userPhone + ", shopName=" + shopName + ", shopLogo=" + shopLogo + ", mallName="
+				+ mallName + ", provinceName=" + provinceName + ", cityName=" + cityName + ", guideType=" + guideType
+				+ ", rebateNum=" + rebateNum + ", shopPostage=" + shopPostage + ", supportWay=" + supportWay
+				+ ", couponTotalDiscount=" + couponTotalDiscount + "]";
 	}
 }
