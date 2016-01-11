@@ -376,6 +376,12 @@ public class OrderManagerController extends BaseController {
 				UserInfo userInfo = iUserInfoService.getUserByMap(map);
 				if (userInfo!=null)
 					paramsMap.put("guideId",userInfo.getId());
+				else {
+					model.addAttribute("orderForms", null);
+					model.addAttribute("rowCont", 0);
+					model.addAttribute("currpage", 1);
+					return "order/order_searchajax_list";
+				}
 			}
 			PagingVO<OrderManagerVO> pagingVO = roaOrderFormService.searchListByMap(paramsMap);
 			List<OrderManagerVO> orderForms = pagingVO.getDataList();
