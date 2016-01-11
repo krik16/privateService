@@ -108,7 +108,7 @@ function ajaxloadApplys(page,status,commissionNo,guideType,name,mall,shop,amount
 
 
 
-function checkApplys(ids,guideType, status, reason) {
+function checkApplys(ids, status, reason,guideType) {
 	
 	$.ajax({ 
 		url: "../sc/check", 
@@ -198,7 +198,7 @@ function checkUnpass(id,guideType) {
 						_util.cmsTip("字数超过限制！");
 						return -1;
 					} else {
-						checkApplys(id, guideType, -1, reason);
+						checkApplys(id, -1, reason, guideType);
 					}
 				}
 			});
