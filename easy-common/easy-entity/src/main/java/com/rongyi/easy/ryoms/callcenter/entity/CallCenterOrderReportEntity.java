@@ -20,7 +20,7 @@ public class CallCenterOrderReportEntity implements Serializable {
 	private int year;//年
 	private int month;//月
 	private int day;//日
-	private String account;//客服账号
+	private int customer;//客服账号
 	private int order_add_cnt;//新增工单数
 	private int order_done_cnt;//解决工单数
 	private Date create_at;//创建时间
@@ -75,16 +75,16 @@ public class CallCenterOrderReportEntity implements Serializable {
 		this.day = day;
 	}
 	/**
-	 * @return the account
+	 * @return the customer
 	 */
-	public String getAccount() {
-		return account;
+	public int getCustomer() {
+		return customer;
 	}
 	/**
-	 * @param account the account to set
+	 * @param customer the customer to set
 	 */
-	public void setAccount(String account) {
-		this.account = account;
+	public void setCustomer(int customer) {
+		this.customer = customer;
 	}
 	/**
 	 * @return the order_add_cnt
@@ -155,7 +155,7 @@ public class CallCenterOrderReportEntity implements Serializable {
 	@Override
 	public String toString() {
 		return "CallCenterOrderReportEntity [id=" + id + ", year=" + year + ", month=" + month + ", day=" + day
-				+ ", account=" + account + ", order_add_cnt=" + order_add_cnt + ", order_done_cnt=" + order_done_cnt
+				+ ", customer=" + customer + ", order_add_cnt=" + order_add_cnt + ", order_done_cnt=" + order_done_cnt
 				+ ", create_at=" + create_at + ", update_at=" + update_at + ", remark=" + remark + "]";
 	}
 }
