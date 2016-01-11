@@ -133,11 +133,23 @@ function checkApplys(ids, status, reason,guideType) {
 }
 function batchCheck(){
 	var ids = [];
+	var guideType = '';
+	var flag = false;
 	$(":checkbox[name='subBox']").each(function() {
 		if (this.checked == true) {
 			ids.push(this.id);
+			if(guideType=='')
+				guideType = (this.attr("guideType"))
+			if(this.attr("guideType")==null || guideType!=this.attr("guideType")){
+				flag = true;
+			}
 		}
 	});
+	if(guideType=='' || flag){
+		_util.cmsTip("请选择同一渠道类型的进行批量审核！");
+		return;
+	}
+
 	if (ids.length != 0) {
 		checkApplys(ids.join(","), 2);
 	}else{

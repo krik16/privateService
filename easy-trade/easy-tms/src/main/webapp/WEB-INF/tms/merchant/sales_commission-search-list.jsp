@@ -27,7 +27,7 @@
 			<c:when test="${not empty list}">
 			  	<c:forEach var="item" items="${list}" varStatus="status">
 			 		<tr>
-			 		<td style="text-align: center;"><input type="checkbox" name="subBox" id="${item.id }"></td>
+			 		<td style="text-align: center;"><input type="checkbox" name="subBox" id="${item.id }" guideType="${item.guideType}"></td>
 			 		
 			 		<td style="text-align: center;">
 			 			<c:set value="${ fn:split(item.picUrls, ';') }" var="urls" />
