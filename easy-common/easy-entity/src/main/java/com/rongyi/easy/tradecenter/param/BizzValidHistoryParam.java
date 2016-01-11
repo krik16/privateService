@@ -22,6 +22,30 @@ public class BizzValidHistoryParam implements Serializable{
     private Date useTimeBegin;//验证开始时间
     private Date useTimeEnd;//验证结束时间
     private List<String> couponIds;
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("BizzValidHistoryParam{");
+        sb.append("orderBy='").append(orderBy).append('\'');
+        sb.append(", orderVa='").append(orderVa).append('\'');
+        sb.append(", pageSize=").append(pageSize);
+        sb.append(", currentPage=").append(currentPage);
+        sb.append(", checkUserId=").append(checkUserId);
+        sb.append(", checkNickName='").append(checkNickName).append('\'');
+        sb.append(", title='").append(title).append('\'');
+        sb.append(", couponCode='").append(couponCode).append('\'');
+        sb.append(", userPhone='").append(userPhone).append('\'');
+        sb.append(", useTimeBegin=").append(useTimeBegin);
+        sb.append(", useTimeEnd=").append(useTimeEnd);
+        sb.append(", couponIds=").append(couponIds);
+        sb.append(", mallMids=").append(mallMids);
+        sb.append(", shopMids=").append(shopMids);
+        sb.append(", recordStart=").append(recordStart);
+        sb.append(", dateStatus=").append(dateStatus);
+        sb.append('}');
+        return sb.toString();
+    }
+
     private List<String> mallMids;
     private List<String> shopMids;
 
@@ -156,25 +180,4 @@ public class BizzValidHistoryParam implements Serializable{
         this.recordStart = recordStart;
     }
 
-    @Override
-    public String toString() {
-        return "BizzValidHistoryParam{" +
-                "orderBy='" + orderBy + '\'' +
-                ", orderVa='" + orderVa + '\'' +
-                ", pageSize=" + pageSize +
-                ", currentPage=" + currentPage +
-                ", checkUserId=" + checkUserId +
-                ", checkNickName='" + checkNickName + '\'' +
-                ", title='" + title + '\'' +
-                ", couponCode='" + couponCode + '\'' +
-                ", userPhone='" + userPhone + '\'' +
-                ", useTimeBegin=" + useTimeBegin +
-                ", useTimeEnd=" + useTimeEnd +
-                ", couponIds=" + "" +
-                ", mallMids=" + "" +
-                ", shopMids=" + "" +
-                ", recordStart=" + recordStart +
-                ", dateStatus=" + dateStatus +
-                '}';
-    }
 }
