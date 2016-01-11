@@ -148,23 +148,6 @@ public class BizzValidHistoryParam implements Serializable{
         this.useTimeEnd = useTimeEnd;
     }
 
-    @Override
-    public String toString() {
-        return "BizzValidHistoryParam{" +
-                "orderBy='" + orderBy + '\'' +
-                ", orderVa='" + orderVa + '\'' +
-                ", pageSize=" + pageSize +
-                ", currentPage=" + currentPage +
-                ", checkUserId=" + checkUserId +
-                ", title='" + title + '\'' +
-                ", couponCode='" + couponCode + '\'' +
-                ", userPhone='" + userPhone + '\'' +
-                ", useTimeBegin=" + useTimeBegin +
-                ", useTimeEnd=" + useTimeEnd +
-                ", recordStart=" + recordStart +
-                '}';
-    }
-
     public Integer getRecordStart() {
         return recordStart;
     }
@@ -173,4 +156,25 @@ public class BizzValidHistoryParam implements Serializable{
         this.recordStart = recordStart;
     }
 
+    @Override
+    public String toString() {
+        return "BizzValidHistoryParam{" +
+                "orderBy='" + orderBy + '\'' +
+                ", orderVa='" + orderVa + '\'' +
+                ", pageSize=" + pageSize +
+                ", currentPage=" + currentPage +
+                ", checkUserId=" + checkUserId +
+                ", checkNickName='" + checkNickName + '\'' +
+                ", title='" + title + '\'' +
+                ", couponCode='" + couponCode + '\'' +
+                ", userPhone='" + userPhone + '\'' +
+                ", useTimeBegin=" + useTimeBegin +
+                ", useTimeEnd=" + useTimeEnd +
+                ", couponIds=" + "" +
+                ", mallMids=" + "" +
+                ", shopMids=" + "" +
+                ", recordStart=" + recordStart +
+                ", dateStatus=" + dateStatus +
+                '}';
+    }
 }
