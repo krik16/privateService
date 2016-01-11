@@ -83,6 +83,11 @@ public class PaymentStatement implements Serializable {
      */
     private Byte isDelete;
 
+    /**
+     * 预计付款时间
+     */
+    private Date predictPayTime;
+
     public Integer getId() {
         return id;
     }
@@ -193,5 +198,21 @@ public class PaymentStatement implements Serializable {
 
     public void setIsDelete(Byte isDelete) {
         this.isDelete = isDelete;
+    }
+
+    public Date getStatusUpdateTime() {
+        return statusUpdateTime;
+    }
+
+    public void setStatusUpdateTime(Date statusUpdateTime) {
+        this.statusUpdateTime = statusUpdateTime;
+    }
+
+    public Date getPredictPayTime() {
+        return predictPayTime;
+    }
+
+    public void setPredictPayTime(Date predictPayTime) {
+        this.predictPayTime = predictPayTime;
     }
 }
