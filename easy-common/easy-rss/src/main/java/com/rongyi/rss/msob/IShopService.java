@@ -199,4 +199,12 @@ public interface IShopService{
      * @throws Exception
      */
     public List<ShopInfoEntity> getShopsByFilialyId(String filialeId)throws Exception;
+
+	/**
+	 * 商场查店铺查询店铺
+	 * @param filialeId  分公司mongoId
+	 * @return
+	 * @throws Exception
+	 */
+	List<ShopInfoEntity> getShopsByMallId(String filialeId)throws Exception;
 }
