@@ -154,7 +154,6 @@ function batchCheck(){
 		checkApplys(ids.join(","), 2);
 	}else{
 		_util.cmsTip("您至少要选中一条返佣！");
-		return;
 	}
 }
 function checkListener() {
