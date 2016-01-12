@@ -20,12 +20,14 @@ public class CallCenterOrderReportEntity implements Serializable {
 	private int year;//年
 	private int month;//月
 	private int day;//日
-	private int customer;//客服账号
+	private int user_id;//客服账号
 	private int order_add_cnt;//新增工单数
 	private int order_done_cnt;//解决工单数
 	private Date create_at;//创建时间
 	private Date update_at;//修改时间
 	private String remark;//备注
+	private int user_count;//客服数量
+	private int week;//周
 	/**
 	 * @return the id
 	 */
@@ -75,16 +77,16 @@ public class CallCenterOrderReportEntity implements Serializable {
 		this.day = day;
 	}
 	/**
-	 * @return the customer
+	 * @return the user_id
 	 */
-	public int getCustomer() {
-		return customer;
+	public int getUser_id() {
+		return user_id;
 	}
 	/**
-	 * @param customer the customer to set
+	 * @param user_id the user_id to set
 	 */
-	public void setCustomer(int customer) {
-		this.customer = customer;
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 	/**
 	 * @return the order_add_cnt
@@ -146,16 +148,28 @@ public class CallCenterOrderReportEntity implements Serializable {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	/* (非 Javadoc) 
-	* <p>Title: toString</p> 
-	* <p>Description: </p> 
-	* @return 
-	* @see java.lang.Object#toString() 
-	*/
-	@Override
-	public String toString() {
-		return "CallCenterOrderReportEntity [id=" + id + ", year=" + year + ", month=" + month + ", day=" + day
-				+ ", customer=" + customer + ", order_add_cnt=" + order_add_cnt + ", order_done_cnt=" + order_done_cnt
-				+ ", create_at=" + create_at + ", update_at=" + update_at + ", remark=" + remark + "]";
+	/**
+	 * @return the user_count
+	 */
+	public int getUser_count() {
+		return user_count;
+	}
+	/**
+	 * @param user_count the user_count to set
+	 */
+	public void setUser_count(int user_count) {
+		this.user_count = user_count;
+	}
+	/**
+	 * @return the week
+	 */
+	public int getWeek() {
+		return week;
+	}
+	/**
+	 * @param week the week to set
+	 */
+	public void setWeek(int week) {
+		this.week = week;
 	}
 }
