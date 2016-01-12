@@ -20,6 +20,8 @@
                 jdbcType="TIMESTAMP"/>
         <result column="cycle_end_time" property="cycleEndTime"
                 jdbcType="TIMESTAMP"/>
+        <result column="cycle_day" property="cycleDay" jdbcType="TINYINT" />
+        <result column="cycle_regular_day" property="cycleRegularDay" jdbcType="VARCHAR" />
         <result column="is_loop" property="isLoop" jdbcType="TINYINT"/>
         <result column="verify_type" property="verifyType" jdbcType="TINYINT"/>
         <result column="gen_header_time" property="generateHeaderTime"
