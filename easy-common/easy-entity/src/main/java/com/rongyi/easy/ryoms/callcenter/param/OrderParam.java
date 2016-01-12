@@ -10,6 +10,14 @@ import java.io.Serializable;
  */
 public class OrderParam implements Serializable {
 
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
 	@Override
 	public String toString() {
 		return "OrderParam [id=" + id + ", customerCode=" + customerCode + ", orderSrc=" + orderSrc + ", orderType="
@@ -160,4 +168,7 @@ public class OrderParam implements Serializable {
 
 	// 每页数
 	private int pageSize = 0;
+
+	// 页数
+	private int page = 0;
 }

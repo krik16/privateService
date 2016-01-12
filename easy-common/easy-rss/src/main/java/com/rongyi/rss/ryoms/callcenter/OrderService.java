@@ -45,6 +45,14 @@ public interface OrderService {
 	 * @return
 	 */
 	public List<OrderVO> list(OrderParam param);
+	
+	/**
+	 * 查询列表记录数
+	 * 
+	 * @param param
+	 * @return
+	 */
+	public int listCnt(OrderParam param);
 
 	/**
 	 * 根据客户账号查询最近的一次的工单编号
