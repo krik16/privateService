@@ -37,9 +37,9 @@ public class BizzValidHistoryParam implements Serializable{
         sb.append(", userPhone='").append(userPhone).append('\'');
         sb.append(", useTimeBegin=").append(useTimeBegin);
         sb.append(", useTimeEnd=").append(useTimeEnd);
-        sb.append(", couponIds=").append(couponIds);
-        sb.append(", mallMids=").append(mallMids);
-        sb.append(", shopMids=").append(shopMids);
+        sb.append(", couponIds=").append("");
+        sb.append(", mallMids=").append("");
+        sb.append(", shopMids=").append("");
         sb.append(", recordStart=").append(recordStart);
         sb.append(", dateStatus=").append(dateStatus);
         sb.append('}');
