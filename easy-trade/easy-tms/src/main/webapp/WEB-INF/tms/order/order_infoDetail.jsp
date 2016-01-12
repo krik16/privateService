@@ -107,7 +107,7 @@
 				<table class="accounttable max" width="100%" border="0" cellspacing="0" cellpadding="0">
 					<tr>
 						<td>商品图片</td>
-						<td>商品名称</td>
+						<td>商品</td>
 						<td>商品规格</td>
 						<td>单价（元）</td>
 						<td>数量</td>
@@ -124,7 +124,10 @@
 								<img src="${sonOrder.commodityPic }">
 							</div>
 						</td>
-						<td><a href="${ctx }/orderManager/commodityDetail?commodityId=${sonOrder.commodityId }&shopId=&currpage=1" target="_parent">${sonOrder.commodityName }</a></td>
+						<td><a href="${ctx }/orderManager/commodityDetail?commodityId=${sonOrder.commodityId }&shopId=&currpage=1" target="_parent">${sonOrder.commodityName }</a>
+							<br>
+							商品编码：${sonOrder.commodityNo }
+						</td>
 						<td>
 							<c:forEach var="specColumnValue" items="${sonOrder.specColumnValues }" >
 								${specColumnValue.columnName }:${specColumnValue.columnValue } &nbsp;

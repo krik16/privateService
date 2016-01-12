@@ -3,7 +3,6 @@ package com.rongyi.tms.web.controller;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.easy.bsoms.entity.UserInfo;
-import com.rongyi.easy.coupon.vo.MMUserCouponVO;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
 import com.rongyi.easy.mcmc.vo.CommodityWebVO;
 import com.rongyi.easy.osm.entity.OrderDetailFormEntity;
@@ -225,7 +224,7 @@ public class OrderManagerController extends BaseController {
 				throw new RuntimeException("orderId is null or empty");
 			}
 			ParentOrderVO orderDetailVo = iOrderQueryService.searchRYOrderDetail(Integer.valueOf(orderId));
-			List<MMUserCouponVO> cashCoupons = new ArrayList<>();
+//			List<MMUserCouponVO> cashCoupons = new ArrayList<>();
 			List<SonOrderVO> sonOrderList = orderDetailVo.getSonOrderList();
 			BigDecimal discountTotal = new BigDecimal("0.00");//总红包（抵扣）
 			BigDecimal commidityTotalPice = new BigDecimal("0.00");//商品总价
@@ -235,20 +234,20 @@ public class OrderManagerController extends BaseController {
 				for (SonOrderVO sonOrderVo : sonOrderList) {
 					commidityTotalPice = commidityTotalPice.add(new BigDecimal(sonOrderVo.getNum())
 							.multiply(new BigDecimal(sonOrderVo.getCommodityCurrentPrice()))).setScale(2, BigDecimal.ROUND_HALF_UP);
-					if (StringUtils.isNotBlank(sonOrderVo.getCouponCode())) {
-						MMUserCouponVO userCouponVO = mMUserCouponService.getUserCouponByCouponCode(sonOrderVo
-								.getCouponCode());
-						if (userCouponVO != null) {
-							if (userCouponVO.getDiscount().compareTo(sonOrderVo.getRealAmount()) == 1) {
-								userCouponVO.setRealDiscount(sonOrderVo.getRealAmount());
-								discountTotal = discountTotal.add(sonOrderVo.getRealAmount());
-							}else{
-								userCouponVO.setRealDiscount(userCouponVO.getDiscount());
-								discountTotal = discountTotal.add(userCouponVO.getDiscount());
-							}
-							cashCoupons.add(userCouponVO);
-						}
-					}
+//					if (StringUtils.isNotBlank(sonOrderVo.getCouponCode())) {
+//						MMUserCouponVO userCouponVO = mMUserCouponService.getUserCouponByCouponCode(sonOrderVo
+//								.getCouponCode());
+//						if (userCouponVO != null) {
+//							if (userCouponVO.getDiscount().compareTo(sonOrderVo.getRealAmount()) == 1) {
+//								userCouponVO.setRealDiscount(sonOrderVo.getRealAmount());
+//								discountTotal = discountTotal.add(sonOrderVo.getRealAmount());
+//							}else{
+//								userCouponVO.setRealDiscount(userCouponVO.getDiscount());
+//								discountTotal = discountTotal.add(userCouponVO.getDiscount());
+//							}
+//							cashCoupons.add(userCouponVO);
+//						}
+//					}
 				}
 			}
 			if (StringUtils.isNotBlank(orderDetailVo.getCommitOrderTime())) {
@@ -260,11 +259,6 @@ public class OrderManagerController extends BaseController {
 			if (StringUtils.isNotBlank(orderDetailVo.getPayTime())) {
 				orderDetailVo.setPayTime(orderDetailVo.getPayTime().substring(0, 16));
 			}
-//			//订单过程包含（">|<4,"）就是正常关闭
-//			if(StringUtils.isNotBlank(orderDetailVo.getStatusRoute())
-//					&& orderDetailVo.getStatusRoute().contains(">|<4,")){
-//				orderDetailVo.setParentOrderStatus("4");
-//			}
 			model.addAttribute("order", orderDetailVo);
 //			model.addAttribute("cashCoupons", cashCoupons);
 			model.addAttribute("discountTotal", discountTotal);
@@ -351,24 +345,9 @@ public class OrderManagerController extends BaseController {
 			if (!CollectionUtils.isEmpty(shopList)) {
 				paramsMap.put("shopList", shopList);
 			}
-//			if (StringUtils.isNotBlank(orderNo)) {
-//				searchMap.put("orderNo", orderNo);
-//			}
-//			if (StringUtils.isNotBlank((String) paramsMap.get("currpage"))) {
-//				searchMap.put("currentPage", paramsMap.get("currpage"));
-//			}
-//			if(StringUtils.isNotBlank(guideType)){
-//				searchMap.put("guideType", guideType);
-//			}
 			if(paramsMap.containsKey("commodityNo")){
 				paramsMap.put("commodityIds", mcmcCommoditySolrService.selectCommodityIndexByNameCode(paramsMap.get("commodityNo").toString(), null));
 			}
-//			if (paramsMap.containsKey("payChannel")){
-//				searchMap.put("payChannel", paramsMap.get("payChannel").toString());
-//			}
-//			if (paramsMap.containsKey("orderCartNo")){
-//				searchMap.put("orderCartNo", paramsMap.get("orderCartNo").toString());
-//			}
 			if (paramsMap.containsKey("sellerAccount")){
 				Map<String, Object> map = new HashMap<>();
 				map.put("userAccount",paramsMap.get("sellerAccount").toString());
