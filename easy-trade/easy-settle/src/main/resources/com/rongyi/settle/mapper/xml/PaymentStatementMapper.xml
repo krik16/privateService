@@ -16,7 +16,6 @@
 		<result column="status_update_time" property="statusUpdateTime" jdbcType="TIMESTAMP" />
 		<result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
 		<result column="is_delete" property="isDelete" jdbcType="TINYINT" />
-		<result column="predict_pay_time" property="predictPayTime" jdbcType="TIMESTAMP" />
 	</resultMap>
 	<sql id="Base_Column_List">
 		id, config_id, rule_code, cycle_start_time, cycle_end_time,
@@ -321,7 +320,8 @@
 		pbc.biz_type,
 		bi.biz_email, bi.pay_account, bi.blank_name, bi.pay_name,
 		ol.desc,ol.create_user_id as download_user,ol.create_at as
-		download_time,pbc.roll_day,pbc.roll_type,pbc.pay_mode,pb.predict_pay_time
+		download_time,pbc.roll_day,pbc.roll_type,pbc.pay_mode,pb.create_at as
+		predict_pay_time
 		from payment_bill pb
 		left join payment_bill_config pbc
 		on pb.config_id=pbc.id

@@ -56,6 +56,10 @@ public enum ConstantEnum {
     ROLL_TYPE_0(0,"天"),
     ROLL_TYPE_1(1,"时"),
 
+    OP_DESC_0(0,"新增"),
+    OP_DESC_1(1,"修改生效"),
+    OP_DESC_2(2,"修改待审核"),
+
 	PAGE_SIZE(10,"分页条数");
     
     private Object code;
