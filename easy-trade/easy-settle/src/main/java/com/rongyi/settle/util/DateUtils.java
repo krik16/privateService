@@ -29,6 +29,26 @@ public class DateUtils {
         return dateTimeFormat.parse(timeBegin);
     }
 
+    /**
+     * 获取前N天的第一秒
+     * 
+     * @param offset 日期偏移量（单位：天）
+     * @return
+     * @throws Exception
+    * @author erliang
+    * @date 2016年1月11日
+     */
+    public static Date getSomedayFirstSecond(int offset) throws Exception {
+        Calendar instance = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat(FORMAT_DATE);
+        instance.add(Calendar.DATE, -offset);
+        Date someday = instance.getTime();
+        String somedayDateStr = dateFormat.format(someday);
+        String timeBegin = somedayDateStr + firstSecond;
+        SimpleDateFormat dateTimeFormat = new SimpleDateFormat(FORMAT_DATETIME);
+        return dateTimeFormat.parse(timeBegin);
+    }
+    
     public static Date getYesterdayLastSecond() throws Exception {
         Calendar instance = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat(FORMAT_DATE);
