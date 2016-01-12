@@ -85,7 +85,7 @@ public interface MallService {
     ResponseVO getMallList(String mallName, Integer page, Integer pageSize);
     
     /**
-     * 根据集团 ID查询商场 imya
+     * 根据集团 ID查询商场 
      * @param groupId
      * @return
      */
