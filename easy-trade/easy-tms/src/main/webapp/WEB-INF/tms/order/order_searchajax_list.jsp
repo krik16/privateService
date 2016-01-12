@@ -27,7 +27,7 @@
 			<c:when test="${not empty orderForms}">
 				<c:forEach var="orderForm" items="${orderForms}" varStatus="status">
 			  		<tr>
-						<td><a href="${ctx}/orderManager/orderCartSearch?orderCartNo=${orderForm.orderCartNo}">${orderForm.orderCartNo}</a></td>
+						<td><a href="${ctx}/orderManager/orderCartSearch?orderCartNo=${orderForm.orderCartNo}" style="text-decoration:underline">${orderForm.orderCartNo}</a></td>
 						<td><a href="${ctx}/orderManager/orderInfo?orderId=${orderForm.orderId}&module=order" style="text-decoration:underline" target="_blank">${orderForm.orderNo}</a></td>
 						<td>${orderForm.sellerAccount}</td>
 						<td>${orderForm.username}</td>

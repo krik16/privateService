@@ -22,7 +22,7 @@
 					<ul>
 						<li class="w_100 lvse size-14">订单信息</li>
 
-						<li class="name">父订单号</li>
+						<li class="name">母订单号</li>
 						<li class="line">|</li>
 						<li class="data max2">${order.orderCartNo }</li>
 
@@ -124,7 +124,7 @@
 								<img src="${sonOrder.commodityPic }">
 							</div>
 						</td>
-						<td><a href="${ctx }/orderManager/commodityDetail?commodityId=${sonOrder.commodityId }&shopId=&currpage=1" target="_parent">${sonOrder.commodityName }</a>
+						<td><a href="${ctx }/orderManager/commodityDetail?commodityId=${sonOrder.commodityId }&shopId=&currpage=1" style="text-decoration:underline" target="_parent">${sonOrder.commodityName }</a>
 							<br>
 							商品编码：${sonOrder.commodityNo }
 						</td>
