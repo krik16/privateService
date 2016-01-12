@@ -19,41 +19,24 @@ public class OrderVO implements Serializable {
 				+ orderSrc + ", orderSrcString=" + orderSrcString + ", orderType=" + orderType + ", orderTypeString="
 				+ orderTypeString + ", orderStatus=" + orderStatus + ", orderStatusString=" + orderStatusString
 				+ ", orderLevel=" + orderLevel + ", orderLevelString=" + orderLevelString + ", title=" + title
-				+ ", moduleId=" + moduleId + ", moduleString=" + moduleString + ", createBy=" + createBy
-				+ ", createByString=" + createByString + ", createAt=" + createAt + ", updateBy=" + updateBy
-				+ ", updateByString=" + updateByString + ", updateAt=" + updateAt + ", replyCnt=" + replyCnt
+				+ ", moduleId=" + moduleId + ", moduleString=" + moduleString + ", createBy=" + createBy + ", createAt="
+				+ createAt + ", updateBy=" + updateBy + ", updateAt=" + updateAt + ", replyCnt=" + replyCnt
 				+ ", replyList=" + replyList + "]";
 	}
 
-	public int getCreateBy() {
+	public String getCreateBy() {
 		return createBy;
 	}
 
-	public int getUpdateBy() {
+	public String getUpdateBy() {
 		return updateBy;
 	}
 
-	public String getCreateByString() {
-		return createByString;
-	}
-
-	public void setCreateByString(String createByString) {
-		this.createByString = createByString;
-	}
-
-	public String getUpdateByString() {
-		return updateByString;
-	}
-
-	public void setUpdateByString(String updateByString) {
-		this.updateByString = updateByString;
-	}
-
-	public void setCreateBy(int createBy) {
+	public void setCreateBy(String createBy) {
 		this.createBy = createBy;
 	}
 
-	public void setUpdateBy(int updateBy) {
+	public void setUpdateBy(String updateBy) {
 		this.updateBy = updateBy;
 	}
 
@@ -240,15 +223,11 @@ public class OrderVO implements Serializable {
 	private String moduleString = "";
 
 	// 创建人
-	private int createBy = 0;
-	// 创建人
-	private String createByString = "";
+	private String createBy = "";
 	// 创建时间
 	private String createAt = "";
 	// 更新人
-	private int updateBy = 0;
-	// 更新人
-	private String updateByString = "";
+	private String updateBy = "";
 	// 更新时间
 	private String updateAt = "";
 

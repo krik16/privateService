@@ -10,11 +10,19 @@ import java.io.Serializable;
  */
 public class OrderDetailEntity implements Serializable {
 
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 	@Override
 	public String toString() {
 		return "OrderDetailEntity [id=" + id + ", orderId=" + orderId + ", orderStatus=" + orderStatus
 				+ ", orderStatusString=" + orderStatusString + ", content=" + content + ", createBy=" + createBy
-				+ ", createByString=" + createByString + ", createAt=" + createAt + "]";
+				+ ", userId=" + userId + ", createAt=" + createAt + "]";
 	}
 
 	/**
@@ -62,11 +70,11 @@ public class OrderDetailEntity implements Serializable {
 		this.content = content;
 	}
 
-	public int getCreateBy() {
+	public String getCreateBy() {
 		return createBy;
 	}
 
-	public void setCreateBy(int createBy) {
+	public void setCreateBy(String createBy) {
 		this.createBy = createBy;
 	}
 
@@ -76,14 +84,6 @@ public class OrderDetailEntity implements Serializable {
 
 	public void setCreateAt(String createAt) {
 		this.createAt = createAt;
-	}
-
-	public String getCreateByString() {
-		return createByString;
-	}
-
-	public void setCreateByString(String createByString) {
-		this.createByString = createByString;
 	}
 
 	// 编号
@@ -100,10 +100,11 @@ public class OrderDetailEntity implements Serializable {
 	private String content = "";
 
 	// 创建人
-	private int createBy = 0;
-	// 创建人
-	private String createByString = "";
+	private String createBy = "";
 	// 创建时间
 	private String createAt = "";
+
+	// 当前用户Id
+	private int userId = 0;
 
 }

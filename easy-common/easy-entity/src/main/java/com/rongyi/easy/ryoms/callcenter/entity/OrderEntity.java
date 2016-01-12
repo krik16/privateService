@@ -17,25 +17,8 @@ public class OrderEntity implements Serializable {
 				+ ", orderTypeString=" + orderTypeString + ", orderStatus=" + orderStatus + ", orderStatusString="
 				+ orderStatusString + ", orderLevel=" + orderLevel + ", orderLevelString=" + orderLevelString
 				+ ", title=" + title + ", content=" + content + ", moduleId=" + moduleId + ", moduleString="
-				+ moduleString + ", createBy=" + createBy + ", createByString=" + createByString + ", createAt="
-				+ createAt + ", updateBy=" + updateBy + ", updateByString=" + updateByString + ", updateAt=" + updateAt
-				+ "]";
-	}
-
-	public String getCreateByString() {
-		return createByString;
-	}
-
-	public void setCreateByString(String createByString) {
-		this.createByString = createByString;
-	}
-
-	public String getUpdateByString() {
-		return updateByString;
-	}
-
-	public void setUpdateByString(String updateByString) {
-		this.updateByString = updateByString;
+				+ moduleString + ", createBy=" + createBy + ", createAt=" + createAt + ", updateBy=" + updateBy
+				+ ", updateAt=" + updateAt + ", userId=" + userId + "]";
 	}
 
 	/**
@@ -163,11 +146,11 @@ public class OrderEntity implements Serializable {
 		this.moduleString = moduleString;
 	}
 
-	public int getCreateBy() {
+	public String getCreateBy() {
 		return createBy;
 	}
 
-	public void setCreateBy(int createBy) {
+	public void setCreateBy(String createBy) {
 		this.createBy = createBy;
 	}
 
@@ -179,11 +162,11 @@ public class OrderEntity implements Serializable {
 		this.createAt = createAt;
 	}
 
-	public int getUpdateBy() {
+	public String getUpdateBy() {
 		return updateBy;
 	}
 
-	public void setUpdateBy(int updateBy) {
+	public void setUpdateBy(String updateBy) {
 		this.updateBy = updateBy;
 	}
 
@@ -193,6 +176,14 @@ public class OrderEntity implements Serializable {
 
 	public void setUpdateAt(String updateAt) {
 		this.updateAt = updateAt;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	// 编号
@@ -234,16 +225,16 @@ public class OrderEntity implements Serializable {
 	private String moduleString = "";
 
 	// 创建人
-	private int createBy = 0;
+	private String createBy = "";
 	// 创建人
-	private String createByString = "";
 	// 创建时间
 	private String createAt = "";
 	// 更新人
-	private int updateBy = 0;
+	private String updateBy = "";
 
-	private String updateByString = "";
 	// 更新时间
 	private String updateAt = "";
 
+	// 用户Id
+	private int userId = 0;
 }
