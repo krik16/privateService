@@ -163,19 +163,19 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private Integer devType;
 
     //0:未打款，1:对私(打款到导购虚拟账号)，2:对公(通过对账单结算)
-    private byte isPayVa;//0:未打款，1:对私(打款到导购虚拟账号)，2:对公(通过对账单结算)
+    private Byte isPayVa;//0:未打款，1:对私(打款到导购虚拟账号)，2:对公(通过对账单结算)
 
-    private BigDecimal orderScoreDiscount = BigDecimal.ZERO;;//购物车订单积分分摊优惠金额
+    private BigDecimal orderScoreDiscount;//购物车订单积分分摊优惠金额
 
-    private BigDecimal orderCouponDiscount = BigDecimal.ZERO;;//购物车订单抵扣券分摊优惠金额
+    private BigDecimal orderCouponDiscount;//购物车订单抵扣券分摊优惠金额
 
-    private byte changePriceFlag;//用户改价通知 0未改价 1 改价 2 改价且恢复抵扣券
+    private Byte changePriceFlag;//用户改价通知 0未改价 1 改价 2 改价且恢复抵扣券
 
     private Integer cartId;//购物车id 0表示不使用购物车
 
-    private int buyerDeleteFlag = 0;//买家删除标志 0 未删除 1 删除
+    private Integer buyerDeleteFlag;//买家删除标志 0 未删除 1 删除
 
-    private int sellerDeleteFlag = 0;//卖家删除标志 0 未删除 1 删除
+    private Integer sellerDeleteFlag;//卖家删除标志 0 未删除 1 删除
 
     private BigDecimal realAmount;//原价
 
@@ -633,22 +633,22 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
         return buyerComment;
     }
 
-    public int getBuyerDeleteFlag()
+    public Integer getBuyerDeleteFlag()
     {
         return buyerDeleteFlag;
     }
 
-    public void setBuyerDeleteFlag(int buyerDeleteFlag)
+    public void setBuyerDeleteFlag(Integer buyerDeleteFlag)
     {
         this.buyerDeleteFlag = buyerDeleteFlag;
     }
 
-    public int getSellerDeleteFlag()
+    public Integer getSellerDeleteFlag()
     {
         return sellerDeleteFlag;
     }
 
-    public void setSellerDeleteFlag(int sellerDeleteFlag)
+    public void setSellerDeleteFlag(Integer sellerDeleteFlag)
     {
         this.sellerDeleteFlag = sellerDeleteFlag;
     }
@@ -710,11 +710,11 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
         this.devType = devType;
     }
 
-    public byte getIsPayVa() {
+    public Byte getIsPayVa() {
         return isPayVa;
     }
 
-    public void setIsPayVa(byte isPayVa) {
+    public void setIsPayVa(Byte isPayVa) {
         this.isPayVa = isPayVa;
     }
 
@@ -734,11 +734,11 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
         this.orderCouponDiscount = orderCouponDiscount;
     }
 
-    public byte getChangePriceFlag() {
+    public Byte getChangePriceFlag() {
         return changePriceFlag;
     }
 
-    public void setChangePriceFlag(byte changePriceFlag) {
+    public void setChangePriceFlag(Byte changePriceFlag) {
         this.changePriceFlag = changePriceFlag;
     }
 
