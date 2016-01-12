@@ -7,12 +7,12 @@
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		<tbody>
 		<tr>
-			<td width="7%">母订单号</td>
-			<td width="7%">订单号</td>
+			<td width="8%">母订单号</td>
+			<td width="8%">订单号</td>
 			<td width="6%">卖家账号</td>
 			<td width="6%">买家账号</td>
-			<td width="8%">商场</td>
-			<td width="8%">店铺</td>
+			<td width="9%">商场</td>
+			<td width="6%">店铺</td>
 			<td width="6%">订单金额（元）</td>
 			<td width="7%">平台促销券（元）</td>
 			<td width="6%">积分（元）</td>
@@ -20,7 +20,7 @@
 			<td width="6%">订单状态</td>
 			<td width="6%">订单来源</td>
 			<td width="6%">支付方式</td>
-			<td width="10%">下单时间</td>
+			<td width="9%">下单时间</td>
 			<td width="5%">渠道</td>
 		</tr>
 		<c:choose>

@@ -138,7 +138,7 @@ function ajaxSearchOrderList() {
 		paramsJson_["payChannel"] = payChannel;
 	}
 	if(commodityNo != ""){
-		paramsJson_["commodityNo"] = commodityNo;
+		paramsJson_["commodityNo"] = encodeURIComponent(commodityNo);
 	}
 	if(timeBegin != ""){
 		paramsJson_["createAtBegin"] = timeBegin;

@@ -148,7 +148,7 @@
 
 			<div class="mallNew-main">
 				<div class="mallNew-main-left">
-					<ul>
+					<%--<ul>
 						<li class="w_100 lvse size-14">抵用积分</li>
 
 						<li class="name">抵扣积分</li>
@@ -157,7 +157,7 @@
 							<c:if test="${order.score==null }">0</c:if>
 							<c:if test="${order.score!=null }">${order.score }</c:if>
 						</li>
-					</ul>
+					</ul>--%>
 
 					<ul>
 						<li class="w_100 lvse size-14">订单信息</li>

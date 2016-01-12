@@ -28,11 +28,13 @@ import com.rongyi.rss.tradecenter.osm.IOrderQueryService;
 import com.rongyi.tms.moudle.vo.ParentOrderCartVO;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
@@ -346,7 +348,19 @@ public class OrderManagerController extends BaseController {
 				paramsMap.put("shopList", shopList);
 			}
 			if(paramsMap.containsKey("commodityNo")){
-				paramsMap.put("commodityIds", mcmcCommoditySolrService.selectCommodityIndexByNameCode(paramsMap.get("commodityNo").toString(), null));
+				logger.info(" commodityNo={} ", URLDecoder.decode(paramsMap.get("commodityNo").toString(), "utf-8"));
+				List<String> commodityIds = new ArrayList<>();
+				List<ObjectId> ids = mcmcCommoditySolrService.selectCommodityIndexByNameCode(URLDecoder.decode(paramsMap.get("commodityNo").toString(), "utf-8"), null);
+				if (CollectionUtils.isEmpty(ids)){
+					model.addAttribute("orderForms", null);
+					model.addAttribute("rowCont", 0);
+					model.addAttribute("currpage", 1);
+					return "order/order_searchajax_list";
+				}
+				for (ObjectId id : ids){
+					commodityIds.add(id.toString());
+				}
+				paramsMap.put("commodityIds", commodityIds);
 			}
 			if (paramsMap.containsKey("sellerAccount")){
 				Map<String, Object> map = new HashMap<>();
