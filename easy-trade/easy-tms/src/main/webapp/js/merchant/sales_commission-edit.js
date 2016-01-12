@@ -139,8 +139,8 @@ function batchCheck(){
 		if (this.checked == true) {
 			ids.push(this.id);
 			if(guideType=='')
-				guideType = (this.attr("guideType"))
-			if(this.attr("guideType")==null || guideType!=this.attr("guideType")){
+				guideType = ($(this).attr("guideType"))
+			if($(this).attr("guideType")==null || guideType!=$(this).attr("guideType")){
 				flag = true;
 			}
 		}
