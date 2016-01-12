@@ -151,7 +151,7 @@ function batchCheck(){
 	}
 
 	if (ids.length != 0) {
-		checkApplys(ids.join(","), 2);
+		checkApplys(ids.join(","), 2, guideType);
 	}else{
 		_util.cmsTip("您至少要选中一条返佣！");
 	}
