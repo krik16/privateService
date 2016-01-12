@@ -1,11 +1,11 @@
 package com.rongyi.tms.web.controller;
 
+import com.rongyi.core.bean.ResponseData;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.easy.bsoms.entity.UserInfo;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
 import com.rongyi.easy.mcmc.vo.CommodityWebVO;
-import com.rongyi.easy.osm.entity.OrderDetailFormEntity;
 import com.rongyi.easy.osm.entity.OrderFormEntity;
 import com.rongyi.easy.osm.vo.OrderCartFormVO;
 import com.rongyi.easy.rmmm.entity.MallCooperateEntity;
@@ -25,6 +25,7 @@ import com.rongyi.rss.mallshop.shop.ROAShopService;
 import com.rongyi.rss.solr.McmcCommoditySolrService;
 import com.rongyi.rss.tradecenter.osm.IOrderCartService;
 import com.rongyi.rss.tradecenter.osm.IOrderQueryService;
+import com.rongyi.tms.excel.ExportOsmOrderExcel;
 import com.rongyi.tms.moudle.vo.ParentOrderCartVO;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -55,36 +56,39 @@ public class OrderManagerController extends BaseController {
 	Logger logger = LoggerFactory.getLogger(OrderManagerController.class);
 
 	@Resource
-	ROACooperationMallService roaCooperationMallService;
+	private ROACooperationMallService roaCooperationMallService;
 
 	@Resource
-	ROAShopService roaShopService;
+	private ROAShopService roaShopService;
 
 	@Autowired
-	ROAOrderFormService roaOrderFormService;
+	private ROAOrderFormService roaOrderFormService;
 
 	@Autowired
-	ROAOrderDetailFormService roaOrderDetailFormService;
+	private ROAOrderDetailFormService roaOrderDetailFormService;
 
 	@Autowired
-	IOrderQueryService iOrderQueryService;
+	private IOrderQueryService iOrderQueryService;
 
 	@Autowired
-	ROAMalllifeUserService roaMalllifeUserService;
+	private ROAMalllifeUserService roaMalllifeUserService;
 
 	@Autowired
-	MSUserCouponService mMUserCouponService;
+	private MSUserCouponService mMUserCouponService;
 
 	@Autowired
-	ROACommodityService commodityService;
+	private ROACommodityService commodityService;
 
 	@Autowired
-	IOrderCartService iOrderCartService;
+	private IOrderCartService iOrderCartService;
 	@Autowired
-	McmcCommoditySolrService mcmcCommoditySolrService;
+	private McmcCommoditySolrService mcmcCommoditySolrService;
 
 	@Autowired
 	private IUserInfoService iUserInfoService;
+
+	@Autowired
+	private ExportOsmOrderExcel exportOsmOrderExcel;
 
 	@RequestMapping("/orderCartSearch")
 	public String orderCartSearch(String orderCartNo, ModelMap model) {
@@ -225,7 +229,6 @@ public class OrderManagerController extends BaseController {
 				throw new RuntimeException("orderId is null or empty");
 			}
 			ParentOrderVO orderDetailVo = iOrderQueryService.searchRYOrderDetail(Integer.valueOf(orderId));
-//			List<MMUserCouponVO> cashCoupons = new ArrayList<>();
 			List<SonOrderVO> sonOrderList = orderDetailVo.getSonOrderList();
 			BigDecimal discountTotal = new BigDecimal("0.00");//总红包（抵扣）
 			BigDecimal commidityTotalPice = new BigDecimal("0.00");//商品总价
@@ -235,20 +238,6 @@ public class OrderManagerController extends BaseController {
 				for (SonOrderVO sonOrderVo : sonOrderList) {
 					commidityTotalPice = commidityTotalPice.add(new BigDecimal(sonOrderVo.getNum())
 							.multiply(new BigDecimal(sonOrderVo.getCommodityCurrentPrice()))).setScale(2, BigDecimal.ROUND_HALF_UP);
-//					if (StringUtils.isNotBlank(sonOrderVo.getCouponCode())) {
-//						MMUserCouponVO userCouponVO = mMUserCouponService.getUserCouponByCouponCode(sonOrderVo
-//								.getCouponCode());
-//						if (userCouponVO != null) {
-//							if (userCouponVO.getDiscount().compareTo(sonOrderVo.getRealAmount()) == 1) {
-//								userCouponVO.setRealDiscount(sonOrderVo.getRealAmount());
-//								discountTotal = discountTotal.add(sonOrderVo.getRealAmount());
-//							}else{
-//								userCouponVO.setRealDiscount(userCouponVO.getDiscount());
-//								discountTotal = discountTotal.add(userCouponVO.getDiscount());
-//							}
-//							cashCoupons.add(userCouponVO);
-//						}
-//					}
 				}
 			}
 			if (StringUtils.isNotBlank(orderDetailVo.getCommitOrderTime())) {
@@ -261,7 +250,6 @@ public class OrderManagerController extends BaseController {
 				orderDetailVo.setPayTime(orderDetailVo.getPayTime().substring(0, 16));
 			}
 			model.addAttribute("order", orderDetailVo);
-//			model.addAttribute("cashCoupons", cashCoupons);
 			model.addAttribute("discountTotal", discountTotal);
 			model.addAttribute("type", type);
 			model.addAttribute("commidityTotalPice", commidityTotalPice);
@@ -287,7 +275,6 @@ public class OrderManagerController extends BaseController {
 	public String ajaxSearchOrderList(HttpServletRequest request, ModelMap model, String paramsJson) {
 		try {
 			Map<String, Object> paramsMap;
-			Map<String, Object> searchMap = new HashMap<>();
 			try {
 				request.setCharacterEncoding("utf-8");
 			} catch (UnsupportedEncodingException e) {
@@ -295,101 +282,21 @@ public class OrderManagerController extends BaseController {
 			}
 			logger.info("paramsjson={}", paramsJson);
 			paramsMap = JsonUtil.getMapFromJson(paramsJson);
-			String mallId = (String) paramsMap.get("mallId");
-			String shopName = (String) paramsMap.get("shopName");
-			String nickname = (String) paramsMap.get("nickname");
-			String username = (String) paramsMap.get("username");
-			//查询用户条件
-			List<UserInfoVO> users = null;
-			if (StringUtils.isNotBlank(username)) {
-//				if (StringUtils.isNotBlank(nickname)) {
-//					nickname = URLDecoder.decode(nickname, "utf-8");
-//				}
-				if (StringUtils.isNotBlank(username)) {
-					username = URLDecoder.decode(username, "utf-8");
-				}
-				users = roaMalllifeUserService.getUsersByNicknameUsername(nickname, username);
-				if(users == null || users.isEmpty()){
-					model.addAttribute("orderForms", null);
-					model.addAttribute("rowCont", 0);
-					model.addAttribute("currpage", 1);
-					return "order/order_searchajax_list";
-				}
-			}
-			List<String> userList = null;
-			if (!CollectionUtils.isEmpty(users)) {
-				userList = getIdFromUser(users);
-			}
-
-			List<Integer> shopList = null;
-			if (StringUtils.isNotBlank(mallId)) {
-				searchMap.put("mallId", mallId);
-			}
-			//搜索店铺必须是指定商场下的店铺
-			if (StringUtils.isNotBlank(shopName)) {
-				shopName = URLDecoder.decode(shopName, "utf-8");
-				String[] shopNames = shopName.split("-");
-				searchMap.put("shopName", shopNames[0]);
-			}
-			if (searchMap.containsKey("mallId") || searchMap.containsKey("shopName")) {
-				shopList = roaShopService.getAllShopIdBuMallId(searchMap);
-				if (CollectionUtils.isEmpty(shopList)){
-					model.addAttribute("orderForms", null);
-					model.addAttribute("rowCont", 0);
-					model.addAttribute("currpage", 1);
-					return "order/order_searchajax_list";
-				}
-			}
-			if (!CollectionUtils.isEmpty(userList)) {
-				paramsMap.put("userList", userList);
-			}
-			if (!CollectionUtils.isEmpty(shopList)) {
-				paramsMap.put("shopList", shopList);
-			}
-			if(paramsMap.containsKey("commodityNo")){
-				logger.info(" commodityNo={} ", URLDecoder.decode(paramsMap.get("commodityNo").toString(), "utf-8"));
-				List<String> commodityIds = new ArrayList<>();
-				List<ObjectId> ids = mcmcCommoditySolrService.selectCommodityIndexByNameCode(URLDecoder.decode(paramsMap.get("commodityNo").toString(), "utf-8"), null);
-				if (CollectionUtils.isEmpty(ids)){
-					model.addAttribute("orderForms", null);
-					model.addAttribute("rowCont", 0);
-					model.addAttribute("currpage", 1);
-					return "order/order_searchajax_list";
-				}
-				for (ObjectId id : ids){
-					commodityIds.add(id.toString());
-				}
-				paramsMap.put("commodityIds", commodityIds);
-			}
-			if (paramsMap.containsKey("sellerAccount")){
-				Map<String, Object> map = new HashMap<>();
-				map.put("userAccount",paramsMap.get("sellerAccount").toString());
-				map.put("isDisabled", 0);
-				UserInfo userInfo = iUserInfoService.getUserByMap(map);
-				if (userInfo!=null)
-					paramsMap.put("guideId",userInfo.getId());
-				else {
-					model.addAttribute("orderForms", null);
-					model.addAttribute("rowCont", 0);
-					model.addAttribute("currpage", 1);
-					return "order/order_searchajax_list";
-				}
+			paramsMap = warpToParamMap(paramsMap);
+			if (paramsMap == null){
+				model.addAttribute("orderForms", null);
+				model.addAttribute("rowCont", 0);
+				model.addAttribute("currpage", 1);
+				return "order/order_searchajax_list";
 			}
 			PagingVO<OrderManagerVO> pagingVO = roaOrderFormService.searchListByMap(paramsMap);
 			List<OrderManagerVO> orderForms = pagingVO.getDataList();
-			List<OrderManagerVO> orderFormList = new ArrayList<>();
 			if (!CollectionUtils.isEmpty(orderForms)) {
-				for (OrderManagerVO orderManagerVO : orderForms) {
-					OrderManagerVO orderVo = setOrderTotalAmount(orderManagerVO);
-					orderFormList.add(orderVo);
-				}
-			}
-			if (!CollectionUtils.isEmpty(orderFormList)) {
-				logger.info(">>>>>>>>>>>>> 得到 " + orderFormList.size() + " 个订单信息");
+				logger.info(">>>>>>>>>>>>> 得到 " + orderForms.size() + " 个订单信息");
 			}
 			int totalPage = pagingVO.getTotalPage();
 			int currentPage = pagingVO.getCurrentPage();
-			model.addAttribute("orderForms", orderFormList);
+			model.addAttribute("orderForms", orderForms);
 			model.addAttribute("rowCont", totalPage);
 			model.addAttribute("currpage", currentPage);
 		} catch (Exception e) {
@@ -399,17 +306,102 @@ public class OrderManagerController extends BaseController {
 		return "order/order_searchajax_list";
 	}
 
-	private OrderManagerVO setOrderTotalAmount(OrderManagerVO orderManagerVO) throws Exception {
-		List<OrderDetailFormEntity> list = roaOrderDetailFormService.selectByParentNum(orderManagerVO.getOrderNo());
-		BigDecimal orderTotalAmount = new BigDecimal("0.00");//订单商品总价
-		if (!CollectionUtils.isEmpty(list)) {
-			for (OrderDetailFormEntity detailForm : list) {
-				orderTotalAmount = orderTotalAmount.add(new BigDecimal(detailForm.getQuantity()).multiply(detailForm
-						.getUnitPrice()));
+	/**
+	 * @return
+	 * @Description: 导出付款清单（财务操作）
+	 * @Author: 柯军
+	 * @datetime:2015年9月21日下午3:03:26
+	 **/
+//	@RequestMapping("/exportPaymentExcel")
+//	public ResponseData exportPaymentSchedule(String ids, HttpServletResponse response, HttpServletRequest request) {
+//		logger.info("exportPaymentExcel ids={}", ids);
+//		try {
+////			ResponseData responseData = accessService.check(request, "FNC_PAYBILL_DWON");
+////			if (responseData.getMeta().getErrno() != 0) {
+////				return responseData;
+////			}
+////		} catch (Exception e) {
+////			e.printStackTrace();
+////			return ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
+////		}
+////		if (StringUtils.isBlank(ids)) {
+////			return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
+////		}
+//		String[] idArray = ids.split("\\,");
+//		return null;
+//	}
+
+	private Map<String, Object> warpToParamMap(Map<String, Object> paramsMap) throws Exception{
+		Map<String, Object> searchMap = new HashMap<>();
+		String mallId = (String) paramsMap.get("mallId");
+		String shopName = (String) paramsMap.get("shopName");
+		String nickname = (String) paramsMap.get("nickname");
+		String username = (String) paramsMap.get("username");
+		//查询用户条件
+		List<UserInfoVO> users = null;
+		if (StringUtils.isNotBlank(username)) {
+//				if (StringUtils.isNotBlank(nickname)) {
+//					nickname = URLDecoder.decode(nickname, "utf-8");
+//				}
+			if (StringUtils.isNotBlank(username)) {
+				username = URLDecoder.decode(username, "utf-8");
+			}
+			users = roaMalllifeUserService.getUsersByNicknameUsername(nickname, username);
+			if(users == null || users.isEmpty()){
+				return null;
 			}
 		}
-		orderManagerVO.setOrderTotalAmount(orderTotalAmount);
-		return orderManagerVO;
+		List<String> userList = null;
+		if (!CollectionUtils.isEmpty(users)) {
+			userList = getIdFromUser(users);
+		}
+
+		List<Integer> shopList = null;
+		if (StringUtils.isNotBlank(mallId)) {
+			searchMap.put("mallId", mallId);
+		}
+		//搜索店铺必须是指定商场下的店铺
+		if (StringUtils.isNotBlank(shopName)) {
+			shopName = URLDecoder.decode(shopName, "utf-8");
+			String[] shopNames = shopName.split("-");
+			searchMap.put("shopName", shopNames[0]);
+		}
+		if (searchMap.containsKey("mallId") || searchMap.containsKey("shopName")) {
+			shopList = roaShopService.getAllShopIdBuMallId(searchMap);
+			if (CollectionUtils.isEmpty(shopList)){
+				return null;
+			}
+		}
+		if (!CollectionUtils.isEmpty(userList)) {
+			paramsMap.put("userList", userList);
+		}
+		if (!CollectionUtils.isEmpty(shopList)) {
+			paramsMap.put("shopList", shopList);
+		}
+		if(paramsMap.containsKey("commodityNo")){
+			logger.info(" commodityNo={} ", URLDecoder.decode(paramsMap.get("commodityNo").toString(), "utf-8"));
+			List<String> commodityIds = new ArrayList<>();
+			List<ObjectId> ids = mcmcCommoditySolrService.selectCommodityIndexByNameCode(URLDecoder.decode(paramsMap.get("commodityNo").toString(), "utf-8"), null);
+			if (CollectionUtils.isEmpty(ids)){
+				return null;
+			}
+			for (ObjectId id : ids){
+				commodityIds.add(id.toString());
+			}
+			paramsMap.put("commodityIds", commodityIds);
+		}
+		if (paramsMap.containsKey("sellerAccount")){
+			Map<String, Object> map = new HashMap<>();
+			map.put("userAccount",paramsMap.get("sellerAccount").toString());
+			map.put("isDisabled", 0);
+			UserInfo userInfo = iUserInfoService.getUserByMap(map);
+			if (userInfo!=null)
+				paramsMap.put("guideId",userInfo.getId());
+			else {
+				return null;
+			}
+		}
+		return paramsMap;
 	}
 
 	private List<String> getIdFromUser(List<UserInfoVO> users) {
