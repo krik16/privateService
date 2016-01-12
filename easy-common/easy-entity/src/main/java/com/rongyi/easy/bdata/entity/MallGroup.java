@@ -14,8 +14,9 @@ import org.mongodb.morphia.annotations.Id;
  */
 @SuppressWarnings("serial")
 @Entity(value="mall_groups",noClassnameStored=true)
-public class MallGroup implements Serializable{
-	
+public class MallGroup  implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 	
 	@Id
 	private ObjectId id;
