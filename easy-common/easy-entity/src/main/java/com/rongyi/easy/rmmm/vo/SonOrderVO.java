@@ -29,7 +29,8 @@ public class SonOrderVO implements Serializable{
 
 	private String refundStatus = "0";// 退款状态
 
-	private String commodityId;// 商品编号
+	private String commodityId;// 商品id
+	private String commodityNo;// 商品编号
 
 	private String commodityName;// 商品名称
 
@@ -97,6 +98,14 @@ public class SonOrderVO implements Serializable{
 
 	public String getCommodityOriginalPrice() {
 		return commodityOriginalPrice;
+	}
+
+	public String getCommodityNo() {
+		return commodityNo;
+	}
+
+	public void setCommodityNo(String commodityNo) {
+		this.commodityNo = commodityNo;
 	}
 
 	public void setCommodityOriginalPrice(String commodityOriginalPrice) {
