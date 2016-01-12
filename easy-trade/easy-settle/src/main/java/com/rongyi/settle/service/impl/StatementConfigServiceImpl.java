@@ -182,12 +182,17 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
         return true;
     }
 
-    @Override
-    public List<StatementConfig> selectForSchedule() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("currentTime", new Date());
-        return this.getBaseDao().selectListBySql(NAMESPACE + ".selectForSchedule", map);
-    }
+	@Override
+	public List<StatementConfig> selectForSchedule() {
+		Map<String, Object> map = new HashMap<>();
+
+		Calendar cal = Calendar.getInstance();
+		// 对账单是第二天凌晨生成前一天的数据，所以要减一天再判断是否在配置的时间段内
+		cal.add(Calendar.DATE, -1);
+
+		map.put("currentTime", cal.getTime());
+		return this.getBaseDao().selectListBySql(NAMESPACE + ".selectForSchedule", map);
+	}
 
     @Override
     public boolean updatePaymentStatusByIds(List<Integer> ids, Integer status, String desc, String userId) {
