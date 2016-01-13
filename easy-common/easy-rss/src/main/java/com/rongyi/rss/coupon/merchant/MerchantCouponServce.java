@@ -15,12 +15,13 @@ import  java.util.List;
  */
 public interface MerchantCouponServce {
 
+
     /**
-     * 商家卡券管理后台查询卡券列表
+     * 卡券查询通用接口
      * @param queryParam
      * @return
-     *//*
-    public PagingVO<Coupon> getCouponByPage(QueryParam queryParam);*/
+     */
+    public MerchantPaging<Coupon> getCouponByPageMysql(QueryParam queryParam);
 
     /**
      *商家卡券通用查询接口
@@ -28,6 +29,7 @@ public interface MerchantCouponServce {
      * @return
      */
     public MerchantPaging<Coupon> getCouponByPageMysql(QueryParam queryParam,UserInfoVo UserInfoVo);
+
     /**
      * 商家卡券通用查询接口
      * @param queryParam 查询参数

@@ -10,6 +10,10 @@ import java.util.List;
  * Created at 2015/7/21 17:19.
  */
 public class QueryParam implements Serializable {
+
+    public static final String RELATION_AND="AND";
+    public static final String RELATION_OR="OR";
+
     private Integer reserve;//预留字段
 
     public Integer getReserve() {
