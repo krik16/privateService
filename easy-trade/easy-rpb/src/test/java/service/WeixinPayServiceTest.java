@@ -1,13 +1,11 @@
 package service;
 
 import base.BaseTest;
+import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.vo.WeixinQueryOrderParamVO;
-import com.rongyi.rpb.common.pay.weixin.model.RefundReqData;
-import com.rongyi.rpb.common.pay.weixin.model.ReverseReqData;
-import com.rongyi.rpb.common.pay.weixin.model.ScanPayReqData;
-import com.rongyi.rpb.common.pay.weixin.model.ScanPayService;
+import com.rongyi.rpb.common.pay.weixin.model.*;
 import com.rongyi.rpb.common.pay.weixin.service.RefundService;
 import com.rongyi.rpb.common.pay.weixin.service.ReverseService;
 import com.rongyi.rpb.common.pay.weixin.service.UnifiedorderService;
@@ -15,12 +13,14 @@ import com.rongyi.rpb.mq.Sender;
 import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rpb.service.WeixinPayService;
 import com.rongyi.rpb.unit.WeixinPayUnit;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Description;
 import org.springframework.test.annotation.Rollback;
 import org.testng.annotations.Test;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 public class WeixinPayServiceTest extends BaseTest {
@@ -88,9 +88,9 @@ public class WeixinPayServiceTest extends BaseTest {
 			// ScanPayReqData("130341714831840336", "容易网商品", "test",
 			// "1000001753309557", 1, "123", "127.0.0.1", "20150625121010",
 			// "20150625122010", "");
-			ScanPayReqData scanPayReqData = new ScanPayReqData("130417670294720780", "容易网商品", "test", "1000001753309557", 1, "123", "127.0.0.1", "", "", "");
-			String response = scanPayService.request(scanPayReqData);
-			System.err.println(response);
+//			ScanPayReqData scanPayReqData = new ScanPayReqData("130417670294720780", "容易网商品", "test", "1000001753309557", 1, "123", "127.0.0.1", "", "", "");
+//			String response = scanPayService.request(scanPayReqData);
+//			System.err.println(response);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -115,7 +115,7 @@ public class WeixinPayServiceTest extends BaseTest {
 			// scanPayQueryService.request(scanPayQueryReqData);
 			// System.err.println(response);
 
-			WeixinQueryOrderParamVO weixinQueryOrderParamVO = weixinPayService.queryOrder(null, "10000017533095571");
+			WeixinQueryOrderParamVO weixinQueryOrderParamVO = weixinPayService.queryOrder(null, "10000017533095571",1);
 			System.err.println(weixinQueryOrderParamVO.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -126,9 +126,9 @@ public class WeixinPayServiceTest extends BaseTest {
 	public void testWinxinScanRefund() {
 		try {
 			RefundService refundService = new RefundService();
-			RefundReqData refundReqData = new RefundReqData("1009290229201506250300791418", "1000001753309557", "123", "1234567890", 1, 1, "1220588601", "CNY");
-			String response = refundService.request(refundReqData);
-			System.err.println(response);
+//			RefundReqData refundReqData = new RefundReqData("1009290229201506250300791418", "1000001753309557", "123", "1234567890", 1, 1, "1220588601", "CNY",1);
+//			String response = refundService.request(refundReqData);
+//			System.err.println(response);
 		} catch (Exception e) {
 		}
 	}
@@ -140,8 +140,8 @@ public class WeixinPayServiceTest extends BaseTest {
 	public void testWeixinReverse() {
 		try {
 			ReverseService reverseService = new ReverseService();
-			ReverseReqData reverseReqData = new ReverseReqData(null, "1000001640303291");
-			String response = reverseService.request(reverseReqData);
+			ReverseReqData reverseReqData = new ReverseReqData(null, "1000001640303291",null);
+			String response = reverseService.request(reverseReqData,null);
 			System.err.println(response);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -152,12 +152,12 @@ public class WeixinPayServiceTest extends BaseTest {
 
 //	 @Test
 	public void testQueryOrder() {
-		 System.err.println(weixinPayService.queryOrder("1009290941201509100838184587",null));
+		 System.err.println(weixinPayService.queryOrder("1009290941201509100838184587",null,1));
 	}
 	
 //	@Test
 	public void testCloseOrder(){
-		weixinPayService.closeOrder("1231");
+		weixinPayService.closeOrder("1231",1);
 	}
 	 
 
@@ -200,8 +200,26 @@ public class WeixinPayServiceTest extends BaseTest {
 //	@Test
 	@Description("微信退款查询")
 	public void testRefundQuery(){
-		weixinPayUnit.checkRefundQueryResult(null, null, "0120288450816163215");
+		weixinPayUnit.checkRefundQueryResult(null, null, "0120288450816163215",1);
 
+	}
+
+	@Test
+	public void testGetSign(){
+		String timeStart = DateUtil.dateToString(DateUtil.getCurrDateTime(), "yyyyMMddHHmmss");
+		String timeExpire = DateUtil.dateToString(DateUtil.addTime(DateUtil.getCurrDateTime(), 15, Calendar.MINUTE), "yyyyMMddHHmmss");
+		PaySignData paySignData = new PaySignData();
+		paySignData.setTotalFee(100);
+		paySignData.setBody("容易网商品");
+//		paySignData.setMallId("10");
+//		paySignData.setOpenId("o0BDmjj6tc3auMeuw4lc_ZjLjxS4");
+		paySignData.setOrderType(1);
+		paySignData.setPayNo("1231231234321");
+		paySignData.setTimeStart(timeStart);
+		paySignData.setTimeExpire(timeExpire);
+		paySignData.setPublicCode("容易Show（RongyiService）");
+		Map map = weixinPayUnit.getWeXinPaySign(paySignData);
+		System.err.println("map="+map.toString());
 	}
 	
 

@@ -99,7 +99,7 @@ public class RpbServiceImpl implements IRpbService {
 		PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
 				paymentEntity.getPayChannel());
 		Map<String, Object> refundResultMap = weixinPayService.weixinRefund(oldPaymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), oldPaymentEntity.getAmountMoney().doubleValue(),
-				paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
+				paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,oldPaymentEntity.getWeixinMchId());
 		if (Constants.RESULT.SUCCESS.equals(refundResultMap.get("result")) || ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr().equals(refundResultMap.get("result"))) {
 			paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
 			paymentEntity.setFinishTime(DateUtil.getCurrDateTime());
@@ -156,7 +156,7 @@ public class RpbServiceImpl implements IRpbService {
 			payAccount = queryOrderParamVO.getBuyer_email();
 		}
 		if (Constants.PAYMENT_STATUS.STAUS2 != paymentEntity.getStatus()) {// 异步通知暂未收到
-			if (queryOrderPayStatus(null, paymentEntity.getPayNo(), paymentEntity.getPayChannel())) {
+			if (queryOrderPayStatus(null, paymentEntity.getPayNo(), paymentEntity.getPayChannel(),paymentEntity.getWeixinMchId())) {
 				LOGGER.info("发送同步支付通知,订单号-->" + orderNo);
 				List<PaySuccessResponse> responseList = paymentLogInfoService.paySuccessToMessage(paymentEntity.getPayNo(), payAccount, orderNums, paymentEntity.getOrderType(), payChannel);
 				if (!responseList.isEmpty()) {
@@ -214,7 +214,7 @@ public class RpbServiceImpl implements IRpbService {
 	 * @datetime:2015年8月11日下午4:17:19
 	 **/
 	@Override
-	public boolean queryOrderPayStatus(String tradeNo, String payNo, Integer payChannel) {
+	public boolean queryOrderPayStatus(String tradeNo, String payNo, Integer payChannel,Integer weixinMchId) {
 		if (Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0 == payChannel) {
 			QueryOrderParamVO queryOrderParamVO = aliPaymentService.queryOrder(tradeNo, payNo);
 			if (queryOrderParamVO != null && ("TRADE_SUCCESS".equals(queryOrderParamVO.getTrade_status()) || "TRADE_FINISHED".equals(queryOrderParamVO.getTrade_status()))) {
@@ -222,7 +222,7 @@ public class RpbServiceImpl implements IRpbService {
 			}
 			LOGGER.info("支付宝订单状态-->" + queryOrderParamVO.getTrade_status());
 		} else if (Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1 == payChannel) {
-			WeixinQueryOrderParamVO weixinQueryOrderParamVO = weixinPayService.queryOrder(tradeNo, payNo);
+			WeixinQueryOrderParamVO weixinQueryOrderParamVO = weixinPayService.queryOrder(tradeNo, payNo,weixinMchId);
 			if (weixinQueryOrderParamVO != null && "SUCCESS".equals(weixinQueryOrderParamVO.getResult_code())
 					&& ("SUCCESS".equals(weixinQueryOrderParamVO.getTrade_state()) || "REFUND".equals(weixinQueryOrderParamVO.getTrade_state()))) {
 				return true;

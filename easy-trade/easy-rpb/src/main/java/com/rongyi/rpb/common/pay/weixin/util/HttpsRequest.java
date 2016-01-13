@@ -65,21 +65,17 @@ public class HttpsRequest implements IServiceRequest {
     //HTTP请求器
     private CloseableHttpClient httpClient;
 
-    public HttpsRequest() throws UnrecoverableKeyException, KeyManagementException, NoSuchAlgorithmException, KeyStoreException, IOException {
-        init();
-    }
-
-    private void init() throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
+    private void init(Configure configure) throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
 
         KeyStore keyStore = KeyStore.getInstance("PKCS12");
-        String cretFilePath = Configure.getCertLocalPath();
+        String cretFilePath = configure.getCertLocalPath();
         if (Strings.isNullOrEmpty(cretFilePath)) {
-            cretFilePath = "/data/etc/projects/easy-rpb-cert/1268956601.p12";
+            cretFilePath = "/data/etc/projects/easy-rpb-cert/1268864001.p12";
             LOGGER.info("设置默认证书路径，certFilePath={}", cretFilePath);
         }
         FileInputStream instream = new FileInputStream(new File(cretFilePath));//加载本地的证书进行https加密传输
         try {
-            keyStore.load(instream, Configure.getCertPassword().toCharArray());//设置证书密码
+            keyStore.load(instream, configure.getCertPassword().toCharArray());//设置证书密码
         } catch (CertificateException e) {
             e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
@@ -90,7 +86,7 @@ public class HttpsRequest implements IServiceRequest {
 
         // Trust own CA and all self-signed certs
         SSLContext sslcontext = SSLContexts.custom()
-                .loadKeyMaterial(keyStore, Configure.getCertPassword().toCharArray())
+                .loadKeyMaterial(keyStore, configure.getCertPassword().toCharArray())
                 .build();
         // Allow TLSv1 protocol only
         SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
@@ -122,11 +118,11 @@ public class HttpsRequest implements IServiceRequest {
      * @throws KeyManagementException
      */
 
-    public String sendPost(String url, Object xmlObj) throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
+    public String sendPost(String url, Object xmlObj,Configure configure) throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
 
-        if (!hasInit) {
-            init();
-        }
+//        if (!hasInit) {
+            init(configure);
+//        }
 
         String result = null;
 

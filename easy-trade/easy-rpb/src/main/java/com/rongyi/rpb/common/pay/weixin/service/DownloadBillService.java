@@ -33,12 +33,12 @@ public class DownloadBillService extends BaseService{
      * @return API返回的XML数据
      * @throws Exception
      */
-    public String request(DownloadBillReqData downloadBillReqData) throws Exception {
+    public String request(DownloadBillReqData downloadBillReqData,Configure configure) throws Exception {
 
         //--------------------------------------------------------------------
         //发送HTTPS的Post请求到API地址
         //--------------------------------------------------------------------
-        String responseString = sendPost(downloadBillReqData);
+        String responseString = sendPost(downloadBillReqData,configure);
 
         return responseString;
     }

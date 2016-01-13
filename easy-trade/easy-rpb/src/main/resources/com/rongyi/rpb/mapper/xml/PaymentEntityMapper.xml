@@ -22,12 +22,15 @@
         <result column="batch_no" property="batchNo" jdbcType="VARCHAR"/>
         <result column="refund_rejected" property="refundRejected"
                 jdbcType="VARCHAR"/>
+        <result column="weixin_mch_id" property="weixinMchId"
+                jdbcType="INTEGER"/>
+
     </resultMap>
 
     <sql id="Base_Column_List">
 		id, order_no,order_type,order_price,pay_no,pay_amount,
 		status,trade_type,create_at,
-		end_at,pay_channel,out_account,in_account,order_title,shop_id,draw_user_id,pay_name,batch_no,refund_rejected
+		end_at,pay_channel,out_account,in_account,order_title,shop_id,draw_user_id,pay_name,batch_no,refund_rejected,weixin_mch_id
 	</sql>
 
     <insert id="insert" parameterType="com.rongyi.easy.rpb.domain.PaymentEntity"
@@ -87,7 +90,10 @@
                 batch_no,
             </if>
             <if test="refundRejected != null">
-                refund_rejected
+                refund_rejected,
+            </if>
+            <if test="weixinMchId != null">
+                weixin_mch_id
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -143,7 +149,10 @@
                 #{batchNo,jdbcType=VARCHAR},
             </if>
             <if test="refundRejected != null">
-                #{refundRejected,jdbcType=INTEGER}
+                #{refundRejected,jdbcType=INTEGER},
+            </if>
+            <if test="weixinMchId != null">
+                #{weixinMchId,jdbcType=INTEGER}
             </if>
 
         </trim>
@@ -201,7 +210,10 @@
                 batch_no = #{batchNo,jdbcType=VARCHAR},
             </if>
             <if test="refundRejected != null">
-                refund_rejected = #{refundRejected,jdbcType=INTEGER}
+                refund_rejected = #{refundRejected,jdbcType=INTEGER},
+            </if>
+            <if test="weixinMchId != null">
+                refund_rejected = #{weixinMchId,jdbcType=INTEGER}
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}

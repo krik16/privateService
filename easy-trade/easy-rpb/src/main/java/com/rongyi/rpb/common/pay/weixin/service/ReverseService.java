@@ -20,12 +20,12 @@ public class ReverseService extends BaseService{
      * @return API返回的XML数据
      * @throws Exception
      */
-    public String request(ReverseReqData reverseReqData) throws Exception {
+    public String request(ReverseReqData reverseReqData,Configure configure) throws Exception {
 
         //--------------------------------------------------------------------
         //发送HTTPS的Post请求到API地址
         //--------------------------------------------------------------------
-        String responseString = sendPost(reverseReqData);
+        String responseString = sendPost(reverseReqData,configure);
 
         return responseString;
     }

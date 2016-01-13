@@ -47,13 +47,13 @@ public class ScanPayReqData {
      * @param timeExpire 订单失效时间，格式同上
      * @param goodsTag 商品标记，微信平台配置的商品标记，用于优惠券或者满减使用
      */
-    public ScanPayReqData(String authCode,String body,String attach,String outTradeNo,int totalFee,String deviceInfo,String spBillCreateIP,String timeStart,String timeExpire,String goodsTag){
+    public ScanPayReqData(String authCode,String body,String attach,String outTradeNo,int totalFee,String deviceInfo,String spBillCreateIP,String timeStart,String timeExpire,String goodsTag,Configure configure){
 
         //微信分配的公众号ID（开通公众号之后可以获取到）
-        setAppid(Configure.getAppid());
+        setAppid(configure.getAppID());
 
         //微信支付分配的商户号ID（开通公众号的微信支付功能之后可以获取到）
-        setMch_id(Configure.getMchid());
+        setMch_id(configure.getMchID());
 
         //这个是扫码终端设备从用户手机上扫取到的支付授权号，这个号是跟用户用来支付的银行卡绑定的，有效期是1分钟
         //调试的时候可以在微信上打开“钱包”里面的“刷卡”，将扫码页面里的那一串14位的数字输入到这里来，进行提交验证
@@ -91,7 +91,7 @@ public class ScanPayReqData {
         setNonce_str(RandomStringGenerator.getRandomStringByLength(32));
 
         //根据API给的签名规则进行签名
-        String sign = Signature.getSign(toMap());
+        String sign = Signature.getSign(toMap(),configure.getKey());
         setSign(sign);//把签名数据设置到Sign这个属性中
 
     }

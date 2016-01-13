@@ -20,12 +20,12 @@ public class PayQueryService extends BaseService {
 	 * @return API返回的XML数据
 	 * @throws Exception
 	 */
-	public String request(ScanPayQueryReqData scanPayQueryReqData) throws Exception {
+	public String request(ScanPayQueryReqData scanPayQueryReqData,Configure configure) throws Exception {
 
 		// --------------------------------------------------------------------
 		// 发送HTTPS的Post请求到API地址
 		// --------------------------------------------------------------------
-		String responseString = sendPost(scanPayQueryReqData);
+		String responseString = sendPost(scanPayQueryReqData,configure);
 
 		return responseString;
 	}

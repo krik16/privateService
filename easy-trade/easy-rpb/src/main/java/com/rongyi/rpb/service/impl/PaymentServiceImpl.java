@@ -8,9 +8,11 @@ import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentItemEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
+import com.rongyi.easy.rpb.domain.WeixinMch;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
 import com.rongyi.easy.tms.vo.MQDrawParam;
 import com.rongyi.rpb.Exception.TradeException;
+import com.rongyi.rpb.common.pay.weixin.model.PaySignData;
 import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.mq.Sender;
@@ -71,6 +73,9 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
     @Autowired
     Sender sender;
+
+    @Autowired
+    WeixinMchService weixinMchService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PaymentServiceImpl.class);
 
@@ -151,6 +156,16 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         if (bodyMap.get("timeExpire") != null) {
             paymentEntityVO.setTimeExpire(bodyMap.get("timeExpire").toString());
         }
+        //
+        if (bodyMap.get("publicCode") != null) {
+            paymentEntityVO.setPublicCode(bodyMap.get("publicCode").toString());
+        }
+        if (bodyMap.get("mallId") != null) {
+            paymentEntityVO.setMallId(bodyMap.get("mallId").toString());
+        }
+        if (bodyMap.get("openId") != null) {
+            paymentEntityVO.setOpenId(bodyMap.get("openId").toString());
+        }
 
         return paymentEntityVO;
     }
@@ -210,7 +225,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
     @Override
     public Map<String, Object> getSendMessage(MessageEvent event) {
-        Map<String, Object> messageMap = new HashMap<String, Object>();
+        Map<String, Object> messageMap = new HashMap<>();
         try {
             if (PaymentEventType.BUYER_PAID.equals(event.getType()))// 支付成功回调通知
                 return null;
@@ -252,7 +267,9 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                 bodyMap = webPageAlipayService.getToken(paymentEntityVO);
             } else if (PaymentEventType.WEIXIN_PAY.equals(event.getType())) {// 微信支付
                 LOGGER.info("微信支付");
-                bodyMap = weixinPayService.getAppWeXinSign(paymentEntityVO.getPayNo(), Double.valueOf(paymentEntityVO.getAmountMoney().toString()), paymentEntityVO.getTimeStart(), paymentEntityVO.getTimeExpire(), paymentEntityVO.getOrderType());
+                PaySignData paySignData = getPaySignData(paymentEntityVO);
+//                bodyMap = weixinPayService.getAppWeXinSign(paymentEntityVO.getPayNo(), Double.valueOf(paymentEntityVO.getAmountMoney().toString()), paymentEntityVO.getTimeStart(), paymentEntityVO.getTimeExpire(), paymentEntityVO.getOrderType());
+                bodyMap = weixinPayService.getAppWeXinSign(paySignData);
             } else if (PaymentEventType.UNION_PAY.equals(event.getType())) {// 银联支付
                 LOGGER.info("银联支付");
                 bodyMap.put("unionOrderNum", ConstantEnum.UNION_COUPON_PREFIX.getValueStr() + paymentEntityVO.getPayNo());
@@ -271,10 +288,20 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
     }
 
+
+    private PaySignData getPaySignData(PaymentEntityVO paymentEntityVO) {
+        PaySignData paySignData = new PaySignData();
+        BeanUtils.copyProperties(paymentEntityVO, paySignData);
+        BigDecimal totalFee = new BigDecimal( Double.valueOf(paymentEntityVO.getAmountMoney().toString())).multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
+        paySignData.setTotalFee(totalFee.intValue());
+        paySignData.setBody("容易网商品");
+        return paySignData;
+    }
+
     @Override
     public PaymentEntityVO insertOrderMessage(MessageEvent event) {
         PaymentEntityVO paymentEntityVO = bodyToPaymentEntity(event.getBody(), event.getType());
-        String payNo = null;
+        String payNo;
         if (MqReceiverServiceImpl.isAppPay(event.getType())) {// 前端支付验证订单号是否已存在
             PaymentEntity paymentEntity = validateOrderNumExist(paymentEntityVO.getOrderNum(), paymentEntityVO.getPayChannel(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
             if (paymentEntity != null) {
@@ -289,7 +316,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                     return paymentEntityVO;
                 } else if (paymentLogInfoService.selectByOutTradeNo(payNo, null) == null) {
                     LOGGER.info("微信支付修改价格，重新生成支付单号-->");
-                    weixinPayService.closeOrder(payNo);
+                    weixinPayService.closeOrder(payNo,paymentEntity.getWeixinMchId());
                 }
             }
 
@@ -323,7 +350,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
     private void insertList(List<PaymentEntity> paymentEntityList, PaymentEntityVO paymentEntityVO, MessageEvent event, String oldPayNo) {
         for (PaymentEntity paymentEntity : paymentEntityList) {
-            paymentEntity.setTradeType(0);// 默认支付
+            paymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);// 默认支付
             if (PaymentEventType.PAY_TO_SELLER.equals(event.getType())) {// 打款给卖家
                 LOGGER.info("打款给卖家");
                 paymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE2);
@@ -343,6 +370,12 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
             }
             if (paymentEntityVO.getAmountMoney().doubleValue() == 0)
                 paymentEntity.setPayChannel(null);
+            if(StringUtils.isNotBlank(paymentEntityVO.getMallId()) && StringUtils.isNotBlank(paymentEntityVO.getPublicCode())) {
+                WeixinMch weixinMch = weixinMchService.selectByPublicAndUserId(paymentEntityVO.getPublicCode(),paymentEntityVO.getMallId());
+                if(weixinMch != null){
+                    paymentEntity.setWeixinMchId(weixinMch.getId());
+                }
+            }
             insertByOrderDetailNum(paymentEntity, paymentEntityVO.getOrderDetailNumArray());// 插入数据库
             LOGGER.info("==================插入数据库成功==============");
         }
@@ -614,7 +647,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                 LOGGER.info(Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0 == paymentEntity.getPayChannel() ? "支付宝" : "微信" + "重复支付直接退款-->退款单号" + payNo);
                 if (Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1 == paymentEntity.getPayChannel()) {// 微信自动退款
                     Map<String, Object> resultMap = weixinPayService.weixinRefund(paymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), paymentEntity.getAmountMoney().doubleValue(),
-                            payNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE6);
+                            payNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE6,paymentEntity.getWeixinMchId());
                     if (Constants.RESULT.SUCCESS.equals(resultMap.get("result")) || ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr().equals(resultMap.get("result")))
                         refundPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
                     refundPaymentEntity.setFinishTime(DateUtil.getCurrDateTime());

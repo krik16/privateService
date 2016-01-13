@@ -92,7 +92,7 @@ public class WebPageAlipayController extends BaseController {
 				LOGGER.info("支付宝网页支付同步通知-->支付宝验证签名不通过，返回消息不是支付宝发出的合法消息!");
 				return "zhifuFail";
 			}
-			boolean bool = rpbService.queryOrderPayStatus(trade_no, out_trade_no, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);
+			boolean bool = rpbService.queryOrderPayStatus(trade_no, out_trade_no, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0,null);
 			if (!bool) {
 				LOGGER.info("支付宝订单查询结果是未支付状态");
 				return "zhifuFail";

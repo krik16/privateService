@@ -2,6 +2,7 @@ package com.rongyi.rpb.service;
 
 import java.util.Map;
 
+import com.rongyi.rpb.common.pay.weixin.model.PaySignData;
 import org.json.JSONException;
 
 import com.rongyi.easy.mq.MessageEvent;
@@ -23,13 +24,10 @@ public interface WeixinPayService {
 	 * 获取微信支付签名
 	 * 
 	 * @author kejun 2015年4月2日
-	 * @param totalFee
-	 * @param payNo
-	 * @param timeStart
-	 * @param timeExpire
+	 * @param paySignData
 	 * @return
 	 */
-	public abstract Map<String, Object> getAppWeXinSign(String payNo, double totalFee,String timeStart,String timeExpire,Integer orderType);
+	Map<String, Object> getAppWeXinSign(PaySignData paySignData);
 
 	/**
 	 * 验证是否是微信退款，是则返回true
@@ -37,7 +35,7 @@ public interface WeixinPayService {
 	 * @param event
 	 * @return
 	 */
-	public abstract boolean validateIsWeixinPay(MessageEvent event);
+	 boolean validateIsWeixinPay(MessageEvent event);
 
 
 	/**
@@ -46,7 +44,7 @@ public interface WeixinPayService {
 	 * @param paymentEntityVO
 	 * @param hisPayEntity
 	 */
-	public abstract boolean messageToRefund(PaymentEntityVO paymentEntityVO, PaymentEntity hisPayEntity);
+	 boolean messageToRefund(PaymentEntityVO paymentEntityVO, PaymentEntity hisPayEntity);
 
 	/**
 	 * 
@@ -58,14 +56,14 @@ public interface WeixinPayService {
 	 * @param newPayNo 付款单号
 	 * @param tradeType 交易类型（0:购买 1:退款 2:打款给卖家 3:提现 4:异常支付 5:重复支付 6：重复支付退款）
 	 */
-	public abstract Map<String,Object>  weixinRefund(String payNo, double refundFee, double totalFee, String newPayNo,Integer tradeType);
+	 Map<String,Object>  weixinRefund(String payNo, double refundFee, double totalFee, String newPayNo,Integer tradeType,Integer weixinMchId);
 
-	public void savePaymentLogInfo(RefundResData refundResData, Integer tradeType);
+	 void savePaymentLogInfo(RefundResData refundResData, Integer tradeType);
 
 	/**
 	 * 微信关闭订单
 	 */
-	public abstract void closeOrder(String payNo);
+	 void closeOrder(String payNo,Integer weixinMchId);
 
 	/**
 	 * @Description: 查询订单
@@ -75,7 +73,7 @@ public interface WeixinPayService {
 	 * @Author: 柯军
 	 * @datetime:2015年8月10日下午2:28:05
 	 **/
-	public abstract WeixinQueryOrderParamVO queryOrder(String tradeNo,String payNo);
+	 WeixinQueryOrderParamVO queryOrder(String tradeNo,String payNo,Integer weixinMchId);
 
 	/**	
 	 * @Description: 微信定时批量退款 
@@ -83,7 +81,7 @@ public interface WeixinPayService {
 	 * @Author:  柯军
 	 * @datetime:2015年8月27日上午10:38:00
 	 **/
-	public void batchTriggerWeixinRefund();
+	 void batchTriggerWeixinRefund();
 	
 
 }

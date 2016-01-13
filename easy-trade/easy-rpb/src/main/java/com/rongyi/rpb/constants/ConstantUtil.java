@@ -154,8 +154,9 @@ public interface ConstantUtil {
 		
 		String SPBILL_CREATE_IP = "127.0.0.1";//终端IP
 		
-		String TRADE_TYPE = "APP";//交易类型
-		
+		String TRADE_TYPE_APP = "APP";//交易类型
+		String TRADE_TYPE_JSAPI = "JSAPI";//交易类型
+
 		public static String UNIFIED_ORDER_URL = "https://api.mch.weixin.qq.com/pay/unifiedorder";//支付接口地址
 		
 		public static String  WEIXIN_NOTIFY_URL = "http://" + NOTIFY_URL.outernetAddress + "/v5/WebPageAlipay/weixin/notify_url.htm";//支付成功异步通知接口

@@ -37,16 +37,14 @@ public class RefundReqData {
      * @param outRefundNo 商户系统内部的退款单号，商户系统内部唯一，同一退款单号多次请求只退一笔
      * @param totalFee 订单总金额，单位为分
      * @param refundFee 退款总金额，单位为分,可以做部分退款
-     * @param opUserID 操作员帐号, 默认为商户号
      * @param refundFeeType 货币类型，符合ISO 4217标准的三位字母代码，默认为CNY（人民币）
      */
-    public RefundReqData(String transactionID,String outTradeNo,String deviceInfo,String outRefundNo,Integer totalFee,Integer refundFee,String opUserID,String refundFeeType){
-
+    public RefundReqData(String transactionID,String outTradeNo,String deviceInfo,String outRefundNo,Integer totalFee,Integer refundFee,String refundFeeType,Configure configure){
         //微信分配的公众号ID（开通公众号之后可以获取到）
-        setAppid(Configure.getAppid());
+        setAppid(configure.getAppID());
 
         //微信支付分配的商户号ID（开通公众号的微信支付功能之后可以获取到）
-        setMch_id(Configure.getMchid());
+        setMch_id(configure.getMchID());
 
         //transaction_id是微信系统为每一笔支付交易分配的订单号，通过这个订单号可以标识这笔交易，它由支付订单API支付成功时返回的数据里面获取到。
         setTransaction_id(transactionID);
@@ -63,13 +61,13 @@ public class RefundReqData {
 
         setRefund_fee(refundFee);
 
-        setOp_user_id(opUserID);
+        setOp_user_id(configure.getMchID());
 
         //随机字符串，不长于32 位
         setNonce_str(RandomStringGenerator.getRandomStringByLength(32));
 
         //根据API给的签名规则进行签名
-        String sign = Signature.getSign(toMap());
+        String sign = Signature.getSign(toMap(),configure.getKey());
         setSign(sign);//把签名数据设置到Sign这个属性中
 
     }
