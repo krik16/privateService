@@ -141,7 +141,10 @@
             </div>
 
             <div class="form-group">
-                <a href="javascript:void(0);" class="search-button1 checked" id="search">查询</a>
+                <a href="javascript:void(0);" class="search-button1 checked" id="searchOrder">查询</a>
+            </div>
+            <div class="form-group">
+                <a href="javascript:void(0);" class="search-button1 checked" id="exportOrder">导出订单</a>
             </div>
         </div>
         <div id="result" style="margin-top: -35px;">

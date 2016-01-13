@@ -4,7 +4,6 @@ import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.common.util.DateTool;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.ExcelUtil;
-import com.rongyi.easy.osm.entity.OrderDetailFormEntity;
 import com.rongyi.easy.rmmm.vo.OrderManagerVO;
 import com.rongyi.rss.mallshop.order.ROAOrderFormService;
 import org.apache.commons.collections.CollectionUtils;
@@ -20,8 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -39,6 +36,7 @@ public class ExportOsmOrderExcel {
         try {
             String path = request.getSession().getServletContext().getRealPath("/");
             InputStream myxls = new FileInputStream(path + "excel/OsmOrderExcel.xlsx");
+//            InputStream myxls = new FileInputStream("OsmOrderExcel.xlsx");
             XSSFWorkbook wb = new XSSFWorkbook(myxls);
             XSSFSheet sheet = wb.getSheetAt(0);
 
@@ -78,7 +76,6 @@ public class ExportOsmOrderExcel {
                     sheet.getRow(i + 2).getCell(12).setCellValue(convertPayChannel(vo.getPayChannel()));
                     sheet.getRow(i + 2).getCell(13).setCellValue(DateTool.date2String(vo.getCreateAt(), DateTool.FORMAT_DATETIME2));
                     sheet.getRow(i + 2).getCell(14).setCellValue(convertGuideType(vo.getGuideType()));
-//                    sheet.getRow(i + 2).getCell(15).setCellValue(vo.getOrderNo());
                 }
                 String outFile = "商品订单记录_"+DateUtil.getCurrentDateYYYYMMDD()+".xlsx";
                 ExcelUtil.exportExcel(response, wb, outFile);

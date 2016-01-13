@@ -281,8 +281,7 @@ public class OrderManagerController extends BaseController {
 				e.printStackTrace();
 			}
 			logger.info("paramsjson={}", paramsJson);
-			paramsMap = JsonUtil.getMapFromJson(paramsJson);
-			paramsMap = warpToParamMap(paramsMap);
+			paramsMap = warpToParamMap(paramsJson);
 			if (paramsMap == null){
 				model.addAttribute("orderForms", null);
 				model.addAttribute("rowCont", 0);
@@ -308,30 +307,25 @@ public class OrderManagerController extends BaseController {
 
 	/**
 	 * @return
-	 * @Description: 导出付款清单（财务操作）
-	 * @Author: 柯军
-	 * @datetime:2015年9月21日下午3:03:26
+	 * @Description: 导出订单
+	 * @Author: 何波
 	 **/
-//	@RequestMapping("/exportPaymentExcel")
-//	public ResponseData exportPaymentSchedule(String ids, HttpServletResponse response, HttpServletRequest request) {
-//		logger.info("exportPaymentExcel ids={}", ids);
-//		try {
-////			ResponseData responseData = accessService.check(request, "FNC_PAYBILL_DWON");
-////			if (responseData.getMeta().getErrno() != 0) {
-////				return responseData;
-////			}
-////		} catch (Exception e) {
-////			e.printStackTrace();
-////			return ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
-////		}
-////		if (StringUtils.isBlank(ids)) {
-////			return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
-////		}
-//		String[] idArray = ids.split("\\,");
-//		return null;
-//	}
+	@RequestMapping("/exportOrderExcel")
+	public void exportOsmOrder(String paramsJson, HttpServletResponse response, HttpServletRequest request) {
+		try {
+			logger.info("export OsmOrder paramsJson={}", paramsJson);
+			Map<String, Object> paramsMap = warpToParamMap(paramsJson);
+			logger.info("export OsmOrder paramsMap={}", paramsMap);
+			if (paramsMap != null) {
+				exportOsmOrderExcel.exportExcel(request, response, paramsMap);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-	private Map<String, Object> warpToParamMap(Map<String, Object> paramsMap) throws Exception{
+	private Map<String, Object> warpToParamMap(String  paramsJson) throws Exception{
+		Map<String, Object>  paramsMap = JsonUtil.getMapFromJson(paramsJson);
 		Map<String, Object> searchMap = new HashMap<>();
 		String mallId = (String) paramsMap.get("mallId");
 		String shopName = (String) paramsMap.get("shopName");

@@ -1,10 +1,14 @@
 $.ajaxSetup({ cache: false });
 
 $(document).ready(function() {
-	ajaxSearchOrderList();
-	$('.search-button1').off().on().click(function(event){
+	ajaxSearchOrderList(1);
+	$('#searchOrder').off().on().click(function(event){
 		$("#currpage").val("1");
-		ajaxSearchOrderList();
+		ajaxSearchOrderList(1);
+	});
+	$('#exportOrder').off().on().click(function(event){
+		$("#currpage").val("1");
+		ajaxSearchOrderList(2);
 	});
 
 	$('.startTime').datetimepicker({
@@ -100,9 +104,13 @@ $(document).ready(function() {
 	});
 });
 	
-//ajax查询订单列表信息
-function ajaxSearchOrderList() {
-	var url_ = "../orderManager/ajaxSearchOrderList";
+//ajax查询/导出订单列表信息(1：查询  2：导出)
+function ajaxSearchOrderList(flag) {
+	var url_;
+	if (flag==2)
+		url_ = "../orderManager/exportOrderExcel";
+	else
+		url_ = "../orderManager/ajaxSearchOrderList";
 	var orderCartNo = $('#orderCartNo').val();
 	var orderNo = $('#orderNo').val();
 	var guideType = $("#guideType").val();
@@ -124,7 +132,10 @@ function ajaxSearchOrderList() {
 
 	var paramsJson_ = { };
 	paramsJson_["currentPage"] = currpage;
-	paramsJson_["pageSize"] = 10;
+	if (flag==2)
+		paramsJson_["pageSize"] = 50000;
+	else
+		paramsJson_["pageSize"] = 10;
 	if(orderNo != ""){
 		paramsJson_["orderNo"] = orderNo;
 	}
@@ -182,56 +193,61 @@ function ajaxSearchOrderList() {
 		contentType: "application/json; charset=UTF-8",
 		data:{"paramsJson":JSON.stringify(paramsJson_)},
 		success: function(data){
-			$("#result").html(data);
+			if (flag!=2) {
+				$("#result").html(data);
 
-			$("#upPage").click(function(){
-				var currpageVal = parseInt($("#currpage").val());
-				if (currpageVal <= 1) {
-					return false;
-				} else {
-					$("#currpage").val(currpageVal - 1);
-				}
-				$("#jumpPage").val("");
-				ajaxSearchOrderList();
-			});
-
-			$("#downPage").click(function(){
-				var currpageVal = parseInt($("#currpage").val());
-				var totalPageVal = parseInt($("#rowCont").val());
-				if (currpageVal >= totalPageVal) {
-					return false;
-				} else {
-					$("#currpage").val(currpageVal + 1);
-				}
-				$("#jumpPage").val("");
-				ajaxSearchOrderList();
-			});
-
-			$("#gopage").click(function(){
-				var temppage = parseInt($('#jumpPageIn').val()), totalPage = parseInt($("#rowCont").val());
-				if (temppage != "" && temppage != undefined && !isNaN(temppage)) {
-					if (temppage >= 1 && temppage <= totalPage) {
-						$("#currpage").val(temppage);
-						ajaxSearchOrderList();
-					} else if(temppage > totalPage){
-						temppage = totalPage;
-						$("#jumpPage").val(totalPage);$("#currpage").val(totalPage);
-						ajaxSearchOrderList();
-					}else if(temppage == 0){
-						temppage = 1;
-						$("#jumpPage").val(1);$("#currpage").val(1);
-						ajaxSearchOrderList();
-					} else{
-						_util.cmsTip("请输入大于0的数字!");
+				$("#upPage").click(function () {
+					var currpageVal = parseInt($("#currpage").val());
+					if (currpageVal <= 1) {
+						return false;
+					} else {
+						$("#currpage").val(currpageVal - 1);
 					}
-				} else if (temppage == 0) {
-					temppage = 1;
-					$("#jumpPage").val(1);$("#currpage").val(1);
+					$("#jumpPage").val("");
 					ajaxSearchOrderList();
-				} else {
-					_util.cmsTip("请输入数字!");
-				}
-			});
+				});
+
+				$("#downPage").click(function () {
+					var currpageVal = parseInt($("#currpage").val());
+					var totalPageVal = parseInt($("#rowCont").val());
+					if (currpageVal >= totalPageVal) {
+						return false;
+					} else {
+						$("#currpage").val(currpageVal + 1);
+					}
+					$("#jumpPage").val("");
+					ajaxSearchOrderList();
+				});
+
+				$("#gopage").click(function () {
+					var temppage = parseInt($('#jumpPageIn').val()), totalPage = parseInt($("#rowCont").val());
+					if (temppage != "" && temppage != undefined && !isNaN(temppage)) {
+						if (temppage >= 1 && temppage <= totalPage) {
+							$("#currpage").val(temppage);
+							ajaxSearchOrderList();
+						} else if (temppage > totalPage) {
+							temppage = totalPage;
+							$("#jumpPage").val(totalPage);
+							$("#currpage").val(totalPage);
+							ajaxSearchOrderList();
+						} else if (temppage == 0) {
+							temppage = 1;
+							$("#jumpPage").val(1);
+							$("#currpage").val(1);
+							ajaxSearchOrderList();
+						} else {
+							_util.cmsTip("请输入大于0的数字!");
+						}
+					} else if (temppage == 0) {
+						temppage = 1;
+						$("#jumpPage").val(1);
+						$("#currpage").val(1);
+						ajaxSearchOrderList();
+					} else {
+						_util.cmsTip("请输入数字!");
+					}
+				});
+			}
 		},
 		error: function(data) {
 
