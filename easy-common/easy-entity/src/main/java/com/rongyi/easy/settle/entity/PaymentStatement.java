@@ -176,14 +176,6 @@ public class PaymentStatement implements Serializable {
         this.payNo = payNo;
     }
 
-    public Date getstatusUpdateTime() {
-        return statusUpdateTime;
-    }
-
-    public void setstatusUpdateTime(Date statusUpdateTime) {
-        this.statusUpdateTime = statusUpdateTime;
-    }
-
     public Date getCreateAt() {
         return createAt;
     }
