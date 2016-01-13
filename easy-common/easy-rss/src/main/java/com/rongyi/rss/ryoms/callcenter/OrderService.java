@@ -55,6 +55,13 @@ public interface OrderService {
 	public int listCnt(OrderParam param);
 
 	/**
+	 * 列表导出(全部导出)
+	 * @param param
+	 * @return
+	 */
+	public List<OrderVO> listExport(OrderParam param);
+	
+	/**
 	 * 根据客户账号查询最近的一次的工单编号
 	 * 
 	 * @param customerCode

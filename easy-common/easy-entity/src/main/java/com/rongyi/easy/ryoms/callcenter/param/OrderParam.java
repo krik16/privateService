@@ -10,12 +10,12 @@ import java.io.Serializable;
  */
 public class OrderParam implements Serializable {
 
-	public int getPage() {
-		return page;
+	public int getCurrentPage() {
+		return currentPage;
 	}
 
-	public void setPage(int page) {
-		this.page = page;
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
 	}
 
 	@Override
@@ -23,7 +23,8 @@ public class OrderParam implements Serializable {
 		return "OrderParam [id=" + id + ", customerCode=" + customerCode + ", orderSrc=" + orderSrc + ", orderType="
 				+ orderType + ", orderStatus=" + orderStatus + ", orderLevel=" + orderLevel + ", title=" + title
 				+ ", userName=" + userName + ", userTag=" + userTag + ", startDate=" + startDate + ", endDate="
-				+ endDate + ", startIndex=" + startIndex + ", pageSize=" + pageSize + "]";
+				+ endDate + ", startIndex=" + startIndex + ", pageSize=" + pageSize + ", currentPage=" + currentPage
+				+ "]";
 	}
 
 	public int getId() {
@@ -170,5 +171,5 @@ public class OrderParam implements Serializable {
 	private int pageSize = 0;
 
 	// 页数
-	private int page = 0;
+	private int currentPage = 0;
 }

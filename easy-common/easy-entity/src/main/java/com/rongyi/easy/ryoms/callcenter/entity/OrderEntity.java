@@ -226,7 +226,6 @@ public class OrderEntity implements Serializable {
 
 	// 创建人
 	private String createBy = "";
-	// 创建人
 	// 创建时间
 	private String createAt = "";
 	// 更新人

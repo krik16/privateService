@@ -109,11 +109,11 @@ public class OrderVO implements Serializable {
 		this.orderStatus = orderStatus;
 	}
 
-	public int getOrderStatusString() {
+	public String getOrderStatusString() {
 		return orderStatusString;
 	}
 
-	public void setOrderStatusString(int orderStatusString) {
+	public void setOrderStatusString(String orderStatusString) {
 		this.orderStatusString = orderStatusString;
 	}
 
@@ -209,7 +209,7 @@ public class OrderVO implements Serializable {
 	// 工单状态
 	private int orderStatus = 0;
 	// 工单状态字符串
-	private int orderStatusString = 0;
+	private String orderStatusString = "";
 
 	// 工单等级
 	private int orderLevel = 0;
