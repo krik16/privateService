@@ -35,14 +35,17 @@
 						<td>${orderForm.shopName}</td>
 						<td>${orderForm.realAmount}</td>
 						<td>
-							<c:if test="${orderForm.couponAmount==null}">0</c:if>
+							<c:if test="${orderForm.couponAmount==null}">0.00</c:if>
 							<c:if test="${orderForm.couponAmount!=null}">${orderForm.couponAmount}</c:if>
 						</td>
 						<td>
-							<c:if test="${orderForm.integralAmount==null}">0</c:if>
-							<c:if test="${orderForm.integralAmount!=null}">${orderForm.integralAmount}</c:if>
+							<c:if test="${orderForm.integralAmount==null or orderForm.integralAmount==0}">0.00</c:if>
+							<c:if test="${orderForm.integralAmount!=null and orderForm.integralAmount!=0}">${orderForm.integralAmount}</c:if>
 						</td>
-						<td>${orderForm.payAmount}</td>
+						<td>
+							<c:if test="${orderForm.payAmount==0}">0.00</c:if>
+							<c:if test="${orderForm.payAmount!=0}">${orderForm.payAmount}</c:if>
+						</td>
 						<td>
 							<c:choose>
 								<c:when test="${orderForm.status == 1}"> 未付款     </c:when>
