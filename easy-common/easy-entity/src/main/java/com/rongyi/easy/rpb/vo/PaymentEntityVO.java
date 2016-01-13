@@ -113,7 +113,20 @@ public class PaymentEntityVO {
      */
     private String timeExpire;
 
+    /**
+     * 微信公众号
+     */
+    private String publicCode;
 
+    /**
+     * 微信支付商场id(区分不同商场的公众号)
+     */
+    private String mallId;
+
+    /**
+     * 微信公众号支付需要获取支付用户的openId
+     */
+    private String openId;
     /**
      * 主键id
      *
@@ -412,5 +425,27 @@ public class PaymentEntityVO {
         this.orderType = orderType;
     }
 
+    public String getPublicCode() {
+        return publicCode;
+    }
 
+    public void setPublicCode(String publicCode) {
+        this.publicCode = publicCode;
+    }
+
+    public String getMallId() {
+        return mallId;
+    }
+
+    public void setMallId(String mallId) {
+        this.mallId = mallId;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
 }

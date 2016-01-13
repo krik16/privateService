@@ -80,7 +80,7 @@ public interface IRpbService {
 	 * @Author:  柯军
 	 * @datetime:2015年8月11日下午4:50:55
 	 **/
-	public boolean queryOrderPayStatus(String tradeNo, String payNo, Integer payChannel);
+	public boolean queryOrderPayStatus(String tradeNo, String payNo, Integer payChannel,Integer weixinMchId);
 	
 	/**	 
 	 * @Description: 查询支付账号购买次数 
