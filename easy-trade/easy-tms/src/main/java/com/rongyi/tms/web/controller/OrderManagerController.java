@@ -330,6 +330,11 @@ public class OrderManagerController extends BaseController {
 				shopName = URLDecoder.decode(shopName, "utf-8");
 				String[] shopNames = shopName.split("-");
 				searchMap.put("shopName", shopNames[0]);
+				if(shopNames.length > 1){
+					List<String> shopMids = new ArrayList<>();
+					shopMids.add(shopNames[1]);
+					searchMap.put("shopMids",shopMids);
+				}
 			}
 			if (searchMap.containsKey("mallId") || searchMap.containsKey("shopName")) {
 				shopList = roaShopService.getAllShopIdBuMallId(searchMap);
