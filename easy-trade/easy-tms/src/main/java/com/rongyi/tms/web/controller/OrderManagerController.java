@@ -1,6 +1,5 @@
 package com.rongyi.tms.web.controller;
 
-import com.rongyi.core.bean.ResponseData;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.easy.bsoms.entity.UserInfo;
@@ -14,10 +13,8 @@ import com.rongyi.easy.rmmm.vo.OrderManagerVO;
 import com.rongyi.easy.rmmm.vo.ParentOrderVO;
 import com.rongyi.easy.rmmm.vo.SonOrderVO;
 import com.rongyi.rss.bsoms.IUserInfoService;
-import com.rongyi.rss.coupon.mall.shop.MSUserCouponService;
 import com.rongyi.rss.malllife.roa.ROACommodityService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
-import com.rongyi.rss.mallshop.order.ROAOrderDetailFormService;
 import com.rongyi.rss.mallshop.order.ROAOrderFormService;
 import com.rongyi.rss.mallshop.shop.ROACooperationMallService;
 import com.rongyi.rss.mallshop.shop.ROAShopService;
@@ -65,16 +62,10 @@ public class OrderManagerController extends BaseController {
 	private ROAOrderFormService roaOrderFormService;
 
 	@Autowired
-	private ROAOrderDetailFormService roaOrderDetailFormService;
-
-	@Autowired
 	private IOrderQueryService iOrderQueryService;
 
 	@Autowired
 	private ROAMalllifeUserService roaMalllifeUserService;
-
-	@Autowired
-	private MSUserCouponService mMUserCouponService;
 
 	@Autowired
 	private ROACommodityService commodityService;
