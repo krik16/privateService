@@ -27,6 +27,10 @@ public interface Constant {
 		String TYPE_MALL_ADMIN = "mallAdmin";
 		
 	}
-	
+
+	interface ORDER_STATUS{
+		/** 待付款 */
+		String UPPAYED = "1";
+	}
 
 }

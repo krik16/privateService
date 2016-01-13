@@ -112,8 +112,8 @@ public class ExportOsmOrderExcel {
         String result = "--";
         if (orderSource!=null){
             switch (orderSource){
-                case 0: result = "容易逛"; break;
-                case 1: result = "微网站"; break;
+                case 0: result = "微网站"; break;
+                case 1: result = "容易逛"; break;
                 case 2: result = "终端机"; break;
                 case 3: result = "其他"; break;
             }

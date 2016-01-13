@@ -58,8 +58,8 @@
 						</td>
 						<td>
 							<c:choose>
-								<c:when test="${orderForm.orderSource == 0}"> 容易逛     </c:when>
-								<c:when test="${orderForm.orderSource == 1}"> 微网站     </c:when>
+								<c:when test="${orderForm.orderSource == 0}"> 微网站     </c:when>
+								<c:when test="${orderForm.orderSource == 1}"> 容易逛     </c:when>
 								<c:when test="${orderForm.orderSource == 2}"> 终端机     </c:when>
 								<c:when test="${orderForm.orderSource == 3}"> 其他      </c:when>
 							</c:choose>

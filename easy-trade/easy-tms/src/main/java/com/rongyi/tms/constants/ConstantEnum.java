@@ -17,8 +17,13 @@ package com.rongyi.tms.constants;
 
 public enum ConstantEnum {
 
+    ORDER_STATUS_1("1","未付款"),
+    ORDER_STATUS_2("2","待发货"),
+    ORDER_STATUS_3("4","已发货"),
+    ORDER_STATUS_4("4","已完成"),
+    ORDER_STATUS_5("5","已关闭"),
+    ORDER_STATUS_8("8","已退款"),
 
-    
     DRAWAPPLY_STATUS_0(0, "未审核"),
     DRAWAPPLY_STATUS_1(1, "一级审核"),
     DRAWAPPLY_STATUS_2(2, "二级审核"),

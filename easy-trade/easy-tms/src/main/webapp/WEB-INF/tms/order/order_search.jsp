@@ -133,8 +133,8 @@
                 <label>订单来源：</label>
                 <select id="orderSource" class="form-control ng-pristine ng-untouched ng-valid" title="">
                     <option value="">-- 全部 --</option>
-                    <option value="0">容易逛</option>
-                    <option value="1">微网站</option>
+                    <option value="0">微网站</option>
+                    <option value="1">容易逛</option>
                     <option value="2">终端机</option>
                     <option value="3">其他</option>
                 </select>
