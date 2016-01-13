@@ -2,6 +2,9 @@ package com.rongyi.rss.content;
 
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.content_v2.param.HomePageParam;
+import com.rongyi.easy.content_v2.vo.ContentListVO;
+
+import java.util.List;
 
 /**
  * 容易逛首页配置业务接口
@@ -21,4 +24,13 @@ public interface MLHomePageContentNewService {
      * @return ResponseVO
      */
     ResponseVO findHomePageContentNewBy(HomePageParam param);
+
+    /**
+     * @lijing
+     * @param cityId
+     * @param cityName
+     * @param type 3代表商品  4代表买手
+     * @return
+     */
+    List<ContentListVO> findContentList(String cityId,String cityName,int type);
 }

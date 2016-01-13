@@ -3,6 +3,7 @@ package com.rongyi.rss.content;
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.content_v2.param.HomePageParam;
 import com.rongyi.easy.content_v2.vo.BuyerLiveVO;
+import com.rongyi.easy.content_v2.vo.ContentListVO;
 import com.rongyi.easy.content_v2.vo.PositonBuyer;
 
 import java.util.List;
@@ -39,4 +40,21 @@ public interface ROAHomePageContentService {
      */
 
     ResponseVO findHomePageContentNewBy(HomePageParam param);
+
+    /**
+     * @lijing
+     * @param cityId
+     * @param cityName
+     * @return
+     */
+    List<ContentListVO> findCommodityList(String cityId,String cityName);
+
+
+    /**
+     * @lijing
+     * @param cityId
+     * @param cityName
+     * @return
+     */
+    List<ContentListVO> findBuyerList(String cityId,String cityName);
 }
