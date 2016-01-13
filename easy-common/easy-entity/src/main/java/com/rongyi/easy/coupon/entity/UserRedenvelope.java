@@ -440,6 +440,18 @@ public class UserRedenvelope implements Serializable {
         return false;
     }
 
+    /**
+     * 判断是否可使用(不校验状态)
+     * 下单后如果商品改价了，这个时候不校验状态，默认校验[抵扣券购买商品时]
+     * @return
+     */
+    public boolean isUsableNotValidStatus() {
+        if (new Date().before(validEndAt) && new Date().after(validStartAt)) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
