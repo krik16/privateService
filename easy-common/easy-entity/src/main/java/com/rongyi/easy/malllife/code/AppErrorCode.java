@@ -28,7 +28,7 @@ public enum AppErrorCode {
     ERROR_GUIDE_ISDISABLED(1062002,"此店铺休息中，无法为您服务"),
     /** 代金券相关  后4位区间  5001---6000*/
     ERROR_COUPON_ORDER_PARAM(1065001,"亲~红包和抵扣券只能用一种喔~”"),
-    ERROR_RECEIVED_REBATE(1065002, "您已领取过了暖冬礼盒"),
+    //ERROR_RECEIVED_REBATE(1065002, "您已领取过了暖冬礼盒"),
 
     /** 购物车相关  后4位区间  6001---7000*/
     ERROR_COMMODITY_NOTFOUND(1066001,"商品不存在"),
@@ -39,6 +39,7 @@ public enum AppErrorCode {
     ERROR_COMMODITY_NOT_REGISTER(1066006,"商品下架"),
     ERROR_COMMODITY_ALL_SOLDOUT(1066007,"商品均已下架"),
     ERROR_ORDERMODEL_SHIPTYPE_CONFLICT(1066008,"同店铺商品仅支持一种配送方式，系统先为您默认快递发货噢"),
+    ERROR_RECEIVED_REBATE(1065002, "您已领取过了新年礼盒")
 
     ;
 

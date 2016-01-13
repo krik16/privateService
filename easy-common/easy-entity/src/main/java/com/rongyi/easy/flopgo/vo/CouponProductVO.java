@@ -42,7 +42,7 @@ public class CouponProductVO implements Serializable{
 		this.shopName=couponProduct.getShopName();
 		this.productNum=couponProduct.getCommodityCode();
 		this.productName=couponProduct.getCommodityName();
-		this.status=couponProduct.getStatus().toString();
+		this.status=couponProduct.getStatus() == null ? "1":couponProduct.getStatus().toString();
 		this.pics=couponProduct.getPics2List();
 		
 		}
