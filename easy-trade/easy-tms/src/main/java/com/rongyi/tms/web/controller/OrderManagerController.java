@@ -304,8 +304,10 @@ public class OrderManagerController extends BaseController {
 	@RequestMapping("/exportOrderExcel")
 	public void exportOsmOrder(String paramsJson, HttpServletResponse response, HttpServletRequest request) {
 		try {
+			if (StringUtils.isBlank(paramsJson))
+				return;
 			logger.info("export OsmOrder paramsJson={}", paramsJson);
-			Map<String, Object> paramsMap = warpToParamMap(paramsJson);
+			Map<String, Object> paramsMap = warpToParamMap(URLDecoder.decode(paramsJson, "utf-8"));
 			logger.info("export OsmOrder paramsMap={}", paramsMap);
 			if (paramsMap != null) {
 				exportOsmOrderExcel.exportExcel(request, response, paramsMap);
