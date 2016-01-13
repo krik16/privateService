@@ -24,6 +24,7 @@ public class ParentOrderVO implements Serializable {
 	private List<String> shopIM;// 店铺可用IM账号
 
 	private String totalPrice = "0";// 总价
+	private BigDecimal payAmount = new BigDecimal(0);// 实际支付价格
 
 	private String parentOrderStatus;// 父订单状态 1未付款 2待发货 3已发货 4确认收货 5已关闭
 
@@ -153,6 +154,14 @@ public class ParentOrderVO implements Serializable {
 	}
 
 	private String changePriceFlag;//改价标志（0没改价,1改价,2改价影响抵扣券）
+
+	public BigDecimal getPayAmount() {
+		return payAmount;
+	}
+
+	public void setPayAmount(BigDecimal payAmount) {
+		this.payAmount = payAmount;
+	}
 
 	private Integer shopNum = 0;//店铺数量
 
