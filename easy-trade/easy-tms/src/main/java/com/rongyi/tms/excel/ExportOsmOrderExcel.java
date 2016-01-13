@@ -86,7 +86,7 @@ public class ExportOsmOrderExcel {
     }
 
     private String convertGuideType(Integer guideType) {
-        String result = "";
+        String result = "--";
         if (guideType!=null){
             switch (guideType){
                 case 1 : result = "商家"; break;
@@ -97,7 +97,7 @@ public class ExportOsmOrderExcel {
     }
 
     private String convertPayChannel(Byte payChannel) {
-        String result = "";
+        String result = "--";
         if (payChannel!=null){
             switch (payChannel){
                 case 1:
@@ -109,7 +109,7 @@ public class ExportOsmOrderExcel {
     }
 
     private String convertOrderSource(Integer orderSource) {
-        String result = "";
+        String result = "--";
         if (orderSource!=null){
             switch (orderSource){
                 case 0: result = "容易逛"; break;
@@ -122,7 +122,7 @@ public class ExportOsmOrderExcel {
     }
 
     private String convertStatus(String status) {
-        String result = "";
+        String result = "--";
         if (StringUtils.isNotBlank(status))
             switch (status) {
                 case "1" : result="未付款";break;

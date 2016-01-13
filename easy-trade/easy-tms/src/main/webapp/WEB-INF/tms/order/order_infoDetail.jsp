@@ -21,7 +21,7 @@
 				<div class="mallNew-main-left">
 					<ul>
 						<li class="w_100 lvse size-14">订单信息</li>
-
+						<hr style="border:1px dashed #F00;border-bottom:0;border-right:0; border-left:0;width:600px;">
 						<li class="name">母订单号</li>
 						<li class="line">|</li>
 						<li class="data max2">${order.orderCartNo }</li>
@@ -195,9 +195,9 @@
 							<c:if test="${order.scoreDeduction!=null }">${0-order.scoreDeduction }</c:if>（元）
 						</li>
 
-						<li class="name">买家应付金额</li>
+						<li class="name">买家实付金额</li>
 						<li class="line">|</li>
-						<li class="data max2">${order.totalPrice }（元）</li>
+						<li class="data max2">${order.payAmount }（元）</li>
 					</ul>
 				</div>
 			</div>
