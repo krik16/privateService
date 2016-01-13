@@ -24,7 +24,7 @@ public class SalerParentOrderVO implements Serializable {
 	private String orderId;// 订单id
 	private String countId;// 下单账号
 	private String orderType;// 订单类型
-	private String orderSource;// 订单渠道
+	private String orderSource;// 订单渠道     0微商城 1APP 2终端机 3其他
 	private String payTime;// 付款时间
 	private String deliverTime;// 发货时间
 	private String comment;// 订单备注
