@@ -3,6 +3,7 @@ package com.rongyi.tms.web.controller;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.easy.bsoms.entity.UserInfo;
+import com.rongyi.easy.coupon.vo.MMUserCouponVO;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
 import com.rongyi.easy.mcmc.vo.CommodityWebVO;
 import com.rongyi.easy.osm.entity.OrderFormEntity;
@@ -13,6 +14,7 @@ import com.rongyi.easy.rmmm.vo.OrderManagerVO;
 import com.rongyi.easy.rmmm.vo.ParentOrderVO;
 import com.rongyi.easy.rmmm.vo.SonOrderVO;
 import com.rongyi.rss.bsoms.IUserInfoService;
+import com.rongyi.rss.coupon.mall.shop.MSUserCouponService;
 import com.rongyi.rss.malllife.roa.ROACommodityService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.rss.mallshop.order.ROAOrderFormService;
@@ -80,6 +82,9 @@ public class OrderManagerController extends BaseController {
 
 	@Autowired
 	private ExportOsmOrderExcel exportOsmOrderExcel;
+
+	@Autowired
+	private MSUserCouponService msUserCouponService;
 
 	@RequestMapping("/orderCartSearch")
 	public String orderCartSearch(String orderCartNo, ModelMap model) {
@@ -229,6 +234,19 @@ public class OrderManagerController extends BaseController {
 				for (SonOrderVO sonOrderVo : sonOrderList) {
 					commidityTotalPice = commidityTotalPice.add(new BigDecimal(sonOrderVo.getNum())
 							.multiply(new BigDecimal(sonOrderVo.getCommodityCurrentPrice()))).setScale(2, BigDecimal.ROUND_HALF_UP);
+					if (StringUtils.isNotBlank(sonOrderVo.getCouponCode())) {
+						MMUserCouponVO userCouponVO = msUserCouponService.getUserCouponByCouponCode(sonOrderVo
+								.getCouponCode());
+						if (userCouponVO != null) {
+							if (userCouponVO.getDiscount().compareTo(sonOrderVo.getRealAmount()) == 1) {
+								userCouponVO.setRealDiscount(sonOrderVo.getRealAmount());
+								discountTotal = discountTotal.add(sonOrderVo.getRealAmount());
+							}else{
+								userCouponVO.setRealDiscount(userCouponVO.getDiscount());
+								discountTotal = discountTotal.add(userCouponVO.getDiscount());
+							}
+						}
+					}
 				}
 			}
 			if (StringUtils.isNotBlank(orderDetailVo.getCommitOrderTime())) {
@@ -241,6 +259,7 @@ public class OrderManagerController extends BaseController {
 				orderDetailVo.setPayTime(orderDetailVo.getPayTime().substring(0, 16));
 			}
 			model.addAttribute("order", orderDetailVo);
+			discountTotal.setScale(2,4);
 			model.addAttribute("discountTotal", discountTotal);
 			model.addAttribute("type", type);
 			model.addAttribute("commidityTotalPice", commidityTotalPice);
