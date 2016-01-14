@@ -42,16 +42,15 @@ public class ExportOsmOrderExcel {
             paramsMap.put("pageSize", 10);
             paramsMap.put("currentPage", currentPage);
             PagingVO<OrderManagerVO> pagingVO = roaOrderFormService.searchListByMap(paramsMap);
-            if (pagingVO!=null) {
+            String path = request.getSession().getServletContext().getRealPath("/");
+            InputStream myxls = new FileInputStream(path + "excel/OsmOrderExcel.xlsx");
+            XSSFWorkbook wb = new XSSFWorkbook(myxls);
+            if (pagingVO!=null)
+            {
                 int times = pagingVO.getRowCnt()%TOTAL_SIZE==0?pagingVO.getRowCnt()/TOTAL_SIZE:pagingVO.getRowCnt()/TOTAL_SIZE+1;
                 for (int t=0; t<times; t++)
                 {
-                    String path = request.getSession().getServletContext().getRealPath("/");
-                    InputStream myxls = new FileInputStream(path + "excel/OsmOrderExcel.xlsx");
-                    //            InputStream myxls = new FileInputStream("OsmOrderExcel.xlsx");
-                    XSSFWorkbook wb = new XSSFWorkbook(myxls);
                     XSSFSheet sheet = wb.getSheetAt(t);
-
                     XSSFCellStyle bodyStyle = wb.createCellStyle();
                     XSSFFont bodyFont = wb.createFont();
                     bodyStyle.setWrapText(true);
@@ -88,11 +87,11 @@ public class ExportOsmOrderExcel {
                             sheet.getRow(i + 2).getCell(13).setCellValue(DateTool.date2String(vo.getCreateAt(), DateTool.FORMAT_DATETIME2));
                             sheet.getRow(i + 2).getCell(14).setCellValue(convertGuideType(vo.getGuideType()));
                         }
-                        String outFile = "商品订单记录_" + DateUtil.getCurrentDateYYYYMMDD() + ".xlsx";
-                        ExcelUtil.exportExcel(response, wb, outFile);
                     }
                 }
             }
+            String outFile = "商品订单记录_" + DateUtil.getCurrentDateYYYYMMDD() + ".xlsx";
+            ExcelUtil.exportExcel(response, wb, outFile);
         } catch (Exception e) {
             e.printStackTrace();
         }
