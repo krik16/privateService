@@ -91,6 +91,8 @@ public class LiveVO implements Serializable {
 	 */
 	private int zoneType;
 
+	private String shopLogo;
+
 	public String getJsessionId() {
 		return jsessionId;
 	}
@@ -218,5 +220,12 @@ public class LiveVO implements Serializable {
 	public void setZoneType(int zoneType) {
 		this.zoneType = zoneType;
 	}
-	
+
+	public String getShopLogo() {
+		return shopLogo;
+	}
+
+	public void setShopLogo(String shopLogo) {
+		this.shopLogo = shopLogo;
+	}
 }

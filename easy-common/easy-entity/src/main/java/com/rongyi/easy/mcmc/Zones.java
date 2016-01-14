@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import com.rongyi.easy.malllife.constants.Constants;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
@@ -85,6 +86,9 @@ public class Zones implements Serializable {
 	private List<ObjectId> category_ids;
 	
 	private List<ObjectId> watcher_ids;
+
+	//商场logo
+	private String icon;
 
 	public ObjectId getId() {
 		return id;
@@ -221,5 +225,16 @@ public class Zones implements Serializable {
 	public void setCategory_ids(List<ObjectId> category_ids) {
 		this.category_ids = category_ids;
 	}
-	
+
+	public String getFullIcon() {
+		return Constants.Common.UPAIYUN_URL_MALL_ICON + getId().toString() + "/" + getIcon().toString();
+	}
+
+	public String getIcon() {
+		return this.icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
 }

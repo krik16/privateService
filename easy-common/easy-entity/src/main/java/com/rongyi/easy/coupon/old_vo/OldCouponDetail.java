@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.rongyi.easy.tradecenter.vo.CouponOrderVO.CheckCouponDetail;
+
 
 /**
  * 优惠券订单详情信息 （优惠券基本信息与券码信息）
@@ -71,9 +73,22 @@ public class OldCouponDetail implements Serializable {
 
 
     private List<Integer> afterSaleService;
+    
+    /**
+     * 订单已核销优惠券详情
+     */
+    private List<CheckCouponDetail> checkCoupons;
 
+    
+    public List<CheckCouponDetail> getCheckCoupons() {
+		return checkCoupons;
+	}
 
-    public Double getPlatformRebateAmount() {
+	public void setCheckCoupons(List<CheckCouponDetail> checkCoupons) {
+		this.checkCoupons = checkCoupons;
+	}
+
+	public Double getPlatformRebateAmount() {
 		return platformRebateAmount;
 	}
 

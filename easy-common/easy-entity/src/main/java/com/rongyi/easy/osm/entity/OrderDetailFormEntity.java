@@ -87,6 +87,12 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
     /**大订单抵扣券分摊优惠金额*/
     private BigDecimal orderCouponDiscount;
 
+    private BigDecimal discountAmount;//原价-卖家优惠
+
+    private BigDecimal rebateAmount;//discount_amount-红包抵扣券
+
+    private BigDecimal scoreAmount;//rebate_amount - 积分
+
 
     public String getRefundDiscountInfo() {
 		return refundDiscountInfo;
@@ -440,6 +446,36 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
         this.orderCouponDiscount = orderCouponDiscount;
     }
 
+    public BigDecimal getDiscountAmount()
+    {
+        return discountAmount;
+    }
+
+    public void setDiscountAmount(BigDecimal discountAmount)
+    {
+        this.discountAmount = discountAmount;
+    }
+
+    public BigDecimal getRebateAmount()
+    {
+        return rebateAmount;
+    }
+
+    public void setRebateAmount(BigDecimal rebateAmount)
+    {
+        this.rebateAmount = rebateAmount;
+    }
+
+    public BigDecimal getScoreAmount()
+    {
+        return scoreAmount;
+    }
+
+    public void setScoreAmount(BigDecimal scoreAmount)
+    {
+        this.scoreAmount = scoreAmount;
+    }
+
     @Override
 	public String toString() {
 		return "OrderDetailFormEntity [id=" + id + ", orderItemNo=" + orderItemNo + ", orderNo=" + orderNo + ", commodityMid="
@@ -449,6 +485,9 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
                 + "couponDiscount="+couponDiscount + ", couponSource=" + couponSource + ", couponType=" + couponType
 				+ ", paymentIdList=" + paymentIdList + ", commoditySpecMid=" + commoditySpecMid + ", couponId=" + couponId + ","
                 + ", orderScoreDiscount=" + orderScoreDiscount + ", orderDiscountFee=" + orderDiscountFee + ", payAmount=" + payAmount + "," +
+                ", discountAmount=" + discountAmount +
+                ", rebateAmount=" + rebateAmount +
+                ", scoreAmount=" + scoreAmount +
                 " ]";
 	}
 

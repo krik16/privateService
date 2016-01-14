@@ -2,7 +2,9 @@ package com.rongyi.easy.rmmm.param;
 
 import java.io.Serializable;
 
-public class TransactionDetailParam implements Serializable{
+import com.rongyi.easy.malllife.param.MalllifeBaseParam;
+
+public class TransactionDetailParam extends MalllifeBaseParam implements Serializable{
 
 	/**
 	 * 

@@ -74,6 +74,9 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private Integer sortPosition;
 	@Field("flashSortPosition")
 	private Integer flashSortPosition;
+	@Field("systemNumber")
+	private String systemNumber;
+
 
 	public Double getPrice() {
 		return price;
@@ -322,5 +325,13 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 	public void setFlashSortPosition(Integer flashSortPosition) {
 		this.flashSortPosition = flashSortPosition;
+	}
+
+	public String getSystemNumber() {
+		return systemNumber;
+	}
+
+	public void setSystemNumber(String systemNumber) {
+		this.systemNumber = systemNumber;
 	}
 }

@@ -1,6 +1,7 @@
 package com.rongyi.rss.coupon;
 
 import com.rongyi.core.bean.ResponseResult;
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.entity.CouponActivity;
@@ -192,4 +193,16 @@ public interface RoaCouponService {
      * @return 关联代金券的店铺id集合
      */
     List<String> getVoucherShopIds(List<String> shopIds, String synTarget);
+
+    /**
+     * 校验摩店登录的人是否有操作这张券的权限
+     * 摩店两种角色：店长、导购，两种角色只能操作关联类型是店铺的券
+     * @param userId 用户id
+     * @param couponId 卡券id
+     * @return ResponseVO 有权限errno=0，没权限errno=1020831, msg="您无权限操作，如需修改请联系集团管理员"
+     *                                         errno=1020832, msg="您无权限操作，如需修改请联系品牌管理员"
+     *                                         errno=1020833, msg="您无权限操作，如需修改请联系商场管理员"
+     * @author lqy
+     */
+    ResponseVO checkMallShopAuthority(Integer userId, String couponId);
 }

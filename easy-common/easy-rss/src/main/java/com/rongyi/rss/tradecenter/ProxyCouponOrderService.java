@@ -6,6 +6,7 @@ import com.rongyi.easy.coupon.entity.CouponOrderItem;
 import com.rongyi.easy.coupon.param.CouponOrderParam;
 import com.rongyi.easy.coupon.param.RoaCouponOrderParam;
 import com.rongyi.easy.rmmm.param.OrderListParam;
+import com.rongyi.easy.tradecenter.vo.CouponOrderVO;
 
 import java.util.List;
 import java.util.Map;
@@ -57,6 +58,14 @@ public interface ProxyCouponOrderService {
      * @return
      */
     CouponOrder findOneByOrderNo(String orderNo);
+
+    /**
+     * 根据订单号查询订单详情
+     *
+     * @param orderNo
+     * @return
+     */
+    CouponOrderVO findOrderDetailByOrderNo(String orderNo);
 
     /**
      * 根据订单PK查询

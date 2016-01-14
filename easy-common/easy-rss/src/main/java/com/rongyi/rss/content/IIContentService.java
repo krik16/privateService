@@ -1,14 +1,9 @@
 package com.rongyi.rss.content;
 
-import com.rongyi.easy.content_v2.entity.ForumContent;
-import com.rongyi.easy.content_v2.entity.ForumHomepage;
-import com.rongyi.easy.content_v2.entity.ForumPosition;
-import com.rongyi.easy.content_v2.entity.ForumStick;
+import com.rongyi.easy.content_v2.entity.*;
 import com.rongyi.easy.content_v2.param.ForumContentParam;
 import com.rongyi.easy.content_v2.param.ForumContentStatusDelParam;
-import com.rongyi.easy.content_v2.vo.ForumContentListVo;
-import com.rongyi.easy.content_v2.vo.ForumHomeModelVo;
-import com.rongyi.easy.content_v2.vo.ForumPostiomModelVo;
+import com.rongyi.easy.content_v2.vo.*;
 
 import java.util.List;
 
@@ -169,4 +164,81 @@ public interface IIContentService {
 	* @throws
 	 */
 	public List<ForumContentListVo> findContentAllByParamSpecail(ForumContentParam par);
+
+	/**
+	 * 查询模版列表
+	 * @return
+	 */
+	public List<ForumTemplateVO> findTemplateList();
+
+
+	/**
+	 * 判断在同一位置、同一区域、同一发布时间段内是否有内容
+	 * @param fc
+	 * @return
+	 */
+	int hasContentNoTitle(ForumContent fc);
+
+	/**
+	 * 通过模版id 查询模版详情
+	 * @param id
+	 * @return
+	 */
+	public ForumTemplate findTemplateById(Integer id);
+
+
+	/**
+	 * 设置模版
+	 * @param forumTemplate
+	 * @return
+	 */
+	public boolean updateTemplateByParam(ForumTemplate forumTemplate);
+
+	/**
+	 * 通过模版id查询位置信息
+	 * @param id
+	 * @return
+	 */
+	public List<ForumPosition> findPositionByTemplateId(Integer  id);
+
+	/**
+	 * 通过城市id查询
+	 * @param ids
+	 * @return
+	 */
+	public List<TemplateListVO> findTemplateCityByCityId(List<String> ids);
+
+	/**
+	 * 通过模版列表判断城市是否存在
+	 * @param templateId
+	 * @param ids
+	 * @return
+	 */
+	public List<ForumTemplateCity> hasTemplateCity(Integer templateId, List<String> ids);
+
+	/**
+	 * 关联城市
+	 * @param templateId
+	 * @param forumTemplateCities
+	 * @param userName
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean renvelCiyt(Integer templateId, List<ForumTemplateCity> forumTemplateCities, String userName) throws Exception;
+
+	/**
+	 * 通过模版id 查询城市信息
+	 * @param id
+	 * @return
+	 */
+	public List<TemplateCityVO> findTemplateCityList(Integer id);
+
+	/**
+	 * 每日秒杀的保存
+	 * @param fc
+	 * @return
+	 * @throws Exception
+	 */
+	public ForumContent saveContentDailySale(ForumContent fc) throws Exception;
+
 }

@@ -5,6 +5,7 @@ import com.rongyi.easy.coupon.entity.CouponOrder;
 import com.rongyi.easy.coupon.entity.CouponOrderItem;
 import com.rongyi.easy.coupon.param.CouponOrderParam;
 import com.rongyi.easy.rmmm.param.OrderListParam;
+import com.rongyi.easy.tradecenter.vo.CouponOrderVO;
 
 import java.util.List;
 import java.util.Map;
@@ -154,6 +155,14 @@ public interface MLCouponOrderService {
      * @return
      */
     CouponOrder findCouponOrderByNo(String orderNo);
+
+    /**
+     * 根据订单号查询订单详情
+     *
+     * @param orderNo
+     * @return
+     */
+    CouponOrderVO findOrderDetailByOrderNo(String orderNo);
 
     /**
      * 优惠券订单列表（全部、待付款）

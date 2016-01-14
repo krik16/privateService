@@ -1,12 +1,13 @@
 package com.rongyi.core.bean;
 
+import java.io.Serializable;
+
 import net.sf.json.JSONObject;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-
-import java.io.Serializable;
 
 /*
 使用示例说明：
@@ -98,6 +99,17 @@ public class ResponseVO implements java.io.Serializable {
     public static ResponseVO failure(int errno, String msg) {
         return new ResponseVO(new Meta(errno, msg), null);
     }
+    
+    /**
+     * 失败码/失败信息回值对象
+     *
+     * @param errno
+     * @param msg
+     * @return ResponseData
+     */
+    public static <T> ResponseVO failure(int errno, String msg, T data) {
+        return new ResponseVO(new Meta(errno, msg), new Result(data, null));
+    }
 
 
     private <T> ResponseVO(Meta meta, T data, Integer currentPage, Integer pageSize, Integer totalCount) {
@@ -120,6 +132,8 @@ public class ResponseVO implements java.io.Serializable {
     public void setMeta(int errno, String msg) {
         this.meta = new Meta(errno, msg);
     }
+
+    public void setMeta(Meta meta) {this.meta=meta;}
 
     public Result getResult() {
         return result;
@@ -144,6 +158,9 @@ public class ResponseVO implements java.io.Serializable {
             return page;
         }
 
+        public void setPage(Page page) {
+            this.page = page;
+        }
 
         public T getData() {
             return data;
@@ -170,6 +187,14 @@ public class ResponseVO implements java.io.Serializable {
 
         private Meta(int errno, String msg) {
             this.errno = errno;
+            this.msg = msg;
+        }
+
+        public void setErrno(int errno) {
+            this.errno = errno;
+        }
+
+        public void setMsg(String msg) {
             this.msg = msg;
         }
 
@@ -226,6 +251,22 @@ public class ResponseVO implements java.io.Serializable {
             this.currentPage = currentPage;
             this.pageSize = pageSize;
             this.totalCount = totalCount;
+        }
+
+        public void setCurrentPage(Integer currentPage) {
+            this.currentPage = currentPage;
+        }
+
+        public void setPageSize(Integer pageSize) {
+            this.pageSize = pageSize;
+        }
+
+        public void setTotalCount(Integer totalCount) {
+            this.totalCount = totalCount;
+        }
+
+        public void setTotalPage(Integer totalPage) {
+            this.totalPage = totalPage;
         }
 
         public Integer getCurrentPage() {

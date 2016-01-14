@@ -44,6 +44,22 @@ public class ForumPosition implements Serializable {
      * 0有效，1无效
      */
     private Integer status;
+    /**
+     * 模版id
+     */
+    private Integer templateId;
+    /***
+     * 图片格式
+     */
+    private String templateImageFormat;
+    /***
+     * 图片大小
+     */
+    private Integer templateImageSize;
+    /**
+     * 图片长度
+     */
+    private String templateImagePixel;
 
     public Integer getId() {
         return id;
@@ -109,6 +125,39 @@ public class ForumPosition implements Serializable {
         this.status = status;
     }
 
+    public Integer getTemplateId() {
+        return templateId;
+    }
+
+    public void setTemplateId(Integer templateId) {
+        this.templateId = templateId;
+    }
+
+    public String getTemplateImageFormat() {
+        return templateImageFormat;
+    }
+
+    public void setTemplateImageFormat(String templateImageFormat) {
+        this.templateImageFormat = templateImageFormat;
+    }
+
+    public Integer getTemplateImageSize() {
+        return templateImageSize;
+    }
+
+    public void setTemplateImageSize(Integer templateImageSize) {
+        this.templateImageSize = templateImageSize;
+    }
+
+    public String getTemplateImagePixel() {
+        return templateImagePixel;
+    }
+
+    public void setTemplateImagePixel(String templateImagePixel) {
+        this.templateImagePixel = templateImagePixel;
+    }
+
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -120,6 +169,10 @@ public class ForumPosition implements Serializable {
                 .append("updateUser", updateUser)
                 .append("updateAt", updateAt)
                 .append("status", status)
+                .append("templateId", templateId)
+                .append("templateImageFormat", templateImageFormat)
+                .append("templateImageSize", templateImageSize)
+                .append("templateImagePixel", templateImagePixel)
                 .toString();
     }
 }

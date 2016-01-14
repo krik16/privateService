@@ -22,6 +22,28 @@ public class SalerDeliveryParam implements Serializable {
 
 	private String ticketPicList;// 小票上传的图片凭证,用“;”隔开
 
+	private Integer userId;//卖家用户id
+	
+	private String expressInfoId;//物流信息主键id
+
+	private Integer source = 1;//操作平台 1摩店 2商家后台
+
+	public String getExpressInfoId() {
+		return expressInfoId;
+	}
+
+	public void setExpressInfoId(String expressInfoId) {
+		this.expressInfoId = expressInfoId;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
 	public String getType() {
 		return type;
 	}
@@ -70,15 +92,20 @@ public class SalerDeliveryParam implements Serializable {
 		this.ticketPicList = ticketPicList;
 	}
 
+	public Integer getSource()
+	{
+		return source;
+	}
+
+	public void setSource(Integer source)
+	{
+		this.source = source;
+	}
+
 	@Override
 	public String toString() {
-		return "SalerDeliveryParam{" +
-				"type='" + type + '\'' +
-				", orderNum='" + orderNum + '\'' +
-				", logisticsBillId='" + logisticsBillId + '\'' +
-				", expressName='" + expressName + '\'' +
-				", expressId='" + expressId + '\'' +
-				", ticketPicList='" + ticketPicList + '\'' +
-				'}';
+		return "SalerDeliveryParam [type=" + type + ", orderNum=" + orderNum + ", logisticsBillId=" + logisticsBillId
+				+ ", expressName=" + expressName + ", expressId=" + expressId + ", ticketPicList=" + ticketPicList + ", userId="
+				+ userId + ", expressInfoId=" + expressInfoId + ",source"+source+"]";
 	}
 }

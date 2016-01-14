@@ -24,6 +24,9 @@ public class OrderDetailModelParam implements Serializable {
 	private String commodityCommission;// 商品佣金
 	private String orderDetailModelId;// 子模板id
 	private String num;// 商品数量
+	private String commodityAppStatus;//商品状态 0下架 1上架
+	private Integer commodityStock;//商品库存
+
 	private List<CommoditySpecColumnVO> specColumnValues;// 规格参数
 
 	private String commodityPic;// 商品图片
@@ -36,11 +39,58 @@ public class OrderDetailModelParam implements Serializable {
 
 	private String commodityPostage;// 邮费
 	
-	private boolean supportCourierDeliver;//支持快递发货字段  true 是    false否
+	private boolean supportCourierDeliver = true;//支持快递发货字段  true 是    false否
 
-	private boolean supportSelfPickup;//支持到店自提  true 是    false否
+	private boolean supportSelfPickup = true;//支持到店自提  true 是    false否
 	
 	private Integer hongBaoNum = 0;// 可使用红包数量
+	
+	private String supportWay;//1仅支持自提 2仅支持快递 3都支持
+	
+	private String couponCode;//红包券码
+	
+	private String couponName;//红包名称
+	
+	private Double discount;// 红包抵扣金额
+
+	public String getCouponCode() {
+		return couponCode;
+	}
+
+	public void setCouponCode(String couponCode) {
+		this.couponCode = couponCode;
+	}
+
+	public String getCouponName() {
+		return couponName;
+	}
+
+	public void setCouponName(String couponName) {
+		this.couponName = couponName;
+	}
+
+	public Double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Double discount) {
+		this.discount = discount;
+	}
+
+	public String getSupportWay() {
+		if(supportCourierDeliver && supportSelfPickup){
+			return "3";
+		}else if(supportCourierDeliver && !supportSelfPickup){
+			return "2";
+		}else if(!supportCourierDeliver && supportSelfPickup){
+			return "1";
+		}
+		return "0";
+	}
+
+	public void setSupportWay(String supportWay) {
+		this.supportWay = supportWay;
+	}
 
 	public Integer getHongBaoNum() {
 		return hongBaoNum;
@@ -154,6 +204,22 @@ public class OrderDetailModelParam implements Serializable {
 		this.supportSelfPickup = supportSelfPickup;
 	}
 
+	public String getCommodityAppStatus() {
+		return commodityAppStatus;
+	}
+
+	public void setCommodityAppStatus(String commodityAppStatus) {
+		this.commodityAppStatus = commodityAppStatus;
+	}
+
+	public Integer getCommodityStock() {
+		return commodityStock;
+	}
+
+	public void setCommodityStock(Integer commodityStock) {
+		this.commodityStock = commodityStock;
+	}
+
 	@Override
 	public String toString() {
 		return "OrderDetailModelParam{" +
@@ -170,6 +236,8 @@ public class OrderDetailModelParam implements Serializable {
 				", commodityPostage='" + commodityPostage + '\'' +
 				", supportCourierDeliver=" + supportCourierDeliver +
 				", supportSelfPickup=" + supportSelfPickup +
+				", commodityAppStatus=" + commodityAppStatus +
+				", commodityStock=" + commodityStock +
 				'}';
 	}
 }
