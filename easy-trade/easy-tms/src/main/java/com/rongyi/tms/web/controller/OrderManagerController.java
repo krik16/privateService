@@ -348,10 +348,10 @@ public class OrderManagerController extends BaseController {
 	@RequestMapping(value = "/validateExcelCount")
 	@ResponseBody
 	public ResponseResult validateExcelCount(String paramsJson) {
+		logger.info("validateExcelCount begin");
 		ResponseResult result = new ResponseResult();
 		result.setSuccess(false);
 		try {
-			result.setSuccess(true);
 			Map<String, Object> paramsMap = warpToParamMap(paramsJson);
 			PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchListByMap(paramsMap);
 			if (pagingVO!=null && pagingVO.getRowCnt()<= ConstantEnum.EXCEL_LIMIT_COUNT.getCodeInt())
