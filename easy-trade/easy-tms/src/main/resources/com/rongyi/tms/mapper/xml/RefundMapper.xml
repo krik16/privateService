@@ -48,7 +48,6 @@
               WHEN left(payment_order.order_no,1) = 4 THEN buyer_info2.phone
               ELSE buyer_info3.phone
               END AS buyer_account,
-
         CASE WHEN `ry_rpb`.`payment_order`.order_type = 1 THEN buyer_info.nick_name
              WHEN left(payment_order.order_no,1) = 4 THEN buyer_info2.nick_name
              ELSE buyer_info3.nick_name
@@ -60,7 +59,7 @@
         LEFT JOIN ry_osm.order_form AS order_form ON payment_order.order_no = order_form.order_no and left(payment_order.order_no,1) != 4
         LEFT JOIN `ry_trade`.`trade_order` ON `ry_rpb`.`payment_order`.`order_no` = `ry_trade`.`trade_order`.`order_no`
         LEFT JOIN ry_user.malllife_user_info buyer_info ON buyer_info.id = `ry_trade`.`trade_order`.`user_id`
-        LEFT JOIN ry_user.malllife_user_info buyer_info2 ON buyer_info2.id = `ry_osm`.`order_form`.`buyer_id`
+        LEFT JOIN ry_user.malllife_user_info buyer_info2 ON buyer_info2.id = cart_form.`buyer_id`
         LEFT JOIN ry_user.malllife_user_info buyer_info3 ON buyer_info3.id = order_form.`buyer_id`
         LEFT JOIN payment_order_op op ON op.payment_id = payment_order.id
     </sql>
