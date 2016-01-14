@@ -1,13 +1,12 @@
 package com.rongyi.easy.roa.entity;
 
-import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Id;
-
-import org.bson.types.ObjectId;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
 
 /**
  * 商场地址
