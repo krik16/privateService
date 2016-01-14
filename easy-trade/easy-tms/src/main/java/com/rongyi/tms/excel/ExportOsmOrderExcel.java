@@ -40,7 +40,7 @@ public class ExportOsmOrderExcel {
         try
         {
             paramsMap.put("pageSize", 10);
-            paramsMap.put("currentPage", currentPage);
+            paramsMap.put("currentPage", 1);
             PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchListByMap(paramsMap);
             String path = request.getSession().getServletContext().getRealPath("/");
             InputStream myxls = new FileInputStream(path + "excel/OsmOrderExcel.xlsx");
