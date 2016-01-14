@@ -28,6 +28,7 @@ public class CallCenterOrderReportEntity implements Serializable {
 	private String remark;//备注
 	private int user_count;//客服数量
 	private int week;//周
+	private int dayTime;
 	/**
 	 * @return the id
 	 */
@@ -171,5 +172,17 @@ public class CallCenterOrderReportEntity implements Serializable {
 	 */
 	public void setWeek(int week) {
 		this.week = week;
+	}
+	/**
+	 * @return the dayTime
+	 */
+	public int getDayTime() {
+		return dayTime;
+	}
+	/**
+	 * @param dayTime the dayTime to set
+	 */
+	public void setDayTime(int dayTime) {
+		this.dayTime = dayTime;
 	}
 }
