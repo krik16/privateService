@@ -217,9 +217,9 @@
 			<!-- 未使用积分和红包/抵扣券 -->
 			<if test="favorType == 0">
 				<!-- 商品 -->
-				AND (((order_form.score_amount &lt;= 0 AND  (order_detail_form.coupon_id IS
-				NOT NULL AND order_detail_form.coupon_id != ''))
-				OR (cart_form.score_amount &lt;= 0 AND cart_form.rebate_type &lt; 0))
+				AND (((order_form.score_amount is null OR order_form.score_amount &lt;= 0 AND  (order_detail_form.coupon_id IS
+				NULL OR order_detail_form.coupon_id = ''))
+				AND (cart_form.score_discount is null or cart_form.score_discount &lt;= 0 OR cart_form.rebate_type &lt; 0))
 				OR
 				<!-- 优惠券 -->
 				((trade_order.score IS NULL OR 0 >= trade_order.score)
@@ -234,12 +234,12 @@
 				OR
 				<!-- 优惠券 -->
 				((trade_order.score IS NULL OR 0 >= trade_order.score)
-				AND (trade_order.hb_type = 0)))
+				AND (trade_order.hb_type = 0 AND trade_order.hb_code IS NOT NULL AND trade_order.hb_code != '')))
 			</if>
 			<!-- 使用积分 -->
 			<if test="favorType == 2">
 				<!-- 商品 -->
-				AND (((order_form.score_amount > 0 AND order_form.coupon_type &lt; 0)
+				AND ((((order_form.rebate_amount > order_form.score_amount)  AND order_form.coupon_type &lt; 0)
 				OR (cart_form.score_discount > 0 AND cart_form.rebate_type &lt; 0))
 				OR
 				<!-- 优惠券 -->
@@ -249,13 +249,13 @@
 			<!-- 使用积分和红包 -->
 			<if test="favorType == 3">
 				<!-- 商品 -->
-				AND (((order_form.score_amount &lt;= 0 AND  (order_detail_form.coupon_id IS
+				AND ((((order_form.rebate_amount > order_form.score_amount)  AND  (order_detail_form.coupon_id IS
 				NOT NULL AND order_detail_form.coupon_id != ''))
 				OR (cart_form.score_discount > 0 AND cart_form.rebate_type = 0))
 				OR
 				<!-- 优惠券 -->
 				((trade_order.score > 0)
-				AND (trade_order.hb_type = 0)))
+				AND (trade_order.hb_type = 0 AND trade_order.hb_code IS NOT NULL AND trade_order.hb_code != '')))
 			</if>
 			<!-- 使用抵扣券 -->
 			<if test="favorType == 4">
@@ -265,17 +265,17 @@
 				OR
 				<!-- 优惠券 -->
 				((trade_order.score  &lt;= 0)
-				AND (trade_order.hb_type = 1)))
+				AND (trade_order.hb_type = 1 AND trade_order.rebate_code IS NOT NULL AND trade_order.rebate_code != '')))
 			</if>
 			<!-- 使用积分和抵扣券 -->
 			<if test="favorType == 5">
 				<!-- 商品 -->
-				AND (((order_form.score_amount > 0 AND order_form.coupon_type > 0)
+				AND ((((order_form.rebate_amount > order_form.score_amount)  AND order_form.coupon_type > 0)
 				OR (cart_form.score_discount  >  0 AND cart_form.rebate_type > 0))
 				OR
 				<!-- 优惠券 -->
 				((trade_order.score  > 0)
-				AND (trade_order.hb_type = 1)))
+				AND (trade_order.hb_type = 1 AND trade_order.rebate_code IS NOT NULL AND trade_order.rebate_code != '')))
 			</if>
 		</if>
 			<!-- 导购类型 -->
