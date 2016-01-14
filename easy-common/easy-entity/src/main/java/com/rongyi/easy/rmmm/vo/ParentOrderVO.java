@@ -84,6 +84,7 @@ public class ParentOrderVO implements Serializable {
 	private String receiveTime;// 确认收货时间
 	private String cancelTime;// 卖家取消订单时间
 	private String closeTime;// 订单关闭时间
+	private String commentTime;// 评价时间
 	private String statusRoute;// 状态路径
 	private String platformRebateAmount = "0";//用户使用抵扣券后对该订单实际抵扣的金额
 	/*
@@ -650,6 +651,16 @@ public class ParentOrderVO implements Serializable {
 
 	public void setIsCartOrder(boolean isCartOrder) {
 		this.isCartOrder = isCartOrder;
+	}
+
+	public String getCommentTime()
+	{
+		return commentTime;
+	}
+
+	public void setCommentTime(String commentTime)
+	{
+		this.commentTime = commentTime;
 	}
 
 	@Override
