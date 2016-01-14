@@ -107,9 +107,9 @@ public class ExportOsmOrderExcel {
             List<OrderManagerVO> pageData = pagingVO.getDataList();
             if (pageData!=null) {
                 orderForms.addAll(pageData);
+                if (pageData.size()<pageSize)
+                    break;
             }
-            if (pageData.size()<pageSize)
-                break;
             currentPage++;
         }
         return orderForms;
