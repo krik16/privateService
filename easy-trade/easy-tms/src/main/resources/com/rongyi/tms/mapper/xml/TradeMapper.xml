@@ -112,6 +112,10 @@
 		WHEN left(ry_rpb.payment_order.order_no,1) = 1  and order_detail_form.coupon_id IS
 		NOT NULL AND order_detail_form.coupon_id != ''
 		THEN 1
+		WHEN payment_order.order_type = 1 and trade_order.rebate_code != '' and trade_order.hb_type = 0
+		THEN 0
+		WHEN payment_order.order_type = 1 and trade_order.hb_code != '' and trade_order.hb_type = -1
+		THEN 1
 		else
 		-1
 		END as rebate_type
