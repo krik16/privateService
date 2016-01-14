@@ -90,7 +90,7 @@
 		THEN
 		cart_form.rebate_code
 		else
-		order_form.coupon_id
+		order_detail_form.coupon_id
 		END as coupon_code,
 		CASE
 		WHEN
@@ -115,6 +115,7 @@
 		LEFT JOIN ry_rpb.payment_order AS payment_order ON payment_event.out_trade_no = payment_order.pay_no
 		LEFT JOIN ry_osm.order_cart_form AS cart_form ON payment_order.order_no = cart_form.order_no and left(payment_order.order_no,1) = 4
 		LEFT JOIN ry_osm.order_form AS order_form ON payment_order.order_no = order_form.order_no and left(payment_order.order_no,1) != 4
+		LEFT JOIN ry_osm.order_detail_form AS order_detail_form ON order_form.order_no = order_detail_form.order_no
 		LEFT JOIN ry_trade.trade_order AS trade_order ON trade_order.order_no = payment_order.order_no
 	</sql>
 
@@ -216,7 +217,8 @@
 			<!-- 未使用积分和红包/抵扣券 -->
 			<if test="favorType == 0">
 				<!-- 商品 -->
-				AND (((order_form.score_amount &lt;= 0 AND  order_form.coupon_type &lt; 0)
+				AND (((order_form.score_amount &lt;= 0 AND  (order_detail_form.coupon_id IS
+				NOT NULL AND order_detail_form.coupon_id != ''))
 				OR (cart_form.score_amount &lt;= 0 AND cart_form.rebate_type &lt; 0))
 				OR
 				<!-- 优惠券 -->
@@ -226,7 +228,8 @@
 			<!-- 使用红包 -->
 			<if test="favorType == 1">
 				<!-- 商品 -->
-				AND (((order_form.score_amount &lt;= 0 AND order_form.discount_amount > 0 and order_form.coupon_discount  &lt;= 0 and order_form.rebate_amount &lt;  order_form.discount_amount)
+				AND (((order_form.score_amount &lt;= 0 AND  (order_detail_form.coupon_id IS
+				NOT NULL AND order_detail_form.coupon_id != ''))
 				OR (cart_form.score_discount &lt;= 0 AND cart_form.rebate_type = 0))
 				OR
 				<!-- 优惠券 -->
@@ -246,7 +249,8 @@
 			<!-- 使用积分和红包 -->
 			<if test="favorType == 3">
 				<!-- 商品 -->
-				AND (((order_form.score_amount &lt;= 0 AND order_form.discount_amount > 0 and order_form.coupon_discount  &lt;= 0 and order_form.rebate_amount &lt;  order_form.discount_amount)
+				AND (((order_form.score_amount &lt;= 0 AND  (order_detail_form.coupon_id IS
+				NOT NULL AND order_detail_form.coupon_id != ''))
 				OR (cart_form.score_discount > 0 AND cart_form.rebate_type = 0))
 				OR
 				<!-- 优惠券 -->
@@ -256,8 +260,8 @@
 			<!-- 使用抵扣券 -->
 			<if test="favorType == 4">
 				<!-- 商品 -->
-				AND (((order_form.score_amount &lt;= 0 AND order_form.coupon_type = 1)
-				OR (cart_form.score_discount  &lt;=  0 AND cart_form.rebate_type = 1))
+				AND (((order_form.score_amount &lt;= 0 AND order_form.coupon_type > 0)
+				OR (cart_form.score_discount  &lt;=  0 AND cart_form.rebate_type > 0))
 				OR
 				<!-- 优惠券 -->
 				((trade_order.score  &lt;= 0)
@@ -266,8 +270,8 @@
 			<!-- 使用积分和抵扣券 -->
 			<if test="favorType == 5">
 				<!-- 商品 -->
-				AND (((order_form.score_amount > 0 AND order_form.coupon_type = 1)
-				OR (cart_form.score_discount  >  0 AND cart_form.rebate_type = 1))
+				AND (((order_form.score_amount > 0 AND order_form.coupon_type > 0)
+				OR (cart_form.score_discount  >  0 AND cart_form.rebate_type > 0))
 				OR
 				<!-- 优惠券 -->
 				((trade_order.score  > 0)
