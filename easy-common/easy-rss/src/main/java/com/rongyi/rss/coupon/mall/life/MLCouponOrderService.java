@@ -4,6 +4,7 @@ import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.easy.coupon.entity.CouponOrder;
 import com.rongyi.easy.coupon.entity.CouponOrderItem;
 import com.rongyi.easy.coupon.param.CouponOrderParam;
+import com.rongyi.easy.coupon.param.WechatPaySignParam;
 import com.rongyi.easy.rmmm.param.OrderListParam;
 
 import java.util.List;
@@ -125,8 +126,12 @@ public interface MLCouponOrderService {
      * @return
      */
     Map<String, Object> generatePaySign(String orderNo, String payType);
-
-
+    /**
+     * 微商城微信支付获取支付签名
+     * @param param
+     * @return
+     */
+    Map<String, Object> generateWechatPaySign(WechatPaySignParam param);
     /**
      * 优惠券退款通知
      *
