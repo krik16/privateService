@@ -114,7 +114,7 @@
 		THEN 1
 		WHEN payment_order.order_type = 1 and trade_order.rebate_code != '' and trade_order.hb_type = 0
 		THEN 0
-		WHEN payment_order.order_type = 1 and trade_order.hb_code != '' and trade_order.hb_type = -1
+		WHEN payment_order.order_type = 1 and trade_order.hb_code != ''
 		THEN 1
 		else
 		-1
