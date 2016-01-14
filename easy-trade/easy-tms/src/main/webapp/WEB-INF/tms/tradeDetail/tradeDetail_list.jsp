@@ -81,8 +81,11 @@
                             <c:when test="${entity.score <= 0 && entity.rebateType eq 1}">
                                 <td>抵扣券</td>
                             </c:when>
-                            <c:otherwise>
+                            <c:when test="${entity.score <= 0 && entity.rebateType eq -1}">
                                 <td>未使用优惠</td>
+                            </c:when>
+                            <c:otherwise>
+                                <td></td>
                             </c:otherwise>
                         </c:choose>
 
