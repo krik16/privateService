@@ -82,13 +82,13 @@
                     <input name="shopId" type="text" class="form-control ng-pristine ng-untouched ng-valid">
                 </li>
             </div>--%>
-            <div class="form-group">
+            <%--<div class="form-group">
                 <li class="xiala" style="list-style-type:none;">
                     <label>街边店：</label>
                     <input name="curbshopName" type="text" class="form-control ng-pristine ng-untouched ng-valid">
                     <input id="curbshopId" type="hidden" value=""/>
                 </li>
-            </div>
+            </div>--%>
             <div class="form-group">
                 <label>买家账号：</label>
                 <input id="buyerAccount" type="text" class="form-control ng-pristine ng-untouched ng-valid">
