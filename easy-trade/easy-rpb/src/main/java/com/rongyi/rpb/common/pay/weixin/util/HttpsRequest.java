@@ -70,7 +70,7 @@ public class HttpsRequest implements IServiceRequest {
         KeyStore keyStore = KeyStore.getInstance("PKCS12");
         String cretFilePath = configure.getCertLocalPath();
         if (Strings.isNullOrEmpty(cretFilePath)) {
-            cretFilePath = "/data/etc/projects/easy-rpb-cert/1268864001.p12";
+            cretFilePath = "/data/etc/projects/easy-rpb-cert/1268956601.p12";
             LOGGER.info("设置默认证书路径，certFilePath={}", cretFilePath);
         }
         FileInputStream instream = new FileInputStream(new File(cretFilePath));//加载本地的证书进行https加密传输
