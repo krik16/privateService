@@ -34,6 +34,7 @@ public class ExportOsmOrderExcel {
     ROAOrderFormService roaOrderFormService;
 
     private int currentPage = 1;
+    private final int TOTAL_SIZE = 4000;//单表最多导出条数
 
     public void exportExcel(HttpServletRequest request, HttpServletResponse response, Map<String, Object> paramsMap) {
         try
@@ -42,7 +43,7 @@ public class ExportOsmOrderExcel {
             paramsMap.put("currentPage", currentPage);
             PagingVO<OrderManagerVO> pagingVO = roaOrderFormService.searchListByMap(paramsMap);
             if (pagingVO!=null) {
-                int times = pagingVO.getRowCnt()%50000==0?pagingVO.getRowCnt()/50000:pagingVO.getRowCnt()/50000+1;
+                int times = pagingVO.getRowCnt()%TOTAL_SIZE==0?pagingVO.getRowCnt()/TOTAL_SIZE:pagingVO.getRowCnt()/TOTAL_SIZE+1;
                 for (int i=0; i<times; i++)
                 {
                     String path = request.getSession().getServletContext().getRealPath("/");
@@ -99,8 +100,8 @@ public class ExportOsmOrderExcel {
 
     private List<OrderManagerVO> getPageDataList(Map<String, Object> paramsMap) throws Exception {
         List<OrderManagerVO> orderForms = new ArrayList<>();
-        int pageSize = 2500;
-        for (int i=0; i<20; i++){
+        int pageSize = 5000;
+        for (int i=0; i<10; i++){
             paramsMap.put("pageSize", pageSize);
             paramsMap.put("currentPage", currentPage);
             PagingVO<OrderManagerVO> pagingVO = roaOrderFormService.searchListByMap(paramsMap);
