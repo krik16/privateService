@@ -4,8 +4,6 @@ package com.rongyi.easy.mcmc.vo;
 import java.io.Serializable;
 import java.util.List;
 
-import org.bson.types.ObjectId;
-
 public class CommoditySpecVO2 implements  Serializable {
 	
 	private static final long serialVersionUID = -3491400779856182500L;

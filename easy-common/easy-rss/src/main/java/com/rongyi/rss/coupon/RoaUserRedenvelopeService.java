@@ -1,5 +1,8 @@
 package com.rongyi.rss.coupon;
 
+import java.util.List;
+import java.util.Map;
+
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.framework.mybatis.pojo.Page;
@@ -13,9 +16,6 @@ import com.rongyi.easy.coupon.vo.RedenvelopeCodeUseDetailVO;
 import com.rongyi.easy.coupon.vo.UserCouponVO;
 import com.rongyi.easy.coupon.vo.UserRedPacketForOrderVO;
 import com.rongyi.easy.coupon.vo.UserRedPacketVO;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * 用户红包业务接口

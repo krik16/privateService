@@ -1,9 +1,9 @@
 package com.rongyi.easy.coupon.param;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import java.io.Serializable;
 import java.util.List;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * 卡券订单参数
