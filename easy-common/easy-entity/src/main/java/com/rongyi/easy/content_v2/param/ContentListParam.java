@@ -16,7 +16,7 @@ public class ContentListParam implements Serializable {
     /**城市名称*/
     private String cityName;
     /**用户jessionId*/
-    private String jsessionId;
+    private String jsessionid;
 
     public String getCityId() {
         return cityId;
@@ -34,12 +34,12 @@ public class ContentListParam implements Serializable {
         this.cityName = cityName;
     }
 
-    public String getJsessionId() {
-        return jsessionId;
+    public String getJsessionid() {
+        return jsessionid;
     }
 
-    public void setJsessionId(String jsessionId) {
-        this.jsessionId = jsessionId;
+    public void setJsessionid(String jsessionid) {
+        this.jsessionid = jsessionid;
     }
 
     @Override
@@ -47,7 +47,7 @@ public class ContentListParam implements Serializable {
         return new ToStringBuilder(this)
                 .append("cityId", cityId)
                 .append("cityName", cityName)
-                .append("jsessionId", jsessionId)
+                .append("jsessionid", jsessionid)
                 .toString();
     }
 }
