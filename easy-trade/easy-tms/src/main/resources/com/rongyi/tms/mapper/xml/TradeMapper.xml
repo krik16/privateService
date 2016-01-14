@@ -263,7 +263,7 @@
 			<if test="favorType == 4">
 				<!-- 商品 -->
 				AND (((order_form.score_amount &lt;= 0 AND order_form.coupon_type > 0)
-				OR (cart_form.score_discount  &lt;=  0 AND cart_form.rebate_type > 0))
+				OR (cart_form.score_discount  &lt;=  0 AND cart_form.rebate_type >= 0))
 				OR
 				<!-- 优惠券 -->
 				((trade_order.score  &lt;= 0)
@@ -273,7 +273,7 @@
 			<if test="favorType == 5">
 				<!-- 商品 -->
 				AND ((((order_form.rebate_amount > order_form.score_amount)  AND order_form.coupon_type > 0)
-				OR (cart_form.score_discount  >  0 AND cart_form.rebate_type > 0))
+				OR (cart_form.score_discount  >  0 AND cart_form.rebate_type >= 0))
 				OR
 				<!-- 优惠券 -->
 				((trade_order.score  > 0)
