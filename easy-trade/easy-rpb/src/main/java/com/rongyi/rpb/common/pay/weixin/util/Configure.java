@@ -16,14 +16,6 @@ import org.springframework.stereotype.Component;
  */
 public class Configure {
 
-    @Autowired
-    WeixinMchService weixinMchService;
-
-    public Configure(){
-
-    }
-
-
     public void init(WeixinMch weixinMch) {
         if (weixinMch != null) {
             setKey(weixinMch.getKey());
@@ -242,5 +234,20 @@ public class Configure {
 
     public static void setHttpsRequestClassName(String httpsRequestClassName) {
         HttpsRequestClassName = httpsRequestClassName;
+    }
+
+    @Override
+    public String toString() {
+        return "Configure{" +
+                "key='" + key + '\'' +
+                ", appID='" + appID + '\'' +
+                ", mchID='" + mchID + '\'' +
+                ", subMchID='" + subMchID + '\'' +
+                ", certLocalPath='" + certLocalPath + '\'' +
+                ", certPassword='" + certPassword + '\'' +
+                ", useThreadToDoReport=" + useThreadToDoReport +
+                ", ip='" + ip + '\'' +
+                ", tradeType='" + tradeType + '\'' +
+                '}';
     }
 }

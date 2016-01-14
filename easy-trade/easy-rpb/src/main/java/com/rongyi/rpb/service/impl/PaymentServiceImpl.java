@@ -156,12 +156,8 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         if (bodyMap.get("timeExpire") != null) {
             paymentEntityVO.setTimeExpire(bodyMap.get("timeExpire").toString());
         }
-        //
-        if (bodyMap.get("publicCode") != null) {
-            paymentEntityVO.setPublicCode(bodyMap.get("publicCode").toString());
-        }
-        if (bodyMap.get("mallId") != null) {
-            paymentEntityVO.setMallId(bodyMap.get("mallId").toString());
+        if (bodyMap.get("appId") != null) {
+            paymentEntityVO.setAppId(bodyMap.get("appId").toString());
         }
         if (bodyMap.get("openId") != null) {
             paymentEntityVO.setOpenId(bodyMap.get("openId").toString());
@@ -301,6 +297,8 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     @Override
     public PaymentEntityVO insertOrderMessage(MessageEvent event) {
         PaymentEntityVO paymentEntityVO = bodyToPaymentEntity(event.getBody(), event.getType());
+
+
         String payNo;
         if (MqReceiverServiceImpl.isAppPay(event.getType())) {// 前端支付验证订单号是否已存在
             PaymentEntity paymentEntity = validateOrderNumExist(paymentEntityVO.getOrderNum(), paymentEntityVO.getPayChannel(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
@@ -370,8 +368,8 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
             }
             if (paymentEntityVO.getAmountMoney().doubleValue() == 0)
                 paymentEntity.setPayChannel(null);
-            if(StringUtils.isNotBlank(paymentEntityVO.getMallId()) && StringUtils.isNotBlank(paymentEntityVO.getPublicCode())) {
-                WeixinMch weixinMch = weixinMchService.selectByPublicAndUserId(paymentEntityVO.getPublicCode(),paymentEntityVO.getMallId());
+            if(StringUtils.isNotBlank(paymentEntityVO.getAppId())) {
+                WeixinMch weixinMch = weixinMchService.selectByAppId(paymentEntityVO.getAppId());
                 if(weixinMch != null){
                     paymentEntity.setWeixinMchId(weixinMch.getId());
                 }

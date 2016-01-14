@@ -217,7 +217,7 @@ public class WeixinPayServiceTest extends BaseTest {
 		paySignData.setPayNo("1231231234321");
 		paySignData.setTimeStart(timeStart);
 		paySignData.setTimeExpire(timeExpire);
-		paySignData.setPublicCode("容易Show（RongyiService）");
+//		paySignData.setAppId("wxb0af59268c136d7d");
 		Map map = weixinPayUnit.getWeXinPaySign(paySignData);
 		System.err.println("map="+map.toString());
 	}

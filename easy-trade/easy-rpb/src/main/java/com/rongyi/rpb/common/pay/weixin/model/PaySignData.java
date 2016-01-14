@@ -19,11 +19,10 @@ public class PaySignData {
 
     public String timeExpire;
 
-    public String publicCode;
+    public String appId;
 
     public String openId;
 
-    public String mallId;
 
     public String getPayNo() {
         return payNo;
@@ -73,20 +72,12 @@ public class PaySignData {
         this.openId = openId;
     }
 
-    public String getMallId() {
-        return mallId;
+    public String getAppId() {
+        return appId;
     }
 
-    public void setMallId(String mallId) {
-        this.mallId = mallId;
-    }
-
-    public String getPublicCode() {
-        return publicCode;
-    }
-
-    public void setPublicCode(String publicCode) {
-        this.publicCode = publicCode;
+    public void setAppId(String appId) {
+        this.appId = appId;
     }
 
     public Integer getOrderType() {
@@ -106,9 +97,8 @@ public class PaySignData {
                 ", orderType=" + orderType +
                 ", timeStart='" + timeStart + '\'' +
                 ", timeExpire='" + timeExpire + '\'' +
-                ", publicCode='" + publicCode + '\'' +
+                ", appId='" + appId + '\'' +
                 ", openId='" + openId + '\'' +
-                ", mallId='" + mallId + '\'' +
                 '}';
     }
 }

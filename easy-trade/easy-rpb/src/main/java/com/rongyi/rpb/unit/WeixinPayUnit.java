@@ -45,7 +45,7 @@ public class WeixinPayUnit {
                     || Strings.isNullOrEmpty(paySignData.getTimeExpire())) {
                 throw new ParamNullException();
             }
-            Configure configure = weixinConfigService.initConfigure(paySignData.getPublicCode(), paySignData.getMallId());
+            Configure configure = weixinConfigService.initConfigure(paySignData.getAppId());
             UnifedOrderReqData unifedOrderReqData = new UnifedOrderReqData(paySignData.getBody(), paySignData.getPayNo(), paySignData.getTotalFee().intValue(), ConstantUtil.PayWeiXin_V3.WEIXIN_NOTIFY_URL,
                     paySignData.getTimeStart(), paySignData.getTimeExpire(), paySignData.getOpenId(),configure);
             UnifiedorderService unifiedorderService = new UnifiedorderService();

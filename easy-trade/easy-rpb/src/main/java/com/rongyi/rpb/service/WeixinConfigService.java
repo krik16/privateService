@@ -9,7 +9,7 @@ import org.apache.commons.lang.StringUtils;
  */
 public interface WeixinConfigService {
 
-    Configure initConfigure(String publicCode, String userId);
+    Configure initConfigure(String appId);
 
     Configure initConfigure(Integer weixinMchId);
 

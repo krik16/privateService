@@ -66,7 +66,7 @@ public class HttpsRequest implements IServiceRequest {
     private CloseableHttpClient httpClient;
 
     private void init(Configure configure) throws IOException, KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
-
+        LOGGER.info("configure="+configure.toString());
         KeyStore keyStore = KeyStore.getInstance("PKCS12");
         String cretFilePath = configure.getCertLocalPath();
         if (Strings.isNullOrEmpty(cretFilePath)) {

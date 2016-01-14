@@ -34,11 +34,18 @@ public class WeixinMchServiceImpl extends BaseServiceImpl implements WeixinMchSe
         return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectByPrimaryKey", map);
     }
 
+//    @Override
+//    public WeixinMch selectByPublicAndUserId(String publicCode, String userId) {
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("publicCode", publicCode);
+//        map.put("userId", userId);
+//        return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectByPublicAndUserId", map);
+//    }
+
     @Override
-    public WeixinMch selectByPublicAndUserId(String publicCode, String userId) {
+    public WeixinMch selectByAppId(String appId) {
         Map<String, Object> map = new HashMap<>();
-        map.put("publicCode", publicCode);
-        map.put("userId", userId);
-        return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectByPublicAndUserId", map);
+        map.put("appId", appId);
+        return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectByAppId", map);
     }
 }
