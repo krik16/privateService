@@ -164,6 +164,10 @@ public class OrderFormEntity implements Serializable {
 
     //0:未打款，1:对私(打款到导购虚拟账号)，2:对公(通过对账单结算)
     private byte isPayVa;
+    /**
+     * 支付方式 1支付宝网页  3支付宝app  5微信
+     */
+    private Byte payChannel;
 
     public Byte getIsAlert() {
         return isAlert;
@@ -179,6 +183,14 @@ public class OrderFormEntity implements Serializable {
 
     public void setTotalAmountWithoutScoreDiscount(BigDecimal totalAmountWithoutScoreDiscount) {
         this.totalAmountWithoutScoreDiscount = totalAmountWithoutScoreDiscount;
+    }
+
+    public Byte getPayChannel() {
+        return payChannel;
+    }
+
+    public void setPayChannel(Byte payChannel) {
+        this.payChannel = payChannel;
     }
 
     public Integer getGuideType() {
