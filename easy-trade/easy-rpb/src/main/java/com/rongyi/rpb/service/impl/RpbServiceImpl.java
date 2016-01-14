@@ -147,7 +147,7 @@ public class RpbServiceImpl implements IRpbService {
 		String payChannel = PaymentEventType.WEIXIN_PAY;
 		String payAccount = null;
 		PaymentLogInfo paymentLogInfo = paymentLogInfoService.selectByOutTradeNo(paymentEntity.getPayNo(),null);
-		if (paymentEntity.getPayChannel() == Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0) {
+		if (paymentEntity.getPayChannel() != null && Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0 == paymentEntity.getPayChannel()) {
 			payChannel = PaymentEventType.APP;
 			if(paymentLogInfo != null && paymentLogInfo.getEventType() != null && paymentLogInfo.getEventType() == Constants.EVENT_TYPE.EVENT_TYPE1){
 				payChannel = PaymentEventType.PAYMENT;
