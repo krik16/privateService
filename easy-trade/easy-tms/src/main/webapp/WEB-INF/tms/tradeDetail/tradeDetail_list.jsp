@@ -66,19 +66,19 @@
                                 ${entity.payChannel eq '2' ? '银行卡 ' : ''}
                         </td>
                         <c:choose>
-                            <c:when test="${entity.score > 0 &&  ((not empty entity.orderCouponCode || entity.hbDiscount > 0) && entity.rebateType < 0)}">
+                            <c:when test="${entity.score > 0 &&  entity.rebateType eq 1}">
                                 <td>红包加积分</td>
                             </c:when>
-                            <c:when test="${entity.score > 0 && entity.rebateType >= 0}">
+                            <c:when test="${entity.score > 0 && entity.rebateType eq 0}">
                                 <td>抵扣券加积分</td>
                             </c:when>
                             <c:when test="${entity.score > 0  && entity.rebateType eq -1}">
                                 <td>积分</td>
                             </c:when>
-                            <c:when test="${(empty entity.score || entity.score <= 0)  && ((not empty entity.orderCouponCode || entity.hbDiscount > 0) && entity.rebateType < 0)}">
+                            <c:when test="${(empty entity.score || entity.score <= 0)  && entity.rebateType eq 1}">
                                 <td>红包</td>
                             </c:when>
-                            <c:when test="${(empty entity.score || entity.score <= 0)&& entity.rebateType >= 0}">
+                            <c:when test="${(empty entity.score || entity.score <= 0) && entity.rebateType eq 0}">
                                 <td>抵扣券</td>
                             </c:when>
                             <c:when test="${(empty entity.score || entity.score <= 0) && (empty entity.rebateType || entity.rebateType < 0)}">
