@@ -15,14 +15,9 @@ public class RequestPaymentParam implements Serializable{
 	private String paymentEventType; // 请求支付类型 1为网页支付，3为APP支付  5微信支付
 	
 	/**
-     * 微信公众号
+     * appId
      */
-    private String publicCode;
-
-    /**
-     * 微信支付商场id(区分不同商场的公众号)
-     */
-    private String mallId;
+    private String appId;
 
     /**
      * 微信公众号支付需要获取支付用户的openId
@@ -44,21 +39,13 @@ public class RequestPaymentParam implements Serializable{
 	public void setPaymentEventType(String paymentEventType) {
 		this.paymentEventType = paymentEventType;
 	}
-
-	public String getPublicCode() {
-		return publicCode;
+	
+	public String getAppId() {
+		return appId;
 	}
 
-	public void setPublicCode(String publicCode) {
-		this.publicCode = publicCode;
-	}
-
-	public String getMallId() {
-		return mallId;
-	}
-
-	public void setMallId(String mallId) {
-		this.mallId = mallId;
+	public void setAppId(String appId) {
+		this.appId = appId;
 	}
 
 	public String getOpenId() {
@@ -72,9 +59,8 @@ public class RequestPaymentParam implements Serializable{
 	@Override
 	public String toString() {
 		return "RequestPaymentParam [orderNums=" + orderNums
-				+ ", paymentEventType=" + paymentEventType + ", publicCode="
-				+ publicCode + ", mallId=" + mallId + ", openId=" + openId
-				+ "]";
+				+ ", paymentEventType=" + paymentEventType + ", appId=" + appId
+				+ ", openId=" + openId + "]";
 	}
 	
 }
