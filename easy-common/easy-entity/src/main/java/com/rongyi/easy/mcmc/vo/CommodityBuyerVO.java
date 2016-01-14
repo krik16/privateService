@@ -347,5 +347,4 @@ public class CommodityBuyerVO implements Serializable{
 				+ ", commodityName=" + commodityName + ", shopId=" + shopId
 				+ ", shopMid=" + shopMid + ", isCollected=" + isCollected + "]";
 	}
-	
 }

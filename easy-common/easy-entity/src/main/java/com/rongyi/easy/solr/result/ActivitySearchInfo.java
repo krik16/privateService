@@ -1,10 +1,10 @@
 package com.rongyi.easy.solr.result;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class ActivitySearchInfo implements Serializable {
 
@@ -45,6 +45,8 @@ public class ActivitySearchInfo implements Serializable {
 	private List<Integer> afterSaleService;//售后服务
 
 	private Integer payDownTime; //支付剩余时间(单位是秒)
+	private List<String	> customCategoryIds; //卡券对应店铺的自定义分类
+	private Integer apply_shops_count; // 卡券支持的店铺数量
 
 	/**
 	 * 使用限制
@@ -327,6 +329,34 @@ public class ActivitySearchInfo implements Serializable {
 		this.payDownTime = payDownTime;
 	}
 
+	/**
+	 * @return the customCategoryIds
+	 */
+	public List<String> getCustomCategoryIds() {
+		return customCategoryIds;
+	}
+
+	/**
+	 * @param customCategoryIds the customCategoryIds to set
+	 */
+	public void setCustomCategoryIds(List<String> customCategoryIds) {
+		this.customCategoryIds = customCategoryIds;
+	}
+
+	/**
+	 * @return the apply_shops_count
+	 */
+	public Integer getApply_shops_count() {
+		return apply_shops_count;
+	}
+
+	/**
+	 * @param apply_shops_count the apply_shops_count to set
+	 */
+	public void setApply_shops_count(Integer apply_shops_count) {
+		this.apply_shops_count = apply_shops_count;
+	}
+
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this)
@@ -360,6 +390,8 @@ public class ActivitySearchInfo implements Serializable {
 				.append("limitCount", limitCount)
 				.append("afterSaleService", afterSaleService)
 				.append("payDownTime", payDownTime)
+				.append("customCategoryIds", customCategoryIds)
+				.append("apply_shops_count", apply_shops_count)
 				.toString();
 	}
 }
