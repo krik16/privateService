@@ -105,7 +105,9 @@ public class ExportOsmOrderExcel {
             paramsMap.put("currentPage", currentPage);
             PagingVO<OrderManagerVO> pagingVO = roaOrderFormService.searchListByMap(paramsMap);
             List<OrderManagerVO> pageData = pagingVO.getDataList();
-            orderForms.addAll(pageData);
+            if (pageData!=null) {
+                orderForms.addAll(pageData);
+            }
             if (pageData.size()<pageSize)
                 break;
             currentPage++;
