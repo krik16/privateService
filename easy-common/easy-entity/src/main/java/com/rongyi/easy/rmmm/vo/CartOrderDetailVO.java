@@ -53,6 +53,15 @@ public class CartOrderDetailVO extends PageVO implements Serializable{
 	private Integer totalCommodityNum = 0;//订单sku数量
 	private String orderId;// 订单id
 	private String receiveType = "1";// 收货方式 0快递 1无需快递
+	private String commentTime;// 评价时间
+
+	public String getCommentTime() {
+		return commentTime;
+	}
+
+	public void setCommentTime(String commentTime) {
+		this.commentTime = commentTime;
+	}
 
 	public String getReceiveType() {
 		return receiveType;
