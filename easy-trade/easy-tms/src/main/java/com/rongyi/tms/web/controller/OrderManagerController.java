@@ -24,8 +24,10 @@ import com.rongyi.rss.mallshop.shop.ROAShopService;
 import com.rongyi.rss.solr.McmcCommoditySolrService;
 import com.rongyi.rss.tradecenter.osm.IOrderCartService;
 import com.rongyi.rss.tradecenter.osm.IOrderQueryService;
+import com.rongyi.tms.constants.ConstantEnum;
 import com.rongyi.tms.excel.ExportOsmOrderExcel;
 import com.rongyi.tms.moudle.vo.ParentOrderCartVO;
+import com.rongyi.tms.moudle.vo.ResponseResult;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.bson.types.ObjectId;
@@ -35,6 +37,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -334,6 +337,29 @@ public class OrderManagerController extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	/**
+	 * @Description: 验证导出报表总数是否超过限制
+	 * @param paramsJson
+	 * @return
+	 * @Author: 何波
+	 **/
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/validateExcelCount")
+	@ResponseBody
+	public ResponseResult validateExcelCount(String paramsJson) {
+		ResponseResult result = new ResponseResult();
+		result.setSuccess(false);
+		try {
+			result.setSuccess(true);
+			Map<String, Object> paramsMap = warpToParamMap(paramsJson);
+			PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchListByMap(paramsMap);
+			if (pagingVO!=null && pagingVO.getRowCnt()<= ConstantEnum.EXCEL_LIMIT_COUNT.getCodeInt())
+                result.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	private Map<String, Object> warpToParamMap(String  paramsJson) throws Exception{

@@ -1,6 +1,7 @@
 $.ajaxSetup({ cache: false });
 
 $(document).ready(function() {
+	setDefaultTime();
 	ajaxSearchOrderList();
 	$('#searchOrder').off().on().click(function(event){
 		$("#currpage").val("1");
@@ -8,7 +9,7 @@ $(document).ready(function() {
 	});
 	$('#exportOrder').off().on().click(function(event){
 		$("#currpage").val("1");
-		exportOsmOrder();
+		validateExcelCount();
 	});
 
 	$('.startTime').datetimepicker({
@@ -176,7 +177,7 @@ function ajaxSearchOrderList() {
  * 导出订单
  */
 function exportOsmOrder(){
-	var url = "../orderManager/exportOrderExcel?paramsJson="+JSON.stringify(getParamsJson(50000));
+	var url = "../orderManager/exportOrderExcel?paramsJson="+JSON.stringify(getParamsJson(5000));
 	var val = encodeURI(url);
 	val = encodeURI(val);
 	window.open(val);
@@ -259,6 +260,31 @@ function getParamsJson(pageSize){
 	if(orderSource != ""){
 		paramsJson_["orderSource"] = orderSource;
 	}
-
 	return paramsJson_;
+}
+
+/**
+ * 导出报表之前验证是否允许导出
+ */
+function validateExcelCount() {
+	$.post("../orderManager/validateExcelCount", {
+		"paramsJson": JSON.stringify(getParamsJson(10))
+	}, function (data) {
+		if (data.success == false) {
+			_util.cmsTip("导出报表的总数超出5000条，无法导出!");
+		} else {
+			exportOsmOrder();
+		}
+	}, "json");
+	;
+}
+
+/**
+ * 设置默认时间
+ */
+function setDefaultTime() {
+	var curDate = new Date();
+	var startDate = curDate.getFullYear() + "/" + (curDate.getMonth() + 1) + "/" + curDate.getDate();
+	$(".startTime").val(getFormatDate(new Date(startDate)));
+	$('.endTime').val(getFormatDate());
 }
