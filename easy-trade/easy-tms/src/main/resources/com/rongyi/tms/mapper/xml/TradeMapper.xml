@@ -245,7 +245,7 @@
 				OR
 				<!-- 优惠券 -->
 				((trade_order.score IS NULL OR 0 >= trade_order.score)
-				AND (trade_order.hb_type = 0 AND trade_order.hb_code IS NOT NULL AND trade_order.hb_code != '')))
+				AND (trade_order.hb_type > 0 AND trade_order.hb_code IS NOT NULL AND trade_order.hb_code != '')))
 			</if>
 			<!-- 使用积分 -->
 			<if test="favorType == 2">
@@ -266,7 +266,7 @@
 				OR
 				<!-- 优惠券 -->
 				((trade_order.score > 0)
-				AND (trade_order.hb_type = 0 AND trade_order.hb_code IS NOT NULL AND trade_order.hb_code != '')))
+				AND (trade_order.hb_type > 0 AND trade_order.hb_code IS NOT NULL AND trade_order.hb_code != '')))
 			</if>
 			<!-- 使用抵扣券 -->
 			<if test="favorType == 4">
