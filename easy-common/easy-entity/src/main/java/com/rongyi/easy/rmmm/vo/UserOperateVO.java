@@ -87,4 +87,5 @@ public class UserOperateVO implements Serializable{
 		this.nonReceived = nonReceived;
 	}
 	
+
 }

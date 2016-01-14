@@ -1,11 +1,12 @@
 package com.rongyi.easy.coupon.entity;
 
 
-import com.rongyi.core.util.AmountConversion;
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import java.io.Serializable;
 import java.util.Date;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.rongyi.core.util.AmountConversion;
 
 /**
  * 用户抵扣券

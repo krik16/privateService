@@ -173,9 +173,9 @@ public class ParentOrderVO implements Serializable {
 	 *是否是购物车订单
 	 */
 	private boolean isCartOrder;
-	
+
 	private boolean ifDeleteOrder = false;//true表示可以删除订单 false
-	
+
 	private boolean ifOnDisplay = false;//true表示横着显示 false表示竖着显示
 
 	public boolean isIfOnDisplay() {
