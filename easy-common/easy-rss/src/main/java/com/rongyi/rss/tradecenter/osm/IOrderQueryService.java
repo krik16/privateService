@@ -197,7 +197,7 @@ public interface IOrderQueryService {
      * @param platformRebateAmount 抵扣券金额
      * @return 最大可用积分
      */
-    Integer getMaxIntegralForCart(List<MaxIntegralParam> paramList,double limit,double moenyExchangeScore,double platformRebateAmount);
+    Map<String,Object> getMaxIntegralForCart(List<MaxIntegralParam> paramList,double limit,double moenyExchangeScore,double platformRebateAmount);
 
 	/**
 	 * 根据购物车订单号 查询中订单号集合

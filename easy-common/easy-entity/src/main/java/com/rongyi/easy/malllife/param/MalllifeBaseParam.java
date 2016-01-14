@@ -9,9 +9,9 @@ package com.rongyi.easy.malllife.param;/*
  *
  */
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import java.io.Serializable;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class MalllifeBaseParam implements Serializable {
 

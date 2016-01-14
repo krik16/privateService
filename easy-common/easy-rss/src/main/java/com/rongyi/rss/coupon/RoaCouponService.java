@@ -187,6 +187,14 @@ public interface RoaCouponService {
     boolean isCanRefundCoupon(String couponId);
 
     /**
+     * 获取shopId集合中关联了进行中的代金券的shopId
+     * @param shopIds 店铺id集合
+     * @param synTarget 信息同步终端: 容易逛,互动屏,微信 [1,1,1]表示三个都选中，传入通配格式'_,1,_'
+     * @return 关联代金券的店铺id集合
+     */
+    List<String> getVoucherShopIds(List<String> shopIds, String synTarget);
+
+    /**
      * 校验摩店登录的人是否有操作这张券的权限
      * 摩店两种角色：店长、导购，两种角色只能操作关联类型是店铺的券
      * @param userId 用户id
