@@ -111,4 +111,18 @@ public class UserOrderReportVo implements Serializable {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	/** 
+	* @Title: toString 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param @return    设定文件 
+	* @author shaozhou
+	* @date 2016年1月14日 下午5:52:11
+	* @throws 
+	*/
+	@Override
+	public String toString() {
+		return "UserOrderReportVo [orderDate=" + orderDate + ", orderAddCount=" + orderAddCount + ", orderDoneCount="
+				+ orderDoneCount + ", year=" + year + ", month=" + month + ", day=" + day + ", week=" + week
+				+ ", userName=" + userName + "]";
+	}
 }

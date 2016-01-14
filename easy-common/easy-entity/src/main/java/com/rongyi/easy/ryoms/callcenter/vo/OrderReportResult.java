@@ -30,4 +30,16 @@ public class OrderReportResult implements Serializable {
 	public void setCount(int count) {
 		this.count = count;
 	}
+	/** 
+	* @Title: toString 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param @return    设定文件 
+	* @author shaozhou
+	* @date 2016年1月14日 下午5:51:13
+	* @throws 
+	*/
+	@Override
+	public String toString() {
+		return "OrderReportResult [OrderReportVo=" + OrderReportVo + ", count=" + count + "]";
+	}
 }

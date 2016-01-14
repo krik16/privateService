@@ -7,7 +7,7 @@ public class OrderReportParam implements Serializable {
 	* @Fields serialVersionUID
 	*/ 
 	private static final long serialVersionUID = 9020669381941530831L;
-	private String userId;//用户名
+	private int userId;//用户名
 	private String beginTime;//开始时间
 	private String endTime;//结束时间
 	private int type;//类别 1 日报表 2 周报表 3 月报表
@@ -16,13 +16,13 @@ public class OrderReportParam implements Serializable {
 	/**
 	 * @return the userId
 	 */
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 	/**
 	 * @param userId the userId to set
 	 */
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 	/**
@@ -85,11 +85,13 @@ public class OrderReportParam implements Serializable {
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
-	/* (非 Javadoc) 
-	* <p>Title: toString</p> 
-	* <p>Description: </p> 
-	* @return 
-	* @see java.lang.Object#toString() 
+	/** 
+	* @Title: toString 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param @return    设定文件 
+	* @author shaozhou
+	* @date 2016年1月14日 下午5:49:16
+	* @throws 
 	*/
 	@Override
 	public String toString() {

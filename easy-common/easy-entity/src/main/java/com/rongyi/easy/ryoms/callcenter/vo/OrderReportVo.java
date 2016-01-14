@@ -124,4 +124,18 @@ public class OrderReportVo implements Serializable {
 	public void setWeek(int week) {
 		this.week = week;
 	}
+	/** 
+	* @Title: toString 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param @return    设定文件 
+	* @author shaozhou
+	* @date 2016年1月14日 下午5:51:31
+	* @throws 
+	*/
+	@Override
+	public String toString() {
+		return "OrderReportVo [orderTime=" + orderTime + ", userCount=" + userCount + ", orderAddCount=" + orderAddCount
+				+ ", orderDoneCount=" + orderDoneCount + ", averageCount=" + averageCount + ", year=" + year
+				+ ", month=" + month + ", day=" + day + ", week=" + week + "]";
+	}
 }
