@@ -412,6 +412,9 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         paymentLogInfo.setTimeEnd(DateUtil.getCurrDateTime());
         paymentLogInfo.setTotal_fee(0.00);
         paymentLogInfo.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
+        if (PaymentEventType.REFUND.equals(event.getType())){
+            paymentLogInfo.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
+        }
         paymentLogInfoService.insertGetId(paymentLogInfo);
         String type = PaymentEventType.BUYER_PAID;
         if (PaymentEventType.REFUND.equals(event.getType()))
