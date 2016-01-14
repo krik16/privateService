@@ -226,7 +226,7 @@
 			<!-- 使用红包 -->
 			<if test="favorType == 1">
 				<!-- 商品 -->
-				AND (((order_form.score_amount &lt;= 0 AND order_form.coupon_type = 0 )
+				AND (((order_form.score_amount &lt;= 0 AND order_form.discount_amount > 0 and order_form.coupon_discount  &lt;= 0 and order_form.rebate_amount &lt;  order_form.discount_amount)
 				OR (cart_form.score_discount &lt;= 0 AND cart_form.rebate_type = 0))
 				OR
 				<!-- 优惠券 -->
@@ -246,7 +246,7 @@
 			<!-- 使用积分和红包 -->
 			<if test="favorType == 3">
 				<!-- 商品 -->
-				AND (((order_form.score_amount > 0 AND order_form.coupon_type = 0)
+				AND (((order_form.score_amount &lt;= 0 AND order_form.discount_amount > 0 and order_form.coupon_discount  &lt;= 0 and order_form.rebate_amount &lt;  order_form.discount_amount)
 				OR (cart_form.score_discount > 0 AND cart_form.rebate_type = 0))
 				OR
 				<!-- 优惠券 -->
