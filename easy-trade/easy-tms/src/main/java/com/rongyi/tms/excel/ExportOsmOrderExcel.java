@@ -34,7 +34,7 @@ public class ExportOsmOrderExcel {
     ROAOrderFormService roaOrderFormService;
 
     private int currentPage = 1;
-    private final int TOTAL_SIZE = 4000;//单表最多导出条数
+    private final int TOTAL_SIZE = 50000;//单表最多导出条数
 
     public void exportExcel(HttpServletRequest request, HttpServletResponse response, Map<String, Object> paramsMap) {
         try
@@ -99,7 +99,7 @@ public class ExportOsmOrderExcel {
 
     private List<OrderManagerVO> getPageDataList(Map<String, Object> paramsMap) throws Exception {
         List<OrderManagerVO> orderForms = new ArrayList<>();
-        int pageSize = 400;//一次查询数
+        int pageSize = 5000;//一次查询数
         for (int i=0; i<TOTAL_SIZE/pageSize; i++){
             paramsMap.put("pageSize", pageSize);
             paramsMap.put("currentPage", currentPage);
