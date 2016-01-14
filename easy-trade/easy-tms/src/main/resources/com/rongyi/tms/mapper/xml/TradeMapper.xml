@@ -230,11 +230,11 @@
 				<!-- 商品 -->
 				AND (((order_form.score_amount is null OR order_form.score_amount &lt;= 0 AND  (order_detail_form.coupon_id IS
 				NULL OR order_detail_form.coupon_id = ''))
-				AND (cart_form.score_discount is null or cart_form.score_discount &lt;= 0 and cart_form.rebate_type &lt; 0 and cart_form.rebate_amount = cart_form.discount_amount))
+				AND (cart_form.score_discount is null or cart_form.score_discount &lt;= 0 and cart_form.rebate_type &lt; 0 and cart_form.rebate_amount = cart_form.discount_amount)  AND payment_order.order_type = 0)
 				OR
 				<!-- 优惠券 -->
 				((trade_order.score IS NULL OR 0 >= trade_order.score)
-				AND (trade_order.hb_type = -1)))
+				AND (trade_order.hb_type = -1))  AND payment_order.order_type = 1)
 			</if>
 			<!-- 使用红包 -->
 			<if test="favorType == 1">
