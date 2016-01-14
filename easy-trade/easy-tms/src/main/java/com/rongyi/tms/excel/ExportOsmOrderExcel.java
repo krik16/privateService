@@ -100,8 +100,8 @@ public class ExportOsmOrderExcel {
 
     private List<OrderManagerVO> getPageDataList(Map<String, Object> paramsMap) throws Exception {
         List<OrderManagerVO> orderForms = new ArrayList<>();
-        int pageSize = 5000;
-        for (int i=0; i<10; i++){
+        int pageSize = 400;//一次查询数
+        for (int i=0; i<TOTAL_SIZE/pageSize; i++){
             paramsMap.put("pageSize", pageSize);
             paramsMap.put("currentPage", currentPage);
             PagingVO<OrderManagerVO> pagingVO = roaOrderFormService.searchListByMap(paramsMap);
