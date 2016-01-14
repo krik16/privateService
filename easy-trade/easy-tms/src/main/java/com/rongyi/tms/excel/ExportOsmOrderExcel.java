@@ -6,6 +6,7 @@ import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.ExcelUtil;
 import com.rongyi.easy.rmmm.vo.OrderManagerVO;
 import com.rongyi.rss.mallshop.order.ROAOrderFormService;
+import com.rongyi.rss.tradecenter.osm.IOrderQueryService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
@@ -31,7 +32,7 @@ import java.util.Map;
 public class ExportOsmOrderExcel {
 
     @Autowired
-    ROAOrderFormService roaOrderFormService;
+    private IOrderQueryService iOrderQueryService;
 
     private int currentPage = 1;
     private final int TOTAL_SIZE = 50000;//单表最多导出条数
@@ -41,7 +42,7 @@ public class ExportOsmOrderExcel {
         {
             paramsMap.put("pageSize", 10);
             paramsMap.put("currentPage", currentPage);
-            PagingVO<OrderManagerVO> pagingVO = roaOrderFormService.searchListByMap(paramsMap);
+            PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchListByMap(paramsMap);
             String path = request.getSession().getServletContext().getRealPath("/");
             InputStream myxls = new FileInputStream(path + "excel/OsmOrderExcel.xlsx");
             XSSFWorkbook wb = new XSSFWorkbook(myxls);
@@ -99,17 +100,18 @@ public class ExportOsmOrderExcel {
 
     private List<OrderManagerVO> getPageDataList(Map<String, Object> paramsMap) throws Exception {
         List<OrderManagerVO> orderForms = new ArrayList<>();
-        int pageSize = 5000;//一次查询数
+        int pageSize = 2500;//一次查询数
         for (int i=0; i<TOTAL_SIZE/pageSize; i++){
             paramsMap.put("pageSize", pageSize);
             paramsMap.put("currentPage", currentPage);
-            PagingVO<OrderManagerVO> pagingVO = roaOrderFormService.searchListByMap(paramsMap);
+            PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchListByMap(paramsMap);
             List<OrderManagerVO> pageData = pagingVO.getDataList();
             if (pageData!=null) {
                 orderForms.addAll(pageData);
                 if (pageData.size()<pageSize)
                     break;
-            }
+            }else
+                break;
             currentPage++;
         }
         return orderForms;
