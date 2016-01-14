@@ -259,7 +259,7 @@ public class OrderManagerController extends BaseController {
 				orderDetailVo.setPayTime(orderDetailVo.getPayTime().substring(0, 16));
 			}
 			model.addAttribute("order", orderDetailVo);
-			discountTotal.setScale(2,4);
+//			discountTotal.setScale(2,4);
 			model.addAttribute("discountTotal", discountTotal);
 			model.addAttribute("type", type);
 			model.addAttribute("commidityTotalPice", commidityTotalPice);
