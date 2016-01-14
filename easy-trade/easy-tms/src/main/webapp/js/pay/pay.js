@@ -491,7 +491,7 @@ function switchCheck(check) {
 		$("#search-sellerName").css("display","none");
 		$("#search-buyerName").css("display","inline-block");
 		$("#search-buyerAccount").css("display","inline-block");
-		$("#search-guideType").css("display","inline-block");
+		$("#search-guideType").css("display","none");
 		$("#search-price").html('退款金额：');
 		$("#search-time").html('退款申请时间段：');
 		$("#search-price").width(60);

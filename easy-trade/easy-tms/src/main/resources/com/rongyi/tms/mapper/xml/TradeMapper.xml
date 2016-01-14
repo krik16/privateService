@@ -102,9 +102,11 @@
 		END as order_discount_info,
 		CASE
 		WHEN
-		left(ry_rpb.payment_order.order_no,1) = 4
+		left(ry_rpb.payment_order.order_no,1) = 4  and cart_form.rebate_type > 0
 		THEN
 		cart_form.rebate_type
+		WHEN left(ry_rpb.payment_order.order_no,1) = 4  and cart_form.rebate_amount  &lt; cart_form.discount_amount
+			THEN 0
 		else
 		order_form.coupon_type
 		END as rebate_type
