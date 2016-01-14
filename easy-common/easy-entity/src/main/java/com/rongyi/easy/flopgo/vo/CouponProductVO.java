@@ -1,9 +1,9 @@
 package com.rongyi.easy.flopgo.vo;
 
-import com.rongyi.easy.coupon.entity.CouponCommodity;
-
 import java.io.Serializable;
 import java.util.List;
+
+import com.rongyi.easy.coupon.entity.CouponCommodity;
 
 /**
  * 做现金卷的信息封装返回

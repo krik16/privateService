@@ -1,9 +1,9 @@
 package com.rongyi.easy.rmmm.param.user;
 
-import com.rongyi.easy.rmmm.base.BaseParam;
-
 import java.io.Serializable;
 import java.util.List;
+
+import com.rongyi.easy.rmmm.base.BaseParam;
 
 /*
  * Copyright (C),上海容易网电子商务有限公司
