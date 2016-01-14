@@ -34,13 +34,13 @@ public class ExportOsmOrderExcel {
     private IOrderQueryService iOrderQueryService;
 
     private int currentPage = 1;
+    private final int pageSize = 2500;//一次查询数
     private final int TOTAL_SIZE = 50000;//单表最多导出条数
-
     public void exportExcel(HttpServletRequest request, HttpServletResponse response, Map<String, Object> paramsMap) {
         try
         {
             paramsMap.put("pageSize", 10);
-            paramsMap.put("currentPage", currentPage);
+            paramsMap.put("currentPage", 1);
             PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchListByMap(paramsMap);
             String path = request.getSession().getServletContext().getRealPath("/");
             InputStream myxls = new FileInputStream(path + "excel/OsmOrderExcel.xlsx");
@@ -50,6 +50,7 @@ public class ExportOsmOrderExcel {
                 int times = pagingVO.getRowCnt()%TOTAL_SIZE==0?pagingVO.getRowCnt()/TOTAL_SIZE:pagingVO.getRowCnt()/TOTAL_SIZE+1;
                 for (int t=0; t<times; t++)
                 {
+                    currentPage = t*TOTAL_SIZE/pageSize+1;
                     XSSFSheet sheet = wb.getSheetAt(t);
                     XSSFCellStyle bodyStyle = wb.createCellStyle();
                     XSSFFont bodyFont = wb.createFont();
@@ -99,7 +100,6 @@ public class ExportOsmOrderExcel {
 
     private List<OrderManagerVO> getPageDataList(Map<String, Object> paramsMap) throws Exception {
         List<OrderManagerVO> orderForms = new ArrayList<>();
-        int pageSize = 2500;//一次查询数
         for (int i=0; i<TOTAL_SIZE/pageSize; i++){
             paramsMap.put("pageSize", pageSize);
             paramsMap.put("currentPage", currentPage);
