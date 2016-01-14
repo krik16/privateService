@@ -44,13 +44,13 @@ public class ExportOsmOrderExcel {
             PagingVO<OrderManagerVO> pagingVO = roaOrderFormService.searchListByMap(paramsMap);
             if (pagingVO!=null) {
                 int times = pagingVO.getRowCnt()%TOTAL_SIZE==0?pagingVO.getRowCnt()/TOTAL_SIZE:pagingVO.getRowCnt()/TOTAL_SIZE+1;
-                for (int i=0; i<times; i++)
+                for (int t=0; t<times; t++)
                 {
                     String path = request.getSession().getServletContext().getRealPath("/");
                     InputStream myxls = new FileInputStream(path + "excel/OsmOrderExcel.xlsx");
                     //            InputStream myxls = new FileInputStream("OsmOrderExcel.xlsx");
                     XSSFWorkbook wb = new XSSFWorkbook(myxls);
-                    XSSFSheet sheet = wb.getSheetAt(i);
+                    XSSFSheet sheet = wb.getSheetAt(t);
 
                     XSSFCellStyle bodyStyle = wb.createCellStyle();
                     XSSFFont bodyFont = wb.createFont();
