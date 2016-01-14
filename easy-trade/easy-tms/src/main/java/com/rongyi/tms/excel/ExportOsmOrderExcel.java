@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -32,57 +33,84 @@ public class ExportOsmOrderExcel {
     @Autowired
     ROAOrderFormService roaOrderFormService;
 
+    private int currentPage = 1;
+
     public void exportExcel(HttpServletRequest request, HttpServletResponse response, Map<String, Object> paramsMap) {
-        try {
-            String path = request.getSession().getServletContext().getRealPath("/");
-            InputStream myxls = new FileInputStream(path + "excel/OsmOrderExcel.xlsx");
-//            InputStream myxls = new FileInputStream("OsmOrderExcel.xlsx");
-            XSSFWorkbook wb = new XSSFWorkbook(myxls);
-            XSSFSheet sheet = wb.getSheetAt(0);
-
-            XSSFCellStyle bodyStyle = wb.createCellStyle();
-            XSSFFont bodyFont = wb.createFont();
-            bodyStyle.setWrapText(true);
-            bodyFont.setFontName("宋体");
-            bodyFont.setFontHeightInPoints((short) 12);
-            bodyStyle.setFont(bodyFont);
-            bodyStyle.setAlignment(XSSFCellStyle.ALIGN_CENTER);// 指定单元格居中对齐
-            bodyStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// 指定单元格垂直居中对齐
-
+        try
+        {
+            paramsMap.put("pageSize", 10);
+            paramsMap.put("currentPage", currentPage);
             PagingVO<OrderManagerVO> pagingVO = roaOrderFormService.searchListByMap(paramsMap);
-            List<OrderManagerVO> orderForms = pagingVO.getDataList();
-            if (CollectionUtils.isNotEmpty(orderForms)) {
-                for (int i = 2; i <= orderForms.size() + 2; i++) {
-                    sheet.createRow(i);
-                    for (int j = 0; j <= 15; j++) {
-                        sheet.getRow(i).createCell(j);
-                        sheet.getRow(i).getCell(j).setCellStyle(bodyStyle);
+            if (pagingVO!=null) {
+                int times = pagingVO.getRowCnt()%50000==0?pagingVO.getRowCnt()/50000:pagingVO.getRowCnt()/50000+1;
+                for (int i=0; i<times; i++)
+                {
+                    String path = request.getSession().getServletContext().getRealPath("/");
+                    InputStream myxls = new FileInputStream(path + "excel/OsmOrderExcel.xlsx");
+                    //            InputStream myxls = new FileInputStream("OsmOrderExcel.xlsx");
+                    XSSFWorkbook wb = new XSSFWorkbook(myxls);
+                    XSSFSheet sheet = wb.getSheetAt(i);
+
+                    XSSFCellStyle bodyStyle = wb.createCellStyle();
+                    XSSFFont bodyFont = wb.createFont();
+                    bodyStyle.setWrapText(true);
+                    bodyFont.setFontName("宋体");
+                    bodyFont.setFontHeightInPoints((short) 12);
+                    bodyStyle.setFont(bodyFont);
+                    bodyStyle.setAlignment(XSSFCellStyle.ALIGN_CENTER);// 指定单元格居中对齐
+                    bodyStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// 指定单元格垂直居中对齐
+
+                    List<OrderManagerVO> orderForms = getPageDataList(paramsMap);
+                    if (CollectionUtils.isNotEmpty(orderForms)) {
+                        for (int i = 2; i <= orderForms.size() + 2; i++) {
+                            sheet.createRow(i);
+                            for (int j = 0; j <= 15; j++) {
+                                sheet.getRow(i).createCell(j);
+                                sheet.getRow(i).getCell(j).setCellStyle(bodyStyle);
+                            }
+                        }
+                        for (int i = 0; i < orderForms.size(); i++) {
+                            OrderManagerVO vo = orderForms.get(i);
+                            sheet.getRow(i + 2).getCell(0).setCellValue(vo.getOrderCartNo());
+                            sheet.getRow(i + 2).getCell(1).setCellValue(vo.getOrderNo());
+                            sheet.getRow(i + 2).getCell(2).setCellValue(vo.getSellerAccount());
+                            sheet.getRow(i + 2).getCell(3).setCellValue(vo.getUsername());
+                            sheet.getRow(i + 2).getCell(4).setCellValue(vo.getMallName());
+                            sheet.getRow(i + 2).getCell(5).setCellValue(vo.getShopName());
+                            sheet.getRow(i + 2).getCell(6).setCellValue(vo.getRealAmount() == null ? "0" : vo.getRealAmount().toString());
+                            sheet.getRow(i + 2).getCell(7).setCellValue(vo.getCouponAmount() == null ? "0" : vo.getCouponAmount().toString());
+                            sheet.getRow(i + 2).getCell(8).setCellValue(vo.getIntegralAmount() == null ? "0" : vo.getIntegralAmount().toString());
+                            sheet.getRow(i + 2).getCell(9).setCellValue(vo.getPayAmount() == null ? "0" : vo.getPayAmount().toString());
+                            sheet.getRow(i + 2).getCell(10).setCellValue(convertStatus(vo.getStatus()));
+                            sheet.getRow(i + 2).getCell(11).setCellValue(convertOrderSource(vo.getOrderSource()));
+                            sheet.getRow(i + 2).getCell(12).setCellValue(convertPayChannel(vo.getPayChannel()));
+                            sheet.getRow(i + 2).getCell(13).setCellValue(DateTool.date2String(vo.getCreateAt(), DateTool.FORMAT_DATETIME2));
+                            sheet.getRow(i + 2).getCell(14).setCellValue(convertGuideType(vo.getGuideType()));
+                        }
+                        String outFile = "商品订单记录_" + DateUtil.getCurrentDateYYYYMMDD() + ".xlsx";
+                        ExcelUtil.exportExcel(response, wb, outFile);
                     }
                 }
-                for (int i = 0; i < orderForms.size(); i++){
-                    OrderManagerVO vo = orderForms.get(i);
-                    sheet.getRow(i + 2).getCell(0).setCellValue(vo.getOrderCartNo());
-                    sheet.getRow(i + 2).getCell(1).setCellValue(vo.getOrderNo());
-                    sheet.getRow(i + 2).getCell(2).setCellValue(vo.getSellerAccount());
-                    sheet.getRow(i + 2).getCell(3).setCellValue(vo.getUsername());
-                    sheet.getRow(i + 2).getCell(4).setCellValue(vo.getMallName());
-                    sheet.getRow(i + 2).getCell(5).setCellValue(vo.getShopName());
-                    sheet.getRow(i + 2).getCell(6).setCellValue(vo.getRealAmount()==null?"0":vo.getRealAmount().toString());
-                    sheet.getRow(i + 2).getCell(7).setCellValue(vo.getCouponAmount()==null?"0":vo.getCouponAmount().toString());
-                    sheet.getRow(i + 2).getCell(8).setCellValue(vo.getIntegralAmount()==null?"0":vo.getIntegralAmount().toString());
-                    sheet.getRow(i + 2).getCell(9).setCellValue(vo.getPayAmount()==null?"0":vo.getPayAmount().toString());
-                    sheet.getRow(i + 2).getCell(10).setCellValue(convertStatus(vo.getStatus()));
-                    sheet.getRow(i + 2).getCell(11).setCellValue(convertOrderSource(vo.getOrderSource()));
-                    sheet.getRow(i + 2).getCell(12).setCellValue(convertPayChannel(vo.getPayChannel()));
-                    sheet.getRow(i + 2).getCell(13).setCellValue(DateTool.date2String(vo.getCreateAt(), DateTool.FORMAT_DATETIME2));
-                    sheet.getRow(i + 2).getCell(14).setCellValue(convertGuideType(vo.getGuideType()));
-                }
-                String outFile = "商品订单记录_"+DateUtil.getCurrentDateYYYYMMDD()+".xlsx";
-                ExcelUtil.exportExcel(response, wb, outFile);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private List<OrderManagerVO> getPageDataList(Map<String, Object> paramsMap) throws Exception {
+        List<OrderManagerVO> orderForms = new ArrayList<>();
+        int pageSize = 2500;
+        for (int i=0; i<20; i++){
+            paramsMap.put("pageSize", pageSize);
+            paramsMap.put("currentPage", currentPage);
+            PagingVO<OrderManagerVO> pagingVO = roaOrderFormService.searchListByMap(paramsMap);
+            List<OrderManagerVO> pageData = pagingVO.getDataList();
+            orderForms.addAll(pageData);
+            if (pageData.size()<pageSize)
+                break;
+            currentPage++;
+        }
+        return orderForms;
     }
 
     private String convertGuideType(Integer guideType) {
