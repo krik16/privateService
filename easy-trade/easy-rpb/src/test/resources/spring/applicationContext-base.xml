@@ -26,4 +26,7 @@
 			</list>
 		</property>
 	</bean>
+	<bean id="idGenService" class="com.rongyi.rpb.service.impl.IdGenService">
+		<constructor-arg name="workerId" value="1" type="long"/>
+	</bean>
 </beans>

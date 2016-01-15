@@ -366,7 +366,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                     BeanUtils.copyProperties(list.get(0), newPaymentEntity);
                     newPaymentEntity.setId(null);
                     newPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
-                    if (paymentEntity.getPayChannel().equals(payChannel)) {
+                    if (paymentEntity.getPayChannel() != null && payChannel.equals(paymentEntity.getPayChannel())) {
                         LOGGER.info("此订单payChannel={}支付方式未支付单已存在，直接返回此笔付款单记录,orderNum={}", paymentEntity.getPayChannel(), orderNumArray[i]);
                         break;
                     } else {
@@ -412,6 +412,9 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         paymentLogInfo.setTimeEnd(DateUtil.getCurrDateTime());
         paymentLogInfo.setTotal_fee(0.00);
         paymentLogInfo.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
+        if (PaymentEventType.REFUND.equals(event.getType())){
+            paymentLogInfo.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
+        }
         paymentLogInfoService.insertGetId(paymentLogInfo);
         String type = PaymentEventType.BUYER_PAID;
         if (PaymentEventType.REFUND.equals(event.getType()))

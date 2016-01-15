@@ -50,8 +50,6 @@
     <div class="p-list">
         <div class="form-inline ng-valid ng-dirty ng-valid-parse">
             <input id="currpage" type="hidden" name="currpage" value="${currpage}"/>
-            <input type="hidden" value="1" name="pageNo" id="currpage">
-
             <div class="form-group">
                 <label>交易流水号:</label>
                 <input id="tradeNo" type="text" class="form-control ng-pristine ng-untouched ng-valid">
@@ -64,15 +62,15 @@
                 <label>付款单号:</label>
                 <input id="payNo" type="text" class="form-control ng-pristine ng-untouched ng-valid">
             </div>
-            <div class="form-group">
+          <%--  <div class="form-group">
                 <label>渠道：</label>
                 <select id="guideType" class="form-control ng-pristine ng-untouched ng-valid">
                     <option value="">--全部--</option>
                     <option value="1">商家</option>
                     <option value="2">买手</option>
                 </select>
-            </div>
-            <div class="form-group">
+            </div>--%>
+        <%--    <div class="form-group">
                 <li class="xiala" style="list-style-type:none;">
                     <label>商场：</label>
                     <input name="mallId" type="text" class="form-control ng-pristine ng-untouched ng-valid">
@@ -83,7 +81,14 @@
                     <label>店铺：</label>
                     <input name="shopId" type="text" class="form-control ng-pristine ng-untouched ng-valid">
                 </li>
-            </div>
+            </div>--%>
+            <%--<div class="form-group">
+                <li class="xiala" style="list-style-type:none;">
+                    <label>街边店：</label>
+                    <input name="curbshopName" type="text" class="form-control ng-pristine ng-untouched ng-valid">
+                    <input id="curbshopId" type="hidden" value=""/>
+                </li>
+            </div>--%>
             <div class="form-group">
                 <label>买家账号：</label>
                 <input id="buyerAccount" type="text" class="form-control ng-pristine ng-untouched ng-valid">
@@ -92,10 +97,10 @@
                 <label>买家付款账号：</label>
                 <input id="buyerPayAccount" type="text" class="form-control ng-pristine ng-untouched ng-valid">
             </div>
-            <div class="form-group">
+            <%--<div class="form-group">
                 <label>卖家账号：</label>
                 <input id="sellerAccount" type="text" class="form-control ng-pristine ng-untouched ng-valid">
-            </div>
+            </div>--%>
             <div class="form-group">
                 <label>收支类型：</label>
                 <select id="tradeType" class="form-control ng-pristine ng-untouched ng-valid">
@@ -130,6 +135,8 @@
                     <option value="1">红包</option>
                     <option value="2">积分</option>
                     <option value="3">红包加积分</option>
+                    <option value="4">抵扣券</option>
+                    <option value="5">抵扣券加积分</option>
                 </select>
             </div>
 
@@ -138,14 +145,13 @@
                 <input name="start" type="text" value=""
                        class=" form-control ng-pristine ng-untouched ng-valid startTime" id="tradeStartTime"
                        style="width:160px"/>
-                <label>至<label>
+                <label>至</label>
                     <input name="end" type="text" value=""
                            class="form-control ng-pristine ng-untouched ng-valid endTime" id="tradeEndTime"
                            style="width:160px"/>
-            </div>
-
+              </div>
             <div class="form-group">
-                <label>提现金额：</label>
+                <label>交易金额：</label>
                 <input type="text" id="minTotalPrice" class=" form-control ng-pristine ng-untouched ng-valid"/>
                 <label>至</label>
                 <input type="text" id="maxTotalPrice" class="form-control ng-pristine ng-untouched ng-valid"/>
