@@ -3,12 +3,28 @@ package com.rongyi.easy.ryoms.callcenter.entity;
 import java.io.Serializable;
 
 /**
- * 客服工单详情实体
+ * 客服工单详情实体(对应DB)
  * 
  * @author wangjianhua
  *
  */
 public class OrderDetailEntity implements Serializable {
+
+	public String getCreateBy() {
+		return createBy;
+	}
+
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
+	}
+
+	public String getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(String createAt) {
+		this.createAt = createAt;
+	}
 
 	public int getUserId() {
 		return userId;
@@ -20,9 +36,8 @@ public class OrderDetailEntity implements Serializable {
 
 	@Override
 	public String toString() {
-		return "OrderDetailEntity [id=" + id + ", orderId=" + orderId + ", orderStatus=" + orderStatus
-				+ ", orderStatusString=" + orderStatusString + ", content=" + content + ", createBy=" + createBy
-				+ ", userId=" + userId + ", createAt=" + createAt + "]";
+		return "OrderDetailEntity [id=" + id + ", orderId=" + orderId + ", orderStatus=" + orderStatus + ", content="
+				+ content + ", userId=" + userId + "]";
 	}
 
 	/**
@@ -54,36 +69,12 @@ public class OrderDetailEntity implements Serializable {
 		this.orderStatus = orderStatus;
 	}
 
-	public String getOrderStatusString() {
-		return orderStatusString;
-	}
-
-	public void setOrderStatusString(String orderStatusString) {
-		this.orderStatusString = orderStatusString;
-	}
-
 	public String getContent() {
 		return content;
 	}
 
 	public void setContent(String content) {
 		this.content = content;
-	}
-
-	public String getCreateBy() {
-		return createBy;
-	}
-
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
-	}
-
-	public String getCreateAt() {
-		return createAt;
-	}
-
-	public void setCreateAt(String createAt) {
-		this.createAt = createAt;
 	}
 
 	// 编号
@@ -93,18 +84,16 @@ public class OrderDetailEntity implements Serializable {
 
 	// 工单状态
 	private int orderStatus = 0;
-	// 工单状态字符串
-	private String orderStatusString = "";
 
 	// 工单等级字符串
 	private String content = "";
+
+	// 当前用户Id
+	private int userId = 0;
 
 	// 创建人
 	private String createBy = "";
 	// 创建时间
 	private String createAt = "";
-
-	// 当前用户Id
-	private int userId = 0;
 
 }

@@ -1,10 +1,9 @@
 package com.rongyi.rss.ryoms.callcenter;
 
-import java.util.List;
-
-import com.rongyi.easy.ryoms.callcenter.entity.OrderEntity;
-import com.rongyi.easy.ryoms.callcenter.param.OrderParam;
-import com.rongyi.easy.ryoms.callcenter.vo.OrderVO;
+import com.rongyi.easy.ryoms.callcenter.param.OrderSaveParam;
+import com.rongyi.easy.ryoms.callcenter.param.OrderSearchParam;
+import com.rongyi.easy.ryoms.callcenter.vo.OrderInfoVO;
+import com.rongyi.easy.ryoms.callcenter.vo.OrderListVO;
 
 /**
  * 客服管理-工单接口
@@ -20,7 +19,7 @@ public interface OrderService {
 	 * @param entity
 	 * @return
 	 */
-	public int add(OrderEntity entity);
+	public int add(OrderSaveParam entity);
 
 	/**
 	 * 修改工单
@@ -28,7 +27,7 @@ public interface OrderService {
 	 * @param entity
 	 * @return
 	 */
-	public int upt(OrderEntity entity);
+	public int upt(OrderSaveParam entity);
 
 	/**
 	 * 查看工单详情
@@ -36,7 +35,7 @@ public interface OrderService {
 	 * @param id
 	 * @return
 	 */
-	public OrderVO info(int id);
+	public OrderInfoVO info(int id);
 
 	/**
 	 * 查询列表
@@ -44,7 +43,7 @@ public interface OrderService {
 	 * @param param
 	 * @return
 	 */
-	public List<OrderVO> list(OrderParam param);
+	public OrderListVO list(OrderSearchParam param);
 	
 	/**
 	 * 查询列表记录数
@@ -52,14 +51,14 @@ public interface OrderService {
 	 * @param param
 	 * @return
 	 */
-	public int listCnt(OrderParam param);
+	public int listCnt(OrderSearchParam param);
 
 	/**
 	 * 列表导出(全部导出)
 	 * @param param
 	 * @return
 	 */
-	public List<OrderVO> listExport(OrderParam param);
+	public OrderListVO listExport(OrderSearchParam param);
 	
 	/**
 	 * 根据客户账号查询最近的一次的工单编号
