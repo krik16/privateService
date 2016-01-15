@@ -147,7 +147,7 @@ public class AppUtil{
 	 * @return
 	 */
     public static boolean isTelephone(String phonenumber) {
-        String phone = "^(010|02\\d|0[3-9]\\d{2})?\\d{6,8}$";//"0\\d{2,3}-\\d{7,8}";
+        String phone = "^0[0-9]{2,3}(-|)[0-9]{7,8}$";//"0\\d{2,3}-\\d{7,8}";
         Pattern p = Pattern.compile(phone);
         Matcher m = p.matcher(phonenumber);
         return m.matches();
