@@ -10,7 +10,7 @@ import java.util.Date;
 * @author shaozhou 
 * @date 2016年1月11日 上午10:42:33
  */
-public class CallCenterOrderReportEntity implements Serializable {
+public class OrderReportEntity implements Serializable {
 
 	/** 
 	* @Fields serialVersionUID
