@@ -129,7 +129,7 @@ public class RpbServiceImpl implements IRpbService {
 		resultMap.put("errMsg", "支付成功");
 //		if (totalAmount == 0) {
 //			List<PaymentEntity> list = paymentService.selectByOrderNum(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0,null);
-//			// TODO 兼容老版本APP0元支付不走签名，在下个强制更新版本后此代码需删除
+//			兼容老版本APP0元支付不走签名，在下个强制更新版本后此代码需删除
 //			if (list.isEmpty()) {
 //				insertZeroOrder(orderNo, totalAmount);
 //				LOGGER.info("老版本0元商品购买,增加0元购买记录,orderNo-->" + orderNo);

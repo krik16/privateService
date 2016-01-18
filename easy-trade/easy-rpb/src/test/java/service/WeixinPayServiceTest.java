@@ -204,19 +204,23 @@ public class WeixinPayServiceTest extends BaseTest {
 
 	}
 
-	@Test
+//	@Test
 	public void testGetSign(){
 //		payNo='0011518921216145847', totalFee=5000, body='容易网商品', orderType=1, timeStart
 //				='2016-01-15 16:26:33', timeExpire='2016-01-15 16:41:33', appId='wxb0af59268c136d7d', openId='ofnj5s65nQk275rH2kQR4-CKHb1M'
-		String timeStart = "2016-01-15 19:01:33";
-		String timeExpire = "2016-01-15 19:41:33";
+
+//		{payNo='0011552743936151554', totalFee=15000, body='容易网商品', orderType=1, timeStart='2016-01-18 11:49:54', timeExpire='2016-01-18 12:04:54', appId='wxb0af59268c136d7d', openId='o0BDmjojF2JiWrcfhX6YLxP-w5kk'}
+//		String timeStart = DateUtil.dateToString(DateUtil.getCurrDateTime(), "yyyyMMddHHmmss");
+		String timeStart ="2016-01-18 11:49:54";
+//		String timeExpire = DateUtil.dateToString(DateUtil.addTime(DateUtil.getCurrDateTime(), 15, Calendar.MINUTE), "yyyyMMddHHmmss");
+		String timeExpire = "2016-01-18 12:04:54";
 		PaySignData paySignData = new PaySignData();
-		paySignData.setTotalFee(5000);
+		paySignData.setTotalFee(15000);
 		paySignData.setBody("容易网商品");
 //		paySignData.setMallId("10");
-		paySignData.setOpenId("o0BDmjj6tc3auMeuw4lc_ZjLjxS4");
+		paySignData.setOpenId("o0BDmjojF2JiWrcfhX6YLxP-w5kk");
 		paySignData.setOrderType(1);
-		paySignData.setPayNo("0011518921216145848");
+		paySignData.setPayNo("0011552743936151554");
 		paySignData.setTimeStart(timeStart);
 		paySignData.setTimeExpire(timeExpire);
 		paySignData.setAppId("wxb0af59268c136d7d");

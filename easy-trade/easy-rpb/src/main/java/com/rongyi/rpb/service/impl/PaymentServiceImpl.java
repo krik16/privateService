@@ -86,7 +86,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
             currpage = Integer.valueOf(searchValueMap.get("currpage").toString());
         searchValueMap.put("currentPage", (currpage - 1) * Constants.PAGE.pageSize);
         searchValueMap.put("pageSize", Constants.PAGE.pageSize);
-        List<PaymentEntityVO> listVO = new ArrayList<PaymentEntityVO>();
+        List<PaymentEntityVO> listVO = new ArrayList<>();
         return listVO;
     }
 
@@ -158,6 +158,8 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         }
         if (bodyMap.get("appId") != null) {
             paymentEntityVO.setAppId(bodyMap.get("appId").toString());
+        }else{
+            paymentEntityVO.setAppId("");
         }
         if (bodyMap.get("openId") != null) {
             paymentEntityVO.setOpenId(bodyMap.get("openId").toString());
@@ -168,9 +170,9 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
     @Override
     public List<PaymentEntity> getPaymemtsByMoreOrderNum(PaymentEntityVO paymentEntityVO) {
-        List<PaymentEntity> paymentEntityList = new ArrayList<PaymentEntity>();
+        List<PaymentEntity> paymentEntityList = new ArrayList<>();
         String[] orderNumArray = paymentEntityVO.getOrderNum().split("\\,");
-        PaymentEntity paymentEntity = null;
+        PaymentEntity paymentEntity;
         String payNo = getPayNo();// 生成付款单号,多个订单号付款单号一样
         LOGGER.info("生成付款单号：" + payNo);
         if (orderNumArray != null && orderNumArray.length > 0) {
@@ -209,7 +211,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     @Override
     public List<PaymentEntity> selectByPayNo(String payNo) {
         try {
-            Map<String, Object> params = new HashMap<String, Object>();
+            Map<String, Object> params = new HashMap<>();
             params.put("payNo", payNo);
             return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectByPayNo", params);
 
@@ -297,8 +299,6 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     @Override
     public PaymentEntityVO insertOrderMessage(MessageEvent event) {
         PaymentEntityVO paymentEntityVO = bodyToPaymentEntity(event.getBody(), event.getType());
-
-
         String payNo;
         if (MqReceiverServiceImpl.isAppPay(event.getType())) {// 前端支付验证订单号是否已存在
             PaymentEntity paymentEntity = validateOrderNumExist(paymentEntityVO.getOrderNum(), paymentEntityVO.getPayChannel(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);

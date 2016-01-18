@@ -50,7 +50,6 @@ public class WeixinPayUnit {
                     paySignData.getTimeStart(), paySignData.getTimeExpire(), paySignData.getOpenId(),configure);
             UnifiedorderService unifiedorderService = new UnifiedorderService();
             String result = unifiedorderService.request(unifedOrderReqData,configure);
-            System.err.println("result="+result);
             String timestamp = WXUtil.getTimeStamp();
             Map<String, Object> resultMap = XMLParser.getMapFromXML(result);
             if (resultMap != null) {

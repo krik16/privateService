@@ -76,11 +76,11 @@ public class UnifedOrderReqData {
         //交易类型
         setTrade_type(configure.getTradeType());
 
-		//交易起始时间
-		setTime_start(timeStart);
-
-		//交易失效时间
-		setTime_expire(timeExpire);
+//		//交易起始时间
+//		setTime_start(timeStart);
+//
+//		//交易失效时间
+//		setTime_expire(timeExpire);
 
 		setOpenid(openid);
 
