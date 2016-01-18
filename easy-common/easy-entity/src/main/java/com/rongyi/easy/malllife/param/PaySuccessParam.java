@@ -12,7 +12,6 @@ public class PaySuccessParam extends BaseParam implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String orderId;//订单id
 	private Integer type;//支付类型   1商品订单  2优惠券订单
-	
 	public String getOrderId() {
 		return orderId;
 	}
