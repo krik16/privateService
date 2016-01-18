@@ -243,4 +243,7 @@ public interface MLCouponOrderService {
      * @throws Exception
      */
      int getMaxIntegral(OrderListParam param, double limit, double scoreExchangeMoney,double platformRebateAmount);
+     
+     public Map<String, Object> generateWechatPaySign(WechatPaySignParam param);
+     
 }
