@@ -233,7 +233,7 @@ public class ShopVO implements Serializable {
 		this.filialeName = filialeName;
 	}
 
-	/**
+    /**
 	 * @return the custom_category_ids
 	 */
 	public List<ObjectId> getCustom_category_ids() {
@@ -247,5 +247,35 @@ public class ShopVO implements Serializable {
 		this.custom_category_ids = custom_category_ids;
 	}
 
-
+	@Override
+    public String toString() {
+        return "ShopVO{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", iconUrl='" + iconUrl + '\'' +
+                ", shopType='" + shopType + '\'' +
+                ", shopNature='" + shopNature + '\'' +
+                ", status='" + status + '\'' +
+                ", recommend='" + recommend + '\'' +
+                ", valid='" + valid + '\'' +
+                ", position=" + position +
+                ", address='" + address + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", averageConsumption='" + averageConsumption + '\'' +
+                ", businessHours='" + businessHours + '\'' +
+                ", description='" + description + '\'' +
+                ", brandId='" + brandId + '\'' +
+                ", brandName='" + brandName + '\'' +
+                ", categories=" + categories +
+                ", terminalImgs=" + terminalImgs +
+                ", hasCoupons=" + hasCoupons +
+                ", location=" + location +
+                ", filiale_id='" + filiale_id + '\'' +
+                ", brand_id='" + brand_id + '\'' +
+                ", zone_ids=" + zone_ids +
+                ", filialeId='" + filialeId + '\'' +
+                ", filialeName='" + filialeName + '\'' +
+                ", custom_category_ids='" + custom_category_ids + '\'' +
+                '}';
+    }
 }

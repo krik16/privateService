@@ -7,9 +7,7 @@ import java.util.List;
 import com.rongyi.easy.mcmc.Commodity;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
-
 public class CommodityBuyerVO implements Serializable{
-
 	/**
 	 * 
 	 */
@@ -346,5 +344,7 @@ public class CommodityBuyerVO implements Serializable{
 				+ ", commodityDescription=" + commodityDescription
 				+ ", commodityName=" + commodityName + ", shopId=" + shopId
 				+ ", shopMid=" + shopMid + ", isCollected=" + isCollected + "]";
-	}
+
+
+}
 }

@@ -90,15 +90,18 @@ public interface ROAShopService {
      * @throws Exception
      */
     public BrandShopDetailVO getBrandShopDetail(String shopId, UserInfoVO user) throws Exception;
+ 
 
+ 
     /**
-   	 * 微商城商品所在店铺信息V0116
-   	 * @param shopId
-   	 * @param user
-   	 * @return
-   	 * @throws Exception
-   	 */
-   	public BrandShopDetailVO getCommodityShopDetail(String shopId, UserInfoVO user) throws Exception;
+	 * 微商城商品所在店铺信息V0116
+	 * @param shopId
+	 * @param user
+	 * @return
+	 * @throws Exception
+	 */
+	public BrandShopDetailVO getCommodityShopDetail(String shopId, UserInfoVO user) throws Exception;
+ 
     public List<String> getSellerImIdByShopId(String shopId);
 
     public ShopInfoEntity getShopByShopMId(String shopMId) throws RmmmException;

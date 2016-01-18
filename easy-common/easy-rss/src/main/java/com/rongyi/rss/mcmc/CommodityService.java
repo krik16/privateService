@@ -8,14 +8,11 @@ import com.rongyi.easy.coupon.param.CouponCommodityParam;
 import com.rongyi.easy.mcmc.*;
 import com.rongyi.easy.mcmc.param.SaleParam;
 
+import com.rongyi.easy.mcmc.vo.*;
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.bean.ResponseVO;
-import com.rongyi.easy.mcmc.vo.CommodityPageBuyerVO;
-import com.rongyi.easy.mcmc.vo.CommoditySpecVO;
-import com.rongyi.easy.mcmc.vo.CommodityVO;
-import com.rongyi.easy.mcmc.vo.CommodityWebVO;
 import com.rongyi.easy.solr.param.CommodityBrandSearchParam;
 import com.rongyi.easy.solr.param.CommoditySearchParam;
 
@@ -26,7 +23,7 @@ public interface CommodityService {
     public List<Commodity> getCommodityListByShopIds(List<String> shopIds);
 
     public CommodityVO getCommoditySpecInfoById(String commodityId, String specId);
-
+    
     public ResponseResult getCommodityById(String id, long shopId);
 
     public ResponseResult getCommodityListByShopId(String id, int orderBy, String keyword, int currentpage, int pagesize);
@@ -54,6 +51,8 @@ public interface CommodityService {
     public ResponseResult getCategoryById(String id);
 
     public ResponseResult searchCommodity(CommoditySearchParam param);
+
+    public ResponseResult searchCommodityForMallLife(CommoditySearchParam param);
 
     public ResponseResult getBrandCommodity(String brandId, String categoryId, int orderBy, int currentpage, int pagesize);
 
@@ -128,4 +127,6 @@ public interface CommodityService {
     public CommoditySpecColumn findCommoditySpecColumnById(ObjectId id);
 
     public List<Commodity> getCommodityByIds(List<ObjectId> ids);
+
+    public List<CommodityBuyerVO> getCommodityBySPU(String commodityId, String spu);
 }

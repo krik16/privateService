@@ -22,6 +22,16 @@ public class StringUtil {
 		}
 	}
 
+
+	public static String intToString(Integer intTemp) {
+		if (intTemp == null) {
+			return "";
+		} else {
+			return String.valueOf(intTemp);
+		}
+	}
+
+
 	/**
 	 * 如果是null，返回0
 	 * 

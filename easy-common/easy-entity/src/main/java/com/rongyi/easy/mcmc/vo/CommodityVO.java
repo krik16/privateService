@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.rongyi.easy.mcmc.Commodity;
+import org.apache.commons.lang.StringUtils;
 
 
 public class CommodityVO  implements  Serializable {
@@ -22,6 +23,7 @@ public class CommodityVO  implements  Serializable {
 	private String commoditySold;
 	private String commodityPubDate;
 	private int commodityStatus;
+	private int commodityAppStatus;// 商品APP显示状态 (0下架 1上架 3待上架)
 
 	private String commodityOPriceMax;//我是最高原价”,
 	private String commodityOPriceMin;//我是最低原价”,
@@ -63,8 +65,25 @@ public class CommodityVO  implements  Serializable {
 	private int brandId;//品牌mysqlId
 	private String filialeMid;//分公司id
 	private int identity = 5;//-1表示定时任务0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购6买手
-
 	private Integer processIdentity;//当前登录人的身份
+	private String activityType = "0";	//活动状态[闪购1、特卖2、秒杀3]
+
+	public String getActivityType() {
+		return activityType;
+	}
+
+	public void setActivityType(String activityType) {
+		this.activityType = activityType;
+	}
+	
+	public int getCommodityAppStatus() {
+		return commodityAppStatus;
+	}
+
+	public void setCommodityAppStatus(int commodityAppStatus) {
+		this.commodityAppStatus = commodityAppStatus;
+	}
+
 	public String getShopName() {
 		return shopName;
 	}
@@ -260,6 +279,34 @@ public class CommodityVO  implements  Serializable {
 		this.registerAt=commodity.getRegisterAt();
 		this.soldOutAt=commodity.getSoldOutAt();
 		this.supportSelfPickup = commodity.isSupportSelfPickup();
+		// 商品待上架且上架时间大于当前时间，app商品状态为 待上架
+		// 商品上架或待上架，且上架时间小于当前时间，且下架时间大于当前时间，app商品状态为 上架
+		// 其他 下架
+		// 状态 -1：非现货初始化(直播使用） 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理5待审核 6审核失败
+		if (this.commodityStatus == 3
+				&& (commodity.getRegisterAt() != null && commodity.getRegisterAt().getTime() - new Date().getTime() > 0)) {
+			this.commodityAppStatus = 3;
+		} else if ((commodityStatus == 1 || commodityStatus == 3)
+				&& (commodity.getRegisterAt() != null && commodity.getRegisterAt().getTime() - new Date().getTime() <= 0)
+				&& (commodity.getSoldOutAt() != null && commodity.getSoldOutAt().getTime() - new Date().getTime() > 0)) {
+			this.commodityAppStatus = 1;
+		} else if (commodityAppStatus != 0 && commodityAppStatus != 1 && commodityAppStatus != 3) {
+			this.commodityAppStatus = 0;
+		} else {
+			this.commodityAppStatus = this.commodityStatus;
+		}
+		
+		//闪购 || 特卖 || 秒杀
+		if (commodity.getSaleId() != null) {
+			this.activityType = "2";
+		} else if (commodity.getFlashSaleId() != null) {
+			this.activityType = "1";
+		} else if (StringUtils.isNotBlank(commodity.getSecKillSign())) {
+			this.activityType = "3";
+		} else {
+			//其他
+			this.activityType = "0";
+		}
 	}
 	public String getCommodityId() {
 		return commodityId;

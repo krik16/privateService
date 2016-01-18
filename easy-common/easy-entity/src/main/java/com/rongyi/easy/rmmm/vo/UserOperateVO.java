@@ -86,6 +86,5 @@ public class UserOperateVO implements Serializable{
 	public void setNonReceived(Integer nonReceived) {
 		this.nonReceived = nonReceived;
 	}
-	
-
+ 
 }

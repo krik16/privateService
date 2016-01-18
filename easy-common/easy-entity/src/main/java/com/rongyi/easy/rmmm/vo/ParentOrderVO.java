@@ -13,10 +13,7 @@ public class ParentOrderVO implements Serializable {
 	private String orderCartNo;// 购物车订单号
 	private String paymentIdList;// 支付流水号
 	private String couponCodes;// 券码（多个逗号隔开）
-	/**
-	 * 支付方式 1支付宝网页  3支付宝app  5微信
-	 */
-	private Byte payChannel;
+	private Byte payChannel;// 券码（多个逗号隔开）
 
 	private String mallName;// 商场名称
 
@@ -87,6 +84,7 @@ public class ParentOrderVO implements Serializable {
 	private String receiveTime;// 确认收货时间
 	private String cancelTime;// 卖家取消订单时间
 	private String closeTime;// 订单关闭时间
+	private String commentTime;// 评价时间
 	private String statusRoute;// 状态路径
 	private String platformRebateAmount = "0";//用户使用抵扣券后对该订单实际抵扣的金额
 	/*
@@ -173,9 +171,9 @@ public class ParentOrderVO implements Serializable {
 	 *是否是购物车订单
 	 */
 	private boolean isCartOrder;
-
+	
 	private boolean ifDeleteOrder = false;//true表示可以删除订单 false
-
+	
 	private boolean ifOnDisplay = false;//true表示横着显示 false表示竖着显示
 
 	public boolean isIfOnDisplay() {
@@ -653,6 +651,16 @@ public class ParentOrderVO implements Serializable {
 
 	public void setIsCartOrder(boolean isCartOrder) {
 		this.isCartOrder = isCartOrder;
+	}
+
+	public String getCommentTime()
+	{
+		return commentTime;
+	}
+
+	public void setCommentTime(String commentTime)
+	{
+		this.commentTime = commentTime;
 	}
 
 	@Override

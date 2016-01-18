@@ -3,9 +3,7 @@ package com.rongyi.easy.osm.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-
 import net.sf.json.JSONObject;
-
 public class OrderFormEntity implements Serializable {
     /**
      * 主键id
@@ -718,4 +716,11 @@ public class OrderFormEntity implements Serializable {
                 ", isPayVa=" + isPayVa +
                 '}';
     }
+
+    public int compareTo(OrderFormEntity o) {
+        if(o == null){
+            return 1;
+        }
+        return this.getOrderNo().compareTo(o.getOrderNo());
+     }
 }

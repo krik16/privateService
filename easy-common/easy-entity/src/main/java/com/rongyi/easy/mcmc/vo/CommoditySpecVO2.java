@@ -26,6 +26,7 @@ public class CommoditySpecVO2 implements  Serializable {
 	private int remain;//剩余量
 	private int lockedStock;//锁定库存
 	private String sku;
+
 	private String commodityId;
 	
 	public String getId() {
