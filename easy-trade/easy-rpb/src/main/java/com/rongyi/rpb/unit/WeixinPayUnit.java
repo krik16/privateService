@@ -59,7 +59,7 @@ public class WeixinPayUnit {
                 map.put("package", "Sign=WXPay");
                 map.put("prepayid", resultMap.get("prepay_id"));
                 map.put("noncestr", resultMap.get("nonce_str"));
-                map.put("timestamp", timestamp);
+                map.put("timeStamp", timestamp);
                 String sign = Signature.getSign(map,configure.getKey());
                 map.put("app_signature", sign);
             }
