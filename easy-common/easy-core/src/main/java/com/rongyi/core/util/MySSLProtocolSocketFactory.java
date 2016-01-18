@@ -229,12 +229,9 @@ public class MySSLProtocolSocketFactory implements ProtocolSocketFactory {
 			inputStream = null;
 			httpUrlConn.disconnect();
 			jsonObject = JSONObject.fromObject(buffer.toString());
-			
-			System.out.println("https httpsRequest :"+jsonObject);
-		} catch (ConnectException ce) {
-			System.err.println("请求微信创建接口失败");
-		} catch (Exception e) {
-			System.err.println("请求微信创建接口失败");
+ 			System.out.println("https httpsRequest :"+jsonObject);
+		}catch (Exception e) {
+			System.err.println("请求微信创建接口失败"+e.getMessage());
 
 		}
 		
