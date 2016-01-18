@@ -3,8 +3,10 @@ package com.rongyi.easy.osm.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import net.sf.json.JSONObject;
-public class OrderFormEntity implements Serializable {
+
+public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity>{
     /**
      * 主键id
      */
@@ -28,7 +30,7 @@ public class OrderFormEntity implements Serializable {
     /**
      * 折扣
      */
-    private BigDecimal disconntFee;
+    private BigDecimal disconntFee = BigDecimal.ZERO;;
 
     /**
      * 物流信息主键id
@@ -161,11 +163,30 @@ public class OrderFormEntity implements Serializable {
     private Integer devType;
 
     //0:未打款，1:对私(打款到导购虚拟账号)，2:对公(通过对账单结算)
-    private byte isPayVa;
-    /**
-     * 支付方式 1支付宝网页  3支付宝app  5微信
-     */
-    private Byte payChannel;
+    private Byte isPayVa;//0:未打款，1:对私(打款到导购虚拟账号)，2:对公(通过对账单结算)
+
+    private BigDecimal orderScoreDiscount;//购物车订单积分分摊优惠金额
+
+    private BigDecimal orderCouponDiscount;//购物车订单抵扣券分摊优惠金额
+
+    private Byte changePriceFlag;//用户改价通知 0未改价 1 改价 2 改价且恢复抵扣券
+
+    private Integer cartId;//购物车id 0表示不使用购物车
+
+    private Integer buyerDeleteFlag;//买家删除标志 0 未删除 1 删除
+
+    private Integer sellerDeleteFlag;//卖家删除标志 0 未删除 1 删除
+
+    private BigDecimal realAmount;//原价
+
+    private BigDecimal discountAmount;//原价-卖家优惠
+
+    private BigDecimal rebateAmount;//discount_amount-红包抵扣券
+
+    private BigDecimal scoreAmount;//rebate_amount - 积分
+
+    private List<OrderDetailFormEntity> detailOrderList;
+    private OrderFormExtraEntity orderExtra;
 
     public Byte getIsAlert() {
         return isAlert;
@@ -183,14 +204,6 @@ public class OrderFormEntity implements Serializable {
         this.totalAmountWithoutScoreDiscount = totalAmountWithoutScoreDiscount;
     }
 
-    public Byte getPayChannel() {
-        return payChannel;
-    }
-
-    public void setPayChannel(Byte payChannel) {
-        this.payChannel = payChannel;
-    }
-
     public Integer getGuideType() {
         return guideType;
     }
@@ -205,6 +218,14 @@ public class OrderFormEntity implements Serializable {
 
     public void setJsonDiscountInfo(JSONObject jsonDiscountInfo) {
         this.jsonDiscountInfo = jsonDiscountInfo;
+    }
+
+    public OrderFormExtraEntity getOrderExtra() {
+        return orderExtra;
+    }
+
+    public void setOrderExtra(OrderFormExtraEntity orderExtra) {
+        this.orderExtra = orderExtra;
     }
 
     /**
@@ -612,6 +633,26 @@ public class OrderFormEntity implements Serializable {
         return buyerComment;
     }
 
+    public Integer getBuyerDeleteFlag()
+    {
+        return buyerDeleteFlag;
+    }
+
+    public void setBuyerDeleteFlag(Integer buyerDeleteFlag)
+    {
+        this.buyerDeleteFlag = buyerDeleteFlag;
+    }
+
+    public Integer getSellerDeleteFlag()
+    {
+        return sellerDeleteFlag;
+    }
+
+    public void setSellerDeleteFlag(Integer sellerDeleteFlag)
+    {
+        this.sellerDeleteFlag = sellerDeleteFlag;
+    }
+
     /**
      * 买家备注
      *
@@ -669,12 +710,90 @@ public class OrderFormEntity implements Serializable {
         this.devType = devType;
     }
 
-    public byte getIsPayVa() {
+    public Byte getIsPayVa() {
         return isPayVa;
     }
 
-    public void setIsPayVa(byte isPayVa) {
+    public void setIsPayVa(Byte isPayVa) {
         this.isPayVa = isPayVa;
+    }
+
+    public BigDecimal getOrderScoreDiscount() {
+        return orderScoreDiscount;
+    }
+
+    public void setOrderScoreDiscount(BigDecimal orderScoreDiscount) {
+        this.orderScoreDiscount = orderScoreDiscount;
+    }
+
+    public BigDecimal getOrderCouponDiscount() {
+        return orderCouponDiscount;
+    }
+
+    public void setOrderCouponDiscount(BigDecimal orderCouponDiscount) {
+        this.orderCouponDiscount = orderCouponDiscount;
+    }
+
+    public Byte getChangePriceFlag() {
+        return changePriceFlag;
+    }
+
+    public void setChangePriceFlag(Byte changePriceFlag) {
+        this.changePriceFlag = changePriceFlag;
+    }
+
+    public Integer getCartId() {
+        return cartId;
+    }
+
+    public void setCartId(Integer cartId) {
+        this.cartId = cartId;
+    }
+
+    public List<OrderDetailFormEntity> getDetailOrderList() {
+        return detailOrderList;
+    }
+
+    public void setDetailOrderList(List<OrderDetailFormEntity> detailOrderList) {
+        this.detailOrderList = detailOrderList;
+    }
+
+    public BigDecimal getRealAmount() {
+        return realAmount;
+    }
+
+    public void setRealAmount(BigDecimal realAmount) {
+        this.realAmount = realAmount;
+    }
+
+    public BigDecimal getDiscountAmount()
+    {
+        return discountAmount;
+    }
+
+    public void setDiscountAmount(BigDecimal discountAmount)
+    {
+        this.discountAmount = discountAmount;
+    }
+
+    public BigDecimal getRebateAmount()
+    {
+        return rebateAmount;
+    }
+
+    public void setRebateAmount(BigDecimal rebateAmount)
+    {
+        this.rebateAmount = rebateAmount;
+    }
+
+    public BigDecimal getScoreAmount()
+    {
+        return scoreAmount;
+    }
+
+    public void setScoreAmount(BigDecimal scoreAmount)
+    {
+        this.scoreAmount = scoreAmount;
     }
 
     @Override
@@ -714,13 +833,24 @@ public class OrderFormEntity implements Serializable {
                 ", devType=" + devType +
                 ", couponType=" + couponType +
                 ", isPayVa=" + isPayVa +
+                ", orderScoreDiscount=" + orderScoreDiscount +
+                ", orderCouponDiscount=" + orderCouponDiscount +
+                ", changePriceFlag=" + changePriceFlag +
+                ", cartId=" + cartId +
+                ", buyerDeleteFlag=" + buyerDeleteFlag +
+                ", sellerDeleteFlag=" + sellerDeleteFlag +
+                ", realAmount=" + realAmount +
+                ", discountAmount=" + discountAmount +
+                ", rebateAmount=" + rebateAmount +
+                ", scoreAmount=" + scoreAmount +
                 '}';
     }
 
+    @Override
     public int compareTo(OrderFormEntity o) {
         if(o == null){
             return 1;
         }
         return this.getOrderNo().compareTo(o.getOrderNo());
-     }
+    }
 }
