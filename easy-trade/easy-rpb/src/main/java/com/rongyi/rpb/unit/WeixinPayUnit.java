@@ -54,12 +54,20 @@ public class WeixinPayUnit {
             String timestamp = WXUtil.getTimeStamp();
             Map<String, Object> resultMap = XMLParser.getMapFromXML(result);
             if (resultMap != null) {
-                map.put("appid", configure.getAppID());
-                map.put("partnerid", configure.getMchID());
-                map.put("package", "Sign=WXPay");
-                map.put("prepayid", resultMap.get("prepay_id"));
-                map.put("noncestr", resultMap.get("nonce_str"));
-                map.put("timeStamp", timestamp);
+                if (ConstantEnum.WEIXIN_PAY_TRADE_TYPE_APP.getValueStr().equals(configure.getTradeType())) {//APP支付签名
+                    map.put("timestamp", timestamp);
+                    map.put("appid", configure.getAppID());
+                    map.put("partnerid", configure.getMchID());
+                    map.put("package", "Sign=WXPay");
+                    map.put("prepayid", resultMap.get("prepay_id"));
+                    map.put("noncestr", resultMap.get("nonce_str"));
+                } else {//微信公众号支付签名timeStamp 生成签名时首字母需大写
+                    map.put("timeStamp", timestamp);
+                    map.put("appId", configure.getAppID());
+                    map.put("signType", "MD5");
+                    map.put("package", "prepay_id="+resultMap.get("prepay_id"));
+                    map.put("nonceStr", resultMap.get("nonce_str"));
+                }
                 String sign = Signature.getSign(map,configure.getKey());
                 map.put("app_signature", sign);
             }
@@ -71,6 +79,11 @@ public class WeixinPayUnit {
         }
         return map;
     }
+
+    /**
+     *
+     * @author 柯军
+     **/
 
     public RefundResData weixinRefund(String payNo, double refundFee, double totalFee, String newPayNo,Integer weixinMchId) {
         LOGGER.info("开始退款,weixinRefund payNo={},refundFee={},totalFee={},newPayNo={}", payNo, refundFee, totalFee, newPayNo);
