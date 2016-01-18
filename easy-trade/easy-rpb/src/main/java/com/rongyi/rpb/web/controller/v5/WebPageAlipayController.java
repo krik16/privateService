@@ -100,7 +100,7 @@ public class WebPageAlipayController extends BaseController {
 			String orderNums = paymentService.getOrderNumStrsByPayNo(out_trade_no, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
 			PaymentEntity paymentEntity = paymentService.selectByPayNoAndPayChannelAndTradeType(out_trade_no, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, null);
 			if (paymentEntity != null && paymentEntity.getStatus() != Constants.PAYMENT_STATUS.STAUS2) {
-				paymentService.updateListStatusBypayNo(out_trade_no, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);// 修改付款单状态
+				paymentService.updateListStatus(out_trade_no, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0);// 修改付款单状态
 				paymentLogInfoService.paySuccessToMessage(out_trade_no, null, orderNums, paymentEntity.getOrderType(), PaymentEventType.PAYMENT);
 			}
 			LOGGER.info("支付宝手机网页同步通知结束 ");

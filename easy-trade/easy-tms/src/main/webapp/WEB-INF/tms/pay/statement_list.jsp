@@ -63,6 +63,9 @@
 							<c:when test="${item.payChannel eq 3}">
 								现金
 							</c:when>
+							<c:when test="${item.payChannel eq 4}">
+								银行转账
+							</c:when>
 							<c:otherwise>
 								支付宝
 							</c:otherwise>

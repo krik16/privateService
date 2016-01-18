@@ -127,15 +127,15 @@ public class RpbServiceImpl implements IRpbService {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("errno", "0");
 		resultMap.put("errMsg", "支付成功");
-		if (totalAmount == 0) {
-			List<PaymentEntity> list = paymentService.selectByOrderNum(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0,null);
-			// TODO 兼容老版本APP0元支付不走签名，在下个强制更新版本后此代码需删除
-			if (list.isEmpty()) {
-				insertZeroOrder(orderNo, totalAmount);
-				LOGGER.info("老版本0元商品购买,增加0元购买记录,orderNo-->" + orderNo);
-			}
-			return resultMap;
-		}
+//		if (totalAmount == 0) {
+//			List<PaymentEntity> list = paymentService.selectByOrderNum(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0,null);
+//			// TODO 兼容老版本APP0元支付不走签名，在下个强制更新版本后此代码需删除
+//			if (list.isEmpty()) {
+//				insertZeroOrder(orderNo, totalAmount);
+//				LOGGER.info("老版本0元商品购买,增加0元购买记录,orderNo-->" + orderNo);
+//			}
+//			return resultMap;
+//		}
 		PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, null, null);
 		if (paymentEntity == null) {
 			resultMap.put("errno", "100");
@@ -147,7 +147,7 @@ public class RpbServiceImpl implements IRpbService {
 		String payChannel = PaymentEventType.WEIXIN_PAY;
 		String payAccount = null;
 		PaymentLogInfo paymentLogInfo = paymentLogInfoService.selectByOutTradeNo(paymentEntity.getPayNo(),null);
-		if (paymentEntity.getPayChannel() == Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0) {
+		if (paymentEntity.getPayChannel() != null && Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0 == paymentEntity.getPayChannel()) {
 			payChannel = PaymentEventType.APP;
 			if(paymentLogInfo != null && paymentLogInfo.getEventType() != null && paymentLogInfo.getEventType() == Constants.EVENT_TYPE.EVENT_TYPE1){
 				payChannel = PaymentEventType.PAYMENT;
