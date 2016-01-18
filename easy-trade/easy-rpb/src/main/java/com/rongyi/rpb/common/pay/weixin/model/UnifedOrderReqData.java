@@ -8,6 +8,7 @@ import java.util.Random;
 import com.rongyi.rpb.common.pay.weixin.util.Configure;
 import com.rongyi.rpb.common.pay.weixin.util.MD5;
 import com.rongyi.rpb.common.pay.weixin.util.Signature;
+import com.rongyi.rpb.constants.ConstantEnum;
 
 
 /**	
@@ -76,11 +77,13 @@ public class UnifedOrderReqData {
         //交易类型
         setTrade_type(configure.getTradeType());
 
-		//交易起始时间
-		setTime_start(timeStart);
+		if(ConstantEnum.WEIXIN_PAY_TRADE_TYPE_APP.getCodeStr().equals(configure.getTradeType())) {
+			//交易起始时间
+			setTime_start(timeStart);
 
-		//交易失效时间
-		setTime_expire(timeExpire);
+			//交易失效时间
+			setTime_expire(timeExpire);
+		}
 
 		setOpenid(openid);
 

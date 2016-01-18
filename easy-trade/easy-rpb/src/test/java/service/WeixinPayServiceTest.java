@@ -204,7 +204,7 @@ public class WeixinPayServiceTest extends BaseTest {
 
 	}
 
-//	@Test
+	@Test
 	public void testGetSign(){
 //		payNo='0011518921216145847', totalFee=5000, body='容易网商品', orderType=1, timeStart
 //				='2016-01-15 16:26:33', timeExpire='2016-01-15 16:41:33', appId='wxb0af59268c136d7d', openId='ofnj5s65nQk275rH2kQR4-CKHb1M'
