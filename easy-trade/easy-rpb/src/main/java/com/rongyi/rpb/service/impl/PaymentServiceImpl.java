@@ -274,7 +274,8 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     @Override
     public PaymentEntityVO insertOrderMessage(MessageEvent event) {
         PaymentEntityVO paymentEntityVO = bodyToPaymentEntity(event.getBody(), event.getType());
-        String payNo = null;
+        String oldPayNo = paymentEntityVO.getPayNo();// 原订单号
+        String payNo;
         if (MqReceiverServiceImpl.isAppPay(event.getType())) {// 前端支付验证订单号是否已存在
             PaymentEntity paymentEntity = validateOrderNumExist(paymentEntityVO.getOrderNum(), paymentEntityVO.getPayChannel(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
             if (paymentEntity != null) {
@@ -295,7 +296,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
         }
         List<PaymentEntity> paymentEntityList = getPaymemtsByMoreOrderNum(paymentEntityVO);// 多个订单号生成多条记录对应一条付款单号
-        String oldPayNo = paymentEntityVO.getPayNo();// 原订单号
+
         payNo = paymentEntityList.get(0).getPayNo();// 新付款单号
         paymentEntityVO.setPayNo(payNo);
         if (StringUtils.isEmpty(paymentEntityVO.getTitle())) {
