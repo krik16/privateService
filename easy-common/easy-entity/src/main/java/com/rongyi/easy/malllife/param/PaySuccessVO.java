@@ -10,6 +10,9 @@ public class PaySuccessVO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private String orderId;//订单id
+	private String sonOrderId;//子订单id
+	private String unitPrice;//单价
+	private String num;//下单数量
 	private String commodityName;//商品名称
 	private String commodityId;//商品id
 	private String totalPrice;//总价
@@ -24,6 +27,24 @@ public class PaySuccessVO implements Serializable{
 	}
 	public void setOrderId(String orderId) {
 		this.orderId = orderId;
+	}
+	public String getSonOrderId() {
+		return sonOrderId;
+	}
+	public void setSonOrderId(String sonOrderId) {
+		this.sonOrderId = sonOrderId;
+	}
+	public String getUnitPrice() {
+		return unitPrice;
+	}
+	public void setUnitPrice(String unitPrice) {
+		this.unitPrice = unitPrice;
+	}
+	public String getNum() {
+		return num;
+	}
+	public void setNum(String num) {
+		this.num = num;
 	}
 	public String getCommodityName() {
 		return commodityName;
@@ -81,10 +102,11 @@ public class PaySuccessVO implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "PaySuccessVO [orderId=" + orderId + ", commodityName="
-				+ commodityName + ", commodityId=" + commodityId
-				+ ", totalPrice=" + totalPrice + ", shopName=" + shopName
-				+ ", consignee=" + consignee + ", phone=" + phone
+		return "PaySuccessVO [orderId=" + orderId + ", sonOrderId="
+				+ sonOrderId + ", unitPrice=" + unitPrice + ", num=" + num
+				+ ", commodityName=" + commodityName + ", commodityId="
+				+ commodityId + ", totalPrice=" + totalPrice + ", shopName="
+				+ shopName + ", consignee=" + consignee + ", phone=" + phone
 				+ ", address=" + address + ", orderNum=" + orderNum
 				+ ", expressBillId=" + expressBillId + "]";
 	}
