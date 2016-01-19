@@ -19,10 +19,8 @@ import com.rongyi.rss.bsoms.IUserInfoService;
 import com.rongyi.rss.roa.ROAMallService;
 import com.rongyi.rss.roa.ROAShopService;
 import com.rongyi.rss.shop.IShopService;
-import com.rongyi.settle.constants.CodeEnum;
 import com.rongyi.settle.constants.ConstantEnum;
 import com.rongyi.settle.service.ConfigShopService;
-import com.rongyi.settle.util.CollectionUtil;
 import com.rongyi.settle.web.controller.vo.UserInfoVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -176,10 +174,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
         //关联店铺
         List<ConfigShop> oldShopConfigs = configShopService.getConfigShopsByConfigId(statementConfig.getId());
         oldShopConfigs.retainAll(shopConfigs);
-        if (oldShopConfigs.size() != shopConfigs.size()) {
-            return false;
-        }
-        return true;
+        return oldShopConfigs.size() == shopConfigs.size();
     }
 
 	@Override
@@ -246,8 +241,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
     public StatementConfigVO selectConfigInfoById(Integer id) {
         Map<String, Object> map = new HashMap<>();
         map.put("id", id);
-        StatementConfigVO vo = this.getBaseDao().selectOneBySql(NAMESPACE + ".selectConfigInfoById", map);
-        return vo;
+        return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectConfigInfoById", map);
     }
 
     @Override
@@ -273,15 +267,12 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
     }
 
     @Override
-    public Map<String, Object> validateIsExist(StatementConfig statementConfig, List<Byte> statuses, Map linkId, Map linkAccount) throws Exception {
+    public Map<String, Object> validateIsExist(StatementConfig statementConfig, List<Byte> statuses, Map linkShopId) throws Exception {
         boolean result = false;
-        int isOneself;
         Byte bussinessType = statementConfig.getBussinessType();
         String bussinessId = statementConfig.getBussinessId();
-        Byte linkShopOp = statementConfig.getLinkShopOp() == null ? 0 : statementConfig.getLinkShopOp();
+//        Byte linkShopOp = statementConfig.getLinkShopOp() == null ? 0 : statementConfig.getLinkShopOp();
         Byte lintType = statementConfig.getLinkType();
-
-        List<ConfigShop> shopConfigs = new ArrayList<>();
         Map<String, Object> ReMap = new HashMap<>();
         Map<String, Object> map = new HashMap<>();
         map.put("cooperateType", statementConfig.getCooperateType());
@@ -290,58 +281,46 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
         map.put("statuses", statuses);
         map.put("effectStartTime", statementConfig.getEffectStartTime());
         map.put("effectEndTime", statementConfig.getEffectEndTime());
+
+        List<ConfigShop> shopConfigs = new ArrayList<>();
         if (lintType == null) {
             result = true;
         } else {
             if (lintType == 0)//全部: 1、自身（商场/集团）  2、全部店铺
             {
                 if (bussinessType == 1 || bussinessType == 4) {
-                    if (checkConfigExist(map)) {
+                    if (checkConfigExist(map, null)) {
                         logger.info("全部: 1、验自身 ---配置已有");
                         ReMap.put("result", true);
                         return ReMap;
                     }
-                    isOneself = 1;
-                    convertToShopConfig(isOneself, bussinessId, bussinessType, linkShopOp, null, null, shopConfigs);
                 }
                 //2、全部店铺
                 List<ShopVO> shopVOs = getShopIdByParam(bussinessType, bussinessId);
                 if (CollectionUtils.isNotEmpty(shopVOs)) {
                     for (ShopVO shopVO : shopVOs) {
                         map.put("shopId", shopVO.getId());
-                        if (checkConfigExist(map)) {
+                        if (checkConfigExist(map, shopConfigs)) {
                             ReMap.put("result", true);
                             return ReMap;
                         }
-                        isOneself = 0;
-                        convertToShopConfig(isOneself, shopVO.getId(), bussinessType, linkShopOp, null, null, shopConfigs);
                     }
                 }
             } else if (lintType == 1)//  自身(商场/集团)
             {
                 if (bussinessType == 1 || bussinessType == 4) {
-                    if (checkConfigExist(map)) {
+                    if (checkConfigExist(map, null)) {
                         ReMap.put("result", true);
                         return ReMap;
                     }
-                    isOneself = 1;
-                    ConfigShop configShop = convertToShopConfig(isOneself, bussinessId, bussinessType, linkShopOp, null, null, shopConfigs);
-                    if (configShop == null) {
-                        ReMap.put("result", true);
-                        ReMap.put("errorMsg", CodeEnum.FIAL_CONFIG_NO_ACCOUNT.getValueStr());
-                        ReMap.put("errorNo", CodeEnum.FIAL_CONFIG_NO_ACCOUNT.getCodeInt());
-                        return ReMap;
-                    }
-                    if (linkId != null) {
-                        Set<String> shopIds = linkId.keySet();
-                        for (String shopId : shopIds) {
+                    if (linkShopId != null) {
+                        Set shopIds = linkShopId.keySet();
+                        for (Object shopId : shopIds) {
                             map.put("shopId", shopId);
-                            if (checkConfigExist(map)) {
+                            if (checkConfigExist(map, shopConfigs)) {
                                 ReMap.put("result", true);
                                 return ReMap;
                             }
-                            isOneself = 0;
-                            convertToShopConfig(isOneself, shopId, bussinessType, linkShopOp, linkId.get(shopId).toString(), linkAccount.get(shopId).toString(), shopConfigs);
                         }
                     }
                 } else {
@@ -351,16 +330,14 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                 }
             } else if (lintType == 2)//部分
             {
-                if (linkId != null) {
-                    Set<String> shopIds = linkId.keySet();
-                    for (String shopId : shopIds) {
+                if (linkShopId != null) {
+                    Set shopIds = linkShopId.keySet();
+                    for (Object shopId : shopIds) {
                         map.put("shopId", shopId);
-                        if (checkConfigExist(map)) {
+                        if (checkConfigExist(map, shopConfigs)) {
                             ReMap.put("result", true);
                             return ReMap;
                         }
-                        isOneself = 0;
-                        convertToShopConfig(isOneself, shopId, bussinessType, linkShopOp, linkId.get(shopId).toString(), linkAccount.get(shopId).toString(), shopConfigs);
                     }
                 } else {
                     logger.info(" lintType==2 参数错误  //自身");
@@ -376,79 +353,79 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
         return ReMap;
     }
 
-    private ConfigShop convertToShopConfig(int isOneself, String id, Byte businessType, Byte linkShopOp, String userLists, String userAccounts, List<ConfigShop> shopConfigs) {
-        ConfigShop shopConfig = null;
-        String userIds = "";
-        String accounts = "";
-        if (isOneself == 1) {
-            //自身
-            List<UserInfoVo> userInfoVos = getAccountInfoByParam(isOneself, Integer.valueOf(businessType), null, id, null);
-            if (CollectionUtils.isNotEmpty(userInfoVos)) {
-                for (UserInfoVo userInfoVo : userInfoVos) {
-                    if (StringUtils.isBlank(userIds)) {
-                        userIds += userInfoVo.getId();
-                        accounts += userInfoVo.getUserAccount();
-                    } else {
-                        userIds += "," + userInfoVo.getId();
-                        accounts += "," + userInfoVo.getUserAccount();
-                    }
-                }
-                shopConfig = new ConfigShop();
-                shopConfig.setUserList(userIds);
-                shopConfig.setRealUserList(userIds);
-                shopConfig.setAccountList(accounts);
-                shopConfig.setRealAccountList(accounts);
-            } else {
-                logger.info("================== 查自身 没有账户");
-            }
-        } else if (isOneself == 0) {
-            List<UserInfoVo> userInfoVos = getAccountInfoByParam(isOneself, null, 1, id, null);
-            List<String> allUserId = new ArrayList<>();
-            List<String> allUserAccount = new ArrayList<>();
-            if (CollectionUtils.isNotEmpty(userInfoVos)) {
-                for (UserInfoVo user : userInfoVos) {
-                    allUserId.add(user.getId().toString());
-                    allUserAccount.add(user.getUserAccount());
-                }
-            }
-            if (linkShopOp.intValue() == 0) {
-                shopConfig = new ConfigShop();
-                shopConfig.setShopId(id);
-                if (userLists == null && userAccounts == null) {//关联全部
-                    if (CollectionUtils.isNotEmpty(allUserId)) {
-                        logger.info("===================>>>>>>>>>>>>>>>>> realUser: " + allUserId + " realAccount: " + allUserAccount.toString());
-                    }
-                    shopConfig.setUserList(CollectionUtil.listToString(allUserId, ","));
-                    shopConfig.setAccountList(CollectionUtil.listToString(allUserAccount, ","));
-                    shopConfig.setRealUserList(CollectionUtil.listToString(allUserId, ","));
-                    shopConfig.setRealAccountList(CollectionUtil.listToString(allUserAccount, ","));
-                } else {
-                    shopConfig.setUserList(userLists);
-                    shopConfig.setRealUserList(userLists);
-                    shopConfig.setAccountList(userAccounts);
-                    shopConfig.setRealAccountList(userAccounts);
-                }
-            } else if (linkShopOp.intValue() == 1) {
-                shopConfig = new ConfigShop();
-                shopConfig.setUserList(userLists);
-                shopConfig.setShopId(id);
-                if (StringUtils.isNotBlank(userLists)) {
-                    allUserId.removeAll(Arrays.asList(userLists.split(",")));
-                    allUserAccount.removeAll(Arrays.asList(userAccounts.split(",")));
-                }
-                if (CollectionUtils.isNotEmpty(allUserId)) {
-                    shopConfig.setRealUserList(CollectionUtil.listToString(allUserId, ","));
-                    shopConfig.setRealAccountList(CollectionUtil.listToString(allUserAccount, ","));
-                }
-            } else {
-                logger.info(" linkShopOp is error:" + linkShopOp);
-            }
-        }
-        if (shopConfig != null) {
-            shopConfigs.add(shopConfig);
-        }
-        return shopConfig;
-    }
+//    private ConfigShop convertToShopConfig(int isOneself, String id, Byte businessType, Byte linkShopOp, String userLists, String userAccounts, List<ConfigShop> shopConfigs) {
+//        ConfigShop shopConfig = null;
+//        String userIds = "";
+//        String accounts = "";
+//        if (isOneself == 1) {
+//            //自身
+//            List<UserInfoVo> userInfoVos = getAccountInfoByParam(isOneself, Integer.valueOf(businessType), null, id, null);
+//            if (CollectionUtils.isNotEmpty(userInfoVos)) {
+//                for (UserInfoVo userInfoVo : userInfoVos) {
+//                    if (StringUtils.isBlank(userIds)) {
+//                        userIds += userInfoVo.getId();
+//                        accounts += userInfoVo.getUserAccount();
+//                    } else {
+//                        userIds += "," + userInfoVo.getId();
+//                        accounts += "," + userInfoVo.getUserAccount();
+//                    }
+//                }
+//                shopConfig = new ConfigShop();
+//                shopConfig.setUserList(userIds);
+//                shopConfig.setRealUserList(userIds);
+//                shopConfig.setAccountList(accounts);
+//                shopConfig.setRealAccountList(accounts);
+//            } else {
+//                logger.info("================== 查自身 没有账户");
+//            }
+//        } else if (isOneself == 0) {
+//            List<UserInfoVo> userInfoVos = getAccountInfoByParam(isOneself, null, 1, id, null);
+//            List<String> allUserId = new ArrayList<>();
+//            List<String> allUserAccount = new ArrayList<>();
+//            if (CollectionUtils.isNotEmpty(userInfoVos)) {
+//                for (UserInfoVo user : userInfoVos) {
+//                    allUserId.add(user.getId().toString());
+//                    allUserAccount.add(user.getUserAccount());
+//                }
+//            }
+//            if (linkShopOp.intValue() == 0) {
+//                shopConfig = new ConfigShop();
+//                shopConfig.setShopId(id);
+//                if (userLists == null && userAccounts == null) {//关联全部
+//                    if (CollectionUtils.isNotEmpty(allUserId)) {
+//                        logger.info("===================>>>>>>>>>>>>>>>>> realUser: " + allUserId + " realAccount: " + allUserAccount.toString());
+//                    }
+//                    shopConfig.setUserList(CollectionUtil.listToString(allUserId, ","));
+//                    shopConfig.setAccountList(CollectionUtil.listToString(allUserAccount, ","));
+//                    shopConfig.setRealUserList(CollectionUtil.listToString(allUserId, ","));
+//                    shopConfig.setRealAccountList(CollectionUtil.listToString(allUserAccount, ","));
+//                } else {
+//                    shopConfig.setUserList(userLists);
+//                    shopConfig.setRealUserList(userLists);
+//                    shopConfig.setAccountList(userAccounts);
+//                    shopConfig.setRealAccountList(userAccounts);
+//                }
+//            } else if (linkShopOp.intValue() == 1) {
+//                shopConfig = new ConfigShop();
+//                shopConfig.setUserList(userLists);
+//                shopConfig.setShopId(id);
+//                if (StringUtils.isNotBlank(userLists)) {
+//                    allUserId.removeAll(Arrays.asList(userLists.split(",")));
+//                    allUserAccount.removeAll(Arrays.asList(userAccounts.split(",")));
+//                }
+//                if (CollectionUtils.isNotEmpty(allUserId)) {
+//                    shopConfig.setRealUserList(CollectionUtil.listToString(allUserId, ","));
+//                    shopConfig.setRealAccountList(CollectionUtil.listToString(allUserAccount, ","));
+//                }
+//            } else {
+//                logger.info(" linkShopOp is error:" + linkShopOp);
+//            }
+//        }
+//        if (shopConfig != null) {
+//            shopConfigs.add(shopConfig);
+//        }
+//        return shopConfig;
+//    }
 
     @Override
     public boolean validateNeedPay(String shopId, String userId, Integer guideType) {
@@ -458,7 +435,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
         map.put("nowTime", new Date());
         map.put("userId", userId);
         map.put("linkRole", guideType);//
-        return !checkConfigExist(map);
+        return !checkConfigExist(map, null);
     }
 
     @Override
@@ -470,10 +447,16 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
      * 判断对账配置是否存在
      *
      * @param paramsMap
+     * @param configShops  配置中间表 可以传null
      * @return
      */
-    private boolean checkConfigExist(Map<String, Object> paramsMap) {
+    private boolean checkConfigExist(Map<String, Object> paramsMap, List<ConfigShop> configShops) {
         boolean result = false;
+        if (paramsMap.containsKey("shopId") && configShops!=null){
+            ConfigShop configShop = new ConfigShop();
+            configShop.setShopId(paramsMap.get("shopId").toString());
+            configShops.add(configShop);
+        }
         int count = this.getBaseDao().selectOneBySql(NAMESPACE + ".validateIsExist", paramsMap);
         if (count > 0) {
             result = true;

@@ -188,15 +188,13 @@ public class StatementConfigController extends BaseController {
             MapUtils.toObject(bussinessInfo, map);
             bussinessInfo.setCreateAt(DateUtil.getCurrDateTime());
             Map linkIdMap = null;
-            Map linkAccountMap = null;
             if (map.containsKey("linkId")) {
                 linkIdMap = JsonUtil.getMapFromJson(map.get("linkId").toString());
-                linkAccountMap = JsonUtil.getMapFromJson(map.get("linkAccount").toString());
             }
             List<Byte> statuses = new ArrayList<>();
             statuses.add(ConstantEnum.CONFIG_STATUS_1.getCodeByte());
             statuses.add(ConstantEnum.CONFIG_STATUS_0.getCodeByte());
-            Map<String, Object> checkMap = statementConfigService.validateIsExist(statementConfig, statuses, linkIdMap, linkAccountMap);
+            Map<String, Object> checkMap = statementConfigService.validateIsExist(statementConfig, statuses, linkIdMap);
 //			LOGGER.info("=========================== checkMap"+checkMap);
             boolean checkResult = (boolean) checkMap.get("result");
             if (checkResult) {
