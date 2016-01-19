@@ -10,6 +10,7 @@ package com.rongyi.rss.rpb;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.core.bean.ResponseData;
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
@@ -153,21 +154,38 @@ public interface IRpbService {
 	void updatePaymentStatus(String[] ids,Integer status,Integer tradeType);
 
 	/**
-	 * @Description: 取消/同意 异常支付
-	 * @param paymentId
-	 * @param refundRejected
-	 * @return
-	 * @Author:  柯军
-	 * @datetime:2015年8月28日上午10:38:48
+	 * Description: 取消/同意 异常支付
+	 * @param paymentId Integer
+	 * @param refundRejected Integer
+	 * Author:  柯军
+	 * datetime:2015年8月28日上午10:38:48
 	 **/
+
 	Map<String,Object> exceCancelPay(Integer paymentId,Integer refundRejected);
 
 	/**
-	 * @Description: 根据公众号和商场ID查询微信公众支付账号信息
-	 * @param:
-	 * @Author:  柯军
+	 * Description: 根据公众号和商场ID查询微信公众支付账号信息
+	 * @param publicCode String
+	 * @param mallId String
+	 * Author:  柯军
 	 **/
 
 	WeixinMch selectByParam(String publicCode,String mallId);
+
+	/**
+	 *  Description:插入商家公众号相关信息
+	 *  @param weixinMch WeixinMch
+	 *  Author: kejun
+	 **/
+	ResponseData insertWeiXinMch(WeixinMch weixinMch);
+
+	/**
+	 *  Description:更新商家公众号相关信息
+	 *  @param weixinMch WeixinMch
+	 *  Author: kejun
+	 **/
+	ResponseData updateWeixinMch(WeixinMch weixinMch);
+
+
 
 }
