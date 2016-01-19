@@ -181,6 +181,10 @@ public class MySSLProtocolSocketFactory implements ProtocolSocketFactory {
 			String requestMethod, String outputStr) {
 		JSONObject jsonObject = null;
 		StringBuffer buffer = new StringBuffer();
+		HttpsURLConnection httpUrlConn  = null;
+		InputStream inputStream = null;
+		InputStreamReader inputStreamReader = null;
+		BufferedReader bufferedReader = null;
 		try {
 			// 创建SSLContext对象，并使用我们指定的信任管理器初始化
 			TrustManager[] tm = { new MyX509TrustManager() };
@@ -190,7 +194,7 @@ public class MySSLProtocolSocketFactory implements ProtocolSocketFactory {
 			SSLSocketFactory ssf = sslContext.getSocketFactory();
 
 			URL url = new URL(requestUrl);
-			HttpsURLConnection httpUrlConn = (HttpsURLConnection) url
+			 httpUrlConn = (HttpsURLConnection) url
 					.openConnection();
 			httpUrlConn.setSSLSocketFactory(ssf);
 
@@ -212,27 +216,36 @@ public class MySSLProtocolSocketFactory implements ProtocolSocketFactory {
 			}
 
 			// 将返回的输入流转换成字符串
-			InputStream inputStream = httpUrlConn.getInputStream();
-			InputStreamReader inputStreamReader = new InputStreamReader(
+			 inputStream = httpUrlConn.getInputStream();
+			 inputStreamReader = new InputStreamReader(
 					inputStream, "utf-8");
-			BufferedReader bufferedReader = new BufferedReader(
+			 bufferedReader = new BufferedReader(
 					inputStreamReader);
 
 			String str = null;
 			while ((str = bufferedReader.readLine()) != null) {
 				buffer.append(str);
 			}
-			bufferedReader.close();
-			inputStreamReader.close();
-			// 释放资源
-			inputStream.close();
-			inputStream = null;
-			httpUrlConn.disconnect();
+ 			System.out.println("https httpsRequest :"+buffer);
 			jsonObject = JSONObject.fromObject(buffer.toString());
- 			System.out.println("https httpsRequest :"+jsonObject);
+ 		
 		}catch (Exception e) {
+			e.printStackTrace();
 			System.err.println("请求微信创建接口失败"+e.getMessage());
 
+		}finally{
+			try {
+				bufferedReader.close();
+				inputStreamReader.close();
+				// 释放资源
+				inputStream.close();
+				inputStream = null;
+				httpUrlConn.disconnect();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
 		}
 		
 		return jsonObject;
