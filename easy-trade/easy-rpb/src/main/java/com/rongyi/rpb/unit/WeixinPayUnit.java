@@ -51,6 +51,7 @@ public class WeixinPayUnit {
             UnifedOrderReqData unifedOrderReqData = new UnifedOrderReqData(body, payNo, totalFee, ConstantUtil.PayWeiXin_V3.WEIXIN_NOTIFY_URL, ConstantUtil.PayWeiXin_V3.TRADE_TYPE, timeStart, timeExpire);
             UnifiedorderService unifiedorderService = new UnifiedorderService();
             String result = unifiedorderService.request(unifedOrderReqData);
+            LOGGER.info("签名结果 result={}",result);
             String timestamp = WXUtil.getTimeStamp();
             Map<String, Object> resultMap = XMLParser.getMapFromXML(result);
             if (resultMap != null) {
