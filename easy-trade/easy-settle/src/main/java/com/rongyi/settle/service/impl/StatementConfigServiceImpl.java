@@ -537,6 +537,15 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
         return shopVOs;
     }
 
+    /**
+     * 查询账户
+     * @param isOneself: 1：自身账号    0：非自身账号
+     * @param type   商户类型
+     * @param guideType   导购类型
+     * @param id   商户id
+     * @param userAccount   账号（查询条件用）
+     * @return
+     */
     @Override
     public List<UserInfoVo> getAccountInfoByParam(Integer isOneself, Integer type, Integer guideType, String id, String userAccount) {
         Map<String, Object> paramsMap = new HashMap<>();
