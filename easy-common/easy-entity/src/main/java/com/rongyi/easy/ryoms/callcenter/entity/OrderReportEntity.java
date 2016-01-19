@@ -185,4 +185,19 @@ public class OrderReportEntity implements Serializable {
 	public void setDayTime(int dayTime) {
 		this.dayTime = dayTime;
 	}
+	/** 
+	* @Title: toString 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param @return    设定文件 
+	* @author shaozhou
+	* @date 2016年1月18日 上午11:15:37
+	* @throws 
+	*/
+	@Override
+	public String toString() {
+		return "OrderReportEntity [id=" + id + ", year=" + year + ", month=" + month + ", day=" + day + ", user_id="
+				+ user_id + ", order_add_cnt=" + order_add_cnt + ", order_done_cnt=" + order_done_cnt + ", create_at="
+				+ create_at + ", update_at=" + update_at + ", remark=" + remark + ", user_count=" + user_count
+				+ ", week=" + week + ", dayTime=" + dayTime + "]";
+	}
 }
