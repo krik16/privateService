@@ -8,6 +8,7 @@
 
 package com.rongyi.rpb.service.impl;
 
+import com.rongyi.core.bean.ResponseData;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.constant.PayEnum;
 import com.rongyi.core.constant.PaymentEventType;
@@ -347,7 +348,7 @@ public class RpbServiceImpl implements IRpbService {
 	@Override
 	public void updatePaymentStatus(String[] ids, Integer status, Integer tradeType) {
 		if(ids != null  && Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE7 == tradeType){
-			Map<String,Object> map = new HashMap<String,Object>();
+			Map<String,Object> map = new HashMap<>();
 			map.put("status", status);
 			paymentService.updateByIds(ids, map);
 		}
@@ -355,7 +356,7 @@ public class RpbServiceImpl implements IRpbService {
 
 	@Override
 	public Map<String, Object> exceCancelPay(Integer paymentId, Integer refundRejected) {
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<>();
 		map.put("success", true);
 		map.put("message", "取消异常付款操作成功");
 		try {
@@ -372,5 +373,33 @@ public class RpbServiceImpl implements IRpbService {
 	public WeixinMch selectByParam(String publicCode, String mallId) {
 		return weixinMchService.selectByPublicCodeAndUserId(publicCode,mallId);
 	}
+
+	@Override
+	public ResponseData insertWeiXinMch(WeixinMch weixinMch) {
+		ResponseData responseData;
+		try{
+			weixinMchService.insert(weixinMch);
+			responseData = ResponseData.success();
+		}catch (Exception e){
+			e.printStackTrace();
+			responseData = ResponseData.failure();
+		}
+		return responseData;
+	}
+
+	@Override
+	public ResponseData updateWeixinMch(WeixinMch weixinMch) {
+		ResponseData responseData;
+		try{
+			weixinMchService.update(weixinMch);
+			responseData = ResponseData.success();
+		}catch (Exception e){
+			e.printStackTrace();
+			responseData = ResponseData.failure();
+		}
+		return responseData;
+	}
+
+
 }
 
