@@ -45,4 +45,11 @@ public class ConfigShopServiceImpl implements ConfigShopService{
     public void update(ConfigShop configShop) {
          mapper.updateByPrimaryKeySelective(configShop);
     }
+
+    @Override
+    public boolean deleteConfigShopByConfigId(Integer configId) {
+        if (configId==null)
+            return false;
+        return mapper.deleteConfigShopByConfigId(configId)>0;
+    }
 }

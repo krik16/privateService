@@ -110,25 +110,21 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
             insert(statementConfig);
             bussinessInfo.setConfigId(statementConfig.getId());
             bussinessInfoService.insert(bussinessInfo);
-            for (ConfigShop configShop : shopConfigs) {
-                configShop.setConfigId(statementConfig.getId());
-                configShopService.insert(configShop);
-            }
             desc = ConstantEnum.OP_DESC_0.getValueStr();
         } else {//修改
             if (validateUpdate(statementConfig, bussinessInfo, shopConfigs)) {
                 statementConfig.setStatus(ConstantEnum.STATUS_0.getCodeByte());
-                desc = ConstantEnum.OP_DESC_1.getValueStr();
-            } else {
                 desc = ConstantEnum.OP_DESC_2.getValueStr();
+            } else {
+                desc = ConstantEnum.OP_DESC_1.getValueStr();
             }
             update(statementConfig);
             bussinessInfoService.update(bussinessInfo);
-            for (ConfigShop configShop : shopConfigs) {
-                configShop.setConfigId(statementConfig.getId());
-                configShopService.update(configShop);
-            }
-
+            configShopService.deleteConfigShopByConfigId(statementConfig.getId());
+        }
+        for (ConfigShop configShop : shopConfigs) {
+            configShop.setConfigId(statementConfig.getId());
+            configShopService.insert(configShop);
         }
         saveOperationLog(statementConfig.getId(), statementConfig.getStatus().intValue(), desc, statementConfig.getCreateBy());
     }
@@ -144,17 +140,25 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
     private boolean validateUpdate(StatementConfig statementConfig, BussinessInfo bussinessInfo, List<ConfigShop> shopConfigs) {
         StatementConfigVO oldStatementConfigVO = selectConfigInfoById(statementConfig.getId());
         BussinessInfo oldBussinessInfo = bussinessInfoService.selectByConfigId(statementConfig.getId());
+        if (oldStatementConfigVO==null || oldBussinessInfo==null)
+            return  false;
         if (!oldStatementConfigVO.getVerifyType().equals(statementConfig.getVerifyType())) {//对账单审核方式
             return false;
-        } else if (!oldStatementConfigVO.getDatumType().equals(statementConfig.getDatumType())) {//付款基准日期
+        } else if (!oldStatementConfigVO.getDatumType().equals(statementConfig.getDatumType())) {//付款基准类型
             return false;
-        } else if (!oldStatementConfigVO.getPayMode().equals(statementConfig.getPayMode())) {//付款方式
+        } else if (!oldStatementConfigVO.getPayMode().equals(statementConfig.getPayMode())) {//付款模式
             return false;
-        } else if (!oldStatementConfigVO.getRegularDay().equals(statementConfig.getRegularDay())) {//固定日期
+        } else if (StringUtils.isNotBlank(oldStatementConfigVO.getRegularDay()) && !oldStatementConfigVO.getRegularDay().equals(statementConfig.getRegularDay())) {//固定日期
             return false;
-        } else if (!oldStatementConfigVO.getRollDay().equals(statementConfig.getRollDay())) {//滚动日期
+        } else if (StringUtils.isNotBlank(oldStatementConfigVO.getRollDay()) && !oldStatementConfigVO.getRollDay().equals(statementConfig.getRollDay())) {//滚动日期
             return false;
-        } else if (!oldStatementConfigVO.getPayChannel().equals(statementConfig.getPayChannel())) {//付款结算方式
+        } else if (oldStatementConfigVO.getCountCycle()!=null && !oldStatementConfigVO.getCountCycle().equals(statementConfig.getCountCycle())) {//计算周期类型
+            return false;
+        }else if (oldStatementConfigVO.getCycleDay()!=null && !oldStatementConfigVO.getCycleDay().equals(statementConfig.getCycleDay())) {//固定计算周期
+            return false;
+        }else if (StringUtils.isNotBlank(oldStatementConfigVO.getCycleRegularDay()) && !oldStatementConfigVO.getCycleRegularDay().equals(statementConfig.getCycleRegularDay())) {//滚动计算周期
+            return false;
+            } else if (!oldStatementConfigVO.getPayChannel().equals(statementConfig.getPayChannel())) {//付款结算方式
             return false;
         } else if (!oldStatementConfigVO.getEffectStartTime().equals(statementConfig.getEffectStartTime()) || !oldStatementConfigVO.getEffectEndTime().equals(statementConfig.getEffectEndTime())) {//生效日期
             return false;
@@ -173,8 +177,9 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
         }
         //关联店铺
         List<ConfigShop> oldShopConfigs = configShopService.getConfigShopsByConfigId(statementConfig.getId());
-        oldShopConfigs.retainAll(shopConfigs);
-        return oldShopConfigs.size() == shopConfigs.size();
+        if (oldShopConfigs==null)
+            return false;
+        return oldShopConfigs.size()==shopConfigs.size() && oldShopConfigs.containsAll(shopConfigs);
     }
 
 	@Override
@@ -239,9 +244,16 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 
     @Override
     public StatementConfigVO selectConfigInfoById(Integer id) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("id", id);
-        return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectConfigInfoById", map);
+        StatementConfigVO statementConfigVO = null;
+        try {
+            Map<String, Object> map = new HashMap<>();
+            map.put("id", id);
+            statementConfigVO = this.getBaseDao().selectOneBySql(NAMESPACE + ".selectConfigInfoById", map);
+            statementConfigVO.setConfigShops(selectConfigShopsPage(map, 1, 10000));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return statementConfigVO;
     }
 
     @Override

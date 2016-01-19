@@ -26,4 +26,6 @@ public interface ConfigShopMapper {
 	List<ConfigShopVO> getConfigShopsPage(Map<String, Object> paramsMap);
 
 	int selectConfigShopsPageCount(Map<String, Object> paramsMap);
+
+	int deleteConfigShopByConfigId(Integer configId);
 }

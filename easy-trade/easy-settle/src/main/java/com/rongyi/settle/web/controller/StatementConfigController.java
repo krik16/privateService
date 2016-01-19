@@ -169,7 +169,7 @@ public class StatementConfigController extends BaseController {
             if (responseData.getMeta().getErrno() != 0) {
                 return responseData;
             }
-            if (!map.containsKey("bussinessType") || !map.containsKey("bussinessCode") || !map.containsKey("bussinessAccount")) {
+            if (!map.containsKey("bussinessType") || !map.containsKey("bussinessCode") || !map.containsKey("bussinessAccount") || !map.containsKey("payMode") || !map.containsKey("countCycle")) {
                 return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
             }
             //验证商家财务账户
@@ -240,7 +240,7 @@ public class StatementConfigController extends BaseController {
                 return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
             }
             StatementConfigVO statementConfigVO = statementConfigService.selectConfigInfoById(Integer.valueOf(map.get("id").toString()));
-            responseData.success(statementConfigVO);
+            responseData = ResponseData.success(statementConfigVO);
         } catch (Exception e) {
             e.printStackTrace();
             responseData = ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
@@ -276,7 +276,7 @@ public class StatementConfigController extends BaseController {
             statementConfigVO.setCycleEndTime(null);
             statementConfigVO.setEffectStartTime(null);
             statementConfigVO.setEffectEndTime(null);
-            responseData.success(statementConfigVO);
+            responseData = ResponseData.success(statementConfigVO);
         } catch (Exception e) {
             e.printStackTrace();
             responseData = ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
@@ -422,7 +422,7 @@ public class StatementConfigController extends BaseController {
      * @date:2015年9月22日下午3:37:03
      **/
     private String getRuleCode() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         try {
             sb.append("BSR");
             sb.append(DateUtil.getCurrentDateYYMMDD());

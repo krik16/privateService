@@ -106,4 +106,9 @@
       </if>
     </where>
   </select>
+
+  <delete id="deleteConfigShopByConfigId" parameterType="int">
+    delete from config_shop
+    where config_id = #{configId,jdbcType=INTEGER}
+  </delete>
 </mapper>
