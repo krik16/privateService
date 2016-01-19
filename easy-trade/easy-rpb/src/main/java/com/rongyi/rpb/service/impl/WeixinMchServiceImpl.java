@@ -1,6 +1,5 @@
 package com.rongyi.rpb.service.impl;
 
-import com.rongyi.core.framework.mybatis.dao.impl.BaseDaoImpl;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.rpb.domain.WeixinMch;
 import com.rongyi.rpb.service.WeixinMchService;
@@ -34,13 +33,13 @@ public class WeixinMchServiceImpl extends BaseServiceImpl implements WeixinMchSe
         return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectByPrimaryKey", map);
     }
 
-//    @Override
-//    public WeixinMch selectByPublicAndUserId(String publicCode, String userId) {
-//        Map<String, Object> map = new HashMap<>();
-//        map.put("publicCode", publicCode);
-//        map.put("userId", userId);
-//        return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectByPublicAndUserId", map);
-//    }
+    @Override
+    public WeixinMch selectByPublicCodeAndUserId(String publicCode, String userId) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("publicCode", publicCode);
+        map.put("userId", userId);
+        return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectByPublicAndUserId", map);
+    }
 
     @Override
     public WeixinMch selectByAppId(String appId) {

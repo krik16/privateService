@@ -97,7 +97,9 @@
     <include refid="Base_Column_List" />
     from weixin_mch
     where user_id = #{userId,jdbcType=VARCHAR}
-    and public_code = #{publicCode,jdbcType=VARCHAR}
+    <if test="publicCode != null and publicCode != ''">
+       and public_code = #{publicCode,jdbcType=VARCHAR}
+    </if>
   </select>
   <select id="selectByAppId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select

@@ -13,7 +13,7 @@ public interface WeixinMchService {
 
     WeixinMch selectById(Integer id);
 
-//    WeixinMch selectByPublicAndUserId(String publicCode,String userId);
+    WeixinMch selectByPublicCodeAndUserId(String publicCode,String userId);
 
     WeixinMch selectByAppId(String appId);
 }

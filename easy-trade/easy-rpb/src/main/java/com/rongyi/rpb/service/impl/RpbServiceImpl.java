@@ -15,6 +15,7 @@ import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentItemEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
+import com.rongyi.easy.rpb.domain.WeixinMch;
 import com.rongyi.easy.rpb.vo.*;
 import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.Constants;
@@ -64,6 +65,9 @@ public class RpbServiceImpl implements IRpbService {
 
 	@Autowired
 	AliPaymentService aliPaymentService;
+
+	@Autowired
+	WeixinMchService weixinMchService;
 
 	@Override
 	public Map<Integer, String> validateAccount(String paymentIds) {
@@ -362,6 +366,11 @@ public class RpbServiceImpl implements IRpbService {
 			e.printStackTrace();
 		}
 		return map;
+	}
+
+	@Override
+	public WeixinMch selectByParam(String publicCode, String mallId) {
+		return weixinMchService.selectByPublicCodeAndUserId(publicCode,mallId);
 	}
 }
 

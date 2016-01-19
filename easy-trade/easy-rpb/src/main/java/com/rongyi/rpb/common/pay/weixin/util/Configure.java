@@ -61,7 +61,7 @@ public class Configure {
     //机器IP
     private String ip = "127.0.0.1";
 
-    private String tradeType = "APP";
+    private String tradeType =ConstantEnum.WEIXIN_PAY_TRADE_TYPE_APP.getValueStr();
 
     //以下是几个API的路径：
 
