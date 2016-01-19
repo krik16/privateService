@@ -23,7 +23,25 @@ public class DetailListVO implements Serializable {
 								// 2: 一级审核通过, 3: 二级审核通过, 4: 佣金已到账
 	private List<SonDetailListVO> sonOrderList;// 子订单数据
 	private String disconnt;// 折扣
+	private String buyerName;// 买家名称
+	private String buyerIM;// 买家IM账号
 
+	
+	public String getBuyerName() {
+		return buyerName;
+	}
+
+	public void setBuyerName(String buyerName) {
+		this.buyerName = buyerName;
+	}
+
+	public String getBuyerIM() {
+		return buyerIM;
+	}
+
+	public void setBuyerIM(String buyerIM) {
+		this.buyerIM = buyerIM;
+	}
 
 	public String getDate() {
 		return date;

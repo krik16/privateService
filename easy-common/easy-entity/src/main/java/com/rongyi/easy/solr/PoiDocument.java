@@ -64,6 +64,9 @@ public class PoiDocument implements Serializable {
 
 	@Field("category_ids")
 	private List<String> category_ids;
+	
+	@Field("custom_category_ids")
+	private List<String> custom_category_ids;
 
 	@Field("shop_nature")
 	private Integer shop_nature;
@@ -395,6 +398,20 @@ public class PoiDocument implements Serializable {
 
 	public void setMall(Integer mall) {
 		this.mall = mall;
+	}
+
+	/**
+	 * @return the custom_category_ids
+	 */
+	public List<String> getCustom_category_ids() {
+		return custom_category_ids;
+	}
+
+	/**
+	 * @param custom_category_ids the custom_category_ids to set
+	 */
+	public void setCustom_category_ids(List<String> custom_category_ids) {
+		this.custom_category_ids = custom_category_ids;
 	}
 
 	

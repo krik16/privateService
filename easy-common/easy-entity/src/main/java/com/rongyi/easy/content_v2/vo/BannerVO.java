@@ -13,6 +13,7 @@ public class BannerVO implements Serializable {
     private Integer id;//id
     private String title; //标题
     private String bannerPic; //banner图片地址
+    private String bannerBackgroundPic;//banner 背景图片
     private String provId;  //省份Id
     private String cityId; //城市Id
     private int type; //文章类型
@@ -92,12 +93,21 @@ public class BannerVO implements Serializable {
         this.id = id;
     }
 
+    public String getBannerBackgroundPic() {
+        return bannerBackgroundPic;
+    }
+
+    public void setBannerBackgroundPic(String bannerBackgroundPic) {
+        this.bannerBackgroundPic = bannerBackgroundPic;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("id", id)
                 .append("title", title)
                 .append("bannerPic", bannerPic)
+                .append("bannerBackgroundPic", bannerBackgroundPic)
                 .append("provId", provId)
                 .append("cityId", cityId)
                 .append("type", type)

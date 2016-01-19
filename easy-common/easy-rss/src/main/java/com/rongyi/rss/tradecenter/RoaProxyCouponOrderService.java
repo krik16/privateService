@@ -5,6 +5,7 @@ import com.rongyi.easy.coupon.entity.CouponOrder;
 import com.rongyi.easy.coupon.entity.CouponOrderItem;
 import com.rongyi.easy.coupon.param.CouponOrderParam;
 import com.rongyi.easy.coupon.param.RoaCouponOrderParam;
+import com.rongyi.easy.tradecenter.vo.CouponOrderVO;
 
 import java.util.List;
 import java.util.Map;

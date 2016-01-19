@@ -4,6 +4,7 @@
 package com.rongyi.easy.rmmm.vo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import com.rongyi.easy.rmmm.param.OrderModelParam;
 
@@ -23,11 +24,40 @@ public class OrderModelVO extends OrderModelParam implements Serializable {
 	private String userName;// 导购姓名
 	private String userPhone;// 导购电话
 	private String shopName;// 店铺名称
+	private String shopLogo;//店铺logo
 	private String mallName;// 商场名称
 	private String provinceName;// 省名称
 	private String cityName;// 市名称
 	private Integer guideType;// 1是导购 2是买手
 	private Integer rebateNum = 0;// 可使用抵扣券数量
+	
+	private String shopPostage;// 店铺快递邮费
+	private String supportWay;//1仅支持自提 2仅支持快递 3都支持
+	private Double couponTotalDiscount;//店铺红包抵扣金额
+
+	public Double getCouponTotalDiscount() {
+		return couponTotalDiscount;
+	}
+
+	public void setCouponTotalDiscount(Double couponTotalDiscount) {
+		this.couponTotalDiscount = couponTotalDiscount;
+	}
+
+	public String getShopPostage() {
+		return shopPostage;
+	}
+
+	public void setShopPostage(String shopPostage) {
+		this.shopPostage = shopPostage;
+	}
+
+	public String getSupportWay() {
+		return supportWay;
+	}
+
+	public void setSupportWay(String supportWay) {
+		this.supportWay = supportWay;
+	}
 
 	public Integer getRebateNum() {
 		return rebateNum;
@@ -124,6 +154,14 @@ public class OrderModelVO extends OrderModelParam implements Serializable {
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
 	}
+	
+	public String getShopLogo() {
+		return shopLogo;
+	}
+
+	public void setShopLogo(String shopLogo) {
+		this.shopLogo = shopLogo;
+	}
 
 	public String getMallName() {
 		return mallName;
@@ -151,21 +189,11 @@ public class OrderModelVO extends OrderModelParam implements Serializable {
 
 	@Override
 	public String toString() {
-		return "OrderModelVO{" +
-				"orderModelId='" + orderModelId + '\'' +
-				", provinceId='" + provinceId + '\'' +
-				", cityId='" + cityId + '\'' +
-				", nickName='" + nickName + '\'' +
-				", imId='" + imId + '\'' +
-				", paymentWaitMax='" + paymentWaitMax + '\'' +
-				", userLogo='" + userLogo + '\'' +
-				", userName='" + userName + '\'' +
-				", userPhone='" + userPhone + '\'' +
-				", shopName='" + shopName + '\'' +
-				", mallName='" + mallName + '\'' +
-				", provinceName='" + provinceName + '\'' +
-				", cityName='" + cityName + '\'' +
-				", guideType=" + guideType +
-				'}';
+		return "OrderModelVO [orderModelId=" + orderModelId + ", provinceId=" + provinceId + ", cityId=" + cityId + ", nickName="
+				+ nickName + ", imId=" + imId + ", paymentWaitMax=" + paymentWaitMax + ", userLogo=" + userLogo + ", userName="
+				+ userName + ", userPhone=" + userPhone + ", shopName=" + shopName + ", shopLogo=" + shopLogo + ", mallName="
+				+ mallName + ", provinceName=" + provinceName + ", cityName=" + cityName + ", guideType=" + guideType
+				+ ", rebateNum=" + rebateNum + ", shopPostage=" + shopPostage + ", supportWay=" + supportWay
+				+ ", couponTotalDiscount=" + couponTotalDiscount + "]";
 	}
 }
