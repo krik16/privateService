@@ -32,9 +32,9 @@ import java.math.BigDecimal;
 import java.util.*;
 
 /**
- * @Author: 柯军
- * @Description: 付款单
- * @datetime:2015年4月23日上午10:03:11
+ * Author: 柯军
+ * Description: 付款单
+ * datetime:2015年4月23日上午10:03:11
  **/
 @Service
 public class PaymentServiceImpl extends BaseServiceImpl implements PaymentService {
@@ -81,13 +81,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
     @Override
     public List<PaymentEntityVO> selectPageListBySearch(Map<String, Object> searchValueMap) {
-        Integer currpage = 1;
-        if (searchValueMap.get("currpage") != null)
-            currpage = Integer.valueOf(searchValueMap.get("currpage").toString());
-        searchValueMap.put("currentPage", (currpage - 1) * Constants.PAGE.pageSize);
-        searchValueMap.put("pageSize", Constants.PAGE.pageSize);
-        List<PaymentEntityVO> listVO = new ArrayList<>();
-        return listVO;
+        return null;
     }
 
     @Override
@@ -175,11 +169,11 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         PaymentEntity paymentEntity;
         String payNo = getPayNo();// 生成付款单号,多个订单号付款单号一样
         LOGGER.info("生成付款单号：" + payNo);
-        if (orderNumArray != null && orderNumArray.length > 0) {
-            for (int i = 0; i < orderNumArray.length; i++) {
+        if (orderNumArray.length > 0) {
+            for(String orderNum : orderNumArray){
                 paymentEntity = new PaymentEntity();
                 BeanUtils.copyProperties(paymentEntityVO, paymentEntity);
-                paymentEntity.setOrderNum(orderNumArray[i]);
+                paymentEntity.setOrderNum(orderNum);
                 paymentEntity.setPayNo(payNo);
                 paymentEntityList.add(paymentEntity);
             }
@@ -245,17 +239,16 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     }
 
     /**
-     * @param paymentEntityVO
+     * Description: 生成消息主体
+     * @param paymentEntityVO PaymentEntityVO
      * @param event
-     * @return
-     * @Description: 生成消息主体
-     * @Author: 柯军
-     * @datetime:2015年4月24日上午11:37:09
+     * Author: 柯军
+     * datetime:2015年4月24日上午11:37:09
      **/
     @SuppressWarnings("unchecked")
     private Map<String, Object> getBodyMap(PaymentEntityVO paymentEntityVO, MessageEvent event) {
 
-        Map<String, Object> bodyMap = new HashMap<String, Object>();
+        Map<String, Object> bodyMap = new HashMap<>();
         try {
             if (PaymentEventType.APP.equals(event.getType())) {// 手机APP支付
                 LOGGER.info("支付宝APP支付");
@@ -334,16 +327,18 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     /**
      * 验证是否是微信修改价格支付
      *
-     * @param type
-     * @param paymentEntityVO
-     * @param paymentEntity
-     * @return
+     * @param type String
+     * @param paymentEntityVO PaymentEntityVO
+     * @param paymentEntity PaymentEntity
+     * Author kejun
      */
     private boolean validateWeixinModifyPrice(String type, PaymentEntityVO paymentEntityVO, PaymentEntity paymentEntity) {
-        if (paymentEntity != null && PaymentEventType.WEIXIN_PAY.equals(type) && paymentEntity.getAmountMoney().doubleValue() != paymentEntityVO.getAmountMoney().doubleValue()) {
-            return true;
-        }
-        return false;
+//        if (paymentEntity != null && PaymentEventType.WEIXIN_PAY.equals(type) && paymentEntity.getAmountMoney().doubleValue() != paymentEntityVO.getAmountMoney().doubleValue()) {
+//            return true;
+//        }
+//        return false;
+//
+        return (paymentEntity != null && PaymentEventType.WEIXIN_PAY.equals(type) && paymentEntity.getAmountMoney().doubleValue() != paymentEntityVO.getAmountMoney().doubleValue());
     }
 
     private void insertList(List<PaymentEntity> paymentEntityList, PaymentEntityVO paymentEntityVO, MessageEvent event, String oldPayNo) {
@@ -383,27 +378,27 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     public PaymentEntity validateOrderNumExist(String orderNum, Integer payChannel, Integer tradeType) {
         if (orderNum == null)
             return null;
-        String[] orderNumArray = orderNum.split("\\,");
+        String[] orderNumArray = orderNum.split(",");
         //验证请求付款记录是否已存在，如果存在，若有同一类型支付方式则返回原有数据，如果没有同一类型则创建一个订单号和付款单号同一个的付款记录，如果不存在则新建
-        for (int i = 0; i < orderNumArray.length; i++) {
-            LOGGER.info("orderNum={},tradeType={},payChannel={}", orderNumArray[i], tradeType, payChannel);
-            List<PaymentEntity> list = selectByOrderNum(orderNumArray[i], tradeType, null);
+        for(String orderNo : orderNumArray){
+            LOGGER.info("orderNum={},tradeType={},payChannel={}", orderNo, tradeType, payChannel);
+            List<PaymentEntity> list = selectByOrderNum(orderNo, tradeType, null);
             if (list != null && !list.isEmpty()) {
                 PaymentEntity newPaymentEntity = new PaymentEntity();
                 for (PaymentEntity paymentEntity : list) {
-                    if (Constants.PAYMENT_STATUS.STAUS2 == list.get(0).getStatus() && payChannel == list.get(0).getPayChannel()) {// 订单已完成支付后重新发起支付请求
+                    if (Constants.PAYMENT_STATUS.STAUS2 == paymentEntity.getStatus() && payChannel == paymentEntity.getPayChannel()) {// 订单已完成支付后重新发起支付请求
                         throw new RuntimeException("此订单已成功支付,此次请求属于订单重复支付请求,请重新下单，订单号-->" + orderNum);
                     }
-                    BeanUtils.copyProperties(list.get(0), newPaymentEntity);
+                    BeanUtils.copyProperties(paymentEntity, newPaymentEntity);
                     newPaymentEntity.setId(null);
                     newPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
                     if (paymentEntity.getPayChannel() != null && payChannel.equals(paymentEntity.getPayChannel())) {
-                        LOGGER.info("此订单payChannel={}支付方式未支付单已存在，直接返回此笔付款单记录,orderNum={}", paymentEntity.getPayChannel(), orderNumArray[i]);
+                        LOGGER.info("此订单payChannel={}支付方式未支付单已存在，直接返回此笔付款单记录,orderNum={}", paymentEntity.getPayChannel(),orderNo);
                         break;
                     } else {
                         PaymentEntity oldPaymentEntity = selectByPayNoAndPayChannelAndTradeType(paymentEntity.getPayNo(), payChannel, tradeType, Constants.PAYMENT_STATUS.STAUS0);
                         if (oldPaymentEntity == null) {
-                            LOGGER.info("此订单payChannel={}支付方式未支付单不存在，新增新付款方式同支付单号待付款记录,orderNum={}", payChannel, orderNumArray[i]);
+                            LOGGER.info("此订单payChannel={}支付方式未支付单不存在，新增新付款方式同支付单号待付款记录,orderNum={}", payChannel, orderNo);
                             newPaymentEntity.setCreateTime(DateUtil.getCurrDateTime());
                             newPaymentEntity.setPayChannel(payChannel);
                             insert(newPaymentEntity);
@@ -417,21 +412,21 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         return null;
     }
 
-    private void modifyPayChannelByMoreRequest(List<PaymentEntity> list, Integer payChannel) {
-        for (PaymentEntity paymentEntity : list) {
-            paymentEntity.setPayChannel(payChannel);
-            updateByPrimaryKeySelective(paymentEntity);
-        }
-    }
+//    private void modifyPayChannelByMoreRequest(List<PaymentEntity> list, Integer payChannel) {
+//        for (PaymentEntity paymentEntity : list) {
+//            paymentEntity.setPayChannel(payChannel);
+//            updateByPrimaryKeySelective(paymentEntity);
+//        }
+//    }
 
     /**
-     * @param event
-     * @param messageMap
-     * @param paymentEntityVO
+     * @param event MessageEvent
+     * @param messageMap  Map<String, Object>
+     * @param paymentEntityVO PaymentEntityVO
      * @return
-     * @Description: 0元支付或退款默认成功，消息立马返回
-     * @Author: 柯军
-     * @datetime:2015年7月12日下午2:29:33
+     * Description: 0元支付或退款默认成功，消息立马返回
+     * Author: 柯军
+     * datetime:2015年7月12日下午2:29:33
      **/
     @Override
     public Map<String, Object> getZeroSendMessage(MessageEvent event, Map<String, Object> messageMap, PaymentEntityVO paymentEntityVO) {
@@ -455,7 +450,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
             target = Constants.SOURCETYPE.COUPON;
         event = rpbEventService.getMessageEvent(paymentEntityVO.getPayNo(), paymentEntityVO.getOrderNum(), paymentEntityVO.getOrderDetailNumArray(), PaymentEventType.ZERO_PAY, null,
                 Constants.SOURCETYPE.RPB, target, type);
-        Map<String, Object> resultMap = new HashMap<String, Object>();
+        Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("code", 0);
         resultMap.put("totlePrice", 0);
         resultMap.put("orderNum", paymentEntityVO.getOrderNum());
@@ -473,7 +468,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
     @Override
     public List<PaymentEntity> selectByPayNoAndTradeType(String payNo, Integer tradeType) {
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
         params.put("payNo", payNo);
         params.put("tradeType", tradeType);
         return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectByPayNoAndTradeType", params);
@@ -481,7 +476,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
     @Override
     public Map<String, String> insert(PaymentEntity paymentEntity) {
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         try {
             this.getBaseDao().insertBySql(PAYMENTENTITY_NAMESPACE + ".insert", paymentEntity);
             map.put("message", "成功插入返回的message数据！");
@@ -494,14 +489,14 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
     @Override
     public PaymentEntity selectByPrimaryKey(String id) {
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
         params.put("id", id);
         return this.getBaseDao().selectOneBySql(PAYMENTENTITY_NAMESPACE + ".selectByPrimaryKey", params);
     }
 
     @Override
     public List<PaymentEntity> selectByOrderNum(String orderNum, Integer tradeType, Integer payChannel) {
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
         params.put("orderNum", orderNum);
         params.put("tradeType", tradeType);
         params.put("payChannel", payChannel);
@@ -510,7 +505,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
     @Override
     public PaymentEntity selectByOrderNumAndTradeType(String orderNum, Integer tradeType, Integer status, Integer payChannel) {
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
         params.put("orderNum", orderNum);
         params.put("tradeType", tradeType);
         params.put("status", status);
@@ -537,7 +532,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
             if (mqDrawParam.getOrderType() != null)
                 paymentEntity.setOrderType(mqDrawParam.getOrderType());
             if (mqDrawParam.getDrawAmount() != null)
-                paymentEntity.setAmountMoney(BigDecimal.valueOf(Double.valueOf(mqDrawParam.getDrawAmount())));
+                paymentEntity.setAmountMoney(BigDecimal.valueOf(mqDrawParam.getDrawAmount()));
             paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
             if (PaymentEventType.DRAW_PAY.equals(event.getType())) {// 提现
                 LOGGER.info("生成提现申请记录，提现单号：" + mqDrawParam.getDrawNo());
@@ -565,7 +560,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
     @Override
     public Map<String, Object> getBodyMap(String payNo, String orderNum, String orderDetailNum, String source, String target, String type) {
-        Map<String, Object> bodyMap = new HashMap<String, Object>();
+        Map<String, Object> bodyMap = new HashMap<>();
         bodyMap.put("orderNum", orderNum);
         if (StringUtils.isNotEmpty(orderDetailNum))
             bodyMap.put("orderDetailNum", orderDetailNum);
@@ -591,7 +586,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
     @Override
     public PaymentEntity selectByOrderNumAndBatchNo(String orderNum, String batchNo) {
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
         params.put("orderNum", orderNum);
         params.put("batchNo", batchNo);
         return this.getBaseDao().selectOneBySql(PAYMENTENTITY_NAMESPACE + ".selectByOrderNumAndBatchNo", params);
@@ -599,7 +594,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
     @Override
     public PaymentEntity selectByPayNoAndPayChannelAndTradeType(String payNo, Integer payChannel, Integer tradeType, Integer status) {
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
         params.put("payNo", payNo);
         params.put("payChannel", payChannel);
         params.put("tradeType", tradeType);
@@ -664,7 +659,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
     @Override
     public List<PaymentEntity> selectByBatchNoAndStatus(String batchNo, Integer status) {
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         map.put("batchNo", batchNo);
         map.put("status", status);
         return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectByBatchNoAndStatus", map);
@@ -714,7 +709,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
     @Override
     public List<PaymentEntity> selectByTradeTypeAndRefundRejected(Integer tradeType, Integer payChannel, Integer refundRejected, Integer status) {
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         map.put("tradeType", tradeType);
         map.put("payChannel", payChannel);
         map.put("refundRejected", refundRejected);
@@ -725,7 +720,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
     @Override
     public void updateRefundRejected(Integer id, Integer refundRejected) {
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         map.put("id", id);
         map.put("refundRejected", refundRejected);
         this.getBaseDao().updateBySql(PAYMENTENTITY_NAMESPACE + ".updateRefundRejected", map);
@@ -733,7 +728,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
     @Override
     public List<PaymentEntity> valiadteStatus(String[] ids, Integer status) {
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         map.put("ids", ids);
         map.put("status", status);
         return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".valiadteStatus", map);
@@ -752,7 +747,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
     @Override
     public PaymentEntity selectByWithLock(Integer id) {
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
         params.put("id", id);
         return this.getBaseDao().selectOneBySql(PAYMENTENTITY_NAMESPACE + ".selectByWithLock", params);
     }

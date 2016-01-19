@@ -49,7 +49,7 @@ public class Configure {
     private String subMchID = "";
 
     //HTTPS证书的本地路径
-    private String certLocalPath = ConstantUtil.CRET_DIRECTORY;
+    private String certLocalPath = ConstantUtil.PayWeiXin_V3.cretDirectory;
 //	private static String certLocalPath ="F:/data/etc/projects/easy-rpb-cert/1268956601.p12";
 
     //HTTPS证书密码，默认密码等于商户号MCHID

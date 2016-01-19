@@ -12,13 +12,11 @@ import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.ConstantUtil;
 import com.unionpay.acp.sdk.HttpClient;
 import org.apache.commons.lang.StringUtils;
-import org.jdom.JDOMException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -39,23 +37,25 @@ public class AliPayUnit {
     TimeExpireUnit timeExpireUnit;
 
     /**
-     * @Description:获取支付宝支付签名
-     * @param:
-     * @Author: 柯军
+     * Description:获取支付宝支付签名
+     * @param totalPrice
+     * Author: 柯军
      **/
 
     public Map<String, Object> getPaySign(String totalPrice, PaymentEntityVO paymentEntityVO, String title) {
         LOGGER.info("获取支付宝签名,getPaySign totalPrice={},payNo={},title={}", totalPrice, paymentEntityVO.getPayNo(), title);
-        Map<String, Object> resultMap = new HashMap<String, Object>();
+        Map<String, Object> resultMap = new HashMap<>();
         try {
             if (Strings.isNullOrEmpty(totalPrice) || Strings.isNullOrEmpty(paymentEntityVO.getPayNo()) || Strings.isNullOrEmpty(title)) {
                 throw new AliPayException(ConstantEnum.EXCEPTION_PARAM_NULL.getCodeStr(), ConstantEnum.EXCEPTION_PARAM_NULL.getValueStr());
             }
             //获取支付失效时长
-            String itBPay = timeExpireUnit.aliPayTimeExpire(paymentEntityVO.getTimeStart(), paymentEntityVO.getTimeExpire(),paymentEntityVO.getOrderType());
+            String itBPay = timeExpireUnit.aliPayTimeExpire(paymentEntityVO.getTimeStart(), paymentEntityVO.getTimeExpire(), paymentEntityVO.getOrderType());
             //获取需加密的签名串
             String signContent = assembleSign(paymentEntityVO.getPayNo(), title, totalPrice, itBPay);
             String rsaSign = RSA.sign(signContent, ConstantUtil.PayZhiFuBao.PRIVATE_KEY, ConstantUtil.PayZhiFuBao.INPUT_CHARSET);
+            if(rsaSign == null)
+                throw new AliPayException(ConstantEnum.EXCEPTION_PARAM_NULL.getCodeStr(), ConstantEnum.EXCEPTION_PARAM_NULL.getValueStr());
             String zhifubaoSign = signContent + "&sign=\"" + URLEncoder.encode(rsaSign, "utf-8") + "\"&sign_type=\"RSA\"";
             resultMap.put("code", 0);
             resultMap.put("zhifubaoSign", zhifubaoSign);
@@ -71,9 +71,8 @@ public class AliPayUnit {
     }
 
     /**
-     * @Description:组装签名串
-     * @param:
-     * @Author: 柯军
+     * Description:组装签名串
+     * Author: 柯军
      **/
 
     private String assembleSign(String orderId, String title, String totlePrice, String itBPay) {
@@ -114,10 +113,9 @@ public class AliPayUnit {
 
     /**
      * @param payNo
-     * @return
-     * @Description: 查询订单状态
-     * @Author: 柯军
-     * @datetime:2015年8月5日上午9:34:52
+     * Description: 查询订单状态
+     * Author: 柯军
+     * datetime:2015年8月5日上午9:34:52
      **/
     public QueryOrderParamVO queryOrder(String tradeNo, String payNo) {
         LOGGER.info("查询支付宝订单状态,queryOrder tradeNo={},payNo={}", tradeNo, payNo);
@@ -134,7 +132,7 @@ public class AliPayUnit {
         } catch (AliPayException e) {
             throw e;
         } catch (Exception e) {
-            LOGGER.error("order query fail. status={},exception={}",status,e.getMessage());
+            LOGGER.error("order query fail. status={},exception={}", status, e.getMessage());
             throw new AliPayException(ConstantEnum.EXCEPTION_ALI_QUERY_ORDER.getCodeStr(), ConstantEnum.EXCEPTION_ALI_QUERY_ORDER.getValueStr());
         }
         return null;
@@ -142,28 +140,29 @@ public class AliPayUnit {
 
     /**
      * @param xmlString
-     * @return
-     * @Description: xml 结果转换成QueryOrderParamVO对象
-     * @Author: 柯军
-     * @datetime:2015年8月7日上午11:17:59
+     * return
+     * Description: xml 结果转换成QueryOrderParamVO对象
+     * Author: 柯军
+     * datetime:2015年8月7日上午11:17:59
      **/
+    @SuppressWarnings("unchecked")
     private QueryOrderParamVO xmlStringToQueryOrderParamVO(String xmlString) {
         LOGGER.info("支付宝订单查询结果数据：" + xmlString);
         QueryOrderParamVO queryOrderParamVO = new QueryOrderParamVO();
         try {
             Map<String, Object> xmlMap = XMLUtil.doXMLParse(xmlString);
-            if ("T".equals(xmlMap.get("is_success"))) {
-                String responseStr = xmlMap.get("response").toString();
-                Map<String, Object> responseMap = XMLUtil.doXMLParse(responseStr);
-                queryOrderParamVO = (QueryOrderParamVO) ObjectConvert.convertFromMap(QueryOrderParamVO.class, responseMap);
-                queryOrderParamVO.setIs_success("T");
-            } else {
-                queryOrderParamVO.setIs_success("F");
-                queryOrderParamVO.setError(ConstantEnum.ALI_QUERY_ORDER_ERROR_CODE.getValueStr());
+            if(xmlMap != null) {
+                if ("T".equals(xmlMap.get("is_success"))) {
+                    String responseStr = xmlMap.get("response").toString();
+                    Map<String, Object> responseMap = XMLUtil.doXMLParse(responseStr);
+                    queryOrderParamVO = (QueryOrderParamVO) ObjectConvert.convertFromMap(QueryOrderParamVO.class, responseMap);
+                    queryOrderParamVO.setIs_success("T");
+                } else {
+                    queryOrderParamVO.setIs_success("F");
+                    queryOrderParamVO.setError(ConstantEnum.ALI_QUERY_ORDER_ERROR_CODE.getValueStr());
+                }
             }
-        } catch (JDOMException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return queryOrderParamVO;
@@ -172,14 +171,13 @@ public class AliPayUnit {
     /**
      * @param outTradeNo 付款单号
      * @param tradeNo    支付宝交易流水号
-     * @return
-     * @Description: 生成订单查询URL字符串
-     * @Author: 柯军
-     * @datetime:2015年8月7日上午11:20:00
+     * Description: 生成订单查询URL字符串
+     * Author: 柯军
+     * datetime:2015年8月7日上午11:20:00
      **/
     private String CreateUrl(String tradeNo, String outTradeNo) {
 
-        Map<String, String> params = new HashMap<String, String>();
+        Map<String, String> params = new HashMap<>();
         params.put("service", ConstantUtil.ZhiFuBaoWebPage.QUERY_SERVICE);
         params.put("partner", ConstantUtil.PayZhiFuBao.PARTNER);
         if (!StringUtils.isEmpty(outTradeNo))
@@ -190,14 +188,14 @@ public class AliPayUnit {
         String sign = AlipaySubmit.buildRequestMysign(params);
         String parameter = "";
         parameter = parameter + ConstantUtil.ZhiFuBaoWebPage.ALIPAY_QUERY_ORDER_GATEWAY;
-        List<String> keys = new ArrayList<String>(params.keySet());
-        for (int i = 0; i < keys.size(); i++) {
-            String value = params.get(keys.get(i));
+        List<String> keys = new ArrayList<>(params.keySet());
+        for(String key : keys){
+            String value = params.get(key);
             if (value == null || value.trim().length() == 0) {
                 continue;
             }
             try {
-                parameter = parameter + keys.get(i) + "=" + URLEncoder.encode(value, ConstantUtil.PayZhiFuBao.INPUT_CHARSET) + "&";
+                parameter = parameter + key + "=" + URLEncoder.encode(value, ConstantUtil.PayZhiFuBao.INPUT_CHARSET) + "&";
             } catch (UnsupportedEncodingException e) {
 
                 e.printStackTrace();

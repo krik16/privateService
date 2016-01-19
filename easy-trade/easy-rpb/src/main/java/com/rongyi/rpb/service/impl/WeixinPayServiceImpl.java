@@ -1,6 +1,5 @@
 package com.rongyi.rpb.service.impl;
 
-import com.google.common.base.Strings;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.constant.PaymentEventType;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
@@ -26,13 +25,15 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
- * @Author: 柯军
- * @Description: 微信支付
- * @datetime:2015年4月23日上午10:07:12
+ * Author: 柯军
+ * Description: 微信支付
+ * datetime:2015年4月23日上午10:07:12
  **/
 @Service
 public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPayService {
@@ -69,7 +70,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
     @Override
     public Map<String, Object> getAppWeXinSign(PaySignData paySignData) {
         LOGGER.info("获取微信支付签名 getAppWeXinSign,paySignData={}",paySignData.toString());
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         try {
 //            BigDecimal totalFee = new BigDecimal(total_fee + "").multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
             Map<String, String> timeExpireMap = timeExpireUnit.weixinPayTimeExpire(paySignData.getTimeStart(), paySignData.getTimeExpire(), paySignData.getOrderType());
@@ -91,9 +92,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
         PaymentEntityVO paymentEntityVO = paymentService.bodyToPaymentEntity(event.getBody(), null);
         PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntityVO.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
                 Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);// 根据退款单记录中的订单号找到对应的历史付款单记录（用来查找付款交易流水号）
-        if (paymentEntity == null)
-            return false;
-        return true;
+        return (paymentEntity != null);
     }
 
 
@@ -187,7 +186,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
     public void batchTriggerWeixinRefund() {
         LOGGER.info("微信批量退款定时任务启动");
         try {
-            List<String> failList = new ArrayList<String>();
+            List<String> failList = new ArrayList<>();
             List<PaymentEntity> list = paymentService.selectByTradeTypeAndRefundRejected(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1,
                     Constants.REFUND_REJECTED.REFUND_REJECTED0, Constants.PAYMENT_STATUS.STAUS0);
             for (PaymentEntity paymentEntity : list) {

@@ -9,7 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by kejun on 2016/1/13.
+ * 微信公众支付
+ * Author kejun
  */
 @Service
 public class WeixinMchServiceImpl extends BaseServiceImpl implements WeixinMchService {
@@ -20,6 +21,7 @@ public class WeixinMchServiceImpl extends BaseServiceImpl implements WeixinMchSe
     public void insert(WeixinMch weixinMch) {
         this.getBaseDao().insertBySql(NAMESPACE + ".insertSelective", weixinMch);
     }
+
 
     @Override
     public void update(WeixinMch weixinMch) {

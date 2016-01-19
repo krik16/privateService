@@ -81,8 +81,8 @@ public class WeixinPayUnit {
     }
 
     /**
-     *
-     * @author 柯军
+     *退款
+     * author 柯军
      **/
 
     public RefundResData weixinRefund(String payNo, double refundFee, double totalFee, String newPayNo,Integer weixinMchId) {

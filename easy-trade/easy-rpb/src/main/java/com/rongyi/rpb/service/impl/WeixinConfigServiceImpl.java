@@ -10,8 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * Created by kejun on 2016/1/13.
- */
+ *  Description: 初始化微信支付账号相关配置
+ *  Author: kejun
+  **/
 @Service
 public class WeixinConfigServiceImpl extends BaseServiceImpl implements WeixinConfigService{
 

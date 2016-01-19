@@ -11,9 +11,9 @@ import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.rpb.service.MqReceiverService;
 
 /**	
- * @Author:  柯军
- * @Description: mq 消息接收器 
- * @datetime:2015年6月25日下午4:37:28
+ * Author:  柯军
+ * Description: mq 消息接收器
+ * datetime:2015年6月25日下午4:37:28
  *
  **/
 @Component

@@ -11,9 +11,9 @@ import com.rongyi.easy.rpb.domain.PaymentItemEntity;
 import com.rongyi.rpb.service.PaymentItemService;
 
 /**
- * @Author: 柯军
- * @Description: 子订单service
- * @datetime:2015年4月23日上午10:02:14
+ * Author: 柯军
+ * Description: 子订单service
+ * datetime:2015年4月23日上午10:02:14
  * 
  **/
 @Service
@@ -28,7 +28,7 @@ public class PaymentItemServiceImpl extends BaseServiceImpl implements PaymentIt
 
 	@Override
 	public List<PaymentItemEntity> selectByPaymentId(Integer paymentId) {
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<>();
 		map.put("paymentId", paymentId);
 		return this.getBaseDao().selectListBySql(PAYMENTENTITY_NAMESPACE + ".selectByPaymentId", map);
 	}

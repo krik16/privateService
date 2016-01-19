@@ -1,43 +1,26 @@
 package com.rongyi.rpb.service.impl;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.rongyi.core.common.util.DateUtil;
+import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
+import com.rongyi.easy.rpb.vo.QueryOrderParamVO;
 import com.rongyi.rpb.Exception.AliPayException;
+import com.rongyi.rpb.service.AliPaymentService;
+import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rpb.unit.AliPayUnit;
 import com.rongyi.rpb.unit.TimeExpireUnit;
 import org.apache.commons.lang.StringUtils;
-import org.jdom.JDOMException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rongyi.core.bean.ObjectConvert;
-import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
-import com.rongyi.easy.rpb.vo.QueryOrderParamVO;
-import com.rongyi.rpb.common.pay.ali.sign.RSA;
-import com.rongyi.rpb.common.pay.ali.util.AlipaySubmit;
-import com.rongyi.rpb.common.pay.weixin.util.XMLUtil;
-import com.rongyi.rpb.constants.ConstantEnum;
-import com.rongyi.rpb.constants.ConstantUtil;
-import com.rongyi.rpb.constants.ConstantUtil.PayZhiFuBao;
-import com.rongyi.rpb.constants.ConstantUtil.ZhiFuBaoWebPage;
-import com.rongyi.rpb.service.AliPaymentService;
-import com.rongyi.rpb.service.PaymentService;
-import com.unionpay.acp.sdk.HttpClient;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * @Author: 柯军
- * @Description: 支付宝Service
- * @datetime:2015年4月23日上午9:51:11
+ * Author: 柯军
+ * Description: 支付宝Service
+ * datetime:2015年4月23日上午9:51:11
  **/
 @Service
 public class AliPaymentServiceImpl extends BaseServiceImpl implements AliPaymentService {
@@ -53,14 +36,14 @@ public class AliPaymentServiceImpl extends BaseServiceImpl implements AliPayment
     AliPayUnit aliPayUnit;
 
     /**
-     * @Description:获取支付签名
-     * @param:
-     * @Author: 柯军
+     * Description:获取支付签名
+     * @param orderMaps
+     * Author: 柯军
      **/
 
     @Override
     public Map<String, Object> getZhiFuBaoSign(Map<String, Object> orderMaps, PaymentEntityVO paymentEntityVO) {
-        Map<String, Object> resultMap = new HashMap<String, Object>();
+        Map<String, Object> resultMap = new HashMap<>();
         try {
             String title = orderMaps.get("title").toString();
             if (StringUtils.isEmpty(title))
@@ -79,10 +62,10 @@ public class AliPaymentServiceImpl extends BaseServiceImpl implements AliPayment
 
     /**
      * @param payNo
-     * @return
-     * @Description: 查询订单状态
-     * @Author: 柯军
-     * @datetime:2015年8月5日上午9:34:52
+     * return
+     * Description: 查询订单状态
+     * Author: 柯军
+     * datetime:2015年8月5日上午9:34:52
      **/
     @Override
     public QueryOrderParamVO queryOrder(String tradeNo, String payNo) {

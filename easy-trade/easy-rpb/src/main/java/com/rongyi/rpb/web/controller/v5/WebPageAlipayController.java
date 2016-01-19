@@ -49,8 +49,6 @@ public class WebPageAlipayController extends BaseController {
 
 	protected static final Logger LOGGER = LoggerFactory.getLogger(WebPageAlipayController.class);
 
-	@Autowired
-	private WebPageAlipayService webPageAlipayService;
 
 	@Autowired
 	private PaymentLogInfoService paymentLogInfoService;
@@ -131,7 +129,7 @@ public class WebPageAlipayController extends BaseController {
 		PaymentLogInfo paymentLogInfo = new PaymentLogInfo();
 		try {
 			Map<String, Object> map = XMLUtil.doXMLParse(notify_data);
-			if (map.get("out_trade_no") != null) {
+			if (map != null && map.get("out_trade_no") != null) {
 				PaymentLogInfo result = paymentLogInfoService.selectByOutTradeNo(map.get("out_trade_no").toString(), null);
 				if (result != null)
 					return;
@@ -172,7 +170,7 @@ public class WebPageAlipayController extends BaseController {
 				model.addAttribute("content", "支付成功");
 			}
 		} catch (Exception e) {
-			LOGGER.error("支付成功变更订单状态出错，错误原因：");
+			LOGGER.error("支付成功变更订单状态出错，notify_data={}",notify_data);
 			e.printStackTrace();
 		}
 	}
@@ -236,7 +234,7 @@ public class WebPageAlipayController extends BaseController {
 		Map<String, Object> requestMap = parseXml(request);
 		if ("SUCCESS".equals(requestMap.get("result_code"))) {
 			LOGGER.info("微信支付异步通知开始,tradeNo={}",requestMap.get("transaction_id").toString());
-			Map<String, Object> responseMap = new HashMap<String, Object>();
+			Map<String, Object> responseMap = new HashMap<>();
 			responseMap.put("return_code", Constants.RESULT.SUCCESS);
 			responseMap.put("return_msg", "OK");
 			boolean bool = paymentLogInfoService.validateByTradeNoAndPayNo(requestMap.get("transaction_id").toString(), requestMap.get("out_trade_no").toString());
@@ -262,7 +260,7 @@ public class WebPageAlipayController extends BaseController {
 	 **/
 	@SuppressWarnings("unchecked")
 	private static Map<String, Object> parseXml(HttpServletRequest request) {
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<>();
 		try {
 			InputStream inputStream = request.getInputStream();
 			SAXReader reader = new SAXReader();
@@ -322,7 +320,7 @@ public class WebPageAlipayController extends BaseController {
 	 */
 	@SuppressWarnings("unchecked")
 	private static Map<String, String> beforeVerify(HttpServletRequest request) {
-		Map<String, String> verifyMap = new HashMap<String, String>();
+		Map<String, String> verifyMap = new HashMap<>();
 		Map<String, String[]> requestParams = request.getParameterMap();
 		for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext();) {
 			String name = iter.next();
