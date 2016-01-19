@@ -109,6 +109,11 @@ public class StatementConfigVO extends StatementConfig{
 	private String generateTime;
 
 	/**
+	 * 商户关联地址
+	 */
+	private String bussinessLinkAddress;
+
+	/**
 	 * 关联店铺
 	 */
 	private List<ConfigShopVO> configShops;

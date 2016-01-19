@@ -78,12 +78,12 @@ public class ConfigShop implements Serializable{
 
         ConfigShop that = (ConfigShop) o;
 
-        return id.equals(that.id);
+        return !(shopId != null ? !shopId.equals(that.shopId) : that.shopId != null);
 
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return shopId != null ? shopId.hashCode() : 0;
     }
 }
