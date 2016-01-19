@@ -332,6 +332,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                 LOGGER.info("买家申请退款");
                 paymentEntity.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
                 // 退款时根据付款单号找到对应付款记录中的付款方式
+                LOGGER.info("oldPayNo={}",oldPayNo);
                 PaymentEntity historyPayment = selectByPayNoAndPayChannelAndTradeType(oldPayNo, null, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2);
                 if (historyPayment == null)
                     throw new TradeException(ConstantEnum.EXCEPTION_PAYMENT_NOT_EXIST.getCodeStr(), ConstantEnum.EXCEPTION_PAYMENT_NOT_EXIST.getValueStr());
