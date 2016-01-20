@@ -44,7 +44,7 @@ public class SessionUserInfo implements Serializable{
     
     private String filialeMid;
     
-    private String logo = "../images/logo.png";  //logo图片地址
+    private String logo = "http://rongyi.b0.upaiyun.com/commodity/text/201601051202219059.png";  //logo图片地址
     
     private String theCompanyName;  //所属集团 or 商场 or 品牌名称
     
