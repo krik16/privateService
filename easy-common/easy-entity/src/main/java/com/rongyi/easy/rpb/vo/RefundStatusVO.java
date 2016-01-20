@@ -42,7 +42,7 @@ public class RefundStatusVO implements Serializable {
     /**
      *退款完成时间
      */
-    public boolean refundDate;
+    public Date refundDate;
 
     public boolean isRongyiProcess() {
         return isRongyiProcess;
@@ -84,11 +84,11 @@ public class RefundStatusVO implements Serializable {
         this.isRefund = isRefund;
     }
 
-    public boolean isRefundDate() {
+    public Date getRefundDate() {
         return refundDate;
     }
 
-    public void setRefundDate(boolean refundDate) {
+    public void setRefundDate(Date refundDate) {
         this.refundDate = refundDate;
     }
 }
