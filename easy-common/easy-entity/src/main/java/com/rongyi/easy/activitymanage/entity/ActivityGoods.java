@@ -9,7 +9,7 @@ public class ActivityGoods {
 
     private String goodsId;
 
-    private Byte type;
+    private Integer type;
 
     private String name;
 
@@ -23,7 +23,7 @@ public class ActivityGoods {
 
     private Date joinEndAt;
 
-    private Byte status;
+    private Integer status;
 
     private String createUser;
 
@@ -59,11 +59,11 @@ public class ActivityGoods {
         this.goodsId = goodsId;
     }
 
-    public Byte getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(Byte type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
@@ -115,11 +115,11 @@ public class ActivityGoods {
         this.joinEndAt = joinEndAt;
     }
 
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

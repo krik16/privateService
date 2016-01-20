@@ -1,5 +1,7 @@
 package com.rongyi.easy.activitymanage.entity;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.util.Date;
 
 public class ActivityInfo {
@@ -11,21 +13,21 @@ public class ActivityInfo {
 
     private Date endAt;
 
-    private Byte type;
+    private Integer type;
 
     private String synTarget;
 
-    private Byte stockDeductType;
+    private Integer stockDeductType;
 
-    private Byte stockUpdateType;
+    private Integer stockUpdateType;
 
-    private Byte isShipping;
+    private Boolean isShipping;
 
     private Integer limitCount;
 
-    private Byte status;
+    private Integer status;
 
-    private Byte publishChannel;
+    private Integer publishChannel;
 
     private Integer cancelTime;
 
@@ -37,7 +39,7 @@ public class ActivityInfo {
 
     private Date updateAt;
 
-    private Byte isDeleted;
+    private Boolean isDeleted;
 
     private Integer version;
 
@@ -73,11 +75,11 @@ public class ActivityInfo {
         this.endAt = endAt;
     }
 
-    public Byte getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(Byte type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
@@ -89,27 +91,27 @@ public class ActivityInfo {
         this.synTarget = synTarget;
     }
 
-    public Byte getStockDeductType() {
+    public Integer getStockDeductType() {
         return stockDeductType;
     }
 
-    public void setStockDeductType(Byte stockDeductType) {
+    public void setStockDeductType(Integer stockDeductType) {
         this.stockDeductType = stockDeductType;
     }
 
-    public Byte getStockUpdateType() {
+    public Integer getStockUpdateType() {
         return stockUpdateType;
     }
 
-    public void setStockUpdateType(Byte stockUpdateType) {
+    public void setStockUpdateType(Integer stockUpdateType) {
         this.stockUpdateType = stockUpdateType;
     }
 
-    public Byte getIsShipping() {
+    public Boolean getIsShipping() {
         return isShipping;
     }
 
-    public void setIsShipping(Byte isShipping) {
+    public void setIsShipping(Boolean isShipping) {
         this.isShipping = isShipping;
     }
 
@@ -121,19 +123,19 @@ public class ActivityInfo {
         this.limitCount = limitCount;
     }
 
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
-    public Byte getPublishChannel() {
+    public Integer getPublishChannel() {
         return publishChannel;
     }
 
-    public void setPublishChannel(Byte publishChannel) {
+    public void setPublishChannel(Integer publishChannel) {
         this.publishChannel = publishChannel;
     }
 
@@ -177,11 +179,11 @@ public class ActivityInfo {
         this.updateAt = updateAt;
     }
 
-    public Byte getIsDeleted() {
+    public Boolean getIsDeleted() {
         return isDeleted;
     }
 
-    public void setIsDeleted(Byte isDeleted) {
+    public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 

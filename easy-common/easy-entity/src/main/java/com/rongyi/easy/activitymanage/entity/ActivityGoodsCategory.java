@@ -9,7 +9,7 @@ public class ActivityGoodsCategory {
 
     private Integer level;
 
-    private Byte type;
+    private Integer type;
 
     public Integer getId() {
         return id;
@@ -43,11 +43,11 @@ public class ActivityGoodsCategory {
         this.level = level;
     }
 
-    public Byte getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(Byte type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 }
