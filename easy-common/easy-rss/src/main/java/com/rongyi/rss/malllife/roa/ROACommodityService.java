@@ -71,6 +71,8 @@ public interface ROACommodityService {
 	public ResponseResult getCategoryById(String id);
 
 	public ResponseResult searchCommodity(CommoditySearchParam param);
+	
+	public ResponseResult searchCommodityForMallLife(CommoditySearchParam param);
 
 	public ResponseResult getBrandCommodity(String brandId, String categoryId, int orderBy, int currentpage,
 			int pagesize);
@@ -109,4 +111,6 @@ public interface ROACommodityService {
 	public Commodity selectById(String id);
  
 	public ResponseVO searchCommodityBrand(CommodityBrandSearchParam param);
+	
+	public List<com.rongyi.easy.mcmc.vo.CommodityBuyerVO> getCommodityBySPU(String commodityId, String spu);
 }

@@ -1,6 +1,7 @@
 package com.rongyi.easy.rmmm.vo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -23,7 +24,7 @@ public class SalerParentOrderVO implements Serializable {
 	private String orderId;// 订单id
 	private String countId;// 下单账号
 	private String orderType;// 订单类型
-	private String orderSource;// 订单渠道
+	private String orderSource;// 订单渠道     0微商城 1APP 2终端机 3其他
 	private String payTime;// 付款时间
 	private String deliverTime;// 发货时间
 	private String comment;// 订单备注
@@ -50,6 +51,9 @@ public class SalerParentOrderVO implements Serializable {
 	private List<String> ticketPicList;// 小票URL集合
 	private String receiveTime;// 收货时间
 	private String buyerPhone;// 买家手机号
+
+	private BigDecimal rebateDiscount;//商家抵扣券金额
+	private String rebateTitle;//商家抵扣券名称
 
 	public String getStatus() {
 		return status;
@@ -332,44 +336,47 @@ public class SalerParentOrderVO implements Serializable {
 		this.buyerPhone = buyerPhone;
 	}
 
+	public BigDecimal getRebateDiscount() {
+		return rebateDiscount;
+	}
+
+	public void setRebateDiscount(BigDecimal rebateDiscount) {
+		this.rebateDiscount = rebateDiscount;
+	}
+	
+	public String getRebateTitle() {
+		return rebateTitle;
+	}
+
+	public void setRebateTitle(String rebateTitle) {
+		this.rebateTitle = rebateTitle;
+	}
+
 	@Override
 	public String toString() {
-		return "SalerParentOrderVO{" +
-				"status='" + status + '\'' +
-				", totalPrice='" + totalPrice + '\'' +
-				", orderTime='" + orderTime + '\'' +
-				", estimateNextStatusTime='" + estimateNextStatusTime + '\'' +
-				", buyerName='" + buyerName + '\'' +
-				", buyerIM='" + buyerIM + '\'' +
-				", orderId='" + orderId + '\'' +
-				", countId='" + countId + '\'' +
-				", orderType='" + orderType + '\'' +
-				", orderSource='" + orderSource + '\'' +
-				", payTime='" + payTime + '\'' +
-				", deliverTime='" + deliverTime + '\'' +
-				", comment='" + comment + '\'' +
-				", consignee='" + consignee + '\'' +
-				", phone='" + phone + '\'' +
-				", address='" + address + '\'' +
-				", commodityPostage='" + commodityPostage + '\'' +
-				", sonOrderList=" + sonOrderList +
-				", isEvaluation='" + isEvaluation + '\'' +
-				", closeType='" + closeType + '\'' +
-				", orderNo='" + orderNo + '\'' +
-				", closeReason='" + closeReason + '\'' +
-				", provinceName='" + provinceName + '\'' +
-				", cityName='" + cityName + '\'' +
-				", districtName='" + districtName + '\'' +
-				", buyerNickName='" + buyerNickName + '\'' +
-				", orderOriginalPrice='" + orderOriginalPrice + '\'' +
-				", allCommodityCommission='" + allCommodityCommission + '\'' +
-				", expressBillId='" + expressBillId + '\'' +
-				", ticketStatus='" + ticketStatus + '\'' +
-				", refuseReason='" + refuseReason + '\'' +
-				", expressName='" + expressName + '\'' +
-				", ticketPicList=" + ticketPicList +
-				", receiveTime='" + receiveTime + '\'' +
-				", buyerPhone='" + buyerPhone + '\'' +
-				'}';
+		return "SalerParentOrderVO [status=" + status + ", totalPrice="
+				+ totalPrice + ", orderTime=" + orderTime
+				+ ", estimateNextStatusTime=" + estimateNextStatusTime
+				+ ", buyerName=" + buyerName + ", buyerIM=" + buyerIM
+				+ ", orderId=" + orderId + ", countId=" + countId
+				+ ", orderType=" + orderType + ", orderSource=" + orderSource
+				+ ", payTime=" + payTime + ", deliverTime=" + deliverTime
+				+ ", comment=" + comment + ", consignee=" + consignee
+				+ ", phone=" + phone + ", address=" + address
+				+ ", commodityPostage=" + commodityPostage + ", sonOrderList="
+				+ sonOrderList + ", isEvaluation=" + isEvaluation
+				+ ", closeType=" + closeType + ", orderNo=" + orderNo
+				+ ", closeReason=" + closeReason + ", provinceName="
+				+ provinceName + ", cityName=" + cityName + ", districtName="
+				+ districtName + ", buyerNickName=" + buyerNickName
+				+ ", orderOriginalPrice=" + orderOriginalPrice
+				+ ", allCommodityCommission=" + allCommodityCommission
+				+ ", expressBillId=" + expressBillId + ", ticketStatus="
+				+ ticketStatus + ", refuseReason=" + refuseReason
+				+ ", expressName=" + expressName + ", ticketPicList="
+				+ ticketPicList + ", receiveTime=" + receiveTime
+				+ ", buyerPhone=" + buyerPhone + ", rebateDiscount="
+				+ rebateDiscount + ", rebateTitle=" + rebateTitle + "]";
 	}
+
 }

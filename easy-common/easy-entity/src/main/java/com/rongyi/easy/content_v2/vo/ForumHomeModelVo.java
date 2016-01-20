@@ -1,5 +1,7 @@
 package com.rongyi.easy.content_v2.vo;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.Date;
 /**
@@ -26,6 +28,8 @@ public class ForumHomeModelVo implements Serializable{
 	    private Date updateAt;
 	    /**子模版个数*/
 	    private Integer positionCount;
+
+	     private String forumCode;
 	   
 		public ForumHomeModelVo(){
 	    	
@@ -95,4 +99,27 @@ public class ForumHomeModelVo implements Serializable{
 			this.positionCount = positionCount;
 		}
 
+	public String getForumCode() {
+		return forumCode;
+	}
+
+	public void setForumCode(String forumCode) {
+		this.forumCode = forumCode;
+	}
+
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append("id", id)
+				.append("modelId", modelId)
+				.append("title", title)
+				.append("status", status)
+				.append("sortIdx", sortIdx)
+				.append("updateUser", updateUser)
+				.append("updateAt", updateAt)
+				.append("positionCount", positionCount)
+				.append("forumCode", forumCode)
+				.toString();
+	}
 }

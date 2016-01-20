@@ -1,5 +1,7 @@
 package com.rongyi.core.enumerate;
 
+import java.util.HashMap;
+
 import com.rongyi.core.sms.SmsConfig;
 
 /**
@@ -174,9 +176,71 @@ public enum CodeEnum {
     ERROR_SAVE_NOTICE("1073003","新建店铺公告失败"),
     ERROR_UPDATE_NOTICE("1073004","修改店铺公告失败"),
     ERROR_DELETE_NOTICE("1073005","删除店铺公告失败"),
-    ERROR_OFFLINE_NOTICE("1073006","公告已强制下线");
+    ERROR_OFFLINE_NOTICE("1073006","公告已强制下线"),
+
+    ERROR_NO_RIGHTS("1073007", "亲,您无权限操作上级/下级发布的商品喔～"),
     
-    
+    //操作权限错误(BO：分公司、SM：店长、SG：导购)
+    //分公司无权操作店长
+    ERROR_AUTH_BO_TO_SM_UP("1101000","分公司无权上架店长商品"),
+    ERROR_AUTH_BO_TO_SM_DOWN("1101001","分公司无权下架店长商品"),
+    ERROR_AUTH_BO_TO_SM_EDIT("1101002","分公司无权修改店长商品"),
+    //分公司无权操作导购
+  	ERROR_AUTH_BO_TO_SG_UP("1101003","分公司无权上架导购商品"),
+  	ERROR_AUTH_BO_TO_SG_DOWN("1101004","分公司无权下架导购商品"),
+  	ERROR_AUTH_BO_TO_SG_EDIT("1101005","分公司无权修改导购商品"),
+  	//分公司无权操作
+  	ERROR_AUTH_BO_TO_OTHER_UP("1101006","分公司无权上架商品"),
+  	ERROR_AUTH_BO_TO_OTHER_DOWN("1101007","分公司无权下架商品"),
+  	ERROR_AUTH_BO_TO_OTHER_EDIT("1101008","分公司无权编辑商品"),
+  	//店长无权操作分公司
+  	ERROR_AUTH_SM_TO_BO_UP("1101009","店长无权上架分公司商品"),
+	ERROR_AUTH_SM_TO_BO_DOWN("1101010","店长无权下架分公司商品"),
+	ERROR_AUTH_SM_TO_BO_EDIT("1101011","店长无权修改分公司商品"),
+	//店长无权操作导购
+	ERROR_AUTH_SM_TO_SG_UP("1101012","店长无权上架导购商品"),
+	ERROR_AUTH_SM_TO_SG_DOWN("1101013","店长无权下架导购商品"),
+	ERROR_AUTH_SM_TO_SG_EDIT("1101014","店长无权修改导购商品"),
+	//店长无权操作
+  	ERROR_AUTH_SM_TO_OTHER_UP("1101015","店长无权上架商品"),
+  	ERROR_AUTH_SM_TO_OTHER_DOWN("1101016","店长无权下架商品"),
+  	ERROR_AUTH_SM_TO_OTHER_EDIT("1101017","店长无权编辑商品"),
+    //导购无权操作分公司
+    ERROR_AUTH_SG_TO_BO_UP("1101018","导购无权上架分公司商品"),
+    ERROR_AUTH_SG_TO_BO_DOWN("1101019","导购无权下架分公司商品"),
+	ERROR_AUTH_SG_TO_BO_EDIT("1101020","导购无权修改分公司商品"),
+	//导购无权操作店长
+	ERROR_AUTH_SG_TO_SM_UP("1101021","导购无权上架店长商品"),
+	ERROR_AUTH_SG_TO_SM_DOWN("1101022","导购无权下架店长商品"),
+	ERROR_AUTH_SG_TO_SM_EDIT("1101023","导购无权修改店长商品"),
+	//导购无权操作
+  	ERROR_AUTH_SG_TO_OTHER_UP("1101024","导购无权上架商品"),
+  	ERROR_AUTH_SG_TO_OTHER_DOWN("1101025","导购无权下架商品"),
+  	ERROR_AUTH_SG_TO_OTHER_EDIT("1101026","导购无权编辑商品"),
+  	//其他操作分公司
+  	ERROR_AUTH_OTHER_TO_BO_UP("1101027","无权上架分公司商品商品"),
+  	ERROR_AUTH_OTHER_TO_BO_DOWN("1101028","无权下架分公司商品"),
+  	ERROR_AUTH_OTHER_TO_BO_EDIT("1101029","无权编辑分公司商品"),
+  	//其他操作店长
+  	ERROR_AUTH_OTHER_TO_SM_UP("1101030","无权上架店长商品"),
+  	ERROR_AUTH_OTHER_TO_SM_DOWN("1101031","无权下架店长商品"),
+  	ERROR_AUTH_OTHER_TO_SM_EDIT("1101032","无权编辑店长商品"),
+  	//其他操作导购
+  	ERROR_AUTH_OTHER_TO_SG_UP("1101033","无权上架导购商品"),
+  	ERROR_AUTH_OTHER_TO_SG_DOWN("1101034","无权下架导购商品"),
+  	ERROR_AUTH_OTHER_TO_SG_EDIT("1101035","无权编辑导购商品"),
+  	//其他操作分其他
+  	ERROR_AUTH_OTHER_TO_OTHER_UP("1101036","无权上架商品"),
+  	ERROR_AUTH_OTHER_TO_OTHER_DOWN("1101037","无权下架商品"),
+  	ERROR_AUTH_OTHER_TO_OTHER_EDIT("1101038","无权编辑商品"),
+	
+	//返回前端的错误信息
+	ERROR_ROLE_BO_EDIT("1201101", "你无权限操作，如需修改请联系分公司管理员"),
+	ERROR_ROLE_SG_EDIT("1201102", "你无权限操作，如需修改请联系导购"),
+	ERROR_ROLE_SM_EDIT("1201103", "你无权限操作，如需修改请联系店长"),
+	
+	ERROR_GUIDE_ISDISABLED("1062002","此店铺休息中，无法为您服务");
+
     private String code; 
     private String message; 
     private CodeEnum(String code, String message) {
@@ -190,5 +254,24 @@ public enum CodeEnum {
     
     public String getMessage(){
         return message;
+    }
+    
+    /**
+     * Code枚举字典
+     */
+    private static HashMap<String, CodeEnum> codeEnumDic = new HashMap<String, CodeEnum>();
+    static {
+	    for (CodeEnum ce : CodeEnum.values()) {
+	    	codeEnumDic.put(ce.getActionCode(), ce);
+	    }
+    }
+    
+    /**
+     * 根据Code获取CodeEnum对象
+     * @param codeCode
+     * @return
+     */
+    public static CodeEnum getCodeEnum(String code) {
+    	return codeEnumDic.get(code);
     }
 }

@@ -13,6 +13,10 @@ import java.util.List;
  */
 public class PlatformRebateVO implements Serializable {
 
+    public final static String UNUSABLE_REASON_SCOPE = "未满足使用范围条件";
+
+    public final static String UNUSABLE_REASON_PRICE = "差%.2f元可用该券";
+
     /**
      * 券id
      */
@@ -83,6 +87,11 @@ public class PlatformRebateVO implements Serializable {
      * 抵扣券关联的代金券结合
      */
     private List<VoucherVO> voucherVOs;
+
+    /**
+     * 抵扣券不可用的原因(未满足使用范围条件 | 差XX.XX元可用该券)
+     */
+    private String unUsableReason;
 
     public String getCouponId() {
         return couponId;
@@ -196,6 +205,14 @@ public class PlatformRebateVO implements Serializable {
         this.usageDesc = usageDesc;
     }
 
+    public String getUnUsableReason() {
+        return unUsableReason;
+    }
+
+    public void setUnUsableReason(String unUsableReason) {
+        this.unUsableReason = unUsableReason;
+    }
+
     // 券状态 0:未使用 1:已使用 2:已过期
     public void setConvertStatus(Integer status, Date validEndAt) {
         if (UserRedenvelope.STATUS_UNUSE.equals(status) && new Date().before(validEndAt))
@@ -223,6 +240,7 @@ public class PlatformRebateVO implements Serializable {
                 .append("usageDesc", usageDesc)
                 .append("commodityIds", commodityIds)
                 .append("voucherVOs", voucherVOs)
+                .append("unUsableReason", unUsableReason)
                 .toString();
     }
 }

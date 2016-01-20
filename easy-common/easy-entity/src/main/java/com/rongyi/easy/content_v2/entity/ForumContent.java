@@ -121,7 +121,19 @@ public class ForumContent implements Serializable {
      * 快捷入口的类型值    方式为 , , ,www.baidu.com
      */
     private String quickTypeVal;
+    /**
+     * banner 背景图片
+     */
+    private String bannerBackgroundPic;
+    /**
+     * 快捷图标个数
+     */
+    private Integer quickCount;
 
+    /**
+     * 快捷入口备注
+     */
+    private String quickRemarks;
     public Integer getId() {
         return id;
     }
@@ -328,34 +340,66 @@ public class ForumContent implements Serializable {
     public void setQuickTypeVal(String quickTypeVal) {
         this.quickTypeVal = quickTypeVal;
     }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public String getBannerBackgroundPic() {
+        return bannerBackgroundPic;
+    }
+
+    public void setBannerBackgroundPic(String bannerBackgroundPic) {
+        this.bannerBackgroundPic = bannerBackgroundPic;
+    }
+
+    public Integer getQuickCount() {
+        return quickCount;
+    }
+
+    public void setQuickCount(Integer quickCount) {
+        this.quickCount = quickCount;
+    }
+
+    public String getQuickRemarks() {
+        return quickRemarks;
+    }
+
+    public void setQuickRemarks(String quickRemarks) {
+        this.quickRemarks = quickRemarks;
+    }
+
     @Override
     public String toString() {
-        return "ForumContent{" +
-                "quickTypeVal='" + quickTypeVal + '\'' +
-                ", id=" + id +
-                ", positionId=" + positionId +
-                ", provId='" + provId + '\'' +
-                ", provName='" + provName + '\'' +
-                ", cityId='" + cityId + '\'' +
-                ", cityName='" + cityName + '\'' +
-                ", picUrls='" + picUrls + '\'' +
-                ", title='" + title + '\'' +
-                ", subtitle='" + subtitle + '\'' +
-                ", type=" + type +
-                ", typeVal='" + typeVal + '\'' +
-                ", shopIds='" + shopIds + '\'' +
-                ", publishBeginAt=" + publishBeginAt +
-                ", publishEndAt=" + publishEndAt +
-                ", createUser='" + createUser + '\'' +
-                ", createAt=" + createAt +
-                ", updateUser='" + updateUser + '\'' +
-                ", updateAt=" + updateAt +
-                ", isDeleted=" + isDeleted +
-                ", status=" + status +
-                ", buyerLive='" + buyerLive + '\'' +
-                ", iosVersion='" + iosVersion + '\'' +
-                ", androidVersion='" + androidVersion + '\'' +
-                ", quickType='" + quickType + '\'' +
-                '}';
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("positionId", positionId)
+                .append("provId", provId)
+                .append("provName", provName)
+                .append("cityId", cityId)
+                .append("cityName", cityName)
+                .append("picUrls", picUrls)
+                .append("title", title)
+                .append("subtitle", subtitle)
+                .append("type", type)
+                .append("typeVal", typeVal)
+                .append("shopIds", shopIds)
+                .append("publishBeginAt", publishBeginAt)
+                .append("publishEndAt", publishEndAt)
+                .append("createUser", createUser)
+                .append("createAt", createAt)
+                .append("updateUser", updateUser)
+                .append("updateAt", updateAt)
+                .append("isDeleted", isDeleted)
+                .append("status", status)
+                .append("buyerLive", buyerLive)
+                .append("iosVersion", iosVersion)
+                .append("androidVersion", androidVersion)
+                .append("quickType", quickType)
+                .append("quickTypeVal", quickTypeVal)
+                .append("bannerBackgroundPic", bannerBackgroundPic)
+                .append("quickCount", quickCount)
+                .append("quickRemarks", quickRemarks)
+                .toString();
     }
 }

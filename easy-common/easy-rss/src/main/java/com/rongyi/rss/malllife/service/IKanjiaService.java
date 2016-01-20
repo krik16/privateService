@@ -13,6 +13,14 @@ public interface IKanjiaService {
 	 * @return
 	 */
 	public ResponseVO discountPrice(Activity activity);
+
+
+	/**
+	 * 是否砍价成功
+	 * @param activity
+	 * @return
+	 */
+	public ResponseVO isKanJia(Activity activity);
 	/**
 	 * 砍价记录
 	 * @param activity
@@ -45,5 +53,7 @@ public interface IKanjiaService {
   * @return
   */
 	public Activity selectActivityId(Activity activity);
+	
+	public ResponseVO getRecordList(Activity activity);
 
 }

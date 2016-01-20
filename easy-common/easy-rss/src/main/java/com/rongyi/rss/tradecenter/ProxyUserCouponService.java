@@ -46,5 +46,5 @@ public interface ProxyUserCouponService {
 
     List<UserCoupon> findUserCouponList(Long orderId, String couponId);
 
-    void updateUserCouponStatusByIds(List<Long> userCouponIds, int status);
+    void updateUserCouponStatusByIds(List<Long> userCouponIds, int status,String paymentId);
 }

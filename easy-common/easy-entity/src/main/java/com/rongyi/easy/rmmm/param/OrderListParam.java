@@ -11,13 +11,13 @@ import java.io.Serializable;
  */
 public class OrderListParam implements Serializable {
 
-	private Double couponAmount;// 红包价格
+	private Double couponAmount = 0.0;// 红包价格
 
-	private Double unitPrice;// 单价
+	private Double unitPrice  = 0.0;// 单价
 
-	private Double num;// 数量
+	private Double num = 0.0;// 数量
 	
-	private Double platformRebateAmount;// 抵扣券抵扣金额
+	private Double platformRebateAmount = 0.0;// 抵扣券抵扣金额
 	
 	private String couponId;// 代金券id
 

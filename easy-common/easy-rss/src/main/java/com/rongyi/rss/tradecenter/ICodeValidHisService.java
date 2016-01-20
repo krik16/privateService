@@ -6,7 +6,9 @@ import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.vo.CouponHistoryVO;
 import com.rongyi.easy.coupon.vo.ValidCommissionVO;
 import com.rongyi.easy.tradecenter.TradeValidRecord;
+import com.rongyi.easy.tradecenter.param.BizzValidHistoryParam;
 import com.rongyi.easy.tradecenter.param.CodeValidHisParam;
+import com.rongyi.easy.tradecenter.vo.BizzValidHistoryVO;
 
 /**
  * @author yujisun
@@ -55,4 +57,11 @@ public interface ICodeValidHisService {
 	 * @return
 	 */
 	ValidCommissionVO getValidCommissionPaging(CodeValidHisParam param);
+
+     /**
+      * 商家验码记录列表
+      * @param param
+      * @return
+      */
+     BizzValidHistoryVO getBizzValidHistoryPage(BizzValidHistoryParam param);
 }

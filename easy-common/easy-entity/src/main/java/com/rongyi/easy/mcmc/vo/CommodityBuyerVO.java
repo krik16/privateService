@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.rongyi.easy.mcmc.Commodity;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -23,15 +24,93 @@ public class CommodityBuyerVO implements Serializable{
 	private int commodityStatus;
 	private int commodityAppStatus;// 商品APP显示状态 (0下架  1上架  3待上架)
 	private int commodityType;//渠道  1商家，2买手
-	private boolean supportCourierDeliver;//导购：true是   false否；买手：默认true   
-
+	private boolean supportCourierDeliver;//支持快递发货    导购：true是   false否；买手：默认true   
+	private boolean supportSelfPickup;//支持到店自提  true 是    false否
+	private boolean offlinePayment;// 线下支付
+	private boolean onlinePayment;// 线上支付
+	private boolean offlineRefund;// 线下退款
+	private boolean onlineRefund;// 线上退款
 	private List<String> shopIM;// 店铺可用IM账号
-	
 	private String bullId;//创建人
-	
 	private Double distance = 0.0; //距离
-	
-	
+	private int saleShopCount; //销售店铺数，小于等于1为单店销售，大于1为多店销售
+	private boolean watching = false; //是否正在看
+	private List<Double> location; //经纬度
+	private String systemNumber; //商品SPU
+	private String activityType = "0";	//活动状态[0其他 闪购1、特卖2、秒杀3]
+
+	public String getActivityType() {
+		return activityType;
+	}
+
+	public void setActivityType(String activityType) {
+		this.activityType = activityType;
+	}
+
+	public String getSystemNumber() {
+		return systemNumber;
+	}
+
+	public void setSystemNumber(String systemNumber) {
+		this.systemNumber = systemNumber;
+	}
+
+	public List<Double> getLocation() {
+		return location;
+	}
+
+	public void setLocation(List<Double> location) {
+		this.location = location;
+	}
+
+	public boolean isWatching() {
+		return watching;
+	}
+
+	public void setWatching(boolean watching) {
+		this.watching = watching;
+	}
+
+	public int getSaleShopCount() {
+		return saleShopCount;
+	}
+
+	public void setSaleShopCount(int saleShopCount) {
+		this.saleShopCount = saleShopCount;
+	}
+
+	public boolean isOfflinePayment() {
+		return offlinePayment;
+	}
+
+	public void setOfflinePayment(boolean offlinePayment) {
+		this.offlinePayment = offlinePayment;
+	}
+
+	public boolean isOnlinePayment() {
+		return onlinePayment;
+	}
+
+	public void setOnlinePayment(boolean onlinePayment) {
+		this.onlinePayment = onlinePayment;
+	}
+
+	public boolean isOfflineRefund() {
+		return offlineRefund;
+	}
+
+	public void setOfflineRefund(boolean offlineRefund) {
+		this.offlineRefund = offlineRefund;
+	}
+
+	public boolean isOnlineRefund() {
+		return onlineRefund;
+	}
+
+	public void setOnlineRefund(boolean onlineRefund) {
+		this.onlineRefund = onlineRefund;
+	}
+
 	public Double getDistance() {
 		return distance;
 	}
@@ -125,7 +204,7 @@ public class CommodityBuyerVO implements Serializable{
 	public CommodityBuyerVO(){
 		
 	}
-	
+
 	public CommodityBuyerVO(Commodity commodity){
 		this.commodityId = commodity.getId().toString();
 		this.commodityPicList = commodity.getPicList();
@@ -168,6 +247,7 @@ public class CommodityBuyerVO implements Serializable{
 		// 买手版渠道  0商家，1买手
 		this.commodityType = commodity.getType();
 		this.supportCourierDeliver = commodity.isSupportCourierDeliver();
+		this.supportSelfPickup = commodity.isSupportSelfPickup();
 
 		// 商品待上架且上架时间大于当前时间，app商品状态为 待上架
 		//商品上架或待上架，且上架时间小于当前时间，且下架时间大于当前时间，app商品状态为 上架
@@ -183,6 +263,19 @@ public class CommodityBuyerVO implements Serializable{
 			this.commodityAppStatus = 0;
 		} else {
 			this.commodityAppStatus = this.commodityStatus;
+		}
+		this.systemNumber = commodity.getSystemNumber();
+		
+		//闪购 || 特卖 || 秒杀
+		if (commodity.getSaleId() != null) {
+			this.activityType = "2";
+		} else if (commodity.getFlashSaleId() != null) {
+			this.activityType = "1";
+		} else if (StringUtils.isNotBlank(commodity.getSecKillSign())) {
+			this.activityType = "3";
+		} else {
+			//其他
+			this.activityType = "0";
 		}
 	}
 	
@@ -268,6 +361,14 @@ public class CommodityBuyerVO implements Serializable{
 	public void setSupportCourierDeliver(boolean supportCourierDeliver) {
 		this.supportCourierDeliver = supportCourierDeliver;
 	}
+	
+	public boolean isSupportSelfPickup() {
+		return supportSelfPickup;
+	}
+
+	public void setSupportSelfPickup(boolean supportSelfPickup) {
+		this.supportSelfPickup = supportSelfPickup;
+	}
 
 	public int getCommodityAppStatus() {
 		return commodityAppStatus;
@@ -286,11 +387,22 @@ public class CommodityBuyerVO implements Serializable{
 				.append("commodityCode", commodityCode)
 				.append("commodityStock", commodityStock)
 				.append("commodityStatus", commodityStatus)
+				.append("commodityAppStatus", commodityAppStatus)
 				.append("commodityType", commodityType)
 				.append("supportCourierDeliver", supportCourierDeliver)
+				.append("supportSelfPickup", supportSelfPickup)
+				.append("offlinePayment", offlinePayment)
+				.append("onlinePayment", onlinePayment)
+				.append("offlineRefund", offlineRefund)
+				.append("onlineRefund", onlineRefund)
 				.append("shopIM", shopIM)
 				.append("bullId", bullId)
 				.append("distance", distance)
+				.append("saleShopCount", saleShopCount)
+				.append("watching", watching)
+				.append("location", location)
+				.append("systemNumber", systemNumber)
+				.append("activityType", activityType)
 				.append("commodityOPriceMax", commodityOPriceMax)
 				.append("commodityOPriceMin", commodityOPriceMin)
 				.append("commodityCPriceMax", commodityCPriceMax)
