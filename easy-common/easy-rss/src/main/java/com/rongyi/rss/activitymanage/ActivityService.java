@@ -8,5 +8,11 @@ import com.rongyi.easy.activitymanage.entity.ActivityInfo;
  */
 public interface ActivityService {
 
+    /**
+     * 新建活动
+     * @param activityInfo
+     * @return boolean
+     * @author Leon
+     */
     boolean saveActivityInfo(ActivityInfo activityInfo);
 }

@@ -1,8 +1,15 @@
 package com.rongyi.easy.activitymanage.entity;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class ActivityGoods {
+/**
+ * 活动商品关联实体
+ * Created by Leon on 2016/1/20.
+ */
+public class ActivityGoods implements Serializable {
     private Integer id;
 
     private Integer activityId;
@@ -161,5 +168,27 @@ public class ActivityGoods {
 
     public void setVersion(Integer version) {
         this.version = version;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("activityId", activityId)
+                .append("goodsId", goodsId)
+                .append("type", type)
+                .append("name", name)
+                .append("picUrl", picUrl)
+                .append("subsidyType", subsidyType)
+                .append("subsidyPrice", subsidyPrice)
+                .append("joinStartAt", joinStartAt)
+                .append("joinEndAt", joinEndAt)
+                .append("status", status)
+                .append("createUser", createUser)
+                .append("updateUser", updateUser)
+                .append("createAt", createAt)
+                .append("updateAt", updateAt)
+                .append("version", version)
+                .toString();
     }
 }

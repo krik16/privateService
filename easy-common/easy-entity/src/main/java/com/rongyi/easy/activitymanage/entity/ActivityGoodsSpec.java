@@ -1,6 +1,14 @@
 package com.rongyi.easy.activitymanage.entity;
 
-public class ActivityGoodsSpec {
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import java.io.Serializable;
+
+/**
+ * 活动商品规格实体
+ * Created by Leon on 2016/1/20.
+ */
+public class ActivityGoodsSpec implements Serializable {
     private Integer id;
 
     private Integer activityGoodsId;
@@ -89,5 +97,20 @@ public class ActivityGoodsSpec {
 
     public void setVersion(Integer version) {
         this.version = version;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("activityGoodsId", activityGoodsId)
+                .append("specId", specId)
+                .append("currCount", currCount)
+                .append("partinCount", partinCount)
+                .append("stockCount", stockCount)
+                .append("currPrice", currPrice)
+                .append("activityPrice", activityPrice)
+                .append("version", version)
+                .toString();
     }
 }

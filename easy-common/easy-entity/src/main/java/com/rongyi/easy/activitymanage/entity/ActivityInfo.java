@@ -1,10 +1,15 @@
 package com.rongyi.easy.activitymanage.entity;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ActivityInfo {
+/**
+ * 活动实体
+ * Created by Leon on 2016/1/20.
+ */
+public class ActivityInfo implements Serializable {
     private Integer id;
 
     private String name;
@@ -193,5 +198,30 @@ public class ActivityInfo {
 
     public void setVersion(Integer version) {
         this.version = version;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("name", name)
+                .append("startAt", startAt)
+                .append("endAt", endAt)
+                .append("type", type)
+                .append("synTarget", synTarget)
+                .append("stockDeductType", stockDeductType)
+                .append("stockUpdateType", stockUpdateType)
+                .append("isShipping", isShipping)
+                .append("limitCount", limitCount)
+                .append("status", status)
+                .append("publishChannel", publishChannel)
+                .append("cancelTime", cancelTime)
+                .append("createUser", createUser)
+                .append("updateUser", updateUser)
+                .append("createAt", createAt)
+                .append("updateAt", updateAt)
+                .append("isDeleted", isDeleted)
+                .append("version", version)
+                .toString();
     }
 }

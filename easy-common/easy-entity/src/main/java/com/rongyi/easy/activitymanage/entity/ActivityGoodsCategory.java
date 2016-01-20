@@ -1,6 +1,14 @@
 package com.rongyi.easy.activitymanage.entity;
 
-public class ActivityGoodsCategory {
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import java.io.Serializable;
+
+/**
+ * 活动商品分类实体
+ * Created by Leon on 2016/1/20.
+ */
+public class ActivityGoodsCategory implements Serializable {
     private Integer id;
 
     private Integer activityGoodsId;
@@ -49,5 +57,16 @@ public class ActivityGoodsCategory {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("activityGoodsId", activityGoodsId)
+                .append("categoryId", categoryId)
+                .append("level", level)
+                .append("type", type)
+                .toString();
     }
 }

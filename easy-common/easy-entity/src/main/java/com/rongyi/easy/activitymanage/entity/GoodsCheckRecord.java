@@ -1,8 +1,15 @@
 package com.rongyi.easy.activitymanage.entity;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class GoodsCheckRecord {
+/**
+ * 商品审核记录实体
+ * Created by Leon on 2016/1/20.
+ */
+public class GoodsCheckRecord implements Serializable {
     private Integer id;
 
     private Integer activityGoodsId;
@@ -61,5 +68,17 @@ public class GoodsCheckRecord {
 
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("activityGoodsId", activityGoodsId)
+                .append("status", status)
+                .append("record", record)
+                .append("createUser", createUser)
+                .append("createAt", createAt)
+                .toString();
     }
 }
