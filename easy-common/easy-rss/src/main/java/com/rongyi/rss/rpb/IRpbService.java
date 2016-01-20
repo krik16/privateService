@@ -14,9 +14,7 @@ import java.util.Map;
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
-import com.rongyi.easy.rpb.vo.PayAccountUseTotal;
-import com.rongyi.easy.rpb.vo.PaymentParamVO;
-import com.rongyi.easy.rpb.vo.QueryOrderParamVO;
+import com.rongyi.easy.rpb.vo.*;
 
 /**
  * @Author: 柯军
@@ -161,5 +159,12 @@ public interface IRpbService {
 	 * @datetime:2015年8月28日上午10:38:48
 	 **/
 	public abstract Map<String,Object> exceCancelPay(Integer paymentId,Integer refundRejected);
+
+	/**
+	 *  Description: 退款详情查询
+	 *  @param refundQueryParamVO
+	 *  Author: kejun
+	 **/
+	RefundStatusVO getRefundStatus(RefundQueryParamVO refundQueryParamVO);
 
 }
