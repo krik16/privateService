@@ -22,6 +22,8 @@ public class PaySuccessVO implements Serializable{
 	private String address;// 邮寄地址
 	private String orderNum;// 订单编号
 	private String expressBillId;// 物流单号ID
+	private String payTime;// 付款时间
+	private String commitOrderTime;// 提交订单时间
 	public String getOrderId() {
 		return orderId;
 	}
@@ -100,6 +102,18 @@ public class PaySuccessVO implements Serializable{
 	public void setExpressBillId(String expressBillId) {
 		this.expressBillId = expressBillId;
 	}
+	public String getPayTime() {
+		return payTime;
+	}
+	public void setPayTime(String payTime) {
+		this.payTime = payTime;
+	}
+	public String getCommitOrderTime() {
+		return commitOrderTime;
+	}
+	public void setCommitOrderTime(String commitOrderTime) {
+		this.commitOrderTime = commitOrderTime;
+	}
 	@Override
 	public String toString() {
 		return "PaySuccessVO [orderId=" + orderId + ", sonOrderId="
@@ -108,7 +122,8 @@ public class PaySuccessVO implements Serializable{
 				+ commodityId + ", totalPrice=" + totalPrice + ", shopName="
 				+ shopName + ", consignee=" + consignee + ", phone=" + phone
 				+ ", address=" + address + ", orderNum=" + orderNum
-				+ ", expressBillId=" + expressBillId + "]";
+				+ ", expressBillId=" + expressBillId + ", payTime=" + payTime
+				+ ", commitOrderTime=" + commitOrderTime + "]";
 	}
 	
 }
