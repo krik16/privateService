@@ -10,7 +10,9 @@ package com.rongyi.core.common.third.param.user;/*
  */
 
 
-public class UserThirdParam  {
+import java.io.Serializable;
+
+public class UserThirdParam  implements Serializable {
 
 
   private String data;  //请求参数
