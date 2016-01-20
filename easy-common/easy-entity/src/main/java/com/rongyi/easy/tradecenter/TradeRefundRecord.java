@@ -34,6 +34,8 @@ public class TradeRefundRecord implements Serializable {
 
     private Date updateAt;
 
+    private String paymentId;
+
     public Integer getId() {
         return id;
     }
@@ -152,5 +154,15 @@ public class TradeRefundRecord implements Serializable {
 
     public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
+    }
+
+    public String getPaymentId()
+    {
+        return paymentId;
+    }
+
+    public void setPaymentId(String paymentId)
+    {
+        this.paymentId = paymentId;
     }
 }
