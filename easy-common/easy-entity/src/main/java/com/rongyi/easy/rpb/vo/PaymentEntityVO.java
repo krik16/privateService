@@ -113,7 +113,12 @@ public class PaymentEntityVO {
      */
     private String timeExpire;
 
+    /**
+     * 微信APPId
+     */
+    private String appId;
 
+    private String openId;
     /**
      * 主键id
      *
@@ -412,5 +417,19 @@ public class PaymentEntityVO {
         this.orderType = orderType;
     }
 
+    public String getAppId() {
+        return appId;
+    }
 
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
 }

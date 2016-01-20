@@ -208,3 +208,4 @@ public interface IShopService{
 	 */
 	List<ShopInfoEntity> getShopsByMallId(String filialeId)throws Exception;
 }
+

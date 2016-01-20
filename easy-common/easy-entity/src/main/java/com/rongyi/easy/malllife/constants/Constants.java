@@ -207,6 +207,10 @@ public interface Constants {
          * 云通讯回调地址
          */
         String YTX_CALLBACK_URL="ytxCallBackUrl";
+        /**
+         * 微信授权
+         */
+        String WEBCHAT_CALL = "webchat_call";
     }
     interface MongoTableName {
 

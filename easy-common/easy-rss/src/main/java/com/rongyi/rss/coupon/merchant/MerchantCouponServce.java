@@ -1,3 +1,4 @@
+
 package com.rongyi.rss.coupon.merchant;
 
 import com.rongyi.easy.coupon.entity.Coupon;
@@ -16,11 +17,13 @@ import  java.util.List;
 public interface MerchantCouponServce {
 
     /**
-     * 商家卡券管理后台查询卡券列表
+     * 卡券查询通用接口
      * @param queryParam
      * @return
-     *//*
-    public PagingVO<Coupon> getCouponByPage(QueryParam queryParam);*/
+     */
+    public MerchantPaging<Coupon> getCouponByPageMysql(QueryParam queryParam);
+
+
 
     /**
      *商家卡券通用查询接口
@@ -83,3 +86,4 @@ public interface MerchantCouponServce {
     public Coupon selectByPrimaryKey(String couponId);
 
 }
+ 

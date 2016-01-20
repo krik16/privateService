@@ -10,18 +10,12 @@ import java.util.List;
  * Created at 2015/7/21 17:19.
  */
 public class QueryParam implements Serializable {
-    private Integer reserve;//预留字段
 
-    public Integer getReserve() {
-        return reserve;
-    }
-
-    public void setReserve(Integer reserve) {
-        this.reserve = reserve;
-    }
-
+    public static final String RELATION_AND="AND";
+    public static final String RELATION_OR="OR";
     private static final int PAGESIZE = 10;
     private static final int CURRENTPAGE = 1;
+
     /**
      * 查询的过滤集合
      */
@@ -31,9 +25,8 @@ public class QueryParam implements Serializable {
      */
     private List<QueryOrder> queryOrders;
 
-
     /**
-     * 查询的表集合
+     * 查询的表集合,适用于内连接
      */
     private List<Form> fromList;
     /**
@@ -49,6 +42,16 @@ public class QueryParam implements Serializable {
      * 开始查询记录 对应 (limit 0,10)中的 0
      */
     private int offset;
+
+    /**
+     * 外连接 列表
+     */
+    private List<JoinFilter> joinFilters;
+
+    /**
+     * 预留字段
+     */
+    private Integer reserve;
 
     public List<QueryFilter> getQueryFilters() {
         return queryFilters;
@@ -122,18 +125,23 @@ public class QueryParam implements Serializable {
     }
 
     public QueryParam(List<QueryFilter> queryFilters, List<QueryOrder> queryOrders, List<Form> fromList) {
-
         this.queryFilters = queryFilters;
         this.queryOrders = queryOrders;
         this.fromList = fromList;
     }
-
+    public QueryParam(List<QueryFilter> queryFilters, List<QueryOrder> queryOrders, List<Form> fromList,List<JoinFilter> joinFilters) {
+        this.joinFilters=joinFilters;
+        this.queryFilters = queryFilters;
+        this.queryOrders = queryOrders;
+        this.fromList = fromList;
+    }
     @Override
     public String toString() {
         return "QueryParam{" +
             "pageSize=" + this.getPageSize() +
             ", offset=" + this.getOffset() +
             ", queryOrders=" + queryOrders +
+            ", joinFilters=" + joinFilters +
             ", currentPage=" + this.getCurrentPage() +
             ", queryFilters=" + queryFilters +
             '}';
@@ -141,12 +149,26 @@ public class QueryParam implements Serializable {
 
     public QueryParam() {
     }
+    public Integer getReserve() {
+        return reserve;
+    }
 
+    public void setReserve(Integer reserve) {
+        this.reserve = reserve;
+    }
     public List<Form> getFromList() {
         return fromList;
     }
 
     public void setFromList(List<Form> fromList) {
         this.fromList = fromList;
+    }
+
+    public List<JoinFilter> getJoinFilters() {
+        return joinFilters;
+    }
+
+    public void setJoinFilters(List<JoinFilter> joinFilters) {
+        this.joinFilters = joinFilters;
     }
 }
