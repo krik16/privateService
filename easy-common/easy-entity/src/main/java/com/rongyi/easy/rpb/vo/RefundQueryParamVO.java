@@ -29,6 +29,21 @@ public class RefundQueryParamVO  implements Serializable {
      */
     public  Integer paychannel;
 
+    /**
+     * 容易网操作预计天数
+     */
+    public Integer rongyiPayDay=3;
+
+    /**
+     * 第三方支付平台操作预计天数
+     */
+    public Integer platformPayDay=2;
+
+    /**
+     * 退款完成预计天数
+     */
+    public Integer refundedDay=3;
+
     public String getOrderNo() {
         return orderNo;
     }
@@ -51,5 +66,41 @@ public class RefundQueryParamVO  implements Serializable {
 
     public void setPaychannel(Integer paychannel) {
         this.paychannel = paychannel;
+    }
+
+    public Integer getRongyiPayDay() {
+        return rongyiPayDay;
+    }
+
+    public void setRongyiPayDay(Integer rongyiPayDay) {
+        this.rongyiPayDay = rongyiPayDay;
+    }
+
+    public Integer getPlatformPayDay() {
+        return platformPayDay;
+    }
+
+    public void setPlatformPayDay(Integer platformPayDay) {
+        this.platformPayDay = platformPayDay;
+    }
+
+    public Integer getRefundedDay() {
+        return refundedDay;
+    }
+
+    public void setRefundedDay(Integer refundedDay) {
+        this.refundedDay = refundedDay;
+    }
+
+    @Override
+    public String toString() {
+        return "RefundQueryParamVO{" +
+                "orderNo='" + orderNo + '\'' +
+                ", refundNo='" + refundNo + '\'' +
+                ", paychannel=" + paychannel +
+                ", rongyiPayDay=" + rongyiPayDay +
+                ", platformPayDay=" + platformPayDay +
+                ", refundedDay=" + refundedDay +
+                '}';
     }
 }
