@@ -26,6 +26,46 @@ public class OrderModelListVO implements Serializable{
 	private String paymentWaitMax;// 付款超时,取消订单的时长
 	
 	private Integer rebateNum = 0;// 可使用抵扣券数量
+	
+	private List<OrderModelVO> orderModelListForAll;//2中都支持
+	
+	private List<OrderModelVO> orderModelListForExpress;//仅支持快递
+	
+	private List<OrderModelVO> orderModelListForSelf;//仅支持自提
+	
+	private String message;// 亲，您的订单中有仅支持....
+
+	public List<OrderModelVO> getOrderModelListForAll() {
+		return orderModelListForAll;
+	}
+
+	public void setOrderModelListForAll(List<OrderModelVO> orderModelListForAll) {
+		this.orderModelListForAll = orderModelListForAll;
+	}
+
+	public List<OrderModelVO> getOrderModelListForExpress() {
+		return orderModelListForExpress;
+	}
+
+	public void setOrderModelListForExpress(List<OrderModelVO> orderModelListForExpress) {
+		this.orderModelListForExpress = orderModelListForExpress;
+	}
+
+	public List<OrderModelVO> getOrderModelListForSelf() {
+		return orderModelListForSelf;
+	}
+
+	public void setOrderModelListForSelf(List<OrderModelVO> orderModelListForSelf) {
+		this.orderModelListForSelf = orderModelListForSelf;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
 
 	public List<OrderModelVO> getOrderModelList() {
 		return orderModelList;

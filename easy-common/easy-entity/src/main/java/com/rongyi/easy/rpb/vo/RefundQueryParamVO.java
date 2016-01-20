@@ -37,7 +37,7 @@ public class RefundQueryParamVO  implements Serializable {
     /**
      * 第三方支付平台操作预计天数
      */
-    public Integer platformPayDay=5;
+    public Integer platformPayDay=2;
 
     /**
      * 退款完成预计天数
