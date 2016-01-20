@@ -691,10 +691,10 @@ public class StatementConfigController extends BaseController {
                     shop.setId(shopVO.getId());
                     shop.setName(shopVO.getName());
                     shop.setPosition(shopVO.getPosition());
-                    //查询店铺关联账号信息
-                    List<UserInfoVo> userAccounts = statementConfigService.getAccountInfoByParam(0, 0, 1, shopVO.getId(), null);
-                    shop.setUserAccounts(userAccounts);
-                    reList.add(shop);
+//                    //查询店铺关联账号信息
+//                    List<UserInfoVo> userAccounts = statementConfigService.getAccountInfoByParam(0, 0, 1, shopVO.getId(), null);
+//                    shop.setUserAccounts(userAccounts);
+//                    reList.add(shop);
                 }
             }
             result = ResponseData.success(reList, currpage, pagesize, count);
