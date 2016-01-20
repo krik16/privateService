@@ -35,14 +35,17 @@ public class RefundStatusVO implements Serializable {
     public Date payPlatformDate;
 
     /**
-     * 是否退款完成
+     * 退款结果
+     *SUCCESS—退款成功
+     *PROCESSING—退款处理中
+     *FAIL—退款失败
      */
-    public boolean isRefund;
+    public String refundReslt;
 
     /**
      *退款完成时间
      */
-    public boolean refundDate;
+    public Date refundDate;
 
     public boolean isRongyiProcess() {
         return isRongyiProcess;
@@ -76,19 +79,19 @@ public class RefundStatusVO implements Serializable {
         this.payPlatformDate = payPlatformDate;
     }
 
-    public boolean isRefund() {
-        return isRefund;
+    public String getRefundReslt() {
+        return refundReslt;
     }
 
-    public void setIsRefund(boolean isRefund) {
-        this.isRefund = isRefund;
+    public void setRefundReslt(String refundReslt) {
+        this.refundReslt = refundReslt;
     }
 
-    public boolean isRefundDate() {
+    public Date getRefundDate() {
         return refundDate;
     }
 
-    public void setRefundDate(boolean refundDate) {
+    public void setRefundDate(Date refundDate) {
         this.refundDate = refundDate;
     }
 }
