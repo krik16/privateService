@@ -165,10 +165,10 @@ public class StatementConfigController extends BaseController {
     public ResponseData save(HttpServletRequest request, @RequestBody Map<String, Object> map) {
         LOGGER.info("====config save==== params={}", map.toString());
         try {
-            ResponseData responseData = accessService.check(request, "FNC_STL_ADD");
-            if (responseData.getMeta().getErrno() != 0) {
-                return responseData;
-            }
+//            ResponseData responseData = accessService.check(request, "FNC_STL_ADD");
+//            if (responseData.getMeta().getErrno() != 0) {
+//                return responseData;
+//            }
             if (!map.containsKey("bussinessType") || !map.containsKey("bussinessCode") || !map.containsKey("bussinessAccount") || !map.containsKey("payMode") || !map.containsKey("countCycle")) {
                 return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
             }
@@ -232,10 +232,10 @@ public class StatementConfigController extends BaseController {
         LOGGER.info("====config update==== params={}", map.toString());
         ResponseData responseData;
         try {
-            responseData = accessService.check(request, "FNC_STL_EDIT");
-            if (responseData.getMeta().getErrno() != 0) {
-                return responseData;
-            }
+//            responseData = accessService.check(request, "FNC_STL_EDIT");
+//            if (responseData.getMeta().getErrno() != 0) {
+//                return responseData;
+//            }
             if (!map.containsKey("id")) {
                 return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
             }
@@ -262,10 +262,10 @@ public class StatementConfigController extends BaseController {
         LOGGER.info("====config copy==== params={}", map.toString());
         ResponseData responseData;
         try {
-            responseData = accessService.check(request, "FNC_STL_COPY");
-            if (responseData.getMeta().getErrno() != 0) {
-                return responseData;
-            }
+//            responseData = accessService.check(request, "FNC_STL_COPY");
+//            if (responseData.getMeta().getErrno() != 0) {
+//                return responseData;
+//            }
             if (!map.containsKey("id")) {
                 return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
             }
@@ -666,7 +666,7 @@ public class StatementConfigController extends BaseController {
                     }
                     break;
                 case 4:
-                    List<MallEntity> mallEntities = rOAMallService.getMallEntitysByGroupId(params.getGroupId());
+                    List<MallEntity> mallEntities = rOAMallService.getMallEntitysByGroupId(params.getId());
                     List<String> mallIds = new ArrayList<>();
                     if (CollectionUtils.isNotEmpty(mallEntities)) {
                         for (MallEntity mallEntity : mallEntities) {

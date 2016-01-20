@@ -112,7 +112,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
             bussinessInfoService.insert(bussinessInfo);
             desc = ConstantEnum.OP_DESC_0.getValueStr();
         } else {//修改
-            if (validateUpdate(statementConfig, bussinessInfo, shopConfigs)) {
+            if (!validateUpdate(statementConfig, bussinessInfo, shopConfigs)) {
                 statementConfig.setStatus(ConstantEnum.STATUS_0.getCodeByte());
                 desc = ConstantEnum.OP_DESC_2.getValueStr();
             } else {
@@ -126,6 +126,9 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
         for (ConfigShop configShop : shopConfigs) {
             configShop.setConfigId(statementConfig.getId());
             configShopService.insert(configShop);
+        }
+        if (statementConfig.getStatus()==null) {
+            statementConfig.setStatus((byte) 0);
         }
         saveOperationLog(statementConfig.getId(), statementConfig.getStatus().intValue(), desc, statementConfig.getCreateBy());
     }
@@ -250,7 +253,9 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
             Map<String, Object> map = new HashMap<>();
             map.put("id", id);
             statementConfigVO = this.getBaseDao().selectOneBySql(NAMESPACE + ".selectConfigInfoById", map);
-            statementConfigVO.setConfigShops(selectConfigShopsPage(map, 1, 10000));
+            if (statementConfigVO!=null && statementConfigVO.getLinkType()!=0) {
+                statementConfigVO.setConfigShops(selectConfigShopsPage(map, 1, 10000));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -294,7 +299,9 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
         map.put("statuses", statuses);
         map.put("effectStartTime", statementConfig.getEffectStartTime());
         map.put("effectEndTime", statementConfig.getEffectEndTime());
-
+        if (statementConfig.getId() != null) {
+            map.put("excludeId", statementConfig.getId() );//excludeId: 修改时需要排除的配置id
+        }
         List<ConfigShop> shopConfigs = new ArrayList<>();
         if (lintType == null) {
             result = true;
@@ -302,7 +309,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
             if (lintType == 0)//全部: 1、自身（商场/集团）  2、全部店铺
             {
                 if (bussinessType == 1 || bussinessType == 4) {
-                    if (checkConfigExist(map, null)) {
+                    if (checkConfigExist(map, shopConfigs)) {
                         logger.info("全部: 1、验自身 ---配置已有");
                         ReMap.put("result", true);
                         return ReMap;
@@ -322,7 +329,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
             } else if (lintType == 1)//  自身(商场/集团)
             {
                 if (bussinessType == 1 || bussinessType == 4) {
-                    if (checkConfigExist(map, null)) {
+                    if (checkConfigExist(map, shopConfigs)) {
                         ReMap.put("result", true);
                         return ReMap;
                     }
@@ -460,14 +467,16 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
      * 判断对账配置是否存在
      *
      * @param paramsMap
-     * @param configShops  配置中间表 可以传null
+     * @param configShops  配置中间表
      * @return
      */
     private boolean checkConfigExist(Map<String, Object> paramsMap, List<ConfigShop> configShops) {
         boolean result = false;
-        if (paramsMap.containsKey("shopId") && configShops!=null){
-            ConfigShop configShop = new ConfigShop();
+        ConfigShop configShop = new ConfigShop();
+        if (paramsMap.containsKey("shopId")){
             configShop.setShopId(paramsMap.get("shopId").toString());
+        }
+        if (configShops!=null) {
             configShops.add(configShop);
         }
         int count = this.getBaseDao().selectOneBySql(NAMESPACE + ".validateIsExist", paramsMap);

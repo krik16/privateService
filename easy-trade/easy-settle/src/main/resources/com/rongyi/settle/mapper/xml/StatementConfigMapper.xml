@@ -324,9 +324,9 @@
         select
         count(1)
         from  payment_bill_config pbc
-        join biz_info bi on pbc.id=bi.config_id
-        join config_shop  sc on pbc.id=sc.config_id
-        join ry_rmmm.shop_info si on sc.shop_id=si.shop_mid
+        left join biz_info bi on pbc.id=bi.config_id
+        left join config_shop  sc on pbc.id=sc.config_id
+        left join ry_rmmm.shop_info si on sc.shop_id=si.shop_mid
         <where>
             <if test="cooperateType!=null">
                 and pbc.cooperate_type=#{cooperateType}
@@ -362,6 +362,10 @@
             </if>
             <if test="nowTime!=null">
                 and #{nowTime} > pbc.effect_start_time and pbc.effect_end_time > #{nowTime}
+            </if>
+            <!-- update exclude config -->
+            <if test="excludeId!=null and excludeId!=''">
+                and pbc.id &lt;&gt; #{excludeId}
             </if>
         </where>
     </select>
