@@ -23,6 +23,16 @@ public class RefundActivityListVO implements Serializable{
     
     private List<OldUserCode> refundList; //用户退款券码列表
 
+	public RefundActivityListVO() {
+		super();
+	}
+
+	public RefundActivityListVO(String refundId, List<OldUserCode> refundList) {
+		super();
+		this.refundId = refundId;
+		this.refundList = refundList;
+	}
+
 	public String getRefundId() {
 		return refundId;
 	}
