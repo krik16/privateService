@@ -32,6 +32,8 @@ public class SonDetailListVO implements Serializable {
 
 	private String commodityCommission;// 商品佣金
 
+	private String status;// 佣金状态 1已发放 2处理中 3失败
+
 	public String getNum() {
 		return num;
 	}
@@ -102,6 +104,14 @@ public class SonDetailListVO implements Serializable {
 
 	public void setCommodityCommission(String commodityCommission) {
 		this.commodityCommission = commodityCommission;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@Override

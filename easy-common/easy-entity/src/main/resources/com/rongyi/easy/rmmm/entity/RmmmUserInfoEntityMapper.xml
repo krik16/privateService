@@ -23,6 +23,8 @@
     <result column="card_id" property="cardId" jdbcType="VARCHAR" />
     <result column="share_code" property="sharCode" jdbcType="VARCHAR" />
     <result column="user_desc" property="userDesc" jdbcType="VARCHAR" />
+    <result column="push_id" property="pushId" jdbcType="VARCHAR" />
+
 
   </resultMap>
   <sql id="Example_Where_Clause" >

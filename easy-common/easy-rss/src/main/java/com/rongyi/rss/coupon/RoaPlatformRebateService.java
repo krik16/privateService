@@ -1,5 +1,6 @@
 package com.rongyi.rss.coupon;
 
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.param.RebateAndRedenvelopParam;
 import com.rongyi.easy.coupon.param.UserRebateParam;
@@ -20,7 +21,7 @@ public interface RoaPlatformRebateService {
      * @return boolean
      * @author lqy
      */
-    boolean validPlatformRebate(RebateAndRedenvelopParam param);
+    ResponseVO validPlatformRebate(RebateAndRedenvelopParam param);
 
     /**
      * 根据券码查询抵扣券的抵扣金额（元）和满多少金额（元）

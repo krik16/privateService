@@ -32,6 +32,7 @@ public class FlopgoPrizeByTimesVO implements Serializable{
 	private String recommendation;//推荐文案
 	private String activityId;//翻牌购的id
 	private String isRebate;//0 不是抵扣券  1是抵扣券
+	private Integer prizeLevel;//奖品等级  1 表示一等奖 2表示2等奖  3表示3等奖  -1表示幸运奖  -2表示惊喜奖
 	public FlopgoPrizeByTimesVO(){
 
 	}
@@ -104,6 +105,14 @@ public class FlopgoPrizeByTimesVO implements Serializable{
 	}
 	public Date getUpdated_at() {
 		return updated_at;
+	}
+
+	public Integer getPrizeLevel() {
+		return prizeLevel;
+	}
+
+	public void setPrizeLevel(Integer prizeLevel) {
+		this.prizeLevel = prizeLevel;
 	}
 
 	public String getActivityId() {
@@ -216,6 +225,7 @@ public class FlopgoPrizeByTimesVO implements Serializable{
 				.append("recommendation", recommendation)
 				.append("activityId", activityId)
 				.append("isRebate", isRebate)
+				.append("prizeLevel",prizeLevel)
 				.toString();
 	}
 }

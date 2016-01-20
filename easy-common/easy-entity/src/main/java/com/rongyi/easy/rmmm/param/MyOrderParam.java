@@ -8,12 +8,22 @@ public class MyOrderParam implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private String  jsessionid;//用户信息jsessionid
 
 	private String status;
 	
 	private String currentPage;
 	
 	private String pageSize;
+
+	public String getJsessionid() {
+		return jsessionid;
+	}
+
+	public void setJsessionid(String jsessionid) {
+		this.jsessionid = jsessionid;
+	}
 
 	public String getCurrentPage() {
 		return currentPage;

@@ -3,6 +3,8 @@
  */
 package com.rongyi.easy.rmmm.vo;
 
+import java.math.BigDecimal;
+
 /**
  * Copyright (C),上海容易网电子商务有限公司 author chenjun Description ： time ：2015年7月27日
  * History: 变更记录 <author> <time> <version> <desc> chenjun 2015年7月27日 1.0 创建文件
@@ -18,6 +20,16 @@ public class MaxIntegralVO {
 	private Integer rebateNum = 0;// 可使用抵扣券数量
 	
 	private Integer hongBaoNum = 0;// 可使用红包数量
+	
+	private BigDecimal realOrderPrice;//不包含积分的支付价格
+
+	public BigDecimal getRealOrderPrice() {
+		return realOrderPrice;
+	}
+
+	public void setRealOrderPrice(BigDecimal realOrderPrice) {
+		this.realOrderPrice = realOrderPrice;
+	}
 
 	public Integer getRebateNum() {
 		return rebateNum;
