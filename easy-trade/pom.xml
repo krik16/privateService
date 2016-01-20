@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.rongyi</groupId>
 	<artifactId>easy-trade</artifactId>
@@ -12,7 +12,7 @@
 		<module>easy-virtual-account</module>
 		<module>easy-anti-cheat</module>
 		<module>easy-settle</module>
-		
+
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -641,7 +641,7 @@
 								<goal>clean</goal>
 							</goals>
 							<!--<configuration>-->
-								<!--<directory>src/main/webapp/WEB-INF/lib</directory>-->
+							<!--<directory>src/main/webapp/WEB-INF/lib</directory>-->
 							<!--</configuration>-->
 						</execution>
 					</executions>
@@ -666,9 +666,9 @@
 						</dependency>
 
 						<!--<dependency>-->
-							<!--<groupId>com.rongyi</groupId>-->
-							<!--<artifactId>easy-mybatis-generator</artifactId>-->
-							<!--<version>${project.version}</version>-->
+						<!--<groupId>com.rongyi</groupId>-->
+						<!--<artifactId>easy-mybatis-generator</artifactId>-->
+						<!--<version>${project.version}</version>-->
 						<!--</dependency>-->
 					</dependencies>
 				</plugin>
@@ -703,7 +703,7 @@
 				<!-- 指定项目的JDK版本 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
+					<artifactId>maven-compiler-plugin-jdk</artifactId>
 					<configuration>
 						<source>1.7</source>
 						<target>1.7</target>
