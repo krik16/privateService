@@ -20,7 +20,7 @@ public interface ITradeUserCodeService {
 
     List<TradeUserCode> findTradeUserCodeList(Integer orderId, String couponId);
 
-    void updateTradeUserCodeStatusByIds(List<Integer> tradeUserCodeIds, int status);
+    void updateTradeUserCodeStatusByIds(List<Integer> tradeUserCodeIds, int status,String paymentId);
 
     Map<String, Object> findTradeUserCodeForStatistics(Map<String, Object> paramsMap);
 
