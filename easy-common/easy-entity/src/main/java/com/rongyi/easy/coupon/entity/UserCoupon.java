@@ -148,6 +148,11 @@ public class UserCoupon implements Serializable {
 
     private Double refundAmount;
 
+    /**
+     * 退款id
+     */
+    private String refundId;
+
 
     public UserCoupon() {
 
@@ -449,6 +454,15 @@ public class UserCoupon implements Serializable {
         this.refundAmount = refundAmount;
     }
 
+    public String getRefundId()
+    {
+        return refundId;
+    }
+
+    public void setRefundId(String refundId)
+    {
+        this.refundId = refundId;
+    }
 
     //    使用状态: 未使用[1],已使用[2],已过期[3]
     public void setConvertStatus(Integer status, Date validEndAt) {
@@ -490,6 +504,7 @@ public class UserCoupon implements Serializable {
                 .append("endTime", endTime)
                 .append("checkUserId", checkUserId)
                 .append("refundAmount", refundAmount)
+                .append("refundId", refundId)
                 .toString();
     }
 

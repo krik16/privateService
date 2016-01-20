@@ -1,5 +1,6 @@
 package com.rongyi.rss.tradecenter;
 
+import com.rongyi.easy.malllife.vo.CouponRefundDetailVO;
 import com.rongyi.easy.tradecenter.TradeUserCode;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public interface ITradeUserCodeService {
 
     List<TradeUserCode> findTradeUserCodeList(Integer orderId, String couponId);
 
-    void updateTradeUserCodeStatusByIds(List<Integer> tradeUserCodeIds, int status);
+    void updateTradeUserCodeStatusByIds(List<Integer> tradeUserCodeIds, int status,String paymentId);
 
     Map<String, Object> findTradeUserCodeForStatistics(Map<String, Object> paramsMap);
 
@@ -34,5 +35,7 @@ public interface ITradeUserCodeService {
      * @return
      */
     int getUserCodeNumByMap(Map<String, Object> paramsMap);
+
+    CouponRefundDetailVO getRefundDetail(Integer refundId);
 
 }
