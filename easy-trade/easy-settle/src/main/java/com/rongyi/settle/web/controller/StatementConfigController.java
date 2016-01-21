@@ -220,7 +220,6 @@ public class StatementConfigController extends BaseController {
 
     /**
      * @Description: 修改配置
-     * @param request
      * @param map
      * @return ResponseData
      * @Author: 柯军
@@ -228,7 +227,7 @@ public class StatementConfigController extends BaseController {
      **/
     @RequestMapping("/update")
     @ResponseBody
-    public ResponseData update(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+    public ResponseData update(@RequestBody Map<String, Object> map) {
         LOGGER.info("====config update==== params={}", map.toString());
         ResponseData responseData;
         try {
@@ -250,7 +249,6 @@ public class StatementConfigController extends BaseController {
 
     /**
      * @Description: 复制配置
-     * @param request
      * @param map
      * @return ResponseData
      * @Author: 柯军
@@ -258,7 +256,7 @@ public class StatementConfigController extends BaseController {
      **/
     @RequestMapping("/copy")
     @ResponseBody
-    public ResponseData copy(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+    public ResponseData copy(@RequestBody Map<String, Object> map) {
         LOGGER.info("====config copy==== params={}", map.toString());
         ResponseData responseData;
         try {

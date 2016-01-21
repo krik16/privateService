@@ -123,4 +123,10 @@ public class StatementConfigServiceTest extends BaseTest{
 				BigDecimal bi =new BigDecimal(11.5 + "").divide(new BigDecimal(100)).setScale(2, BigDecimal.ROUND_HALF_UP);
 				System.err.println(bi.doubleValue());
 	}
+
+	@Test
+	public void testGetUserAccountByConfigId(){
+		List<String> accounts = statementConfigService.getUserAccountByConfigId(93);
+		System.err.println(accounts);
+	}
 }

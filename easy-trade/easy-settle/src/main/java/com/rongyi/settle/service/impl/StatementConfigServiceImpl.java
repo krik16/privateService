@@ -380,6 +380,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
         if (configId==null){
             return null;
         }
+        logger.info("getUserAccountByConfigId start configId = {}", configId);
         List<String> result = new ArrayList<>();
         try {
             StatementConfigVO config = selectConfigInfoById(configId);
@@ -440,6 +441,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
         } catch (Exception e) {
             e.printStackTrace();
         }
+        logger.info("getUserAccountByConfigId end result = {}", result);
         return result;
     }
 
