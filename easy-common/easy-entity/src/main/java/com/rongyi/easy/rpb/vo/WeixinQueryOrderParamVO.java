@@ -17,7 +17,8 @@ import java.io.Serializable;
  * 
  **/
 
-public class WeixinQueryOrderParamVO implements Serializable {
+public class
+		WeixinQueryOrderParamVO implements Serializable {
 
 	/**
 	 * 
@@ -275,4 +276,30 @@ public class WeixinQueryOrderParamVO implements Serializable {
 		this.result_code = result_code;
 	}
 
+	@Override
+	public String toString() {
+		return "WeixinQueryOrderParamVO{" +
+				"ret_code=" + ret_code +
+				", ret_msg='" + ret_msg + '\'' +
+				", input_charset='" + input_charset + '\'' +
+				", trade_state='" + trade_state + '\'' +
+				", trade_mode='" + trade_mode + '\'' +
+				", partner='" + partner + '\'' +
+				", bank_type='" + bank_type + '\'' +
+				", bank_billno='" + bank_billno + '\'' +
+				", total_fee='" + total_fee + '\'' +
+				", fee_type='" + fee_type + '\'' +
+				", transaction_id='" + transaction_id + '\'' +
+				", out_trade_no='" + out_trade_no + '\'' +
+				", is_split='" + is_split + '\'' +
+				", is_refund='" + is_refund + '\'' +
+				", attach='" + attach + '\'' +
+				", time_end='" + time_end + '\'' +
+				", transport_fee='" + transport_fee + '\'' +
+				", product_fee='" + product_fee + '\'' +
+				", discount='" + discount + '\'' +
+				", rmb_total_fee='" + rmb_total_fee + '\'' +
+				", result_code='" + result_code + '\'' +
+				'}';
+	}
 }
