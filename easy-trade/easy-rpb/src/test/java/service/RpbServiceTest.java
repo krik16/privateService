@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.rongyi.easy.rpb.vo.RefundQueryParamVO;
+import com.rongyi.rpb.unit.AliPayUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.testng.annotations.Test;
@@ -36,6 +37,9 @@ public class RpbServiceTest extends BaseTest{
 
 	@Autowired
 	IRpbService iRpbService;
+
+	@Autowired
+	AliPayUnit aliPayUnit;
 	
 //	@Test
 	public void testOperateWeixinRefund(){
@@ -83,6 +87,11 @@ public class RpbServiceTest extends BaseTest{
 		RefundQueryParamVO refundQueryParamVO = new RefundQueryParamVO();
 		refundQueryParamVO.setRefundNo("0012145456640100231");
 		iRpbService.getRefundStatus(refundQueryParamVO);
+	}
+
+	@Test
+	public void testqueryRefund(){
+		aliPayUnit.queryRefund(null,"201601210012111979520171917");
 	}
 
 

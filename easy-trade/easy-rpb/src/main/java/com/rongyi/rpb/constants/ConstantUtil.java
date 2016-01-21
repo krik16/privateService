@@ -80,6 +80,7 @@ public interface ConstantUtil {
 		
 		String ALIPAY_QUERY_ORDER_GATEWAY = "https://www.alipay.com/cooperate/gateway.do?"; //订单查询接口
 		String QUERY_SERVICE = "single_trade_query";//支付宝查询服务--单笔查询服务(不可修改)
+		String QUERY_REFUND_SERVICE="refund_fastpay_query";//支付宝退款查询接口
 		
 	}
 
