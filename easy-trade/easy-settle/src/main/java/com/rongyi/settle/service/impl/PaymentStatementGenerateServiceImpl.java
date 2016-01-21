@@ -1,22 +1,5 @@
 package com.rongyi.settle.service.impl;
 
-import java.text.ParseException;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.text.SimpleDateFormat;
-
-import com.rongyi.core.common.util.DateUtil;
-import org.joda.time.DateTime;
-import org.joda.time.Days;
-import org.joda.time.Interval;
-import org.joda.time.Months;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.settle.entity.PaymentStatement;
 import com.rongyi.easy.settle.entity.StatementConfig;
@@ -26,6 +9,17 @@ import com.rongyi.settle.constants.SettleConstant;
 import com.rongyi.settle.service.PaymentStatementService;
 import com.rongyi.settle.service.StatementConfigService;
 import com.rongyi.settle.util.DateUtils;
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.Months;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by xgq on 2015/9/22.
