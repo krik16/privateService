@@ -190,7 +190,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
             }
             if (regularDay == null) {//当前时间大于固定时间最大值，例如固定日期5&10&20,当前时间为30号
                 Calendar calendar = Calendar.getInstance();
-                calendar.setTime(  DateUtil.getDaysInAdd(toDay, -toDay.getDay()));
+                calendar.setTime(DateUtil.getDaysInAdd(toDay, -toDay.getDay()));
                 calendar.add(Calendar.MONTH, 1);
                 regularDay = DateUtil.getDaysInAdd(calendar.getTime(), Integer.valueOf(regularDays[0]));
             }
@@ -649,6 +649,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 
     /**
      * 券订单汇总数据再汇总
+     * 按照券类型 + 店铺 合并
      *
      * @param list 原始数据
      * @return 再汇总后的数据
@@ -656,9 +657,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
     private List<CouponExcelDto> adjustCouponExcelDtoList(List<CouponExcelDto> list) {
         Map<String, CouponExcelDto> map = new HashMap();
         for (CouponExcelDto couponExcelDto : list) {
-            CouponExcelDto existCouponExcelDto = map.get(couponExcelDto.getCouponId());
+            CouponExcelDto existCouponExcelDto = map.get(couponExcelDto.getCouponId() + couponExcelDto.getShopName());
             if (existCouponExcelDto == null) {
-                map.put(couponExcelDto.getCouponId(), couponExcelDto);
+                map.put(couponExcelDto.getCouponId() + couponExcelDto.getShopName(), couponExcelDto);
             } else {
                 // 汇总数量
                 existCouponExcelDto.setCouponCount(existCouponExcelDto.getCouponCount() + couponExcelDto.getCouponCount());
@@ -681,7 +682,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 
     /**
      * 商品订单汇总数据再汇总，用于多家（店铺/导购）的数据汇总到一张（商场、品牌的）报表中
-     * 商品订单汇总数据不拆分到具体的商品类型；仅根据订单类型（商品订单，退货订单等）进行合并
+     * 商品订单汇总数据不拆分到具体的商品类型；仅根据订单类型（商品订单，退货订单等）+ 店铺 进行合并
      *
      * @param list 原始数据
      * @return 再汇总后的数据
@@ -689,9 +690,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
     private List<OrderSettlementTopDto> adjustOrderExcelDtoList(List<OrderSettlementTopDto> list) {
         Map<String, OrderSettlementTopDto> map = new HashMap();
         for (OrderSettlementTopDto orderTopDto : list) {
-            OrderSettlementTopDto existOrderTopDto = map.get(orderTopDto.getOrderType());
+            OrderSettlementTopDto existOrderTopDto = map.get(orderTopDto.getOrderType() + orderTopDto.getShopName());
             if (existOrderTopDto == null) {
-                map.put(orderTopDto.getOrderType(), orderTopDto);
+                map.put(orderTopDto.getOrderType() + orderTopDto.getShopName(), orderTopDto);
             } else {
                 // 汇总订单数量
                 existOrderTopDto.setOrderCount(existOrderTopDto.getOrderCount() + orderTopDto.getOrderCount());

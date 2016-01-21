@@ -615,6 +615,7 @@
 	</select>
 
 	<resultMap id="CouponExcelDtoMap" type="com.rongyi.settle.dto.CouponExcelDto">
+		<result column="shop_name" property="shopName" jdbcType="VARCHAR" />
 		<result column="coupon_id" property="couponId" jdbcType="VARCHAR" />
 		<result column="title" property="couponName" jdbcType="VARCHAR" />
 		<result column="pay_channel" property="revenueType" jdbcType="VARCHAR" />
@@ -627,6 +628,7 @@
 	</resultMap>
 
 	<resultMap id="OrderTopDtoMap" type="com.rongyi.settle.dto.OrderSettlementTopDto">
+		<result column="shop_name" property="shopName" jdbcType="VARCHAR" />
 		<result column="income_type" property="incomeType" jdbcType="VARCHAR" />
 		<result column="order_type" property="orderType" jdbcType="VARCHAR" />
 		<result column="order_count" property="orderCount" jdbcType="INTEGER" />
@@ -659,7 +661,8 @@
 
 	<select id="selectForCouponExcelDto" parameterType="java.util.Map" resultMap="CouponExcelDtoMap">
 		SELECT SQL_NO_CACHE
-			UC.coupon_id AS coupon_id
+			SI.shop_name
+			,UC.coupon_id AS coupon_id
 			,IFNULL(UC.title, '其他') AS title
 			,'收入' AS pay_channel
 			,COUNT(1) AS coupon_count
@@ -684,12 +687,13 @@
 				#{startTime,jdbcType=TIMESTAMP} AND #{endTime,jdbcType=TIMESTAMP}
 			AND
 				UC.shop_id = #{shopId,jdbcType=VARCHAR}
-		GROUP BY UC.coupon_id
+		GROUP BY SI.id,UC.coupon_id
 	</select>
 	
 	<select id="selectForCouponExcelDtoByUsers" parameterType="java.util.Map" resultMap="CouponExcelDtoMap">
 		SELECT SQL_NO_CACHE
-			UC.coupon_id AS coupon_id
+			SI.shop_name
+			,UC.coupon_id AS coupon_id
 			,IFNULL(UC.title, '其他') AS title
 			,'收入' AS pay_channel
 			,COUNT(1) AS coupon_count
@@ -717,7 +721,7 @@
 				<foreach item="item" index="index" collection="userIds" open="("  separator="," close=")">  
 	            	#{item}  
 	        	</foreach>  
-		GROUP BY UC.coupon_id
+		GROUP BY SI.id,UC.coupon_id
 	</select>
 
 	<select id="selectForConfigShopsById" parameterType="java.util.Map" resultType="String">
@@ -731,7 +735,8 @@
 
 	<select id="selectForCouponExcelDtoByMid" parameterType="java.util.Map" resultMap="CouponExcelDtoMap">
 		SELECT SQL_NO_CACHE
-			UC.coupon_id AS coupon_id
+			SI.shop_name
+			,UC.coupon_id AS coupon_id
 			,IFNULL(UC.title, '其他') AS title
 			,'收入' AS pay_channel
 			,COUNT(1) AS coupon_count
@@ -765,11 +770,12 @@
 			<if test="shopId != null">
 				AND SI.shop_mid = #{shopId,jdbcType=VARCHAR}
 			</if>
-		GROUP BY UC.coupon_id
+		GROUP BY SI.id,UC.coupon_id
 	</select>
 
 	<select id="selectForOrderTopDto" parameterType="java.util.Map" resultMap="OrderTopDtoMap">
 		SELECT SQL_NO_CACHE
+			SI.shop_name,
 			'收入' AS income_type,
 			'商品订单' AS order_type,
 		    COUNT(1) AS order_count,
@@ -810,6 +816,7 @@
 	            	#{item}  
 	        	</foreach>  
 			</if>
+		GROUP BY SI.id
 	</select>
 	
 	<select id="selectForOrderDetailDto" parameterType="java.util.Map" resultMap="OrderDetailDtoMap">
@@ -845,7 +852,7 @@
 				INNER JOIN ry_osm.order_event H2 ON A.order_no = H2.order_no AND H2.`status` = 2
 				INNER JOIN ry_osm.order_event H3 ON A.order_no = H3.order_no AND H3.`status` = 3
 				LEFT JOIN ry_osm.order_event H4 ON A.order_no = H4.order_no AND H4.`status` = 4
-				LEFT JOIN ry_rpb.payment_order O ON A.order_no = O.order_no AND O.trade_type = 0
+				LEFT JOIN ry_rpb.payment_order O ON A.order_no = O.order_no AND O.trade_type = 0 AND O.`status` = 2
 				LEFT JOIN ry_data.m_mcmc_commodity N ON B.commodity_mid = N.mid
 				LEFT JOIN ry_user.malllife_user_info MUA ON MUA.id = A.buyer_id
 		WHERE H3.create_at BETWEEN #{startTime,jdbcType=TIMESTAMP} AND #{endTime,jdbcType=TIMESTAMP}

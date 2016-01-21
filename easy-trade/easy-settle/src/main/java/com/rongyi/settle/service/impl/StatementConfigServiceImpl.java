@@ -7,20 +7,28 @@
 
 package com.rongyi.settle.service.impl;
 
-import java.util.*;
-
+import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.bsoms.entity.UserInfo;
 import com.rongyi.easy.roa.entity.MallEntity;
 import com.rongyi.easy.roa.vo.ShopPositionVO;
 import com.rongyi.easy.roa.vo.ShopVO;
+import com.rongyi.easy.settle.entity.BussinessInfo;
 import com.rongyi.easy.settle.entity.ConfigShop;
+import com.rongyi.easy.settle.entity.OperationLog;
+import com.rongyi.easy.settle.entity.StatementConfig;
 import com.rongyi.easy.settle.vo.ConfigShopVO;
+import com.rongyi.easy.settle.vo.StatementConfigVO;
 import com.rongyi.rss.bsoms.IUserInfoService;
 import com.rongyi.rss.roa.ROAMallService;
 import com.rongyi.rss.roa.ROAShopService;
 import com.rongyi.rss.shop.IShopService;
 import com.rongyi.settle.constants.ConstantEnum;
+import com.rongyi.settle.constants.SettleConstant;
+import com.rongyi.settle.mapper.OperationLogMapper;
+import com.rongyi.settle.mapper.StatementConfigMapper;
+import com.rongyi.settle.service.BussinessInfoService;
 import com.rongyi.settle.service.ConfigShopService;
+import com.rongyi.settle.service.StatementConfigService;
 import com.rongyi.settle.web.controller.vo.UserInfoVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -30,15 +38,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
-import com.rongyi.easy.settle.entity.BussinessInfo;
-import com.rongyi.easy.settle.entity.OperationLog;
-import com.rongyi.easy.settle.entity.StatementConfig;
-import com.rongyi.easy.settle.vo.StatementConfigVO;
-import com.rongyi.settle.mapper.OperationLogMapper;
-import com.rongyi.settle.mapper.StatementConfigMapper;
-import com.rongyi.settle.service.BussinessInfoService;
-import com.rongyi.settle.service.StatementConfigService;
+import java.util.*;
 
 /**
  * @User 柯军
@@ -184,8 +184,32 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
         return oldShopConfigs != null && oldShopConfigs.size() == shopConfigs.size() && oldShopConfigs.containsAll(shopConfigs);
     }
 
+	/* (non-Javadoc)
+	 * @see com.rongyi.settle.service.StatementConfigService#selectForScheduleDaily()
+	 */
 	@Override
-	public List<StatementConfig> selectForSchedule() {
+	public List<StatementConfig> selectForScheduleDaily() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("currentTime", new Date());
+		return this.getBaseDao().selectListBySql(NAMESPACE + ".selectForSchedule", map);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.rongyi.settle.service.StatementConfigService#selectForScheduleSpacing()
+	 */
+	@Override
+	public List<StatementConfig> selectForScheduleSpacing() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("currentTime", new Date());
+        map.put("cycleType", SettleConstant.CountCycleType.DAY);
+        return this.getBaseDao().selectListBySql(NAMESPACE + ".selectForScheduleSpacing", map);
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.rongyi.settle.service.StatementConfigService#selectForScheduleJumping()
+	 */
+	@Override
+	public List<StatementConfig> selectForScheduleJumping() {
 		Map<String, Object> map = new HashMap<>();
 
 		Calendar cal = Calendar.getInstance();
@@ -193,9 +217,10 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
 		cal.add(Calendar.DATE, -1);
 
 		map.put("currentTime", cal.getTime());
-		return this.getBaseDao().selectListBySql(NAMESPACE + ".selectForSchedule", map);
+        map.put("cycleType", SettleConstant.CountCycleType.OTHER);
+		return this.getBaseDao().selectListBySql(NAMESPACE + ".selectForScheduleJumping", map);
 	}
-
+	
     @Override
     public boolean updatePaymentStatusByIds(List<Integer> ids, Integer status, String desc, String userId) {
         boolean result = false;

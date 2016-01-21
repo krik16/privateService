@@ -30,13 +30,43 @@ public class DateUtils {
     }
 
     /**
+     * 获取指定日期的第一秒
+     *
+     * @param date 指定的日期
+     * @return 指定日期当天的第一秒的时间
+     * @throws Exception
+     */
+    public static Date getAllocatedDayFirstSecond(Date date) throws Exception {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(FORMAT_DATE);
+        String allocDateStr = dateFormat.format(date);
+        String timeBegin = allocDateStr + firstSecond;
+        SimpleDateFormat dateTimeFormat = new SimpleDateFormat(FORMAT_DATETIME);
+        return dateTimeFormat.parse(timeBegin);
+    }
+
+    /**
+     * 获取指定日期的最后一秒
+     *
+     * @param date 指定的日期
+     * @return 指定日期当天的最后一秒的时间
+     * @throws Exception
+     */
+    public static Date getAllocatedDayLastSecond(Date date) throws Exception {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(FORMAT_DATE);
+        String allocDateStr = dateFormat.format(date);
+        String timeBegin = allocDateStr + lastSecond;
+        SimpleDateFormat dateTimeFormat = new SimpleDateFormat(FORMAT_DATETIME);
+        return dateTimeFormat.parse(timeBegin);
+    }
+
+    /**
      * 获取前N天的第一秒
      * 
      * @param offset 日期偏移量（单位：天）
      * @return
      * @throws Exception
-    * @author erliang
-    * @date 2016年1月11日
+     * @author erliang
+     * @date 2016年1月11日
      */
     public static Date getSomedayFirstSecond(int offset) throws Exception {
         Calendar instance = Calendar.getInstance();
@@ -48,7 +78,7 @@ public class DateUtils {
         SimpleDateFormat dateTimeFormat = new SimpleDateFormat(FORMAT_DATETIME);
         return dateTimeFormat.parse(timeBegin);
     }
-    
+
     public static Date getYesterdayLastSecond() throws Exception {
         Calendar instance = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat(FORMAT_DATE);
