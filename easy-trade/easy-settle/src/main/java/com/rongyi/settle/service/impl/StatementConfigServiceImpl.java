@@ -119,8 +119,9 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                 desc = ConstantEnum.OP_DESC_1.getValueStr();
             }
             update(statementConfig);
+            bussinessInfo.setId(null);
             bussinessInfo.setConfigId(statementConfig.getId());
-            bussinessInfoService.update(bussinessInfo);
+            bussinessInfoService.updateByConfigId(bussinessInfo);
             configShopService.deleteConfigShopByConfigId(statementConfig.getId());
         }
         for (ConfigShop configShop : shopConfigs) {

@@ -178,7 +178,9 @@ public class StatementConfigController extends BaseController {
             StatementConfig statementConfig = new StatementConfig();
             BussinessInfo bussinessInfo = new BussinessInfo();
             MapUtils.toObject(statementConfig, map);
-            statementConfig.setCreateAt(DateUtil.getCurrDateTime());
+            if (!map.containsKey("id")) {
+                statementConfig.setCreateAt(DateUtil.getCurrDateTime());
+            }
             statementConfig.setCreateBy(getUserName(request));
             statementConfig.setBussinessId(statementConfig.getBussinessCode());
             if (map.containsKey("effectStartTime") && map.containsKey("effectEndTime")) {
