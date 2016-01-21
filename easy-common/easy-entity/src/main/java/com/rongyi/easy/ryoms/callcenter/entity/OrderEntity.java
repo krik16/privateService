@@ -82,13 +82,13 @@ public class OrderEntity implements Serializable {
 		this.title = title;
 	}
 
-//	public String getContent() {
-//		return content;
-//	}
-//
-//	public void setContent(String content) {
-//		this.content = content;
-//	}
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
 
 	public int getModuleId() {
 		return moduleId;
@@ -136,7 +136,7 @@ public class OrderEntity implements Serializable {
 	private String title = "";
 
 	// 内容
-	// private String content = "";
+	private String content = "";
 
 	// 板块
 	private int moduleId = 0;

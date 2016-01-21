@@ -1,5 +1,6 @@
 package com.rongyi.rss.ryoms.callcenter;
 
+import com.rongyi.easy.ryoms.callcenter.entity.OrderEntity;
 import com.rongyi.easy.ryoms.callcenter.param.OrderSaveParam;
 import com.rongyi.easy.ryoms.callcenter.param.OrderSearchParam;
 import com.rongyi.easy.ryoms.callcenter.vo.OrderInfoVO;
@@ -19,7 +20,7 @@ public interface OrderService {
 	 * @param entity
 	 * @return
 	 */
-	public int add(OrderSaveParam entity);
+	public int add(OrderEntity entity);
 
 	/**
 	 * 修改工单
@@ -27,7 +28,7 @@ public interface OrderService {
 	 * @param entity
 	 * @return
 	 */
-	public int upt(OrderSaveParam entity);
+	public int upt(OrderEntity entity);
 
 	/**
 	 * 查看工单详情
