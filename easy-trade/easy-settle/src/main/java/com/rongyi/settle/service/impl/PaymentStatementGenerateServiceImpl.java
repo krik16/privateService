@@ -91,7 +91,7 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
         outer:
         for (StatementConfig statementConfig : statementConfigJumpingList) {
             try {
-                List<String> regularDays = Arrays.asList(statementConfig.getCycleRegularDay().split(","));
+                List<String> regularDays = Arrays.asList(statementConfig.getCycleRegularDay().split("&"));
                 DateTime effectEndTime = new DateTime(statementConfig.getEffectEndTime());
                 DateTime currentTime = new DateTime(new Date());
 
