@@ -252,6 +252,8 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
             map.put("id", id);
             statementConfigVO = this.getBaseDao().selectOneBySql(NAMESPACE + ".selectConfigInfoById", map);
             if (statementConfigVO!=null && statementConfigVO.getLinkType()!=0) {
+                map.clear();
+                map.put("configId", id);
                 statementConfigVO.setConfigShops(selectConfigShopsPage(map, 1, 10000));
             }
         } catch (Exception e) {
