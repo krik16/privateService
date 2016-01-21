@@ -369,79 +369,78 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
         return ReMap;
     }
 
-//    private ConfigShop convertToShopConfig(int isOneself, String id, Byte businessType, Byte linkShopOp, String userLists, String userAccounts, List<ConfigShop> shopConfigs) {
-//        ConfigShop shopConfig = null;
-//        String userIds = "";
-//        String accounts = "";
-//        if (isOneself == 1) {
-//            //自身
-//            List<UserInfoVo> userInfoVos = getAccountInfoByParam(isOneself, Integer.valueOf(businessType), null, id, null);
-//            if (CollectionUtils.isNotEmpty(userInfoVos)) {
-//                for (UserInfoVo userInfoVo : userInfoVos) {
-//                    if (StringUtils.isBlank(userIds)) {
-//                        userIds += userInfoVo.getId();
-//                        accounts += userInfoVo.getUserAccount();
-//                    } else {
-//                        userIds += "," + userInfoVo.getId();
-//                        accounts += "," + userInfoVo.getUserAccount();
-//                    }
-//                }
-//                shopConfig = new ConfigShop();
-//                shopConfig.setUserList(userIds);
-//                shopConfig.setRealUserList(userIds);
-//                shopConfig.setAccountList(accounts);
-//                shopConfig.setRealAccountList(accounts);
-//            } else {
-//                logger.info("================== 查自身 没有账户");
-//            }
-//        } else if (isOneself == 0) {
-//            List<UserInfoVo> userInfoVos = getAccountInfoByParam(isOneself, null, 1, id, null);
-//            List<String> allUserId = new ArrayList<>();
-//            List<String> allUserAccount = new ArrayList<>();
-//            if (CollectionUtils.isNotEmpty(userInfoVos)) {
-//                for (UserInfoVo user : userInfoVos) {
-//                    allUserId.add(user.getId().toString());
-//                    allUserAccount.add(user.getUserAccount());
-//                }
-//            }
-//            if (linkShopOp.intValue() == 0) {
-//                shopConfig = new ConfigShop();
-//                shopConfig.setShopId(id);
-//                if (userLists == null && userAccounts == null) {//关联全部
-//                    if (CollectionUtils.isNotEmpty(allUserId)) {
-//                        logger.info("===================>>>>>>>>>>>>>>>>> realUser: " + allUserId + " realAccount: " + allUserAccount.toString());
-//                    }
-//                    shopConfig.setUserList(CollectionUtil.listToString(allUserId, ","));
-//                    shopConfig.setAccountList(CollectionUtil.listToString(allUserAccount, ","));
-//                    shopConfig.setRealUserList(CollectionUtil.listToString(allUserId, ","));
-//                    shopConfig.setRealAccountList(CollectionUtil.listToString(allUserAccount, ","));
-//                } else {
-//                    shopConfig.setUserList(userLists);
-//                    shopConfig.setRealUserList(userLists);
-//                    shopConfig.setAccountList(userAccounts);
-//                    shopConfig.setRealAccountList(userAccounts);
-//                }
-//            } else if (linkShopOp.intValue() == 1) {
-//                shopConfig = new ConfigShop();
-//                shopConfig.setUserList(userLists);
-//                shopConfig.setShopId(id);
-//                if (StringUtils.isNotBlank(userLists)) {
-//                    allUserId.removeAll(Arrays.asList(userLists.split(",")));
-//                    allUserAccount.removeAll(Arrays.asList(userAccounts.split(",")));
-//                }
-//                if (CollectionUtils.isNotEmpty(allUserId)) {
-//                    shopConfig.setRealUserList(CollectionUtil.listToString(allUserId, ","));
-//                    shopConfig.setRealAccountList(CollectionUtil.listToString(allUserAccount, ","));
-//                }
-//            } else {
-//                logger.info(" linkShopOp is error:" + linkShopOp);
-//            }
-//        }
-//        if (shopConfig != null) {
-//            shopConfigs.add(shopConfig);
-//        }
-//        return shopConfig;
-//    }
+    /**
+     * 根据配置id查询该配置下配置的所有账号
+     * @param configId
+     * @return
+     */
+    public List<String> getUserAccountByConfigId(Integer configId){
+        if (configId==null){
+            return null;
+        }
+        List<String> result = new ArrayList<>();
+        try {
+            StatementConfigVO config = selectConfigInfoById(configId);
+            if (config!=null)
+            {
+                List<UserInfoVo> userInfoVos = new ArrayList<>();
+                if (config.getLinkType()!=null && config.getLinkType()==0)//全部
+                {
+                    List<UserInfoVo> selfUsers = getAccountInfoByParam(ConstantEnum.IS_ONESELF.getCodeInt(), Integer.valueOf(config.getBussinessType()), null, config.getBussinessId(), null);
+                    if(CollectionUtils.isNotEmpty(selfUsers)) {
+                        userInfoVos.addAll(selfUsers);
+                    }
+                    List<ShopVO> shops = getShopIdByParam(config.getBussinessType(), config.getBussinessId());
+                    for (ShopVO shop : shops){//getAccountInfoByParam(isOneself, null, 1, businessId, null);
+                        List<UserInfoVo> shopUsers = getAccountInfoByParam(ConstantEnum.NOT_ONESELF.getCodeInt(), null, 1, shop.getId(), null);
+                        if(CollectionUtils.isNotEmpty(shopUsers))
+                            userInfoVos.addAll(shopUsers);
+                    }
+                }
+                else if (config.getLinkType()!=null && (config.getLinkType()==1|| config.getLinkType()==2))//自身 or 部分
+                {
+                    if (config.getConfigShops()!=null)
+                    {
+                        List<String> shopIds = new ArrayList<>();
+                        List<String> realShopIds = new ArrayList<>();
+                        for(ConfigShopVO configShop : config.getConfigShops()){
+                            if (StringUtils.isNotBlank(configShop.getShopId())){
+                                shopIds.add(configShop.getShopId());
+                            }
+                        }
+                        if (config.getLinkShopOp()==0)
+                            realShopIds = shopIds;
+                        else {
+                            List<ShopVO> shops = getShopIdByParam(config.getBussinessType(), config.getBussinessId());
+                            for (ShopVO shop : shops){
+                                realShopIds.add(shop.getId());
+                                realShopIds.removeAll(shopIds);
+                            }
+                        }
+                        for (String shopId : realShopIds){
+                            List<UserInfoVo> shopUsers = getAccountInfoByParam(ConstantEnum.NOT_ONESELF.getCodeInt(), null, 1, shopId, null);
+                            if(CollectionUtils.isNotEmpty(shopUsers))
+                                userInfoVos.addAll(shopUsers);
+                        }
+                    }
+                    if (config.getLinkType()==1)
+                    {
+                        List<UserInfoVo> selfUsers = getAccountInfoByParam(ConstantEnum.IS_ONESELF.getCodeInt(), Integer.valueOf(config.getBussinessType()), null, config.getBussinessId(), null);
+                        if(CollectionUtils.isNotEmpty(selfUsers)) {
+                            userInfoVos.addAll(selfUsers);
+                        }
+                    }
+                }
+                for (UserInfoVo userInfoVo : userInfoVos){
+                    result.add(userInfoVo.getUserAccount());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 
     @Override
     public boolean validateNeedPay(String shopId, String userId, Integer guideType) {
@@ -549,6 +548,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
      */
     @Override
     public List<UserInfoVo> getAccountInfoByParam(Integer isOneself, Integer type, Integer guideType, String id, String userAccount) {
+        List<UserInfoVo> userAccounts = new ArrayList<>();
         Map<String, Object> paramsMap = new HashMap<>();
         paramsMap.put("isDisabled", 0);
         if (StringUtils.isNotBlank(userAccount)) {
@@ -577,7 +577,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                     paramsMap.put("identity", 0);
                     break;
                 default:
-                    return null;
+                    return userAccounts;
             }
         } else if (isOneself == 0) {
             if (guideType == 1) //产品确认该情况（店长+导购）
@@ -593,7 +593,6 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
             paramsMap.put("shopId", id);
         }
         List<UserInfo> userInfos = iUserInfoService.getFullUserInfoByRelevanceId(paramsMap);
-        List<UserInfoVo> userAccounts = new ArrayList<>();
         if (CollectionUtils.isNotEmpty(userInfos)) {
             for (UserInfo userInfo : userInfos) {
                 UserInfoVo userInfoVo = new UserInfoVo();

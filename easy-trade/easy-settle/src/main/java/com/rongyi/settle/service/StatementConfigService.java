@@ -128,6 +128,15 @@ public interface StatementConfigService {
 	 **/
 	Map<String, Object> validateIsExist(StatementConfig statementConfig, List<Byte> statuses, String[] linkShopIds) throws Exception;
 
+	/**
+	 * 获取账户信息
+	 * @param isOneself
+	 * @param type
+	 * @param guideType
+	 * @param id
+	 * @param userAccount
+	 * @return
+	 */
 	List<UserInfoVo> getAccountInfoByParam(Integer isOneself, Integer type, Integer guideType, String id, String userAccount);
 
 	/**
@@ -147,4 +156,11 @@ public interface StatementConfigService {
 	List<ConfigShopVO> selectConfigShopsPage(Map<String, Object> paramsMap, int currPage, int pageSize) throws Exception;
 
 	int selectConfigShopsPageCount(Map<String, Object> paramsMap);
+
+	/**
+	 * 根据配置id查询该配置下配置的所有账号
+	 * @param configId
+	 * @return
+	 */
+	List<String> getUserAccountByConfigId(Integer configId);
 }

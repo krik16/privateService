@@ -60,6 +60,9 @@ public enum ConstantEnum {
     OP_DESC_1(1,"修改生效"),
     OP_DESC_2(2,"修改待审核"),
 
+    IS_ONESELF(1,"关联自身"),
+    NOT_ONESELF(0,"非关联自身"),
+
 	PAGE_SIZE(10,"分页条数");
     
     private Object code;
