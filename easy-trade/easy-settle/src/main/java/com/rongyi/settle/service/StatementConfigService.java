@@ -120,13 +120,13 @@ public interface StatementConfigService {
 	/**	
 	 * @Description: 验证对账单配置是否已存在 
 	 * @param statementConfig
-	 * @param linkShopId
+	 * @param linkShopIds
 	 * @param statuses
 	 * @return
 	 * @Author:  柯军
 	 * @datetime:2015年10月21日下午2:38:48
 	 **/
-	Map<String, Object> validateIsExist(StatementConfig statementConfig, List<Byte> statuses, Map linkShopId) throws Exception;
+	Map<String, Object> validateIsExist(StatementConfig statementConfig, List<Byte> statuses, String[] linkShopIds) throws Exception;
 
 	List<UserInfoVo> getAccountInfoByParam(Integer isOneself, Integer type, Integer guideType, String id, String userAccount);
 

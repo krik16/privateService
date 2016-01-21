@@ -144,8 +144,8 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
     private boolean validateUpdate(StatementConfig statementConfig, BussinessInfo bussinessInfo, List<ConfigShop> shopConfigs) {
         StatementConfigVO oldStatementConfigVO = selectConfigInfoById(statementConfig.getId());
         BussinessInfo oldBussinessInfo = bussinessInfoService.selectByConfigId(statementConfig.getId());
-        if (oldStatementConfigVO==null || oldBussinessInfo==null)
-            return  false;
+        if (oldStatementConfigVO == null || oldBussinessInfo == null)
+            return false;
         if (!oldStatementConfigVO.getVerifyType().equals(statementConfig.getVerifyType())) {//对账单审核方式
             return false;
         } else if (!oldStatementConfigVO.getDatumType().equals(statementConfig.getDatumType())) {//付款基准类型
@@ -156,13 +156,13 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
             return false;
         } else if (StringUtils.isNotBlank(oldStatementConfigVO.getRollDay()) && !oldStatementConfigVO.getRollDay().equals(statementConfig.getRollDay())) {//滚动日期
             return false;
-        } else if (oldStatementConfigVO.getCountCycle()!=null && !oldStatementConfigVO.getCountCycle().equals(statementConfig.getCountCycle())) {//计算周期类型
+        } else if (oldStatementConfigVO.getCountCycle() != null && !oldStatementConfigVO.getCountCycle().equals(statementConfig.getCountCycle())) {//计算周期类型
             return false;
-        }else if (oldStatementConfigVO.getCycleDay()!=null && !oldStatementConfigVO.getCycleDay().equals(statementConfig.getCycleDay())) {//固定计算周期
+        } else if (oldStatementConfigVO.getCycleDay() != null && !oldStatementConfigVO.getCycleDay().equals(statementConfig.getCycleDay())) {//固定计算周期
             return false;
-        }else if (StringUtils.isNotBlank(oldStatementConfigVO.getCycleRegularDay()) && !oldStatementConfigVO.getCycleRegularDay().equals(statementConfig.getCycleRegularDay())) {//滚动计算周期
+        } else if (StringUtils.isNotBlank(oldStatementConfigVO.getCycleRegularDay()) && !oldStatementConfigVO.getCycleRegularDay().equals(statementConfig.getCycleRegularDay())) {//滚动计算周期
             return false;
-            } else if (!oldStatementConfigVO.getPayChannel().equals(statementConfig.getPayChannel())) {//付款结算方式
+        } else if (!oldStatementConfigVO.getPayChannel().equals(statementConfig.getPayChannel())) {//付款结算方式
             return false;
         } else if (!oldStatementConfigVO.getEffectStartTime().equals(statementConfig.getEffectStartTime()) || !oldStatementConfigVO.getEffectEndTime().equals(statementConfig.getEffectEndTime())) {//生效日期
             return false;
@@ -181,9 +181,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
         }
         //关联店铺
         List<ConfigShop> oldShopConfigs = configShopService.getConfigShopsByConfigId(statementConfig.getId());
-        if (oldShopConfigs==null)
-            return false;
-        return oldShopConfigs.size()==shopConfigs.size() && oldShopConfigs.containsAll(shopConfigs);
+        return oldShopConfigs != null && oldShopConfigs.size() == shopConfigs.size() && oldShopConfigs.containsAll(shopConfigs);
     }
 
 	@Override
@@ -285,7 +283,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
     }
 
     @Override
-    public Map<String, Object> validateIsExist(StatementConfig statementConfig, List<Byte> statuses, Map linkShopId) throws Exception {
+    public Map<String, Object> validateIsExist(StatementConfig statementConfig, List<Byte> statuses, String[] linkShopIds) throws Exception {
         boolean result = false;
         Byte bussinessType = statementConfig.getBussinessType();
         String bussinessId = statementConfig.getBussinessId();
@@ -333,9 +331,8 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                         ReMap.put("result", true);
                         return ReMap;
                     }
-                    if (linkShopId != null) {
-                        Set shopIds = linkShopId.keySet();
-                        for (Object shopId : shopIds) {
+                    if (linkShopIds != null) {
+                        for (String shopId : linkShopIds) {
                             map.put("shopId", shopId);
                             if (checkConfigExist(map, shopConfigs)) {
                                 ReMap.put("result", true);
@@ -350,9 +347,8 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                 }
             } else if (lintType == 2)//部分
             {
-                if (linkShopId != null) {
-                    Set shopIds = linkShopId.keySet();
-                    for (Object shopId : shopIds) {
+                if (linkShopIds != null) {
+                    for (String shopId : linkShopIds) {
                         map.put("shopId", shopId);
                         if (checkConfigExist(map, shopConfigs)) {
                             ReMap.put("result", true);
