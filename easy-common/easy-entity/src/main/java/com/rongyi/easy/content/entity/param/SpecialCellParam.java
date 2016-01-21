@@ -3,6 +3,8 @@ package com.rongyi.easy.content.entity.param;
 import java.io.Serializable;
 
 import com.rongyi.easy.malllife.param.MalllifeBaseParam;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * 
 * @ClassName: SpecialCellParam 
@@ -111,5 +113,17 @@ public class SpecialCellParam extends MalllifeBaseParam implements Serializable{
 	 */
 	public void setLatitude(String latitude) {
 		this.latitude = latitude;
+	}
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append("keyword", keyword)
+				.append("cityId", cityId)
+				.append("cityName", cityName)
+				.append("sort", sort)
+				.append("longitude", longitude)
+				.append("latitude", latitude)
+				.toString();
 	}
 }

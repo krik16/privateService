@@ -2,6 +2,7 @@ package com.rongyi.core.util;
 
 
 import org.springframework.util.StringUtils;
+
 import com.rongyi.core.constant.CouponConst;
 
 /**

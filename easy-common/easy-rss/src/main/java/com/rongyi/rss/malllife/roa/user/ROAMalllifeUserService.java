@@ -33,6 +33,14 @@ public interface ROAMalllifeUserService {
 	public void registUser(MalllifeUser malllifeUser) throws Exception;
 
 	/**
+	 *
+	 * @param malllifeUser 注册信息
+	 * @return 0失败 >0成功
+	 * @throws Exception
+	 */
+	public String registMaillLifeUser(MalllifeUser malllifeUser) throws Exception;
+
+	/**
 	 * 根据用户Id查询 uuid
 	 * 
 	 * @param uid

@@ -19,7 +19,6 @@ public class SaleDetailVO implements Serializable {
     private String name;
     private String activityUrl;
     private String contentUrl;
-
     private List<CommodityBuyerVO> commodityList;
 
     public Integer getId() {

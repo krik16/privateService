@@ -1,11 +1,11 @@
 package com.rongyi.easy.coupon.entity;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import java.beans.Transient;
 import java.io.Serializable;
 import java.util.Date;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * 老用户代金券
@@ -493,4 +493,70 @@ public class UserCoupon implements Serializable {
                 .toString();
     }
 
+    private String holderId;
+
+    private String holderType;
+    
+    private String holderName;
+
+    private Integer apply_shops_count; // 可用店铺数
+    
+	/**
+	 * @return the holderId
+	 */
+	public String getHolderId() {
+		return holderId;
+	}
+
+	/**
+	 * @param holderId the holderId to set
+	 */
+	public void setHolderId(String holderId) {
+		this.holderId = holderId;
+	}
+
+	/**
+	 * @return the holderType
+	 */
+	public String getHolderType() {
+		return holderType;
+	}
+
+	/**
+	 * @param holderType the holderType to set
+	 */
+	public void setHolderType(String holderType) {
+		this.holderType = holderType;
+	}
+
+	/**
+	 * @return the holderName
+	 */
+	public String getHolderName() {
+		return holderName;
+	}
+
+	/**
+	 * @param holderName the holderName to set
+	 */
+	public void setHolderName(String holderName) {
+		this.holderName = holderName;
+	}
+
+	/**
+	 * @return the apply_shops_count
+	 */
+	public Integer getApply_shops_count() {
+		return apply_shops_count;
+	}
+
+	/**
+	 * @param apply_shops_count the apply_shops_count to set
+	 */
+	public void setApply_shops_count(Integer apply_shops_count) {
+		this.apply_shops_count = apply_shops_count;
+	}
+    
+    
+    
 }
