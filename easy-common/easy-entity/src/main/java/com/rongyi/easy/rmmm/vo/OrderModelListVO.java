@@ -27,36 +27,16 @@ public class OrderModelListVO implements Serializable{
 	
 	private Integer rebateNum = 0;// 可使用抵扣券数量
 	
-	private List<OrderModelVO> orderModelListForAll;//2中都支持
-	
-	private List<OrderModelVO> orderModelListForExpress;//仅支持快递
-	
-	private List<OrderModelVO> orderModelListForSelf;//仅支持自提
-	
 	private String message;// 亲，您的订单中有仅支持....
+	
+	private List<Integer> orderModelListNum;//[3,2,1] 分别对应 都支持数量，仅支持快递数量，仅支持自提数量
 
-	public List<OrderModelVO> getOrderModelListForAll() {
-		return orderModelListForAll;
+	public List<Integer> getOrderModelListNum() {
+		return orderModelListNum;
 	}
 
-	public void setOrderModelListForAll(List<OrderModelVO> orderModelListForAll) {
-		this.orderModelListForAll = orderModelListForAll;
-	}
-
-	public List<OrderModelVO> getOrderModelListForExpress() {
-		return orderModelListForExpress;
-	}
-
-	public void setOrderModelListForExpress(List<OrderModelVO> orderModelListForExpress) {
-		this.orderModelListForExpress = orderModelListForExpress;
-	}
-
-	public List<OrderModelVO> getOrderModelListForSelf() {
-		return orderModelListForSelf;
-	}
-
-	public void setOrderModelListForSelf(List<OrderModelVO> orderModelListForSelf) {
-		this.orderModelListForSelf = orderModelListForSelf;
+	public void setOrderModelListNum(List<Integer> orderModelListNum) {
+		this.orderModelListNum = orderModelListNum;
 	}
 
 	public String getMessage() {
@@ -110,8 +90,8 @@ public class OrderModelListVO implements Serializable{
 	@Override
 	public String toString() {
 		return "OrderModelListVO [orderModelList=" + orderModelList + ", supportWay=" + supportWay + ", totalCommodityNum="
-				+ totalCommodityNum + ", paymentWaitMax=" + paymentWaitMax
-				+ ", rebateNum=" + rebateNum + "]";
+				+ totalCommodityNum + ", paymentWaitMax=" + paymentWaitMax + ", rebateNum=" + rebateNum + ", message=" + message
+				+ ", orderModelListNum=" + orderModelListNum + "]";
 	}
 
 }
