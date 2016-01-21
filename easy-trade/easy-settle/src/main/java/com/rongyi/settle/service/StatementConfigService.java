@@ -179,9 +179,9 @@ public interface StatementConfigService {
 	int selectConfigShopsPageCount(Map<String, Object> paramsMap);
 
 	/**
-	 * 根据配置id查询该配置下配置的所有账号
+	 * 根据配置id查询该配置下配置的所有账号id
 	 * @param configId
 	 * @return
 	 */
-	List<String> getUserAccountByConfigId(Integer configId);
+	List<Integer> getUserIdByConfigId(Integer configId);
 }

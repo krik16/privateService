@@ -397,16 +397,16 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
     }
 
     /**
-     * 根据配置id查询该配置下配置的所有账号
+     * 根据配置id查询该配置下配置的所有账号id
      * @param configId
      * @return
      */
-    public List<String> getUserAccountByConfigId(Integer configId){
+    public List<Integer> getUserIdByConfigId(Integer configId){
         if (configId==null){
             return null;
         }
         logger.info("getUserAccountByConfigId start configId = {}", configId);
-        List<String> result = new ArrayList<>();
+        List<Integer> result = new ArrayList<>();
         try {
             StatementConfigVO config = selectConfigInfoById(configId);
             if (config!=null)
@@ -460,7 +460,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                     }
                 }
                 for (UserInfoVo userInfoVo : userInfoVos){
-                    result.add(userInfoVo.getUserAccount());
+                    result.add(userInfoVo.getId());
                 }
             }
         } catch (Exception e) {
