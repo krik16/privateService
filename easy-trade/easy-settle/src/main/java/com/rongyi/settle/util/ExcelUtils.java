@@ -1,20 +1,18 @@
 package com.rongyi.settle.util;
 
+import com.rongyi.settle.constants.SettleConstant;
+import com.rongyi.settle.dto.*;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.text.DecimalFormat;
-
-import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.xssf.usermodel.*;
-
-import com.rongyi.settle.constants.SettleConstant;
-import com.rongyi.settle.dto.CouponCodeExcelDto;
-import com.rongyi.settle.dto.CouponExcelDto;
-import com.rongyi.settle.dto.OrderSettlementDetailVO;
-import com.rongyi.settle.dto.OrderSettlementTopDto;
-import com.rongyi.settle.dto.PaymentStatementExcelDto;
 
 /**
  * Created by xgq on 2015/9/29.
@@ -261,14 +259,14 @@ public class ExcelUtils {
         totalDiscountCell.setCellValue(orderHbSum + orderScoreSum + orderDiscountSum + couponHbSum + couponScoreSum + couponDiscountSum);
 
         // sheet1: 券明细数据
-        int sheetCountC = (int) Math.ceil(excelDto.getCouponCodeExcelDtoList().size() / 6d);
+        int sheetCountC = (int) Math.ceil(excelDto.getCouponCodeExcelDtoList().size() / 60000d);
         for (int j = 0; j < sheetCountC; j++) {
             int toIndex = 0;
-            int fromIndex = j * 6;
+            int fromIndex = j * 60000;
             if (j == sheetCountC - 1) {
                 toIndex = excelDto.getCouponCodeExcelDtoList().size();
             } else {
-                toIndex = (j + 1) * 6;
+                toIndex = (j + 1) * 60000;
             }
 
             XSSFSheet sheet1;
@@ -351,7 +349,7 @@ public class ExcelUtils {
             int toIndex = 0;
             int fromIndex = j * 60000;
             if (j == sheetCountO - 1) {
-                toIndex = excelDto.getCouponCodeExcelDtoList().size();
+                toIndex = excelDto.getOrderSettlementDetailVOList().size();
             } else {
                 toIndex = (j + 1) * 60000;
             }

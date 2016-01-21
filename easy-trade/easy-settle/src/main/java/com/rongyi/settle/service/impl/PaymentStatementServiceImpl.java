@@ -24,6 +24,7 @@ import com.rongyi.settle.service.PaymentStatementService;
 import com.rongyi.settle.service.StatementConfigService;
 import com.rongyi.settle.unit.SendEmailUnit;
 import com.rongyi.settle.util.AmountUtil;
+import com.rongyi.settle.util.CollectionUtil;
 import com.rongyi.settle.util.DateUtils;
 import com.rongyi.settle.util.ExcelUtils;
 import org.apache.commons.collections.CollectionUtils;
@@ -437,34 +438,37 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 
         logger.info("对账单获取数据开始，BusinessId = " + statementConfig.getBussinessId() + " BusinessType = " + statementConfig.getBussinessType());
 
-        List<String> userIds = statementConfigService.getUserAccountByConfigId(statementConfig.getId());
-        for (String idStr : userIds) {
-            if (idStr == null || idStr.isEmpty())
-                continue;
-            List<CouponStatementDetailDto> couponStatementDetailDtos = selectForStatementDetailsByUsers(idStr, paymentStatement.getCycleStartTime(),
-                    paymentStatement.getCycleEndTime());
-            if (couponStatementDetailDtos != null) {
-                couponStatementDetailDtoList.addAll(couponStatementDetailDtos);
-            }
+        List<Integer> userIds = statementConfigService.getUserIdByConfigId(statementConfig.getId());
+        String idStr = CollectionUtil.ListToStringAll(userIds, ",");
 
-            List<CouponExcelDto> couponExcelDtos = selectForCouponExcelDtoByUsers(idStr, paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime());
-            if (couponExcelDtos != null) {
-                couponExcelDtoList.addAll(couponExcelDtos);
-            }
-
-            List<OrderSettlementTopDto> orderSettlementTopDtos = selectForOrderTopDto(null, null, null, idStr, paymentStatement.getCycleStartTime(),
-                    paymentStatement.getCycleEndTime());
-            if (orderSettlementTopDtos != null) {
-                orderTopDtoList.addAll(orderSettlementTopDtos);
-            }
-
-            List<OrderSettlementDetailDto> orderSettlementDetailDtos = selectForOrderDetailDto(null, null, null, idStr, paymentStatement.getCycleStartTime(),
-                    paymentStatement.getCycleEndTime());
-            if (orderSettlementDetailDtos != null) {
-                orderDetailDtoList.addAll(orderSettlementDetailDtos);
-            }
-
+        if (idStr == null || idStr.isEmpty()) {
+            logger.error("对账单配置未获取到对应用户信息，BusinessId = " + statementConfig.getBussinessId() + " BusinessType = " + statementConfig.getBussinessType());
+            return;
         }
+
+        List<CouponStatementDetailDto> couponStatementDetailDtos = selectForStatementDetailsByUsers(idStr, paymentStatement.getCycleStartTime(),
+                paymentStatement.getCycleEndTime());
+        if (couponStatementDetailDtos != null) {
+            couponStatementDetailDtoList.addAll(couponStatementDetailDtos);
+        }
+
+        List<CouponExcelDto> couponExcelDtos = selectForCouponExcelDtoByUsers(idStr, paymentStatement.getCycleStartTime(), paymentStatement.getCycleEndTime());
+        if (couponExcelDtos != null) {
+            couponExcelDtoList.addAll(couponExcelDtos);
+        }
+
+        List<OrderSettlementTopDto> orderSettlementTopDtos = selectForOrderTopDto(null, null, null, idStr, paymentStatement.getCycleStartTime(),
+                paymentStatement.getCycleEndTime());
+        if (orderSettlementTopDtos != null) {
+            orderTopDtoList.addAll(orderSettlementTopDtos);
+        }
+
+        List<OrderSettlementDetailDto> orderSettlementDetailDtos = selectForOrderDetailDto(null, null, null, idStr, paymentStatement.getCycleStartTime(),
+                paymentStatement.getCycleEndTime());
+        if (orderSettlementDetailDtos != null) {
+            orderDetailDtoList.addAll(orderSettlementDetailDtos);
+        }
+
         if (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.SHOP)) {
             ShopVO shopVO = roaShopService.getShopVOById(statementConfig.getBussinessId());
             paymentStatementExcelDto.setShopName(shopVO.getName());
