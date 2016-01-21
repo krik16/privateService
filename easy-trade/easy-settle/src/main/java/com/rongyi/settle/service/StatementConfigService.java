@@ -82,12 +82,34 @@ public interface StatementConfigService {
 	 **/
 	void saveStatementConfigAndInfo(StatementConfig statementConfig,BussinessInfo bussinessInfo, List<ConfigShop> shopConfigs);
 
-	/**
-	 * @Description: 定时任务查询符合条件的对账配置
-	 * @Author:  xgq
-	 **/
-	List<StatementConfig> selectForSchedule();
 
+	/**
+	 * 获取对账单配置（旧）
+	 * 
+	 * @return
+	* @author erliang
+	* @date 2016年1月15日
+	 */
+	List<StatementConfig> selectForScheduleDaily();
+
+	/**
+	 * 获取对账单配置（多日间隔为一个结算周期）
+	 * 
+	 * @return
+	 * @author erliang
+	 * @date 2016年1月15日
+	 */
+	List<StatementConfig> selectForScheduleSpacing();
+
+	/**
+	 * 获取对账单配置（指定日期）
+	 *
+	 * @return
+	 * @author erliang
+	 * @date 2016年1月15日
+	 */
+	List<StatementConfig> selectForScheduleJumping();
+	
 	/**
 	 * 批量对账单配置审核
 	 * @param ids
@@ -151,7 +173,6 @@ public interface StatementConfigService {
 	boolean validateNeedPay(String shopId,String userId,Integer gradeType);
 
 	List<StatementConfig> checkeffectStart(Map<String, Object> paramsMap);
-
 
 	List<ConfigShopVO> selectConfigShopsPage(Map<String, Object> paramsMap, int currPage, int pageSize) throws Exception;
 

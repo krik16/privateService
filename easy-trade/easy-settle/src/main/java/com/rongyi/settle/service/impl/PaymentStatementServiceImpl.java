@@ -1,14 +1,5 @@
 package com.rongyi.settle.service.impl;
 
-import java.math.BigDecimal;
-import java.util.*;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
@@ -25,13 +16,7 @@ import com.rongyi.rss.rpb.IRpbService;
 import com.rongyi.rss.rpb.OrderNoGenService;
 import com.rongyi.settle.constants.ConstantEnum;
 import com.rongyi.settle.constants.SettleConstant;
-import com.rongyi.settle.dto.CouponCodeExcelDto;
-import com.rongyi.settle.dto.CouponExcelDto;
-import com.rongyi.settle.dto.CouponStatementDetailDto;
-import com.rongyi.settle.dto.OrderSettlementDetailDto;
-import com.rongyi.settle.dto.OrderSettlementDetailVO;
-import com.rongyi.settle.dto.OrderSettlementTopDto;
-import com.rongyi.settle.dto.PaymentStatementExcelDto;
+import com.rongyi.settle.dto.*;
 import com.rongyi.settle.mapper.OperationLogMapper;
 import com.rongyi.settle.mapper.PaymentStatementMapper;
 import com.rongyi.settle.service.BussinessInfoService;
@@ -41,6 +26,14 @@ import com.rongyi.settle.unit.SendEmailUnit;
 import com.rongyi.settle.util.AmountUtil;
 import com.rongyi.settle.util.DateUtils;
 import com.rongyi.settle.util.ExcelUtils;
+import org.apache.commons.collections.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.util.*;
 
 /**
  * Created by xgq on 2015/9/22. Modified by ZhengYl on 2015/12/08
@@ -190,7 +183,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
             }
             if (regularDay == null) {//当前时间大于固定时间最大值，例如固定日期5&10&20,当前时间为30号
                 Calendar calendar = Calendar.getInstance();
-                calendar.setTime(  DateUtil.getDaysInAdd(toDay, -toDay.getDay()));
+                calendar.setTime(DateUtil.getDaysInAdd(toDay, -toDay.getDay()));
                 calendar.add(Calendar.MONTH, 1);
                 regularDay = DateUtil.getDaysInAdd(calendar.getTime(), Integer.valueOf(regularDays[0]));
             }
@@ -442,104 +435,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
         List<OrderSettlementTopDto> orderTopDtoList = new ArrayList<>();
         List<OrderSettlementDetailDto> orderDetailDtoList = new ArrayList<>();
 
-        // boolean dataLoad = false;
-
         logger.info("对账单获取数据开始，BusinessId = " + statementConfig.getBussinessId() + " BusinessType = " + statementConfig.getBussinessType());
-        // if
-        // (statementConfig.getLinkType().equals(SettleConstant.LinkType.ALL)) {
-        // if
-        // (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.MALL))
-        // {
-        // // 商场 & all
-        // couponStatementDetailDtoList =
-        // selectForStatementDetails(statementConfig.getBussinessId(), null,
-        // null, paymentStatement.getCycleStartTime(),
-        // paymentStatement.getCycleEndTime());
-        //
-        // couponExcelDtoList =
-        // selectForCouponExcelDto(statementConfig.getBussinessId(), null, null,
-        // paymentStatement.getCycleStartTime(),
-        // paymentStatement.getCycleEndTime());
-        //
-        // orderTopDtoList = selectForOrderTopDto(null,
-        // statementConfig.getBussinessId(), null, null,
-        // paymentStatement.getCycleStartTime(),
-        // paymentStatement.getCycleEndTime());
-        //
-        // orderDetailDtoList = selectForOrderDetailDto(null,
-        // statementConfig.getBussinessId(), null, null,
-        // paymentStatement.getCycleStartTime(),
-        // paymentStatement.getCycleEndTime());
-        //
-        // paymentStatementExcelDto.setMallName(statementConfig.getBussinessName());
-        //
-        // dataLoad = true;
-        //
-        // } else if
-        // (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.BRAND))
-        // {
-        // // 品牌 & all
-        // couponStatementDetailDtoList = selectForStatementDetails(null,
-        // statementConfig.getBussinessId(), null,
-        // paymentStatement.getCycleStartTime(),
-        // paymentStatement.getCycleEndTime());
-        //
-        // couponExcelDtoList = selectForCouponExcelDto(null,
-        // statementConfig.getBussinessId(), null,
-        // paymentStatement.getCycleStartTime(),
-        // paymentStatement.getCycleEndTime());
-        //
-        // orderTopDtoList = selectForOrderTopDto(null, null,
-        // statementConfig.getBussinessId(), null,
-        // paymentStatement.getCycleStartTime(),
-        // paymentStatement.getCycleEndTime());
-        //
-        // orderDetailDtoList = selectForOrderDetailDto(null, null,
-        // statementConfig.getBussinessId(), null,
-        // paymentStatement.getCycleStartTime(),
-        // paymentStatement.getCycleEndTime());
-        //
-        // paymentStatementExcelDto.setMallName(statementConfig.getBussinessName());
-        //
-        // dataLoad = true;
-        // } else if
-        // (statementConfig.getBussinessType().equals(SettleConstant.BussinessType.SHOP))
-        // {
-        // logger.info("生成店铺对账单数据");
-        // // 店铺 & all
-        // couponStatementDetailDtoList = selectForStatementDetails(null, null,
-        // statementConfig.getBussinessId(),
-        // paymentStatement.getCycleStartTime(),
-        // paymentStatement.getCycleEndTime());
-        // logger.info("couponStatementDetailDtoList
-        // size=",couponStatementDetailDtoList.size());
-        // couponExcelDtoList = selectForCouponExcelDto(null, null,
-        // statementConfig.getBussinessId(),
-        // paymentStatement.getCycleStartTime(),
-        // paymentStatement.getCycleEndTime());
-        //
-        // orderTopDtoList =
-        // selectForOrderTopDto(statementConfig.getBussinessId(), null, null,
-        // null, paymentStatement.getCycleStartTime(),
-        // paymentStatement.getCycleEndTime());
-        //
-        // orderDetailDtoList =
-        // selectForOrderDetailDto(statementConfig.getBussinessId(), null, null,
-        // null, paymentStatement.getCycleStartTime(),
-        // paymentStatement.getCycleEndTime());
-        //
-        // ShopVO shopVO =
-        // roaShopService.getShopVOById(statementConfig.getBussinessId());
-        // paymentStatementExcelDto.setShopName(shopVO.getName());
-        // paymentStatementExcelDto.setMallName(shopVO.getPosition().getMall());
-        //
-        // dataLoad = true;
-        // }
-        // }
 
-        // if (!dataLoad) {
-        // part
-        List<String> userIds = selectForConfigShops(statementConfig.getId());
+        List<String> userIds = statementConfigService.getUserAccountByConfigId(statementConfig.getId());
         for (String idStr : userIds) {
             if (idStr == null || idStr.isEmpty())
                 continue;
@@ -649,6 +547,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 
     /**
      * 券订单汇总数据再汇总
+     * 按照券类型 + 店铺 合并
      *
      * @param list 原始数据
      * @return 再汇总后的数据
@@ -656,9 +555,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
     private List<CouponExcelDto> adjustCouponExcelDtoList(List<CouponExcelDto> list) {
         Map<String, CouponExcelDto> map = new HashMap();
         for (CouponExcelDto couponExcelDto : list) {
-            CouponExcelDto existCouponExcelDto = map.get(couponExcelDto.getCouponId());
+            CouponExcelDto existCouponExcelDto = map.get(couponExcelDto.getCouponId() + couponExcelDto.getShopName());
             if (existCouponExcelDto == null) {
-                map.put(couponExcelDto.getCouponId(), couponExcelDto);
+                map.put(couponExcelDto.getCouponId() + couponExcelDto.getShopName(), couponExcelDto);
             } else {
                 // 汇总数量
                 existCouponExcelDto.setCouponCount(existCouponExcelDto.getCouponCount() + couponExcelDto.getCouponCount());
@@ -681,7 +580,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 
     /**
      * 商品订单汇总数据再汇总，用于多家（店铺/导购）的数据汇总到一张（商场、品牌的）报表中
-     * 商品订单汇总数据不拆分到具体的商品类型；仅根据订单类型（商品订单，退货订单等）进行合并
+     * 商品订单汇总数据不拆分到具体的商品类型；仅根据订单类型（商品订单，退货订单等）+ 店铺 进行合并
      *
      * @param list 原始数据
      * @return 再汇总后的数据
@@ -689,9 +588,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
     private List<OrderSettlementTopDto> adjustOrderExcelDtoList(List<OrderSettlementTopDto> list) {
         Map<String, OrderSettlementTopDto> map = new HashMap();
         for (OrderSettlementTopDto orderTopDto : list) {
-            OrderSettlementTopDto existOrderTopDto = map.get(orderTopDto.getOrderType());
+            OrderSettlementTopDto existOrderTopDto = map.get(orderTopDto.getOrderType() + orderTopDto.getShopName());
             if (existOrderTopDto == null) {
-                map.put(orderTopDto.getOrderType(), orderTopDto);
+                map.put(orderTopDto.getOrderType() + orderTopDto.getShopName(), orderTopDto);
             } else {
                 // 汇总订单数量
                 existOrderTopDto.setOrderCount(existOrderTopDto.getOrderCount() + orderTopDto.getOrderCount());
