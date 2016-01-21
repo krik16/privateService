@@ -16,6 +16,9 @@ public class SaleParam implements Serializable {
     private int activityType; //活动类型 1为特卖  2为闪购 3为秒杀
     private List<ActivityCommodityParam> commodityParams = new ArrayList<>(); // 闪购或特卖关联商品及排序数
     private List<String> commodityIds = new ArrayList<>(); //秒杀关联商品列表
+    private String commodityId;//商品Id
+    private String type;//coupon为卡卷，commodity为商品
+    private String couponId;//卡卷Id
 
     public Integer getId() {
         return id;
@@ -81,6 +84,30 @@ public class SaleParam implements Serializable {
         this.commodityIds = commodityIds;
     }
 
+    public String getCommodityId() {
+        return commodityId;
+    }
+
+    public void setCommodityId(String commodityId) {
+        this.commodityId = commodityId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getCouponId() {
+        return couponId;
+    }
+
+    public void setCouponId(String couponId) {
+        this.couponId = couponId;
+    }
+
     @Override
     public String toString() {
         return "SaleParam{" +
@@ -92,6 +119,9 @@ public class SaleParam implements Serializable {
                 ", commodityParams=" + commodityParams +
                 ", secKillSign=" + secKillSign +
                 ", commodityIds=" + commodityIds +
+                ",commodityId=" + commodityId +
+                ",type="+type+
+                ",couponId="+couponId+
                 '}';
     }
 }

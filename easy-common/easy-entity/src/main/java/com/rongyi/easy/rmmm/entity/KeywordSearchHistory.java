@@ -23,6 +23,7 @@ public class KeywordSearchHistory implements Serializable{
 	private int search_type; // 1for commodity  2for shop/mall 3for activity
 	private String keyword;
 	private Date create_at;
+	private int total_count;
 	public int getSearch_type() {
 		return search_type;
 	}
@@ -65,5 +66,11 @@ public class KeywordSearchHistory implements Serializable{
 	public void setCreate_at(Date create_at) {
 		this.create_at = create_at;
 	}
-	
+	public int getTotal_count() {
+		return total_count;
+	}
+	public void setTotal_count(int total_count) {
+		this.total_count = total_count;
+	}
+
 }

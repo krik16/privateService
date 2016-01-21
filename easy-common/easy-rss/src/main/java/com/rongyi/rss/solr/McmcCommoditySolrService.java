@@ -93,6 +93,10 @@ public interface McmcCommoditySolrService {
 
 	public boolean updateCommodityFlashSale(String commodityId, Integer sortPosition, Integer flashSaleId, Date activityStartTime, Date activityEndTime);
 
+	public boolean cleanCommoditySecKill(String secKillSign);
+
+	public boolean updateCommoditySecKill(String commodityId,String secKillSign);
+
 //	public boolean updateCommoditySale(String commodityId, Integer sortPosition);
 
 }

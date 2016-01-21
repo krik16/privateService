@@ -18,6 +18,7 @@ public class CommodityPageBuyerVO implements Serializable{
 	private int currentPage;
 	private int nextFrom;
 	private List<CommodityBuyerVO> commodityList;
+	private int totalCount;
 	public int getTotalPage() {
 		return totalPage;
 	}
@@ -50,7 +51,13 @@ public class CommodityPageBuyerVO implements Serializable{
 	public void setNextFrom(int nextFrom) {
 		this.nextFrom = nextFrom;
 	}
+	public int getTotalCount() {
+		return totalCount;
+	}
 
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
+	}
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this)
