@@ -32,6 +32,7 @@ public class BrandShopDetailVO implements Serializable{
 	//private String shopIM;// 店铺可用IM账号
 	private List<String> shopIM;// 店铺可用IM账号
 	private String shopMid;// shop mongoId
+	private int guideNum;//店铺导购数量
 
 	public String getShopLogo() {
 		return shopLogo;
@@ -200,4 +201,13 @@ public class BrandShopDetailVO implements Serializable{
 	public void setShopMid(String shopMid) {
 		this.shopMid = shopMid;
 	}
+
+	public int getGuideNum() {
+		return guideNum;
+	}
+
+	public void setGuideNum(int guideNum) {
+		this.guideNum = guideNum;
+	}
+	
 }
