@@ -260,8 +260,8 @@ public class ActivityData extends Data implements Serializable {
     public void setPayDownTime(Integer payDownTime) {
         this.payDownTime = payDownTime;
     }
-
-    @Override
+    
+	@Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("_id", _id)
