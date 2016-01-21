@@ -95,6 +95,14 @@ public interface IShopService{
 	 * @throws Exception
 	 */
 	public BrandShopDetailVO getCommodityShopDetail(String shopId, UserInfoVO user) throws Exception;
+	/**
+	 * 商品所在店铺信息V0202
+	 * @param shopId
+	 * @param user
+	 * @return
+	 * @throws Exception
+	 */
+	public BrandShopDetailVO getCommodityShopInfoDetail(String shopId, UserInfoVO user) throws Exception;
 	public List<String> getSellerImIdByShopId(String shopId);
 
 	public ShopInfoEntity getShopByShopMId(String shopMId) throws RmmmException;
