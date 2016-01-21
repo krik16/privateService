@@ -59,6 +59,8 @@ public class WeixinPayUnit {
                     map.put("appid", configure.getAppID());
                     map.put("partnerid", configure.getMchID());
                     map.put("package", "Sign=WXPay");
+                    if(resultMap.get("prepay_id") == null)
+                        throw new WeixinException(ConstantEnum.EXCEPTION_WEIXIN_SIGN_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_SIGN_FAIL.getValueStr());
                     map.put("prepayid", resultMap.get("prepay_id"));
                     map.put("noncestr", resultMap.get("nonce_str"));
                 } else {//微信公众号支付签名timeStamp 生成签名时首字母需大写
