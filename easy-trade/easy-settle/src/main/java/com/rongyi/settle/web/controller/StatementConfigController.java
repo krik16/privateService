@@ -694,7 +694,7 @@ public class StatementConfigController extends BaseController {
 //                    //查询店铺关联账号信息
 //                    List<UserInfoVo> userAccounts = statementConfigService.getAccountInfoByParam(0, 0, 1, shopVO.getId(), null);
 //                    shop.setUserAccounts(userAccounts);
-//                    reList.add(shop);
+                    reList.add(shop);
                 }
             }
             result = ResponseData.success(reList, currpage, pagesize, count);
