@@ -170,6 +170,34 @@ public class AliPayUnit {
     }
 
     /**
+     * @param payNo
+     * @return
+     * @Description: 查询退款状态
+     * @Author: 柯军
+     * @datetime:2015年8月5日上午9:34:52
+     **/
+    public QueryOrderParamVO queryRefund(String tradeNo, String payNo) {
+        LOGGER.info("查询支付宝退款状态,queryOrder tradeNo={},payNo={}", tradeNo, payNo);
+        int status = 200;
+        try {
+            if (Strings.isNullOrEmpty(tradeNo) && Strings.isNullOrEmpty(payNo)) {
+                throw new AliPayException(ConstantEnum.EXCEPTION_PARAM_NULL.getCodeStr(), ConstantEnum.EXCEPTION_PARAM_NULL.getValueStr());
+            }
+            String url = CreateUrl(tradeNo, payNo);
+            HttpClient hc = new HttpClient(url, 30000, 30000);
+            status = hc.send(new HashMap<String, String>(), ConstantUtil.PayZhiFuBao.INPUT_CHARSET);
+            if (status == 200)
+                return xmlStringToQueryOrderParamVO(hc.getResult());
+        } catch (AliPayException e) {
+            throw e;
+        } catch (Exception e) {
+            LOGGER.error("order query fail. status={},exception={}", status, e.getMessage());
+            throw new AliPayException(ConstantEnum.EXCEPTION_ALI_QUERY_ORDER.getCodeStr(), ConstantEnum.EXCEPTION_ALI_QUERY_ORDER.getValueStr());
+        }
+        return null;
+    }
+
+    /**
      * @param outTradeNo 付款单号
      * @param tradeNo    支付宝交易流水号
      * @return

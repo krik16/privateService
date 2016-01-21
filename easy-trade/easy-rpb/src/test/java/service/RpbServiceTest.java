@@ -8,9 +8,12 @@
 
 package service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.rongyi.easy.rpb.vo.RefundQueryParamVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.testng.annotations.Test;
@@ -73,5 +76,38 @@ public class RpbServiceTest extends BaseTest{
 		paymentParamVO.setUserId("superadmin");
 		Map<String,Object> map = iRpbService.generatePayment(paymentParamVO);
 		System.err.println(map.toString());
+	}
+
+	@Test
+	public void testgetRefundStatus(){
+		RefundQueryParamVO refundQueryParamVO = new RefundQueryParamVO();
+		refundQueryParamVO.setRefundNo("0012145456640100231");
+		iRpbService.getRefundStatus(refundQueryParamVO);
+	}
+
+
+	private static Date addWorkDay(Date date, int num) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		int mod = num % 5;
+		int other = num / 5 * 7;
+		for (int i = 0; i < mod;) {
+			cal.add(Calendar.DATE, 1);
+			switch (cal.get(Calendar.DAY_OF_WEEK)) {
+				case Calendar.SUNDAY:
+				case Calendar.SATURDAY:
+					break;
+				default:
+					i++;
+					break;
+			}
+		}
+		if (other > 0)
+			cal.add(Calendar.DATE, other);
+		return cal.getTime();
+	}
+
+	public static void main(String[] args){
+		System.err.println("newTime="+addWorkDay(new Date(), 8));
 	}
 }

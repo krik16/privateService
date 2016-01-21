@@ -197,10 +197,10 @@ public class WeixinPayServiceTest extends BaseTest {
 //		}
 //	}
 	
-//	@Test
+	@Test
 	@Description("微信退款查询")
 	public void testRefundQuery(){
-		weixinPayUnit.checkRefundQueryResult(null, null, "0120288450816163215");
+		weixinPayUnit.checkRefundQueryResult(null, null, "0011939128576122600");
 
 	}
 
@@ -209,6 +209,7 @@ public class WeixinPayServiceTest extends BaseTest {
 //		payNo=0011957252096104310,total_fee=0.01，timeStart=2016-01-19 10:43:05,timeExpire=2016-01-19 11:00:05,orderType=0
 		weixinPayService.getAppWeXinSign("0011957252096104310",0.01,"2016-01-19 10:43:05","2016-01-19 11:00:05",0);
 	}
+
 
 
 	public static String getRequestXml(SortedMap<Object, Object> parameters) {

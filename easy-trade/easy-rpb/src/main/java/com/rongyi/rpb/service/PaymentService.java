@@ -269,4 +269,14 @@ public interface PaymentService {
 	 **/
 
 	public abstract PaymentEntity selectByWithLock(Integer id);
+
+	/**
+	 *  Description: 根据付款单号和订单号查询记录
+	 *  @param payNo 付款单号
+	 *  @param orderNo 订单号
+	 *  @param tradeType 交易类型
+	 *  @param status 状态
+	 *  Author: kejun
+	 **/
+	PaymentEntity selectByPayNoAndOrderNo(String payNo,String orderNo,Integer tradeType,Integer status);
 }

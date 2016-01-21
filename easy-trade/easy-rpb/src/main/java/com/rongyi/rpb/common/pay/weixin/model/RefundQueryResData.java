@@ -32,6 +32,7 @@ public class RefundQueryResData {
     private String refund_fee_0 = "";
     private String coupon_refund_fee_0 = "";
     private String refund_status_0 = "";
+    private String refund_recv_accout_0="";
 
     public String getReturn_code() {
         return return_code;
@@ -185,12 +186,20 @@ public class RefundQueryResData {
 		this.refund_status_0 = refund_status_0;
 	}
 
-	@Override
+    public String getRefund_recv_accout_0() {
+        return refund_recv_accout_0;
+    }
+
+    public void setRefund_recv_accout_0(String refund_recv_accout_0) {
+        this.refund_recv_accout_0 = refund_recv_accout_0;
+    }
+
+    @Override
 	public String toString() {
 		return "RefundQueryResData [return_code=" + return_code + ", return_msg=" + return_msg + ", result_code=" + result_code + ", err_code=" + err_code + ", err_code_des=" + err_code_des
 				+ ", appid=" + appid + ", mch_id=" + mch_id + ", nonce_str=" + nonce_str + ", sign=" + sign + ", device_info=" + device_info + ", transaction_id=" + transaction_id + ", out_trade_no="
 				+ out_trade_no + ", refund_count=" + refund_count + ", out_refund_no_0=" + out_refund_no_0 + ", refund_id_0=" + refund_id_0 + ", refund_channel_0=" + refund_channel_0
-				+ ", refund_fee_0=" + refund_fee_0 + ", coupon_refund_fee_0=" + coupon_refund_fee_0 + ", refund_status_0=" + refund_status_0 + "]";
+				+ ", refund_fee_0=" + refund_fee_0 + ", coupon_refund_fee_0=" + coupon_refund_fee_0 + ", refund_status_0=" + refund_status_0 + ", refund_recv_accout_0=" + refund_recv_accout_0 + "]";
 	}
 
 }

@@ -16,14 +16,18 @@ import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentItemEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.*;
+import com.rongyi.rpb.Exception.TradeException;
+import com.rongyi.rpb.common.pay.weixin.model.RefundQueryResData;
 import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.mq.Sender;
 import com.rongyi.rpb.nsynchronous.OrderFormNsyn;
 import com.rongyi.rpb.service.*;
+import com.rongyi.rpb.unit.WeixinPayUnit;
 import com.rongyi.rss.rpb.IRpbService;
 import net.sf.json.JSONObject;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
@@ -39,7 +43,7 @@ import java.util.Map;
  **/
 public class RpbServiceImpl implements IRpbService {
 
-	private static final Logger LOGGER = Logger.getLogger(RpbServiceImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(RpbServiceImpl.class);
 
 	@Autowired
 	OrderFormNsyn orderFormNsyn;
@@ -64,6 +68,9 @@ public class RpbServiceImpl implements IRpbService {
 
 	@Autowired
 	AliPaymentService aliPaymentService;
+
+	@Autowired
+	WeixinPayUnit weixinPayUnit;
 
 	@Override
 	public Map<Integer, String> validateAccount(String paymentIds) {
@@ -362,6 +369,53 @@ public class RpbServiceImpl implements IRpbService {
 			e.printStackTrace();
 		}
 		return map;
+	}
+
+	@Override
+	public RefundStatusVO getRefundStatus(RefundQueryParamVO refundQueryParamVO) {
+		LOGGER.info("退款详情接口，refundQueryParamVO={}", refundQueryParamVO.toString());
+		RefundStatusVO refundStatusVO = new RefundStatusVO();
+		PaymentEntity paymentEntity = paymentService.selectByPayNoAndPayChannelAndTradeType(refundQueryParamVO.getRefundNo(), null, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, null);
+		if(paymentEntity == null)
+			throw new TradeException("该订单不存在，orderNo={}",refundQueryParamVO.getOrderNo());
+		int totalDay;
+		if(paymentEntity.getStatus() != Constants.PAYMENT_STATUS.STAUS2){//容易网未操作
+			totalDay = refundQueryParamVO.getRongyiPayDay();
+			refundStatusVO.setRongyiDate(DateUtil.addWorkDay(paymentEntity.getCreateTime(),totalDay));
+			totalDay += refundQueryParamVO.getPlatformPayDay();
+			refundStatusVO.setPayPlatformDate(DateUtil.addWorkDay(paymentEntity.getCreateTime(),totalDay));
+			totalDay += refundQueryParamVO.getRefundedDay();
+			refundStatusVO.setRefundDate(DateUtil.addWorkDay(paymentEntity.getCreateTime(), totalDay));
+		}else{//容易网已操作
+			refundStatusVO.setIsRongyiProcess(true);
+			refundStatusVO.setRongyiDate(paymentEntity.getFinishTime());
+			String status = "";
+			if(Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0 == paymentEntity.getPayChannel()) {//支付宝退款
+				//TODO 调用支付宝查询接口
+				status = ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr();
+			}else if(Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1 == paymentEntity.getPayChannel()){//微信退款
+				RefundQueryResData refundQueryResData = weixinPayUnit.refundQuery(null,null,refundQueryParamVO.getRefundNo());
+				LOGGER.info("微信退款查询返回结果，refundQueryResData={}",refundQueryResData.toString());
+				status = refundQueryResData.getRefund_status_0();
+			}
+			if (ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr().equals(status)) {//退款处理中
+				totalDay = refundQueryParamVO.getPlatformPayDay();
+				refundStatusVO.setPayPlatformDate(DateUtil.addWorkDay(paymentEntity.getFinishTime(), totalDay));
+				refundStatusVO.setIsPayPlatformProcess(false);
+				totalDay += refundQueryParamVO.getRefundedDay();
+				refundStatusVO.setRefundDate(DateUtil.addWorkDay(paymentEntity.getFinishTime(), totalDay));
+				refundStatusVO.setRefundReslt(ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr());
+			} else if (ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getCodeStr().equals(status)) {//退款完成
+				refundStatusVO.setIsPayPlatformProcess(true);
+				refundStatusVO.setPayPlatformDate(paymentEntity.getFinishTime());
+				refundStatusVO.setRefundReslt(ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getCodeStr());
+			} else {//退款失败
+				refundStatusVO.setIsPayPlatformProcess(false);
+				refundStatusVO.setRefundReslt(ConstantEnum.WEIXIN_REFUND_RESULT_FAIL.getCodeStr());
+			}
+
+		}
+		return refundStatusVO;
 	}
 }
 
