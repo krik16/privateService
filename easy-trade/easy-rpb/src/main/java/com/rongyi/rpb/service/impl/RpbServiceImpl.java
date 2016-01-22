@@ -385,8 +385,16 @@ public class RpbServiceImpl implements IRpbService {
 		RefundStatusVO refundStatusVO = new RefundStatusVO();
 		PaymentEntity paymentEntity = paymentService.selectByPayNoAndPayChannelAndTradeType(refundQueryParamVO.getRefundNo(), null, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, null);
 		if (paymentEntity == null)
-			throw new TradeException("该订单不存在，orderNo={}", refundQueryParamVO.getOrderNo());
+			throw new TradeException("该退款单不存在，refundNo={}", refundQueryParamVO.getRefundNo());
 		int totalDay;
+		if(paymentEntity.getPayChannel() == null){//0元单退款
+			refundStatusVO.setIsRongyiProcess(true);
+			refundStatusVO.setRongyiDate(paymentEntity.getFinishTime());
+			refundStatusVO.setPayPlatformDate(paymentEntity.getFinishTime());
+			refundStatusVO.setIsPayPlatformProcess(true);
+			refundStatusVO.setRefundReslt(ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getCodeStr());
+			return refundStatusVO;
+		}
 		if (paymentEntity.getStatus() != Constants.PAYMENT_STATUS.STAUS2) {//容易网未操作
 			totalDay = refundQueryParamVO.getRongyiPayDay();
 			refundStatusVO.setRongyiDate(DateUtil.addWorkDay(paymentEntity.getCreateTime(), totalDay));
@@ -394,6 +402,7 @@ public class RpbServiceImpl implements IRpbService {
 			refundStatusVO.setPayPlatformDate(DateUtil.addWorkDay(paymentEntity.getCreateTime(), totalDay));
 			totalDay += refundQueryParamVO.getRefundedDay();
 			refundStatusVO.setRefundDate(DateUtil.addWorkDay(paymentEntity.getCreateTime(), totalDay));
+			refundStatusVO.setRefundReslt(ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr());
 		} else {//容易网已操作
 			refundStatusVO.setIsRongyiProcess(true);
 			refundStatusVO.setRongyiDate(paymentEntity.getFinishTime());
@@ -458,7 +467,7 @@ public class RpbServiceImpl implements IRpbService {
 	}
 
 	private boolean validateTradeStatus(String tradeStatus) {
-		return "TRADE_SUCCESS".equals(tradeStatus) || "TRADE_FINISHED".equals(tradeStatus) || "TRADE_HAS_CLOSED".equals(tradeStatus);
+		return "SUCCESS".equals(tradeStatus) || "TRADE_SUCCESS".equals(tradeStatus) || "TRADE_FINISHED".equals(tradeStatus) || "TRADE_HAS_CLOSED".equals(tradeStatus);
 	}
 }
 
