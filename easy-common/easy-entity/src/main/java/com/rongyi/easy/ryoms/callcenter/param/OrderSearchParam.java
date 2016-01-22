@@ -9,14 +9,21 @@ import java.io.Serializable;
  *
  */
 public class OrderSearchParam implements Serializable {
-
+	/** 
+	* @Title: toString 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param @return    设定文件 
+	* @author shaozhou
+	* @date 2016年1月22日 下午5:47:54
+	* @throws 
+	*/
 	@Override
 	public String toString() {
 		return "OrderSearchParam [id=" + id + ", customerCode=" + customerCode + ", orderSrc=" + orderSrc
 				+ ", orderType=" + orderType + ", orderStatus=" + orderStatus + ", orderLevel=" + orderLevel
 				+ ", title=" + title + ", userName=" + userName + ", userTag=" + userTag + ", startDate=" + startDate
 				+ ", endDate=" + endDate + ", pageSize=" + pageSize + ", currentPage=" + currentPage + ", startIndex="
-				+ startIndex + ", userId=" + userId + "]";
+				+ startIndex + ", userId=" + userId + ", customerTel=" + customerTel + "]";
 	}
 
 	public String getId() {
@@ -138,6 +145,19 @@ public class OrderSearchParam implements Serializable {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+	/**
+	 * @return the customerTel
+	 */
+	public String getCustomerTel() {
+		return customerTel;
+	}
+
+	/**
+	 * @param customerTel the customerTel to set
+	 */
+	public void setCustomerTel(String customerTel) {
+		this.customerTel = customerTel;
+	}
 
 	/**
 	 * 
@@ -187,4 +207,8 @@ public class OrderSearchParam implements Serializable {
 	private int startIndex = 0;
 
 	private int userId = 0;
+	
+	//手机号码
+	private String customerTel;
+	
 }
