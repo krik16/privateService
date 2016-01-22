@@ -1,5 +1,6 @@
 package com.rongyi.rss.activitymanage;
 
+import com.rongyi.easy.activitymanage.entity.ActivityCheckRecord;
 import com.rongyi.easy.activitymanage.entity.ActivityInfo;
 
 /**
@@ -15,4 +16,12 @@ public interface ActivityService {
      * @author Leon
      */
     boolean saveActivityInfo(ActivityInfo activityInfo);
+
+    /**
+     * 审核活动
+     * @param activityCheckRecord
+     * @return boolean
+     * @author Leon
+     */
+    boolean checkActivityInfo(ActivityCheckRecord activityCheckRecord);
 }
