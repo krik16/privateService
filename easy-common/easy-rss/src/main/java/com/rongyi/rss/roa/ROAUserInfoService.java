@@ -143,4 +143,12 @@ public interface ROAUserInfoService {
 	 * @return
 	 */
 	public boolean hasAnyRoleAuthority(String ryst,List<String> authorities) throws Exception;
+	
+	/**
+	 * 查询bs top页信息
+	 * @param bsst
+	 * @return
+	 * @throws Exception
+	 */
+	public Map getBsTop(String bsst)throws Exception;
 }
