@@ -9,13 +9,13 @@ public class ActivityGoods {
 
     private String goodsId;
 
-    private Byte type;
+    private Integer type;
 
     private String name;
 
     private String picUrl;
 
-    private Byte subsidyType;
+    private Integer subsidyType;
 
     private Integer subsidyPrice;
 
@@ -23,7 +23,7 @@ public class ActivityGoods {
 
     private Date joinEndAt;
 
-    private Byte status;
+    private Integer status;
 
     private String createUser;
 
@@ -33,7 +33,7 @@ public class ActivityGoods {
 
     private Date updateAt;
 
-    private Byte isDeleted;
+    private Boolean isDeleted;
 
     private Integer version;
 
@@ -61,11 +61,11 @@ public class ActivityGoods {
         this.goodsId = goodsId;
     }
 
-    public Byte getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(Byte type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
@@ -85,11 +85,11 @@ public class ActivityGoods {
         this.picUrl = picUrl;
     }
 
-    public Byte getSubsidyType() {
+    public Integer getSubsidyType() {
         return subsidyType;
     }
 
-    public void setSubsidyType(Byte subsidyType) {
+    public void setSubsidyType(Integer subsidyType) {
         this.subsidyType = subsidyType;
     }
 
@@ -117,11 +117,11 @@ public class ActivityGoods {
         this.joinEndAt = joinEndAt;
     }
 
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -157,11 +157,11 @@ public class ActivityGoods {
         this.updateAt = updateAt;
     }
 
-    public Byte getIsDeleted() {
+    public Boolean getIsDeleted() {
         return isDeleted;
     }
 
-    public void setIsDeleted(Byte isDeleted) {
+    public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 

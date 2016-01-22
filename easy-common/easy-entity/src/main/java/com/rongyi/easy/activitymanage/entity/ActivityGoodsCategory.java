@@ -7,7 +7,7 @@ public class ActivityGoodsCategory {
 
     private Integer activityGoodsId;
 
-    private Byte type;
+    private Integer type;
 
     private String categoryId;
 
@@ -35,11 +35,11 @@ public class ActivityGoodsCategory {
         this.activityGoodsId = activityGoodsId;
     }
 
-    public Byte getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(Byte type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 

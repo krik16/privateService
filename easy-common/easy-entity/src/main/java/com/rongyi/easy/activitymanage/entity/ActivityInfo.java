@@ -11,13 +11,13 @@ public class ActivityInfo {
 
     private Date endAt;
 
-    private Byte type;
+    private Integer type;
 
     private String synTarget;
 
-    private Byte status;
+    private Integer status;
 
-    private Byte publishChannel;
+    private Integer publishChannel;
 
     private String createUser;
 
@@ -27,7 +27,7 @@ public class ActivityInfo {
 
     private Date updateAt;
 
-    private Byte isDeleted;
+    private Boolean isDeleted;
 
     private Integer version;
 
@@ -63,11 +63,11 @@ public class ActivityInfo {
         this.endAt = endAt;
     }
 
-    public Byte getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(Byte type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
@@ -79,19 +79,19 @@ public class ActivityInfo {
         this.synTarget = synTarget;
     }
 
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
-    public Byte getPublishChannel() {
+    public Integer getPublishChannel() {
         return publishChannel;
     }
 
-    public void setPublishChannel(Byte publishChannel) {
+    public void setPublishChannel(Integer publishChannel) {
         this.publishChannel = publishChannel;
     }
 
@@ -127,11 +127,11 @@ public class ActivityInfo {
         this.updateAt = updateAt;
     }
 
-    public Byte getIsDeleted() {
+    public Boolean getIsDeleted() {
         return isDeleted;
     }
 
-    public void setIsDeleted(Byte isDeleted) {
+    public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 

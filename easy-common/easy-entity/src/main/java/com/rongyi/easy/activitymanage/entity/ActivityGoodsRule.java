@@ -7,11 +7,11 @@ public class ActivityGoodsRule {
 
     private Integer activityId;
 
-    private Byte stockDeductType;
+    private Integer stockDeductType;
 
-    private Byte stockUpdateType;
+    private Integer stockUpdateType;
 
-    private Byte isShipping;
+    private Boolean isShipping;
 
     private Integer limitCount;
 
@@ -37,27 +37,27 @@ public class ActivityGoodsRule {
         this.activityId = activityId;
     }
 
-    public Byte getStockDeductType() {
+    public Integer getStockDeductType() {
         return stockDeductType;
     }
 
-    public void setStockDeductType(Byte stockDeductType) {
+    public void setStockDeductType(Integer stockDeductType) {
         this.stockDeductType = stockDeductType;
     }
 
-    public Byte getStockUpdateType() {
+    public Integer getStockUpdateType() {
         return stockUpdateType;
     }
 
-    public void setStockUpdateType(Byte stockUpdateType) {
+    public void setStockUpdateType(Integer stockUpdateType) {
         this.stockUpdateType = stockUpdateType;
     }
 
-    public Byte getIsShipping() {
+    public Boolean getIsShipping() {
         return isShipping;
     }
 
-    public void setIsShipping(Byte isShipping) {
+    public void setIsShipping(Boolean isShipping) {
         this.isShipping = isShipping;
     }
 
