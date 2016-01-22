@@ -129,4 +129,5 @@ public interface CommodityService {
     public List<Commodity> getCommodityByIds(List<ObjectId> ids);
 
     public List<CommodityBuyerVO> getCommodityBySPU(String commodityId, String spu);
+
 }
