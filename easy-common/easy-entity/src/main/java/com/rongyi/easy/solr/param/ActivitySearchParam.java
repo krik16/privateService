@@ -27,7 +27,7 @@ public class ActivitySearchParam implements Serializable{
 	private String shop_id;   //店铺id
 	private String holder_id;       //优惠券持有者id
 	private List<String> shopList;    //终端机参数 店铺id List
-	
+ 	
 	private String mallId; // mall Id for 终端屏
 	private String startLetter;  // 首字母 for 终端屏
 
