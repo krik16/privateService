@@ -10,19 +10,45 @@ public class WeixinMch implements Serializable {
 
 	private Integer id;
 
+    /**
+     * APPID
+     */
     private String appId;
 
+    /**
+     * 密钥
+     */
     private String key;
 
+    /**
+     * 商户号
+     */
     private String mchId;
 
+    /**
+     * 证书路过
+     */
     private String cretPath;
 
+    /**
+     * 公众号
+     */
     private String publicCode;
 
+    /**
+     * 商家ID
+     */
     private String userId;
 
+    /**
+     * 交易类型  0:APP(app支付),1:JSAPI(公众号支付),2:NATIVE(原生扫码支付)
+     */
     private Byte tradeType;
+
+    /**
+     * 是否是容易网支付账号 0:不是，1：是
+     */
+    private Byte isRongyiPay;
 
     public Integer getId() {
         return id;
@@ -86,5 +112,13 @@ public class WeixinMch implements Serializable {
 
     public void setTradeType(Byte tradeType) {
         this.tradeType = tradeType;
+    }
+
+    public Byte getIsRongyiPay() {
+        return isRongyiPay;
+    }
+
+    public void setIsRongyiPay(Byte isRongyiPay) {
+        this.isRongyiPay = isRongyiPay;
     }
 }
