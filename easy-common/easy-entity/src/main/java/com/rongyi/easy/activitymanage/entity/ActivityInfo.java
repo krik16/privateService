@@ -1,8 +1,10 @@
 package com.rongyi.easy.activitymanage.entity;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ActivityInfo {
+public class ActivityInfo implements Serializable {
     private Integer id;
 
     private String name;
@@ -30,6 +32,8 @@ public class ActivityInfo {
     private Boolean isDeleted;
 
     private Integer version;
+
+    private ActivityGoodsRule activityGoodsRule;
 
     public Integer getId() {
         return id;
@@ -141,5 +145,34 @@ public class ActivityInfo {
 
     public void setVersion(Integer version) {
         this.version = version;
+    }
+
+    public ActivityGoodsRule getActivityGoodsRule() {
+        return activityGoodsRule;
+    }
+
+    public void setActivityGoodsRule(ActivityGoodsRule activityGoodsRule) {
+        this.activityGoodsRule = activityGoodsRule;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("name", name)
+                .append("startAt", startAt)
+                .append("endAt", endAt)
+                .append("type", type)
+                .append("synTarget", synTarget)
+                .append("status", status)
+                .append("publishChannel", publishChannel)
+                .append("createUser", createUser)
+                .append("createAt", createAt)
+                .append("updateUser", updateUser)
+                .append("updateAt", updateAt)
+                .append("isDeleted", isDeleted)
+                .append("version", version)
+                .append("activityGoodsRule", activityGoodsRule)
+                .toString();
     }
 }

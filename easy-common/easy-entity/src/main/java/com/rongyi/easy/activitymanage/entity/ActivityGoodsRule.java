@@ -1,8 +1,11 @@
 package com.rongyi.easy.activitymanage.entity;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class ActivityGoodsRule {
+public class ActivityGoodsRule implements Serializable {
     private Integer id;
 
     private Integer activityId;
@@ -91,5 +94,20 @@ public class ActivityGoodsRule {
 
     public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("activityId", activityId)
+                .append("stockDeductType", stockDeductType)
+                .append("stockUpdateType", stockUpdateType)
+                .append("isShipping", isShipping)
+                .append("limitCount", limitCount)
+                .append("cancelTime", cancelTime)
+                .append("createAt", createAt)
+                .append("updateAt", updateAt)
+                .toString();
     }
 }
