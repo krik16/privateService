@@ -1,6 +1,7 @@
 package com.rongyi.easy.activitymanage.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class ActivityGoods {
     private Integer id;
@@ -36,7 +37,21 @@ public class ActivityGoods {
     private Boolean isDeleted;
 
     private Integer version;
+    public ActivityGoods(int type){
+		this.type=type;
+	}
+	public ActivityGoods(String goodsId){
+		this.goodsId=goodsId;
+	}
+    private List<ActivityGoodsSpec> listActivityGoodsSpec;//提交时列表集合
+    public List<ActivityGoodsSpec> getListActivityGoodsSpec() {
+		return listActivityGoodsSpec;
+	}
 
+	public void setListActivityGoodsSpec(
+			List<ActivityGoodsSpec> listActivityGoodsSpec) {
+		this.listActivityGoodsSpec = listActivityGoodsSpec;
+	}
     public Integer getId() {
         return id;
     }
