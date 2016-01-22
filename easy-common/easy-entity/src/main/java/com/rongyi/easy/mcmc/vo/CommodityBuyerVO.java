@@ -281,18 +281,15 @@ public class CommodityBuyerVO implements Serializable{
 		// 当前是秒杀商品
 		if ("3".equals(this.activityType)) {
 			long nowTime = new Date().getTime();
-			if (this.commodityAppStatus == 3 || (commodity.getActivityStartTime() != null && commodity.getActivityStartTime().getTime() < nowTime)) {
-				// 秒杀未开始
-				this.commodityAppStatus = 3;
-			} else if (this.commodityAppStatus == 1 && commodity.getActivityStartTime() != null && commodity.getActivityStartTime().getTime() >= nowTime) {
-				// 秒杀已开始 
-				this.commodityAppStatus = 1;
-			} else if (commodity.getActivityEndTime() != null && commodity.getActivityEndTime().getTime() <= nowTime) {
-				// 活动已结束 (秒杀)
-				this.commodityAppStatus = 4;
-			} else {
-				// 商品已经下架
-				this.commodityAppStatus = 0;
+			// 商品处于上架状态
+			if (this.commodityAppStatus == 1) {
+				if (commodity.getActivityStartTime() != null && commodity.getActivityStartTime().getTime() > nowTime) {
+					// 秒杀未开始
+					this.commodityAppStatus = 3;
+				} else if (commodity.getActivityEndTime() != null && commodity.getActivityEndTime().getTime() <= nowTime) {
+					// 秒杀已结束
+					this.commodityAppStatus = 4;
+				}
 			}
 		}
 	}

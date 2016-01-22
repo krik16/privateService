@@ -48,7 +48,7 @@ public class ActivitySearchInfo implements Serializable {
 	private List<String	> customCategoryIds; //卡券对应店铺的自定义分类
 	private Integer apply_shops_count; // 卡券支持的店铺数量
 	
-	private int activityStataus = 0; 	//活动状态[0其他(不参与逻辑) 未开始1 正常2 结束3]
+	private int activityStatus = 0; 	//活动状态[0其他(不参与逻辑) 未开始1 正常2 结束3]
 	
 
 	/**
@@ -360,12 +360,12 @@ public class ActivitySearchInfo implements Serializable {
 		this.apply_shops_count = apply_shops_count;
 	}
 
-	public int getActivityStataus() {
-		return activityStataus;
+	public int getActivityStatus() {
+		return activityStatus;
 	}
 
-	public void setActivityStataus(int activityStataus) {
-		this.activityStataus = activityStataus;
+	public void setActivityStatus(int activityStatus) {
+		this.activityStatus = activityStatus;
 	}
 
 	@Override
@@ -381,7 +381,7 @@ public class ActivitySearchInfo implements Serializable {
 				+ limitPublishCount + ", limitUseCount=" + limitUseCount + ", limitCount=" + limitCount
 				+ ", afterSaleService=" + afterSaleService + ", payDownTime=" + payDownTime + ", customCategoryIds="
 				+ customCategoryIds + ", apply_shops_count=" + apply_shops_count + ", activityStataus="
-				+ activityStataus + ", limitDesc=" + limitDesc + ", usageDesc=" + usageDesc + ", remark=" + remark
+				+ activityStatus + ", limitDesc=" + limitDesc + ", usageDesc=" + usageDesc + ", remark=" + remark
 				+ "]";
 	}
 	
