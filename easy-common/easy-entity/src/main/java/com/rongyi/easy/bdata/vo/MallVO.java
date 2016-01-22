@@ -35,6 +35,8 @@ public class MallVO implements Serializable {
     private Integer rank;
     private String slug;
     private Long shopNum;
+    private double logoX;  //经度
+    private double logoY;  //纬度
 
     public String getId() {
         return id;
