@@ -1,8 +1,11 @@
 package com.rongyi.easy.activitymanage.entity;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class ActivityCheckRecord {
+public class ActivityCheckRecord implements Serializable {
     private Integer id;
 
     private Integer activityId;
@@ -61,5 +64,17 @@ public class ActivityCheckRecord {
 
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("activityId", activityId)
+                .append("status", status)
+                .append("record", record)
+                .append("createUser", createUser)
+                .append("createAt", createAt)
+                .toString();
     }
 }

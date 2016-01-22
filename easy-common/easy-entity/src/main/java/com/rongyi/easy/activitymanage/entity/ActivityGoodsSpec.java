@@ -1,8 +1,11 @@
 package com.rongyi.easy.activitymanage.entity;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class ActivityGoodsSpec {
+public class ActivityGoodsSpec implements Serializable {
     private Integer id;
 
     private Integer activityGoodsId;
@@ -91,5 +94,20 @@ public class ActivityGoodsSpec {
 
     public void setVersion(Integer version) {
         this.version = version;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("activityGoodsId", activityGoodsId)
+                .append("specId", specId)
+                .append("joinCount", joinCount)
+                .append("stockCount", stockCount)
+                .append("activityPrice", activityPrice)
+                .append("createAt", createAt)
+                .append("updateAt", updateAt)
+                .append("version", version)
+                .toString();
     }
 }
