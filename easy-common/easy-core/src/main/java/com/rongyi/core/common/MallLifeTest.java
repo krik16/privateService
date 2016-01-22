@@ -26,12 +26,16 @@ public class MallLifeTest {
         int hh=(int)ss/3600;  //共计小时数
         int dd=(int)hh/24;   //共计天数
 
-        System.out.println("共"+dd+"天 准确时间是："+hh+" 小时 "+MM+" 分钟"+ss+" 秒 共计："+ss*1000+" 毫秒");
+       // System.out.println("共"+dd+"天 准确时间是："+hh+" 小时 "+MM+" 分钟"+ss+" 秒 共计："+ss*1000+" 毫秒");
 
 
-        System.out.println("输出具体时间======"+mallLifeTest.formatTime(endT-startT));
+       // System.out.println("输出具体时间======"+mallLifeTest.formatTime(endT-startT));
 
-        System.out.println("输出具体时间2222======"+mallLifeTest.formatTime2(endT-startT));
+      //  System.out.println("输出具体时间2222======"+mallLifeTest.formatTime2(endT-startT));
+
+        System.out.println(mallLifeTest.toHexString("126887817c44ae552e351a862289fca380"));
+        System.out.println(mallLifeTest.toHexString("126887817c44ae552e351a862289fca380").length());
+        System.out.println(mallLifeTest.toStringHex1(mallLifeTest.toHexString("126887817c44ae552e351a862289fca380")));
 
 
     }
@@ -108,4 +112,38 @@ public class MallLifeTest {
 
         return strDay+"天"+strHour+"小时"+strMinute + " 分钟 " + strSecond + " 秒";
     }
+
+
+
+
+    //转化字符串为十六进制编码
+    public   String toHexString(String s) {
+        String str = "";
+        for (int i = 0; i < s.length(); i++) {
+            int ch = (int) s.charAt(i);
+            String s4 = Integer.toHexString(ch);
+            str = str + s4;
+        }
+        return str;
+    }
+    // 转化十六进制编码为字符串
+    public   String toStringHex1(String s) {
+        byte[] baKeyword = new byte[s.length() / 2];
+        for (int i = 0; i < baKeyword.length; i++) {
+            try {
+                baKeyword[i] = (byte) (0xff & Integer.parseInt(s.substring(
+                        i * 2, i * 2 + 2), 16));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            s = new String(baKeyword, "utf-8");// UTF-16le:Not
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+        return s;
+    }
+
+
 }
