@@ -9,7 +9,23 @@ import java.io.Serializable;
 import java.util.List;
 
 public class MallVO implements Serializable {
-    private static final long serialVersionUID = 1L;
+    public double getLogoX() {
+		return logoX;
+	}
+
+	public void setLogoX(double logoX) {
+		this.logoX = logoX;
+	}
+
+	public double getLogoY() {
+		return logoY;
+	}
+
+	public void setLogoY(double logoY) {
+		this.logoY = logoY;
+	}
+
+	private static final long serialVersionUID = 1L;
     private String id;//商场ID
     private String name;//商场名称
     private String mold;//商场类型
