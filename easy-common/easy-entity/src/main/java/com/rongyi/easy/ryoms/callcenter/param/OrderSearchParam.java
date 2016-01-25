@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class OrderSearchParam implements Serializable {
 	/** 
 	* @Title: toString 
-	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @Description: toString重写
 	* @param @return    设定文件 
 	* @author shaozhou
 	* @date 2016年1月25日 下午5:42:05
