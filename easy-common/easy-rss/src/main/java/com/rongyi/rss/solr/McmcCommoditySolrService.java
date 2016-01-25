@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.rongyi.easy.mcmc.param.ActivityCommodityParam;
+import com.rongyi.easy.solr.result.CommoditySolrResult;
 import org.bson.types.ObjectId;
 
 import com.rongyi.easy.solr.McmcCommodityDocument;
@@ -67,7 +68,7 @@ public interface McmcCommoditySolrService {
 	 */
 	public List<ObjectId> commoditySearch(CommoditySearchParam param);
 
-	public Long commoditySearchTotalCount(CommoditySearchParam param);
+	public CommoditySolrResult commoditySearchTotalCountAndIds(CommoditySearchParam param);
 
 	/**
 	 * 商品检索 - 容易逛商品聚合
