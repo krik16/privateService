@@ -4,5 +4,6 @@
 /easy-trade/easy-tms/easy-tms.iml
 
 /easy-trade/easy-virtual-account/*.iml
+
 /easy-trade/easy-settle/easy-settle.iml
-*.iml
+/easy-trade/*.iml

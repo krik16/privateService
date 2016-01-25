@@ -35,7 +35,7 @@ public class TimeExpireUnitTest extends BaseTest{
     public void testWeixinPayTimeExpire(){
         String startTime = null;
         String expireTime = null;
-        System.err.println("参数为空："+timeExpireUnit.weixinPayTimeExpire(startTime, expireTime,1));
+//        System.err.println("参数为空："+timeExpireUnit.weixinPayTimeExpire(startTime, expireTime,1));
         startTime = "2015-11-18 11:15:20";
         expireTime = "2015-11-18 11:19:50";
         System.err.println("间隔小于5分钟" + timeExpireUnit.weixinPayTimeExpire(startTime, expireTime,1));

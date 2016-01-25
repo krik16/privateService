@@ -69,7 +69,7 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 		if (map.get("tradeType") == null || StringUtils.isEmpty(map.get("tradeType").toString())) {
 			map.remove("tradeType");
 		}
-		List<String> buyerIds = new ArrayList<String>();
+		List<String> buyerIds = new ArrayList<>();
 		if (map.get("buyerName") != null && StringUtils.isNotBlank(map.get("buyerName").toString())) {
 			try {
 				List<UserInfoVO> userVoList = rOAMallLifeUserService.getUserDetailByName(map.get("buyerName").toString());
@@ -160,8 +160,12 @@ public class TradeDetailServiceImpl extends BaseServiceImpl implements TradeDeta
 				jsonObject = JSONObject.fromObject(tradeVo.getOrderDiscountInfo());
 			}
 		}
-		if (jsonObject != null && jsonObject.get("score") != null)
+		if (jsonObject != null && jsonObject.get("score") != null) {
 			tradeVo.setScore(jsonObject.getInt("score"));
+			if (jsonObject.get("returnScore") != null) {
+				tradeVo.setScore(jsonObject.getInt("score")-jsonObject.getInt("returnScore"));
+			}
+		}
 		if (jsonObject != null && jsonObject.get("cashCouponDiscount") != null)
 			tradeVo.setCouponDiscountInt(Integer.valueOf(jsonObject.getString("cashCouponDiscount")));
 		return tradeVo;
