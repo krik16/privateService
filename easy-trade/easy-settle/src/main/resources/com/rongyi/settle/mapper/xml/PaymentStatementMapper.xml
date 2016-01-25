@@ -780,8 +780,8 @@
 			'商品订单' AS order_type,
 		    COUNT(1) AS order_count,
 			SUM(ODF.unit_price * quantity - OF.disconnt_fee + express_fee) AS total_amount,
-			SUM(OF.order_score_discount) AS score_amount,
-			SUM(OF.order_coupon_discount + ODF.coupon_discount) AS hb_amount,
+			SUM(OF.score_discount + OF.order_score_discount) AS score_amount,
+			SUM(OF.coupon_discount + OF.order_coupon_discount + ODF.coupon_discount) AS hb_amount,
 			0 AS discount_amount
 		FROM
 		    ry_osm.order_form OF
@@ -822,8 +822,8 @@
 	<select id="selectForOrderDetailDto" parameterType="java.util.Map" resultMap="OrderDetailDtoMap">
 		SELECT SQL_NO_CACHE
 			A.create_at,
-			A.order_coupon_discount + SUM(B.coupon_discount) AS coupon_discount,
-			A.order_score_discount AS score_discount,
+			A.coupon_discount +	A.order_coupon_discount + SUM(B.coupon_discount) AS coupon_discount,
+			A.score_discount + A.order_score_discount AS score_discount,
 			CASE WHEN A.`status` = 2 THEN '待发货' WHEN A.`status` = 3 THEN '已发货' WHEN A.`status` = 4 THEN '确认收货'
 				WHEN (A.`status` > 4 AND H3.id IS NOT NULL) THEN '已完成'
 				WHEN (A.`status` > 4 AND H3.id IS NULL AND H4.id IS NULL) THEN'退款'
