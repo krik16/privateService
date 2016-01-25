@@ -76,8 +76,6 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
             Map<String, String> timeExpireMap = timeExpireUnit.weixinPayTimeExpire(paySignData.getTimeStart(), paySignData.getTimeExpire(), paySignData.getOrderType());
             LOGGER.info("timeExpireMap={}", timeExpireMap);
             map = weixinPayUnit.getWeXinPaySign(paySignData);
-            map.put("code", 0);
-            map.put("totlePrice", paySignData.getTotalFee());
         } catch (WeixinException e) {
             map.put("code", e.getCode());
             map.put("message", e.getMessage());

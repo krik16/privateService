@@ -53,6 +53,9 @@ public class WeixinPayUnit {
             LOGGER.info("result={}",result);
             String timestamp = WXUtil.getTimeStamp();
             Map<String, Object> resultMap = XMLParser.getMapFromXML(result);
+            map.put("code", 0);
+            map.put("message","success");
+            map.put("totlePrice", paySignData.getTotalFee());
             if ("SUCCESS".equals(resultMap.get("return_code"))) {
                 if (ConstantEnum.WEIXIN_PAY_TRADE_TYPE_APP.getValueStr().equals(configure.getTradeType())) {//APP支付签名
                     map.put("timestamp", timestamp);
