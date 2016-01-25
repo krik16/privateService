@@ -1,5 +1,8 @@
 package com.rongyi.easy.mcmc.param;
 
+import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.mcmc.Commodity;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +22,24 @@ public class SaleParam implements Serializable {
     private String commodityId;//商品Id
     private String type;//coupon为卡卷，commodity为商品
     private String couponId;//卡卷Id
+    private List<CommoditySolr> commodityList;
+    private List<CouponSolr> couponSolrList;
+
+    public List<CouponSolr> getCouponSolrList() {
+        return couponSolrList;
+    }
+
+    public void setCouponSolrList(List<CouponSolr> couponSolrList) {
+        this.couponSolrList = couponSolrList;
+    }
+
+    public List<CommoditySolr> getCommodityList() {
+        return commodityList;
+    }
+
+    public void setCommodityList(List<CommoditySolr> commodityList) {
+        this.commodityList = commodityList;
+    }
 
     public Integer getId() {
         return id;
