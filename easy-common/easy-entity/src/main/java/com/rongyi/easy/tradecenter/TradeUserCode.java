@@ -71,6 +71,8 @@ public class TradeUserCode implements Serializable {
 
     private Date updateAt;
 
+    private Date couponChannel;
+
 
     public Double getOrigPrice_Y() {
         return new BigDecimal(this.origPrice).divide(rate, 2, BigDecimal.ROUND_HALF_UP).doubleValue();
@@ -338,5 +340,15 @@ public class TradeUserCode implements Serializable {
 
     public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
+    }
+
+    public Date getCouponChannel()
+    {
+        return couponChannel;
+    }
+
+    public void setCouponChannel(Date couponChannel)
+    {
+        this.couponChannel = couponChannel;
     }
 }
