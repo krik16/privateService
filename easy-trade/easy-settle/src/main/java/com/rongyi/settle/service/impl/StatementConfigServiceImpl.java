@@ -78,7 +78,22 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
     public List<StatementConfigVO> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
         map.put("currentPage", (currentPage - 1) * pageSize);
         map.put("pageSize", pageSize);
-        return this.getBaseDao().selectListBySql(NAMESPACE + ".selectPageList", map);
+        List<StatementConfigVO> list = this.getBaseDao().selectListBySql(NAMESPACE + ".selectPageList", map);
+        if (CollectionUtils.isNotEmpty(list))
+        {
+            for (StatementConfigVO vo : list){
+                if (vo.getStatus()!=null && vo.getStatus()==ConstantEnum.STATUS_2.getCodeByte()){
+                    Map<String, Object> paramsMap = new HashMap<>();
+                    paramsMap.put("opId", vo.getId());
+                    paramsMap.put("opType", ConstantEnum.STATUS_2.getCodeInt());
+                    paramsMap.put("opModel", ConstantEnum.OP_MODEL_0.getCodeInt());
+                    OperationLog opLog = operationLogMapper.getOpByMap(paramsMap);
+                    if (opLog!=null)
+                        vo.setVerifyDesc(opLog.getDesc());
+                }
+            }
+        }
+        return list;
     }
 
     @Override
