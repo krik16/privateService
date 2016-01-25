@@ -7,6 +7,8 @@ import java.util.List;
 
 public class CouponRefundDetailVO implements Serializable {
 
+
+
 	private BigDecimal refundAmount;//退款金额
 
 	private Integer refundNum;//退款数量
@@ -76,7 +78,7 @@ public class CouponRefundDetailVO implements Serializable {
                 '}';
     }
 
-	public class RefundMessage{
+	public class RefundMessage implements Serializable{
 
 		private String stage;// 退款状态描述
 
