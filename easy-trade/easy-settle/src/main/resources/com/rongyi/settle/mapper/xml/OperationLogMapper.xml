@@ -99,16 +99,16 @@
     from op_log
     <where>
       <if test="opModel!=null">
-        op_model=#{opModel}
+        and op_model=#{opModel}
       </if>
       <if test="opType!=null">
-        op_type=#{opType}
+        and op_type=#{opType}
       </if>
       <if test="opId!=null">
-        op_id=#{opId}
+        and op_id=#{opId}
       </if>
       <if test="id!=null">
-        id=#{id}
+        and id=#{id}
       </if>
     </where>
   </select>
