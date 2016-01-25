@@ -1,7 +1,10 @@
 package com.rongyi.easy.rpb.domain;
 
 import java.io.Serializable;
-
+/**
+ *  Description: 微信商户账号
+ *  Author: kejun
+ **/
 public class WeixinMch implements Serializable {
     /**
 	 * 
@@ -26,7 +29,7 @@ public class WeixinMch implements Serializable {
     private String mchId;
 
     /**
-     * 证书路过
+     * 证书路径
      */
     private String cretPath;
 
