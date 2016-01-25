@@ -12,5 +12,5 @@ import java.util.List;
  * Project:easy-common
  */
 public interface ROAPushShopUserService {
-    public List<RmmmUserInfoEntity> findByShopMids(List<String> mids);
+    public List<RmmmUserInfoEntity> findByShopMid(String shopMid,List<Integer> identities);
 }
