@@ -235,7 +235,7 @@
         </if>
         #{createBy,jdbcType=VARCHAR},
         #{cycleDay,jdbcType=TINYINT},
-        #{cycleRegularDay,jdbcType=VARCHAR},
+        #{cycleRegularDay,jdbcType=VARCHAR}
         )
     </insert>
 
