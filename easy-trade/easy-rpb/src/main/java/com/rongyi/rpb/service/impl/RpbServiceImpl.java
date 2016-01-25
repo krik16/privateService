@@ -173,8 +173,10 @@ public class RpbServiceImpl implements IRpbService {
 			}
 		} else {
 			List<PaySuccessResponse> responseList = paymentLogInfoService.paySuccessToMessage(paymentEntity.getPayNo(), payAccount, orderNums, paymentEntity.getOrderType(), payChannel);
+			LOGGER.info("time7={}"+DateUtil.getCurrDateTime());
 			if (!responseList.isEmpty())
 				resultMap = responseList.get(0).getResult();
+			LOGGER.info("time8={}"+DateUtil.getCurrDateTime());
 		}
 		LOGGER.info("订单系统订单处理结果" + resultMap.toString());
 		return resultMap;
