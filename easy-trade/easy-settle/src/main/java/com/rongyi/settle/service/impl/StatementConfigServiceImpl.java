@@ -393,7 +393,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                 if (linkShopIds != null) {
                     for (String shopId : linkShopIds) {
                         map.put("shopId", shopId);
-                        logger.info("linkType=2  map="+map.toString());
+//                        logger.info("linkType=2  map="+map.toString());
                         if (checkConfigExist(map, shopConfigs)) {
                             ReMap.put("result", true);
                             return ReMap;

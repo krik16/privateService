@@ -404,7 +404,7 @@
                 and si.id=#{shopMysqlId}
             </if>
             <if test="shopId!=null">
-                and si.shop_mid=#{shopId}
+                and sc.shop_id=#{shopId}
             </if>
             <if test="userId!=null">
                 and sc.real_user_list like concat('%', #{userId}, '%')
