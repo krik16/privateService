@@ -5,17 +5,26 @@ import java.io.Serializable;
 /**
  * Created by xuying on 2016/1/25.
  */
-public class CouponSolr implements Serializable{
-    private String couponId;
+public class SaleParamSolr implements Serializable{
+    private String id;
     private long startTime; //开始时间
     private long endTime; //结束时间
+    private String type;//coupon为卡卷，commodity为商品
 
-    public String getCouponId() {
-        return couponId;
+    public String getId() {
+        return id;
     }
 
-    public void setCouponId(String couponId) {
-        this.couponId = couponId;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public long getStartTime() {
