@@ -14,16 +14,17 @@ public class OrderSearchParam implements Serializable {
 	* @Description: TODO(这里用一句话描述这个方法的作用) 
 	* @param @return    设定文件 
 	* @author shaozhou
-	* @date 2016年1月22日 下午5:47:54
+	* @date 2016年1月25日 下午5:42:05
 	* @throws 
 	*/
 	@Override
 	public String toString() {
 		return "OrderSearchParam [id=" + id + ", customerCode=" + customerCode + ", orderSrc=" + orderSrc
 				+ ", orderType=" + orderType + ", orderStatus=" + orderStatus + ", orderLevel=" + orderLevel
-				+ ", title=" + title + ", userName=" + userName + ", userTag=" + userTag + ", startDate=" + startDate
-				+ ", endDate=" + endDate + ", pageSize=" + pageSize + ", currentPage=" + currentPage + ", startIndex="
-				+ startIndex + ", userId=" + userId + ", customerTel=" + customerTel + "]";
+				+ ", title=" + title + ", userName=" + userName + ", userTag=" + userTag + ", dateTag=" + dateTag
+				+ ", startDate=" + startDate + ", endDate=" + endDate + ", pageSize=" + pageSize + ", currentPage="
+				+ currentPage + ", startIndex=" + startIndex + ", userId=" + userId + ", customerTel=" + customerTel
+				+ "]";
 	}
 
 	public String getId() {
@@ -89,13 +90,32 @@ public class OrderSearchParam implements Serializable {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
-	public int getUserTag() {
+	/**
+	 * @return the userTag
+	 */
+	public String getUserTag() {
 		return userTag;
 	}
 
-	public void setUserTag(int userTag) {
+	/**
+	 * @param userTag the userTag to set
+	 */
+	public void setUserTag(String userTag) {
 		this.userTag = userTag;
+	}
+
+	/**
+	 * @return the dateTag
+	 */
+	public String getDateTag() {
+		return dateTag;
+	}
+
+	/**
+	 * @param dateTag the dateTag to set
+	 */
+	public void setDateTag(String dateTag) {
+		this.dateTag = dateTag;
 	}
 
 	public String getStartDate() {
@@ -189,7 +209,9 @@ public class OrderSearchParam implements Serializable {
 	private String userName = "";
 
 	// 用户类型（标签，创建人/更新人）
-	private int userTag = 0;
+	private String userTag = "";
+	
+	private String dateTag ="";
 
 	// 开始日期
 	private String startDate = "";
