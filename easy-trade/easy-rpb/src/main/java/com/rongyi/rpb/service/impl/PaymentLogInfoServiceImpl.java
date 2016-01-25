@@ -150,7 +150,6 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
     @SuppressWarnings("unchecked")
     @Override
     public List<PaySuccessResponse> paySuccessToMessage(String out_trade_no, String buyerEmail, String orderNums, Integer orderType, String payChannel) {
-        LOGGER.info("time1={}",DateUtil.getCurrDateTime());
         List<PaySuccessResponse> responseList = new ArrayList<>();
         if (orderNums != null) {
             String[] orderNumArray = orderNums.split(",");
@@ -159,24 +158,17 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
                 if (Constants.ORDER_TYPE.ORDER_TYPE_0 == orderType)// 商品订单
                     target = Constants.SOURCETYPE.OSM;
                 MessageEvent event = rpbEventService.getMessageEvent(out_trade_no, orderNum, null, payChannel, buyerEmail, Constants.SOURCETYPE.RPB, target, PaymentEventType.BUYER_PAID);
-                LOGGER.info("time2={}",DateUtil.getCurrDateTime());
                 String response = sender.convertSendAndReceive(event);
-                LOGGER.info("response={}",response);
-                if (response == null) {
-                    LOGGER.info("time3={}",DateUtil.getCurrDateTime());
+                if (response == null)
                     continue;
-                }
                 MessageEvent responseEvent = rpbEventService.messageToMessageEvent(response);
-                LOGGER.info("time4={}",DateUtil.getCurrDateTime());
                 Map<String, Object> map = (Map<String, Object>) responseEvent.getBody();
                 if (map.get("orderNum") != null && map.get("result") != null) {
                     PaySuccessResponse paySuccessResponse = new PaySuccessResponse((String) map.get("orderNum"), (Map<String, Object>) map.get("result"));
                     responseList.add(paySuccessResponse);
-                    LOGGER.info("time5={}", DateUtil.getCurrDateTime());
                 }
             }
         }
-        LOGGER.info("time6={}", DateUtil.getCurrDateTime());
         return responseList;
     }
 
