@@ -83,12 +83,12 @@ body {
 								${trade.payChannel eq '2' ? '银行卡 ' : ''}
 							</p>
 						</div>
-						<div class="line-heights shopsName">商场:</div>
+						<%--<div class="line-heights shopsName">商场:</div>
 						<div class="shopsData">
 							<p class="p_text">
 								${trade.mallName}
 							</p>
-						</div>
+						</div>--%>
 						<div style="clear: both;"></div>
 					<c:choose>
 						<c:when test="${trade.tradeType eq '0'}">
@@ -173,13 +173,13 @@ body {
 							</c:if>
 							</p>
 						</div>
-						<div style="clear: both;"></div>
+						<%--<div style="clear: both;"></div>
 						<div class="line-heights shopsName">店铺:</div>
 						<div class="shopsData">
 							<p class="p_text">
 								${trade.shopName} 
 							</p>
-						</div>
+						</div>--%>
 						<div style="clear: both;"></div>
 						<div class="line-heights shopsName">买家支付账号:</div>
 						<div class="shopsData">

@@ -108,7 +108,7 @@ function ajaxloadApplys(page,status,commissionNo,guideType,name,mall,shop,amount
 
 
 
-function checkApplys(ids,guideType, status, reason) {
+function checkApplys(ids, status, reason,guideType) {
 	
 	$.ajax({ 
 		url: "../sc/check", 
@@ -133,16 +133,27 @@ function checkApplys(ids,guideType, status, reason) {
 }
 function batchCheck(){
 	var ids = [];
+	var guideType = '';
+	var flag = false;
 	$(":checkbox[name='subBox']").each(function() {
 		if (this.checked == true) {
 			ids.push(this.id);
+			if(guideType=='')
+				guideType = ($(this).attr("guideType"))
+			if($(this).attr("guideType")==null || guideType!=$(this).attr("guideType")){
+				flag = true;
+			}
 		}
 	});
+	if(guideType=='' || flag){
+		_util.cmsTip("请选择同一渠道类型的进行批量审核！");
+		return;
+	}
+
 	if (ids.length != 0) {
-		checkApplys(ids.join(","), 2);
+		checkApplys(ids.join(","), 2, guideType);
 	}else{
 		_util.cmsTip("您至少要选中一条返佣！");
-		return;
 	}
 }
 function checkListener() {
@@ -198,7 +209,7 @@ function checkUnpass(id,guideType) {
 						_util.cmsTip("字数超过限制！");
 						return -1;
 					} else {
-						checkApplys(id, guideType, -1, reason);
+						checkApplys(id, -1, reason, guideType);
 					}
 				}
 			});

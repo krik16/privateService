@@ -8,11 +8,11 @@
 		 <td style="text-align: center;"><input type="checkbox" id="select-all" onclick="selectAll()"/></td>
 			<td>付款单号</td>
 			<td>订单号</td>
-			<td>渠道</td>
+			<%--<td>渠道</td>--%>
 			<td>申请退款时间</td>
 			<td>打款方式</td>
-			<td>商场</td>
-			<td>店铺</td>
+			<%--<td>商场</td>
+			<td>店铺</td>--%>
 			<td>买家账号</td>
 			<td>买家姓名</td>
 			<td>退款金额</td>
@@ -40,7 +40,7 @@
 								<td>${item.orderNo}</td>
 							</c:otherwise>
 						</c:choose>
-						<c:choose>
+						<%--<c:choose>
 							<c:when test="${item.guideType eq 1}">
 								<td>商家</td>
 							</c:when>
@@ -48,7 +48,7 @@
 								<td>买手</td>
 							</c:when>
 							<c:otherwise><td></td></c:otherwise>
-						</c:choose>
+						</c:choose>--%>
 						<td><fmt:formatDate value="${item.orderTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 						<c:choose>
 						<c:when test="${item.payChannel eq 0}">
@@ -59,8 +59,8 @@
 						</c:when>
 						<c:otherwise><td>银行卡</td></c:otherwise>
 						</c:choose>
-						<td>${item.mallName}</td>
-						<td>${item.shopName}</td>
+						<%--<td>${item.mallName}</td>
+						<td>${item.shopName}</td>--%>
 						<td>${item.buyerAccount}</td>
 						<td>${item.buyerName}</td>
 						<td>${item.orderPrice}</td>

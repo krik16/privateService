@@ -27,7 +27,7 @@
 			<c:when test="${not empty list}">
 			  	<c:forEach var="item" items="${list}" varStatus="status">
 			 		<tr>
-			 		<td style="text-align: center;"><input type="checkbox" name="subBox" id="${item.id }"></td>
+			 		<td style="text-align: center;"><input type="checkbox" name="subBox" id="${item.id }" guideType="${item.guideType}"></td>
 			 		
 			 		<td style="text-align: center;">
 			 			<c:set value="${ fn:split(item.picUrls, ';') }" var="urls" />
@@ -53,7 +53,7 @@
 			 		<td style="text-align: center;">未到账</td>
 			 		<td style="text-align: center;" name="operate">
 			 			<sec:authorize ifAnyGranted="TMS_SC_VERIFY" >
-				 			<a href="javascript:void(0);" class="btnsearch" id="checkok-${item.id }" onclick="checkApplys(${item.id},${item.guideType==null?0:item.guideType},2)">审核通过</a>
+				 			<a href="javascript:void(0);" class="btnsearch" id="checkok-${item.id }" onclick="checkApplys(${item.id},2,null,${item.guideType==null?0:item.guideType})">审核通过</a>
 				 			<a href="javascript:void(0);" class="btnsearch" id="checkok-${item.id }" onclick="checkUnpass(${item.id},${item.guideType==null?0:item.guideType});">审核不通过</a>
 			 			</sec:authorize>
 			 		</td>

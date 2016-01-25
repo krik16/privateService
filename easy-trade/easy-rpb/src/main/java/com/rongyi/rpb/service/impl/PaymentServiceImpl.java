@@ -274,7 +274,8 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     @Override
     public PaymentEntityVO insertOrderMessage(MessageEvent event) {
         PaymentEntityVO paymentEntityVO = bodyToPaymentEntity(event.getBody(), event.getType());
-        String payNo = null;
+        String oldPayNo = paymentEntityVO.getPayNo();// 原订单号
+        String payNo;
         if (MqReceiverServiceImpl.isAppPay(event.getType())) {// 前端支付验证订单号是否已存在
             PaymentEntity paymentEntity = validateOrderNumExist(paymentEntityVO.getOrderNum(), paymentEntityVO.getPayChannel(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
             if (paymentEntity != null) {
@@ -295,7 +296,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
         }
         List<PaymentEntity> paymentEntityList = getPaymemtsByMoreOrderNum(paymentEntityVO);// 多个订单号生成多条记录对应一条付款单号
-        String oldPayNo = paymentEntityVO.getPayNo();// 原订单号
+
         payNo = paymentEntityList.get(0).getPayNo();// 新付款单号
         paymentEntityVO.setPayNo(payNo);
         if (StringUtils.isEmpty(paymentEntityVO.getTitle())) {
@@ -366,7 +367,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                     BeanUtils.copyProperties(list.get(0), newPaymentEntity);
                     newPaymentEntity.setId(null);
                     newPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
-                    if (paymentEntity.getPayChannel().equals(payChannel)) {
+                    if (paymentEntity.getPayChannel() != null && payChannel.equals(paymentEntity.getPayChannel())) {
                         LOGGER.info("此订单payChannel={}支付方式未支付单已存在，直接返回此笔付款单记录,orderNum={}", paymentEntity.getPayChannel(), orderNumArray[i]);
                         break;
                     } else {
@@ -412,6 +413,9 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         paymentLogInfo.setTimeEnd(DateUtil.getCurrDateTime());
         paymentLogInfo.setTotal_fee(0.00);
         paymentLogInfo.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
+        if (PaymentEventType.REFUND.equals(event.getType())){
+            paymentLogInfo.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
+        }
         paymentLogInfoService.insertGetId(paymentLogInfo);
         String type = PaymentEventType.BUYER_PAID;
         if (PaymentEventType.REFUND.equals(event.getType()))

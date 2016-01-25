@@ -29,7 +29,7 @@ $(document).ready(function () {
 
         }
     });
-    $('input[name="mallId"]').typeahead({
+  /*  $('input[name="mallId"]').typeahead({
         source: function (query, process) {
             $("input[name='mallId']").attr("id", "");
             m_names = [];
@@ -104,7 +104,7 @@ $(document).ready(function () {
             $("input[name='shopId']").val(selection);
             return selection;
         }
-    });
+    });*/
 });
 
 /**
@@ -140,11 +140,11 @@ function getParamsJson() {
     var tradeNo = $('#tradeNo').val();
     var payNo = $('#payNo').val();
     var orderNo = $('#orderNo').val();
-    var mallName = $("input[name='mallId']").val();
-    var shopName = $("input[name='shopId']").val();
+  /*  var mallName = $("input[name='mallId']").val();
+    var shopName = $("input[name='shopId']").val();*/
     var buyerAccount = $('#buyerAccount').val();
     var buyerName = $('#buyerName').val();
-    var sellerAccount = $('#sellerAccount').val();
+    /*var sellerAccount = $('#sellerAccount').val();*/
     var tradeType = $('#tradeType').val();
     var payChannel = $('#payChannel').val();
     var tradeStartTime = $('#tradeStartTime').val();
@@ -160,11 +160,11 @@ function getParamsJson() {
         'tradeNo': tradeNo,
         'payNo': payNo,
         'orderNo': orderNo,
-        'mallName': mallName,
-        'shopName': shopName,
+       /* 'mallName': mallName,
+        'shopName': shopName,*/
         'buyerAccount': buyerAccount,
         'buyerName': buyerName,
-        'sellerAccount': sellerAccount,
+        /*'sellerAccount': sellerAccount,*/
         'tradeType': tradeType,
         'payChannel': payChannel,
         'tradeStartTime': tradeStartTime,
