@@ -171,6 +171,11 @@ public class TCCouponVO implements Serializable {
      */
     private Boolean  isThird;
 
+    /**
+     * 导入渠道
+     */
+    private Integer inChannel;
+
     private Long version; // 乐观锁
 
 
@@ -579,6 +584,14 @@ public class TCCouponVO implements Serializable {
         this.sortIndex = sortIndex;
     }
 
+    public Integer getInChannel() {
+        return inChannel;
+    }
+
+    public void setInChannel(Integer inChannel) {
+        this.inChannel = inChannel;
+    }
+
     /**
      * 剩余库存量
      *
@@ -959,6 +972,7 @@ public class TCCouponVO implements Serializable {
                 .append(", products=").append(products)
                 .append(", visitedCount=").append(visitedCount)
                 .append(", sortIndex=").append(sortIndex).append(", version=")
+                .append(",inChannel=").append(inChannel)
                 .append(version).append("]");
         return builder.toString();
     }
