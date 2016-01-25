@@ -67,6 +67,8 @@ public interface McmcCommoditySolrService {
 	 */
 	public List<ObjectId> commoditySearch(CommoditySearchParam param);
 
+	public Long commoditySearchTotalCount(CommoditySearchParam param);
+
 	/**
 	 * 商品检索 - 容易逛商品聚合
 	 *

@@ -56,6 +56,10 @@ public interface Constants {
     	 * 未登录不可访问
     	 */
     	short STATUS_UN_LOGIN = 21;
+    	/**
+    	 * 敏感词
+    	 */
+    	short STATUS_SENSITIVE = 2;
     }
     interface PageSize {
     	/**

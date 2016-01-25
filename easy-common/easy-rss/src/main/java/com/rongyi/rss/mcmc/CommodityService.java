@@ -6,7 +6,6 @@ import java.util.List;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.param.CouponCommodityParam;
 import com.rongyi.easy.mcmc.*;
-import com.rongyi.easy.mcmc.param.CouponParam;
 import com.rongyi.easy.mcmc.param.SaleParam;
 
 import com.rongyi.easy.mcmc.vo.*;

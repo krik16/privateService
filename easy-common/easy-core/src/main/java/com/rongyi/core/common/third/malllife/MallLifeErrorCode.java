@@ -30,6 +30,7 @@ public enum MallLifeErrorCode {
     /*  8200-8250 参数合法性验证 */
     MOBILE_NUMBER_ILLEGAL(1068201,"手机号码不合法"),
     USER_PHONE_ISEXIST(1068205,"注册手机号已经存在"),
+    PARAMETER_FORMAT (1068208,"参数格式不合法"),
 
     /**toB业务 */
     COUPON_OPENID_ISEXIST(1069111,"用户不存在"),
