@@ -20,4 +20,12 @@ public interface ActivityConstants {
     interface ActivityType {
         Integer GOODS_AND_COUPON = 3;// 商品及卡券类型
     }
+
+    /**
+     * 发布渠道
+     */
+    interface PublishChannel {
+        Integer OPERATION = 0;
+        Integer MERCHANT = 1;
+    }
 }
