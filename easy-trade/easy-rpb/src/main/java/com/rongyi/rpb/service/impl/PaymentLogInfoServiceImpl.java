@@ -161,9 +161,11 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
                 MessageEvent event = rpbEventService.getMessageEvent(out_trade_no, orderNum, null, payChannel, buyerEmail, Constants.SOURCETYPE.RPB, target, PaymentEventType.BUYER_PAID);
                 LOGGER.info("time2={}",DateUtil.getCurrDateTime());
                 String response = sender.convertSendAndReceive(event);
-                if (response == null)
+                LOGGER.info("response={}",response);
+                if (response == null) {
+                    LOGGER.info("time3={}",DateUtil.getCurrDateTime());
                     continue;
-                LOGGER.info("time3={}",DateUtil.getCurrDateTime());
+                }
                 MessageEvent responseEvent = rpbEventService.messageToMessageEvent(response);
                 LOGGER.info("time4={}",DateUtil.getCurrDateTime());
                 Map<String, Object> map = (Map<String, Object>) responseEvent.getBody();
