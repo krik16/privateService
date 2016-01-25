@@ -80,7 +80,8 @@
         pbc.is_delete,
         pbc.create_by,bi.pay_account,pbc.gen_hm_time as
         generate_time,bi.pay_name,bi.blank_name,bi.blank_address,bi.biz_address,bi.biz_email,
-        bi.biz_account,bi.contact_name,bi.contact_phone,bi.contact_weixin,bi.contact_qq
+        bi.biz_account,bi.contact_name,bi.contact_phone,bi.contact_weixin,bi.contact_qq,
+        pbc.cycle_day, pbc.cycle_regular_day
     </sql>
     
     <sql id="Config_Column_List">
@@ -191,6 +192,8 @@
         effect_start_time, effect_end_time, pay_channel,
         contract_no,
         link_rule_code,
+        cycle_day,
+        cycle_regular_day
         <if test="status != null">
             `status`,
         </if>
@@ -230,7 +233,9 @@
         <if test="isDelete != null">
             is_delete = #{isDelete,jdbcType=TINYINT},
         </if>
-        #{createBy,jdbcType=VARCHAR}
+        #{createBy,jdbcType=VARCHAR},
+        #{cycleDay,jdbcType=TINYINT},
+        #{cycleRegularDay,jdbcType=VARCHAR},
         )
     </insert>
 
@@ -331,6 +336,12 @@
             </if>
             <if test="createBy != null">
                 create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="cycleDay != null">
+                cycle_day = #{cycleDay,jdbcType=TINYINT},
+            </if>
+            <if test="cycleRegularDay != null">
+                cycle_regular_day = #{cycleRegularDay,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
