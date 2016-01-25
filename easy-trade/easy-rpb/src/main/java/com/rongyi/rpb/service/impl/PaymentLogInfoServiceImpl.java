@@ -119,8 +119,8 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
                         insertGetId(paymentLogInfo);
                     }
                     String orderNums = paymentService.getOrderNumStrsByPayNo(paymentLogInfo.getOutTradeNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
-                    paySuccessToMessage(paymentLogInfo.getOutTradeNo(), paymentLogInfo.getBuyer_email(), orderNums, withLockPaymentEntity.getOrderType(), payChannel);
                     paymentService.updateListStatus(paymentLogInfo.getOutTradeNo(), tradeType, status, realPayChannel);// 修改付款单状态
+                    paySuccessToMessage(paymentLogInfo.getOutTradeNo(), paymentLogInfo.getBuyer_email(), orderNums, withLockPaymentEntity.getOrderType(), payChannel);
                     LOGGER.info("更新付款单状态，记录付款事件成功，payNo={}", withLockPaymentEntity.getPayNo());
                     return true;
                 }

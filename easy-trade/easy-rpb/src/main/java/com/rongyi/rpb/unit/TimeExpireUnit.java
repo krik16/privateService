@@ -70,13 +70,17 @@ public class TimeExpireUnit {
             if (StringUtils.isEmpty(timeStart) || StringUtils.isEmpty(timeExpire)) {
                 LOGGER.info("微信支付失效时间参数不合法,默认给予失效时间为{}分钟，timeStart={},timeExpire={}",itBPay, timeStart, timeExpire);
                 timeStart = DateUtil.getCurrDateTime().toString();
-                timeExpire = DateUtil.dateToString(DateUtil.addTime(DateUtil.stringToDate(timeStart), itBPay, Calendar.MINUTE), "yyyyMMddHHmmss");
-            } else if (DateUtil.dateDiff(DateUtil.stringToDate(timeStart), DateUtil.stringToDate(timeExpire)) < 5) {
+                timeExpire = DateUtil.dateToString(DateUtil.addTime(DateUtil.stringToDate(timeStart), itBPay, Calendar.MINUTE), "yyyy-MM-dd HH:mm:ss");
+            } else if(DateUtil.dateDiff(DateUtil.stringToDate(timeExpire), DateUtil.getCurrDateTime()) > 0){
+                LOGGER.info("微信支付失效时间小于当前时间戳，属于无效条件，默认给予失效时间为{}分钟，timeStart={},timeExpire={}",itBPay, timeStart, timeExpire);
+                timeStart = DateUtil.dateToString(DateUtil.getCurrDateTime(),"yyyy-MM-dd HH:mm:ss");
+                timeExpire = DateUtil.dateToString(DateUtil.addTime(DateUtil.stringToDate(timeStart), itBPay, Calendar.MINUTE), "yyyy-MM-dd HH:mm:ss");
+            }else if (DateUtil.dateDiff(DateUtil.stringToDate(timeStart), DateUtil.stringToDate(timeExpire)) < 5) {
                 LOGGER.info("微信支付失效时间间隔小于5分钟，默认给予失效时间为5分钟，timeStart={},timeExpire={}", timeStart, timeExpire);
-                timeExpire = DateUtil.dateToString(DateUtil.addTime(DateUtil.stringToDate(timeStart), 5, Calendar.MINUTE), "yyyyMMddHHmmss");
+                timeExpire = DateUtil.dateToString(DateUtil.addTime(DateUtil.stringToDate(timeStart), 5, Calendar.MINUTE), "yyyy-MM-dd HH:mm:ss");
             } else if (DateUtil.dateDiff(DateUtil.stringToDate(timeStart), DateUtil.stringToDate(timeExpire)) > (15 * 24 * 60)) {
                 LOGGER.info("微信支付失效时间大于15天，属于无效条件，默认给予失效时间为{}分钟，timeStart={},timeExpire={}",itBPay, timeStart, timeExpire);
-                timeExpire = DateUtil.dateToString(DateUtil.addTime(DateUtil.stringToDate(timeStart), itBPay, Calendar.MINUTE), "yyyyMMddHHmmss");
+                timeExpire = DateUtil.dateToString(DateUtil.addTime(DateUtil.stringToDate(timeStart), itBPay, Calendar.MINUTE), "yyyy-MM-dd HH:mm:ss");
             }
             timeStart = DateUtil.dateToString(DateUtil.stringToDate(timeStart), "yyyyMMddHHmmss");
             timeExpire = DateUtil.dateToString(DateUtil.stringToDate(timeExpire), "yyyyMMddHHmmss");
