@@ -156,7 +156,7 @@ public class UserCoupon implements Serializable {
     /**
      * 券码类型
      */
-    private String couponChannel;//券码类型 5哈根达斯 6中影 7纵漫线美漫大趴 8星巴克
+    private Integer couponChannel;//券码类型 5哈根达斯 6中影 7纵漫线美漫大趴 8星巴克
 
     public UserCoupon() {
 
@@ -468,12 +468,12 @@ public class UserCoupon implements Serializable {
         this.refundId = refundId;
     }
 
-    public String getCouponChannel()
+    public Integer getCouponChannel()
     {
         return couponChannel;
     }
 
-    public void setCouponChannel(String couponChannel)
+    public void setCouponChannel(Integer couponChannel)
     {
         this.couponChannel = couponChannel;
     }
