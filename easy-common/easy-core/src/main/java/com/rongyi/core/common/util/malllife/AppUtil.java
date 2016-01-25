@@ -2,6 +2,8 @@ package com.rongyi.core.common.util.malllife;
 
 import com.rongyi.core.enumerate.malllife.AppReferenceEnum;
 import java.text.SimpleDateFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -139,5 +141,26 @@ public class AppUtil{
         
     }
     
+    /**
+	 * 判断电话
+	 * @param phonenumber
+	 * @return
+	 */
+    public static boolean isTelephone(String phonenumber) {
+        String phone = "^0[0-9]{2,3}(-|)[0-9]{7,8}$";//"0\\d{2,3}-\\d{7,8}";
+        Pattern p = Pattern.compile(phone);
+        Matcher m = p.matcher(phonenumber);
+        return m.matches();
+    }
 
+    /**
+     * 判断手机号
+     * @param mobiles
+     * @return
+     */
+    public static boolean isMobileNO(String mobiles) {
+        Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+        Matcher m = p.matcher(mobiles);
+        return m.matches();
+    }
 }

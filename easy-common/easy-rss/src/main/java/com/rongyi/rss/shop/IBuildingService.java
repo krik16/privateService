@@ -30,4 +30,6 @@ public interface IBuildingService {
 	 * @return
 	 */
 	public BuildingEntity getBuildingById(String id);
+
+	public List<BuildingEntity> searchBuildingByMall(String mallId);
 }

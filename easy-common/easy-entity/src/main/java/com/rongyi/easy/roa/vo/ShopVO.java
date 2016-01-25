@@ -1,9 +1,9 @@
 package com.rongyi.easy.roa.vo;
 
-import org.bson.types.ObjectId;
-
 import java.io.Serializable;
 import java.util.List;
+
+import org.bson.types.ObjectId;
 
 public class ShopVO implements Serializable {
 
@@ -33,6 +33,7 @@ public class ShopVO implements Serializable {
     private List<ObjectId> zone_ids;
     private String filialeId;
 	private String filialeName;
+	private List<ObjectId> custom_category_ids;
 
     public String getId() {
         return id;
@@ -231,4 +232,50 @@ public class ShopVO implements Serializable {
 	public void setFilialeName(String filialeName) {
 		this.filialeName = filialeName;
 	}
+
+    /**
+	 * @return the custom_category_ids
+	 */
+	public List<ObjectId> getCustom_category_ids() {
+		return custom_category_ids;
+	}
+
+	/**
+	 * @param custom_category_ids the custom_category_ids to set
+	 */
+	public void setCustom_category_ids(List<ObjectId> custom_category_ids) {
+		this.custom_category_ids = custom_category_ids;
+	}
+
+	@Override
+    public String toString() {
+        return "ShopVO{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", iconUrl='" + iconUrl + '\'' +
+                ", shopType='" + shopType + '\'' +
+                ", shopNature='" + shopNature + '\'' +
+                ", status='" + status + '\'' +
+                ", recommend='" + recommend + '\'' +
+                ", valid='" + valid + '\'' +
+                ", position=" + position +
+                ", address='" + address + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", averageConsumption='" + averageConsumption + '\'' +
+                ", businessHours='" + businessHours + '\'' +
+                ", description='" + description + '\'' +
+                ", brandId='" + brandId + '\'' +
+                ", brandName='" + brandName + '\'' +
+                ", categories=" + categories +
+                ", terminalImgs=" + terminalImgs +
+                ", hasCoupons=" + hasCoupons +
+                ", location=" + location +
+                ", filiale_id='" + filiale_id + '\'' +
+                ", brand_id='" + brand_id + '\'' +
+                ", zone_ids=" + zone_ids +
+                ", filialeId='" + filialeId + '\'' +
+                ", filialeName='" + filialeName + '\'' +
+                ", custom_category_ids='" + custom_category_ids + '\'' +
+                '}';
+    }
 }

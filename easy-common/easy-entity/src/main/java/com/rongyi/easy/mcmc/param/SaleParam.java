@@ -9,11 +9,13 @@ import java.util.List;
  */
 public class SaleParam implements Serializable {
     private Integer id; //特卖/闪购ID
+    private String secKillSign; //秒杀标记
     private List<String> shopIds = new ArrayList<>(); //特卖关联特卖店铺MONGO ID列表
-    private long startTime; //特卖开始时间
-    private long endTime; //特卖结束时间
-    private int activityType; //活动类型 1为特卖  2为闪购
+    private long startTime; //开始时间
+    private long endTime; //结束时间
+    private int activityType; //活动类型 1为特卖  2为闪购 3为秒杀
     private List<ActivityCommodityParam> commodityParams = new ArrayList<>(); // 闪购或特卖关联商品及排序数
+    private List<String> commodityIds = new ArrayList<>(); //秒杀关联商品列表
 
     public Integer getId() {
         return id;
@@ -63,6 +65,22 @@ public class SaleParam implements Serializable {
         this.commodityParams = commodityParams;
     }
 
+    public String getSecKillSign() {
+        return secKillSign;
+    }
+
+    public void setSecKillSign(String secKillSign) {
+        this.secKillSign = secKillSign;
+    }
+
+    public List<String> getCommodityIds() {
+        return commodityIds;
+    }
+
+    public void setCommodityIds(List<String> commodityIds) {
+        this.commodityIds = commodityIds;
+    }
+
     @Override
     public String toString() {
         return "SaleParam{" +
@@ -72,6 +90,8 @@ public class SaleParam implements Serializable {
                 ", endTime=" + endTime +
                 ", activityType=" + activityType +
                 ", commodityParams=" + commodityParams +
+                ", secKillSign=" + secKillSign +
+                ", commodityIds=" + commodityIds +
                 '}';
     }
 }

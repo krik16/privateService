@@ -1,5 +1,8 @@
 package com.rongyi.rss.coupon.mall.life;
 
+import java.util.List;
+import java.util.Map;
+
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.UserRedenvelope;
@@ -8,9 +11,6 @@ import com.rongyi.easy.coupon.param.RebateAndRedenvelopParam;
 import com.rongyi.easy.coupon.vo.UserCouponVO;
 import com.rongyi.easy.coupon.vo.UserRedPacketForOrderVO;
 import com.rongyi.easy.coupon.vo.UserRedPacketVO;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * 摩生活：用户红包接口
@@ -151,6 +151,20 @@ public interface MLUserRedenvelopeService {
      * @author lqy
      */
     int getUserRedPacketCount(RebateAndRedenvelopParam param);
+
+    /**
+     * 检查红包是否使用(status未使用[0],已使用[1])
+     * @param couponOrderParam
+     * @return
+     * @author wzw
+     */
     boolean checkEnvelopeIsUse(CouponOrderParam couponOrderParam);
+
+    /**
+     * 砍价发送红包
+     * @param couponOrderParam
+     * @return
+     * @author wzw
+     */
     boolean sendEnvelope(CouponOrderParam couponOrderParam);
 }

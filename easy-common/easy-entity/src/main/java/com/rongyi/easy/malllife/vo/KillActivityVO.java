@@ -23,6 +23,15 @@ public class KillActivityVO implements Serializable {
 	private Integer limitCount;
 	private List<Double> location;// 店铺的 经纬度
 	private int couponNum;// 剩余库存
+	private String type = "1";//”1代金券 2商品”
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	public String getCouponId() {
 		return couponId;
@@ -117,7 +126,7 @@ public class KillActivityVO implements Serializable {
 		return "KillActivityVO [couponId=" + couponId + ", title=" + title + ", currentPrice=" + currentPrice
 				+ ", originalPrice=" + originalPrice + ", picUrl=" + picUrl + ", shopName=" + shopName + ", mallName=" + mallName
 				+ ", limitPublishCount=" + limitPublishCount + ", limitCount=" + limitCount + ", location=" + location
-				+ ", couponNum=" + couponNum + "]";
+				+ ", couponNum=" + couponNum + ", type=" + type + "]";
 	}
 
 }

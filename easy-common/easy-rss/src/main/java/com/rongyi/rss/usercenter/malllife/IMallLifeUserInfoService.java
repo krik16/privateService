@@ -26,7 +26,7 @@ public interface IMallLifeUserInfoService {
      * @param malllifeUser 用户参数信息
      * @throws Exception
      */
-    public void registUser(MalllifeUser malllifeUser) throws Exception;
+    public String registUser(MalllifeUser malllifeUser) throws Exception;
 
     /**
      * 根据用户Id查询 uuid
