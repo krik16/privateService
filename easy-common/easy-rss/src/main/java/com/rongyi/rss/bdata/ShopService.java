@@ -1,10 +1,10 @@
 package com.rongyi.rss.bdata;
 
-import java.util.List;
-import java.util.Map;
-
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.bdata.entity.Shop;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 店铺服务
@@ -23,7 +23,7 @@ public interface ShopService {
 	 * @return 带ShopVO 的ResponseVO
 	 * @throws Exception 
 	 */
-	ResponseVO searchShops(String mallId, String keyword, String customCateId, int page, int pageSize) throws Exception;
+	ResponseVO searchShops(String mallId, String keyword, String customCateId, String zondId, int page, int pageSize) throws Exception;
 	
 	/**
 	 * 获取单个店铺详情
