@@ -71,7 +71,7 @@ public class TradeUserCode implements Serializable {
 
     private Date updateAt;
 
-    private Date couponChannel;
+    private String couponChannel;
 
 
     public Double getOrigPrice_Y() {
@@ -342,12 +342,12 @@ public class TradeUserCode implements Serializable {
         this.updateAt = updateAt;
     }
 
-    public Date getCouponChannel()
+    public String getCouponChannel()
     {
         return couponChannel;
     }
 
-    public void setCouponChannel(Date couponChannel)
+    public void setCouponChannel(String couponChannel)
     {
         this.couponChannel = couponChannel;
     }
