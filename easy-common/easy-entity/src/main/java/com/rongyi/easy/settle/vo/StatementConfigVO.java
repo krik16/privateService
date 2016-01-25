@@ -117,6 +117,11 @@ public class StatementConfigVO extends StatementConfig{
 	 * 关联店铺
 	 */
 	private List<ConfigShopVO> configShops;
+
+	/**
+	 * 审核意见（含失败原因）
+	 */
+	private String verifyDesc;
     
 	public Integer getConfigId() {
 		return configId;
@@ -262,5 +267,21 @@ public class StatementConfigVO extends StatementConfig{
 
 	public void setConfigShops(List<ConfigShopVO> configShops) {
 		this.configShops = configShops;
+	}
+
+	public String getBussinessLinkAddress() {
+		return bussinessLinkAddress;
+	}
+
+	public void setBussinessLinkAddress(String bussinessLinkAddress) {
+		this.bussinessLinkAddress = bussinessLinkAddress;
+	}
+
+	public String getVerifyDesc() {
+		return verifyDesc;
+	}
+
+	public void setVerifyDesc(String verifyDesc) {
+		this.verifyDesc = verifyDesc;
 	}
 }
