@@ -192,8 +192,6 @@
         effect_start_time, effect_end_time, pay_channel,
         contract_no,
         link_rule_code,
-        cycle_day,
-        cycle_regular_day
         <if test="status != null">
             `status`,
         </if>
@@ -201,7 +199,9 @@
         <if test="isDelete != null">
             is_delete,
         </if>
-        create_by
+        create_by,
+        cycle_day,
+        cycle_regular_day
         )
         values (#{ruleCode,jdbcType=VARCHAR},
         #{cooperateType,jdbcType=TINYINT},
