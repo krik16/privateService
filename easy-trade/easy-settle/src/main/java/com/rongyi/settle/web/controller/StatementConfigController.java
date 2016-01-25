@@ -7,22 +7,30 @@
 
 package com.rongyi.settle.web.controller;
 
-import java.util.*;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.common.util.DateTool;
-import com.rongyi.core.common.util.JsonUtil;
+import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.easy.roa.entity.AreaEntity;
 import com.rongyi.easy.roa.entity.MallEntity;
 import com.rongyi.easy.roa.vo.*;
+import com.rongyi.easy.settle.entity.BussinessInfo;
 import com.rongyi.easy.settle.entity.ConfigShop;
+import com.rongyi.easy.settle.entity.StatementConfig;
 import com.rongyi.easy.settle.vo.ConfigShopVO;
+import com.rongyi.easy.settle.vo.StatementConfigVO;
 import com.rongyi.easy.shop.entity.ShopEntity;
+import com.rongyi.rss.malllife.roa.ROARedisService;
 import com.rongyi.rss.roa.*;
 import com.rongyi.rss.shop.IShopService;
+import com.rongyi.settle.constants.CodeEnum;
+import com.rongyi.settle.constants.ConstantEnum;
+import com.rongyi.settle.constants.ResponseData;
+import com.rongyi.settle.service.AccessService;
+import com.rongyi.settle.service.StatementConfigService;
+import com.rongyi.settle.util.MapUtils;
 import com.rongyi.settle.web.controller.params.FindAccountParam;
 import com.rongyi.settle.web.controller.params.RelevanceParam;
+import com.rongyi.settle.web.controller.vo.RelevanceVO;
 import com.rongyi.settle.web.controller.vo.UserInfoVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -35,19 +43,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.rongyi.core.common.PagingVO;
-import com.rongyi.core.common.util.DateUtil;
-import com.rongyi.easy.settle.entity.BussinessInfo;
-import com.rongyi.easy.settle.entity.StatementConfig;
-import com.rongyi.easy.settle.vo.StatementConfigVO;
-import com.rongyi.rss.malllife.roa.ROARedisService;
-import com.rongyi.settle.constants.CodeEnum;
-import com.rongyi.settle.constants.ConstantEnum;
-import com.rongyi.settle.constants.ResponseData;
-import com.rongyi.settle.service.AccessService;
-import com.rongyi.settle.service.StatementConfigService;
-import com.rongyi.settle.util.MapUtils;
-import com.rongyi.settle.web.controller.vo.RelevanceVO;
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: 柯军
@@ -274,6 +274,8 @@ public class StatementConfigController extends BaseController {
             statementConfigVO.setRuleCode(null);
             statementConfigVO.setCycleStartTime(null);
             statementConfigVO.setCycleEndTime(null);
+            statementConfigVO.setCycleDay(null);
+            statementConfigVO.setCycleRegularDay(null);
             statementConfigVO.setEffectStartTime(null);
             statementConfigVO.setEffectEndTime(null);
             responseData = ResponseData.success(statementConfigVO);
