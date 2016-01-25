@@ -37,7 +37,7 @@
 	<rabbit:direct-exchange name="${mq.exchange}"
 		durable="true" auto-delete="false" id="${mq.exchange}">
 		<rabbit:bindings>
-			<rabbit:binding queue="${mq.queuename}" key="${mq.queuename}" />
+			<rabbit:binding queue="${mq.queuename}" key="${mq.queuename}"/>
 		</rabbit:bindings>
 	</rabbit:direct-exchange>
 

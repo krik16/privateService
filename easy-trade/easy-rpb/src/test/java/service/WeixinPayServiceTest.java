@@ -218,12 +218,12 @@ public class WeixinPayServiceTest extends BaseTest {
 		paySignData.setTotalFee(15000);
 		paySignData.setBody("容易网商品");
 //		paySignData.setMallId("10");
-//		paySignData.setOpenId("o0BDmjojF2JiWrcfhX6YLxP-w5kk");
+		paySignData.setOpenId("ofnj5s65nQk275rH2kQR4-CKHb1M");
 		paySignData.setOrderType(1);
 		paySignData.setPayNo("0011552743936151554");
 		paySignData.setTimeStart(timeStart);
 		paySignData.setTimeExpire(timeExpire);
-//		paySignData.setAppId("wxb0af59268c136d7d");
+		paySignData.setAppId("wxb0af59268c136d7d");
 		Map map = weixinPayUnit.getWeXinPaySign(paySignData);
 		System.err.println("map="+map.toString());
 	}
@@ -231,7 +231,7 @@ public class WeixinPayServiceTest extends BaseTest {
 	@Test
 	public void testgetWeXinPaySign(){
 //		payNo=0011957252096104310,total_fee=0.01，timeStart=2016-01-19 10:43:05,timeExpire=2016-01-19 11:00:05,orderType=0
-		weixinPayService.getAppWeXinSign("0011957252096104310",0.01,"2016-01-19 10:43:05","2016-01-19 11:00:05",0);
+//		weixinPayService.getAppWeXinSign("0011957252096104310",0.01,"2016-01-19 10:43:05","2016-01-19 11:00:05",0);
 	}
 
 
