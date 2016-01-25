@@ -1,5 +1,8 @@
 package com.rongyi.rss.coupon;
 
+import java.util.List;
+import java.util.Map;
+
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.framework.mybatis.pojo.Page;
@@ -13,9 +16,6 @@ import com.rongyi.easy.coupon.vo.RedenvelopeCodeUseDetailVO;
 import com.rongyi.easy.coupon.vo.UserCouponVO;
 import com.rongyi.easy.coupon.vo.UserRedPacketForOrderVO;
 import com.rongyi.easy.coupon.vo.UserRedPacketVO;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * 用户红包业务接口
@@ -218,6 +218,20 @@ public interface RoaUserRedenvelopeService {
      * @author lqy
      */
     void pushWillExpireTimerTask();
+
+    /**
+     * 检查红包是否使用(status未使用[0],已使用[1])
+     * @param couponOrderParam
+     * @return
+     * @author wzw
+     */
     boolean checkEnvelopeIsUse(CouponOrderParam couponOrderParam);
-    boolean sendEnvelope(CouponOrderParam couponOrderParam);   
+
+    /**
+     * 砍价发送红包
+     * @param couponOrderParam
+     * @return
+     * @author wzw
+     */
+    boolean sendEnvelope(CouponOrderParam couponOrderParam);
 }

@@ -37,7 +37,7 @@ public class ForumContentParam implements Serializable{
 	private Integer offset;
 	
 	/**排序的字段*/
-	private String orderByString;
+	private String orderByString=ORDER_BY_CLAUSE;
 	
 	/**0 为升序  1为降序  */
 	private Integer orderByDesc;
