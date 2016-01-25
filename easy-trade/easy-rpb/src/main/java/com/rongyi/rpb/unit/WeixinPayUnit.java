@@ -53,7 +53,7 @@ public class WeixinPayUnit {
             LOGGER.info("result={}",result);
             String timestamp = WXUtil.getTimeStamp();
             Map<String, Object> resultMap = XMLParser.getMapFromXML(result);
-            if (resultMap != null) {
+            if ("SUCCESS".equals(resultMap.get("return_code"))) {
                 if (ConstantEnum.WEIXIN_PAY_TRADE_TYPE_APP.getValueStr().equals(configure.getTradeType())) {//APP支付签名
                     map.put("timestamp", timestamp);
                     map.put("appid", configure.getAppID());
@@ -63,7 +63,7 @@ public class WeixinPayUnit {
                         throw new WeixinException(ConstantEnum.EXCEPTION_WEIXIN_SIGN_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_SIGN_FAIL.getValueStr());
                     map.put("prepayid", resultMap.get("prepay_id"));
                     map.put("noncestr", resultMap.get("nonce_str"));
-                } else {//微信公众号支付签名timeStamp 生成签名时首字母需大写
+                } else {//微信公众号支付签名
                     map.put("timeStamp", timestamp);
                     map.put("appId", configure.getAppID());
                     map.put("signType", "MD5");
@@ -72,6 +72,14 @@ public class WeixinPayUnit {
                 }
                 String sign = Signature.getSign(map,configure.getKey());
                 map.put("app_signature", sign);
+            }else{
+                if("appid and openid not match".equals(resultMap.get("return_msg"))){
+                    map.put("code",ConstantEnum.EXCEPTION_WEIXIN_SIGN_OPEN_ID_FAIL.getCodeStr());
+                    map.put("message", ConstantEnum.EXCEPTION_WEIXIN_SIGN_OPEN_ID_FAIL.getValueStr());
+                }else{
+                    map.put("code", ConstantEnum.EXCEPTION_WEIXIN_SIGN_FAIL.getCodeStr());
+                    map.put("message", ConstantEnum.EXCEPTION_WEIXIN_SIGN_FAIL.getValueStr());
+                }
             }
         } catch (WeixinException e) {
             throw e;
