@@ -93,7 +93,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="getOpByMap" parameterType="map" resultMap="BASERESULTMAP">
+  <select id="getOpByMap" parameterType="map" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from op_log
