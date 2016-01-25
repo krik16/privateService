@@ -49,7 +49,17 @@ public class ActivitySearchInfo implements Serializable {
 	private Integer apply_shops_count; // 卡券支持的店铺数量
 	
 	private int activityStatus = 0; 	//活动状态[0其他(不参与逻辑) 未开始1 正常2 结束3]
+	private String workTime = "9:30~18:30（周一至周五）\n法定假日除外";
+
 	
+
+	public String getWorkTime() {
+		return workTime;
+	}
+
+	public void setWorkTime(String workTime) {
+		this.workTime = workTime;
+	}
 
 	/**
 	 * 使用限制
