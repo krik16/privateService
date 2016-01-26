@@ -26,6 +26,7 @@ public class ActivitySearchParam implements Serializable{
 	private String zone_id;   //区域id
 	private String shop_id;   //店铺id
 	private String holder_id;       //优惠券持有者id
+	private boolean couponRequired; //是否只看优惠券
 	private List<String> shopList;    //终端机参数 店铺id List
  	
 	private String mallId; // mall Id for 终端屏
@@ -117,6 +118,12 @@ public class ActivitySearchParam implements Serializable{
 	public void setHolder_id(String holder_id) {
 		this.holder_id = holder_id;
 	}
+	public boolean isCouponRequired() {
+		return couponRequired;
+	}
+	public void setCouponRequired(boolean couponRequired) {
+		this.couponRequired = couponRequired;
+	}
 	public List<String> getShopList() {
 		return shopList;
 	}
@@ -167,8 +174,8 @@ public class ActivitySearchParam implements Serializable{
 				+ ", coord_y=" + coord_y + ", cat_id=" + cat_id + ", custom_cat_id=" + custom_cat_id + ", city_name="
 				+ city_name + ", sort=" + sort + ", requiredCoupon=" + requiredCoupon + ", from=" + from + ", size="
 				+ size + ", brand_id=" + brand_id + ", zone_id=" + zone_id + ", shop_id=" + shop_id + ", holder_id="
-				+ holder_id + ", shopList=" + shopList + ", mallId=" + mallId + ", startLetter=" + startLetter
-				+ ", showChannel=" + showChannel + "]";
+				+ holder_id + ", couponRequired=" + couponRequired + ", shopList=" + shopList + ", mallId=" + mallId
+				+ ", startLetter=" + startLetter + ", showChannel=" + showChannel + "]";
 	}
 	
 }
