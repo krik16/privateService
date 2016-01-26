@@ -383,7 +383,7 @@ public class RpbServiceImpl implements IRpbService {
 		LOGGER.info("第三方系统记录微信商户相关信息 weixinMch={}",weixinMch.toString());
 		ResponseData responseData;
 		try{
-			WeixinMch oldWeixinMch = weixinMchService.selectByMchIdAndUserIdAndTradeType(weixinMch.getMchId(),weixinMch.getUserId(),weixinMch.getTradeType());
+			WeixinMch oldWeixinMch = weixinMchService.selectByMchIdAndUserId(weixinMch.getMchId(),weixinMch.getUserId());
 			if(oldWeixinMch == null) {
 				weixinMchService.insert(weixinMch);
 			}else{

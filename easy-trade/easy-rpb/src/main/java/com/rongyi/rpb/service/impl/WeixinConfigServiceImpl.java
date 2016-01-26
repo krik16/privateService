@@ -24,6 +24,7 @@ public class WeixinConfigServiceImpl extends BaseServiceImpl implements WeixinCo
         Configure configure = new Configure();
         if (StringUtils.isNotBlank(appId)) {
             WeixinMch weixinMch = weixinMchService.selectByAppIdAndTradeType(appId, weixinPayType);
+            weixinMch.setTradeType(String.valueOf(weixinPayType));
             configure.init(weixinMch);
         }
         return configure;
