@@ -43,7 +43,8 @@ public class SearchActivityParam extends PagingParam {
 
     /**当前页码*/
     private Integer offset;
-
+    /**0代表第一个标签所有活动，1代表近期活动  （是当前月的 1号到月底）*/
+    private Integer label;
     /**
      * 排序字段
      */
@@ -130,6 +131,14 @@ public class SearchActivityParam extends PagingParam {
         this.orderByClause = orderByClause;
     }
 
+    public Integer getLabel() {
+        return label;
+    }
+
+    public void setLabel(Integer label) {
+        this.label = label;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -142,7 +151,10 @@ public class SearchActivityParam extends PagingParam {
                 .append("name", name)
                 .append("publishChannel", publishChannel)
                 .append("offset", offset)
+                .append("label", label)
                 .append("orderByClause", orderByClause)
+                .append("currentPage",super.getCurrentPage())
+                .append("pageSize",super.getPageSize())
                 .toString();
     }
 }

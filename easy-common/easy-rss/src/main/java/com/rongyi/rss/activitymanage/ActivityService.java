@@ -38,7 +38,7 @@ public interface ActivityService {
 	 * @return 
 	 * @author wangzhiwen
 	 */
-     public ActivityGoods countActivityGoods(QueryActivityGoods queryActivityGoods);
+     public int countActivityGoods(QueryActivityGoods queryActivityGoods);
      /**
  	 * 根据goodid，joinStartAt，joinEndAt查询商品卡券在同一时间是否参加其他活动
  	 * @param queryActivityGoods
