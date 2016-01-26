@@ -42,4 +42,9 @@ public class SaleParamSolr implements Serializable{
     public void setEndTime(long endTime) {
         this.endTime = endTime;
     }
+
+	@Override
+	public String toString() {
+		return "SaleParamSolr [id=" + id + ", startTime=" + startTime + ", endTime=" + endTime + ", type=" + type + "]";
+	}
 }
