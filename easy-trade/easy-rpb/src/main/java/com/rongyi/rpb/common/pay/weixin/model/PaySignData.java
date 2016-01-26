@@ -23,7 +23,7 @@ public class PaySignData {
 
     private String openId;
 
-    private String weixinPayType;
+    private Integer weixinPayType;
 
 
     public String getPayNo() {
@@ -90,11 +90,11 @@ public class PaySignData {
         this.orderType = orderType;
     }
 
-    public String getWeixinPayType() {
+    public Integer getWeixinPayType() {
         return weixinPayType;
     }
 
-    public void setWeixinPayType(String weixinPayType) {
+    public void setWeixinPayType(Integer weixinPayType) {
         this.weixinPayType = weixinPayType;
     }
 
