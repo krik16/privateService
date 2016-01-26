@@ -30,9 +30,29 @@ public class OldUserCode implements Serializable {
     private String refundId;//退款id
     
     private Integer couponChannel;//券码类型 5哈根达斯 6中影 7纵漫线美漫大趴 8星巴克
+    
+    private Integer couponShowType;//券码展示类型 0默认 1url 2二维码
+    
+    private String codeRule;//二维码显示规则
 
 
-    public Integer getCouponChannel() {
+    public Integer getCouponShowType() {
+		return couponShowType;
+	}
+
+	public void setCouponShowType(Integer couponShowType) {
+		this.couponShowType = couponShowType;
+	}
+
+	public String getCodeRule() {
+		return codeRule;
+	}
+
+	public void setCodeRule(String codeRule) {
+		this.codeRule = codeRule;
+	}
+
+	public Integer getCouponChannel() {
 		return couponChannel;
 	}
 
