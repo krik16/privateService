@@ -494,7 +494,9 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
         map.put("shopMysqlId", shopId);
         map.put("status", ConstantEnum.CONFIG_STATUS_1.getCodeInt());
         map.put("nowTime", new Date());
-//        map.put("userId", userId);
+        if (StringUtils.isNotBlank(userId)) {
+            map.put("userId", userId);
+        }
         map.put("linkRole", guideType);//
         return !checkConfigExist(map, null);
     }
