@@ -73,6 +73,8 @@ public class TradeUserCode implements Serializable {
 
     private Integer couponChannel;
 
+    private Byte couponShowType;
+
 
     public Double getOrigPrice_Y() {
         return new BigDecimal(this.origPrice).divide(rate, 2, BigDecimal.ROUND_HALF_UP).doubleValue();
@@ -350,5 +352,15 @@ public class TradeUserCode implements Serializable {
     public void setCouponChannel(Integer couponChannel)
     {
         this.couponChannel = couponChannel;
+    }
+
+    public Byte getCouponShowType()
+    {
+        return couponShowType;
+    }
+
+    public void setCouponShowType(Byte couponShowType)
+    {
+        this.couponShowType = couponShowType;
     }
 }
