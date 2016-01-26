@@ -17,6 +17,13 @@ public interface MallService {
      */
 
     ResponseVO getMall(String mallId);
+    
+    /**
+	 * 通过商场ID列表获取商场详情
+	 * @param ids 商场id列表
+	 * @return 带List&lt;MallVO&gt;的ResponseVO
+	 */
+	ResponseVO getMallsByIds(String ids);
 
     /**
      * 获取商场楼层
