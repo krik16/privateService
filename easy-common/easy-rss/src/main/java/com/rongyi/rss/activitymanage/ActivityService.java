@@ -2,11 +2,14 @@ package com.rongyi.rss.activitymanage;
 
 import java.util.List;
 
+import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.activity.entity.QueryActivityGoods;
 import com.rongyi.easy.activitymanage.entity.ActivityCheckRecord;
 import com.rongyi.easy.activitymanage.entity.ActivityGoods;
 import com.rongyi.easy.activitymanage.entity.ActivityGoodsSpec;
 import com.rongyi.easy.activitymanage.entity.ActivityInfo;
+import com.rongyi.easy.activitymanage.param.SearchActivityParam;
+import com.rongyi.easy.activitymanage.vo.ActivityInfoListVO;
 
 /**
  * 活动后台管理接口
@@ -72,4 +75,12 @@ public interface ActivityService {
 	  * @author wangzhiwen
       */
      public int insertActivityGoodsSpec(ActivityGoodsSpec activityGoodsSpec);
+
+    /**
+     * 查询活动列表
+     * @param searchActivityParam
+     * @return
+     */
+    public PagingVO<ActivityInfoListVO> getActivityList(SearchActivityParam searchActivityParam);
+
 }

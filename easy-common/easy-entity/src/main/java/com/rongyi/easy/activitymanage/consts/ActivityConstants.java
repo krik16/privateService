@@ -28,4 +28,23 @@ public interface ActivityConstants {
         Integer OPERATION = 0;
         Integer MERCHANT = 1;
     }
+
+    /**
+     * 推广渠道
+     */
+    interface  SynTarget {
+        int RONGYIGUANG = 0;
+        int TERMINAL = 1;
+        int WEIXIN = 2;
+        int WEISALE = 3;
+    }
+
+    /**
+     * 分页
+     */
+    interface Paging{
+        Integer CURRENTPAGE =1 ;
+        Integer PAGESIZE = 10;
+    }
+
 }

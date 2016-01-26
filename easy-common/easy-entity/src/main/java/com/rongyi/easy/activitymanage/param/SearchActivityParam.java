@@ -13,6 +13,7 @@ import java.util.Date;
  * easy-api.
  */
 public class SearchActivityParam extends PagingParam {
+    private static final String ORDER_BY_CLAUSE = "start_at DESC,create_at DESC";
     /**描述:
      * 0.待审核
      * 1.不通过
@@ -37,6 +38,25 @@ public class SearchActivityParam extends PagingParam {
     private Date endAt;
     /**活动名称*/
     private String name;
+    /**发布渠道: 大运营[0] 商家[1]'*/
+    private Integer publishChannel;
+
+    /**当前页码*/
+    private Integer offset;
+
+    /**
+     * 排序字段
+     */
+    private String orderByClause = ORDER_BY_CLAUSE;
+
+    public Integer getOffset() {
+        offset = (super.getCurrentPage() -1) * super.getPageSize();
+        return offset;
+    }
+
+    public void setOffset(Integer offset) {
+        this.offset = offset;
+    }
 
     public Integer getStatus() {
         return status;
@@ -94,6 +114,22 @@ public class SearchActivityParam extends PagingParam {
         this.name = name;
     }
 
+    public Integer getPublishChannel() {
+        return publishChannel;
+    }
+
+    public void setPublishChannel(Integer publishChannel) {
+        this.publishChannel = publishChannel;
+    }
+
+    public String getOrderByClause() {
+        return orderByClause;
+    }
+
+    public void setOrderByClause(String orderByClause) {
+        this.orderByClause = orderByClause;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -104,6 +140,9 @@ public class SearchActivityParam extends PagingParam {
                 .append("startAt", startAt)
                 .append("endAt", endAt)
                 .append("name", name)
+                .append("publishChannel", publishChannel)
+                .append("offset", offset)
+                .append("orderByClause", orderByClause)
                 .toString();
     }
 }
