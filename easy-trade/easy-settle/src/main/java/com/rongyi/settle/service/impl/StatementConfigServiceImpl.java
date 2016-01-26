@@ -82,7 +82,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
         if (CollectionUtils.isNotEmpty(list))
         {
             for (StatementConfigVO vo : list){
-                if (vo.getStatus()!=null && vo.getStatus()==ConstantEnum.STATUS_2.getCodeByte()){
+                if (vo.getStatus()!=null && vo.getStatus().byteValue()==ConstantEnum.STATUS_2.getCodeByte()){
                     Map<String, Object> paramsMap = new HashMap<>();
                     paramsMap.put("opId", vo.getId());
                     paramsMap.put("opType", ConstantEnum.STATUS_2.getCodeInt());
