@@ -23,6 +23,10 @@ public class WechatPaySignParam implements Serializable{
 	 *  微信公众号支付需要获取支付用户的openId
 	 */
 	private String openId;
+	/**
+	 * 0:APP(app支付),1:JSAPI(公众号支付),2:NATIVE(原生扫码支付)
+	 */
+	private String weixinPayType;
 	public String getOrderNo() {
 		return orderNo;
 	}
@@ -47,10 +51,17 @@ public class WechatPaySignParam implements Serializable{
 	public void setOpenId(String openId) {
 		this.openId = openId;
 	}
+	public String getWeixinPayType() {
+		return weixinPayType;
+	}
+	public void setWeixinPayType(String weixinPayType) {
+		this.weixinPayType = weixinPayType;
+	}
 	@Override
 	public String toString() {
 		return "WechatPaySignParam [orderNo=" + orderNo + ", payType="
-				+ payType + ", appId=" + appId + ", openId=" + openId + "]";
+				+ payType + ", appId=" + appId + ", openId=" + openId
+				+ ", weixinPayType=" + weixinPayType + "]";
 	}
 	
 }
