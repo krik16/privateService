@@ -7,21 +7,23 @@ import java.io.Serializable;
  */
 public class PaySignData {
 
-    public String payNo;
+    private String payNo;
 
-    public Integer totalFee;
+    private Integer totalFee;
 
-    public String body;
+    private String body;
 
-    public Integer orderType;
+    private Integer orderType;
 
-    public String timeStart;
+    private String timeStart;
 
-    public String timeExpire;
+    private String timeExpire;
 
-    public String appId;
+    private String appId;
 
-    public String openId;
+    private String openId;
+
+    private String weixinPayType;
 
 
     public String getPayNo() {
@@ -88,6 +90,14 @@ public class PaySignData {
         this.orderType = orderType;
     }
 
+    public String getWeixinPayType() {
+        return weixinPayType;
+    }
+
+    public void setWeixinPayType(String weixinPayType) {
+        this.weixinPayType = weixinPayType;
+    }
+
     @Override
     public String toString() {
         return "PaySignData{" +
@@ -99,6 +109,7 @@ public class PaySignData {
                 ", timeExpire='" + timeExpire + '\'' +
                 ", appId='" + appId + '\'' +
                 ", openId='" + openId + '\'' +
+                ", weixinPayType='" + weixinPayType + '\'' +
                 '}';
     }
 }

@@ -69,7 +69,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 
     @Override
     public Map<String, Object> getAppWeXinSign(PaySignData paySignData) {
-        LOGGER.info("获取微信支付签名 getAppWeXinSign,paySignData={}",paySignData.toString());
+        LOGGER.info("获取微信支付签名 getAppWeXinSign,paySignData={}",paySignData);
         Map<String, Object> map = new HashMap<>();
         try {
 //            BigDecimal totalFee = new BigDecimal(total_fee + "").multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);

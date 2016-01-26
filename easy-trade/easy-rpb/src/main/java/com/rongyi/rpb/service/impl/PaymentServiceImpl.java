@@ -152,11 +152,14 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         }
         if (bodyMap.get("appId") != null) {
             paymentEntityVO.setAppId(bodyMap.get("appId").toString());
-        }else{
+        } else {
             paymentEntityVO.setAppId("");
         }
         if (bodyMap.get("openId") != null) {
             paymentEntityVO.setOpenId(bodyMap.get("openId").toString());
+        }
+        if (bodyMap.get("weixinPayType") != null) {
+            paymentEntityVO.setWeixinPayType(Integer.valueOf(bodyMap.get("weixinPayType").toString()));
         }
 
         return paymentEntityVO;
@@ -165,12 +168,12 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     @Override
     public List<PaymentEntity> getPaymemtsByMoreOrderNum(PaymentEntityVO paymentEntityVO) {
         List<PaymentEntity> paymentEntityList = new ArrayList<>();
-        String[] orderNumArray = paymentEntityVO.getOrderNum().split("\\,");
+        String[] orderNumArray = paymentEntityVO.getOrderNum().split(",");
         PaymentEntity paymentEntity;
         String payNo = getPayNo();// 生成付款单号,多个订单号付款单号一样
         LOGGER.info("生成付款单号：" + payNo);
         if (orderNumArray.length > 0) {
-            for(String orderNum : orderNumArray){
+            for (String orderNum : orderNumArray) {
                 paymentEntity = new PaymentEntity();
                 BeanUtils.copyProperties(paymentEntityVO, paymentEntity);
                 paymentEntity.setOrderNum(orderNum);
@@ -240,10 +243,10 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 
     /**
      * Description: 生成消息主体
+     *
      * @param paymentEntityVO PaymentEntityVO
-     * @param event
-     * Author: 柯军
-     * datetime:2015年4月24日上午11:37:09
+     * @param event           Author: 柯军
+     *                        datetime:2015年4月24日上午11:37:09
      **/
     @SuppressWarnings("unchecked")
     private Map<String, Object> getBodyMap(PaymentEntityVO paymentEntityVO, MessageEvent event) {
@@ -268,7 +271,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                 LOGGER.info("申请退款或打款给卖家");
                 bodyMap.put("paymentId", paymentEntityVO.getPayNo());
             }
-            bodyMap.put("totalPrice",bodyMap.get("totlePrice"));
+            bodyMap.put("totalPrice", bodyMap.get("totlePrice"));
             bodyMap.put("orderNum", paymentEntityVO.getOrderNum());
             bodyMap.put("orderDetailNum", paymentEntityVO.getOrderDetailNumArray());
         } catch (Exception e) {
@@ -284,7 +287,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     private PaySignData getPaySignData(PaymentEntityVO paymentEntityVO) {
         PaySignData paySignData = new PaySignData();
         BeanUtils.copyProperties(paymentEntityVO, paySignData);
-        BigDecimal totalFee = new BigDecimal( Double.valueOf(paymentEntityVO.getAmountMoney().toString())).multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
+        BigDecimal totalFee = new BigDecimal(Double.valueOf(paymentEntityVO.getAmountMoney().toString())).multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
         paySignData.setTotalFee(totalFee.intValue());
         paySignData.setBody("容易网商品");
         return paySignData;
@@ -308,7 +311,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                     return paymentEntityVO;
                 } else if (paymentLogInfoService.selectByOutTradeNo(payNo, null) == null) {
                     LOGGER.info("微信支付修改价格，重新生成支付单号-->");
-                    weixinPayService.closeOrder(payNo,paymentEntity.getWeixinMchId());
+                    weixinPayService.closeOrder(payNo, paymentEntity.getWeixinMchId());
                 }
             }
 
@@ -328,17 +331,12 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
     /**
      * 验证是否是微信修改价格支付
      *
-     * @param type String
+     * @param type            String
      * @param paymentEntityVO PaymentEntityVO
-     * @param paymentEntity PaymentEntity
-     * Author kejun
+     * @param paymentEntity   PaymentEntity
+     *                        Author kejun
      */
     private boolean validateWeixinModifyPrice(String type, PaymentEntityVO paymentEntityVO, PaymentEntity paymentEntity) {
-//        if (paymentEntity != null && PaymentEventType.WEIXIN_PAY.equals(type) && paymentEntity.getAmountMoney().doubleValue() != paymentEntityVO.getAmountMoney().doubleValue()) {
-//            return true;
-//        }
-//        return false;
-//
         return (paymentEntity != null && PaymentEventType.WEIXIN_PAY.equals(type) && paymentEntity.getAmountMoney().doubleValue() != paymentEntityVO.getAmountMoney().doubleValue());
     }
 
@@ -364,9 +362,9 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
             }
             if (paymentEntityVO.getAmountMoney().doubleValue() == 0)
                 paymentEntity.setPayChannel(null);
-            if(StringUtils.isNotBlank(paymentEntityVO.getAppId())) {
-                WeixinMch weixinMch = weixinMchService.selectByAppId(paymentEntityVO.getAppId());
-                if(weixinMch != null){
+            if (StringUtils.isNotBlank(paymentEntityVO.getAppId())) {
+                WeixinMch weixinMch = weixinMchService.selectByAppIdAndTradeType(paymentEntityVO.getAppId(), paymentEntityVO.getWeixinPayType());
+                if (weixinMch != null) {
                     paymentEntity.setWeixinMchId(weixinMch.getId());
                 }
             }
@@ -381,7 +379,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
             return null;
         String[] orderNumArray = orderNum.split(",");
         //验证请求付款记录是否已存在，如果存在，若有同一类型支付方式则返回原有数据，如果没有同一类型则创建一个订单号和付款单号同一个的付款记录，如果不存在则新建
-        for(String orderNo : orderNumArray){
+        for (String orderNo : orderNumArray) {
             LOGGER.info("orderNum={},tradeType={},payChannel={}", orderNo, tradeType, payChannel);
             List<PaymentEntity> list = selectByOrderNum(orderNo, tradeType, null);
             if (list != null && !list.isEmpty()) {
@@ -394,7 +392,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                     newPaymentEntity.setId(null);
                     newPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
                     if (paymentEntity.getPayChannel() != null && payChannel.equals(paymentEntity.getPayChannel())) {
-                        LOGGER.info("此订单payChannel={}支付方式未支付单已存在，直接返回此笔付款单记录,orderNum={}", paymentEntity.getPayChannel(),orderNo);
+                        LOGGER.info("此订单payChannel={}支付方式未支付单已存在，直接返回此笔付款单记录,orderNum={}", paymentEntity.getPayChannel(), orderNo);
                         break;
                     } else {
                         PaymentEntity oldPaymentEntity = selectByPayNoAndPayChannelAndTradeType(paymentEntity.getPayNo(), payChannel, tradeType, Constants.PAYMENT_STATUS.STAUS0);
@@ -421,11 +419,10 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
 //    }
 
     /**
-     * @param event MessageEvent
-     * @param messageMap  Map<String, Object>
+     * @param event           MessageEvent
+     * @param messageMap      Map<String, Object>
      * @param paymentEntityVO PaymentEntityVO
-     * @return
-     * Description: 0元支付或退款默认成功，消息立马返回
+     * @return Description: 0元支付或退款默认成功，消息立马返回
      * Author: 柯军
      * datetime:2015年7月12日下午2:29:33
      **/
@@ -439,7 +436,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         paymentLogInfo.setTimeEnd(DateUtil.getCurrDateTime());
         paymentLogInfo.setTotal_fee(0.00);
         paymentLogInfo.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
-        if (PaymentEventType.REFUND.equals(event.getType())){
+        if (PaymentEventType.REFUND.equals(event.getType())) {
             paymentLogInfo.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
         }
         paymentLogInfoService.insertGetId(paymentLogInfo);
@@ -644,7 +641,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                 LOGGER.info(Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0 == paymentEntity.getPayChannel() ? "支付宝" : "微信" + "重复支付直接退款-->退款单号" + payNo);
                 if (Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1 == paymentEntity.getPayChannel()) {// 微信自动退款
                     Map<String, Object> resultMap = weixinPayService.weixinRefund(paymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), paymentEntity.getAmountMoney().doubleValue(),
-                            payNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE6,paymentEntity.getWeixinMchId());
+                            payNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE6, paymentEntity.getWeixinMchId());
                     if (Constants.RESULT.SUCCESS.equals(resultMap.get("result")) || ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr().equals(resultMap.get("result")))
                         refundPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
                     refundPaymentEntity.setFinishTime(DateUtil.getCurrDateTime());

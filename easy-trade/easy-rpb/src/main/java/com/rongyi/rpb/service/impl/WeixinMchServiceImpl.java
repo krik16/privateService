@@ -44,10 +44,11 @@ public class WeixinMchServiceImpl extends BaseServiceImpl implements WeixinMchSe
     }
 
     @Override
-    public WeixinMch selectByAppId(String appId) {
+    public WeixinMch selectByAppIdAndTradeType(String appId,Integer tradeType) {
         Map<String, Object> map = new HashMap<>();
         map.put("appId", appId);
-        return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectByAppId", map);
+        map.put("tradeType", tradeType);
+        return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectByAppIdAndTradeType", map);
     }
 
     @Override
