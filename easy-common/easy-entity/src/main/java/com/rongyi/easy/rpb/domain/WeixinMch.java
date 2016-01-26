@@ -125,4 +125,19 @@ public class WeixinMch implements Serializable {
     public void setIsRongyiPay(Byte isRongyiPay) {
         this.isRongyiPay = isRongyiPay;
     }
+
+    @Override
+    public String toString() {
+        return "WeixinMch{" +
+                "id=" + id +
+                ", appId='" + appId + '\'' +
+                ", key='" + key + '\'' +
+                ", mchId='" + mchId + '\'' +
+                ", cretPath='" + cretPath + '\'' +
+                ", publicCode='" + publicCode + '\'' +
+                ", userId='" + userId + '\'' +
+                ", tradeType=" + tradeType +
+                ", isRongyiPay=" + isRongyiPay +
+                '}';
+    }
 }
