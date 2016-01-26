@@ -25,7 +25,9 @@ import com.rongyi.rpb.nsynchronous.OrderFormNsyn;
 import com.rongyi.rpb.service.*;
 import com.rongyi.rss.rpb.IRpbService;
 import net.sf.json.JSONObject;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
@@ -41,7 +43,7 @@ import java.util.Map;
  **/
 public class RpbServiceImpl implements IRpbService {
 
-	private static final Logger LOGGER = Logger.getLogger(RpbServiceImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(RpbServiceImpl.class);
 
 	@Autowired
 	OrderFormNsyn orderFormNsyn;
@@ -378,10 +380,17 @@ public class RpbServiceImpl implements IRpbService {
 	}
 
 	@Override
-	public ResponseData insertWeiXinMch(WeixinMch weixinMch) {
+	public ResponseData addWeixinMch(WeixinMch weixinMch) {
+		LOGGER.info("第三方系统记录微信商户相关信息 weixinMch={}",weixinMch.toString());
 		ResponseData responseData;
 		try{
-			weixinMchService.insert(weixinMch);
+			WeixinMch oldWeixinMch = weixinMchService.selectByMchIdAndUserIdAndTradeType(weixinMch.getMchId(),weixinMch.getUserId(),weixinMch.getTradeType());
+			if(oldWeixinMch == null) {
+				weixinMchService.insert(weixinMch);
+			}else{
+				weixinMch.setId(oldWeixinMch.getId());
+				weixinMchService.update(weixinMch);
+			}
 			responseData = ResponseData.success();
 		}catch (Exception e){
 			e.printStackTrace();
@@ -389,20 +398,5 @@ public class RpbServiceImpl implements IRpbService {
 		}
 		return responseData;
 	}
-
-	@Override
-	public ResponseData updateWeixinMch(WeixinMch weixinMch) {
-		ResponseData responseData;
-		try{
-			weixinMchService.update(weixinMch);
-			responseData = ResponseData.success();
-		}catch (Exception e){
-			e.printStackTrace();
-			responseData = ResponseData.failure();
-		}
-		return responseData;
-	}
-
-
 }
 

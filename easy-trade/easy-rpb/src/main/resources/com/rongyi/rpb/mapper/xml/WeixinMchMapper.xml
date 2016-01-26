@@ -115,4 +115,12 @@
     from weixin_mch
     where app_id = #{appId,jdbcType=VARCHAR}
   </select>
+  <select id="selectByMchIdAndUserIdAndTradeType" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from weixin_mch
+    where mch_id = #{mchId,jdbcType=VARCHAR}
+    and user_id = #{userId,jdbcType=VARCHAR}
+    and trade_type = #{tradeType,jdbcType=TINYINT}
+  </select>
 </mapper>
