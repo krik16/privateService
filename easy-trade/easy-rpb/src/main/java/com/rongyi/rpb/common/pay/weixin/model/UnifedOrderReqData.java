@@ -85,7 +85,7 @@ public class UnifedOrderReqData {
 			setTime_expire(timeExpire);
 		}
 
-		if(openid != null) {
+		if(ConstantEnum.WEIXIN_PAY_TRADE_TYPE_JSAPI.getCodeByte().equals(configure.getTradeType())) {
 			setOpenid(openid);
 		}
 

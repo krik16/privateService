@@ -48,6 +48,7 @@ public class WeixinPayUnit {
             Configure configure = weixinConfigService.initConfigure(paySignData.getAppId(),paySignData.getWeixinPayType());
             UnifedOrderReqData unifedOrderReqData = new UnifedOrderReqData(paySignData.getBody(), paySignData.getPayNo(), paySignData.getTotalFee().intValue(), ConstantUtil.PayWeiXin_V3.WEIXIN_NOTIFY_URL,
                     paySignData.getTimeStart(), paySignData.getTimeExpire(), paySignData.getOpenId(),configure);
+            LOGGER.info("unifedOrderReqData={}",unifedOrderReqData);
             UnifiedorderService unifiedorderService = new UnifiedorderService();
             String result = unifiedorderService.request(unifedOrderReqData,configure);
             LOGGER.info("result={}",result);
