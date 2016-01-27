@@ -30,13 +30,19 @@ public interface RoaActivityTemplateService {
     ActivityTemplate getTemplateById(Integer id);
 
     /***
-     * 查询活动模版列表
+     * 查询活动模版列表  用于特卖 闪购
      * @param activityTemplateParam
      * @return  PagingVO<ActivityTemplateVO>
      */
     PagingVO<ActivityTemplateVO> selectTemplateListByParam(ActivityTemplateParam activityTemplateParam);
 
 
+    /**
+     * 查询活动模版的  用于整体的活动流程的模版列表查询
+     * @param activityTemplateParam
+     * @return
+     */
+    PagingVO<ActivityTemplateVO> selectActivityTemplateList(ActivityTemplateParam activityTemplateParam);
     /**
      * 通过Id得到活动模版详情
      * @param id
