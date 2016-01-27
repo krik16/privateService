@@ -158,7 +158,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         if (bodyMap.get("openId") != null) {
             paymentEntityVO.setOpenId(bodyMap.get("openId").toString());
         }
-        if (bodyMap.get("weixinPayType") != null) {
+        if (bodyMap.get("weixinPayType") != null && !"null".equals(bodyMap.get("weixinPayType").toString())) {
             paymentEntityVO.setWeixinPayType(Integer.valueOf(bodyMap.get("weixinPayType").toString()));
         }
 
