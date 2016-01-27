@@ -1,6 +1,6 @@
 /**
- * @Copyright (C),上海容易网电子商务有限公司	
- * @Author: 柯军 
+ * @Copyright (C),上海容易网电子商务有限公司
+ * @Author: 柯军
  * @datetime:2015年6月4日下午2:54:04
  * @Description: TODO
  *
@@ -25,9 +25,7 @@ import com.rongyi.rpb.nsynchronous.OrderFormNsyn;
 import com.rongyi.rpb.service.*;
 import com.rongyi.rss.rpb.IRpbService;
 import net.sf.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
@@ -39,11 +37,11 @@ import java.util.Map;
  * Author: 柯军
  * Description: rpb dubbo 接口实现
  * datetime:2015年6月4日下午2:54:04
- * 
+ *
  **/
 public class RpbServiceImpl implements IRpbService {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(RpbServiceImpl.class);
+	private static final Logger LOGGER = Logger.getLogger(RpbServiceImpl.class);
 
 	@Autowired
 	OrderFormNsyn orderFormNsyn;
@@ -346,7 +344,7 @@ public class RpbServiceImpl implements IRpbService {
 			map.put("message", "申请异常");
 			e.printStackTrace();
 		}
-	
+
 		return map;
 	}
 
@@ -380,17 +378,10 @@ public class RpbServiceImpl implements IRpbService {
 	}
 
 	@Override
-	public ResponseData addWeixinMch(WeixinMch weixinMch) {
-		LOGGER.info("第三方系统记录微信商户相关信息 weixinMch={}",weixinMch.toString());
+	public ResponseData insertWeiXinMch(WeixinMch weixinMch) {
 		ResponseData responseData;
 		try{
-			WeixinMch oldWeixinMch = weixinMchService.selectByMchIdAndUserIdAndTradeType(weixinMch.getMchId(),weixinMch.getUserId(),weixinMch.getTradeType());
-			if(oldWeixinMch == null) {
-				weixinMchService.insert(weixinMch);
-			}else{
-				weixinMch.setId(oldWeixinMch.getId());
-				weixinMchService.update(weixinMch);
-			}
+			weixinMchService.insert(weixinMch);
 			responseData = ResponseData.success();
 		}catch (Exception e){
 			e.printStackTrace();
@@ -398,5 +389,20 @@ public class RpbServiceImpl implements IRpbService {
 		}
 		return responseData;
 	}
+
+	@Override
+	public ResponseData updateWeixinMch(WeixinMch weixinMch) {
+		ResponseData responseData;
+		try{
+			weixinMchService.update(weixinMch);
+			responseData = ResponseData.success();
+		}catch (Exception e){
+			e.printStackTrace();
+			responseData = ResponseData.failure();
+		}
+		return responseData;
+	}
+
+
 }
 
