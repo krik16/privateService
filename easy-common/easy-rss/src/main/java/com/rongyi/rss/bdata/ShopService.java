@@ -13,6 +13,7 @@ import java.util.Map;
  */
 public interface ShopService {
 	
+	 
 	/**
 	 * 店铺搜索
 	 * @param mallId		商场ID
@@ -26,6 +27,10 @@ public interface ShopService {
 	 */
 	ResponseVO searchShops(String mallId, String keyword, String customCateId, String zoneId, int page, int pageSize) throws Exception;
 	
+
+	ResponseVO searchShops(String mallId, String keyword, String customCateId, int page, int pageSize) throws Exception;
+
+
 	/**
 	 * 获取单个店铺详情
 	 * @param id 店铺id
