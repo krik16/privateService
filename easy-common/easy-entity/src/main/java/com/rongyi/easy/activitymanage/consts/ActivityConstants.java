@@ -47,4 +47,9 @@ public interface ActivityConstants {
         Integer PAGESIZE = 10;
     }
 
+    interface GoodsType {
+        String COMMODITY = "商品";
+        String COUPON = "卡券";
+    }
+
 }

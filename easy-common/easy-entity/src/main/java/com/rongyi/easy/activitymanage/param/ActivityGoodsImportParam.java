@@ -16,6 +16,11 @@ public class ActivityGoodsImportParam extends PagingParam {
      */
     private String version;
 
+    /**
+     * 是否有效，无效[false] 有效[true]
+     */
+    private Boolean valid;
+
     public Integer getActivityId() {
         return activityId;
     }
@@ -32,11 +37,20 @@ public class ActivityGoodsImportParam extends PagingParam {
         this.version = version;
     }
 
+    public Boolean getValid() {
+        return valid;
+    }
+
+    public void setValid(Boolean valid) {
+        this.valid = valid;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("activityId", activityId)
                 .append("version", version)
+                .append("valid", valid)
                 .toString();
     }
 }

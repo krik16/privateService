@@ -5,7 +5,9 @@ import java.util.List;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.activity.entity.QueryActivityGoods;
 import com.rongyi.easy.activitymanage.entity.*;
+import com.rongyi.easy.activitymanage.param.ActivityGoodsImportParam;
 import com.rongyi.easy.activitymanage.param.SearchActivityParam;
+import com.rongyi.easy.activitymanage.vo.ActivityGoodsImportVO;
 import com.rongyi.easy.activitymanage.vo.ActivityInfoListVO;
 
 /**
@@ -87,4 +89,11 @@ public interface ActivityService {
      * @author Leon
      */
     boolean saveActivityGoodsImport(List<ActivityGoodsImport> activityGoodsImports);
+
+    /**
+     * 查询
+     * @param param
+     * @return
+     */
+    PagingVO<ActivityGoodsImportVO> getActivityGoodsImports(ActivityGoodsImportParam param);
 }

@@ -34,6 +34,13 @@ public class PagingParam implements Serializable {
         this.pageSize = pageSize;
     }
 
+    public Integer getOffset() {
+        if (currentPage == null || currentPage < 1 || pageSize == null || pageSize < 1) {
+            return null;
+        }
+        return  (currentPage -1) * pageSize;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
