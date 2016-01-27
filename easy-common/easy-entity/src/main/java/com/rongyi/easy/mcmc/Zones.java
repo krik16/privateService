@@ -1,10 +1,13 @@
 package com.rongyi.easy.mcmc;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import com.rongyi.easy.malllife.constants.Constants;
+import com.rongyi.easy.roa.entity.CategoriesEntity;
+import com.rongyi.easy.smms.Category;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
@@ -22,10 +25,26 @@ public class Zones implements Serializable {
 	 */
 	@Id
 	private ObjectId id;
+
+	private int mall_valid;
+
+	private List<CategoriesEntity> main_categories;
+
+	private int rank;
+
 	/**
 	 * 区域类型
 	 */
 	private String _type;
+
+	private String slug;//名称拼音
+
+	private String address;
+
+	private String appearance_pic;
+
+	private String telephone;
+
 	/**
 	 * app图片名
 	 */
@@ -69,7 +88,7 @@ public class Zones implements Serializable {
 	/**
 	 * 更新时间
 	 */
-	private Date updated_at;
+	private Date updated_at;//更新时间
 	/**
 	 * 更新人id
 	 */
@@ -89,6 +108,33 @@ public class Zones implements Serializable {
 
 	//商场logo
 	private String icon;
+
+	private String province;
+	private String city;
+	private String district;
+	private String bussinessDistrict;
+	private String operator_id;
+	private String mold;
+	private String valid;
+	private String terminal_mall;
+	private String business_status;
+
+
+	private ArrayList<ObjectId> zone_ids;
+
+	private String shopCount;
+	//进行空值判断，不建索引，1表示有值
+	private List<Object> parking;
+	private String transport_information;
+	private String business_hours;
+	private String apperance_pic;
+	private String web_apperance_pic;
+	private String traffic_pic;
+	private String introduction_pic;
+	private String terminal_logo;
+	private String recommend;
+	private ArrayList<String> aliases;//别名
+	private String floor;//楼层
 
 	public ObjectId getId() {
 		return id;
@@ -236,5 +282,237 @@ public class Zones implements Serializable {
 
 	public void setIcon(String icon) {
 		this.icon = icon;
+	}
+
+	public int getMall_valid() {
+		return mall_valid;
+	}
+
+	public void setMall_valid(int mall_valid) {
+		this.mall_valid = mall_valid;
+	}
+
+	public List<CategoriesEntity> getMain_categories() {
+		return main_categories;
+	}
+
+	public void setMain_categories(List<CategoriesEntity> main_categories) {
+		this.main_categories = main_categories;
+	}
+
+	public int getRank() {
+		return rank;
+	}
+
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
+
+	public String getSlug() {
+		return slug;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getAppearance_pic() {
+		return appearance_pic;
+	}
+
+	public void setAppearance_pic(String appearance_pic) {
+		this.appearance_pic = appearance_pic;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+
+	public String getBussinessDistrict() {
+		return bussinessDistrict;
+	}
+
+	public void setBussinessDistrict(String bussinessDistrict) {
+		this.bussinessDistrict = bussinessDistrict;
+	}
+
+	public String getOperator_id() {
+		return operator_id;
+	}
+
+	public void setOperator_id(String operator_id) {
+		this.operator_id = operator_id;
+	}
+
+	public String getMold() {
+		return mold;
+	}
+
+	public void setMold(String mold) {
+		this.mold = mold;
+	}
+
+	public String getValid() {
+		return valid;
+	}
+
+	public void setValid(String valid) {
+		this.valid = valid;
+	}
+
+	public String getTerminal_mall() {
+		return terminal_mall;
+	}
+
+	public void setTerminal_mall(String terminal_mall) {
+		this.terminal_mall = terminal_mall;
+	}
+
+	public String getBusiness_status() {
+		return business_status;
+	}
+
+	public void setBusiness_status(String business_status) {
+		this.business_status = business_status;
+	}
+
+	public ArrayList<ObjectId> getZone_ids() {
+		return zone_ids;
+	}
+
+	public void setZone_ids(ArrayList<ObjectId> zone_ids) {
+		this.zone_ids = zone_ids;
+	}
+
+	public String getShopCount() {
+		return shopCount;
+	}
+
+	public void setShopCount(String shopCount) {
+		this.shopCount = shopCount;
+	}
+
+	public List<Object> getParking() {
+		return parking;
+	}
+
+	public void setParking(List<Object> parking) {
+		this.parking = parking;
+	}
+
+	public String getTransport_information() {
+		return transport_information;
+	}
+
+	public void setTransport_information(String transport_information) {
+		this.transport_information = transport_information;
+	}
+
+	public String getBusiness_hours() {
+		return business_hours;
+	}
+
+	public void setBusiness_hours(String business_hours) {
+		this.business_hours = business_hours;
+	}
+
+	public String getApperance_pic() {
+		return apperance_pic;
+	}
+
+	public void setApperance_pic(String apperance_pic) {
+		this.apperance_pic = apperance_pic;
+	}
+
+	public String getWeb_apperance_pic() {
+		return web_apperance_pic;
+	}
+
+	public void setWeb_apperance_pic(String web_apperance_pic) {
+		this.web_apperance_pic = web_apperance_pic;
+	}
+
+	public String getTraffic_pic() {
+		return traffic_pic;
+	}
+
+	public void setTraffic_pic(String traffic_pic) {
+		this.traffic_pic = traffic_pic;
+	}
+
+	public String getIntroduction_pic() {
+		return introduction_pic;
+	}
+
+	public void setIntroduction_pic(String introduction_pic) {
+		this.introduction_pic = introduction_pic;
+	}
+
+	public String getTerminal_logo() {
+		return terminal_logo;
+	}
+
+	public void setTerminal_logo(String terminal_logo) {
+		this.terminal_logo = terminal_logo;
+	}
+
+	public String getRecommend() {
+		return recommend;
+	}
+
+	public void setRecommend(String recommend) {
+		this.recommend = recommend;
+	}
+
+	public ArrayList<String> getAliases() {
+		return aliases;
+	}
+
+	public void setAliases(ArrayList<String> aliases) {
+		this.aliases = aliases;
+	}
+
+	public String getFloor() {
+		return floor;
+	}
+
+	public void setFloor(String floor) {
+		this.floor = floor;
 	}
 }

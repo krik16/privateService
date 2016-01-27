@@ -10,6 +10,7 @@ import com.rongyi.easy.mcmc.*;
 import com.rongyi.easy.mcmc.param.SaleParam;
 
 import com.rongyi.easy.mcmc.vo.*;
+import com.rongyi.easy.solr.McmcCommodityDocument;
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
@@ -131,11 +132,14 @@ public interface CommodityService {
 
     public List<CommodityBuyerVO> getCommodityBySPU(String commodityId, String spu);
 
-//    /**
-//	 * 获取有商品的分类列表
-//	 * @param categoryParam	参数对象
-//	 * @return
-//	 */
-//	public ResponseResult getBuyerCommodityCategoryHasCommodity(BuyerCategoryParam categoryParam);
+    public List<McmcCommodityDocument> getMcmcCommodityDocumentList(int skip,int pageSize) throws Exception;
+
+    public McmcCommodityDocument getMmcmcCommodityDoucmentById(String commodityId) throws Exception;
+    /**
+	 * 获取有商品的分类列表
+	 * @param categoryParam	参数对象
+	 * @return
+	 */
+	public ResponseResult getBuyerCommodityCategoryHasCommodity(BuyerCategoryParam categoryParam);
 
 }
