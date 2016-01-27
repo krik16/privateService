@@ -85,7 +85,9 @@ public class UnifedOrderReqData {
 			setTime_expire(timeExpire);
 		}
 
-		setOpenid(openid);
+		if(openid != null) {
+			setOpenid(openid);
+		}
 
         //根据API给的签名规则进行签名
         String sign = Signature.getSign(toMap(),configure.getKey());
