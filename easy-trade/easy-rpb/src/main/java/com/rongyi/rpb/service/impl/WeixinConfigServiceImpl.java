@@ -20,10 +20,10 @@ public class WeixinConfigServiceImpl extends BaseServiceImpl implements WeixinCo
     WeixinMchService weixinMchService;
 
     @Override
-    public Configure initConfigure(String appId) {
+    public Configure initConfigure(String appId,Integer weixinPayType) {
         Configure configure = new Configure();
         if (StringUtils.isNotBlank(appId)) {
-            WeixinMch weixinMch = weixinMchService.selectByAppId(appId);
+            WeixinMch weixinMch = weixinMchService.selectByAppIdAndTradeType(appId, weixinPayType);
             configure.init(weixinMch);
         }
         return configure;
