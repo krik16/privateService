@@ -4,10 +4,7 @@ import java.util.List;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.activity.entity.QueryActivityGoods;
-import com.rongyi.easy.activitymanage.entity.ActivityCheckRecord;
-import com.rongyi.easy.activitymanage.entity.ActivityGoods;
-import com.rongyi.easy.activitymanage.entity.ActivityGoodsSpec;
-import com.rongyi.easy.activitymanage.entity.ActivityInfo;
+import com.rongyi.easy.activitymanage.entity.*;
 import com.rongyi.easy.activitymanage.param.SearchActivityParam;
 import com.rongyi.easy.activitymanage.vo.ActivityInfoListVO;
 
@@ -83,4 +80,11 @@ public interface ActivityService {
      */
     public PagingVO<ActivityInfoListVO> getActivityList(SearchActivityParam searchActivityParam);
 
+    /**
+     * 保存添加商品导入的excel数据
+     * @param activityGoodsImports
+     * @return boolean
+     * @author Leon
+     */
+    boolean saveActivityGoodsImport(List<ActivityGoodsImport> activityGoodsImports);
 }
