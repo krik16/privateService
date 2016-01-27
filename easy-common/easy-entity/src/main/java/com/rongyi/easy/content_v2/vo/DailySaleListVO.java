@@ -27,7 +27,16 @@ public class DailySaleListVO implements Serializable {
     private Date publishEndAt;
     /**图片*/
     private String dailyPic;
+    /**库存量*/
+    private Integer stockCount;
 
+    public Integer getStockCount() {
+        return stockCount;
+    }
+
+    public void setStockCount(Integer stockCount) {
+        this.stockCount = stockCount;
+    }
 
     public Integer getType() {
         return type;
@@ -104,6 +113,7 @@ public class DailySaleListVO implements Serializable {
                 .append("publishBeginAt", publishBeginAt)
                 .append("publishEndAt", publishEndAt)
                 .append("dailyPic", dailyPic)
+                .append("stockCount", stockCount)
                 .toString();
     }
 }
