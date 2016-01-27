@@ -77,13 +77,13 @@ public class UnifedOrderReqData {
         //交易类型
         setTrade_type(configure.getTradeType());
 
-	/*	if(ConstantEnum.WEIXIN_PAY_TRADE_TYPE_APP.getValueStr().equals(configure.getTradeType())) {
+		if(ConstantEnum.WEIXIN_PAY_TRADE_TYPE_APP.getValueStr().equals(configure.getTradeType())) {
 			//交易起始时间
 			setTime_start(timeStart);
 
 			//交易失效时间
 			setTime_expire(timeExpire);
-		}*/
+		}
 
 		if(ConstantEnum.WEIXIN_PAY_TRADE_TYPE_JSAPI.getValueStr().equals(configure.getTradeType())) {
 			setOpenid(openid);
