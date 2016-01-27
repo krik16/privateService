@@ -15,6 +15,18 @@ public class WeixinLoginParam implements Serializable{
 	private String phone;//手机号（用户账号）
 	private String pswd;//密码
 	private String openId;//微信openId
+
+	private String appId; //商家公众号Id
+
+
+	public String getAppId() {
+		return appId;
+	}
+
+	public void setAppId(String appId) {
+		this.appId = appId;
+	}
+
 	public String getPhone() {
 		return phone;
 	}

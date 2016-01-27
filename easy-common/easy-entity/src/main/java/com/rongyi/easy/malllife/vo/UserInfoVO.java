@@ -47,6 +47,8 @@ public class UserInfoVO implements Serializable {
 
 	private Integer isDisable;//是否禁用  0,正常，1禁用
 
+	private String  publicNumId;//商家公众号Id
+
 	public String getShareCode() {
 		return shareCode;
 	}
@@ -247,6 +249,11 @@ public class UserInfoVO implements Serializable {
 		this.isDisable = isDisable;
 	}
 
+	public String getPublicNumId() {
+		return publicNumId;
+	}
 
-
+	public void setPublicNumId(String publicNumId) {
+		this.publicNumId = publicNumId;
+	}
 }
