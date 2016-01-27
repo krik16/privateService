@@ -72,7 +72,6 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
         LOGGER.info("获取微信支付签名 getAppWeXinSign,paySignData={}",paySignData);
         Map<String, Object> map = new HashMap<>();
         try {
-//            BigDecimal totalFee = new BigDecimal(total_fee + "").multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
             Map<String, String> timeExpireMap = timeExpireUnit.weixinPayTimeExpire(paySignData.getTimeStart(), paySignData.getTimeExpire(), paySignData.getOrderType());
             LOGGER.info("timeExpireMap={}", timeExpireMap);
             paySignData.setTimeStart(timeExpireMap.get("timeStart"));

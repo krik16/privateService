@@ -210,21 +210,22 @@ public class WeixinPayServiceTest extends BaseTest {
 //				='2016-01-15 16:26:33', timeExpire='2016-01-15 16:41:33', appId='wxb0af59268c136d7d', openId='ofnj5s65nQk275rH2kQR4-CKHb1M'
 
 //		{payNo='0011552743936151554', totalFee=15000, body='容易网商品', orderType=1, timeStart='2016-01-18 11:49:54', timeExpire='2016-01-18 12:04:54', appId='wxb0af59268c136d7d', openId='o0BDmjojF2JiWrcfhX6YLxP-w5kk'}
-		String timeStart = DateUtil.dateToString(DateUtil.getCurrDateTime(), "yyyyMMddHHmmss");
-//		String timeStart ="2016-01-18 11:49:54";
-		String timeExpire = DateUtil.dateToString(DateUtil.addTime(DateUtil.getCurrDateTime(), 15, Calendar.MINUTE), "yyyyMMddHHmmss");
-//		String timeExpire = "2016-01-18 12:04:54";
+//		String timeStart = DateUtil.dateToString(DateUtil.getCurrDateTime());
+		String timeStart ="2016-01-27 16:49:54";
+//		String timeExpire = DateUtil.dateToString(DateUtil.addTime(DateUtil.getCurrDateTime(), 15, Calendar.MINUTE));
+		String timeExpire = "2016-01-27 18:04:54";
 		PaySignData paySignData = new PaySignData();
 		paySignData.setTotalFee(15000);
 		paySignData.setBody("容易网商品");
 //		paySignData.setMallId("10");
-//		paySignData.setOpenId("ofnj5s65nQk275rH2kQR4-CKHb1M");
+//		paySignData.setOpenId("oljTBsyqrfuR9OxUsVURM56noPzY");
+		paySignData.setOpenId("o0BDmjppq_rgjfZMdpSU5rPA-CFo");
 		paySignData.setOrderType(0);
 		paySignData.setPayNo("001276971084814022126");
 		paySignData.setTimeStart(timeStart);
 		paySignData.setTimeExpire(timeExpire);
-//		paySignData.setWeixinPayType("0");
-//		paySignData.setAppId("wxb0af59268c136d7d");
+		paySignData.setWeixinPayType(1);
+		paySignData.setAppId("wxb0af59268c136d7d");
 		Map map = weixinPayUnit.getWeXinPaySign(paySignData);
 		System.err.println("map="+map.toString());
 	}
@@ -233,12 +234,14 @@ public class WeixinPayServiceTest extends BaseTest {
 	public void testgetWeXinPaySign(){
 
 		PaySignData paySignData = new PaySignData();
-			paySignData.setPayNo("0012773109760142231122");
+			paySignData.setPayNo("00127731097260142231122");
 			paySignData.setTotalFee(1);
 			paySignData.setBody("s");
 			paySignData.setOrderType(0);
-			paySignData.setTimeStart("2016-01-27 14:22:14");
-			paySignData.setTimeExpire("2016-01-27 15:22:14");
+			paySignData.setOpenId("oljTBsyqrfuR9OxUsVURM56noPzY");
+			paySignData.setAppId("wx749527272cae4b9b");
+//			paySignData.setTimeStart("2016-01-27 14:22:14");
+//			paySignData.setTimeExpire("2016-01-27 15:22:14");
 		weixinPayService.getAppWeXinSign(paySignData);
 	}
 
