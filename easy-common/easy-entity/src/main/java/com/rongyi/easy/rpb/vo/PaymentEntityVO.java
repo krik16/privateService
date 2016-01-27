@@ -119,6 +119,8 @@ public class PaymentEntityVO {
     private String appId;
 
     private String openId;
+
+    private Integer weixinPayType;
     /**
      * 主键id
      *
@@ -431,5 +433,13 @@ public class PaymentEntityVO {
 
     public void setOpenId(String openId) {
         this.openId = openId;
+    }
+
+    public Integer getWeixinPayType() {
+        return weixinPayType;
+    }
+
+    public void setWeixinPayType(Integer weixinPayType) {
+        this.weixinPayType = weixinPayType;
     }
 }
