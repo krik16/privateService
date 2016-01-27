@@ -91,9 +91,18 @@ public interface ActivityService {
     boolean saveActivityGoodsImport(List<ActivityGoodsImport> activityGoodsImports);
 
     /**
-     * 查询
+     * 查询导入的商品列表
      * @param param
-     * @return
+     * @return PagingVO<ActivityGoodsImportVO>
+     * @author Leon
      */
     PagingVO<ActivityGoodsImportVO> getActivityGoodsImports(ActivityGoodsImportParam param);
+
+    /**
+     * 移除关联的商品
+     * @param importId 临时表id
+     * @return Boolean
+     * @author Leon
+     */
+    boolean removeActivityGoodsImport(Integer importId);
 }

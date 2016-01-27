@@ -48,8 +48,10 @@ public interface ActivityConstants {
     }
 
     interface GoodsType {
-        String COMMODITY = "商品";
-        String COUPON = "卡券";
+        String COMMODITY_STR = "商品";
+        String COUPON_STR = "卡券";
+        Integer COMMODITY_INT = 0;
+        Integer COUPON_INT = 1;
     }
 
 }

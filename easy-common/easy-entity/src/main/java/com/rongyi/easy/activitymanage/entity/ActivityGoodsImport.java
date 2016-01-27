@@ -39,6 +39,10 @@ public class ActivityGoodsImport implements Serializable {
         this.version = version;
     }
 
+    public ActivityGoodsImport() {
+
+    }
+
     public Integer getId() {
         return id;
     }
