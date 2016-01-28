@@ -199,6 +199,11 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
      */
     private String weixinChannel;
 
+    /**
+     * 微信openId
+     */
+    private String openId;
+
     public Byte getIsAlert() {
         return isAlert;
     }
@@ -823,6 +828,14 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
         this.weixinChannel = weixinChannel;
     }
 
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
+
     @Override
     public String toString() {
         return "OrderFormEntity{" +
@@ -872,6 +885,7 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
                 ", scoreAmount=" + scoreAmount +
                 ", weixinAppId=" + weixinAppId +
                 ", weixinChannel=" + weixinChannel +
+                ", openId=" + openId +
                 '}';
     }
 

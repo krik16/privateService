@@ -33,6 +33,10 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 
 	private String weixinChannel;//微信标准版支付渠道
 
+	private String openId;//微信openId
+
+
+
 	public List<ParentOrderParam> getParentOrderList() {
 		return parentOrderList;
 	}
@@ -113,6 +117,14 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 		this.weixinChannel = weixinChannel;
 	}
 
+	public String getOpenId() {
+		return openId;
+	}
+
+	public void setOpenId(String openId) {
+		this.openId = openId;
+	}
+
 	@Override
 	public String toString() {
 		return "SubmitOrderParam{" +
@@ -126,6 +138,7 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 				", ifCart='" + ifCart + '\'' +
 				", weixinAppId='" + weixinAppId + '\'' +
 				", weixinChannel='" + weixinChannel + '\'' +
+				", openId='" + openId + '\'' +
 				'}';
 	}
 }
