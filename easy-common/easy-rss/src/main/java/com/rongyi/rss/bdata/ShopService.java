@@ -16,6 +16,19 @@ public interface ShopService {
 	/**
 	 * 店铺搜索
 	 * @param mallId		商场ID
+	 * @param zoneId		楼层ID
+	 * @param keyword		关键词（商场名称）
+	 * @param customCateId	自定义分类ID
+	 * @param page			当前页
+	 * @param pageSize		分页条数
+	 * @return 带ShopVO 的ResponseVO
+	 * @throws Exception 
+	 */
+	ResponseVO searchShops(String mallId, String zoneId, String keyword, String customCateId, int page, int pageSize) throws Exception;
+
+	/**
+	 * 店铺搜索
+	 * @param mallId		商场ID
 	 * @param keyword		关键词（商场名称）
 	 * @param customCateId	自定义分类ID
 	 * @param page			当前页
@@ -24,7 +37,7 @@ public interface ShopService {
 	 * @throws Exception 
 	 */
 	ResponseVO searchShops(String mallId, String keyword, String customCateId, int page, int pageSize) throws Exception;
-	
+
 	/**
 	 * 获取单个店铺详情
 	 * @param id 店铺id
