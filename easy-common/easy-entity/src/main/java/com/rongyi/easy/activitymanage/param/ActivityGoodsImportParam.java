@@ -2,6 +2,8 @@ package com.rongyi.easy.activitymanage.param;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import java.util.List;
+
 /**
  * Created by Leon on 2016/1/27.
  */
@@ -36,6 +38,11 @@ public class ActivityGoodsImportParam extends PagingParam {
      * 类型：商品[0] 卡券[1]
      */
     private Integer goodsType;
+
+    /**
+     * id集合
+     */
+    private List<Integer> ids;
 
     public Integer getId() {
         return id;
@@ -85,6 +92,14 @@ public class ActivityGoodsImportParam extends PagingParam {
         this.goodsType = goodsType;
     }
 
+    public List<Integer> getIds() {
+        return ids;
+    }
+
+    public void setIds(List<Integer> ids) {
+        this.ids = ids;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -94,6 +109,7 @@ public class ActivityGoodsImportParam extends PagingParam {
                 .append("version", version)
                 .append("valid", valid)
                 .append("goodsType", goodsType)
+                .append("ids", ids)
                 .toString();
     }
 }

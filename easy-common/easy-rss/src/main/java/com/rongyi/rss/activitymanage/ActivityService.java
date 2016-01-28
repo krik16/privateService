@@ -9,6 +9,7 @@ import com.rongyi.easy.activitymanage.param.ActivityGoodsImportParam;
 import com.rongyi.easy.activitymanage.param.SearchActivityParam;
 import com.rongyi.easy.activitymanage.vo.ActivityGoodsImportVO;
 import com.rongyi.easy.activitymanage.vo.ActivityInfoListVO;
+import com.rongyi.easy.activitymanage.vo.ActivityInfoVO;
 
 /**
  * 活动后台管理接口
@@ -96,13 +97,32 @@ public interface ActivityService {
      * @return PagingVO<ActivityGoodsImportVO>
      * @author Leon
      */
-    PagingVO<ActivityGoodsImportVO> getActivityGoodsImports(ActivityGoodsImportParam param);
+    PagingVO<ActivityGoodsImportVO> getGoodsImportsByPage(ActivityGoodsImportParam param);
 
     /**
      * 移除关联的商品
-     * @param importId 临时表id
+     * @param importIds 临时表id集合
      * @return Boolean
      * @author Leon
      */
-    boolean removeActivityGoodsImport(Integer importId);
+    boolean removeActivityGoodsImport(List<Integer> importIds);
+
+    /**
+     * 获取导入商品的列表
+     * @param param
+     * @return List<ActivityGoodsImport>
+     * @author Leon
+     */
+    List<ActivityGoodsImport> getGoodsImports(ActivityGoodsImportParam param);
+
+
+    /**
+     * 对外（交易使用）
+     * 查询活动详情接口
+     * @param goodsId 商品id
+     * @param goodsType 商品[3] 卡券[1]
+     * @return ActivityInfoVO
+     */
+    ActivityInfoVO getActivityInfoVO(String goodsId, Integer goodsType);
+
 }
