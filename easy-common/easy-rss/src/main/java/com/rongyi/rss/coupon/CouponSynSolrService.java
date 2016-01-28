@@ -2,8 +2,9 @@ package com.rongyi.rss.coupon;
 
 import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.solr.ActivityDocument;
-
 import java.util.List;
+
+import org.apache.solr.common.SolrInputDocument;
 
 /**
  * 优惠券数据同步到solr
@@ -43,5 +44,28 @@ public interface CouponSynSolrService {
     public List<ActivityDocument> getActivityDocumentList(int skip,int pageSize) throws Exception;
 
     public ActivityDocument getActivityDocument(String activityMid);
+    
+    /**
+     * 返回coupon总数
+     * @return
+     */
+    long getCouponCount();
+    
+    /**
+     * 返回指定分页卡券列表
+     * @param skip
+     * @param pageSize
+     * @return
+     * @throws Exception
+     */
+    List<SolrInputDocument> getCouponDocumentList(int skip, int pageSize) throws Exception;
+
+
+    /**
+     * 返回指定ID卡券doc对象
+     * @param id	卡券ID
+     * @return
+     */
+    SolrInputDocument getCouponDocument(String id);
 
 }
