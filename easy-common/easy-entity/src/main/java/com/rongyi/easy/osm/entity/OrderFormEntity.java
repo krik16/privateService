@@ -195,9 +195,9 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private String weixinAppId;
 
     /**
-     * 微信标准版支付渠道
+     * 下单渠道
      */
-    private String weixinChannel;
+    private String orderChannel;
 
     /**
      * 微信openId
@@ -820,12 +820,12 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
         this.weixinAppId = weixinAppId;
     }
 
-    public String getWeixinChannel() {
-        return weixinChannel;
+    public String getOrderChannel() {
+        return orderChannel;
     }
 
-    public void setWeixinChannel(String weixinChannel) {
-        this.weixinChannel = weixinChannel;
+    public void setOrderChannel(String orderChannel) {
+        this.orderChannel = orderChannel;
     }
 
     public String getOpenId() {
@@ -884,7 +884,7 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
                 ", rebateAmount=" + rebateAmount +
                 ", scoreAmount=" + scoreAmount +
                 ", weixinAppId=" + weixinAppId +
-                ", weixinChannel=" + weixinChannel +
+                ", orderChannel=" + orderChannel +
                 ", openId=" + openId +
                 '}';
     }

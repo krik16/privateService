@@ -109,9 +109,9 @@ public class TradeOrder implements Serializable {
     private String weixinAppId;
 
     /**
-     * 微信标准版支付渠道
+     * 下单渠道
      */
-    private String weixinChannel;
+    private String orderChannel;
     /**
      * 元
      *
@@ -549,11 +549,11 @@ public class TradeOrder implements Serializable {
         this.weixinAppId = weixinAppId;
     }
 
-    public String getWeixinChannel() {
-        return weixinChannel;
+    public String getOrderChannel() {
+        return orderChannel;
     }
 
-    public void setWeixinChannel(String weixinChannel) {
-        this.weixinChannel = weixinChannel;
+    public void setOrderChannel(String orderChannel) {
+        this.orderChannel = orderChannel;
     }
 }
