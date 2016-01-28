@@ -1,12 +1,13 @@
 package com.rongyi.easy.solr;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
 /**
  * Created by wangzehui on 2016/1/26.
  */
-public class ActivityDocument {
+public class ActivityDocument implements Serializable{
     private String id;
     private String var_poi_chinese;
     private String var_title_chinese;// 活动名称

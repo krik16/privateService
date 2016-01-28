@@ -134,7 +134,9 @@ public interface CommodityService {
 
     public List<McmcCommodityDocument> getMcmcCommodityDocumentList(int skip,int pageSize) throws Exception;
 
-    public McmcCommodityDocument getMmcmcCommodityDoucmentById(String commodityId) throws Exception;
+    public McmcCommodityDocument getMmcmcCommodityDocumentById(String commodityId) throws Exception;
+
+    public long getCommodityCount();
     /**
 	 * 获取有商品的分类列表
 	 * @param categoryParam	参数对象
