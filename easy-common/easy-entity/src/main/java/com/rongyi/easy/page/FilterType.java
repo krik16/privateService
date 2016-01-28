@@ -9,7 +9,7 @@ import java.io.Serializable;
  */
 public enum FilterType implements Serializable {
 
-    LIKE("LIKE","LIKE"),  EQUALS("EQ","="),  GREATETHAN("GH","&lt;"),  GREATEEQUAL("GE","&lt;="),  LESSTHAN("LH","&lt;"),  LESSEQUAL("LE","&lt;="),  NOTEQUAL("NEQ","!="),
+    LIKE("LIKE","LIKE"),  EQUALS("EQ","="),  GREATETHAN("GH","&gt;"),  GREATEEQUAL("GE","&gt;="),  LESSTHAN("LH","&lt;"),  LESSEQUAL("LE","&lt;="),  NOTEQUAL("NEQ","!="),
     IN("IN","IN"),NIN("NIN","NOT IN"),ISNULL("NULL","IS NULL"),ISNOTNULL("NNULL","IS NOT NULL"),
     REGEXP("REGEXP","REGEXP"),BEQ("BEQ","beq") ,EXISTS("EXISTS","EXISTS"),NOTEXISTS("NOTEXISTS","NOT EXISTS");
 
