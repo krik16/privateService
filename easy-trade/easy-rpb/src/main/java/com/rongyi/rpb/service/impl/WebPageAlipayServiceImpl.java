@@ -36,6 +36,7 @@ public class WebPageAlipayServiceImpl extends BaseServiceImpl implements WebPage
 
 	@Override
 	public Map<String, Object> getToken(PaymentEntityVO paymentEntityVO) {
+		LOGGER.info("price="+paymentEntityVO.getAmountMoney());
 		Map<String, Object> map = new HashMap<>();
 		//支付失效时间
 		String itBPay= timeExpireUnit.aliPayTimeExpire(paymentEntityVO.getTimeStart(), paymentEntityVO.getTimeExpire(),paymentEntityVO.getOrderType());

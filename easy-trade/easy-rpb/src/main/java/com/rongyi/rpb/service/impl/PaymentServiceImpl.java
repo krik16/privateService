@@ -158,7 +158,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         if (bodyMap.get("openId") != null) {
             paymentEntityVO.setOpenId(bodyMap.get("openId").toString());
         }
-        if (bodyMap.get("weixinPayType") != null) {
+        if (bodyMap.get("weixinPayType") != null && !"null".equals(bodyMap.get("weixinPayType").toString())) {
             paymentEntityVO.setWeixinPayType(Integer.valueOf(bodyMap.get("weixinPayType").toString()));
         }
 
@@ -271,7 +271,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                 LOGGER.info("申请退款或打款给卖家");
                 bodyMap.put("paymentId", paymentEntityVO.getPayNo());
             }
-            bodyMap.put("totalPrice", bodyMap.get("totlePrice"));
+            bodyMap.put("totalPrice", paymentEntityVO.getAmountMoney());
             bodyMap.put("orderNum", paymentEntityVO.getOrderNum());
             bodyMap.put("orderDetailNum", paymentEntityVO.getOrderDetailNumArray());
         } catch (Exception e) {

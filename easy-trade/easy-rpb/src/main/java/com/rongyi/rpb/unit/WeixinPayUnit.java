@@ -63,7 +63,7 @@ public class WeixinPayUnit {
                         throw new WeixinException(ConstantEnum.EXCEPTION_WEIXIN_SIGN_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_SIGN_FAIL.getValueStr());
                     map.put("prepayid", resultMap.get("prepay_id"));
                     map.put("noncestr", resultMap.get("nonce_str"));
-                } else {//微信公众号支付签名timeStamp 生成签名时首字母需大写
+                } else {//微信公众号支付签名
                     map.put("timeStamp", timestamp);
                     map.put("appId", configure.getAppID());
                     map.put("signType", "MD5");
