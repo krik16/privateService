@@ -92,7 +92,7 @@
 		,biz_type
 		,biz_code
 		,biz_name
-		,biz_address
+		,biz_real_address
 		,link_type
 		,link_shop_op
 		,link_role
