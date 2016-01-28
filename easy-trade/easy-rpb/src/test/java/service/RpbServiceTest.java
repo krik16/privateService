@@ -85,7 +85,7 @@ public class RpbServiceTest extends BaseTest{
 	@Test
 	public void testgetRefundStatus(){
 		RefundQueryParamVO refundQueryParamVO = new RefundQueryParamVO();
-		refundQueryParamVO.setRefundNo("0012179489792213000");
+		refundQueryParamVO.setRefundNo("0012658247424173305");
 		iRpbService.getRefundStatus(refundQueryParamVO);
 	}
 

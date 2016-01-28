@@ -9,7 +9,6 @@
 package com.rongyi.rpb.service.impl;
 
 import com.rongyi.core.common.util.DateUtil;
-import com.rongyi.core.common.util.StringUtil;
 import com.rongyi.core.constant.PayEnum;
 import com.rongyi.core.constant.PaymentEventType;
 import com.rongyi.easy.mq.MessageEvent;
@@ -36,6 +35,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -436,7 +436,9 @@ public class RpbServiceImpl implements IRpbService {
 						refundStatusVO.setRefundReslt(ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getCodeStr());
 					} else {
 						refundStatusVO.setRefundReslt(ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr());
-						refundStatusVO.setRefundDate(DateUtil.addWorkDay(paymentEntity.getFinishTime(), refundQueryParamVO.getRefundedDay()));
+//						refundStatusVO.setRefundDate(DateUtil.addWorkDay(paymentEntity.getFinishTime(), refundQueryParamVO.getRefundedDay()));
+						//TODO 测试
+						refundStatusVO.setRefundDate(DateUtil.addTime(paymentEntity.getFinishTime(),10, Calendar.MINUTE));
 					}
 				} else {//退款失败
 					refundStatusVO.setIsPayPlatformProcess(false);
@@ -448,8 +450,9 @@ public class RpbServiceImpl implements IRpbService {
 				status = refundQueryResData.getRefund_status_0();
 				if (ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr().equals(status)) {//退款处理中
 					totalDay = refundQueryParamVO.getPlatformPayDay();
-					refundStatusVO.setPayPlatformDate(DateUtil.addWorkDay(paymentEntity.getFinishTime(), totalDay));
-					refundStatusVO.setIsPayPlatformProcess(false);
+//					refundStatusVO.setPayPlatformDate(DateUtil.addWorkDay(paymentEntity.getFinishTime(), totalDay));
+					refundStatusVO.setPayPlatformDate(paymentEntity.getFinishTime());
+					refundStatusVO.setIsPayPlatformProcess(true);
 					totalDay += refundQueryParamVO.getRefundedDay();
 					refundStatusVO.setRefundDate(DateUtil.addWorkDay(paymentEntity.getFinishTime(), totalDay));
 					refundStatusVO.setRefundReslt(ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr());
