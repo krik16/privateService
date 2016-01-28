@@ -831,7 +831,7 @@
 		 	A.order_no,
 		 	B.commodity_mid AS commodity_id,
 		 	N.`name` AS commodity_name,
-			CASE WHEN (O.pay_channel = 0 OR PO.pay_channel = 0) THEN '支付宝' WHEN (O.pay_channel = 1 OR PO.pay_channel = 1) THEN '微信' ELSE '其他' END AS `paytype`,
+			CASE WHEN (O.pay_channel = 0 OR PO.pay_channel = 0) THEN '支付宝' WHEN (O.pay_channel = 1 OR PO.pay_channel = 1) THEN '微信' ELSE '其他' END AS `pay_channel`,
 		 	D.mall_mid AS mall_id,
 		 	D.mall_name,
 		 	E.shop_mid AS shop_id,
