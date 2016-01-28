@@ -1,11 +1,10 @@
 package com.rongyi.easy.rmmm.param;
 
+import com.rongyi.easy.malllife.param.MalllifeBaseParam;
 import net.sf.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.List;
-
-import com.rongyi.easy.malllife.param.MalllifeBaseParam;
 
 public class SubmitOrderParam extends MalllifeBaseParam implements Serializable {
 
@@ -29,6 +28,10 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 	private JSONObject discountInfo;// {“score”:”使用积分”} 购物车使用积分
 
 	private Boolean ifCart = true;//是否购物车订单
+
+	private String weixinAppId;//微信标准版支付appid
+
+	private String weixinChannel;//微信标准版支付渠道
 
 	public List<ParentOrderParam> getParentOrderList() {
 		return parentOrderList;
@@ -94,6 +97,22 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 		this.ifCart = ifCart;
 	}
 
+	public String getWeixinAppId() {
+		return weixinAppId;
+	}
+
+	public void setWeixinAppId(String weixinAppId) {
+		this.weixinAppId = weixinAppId;
+	}
+
+	public String getWeixinChannel() {
+		return weixinChannel;
+	}
+
+	public void setWeixinChannel(String weixinChannel) {
+		this.weixinChannel = weixinChannel;
+	}
+
 	@Override
 	public String toString() {
 		return "SubmitOrderParam{" +
@@ -105,6 +124,8 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 				", platformRebateCode='" + platformRebateCode + '\'' +
 				", discountInfo='" + discountInfo + '\'' +
 				", ifCart='" + ifCart + '\'' +
+				", weixinAppId='" + weixinAppId + '\'' +
+				", weixinChannel='" + weixinChannel + '\'' +
 				'}';
 	}
 }
