@@ -103,8 +103,10 @@ public enum ConstantEnum {
     STATEMENT_STATUE_9(9,"付款冻结"),
     STATEMENT_STATUE_10(10,"付款解冻"),
     STATEMENT_STATUE_11(11,"未下载"),
-    STATEMENT_STATUE_12(12,"以付款"),
-    
+    STATEMENT_STATUE_12(12,"已付款"),
+
+    USER_TYPE_2(2,"卖家账号买手类型"),
+
     EXCEL_LIMIT_COUNT(5000,"交易明细报表导出限制总数");
     interface ACCOUNT_STATUS{
         int ACCOUNT_STATUS0 = 0;//登陆账号和支付账号正常
