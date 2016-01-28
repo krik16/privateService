@@ -4,6 +4,8 @@ import com.rongyi.easy.integral.constant.SourceType;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -111,18 +113,32 @@ public class SystemConfig implements Serializable{
             sb.append(day+"天");
         }
         if(hour > 0) {
-            sb.append(hour+"小时");
+            sb.append(hour+"时");
         }
         if(minute > 0) {
             sb.append(minute+"分");
         }
-        if(second > 0) {
+         if(second > 0) {
             sb.append(second+"秒");
         }
        /* if(milliSecond > 0) {
             sb.append(milliSecond+"毫秒");
         }*/
         return sb.toString();
+    }
+
+
+
+    public static String convert(long mill){
+        Date date=new Date(mill);
+        String strs="";
+        try {
+            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            strs=sdf.format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return strs;
     }
 
 }
