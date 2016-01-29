@@ -485,7 +485,7 @@ public class PaymentStatementController extends BaseController {
 			paymentStatementService.generate(id, getUserName(request));
 		} catch (SettleConfigNotFoundException sce) {
 			return ResponseData.failure(CodeEnum.FIAL_CONFIG_NOT_FOUND.getCodeInt(), CodeEnum.FIAL_CONFIG_NOT_FOUND.getValueStr());
-		} catch (PaymentStatementServiceImpl.StatementInvalidException sce) {
+		} catch (PaymentStatementServiceImpl.StatementInvalidException sie) {
 			return ResponseData.failure(CodeEnum.FIAL_STATEMENT_INVALID.getCodeInt(), CodeEnum.FIAL_STATEMENT_INVALID.getValueStr());
 		} catch (Exception e) {
 			e.printStackTrace();
