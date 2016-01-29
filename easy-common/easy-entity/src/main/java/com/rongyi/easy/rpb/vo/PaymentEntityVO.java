@@ -120,9 +120,6 @@ public class PaymentEntityVO {
 
     private String openId;
 
-    /**
-     * 微信支付方式 0:APP(app支付),1:JSAPI(公众号支付),2:NATIVE(原生扫码支付)
-     */
     private Integer weixinPayType;
     /**
      * 主键id

@@ -1,7 +1,6 @@
 package com.rongyi.easy.rpb.domain;
 
 import java.io.Serializable;
-
 /**
  *  Description: 微信商户账号
  *  Author: kejun

@@ -9,7 +9,7 @@ import com.rongyi.easy.rmmm.param.OrderListParam;
 import com.rongyi.easy.tradecenter.vo.CouponOrderVO;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Map; 
 
 
 /**
@@ -242,5 +242,7 @@ public interface MLCouponOrderService {
      * @throws Exception
      */
      int getMaxIntegral(OrderListParam param, double limit, double scoreExchangeMoney,double platformRebateAmount);
+     
      public Map<String, Object> generateWechatPaySign(WechatPaySignParam param);
+     
 }

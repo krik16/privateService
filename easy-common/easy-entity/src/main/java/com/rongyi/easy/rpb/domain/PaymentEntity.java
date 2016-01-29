@@ -118,7 +118,7 @@ public class PaymentEntity implements Serializable {
 
 	/**
 	 * 主键id
-	 *
+	 * 
 	 * @return id
 	 */
 	public Integer getId() {
@@ -127,7 +127,7 @@ public class PaymentEntity implements Serializable {
 
 	/**
 	 * 主键id
-	 *
+	 * 
 	 * @param id
 	 */
 	public void setId(Integer id) {
@@ -144,7 +144,7 @@ public class PaymentEntity implements Serializable {
 
 	/**
 	 * 大订单号
-	 *
+	 * 
 	 * @return orderNum
 	 */
 	public String getOrderNum() {
@@ -153,7 +153,7 @@ public class PaymentEntity implements Serializable {
 
 	/**
 	 * 大订单号
-	 *
+	 * 
 	 * @param orderNum
 	 */
 	public void setOrderNum(String orderNum) {
@@ -169,7 +169,7 @@ public class PaymentEntity implements Serializable {
 
 	/**
 	 * 订单名称
-	 *
+	 * 
 	 * @param title
 	 */
 	public void setTitle(String title) {
@@ -178,14 +178,14 @@ public class PaymentEntity implements Serializable {
 
 	/**
 	 * 子订单号（如果是大订单则不填）
-	 *
+	 * 
 	 * @return orderDetailNum
 	 */
 	/*
 	 * public Integer getOrderDetailNum() { return orderDetailNum; }
 	 *//**
 	 * 子订单号（如果是大订单则不填）
-	 *
+	 * 
 	 * @param orderDetailNum
 	 */
 	/*
@@ -195,7 +195,7 @@ public class PaymentEntity implements Serializable {
 
 	/**
 	 * 金额
-	 *
+	 * 
 	 * @return amountMoney
 	 */
 	public BigDecimal getAmountMoney() {
@@ -204,7 +204,7 @@ public class PaymentEntity implements Serializable {
 
 	/**
 	 * 金额
-	 *
+	 * 
 	 * @param amountMoney
 	 */
 	public void setAmountMoney(BigDecimal amountMoney) {
@@ -213,7 +213,7 @@ public class PaymentEntity implements Serializable {
 
 	/**
 	 * 状态（款已打/款已到）
-	 *
+	 * 
 	 * @return status
 	 */
 	public Integer getStatus() {
@@ -222,7 +222,7 @@ public class PaymentEntity implements Serializable {
 
 	/**
 	 * 状态（款已打/款已到）
-	 *
+	 * 
 	 * @param status
 	 */
 	public void setStatus(Integer status) {
@@ -231,7 +231,7 @@ public class PaymentEntity implements Serializable {
 
 	/**
 	 * 交易类型（购买/退款）
-	 *
+	 * 
 	 * @return tradeType
 	 */
 	public Integer getTradeType() {
@@ -240,7 +240,7 @@ public class PaymentEntity implements Serializable {
 
 	/**
 	 * 交易类型（购买/退款）
-	 *
+	 * 
 	 * @param tradeType
 	 */
 	public void setTradeType(Integer tradeType) {
@@ -249,7 +249,7 @@ public class PaymentEntity implements Serializable {
 
 	/**
 	 * 创建时间
-	 *
+	 * 
 	 * @return createTime
 	 */
 	public Date getCreateTime() {
@@ -258,7 +258,7 @@ public class PaymentEntity implements Serializable {
 
 	/**
 	 * 创建时间
-	 *
+	 * 
 	 * @param createTime
 	 */
 	public void setCreateTime(Date createTime) {
@@ -267,7 +267,7 @@ public class PaymentEntity implements Serializable {
 
 	/**
 	 * 完成时间
-	 *
+	 * 
 	 * @return finishTime
 	 */
 	public Date getFinishTime() {
@@ -276,7 +276,7 @@ public class PaymentEntity implements Serializable {
 
 	/**
 	 * 完成时间
-	 *
+	 * 
 	 * @param finishTime
 	 */
 	public void setFinishTime(Date finishTime) {
@@ -285,7 +285,7 @@ public class PaymentEntity implements Serializable {
 
 	/**
 	 * 支付工具（银行/支付宝等）
-	 *
+	 * 
 	 * @return payChannel
 	 */
 	public Integer getPayChannel() {
@@ -294,7 +294,7 @@ public class PaymentEntity implements Serializable {
 
 	/**
 	 * 支付工具（银行/支付宝等）
-	 *
+	 * 
 	 * @param payChannel
 	 */
 	public void setPayChannel(Integer payChannel) {
@@ -303,7 +303,7 @@ public class PaymentEntity implements Serializable {
 
 	/**
 	 * 转出账号
-	 *
+	 * 
 	 * @return outAccount
 	 */
 	public String getOutAccount() {
@@ -312,7 +312,7 @@ public class PaymentEntity implements Serializable {
 
 	/**
 	 * 转出账号
-	 *
+	 * 
 	 * @param outAccount
 	 */
 	public void setOutAccount(String outAccount) {
@@ -321,7 +321,7 @@ public class PaymentEntity implements Serializable {
 
 	/**
 	 * 转入账号
-	 *
+	 * 
 	 * @return inAccount
 	 */
 	public String getInAccount() {
@@ -330,7 +330,7 @@ public class PaymentEntity implements Serializable {
 
 	/**
 	 * 转入账号
-	 *
+	 * 
 	 * @param inAccount
 	 */
 	public void setInAccount(String inAccount) {
