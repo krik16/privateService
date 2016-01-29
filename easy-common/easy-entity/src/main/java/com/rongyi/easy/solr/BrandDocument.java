@@ -53,7 +53,7 @@ public class BrandDocument implements Serializable{
     @Field
     private String description;
     @Field
-    private String average_comsumption;
+    private String average_consumption;
     @Field
     private String valid;
     @Field
@@ -62,7 +62,7 @@ public class BrandDocument implements Serializable{
     public BrandDocument() {
     }
 
-    public BrandDocument(BrandEntity brand) throws InvocationTargetException, IllegalAccessException {
+    public BrandDocument(BrandEntity brand) throws Exception {
         if(brand==null)
             return;
         BeanUtils.copyProperties(this,brand);
@@ -76,9 +76,7 @@ public class BrandDocument implements Serializable{
         else
             this.setDescription(null);
         if(StringUtils.isNotBlank(brand.getAverage_consumption()))
-            this.setAverage_comsumption("1");
-        else
-            this.setAverage_comsumption(null);
+            this.setAverage_consumption("1");
         //slug
         if(StringUtils.isNotBlank(brand.getName())){
             List<String> pinyins = Pinyin4jUtil.converterToSpell(brand.getName());
@@ -210,12 +208,12 @@ public class BrandDocument implements Serializable{
         this.description = description;
     }
 
-    public String getAverage_comsumption() {
-        return average_comsumption;
+    public String getAverage_consumption() {
+        return average_consumption;
     }
 
-    public void setAverage_comsumption(String average_comsumption) {
-        this.average_comsumption = average_comsumption;
+    public void setAverage_consumption(String average_consumption) {
+        this.average_consumption = average_consumption;
     }
 
     public String getValid() {
