@@ -1,6 +1,9 @@
 package com.rongyi.core.bean;
 
+import java.io.Serializable;
+
 import net.sf.json.JSONObject;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
@@ -152,9 +155,13 @@ public class ResponseData implements java.io.Serializable {
                     .toString();
         }
     }
-
-    public static class Meta {
-        private int errno; //错误码
+    
+    public static class Meta implements Serializable{
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private int errno; //错误码
         private String msg;  //提示信息
 
         private Meta() {}
