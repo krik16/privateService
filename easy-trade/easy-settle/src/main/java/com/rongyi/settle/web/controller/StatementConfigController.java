@@ -262,7 +262,7 @@ public class StatementConfigController extends BaseController {
         LOGGER.info("====config copy==== params={}", map.toString());
         ResponseData responseData;
         try {
-            responseData = accessService.check(request, "FNC_STL_COPY");
+            responseData = accessService.check(request, "FNC_STL_CHANGE");
             if (responseData.getMeta().getErrno() != 0) {
                 return responseData;
             }
