@@ -29,7 +29,11 @@ import org.apache.commons.lang.builder.ToStringStyle;
  */
 public class ResponseData implements java.io.Serializable {
 
-    private static final Meta SUCCESS = new Meta(0, "success"); //成功
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private static final Meta SUCCESS = new Meta(0, "success"); //成功
     private static final Meta FAILURE = new Meta(1, "failure"); //失败
 
     private Meta meta; // errno=0：成功,errno=1:失败
