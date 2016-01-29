@@ -26,19 +26,18 @@ public class CityDocument implements Serializable{
     //private String icon;
     private String var_name_chinese;
 
-    private String text;
 
-    private String type;
+    private String type;//省市区 商城类型
 
-    private String area1;
+    private String area1;//地区所在省
 
-    private String area2;
+    private String area2;//地区所在市
 
-    private String area3;
+    private String area3;//地区所在区
 
-    private String area4;
+    private String area4;//地区所在商圈
 
-    private String zone;
+    private String zone;//1表示城市或者区
 
     /*private String slug;
 
@@ -67,7 +66,7 @@ public class CityDocument implements Serializable{
             return;
         if(StringUtils.isNotBlank(zone.getName())){
             this.setVar_name_chinese(Pinyin4jUtil.tripBracket(zone.getName()));
-            this.setText(Pinyin4jUtil.tripBracket(zone.getName()));
+            //this.setText(Pinyin4jUtil.tripBracket(zone.getName()));
         }
         this.setType(zone.get_type());
         if(StringUtils.isNotBlank(zone.get_type())
@@ -150,13 +149,6 @@ public class CityDocument implements Serializable{
         this.var_name_chinese = var_name_chinese;
     }
 
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
 
     public String getType() {
         return type;
