@@ -78,7 +78,7 @@ public class MallsDocument implements java.io.Serializable{
 	private ArrayList<String> aliases;//别名
 	private String floor;//楼层
 	private String slug;//名称拼音
-	private List<ObjectId> parent_ids;
+	//private List<ObjectId> parent_ids;
 
 	public MallsDocument() {
 	}
@@ -100,9 +100,9 @@ public class MallsDocument implements java.io.Serializable{
 		mall_valid=Integer.toString(zone.getMall_valid());
 		if(StringUtils.isNotBlank(zone.getBusiness_status()))
 			business_status=zone.getBusiness_status();
-		if(CollectionUtils.isNotEmpty(zone.getParent_ids())){
+		/*if(CollectionUtils.isNotEmpty(zone.getParent_ids())){
 			parent_ids=zone.getParent_ids();
-		}
+		}*/
 		if(StringUtils.isNotBlank(zone.getRecommend()))
 			recommend=zone.getRecommend();
 		else
@@ -443,13 +443,13 @@ public class MallsDocument implements java.io.Serializable{
 		this.slug = slug;
 	}
 
-	public List<ObjectId> getParent_ids() {
+	/*public List<ObjectId> getParent_ids() {
 		return parent_ids;
 	}
 
 	public void setParent_ids(List<ObjectId> parent_ids) {
 		this.parent_ids = parent_ids;
-	}
+	}*/
 
 	/*private boolean has_activity=false;
 
