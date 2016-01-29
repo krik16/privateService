@@ -46,7 +46,7 @@ public class BrandDocument implements Serializable{
     @Field
     private ArrayList<String> aliases;//别名
     @Field
-    private String shopCount;
+    private String shopcount;
     //进行空值判断，不建索引，1表示有值
     @Field
     private String tags;
@@ -182,12 +182,12 @@ public class BrandDocument implements Serializable{
         this.aliases = aliases;
     }
 
-    public String getShopCount() {
-        return shopCount;
+    public String getShopcount() {
+        return shopcount;
     }
 
-    public void setShopCount(String shopCount) {
-        this.shopCount = shopCount;
+    public void setShopcount(String shopcount) {
+        this.shopcount = shopcount;
     }
 
     public String getTags() {
