@@ -1,6 +1,6 @@
 package com.rongyi.rss.activity.push;
 
-import com.rongyi.easy.activity.entity.dto.PushMessageDTO;
+import com.rongyi.easy.msgcenter.PushMessageDTO;
 
 /**
  * Description:

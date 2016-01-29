@@ -112,6 +112,11 @@ public class PaymentEntity implements Serializable {
 	private String refundRejected;
 
 	/**
+	 * 微信支付商户账号b表对应id
+	 */
+	private Integer weixinMchId;
+
+	/**
 	 * 主键id
 	 * 
 	 * @return id
@@ -386,5 +391,13 @@ public class PaymentEntity implements Serializable {
 
 	public void setRefundRejected(String refundRejected) {
 		this.refundRejected = refundRejected;
+	}
+
+	public Integer getWeixinMchId() {
+		return weixinMchId;
+	}
+
+	public void setWeixinMchId(Integer weixinMchId) {
+		this.weixinMchId = weixinMchId;
 	}
 }
