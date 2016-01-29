@@ -339,6 +339,9 @@ public class ExcelUtils {
 
                 XSSFCell shopNameStr = row15.createCell(19);
                 shopNameStr.setCellValue(couponCodeExcelDto.getShopName());
+
+                XSSFCell sourceStr = row15.createCell(20);
+                sourceStr.setCellValue(couponCodeExcelDto.getSource());
             }
         }
 
@@ -410,6 +413,9 @@ public class ExcelUtils {
 
                 XSSFCell phone = rowOrder.createCell(14);
                 phone.setCellValue(encryptPhone(orderDetail.getBuyerPhone()));
+
+                XSSFCell source = rowOrder.createCell(15);
+                source.setCellValue(orderDetail.getOrderSource());
             }
         }
 

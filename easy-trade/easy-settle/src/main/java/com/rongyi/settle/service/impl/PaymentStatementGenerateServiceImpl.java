@@ -46,6 +46,8 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
         for (StatementConfig statementConfig : statementConfigList) {
             try {
                 Integer spacingDays = statementConfig.getCycleDay();
+                if (spacingDays == null || spacingDays == 0)
+                    spacingDays = 1;
                 DateTime settleDay = new DateTime(statementConfig.getEffectStartTime());
                 settleDay = settleDay.plusDays(spacingDays);
                 DateTime settleEndDay = new DateTime(statementConfig.getEffectEndTime());
@@ -55,9 +57,9 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
                     if (Days.daysBetween(currentDateTime, settleDay).getDays() == 0) {
                         Date settlePeriodFirstSecond = DateUtils.getSomedayFirstSecond(spacingDays);
                         Date settlePeriodLastSecond;
-                        if(currentDateTime.isAfter(settleEndDay)){
+                        if (currentDateTime.isAfter(settleEndDay)) {
                             settlePeriodLastSecond = DateUtils.getAllocatedDayLastSecond(statementConfig.getEffectEndTime());
-                        }else{
+                        } else {
                             settlePeriodLastSecond = DateUtils.getYesterdayLastSecond();
                         }
                         List<PaymentStatement> paymentStatements = paymentStatementService.selectByCycleTime(statementConfig.getId(), settlePeriodFirstSecond, settlePeriodLastSecond);
