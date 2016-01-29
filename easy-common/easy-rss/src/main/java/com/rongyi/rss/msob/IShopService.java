@@ -140,7 +140,7 @@ public interface IShopService{
 	/**
 	 * 根据店铺名模糊获取店铺所在商场下的店铺列表
 	 * 
-	 * @param mallName
+	 * @param
 	 * @return
 	 * @throws Exception
 	 */
@@ -171,8 +171,8 @@ public interface IShopService{
 	
 	/**
 	 * 验券成功后，发消息通知买家
-	 * @param IMIds
-	 * @param body
+	 * @param userId
+	 * @param shopMid
 	 * @throws Exception
 	 */
 	public void sendShopMessageToIMUser(final String userId, final String shopMid) throws Exception;
@@ -216,3 +216,4 @@ public interface IShopService{
 	 */
 	List<ShopInfoEntity> getShopsByMallId(String filialeId)throws Exception;
 }
+

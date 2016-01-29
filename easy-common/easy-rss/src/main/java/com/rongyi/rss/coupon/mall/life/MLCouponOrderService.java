@@ -5,11 +5,12 @@ import com.rongyi.easy.coupon.entity.CouponOrder;
 import com.rongyi.easy.coupon.entity.CouponOrderItem;
 import com.rongyi.easy.coupon.param.CouponOrderParam;
 import com.rongyi.easy.malllife.vo.CouponRefundDetailVO;
+import com.rongyi.easy.coupon.param.WechatPaySignParam;
 import com.rongyi.easy.rmmm.param.OrderListParam;
 import com.rongyi.easy.tradecenter.vo.CouponOrderVO;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Map; 
 
 
 /**
@@ -164,6 +165,7 @@ public interface MLCouponOrderService {
      * @return
      */
     CouponOrderVO findOrderDetailByOrderNo(String orderNo);
+ 
 
     /**
      * 优惠券订单列表（全部、待付款）
@@ -249,4 +251,6 @@ public interface MLCouponOrderService {
       * @return
       */
      CouponRefundDetailVO getRefundDetail(Integer refundId);
+     public Map<String, Object> generateWechatPaySign(WechatPaySignParam param);
+     
 }

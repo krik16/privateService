@@ -21,6 +21,8 @@ public class LoginByCodeVO implements Serializable{
     private String       pushChanelId;//百度推送服务ID app传给后台
     private String      lastSignInIp;//最新登录Ip地址
     private String      openId;//微信
+    private String appId; //商家公众号Id
+
 
     public String getShareCode() {
         return shareCode;
@@ -84,5 +86,13 @@ public class LoginByCodeVO implements Serializable{
 
     public void setOpenId(String openId) {
         this.openId = openId;
+    }
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
     }
 }

@@ -90,6 +90,9 @@ public interface ROAShopService {
      * @throws Exception
      */
     public BrandShopDetailVO getBrandShopDetail(String shopId, UserInfoVO user) throws Exception;
+ 
+
+ 
     /**
 	 * 微商城商品所在店铺信息V0116
 	 * @param shopId
@@ -137,7 +140,7 @@ public interface ROAShopService {
     /**
      * 根据店铺名模糊获取店铺所在商场下的店铺列表
      *
-     * @param mallName
+     * @param
      * @return
      * @throws Exception
      */
@@ -173,8 +176,8 @@ public interface ROAShopService {
     /**
      * 验券成功后，发消息通知买家
      *
-     * @param IMIds
-     * @param body
+     * @param
+     * @param
      * @throws Exception
      */
     public void sendShopMessageToIMUser(final String userId, final String shopMid) throws Exception;

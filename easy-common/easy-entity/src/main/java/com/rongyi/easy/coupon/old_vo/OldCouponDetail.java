@@ -19,6 +19,12 @@ public class OldCouponDetail implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer id;
+    
+    private String orderNo;//订单编号
+    
+    private String orderTime;//下单时间
+    
+    private String payTime;//支付时间
 
     private String title;//券名称
 
@@ -142,8 +148,32 @@ public class OldCouponDetail implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+    
+    public String getOrderNo() {
+		return orderNo;
+	}
 
-    //新版本废弃
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
+	}
+	
+	public String getOrderTime() {
+		return orderTime;
+	}
+
+	public void setOrderTime(String orderTime) {
+		this.orderTime = orderTime;
+	}
+
+	public String getPayTime() {
+		return payTime;
+	}
+
+	public void setPayTime(String payTime) {
+		this.payTime = payTime;
+	}
+
+	//新版本废弃
     @Deprecated
     public String getActivityCode() {
         return activityCode;
