@@ -48,14 +48,7 @@ public interface ActivityService {
 	 * @author wangzhiwen
  	 */
      public List<ActivityGoods> getActivityGoodsInfo(QueryActivityGoods queryActivityGoods);
-     
-     /**
-      * 批量新增ActivityGoods数据
-      * @param ActivityGoods
-      * @return 
-	  * @author wangzhiwen
-      */
-     public int batchInsert(List<ActivityGoods> listActivityGoods);
+
      /**
       * 新增ActivityGoods数据返回Id
       * @param activityGoods
@@ -125,7 +118,13 @@ public interface ActivityService {
      */
     ResponseVO saveActivityGoods(ActivityGoodsImportParam param);
 
-
+    /**
+     * 批量新增ActivityGoods数据
+     * @param ActivityGoods
+     * @return boolean
+     * @author Leon
+     */
+    boolean batchInsertGoods(List<ActivityGoods> ActivityGoods);
 
 
 

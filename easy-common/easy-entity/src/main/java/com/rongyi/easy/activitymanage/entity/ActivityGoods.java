@@ -41,24 +41,27 @@ public class ActivityGoods implements Serializable {
 
     private Integer version;
 
+    /**
+     * 商品规格
+     */
+    private List<ActivityGoodsSpec>  activityGoodsSpecs;
+
+    /**
+     * 商品分类
+     */
+    private List<ActivityGoodsCategory> activityGoodsCategories;
+
     public ActivityGoods(int type){
 		this.type=type;
 	}
 
-	public ActivityGoods(String goodsId){
+    public ActivityGoods() {
+    }
+
+    public ActivityGoods(String goodsId){
 		this.goodsId=goodsId;
 	}
 
-    private List<ActivityGoodsSpec> listActivityGoodsSpec;//提交时列表集合
-
-    public List<ActivityGoodsSpec> getListActivityGoodsSpec() {
-		return listActivityGoodsSpec;
-	}
-
-	public void setListActivityGoodsSpec(
-			List<ActivityGoodsSpec> listActivityGoodsSpec) {
-		this.listActivityGoodsSpec = listActivityGoodsSpec;
-	}
     public Integer getId() {
         return id;
     }
@@ -195,6 +198,22 @@ public class ActivityGoods implements Serializable {
         this.version = version;
     }
 
+    public List<ActivityGoodsSpec> getActivityGoodsSpecs() {
+        return activityGoodsSpecs;
+    }
+
+    public void setActivityGoodsSpecs(List<ActivityGoodsSpec> activityGoodsSpecs) {
+        this.activityGoodsSpecs = activityGoodsSpecs;
+    }
+
+    public List<ActivityGoodsCategory> getActivityGoodsCategories() {
+        return activityGoodsCategories;
+    }
+
+    public void setActivityGoodsCategories(List<ActivityGoodsCategory> activityGoodsCategories) {
+        this.activityGoodsCategories = activityGoodsCategories;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -215,7 +234,8 @@ public class ActivityGoods implements Serializable {
                 .append("updateAt", updateAt)
                 .append("isDeleted", isDeleted)
                 .append("version", version)
-                .append("listActivityGoodsSpec", listActivityGoodsSpec)
+                .append("activityGoodsSpecs", activityGoodsSpecs)
+                .append("activityGoodsCategories", activityGoodsCategories)
                 .toString();
     }
 }

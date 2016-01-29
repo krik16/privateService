@@ -15,6 +15,15 @@ public interface ActivityConstants {
     }
 
     /**
+     * 商品审核状态
+     */
+    interface ActivityGoodsCheckStatus {
+        Integer NO_CHECK = 0;
+        Integer CHECK_FAILURE = 1;
+        Integer CHECK_SUCCESS = 2;
+    }
+
+    /**
      * label 类型
      */
     interface  GoodsLabelType{
@@ -61,6 +70,16 @@ public interface ActivityConstants {
         String COUPON_STR = "卡券";
         Integer COMMODITY_INT = 0;
         Integer COUPON_INT = 1;
+    }
+
+    /**
+     * activityGoodsType 类型
+     */
+    interface ActivityGoodsType {
+        Integer REDVEN = 0;//红包
+        Integer VOUCHER = 1;//代金券
+        Integer REBATE = 2;//抵扣券
+        Integer COMMODITY = 3;//商品
     }
 
 }
