@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 @SuppressWarnings("serial")
-@Entity(value="category",noClassnameStored=true)
+@Entity(value="categories",noClassnameStored=true)
 public class CategoryEntity implements java.io.Serializable{
 
 	/**
