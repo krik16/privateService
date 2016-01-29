@@ -1,11 +1,17 @@
 package com.rongyi.easy.ryoms.entity;
 
+import java.io.Serializable;
+
 /**
  * 微信号与美味不用等对应关系
  * @author 苏娟
  *
  */
-public class MeiweiWechatVo {
+public class MeiweiWechatVo implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Integer wechatId;
 	private String mallId;

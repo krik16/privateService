@@ -1,11 +1,17 @@
 package com.rongyi.easy.ryoms.entity;
 
+import java.io.Serializable;
+
 /**
  * 微信号支付信息
  * @author user
  *
  */
-public class WechatPayVo {
+public class WechatPayVo implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Integer wechatId;
 	private String mchId;           //商户号
