@@ -261,6 +261,12 @@ public class PaymentServiceTest extends BaseTest {
 		System.err.println("payNo={}"+paymentEntity.getPayNo());
 	}
 
+	@Test
+	public void testGetWeixinSendMessage(){
+		MessageEvent rpbEvent2 = getRpbEvent("rob", "5");
+		paymentService.getSendMessage(rpbEvent2);
+	}
+
 	public static void main(String[] args){
 		String id="1";
 		String ids="1,2";

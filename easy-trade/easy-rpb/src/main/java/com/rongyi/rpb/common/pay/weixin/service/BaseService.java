@@ -29,15 +29,18 @@ public class BaseService{
         serviceRequest = (IServiceRequest) c.newInstance();
     }
 
-    protected String sendPost(Object xmlObj) throws UnrecoverableKeyException, IOException, NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
-        return serviceRequest.sendPost(apiURL,xmlObj);
+    protected String sendPost(Object xmlObj,Configure configure) throws UnrecoverableKeyException, IOException, NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
+        return serviceRequest.sendPost(apiURL,xmlObj,configure);
     }
+//
+//    protected String sendPost(Object xmlObj,Integer weixinMchId) throws UnrecoverableKeyException, IOException, NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
+//        Configure configure = new Configure(weixinMchId);
+//        return serviceRequest.sendPost(apiURL,xmlObj,configure);
+//    }
+//
+//    protected String sendPost(Object xmlObj,String publicCode,String mailId) throws UnrecoverableKeyException, IOException, NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
+//        Configure configure = new Configure(publicCode,mailId);
+//        return serviceRequest.sendPost(apiURL,xmlObj,configure);
+//    }
 
-    /**
-     * 供商户想自定义自己的HTTP请求器用
-     * @param request 实现了IserviceRequest接口的HttpsRequest
-     */
-    public void setServiceRequest(IServiceRequest request){
-        serviceRequest = request;
-    }
 }

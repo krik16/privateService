@@ -20,12 +20,12 @@ public class RefundQueryService extends BaseService{
      * @return API返回的XML数据
      * @throws Exception
      */
-    public String request(RefundQueryReqData refundQueryReqData) throws Exception {
+    public String request(RefundQueryReqData refundQueryReqData,Configure configure) throws Exception {
 
         //--------------------------------------------------------------------
         //发送HTTPS的Post请求到API地址
         //--------------------------------------------------------------------
-        String responseString = sendPost(refundQueryReqData);
+        String responseString = sendPost(refundQueryReqData,configure);
 
         return responseString;
     }

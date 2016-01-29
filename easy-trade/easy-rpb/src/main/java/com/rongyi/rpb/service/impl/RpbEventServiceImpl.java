@@ -15,9 +15,9 @@ import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rpb.service.RpbEventService;
 
 /**
- * @Author: 柯军
- * @Description: MQ接口信息类
- * @datetime:2015年4月23日上午10:05:06
+ * Author: 柯军
+ * Description: MQ接口信息类
+ * datetime:2015年4月23日上午10:05:06
  * 
  **/
 @Service
@@ -43,7 +43,7 @@ public class RpbEventServiceImpl extends BaseServiceImpl implements RpbEventServ
 	@Override
 	public MessageEvent getMessageEvent(String payNo, String orderNum, String orderDetailNum, String payChannel,String payAccount, String source, String target, String type) {
 		MessageEvent event = new MessageEvent();
-		Map<String, Object> bodyMap = new HashMap<String, Object>();
+		Map<String, Object> bodyMap = new HashMap<>();
 		bodyMap.put("orderNum", orderNum);
 		if (StringUtils.isNotEmpty(orderDetailNum))
 			bodyMap.put("orderDetailNum", orderDetailNum);

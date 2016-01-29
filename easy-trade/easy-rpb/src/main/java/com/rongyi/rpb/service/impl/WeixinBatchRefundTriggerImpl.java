@@ -15,9 +15,9 @@ import com.rongyi.rpb.service.WeixinPayService;
 import com.rongyi.rss.service.trigger.WeixinBatchRefundTrigger;
 
 /**	
- * @Author:  柯军
- * @Description: 微信定时打款 
- * @datetime:2015年9月14日上午11:07:32
+ * Author:  柯军
+ * Description: 微信定时打款
+ * datetime:2015年9月14日上午11:07:32
  *
  **/
 @Service

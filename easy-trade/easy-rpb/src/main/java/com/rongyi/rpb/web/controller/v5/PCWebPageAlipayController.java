@@ -39,9 +39,6 @@ public class PCWebPageAlipayController extends BaseController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(PCWebPageAlipayController.class);
 
 	@Autowired
-	private PCWebPageAlipayService pcWebPageAlipayService;
-
-	@Autowired
 	private PaymentLogInfoService paymentLogInfoService;
 
 	@Autowired
@@ -77,11 +74,11 @@ public class PCWebPageAlipayController extends BaseController {
 		PaymentLogInfo result = paymentLogInfoService.selectByNotifyId(notify_id);
 		if (result != null)
 			return null;
-		List<PaymentEntity> allList = new ArrayList<PaymentEntity>();
+		List<PaymentEntity> allList = new ArrayList<>();
 		if(success_details != null){
 			LOGGER.info("支付宝打款成功记录,success_details={}", success_details);
 			String[] detailList = success_details.split("\\|");
-			if (detailList != null && detailList.length > 0) {
+			if (detailList.length > 0) {
 				for (String details : detailList) {
 					PaymentLogInfo paymentLogInfo = new PaymentLogInfo();
 					parsPayDetail(paymentLogInfo, details);
@@ -129,8 +126,8 @@ public class PCWebPageAlipayController extends BaseController {
 	 * @datetime:2015年5月21日上午11:53:11
 	 **/
 	public void paySuccessToMessage(List<PaymentEntity> list, Integer tradeType) {
-		List<PayNotifyVO> payNotifylist = new ArrayList<PayNotifyVO>();
-		Map<String, Object> bodyMap = new HashMap<String, Object>();
+		List<PayNotifyVO> payNotifylist = new ArrayList<>();
+		Map<String, Object> bodyMap = new HashMap<>();
 		for (PaymentEntity paymentEntity : list) {
 			PayNotifyVO payNotifyVO = new PayNotifyVO();
 			payNotifyVO.setDrawNo(paymentEntity.getOrderNum());
@@ -155,16 +152,14 @@ public class PCWebPageAlipayController extends BaseController {
 
 	private PaymentLogInfo parsPayDetail(PaymentLogInfo paymentLogInfo, String details) {
 		String[] detail = details.split("\\^");
-		if (detail != null) {
-			if (detail.length > 0)
-				paymentLogInfo.setOutTradeNo(detail[0]);// 订单号是流水号8位之后的值
-			if (detail.length > 1)
-				paymentLogInfo.setBuyer_email(detail[1]);
-			if (detail.length > 3)
-				paymentLogInfo.setTotal_fee(Double.valueOf(detail[3]));
-			if (detail.length > 6)
-				paymentLogInfo.setTrade_no(detail[6]);
-		}
+		if (detail.length > 0)
+			paymentLogInfo.setOutTradeNo(detail[0]);// 订单号是流水号8位之后的值
+		if (detail.length > 1)
+			paymentLogInfo.setBuyer_email(detail[1]);
+		if (detail.length > 3)
+			paymentLogInfo.setTotal_fee(Double.valueOf(detail[3]));
+		if (detail.length > 6)
+			paymentLogInfo.setTrade_no(detail[6]);
 		return paymentLogInfo;
 	}
 
@@ -195,7 +190,6 @@ public class PCWebPageAlipayController extends BaseController {
 		}
 		LOGGER.info("支付宝退款成功异步通知开始");
 		String[] batchDetail = result_details.split("#");
-		if (batchDetail != null) {
 			try {
 				for (int i = 0; i < batchDetail.length; i++) {
 					PaymentLogInfo paymentLogInfo = new PaymentLogInfo();
@@ -226,21 +220,20 @@ public class PCWebPageAlipayController extends BaseController {
 							LOGGER.info("更改退款项状态 0--->2,退款单号={}", refundPaymentEntity.getPayNo());
 							paymentService.updateListStatusBypayNo(refundPaymentEntity.getPayNo(), refundPaymentEntity.getTradeType(), Constants.PAYMENT_STATUS.STAUS2);// 修改打款状态
 							//正常退款的才会发送退款消息，重复支付的退款无需发送退款通知
-							if(refundPaymentEntity.getTradeType() == Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1) {
+							if (refundPaymentEntity.getTradeType() == Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1) {
 								refundNotifyMq(refundPaymentEntity);
 							}
 						} else {
 							LOGGER.info("订单不存在，退款状态更新失败,tradeNo={},batchNo={}", paymentLogInfo.getTrade_no(), batch_no);
 						}
-					}else if(details != null){//退款失败处理，更新付款状态为待付款
-						LOGGER.info("支付宝退款失败，不更新退款状态,result_details={}",result_details);
+					} else{//退款失败处理，更新付款状态为待付款
+						LOGGER.info("支付宝退款失败，不更新退款状态,result_details={}", result_details);
 					}
 				}
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
 		LOGGER.info("支付宝退款成功异步通知结束");
 		return "payManager/notify";
 	}
@@ -252,7 +245,7 @@ public class PCWebPageAlipayController extends BaseController {
 	 * @datetime:2015年7月12日上午10:22:20
 	 **/
 	private void refundNotifyMq(PaymentEntity refundPaymentEntity) {
-		Map<String, Object> bodyMap = new HashMap<String, Object>();
+		Map<String, Object> bodyMap = new HashMap<>();
 		bodyMap.put("orderNum", refundPaymentEntity.getOrderNum());
 		bodyMap.put("totalPrice", refundPaymentEntity.getAmountMoney());
 		bodyMap.put("paymentId", refundPaymentEntity.getPayNo());

@@ -1,5 +1,7 @@
 package com.rongyi.rpb.common.pay.weixin.service;
 
+import com.rongyi.rpb.common.pay.weixin.util.Configure;
+
 import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
@@ -15,6 +17,6 @@ import java.security.UnrecoverableKeyException;
 public interface IServiceRequest {
 
     //Service依赖的底层https请求器必须实现这么一个接口
-    public String sendPost(String api_url,Object xmlObj) throws UnrecoverableKeyException, KeyManagementException, NoSuchAlgorithmException, KeyStoreException, IOException;
+    public String sendPost(String api_url,Object xmlObj,Configure configure) throws UnrecoverableKeyException, KeyManagementException, NoSuchAlgorithmException, KeyStoreException, IOException;
 
 }

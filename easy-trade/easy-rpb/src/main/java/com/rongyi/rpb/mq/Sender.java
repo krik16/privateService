@@ -25,9 +25,9 @@ import com.rabbitmq.client.Channel;
 import com.rongyi.easy.mq.MessageEvent;
 
 /**
- * @Author: 柯军
- * @Description: mq sender
- * @datetime:2015年6月1日下午6:17:04
+ * Author: 柯军
+ * Description: mq sender
+ * datetime:2015年6月1日下午6:17:04
  * 
  **/
 @Component
@@ -41,21 +41,21 @@ public class Sender {
 //    private Map<String, Notification> syscNotifyMap = new HashMap<String, Notification>();
 
     /**
-     * @Description: 消息发送
-     * @param messageMap
-     * @param routingKey
-     * @Author: 柯军
-     * @datetime:2015年6月2日上午10:01:53
+     * Description: 消息发送
+     * @param messageMap 消息内容
+     * @param routingKey key
+     * Author: 柯军
+     * datetime:2015年6月2日上午10:01:53
      **/
     public  void convertAndSend(Map<String, Object> messageMap, String routingKey) {
         toConvertAndSend(messageMap, routingKey);
     }
 
     /**
-     * @Description: 消息发送
+     * Description: 消息发送
      * @param event 封装对象
-     * @Author: 柯军
-     * @datetime:2015年6月2日上午10:01:58
+     * Author: 柯军
+     * datetime:2015年6月2日上午10:01:58
      **/
     public  void convertAndSend(MessageEvent event) {
         toConvertAndSend(event, event.getTarget());
@@ -68,22 +68,22 @@ public class Sender {
     }
 
     /**
-     * @Description: 消息发送并获得返回信息
+     * Description: 消息发送并获得返回信息
      * @param event 封装对象
-     * @Author: 柯军
-     * @datetime:2015年6月2日下午3:54:23
+     * Author: 柯军
+     * datetime:2015年6月2日下午3:54:23
      **/
     public  String convertSendAndReceive(MessageEvent event) {
         return toConvertSendAndReceive(event.getTarget(), event);
     }
 
     /**
-     * @Description: 消息发送并获得返回信息
-     * @param routingKey
-     * @param messageMap
+     * Description: 消息发送并获得返回信息
+     * @param routingKey key
+     * @param messageMap 消息内容
      * @return
-     * @Author: 柯军
-     * @datetime:2015年6月2日下午3:59:38
+     * Author: 柯军
+     * datetime:2015年6月2日下午3:59:38
      **/
     public  String convertSendAndReceive(String routingKey, Map<String, Object> messageMap) {
         return toConvertSendAndReceive(routingKey, messageMap);
@@ -101,12 +101,12 @@ public class Sender {
     }
 
     /**
-     * @Description: rpc调用，同步返回信息
-     * @param messageMap
-     * @param message
-     * @param channel
-     * @Author: 柯军
-     * @datetime:2015年6月1日下午6:11:37
+     * Description: rpc调用，同步返回信息
+     * @param messageMap 消息内容
+     * @param message Message
+     * @param channel Channel
+     * Author: 柯军
+     * datetime:2015年6月1日下午6:11:37
      **/
     public void rpcSend(Map<String, Object> messageMap, Message message, Channel channel) {
         try {
@@ -120,11 +120,11 @@ public class Sender {
     }
 
     /**
-     * @Description: 将 Message messageProperties 转换为 channel 使用的BasicProperties
-     * @param message
+     * Description: 将 Message messageProperties 转换为 channel 使用的BasicProperties
+     * @param message Message
      * @return
-     * @Author: 柯军
-     * @datetime:2015年6月2日下午5:51:57
+     * Author: 柯军
+     * datetime:2015年6月2日下午5:51:57
      **/
     public static BasicProperties getBasicProperties(Message message) {
         MessageProperties messageProperties = message.getMessageProperties();

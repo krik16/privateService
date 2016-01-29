@@ -7,61 +7,70 @@ import com.rongyi.rpb.Exception.TradeException;
 import com.rongyi.rpb.Exception.WeixinException;
 import com.rongyi.rpb.common.pay.weixin.model.*;
 import com.rongyi.rpb.common.pay.weixin.service.*;
-import com.rongyi.rpb.common.pay.weixin.util.Signature;
-import com.rongyi.rpb.common.pay.weixin.util.Util;
-import com.rongyi.rpb.common.pay.weixin.util.WXUtil;
-import com.rongyi.rpb.common.pay.weixin.util.XMLParser;
+import com.rongyi.rpb.common.pay.weixin.util.*;
 import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.ConstantUtil;
 import com.rongyi.rpb.constants.Constants;
+import com.rongyi.rpb.service.WeixinConfigService;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by kejun on 2015/11/25.
- */
+
 @Component
 public class WeixinPayUnit {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WeixinPayUnit.class);
 
 
+    @Autowired
+    WeixinConfigService weixinConfigService;
     /**
-     * @param payNo
-     * @param totalFee
-     * @param body
-     * @return
-     * @Description: 获取微信支付签名
-     * @Author: 柯军
-     * @datetime:2015年9月2日下午1:32:08
+     * param paySignData
+     * return 获取微信支付签名
+     * 柯军
+     * 2015年9月2日下午1:32:08
      **/
-    public Map<String, Object> getWeXinPaySign(String payNo, Integer totalFee, String body, String timeStart, String timeExpire) {
-        LOGGER.info("getAppWeXinSign payNo={},totalFee={},body={},timeStart={},timeExpire={}", payNo, totalFee, body, timeStart, timeExpire);
-        Map<String, Object> map = new HashMap<String, Object>();
+    public Map<String, Object> getWeXinPaySign(PaySignData paySignData) {
+        LOGGER.info("getAppWeXinSign paySignData", paySignData.toString());
+        Map<String, Object> map = new HashMap<>();
         try {
-            if (Strings.isNullOrEmpty(payNo) || null == totalFee || Strings.isNullOrEmpty(body) || Strings.isNullOrEmpty(timeStart) || Strings.isNullOrEmpty(timeExpire)) {
+            if (Strings.isNullOrEmpty(paySignData.getPayNo()) || null == paySignData.getTotalFee() || Strings.isNullOrEmpty(paySignData.getBody()) || Strings.isNullOrEmpty(paySignData.getTimeStart())
+                    || Strings.isNullOrEmpty(paySignData.getTimeExpire())) {
                 throw new ParamNullException();
             }
-            UnifedOrderReqData unifedOrderReqData = new UnifedOrderReqData(body, payNo, totalFee, ConstantUtil.PayWeiXin_V3.WEIXIN_NOTIFY_URL, ConstantUtil.PayWeiXin_V3.TRADE_TYPE, timeStart, timeExpire);
+            Configure configure = weixinConfigService.initConfigure(paySignData.getAppId(),paySignData.getWeixinPayType());
+            UnifedOrderReqData unifedOrderReqData = new UnifedOrderReqData(paySignData.getBody(), paySignData.getPayNo(), paySignData.getTotalFee().intValue(), ConstantUtil.PayWeiXin_V3.WEIXIN_NOTIFY_URL,
+                    paySignData.getTimeStart(), paySignData.getTimeExpire(), paySignData.getOpenId(),configure);
             UnifiedorderService unifiedorderService = new UnifiedorderService();
-            String result = unifiedorderService.request(unifedOrderReqData);
-            LOGGER.info("签名结果 result={}",result);
+            String result = unifiedorderService.request(unifedOrderReqData,configure);
+            LOGGER.info("result={}",result);
             String timestamp = WXUtil.getTimeStamp();
             Map<String, Object> resultMap = XMLParser.getMapFromXML(result);
             if (resultMap != null) {
-                map.put("appid", ConstantUtil.PayWeiXin_V3.APP_ID);
-                map.put("partnerid", ConstantUtil.PayWeiXin_V3.MCH_ID);
-                map.put("package", "Sign=WXPay");
-                map.put("prepayid", resultMap.get("prepay_id"));
-                map.put("noncestr", resultMap.get("nonce_str"));
-                map.put("timestamp", timestamp);
-                String sign = Signature.getSign(map);
+                if (ConstantEnum.WEIXIN_PAY_TRADE_TYPE_APP.getValueStr().equals(configure.getTradeType())) {//APP支付签名
+                    map.put("timestamp", timestamp);
+                    map.put("appid", configure.getAppID());
+                    map.put("partnerid", configure.getMchID());
+                    map.put("package", "Sign=WXPay");
+                    if(resultMap.get("prepay_id") == null)
+                        throw new WeixinException(ConstantEnum.EXCEPTION_WEIXIN_SIGN_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_SIGN_FAIL.getValueStr());
+                    map.put("prepayid", resultMap.get("prepay_id"));
+                    map.put("noncestr", resultMap.get("nonce_str"));
+                } else {//微信公众号支付签名
+                    map.put("timeStamp", timestamp);
+                    map.put("appId", configure.getAppID());
+                    map.put("signType", "MD5");
+                    map.put("package", "prepay_id="+resultMap.get("prepay_id"));
+                    map.put("nonceStr", resultMap.get("nonce_str"));
+                }
+                String sign = Signature.getSign(map,configure.getKey());
                 map.put("app_signature", sign);
             }
         } catch (WeixinException e) {
@@ -73,7 +82,12 @@ public class WeixinPayUnit {
         return map;
     }
 
-    public RefundResData weixinRefund(String payNo, double refundFee, double totalFee, String newPayNo) {
+    /**
+     *退款
+     * author 柯军
+     **/
+
+    public RefundResData weixinRefund(String payNo, double refundFee, double totalFee, String newPayNo,Integer weixinMchId) {
         LOGGER.info("开始退款,weixinRefund payNo={},refundFee={},totalFee={},newPayNo={}", payNo, refundFee, totalFee, newPayNo);
         try {
             if (Strings.isNullOrEmpty(payNo) || refundFee < 0d || totalFee < refundFee || Strings.isNullOrEmpty(newPayNo)) {
@@ -82,8 +96,9 @@ public class WeixinPayUnit {
             RefundService refundService = new RefundService();
             BigDecimal bigTotalFee = new BigDecimal(totalFee + "").multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
             BigDecimal bigRefundFee = new BigDecimal(refundFee + "").multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
-            RefundReqData refundReqData = new RefundReqData(null, payNo, null, newPayNo, bigTotalFee.intValue(), bigRefundFee.intValue(), ConstantUtil.PayWeiXin_V3.MCH_ID, null);
-            String result = refundService.request(refundReqData);
+            Configure configure = weixinConfigService.initConfigure(weixinMchId);
+            RefundReqData refundReqData = new RefundReqData(null, payNo, null, newPayNo, bigTotalFee.intValue(), bigRefundFee.intValue(),null,configure);
+            String result = refundService.request(refundReqData,configure);
             RefundResData refundResData = (RefundResData) Util.getObjectFromXML(result, RefundResData.class);
             if (Constants.RESULT.SUCCESS.equals(refundResData.getReturn_code()) && Constants.RESULT.SUCCESS.equals(refundResData.getResult_code())) {// 退款申请成功后查询退款结果
                 LOGGER.info("退款成功,refundResData={}", refundResData);
@@ -101,15 +116,15 @@ public class WeixinPayUnit {
     }
 
     /**
-     * @Description:验证退款查询结果是否正确
-     * @param:tradeNo 交易流水号
-     * @param:payNo 付款单号
-     * @param:refundNo 退款单号
-     * @Author: 柯军
+     * Description:验证退款查询结果是否正确
+     * param:tradeNo 交易流水号
+     * param:payNo 付款单号
+     * param:refundNo 退款单号
+     * Author: 柯军
      **/
 
-    public void checkRefundQueryResult(String tradeNo, String payNo, String refundNo) {
-        RefundQueryResData refundQueryResData = refundQuery(tradeNo, payNo, refundNo);
+    public void checkRefundQueryResult(String tradeNo, String payNo, String refundNo,Integer weixinMchId) {
+        RefundQueryResData refundQueryResData = refundQuery(tradeNo, payNo, refundNo,weixinMchId);
         LOGGER.info("退款申请结果检查,checkRefundQueryResult refundQueryResData={}", refundQueryResData.toString());
         if (ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getCodeStr().equals(refundQueryResData.getRefund_status_0())
                 || ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr().equals(refundQueryResData.getRefund_status_0())) {// 退款成功
@@ -126,21 +141,22 @@ public class WeixinPayUnit {
     }
 
     /**
-     * @Description: 微信退款查询
-     * @param:
-     * @Author: 柯军
+     * Description: 微信退款查询
+     * param:
+     * Author: 柯军
      **/
 
-    public RefundQueryResData refundQuery(String tradeNo, String payNo, String refundNo) {
-        LOGGER.info("退款查询,refundQuery tradeNo={},payNo={},refundNo={}", tradeNo, payNo, refundNo);
-        RefundQueryResData refundQueryResData = new RefundQueryResData();
+    public RefundQueryResData refundQuery(String tradeNo, String payNo, String refundNo,Integer weixinMchId) {
+        LOGGER.info("退款查询,refundQuery tradeNo={},payNo={},refundNo={},weixinMchId={}", tradeNo, payNo, refundNo,weixinMchId);
+        RefundQueryResData refundQueryResData;
         try {
             if (Strings.isNullOrEmpty(tradeNo) && Strings.isNullOrEmpty(payNo) && Strings.isNullOrEmpty(refundNo)) {
                 throw new ParamNullException();
             }
             RefundQueryService refundQueryService = new RefundQueryService();
-            RefundQueryReqData refundQueryReqData = new RefundQueryReqData(tradeNo, payNo, null, refundNo, null);
-            String result = refundQueryService.request(refundQueryReqData);
+            Configure configure = weixinConfigService.initConfigure(weixinMchId);
+            RefundQueryReqData refundQueryReqData = new RefundQueryReqData(tradeNo, payNo, null, refundNo, null,configure);
+            String result = refundQueryService.request(refundQueryReqData,configure);
             refundQueryResData = (RefundQueryResData) Util.getObjectFromXML(result, RefundQueryResData.class);
         } catch (TradeException e) {
             throw e;
@@ -151,15 +167,16 @@ public class WeixinPayUnit {
         return refundQueryResData;
     }
 
-    public void closeOrder(String payNo) {
+    public void closeOrder(String payNo,Integer weixinMchId) {
         LOGGER.info("关闭订单,closeOrder payNo={}", payNo);
         try {
             if (Strings.isNullOrEmpty(payNo)) {
                 throw new ParamNullException();
             }
             ReverseService reverseService = new ReverseService();
-            ReverseReqData reverseReqData = new ReverseReqData(null, payNo);
-            String response = reverseService.request(reverseReqData);
+            Configure configure = weixinConfigService.initConfigure(weixinMchId);
+            ReverseReqData reverseReqData = new ReverseReqData(null, payNo,configure);
+            String response = reverseService.request(reverseReqData,configure);
             if (!response.contains("CDATA[SUCCESS]")) {
                 LOGGER.error("closeOrder fail. response={}", response);
                 throw new WeixinException(ConstantEnum.EXCEPTION_WEIXIN_ORDER_CLOSE.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_ORDER_CLOSE.getValueStr());
@@ -173,21 +190,22 @@ public class WeixinPayUnit {
     }
 
     /**
-     * @Description:订单查询
-     * @param:
-     * @Author: 柯军
+     * Description:订单查询
+     * param:
+     * Author: 柯军
      **/
 
-    public WeixinQueryOrderParamVO queryOrder(String tradeNo, String payNo) {
-        LOGGER.info("订单查询,queryOrder tradeNo={},payNo={}", tradeNo, payNo);
+    public WeixinQueryOrderParamVO queryOrder(String tradeNo, String payNo,Integer weixinMchId) {
+        LOGGER.info("订单查询,queryOrder tradeNo={},payNo={},weixinMchId={}", tradeNo, payNo,weixinMchId);
         String result = null;
         try {
             if (Strings.isNullOrEmpty(tradeNo) && Strings.isNullOrEmpty(payNo)) {
                 throw new ParamNullException();
             }
             PayQueryService payQueryService = new PayQueryService();
-            ScanPayQueryReqData scanPayQueryReqData = new ScanPayQueryReqData(tradeNo, payNo);
-            result = payQueryService.request(scanPayQueryReqData);
+            Configure configure = weixinConfigService.initConfigure(weixinMchId);
+            ScanPayQueryReqData scanPayQueryReqData = new ScanPayQueryReqData(tradeNo, payNo,configure);
+            result = payQueryService.request(scanPayQueryReqData,configure);
             return (WeixinQueryOrderParamVO) Util.getObjectFromXML(result, WeixinQueryOrderParamVO.class);
         } catch (Exception e) {
             LOGGER.info("微信订单查询失败，result={}", result);
