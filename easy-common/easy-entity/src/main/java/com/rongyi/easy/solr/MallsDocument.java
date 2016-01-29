@@ -69,8 +69,8 @@ public class MallsDocument implements java.io.Serializable{
 	private String transport_information;
 	private String business_hours;
 	private String telephone;
-	private String apperance_pic;
-	private String web_apperance_pic;
+	private String appearance_pic;
+	private String web_appearance_pic;
 	private String traffic_pic;
 	private String introduction_pic;
 	private String terminal_logo;
@@ -132,9 +132,9 @@ public class MallsDocument implements java.io.Serializable{
 		if(StringUtils.isNotBlank(zone.getTelephone()))
 			telephone="1";
 		if(StringUtils.isNotBlank(zone.getAppearance_pic()))
-			apperance_pic="1";
+			appearance_pic="1";
 		if(StringUtils.isNotBlank(zone.getWeb_apperance_pic()))
-			web_apperance_pic="1";
+			web_appearance_pic="1";
 		if(StringUtils.isNotBlank(zone.getTraffic_pic()))
 			traffic_pic="1";
 		if(StringUtils.isNotBlank(zone.getIntroduction_pic()))
@@ -371,20 +371,20 @@ public class MallsDocument implements java.io.Serializable{
 		this.telephone = telephone;
 	}
 
-	public String getApperance_pic() {
-		return apperance_pic;
+	public String getAppearance_pic() {
+		return appearance_pic;
 	}
 
-	public void setApperance_pic(String apperance_pic) {
-		this.apperance_pic = apperance_pic;
+	public void setAppearance_pic(String appearance_pic) {
+		this.appearance_pic = appearance_pic;
 	}
 
-	public String getWeb_apperance_pic() {
-		return web_apperance_pic;
+	public String getWeb_appearance_pic() {
+		return web_appearance_pic;
 	}
 
-	public void setWeb_apperance_pic(String web_apperance_pic) {
-		this.web_apperance_pic = web_apperance_pic;
+	public void setWeb_appearance_pic(String web_appearance_pic) {
+		this.web_appearance_pic = web_appearance_pic;
 	}
 
 	public String getTraffic_pic() {
