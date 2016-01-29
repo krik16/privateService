@@ -77,7 +77,7 @@ public class CityDocument implements Serializable{
             if(zone.getParent_ids().size()>=1)
                 this.setArea1(zone.getParent_ids().get(0).toString());
             if(zone.getParent_ids().size()>=2)
-                this.setArea1(zone.getParent_ids().get(1).toString());
+                this.setArea2(zone.getParent_ids().get(1).toString());
             if(zone.getParent_ids().size()>=3)
                 this.setArea3(zone.getParent_ids().get(2).toString());
             if(zone.getParent_ids().size()>=4)
