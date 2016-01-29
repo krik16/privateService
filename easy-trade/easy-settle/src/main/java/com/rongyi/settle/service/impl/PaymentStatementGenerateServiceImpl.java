@@ -141,7 +141,7 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
                         if (settlementStartTime.isBefore(effectStartTime)) {
                             settlementStartTime = effectStartTime;
                         }
-                        settlePeriodFirstSecond = settlementStartTime.toDate();
+                        settlePeriodFirstSecond = DateUtils.getAllocatedDayFirstSecond(settlementStartTime.toDate());
                         settlePeriodLastSecond = DateUtils.getYesterdayLastSecond();
                     } else {
                         continue;
