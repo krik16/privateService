@@ -8,6 +8,7 @@ import com.rongyi.easy.activity.entity.QueryActivityGoods;
 import com.rongyi.easy.activitymanage.entity.*;
 import com.rongyi.easy.activitymanage.param.ActivityGoodsImportParam;
 import com.rongyi.easy.activitymanage.param.SearchActivityParam;
+import com.rongyi.easy.activitymanage.vo.ActivityGoodTemplateVO;
 import com.rongyi.easy.activitymanage.vo.ActivityGoodsImportVO;
 import com.rongyi.easy.activitymanage.vo.ActivityInfoListVO;
 import com.rongyi.easy.activitymanage.vo.ActivityInfoVO;
@@ -146,7 +147,7 @@ public interface ActivityService {
      * @param type
      * @return
      */
-    List<ActivityGoods> selectActivityGoodsByActivity(List<String> ids,Integer activityId,Integer type);
+    List<ActivityGoodTemplateVO> selectActivityGoodsByActivity(List<String> ids,Integer activityId,Integer type);
 
 
 }
