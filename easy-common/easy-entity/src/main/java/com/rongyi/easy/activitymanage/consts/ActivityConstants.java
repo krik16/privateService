@@ -15,6 +15,15 @@ public interface ActivityConstants {
     }
 
     /**
+     * label 类型
+     */
+    interface  GoodsLabelType{
+        int REDVEN = 0;//红包
+        int VOUCHER = 1;//代金券
+        int REBATE = 2;//抵扣券
+        int COMMODITY = 3;//商品
+    }
+    /**
      * 活动类型
      */
     interface ActivityType {

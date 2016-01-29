@@ -97,11 +97,11 @@ public interface ActivityService {
      * @return PagingVO<ActivityGoodsImportVO>
      * @author Leon
      */
-    PagingVO<ActivityGoodsImportVO> getGoodsImportsByPage(ActivityGoodsImportParam param);
+    PagingVO<ActivityGoodsImportVO> getActivityGoodsImports(ActivityGoodsImportParam param);
 
     /**
      * 移除关联的商品
-     * @param importIds 临时表id集合
+     * @param importId 临时表id
      * @return Boolean
      * @author Leon
      */
@@ -124,5 +124,16 @@ public interface ActivityService {
      * @return ActivityInfoVO
      */
     ActivityInfoVO getActivityInfoVO(String goodsId, Integer goodsType);
+    
+
+    /**
+     * 查询活动关联的商品信息
+     * @param ids
+     * @param activityId
+     * @param type
+     * @return
+     */
+    List<ActivityGoods> selectActivityGoodsByActivity(List<String> ids,Integer activityId,Integer type);
+
 
 }
