@@ -61,7 +61,7 @@ public class MallsDocument implements java.io.Serializable{
 
 	private ArrayList<ObjectId> zone_ids;
 
-	private String shopCount;
+	private String shopcount;
 	//进行空值判断，不建索引，1表示有值
 	private String parent_id;
 	private String description;
@@ -315,12 +315,12 @@ public class MallsDocument implements java.io.Serializable{
 		this.zone_ids = zone_ids;
 	}
 
-	public String getShopCount() {
-		return shopCount;
+	public String getShopcount() {
+		return shopcount;
 	}
 
-	public void setShopCount(String shopCount) {
-		this.shopCount = shopCount;
+	public void setShopcount(String shopcount) {
+		this.shopcount = shopcount;
 	}
 
 	public String getParent_id() {
