@@ -421,7 +421,7 @@ public class RpbServiceImpl implements IRpbService {
 				if ("T".equals(aliRefundResultData.getIsSuccess())) {//查询成功
 					PaymentLogInfo paymentLogInfo = paymentLogInfoService.selectByOutTradeNo(paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
 					if (paymentLogInfo == null || StringUtils.isBlank(paymentLogInfo.getTrade_no())) {
-						throw new AliPayException(ConstantEnum.EXCEPTION_PAYMENT_EVENT_NOT_EXIST.getCodeStr(), ConstantEnum.EXCEPTION_PAYMENT_EVENT_NOT_EXIST.getValueStr());
+						throw new AliPayException(ConstantEnum.EXCEPTION_PAYMENT_NOT_EXIST.getCodeStr(), ConstantEnum.EXCEPTION_PAYMENT_NOT_EXIST.getValueStr());
 					}
 					for (AliRefundResultData.ResultDetail resultDetail : aliRefundResultData.getResultDetails()) {
 						if (paymentLogInfo.getTrade_no().equals(resultDetail.getTradeNo())) {
@@ -455,7 +455,7 @@ public class RpbServiceImpl implements IRpbService {
 					refundStatusVO.setRefundReslt(ConstantEnum.WEIXIN_REFUND_RESULT_FAIL.getCodeStr());
 				}
 			} else if (Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1 == paymentEntity.getPayChannel()) {//微信退款
-				RefundQueryResData refundQueryResData = weixinPayUnit.refundQuery(null, null, refundQueryParamVO.getRefundNo());
+				RefundQueryResData refundQueryResData = weixinPayUnit.refundQuery(null, null, refundQueryParamVO.getRefundNo(),null);
 				LOGGER.info("微信退款查询返回结果，refundQueryResData={}", refundQueryResData.toString());
 				status = refundQueryResData.getRefund_status_0();
 				if (ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr().equals(status)) {//退款处理中

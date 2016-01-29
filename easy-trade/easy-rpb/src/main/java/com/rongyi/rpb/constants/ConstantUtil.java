@@ -73,7 +73,7 @@ public interface ConstantUtil {
 		// 签名方式，选择项：0001(RSA)、MD5。无线的产品中，签名方式为rsa时，sign_type需赋值为0001而不是RSA
 //		String SIGN_TYPE = "MD5";
 
-//		String ALIPAY_GATEWAY_NEW = "https://mapi.alipay.com/gateway.do?";
+		String ALIPAY_GATEWAY_NEW = "https://mapi.alipay.com/gateway.do?";
 //		String ALIPAY_GATEWAY_NEW2 = "http://wappaygw.alipay.com/service/rest.htm?";// 支付宝网关地址
 		String NOTIFY_URL_ZHIFUBAO_PC_WEB = "http://" + NOTIFY_URL.outernetAddress + "/v5/PCWebPageAlipay/refund_notify_url.htm";// 支付宝异步回调通知路径
 //		String PAYMENT_TYPE = "1";// 支付类型
