@@ -9,6 +9,13 @@ import java.util.List;
  * Created by wangzehui on 2016/1/22.
  */
 public interface IZoneService {
+
+    /**
+     * 获取需要索引的数据总数
+     * @return
+     */
+    public long getZoneCount();
+
     /**
      * 分页创建索引对象
      * @param skip
