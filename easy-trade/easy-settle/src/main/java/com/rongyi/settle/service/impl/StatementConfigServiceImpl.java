@@ -122,6 +122,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
     public void saveStatementConfigAndInfo(StatementConfig statementConfig, BussinessInfo bussinessInfo, List<ConfigShop> shopConfigs) {
         String desc;
         if (statementConfig.getId() == null) {//新增
+            statementConfig.setStatus(ConstantEnum.STATUS_0.getCodeByte());
             insert(statementConfig);
             bussinessInfo.setConfigId(statementConfig.getId());
             bussinessInfoService.insert(bussinessInfo);
