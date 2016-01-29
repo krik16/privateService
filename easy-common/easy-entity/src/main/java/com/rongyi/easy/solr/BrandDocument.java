@@ -66,24 +66,22 @@ public class BrandDocument implements Serializable{
         if(brand==null)
             return;
         BeanUtils.copyProperties(this,brand);
-        brand.setIcon("/system/brand/icon/"+brand.getId().toString()+"/"+brand.getIcon());
+        icon="/system/brand/icon/"+brand.getId().toString()+"/"+brand.getIcon();
         if(StringUtils.isNotBlank(brand.getTags()))
-            this.setTags("1");
-        else
-            this.setTags(null);
+            tags="1";
         if(StringUtils.isNotBlank(brand.getDescription()))
-            this.setDescription("1");
-        else
-            this.setDescription(null);
+            description="1";
         if(StringUtils.isNotBlank(brand.getAverage_consumption()))
-            this.setAverage_consumption("1");
+            average_consumption="1";
+        if(StringUtils.isBlank(valid))
+            valid="0";
         //slug
         if(StringUtils.isNotBlank(brand.getName())){
             List<String> pinyins = Pinyin4jUtil.converterToSpell(brand.getName());
             if (CollectionUtils.isNotEmpty(pinyins)) {
-                this.setSlug(pinyins.get(0));
+                slug=pinyins.get(0);
             } else {
-                this.setSlug(brand.getName());
+                slug=brand.getName();
             }
         }
     }
