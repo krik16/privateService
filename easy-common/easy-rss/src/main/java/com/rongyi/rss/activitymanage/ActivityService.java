@@ -50,13 +50,6 @@ public interface ActivityService {
      public List<ActivityGoods> getActivityGoodsInfo(QueryActivityGoods queryActivityGoods);
 
      /**
-      * 新增ActivityGoods数据返回Id
-      * @param activityGoods
-      * @return 
-	  * @author wangzhiwen
-      */
-     public ActivityGoods insertActivityGoodsReturnId(ActivityGoods activityGoods);
-     /**
       * 新增操作记录
       * @param activityCheckRecord
       * @return 
