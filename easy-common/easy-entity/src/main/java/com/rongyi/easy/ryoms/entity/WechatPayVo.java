@@ -18,6 +18,7 @@ public class WechatPayVo implements Serializable{
 	private String tradeType;         //支付方式 0app 1公众号  2原生扫码(多种支付方式逗号分隔)
 	private Byte isRongyiPay;       //是否容易内部支付 0不是 1是
 	private String cretPath;        //证书路径
+	private String apiKey ;            //API密钥
 	
 	public Integer getId() { 
 		return id;
@@ -55,6 +56,10 @@ public class WechatPayVo implements Serializable{
 	public void setCretPath(String cretPath) {
 		this.cretPath = cretPath;
 	}
-	
-	
+	public String getApiKey() {
+		return apiKey;
+	}
+	public void setApiKey(String apiKey) {
+		this.apiKey = apiKey;
+	}
 }
