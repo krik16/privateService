@@ -117,7 +117,7 @@ public interface ActivityService {
      * @return boolean
      * @author Leon
      */
-    boolean batchInsertGoods(List<ActivityGoods> ActivityGoods);
+    boolean insertBatchGoods(List<ActivityGoods> ActivityGoods);
 
 
 
