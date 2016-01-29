@@ -7,28 +7,6 @@
 
 package com.rongyi.settle.web.controller;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
@@ -44,8 +22,29 @@ import com.rongyi.settle.service.AccessService;
 import com.rongyi.settle.service.BussinessInfoService;
 import com.rongyi.settle.service.PaymentStatementService;
 import com.rongyi.settle.service.StatementConfigService;
+import com.rongyi.settle.service.impl.PaymentStatementServiceImpl;
 import com.rongyi.settle.service.impl.PaymentStatementServiceImpl.SettleConfigNotFoundException;
 import com.rongyi.settle.util.DateUtils;
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Author: 柯军
@@ -486,6 +485,8 @@ public class PaymentStatementController extends BaseController {
 			paymentStatementService.generate(id, getUserName(request));
 		} catch (SettleConfigNotFoundException sce) {
 			return ResponseData.failure(CodeEnum.FIAL_CONFIG_NOT_FOUND.getCodeInt(), CodeEnum.FIAL_CONFIG_NOT_FOUND.getValueStr());
+		} catch (PaymentStatementServiceImpl.StatementInvalidException sce) {
+			return ResponseData.failure(CodeEnum.FIAL_STATEMENT_INVALID.getCodeInt(), CodeEnum.FIAL_STATEMENT_INVALID.getValueStr());
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());

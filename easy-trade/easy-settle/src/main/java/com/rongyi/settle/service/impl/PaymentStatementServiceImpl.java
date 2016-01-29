@@ -407,7 +407,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
         PaymentStatement paymentStatement = get(id);
         if (ConstantEnum.STATUS_8.getCodeByte().equals(paymentStatement.getStatus())) {
             logger.error("作废对账单不能重新生成。id=" + id);
-            throw new Exception("作废对账单不能重新生成。id=" + id);
+            throw new StatementInvalidException();
         }
         StatementConfig statementConfig = statementConfigService.selectById(paymentStatement.getConfigId());
 
@@ -659,5 +659,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
     public static class SettleConfigNotFoundException extends Exception {
         /**  */
         private static final long serialVersionUID = 3667148117489758392L;
+    }
+
+    public static class StatementInvalidException extends Exception {
+        private static final long serialVersionUID = 8882241324536918179L;
     }
 }
