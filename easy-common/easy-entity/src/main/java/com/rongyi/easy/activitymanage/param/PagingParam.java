@@ -1,6 +1,5 @@
 package com.rongyi.easy.activitymanage.param;
 
-import com.rongyi.easy.activitymanage.consts.ActivityConstants;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
@@ -14,9 +13,9 @@ import java.io.Serializable;
  */
 public class PagingParam implements Serializable {
     /**当前页 从1 开始*/
-    private Integer currentPage = ActivityConstants.Paging.CURRENTPAGE;
+    private Integer currentPage;
     /**每页数量   */
-    private Integer pageSize = ActivityConstants.Paging.PAGESIZE;
+    private Integer pageSize;
 
     public Integer getCurrentPage() {
         return currentPage;

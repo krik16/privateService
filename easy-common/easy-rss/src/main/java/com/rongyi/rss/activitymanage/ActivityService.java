@@ -2,6 +2,7 @@ package com.rongyi.rss.activitymanage;
 
 import java.util.List;
 
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.activity.entity.QueryActivityGoods;
 import com.rongyi.easy.activitymanage.entity.*;
@@ -114,6 +115,18 @@ public interface ActivityService {
      * @author Leon
      */
     List<ActivityGoodsImport> getGoodsImports(ActivityGoodsImportParam param);
+
+    /**
+     * 保存商品
+     * @param param
+     * @return ResponseVO
+     * @author Leon
+     */
+    ResponseVO saveActivityGoods(ActivityGoodsImportParam param);
+
+
+
+
 
 
     /**
