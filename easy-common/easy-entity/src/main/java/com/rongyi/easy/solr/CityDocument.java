@@ -62,8 +62,9 @@ public class CityDocument implements Serializable{
     private String telephone; //新增电话 app四期*/
 
     public CityDocument(Zones zone) {
-        if(zone==null)
+         if(zone==null)
             return;
+        id=zone.getId().toString();
         if(StringUtils.isNotBlank(zone.getName())){
             this.setVar_name_chinese(Pinyin4jUtil.tripBracket(zone.getName()));
             //this.setText(Pinyin4jUtil.tripBracket(zone.getName()));
