@@ -84,7 +84,7 @@ public class ActivityInfoVO implements Serializable {
     /**
      * 卡券及商品类型活动规则
      */
-    private ActivityGoodsRuleVO goodsRuleVO;
+    private ActivityGoodsRuleVO activityGoodsRuleVO;
 
     public Integer getId() {
         return id;
@@ -198,6 +198,14 @@ public class ActivityInfoVO implements Serializable {
         this.version = version;
     }
 
+    public ActivityGoodsRuleVO getActivityGoodsRuleVO() {
+        return activityGoodsRuleVO;
+    }
+
+    public void setActivityGoodsRuleVO(ActivityGoodsRuleVO activityGoodsRuleVO) {
+        this.activityGoodsRuleVO = activityGoodsRuleVO;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -215,6 +223,7 @@ public class ActivityInfoVO implements Serializable {
                 .append("updateAt", updateAt)
                 .append("isDeleted", isDeleted)
                 .append("version", version)
+                .append("activityGoodsRuleVO", activityGoodsRuleVO)
                 .toString();
     }
 }
