@@ -1,28 +1,28 @@
 package com.rongyi.rpb.service.impl;
 
-import java.net.URLDecoder;
-import java.util.HashMap;
-import java.util.Map;
-
-import com.rongyi.easy.rpb.vo.PaymentEntityVO;
-import com.rongyi.rpb.unit.TimeExpireUnit;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
+import com.rongyi.easy.rpb.vo.PaymentEntityVO;
+import com.rongyi.rpb.Exception.TradeException;
 import com.rongyi.rpb.common.pay.ali.sign.AlipayConfig;
 import com.rongyi.rpb.common.pay.ali.util.AlipayNotify;
 import com.rongyi.rpb.common.pay.ali.util.AlipaySubmit;
 import com.rongyi.rpb.common.pay.ali.util.UtilDate;
 import com.rongyi.rpb.constants.ConstantUtil;
 import com.rongyi.rpb.service.WebPageAlipayService;
+import com.rongyi.rpb.unit.TimeExpireUnit;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.net.URLDecoder;
+import java.util.HashMap;
+import java.util.Map;
 
 /**	
- * @Author:  柯军
- * @Description: 支付宝网页支付实现类 
- * @datetime:2015年4月23日上午10:05:58
+ * Author:  柯军
+ * Description: 支付宝网页支付实现类
+ * datetime:2015年4月23日上午10:05:58
  *
  **/
 @Service
@@ -36,12 +36,13 @@ public class WebPageAlipayServiceImpl extends BaseServiceImpl implements WebPage
 
 	@Override
 	public Map<String, Object> getToken(PaymentEntityVO paymentEntityVO) {
-		Map<String, Object> map = new HashMap<String, Object>();
+		LOGGER.info("price="+paymentEntityVO.getAmountMoney());
+		Map<String, Object> map = new HashMap<>();
 		//支付失效时间
 		String itBPay= timeExpireUnit.aliPayTimeExpire(paymentEntityVO.getTimeStart(), paymentEntityVO.getTimeExpire(),paymentEntityVO.getOrderType());
 
 		// 把请求参数打包成数组
-		Map<String, String> sParaTempToken = new HashMap<String, String>();
+		Map<String, String> sParaTempToken = new HashMap<>();
 		sParaTempToken.put("service", ConstantUtil.ZhiFuBaoWebPage.AUTHORIZATION_SERVICE);
 		sParaTempToken.put("partner", ConstantUtil.PayZhiFuBao.PARTNER);
 		sParaTempToken.put("_input_charset", ConstantUtil.PayZhiFuBao.INPUT_CHARSET);
@@ -53,7 +54,8 @@ public class WebPageAlipayServiceImpl extends BaseServiceImpl implements WebPage
 		try {
 			// 建立请求
 			String sHtmlTextToken = AlipaySubmit.buildRequest(ConstantUtil.ZhiFuBaoWebPage.ALIPAY_GATEWAY_NEW, "", "", sParaTempToken);
-
+			if(sHtmlTextToken == null)
+				throw  new TradeException("支付宝支付获取支付令牌出错");
 			// URLDECODE返回的信息
 			sHtmlTextToken = URLDecoder.decode(sHtmlTextToken, AlipayConfig.input_charset);
 
@@ -65,6 +67,7 @@ public class WebPageAlipayServiceImpl extends BaseServiceImpl implements WebPage
 			map.put("code", 0);
 		} catch (Exception e) {
 			LOGGER.error(e);
+			e.printStackTrace();
 			map.put("Exception", e.getMessage());
 		}
 		return map;
@@ -73,7 +76,7 @@ public class WebPageAlipayServiceImpl extends BaseServiceImpl implements WebPage
 	public String getAuthandexecute() {
 		// 将request_token 拼如request data中
 		String reqData = "<auth_and_execute_req><request_token>" + requestToken + "</request_token></auth_and_execute_req>";
-		Map<String, String> sParaTemp = new HashMap<String, String>();
+		Map<String, String> sParaTemp = new HashMap<>();
 
 		sParaTemp.put("service", ConstantUtil.ZhiFuBaoWebPage.TRADE_SERVICE);
 		sParaTemp.put("partner", ConstantUtil.PayZhiFuBao.PARTNER);
@@ -88,8 +91,7 @@ public class WebPageAlipayServiceImpl extends BaseServiceImpl implements WebPage
 	/**
 	 * 构造请求令牌所需要的数据 （获得token所需的工具类）
 	 * 
-	 * @param orderId
-	 * @return
+	 * @param orderId String
 	 */
 	private String getRequestDataToken(String orderId, String totalFee, String itemName,String itBPay) {
 

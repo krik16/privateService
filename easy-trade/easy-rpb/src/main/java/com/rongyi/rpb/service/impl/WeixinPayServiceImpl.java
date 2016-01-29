@@ -1,6 +1,5 @@
 package com.rongyi.rpb.service.impl;
 
-import com.google.common.base.Strings;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.constant.PaymentEventType;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
@@ -11,6 +10,7 @@ import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
 import com.rongyi.easy.rpb.vo.WeixinQueryOrderParamVO;
 import com.rongyi.rpb.Exception.WeixinException;
+import com.rongyi.rpb.common.pay.weixin.model.PaySignData;
 import com.rongyi.rpb.common.pay.weixin.model.RefundResData;
 import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.Constants;
@@ -25,13 +25,15 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
- * @Author: 柯军
- * @Description: 微信支付
- * @datetime:2015年4月23日上午10:07:12
+ * Author: 柯军
+ * Description: 微信支付
+ * datetime:2015年4月23日上午10:07:12
  **/
 @Service
 public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPayService {
@@ -66,16 +68,17 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
     private static final Logger LOGGER = LoggerFactory.getLogger(WeixinPayServiceImpl.class);
 
     @Override
-    public Map<String, Object> getAppWeXinSign(String payNo, double total_fee, String timeStart, String timeExpire, Integer orderType) {
-        LOGGER.info("获取微信支付签名 getAppWeXinSign,payNo={},total_fee={}，timeStart={},timeExpire={},orderType={}", payNo, total_fee, timeStart, timeExpire, orderType);
-        Map<String, Object> map = new HashMap<String, Object>();
+    public Map<String, Object> getAppWeXinSign(PaySignData paySignData) {
+        LOGGER.info("获取微信支付签名 getAppWeXinSign,paySignData={}",paySignData);
+        Map<String, Object> map = new HashMap<>();
         try {
-            BigDecimal totalFee = new BigDecimal(total_fee + "").multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP);
-            Map<String, String> timeExpireMap = timeExpireUnit.weixinPayTimeExpire(timeStart, timeExpire, orderType);
+            Map<String, String> timeExpireMap = timeExpireUnit.weixinPayTimeExpire(paySignData.getTimeStart(), paySignData.getTimeExpire(), paySignData.getOrderType());
             LOGGER.info("timeExpireMap={}", timeExpireMap);
-            map = weixinPayUnit.getWeXinPaySign(payNo, totalFee.intValue(), "容易网商品", timeExpireMap.get("timeStart"), timeExpireMap.get("timeExpire"));
+            paySignData.setTimeStart(timeExpireMap.get("timeStart"));
+            paySignData.setTimeExpire(timeExpireMap.get("timeExpire"));
+            map = weixinPayUnit.getWeXinPaySign(paySignData);
             map.put("code", 0);
-            map.put("totlePrice", total_fee);
+            map.put("totlePrice", paySignData.getTotalFee());
         } catch (WeixinException e) {
             map.put("code", e.getCode());
             map.put("message", e.getMessage());
@@ -90,9 +93,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
         PaymentEntityVO paymentEntityVO = paymentService.bodyToPaymentEntity(event.getBody(), null);
         PaymentEntity paymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntityVO.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
                 Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1);// 根据退款单记录中的订单号找到对应的历史付款单记录（用来查找付款交易流水号）
-        if (paymentEntity == null)
-            return false;
-        return true;
+        return (paymentEntity != null);
     }
 
 
@@ -101,7 +102,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
         LOGGER.info("MQ消息申请退款，历史付款单号payNo={},历史付款订单号orderNo={}", hisPayEntity.getPayNo(), hisPayEntity.getOrderNum());
         String newPayNo = paymentService.getPayNo();
         Map<String, Object> result = weixinRefund(hisPayEntity.getPayNo(), paymentEntityVO.getAmountMoney().doubleValue(), hisPayEntity.getAmountMoney().doubleValue(), newPayNo,
-                Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
+                Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,hisPayEntity.getWeixinMchId());
         PaymentEntity paymentEntity = new PaymentEntity();
         BeanUtils.copyProperties(paymentEntityVO, paymentEntity);
         paymentEntity.setPayNo(newPayNo);
@@ -120,17 +121,17 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
     }
 
     @Override
-    public Map<String, Object> weixinRefund(String payNo, double refundFee, double totalFee, String newPayNo, Integer tradeType) {
-        LOGGER.info("申请微信退款  weixinRefund payNo={},refundFee={},totalFee={},newPayNo={},tradeType={}", payNo, refundFee, totalFee, newPayNo, tradeType);
+    public Map<String, Object> weixinRefund(String payNo, double refundFee, double totalFee, String newPayNo, Integer tradeType,Integer weixinMchId) {
+        LOGGER.info("申请微信退款  weixinRefund payNo={},refundFee={},totalFee={},newPayNo={},tradeType={},weixinMchId={}", payNo, refundFee, totalFee, newPayNo, tradeType,weixinMchId);
 
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         try {
             //微信退款
-            RefundResData refundResData = weixinPayUnit.weixinRefund(payNo, refundFee, totalFee, newPayNo);
+            RefundResData refundResData = weixinPayUnit.weixinRefund(payNo, refundFee, totalFee, newPayNo,weixinMchId);
             //退款成功后睡眠1秒钟后查询结果，否则微信端可能未处理完退款申请，导致查询结果错误
             Thread.sleep(1000);
             //退款查询结果验证是否成功退款
-            weixinPayUnit.checkRefundQueryResult(null, null, newPayNo);
+            weixinPayUnit.checkRefundQueryResult(null, null, newPayNo,weixinMchId);
             //记录退款事件
             savePaymentLogInfo(refundResData, tradeType);
             map.put("result", ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getCodeStr());
@@ -172,21 +173,21 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 
 
     @Override
-    public void closeOrder(String payNo) {
-        weixinPayUnit.closeOrder(payNo);
+    public void closeOrder(String payNo,Integer weixinMchId) {
+        weixinPayUnit.closeOrder(payNo,weixinMchId);
         paymentService.deleteByPayNo(payNo);
     }
 
     @Override
-    public WeixinQueryOrderParamVO queryOrder(String tradeNo, String payNo) {
-        return weixinPayUnit.queryOrder(tradeNo, payNo);
+    public WeixinQueryOrderParamVO queryOrder(String tradeNo, String payNo,Integer weixinMchId) {
+        return weixinPayUnit.queryOrder(tradeNo, payNo,weixinMchId);
     }
 
     @Override
     public void batchTriggerWeixinRefund() {
         LOGGER.info("微信批量退款定时任务启动");
         try {
-            List<String> failList = new ArrayList<String>();
+            List<String> failList = new ArrayList<>();
             List<PaymentEntity> list = paymentService.selectByTradeTypeAndRefundRejected(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1,
                     Constants.REFUND_REJECTED.REFUND_REJECTED0, Constants.PAYMENT_STATUS.STAUS0);
             for (PaymentEntity paymentEntity : list) {
@@ -195,7 +196,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
                     LOGGER.info("付款记录不存在,忽略该条退款，继续后面退款,orderNo={}",paymentEntity.getOrderNum());
                     continue;
                 }
-                Map<String, Object> refundResultMap = weixinRefund(oldPaymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), oldPaymentEntity.getAmountMoney().doubleValue(), paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
+                Map<String, Object> refundResultMap = weixinRefund(oldPaymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), oldPaymentEntity.getAmountMoney().doubleValue(), paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,oldPaymentEntity.getWeixinMchId());
                 if (Constants.RESULT.SUCCESS.equals(refundResultMap.get("result")) || ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr().equals(refundResultMap.get("result"))) {
                     paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
                     paymentEntity.setFinishTime(DateUtil.getCurrDateTime());

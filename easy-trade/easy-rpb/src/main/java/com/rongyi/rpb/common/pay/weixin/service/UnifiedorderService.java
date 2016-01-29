@@ -37,44 +37,13 @@ public class UnifiedorderService extends BaseService{
      * @return API返回的数据
      * @throws Exception
      */
-    public String request(UnifedOrderReqData unifedOrderReqData) throws Exception {
+    public String request(UnifedOrderReqData unifedOrderReqData,Configure configure) throws Exception {
 
         //--------------------------------------------------------------------
         //发送HTTPS的Post请求到API地址
         //--------------------------------------------------------------------
-        String responseString = sendPost(unifedOrderReqData);
+        String responseString = sendPost(unifedOrderReqData,configure);
         return responseString;
     }
 
-	/**	
-	 * @Description: 获取微信支付签名 
-	 * @param payNo
-	 * @param totalFee
-	 * @param body
-	 * @return	
-	 * @Author:  柯军
-	 * @datetime:2015年9月2日下午1:32:08
-	 **/
-	public Map<String,Object> getAppWeXinSign(String payNo, Integer totalFee, String body,String timeStart,String timeExpire) {
-		Map<String,Object> map = new HashMap<String,Object>();
-		UnifedOrderReqData unifedOrderReqData = new UnifedOrderReqData(body,payNo, totalFee,ConstantUtil.PayWeiXin_V3.WEIXIN_NOTIFY_URL,ConstantUtil.PayWeiXin_V3.TRADE_TYPE,timeStart,timeExpire);
-		try {
-			 String result = request(unifedOrderReqData);
-			 String timestamp = WXUtil.getTimeStamp();
-			Map<String,Object> resultMap = XMLParser.getMapFromXML(result);
-			if(resultMap != null){
-				map.put("appid",ConstantUtil.PayWeiXin_V3.APP_ID);
-				map.put("partnerid",ConstantUtil.PayWeiXin_V3.MCH_ID);
-				map.put("package","Sign=WXPay");
-				map.put("prepayid", resultMap.get("prepay_id"));
-				map.put("noncestr", resultMap.get("nonce_str"));
-				map.put("timestamp",timestamp);
-				String sign =  Signature.getSign(map);
-				map.put("app_signature", sign);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return map;
-	}
 }

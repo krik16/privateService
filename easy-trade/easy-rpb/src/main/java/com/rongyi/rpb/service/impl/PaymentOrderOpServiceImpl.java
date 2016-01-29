@@ -9,8 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by kejun on 2015/12/17.
- */
+ *  Description: 付款单操作日志
+ *  Author: kejun
+  **/
 @Service
 public class PaymentOrderOpServiceImpl extends BaseServiceImpl implements PaymentOrderOpService{
 

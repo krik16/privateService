@@ -1,6 +1,6 @@
 /**
- * @Copyright (C),上海容易网电子商务有限公司	
- * @Author: 柯军 
+ * @Copyright (C),上海容易网电子商务有限公司
+ * @Author: 柯军
  * @datetime:2015年6月4日下午2:54:04
  * @Description: TODO
  *
@@ -8,6 +8,7 @@
 
 package com.rongyi.rpb.service.impl;
 
+import com.rongyi.core.bean.ResponseData;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.constant.PayEnum;
 import com.rongyi.core.constant.PaymentEventType;
@@ -15,6 +16,7 @@ import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentItemEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
+import com.rongyi.easy.rpb.domain.WeixinMch;
 import com.rongyi.easy.rpb.vo.*;
 import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.Constants;
@@ -32,10 +34,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Author: 柯军
- * @Description: rpb dubbo 接口实现
- * @datetime:2015年6月4日下午2:54:04
- * 
+ * Author: 柯军
+ * Description: rpb dubbo 接口实现
+ * datetime:2015年6月4日下午2:54:04
+ *
  **/
 public class RpbServiceImpl implements IRpbService {
 
@@ -65,16 +67,19 @@ public class RpbServiceImpl implements IRpbService {
 	@Autowired
 	AliPaymentService aliPaymentService;
 
+	@Autowired
+	WeixinMchService weixinMchService;
+
 	@Override
 	public Map<Integer, String> validateAccount(String paymentIds) {
 		if (paymentIds == null)
 			return null;
-		String[] ids = paymentIds.split("\\,");
-		Map<Integer, String> map = new HashMap<Integer, String>();
-		int value = 0;
-		if (ids != null)
-			for (int i = 0; i < ids.length; i++) {
-				PaymentEntity paymentEntity = paymentService.selectByPrimaryKey(ids[i]);
+		String[] ids = paymentIds.split(",");
+		Map<Integer, String> map = new HashMap<>();
+		int value;
+		if (ids.length > 0)
+			for(String id : ids){
+				PaymentEntity paymentEntity = paymentService.selectByPrimaryKey(id);
 				if (paymentEntity == null)
 					continue;
 				value = orderFormNsyn.validateAccount(paymentEntity.getOrderNum(), paymentEntity.getPayChannel());
@@ -99,7 +104,7 @@ public class RpbServiceImpl implements IRpbService {
 		PaymentEntity oldPaymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
 				paymentEntity.getPayChannel());
 		Map<String, Object> refundResultMap = weixinPayService.weixinRefund(oldPaymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), oldPaymentEntity.getAmountMoney().doubleValue(),
-				paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
+				paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,oldPaymentEntity.getWeixinMchId());
 		if (Constants.RESULT.SUCCESS.equals(refundResultMap.get("result")) || ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr().equals(refundResultMap.get("result"))) {
 			paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
 			paymentEntity.setFinishTime(DateUtil.getCurrDateTime());
@@ -124,12 +129,12 @@ public class RpbServiceImpl implements IRpbService {
 	@Override
 	public Map<String, Object> paySuccessNotify(String orderNo, Double totalAmount) {
 		LOGGER.info("参数：ordeNo=" + orderNo + ",totalAmount=" + totalAmount);
-		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<>();
 		resultMap.put("errno", "0");
 		resultMap.put("errMsg", "支付成功");
 //		if (totalAmount == 0) {
 //			List<PaymentEntity> list = paymentService.selectByOrderNum(orderNo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0,null);
-//			// TODO 兼容老版本APP0元支付不走签名，在下个强制更新版本后此代码需删除
+//			兼容老版本APP0元支付不走签名，在下个强制更新版本后此代码需删除
 //			if (list.isEmpty()) {
 //				insertZeroOrder(orderNo, totalAmount);
 //				LOGGER.info("老版本0元商品购买,增加0元购买记录,orderNo-->" + orderNo);
@@ -156,7 +161,7 @@ public class RpbServiceImpl implements IRpbService {
 			payAccount = queryOrderParamVO.getBuyer_email();
 		}
 		if (Constants.PAYMENT_STATUS.STAUS2 != paymentEntity.getStatus()) {// 异步通知暂未收到
-			if (queryOrderPayStatus(null, paymentEntity.getPayNo(), paymentEntity.getPayChannel())) {
+			if (queryOrderPayStatus(null, paymentEntity.getPayNo(), paymentEntity.getPayChannel(),paymentEntity.getWeixinMchId())) {
 				LOGGER.info("发送同步支付通知,订单号-->" + orderNo);
 				List<PaySuccessResponse> responseList = paymentLogInfoService.paySuccessToMessage(paymentEntity.getPayNo(), payAccount, orderNums, paymentEntity.getOrderType(), payChannel);
 				if (!responseList.isEmpty()) {
@@ -176,63 +181,66 @@ public class RpbServiceImpl implements IRpbService {
 	}
 
 	/**
-	 * @Description:增加0元支付（此版本临时增加此方法，原因是前端APP在优惠券0元购买是未请求获取支付签名，导致系统无0元支付记录，故在支付成功通知时增加交易记录）
-	 * @param orderNo
-	 * @param totalAmount
-	 * @Author: 柯军
-	 * @datetime:2015年7月30日下午5:23:52
+	 * Description:增加0元支付（此版本临时增加此方法，原因是前端APP在优惠券0元购买是未请求获取支付签名，导致系统无0元支付记录，故在支付成功通知时增加交易记录）
+	 * @param orderNo String
+	 * @param totalAmount Double
+	 * Author: 柯军
+	 * datetime:2015年7月30日下午5:23:52
 	 **/
-	private void insertZeroOrder(String orderNo, Double totalAmount) {
-		MessageEvent event = new MessageEvent();
-		Map<String, Object> bodyMap = new HashMap<String, Object>();
-		// TODO
-		// 此处orderNo不加双引号转义，JSOBObject.formObject逗比方法会把orderNo当做int处理，丢弃首位的0
-		bodyMap.put("orderNum", "\"" + orderNo + "\"");
-		bodyMap.put("orderType", Constants.ORDER_TYPE.ORDER_TYPE_1);
-		bodyMap.put("totalPrice", totalAmount);
-		event.setBody(bodyMap);
-		event.setTimestamp(DateUtil.getCurrDateTime().getTime());
-		event.setType(PaymentEventType.PAYMENT);
-		PaymentEntityVO paymentEntityVO = paymentService.insertOrderMessage(event);
-		PaymentLogInfo paymentLogInfo = new PaymentLogInfo();
-		paymentLogInfo.setOutTradeNo(paymentEntityVO.getPayNo());
-		paymentLogInfo.setNotifyTime(DateUtil.getCurrDateTime());
-		paymentLogInfo.setResult("success");
-		paymentLogInfo.setTradeMode("1");
-		paymentLogInfo.setTimeEnd(DateUtil.getCurrDateTime());
-		paymentLogInfo.setTotal_fee(0.00);
-		paymentLogInfoService.insertGetId(paymentLogInfo);
-
-		paymentLogInfoService.paySuccessToMessage(paymentEntityVO.getPayNo(), null, orderNo, Constants.ORDER_TYPE.ORDER_TYPE_1, paymentEntityVO.getPayChannel().toString());
-	}
+//	private void insertZeroOrder(String orderNo, Double totalAmount) {
+//		MessageEvent event = new MessageEvent();
+//		Map<String, Object> bodyMap = new HashMap<String, Object>();
+//		// TODO
+//		// 此处orderNo不加双引号转义，JSOBObject.formObject逗比方法会把orderNo当做int处理，丢弃首位的0
+//		bodyMap.put("orderNum", "\"" + orderNo + "\"");
+//		bodyMap.put("orderType", Constants.ORDER_TYPE.ORDER_TYPE_1);
+//		bodyMap.put("totalPrice", totalAmount);
+//		event.setBody(bodyMap);
+//		event.setTimestamp(DateUtil.getCurrDateTime().getTime());
+//		event.setType(PaymentEventType.PAYMENT);
+//		PaymentEntityVO paymentEntityVO = paymentService.insertOrderMessage(event);
+//		PaymentLogInfo paymentLogInfo = new PaymentLogInfo();
+//		paymentLogInfo.setOutTradeNo(paymentEntityVO.getPayNo());
+//		paymentLogInfo.setNotifyTime(DateUtil.getCurrDateTime());
+//		paymentLogInfo.setResult("success");
+//		paymentLogInfo.setTradeMode("1");
+//		paymentLogInfo.setTimeEnd(DateUtil.getCurrDateTime());
+//		paymentLogInfo.setTotal_fee(0.00);
+//		paymentLogInfoService.insertGetId(paymentLogInfo);
+//
+//		paymentLogInfoService.paySuccessToMessage(paymentEntityVO.getPayNo(), null, orderNo, Constants.ORDER_TYPE.ORDER_TYPE_1, paymentEntityVO.getPayChannel().toString());
+//	}
 
 	/**
-	 * @Description: 查询订单在第三方交易系统中状态
-	 * @param tradeNo
-	 * @return
-	 * @Author: 柯军
-	 * @datetime:2015年8月11日下午4:17:19
+	 * Description: 查询订单在第三方交易系统中状态
+	 * @param tradeNo String
+	 * @param payNo String
+	 * @param payChannel Integer
+	 * @param weixinMchId Integer
+	 * Author: 柯军
+	 * datetime:2015年8月11日下午4:17:19
 	 **/
 	@Override
-	public boolean queryOrderPayStatus(String tradeNo, String payNo, Integer payChannel) {
+	public boolean queryOrderPayStatus(String tradeNo, String payNo, Integer payChannel,Integer weixinMchId) {
 		if (Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0 == payChannel) {
 			QueryOrderParamVO queryOrderParamVO = aliPaymentService.queryOrder(tradeNo, payNo);
 			if (queryOrderParamVO != null && ("TRADE_SUCCESS".equals(queryOrderParamVO.getTrade_status()) || "TRADE_FINISHED".equals(queryOrderParamVO.getTrade_status()))) {
 				return true;
 			}
-			LOGGER.info("支付宝订单状态-->" + queryOrderParamVO.getTrade_status());
+			LOGGER.info("支付宝订单状态-->" + queryOrderParamVO);
 		} else if (Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1 == payChannel) {
-			WeixinQueryOrderParamVO weixinQueryOrderParamVO = weixinPayService.queryOrder(tradeNo, payNo);
+			WeixinQueryOrderParamVO weixinQueryOrderParamVO = weixinPayService.queryOrder(tradeNo, payNo,weixinMchId);
 			if (weixinQueryOrderParamVO != null && "SUCCESS".equals(weixinQueryOrderParamVO.getResult_code())
 					&& ("SUCCESS".equals(weixinQueryOrderParamVO.getTrade_state()) || "REFUND".equals(weixinQueryOrderParamVO.getTrade_state()))) {
 				return true;
 			}
-			LOGGER.info("微信订单支付未成功-->" + weixinQueryOrderParamVO.toString());
+			LOGGER.info("微信订单支付未成功-->" + weixinQueryOrderParamVO);
 		} else {
 			LOGGER.info("未找到对应付款方式-->payChannel=" + payChannel + ",tradeNo=" + tradeNo + ",payNo=" + payNo);
 		}
 		return false;
 	}
+
 
 	@Override
 	public QueryOrderParamVO queryOrder(Map<String, Object> map) {
@@ -263,7 +271,7 @@ public class RpbServiceImpl implements IRpbService {
 
 	@Override
 	public Map<String, Object> weixinRefundRejected(Integer paymentId, Integer refundRejected) {
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<>();
 		map.put("success", true);
 		map.put("message", refundRejected == Constants.REFUND_REJECTED.REFUND_REJECTED0 ? "同意退款操作成功" : "拒绝退款操作成功");
 		try {
@@ -278,7 +286,7 @@ public class RpbServiceImpl implements IRpbService {
 
 	@Override
 	public Map<String, Object> validatePayHtml(String[] ids, Integer operateType) {
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<>();
 		List<PaymentEntity> list = paymentService.valiadteStatus(ids, Constants.PAYMENT_STATUS.STAUS2);
 		if (!list.isEmpty()) {
 			map.put("success", false);
@@ -302,7 +310,7 @@ public class RpbServiceImpl implements IRpbService {
 	}
 	@Override
 	public Map<String, Object> generatePayment(PaymentParamVO paymentParamVO) {
-		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> map = new HashMap<>();
 		try {
 //			PaymentEntity oldPaymentEntity = paymentService.validateOrderNumExist(paymentParamVO.getOperateNo(), paymentParamVO.getPayChannel(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE7);
 //			if (oldPaymentEntity != null && StringUtils.isNotEmpty(oldPaymentEntity.getPayNo())) {
@@ -321,7 +329,7 @@ public class RpbServiceImpl implements IRpbService {
 				return map;
 			}
 			if (paymentParamVO.getPayTotal() != null)
-				paymentEntity.setAmountMoney(BigDecimal.valueOf(Double.valueOf(paymentParamVO.getPayTotal())));
+				paymentEntity.setAmountMoney(BigDecimal.valueOf(paymentParamVO.getPayTotal()));
 			paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
 			paymentEntity.setCreateTime(paymentParamVO.getCreateAt());
 			paymentEntity.setPayChannel(paymentParamVO.getPayChannel());
@@ -336,14 +344,14 @@ public class RpbServiceImpl implements IRpbService {
 			map.put("message", "申请异常");
 			e.printStackTrace();
 		}
-	
+
 		return map;
 	}
 
 	@Override
 	public void updatePaymentStatus(String[] ids, Integer status, Integer tradeType) {
 		if(ids != null  && Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE7 == tradeType){
-			Map<String,Object> map = new HashMap<String,Object>();
+			Map<String,Object> map = new HashMap<>();
 			map.put("status", status);
 			paymentService.updateByIds(ids, map);
 		}
@@ -351,7 +359,7 @@ public class RpbServiceImpl implements IRpbService {
 
 	@Override
 	public Map<String, Object> exceCancelPay(Integer paymentId, Integer refundRejected) {
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<>();
 		map.put("success", true);
 		map.put("message", "取消异常付款操作成功");
 		try {
@@ -363,5 +371,38 @@ public class RpbServiceImpl implements IRpbService {
 		}
 		return map;
 	}
+
+	@Override
+	public WeixinMch selectByParam(String publicCode, String mallId) {
+		return weixinMchService.selectByPublicCodeAndUserId(publicCode,mallId);
+	}
+
+	@Override
+	public ResponseData insertWeiXinMch(WeixinMch weixinMch) {
+		ResponseData responseData;
+		try{
+			weixinMchService.insert(weixinMch);
+			responseData = ResponseData.success();
+		}catch (Exception e){
+			e.printStackTrace();
+			responseData = ResponseData.failure();
+		}
+		return responseData;
+	}
+
+	@Override
+	public ResponseData updateWeixinMch(WeixinMch weixinMch) {
+		ResponseData responseData;
+		try{
+			weixinMchService.update(weixinMch);
+			responseData = ResponseData.success();
+		}catch (Exception e){
+			e.printStackTrace();
+			responseData = ResponseData.failure();
+		}
+		return responseData;
+	}
+
+
 }
 
