@@ -23,6 +23,10 @@ public class TemplateCouponGood implements Serializable {
     private String subtitle;
    /**false表示没有删除   true表示删除了*/
     private Boolean isDeleted;
+    /**
+     * 活动规则
+     */
+    private String activityRule;
    /**创建人*/
     private String createUser;
     /**创建时间*/
@@ -122,6 +126,14 @@ public class TemplateCouponGood implements Serializable {
         this.customLocale = customLocale;
     }
 
+    public String getActivityRule() {
+        return activityRule;
+    }
+
+    public void setActivityRule(String activityRule) {
+        this.activityRule = activityRule;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -131,6 +143,7 @@ public class TemplateCouponGood implements Serializable {
                 .append("timedActivityTitle", timedActivityTitle)
                 .append("subtitle", subtitle)
                 .append("isDeleted", isDeleted)
+                .append("activityRule", activityRule)
                 .append("createUser", createUser)
                 .append("createAt", createAt)
                 .append("updateAt", updateAt)

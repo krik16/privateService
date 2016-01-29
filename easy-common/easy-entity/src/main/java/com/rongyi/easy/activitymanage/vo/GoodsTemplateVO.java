@@ -47,6 +47,10 @@ public class GoodsTemplateVO implements Serializable{
     private String timedActivityTitle;
 
     /**
+     * 规则
+     */
+    private String activityRule;
+    /**
      *活动地址
      */
     private String activityUrl;
@@ -110,6 +114,7 @@ public class GoodsTemplateVO implements Serializable{
                 this.customLocale = activityTemplate.getTemplateCouponGood().getCustomLocale();
                 this.timedActivityTitle = activityTemplate.getTemplateCouponGood().getTimedActivityTitle();
                 this.bannerPic = activityTemplate.getTemplateCouponGood().getBannerPic();
+                this.activityRule = activityTemplate.getTemplateCouponGood().getActivityRule();
             }
         }
     }
@@ -249,6 +254,14 @@ public class GoodsTemplateVO implements Serializable{
         this.labels = labels;
     }
 
+    public String getActivityRule() {
+        return activityRule;
+    }
+
+    public void setActivityRule(String activityRule) {
+        this.activityRule = activityRule;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -259,6 +272,7 @@ public class GoodsTemplateVO implements Serializable{
                 .append("endAt", endAt)
                 .append("customLocale", customLocale)
                 .append("timedActivityTitle", timedActivityTitle)
+                .append("activityRule", activityRule)
                 .append("activityUrl", activityUrl)
                 .append("activityType", activityType)
                 .append("moduleType", moduleType)
