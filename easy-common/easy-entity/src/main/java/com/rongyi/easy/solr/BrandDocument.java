@@ -21,6 +21,8 @@ public class BrandDocument implements Serializable{
 
     private static final long serialVersionUID = -6516058338575306587L;
 
+    private String id;
+
     @Field
     private String name;
     @Field
@@ -28,11 +30,11 @@ public class BrandDocument implements Serializable{
     @Field
     private String ename;
     @Field
-    private String operator_id;
+    private String operator_id;//
     @Field
-    private String icon;
+    private String icon;//品牌图标
     @Field
-    private String key_tags;
+    private String key_tags;//关键标签，shop需要
     @Field
     private Date created_at;//创建时间
     @Field
@@ -40,9 +42,9 @@ public class BrandDocument implements Serializable{
     @Field
     private ArrayList<ObjectId> category_ids;
     @Field
-    private ArrayList<String> category_tags;
+    private ArrayList<String> category_tags;//品类
     @Field
-    private ArrayList<String> aliases;
+    private ArrayList<String> aliases;//别名
     @Field
     private String shopCount;
     //进行空值判断，不建索引，1表示有值
@@ -86,6 +88,14 @@ public class BrandDocument implements Serializable{
                 this.setSlug(brand.getName());
             }
         }
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

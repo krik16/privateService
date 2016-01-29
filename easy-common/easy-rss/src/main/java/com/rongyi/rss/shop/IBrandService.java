@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.rongyi.easy.entity.BrandEntity;
 import com.rongyi.easy.rmmm.entity.BrandInfoEntity;
+import com.rongyi.easy.solr.BrandDocument;
 
 public interface IBrandService {
 	/**
@@ -38,4 +39,28 @@ public interface IBrandService {
 	* @throws
 	 */
 	public BrandInfoEntity selectBrandByMongoId(String brandMid);
+
+
+	/**
+	 * 获取品牌总数插入到solr库中
+	 * @return
+	 */
+	public long getBrandCount();
+
+	/**
+	 * 分页获取品牌solr对象
+	 * @param skip
+	 * @param pageSize
+	 * @return
+	 * @throws Exception
+	 */
+	public List<BrandDocument> getBrandDocumentList(int skip,int pageSize) throws Exception;
+
+	/**
+	 * 品牌mongo转solr
+	 * @param brandMid
+	 * @return
+	 * @throws Exception
+	 */
+	public BrandDocument getBrandDocument(String brandMid) throws Exception;
 }
