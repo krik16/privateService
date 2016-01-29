@@ -20,12 +20,12 @@ public class ScanPayService extends BaseService{
      * @return API返回的数据
      * @throws Exception
      */
-    public String request(ScanPayReqData scanPayReqData) throws Exception {
+    public String request(ScanPayReqData scanPayReqData,Configure configure) throws Exception {
 
         //--------------------------------------------------------------------
         //发送HTTPS的Post请求到API地址
         //--------------------------------------------------------------------
-        String responseString = sendPost(scanPayReqData);
+        String responseString = sendPost(scanPayReqData,configure);
 
         return responseString;
     }

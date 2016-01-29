@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,10 +22,11 @@ public class TimeExpireUnit {
     private static final Logger LOGGER = LoggerFactory.getLogger(TimeExpireUnit.class);
 
     /**
-     * @Description: 支付宝支付超时时间获取
-     * @param: timeStart
-     * @param: timeExpire
-     * @Author: 柯军
+     * Description: 支付宝支付超时时间获取
+     * @param timeStart String
+     * @param timeExpire String
+     * @param orderType int
+     * Author: 柯军
      **/
 
     public String aliPayTimeExpire(String timeStart, String timeExpire, int orderType) {
@@ -52,11 +52,13 @@ public class TimeExpireUnit {
     }
 
     /**
-     * @Description: 微信支付超时时间获取
-     * @param:
-     * @Author: 柯军
+     *
+     * Description: 微信支付超时时间获取
+     * @param timeStart String
+     * @param timeExpire String
+     * @param orderType int
+     * Author: 柯军
      **/
-
     public Map<String,String> weixinPayTimeExpire(String timeStart, String timeExpire, int orderType) {
         Map<String,String> map = new HashMap<>();
         //默认支付失效时间分钟

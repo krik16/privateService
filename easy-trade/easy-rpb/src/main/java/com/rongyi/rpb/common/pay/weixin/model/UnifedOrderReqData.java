@@ -8,6 +8,7 @@ import java.util.Random;
 import com.rongyi.rpb.common.pay.weixin.util.Configure;
 import com.rongyi.rpb.common.pay.weixin.util.MD5;
 import com.rongyi.rpb.common.pay.weixin.util.Signature;
+import com.rongyi.rpb.constants.ConstantEnum;
 
 
 /**	
@@ -47,12 +48,13 @@ public class UnifedOrderReqData {
      * @datetime:2015年9月2日
      *
      **/
-    public UnifedOrderReqData(String body,String outTradeNo,Integer totalFee,String notifyUrl,String tradeType,String timeStart,String timeExpire){
+    public UnifedOrderReqData(String body,String outTradeNo,Integer totalFee,String notifyUrl,String timeStart,String timeExpire,String openid,
+							  Configure configure){
         //微信分配的公众号ID（开通公众号之后可以获取到）
-        setAppid(Configure.getAppid());
+		setAppid(configure.getAppID());
 
         //微信支付分配的商户号ID（开通公众号的微信支付功能之后可以获取到）
-        setMch_id(Configure.getMchid());
+        setMch_id(configure.getMchID());
 
         //随机字符串，不长于32 位
         setNonce_str(genNonceStr());
@@ -67,22 +69,28 @@ public class UnifedOrderReqData {
         setTotal_fee(totalFee);
         
         //终端IP
-        setSpbill_create_ip(Configure.getIP());
+        setSpbill_create_ip(configure.getIp());
         
         //异步通知地址
         setNotify_url(notifyUrl);
         
         //交易类型
-        setTrade_type(tradeType);
+        setTrade_type(configure.getTradeType());
 
-		//交易起始时间
-		setTime_start(timeStart);
+		if(ConstantEnum.WEIXIN_PAY_TRADE_TYPE_APP.getValueStr().equals(configure.getTradeType())) {
+			//交易起始时间
+			setTime_start(timeStart);
 
-		//交易失效时间
-		setTime_expire(timeExpire);
+			//交易失效时间
+			setTime_expire(timeExpire);
+		}
+
+		if(ConstantEnum.WEIXIN_PAY_TRADE_TYPE_JSAPI.getValueStr().equals(configure.getTradeType())) {
+			setOpenid(openid);
+		}
 
         //根据API给的签名规则进行签名
-        String sign = Signature.getSign(toMap());
+        String sign = Signature.getSign(toMap(),configure.getKey());
         setSign(sign);//把签名数据设置到Sign这个属性中
 
     }

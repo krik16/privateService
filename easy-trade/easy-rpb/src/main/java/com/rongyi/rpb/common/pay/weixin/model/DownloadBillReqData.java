@@ -33,13 +33,12 @@ public class DownloadBillReqData {
     REFUND，返回当日退款订单
     REVOKED，已撤销的订单
      */
-    public DownloadBillReqData(String deviceInfo,String billDate,String billType){
-
+    public DownloadBillReqData(String deviceInfo,String billDate,String billType,Configure configure){
         //微信分配的公众号ID（开通公众号之后可以获取到）
-        setAppid(Configure.getAppid());
+        setAppid(configure.getAppID());
 
         //微信支付分配的商户号ID（开通公众号的微信支付功能之后可以获取到）
-        setMch_id(Configure.getMchid());
+        setMch_id(configure.getMchID());
 
         //商户自己定义的扫码支付终端设备号，方便追溯这笔交易发生在哪台终端设备上
         setDevice_info(deviceInfo);
@@ -53,7 +52,7 @@ public class DownloadBillReqData {
         setNonce_str(RandomStringGenerator.getRandomStringByLength(32));
 
         //根据API给的签名规则进行签名
-        String sign = Signature.getSign(toMap());
+        String sign = Signature.getSign(toMap(),configure.getKey());
         setSign(sign);//把签名数据设置到Sign这个属性中
 
 

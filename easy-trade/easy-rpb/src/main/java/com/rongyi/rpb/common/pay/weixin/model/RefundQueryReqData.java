@@ -34,13 +34,13 @@ public class RefundQueryReqData {
      * @param refundID 来自退款API的成功返回，微信退款单号refund_id、out_refund_no、out_trade_no 、transaction_id 四个参数必填一个，如果同事存在优先级为：refund_id>out_refund_no>transaction_id>out_trade_no
      */
 
-    public RefundQueryReqData(String transactionID,String outTradeNo,String deviceInfo,String outRefundNo,String refundID){
+    public RefundQueryReqData(String transactionID,String outTradeNo,String deviceInfo,String outRefundNo,String refundID,Configure configure){
 
         //微信分配的公众号ID（开通公众号之后可以获取到）
-        setAppid(Configure.getAppid());
+        setAppid(configure.getAppID());
 
         //微信支付分配的商户号ID（开通公众号的微信支付功能之后可以获取到）
-        setMch_id(Configure.getMchid());
+        setMch_id(configure.getMchID());
 
         //transaction_id是微信系统为每一笔支付交易分配的订单号，通过这个订单号可以标识这笔交易，它由支付订单API支付成功时返回的数据里面获取到。
         setTransaction_id(transactionID);
@@ -60,7 +60,7 @@ public class RefundQueryReqData {
         setNonce_str(RandomStringGenerator.getRandomStringByLength(32));
 
         //根据API给的签名规则进行签名
-        String sign = Signature.getSign(toMap());
+        String sign = Signature.getSign(toMap(),configure.getKey());
         setSign(sign);//把签名数据设置到Sign这个属性中
 
     }
