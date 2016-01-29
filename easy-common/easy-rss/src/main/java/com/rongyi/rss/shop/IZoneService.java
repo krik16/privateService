@@ -33,6 +33,12 @@ public interface IZoneService {
     public CityDocument getCityDocument(String zoneMid) throws Exception;
 
     /**
+     * 获取商城数量
+     * @return
+     */
+    public long getMallCount();
+
+    /**
      * mall索引 分页
      * @param skip
      * @param pageSize
