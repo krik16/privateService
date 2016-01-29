@@ -16,6 +16,10 @@ import java.io.Serializable;
  */
 public class UserOperateVO implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer newCoupon = 0;//上次操作我的代金券之后领取的代金券数量
 	private Integer newHongBao = 0;	//上次操作我的红包之后领取的红包数量
 	private Integer newRebate = 0;//上次操作我的抵扣券之后领取的抵扣券数量
@@ -24,8 +28,10 @@ public class UserOperateVO implements Serializable{
 	private Integer myCouponNum = 0;//我的代金券数量
 	private Integer myHongBaoNum = 0;//我的红包数量
 	private Integer myRebateNum = 0;//我的抵扣券数量
-	private Integer nonPayment = 0;//待付款订单数量
+	private Integer nonPayment = 0;//待付款订单数量（含商品订单和优惠券订单）
 	private Integer nonReceived = 0;//待收货订单数量
+	private Integer unPaidOrderCount = 0;//待付款商品订单数量
+	private Integer unPaidCouponOrderCount = 0;//待付款优惠券订单数量
 	public Integer getMyCouponNum() {
 		return myCouponNum;
 	}
@@ -85,6 +91,18 @@ public class UserOperateVO implements Serializable{
 	}
 	public void setNonReceived(Integer nonReceived) {
 		this.nonReceived = nonReceived;
+	}
+	public Integer getUnPaidOrderCount() {
+		return unPaidOrderCount;
+	}
+	public void setUnPaidOrderCount(Integer unPaidOrderCount) {
+		this.unPaidOrderCount = unPaidOrderCount;
+	}
+	public Integer getUnPaidCouponOrderCount() {
+		return unPaidCouponOrderCount;
+	}
+	public void setUnPaidCouponOrderCount(Integer unPaidCouponOrderCount) {
+		this.unPaidCouponOrderCount = unPaidCouponOrderCount;
 	}
 	
 }

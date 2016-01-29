@@ -113,7 +113,14 @@ public class PaymentEntityVO {
      */
     private String timeExpire;
 
+    /**
+     * 微信APPId
+     */
+    private String appId;
 
+    private String openId;
+
+    private Integer weixinPayType;
     /**
      * 主键id
      *
@@ -412,5 +419,27 @@ public class PaymentEntityVO {
         this.orderType = orderType;
     }
 
+    public String getAppId() {
+        return appId;
+    }
 
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
+
+    public Integer getWeixinPayType() {
+        return weixinPayType;
+    }
+
+    public void setWeixinPayType(Integer weixinPayType) {
+        this.weixinPayType = weixinPayType;
+    }
 }

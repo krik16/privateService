@@ -10,61 +10,28 @@ import java.util.Date;
  * Created at 2015/7/21 17:17.
  */
 public  enum ValueType implements Serializable {
-    VARCHAR, DATE, TIMESTAMP, DECIMAL, BIGINT, FLOAT,TINYINT,INTEGER;
+    VARCHAR("VARCHAR"), DATE("DATE"), TIMESTAMP("TIMESTAMP"), DECIMAL("DECIMAL"), BIGINT("BIGINT"), FLOAT("FLOAT"),TINYINT("TINYINT"),INTEGER("INTEGER");
 
     public static ValueType toType(String type) {
-        if ("VARCHAR".equals(type)) {
-            return VARCHAR;
-        }
-        if ("DATE".equals(type)) {
-            return DATE;
-        }
-        if ("TIMESTAMP".equals(type)) {
-            return TIMESTAMP;
-        }
-        if ("DECIMAL".equals(type)) {
-            return DECIMAL;
-        }
-        if ("BIGINT".equals(type)) {
-            return BIGINT;
-        }
-        if ("FLOAT".equals(type)) {
-            return FLOAT;
-        }
-        if ("TINYINT".equals(type)) {
-            return TINYINT;
-        }
-        if ("INTEGER".equals(type)) {
-            return INTEGER;
+        for(ValueType valueType:ValueType.values()) {
+            if(valueType.getValue().equals(type)){
+                return valueType;
+            }
         }
         return null;
     }
 
-    public String toString() {
-        if (this == VARCHAR) {
-            return "VARCHAR";
-        }
-        if (this == DATE) {
-            return "DATE";
-        }
-        if (this == TIMESTAMP) {
-            return "TIMESTAMP";
-        }
-        if (this == DECIMAL) {
-            return "DECIMAL";
-        }
-        if (this == BIGINT) {
-            return "BIGINT";
-        }
-        if (this == FLOAT) {
-            return "FLOAT";
-        }
-        if (this == TINYINT) {
-            return "TINYINT";
-        }
-        if (this == INTEGER) {
-            return "INTEGER";
-        }
-        return "VARCHAR";
+    private String value;
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    private ValueType(String str){
+        this.value=str;
     }
 }
