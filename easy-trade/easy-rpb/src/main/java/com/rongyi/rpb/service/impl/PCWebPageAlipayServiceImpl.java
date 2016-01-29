@@ -20,7 +20,6 @@ import com.rongyi.rpb.service.PaymentLogInfoService;
 import com.rongyi.rpb.service.PaymentOrderOpService;
 import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rss.mallshop.user.ROAUserService;
-
 import org.drools.core.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,9 +33,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Author: 柯军
- * @Description: PC端退付款实现
- * @datetime:2015年4月23日上午10:04:32
+ * Author: 柯军
+ * Description: PC端退付款实现
+ * datetime:2015年4月23日上午10:04:32
  * 
  **/
 @Service
@@ -62,10 +61,10 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 
 	@Override
 	public Map<String, Object> getOnePayInfo(String payNo, String totalFee, String buyerEmail, String buyerName, String desc) {
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<>();
 		// 把请求参数打包成数组
 		String detail_data = payNo + "^" + buyerEmail + "^" + buyerName + "^" + totalFee + "^" + desc;
-		Map<String, String> sParaTempToken = new HashMap<String, String>();
+		Map<String, String> sParaTempToken = new HashMap<>();
 		sParaTempToken.put("service", ConstantUtil.PCZhiFuBaoWebPage.AUTHORIZATION_SERVICE);
 		sParaTempToken.put("partner", ConstantUtil.PayZhiFuBao.PARTNER);
 		sParaTempToken.put("_input_charset", ConstantUtil.PayZhiFuBao.INPUT_CHARSET);
@@ -93,9 +92,9 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 
 	@Override
 	public List<Map<String, Object>> getBatchPayBuyerMessage(String[] idArray, String desc) {
-		List<Map<String, Object>> buyerList = new ArrayList<Map<String, Object>>();
+		List<Map<String, Object>> buyerList = new ArrayList<>();
 		for (String id : idArray) {
-			Map<String, Object> buyerMap = new HashMap<String, Object>();
+			Map<String, Object> buyerMap = new HashMap<>();
 			PaymentEntity paymentEntity = paymentService.selectByPrimaryKey(id);
 			buyerMap.put("payNo", paymentEntity.getPayNo());
 			buyerMap.put("total_fee", paymentEntity.getAmountMoney().toString());
@@ -109,7 +108,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 
 	@Override
 	public Map<String, Object> getBatchPayInfo(List<Map<String, Object>> buyerList) {
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<>();
 		StringBuilder detailData = new StringBuilder();
 		// 把请求参数打包成数组
 		Double batch_fee = 0.0;
@@ -127,7 +126,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 				detailData.append("|");
 			batch_fee += Double.valueOf(buyerList.get(i).get("total_fee").toString());
 		}
-		Map<String, String> sParaTempToken = new HashMap<String, String>();
+		Map<String, String> sParaTempToken = new HashMap<>();
 		sParaTempToken.put("service", ConstantUtil.PCZhiFuBaoWebPage.AUTHORIZATION_SERVICE);
 		sParaTempToken.put("partner", ConstantUtil.PayZhiFuBao.PARTNER);
 		sParaTempToken.put("_input_charset", ConstantUtil.PayZhiFuBao.INPUT_CHARSET);
@@ -155,7 +154,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 
 	@Override
 	public Map<String, Object> getRefunInfo(PaymentEntity paymentEntity, String batch_num, String price, String tradeNo, String desc) {
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<>();
 		String batchNo = getBatchNo(paymentEntity.getPayNo());
 		try {
 			if (paymentEntity.getBatchNo() != null) {
@@ -171,7 +170,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 			}
 			String detailData = tradeNo + "^" + price + "^" + desc;
 			// 把请求参数打包成数组
-			Map<String, String> sParaTemp = new HashMap<String, String>();
+			Map<String, String> sParaTemp = new HashMap<>();
 			sParaTemp.put("service", ConstantUtil.PCRefundWebPage.AUTHORIZATION_SERVICE);
 			sParaTemp.put("partner", AlipayConfig.partner);
 			sParaTemp.put("_input_charset", AlipayConfig.input_charset);
@@ -192,7 +191,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 
 	@Override
 	public List<Map<String, Object>> getBatchRefundBuyerMessage(String[] idArray, String desc) {
-		List<Map<String, Object>> refundList = new ArrayList<Map<String, Object>>();
+		List<Map<String, Object>> refundList = new ArrayList<>();
 		String batchNo = getBatchNo(null);
 		for (String id : idArray) {// 验证批量单号是否已存在
 			PaymentEntity paymentEntity = paymentService.selectByPrimaryKey(id);
@@ -206,13 +205,13 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 		}
 		LOGGER.info("batchNo=" + batchNo);
 		for (String id : idArray) {
-			Map<String, Object> buyerMap = new HashMap<String, Object>();
+			Map<String, Object> buyerMap = new HashMap<>();
 			PaymentEntity paymentEntity = paymentService.selectByPrimaryKey(id);
 			if (paymentEntity.getBatchNo() == null || !batchNo.equals(paymentEntity.getBatchNo())) {
 				paymentEntity.setBatchNo(batchNo);
 				paymentService.updateByPrimaryKeySelective(paymentEntity);
 			}
-			PaymentEntity historyPaymentEntity = null;
+			PaymentEntity historyPaymentEntity;
 			if (Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1 == paymentEntity.getTradeType())// 正常支付退款记录
 				historyPaymentEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
 						paymentEntity.getPayChannel());
@@ -237,7 +236,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 
 	@Override
 	public Map<String, Object> getBatchRefunInfo(List<Map<String, Object>> refundList) {
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<>();
 		String desc = "协商退款";
 		StringBuilder detailData = new StringBuilder();
 		for (int i = 0; i < refundList.size(); i++) {
@@ -250,7 +249,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 				detailData.append("#");
 		}
 		// 把请求参数打包成数组
-		Map<String, String> sParaTemp = new HashMap<String, String>();
+		Map<String, String> sParaTemp = new HashMap<>();
 		sParaTemp.put("service", ConstantUtil.PCRefundWebPage.AUTHORIZATION_SERVICE);
 		sParaTemp.put("partner", AlipayConfig.partner);
 		sParaTemp.put("_input_charset", AlipayConfig.input_charset);
@@ -274,11 +273,11 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 	@Override
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> getHtmlMap(MessageEvent event) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		Map<String, Object> messageMap = null;
+		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> messageMap;
 		try {
 			messageMap = JsonUtil.getMapFromJson(event.getBody().toString());
-			String[] idArray = messageMap.get("paymentId").toString().split("\\,");
+			String[] idArray = messageMap.get("paymentId").toString().split(",");
 			Integer operateType = Integer.valueOf(messageMap.get("operateType").toString());
 			if (PayEnum.DRAW_APPLY_ONE.getCode().equals(operateType) || PayEnum.EXCE_PAY_ONE.getCode().equals(operateType) || PayEnum.STATEMENT_ONE.getCode().equals(operateType)) {
 				LOGGER.info("单条支付");
@@ -291,7 +290,7 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 			} else if (PayEnum.TRADE_REFUND_ONE.getCode().equals(operateType)) {
 				LOGGER.info("单条退款");
 				PaymentEntity paymentEntity = paymentService.selectByPrimaryKey(messageMap.get("paymentId").toString());
-				PaymentEntity hisPayEntity = null;
+				PaymentEntity hisPayEntity;
 				if (Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1 == paymentEntity.getTradeType())// 正常付款记录退款
 					hisPayEntity = paymentService.selectByOrderNumAndTradeType(paymentEntity.getOrderNum(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2,
 							paymentEntity.getPayChannel());// 根据退款单记录中的订单号找到对应的历史付款单记录（用来查找付款交易流水号）
@@ -329,9 +328,9 @@ public class PCWebPageAlipayServiceImpl extends BaseServiceImpl implements PCWeb
 	}
 
 	/**
-	 * @Description:付款操作记录
-	 * @param:
-	 * @Author:  柯军
+	 * Description:付款操作记录
+	 * @param paymentIds
+	 * Author:  柯军
 	 **/
 
 	private void insertOp(String[] paymentIds,String userId){

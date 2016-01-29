@@ -76,7 +76,7 @@ public class UnionpayMarketingServiceImpl extends BaseServiceImpl implements Uni
 	}
 
 	/**
-	 * @param contentData
+	 * @param submitFromData
 	 * @return 返回报文 map
 	 */
 	public static Map<String, String> submitDataInfo(Map<String, String> submitFromData, String requestUrl) {
