@@ -118,9 +118,9 @@ public class SystemConfig implements Serializable{
         if(minute > 0) {
             sb.append(minute+"分");
         }
-         if(second > 0) {
+        /* if(second > 0) {
             sb.append(second+"秒");
-        }
+        }*/
        /* if(milliSecond > 0) {
             sb.append(milliSecond+"毫秒");
         }*/
