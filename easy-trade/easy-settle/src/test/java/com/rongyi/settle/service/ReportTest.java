@@ -24,8 +24,8 @@ public class ReportTest extends BaseTest{
 //    @Rollback(false)
     public void sendEmailTest(){
     	try {
-//			paymentStatementService.generateForSchedule();
-    		paymentStatementService2.generate(1092, "admin");
+			paymentStatementService.generateForSchedule();
+//    		paymentStatementService2.generate(1092, "admin");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

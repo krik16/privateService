@@ -53,7 +53,7 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
                 DateTime settleEndDay = new DateTime(statementConfig.getEffectEndTime());
                 settleEndDay = settleEndDay.plusDays(spacingDays);
                 DateTime currentDateTime = new DateTime();
-                while (!settleDay.isAfter(settleEndDay)) {
+                while (settleDay.isBefore(settleEndDay)) {
                     if (Days.daysBetween(currentDateTime, settleDay).getDays() == 0) {
                         Date settlePeriodFirstSecond = DateUtils.getSomedayFirstSecond(spacingDays);
                         Date settlePeriodLastSecond;
@@ -95,11 +95,14 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
             try {
                 List<String> regularDays = Arrays.asList(statementConfig.getCycleRegularDay().split("&"));
                 DateTime effectEndTime = new DateTime(statementConfig.getEffectEndTime());
-                DateTime currentTime = new DateTime(new Date());
+                DateTime effectStartTime = new DateTime(statementConfig.getEffectStartTime());
+                DateTime currentTime = new DateTime();
 
                 if (regularDays.contains(String.valueOf(currentTime.getDayOfMonth()))) {
+                    Integer toDayOfMonth = currentTime.getDayOfMonth();
                     Date settlePeriodFirstSecond = new Date();
                     Date settlePeriodLastSecond = new Date();
+                    DateTime settlementStartTime = new DateTime();
 
                     if (currentTime.isAfter(effectEndTime) && Months.monthsBetween(effectEndTime, currentTime).getMonths() <= 1) {
                         int settlementStartDay = 0;
@@ -117,7 +120,6 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
                             }
                         }
 
-                        DateTime settlementStartTime = new DateTime();
                         if (settlementStartDay == 0) {
                             settlementStartDay = Integer.valueOf(regularDays.get(regularDays.size() - 1));
                             settlementStartTime = settlementStartTime.minusMonths(1);
@@ -126,6 +128,23 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
 
                         settlePeriodFirstSecond = settlementStartTime.toDate();
                         settlePeriodLastSecond = DateUtils.getAllocatedDayLastSecond(statementConfig.getEffectEndTime());
+                    } else if (currentTime.isBefore(effectEndTime)) {
+                        int index = regularDays.indexOf(toDayOfMonth.toString());
+                        if (--index < 0) {
+                            index = regularDays.size() - 1;
+                        }
+                        String startDayOfMonth = regularDays.get(index);
+                        settlementStartTime = settlementStartTime.withDayOfMonth(Integer.valueOf(startDayOfMonth));
+                        if (index == regularDays.size() - 1) {
+                            settlementStartTime = settlementStartTime.minusMonths(1);
+                        }
+                        if (settlementStartTime.isBefore(effectStartTime)) {
+                            settlementStartTime = effectStartTime;
+                        }
+                        settlePeriodFirstSecond = settlementStartTime.toDate();
+                        settlePeriodLastSecond = DateUtils.getYesterdayLastSecond();
+                    } else {
+                        continue;
                     }
 
                     List<PaymentStatement> paymentStatements = paymentStatementService.selectByCycleTime(statementConfig.getId(), settlePeriodFirstSecond, settlePeriodLastSecond);
