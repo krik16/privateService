@@ -105,6 +105,7 @@ public class ShopDocument implements Serializable {
 	}
 
 	public ShopDocument(ShopEntity shop) {
+		id=shop.getId().toString();
 		if(StringUtils.isNotBlank(shop.getName()))
 			name=shop.getName();
 		if(shop.getOperator_id()!=null)
