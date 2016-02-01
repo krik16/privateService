@@ -180,6 +180,7 @@ public class PaymentStatementController extends BaseController {
 			List<PaymentStatementDto> list;
 			int count;
 			if (searchType == 5) {
+				LOGGER.info("query params map={}", map);
 				list = paymentStatementService.selectPageListForMerchant(map, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt());
 				count = paymentStatementService.selectPageListCountForMerchant(map);
 				for (PaymentStatementDto paymentStatementDto : list) {
