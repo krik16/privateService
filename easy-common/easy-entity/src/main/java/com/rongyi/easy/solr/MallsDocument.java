@@ -59,7 +59,7 @@ public class MallsDocument implements java.io.Serializable{
 	private Date created_at;//创建时间
 	private Date updated_at;//更新时间
 
-	private ArrayList<ObjectId> zone_ids;
+	private ArrayList<String> zone_ids;
 
 	private String shopcount;
 	//进行空值判断，不建索引，1表示有值
@@ -100,9 +100,8 @@ public class MallsDocument implements java.io.Serializable{
 		mall_valid=Integer.toString(zone.getMall_valid());
 		if(StringUtils.isNotBlank(zone.getBusiness_status()))
 			business_status=zone.getBusiness_status();
-		/*if(CollectionUtils.isNotEmpty(zone.getParent_ids())){
-			parent_ids=zone.getParent_ids();
-		}*/
+		if(CollectionUtils.isNotEmpty(zone.getParent_ids()))
+			zone_ids=ListUtil.toStringList(zone.getParent_ids());
 		if(StringUtils.isNotBlank(zone.getRecommend()))
 			recommend=zone.getRecommend();
 		else
@@ -307,11 +306,11 @@ public class MallsDocument implements java.io.Serializable{
 		this.updated_at = updated_at;
 	}
 
-	public ArrayList<ObjectId> getZone_ids() {
+	public ArrayList<String> getZone_ids() {
 		return zone_ids;
 	}
 
-	public void setZone_ids(ArrayList<ObjectId> zone_ids) {
+	public void setZone_ids(ArrayList<String> zone_ids) {
 		this.zone_ids = zone_ids;
 	}
 
