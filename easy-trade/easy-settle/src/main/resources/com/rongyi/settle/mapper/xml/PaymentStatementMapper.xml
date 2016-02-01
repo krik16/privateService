@@ -344,6 +344,9 @@
 			and pb.cycle_start_time &gt;=
 			#{createAtStart,jdbcType=TIMESTAMP}
 		</if>
+		<if test="predictPayTimeBegin!=null">
+			and pb.predict_pay_time &lt; #{predictPayTimeBegin}
+		</if>
 		<if test="createAtEnd != null and createAtEnd != ''">
 			and pb.cycle_start_time &lt;=
 			#{createAtEnd,jdbcType=TIMESTAMP}
