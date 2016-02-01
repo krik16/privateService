@@ -11,6 +11,7 @@ import com.rongyi.settle.service.StatementConfigService;
 import com.rongyi.settle.util.DateUtils;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
+import org.joda.time.IllegalFieldValueException;
 import org.joda.time.Months;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -100,8 +101,8 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
 
                 if (regularDays.contains(String.valueOf(currentTime.getDayOfMonth()))) {
                     Integer toDayOfMonth = currentTime.getDayOfMonth();
-                    Date settlePeriodFirstSecond = new Date();
-                    Date settlePeriodLastSecond = new Date();
+                    Date settlePeriodFirstSecond;
+                    Date settlePeriodLastSecond;
                     DateTime settlementStartTime = new DateTime();
 
                     if (currentTime.isAfter(effectEndTime) && Months.monthsBetween(effectEndTime, currentTime).getMonths() <= 1) {
@@ -164,6 +165,9 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
                         paymentStatementService.createExcel(null, paymentStatement, statementConfig, null);
                     }
                 }
+            } catch (IllegalFieldValueException illDateE) {
+                logger.error(illDateE.getMessage());
+                logger.error("定时任务-执行对账单配置出错，自定义类型配置不支持>29日的日期。id=" + statementConfig.getId() + ", regularDays: " + statementConfig.getRegularDay());
             } catch (Exception e) {
                 e.printStackTrace();
                 logger.error("定时任务-执行对账单配置出错。id=" + statementConfig.getId());

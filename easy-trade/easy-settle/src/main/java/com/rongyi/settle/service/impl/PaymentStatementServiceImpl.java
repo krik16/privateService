@@ -545,8 +545,8 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
             ids.add(id);
             updatePaymentStatusByIds(ids, ConstantEnum.STATUS_8.getCodeInt(), "重新生成或作废", userId);
         }
-        id = insert(paymentStatement);
-        logger.info("对账单生成完毕, id: " + id);
+        insert(paymentStatement);
+        logger.info("对账单生成完毕, id: " + paymentStatement.getId());
     }
 
     /**

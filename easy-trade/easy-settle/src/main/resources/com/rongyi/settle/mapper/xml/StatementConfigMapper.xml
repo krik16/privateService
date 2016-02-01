@@ -448,7 +448,7 @@
         WHERE `status`=1 
         	AND is_delete=0
             AND count_cycle = #{cycleType,jdbcType=TINYINT}
-        	AND DATE_ADD(#{currentTime,jdbcType=TIMESTAMP}, INTERVAL -IFNULL(cycle_day, 0) DAY) BETWEEN effect_start_time AND effect_end_time
+        	AND DATE_ADD(#{currentTime,jdbcType=TIMESTAMP}, INTERVAL -IFNULL(cycle_day, 1) DAY) BETWEEN effect_start_time AND effect_end_time
     </select>
 
     <select id="selectForScheduleJumping" parameterType="java.util.Map"
