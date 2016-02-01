@@ -85,7 +85,7 @@ public interface ConstantUtil {
 		String CALL_BACK_URL_WEB = "http://" + NOTIFY_URL.innernetAddress + "/v5/WebPageAlipay/call_back.htm";
 		String NOTIFY_URL_ZHIFUBAO_APP = "http://" + NOTIFY_URL.outernetAddress + "/v5/WebPageAlipay/app/notify_url.htm";
 		String NOTIFY_URL_ZHIFUBAO_WEB = "http://" + NOTIFY_URL.outernetAddress + "/v5/WebPageAlipay/notify_url.htm";
-		String MERCHANT_URL_WEB = "http://api2.rongyi.com/app/v5/WebPageAlipay/merchant_url.htm";
+		String MERCHANT_URL_WEB = "http://" + NOTIFY_URL.innernetAddress + "/v5/WebPageAlipay/merchant_url.htm";
 	}
 	/**
 	 * Author:  柯军
