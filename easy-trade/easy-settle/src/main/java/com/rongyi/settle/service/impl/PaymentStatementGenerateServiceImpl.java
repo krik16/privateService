@@ -101,8 +101,8 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
 
                 if (regularDays.contains(String.valueOf(currentTime.getDayOfMonth()))) {
                     Integer toDayOfMonth = currentTime.getDayOfMonth();
-                    Date settlePeriodFirstSecond = new Date();
-                    Date settlePeriodLastSecond = new Date();
+                    Date settlePeriodFirstSecond;
+                    Date settlePeriodLastSecond;
                     DateTime settlementStartTime = new DateTime();
 
                     if (currentTime.isAfter(effectEndTime) && Months.monthsBetween(effectEndTime, currentTime).getMonths() <= 1) {
