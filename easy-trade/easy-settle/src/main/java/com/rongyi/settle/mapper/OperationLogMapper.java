@@ -19,7 +19,7 @@ public interface OperationLogMapper {
 	int updateByPrimaryKey(OperationLog record);
 
 	/**
-	 * map条件查询日志记录
+	 * map条件查询日志记录(多个取最后一个)
 	 * @param paramsMap
 	 */
 	OperationLog getOpByMap(Map<String, Object> paramsMap);
