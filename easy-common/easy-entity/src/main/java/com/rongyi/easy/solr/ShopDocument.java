@@ -158,7 +158,7 @@ public class ShopDocument implements Serializable {
 		if(StringUtils.isNotBlank(shop.getBusiness_hours()))
 			business_hours=shop.getBusiness_hours();
 		if(shop.getParent_status()!=null)
-			parent_status=shop.getBusiness_status().toString();
+			parent_status=shop.getParent_status().toString();
 		//进行空值判断，不建索引，1表示有值
 		if(CollectionUtils.isNotEmpty(shop.getBrand_ids()))
 			brand_ids="1";
