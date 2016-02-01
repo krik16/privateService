@@ -49,4 +49,6 @@ public interface ICommodityService {
 	public List<Commodity> findBySystemNumer(String systemNumber);
 
 	public CommodityFullVO getFullCommodity(String commodityId);
+
+	public List<CommodityFullVO> getFullCommodityList(List<String> commodityIds);
 }
