@@ -21,7 +21,7 @@ import java.util.List;
 public class MallsDocument implements java.io.Serializable{
      
     /**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -33,26 +33,23 @@ public class MallsDocument implements java.io.Serializable{
     private String name;
     
     @Field
-    private String area1;
+    private String area1;//商城所在省
 
     @Field
-    private String area2;
+    private String area2;//商城所在市
     
     @Field
-    private String area3;
+    private String area3;//商城所在区
     
     @Field
-    private String area4;
+    private String area4;//商城所在商圈
 
 	private String address;
-	private String province;
-	private String city;
-	private String district;
-	private String bussinessDistrict;
+
 	private String operator_id;
 	private String icon;
 	private String mold;
-	private String mall_valid;
+	private String mall_valid;//商城状态
 	private String terminal_mall;
 	private String business_status;
 
@@ -61,7 +58,7 @@ public class MallsDocument implements java.io.Serializable{
 
 	private ArrayList<String> zone_ids;
 
-	private String shopcount;
+	private String shopcount;//商城下属店铺数量
 	//进行空值判断，不建索引，1表示有值
 	private String parent_id;
 	private String description;
@@ -76,7 +73,7 @@ public class MallsDocument implements java.io.Serializable{
 	private String terminal_logo;
 	private String recommend;
 	private ArrayList<String> aliases;//别名
-	private String floor;//楼层
+	private String floor;//楼层 1表示商城有楼层
 	private String slug;//名称拼音
 	//private List<ObjectId> parent_ids;
 
@@ -208,38 +205,6 @@ public class MallsDocument implements java.io.Serializable{
 
 	public void setAddress(String address) {
 		this.address = address;
-	}
-
-	public String getProvince() {
-		return province;
-	}
-
-	public void setProvince(String province) {
-		this.province = province;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getDistrict() {
-		return district;
-	}
-
-	public void setDistrict(String district) {
-		this.district = district;
-	}
-
-	public String getBussinessDistrict() {
-		return bussinessDistrict;
-	}
-
-	public void setBussinessDistrict(String bussinessDistrict) {
-		this.bussinessDistrict = bussinessDistrict;
 	}
 
 	public String getOperator_id() {

@@ -90,6 +90,12 @@ public interface IShopService {
 	public List<String> searchShop(String filialeId, int currpage, int pageSize);
 
 	/**
+	 * 获取店铺数量
+	 * @return
+	 */
+	public long getShopCount();
+
+	/**
 	 * 分页查询店铺转换成solr对象
 	 * @param skip
 	 * @param pageSize
