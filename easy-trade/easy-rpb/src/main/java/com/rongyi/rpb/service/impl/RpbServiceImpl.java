@@ -384,6 +384,9 @@ public class RpbServiceImpl implements IRpbService {
 		ResponseData responseData;
 		try{
 			WeixinMch oldWeixinMch = weixinMchService.selectByMchIdAndUserId(weixinMch.getMchId(),weixinMch.getUserId());
+			if(weixinMch.getIsRongyiPay() == null){
+				weixinMch.setIsRongyiPay(ConstantEnum.WEIXIN_IS_RONGYI_PAY_0.getCodeByte());
+			}
 			if(oldWeixinMch == null) {
 				weixinMchService.insert(weixinMch);
 			}else{
