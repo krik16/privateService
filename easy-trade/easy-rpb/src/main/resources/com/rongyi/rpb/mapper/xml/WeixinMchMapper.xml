@@ -81,7 +81,7 @@
       <if test="tradeType != null" >
         trade_type = #{tradeType,jdbcType=VARCHAR},
       </if>
-      <if test="is_rongyi_pay != null" >
+      <if test="isRongyiPay != null" >
         is_rongyi_pay = #{isRongyiPay,jdbcType=TINYINT}
       </if>
     </set>
