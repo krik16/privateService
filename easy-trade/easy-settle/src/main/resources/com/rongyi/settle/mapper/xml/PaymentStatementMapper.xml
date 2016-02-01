@@ -426,7 +426,7 @@
 		update payment_bill
 		set status=#{status, jdbcType=INTEGER},
 		status_update_time = #{statusUpdateTime,jdbcType=TIMESTAMP},
-		predict_pay_time = #{predictPayTime, TIMESTAMP}
+		predict_pay_time = #{predictPayTime, jdbcType=TIMESTAMP}
 		<where>
 			<if test="ids != null">
 				AND id in
