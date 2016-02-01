@@ -202,7 +202,7 @@ public class Pinyin4jUtil {
 	 * 将字符串中所有括号的内容去除
 	 */
 	public  static String tripBracket(String str) {
-		Pattern pattern = Pattern.compile("[(（].*[)）]");
+		Pattern pattern = Pattern.compile("[(\\uff08].*[)\\uff09]");
 		Matcher matcher = pattern.matcher(str);
 		while(matcher.find())
 			str = matcher.replaceAll("");
