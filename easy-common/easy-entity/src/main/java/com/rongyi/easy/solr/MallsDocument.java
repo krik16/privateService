@@ -146,7 +146,7 @@ public class MallsDocument implements java.io.Serializable{
 		//缩略
 		if(StringUtils.isNotBlank(zone.getName())){
 			List<String> pinyins = Pinyin4jUtil.converterToSpell(zone.getName());
-			if (ListUtil.isNotEmpty(pinyins)&&pinyins.size()>2) {
+			if (ListUtil.isNotEmpty(pinyins)&&pinyins.size()>1) {
 				slug=pinyins.get(1);
 			} else {
 				slug=zone.getName();
