@@ -44,6 +44,7 @@ public class ActivityData extends Data implements Serializable {
     private List<Integer> afterSaleService;//CouponConst.AFTER_SALE_SERVICE;//[1,1,1] 1为支持，0为不支持。第一位：随时退、第二位：过期退 第三位： 免预约
     private Integer payDownTime; //支付剩余时间(单位是秒)
 
+    private String easyOrder;
 
     public String get_id() {
         return _id;
@@ -260,8 +261,16 @@ public class ActivityData extends Data implements Serializable {
     public void setPayDownTime(Integer payDownTime) {
         this.payDownTime = payDownTime;
     }
-    
-	@Override
+
+    public String getEasyOrder() {
+        return easyOrder;
+    }
+
+    public void setEasyOrder(String easyOrder) {
+        this.easyOrder = easyOrder;
+    }
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("_id", _id)

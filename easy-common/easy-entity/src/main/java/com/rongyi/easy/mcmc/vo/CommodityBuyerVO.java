@@ -37,6 +37,8 @@ public class CommodityBuyerVO implements Serializable{
 	private String systemNumber; //商品SPU
 	private String activityType = "0";	//活动类型[0其他 闪购1、特卖2、秒杀3]
 
+	private String easyOrder;//容易令
+
 	public String getActivityType() {
 		return activityType;
 	}
@@ -374,7 +376,15 @@ public class CommodityBuyerVO implements Serializable{
 	public void setSupportCourierDeliver(boolean supportCourierDeliver) {
 		this.supportCourierDeliver = supportCourierDeliver;
 	}
-	
+
+	public String getEasyOrder() {
+		return easyOrder;
+	}
+
+	public void setEasyOrder(String easyOrder) {
+		this.easyOrder = easyOrder;
+	}
+
 	public boolean isSupportSelfPickup() {
 		return supportSelfPickup;
 	}
