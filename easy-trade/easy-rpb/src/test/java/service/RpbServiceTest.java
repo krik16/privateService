@@ -8,19 +8,18 @@
 
 package service;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import base.BaseTest;
+import com.rongyi.core.common.util.DateUtil;
+import com.rongyi.easy.mq.MessageEvent;
+import com.rongyi.easy.rpb.domain.WeixinMch;
+import com.rongyi.easy.rpb.vo.PaymentParamVO;
+import com.rongyi.rss.rpb.IRpbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.testng.annotations.Test;
 
-import base.BaseTest;
-
-import com.rongyi.core.common.util.DateUtil;
-import com.rongyi.easy.mq.MessageEvent;
-import com.rongyi.easy.rpb.vo.PaymentParamVO;
-import com.rongyi.rss.rpb.IRpbService;
+import java.util.HashMap;
+import java.util.Map;
 
 /**	
  * @Author:  柯军
@@ -73,5 +72,19 @@ public class RpbServiceTest extends BaseTest{
 		paymentParamVO.setUserId("superadmin");
 		Map<String,Object> map = iRpbService.generatePayment(paymentParamVO);
 		System.err.println(map.toString());
+	}
+	@Test
+	@Rollback(false)
+	public void testAddWeixinMch(){
+		WeixinMch weixinMch = new WeixinMch();
+		weixinMch.setIsRongyiPay((byte)0);
+		weixinMch.setTradeType("1");
+		weixinMch.setAppId("aaaa");
+		weixinMch.setCretPath("/test/test2");
+		weixinMch.setKey("1231");
+		weixinMch.setMchId("1001");
+		weixinMch.setPublicCode("asda");
+		weixinMch.setUserId("1231");
+		iRpbService.addWeixinMch(weixinMch);
 	}
 }
