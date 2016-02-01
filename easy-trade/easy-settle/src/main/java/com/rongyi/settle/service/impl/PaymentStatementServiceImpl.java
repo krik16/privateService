@@ -153,6 +153,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
                     }
 
                 }
+                logger.info("updateStatusByIds paramsMap={}", paramsMap);
                 paymentStatementMapper.updateStatusByIds(paramsMap);
                 result = true;
             }
