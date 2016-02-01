@@ -179,8 +179,8 @@ public class PaymentStatementController extends BaseController {
 				map.put("statusList", statusList);
 			List<PaymentStatementDto> list;
 			int count;
+			LOGGER.info("query params map={}", map);
 			if (searchType == 5) {
-				LOGGER.info("query params map={}", map);
 				list = paymentStatementService.selectPageListForMerchant(map, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt());
 				count = paymentStatementService.selectPageListCountForMerchant(map);
 				for (PaymentStatementDto paymentStatementDto : list) {
