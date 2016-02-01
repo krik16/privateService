@@ -135,7 +135,8 @@ public class Zones implements Serializable {
 	private String recommend;
 	private ArrayList<String> aliases;//别名
 	private String floor;//楼层
-
+	private int system_status;
+	private int systemStatus;
 	public ObjectId getId() {
 		return id;
 	}
@@ -514,5 +515,21 @@ public class Zones implements Serializable {
 
 	public void setFloor(String floor) {
 		this.floor = floor;
+	}
+
+	public int getSystem_status() {
+		return system_status;
+	}
+
+	public void setSystem_status(int system_status) {
+		this.system_status = system_status;
+	}
+
+	public int getSystemStatus() {
+		return systemStatus;
+	}
+
+	public void setSystemStatus(int systemStatus) {
+		this.systemStatus = systemStatus;
 	}
 }
