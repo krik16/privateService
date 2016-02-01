@@ -37,7 +37,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -440,15 +439,11 @@ public class RpbServiceImpl implements IRpbService {
 					refundStatusVO.setIsPayPlatformProcess(true);
 					refundStatusVO.setPayPlatformDate(paymentEntity.getFinishTime());
 					//比较支付宝已完成时间加预计时间是否大于当前时间
-//					if (DateUtil.dateDiff(DateUtil.getCurrDateTime(), DateUtil.addWorkDay(paymentEntity.getFinishTime(), refundQueryParamVO.getRefundedDay())) < 0) {
-					//TODO 测试
-					if (DateUtil.dateDiff(DateUtil.getCurrDateTime(), DateUtil.addTime(paymentEntity.getFinishTime(), 10, Calendar.MINUTE)) < 0) {
+					if (DateUtil.dateDiff(DateUtil.getCurrDateTime(), DateUtil.addWorkDay(paymentEntity.getFinishTime(), refundQueryParamVO.getRefundedDay())) < 0) {
 						refundStatusVO.setRefundReslt(ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getCodeStr());
 					} else {
 						refundStatusVO.setRefundReslt(ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr());
-//						refundStatusVO.setRefundDate(DateUtil.addWorkDay(paymentEntity.getFinishTime(), refundQueryParamVO.getRefundedDay()));
-						//TODO 测试
-						refundStatusVO.setRefundDate(DateUtil.addTime(paymentEntity.getFinishTime(), 10, Calendar.MINUTE));
+						refundStatusVO.setRefundDate(DateUtil.addWorkDay(paymentEntity.getFinishTime(), refundQueryParamVO.getRefundedDay()));
 					}
 				} else {//退款失败
 					refundStatusVO.setIsPayPlatformProcess(false);

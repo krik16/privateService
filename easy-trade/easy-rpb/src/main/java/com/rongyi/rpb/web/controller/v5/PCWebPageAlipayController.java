@@ -1,17 +1,5 @@
 package com.rongyi.rpb.web.controller.v5;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.constant.PaymentEventType;
 import com.rongyi.easy.mq.MessageEvent;
@@ -19,14 +7,25 @@ import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentItemEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.PayNotifyVO;
+import com.rongyi.easy.rpb.vo.PaymentEntityVO;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.mq.Sender;
-import com.rongyi.rpb.service.PCWebPageAlipayService;
-import com.rongyi.rpb.service.PaymentItemService;
-import com.rongyi.rpb.service.PaymentLogInfoService;
-import com.rongyi.rpb.service.PaymentService;
-import com.rongyi.rpb.service.RpbEventService;
+import com.rongyi.rpb.service.*;
 import com.rongyi.rpb.web.controller.BaseController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author LiuChao 2014年8月26日16:17 支付宝网页支付API。 包含支付宝网页支付：
@@ -52,6 +51,42 @@ public class PCWebPageAlipayController extends BaseController {
 
 	@Autowired
 	Sender sender;
+
+	@Autowired
+	WebPageAlipayService webPageAlipayService;
+	/**
+	 * @Description: 支付宝页面支付，接收APP前台传来订单号进行支付宝网页支付相关操作（测试使用）
+	 * @param orderId
+	 * @param model
+	 * @return
+	 * @Author: 柯军
+	 * @datetime:2015年6月26日下午6:24:31
+	 **/
+	@RequestMapping("/zhifubaoRepay.htm")
+	public String zhifubaoRepayTest(@RequestParam String orderId, Model model) {
+		PaymentEntity paymentEntity = new PaymentEntity();
+		paymentEntity.setPayNo(orderId);
+		paymentEntity.setOrderNum(orderId);
+		paymentEntity.setTradeType(0);
+		paymentEntity.setOrderType(0);
+		paymentService.insert(paymentEntity);
+		PaymentEntityVO paymentEntityVO = new PaymentEntityVO();
+		BeanUtils.copyProperties(paymentEntity, paymentEntityVO);
+		paymentEntityVO.setAmountMoney(new BigDecimal("0.01"));
+		paymentEntityVO.setTitle("test");
+		paymentEntityVO.setTimeStart("2015-02-01 13:40");
+		paymentEntityVO.setTimeExpire("2015-02-01 14:48");
+		paymentEntityVO.setPayNo("1231231231231");
+		String total_fee = "0.01";
+		String itemName = "容易2015-03-25";
+		try {
+			Map<String, Object> map = webPageAlipayService.getToken(paymentEntityVO);
+			model.addAttribute("content", map.get("sHtmlText"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "zhifu";
+	}
 
 	/**
 	 * 支付宝打款成功通知
