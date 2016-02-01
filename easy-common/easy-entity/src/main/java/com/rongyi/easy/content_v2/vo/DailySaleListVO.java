@@ -15,6 +15,10 @@ public class DailySaleListVO implements Serializable {
     private Integer type;
     /**类型值*/
     private String typeVal;
+    /**
+     * 每日秒杀的标签 如果是今天限时时间 如果是明天显示未开始
+     */
+    private String label;
     /**名称*/
     private String title;
     /**原价*/
@@ -102,11 +106,20 @@ public class DailySaleListVO implements Serializable {
         this.dailyPic = dailyPic;
     }
 
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("type", type)
                 .append("typeVal", typeVal)
+                .append("label", label)
                 .append("title", title)
                 .append("origPrice", origPrice)
                 .append("currPrice", currPrice)
