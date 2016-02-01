@@ -48,6 +48,7 @@ $(function(){
 		imglist.eq(i).removeAttr('style');
 		imglist.eq(i).css('max-width','100%');
 	}
+	alert("test  支付出现异常或者用户中途取消支付");
 	window.Rongyi.HtmlNavigatePaySuccess(false,"支付出现异常或者用户中途取消支付");
 
 })
