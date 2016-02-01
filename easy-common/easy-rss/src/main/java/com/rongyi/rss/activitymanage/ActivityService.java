@@ -34,6 +34,27 @@ public interface ActivityService {
      * @author Leon
      */
     boolean checkActivityInfo(ActivityCheckRecord activityCheckRecord);
+
+    /**
+     * 批量新增ActivityGoods数据
+     * @param ActivityGoods
+     * @return boolean
+     * @author Leon
+     */
+    boolean insertBatchGoods(List<ActivityGoods> ActivityGoods);
+
+    /**
+     * 保存导入失败的商品
+     * @param activityGoodsImports
+     * @return boolean
+     * @author Leon
+     */
+    boolean saveActivityGoodsImport(List<ActivityGoodsImport> activityGoodsImports);
+
+
+
+
+
     /**
 	 * 根据活动ID统计报名的商品卡券数量
 	 * @param queryActivityGoods
@@ -71,13 +92,7 @@ public interface ActivityService {
      */
     public PagingVO<ActivityInfoListVO> getActivityList(SearchActivityParam searchActivityParam);
 
-    /**
-     * 保存添加商品导入的excel数据
-     * @param activityGoodsImports
-     * @return boolean
-     * @author Leon
-     */
-    boolean saveActivityGoodsImport(List<ActivityGoodsImport> activityGoodsImports);
+
 
     /**
      * 查询导入的商品列表
@@ -111,13 +126,7 @@ public interface ActivityService {
      */
     ResponseVO saveActivityGoods(ActivityGoodsImportParam param);
 
-    /**
-     * 批量新增ActivityGoods数据
-     * @param ActivityGoods
-     * @return boolean
-     * @author Leon
-     */
-    boolean insertBatchGoods(List<ActivityGoods> ActivityGoods);
+
 
 
 

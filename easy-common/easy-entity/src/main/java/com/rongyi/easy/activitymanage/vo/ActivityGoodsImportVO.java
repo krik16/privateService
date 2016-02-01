@@ -1,8 +1,11 @@
 package com.rongyi.easy.activitymanage.vo;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 
 /**
+ * 导入商品返回结果VO
  * Created by Leon on 2016/1/27.
  */
 public class ActivityGoodsImportVO implements Serializable {
@@ -38,24 +41,14 @@ public class ActivityGoodsImportVO implements Serializable {
     private String version;
 
     /**
-     * 商品成功的数量
+     * 成功的数量
      */
-    private Integer commoditySuccessCount;
+    private Integer successCount;
 
     /**
-     * 商品失败的数量
+     * 失败的数量
      */
-    private Integer commodityFailureCount;
-
-    /**
-     * 卡券成功的数量
-     */
-    private Integer couponSuccessCount;
-
-    /**
-     * 卡券失败的数量
-     */
-    private Integer couponFailureCount;
+    private Integer failureCount;
 
     public Integer getId() {
         return id;
@@ -105,35 +98,33 @@ public class ActivityGoodsImportVO implements Serializable {
         this.version = version;
     }
 
-    public Integer getCommoditySuccessCount() {
-        return commoditySuccessCount;
+    public Integer getSuccessCount() {
+        return successCount;
     }
 
-    public void setCommoditySuccessCount(Integer commoditySuccessCount) {
-        this.commoditySuccessCount = commoditySuccessCount;
+    public void setSuccessCount(Integer successCount) {
+        this.successCount = successCount;
     }
 
-    public Integer getCommodityFailureCount() {
-        return commodityFailureCount;
+    public Integer getFailureCount() {
+        return failureCount;
     }
 
-    public void setCommodityFailureCount(Integer commodityFailureCount) {
-        this.commodityFailureCount = commodityFailureCount;
+    public void setFailureCount(Integer failureCount) {
+        this.failureCount = failureCount;
     }
 
-    public Integer getCouponSuccessCount() {
-        return couponSuccessCount;
-    }
-
-    public void setCouponSuccessCount(Integer couponSuccessCount) {
-        this.couponSuccessCount = couponSuccessCount;
-    }
-
-    public Integer getCouponFailureCount() {
-        return couponFailureCount;
-    }
-
-    public void setCouponFailureCount(Integer couponFailureCount) {
-        this.couponFailureCount = couponFailureCount;
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("activityId", activityId)
+                .append("goodsId", goodsId)
+                .append("goodsName", goodsName)
+                .append("goodsType", goodsType)
+                .append("version", version)
+                .append("successCount", successCount)
+                .append("failureCount", failureCount)
+                .toString();
     }
 }
