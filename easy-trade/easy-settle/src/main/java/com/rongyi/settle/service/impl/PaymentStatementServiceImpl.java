@@ -173,9 +173,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
     public Date calcPredictPayTime(Integer configId) {
         StatementConfig statementConfig = statementConfigService.selectConfigInfoById(configId);
         Date regularDay = null;
+        Date toDay = DateUtil.getCurrDateTime();
         if (ConstantEnum.PAY_MODE_0.getCodeByte().equals(statementConfig.getPayMode())) {//固定日期
             String[] regularDays = statementConfig.getRegularDay().split("&");
-            Date toDay = DateUtil.getCurrDateTime();
             for (String s : regularDays) {
                 if (toDay.getDay() < Integer.valueOf(s)) {
                     int num = Integer.valueOf(s) - toDay.getDay();
@@ -190,8 +190,11 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
                 regularDay = DateUtil.getDaysInAdd(calendar.getTime(), Integer.valueOf(regularDays[0]));
             }
         } else {//滚动日期
-            regularDay = DateUtil.getDaysInAdd(DateUtil.getCurrDateTime(), Integer.valueOf(statementConfig.getRollDay()));
+            regularDay = DateUtil.getDaysInAdd(toDay, Integer.valueOf(statementConfig.getRollDay()));
         }
+        regularDay = DateUtil.addHours(regularDay, toDay.getHours());
+        regularDay = DateUtil.addTime(regularDay,toDay.getMinutes(),Calendar.MINUTE);
+        regularDay = DateUtil.addTime(regularDay,toDay.getSeconds(),Calendar.SECOND);
         return regularDay;
     }
 
