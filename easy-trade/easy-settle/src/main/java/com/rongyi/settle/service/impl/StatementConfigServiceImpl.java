@@ -148,7 +148,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
     }
 
     public void insertShopConfigNysn(final List<ConfigShop> shopConfigs,final Integer configId) {
-        logger.info("异步更新店铺配置信息,configId={}",configId);
+        logger.info("异步更新店铺配置信息开始,configId={}",configId);
         final Thread thread = new Thread() {
             @Override
             public void run() {
@@ -156,9 +156,10 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                     for (ConfigShop configShop : shopConfigs) {
                         configShop.setConfigId(configId);
                         configShopService.insert(configShop);
+                        logger.info("异步更新店铺配置信息结束,configId={}", configId);
                     }
                 } catch (Exception e) {
-                    logger.error("异步更新店铺配置信息失败");
+                    logger.error("异步更新店铺配置信息失败,configId={}",configId);
                     e.printStackTrace();
                 }
 
