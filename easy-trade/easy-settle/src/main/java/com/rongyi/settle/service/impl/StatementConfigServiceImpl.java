@@ -360,13 +360,22 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                 //2、全部店铺
                 List<ShopVO> shopVOs = getShopIdByParam(bussinessType, bussinessId);
                 if (CollectionUtils.isNotEmpty(shopVOs)) {
+                    List<String> linkShopList = new ArrayList<>();
                     for (ShopVO shopVO : shopVOs) {
-                        map.put("shopId", shopVO.getId());
-                        if (checkConfigExist(map, shopConfigs)) {
-                            ReMap.put("result", true);
-                            return ReMap;
-                        }
+                        linkShopList.add(shopVO.getId());
                     }
+                    map.put("linkShopIds",linkShopList);
+                    if (checkConfigExist(map, shopConfigs)) {
+                        ReMap.put("result", true);
+                        return ReMap;
+                    }
+//                    for (ShopVO shopVO : shopVOs) {
+//                        map.put("shopId", shopVO.getId());
+//                        if (checkConfigExist(map, shopConfigs)) {
+//                            ReMap.put("result", true);
+//                            return ReMap;
+//                        }
+//                    }
                 }
             } else if (lintType == 1)//  自身(商场/集团)
             {
@@ -376,13 +385,20 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                         return ReMap;
                     }
                     if (linkShopIds != null) {
-                        for (String shopId : linkShopIds) {
-                            map.put("shopId", shopId);
-                            if (checkConfigExist(map, shopConfigs)) {
-                                ReMap.put("result", true);
-                                return ReMap;
-                            }
+                        List<String> linkShopList = new ArrayList<>();
+                        linkShopList.toArray(linkShopIds);
+                        map.put("linkShopIds",linkShopList);
+                        if (checkConfigExist(map, shopConfigs)) {
+                            ReMap.put("result", true);
+                            return ReMap;
                         }
+//                        for (String shopId : linkShopIds) {
+//                            map.put("shopId", shopId);
+//                            if (checkConfigExist(map, shopConfigs)) {
+//                                ReMap.put("result", true);
+//                                return ReMap;
+//                            }
+//                        }
                     }
                 } else {
                     logger.info("参数错误  //自身");
@@ -392,14 +408,21 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
             } else if (lintType == 2)//部分
             {
                 if (linkShopIds != null) {
-                    for (String shopId : linkShopIds) {
-                        map.put("shopId", shopId);
-//                        logger.info("linkType=2  map="+map.toString());
-                        if (checkConfigExist(map, shopConfigs)) {
-                            ReMap.put("result", true);
-                            return ReMap;
-                        }
+                    List<String> linkShopList = new ArrayList<>();
+                    linkShopList.toArray(linkShopIds);
+                    map.put("linkShopIds",linkShopList);
+                    if (checkConfigExist(map, shopConfigs)) {
+                        ReMap.put("result", true);
+                        return ReMap;
                     }
+//                    for (String shopId : linkShopIds) {
+//                        map.put("shopId", shopId);
+////                        logger.info("linkType=2  map="+map.toString());
+//                        if (checkConfigExist(map, shopConfigs)) {
+//                            ReMap.put("result", true);
+//                            return ReMap;
+//                        }
+//                    }
                 } else {
                     logger.info(" lintType==2 参数错误  //自身");
                     ReMap.put("result", true);
@@ -515,7 +538,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
      * @return
      */
     private boolean checkConfigExist(Map<String, Object> paramsMap, List<ConfigShop> configShops) {
-        boolean result = false;
+        logger.info("linkShopIds={}",paramsMap.get("linkShopIds").toString());
         ConfigShop configShop = new ConfigShop();
         if (paramsMap.containsKey("shopId")){
             configShop.setShopId(paramsMap.get("shopId").toString());
@@ -524,10 +547,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
             configShops.add(configShop);
         }
         int count = this.getBaseDao().selectOneBySql(NAMESPACE + ".validateIsExist", paramsMap);
-        if (count > 0) {
-            result = true;
-        }
-        return result;
+        return count > 0;
     }
 
     private List<ShopVO> getShopIdByParam(byte bussinessType, String bussinessId) throws Exception {
