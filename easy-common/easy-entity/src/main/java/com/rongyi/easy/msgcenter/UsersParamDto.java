@@ -3,6 +3,7 @@ package com.rongyi.easy.msgcenter;
 import com.rongyi.core.constant.Constants;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -18,20 +19,11 @@ public class UsersParamDto implements Serializable{
     private String id;
     private String phone;
     private Integer currentPage;
+    private Integer conditionType;
+    private Date startTime;
+    private Date endTime;
     private Integer pageSize;
     private Integer start;
-
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("UsersParamDto{");
-        sb.append("nickName='").append(nickName).append('\'');
-        sb.append(", id='").append(id).append('\'');
-        sb.append(", phone='").append(phone).append('\'');
-        sb.append(", currentPage=").append(currentPage);
-        sb.append(", pageSize=").append(pageSize);
-        sb.append('}');
-        return sb.toString();
-    }
 
     public String getPhone() {
         return phone;
@@ -85,5 +77,45 @@ public class UsersParamDto implements Serializable{
 
     public Map<String,Object> convertToMap(){
         return null;
+    }
+
+    public Integer getConditionType() {
+        return conditionType;
+    }
+
+    public void setConditionType(Integer conditionType) {
+        this.conditionType = conditionType;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("UsersParamDto{");
+        sb.append("nickName='").append(nickName).append('\'');
+        sb.append(", id='").append(id).append('\'');
+        sb.append(", phone='").append(phone).append('\'');
+        sb.append(", currentPage=").append(currentPage);
+        sb.append(", conditionType=").append(conditionType);
+        sb.append(", startTime=").append(startTime);
+        sb.append(", endTime=").append(endTime);
+        sb.append(", pageSize=").append(pageSize);
+        sb.append(", start=").append(start);
+        sb.append('}');
+        return sb.toString();
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 }

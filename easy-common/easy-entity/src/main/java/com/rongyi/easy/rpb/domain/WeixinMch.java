@@ -1,7 +1,10 @@
 package com.rongyi.easy.rpb.domain;
 
 import java.io.Serializable;
-
+/**
+ *  Description: 微信商户账号
+ *  Author: kejun
+ **/
 public class WeixinMch implements Serializable {
     /**
 	 * 
@@ -10,19 +13,45 @@ public class WeixinMch implements Serializable {
 
 	private Integer id;
 
+    /**
+     * APPID
+     */
     private String appId;
 
+    /**
+     * 密钥
+     */
     private String key;
 
+    /**
+     * 商户号
+     */
     private String mchId;
 
+    /**
+     * 证书路径
+     */
     private String cretPath;
 
+    /**
+     * 公众号
+     */
     private String publicCode;
 
+    /**
+     * 商家ID
+     */
     private String userId;
 
-    private Byte tradeType;
+    /**
+     * 交易类型  0:APP(app支付),1:JSAPI(公众号支付),2:NATIVE(原生扫码支付)多个支付方式逗号分隔
+     */
+    private String tradeType;
+
+    /**
+     * 是否是容易网支付账号 0:不是，1：是
+     */
+    private Byte isRongyiPay;
 
     public Integer getId() {
         return id;
@@ -80,11 +109,34 @@ public class WeixinMch implements Serializable {
         this.userId = userId;
     }
 
-    public Byte getTradeType() {
+    public String getTradeType() {
         return tradeType;
     }
 
-    public void setTradeType(Byte tradeType) {
+    public void setTradeType(String tradeType) {
         this.tradeType = tradeType;
+    }
+
+    public Byte getIsRongyiPay() {
+        return isRongyiPay;
+    }
+
+    public void setIsRongyiPay(Byte isRongyiPay) {
+        this.isRongyiPay = isRongyiPay;
+    }
+
+    @Override
+    public String toString() {
+        return "WeixinMch{" +
+                "id=" + id +
+                ", appId='" + appId + '\'' +
+                ", key='" + key + '\'' +
+                ", mchId='" + mchId + '\'' +
+                ", cretPath='" + cretPath + '\'' +
+                ", publicCode='" + publicCode + '\'' +
+                ", userId='" + userId + '\'' +
+                ", tradeType=" + tradeType +
+                ", isRongyiPay=" + isRongyiPay +
+                '}';
     }
 }

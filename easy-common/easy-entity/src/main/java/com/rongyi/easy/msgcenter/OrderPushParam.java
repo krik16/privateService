@@ -25,15 +25,28 @@ public class OrderPushParam implements Serializable {
     private Integer type;
     private String userId;
     private Integer orderId;
+    private Integer isCartOrder;//是否购物车订单     0 ：不是    1：是
+    private String orderNo;
+
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("OrderUpdatePushParam{");
+        final StringBuffer sb = new StringBuffer("OrderPushParam{");
         sb.append("type=").append(type);
         sb.append(", userId='").append(userId).append('\'');
-        sb.append(", orderId='").append(orderId).append('\'');
+        sb.append(", orderId=").append(orderId);
+        sb.append(", isCartOrder=").append(isCartOrder);
+        sb.append(", orderNo=").append(orderNo);
         sb.append('}');
         return sb.toString();
+    }
+
+    public Integer getIsCartOrder() {
+        return isCartOrder;
+    }
+
+    public void setIsCartOrder(Integer isCartOrder) {
+        this.isCartOrder = isCartOrder;
     }
 
     public Integer getType() {
@@ -58,5 +71,13 @@ public class OrderPushParam implements Serializable {
 
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
+    }
+
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
     }
 }

@@ -23,7 +23,10 @@ public class RequestPaymentParam implements Serializable{
      * 微信公众号支付需要获取支付用户的openId
      */
     private String openId;
-
+    /**
+	 * 0:APP(app支付),1:JSAPI(公众号支付),2:NATIVE(原生扫码支付)
+	 */
+	private String weixinPayType;
 	public List<String> getOrderNums() {
 		return orderNums;
 	}
@@ -55,12 +58,21 @@ public class RequestPaymentParam implements Serializable{
 	public void setOpenId(String openId) {
 		this.openId = openId;
 	}
+	
+	public String getWeixinPayType() {
+		return weixinPayType;
+	}
+
+	public void setWeixinPayType(String weixinPayType) {
+		this.weixinPayType = weixinPayType;
+	}
 
 	@Override
 	public String toString() {
 		return "RequestPaymentParam [orderNums=" + orderNums
 				+ ", paymentEventType=" + paymentEventType + ", appId=" + appId
-				+ ", openId=" + openId + "]";
+				+ ", openId=" + openId + ", weixinPayType=" + weixinPayType
+				+ "]";
 	}
 	
 }

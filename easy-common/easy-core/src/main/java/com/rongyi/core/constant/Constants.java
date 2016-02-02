@@ -735,4 +735,31 @@ public interface Constants {
         byte IS_PAY_VA_1 = 1;//对私(打款到导购虚拟账号
         byte IS_PAY_VA_2 = 2;//对公(通过对账单结算)'
     }
+
+
+    /**
+     * 百度推送定义的消息类型
+     */
+    interface BD_PUSH_MSG_TYPE{
+        int TC_MSG=0;//透传消息
+        int TZ_MSG=1;//通知消息
+    }
+
+
+    /**
+     * 百度推送设备类型
+     */
+    interface PUSH_DEVICE{
+        int ADDROID=3;
+        int IOS=4;
+    }
+    /**
+     * 百度推送到达APP
+     */
+    interface PUSH_APP{
+        int RYG=0;//容易逛
+        int MD=4;//摩店
+    }
+
+
 }

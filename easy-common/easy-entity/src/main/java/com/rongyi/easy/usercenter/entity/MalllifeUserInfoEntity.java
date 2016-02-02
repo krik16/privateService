@@ -102,6 +102,9 @@ public class MalllifeUserInfoEntity  implements Serializable {
 
 
 
+    /** 商家公众号Id */
+    private String publicNumId;
+
     /**
      * 用户uuid
      * @return id
@@ -492,5 +495,13 @@ public class MalllifeUserInfoEntity  implements Serializable {
      */
     public void setRegistIp(String registIp) {
         this.registIp = registIp;
+    }
+
+    public String getPublicNumId() {
+        return publicNumId;
+    }
+
+    public void setPublicNumId(String publicNumId) {
+        this.publicNumId = publicNumId;
     }
 }

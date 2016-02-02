@@ -165,4 +165,13 @@ public interface IUserInfoService {
 	 * @return
 	 */
 	List<UserInfo> getFullUserInfoByRelevanceId(Map<String, Object> paramsMap);
+	
+	/**
+	 * 通过service ticket获取登录top页信息
+	 * 返回Map{userInfo:com.rongyi.easy.bsoms.entity.SessionUserInfo,authorities:List<String>,logoutUrl}
+	 * @param bsst
+	 * @return
+	 * @throws Exception
+	 */
+	public Map getBsTop(String bsst)throws Exception ;
 }

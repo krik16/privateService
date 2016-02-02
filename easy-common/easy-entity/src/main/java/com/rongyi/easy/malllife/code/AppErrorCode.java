@@ -39,8 +39,10 @@ public enum AppErrorCode {
     ERROR_COMMODITY_NOT_REGISTER(1066006,"商品下架"),
     ERROR_COMMODITY_ALL_SOLDOUT(1066007,"商品均已下架"),
     ERROR_ORDERMODEL_SHIPTYPE_CONFLICT(1066008,"同店铺商品仅支持一种配送方式，系统先为您默认快递发货噢"),
-    ERROR_RECEIVED_REBATE(1065002, "您已领取过了新年礼盒")
-
+    ERROR_RECEIVED_REBATE(1065002, "您已领取过了新年礼盒"),
+    
+    
+    ERROR_WECHAT_APPID_OPENID(1067001,"微信appId或渠道或openId不能为空")
     ;
 
 

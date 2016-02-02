@@ -22,9 +22,15 @@ public interface IOrderCartService {
 
     /**
      * 根据购物车订单查询
-     *
      * @param orderNo String
      **/
 
     OrderCartFormEntity selectByOrerNo(String orderNo) throws Exception;
+
+    /**
+     * 通过id获取购物车订单VO
+     * @param id
+     * @return
+     */
+    OrderCartFormVO getOrderCartVOById(Integer id);
 }

@@ -1,6 +1,6 @@
 /**
- * @Copyright (C),上海容易网电子商务有限公司	
- * @Author: 柯军 
+ * @Copyright (C),上海容易网电子商务有限公司
+ * @Author: 柯军
  * @datetime:2015年6月4日下午2:55:06
  * @Description: TODO
  *
@@ -38,7 +38,7 @@ public interface IRpbService {
 	 * @Author: 柯军
 	 * @datetime:2015年6月4日下午3:46:18
 	 **/
-	 Map<Integer,String> validateAccount(String paymentIds) throws Exception;
+	Map<Integer,String> validateAccount(String paymentIds) throws Exception;
 
 	/**
 	 * @Description: 根据交易流水号查询对应的付款记录
@@ -47,7 +47,7 @@ public interface IRpbService {
 	 * @Author:  柯军
 	 * @datetime:2015年6月11日下午3:48:36
 	 **/
-	 PaymentLogInfo selectByTradeNo(String tradeNo);
+	PaymentLogInfo selectByTradeNo(String tradeNo);
 
 	/**
 	 * @Description: 收到操作微信退款
@@ -56,7 +56,7 @@ public interface IRpbService {
 	 * @Author: 柯军
 	 * @datetime:2015年7月12日下午1:12:12
 	 **/
-	 Map<String, Object> operateWeixinRefund(Integer id);
+	Map<String, Object> operateWeixinRefund(Integer id);
 
 	/**
 	 * @Description: 订单支付完成后前端收到支付成功同步通知后端完成支付（更改支付状态） 
@@ -65,7 +65,7 @@ public interface IRpbService {
 	 * @Author:  柯军
 	 * @datetime:2015年7月30日上午9:48:46
 	 **/
-	 Map<String,Object> paySuccessNotify(String orderNo,Double totalAmount);
+	Map<String,Object> paySuccessNotify(String orderNo,Double totalAmount);
 
 
 	/**
@@ -74,7 +74,7 @@ public interface IRpbService {
 	 * @Author:  柯军
 	 * @datetime:2015年8月7日下午1:39:56
 	 **/
-	 QueryOrderParamVO queryOrder(Map<String,Object> map);
+	QueryOrderParamVO queryOrder(Map<String,Object> map);
 
 	/**
 	 * @Description: 查询订单在第三方系统中状态
@@ -85,7 +85,7 @@ public interface IRpbService {
 	 * @Author:  柯军
 	 * @datetime:2015年8月11日下午4:50:55
 	 **/
-	 boolean queryOrderPayStatus(String tradeNo, String payNo, Integer payChannel,Integer weixinMchId);
+	boolean queryOrderPayStatus(String tradeNo, String payNo, Integer payChannel,Integer weixinMchId);
 
 	/**
 	 * @Description: 查询支付账号购买次数
@@ -94,7 +94,7 @@ public interface IRpbService {
 	 * @Author:  柯军
 	 * @datetime:2015年8月12日上午11:46:46
 	 **/
-	 List<PayAccountUseTotal> selectPayAccountUseTotal(Map<String, Object> map);
+	List<PayAccountUseTotal> selectPayAccountUseTotal(Map<String, Object> map);
 
 
 	/**
@@ -104,7 +104,7 @@ public interface IRpbService {
 	 * @Author:  柯军
 	 * @datetime:2015年8月24日下午5:46:02
 	 **/
-	 Map<String, Object> getPaySign(MessageEvent event);
+	Map<String, Object> getPaySign(MessageEvent event);
 
 	/**
 	 * @Description: 查询付款记录
@@ -126,7 +126,7 @@ public interface IRpbService {
 	 * @Author:  柯军
 	 * @datetime:2015年8月28日上午10:38:48
 	 **/
-	 Map<String,Object> weixinRefundRejected(Integer paymentId,Integer refundRejected);
+	Map<String,Object> weixinRefundRejected(Integer paymentId,Integer refundRejected);
 
 	/**
 	 * @Description: 付款/退款操作前验证是否付款操作条件 
@@ -181,14 +181,7 @@ public interface IRpbService {
 	 *  @param weixinMch WeixinMch
 	 *  Author: kejun
 	 **/
-	ResponseData insertWeiXinMch(WeixinMch weixinMch);
-
-	/**
-	 *  Description:更新商家公众号相关信息
-	 *  @param weixinMch WeixinMch
-	 *  Author: kejun
-	 **/
-	ResponseData updateWeixinMch(WeixinMch weixinMch);
+	ResponseData addWeixinMch(WeixinMch weixinMch);
 
 
 

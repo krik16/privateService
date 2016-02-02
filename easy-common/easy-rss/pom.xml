@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -65,3 +66,32 @@
 	</dependencies>
 >>>>>>> f1a436255413a8336e7d9ac4f1a6a28c0694370c
 </project>
+=======
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.rongyi</groupId>
+		<artifactId>easy-common</artifactId>
+		<version>2.9.5-SNAPSHOT</version>	
+	</parent>
+	<artifactId>easy-rss</artifactId>
+	<packaging>jar</packaging>
+ 
+	<dependencies>
+		<dependency>
+			<groupId>com.rongyi</groupId>
+			<artifactId>easy-entity</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.rongyi</groupId>
+			<artifactId>easy-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+	</dependency>
+		
+	</dependencies>
+</project>
+>>>>>>> da6c1ff366d60795715da2d15a8c64d5017b52d8
