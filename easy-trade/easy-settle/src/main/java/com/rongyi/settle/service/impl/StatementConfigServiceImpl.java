@@ -200,17 +200,17 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
             return false;
         } else if (!oldStatementConfigVO.getEffectStartTime().equals(statementConfig.getEffectStartTime()) || !oldStatementConfigVO.getEffectEndTime().equals(statementConfig.getEffectEndTime())) {//生效日期
             return false;
-        } else if (!oldBussinessInfo.getBussinessAccount().equals(bussinessInfo.getBussinessAccount())) {//商家财务联系人ID
+        } else if (oldBussinessInfo.getBussinessAccount() != null && !oldBussinessInfo.getBussinessAccount().equals(bussinessInfo.getBussinessAccount())) {//商家财务联系人ID
             return false;
-        } else if (!oldBussinessInfo.getBlankName().equals(bussinessInfo.getBlankName())) {//商户结算开户银行
+        } else if (oldBussinessInfo.getBlankName() != null && !oldBussinessInfo.getBlankName().equals(bussinessInfo.getBlankName())) {//商户结算开户银行
             return false;
         } else if (!oldBussinessInfo.getPayAccount().equals(bussinessInfo.getPayAccount())) {//商户结算账户
             return false;
         } else if (!oldBussinessInfo.getPayName().equals(bussinessInfo.getPayName())) {//商户结算姓名
             return false;
-        } else if (!oldBussinessInfo.getBussinessAddress().equals(bussinessInfo.getBussinessAddress())) {//商户结算地址
+        } else if (oldBussinessInfo.getBussinessAddress() != null && !oldBussinessInfo.getBussinessAddress().equals(bussinessInfo.getBussinessAddress())) {//商户结算地址
             return false;
-        } else if (!oldBussinessInfo.getBlankAddress().equals(bussinessInfo.getBlankAddress())) {//开户网点
+        } else if (oldBussinessInfo.getBlankAddress() != null && !oldBussinessInfo.getBlankAddress().equals(bussinessInfo.getBlankAddress())) {//开户网点
             return false;
         }
         //关联店铺
