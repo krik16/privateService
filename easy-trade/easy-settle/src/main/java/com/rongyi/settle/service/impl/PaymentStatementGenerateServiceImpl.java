@@ -116,7 +116,7 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
                                 continue outer;
                             }
 
-                            if (day < effectEndTime.getDayOfMonth()) {
+                            if (day <= effectEndTime.getDayOfMonth()) {
                                 settlementStartDay = day;
                             }
                         }
@@ -127,7 +127,7 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
                         }
                         settlementStartTime = settlementStartTime.withDayOfMonth(settlementStartDay);
 
-                        settlePeriodFirstSecond = settlementStartTime.toDate();
+                        settlePeriodFirstSecond = DateUtils.getAllocatedDayFirstSecond(settlementStartTime.toDate());
                         settlePeriodLastSecond = DateUtils.getAllocatedDayLastSecond(statementConfig.getEffectEndTime());
                     } else if (currentTime.isBefore(effectEndTime)) {
                         int index = regularDays.indexOf(toDayOfMonth.toString());
