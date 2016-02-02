@@ -140,14 +140,31 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
             bussinessInfoService.updateByConfigId(bussinessInfo);
             configShopService.deleteConfigShopByConfigId(statementConfig.getId());
         }
-        for (ConfigShop configShop : shopConfigs) {
-            configShop.setConfigId(statementConfig.getId());
-            configShopService.insert(configShop);
-        }
+        insertShopConfigNysn(shopConfigs,statementConfig.getId());
         if (statementConfig.getStatus()==null) {
             statementConfig.setStatus((byte) 0);
         }
         saveOperationLog(statementConfig.getId(), statementConfig.getStatus().intValue(), desc, statementConfig.getCreateBy());
+    }
+
+    public void insertShopConfigNysn(final List<ConfigShop> shopConfigs,final Integer configId) {
+        logger.info("异步更新店铺配置信息,configId={}",configId);
+        final Thread thread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    for (ConfigShop configShop : shopConfigs) {
+                        configShop.setConfigId(configId);
+                        configShopService.insert(configShop);
+                    }
+                } catch (Exception e) {
+                    logger.error("异步更新店铺配置信息失败");
+                    e.printStackTrace();
+                }
+
+            }
+        };
+        thread.start();
     }
 
     /**
@@ -549,6 +566,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
             }
         }
         int count = this.getBaseDao().selectOneBySql(NAMESPACE + ".validateIsExist", paramsMap);
+        logger.info("校验完成count={}",count);
         return count > 0;
     }
 
