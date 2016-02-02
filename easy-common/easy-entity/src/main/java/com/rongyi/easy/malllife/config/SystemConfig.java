@@ -109,13 +109,13 @@ public class SystemConfig implements Serializable{
         Long milliSecond = ms - day * dd - hour * hh - minute * mi - second * ss;
 
         StringBuffer sb = new StringBuffer();
-        if(day > 0) {
+        if(day >= 0) {
             sb.append(day+"天");
         }
-        if(hour > 0) {
+        if(hour >= 0) {
             sb.append(hour+"时");
         }
-        if(minute > 0) {
+        if(minute >= 0) {
             sb.append(minute+"分");
         }
         /* if(second > 0) {

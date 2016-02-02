@@ -31,6 +31,9 @@ public interface ROACategoriesService {
      * @return
      */
     public List<Map<String, Object>> getSortByList();
+
+    public List<Map<String, Object>> getSortOldByList();
+
     /**
      * 根据父目录id和分类级别查询
      * @param type
