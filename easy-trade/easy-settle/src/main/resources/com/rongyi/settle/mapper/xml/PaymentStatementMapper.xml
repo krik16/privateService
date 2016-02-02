@@ -317,9 +317,9 @@
 	<update id="updateStatusByIds" parameterType="map">
 		update payment_bill
 		set status=#{status, jdbcType=INTEGER},
-		status_update_time = #{statusUpdateTime,jdbcType=TIMESTAMP},
+		status_update_time = #{statusUpdateTime,jdbcType=TIMESTAMP}
 		<if test="predictPayTime != null and predictPayTime != ''">
-			predict_pay_time = #{predictPayTime, jdbcType=TIMESTAMP}
+			,predict_pay_time = #{predictPayTime, jdbcType=TIMESTAMP}
 		</if>
 		<where>
 			<if test="ids != null">
