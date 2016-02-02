@@ -418,7 +418,7 @@
             </if>
 
             <!--检查配置中店铺ID是否已存在-->
-            <if test="linkShopIds!=null">
+            <if test="linkShopIds!=null and linkShopIds != '' ">
                 and sc.shop_id in
                 <foreach collection="linkShopIds" item="item" open="(" separator="," close=")">#{item}</foreach>
             </if>
