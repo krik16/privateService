@@ -540,11 +540,12 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
     private boolean checkConfigExist(Map<String, Object> paramsMap, List<ConfigShop> configShops) {
         logger.info("linkShopIds={}",paramsMap.get("linkShopIds"));
         ConfigShop configShop = new ConfigShop();
-        if (paramsMap.containsKey("shopId")){
-            configShop.setShopId(paramsMap.get("shopId").toString());
-        }
-        if (configShops!=null) {
-            configShops.add(configShop);
+        if (paramsMap.get("linkShopIds") != null){
+            List<String> linkShopIds = (List<String>)paramsMap.get("linkShopIds");
+            for(String shopId : linkShopIds){
+                configShop.setShopId(shopId);
+                configShops.add(configShop);
+            }
         }
         int count = this.getBaseDao().selectOneBySql(NAMESPACE + ".validateIsExist", paramsMap);
         return count > 0;
