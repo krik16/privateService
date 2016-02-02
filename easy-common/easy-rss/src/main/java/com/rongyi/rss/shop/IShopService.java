@@ -3,6 +3,7 @@ package com.rongyi.rss.shop;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.solr.PoiDocument;
 import com.rongyi.easy.solr.ShopDocument;
 import org.bson.types.ObjectId;
 
@@ -116,4 +117,19 @@ public interface IShopService {
 	 * @return
 	 */
 	public List<ShopEntity> searchShopByIds(List<ObjectId> ids);
+
+	/**
+	 * 分页获取店铺solr对象（poi库）
+	 * @param skip
+	 * @param pageSize
+	 * @return
+	 */
+	public List<PoiDocument> getShopPoiDocumentList(int skip,int pageSize);
+
+	/**
+	 * 获取店铺solr对象（poi库）
+	 * @param shopMid
+	 * @return
+	 */
+	public PoiDocument getShopPoiDocument(String shopMid);
 }

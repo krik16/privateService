@@ -2,6 +2,7 @@ package com.rongyi.rss.shop;
 
 import com.rongyi.easy.solr.CityDocument;
 import com.rongyi.easy.solr.MallsDocument;
+import com.rongyi.easy.solr.PoiDocument;
 
 import java.util.List;
 
@@ -53,4 +54,19 @@ public interface IZoneService {
      * @throws Exception
      */
     public MallsDocument getMallDocument(String zoneMid) ;
+
+    /**
+     * 分页获取商城文档对象
+     * @param skip
+     * @param pageSize
+     * @return
+     */
+    public List<PoiDocument> getMallPoiDocumentList(int skip,int pageSize);
+
+    /**
+     * 获取商城文档对象
+     * @param zoneMid
+     * @return
+     */
+    public PoiDocument getMallPoiDocument(String zoneMid);
 }

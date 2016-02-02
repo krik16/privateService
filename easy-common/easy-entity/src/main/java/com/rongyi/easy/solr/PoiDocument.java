@@ -136,6 +136,8 @@ public class PoiDocument implements Serializable {
 	@Field("mall")
 	private Integer mall;
 
+	private String appearance_pic;
+
 	public PoiDocument() {
 	}
 
@@ -544,7 +546,13 @@ public class PoiDocument implements Serializable {
 		this.custom_category_ids = custom_category_ids;
 	}
 
-	
-	
+	public String getAppearance_pic() {
+		return appearance_pic;
+	}
+
+	public void setAppearance_pic(String appearance_pic) {
+		this.appearance_pic = appearance_pic;
+	}
+
 
 }

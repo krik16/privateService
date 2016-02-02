@@ -1,5 +1,7 @@
 package com.rongyi.rss.solr;
 
+import java.util.Map;
+
 /**
  * Created by wangzehui on 2016/1/27.
  */
@@ -19,4 +21,11 @@ public interface ROASolrService {
      * @throws Exception
      */
     public void updateIndex(String core,String id) throws Exception;
+
+    /**
+     * 导入索引
+     * @param core
+     * @param map
+     */
+    public void importIndex(String core,Map<String,Object> map);
 }
