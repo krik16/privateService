@@ -539,10 +539,11 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
      */
     private boolean checkConfigExist(Map<String, Object> paramsMap, List<ConfigShop> configShops) {
         logger.info("linkShopIds={}",paramsMap.get("linkShopIds"));
-        ConfigShop configShop = new ConfigShop();
+
         if (paramsMap.get("linkShopIds") != null){
             List<String> linkShopIds = (List<String>)paramsMap.get("linkShopIds");
             for(String shopId : linkShopIds){
+                ConfigShop configShop = new ConfigShop();
                 configShop.setShopId(shopId);
                 configShops.add(configShop);
             }
