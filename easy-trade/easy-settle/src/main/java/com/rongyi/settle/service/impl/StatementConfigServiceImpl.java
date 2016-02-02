@@ -538,7 +538,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
      * @return
      */
     private boolean checkConfigExist(Map<String, Object> paramsMap, List<ConfigShop> configShops) {
-        logger.info("linkShopIds={}",paramsMap.get("linkShopIds").toString());
+        logger.info("linkShopIds={}",paramsMap.get("linkShopIds"));
         ConfigShop configShop = new ConfigShop();
         if (paramsMap.containsKey("shopId")){
             configShop.setShopId(paramsMap.get("shopId").toString());
