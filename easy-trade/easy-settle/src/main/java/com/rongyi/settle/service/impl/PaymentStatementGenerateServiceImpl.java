@@ -116,7 +116,7 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
                                 continue outer;
                             }
 
-                            if (day < effectEndTime.getDayOfMonth()) {
+                            if (day <= effectEndTime.getDayOfMonth()) {
                                 settlementStartDay = day;
                             }
                         }
