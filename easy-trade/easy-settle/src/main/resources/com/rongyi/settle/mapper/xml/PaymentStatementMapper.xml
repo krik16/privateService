@@ -202,7 +202,7 @@
 			</foreach>
 		</if>
 
-		<if test="predictPayTimeBegin!=null">
+		<if test="predictPayTimeBegin !=null and predictPayTimeBegin != ''">
 			and pb.predict_pay_time &lt; #{predictPayTimeBegin}
 		</if>
 
@@ -314,6 +314,23 @@
 		</if>
 	</select>
 
+	<update id="updateStatusByIds" parameterType="map">
+		update payment_bill
+		set status=#{status, jdbcType=INTEGER},
+		status_update_time = #{statusUpdateTime,jdbcType=TIMESTAMP},
+		<if test="predictPayTime != null and predictPayTime != ''">
+			predict_pay_time = #{predictPayTime, jdbcType=TIMESTAMP}
+		</if>
+		<where>
+			<if test="ids != null">
+				AND id in
+				<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</update>
+
 	<select id="selectPageListForMerchant" resultMap="DtoResultMap" parameterType="java.util.Map">
 		select * from (select
 		pb.id, pb.type, pb.batch_no, pb.cycle_start_time,
@@ -421,21 +438,6 @@
 		and
 		cycle_end_time = #{cycleEndTime,jdbcType=TIMESTAMP}
 	</select>
-
-	<update id="updateStatusByIds" parameterType="map">
-		update payment_bill
-		set status=#{status, jdbcType=INTEGER},
-		status_update_time = #{statusUpdateTime,jdbcType=TIMESTAMP},
-		predict_pay_time = #{predictPayTime, jdbcType=TIMESTAMP}
-		<where>
-			<if test="ids != null">
-				AND id in
-				<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
-					#{item}
-				</foreach>
-			</if>
-		</where>
-	</update>
 
 	<update id="cancel" parameterType="java.lang.Integer">
 		update payment_bill set
