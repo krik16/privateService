@@ -848,7 +848,7 @@
 		 	D.mall_name,
 		 	E.shop_mid AS shop_id,
 		 	E.shop_name,
-		 	(B.unit_price * quantity - A.disconnt_fee) AS orig_price,
+		 	(B.unit_price * quantity - A.disconnt_fee + A.express_fee) AS orig_price,
 		 	A.total_amount AS pay_amount,
 		 	H2.create_at AS payment_time,
 		 	H3.create_at AS delivery_time,
