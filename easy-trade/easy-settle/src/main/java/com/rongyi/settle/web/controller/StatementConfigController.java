@@ -207,11 +207,13 @@ public class StatementConfigController extends BaseController {
             }
             List<ConfigShop> shopConfigs = (List<ConfigShop>) checkMap.get("shopConfigs");
             String ruleCode = getRuleCode();
-            if (StringUtils.isNotBlank(ruleCode) && ruleCode.length() > 10) {
-                redisService.set(ruleCode.substring(0, 9), ruleCode);
-                redisService.expire(ruleCode.substring(0, 9), 60 * 60 * 48);// 两天后失效
+            if (statementConfig.getId()==null) {
+                if (StringUtils.isNotBlank(ruleCode) && ruleCode.length() > 10) {
+                    redisService.set(ruleCode.substring(0, 9), ruleCode);
+                    redisService.expire(ruleCode.substring(0, 9), 60 * 60 * 48);// 两天后失效
+                }
+                statementConfig.setRuleCode(ruleCode);
             }
-            statementConfig.setRuleCode(ruleCode);
             statementConfigService.saveStatementConfigAndInfo(statementConfig, bussinessInfo, shopConfigs);
             return ResponseData.success();
         } catch (Exception e) {

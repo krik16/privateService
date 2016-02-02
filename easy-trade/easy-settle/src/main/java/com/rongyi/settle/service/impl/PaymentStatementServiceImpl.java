@@ -138,7 +138,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
                         }
                     } else if (ConstantEnum.STATUS_4.getCodeInt().equals(status)) {
                         PaymentStatement paymentStatement = get(ids.get(i));
-                        paymentStatement.setPredictPayTime(calcPredictPayTime(paymentStatement.getConfigId()));
+                        paramsMap.put("predictPayTime", calcPredictPayTime(paymentStatement.getConfigId()));
                         if (paymentStatement.getPayTotal() == null || paymentStatement.getPayTotal() == 0) {
                             paramsMap.put("status", ConstantEnum.STATUS_12.getCodeByte());
                             desc += ",0元商家审核确认，状态直接为已付款";
@@ -153,6 +153,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
                     }
 
                 }
+//                logger.info("updateStatusByIds paramsMap={}", paramsMap);
                 paymentStatementMapper.updateStatusByIds(paramsMap);
                 result = true;
             }
@@ -172,9 +173,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
     public Date calcPredictPayTime(Integer configId) {
         StatementConfig statementConfig = statementConfigService.selectConfigInfoById(configId);
         Date regularDay = null;
+        Date toDay = DateUtil.getCurrDateTime();
         if (ConstantEnum.PAY_MODE_0.getCodeByte().equals(statementConfig.getPayMode())) {//固定日期
             String[] regularDays = statementConfig.getRegularDay().split("&");
-            Date toDay = DateUtil.getCurrDateTime();
             for (String s : regularDays) {
                 if (toDay.getDay() < Integer.valueOf(s)) {
                     int num = Integer.valueOf(s) - toDay.getDay();
@@ -189,8 +190,11 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
                 regularDay = DateUtil.getDaysInAdd(calendar.getTime(), Integer.valueOf(regularDays[0]));
             }
         } else {//滚动日期
-            regularDay = DateUtil.getDaysInAdd(DateUtil.getCurrDateTime(), Integer.valueOf(statementConfig.getRollDay()));
+            regularDay = DateUtil.getDaysInAdd(toDay, Integer.valueOf(statementConfig.getRollDay()));
         }
+        regularDay = DateUtil.addHours(regularDay, toDay.getHours());
+        regularDay = DateUtil.addTime(regularDay,toDay.getMinutes(),Calendar.MINUTE);
+        regularDay = DateUtil.addTime(regularDay,toDay.getSeconds(),Calendar.SECOND);
         return regularDay;
     }
 

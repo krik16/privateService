@@ -41,10 +41,7 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Author: 柯军
@@ -120,6 +117,7 @@ public class PaymentStatementController extends BaseController {
 				break;
 			case 2:// 查询待付款审核列表
 				responseData = accessService.check(request, "FNC_UNPVFY_VIEW");
+				map.put("predictPayTimeBegin", new Date());
 				if (responseData.getMeta().getErrno() != 0) {
 					return responseData;
 				}
@@ -181,6 +179,7 @@ public class PaymentStatementController extends BaseController {
 				map.put("statusList", statusList);
 			List<PaymentStatementDto> list;
 			int count;
+			LOGGER.info("query params map={}", map);
 			if (searchType == 5) {
 				list = paymentStatementService.selectPageListForMerchant(map, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt());
 				count = paymentStatementService.selectPageListCountForMerchant(map);

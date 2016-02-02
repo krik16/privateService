@@ -460,8 +460,8 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                             List<ShopVO> shops = getShopIdByParam(config.getBussinessType(), config.getBussinessId());
                             for (ShopVO shop : shops){
                                 realShopIds.add(shop.getId());
-                                realShopIds.removeAll(shopIds);
                             }
+                            realShopIds.removeAll(shopIds);
                         }
                         for (String shopId : realShopIds){
                             List<UserInfoVo> shopUsers = getAccountInfoByParam(ConstantEnum.NOT_ONESELF.getCodeInt(), null, 1, shopId, null);
