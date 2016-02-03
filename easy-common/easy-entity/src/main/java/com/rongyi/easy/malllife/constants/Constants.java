@@ -56,6 +56,10 @@ public interface Constants {
     	 * 未登录不可访问
     	 */
     	short STATUS_UN_LOGIN = 21;
+    	/**
+    	 * 敏感词
+    	 */
+    	short STATUS_SENSITIVE = 2;
     }
     interface PageSize {
     	/**
@@ -207,6 +211,7 @@ public interface Constants {
          * 云通讯回调地址
          */
         String YTX_CALLBACK_URL="ytxCallBackUrl";
+
         /**
          * 微信授权
          */
@@ -382,5 +387,11 @@ public interface Constants {
 
     }
 }
+
+
+
+
+
+
 
 

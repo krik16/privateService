@@ -4,6 +4,7 @@ import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.easy.coupon.entity.CouponOrder;
 import com.rongyi.easy.coupon.entity.CouponOrderItem;
 import com.rongyi.easy.coupon.param.CouponOrderParam;
+import com.rongyi.easy.malllife.vo.CouponRefundDetailVO;
 import com.rongyi.easy.coupon.param.WechatPaySignParam;
 import com.rongyi.easy.rmmm.param.OrderListParam;
 import com.rongyi.easy.tradecenter.vo.CouponOrderVO;
@@ -243,6 +244,12 @@ public interface MLCouponOrderService {
      */
      int getMaxIntegral(OrderListParam param, double limit, double scoreExchangeMoney,double platformRebateAmount);
      
+     /**
+      * 代金券退款详情
+      * @param refundId
+      * @return
+      */
+     CouponRefundDetailVO getRefundDetail(Integer refundId);
      public Map<String, Object> generateWechatPaySign(WechatPaySignParam param);
      
 }

@@ -1,5 +1,6 @@
 package com.rongyi.rss.tradecenter;
 
+import com.rongyi.easy.malllife.vo.CouponRefundDetailVO;
 import com.rongyi.easy.tradecenter.TradeUserCode;
 
 import java.util.List;
@@ -34,5 +35,7 @@ public interface ITradeUserCodeService {
      * @return
      */
     int getUserCodeNumByMap(Map<String, Object> paramsMap);
+
+    CouponRefundDetailVO getRefundDetail(Integer refundId);
 
 }

@@ -1,6 +1,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> f1a436255413a8336e7d9ac4f1a6a28c0694370c
 =======
@@ -257,12 +258,15 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> f98442833dfc62b5f93c72a10bf967c5ee3abed3
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.rongyi</groupId>
 		<artifactId>easy-common</artifactId>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 		<version>2.7.1-SNAPSHOT</version>
@@ -275,6 +279,9 @@
 =======
 		<version>2.9.3-SNAPSHOT</version>
 >>>>>>> a151b9c7401e4796f226b85fe8b3ba68107b6d69
+=======
+		<version>2.9.3-SNAPSHOT</version>
+>>>>>>> f98442833dfc62b5f93c72a10bf967c5ee3abed3
 	</parent>
 	<artifactId>easy-core</artifactId>
 	<packaging>jar</packaging>
@@ -508,6 +515,7 @@
 			<version>2.5.0</version>
 	     </dependency>
 	</dependencies>
+<<<<<<< HEAD
 </project>
 >>>>>>> 0e89d5161e0c2eced6c5ca9847bbbbf35dbeea23
 =======
@@ -515,3 +523,6 @@
 >>>>>>> f1a436255413a8336e7d9ac4f1a6a28c0694370c
 =======
 >>>>>>> da6c1ff366d60795715da2d15a8c64d5017b52d8
+=======
+</project>
+>>>>>>> f98442833dfc62b5f93c72a10bf967c5ee3abed3

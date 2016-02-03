@@ -1,5 +1,8 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> f98442833dfc62b5f93c72a10bf967c5ee3abed3
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
@@ -110,6 +113,7 @@
 			</plugin>
 		</plugins>
 	</build>
+<<<<<<< HEAD
 </project>
 =======
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -320,3 +324,6 @@
 	</build>
 </project>
 >>>>>>> da6c1ff366d60795715da2d15a8c64d5017b52d8
+=======
+</project>
+>>>>>>> f98442833dfc62b5f93c72a10bf967c5ee3abed3
