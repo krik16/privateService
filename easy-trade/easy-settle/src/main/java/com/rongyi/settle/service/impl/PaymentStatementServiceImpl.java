@@ -1,5 +1,19 @@
 package com.rongyi.settle.service.impl;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
@@ -16,7 +30,13 @@ import com.rongyi.rss.rpb.IRpbService;
 import com.rongyi.rss.rpb.OrderNoGenService;
 import com.rongyi.settle.constants.ConstantEnum;
 import com.rongyi.settle.constants.SettleConstant;
-import com.rongyi.settle.dto.*;
+import com.rongyi.settle.dto.CouponCodeExcelDto;
+import com.rongyi.settle.dto.CouponExcelDto;
+import com.rongyi.settle.dto.CouponStatementDetailDto;
+import com.rongyi.settle.dto.OrderSettlementDetailDto;
+import com.rongyi.settle.dto.OrderSettlementDetailVO;
+import com.rongyi.settle.dto.OrderSettlementTopDto;
+import com.rongyi.settle.dto.PaymentStatementExcelDto;
 import com.rongyi.settle.mapper.OperationLogMapper;
 import com.rongyi.settle.mapper.PaymentStatementMapper;
 import com.rongyi.settle.service.BussinessInfoService;
@@ -27,14 +47,6 @@ import com.rongyi.settle.util.AmountUtil;
 import com.rongyi.settle.util.CollectionUtil;
 import com.rongyi.settle.util.DateUtils;
 import com.rongyi.settle.util.ExcelUtils;
-import org.apache.commons.collections.CollectionUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
-import java.util.*;
 
 /**
  * Created by xgq on 2015/9/22. Modified by ZhengYl on 2015/12/08
@@ -488,7 +500,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
 
         List<CouponCodeExcelDto> couponCodeExcelDtoList = new ArrayList<>();
         List<OrderSettlementDetailVO> orderSettlementDetailVOs = new ArrayList<>();
-        double total = 0;
+        double payTotal = 0;
         double totalCoupon = 0;
         double payTotalCoupon = 0;
         for (CouponStatementDetailDto couponStatementDetailDto : couponStatementDetailDtoList) {
@@ -517,9 +529,9 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
         paymentStatementExcelDto.setPayTotalOrder(totalOrder);
         paymentStatementExcelDto.setRongyiDiscountOrder(totalOrder - payTotalOrder);
 
-        total = totalOrder + totalCoupon;
-        paymentStatementExcelDto.setPayTotal(total);
-        paymentStatementExcelDto.setRongyiDiscount(total - payTotalCoupon - payTotalOrder);
+        payTotal = totalOrder + totalCoupon;
+        paymentStatementExcelDto.setPayTotal(payTotal);
+        paymentStatementExcelDto.setRongyiDiscount(payTotal - payTotalCoupon - payTotalOrder);
 
         BussinessInfo bussinessInfo = bussinessInfoService.selectByConfigId(statementConfig.getId());
         paymentStatementExcelDto.setShopAccountName(bussinessInfo.getPayName());
@@ -543,7 +555,7 @@ public class PaymentStatementServiceImpl extends BaseServiceImpl implements Paym
                 getFileName(statementConfig.getBussinessName(), DateUtils.getDateStr(paymentStatement.getCycleStartTime())), paymentStatementExcelDto);
 
         // 插入生成记录
-        paymentStatement.setPayTotal(AmountUtil.changYuanToFen(total));
+        paymentStatement.setPayTotal(AmountUtil.changYuanToFen(payTotal));
         if (id != null) {
             List<Integer> ids = new ArrayList<Integer>();
             ids.add(id);

@@ -117,13 +117,13 @@ public class PaymentStatementController extends BaseController {
 				break;
 			case 2:// 查询待付款审核列表
 				responseData = accessService.check(request, "FNC_UNPVFY_VIEW");
-				map.put("predictPayTimeBegin", new Date());
 				if (responseData.getMeta().getErrno() != 0) {
 					return responseData;
 				}
-				if (searchStatus == 0)
+				if (searchStatus == 0) {
+					map.put("predictPayTimeBegin", new Date());
 					statusList.add(ConstantEnum.STATUS_4.getCodeByte());
-				else {
+				}else {
 					statusList.add(ConstantEnum.STATUS_6.getCodeByte());
 					statusList.add(ConstantEnum.STATUS_7.getCodeByte());
 					statusList.add(ConstantEnum.STATUS_8.getCodeByte());
