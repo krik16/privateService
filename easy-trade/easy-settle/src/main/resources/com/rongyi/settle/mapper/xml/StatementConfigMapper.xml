@@ -459,8 +459,8 @@
         WHERE `status`=1 
         	AND is_delete=0
             AND count_cycle = #{cycleType,jdbcType=TINYINT}
-            AND DATEDIFF(#{currentTime,jdbcType=TIMESTAMP}, effect_end_time) &lt; 31
-            AND DATEDIFF(#{currentTime,jdbcType=TIMESTAMP}, effect_start_time) &gt; 0
+            AND DATEDIFF(#{currentTime,jdbcType=TIMESTAMP}, effect_end_time) &lt;= 31
+            AND DATEDIFF(#{currentTime,jdbcType=TIMESTAMP}, effect_start_time) &gt;= 0
     </select>
 
     <update id="updateStatusByIds" parameterType="map">
