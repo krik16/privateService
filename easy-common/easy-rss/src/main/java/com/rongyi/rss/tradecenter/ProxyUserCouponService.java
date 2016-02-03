@@ -1,6 +1,7 @@
 package com.rongyi.rss.tradecenter;
 
 import com.rongyi.easy.coupon.entity.UserCoupon;
+import com.rongyi.easy.malllife.vo.CouponRefundDetailVO;
 
 import java.util.List;
 
@@ -46,5 +47,7 @@ public interface ProxyUserCouponService {
 
     List<UserCoupon> findUserCouponList(Long orderId, String couponId);
 
-    void updateUserCouponStatusByIds(List<Long> userCouponIds, int status);
+    void updateUserCouponStatusByIds(List<Long> userCouponIds, int status,String paymentId);
+
+    CouponRefundDetailVO getRefundDetail(Integer refundId);
 }

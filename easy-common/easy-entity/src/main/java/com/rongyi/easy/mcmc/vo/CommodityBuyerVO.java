@@ -20,7 +20,7 @@ public class CommodityBuyerVO implements Serializable{
 	private String commodityCode;
 	private String commodityStock;
 	private int commodityStatus;
-	private int commodityAppStatus;// 商品APP显示状态 (0下架  1上架  3待上架)
+	private int commodityAppStatus;// 商品APP显示状态 (0下架  1上架  3待上架 4秒杀结束)
 	private int commodityType;//渠道  1商家，2买手
 	private boolean supportCourierDeliver;//支持快递发货    导购：true是   false否；买手：默认true   
 	private boolean supportSelfPickup;//支持到店自提  true 是    false否
@@ -35,7 +35,9 @@ public class CommodityBuyerVO implements Serializable{
 	private boolean watching = false; //是否正在看
 	private List<Double> location; //经纬度
 	private String systemNumber; //商品SPU
-	private String activityType = "0";	//活动状态[0其他 闪购1、特卖2、秒杀3]
+	private String activityType = "0";	//活动类型[0其他 闪购1、特卖2、秒杀3]
+
+	private String easyOrder;//容易令
 
 	public String getActivityType() {
 		return activityType;
@@ -275,6 +277,21 @@ public class CommodityBuyerVO implements Serializable{
 			//其他
 			this.activityType = "0";
 		}
+		
+		// 当前是秒杀商品
+		if ("3".equals(this.activityType)) {
+			long nowTime = new Date().getTime();
+			// 商品处于上架状态
+			if (this.commodityAppStatus == 1) {
+				if (commodity.getActivityStartTime() != null && commodity.getActivityStartTime().getTime() > nowTime) {
+					// 秒杀未开始
+					this.commodityAppStatus = 3;
+				} else if (commodity.getActivityEndTime() != null && commodity.getActivityEndTime().getTime() <= nowTime) {
+					// 秒杀已结束
+					this.commodityAppStatus = 4;
+				}
+			}
+		}
 	}
 	
 	public List<String> getCommodityPicList() {
@@ -359,7 +376,15 @@ public class CommodityBuyerVO implements Serializable{
 	public void setSupportCourierDeliver(boolean supportCourierDeliver) {
 		this.supportCourierDeliver = supportCourierDeliver;
 	}
-	
+
+	public String getEasyOrder() {
+		return easyOrder;
+	}
+
+	public void setEasyOrder(String easyOrder) {
+		this.easyOrder = easyOrder;
+	}
+
 	public boolean isSupportSelfPickup() {
 		return supportSelfPickup;
 	}
@@ -378,41 +403,20 @@ public class CommodityBuyerVO implements Serializable{
 
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this)
-				.append("shopName", shopName)
-				.append("commodityPicList", commodityPicList)
-				.append("commodityId", commodityId)
-				.append("commodityCode", commodityCode)
-				.append("commodityStock", commodityStock)
-				.append("commodityStatus", commodityStatus)
-				.append("commodityAppStatus", commodityAppStatus)
-				.append("commodityType", commodityType)
-				.append("supportCourierDeliver", supportCourierDeliver)
-				.append("supportSelfPickup", supportSelfPickup)
-				.append("offlinePayment", offlinePayment)
-				.append("onlinePayment", onlinePayment)
-				.append("offlineRefund", offlineRefund)
-				.append("onlineRefund", onlineRefund)
-				.append("shopIM", shopIM)
-				.append("bullId", bullId)
-				.append("distance", distance)
-				.append("saleShopCount", saleShopCount)
-				.append("watching", watching)
-				.append("location", location)
-				.append("systemNumber", systemNumber)
-				.append("activityType", activityType)
-				.append("commodityOPriceMax", commodityOPriceMax)
-				.append("commodityOPriceMin", commodityOPriceMin)
-				.append("commodityCPriceMax", commodityCPriceMax)
-				.append("commodityCPriceMin", commodityCPriceMin)
-				.append("commodityOPOfLCP", commodityOPOfLCP)
-				.append("commodityBrandName", commodityBrandName)
-				.append("commodityPostage", commodityPostage)
-				.append("commodityDescription", commodityDescription)
-				.append("commodityName", commodityName)
-				.append("shopId", shopId)
-				.append("shopMid", shopMid)
-				.append("isCollected", isCollected)
-				.toString();
+		return "CommodityBuyerVO [shopName=" + shopName + ", commodityPicList=" + commodityPicList + ", commodityId="
+				+ commodityId + ", commodityCode=" + commodityCode + ", commodityStock=" + commodityStock
+				+ ", commodityStatus=" + commodityStatus + ", commodityAppStatus=" + commodityAppStatus
+				+ ", commodityType=" + commodityType + ", supportCourierDeliver=" + supportCourierDeliver
+				+ ", supportSelfPickup=" + supportSelfPickup + ", offlinePayment=" + offlinePayment + ", onlinePayment="
+				+ onlinePayment + ", offlineRefund=" + offlineRefund + ", onlineRefund=" + onlineRefund + ", shopIM="
+				+ shopIM + ", bullId=" + bullId + ", distance=" + distance + ", saleShopCount=" + saleShopCount
+				+ ", watching=" + watching + ", location=" + location + ", systemNumber=" + systemNumber
+				+ ", activityType=" + activityType + ", commodityOPriceMax=" + commodityOPriceMax
+				+ ", commodityOPriceMin=" + commodityOPriceMin + ", commodityCPriceMax=" + commodityCPriceMax
+				+ ", commodityCPriceMin=" + commodityCPriceMin + ", commodityOPOfLCP=" + commodityOPOfLCP
+				+ ", commodityBrandName=" + commodityBrandName + ", commodityPostage=" + commodityPostage
+				+ ", commodityDescription=" + commodityDescription + ", commodityName=" + commodityName + ", shopId="
+				+ shopId + ", shopMid=" + shopMid + ", isCollected=" + isCollected + "]";
 	}
+	
 }

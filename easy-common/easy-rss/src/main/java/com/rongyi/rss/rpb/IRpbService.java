@@ -15,9 +15,7 @@ import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.domain.WeixinMch;
-import com.rongyi.easy.rpb.vo.PayAccountUseTotal;
-import com.rongyi.easy.rpb.vo.PaymentParamVO;
-import com.rongyi.easy.rpb.vo.QueryOrderParamVO;
+import com.rongyi.easy.rpb.vo.*;
 
 /**
  * @Author: 柯军
@@ -187,5 +185,12 @@ public interface IRpbService {
 	ResponseData updateWeixinMch(WeixinMch weixinMch);
 
 
+
+	/**
+	 *  Description: 退款详情查询
+	 *  @param refundQueryParamVO
+	 *  Author: kejun
+	 **/
+	RefundStatusVO getRefundStatus(RefundQueryParamVO refundQueryParamVO);
 
 }
