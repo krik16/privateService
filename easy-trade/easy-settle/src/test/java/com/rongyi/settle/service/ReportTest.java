@@ -26,7 +26,7 @@ public class ReportTest extends BaseTest{
     public void sendEmailTest(){
     	try {
 //			paymentStatementService.generateForSchedule();
-    		paymentStatementService2.generate(1330, "admin");
+    		paymentStatementService2.generate(1339, "admin");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

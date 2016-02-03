@@ -786,49 +786,60 @@
 	</select>
 
 	<select id="selectForOrderTopDto" parameterType="java.util.Map" resultMap="OrderTopDtoMap">
-		SELECT SQL_NO_CACHE
-			SI.shop_name,
-			'收入' AS income_type,
-			'商品订单' AS order_type,
-		    COUNT(1) AS order_count,
-			SUM(ODF.unit_price * quantity - OF.disconnt_fee + express_fee) AS total_amount,
-			SUM(OF.score_discount + OF.order_score_discount) AS score_amount,
-			SUM(OF.coupon_discount + OF.order_coupon_discount + ODF.coupon_discount) AS hb_amount,
-			0 AS discount_amount
+		SELECT
+		shop_name,
+		SUM(total_amount) AS total_amount,
+		'收入' AS income_type,
+		'商品订单' AS order_type,
+		COUNT(OFID) AS order_count,
+		SUM(total_amount) AS total_amount,
+		SUM(score_amount) AS score_amount,
+		SUM(hb_amount) AS hb_amount,
+		0 AS discount_amount
+		FROM (
+		SELECT
+		SI.id AS SID,
+		SI.shop_name,
+		OF.id AS OFID,
+		SUM(ODF.unit_price * quantity) - OF.disconnt_fee + OF.express_fee AS total_amount,
+		SUM(OF.score_discount + OF.order_score_discount) AS score_amount,
+		SUM(OF.coupon_discount + OF.order_coupon_discount + ODF.coupon_discount) AS hb_amount
 		FROM
-		    ry_osm.order_form OF
-		        INNER JOIN
-		    ry_osm.order_event H3 ON OF.order_no = H3.order_no and H3.`status` = 3
-		        LEFT JOIN
-		    ry_osm.order_detail_form ODF ON OF.order_no = ODF.order_no
-		        LEFT JOIN
-		    ry_rmmm.user_shop US ON OF.guide_id = US.user_id
-		        LEFT JOIN
-		    ry_rmmm.mall_cooperate MC ON US.mall_id = MC.id
-		        LEFT JOIN
-		    ry_rmmm.shop_info SI ON US.shop_id = SI.id
-		    	LEFT JOIN
-		    ry_rmmm.brand_info AS BI ON BI.id = SI.brand_id	
+		ry_osm.order_form OF
+		INNER JOIN
+		ry_osm.order_event H3 ON OF.order_no = H3.order_no and H3.`status` = 3
+		LEFT JOIN
+		ry_osm.order_detail_form ODF ON OF.order_no = ODF.order_no
+		LEFT JOIN
+		ry_rmmm.user_shop US ON OF.guide_id = US.user_id
+		LEFT JOIN
+		ry_rmmm.mall_cooperate MC ON US.mall_id = MC.id
+		LEFT JOIN
+		ry_rmmm.shop_info SI ON US.shop_id = SI.id
+		LEFT JOIN
+		ry_rmmm.brand_info AS BI ON BI.id = SI.brand_id
 		WHERE
-		    H3.create_at BETWEEN #{startTime,jdbcType=TIMESTAMP} AND #{endTime,jdbcType=TIMESTAMP}
-			AND OF.`status` &gt; 2
-			AND OF.is_pay_va = 0
-			<if test="brandId != null">
-				AND BI.brand_mid = #{brandId,jdbcType=VARCHAR}
-			</if>
-			<if test="mallId != null">
-				AND MC.mall_mid = #{mallId,jdbcType=VARCHAR}
-			</if>
-			<if test="shopId != null">
-				AND SI.shop_mid = #{shopId,jdbcType=VARCHAR}
-			</if>
-			<if test="userIds != null">
-				AND OF.guide_id IN
-				<foreach item="item" index="index" collection="userIds" open="("  separator="," close=")">  
-	            	#{item}  
-	        	</foreach>  
-			</if>
-		GROUP BY SI.id
+		H3.create_at BETWEEN #{startTime,jdbcType=TIMESTAMP} AND #{endTime,jdbcType=TIMESTAMP}
+		AND OF.`status` &gt; 2
+		AND OF.is_pay_va = 0
+		<if test="brandId != null">
+			AND BI.brand_mid = #{brandId,jdbcType=VARCHAR}
+		</if>
+		<if test="mallId != null">
+			AND MC.mall_mid = #{mallId,jdbcType=VARCHAR}
+		</if>
+		<if test="shopId != null">
+			AND SI.shop_mid = #{shopId,jdbcType=VARCHAR}
+		</if>
+		<if test="userIds != null">
+			AND OF.guide_id IN
+			<foreach item="item" index="index" collection="userIds" open="("  separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		GROUP BY OF.id
+		) AS OFTEMP
+		GROUP BY OFTEMP.SID
 	</select>
 	
 	<select id="selectForOrderDetailDto" parameterType="java.util.Map" resultMap="OrderDetailDtoMap">
@@ -848,7 +859,7 @@
 		 	D.mall_name,
 		 	E.shop_mid AS shop_id,
 		 	E.shop_name,
-		 	(B.unit_price * quantity - A.disconnt_fee + A.express_fee) AS orig_price,
+			SUM(B.unit_price * quantity) - A.disconnt_fee + A.express_fee AS orig_price,
 		 	A.total_amount AS pay_amount,
 		 	H2.create_at AS payment_time,
 		 	H3.create_at AS delivery_time,
@@ -864,7 +875,7 @@
 				LEFT JOIN ry_rmmm.brand_info BI ON BI.id = E.brand_id
 				INNER JOIN ry_osm.order_event H2 ON A.order_no = H2.order_no AND H2.`status` = 2
 				INNER JOIN ry_osm.order_event H3 ON A.order_no = H3.order_no AND H3.`status` = 3
-				LEFT JOIN ry_osm.order_event H4 ON A.order_no = H4.order_no AND H4.`status` = 4
+				LEFT JOIN ry_osm.order_event H4 ON A.order_no = H4.order_no AND H4.`status` = 4 AND H4.type = 4
 				LEFT JOIN ry_rpb.payment_order O ON A.order_no = O.order_no AND O.trade_type = 0 AND O.`status` = 2
 				LEFT JOIN ry_osm.order_cart_form OCF ON OCF.id = A.cart_id
 				LEFT JOIN ry_rpb.payment_order PO ON OCF.order_no = PO.order_no and PO.trade_type = 0 AND PO.`status` = 2
