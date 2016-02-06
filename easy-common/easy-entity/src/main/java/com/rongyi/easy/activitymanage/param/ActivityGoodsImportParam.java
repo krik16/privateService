@@ -44,6 +44,11 @@ public class ActivityGoodsImportParam extends PagingParam {
      */
     private List<Integer> ids;
 
+    /**
+     * 创建人
+     */
+    private String createUser;
+
     public Integer getId() {
         return id;
     }
@@ -100,6 +105,14 @@ public class ActivityGoodsImportParam extends PagingParam {
         this.ids = ids;
     }
 
+    public String getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -110,6 +123,7 @@ public class ActivityGoodsImportParam extends PagingParam {
                 .append("valid", valid)
                 .append("goodsType", goodsType)
                 .append("ids", ids)
+                .append("createUser", createUser)
                 .toString();
     }
 }
