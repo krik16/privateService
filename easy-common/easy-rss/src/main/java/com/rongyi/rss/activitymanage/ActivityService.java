@@ -36,6 +36,29 @@ public interface ActivityService {
     boolean checkActivityInfo(ActivityCheckRecord activityCheckRecord);
 
     /**
+     * 校验同一时间段内同一商品id是否已经存在
+     * @param activityGoods
+     * @return boolean
+     * @author Leon
+     */
+    boolean validJoinDate(ActivityGoods activityGoods);
+
+    /**
+     * 保存商品
+     * @param activityGoods
+     * @return boolean
+     * @author Leon
+     */
+    boolean saveActivityGoods(ActivityGoods activityGoods);
+
+
+
+
+
+
+
+
+    /**
      * 批量新增ActivityGoods数据
      * @param ActivityGoods
      * @return boolean
@@ -118,13 +141,7 @@ public interface ActivityService {
      */
     List<ActivityGoodsImport> getGoodsImports(ActivityGoodsImportParam param);
 
-    /**
-     * 保存商品
-     * @param param
-     * @return ResponseVO
-     * @author Leon
-     */
-    ResponseVO saveActivityGoods(ActivityGoodsImportParam param);
+
 
 
 
@@ -149,6 +166,7 @@ public interface ActivityService {
      * @return
      */
     List<ActivityGoodTemplateVO> selectActivityGoodsByActivity(List<String> ids,Integer activityId,Integer type);
+
 
 
 }
