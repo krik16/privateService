@@ -7,11 +7,9 @@ import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.activity.entity.QueryActivityGoods;
 import com.rongyi.easy.activitymanage.entity.*;
 import com.rongyi.easy.activitymanage.param.ActivityGoodsImportParam;
+import com.rongyi.easy.activitymanage.param.ActivityGoodsParam;
 import com.rongyi.easy.activitymanage.param.SearchActivityParam;
-import com.rongyi.easy.activitymanage.vo.ActivityGoodTemplateVO;
-import com.rongyi.easy.activitymanage.vo.ActivityGoodsImportVO;
-import com.rongyi.easy.activitymanage.vo.ActivityInfoListVO;
-import com.rongyi.easy.activitymanage.vo.ActivityInfoVO;
+import com.rongyi.easy.activitymanage.vo.*;
 
 /**
  * 活动后台管理接口
@@ -51,13 +49,6 @@ public interface ActivityService {
      */
     boolean saveActivityGoods(ActivityGoods activityGoods);
 
-
-
-
-
-
-
-
     /**
      * 批量新增ActivityGoods数据
      * @param ActivityGoods
@@ -73,6 +64,31 @@ public interface ActivityService {
      * @author Leon
      */
     boolean saveActivityGoodsImport(List<ActivityGoodsImport> activityGoodsImports);
+
+    /**
+     * 获取导入失败记录
+     * @param param
+     * @return List<ActivityGoodsImport>
+     * @author Leon
+     */
+    List<ActivityGoodsImport> getGoodsImports(ActivityGoodsImportParam param);
+
+    /**
+     * 查询导入的商品列表
+     * @param param
+     * @return PagingVO<ActivityGoodsVO>
+     * @author Leon
+     */
+    PagingVO<ActivityGoodsVO> getActivityGoods(ActivityGoodsParam param);
+
+
+
+
+
+
+
+
+
 
 
 
@@ -117,13 +133,7 @@ public interface ActivityService {
 
 
 
-    /**
-     * 查询导入的商品列表
-     * @param param
-     * @return PagingVO<ActivityGoodsImportVO>
-     * @author Leon
-     */
-    PagingVO<ActivityGoodsImportVO> getActivityGoodsImports(ActivityGoodsImportParam param);
+
 
     /**
      * 移除关联的商品
@@ -133,13 +143,7 @@ public interface ActivityService {
      */
     boolean removeActivityGoodsImport(List<Integer> importIds);
 
-    /**
-     * 获取导入商品的列表
-     * @param param
-     * @return List<ActivityGoodsImport>
-     * @author Leon
-     */
-    List<ActivityGoodsImport> getGoodsImports(ActivityGoodsImportParam param);
+
 
 
 
