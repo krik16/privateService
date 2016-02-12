@@ -1,8 +1,12 @@
 package com.rongyi.easy.activitymanage.entity;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -50,6 +54,22 @@ public class ActivityGoods implements Serializable {
      * 商品分类
      */
     private List<ActivityGoodsCategory> activityGoodsCategories;
+
+    /**
+     * 获取商品分类的层级信息
+     * @return 餐饮 > 西餐 > 牛排
+     */
+    public String getCategoryString() {
+        String categoryStr = "";
+        if (CollectionUtils.isNotEmpty(activityGoodsCategories)) {
+            List<String> categoryList = new ArrayList<>();
+            for (ActivityGoodsCategory goodsCategory : activityGoodsCategories) {
+                categoryList.add(goodsCategory.getCategoryName());
+            }
+            categoryStr = StringUtils.join(categoryList, " > ");
+        }
+        return categoryStr;
+    }
 
     public ActivityGoods(int type){
 		this.type=type;

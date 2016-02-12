@@ -81,7 +81,13 @@ public interface ActivityService {
      */
     PagingVO<ActivityGoodsVO> getActivityGoods(ActivityGoodsParam param);
 
-
+    /**
+     * 移除商品
+     * @param activityGoodsIds
+     * @return Boolean
+     * @author Leon
+     */
+    boolean removeActivityGoodsImport(List<Integer> activityGoodsIds);
 
 
 
@@ -135,13 +141,7 @@ public interface ActivityService {
 
 
 
-    /**
-     * 移除关联的商品
-     * @param importId 临时表id
-     * @return Boolean
-     * @author Leon
-     */
-    boolean removeActivityGoodsImport(List<Integer> importIds);
+
 
 
 
