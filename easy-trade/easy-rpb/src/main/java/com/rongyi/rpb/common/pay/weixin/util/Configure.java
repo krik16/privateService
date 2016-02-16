@@ -19,11 +19,11 @@ public class Configure {
             setMchID(weixinMch.getMchId());
             setCertLocalPath(weixinMch.getCretPath());
             setCertPassword(weixinMch.getMchId());
-            if (ConstantEnum.WEIXIN_PAY_TRADE_TYPE_APP.getCode().toString().equals(weixinMch.getTradeType())) {
+            if (ConstantEnum.WEIXIN_PAY_TRADE_TYPE_APP.getCodeStr().equals(weixinMch.getTradeType())) {
                 setTradeType(ConstantEnum.WEIXIN_PAY_TRADE_TYPE_APP.getValueStr());
-            } else if (ConstantEnum.WEIXIN_PAY_TRADE_TYPE_JSAPI.getCode().toString().equals(weixinMch.getTradeType())) {
+            } else if (ConstantEnum.WEIXIN_PAY_TRADE_TYPE_JSAPI.getCodeStr().equals(weixinMch.getTradeType())) {
                 setTradeType(ConstantEnum.WEIXIN_PAY_TRADE_TYPE_JSAPI.getValueStr());
-            } else if (ConstantEnum.WEIXIN_PAY_TRADE_TYPE_NATIVE.getCode().toString().equals(weixinMch.getTradeType())) {
+            } else if (ConstantEnum.WEIXIN_PAY_TRADE_TYPE_NATIVE.getCodeStr().equals(weixinMch.getTradeType())) {
                 setTradeType(ConstantEnum.WEIXIN_PAY_TRADE_TYPE_NATIVE.getValueStr());
             }
         }
