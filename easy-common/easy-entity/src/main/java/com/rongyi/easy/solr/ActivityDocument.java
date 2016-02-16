@@ -49,7 +49,7 @@ public class ActivityDocument implements Serializable{
     private Date public_start;
     private Date public_end;
 
-    private String buyed_num;
+    //private String buyed_num;
     private String text;
     private String area1;
     private String area2;
@@ -346,13 +346,13 @@ public class ActivityDocument implements Serializable{
         this.public_end = public_end;
     }
 
-    public String getBuyed_num() {
+   /* public String getBuyed_num() {
         return buyed_num;
     }
 
     public void setBuyed_num(String buyed_num) {
         this.buyed_num = buyed_num;
-    }
+    }*/
 
     public int getMall() {
         return mall;
