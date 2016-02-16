@@ -3,10 +3,6 @@ package com.rongyi.rpb.common.pay.weixin.util;
 import com.rongyi.easy.rpb.domain.WeixinMch;
 import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.ConstantUtil;
-import com.rongyi.rpb.service.WeixinMchService;
-import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * User: rizenguo
@@ -23,11 +19,11 @@ public class Configure {
             setMchID(weixinMch.getMchId());
             setCertLocalPath(weixinMch.getCretPath());
             setCertPassword(weixinMch.getMchId());
-            if (ConstantEnum.WEIXIN_PAY_TRADE_TYPE_APP.getCodeByte().equals(weixinMch.getTradeType())) {
+            if (ConstantEnum.WEIXIN_PAY_TRADE_TYPE_APP.getCode().toString().equals(weixinMch.getTradeType())) {
                 setTradeType(ConstantEnum.WEIXIN_PAY_TRADE_TYPE_APP.getValueStr());
-            } else if (ConstantEnum.WEIXIN_PAY_TRADE_TYPE_JSAPI.getCodeByte().equals(weixinMch.getTradeType())) {
+            } else if (ConstantEnum.WEIXIN_PAY_TRADE_TYPE_JSAPI.getCode().toString().equals(weixinMch.getTradeType())) {
                 setTradeType(ConstantEnum.WEIXIN_PAY_TRADE_TYPE_JSAPI.getValueStr());
-            } else if (ConstantEnum.WEIXIN_PAY_TRADE_TYPE_NATIVE.getCodeByte().equals(weixinMch.getTradeType())) {
+            } else if (ConstantEnum.WEIXIN_PAY_TRADE_TYPE_NATIVE.getCode().toString().equals(weixinMch.getTradeType())) {
                 setTradeType(ConstantEnum.WEIXIN_PAY_TRADE_TYPE_NATIVE.getValueStr());
             }
         }

@@ -49,11 +49,16 @@ public class RpbServiceTest extends BaseTest{
 		event.setType("5");
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("weidianId","\"\"");
-		map.put("title", "测试优惠券 勿买");
-		map.put("orderType", "1");
+		map.put("title", "卡券测试1");
+		map.put("timeStart", "2016-02-16 17:17:19");
+		map.put("timeExpire", "2016-02-16 17:52:19");
+		map.put("appId", "wxb0af59268c136d7d");
+		map.put("openId", "o0BDmjr5jmDDZieVha8Evg_aJdQM");
 		map.put("orderDetailNum", "\"\"");
-		map.put("orderNum", "1009351119361126");
-		map.put("totalPrice", "0.01");
+		map.put("orderNum", "\"021644108544151726\"");
+		map.put("weixinPayType", "1");
+		map.put("orderType", "1");
+		map.put("totalPrice", 2);
 		event.setBody(map);
 		iRpbService.getPaySign(event);
 	}
