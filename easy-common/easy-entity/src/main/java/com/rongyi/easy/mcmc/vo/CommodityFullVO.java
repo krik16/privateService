@@ -3,6 +3,7 @@ package com.rongyi.easy.mcmc.vo;
 import org.apache.commons.collections.CollectionUtils;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,6 +19,10 @@ public class CommodityFullVO implements Serializable {
     private List<String> picList;//商品图片列表
     private List<CommodityCategorySimpleVO> categorySimpleVOs;
     private List<CommoditySpecSimpleVO> specSimpleVOs;
+
+    private int status;
+    private Date registerAt;//上架时间
+    private Date soldOutAt;//下架时间
 
     public String getId() {
         return id;
@@ -47,12 +52,20 @@ public class CommodityFullVO implements Serializable {
         return originalPrice;
     }
 
+    public Double getOriginalPriceDouble() {
+        return Double.valueOf(originalPrice);
+    }
+
     public void setOriginalPrice(String originalPrice) {
         this.originalPrice = originalPrice;
     }
 
     public String getCurrentPrice() {
         return currentPrice;
+    }
+
+    public Double getCurrentPriceDouble() {
+        return Double.valueOf(currentPrice);
     }
 
     public void setCurrentPrice(String currentPrice) {
@@ -113,5 +126,29 @@ public class CommodityFullVO implements Serializable {
                 return categoryTier.toString().substring(0, categoryTier.toString().length() - 3);
             } else return "";
         } else return "";
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public Date getRegisterAt() {
+        return registerAt;
+    }
+
+    public void setRegisterAt(Date registerAt) {
+        this.registerAt = registerAt;
+    }
+
+    public Date getSoldOutAt() {
+        return soldOutAt;
+    }
+
+    public void setSoldOutAt(Date soldOutAt) {
+        this.soldOutAt = soldOutAt;
     }
 }
