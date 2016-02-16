@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class CommodityCategorySimpleVO implements Serializable {
     private String id;
     private String name;
+    private int type;
 
     public String getId() {
         return id;
@@ -23,5 +24,13 @@ public class CommodityCategorySimpleVO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }
