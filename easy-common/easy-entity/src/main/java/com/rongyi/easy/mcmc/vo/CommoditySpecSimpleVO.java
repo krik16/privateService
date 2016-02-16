@@ -7,9 +7,9 @@ import java.util.List;
 
 public class CommoditySpecSimpleVO implements Serializable {
     private String id;
-    private String stock;//库存
-    private String originalPrice;
-    private String currentPrice;
+    private Integer stock;//库存
+    private Double originalPrice;
+    private Double currentPrice;
     private List<CommoditySpecColumnVO> specColumns;
 
     public String getId() {
@@ -20,27 +20,27 @@ public class CommoditySpecSimpleVO implements Serializable {
         this.id = id;
     }
 
-    public String getStock() {
+    public Integer getStock() {
         return stock;
     }
 
-    public void setStock(String stock) {
+    public void setStock(Integer stock) {
         this.stock = stock;
     }
 
-    public String getOriginalPrice() {
+    public Double getOriginalPrice() {
         return originalPrice;
     }
 
-    public void setOriginalPrice(String originalPrice) {
+    public void setOriginalPrice(Double originalPrice) {
         this.originalPrice = originalPrice;
     }
 
-    public String getCurrentPrice() {
+    public Double getCurrentPrice() {
         return currentPrice;
     }
 
-    public void setCurrentPrice(String currentPrice) {
+    public void setCurrentPrice(Double currentPrice) {
         this.currentPrice = currentPrice;
     }
 
