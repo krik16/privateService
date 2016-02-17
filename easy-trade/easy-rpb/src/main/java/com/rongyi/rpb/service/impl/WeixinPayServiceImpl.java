@@ -202,12 +202,11 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
                     paymentEntity.setFinishTime(DateUtil.getCurrDateTime());
                     paymentService.updateByPrimaryKeySelective(paymentEntity);
                     String target = Constants.SOURCETYPE.OSM;
-                    String orderDetailNum = "";
                     if (Constants.ORDER_TYPE.ORDER_TYPE_1 == oldPaymentEntity.getOrderType()) {
                         target = Constants.SOURCETYPE.COUPON;
-                        List<PaymentItemEntity> itemList = paymentItemService.selectByPaymentId(paymentEntity.getId());
-                        orderDetailNum = paymentItemService.getDetailNum(itemList);
                     }
+                    List<PaymentItemEntity> itemList = paymentItemService.selectByPaymentId(paymentEntity.getId());
+                    String orderDetailNum = paymentItemService.getDetailNum(itemList);
                     MessageEvent event = rpbEventService.getMessageEvent(paymentEntity.getPayNo(), paymentEntity.getOrderNum(), orderDetailNum, paymentEntity.getPayChannel().toString(), null,
                             Constants.SOURCETYPE.RPB, target, PaymentEventType.REFUND);
                     sender.convertAndSend(event);

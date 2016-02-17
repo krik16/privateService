@@ -22,6 +22,8 @@ public class RefundQueryReqData {
     private String sign = "";
     private String transaction_id = "";
     private String out_trade_no = "";
+    private String out_refund_no;
+    private String refund_id;
 
     /**
      * 请求退款查询服务
@@ -135,9 +137,6 @@ public class RefundQueryReqData {
         this.refund_id = refund_id;
     }
 
-    private String out_refund_no;
-    private String refund_id;
-
     public Map<String,Object> toMap(){
         Map<String,Object> map = new HashMap<String, Object>();
         Field[] fields = this.getClass().getDeclaredFields();
@@ -157,4 +156,19 @@ public class RefundQueryReqData {
         return map;
     }
 
+
+    @Override
+    public String toString() {
+        return "RefundQueryReqData{" +
+                "appid='" + appid + '\'' +
+                ", mch_id='" + mch_id + '\'' +
+                ", device_info='" + device_info + '\'' +
+                ", nonce_str='" + nonce_str + '\'' +
+                ", sign='" + sign + '\'' +
+                ", transaction_id='" + transaction_id + '\'' +
+                ", out_trade_no='" + out_trade_no + '\'' +
+                ", out_refund_no='" + out_refund_no + '\'' +
+                ", refund_id='" + refund_id + '\'' +
+                '}';
+    }
 }

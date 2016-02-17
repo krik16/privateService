@@ -72,7 +72,7 @@
 								<c:when test="${order.parentOrderStatus == 2}"> 待发货     </c:when>
 								<c:when test="${order.parentOrderStatus == 3}"> 已发货 （<span class="lvse">发货人：${order.userName }</span>） </c:when>
 								<c:when test="${order.parentOrderStatus == 4}"> 已完成 （<span class="lvse">发货人：${order.userName }</span>） </c:when>
-								<c:when test="${order.parentOrderStatus == 5}"> 已关闭 （<span class="lvse">发货人：${order.userName }</span>） </c:when>
+								<c:when test="${order.parentOrderStatus == 5}"> 已关闭 		</c:when>
 								<c:when test="${order.parentOrderStatus == 8}"> 已退款   	</c:when>
 							</c:choose>
 						</li>
