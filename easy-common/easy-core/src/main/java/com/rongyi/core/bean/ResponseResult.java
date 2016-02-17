@@ -10,7 +10,7 @@ public class ResponseResult implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/** 成功消息Code **/
-	private static final String SUCCESS = "200";
+	private static final String SUCCESS = "0";
 	/** 是否成功 **/
 	private boolean success = true;
 	/** 返回对象类型数据 **/

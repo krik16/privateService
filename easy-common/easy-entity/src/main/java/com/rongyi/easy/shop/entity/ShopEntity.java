@@ -46,8 +46,9 @@ public class ShopEntity implements Serializable{
     //@JsonDeserialize(using=ObjectIdJsonDeserializer.class)
     private List<ObjectId> category_ids;//店铺所属分类
     
-    //@JsonDeserialize(using=ObjectIdJsonDeserializer.class)
-    private List<ObjectId> exclusive_category_ids;//店铺所属专属分类
+//    //@JsonDeserialize(using=ObjectIdJsonDeserializer.class)
+//    private List<ObjectId> exclusive_category_ids;//店铺所属专属分类
+    private List<ObjectId> custom_category_ids;
     
     private List<String> photo_urls;//图片地址
     private String tags;//标签 自定义分类
@@ -155,19 +156,19 @@ public class ShopEntity implements Serializable{
 		}
 		
 		if(CollectionUtils.isNotEmpty(param.getExclusive_category_ids())){
-			List<ObjectId> exclusive_category_ids=new ArrayList<ObjectId>();
+			List<ObjectId> custom_category_ids=new ArrayList<ObjectId>();
 			for(String id:param.getExclusive_category_ids()){
 				if(StringUtils.isNotBlank(id)){
 					if(id.matches("[\\da-zA-Z]{24}"))
-						exclusive_category_ids.add(new ObjectId(id));
+						custom_category_ids.add(new ObjectId(id));
 					else{
 						throw new Exception("品牌品牌id格式不对");
 					}
 				}else{
-					exclusive_category_ids.add(null);
+					custom_category_ids.add(null);
 				}
 			}
-			this.exclusive_category_ids = exclusive_category_ids;
+			this.custom_category_ids = custom_category_ids;
 		}
 		
 		this.photo_urls = param.getPhoto_urls();
@@ -284,15 +285,25 @@ public class ShopEntity implements Serializable{
 	public void setCategory_ids(List<ObjectId> category_ids) {
 		this.category_ids = category_ids;
 	}
-	public List<ObjectId> getExclusive_category_ids() {
-		return exclusive_category_ids;
+//	public List<ObjectId> getExclusive_category_ids() {
+//		return exclusive_category_ids;
+//	}
+//	public void setExclusive_category_ids(List<ObjectId> exclusive_category_ids) {
+//		this.exclusive_category_ids = exclusive_category_ids;
+//	}
+	
+	public List<ObjectId> getCustom_category_ids() {
+		return custom_category_ids;
 	}
-	public void setExclusive_category_ids(List<ObjectId> exclusive_category_ids) {
-		this.exclusive_category_ids = exclusive_category_ids;
+
+	public void setCustom_category_ids(List<ObjectId> custom_category_ids) {
+		this.custom_category_ids = custom_category_ids;
 	}
+	
 	public String getTags() {
 		return tags;
 	}
+
 	public void setTags(String tags) {
 		this.tags = tags;
 	}

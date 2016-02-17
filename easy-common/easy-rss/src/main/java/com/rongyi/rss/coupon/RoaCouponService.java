@@ -15,6 +15,8 @@ import java.util.List;
  * 新版卡券接口
  *
  * @author Breggor
+ *
+ *
  */
 public interface RoaCouponService {
 
