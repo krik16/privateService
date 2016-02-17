@@ -10,23 +10,27 @@ import java.util.HashMap;
  */
 public interface ErrorNO {
 	/** 成功 **/
-	final int SUCCESS = 0;
+	final int SUCCESS 		= 0;
 	/** 签名错误 **/
-	final int SIGN_ERROR = 1181001;
+	final int SIGN_ERROR 	= 1181001;
 	/** 缺少参数 **/
-	final int LACK_PARAM = 1181002;
+	final int LACK_PARAM 	= 1181002;
 	/** 请求超时 **/
-	final int TIME_OUT = 1181003;
+	final int TIME_OUT 		= 1181003;
+	/** 数据不存在 **/
+	final int NO_DATA 		= 1181004;
 	/** 调用异常 **/
-	final int EXCEPTION = 1181010;
+	final int EXCEPTION 	= 1181010;
+
 	/** 错误消息 **/
 	public final static HashMap<Integer, String> ERRNO_MSG = new HashMap<Integer, String>() {
 		private static final long serialVersionUID = -963437014602035731L;
 		{
 			put(SIGN_ERROR, "签名错误");
 			put(LACK_PARAM, "缺少参数");
-			put(TIME_OUT  , "请求超时");
-			put(EXCEPTION , "调用异常");
+			put(TIME_OUT, 	"请求超时");
+			put(EXCEPTION, 	"调用异常");
+			put(NO_DATA, 	"数据不存在");
 		}
 	};
 }
