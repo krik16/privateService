@@ -428,12 +428,19 @@ public class OrderManagerController extends BaseController {
 			paramsMap.put("commodityIds", commodityIds);
 		}
 		if (paramsMap.containsKey("sellerAccount")){
+			List<Integer> guideIds = new ArrayList<>();
 			Map<String, Object> map = new HashMap<>();
 			map.put("userAccount",paramsMap.get("sellerAccount").toString());
 			map.put("isDisabled", 0);
-			UserInfo userInfo = iUserInfoService.getUserByMap(map);
+			UserInfo userInfo = iUserInfoService.getUserByMap(map);//导购(商场品牌)
 			if (userInfo!=null)
-				paramsMap.put("guideId",userInfo.getId());
+				guideIds.add(userInfo.getId());
+			map.put("type", ConstantEnum.USER_TYPE_2.getCodeInt());
+			UserInfo userInfo2 = iUserInfoService.getUserByMap(map);//买手
+			if (userInfo2!=null)
+				guideIds.add(userInfo2.getId());
+			if (CollectionUtils.isNotEmpty(guideIds))
+				paramsMap.put("guideIds",guideIds);
 			else {
 				return null;
 			}

@@ -461,5 +461,23 @@
         for update
     </select>
 
+    <select id="selectByPayNoAndOrderNo" resultMap="BaseResultMap"
+            parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from payment_order
+        where pay_no = #{payNo,jdbcType=VARCHAR}
+        and
+        order_no = #{orderNo,jdbcType=VARCHAR}
+        <if test="status != null and status != ''">
+            and status =
+            #{status,jdbcType=INTEGER}
+        </if>
+        <if test="tradeType != null and tradeType != ''">
+            and trade_ype =
+            #{tradeType,jdbcType=INTEGER}
+        </if>
+    </select>
+
 </mapper>
 
