@@ -142,7 +142,7 @@
 						<td>${sonOrder.integralDiscount }</td>
 						<td>
 							<c:choose>
-								<c:when test="${orderForm.status==1 or orderForm.status==5}"> 0.00 </c:when>
+								<c:when test="${order.parentOrderStatus==1 or order.parentOrderStatus==5}"> 0.00 </c:when>
 								<c:otherwise>${sonOrder.realAmount }</c:otherwise>
 							</c:choose>
 						</td>
@@ -196,7 +196,7 @@
 
 						<li class="name">卡券抵扣金额</li>
 						<li class="line">|</li>
-						<li class="data max2">${0-discountTotal }（元）</li>
+						<li class="data max2">${discountTotal }（元）</li>
 
 						<li class="name">积分抵扣金额</li>
 						<li class="line">|</li>
