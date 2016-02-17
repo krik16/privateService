@@ -16,6 +16,12 @@ public interface ROAPushShopUserService {
 
     public List<RmmmUserInfoEntity> findAllUsers(Integer type);
 
-    public List<RmmmUserInfoEntity> findUserByPhone(String phone);
+    /**
+     *
+     * @param phone
+     * @param type 1:买手 0：其他身份
+     * @return
+     */
+    public List<RmmmUserInfoEntity> findUserByPhone(String phone,Integer type);
 
 }
