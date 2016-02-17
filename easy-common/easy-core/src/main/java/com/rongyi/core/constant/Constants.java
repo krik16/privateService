@@ -758,7 +758,7 @@ public interface Constants {
      */
     interface PUSH_APP{
         int RYG=0;//容易逛
-        int MD=4;//摩店
+        int MD=1;//摩店
     }
 
 
