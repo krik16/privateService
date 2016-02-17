@@ -29,6 +29,17 @@ public class RevenueGuideVo implements Serializable {
 	private BigDecimal faleCommission;
 	
 	private Integer drawCountMax = 0;//这个是同一天同一个卖家允许提现的次数
+	
+	/**  当日营业额 */
+	private BigDecimal turnoverToday;
+
+	public BigDecimal getTurnoverToday() {
+		return turnoverToday;
+	}
+
+	public void setTurnoverToday(BigDecimal turnoverToday) {
+		this.turnoverToday = turnoverToday;
+	}
 
 	public Integer getDrawCountMax() {
 		return drawCountMax;
@@ -90,7 +101,8 @@ public class RevenueGuideVo implements Serializable {
 	@Override
 	public String toString() {
 		return "RevenueGuideVo [amountTotal=" + amountTotal + ", auditCommissionTotal=" + auditCommissionTotal + ", bonusToday="
-				+ bonusToday + ", drawingTotal=" + drawingTotal + ", tradeAmountToday=" + tradeAmountToday + "]";
+				+ bonusToday + ", drawingTotal=" + drawingTotal + ", tradeAmountToday=" + tradeAmountToday + ", faleCommission="
+				+ faleCommission + ", drawCountMax=" + drawCountMax + ", turnoverToday=" + turnoverToday + "]";
 	}
 
 }
