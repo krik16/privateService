@@ -25,8 +25,18 @@ public class DetailListVO implements Serializable {
 	private String disconnt;// 折扣
 	private String buyerName;// 买家名称
 	private String buyerIM;// 买家IM账号
+	
+	private String realAmount;// 订单总金额
 
 	
+	public String getRealAmount() {
+		return realAmount;
+	}
+
+	public void setRealAmount(String realAmount) {
+		this.realAmount = realAmount;
+	}
+
 	public String getBuyerName() {
 		return buyerName;
 	}
