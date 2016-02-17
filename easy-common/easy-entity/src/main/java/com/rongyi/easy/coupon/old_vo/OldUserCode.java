@@ -15,7 +15,7 @@ public class OldUserCode implements Serializable {
 
     private String thumbnail;//缩略图
 
-    private Integer status;//使用状态：1-未使用、2-已使用、3-退款中、4-已退款、5-已过期
+    private Integer status;//使用状态：0,已使用:1,退款中:2,已退款:3,已过期:4   默认值-1
 
     private String useTime;//使用时间
 
@@ -26,9 +26,49 @@ public class OldUserCode implements Serializable {
     private BigDecimal unit_price; // 单价
 
     private Integer activitiesId; // 用户优惠券主键Id
+    
+    private String refundId;//退款id
+    
+    private Integer couponChannel;//券码类型 5哈根达斯 6中影 7纵漫线美漫大趴 8星巴克
+    
+    private Integer couponShowType;//券码展示类型 0默认 1url 2二维码
+    
+    private String codeRule;//二维码显示规则
 
 
-    public Integer getId() {
+    public Integer getCouponShowType() {
+		return couponShowType;
+	}
+
+	public void setCouponShowType(Integer couponShowType) {
+		this.couponShowType = couponShowType;
+	}
+
+	public String getCodeRule() {
+		return codeRule;
+	}
+
+	public void setCodeRule(String codeRule) {
+		this.codeRule = codeRule;
+	}
+
+	public Integer getCouponChannel() {
+		return couponChannel;
+	}
+
+	public void setCouponChannel(Integer couponChannel) {
+		this.couponChannel = couponChannel;
+	}
+
+	public String getRefundId() {
+		return refundId;
+	}
+
+	public void setRefundId(String refundId) {
+		this.refundId = refundId;
+	}
+
+	public Integer getId() {
         return id;
     }
 

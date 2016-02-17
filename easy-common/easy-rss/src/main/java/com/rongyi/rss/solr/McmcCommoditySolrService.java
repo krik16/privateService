@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.rongyi.easy.mcmc.param.ActivityCommodityParam;
+import com.rongyi.easy.solr.result.CommoditySolrResult;
 import org.bson.types.ObjectId;
 
 import com.rongyi.easy.solr.McmcCommodityDocument;
@@ -67,6 +68,8 @@ public interface McmcCommoditySolrService {
 	 */
 	public List<ObjectId> commoditySearch(CommoditySearchParam param);
 
+	public CommoditySolrResult commoditySearchTotalCountAndIds(CommoditySearchParam param);
+
 	/**
 	 * 商品检索 - 容易逛商品聚合
 	 *
@@ -92,6 +95,10 @@ public interface McmcCommoditySolrService {
 	public boolean cleanCommodityFlashSale(Integer flashSaleId);
 
 	public boolean updateCommodityFlashSale(String commodityId, Integer sortPosition, Integer flashSaleId, Date activityStartTime, Date activityEndTime);
+
+	public boolean cleanCommoditySecKill(String secKillSign);
+
+	public boolean updateCommoditySecKill(String commodityId,String secKillSign);
 
 //	public boolean updateCommoditySale(String commodityId, Integer sortPosition);
 

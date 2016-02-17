@@ -101,7 +101,14 @@ public interface ROAShopService {
 	 * @throws Exception
 	 */
 	public BrandShopDetailVO getCommodityShopDetail(String shopId, UserInfoVO user) throws Exception;
- 
+	/**
+	 * 商品所在店铺信息V0202
+	 * @param shopId
+	 * @param user
+	 * @return
+	 * @throws Exception
+	 */
+	public BrandShopDetailVO getCommodityShopInfoDetail(String shopId, UserInfoVO user) throws Exception;
     public List<String> getSellerImIdByShopId(String shopId);
 
     public ShopInfoEntity getShopByShopMId(String shopMId) throws RmmmException;
@@ -133,7 +140,7 @@ public interface ROAShopService {
     /**
      * 根据店铺名模糊获取店铺所在商场下的店铺列表
      *
-     * @param mallName
+     * @param
      * @return
      * @throws Exception
      */
@@ -169,8 +176,8 @@ public interface ROAShopService {
     /**
      * 验券成功后，发消息通知买家
      *
-     * @param IMIds
-     * @param body
+     * @param
+     * @param
      * @throws Exception
      */
     public void sendShopMessageToIMUser(final String userId, final String shopMid) throws Exception;

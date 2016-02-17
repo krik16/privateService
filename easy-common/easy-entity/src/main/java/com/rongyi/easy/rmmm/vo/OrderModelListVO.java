@@ -26,6 +26,26 @@ public class OrderModelListVO implements Serializable{
 	private String paymentWaitMax;// 付款超时,取消订单的时长
 	
 	private Integer rebateNum = 0;// 可使用抵扣券数量
+	
+	private String message;// 亲，您的订单中有仅支持....
+	
+	private List<Integer> orderModelListNum;//[3,2,1] 分别对应 都支持数量，仅支持快递数量，仅支持自提数量
+
+	public List<Integer> getOrderModelListNum() {
+		return orderModelListNum;
+	}
+
+	public void setOrderModelListNum(List<Integer> orderModelListNum) {
+		this.orderModelListNum = orderModelListNum;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
 
 	public List<OrderModelVO> getOrderModelList() {
 		return orderModelList;
@@ -70,8 +90,8 @@ public class OrderModelListVO implements Serializable{
 	@Override
 	public String toString() {
 		return "OrderModelListVO [orderModelList=" + orderModelList + ", supportWay=" + supportWay + ", totalCommodityNum="
-				+ totalCommodityNum + ", paymentWaitMax=" + paymentWaitMax
-				+ ", rebateNum=" + rebateNum + "]";
+				+ totalCommodityNum + ", paymentWaitMax=" + paymentWaitMax + ", rebateNum=" + rebateNum + ", message=" + message
+				+ ", orderModelListNum=" + orderModelListNum + "]";
 	}
 
 }

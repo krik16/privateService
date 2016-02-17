@@ -25,8 +25,8 @@ public class Commodity implements  Serializable,Cloneable{
 
 	private Integer saleId; //特卖mysql id
 	private Integer flashSaleId; // 闪购mysql id
-//	private Date activityStartTime; //特卖或闪购开始时间
-//	private Date activityEndTime; //特卖或闪购结束时间
+	private Date activityStartTime; //特卖、闪购、秒杀开始时间
+	private Date activityEndTime; //特卖、闪购、秒杀结束时间
 	private String secKillSign; //秒杀标记
 	
 	private String name;//商品名称
@@ -479,21 +479,21 @@ public class Commodity implements  Serializable,Cloneable{
 		this.flashSaleId = flashSaleId;
 	}
 
-//	public Date getActivityStartTime() {
-//		return activityStartTime;
-//	}
-//
-//	public void setActivityStartTime(Date activityStartTime) {
-//		this.activityStartTime = activityStartTime;
-//	}
-//
-//	public Date getActivityEndTime() {
-//		return activityEndTime;
-//	}
-//
-//	public void setActivityEndTime(Date activityEndTime) {
-//		this.activityEndTime = activityEndTime;
-//	}
+	public Date getActivityStartTime() {
+		return activityStartTime;
+	}
+
+	public void setActivityStartTime(Date activityStartTime) {
+		this.activityStartTime = activityStartTime;
+	}
+
+	public Date getActivityEndTime() {
+		return activityEndTime;
+	}
+
+	public void setActivityEndTime(Date activityEndTime) {
+		this.activityEndTime = activityEndTime;
+	}
 	public void setSystemNumber(String systemNumber) {
 		this.systemNumber = systemNumber;
 	}

@@ -210,6 +210,11 @@ public class Coupon implements Serializable {
     private String outChannelName;
 
     /**
+     * 券码展现形式：正常显示[0] URL显示[1] 2维码形式[2]
+     */
+    private Integer codeShowType;
+
+    /**
      * 店铺对应的公司名
      */
     private String sourceName;
@@ -925,7 +930,13 @@ public class Coupon implements Serializable {
         this.validDays = validDays;
     }
 
-   
+    public Integer getCodeShowType() {
+        return codeShowType;
+    }
+
+    public void setCodeShowType(Integer codeShowType) {
+        this.codeShowType = codeShowType;
+    }
 
     public List<CouponCommodityCategory> getCouponCommodityCategories() {
         return couponCommodityCategories;
@@ -972,6 +983,7 @@ public class Coupon implements Serializable {
                 .append("inChannelName", inChannelName)
                 .append("outChannel", outChannel)
                 .append("outChannelName", outChannelName)
+                .append("codeShowType", codeShowType)
                 .append("sourceName", sourceName)
                 .append("createUser", createUser)
                 .append("createAt", createAt)

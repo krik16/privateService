@@ -23,6 +23,8 @@ public class ActivityDetailSearchResult implements Serializable{
 	public SearchMeta getMeta() {
 		return meta;
 	}
+
+	private String easyOrder;
 	public void setMeta(SearchMeta meta) {
 		this.meta = meta;
 	}
@@ -48,6 +50,14 @@ public class ActivityDetailSearchResult implements Serializable{
 	public void copyResult(ActivityData data) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		this.result = new ActivitySearchInfo();
 		PropertyUtils.copyProperties(this.result, data);
+	}
+
+	public String getEasyOrder() {
+		return easyOrder;
+	}
+
+	public void setEasyOrder(String easyOrder) {
+		this.easyOrder = easyOrder;
 	}
 
 	@Override
