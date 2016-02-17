@@ -22,6 +22,8 @@ public class BullInfoVO implements Serializable {
 	private String bullIntroduction;// 买手简介
 	private String bullImId;// 买手环信id
 
+	private String easyOrder;//容易令
+
 	public String getBullId() {
 		return bullId;
 	}
@@ -100,6 +102,14 @@ public class BullInfoVO implements Serializable {
 
 	public void setBullImId(String bullImId) {
 		this.bullImId = bullImId;
+	}
+
+	public String getEasyOrder() {
+		return easyOrder;
+	}
+
+	public void setEasyOrder(String easyOrder) {
+		this.easyOrder = easyOrder;
 	}
 
 	@Override

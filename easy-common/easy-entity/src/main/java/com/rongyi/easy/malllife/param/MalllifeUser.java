@@ -55,6 +55,8 @@ public class MalllifeUser implements Serializable {
 
     private String registInIp;//注册IP
 
+    private String  publicNumId;//商家公众号Id
+
     public String getIdfa() {
         return idfa;
     }
@@ -198,5 +200,13 @@ public class MalllifeUser implements Serializable {
 
     public void setRegistInIp(String registInIp) {
         this.registInIp = registInIp;
+    }
+
+    public String getPublicNumId() {
+        return publicNumId;
+    }
+
+    public void setPublicNumId(String publicNumId) {
+        this.publicNumId = publicNumId;
     }
 }

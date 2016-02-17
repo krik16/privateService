@@ -6,6 +6,7 @@ package com.rongyi.easy.rmmm.param;
 import java.io.Serializable;
 
 import com.rongyi.easy.malllife.param.MalllifeBaseParam;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * Copyright (C),上海容易网电子商务有限公司
@@ -24,6 +25,10 @@ public class BullParam extends MalllifeBaseParam implements Serializable{
 	private String commodityType;//商品类型", 1所有商品 2导购商品 3买手商品 4闪购 5卖场
 	private String keyword;
 	private String categoryId;
+
+	private String shopId;
+	private String mallId;
+
 	public String getKeyword() {
 		return keyword;
 	}
@@ -71,13 +76,33 @@ public class BullParam extends MalllifeBaseParam implements Serializable{
 		this.commodityType = commodityType;
 	}
 
+	public String getShopId() {
+		return shopId;
+	}
+
+	public void setShopId(String shopId) {
+		this.shopId = shopId;
+	}
+
+	public String getMallId() {
+		return mallId;
+	}
+
+	public void setMallId(String mallId) {
+		this.mallId = mallId;
+	}
+
 	@Override
 	public String toString() {
-		return "BullParam{" +
-				"bullId='" + bullId + '\'' +
-				", liveId='" + liveId + '\'' +
-				", flashSaleId='" + flashSaleId + '\'' +
-				", commodityType='" + commodityType + '\'' +
-				'}';
+		return new ToStringBuilder(this)
+				.append("bullId", bullId)
+				.append("liveId", liveId)
+				.append("flashSaleId", flashSaleId)
+				.append("commodityType", commodityType)
+				.append("keyword", keyword)
+				.append("categoryId", categoryId)
+				.append("shopId", shopId)
+				.append("mallId", mallId)
+				.toString();
 	}
 }

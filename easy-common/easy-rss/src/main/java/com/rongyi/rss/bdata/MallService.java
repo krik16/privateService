@@ -90,5 +90,12 @@ public interface MallService {
      * @return	ResponseVO 对象
      */
     ResponseVO getMallList(String mallName, Integer page, Integer pageSize);
+    
+    /**
+     * 根据集团 ID查询商场 
+     * @param groupId
+     * @return
+     */
+    ResponseVO getMallListByGroupId(String groupId);
 
 }

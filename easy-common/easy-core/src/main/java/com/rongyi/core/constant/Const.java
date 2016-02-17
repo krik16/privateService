@@ -45,6 +45,8 @@ public interface Const {
 			put("terminal", "156b8d147a2c11e5b7a9000c29a33e38");
 			//微信
 			put("weChat", "156b8d147a2c11e5b7a9000c29a33e39");
+			//电子会员
+			put("member", "156b8d147a2c11e5b7a9000c29a33e40");
 		}
 	};
 

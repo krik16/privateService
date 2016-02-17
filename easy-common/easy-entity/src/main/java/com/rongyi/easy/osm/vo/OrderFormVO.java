@@ -16,7 +16,7 @@ public class OrderFormVO extends OrderFormEntity implements Serializable{
     private byte payChannel;
     private String orderCartNo;//购物车订单号
 
-    public byte getPayChannel() {
+    public Byte getPayChannel() {
         return payChannel;
     }
 
