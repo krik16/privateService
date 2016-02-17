@@ -12,5 +12,10 @@ import java.util.List;
  * Project:easy-common
  */
 public interface ROAPushShopUserService {
-    public List<RmmmUserInfoEntity> findByShopMid(String shopMid,List<Integer> identities);
+    public List<RmmmUserInfoEntity> findByShopMid(String shopMid, List<Integer> identities);
+
+    public List<RmmmUserInfoEntity> findAllUsers(Integer type);
+
+    public List<RmmmUserInfoEntity> findUserByPhone(String phone);
+
 }
