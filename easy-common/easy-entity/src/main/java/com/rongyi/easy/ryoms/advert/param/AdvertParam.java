@@ -7,10 +7,18 @@ public class AdvertParam implements Serializable {
 	* @Fields serialVersionUID
 	*/ 
 	private static final long serialVersionUID = -8496462108476346037L;
+	private String id;//广告id 新增不需要，修改需要
 	private String groupId;//广告组id
 	private int currentPage;//当前页
 	private int pageSize;//总页数
 	private int startIndex = 0;
+	private String position;//广告位置 1全屏 2banner
+	private String adTime;//播放时长
+	private String module_type;//11 全屏模板-A 22 首页Banner-A
+	private String content;//内容url
+	private String publish_start;//发布开始时间
+	private String publish_end;//发布结束时间
+	private String mallIds;//商场id 多个商场用逗号分割
 	/**
 	 * @return the groupId
 	 */
@@ -59,5 +67,100 @@ public class AdvertParam implements Serializable {
 	public void setStartIndex(int startIndex) {
 		this.startIndex = startIndex;
 	}
-	
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+	/**
+	 * @return the position
+	 */
+	public String getPosition() {
+		return position;
+	}
+	/**
+	 * @param position the position to set
+	 */
+	public void setPosition(String position) {
+		this.position = position;
+	}
+	/**
+	 * @return the adTime
+	 */
+	public String getAdTime() {
+		return adTime;
+	}
+	/**
+	 * @param adTime the adTime to set
+	 */
+	public void setAdTime(String adTime) {
+		this.adTime = adTime;
+	}
+	/**
+	 * @return the module_type
+	 */
+	public String getModule_type() {
+		return module_type;
+	}
+	/**
+	 * @param module_type the module_type to set
+	 */
+	public void setModule_type(String module_type) {
+		this.module_type = module_type;
+	}
+	/**
+	 * @return the content
+	 */
+	public String getContent() {
+		return content;
+	}
+	/**
+	 * @param content the content to set
+	 */
+	public void setContent(String content) {
+		this.content = content;
+	}
+	/**
+	 * @return the publish_start
+	 */
+	public String getPublish_start() {
+		return publish_start;
+	}
+	/**
+	 * @param publish_start the publish_start to set
+	 */
+	public void setPublish_start(String publish_start) {
+		this.publish_start = publish_start;
+	}
+	/**
+	 * @return the publish_end
+	 */
+	public String getPublish_end() {
+		return publish_end;
+	}
+	/**
+	 * @param publish_end the publish_end to set
+	 */
+	public void setPublish_end(String publish_end) {
+		this.publish_end = publish_end;
+	}
+	/**
+	 * @return the mallIds
+	 */
+	public String getMallIds() {
+		return mallIds;
+	}
+	/**
+	 * @param mallIds the mallIds to set
+	 */
+	public void setMallIds(String mallIds) {
+		this.mallIds = mallIds;
+	}
 }

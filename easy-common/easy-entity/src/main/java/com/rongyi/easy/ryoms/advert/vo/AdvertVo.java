@@ -10,6 +10,7 @@ public class AdvertVo {
 	private String content;//素材内容
 	private Integer content_type;//素材类型 1:图片,2:视频
 	private Integer status;//广告状态 1待审核, 2审核未通过, 3待发布,4进行中,5已结束,6已下线, 7已删除
+	private String status_detail;//状态描述
 	private Date publish_start;//发布开始时间
 	private Date publish_end;//发布结束时间
 	private Long group_id;//广告组id
@@ -185,19 +186,16 @@ public class AdvertVo {
 	public void setUpdate_at(Long update_at) {
 		this.update_at = update_at;
 	}
-	/** 
-	* @Title: toString 
-	* @Description: TODO(这里用一句话描述这个方法的作用) 
-	* @param @return    设定文件 
-	* @author shaozhou
-	* @date 2016年2月17日 上午11:46:31
-	* @throws 
-	*/
-	@Override
-	public String toString() {
-		return "AdvertVo [id=" + id + ", position=" + position + ", adtime=" + adtime + ", module_type=" + module_type
-				+ ", content=" + content + ", content_type=" + content_type + ", status=" + status + ", publish_start="
-				+ publish_start + ", publish_end=" + publish_end + ", group_id=" + group_id + ", create_by=" + create_by
-				+ ", create_at=" + create_at + ", update_by=" + update_by + ", update_at=" + update_at + "]";
+	/**
+	 * @return the status_detail
+	 */
+	public String getStatus_detail() {
+		return status_detail;
+	}
+	/**
+	 * @param status_detail the status_detail to set
+	 */
+	public void setStatus_detail(String status_detail) {
+		this.status_detail = status_detail;
 	}
 }

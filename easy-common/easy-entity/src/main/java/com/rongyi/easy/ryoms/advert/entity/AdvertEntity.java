@@ -18,9 +18,9 @@ public class AdvertEntity implements Serializable {
 	private Date publish_start;//发布开始时间
 	private Date publish_end;//发布结束时间
 	private Long group_id;//广告组id
-	private Long create_by;//创建人账号ID
+	private Integer create_by;//创建人账号ID
 	private Date create_at;//记录创建时间
-	private Long update_by;//更新人账号ID
+	private Integer update_by;//更新人账号ID
 	private Date update_at;//记录更新时间
 	/**
 	 * @return the id
@@ -145,13 +145,13 @@ public class AdvertEntity implements Serializable {
 	/**
 	 * @return the create_by
 	 */
-	public Long getCreate_by() {
+	public Integer getCreate_by() {
 		return create_by;
 	}
 	/**
 	 * @param create_by the create_by to set
 	 */
-	public void setCreate_by(Long create_by) {
+	public void setCreate_by(Integer create_by) {
 		this.create_by = create_by;
 	}
 	/**
@@ -169,13 +169,13 @@ public class AdvertEntity implements Serializable {
 	/**
 	 * @return the update_by
 	 */
-	public Long getUpdate_by() {
+	public Integer getUpdate_by() {
 		return update_by;
 	}
 	/**
 	 * @param update_by the update_by to set
 	 */
-	public void setUpdate_by(Long update_by) {
+	public void setUpdate_by(Integer update_by) {
 		this.update_by = update_by;
 	}
 	/**
@@ -189,21 +189,5 @@ public class AdvertEntity implements Serializable {
 	 */
 	public void setUpdate_at(Date update_at) {
 		this.update_at = update_at;
-	}
-	/** 
-	* @Title: toString 
-	* @Description: TODO(这里用一句话描述这个方法的作用) 
-	* @param @return    设定文件 
-	* @author shaozhou
-	* @date 2016年2月17日 下午2:18:27
-	* @throws 
-	*/
-	@Override
-	public String toString() {
-		return "AdvertEntity [id=" + id + ", position=" + position + ", adtime=" + adtime + ", module_type="
-				+ module_type + ", content=" + content + ", content_type=" + content_type + ", status=" + status
-				+ ", publish_start=" + publish_start + ", publish_end=" + publish_end + ", group_id=" + group_id
-				+ ", create_by=" + create_by + ", create_at=" + create_at + ", update_by=" + update_by + ", update_at="
-				+ update_at + "]";
 	}
 }
