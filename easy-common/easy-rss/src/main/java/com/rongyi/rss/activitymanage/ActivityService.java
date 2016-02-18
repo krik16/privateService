@@ -25,6 +25,7 @@ public interface ActivityService {
      */
     boolean saveActivityInfo(ActivityInfo activityInfo);
 
+
     /**
      * 审核活动
      * @param activityCheckRecord

@@ -101,4 +101,5 @@ public interface RoaActivityTemplateService {
     PagingVO<ActivityGoods> getCouponGoodsByTemplate(QueryGoodCouponParam queryGoodCouponParam);
 
 
+
 }
