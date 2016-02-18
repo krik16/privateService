@@ -23,13 +23,9 @@ public interface ShopService {
 	 * @param pageSize		分页条数
 	 * @param zoneId		区域Id（省市区商圈商场楼层）
 	 * @return 带ShopVO 的ResponseVO
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	ResponseVO searchShops(String mallId, String keyword, String customCateId, String zoneId, int page, int pageSize) throws Exception;
-	
-
-	ResponseVO searchShops(String mallId, String keyword, String customCateId, int page, int pageSize) throws Exception;
-
 
 	/**
 	 * 获取单个店铺详情
