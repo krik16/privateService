@@ -23,6 +23,9 @@ public class CommodityFullVO implements Serializable {
     private int status;
     private Date registerAt;//上架时间
     private Date soldOutAt;//下架时间
+    private String brandName;
+    private String brandId;
+    private String brandMid;
 
     public String getId() {
         return id;
@@ -150,5 +153,29 @@ public class CommodityFullVO implements Serializable {
 
     public void setSoldOutAt(Date soldOutAt) {
         this.soldOutAt = soldOutAt;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+
+    public String getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(String brandId) {
+        this.brandId = brandId;
+    }
+
+    public String getBrandMid() {
+        return brandMid;
+    }
+
+    public void setBrandMid(String brandMid) {
+        this.brandMid = brandMid;
     }
 }
