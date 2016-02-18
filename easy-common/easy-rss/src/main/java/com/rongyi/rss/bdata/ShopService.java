@@ -45,7 +45,7 @@ public interface ShopService {
 	 * @param paramMap
 	 * @return
 	 */
-	public List<Shop> searchShop(Map<String, Object> paramMap);
+	List<Shop> searchShop(Map<String, Object> paramMap);
 	
 	/**
 	 * 根据商场ID || 店铺名称获取店铺列表
