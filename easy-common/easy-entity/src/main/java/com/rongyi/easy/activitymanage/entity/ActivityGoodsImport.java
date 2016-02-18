@@ -18,8 +18,6 @@ public class ActivityGoodsImport implements Serializable {
 
     private String type;
 
-    private Boolean valid;
-
     private String failureCause;
 
     private String createUser;
@@ -28,11 +26,10 @@ public class ActivityGoodsImport implements Serializable {
 
     private String version;
 
-    public ActivityGoodsImport(Integer activityId, String goodsId, String type, Boolean valid, String failureCause, String createUser, Date createAt, String version) {
+    public ActivityGoodsImport(Integer activityId, String goodsId, String type, String failureCause, String createUser, Date createAt, String version) {
         this.activityId = activityId;
         this.goodsId = goodsId;
         this.type = type;
-        this.valid = valid;
         this.failureCause = failureCause;
         this.createUser = createUser;
         this.createAt = createAt;
@@ -75,14 +72,6 @@ public class ActivityGoodsImport implements Serializable {
         this.type = type;
     }
 
-    public Boolean getValid() {
-        return valid;
-    }
-
-    public void setValid(Boolean valid) {
-        this.valid = valid;
-    }
-
     public String getFailureCause() {
         return failureCause;
     }
@@ -122,7 +111,6 @@ public class ActivityGoodsImport implements Serializable {
                 .append("activityId", activityId)
                 .append("goodsId", goodsId)
                 .append("type", type)
-                .append("valid", valid)
                 .append("failureCause", failureCause)
                 .append("createUser", createUser)
                 .append("createAt", createAt)

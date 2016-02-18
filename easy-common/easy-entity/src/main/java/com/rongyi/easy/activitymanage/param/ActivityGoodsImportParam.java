@@ -30,14 +30,14 @@ public class ActivityGoodsImportParam extends PagingParam {
     private String version;
 
     /**
-     * 是否有效，无效[false] 有效[true]
-     */
-    private Boolean valid;
-
-    /**
      * 类型：商品[0] 卡券[1]
      */
     private Integer goodsType;
+
+    /**
+     * 商品审核状态：待审核[0] 未通过[1] 已通过[2]
+     */
+    private Integer status;
 
     /**
      * id集合
@@ -81,14 +81,6 @@ public class ActivityGoodsImportParam extends PagingParam {
         this.version = version;
     }
 
-    public Boolean getValid() {
-        return valid;
-    }
-
-    public void setValid(Boolean valid) {
-        this.valid = valid;
-    }
-
     public Integer getGoodsType() {
         return goodsType;
     }
@@ -113,6 +105,14 @@ public class ActivityGoodsImportParam extends PagingParam {
         this.createUser = createUser;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -120,8 +120,8 @@ public class ActivityGoodsImportParam extends PagingParam {
                 .append("activityId", activityId)
                 .append("goodsId", goodsId)
                 .append("version", version)
-                .append("valid", valid)
                 .append("goodsType", goodsType)
+                .append("status", status)
                 .append("ids", ids)
                 .append("createUser", createUser)
                 .toString();
