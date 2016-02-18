@@ -7,6 +7,14 @@ package com.rongyi.easy.ryoms.advert.vo;
  * @date 2016年2月15日 下午4:37:33
  */
 public class MaterialVO {
+	public int getSeq() {
+		return seq;
+	}
+
+	public void setSeq(int seq) {
+		this.seq = seq;
+	}
+
 	public int getMaterialId() {
 		return materialId;
 	}
@@ -77,4 +85,6 @@ public class MaterialVO {
 	private String moduleName = "";
 	// 模板内容
 	private String content = "";
+	// 排序
+	private int seq = 0;
 }

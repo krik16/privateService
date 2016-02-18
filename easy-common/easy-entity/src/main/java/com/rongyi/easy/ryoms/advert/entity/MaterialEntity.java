@@ -7,6 +7,22 @@ package com.rongyi.easy.ryoms.advert.entity;
  * @date 2016年2月15日 下午4:37:33
  */
 public class MaterialEntity {
+	public int getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(int contentType) {
+		this.contentType = contentType;
+	}
+
+	public int getSeq() {
+		return seq;
+	}
+
+	public void setSeq(int seq) {
+		this.seq = seq;
+	}
+
 	public int getMaterialId() {
 		return materialId;
 	}
@@ -63,8 +79,12 @@ public class MaterialEntity {
 	private int position = 0;
 	// 模板ID
 	private int module = 0;
+	// 内容类型
+	private int contentType = 0;
 	// 模板内容
 	private String content = "";
 	// 用户ID
 	private int userId = 0;
+	// 排序
+	private int seq = 0;
 }

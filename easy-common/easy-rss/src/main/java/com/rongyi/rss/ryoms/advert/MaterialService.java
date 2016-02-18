@@ -73,5 +73,5 @@ public interface MaterialService {
 	 *            登录用户ID
 	 * @return
 	 */
-	public int sort(int materialId, int type, int userId);
+	public int sort(int materialId, int seq, int type, int userId);
 }
