@@ -49,6 +49,9 @@ public class ActivityGoodsCategory implements Serializable {
      */
     private Date updateAt;
 
+    public ActivityGoodsCategory(){
+
+    }
     public ActivityGoodsCategory(Integer type, String categoryId, String categoryName, Integer level, Date createAt) {
         this.type = type;
         this.categoryId = categoryId;
