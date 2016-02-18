@@ -10,4 +10,6 @@ public interface AdvertGroupService {
 	public void save(AdvertGroupEntity entity);
 
 	public List<AdvertGroupVo> searchGroups(AdvertGroupParam advertGroupParam);
+	
+	public AdvertGroupVo info(Integer iidd);
 }
