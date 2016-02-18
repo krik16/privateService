@@ -196,7 +196,12 @@
 
 						<li class="name">卡券抵扣金额</li>
 						<li class="line">|</li>
-						<li class="data max2">${discountTotal }（元）</li>
+						<li class="data max2">
+							<c:choose>
+								<c:when test="${discountTotal-(commidityTotalPice - order.discountFee)>0 }">${commidityTotalPice - order.discountFee }（元）</c:when>
+								<c:otherwise>${discountTotal }（元）</c:otherwise>
+							</c:choose>
+						</li>
 
 						<li class="name">积分抵扣金额</li>
 						<li class="line">|</li>
