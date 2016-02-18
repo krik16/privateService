@@ -6,24 +6,45 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 活动导入商品记录实体
+ * 活动导入商品错误记录
  */
 public class ActivityGoodsImport implements Serializable {
 
     private Integer id;
 
+    /**
+     * 活动id
+     */
     private Integer activityId;
 
+    /**
+     * 商品和卡券id
+     */
     private String goodsId;
 
+    /**
+     * 商品类型
+     */
     private String type;
 
+    /**
+     * 失败原因
+     */
     private String failureCause;
 
+    /**
+     * 创建人
+     */
     private String createUser;
 
+    /**
+     * 创建时间
+     */
     private Date createAt;
 
+    /**
+     * 版本号
+     */
     private String version;
 
     public ActivityGoodsImport(Integer activityId, String goodsId, String type, String failureCause, String createUser, Date createAt, String version) {

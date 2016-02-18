@@ -5,23 +5,50 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * 活动商品规格
+ */
 public class ActivityGoodsSpec implements Serializable {
     private Integer id;
 
+    /**
+     * 活动商品关联表id
+     */
     private Integer activityGoodsId;
 
+    /**
+     * 商品规格id
+     */
     private String specId;
 
+    /**
+     * 活动商品/卡券参与量
+     */
     private Integer joinCount;
 
+    /**
+     * 商品/卡券活动库存
+     */
     private Integer stockCount;
 
+    /**
+     * 活动价
+     */
     private Integer activityPrice;
 
+    /**
+     * 创建时间
+     */
     private Date createAt;
 
+    /**
+     * 修改时间
+     */
     private Date updateAt;
 
+    /**
+     * 版本号
+     */
     private Integer version;
 
     public Integer getId() {

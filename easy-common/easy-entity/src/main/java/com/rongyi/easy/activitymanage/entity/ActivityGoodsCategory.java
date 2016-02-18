@@ -5,21 +5,48 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * 活动商品分类
+ */
 public class ActivityGoodsCategory implements Serializable {
+    /**
+     * PK
+     */
     private Integer id;
 
+    /**
+     * 活动商品关联表id
+     */
     private Integer activityGoodsId;
 
+    /**
+     * 类型：商品[0] 卡券[1]
+     */
     private Integer type;
 
+    /**
+     * 商品/卡券分类id
+     */
     private String categoryId;
 
+    /**
+     * 分类名称
+     */
     private String categoryName;
 
+    /**
+     * 商品/卡券分类等级
+     */
     private Integer level;
 
+    /**
+     * 创建时间
+     */
     private Date createAt;
 
+    /**
+     * 修改时间
+     */
     private Date updateAt;
 
     public ActivityGoodsCategory(Integer type, String categoryId, String categoryName, Integer level, Date createAt) {

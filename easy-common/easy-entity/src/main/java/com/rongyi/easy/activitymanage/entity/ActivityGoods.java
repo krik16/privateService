@@ -10,39 +10,93 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 活动商品
+ */
 public class ActivityGoods implements Serializable {
+    /**
+     * PK
+     */
     private Integer id;
 
+    /**
+     * 活动id
+     */
     private Integer activityId;
 
+    /**
+     * 商品id
+     */
     private String goodsId;
 
+    /**
+     * 类型 0代表红包，1代表代金券，2代表抵扣券 3代表商品
+     */
     private Integer type;
 
+    /**
+     * 商品/卡券名称
+     */
     private String name;
 
+    /**
+     * 商品/卡券图片url
+     */
     private String picUrl;
 
+    /**
+     * 单商品补贴方式 金额元[0] 百分比[1]
+     */
     private Integer subsidyType;
 
+    /**
+     * subsidy_type = 0单商品补贴金额（分），subsidy_type=1时单品补贴百分比的数字，例如单品补贴10%，存入10
+     */
     private Integer subsidyPrice;
 
+    /**
+     * 参与开始时间
+     */
     private Date joinStartAt;
 
+    /**
+     * 参与结束时间
+     */
     private Date joinEndAt;
 
+    /**
+     * 商品审核状态：待审核[0] 未通过[1] 已通过[2]
+     */
     private Integer status;
 
+    /**
+     * 创建人
+     */
     private String createUser;
 
+    /**
+     * 修改人
+     */
     private String updateUser;
 
+    /**
+     * 创建时间
+     */
     private Date createAt;
 
+    /**
+     * 修改时间
+     */
     private Date updateAt;
 
+    /**
+     * 是否删除: 默认否[0], 是[1]
+     */
     private Boolean isDeleted;
 
+    /**
+     * 版本号
+     */
     private Integer version;
 
     /**

@@ -4,35 +4,84 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * 活动基础信息
+ */
 public class ActivityInfo implements Serializable {
+
+    /**
+     * PK
+     */
     private Integer id;
 
+    /**
+     * 活动名称
+     */
     private String name;
 
+    /**
+     * 活动开始时间
+     */
     private Date startAt;
 
+    /**
+     * 活动结束时间
+     */
     private Date endAt;
 
+    /**
+     * 活动类型 0.商品类活动，1卡券类活动，2.抽奖类活动 3.卡券及商品类活动，4.签到送积分，5，特卖
+     */
     private Integer type;
 
+    /**
+     * 发布终端:[1,1,1,1]表示容易逛、终端屏、微信、微商端全部选中[1,0,0,0]表示第一个选中
+     */
     private String synTarget;
 
+    /**
+     * 活动状态：待审核[0] 未通过[1] 已通过[2] 已下线[3]
+     */
     private Integer status;
 
+    /**
+     * 发布渠道: 大运营[0] 商家[1]
+     */
     private Integer publishChannel;
 
+    /**
+     * 创建人
+     */
     private String createUser;
 
+    /**
+     * 创建时间
+     */
     private Date createAt;
 
+    /**
+     * 修改人
+     */
     private String updateUser;
 
+    /**
+     * 修改时间
+     */
     private Date updateAt;
 
+    /**
+     * 是否删除  否[0] 是[1]
+     */
     private Boolean isDeleted;
 
+    /**
+     * 版本号
+     */
     private Integer version;
 
+    /**
+     * 卡券及商品类的活动规则
+     */
     private ActivityGoodsRule activityGoodsRule;
 
     public Integer getId() {

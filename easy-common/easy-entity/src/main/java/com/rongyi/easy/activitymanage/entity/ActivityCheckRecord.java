@@ -5,17 +5,35 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * 活动审核记录
+ */
 public class ActivityCheckRecord implements Serializable {
     private Integer id;
 
+    /**
+     * 活动id
+     */
     private Integer activityId;
 
+    /**
+     * 审核状态 [1] 不通过 [2] 通过
+     */
     private Integer status;
 
+    /**
+     * 审核记录
+     */
     private String record;
 
+    /**
+     * 审核人
+     */
     private String createUser;
 
+    /**
+     * 审核时间
+     */
     private Date createAt;
 
     public Integer getId() {
