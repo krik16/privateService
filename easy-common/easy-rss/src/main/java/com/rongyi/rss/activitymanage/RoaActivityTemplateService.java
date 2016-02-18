@@ -1,6 +1,8 @@
 package com.rongyi.rss.activitymanage;
 
 import com.rongyi.core.common.PagingVO;
+import com.rongyi.easy.activity.entity.vo.QueryGoodCouponParam;
+import com.rongyi.easy.activitymanage.entity.ActivityGoods;
 import com.rongyi.easy.activitymanage.entity.ActivityTemplate;
 import com.rongyi.easy.activitymanage.entity.TemplateSaleShopMall;
 import com.rongyi.easy.activitymanage.param.ActivityTemplateParam;
@@ -10,8 +12,11 @@ import com.rongyi.easy.activitymanage.vo.ActivityTemplateVO;
 import java.util.List;
 
 /**
- * 活动模版接口
- * Created by lijing on 2015/11/18.
+ * create by com.rongyi.rss.activitymanage ideaworkspace :author lijing
+ * User:lijing
+ * DATE : 2016/2/18
+ * TIME : 11:14
+ * ideaworkspace.
  */
 public interface RoaActivityTemplateService {
     /**
@@ -69,7 +74,7 @@ public interface RoaActivityTemplateService {
     List<ActivityListVO> getActivityListByIds(List<Integer> ids,int type) throws  Exception;
 
 
-     int findActivityByMallShop(String mallMid,String shopMid);
+    int findActivityByMallShop(String mallMid,String shopMid);
 
     /**
      * 根据商场id查询特卖对应的商场店铺列表
@@ -92,5 +97,8 @@ public interface RoaActivityTemplateService {
      * @return
      */
     boolean checkShops(List<String> shops);
+
+    PagingVO<ActivityGoods> getCouponGoodsByTemplate(QueryGoodCouponParam queryGoodCouponParam);
+
 
 }
