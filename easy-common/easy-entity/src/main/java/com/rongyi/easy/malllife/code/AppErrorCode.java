@@ -42,7 +42,8 @@ public enum AppErrorCode {
     ERROR_RECEIVED_REBATE(1065002, "您已领取过了新年礼盒"),
     
     
-    ERROR_WECHAT_APPID_OPENID(1067001,"微信appId或渠道或openId不能为空")
+    ERROR_WECHAT_APPID_OPENID(1067001,"微信appId或渠道或openId不能为空"),
+    ERROR_ORDERID_ISNULL(1067002,"订单号不能为空")
     ;
 
 
