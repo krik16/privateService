@@ -17,8 +17,6 @@ public interface ErrorNO {
 	final int LACK_PARAM 	= 1181002;
 	/** 请求超时 **/
 	final int TIME_OUT 		= 1181003;
-	/** 数据不存在 **/
-	final int NO_DATA 		= 1181004;
 	/** 调用异常 **/
 	final int EXCEPTION 	= 1181010;
 
@@ -30,7 +28,6 @@ public interface ErrorNO {
 			put(LACK_PARAM, "缺少参数");
 			put(TIME_OUT, 	"请求超时");
 			put(EXCEPTION, 	"调用异常");
-			put(NO_DATA, 	"数据不存在");
 		}
 	};
 }
