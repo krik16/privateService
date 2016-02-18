@@ -13,17 +13,17 @@ public class CouponRefundParam extends BaseParam implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private String orderId;//订单号
+	private String orderNo;//订单号
 	private Integer number;//退款优惠券数量
 	private Double totalFee;//退款总金额
 	private String refundWay;//退款方式
 	private String refundReason;//退款原因
 	
-	public String getOrderId() {
-		return orderId;
+	public String getOrderNo() {
+		return orderNo;
 	}
-	public void setOrderId(String orderId) {
-		this.orderId = orderId;
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
 	}
 	public Integer getNumber() {
 		return number;
