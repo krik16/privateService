@@ -26,6 +26,8 @@ public class ActivityGoodsParam extends PagingParam {
 
     private List<Integer> ids;
 
+    private String orderByClause = "create_at";
+
     public Integer getActivityId() {
         return activityId;
     }
@@ -58,6 +60,14 @@ public class ActivityGoodsParam extends PagingParam {
         this.ids = ids;
     }
 
+    public String getOrderByClause() {
+        return orderByClause;
+    }
+
+    public void setOrderByClause(String orderByClause) {
+        this.orderByClause = orderByClause;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -65,6 +75,7 @@ public class ActivityGoodsParam extends PagingParam {
                 .append("activityId", activityId)
                 .append("status", status)
                 .append("ids", ids)
+                .append("orderByClause", orderByClause)
                 .toString();
     }
 }
