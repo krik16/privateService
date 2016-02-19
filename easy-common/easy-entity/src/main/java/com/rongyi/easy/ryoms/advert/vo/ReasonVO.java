@@ -22,12 +22,12 @@ public class ReasonVO {
 		this.createAt = createAt;
 	}
 
-	public String getReason() {
-		return reason;
+	public String getContent() {
+		return content;
 	}
 
-	public void setReason(String reason) {
-		this.reason = reason;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	// 创建人
@@ -35,5 +35,5 @@ public class ReasonVO {
 	// 创建时间
 	private String createAt = "";
 	// 理由
-	private String reason = "";
+	private String content = "";
 }

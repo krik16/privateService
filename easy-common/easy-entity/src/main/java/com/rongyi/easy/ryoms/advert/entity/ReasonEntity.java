@@ -14,14 +14,6 @@ public class ReasonEntity {
 		this.srcType = srcType;
 	}
 
-	public int getSrclId() {
-		return srclId;
-	}
-
-	public void setSrclId(int srclId) {
-		this.srclId = srclId;
-	}
-
 	public String getContent() {
 		return content;
 	}
@@ -38,8 +30,26 @@ public class ReasonEntity {
 		this.userId = userId;
 	}
 
+	public int getSrcId() {
+		return srcId;
+	}
+
+	public void setSrcId(int srcId) {
+		this.srcId = srcId;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	// ID
+	private int id = 0;
 	// 来源ID
-	private int srclId = 0;
+	private int srcId = 0;
 	// 来源类型
 	private int srcType = 0;
 	// 内容/理由
