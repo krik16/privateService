@@ -90,7 +90,13 @@ public interface ActivityService {
      */
     boolean removeActivityGoodsImport(List<Integer> activityGoodsIds);
 
-
+    /**
+     * 根据id获取活动信息
+     * @param activityId
+     * @return ActivityInfo
+     * @author Leon
+     */
+    ActivityInfo getActivityInfoById(Integer activityId);
 
 
 
@@ -171,7 +177,5 @@ public interface ActivityService {
      * @return
      */
     List<ActivityGoodTemplateVO> selectActivityGoodsByActivity(List<String> ids,Integer activityId,Integer type);
-
-
 
 }
