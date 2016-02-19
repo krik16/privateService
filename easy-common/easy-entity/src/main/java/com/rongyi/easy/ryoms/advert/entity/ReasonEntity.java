@@ -6,6 +6,14 @@ package com.rongyi.easy.ryoms.advert.entity;
  * @date 2016年2月19日
  */
 public class ReasonEntity {
+	public int getSrcType() {
+		return srcType;
+	}
+
+	public void setSrcType(int srcType) {
+		this.srcType = srcType;
+	}
+
 	public int getSrclId() {
 		return srclId;
 	}
@@ -32,6 +40,8 @@ public class ReasonEntity {
 
 	// 来源ID
 	private int srclId = 0;
+	// 来源类型
+	private int srcType = 0;
 	// 内容/理由
 	private String content = "";
 	// 用户ID

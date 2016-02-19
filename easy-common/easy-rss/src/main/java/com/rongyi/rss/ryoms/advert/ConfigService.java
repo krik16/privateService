@@ -14,13 +14,11 @@ import com.rongyi.easy.ryoms.advert.entity.ConfigEntity;
 import com.rongyi.easy.ryoms.advert.param.ConfigSearchParam;
 import com.rongyi.easy.ryoms.advert.vo.CityVO;
 import com.rongyi.easy.ryoms.advert.vo.ConfigVO;
-import com.rongyi.easy.ryoms.advert.vo.ReasonVO;
 
 /**
- * @ClassName: ConfigService
  * @Description: 参数配置管理接口
  * @author wangjh
- * @date 2016年2月15日 下午4:38:09
+ * @date 2016年2月19日
  */
 public interface ConfigService {
 
@@ -42,6 +40,7 @@ public interface ConfigService {
 
 	/**
 	 * 新增配置
+	 * 
 	 * @param entity
 	 * @return
 	 */
@@ -72,25 +71,6 @@ public interface ConfigService {
 	 */
 	public int enable(int configId, int userId);
 
-	/**
-	 * 停用配置
-	 * 
-	 * @param id
-	 * @param userId
-	 * @param reason
-	 * @return
-	 */
-	public int disable(int configId, int userId, String reason);
-
-	/**
-	 * 停用理由列表(最新5条)
-	 * 
-	 * @param id
-	 * @param size
-	 * @return
-	 */
-	public List<ReasonVO> topDisableReasonList(int configId);
-	
 	/**
 	 * 停用理由列表
 	 * 
