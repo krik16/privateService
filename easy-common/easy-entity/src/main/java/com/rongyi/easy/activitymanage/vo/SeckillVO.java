@@ -47,7 +47,7 @@ public class SeckillVO implements Serializable{
     /**
      *labe集合
      */
-    private List<SeckillLabelVO> labels=new ArrayList<SeckillLabelVO>();
+    private List<SeckillLabelListVO> labels=new ArrayList<SeckillLabelListVO>();
 
     public Integer getId() {
         return id;
@@ -105,13 +105,14 @@ public class SeckillVO implements Serializable{
         this.activityRule = activityRule;
     }
 
-    public List<SeckillLabelVO> getLabels() {
+    public List<SeckillLabelListVO> getLabels() {
         return labels;
     }
 
-    public void setLabels(List<SeckillLabelVO> labels) {
+    public void setLabels(List<SeckillLabelListVO> labels) {
         this.labels = labels;
     }
+
 
     @Override
     public String toString() {
