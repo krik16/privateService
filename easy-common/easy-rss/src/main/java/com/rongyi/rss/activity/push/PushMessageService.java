@@ -2,6 +2,8 @@ package com.rongyi.rss.activity.push;
 
 import com.rongyi.easy.msgcenter.PushMessageDTO;
 
+import java.util.Map;
+
 /**
  * Description:
  * Author: 袁波
@@ -12,4 +14,5 @@ import com.rongyi.easy.msgcenter.PushMessageDTO;
 public interface PushMessageService {
     public String pushMsgToSingleDevice(PushMessageDTO pushSingleDeviceDTO);
     public String pushMsgToAll(PushMessageDTO pushMessageDTO) ;
+    public Map<String,Object> querySuccessCount(PushMessageDTO pushSingleDeviceDTO) ;
 }
