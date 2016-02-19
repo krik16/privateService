@@ -160,7 +160,7 @@ public class PushMessageDTO {
             androidMsg=new AndroidMsg(this.getTitle(),this.getMessage());
         }
         if(this.getPushApp()!=null&&this.getPushApp()==1){
-            androidMsg.setOpen_type(3);
+            androidMsg.setOpen_type(2);
         }
         return JSONObject.fromObject(androidMsg).toString();
     }
