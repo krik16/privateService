@@ -1,5 +1,7 @@
 package com.rongyi.easy.mcmc.vo;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 
 /**
@@ -32,5 +34,14 @@ public class CommodityCategorySimpleVO implements Serializable {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("name", name)
+                .append("type", type)
+                .toString();
     }
 }

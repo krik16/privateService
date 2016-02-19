@@ -1,6 +1,7 @@
 package com.rongyi.easy.mcmc.vo;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -177,5 +178,26 @@ public class CommodityFullVO implements Serializable {
 
     public void setBrandMid(String brandMid) {
         this.brandMid = brandMid;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("name", name)
+                .append("code", code)
+                .append("originalPrice", originalPrice)
+                .append("currentPrice", currentPrice)
+                .append("stock", stock)
+                .append("picList", picList)
+                .append("categorySimpleVOs", categorySimpleVOs)
+                .append("specSimpleVOs", specSimpleVOs)
+                .append("status", status)
+                .append("registerAt", registerAt)
+                .append("soldOutAt", soldOutAt)
+                .append("brandName", brandName)
+                .append("brandId", brandId)
+                .append("brandMid", brandMid)
+                .toString();
     }
 }

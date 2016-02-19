@@ -1,6 +1,7 @@
 package com.rongyi.easy.mcmc.vo;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.util.List;
@@ -65,5 +66,16 @@ public class CommoditySpecSimpleVO implements Serializable {
                 return specDetail.toString().substring(0, specDetail.toString().length() - 1);
             } else return "";
         } else return "";
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("stock", stock)
+                .append("originalPrice", originalPrice)
+                .append("currentPrice", currentPrice)
+                .append("specColumns", specColumns)
+                .toString();
     }
 }
