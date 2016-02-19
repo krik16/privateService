@@ -67,5 +67,4 @@ public interface CouponSynSolrService {
      * @return
      */
     SolrInputDocument getCouponDocument(String id);
-
 }

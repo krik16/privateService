@@ -1,5 +1,7 @@
 package com.rongyi.rss.solr;
 
+import java.net.MalformedURLException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,15 +19,30 @@ public interface ROASolrService {
     /**
      * 增量更新索引
      * @param core
-     * @param id
+     * @param ids
      * @throws Exception
      */
-    public void updateIndex(String core,String id) throws Exception;
+    public void replaceIndex(String core,List<String> ids) throws Exception;
 
     /**
      * 导入索引
      * @param core
      * @param map
      */
-    public void importIndex(String core,Map<String,Object> map);
+    public void importIndex(String core,Map<String,Object> map) throws Exception;
+
+    /**
+     * 获取core的fields
+     * @param core
+     * @return
+     * @throws Exception
+     */
+    public List<String> getFields(String core) throws  Exception;
+
+    /**
+     * 修改core某个id的field
+     * @param core
+     * @param paramMap
+     */
+    public void updateIndex(String core,Map<String,Object> paramMap) throws Exception;
 }

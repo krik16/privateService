@@ -57,6 +57,11 @@ public class ActivityDocument implements Serializable{
     private String area4;
     private String area5;
     private String area6;
+
+    private String secKillSign;
+    private Date activityStartTime;
+    private Date activityEndTime;
+
     public String getBrand_ids() {
         return brand_ids;
     }
@@ -424,5 +429,29 @@ public class ActivityDocument implements Serializable{
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getSecKillSign() {
+        return secKillSign;
+    }
+
+    public void setSecKillSign(String secKillSign) {
+        this.secKillSign = secKillSign;
+    }
+
+    public Date getActivityStartTime() {
+        return activityStartTime;
+    }
+
+    public void setActivityStartTime(Date activityStartTime) {
+        this.activityStartTime = activityStartTime;
+    }
+
+    public Date getActivityEndTime() {
+        return activityEndTime;
+    }
+
+    public void setActivityEndTime(Date activityEndTime) {
+        this.activityEndTime = activityEndTime;
     }
 }

@@ -82,7 +82,12 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private Integer flashSortPosition;
 	@Field("systemNumber")
 	private String systemNumber;
-
+	@Field("category1_id")
+	private String category1Id;
+	@Field("category2_id")
+	private String category2Id;
+	@Field("category3_id")
+	private String category3Id;
 
 	public Double getPrice() {
 		return price;
@@ -367,5 +372,29 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 	public void setSystemNumber(String systemNumber) {
 		this.systemNumber = systemNumber;
+	}
+
+	public String getCategory1Id() {
+		return category1Id;
+	}
+
+	public void setCategory1Id(String category1Id) {
+		this.category1Id = category1Id;
+	}
+
+	public String getCategory2Id() {
+		return category2Id;
+	}
+
+	public void setCategory2Id(String category2Id) {
+		this.category2Id = category2Id;
+	}
+
+	public String getCategory3Id() {
+		return category3Id;
+	}
+
+	public void setCategory3Id(String category3Id) {
+		this.category3Id = category3Id;
 	}
 }
