@@ -250,6 +250,11 @@ public class Coupon implements Serializable {
     private Boolean isDeleted;
 
     /**
+     * 是否是活动卡券
+     */
+    private Boolean isActive;
+
+    /**
      * 代金券分类
      */
     private CouponCategory couponCategory;
@@ -566,6 +571,14 @@ public class Coupon implements Serializable {
 
     public String getDetailPicUrl() {
         return detailPicUrl;
+    }
+
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
     }
 
     public List<String> getDetailPicUrls() {
