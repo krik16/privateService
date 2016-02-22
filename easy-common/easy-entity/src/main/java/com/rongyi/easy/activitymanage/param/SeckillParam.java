@@ -14,6 +14,7 @@ import java.io.Serializable;
 public class SeckillParam implements Serializable {
     private Integer id;
 
+
     public Integer getId() {
         return id;
     }
