@@ -14,14 +14,6 @@ public class ConfigEntity {
 		this.configId = configId;
 	}
 
-	public String getMallMid() {
-		return mallMid;
-	}
-
-	public void setMallMid(String mallMid) {
-		this.mallMid = mallMid;
-	}
-
 	public String getMallName() {
 		return mallName;
 	}
@@ -86,10 +78,18 @@ public class ConfigEntity {
 		this.userId = userId;
 	}
 
+	public String getMallMId() {
+		return mallMId;
+	}
+
+	public void setMallMId(String mallMId) {
+		this.mallMId = mallMId;
+	}
+
 	// 编号
 	private int configId = 0;
 	// 商城Id
-	private String mallMid = "";
+	private String mallMId = "";
 	// 商城名称
 	private String mallName = "";
 	// 商城等级
