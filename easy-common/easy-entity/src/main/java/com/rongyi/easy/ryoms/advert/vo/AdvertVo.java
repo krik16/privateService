@@ -1,8 +1,14 @@
 package com.rongyi.easy.ryoms.advert.vo;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
-public class AdvertVo {
+public class AdvertVo implements Serializable {
+	/** 
+	* @Fields serialVersionUID
+	*/ 
+	private static final long serialVersionUID = -1309872971784984018L;
 	private Long id;//'编号'
 	private Integer position;//广告位置，参考ad_option中定义 1:全屏 2:首页banner
 	private Integer adtime;//播放时长
@@ -18,6 +24,8 @@ public class AdvertVo {
 	private Long create_at;//记录创建时间
 	private Long update_by;//更新人账号ID
 	private Long update_at;//记录更新时间
+	private List<String> mall_ids;//关联商场id集合
+	private List<String> mall_names;//关联商场name集合
 	/**
 	 * @return the id
 	 */
@@ -197,5 +205,29 @@ public class AdvertVo {
 	 */
 	public void setStatus_detail(String status_detail) {
 		this.status_detail = status_detail;
+	}
+	/**
+	 * @return the mall_ids
+	 */
+	public List<String> getMall_ids() {
+		return mall_ids;
+	}
+	/**
+	 * @param mall_ids the mall_ids to set
+	 */
+	public void setMall_ids(List<String> mall_ids) {
+		this.mall_ids = mall_ids;
+	}
+	/**
+	 * @return the mall_names
+	 */
+	public List<String> getMall_names() {
+		return mall_names;
+	}
+	/**
+	 * @param mall_names the mall_names to set
+	 */
+	public void setMall_names(List<String> mall_names) {
+		this.mall_names = mall_names;
 	}
 }

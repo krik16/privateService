@@ -19,6 +19,8 @@ public class AdvertParam implements Serializable {
 	private String publish_start;//发布开始时间
 	private String publish_end;//发布结束时间
 	private String mallIds;//商场id 多个商场用逗号分割
+	private String agree;//审核通过1 不通过2
+	private String reason;//审核不通过原因
 	/**
 	 * @return the groupId
 	 */
@@ -162,5 +164,29 @@ public class AdvertParam implements Serializable {
 	 */
 	public void setMallIds(String mallIds) {
 		this.mallIds = mallIds;
+	}
+	/**
+	 * @return the agree
+	 */
+	public String getAgree() {
+		return agree;
+	}
+	/**
+	 * @param agree the agree to set
+	 */
+	public void setAgree(String agree) {
+		this.agree = agree;
+	}
+	/**
+	 * @return the reason
+	 */
+	public String getReason() {
+		return reason;
+	}
+	/**
+	 * @param reason the reason to set
+	 */
+	public void setReason(String reason) {
+		this.reason = reason;
 	}
 }
