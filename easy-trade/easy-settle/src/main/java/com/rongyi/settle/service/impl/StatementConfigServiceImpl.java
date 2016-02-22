@@ -426,9 +426,9 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
             } else if (lintType == 2)//部分
             {
                 if (linkShopIds != null) {
-                    List<String> linkShopList = new ArrayList<>();
-                    linkShopList.toArray(linkShopIds);
-                    map.put("linkShopIds",linkShopList);
+//                    List<String> linkShopList = new ArrayList<>();
+//                    linkShopList.toArray(linkShopIds);
+                    map.put("linkShopIds",linkShopIds);
                     if (checkConfigExist(map, shopConfigs)) {
                         ReMap.put("result", true);
                         return ReMap;
