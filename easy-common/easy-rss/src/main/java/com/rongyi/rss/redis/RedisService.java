@@ -20,4 +20,19 @@ public interface RedisService {
      * @throws Exception
      */
     public Long decr(String key) throws Exception;
+
+    /**
+     * 获取value
+     * @param key
+     * @return
+     */
+    public String get(String key);
+
+    /**
+     * set key value
+     * @param key
+     * @param value
+     * @return
+     */
+    public String set(String key,String value);
 }
