@@ -21,9 +21,9 @@ public class BuyerCategoryParam implements Serializable {
 	private String flashSaleId;		// 特卖ID
 	
 	public BuyerCategoryParam() {
-		this.filterType = 0;
-		this.filterId = "";
-		this.showParent = false;
+//		this.filterType = 0;
+//		this.filterId = "";
+//		this.showParent = true;
 	}
 	
 	public BuyerCategoryParam(Integer filterType, String filterId, boolean showParent, String bullId, String liveId,
