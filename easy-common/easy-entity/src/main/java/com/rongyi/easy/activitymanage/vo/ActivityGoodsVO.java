@@ -46,6 +46,16 @@ public class ActivityGoodsVO implements Serializable {
     private Integer subsidyPrice;
 
     /**
+     * 商品审核状态：待审核[0] 未通过[1] 已通过[2]
+     */
+    private Integer status;
+
+    /**
+     * 创建人（报名商家）
+     */
+    private String createUser;
+
+    /**
      * 分类信息
      * 餐饮 > 西餐 > 牛排
      */
@@ -128,6 +138,22 @@ public class ActivityGoodsVO implements Serializable {
         return subsidyPrice;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -138,6 +164,8 @@ public class ActivityGoodsVO implements Serializable {
                 .append("type", type)
                 .append("subsidyType", subsidyType)
                 .append("subsidyPrice", subsidyPrice)
+                .append("status", status)
+                .append("createUser", createUser)
                 .append("categoryStr", categoryStr)
                 .append("activityGoodsSpecVOs", activityGoodsSpecVOs)
                 .toString();
