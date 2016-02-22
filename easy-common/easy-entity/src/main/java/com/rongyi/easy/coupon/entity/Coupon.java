@@ -249,10 +249,6 @@ public class Coupon implements Serializable {
      */
     private Boolean isDeleted;
 
-    /**
-     * 是否是活动卡券
-     */
-    private Boolean isActive;
 
     /**
      * 代金券分类
@@ -573,13 +569,7 @@ public class Coupon implements Serializable {
         return detailPicUrl;
     }
 
-    public Boolean getIsActive() {
-        return isActive;
-    }
 
-    public void setIsActive(Boolean isActive) {
-        this.isActive = isActive;
-    }
 
     public List<String> getDetailPicUrls() {
         List<String> list = ListUtils.EMPTY_LIST;
