@@ -403,7 +403,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                         return ReMap;
                     }
                     if (linkShopIds != null) {
-                        map.put("linkShopIds",linkShopIds);
+                        map.put("linkShopIds",Arrays.asList(linkShopIds));
                         if (checkConfigExist(map, shopConfigs)) {
                             ReMap.put("result", true);
                             return ReMap;
@@ -426,7 +426,7 @@ public class StatementConfigServiceImpl extends BaseServiceImpl implements State
                 if (linkShopIds != null) {
 //                    List<String> linkShopList = new ArrayList<>();
 //                    linkShopList.toArray(linkShopIds);
-                    map.put("linkShopIds",linkShopIds);
+                    map.put("linkShopIds",Arrays.asList(linkShopIds));
                     if (checkConfigExist(map, shopConfigs)) {
                         ReMap.put("result", true);
                         return ReMap;
