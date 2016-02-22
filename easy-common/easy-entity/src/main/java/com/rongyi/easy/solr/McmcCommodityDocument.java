@@ -83,11 +83,11 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	@Field("systemNumber")
 	private String systemNumber;
 	@Field("category1_id")
-	private String category1Id;
+	private String category1_id;
 	@Field("category2_id")
-	private String category2Id;
+	private String category2_id;
 	@Field("category3_id")
-	private String category3Id;
+	private String category3_id;
 
 	public Double getPrice() {
 		return price;
@@ -374,27 +374,27 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.systemNumber = systemNumber;
 	}
 
-	public String getCategory1Id() {
-		return category1Id;
+	public String getCategory1_id() {
+		return category1_id;
 	}
 
-	public void setCategory1Id(String category1Id) {
-		this.category1Id = category1Id;
+	public void setCategory1_id(String category1_id) {
+		this.category1_id = category1_id;
 	}
 
-	public String getCategory2Id() {
-		return category2Id;
+	public String getCategory2_id() {
+		return category2_id;
 	}
 
-	public void setCategory2Id(String category2Id) {
-		this.category2Id = category2Id;
+	public void setCategory2_id(String category2_id) {
+		this.category2_id = category2_id;
 	}
 
-	public String getCategory3Id() {
-		return category3Id;
+	public String getCategory3_id() {
+		return category3_id;
 	}
 
-	public void setCategory3Id(String category3Id) {
-		this.category3Id = category3Id;
+	public void setCategory3_id(String category3_id) {
+		this.category3_id = category3_id;
 	}
 }
