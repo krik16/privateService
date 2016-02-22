@@ -178,4 +178,5 @@ public interface ActivityService {
      */
     List<ActivityGoodTemplateVO> selectActivityGoodsByActivity(List<String> ids,Integer activityId,Integer type);
 
+
 }
