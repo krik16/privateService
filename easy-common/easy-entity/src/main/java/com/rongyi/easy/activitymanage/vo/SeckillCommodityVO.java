@@ -25,11 +25,11 @@ public class SeckillCommodityVO implements Serializable {
     /**
      * 当前价格
      */
-    private Integer currentPrice;
+    private String currentPrice;
     /**
      * 原来价格
      */
-    private Integer originalPrice;
+    private String originalPrice;
     /**
      * 商品库存
      */
@@ -67,19 +67,19 @@ public class SeckillCommodityVO implements Serializable {
         this.stockCount = stockCount;
     }
 
-    public Integer getOriginalPrice() {
+    public String getOriginalPrice() {
         return originalPrice;
     }
 
-    public void setOriginalPrice(Integer originalPrice) {
+    public void setOriginalPrice(String originalPrice) {
         this.originalPrice = originalPrice;
     }
 
-    public Integer getCurrentPrice() {
+    public String getCurrentPrice() {
         return currentPrice;
     }
 
-    public void setCurrentPrice(Integer currentPrice) {
+    public void setCurrentPrice(String currentPrice) {
         this.currentPrice = currentPrice;
     }
 
