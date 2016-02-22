@@ -12,19 +12,19 @@ import org.apache.commons.lang.builder.ToStringStyle;
 /*
 使用示例说明：
 {
-   		"meta": {
-       	        	 "msg": "success",                     //返回的是错误提示信息
-       		         "errno": 0                            //0代表成功  1，代表失败
-                },
-        "result": {
-                     "data":{} or []                       //多行记录返回数组
-                     "page":{                              //page 是可选项，data为数组时才会有page，也可以无page信息（不分页）。
-                            "currentPage"":1 ,             //当前页,目前系统有从0或1开始。统一1开始
-                            "pageSize":10,                 //分页的数量
-                            "totalPage":1,                 //总页数
-                            "totalCount":10                //总行数
-                        }
-                   }
+    "meta": {
+        "msg": "success",                     //返回的是错误提示信息
+        "errno": 0                            //0代表成功  1，代表失败
+    },
+    "result": {
+        "data":{} or []                       //多行记录返回数组
+        "page":{                              //page 是可选项，data为数组时才会有page，也可以无page信息（不分页）。
+            "currentPage"":1 ,                //当前页,目前系统有从0或1开始。统一1开始
+            "pageSize":10,                    //分页的数量
+            "totalPage":1,                    //总页数
+            "totalCount":10                   //总行数
+        }
+    }
 }
 */
 
@@ -38,8 +38,8 @@ public class ResponseVO implements java.io.Serializable {
     public static final Meta SUCCESS = new Meta(0, "success"); //成功
     public static final Meta FAILURE = new Meta(1, "failure"); //失败
 
-    private Meta meta; // errno=0：成功,errno=1:失败
-    private Result result;//数据
+    private Meta meta;      //errno=0：成功, errno=1：失败
+    private Result result;  //数据
     
     public ResponseVO(){
     	
