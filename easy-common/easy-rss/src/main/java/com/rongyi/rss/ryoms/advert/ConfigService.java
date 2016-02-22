@@ -14,6 +14,7 @@ import com.rongyi.easy.ryoms.advert.entity.ConfigEntity;
 import com.rongyi.easy.ryoms.advert.param.ConfigSearchParam;
 import com.rongyi.easy.ryoms.advert.vo.CityVO;
 import com.rongyi.easy.ryoms.advert.vo.ConfigVO;
+import com.rongyi.easy.ryoms.advert.vo.ReasonVO;
 
 /**
  * @Description: 参数配置管理接口
@@ -70,6 +71,23 @@ public interface ConfigService {
 	 * @return
 	 */
 	public int enable(int configId, int userId);
+
+	/**
+	 * 停用配置
+	 * 
+	 * @param id
+	 * @param userId
+	 * @return
+	 */
+	public int disable(int configId, String content, int userId);
+
+	/**
+	 * 停用理由列表（TOP5）
+	 * 
+	 * @param configId
+	 * @return
+	 */
+	public List<ReasonVO> topDisableList(int configId);
 
 	/**
 	 * 停用理由列表

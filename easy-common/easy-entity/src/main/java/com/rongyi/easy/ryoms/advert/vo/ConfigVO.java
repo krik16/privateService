@@ -102,14 +102,6 @@ public class ConfigVO {
 		this.countTotal = countTotal;
 	}
 
-	public int getCountRy() {
-		return countRy;
-	}
-
-	public void setCountRy(int countRy) {
-		this.countRy = countRy;
-	}
-
 	public int getCountMall() {
 		return countMall;
 	}
@@ -132,6 +124,14 @@ public class ConfigVO {
 
 	public void setStatusName(String statusName) {
 		this.statusName = statusName;
+	}
+
+	public int getCountRY() {
+		return countRY;
+	}
+
+	public void setCountRY(int countRY) {
+		this.countRY = countRY;
 	}
 
 	// 编号
@@ -159,7 +159,7 @@ public class ConfigVO {
 	// 广告数量
 	private int countTotal = 0;
 	// 广告数量-容易网
-	private int countRy = 0;
+	private int countRY = 0;
 	// 广告数量-卖场
 	private int countMall = 0;
 	// 状态Id

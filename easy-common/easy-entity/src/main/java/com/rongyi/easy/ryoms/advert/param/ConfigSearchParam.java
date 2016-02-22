@@ -18,10 +18,10 @@ public class ConfigSearchParam {
 	public void setPosition(int position) {
 		this.position = position;
 	}
-	public int getMallLevel() {
+	public String getMallLevel() {
 		return mallLevel;
 	}
-	public void setMallLevel(int mallLevel) {
+	public void setMallLevel(String mallLevel) {
 		this.mallLevel = mallLevel;
 	}
 	public int getStatus() {
@@ -71,7 +71,7 @@ public class ConfigSearchParam {
 	// 广告位置
 	private int position = 0;
 	// 商城等级Id
-	private int mallLevel = 0;
+	private String mallLevel = "";
 	// 配置状态Id
 	private int status = 0;
 	// 大区Id
