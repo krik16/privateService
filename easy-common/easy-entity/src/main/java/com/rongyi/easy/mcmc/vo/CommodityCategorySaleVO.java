@@ -3,198 +3,189 @@ package com.rongyi.easy.mcmc.vo;
 import java.io.Serializable;
 import java.util.List;
 
+import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.easy.mcmc.CommodityCategory;
 
 public class CommodityCategorySaleVO implements Serializable {
+	private static final long serialVersionUID = -4158506094352482238L;
+	private String categoryId;
+	private String categoryName;
+	private String categoryLogo;
+	private String categoryType;
+	private List<SndClassCategory> subCategoryList;
 
-  /**
-     * 
-     */
-  private static final long serialVersionUID = -4158506094352482238L;
-  private String categoryId;
-  private String categoryName;
-  private String categoryLogo;
-  private String categoryType;
-  private List<SndClassCategory> subCategoryList;
+	public List<SndClassCategory> getSubCategoryList() {
+		return subCategoryList;
+	}
 
-  public List<SndClassCategory> getSubCategoryList() {
-    return subCategoryList;
-  }
+	public void setSubCategoryList(List<SndClassCategory> subCategoryList) {
+		this.subCategoryList = subCategoryList;
+	}
 
-  public void setSubCategoryList(List<SndClassCategory> subCategoryList) {
-    this.subCategoryList = subCategoryList;
-  }
+	public CommodityCategorySaleVO() {
 
-  public CommodityCategorySaleVO() {
+	}
 
-  }
+	public CommodityCategorySaleVO(CommodityCategory commodityCategory) {
+		this.categoryId = commodityCategory.getId().toString();
+		this.categoryName = commodityCategory.getName();
+		this.categoryLogo = commodityCategory.getLogoUrl();
+		this.categoryType = "我是一级类目";
+	}
 
-  public CommodityCategorySaleVO(CommodityCategory commodityCategory) {
-    this.categoryId = commodityCategory.getId().toString();
-    this.categoryName = commodityCategory.getName();
-    this.categoryLogo = commodityCategory.getLogoUrl();
-    this.categoryType = "我是一级类目";
-  }
+	public String getCategoryId() {
+		return categoryId;
+	}
 
-  public String getCategoryId() {
-    return categoryId;
-  }
+	public void setCategoryId(String categoryId) {
+		this.categoryId = categoryId;
+	}
 
-  public void setCategoryId(String categoryId) {
-    this.categoryId = categoryId;
-  }
+	public String getCategoryName() {
+		return categoryName;
+	}
 
-  public String getCategoryName() {
-    return categoryName;
-  }
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 
-  public void setCategoryName(String categoryName) {
-    this.categoryName = categoryName;
-  }
+	public String getCategoryLogo() {
+		return categoryLogo;
+	}
 
-  public String getCategoryLogo() {
-    return categoryLogo;
-  }
+	public void setCategoryLogo(String categoryLogo) {
+		this.categoryLogo = categoryLogo;
+	}
 
-  public void setCategoryLogo(String categoryLogo) {
-    this.categoryLogo = categoryLogo;
-  }
+	public String getCategoryType() {
+		return categoryType;
+	}
 
-  public String getCategoryType() {
-    return categoryType;
-  }
+	public void setCategoryType(String categoryType) {
+		this.categoryType = categoryType;
+	}
 
-  public void setCategoryType(String categoryType) {
-    this.categoryType = categoryType;
-  }
+	public class SndClassCategory implements Serializable {
+		private static final long serialVersionUID = -8762888917527899984L;
+		private String categoryId;
+		private String categoryName;
+		private String categoryLogo;
+		private String categoryType;
+		private List<TrdClassCategory> subCategoryList;
 
+		public SndClassCategory() {
 
-  public class SndClassCategory implements Serializable {
-    /**
-             * 
-             */
-    private static final long serialVersionUID = -8762888917527899984L;
-    private String categoryId;
-    private String categoryName;
-    private String categoryLogo;
-    private String categoryType;
-    private List<TrdClassCategory> subCategoryList;
+		}
 
-    public SndClassCategory() {
+		public SndClassCategory(CommodityCategory commodityCategory) {
+			this.categoryId = commodityCategory.getId().toString();
+			this.categoryName = commodityCategory.getName();
+			this.categoryLogo = commodityCategory.getLogoUrl();
+			this.categoryType = "我是二级类目";
+		}
 
-    }
+		public String getCategoryId() {
+			return categoryId;
+		}
 
-    public SndClassCategory(CommodityCategory commodityCategory) {
-      this.categoryId = commodityCategory.getId().toString();
-      this.categoryName = commodityCategory.getName();
-      this.categoryLogo = commodityCategory.getLogoUrl();
-      this.categoryType = "我是二级类目";
-    }
+		public void setCategoryId(String categoryId) {
+			this.categoryId = categoryId;
+		}
 
-    public String getCategoryId() {
-      return categoryId;
-    }
+		public String getCategoryName() {
+			return categoryName;
+		}
 
-    public void setCategoryId(String categoryId) {
-      this.categoryId = categoryId;
-    }
+		public void setCategoryName(String categoryName) {
+			this.categoryName = categoryName;
+		}
 
-    public String getCategoryName() {
-      return categoryName;
-    }
+		public String getCategoryLogo() {
+			return categoryLogo;
+		}
 
-    public void setCategoryName(String categoryName) {
-      this.categoryName = categoryName;
-    }
+		public void setCategoryLogo(String categoryLogo) {
+			this.categoryLogo = categoryLogo;
+		}
 
-    public String getCategoryLogo() {
-      return categoryLogo;
-    }
+		public String getCategoryType() {
+			return categoryType;
+		}
 
-    public void setCategoryLogo(String categoryLogo) {
-      this.categoryLogo = categoryLogo;
-    }
+		public void setCategoryType(String categoryType) {
+			this.categoryType = categoryType;
+		}
 
-    public String getCategoryType() {
-      return categoryType;
-    }
+		public List<TrdClassCategory> getSubCategoryList() {
+			return subCategoryList;
+		}
 
-    public void setCategoryType(String categoryType) {
-      this.categoryType = categoryType;
-    }
+		public void setSubCategoryList(List<TrdClassCategory> subCategoryList) {
+			this.subCategoryList = subCategoryList;
+		}
 
-    public List<TrdClassCategory> getSubCategoryList() {
-      return subCategoryList;
-    }
+		public class TrdClassCategory implements Serializable {
+			private static final long serialVersionUID = 3027565667824642164L;
+			private String categoryId;
+			private String categoryName;
+			private String categoryLogo;
+			private String categoryType;
+			private List<CommoditySpecColumnVO> categoryColumList;
 
-    public void setSubCategoryList(List<TrdClassCategory> subCategoryList) {
-      this.subCategoryList = subCategoryList;
-    }
+			public TrdClassCategory() {
 
-    public class TrdClassCategory implements Serializable {
-      /**
-                 * 
-                 */
-      private static final long serialVersionUID = 3027565667824642164L;
-      private String categoryId;
-      private String categoryName;
-      private String categoryLogo;
-      private String categoryType;
-      private List<CommoditySpecColumnVO> categoryColumList;
+			}
 
-      public TrdClassCategory() {
+			public TrdClassCategory(CommodityCategory commodityCategory) {
+				this.categoryId = commodityCategory.getId().toString();
+				this.categoryName = commodityCategory.getName();
+				this.categoryLogo = commodityCategory.getLogoUrl();
+				this.categoryType = "我是三级类目";
+			}
 
-      }
+			public List<CommoditySpecColumnVO> getCategoryColumList() {
+				return categoryColumList;
+			}
 
-      public TrdClassCategory(CommodityCategory commodityCategory) {
-        this.categoryId = commodityCategory.getId().toString();
-        this.categoryName = commodityCategory.getName();
-        this.categoryLogo = commodityCategory.getLogoUrl();
-        this.categoryType = "我是三级类目";
-      }
+			public void setCategoryColumList(List<CommoditySpecColumnVO> categoryColumList) {
+				this.categoryColumList = categoryColumList;
+			}
 
-      public List<CommoditySpecColumnVO> getCategoryColumList() {
-        return categoryColumList;
-      }
+			public String getCategoryId() {
+				return categoryId;
+			}
 
-      public void setCategoryColumList(List<CommoditySpecColumnVO> categoryColumList) {
-        this.categoryColumList = categoryColumList;
-      }
+			public void setCategoryId(String categoryId) {
+				this.categoryId = categoryId;
+			}
 
-      public String getCategoryId() {
-        return categoryId;
-      }
+			public String getCategoryName() {
+				return categoryName;
+			}
 
-      public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
-      }
+			public void setCategoryName(String categoryName) {
+				this.categoryName = categoryName;
+			}
 
-      public String getCategoryName() {
-        return categoryName;
-      }
+			public String getCategoryLogo() {
+				return categoryLogo;
+			}
 
-      public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-      }
+			public void setCategoryLogo(String categoryLogo) {
+				this.categoryLogo = categoryLogo;
+			}
 
-      public String getCategoryLogo() {
-        return categoryLogo;
-      }
+			public String getCategoryType() {
+				return categoryType;
+			}
 
-      public void setCategoryLogo(String categoryLogo) {
-        this.categoryLogo = categoryLogo;
-      }
-
-      public String getCategoryType() {
-        return categoryType;
-      }
-
-      public void setCategoryType(String categoryType) {
-        this.categoryType = categoryType;
-      }
-    }
-
-  }
-
-
+			public void setCategoryType(String categoryType) {
+				this.categoryType = categoryType;
+			}
+		}
+	}
+	
+	public String toJson() {
+		return JsonUtil.getJSONString(this);
+	}
 }
