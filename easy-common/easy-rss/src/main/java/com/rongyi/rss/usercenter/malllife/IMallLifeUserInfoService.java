@@ -191,7 +191,7 @@ public interface IMallLifeUserInfoService {
      * @param usersParamDto
      * @return
      */
-    public PagingVO<MalllifeUserListInfoDto> findUsesByPage(UsersParamDto usersParamDto) throws Exception;
+    public PagingVO<MalllifeUserListInfoDto>  findUsesByPage(UsersParamDto usersParamDto) throws Exception;
 
     /**
      * 红包推送 查询用户的id
