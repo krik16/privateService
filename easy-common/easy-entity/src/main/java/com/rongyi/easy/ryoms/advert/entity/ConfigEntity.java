@@ -54,12 +54,12 @@ public class ConfigEntity {
 		this.countTotal = countTotal;
 	}
 
-	public int getCountRy() {
-		return countRy;
+	public int getCountRY() {
+		return countRY;
 	}
 
-	public void setCountRy(int countRy) {
-		this.countRy = countRy;
+	public void setCountRY(int countRy) {
+		this.countRY = countRy;
 	}
 
 	public int getCountMall() {
@@ -101,7 +101,7 @@ public class ConfigEntity {
 	// 广告数量
 	private int countTotal = 0;
 	// 广告数量-容易网
-	private int countRy = 0;
+	private int countRY = 0;
 	// 广告数量-卖场
 	private int countMall = 0;
 	// 用户Id
