@@ -14,6 +14,8 @@ public interface ActivityConstants {
         Integer CHECK_SUCCESS = 2;
     }
 
+
+
     /**
      * 商品审核状态
      */
@@ -37,6 +39,8 @@ public interface ActivityConstants {
      */
     interface ActivityType {
         Integer GOODS_AND_COUPON = 3;// 商品及卡券类型
+        Integer RAFFLE = 2;//抽奖类活动
+        Integer SIGN = 4;//签到送积分活动
     }
 
     /**
