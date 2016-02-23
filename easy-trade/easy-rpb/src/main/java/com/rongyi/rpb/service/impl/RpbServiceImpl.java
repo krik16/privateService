@@ -18,13 +18,22 @@ import com.rongyi.easy.rpb.domain.PaymentItemEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.domain.WeixinMch;
 import com.rongyi.easy.rpb.vo.*;
+import com.rongyi.rpb.Exception.AliPayException;
+import com.rongyi.rpb.Exception.TradeException;
+import com.rongyi.rpb.common.pay.ali.model.AliRefundResultData;
+import com.rongyi.rpb.common.pay.weixin.model.RefundQueryResData;
 import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.mq.Sender;
 import com.rongyi.rpb.nsynchronous.OrderFormNsyn;
 import com.rongyi.rpb.service.*;
+import com.rongyi.rpb.unit.AliPayUnit;
+import com.rongyi.rpb.unit.WeixinPayUnit;
 import com.rongyi.rss.rpb.IRpbService;
 import net.sf.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +80,12 @@ public class RpbServiceImpl implements IRpbService {
 	@Autowired
 	WeixinMchService weixinMchService;
 
+	@Autowired
+	WeixinPayUnit weixinPayUnit;
+
+	@Autowired
+	AliPayUnit aliPayUnit;
+
 	@Override
 	public Map<Integer, String> validateAccount(String paymentIds) {
 		if (paymentIds == null)
@@ -112,12 +127,11 @@ public class RpbServiceImpl implements IRpbService {
 			paymentService.updateByPrimaryKeySelective(paymentEntity);
 			refundResultMap.put("success", true);
 			String target = Constants.SOURCETYPE.OSM;
-			String orderDetailNum = "";
 			if (Constants.ORDER_TYPE.ORDER_TYPE_1 == oldPaymentEntity.getOrderType()) {
 				target = Constants.SOURCETYPE.COUPON;
-				List<PaymentItemEntity> itemList = paymentItemService.selectByPaymentId(paymentEntity.getId());
-				orderDetailNum = paymentItemService.getDetailNum(itemList);
 			}
+			List<PaymentItemEntity> itemList = paymentItemService.selectByPaymentId(paymentEntity.getId());
+			String orderDetailNum = paymentItemService.getDetailNum(itemList);
 			MessageEvent event = rpbEventService.getMessageEvent(paymentEntity.getPayNo(), paymentEntity.getOrderNum(), orderDetailNum, paymentEntity.getPayChannel().toString(), null,
 					Constants.SOURCETYPE.RPB, target, PaymentEventType.REFUND);
 			sender.convertAndSend(event);
@@ -371,6 +385,98 @@ public class RpbServiceImpl implements IRpbService {
 			e.printStackTrace();
 		}
 		return map;
+	}
+
+	@Override
+	public RefundStatusVO getRefundStatus(RefundQueryParamVO refundQueryParamVO) {
+		LOGGER.info("退款详情接口，refundQueryParamVO={}", refundQueryParamVO.toString());
+		RefundStatusVO refundStatusVO = new RefundStatusVO();
+		PaymentEntity paymentEntity = paymentService.selectByPayNoAndPayChannelAndTradeType(refundQueryParamVO.getRefundNo(), null, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1, null);
+		if (paymentEntity == null)
+			throw new TradeException("该退款单不存在，refundNo={}", refundQueryParamVO.getRefundNo());
+		int totalDay;
+		if(paymentEntity.getPayChannel() == null){//0元单退款
+			refundStatusVO.setIsRongyiProcess(true);
+			refundStatusVO.setRongyiDate(paymentEntity.getFinishTime());
+			refundStatusVO.setPayPlatformDate(paymentEntity.getFinishTime());
+			refundStatusVO.setIsPayPlatformProcess(true);
+			refundStatusVO.setRefundReslt(ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getCodeStr());
+			return refundStatusVO;
+		}
+		if (paymentEntity.getStatus() != Constants.PAYMENT_STATUS.STAUS2) {//容易网未操作
+			totalDay = refundQueryParamVO.getRongyiPayDay();
+			refundStatusVO.setRongyiDate(DateUtil.addWorkDay(paymentEntity.getCreateTime(), totalDay));
+			totalDay += refundQueryParamVO.getPlatformPayDay();
+			refundStatusVO.setPayPlatformDate(DateUtil.addWorkDay(paymentEntity.getCreateTime(), totalDay));
+			totalDay += refundQueryParamVO.getRefundedDay();
+			refundStatusVO.setRefundDate(DateUtil.addWorkDay(paymentEntity.getCreateTime(), totalDay));
+			refundStatusVO.setRefundReslt(ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr());
+		} else {//容易网已操作
+			refundStatusVO.setIsRongyiProcess(true);
+			refundStatusVO.setRongyiDate(paymentEntity.getFinishTime());
+			String status = "";
+			if (Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL0 == paymentEntity.getPayChannel()) {//支付宝退款
+				AliRefundResultData aliRefundResultData = aliPayUnit.queryRefund(null, paymentEntity.getBatchNo());
+				LOGGER.info("支付宝退款查询返回结果，aliRefundResultData={}", aliRefundResultData.toString());
+				if ("T".equals(aliRefundResultData.getIsSuccess())) {//查询成功
+					PaymentLogInfo paymentLogInfo = paymentLogInfoService.selectByOutTradeNo(paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
+					if (paymentLogInfo == null || StringUtils.isBlank(paymentLogInfo.getTrade_no())) {
+						throw new AliPayException(ConstantEnum.EXCEPTION_PAYMENT_NOT_EXIST.getCodeStr(), ConstantEnum.EXCEPTION_PAYMENT_NOT_EXIST.getValueStr());
+					}
+					for (AliRefundResultData.ResultDetail resultDetail : aliRefundResultData.getResultDetails()) {
+						if (paymentLogInfo.getTrade_no().equals(resultDetail.getTradeNo())) {
+							if (validateTradeStatus(resultDetail.getResult())) {
+								status = ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getCodeStr();
+							} else {
+								status = ConstantEnum.WEIXIN_REFUND_RESULT_FAIL.getCodeStr();
+							}
+							break;
+						}
+					}
+				} else {
+					status = ConstantEnum.WEIXIN_REFUND_RESULT_FAIL.getCodeStr();
+				}
+				if (ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getCodeStr().equals(status)) {//退款完成
+					refundStatusVO.setIsPayPlatformProcess(true);
+					refundStatusVO.setPayPlatformDate(paymentEntity.getFinishTime());
+					//比较支付宝已完成时间加预计时间是否大于当前时间
+					if (DateUtil.dateDiff(DateUtil.getCurrDateTime(), DateUtil.addWorkDay(paymentEntity.getFinishTime(), refundQueryParamVO.getRefundedDay())) < 0) {
+						refundStatusVO.setRefundReslt(ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getCodeStr());
+					} else {
+						refundStatusVO.setRefundReslt(ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr());
+						refundStatusVO.setRefundDate(DateUtil.addWorkDay(paymentEntity.getFinishTime(), refundQueryParamVO.getRefundedDay()));
+					}
+				} else {//退款失败
+					refundStatusVO.setIsPayPlatformProcess(false);
+					refundStatusVO.setRefundReslt(ConstantEnum.WEIXIN_REFUND_RESULT_FAIL.getCodeStr());
+				}
+			} else if (Constants.PAYMENT_PAY_CHANNEL.PAY_CHANNEL1 == paymentEntity.getPayChannel()) {//微信退款
+				RefundQueryResData refundQueryResData = weixinPayUnit.refundQuery(null, null, refundQueryParamVO.getRefundNo(),null);
+				LOGGER.info("微信退款查询返回结果，refundQueryResData={}", refundQueryResData.toString());
+				status = refundQueryResData.getRefund_status_0();
+				if (ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr().equals(status)) {//退款处理中
+					totalDay = refundQueryParamVO.getPlatformPayDay();
+//					refundStatusVO.setPayPlatformDate(DateUtil.addWorkDay(paymentEntity.getFinishTime(), totalDay));
+					refundStatusVO.setPayPlatformDate(paymentEntity.getFinishTime());
+					refundStatusVO.setIsPayPlatformProcess(true);
+					totalDay += refundQueryParamVO.getRefundedDay();
+					refundStatusVO.setRefundDate(DateUtil.addWorkDay(paymentEntity.getFinishTime(), totalDay));
+					refundStatusVO.setRefundReslt(ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr());
+				} else if (ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getCodeStr().equals(status)) {//退款完成
+					refundStatusVO.setIsPayPlatformProcess(true);
+					refundStatusVO.setPayPlatformDate(paymentEntity.getFinishTime());
+					refundStatusVO.setRefundReslt(ConstantEnum.WEIXIN_REFUND_RESULT_SUCCESS.getCodeStr());
+				} else {//退款失败
+					refundStatusVO.setIsPayPlatformProcess(false);
+					refundStatusVO.setRefundReslt(ConstantEnum.WEIXIN_REFUND_RESULT_FAIL.getCodeStr());
+				}
+			}
+		}
+		return refundStatusVO;
+	}
+
+	private boolean validateTradeStatus(String tradeStatus) {
+		return "SUCCESS".equals(tradeStatus) || "TRADE_SUCCESS".equals(tradeStatus) || "TRADE_FINISHED".equals(tradeStatus) || "TRADE_HAS_CLOSED".equals(tradeStatus);
 	}
 
 	@Override

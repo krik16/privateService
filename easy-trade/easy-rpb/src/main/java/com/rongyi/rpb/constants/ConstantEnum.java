@@ -62,6 +62,7 @@ public enum ConstantEnum {
 	EXCEPTION_WEIXIN_REFUND_FAIL("1019106","微信退款失败"),
 	EXCEPTION_WEIXIN_ORDER_CLOSE("1019107","微信订单关闭失败"),
 	EXCEPTION_WEIXIN_QUERY_ORDER("1019108","微信订单查询失败"),
+
 	EXCEPTION_PAYMENT_NOT_EXIST("1019109","付款记录不存在"),
 	EXCEPTION_WEIXIN_SIGN_OPEN_ID_FAIL("1019110","为确保你可以及时跟进和查看订单状态，请先关注公众号再支付订单"),
 

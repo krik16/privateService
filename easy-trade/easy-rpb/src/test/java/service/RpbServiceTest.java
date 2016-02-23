@@ -8,6 +8,17 @@
 
 package service;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.rongyi.easy.rpb.vo.RefundQueryParamVO;
+import com.rongyi.rpb.unit.AliPayUnit;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
+import org.testng.annotations.Test;
+
 import base.BaseTest;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.easy.mq.MessageEvent;
@@ -32,6 +43,9 @@ public class RpbServiceTest extends BaseTest{
 
 	@Autowired
 	IRpbService iRpbService;
+
+	@Autowired
+	AliPayUnit aliPayUnit;
 	
 //	@Test
 	public void testOperateWeixinRefund(){
@@ -91,5 +105,43 @@ public class RpbServiceTest extends BaseTest{
 		weixinMch.setPublicCode("asda");
 		weixinMch.setUserId("1231");
 		iRpbService.addWeixinMch(weixinMch);
+	}
+
+	@Test
+	public void testgetRefundStatus(){
+		RefundQueryParamVO refundQueryParamVO = new RefundQueryParamVO();
+		refundQueryParamVO.setRefundNo("0012658247424173305");
+		iRpbService.getRefundStatus(refundQueryParamVO);
+	}
+
+	@Test
+	public void testqueryRefund(){
+		aliPayUnit.queryRefund(null,"201601210012111979520171917");
+	}
+
+
+	private static Date addWorkDay(Date date, int num) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		int mod = num % 5;
+		int other = num / 5 * 7;
+		for (int i = 0; i < mod;) {
+			cal.add(Calendar.DATE, 1);
+			switch (cal.get(Calendar.DAY_OF_WEEK)) {
+				case Calendar.SUNDAY:
+				case Calendar.SATURDAY:
+					break;
+				default:
+					i++;
+					break;
+			}
+		}
+		if (other > 0)
+			cal.add(Calendar.DATE, other);
+		return cal.getTime();
+	}
+
+	public static void main(String[] args){
+		System.err.println("newTime="+addWorkDay(new Date(), 8));
 	}
 }
