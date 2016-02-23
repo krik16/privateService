@@ -148,6 +148,15 @@ public class UserCoupon implements Serializable {
 
     private Double refundAmount;
 
+    /**
+     * 退款id
+     */
+    private String refundId;
+
+
+    private Integer couponChannel;//券码类型 5哈根达斯 6中影 7纵漫线美漫大趴 8星巴克
+
+    private Integer couponShowType;//券码展示类型 0默认 1url 2二维码
 
     public UserCoupon() {
 
@@ -449,6 +458,35 @@ public class UserCoupon implements Serializable {
         this.refundAmount = refundAmount;
     }
 
+    public String getRefundId()
+    {
+        return refundId;
+    }
+
+    public void setRefundId(String refundId)
+    {
+        this.refundId = refundId;
+    }
+
+    public Integer getCouponChannel()
+    {
+        return couponChannel;
+    }
+
+    public void setCouponChannel(Integer couponChannel)
+    {
+        this.couponChannel = couponChannel;
+    }
+
+    public Integer getCouponShowType()
+    {
+        return couponShowType;
+    }
+
+    public void setCouponShowType(Integer couponShowType)
+    {
+        this.couponShowType = couponShowType;
+    }
 
     //    使用状态: 未使用[1],已使用[2],已过期[3]
     public void setConvertStatus(Integer status, Date validEndAt) {
@@ -490,6 +528,9 @@ public class UserCoupon implements Serializable {
                 .append("endTime", endTime)
                 .append("checkUserId", checkUserId)
                 .append("refundAmount", refundAmount)
+                .append("refundId", refundId)
+                .append("couponChannel", couponChannel)
+                .append("couponShowType", couponShowType)
                 .toString();
     }
 

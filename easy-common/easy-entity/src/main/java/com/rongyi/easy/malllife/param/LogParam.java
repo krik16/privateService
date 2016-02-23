@@ -22,6 +22,7 @@ public class LogParam implements Serializable {
     private  String clickNum;//[点击量]
     private  String type;//[展示、点击、debug类型等]
     private  String timeStamp;//点击时间戳
+    private  String channel;//分享渠道
 
     private String opRole;// 操作角色
 
@@ -106,5 +107,13 @@ public class LogParam implements Serializable {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getChannel() {
+        return channel;
+    }
+
+    public void setChannel(String channel) {
+        this.channel = channel;
     }
 }
