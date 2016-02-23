@@ -100,6 +100,11 @@ public interface RoaActivityTemplateService {
 
     PagingVO<ActivityGoods> getCouponGoodsByTemplate(QueryGoodCouponParam queryGoodCouponParam);
 
-
-
+    /**
+     * 活动审核成功时插入活动模板信息
+     * @param activityId 活动id
+     * @return boolean
+     * @author Leon
+     */
+    boolean saveActivityTemplateByActivityId(Integer activityId);
 }
