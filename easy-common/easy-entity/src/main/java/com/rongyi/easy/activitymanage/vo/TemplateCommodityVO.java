@@ -33,6 +33,8 @@ public class TemplateCommodityVO implements Serializable {
     /**图片*/
     private String pic;
 
+    private Integer isCommodityUp= 0;
+
     public Integer getId() {
         return id;
     }
@@ -113,6 +115,14 @@ public class TemplateCommodityVO implements Serializable {
         this.pic = pic;
     }
 
+    public Integer getIsCommodityUp() {
+        return isCommodityUp;
+    }
+
+    public void setIsCommodityUp(Integer isCommodityUp) {
+        this.isCommodityUp = isCommodityUp;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -126,6 +136,7 @@ public class TemplateCommodityVO implements Serializable {
                 .append("orderPosition", orderPosition)
                 .append("stockCount", stockCount)
                 .append("pic", pic)
+                .append("isCommodityUp", isCommodityUp)
                 .toString();
     }
 }

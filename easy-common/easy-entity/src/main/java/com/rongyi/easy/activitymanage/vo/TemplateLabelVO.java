@@ -35,6 +35,8 @@ public class TemplateLabelVO implements Serializable {
 
    private List<TemplateCommodityVO> commoditys = new ArrayList<TemplateCommodityVO>();
 
+    private Integer isUpdate = 0;
+
     public TemplateLabelVO(){
 
     }
@@ -49,6 +51,15 @@ public class TemplateLabelVO implements Serializable {
             this.moreUrl = templateLabel.getMoreUrl();
         }
     }
+
+    public Integer getIsUpdate() {
+        return isUpdate;
+    }
+
+    public void setIsUpdate(Integer isUpdate) {
+        this.isUpdate = isUpdate;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -124,6 +135,7 @@ public class TemplateLabelVO implements Serializable {
                 .append("endAt", endAt)
                 .append("moreUrl", moreUrl)
                 .append("commoditys", commoditys)
+                .append("isUpdate", isUpdate)
                 .toString();
     }
 }
