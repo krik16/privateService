@@ -27,4 +27,6 @@ public interface MshopWhiteListService {
     public List<MshopWhiteList> findAllMallWhiteList();
 
     public List<MshopWhiteList> findAllGroupWhiteList();
+
+    public boolean isExistMerchant(String merchantId);
 }
