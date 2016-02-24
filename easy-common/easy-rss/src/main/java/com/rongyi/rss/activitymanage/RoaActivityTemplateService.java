@@ -114,4 +114,14 @@ public interface RoaActivityTemplateService {
      * @author Leon
      */
     boolean saveActivityTemplateByActivityId(Integer activityId);
+
+    /**
+     * 通过 闪购活动id  和商品id 查询闪购的商品 的位置信息
+     * @param activityId
+     * @param commodityId
+     * @user lijing
+     * @return
+     */
+    Integer searchPositionByIFlashAndCommodity(Integer activityId,String commodityId);
+
 }
