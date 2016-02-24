@@ -488,5 +488,44 @@ public class StatementConfig implements Serializable {
 		this.cycleRegularDay = cycleRegularDay;
 	}
 
-
+    @Override
+    public String toString() {
+        return "StatementConfig{" +
+                "id=" + id +
+                ", ruleCode='" + ruleCode + '\'' +
+                ", cooperateType=" + cooperateType +
+                ", bussinessType=" + bussinessType +
+                ", bussinessCode='" + bussinessCode + '\'' +
+                ", bussinessId='" + bussinessId + '\'' +
+                ", bussinessName='" + bussinessName + '\'' +
+                ", bussinessRealAddress='" + bussinessRealAddress + '\'' +
+                ", linkType=" + linkType +
+                ", linkRole=" + linkRole +
+                ", linkShopOp=" + linkShopOp +
+                ", countCycle=" + countCycle +
+                ", cycleStartTime=" + cycleStartTime +
+                ", cycleEndTime=" + cycleEndTime +
+                ", cycleDay=" + cycleDay +
+                ", cycleRegularDay='" + cycleRegularDay + '\'' +
+                ", isLoop=" + isLoop +
+                ", verifyType=" + verifyType +
+                ", generateHeaderTime='" + generateHeaderTime + '\'' +
+                ", generateHmTime='" + generateHmTime + '\'' +
+                ", sendTime=" + sendTime +
+                ", datumType=" + datumType +
+                ", payMode=" + payMode +
+                ", regularDay='" + regularDay + '\'' +
+                ", rollDay='" + rollDay + '\'' +
+                ", rollType=" + rollType +
+                ", effectStartTime=" + effectStartTime +
+                ", effectEndTime=" + effectEndTime +
+                ", payChannel=" + payChannel +
+                ", contractNo='" + contractNo + '\'' +
+                ", linkedRuleCode='" + linkedRuleCode + '\'' +
+                ", status=" + status +
+                ", createAt=" + createAt +
+                ", isDelete=" + isDelete +
+                ", createBy='" + createBy + '\'' +
+                '}';
+    }
 }

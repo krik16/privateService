@@ -284,4 +284,29 @@ public class StatementConfigVO extends StatementConfig{
 	public void setVerifyDesc(String verifyDesc) {
 		this.verifyDesc = verifyDesc;
 	}
+
+	@Override
+	public String toString() {
+		return "StatementConfigVO{" +
+				"configId=" + configId +
+				", payAccount='" + payAccount + '\'' +
+				", payName='" + payName + '\'' +
+				", blankName='" + blankName + '\'' +
+				", blankAddress='" + blankAddress + '\'' +
+				", bussinessAddress='" + bussinessAddress + '\'' +
+				", linkShopOp=" + linkShopOp +
+				", linkRole=" + linkRole +
+				", linkType=" + linkType +
+				", bussinessEmail='" + bussinessEmail + '\'' +
+				", bussinessAccount='" + bussinessAccount + '\'' +
+				", contactName='" + contactName + '\'' +
+				", contactPhone='" + contactPhone + '\'' +
+				", contactWeixin='" + contactWeixin + '\'' +
+				", contactQq='" + contactQq + '\'' +
+				", generateTime='" + generateTime + '\'' +
+				", bussinessLinkAddress='" + bussinessLinkAddress + '\'' +
+				", configShops=" + configShops +
+				", verifyDesc='" + verifyDesc + '\'' +
+				'}';
+	}
 }
