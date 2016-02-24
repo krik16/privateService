@@ -7,7 +7,7 @@ import java.util.List;
 import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.easy.mcmc.CommodityCategory;
 
-public class CommodityCategorySaleVO implements Serializable {
+public class CommodityCategorySaleVO implements Serializable, Comparable<CommodityCategorySaleVO> {
 	private static final long serialVersionUID = -4158506094352482238L;
 	private String categoryId;
 	private String categoryName;
@@ -78,7 +78,7 @@ public class CommodityCategorySaleVO implements Serializable {
 
 
 
-	public class SndClassCategory implements Serializable {
+	public class SndClassCategory implements Serializable, Comparable<SndClassCategory>{
 		private static final long serialVersionUID = -8762888917527899984L;
 		private String categoryId;
 		private String categoryName;
@@ -147,8 +147,6 @@ public class CommodityCategorySaleVO implements Serializable {
 			this.createAt = createAt;
 		}
 
-
-
 		public class TrdClassCategory implements Serializable {
 			private static final long serialVersionUID = 3027565667824642164L;
 			private String categoryId;
@@ -212,9 +210,38 @@ public class CommodityCategorySaleVO implements Serializable {
 		public String toJson() {
 			return JsonUtil.getJSONString(this);
 		}
+
+		/**
+		 * 排序
+		 */
+		@Override
+		public int compareTo(SndClassCategory o) {
+			long t1 = this.getCreateAt().getTime();
+			long t2 = o.getCreateAt().getTime();
+			if (t1 < t2) {
+				return -1;
+			}
+			if (t1 > t2) {
+				return 1;
+			}
+			return 0;
+		}
 	}
 	
 	public String toJson() {
 		return JsonUtil.getJSONString(this);
+	}
+
+	@Override
+	public int compareTo(CommodityCategorySaleVO o) {
+		long t1 = this.getCreateAt().getTime();
+		long t2 = o.getCreateAt().getTime();
+		if (t1 < t2) {
+			return -1;
+		}
+		if (t1 > t2) {
+			return 1;
+		}
+		return 0;
 	}
 }
