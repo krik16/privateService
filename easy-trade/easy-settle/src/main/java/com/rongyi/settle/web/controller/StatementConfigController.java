@@ -196,6 +196,7 @@ public class StatementConfigController extends BaseController {
             List<Byte> statuses = new ArrayList<>();
             statuses.add(ConstantEnum.CONFIG_STATUS_1.getCodeByte());
             statuses.add(ConstantEnum.CONFIG_STATUS_0.getCodeByte());
+            LOGGER.info("==== statementConfig={}", statementConfig);
             Map<String, Object> checkMap = statementConfigService.validateIsExist(statementConfig, statuses, linkShopIds);
 //			LOGGER.info("=========================== checkMap"+checkMap);
             boolean checkResult = (boolean) checkMap.get("result");
@@ -243,6 +244,7 @@ public class StatementConfigController extends BaseController {
                 return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
             }
             StatementConfigVO statementConfigVO = statementConfigService.selectConfigInfoById(Integer.valueOf(map.get("id").toString()));
+            LOGGER.info("===== statementConfig update={}", statementConfigVO);
             responseData = ResponseData.success(statementConfigVO);
         } catch (Exception e) {
             e.printStackTrace();
@@ -280,6 +282,7 @@ public class StatementConfigController extends BaseController {
             statementConfigVO.setCycleRegularDay(null);
             statementConfigVO.setEffectStartTime(null);
             statementConfigVO.setEffectEndTime(null);
+            LOGGER.info("===== statementConfig copy={}", statementConfigVO);
             responseData = ResponseData.success(statementConfigVO);
         } catch (Exception e) {
             e.printStackTrace();
