@@ -183,6 +183,10 @@ public class CommodityCategorySaleVO implements Serializable {
 				this.categoryType = categoryType;
 			}
 		}
+		
+		public String toJson() {
+			return JsonUtil.getJSONString(this);
+		}
 	}
 	
 	public String toJson() {
