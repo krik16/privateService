@@ -1,6 +1,7 @@
 package com.rongyi.easy.mcmc.vo;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import com.rongyi.core.common.util.JsonUtil;
@@ -12,6 +13,7 @@ public class CommodityCategorySaleVO implements Serializable {
 	private String categoryName;
 	private String categoryLogo;
 	private String categoryType;
+	private Date createAt;
 	private List<SndClassCategory> subCategoryList;
 
 	public List<SndClassCategory> getSubCategoryList() {
@@ -31,6 +33,7 @@ public class CommodityCategorySaleVO implements Serializable {
 		this.categoryName = commodityCategory.getName();
 		this.categoryLogo = commodityCategory.getLogoUrl();
 		this.categoryType = "我是一级类目";
+		this.createAt = commodityCategory.getCreateAt();
 	}
 
 	public String getCategoryId() {
@@ -64,6 +67,16 @@ public class CommodityCategorySaleVO implements Serializable {
 	public void setCategoryType(String categoryType) {
 		this.categoryType = categoryType;
 	}
+	
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+
+
 
 	public class SndClassCategory implements Serializable {
 		private static final long serialVersionUID = -8762888917527899984L;
@@ -71,6 +84,7 @@ public class CommodityCategorySaleVO implements Serializable {
 		private String categoryName;
 		private String categoryLogo;
 		private String categoryType;
+		private Date createAt;
 		private List<TrdClassCategory> subCategoryList;
 
 		public SndClassCategory() {
@@ -82,6 +96,7 @@ public class CommodityCategorySaleVO implements Serializable {
 			this.categoryName = commodityCategory.getName();
 			this.categoryLogo = commodityCategory.getLogoUrl();
 			this.categoryType = "我是二级类目";
+			this.createAt = commodityCategory.getCreateAt();
 		}
 
 		public String getCategoryId() {
@@ -123,6 +138,16 @@ public class CommodityCategorySaleVO implements Serializable {
 		public void setSubCategoryList(List<TrdClassCategory> subCategoryList) {
 			this.subCategoryList = subCategoryList;
 		}
+		
+		public Date getCreateAt() {
+			return createAt;
+		}
+
+		public void setCreateAt(Date createAt) {
+			this.createAt = createAt;
+		}
+
+
 
 		public class TrdClassCategory implements Serializable {
 			private static final long serialVersionUID = 3027565667824642164L;
