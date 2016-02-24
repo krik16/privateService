@@ -12,6 +12,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		<version>2.7.1-SNAPSHOT</version>
 =======
  
@@ -85,6 +86,9 @@
 		<groupId>com.rongyi</groupId>
 		<artifactId>easy-common</artifactId>
 		<version>2.9.5-SNAPSHOT</version>	
+=======
+		<version>3.0.5-SNAPSHOT</version>
+>>>>>>> 4e9bdce9b84d074043ed9274fb4d65b3e67590b5
 	</parent>
 	<artifactId>easy-rss</artifactId>
 	<packaging>jar</packaging>

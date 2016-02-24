@@ -16,7 +16,6 @@ public class AndroidMsg implements Serializable{
     private Integer notification_basic_style;
     private Integer open_type;
     private String url;
-    private String pkg_content;
     private CustomContent custom_content;
 
     public AndroidMsg(String title,String content,Integer type,String code){
@@ -75,14 +74,6 @@ public class AndroidMsg implements Serializable{
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public String getPkg_content() {
-        return pkg_content;
-    }
-
-    public void setPkg_content(String pkg_content) {
-        this.pkg_content = pkg_content;
     }
 
     public CustomContent getCustom_content() {

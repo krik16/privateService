@@ -269,6 +269,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		<version>2.7.1-SNAPSHOT</version>
 =======
 
@@ -282,6 +283,9 @@
 =======
 		<version>2.9.3-SNAPSHOT</version>
 >>>>>>> f98442833dfc62b5f93c72a10bf967c5ee3abed3
+=======
+		<version>3.0.5-SNAPSHOT</version>
+>>>>>>> 4e9bdce9b84d074043ed9274fb4d65b3e67590b5
 	</parent>
 	<artifactId>easy-core</artifactId>
 	<packaging>jar</packaging>
@@ -516,6 +520,7 @@
 	     </dependency>
 	</dependencies>
 <<<<<<< HEAD
+<<<<<<< HEAD
 </project>
 >>>>>>> 0e89d5161e0c2eced6c5ca9847bbbbf35dbeea23
 =======
@@ -526,3 +531,6 @@
 =======
 </project>
 >>>>>>> f98442833dfc62b5f93c72a10bf967c5ee3abed3
+=======
+</project>
+>>>>>>> 4e9bdce9b84d074043ed9274fb4d65b3e67590b5
