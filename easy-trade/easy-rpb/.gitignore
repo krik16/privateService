@@ -1,6 +1,10 @@
-/target/
-*.class
+.settings
+.classpath
+.project
 classes
-/sonar-project.properties
-/rongyi-dubbo-rmc
-/test-output
+target
+*.iml*.properties
+.idea
+*.iml
+.gitignore
+!/.gitignore
