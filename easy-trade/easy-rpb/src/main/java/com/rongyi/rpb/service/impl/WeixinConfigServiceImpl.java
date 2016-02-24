@@ -2,7 +2,9 @@ package com.rongyi.rpb.service.impl;
 
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.rpb.domain.WeixinMch;
+import com.rongyi.rpb.Exception.WeixinException;
 import com.rongyi.rpb.common.pay.weixin.util.Configure;
+import com.rongyi.rpb.constants.ConstantEnum;
 import com.rongyi.rpb.service.WeixinConfigService;
 import com.rongyi.rpb.service.WeixinMchService;
 import org.apache.commons.lang.StringUtils;
@@ -24,6 +26,9 @@ public class WeixinConfigServiceImpl extends BaseServiceImpl implements WeixinCo
         Configure configure = new Configure();
         if (StringUtils.isNotBlank(appId)) {
             WeixinMch weixinMch = weixinMchService.selectByAppIdAndTradeType(appId, weixinPayType);
+            if(weixinMch == null){
+                throw new WeixinException(ConstantEnum.EXCEPTION_WEIXIN_APPID_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_WEIXIN_APPID_NOT_EXIST.getValueStr());
+            }
             weixinMch.setTradeType(String.valueOf(weixinPayType));
             configure.init(weixinMch);
         }
