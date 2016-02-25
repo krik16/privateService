@@ -26,6 +26,7 @@ public class ResponseResult implements java.io.Serializable {
 	public ResponseResult() {
 		this.success = true;
 		this.code = SUCCESS;
+		this.message = "成功";
 	}
 
 	/**
@@ -56,12 +57,32 @@ public class ResponseResult implements java.io.Serializable {
 	/**
 	 * Success 
 	 * @param info		返回值信息
+	 * @return
+	 */
+	public ResponseResult Success(Object info) {
+		return Success(info, "成功", SUCCESS);
+	}
+	
+	/**
+	 * Success 
+	 * @param info		返回值信息
 	 * @param message	消息
 	 * @return
 	 */
 	public ResponseResult Success(Object info, String message) {
+		return Success(info, SUCCESS, message);
+	}
+	
+	/**
+	 * Success 
+	 * @param info		返回值信息
+	 * @param errCode	消息码
+	 * @param message	消息
+	 * @return
+	 */
+	public ResponseResult Success(Object info, String errCode, String message) {
 		this.success = true;
-		this.code = SUCCESS;
+		this.code = errCode;
 		this.message = message;
 		this.info = info;
 		return this;
