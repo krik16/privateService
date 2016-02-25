@@ -60,7 +60,7 @@ public class ResponseResult implements java.io.Serializable {
 	 * @return
 	 */
 	public ResponseResult Success(Object info) {
-		return Success(info, "成功", SUCCESS);
+		return Success(info, "正常", SUCCESS);
 	}
 	
 	/**
