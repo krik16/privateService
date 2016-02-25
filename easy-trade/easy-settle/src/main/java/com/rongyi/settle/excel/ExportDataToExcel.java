@@ -11,7 +11,6 @@ package com.rongyi.settle.excel;
 import com.rongyi.core.common.util.DateTool;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.ExcelUtil;
-import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
 import com.rongyi.settle.constants.ConstantEnum;
 import com.rongyi.settle.service.PaymentStatementService;
@@ -24,7 +23,6 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -40,17 +38,17 @@ public class ExportDataToExcel {
 	@Autowired
 	private PaymentStatementService paymentStatementService;
 
-	@SuppressWarnings("unchecked")
-	public Map<String, Object> getParamMap(HttpServletRequest request) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		try {
-			String paramsJson = new String(request.getParameter("paramsJson").getBytes("iso8859-1"), "UTF-8");
-			map = JsonUtil.getMapFromJson(paramsJson);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-		return map;
-	}
+//	@SuppressWarnings("unchecked")
+//	public Map<String, Object> getParamMap(HttpServletRequest request) {
+//		Map<String, Object> map = new HashMap<>();
+//		try {
+//			String paramsJson = new String(request.getParameter("paramsJson").getBytes("iso8859-1"), "UTF-8");
+//			map = JsonUtil.getMapFromJson(paramsJson);
+//		} catch (UnsupportedEncodingException e) {
+//			e.printStackTrace();
+//		}
+//		return map;
+//	}
 
 	/**
 	 * 导出付款清单
@@ -65,7 +63,7 @@ public class ExportDataToExcel {
 			map.put("idArray", idArray);
 			map.put("status", 6);
 			List<PaymentStatementDto> payments = paymentStatementService.selectPageList(map, null, null);
-			List<Integer> ids = new ArrayList<Integer>();
+			List<Integer> ids = new ArrayList<>();
 			Set<String> businessIds = null;
 			if (CollectionUtils.isNotEmpty(payments)) {
 				businessIds = new HashSet<>();
@@ -97,11 +95,12 @@ public class ExportDataToExcel {
 			bodyStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// 指定单元格垂直居中对齐
 
 			List<List<PaymentStatementDto>> parentsDtoList = new ArrayList<>();
-			if (CollectionUtils.isNotEmpty(businessIds)) {
+			if (businessIds!=null && CollectionUtils.isNotEmpty(businessIds)) {
 				for (String businessId : businessIds) {
 					List<PaymentStatementDto> sonDtoList = new ArrayList<>();
 					for (PaymentStatementDto p : payments) {
 						if (businessId != null && businessId.equals(p.getBussinessId())) {
+							//已下载的不允许重复下载
 							if (p.getStatus().equals(ConstantEnum.STATUS_11.getCodeByte())) {
 								XSSFSheet sheet = wb.createSheet(sonDtoList.get(0).getBussinessName() + "-" + System.currentTimeMillis());
 								sheet.createRow(0);
@@ -170,12 +169,12 @@ public class ExportDataToExcel {
 							sheet.getRow(i).getCell(2)
 									.setCellValue(DateTool.date2String(dto.getCycleStartTime(), DateTool.FORMAT_DATE_2) + "-" + DateTool.date2String(dto.getCycleEndTime(), DateTool.FORMAT_DATE_2));
 							sheet.getRow(i).getCell(3).setCellValue(dto.getBussinessName());
-							sheet.getRow(i).getCell(4).setCellValue("现金");
+							sheet.getRow(i).getCell(4).setCellValue(convertPayChannel(dto.getPayChannel()));
 							sheet.getRow(i).getCell(5).setCellValue(dto.getPayAccount());
 							sheet.getRow(i).getCell(6).setCellValue(dto.getPayName());
 							sheet.getRow(i).getCell(7).setCellValue(dto.getBlankName());
 							if (dto.getPayTotal() != null){
-								BigDecimal totalFee = new BigDecimal(dto.getPayTotal() + "").divide(new BigDecimal(100)).setScale(2, BigDecimal.ROUND_HALF_UP);
+								BigDecimal totalFee = new BigDecimal(dto.getPayTotal() + "").divide(new BigDecimal(100), 2, 4);
 								sheet.getRow(i).getCell(8).setCellValue(totalFee.toString());
 							}
 							sheet.getRow(i).getCell(9).setCellValue("已下载");
@@ -191,5 +190,16 @@ public class ExportDataToExcel {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	private String convertPayChannel(Byte payChannel) {
+		String result = "";
+		if (payChannel != null) {
+			switch (payChannel){
+                case 3: result=ConstantEnum.PAY_CHANNEL_CASH.getValueStr(); break;
+                case 4: result=ConstantEnum.PAY_CHANNEL_TRANSFER.getValueStr(); break;
+            }
+		}
+		return result;
 	}
 }

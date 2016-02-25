@@ -82,12 +82,34 @@ public interface StatementConfigService {
 	 **/
 	void saveStatementConfigAndInfo(StatementConfig statementConfig,BussinessInfo bussinessInfo, List<ConfigShop> shopConfigs);
 
-	/**
-	 * @Description: 定时任务查询符合条件的对账配置
-	 * @Author:  xgq
-	 **/
-	List<StatementConfig> selectForSchedule();
 
+	/**
+	 * 获取对账单配置（旧）
+	 * 
+	 * @return
+	* @author erliang
+	* @date 2016年1月15日
+	 */
+	List<StatementConfig> selectForScheduleDaily();
+
+	/**
+	 * 获取对账单配置（多日间隔为一个结算周期）
+	 * 
+	 * @return
+	 * @author erliang
+	 * @date 2016年1月15日
+	 */
+	List<StatementConfig> selectForScheduleSpacing();
+
+	/**
+	 * 获取对账单配置（指定日期）
+	 *
+	 * @return
+	 * @author erliang
+	 * @date 2016年1月15日
+	 */
+	List<StatementConfig> selectForScheduleJumping();
+	
 	/**
 	 * 批量对账单配置审核
 	 * @param ids
@@ -120,15 +142,23 @@ public interface StatementConfigService {
 	/**	
 	 * @Description: 验证对账单配置是否已存在 
 	 * @param statementConfig
-	 * @param linkId
-	 * @param linkAccount
+	 * @param linkShopIds
 	 * @param statuses
 	 * @return
 	 * @Author:  柯军
 	 * @datetime:2015年10月21日下午2:38:48
 	 **/
-	Map<String, Object> validateIsExist(StatementConfig statementConfig, List<Byte> statuses, Map linkId, Map linkAccount) throws Exception;
+	Map<String, Object> validateIsExist(StatementConfig statementConfig, List<Byte> statuses, String[] linkShopIds) throws Exception;
 
+	/**
+	 * 获取账户信息
+	 * @param isOneself
+	 * @param type
+	 * @param guideType
+	 * @param id
+	 * @param userAccount
+	 * @return
+	 */
 	List<UserInfoVo> getAccountInfoByParam(Integer isOneself, Integer type, Integer guideType, String id, String userAccount);
 
 	/**
@@ -144,8 +174,14 @@ public interface StatementConfigService {
 
 	List<StatementConfig> checkeffectStart(Map<String, Object> paramsMap);
 
-
 	List<ConfigShopVO> selectConfigShopsPage(Map<String, Object> paramsMap, int currPage, int pageSize) throws Exception;
 
 	int selectConfigShopsPageCount(Map<String, Object> paramsMap);
+
+	/**
+	 * 根据配置id查询该配置下配置的所有账号id
+	 * @param configId
+	 * @return
+	 */
+	List<Integer> getUserIdByConfigId(Integer configId);
 }

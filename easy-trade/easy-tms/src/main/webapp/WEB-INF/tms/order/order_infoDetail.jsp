@@ -111,6 +111,7 @@
 						<td>单价（元）</td>
 						<td>数量</td>
 						<td>商品总价（元）</td>
+						<td>折扣抵扣（元）</td>
 						<td>红包</td>
 						<td>平台促销券（元）</td>
 						<td>容颜值抵扣（元）</td>
@@ -135,10 +136,16 @@
 						<td>${sonOrder.commodityCurrentPrice }</td>
 						<td>${sonOrder.num }</td>
 						<td>${sonOrder.commodityAmount }</td>
+						<td>${sonOrder.commodityDiscount }</td>
 						<td>${sonOrder.hbDiscount }</td>
 						<td>${sonOrder.voucherDiscount }</td>
 						<td>${sonOrder.integralDiscount }</td>
-						<td>${sonOrder.realAmount }</td>
+						<td>
+							<c:choose>
+								<c:when test="${order.parentOrderStatus==1 or order.parentOrderStatus==5}"> 0.00 </c:when>
+								<c:otherwise>${sonOrder.realAmount }</c:otherwise>
+							</c:choose>
+						</td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -174,6 +181,10 @@
 						<li class="line">|</li>
 						<li class="data max2">${order.commodityPostage }（元）</li>
 
+						<li class="name">折扣抵扣</li>
+						<li class="line">|</li>
+						<li class="data max2">${order.discountFee }（元）</li>
+
 						<li class="name">订单总价</li>
 						<li class="line">|</li>
 						<li class="data max2">
@@ -185,7 +196,12 @@
 
 						<li class="name">卡券抵扣金额</li>
 						<li class="line">|</li>
-						<li class="data max2">${0-discountTotal }（元）</li>
+						<li class="data max2">
+							<c:choose>
+								<c:when test="${discountTotal-(commidityTotalPice - order.discountFee)>0 }">${commidityTotalPice - order.discountFee }（元）</c:when>
+								<c:otherwise>${discountTotal }（元）</c:otherwise>
+							</c:choose>
+						</li>
 
 						<li class="name">积分抵扣金额</li>
 						<li class="line">|</li>

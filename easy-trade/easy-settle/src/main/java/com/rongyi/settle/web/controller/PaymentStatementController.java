@@ -7,28 +7,6 @@
 
 package com.rongyi.settle.web.controller;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.rongyi.core.common.PropertyConfigurer;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.easy.settle.dto.PaymentStatementDto;
@@ -44,13 +22,31 @@ import com.rongyi.settle.service.AccessService;
 import com.rongyi.settle.service.BussinessInfoService;
 import com.rongyi.settle.service.PaymentStatementService;
 import com.rongyi.settle.service.StatementConfigService;
+import com.rongyi.settle.service.impl.PaymentStatementServiceImpl;
 import com.rongyi.settle.service.impl.PaymentStatementServiceImpl.SettleConfigNotFoundException;
 import com.rongyi.settle.util.DateUtils;
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.OutputStream;
+import java.util.*;
 
 /**
- * @Author: 柯军
- * @Description: 对账单列表
- * @datetime:2015年9月21日上午11:15:53
+ * Author: 柯军
+ * Description: 对账单列表
+ * datetime:2015年9月21日上午11:15:53
  **/
 @Controller
 @RequestMapping("/paymentStatement")
@@ -80,11 +76,11 @@ public class PaymentStatementController extends BaseController {
 	private AccessService accessService;
 
 	/**
-	 * @param map
-	 * @return
-	 * @Description: 对账单列表（包括所有列表，审核列表，商家对账单列表）
-	 * @Author: 柯军
-	 * @datetime:2015年9月21日下午3:01:04
+	 * param map
+	 * return
+	 * Description: 对账单列表（包括所有列表，审核列表，商家对账单列表）
+	 * Author: 柯军
+	 * datetime:2015年9月21日下午3:01:04
 	 **/
 	@RequestMapping("/list")
 	@ResponseBody
@@ -96,7 +92,7 @@ public class PaymentStatementController extends BaseController {
 			Integer searchStatus = -1;
 			if (map.get("searchStatus") != null)
 				searchStatus = Integer.valueOf(map.get("searchStatus").toString());
-			List<Byte> statusList = new ArrayList<Byte>();
+			List<Byte> statusList = new ArrayList<>();
 			ResponseData responseData;
 			switch (searchType) {
 			case 0:// 查询对账单列表
@@ -124,9 +120,10 @@ public class PaymentStatementController extends BaseController {
 				if (responseData.getMeta().getErrno() != 0) {
 					return responseData;
 				}
-				if (searchStatus == 0)
+				if (searchStatus == 0) {
+					map.put("predictPayTimeBegin", new Date());
 					statusList.add(ConstantEnum.STATUS_4.getCodeByte());
-				else {
+				}else {
 					statusList.add(ConstantEnum.STATUS_6.getCodeByte());
 					statusList.add(ConstantEnum.STATUS_7.getCodeByte());
 					statusList.add(ConstantEnum.STATUS_8.getCodeByte());
@@ -139,8 +136,7 @@ public class PaymentStatementController extends BaseController {
 				}
 				statusList.add(ConstantEnum.STATUS_6.getCodeByte());
 				statusList.add(ConstantEnum.STATUS_11.getCodeByte());
-				// statusList.add(ConstantEnum.STATUS_12.getCodeByte());
-				List<Byte> payChannelList = new ArrayList<Byte>();
+				List<Byte> payChannelList = new ArrayList<>();
 				payChannelList.add(ConstantEnum.STATUS_3.getCodeByte());
 				payChannelList.add(ConstantEnum.STATUS_4.getCodeByte());
 				map.put("payChannelList", payChannelList);
@@ -153,13 +149,7 @@ public class PaymentStatementController extends BaseController {
 					return responseData;
 				}
 				map.put("bussinessAccount", getUserName(request));
-				if (searchStatus == 0) {// 全部
-					// statusList.add(ConstantEnum.STATUS_1.getCodeByte());
-					// statusList.add(ConstantEnum.STATUS_3.getCodeByte());
-					// statusList.add(ConstantEnum.STATUS_4.getCodeByte());
-					// statusList.add(ConstantEnum.STATUS_5.getCodeByte());
-					// statusList.add(ConstantEnum.STATUS_12.getCodeByte());
-				} else if (searchStatus == 1) {// 待确认
+				 if (searchStatus == 1) {// 待确认
 					statusList.add(ConstantEnum.STATUS_1.getCodeByte());
 					statusList.add(ConstantEnum.STATUS_3.getCodeByte());
 				} else if (searchStatus == 2) {// 已确认
@@ -187,8 +177,9 @@ public class PaymentStatementController extends BaseController {
 			}
 			if (!statusList.isEmpty())
 				map.put("statusList", statusList);
-			List<PaymentStatementDto> list = new ArrayList<>();
-			Integer count = 0;
+			List<PaymentStatementDto> list;
+			int count;
+			LOGGER.info("query params map={}", map);
 			if (searchType == 5) {
 				list = paymentStatementService.selectPageListForMerchant(map, currentPage, ConstantEnum.PAGE_SIZE.getCodeInt());
 				count = paymentStatementService.selectPageListCountForMerchant(map);
@@ -216,12 +207,12 @@ public class PaymentStatementController extends BaseController {
 	}
 
 	/**
-	 * @Description: 商家对账单不同状态总数
-	 * @param request
-	 * @param map
-	 * @return
-	 * @Author: 柯军
-	 * @datetime:2015年10月13日上午11:51:35
+	 * Description: 商家对账单不同状态总数
+	 * param request
+	 * param map
+	 * return
+	 * Author: 柯军
+	 * datetime:2015年10月13日上午11:51:35
 	 **/
 	@RequestMapping("/bizListTotal")
 	@ResponseBody
@@ -238,10 +229,10 @@ public class PaymentStatementController extends BaseController {
 			return ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
 		}
 		if (map == null)
-			map = new HashMap<String, Object>();
+			map = new HashMap<>();
 		map.put("bussinessAccount", getUserName(request));
-		Map<String, Object> responseMap = new HashMap<String, Object>();
-		List<Byte> statusList = new ArrayList<Byte>();
+		Map<String, Object> responseMap = new HashMap<>();
+		List<Byte> statusList = new ArrayList<>();
 		// statusList.add(ConstantEnum.STATUS_1.getCodeByte());
 		// statusList.add(ConstantEnum.STATUS_3.getCodeByte());
 		// statusList.add(ConstantEnum.STATUS_4.getCodeByte());
@@ -285,17 +276,17 @@ public class PaymentStatementController extends BaseController {
 	}
 
 	/**
-	 * @param request
-	 * @param map
-	 * @return
-	 * @Description: 对账单审核（待付款）
-	 * @Author: 柯军
-	 * @datetime:2015年9月21日下午3:03:17
+	 * param request
+	 * param map
+	 * return
+	 * Description: 对账单审核（待付款）
+	 * Author: 柯军
+	 * datetime:2015年9月21日下午3:03:17
 	 **/
 	@RequestMapping("/verify")
 	@ResponseBody
 	public ResponseData verify(HttpServletRequest request, @RequestBody Map<String, Object> map) {
-		ResponseData result = null;
+		ResponseData result;
 		try {
 
 			LOGGER.info("verify map={}", map);
@@ -310,12 +301,12 @@ public class PaymentStatementController extends BaseController {
 				ids.add(Integer.valueOf(id.trim()));
 			}
 			ResponseData responseData;
-			if (status == 1 || status == 2) {
+			if (status == 1 || status == 2) {//初始审核
 				responseData = accessService.check(request, "FNC_STLCONF_VFY");
 				if (responseData.getMeta().getErrno() != 0) {
 					return responseData;
 				}
-			} else if (status == 4 || status == 5) {
+			} else if (status == 4 || status == 5) {//商家审核
 				responseData = accessService.checkMerchant(request, "FUND_CHECK_MGR");
 				if (responseData.getMeta().getErrno() != 0) {
 					return responseData;
@@ -328,7 +319,7 @@ public class PaymentStatementController extends BaseController {
 						return ResponseData.failure(CodeEnum.FIAL_NO_AUTHORITY_PAYMENT.getCodeInt(), CodeEnum.FIAL_NO_AUTHORITY_PAYMENT.getValueStr());
 					}
 				}
-			} else if (status == 6 || status == 7) {
+			} else if (status == 6 || status == 7) {//财务审核
 				responseData = accessService.check(request, "FNC_UNPVFY_VFY");
 				if (responseData.getMeta().getErrno() != 0) {
 					return responseData;
@@ -348,12 +339,12 @@ public class PaymentStatementController extends BaseController {
 	}
 
 	/**
-	 * @param request
-	 * @param map
-	 * @return
-	 * @Description: 导出对账单明细（财务操作）
-	 * @Author: 柯军
-	 * @datetime:2015年9月21日下午3:03:26
+	 * param request
+	 * param map
+	 * return
+	 * Description: 导出对账单明细（财务操作）
+	 * Author: 柯军
+	 * datetime:2015年9月21日下午3:03:26
 	 **/
 	@RequestMapping("/exportFinanceExcel")
 	public ResponseData exportFinanceExcel(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, Object> map) {
@@ -368,16 +359,16 @@ public class PaymentStatementController extends BaseController {
 			return ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
 		}
 		if (map == null)
-			map = new HashMap<String, Object>();
+			map = new HashMap<>();
 		exportFinanceVerifyExcel.exportExcel(request, response, map);
 		return null;
 	}
 
 	/**
-	 * @return
-	 * @Description: 导出付款清单（财务操作）
-	 * @Author: 柯军
-	 * @datetime:2015年9月21日下午3:03:26
+	 * return
+	 * Description: 导出付款清单（财务操作）
+	 * Author: 柯军
+	 * datetime:2015年9月21日下午3:03:26
 	 **/
 	@RequestMapping("/exportPaymentExcel")
 	public ResponseData exportPaymentSchedule(String ids, HttpServletResponse response, HttpServletRequest request) {
@@ -394,18 +385,18 @@ public class PaymentStatementController extends BaseController {
 		if (StringUtils.isBlank(ids)) {
 			return ResponseData.failure(CodeEnum.FIAL_PARAMS_ERROR.getCodeInt(), CodeEnum.FIAL_PARAMS_ERROR.getValueStr());
 		}
-		String[] idArray = ids.split("\\,");
+		String[] idArray = ids.split(",");
 		exportDataToExcel.exportPaymentScheduleExcel(request, response, idArray);
 		return null;
 	}
 
 	/**
-	 * @param request
-	 * @param map
-	 * @return
-	 * @Description: 作废
-	 * @Author: 柯军
-	 * @datetime:2015年9月21日下午3:04:09
+	 * param request
+	 * param map
+	 * return
+	 * Description: 作废
+	 * Author: 柯军
+	 * datetime:2015年9月21日下午3:04:09
 	 **/
 	@RequestMapping("/invalid")
 	@ResponseBody
@@ -426,59 +417,59 @@ public class PaymentStatementController extends BaseController {
 	}
 
 	/**
-	 * @param request
-	 * @param map
-	 * @return
-	 * @Description: 商品订单查询(商家操作)
-	 * @Author: 柯军
-	 * @datetime:2015年9月21日下午3:04:23
+	 * param request
+	 * param map
+	 * return
+	 * Description: 商品订单查询(商家操作)
+	 * Author: 柯军
+	 * datetime:2015年9月21日下午3:04:23
 	 **/
 	@RequestMapping("/merchandiseList")
-	public ResponseData merchandiseList(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+	public ResponseData merchandiseList() {
 		return null;
 	}
 
 	/**
-	 * @param request
-	 * @param map
-	 * @return
-	 * @Description: 导出商品订单明细(商家操作)
-	 * @Author: 柯军
-	 * @datetime:2015年9月21日下午3:04:46
+	 * param request
+	 * param map
+	 * return
+	 * Description: 导出商品订单明细(商家操作)
+	 * Author: 柯军
+	 * datetime:2015年9月21日下午3:04:46
 	 **/
 	@RequestMapping("exportMerchandiseExcel")
-	public ResponseData exportMerchandiseExcel(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+	public ResponseData exportMerchandiseExcel() {
 		return null;
 	}
 
 	/**
-	 * @param request
-	 * @param map
-	 * @return
-	 * @Description: 优惠券订单查询(商家操作)
-	 * @Author: 柯军
-	 * @datetime:2015年9月21日下午3:05:09
+	 * param request
+	 * param map
+	 * return
+	 * Description: 优惠券订单查询(商家操作)
+	 * Author: 柯军
+	 * datetime:2015年9月21日下午3:05:09
 	 **/
 	@RequestMapping("/couponList")
-	public ResponseData couponList(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+	public ResponseData couponList() {
 		return null;
 	}
 
 	/**
-	 * @param request
-	 * @param map
-	 * @return
-	 * @Description: 导出优惠券订单明细(商家操作)
-	 * @Author: 柯军
-	 * @datetime:2015年9月21日下午3:05:30
+	 * param request
+	 * param map
+	 * return
+	 * Description: 导出优惠券订单明细(商家操作)
+	 * Author: 柯军
+	 * datetime:2015年9月21日下午3:05:30
 	 **/
 	@RequestMapping("exportCouponExcel")
-	public ResponseData exportCouponExcel(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+	public ResponseData exportCouponExcel() {
 		return null;
 	}
 
 	/**
-	 * @Description: 生成对账单
+	 * Description: 生成对账单
 	 **/
 	@RequestMapping("/generate")
 	@ResponseBody
@@ -493,6 +484,8 @@ public class PaymentStatementController extends BaseController {
 			paymentStatementService.generate(id, getUserName(request));
 		} catch (SettleConfigNotFoundException sce) {
 			return ResponseData.failure(CodeEnum.FIAL_CONFIG_NOT_FOUND.getCodeInt(), CodeEnum.FIAL_CONFIG_NOT_FOUND.getValueStr());
+		} catch (PaymentStatementServiceImpl.StatementInvalidException sie) {
+			return ResponseData.failure(CodeEnum.FIAL_STATEMENT_INVALID.getCodeInt(), CodeEnum.FIAL_STATEMENT_INVALID.getValueStr());
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseData.failure(CodeEnum.ERROR_SYSTEM.getCodeInt(), CodeEnum.ERROR_SYSTEM.getValueStr());
@@ -506,9 +499,9 @@ public class PaymentStatementController extends BaseController {
 	}
 
 	/**
-	 * @return
-	 * @Description: 对账单明细
-	 * @Author: xgq
+	 * return
+	 * Description: 对账单明细
+	 * Author: xgq
 	 **/
 	@RequestMapping("/info")
 	@ResponseBody
@@ -536,7 +529,7 @@ public class PaymentStatementController extends BaseController {
 			File f = new File(propertyConfigurer.getProperty("settle.file.path") + statementConfig.getBussinessId() + "/" + fileName);
 			BufferedInputStream br = new BufferedInputStream(new FileInputStream(f));
 			byte[] buf = new byte[2048];
-			int len = 0;
+			int len;
 			response.reset();
 			response.setContentType("application/x-msdownload");
 			response.setHeader("Content-Disposition", "attachment; filename=" + toUTF8(f.getName()));
@@ -554,17 +547,17 @@ public class PaymentStatementController extends BaseController {
 	}
 
 	public String toUTF8(String s) {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < s.length(); i++) {
 			char c = s.charAt(i);
-			if (c >= 0 && c <= 255) {
+			if (c > 0 && c <= 255) {
 				sb.append(c);
 			} else {
 				byte[] b;
 				try {
 					b = Character.toString(c).getBytes("utf-8");
 				} catch (Exception ex) {
-					System.out.println(ex);
+					LOGGER.error(ex.getMessage());
 					b = new byte[0];
 				}
 				for (int j = 0; j < b.length; j++) {

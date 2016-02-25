@@ -35,6 +35,9 @@ public class OrderSettlementTopDto {
     /** 商品订单补贴金额（汇总） */
     private Double orderDiscountTotal;
 
+	/** 店铺名称 */
+	private String shopName;
+
 	/**
 	 * @return the incomeType
 	 */
@@ -131,5 +134,13 @@ public class OrderSettlementTopDto {
 	 */
 	public void setOrderDiscountTotal(Double orderDiscountTotal) {
 		this.orderDiscountTotal = orderDiscountTotal;
+	}
+
+	public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
 	}
 }

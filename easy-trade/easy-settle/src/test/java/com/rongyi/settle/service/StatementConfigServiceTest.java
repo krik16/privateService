@@ -8,18 +8,17 @@
 
 package com.rongyi.settle.service;
 
-import java.math.BigDecimal;
-import java.util.*;
-
+import com.rongyi.easy.settle.entity.StatementConfig;
+import com.rongyi.easy.settle.vo.StatementConfigVO;
 import com.rongyi.rss.settle.GoodPayService;
+import com.rongyi.settle.BaseTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Description;
 import org.springframework.test.annotation.Rollback;
 
-import com.rongyi.easy.settle.entity.StatementConfig;
-import com.rongyi.easy.settle.vo.StatementConfigVO;
-import com.rongyi.settle.BaseTest;
+import java.math.BigDecimal;
+import java.util.*;
 
 /**	
  * @Author:  柯军
@@ -122,5 +121,11 @@ public class StatementConfigServiceTest extends BaseTest{
 	public static void main(String[] args) {
 				BigDecimal bi =new BigDecimal(11.5 + "").divide(new BigDecimal(100)).setScale(2, BigDecimal.ROUND_HALF_UP);
 				System.err.println(bi.doubleValue());
+	}
+
+	@Test
+	public void testGetUserAccountByConfigId(){
+		List<Integer> accounts = statementConfigService.getUserIdByConfigId(93);
+		System.err.println(accounts);
 	}
 }

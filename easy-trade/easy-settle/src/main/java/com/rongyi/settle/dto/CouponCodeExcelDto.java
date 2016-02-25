@@ -23,7 +23,16 @@ public class CouponCodeExcelDto {
     private String buyerName;
     private String guideName;
     private String guidePhone;
-    
+    private String source;
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
     /** 使用积分金额 */
     private Double scoreAmount;
 
