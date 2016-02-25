@@ -186,7 +186,14 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private BigDecimal scoreAmount;//rebate_amount - 积分
 
     private List<OrderDetailFormEntity> detailOrderList;
+
     private OrderFormExtraEntity orderExtra;
+
+    //订单对应事件
+    private OrderEventEntity orderEvent;
+
+    //对单对应退款记录
+    private ApplicationFormEntity applicationForm;
 
     public Byte getIsAlert() {
         return isAlert;
@@ -794,6 +801,26 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     public void setScoreAmount(BigDecimal scoreAmount)
     {
         this.scoreAmount = scoreAmount;
+    }
+
+    public OrderEventEntity getOrderEvent()
+    {
+        return orderEvent;
+    }
+
+    public void setOrderEvent(OrderEventEntity orderEvent)
+    {
+        this.orderEvent = orderEvent;
+    }
+
+    public ApplicationFormEntity getApplicationForm()
+    {
+        return applicationForm;
+    }
+
+    public void setApplicationForm(ApplicationFormEntity applicationForm)
+    {
+        this.applicationForm = applicationForm;
     }
 
     @Override
