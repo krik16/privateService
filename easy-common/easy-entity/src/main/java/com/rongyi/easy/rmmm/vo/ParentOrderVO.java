@@ -96,7 +96,7 @@ public class ParentOrderVO implements Serializable {
 	private String expressBillId;// 物流单号ID
 
 	private String expressName;// 物流名称
-	private BigDecimal discountFee = BigDecimal.valueOf(0.0);// 商品折扣价
+	private BigDecimal discountFee = BigDecimal.valueOf(0.00);// 商品折扣价
 
 	private String score = "0";// 使用的颜值
 	private String scoreDeduction = "0";// 颜值抵扣金额
@@ -104,9 +104,11 @@ public class ParentOrderVO implements Serializable {
 
 	private String liveName;//直播名
 
-	private BigDecimal orderScoreDiscount = BigDecimal.valueOf(0.0);//购物车分摊的积分优惠
+	private BigDecimal orderScoreDiscount = BigDecimal.valueOf(0.00);//购物车分摊的积分优惠
+	private BigDecimal orderCouponDiscount = BigDecimal.valueOf(0.00);//购物车分摊的抵扣券优惠
+	private BigDecimal couponDiscount = BigDecimal.valueOf(0.00);//非购物车订单抵扣券抵扣金额
 
-	private BigDecimal orderRebateDiscount = BigDecimal.valueOf(0.0);//购物车分摊的抵扣券优惠
+	private BigDecimal orderRebateDiscount = BigDecimal.valueOf(0.00);//购物车分摊的抵扣券优惠
 
 	private Date createAt;//创建时间
 
@@ -132,6 +134,22 @@ public class ParentOrderVO implements Serializable {
 
 	public Byte getPayChannel() {
 		return payChannel;
+	}
+
+	public BigDecimal getOrderCouponDiscount() {
+		return orderCouponDiscount;
+	}
+
+	public void setOrderCouponDiscount(BigDecimal orderCouponDiscount) {
+		this.orderCouponDiscount = orderCouponDiscount;
+	}
+
+	public BigDecimal getCouponDiscount() {
+		return couponDiscount;
+	}
+
+	public void setCouponDiscount(BigDecimal couponDiscount) {
+		this.couponDiscount = couponDiscount;
 	}
 
 	public void setPayChannel(Byte payChannel) {
