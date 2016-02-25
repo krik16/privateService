@@ -70,4 +70,20 @@ public class ConfigShop implements Serializable{
     public void setRealAccountList(String realAccountList) {
         this.realAccountList = realAccountList;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ConfigShop that = (ConfigShop) o;
+
+        return !(shopId != null ? !shopId.equals(that.shopId) : that.shopId != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return shopId != null ? shopId.hashCode() : 0;
+    }
 }
