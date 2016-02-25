@@ -70,6 +70,16 @@ public class ActivityGoods implements Serializable {
     private Integer status;
 
     /**
+     * 发布商品的机构类型, 大运营[0] 店铺[1] 商场[2] 品牌[3]
+     */
+    private Integer identity;
+
+    /**
+     * 发布商品的机构类型id
+     */
+    private String identityId;
+
+    /**
      * 创建人
      */
     private String createUser;
@@ -224,6 +234,22 @@ public class ActivityGoods implements Serializable {
         this.status = status;
     }
 
+    public Integer getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(Integer identity) {
+        this.identity = identity;
+    }
+
+    public String getIdentityId() {
+        return identityId;
+    }
+
+    public void setIdentityId(String identityId) {
+        this.identityId = identityId;
+    }
+
     public String getCreateUser() {
         return createUser;
     }
@@ -302,6 +328,8 @@ public class ActivityGoods implements Serializable {
                 .append("joinStartAt", joinStartAt)
                 .append("joinEndAt", joinEndAt)
                 .append("status", status)
+                .append("identity", identity)
+                .append("identityId", identityId)
                 .append("createUser", createUser)
                 .append("updateUser", updateUser)
                 .append("createAt", createAt)
