@@ -21,6 +21,17 @@ public class IncomeDetailVo implements Serializable {
 	 * 总佣金收入（包含交易佣金，优惠券佣金，奖金佣金）
 	 */
 	private BigDecimal commissionIncome;
+	
+	/** 营业额（积累） */
+	private BigDecimal turnoverTotal;
+
+	public BigDecimal getTurnoverTotal() {
+		return turnoverTotal;
+	}
+
+	public void setTurnoverTotal(BigDecimal turnoverTotal) {
+		this.turnoverTotal = turnoverTotal;
+	}
 
 	/** 资金收入（积累） */
 	public BigDecimal getIncomeTotal() {
@@ -91,7 +102,8 @@ public class IncomeDetailVo implements Serializable {
 	@Override
 	public String toString() {
 		return "IncomeDetailVo [incomeTotal=" + incomeTotal + ", commissionTotal=" + commissionTotal + ", bonusTotal="
-				+ bonusTotal + ", drawTotal=" + drawTotal + ", tradeAmountTotal=" + tradeAmountTotal + "]";
+				+ bonusTotal + ", drawTotal=" + drawTotal + ", tradeAmountTotal=" + tradeAmountTotal + ", commissionIncome="
+				+ commissionIncome + ", turnoverTotal=" + turnoverTotal + "]";
 	}
 
 }
