@@ -9,8 +9,8 @@ public class AdvertParam implements Serializable {
 	private static final long serialVersionUID = -8496462108476346037L;
 	private String id;//广告id 新增不需要，修改需要
 	private String groupId;//广告组id
-	private int currentPage;//当前页
-	private int pageSize;//总页数
+	private int currentPage = 0;//当前页
+	private int pageSize =0;//总页数
 	private int startIndex = 0;
 	private String position;//广告位置 1全屏 2banner
 	private String adTime;//播放时长
@@ -188,5 +188,21 @@ public class AdvertParam implements Serializable {
 	 */
 	public void setReason(String reason) {
 		this.reason = reason;
+	}
+	/** 
+	* @Title: toString 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param @return    设定文件 
+	* @author shaozhou
+	* @date 2016年2月24日 上午10:25:26
+	* @throws 
+	*/
+	@Override
+	public String toString() {
+		return "AdvertParam [id=" + id + ", groupId=" + groupId + ", currentPage=" + currentPage + ", pageSize="
+				+ pageSize + ", startIndex=" + startIndex + ", position=" + position + ", adTime=" + adTime
+				+ ", module_type=" + module_type + ", content=" + content + ", publish_start=" + publish_start
+				+ ", publish_end=" + publish_end + ", mallIds=" + mallIds + ", agree=" + agree + ", reason=" + reason
+				+ "]";
 	}
 }

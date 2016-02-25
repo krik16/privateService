@@ -11,13 +11,13 @@ public class AdvertGroupVo {
 	private Long create_at;
 	private Long update_by;
 	private Long update_at;
-	private Integer waitCheckCount;//待审核数量
-	private Integer disAgreeCount;//未通过数量
-	private Integer waitPublishCount;//待发布数量
-	private Integer processingCount;//进行中数量
-	private Integer endCount;//已结束数量
-	private Integer offlineCount;//已下线数量
-	private Integer deleteCount;//已删除数量
+	private Integer waitCheckCount = 0;//待审核数量
+	private Integer disAgreeCount = 0;//未通过数量
+	private Integer waitPublishCount = 0;//待发布数量
+	private Integer processingCount = 0;//进行中数量
+	private Integer endCount = 0;//已结束数量
+	private Integer offlineCount = 0;//已下线数量
+	private Integer deleteCount = 0;//已删除数量
 	private List<AdvertVo> advertVos;
 	/**
 	 * @return the id

@@ -12,4 +12,6 @@ public interface AdvertGroupService {
 	public List<AdvertGroupVo> searchGroups(AdvertGroupParam advertGroupParam);
 	
 	public AdvertGroupVo info(Integer iidd);
+
+	public int count(AdvertGroupParam advertGroupParam);
 }
