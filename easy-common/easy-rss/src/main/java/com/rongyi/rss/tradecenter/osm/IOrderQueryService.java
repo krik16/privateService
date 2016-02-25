@@ -3,9 +3,6 @@
  */
 package com.rongyi.rss.tradecenter.osm;
 
-import java.util.List;
-import java.util.Map;
-
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.osm.entity.OrderDetailFormEntity;
 import com.rongyi.easy.osm.entity.OrderEventEntity;
@@ -17,6 +14,10 @@ import com.rongyi.easy.rmmm.param.MyOrderParam;
 import com.rongyi.easy.rmmm.param.TransactionDetailParam;
 import com.rongyi.easy.rmmm.vo.*;
 
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Copyright (C),上海容易网电子商务有限公司
  * author chenjun
@@ -27,6 +28,13 @@ import com.rongyi.easy.rmmm.vo.*;
  * chenjun            2015年10月12日               1.0              创建文件
  */
 public interface IOrderQueryService {
+
+	/**
+	 * 传入查询起始时间，统计新增收入与待处理订单数量
+	 * @param beginDate: 查询起始时间
+	 * @return
+	 */
+	int getSalerToProcess(Date beginDate);
 	
 	/**
 	 * 我的订单列表

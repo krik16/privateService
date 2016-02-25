@@ -70,6 +70,10 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 
 	private Integer from = 0; // 从0开始 偏移量，商品聚合分页使用
 
+	private String zoneId;
+
+	private String commodityCode;
+
 	public Integer getFrom() {
 		return from;
 	}
@@ -238,6 +242,22 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 		this.systemNumber = systemNumber;
 	}
 
+	public String getZoneId() {
+		return zoneId;
+	}
+
+	public void setZoneId(String zoneId) {
+		this.zoneId = zoneId;
+	}
+
+	public String getCommodityCode() {
+		return commodityCode;
+	}
+
+	public void setCommodityCode(String commodityCode) {
+		this.commodityCode = commodityCode;
+	}
+
 	@Override
 	public String toString() {
 		return "CommoditySearchParam{" +
@@ -256,6 +276,8 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 				", flashSaleId='" + flashSaleId + '\'' +
 				", systemNumber='" + systemNumber + '\'' +
 				", from='" + from + '\'' +
+				", zoneId='" + zoneId + '\'' +
+				", commodityCode='" + commodityCode + '\'' +
 				'}';
 	}
 }
