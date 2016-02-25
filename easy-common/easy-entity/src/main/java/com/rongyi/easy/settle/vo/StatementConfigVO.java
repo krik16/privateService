@@ -109,9 +109,19 @@ public class StatementConfigVO extends StatementConfig{
 	private String generateTime;
 
 	/**
+	 * 商户关联地址
+	 */
+	private String bussinessLinkAddress;
+
+	/**
 	 * 关联店铺
 	 */
 	private List<ConfigShopVO> configShops;
+
+	/**
+	 * 审核意见（含失败原因）
+	 */
+	private String verifyDesc;
     
 	public Integer getConfigId() {
 		return configId;
@@ -257,5 +267,46 @@ public class StatementConfigVO extends StatementConfig{
 
 	public void setConfigShops(List<ConfigShopVO> configShops) {
 		this.configShops = configShops;
+	}
+
+	public String getBussinessLinkAddress() {
+		return bussinessLinkAddress;
+	}
+
+	public void setBussinessLinkAddress(String bussinessLinkAddress) {
+		this.bussinessLinkAddress = bussinessLinkAddress;
+	}
+
+	public String getVerifyDesc() {
+		return verifyDesc;
+	}
+
+	public void setVerifyDesc(String verifyDesc) {
+		this.verifyDesc = verifyDesc;
+	}
+
+	@Override
+	public String toString() {
+		return "StatementConfigVO{" +
+				"configId=" + configId +
+				", payAccount='" + payAccount + '\'' +
+				", payName='" + payName + '\'' +
+				", blankName='" + blankName + '\'' +
+				", blankAddress='" + blankAddress + '\'' +
+				", bussinessAddress='" + bussinessAddress + '\'' +
+				", linkShopOp=" + linkShopOp +
+				", linkRole=" + linkRole +
+				", linkType=" + linkType +
+				", bussinessEmail='" + bussinessEmail + '\'' +
+				", bussinessAccount='" + bussinessAccount + '\'' +
+				", contactName='" + contactName + '\'' +
+				", contactPhone='" + contactPhone + '\'' +
+				", contactWeixin='" + contactWeixin + '\'' +
+				", contactQq='" + contactQq + '\'' +
+				", generateTime='" + generateTime + '\'' +
+				", bussinessLinkAddress='" + bussinessLinkAddress + '\'' +
+				", configShops=" + configShops +
+				", verifyDesc='" + verifyDesc + '\'' +
+				'}';
 	}
 }
