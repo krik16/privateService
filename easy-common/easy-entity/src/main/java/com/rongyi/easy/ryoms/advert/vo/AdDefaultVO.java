@@ -6,7 +6,7 @@ package com.rongyi.easy.ryoms.advert.vo;
  * @author wangjh
  * @date 2016年2月15日 下午4:37:33
  */
-public class MaterialVO {
+public class AdDefaultVO {
 	public int getSeq() {
 		return seq;
 	}

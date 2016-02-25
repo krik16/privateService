@@ -1,5 +1,4 @@
 /**   
-* @Title: MaterialService.java 
 * @Package com.rongyi.rss.ryoms.advert 
 * @Description: 素材管理接口
 * @author wangjh
@@ -10,17 +9,16 @@ package com.rongyi.rss.ryoms.advert;
 
 import java.util.List;
 
-import com.rongyi.easy.ryoms.advert.entity.MaterialEntity;
-import com.rongyi.easy.ryoms.advert.param.MaterialSearchParam;
-import com.rongyi.easy.ryoms.advert.vo.MaterialVO;
+import com.rongyi.easy.ryoms.advert.entity.AdDefaultEntity;
+import com.rongyi.easy.ryoms.advert.param.AdDefaultSearchParam;
+import com.rongyi.easy.ryoms.advert.vo.AdDefaultVO;
 
 /**
- * @ClassName: MaterialService
  * @Description: 素材管理接口
  * @author wangjh
  * @date 2016年2月15日 下午4:38:09
  */
-public interface MaterialService {
+public interface AdDefaultService {
 
 	/**
 	 * 素材列表
@@ -28,7 +26,7 @@ public interface MaterialService {
 	 * @param param
 	 * @return
 	 */
-	public List<MaterialVO> list(MaterialSearchParam param);
+	public List<AdDefaultVO> list(AdDefaultSearchParam param);
 
 	/**
 	 * 新增素材
@@ -36,7 +34,7 @@ public interface MaterialService {
 	 * @param entity
 	 * @return
 	 */
-	public int add(MaterialEntity entity);
+	public int add(AdDefaultEntity entity);
 
 	/**
 	 * 修改素材
@@ -44,7 +42,7 @@ public interface MaterialService {
 	 * @param entity
 	 * @return
 	 */
-	public int save(MaterialEntity entity);
+	public int save(AdDefaultEntity entity);
 
 	/**
 	 * 素材详情
@@ -52,7 +50,7 @@ public interface MaterialService {
 	 * @param materialId
 	 * @return
 	 */
-	public MaterialVO info(int materialId);
+	public AdDefaultVO info(int materialId);
 
 	/**
 	 * 删除素材
