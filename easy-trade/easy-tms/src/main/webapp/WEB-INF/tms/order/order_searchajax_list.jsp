@@ -14,7 +14,7 @@
 			<td width="9%">商场</td>
 			<td width="6%">店铺</td>
 			<td width="6%">订单金额（元）</td>
-			<td width="7%">平台促销券（元）</td>
+			<td width="7%">平台卡券（元）</td>
 			<td width="6%">积分（元）</td>
 			<td width="6%">支付金额（元）</td>
 			<td width="6%">订单状态</td>

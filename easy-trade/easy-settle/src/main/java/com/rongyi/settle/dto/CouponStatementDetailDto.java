@@ -1,9 +1,9 @@
 package com.rongyi.settle.dto;
 
+import com.rongyi.settle.util.AmountUtil;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import com.rongyi.settle.util.AmountUtil;
 
 /**
  * Created by xgq on 2015/9/28.
@@ -31,6 +31,15 @@ public class CouponStatementDetailDto {
     private String userName;
     private String guidePhone;
     private String guideName;
+    private String source;
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
 
     public String getOrderNo() {
         return orderNo;
@@ -230,6 +239,7 @@ public class CouponStatementDetailDto {
         dto.setBuyerName(getUserName());
         dto.setGuideName(getGuideName());
         dto.setGuidePhone(getGuidePhone());
+        dto.setSource(getSource());
         return dto;
     }
 }

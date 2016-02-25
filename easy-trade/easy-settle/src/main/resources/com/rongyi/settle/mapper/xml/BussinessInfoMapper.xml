@@ -130,6 +130,54 @@
 		</set>
 		where id = #{id,jdbcType=INTEGER}
 	</update>
+	<update id="updateByConfigId" parameterType="com.rongyi.easy.settle.entity.BussinessInfo">
+		update biz_info
+		<set>
+			<if test="configId != null">
+				config_id = #{configId,jdbcType=INTEGER},
+			</if>
+			<if test="payAccount != null">
+				pay_account = #{payAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="payName != null">
+				pay_name = #{payName,jdbcType=VARCHAR},
+			</if>
+			<if test="blankName != null">
+				blank_name = #{blankName,jdbcType=VARCHAR},
+			</if>
+			<if test="blankAddress != null">
+				blank_address = #{blankAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="bussinessAddress != null">
+				biz_address = #{bussinessAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="bussinessEmail != null">
+				biz_email = #{bussinessEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="bussinessAccount != null">
+				biz_account = #{bussinessAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="contactName != null">
+				contact_name = #{contactName,jdbcType=VARCHAR},
+			</if>
+			<if test="contactPhone != null">
+				contact_phone = #{contactPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="contactWeixin != null">
+				contact_weixin = #{contactWeixin,jdbcType=VARCHAR},
+			</if>
+			<if test="contactQq != null">
+				contact_qq = #{contactQq,jdbcType=VARCHAR},
+			</if>
+			<if test="createAt != null">
+				create_at = #{createAt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isDelete != null">
+				is_delete = #{isDelete,jdbcType=TINYINT},
+			</if>
+		</set>
+		where config_id = #{configId,jdbcType=INTEGER}
+	</update>
 		<select id="selectByConfigId" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
 		select

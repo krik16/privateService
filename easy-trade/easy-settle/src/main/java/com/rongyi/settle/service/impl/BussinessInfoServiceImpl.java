@@ -46,4 +46,9 @@ public class BussinessInfoServiceImpl extends BaseServiceImpl implements Bussine
 		return this.getBaseDao().selectOneBySql(NAMESPACE+".selectByConfigId",map);
 	}
 
+	@Override
+	public void updateByConfigId(BussinessInfo bussinessInfo) {
+		this.getBaseDao().updateBySql(NAMESPACE+".updateByConfigId",bussinessInfo);
+	}
+
 }

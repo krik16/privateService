@@ -229,7 +229,8 @@ public class OrderManagerController extends BaseController {
 			}
 			ParentOrderVO orderDetailVo = iOrderQueryService.searchRYOrderDetail(Integer.valueOf(orderId));
 			List<SonOrderVO> sonOrderList = orderDetailVo.getSonOrderList();
-			BigDecimal discountTotal = new BigDecimal("0.00");//总红包（抵扣）
+			BigDecimal discountTotal = new BigDecimal("0.00");//总卡券信息（包含抵扣券）
+			discountTotal = discountTotal.add(orderDetailVo.getCouponDiscount()).add(orderDetailVo.getOrderCouponDiscount());//抵扣信息
 			BigDecimal commidityTotalPice = new BigDecimal("0.00");//商品总价
 			if (!CollectionUtils.isEmpty(sonOrderList)) {
 				//目前一个订单只会有一种商品，直播也是一个
@@ -241,13 +242,8 @@ public class OrderManagerController extends BaseController {
 						MMUserCouponVO userCouponVO = msUserCouponService.getUserCouponByCouponCode(sonOrderVo
 								.getCouponCode());
 						if (userCouponVO != null) {
-							if (userCouponVO.getDiscount().compareTo(sonOrderVo.getRealAmount()) == 1) {
-								userCouponVO.setRealDiscount(sonOrderVo.getRealAmount());
-								discountTotal = discountTotal.add(sonOrderVo.getRealAmount());
-							}else{
-								userCouponVO.setRealDiscount(userCouponVO.getDiscount());
-								discountTotal = discountTotal.add(userCouponVO.getDiscount());
-							}
+							userCouponVO.setRealDiscount(sonOrderVo.getRealAmount());
+							discountTotal = discountTotal.add(sonOrderVo.getHbDiscount());
 						}
 					}
 				}
@@ -263,7 +259,7 @@ public class OrderManagerController extends BaseController {
 			}
 			model.addAttribute("order", orderDetailVo);
 //			discountTotal.setScale(2,4);
-			model.addAttribute("discountTotal", discountTotal);
+			model.addAttribute("discountTotal", discountTotal.setScale(2, 4));
 			model.addAttribute("type", type);
 			model.addAttribute("commidityTotalPice", commidityTotalPice);
 		} catch (Exception e) {

@@ -43,4 +43,6 @@ public interface BussinessInfoService {
 	 * @datetime:2015年9月22日下午4:48:50
 	 **/
 	BussinessInfo selectByConfigId(Integer configId);
+
+	void updateByConfigId(BussinessInfo bussinessInfo);
 }
