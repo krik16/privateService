@@ -71,6 +71,17 @@ public class OrderSettlementDetailDto {
 	/** 买家手机号 */
 	private String buyerPhone;
 
+	/** 订单来源 */
+	private String orderSource;
+
+	public String getOrderSource() {
+		return orderSource;
+	}
+
+	public void setOrderSource(String orderSource) {
+		this.orderSource = orderSource;
+	}
+
 	/**
 	 * @return the createAt
 	 */
@@ -367,7 +378,7 @@ public class OrderSettlementDetailDto {
 			vo.setReceiptTime(dateFormat.format(getReceiptTime()));
 		}
 		vo.setBuyerPhone(getBuyerPhone());
-
+		vo.setOrderSource(getOrderSource());
 		return vo;
 	}
 }

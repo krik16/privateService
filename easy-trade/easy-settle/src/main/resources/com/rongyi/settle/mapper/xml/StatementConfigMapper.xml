@@ -20,6 +20,8 @@
                 jdbcType="TIMESTAMP"/>
         <result column="cycle_end_time" property="cycleEndTime"
                 jdbcType="TIMESTAMP"/>
+        <result column="cycle_day" property="cycleDay" jdbcType="TINYINT" />
+        <result column="cycle_regular_day" property="cycleRegularDay" jdbcType="VARCHAR" />
         <result column="is_loop" property="isLoop" jdbcType="TINYINT"/>
         <result column="verify_type" property="verifyType" jdbcType="TINYINT"/>
         <result column="gen_header_time" property="generateHeaderTime"
@@ -78,7 +80,46 @@
         pbc.is_delete,
         pbc.create_by,bi.pay_account,pbc.gen_hm_time as
         generate_time,bi.pay_name,bi.blank_name,bi.blank_address,bi.biz_address,bi.biz_email,
-        bi.biz_account,bi.contact_name,bi.contact_phone,bi.contact_weixin,bi.contact_qq
+        bi.biz_account,bi.contact_name,bi.contact_phone,bi.contact_weixin,bi.contact_qq,
+        pbc.cycle_day, pbc.cycle_regular_day
+    </sql>
+    
+    <sql id="Config_Column_List">
+	    id
+		,rule_code
+		,cooperate_type
+		,biz_id
+		,biz_type
+		,biz_code
+		,biz_name
+		,biz_real_address
+		,link_type
+		,link_shop_op
+		,link_role
+		,count_cycle
+		,cycle_start_time
+		,cycle_end_time
+		,cycle_day
+		,cycle_regular_day
+		,is_loop
+		,verify_type
+		,gen_header_time
+		,gen_hm_time
+		,send_time
+		,datum_type
+		,pay_mode
+		,regular_day
+		,roll_day
+		,roll_type
+		,effect_start_time
+		,effect_end_time
+		,pay_channel
+		,contract_no
+		,link_rule_code
+		,status
+		,create_at
+		,is_delete
+		,create_by
     </sql>
 
     <sql id="Base_list_where_clause">
@@ -158,7 +199,9 @@
         <if test="isDelete != null">
             is_delete,
         </if>
-        create_by
+        create_by,
+        cycle_day,
+        cycle_regular_day
         )
         values (#{ruleCode,jdbcType=VARCHAR},
         #{cooperateType,jdbcType=TINYINT},
@@ -190,7 +233,9 @@
         <if test="isDelete != null">
             is_delete = #{isDelete,jdbcType=TINYINT},
         </if>
-        #{createBy,jdbcType=VARCHAR}
+        #{createBy,jdbcType=VARCHAR},
+        #{cycleDay,jdbcType=TINYINT},
+        #{cycleRegularDay,jdbcType=VARCHAR}
         )
     </insert>
 
@@ -292,6 +337,12 @@
             <if test="createBy != null">
                 create_by = #{createBy,jdbcType=VARCHAR},
             </if>
+            <if test="cycleDay != null">
+                cycle_day = #{cycleDay,jdbcType=TINYINT},
+            </if>
+            <if test="cycleRegularDay != null">
+                cycle_regular_day = #{cycleRegularDay,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
@@ -322,9 +373,9 @@
         select
         count(1)
         from  payment_bill_config pbc
-        join biz_info bi on pbc.id=bi.config_id
-        join config_shop  sc on pbc.id=sc.config_id
-        join ry_rmmm.shop_info si on sc.shop_id=si.shop_mid
+        left join biz_info bi on pbc.id=bi.config_id
+        left join config_shop  sc on pbc.id=sc.config_id
+        left join ry_rmmm.shop_info si on sc.shop_id=si.shop_mid
         <where>
             <if test="cooperateType!=null">
                 and pbc.cooperate_type=#{cooperateType}
@@ -353,13 +404,23 @@
                 and si.id=#{shopMysqlId}
             </if>
             <if test="shopId!=null">
-                and si.shop_mid=#{shopId}
+                and sc.shop_id=#{shopId}
             </if>
             <if test="userId!=null">
                 and sc.real_user_list like concat('%', #{userId}, '%')
             </if>
             <if test="nowTime!=null">
                 and #{nowTime} > pbc.effect_start_time and pbc.effect_end_time > #{nowTime}
+            </if>
+            <!-- update exclude config -->
+            <if test="excludeId!=null and excludeId!=''">
+                and pbc.id &lt;&gt; #{excludeId}
+            </if>
+
+            <!--检查配置中店铺ID是否已存在-->
+            <if test="linkShopIds!=null and linkShopIds.size()>0 ">
+                and sc.shop_id in
+                <foreach collection="linkShopIds" item="item" open="(" separator="," close=")">#{item}</foreach>
             </if>
         </where>
     </select>
@@ -377,14 +438,35 @@
 
     <select id="selectForSchedule" parameterType="java.util.Map"
             resultMap="BaseResultMap">
-        select
-        *
-        from payment_bill_config
-        where `status`=1 and
-        is_delete=0 AND
-        #{currentTime,jdbcType=TIMESTAMP} BETWEEN
-        effect_start_time AND
-        effect_end_time
+        SELECT
+      <include refid="Config_Column_List" />
+        FROM payment_bill_config
+        WHERE `status`=1 
+        	AND is_delete=0 
+        	AND #{currentTime,jdbcType=TIMESTAMP} BETWEEN effect_start_time AND effect_end_time
+    </select>
+
+    <select id="selectForScheduleSpacing" parameterType="java.util.Map"
+            resultMap="BaseResultMap">
+        SELECT
+      <include refid="Config_Column_List" />
+        FROM payment_bill_config
+        WHERE `status`=1 
+        	AND is_delete=0
+            AND count_cycle = #{cycleType,jdbcType=TINYINT}
+        	AND DATE_ADD(#{currentTime,jdbcType=TIMESTAMP}, INTERVAL -IFNULL(cycle_day, 1) DAY) BETWEEN effect_start_time AND effect_end_time
+    </select>
+
+    <select id="selectForScheduleJumping" parameterType="java.util.Map"
+            resultMap="BaseResultMap">
+        SELECT
+      <include refid="Config_Column_List" />
+        FROM payment_bill_config
+        WHERE `status`=1 
+        	AND is_delete=0
+            AND count_cycle = #{cycleType,jdbcType=TINYINT}
+            AND DATEDIFF(#{currentTime,jdbcType=TIMESTAMP}, effect_end_time) &lt;= 31
+            AND DATEDIFF(#{currentTime,jdbcType=TIMESTAMP}, effect_start_time) &gt;= 0
     </select>
 
     <update id="updateStatusByIds" parameterType="map">

@@ -18,4 +18,8 @@ public interface ConfigShopService {
     List<ConfigShopVO> getConfigShopsPage(Map<String, Object> paramsMap);
 
     int selectConfigShopsPageCount(Map<String, Object> paramsMap);
+
+    void update(ConfigShop configShop);
+
+    boolean deleteConfigShopByConfigId(Integer configId);
 }

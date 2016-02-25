@@ -40,4 +40,16 @@ public class ConfigShopServiceImpl implements ConfigShopService{
     public int selectConfigShopsPageCount(Map<String, Object> paramsMap) {
         return mapper.selectConfigShopsPageCount(paramsMap);
     }
+
+    @Override
+    public void update(ConfigShop configShop) {
+         mapper.updateByPrimaryKeySelective(configShop);
+    }
+
+    @Override
+    public boolean deleteConfigShopByConfigId(Integer configId) {
+        if (configId==null)
+            return false;
+        return mapper.deleteConfigShopByConfigId(configId)>0;
+    }
 }

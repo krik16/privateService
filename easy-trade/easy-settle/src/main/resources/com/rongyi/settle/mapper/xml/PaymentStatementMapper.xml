@@ -202,6 +202,10 @@
 			</foreach>
 		</if>
 
+		<if test="predictPayTimeBegin !=null and predictPayTimeBegin != ''">
+			and pb.predict_pay_time &lt; #{predictPayTimeBegin}
+		</if>
+
 		<if test="status != null and status != ''">
 			and pb.status = #{status,jdbcType=TINYINT}
 		</if>
@@ -310,6 +314,23 @@
 		</if>
 	</select>
 
+	<update id="updateStatusByIds" parameterType="map">
+		update payment_bill
+		set status=#{status, jdbcType=INTEGER},
+		status_update_time = #{statusUpdateTime,jdbcType=TIMESTAMP}
+		<if test="predictPayTime != null and predictPayTime != ''">
+			,predict_pay_time = #{predictPayTime, jdbcType=TIMESTAMP}
+		</if>
+		<where>
+			<if test="ids != null">
+				AND id in
+				<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</update>
+
 	<select id="selectPageListForMerchant" resultMap="DtoResultMap" parameterType="java.util.Map">
 		select * from (select
 		pb.id, pb.type, pb.batch_no, pb.cycle_start_time,
@@ -344,6 +365,7 @@
 			and pb.cycle_start_time &gt;=
 			#{createAtStart,jdbcType=TIMESTAMP}
 		</if>
+
 		<if test="createAtEnd != null and createAtEnd != ''">
 			and pb.cycle_start_time &lt;=
 			#{createAtEnd,jdbcType=TIMESTAMP}
@@ -417,20 +439,6 @@
 		cycle_end_time = #{cycleEndTime,jdbcType=TIMESTAMP}
 	</select>
 
-	<update id="updateStatusByIds" parameterType="map">
-		update payment_bill
-		set status=#{status, jdbcType=INTEGER},
-		status_update_time = #{statusUpdateTime,jdbcType=TIMESTAMP}
-		<where>
-			<if test="ids != null">
-				AND id in
-				<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
-					#{item}
-				</foreach>
-			</if>
-		</where>
-	</update>
-
 	<update id="cancel" parameterType="java.lang.Integer">
 		update payment_bill set
 		status=8 where id=#{id, jdbcType=INTEGER}
@@ -478,6 +486,7 @@
 		<result column="user_name" property="userName" jdbcType="VARCHAR" />
 		<result column="guide_name" property="guideName" jdbcType="VARCHAR" />
 		<result column="guide_phone" property="guidePhone" jdbcType="VARCHAR" />
+		<result column="source" property="source" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<select id="selectForStatementDetails" parameterType="java.util.Map" resultMap="StatementDetailMap">
@@ -541,7 +550,8 @@
 			US.shop_id,
 			US.mall_id,
 			SI.shop_name,
-			MC.mall_name
+			MC.mall_name,
+			CASE tor.source WHEN 0 THEN '容易逛' WHEN 1 THEN '微网站' WHEN 2 THEN '终端机' ELSE '其他' END AS source
 		FROM
 			ry_trade.trade_user_code tuc
 				JOIN ry_trade.trade_order tor ON tuc.order_id = tor.id
@@ -598,7 +608,8 @@
 			US.shop_id,
 			US.mall_id,
 			SI.shop_name,
-			MC.mall_name
+			MC.mall_name,
+		 	CASE tor.source WHEN 0 THEN '容易逛' WHEN 1 THEN '微网站' WHEN 2 THEN '终端机' ELSE '其他' END AS source
 		FROM
 			ry_trade.trade_user_code tuc
 				JOIN ry_trade.trade_order tor ON tuc.order_id = tor.id
@@ -615,6 +626,7 @@
 	</select>
 
 	<resultMap id="CouponExcelDtoMap" type="com.rongyi.settle.dto.CouponExcelDto">
+		<result column="shop_name" property="shopName" jdbcType="VARCHAR" />
 		<result column="coupon_id" property="couponId" jdbcType="VARCHAR" />
 		<result column="title" property="couponName" jdbcType="VARCHAR" />
 		<result column="pay_channel" property="revenueType" jdbcType="VARCHAR" />
@@ -627,6 +639,7 @@
 	</resultMap>
 
 	<resultMap id="OrderTopDtoMap" type="com.rongyi.settle.dto.OrderSettlementTopDto">
+		<result column="shop_name" property="shopName" jdbcType="VARCHAR" />
 		<result column="income_type" property="incomeType" jdbcType="VARCHAR" />
 		<result column="order_type" property="orderType" jdbcType="VARCHAR" />
 		<result column="order_count" property="orderCount" jdbcType="INTEGER" />
@@ -655,11 +668,13 @@
 		<result column="delivery_time" property="deliveryTime" jdbcType="TIMESTAMP" />
 		<result column="receipt_time" property="receiptTime" jdbcType="TIMESTAMP" />
 		<result column="buyer_phone" property="buyerPhone" jdbcType="VARCHAR" />
+		<result column="order_source" property="orderSource" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<select id="selectForCouponExcelDto" parameterType="java.util.Map" resultMap="CouponExcelDtoMap">
 		SELECT SQL_NO_CACHE
-			UC.coupon_id AS coupon_id
+			SI.shop_name
+			,UC.coupon_id AS coupon_id
 			,IFNULL(UC.title, '其他') AS title
 			,'收入' AS pay_channel
 			,COUNT(1) AS coupon_count
@@ -684,12 +699,13 @@
 				#{startTime,jdbcType=TIMESTAMP} AND #{endTime,jdbcType=TIMESTAMP}
 			AND
 				UC.shop_id = #{shopId,jdbcType=VARCHAR}
-		GROUP BY UC.coupon_id
+		GROUP BY SI.id,UC.coupon_id
 	</select>
 	
 	<select id="selectForCouponExcelDtoByUsers" parameterType="java.util.Map" resultMap="CouponExcelDtoMap">
 		SELECT SQL_NO_CACHE
-			UC.coupon_id AS coupon_id
+			SI.shop_name
+			,UC.coupon_id AS coupon_id
 			,IFNULL(UC.title, '其他') AS title
 			,'收入' AS pay_channel
 			,COUNT(1) AS coupon_count
@@ -717,7 +733,7 @@
 				<foreach item="item" index="index" collection="userIds" open="("  separator="," close=")">  
 	            	#{item}  
 	        	</foreach>  
-		GROUP BY UC.coupon_id
+		GROUP BY SI.id,UC.coupon_id
 	</select>
 
 	<select id="selectForConfigShopsById" parameterType="java.util.Map" resultType="String">
@@ -731,7 +747,8 @@
 
 	<select id="selectForCouponExcelDtoByMid" parameterType="java.util.Map" resultMap="CouponExcelDtoMap">
 		SELECT SQL_NO_CACHE
-			UC.coupon_id AS coupon_id
+			SI.shop_name
+			,UC.coupon_id AS coupon_id
 			,IFNULL(UC.title, '其他') AS title
 			,'收入' AS pay_channel
 			,COUNT(1) AS coupon_count
@@ -765,58 +782,71 @@
 			<if test="shopId != null">
 				AND SI.shop_mid = #{shopId,jdbcType=VARCHAR}
 			</if>
-		GROUP BY UC.coupon_id
+		GROUP BY SI.id,UC.coupon_id
 	</select>
 
 	<select id="selectForOrderTopDto" parameterType="java.util.Map" resultMap="OrderTopDtoMap">
-		SELECT SQL_NO_CACHE
-			'收入' AS income_type,
-			'商品订单' AS order_type,
-		    COUNT(1) AS order_count,
-			SUM(ODF.unit_price * quantity - OF.disconnt_fee + express_fee) AS total_amount,
-			SUM(OF.score_discount) AS score_amount,
-			SUM(OF.coupon_discount + ODF.coupon_discount) AS hb_amount,
-			0 AS discount_amount
+		SELECT
+		shop_name,
+		SUM(total_amount) AS total_amount,
+		'收入' AS income_type,
+		'商品订单' AS order_type,
+		COUNT(OFID) AS order_count,
+		SUM(total_amount) AS total_amount,
+		SUM(score_amount) AS score_amount,
+		SUM(hb_amount) AS hb_amount,
+		0 AS discount_amount
+		FROM (
+		SELECT
+		SI.id AS SID,
+		SI.shop_name,
+		OF.id AS OFID,
+		SUM(ODF.unit_price * quantity) - OF.disconnt_fee + OF.express_fee AS total_amount,
+		SUM(OF.score_discount + OF.order_score_discount) AS score_amount,
+		SUM(OF.coupon_discount + OF.order_coupon_discount + ODF.coupon_discount) AS hb_amount
 		FROM
-		    ry_osm.order_form OF
-		        INNER JOIN
-		    ry_osm.order_event H3 ON OF.order_no = H3.order_no and H3.`status` = 3
-		        LEFT JOIN
-		    ry_osm.order_detail_form ODF ON OF.order_no = ODF.order_no
-		        LEFT JOIN
-		    ry_rmmm.user_shop US ON OF.guide_id = US.user_id
-		        LEFT JOIN
-		    ry_rmmm.mall_cooperate MC ON US.mall_id = MC.id
-		        LEFT JOIN
-		    ry_rmmm.shop_info SI ON US.shop_id = SI.id
-		    	LEFT JOIN
-		    ry_rmmm.brand_info AS BI ON BI.id = SI.brand_id	
+		ry_osm.order_form OF
+		INNER JOIN
+		ry_osm.order_event H3 ON OF.order_no = H3.order_no and H3.`status` = 3
+		LEFT JOIN
+		ry_osm.order_detail_form ODF ON OF.order_no = ODF.order_no
+		LEFT JOIN
+		ry_rmmm.user_shop US ON OF.guide_id = US.user_id
+		LEFT JOIN
+		ry_rmmm.mall_cooperate MC ON US.mall_id = MC.id
+		LEFT JOIN
+		ry_rmmm.shop_info SI ON US.shop_id = SI.id
+		LEFT JOIN
+		ry_rmmm.brand_info AS BI ON BI.id = SI.brand_id
 		WHERE
-		    H3.create_at BETWEEN #{startTime,jdbcType=TIMESTAMP} AND #{endTime,jdbcType=TIMESTAMP}
-			AND OF.`status` &gt; 2
-			AND OF.is_pay_va = 0
-			<if test="brandId != null">
-				AND BI.brand_mid = #{brandId,jdbcType=VARCHAR}
-			</if>
-			<if test="mallId != null">
-				AND MC.mall_mid = #{mallId,jdbcType=VARCHAR}
-			</if>
-			<if test="shopId != null">
-				AND SI.shop_mid = #{shopId,jdbcType=VARCHAR}
-			</if>
-			<if test="userIds != null">
-				AND OF.guide_id IN
-				<foreach item="item" index="index" collection="userIds" open="("  separator="," close=")">  
-	            	#{item}  
-	        	</foreach>  
-			</if>
+		H3.create_at BETWEEN #{startTime,jdbcType=TIMESTAMP} AND #{endTime,jdbcType=TIMESTAMP}
+		AND OF.`status` &gt; 2
+		AND OF.is_pay_va = 0
+		<if test="brandId != null">
+			AND BI.brand_mid = #{brandId,jdbcType=VARCHAR}
+		</if>
+		<if test="mallId != null">
+			AND MC.mall_mid = #{mallId,jdbcType=VARCHAR}
+		</if>
+		<if test="shopId != null">
+			AND SI.shop_mid = #{shopId,jdbcType=VARCHAR}
+		</if>
+		<if test="userIds != null">
+			AND OF.guide_id IN
+			<foreach item="item" index="index" collection="userIds" open="("  separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		GROUP BY OF.id
+		) AS OFTEMP
+		GROUP BY OFTEMP.SID
 	</select>
 	
 	<select id="selectForOrderDetailDto" parameterType="java.util.Map" resultMap="OrderDetailDtoMap">
 		SELECT SQL_NO_CACHE
 			A.create_at,
-			A.coupon_discount + SUM(B.coupon_discount) AS coupon_discount,
-			A.score_discount,
+			A.coupon_discount + A.order_coupon_discount + SUM(B.coupon_discount) AS coupon_discount,
+			A.score_discount + A.order_score_discount AS score_discount,
 			CASE WHEN A.`status` = 2 THEN '待发货' WHEN A.`status` = 3 THEN '已发货' WHEN A.`status` = 4 THEN '确认收货'
 				WHEN (A.`status` > 4 AND H3.id IS NOT NULL) THEN '已完成'
 				WHEN (A.`status` > 4 AND H3.id IS NULL AND H4.id IS NULL) THEN'退款'
@@ -824,17 +854,18 @@
 		 	A.order_no,
 		 	B.commodity_mid AS commodity_id,
 		 	N.`name` AS commodity_name,
-		 	CASE O.pay_channel WHEN 0 THEN '支付宝' WHEN 1 THEN '微信' ELSE '其他' END AS pay_channel,
+			CASE WHEN (O.pay_channel = 0 OR PO.pay_channel = 0) THEN '支付宝' WHEN (O.pay_channel = 1 OR PO.pay_channel = 1) THEN '微信' ELSE '其他' END AS `pay_channel`,
 		 	D.mall_mid AS mall_id,
 		 	D.mall_name,
 		 	E.shop_mid AS shop_id,
 		 	E.shop_name,
-		 	(B.unit_price * quantity - A.disconnt_fee + express_fee) AS orig_price,
+			SUM(B.unit_price * quantity) - A.disconnt_fee + A.express_fee AS orig_price,
 		 	A.total_amount AS pay_amount,
 		 	H2.create_at AS payment_time,
 		 	H3.create_at AS delivery_time,
 		 	H4.create_at AS receipt_time,
-		 	MUA.phone AS buyer_phone
+		 	MUA.phone AS buyer_phone,
+			CASE A.order_source WHEN 0 THEN '微网站' WHEN 1 THEN '容易逛' WHEN 2 THEN '终端机' ELSE '其他' END AS order_source
 		FROM
 			ry_osm.order_form A
 				LEFT JOIN ry_osm.order_detail_form B ON A.order_no = B.order_no
@@ -844,8 +875,10 @@
 				LEFT JOIN ry_rmmm.brand_info BI ON BI.id = E.brand_id
 				INNER JOIN ry_osm.order_event H2 ON A.order_no = H2.order_no AND H2.`status` = 2
 				INNER JOIN ry_osm.order_event H3 ON A.order_no = H3.order_no AND H3.`status` = 3
-				LEFT JOIN ry_osm.order_event H4 ON A.order_no = H4.order_no AND H4.`status` = 4
-				LEFT JOIN ry_rpb.payment_order O ON A.order_no = O.order_no AND O.trade_type = 0
+				LEFT JOIN ry_osm.order_event H4 ON A.order_no = H4.order_no AND H4.`status` = 4 AND H4.type = 4
+				LEFT JOIN ry_rpb.payment_order O ON A.order_no = O.order_no AND O.trade_type = 0 AND O.`status` = 2
+				LEFT JOIN ry_osm.order_cart_form OCF ON OCF.id = A.cart_id
+				LEFT JOIN ry_rpb.payment_order PO ON OCF.order_no = PO.order_no and PO.trade_type = 0 AND PO.`status` = 2
 				LEFT JOIN ry_data.m_mcmc_commodity N ON B.commodity_mid = N.mid
 				LEFT JOIN ry_user.malllife_user_info MUA ON MUA.id = A.buyer_id
 		WHERE H3.create_at BETWEEN #{startTime,jdbcType=TIMESTAMP} AND #{endTime,jdbcType=TIMESTAMP}

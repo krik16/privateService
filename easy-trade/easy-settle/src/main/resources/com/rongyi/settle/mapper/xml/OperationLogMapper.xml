@@ -92,4 +92,26 @@
       is_delete = #{isDelete,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getOpByMap" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from op_log
+    <where>
+      <if test="opModel!=null">
+        and op_model=#{opModel}
+      </if>
+      <if test="opType!=null">
+        and op_type=#{opType}
+      </if>
+      <if test="opId!=null">
+        and op_id=#{opId}
+      </if>
+      <if test="id!=null">
+        and id=#{id}
+      </if>
+    </where>
+    order by create_at desc
+    limit 0,1
+  </select>
 </mapper>

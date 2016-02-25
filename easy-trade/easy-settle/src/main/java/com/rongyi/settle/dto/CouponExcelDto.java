@@ -24,6 +24,9 @@ public class CouponExcelDto {
     
     /** 购券使用红包金额合计 */
     private Double couponHbTotal;
+
+    /** 店铺名称 */
+    private String shopName;
     
     public String getCouponId() {
         return couponId;
@@ -121,5 +124,11 @@ public class CouponExcelDto {
 		this.couponHbTotal = couponHbTotal;
 	}
 
+    public String getShopName() {
+        return shopName;
+    }
 
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
 }
