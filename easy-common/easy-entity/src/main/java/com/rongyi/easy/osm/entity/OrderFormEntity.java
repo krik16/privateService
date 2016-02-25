@@ -193,7 +193,7 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private OrderEventEntity orderEvent;
 
     //对单对应退款记录
-    private ApplicationFormEntity applicationForm;
+    private String applicationType;
 
     public Byte getIsAlert() {
         return isAlert;
@@ -813,14 +813,14 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
         this.orderEvent = orderEvent;
     }
 
-    public ApplicationFormEntity getApplicationForm()
+    public String getApplicationType()
     {
-        return applicationForm;
+        return applicationType;
     }
 
-    public void setApplicationForm(ApplicationFormEntity applicationForm)
+    public void setApplicationType(String applicationType)
     {
-        this.applicationForm = applicationForm;
+        this.applicationType = applicationType;
     }
 
     @Override
