@@ -18,6 +18,8 @@ public class SeckillCommodityVO implements Serializable {
      *
      */
     private String goodsId;
+
+    private Integer type;
     /**
      * 商品名称
      */
@@ -42,6 +44,14 @@ public class SeckillCommodityVO implements Serializable {
      * 图片
      */
     private String pic;
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
 
     public String getPic() {
         return pic;
@@ -103,6 +113,7 @@ public class SeckillCommodityVO implements Serializable {
     public String toString() {
         return new ToStringBuilder(this)
                 .append("goodsId", goodsId)
+                .append("type", type)
                 .append("name", name)
                 .append("currentPrice", currentPrice)
                 .append("originalPrice", originalPrice)
