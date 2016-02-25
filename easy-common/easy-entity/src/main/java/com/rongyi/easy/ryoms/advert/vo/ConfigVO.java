@@ -1,11 +1,17 @@
 package com.rongyi.easy.ryoms.advert.vo;
 
+import java.io.Serializable;
+
 /**
  * @Description: 配置VO类
  * @author wangjh
  * @date 2016年2月18日
  */
-public class ConfigVO {
+public class ConfigVO implements Serializable {
+	/** 
+	* @Fields serialVersionUID
+	*/ 
+	private static final long serialVersionUID = -1452982881105333559L;
 	public int getConfigId() {
 		return configId;
 	}

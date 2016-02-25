@@ -97,4 +97,6 @@ public interface ConfigService {
 	 * @return
 	 */
 	public List<CityVO> cityListByArea(int areaId);
+
+	public List<ConfigVO> getConfigByMallId(String mallId);
 }

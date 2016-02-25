@@ -1,8 +1,13 @@
 package com.rongyi.easy.ryoms.advert.vo;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class AdvertGroupVo {
+public class AdvertGroupVo implements Serializable {
+	/** 
+	* @Fields serialVersionUID
+	*/ 
+	private static final long serialVersionUID = 7023957441867042367L;
 	private Long id;
 	private String name;
 	private String contract;

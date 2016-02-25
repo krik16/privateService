@@ -98,4 +98,10 @@ public interface MallService {
      */
     ResponseVO getMallListByGroupId(String groupId);
 
+	ResponseVO getAdNumByMallId(String mallId);
+
+	ResponseVO getAdsByMallId(String mall_id);
+
+	ResponseVO getAdById(String ad_id);
+
 }
