@@ -24,7 +24,7 @@ public class WeixinConfigServiceImpl extends BaseServiceImpl implements WeixinCo
     @Override
     public Configure initConfigure(String appId,Integer weixinPayType) {
         Configure configure = new Configure();
-        if (StringUtils.isNotBlank(appId)) {
+        if (StringUtils.isNotBlank(appId) && !"null".equals(appId)) {
             WeixinMch weixinMch = weixinMchService.selectByAppIdAndTradeType(appId, weixinPayType);
             if(weixinMch == null){
                 throw new WeixinException(ConstantEnum.EXCEPTION_WEIXIN_APPID_NOT_EXIST.getCodeStr(),ConstantEnum.EXCEPTION_WEIXIN_APPID_NOT_EXIST.getValueStr());
