@@ -6,6 +6,22 @@ package com.rongyi.easy.ryoms.advert.vo;
  * @date 2016年2月15日 下午4:37:33
  */
 public class AdDefaultVO {
+	public String getContentTypeId() {
+		return contentTypeId;
+	}
+
+	public void setContentTypeId(String contentTypeId) {
+		this.contentTypeId = contentTypeId;
+	}
+
+	public String getContentTypeName() {
+		return contentTypeName;
+	}
+
+	public void setContentTypeName(String contentTypeName) {
+		this.contentTypeName = contentTypeName;
+	}
+
 	public int getSeq() {
 		return seq;
 	}
@@ -94,6 +110,10 @@ public class AdDefaultVO {
 	private String moduleName = "";
 	// 模板内容
 	private String content = "";
+	// 素材的类型
+	private String contentTypeId = "";
+	// 素材的类型
+	private String contentTypeName = "";
 	// 排序
 	private int seq = 0;
 }
