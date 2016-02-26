@@ -1,7 +1,6 @@
 package com.rongyi.easy.ryoms.advert.param;
 
 /**
- * @ClassName: MaterialSearchParam
  * @Description: 素材查询参数类
  * @author wangjh
  * @date 2016年2月15日 下午4:37:33

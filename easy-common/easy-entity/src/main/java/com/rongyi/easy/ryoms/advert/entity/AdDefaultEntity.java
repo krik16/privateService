@@ -7,13 +7,14 @@ package com.rongyi.easy.ryoms.advert.entity;
  * @date 2016年2月15日 下午4:37:33
  */
 public class AdDefaultEntity {
-	public int getContentType() {
-		return contentType;
-	}
 
-	public void setContentType(int contentType) {
-		this.contentType = contentType;
-	}
+	// public int getContentType() {
+	// return contentType;
+	// }
+	//
+	// public void setContentType(int contentType) {
+	// this.contentType = contentType;
+	// }
 
 	public int getSeq() {
 		return seq;
@@ -47,22 +48,6 @@ public class AdDefaultEntity {
 		this.position = position;
 	}
 
-	public int getModule() {
-		return module;
-	}
-
-	public void setModule(int module) {
-		this.module = module;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
 	public int getUserId() {
 		return userId;
 	}
@@ -71,18 +56,22 @@ public class AdDefaultEntity {
 		this.userId = userId;
 	}
 
-	// 素材ID
-	private int materialId = 0;
+	public int getDefaultId() {
+		return defaultId;
+	}
+
+	public void setDefaultId(int defaultId) {
+		this.defaultId = defaultId;
+	}
+
+	// 默认素材ID
+	private int defaultId = 0;
 	// 素材名称
 	private String name = "";
 	// 广告位置ID
 	private int position = 0;
-	// 模板ID
-	private int module = 0;
-	// 内容类型
-	private int contentType = 0;
-	// 模板内容
-	private String content = "";
+	// 素材ID
+	private int materialId = 0;
 	// 用户ID
 	private int userId = 0;
 	// 排序
