@@ -67,6 +67,8 @@ public class UserInfo implements Serializable{
     
     private UserShop userShop;
     
+    private Integer isEdit;  //是否可编辑
+    
     public String getStopReason() {
 		return stopReason;
 	}
@@ -313,6 +315,14 @@ public class UserInfo implements Serializable{
 
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
+	}
+
+	public Integer getIsEdit() {
+		return isEdit;
+	}
+
+	public void setIsEdit(Integer isEdit) {
+		this.isEdit = isEdit;
 	}
 
 }
