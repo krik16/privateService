@@ -14,7 +14,6 @@ import com.rongyi.easy.rmmm.param.MyOrderParam;
 import com.rongyi.easy.rmmm.param.TransactionDetailParam;
 import com.rongyi.easy.rmmm.vo.*;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -29,13 +28,6 @@ import java.util.Map;
  */
 public interface IOrderQueryService {
 
-	/**
-	 * 传入查询起始时间，统计新增收入与待处理订单数量
-	 * @param beginDate: 查询起始时间
-	 * @return
-	 */
-	int getSalerToProcess(Date beginDate);
-	
 	/**
 	 * 我的订单列表
 	 * 
