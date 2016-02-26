@@ -27,6 +27,9 @@
     <result column="pic_urls" property="picUrls" jdbcType="LONGVARBINARY" />
     <result column="remarks" property="remarks" jdbcType="LONGVARBINARY" />
   </resultMap>
+  <resultMap id="FullResultMap" type="com.rongyi.easy.tms.vo.v2.SalesCommissionVO" extends="ResultMapWithBLOBs" >
+    <result column="register_type" property="registerType" jdbcType="TINYINT" />
+  </resultMap>
   <sql id="Base_Column_List" >
     id, guide_id, order_no, commission_amount, `status`, create_at, `type`, pic_upload_at, 
     create_user, update_user, update_at, buyer_account, seller_account, version, guide_type, 
@@ -231,4 +234,55 @@
       is_delete = #{isDelete,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <sql id="Commission_List_Condition">
+    <if test="status!=null">
+      and sc.status=#{status}
+    </if>
+    <if test="searchType!=null and searchType=1">
+      and sc.status not in(1, -1)
+    </if>
+    <if test="commNo!=null and commNo!=''">
+      and sc.comm_no=#{commNo}
+    </if>
+    <if test="createAtBegin!=null and createAtBegin!=''">
+      and sc.create_at &gt;#{createAtBegin}
+    </if>
+    <if test="createAtEnd!=null and createAtEnd!=''">
+      and sc.create_at &lt;#{createAtEnd}
+    </if>
+    <if test="registerPhone!=null and registerPhone!=''">
+      and sc.register_phone == #{registerPhone}
+    </if>
+    <if test="invitePhone!=null and invitePhone!=''">
+      and sc.invite_phone == #{invitePhone}
+    </if>
+    <if test="commissionAmountBegin!=null and commissionAmountBegin!=''">
+      and sc.commission_amount &gt; #{commissionAmountBegin}
+    </if>
+    <if test="commissionAmountEnd!=null and commissionAmountEnd!=''">
+      and sc.commission_amount &lt; #{commissionAmountEnd}
+    </if>
+    <if test="guideType!=null and guideType!=0">
+      and sc.guide_type == #{guideType}
+    </if>
+    <if test="orderNos!=null and orderNos.size()>0">
+      and sc.order_no in<foreach collection="orderNos" item="item" open="(" separator="," close=")">#{item}</foreach>
+    </if>
+    <if test="registerType!=null and registerType!=0">
+      and cc.register_type == #{registerType}
+    </if>
+    <if test="type!=null">
+      and cc.type=#{type}
+    </if>
+  </sql>
+  
+  <select id="findCommissionList" parameterType="map" resultMap="FullResultMap">
+    select sc.*, cc.register_type, cc.type from sales_commission sc join commission_config cc on sc.config_id=cc.id
+    <where>
+      <include refid="Commission_List_Condition"/>
+    </where>
+    limit #{currentPage, jdbcType=INTEGER}, #{pageSize, jdbcType=INTEGER}
+    order_by sc.create_at
+  </select>
 </mapper>

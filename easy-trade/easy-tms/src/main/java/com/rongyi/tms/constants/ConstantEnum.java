@@ -16,6 +16,9 @@ package com.rongyi.tms.constants;
  **/
 
 public enum ConstantEnum {
+    COMMISSION_TYPE_0(0, "推广返佣"),
+    COMMISSION_TYPE_1(1, "首单返佣"),
+    COMMISSION_TYPE_2(2, "小票返佣"),
 
     ORDER_STATUS_1("1","未付款"),
     ORDER_STATUS_2("2","待发货"),
