@@ -29,13 +29,6 @@ import com.rongyi.easy.rmmm.vo.TransactionDetailVO;
 public interface ROAOrderService {
 
 	/**
-	 * 传入查询起始时间，统计新增收入与待处理订单数量
-	 * @param beginDate: 查询起始时间
-	 * @return
-	 */
-	int getSalerToProcess(Date beginDate);
-	
-	/**
 	 * 生成订单
 	 * @param submitOrderParam
 	 * @param buyerNum
