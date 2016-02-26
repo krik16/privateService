@@ -113,4 +113,13 @@ public interface ROACommodityService {
 	public ResponseVO searchCommodityBrand(CommodityBrandSearchParam param);
 	
 	public List<com.rongyi.easy.mcmc.vo.CommodityBuyerVO> getCommodityBySPU(String commodityId, String spu);
+
+	/**
+	 * 删除指定商品
+	 * @param commodityId	商品ID
+	 * @param shopId		店铺ID
+	 * @param identity		操作者
+	 * @return
+	 */
+	public ResponseResult deleteCommodity(String commodityId, Long shopId, Integer identity);
 }

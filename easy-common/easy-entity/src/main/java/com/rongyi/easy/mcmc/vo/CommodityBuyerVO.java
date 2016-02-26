@@ -6,12 +6,7 @@ import java.util.List;
 
 import com.rongyi.easy.mcmc.Commodity;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.builder.ToStringBuilder;
 public class CommodityBuyerVO implements Serializable{
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1461107119422444629L;
 
 	private String shopName;//店铺名称
