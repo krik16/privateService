@@ -1,5 +1,6 @@
 package com.rongyi.rss.mallshop.order;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +27,13 @@ import com.rongyi.easy.rmmm.vo.ShopMallVO;
 import com.rongyi.easy.rmmm.vo.TransactionDetailVO;
 
 public interface ROAOrderService {
+
+	/**
+	 * 传入查询起始时间，统计新增收入与待处理订单数量
+	 * @param beginDate: 查询起始时间
+	 * @return
+	 */
+	int getSalerToProcess(Date beginDate);
 	
 	/**
 	 * 生成订单
