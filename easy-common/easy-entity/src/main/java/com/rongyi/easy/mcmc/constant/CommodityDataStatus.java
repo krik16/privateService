@@ -23,5 +23,4 @@ public interface CommodityDataStatus extends DataStatus {
 	public static final int STATUS_COMMODITY_CHECK_PENDING		= 5;
 	/** 商品数据状态：审核失败 **/
 	public static final int STATUS_COMMODITY_CHECK_FAIL			= 6;
-	
 }
