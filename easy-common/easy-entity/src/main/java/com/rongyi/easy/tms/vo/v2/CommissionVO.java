@@ -1,6 +1,7 @@
 package com.rongyi.easy.tms.vo.v2;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @Copyright (C), 上海容易网电子商务有限公司
@@ -40,6 +41,17 @@ public class CommissionVO implements Serializable{
      * 注册人手机号
      */
     private String  registerPhone;
+
+    /**
+     * 订单创建时间(用户注册完成时间)
+     */
+    private Date createAt;
+
+    /**
+     * 订单号(首单返佣使用)
+     */
+    private String orderNo;
+
 
     public Integer getType() {
         return type;
@@ -89,6 +101,22 @@ public class CommissionVO implements Serializable{
         this.registerPhone = registerPhone;
     }
 
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
+
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
+    }
+
     @Override
     public String toString() {
         return "CommissionVO{" +
@@ -98,6 +126,8 @@ public class CommissionVO implements Serializable{
                 ", invitePhone='" + invitePhone + '\'' +
                 ", registerType=" + registerType +
                 ", registerPhone='" + registerPhone + '\'' +
+                ", createAt='" + createAt + '\'' +
+                ", orderNo='" + orderNo + '\'' +
                 '}';
     }
 }

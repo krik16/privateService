@@ -61,9 +61,14 @@ public class SalesCommission implements Serializable {
     private String registerPhone;
 
     /**
+     * 配置id
+     */
+    private Integer configId;
+
+    /**
      * 标记删除(0:正常，1:删除，默认0)
      */
-    private byte is_delete;
+    private byte isDelete;
 
     public Integer getId() {
         return id;
@@ -217,12 +222,20 @@ public class SalesCommission implements Serializable {
         this.registerPhone = registerPhone;
     }
 
-    public byte getIs_delete() {
-        return is_delete;
+    public byte getIsDelete() {
+        return isDelete;
     }
 
-    public void setIs_delete(byte is_delete) {
-        this.is_delete = is_delete;
+    public void setIsDelete(byte isDelete) {
+        this.isDelete = isDelete;
+    }
+
+    public Integer getConfigId() {
+        return configId;
+    }
+
+    public void setConfigId(Integer configId) {
+        this.configId = configId;
     }
 
     @Override
@@ -247,7 +260,8 @@ public class SalesCommission implements Serializable {
                 ", commType=" + commType +
                 ", invitePhone='" + invitePhone + '\'' +
                 ", registerPhone='" + registerPhone + '\'' +
-                ", is_delete=" + is_delete +
+                ", configId='" + configId + '\'' +
+                ", isDelete=" + isDelete +
                 '}';
     }
 }
