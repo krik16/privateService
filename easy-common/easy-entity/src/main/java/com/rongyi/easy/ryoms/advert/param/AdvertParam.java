@@ -21,6 +21,7 @@ public class AdvertParam implements Serializable {
 	private String mallIds;//商场id 多个商场用逗号分割
 	private String agree;//审核通过1 不通过2
 	private String reason;//审核不通过原因
+	private String material_id;//关联素材id
 	/**
 	 * @return the groupId
 	 */
@@ -189,12 +190,25 @@ public class AdvertParam implements Serializable {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
+	
+	/**
+	 * @return the material_id
+	 */
+	public String getMaterial_id() {
+		return material_id;
+	}
+	/**
+	 * @param material_id the material_id to set
+	 */
+	public void setMaterial_id(String material_id) {
+		this.material_id = material_id;
+	}
 	/** 
 	* @Title: toString 
 	* @Description: TODO(这里用一句话描述这个方法的作用) 
 	* @param @return    设定文件 
 	* @author shaozhou
-	* @date 2016年2月24日 上午10:25:26
+	* @date 2016年2月26日 下午2:51:48
 	* @throws 
 	*/
 	@Override
@@ -203,6 +217,6 @@ public class AdvertParam implements Serializable {
 				+ pageSize + ", startIndex=" + startIndex + ", position=" + position + ", adTime=" + adTime
 				+ ", module_type=" + module_type + ", content=" + content + ", publish_start=" + publish_start
 				+ ", publish_end=" + publish_end + ", mallIds=" + mallIds + ", agree=" + agree + ", reason=" + reason
-				+ "]";
+				+ ", material_id=" + material_id + "]";
 	}
 }

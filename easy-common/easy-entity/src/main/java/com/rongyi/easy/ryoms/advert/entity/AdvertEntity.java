@@ -11,6 +11,7 @@ public class AdvertEntity implements Serializable {
 	private Integer id;
 	private Integer position;//广告位置，参考ad_option中定义 1:全屏 2:首页banner
 	private Integer adtime;//播放时长
+	private Integer material_id;//素材id
 	private Integer module_type;//素材模板 11 全屏模板-A 22 首页Banner-A
 	private String content;//素材内容
 	private Integer content_type;//素材类型 1:图片,2:视频
@@ -189,5 +190,17 @@ public class AdvertEntity implements Serializable {
 	 */
 	public void setUpdate_at(Date update_at) {
 		this.update_at = update_at;
+	}
+	/**
+	 * @return the material_id
+	 */
+	public Integer getMaterial_id() {
+		return material_id;
+	}
+	/**
+	 * @param material_id the material_id to set
+	 */
+	public void setMaterial_id(Integer material_id) {
+		this.material_id = material_id;
 	}
 }

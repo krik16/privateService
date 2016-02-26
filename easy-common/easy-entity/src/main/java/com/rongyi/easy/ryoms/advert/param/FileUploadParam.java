@@ -10,6 +10,7 @@ public class FileUploadParam implements Serializable {
 	private String maxSize;
 	private String width;
 	private String height;
+	private String module_type;
 	/**
 	 * @return the maxSize
 	 */
@@ -45,5 +46,30 @@ public class FileUploadParam implements Serializable {
 	 */
 	public void setHeight(String height) {
 		this.height = height;
+	}
+	/**
+	 * @return the module_type
+	 */
+	public String getModule_type() {
+		return module_type;
+	}
+	/**
+	 * @param module_type the module_type to set
+	 */
+	public void setModule_type(String module_type) {
+		this.module_type = module_type;
+	}
+	/** 
+	* @Title: toString 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param @return    设定文件 
+	* @author shaozhou
+	* @date 2016年2月26日 下午2:38:44
+	* @throws 
+	*/
+	@Override
+	public String toString() {
+		return "FileUploadParam [maxSize=" + maxSize + ", width=" + width + ", height=" + height + ", module_type="
+				+ module_type + "]";
 	}
 }
