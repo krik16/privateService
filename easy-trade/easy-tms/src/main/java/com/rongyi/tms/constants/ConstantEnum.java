@@ -107,6 +107,18 @@ public enum ConstantEnum {
 
     USER_TYPE_2(2,"卖家账号买手类型"),
 
+    COMMISSION_STATUS_2_UNCHECK(-2,"二审不通过"),
+    COMMISSION_STATUS_1_UNCHECK(-1,"一审不通过"),
+    COMMISSION_STATUS_0(0,"小票未上传"),
+    COMMISSION_STATUS_1(1,"待审核"),
+    COMMISSION_STATUS_2(2,"一级审核通过"),
+    COMMISSION_STATUS_3(3,"二级审核通过"),
+    COMMISSION_STATUS_4(4,"此状态未使用"),
+    COMMISSION_STATUS_5(5,"当日返佣超出限制"),
+    COMMISSION_STATUS_6(6,"佣金已到账"),
+
+    COMMISSION_ADD_FAIL("1019201","未查找到符合的佣金规则配置，不增加佣金"),
+
     EXCEL_LIMIT_COUNT(5000,"交易明细报表导出限制总数");
     interface ACCOUNT_STATUS{
         int ACCOUNT_STATUS0 = 0;//登陆账号和支付账号正常
