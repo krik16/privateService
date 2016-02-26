@@ -1,7 +1,6 @@
 package com.rongyi.easy.ryoms.advert.vo;
 
 /**
- * @ClassName: MaterialVO
  * @Description: 素材VO类
  * @author wangjh
  * @date 2016年2月15日 下午4:37:33
@@ -71,6 +70,16 @@ public class AdDefaultVO {
 		this.content = content;
 	}
 
+	public int getDefaultId() {
+		return defaultId;
+	}
+
+	public void setDefaultId(int defaultId) {
+		this.defaultId = defaultId;
+	}
+
+	// 默认素材Id
+	private int defaultId = 0;
 	// 素材ID
 	private int materialId = 0;
 	// 素材名称
