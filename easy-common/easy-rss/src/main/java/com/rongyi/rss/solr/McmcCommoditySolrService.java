@@ -100,6 +100,13 @@ public interface McmcCommoditySolrService {
 
 	public boolean updateCommoditySecKill(String commodityId,String secKillSign);
 
+	/**
+	 * 删除指定ID的商品
+	 * @param commodityId	商品ID
+	 * @return
+	 */
+	public boolean deleteCommodity(String commodityId);
+
 //	public boolean updateCommoditySale(String commodityId, Integer sortPosition);
 
 }

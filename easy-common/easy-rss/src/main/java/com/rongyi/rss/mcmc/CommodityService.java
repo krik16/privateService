@@ -130,4 +130,13 @@ public interface CommodityService {
 
     public List<CommodityBuyerVO> getCommodityBySPU(String commodityId, String spu);
 
+    /**
+     * 删除商品
+     * @param commodityId	商品ID
+     * @param shopId		店铺ID
+     * @param identity		角色
+     * @return
+     */
+	public ResponseResult deleteCommodity(String commodityId, Long shopId, Integer identity);
+
 }

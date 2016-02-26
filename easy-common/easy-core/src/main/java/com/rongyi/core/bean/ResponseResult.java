@@ -31,27 +31,35 @@ public class ResponseResult implements java.io.Serializable {
 
 	/**
 	 * Error 
-	 * @param errorCode	错误码
+	 * @param errCode	错误码
 	 * @param message	消息
 	 * @return
 	 */
-	public ResponseResult error(String errorCode, String message) {
-		return error(errorCode, message, null);
+	public ResponseResult error(String errCode, String message) {
+		return error(errCode, message, null);
 	}
 
 	/**
 	 * Error 
-	 * @param errorCode	错误码
+	 * @param errCode	错误码
 	 * @param message	消息
 	 * @param info		info
 	 * @return
 	 */
-	public ResponseResult error(String errorCode, String message, Object info) {
+	public ResponseResult error(String errCode, String message, Object info) {
 		this.success = false;
-		this.code = errorCode;
+		this.code = errCode;
 		this.message = message;
 		this.info = info;
 		return this;
+	}
+	
+	/**
+	 * Success 
+	 * @return
+	 */
+	public ResponseResult Success() {
+		return Success(null);
 	}
 
 	/**
@@ -60,7 +68,7 @@ public class ResponseResult implements java.io.Serializable {
 	 * @return
 	 */
 	public ResponseResult Success(Object info) {
-		return Success(info, "正常", SUCCESS);
+		return Success(info, "正常");
 	}
 	
 	/**
@@ -70,21 +78,21 @@ public class ResponseResult implements java.io.Serializable {
 	 * @return
 	 */
 	public ResponseResult Success(Object info, String message) {
-		return Success(info, SUCCESS, message);
+		return Success(info, message, SUCCESS);
 	}
 	
 	/**
 	 * Success 
 	 * @param info		返回值信息
-	 * @param errCode	消息码
 	 * @param message	消息
+	 * @param errCode	消息码
 	 * @return
 	 */
-	public ResponseResult Success(Object info, String errCode, String message) {
+	public ResponseResult Success(Object info, String message, String errCode) {
 		this.success = true;
+		this.info = info;
 		this.code = errCode;
 		this.message = message;
-		this.info = info;
 		return this;
 	}
 
@@ -134,6 +142,30 @@ public class ResponseResult implements java.io.Serializable {
 	public ResponseResult setMessage(String message) {
 		this.message = message;
 		return this;
+	}
+	
+	public static ResponseResult err(String errCode, String message) {
+		return new ResponseResult().error(errCode, message);
+	}
+	
+	public static ResponseResult err(String errCode, String message, Object info) {
+		return new ResponseResult().error(errCode, message, info);
+	}
+	
+	public static ResponseResult succ() {
+		return new ResponseResult().Success();
+	}
+	
+	public static ResponseResult succ(Object info) {
+		return new ResponseResult().Success(info);
+	}
+	
+	public static ResponseResult succ(Object info, String message) {
+		return new ResponseResult().Success(info, message);
+	}
+	
+	public static ResponseResult succ(Object info, String message, String errCode) {
+		return new ResponseResult().Success(info, message, errCode);
 	}
 
 	@Override
