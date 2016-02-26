@@ -20,7 +20,7 @@ public class ActivityTemplateParam implements Serializable {
     /**
      * 活动id
      */
-    private String activityRuleId;
+    private Integer activityRuleId;
     /** 活动类型 0.商品类活动，1卡券类活动，2.抽奖类活动 3.卡券及商品类活动，4.签到送积分，5，特卖*/
     private Integer activityType;
     /**活动状态 1 未开始，2进行中 3已结束  全部不传*/
@@ -45,11 +45,11 @@ public class ActivityTemplateParam implements Serializable {
     /**排序的字段*/
     private String orderByString= ORDER_BY_CLAUSE;
 
-    public String getActivityRuleId() {
+    public Integer getActivityRuleId() {
         return activityRuleId;
     }
 
-    public void setActivityRuleId(String activityRuleId) {
+    public void setActivityRuleId(Integer activityRuleId) {
         this.activityRuleId = activityRuleId;
     }
 
