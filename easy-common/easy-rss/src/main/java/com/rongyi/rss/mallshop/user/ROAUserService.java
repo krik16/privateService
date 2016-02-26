@@ -3,6 +3,7 @@ package com.rongyi.rss.mallshop.user;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.malllife.pojo.BuyerInfoPojo;
 import com.rongyi.easy.mallshop.MallShopException;
 import com.rongyi.easy.rmmm.dto.user.UserShopMallAccountDto;
 import com.rongyi.easy.rmmm.entity.RmmmUserInfoEntity;
@@ -271,4 +272,12 @@ public interface ROAUserService {
     public Integer editUserDesc(Integer userId,String desc)throws MallShopException;
 
     public boolean updatePushId(String pushId,String userPhone) throws Exception;
+    
+    /**
+     * 根据邀请码查询导购或者买手数据
+     *
+     * @param sharCode
+     * @return 
+     */
+    public BuyerInfoPojo selectUserBySharCode(String sharCode) throws Exception;
 }
