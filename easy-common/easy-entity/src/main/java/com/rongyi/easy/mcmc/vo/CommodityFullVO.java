@@ -1,6 +1,7 @@
 package com.rongyi.easy.mcmc.vo;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
@@ -133,6 +134,19 @@ public class CommodityFullVO implements Serializable {
                 return categoryTier.toString().substring(0, categoryTier.toString().length() - 3);
             } else return "";
         } else return "";
+    }
+
+    /**
+     * 判断是否包邮
+     * @return
+     */
+    public Boolean isShipping() {
+        if (supportCourierDeliver) {
+            if (StringUtils.isBlank(postage) || Double.valueOf(0).equals(Double.valueOf(postage))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public int getStatus() {
