@@ -45,4 +45,11 @@ public interface ROASolrService {
      * @param paramMap
      */
     public void updateIndex(String core,Map<String,Object> paramMap) throws Exception;
+
+    /**
+     * 备份core
+     * @param core
+     * @return
+     */
+    public boolean backup(String core) throws MalformedURLException, Exception;
 }
