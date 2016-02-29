@@ -271,7 +271,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                 LOGGER.info("申请退款或打款给卖家");
                 bodyMap.put("paymentId", paymentEntityVO.getPayNo());
             }
-            bodyMap.put("totalPrice", paymentEntityVO.getAmountMoney());
+            bodyMap.put("totalPrice", paymentEntityVO.getAmountMoney().doubleValue() * 100d);
             bodyMap.put("orderNum", paymentEntityVO.getOrderNum());
             bodyMap.put("orderDetailNum", paymentEntityVO.getOrderDetailNumArray());
         } catch (Exception e) {

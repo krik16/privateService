@@ -31,6 +31,8 @@ import com.rongyi.rpb.unit.AliPayUnit;
 import com.rongyi.rpb.unit.WeixinPayUnit;
 import com.rongyi.rss.rpb.IRpbService;
 import net.sf.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,7 +47,7 @@ import java.util.Map;
  * Author: 柯军
  * Description: rpb dubbo 接口实现
  * datetime:2015年6月4日下午2:54:04
- *
+ * 
  **/
 public class RpbServiceImpl implements IRpbService {
 
@@ -357,7 +359,7 @@ public class RpbServiceImpl implements IRpbService {
 			map.put("message", "申请异常");
 			e.printStackTrace();
 		}
-
+	
 		return map;
 	}
 
@@ -483,10 +485,20 @@ public class RpbServiceImpl implements IRpbService {
 	}
 
 	@Override
-	public ResponseData insertWeiXinMch(WeixinMch weixinMch) {
+	public ResponseData addWeixinMch(WeixinMch weixinMch) {
+		LOGGER.info("第三方系统记录微信商户相关信息 weixinMch={}",weixinMch.toString());
 		ResponseData responseData;
 		try{
-			weixinMchService.insert(weixinMch);
+			WeixinMch oldWeixinMch = weixinMchService.selectByMchIdAndUserId(weixinMch.getMchId(),weixinMch.getUserId());
+			if(weixinMch.getIsRongyiPay() == null){
+				weixinMch.setIsRongyiPay(ConstantEnum.WEIXIN_IS_RONGYI_PAY_0.getCodeByte());
+			}
+			if(oldWeixinMch == null) {
+				weixinMchService.insert(weixinMch);
+			}else{
+				weixinMch.setId(oldWeixinMch.getId());
+				weixinMchService.update(weixinMch);
+			}
 			responseData = ResponseData.success();
 		}catch (Exception e){
 			e.printStackTrace();
@@ -494,20 +506,5 @@ public class RpbServiceImpl implements IRpbService {
 		}
 		return responseData;
 	}
-
-	@Override
-	public ResponseData updateWeixinMch(WeixinMch weixinMch) {
-		ResponseData responseData;
-		try{
-			weixinMchService.update(weixinMch);
-			responseData = ResponseData.success();
-		}catch (Exception e){
-			e.printStackTrace();
-			responseData = ResponseData.failure();
-		}
-		return responseData;
-	}
-
-
 }
 
