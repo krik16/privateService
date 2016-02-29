@@ -104,6 +104,10 @@ public enum CodeEnum {
     ERROR_MCMC_COMMODITY_ID_EMPTY("-7009", "商品信息错误"),
 	ERROR_MCMC_COMMODITY_DELETED("-7010", "商品不存在或已删除"),
 	ERROR_MCMC_COMMODITY_DELETED_OR_NODOWN("-7011", "商品已删除或未下架"),
+	ERROR_MCMC_COMMODITY_NAME_HAS_SENSITIVE_WORD("-7012", "您填写的商品名称不符合规范，请重新发布"),
+	ERROR_MCMC_COMMODITY_DESCRIPTION_HAS_SENSITIVE_WORD("-7013", "您填写的商品描述不符合规范，请重新发布"),
+	ERROR_MCMC_COMMODITY_SPEC_HAS_SENSITIVE_WORD("-7014", "您填写的商品规格不符合规范，请重新发布"),
+	ERROR_MCMC_COMMODITY_LIVE_NAME_HAS_SENSITIVE_WORD("-7015", "您填写的直播名字不符合规范，请重新发布"),
     /** 百联优惠券常量 */
     ERROR_BUYED_OUT("-3007","优惠券已经被领完"),
 
@@ -238,9 +242,6 @@ public enum CodeEnum {
 	ERROR_ROLE_BO_EDIT("1201101", "你无权限操作，如需修改请联系分公司管理员"),
 	ERROR_ROLE_SG_EDIT("1201102", "你无权限操作，如需修改请联系导购"),
 	ERROR_ROLE_SM_EDIT("1201103", "你无权限操作，如需修改请联系店长"),
-	
-	//您填写的内容不符合规定
-	ERROR_CONTENT_NOT_LEGAL("1211001", "您填写的内容不符合规范，请重新发布"),
 	
 	ERROR_GUIDE_ISDISABLED("1062002","此店铺休息中，无法为您服务");
 
