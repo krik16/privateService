@@ -14,6 +14,7 @@ import java.util.Date;
  */
 public class SearchActivityParam extends PagingParam {
     private static final String ORDER_BY_CLAUSE = "start_at DESC,create_at DESC";
+    private static final String ORDER_BY_CLAUSE_LABEL = "create_at DESC";
     /**描述:
      * 0.待审核
      * 1.不通过
@@ -124,7 +125,10 @@ public class SearchActivityParam extends PagingParam {
     }
 
     public String getOrderByClause() {
-        return orderByClause;
+        if (label == 0) {
+            return ORDER_BY_CLAUSE_LABEL;
+        }
+        return ORDER_BY_CLAUSE;
     }
 
     public void setOrderByClause(String orderByClause) {
