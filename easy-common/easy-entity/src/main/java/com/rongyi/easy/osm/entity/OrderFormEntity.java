@@ -1,10 +1,11 @@
 package com.rongyi.easy.osm.entity;
 
+import net.sf.json.JSONObject;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import net.sf.json.JSONObject;
 
 public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity>{
     /**
@@ -187,6 +188,21 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
 
     private List<OrderDetailFormEntity> detailOrderList;
     private OrderFormExtraEntity orderExtra;
+
+    /**
+     * 微信标准版支付记录appid
+     */
+    private String weixinAppId;
+
+    /**
+     * 下单渠道
+     */
+    private String orderChannel;
+
+    /**
+     * 微信openId
+     */
+    private String openId;
 
     public Byte getIsAlert() {
         return isAlert;
@@ -796,6 +812,30 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
         this.scoreAmount = scoreAmount;
     }
 
+    public String getWeixinAppId() {
+        return weixinAppId;
+    }
+
+    public void setWeixinAppId(String weixinAppId) {
+        this.weixinAppId = weixinAppId;
+    }
+
+    public String getOrderChannel() {
+        return orderChannel;
+    }
+
+    public void setOrderChannel(String orderChannel) {
+        this.orderChannel = orderChannel;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
+
     @Override
     public String toString() {
         return "OrderFormEntity{" +
@@ -843,6 +883,9 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
                 ", discountAmount=" + discountAmount +
                 ", rebateAmount=" + rebateAmount +
                 ", scoreAmount=" + scoreAmount +
+                ", weixinAppId=" + weixinAppId +
+                ", orderChannel=" + orderChannel +
+                ", openId=" + openId +
                 '}';
     }
 

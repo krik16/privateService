@@ -1,6 +1,7 @@
 package com.rongyi.easy.ryoms.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 微信 
@@ -19,12 +20,14 @@ public class WechatInfoVo implements Serializable{
 	private String appSecret;         //(应用密钥
 	private String encodingAESKey;    //消息加密密钥
 	private Integer type;             //类型  1容易内部&代运营   2容易外部
-	private String mallId;            //商场monogId
-	private String mallName;          //商场名称
+	private String mallId;            //商场monogId or集团id
+	private String mallName;          //商场名称 or 集团名称
 	private String dockingType;       //对接方式  1B类 2C类
 	private Integer isMeiwei ;		//是否接入美味不用等
 	private String meiweiId;  		//美味不用等商场ID
 	private Integer isDeleted ;      //是否已删除  0正常 1已删除
+	List<MeiweiWechatVo> meiweiList ; //美味ID与商场对应关系
+	private WechatPayVo wechatPayVo;      //支付信息
 	public Integer getId() {
 		return id;
 	}
@@ -103,5 +106,18 @@ public class WechatInfoVo implements Serializable{
 	public void setIsDeleted(Integer isDeleted) {
 		this.isDeleted = isDeleted;
 	}
+	public List<MeiweiWechatVo> getMeiweiList() {
+		return meiweiList;
+	}
+	public void setMeiweiList(List<MeiweiWechatVo> meiweiList) {
+		this.meiweiList = meiweiList;
+	}
+	public WechatPayVo getWechatPayVo() {
+		return wechatPayVo;
+	}
+	public void setWechatPayVo(WechatPayVo wechatPayVo) {
+		this.wechatPayVo = wechatPayVo;
+	}
+	
 	
 }
