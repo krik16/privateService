@@ -7,7 +7,7 @@ import java.util.Date;
 public class PaymentEntity implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 2516018941608003955L;
 
@@ -16,7 +16,7 @@ public class PaymentEntity implements Serializable {
 	}
 
 	public PaymentEntity(String payNo, String orderNum, Integer orderType, BigDecimal orderPrice, String title, BigDecimal amountMoney, Integer status, Integer tradeType, Date createTime,
-			Date finishTime, Integer payChannel, String outAccount, String inAccount, Integer showNum, String drawUserId, String payName) {
+						 Date finishTime, Integer payChannel, String outAccount, String inAccount, Integer showNum, String drawUserId, String payName) {
 		super();
 		this.payNo = payNo;
 		this.orderNum = orderNum;
@@ -53,7 +53,7 @@ public class PaymentEntity implements Serializable {
 	private Integer orderType = 0;
 	/**
 	 * 订单金额
-	 * 
+	 *
 	 */
 	private BigDecimal orderPrice;
 
