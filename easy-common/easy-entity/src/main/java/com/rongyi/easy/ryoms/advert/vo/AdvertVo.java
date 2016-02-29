@@ -11,7 +11,7 @@ public class AdvertVo implements Serializable {
 	private static final long serialVersionUID = -1309872971784984018L;
 	private Long id;//'编号'
 	private Integer position;//广告位置，参考ad_option中定义 1:全屏 2:首页banner
-	private Integer adtime;//播放时长
+	private Integer adTime;//播放时长
 	private Integer module_type;//素材模板 11 全屏模板-A 22 首页Banner-A
 	private String content;//素材内容
 	private Integer content_type;//素材类型 1:图片,2:视频
@@ -51,16 +51,16 @@ public class AdvertVo implements Serializable {
 		this.position = position;
 	}
 	/**
-	 * @return the adtime
+	 * @return the adTime
 	 */
-	public Integer getAdtime() {
-		return adtime;
+	public Integer getAdTime() {
+		return adTime;
 	}
 	/**
-	 * @param adtime the adtime to set
+	 * @param adTime the adTime to set
 	 */
-	public void setAdtime(Integer adtime) {
-		this.adtime = adtime;
+	public void setAdTime(Integer adTime) {
+		this.adTime = adTime;
 	}
 	/**
 	 * @return the module_type
@@ -235,12 +235,12 @@ public class AdvertVo implements Serializable {
 	* @Description: TODO(这里用一句话描述这个方法的作用) 
 	* @param @return    设定文件 
 	* @author shaozhou
-	* @date 2016年2月26日 下午6:06:27
+	* @date 2016年2月29日 下午6:17:50
 	* @throws 
 	*/
 	@Override
 	public String toString() {
-		return "AdvertVo [id=" + id + ", position=" + position + ", adtime=" + adtime + ", module_type=" + module_type
+		return "AdvertVo [id=" + id + ", position=" + position + ", adTime=" + adTime + ", module_type=" + module_type
 				+ ", content=" + content + ", content_type=" + content_type + ", status=" + status + ", status_detail="
 				+ status_detail + ", publish_start=" + publish_start + ", publish_end=" + publish_end + ", group_id="
 				+ group_id + ", create_by=" + create_by + ", create_at=" + create_at + ", update_by=" + update_by
