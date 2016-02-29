@@ -140,8 +140,8 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
             {
                 SalesCommission salesCommission = new SalesCommission();
                 salesCommission.setId(Integer.valueOf(idStr));
-                salesCommission.setStatus(param.getStatus());
-                salesCommission.setUpdateDate(new Date());
+                salesCommission.setStatus(param.getStatus().byteValue());
+                salesCommission.setUpdateAt(new Date());
                 CommissionConfig config = commissionConfigService.selectById(commission.getConfigId());
                 if (config!=null)
                 {
@@ -155,10 +155,10 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
                         paramsMap.put("type", config.getType());
                         Integer dailyCount = this.getBaseDao().count(NAMESPACE + ".selectDailyCount", paramsMap);
                         if (dailyCount>config.getLimitTotal()){
-                            salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_5.getCodeInt());
+                            salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_5.getCodeByte());
                         }
                     }
-                    int updateNum = this.getBaseDao().updateBySql(NAMESPACE + ".selectDailyCount", salesCommission);
+                    int updateNum = this.getBaseDao().updateBySql(NAMESPACE + ".updateByPrimaryKeySelective", salesCommission);
                     if (updateNum>0)
                         resultNum++;
                 }

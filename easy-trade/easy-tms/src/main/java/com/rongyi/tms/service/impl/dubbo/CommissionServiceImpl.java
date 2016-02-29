@@ -55,12 +55,12 @@ public class CommissionServiceImpl implements CommissionService{
         salesCommission.setCommissionAmount(new BigDecimal(commissionConfig.getCommAmount()));
         if(ConstantEnum.COMMISSION_CONFIG_CUST_VERIFY_0.getCodeByte().equals(commissionConfig.getFinaVerify())){
             LOGGER.info("财务审核系统自动审核通过");
-            salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_3.getCodeInt());
+            salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_3.getCodeByte());
         }else if(ConstantEnum.COMMISSION_CONFIG_CUST_VERIFY_0.getCodeByte().equals(commissionConfig.getCustVerify())){//客服系统自动审核
             LOGGER.info("客服审核系统自动审核通过");
-            salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_2.getCodeInt());
+            salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_2.getCodeByte());
         }
-        salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_1.getCodeInt());
+        salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_1.getCodeByte());
         salesCommission.setCreateAt(DateUtil.getCurrDateTime());
         salesCommission.setGuideType(commissionVO.getGuideType());
         salesCommission.setCommNo(orderNoGenService.getOrderNo("5"));
