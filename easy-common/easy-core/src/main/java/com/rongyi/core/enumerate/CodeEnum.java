@@ -152,6 +152,9 @@ public enum CodeEnum {
     ERROR_COUPON_REPEAT("-6002","一张红包只能使用一次"),
     ERROR_COUPON_PUBLISH_OVER("-6003","每日限量发行数填写错误"),
     ERROR_COUPON_PUBLISH_CHANNEL("-6004","亲，活动券你不能管理哦"),
+    ERROR_COUPON_NAME_HAS_SENSITIVE_WORD("-6005","卡券名称存在关键词"),
+    ERROR_COUPON_USE_LIMIT_HAS_SENSITIVE_WORD("-6006","卡券使用限制存在关键词"),
+    ERROR_COUPON_USEAGE_HAS_SENSITIVE_WORD("-6007","卡券使用方式存在关键词"),
 
     ERROR_ACCOUNT_INSUFFICIENT_BALANCE("-7001","账户余额不足"),
     ERROR_ACCOUNT_NO_PERMISSION("-7002","账户被冻结或未授权"),
@@ -239,7 +242,7 @@ public enum CodeEnum {
 	ERROR_ROLE_SM_EDIT("1201103", "你无权限操作，如需修改请联系店长"),
 	
 	//您填写的内容不符合规定
-	ERROR_CONTENT_NOT_LEGAL("1211001", "您填写的内容不符合规定，请重新发布"),
+	ERROR_CONTENT_NOT_LEGAL("1211001", "您填写的内容不符合规范，请重新发布"),
 	
 	ERROR_GUIDE_ISDISABLED("1062002","此店铺休息中，无法为您服务");
 
