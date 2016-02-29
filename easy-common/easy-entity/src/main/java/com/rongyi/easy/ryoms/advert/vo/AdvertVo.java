@@ -230,4 +230,20 @@ public class AdvertVo implements Serializable {
 	public void setMall_names(List<String> mall_names) {
 		this.mall_names = mall_names;
 	}
+	/** 
+	* @Title: toString 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param @return    设定文件 
+	* @author shaozhou
+	* @date 2016年2月26日 下午6:06:27
+	* @throws 
+	*/
+	@Override
+	public String toString() {
+		return "AdvertVo [id=" + id + ", position=" + position + ", adtime=" + adtime + ", module_type=" + module_type
+				+ ", content=" + content + ", content_type=" + content_type + ", status=" + status + ", status_detail="
+				+ status_detail + ", publish_start=" + publish_start + ", publish_end=" + publish_end + ", group_id="
+				+ group_id + ", create_by=" + create_by + ", create_at=" + create_at + ", update_by=" + update_by
+				+ ", update_at=" + update_at + ", mall_ids=" + mall_ids + ", mall_names=" + mall_names + "]";
+	}
 }

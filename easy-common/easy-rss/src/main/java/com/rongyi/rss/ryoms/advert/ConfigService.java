@@ -99,4 +99,29 @@ public interface ConfigService {
 	public List<CityVO> cityListByArea(int areaId);
 
 	public List<ConfigVO> getConfigByMallId(String mallId);
+	
+	/**
+	 * 
+	* @Title: collectAreaCnt 
+	* @Description: 广告管理查询可关联的商场数量
+	* @param @param query
+	* @param @return    设定文件 
+	* @return int    返回类型 
+	* @author shaozhou
+	* @date 2016年2月29日 上午11:38:26
+	* @throws
+	 */
+	public int collectAreaCnt(ConfigSearchParam query);
+	/**
+	 * 
+	* @Title: collectAreaList 
+	* @Description: 广告管理查询可关联的商场list 
+	* @param @param query
+	* @param @return    设定文件 
+	* @return List<ConfigVO>    返回类型 
+	* @author shaozhou
+	* @date 2016年2月29日 上午11:39:11
+	* @throws
+	 */
+	public List<ConfigVO> collectAreaList(ConfigSearchParam query);
 }
