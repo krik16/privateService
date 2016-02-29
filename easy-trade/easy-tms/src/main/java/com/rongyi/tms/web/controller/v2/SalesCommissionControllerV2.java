@@ -7,6 +7,8 @@ import com.rongyi.tms.constants.Constant;
 import com.rongyi.tms.constants.ConstantEnum;
 import com.rongyi.tms.service.v2.SalesCommissionService;
 import com.rongyi.tms.web.controller.SalesCommissionController;
+import com.rongyi.tms.web.controller.param.VerifyCommissionParam;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -71,6 +74,48 @@ public class SalesCommissionControllerV2 {
             int totalAccount = salesCommissionService.countCommission(map);
             result = ResponseData.success(list, currentPage,Constant.PAGE.PAGESIZE, totalAccount);
             logger.info("findFirstOrderList end");
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = ResponseData.failure(Integer.valueOf(CodeEnum.ERROR_SYSTEM.getActionCode()), CodeEnum.ERROR_SYSTEM.getMessage());
+        }
+        return result;
+    }
+
+    @RequestMapping("/detail")
+    @ResponseBody
+    public ResponseData detail(HttpServletRequest request) {
+        ResponseData result;
+        try {
+            Integer id = Integer.valueOf(request.getParameter("id"));
+            logger.info("detail begin id={}", id);
+            if (id == null){
+                return ResponseData.failure(Integer.valueOf(CodeEnum.ERROR_PARAM.getActionCode()),CodeEnum.ERROR_PARAM.getMessage());
+            }
+            SalesCommissionVO salesCommissionVO = salesCommissionService.getCommissionDetail(id);
+            result = ResponseData.success(salesCommissionVO);
+            logger.info("detail end");
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = ResponseData.failure(Integer.valueOf(CodeEnum.ERROR_SYSTEM.getActionCode()), CodeEnum.ERROR_SYSTEM.getMessage());
+        }
+        return result;
+    }
+
+    @RequestMapping("/verify")
+    @ResponseBody
+    public ResponseData verifyCommission(@RequestBody VerifyCommissionParam param) {
+        ResponseData result;
+        try {
+            logger.info("verifyCommission begin param={}", param);
+            if (StringUtils.isBlank(param.getIds()) || param.getStatus()==null
+                    || (param.getStatus()<0 && StringUtils.isBlank(param.getDesc()))){
+                return ResponseData.failure(Integer.valueOf(CodeEnum.ERROR_PARAM.getActionCode()),CodeEnum.ERROR_PARAM.getMessage());
+            }
+            if (salesCommissionService.verifyCommission(param, "test"))
+                result = ResponseData.success();
+            else
+                result = ResponseData.failure(Integer.valueOf(CodeEnum.ERROR_UPDATE.getActionCode()), CodeEnum.ERROR_UPDATE.getMessage());
+            logger.info("verifyCommission end");
         } catch (Exception e) {
             e.printStackTrace();
             result = ResponseData.failure(Integer.valueOf(CodeEnum.ERROR_SYSTEM.getActionCode()), CodeEnum.ERROR_SYSTEM.getMessage());
