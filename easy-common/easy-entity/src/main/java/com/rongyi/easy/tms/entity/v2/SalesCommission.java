@@ -2,6 +2,7 @@ package com.rongyi.easy.tms.entity.v2;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
 
 public class SalesCommission implements Serializable {
@@ -65,6 +66,8 @@ public class SalesCommission implements Serializable {
      */
     private Integer configId;
 
+    private BigInteger version;
+
     /**
      * 标记删除(0:正常，1:删除，默认0)
      */
@@ -116,6 +119,14 @@ public class SalesCommission implements Serializable {
 
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
+    }
+
+    public BigInteger getVersion() {
+        return version;
+    }
+
+    public void setVersion(BigInteger version) {
+        this.version = version;
     }
 
     public Date getPicUploadAt() {
