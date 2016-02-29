@@ -14,6 +14,7 @@ import com.rongyi.easy.rmmm.param.MyOrderParam;
 import com.rongyi.easy.rmmm.param.TransactionDetailParam;
 import com.rongyi.easy.rmmm.vo.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -173,6 +174,22 @@ public interface IOrderQueryService {
 	 * @throws Exception
 	 */
 	DetailVO getMyOnOrderAmount(MyDealParam param) throws Exception;
+
+	/**
+	 * 我的在途营业额（总计）
+	 *
+	 * @return
+	 * @throws Exception
+	 */
+	BigDecimal getMyOnOrderAmountTotal(String userId) throws Exception;
+
+	/**
+	 * 我的在途营业额（当日）
+	 *
+	 * @return
+	 * @throws Exception
+	 */
+	BigDecimal getMyOnOrderAmountDaily(String userId) throws Exception;
 	
 	/**
 	 * 我的交易佣金列表
