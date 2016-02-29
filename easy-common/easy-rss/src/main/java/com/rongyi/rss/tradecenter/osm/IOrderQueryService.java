@@ -165,6 +165,14 @@ public interface IOrderQueryService {
 	 * @throws Exception
 	 */
 	DetailVO getMyDealAmount(MyDealParam param) throws Exception;
+
+	/**
+	 * 我的营业额列表
+	 *
+	 * @return
+	 * @throws Exception
+	 */
+	DetailVO getMyOnOrderAmount(MyDealParam param) throws Exception;
 	
 	/**
 	 * 我的交易佣金列表
