@@ -96,7 +96,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
         Map<String, Object> map = new HashMap<>();
         map.put("id", id);
         SalesCommissionVO vo = this.getBaseDao().selectOneBySql(NAMESPACE + ".getCommissionDetail", map);
-        if (vo.getStatus()==-1 || vo.getStatus()==-2){
+        if (vo!=null &&(vo.getStatus()==-1 || vo.getStatus()==-2)){
             SalesCommissionAuditLog log = salesCommissionAuditLogService.selectFailedLog(id);
             if (log!=null)
                 vo.setReason(log.getMemo());

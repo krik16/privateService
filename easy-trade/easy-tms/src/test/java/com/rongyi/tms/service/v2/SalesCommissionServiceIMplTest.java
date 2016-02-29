@@ -25,9 +25,15 @@ public class SalesCommissionServiceIMplTest extends BaseTest{
         map.put("pageSize", 5);
         map.put("type", ConstantEnum.COMMISSION_TYPE_0.getCodeInt());
         map.put("searchType", 1);
-        System.out.println("============>>>>>>>>>>>>>>>>> map"+map);
+        System.out.println("============>>>>>>>>>>>>>>>>> map" + map);
         List<SalesCommissionVO> list = salesCommissionService.findCommissionList(map);
         System.out.println("============>>>>>>>>>>>>>>>>> list"+list);
     }
 
+    @Test
+    public void testGetDetail(){
+        System.out.println("===================>>>>>>>>>>>>>>testGetDetail begin");
+        SalesCommissionVO vo = salesCommissionService.getCommissionDetail(30);
+        System.out.println("====================>>>>>>>>>>>>>>>> vo="+vo);
+    }
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -82,9 +83,10 @@ public class SalesCommissionControllerV2 {
 
     @RequestMapping("/detail")
     @ResponseBody
-    public ResponseData detail(Integer id) {
+    public ResponseData detail(HttpServletRequest request) {
         ResponseData result;
         try {
+            Integer id = Integer.valueOf(request.getParameter("id"));
             logger.info("detail begin id={}", id);
             if (id == null){
                 return ResponseData.failure(Integer.valueOf(CodeEnum.ERROR_PARAM.getActionCode()),CodeEnum.ERROR_PARAM.getMessage());
@@ -99,7 +101,7 @@ public class SalesCommissionControllerV2 {
         return result;
     }
 
-    @RequestMapping("/detail")
+    @RequestMapping("/verify")
     @ResponseBody
     public ResponseData verifyCommission(@RequestBody VerifyCommissionParam param) {
         ResponseData result;
@@ -109,7 +111,7 @@ public class SalesCommissionControllerV2 {
                     || (param.getStatus()<0 && StringUtils.isBlank(param.getDesc()))){
                 return ResponseData.failure(Integer.valueOf(CodeEnum.ERROR_PARAM.getActionCode()),CodeEnum.ERROR_PARAM.getMessage());
             }
-            if (salesCommissionService.verifyCommission(param))
+            if (salesCommissionService.verifyCommission(param, "test"))
                 result = ResponseData.success();
             else
                 result = ResponseData.failure(Integer.valueOf(CodeEnum.ERROR_UPDATE.getActionCode()), CodeEnum.ERROR_UPDATE.getMessage());
