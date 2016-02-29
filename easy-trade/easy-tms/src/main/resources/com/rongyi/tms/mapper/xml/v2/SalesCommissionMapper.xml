@@ -18,7 +18,7 @@
     <result column="version" property="version" jdbcType="BIGINT" />
     <result column="guide_type" property="guideType" jdbcType="INTEGER" />
     <result column="comm_no" property="commNo" jdbcType="VARCHAR" />
-    <result column="comm_type" property="commType" jdbcType="TINYINT" />
+    <result column="config_id" property="configId" jdbcType="INTEGER" />
     <result column="invite_phone" property="invitePhone" jdbcType="VARCHAR" />
     <result column="register_phone" property="registerPhone" jdbcType="VARCHAR" />
     <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
@@ -31,15 +31,15 @@
     <result column="register_type" property="registerType" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, guide_id, order_no, commission_amount, `status`, create_at, `type`, pic_upload_at, 
-    create_user, update_user, update_at, buyer_account, seller_account, version, guide_type, 
-    comm_no, comm_type, invite_phone, register_phone, is_delete
+    id, guide_id, order_no, commission_amount, `status`, create_at, `type`, pic_upload_at,
+    create_user, update_user, update_at, buyer_account, seller_account, version, guide_type,
+    comm_no, config_id, invite_phone, register_phone, is_delete
   </sql>
   <sql id="Blob_Column_List" >
     pic_urls, remarks
   </sql>
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
@@ -51,20 +51,20 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.rongyi.easy.tms.entity.v2.SalesCommission" useGeneratedKeys="true" keyProperty="id" >
-    insert into sales_commission (guide_id, order_no, commission_amount, 
-      `status`, create_at, `type`, 
-      pic_upload_at, create_user, update_user, 
-      update_at, buyer_account, seller_account, 
-      version, guide_type, comm_no, 
-      comm_type, invite_phone, register_phone, 
+    insert into sales_commission (guide_id, order_no, commission_amount,
+      `status`, create_at, `type`,
+      pic_upload_at, create_user, update_user,
+      update_at, buyer_account, seller_account,
+      version, guide_type, comm_no,
+      config_id, invite_phone, register_phone,
       is_delete, pic_urls, remarks
       )
-    values (#{guideId,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, #{commissionAmount,jdbcType=DECIMAL}, 
-      #{status,jdbcType=TINYINT}, #{createAt,jdbcType=TIMESTAMP}, #{type,jdbcType=TINYINT}, 
-      #{picUploadAt,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, 
-      #{updateAt,jdbcType=TIMESTAMP}, #{buyerAccount,jdbcType=VARCHAR}, #{sellerAccount,jdbcType=VARCHAR}, 
-      #{version,jdbcType=BIGINT}, #{guideType,jdbcType=INTEGER}, #{commNo,jdbcType=VARCHAR}, 
-      #{commType,jdbcType=TINYINT}, #{invitePhone,jdbcType=VARCHAR}, #{registerPhone,jdbcType=VARCHAR}, 
+    values (#{guideId,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, #{commissionAmount,jdbcType=DECIMAL},
+      #{status,jdbcType=TINYINT}, #{createAt,jdbcType=TIMESTAMP}, #{type,jdbcType=TINYINT},
+      #{picUploadAt,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR},
+      #{updateAt,jdbcType=TIMESTAMP}, #{buyerAccount,jdbcType=VARCHAR}, #{sellerAccount,jdbcType=VARCHAR},
+      #{version,jdbcType=BIGINT}, #{guideType,jdbcType=INTEGER}, #{commNo,jdbcType=VARCHAR},
+      #{configId,jdbcType=INTEGER}, #{invitePhone,jdbcType=VARCHAR}, #{registerPhone,jdbcType=VARCHAR},
       #{isDelete,jdbcType=TINYINT}, #{picUrls,jdbcType=LONGVARBINARY}, #{remarks,jdbcType=LONGVARBINARY}
       )
   </insert>
@@ -86,7 +86,7 @@
       version,
       guide_type,
       comm_no,
-      comm_type,
+      config_id,
       invite_phone,
       register_phone,
       is_delete,
@@ -109,7 +109,7 @@
       #{version,jdbcType=BIGINT},
       #{guideType,jdbcType=INTEGER},
       #{commNo,jdbcType=VARCHAR},
-      #{commType,jdbcType=TINYINT},
+      #{configId,jdbcType=INTEGER},
       #{invitePhone,jdbcType=VARCHAR},
       #{registerPhone,jdbcType=VARCHAR},
       #{isDelete,jdbcType=TINYINT},
@@ -165,8 +165,8 @@
       <if test="commNo != null" >
         comm_no = #{commNo,jdbcType=VARCHAR},
       </if>
-      <if test="commType != null" >
-        comm_type = #{commType,jdbcType=TINYINT},
+      <if test="configId != null" >
+        config_id = #{configId,jdbcType=INTEGER},
       </if>
       <if test="invitePhone != null" >
         invite_phone = #{invitePhone,jdbcType=VARCHAR},
@@ -203,7 +203,7 @@
       version = #{version,jdbcType=BIGINT},
       guide_type = #{guideType,jdbcType=INTEGER},
       comm_no = #{commNo,jdbcType=VARCHAR},
-      comm_type = #{commType,jdbcType=TINYINT},
+      config_id = #{configId,jdbcType=INTEGER},
       invite_phone = #{invitePhone,jdbcType=VARCHAR},
       register_phone = #{registerPhone,jdbcType=VARCHAR},
       is_delete = #{isDelete,jdbcType=TINYINT},
@@ -228,7 +228,7 @@
       version = #{version,jdbcType=BIGINT},
       guide_type = #{guideType,jdbcType=INTEGER},
       comm_no = #{commNo,jdbcType=VARCHAR},
-      comm_type = #{commType,jdbcType=TINYINT},
+      config_id = #{configId,jdbcType=INTEGER},
       invite_phone = #{invitePhone,jdbcType=VARCHAR},
       register_phone = #{registerPhone,jdbcType=VARCHAR},
       is_delete = #{isDelete,jdbcType=TINYINT}
