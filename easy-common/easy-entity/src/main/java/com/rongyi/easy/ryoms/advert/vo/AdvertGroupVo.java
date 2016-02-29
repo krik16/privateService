@@ -23,6 +23,8 @@ public class AdvertGroupVo implements Serializable {
 	private Integer endCount = 0;//已结束数量
 	private Integer offlineCount = 0;//已下线数量
 	private Integer deleteCount = 0;//已删除数量
+	private Integer totalCount = 0; //总条数
+	private Integer otherCount =0;//其他状态的数量
 	private List<AdvertVo> advertVos;
 	/**
 	 * @return the id
@@ -216,12 +218,36 @@ public class AdvertGroupVo implements Serializable {
 	public void setUpdate_by(Long update_by) {
 		this.update_by = update_by;
 	}
+	/**
+	 * @return the totalCount
+	 */
+	public Integer getTotalCount() {
+		return totalCount;
+	}
+	/**
+	 * @param totalCount the totalCount to set
+	 */
+	public void setTotalCount(Integer totalCount) {
+		this.totalCount = totalCount;
+	}
+	/**
+	 * @return the otherCount
+	 */
+	public Integer getOtherCount() {
+		return otherCount;
+	}
+	/**
+	 * @param otherCount the otherCount to set
+	 */
+	public void setOtherCount(Integer otherCount) {
+		this.otherCount = otherCount;
+	}
 	/** 
 	* @Title: toString 
 	* @Description: TODO(这里用一句话描述这个方法的作用) 
 	* @param @return    设定文件 
 	* @author shaozhou
-	* @date 2016年2月17日 上午11:37:43
+	* @date 2016年2月29日 上午10:12:11
 	* @throws 
 	*/
 	@Override
@@ -230,7 +256,7 @@ public class AdvertGroupVo implements Serializable {
 				+ ", create_by=" + create_by + ", create_at=" + create_at + ", update_by=" + update_by + ", update_at="
 				+ update_at + ", waitCheckCount=" + waitCheckCount + ", disAgreeCount=" + disAgreeCount
 				+ ", waitPublishCount=" + waitPublishCount + ", processingCount=" + processingCount + ", endCount="
-				+ endCount + ", offlineCount=" + offlineCount + ", deleteCount=" + deleteCount + ", advertVos="
-				+ advertVos + "]";
+				+ endCount + ", offlineCount=" + offlineCount + ", deleteCount=" + deleteCount + ", totalCount="
+				+ totalCount + ", otherCount=" + otherCount + ", advertVos=" + advertVos + "]";
 	}
 }
