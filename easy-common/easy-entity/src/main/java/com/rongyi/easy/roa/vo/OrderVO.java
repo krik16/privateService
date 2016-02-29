@@ -72,4 +72,5 @@ public class OrderVO implements Serializable{
 	public void setOrderActivities(List<OldCouponCodeVO> orderActivities) {
 		this.orderActivities = orderActivities;
 	}
+	
 }

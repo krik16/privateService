@@ -153,6 +153,7 @@ public interface IOrderQueryService {
 	 * @param statusRoute
 	 * @return
 	 */
+	@Deprecated
 	Map<String, String> getRouteByStatusRoute(String statusRoute);
 	
 	List<OrderFormEntity> selectOrderList(Map param) throws Exception ;

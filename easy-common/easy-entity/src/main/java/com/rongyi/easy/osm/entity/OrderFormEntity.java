@@ -186,15 +186,29 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
     private BigDecimal scoreAmount;//rebate_amount - 积分
 
     private List<OrderDetailFormEntity> detailOrderList;
-
     private OrderFormExtraEntity orderExtra;
-
+    
     //订单对应事件
     private OrderEventEntity orderEvent;
 
     //对单对应退款记录
     private String applicationType;
 
+    /**
+     * 微信标准版支付记录appid
+     */
+    private String weixinAppId;
+
+    /**
+     * 下单渠道
+     */
+    private String orderChannel;
+
+    /**
+     * 微信openId
+     */
+    private String openId;
+    
     public Byte getIsAlert() {
         return isAlert;
     }
@@ -823,6 +837,30 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
         this.applicationType = applicationType;
     }
 
+    public String getWeixinAppId() {
+        return weixinAppId;
+    }
+
+    public void setWeixinAppId(String weixinAppId) {
+        this.weixinAppId = weixinAppId;
+    }
+
+    public String getOrderChannel() {
+        return orderChannel;
+    }
+
+    public void setOrderChannel(String orderChannel) {
+        this.orderChannel = orderChannel;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
+
     @Override
     public String toString() {
         return "OrderFormEntity{" +
@@ -870,6 +908,9 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
                 ", discountAmount=" + discountAmount +
                 ", rebateAmount=" + rebateAmount +
                 ", scoreAmount=" + scoreAmount +
+                ", weixinAppId=" + weixinAppId +
+                ", orderChannel=" + orderChannel +
+                ", openId=" + openId +
                 '}';
     }
 

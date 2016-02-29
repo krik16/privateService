@@ -10,6 +10,8 @@
 package com.rongyi.easy.solr.param;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.rongyi.easy.malllife.param.MalllifeBaseParam;
 
@@ -73,6 +75,20 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	private String zoneId;
 
 	private String commodityCode;
+
+	private List<String> keywordList = new ArrayList<>();
+
+	public List<String> getKeywordList() {
+		return keywordList;
+	}
+
+	public void setKeywordList(List<String> keywordList) {
+		this.keywordList = keywordList;
+	}
+
+	public void addKeywordList(String keyword) {
+		this.keywordList.add(keyword);
+	}
 
 	public Integer getFrom() {
 		return from;
@@ -278,6 +294,7 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 				", from='" + from + '\'' +
 				", zoneId='" + zoneId + '\'' +
 				", commodityCode='" + commodityCode + '\'' +
+				", keywordList='" + keywordList + '\'' +
 				'}';
 	}
 }
