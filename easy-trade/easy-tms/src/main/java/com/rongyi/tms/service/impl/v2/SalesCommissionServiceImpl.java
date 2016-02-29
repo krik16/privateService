@@ -9,6 +9,8 @@ import com.rongyi.rss.tradecenter.osm.IOrderQueryService;
 import com.rongyi.tms.constants.ConstantEnum;
 import com.rongyi.tms.service.v2.SalesCommissionService;
 import org.apache.commons.collections.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,8 @@ import java.util.Map;
  **/
 @Service("salesCommissionService")
 public class SalesCommissionServiceImpl extends BaseServiceImpl implements SalesCommissionService{
+
+    Logger logger = LoggerFactory.getLogger(SalesCommissionServiceImpl.class);
 
     private  static final String NAMESPACE ="com.rongyi.tms.mapper.xml.v2.SalesCommissionMapper";
 
@@ -43,6 +47,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
      */
     @Override
     public List<SalesCommissionVO> findCommissionList(Map<String, Object> map) {
+        logger.info("service findCommissionList start map={}", map);
         List<SalesCommissionVO> list = this.getBaseDao().selectListBySql(NAMESPACE+".findCommissionList",map);
         List<SalesCommissionVO> reList = new ArrayList<>();
         if (CollectionUtils.isNotEmpty(list)) {
@@ -50,6 +55,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
                 reList.add(processCommissionVO(vo, map.get("type").toString()));
             }
         }
+        logger.info("service findCommissionList start size={}",reList.size());
         return reList;
     }
 
@@ -74,6 +80,6 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
      */
     @Override
     public int countCommission(Map<String, Object> map) {
-        return 0;
+        return this.getBaseDao().count(NAMESPACE+".countSalesCommission",map);
     }
 }

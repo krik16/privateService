@@ -239,6 +239,7 @@
     <if test="status!=null">
       and sc.status=#{status}
     </if>
+    <!-- 财务列表 -->
     <if test="searchType!=null and searchType=1">
       and sc.status not in(1, -1)
     </if>
@@ -282,7 +283,13 @@
     <where>
       <include refid="Commission_List_Condition"/>
     </where>
-    limit #{currentPage, jdbcType=INTEGER}, #{pageSize, jdbcType=INTEGER}
-    order_by sc.create_at
+    order by sc.create_at desc
+    limit #{startRecord, jdbcType=INTEGER}, #{pageSize, jdbcType=INTEGER}
+  </select>
+  <select id="countSalesCommission" parameterType="map" resultType="int">
+    select count(1) from sales_commission sc join commission_config cc on sc.config_id=cc.id
+    <where>
+      <include refid="Commission_List_Condition"/>
+    </where>
   </select>
 </mapper>
