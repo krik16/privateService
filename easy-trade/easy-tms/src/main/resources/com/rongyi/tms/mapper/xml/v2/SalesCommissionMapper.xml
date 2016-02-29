@@ -292,4 +292,16 @@
       <include refid="Commission_List_Condition"/>
     </where>
   </select>
+  <select id="getCommissionDetail" parameterType="map" resultMap="FullResultMap">
+    select sc.*, cc.register_type, cc.type
+    from sales_commission sc join commission_config cc on sc.config_id=cc.id
+    where sc.id=#{id}
+  </select>
+  <select id="selectDailyCount" parameterType="map" resultType="int">
+    select count(1) from sales_commission sc join commission_config cc on sc.config_id=cc.id
+    where TO_DAYS(sc.create_at)=TO_DAYS(#{createAt, jdbcType=DATETIME})
+          and sc.guide_id=#{guideId, jdbcType=INTEGER}
+          and sc.status=3
+          and cc.type={type, jdbcType=INTEGER}
+  </select>
 </mapper>

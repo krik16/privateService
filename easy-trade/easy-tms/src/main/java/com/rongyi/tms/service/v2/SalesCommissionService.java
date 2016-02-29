@@ -2,6 +2,7 @@ package com.rongyi.tms.service.v2;
 
 import com.rongyi.easy.tms.entity.v2.SalesCommission;
 import com.rongyi.easy.tms.vo.v2.SalesCommissionVO;
+import com.rongyi.tms.web.controller.param.VerifyCommissionParam;
 
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,13 @@ import java.util.Map;
  **/
 public interface SalesCommissionService {
 
+    /**
+     * 通过主键id查询
+     * @param id
+     * @return
+     */
+    SalesCommission selectById(Integer id);
+
     void insert(SalesCommission salesCommission);
 
     /**
@@ -23,9 +31,19 @@ public interface SalesCommissionService {
     List<SalesCommissionVO> findCommissionList(Map<String, Object> map);
 
     /**
+     * 佣金详情
+     * @param id
+     * @return
+     */
+    SalesCommissionVO getCommissionDetail(Integer id);
+
+    /**
      * 佣金总条数
      * @param map
      * @return
      */
     int countCommission(Map<String, Object> map);
+
+
+    boolean verifyCommission(VerifyCommissionParam param);
 }
