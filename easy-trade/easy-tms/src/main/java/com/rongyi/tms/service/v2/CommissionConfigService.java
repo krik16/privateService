@@ -21,6 +21,8 @@ public interface CommissionConfigService {
 
     List<CommissionConfig> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize);
 
+    Integer selectPageCount(Map<String,Object> map);
+
     /**
      *  查询是否有符合佣金增加条件的配置
      * @param type 返佣类型
@@ -31,5 +33,13 @@ public interface CommissionConfigService {
      */
     CommissionConfig selectByTypes(Integer type,Integer inviteType,Integer registerType,Date effectTime);
 
+    /**
+     *
+     * @param type 返佣类型(0:推广返佣,1:首单返佣,2:小票返佣)
+     * @param effectStartTime 生效起始时间
+     * @param effectEndTime 生效结束时间
+     * @return boolean
+     */
+    boolean validateIsExist(byte type,byte inviteType,byte registerType, Date effectStartTime,Date effectEndTime);
 
 }

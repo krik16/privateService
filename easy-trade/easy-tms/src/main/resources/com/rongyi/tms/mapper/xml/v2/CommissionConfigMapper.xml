@@ -27,7 +27,15 @@
   </sql>
 
   <sql id="list_where_clause">
-
+    <if test="ruleCode != null and ruleCode != ''">
+      rule_code = #{ruleCode}
+    </if>
+    <if test="status != null and status != ''">
+      status = #{status}
+    </if>
+    <if test="type != null and type != ''">
+      type = #{type}
+    </if>
   </sql>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -41,7 +49,7 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.rongyi.easy.tms.entity.v2.CommissionConfig" useGeneratedKeys="true" keyProperty="id" >
-    insert into commission_config (rule_code, effect_start_time, effect_end_time, 
+    insert into commission_config (rule_code, effect_start_time, effect_end_time, `
       `type`, comm_threshold, comm_amount, 
       invite_type, register_type, limit_type, 
       limit_total, cust_verify, fina_verify, 
@@ -190,7 +198,29 @@
     </if>
   </select>
 
+  <select id="selectPageCount" resultMap="BaseResultMap"
+          parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from
+    commission_config
+    <where>
+      <include refid="list_where_clause" />
+    </where>
+  </select>
+
   <select id="selectByTypes" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from commission_config
+    where type = #{type,jdbcType=TINYINT}
+    and (invite_type = #{inviteType,jdbcType=TINYINT} or invite_type = 0)
+    and (register_type = #{registerType,jdbcType=TINYINT} or register_type = 0)
+    and (status = 1 or status = 3)
+    <!-- 时间条件暂过滤-->
+    <!--and effect_start_time &lt;= effectTime and effectTime &lt;= effect_end_time-->
+  </select>
+  <select id="validateIsExist" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
     from commission_config

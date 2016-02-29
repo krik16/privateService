@@ -31,13 +31,13 @@ public class CommissionConfigServiceImpl extends BaseServiceImpl implements Comm
 
     @Override
     public void update(CommissionConfig commissionConfig) {
-        this.getBaseDao().updateBySql(NAMESPACE+".updateByPrimaryKeySelective",commissionConfig);
+        this.getBaseDao().updateBySql(NAMESPACE + ".updateByPrimaryKeySelective", commissionConfig);
     }
 
     @Override
     public CommissionConfig selectById(Integer id) {
         Map<String,Object> map = new HashMap<>();
-        map.put("id",id);
+        map.put("id", id);
         return this.getBaseDao().selectOneBySql(NAMESPACE+".selectByPrimaryKey",map);
     }
 
@@ -45,7 +45,12 @@ public class CommissionConfigServiceImpl extends BaseServiceImpl implements Comm
     public List<CommissionConfig> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
         map.put("currentPage", (currentPage - 1) * pageSize);
         map.put("pageSize", pageSize);
-        return this.getBaseDao().selectListBySql(NAMESPACE+".selectPageList",map);
+        return this.getBaseDao().selectListBySql(NAMESPACE + ".selectPageList", map);
+    }
+
+    public Integer selectPageCount(Map<String, Object> map){
+        Integer count = this.getBaseDao().selectOneBySql(NAMESPACE + ".selectPageCount", map);
+        return count == null ? 0 : count;
     }
 
     @Override
@@ -56,5 +61,17 @@ public class CommissionConfigServiceImpl extends BaseServiceImpl implements Comm
         map.put("registerType",registerType);
         map.put("effectTime",effectTime);
         return this.getBaseDao().selectOneBySql(NAMESPACE+".selectByTypes",map);
+    }
+
+    @Override
+    public boolean validateIsExist(byte type,byte inviteType,byte registerType, Date effectStartTime,Date effectEndTime){
+        Map<String,Object> map = new HashMap<>();
+        map.put("type",type);
+        map.put("inviteType",inviteType);
+        map.put("registerType", registerType);
+        map.put("effectStartTime",effectStartTime);
+        map.put("effectEndTime",effectEndTime);
+        CommissionConfig commissionConfig = this.getBaseDao().selectOneBySql(NAMESPACE + ".validateIsExist", map);
+        return commissionConfig != null;
     }
 }
