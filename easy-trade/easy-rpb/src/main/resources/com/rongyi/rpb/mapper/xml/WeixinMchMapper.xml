@@ -9,7 +9,7 @@
     <result column="cret_path" property="cretPath" jdbcType="VARCHAR" />
     <result column="public_code" property="publicCode" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
-    <result column="trade_type" property="tradeType" jdbcType="TINYINT" />
+    <result column="trade_type" property="tradeType" jdbcType="VARCHAR" />
     <result column="is_rongyi_pay" property="isRongyiPay" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
@@ -31,7 +31,7 @@
       trade_type,is_rongyi_pay)
     values (#{appId,jdbcType=VARCHAR}, #{key,jdbcType=VARCHAR}, #{mchId,jdbcType=VARCHAR}, 
       #{cretPath,jdbcType=VARCHAR}, #{publicCode,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
-      #{tradeType,jdbcType=TINYINT}),
+      #{tradeType,jdbcType=VARCHAR}),
       #{isRongyiPay,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.rongyi.easy.rpb.domain.WeixinMch" useGeneratedKeys="true" keyProperty="id" >
@@ -53,7 +53,7 @@
       #{cretPath,jdbcType=VARCHAR},
       #{publicCode,jdbcType=VARCHAR},
       #{userId,jdbcType=VARCHAR},
-      #{tradeType,jdbcType=TINYINT},
+      #{tradeType,jdbcType=VARCHAR},
       #{isRongyiPay,jdbcType=TINYINT}
     </trim>
   </insert>
@@ -79,9 +79,9 @@
         user_id = #{userId,jdbcType=VARCHAR},
       </if>
       <if test="tradeType != null" >
-        trade_type = #{tradeType,jdbcType=TINYINT},
+        trade_type = #{tradeType,jdbcType=VARCHAR},
       </if>
-      <if test="is_rongyi_pay != null" >
+      <if test="isRongyiPay != null" >
         is_rongyi_pay = #{isRongyiPay,jdbcType=TINYINT}
       </if>
     </set>
@@ -95,7 +95,7 @@
       cret_path = #{cretPath,jdbcType=VARCHAR},
       public_code = #{publicCode,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=VARCHAR},
-      trade_type = #{tradeType,jdbcType=TINYINT},
+      trade_type = #{tradeType,jdbcType=VARCHAR},
       is_rongyi_pay = #{isRongyiPay,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -115,15 +115,14 @@
     from weixin_mch
     where app_id = #{appId,jdbcType=VARCHAR}
     <if test="tradeType != null and tradeType != ''">
-      and trade_type = #{tradeType,jdbcType=VARCHAR}
+      and trade_type like  CONCAT('%',#{tradeType},'%')
     </if>
   </select>
-  <select id="selectByMchIdAndUserIdAndTradeType" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByMchIdAndUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
     from weixin_mch
     where mch_id = #{mchId,jdbcType=VARCHAR}
     and user_id = #{userId,jdbcType=VARCHAR}
-    and trade_type = #{tradeType,jdbcType=TINYINT}
   </select>
 </mapper>

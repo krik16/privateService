@@ -20,11 +20,17 @@ import org.springframework.test.annotation.Rollback;
 import org.testng.annotations.Test;
 
 import base.BaseTest;
-
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.easy.mq.MessageEvent;
+import com.rongyi.easy.rpb.domain.WeixinMch;
 import com.rongyi.easy.rpb.vo.PaymentParamVO;
 import com.rongyi.rss.rpb.IRpbService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
+import org.testng.annotations.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**	
  * @Author:  柯军
@@ -57,11 +63,16 @@ public class RpbServiceTest extends BaseTest{
 		event.setType("5");
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("weidianId","\"\"");
-		map.put("title", "测试优惠券 勿买");
-		map.put("orderType", "1");
+		map.put("title", "卡券测试1");
+		map.put("timeStart", "2016-02-16 17:17:19");
+		map.put("timeExpire", "2016-02-16 17:52:19");
+		map.put("appId", "wxb0af59268c136d7d");
+		map.put("openId", "o0BDmjr5jmDDZieVha8Evg_aJdQM");
 		map.put("orderDetailNum", "\"\"");
-		map.put("orderNum", "1009351119361126");
-		map.put("totalPrice", "0.01");
+		map.put("orderNum", "\"021644108544151726\"");
+		map.put("weixinPayType", "1");
+		map.put("orderType", "1");
+		map.put("totalPrice", 2);
 		event.setBody(map);
 		iRpbService.getPaySign(event);
 	}
@@ -80,6 +91,20 @@ public class RpbServiceTest extends BaseTest{
 		paymentParamVO.setUserId("superadmin");
 		Map<String,Object> map = iRpbService.generatePayment(paymentParamVO);
 		System.err.println(map.toString());
+	}
+	@Test
+	@Rollback(false)
+	public void testAddWeixinMch(){
+		WeixinMch weixinMch = new WeixinMch();
+		weixinMch.setIsRongyiPay((byte)0);
+		weixinMch.setTradeType("1");
+		weixinMch.setAppId("aaaa");
+		weixinMch.setCretPath("/test/test2");
+		weixinMch.setKey("1231");
+		weixinMch.setMchId("1001");
+		weixinMch.setPublicCode("asda");
+		weixinMch.setUserId("1231");
+		iRpbService.addWeixinMch(weixinMch);
 	}
 
 	@Test
