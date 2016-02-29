@@ -1,11 +1,17 @@
 package com.rongyi.easy.ryoms.advert.param;
 
+import java.io.Serializable;
+
 /**
  * @Description: 配置查询参数类
  * @author wangjh
  * @date 2016年2月18日
  */
-public class ConfigSearchParam {
+public class ConfigSearchParam implements Serializable {
+	/** 
+	* @Fields serialVersionUID
+	*/ 
+	private static final long serialVersionUID = 7254887006296038782L;
 	public String getMallName() {
 		return mallName;
 	}

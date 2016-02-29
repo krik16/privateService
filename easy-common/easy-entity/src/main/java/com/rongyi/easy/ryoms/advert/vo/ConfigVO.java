@@ -12,6 +12,23 @@ public class ConfigVO implements Serializable {
 	* @Fields serialVersionUID
 	*/ 
 	private static final long serialVersionUID = -1452982881105333559L;
+	/** 
+	* @Title: toString 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param @return    设定文件 
+	* @author shaozhou
+	* @date 2016年2月29日 下午6:13:26
+	* @throws 
+	*/
+	@Override
+	public String toString() {
+		return "ConfigVO [configId=" + configId + ", mallMId=" + mallMId + ", mallName=" + mallName + ", mallLevel="
+				+ mallLevel + ", positionId=" + positionId + ", positionName=" + positionName + ", cityMId=" + cityMId
+				+ ", cityName=" + cityName + ", cityLevel=" + cityLevel + ", areaId=" + areaId + ", areaName="
+				+ areaName + ", countTotal=" + countTotal + ", countRY=" + countRY + ", countMall=" + countMall
+				+ ", statusId=" + statusId + ", statusName=" + statusName + "]";
+	}
+
 	public int getConfigId() {
 		return configId;
 	}
