@@ -130,6 +130,10 @@ public class ResponseResult implements java.io.Serializable {
 		return code;
 	}
 
+	public Integer getCodeInt() {
+		return Integer.valueOf(code);
+	}
+
 	public ResponseResult setCode(String code) {
 		this.code = code;
 		return this;

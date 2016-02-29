@@ -137,6 +137,6 @@ public interface CommodityService {
      * @param identity		角色
      * @return
      */
-	public ResponseResult deleteCommodity(String commodityId, Long shopId, Integer identity);
+	public ResponseVO deleteCommodity(String commodityId, Long shopId, Integer identity);
 
 }
