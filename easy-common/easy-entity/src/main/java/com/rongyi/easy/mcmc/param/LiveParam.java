@@ -1,6 +1,7 @@
 package com.rongyi.easy.mcmc.param;
 
 import java.io.Serializable;
+import java.util.List;
 
 
 /**
@@ -38,10 +39,19 @@ public class LiveParam  implements Serializable{
 	 */
 	private int zoneType;
 	/**
+
 	 * 定点位置id
 	 */
 	private String liveAddressId;
-	
+	private List<String> urlList;
+
+	public List<String> getUrlList() {
+		return urlList;
+	}
+
+	public void setUrlList(List<String> urlList) {
+		this.urlList = urlList;
+	}
 	public int getZoneType() {
 		return zoneType;
 	}
