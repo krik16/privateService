@@ -37,7 +37,7 @@ public class CommissionServiceImpl implements CommissionService{
 
     @Override
     public ResponseData addCommission(CommissionVO commissionVO) {
-        LOGGER.info("commissionVO={}",commissionVO);
+        LOGGER.info("增加佣金,commissionVO={}",commissionVO);
         CommissionConfig commissionConfig = commissionConfigService.selectByTypes(commissionVO.getType(), commissionVO.getGuideType(), commissionVO.getRegisterType(), commissionVO.getCreateAt());
         if(commissionConfig == null){
             LOGGER.info("未查找到符合的佣金规则配置，不增加佣金");
@@ -53,6 +53,13 @@ public class CommissionServiceImpl implements CommissionService{
         salesCommission.setGuideId(commissionVO.getGuideId());
         salesCommission.setOrderNo(commissionVO.getOrderNo());
         salesCommission.setCommissionAmount(new BigDecimal(commissionConfig.getCommAmount()));
+        if(ConstantEnum.COMMISSION_CONFIG_CUST_VERIFY_0.getCodeByte().equals(commissionConfig.getFinaVerify())){
+            LOGGER.info("财务审核系统自动审核通过");
+            salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_3.getCodeInt());
+        }else if(ConstantEnum.COMMISSION_CONFIG_CUST_VERIFY_0.getCodeByte().equals(commissionConfig.getCustVerify())){//客服系统自动审核
+            LOGGER.info("客服审核系统自动审核通过");
+            salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_2.getCodeInt());
+        }
         salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_1.getCodeInt());
         salesCommission.setCreateAt(DateUtil.getCurrDateTime());
         salesCommission.setGuideType(commissionVO.getGuideType());

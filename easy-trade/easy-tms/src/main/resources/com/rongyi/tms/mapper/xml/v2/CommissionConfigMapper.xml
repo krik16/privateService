@@ -17,13 +17,12 @@
     <result column="fina_verify" property="finaVerify" jdbcType="TINYINT" />
     <result column="status" property="status" jdbcType="TINYINT" />
     <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
-    <result column="config_id" property="configId" jdbcType="INTEGER" />
     <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, rule_code, effect_start_time, effect_end_time, `type`, comm_threshold, comm_amount, 
-    invite_type, register_type, limit_type, limit_total, cust_verify, fina_verify, `status`, 
-    create_at,config_id, is_delete
+    id, rule_code, effect_start_time, effect_end_time, `type`, comm_threshold, comm_amount,
+    invite_type, register_type, limit_type, limit_total, cust_verify, fina_verify, `status`,
+    create_at,is_delete
   </sql>
 
   <sql id="list_where_clause">
@@ -39,7 +38,7 @@
   </sql>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from commission_config
     where id = #{id,jdbcType=INTEGER}
@@ -50,24 +49,28 @@
   </delete>
   <insert id="insert" parameterType="com.rongyi.easy.tms.entity.v2.CommissionConfig" useGeneratedKeys="true" keyProperty="id" >
     insert into commission_config (rule_code, effect_start_time, effect_end_time, `
-      `type`, comm_threshold, comm_amount, 
-      invite_type, register_type, limit_type, 
-      limit_total, cust_verify, fina_verify, 
-      `status`, create_at,config_id, is_delete
+      `type`, comm_threshold, comm_amount,
+      invite_type, register_type, limit_type,
+      limit_total, cust_verify, fina_verify,
+      `status`, create_at, is_delete
       )
-    values (#{ruleCode,jdbcType=VARCHAR}, #{effectStartTime,jdbcType=TIMESTAMP}, #{effectEndTime,jdbcType=TIMESTAMP}, 
-      #{type,jdbcType=TINYINT}, #{commThreshold,jdbcType=INTEGER}, #{commAmount,jdbcType=INTEGER}, 
-      #{inviteType,jdbcType=TINYINT}, #{registerType,jdbcType=TINYINT}, #{limitType,jdbcType=TINYINT}, 
-      #{limitTotal,jdbcType=INTEGER}, #{custVerify,jdbcType=TINYINT}, #{finaVerify,jdbcType=TINYINT}, 
-      #{status,jdbcType=TINYINT}, #{createAt,jdbcType=TIMESTAMP}, #{configId,jdbcType=INTEGER}, #{isDelete,jdbcType=TINYINT}
+    values (#{ruleCode,jdbcType=VARCHAR}, #{effectStartTime,jdbcType=TIMESTAMP}, #{effectEndTime,jdbcType=TIMESTAMP},
+      #{type,jdbcType=TINYINT}, #{commThreshold,jdbcType=INTEGER}, #{commAmount,jdbcType=INTEGER},
+      #{inviteType,jdbcType=TINYINT}, #{registerType,jdbcType=TINYINT}, #{limitType,jdbcType=TINYINT},
+      #{limitTotal,jdbcType=INTEGER}, #{custVerify,jdbcType=TINYINT}, #{finaVerify,jdbcType=TINYINT},
+      #{status,jdbcType=TINYINT}, #{createAt,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=TINYINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.rongyi.easy.tms.entity.v2.CommissionConfig" useGeneratedKeys="true" keyProperty="id" >
     insert into commission_config
     <trim prefix="(" suffix=")" suffixOverrides="," >
       rule_code,
-      effect_start_time,
-      effect_end_time,
+      <if test="effectStartTime != null">
+           effect_start_time,
+      </if>
+      <if test="effectEndTime != null">
+         effect_end_time,
+      </if>
       `type`,
       comm_threshold,
       comm_amount,
@@ -79,13 +82,18 @@
       fina_verify,
       `status`,
       create_at,
-      config_id,
-      is_delete,
+      <if test="isDelete != null">
+        is_delete,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       #{ruleCode,jdbcType=VARCHAR},
-      #{effectStartTime,jdbcType=TIMESTAMP},
-      #{effectEndTime,jdbcType=TIMESTAMP},
+      <if test="effectStartTime != null">
+        #{effectStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="effectEndTime != null">
+         #{effectEndTime,jdbcType=TIMESTAMP},
+      </if>
       #{type,jdbcType=TINYINT},
       #{commThreshold,jdbcType=INTEGER},
       #{commAmount,jdbcType=INTEGER},
@@ -97,8 +105,9 @@
       #{finaVerify,jdbcType=TINYINT},
       #{status,jdbcType=TINYINT},
       #{createAt,jdbcType=TIMESTAMP},
-      #{configId,jdbcType=INTEGER},
-      #{isDelete,jdbcType=TINYINT},
+      <if test="isDelete != null">
+         #{isDelete,jdbcType=TINYINT},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.rongyi.easy.tms.entity.v2.CommissionConfig" >
@@ -146,9 +155,6 @@
       <if test="createAt != null" >
         create_at = #{createAt,jdbcType=TIMESTAMP},
       </if>
-      <if test="configId != null" >
-        config_id = #{configId,jdbcType=INTEGER},
-      </if>
       <if test="isDelete != null" >
         is_delete = #{isDelete,jdbcType=TINYINT},
       </if>
@@ -171,7 +177,6 @@
       fina_verify = #{finaVerify,jdbcType=TINYINT},
       `status` = #{status,jdbcType=TINYINT},
       create_at = #{createAt,jdbcType=TIMESTAMP},
-      config_id = #{configId,jdbcType=INTEGER},
       is_delete = #{isDelete,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -190,7 +195,7 @@
     </if>
 
     <if test="orderby == null">
-      order by trade_time desc
+      order by create_at desc
     </if>
     <if test="currentPage != null">
       limit
@@ -198,10 +203,10 @@
     </if>
   </select>
 
-  <select id="selectPageCount" resultMap="BaseResultMap"
-          parameterType="map">
+  <select id="selectPageCount" parameterType="java.util.Map"
+          resultType="java.lang.Integer">
     select
-    <include refid="Base_Column_List" />
+      count(1)
     from
     commission_config
     <where>

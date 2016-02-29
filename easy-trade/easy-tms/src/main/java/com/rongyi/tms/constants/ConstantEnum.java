@@ -130,6 +130,9 @@ public enum ConstantEnum {
     COMMISSION_CONFIG_TYPE_1(1,"首单返佣"),
     COMMISSION_CONFIG_TYPE_2(2,"小票返佣"),
 
+    COMMISSION_CONFIG_CUST_VERIFY_0(0,"系统审核"),
+    COMMISSION_CONFIG_CUST_VERIFY_1(1,"人工审核"),
+
     COMMISSION_ADD_FAIL("1019201","未查找到符合的佣金规则配置，不增加佣金"),
     COMMISSION_CONFIG_LIST_FAIL("1019202","查询佣金规则列表失败"),
     COMMISSION_CONFIG_EXIST("1019203","此佣金规则配置已存在"),
