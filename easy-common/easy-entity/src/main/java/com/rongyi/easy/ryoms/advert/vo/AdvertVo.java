@@ -3,6 +3,7 @@ package com.rongyi.easy.ryoms.advert.vo;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class AdvertVo implements Serializable {
 	/** 
@@ -24,8 +25,8 @@ public class AdvertVo implements Serializable {
 	private Long create_at;//记录创建时间
 	private Long update_by;//更新人账号ID
 	private Long update_at;//记录更新时间
-	private List<String> mall_ids;//关联商场id集合
-	private List<String> mall_names;//关联商场name集合
+	private List<Map<String,Object>> mall_List;//关联商场id集合
+	//private List<String> mall_names;//关联商场name集合
 	/**
 	 * @return the id
 	 */
@@ -207,35 +208,23 @@ public class AdvertVo implements Serializable {
 		this.status_detail = status_detail;
 	}
 	/**
-	 * @return the mall_ids
+	 * @return the mall_List
 	 */
-	public List<String> getMall_ids() {
-		return mall_ids;
+	public List<Map<String, Object>> getMall_List() {
+		return mall_List;
 	}
 	/**
-	 * @param mall_ids the mall_ids to set
+	 * @param mall_List the mall_List to set
 	 */
-	public void setMall_ids(List<String> mall_ids) {
-		this.mall_ids = mall_ids;
-	}
-	/**
-	 * @return the mall_names
-	 */
-	public List<String> getMall_names() {
-		return mall_names;
-	}
-	/**
-	 * @param mall_names the mall_names to set
-	 */
-	public void setMall_names(List<String> mall_names) {
-		this.mall_names = mall_names;
+	public void setMall_List(List<Map<String, Object>> mall_List) {
+		this.mall_List = mall_List;
 	}
 	/** 
 	* @Title: toString 
 	* @Description: TODO(这里用一句话描述这个方法的作用) 
 	* @param @return    设定文件 
 	* @author shaozhou
-	* @date 2016年2月29日 下午6:17:50
+	* @date 2016年2月29日 下午6:41:03
 	* @throws 
 	*/
 	@Override
@@ -244,6 +233,6 @@ public class AdvertVo implements Serializable {
 				+ ", content=" + content + ", content_type=" + content_type + ", status=" + status + ", status_detail="
 				+ status_detail + ", publish_start=" + publish_start + ", publish_end=" + publish_end + ", group_id="
 				+ group_id + ", create_by=" + create_by + ", create_at=" + create_at + ", update_by=" + update_by
-				+ ", update_at=" + update_at + ", mall_ids=" + mall_ids + ", mall_names=" + mall_names + "]";
+				+ ", update_at=" + update_at + ", mall_List=" + mall_List + "]";
 	}
 }
