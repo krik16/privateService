@@ -256,6 +256,10 @@ public enum CodeEnum {
     public String getActionCode(){
         return code; 
     }
+
+    public Integer getActionCodeInt() {
+        return Integer.valueOf(code);
+    }
     
     public String getMessage(){
         return message;

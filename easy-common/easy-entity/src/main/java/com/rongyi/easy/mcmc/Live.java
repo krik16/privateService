@@ -42,7 +42,7 @@ public class Live implements Serializable {
 	 */
 	private String bullId;
 	/**
-	 * 直播状态 [0:发布/预热中，1:上线/进行中，2:下线(已过期)]
+	 * 直播状态 [0:发布/预热中，1:上线/进行中，2:下线(已过期),-1代表删除]
 	 */
 	private int status;
 	/**
@@ -96,8 +96,16 @@ public class Live implements Serializable {
 	 * 排序字段
 	 */
 	private int sort;
-	
-	
+
+	private List<String> urlList;
+
+	public List<String> getUrlList() {
+		return urlList;
+	}
+
+	public void setUrlList(List<String> urlList) {
+		this.urlList = urlList;
+	}
 
 	public ObjectId getId() {
 		return id;
@@ -283,6 +291,7 @@ public class Live implements Serializable {
 		live.setZoneType(zoneType);
 		live.setBullName(bullName);
 		live.setPhone(phone);
+		live.setUrlList(urlList);
 		return live;
 	}
 
