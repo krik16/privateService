@@ -186,6 +186,7 @@ public enum CodeEnum {
     ERROR_UPDATE_NOTICE("1073004","修改店铺公告失败"),
     ERROR_DELETE_NOTICE("1073005","删除店铺公告失败"),
     ERROR_OFFLINE_NOTICE("1073006","公告已强制下线"),
+    ERROR_NOTICE_HAS_SENSITIVE_WORD("1073007","您填写的店铺公告不符合规范，请重新发布"),
 
     ERROR_NO_RIGHTS("1073007", "亲,您无权限操作上级/下级发布的商品喔～"),
     
