@@ -299,9 +299,9 @@
   </select>
   <select id="selectDailyCount" parameterType="map" resultType="int">
     select count(1) from sales_commission sc join commission_config cc on sc.config_id=cc.id
-    where TO_DAYS(sc.create_at)=TO_DAYS(#{createAt, jdbcType=DATETIME})
+    where TO_DAYS(sc.create_at)=TO_DAYS(#{createAt, jdbcType=TIMESTAMP})
           and sc.guide_id=#{guideId, jdbcType=INTEGER}
           and sc.status=3
-          and cc.type={type, jdbcType=INTEGER}
+          and cc.type=#{type, jdbcType=TINYINT}
   </select>
 </mapper>
