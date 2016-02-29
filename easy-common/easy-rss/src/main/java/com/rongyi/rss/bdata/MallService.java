@@ -103,5 +103,20 @@ public interface MallService {
 	ResponseVO getAdsByMallId(String mall_id);
 
 	ResponseVO getAdById(String ad_id);
+	
+	/**
+	 * 获取默认素材列表
+	 * 
+	 * @return
+	 */
+	ResponseVO getDefaultAds();
+
+	/**
+	 * 获取默认素材详情
+	 * 
+	 * @param defaultId
+	 * @return
+	 */
+	ResponseVO getDefaultAdById(String defaultId);
 
 }
