@@ -45,5 +45,5 @@ public interface SalesCommissionService {
     int countCommission(Map<String, Object> map);
 
 
-    boolean verifyCommission(VerifyCommissionParam param);
+    boolean verifyCommission(VerifyCommissionParam param, String user);
 }

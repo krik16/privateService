@@ -129,15 +129,19 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
     }
 
     @Override
-    public boolean verifyCommission(VerifyCommissionParam param) {
+    public boolean verifyCommission(VerifyCommissionParam param, String user) {
+        int resultNum = 0;
         Map<String, Object> paramsMap = new HashMap<>();
         List<String> ids = Arrays.asList(param.getIds().split(","));
         for (String idStr : ids)
         {
-            int id = Integer.valueOf(idStr);
-            SalesCommission commission = selectById(id);
+            SalesCommission commission = selectById(Integer.valueOf(idStr));
             if (commission!=null)
             {
+                SalesCommission salesCommission = new SalesCommission();
+                salesCommission.setId(Integer.valueOf(idStr));
+                salesCommission.setStatus(param.getStatus());
+                salesCommission.setUpdateDate(new Date());
                 CommissionConfig config = commissionConfigService.selectById(commission.getConfigId());
                 if (config!=null)
                 {
@@ -150,14 +154,29 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
                         paramsMap.put("status", param.getStatus());
                         paramsMap.put("type", config.getType());
                         Integer dailyCount = this.getBaseDao().count(NAMESPACE + ".selectDailyCount", paramsMap);
+                        if (dailyCount>config.getLimitTotal()){
+                            salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_5.getCodeInt());
+                        }
                     }
+                    int updateNum = this.getBaseDao().updateBySql(NAMESPACE + ".selectDailyCount", salesCommission);
+                    if (updateNum>0)
+                        resultNum++;
                 }
             }
-
-
         }
-//        addOperateLog(id, param.getDesc())
-        return false;
+
+        if (resultNum>0){
+            for (String idStr : ids){
+                SalesCommissionAuditLog auditLog = new SalesCommissionAuditLog();
+                auditLog.setAuditUserId(user);
+                auditLog.setCreateAt(new Date());
+                auditLog.setMemo(param.getDesc());
+                auditLog.setOperateBiz(param.getOperateType());
+                auditLog.setSalesCommissionId(Integer.valueOf(idStr));
+                salesCommissionAuditLogService.createCommissionAuditLog(auditLog);
+            }
+        }
+        return resultNum>0;
     }
 
 
