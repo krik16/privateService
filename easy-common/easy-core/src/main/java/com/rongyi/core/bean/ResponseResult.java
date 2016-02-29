@@ -2,10 +2,10 @@ package com.rongyi.core.bean;
 
 /**
  * 统一返回对象 逐渐废弃
- *
  * @author baodk
  * @see ResponseVO
  */
+@Deprecated// 不建议使用当前对象
 public class ResponseResult implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 
