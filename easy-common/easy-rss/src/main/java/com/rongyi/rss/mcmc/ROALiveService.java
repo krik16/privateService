@@ -125,5 +125,8 @@ public interface ROALiveService {
 	 */
 	ResponseVO getLiveByIdsAndTime(List<String> ids, long time, int commodityCount, int liveStatus,
 			int commodityStatus);
-
+    /*
+    根据Id删除直播商品
+     */
+	ResponseVO  deleteById (String id);
 }

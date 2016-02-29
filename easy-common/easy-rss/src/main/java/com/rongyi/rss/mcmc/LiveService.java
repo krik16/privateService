@@ -133,5 +133,7 @@ public interface LiveService {
 	 * @return
 	 */
 	ResponseVO feCommodityOffShelves(String commodityId);
+
+	ResponseVO  deleteById (String id);
 }
 

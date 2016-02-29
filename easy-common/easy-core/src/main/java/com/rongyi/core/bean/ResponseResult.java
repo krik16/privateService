@@ -1,11 +1,11 @@
 package com.rongyi.core.bean;
 
 /**
- * 统一返回对象 逐渐废弃
- *
+ * 统一返回对象 逐渐废弃 【不建议使用当前对象 建议使用ResponseVO】
  * @author baodk
  * @see ResponseVO
  */
+@Deprecated
 public class ResponseResult implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -128,6 +128,10 @@ public class ResponseResult implements java.io.Serializable {
 
 	public String getCode() {
 		return code;
+	}
+
+	public Integer getCodeInt() {
+		return Integer.valueOf(code);
 	}
 
 	public ResponseResult setCode(String code) {
