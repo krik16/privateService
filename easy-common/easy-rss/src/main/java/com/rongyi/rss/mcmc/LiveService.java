@@ -135,5 +135,7 @@ public interface LiveService {
 	ResponseVO feCommodityOffShelves(String commodityId);
 
 	ResponseVO  deleteById (String id);
+
+	ResponseVO  topByIds(List<String> ids,Integer sort);
 }
 
