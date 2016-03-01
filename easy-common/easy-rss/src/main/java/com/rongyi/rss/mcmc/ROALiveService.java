@@ -130,5 +130,5 @@ public interface ROALiveService {
      */
 	ResponseVO  deleteById (String id);
 
-	ResponseVO  topByIds(List<String> ids,Integer sort);
+
 }

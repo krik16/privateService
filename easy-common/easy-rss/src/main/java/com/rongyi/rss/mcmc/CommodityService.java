@@ -139,4 +139,6 @@ public interface CommodityService {
      */
 	public ResponseVO deleteCommodity(String commodityId, Long shopId, Integer identity);
 
+    ResponseVO  topByIds(List<String> ids,Integer sort);
+
 }
