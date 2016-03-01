@@ -45,6 +45,10 @@ public class SalesCommission implements Serializable {
 
     private Byte isDelete;
 
+    private String picUrls;
+
+    private String remarks;
+
     public Integer getId() {
         return id;
     }
@@ -75,6 +79,22 @@ public class SalesCommission implements Serializable {
 
     public void setCommissionAmount(BigDecimal commissionAmount) {
         this.commissionAmount = commissionAmount;
+    }
+
+    public String getPicUrls() {
+        return picUrls;
+    }
+
+    public void setPicUrls(String picUrls) {
+        this.picUrls = picUrls;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 
     public Byte getStatus() {
