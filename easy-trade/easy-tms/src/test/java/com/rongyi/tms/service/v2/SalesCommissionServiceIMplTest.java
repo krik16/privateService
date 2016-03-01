@@ -5,6 +5,7 @@ import com.rongyi.tms.BaseTest;
 import com.rongyi.tms.constants.ConstantEnum;
 import com.rongyi.tms.web.controller.param.VerifyCommissionParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
@@ -39,6 +40,7 @@ public class SalesCommissionServiceIMplTest extends BaseTest{
     }
 
     @Test
+    @Rollback(false)
     public void tesVerify(){
         System.out.println("===================>>>>>>>>>>>>>>tesVerify begin");
         VerifyCommissionParam param = new VerifyCommissionParam();
