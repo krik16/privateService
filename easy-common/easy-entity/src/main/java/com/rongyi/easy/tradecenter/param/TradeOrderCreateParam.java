@@ -144,6 +144,16 @@ public class TradeOrderCreateParam implements Serializable {
     private Date nextStatusTime;
 
     /**
+     * 微信标准版支付记录appid
+     */
+    private String weixinAppId;
+
+    /**
+     * 微信标准版支付渠道
+     */
+    private String orderChannel;
+
+    /**
      * end
      */
 
@@ -423,6 +433,22 @@ public class TradeOrderCreateParam implements Serializable {
         this.idfa = idfa;
     }
 
+    public String getWeixinAppId() {
+        return weixinAppId;
+    }
+
+    public void setWeixinAppId(String weixinAppId) {
+        this.weixinAppId = weixinAppId;
+    }
+
+    public String getOrderChannel() {
+        return orderChannel;
+    }
+
+    public void setOrderChannel(String orderChannel) {
+        this.orderChannel = orderChannel;
+    }
+
     @Override
     public String toString() {
         return "TradeOrderCreateParam{" +
@@ -455,6 +481,8 @@ public class TradeOrderCreateParam implements Serializable {
                 ", statusHold=" + statusHold +
                 ", nextStatusTime=" + nextStatusTime +
                 ", platformRebateCode=" + platformRebateCode +
+                ", weixinAppId=" + weixinAppId +
+                ", orderChannel=" + orderChannel +
                 '}';
     }
 }

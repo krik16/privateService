@@ -24,8 +24,8 @@
     <result column="share_code" property="sharCode" jdbcType="VARCHAR" />
     <result column="user_desc" property="userDesc" jdbcType="VARCHAR" />
     <result column="push_id" property="pushId" jdbcType="VARCHAR" />
-
-
+	<result column="use_code" property="useCode" jdbcType="VARCHAR" />
+	<result column="jsessionid" property="jsessionid" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -88,7 +88,7 @@
   <sql id="Base_Column_List" >
     id, user_logo, role_id, user_phone, user_pwd, user_name, user_nick_name, user_status, 
     account_id, create_by, create_at, update_by, update_at, version, is_disabled, device_uuid,
-    card_id,share_code
+    card_id,share_code,use_code,jsessionid
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rongyi.easy.rmmm.entity.RmmmUserInfoEntityExample" >
     select
@@ -126,13 +126,14 @@
       user_nick_name, user_status, account_id,
       create_by, create_at, update_by, 
       update_at, version, is_disabled, 
-      device_uuid, card_id,share_code)
+      device_uuid, card_id,share_code,use_code,jsessionid)
     values (#{id,jdbcType=INTEGER}, #{userLogo,jdbcType=VARCHAR}, #{roleId,jdbcType=INTEGER}, 
       #{userPhone,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
       #{userNickName,jdbcType=VARCHAR}, #{userStatus,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, 
       #{createBy,jdbcType=INTEGER}, #{createAt,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=INTEGER}, 
       #{updateAt,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER}, #{isDisabled,jdbcType=INTEGER}, 
-      #{deviceUuid,jdbcType=VARCHAR}, #{cardId,jdbcType=VARCHAR},#{sharCode,jdbcType=VARCHAR})
+      #{deviceUuid,jdbcType=VARCHAR}, #{cardId,jdbcType=VARCHAR},#{sharCode,jdbcType=VARCHAR}),
+      #{useCode,jdbcType=VARCHAR},#{jsessionid,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.rongyi.easy.rmmm.entity.RmmmUserInfoEntity" >
     insert into rmmm_user_info
@@ -188,8 +189,14 @@
       <if test="cardId != null" >
         card_id,
       </if>
-      <if test="cardId != null" >
+      <if test="shareCode != null" >
         share_code,
+      </if>
+       <if test="useCode != null" >
+        use_code,
+      </if>
+       <if test="jsessionid != null" >
+        jsessionid,
       </if>
 
     </trim>
@@ -247,6 +254,12 @@
       </if>
       <if test="sharCode != null" >
         #{sharCode,jdbcType=VARCHAR},
+      </if>
+       <if test="useCode != null" >
+        #{useCode,jdbcType=VARCHAR},
+      </if>
+       <if test="jsessionid != null" >
+        #{jsessionid,jdbcType=VARCHAR},
       </if>
 
     </trim>
@@ -390,6 +403,12 @@
       <if test="cardId != null" >
         card_id = #{cardId,jdbcType=VARCHAR},
       </if>
+      <if test="useCode != null" >
+        use_code = #{useCode,jdbcType=VARCHAR},
+      </if>
+      <if test="jsessionid != null" >
+        jsessionid = #{jsessionid,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -410,7 +429,9 @@
       version = #{version,jdbcType=INTEGER},
       is_disabled = #{isDisabled,jdbcType=INTEGER},
       device_uuid = #{deviceUuid,jdbcType=VARCHAR},
-      card_id = #{cardId,jdbcType=VARCHAR}
+      card_id = #{cardId,jdbcType=VARCHAR},
+      use_code = #{useCode,jdbcType=VARCHAR},
+      jsessionid = #{jsessionid,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

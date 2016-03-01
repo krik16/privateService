@@ -67,6 +67,10 @@ public class UserInfo implements Serializable{
     
     private UserShop userShop;
     
+    private String useCode; //注册使用的邀请码
+    
+    private String jsessionid ;//摩店登录标识
+    
     public String getStopReason() {
 		return stopReason;
 	}
@@ -313,6 +317,22 @@ public class UserInfo implements Serializable{
 
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
+	}
+
+	public String getUseCode() {
+		return useCode;
+	}
+
+	public void setUseCode(String useCode) {
+		this.useCode = useCode;
+	}
+
+	public String getJsessionid() {
+		return jsessionid;
+	}
+
+	public void setJsessionid(String jsessionid) {
+		this.jsessionid = jsessionid;
 	}
 
 }

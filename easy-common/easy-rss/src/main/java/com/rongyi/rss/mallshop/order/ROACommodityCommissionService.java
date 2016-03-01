@@ -41,5 +41,13 @@ public interface ROACommodityCommissionService {
 	 * @throws Exception
 	 */
 	public DetailVO getMyDealCommission(MyDealParam param) throws Exception;
+	
+	/**
+	 * 我的营业额列表
+	 *
+	 * @return
+	 * @throws Exception
+	 */
+	DetailVO getMyOnOrderAmount(MyDealParam param) throws Exception;
 
 }

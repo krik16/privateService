@@ -93,6 +93,16 @@ public class LiveVO implements Serializable {
 
 	private String shopLogo;
 
+	private  List<String> urlList;
+
+	public List<String> getUrlList() {
+		return urlList;
+	}
+
+	public void setUrlList(List<String> urlList) {
+		this.urlList = urlList;
+	}
+
 	public String getJsessionId() {
 		return jsessionId;
 	}
