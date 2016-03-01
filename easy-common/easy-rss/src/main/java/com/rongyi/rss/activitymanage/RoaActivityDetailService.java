@@ -29,7 +29,7 @@ public interface RoaActivityDetailService  {
    public ResponseVO searchIfashBuyDetailByParam(FlashSaleParam flashSaleParam);
 
     /**
-     * 查询活动详情
+     * 查询秒杀活动详情
      * @param searchSecKillParam
      * @return
      */
