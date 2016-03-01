@@ -22,9 +22,9 @@ public class AdvertVo implements Serializable {
 	private Date publish_start;//发布开始时间
 	private Date publish_end;//发布结束时间
 	private Long group_id;//广告组id
-	private Long create_by;//创建人账号ID
+	private String create_by;//创建人账号ID
 	private Long create_at;//记录创建时间
-	private Long update_by;//更新人账号ID
+	private String update_by;//更新人账号ID
 	private Long update_at;//记录更新时间
 	private List<Map<String,Object>> mall_List;//关联商场id集合
 	//private List<String> mall_names;//关联商场name集合
@@ -149,18 +149,6 @@ public class AdvertVo implements Serializable {
 		this.group_id = group_id;
 	}
 	/**
-	 * @return the create_by
-	 */
-	public Long getCreate_by() {
-		return create_by;
-	}
-	/**
-	 * @param create_by the create_by to set
-	 */
-	public void setCreate_by(Long create_by) {
-		this.create_by = create_by;
-	}
-	/**
 	 * @return the create_at
 	 */
 	public Long getCreate_at() {
@@ -171,18 +159,6 @@ public class AdvertVo implements Serializable {
 	 */
 	public void setCreate_at(Long create_at) {
 		this.create_at = create_at;
-	}
-	/**
-	 * @return the update_by
-	 */
-	public Long getUpdate_by() {
-		return update_by;
-	}
-	/**
-	 * @param update_by the update_by to set
-	 */
-	public void setUpdate_by(Long update_by) {
-		this.update_by = update_by;
 	}
 	/**
 	 * @return the update_at
@@ -232,12 +208,36 @@ public class AdvertVo implements Serializable {
 	public void setMaterial_id(Integer material_id) {
 		this.material_id = material_id;
 	}
+	/**
+	 * @return the create_by
+	 */
+	public String getCreate_by() {
+		return create_by;
+	}
+	/**
+	 * @param create_by the create_by to set
+	 */
+	public void setCreate_by(String create_by) {
+		this.create_by = create_by;
+	}
+	/**
+	 * @return the update_by
+	 */
+	public String getUpdate_by() {
+		return update_by;
+	}
+	/**
+	 * @param update_by the update_by to set
+	 */
+	public void setUpdate_by(String update_by) {
+		this.update_by = update_by;
+	}
 	/** 
 	* @Title: toString 
 	* @Description: TODO(这里用一句话描述这个方法的作用) 
 	* @param @return    设定文件 
 	* @author shaozhou
-	* @date 2016年3月1日 上午10:20:57
+	* @date 2016年3月1日 上午11:17:16
 	* @throws 
 	*/
 	@Override
