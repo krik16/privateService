@@ -27,13 +27,13 @@
 
   <sql id="list_where_clause">
     <if test="ruleCode != null and ruleCode != ''">
-      rule_code = #{ruleCode}
+      and rule_code = #{ruleCode}
     </if>
     <if test="status != null and status != ''">
-      status = #{status}
+      and status = #{status,jdbcType=TINYINT}
     </if>
     <if test="type != null and type != ''">
-      type = #{type}
+      and type = #{type,jdbcType=TINYINT}
     </if>
   </sql>
 

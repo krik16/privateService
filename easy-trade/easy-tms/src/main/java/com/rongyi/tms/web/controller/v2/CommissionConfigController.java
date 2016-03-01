@@ -129,7 +129,10 @@ public class CommissionConfigController {
     private void updateStatus(Map<String, Object> map) {
         CommissionConfig commissionConfig = commissionConfigService.selectById(Integer.valueOf(map.get("id").toString()));
         commissionConfig.setStatus(Byte.valueOf(map.get("status").toString()));
-        commissionConfigService.insert(commissionConfig);
+        //TODO 此版本不考虑时间条件，置默认值
+        commissionConfig.setEffectStartTime(null);
+        commissionConfig.setEffectEndTime(null);
+        commissionConfigService.update(commissionConfig);
     }
 
     /**
