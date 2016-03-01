@@ -13,8 +13,9 @@ public class AdvertVo implements Serializable {
 	private Long id;//'编号'
 	private Integer position;//广告位置，参考ad_option中定义 1:全屏 2:首页banner
 	private Integer adTime;//播放时长
-	private Integer module_type;//素材模板 11 全屏模板-A 22 首页Banner-A
 	private String content;//素材内容
+	private Integer module_type;//素材模板 11 全屏模板-A 22 首页Banner-A
+	private Integer material_id;//素材id
 	private Integer content_type;//素材类型 1:图片,2:视频
 	private Integer status;//广告状态 1待审核, 2审核未通过, 3待发布,4进行中,5已结束,6已下线, 7已删除
 	private String status_detail;//状态描述
@@ -219,20 +220,33 @@ public class AdvertVo implements Serializable {
 	public void setMall_List(List<Map<String, Object>> mall_List) {
 		this.mall_List = mall_List;
 	}
+	/**
+	 * @return the material_id
+	 */
+	public Integer getMaterial_id() {
+		return material_id;
+	}
+	/**
+	 * @param material_id the material_id to set
+	 */
+	public void setMaterial_id(Integer material_id) {
+		this.material_id = material_id;
+	}
 	/** 
 	* @Title: toString 
 	* @Description: TODO(这里用一句话描述这个方法的作用) 
 	* @param @return    设定文件 
 	* @author shaozhou
-	* @date 2016年2月29日 下午6:41:03
+	* @date 2016年3月1日 上午10:20:57
 	* @throws 
 	*/
 	@Override
 	public String toString() {
-		return "AdvertVo [id=" + id + ", position=" + position + ", adTime=" + adTime + ", module_type=" + module_type
-				+ ", content=" + content + ", content_type=" + content_type + ", status=" + status + ", status_detail="
-				+ status_detail + ", publish_start=" + publish_start + ", publish_end=" + publish_end + ", group_id="
-				+ group_id + ", create_by=" + create_by + ", create_at=" + create_at + ", update_by=" + update_by
-				+ ", update_at=" + update_at + ", mall_List=" + mall_List + "]";
+		return "AdvertVo [id=" + id + ", position=" + position + ", adTime=" + adTime + ", content=" + content
+				+ ", module_type=" + module_type + ", material_id=" + material_id + ", content_type=" + content_type
+				+ ", status=" + status + ", status_detail=" + status_detail + ", publish_start=" + publish_start
+				+ ", publish_end=" + publish_end + ", group_id=" + group_id + ", create_by=" + create_by
+				+ ", create_at=" + create_at + ", update_by=" + update_by + ", update_at=" + update_at + ", mall_List="
+				+ mall_List + "]";
 	}
 }
