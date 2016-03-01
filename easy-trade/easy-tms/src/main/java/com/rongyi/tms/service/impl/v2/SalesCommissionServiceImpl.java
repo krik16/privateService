@@ -108,8 +108,10 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
         try {
             if (ConstantEnum.COMMISSION_TYPE_1.getCodeStr().equals(type)){
                 OrderFormEntity orderForm = iOrderQueryService.getOrderFormByOrderNum(commissionVO.getOrderNo());
-                commissionVO.setOrderCreateAt(DateTool.date2String(orderForm.getCreateAt(), DateTool.FORMAT_DATETIME));
-                commissionVO.setOrderAmount(orderForm.getTotalAmount());
+                if (orderForm!=null) {
+                    commissionVO.setOrderCreateAt(DateTool.date2String(orderForm.getCreateAt(), DateTool.FORMAT_DATETIME));
+                    commissionVO.setOrderAmount(orderForm.getTotalAmount());
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

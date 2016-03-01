@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ *
  * Created by hebo on 2016/2/29.
  */
 public class SalesCommissionServiceIMplTest extends BaseTest{
@@ -25,8 +26,8 @@ public class SalesCommissionServiceIMplTest extends BaseTest{
         Map<String,Object> map = new HashMap<>();
         map.put("startRecord", 0);
         map.put("pageSize", 5);
-        map.put("type", ConstantEnum.COMMISSION_TYPE_0.getCodeInt());
-        map.put("searchType", 1);
+        map.put("type", ConstantEnum.COMMISSION_TYPE_1.getCodeInt());
+        map.put("searchType", 0);
         System.out.println("============>>>>>>>>>>>>>>>>> map" + map);
         List<SalesCommissionVO> list = salesCommissionService.findCommissionList(map);
         System.out.println("============>>>>>>>>>>>>>>>>> list"+list);
