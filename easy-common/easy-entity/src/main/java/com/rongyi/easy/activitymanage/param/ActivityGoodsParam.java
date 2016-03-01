@@ -26,7 +26,7 @@ public class ActivityGoodsParam extends PagingParam {
 
     private List<Integer> ids;
 
-    private String orderByClause = "create_at";
+    private String orderByClause = "create_at desc";
 
     public Integer getActivityId() {
         return activityId;
