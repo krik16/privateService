@@ -15,6 +15,7 @@ import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.malllife.vo.CommodityBuyerVO;
 import com.rongyi.easy.malllife.vo.ShopCommodityVO;
 import com.rongyi.easy.mcmc.Commodity;
@@ -113,4 +114,11 @@ public interface ROACommodityService {
 	public ResponseVO searchCommodityBrand(CommodityBrandSearchParam param);
 	
 	public List<com.rongyi.easy.mcmc.vo.CommodityBuyerVO> getCommodityBySPU(String commodityId, String spu);
+
+	/**
+	 * 获取有商品的分类列表
+	 * @param categoryParam	参数对象
+	 * @return
+	 */
+	public ResponseResult getBuyerCommodityCategoryHasCommodity(BuyerCategoryParam categoryParam);
 }
