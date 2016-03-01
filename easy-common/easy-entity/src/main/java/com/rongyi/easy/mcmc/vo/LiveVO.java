@@ -95,6 +95,9 @@ public class LiveVO implements Serializable {
 
 	private  List<String> urlList;
 
+	//直播地点
+	private String address;
+
 	public List<String> getUrlList() {
 		return urlList;
 	}
@@ -237,5 +240,13 @@ public class LiveVO implements Serializable {
 
 	public void setShopLogo(String shopLogo) {
 		this.shopLogo = shopLogo;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 }
