@@ -142,6 +142,6 @@ public interface CommodityService {
 	 * @param categoryParam	参数对象
 	 * @return
 	 */
-	public ResponseResult getBuyerCommodityCategoryHasCommodity(BuyerCategoryParam categoryParam);
+	/*public ResponseResult getBuyerCommodityCategoryHasCommodity(BuyerCategoryParam categoryParam);*/
 
 }
