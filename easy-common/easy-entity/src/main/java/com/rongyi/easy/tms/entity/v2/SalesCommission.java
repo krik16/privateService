@@ -5,11 +5,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class SalesCommission implements Serializable {
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -3490504338459066931L;
-    
     private Integer id;
 
     private String guideId;
@@ -18,57 +13,41 @@ public class SalesCommission implements Serializable {
 
     private BigDecimal commissionAmount;
 
-    private Integer status;
+    private Byte status;
 
     private Date createAt;
 
+    private Byte type;
+
     private Date picUploadAt;
 
-    private String picUrls;
-    
     private String createUser;
-    
-    private int type;// 默认为空，是返佣；1：考核奖金  ;2:惩罚
-    
-    private String remark;// 考核奖金 备注
-    
+
     private String updateUser;
-    
-    private Date updateDate;
-    
+
+    private Date updateAt;
+
     private String buyerAccount;
+
+    private String sellerAccount;
+
+    private Long version;
 
     private Integer guideType;
 
-    /**
-     * 返佣流水号
-     */
     private String commNo;
 
-    /**
-     * 返佣类型（0:小票返佣,1:邀请返佣(容易逛),2:首单返佣,3:认证返佣(摩店)）
-     */
-    private byte commType;
-
-    /**
-     * 邀请人手机号
-     */
     private String invitePhone;
 
-    /**
-     * 注册人手机号
-     */
     private String registerPhone;
 
-    /**
-     * 配置id
-     */
     private Integer configId;
 
-    /**
-     * 标记删除(0:正常，1:删除，默认0)
-     */
-    private byte isDelete;
+    private Byte isDelete;
+
+    private String picUrls;
+
+    private String remarks;
 
     public Integer getId() {
         return id;
@@ -102,11 +81,27 @@ public class SalesCommission implements Serializable {
         this.commissionAmount = commissionAmount;
     }
 
-    public Integer getStatus() {
+    public String getPicUrls() {
+        return picUrls;
+    }
+
+    public void setPicUrls(String picUrls) {
+        this.picUrls = picUrls;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public Byte getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Byte status) {
         this.status = status;
     }
 
@@ -118,28 +113,20 @@ public class SalesCommission implements Serializable {
         this.createAt = createAt;
     }
 
+    public Byte getType() {
+        return type;
+    }
+
+    public void setType(Byte type) {
+        this.type = type;
+    }
+
     public Date getPicUploadAt() {
         return picUploadAt;
     }
 
     public void setPicUploadAt(Date picUploadAt) {
         this.picUploadAt = picUploadAt;
-    }
-
-    public String getPicUrls() {
-        return picUrls;
-    }
-
-    public void setPicUrls(String picUrls) {
-        this.picUrls = picUrls;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
     }
 
     public String getCreateUser() {
@@ -150,14 +137,6 @@ public class SalesCommission implements Serializable {
         this.createUser = createUser;
     }
 
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
     public String getUpdateUser() {
         return updateUser;
     }
@@ -166,21 +145,37 @@ public class SalesCommission implements Serializable {
         this.updateUser = updateUser;
     }
 
-    public Date getUpdateDate() {
-        return updateDate;
+    public Date getUpdateAt() {
+        return updateAt;
     }
 
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
+    public void setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
     }
 
     public String getBuyerAccount() {
-		return buyerAccount;
-	}
+        return buyerAccount;
+    }
 
-	public void setBuyerAccount(String buyerAccount) {
-		this.buyerAccount = buyerAccount;
-	}
+    public void setBuyerAccount(String buyerAccount) {
+        this.buyerAccount = buyerAccount;
+    }
+
+    public String getSellerAccount() {
+        return sellerAccount;
+    }
+
+    public void setSellerAccount(String sellerAccount) {
+        this.sellerAccount = sellerAccount;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
+    }
 
     public Integer getGuideType() {
         return guideType;
@@ -196,14 +191,6 @@ public class SalesCommission implements Serializable {
 
     public void setCommNo(String commNo) {
         this.commNo = commNo;
-    }
-
-    public byte getCommType() {
-        return commType;
-    }
-
-    public void setCommType(byte commType) {
-        this.commType = commType;
     }
 
     public String getInvitePhone() {
@@ -222,14 +209,6 @@ public class SalesCommission implements Serializable {
         this.registerPhone = registerPhone;
     }
 
-    public byte getIsDelete() {
-        return isDelete;
-    }
-
-    public void setIsDelete(byte isDelete) {
-        this.isDelete = isDelete;
-    }
-
     public Integer getConfigId() {
         return configId;
     }
@@ -238,30 +217,11 @@ public class SalesCommission implements Serializable {
         this.configId = configId;
     }
 
-    @Override
-    public String toString() {
-        return "SalesCommission{" +
-                "id=" + id +
-                ", guideId='" + guideId + '\'' +
-                ", orderNo='" + orderNo + '\'' +
-                ", commissionAmount=" + commissionAmount +
-                ", status=" + status +
-                ", createAt=" + createAt +
-                ", picUploadAt=" + picUploadAt +
-                ", picUrls='" + picUrls + '\'' +
-                ", createUser='" + createUser + '\'' +
-                ", type=" + type +
-                ", remark='" + remark + '\'' +
-                ", updateUser='" + updateUser + '\'' +
-                ", updateDate=" + updateDate +
-                ", buyerAccount='" + buyerAccount + '\'' +
-                ", guideType=" + guideType +
-                ", commNo='" + commNo + '\'' +
-                ", commType=" + commType +
-                ", invitePhone='" + invitePhone + '\'' +
-                ", registerPhone='" + registerPhone + '\'' +
-                ", configId='" + configId + '\'' +
-                ", isDelete=" + isDelete +
-                '}';
+    public Byte getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Byte isDelete) {
+        this.isDelete = isDelete;
     }
 }

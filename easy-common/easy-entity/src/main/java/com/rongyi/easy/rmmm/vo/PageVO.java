@@ -24,6 +24,10 @@ public class PageVO implements Serializable {
      * 当前返回页
      */
     private int currentPage;
+    /**
+     *  数据总数
+     */
+    private int totalCount;
 
     public int getTotalPage() {
         return totalPage;
@@ -47,6 +51,14 @@ public class PageVO implements Serializable {
 
     public void setCurrentPage(int currentPage) {
         this.currentPage = currentPage;
+    }
+
+    public int getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(int totalCount) {
+        this.totalCount = totalCount;
     }
 
     public void setTotalPageByTotalRecord(int totalRecord) {

@@ -175,14 +175,7 @@ public interface IRpbService {
 	 *  @param weixinMch WeixinMch
 	 *  Author: kejun
 	 **/
-	ResponseData insertWeiXinMch(WeixinMch weixinMch);
-
-	/**
-	 *  Description:更新商家公众号相关信息
-	 *  @param weixinMch WeixinMch
-	 *  Author: kejun
-	 **/
-	ResponseData updateWeixinMch(WeixinMch weixinMch);
+	ResponseData addWeixinMch(WeixinMch weixinMch);
 
 
 

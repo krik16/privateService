@@ -1,6 +1,8 @@
 package com.rongyi.easy.solr.param;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ShopSearchParam implements Serializable{
 
@@ -25,6 +27,19 @@ public class ShopSearchParam implements Serializable{
 	private boolean commodityRequired; //是否只看有商品的店铺
 	private String mall_id;  //商场id
 	private String poi_type; //店铺：0 商场：1
+	private List<String> keywordList = new ArrayList<>();
+
+	public List<String> getKeywordList() {
+		return keywordList;
+	}
+
+	public void setKeywordList(List<String> keywordList) {
+		this.keywordList = keywordList;
+	}
+
+	public void addKeywordList(String keyword) {
+		this.keywordList.add(keyword);
+	}
 
 	public String getPoi_type() {
 		return poi_type;
@@ -147,6 +162,7 @@ public class ShopSearchParam implements Serializable{
 				", commodityRequired=" + commodityRequired +
 				", mall_id='" + mall_id + '\'' +
 				", poi_type='" + poi_type + '\'' +
+				", keywordList='" + keywordList + '\'' +
 				'}';
 	}
 }

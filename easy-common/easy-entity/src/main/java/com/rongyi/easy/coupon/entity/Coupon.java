@@ -254,6 +254,7 @@ public class Coupon implements Serializable {
      */
     private Boolean isDeleted;
 
+
     /**
      * 代金券分类
      */
@@ -572,6 +573,8 @@ public class Coupon implements Serializable {
     public String getDetailPicUrl() {
         return detailPicUrl;
     }
+
+
 
     public List<String> getDetailPicUrls() {
         List<String> list = ListUtils.EMPTY_LIST;

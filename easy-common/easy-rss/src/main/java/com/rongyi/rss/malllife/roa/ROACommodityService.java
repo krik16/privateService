@@ -121,5 +121,5 @@ public interface ROACommodityService {
 	 * @param identity		操作者
 	 * @return
 	 */
-	public ResponseResult deleteCommodity(String commodityId, Long shopId, Integer identity);
+	public ResponseVO deleteCommodity(String commodityId, Long shopId, Integer identity);
 }

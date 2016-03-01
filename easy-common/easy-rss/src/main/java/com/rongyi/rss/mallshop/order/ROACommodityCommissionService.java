@@ -3,6 +3,7 @@
  */
 package com.rongyi.rss.mallshop.order;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 import com.rongyi.easy.rmmm.param.MyDealParam;
@@ -41,5 +42,29 @@ public interface ROACommodityCommissionService {
 	 * @throws Exception
 	 */
 	public DetailVO getMyDealCommission(MyDealParam param) throws Exception;
+	
+	/**
+	 * 我的营业额列表
+	 *
+	 * @return
+	 * @throws Exception
+	 */
+	DetailVO getMyOnOrderAmount(MyDealParam param) throws Exception;
+	
+	/**
+	 * 我的在途营业额（总计）
+	 *
+	 * @return
+	 * @throws Exception
+	 */
+	BigDecimal getMyOnOrderAmountTotal(String userId) throws Exception;
+
+	/**
+	 * 我的在途营业额（当日）
+	 *
+	 * @return
+	 * @throws Exception
+	 */
+	BigDecimal getMyOnOrderAmountDaily(String userId) throws Exception;
 
 }

@@ -1,6 +1,9 @@
 package com.rongyi.core.bean;
 
+import java.io.Serializable;
+
 import net.sf.json.JSONObject;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
@@ -29,7 +32,11 @@ import org.apache.commons.lang.builder.ToStringStyle;
  */
 public class ResponseData implements java.io.Serializable {
 
-    private static final Meta SUCCESS = new Meta(0, "success"); //成功
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private static final Meta SUCCESS = new Meta(0, "success"); //成功
     private static final Meta FAILURE = new Meta(1, "failure"); //失败
 
     private Meta meta; // errno=0：成功,errno=1:失败
@@ -148,9 +155,13 @@ public class ResponseData implements java.io.Serializable {
                     .toString();
         }
     }
-
-    public static class Meta {
-        private int errno; //错误码
+    
+    public static class Meta implements Serializable{
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private int errno; //错误码
         private String msg;  //提示信息
 
         private Meta() {}
