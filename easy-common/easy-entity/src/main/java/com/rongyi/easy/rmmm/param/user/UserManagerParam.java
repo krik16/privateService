@@ -55,6 +55,7 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	private int isUpdate = 0;  //操作参数  （==1直接修改未合作店长为已合作店长 ）
 	private int defaultAccount ;  //资金账号默认   1默认支付宝  2默认银行卡
 
+	private String shareCode;//邀请码
 
 
     public Integer getId() {
@@ -70,6 +71,14 @@ public class UserManagerParam extends BaseParam implements Serializable{
 
 	public void setUserDesc(String userDesc) {
 		this.userDesc = userDesc;
+	}
+
+	public String getShareCode() {
+		return shareCode;
+	}
+
+	public void setShareCode(String shareCode) {
+		this.shareCode = shareCode;
 	}
 
 	public String getCreatingUserType() {
