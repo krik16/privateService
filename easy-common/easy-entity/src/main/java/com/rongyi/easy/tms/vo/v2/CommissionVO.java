@@ -96,6 +96,14 @@ public class CommissionVO implements Serializable{
         this.orderNo = orderNo;
     }
 
+    public Date getFinishAt() {
+        return finishAt;
+    }
+
+    public void setFinishAt(Date finishAt) {
+        this.finishAt = finishAt;
+    }
+
     @Override
     public String toString() {
         return "CommissionVO{" +
@@ -104,6 +112,7 @@ public class CommissionVO implements Serializable{
                 ", registerId='" + registerId + '\'' +
                 ", registerPhone='" + registerPhone + '\'' +
                 ", createAt=" + createAt +
+                ", finishAt=" + finishAt +
                 ", orderNo='" + orderNo + '\'' +
                 '}';
     }
