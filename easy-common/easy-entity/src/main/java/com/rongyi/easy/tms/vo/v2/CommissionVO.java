@@ -18,24 +18,14 @@ public class CommissionVO implements Serializable{
     private Integer type;
 
     /**
-     *邀请人类型(1:导购,2:买手)
-     */
-    private Integer guideType;
-
-    /**
-     * 邀请人id
-     */
-    private String guideId;
-
-    /**
-     * 邀请人手机号
-     */
-    private String invitePhone;
-
-    /**
      * 注册人类型(1:容易逛,2:摩店)
      */
     private Integer registerType;
+
+    /**
+     * 注册人id
+     */
+    private String registerId;
 
     /**
      * 注册人手机号
@@ -61,28 +51,12 @@ public class CommissionVO implements Serializable{
         this.type = type;
     }
 
-    public Integer getGuideType() {
-        return guideType;
+    public String getRegisterId() {
+        return registerId;
     }
 
-    public void setGuideType(Integer guideType) {
-        this.guideType = guideType;
-    }
-
-    public String getGuideId() {
-        return guideId;
-    }
-
-    public void setGuideId(String guideId) {
-        this.guideId = guideId;
-    }
-
-    public String getInvitePhone() {
-        return invitePhone;
-    }
-
-    public void setInvitePhone(String invitePhone) {
-        this.invitePhone = invitePhone;
+    public void setRegisterId(String registerId) {
+        this.registerId = registerId;
     }
 
     public Integer getRegisterType() {
@@ -121,12 +95,10 @@ public class CommissionVO implements Serializable{
     public String toString() {
         return "CommissionVO{" +
                 "type=" + type +
-                ", guideType=" + guideType +
-                ", guideId='" + guideId + '\'' +
-                ", invitePhone='" + invitePhone + '\'' +
                 ", registerType=" + registerType +
+                ", registerId='" + registerId + '\'' +
                 ", registerPhone='" + registerPhone + '\'' +
-                ", createAt='" + createAt + '\'' +
+                ", createAt=" + createAt +
                 ", orderNo='" + orderNo + '\'' +
                 '}';
     }
