@@ -13,7 +13,9 @@ import java.util.List;
 public class DetailListVO implements Serializable {
 
 	private String date;// 交易时间
-	private String amount;// 增加
+	private String deliveryDate;// 发货时间
+	private String amount;// 金额
+	private String realAmount; //订单总金额（买家实际支付金额）
 	private String orderId;// 大订单id
 	private String orderNum;// 大订单号
 	private String commodityPostage;// 运费
@@ -123,11 +125,28 @@ public class DetailListVO implements Serializable {
 		this.disconnt = disconnt;
 	}
 
+	public String getRealAmount() {
+		return realAmount;
+	}
+
+	public void setRealAmount(String realAmount) {
+		this.realAmount = realAmount;
+	}
+
+	public String getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(String deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+
 	@Override
 	public String toString() {
 		return "DetailListVO{" +
 				"date='" + date + '\'' +
 				", amount='" + amount + '\'' +
+				", realAmount='" + realAmount + '\'' +
 				", orderId='" + orderId + '\'' +
 				", orderNum='" + orderNum + '\'' +
 				", commodityPostage='" + commodityPostage + '\'' +
