@@ -27,7 +27,25 @@ public class DetailListVO implements Serializable {
 	private String disconnt;// 折扣
 	private String buyerName;// 买家名称
 	private String buyerIM;// 买家IM账号
-	private String traceStatus; //详情状态（轨迹图）
+	private String traceStatus; //详情状态（轨迹图） 0 发货成功（处理中） 1 订单完成 2 订单失败 3 审核成功 4审核失败 5已发放
+	private String realCommodityCommission;// 该订单原佣金金额
+	private String failReason;// 审核失败理由
+
+	public String getRealCommodityCommission() {
+		return realCommodityCommission;
+	}
+
+	public void setRealCommodityCommission(String realCommodityCommission) {
+		this.realCommodityCommission = realCommodityCommission;
+	}
+
+	public String getFailReason() {
+		return failReason;
+	}
+
+	public void setFailReason(String failReason) {
+		this.failReason = failReason;
+	}
 
 	public String getTraceStatus() {
 		return traceStatus;
@@ -151,18 +169,11 @@ public class DetailListVO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "DetailListVO{" +
-				"date='" + date + '\'' +
-				", amount='" + amount + '\'' +
-				", realAmount='" + realAmount + '\'' +
-				", orderId='" + orderId + '\'' +
-				", orderNum='" + orderNum + '\'' +
-				", commodityPostage='" + commodityPostage + '\'' +
-				", status='" + status + '\'' +
-				", allCommodityCommission='" + allCommodityCommission + '\'' +
-				", ticketStatus='" + ticketStatus + '\'' +
-				", sonOrderList=" + sonOrderList +
-				", disconnt='" + disconnt + '\'' +
-				'}';
+		return "DetailListVO [date=" + date + ", deliveryDate=" + deliveryDate + ", amount=" + amount + ", realAmount="
+				+ realAmount + ", orderId=" + orderId + ", orderNum=" + orderNum + ", commodityPostage=" + commodityPostage
+				+ ", status=" + status + ", allCommodityCommission=" + allCommodityCommission + ", ticketStatus=" + ticketStatus
+				+ ", sonOrderList=" + sonOrderList + ", disconnt=" + disconnt + ", buyerName=" + buyerName + ", buyerIM="
+				+ buyerIM + ", traceStatus=" + traceStatus + ", realCommodityCommission=" + realCommodityCommission
+				+ ", failReason=" + failReason + "]";
 	}
 }
