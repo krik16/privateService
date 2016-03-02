@@ -1,7 +1,9 @@
 package com.rongyi.tms.service.impl.v2;
 
 import com.rongyi.core.common.util.DateTool;
+import com.rongyi.core.constant.VirtualAccountEventTypeEnum;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
+import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.osm.entity.OrderFormEntity;
 import com.rongyi.easy.tms.entity.SalesCommissionAuditLog;
 import com.rongyi.easy.tms.entity.v2.CommissionConfig;
@@ -9,10 +11,13 @@ import com.rongyi.easy.tms.entity.v2.SalesCommission;
 import com.rongyi.easy.tms.vo.v2.SalesCommissionVO;
 import com.rongyi.rss.tradecenter.osm.IOrderQueryService;
 import com.rongyi.tms.constants.ConstantEnum;
+import com.rongyi.tms.moudle.vo.CommissionAmountTotalVO;
 import com.rongyi.tms.service.SalesCommissionAuditLogService;
 import com.rongyi.tms.service.v2.CommissionConfigService;
 import com.rongyi.tms.service.v2.SalesCommissionService;
 import com.rongyi.tms.web.controller.param.VerifyCommissionParam;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,7 +72,6 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 
     /**
      * 佣金列表
-     *
      * @param map
      * @return
      */
@@ -161,8 +165,23 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
                         }
                     }
                     int updateNum = this.getBaseDao().updateBySql(NAMESPACE + ".updateByPrimaryKeySelective", salesCommission);
-                    if (updateNum>0)
+                    if (updateNum>0){
+//                        LOGGER.info("更新成功，发送消息到 va");
+//                        Map<String, Object> paramMap = new HashMap<>();
+//                        Map<String, Object> bodyMap = new HashMap<>();
+//                        paramMap.put("version", version);
+//                        JSONArray array = new JSONArray();
+//                        List<CommissionAmountTotalVO> commissions = this.getBaseDao().selectListBySql(NAMESPACE_SALESCOMMISSION + ".commissionAmountTotalByVersion", paramMap);
+//                        for (CommissionAmountTotalVO commission : commissions) {
+//                            JSONObject jsonObject = JSONObject.fromObject(commission);
+//                            array.add(jsonObject);
+//                        }
+//                        bodyMap.put("detailList", array);
+//                        LOGGER.info(array);
+//                        MessageEvent event = MessageEvent.getMessageEvent(bodyMap, "tms", "va", VirtualAccountEventTypeEnum.COMMISSION_BATCH_POST.getCode());
+//                        sender.convertAndSend(event);
                         resultNum++;
+                    }
                 }
             }
         }
