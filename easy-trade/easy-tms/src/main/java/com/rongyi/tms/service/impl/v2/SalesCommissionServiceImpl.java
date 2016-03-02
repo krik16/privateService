@@ -1,7 +1,9 @@
 package com.rongyi.tms.service.impl.v2;
 
 import com.rongyi.core.common.util.DateTool;
+import com.rongyi.core.constant.VirtualAccountEventTypeEnum;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
+import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.osm.entity.OrderFormEntity;
 import com.rongyi.easy.tms.entity.SalesCommissionAuditLog;
 import com.rongyi.easy.tms.entity.v2.CommissionConfig;
@@ -9,10 +11,14 @@ import com.rongyi.easy.tms.entity.v2.SalesCommission;
 import com.rongyi.easy.tms.vo.v2.SalesCommissionVO;
 import com.rongyi.rss.tradecenter.osm.IOrderQueryService;
 import com.rongyi.tms.constants.ConstantEnum;
+import com.rongyi.tms.moudle.vo.CommissionAmountTotalVO;
+import com.rongyi.tms.mq.Sender;
 import com.rongyi.tms.service.SalesCommissionAuditLogService;
 import com.rongyi.tms.service.v2.CommissionConfigService;
 import com.rongyi.tms.service.v2.SalesCommissionService;
 import com.rongyi.tms.web.controller.param.VerifyCommissionParam;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,6 +48,9 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
     @Autowired
     private CommissionConfigService commissionConfigService;
 
+    @Autowired
+    Sender sender;
+
     /**
      * 通过主键id查询
      *
@@ -67,7 +76,6 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 
     /**
      * 佣金列表
-     *
      * @param map
      * @return
      */
@@ -156,13 +164,34 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
                         paramsMap.put("status", param.getStatus());
                         paramsMap.put("type", config.getType());
                         Integer dailyCount = this.getBaseDao().count(NAMESPACE + ".selectDailyCount", paramsMap);
-                        if (dailyCount>config.getLimitTotal()){
+                        if (dailyCount>=config.getLimitTotal()){
                             salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_5.getCodeByte());
                         }
                     }
                     int updateNum = this.getBaseDao().updateBySql(NAMESPACE + ".updateByPrimaryKeySelective", salesCommission);
                     if (updateNum>0)
+                    {
+                        logger.info("更新成功，发送消息到 va");
+                        CommissionAmountTotalVO commissionAmountTotalVO = new CommissionAmountTotalVO();
+                        commissionAmountTotalVO.setId(commission.getId());
+                        commissionAmountTotalVO.setCommissionAmount(commission.getCommissionAmount());
+                        commissionAmountTotalVO.setGuideId(commission.getGuideId());
+                        JSONObject jsonObject = JSONObject.fromObject(commissionAmountTotalVO);
+                        Map<String, Object> bodyMap = new HashMap<>();
+                        JSONArray array = new JSONArray();
+                        array.add(jsonObject);
+                        bodyMap.put("detailList", array);
+                        logger.info(array.toString());
+                        MessageEvent event = null;
+                        if (config.getType() == ConstantEnum.COMMISSION_TYPE_0.getCodeByte())
+                            event = MessageEvent.getMessageEvent(bodyMap, "tms", "va", VirtualAccountEventTypeEnum.COMMISSION_TYPE_EXPAND.getCode());
+                        else if (config.getType() == ConstantEnum.COMMISSION_TYPE_1.getCodeByte())
+                            event = MessageEvent.getMessageEvent(bodyMap, "tms", "va", VirtualAccountEventTypeEnum.COMMISSION_TYPE_FIRST.getCode());
+                        sender.convertAndSend(event);
                         resultNum++;
+                    }else {
+                        logger.info("佣金审核修改失败");
+                    }
                 }
             }
         }

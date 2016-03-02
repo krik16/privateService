@@ -45,7 +45,7 @@ public class SalesCommissionServiceIMplTest extends BaseTest{
     public void tesVerify(){
         System.out.println("===================>>>>>>>>>>>>>>tesVerify begin");
         VerifyCommissionParam param = new VerifyCommissionParam();
-        param.setIds("30");
+        param.setIds("29");
         param.setOperateType(2);
         param.setStatus(3);
         param.setDesc("二级审核通过");

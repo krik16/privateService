@@ -267,8 +267,11 @@
     <if test="guideType!=null and guideType!=0">
       and sc.guide_type == #{guideType}
     </if>
-    <if test="orderNos!=null and orderNos.size()>0">
-      and sc.order_no in<foreach collection="orderNos" item="item" open="(" separator="," close=")">#{item}</foreach>
+    <if test="orderCreateAtBegin!=null and orderCreateAtBegin!=''">
+      and of.create_at &gt; #{orderCreateAtBegin}
+    </if>
+    <if test="orderCreateAtEnd!=nul and orderCreateAtEnd!=''">
+      and of.create_at &lt; #{orderCreateAtEnd}
     </if>
     <if test="registerType!=null and registerType!=0">
       and cc.register_type == #{registerType}
@@ -279,7 +282,10 @@
   </sql>
   
   <select id="findCommissionList" parameterType="map" resultMap="FullResultMap">
-    select sc.*, cc.register_type, cc.type from sales_commission sc join commission_config cc on sc.config_id=cc.id
+    select sc.*, cc.register_type, cc.type
+    from sales_commission sc
+    join commission_config cc on sc.config_id=cc.id
+    left join ry_osm.order_form of on sc.order_no=of.order_no
     <where>
       <include refid="Commission_List_Condition"/>
     </where>
@@ -287,7 +293,10 @@
     limit #{startRecord, jdbcType=INTEGER}, #{pageSize, jdbcType=INTEGER}
   </select>
   <select id="countSalesCommission" parameterType="map" resultType="int">
-    select count(1) from sales_commission sc join commission_config cc on sc.config_id=cc.id
+    select count(1)
+    from sales_commission sc
+    join commission_config cc on sc.config_id=cc.id
+    left join ry_osm.order_form of on sc.order_no=of.order_no
     <where>
       <include refid="Commission_List_Condition"/>
     </where>
