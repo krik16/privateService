@@ -23,7 +23,6 @@ public class CommissionAmountTotalVO {
     private String guideId;
     private BigDecimal commissionAmount;
     private long version;
-    private byte  type;//返佣类型(0:推广返佣,1:首单返佣,2:小票返佣)
     public String getGuideId() {
         return guideId;
     }
@@ -50,11 +49,4 @@ public class CommissionAmountTotalVO {
         this.version = version;
     }
 
-    public byte getType() {
-        return type;
-    }
-
-    public void setType(byte type) {
-        this.type = type;
-    }
 }

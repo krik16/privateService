@@ -12,6 +12,7 @@ import com.rongyi.easy.tms.vo.v2.SalesCommissionVO;
 import com.rongyi.rss.tradecenter.osm.IOrderQueryService;
 import com.rongyi.tms.constants.ConstantEnum;
 import com.rongyi.tms.moudle.vo.CommissionAmountTotalVO;
+import com.rongyi.tms.mq.Sender;
 import com.rongyi.tms.service.SalesCommissionAuditLogService;
 import com.rongyi.tms.service.v2.CommissionConfigService;
 import com.rongyi.tms.service.v2.SalesCommissionService;
@@ -46,6 +47,9 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 
     @Autowired
     private CommissionConfigService commissionConfigService;
+
+    @Autowired
+    Sender sender;
 
     /**
      * 通过主键id查询
@@ -165,22 +169,28 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
                         }
                     }
                     int updateNum = this.getBaseDao().updateBySql(NAMESPACE + ".updateByPrimaryKeySelective", salesCommission);
-                    if (updateNum>0){
-//                        LOGGER.info("更新成功，发送消息到 va");
-//                        Map<String, Object> paramMap = new HashMap<>();
-//                        Map<String, Object> bodyMap = new HashMap<>();
-//                        paramMap.put("version", version);
-//                        JSONArray array = new JSONArray();
-//                        List<CommissionAmountTotalVO> commissions = this.getBaseDao().selectListBySql(NAMESPACE_SALESCOMMISSION + ".commissionAmountTotalByVersion", paramMap);
-//                        for (CommissionAmountTotalVO commission : commissions) {
-//                            JSONObject jsonObject = JSONObject.fromObject(commission);
-//                            array.add(jsonObject);
-//                        }
-//                        bodyMap.put("detailList", array);
-//                        LOGGER.info(array);
-//                        MessageEvent event = MessageEvent.getMessageEvent(bodyMap, "tms", "va", VirtualAccountEventTypeEnum.COMMISSION_BATCH_POST.getCode());
-//                        sender.convertAndSend(event);
+                    if (updateNum>0)
+                    {
+                        logger.info("更新成功，发送消息到 va");
+                        CommissionAmountTotalVO commissionAmountTotalVO = new CommissionAmountTotalVO();
+                        commissionAmountTotalVO.setId(commission.getId());
+                        commissionAmountTotalVO.setCommissionAmount(commission.getCommissionAmount());
+                        commissionAmountTotalVO.setGuideId(commission.getGuideId());
+                        JSONObject jsonObject = JSONObject.fromObject(commissionAmountTotalVO);
+                        Map<String, Object> bodyMap = new HashMap<>();
+                        JSONArray array = new JSONArray();
+                        array.add(jsonObject);
+                        bodyMap.put("detailList", array);
+                        logger.info(array.toString());
+                        MessageEvent event = null;
+                        if (config.getType() == ConstantEnum.COMMISSION_TYPE_0.getCodeByte())
+                            event = MessageEvent.getMessageEvent(bodyMap, "tms", "va", VirtualAccountEventTypeEnum.COMMISSION_TYPE_EXPAND.getCode());
+                        else if (config.getType() == ConstantEnum.COMMISSION_TYPE_1.getCodeByte())
+                            event = MessageEvent.getMessageEvent(bodyMap, "tms", "va", VirtualAccountEventTypeEnum.COMMISSION_TYPE_FIRST.getCode());
+                        sender.convertAndSend(event);
                         resultNum++;
+                    }else {
+                        logger.info("佣金审核修改失败");
                     }
                 }
             }
