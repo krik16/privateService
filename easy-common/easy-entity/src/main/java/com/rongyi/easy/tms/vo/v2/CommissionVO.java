@@ -33,9 +33,14 @@ public class CommissionVO implements Serializable{
     private String  registerPhone;
 
     /**
-     * 订单创建时间(用户注册完成时间)
+     * 订单创建时间(摩店用户认证提交时间)
      */
     private Date createAt;
+
+    /**
+     * 订单完成时间(摩店用户认证通过时间/容易逛用户注册完成时间)
+     */
+    private Date finishAt;
 
     /**
      * 订单号(首单返佣使用)
@@ -91,6 +96,14 @@ public class CommissionVO implements Serializable{
         this.orderNo = orderNo;
     }
 
+    public Date getFinishAt() {
+        return finishAt;
+    }
+
+    public void setFinishAt(Date finishAt) {
+        this.finishAt = finishAt;
+    }
+
     @Override
     public String toString() {
         return "CommissionVO{" +
@@ -99,6 +112,7 @@ public class CommissionVO implements Serializable{
                 ", registerId='" + registerId + '\'' +
                 ", registerPhone='" + registerPhone + '\'' +
                 ", createAt=" + createAt +
+                ", finishAt=" + finishAt +
                 ", orderNo='" + orderNo + '\'' +
                 '}';
     }
