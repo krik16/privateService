@@ -29,7 +29,7 @@ public interface ROAMalllifeUserService {
 	 * @param malllifeUser
 	 * @throws Exception
 	 */
-	public void registUser(MalllifeUser malllifeUser) throws Exception;
+	public String registUser(MalllifeUser malllifeUser) throws Exception;
 
 	/**
 	 *
