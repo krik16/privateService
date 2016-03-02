@@ -156,7 +156,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
                         paramsMap.put("status", param.getStatus());
                         paramsMap.put("type", config.getType());
                         Integer dailyCount = this.getBaseDao().count(NAMESPACE + ".selectDailyCount", paramsMap);
-                        if (dailyCount>config.getLimitTotal()){
+                        if (dailyCount>=config.getLimitTotal()){
                             salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_5.getCodeByte());
                         }
                     }
