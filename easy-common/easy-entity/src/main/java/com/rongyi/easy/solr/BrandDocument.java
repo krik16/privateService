@@ -2,11 +2,11 @@ package com.rongyi.easy.solr;
 
 import com.rongyi.core.util.Pinyin4jUtil;
 import com.rongyi.easy.entity.BrandEntity;
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.solr.client.solrj.beans.Field;
 import org.bson.types.ObjectId;
+import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
@@ -65,7 +65,7 @@ public class BrandDocument implements Serializable{
     public BrandDocument(BrandEntity brand) throws Exception {
         if(brand==null)
             return;
-        BeanUtils.copyProperties(this,brand);
+        BeanUtils.copyProperties(brand,this );
         icon="/system/brand/icon/"+brand.getId().toString()+"/"+brand.getIcon();
         if(StringUtils.isNotBlank(brand.getTags()))
             tags="1";
