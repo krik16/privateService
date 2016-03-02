@@ -27,8 +27,16 @@ public class DetailListVO implements Serializable {
 	private String disconnt;// 折扣
 	private String buyerName;// 买家名称
 	private String buyerIM;// 买家IM账号
+	private String traceStatus; //详情状态（轨迹图）
 
-	
+	public String getTraceStatus() {
+		return traceStatus;
+	}
+
+	public void setTraceStatus(String traceStatus) {
+		this.traceStatus = traceStatus;
+	}
+
 	public String getBuyerName() {
 		return buyerName;
 	}

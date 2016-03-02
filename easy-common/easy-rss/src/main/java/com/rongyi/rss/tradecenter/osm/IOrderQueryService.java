@@ -238,4 +238,13 @@ public interface IOrderQueryService {
 	 * @return
 	 */
 	OrderFormExtraEntity getNewAddressByOrderNo(String orderNo);
+
+	/**
+	 * 我的交易金额明细
+	 *
+	 * @param orderNo 订单号
+	 * @return
+	 * @throws Exception
+	 */
+	public DetailListVO getMyDealAmountDetail(String orderNo) throws Exception;
 }
