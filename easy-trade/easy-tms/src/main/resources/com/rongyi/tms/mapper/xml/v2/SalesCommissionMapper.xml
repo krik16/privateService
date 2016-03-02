@@ -267,8 +267,11 @@
     <if test="guideType!=null and guideType!=0">
       and sc.guide_type == #{guideType}
     </if>
-    <if test="orderNos!=null and orderNos.size()>0">
-      and sc.order_no in<foreach collection="orderNos" item="item" open="(" separator="," close=")">#{item}</foreach>
+    <if test="orderCreateAtBegin!=null and orderCreateAtBegin!=''">
+      and sc.order_no in (select order_no from ry_osm.order_form where create_at &gt; #{orderCreateAtBegin})
+    </if>
+    <if test="orderCreateAtEnd!=nul and orderCreateAtEnd!=''">
+      and sc.order_no in (select order_no from ry_osm.order_form where create_at &lt; #{orderCreateAtEnd})
     </if>
     <if test="registerType!=null and registerType!=0">
       and cc.register_type == #{registerType}
