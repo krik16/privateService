@@ -70,5 +70,10 @@
 	<dubbo:reference interface="com.rongyi.rss.solr.McmcCommoditySolrService" id="mcmcCommoditySolrService"  version="${dubbo.version}" check="false"/>
 	<!-- 商品信息 -->
 	<dubbo:reference interface="com.rongyi.rss.bsoms.IUserInfoService" id="iUserInfoService"  version="${dubbo.version}" check="false"/>
+	<!-- 大运营后台用户权限查询 -->
+	<dubbo:reference interface="com.rongyi.rss.ryoms.ROARyUserService" id="ryUserServiceryUserService" version="${dubbo.version}" check="false" />
+
+	<!-- 商家后台用户权限查询 -->
+	<dubbo:reference interface="com.rongyi.rss.roa.ROAUserInfoService" id="userInfoService" version="${dubbo.version}" check="false" />
 
 </beans>  

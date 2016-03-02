@@ -4,8 +4,6 @@ import com.rongyi.easy.tms.vo.v2.CommissionVO;
 import com.rongyi.rss.tms.CommissionService;
 import com.rongyi.tms.BaseTest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
-import org.testng.annotations.Test;
 
 import java.util.Date;
 
@@ -19,8 +17,8 @@ public class CommissionServiceImplTest extends BaseTest{
     @Autowired
     CommissionService commissionService;
 
-    @Test
-    @Rollback(false)
+//    @Test
+//    @Rollback(false)
     public void addCommissionTest(){
         CommissionVO commissionVO = new CommissionVO();
         commissionVO.setType(1);
