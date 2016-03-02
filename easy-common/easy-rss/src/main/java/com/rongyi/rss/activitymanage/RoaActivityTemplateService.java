@@ -84,6 +84,13 @@ public interface RoaActivityTemplateService {
      */
     List<TemplateSaleShopMall> findTemplateSaleShopMalls(String mallId);
 
+    /**
+     * 通过店铺ids得到对应的特卖店铺集合
+     * @param shopIds
+     * @return
+     */
+    List<TemplateSaleShopMall> findTemplateSaleShopMallsByShops(List<String> shopIds);
+
     /***
      * 判断商场是否已经有了 true 为有  false 为没有
      * @param mallId

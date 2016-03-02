@@ -103,7 +103,15 @@ public class TradeOrder implements Serializable {
     private Byte hbType;
 
     private String idfa;
+    /**
+     * 微信标准版支付记录appid
+     */
+    private String weixinAppId;
 
+    /**
+     * 下单渠道
+     */
+    private String orderChannel;
     /**
      * 元
      *
@@ -531,5 +539,21 @@ public class TradeOrder implements Serializable {
 
     public void setIdfa(String idfa) {
         this.idfa = idfa;
+    }
+
+    public String getWeixinAppId() {
+        return weixinAppId;
+    }
+
+    public void setWeixinAppId(String weixinAppId) {
+        this.weixinAppId = weixinAppId;
+    }
+
+    public String getOrderChannel() {
+        return orderChannel;
+    }
+
+    public void setOrderChannel(String orderChannel) {
+        this.orderChannel = orderChannel;
     }
 }

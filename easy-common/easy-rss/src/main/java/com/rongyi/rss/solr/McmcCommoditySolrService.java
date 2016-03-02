@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.mcmc.param.ActivityCommodityParam;
 import com.rongyi.easy.solr.result.CommoditySolrResult;
 import org.bson.types.ObjectId;
@@ -78,7 +79,7 @@ public interface McmcCommoditySolrService {
 	 * @param param
 	 * @return
 	 */
-	public Map searchCommodityForMallLife(CommoditySearchParam param);
+	public Map<?, ?> searchCommodityForMallLife(CommoditySearchParam param);
 
 	/**
 	 * @author ZhengYl
@@ -99,6 +100,13 @@ public interface McmcCommoditySolrService {
 	public boolean cleanCommoditySecKill(String secKillSign);
 
 	public boolean updateCommoditySecKill(String commodityId,String secKillSign);
+
+	/**
+	 * 搜索有商品的商品分类列表
+	 * @param categoryParam	参数对象
+	 * @return
+	 */
+	public Map<String, Object> searchCommodityCategoryHasCommodity(BuyerCategoryParam categoryParam);
 
 //	public boolean updateCommoditySale(String commodityId, Integer sortPosition);
 
