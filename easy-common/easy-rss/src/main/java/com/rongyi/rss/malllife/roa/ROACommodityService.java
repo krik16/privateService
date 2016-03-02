@@ -122,4 +122,6 @@ public interface ROACommodityService {
 	 * @return
 	 */
 	public ResponseVO deleteCommodity(String commodityId, Long shopId, Integer identity);
+
+	public ResponseVO  topByIds(List<String> ids,Integer sort);
 }

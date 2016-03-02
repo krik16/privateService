@@ -5,9 +5,8 @@ import java.util.Map;
 
 import com.rongyi.easy.usercenter.dto.malllife.MalllifeUserInfoDto;
 import com.rongyi.easy.usercenter.entity.MalllifeUserInfoEntity;
-
-
 import com.rongyi.easy.malllife.param.MalllifeUser;
+import com.rongyi.easy.malllife.pojo.BuyerInfoPojo;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
 
 /*
@@ -30,7 +29,7 @@ public interface ROAMalllifeUserService {
 	 * @param malllifeUser
 	 * @throws Exception
 	 */
-	public void registUser(MalllifeUser malllifeUser) throws Exception;
+	public String registUser(MalllifeUser malllifeUser) throws Exception;
 
 	/**
 	 *
@@ -170,6 +169,13 @@ public interface ROAMalllifeUserService {
 	 * @return
 	 */
 	public Map<String,UserInfoVO> getUserListByIdList(List<String> idList);
+	
+	/**
+	 * 判断容易逛用户是否被邀请来的
+	 * @param userId
+	 * @return
+	 */
+	public BuyerInfoPojo getUserIsByShare(String userId,int type);
 
 
 

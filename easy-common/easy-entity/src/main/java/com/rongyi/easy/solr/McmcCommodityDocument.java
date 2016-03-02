@@ -76,7 +76,16 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private Integer flashSortPosition;
 	@Field("systemNumber")
 	private String systemNumber;
+	@Field("sort")
+	private Integer sort;
 
+	public Integer getSort() {
+		return null==sort?0:sort;
+	}
+
+	public void setSort(Integer sort) {
+		this.sort = sort;
+	}
 
 	public Double getPrice() {
 		return price;
