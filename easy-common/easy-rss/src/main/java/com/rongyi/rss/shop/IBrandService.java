@@ -63,4 +63,6 @@ public interface IBrandService {
 	 * @throws Exception
 	 */
 	public BrandDocument getBrandDocument(String brandMid) throws Exception;
+
+	public List<BrandEntity> getBrandList(int skip,int pageSize);
 }

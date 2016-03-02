@@ -1,5 +1,7 @@
 package com.rongyi.rss.redis;
 
+import java.util.List;
+
 /**
  * Created by wangzehui on 2016/2/19.
  */
@@ -35,4 +37,22 @@ public interface RedisService {
      * @return
      */
     public String set(String key,String value);
+
+    /**
+     * 批量插入
+     * @param keys
+     * @param values
+     * @param time
+     * @throws Exception
+     */
+    public void setObject(List<String> keys, List<Object> values,int time) throws Exception;
+
+    /**
+     * 获取hash对象
+     * @param key
+     * @param c
+     * @return
+     * @throws Exception
+     */
+    public Object getObject(String key ,Class c) throws Exception;
 }

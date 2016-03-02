@@ -1,5 +1,6 @@
 package com.rongyi.rss.shop;
 
+import com.rongyi.easy.mcmc.Zones;
 import com.rongyi.easy.solr.CityDocument;
 import com.rongyi.easy.solr.MallsDocument;
 import com.rongyi.easy.solr.PoiDocument;
@@ -69,4 +70,18 @@ public interface IZoneService {
      * @return
      */
     public PoiDocument getMallPoiDocument(String zoneMid);
+
+    /**
+     * 查询zone表全部数据
+     * @param skip
+     * @param pageSize
+     * @return
+     */
+    public List<Zones> getZones(int skip,int pageSize);
+
+    /**
+     * 查询zone表全部记录数
+     * @return
+     */
+    public long getZonesCount();
 }

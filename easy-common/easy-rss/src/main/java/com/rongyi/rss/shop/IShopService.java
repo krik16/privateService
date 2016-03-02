@@ -124,12 +124,12 @@ public interface IShopService {
 	 * @param pageSize
 	 * @return
 	 */
-	public List<PoiDocument> getShopPoiDocumentList(int skip,int pageSize);
+	public List<PoiDocument> getShopPoiDocumentList(int skip,int pageSize) throws Exception;
 
 	/**
 	 * 获取店铺solr对象（poi库）
 	 * @param shopMid
 	 * @return
 	 */
-	public PoiDocument getShopPoiDocument(String shopMid);
+	public PoiDocument getShopPoiDocument(String shopMid) throws Exception;
 }
