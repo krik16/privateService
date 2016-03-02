@@ -140,6 +140,8 @@ public enum ConstantEnum {
     COMMISSION_CONFIG_VERIFY_FAIL("1019205","审核佣金规则配置失败"),
     COMMISSION_CONFIG_FREEZE_FAIL("1019206","审核佣金规则启用/停用失败"),
     COMMISSION_CONFIG_DETAIL_FAIL("1019207","返佣规则详情"),
+    COMMISSION_ADD_INVITE_NOT_FOUND("1019208","未找到对应的邀请人信息，不增加佣金"),
+    COMMISSION_ADD_NOT_FIRST("1019209","此笔返佣不是首笔返佣,不增加佣金"),
 
     EXCEL_LIMIT_COUNT(5000,"交易明细报表导出限制总数");
     interface ACCOUNT_STATUS{

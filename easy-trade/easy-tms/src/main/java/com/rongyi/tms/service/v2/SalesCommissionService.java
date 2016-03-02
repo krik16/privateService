@@ -46,4 +46,13 @@ public interface SalesCommissionService {
 
 
     boolean verifyCommission(VerifyCommissionParam param, String user);
+
+    /**
+     *验证是否允许返佣
+     * @param guideId
+     * @param registerId
+     * @param type
+     * @return
+     */
+    boolean validateIsAllow(Integer guideId,String registerId,Integer type);
 }

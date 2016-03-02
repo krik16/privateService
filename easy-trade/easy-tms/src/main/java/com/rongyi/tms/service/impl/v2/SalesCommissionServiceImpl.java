@@ -210,5 +210,15 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
         return resultNum>0;
     }
 
+    @Override
+    public boolean validateIsAllow(Integer guideId, String registerId, Integer type) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("guideId", guideId);
+        map.put("registerId", registerId);
+        map.put("type", type);
+        int count = this.getBaseDao().selectOneBySql(NAMESPACE + ".validateIsAllow", map);
+        return count <= 0;
+    }
+
 
 }

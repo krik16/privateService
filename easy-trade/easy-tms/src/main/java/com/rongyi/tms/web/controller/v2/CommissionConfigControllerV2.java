@@ -28,10 +28,10 @@ import java.util.Map;
  **/
 @Controller
 @RequestMapping("/v2/commissionConfig")
-public class CommissionConfigController {
+public class CommissionConfigControllerV2 {
 
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CommissionConfigController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CommissionConfigControllerV2.class);
     @Autowired
     CommissionConfigService commissionConfigService;
 
