@@ -27,7 +27,7 @@ public class MallVO implements Serializable{
 	private String wechat_pic; //商场 微信展示图片：微信地址
 	private String icon;//商场ICOn：图片logoURl
 	private String merlog_pic ;//商家后台Logo
-	
+	private String mall_level;//商场级别 A、B、C、S、SS
 	public String getIcon() {
 		return icon;
 	}
@@ -161,5 +161,35 @@ public class MallVO implements Serializable{
 	public void setMerlog_pic(String merlog_pic) {
 		this.merlog_pic = merlog_pic;
 	}
-	
+	/**
+	 * @return the mall_level
+	 */
+	public String getMall_level() {
+		return mall_level;
+	}
+	/**
+	 * @param mall_level the mall_level to set
+	 */
+	public void setMall_level(String mall_level) {
+		this.mall_level = mall_level;
+	}
+	/** 
+	* @Title: toString 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param @return    设定文件 
+	* @author shaozhou
+	* @date 2016年3月2日 下午1:46:24
+	* @throws 
+	*/
+	@Override
+	public String toString() {
+		return "MallVO [id=" + id + ", name=" + name + ", mold=" + mold + ", business_status=" + business_status
+				+ ", recommend=" + recommend + ", aliases=" + aliases + ", weixin=" + weixin + ", mallAddress="
+				+ mallAddress + ", business_hours=" + business_hours + ", description=" + description + ", telephone="
+				+ telephone + ", transport_information=" + transport_information + ", parking=" + parking
+				+ ", terminal_mall=" + terminal_mall + ", appearance_pic=" + appearance_pic + ", web_appearance_pic="
+				+ web_appearance_pic + ", traffic_pic=" + traffic_pic + ", introduction_pic=" + introduction_pic
+				+ ", terminal_logo=" + terminal_logo + ", wechat_pic=" + wechat_pic + ", icon=" + icon + ", merlog_pic="
+				+ merlog_pic + ", mall_level=" + mall_level + "]";
+	}
 }
