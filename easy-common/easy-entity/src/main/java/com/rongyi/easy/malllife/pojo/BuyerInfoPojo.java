@@ -126,4 +126,21 @@ public class BuyerInfoPojo implements Serializable {
     public void setImUser(String imUser) {
         this.imUser = imUser;
     }
+
+    @Override
+    public String toString() {
+        return "BuyerInfoPojo{" +
+                "userId=" + userId +
+                ", userType=" + userType +
+                ", userLogo='" + userLogo + '\'' +
+                ", userPhone='" + userPhone + '\'' +
+                ", userNickName='" + userNickName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", shareCode='" + shareCode + '\'' +
+                ", userDesc='" + userDesc + '\'' +
+                ", imUser='" + imUser + '\'' +
+                ", userFansCount=" + userFansCount +
+                ", isFans=" + isFans +
+                '}';
+    }
 }

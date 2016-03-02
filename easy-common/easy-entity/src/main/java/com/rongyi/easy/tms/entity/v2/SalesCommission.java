@@ -39,6 +39,8 @@ public class SalesCommission implements Serializable {
 
     private String invitePhone;
 
+    private String registerId;
+
     private String registerPhone;
 
     private Integer configId;
@@ -223,5 +225,13 @@ public class SalesCommission implements Serializable {
 
     public void setIsDelete(Byte isDelete) {
         this.isDelete = isDelete;
+    }
+
+    public String getRegisterId() {
+        return registerId;
+    }
+
+    public void setRegisterId(String registerId) {
+        this.registerId = registerId;
     }
 }
