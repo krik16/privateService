@@ -33,4 +33,14 @@ public interface VirtualAccountDetailTypes {
 	
 	/** 优惠券返佣*/
 	public static final int COUPON_COMMISSION = 6;
+
+	/**
+	 * 推广返佣
+	 */
+	 int EXTEND_COMMISSION=7;
+
+	/**
+	 * 首单返佣
+	 */
+	int FIRST_COMMISSION=8;
 }
