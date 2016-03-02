@@ -101,12 +101,12 @@ public interface McmcCommoditySolrService {
 
 	public boolean updateCommoditySecKill(String commodityId,String secKillSign);
 
-	/**
-	 * 搜索有商品的商品分类列表
-	 * @param categoryParam	参数对象
-	 * @return
-	 */
-	public Map<String, Object> searchCommodityCategoryHasCommodity(BuyerCategoryParam categoryParam);
+//	/**
+//	 * 搜索有商品的商品分类列表
+//	 * @param categoryParam	参数对象
+//	 * @return
+//	 */
+//	public Map<String, Object> searchCommodityCategoryHasCommodity(BuyerCategoryParam categoryParam);
 
 //	public boolean updateCommoditySale(String commodityId, Integer sortPosition);
 
