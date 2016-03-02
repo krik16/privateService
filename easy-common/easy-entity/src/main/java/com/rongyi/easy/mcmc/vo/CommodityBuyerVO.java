@@ -261,7 +261,7 @@ public class CommodityBuyerVO implements Serializable{
 		}
 		this.systemNumber = commodity.getSystemNumber();
 		
-		//闪购 || 特卖 || 秒杀
+		// 活动类型[0其他 闪购1、特卖2、秒杀3]
 		if (commodity.getSaleId() != null) {
 			this.activityType = "2";
 		} else if (commodity.getFlashSaleId() != null) {
