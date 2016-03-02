@@ -1,6 +1,7 @@
 package com.rongyi.easy.mcmc.vo;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
@@ -27,6 +28,9 @@ public class CommodityFullVO implements Serializable {
     private String brandName;
     private String brandId;
     private String brandMid;
+    private String shopName;
+    private String postage;//商品邮费
+    private boolean supportCourierDeliver = true;//支持快递发货字段  true 是    false否
 
     public String getId() {
         return id;
@@ -132,6 +136,19 @@ public class CommodityFullVO implements Serializable {
         } else return "";
     }
 
+    /**
+     * 判断是否包邮
+     * @return
+     */
+    public Boolean isShipping() {
+        if (supportCourierDeliver) {
+            if (StringUtils.isBlank(postage) || Double.valueOf(0).equals(Double.valueOf(postage))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public int getStatus() {
         return status;
     }
@@ -198,6 +215,33 @@ public class CommodityFullVO implements Serializable {
                 .append("brandName", brandName)
                 .append("brandId", brandId)
                 .append("brandMid", brandMid)
+                .append("shopName", shopName)
+                .append("postage", postage)
+                .append("supportCourierDeliver", supportCourierDeliver)
                 .toString();
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public String getPostage() {
+        return postage;
+    }
+
+    public void setPostage(String postage) {
+        this.postage = postage;
+    }
+
+    public boolean isSupportCourierDeliver() {
+        return supportCourierDeliver;
+    }
+
+    public void setSupportCourierDeliver(boolean supportCourierDeliver) {
+        this.supportCourierDeliver = supportCourierDeliver;
     }
 }

@@ -3,6 +3,7 @@ package com.rongyi.easy.activitymanage.vo;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -49,6 +50,16 @@ public class ActivityGoodsVO implements Serializable {
      * 商品审核状态：待审核[0] 未通过[1] 已通过[2]
      */
     private Integer status;
+
+    /**
+     * 参与开始时间
+     */
+    private Date joinStartAt;
+
+    /**
+     * 参与结束时间
+     */
+    private Date joinEndAt;
 
     /**
      * 创建人（报名商家）
@@ -146,6 +157,22 @@ public class ActivityGoodsVO implements Serializable {
         this.status = status;
     }
 
+    public Date getJoinStartAt() {
+        return joinStartAt;
+    }
+
+    public void setJoinStartAt(Date joinStartAt) {
+        this.joinStartAt = joinStartAt;
+    }
+
+    public Date getJoinEndAt() {
+        return joinEndAt;
+    }
+
+    public void setJoinEndAt(Date joinEndAt) {
+        this.joinEndAt = joinEndAt;
+    }
+
     public String getCreateUser() {
         return createUser;
     }
@@ -165,6 +192,8 @@ public class ActivityGoodsVO implements Serializable {
                 .append("subsidyType", subsidyType)
                 .append("subsidyPrice", subsidyPrice)
                 .append("status", status)
+                .append("joinStartAt", joinStartAt)
+                .append("joinEndAt", joinEndAt)
                 .append("createUser", createUser)
                 .append("categoryStr", categoryStr)
                 .append("activityGoodsSpecVOs", activityGoodsSpecVOs)

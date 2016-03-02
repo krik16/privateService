@@ -17,7 +17,9 @@ public class SeckillCommodityVO implements Serializable {
      * 商品或者卡券Id
      *
      */
-    private String goodsId;
+    private String couponId;
+
+    private Integer type;
     /**
      * 商品名称
      */
@@ -42,6 +44,14 @@ public class SeckillCommodityVO implements Serializable {
      * 图片
      */
     private String pic;
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
 
     public String getPic() {
         return pic;
@@ -91,18 +101,19 @@ public class SeckillCommodityVO implements Serializable {
         this.name = name;
     }
 
-    public String getGoodsId() {
-        return goodsId;
+    public String getCouponId() {
+        return couponId;
     }
 
-    public void setGoodsId(String goodsId) {
-        this.goodsId = goodsId;
+    public void setCouponId(String couponId) {
+        this.couponId = couponId;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .append("goodsId", goodsId)
+                .append("couponId", couponId)
+                .append("type", type)
                 .append("name", name)
                 .append("currentPrice", currentPrice)
                 .append("originalPrice", originalPrice)
