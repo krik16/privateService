@@ -22,6 +22,16 @@ public class MyDealParam extends BaseParam implements Serializable {
 	private String date;// 0所有时间1当天，2当周，3当月
 
 	private String guideId;// 导购id
+	
+	private String orderNum;//订单号
+
+	public String getOrderNum() {
+		return orderNum;
+	}
+
+	public void setOrderNum(String orderNum) {
+		this.orderNum = orderNum;
+	}
 
 	public String getStatus() {
 		return status;
