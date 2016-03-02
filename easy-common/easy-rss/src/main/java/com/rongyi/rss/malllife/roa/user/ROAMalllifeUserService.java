@@ -175,7 +175,7 @@ public interface ROAMalllifeUserService {
 	 * @param userId
 	 * @return
 	 */
-	public BuyerInfoPojo getUserIsByShare(String userId);
+	public BuyerInfoPojo getUserIsByShare(String userId,int type);
 
 
 
