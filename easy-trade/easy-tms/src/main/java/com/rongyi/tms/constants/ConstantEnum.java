@@ -133,6 +133,9 @@ public enum ConstantEnum {
     COMMISSION_CONFIG_CUST_VERIFY_0(0,"系统审核"),
     COMMISSION_CONFIG_CUST_VERIFY_1(1,"人工审核"),
 
+    FIAL_USER_PARAMS_PAYMENT("1019401", "没有登录或登录信息错误"),//前台约定，没有登录统一后三位为401
+    FIAL_NO_AUTHORITY_PAYMENT("1019403", "没有访问该资源的权限"),//前台约定，没有权限统一后三位为403
+
     COMMISSION_ADD_FAIL("1019201","未查找到符合的佣金规则配置，不增加佣金"),
     COMMISSION_CONFIG_LIST_FAIL("1019202","查询佣金规则列表失败"),
     COMMISSION_CONFIG_EXIST("1019203","此佣金规则配置已存在"),
