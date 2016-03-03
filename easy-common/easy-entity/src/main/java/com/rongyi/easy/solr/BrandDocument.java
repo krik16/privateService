@@ -1,5 +1,6 @@
 package com.rongyi.easy.solr;
 
+import com.rongyi.core.util.ListUtil;
 import com.rongyi.core.util.Pinyin4jUtil;
 import com.rongyi.easy.entity.BrandEntity;
 import org.apache.commons.collections.CollectionUtils;
@@ -40,11 +41,11 @@ public class BrandDocument implements Serializable{
     @Field
     private Date updated_at;//更新时间
     @Field
-    private ArrayList<ObjectId> category_ids;
+    private ArrayList<String> category_ids;
     @Field
     private ArrayList<String> category_tags;//品类
     @Field
-    private ArrayList<String> aliases;//别名
+    private List<String> aliases;//别名
     @Field
     private String shopcount;
     //进行空值判断，不建索引，1表示有值
@@ -65,7 +66,9 @@ public class BrandDocument implements Serializable{
     public BrandDocument(BrandEntity brand) throws Exception {
         if(brand==null)
             return;
-        BeanUtils.copyProperties(brand,this );
+        BeanUtils.copyProperties(brand,this);
+        if(CollectionUtils.isNotEmpty(brand.getCategory_ids()))
+            category_ids= ListUtil.toStringList(brand.getCategory_ids());
         icon="/system/brand/icon/"+brand.getId().toString()+"/"+brand.getIcon();
         if(StringUtils.isNotBlank(brand.getTags()))
             tags="1";
@@ -158,11 +161,11 @@ public class BrandDocument implements Serializable{
         this.updated_at = updated_at;
     }
 
-    public ArrayList<ObjectId> getCategory_ids() {
+    public ArrayList<String> getCategory_ids() {
         return category_ids;
     }
 
-    public void setCategory_ids(ArrayList<ObjectId> category_ids) {
+    public void setCategory_ids(ArrayList<String> category_ids) {
         this.category_ids = category_ids;
     }
 
@@ -174,11 +177,11 @@ public class BrandDocument implements Serializable{
         this.category_tags = category_tags;
     }
 
-    public ArrayList<String> getAliases() {
+    public List<String> getAliases() {
         return aliases;
     }
 
-    public void setAliases(ArrayList<String> aliases) {
+    public void setAliases(List<String> aliases) {
         this.aliases = aliases;
     }
 
