@@ -17,25 +17,41 @@ import java.io.Serializable;
 public class NodeVO implements Serializable{
 	
 	private String date;//节点时间
-	private boolean node;//节点
-	private String flag;//是否点亮
+	private String node;//节点
+	private boolean flag;//是否点亮
 	private String nodeMessage;//
+	public NodeVO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public NodeVO(String node, boolean flag) {
+		super();
+		this.node = node;
+		this.flag = flag;
+	}
+	public NodeVO(String date, String node, boolean flag, String nodeMessage) {
+		super();
+		this.date = date;
+		this.node = node;
+		this.flag = flag;
+		this.nodeMessage = nodeMessage;
+	}
 	public String getDate() {
 		return date;
 	}
 	public void setDate(String date) {
 		this.date = date;
 	}
-	public boolean isNode() {
+	public String getNode() {
 		return node;
 	}
-	public void setNode(boolean node) {
+	public void setNode(String node) {
 		this.node = node;
 	}
-	public String getFlag() {
+	public boolean isFlag() {
 		return flag;
 	}
-	public void setFlag(String flag) {
+	public void setFlag(boolean flag) {
 		this.flag = flag;
 	}
 	public String getNodeMessage() {
