@@ -66,8 +66,11 @@ public class BrandEntity implements Serializable{
 
 	public String getFullIcon() {
 		return "http://rongyi.b0.upaiyun.com/system/brand/icon/" + id + "/" + icon;
-	}
+}
 
+	public void setFullIcon(String icon){
+
+	}
 	public String getId() {
 		return id;
 	}
@@ -171,4 +174,5 @@ public class BrandEntity implements Serializable{
 	public void setAverage_consumption(String average_consumption) {
 		this.average_consumption = average_consumption;
 	}
+
 }

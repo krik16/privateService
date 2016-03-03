@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.rongyi.easy.malllife.constants.Constants;
 import com.rongyi.easy.roa.entity.CategoriesEntity;
+import com.rongyi.easy.shop.dto.ZoneDTO;
 import com.rongyi.easy.smms.Category;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
@@ -137,6 +138,18 @@ public class Zones implements Serializable {
 	private String floor;//楼层
 	private int system_status;
 	private int systemStatus;
+
+
+	public Zones() {
+	}
+
+	public Zones(ZoneDTO zone) {
+		id=new ObjectId(zone.getId());
+		name=zone.getName();
+		_type=zone.getType();
+		address=zone.getAddress();
+	}
+
 	public ObjectId getId() {
 		return id;
 	}
