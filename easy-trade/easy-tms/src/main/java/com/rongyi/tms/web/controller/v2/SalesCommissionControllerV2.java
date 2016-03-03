@@ -102,10 +102,12 @@ public class SalesCommissionControllerV2 extends BaseControllerV2{
 
     @RequestMapping("/detail")
     @ResponseBody
-    public ResponseData detail(HttpServletRequest request) {
+    public ResponseData detail(@RequestBody Map<String, Object> map) {
         ResponseData result;
         try {
-            Integer id = Integer.valueOf(request.getParameter("id"));
+            Integer id = null;
+            if (map.containsKey("id"))
+                id = Integer.valueOf(map.get("id").toString());
             LOGGER.info("detail begin id={}", id);
             if (id == null){
                 return ResponseData.failure(Integer.valueOf(CodeEnum.ERROR_PARAM.getActionCode()),CodeEnum.ERROR_PARAM.getMessage());
