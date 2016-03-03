@@ -4,6 +4,7 @@ import com.rongyi.core.bean.ResponseData;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.easy.tms.entity.v2.CommissionConfig;
 import com.rongyi.rss.malllife.roa.ROARedisService;
+import com.rongyi.tms.Exception.PermissionException;
 import com.rongyi.tms.constants.Constant;
 import com.rongyi.tms.constants.ConstantEnum;
 import com.rongyi.tms.service.v2.CommissionConfigService;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -28,26 +30,33 @@ import java.util.Map;
  **/
 @Controller
 @RequestMapping("/v2/commissionConfig")
-public class CommissionConfigController {
+public class CommissionConfigControllerV2 extends BaseControllerV2{
 
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CommissionConfigController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CommissionConfigControllerV2.class);
     @Autowired
     CommissionConfigService commissionConfigService;
 
     @Autowired
-    private ROARedisService redisService;
+    ROARedisService redisService;
+
+
 
     @RequestMapping("/list")
     @ResponseBody
-    public ResponseData list(@RequestBody Map<String, Object> map) {
+    public ResponseData list(HttpServletRequest request,@RequestBody Map<String, Object> map) {
         LOGGER.info("佣金规则配置列表,map={}", map);
         try {
+            permissionCheck(request, "FNC_RULELIST_VIEW");
             Integer currentPage = Integer.valueOf(map.get("currentPage").toString());
             List<CommissionConfig> list = commissionConfigService.selectPageList(map, currentPage, Constant.PAGE.PAGESIZE);
             Integer count = commissionConfigService.selectPageCount(map);
             return ResponseData.success(list, currentPage, Constant.PAGE.PAGESIZE, count);
-        } catch (Exception e) {
+        }catch (PermissionException e){
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+            return ResponseData.failure(Integer.valueOf(e.getCode()), e.getMessage());
+        }catch (Exception e) {
             LOGGER.error(e.getMessage());
             e.printStackTrace();
             return ResponseData.failure(ConstantEnum.COMMISSION_CONFIG_LIST_FAIL.getCodeInt(), ConstantEnum.COMMISSION_CONFIG_LIST_FAIL.getValueStr());
@@ -56,9 +65,10 @@ public class CommissionConfigController {
 
     @RequestMapping("/save")
     @ResponseBody
-    public ResponseData save(@RequestBody Map<String, Object> map) {
+    public ResponseData save(HttpServletRequest request,@RequestBody Map<String, Object> map) {
         LOGGER.info("佣金规则保存,map={}", map);
         try {
+            permissionCheck(request, "FNC_RULELIST_ADD");
             CommissionConfig commissionConfig = new CommissionConfig();
             MapUtils.toObject(commissionConfig, map);
             boolean result = commissionConfigService.validateIsExist(commissionConfig.getType(), commissionConfig.getInviteType(), commissionConfig.getRegisterType(), commissionConfig.getEffectStartTime(), commissionConfig.getEffectEndTime());
@@ -76,6 +86,10 @@ public class CommissionConfigController {
             commissionConfig.setRuleCode(ruleCode);
             commissionConfigService.insert(commissionConfig);
             return ResponseData.success();
+        }catch (PermissionException e){
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+            return ResponseData.failure(Integer.valueOf(e.getCode()), e.getMessage());
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
             e.printStackTrace();
@@ -85,12 +99,17 @@ public class CommissionConfigController {
 
     @RequestMapping("/verify")
     @ResponseBody
-    public ResponseData verify(@RequestBody Map<String, Object> map) {
+    public ResponseData verify(HttpServletRequest request,@RequestBody Map<String, Object> map) {
         LOGGER.info("佣金规则审核,map={}", map);
         try {
+            permissionCheck(request, "FNC_RULELIST_VFY");
             updateStatus(map);
             return ResponseData.success();
-        } catch (Exception e) {
+        } catch (PermissionException e){
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+            return ResponseData.failure(Integer.valueOf(e.getCode()), e.getMessage());
+        }catch (Exception e) {
             LOGGER.error(e.getMessage());
             e.printStackTrace();
             return ResponseData.failure(ConstantEnum.COMMISSION_CONFIG_VERIFY_FAIL.getCodeInt(), ConstantEnum.COMMISSION_CONFIG_VERIFY_FAIL.getValueStr());
@@ -99,11 +118,16 @@ public class CommissionConfigController {
 
     @RequestMapping("/freeze")
     @ResponseBody
-    public ResponseData freeze(@RequestBody Map<String, Object> map) {
+    public ResponseData freeze(HttpServletRequest request,@RequestBody Map<String, Object> map) {
         LOGGER.info("佣金规则启用/停用,map={}", map);
         try {
+            permissionCheck(request, "FNC_RULELIST_VFY");
             updateStatus(map);
             return ResponseData.success();
+        }catch (PermissionException e){
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+            return ResponseData.failure(Integer.valueOf(e.getCode()), e.getMessage());
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
             e.printStackTrace();
@@ -113,11 +137,16 @@ public class CommissionConfigController {
 
     @RequestMapping("/detail")
     @ResponseBody
-    public ResponseData detail(@RequestBody Map<String, Object> map) {
+    public ResponseData detail(HttpServletRequest request,@RequestBody Map<String, Object> map) {
         LOGGER.info("佣金规则详情,map={}", map);
         try {
+            permissionCheck(request, "FNC_RULELIST_VIEW");
             CommissionConfig commissionConfig = commissionConfigService.selectById(Integer.valueOf(map.get("id").toString()));
             return ResponseData.success(commissionConfig);
+        }catch (PermissionException e){
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+            return ResponseData.failure(Integer.valueOf(e.getCode()), e.getMessage());
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
             e.printStackTrace();
@@ -125,6 +154,7 @@ public class CommissionConfigController {
         }
 
     }
+
 
     private void updateStatus(Map<String, Object> map) {
         CommissionConfig commissionConfig = commissionConfigService.selectById(Integer.valueOf(map.get("id").toString()));

@@ -133,6 +133,9 @@ public enum ConstantEnum {
     COMMISSION_CONFIG_CUST_VERIFY_0(0,"系统审核"),
     COMMISSION_CONFIG_CUST_VERIFY_1(1,"人工审核"),
 
+    FIAL_USER_PARAMS_PAYMENT("1019401", "没有登录或登录信息错误"),//前台约定，没有登录统一后三位为401
+    FIAL_NO_AUTHORITY_PAYMENT("1019403", "没有访问该资源的权限"),//前台约定，没有权限统一后三位为403
+
     COMMISSION_ADD_FAIL("1019201","未查找到符合的佣金规则配置，不增加佣金"),
     COMMISSION_CONFIG_LIST_FAIL("1019202","查询佣金规则列表失败"),
     COMMISSION_CONFIG_EXIST("1019203","此佣金规则配置已存在"),
@@ -140,6 +143,8 @@ public enum ConstantEnum {
     COMMISSION_CONFIG_VERIFY_FAIL("1019205","审核佣金规则配置失败"),
     COMMISSION_CONFIG_FREEZE_FAIL("1019206","审核佣金规则启用/停用失败"),
     COMMISSION_CONFIG_DETAIL_FAIL("1019207","返佣规则详情"),
+    COMMISSION_ADD_INVITE_NOT_FOUND("1019208","未找到对应的邀请人信息，不增加佣金"),
+    COMMISSION_ADD_NOT_FIRST("1019209","此笔返佣不是首笔返佣,不增加佣金"),
 
     EXCEL_LIMIT_COUNT(5000,"交易明细报表导出限制总数");
     interface ACCOUNT_STATUS{

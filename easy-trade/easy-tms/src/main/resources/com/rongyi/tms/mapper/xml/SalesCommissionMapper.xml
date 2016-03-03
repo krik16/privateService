@@ -187,7 +187,7 @@
 
 		from
 		<include refid="View_From" />
-		where commission_amount is not null and
+		where commission_amount is not null and config_id = 0 and
 		sales_commission.status in
 		<foreach collection="status" index="index" item="item" open="("
 			separator="," close=")">
@@ -258,7 +258,7 @@
 		from
 		<include refid="View_From" />
 		where commission_amount is
-		not null and sales_commission.status in
+		not null and config_id = 0 and  sales_commission.status in
 		<foreach collection="status" index="index" item="item" open="("
 			separator="," close=")">
 			#{item}

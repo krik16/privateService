@@ -20,6 +20,7 @@
     <result column="comm_no" property="commNo" jdbcType="VARCHAR" />
     <result column="config_id" property="configId" jdbcType="INTEGER" />
     <result column="invite_phone" property="invitePhone" jdbcType="VARCHAR" />
+    <result column="register_id" property="registerId" jdbcType="VARCHAR" />
     <result column="register_phone" property="registerPhone" jdbcType="VARCHAR" />
     <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
   </resultMap>
@@ -35,7 +36,7 @@
   <sql id="Base_Column_List" >
     id, guide_id, order_no, commission_amount, `status`, create_at, `type`, pic_upload_at,
     create_user, update_user, update_at, buyer_account, seller_account, version, guide_type,
-    comm_no, config_id, invite_phone, register_phone, is_delete
+    comm_no, config_id, invite_phone,register_id, register_phone, is_delete
   </sql>
   <sql id="Blob_Column_List" >
     pic_urls, remarks
@@ -58,7 +59,7 @@
       pic_upload_at, create_user, update_user,
       update_at, buyer_account, seller_account,
       version, guide_type, comm_no,
-      config_id, invite_phone, register_phone,
+      config_id, invite_phone,register_id, register_phone,
       is_delete, pic_urls, remarks
       )
     values (#{guideId,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, #{commissionAmount,jdbcType=DECIMAL},
@@ -66,7 +67,7 @@
       #{picUploadAt,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR},
       #{updateAt,jdbcType=TIMESTAMP}, #{buyerAccount,jdbcType=VARCHAR}, #{sellerAccount,jdbcType=VARCHAR},
       #{version,jdbcType=BIGINT}, #{guideType,jdbcType=INTEGER}, #{commNo,jdbcType=VARCHAR},
-      #{configId,jdbcType=INTEGER}, #{invitePhone,jdbcType=VARCHAR}, #{registerPhone,jdbcType=VARCHAR},
+      #{configId,jdbcType=INTEGER}, #{invitePhone,jdbcType=VARCHAR},#{registerId,jdbcType=VARCHAR}, #{registerPhone,jdbcType=VARCHAR},
       #{isDelete,jdbcType=TINYINT}, #{picUrls,jdbcType=LONGVARBINARY}, #{remarks,jdbcType=LONGVARBINARY}
       )
   </insert>
@@ -90,8 +91,11 @@
       comm_no,
       config_id,
       invite_phone,
+      register_id,
       register_phone,
+      <if test="isDelete != null and idDelete != ''">
       is_delete,
+      </if>
       pic_urls,
       remarks,
     </trim>
@@ -113,8 +117,11 @@
       #{commNo,jdbcType=VARCHAR},
       #{configId,jdbcType=INTEGER},
       #{invitePhone,jdbcType=VARCHAR},
+      #{registerId,jdbcType=VARCHAR},
       #{registerPhone,jdbcType=VARCHAR},
+      <if test="isDelete != null and idDelete != ''">
       #{isDelete,jdbcType=TINYINT},
+      </if>
       #{picUrls,jdbcType=LONGVARBINARY},
       #{remarks,jdbcType=LONGVARBINARY},
     </trim>
@@ -173,6 +180,9 @@
       <if test="invitePhone != null" >
         invite_phone = #{invitePhone,jdbcType=VARCHAR},
       </if>
+      <if test="registerId != null" >
+        register_id = #{registerId,jdbcType=VARCHAR},
+      </if>
       <if test="registerPhone != null" >
         register_phone = #{registerPhone,jdbcType=VARCHAR},
       </if>
@@ -207,6 +217,7 @@
       comm_no = #{commNo,jdbcType=VARCHAR},
       config_id = #{configId,jdbcType=INTEGER},
       invite_phone = #{invitePhone,jdbcType=VARCHAR},
+      register_id = #{registerId,jdbcType=VARCHAR},
       register_phone = #{registerPhone,jdbcType=VARCHAR},
       is_delete = #{isDelete,jdbcType=TINYINT},
       pic_urls = #{picUrls,jdbcType=LONGVARBINARY},
@@ -232,6 +243,7 @@
       comm_no = #{commNo,jdbcType=VARCHAR},
       config_id = #{configId,jdbcType=INTEGER},
       invite_phone = #{invitePhone,jdbcType=VARCHAR},
+      register_id = #{registerId,jdbcType=VARCHAR},
       register_phone = #{registerPhone,jdbcType=VARCHAR},
       is_delete = #{isDelete,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
@@ -346,5 +358,11 @@
           and sc.guide_id=#{guideId, jdbcType=INTEGER}
           and sc.status=3
           and cc.type=#{type, jdbcType=TINYINT}
+  </select>
+  <select id="validateIsAllow" parameterType="map" resultType="int">
+    select count(1) from sales_commission sc left join commission_config cc on sc.config_id = cc.id
+    where guide_id=#{guideId, jdbcType=VARCHAR}
+    and register_id=#{registerId, jdbcType=VARCHAR}
+    and cc.type=#{type, jdbcType=TINYINT}
   </select>
 </mapper>

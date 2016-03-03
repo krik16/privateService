@@ -34,7 +34,7 @@ public interface CommissionConfigService {
     CommissionConfig selectByTypes(Integer type,Integer inviteType,Integer registerType,Date effectTime);
 
     /**
-     *
+     *验证是否有符合条件的返佣规则
      * @param type 返佣类型(0:推广返佣,1:首单返佣,2:小票返佣)
      * @param effectStartTime 生效起始时间
      * @param effectEndTime 生效结束时间
