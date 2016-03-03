@@ -195,7 +195,8 @@ public class PoiDocument implements Serializable {
 		if(CollectionUtils.isNotEmpty(shop.getCustom_category_ids())){
 			custom_category_ids=new ArrayList<String>();
 			for(ObjectId id:shop.getCustom_category_ids()){
-				custom_category_ids.add(id.toString());
+				if(id!=null)
+					custom_category_ids.add(id.toString());
 			}
 		}
 		mall=0;
