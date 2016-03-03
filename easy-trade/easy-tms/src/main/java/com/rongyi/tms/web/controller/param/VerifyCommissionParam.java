@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 public class VerifyCommissionParam implements Serializable {
     private String ids;
+    private Integer type;
     private Integer status;
     private String desc;
     private Integer operateType;
@@ -43,12 +44,21 @@ public class VerifyCommissionParam implements Serializable {
         this.desc = desc;
     }
 
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         return "VerifyCommissionParam{" +
                 "ids='" + ids + '\'' +
                 ", status=" + status +
                 ", desc='" + desc + '\'' +
+                ", type='" + type + '\'' +
                 '}';
     }
 }
