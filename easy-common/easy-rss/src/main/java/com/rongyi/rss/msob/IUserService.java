@@ -316,4 +316,10 @@ public interface IUserService {
      * @return 
      */
     public BuyerInfoPojo selectUserBySharCode(String sharCode) throws Exception;
+
+    /**
+     * 销毁 用户登录信息
+     * @param keysId 多个地方登录，账号以之间以逗号隔开
+     */
+    public void cleanUserKey(String keysId);
 }
