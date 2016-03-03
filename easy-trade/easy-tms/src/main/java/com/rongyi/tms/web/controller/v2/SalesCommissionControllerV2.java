@@ -8,7 +8,7 @@ import com.rongyi.tms.constants.Constant;
 import com.rongyi.tms.constants.ConstantEnum;
 import com.rongyi.tms.service.v2.SalesCommissionService;
 import com.rongyi.tms.web.controller.SalesCommissionController;
-import com.rongyi.tms.web.controller.param.VerifyCommissionParam;
+import com.rongyi.easy.tms.vo.v2.VerifyCommissionParam;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

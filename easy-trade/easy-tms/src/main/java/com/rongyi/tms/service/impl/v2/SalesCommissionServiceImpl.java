@@ -13,7 +13,7 @@ import com.rongyi.tms.mq.Sender;
 import com.rongyi.tms.service.SalesCommissionAuditLogService;
 import com.rongyi.tms.service.v2.CommissionConfigService;
 import com.rongyi.tms.service.v2.SalesCommissionService;
-import com.rongyi.tms.web.controller.param.VerifyCommissionParam;
+import com.rongyi.easy.tms.vo.v2.VerifyCommissionParam;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;

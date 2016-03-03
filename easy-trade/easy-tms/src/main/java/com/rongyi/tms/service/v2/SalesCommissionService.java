@@ -2,7 +2,7 @@ package com.rongyi.tms.service.v2;
 
 import com.rongyi.easy.tms.entity.v2.SalesCommission;
 import com.rongyi.easy.tms.vo.v2.SalesCommissionVO;
-import com.rongyi.tms.web.controller.param.VerifyCommissionParam;
+import com.rongyi.easy.tms.vo.v2.VerifyCommissionParam;
 
 import java.util.List;
 import java.util.Map;
