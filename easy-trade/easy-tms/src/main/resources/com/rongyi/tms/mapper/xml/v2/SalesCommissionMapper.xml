@@ -250,16 +250,12 @@
   </update>
   
   <sql id="Commission_List_Condition">
-    <if test="status!=null">
-      <if test="status=2">
-        and sc.status in(2, 3, -2, 5)
-      </if>
-      <if test="status!=2">
-        and sc.status=#{status}
-      </if>
+    <!-- 1：商家待审核 2：财务待审核（商家审核通过） 3：财务审核通过 -1：商家审核不通过 -2：财务审核不通过 5:当日返佣超出限制-->
+    <if test="statuses!=null and statuses.size()>0">
+        and sc.status in<foreach collection="statuses" item="item" open="(" separator="," close=")">#{item}</foreach>
     </if>
     <!-- 财务列表 -->
-    <if test="searchType!=null and searchType=1">
+    <if test="searchType!=null and searchType==1">
       and sc.status not in(1, -1)
     </if>
     <if test="commNo!=null and commNo!=''">
@@ -325,8 +321,8 @@
     select count(1)
     from sales_commission sc
     join commission_config cc on sc.config_id=cc.id
-    JOIN ry_osm.order_form of on sc.order_no=of.order_no
-    JOIN ry_trade.trade_order tr on sc.order_no=tr.order_no
+    LEFT JOIN ry_osm.order_form of on sc.order_no=of.order_no
+    LEFT JOIN ry_trade.trade_order tr on sc.order_no=tr.order_no
     <where>
       <include refid="Commission_List_Condition"/>
     </where>
