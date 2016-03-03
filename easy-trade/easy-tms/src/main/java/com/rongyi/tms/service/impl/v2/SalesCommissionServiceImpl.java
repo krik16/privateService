@@ -97,12 +97,12 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
      */
     private List<Integer> convertToStatus(Integer status, Integer searchType) {
         List<Integer> reList = new ArrayList<>();
-        if (status==ConstantEnum.COMMISSION_STATUS_2.getCodeInt() && searchType==ConstantEnum.COMMISSION_VERIFY_0.getCodeInt()){
+        if (status.intValue()==ConstantEnum.COMMISSION_STATUS_2.getCodeInt() && searchType.intValue()==ConstantEnum.COMMISSION_VERIFY_0.getCodeInt()){
             reList.add(ConstantEnum.COMMISSION_STATUS_2.getCodeInt());
             reList.add(ConstantEnum.COMMISSION_STATUS_3.getCodeInt());
             reList.add(ConstantEnum.COMMISSION_STATUS_2_UNCHECK.getCodeInt());
             reList.add(ConstantEnum.COMMISSION_STATUS_5.getCodeInt());
-        }else if (status==ConstantEnum.COMMISSION_STATUS_3.getCodeInt()){
+        }else if (status.intValue()==ConstantEnum.COMMISSION_STATUS_3.getCodeInt()){
             reList.add(ConstantEnum.COMMISSION_STATUS_3.getCodeInt());
             reList.add(ConstantEnum.COMMISSION_STATUS_5.getCodeInt());
         }else
