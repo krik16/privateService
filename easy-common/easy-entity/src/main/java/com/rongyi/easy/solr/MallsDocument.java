@@ -141,13 +141,14 @@ public class MallsDocument implements java.io.Serializable{
 		/*if(!getZoneFloorField(dbObject.get("_id").toString()).equalsIgnoreCase("-1"))//判断商场是否有楼层
 			mall.setFloor("1");*/
 		//缩略
-		if(StringUtils.isNotBlank(zone.getName())){
+		slug=zone.getSlug();
+		/*if(StringUtils.isNotBlank(zone.getName())){
 			List<String> pinyins = Pinyin4jUtil.converterToSpell(zone.getName());
 			if (ListUtil.isNotEmpty(pinyins)) {
 				slug=pinyins.get(0);
 			}else
 				slug=zone.getName();
-		}
+		}*/
 	}
 
 	public String getId() {
