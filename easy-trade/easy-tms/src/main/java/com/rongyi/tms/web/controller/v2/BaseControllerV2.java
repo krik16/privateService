@@ -37,4 +37,16 @@ public class BaseControllerV2 {
             throw new RuntimeException();
         }
     }
+
+    /**
+     *  获取登录用户名
+     * @param request request
+     * @return String
+     */
+    public String getUserName(HttpServletRequest request){
+        if(request.getSession().getAttribute("userName") != null)
+            return request.getSession().getAttribute("userName").toString();
+        return "";
+    }
+
 }

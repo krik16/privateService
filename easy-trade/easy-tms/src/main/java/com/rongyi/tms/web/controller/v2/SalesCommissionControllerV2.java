@@ -155,7 +155,7 @@ public class SalesCommissionControllerV2 extends BaseControllerV2{
                 permissionCheck(request, "NO_PERMISSION");
             }
 
-            if (salesCommissionService.verifyCommission(param, "test"))
+            if (salesCommissionService.verifyCommission(param, getUserName(request)))
                 result = ResponseData.success();
             else
                 result = ResponseData.failure(Integer.valueOf(CodeEnum.ERROR_UPDATE.getActionCode()), CodeEnum.ERROR_UPDATE.getMessage());
