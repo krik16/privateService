@@ -174,4 +174,11 @@ public interface IUserInfoService {
 	 * @throws Exception
 	 */
 	public Map getBsTop(String bsst)throws Exception ;
+	
+	/**
+	 * 查询各状态的用户数量
+	 * @param map
+	 * @return
+	 */
+	public List<Map<String, Object>> getUserStatusCount(Map map);
 }
