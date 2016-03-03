@@ -54,6 +54,7 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	private int flag=0;//操作参数 1升级功能
 	private int isUpdate = 0;  //操作参数  （==1直接修改未合作店长为已合作店长 ）
 	private int defaultAccount ;  //资金账号默认   1默认支付宝  2默认银行卡
+	private String jsessionid ;//摩店登录标识
 
 	private String shareCode;//邀请码
 
@@ -324,6 +325,12 @@ public Integer getIdentity() {
 	}
 	public void setDefaultAccount(int defaultAccount) {
 		this.defaultAccount = defaultAccount;
+	}
+	public String getJsessionid() {
+		return jsessionid;
+	}
+	public void setJsessionid(String jsessionid) {
+		this.jsessionid = jsessionid;
 	}
 	
 	}
