@@ -30,6 +30,15 @@ public class DetailListVO implements Serializable {
 	private String traceStatus; //详情状态（轨迹图） 0 发货成功（处理中） 1 订单完成 2 订单失败 3 审核成功 4审核失败 5已发放
 	private String realCommodityCommission;// 该订单原佣金金额
 	private String failReason;// 审核失败理由
+	private List<NodeVO> nodeList;// 节点数据
+
+	public List<NodeVO> getNodeList() {
+		return nodeList;
+	}
+
+	public void setNodeList(List<NodeVO> nodeList) {
+		this.nodeList = nodeList;
+	}
 
 	public String getRealCommodityCommission() {
 		return realCommodityCommission;
@@ -174,6 +183,6 @@ public class DetailListVO implements Serializable {
 				+ ", status=" + status + ", allCommodityCommission=" + allCommodityCommission + ", ticketStatus=" + ticketStatus
 				+ ", sonOrderList=" + sonOrderList + ", disconnt=" + disconnt + ", buyerName=" + buyerName + ", buyerIM="
 				+ buyerIM + ", traceStatus=" + traceStatus + ", realCommodityCommission=" + realCommodityCommission
-				+ ", failReason=" + failReason + "]";
+				+ ", failReason=" + failReason + ", nodeList=" + nodeList + "]";
 	}
 }
