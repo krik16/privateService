@@ -74,7 +74,11 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
     @Override
     public List<SalesCommissionVO> findCommissionList(Map<String, Object> map) {
         logger.info("service findCommissionList start map={}", map);
+        if (map.containsKey("status")) {
+            map.put("statuses", convertToStatus(Integer.valueOf(map.get("status").toString()), Integer.valueOf(map.get("searchType").toString())));
+        }
         List<SalesCommissionVO> list = new ArrayList<>();
+        logger.info("============= searchMap={}", map);
         if (ConstantEnum.COMMISSION_TYPE_0.getCodeInt().intValue() == Integer.valueOf(map.get("type").toString())) {
             list = this.getBaseDao().selectListBySql(NAMESPACE + ".findCommissionListExpand", map);
         }
@@ -84,6 +88,26 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 
         logger.info("service findCommissionList start size={}", list.size());
         return list;
+    }
+
+    /**
+     * 根据业务需求转换状态集合
+     * @param status
+     * @return
+     */
+    private List<Integer> convertToStatus(Integer status, Integer searchType) {
+        List<Integer> reList = new ArrayList<>();
+        if (status==ConstantEnum.COMMISSION_STATUS_2.getCodeInt() && searchType==ConstantEnum.COMMISSION_VERIFY_0.getCodeInt()){
+            reList.add(ConstantEnum.COMMISSION_STATUS_2.getCodeInt());
+            reList.add(ConstantEnum.COMMISSION_STATUS_3.getCodeInt());
+            reList.add(ConstantEnum.COMMISSION_STATUS_2_UNCHECK.getCodeInt());
+            reList.add(ConstantEnum.COMMISSION_STATUS_5.getCodeInt());
+        }else if (status==ConstantEnum.COMMISSION_STATUS_3.getCodeInt()){
+            reList.add(ConstantEnum.COMMISSION_STATUS_3.getCodeInt());
+            reList.add(ConstantEnum.COMMISSION_STATUS_5.getCodeInt());
+        }else
+            reList.add(status);
+        return reList;
     }
 
     /**
