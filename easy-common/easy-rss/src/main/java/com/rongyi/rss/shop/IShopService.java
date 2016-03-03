@@ -132,4 +132,6 @@ public interface IShopService {
 	 * @return
 	 */
 	public PoiDocument getShopPoiDocument(String shopMid) throws Exception;
+
+	public void prepareForFullUpdate();
 }
