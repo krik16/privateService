@@ -1,15 +1,12 @@
 package com.rongyi.tms.service.impl.v2;
 
-import com.rongyi.core.common.util.DateTool;
 import com.rongyi.core.constant.VirtualAccountEventTypeEnum;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.mq.MessageEvent;
-import com.rongyi.easy.osm.entity.OrderFormEntity;
 import com.rongyi.easy.tms.entity.SalesCommissionAuditLog;
 import com.rongyi.easy.tms.entity.v2.CommissionConfig;
 import com.rongyi.easy.tms.entity.v2.SalesCommission;
 import com.rongyi.easy.tms.vo.v2.SalesCommissionVO;
-import com.rongyi.rss.tradecenter.osm.IOrderQueryService;
 import com.rongyi.tms.constants.ConstantEnum;
 import com.rongyi.tms.moudle.vo.CommissionAmountTotalVO;
 import com.rongyi.tms.mq.Sender;
@@ -19,7 +16,6 @@ import com.rongyi.tms.service.v2.SalesCommissionService;
 import com.rongyi.tms.web.controller.param.VerifyCommissionParam;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +36,6 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
     private  static final String NAMESPACE ="com.rongyi.tms.mapper.xml.v2.SalesCommissionMapper";
 
     @Autowired
-    private IOrderQueryService iOrderQueryService;
-
-    @Autowired
     private SalesCommissionAuditLogService salesCommissionAuditLogService;
 
     @Autowired
@@ -53,7 +46,6 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 
     /**
      * 通过主键id查询
-     *
      * @param id
      * @return
      */
@@ -82,20 +74,20 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
     @Override
     public List<SalesCommissionVO> findCommissionList(Map<String, Object> map) {
         logger.info("service findCommissionList start map={}", map);
-        List<SalesCommissionVO> list = this.getBaseDao().selectListBySql(NAMESPACE + ".findCommissionList", map);
-        List<SalesCommissionVO> reList = new ArrayList<>();
-        if (CollectionUtils.isNotEmpty(list)) {
-            for (SalesCommissionVO vo : list){
-                reList.add(processCommissionVO(vo, map.get("type").toString()));
-            }
+        List<SalesCommissionVO> list = new ArrayList<>();
+        if (ConstantEnum.COMMISSION_TYPE_0.getCodeInt().intValue() == Integer.valueOf(map.get("type").toString())) {
+            list = this.getBaseDao().selectListBySql(NAMESPACE + ".findCommissionListExpand", map);
         }
-        logger.info("service findCommissionList start size={}", reList.size());
-        return reList;
+        if (ConstantEnum.COMMISSION_TYPE_1.getCodeInt().intValue() == Integer.valueOf(map.get("type").toString())) {
+            list = this.getBaseDao().selectListBySql(NAMESPACE + ".findCommissionListFirst", map);
+        }
+
+        logger.info("service findCommissionList start size={}", list.size());
+        return list;
     }
 
     /**
      * 佣金详情
-     *
      * @param id
      * @return
      */
@@ -112,30 +104,21 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
         return vo;
     }
 
-    private SalesCommissionVO processCommissionVO(SalesCommissionVO commissionVO, String  type) {
-        try {
-            if (ConstantEnum.COMMISSION_TYPE_1.getCodeStr().equals(type)){
-                OrderFormEntity orderForm = iOrderQueryService.getOrderFormByOrderNum(commissionVO.getOrderNo());
-                if (orderForm!=null) {
-                    commissionVO.setOrderCreateAt(DateTool.date2String(orderForm.getCreateAt(), DateTool.FORMAT_DATETIME));
-                    commissionVO.setOrderAmount(orderForm.getTotalAmount());
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return commissionVO;
-    }
-
     /**
      * 佣金总条数
-     *
      * @param map
      * @return
      */
     @Override
     public int countCommission(Map<String, Object> map) {
-        return this.getBaseDao().count(NAMESPACE+".countSalesCommission",map);
+        int totalCount = 0;
+        if (ConstantEnum.COMMISSION_TYPE_0.getCodeInt().intValue() == Integer.valueOf(map.get("type").toString())) {
+            totalCount = this.getBaseDao().count(NAMESPACE + ".countSalesCommissionExpand", map);
+        }
+        if (ConstantEnum.COMMISSION_TYPE_1.getCodeInt().intValue() == Integer.valueOf(map.get("type").toString())) {
+            totalCount = this.getBaseDao().count(NAMESPACE + ".countSalesCommissionFirst", map);
+        }
+        return totalCount;
     }
 
     @Override
@@ -183,9 +166,9 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
                         bodyMap.put("detailList", array);
                         logger.info(array.toString());
                         MessageEvent event = null;
-                        if (config.getType() == ConstantEnum.COMMISSION_TYPE_0.getCodeByte())
+                        if (config.getType().byteValue() == ConstantEnum.COMMISSION_TYPE_0.getCodeByte())
                             event = MessageEvent.getMessageEvent(bodyMap, "tms", "va", VirtualAccountEventTypeEnum.COMMISSION_TYPE_EXPAND.getCode());
-                        else if (config.getType() == ConstantEnum.COMMISSION_TYPE_1.getCodeByte())
+                        else if (config.getType().byteValue() == ConstantEnum.COMMISSION_TYPE_1.getCodeByte())
                             event = MessageEvent.getMessageEvent(bodyMap, "tms", "va", VirtualAccountEventTypeEnum.COMMISSION_TYPE_FIRST.getCode());
                         sender.convertAndSend(event);
                         resultNum++;

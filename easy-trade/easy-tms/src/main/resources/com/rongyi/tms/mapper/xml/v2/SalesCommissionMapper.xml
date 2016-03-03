@@ -30,6 +30,8 @@
   </resultMap>
   <resultMap id="FullResultMap" type="com.rongyi.easy.tms.vo.v2.SalesCommissionVO" extends="ResultMapWithBLOBs" >
     <result column="register_type" property="registerType" jdbcType="TINYINT" />
+    <result column="order_create_at" property="orderCreateAt" jdbcType="TIMESTAMP" />
+    <result column="order_amount" property="orderAmount" jdbcType="DECIMAL" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, guide_id, order_no, commission_amount, `status`, create_at, `type`, pic_upload_at,
@@ -249,7 +251,12 @@
   
   <sql id="Commission_List_Condition">
     <if test="status!=null">
-      and sc.status=#{status}
+      <if test="status=2">
+        and sc.status in(2, 3, -2, 5)
+      </if>
+      <if test="status!=2">
+        and sc.status=#{status}
+      </if>
     </if>
     <!-- 财务列表 -->
     <if test="searchType!=null and searchType=1">
@@ -280,10 +287,10 @@
       and sc.guide_type == #{guideType}
     </if>
     <if test="orderCreateAtBegin!=null and orderCreateAtBegin!=''">
-      and of.create_at &gt; #{orderCreateAtBegin}
+      and (of.create_at &gt; #{orderCreateAtBegin} or tr.create_at &gt; #{orderCreateAtBegin})
     </if>
     <if test="orderCreateAtEnd!=nul and orderCreateAtEnd!=''">
-      and of.create_at &lt; #{orderCreateAtEnd}
+      and (of.create_at &lt; #{orderCreateAtEnd} or tr.create_at &lt; #{orderCreateAtEnd})
     </if>
     <if test="registerType!=null and registerType!=0">
       and cc.register_type == #{registerType}
@@ -292,27 +299,59 @@
       and cc.type=#{type}
     </if>
   </sql>
-  
-  <select id="findCommissionList" parameterType="map" resultMap="FullResultMap">
-    select sc.*, cc.register_type, cc.type
-    from sales_commission sc
-    join commission_config cc on sc.config_id=cc.id
-    left join ry_osm.order_form of on sc.order_no=of.order_no
+
+  <!-- 首单佣金列表 -->
+  <select id="findCommissionListFirst" parameterType="map" resultMap="FullResultMap">
+    SELECT sc.*, cc.register_type, cc.type,
+    CASE
+    WHEN LENGTH(sc.order_no)=19 THEN  of.create_at
+    WHEN LENGTH(sc.order_no)=18 THEN  tr.create_at
+    ELSE '' END AS order_create_at,
+    CASE
+    WHEN LENGTH(sc.order_no)=19 THEN  of.total_amount
+    WHEN LENGTH(sc.order_no)=18 THEN  tr.pay_amount ELSE ''
+    END AS order_amount
+    FROM sales_commission sc
+    JOIN commission_config cc on sc.config_id=cc.id
+    LEFT JOIN ry_osm.order_form of on sc.order_no=of.order_no
+    LEFT JOIN ry_trade.trade_order tr on sc.order_no=tr.order_no
     <where>
       <include refid="Commission_List_Condition"/>
     </where>
     order by sc.create_at desc
     limit #{startRecord, jdbcType=INTEGER}, #{pageSize, jdbcType=INTEGER}
   </select>
-  <select id="countSalesCommission" parameterType="map" resultType="int">
+  <select id="countSalesCommissionFirst" parameterType="map" resultType="int">
     select count(1)
     from sales_commission sc
     join commission_config cc on sc.config_id=cc.id
-    left join ry_osm.order_form of on sc.order_no=of.order_no
+    JOIN ry_osm.order_form of on sc.order_no=of.order_no
+    JOIN ry_trade.trade_order tr on sc.order_no=tr.order_no
     <where>
       <include refid="Commission_List_Condition"/>
     </where>
   </select>
+
+  <!-- 推广佣金列表 -->
+  <select id="findCommissionListExpand" parameterType="map" resultMap="FullResultMap">
+    SELECT sc.*, cc.register_type, cc.type
+    FROM sales_commission sc
+    JOIN commission_config cc on sc.config_id=cc.id
+    <where>
+      <include refid="Commission_List_Condition"/>
+    </where>
+    order by sc.create_at desc
+    limit #{startRecord, jdbcType=INTEGER}, #{pageSize, jdbcType=INTEGER}
+  </select>
+  <select id="countSalesCommissionExpand" parameterType="map" resultType="int">
+    select count(1)
+    from sales_commission sc
+    join commission_config cc on sc.config_id=cc.id
+    <where>
+      <include refid="Commission_List_Condition"/>
+    </where>
+  </select>
+
   <select id="getCommissionDetail" parameterType="map" resultMap="FullResultMap">
     select sc.*, cc.register_type, cc.type
     from sales_commission sc join commission_config cc on sc.config_id=cc.id
