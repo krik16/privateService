@@ -3,6 +3,7 @@ package com.rongyi.tms.service.v2;
 import com.rongyi.easy.tms.vo.v2.SalesCommissionVO;
 import com.rongyi.tms.BaseTest;
 import com.rongyi.tms.constants.ConstantEnum;
+import com.rongyi.tms.service.impl.v2.SalesCommissionServiceImpl;
 import com.rongyi.tms.web.controller.param.VerifyCommissionParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
@@ -19,7 +20,7 @@ import java.util.Map;
 public class SalesCommissionServiceIMplTest extends BaseTest{
 
     @Autowired
-    private SalesCommissionService salesCommissionService;
+    private SalesCommissionServiceImpl salesCommissionService;
 
     @Test
     public void testFindCommissionList(){

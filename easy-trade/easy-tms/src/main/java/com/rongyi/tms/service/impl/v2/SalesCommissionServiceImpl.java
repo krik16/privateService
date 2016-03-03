@@ -35,9 +35,6 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 
     private  static final String NAMESPACE ="com.rongyi.tms.mapper.xml.v2.SalesCommissionMapper";
 
-//    @Autowired
-//    private IOrderQueryService iOrderQueryService;
-
     @Autowired
     private SalesCommissionAuditLogService salesCommissionAuditLogService;
 
@@ -49,7 +46,6 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 
     /**
      * 通过主键id查询
-     *
      * @param id
      * @return
      */
@@ -92,7 +88,6 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 
     /**
      * 佣金详情
-     *
      * @param id
      * @return
      */
@@ -109,24 +104,8 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
         return vo;
     }
 
-//    private SalesCommissionVO processCommissionVO(SalesCommissionVO commissionVO, String  type) {
-//        try {
-//            if (ConstantEnum.COMMISSION_TYPE_1.getCodeStr().equals(type)){
-//                OrderFormEntity orderForm = iOrderQueryService.getOrderFormByOrderNum(commissionVO.getOrderNo());
-//                if (orderForm!=null) {
-//                    commissionVO.setOrderCreateAt(DateTool.date2String(orderForm.getCreateAt(), DateTool.FORMAT_DATETIME));
-//                    commissionVO.setOrderAmount(orderForm.getTotalAmount());
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return commissionVO;
-//    }
-
     /**
      * 佣金总条数
-     *
      * @param map
      * @return
      */

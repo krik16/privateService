@@ -251,7 +251,12 @@
   
   <sql id="Commission_List_Condition">
     <if test="status!=null">
-      and sc.status=#{status}
+      <if test="status=2">
+        and sc.status in(2, 3, -2, 5)
+      </if>
+      <if test="status!=2">
+        and sc.status=#{status}
+      </if>
     </if>
     <!-- 财务列表 -->
     <if test="searchType!=null and searchType=1">
