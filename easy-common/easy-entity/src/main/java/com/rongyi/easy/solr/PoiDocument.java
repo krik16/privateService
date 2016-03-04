@@ -60,7 +60,7 @@ public class PoiDocument implements Serializable {
 	private String text;
 
 	@Field("key_tags")
-	private String key_tags;
+	private List<String> key_tags;
 
 	@Field("brand_ids")
 	private String brand_ids;
@@ -164,6 +164,8 @@ public class PoiDocument implements Serializable {
 		//key_tags=shop.getKey_tags(); 该字段可以是List<String> 可以废除
 		/*if(dbObject.get("key_tags") != null)
 			shop.setKey_tags(stringToArrayList(dbObject.get("key_tags").toString()));*/
+		if(StringUtils.isNotBlank(shop.getKey_tags()))
+			key_tags=Arrays.asList(shop.getKey_tags().split("[\u3000\\s]+"));
 		brand_ids=shop.getBrand_id().toString();
 		if(shop.getValid()!=null&&shop.getValid().toString().equals("0"))
 			valid="0";
@@ -336,11 +338,11 @@ public class PoiDocument implements Serializable {
 		this.text = text;
 	}
 
-	public String getKey_tags() {
+	public List<String> getKey_tags() {
 		return key_tags;
 	}
 
-	public void setKey_tags(String key_tags) {
+	public void setKey_tags(List<String> key_tags) {
 		this.key_tags = key_tags;
 	}
 
