@@ -123,7 +123,7 @@ public interface ROACommodityService {
 	 */
 	public ResponseVO deleteCommodity(String commodityId, Long shopId, Integer identity);
 
-	public ResponseVO  topByIds(List<String> ids,Integer sort);
+	public ResponseVO  topByIds(List<String> ids,Integer sort,Integer type);
 
 	/**
 	 * 获取商品邮费
