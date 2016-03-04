@@ -195,5 +195,5 @@ public interface IUserInfoService {
 	 * @param paramMap
 	 * @return
 	 */
-	public boolean checkCertifiedUser(Map paramMap)throws Exception;
+	public boolean checkCertifiedUser(Map paramMap);
 }
