@@ -3,6 +3,7 @@ package com.rongyi.rss.malllife.roa.user;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.malllife.pojo.InvitationUserInfoPojo;
 import com.rongyi.easy.usercenter.dto.malllife.MalllifeUserInfoDto;
 import com.rongyi.easy.usercenter.entity.MalllifeUserInfoEntity;
 import com.rongyi.easy.malllife.param.MalllifeUser;
@@ -175,7 +176,13 @@ public interface ROAMalllifeUserService {
 	 * @param userId
 	 * @return
 	 */
-	public BuyerInfoPojo getUserIsByShare(String userId,int type);
+
+	/**
+	 * type = 1  是容易逛， type = 2 是摩店
+	 * 判断容易逛用户是否被邀请来的
+	 * @return 如果没有 返回
+	 */
+	public InvitationUserInfoPojo getUserIsByShare(String userId,int type);
 
 
 
