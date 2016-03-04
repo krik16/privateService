@@ -36,9 +36,10 @@ public interface IZoneService {
 
     /**
      * 获取商城数量
+     * @param  type 0加上状态过滤
      * @return
      */
-    public long getMallCount();
+    public long getMallCount(int type);
 
     /**
      * mall索引 分页
