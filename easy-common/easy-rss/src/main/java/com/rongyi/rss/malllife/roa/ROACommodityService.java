@@ -124,4 +124,11 @@ public interface ROACommodityService {
 	public ResponseVO deleteCommodity(String commodityId, Long shopId, Integer identity);
 
 	public ResponseVO  topByIds(List<String> ids,Integer sort);
+
+	/**
+	 * 获取商品邮费
+	 * @param userId
+	 * @return
+	 */
+	public String getPostageByUserId(String userId);
 }
