@@ -4,6 +4,7 @@ import com.rongyi.easy.tms.entity.v2.SalesCommission;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  *
@@ -14,7 +15,7 @@ public class SalesCommissionVO extends SalesCommission implements Serializable{
 
     private String reason;//审核未通过原因
     private String orderNo;//首单订单号
-    private String orderCreateAt;//订单创建时间
+    private Date orderCreateAt;//订单创建时间
     private BigDecimal orderAmount;//订单金额
 
     public Integer getRegisterType() {
@@ -43,11 +44,11 @@ public class SalesCommissionVO extends SalesCommission implements Serializable{
         this.orderNo = orderNo;
     }
 
-    public String getOrderCreateAt() {
+    public Date getOrderCreateAt() {
         return orderCreateAt;
     }
 
-    public void setOrderCreateAt(String orderCreateAt) {
+    public void setOrderCreateAt(Date orderCreateAt) {
         this.orderCreateAt = orderCreateAt;
     }
 

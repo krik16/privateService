@@ -7,8 +7,8 @@ import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.param.CouponCommodityParam;
 import com.rongyi.easy.mcmc.*;
 import com.rongyi.easy.mcmc.param.SaleParam;
-
 import com.rongyi.easy.mcmc.vo.*;
+
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
@@ -138,5 +138,27 @@ public interface CommodityService {
      * @return
      */
 	public ResponseVO deleteCommodity(String commodityId, Long shopId, Integer identity);
+
+    /**
+     * 置顶，取消置顶接口，type为1，置顶，为0，取消置顶
+     * @param ids
+     * @param sort
+     * @param type
+     * @return
+     */
+    ResponseVO  topByIds(List<String> ids,Integer sort,Integer type);
+    /**
+     * 获取商品直播的地址和品牌
+     * @param commodityIds
+     * @return
+     */
+	public ResponseVO getLiveAddressAndBrandByCommodityIds(List<String> commodityIds);
+
+    /**
+     * 获取商品邮费
+     * @param userId
+     * @return
+     */
+    public String getPostageByUserId(String userId);
 
 }

@@ -29,6 +29,9 @@ public class BonusDetailVO implements Serializable {
 
 	/** 状态: 全部[0] 已发放[1] 处理中[2] 失败[3] */
 	private String status;
+
+	/** 奖励原因 */
+	private String awardReason;
 	
 	public String getDate() {
 		return date;
@@ -54,5 +57,12 @@ public class BonusDetailVO implements Serializable {
 	public void setStatus(String status) {
 		this.status = status;
 	}
- 
+
+	public String getAwardReason() {
+		return awardReason;
+	}
+
+	public void setAwardReason(String awardReason) {
+		this.awardReason = awardReason;
+	}
 }

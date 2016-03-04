@@ -16,7 +16,8 @@ public class BuyerInfoPojo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer userId; //买手ID
-
+    
+    //商家类型：0商场、1品牌、2买手
     private Integer userType;//卖家类型
 
     private String  userLogo;//卖家logo
@@ -127,7 +128,6 @@ public class BuyerInfoPojo implements Serializable {
     public void setImUser(String imUser) {
         this.imUser = imUser;
     }
-
 	public String getUserAccount() {
 		return userAccount;
 	}
@@ -135,4 +135,19 @@ public class BuyerInfoPojo implements Serializable {
 	public void setUserAccount(String userAccount) {
 		this.userAccount = userAccount;
 	}
-}
+    @Override
+    public String toString() {
+        return "BuyerInfoPojo{" +
+                "userId=" + userId +
+                ", userType=" + userType +
+                ", userLogo='" + userLogo + '\'' +
+                ", userPhone='" + userPhone + '\'' +
+                ", userNickName='" + userNickName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", shareCode='" + shareCode + '\'' +
+                ", userDesc='" + userDesc + '\'' +
+                ", imUser='" + imUser + '\'' +
+                ", userFansCount=" + userFansCount +
+                ", isFans=" + isFans +
+                '}';
+    }}

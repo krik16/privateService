@@ -122,4 +122,21 @@ public interface ROACommodityService {
 	 * @return
 	 */
 	public ResponseVO deleteCommodity(String commodityId, Long shopId, Integer identity);
+
+	public ResponseVO  topByIds(List<String> ids,Integer sort,Integer type);
+
+	/**
+	 * 获取商品邮费
+	 * @param userId
+	 * @return
+	 */
+	public String getPostageByUserId(String userId);
+
+	/**
+     * 获取商品直播的地址和品牌
+     * @param commodityIds
+     * @return
+     */
+	public ResponseVO getLiveAddressAndBrandByCommodityIds(List<String> commodityIds);
+
 }

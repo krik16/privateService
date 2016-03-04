@@ -90,6 +90,9 @@ public class Zones implements Serializable {
 	//商场logo
 	private String icon;
 
+	//商场地址
+	private  String address;
+
 	public ObjectId getId() {
 		return id;
 	}
@@ -236,5 +239,13 @@ public class Zones implements Serializable {
 
 	public void setIcon(String icon) {
 		this.icon = icon;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 }

@@ -23,6 +23,8 @@ public enum CodeEnum {
     ERROR_PARAM("-13", "必要参数为空或不合法"),
     ERROR_PARAM_1301("-1301", "必填参数不能为空"),
 
+    ERROR_VERSION_180("-3180", "当前版本不支持注册，请升级到V1.70后的版本再注册"),
+
     ERROR_PARAM_CHAR("-78","包含特殊字符"),
 
     /** 正常 但没有数据 **/
