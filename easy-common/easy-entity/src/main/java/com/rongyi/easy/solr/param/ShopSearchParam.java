@@ -144,25 +144,13 @@ public class ShopSearchParam implements Serializable{
 	public void setCustom_cat_id(String custom_cat_id) {
 		this.custom_cat_id = custom_cat_id;
 	}
+
 	@Override
 	public String toString() {
-		return "ShopSearchParam{" +
-				"keyword='" + keyword + '\'' +
-				", distance=" + distance +
-				", coord_x='" + coord_x + '\'' +
-				", coord_y='" + coord_y + '\'' +
-				", cat_id='" + cat_id + '\'' +
-				", city_name='" + city_name + '\'' +
-				", sort='" + sort + '\'' +
-				", from=" + from +
-				", size=" + size +
-				", brand_id='" + brand_id + '\'' +
-				", zone_id='" + zone_id + '\'' +
-				", shop_id='" + shop_id + '\'' +
-				", commodityRequired=" + commodityRequired +
-				", mall_id='" + mall_id + '\'' +
-				", poi_type='" + poi_type + '\'' +
-				", keywordList='" + keywordList + '\'' +
-				'}';
+		return "ShopSearchParam [keyword=" + keyword + ", distance=" + distance + ", coord_x=" + coord_x + ", coord_y="
+				+ coord_y + ", cat_id=" + cat_id + ", custom_cat_id=" + custom_cat_id + ", city_name=" + city_name
+				+ ", sort=" + sort + ", from=" + from + ", size=" + size + ", brand_id=" + brand_id + ", zone_id="
+				+ zone_id + ", shop_id=" + shop_id + ", commodityRequired=" + commodityRequired + ", mall_id=" + mall_id
+				+ ", poi_type=" + poi_type + "]";
 	}
 }
