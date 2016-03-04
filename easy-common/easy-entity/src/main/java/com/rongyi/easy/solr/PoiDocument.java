@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import com.rongyi.core.util.ListUtil;
 import com.rongyi.easy.mcmc.Zones;
 import com.rongyi.easy.shop.entity.ShopEntity;
 import org.apache.commons.collections.CollectionUtils;
@@ -200,6 +201,8 @@ public class PoiDocument implements Serializable {
 			}
 		}
 		mall=0;
+		if(CollectionUtils.isNotEmpty(shop.getZone_ids()))
+			zone_ids= ListUtil.toStringList(shop.getZone_ids());
 	}
 
 
