@@ -61,6 +61,8 @@ public class Commodity implements  Serializable,Cloneable{
 
 	private int identity = -100;//-100 默认值，老数据，不处理权限 0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购6买手
 
+	private Integer templateId;//邮费模版id
+
 	@Override
 	public String toString() {
 		return "Commodity{" +
@@ -576,5 +578,13 @@ public class Commodity implements  Serializable,Cloneable{
 
 	public void setSort(Integer sort) {
 		this.sort = sort;
+	}
+
+	public Integer getTemplateId() {
+		return templateId;
+	}
+
+	public void setTemplateId(Integer templateId) {
+		this.templateId = templateId;
 	}
 }

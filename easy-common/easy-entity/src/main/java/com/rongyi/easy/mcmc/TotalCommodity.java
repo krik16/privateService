@@ -63,6 +63,8 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 	private List<String> skus;//规格sku集合
 
+	private Integer templateId;//邮费模版id
+
 	public ObjectId getId() {
 		return id;
 	}
@@ -339,5 +341,13 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 	public void setSkus(List<String> skus) {
 		this.skus = skus;
+	}
+
+	public Integer getTemplateId() {
+		return templateId;
+	}
+
+	public void setTemplateId(Integer templateId) {
+		this.templateId = templateId;
 	}
 }
