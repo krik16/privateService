@@ -131,4 +131,12 @@ public interface ROACommodityService {
 	 * @return
 	 */
 	public String getPostageByUserId(String userId);
+
+	/**
+     * 获取商品直播的地址和品牌
+     * @param commodityIds
+     * @return
+     */
+	public ResponseVO getLiveAddressAndBrandByCommodityIds(List<String> commodityIds);
+
 }
