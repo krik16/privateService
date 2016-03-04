@@ -1,16 +1,17 @@
 package com.rongyi.easy.mcmc.entity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class FreightTemplateEntityExample {
+public class PostageTemplateEntityExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public FreightTemplateEntityExample() {
+    public PostageTemplateEntityExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -164,63 +165,63 @@ public class FreightTemplateEntityExample {
             return (Criteria) this;
         }
 
-        public Criteria andFreightIsNull() {
-            addCriterion("freight is null");
+        public Criteria andPostageIsNull() {
+            addCriterion("postage is null");
             return (Criteria) this;
         }
 
-        public Criteria andFreightIsNotNull() {
-            addCriterion("freight is not null");
+        public Criteria andPostageIsNotNull() {
+            addCriterion("postage is not null");
             return (Criteria) this;
         }
 
-        public Criteria andFreightEqualTo(Integer value) {
-            addCriterion("freight =", value, "freight");
+        public Criteria andPostageEqualTo(Integer value) {
+            addCriterion("postage =", value, "postage");
             return (Criteria) this;
         }
 
-        public Criteria andFreightNotEqualTo(Integer value) {
-            addCriterion("freight <>", value, "freight");
+        public Criteria andPostageNotEqualTo(Integer value) {
+            addCriterion("postage <>", value, "postage");
             return (Criteria) this;
         }
 
-        public Criteria andFreightGreaterThan(Integer value) {
-            addCriterion("freight >", value, "freight");
+        public Criteria andPostageGreaterThan(Integer value) {
+            addCriterion("postage >", value, "postage");
             return (Criteria) this;
         }
 
-        public Criteria andFreightGreaterThanOrEqualTo(Integer value) {
-            addCriterion("freight >=", value, "freight");
+        public Criteria andPostageGreaterThanOrEqualTo(Integer value) {
+            addCriterion("postage >=", value, "postage");
             return (Criteria) this;
         }
 
-        public Criteria andFreightLessThan(Integer value) {
-            addCriterion("freight <", value, "freight");
+        public Criteria andPostageLessThan(Integer value) {
+            addCriterion("postage <", value, "postage");
             return (Criteria) this;
         }
 
-        public Criteria andFreightLessThanOrEqualTo(Integer value) {
-            addCriterion("freight <=", value, "freight");
+        public Criteria andPostageLessThanOrEqualTo(Integer value) {
+            addCriterion("postage <=", value, "postage");
             return (Criteria) this;
         }
 
-        public Criteria andFreightIn(List<Integer> values) {
-            addCriterion("freight in", values, "freight");
+        public Criteria andPostageIn(List<Integer> values) {
+            addCriterion("postage in", values, "postage");
             return (Criteria) this;
         }
 
-        public Criteria andFreightNotIn(List<Integer> values) {
-            addCriterion("freight not in", values, "freight");
+        public Criteria andPostageNotIn(List<Integer> values) {
+            addCriterion("postage not in", values, "postage");
             return (Criteria) this;
         }
 
-        public Criteria andFreightBetween(Integer value1, Integer value2) {
-            addCriterion("freight between", value1, value2, "freight");
+        public Criteria andPostageBetween(Integer value1, Integer value2) {
+            addCriterion("postage between", value1, value2, "postage");
             return (Criteria) this;
         }
 
-        public Criteria andFreightNotBetween(Integer value1, Integer value2) {
-            addCriterion("freight not between", value1, value2, "freight");
+        public Criteria andPostageNotBetween(Integer value1, Integer value2) {
+            addCriterion("postage not between", value1, value2, "postage");
             return (Criteria) this;
         }
 
@@ -291,6 +292,246 @@ public class FreightTemplateEntityExample {
 
         public Criteria andMallMidNotBetween(String value1, String value2) {
             addCriterion("mall_mid not between", value1, value2, "mallMid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateAtIsNull() {
+            addCriterion("create_at is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateAtIsNotNull() {
+            addCriterion("create_at is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateAtEqualTo(Date value) {
+            addCriterion("create_at =", value, "createAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateAtNotEqualTo(Date value) {
+            addCriterion("create_at <>", value, "createAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateAtGreaterThan(Date value) {
+            addCriterion("create_at >", value, "createAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateAtGreaterThanOrEqualTo(Date value) {
+            addCriterion("create_at >=", value, "createAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateAtLessThan(Date value) {
+            addCriterion("create_at <", value, "createAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateAtLessThanOrEqualTo(Date value) {
+            addCriterion("create_at <=", value, "createAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateAtIn(List<Date> values) {
+            addCriterion("create_at in", values, "createAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateAtNotIn(List<Date> values) {
+            addCriterion("create_at not in", values, "createAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateAtBetween(Date value1, Date value2) {
+            addCriterion("create_at between", value1, value2, "createAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateAtNotBetween(Date value1, Date value2) {
+            addCriterion("create_at not between", value1, value2, "createAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateByIsNull() {
+            addCriterion("create_by is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateByIsNotNull() {
+            addCriterion("create_by is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateByEqualTo(Integer value) {
+            addCriterion("create_by =", value, "createBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateByNotEqualTo(Integer value) {
+            addCriterion("create_by <>", value, "createBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateByGreaterThan(Integer value) {
+            addCriterion("create_by >", value, "createBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateByGreaterThanOrEqualTo(Integer value) {
+            addCriterion("create_by >=", value, "createBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateByLessThan(Integer value) {
+            addCriterion("create_by <", value, "createBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateByLessThanOrEqualTo(Integer value) {
+            addCriterion("create_by <=", value, "createBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateByIn(List<Integer> values) {
+            addCriterion("create_by in", values, "createBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateByNotIn(List<Integer> values) {
+            addCriterion("create_by not in", values, "createBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateByBetween(Integer value1, Integer value2) {
+            addCriterion("create_by between", value1, value2, "createBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateByNotBetween(Integer value1, Integer value2) {
+            addCriterion("create_by not between", value1, value2, "createBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateAtIsNull() {
+            addCriterion("update_at is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateAtIsNotNull() {
+            addCriterion("update_at is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateAtEqualTo(Date value) {
+            addCriterion("update_at =", value, "updateAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateAtNotEqualTo(Date value) {
+            addCriterion("update_at <>", value, "updateAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateAtGreaterThan(Date value) {
+            addCriterion("update_at >", value, "updateAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateAtGreaterThanOrEqualTo(Date value) {
+            addCriterion("update_at >=", value, "updateAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateAtLessThan(Date value) {
+            addCriterion("update_at <", value, "updateAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateAtLessThanOrEqualTo(Date value) {
+            addCriterion("update_at <=", value, "updateAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateAtIn(List<Date> values) {
+            addCriterion("update_at in", values, "updateAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateAtNotIn(List<Date> values) {
+            addCriterion("update_at not in", values, "updateAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateAtBetween(Date value1, Date value2) {
+            addCriterion("update_at between", value1, value2, "updateAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateAtNotBetween(Date value1, Date value2) {
+            addCriterion("update_at not between", value1, value2, "updateAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateByIsNull() {
+            addCriterion("update_by is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateByIsNotNull() {
+            addCriterion("update_by is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateByEqualTo(Integer value) {
+            addCriterion("update_by =", value, "updateBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateByNotEqualTo(Integer value) {
+            addCriterion("update_by <>", value, "updateBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateByGreaterThan(Integer value) {
+            addCriterion("update_by >", value, "updateBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateByGreaterThanOrEqualTo(Integer value) {
+            addCriterion("update_by >=", value, "updateBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateByLessThan(Integer value) {
+            addCriterion("update_by <", value, "updateBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateByLessThanOrEqualTo(Integer value) {
+            addCriterion("update_by <=", value, "updateBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateByIn(List<Integer> values) {
+            addCriterion("update_by in", values, "updateBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateByNotIn(List<Integer> values) {
+            addCriterion("update_by not in", values, "updateBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateByBetween(Integer value1, Integer value2) {
+            addCriterion("update_by between", value1, value2, "updateBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateByNotBetween(Integer value1, Integer value2) {
+            addCriterion("update_by not between", value1, value2, "updateBy");
             return (Criteria) this;
         }
 
