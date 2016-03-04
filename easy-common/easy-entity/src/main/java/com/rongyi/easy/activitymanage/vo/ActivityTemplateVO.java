@@ -27,7 +27,7 @@ public class ActivityTemplateVO implements Serializable{
     /**活动结束时间*/
     private Date endAt;
 
-    /**活动状态 1 未开始，2进行中 3已结束*/
+    /**活动状态 1 未开始，2进行中 3已结束 4 已下线*/
     private Integer activityStatus;
     /***
      * 活动最后生成的URl
