@@ -44,6 +44,14 @@ public class TemplateRelevantGoodsCoupon implements Serializable{
     private Date updateAt;
     /**版本*/
     private Integer version;
+    /**
+     * 用于判断这条记录的
+     * 0 无修改
+     * 1表示新增
+     * 2表示删除
+     * 3表示修改
+     */
+    private Integer isCommodityUp;
 
     public Integer getId() {
         return id;
@@ -181,6 +189,14 @@ public class TemplateRelevantGoodsCoupon implements Serializable{
         this.version = version;
     }
 
+    public Integer getIsCommodityUp() {
+        return isCommodityUp;
+    }
+
+    public void setIsCommodityUp(Integer isCommodityUp) {
+        this.isCommodityUp = isCommodityUp;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -201,6 +217,7 @@ public class TemplateRelevantGoodsCoupon implements Serializable{
                 .append("createAt", createAt)
                 .append("updateAt", updateAt)
                 .append("version", version)
+                .append("isCommodityUp", isCommodityUp)
                 .toString();
     }
 }
