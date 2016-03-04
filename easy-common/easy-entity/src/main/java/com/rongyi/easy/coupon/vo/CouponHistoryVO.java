@@ -22,6 +22,7 @@ public class CouponHistoryVO implements Serializable{
 	private String couponId;//券id
 	private String date;//验证时间（类型：String）
 	private String from;//码佣
+	private String status;//状态
 	public String getFrom() {
 		return from;
 	}
@@ -81,6 +82,14 @@ public class CouponHistoryVO implements Serializable{
 	}
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@Override
