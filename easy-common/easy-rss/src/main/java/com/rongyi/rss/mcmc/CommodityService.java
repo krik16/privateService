@@ -139,7 +139,14 @@ public interface CommodityService {
      */
 	public ResponseVO deleteCommodity(String commodityId, Long shopId, Integer identity);
 
-    ResponseVO  topByIds(List<String> ids,Integer sort);
+    /**
+     * 置顶，取消置顶接口，type为1，置顶，为0，取消置顶
+     * @param ids
+     * @param sort
+     * @param type
+     * @return
+     */
+    ResponseVO  topByIds(List<String> ids,Integer sort,Integer type);
     /**
      * 获取商品直播的地址和品牌
      * @param commodityIds

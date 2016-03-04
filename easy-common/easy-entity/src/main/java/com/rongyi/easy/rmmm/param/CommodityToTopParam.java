@@ -13,7 +13,8 @@ public class CommodityToTopParam extends BaseParam implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private List<String> commodityIds;
-	private Integer sort;
+	private Integer sort;//0 未置顶  大于0  置顶
+	private Integer type;//type 1表示   置顶，type 0 表示取消置顶
 	public List<String> getCommodityIds() {
 		return commodityIds;
 	}
@@ -25,6 +26,12 @@ public class CommodityToTopParam extends BaseParam implements Serializable{
 	}
 	public void setSort(Integer sort) {
 		this.sort = sort;
+	}
+	public Integer getType() {
+		return type;
+	}
+	public void setType(Integer type) {
+		this.type = type;
 	}
 	
 }
