@@ -12,8 +12,10 @@ import java.util.List;
  */
 public class DetailListVO implements Serializable {
 
-	private String date;// 交易时间
+	private String date;// 交易完成时间
 	private String deliveryDate;// 发货时间
+	private String auditDate; // 审核时间
+	private String commissionPayDate; // 发放时间
 	private String amount;// 金额
 	private String realAmount; //订单总金额（买家实际支付金额）
 	private String orderId;// 大订单id
@@ -174,6 +176,22 @@ public class DetailListVO implements Serializable {
 
 	public void setDeliveryDate(String deliveryDate) {
 		this.deliveryDate = deliveryDate;
+	}
+
+	public String getAuditDate() {
+		return auditDate;
+	}
+
+	public void setAuditDate(String auditDate) {
+		this.auditDate = auditDate;
+	}
+
+	public String getCommissionPayDate() {
+		return commissionPayDate;
+	}
+
+	public void setCommissionPayDate(String commissionPayDate) {
+		this.commissionPayDate = commissionPayDate;
 	}
 
 	@Override
