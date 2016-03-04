@@ -92,6 +92,7 @@ public class VirtualAccountDetailService extends BaseServiceImpl {
 				detailVO.setDate(DateUtil.dateToString(detailEntity.getCreateAt(), "yyyy.MM.dd HH:mm:ss"));
 				detailVO.setFrom(Constants.DrawApplyStatus.BONUS_DEFAULT_MSG);
 				detailVO.setStatus(String.valueOf(Constants.DrawApplyStatus.SEND));
+				detailVO.setAwardReason(detailEntity.getRemark());
 				resultList.add(detailVO);
 			}
 			result.setDetailList(resultList);
