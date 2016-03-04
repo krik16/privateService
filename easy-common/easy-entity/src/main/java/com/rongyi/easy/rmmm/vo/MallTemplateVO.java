@@ -17,7 +17,7 @@ import java.io.Serializable;
 public class MallTemplateVO  implements Serializable {
 	
 	private String templateId;// 模板邮费id
-	private String templatePostage;// 模板邮费
+	private double templatePostage;// 模板邮费
 	private String customPostage;// 最近填写的自定义邮费
 	public String getTemplateId() {
 		return templateId;
@@ -25,10 +25,10 @@ public class MallTemplateVO  implements Serializable {
 	public void setTemplateId(String templateId) {
 		this.templateId = templateId;
 	}
-	public String getTemplatePostage() {
+	public double getTemplatePostage() {
 		return templatePostage;
 	}
-	public void setTemplatePostage(String templatePostage) {
+	public void setTemplatePostage(double templatePostage) {
 		this.templatePostage = templatePostage;
 	}
 	public String getCustomPostage() {
