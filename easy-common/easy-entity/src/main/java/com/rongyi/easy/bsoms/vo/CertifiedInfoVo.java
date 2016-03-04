@@ -2,6 +2,9 @@ package com.rongyi.easy.bsoms.vo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
+import com.rongyi.easy.bsoms.entity.CertifiedCheckInfo;
 
 /**
  * 导购认证信息
@@ -22,6 +25,13 @@ public class CertifiedInfoVo implements Serializable{
 	private String shopId;        //店铺
 	private String mallName;      //商场名称
 	private String shopName;      //店铺名称
+	private String userAccount;   //用户账号
+	private String userNickName;  //用户昵称
+	private Integer userStatus;   //账号状态
+	private Integer isAcc = 1;        //是否加速审核  0是 1否
+	private Integer inviteUserId;  //邀请人ID
+	private String inviteUserAccount;//邀请人账号
+	private List<CertifiedCheckInfo> failList; //审核不理由
 	private Integer isDeleted;    //是否已删除  0正常 1已删除
 	private Date createAt;
 	private Date updateAt;
@@ -102,5 +112,47 @@ public class CertifiedInfoVo implements Serializable{
 	}
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
+	}
+	public String getUserAccount() {
+		return userAccount;
+	}
+	public void setUserAccount(String userAccount) {
+		this.userAccount = userAccount;
+	}
+	public Integer getUserStatus() {
+		return userStatus;
+	}
+	public void setUserStatus(Integer userStatus) {
+		this.userStatus = userStatus;
+	}
+	public Integer getIsAcc() {
+		return isAcc;
+	}
+	public void setIsAcc(Integer isAcc) {
+		this.isAcc = isAcc;
+	}
+	public Integer getInviteUserId() {
+		return inviteUserId;
+	}
+	public void setInviteUserId(Integer inviteUserId) {
+		this.inviteUserId = inviteUserId;
+	}
+	public String getInviteUserAccount() {
+		return inviteUserAccount;
+	}
+	public void setInviteUserAccount(String inviteUserAccount) {
+		this.inviteUserAccount = inviteUserAccount;
+	}
+	public List<CertifiedCheckInfo> getFailList() {
+		return failList;
+	}
+	public void setFailList(List<CertifiedCheckInfo> failList) {
+		this.failList = failList;
+	}
+	public String getUserNickName() {
+		return userNickName;
+	}
+	public void setUserNickName(String userNickName) {
+		this.userNickName = userNickName;
 	}
 }
