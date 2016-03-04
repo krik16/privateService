@@ -36,6 +36,8 @@ public class BuyerInfoPojo implements Serializable {
     private Integer userFansCount;//粉丝数
 
     private Boolean isFans;//false 未关注；ture 已关注
+    
+    private String userAccount; //买手账号
 
 
     public Integer getUserId() {
@@ -125,4 +127,12 @@ public class BuyerInfoPojo implements Serializable {
     public void setImUser(String imUser) {
         this.imUser = imUser;
     }
+
+	public String getUserAccount() {
+		return userAccount;
+	}
+
+	public void setUserAccount(String userAccount) {
+		this.userAccount = userAccount;
+	}
 }
