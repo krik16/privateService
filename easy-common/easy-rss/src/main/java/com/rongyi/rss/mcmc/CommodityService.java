@@ -141,4 +141,11 @@ public interface CommodityService {
 
     ResponseVO  topByIds(List<String> ids,Integer sort);
 
+    /**
+     * 获取商品邮费
+     * @param userId
+     * @return
+     */
+    public String getPostageByUserId(String userId);
+
 }
