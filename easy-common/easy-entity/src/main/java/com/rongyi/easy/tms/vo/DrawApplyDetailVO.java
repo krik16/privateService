@@ -40,7 +40,7 @@ public class DrawApplyDetailVO implements Serializable {
 	/** 发放时间 */
 	private Date payAt;
 
-	/** 轨迹跟踪状态 */
+	/** 轨迹跟踪状态  0 提现申请 1 审核成功 2审核失败 3 已发放*/
 	private Integer traceStatus;
 
 	/** 审核失败理由 */
