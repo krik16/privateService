@@ -133,5 +133,13 @@ public interface IShopService {
 	 */
 	public PoiDocument getShopPoiDocument(String shopMid) throws Exception;
 
+	/**
+	 * cache data
+	 */
 	public void prepareForFullUpdate();
+
+	/**
+	 * clear cache data
+	 */
+	public void clearCache();
 }
