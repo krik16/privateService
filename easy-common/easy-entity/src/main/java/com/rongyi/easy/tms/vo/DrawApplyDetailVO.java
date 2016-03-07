@@ -34,6 +34,18 @@ public class DrawApplyDetailVO implements Serializable {
     /** 提现金额 */
     private BigDecimal drawAmount;
 
+	/** 审核时间 */
+	private Date verifyAt;
+
+	/** 发放时间 */
+	private Date payAt;
+
+	/** 轨迹跟踪状态 */
+	private Integer traceStatus;
+
+	/** 审核失败理由 */
+	private String failReason;
+
 	/**
 	 * 卡名称（暂时只有支付宝）
 	 */
@@ -87,4 +99,35 @@ public class DrawApplyDetailVO implements Serializable {
 		this.payAccountType = payAccountType;
 	}
 
+	public Date getVerifyAt() {
+		return verifyAt;
+	}
+
+	public void setVerifyAt(Date verifyAt) {
+		this.verifyAt = verifyAt;
+	}
+
+	public Date getPayAt() {
+		return payAt;
+	}
+
+	public void setPayAt(Date payAt) {
+		this.payAt = payAt;
+	}
+
+	public Integer getTraceStatus() {
+		return traceStatus;
+	}
+
+	public void setTraceStatus(Integer traceStatus) {
+		this.traceStatus = traceStatus;
+	}
+
+	public String getFailReason() {
+		return failReason;
+	}
+
+	public void setFailReason(String failReason) {
+		this.failReason = failReason;
+	}
 }
