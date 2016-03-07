@@ -24,6 +24,16 @@ public class MyDealParam extends BaseParam implements Serializable {
 	private String guideId;// 导购id
 	
 	private String orderNum;//订单号
+	
+	private String couponCode;//代金券券码
+
+	public String getCouponCode() {
+		return couponCode;
+	}
+
+	public void setCouponCode(String couponCode) {
+		this.couponCode = couponCode;
+	}
 
 	public String getOrderNum() {
 		return orderNum;

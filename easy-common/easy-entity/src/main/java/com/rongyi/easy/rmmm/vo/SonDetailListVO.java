@@ -36,16 +36,6 @@ public class SonDetailListVO implements Serializable {
 	
 	private String sonOrderStatus;// 商品订单状态— 0交易成功、1退款中、3已退款
 
-	public String getSonOrderStatus() {
-		return sonOrderStatus;
-	}
-
-	public void setSonOrderStatus(String sonOrderStatus) {
-		this.sonOrderStatus = sonOrderStatus;
-	}
-
-	private String sonOrderStatus; //商品订单状态— 0交易成功、1退款中、3已退款
-
 	public String getNum() {
 		return num;
 	}
