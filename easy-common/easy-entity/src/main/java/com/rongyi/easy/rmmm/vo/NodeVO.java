@@ -25,10 +25,11 @@ public class NodeVO implements Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public NodeVO(String node, boolean flag) {
+	public NodeVO(String node, boolean flag, String nodeStatus) {
 		super();
 		this.node = node;
 		this.flag = flag;
+		this.nodeStatus = nodeStatus;
 	}
 	public NodeVO(String date, String node, boolean flag, String nodeMessage, String nodeStatus) {
 		super();
