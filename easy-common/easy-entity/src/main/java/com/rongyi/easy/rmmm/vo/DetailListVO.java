@@ -66,6 +66,15 @@ public class DetailListVO implements Serializable {
 		this.traceStatus = traceStatus;
 	}
 
+	
+	public String getRealAmount() {
+		return realAmount;
+	}
+
+	public void setRealAmount(String realAmount) {
+		this.realAmount = realAmount;
+	}
+
 	public String getBuyerName() {
 		return buyerName;
 	}
@@ -160,14 +169,6 @@ public class DetailListVO implements Serializable {
 
 	public void setDisconnt(String disconnt) {
 		this.disconnt = disconnt;
-	}
-
-	public String getRealAmount() {
-		return realAmount;
-	}
-
-	public void setRealAmount(String realAmount) {
-		this.realAmount = realAmount;
 	}
 
 	public String getDeliveryDate() {

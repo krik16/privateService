@@ -20,21 +20,30 @@ public class NodeVO implements Serializable{
 	private String node;//节点
 	private boolean flag;//是否点亮
 	private String nodeMessage;//
+	private String nodeStatus;//节点状态  （不同详情页，状态不同，请看接口文档）
 	public NodeVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public NodeVO(String node, boolean flag) {
+	public NodeVO(String node, boolean flag, String nodeStatus) {
 		super();
 		this.node = node;
 		this.flag = flag;
+		this.nodeStatus = nodeStatus;
 	}
-	public NodeVO(String date, String node, boolean flag, String nodeMessage) {
+	public NodeVO(String date, String node, boolean flag, String nodeMessage, String nodeStatus) {
 		super();
 		this.date = date;
 		this.node = node;
 		this.flag = flag;
 		this.nodeMessage = nodeMessage;
+		this.nodeStatus = nodeStatus;
+	}
+	public String getNodeStatus() {
+		return nodeStatus;
+	}
+	public void setNodeStatus(String nodeStatus) {
+		this.nodeStatus = nodeStatus;
 	}
 	public String getDate() {
 		return date;
@@ -62,7 +71,8 @@ public class NodeVO implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "NodeVO [date=" + date + ", node=" + node + ", flag=" + flag + ", nodeMessage=" + nodeMessage + "]";
+		return "NodeVO [date=" + date + ", node=" + node + ", flag=" + flag + ", nodeMessage=" + nodeMessage + ", nodeStatus="
+				+ nodeStatus + "]";
 	}
 
 }

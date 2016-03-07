@@ -39,6 +39,14 @@ public class TemplateLabel implements Serializable {
     private Date updateAt;
     /**版本*/
     private Integer version;
+    /**
+     * 判断label是否删除的 用于 卡券及商品 类型中
+     * 0 无修改
+     * 1表示新增
+     * 2表示删除
+     * 3表示修改
+     */
+    private Integer isUpdate;
     /**关联的卡券商品*/
     private List<TemplateRelevantGoodsCoupon> templateRelevantGoodsCouponList;
 
@@ -162,6 +170,14 @@ public class TemplateLabel implements Serializable {
         this.templateRelevantGoodsCouponList = templateRelevantGoodsCouponList;
     }
 
+    public Integer getIsUpdate() {
+        return isUpdate;
+    }
+
+    public void setIsUpdate(Integer isUpdate) {
+        this.isUpdate = isUpdate;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -179,6 +195,7 @@ public class TemplateLabel implements Serializable {
                 .append("createAt", createAt)
                 .append("updateAt", updateAt)
                 .append("version", version)
+                .append("isUpdate", isUpdate)
                 .append("templateRelevantGoodsCouponList", templateRelevantGoodsCouponList)
                 .toString();
     }

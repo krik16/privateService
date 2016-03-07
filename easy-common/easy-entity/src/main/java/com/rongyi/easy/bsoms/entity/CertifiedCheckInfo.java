@@ -3,17 +3,19 @@ package com.rongyi.easy.bsoms.entity;
 import java.util.Date;
 
 /**
- * 摩店用户审核不通过表
+ * 摩店用户审核记得表
  * @author sj
  *
  */
-public class CertifiedFailInfo {
+public class CertifiedCheckInfo {
 	
     private Integer id;
 
     private Integer userId;    //用户ID
 
     private Integer opeUserId;   //审核人ID
+    
+    private Integer checkStatus; //审核状态  0通过  1不通过
     
     private String reason;       //不通过理由
 
@@ -78,4 +80,12 @@ public class CertifiedFailInfo {
     public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
     }
+
+	public Integer getCheckStatus() {
+		return checkStatus;
+	}
+
+	public void setCheckStatus(Integer checkStatus) {
+		this.checkStatus = checkStatus;
+	}
 }

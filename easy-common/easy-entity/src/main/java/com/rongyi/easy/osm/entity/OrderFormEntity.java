@@ -1,10 +1,11 @@
 package com.rongyi.easy.osm.entity;
 
+import net.sf.json.JSONObject;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import net.sf.json.JSONObject;
 
 public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity>{
     /**

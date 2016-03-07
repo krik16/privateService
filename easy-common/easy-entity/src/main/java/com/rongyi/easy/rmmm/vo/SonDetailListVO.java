@@ -33,8 +33,8 @@ public class SonDetailListVO implements Serializable {
 	private String commodityCommission;// 商品佣金
 
 	private String status;// 佣金状态 1已发放 2处理中 3失败
-
-	private String sonOrderStatus; //商品订单状态— 0交易成功、1退款中、3已退款
+	
+	private String sonOrderStatus;// 商品订单状态— 0交易成功、1退款中、3已退款
 
 	public String getNum() {
 		return num;

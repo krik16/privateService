@@ -1,5 +1,7 @@
 package com.rongyi.easy.mcmc.entity;
 
+import com.rongyi.easy.mcmc.param.PostageTemplateParam;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -19,6 +21,20 @@ public class PostageTemplateEntity implements Serializable{
     private Integer updateBy;
 
     private Integer status;
+
+    public PostageTemplateEntity() {
+    }
+
+    public PostageTemplateEntity(PostageTemplateParam param) {
+        this.id = param.getId();
+        this.postage = Integer.valueOf(Double.toString(Math.rint(param.getPostage()*100)));
+        this.mallMid = param.getMallMid();
+        this.createAt = param.getCreateAt();
+        this.createBy = param.getCreateBy();
+        this.updateAt = param.getUpdateAt();
+        this.updateBy = param.getUpdateBy();
+        this.status = param.getStatus();
+    }
 
     public Integer getId() {
         return id;
