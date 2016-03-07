@@ -42,6 +42,12 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private String brand_id;
 	@Field("category_ids")
 	private List<String> category_ids;
+	@Field("category1_id")
+	private String category1_id;
+	@Field("category2_id")
+	private String category2_id;
+	@Field("category3_id")
+	private String category3_id;
 	@Field("commodityMallId")
 	private String commodityMallId;
 	@Field("commodityBrandId")
@@ -124,6 +130,34 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 	public void setCategory_ids(List<String> category_ids) {
 		this.category_ids = category_ids;
+		// 三级分类拆分成三个字段
+		this.setCategory1_id(category_ids.get(0));
+		this.setCategory2_id(category_ids.get(1));
+		this.setCategory3_id(category_ids.get(2));
+	}
+	
+	public String getCategory1_id() {
+		return category1_id;
+	}
+
+	public void setCategory1_id(String category1_id) {
+		this.category1_id = category1_id;
+	}
+
+	public String getCategory2_id() {
+		return category2_id;
+	}
+
+	public void setCategory2_id(String category2_id) {
+		this.category2_id = category2_id;
+	}
+
+	public String getCategory3_id() {
+		return category3_id;
+	}
+
+	public void setCategory3_id(String category3_id) {
+		this.category3_id = category3_id;
 	}
 
 	public List<String> getZone_ids() {

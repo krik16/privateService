@@ -63,64 +63,6 @@ public class Commodity implements  Serializable,Cloneable{
 
 	private Integer templateId;//邮费模版id
 
-	@Override
-	public String toString() {
-		return "Commodity{" +
-				"id=" + id +
-				", type=" + type +
-				", liveId='" + liveId + '\'' +
-				", isSpot=" + isSpot +
-				", liveStartTime=" + liveStartTime +
-				", liveEndTime=" + liveEndTime +
-				", create_by='" + create_by + '\'' +
-				", name='" + name + '\'' +
-				", category='" + category + '\'' +
-				", shopId='" + shopId + '\'' +
-				", shopMid='" + shopMid + '\'' +
-				", status=" + status +
-				", code='" + code + '\'' +
-				", description='" + description + '\'' +
-				", postage='" + postage + '\'' +
-				", stock=" + stock +
-				", sold=" + sold +
-				", createAt=" + createAt +
-				", updateAt=" + updateAt +
-				", originalPrice='" + originalPrice + '\'' +
-				", currentPrice='" + currentPrice + '\'' +
-				", oPriceOfLowestCPrice='" + oPriceOfLowestCPrice + '\'' +
-				", brandName='" + brandName + '\'' +
-				", mallMid='" + mallMid + '\'' +
-				", shopNum='" + shopNum + '\'' +
-				", update_by='" + update_by + '\'' +
-				", brandMid='" + brandMid + '\'' +
-				", supportCourierDeliver=" + supportCourierDeliver +
-				", picList=" + picList +
-				", specList=" + specList +
-				", price=" + price +
-				", brandId='" + brandId + '\'' +
-				", mallId='" + mallId + '\'' +
-				", categoryIds=" + categoryIds +
-				", customCategory=" + customCategory +
-				//", distribution=" + distribution +
-				", freight=" + freight +
-				", terminalType=" + terminalType +
-				", registerAt=" + registerAt +
-				", soldOutAt=" + soldOutAt +
-				", source=" + source +
-				", stockStatus=" + stockStatus +
-				", oPriceMax='" + oPriceMax + '\'' +
-				", oPriceMin='" + oPriceMin + '\'' +
-				", cPriceMax='" + cPriceMax + '\'' +
-				", cPriceMin='" + cPriceMin + '\'' +
-				", saleId='" + saleId + '\'' +
-				", flashSaleId='" + flashSaleId + '\'' +
-				", secKillSign='" + secKillSign + '\'' +
-				", sort='"+sort+'\''+
-//				", activityStartTime='" + activityStartTime + '\'' +
-//				", activityEndTime='" + activityEndTime + '\'' +
-				'}';
-	}
-
 	public boolean isSupportCourierDeliver() {
 		return supportCourierDeliver;
 	}
@@ -586,5 +528,26 @@ public class Commodity implements  Serializable,Cloneable{
 
 	public void setTemplateId(Integer templateId) {
 		this.templateId = templateId;
+	}
+	
+	@Override
+	public String toString() {
+		return "Commodity [id=" + id + ", type=" + type + ", liveId=" + liveId + ", isSpot=" + isSpot
+				+ ", liveStartTime=" + liveStartTime + ", liveEndTime=" + liveEndTime + ", create_by=" + create_by
+				+ ", saleId=" + saleId + ", flashSaleId=" + flashSaleId + ", activityStartTime=" + activityStartTime
+				+ ", activityEndTime=" + activityEndTime + ", secKillSign=" + secKillSign + ", name=" + name
+				+ ", category=" + category + ", shopId=" + shopId + ", shopMid=" + shopMid + ", status=" + status
+				+ ", code=" + code + ", description=" + description + ", postage=" + postage + ", stock=" + stock
+				+ ", sold=" + sold + ", lockedStock=" + lockedStock + ", createAt=" + createAt + ", updateAt="
+				+ updateAt + ", originalPrice=" + originalPrice + ", currentPrice=" + currentPrice
+				+ ", oPriceOfLowestCPrice=" + oPriceOfLowestCPrice + ", brandName=" + brandName + ", mallMid=" + mallMid
+				+ ", shopNum=" + shopNum + ", filialeMid=" + filialeMid + ", update_by=" + update_by + ", brandMid="
+				+ brandMid + ", supportCourierDeliver=" + supportCourierDeliver + ", supportSelfPickup="
+				+ supportSelfPickup + ", identity=" + identity + ", picList=" + picList + ", specList=" + specList
+				+ ", price=" + price + ", brandId=" + brandId + ", mallId=" + mallId + ", categoryIds=" + categoryIds
+				+ ", customCategory=" + customCategory + ", freight=" + freight + ", terminalType=" + terminalType
+				+ ", registerAt=" + registerAt + ", soldOutAt=" + soldOutAt + ", source=" + source + ", stockStatus="
+				+ stockStatus + ", systemNumber=" + systemNumber + ", reason=" + reason + ", oPriceMax=" + oPriceMax
+				+ ", oPriceMin=" + oPriceMin + ", cPriceMax=" + cPriceMax + ", cPriceMin=" + cPriceMin + "]";
 	}
 }

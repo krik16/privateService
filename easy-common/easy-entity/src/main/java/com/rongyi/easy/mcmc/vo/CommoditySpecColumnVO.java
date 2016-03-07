@@ -3,6 +3,7 @@ package com.rongyi.easy.mcmc.vo;
 import java.io.Serializable;
 
 import com.rongyi.easy.mcmc.CommoditySpecColumn;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 
 public class CommoditySpecColumnVO implements  Serializable{
@@ -53,18 +54,20 @@ public class CommoditySpecColumnVO implements  Serializable{
 
 	@Override
 	public String toString() {
-		return "CommoditySpecColumnVO{" +
-				"columnId='" + columnId + '\'' +
-				", columnName='" + columnName + '\'' +
-				", columnValue='" + columnValue + '\'' +
-				", isRequired=" + isRequired +
-				'}';
+		return new ToStringBuilder(this)
+				.append("columnId", columnId)
+				.append("columnName", columnName)
+				.append("columnValue", columnValue)
+				.append("columnNote", columnNote)
+				.append("isRequired", isRequired)
+				.toString();
 	}
+
 	public String getColumnNote() {
 		return columnNote;
 	}
 	public void setColumnNote(String columnNote) {
 		this.columnNote = columnNote;
 	}
-	
+
 }

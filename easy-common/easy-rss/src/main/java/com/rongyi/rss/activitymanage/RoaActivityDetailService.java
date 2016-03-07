@@ -1,6 +1,7 @@
 package com.rongyi.rss.activitymanage;
 
 import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.easy.activitymanage.param.SearchSecKillParam;
 import com.rongyi.easy.rmmm.param.FlashSaleParam;
 
 import java.io.Serializable;
@@ -26,4 +27,11 @@ public interface RoaActivityDetailService  {
      * @return
      */
    public ResponseVO searchIfashBuyDetailByParam(FlashSaleParam flashSaleParam);
+
+    /**
+     * 查询秒杀活动详情
+     * @param searchSecKillParam
+     * @return
+     */
+    public ResponseVO searchSeckillDetailByParam(SearchSecKillParam searchSecKillParam);
 }

@@ -68,7 +68,6 @@ public class ActivityTemplate implements Serializable{
     /**特卖的置顶商品*/
     private List<SaleCommodityTop> saleCommodityTops;
 
-
     public Integer getId() {
         return id;
     }
@@ -269,6 +268,7 @@ public class ActivityTemplate implements Serializable{
     public void setSaleCommodityTops(List<SaleCommodityTop> saleCommodityTops) {
         this.saleCommodityTops = saleCommodityTops;
     }
+
 
     @Override
     public String toString() {
