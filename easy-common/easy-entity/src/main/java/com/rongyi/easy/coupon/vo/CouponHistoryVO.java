@@ -27,6 +27,13 @@ public class CouponHistoryVO implements Serializable{
 	private String orderNo; // 订单号
 	private Date verifyAt; // 审核时间
 	private Date payAt; // 发放时间
+	private String failReason;//审核失败理由
+	public String getFailReason() {
+		return failReason;
+	}
+	public void setFailReason(String failReason) {
+		this.failReason = failReason;
+	}
 	public String getFrom() {
 		return from;
 	}
