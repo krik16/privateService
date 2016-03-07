@@ -2,6 +2,7 @@ package com.rongyi.tms.service.impl.dubbo;
 
 import com.rongyi.core.bean.ResponseData;
 import com.rongyi.easy.malllife.pojo.BuyerInfoPojo;
+import com.rongyi.easy.malllife.pojo.InvitationUserInfoPojo;
 import com.rongyi.easy.tms.entity.v2.CommissionConfig;
 import com.rongyi.easy.tms.entity.v2.SalesCommission;
 import com.rongyi.easy.tms.vo.v2.CommissionVO;
@@ -43,7 +44,7 @@ public class CommissionServiceImpl implements CommissionService{
     @Override
     public ResponseData addCommission(CommissionVO commissionVO) {
         LOGGER.info("增加佣金,commissionVO={}", commissionVO);
-        BuyerInfoPojo buyerInfoPojo = rOAMallLifeUserService.getUserIsByShare(commissionVO.getRegisterId(), commissionVO.getRegisterType());
+        InvitationUserInfoPojo buyerInfoPojo = rOAMallLifeUserService.getUserIsByShare(commissionVO.getRegisterId(), commissionVO.getRegisterType());
         if(buyerInfoPojo == null || StringUtils.isBlank(buyerInfoPojo.getShareCode())){
             LOGGER.info("未找到对应的邀请人信息，不增加佣金,buyerInfoPojo={}", buyerInfoPojo);
             return ResponseData.failure(ConstantEnum.COMMISSION_ADD_INVITE_NOT_FOUND.getCodeInt(), ConstantEnum.COMMISSION_ADD_INVITE_NOT_FOUND.getValueStr());
@@ -68,7 +69,7 @@ public class CommissionServiceImpl implements CommissionService{
         return ResponseData.success();
     }
 
-    private SalesCommission initSalesCommission(CommissionVO commissionVO,CommissionConfig commissionConfig,BuyerInfoPojo buyerInfoPojo){
+    private SalesCommission initSalesCommission(CommissionVO commissionVO,CommissionConfig commissionConfig,InvitationUserInfoPojo buyerInfoPojo){
         SalesCommission salesCommission = new SalesCommission();
         salesCommission.setGuideId(buyerInfoPojo.getUserId().toString());
         salesCommission.setOrderNo(commissionVO.getOrderNo());
