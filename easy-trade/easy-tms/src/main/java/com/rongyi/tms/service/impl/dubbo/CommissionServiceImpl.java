@@ -1,7 +1,6 @@
 package com.rongyi.tms.service.impl.dubbo;
 
 import com.rongyi.core.bean.ResponseData;
-import com.rongyi.easy.malllife.pojo.BuyerInfoPojo;
 import com.rongyi.easy.malllife.pojo.InvitationUserInfoPojo;
 import com.rongyi.easy.tms.entity.v2.CommissionConfig;
 import com.rongyi.easy.tms.entity.v2.SalesCommission;
@@ -40,6 +39,26 @@ public class CommissionServiceImpl implements CommissionService{
 
     @Autowired
     ROAMalllifeUserService rOAMallLifeUserService;
+
+    /**
+     * 返佣列表查询（推广/首单）
+     * @param commissionVO 请求参数对象
+     * @return ResponseData
+     */
+    @Override
+    public ResponseData getCommissionList(CommissionVO commissionVO){
+        return null;
+    }
+
+    /**
+     * 返佣详情查询（推广/首单）
+     * @param id 佣金id
+     * @return ResponseData
+     */
+    @Override
+    public ResponseData getCommissionInfo(Integer id){
+        return null;
+    }
 
     @Override
     public ResponseData addCommission(CommissionVO commissionVO) {
