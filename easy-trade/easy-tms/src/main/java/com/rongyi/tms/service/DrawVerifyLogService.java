@@ -35,4 +35,13 @@ public interface DrawVerifyLogService {
      * @return
      */
     public DrawVerifyLog getLogByApplyId(Integer applyId);
+
+    /**
+     *
+     * @Description 获取某个提现申请最新一条审核记录
+     * @author 袁波
+     * @param applyId 提现申请id
+     * @return
+     */
+    public DrawVerifyLog getLatestLogByApplyId(Integer applyId);
 }
