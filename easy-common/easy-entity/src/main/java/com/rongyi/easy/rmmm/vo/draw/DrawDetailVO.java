@@ -29,6 +29,18 @@ public class DrawDetailVO implements Serializable {
 	 * @Fields status : TODO(状态: 全部[0] 已发放[1] 处理中[2] 失败[3])
 	 */
 	private String status;
+	
+	private Integer drawId;//提现记录id
+
+	
+
+	public Integer getDrawId() {
+		return drawId;
+	}
+
+	public void setDrawId(Integer drawId) {
+		this.drawId = drawId;
+	}
 
 	public String getDate() {
 		return date;
@@ -60,6 +72,12 @@ public class DrawDetailVO implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	@Override
+	public String toString() {
+		return "DrawDetailVO [date=" + date + ", accountNo=" + accountNo + ", amount=" + amount + ", status=" + status
+				+ ", drawId=" + drawId + "]";
 	}
 
 }
