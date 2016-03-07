@@ -16,4 +16,18 @@ public interface CommissionService {
      * @return ResponseData
      */
     ResponseData addCommission(CommissionVO commissionVO);
+
+    /**
+     * 返佣列表查询（推广/首单）
+     * @param commissionVO 请求参数对象
+     * @return ResponseData
+     */
+    ResponseData getCommissionList(CommissionVO commissionVO);
+
+    /**
+     * 返佣详情查询（推广/首单）
+     * @param id 佣金id
+     * @return ResponseData
+     */
+    ResponseData getCommissionInfo(Integer id);
 }
