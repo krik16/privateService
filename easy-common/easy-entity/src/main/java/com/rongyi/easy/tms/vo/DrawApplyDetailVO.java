@@ -19,7 +19,9 @@ import java.util.Date;
  */
 public class DrawApplyDetailVO implements Serializable {
     private static final long serialVersionUID = -7647979818874548559L;
-    
+
+	private Integer id;
+
     /** 提现账号 */
     private String drawApplyAccount;
     
@@ -31,6 +33,11 @@ public class DrawApplyDetailVO implements Serializable {
     
     /** 提现金额 */
     private BigDecimal drawAmount;
+
+	/**
+	 * 卡名称（暂时只有支付宝）
+	 */
+	private String payAccountType;
 
 	public String getDrawApplyAccount() {
 		return drawApplyAccount;
@@ -63,7 +70,21 @@ public class DrawApplyDetailVO implements Serializable {
 	public void setDrawAmount(BigDecimal drawAmount) {
 		this.drawAmount = drawAmount;
 	}
-    
-    
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getPayAccountType() {
+		return payAccountType;
+	}
+
+	public void setPayAccountType(String payAccountType) {
+		this.payAccountType = payAccountType;
+	}
 
 }
