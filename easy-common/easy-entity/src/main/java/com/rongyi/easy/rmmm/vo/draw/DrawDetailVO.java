@@ -1,6 +1,9 @@
 package com.rongyi.easy.rmmm.vo.draw;
 
 import java.io.Serializable;
+import java.util.List;
+
+import com.rongyi.easy.rmmm.vo.NodeVO;
 
 /**
 * @ClassName: DrawDetailVO
@@ -31,8 +34,18 @@ public class DrawDetailVO implements Serializable {
 	private String status;
 	
 	private Integer drawId;//提现记录id
+	
+	private List<NodeVO> nodeList;// 节点数据
 
 	
+
+	public List<NodeVO> getNodeList() {
+		return nodeList;
+	}
+
+	public void setNodeList(List<NodeVO> nodeList) {
+		this.nodeList = nodeList;
+	}
 
 	public Integer getDrawId() {
 		return drawId;
@@ -77,7 +90,7 @@ public class DrawDetailVO implements Serializable {
 	@Override
 	public String toString() {
 		return "DrawDetailVO [date=" + date + ", accountNo=" + accountNo + ", amount=" + amount + ", status=" + status
-				+ ", drawId=" + drawId + "]";
+				+ ", drawId=" + drawId + ", nodeList=" + nodeList + "]";
 	}
 
 }
