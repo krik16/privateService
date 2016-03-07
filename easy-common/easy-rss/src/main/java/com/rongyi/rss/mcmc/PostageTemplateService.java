@@ -45,5 +45,5 @@ public interface PostageTemplateService {
      * @param param
      * @return
      */
-    public boolean insertOrUpdatePostageTemplate(PostageTemplateParam param);
+    public boolean insertOrUpdatePostageTemplate(PostageTemplateParam param) throws Exception;
 }
