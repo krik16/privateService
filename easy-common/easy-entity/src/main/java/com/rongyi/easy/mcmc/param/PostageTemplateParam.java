@@ -6,7 +6,7 @@ import java.util.Date;
 public class PostageTemplateParam implements Serializable{
     private Integer id;
 
-    private Integer postage;
+    private Double postage;
 
     private String mallMid;
 
@@ -28,11 +28,11 @@ public class PostageTemplateParam implements Serializable{
         this.id = id;
     }
 
-    public Integer getPostage() {
+    public Double getPostage() {
         return postage;
     }
 
-    public void setPostage(Integer postage) {
+    public void setPostage(Double postage) {
         this.postage = postage;
     }
 
