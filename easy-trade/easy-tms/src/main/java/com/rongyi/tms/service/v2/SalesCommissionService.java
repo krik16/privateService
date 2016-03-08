@@ -31,6 +31,13 @@ public interface SalesCommissionService {
     List<SalesCommissionVO> findCommissionList(Map<String, Object> map);
 
     /**
+     * 摩店佣金列表
+     * @param map
+     * @return
+     */
+    List<SalesCommissionVO> findCommissionListForMallShop(Map<String, Object> map);
+
+    /**
      * 佣金详情
      * @param id
      * @return
@@ -55,4 +62,20 @@ public interface SalesCommissionService {
      * @return
      */
     boolean validateIsAllow(Integer guideId,String registerId,Integer type);
+
+    /**
+     * 佣金总条数(摩店)
+     *
+     * @param map
+     * @return
+     */
+    int countCommissionForMallShop(Map<String, Object> map);
+
+    /**
+     * 摩店佣金详情
+     *
+     * @param id
+     * @return
+     */
+    SalesCommissionVO getCommissionDetailForMallShop(Integer id);
 }

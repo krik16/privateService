@@ -30,6 +30,7 @@
   </resultMap>
   <resultMap id="FullResultMap" type="com.rongyi.easy.tms.vo.v2.SalesCommissionVO" extends="ResultMapWithBLOBs" >
     <result column="register_type" property="registerType" jdbcType="TINYINT" />
+    <result column="commission_type" property="commissionType" jdbcType="TINYINT" />
     <result column="order_create_at" property="orderCreateAt" jdbcType="TIMESTAMP" />
     <result column="order_amount" property="orderAmount" jdbcType="DECIMAL" />
   </resultMap>
@@ -328,6 +329,67 @@
     </where>
   </select>
 
+    <!-- 摩店佣金列表count -->
+    <select id="countCommissionByUserId" resultType="int" parameterType="java.util.Map">
+        select count(1)
+        FROM sales_commission sc
+        JOIN commission_config cc on sc.config_id=cc.id
+        LEFT JOIN ry_osm.order_form of on sc.order_no=of.order_no
+        LEFT JOIN ry_trade.trade_order tr on sc.order_no=tr.order_no
+        WHERE sc.guide_id = #{userId,jdbcType=VARCHAR}
+        <if test="statusList != null">
+            AND sc.status IN
+            <foreach collection="statusList" index="index" item="item" open="("
+                     separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="dayRange != null">
+            AND TO_DAYS(sc.create_at) = TO_DAYS(now())
+        </if>
+        <if test="weekRange != null">
+            AND WEEK(sc.create_at) = WEEK(now())
+        </if>
+        <if test="monthRange != null">
+            AND MONTH(sc.create_at) = MONTH(now())
+        </if>
+    </select>
+
+
+
+  <!-- 摩店佣金列表 -->
+  <select id="selectCommissionByUserId" resultMap="FullResultMap" parameterType="java.util.Map">
+    SELECT sc.*,
+      cc.register_type,
+      cc.type,
+      cc.type AS commission_type,
+      CASE WHEN LENGTH(sc.order_no)=19 THEN  of.create_at WHEN LENGTH(sc.order_no)=18 THEN  tr.create_at ELSE '' END AS order_create_at,
+      CASE WHEN LENGTH(sc.order_no)=19 THEN  of.total_amount WHEN LENGTH(sc.order_no)=18 THEN  tr.pay_amount ELSE '' END AS order_amount
+    FROM sales_commission sc
+      JOIN commission_config cc on sc.config_id=cc.id
+      LEFT JOIN ry_osm.order_form of on sc.order_no=of.order_no
+      LEFT JOIN ry_trade.trade_order tr on sc.order_no=tr.order_no
+    WHERE sc.guide_id = #{userId,jdbcType=VARCHAR}
+      <if test="statusList != null">
+          AND sc.status IN
+          <foreach collection="statusList" index="index" item="item" open="("
+                   separator="," close=")">
+              #{item}
+          </foreach>
+      </if>
+      <if test="dayRange != null">
+          AND TO_DAYS(sc.create_at) = TO_DAYS(now())
+      </if>
+      <if test="weekRange != null">
+          AND WEEK(sc.create_at) = WEEK(now())
+      </if>
+      <if test="monthRange != null">
+          AND MONTH(sc.create_at) = MONTH(now())
+      </if>
+    ORDER BY sc.create_at DESC
+    LIMIT #{startRecord,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+  </select>
+
   <!-- 推广佣金列表 -->
   <select id="findCommissionListExpand" parameterType="map" resultMap="FullResultMap">
     SELECT sc.*, cc.register_type, cc.type
@@ -349,7 +411,7 @@
   </select>
 
   <select id="getCommissionDetail" parameterType="map" resultMap="FullResultMap">
-    select sc.*, cc.register_type, cc.type
+    select sc.*, cc.register_type, cc.type, cc.type AS commission_type
     from sales_commission sc join commission_config cc on sc.config_id=cc.id
     where sc.id=#{id}
   </select>
