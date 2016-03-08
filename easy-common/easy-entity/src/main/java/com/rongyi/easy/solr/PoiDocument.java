@@ -166,7 +166,8 @@ public class PoiDocument implements Serializable {
 			shop.setKey_tags(stringToArrayList(dbObject.get("key_tags").toString()));*/
 		if(StringUtils.isNotBlank(shop.getKey_tags()))
 			key_tags=Arrays.asList(shop.getKey_tags().split("[\u3000\\s]+"));
-		brand_ids=shop.getBrand_id().toString();
+		if(shop.getBrand_id()!=null)
+			brand_ids=shop.getBrand_id().toString();
 		if(shop.getValid()!=null&&shop.getValid().toString().equals("0"))
 			valid="0";
 		else
