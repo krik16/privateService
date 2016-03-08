@@ -6,6 +6,7 @@ package com.rongyi.rss.mallshop.order;
 import java.math.BigDecimal;
 import java.util.Map;
 
+import com.rongyi.core.bean.ResponseData;
 import com.rongyi.easy.rmmm.param.MyDealParam;
 import com.rongyi.easy.rmmm.vo.DetailListVO;
 import com.rongyi.easy.rmmm.vo.DetailVO;
