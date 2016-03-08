@@ -31,7 +31,7 @@ public class PostageTemplateVO implements Serializable{
 
     public PostageTemplateVO(PostageTemplateEntity postage) {
         this.id = postage.getId();
-        SimpleDateFormat sdf=new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         this.postage =postage.getPostage()/100.0;
         this.mallMid = postage.getMallMid();
         if(postage.getCreateAt()!=null)
