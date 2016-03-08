@@ -2,6 +2,7 @@ package com.rongyi.rss.mcmc;
 
 import com.rongyi.easy.mcmc.entity.PostageTemplateEntity;
 import com.rongyi.easy.mcmc.param.PostageTemplateParam;
+import com.rongyi.easy.mcmc.vo.PostageTemplateVO;
 
 import java.util.List;
 
@@ -31,7 +32,7 @@ public interface PostageTemplateService {
      * @param pageSize
      * @return
      */
-    public List<PostageTemplateEntity> searchPostageTemplateByMallName(String mallName,int skip,int pageSize);
+    public List<PostageTemplateVO> searchPostageTemplateByMallName(String mallName,int skip,int pageSize);
 
     /**
      * 根据商城名查询模版总数
