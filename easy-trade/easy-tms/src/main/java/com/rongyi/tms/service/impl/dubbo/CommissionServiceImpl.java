@@ -4,6 +4,7 @@ import com.rongyi.core.bean.ResponseData;
 import com.rongyi.core.constant.Constants;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.easy.malllife.pojo.InvitationUserInfoPojo;
+import com.rongyi.easy.tms.entity.SalesCommissionAuditLog;
 import com.rongyi.easy.tms.entity.v2.CommissionConfig;
 import com.rongyi.easy.tms.entity.v2.SalesCommission;
 import com.rongyi.easy.tms.vo.v2.CommissionVO;
@@ -15,6 +16,7 @@ import com.rongyi.tms.Exception.PermissionException;
 import com.rongyi.tms.constants.CodeEnum;
 import com.rongyi.tms.constants.Constant;
 import com.rongyi.tms.constants.ConstantEnum;
+import com.rongyi.tms.service.SalesCommissionAuditLogService;
 import com.rongyi.tms.service.v2.CommissionConfigService;
 import com.rongyi.tms.service.v2.SalesCommissionService;
 import org.apache.commons.lang.StringUtils;
@@ -48,6 +50,9 @@ public class CommissionServiceImpl implements CommissionService {
 
     @Autowired
     ROAMalllifeUserService rOAMallLifeUserService;
+
+    @Autowired
+    SalesCommissionAuditLogService salesCommissionAuditLogService;
 
     /**
      * 摩店返佣列表查询（推广/首单）
@@ -125,10 +130,24 @@ public class CommissionServiceImpl implements CommissionService {
         LOGGER.debug("getCommissionList 摩店佣金详情 ,param={}", id);
         ResponseData result;
         try {
-            if (id == null){
-                return ResponseData.failure(Integer.valueOf(CodeEnum.ERROR_PARAM.getActionCode()),CodeEnum.ERROR_PARAM.getMessage());
+            if (id == null) {
+                return ResponseData.failure(Integer.valueOf(CodeEnum.ERROR_PARAM.getActionCode()), CodeEnum.ERROR_PARAM.getMessage());
             }
             SalesCommissionVO salesCommissionVO = salesCommissionService.getCommissionDetailForMallShop(id);
+
+            if (salesCommissionVO != null) {
+                Integer commissionId = salesCommissionVO.getId();
+                Integer status = salesCommissionVO.getStatus().intValue();
+                if (status == ConstantEnum.COMMISSION_STATUS_6.getValueInt()) {
+                    SalesCommissionAuditLog auditLog = salesCommissionAuditLogService.selectLatestLogWithCommissionId(commissionId);
+                    salesCommissionVO.setPayAt(auditLog.getCreateAt());
+                    salesCommissionVO.setAuditAt(auditLog.getCreateAt());
+                } else if (status < 0 || status == ConstantEnum.COMMISSION_STATUS_3.getValueInt()) {
+                    SalesCommissionAuditLog auditLog = salesCommissionAuditLogService.selectLatestLogWithCommissionId(commissionId);
+                    salesCommissionVO.setAuditAt(auditLog.getCreateAt());
+                }
+            }
+
             result = ResponseData.success(salesCommissionVO);
             LOGGER.debug("detail end");
         } catch (Exception e) {

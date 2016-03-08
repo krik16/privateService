@@ -78,5 +78,13 @@ public class SalesCommissionAuditLogServiceImpl extends BaseServiceImpl implemen
     public int batachInsertCommissionAuditLog(Map<String, Object> paramsMap) {
         return this.getBaseDao().insertBySql(NAMESPACE_SALESCOMMISSION_LOG+".batchInsert", paramsMap);
     }
-    
+
+    @Override
+    public SalesCommissionAuditLog selectLatestLogWithCommissionId(Integer commissionId) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("salesCommissionId", commissionId);
+        return this.getBaseDao().selectOneBySql(NAMESPACE_SALESCOMMISSION_LOG + ".selectLatestLogWithCommissionId", map);
+    }
+
+
 }

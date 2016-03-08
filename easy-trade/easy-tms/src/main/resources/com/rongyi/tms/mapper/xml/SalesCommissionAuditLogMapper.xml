@@ -135,4 +135,14 @@
 		WHERE sales_commission_id = #{salesCommissionId}
 		ORDER BY create_at DESC;
 	</select>
+
+	<select id="selectLatestLogWithCommissionId" resultMap="ResultMapWithBLOBs" parameterType="java.util.Map">
+		SELECT
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		FROM sales_commission_audit_log
+		WHERE sales_commission_id = #{salesCommissionId,jdbcType=INTEGER}
+		ORDER BY create_at DESC;
+	</select>
 </mapper>

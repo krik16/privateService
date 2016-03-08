@@ -56,4 +56,6 @@ public interface SalesCommissionAuditLogService {
      * @return
      */
     public int batachInsertCommissionAuditLog(Map<String, Object> paramsMap);
+
+    public SalesCommissionAuditLog selectLatestLogWithCommissionId(Integer commissionId);
 }
