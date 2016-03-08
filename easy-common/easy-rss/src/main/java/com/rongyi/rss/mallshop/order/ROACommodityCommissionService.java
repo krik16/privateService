@@ -6,6 +6,7 @@ package com.rongyi.rss.mallshop.order;
 import java.math.BigDecimal;
 import java.util.Map;
 
+import com.rongyi.core.bean.ResponseData;
 import com.rongyi.easy.rmmm.param.MyDealParam;
 import com.rongyi.easy.rmmm.vo.DetailListVO;
 import com.rongyi.easy.rmmm.vo.DetailVO;
@@ -85,5 +86,19 @@ public interface ROACommodityCommissionService {
 	 * @throws Exception
 	 */
 	public DetailListVO getMyDealCommissionDetail(String orderNo) throws Exception;
+	
+	/**
+     * 摩店返佣列表查询（推广/首单）
+     * @param params 请求参数对象
+     * @return ResponseData
+     */
+    ResponseData getCommissionList(Map<String, Object> params);
+
+    /**
+     * 摩店返佣详情查询（推广/首单）
+     * @param id 佣金id
+     * @return ResponseData
+     */
+    ResponseData getCommissionInfo(Integer id);
 
 }
