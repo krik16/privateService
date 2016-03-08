@@ -29,11 +29,11 @@ import java.util.*;
  * 2016/2/25 17:53
  **/
 @Service("salesCommissionService")
-public class SalesCommissionServiceImpl extends BaseServiceImpl implements SalesCommissionService{
+public class SalesCommissionServiceImpl extends BaseServiceImpl implements SalesCommissionService {
 
     Logger logger = LoggerFactory.getLogger(SalesCommissionServiceImpl.class);
 
-    private  static final String NAMESPACE ="com.rongyi.tms.mapper.xml.v2.SalesCommissionMapper";
+    private static final String NAMESPACE = "com.rongyi.tms.mapper.xml.v2.SalesCommissionMapper";
 
     @Autowired
     private SalesCommissionAuditLogService salesCommissionAuditLogService;
@@ -46,13 +46,14 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 
     /**
      * 通过主键id查询
+     *
      * @param id
      * @return
      */
     @Override
     public SalesCommission selectById(Integer id) {
-        SalesCommission salesCommission  = null;
-        if (id != null){
+        SalesCommission salesCommission = null;
+        if (id != null) {
             Map<String, Object> map = new HashMap<>();
             map.put("id", id);
             salesCommission = this.getBaseDao().selectOneBySql(NAMESPACE + ".selectByPrimaryKey", map);
@@ -68,6 +69,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 
     /**
      * 佣金列表
+     *
      * @param map
      * @return
      */
@@ -92,26 +94,28 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 
     /**
      * 根据业务需求转换状态集合
+     *
      * @param status
      * @return
      */
     private List<Integer> convertToStatus(Integer status, Integer searchType) {
         List<Integer> reList = new ArrayList<>();
-        if (status.intValue()==ConstantEnum.COMMISSION_STATUS_2.getCodeInt() && searchType.intValue()==ConstantEnum.COMMISSION_VERIFY_0.getCodeInt()){
+        if (status.intValue() == ConstantEnum.COMMISSION_STATUS_2.getCodeInt() && searchType.intValue() == ConstantEnum.COMMISSION_VERIFY_0.getCodeInt()) {
             reList.add(ConstantEnum.COMMISSION_STATUS_2.getCodeInt());
             reList.add(ConstantEnum.COMMISSION_STATUS_3.getCodeInt());
             reList.add(ConstantEnum.COMMISSION_STATUS_2_UNCHECK.getCodeInt());
             reList.add(ConstantEnum.COMMISSION_STATUS_5.getCodeInt());
-        }else if (status.intValue()==ConstantEnum.COMMISSION_STATUS_3.getCodeInt()){
+        } else if (status.intValue() == ConstantEnum.COMMISSION_STATUS_3.getCodeInt()) {
             reList.add(ConstantEnum.COMMISSION_STATUS_3.getCodeInt());
             reList.add(ConstantEnum.COMMISSION_STATUS_5.getCodeInt());
-        }else
+        } else
             reList.add(status);
         return reList;
     }
 
     /**
      * 佣金详情
+     *
      * @param id
      * @return
      */
@@ -120,9 +124,39 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
         Map<String, Object> map = new HashMap<>();
         map.put("id", id);
         SalesCommissionVO vo = this.getBaseDao().selectOneBySql(NAMESPACE + ".getCommissionDetail", map);
-        if (vo!=null &&(vo.getStatus()==-1 || vo.getStatus()==-2)){
+        if (vo != null && (vo.getStatus() == -1 || vo.getStatus() == -2)) {
             SalesCommissionAuditLog log = salesCommissionAuditLogService.selectFailedLog(id);
-            if (log!=null)
+            if (log != null)
+                vo.setReason(log.getMemo());
+        }
+        return vo;
+    }
+
+    /**
+     * 摩店佣金详情
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public SalesCommissionVO getCommissionDetailForMallShop(Integer id) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", id);
+        SalesCommissionVO vo = this.getBaseDao().selectOneBySql(NAMESPACE + ".getCommissionDetail", map);
+
+        if (vo.getCommissionType() == ConstantEnum.COMMISSION_TYPE_1.getValueInt()) {
+            vo.setCommissionType(3);
+        } else if (vo.getCommissionType() == ConstantEnum.COMMISSION_TYPE_0.getValueInt()) {
+            if (vo.getRegisterType() == ConstantEnum.COMMISSION_REGISTER_RONGYI.getValueInt()) {
+                vo.setCommissionType(1);
+            } else if (vo.getRegisterType() == ConstantEnum.COMMISSION_REGISTER_MALLSHOP.getValueInt()) {
+                vo.setCommissionType(2);
+            }
+        }
+
+        if (vo != null && (vo.getStatus() == -1 || vo.getStatus() == -2)) {
+            SalesCommissionAuditLog log = salesCommissionAuditLogService.selectFailedLog(id);
+            if (log != null)
                 vo.setReason(log.getMemo());
         }
         return vo;
@@ -130,6 +164,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 
     /**
      * 佣金总条数
+     *
      * @param map
      * @return
      */
@@ -150,20 +185,16 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
         int resultNum = 0;
         Map<String, Object> paramsMap = new HashMap<>();
         List<String> ids = Arrays.asList(param.getIds().split(","));
-        for (String idStr : ids)
-        {
+        for (String idStr : ids) {
             SalesCommission commission = selectById(Integer.valueOf(idStr));
-            if (commission!=null)
-            {
+            if (commission != null) {
                 SalesCommission salesCommission = new SalesCommission();
                 salesCommission.setId(Integer.valueOf(idStr));
                 salesCommission.setStatus(param.getStatus().byteValue());
                 salesCommission.setUpdateAt(new Date());
                 CommissionConfig config = commissionConfigService.selectById(commission.getConfigId());
-                if (config!=null)
-                {
-                    if (param.getStatus().intValue() == ConstantEnum.COMMISSION_STATUS_3.getCodeInt())
-                    {
+                if (config != null) {
+                    if (param.getStatus().intValue() == ConstantEnum.COMMISSION_STATUS_3.getCodeInt()) {
                         //二级审核获取当天已通过审核数
                         paramsMap.clear();
                         paramsMap.put("guideId", commission.getGuideId());
@@ -171,13 +202,12 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
                         paramsMap.put("status", param.getStatus());
                         paramsMap.put("type", config.getType());
                         Integer dailyCount = this.getBaseDao().count(NAMESPACE + ".selectDailyCount", paramsMap);
-                        if (dailyCount>=config.getLimitTotal()){
+                        if (dailyCount >= config.getLimitTotal()) {
                             salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_5.getCodeByte());
                         }
                     }
                     int updateNum = this.getBaseDao().updateBySql(NAMESPACE + ".updateByPrimaryKeySelective", salesCommission);
-                    if (updateNum>0)
-                    {
+                    if (updateNum > 0) {
                         logger.info("更新成功，发送消息到 va");
                         CommissionAmountTotalVO commissionAmountTotalVO = new CommissionAmountTotalVO();
                         commissionAmountTotalVO.setId(commission.getId());
@@ -196,15 +226,15 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
                             event = MessageEvent.getMessageEvent(bodyMap, "tms", "va", VirtualAccountEventTypeEnum.COMMISSION_TYPE_FIRST.getCode());
                         sender.convertAndSend(event);
                         resultNum++;
-                    }else {
+                    } else {
                         logger.info("佣金审核修改失败");
                     }
                 }
             }
         }
 
-        if (resultNum>0){
-            for (String idStr : ids){
+        if (resultNum > 0) {
+            for (String idStr : ids) {
                 SalesCommissionAuditLog auditLog = new SalesCommissionAuditLog();
                 auditLog.setAuditUserId(user);
                 auditLog.setCreateAt(new Date());
@@ -214,7 +244,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
                 salesCommissionAuditLogService.createCommissionAuditLog(auditLog);
             }
         }
-        return resultNum>0;
+        return resultNum > 0;
     }
 
     @Override
@@ -227,5 +257,35 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
         return count <= 0;
     }
 
+    @Override
+    public List<SalesCommissionVO> findCommissionListForMallShop(Map<String, Object> map) {
+        logger.info("service findCommissionListForMallShop start map={}", map);
 
+        List<SalesCommissionVO> list = this.getBaseDao().selectListBySql(NAMESPACE + ".selectCommissionByUserId", map);
+        for (SalesCommissionVO vo : list) {
+            if (vo.getCommissionType() == ConstantEnum.COMMISSION_TYPE_1.getValueInt()) {
+                vo.setCommissionType(3);
+            } else if (vo.getCommissionType() == ConstantEnum.COMMISSION_TYPE_0.getValueInt()) {
+                if (vo.getRegisterType() == ConstantEnum.COMMISSION_REGISTER_RONGYI.getValueInt()) {
+                    vo.setCommissionType(1);
+                } else if (vo.getRegisterType() == ConstantEnum.COMMISSION_REGISTER_MALLSHOP.getValueInt()) {
+                    vo.setCommissionType(2);
+                }
+            }
+        }
+
+        logger.info("service findCommissionListForMallShop end size={}", list.size());
+        return list;
+    }
+
+    /**
+     * 佣金总条数(摩店)
+     *
+     * @param map
+     * @return
+     */
+    @Override
+    public int countCommissionForMallShop(Map<String, Object> map) {
+        return this.getBaseDao().count(NAMESPACE + ".countCommissionByUserId", map);
+    }
 }

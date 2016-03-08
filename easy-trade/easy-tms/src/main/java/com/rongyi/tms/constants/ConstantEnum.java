@@ -22,6 +22,9 @@ public enum ConstantEnum {
     COMMISSION_TYPE_1(1, "首单返佣"),
     COMMISSION_TYPE_2(2, "小票返佣"),
 
+    COMMISSION_REGISTER_RONGYI(1, "容易逛"),
+    COMMISSION_REGISTER_MALLSHOP(2, "摩店"),
+
     ORDER_STATUS_1("1","未付款"),
     ORDER_STATUS_2("2","待发货"),
     ORDER_STATUS_3("4","已发货"),
