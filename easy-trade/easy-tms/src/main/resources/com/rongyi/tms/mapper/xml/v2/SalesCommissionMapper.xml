@@ -22,6 +22,7 @@
     <result column="invite_phone" property="invitePhone" jdbcType="VARCHAR" />
     <result column="register_id" property="registerId" jdbcType="VARCHAR" />
     <result column="register_phone" property="registerPhone" jdbcType="VARCHAR" />
+    <result column="register_time" property="registerTime" jdbcType="TIMESTAMP" />
     <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.rongyi.easy.tms.entity.v2.SalesCommission" extends="BaseResultMap" >
@@ -36,7 +37,7 @@
   <sql id="Base_Column_List" >
     id, guide_id, order_no, commission_amount, `status`, create_at, `type`, pic_upload_at,
     create_user, update_user, update_at, buyer_account, seller_account, version, guide_type,
-    comm_no, config_id, invite_phone,register_id, register_phone, is_delete
+    comm_no, config_id, invite_phone,register_id,register_phone,register_time, is_delete
   </sql>
   <sql id="Blob_Column_List" >
     pic_urls, remarks
@@ -59,7 +60,7 @@
       pic_upload_at, create_user, update_user,
       update_at, buyer_account, seller_account,
       version, guide_type, comm_no,
-      config_id, invite_phone,register_id, register_phone,
+      config_id, invite_phone,register_id, register_phone,register_time,
       is_delete, pic_urls, remarks
       )
     values (#{guideId,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, #{commissionAmount,jdbcType=DECIMAL},
@@ -68,6 +69,7 @@
       #{updateAt,jdbcType=TIMESTAMP}, #{buyerAccount,jdbcType=VARCHAR}, #{sellerAccount,jdbcType=VARCHAR},
       #{version,jdbcType=BIGINT}, #{guideType,jdbcType=INTEGER}, #{commNo,jdbcType=VARCHAR},
       #{configId,jdbcType=INTEGER}, #{invitePhone,jdbcType=VARCHAR},#{registerId,jdbcType=VARCHAR}, #{registerPhone,jdbcType=VARCHAR},
+      #{registerTime,jdbcType=TIMESTAMP},
       #{isDelete,jdbcType=TINYINT}, #{picUrls,jdbcType=LONGVARBINARY}, #{remarks,jdbcType=LONGVARBINARY}
       )
   </insert>
@@ -93,6 +95,7 @@
       invite_phone,
       register_id,
       register_phone,
+      register_time,
       <if test="isDelete != null and idDelete != ''">
       is_delete,
       </if>
@@ -119,6 +122,7 @@
       #{invitePhone,jdbcType=VARCHAR},
       #{registerId,jdbcType=VARCHAR},
       #{registerPhone,jdbcType=VARCHAR},
+      #{registerTime,jdbcType=TIMESTAMP},
       <if test="isDelete != null and idDelete != ''">
       #{isDelete,jdbcType=TINYINT},
       </if>
@@ -186,6 +190,9 @@
       <if test="registerPhone != null" >
         register_phone = #{registerPhone,jdbcType=VARCHAR},
       </if>
+      <if test="registerTime != null" >
+        register_time = #{registerTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="isDelete != null" >
         is_delete = #{isDelete,jdbcType=TINYINT},
       </if>
@@ -219,6 +226,7 @@
       invite_phone = #{invitePhone,jdbcType=VARCHAR},
       register_id = #{registerId,jdbcType=VARCHAR},
       register_phone = #{registerPhone,jdbcType=VARCHAR},
+      register_time = #{registerTime,jdbcType=TIMESTAMP},
       is_delete = #{isDelete,jdbcType=TINYINT},
       pic_urls = #{picUrls,jdbcType=LONGVARBINARY},
       remarks = #{remarks,jdbcType=LONGVARBINARY}
@@ -245,6 +253,7 @@
       invite_phone = #{invitePhone,jdbcType=VARCHAR},
       register_id = #{registerId,jdbcType=VARCHAR},
       register_phone = #{registerPhone,jdbcType=VARCHAR},
+      register_time = #{registerTime,jdbcType=TIMESTAMP},
       is_delete = #{isDelete,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -269,6 +278,9 @@
     </if>
     <if test="registerPhone!=null and registerPhone!=''">
       and sc.register_phone == #{registerPhone}
+    </if>
+    <if test="registerTime!=null and registerTime!=''">
+      and sc.register_time == #{registerTime}
     </if>
     <if test="invitePhone!=null and invitePhone!=''">
       and sc.invite_phone == #{invitePhone}

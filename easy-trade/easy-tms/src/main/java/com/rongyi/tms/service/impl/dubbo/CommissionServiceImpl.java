@@ -1,6 +1,7 @@
 package com.rongyi.tms.service.impl.dubbo;
 
 import com.rongyi.core.bean.ResponseData;
+import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.easy.malllife.pojo.InvitationUserInfoPojo;
 import com.rongyi.easy.tms.entity.v2.CommissionConfig;
 import com.rongyi.easy.tms.entity.v2.SalesCommission;
@@ -101,7 +102,8 @@ public class CommissionServiceImpl implements CommissionService{
             salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_2.getCodeByte());
         }
         salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_1.getCodeByte());
-        salesCommission.setCreateAt(commissionVO.getFinishAt());
+        salesCommission.setRegisterTime(commissionVO.getFinishAt());
+        salesCommission.setCreateAt(DateUtil.getCurrDateTime());
         salesCommission.setGuideType(buyerInfoPojo.getUserType());
         salesCommission.setCommNo(orderNoGenService.getOrderNo("5"));
         salesCommission.setInvitePhone(buyerInfoPojo.getUserPhone());
