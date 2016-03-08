@@ -411,8 +411,18 @@
   </select>
 
   <select id="getCommissionDetail" parameterType="map" resultMap="FullResultMap">
-    select sc.*, cc.register_type, cc.type, cc.type AS commission_type
+    select sc.*, cc.register_type, cc.type, cc.type AS commission_type,
+      CASE
+      WHEN LENGTH(sc.order_no)=19 THEN  of.create_at
+      WHEN LENGTH(sc.order_no)=18 THEN  tr.create_at
+      ELSE '' END AS order_create_at,
+      CASE
+      WHEN LENGTH(sc.order_no)=19 THEN  of.total_amount
+      WHEN LENGTH(sc.order_no)=18 THEN  tr.pay_amount ELSE ''
+      END AS order_amount
     from sales_commission sc join commission_config cc on sc.config_id=cc.id
+      LEFT JOIN ry_osm.order_form of on sc.order_no=of.order_no
+      LEFT JOIN ry_trade.trade_order tr on sc.order_no=tr.order_no
     where sc.id=#{id}
   </select>
   <select id="selectDailyCount" parameterType="map" resultType="int">
