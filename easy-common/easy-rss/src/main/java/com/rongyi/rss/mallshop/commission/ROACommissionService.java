@@ -1,18 +1,25 @@
-package com.rongyi.rss.tms;
+/**
+ * 
+ */
+package com.rongyi.rss.mallshop.commission;
+
+import java.util.Map;
 
 import com.rongyi.core.bean.ResponseData;
 import com.rongyi.easy.tms.vo.v2.CommissionVO;
 
-import java.util.Map;
-
 /**
- * @Copyright (C), 上海容易网电子商务有限公司
- * kejun
- * 2016/2/26 10:22
- **/
-public interface CommissionService {
-
-    /**
+ * Copyright (C),上海容易网电子商务有限公司
+ * author chenjun
+ * Description ：推广佣金接口
+ * time ：2016年3月8日
+ * History: 变更记录
+ * <author>           <time>             <version>        <desc>
+ * chenjun            2016年3月8日               1.0              创建文件
+ */
+public interface ROACommissionService {
+	
+	/**
      * 返佣
      * @param commissionVO 请求参数对象
      * @return ResponseData
@@ -32,4 +39,5 @@ public interface CommissionService {
      * @return ResponseData
      */
     ResponseData getCommissionInfo(Integer id);
+
 }

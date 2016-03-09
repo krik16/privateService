@@ -43,6 +43,8 @@ public class SalesCommission implements Serializable {
 
     private String registerPhone;
 
+    private Date registerTime;
+
     private Integer configId;
 
     private Byte isDelete;
@@ -233,5 +235,13 @@ public class SalesCommission implements Serializable {
 
     public void setRegisterId(String registerId) {
         this.registerId = registerId;
+    }
+
+    public Date getRegisterTime() {
+        return registerTime;
+    }
+
+    public void setRegisterTime(Date registerTime) {
+        this.registerTime = registerTime;
     }
 }

@@ -18,7 +18,6 @@ public class MallTemplateVO  implements Serializable {
 	
 	private String templateId;// 模板邮费id
 	private double templatePostage;// 模板邮费
-	private String customPostage;// 最近填写的自定义邮费
 	public String getTemplateId() {
 		return templateId;
 	}
@@ -31,16 +30,9 @@ public class MallTemplateVO  implements Serializable {
 	public void setTemplatePostage(double templatePostage) {
 		this.templatePostage = templatePostage;
 	}
-	public String getCustomPostage() {
-		return customPostage;
-	}
-	public void setCustomPostage(String customPostage) {
-		this.customPostage = customPostage;
-	}
 	@Override
 	public String toString() {
-		return "MallTemplateVO [templateId=" + templateId + ", templatePostage=" + templatePostage + ", customPostage="
-				+ customPostage + "]";
+		return "MallTemplateVO [templateId=" + templateId + ", templatePostage=" + templatePostage + "]";
 	}
 
 }

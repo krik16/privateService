@@ -18,6 +18,19 @@ public class SalesCommissionVO extends SalesCommission implements Serializable{
     private Date orderCreateAt;//订单创建时间
     private BigDecimal orderAmount;//订单金额
 
+    private Date payAt; //发放时间
+    private Date auditAt; //审核时间
+
+    private Integer commissionType; //返佣类型 1 容易逛、2 摩店、 3首单
+
+    public Integer getCommissionType() {
+        return commissionType;
+    }
+
+    public void setCommissionType(Integer commissionType) {
+        this.commissionType = commissionType;
+    }
+
     public Integer getRegisterType() {
         return registerType;
     }
@@ -58,6 +71,22 @@ public class SalesCommissionVO extends SalesCommission implements Serializable{
 
     public void setOrderAmount(BigDecimal orderAmount) {
         this.orderAmount = orderAmount;
+    }
+
+    public Date getPayAt() {
+        return payAt;
+    }
+
+    public void setPayAt(Date payAt) {
+        this.payAt = payAt;
+    }
+
+    public Date getAuditAt() {
+        return auditAt;
+    }
+
+    public void setAuditAt(Date auditAt) {
+        this.auditAt = auditAt;
     }
 
     @Override

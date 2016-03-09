@@ -27,7 +27,7 @@ public class PostageTemplateEntity implements Serializable{
 
     public PostageTemplateEntity(PostageTemplateParam param) {
         this.id = param.getId();
-        this.postage = Integer.valueOf(Double.toString(Math.rint(param.getPostage()*100)));
+        this.postage = Double.valueOf(param.getPostage()*100).intValue();
         this.mallMid = param.getMallMid();
         this.createAt = param.getCreateAt();
         this.createBy = param.getCreateBy();

@@ -36,6 +36,7 @@ public class CommodityVO  implements  Serializable {
 	private Date liveStartTime; // 直播开始时间
 	private Date liveEndTime; // 直播结束时间
 	private String create_by; // 创建人 
+	private String update_by;//修改人
 	private String liveId; // 直播Id
 	private String commodityOriginalPrice;
 	private String commodityCurrentPrice;
@@ -318,6 +319,7 @@ public class CommodityVO  implements  Serializable {
 			this.activityType = "0";
 		}
 		this.sort=commodity.getSort();//排序
+		this.update_by = commodity.getUpdate_by();//修改人
 	}
 	public String getCommodityId() {
 		return commodityId;
@@ -410,48 +412,6 @@ public class CommodityVO  implements  Serializable {
 	public void setSoldOutAt(Date soldOutAt) {
 		this.soldOutAt = soldOutAt;
 	}
-	@Override
-	public String toString() {
-		return "CommodityVO{" +
-				"commodityId='" + commodityId + '\'' +
-				", commodityName='" + commodityName + '\'' +
-				", commodityCategory='" + commodityCategory + '\'' +
-				", commodityDescription='" + commodityDescription + '\'' +
-				", commodityPostage='" + commodityPostage + '\'' +
-				", commodityStock='" + commodityStock + '\'' +
-				", commoditySold='" + commoditySold + '\'' +
-				", commodityPubDate='" + commodityPubDate + '\'' +
-				", commodityStatus=" + commodityStatus +
-				", commodityOPriceMax='" + commodityOPriceMax + '\'' +
-				", commodityOPriceMin='" + commodityOPriceMin + '\'' +
-				", commodityCPriceMax='" + commodityCPriceMax + '\'' +
-				", commodityCPriceMin='" + commodityCPriceMin + '\'' +
-				", commodityOPOfLCP='" + commodityOPOfLCP + '\'' +
-				", commodityType=" + commodityType +
-				", isSpot=" + isSpot +
-				", liveStartTime=" + liveStartTime +
-				", liveEndTime=" + liveEndTime +
-				", create_by='" + create_by + '\'' +
-				", liveId='" + liveId + '\'' +
-				", commodityOriginalPrice='" + commodityOriginalPrice + '\'' +
-				", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +
-				", shopId='" + shopId + '\'' +
-				", shopMid='" + shopMid + '\'' +
-				", commodityShopNumber='" + commodityShopNumber + '\'' +
-				", commodityPicList=" + commodityPicList +
-				", commoditySpecList=" + commoditySpecList +
-				", commodityCode='" + commodityCode + '\'' +
-				", commodityCommission='" + commodityCommission + '\'' +
-				", brandMid='" + brandMid + '\'' +
-				", mallMid='" + mallMid + '\'' +
-				", shopName='" + shopName + '\'' +
-				", supportCourierDeliver=" + supportCourierDeliver +
-				", supportSelfPickup=" + supportSelfPickup +
-				", identity=" + identity +
-				", processIdentity=" + processIdentity +
-				",sort="+sort+
-				'}';
-	}
 	public Integer getSource() {
 		return source;
 	}
@@ -540,4 +500,53 @@ public class CommodityVO  implements  Serializable {
 	public void setSort(Integer sort) {
 		this.sort = sort;
 	}
+
+	public String getUpdate_by() {
+		return update_by;
+	}
+
+	public void setUpdate_by(String update_by) {
+		this.update_by = update_by;
+	}
+
+	@Override
+	public String toString() {
+		return "CommodityVO [commodityId=" + commodityId + ", commodityName="
+				+ commodityName + ", commodityCategory=" + commodityCategory
+				+ ", commodityDescription=" + commodityDescription
+				+ ", commodityPostage=" + commodityPostage
+				+ ", commodityStock=" + commodityStock + ", commoditySold="
+				+ commoditySold + ", commodityPubDate=" + commodityPubDate
+				+ ", commodityStatus=" + commodityStatus
+				+ ", commodityAppStatus=" + commodityAppStatus
+				+ ", commodityOPriceMax=" + commodityOPriceMax
+				+ ", commodityOPriceMin=" + commodityOPriceMin
+				+ ", commodityCPriceMax=" + commodityCPriceMax
+				+ ", commodityCPriceMin=" + commodityCPriceMin
+				+ ", commodityOPOfLCP=" + commodityOPOfLCP + ", commodityType="
+				+ commodityType + ", isSpot=" + isSpot + ", liveStartTime="
+				+ liveStartTime + ", liveEndTime=" + liveEndTime
+				+ ", create_by=" + create_by + ", update_by=" + update_by
+				+ ", liveId=" + liveId + ", commodityOriginalPrice="
+				+ commodityOriginalPrice + ", commodityCurrentPrice="
+				+ commodityCurrentPrice + ", shopId=" + shopId + ", shopMid="
+				+ shopMid + ", commodityShopNumber=" + commodityShopNumber
+				+ ", commodityPicList=" + commodityPicList
+				+ ", commoditySpecList=" + commoditySpecList
+				+ ", commodityCode=" + commodityCode + ", commodityCommission="
+				+ commodityCommission + ", brandMid=" + brandMid + ", mallMid="
+				+ mallMid + ", shopName=" + shopName
+				+ ", supportCourierDeliver=" + supportCourierDeliver
+				+ ", supportSelfPickup=" + supportSelfPickup + ", registerAt="
+				+ registerAt + ", soldOutAt=" + soldOutAt + ", source="
+				+ source + ", freight=" + freight + ", terminalType="
+				+ terminalType + ", stockStatus=" + stockStatus + ", reason="
+				+ reason + ", mallId=" + mallId + ", brandName=" + brandName
+				+ ", shopNum=" + shopNum + ", brandId=" + brandId
+				+ ", filialeMid=" + filialeMid + ", identity=" + identity
+				+ ", processIdentity=" + processIdentity + ", activityType="
+				+ activityType + ", templateId=" + templateId + ", sort="
+				+ sort + "]";
+	}
+	
 }
