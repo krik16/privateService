@@ -15,6 +15,7 @@
     <result column="msg_link" property="msgLink" jdbcType="VARCHAR" />
     <result column="msg_content" property="msgContent" jdbcType="VARCHAR" />
     <result column="msg_type" property="msgType" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >

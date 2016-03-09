@@ -1,6 +1,7 @@
 package com.rongyi.rss.msob;
 
 import com.rongyi.easy.mallshop.MallShopException;
+import com.rongyi.easy.rmmm.dto.system.SystemMsgDto;
 import com.rongyi.easy.rmmm.param.system.SystemMsgParam;
 import com.rongyi.easy.rmmm.vo.system.SystemMsgListVo;
 
@@ -70,5 +71,14 @@ public interface ISystemMsgService {
      * @throws MallShopException
      */
     public int setBuyerRead(SystemMsgParam param) throws MallShopException;
+
+
+    /**
+     * 保存推送消息
+     * @param systemMsgDto 推送消息内容
+     * @param userId  指定推送人员
+     * @throws MallShopException
+     */
+    public void savePushMsg(SystemMsgDto systemMsgDto,String userId)throws MallShopException;
 
 }
