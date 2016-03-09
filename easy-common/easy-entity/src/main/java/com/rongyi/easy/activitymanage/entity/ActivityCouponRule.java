@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class ActivityCouponRule implements Serializable {
+
     private Integer id;
 
     private Integer activityId;
