@@ -63,9 +63,12 @@
 		</if>
 		<if test="weekRange != null">
 			AND WEEK(create_at) = WEEK(now())
+			AND MONTH(create_at) = MONTH(now())
+			AND YEAR(create_at) = YEAR (now())
 		</if>
 		<if test="monthRange != null">
 			AND MONTH(create_at) = MONTH(now())
+			AND YEAR(create_at) = YEAR (now())
 		</if>
 		ORDER BY create_at DESC
 		LIMIT #{pageStart,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
@@ -81,10 +84,13 @@
 		</if>
 		<if test="weekRange != null">
 			AND WEEK(create_at) = WEEK(now())
+			AND MONTH(create_at) = MONTH(now())
+			AND YEAR(create_at) = YEAR (now())
 		</if>
 		<if test="monthRange != null">
 			AND MONTH(create_at) = MONTH(now())
+			AND YEAR(create_at) = YEAR (now())
 		</if>
-		AND YEAR(create_at) = YEAR (now())
+
 	</select>
 </mapper>
