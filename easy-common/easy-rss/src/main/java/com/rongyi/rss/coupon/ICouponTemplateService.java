@@ -50,4 +50,12 @@ public interface ICouponTemplateService {
      * @return
      */
     ResponseResult setDefaultTemplate(String id, boolean isDefault, String type) throws Exception;
+    
+    /**
+     * 获取店铺默认使用方式和使用限制
+     * @param shopId
+     * @return 正常返回两条数据 第一条使用限制  第二条使用方式 。如果不存在默认使用说明或者使用显示，则数据返回空，或者1条数据
+     * @author yuanbo
+     */
+    public ResponseResult getDefaultTemlateList(String shopId);
 }
