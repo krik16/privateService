@@ -108,6 +108,10 @@ public class ActivityGoods implements Serializable {
      * 版本号
      */
     private Integer version;
+    /**
+     * 0:取消撤销状态  1:表示申请撤销中状态
+     */
+    private Integer applyStatus;
 
     /**
      * 商品规格
@@ -314,6 +318,14 @@ public class ActivityGoods implements Serializable {
         this.activityGoodsCategories = activityGoodsCategories;
     }
 
+    public Integer getApplyStatus() {
+        return applyStatus;
+    }
+
+    public void setApplyStatus(Integer applyStatus) {
+        this.applyStatus = applyStatus;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -336,6 +348,7 @@ public class ActivityGoods implements Serializable {
                 .append("updateAt", updateAt)
                 .append("isDeleted", isDeleted)
                 .append("version", version)
+                .append("applyStatus", applyStatus)
                 .append("activityGoodsSpecs", activityGoodsSpecs)
                 .append("activityGoodsCategories", activityGoodsCategories)
                 .toString();
