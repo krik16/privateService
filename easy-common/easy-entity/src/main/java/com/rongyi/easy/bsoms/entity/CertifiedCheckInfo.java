@@ -1,5 +1,6 @@
 package com.rongyi.easy.bsoms.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,9 +8,10 @@ import java.util.Date;
  * @author sj
  *
  */
-public class CertifiedCheckInfo {
-	
-    private Integer id;
+public class CertifiedCheckInfo implements Serializable{
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
 
     private Integer userId;    //用户ID
 

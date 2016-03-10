@@ -196,4 +196,11 @@ public interface IUserInfoService {
 	 * @return
 	 */
 	public boolean checkCertifiedUser(Map paramMap);
+	
+	/**
+	 * 查询用户审核记录
+	 * @param paramMap
+	 * @return
+	 */
+	public List<CertifiedCheckInfo> getCheckListByUserId(Map paramMap);
 }
