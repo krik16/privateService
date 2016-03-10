@@ -389,7 +389,6 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                         throw new RuntimeException("此订单已成功支付,此次请求属于订单重复支付请求,请重新下单，订单号-->" + orderNum);
                     }
                     BeanUtils.copyProperties(paymentEntity, newPaymentEntity);
-                    newPaymentEntity.setId(null);
                     newPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
                     if (paymentEntity.getPayChannel() != null && payChannel.equals(paymentEntity.getPayChannel())) {
                         LOGGER.info("此订单payChannel={}支付方式未支付单已存在，直接返回此笔付款单记录,orderNum={}", paymentEntity.getPayChannel(), orderNo);
@@ -398,6 +397,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                         PaymentEntity oldPaymentEntity = selectByPayNoAndPayChannelAndTradeType(paymentEntity.getPayNo(), payChannel, tradeType, Constants.PAYMENT_STATUS.STAUS0);
                         if (oldPaymentEntity == null) {
                             LOGGER.info("此订单payChannel={}支付方式未支付单不存在，新增新付款方式同支付单号待付款记录,orderNum={}", payChannel, orderNo);
+                            newPaymentEntity.setId(null);
                             newPaymentEntity.setCreateTime(DateUtil.getCurrDateTime());
                             newPaymentEntity.setPayChannel(payChannel);
                             insert(newPaymentEntity);
