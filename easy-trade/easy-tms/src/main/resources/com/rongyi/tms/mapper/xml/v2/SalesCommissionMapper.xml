@@ -349,6 +349,7 @@
         LEFT JOIN ry_osm.order_form of on sc.order_no=of.order_no
         LEFT JOIN ry_trade.trade_order tr on sc.order_no=tr.order_no
         WHERE sc.guide_id = #{userId,jdbcType=VARCHAR}
+          and IFNULL(sc.commission_amount, 0) > 0
         <if test="statusList != null">
             AND sc.status IN
             <foreach collection="statusList" index="index" item="item" open="("
@@ -382,6 +383,7 @@
       LEFT JOIN ry_osm.order_form of on sc.order_no=of.order_no
       LEFT JOIN ry_trade.trade_order tr on sc.order_no=tr.order_no
     WHERE sc.guide_id = #{userId,jdbcType=VARCHAR}
+      and IFNULL(sc.commission_amount, 0) > 0
       <if test="statusList != null">
           AND sc.status IN
           <foreach collection="statusList" index="index" item="item" open="("
