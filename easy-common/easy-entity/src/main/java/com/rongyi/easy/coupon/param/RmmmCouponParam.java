@@ -21,6 +21,11 @@ public class RmmmCouponParam implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
+     * id
+     */
+    private String id;
+
+    /**
      * 券名称
      */
     private String title;
@@ -254,8 +259,16 @@ public class RmmmCouponParam implements Serializable {
         this.activityId = activityId;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("title", title).append("totalCount", totalCount).append("limitCount", limitCount).append("activityId", activityId).append("originalPrice", originalPrice).append("currentPrice", currentPrice).append("publishBeginDate", publishBeginDate).append("publishEndDate", publishEndDate).append("validBeginDate", validBeginDate).append("validEndDate", validEndDate).append("useRestriction", useRestriction).append("useDescription", useDescription).append("detailPicUrls", detailPicUrls).append("shopId", shopId).append("limitPublishCount", limitPublishCount).append("limitUseCount", limitUseCount).append("afterSaleService", afterSaleService).append("createUser", createUser).toString();
+        return new ToStringBuilder(this).append("id", id).append("title", title).append("totalCount", totalCount).append("limitCount", limitCount).append("activityId", activityId).append("originalPrice", originalPrice).append("currentPrice", currentPrice).append("publishBeginDate", publishBeginDate).append("publishEndDate", publishEndDate).append("validBeginDate", validBeginDate).append("validEndDate", validEndDate).append("useRestriction", useRestriction).append("useDescription", useDescription).append("detailPicUrls", detailPicUrls).append("shopId", shopId).append("limitPublishCount", limitPublishCount).append("limitUseCount", limitUseCount).append("afterSaleService", afterSaleService).append("createUser", createUser).toString();
     }
 }
