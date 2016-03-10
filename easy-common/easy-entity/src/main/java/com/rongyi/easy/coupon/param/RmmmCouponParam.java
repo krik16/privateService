@@ -16,252 +16,246 @@ import java.util.List;
 
 /**
  * @author ZhengYl
- *
  */
 public class RmmmCouponParam implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 券名称
-	 */
-	private String title;
+    /**
+     * 券名称
+     */
+    private String title;
 
-	/**
-	 * 总量
-	 */
-	private Integer totalCount;
+    /**
+     * 总量
+     */
+    private Integer totalCount;
 
-	/**
-	 * 每人限购数量
-	 */
-	private Integer limitCount;
+    /**
+     * 每人限购数量
+     */
+    private Integer limitCount;
 
-	/**
-	 * 原价
-	 */
-	private Double originalPrice;
+    /**
+     * 原价
+     */
+    private Double originalPrice;
 
-	/**
-	 * 现价
-	 */
-	private Double currentPrice;
+    /**
+     * 现价
+     */
+    private Double currentPrice;
 
-	/**
-	 * 发布开始时间 格式："yyyy-MM-dd";
-	 */
-	private String publishBeginDate;
+    /**
+     * 发布开始时间 格式："yyyy-MM-dd";
+     */
+    private String publishBeginDate;
 
-	/**
-	 * 发布结束时间 格式："yyyy-MM-dd";
-	 */
-	private String publishEndDate;
+    /**
+     * 发布结束时间 格式："yyyy-MM-dd";
+     */
+    private String publishEndDate;
 
-	/**
-	 * 有效期开始时间 格式："yyyy-MM-dd";
-	 */
-	private String validBeginDate;
+    /**
+     * 有效期开始时间 格式："yyyy-MM-dd";
+     */
+    private String validBeginDate;
 
-	/**
-	 * 有效期结束时间 格式："yyyy-MM-dd";
-	 */
-	private String validEndDate;
+    /**
+     * 有效期结束时间 格式："yyyy-MM-dd";
+     */
+    private String validEndDate;
 
-	/**
-	 * 使用限制
-	 */
-	private String useRestriction;
+    /**
+     * 使用限制
+     */
+    private String useRestriction;
 
-	/**
-	 * 使用说明
-	 */
-	private String useDescription;
+    /**
+     * 使用说明
+     */
+    private String useDescription;
 
-	/**
-	 * 详情图url列表(0-4)张
-	 */
-	private List<String> detailPicUrls;
+    /**
+     * 详情图url列表(0-4)张
+     */
+    private List<String> detailPicUrls;
 
-	/**
-	 * 关联店铺集合 店铺id串
-	 */
-	private String shopId;
+    /**
+     * 关联店铺集合 店铺id串
+     */
+    private String shopId;
 
-	/**
-	 * 每日限量发行张数
-	 */
-	private Integer limitPublishCount;
+    /**
+     * 每日限量发行张数
+     */
+    private Integer limitPublishCount;
 
-	/**
-	 * 每人每日限用张数
-	 */
-	private Integer limitUseCount;
-	
-	/**
-	 * [随时退,过期退,免预约”,”不可退”]  如对应[1,0,0,0]，是集合类型 ,0否 1是
-	 */
-	private List<Integer> afterSaleService;
+    /**
+     * 每人每日限用张数
+     */
+    private Integer limitUseCount;
 
-	/**
-	 * 创建人
-	 */
-	private String createUser;
+    /**
+     * [随时退,过期退,免预约”,”不可退”]  如对应[1,0,0,0]，是集合类型 ,0否 1是
+     */
+    private List<Integer> afterSaleService;
 
-	public String getTitle() {
-		return title;
-	}
+    /**
+     * 活动id
+     */
+    private Integer activityId;
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    /**
+     * 创建人
+     */
+    private String createUser;
 
-	public Integer getTotalCount() {
-		return totalCount;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setTotalCount(Integer totalCount) {
-		this.totalCount = totalCount;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public Integer getLimitCount() {
-		return limitCount;
-	}
+    public Integer getTotalCount() {
+        return totalCount;
+    }
 
-	public void setLimitCount(Integer limitCount) {
-		this.limitCount = limitCount;
-	}
+    public void setTotalCount(Integer totalCount) {
+        this.totalCount = totalCount;
+    }
 
-	public Double getOriginalPrice() {
-		return originalPrice;
-	}
+    public Integer getLimitCount() {
+        return limitCount;
+    }
 
-	public void setOriginalPrice(Double originalPrice) {
-		this.originalPrice = originalPrice;
-	}
+    public void setLimitCount(Integer limitCount) {
+        this.limitCount = limitCount;
+    }
 
-	public Double getCurrentPrice() {
-		return currentPrice;
-	}
+    public Double getOriginalPrice() {
+        return originalPrice;
+    }
 
-	public void setCurrentPrice(Double currentPrice) {
-		this.currentPrice = currentPrice;
-	}
+    public void setOriginalPrice(Double originalPrice) {
+        this.originalPrice = originalPrice;
+    }
 
-	public String getPublishBeginDate() {
-		return publishBeginDate;
-	}
+    public Double getCurrentPrice() {
+        return currentPrice;
+    }
 
-	public void setPublishBeginDate(String publishBeginDate) {
-		this.publishBeginDate = publishBeginDate;
-	}
+    public void setCurrentPrice(Double currentPrice) {
+        this.currentPrice = currentPrice;
+    }
 
-	public String getPublishEndDate() {
-		return publishEndDate;
-	}
+    public String getPublishBeginDate() {
+        return publishBeginDate;
+    }
 
-	public void setPublishEndDate(String publishEndDate) {
-		this.publishEndDate = publishEndDate;
-	}
+    public void setPublishBeginDate(String publishBeginDate) {
+        this.publishBeginDate = publishBeginDate;
+    }
 
-	public String getValidBeginDate() {
-		return validBeginDate;
-	}
+    public String getPublishEndDate() {
+        return publishEndDate;
+    }
 
-	public void setValidBeginDate(String validBeginDate) {
-		this.validBeginDate = validBeginDate;
-	}
+    public void setPublishEndDate(String publishEndDate) {
+        this.publishEndDate = publishEndDate;
+    }
 
-	public String getValidEndDate() {
-		return validEndDate;
-	}
+    public String getValidBeginDate() {
+        return validBeginDate;
+    }
 
-	public void setValidEndDate(String validEndDate) {
-		this.validEndDate = validEndDate;
-	}
+    public void setValidBeginDate(String validBeginDate) {
+        this.validBeginDate = validBeginDate;
+    }
 
-	public String getUseRestriction() {
-		return useRestriction;
-	}
+    public String getValidEndDate() {
+        return validEndDate;
+    }
 
-	public void setUseRestriction(String useRestriction) {
-		this.useRestriction = useRestriction;
-	}
+    public void setValidEndDate(String validEndDate) {
+        this.validEndDate = validEndDate;
+    }
 
-	public String getUseDescription() {
-		return useDescription;
-	}
+    public String getUseRestriction() {
+        return useRestriction;
+    }
 
-	public void setUseDescription(String useDescription) {
-		this.useDescription = useDescription;
-	}
+    public void setUseRestriction(String useRestriction) {
+        this.useRestriction = useRestriction;
+    }
 
-	public List<String> getDetailPicUrls() {
-		return detailPicUrls;
-	}
+    public String getUseDescription() {
+        return useDescription;
+    }
 
-	public void setDetailPicUrls(List<String> detailPicUrls) {
-		this.detailPicUrls = detailPicUrls;
-	}
+    public void setUseDescription(String useDescription) {
+        this.useDescription = useDescription;
+    }
 
-	public String getShopId() {
-		return shopId;
-	}
+    public List<String> getDetailPicUrls() {
+        return detailPicUrls;
+    }
 
-	public void setShopId(String shopId) {
-		this.shopId = shopId;
-	}
+    public void setDetailPicUrls(List<String> detailPicUrls) {
+        this.detailPicUrls = detailPicUrls;
+    }
 
-	public Integer getLimitPublishCount() {
-		return limitPublishCount;
-	}
+    public String getShopId() {
+        return shopId;
+    }
 
-	public void setLimitPublishCount(Integer limitPublishCount) {
-		this.limitPublishCount = limitPublishCount;
-	}
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
+    }
 
-	public Integer getLimitUseCount() {
-		return limitUseCount;
-	}
+    public Integer getLimitPublishCount() {
+        return limitPublishCount;
+    }
 
-	public void setLimitUseCount(Integer limitUseCount) {
-		this.limitUseCount = limitUseCount;
-	}
+    public void setLimitPublishCount(Integer limitPublishCount) {
+        this.limitPublishCount = limitPublishCount;
+    }
 
-	public List<Integer> getAfterSaleService() {
-		return afterSaleService;
-	}
+    public Integer getLimitUseCount() {
+        return limitUseCount;
+    }
 
-	public void setAfterSaleService(List<Integer> afterSaleService) {
-		this.afterSaleService = afterSaleService;
-	}
+    public void setLimitUseCount(Integer limitUseCount) {
+        this.limitUseCount = limitUseCount;
+    }
 
-	public String getCreateUser() {
-		return createUser;
-	}
+    public List<Integer> getAfterSaleService() {
+        return afterSaleService;
+    }
 
-	public void setCreateUser(String createUser) {
-		this.createUser = createUser;
-	}
+    public void setAfterSaleService(List<Integer> afterSaleService) {
+        this.afterSaleService = afterSaleService;
+    }
 
-	@Override
-	public String toString() {
-		return new ToStringBuilder(this)
-				.append("title", title)
-				.append("totalCount", totalCount)
-				.append("limitCount", limitCount)
-				.append("originalPrice", originalPrice)
-				.append("currentPrice", currentPrice)
-				.append("publishBeginDate", publishBeginDate)
-				.append("publishEndDate", publishEndDate)
-				.append("validBeginDate", validBeginDate)
-				.append("validEndDate", validEndDate)
-				.append("useRestriction", useRestriction)
-				.append("useDescription", useDescription)
-				.append("detailPicUrls", detailPicUrls)
-				.append("shopId", shopId)
-				.append("limitPublishCount", limitPublishCount)
-				.append("limitUseCount", limitUseCount)
-				.append("afterSaleService", afterSaleService)
-				.append("createUser", createUser)
-				.toString();
-	}
+    public String getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
+    }
+
+    public Integer getActivityId() {
+        return activityId;
+    }
+
+    public void setActivityId(Integer activityId) {
+        this.activityId = activityId;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).append("title", title).append("totalCount", totalCount).append("limitCount", limitCount).append("activityId", activityId).append("originalPrice", originalPrice).append("currentPrice", currentPrice).append("publishBeginDate", publishBeginDate).append("publishEndDate", publishEndDate).append("validBeginDate", validBeginDate).append("validEndDate", validEndDate).append("useRestriction", useRestriction).append("useDescription", useDescription).append("detailPicUrls", detailPicUrls).append("shopId", shopId).append("limitPublishCount", limitPublishCount).append("limitUseCount", limitUseCount).append("afterSaleService", afterSaleService).append("createUser", createUser).toString();
+    }
 }
