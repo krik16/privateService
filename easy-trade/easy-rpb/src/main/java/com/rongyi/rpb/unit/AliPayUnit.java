@@ -65,7 +65,8 @@ public class AliPayUnit {
         } catch (AliPayException e) {
             throw e;
         } catch (Exception e) {
-            LOGGER.error(e.getMessage());
+            LOGGER.error("获取支付宝签名失败,e.getMessage={}",e.getMessage(),e);
+            e.printStackTrace();
             throw new AliPayException(ConstantEnum.EXCEPTION_ALI_PAY_SIGN_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_ALI_PAY_SIGN_FAIL.getValueStr());
         }
         return resultMap;
@@ -133,7 +134,8 @@ public class AliPayUnit {
         } catch (AliPayException e) {
             throw e;
         } catch (Exception e) {
-            LOGGER.error("order query fail. status={},exception={}", status, e.getMessage());
+            LOGGER.error("查询支付宝订单状态失败,e.getMessage={}",e.getMessage(),e);
+            e.printStackTrace();
             throw new AliPayException(ConstantEnum.EXCEPTION_ALI_QUERY_ORDER.getCodeStr(), ConstantEnum.EXCEPTION_ALI_QUERY_ORDER.getValueStr());
         }
         return null;
@@ -166,6 +168,7 @@ public class AliPayUnit {
                 }
             }
         } catch (Exception e) {
+            LOGGER.error("支付宝订单查询结果数据,e.getMessage={}",e.getMessage(),e);
             e.printStackTrace();
         }
         return queryOrderParamVO;
@@ -195,7 +198,8 @@ public class AliPayUnit {
         } catch (AliPayException e) {
             throw e;
         } catch (Exception e) {
-            LOGGER.error("order query fail. status={},exception={}", status, e.getMessage());
+            LOGGER.error("查询支付宝退款状态,e.getMessage={},status={}",e.getMessage(),status,e);
+            e.printStackTrace();
             throw new AliPayException(ConstantEnum.EXCEPTION_ALI_QUERY_ORDER.getCodeStr(), ConstantEnum.EXCEPTION_ALI_QUERY_ORDER.getValueStr());
         }
         return null;
