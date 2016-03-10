@@ -20,7 +20,7 @@ public class ConfigVO implements Serializable {
 	// 商城名称
 	private String mallName = "";
 	// 商城等级
-	private String mallLevel = "";
+	private String mall_level = "";
 	// 广告位置
 	private int positionId = 0;
 	// 广告位置
@@ -90,16 +90,16 @@ public class ConfigVO implements Serializable {
 		this.mallName = mallName;
 	}
 	/**
-	 * @return the mallLevel
+	 * @return the mall_level
 	 */
-	public String getMallLevel() {
-		return mallLevel;
+	public String getMall_level() {
+		return mall_level;
 	}
 	/**
-	 * @param mallLevel the mallLevel to set
+	 * @param mall_level the mall_level to set
 	 */
-	public void setMallLevel(String mallLevel) {
-		this.mallLevel = mallLevel;
+	public void setMall_level(String mall_level) {
+		this.mall_level = mall_level;
 	}
 	/**
 	 * @return the positionId
@@ -343,16 +343,16 @@ public class ConfigVO implements Serializable {
 	}
 	/** 
 	* @Title: toString 
-	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @Description: toString重写
 	* @param @return    设定文件 
 	* @author shaozhou
-	* @date 2016年3月1日 下午5:05:36
+	* @date 2016年3月10日 下午6:40:19
 	* @throws 
 	*/
 	@Override
 	public String toString() {
-		return "ConfigVO [configId=" + configId + ", mallMId=" + mallMId + ", mallName=" + mallName + ", mallLevel="
-				+ mallLevel + ", positionId=" + positionId + ", positionName=" + positionName + ", cityMId=" + cityMId
+		return "ConfigVO [configId=" + configId + ", mallMId=" + mallMId + ", mallName=" + mallName + ", mall_level="
+				+ mall_level + ", positionId=" + positionId + ", positionName=" + positionName + ", cityMId=" + cityMId
 				+ ", cityName=" + cityName + ", cityLevel=" + cityLevel + ", areaId=" + areaId + ", areaName="
 				+ areaName + ", countTotal=" + countTotal + ", countRY=" + countRY + ", countMall=" + countMall
 				+ ", statusId=" + statusId + ", statusName=" + statusName + ", create_int=" + create_int
