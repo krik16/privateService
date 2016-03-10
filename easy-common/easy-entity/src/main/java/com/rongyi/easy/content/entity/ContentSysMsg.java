@@ -46,11 +46,16 @@ public class ContentSysMsg implements Serializable{
     /** 消息内容 */
     private String msgContent;
 
-    /** 推送对象 0 全部 1卖家 2买家 3指定用户 */
+    /** 推送对象 0 全部 1卖家 2买家 3指定用户 4指定商场 5指定店铺*/
     private Integer msgType;
 
+    /*相关ID 用户ID，摩店ID，商城ID*/
+    private String objId;
 
-    private String userId;//用户ID
+    /**查看类型 -1所有可看，0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购，6买手'**/
+    private Integer roleType;
+
+
 
     public Integer getId() {
         return id;
@@ -156,11 +161,19 @@ public class ContentSysMsg implements Serializable{
         this.msgType = msgType;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getObjId() {
+        return objId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setObjId(String objId) {
+        this.objId = objId;
+    }
+
+    public Integer getRoleType() {
+        return roleType;
+    }
+
+    public void setRoleType(Integer roleType) {
+        this.roleType = roleType;
     }
 }
