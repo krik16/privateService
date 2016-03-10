@@ -92,6 +92,7 @@ public interface CouponConstants {
         Integer VOUCHER = 0;
         Integer REBATE = 1;
         Integer REDENVELOPE = 2;
+        Integer ACTIVITY = 3;
     }
 
 
