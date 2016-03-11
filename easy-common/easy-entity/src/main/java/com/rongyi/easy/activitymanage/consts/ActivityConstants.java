@@ -14,8 +14,34 @@ public interface ActivityConstants {
         Integer CHECK_SUCCESS = 2;
     }
 
+    /**
+     * 活动状态
+     */
+    interface ActivityStatus {
+        int NO_CHECK = 0; //待审核
+        int CHECK_FAILURE = 1;//审核没通过
+        int CHECK_SUCCESS = 2;//审核通过
+        int OFFLINE = 3;//下线
+    }
 
-
+    /**
+     * 摩店活动状态
+     */
+    interface MerchantStatusCode {
+         int EROLLING = 1;//报名进行中
+        int EROLLED = 2;//已经报名
+        int EROLLEND = 3;//报名已截至
+        int ACTIVITYEND = 4;//活动已结束
+    }
+    /**
+     * 摩店活动状态对应的名称
+     */
+    interface MerchantStatusCodeName{
+       String EROLLINGNAME = "报名进行中";
+        String EROLLEDNAME = "已报名";//已经报名
+        String EROLLENDNAME = "报名已截止";//报名已截至
+        String ACTIVITYENDNAME = "活动已结束";//活动已结束
+    }
     /**
      * 商品审核状态
      */

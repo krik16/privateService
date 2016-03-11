@@ -11,9 +11,18 @@ public class BaseServiceImpl implements BaseService {
   @Autowired(required = false)
   @Qualifier(value = "baseDao")
   private BaseDao baseDao;
+  
+  @Autowired(required = false)
+  @Qualifier(value = "baseDaoBase")
+  private BaseDao baseDaoBase;
 
   @Override
   public BaseDao getBaseDao() {
     return this.baseDao;
+  }
+
+  @Override
+  public BaseDao getBaseDaoBase() {
+	 return this.baseDaoBase;
   }
 }
