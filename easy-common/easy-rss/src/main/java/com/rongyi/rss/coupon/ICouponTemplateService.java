@@ -1,8 +1,9 @@
 package com.rongyi.rss.coupon;
 
-import com.rongyi.core.bean.ResponseResult;
-
 import java.util.Map;
+
+import com.rongyi.core.bean.ResponseResult;
+import com.rongyi.core.bean.ResponseVO;
 
 public interface ICouponTemplateService {
     /**
@@ -57,5 +58,5 @@ public interface ICouponTemplateService {
      * @return 正常返回两条数据 第一条使用限制  第二条使用方式 。如果不存在默认使用说明或者使用显示，则数据返回空，或者1条数据
      * @author yuanbo
      */
-    public ResponseResult getDefaultTemlateList(String shopId);
+    public ResponseVO getDefaultTemlateList(String shopId);
 }

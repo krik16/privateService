@@ -6,15 +6,17 @@ import com.rongyi.easy.rmmm.entity.RmmmUserInfoEntity;
 import com.rongyi.easy.rmmm.param.system.SystemMsgParam;
 import com.rongyi.easy.rmmm.vo.system.SystemMsgListVo;
 
+import java.util.List;
+
 public interface ISystemMsgService {
 	
 	/**
      * 返回卖家系统消息
-     * @param userId
+     * @param user
      * @return
      * @throws Exception
      */
-    public SystemMsgListVo findsellerMsgList(SystemMsgParam param,Integer userId) throws Exception;
+    public SystemMsgListVo findsellerMsgList(SystemMsgParam param,RmmmUserInfoEntity user) throws Exception;
     
     /**
      * 返回买家系统消息
@@ -76,9 +78,9 @@ public interface ISystemMsgService {
 
     /**
      * 保存推送消息
-     * @param systemMsgDto 推送消息内容
+     * @param systemMsgDtoList 推送消息内容
      * @throws MallShopException
      */
-    public void savePushMsg(SystemMsgDto systemMsgDto)throws MallShopException;
+    public void savePushMsg(List<SystemMsgDto> systemMsgDtoList)throws MallShopException;
 
 }

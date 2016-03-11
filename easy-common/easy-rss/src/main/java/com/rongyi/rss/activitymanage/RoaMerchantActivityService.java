@@ -3,6 +3,7 @@ package com.rongyi.rss.activitymanage;
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.activitymanage.vo.ActivityInfoVO;
 import com.rongyi.easy.activitymanage.vo.RegisterGoodsVO;
+import com.rongyi.easy.merchantactivity.param.SearchMerchActivityListParam;
 
 import java.util.List;
 
@@ -89,7 +90,7 @@ public interface RoaMerchantActivityService {
      * @param pageSize
      *            每页数
      */
-    public List<ActivityInfoVO> list(String shopId, int currentPage, int pageSize);
+    public ResponseVO list(SearchMerchActivityListParam searchMerchActivityListParam);
 
     /**
      * 活动详情
