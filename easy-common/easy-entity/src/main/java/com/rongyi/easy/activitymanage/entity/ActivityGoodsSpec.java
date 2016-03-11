@@ -1,7 +1,5 @@
 package com.rongyi.easy.activitymanage.entity;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -9,7 +7,15 @@ import java.util.Date;
  * 活动商品规格
  */
 public class ActivityGoodsSpec implements Serializable {
-    private Integer id;
+    public Integer getAppendCount() {
+		return appendCount;
+	}
+
+	public void setAppendCount(Integer appendCount) {
+		this.appendCount = appendCount;
+	}
+
+	private Integer id;
 
     /**
      * 活动商品关联表id
@@ -50,6 +56,11 @@ public class ActivityGoodsSpec implements Serializable {
      * 版本号
      */
     private Integer version;
+
+    /**
+     * 追加数
+     */
+    private Integer appendCount;
 
     public Integer getId() {
         return id;
@@ -124,17 +135,10 @@ public class ActivityGoodsSpec implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", id)
-                .append("activityGoodsId", activityGoodsId)
-                .append("specId", specId)
-                .append("joinCount", joinCount)
-                .append("stockCount", stockCount)
-                .append("activityPrice", activityPrice)
-                .append("createAt", createAt)
-                .append("updateAt", updateAt)
-                .append("version", version)
-                .toString();
-    }
+	public String toString() {
+		return "ActivityGoodsSpec [id=" + id + ", activityGoodsId=" + activityGoodsId + ", specId=" + specId
+				+ ", joinCount=" + joinCount + ", stockCount=" + stockCount + ", activityPrice=" + activityPrice
+				+ ", createAt=" + createAt + ", updateAt=" + updateAt + ", version=" + version + ", count=" + count
+				+ "]";
+	}
 }
