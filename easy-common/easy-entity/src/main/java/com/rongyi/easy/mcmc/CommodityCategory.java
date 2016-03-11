@@ -82,16 +82,8 @@ public class CommodityCategory  implements java.io.Serializable{
 
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this)
-				.append("id", id)
-				.append("name", name)
-				.append("logoUrl", logoUrl)
-				.append("createAt", createAt)
-				.append("parentids", parentids)
-				.append("parentid", parentid)
-				.append("type", type)
-				.append("columnIds", columnIds)
-				.append("commodityCount", commodityCount)
-				.toString();
+		return "CommodityCategory [id=" + id + ", name=" + name + ", logoUrl=" + logoUrl + ", createAt=" + createAt
+				+ ", parentids=" + parentids + ", parentid=" + parentid + ", type=" + type + ", columnIds=" + columnIds
+				+ ", commodityCount=" + commodityCount + "]";
 	}
 }
