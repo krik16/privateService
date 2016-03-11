@@ -138,7 +138,7 @@ public class ActivityGoodsSpec implements Serializable {
 	public String toString() {
 		return "ActivityGoodsSpec [id=" + id + ", activityGoodsId=" + activityGoodsId + ", specId=" + specId
 				+ ", joinCount=" + joinCount + ", stockCount=" + stockCount + ", activityPrice=" + activityPrice
-				+ ", createAt=" + createAt + ", updateAt=" + updateAt + ", version=" + version + ", count=" + count
-				+ "]";
+				+ ", createAt=" + createAt + ", updateAt=" + updateAt + ", version=" + version + ", appendCount="
+				+ appendCount + "]";
 	}
 }
