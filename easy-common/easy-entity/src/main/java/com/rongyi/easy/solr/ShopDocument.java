@@ -133,7 +133,8 @@ public class ShopDocument implements Serializable {
 		category_ids=new ArrayList<String>();
 		if(CollectionUtils.isNotEmpty(shop.getCategory_ids())){
 			for(ObjectId categoryId:shop.getCategory_ids()){
-				category_ids.add(categoryId.toString());
+				if(categoryId!=null)
+					category_ids.add(categoryId.toString());
 			}
 		}
 		if(StringUtils.isNotBlank(shop.getTags())){
