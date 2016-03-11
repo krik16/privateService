@@ -79,6 +79,12 @@ public class CommissionConfig implements Serializable {
      */
     private Date createAt;
 
+    private String createBy;
+
+    private Date updateAt;
+
+    private String updateBy;
+
     /**
      * 标记删除(0:正常，1:删除，默认0)
      */
@@ -210,5 +216,29 @@ public class CommissionConfig implements Serializable {
 
     public void setIsDelete(Byte isDelete) {
         this.isDelete = isDelete;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
+
+    public Date getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
     }
 }
