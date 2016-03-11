@@ -1,21 +1,20 @@
 package com.rongyi.rss.activitymanage;
 
 import com.rongyi.core.bean.ResponseVO;
-import com.rongyi.easy.activitymanage.vo.ActivityInfoVO;
 import com.rongyi.easy.activitymanage.vo.RegisterGoodsVO;
 import com.rongyi.easy.merchantactivity.param.SearchMerchActivityListParam;
+import com.rongyi.easy.merchantactivity.vo.MerchantEnrollDetailVO;
 
 import java.util.List;
 
 /**
  * create by com.rongyi.rss.activitymanage ideaworkspace :author lijing
- *  摩店后台报名 活动接口
  * User:lijing
- * DATE : 2016/3/10
- * TIME : 13:59
+ * DATE : 2016/3/11
+ * TIME : 11:16
  * ideaworkspace.
  */
-public interface RoaMerchantActivityService {
+public interface ShopCartMerchantActivityService {
     /**
      * 活动报名意愿
      *
