@@ -84,6 +84,7 @@ public class CommissionConfigControllerV2 extends BaseControllerV2{
                 redisService.expire(ruleCode.substring(0, 9), 60 * 60 * 48);// 两天后失效
             }
             commissionConfig.setRuleCode(ruleCode);
+            commissionConfig.setCreateBy(getUserName(request));
             commissionConfigService.insert(commissionConfig);
             return ResponseData.success();
         }catch (PermissionException e){
@@ -103,7 +104,7 @@ public class CommissionConfigControllerV2 extends BaseControllerV2{
         LOGGER.info("佣金规则审核,map={}", map);
         try {
             permissionCheck(request, "FNC_RULELIST_VFY");
-            updateStatus(map);
+            updateStatus(map,getUserName(request));
             return ResponseData.success();
         } catch (PermissionException e){
             LOGGER.error(e.getMessage());
@@ -122,7 +123,7 @@ public class CommissionConfigControllerV2 extends BaseControllerV2{
         LOGGER.info("佣金规则启用/停用,map={}", map);
         try {
             permissionCheck(request, "FNC_RULELIST_VFY");
-            updateStatus(map);
+            updateStatus(map,getUserName(request));
             return ResponseData.success();
         }catch (PermissionException e){
             LOGGER.error(e.getMessage());
@@ -156,12 +157,14 @@ public class CommissionConfigControllerV2 extends BaseControllerV2{
     }
 
 
-    private void updateStatus(Map<String, Object> map) {
+    private void updateStatus(Map<String, Object> map,String userName) {
         CommissionConfig commissionConfig = commissionConfigService.selectById(Integer.valueOf(map.get("id").toString()));
         commissionConfig.setStatus(Byte.valueOf(map.get("status").toString()));
         //TODO 此版本不考虑时间条件，置默认值
         commissionConfig.setEffectStartTime(null);
         commissionConfig.setEffectEndTime(null);
+        commissionConfig.setUpdateAt(DateUtil.getCurrDateTime());
+        commissionConfig.setUpdateBy(userName);
         commissionConfigService.update(commissionConfig);
     }
 
