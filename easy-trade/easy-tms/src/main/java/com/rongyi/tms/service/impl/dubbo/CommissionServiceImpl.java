@@ -72,7 +72,7 @@ public class CommissionServiceImpl implements CommissionService {
                 params.put("pageSize", Constant.PAGE.PAGESIZE);
             }
             int currentPage = params.containsKey("currentPage") ? Integer.valueOf(params.get("currentPage").toString()) : 1;
-            params.put("startRecord", (currentPage - 1) * (int) params.get("pageSize"));
+            params.put("startRecord", (currentPage - 1) *  Integer.valueOf(params.get("pageSize").toString()));
 
             if (params.get("getTimeRange") != null) {
                 if (params.get("getTimeRange") == Constants.TMSTimeRangeType.DAY) {
@@ -85,7 +85,7 @@ public class CommissionServiceImpl implements CommissionService {
             }
 
             if (params.containsKey("status")) {
-                List<Integer> statusList = new ArrayList<Integer>();
+                List<Integer> statusList = new ArrayList<>();
 
                 if (params.get("status") == Constants.DrawApplyStatus.SEND) {
                     statusList.add(ConstantEnum.COMMISSION_STATUS_6.getValueInt());
@@ -138,11 +138,11 @@ public class CommissionServiceImpl implements CommissionService {
             if (salesCommissionVO != null) {
                 Integer commissionId = salesCommissionVO.getId();
                 Integer status = salesCommissionVO.getStatus().intValue();
-                if (status == ConstantEnum.COMMISSION_STATUS_6.getValueInt()) {
+                if (status == ConstantEnum.COMMISSION_STATUS_6.getValueInt().intValue()) {
                     SalesCommissionAuditLog auditLog = salesCommissionAuditLogService.selectLatestLogWithCommissionId(commissionId);
                     salesCommissionVO.setPayAt(auditLog.getCreateAt());
                     salesCommissionVO.setAuditAt(auditLog.getCreateAt());
-                } else if (status < 0 || status == ConstantEnum.COMMISSION_STATUS_3.getValueInt()) {
+                } else if (status < 0 || status == ConstantEnum.COMMISSION_STATUS_3.getValueInt().intValue()) {
                     SalesCommissionAuditLog auditLog = salesCommissionAuditLogService.selectLatestLogWithCommissionId(commissionId);
                     salesCommissionVO.setAuditAt(auditLog.getCreateAt());
                 }
@@ -168,7 +168,7 @@ public class CommissionServiceImpl implements CommissionService {
 
         boolean result = salesCommissionService.validateIsAllow(buyerInfoPojo.getUserId(), commissionVO.getRegisterId(), commissionVO.getType());
         if (!result) {
-            LOGGER.info("此笔返佣不是首笔返佣,不增加佣金,result={}", result);
+            LOGGER.info("此笔返佣不是首笔返佣,不增加佣金,result={}", false);
             return ResponseData.failure(ConstantEnum.COMMISSION_ADD_NOT_FIRST.getCodeInt(), ConstantEnum.COMMISSION_ADD_NOT_FIRST.getValueStr());
         }
         //实体字段定义与本地定义不相同
