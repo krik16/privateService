@@ -25,7 +25,7 @@
   <sql id="Base_Column_List" >
     id, rule_code, effect_start_time, effect_end_time, `type`, comm_threshold, comm_amount,
     invite_type, register_type, limit_type, limit_total, cust_verify, fina_verify, `status`,
-    create_at,create_by,upadte_at,update_by,is_delete
+    create_at,create_by,update_at,update_by,is_delete
   </sql>
 
   <sql id="list_where_clause">
@@ -55,7 +55,7 @@
       `type`, comm_threshold, comm_amount,
       invite_type, register_type, limit_type,
       limit_total, cust_verify, fina_verify,
-      `status`, create_at,create_by,upadte_at,update_by, is_delete
+      `status`, create_at,create_by,update_at,update_by, is_delete
       )
     values (#{ruleCode,jdbcType=VARCHAR}, #{effectStartTime,jdbcType=TIMESTAMP}, #{effectEndTime,jdbcType=TIMESTAMP},
       #{type,jdbcType=TINYINT}, #{commThreshold,jdbcType=INTEGER}, #{commAmount,jdbcType=INTEGER},
@@ -86,7 +86,7 @@
       `status`,
       create_at,
       create_by,
-      upadte_at,
+      update_at,
       update_by,
       <if test="isDelete != null">
         is_delete,
