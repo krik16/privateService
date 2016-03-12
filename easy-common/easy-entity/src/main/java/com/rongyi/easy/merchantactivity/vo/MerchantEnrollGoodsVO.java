@@ -1,13 +1,12 @@
-package com.rongyi.easy.activitymanage.vo;
+package com.rongyi.easy.merchantactivity.vo;
 
 /**
- * 类说明
+ * 报名卡劵实体
  * 
  * @author wangjh
  * @date 2016年3月10日
  */
-public class RegisterGoodsVO {
-
+public class MerchantEnrollGoodsVO {
 	/**
 	 * 开始时间
 	 * 
@@ -189,10 +188,19 @@ public class RegisterGoodsVO {
 		this.activityStatus = activityStatus;
 	}
 
+	public int getActivityId() {
+		return activityId;
+	}
+
+	public void setActivityId(int activityId) {
+		this.activityId = activityId;
+	}
+
 	/**
 	 * ID
 	 */
 	private int activityGoodsId = 0;
+	private int activityId = 0;
 	private String goodsId = "";
 	private String title = "";
 	private String picUrl = "";
