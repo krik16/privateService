@@ -4,6 +4,7 @@ import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.activitymanage.vo.ActivityInfoVO;
 import com.rongyi.easy.activitymanage.vo.RegisterGoodsVO;
 import com.rongyi.easy.merchantactivity.param.SearchMerchActivityListParam;
+import com.rongyi.easy.merchantactivity.vo.MerchantEnrollDetailVO;
 
 import java.util.List;
 
