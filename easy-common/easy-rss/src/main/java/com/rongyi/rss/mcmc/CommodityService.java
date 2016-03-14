@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.param.CouponCommodityParam;
+import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.mcmc.*;
 import com.rongyi.easy.mcmc.param.SaleParam;
 
@@ -129,5 +130,12 @@ public interface CommodityService {
     public List<Commodity> getCommodityByIds(List<ObjectId> ids);
 
     public List<CommodityBuyerVO> getCommodityBySPU(String commodityId, String spu);
+
+//    /**
+//	 * 获取有商品的分类列表
+//	 * @param categoryParam	参数对象
+//	 * @return
+//	 */
+//	public ResponseResult getBuyerCommodityCategoryHasCommodity(BuyerCategoryParam categoryParam);
 
 }
