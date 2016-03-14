@@ -68,6 +68,6 @@ public interface ROAUserAccountService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<String> findImId(List<Long> shopIds) throws Exception;
+	public List<String> findImId(List<String> shopIds) throws Exception;
 
 }
