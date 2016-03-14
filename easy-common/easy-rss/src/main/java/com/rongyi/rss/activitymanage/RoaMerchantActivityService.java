@@ -1,9 +1,9 @@
 package com.rongyi.rss.activitymanage;
 
 import com.rongyi.core.bean.ResponseVO;
-import com.rongyi.easy.activitymanage.vo.ActivityInfoVO;
 import com.rongyi.easy.merchantactivity.param.SearchMerchActivityListParam;
 import com.rongyi.easy.merchantactivity.vo.MerchantEnrollDetailVO;
+import com.rongyi.easy.merchantactivity.vo.MerchantEnrollGoodsVO;
 
 import java.util.List;
 
@@ -28,9 +28,9 @@ public interface RoaMerchantActivityService {
      *
      * @return 1：成功；0：失败
      */
-    public Boolean registerWill(int activityId, String shopId, String userId,String userName);
+    public Boolean enrollWill(int activityId, String shopId, String userId,String userName);
 
-   /* *//**
+    /**
      * 活动报名
      *
      * @param activityId
@@ -41,8 +41,8 @@ public interface RoaMerchantActivityService {
      *            当前用户Id
      *
      * @return true：成功；false：失败
-     *//*
-    public boolean register(int activityId, String goodsId, String shopId, String userId,String userName);*/
+     */
+    public boolean enroll(int activityId, String goodsId, String shopId, String userId,String userName);
 
     /**
      * 活动报名列表（卡劵列表）
@@ -57,28 +57,48 @@ public interface RoaMerchantActivityService {
      *            每页数
      * @return
      */
-    public ResponseVO registerList(int activityId, String shopId, int currentPage, int pageSize);
+    public ResponseVO enrollList(int activityId, String shopId, int currentPage, int pageSize);
 
-  /*  *//**
-     * 活动报名商品（优惠劵）状态
-     *//*
-    public RegisterGoodsVO getRegisterStatus(int activityGoodsId);*/
+	/**
+	 * 活动报名商品（优惠劵）状态
+	 */
+	public MerchantEnrollGoodsVO enrollInfo(int activityGoodsId);
 
- /*   *//**
-     * 取消报名（撤销报名）
+	/**
+	 * 取消报名（撤销报名）
+	 *
+	 * @param activityGoodsId
+	 *            活动商品Id
+	 * @param userId
+	 *            当前用户Id
+	 * @param userName
+	 *            当前用户名称
+	 *
+	 * @return 1：成功；0：失败
+	 */
+	public int enrollRevoke(int activityGoodsId, String userId, String userName);
+	
+	/**
+     * 活动邀请删除
      *
-     * @param activityId
-     *            活动Id
-     * @param goodsId
-     *            商品/卡劵Id
-     * @param shopId
-     *            店铺Id
+     * @param activityIds
+     *            活动Ids
      * @param userId
      *            当前用户Id
      *
      * @return 1：成功；0：失败
-     *//*
-    public int revokeRegister(int activityId, String goodsId, String shopId, String userId,String userName);*/
+     */
+    public Boolean merchantActivitDelete(List<Integer> activityIds, String shopId,String userId,String userName);
+
+	/**
+	 * 商品（优惠劵）追加库存
+	 *
+	 * @param activityGoodsId
+	 *            活动商品Id
+	 * 
+	 * @return 1：成功；0：失败
+	 */
+	public int appendStock(int activityGoodsId, int number);
 
     /**
      * 活动邀请列表）
@@ -92,33 +112,5 @@ public interface RoaMerchantActivityService {
      */
     public MerchantEnrollDetailVO searchMerchantActivityDetail(int activityId,String shopId);
 
-    /**
-     * 活动邀请删除
-     *
-     * @param activityIds
-     *            活动Ids
-     * @param userId
-     *            当前用户Id
-     *
-     * @return 1：成功；0：失败
-     */
-    public Boolean delete(List<Integer> activityIds, String shopId,String userId,String userName);
-
-/*    *//**
-     * 商品（优惠劵）追加库存
-     *
-     * @param activityId
-     *            活动Id
-     * @param goodsId
-     *            商品/卡劵Id
-     * @param shopId
-     *            店铺Id
-     * @param number
-     *            追加库存数
-     * @param userId
-     *            当前用户Id
-     *
-     * @return 1：成功；0：失败
-     *//*
-    public int appendStock(int activityId, String goodsId, String shopId, int number, int userId);*/
+    
 }
