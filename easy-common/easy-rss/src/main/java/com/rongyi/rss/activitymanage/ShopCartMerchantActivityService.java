@@ -26,7 +26,7 @@ public interface ShopCartMerchantActivityService {
      *
      * @return 1：成功；0：失败
      */
-    public Boolean registerWill(int activityId, String shopId, String userId,String userName);
+    public Boolean enrollWill(int activityId, String shopId, String userId,String userName);
 
 /*    *//**
      * 活动报名
