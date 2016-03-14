@@ -1,6 +1,7 @@
 package com.rongyi.tms.web.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +10,11 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.util.AmountConversion;
+import com.rongyi.easy.osm.vo.OrderCartFormVO;
+import com.rongyi.rss.tradecenter.osm.IOrderCartService;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,6 +50,9 @@ public class TradeDetailController extends BaseController {
 
 	@Autowired
 	IRpbService rpbService;
+
+	@Autowired
+	private IOrderCartService iOrderCartService;
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String search(ModelMap model, String currpage) {
@@ -120,14 +128,34 @@ public class TradeDetailController extends BaseController {
 	 **/
 	@RequestMapping(value = "/info", method = RequestMethod.GET)
 	public String info(ModelMap model, Integer id, String tradeNo) {
-		TradeVO tradeVO = tradeDetailService.selectById(id);
-		PaymentLogInfo paymentLogInfo = rpbService.selectByTradeNo(tradeNo);
-		if (paymentLogInfo != null)
-			tradeVO.setBuyerAccount(paymentLogInfo.getBuyer_email());
-		tradeDetailService.setIntegralAndCouponDiscount(tradeVO);
-		model.addAttribute("trade", tradeVO);
-		model.addAttribute("discountAmount", AmountConversion.fenToYuan(tradeVO.getHbDiscount() + tradeVO.getCouponDiscountInt() + tradeVO.getScore()));
-		getRongyiAccount(model, tradeVO.getPayChannel());
+		try {
+			LOGGER.info("trade detail info start");
+			TradeVO tradeVO = tradeDetailService.selectById(id);
+			PaymentLogInfo paymentLogInfo = rpbService.selectByTradeNo(tradeNo);
+			if (paymentLogInfo != null)
+                tradeVO.setBuyerAccount(paymentLogInfo.getBuyer_email());
+			tradeDetailService.setIntegralAndCouponDiscount(tradeVO);
+			double discountAmount;
+			if (tradeVO.getOrderType()==ConstantEnum.PAYMENT_ORDER_TYPE1.getCodeInt().intValue())
+				discountAmount = AmountConversion.fenToYuan(tradeVO.getHbDiscount() + tradeVO.getCouponDiscountInt() + tradeVO.getScore());
+            else {
+                Map<String, Object> paramsMap = new HashMap<>();
+                paramsMap.put("orderNo", tradeVO.getOrderNo());
+                PagingVO<OrderCartFormVO> page = iOrderCartService.searchListByMap(paramsMap);
+				List<OrderCartFormVO> dataList = page.getDataList();
+				if (CollectionUtils.isNotEmpty(dataList)){
+					discountAmount = dataList.get(0).getRebateDiscount().add(new BigDecimal(tradeVO.getCouponDiscountInt()))
+							.add(new BigDecimal(AmountConversion.fenToYuan(tradeVO.getScore()))).setScale(2, 4).doubleValue();
+				}else {
+					discountAmount = tradeVO.getCouponDiscountInt();
+				}
+            }
+			model.addAttribute("discountAmount", discountAmount);
+			model.addAttribute("trade", tradeVO);
+			getRongyiAccount(model, tradeVO.getPayChannel());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "/tradeDetail/tradeDetail_info";
 	}
 
