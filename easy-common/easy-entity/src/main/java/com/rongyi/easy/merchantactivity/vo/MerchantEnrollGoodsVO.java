@@ -116,7 +116,7 @@ public class MerchantEnrollGoodsVO {
 	/**
 	 * 审核状态
 	 * 
-	 * @return 0：待审核 1：退回修改（未通过） 2：报名成功（通过）
+	 * @return 0：待审核 1：退回修改（未通过） 2：报名成功（通过） 3：参与成功、活动结束
 	 */
 	public int getCheckStatus() {
 		return checkStatus;
@@ -126,7 +126,7 @@ public class MerchantEnrollGoodsVO {
 	 * 审核状态
 	 * 
 	 * @param checkStatus
-	 *            0：待审核 1：退回修改（未通过） 2：报名成功（通过）
+	 *            0：待审核 1：退回修改（未通过） 2：报名成功（通过） 3：参与成功、活动结束
 	 */
 	public void setCheckStatus(int checkStatus) {
 		this.checkStatus = checkStatus;
@@ -169,25 +169,6 @@ public class MerchantEnrollGoodsVO {
 		this.applyStatus = applyStatus;
 	}
 
-	/**
-	 * 活动状态
-	 * 
-	 * @return 0：未开始 1：进行中 2：已结束
-	 */
-	public int getActivityStatus() {
-		return activityStatus;
-	}
-
-	/**
-	 * 报名状态
-	 * 
-	 * @param applyStatus
-	 *            0： 1：进行中 2：已结束
-	 */
-	public void setActivityStatus(int activityStatus) {
-		this.activityStatus = activityStatus;
-	}
-
 	public int getActivityId() {
 		return activityId;
 	}
@@ -207,7 +188,6 @@ public class MerchantEnrollGoodsVO {
 	private int checkStatus = 0;
 	private String checkReason = "";
 	private int applyStatus = 0;
-	private int activityStatus = 0;
 	private String activityStartAt = "";
 	private String activityEndAt = "";
 }
