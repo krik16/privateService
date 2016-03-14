@@ -3,9 +3,10 @@ package com.rongyi.easy.solr.result;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.List;
 
-public class ShopSearchInfo implements Serializable {
+public class ShopSearchInfo implements Serializable,Comparable<ShopSearchInfo> {
 
     /**
      *
@@ -34,7 +35,7 @@ public class ShopSearchInfo implements Serializable {
     private String brandId;  // 品牌id ，摩店用
     private String appearance_pic;
     private String telephone; //商家电话
-
+    private Double dist;//距离
     public String getAppearance_pic() {
         return appearance_pic;
     }
@@ -237,5 +238,26 @@ public class ShopSearchInfo implements Serializable {
                 .append("appearance_pic", appearance_pic)
                 .append("telephone", telephone)
                 .toString();
+    }
+
+    public Double getDist() {
+        return dist;
+    }
+
+    public void setDist(Double dist) {
+        this.dist = dist;
+    }
+
+    @Override
+    public int compareTo(ShopSearchInfo o) {
+       // return Math.ceil(dist-0);
+        if(o==null||o.getDist()==null){
+            return 1;
+        }else if(this==null||this.dist==null){
+            return -1;
+        }else{
+            DecimalFormat df=new DecimalFormat("0");
+            return Integer.valueOf(df.format((dist - o.getDist()) * 1000));
+        }
     }
 }
