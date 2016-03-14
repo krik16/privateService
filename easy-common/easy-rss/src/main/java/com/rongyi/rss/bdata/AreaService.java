@@ -23,4 +23,9 @@ public interface AreaService {
 	 * @return
 	 */
 	public List<BdArea> getAreaListByParentId(Integer parentId);
+	
+	/**
+	 * 查询所有区域信息
+	 */
+	public List<BdArea> getAreaList();
 }
