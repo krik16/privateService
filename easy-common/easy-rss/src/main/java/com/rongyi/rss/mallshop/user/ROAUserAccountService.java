@@ -35,7 +35,7 @@ public interface ROAUserAccountService {
 
 	/**
 	 * 修改/添加账号信息
-	 * @param accountEntity
+	 * @param accountParam
 	 * @return
 	 * @throws MallShopException
 	 */
