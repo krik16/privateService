@@ -1,5 +1,7 @@
 package com.rongyi.easy.activitymanage.entity;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,13 +14,13 @@ public class ActivityEntryRule  implements Serializable {
 
     private String relevanceName;
 
-    private Byte relevanceType;
+    private Integer relevanceType;
 
     private String createBy;
 
     private Date createAt;
 
-    private Byte isDeleted;
+    private Boolean isDeleted;
 
     public Integer getId() {
         return id;
@@ -52,12 +54,16 @@ public class ActivityEntryRule  implements Serializable {
         this.relevanceName = relevanceName;
     }
 
-    public Byte getRelevanceType() {
+    public Integer getRelevanceType() {
         return relevanceType;
     }
 
-    public void setRelevanceType(Byte relevanceType) {
+    public void setRelevanceType(Integer relevanceType) {
         this.relevanceType = relevanceType;
+    }
+
+    public void setIsDeleted(Boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     public String getCreateBy() {
@@ -76,11 +82,17 @@ public class ActivityEntryRule  implements Serializable {
         this.createAt = createAt;
     }
 
-    public Byte getIsDeleted() {
-        return isDeleted;
-    }
-
-    public void setIsDeleted(Byte isDeleted) {
-        this.isDeleted = isDeleted;
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("activityId", activityId)
+                .append("relevanceId", relevanceId)
+                .append("relevanceName", relevanceName)
+                .append("relevanceType", relevanceType)
+                .append("createBy", createBy)
+                .append("createAt", createAt)
+                .append("isDeleted", isDeleted)
+                .toString();
     }
 }
