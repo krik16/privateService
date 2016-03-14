@@ -16,7 +16,7 @@ public class PostageTemplateParamForSearch {
 
 	private String mallName;//商城名字
 
-	private Integer currpage;//当前页0表示第一页
+	private Integer currpage;//当前页1表示第一页
 	
 	private Integer pageSize;//每页大小
 
