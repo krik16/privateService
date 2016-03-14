@@ -1,5 +1,7 @@
 package com.rongyi.easy.activitymanage.entity;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,9 +12,9 @@ public class ActivityEnroll implements Serializable {
 
     private String enrollId;
 
-    private Byte enrollType;
+    private Integer enrollType;
 
-    private Byte isReg;
+    private Integer isReg;
 
     private String createBy;
 
@@ -22,7 +24,8 @@ public class ActivityEnroll implements Serializable {
 
     private Date updateAt;
 
-    private Byte isDeleted;
+    private Boolean isDeleted;
+
 
     public Integer getId() {
         return id;
@@ -48,21 +51,6 @@ public class ActivityEnroll implements Serializable {
         this.enrollId = enrollId;
     }
 
-    public Byte getEnrollType() {
-        return enrollType;
-    }
-
-    public void setEnrollType(Byte enrollType) {
-        this.enrollType = enrollType;
-    }
-
-    public Byte getIsReg() {
-        return isReg;
-    }
-
-    public void setIsReg(Byte isReg) {
-        this.isReg = isReg;
-    }
 
     public String getCreateBy() {
         return createBy;
@@ -96,11 +84,43 @@ public class ActivityEnroll implements Serializable {
         this.updateAt = updateAt;
     }
 
-    public Byte getIsDeleted() {
+    public Integer getEnrollType() {
+        return enrollType;
+    }
+
+    public void setEnrollType(Integer enrollType) {
+        this.enrollType = enrollType;
+    }
+
+    public Integer getIsReg() {
+        return isReg;
+    }
+
+    public void setIsReg(Integer isReg) {
+        this.isReg = isReg;
+    }
+
+    public Boolean getIsDeleted() {
         return isDeleted;
     }
 
-    public void setIsDeleted(Byte isDeleted) {
+    public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("activityId", activityId)
+                .append("enrollId", enrollId)
+                .append("enrollType", enrollType)
+                .append("isReg", isReg)
+                .append("createBy", createBy)
+                .append("createAt", createAt)
+                .append("updateBy", updateBy)
+                .append("updateAt", updateAt)
+                .append("isDeleted", isDeleted)
+                .toString();
     }
 }

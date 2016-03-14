@@ -1,7 +1,10 @@
 package com.rongyi.easy.activitymanage.entity;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class ActivityCouponRule implements Serializable {
 
@@ -9,11 +12,11 @@ public class ActivityCouponRule implements Serializable {
 
     private Integer activityId;
 
-    private Byte entryLimit;
+    private Integer entryLimit;
 
-    private Byte entryLimitMallshop;
+    private Integer entryLimitMallshop;
 
-    private Byte isDeleted;
+    private Boolean isDeleted;
 
     private String createBy;
 
@@ -24,6 +27,10 @@ public class ActivityCouponRule implements Serializable {
     private Date updateAt;
 
     private String activityRule;
+    /**
+     * 规则信息表
+     */
+    private List<ActivityEntryRule> activityEntryRuleList;
 
     public Integer getId() {
         return id;
@@ -41,27 +48,12 @@ public class ActivityCouponRule implements Serializable {
         this.activityId = activityId;
     }
 
-    public Byte getEntryLimit() {
-        return entryLimit;
-    }
 
-    public void setEntryLimit(Byte entryLimit) {
-        this.entryLimit = entryLimit;
-    }
-
-    public Byte getEntryLimitMallshop() {
-        return entryLimitMallshop;
-    }
-
-    public void setEntryLimitMallshop(Byte entryLimitMallshop) {
-        this.entryLimitMallshop = entryLimitMallshop;
-    }
-
-    public Byte getIsDeleted() {
+    public Boolean getIsDeleted() {
         return isDeleted;
     }
 
-    public void setIsDeleted(Byte isDeleted) {
+    public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
@@ -103,5 +95,46 @@ public class ActivityCouponRule implements Serializable {
 
     public void setActivityRule(String activityRule) {
         this.activityRule = activityRule;
+    }
+
+    public Integer getEntryLimit() {
+        return entryLimit;
+    }
+
+    public void setEntryLimit(Integer entryLimit) {
+        this.entryLimit = entryLimit;
+    }
+
+    public Integer getEntryLimitMallshop() {
+        return entryLimitMallshop;
+    }
+
+    public void setEntryLimitMallshop(Integer entryLimitMallshop) {
+        this.entryLimitMallshop = entryLimitMallshop;
+    }
+
+    public List<ActivityEntryRule> getActivityEntryRuleList() {
+        return activityEntryRuleList;
+    }
+
+    public void setActivityEntryRuleList(List<ActivityEntryRule> activityEntryRuleList) {
+        this.activityEntryRuleList = activityEntryRuleList;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("activityId", activityId)
+                .append("entryLimit", entryLimit)
+                .append("entryLimitMallshop", entryLimitMallshop)
+                .append("isDeleted", isDeleted)
+                .append("createBy", createBy)
+                .append("createAt", createAt)
+                .append("updateBy", updateBy)
+                .append("updateAt", updateAt)
+                .append("activityRule", activityRule)
+                .append("activityEntryRuleList", activityEntryRuleList)
+                .toString();
     }
 }
