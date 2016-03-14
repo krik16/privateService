@@ -45,6 +45,7 @@
 			jdbcType="VARCHAR" />
 		<result column="score" property="score" jdbcType="INTEGER" />
 		<result column="hb_discount" property="hbDiscount" jdbcType="INTEGER" />
+		<result column="rebate_discount" property="couponDiscountInt" jdbcType="INTEGER" />
 		<result column="guide_type" property="guideType" jdbcType="INTEGER" />
 		<result column="rebate_type" property="rebateType" jdbcType="INTEGER" />
 
@@ -77,6 +78,7 @@
 		trade_order.user_phone AS coupon_buyer_account,
 		trade_order.score,
 		trade_order.hb_discount,
+		trade_order.rebate_discount,
 		CASE WHEN
 		left(ry_rpb.payment_order.order_no,1) = 4
 		THEN

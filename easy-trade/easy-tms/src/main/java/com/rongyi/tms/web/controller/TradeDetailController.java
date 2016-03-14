@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.rongyi.core.util.AmountConversion;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -125,6 +126,7 @@ public class TradeDetailController extends BaseController {
 			tradeVO.setBuyerAccount(paymentLogInfo.getBuyer_email());
 		tradeDetailService.setIntegralAndCouponDiscount(tradeVO);
 		model.addAttribute("trade", tradeVO);
+		model.addAttribute("discountAmount", AmountConversion.fenToYuan(tradeVO.getHbDiscount() + tradeVO.getCouponDiscountInt() + tradeVO.getScore()));
 		getRongyiAccount(model, tradeVO.getPayChannel());
 		return "/tradeDetail/tradeDetail_info";
 	}

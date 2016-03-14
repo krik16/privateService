@@ -68,7 +68,7 @@ body {
 						<div class="shopsData">
 							<p class="p_text">
 								<c:choose>
-									<c:when test="${trade.tradeType eq 0}">
+									<c:when test="${trade.orderType eq 0}">
 										商品订单
 									</c:when>
 									<c:otherwise>优惠券订单</c:otherwise>
@@ -131,7 +131,7 @@ body {
 					</c:choose>
 					<div class="line-heights shopsName" style="width: 20%">优惠金额:</div>
 					<div class="shopsData" style="width: 70%">
-						${trade.hbDiscount + trade.score/100 }（元）
+						${discountAmount }（元）
 					</div>
 				</div>
 					<div class="shops-main-right">
