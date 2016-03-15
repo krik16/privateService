@@ -23,6 +23,7 @@ public class AdvertEntity implements Serializable {
 	private Date create_at;//记录创建时间
 	private Integer update_by;//更新人账号ID
 	private Date update_at;//记录更新时间
+	private Integer relation_id;//广告关联配置id
 	/**
 	 * @return the id
 	 */
@@ -202,5 +203,17 @@ public class AdvertEntity implements Serializable {
 	 */
 	public void setMaterial_id(Integer material_id) {
 		this.material_id = material_id;
+	}
+	/**
+	 * @return the relation_id
+	 */
+	public Integer getRelation_id() {
+		return relation_id;
+	}
+	/**
+	 * @param relation_id the relation_id to set
+	 */
+	public void setRelation_id(Integer relation_id) {
+		this.relation_id = relation_id;
 	}
 }

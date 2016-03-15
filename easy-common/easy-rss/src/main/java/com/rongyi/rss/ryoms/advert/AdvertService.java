@@ -13,7 +13,7 @@ public interface AdvertService {
 
 	public int count(AdvertParam advertParam);
 
-	public void save(AdvertEntity entity, String mallIds);
+	public void save(AdvertEntity entity, String mallIds, String string);
 
 	public AdvertVo info(Integer id);
 	

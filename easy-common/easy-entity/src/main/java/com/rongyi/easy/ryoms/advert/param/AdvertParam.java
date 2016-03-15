@@ -22,6 +22,7 @@ public class AdvertParam implements Serializable {
 	private String agree;//审核通过1 不通过2
 	private String reason;//审核不通过原因
 	private String material_id;//关联素材id
+	private String relation_id;//广告关联配置id
 	/**
 	 * @return the groupId
 	 */
@@ -203,12 +204,24 @@ public class AdvertParam implements Serializable {
 	public void setMaterial_id(String material_id) {
 		this.material_id = material_id;
 	}
+	/**
+	 * @return the relation_id
+	 */
+	public String getRelation_id() {
+		return relation_id;
+	}
+	/**
+	 * @param relation_id the relation_id to set
+	 */
+	public void setRelation_id(String relation_id) {
+		this.relation_id = relation_id;
+	}
 	/** 
 	* @Title: toString 
 	* @Description: TODO(这里用一句话描述这个方法的作用) 
 	* @param @return    设定文件 
 	* @author shaozhou
-	* @date 2016年2月26日 下午2:51:48
+	* @date 2016年3月15日 上午10:08:13
 	* @throws 
 	*/
 	@Override
@@ -217,6 +230,6 @@ public class AdvertParam implements Serializable {
 				+ pageSize + ", startIndex=" + startIndex + ", position=" + position + ", adTime=" + adTime
 				+ ", module_type=" + module_type + ", content=" + content + ", publish_start=" + publish_start
 				+ ", publish_end=" + publish_end + ", mallIds=" + mallIds + ", agree=" + agree + ", reason=" + reason
-				+ ", material_id=" + material_id + "]";
+				+ ", material_id=" + material_id + ", relation_id=" + relation_id + "]";
 	}
 }

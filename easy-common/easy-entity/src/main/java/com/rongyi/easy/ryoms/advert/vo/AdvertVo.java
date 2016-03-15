@@ -28,6 +28,10 @@ public class AdvertVo implements Serializable {
 	private Long update_at;//记录更新时间
 	private List<Map<String,Object>> mall_List;//关联商场id集合
 	//private List<String> mall_names;//关联商场name集合
+	private Integer relation_id;
+	private String relation_name;
+	private String relation_code;
+	private String relation_url;
 	/**
 	 * @return the id
 	 */
@@ -232,12 +236,60 @@ public class AdvertVo implements Serializable {
 	public void setUpdate_by(String update_by) {
 		this.update_by = update_by;
 	}
+	/**
+	 * @return the relation_id
+	 */
+	public Integer getRelation_id() {
+		return relation_id;
+	}
+	/**
+	 * @param relation_id the relation_id to set
+	 */
+	public void setRelation_id(Integer relation_id) {
+		this.relation_id = relation_id;
+	}
+	/**
+	 * @return the relation_name
+	 */
+	public String getRelation_name() {
+		return relation_name;
+	}
+	/**
+	 * @param relation_name the relation_name to set
+	 */
+	public void setRelation_name(String relation_name) {
+		this.relation_name = relation_name;
+	}
+	/**
+	 * @return the relation_code
+	 */
+	public String getRelation_code() {
+		return relation_code;
+	}
+	/**
+	 * @param relation_code the relation_code to set
+	 */
+	public void setRelation_code(String relation_code) {
+		this.relation_code = relation_code;
+	}
+	/**
+	 * @return the relation_url
+	 */
+	public String getRelation_url() {
+		return relation_url;
+	}
+	/**
+	 * @param relation_url the relation_url to set
+	 */
+	public void setRelation_url(String relation_url) {
+		this.relation_url = relation_url;
+	}
 	/** 
 	* @Title: toString 
 	* @Description: TODO(这里用一句话描述这个方法的作用) 
 	* @param @return    设定文件 
 	* @author shaozhou
-	* @date 2016年3月1日 上午11:17:16
+	* @date 2016年3月15日 上午10:24:01
 	* @throws 
 	*/
 	@Override
@@ -247,6 +299,7 @@ public class AdvertVo implements Serializable {
 				+ ", status=" + status + ", status_detail=" + status_detail + ", publish_start=" + publish_start
 				+ ", publish_end=" + publish_end + ", group_id=" + group_id + ", create_by=" + create_by
 				+ ", create_at=" + create_at + ", update_by=" + update_by + ", update_at=" + update_at + ", mall_List="
-				+ mall_List + "]";
+				+ mall_List + ", relation_id=" + relation_id + ", relation_name=" + relation_name + ", relation_code="
+				+ relation_code + ", relation_url=" + relation_url + "]";
 	}
 }
