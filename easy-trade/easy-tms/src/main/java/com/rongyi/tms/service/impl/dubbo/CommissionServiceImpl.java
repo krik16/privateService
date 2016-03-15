@@ -87,14 +87,14 @@ public class CommissionServiceImpl implements CommissionService {
                 List<Integer> statusList = new ArrayList<>();
 
                 if (params.get("status") == Constants.DrawApplyStatus.SEND) {
-                    statusList.add(ConstantEnum.COMMISSION_STATUS_6.getValueInt());
+                    statusList.add(ConstantEnum.COMMISSION_STATUS_6.getCodeInt());
                 } else if (params.get("status") == Constants.DrawApplyStatus.PROCESSING) {
-                    statusList.add(ConstantEnum.COMMISSION_STATUS_1.getValueInt());
-                    statusList.add(ConstantEnum.COMMISSION_STATUS_2.getValueInt());
-                    statusList.add(ConstantEnum.COMMISSION_STATUS_3.getValueInt());
+                    statusList.add(ConstantEnum.COMMISSION_STATUS_1.getCodeInt());
+                    statusList.add(ConstantEnum.COMMISSION_STATUS_2.getCodeInt());
+                    statusList.add(ConstantEnum.COMMISSION_STATUS_3.getCodeInt());
                 } else if (params.get("status") == Constants.DrawApplyStatus.FAIL) {
-                    statusList.add(ConstantEnum.COMMISSION_STATUS_1_UNCHECK.getValueInt());
-                    statusList.add(ConstantEnum.COMMISSION_STATUS_2_UNCHECK.getValueInt());
+                    statusList.add(ConstantEnum.COMMISSION_STATUS_1_UNCHECK.getCodeInt());
+                    statusList.add(ConstantEnum.COMMISSION_STATUS_2_UNCHECK.getCodeInt());
                 }
 
                 if (statusList.size() > 0) {
@@ -143,11 +143,11 @@ public class CommissionServiceImpl implements CommissionService {
             if (salesCommissionVO != null) {
                 Integer commissionId = salesCommissionVO.getId();
                 Integer status = salesCommissionVO.getStatus().intValue();
-                if (status == ConstantEnum.COMMISSION_STATUS_6.getValueInt().intValue()) {
+                if (status == ConstantEnum.COMMISSION_STATUS_6.getCodeInt().intValue()) {
                     SalesCommissionAuditLog auditLog = salesCommissionAuditLogService.selectLatestLogWithCommissionId(commissionId);
                     salesCommissionVO.setPayAt(auditLog.getCreateAt());
                     salesCommissionVO.setAuditAt(auditLog.getCreateAt());
-                } else if (status < 0 || status == ConstantEnum.COMMISSION_STATUS_3.getValueInt().intValue()) {
+                } else if (status < 0 || status == ConstantEnum.COMMISSION_STATUS_3.getCodeInt().intValue()) {
                     SalesCommissionAuditLog auditLog = salesCommissionAuditLogService.selectLatestLogWithCommissionId(commissionId);
                     salesCommissionVO.setAuditAt(auditLog.getCreateAt());
                 }
