@@ -1,13 +1,14 @@
 package com.rongyi.tms.service.impl.dubbo;
 
 import com.rongyi.core.bean.ResponseData;
-import com.rongyi.core.constant.Constants;
 import com.rongyi.core.common.util.DateUtil;
+import com.rongyi.core.constant.Constants;
 import com.rongyi.easy.malllife.pojo.InvitationUserInfoPojo;
 import com.rongyi.easy.tms.entity.SalesCommissionAuditLog;
 import com.rongyi.easy.tms.entity.v2.CommissionConfig;
 import com.rongyi.easy.tms.entity.v2.SalesCommission;
 import com.rongyi.easy.tms.vo.v2.CommissionVO;
+import com.rongyi.easy.tms.vo.v2.SalesCommissionListVO;
 import com.rongyi.easy.tms.vo.v2.SalesCommissionVO;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.rss.rpb.OrderNoGenService;
@@ -72,7 +73,7 @@ public class CommissionServiceImpl implements CommissionService {
                 params.put("pageSize", Constant.PAGE.PAGESIZE);
             }
             int currentPage = params.containsKey("currentPage") ? Integer.valueOf(params.get("currentPage").toString()) : 1;
-            params.put("startRecord", (currentPage - 1) *  Integer.valueOf(params.get("pageSize").toString()));
+            params.put("startRecord", (currentPage - 1) * Integer.valueOf(params.get("pageSize").toString()));
 
             if (params.get("getTimeRange") != null) {
                 if (params.get("getTimeRange") == Constants.TMSTimeRangeType.DAY) {
@@ -104,8 +105,10 @@ public class CommissionServiceImpl implements CommissionService {
             }
 
             List<SalesCommissionVO> list = salesCommissionService.findCommissionListForMallShop(params);
+            SalesCommissionListVO resultList = new SalesCommissionListVO();
+            resultList.setSalesCommissionVOs(list);
             int totalAccount = salesCommissionService.countCommissionForMallShop(params);
-            result = ResponseData.success(list, currentPage, Constant.PAGE.PAGESIZE, totalAccount);
+            result = ResponseData.success(resultList, currentPage, Integer.parseInt(params.get("pageSize").toString()), totalAccount);
             LOGGER.debug("getCommissionList end");
         } catch (PermissionException e) {
             LOGGER.error(e.getMessage());
