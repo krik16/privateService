@@ -159,18 +159,9 @@ body {
 						<div class="line-heights shopsName">优惠方式:</div>
 						<div class="shopsData">
 							<p class="p_text" style="color: #ff4a8f;font-weight: bold;font-size: 14px">
-							<c:if test="${ not empty trade.score && trade.score > 0}">
-									积分 
-									(${trade.score})
-									<c:if
-									test="${trade.couponDiscountInt > 0}">
-									、
-									</c:if>
-							</c:if>
-							<c:if
-								test="${trade.couponDiscountInt > 0}">
-									红包(${trade.couponDiscountInt}元)
-							</c:if>
+							<c:if test="${ not empty trade.score && trade.score > 0}">积分 (${trade.score/100})</c:if>
+							<c:if test="${hbDiscount > 0}">&nbsp;红包 (${hbDiscount})</c:if>
+							<c:if test="${couponDiscount > 0}">&nbsp;抵扣 (${couponDiscount})</c:if>
 							</p>
 						</div>
 						<%--<div style="clear: both;"></div>

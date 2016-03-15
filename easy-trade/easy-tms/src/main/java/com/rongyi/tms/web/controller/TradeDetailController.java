@@ -12,8 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.util.AmountConversion;
+import com.rongyi.easy.osm.entity.OrderDetailFormEntity;
+import com.rongyi.easy.osm.entity.OrderFormEntity;
 import com.rongyi.easy.osm.vo.OrderCartFormVO;
 import com.rongyi.rss.tradecenter.osm.IOrderCartService;
+import com.rongyi.rss.tradecenter.osm.IOrderQueryService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +56,9 @@ public class TradeDetailController extends BaseController {
 
 	@Autowired
 	private IOrderCartService iOrderCartService;
+
+	@Autowired
+	private IOrderQueryService iOrderQueryService;
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String search(ModelMap model, String currpage) {
@@ -135,22 +141,42 @@ public class TradeDetailController extends BaseController {
 			if (paymentLogInfo != null)
                 tradeVO.setBuyerAccount(paymentLogInfo.getBuyer_email());
 			tradeDetailService.setIntegralAndCouponDiscount(tradeVO);
-			double discountAmount;
-			if (tradeVO.getOrderType()==ConstantEnum.PAYMENT_ORDER_TYPE1.getCodeInt().intValue())
+			double discountAmount;//总优惠
+			double hbDiscount;//红包
+			BigDecimal hbDiscountDecimal = BigDecimal.ZERO;//红包
+			double couponDiscount = 0;//抵扣
+			if (tradeVO.getOrderType()==ConstantEnum.PAYMENT_ORDER_TYPE1.getCodeInt().intValue()){
+				hbDiscount = AmountConversion.fenToYuan(tradeVO.getHbDiscount());
+				couponDiscount = AmountConversion.fenToYuan(tradeVO.getCouponDiscountInt());
 				discountAmount = AmountConversion.fenToYuan(tradeVO.getHbDiscount() + tradeVO.getCouponDiscountInt() + tradeVO.getScore());
-            else {
+			} else {
                 Map<String, Object> paramsMap = new HashMap<>();
                 paramsMap.put("orderNo", tradeVO.getOrderNo());
                 PagingVO<OrderCartFormVO> page = iOrderCartService.searchListByMap(paramsMap);
 				List<OrderCartFormVO> dataList = page.getDataList();
+				List<OrderFormEntity> orderFormEntities = iOrderQueryService.getShopOrderNoByCartNo(tradeVO.getOrderNo());
+				if (CollectionUtils.isNotEmpty(orderFormEntities)){
+					for (OrderFormEntity orderForm : orderFormEntities){
+						List<OrderDetailFormEntity> orderDetailEntities = iOrderQueryService.selectByParentNum(orderForm.getOrderNo());
+						if (CollectionUtils.isNotEmpty(orderDetailEntities)){
+							for (OrderDetailFormEntity orderDetailForm : orderDetailEntities){
+								hbDiscountDecimal = hbDiscountDecimal.add(orderDetailForm.getCouponDiscount());
+							}
+						}
+					}
+				}
+				hbDiscount = hbDiscountDecimal.setScale(2, 4).doubleValue();
 				if (CollectionUtils.isNotEmpty(dataList)){
-					discountAmount = dataList.get(0).getRebateDiscount().add(new BigDecimal(tradeVO.getCouponDiscountInt()))
+					couponDiscount = dataList.get(0).getRebateDiscount().doubleValue();
+					discountAmount = dataList.get(0).getRebateDiscount().add(hbDiscountDecimal)
 							.add(new BigDecimal(AmountConversion.fenToYuan(tradeVO.getScore()))).setScale(2, 4).doubleValue();
 				}else {
 					discountAmount = tradeVO.getCouponDiscountInt();
 				}
             }
 			model.addAttribute("discountAmount", discountAmount);
+			model.addAttribute("hbDiscount", hbDiscount);
+			model.addAttribute("couponDiscount", couponDiscount);
 			model.addAttribute("trade", tradeVO);
 			getRongyiAccount(model, tradeVO.getPayChannel());
 		} catch (Exception e) {
