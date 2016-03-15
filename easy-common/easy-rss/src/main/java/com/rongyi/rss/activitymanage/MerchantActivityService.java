@@ -2,6 +2,8 @@ package com.rongyi.rss.activitymanage;
 
 import com.rongyi.easy.activitymanage.entity.ActivityInfo;
 
+import java.util.Map;
+
 /**
  * create by com.rongyi.rss.activitymanage ideaworkspace :author lijing
  * 商家后台活动接口
@@ -16,5 +18,12 @@ public interface MerchantActivityService {
      * @Param activityInfo
      * @return
      */
-    public Boolean saveMerchantCouponActivityInfo(ActivityInfo activityInfo);
+    public ActivityInfo saveMerchantCouponActivityInfo(ActivityInfo activityInfo);
+
+    /**
+     * 通过im消息发送信息
+     * @param userIds
+     * @param param
+     */
+    public void sendImMsg(String[] userIds,Map<String, String> param);
 }

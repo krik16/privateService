@@ -1,5 +1,7 @@
 package com.rongyi.easy.activitymanage.entity;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -61,6 +63,11 @@ public class ActivityGoodsSpec implements Serializable {
      * 追加数
      */
     private Integer appendCount;
+
+    /**
+     * 是否恢复库存 0 没有 1恢复
+     */
+    private Integer recStock;
 
     public Integer getId() {
         return id;
@@ -134,11 +141,28 @@ public class ActivityGoodsSpec implements Serializable {
         this.version = version;
     }
 
+    public Integer getRecStock() {
+        return recStock;
+    }
+
+    public void setRecStock(Integer recStock) {
+        this.recStock = recStock;
+    }
+
     @Override
-	public String toString() {
-		return "ActivityGoodsSpec [id=" + id + ", activityGoodsId=" + activityGoodsId + ", specId=" + specId
-				+ ", joinCount=" + joinCount + ", stockCount=" + stockCount + ", activityPrice=" + activityPrice
-				+ ", createAt=" + createAt + ", updateAt=" + updateAt + ", version=" + version + ", appendCount="
-				+ appendCount + "]";
-	}
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("activityGoodsId", activityGoodsId)
+                .append("specId", specId)
+                .append("joinCount", joinCount)
+                .append("stockCount", stockCount)
+                .append("activityPrice", activityPrice)
+                .append("createAt", createAt)
+                .append("updateAt", updateAt)
+                .append("version", version)
+                .append("appendCount", appendCount)
+                .append("recStock", recStock)
+                .toString();
+    }
 }

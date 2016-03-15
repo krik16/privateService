@@ -32,6 +32,20 @@ public interface ActivityConstants {
     }
 
     /**
+     * 报名状态  1报名 - 0 不报名
+     */
+    interface  ActivityEnrollReg{
+        int ISREG_TRUE = 1;
+        int ISREG_FALSE = 0;
+    }
+    /**
+     * 报名的类型
+     */
+    interface ActivityEnrollType{
+        int SHOP = 0;
+        int MALL =1;
+    }
+    /**
      * 摩店活动状态
      */
     interface MerchantStatusCode {
