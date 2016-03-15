@@ -25,6 +25,10 @@ public class AdvertNewVo implements Serializable {
 	private Integer adOrder =0;//广告排序
 	private Integer holder =0;//所属 0 容易网 1 商家
 	private String mall_id;//商场id
+	private Integer relation_id;
+	private String relation_name;
+	private String relation_code;
+	private String relation_url;
 	/**
 	 * @return the id
 	 */
@@ -240,5 +244,71 @@ public class AdvertNewVo implements Serializable {
 	 */
 	public void setMall_id(String mall_id) {
 		this.mall_id = mall_id;
+	}
+	/**
+	 * @return the relation_id
+	 */
+	public Integer getRelation_id() {
+		return relation_id;
+	}
+	/**
+	 * @param relation_id the relation_id to set
+	 */
+	public void setRelation_id(Integer relation_id) {
+		this.relation_id = relation_id;
+	}
+	/**
+	 * @return the relation_name
+	 */
+	public String getRelation_name() {
+		return relation_name;
+	}
+	/**
+	 * @param relation_name the relation_name to set
+	 */
+	public void setRelation_name(String relation_name) {
+		this.relation_name = relation_name;
+	}
+	/**
+	 * @return the relation_code
+	 */
+	public String getRelation_code() {
+		return relation_code;
+	}
+	/**
+	 * @param relation_code the relation_code to set
+	 */
+	public void setRelation_code(String relation_code) {
+		this.relation_code = relation_code;
+	}
+	/**
+	 * @return the relation_url
+	 */
+	public String getRelation_url() {
+		return relation_url;
+	}
+	/**
+	 * @param relation_url the relation_url to set
+	 */
+	public void setRelation_url(String relation_url) {
+		this.relation_url = relation_url;
+	}
+	/** 
+	* @Title: toString 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param @return    设定文件 
+	* @author shaozhou
+	* @date 2016年3月15日 下午5:45:34
+	* @throws 
+	*/
+	@Override
+	public String toString() {
+		return "AdvertNewVo [id=" + id + ", position=" + position + ", adtime=" + adtime + ", module_type="
+				+ module_type + ", content=" + content + ", content_type=" + content_type + ", status=" + status
+				+ ", status_detail=" + status_detail + ", publish_start=" + publish_start + ", publish_end="
+				+ publish_end + ", group_id=" + group_id + ", create_by=" + create_by + ", create_at=" + create_at
+				+ ", update_by=" + update_by + ", update_at=" + update_at + ", adOrder=" + adOrder + ", holder="
+				+ holder + ", mall_id=" + mall_id + ", relation_id=" + relation_id + ", relation_name=" + relation_name
+				+ ", relation_code=" + relation_code + ", relation_url=" + relation_url + "]";
 	}
 }

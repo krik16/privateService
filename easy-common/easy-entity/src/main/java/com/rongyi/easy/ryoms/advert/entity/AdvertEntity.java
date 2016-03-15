@@ -24,6 +24,9 @@ public class AdvertEntity implements Serializable {
 	private Integer update_by;//更新人账号ID
 	private Date update_at;//记录更新时间
 	private Integer relation_id;//广告关联配置id
+	private String relation_name;
+	private String relation_code;
+	private String relation_url;
 	/**
 	 * @return the id
 	 */
@@ -215,5 +218,41 @@ public class AdvertEntity implements Serializable {
 	 */
 	public void setRelation_id(Integer relation_id) {
 		this.relation_id = relation_id;
+	}
+	/**
+	 * @return the relation_name
+	 */
+	public String getRelation_name() {
+		return relation_name;
+	}
+	/**
+	 * @param relation_name the relation_name to set
+	 */
+	public void setRelation_name(String relation_name) {
+		this.relation_name = relation_name;
+	}
+	/**
+	 * @return the relation_code
+	 */
+	public String getRelation_code() {
+		return relation_code;
+	}
+	/**
+	 * @param relation_code the relation_code to set
+	 */
+	public void setRelation_code(String relation_code) {
+		this.relation_code = relation_code;
+	}
+	/**
+	 * @return the relation_url
+	 */
+	public String getRelation_url() {
+		return relation_url;
+	}
+	/**
+	 * @param relation_url the relation_url to set
+	 */
+	public void setRelation_url(String relation_url) {
+		this.relation_url = relation_url;
 	}
 }
