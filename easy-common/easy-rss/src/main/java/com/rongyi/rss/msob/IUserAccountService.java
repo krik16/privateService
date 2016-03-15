@@ -66,6 +66,6 @@ public interface IUserAccountService {
      * @return
      * @throws Exception
      */
-    public List<String> findImId(List<Long> shopIds) throws Exception;
+    public List<String> findImId(List<String> shopIds) throws Exception;
 
 }

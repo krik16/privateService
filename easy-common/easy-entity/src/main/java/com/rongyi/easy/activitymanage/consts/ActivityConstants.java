@@ -14,6 +14,13 @@ public interface ActivityConstants {
         Integer CHECK_SUCCESS = 2;
     }
 
+    interface ActivityCouponType{
+        Integer MALL =0;
+        Integer SHOP =1;
+        Integer BRAND =2;
+        Integer GROUP = 3;
+        Integer MALL_SHOP =4;
+    }
     /**
      * 活动状态
      */
@@ -24,6 +31,20 @@ public interface ActivityConstants {
         int OFFLINE = 3;//下线
     }
 
+    /**
+     * 报名状态  1报名 - 0 不报名
+     */
+    interface  ActivityEnrollReg{
+        int ISREG_TRUE = 1;
+        int ISREG_FALSE = 0;
+    }
+    /**
+     * 报名的类型
+     */
+    interface ActivityEnrollType{
+        int SHOP = 0;
+        int MALL =1;
+    }
     /**
      * 摩店活动状态
      */
@@ -64,6 +85,7 @@ public interface ActivityConstants {
      * 活动类型
      */
     interface ActivityType {
+        Integer COUPON = 1;//卡券类型
         Integer GOODS_AND_COUPON = 3;// 商品及卡券类型
         Integer RAFFLE = 2;//抽奖类活动
         Integer SIGN = 4;//签到送积分活动

@@ -35,7 +35,7 @@ public interface ROAUserAccountService {
 
 	/**
 	 * 修改/添加账号信息
-	 * @param accountEntity
+	 * @param accountParam
 	 * @return
 	 * @throws MallShopException
 	 */
@@ -68,6 +68,6 @@ public interface ROAUserAccountService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<String> findImId(List<Long> shopIds) throws Exception;
+	public List<String> findImId(List<String> shopIds) throws Exception;
 
 }
