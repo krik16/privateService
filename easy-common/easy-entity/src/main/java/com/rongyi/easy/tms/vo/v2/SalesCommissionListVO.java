@@ -1,5 +1,7 @@
 package com.rongyi.easy.tms.vo.v2;
 
+import com.rongyi.easy.rmmm.vo.PageVO;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -12,7 +14,7 @@ import java.util.List;
  *
  */
 
-public class SalesCommissionListVO implements Serializable {
+public class SalesCommissionListVO extends PageVO implements Serializable {
 
     List<SalesCommissionVO> salesCommissionVOs;
 

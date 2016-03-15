@@ -2,6 +2,8 @@ package com.rongyi.rss.tms;
 
 import com.rongyi.core.bean.ResponseData;
 import com.rongyi.easy.tms.vo.v2.CommissionVO;
+import com.rongyi.easy.tms.vo.v2.SalesCommissionListVO;
+import com.rongyi.easy.tms.vo.v2.SalesCommissionVO;
 
 import java.util.Map;
 
@@ -14,6 +16,7 @@ public interface CommissionService {
 
     /**
      * 返佣
+     *
      * @param commissionVO 请求参数对象
      * @return ResponseData
      */
@@ -21,15 +24,17 @@ public interface CommissionService {
 
     /**
      * 摩店返佣列表查询（推广/首单）
+     *
      * @param params 请求参数对象
      * @return ResponseData
      */
-    ResponseData getCommissionList(Map<String, Object> params);
+    SalesCommissionListVO getCommissionList(Map<String, Object> params) throws Exception;
 
     /**
      * 摩店返佣详情查询（推广/首单）
+     *
      * @param id 佣金id
      * @return ResponseData
      */
-    ResponseData getCommissionInfo(Integer id);
+    SalesCommissionVO getCommissionInfo(Integer id) throws Exception;
 }
