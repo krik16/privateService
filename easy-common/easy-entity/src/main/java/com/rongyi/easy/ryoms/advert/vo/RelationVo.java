@@ -138,4 +138,18 @@ public class RelationVo implements Serializable {
 	public void setContent_url(String content_url) {
 		this.content_url = content_url;
 	}
+	/** 
+	* @Title: toString 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param @return    设定文件 
+	* @author shaozhou
+	* @date 2016年3月15日 下午4:04:20
+	* @throws 
+	*/
+	@Override
+	public String toString() {
+		return "RelationVo [relation_id=" + relation_id + ", name=" + name + ", code=" + code + ", status=" + status
+				+ ", content_type=" + content_type + ", content_url=" + content_url + ", create_by=" + create_by
+				+ ", create_at=" + create_at + ", update_by=" + update_by + ", update_at=" + update_at + "]";
+	}
 }
