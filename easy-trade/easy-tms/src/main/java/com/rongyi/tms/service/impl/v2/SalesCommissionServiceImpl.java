@@ -1,5 +1,6 @@
 package com.rongyi.tms.service.impl.v2;
 
+import com.rongyi.core.constant.Constants;
 import com.rongyi.core.constant.VirtualAccountEventTypeEnum;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.mq.MessageEvent;
@@ -271,6 +272,14 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
                 } else if (vo.getRegisterType() == ConstantEnum.COMMISSION_REGISTER_MALLSHOP.getCodeInt()) {
                     vo.setCommissionType(2);
                 }
+            }
+
+            if (vo.getStatus().intValue() == ConstantEnum.COMMISSION_STATUS_6.getCodeInt()) {
+                vo.setStatus((byte) Constants.DrawApplyStatus.SEND);
+            } else if (vo.getStatus().intValue() >= ConstantEnum.COMMISSION_STATUS_1.getCodeInt() && vo.getStatus().intValue() <= ConstantEnum.COMMISSION_STATUS_3.getCodeInt()) {
+                vo.setStatus((byte) Constants.DrawApplyStatus.PROCESSING);
+            } else if (vo.getStatus().intValue() < 0) {
+                vo.setStatus((byte) Constants.DrawApplyStatus.FAIL);
             }
         }
 
