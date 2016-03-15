@@ -2,6 +2,7 @@ package com.rongyi.rss.bdata;
 
 import java.util.List;
 
+import com.rongyi.easy.bdata.dto.AreaDto;
 import com.rongyi.easy.bdata.entity.BdArea;
 
 /**
@@ -27,5 +28,5 @@ public interface AreaService {
 	/**
 	 * 查询所有区域信息
 	 */
-	public List<BdArea> getAreaList();
+	public List<AreaDto> getAreaList();
 }
