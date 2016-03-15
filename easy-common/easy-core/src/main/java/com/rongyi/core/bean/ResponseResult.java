@@ -2,6 +2,7 @@ package com.rongyi.core.bean;
 
 /**
  * 统一返回对象 逐渐废弃 【不建议使用当前对象 建议使用ResponseVO】
+ * !!!《《《《禁止本类修改当前状态code，如需新success code 外部传入》》》!!!
  * @author baodk
  * @see ResponseVO
  */
@@ -9,8 +10,8 @@ package com.rongyi.core.bean;
 public class ResponseResult implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 
-	/** 成功消息Code **/
-	private static final String SUCCESS = "0";
+	/** 成功消息Code=200 default=200 **/
+	private static final String SUCCESS = "200";//!!!禁止本类修改当前状态code，如需新success code 外部传入!!!
 	/** 是否成功 **/
 	private boolean success = true;
 	/** 返回对象类型数据 **/
@@ -55,7 +56,7 @@ public class ResponseResult implements java.io.Serializable {
 	}
 	
 	/**
-	 * Success 
+	 * Success 当前默认errcode=200
 	 * @return
 	 */
 	public ResponseResult Success() {
@@ -63,7 +64,7 @@ public class ResponseResult implements java.io.Serializable {
 	}
 
 	/**
-	 * Success 
+	 * Success 当前默认errcode=200
 	 * @param info		返回值信息
 	 * @return
 	 */
@@ -72,7 +73,7 @@ public class ResponseResult implements java.io.Serializable {
 	}
 	
 	/**
-	 * Success 
+	 * Success 当前默认errcode=200
 	 * @param info		返回值信息
 	 * @param message	消息
 	 * @return
@@ -82,7 +83,7 @@ public class ResponseResult implements java.io.Serializable {
 	}
 	
 	/**
-	 * Success 
+	 * Success 当前默认errcode=200
 	 * @param info		返回值信息
 	 * @param message	消息
 	 * @param errCode	消息码
@@ -156,18 +157,40 @@ public class ResponseResult implements java.io.Serializable {
 		return new ResponseResult().error(errCode, message, info);
 	}
 	
+	/**
+	 * succ 当前默认errcode=200
+	 * @return
+	 */
 	public static ResponseResult succ() {
 		return new ResponseResult().Success();
 	}
 	
+	/**
+	 * succ 当前默认errcode=200
+	 * @param info
+	 * @return
+	 */
 	public static ResponseResult succ(Object info) {
 		return new ResponseResult().Success(info);
 	}
 	
+	/**
+	 * succ 当前默认errcode=200
+	 * @param info
+	 * @param message
+	 * @return
+	 */
 	public static ResponseResult succ(Object info, String message) {
 		return new ResponseResult().Success(info, message);
 	}
 	
+	/**
+	 * succ 当前默认errcode=200
+	 * @param info
+	 * @param message
+	 * @param errCode
+	 * @return
+	 */
 	public static ResponseResult succ(Object info, String message, String errCode) {
 		return new ResponseResult().Success(info, message, errCode);
 	}
