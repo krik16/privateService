@@ -46,12 +46,12 @@ public class RmmmActiveCouponParam implements Serializable {
 	/**
 	 * 原价
 	 */
-	private Double orgPrice;
+	private String orgPrice;
 
 	/**
 	 * 现价
 	 */
-	private Double activityPrice;
+	private String activityPrice;
 
 	/**
 	 * 发布开始时间 格式："yyyy-MM-dd";
@@ -89,6 +89,24 @@ public class RmmmActiveCouponParam implements Serializable {
 	private int pageSize;
 	private Integer identity;//身份类型:0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购，6买手
 	private int number;
+	private String status;
+	private String reason;
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+
 	public int getNumber() {
 		return number;
 	}
@@ -171,19 +189,19 @@ public class RmmmActiveCouponParam implements Serializable {
 		this.stockCount = stockCount;
 	}
 
-	public Double getOrgPrice() {
+	public String getOrgPrice() {
 		return orgPrice;
 	}
 
-	public void setOrgPrice(Double orgPrice) {
+	public void setOrgPrice(String orgPrice) {
 		this.orgPrice = orgPrice;
 	}
 
-	public Double getActivityPrice() {
+	public String getActivityPrice() {
 		return activityPrice;
 	}
 
-	public void setActivityPrice(Double activityPrice) {
+	public void setActivityPrice(String activityPrice) {
 		this.activityPrice = activityPrice;
 	}
 
