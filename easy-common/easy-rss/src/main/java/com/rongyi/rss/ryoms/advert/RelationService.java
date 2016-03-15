@@ -14,7 +14,7 @@ public interface RelationService {
 
 	void save(RelationEntity entity);
 
-	boolean existCode(String code);
+	boolean existCode(RelationParam relationParam);
 
 	RelationVo info(Integer id);
 
