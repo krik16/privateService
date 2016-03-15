@@ -9,11 +9,10 @@ import java.util.List;
  * create by com.rongyi.rss.activitymanage ideaworkspace :author lijing
  * User:lijing
  * DATE : 2016/3/15
- * TIME : 11:04
+ * TIME : 11:13
  * ideaworkspace.
  */
-public interface MerchantActivityCoupService  {
-
+public interface MerchantActivityCouponService {
     /**
      * 查询 未开始  进行中的所有活动
      * @return
