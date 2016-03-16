@@ -40,30 +40,65 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
     @Autowired
     private OrderNoGenService orderNoGenService;
 
+    /**
+     * 定时任务执行生成对账单操作的入口，分为两种生成模式
+     * <p> <p>
+     *  第一种模式：指定日期间隔出账单，例如每隔3天出账单、账单有效期为2016-02-01 ~ 2016-03-01
+     *  <p>
+     *      那么在02-04凌晨会生成 02-01 00:00:00 至 02-03 23:59:59期间完成的交易的对账单数据
+     *      <p>
+     *      以此类推02-07凌晨会生成 02-04 00:00:00 至 02-06 23:59:59期间完成的交易的对账单数据
+     *      <p>
+     *  第二种模式：固定day of month生成对账单，例如每月5、15 、25日出账单，账单有效期为2016-02-01 ~ 2016-03-01
+     *  <p>
+     *      那么在02-05凌晨会生成 02-01 00:00:00 至 02-04 23:59:59期间完成的交易的对账单数据
+     *       <p>
+     *      以此类推02-15凌晨会生成 02-05 00:00:00 至 02-14 23:59:59期间完成的交易的对账单数据
+     *       <p>
+     *      以此类推02-25凌晨会生成 02-15 00:00:00 至 02-24 23:59:59期间完成的交易的对账单数据
+     *      <p>
+     *      最后，请注意，03-05凌晨会生成 02-25 00:00:00 至 03-01 23:59:59期间完成的交易的对账单数据
+     *
+     * @throws Exception
+     */
     @Override
     public void generateForSchedule() throws Exception {
         logger.info("定时任务-扫描对账单配置……");
+        //第一种模式
         List<StatementConfig> statementConfigList = statementConfigService.selectForScheduleSpacing();
         for (StatementConfig statementConfig : statementConfigList) {
             try {
+                // 从配置中取时间间隔
                 Integer spacingDays = statementConfig.getCycleDay();
                 if (spacingDays == null || spacingDays == 0)
                     spacingDays = 1;
+
                 DateTime settleDay = new DateTime(statementConfig.getEffectStartTime());
+                // 实际结算生成的开始时间
                 settleDay = settleDay.plusDays(spacingDays);
+
                 DateTime settleEndDay = new DateTime(statementConfig.getEffectEndTime());
+                // 实际结算生成的结束时间
                 settleEndDay = settleEndDay.plusDays(spacingDays);
+
                 DateTime currentDateTime = new DateTime();
                 while (settleDay.isBefore(settleEndDay)) {
+                    // 判断今天是否处于固定间隔的日期上，通过从结算生成的开始时间（settleDay）开始累加固定间隔天数（spacingDays）的方式循环判断
                     if (Days.daysBetween(currentDateTime, settleDay).getDays() == 0) {
+                        // 结算计算开始时间，精确到秒
                         Date settlePeriodFirstSecond = DateUtils.getSomedayFirstSecond(spacingDays);
+                        // 结算计算结束时间，精确到秒
                         Date settlePeriodLastSecond;
                         if (currentDateTime.isAfter(settleEndDay)) {
+                            // 判断计算结束时间是否超过了结算生效时间，如果超过，取结算生效时间的最后一秒
                             settlePeriodLastSecond = DateUtils.getAllocatedDayLastSecond(statementConfig.getEffectEndTime());
                         } else {
+                            // 没超过，按照配置的时间间隔，取昨天的最后一秒
                             settlePeriodLastSecond = DateUtils.getYesterdayLastSecond();
                         }
+                        // 拿到settlePeriodFirstSecond/LastSecond后在历史对账单里查询这张单是否生成过
                         List<PaymentStatement> paymentStatements = paymentStatementService.selectByCycleTime(statementConfig.getId(), settlePeriodFirstSecond, settlePeriodLastSecond);
+                        // 没有生成，进入制作excel对账单的过程
                         if (paymentStatements == null || paymentStatements.size() == 0) {
                             logger.info("定时任务-执行对账单配置id=" + statementConfig.getId());
                             PaymentStatement paymentStatement = new PaymentStatement();
@@ -90,15 +125,18 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
             }
         }
 
+        //第二种模式
         List<StatementConfig> statementConfigJumpingList = statementConfigService.selectForScheduleJumping();
         outer:
         for (StatementConfig statementConfig : statementConfigJumpingList) {
             try {
+                // 先从配置中取出生成账单的固定日期串，比如"5&15&25"
                 List<String> regularDays = Arrays.asList(statementConfig.getCycleRegularDay().split("&"));
                 DateTime effectEndTime = new DateTime(statementConfig.getEffectEndTime());
                 DateTime effectStartTime = new DateTime(statementConfig.getEffectStartTime());
                 DateTime currentTime = new DateTime();
 
+                // 首先判断今天在不在这个固定日期上
                 if (regularDays.contains(String.valueOf(currentTime.getDayOfMonth()))) {
                     Integer toDayOfMonth = currentTime.getDayOfMonth();
                     Date settlePeriodFirstSecond;
@@ -106,6 +144,7 @@ public class PaymentStatementGenerateServiceImpl extends BaseServiceImpl impleme
                     DateTime settlementStartTime = new DateTime();
 
                     if (currentTime.isAfter(effectEndTime) && Months.monthsBetween(effectEndTime, currentTime).getMonths() <= 1) {
+                        // 当前日期在结算生效日期结束后的一个月内
                         int settlementStartDay = 0;
                         for (String dayStr : regularDays) {
                             int day = Integer.valueOf(dayStr);

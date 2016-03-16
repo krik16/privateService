@@ -1,5 +1,6 @@
 package com.rongyi.tms.service.impl.v2;
 
+import com.rongyi.core.constant.Constants;
 import com.rongyi.core.constant.VirtualAccountEventTypeEnum;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.mq.MessageEvent;
@@ -144,12 +145,12 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
         map.put("id", id);
         SalesCommissionVO vo = this.getBaseDao().selectOneBySql(NAMESPACE + ".getCommissionDetail", map);
 
-        if (vo.getCommissionType() == ConstantEnum.COMMISSION_TYPE_1.getValueInt()) {
+        if (vo.getCommissionType() == ConstantEnum.COMMISSION_TYPE_1.getCodeInt()) {
             vo.setCommissionType(3);
-        } else if (vo.getCommissionType() == ConstantEnum.COMMISSION_TYPE_0.getValueInt()) {
-            if (vo.getRegisterType() == ConstantEnum.COMMISSION_REGISTER_RONGYI.getValueInt()) {
+        } else if (vo.getCommissionType() == ConstantEnum.COMMISSION_TYPE_0.getCodeInt()) {
+            if (vo.getRegisterType() == ConstantEnum.COMMISSION_REGISTER_RONGYI.getCodeInt()) {
                 vo.setCommissionType(1);
-            } else if (vo.getRegisterType() == ConstantEnum.COMMISSION_REGISTER_MALLSHOP.getValueInt()) {
+            } else if (vo.getRegisterType() == ConstantEnum.COMMISSION_REGISTER_MALLSHOP.getCodeInt()) {
                 vo.setCommissionType(2);
             }
         }
@@ -263,14 +264,22 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 
         List<SalesCommissionVO> list = this.getBaseDao().selectListBySql(NAMESPACE + ".selectCommissionByUserId", map);
         for (SalesCommissionVO vo : list) {
-            if (vo.getCommissionType() == ConstantEnum.COMMISSION_TYPE_1.getValueInt()) {
+            if (vo.getCommissionType() == ConstantEnum.COMMISSION_TYPE_1.getCodeInt()) {
                 vo.setCommissionType(3);
-            } else if (vo.getCommissionType() == ConstantEnum.COMMISSION_TYPE_0.getValueInt()) {
-                if (vo.getRegisterType() == ConstantEnum.COMMISSION_REGISTER_RONGYI.getValueInt()) {
+            } else if (vo.getCommissionType() == ConstantEnum.COMMISSION_TYPE_0.getCodeInt()) {
+                if (vo.getRegisterType() == ConstantEnum.COMMISSION_REGISTER_RONGYI.getCodeInt()) {
                     vo.setCommissionType(1);
-                } else if (vo.getRegisterType() == ConstantEnum.COMMISSION_REGISTER_MALLSHOP.getValueInt()) {
+                } else if (vo.getRegisterType() == ConstantEnum.COMMISSION_REGISTER_MALLSHOP.getCodeInt()) {
                     vo.setCommissionType(2);
                 }
+            }
+
+            if (vo.getStatus().intValue() == ConstantEnum.COMMISSION_STATUS_6.getCodeInt()) {
+                vo.setStatus((byte) Constants.DrawApplyStatus.SEND);
+            } else if (vo.getStatus().intValue() >= ConstantEnum.COMMISSION_STATUS_1.getCodeInt() && vo.getStatus().intValue() <= ConstantEnum.COMMISSION_STATUS_3.getCodeInt()) {
+                vo.setStatus((byte) Constants.DrawApplyStatus.PROCESSING);
+            } else if (vo.getStatus().intValue() < 0) {
+                vo.setStatus((byte) Constants.DrawApplyStatus.FAIL);
             }
         }
 

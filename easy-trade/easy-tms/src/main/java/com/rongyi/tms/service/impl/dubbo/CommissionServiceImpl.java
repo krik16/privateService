@@ -1,19 +1,19 @@
 package com.rongyi.tms.service.impl.dubbo;
 
 import com.rongyi.core.bean.ResponseData;
-import com.rongyi.core.constant.Constants;
 import com.rongyi.core.common.util.DateUtil;
+import com.rongyi.core.constant.Constants;
 import com.rongyi.easy.malllife.pojo.InvitationUserInfoPojo;
 import com.rongyi.easy.tms.entity.SalesCommissionAuditLog;
 import com.rongyi.easy.tms.entity.v2.CommissionConfig;
 import com.rongyi.easy.tms.entity.v2.SalesCommission;
 import com.rongyi.easy.tms.vo.v2.CommissionVO;
+import com.rongyi.easy.tms.vo.v2.SalesCommissionListVO;
 import com.rongyi.easy.tms.vo.v2.SalesCommissionVO;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.rss.rpb.OrderNoGenService;
 import com.rongyi.rss.tms.CommissionService;
 import com.rongyi.tms.Exception.PermissionException;
-import com.rongyi.tms.constants.CodeEnum;
 import com.rongyi.tms.constants.Constant;
 import com.rongyi.tms.constants.ConstantEnum;
 import com.rongyi.tms.service.SalesCommissionAuditLogService;
@@ -61,18 +61,17 @@ public class CommissionServiceImpl implements CommissionService {
      * @return ResponseData
      */
     @Override
-    public ResponseData getCommissionList(Map<String, Object> params) {
-        ResponseData result;
+    public SalesCommissionListVO getCommissionList(Map<String, Object> params) throws Exception {
         LOGGER.debug("getCommissionList 摩店佣金列表 ,param={}", params);
         try {
             if (!params.containsKey("currentPage") || !params.containsKey("userId")) {
-                return ResponseData.failure(Integer.valueOf(CodeEnum.ERROR_PARAM.getActionCode()), CodeEnum.ERROR_PARAM.getMessage());
+                return null;
             }
             if (!params.containsKey("pageSize")) {
                 params.put("pageSize", Constant.PAGE.PAGESIZE);
             }
             int currentPage = params.containsKey("currentPage") ? Integer.valueOf(params.get("currentPage").toString()) : 1;
-            params.put("startRecord", (currentPage - 1) *  Integer.valueOf(params.get("pageSize").toString()));
+            params.put("startRecord", (currentPage - 1) * Integer.valueOf(params.get("pageSize").toString()));
 
             if (params.get("getTimeRange") != null) {
                 if (params.get("getTimeRange") == Constants.TMSTimeRangeType.DAY) {
@@ -87,15 +86,15 @@ public class CommissionServiceImpl implements CommissionService {
             if (params.containsKey("status")) {
                 List<Integer> statusList = new ArrayList<>();
 
-                if (params.get("status") == Constants.DrawApplyStatus.SEND) {
-                    statusList.add(ConstantEnum.COMMISSION_STATUS_6.getValueInt());
-                } else if (params.get("status") == Constants.DrawApplyStatus.PROCESSING) {
-                    statusList.add(ConstantEnum.COMMISSION_STATUS_1.getValueInt());
-                    statusList.add(ConstantEnum.COMMISSION_STATUS_2.getValueInt());
-                    statusList.add(ConstantEnum.COMMISSION_STATUS_3.getValueInt());
-                } else if (params.get("status") == Constants.DrawApplyStatus.FAIL) {
-                    statusList.add(ConstantEnum.COMMISSION_STATUS_1_UNCHECK.getValueInt());
-                    statusList.add(ConstantEnum.COMMISSION_STATUS_2_UNCHECK.getValueInt());
+                if (Integer.parseInt(params.get("status").toString()) == Constants.DrawApplyStatus.SEND) {
+                    statusList.add(ConstantEnum.COMMISSION_STATUS_6.getCodeInt());
+                } else if (Integer.parseInt(params.get("status").toString()) == Constants.DrawApplyStatus.PROCESSING) {
+                    statusList.add(ConstantEnum.COMMISSION_STATUS_1.getCodeInt());
+                    statusList.add(ConstantEnum.COMMISSION_STATUS_2.getCodeInt());
+                    statusList.add(ConstantEnum.COMMISSION_STATUS_3.getCodeInt());
+                } else if (Integer.parseInt(params.get("status").toString()) == Constants.DrawApplyStatus.FAIL) {
+                    statusList.add(ConstantEnum.COMMISSION_STATUS_1_UNCHECK.getCodeInt());
+                    statusList.add(ConstantEnum.COMMISSION_STATUS_2_UNCHECK.getCodeInt());
                 }
 
                 if (statusList.size() > 0) {
@@ -104,19 +103,26 @@ public class CommissionServiceImpl implements CommissionService {
             }
 
             List<SalesCommissionVO> list = salesCommissionService.findCommissionListForMallShop(params);
+            SalesCommissionListVO resultList = new SalesCommissionListVO();
+            resultList.setSalesCommissionVOs(list);
+
             int totalAccount = salesCommissionService.countCommissionForMallShop(params);
-            result = ResponseData.success(list, currentPage, Constant.PAGE.PAGESIZE, totalAccount);
+            resultList.setTotalCount(totalAccount);
+            resultList.setCurrentPage(currentPage);
+            resultList.setPageSize(Integer.parseInt(params.get("pageSize").toString()));
+            resultList.setTotalPage((int) Math.floor((totalAccount * 1.0d) / Integer.parseInt(params.get("pageSize").toString())));
             LOGGER.debug("getCommissionList end");
+            return resultList;
         } catch (PermissionException e) {
             LOGGER.error(e.getMessage());
             e.printStackTrace();
-            return ResponseData.failure(Integer.valueOf(e.getCode()), e.getMessage());
+            throw e;
         } catch (Exception e) {
             e.printStackTrace();
-            result = ResponseData.failure(Integer.valueOf(CodeEnum.ERROR_SYSTEM.getActionCode()), CodeEnum.ERROR_SYSTEM.getMessage());
+            throw e;
         }
 
-        return result;
+
     }
 
     /**
@@ -126,35 +132,33 @@ public class CommissionServiceImpl implements CommissionService {
      * @return ResponseData
      */
     @Override
-    public ResponseData getCommissionInfo(Integer id) {
+    public SalesCommissionVO getCommissionInfo(Integer id) throws Exception {
         LOGGER.debug("getCommissionList 摩店佣金详情 ,param={}", id);
-        ResponseData result;
         try {
             if (id == null) {
-                return ResponseData.failure(Integer.valueOf(CodeEnum.ERROR_PARAM.getActionCode()), CodeEnum.ERROR_PARAM.getMessage());
+                return null;
             }
             SalesCommissionVO salesCommissionVO = salesCommissionService.getCommissionDetailForMallShop(id);
 
             if (salesCommissionVO != null) {
                 Integer commissionId = salesCommissionVO.getId();
                 Integer status = salesCommissionVO.getStatus().intValue();
-                if (status == ConstantEnum.COMMISSION_STATUS_6.getValueInt().intValue()) {
+                if (status == ConstantEnum.COMMISSION_STATUS_6.getCodeInt().intValue()) {
                     SalesCommissionAuditLog auditLog = salesCommissionAuditLogService.selectLatestLogWithCommissionId(commissionId);
                     salesCommissionVO.setPayAt(auditLog.getCreateAt());
                     salesCommissionVO.setAuditAt(auditLog.getCreateAt());
-                } else if (status < 0 || status == ConstantEnum.COMMISSION_STATUS_3.getValueInt().intValue()) {
+                } else if (status < 0 || status == ConstantEnum.COMMISSION_STATUS_3.getCodeInt().intValue()) {
                     SalesCommissionAuditLog auditLog = salesCommissionAuditLogService.selectLatestLogWithCommissionId(commissionId);
                     salesCommissionVO.setAuditAt(auditLog.getCreateAt());
                 }
             }
 
-            result = ResponseData.success(salesCommissionVO);
             LOGGER.debug("detail end");
+            return salesCommissionVO;
         } catch (Exception e) {
             e.printStackTrace();
-            result = ResponseData.failure(Integer.valueOf(CodeEnum.ERROR_SYSTEM.getActionCode()), CodeEnum.ERROR_SYSTEM.getMessage());
+            throw e;
         }
-        return result;
     }
 
     @Override
