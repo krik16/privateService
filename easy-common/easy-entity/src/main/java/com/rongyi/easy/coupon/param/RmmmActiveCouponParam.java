@@ -92,6 +92,15 @@ public class RmmmActiveCouponParam implements Serializable {
 	private String status;
 	private String reason;
 	private String statusDes;
+	private String activityGoodsId;
+	public String getActivityGoodsId() {
+		return activityGoodsId;
+	}
+
+	public void setActivityGoodsId(String activityGoodsId) {
+		this.activityGoodsId = activityGoodsId;
+	}
+
 	public String getStatusDes() {
 		return statusDes;
 	}
