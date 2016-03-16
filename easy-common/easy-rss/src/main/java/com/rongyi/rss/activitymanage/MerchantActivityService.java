@@ -1,7 +1,9 @@
 package com.rongyi.rss.activitymanage;
 
 import com.rongyi.easy.activitymanage.entity.ActivityInfo;
+import com.rongyi.easy.activitymanage.vo.ActivityGoodsCheckRecordVO;
 
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -26,4 +28,58 @@ public interface MerchantActivityService {
      * @param param
      */
     public void sendImMsg(String[] userIds,Map<String, String> param);
+    
+    /**
+	 * 修改报名的信息(参与价或参与库存)
+	 * 
+	 * @author wangjianhua
+	 * 
+	 * @param activityGoodsId
+	 *            活动商品ID
+	 * @param joinCount
+	 *            参与库存数
+	 * @param activityPrice
+	 *            活动价
+	 * @return 1：成功 0：失败
+	 */
+	public int updateEnrollGoodsSpec(int activityGoodsId, int joinCount, int activityPrice, String userName);
+
+	/**
+	 * 修改报名的信息（参与时间）
+	 * 
+	 * @author wangjianhua
+	 * 
+	 * @param activityGoodsId
+	 *            活动商品ID
+	 * @param joinStartDate
+	 *            参与开始时间
+	 * @param joinEndDate
+	 *            参与结束时间
+	 * @return 1：成功 0：失败
+	 */
+	public int updateEnrollGoodsJoinDate(int activityGoodsId, Date joinStartDate, Date joinEndDate, String userName);
+	
+	/**
+	 * 追加库存
+	 * 
+	 * @author wangjianhua
+	 * 
+	 * @param activityGoodsId
+	 *            活动商品ID
+	 * @param count
+	 *            库存数
+	 * @return
+	 */
+	public int appendStock(int activityGoodsId, int count);
+	
+	/**
+	 * 退回理由
+	 * 
+	 * @author wangjianhua
+	 * 
+	 * @param activityGoodsId
+	 *            活动商品ID
+	 * @return
+	 */
+	public ActivityGoodsCheckRecordVO refusedReason(int activityGoodsId);
 }
