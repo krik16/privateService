@@ -29,6 +29,26 @@ public class OrderModelForCartParam  extends MalllifeBaseParam implements Serial
 	private List<Integer> detailModelIds;//要删除的或修改的子模板id集合
 	
 	private Map<String,String> detailModelMap;// key=子模板id value=红包券码
+	
+	private String source = "1";//来源 0为微网站，1为容易逛，2为终端机，3其他
+	
+	private String userId;//买家id
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
 
 	public Map<String, String> getDetailModelMap() {
 		return detailModelMap;
