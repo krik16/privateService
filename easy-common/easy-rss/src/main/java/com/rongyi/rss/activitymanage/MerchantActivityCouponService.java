@@ -17,7 +17,7 @@ public interface MerchantActivityCouponService {
      * 查询 未开始  进行中的所有活动
      * @Param relevanId id
      *
-     * @Param relevanType 代表大运营  1代表商场 2达标店铺 3代表品牌 4代表集团
+     * @Param relevanType 0代表大运营  1代表商场 2达标店铺 3代表品牌 4代表集团
      * @return
      */
     public List<ActivityInfo> searchMerchantActivtyList(String relevanId,Integer relevanType);
