@@ -32,5 +32,5 @@ public interface MerchantActivityCouponService {
      * @param enrollCoupon
      * @return
      */
-    public Boolean enrollCouponActivity(EnrollCoupon enrollCoupon);
+    public Boolean saveEnrollCouponActivity(EnrollCoupon enrollCoupon);
 }
