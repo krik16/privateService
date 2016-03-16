@@ -37,6 +37,7 @@ public class CertifiedInfoVo implements Serializable{
 	private Integer isDeleted;    //是否已删除  0正常 1已删除
 	private Date createAt;
 	private Date updateAt;
+	private String position;       
 	public Integer getId() {
 		return id;
 	}
@@ -170,5 +171,11 @@ public class CertifiedInfoVo implements Serializable{
 	}
 	public void setUserNickName(String userNickName) {
 		this.userNickName = userNickName;
+	}
+	public String getPosition() {
+		return position;
+	}
+	public void setPosition(String position) {
+		this.position = position;
 	}
 }
