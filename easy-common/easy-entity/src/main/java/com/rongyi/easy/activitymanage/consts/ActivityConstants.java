@@ -14,6 +14,18 @@ public interface ActivityConstants {
         Integer CHECK_SUCCESS = 2;
     }
 
+    /**
+     * 活动商品的机构类型
+     */
+    interface ActivityGoodIdentity{
+        Integer RONGYI = 0;//大运营
+        Integer SHOP =1;//店铺
+        Integer MALL = 2;//商场
+        Integer Brand = 3;//品牌
+    }
+   /*
+   *活动类型
+    */
     interface ActivityCouponType{
         Integer MALL =0;
         Integer SHOP =1;
@@ -80,6 +92,7 @@ public interface ActivityConstants {
         int VOUCHER = 1;//代金券
         int REBATE = 2;//抵扣券
         int COMMODITY = 3;//商品
+        int ACTIVITYCOUPON = 4;//活动券
     }
     /**
      * 活动类型

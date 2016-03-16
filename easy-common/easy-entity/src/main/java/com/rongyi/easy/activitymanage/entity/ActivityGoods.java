@@ -30,7 +30,7 @@ public class ActivityGoods implements Serializable {
     private String goodsId;
 
     /**
-     * 类型 0代表红包，1代表代金券，2代表抵扣券 3代表商品
+     * 类型 0代表红包，1代表代金券，2代表抵扣券 3代表商品  4代表活动券
      */
     private Integer type;
 
