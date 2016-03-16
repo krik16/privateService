@@ -16,14 +16,14 @@ public interface AreaService {
 	 * @param areaId
 	 * @retur
 	 */
-	public BdArea getAreaByAreaId(Integer areaId);
+	public AreaDto getAreaByAreaId(Integer areaId);
 	
 	/**
 	 * 根据父级ID查询区域列表
 	 * @param parentId （查询所有省传1）
 	 * @return
 	 */
-	public List<BdArea> getAreaListByParentId(Integer parentId);
+	public List<AreaDto> getAreaListByParentId(Integer parentId);
 	
 	/**
 	 * 查询所有区域信息

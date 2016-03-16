@@ -11,9 +11,11 @@ public class CertifiedInfo {
 	private Integer id;
 	private Integer userId;        //关联用户ID
 	private String callName;      //称呼
-	private String city;          //所在城市 
+	private Integer proId;       //省ID
+	private Integer cityId;       //市ID
+	private Integer areaId;       //区ID
 	private String contactPhone;  //联系电话
-	private String synopsis;      //自我简介
+	private String resume;      //自我简介
 	private Integer isDeleted;    //是否已删除  0正常 1已删除
 	private Date createAt;
 	private Date updateAt;
@@ -35,11 +37,23 @@ public class CertifiedInfo {
 	public void setCallName(String callName) {
 		this.callName = callName;
 	}
-	public String getCity() {
-		return city;
+	public Integer getProId() {
+		return proId;
 	}
-	public void setCity(String city) {
-		this.city = city;
+	public void setProId(Integer proId) {
+		this.proId = proId;
+	}
+	public Integer getCityId() {
+		return cityId;
+	}
+	public void setCityId(Integer cityId) {
+		this.cityId = cityId;
+	}
+	public Integer getAreaId() {
+		return areaId;
+	}
+	public void setAreaId(Integer areaId) {
+		this.areaId = areaId;
 	}
 	public String getContactPhone() {
 		return contactPhone;
@@ -47,11 +61,11 @@ public class CertifiedInfo {
 	public void setContactPhone(String contactPhone) {
 		this.contactPhone = contactPhone;
 	}
-	public String getSynopsis() {
-		return synopsis;
+	public String getResume() {
+		return resume;
 	}
-	public void setSynopsis(String synopsis) {
-		this.synopsis = synopsis;
+	public void setResume(String resume) {
+		this.resume = resume;
 	}
 	public Integer getIsDeleted() {
 		return isDeleted;
