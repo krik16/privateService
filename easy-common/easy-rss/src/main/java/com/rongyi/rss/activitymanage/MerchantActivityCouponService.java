@@ -15,9 +15,12 @@ import java.util.List;
 public interface MerchantActivityCouponService {
     /**
      * 查询 未开始  进行中的所有活动
+     * @Param relevanId id
+     *
+     * @Param relevanType 代表大运营  1代表商场 2达标店铺 3代表品牌 4代表集团
      * @return
      */
-    public List<ActivityInfo> searchMerchantActivtyList();
+    public List<ActivityInfo> searchMerchantActivtyList(String relevanId,Integer relevanType);
 
     /**
      * 通过活动id 查询活动详情
