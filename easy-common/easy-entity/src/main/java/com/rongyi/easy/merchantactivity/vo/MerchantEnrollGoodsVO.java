@@ -1,12 +1,18 @@
 package com.rongyi.easy.merchantactivity.vo;
 
+import java.io.Serializable;
+
 /**
  * 报名卡劵实体
  * 
  * @author wangjh
  * @date 2016年3月10日
  */
-public class MerchantEnrollGoodsVO {
+public class MerchantEnrollGoodsVO implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5445032185274728369L;
 	/**
 	 * 开始时间
 	 * 
