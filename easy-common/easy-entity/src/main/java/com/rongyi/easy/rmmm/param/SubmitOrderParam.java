@@ -34,6 +34,7 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 	private String orderChannel;//下单渠道
 
 	private String openId;//微信openId
+	private String phone;//用户手机号
 
 
 
@@ -124,21 +125,25 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 	public void setOpenId(String openId) {
 		this.openId = openId;
 	}
+	
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
 	@Override
 	public String toString() {
-		return "SubmitOrderParam{" +
-				"parentOrderList=" + parentOrderList +
-				", commodityCartIds=" + commodityCartIds +
-				", devId='" + devId + '\'' +
-				", devType='" + devType + '\'' +
-				", source='" + source + '\'' +
-				", platformRebateCode='" + platformRebateCode + '\'' +
-				", discountInfo='" + discountInfo + '\'' +
-				", ifCart='" + ifCart + '\'' +
-				", weixinAppId='" + weixinAppId + '\'' +
-				", orderChannel='" + orderChannel + '\'' +
-				", openId='" + openId + '\'' +
-				'}';
+		return "SubmitOrderParam [parentOrderList=" + parentOrderList
+				+ ", commodityCartIds=" + commodityCartIds + ", devId=" + devId
+				+ ", devType=" + devType + ", source=" + source
+				+ ", platformRebateCode=" + platformRebateCode
+				+ ", discountInfo=" + discountInfo + ", ifCart=" + ifCart
+				+ ", weixinAppId=" + weixinAppId + ", orderChannel="
+				+ orderChannel + ", openId=" + openId + ", phone=" + phone
+				+ "]";
 	}
+	
 }
