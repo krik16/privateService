@@ -21,7 +21,7 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 
 	private String devType;// 设备类型（0 ios/1 android/2 wap）
 
-	private String source;//订单来源 0为微商城，1为APP，2为终端机，3其他
+	private String source;//订单来源 0为微商城,微信，1为APP，2为终端机，3其他
 
 	private String platformRebateCode;//购物车抵扣券码
 
