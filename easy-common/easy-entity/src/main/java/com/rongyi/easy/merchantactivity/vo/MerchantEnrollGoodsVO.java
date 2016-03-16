@@ -1,6 +1,7 @@
 package com.rongyi.easy.merchantactivity.vo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 报名卡劵实体
@@ -18,7 +19,7 @@ public class MerchantEnrollGoodsVO implements Serializable {
 	 * 
 	 * @return
 	 */
-	public String getActivityStartAt() {
+	public Date getActivityStartAt() {
 		return activityStartAt;
 	}
 
@@ -27,7 +28,7 @@ public class MerchantEnrollGoodsVO implements Serializable {
 	 * 
 	 * @param activityStartAt
 	 */
-	public void setActivityStartAt(String activityStartAt) {
+	public void setActivityStartAt(Date activityStartAt) {
 		this.activityStartAt = activityStartAt;
 	}
 
@@ -36,7 +37,7 @@ public class MerchantEnrollGoodsVO implements Serializable {
 	 * 
 	 * @return
 	 */
-	public String getActivityEndAt() {
+	public Date getActivityEndAt() {
 		return activityEndAt;
 	}
 
@@ -45,7 +46,7 @@ public class MerchantEnrollGoodsVO implements Serializable {
 	 * 
 	 * @param activityEndAt
 	 */
-	public void setActivityEndAt(String activityEndAt) {
+	public void setActivityEndAt(Date activityEndAt) {
 		this.activityEndAt = activityEndAt;
 	}
 
@@ -194,6 +195,6 @@ public class MerchantEnrollGoodsVO implements Serializable {
 	private int checkStatus = 0;
 	private String checkReason = "";
 	private int applyStatus = 0;
-	private String activityStartAt = "";
-	private String activityEndAt = "";
+	private Date activityStartAt;
+	private Date activityEndAt;
 }

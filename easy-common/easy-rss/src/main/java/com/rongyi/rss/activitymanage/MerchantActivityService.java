@@ -82,4 +82,24 @@ public interface MerchantActivityService {
 	 * @return
 	 */
 	public ActivityGoodsCheckRecordVO refusedReason(int activityGoodsId);
+	
+	/**
+	 * 申请撤销报名
+	 * 
+	 * @author wangjianhua
+	 * @param activityGoodsId
+	 * @param userName
+	 * @return
+	 */
+	public int revokeEnroll(int activityGoodsId, String userName);
+	
+	/**
+	 * 取消报名
+	 * 
+	 * @author wangjianhua
+	 * @param activityGoodsId
+	 * @param userName
+	 * @return
+	 */
+	public int cancelEnroll(int activityGoodsId, String userName);
 }
