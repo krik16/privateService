@@ -13,12 +13,24 @@ import java.util.Date;
  * ideaworkspace.
  */
 public class EnrollCoupon implements Serializable {
+    /**
+     * 活动id
+     */
     private Integer activityId;
 
+    /**
+     * 活动券id
+     */
     private String couponId;
 
+    /**
+     * 参与时间
+     */
     private Date joinStartAt;
 
+    /**
+     * 参与结束时间
+     */
     private Date joinEndAt;
 
     /**
@@ -87,15 +99,33 @@ public class EnrollCoupon implements Serializable {
         this.relevanType = relevanType;
     }
 
+    public String getCreateUserName() {
+        return createUserName;
+    }
+
+    public void setCreateUserName(String createUserName) {
+        this.createUserName = createUserName;
+    }
+
+    public String getCreateUserId() {
+        return createUserId;
+    }
+
+    public void setCreateUserId(String createUserId) {
+        this.createUserId = createUserId;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .append("relevanType", relevanType)
-                .append("relevanId", relevanId)
-                .append("joinEndAt", joinEndAt)
-                .append("joinStartAt", joinStartAt)
-                .append("couponId", couponId)
                 .append("activityId", activityId)
+                .append("couponId", couponId)
+                .append("joinStartAt", joinStartAt)
+                .append("joinEndAt", joinEndAt)
+                .append("relevanId", relevanId)
+                .append("relevanType", relevanType)
+                .append("createUserName", createUserName)
+                .append("createUserId", createUserId)
                 .toString();
     }
 }
