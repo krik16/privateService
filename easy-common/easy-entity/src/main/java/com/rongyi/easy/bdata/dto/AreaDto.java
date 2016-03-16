@@ -4,10 +4,18 @@ import java.io.Serializable;
 
 public class AreaDto implements Serializable{
 	private static final long serialVersionUID = 1L;
+	private Integer id;      
 	private Integer areaId;       //区域ID
 	private Integer parentId;     //父级ID
 	private String cnname;        //名称
 	
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public Integer getAreaId() {
 		return areaId;
 	}
