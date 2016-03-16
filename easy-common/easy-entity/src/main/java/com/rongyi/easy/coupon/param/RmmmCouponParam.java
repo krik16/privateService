@@ -114,19 +114,20 @@ public class RmmmCouponParam implements Serializable {
      * 创建人
      */
     private String createUser;
-    private String jsessionId;
+    private String jsessionid;
     
     
+ 
 
-   	public String getJsessionId() {
-   		return jsessionId;
-   	}
+    public String getJsessionid() {
+		return jsessionid;
+	}
 
-   	public void setJsessionId(String jsessionId) {
-   		this.jsessionId = jsessionId;
-   	}
+	public void setJsessionid(String jsessionid) {
+		this.jsessionid = jsessionid;
+	}
 
-    public String getTitle() {
+	public String getTitle() {
         return title;
     }
 
