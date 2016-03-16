@@ -5,7 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 public class UserInfo implements Serializable{
-    private Integer id;
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
 
     private Integer type;
 
@@ -67,7 +69,7 @@ public class UserInfo implements Serializable{
     
     private UserShop userShop;
     
-    private Integer isEdit;  //是否可编辑
+    private Integer isEdit = 1;  //是否可编辑  0可编辑  1不可编辑
     
     public String getStopReason() {
 		return stopReason;
