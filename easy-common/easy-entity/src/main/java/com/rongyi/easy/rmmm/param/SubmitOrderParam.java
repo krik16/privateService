@@ -35,7 +35,7 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 
 	private String openId;//微信openId
 	private String phone;//用户手机号
-
+	private String memberId;//微信电子会员id
 
 
 	public List<ParentOrderParam> getParentOrderList() {
@@ -133,6 +133,14 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
 
 	@Override
 	public String toString() {
@@ -143,7 +151,7 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 				+ ", discountInfo=" + discountInfo + ", ifCart=" + ifCart
 				+ ", weixinAppId=" + weixinAppId + ", orderChannel="
 				+ orderChannel + ", openId=" + openId + ", phone=" + phone
-				+ "]";
+				+ ", memberId=" + memberId + "]";
 	}
 	
 }
