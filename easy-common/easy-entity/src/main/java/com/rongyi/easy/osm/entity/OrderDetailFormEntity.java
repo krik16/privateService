@@ -1,5 +1,7 @@
 package com.rongyi.easy.osm.entity;
 
+import com.rongyi.easy.activitymanage.vo.CommodityVO;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -92,6 +94,8 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
     private BigDecimal rebateAmount;//discount_amount-红包抵扣券
 
     private BigDecimal scoreAmount;//rebate_amount - 积分
+
+    private CommodityVO commodity;//关联的商品
 
 
     public String getRefundDiscountInfo() {
@@ -474,6 +478,16 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
     public void setScoreAmount(BigDecimal scoreAmount)
     {
         this.scoreAmount = scoreAmount;
+    }
+
+    public CommodityVO getCommodity()
+    {
+        return commodity;
+    }
+
+    public void setCommodity(CommodityVO commodity)
+    {
+        this.commodity = commodity;
     }
 
     @Override
