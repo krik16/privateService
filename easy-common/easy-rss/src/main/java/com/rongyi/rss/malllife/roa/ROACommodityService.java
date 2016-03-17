@@ -23,6 +23,8 @@ import com.rongyi.easy.mcmc.vo.CommodityPageBuyerVO;
 import com.rongyi.easy.mcmc.vo.CommoditySpecVO;
 import com.rongyi.easy.mcmc.vo.CommodityVO;
 import com.rongyi.easy.mcmc.vo.CommodityWebVO;
+import com.rongyi.easy.roa.param.SearchCommodityBrandParam;
+import com.rongyi.easy.roa.param.SearchCommodityCategoryParam;
 import com.rongyi.easy.solr.param.CommodityBrandSearchParam;
 import com.rongyi.easy.solr.param.CommoditySearchParam;
 
@@ -129,7 +131,7 @@ public interface ROACommodityService {
      * @param page			当前页
      * @return
      */
-	public ResponseVO getCommodityCategorysByMall(String mallId, boolean showParent, int pageSize, int page);
+	public ResponseVO getCommodityCategorysByMall(SearchCommodityCategoryParam param);
 	
 	/**
 	 * 根据商场获取品牌列表(有商品的品牌列表)
@@ -139,6 +141,6 @@ public interface ROACommodityService {
 	 * @param page			当前页
 	 * @return
 	 */
-	public ResponseVO getBrandsByMall(String mallId, String keyword, int pageSize, int page);
+	public ResponseVO getBrandsByMall(SearchCommodityBrandParam param);
 	
 }
