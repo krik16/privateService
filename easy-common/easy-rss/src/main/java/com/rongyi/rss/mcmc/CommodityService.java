@@ -137,5 +137,21 @@ public interface CommodityService {
 //	 * @return
 //	 */
 //	public ResponseResult getBuyerCommodityCategoryHasCommodity(BuyerCategoryParam categoryParam);
+    
+    /**
+     * 根据商场获取品类列表(有商品的品类列表)
+     * @param mallId
+     * @param showParent
+     * @return
+     */
+	public ResponseVO getCommodityCategorysByMall(String mallId, boolean showParent);
+	
+	/**
+	 * 根据商场获取品牌列表(有商品的品牌列表)
+	 * @param mallId
+	 * @param keyword
+	 * @return
+	 */
+	public ResponseVO getBrandsByMall(String mallId, String keyword);
 
 }
