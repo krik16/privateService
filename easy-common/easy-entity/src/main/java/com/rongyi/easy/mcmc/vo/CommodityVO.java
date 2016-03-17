@@ -56,7 +56,7 @@ public class CommodityVO  implements  Serializable {
 	private Integer source;//来源0表示页面添加1表示批量导入2表示app添加的商品
 	//private Integer distribution;//配送方式 1表示到店自提2快递3表示支持两种方式
 	private Integer freight;//1表示商家承担运费,0表示买家承担运费
-	private Integer terminalType;//上架终端：1.表示容易逛2.表示互动屏3.表示容易逛和互动屏4.表示微商5.微商,容易逛6.微商,互动屏7.容易逛, 互动屏, 微商(转换成二进制数个位1有容易逛第二位1有 互动屏第三位1有 微商)
+	private Integer terminalType;//上架终端：com.rongyi.easy.mcmc.constant.CommodityTerminalType常量定义
 	private Integer stockStatus;//0表示统一库存1表示分管库存
 	private String reason;//下架原因
 	private String mallId;//商场mysql Id
