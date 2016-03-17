@@ -79,7 +79,7 @@ public class ResponseResult implements java.io.Serializable {
 	 * @param message	消息
 	 * @return
 	 */
-	public ResponseResult Success(Object info, String errCode, String message) {
+	public ResponseResult Success(Object info, String message, String errCode) {
 		this.success = true;
 		this.code = errCode;
 		this.message = message;

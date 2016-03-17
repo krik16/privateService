@@ -35,6 +35,7 @@ public class CommodityVO1 implements  Serializable {
 	private String reason;//审核失败原因
 
 	private int identity = 5;//0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购6买手
+	private String terminal; // 终端 1：微信 2：终端屏 3：其他
 
 	public String getId() {
 		return id;
@@ -121,5 +122,12 @@ public class CommodityVO1 implements  Serializable {
 
 	public void setIdentity(int identity) {
 		this.identity = identity;
+	}
+	
+	public String getTerminal() {
+		return terminal;
+	}
+	public void setTerminal(String terminal) {
+		this.terminal = terminal;
 	}
 }

@@ -1,11 +1,13 @@
 package com.rongyi.easy.mcmc.param;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 
+import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.easy.mcmc.mvc.DateJson.DateJsonDeserializer;
 
 
@@ -274,6 +276,4 @@ public class CommodityParam {
 	public void setRemain(Integer remain) {
 		this.remain = remain;
 	}
-	
-	
 }
