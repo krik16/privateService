@@ -16,7 +16,7 @@ public class SearchCommodityBrandParam extends MalllifeBaseParam implements Seri
 	private static final long serialVersionUID = 1L;
 	private String mallId;		//商场id
 	private String keyword;//品牌搜索关键字
-	
+	private String source;//1微信  2终端屏
 	public String getMallId() {
 		return mallId;
 	}
@@ -29,9 +29,16 @@ public class SearchCommodityBrandParam extends MalllifeBaseParam implements Seri
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-
+	
+	public String getSource() {
+		return source;
+	}
+	public void setSource(String source) {
+		this.source = source;
+	}
 	@Override
 	public String toString() {
-		return super.toString() + "SearchCommodityBrandParam [mallId=" + mallId + ", keyword=" + keyword + "]";
+		return "SearchCommodityBrandParam [mallId=" + mallId + ", keyword="
+				+ keyword + ", source=" + source + "]";
 	}
 }

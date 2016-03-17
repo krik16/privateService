@@ -17,6 +17,7 @@ public class SearchCommodityCategoryParam extends MalllifeBaseParam implements S
 	
 	private String mallId;//商场id
 	private boolean showParent;//是否显示父级类别   true是  false否
+	private String source;//1微信  2终端屏
 	public String getMallId() {
 		return mallId;
 	}
@@ -29,9 +30,17 @@ public class SearchCommodityCategoryParam extends MalllifeBaseParam implements S
 	public void setShowParent(boolean showParent) {
 		this.showParent = showParent;
 	}
+	
+	public String getSource() {
+		return source;
+	}
+	public void setSource(String source) {
+		this.source = source;
+	}
 	@Override
 	public String toString() {
-		return super.toString() + "SearchCommodityCategoryParam [mallId=" + mallId + ", showParent=" + showParent + "]";
+		return "SearchCommodityCategoryParam [mallId=" + mallId
+				+ ", showParent=" + showParent + ", source=" + source + "]";
 	}
 	
 }
