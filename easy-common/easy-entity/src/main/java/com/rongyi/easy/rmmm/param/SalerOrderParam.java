@@ -26,13 +26,26 @@ public class SalerOrderParam implements Serializable {
 	 */
 
 	private String guideId;// 导购id
-	private String status;// 订单状态 1待处理，2未付款，3已完成，4已关闭",
+	private String status;// 订单状态 订单状态  1待处理，2未付款，3已完成，4已关闭"（店铺）  6待处理，7未付款，8已完成，9已关闭",（导购）
 
 	private String currentPage;// （要请求页）
 
 	private String pageSize;// 每页数据显示数量
 
 	private Integer guideType;// 卖家类型 1是导购 2是买手
+
+	public SalerOrderParam() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public SalerOrderParam(String guideId, String status, String currentPage, String pageSize) {
+		super();
+		this.guideId = guideId;
+		this.status = status;
+		this.currentPage = currentPage;
+		this.pageSize = pageSize;
+	}
 
 	public String getStatus() {
 		return status;

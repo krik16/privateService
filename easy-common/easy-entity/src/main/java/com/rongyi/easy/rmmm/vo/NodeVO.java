@@ -20,7 +20,7 @@ public class NodeVO implements Serializable{
 	private String node;//节点
 	private boolean flag;//是否点亮
 	private String nodeMessage;//
-	private String nodeStatus;//节点状态  （不同详情页，状态不同，请看接口文档）
+	private String nodeStatus;//0 处理中 1失败 2成功
 	public NodeVO() {
 		super();
 		// TODO Auto-generated constructor stub
