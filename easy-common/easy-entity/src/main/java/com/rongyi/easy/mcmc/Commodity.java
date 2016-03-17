@@ -167,6 +167,24 @@ public class Commodity implements  Serializable,Cloneable{
 	private String oPriceMin;//商品原最低价（用于买家版）
 	private String cPriceMax;//商品现最高价（用于买家版）
 	private String cPriceMin;//商品现最高价（用于买家版）
+	private Integer purchaseCount;//商品的限购数量
+	private String weAndTeStatus;//商品在终端机与App上的隐藏与显示
+	public Integer getPurchaseCount() {
+		return purchaseCount==null || purchaseCount < 0 ? 0:purchaseCount;
+	}
+
+	public void setPurchaseCount(Integer purchaseCount) {
+		purchaseCount = purchaseCount;
+	}
+
+	public String getWeAndTeStatus() {
+		return weAndTeStatus;
+	}
+
+	public void setWeAndTeStatus(String weAndTeStatus) {
+		this.weAndTeStatus = weAndTeStatus;
+	}
+
 	public ObjectId getId() {
 		return id;
 	}
@@ -389,6 +407,8 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setSecKillSign(secKillSign);
 //		commodity.setActivityStartTime(activityStartTime);
 //		commodity.setActivityEndTime(activityEndTime);
+		commodity.setPurchaseCount(purchaseCount);
+		commodity.setWeAndTeStatus(weAndTeStatus);
 		return commodity;
 	}
 	
@@ -527,6 +547,6 @@ public class Commodity implements  Serializable,Cloneable{
 				+ ", customCategory=" + customCategory + ", freight=" + freight + ", terminalType=" + terminalType
 				+ ", registerAt=" + registerAt + ", soldOutAt=" + soldOutAt + ", source=" + source + ", stockStatus="
 				+ stockStatus + ", systemNumber=" + systemNumber + ", reason=" + reason + ", oPriceMax=" + oPriceMax
-				+ ", oPriceMin=" + oPriceMin + ", cPriceMax=" + cPriceMax + ", cPriceMin=" + cPriceMin + "]";
+				+ ", oPriceMin=" + oPriceMin +",purchaseCount="+purchaseCount+",weAndTeStatus="+weAndTeStatus+ ", cPriceMax=" + cPriceMax + ", cPriceMin=" + cPriceMin + "]";
 	}
 }
