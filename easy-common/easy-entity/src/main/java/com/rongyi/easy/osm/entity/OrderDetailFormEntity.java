@@ -1,6 +1,6 @@
 package com.rongyi.easy.osm.entity;
 
-import com.rongyi.easy.activitymanage.vo.CommodityVO;
+import com.rongyi.easy.mcmc.vo.CommodityVO;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
