@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.mcmc.param.ActivityCommodityParam;
+import com.rongyi.easy.roa.param.SearchCommodityBrandParam;
 import com.rongyi.easy.solr.result.CommoditySolrResult;
 import org.bson.types.ObjectId;
 
@@ -100,6 +101,13 @@ public interface McmcCommoditySolrService {
 	public boolean cleanCommoditySecKill(String secKillSign);
 
 	public boolean updateCommoditySecKill(String commodityId,String secKillSign);
+
+	/**
+	 * 搜索品牌列表
+	 * @param brandParam	搜索参数
+	 * @return
+	 */
+	public Map<String, Object> searchBrands(SearchCommodityBrandParam brandParam);
 
 //	/**
 //	 * 搜索有商品的商品分类列表
