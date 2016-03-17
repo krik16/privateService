@@ -1,6 +1,7 @@
 package com.rongyi.rss.activitymanage;
 
 import com.rongyi.easy.activitymanage.entity.ActivityInfo;
+import com.rongyi.easy.merchantactivity.vo.MerchantActivityCountVO;
 import com.rongyi.easy.activitymanage.vo.ActivityGoodsCheckRecordVO;
 
 import java.util.Date;
@@ -28,6 +29,14 @@ public interface MerchantActivityService {
      * @param param
      */
     public void sendImMsg(String[] userIds,Map<String, String> param);
+
+    /**
+     * 通过商场 查询商场下所有活动总量
+     * @param relevanId
+     * @param relevanType
+     * @return
+     */
+    public MerchantActivityCountVO searchMerchantCount(String relevanId,Integer relevanType);
     
     /**
 	 * 修改报名的信息(参与价或参与库存)

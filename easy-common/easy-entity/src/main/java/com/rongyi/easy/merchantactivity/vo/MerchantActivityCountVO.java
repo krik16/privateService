@@ -54,6 +54,7 @@ public class MerchantActivityCountVO implements Serializable {
     }
 
     public Integer getSupportActivityCount() {
+        this.supportActivityCount= this.allActivityCount;
         return supportActivityCount;
     }
 
