@@ -29,11 +29,9 @@ public class SearchCommodityBrandParam extends MalllifeBaseParam implements Seri
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-	
-}
-	
+
 	@Override
 	public String toString() {
-		return super.toString() + "SearchCommodityBrandParam [mallId=" + mallId + ", keywords=" + keywords + "]";
+		return super.toString() + "SearchCommodityBrandParam [mallId=" + mallId + ", keyword=" + keyword + "]";
 	}
 }

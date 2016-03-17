@@ -10,6 +10,9 @@ import com.rongyi.easy.mcmc.*;
 import com.rongyi.easy.mcmc.param.SaleParam;
 
 import com.rongyi.easy.mcmc.vo.*;
+import com.rongyi.easy.roa.param.SearchCommodityBrandParam;
+import com.rongyi.easy.roa.param.SearchCommodityCategoryParam;
+
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
@@ -140,22 +143,16 @@ public interface CommodityService {
     
     /**
      * 根据商场获取品类列表(有商品的品类列表)
-     * @param mallId		商场ID
-     * @param showParent	是否显示父级
-     * @param pageSize		分页条数
-     * @param page			当前页
+     * @param categoryParam		商场搜索品类列表参数对象
      * @return
      */
-	public ResponseVO getCommodityCategorysByMall(String mallId, boolean showParent, int pageSize, int page);
+	public ResponseVO getCommodityCategorysByMall(SearchCommodityCategoryParam categoryParam);
 	
 	/**
 	 * 根据商场获取品牌列表(有商品的品牌列表)
-	 * @param mallId		商场ID
-	 * @param keyword		搜索关键字（匹配品牌名称）
-	 * @param pageSize		分页条数
-	 * @param page			当前页
+	 * @param brandParam	商场搜索品牌列表参数对象
 	 * @return
 	 */
-	public ResponseVO getBrandsByMall(String mallId, String keyword, int pageSize, int page);
+	public ResponseVO getBrandsByMall(SearchCommodityBrandParam brandParam);
 
 }

@@ -29,6 +29,9 @@ public class SearchCommodityCategoryParam extends MalllifeBaseParam implements S
 	public void setShowParent(boolean showParent) {
 		this.showParent = showParent;
 	}
-	
+	@Override
+	public String toString() {
+		return super.toString() + "SearchCommodityCategoryParam [mallId=" + mallId + ", showParent=" + showParent + "]";
+	}
 	
 }
