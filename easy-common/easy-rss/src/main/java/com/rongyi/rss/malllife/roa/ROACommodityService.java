@@ -121,4 +121,24 @@ public interface ROACommodityService {
 //	 * @return
 //	 */
 //	public ResponseResult getBuyerCommodityCategoryHasCommodity(BuyerCategoryParam categoryParam);
+	/**
+     * 根据商场获取品类列表(有商品的品类列表)
+     * @param mallId		商场ID
+     * @param showParent	是否显示父级
+     * @param pageSize		分页条数
+     * @param page			当前页
+     * @return
+     */
+	public ResponseVO getCommodityCategorysByMall(String mallId, boolean showParent, int pageSize, int page);
+	
+	/**
+	 * 根据商场获取品牌列表(有商品的品牌列表)
+	 * @param mallId		商场ID
+	 * @param keyword		搜索关键字（匹配品牌名称）
+	 * @param pageSize		分页条数
+	 * @param page			当前页
+	 * @return
+	 */
+	public ResponseVO getBrandsByMall(String mallId, String keyword, int pageSize, int page);
+	
 }
