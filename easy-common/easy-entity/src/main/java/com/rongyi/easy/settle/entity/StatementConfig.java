@@ -79,6 +79,16 @@ public class StatementConfig implements Serializable {
     private Date cycleEndTime;
 
     /**
+     * 计算周期（单位：天）
+     */
+    private Integer cycleDay;
+    
+    /** 
+     * 对账单生成的日期（自定义类型），如每月5日15日25日生成订单，记为5&15&25 
+     */
+    private String cycleRegularDay;
+    
+    /**
      * 是否滚动账期（0:是，1:否，默认是）
      */
     private Byte isLoop;
@@ -450,5 +460,72 @@ public class StatementConfig implements Serializable {
 		this.linkRole = linkRole;
 	}
 
+	/**
+	 * @return the cycleDay
+	 */
+	public Integer getCycleDay() {
+		return cycleDay;
+	}
 
+	/**
+	 * @param cycleDay the cycleDay to set
+	 */
+	public void setCycleDay(Integer cycleDay) {
+		this.cycleDay = cycleDay;
+	}
+
+	/**
+	 * @return the cycleRegularDay
+	 */
+	public String getCycleRegularDay() {
+		return cycleRegularDay;
+	}
+
+	/**
+	 * @param cycleRegularDay the cycleRegularDay to set
+	 */
+	public void setCycleRegularDay(String cycleRegularDay) {
+		this.cycleRegularDay = cycleRegularDay;
+	}
+
+    @Override
+    public String toString() {
+        return "StatementConfig{" +
+                "id=" + id +
+                ", ruleCode='" + ruleCode + '\'' +
+                ", cooperateType=" + cooperateType +
+                ", bussinessType=" + bussinessType +
+                ", bussinessCode='" + bussinessCode + '\'' +
+                ", bussinessId='" + bussinessId + '\'' +
+                ", bussinessName='" + bussinessName + '\'' +
+                ", bussinessRealAddress='" + bussinessRealAddress + '\'' +
+                ", linkType=" + linkType +
+                ", linkRole=" + linkRole +
+                ", linkShopOp=" + linkShopOp +
+                ", countCycle=" + countCycle +
+                ", cycleStartTime=" + cycleStartTime +
+                ", cycleEndTime=" + cycleEndTime +
+                ", cycleDay=" + cycleDay +
+                ", cycleRegularDay='" + cycleRegularDay + '\'' +
+                ", isLoop=" + isLoop +
+                ", verifyType=" + verifyType +
+                ", generateHeaderTime='" + generateHeaderTime + '\'' +
+                ", generateHmTime='" + generateHmTime + '\'' +
+                ", sendTime=" + sendTime +
+                ", datumType=" + datumType +
+                ", payMode=" + payMode +
+                ", regularDay='" + regularDay + '\'' +
+                ", rollDay='" + rollDay + '\'' +
+                ", rollType=" + rollType +
+                ", effectStartTime=" + effectStartTime +
+                ", effectEndTime=" + effectEndTime +
+                ", payChannel=" + payChannel +
+                ", contractNo='" + contractNo + '\'' +
+                ", linkedRuleCode='" + linkedRuleCode + '\'' +
+                ", status=" + status +
+                ", createAt=" + createAt +
+                ", isDelete=" + isDelete +
+                ", createBy='" + createBy + '\'' +
+                '}';
+    }
 }

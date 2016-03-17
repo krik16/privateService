@@ -3,6 +3,7 @@ package com.rongyi.rss.mcmc;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.mcmc.vo.CommodityFullVO;
 import org.bson.types.ObjectId;
 
 import com.rongyi.easy.mcmc.Commodity;
@@ -46,4 +47,8 @@ public interface ICommodityService {
 	public void updateSystemNumber(List<ObjectId> commodityIds,String systemNumber);
 	
 	public List<Commodity> findBySystemNumer(String systemNumber);
+
+	public CommodityFullVO getFullCommodity(String commodityId);
+
+	public List<CommodityFullVO> getFullCommodityList(List<String> commodityIds);
 }
