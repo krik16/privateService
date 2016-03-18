@@ -1,6 +1,7 @@
 package com.rongyi.easy.bdata.vo;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class AdvertNewVo implements Serializable {
 	/** 
@@ -18,9 +19,9 @@ public class AdvertNewVo implements Serializable {
 	private Long publish_start;//发布开始时间
 	private Long publish_end;//发布结束时间
 	private Long group_id;//广告组id
-	private Long create_by;//创建人账号ID
+	private String create_by;//创建人账号ID
 	private Long create_at;//记录创建时间
-	private Long update_by;//更新人账号ID
+	private String update_by;//更新人账号ID
 	private Long update_at;//记录更新时间
 	private Integer adOrder =0;//广告排序
 	private Integer holder =0;//所属 0 容易网 1 商家
@@ -29,6 +30,7 @@ public class AdvertNewVo implements Serializable {
 	private String relation_name;
 	private String relation_code;
 	private String relation_url;
+	private List<String> mall_ids;
 	/**
 	 * @return the id
 	 */
@@ -150,42 +152,6 @@ public class AdvertNewVo implements Serializable {
 		this.group_id = group_id;
 	}
 	/**
-	 * @return the create_by
-	 */
-	public Long getCreate_by() {
-		return create_by;
-	}
-	/**
-	 * @param create_by the create_by to set
-	 */
-	public void setCreate_by(Long create_by) {
-		this.create_by = create_by;
-	}
-	/**
-	 * @return the create_at
-	 */
-	public Long getCreate_at() {
-		return create_at;
-	}
-	/**
-	 * @param create_at the create_at to set
-	 */
-	public void setCreate_at(Long create_at) {
-		this.create_at = create_at;
-	}
-	/**
-	 * @return the update_by
-	 */
-	public Long getUpdate_by() {
-		return update_by;
-	}
-	/**
-	 * @param update_by the update_by to set
-	 */
-	public void setUpdate_by(Long update_by) {
-		this.update_by = update_by;
-	}
-	/**
 	 * @return the update_at
 	 */
 	public Long getUpdate_at() {
@@ -220,6 +186,42 @@ public class AdvertNewVo implements Serializable {
 	 */
 	public void setAdOrder(Integer adOrder) {
 		this.adOrder = adOrder;
+	}
+	/**
+	 * @return the create_by
+	 */
+	public String getCreate_by() {
+		return create_by;
+	}
+	/**
+	 * @param create_by the create_by to set
+	 */
+	public void setCreate_by(String create_by) {
+		this.create_by = create_by;
+	}
+	/**
+	 * @return the create_at
+	 */
+	public Long getCreate_at() {
+		return create_at;
+	}
+	/**
+	 * @param create_at the create_at to set
+	 */
+	public void setCreate_at(Long create_at) {
+		this.create_at = create_at;
+	}
+	/**
+	 * @return the update_by
+	 */
+	public String getUpdate_by() {
+		return update_by;
+	}
+	/**
+	 * @param update_by the update_by to set
+	 */
+	public void setUpdate_by(String update_by) {
+		this.update_by = update_by;
 	}
 	/**
 	 * @return the holder
@@ -293,12 +295,24 @@ public class AdvertNewVo implements Serializable {
 	public void setRelation_url(String relation_url) {
 		this.relation_url = relation_url;
 	}
+	/**
+	 * @return the mall_ids
+	 */
+	public List<String> getMall_ids() {
+		return mall_ids;
+	}
+	/**
+	 * @param mall_ids the mall_ids to set
+	 */
+	public void setMall_ids(List<String> mall_ids) {
+		this.mall_ids = mall_ids;
+	}
 	/** 
 	* @Title: toString 
 	* @Description: TODO(这里用一句话描述这个方法的作用) 
 	* @param @return    设定文件 
 	* @author shaozhou
-	* @date 2016年3月15日 下午5:45:34
+	* @date 2016年3月18日 下午2:40:03
 	* @throws 
 	*/
 	@Override
@@ -309,6 +323,7 @@ public class AdvertNewVo implements Serializable {
 				+ publish_end + ", group_id=" + group_id + ", create_by=" + create_by + ", create_at=" + create_at
 				+ ", update_by=" + update_by + ", update_at=" + update_at + ", adOrder=" + adOrder + ", holder="
 				+ holder + ", mall_id=" + mall_id + ", relation_id=" + relation_id + ", relation_name=" + relation_name
-				+ ", relation_code=" + relation_code + ", relation_url=" + relation_url + "]";
+				+ ", relation_code=" + relation_code + ", relation_url=" + relation_url + ", mall_ids=" + mall_ids
+				+ "]";
 	}
 }

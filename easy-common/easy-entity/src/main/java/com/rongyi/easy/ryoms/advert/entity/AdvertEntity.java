@@ -2,6 +2,7 @@ package com.rongyi.easy.ryoms.advert.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class AdvertEntity implements Serializable {
 	/** 
@@ -27,6 +28,7 @@ public class AdvertEntity implements Serializable {
 	private String relation_name;
 	private String relation_code;
 	private String relation_url;
+	private List<String> mall_ids;
 	/**
 	 * @return the id
 	 */
@@ -254,5 +256,17 @@ public class AdvertEntity implements Serializable {
 	 */
 	public void setRelation_url(String relation_url) {
 		this.relation_url = relation_url;
+	}
+	/**
+	 * @return the mall_ids
+	 */
+	public List<String> getMall_ids() {
+		return mall_ids;
+	}
+	/**
+	 * @param mall_ids the mall_ids to set
+	 */
+	public void setMall_ids(List<String> mall_ids) {
+		this.mall_ids = mall_ids;
 	}
 }
