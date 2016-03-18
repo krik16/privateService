@@ -41,4 +41,7 @@ public interface ITotalCommodityService {
 	public Long searchCommodityByCodeAndBrand(String code,String brandMid);
 
 	public Map<String ,Object> findListForWechat(Map<String, Object> params);
+
+	public boolean updateCommodityWeAndTeStatus(String id, String type, String terminalType, String weAndTeStatus);
+
 }

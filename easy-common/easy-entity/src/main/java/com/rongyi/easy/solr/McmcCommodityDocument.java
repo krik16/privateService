@@ -84,6 +84,10 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private Integer terminalType;// com.rongyi.easy.mcmc.constant.CommodityTerminalType常量定义
 	@Field("systemNumber")
 	private String systemNumber;
+	@Field("weAndTeStatus")
+	private String weAndTeStatus;
+
+
 
 
 	public Double getPrice() {
@@ -377,5 +381,13 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 	public void setSystemNumber(String systemNumber) {
 		this.systemNumber = systemNumber;
+	}
+
+	public String getWeAndTeStatus() {
+		return weAndTeStatus;
+	}
+
+	public void setWeAndTeStatus(String weAndTeStatus) {
+		this.weAndTeStatus = weAndTeStatus;
 	}
 }

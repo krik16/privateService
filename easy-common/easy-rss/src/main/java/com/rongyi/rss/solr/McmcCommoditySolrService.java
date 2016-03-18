@@ -120,5 +120,6 @@ public interface McmcCommoditySolrService {
 //	public Map<String, Object> searchCommodityCategoryHasCommodity(BuyerCategoryParam categoryParam);
 
 //	public boolean updateCommoditySale(String commodityId, Integer sortPosition);
+public boolean updateCommodityWeAndTeStatus(String commodityId, String  weAndTeStatus);
 
 }
