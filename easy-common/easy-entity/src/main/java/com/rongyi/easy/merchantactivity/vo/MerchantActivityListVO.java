@@ -1,5 +1,7 @@
 package com.rongyi.easy.merchantactivity.vo;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -60,5 +62,180 @@ public class MerchantActivityListVO implements Serializable {
      */
     private Integer isAuto = 1;
 
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Date getStartAt() {
+        return startAt;
+    }
+
+    public void setStartAt(Date startAt) {
+        this.startAt = startAt;
+    }
+
+    public Date getEndAt() {
+        return endAt;
+    }
+
+    public void setEndAt(Date endAt) {
+        this.endAt = endAt;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public String getSynTarget() {
+        return synTarget;
+    }
+
+    public void setSynTarget(String synTarget) {
+        this.synTarget = synTarget;
+    }
+
+    public Date getEnrollStartAt() {
+        return enrollStartAt;
+    }
+
+    public void setEnrollStartAt(Date enrollStartAt) {
+        this.enrollStartAt = enrollStartAt;
+    }
+
+    public Date getEnrollEndAt() {
+        return enrollEndAt;
+    }
+
+    public void setEnrollEndAt(Date enrollEndAt) {
+        this.enrollEndAt = enrollEndAt;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
+    }
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
+
+    public String getUpdateUser() {
+        return updateUser;
+    }
+
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser;
+    }
+
+    public Date getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
+    }
+
+    public Integer getPendGoods() {
+        return pendGoods;
+    }
+
+    public void setPendGoods(Integer pendGoods) {
+        this.pendGoods = pendGoods;
+    }
+
+    public Integer getRevokeGoods() {
+        return revokeGoods;
+    }
+
+    public void setRevokeGoods(Integer revokeGoods) {
+        this.revokeGoods = revokeGoods;
+    }
+
+    public Integer getActivityType() {
+        return activityType;
+    }
+
+    public void setActivityType(Integer activityType) {
+        this.activityType = activityType;
+    }
+
+    public Integer getGoodsTotal() {
+        return goodsTotal;
+    }
+
+    public void setGoodsTotal(Integer goodsTotal) {
+        this.goodsTotal = goodsTotal;
+    }
+
+    public Integer getPassGoods() {
+        return passGoods;
+    }
+
+    public void setPassGoods(Integer passGoods) {
+        this.passGoods = passGoods;
+    }
+
+    public Integer getIsAuto() {
+        return isAuto;
+    }
+
+    public void setIsAuto(Integer isAuto) {
+        this.isAuto = isAuto;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("name", name)
+                .append("startAt", startAt)
+                .append("endAt", endAt)
+                .append("type", type)
+                .append("synTarget", synTarget)
+                .append("enrollStartAt", enrollStartAt)
+                .append("enrollEndAt", enrollEndAt)
+                .append("status", status)
+                .append("createUser", createUser)
+                .append("createAt", createAt)
+                .append("updateUser", updateUser)
+                .append("updateAt", updateAt)
+                .append("pendGoods", pendGoods)
+                .append("revokeGoods", revokeGoods)
+                .append("activityType", activityType)
+                .append("goodsTotal", goodsTotal)
+                .append("passGoods", passGoods)
+                .append("isAuto", isAuto)
+                .toString();
+    }
 }
