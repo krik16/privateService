@@ -1,5 +1,7 @@
 package com.rongyi.easy.merchantactivity.vo;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -47,6 +49,9 @@ public class MerchantActivityListVO implements Serializable {
     private Integer pendGoods;
     
     private Integer revokeGoods;
+
+    private String relevanceId;
+    private Integer relevanceType;
     /**模版类型*/
     private Integer activityType;
     /**报名商品总数*/
@@ -60,5 +65,224 @@ public class MerchantActivityListVO implements Serializable {
      */
     private Integer isAuto = 1;
 
+    /**
+     * 商品数量
+     */
+    private ActivityGoodsCountVO activityGoodsCountVO;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Date getStartAt() {
+        return startAt;
+    }
+
+    public void setStartAt(Date startAt) {
+        this.startAt = startAt;
+    }
+
+    public Date getEndAt() {
+        return endAt;
+    }
+
+    public void setEndAt(Date endAt) {
+        this.endAt = endAt;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public String getSynTarget() {
+        return synTarget;
+    }
+
+    public void setSynTarget(String synTarget) {
+        this.synTarget = synTarget;
+    }
+
+    public Date getEnrollStartAt() {
+        return enrollStartAt;
+    }
+
+    public void setEnrollStartAt(Date enrollStartAt) {
+        this.enrollStartAt = enrollStartAt;
+    }
+
+    public Date getEnrollEndAt() {
+        return enrollEndAt;
+    }
+
+    public void setEnrollEndAt(Date enrollEndAt) {
+        this.enrollEndAt = enrollEndAt;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
+    }
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
+
+    public String getUpdateUser() {
+        return updateUser;
+    }
+
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser;
+    }
+
+    public Date getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
+    }
+
+    public Integer getPendGoods() {
+        if(activityGoodsCountVO != null){
+            return activityGoodsCountVO.getAuditGoodsCount();
+        }
+        return pendGoods;
+    }
+
+    public void setPendGoods(Integer pendGoods) {
+        this.pendGoods = pendGoods;
+    }
+
+    public Integer getRevokeGoods() {
+        if(activityGoodsCountVO != null){
+            return activityGoodsCountVO.getRevokeGoodsCount();
+        }
+        return revokeGoods;
+    }
+
+    public void setRevokeGoods(Integer revokeGoods) {
+        this.revokeGoods = revokeGoods;
+    }
+
+    public Integer getActivityType() {
+        return activityType;
+    }
+
+    public void setActivityType(Integer activityType) {
+        this.activityType = activityType;
+    }
+
+    public Integer getGoodsTotal() {
+        if(activityGoodsCountVO != null){
+            return activityGoodsCountVO.getAllGoodsCount();
+        }
+        return goodsTotal;
+    }
+
+    public void setGoodsTotal(Integer goodsTotal) {
+        this.goodsTotal = goodsTotal;
+    }
+
+    public Integer getPassGoods() {
+        if(activityGoodsCountVO != null){
+            return activityGoodsCountVO.getPassGoodsCount();
+        }
+        return passGoods;
+    }
+
+    public void setPassGoods(Integer passGoods) {
+        this.passGoods = passGoods;
+    }
+
+    public Integer getIsAuto() {
+        return isAuto;
+    }
+
+    public void setIsAuto(Integer isAuto) {
+        this.isAuto = isAuto;
+    }
+
+    public ActivityGoodsCountVO getActivityGoodsCountVO() {
+        return activityGoodsCountVO;
+    }
+
+    public void setActivityGoodsCountVO(ActivityGoodsCountVO activityGoodsCountVO) {
+        this.activityGoodsCountVO = activityGoodsCountVO;
+    }
+
+    public String getRelevanceId() {
+        return relevanceId;
+    }
+
+    public void setRelevanceId(String relevanceId) {
+        this.relevanceId = relevanceId;
+    }
+
+    public Integer getRelevanceType() {
+        return relevanceType;
+    }
+
+    public void setRelevanceType(Integer relevanceType) {
+        this.relevanceType = relevanceType;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("name", name)
+                .append("startAt", startAt)
+                .append("endAt", endAt)
+                .append("type", type)
+                .append("synTarget", synTarget)
+                .append("enrollStartAt", enrollStartAt)
+                .append("enrollEndAt", enrollEndAt)
+                .append("status", status)
+                .append("createUser", createUser)
+                .append("createAt", createAt)
+                .append("updateUser", updateUser)
+                .append("updateAt", updateAt)
+                .append("pendGoods", pendGoods)
+                .append("revokeGoods", revokeGoods)
+                .append("relevanceId", relevanceId)
+                .append("relevanceType", relevanceType)
+                .append("activityType", activityType)
+                .append("goodsTotal", goodsTotal)
+                .append("passGoods", passGoods)
+                .append("isAuto", isAuto)
+                .append("activityGoodsCountVO", activityGoodsCountVO)
+                .toString();
+    }
 }

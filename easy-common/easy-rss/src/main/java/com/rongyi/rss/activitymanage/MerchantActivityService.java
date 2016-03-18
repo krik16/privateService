@@ -1,8 +1,11 @@
 package com.rongyi.rss.activitymanage;
 
+import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.activitymanage.entity.ActivityInfo;
+import com.rongyi.easy.merchantactivity.param.MerchantActivityListParam;
 import com.rongyi.easy.merchantactivity.vo.MerchantActivityCountVO;
 import com.rongyi.easy.activitymanage.vo.ActivityGoodsCheckRecordVO;
+import com.rongyi.easy.merchantactivity.vo.MerchantActivityListVO;
 
 import java.util.Date;
 import java.util.Map;
@@ -16,6 +19,8 @@ import java.util.Map;
  * ideaworkspace.
  */
 public interface MerchantActivityService {
+
+	public PagingVO<MerchantActivityListVO> searchMerchantActivityList(MerchantActivityListParam merchantActivityListParam);
     /**
      * 保存商家活动规则信息
      * @Param activityInfo
