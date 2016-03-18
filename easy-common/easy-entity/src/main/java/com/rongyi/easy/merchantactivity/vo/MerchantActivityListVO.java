@@ -49,6 +49,9 @@ public class MerchantActivityListVO implements Serializable {
     private Integer pendGoods;
     
     private Integer revokeGoods;
+
+    private String relevanceId;
+    private Integer relevanceType;
     /**模版类型*/
     private Integer activityType;
     /**报名商品总数*/
@@ -61,6 +64,11 @@ public class MerchantActivityListVO implements Serializable {
      * 是否自营
      */
     private Integer isAuto = 1;
+
+    /**
+     * 商品数量
+     */
+    private ActivityGoodsCountVO activityGoodsCountVO;
 
     public Integer getId() {
         return id;
@@ -167,6 +175,9 @@ public class MerchantActivityListVO implements Serializable {
     }
 
     public Integer getPendGoods() {
+        if(activityGoodsCountVO != null){
+            return activityGoodsCountVO.getAuditGoodsCount();
+        }
         return pendGoods;
     }
 
@@ -175,6 +186,9 @@ public class MerchantActivityListVO implements Serializable {
     }
 
     public Integer getRevokeGoods() {
+        if(activityGoodsCountVO != null){
+            return activityGoodsCountVO.getRevokeGoodsCount();
+        }
         return revokeGoods;
     }
 
@@ -191,6 +205,9 @@ public class MerchantActivityListVO implements Serializable {
     }
 
     public Integer getGoodsTotal() {
+        if(activityGoodsCountVO != null){
+            return activityGoodsCountVO.getAllGoodsCount();
+        }
         return goodsTotal;
     }
 
@@ -199,6 +216,9 @@ public class MerchantActivityListVO implements Serializable {
     }
 
     public Integer getPassGoods() {
+        if(activityGoodsCountVO != null){
+            return activityGoodsCountVO.getPassGoodsCount();
+        }
         return passGoods;
     }
 
@@ -212,6 +232,30 @@ public class MerchantActivityListVO implements Serializable {
 
     public void setIsAuto(Integer isAuto) {
         this.isAuto = isAuto;
+    }
+
+    public ActivityGoodsCountVO getActivityGoodsCountVO() {
+        return activityGoodsCountVO;
+    }
+
+    public void setActivityGoodsCountVO(ActivityGoodsCountVO activityGoodsCountVO) {
+        this.activityGoodsCountVO = activityGoodsCountVO;
+    }
+
+    public String getRelevanceId() {
+        return relevanceId;
+    }
+
+    public void setRelevanceId(String relevanceId) {
+        this.relevanceId = relevanceId;
+    }
+
+    public Integer getRelevanceType() {
+        return relevanceType;
+    }
+
+    public void setRelevanceType(Integer relevanceType) {
+        this.relevanceType = relevanceType;
     }
 
     @Override
@@ -232,10 +276,13 @@ public class MerchantActivityListVO implements Serializable {
                 .append("updateAt", updateAt)
                 .append("pendGoods", pendGoods)
                 .append("revokeGoods", revokeGoods)
+                .append("relevanceId", relevanceId)
+                .append("relevanceType", relevanceType)
                 .append("activityType", activityType)
                 .append("goodsTotal", goodsTotal)
                 .append("passGoods", passGoods)
                 .append("isAuto", isAuto)
+                .append("activityGoodsCountVO", activityGoodsCountVO)
                 .toString();
     }
 }
