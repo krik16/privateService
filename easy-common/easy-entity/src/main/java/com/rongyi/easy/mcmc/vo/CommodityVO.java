@@ -68,6 +68,7 @@ public class CommodityVO  implements  Serializable {
 	private Integer processIdentity;//当前登录人的身份
 	private String activityType = "0";	//活动状态[闪购1、特卖2、秒杀3]
 	private Integer purchaseCount; //商品限购数 0为不限购
+	private String  weAndTeStatus;//1表示终端机，2表示微信，3表示都显示，4表示都不显示
 
 	public String getActivityType() {
 		return activityType;
@@ -236,6 +237,7 @@ public class CommodityVO  implements  Serializable {
 		this.brandMid = commodity.getBrandMid();//品牌mongoId
 		this.mallMid = commodity.getMallMid();//商场mongoId
 		this.purchaseCount=commodity.getPurchaseCount();
+		this.weAndTeStatus=commodity.getWeAndTeStatus();
 		if(commodity.isSpot()){
 			this.isSpot = 1;//现货
 		}else{
@@ -440,6 +442,7 @@ public class CommodityVO  implements  Serializable {
 				", supportSelfPickup=" + supportSelfPickup +
 				", identity=" + identity +
 				", processIdentity=" + processIdentity +
+				", weAndTeStatus=" +weAndTeStatus+
 				", purchaseCount=" + purchaseCount +
 				'}';
 	}
@@ -532,5 +535,13 @@ public class CommodityVO  implements  Serializable {
 	public void setPurchaseCount(Integer purchaseCount)
 	{
 		this.purchaseCount = purchaseCount;
+	}
+
+	public String getWeAndTeStatus() {
+		return weAndTeStatus;
+	}
+
+	public void setWeAndTeStatus(String weAndTeStatus) {
+		this.weAndTeStatus = weAndTeStatus;
 	}
 }

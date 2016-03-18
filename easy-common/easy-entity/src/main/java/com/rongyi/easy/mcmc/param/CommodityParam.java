@@ -74,6 +74,8 @@ public class CommodityParam {
 	private Integer remain;//剩余总量
 	
 	private int hasSpec;//0表示无规格 1表示有规格
+	private String  weAndTeStatus;//1表示终端机，2表示微信，3表示都显示，4表示都不显示
+	private Integer purchaseCount;//限购数量，0表示不限购
 	
 	public String getId() {
 		return id;
@@ -277,6 +279,22 @@ public class CommodityParam {
 		this.remain = remain;
 	}
 
+	public String getWeAndTeStatus() {
+		return weAndTeStatus;
+	}
+
+	public void setWeAndTeStatus(String weAndTeStatus) {
+		this.weAndTeStatus = weAndTeStatus;
+	}
+
+	public Integer getPurchaseCount() {
+		return purchaseCount;
+	}
+
+	public void setPurchaseCount(Integer purchaseCount) {
+		this.purchaseCount = purchaseCount;
+	}
+
 	@Override
 	public String toString() {
 		return "CommodityParam [type=" + type + ", id=" + id + ", name=" + name + ", category=" + category + ", status="
@@ -285,7 +303,8 @@ public class CommodityParam {
 				+ ", categoryIds=" + categoryIds + ", customCategory=" + customCategory + ", distribution="
 				+ distribution + ", freight=" + freight + ", terminalType=" + terminalType + ", registerAt="
 				+ registerAt + ", soldOutAt=" + soldOutAt + ", stockStatus=" + stockStatus + ", commoditySpeceParams="
-				+ commoditySpeceParams + ", stock=" + stock + ", remain=" + remain + ", hasSpec=" + hasSpec + "]";
+				+ commoditySpeceParams + ", stock=" + stock + ", remain=" + remain
+				+",weAndTeStatus="+weAndTeStatus+",purchaseCount="+purchaseCount+ ", hasSpec=" + hasSpec + "]";
 	}
 	
 }
