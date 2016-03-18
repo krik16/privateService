@@ -15,6 +15,17 @@ public interface ActivityConstants {
     }
 
     /**
+     * 活动的机构类型
+     */
+    interface ActivityInfoType{
+        //0:表示大运营 1:商场的活动  2:表示店铺 3表示集团 4:表示品牌
+        Integer RONGYI = 0;//大运营
+        Integer SHOP =2;//店铺
+        Integer MALL = 1;//商场
+        Integer Brand = 4;//品牌
+        Integer GROUP = 3;//集团
+    }
+    /**
      * 活动商品的机构类型
      */
     interface ActivityGoodIdentity{

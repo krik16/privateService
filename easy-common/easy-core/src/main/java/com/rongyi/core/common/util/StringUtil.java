@@ -254,4 +254,18 @@ public class StringUtil {
 
 	}
 
+	/**
+	 * 字符串转换成Int
+	 * 
+	 * @author wangjianhua
+	 * @param str
+	 * @return 转换失败，返回：0
+	 */
+	public static int tryParseInt(String str) {
+		try {
+			return Integer.parseInt(str);
+		} catch (Exception e) {
+			return 0;
+		}
+	}
 }

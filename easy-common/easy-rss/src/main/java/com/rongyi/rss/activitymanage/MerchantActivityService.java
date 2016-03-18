@@ -1,7 +1,11 @@
 package com.rongyi.rss.activitymanage;
 
+import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.activitymanage.entity.ActivityInfo;
+import com.rongyi.easy.merchantactivity.param.MerchantActivityListParam;
+import com.rongyi.easy.merchantactivity.vo.MerchantActivityCountVO;
 import com.rongyi.easy.activitymanage.vo.ActivityGoodsCheckRecordVO;
+import com.rongyi.easy.merchantactivity.vo.MerchantActivityListVO;
 
 import java.util.Date;
 import java.util.Map;
@@ -15,6 +19,8 @@ import java.util.Map;
  * ideaworkspace.
  */
 public interface MerchantActivityService {
+
+	public PagingVO<MerchantActivityListVO> searchMerchantActivityList(MerchantActivityListParam merchantActivityListParam);
     /**
      * 保存商家活动规则信息
      * @Param activityInfo
@@ -28,6 +34,14 @@ public interface MerchantActivityService {
      * @param param
      */
     public void sendImMsg(String[] userIds,Map<String, String> param);
+
+    /**
+     * 通过商场 查询商场下所有活动总量
+     * @param relevanId
+     * @param relevanType
+     * @return
+     */
+    public MerchantActivityCountVO searchMerchantCount(String relevanId,Integer relevanType);
     
     /**
 	 * 修改报名的信息(参与价或参与库存)
@@ -82,4 +96,24 @@ public interface MerchantActivityService {
 	 * @return
 	 */
 	public ActivityGoodsCheckRecordVO refusedReason(int activityGoodsId);
+	
+	/**
+	 * 申请撤销报名
+	 * 
+	 * @author wangjianhua
+	 * @param activityGoodsId
+	 * @param userName
+	 * @return
+	 */
+	public int revokeEnroll(int activityGoodsId, String userName);
+	
+	/**
+	 * 取消报名
+	 * 
+	 * @author wangjianhua
+	 * @param activityGoodsId
+	 * @param userName
+	 * @return
+	 */
+	public int cancelEnroll(int activityGoodsId, String userName);
 }

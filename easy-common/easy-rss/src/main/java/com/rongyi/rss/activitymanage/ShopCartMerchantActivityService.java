@@ -98,6 +98,25 @@ public interface ShopCartMerchantActivityService {
 	 * @return 1：成功；0：失败
 	 */
 	public int appendStock(int activityGoodsId, int number);
+	
+	/**
+	 * 修改商品（卡劵）详情信息
+	 * 
+	 * @author wangjianhua
+	 * @param activityGoodsId
+	 *            活动商品Id
+	 * @param title
+	 *            标题
+	 * @param stockCount
+	 *            库存数
+	 * @param activityPrice
+	 *            活动价（单位：元）
+	 * @param userName
+	 *            用户名
+	 * @return 1：成功；0：失败
+	 */
+	public int updateActivityGoodsInfo(int activityGoodsId, String title, int stockCount, double activityPrice, String userName);
+
 
     /**
      * 活动邀请列表）
