@@ -10,6 +10,22 @@ import java.util.Date;
  * @date 2016年3月10日
  */
 public class MerchantEnrollGoodsVO implements Serializable {
+	public Date getJoinStartAt() {
+		return joinStartAt;
+	}
+
+	public void setJoinStartAt(Date joinStartAt) {
+		this.joinStartAt = joinStartAt;
+	}
+
+	public Date getJoinEndAt() {
+		return joinEndAt;
+	}
+
+	public void setJoinEndAt(Date joinEndAt) {
+		this.joinEndAt = joinEndAt;
+	}
+
 	/**
 	 * 
 	 */
@@ -197,4 +213,6 @@ public class MerchantEnrollGoodsVO implements Serializable {
 	private int applyStatus = 0;
 	private Date activityStartAt;
 	private Date activityEndAt;
+	private Date joinStartAt;
+	private Date joinEndAt;
 }

@@ -111,4 +111,14 @@ public interface MerchantActivityService {
 	 * @return
 	 */
 	public int cancelEnroll(int activityGoodsId, String userName);
+	
+	/**
+	 * 判断当前商品是不是自营
+	 * 
+	 * @author wangjianhua
+	 * @param activityGoodsId
+	 * @param mallId
+	 * @return
+	 */
+	public int isSelfGoods(int activityGoodsId, String mallId);
 }
