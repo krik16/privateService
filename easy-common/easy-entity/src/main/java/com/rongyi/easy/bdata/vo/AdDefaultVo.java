@@ -27,6 +27,7 @@ public class AdDefaultVo implements Serializable {
 	private Long create_at;//记录创建时间long
 	private String update_by;//更新人名称
 	private Long update_at;//记录更新时间long
+	private Integer status;//状态 1 有效 0 无效
 	/**
 	 * @return the defaultId
 	 */
@@ -171,12 +172,24 @@ public class AdDefaultVo implements Serializable {
 	public void setUpdate_at(Long update_at) {
 		this.update_at = update_at;
 	}
+	/**
+	 * @return the status
+	 */
+	public Integer getStatus() {
+		return status;
+	}
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 	/** 
 	* @Title: toString 
 	* @Description: TODO(这里用一句话描述这个方法的作用) 
 	* @param @return    设定文件 
 	* @author shaozhou
-	* @date 2016年3月16日 上午11:56:22
+	* @date 2016年3月18日 下午5:26:06
 	* @throws 
 	*/
 	@Override
@@ -184,6 +197,6 @@ public class AdDefaultVo implements Serializable {
 		return "AdDefaultVo [defaultId=" + defaultId + ", name=" + name + ", position_id=" + position_id
 				+ ", position_name=" + position_name + ", moduleId=" + moduleId + ", content_url=" + content_url
 				+ ", content_type=" + content_type + ", seq=" + seq + ", create_by=" + create_by + ", create_at="
-				+ create_at + ", update_by=" + update_by + ", update_at=" + update_at + "]";
+				+ create_at + ", update_by=" + update_by + ", update_at=" + update_at + ", status=" + status + "]";
 	}
 }
