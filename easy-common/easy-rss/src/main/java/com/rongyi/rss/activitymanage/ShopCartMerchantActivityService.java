@@ -110,12 +110,12 @@ public interface ShopCartMerchantActivityService {
 	 * @param stockCount
 	 *            库存数
 	 * @param activityPrice
-	 *            活动价（单位：分）
+	 *            活动价（单位：元）
 	 * @param userName
 	 *            用户名
 	 * @return 1：成功；0：失败
 	 */
-	public int updateActivityGoodsInfo(int activityGoodsId, String title, int stockCount, int activityPrice, String userName);
+	public int updateActivityGoodsInfo(int activityGoodsId, String title, int stockCount, double activityPrice, String userName);
 
 
     /**
