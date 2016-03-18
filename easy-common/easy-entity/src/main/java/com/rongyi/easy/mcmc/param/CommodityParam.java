@@ -1,11 +1,13 @@
 package com.rongyi.easy.mcmc.param;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 
+import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.easy.mcmc.mvc.DateJson.DateJsonDeserializer;
 
 
@@ -46,7 +48,7 @@ public class CommodityParam {
 	
 	private Integer freight;//1表示商家承担运费,0表示买家承担运费
 	
-	private Integer terminalType;//上架终端：1.表示容易逛2.表示互动屏3.表示容易逛和互动屏4.表示微商5.微商,容易逛6.微商,互动屏7.容易逛, 互动屏, 微商(转换成二进制数个位1有容易逛第二位1有 互动屏第三位1有 微商)
+	private Integer terminalType;//上架终端：com.rongyi.easy.mcmc.constant.CommodityTerminalType常量定义说明
 	
 	
 	/*@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")*/
@@ -274,6 +276,16 @@ public class CommodityParam {
 	public void setRemain(Integer remain) {
 		this.remain = remain;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "CommodityParam [type=" + type + ", id=" + id + ", name=" + name + ", category=" + category + ", status="
+				+ status + ", code=" + code + ", description=" + description + ", postage=" + postage
+				+ ", originalPrice=" + originalPrice + ", currentPrice=" + currentPrice + ", picList=" + picList
+				+ ", categoryIds=" + categoryIds + ", customCategory=" + customCategory + ", distribution="
+				+ distribution + ", freight=" + freight + ", terminalType=" + terminalType + ", registerAt="
+				+ registerAt + ", soldOutAt=" + soldOutAt + ", stockStatus=" + stockStatus + ", commoditySpeceParams="
+				+ commoditySpeceParams + ", stock=" + stock + ", remain=" + remain + ", hasSpec=" + hasSpec + "]";
+	}
 	
 }

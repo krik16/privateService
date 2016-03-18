@@ -7,7 +7,6 @@ import java.util.List;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.mongodb.morphia.annotations.Entity;
 
-import com.rongyi.easy.mcmc.mvc.DateJson.DateJsonDeserializer;
 import com.rongyi.easy.mcmc.mvc.DateJson.JsonDateSerializer;
 
 @Entity("mcmc_commodity")
@@ -35,6 +34,7 @@ public class CommodityVO1 implements  Serializable {
 	private String reason;//审核失败原因
 
 	private int identity = 5;//0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购6买手
+	private Integer terminalType = 1; // com.rongyi.easy.mcmc.constant.CommodityTerminalType常量定义
 
 	public String getId() {
 		return id;
@@ -122,4 +122,12 @@ public class CommodityVO1 implements  Serializable {
 	public void setIdentity(int identity) {
 		this.identity = identity;
 	}
+	public Integer getTerminalType() {
+		return terminalType;
+	}
+	
+	public void setTerminalType(Integer terminalType) {
+		this.terminalType = terminalType;
+	}
+	
 }
