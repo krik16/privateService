@@ -12,6 +12,10 @@ public interface ActivityConstants {
         Integer NO_CHECK = 0;
         Integer CHECK_FAILURE = 1;
         Integer CHECK_SUCCESS = 2;
+        Integer OFFLINE = 3;
+        Integer REVOKEING = 4;
+        Integer REVOKE_PASS =5;
+        Integer REVOKE_FAIL = 6;
     }
 
     /**

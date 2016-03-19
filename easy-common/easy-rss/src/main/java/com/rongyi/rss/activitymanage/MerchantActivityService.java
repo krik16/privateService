@@ -3,6 +3,7 @@ package com.rongyi.rss.activitymanage;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.activitymanage.entity.ActivityInfo;
 import com.rongyi.easy.merchantactivity.param.MerchantActivityListParam;
+import com.rongyi.easy.merchantactivity.param.RevokeOrCannelMerchantActivityParam;
 import com.rongyi.easy.merchantactivity.vo.MerchantActivityCountVO;
 import com.rongyi.easy.activitymanage.vo.ActivityGoodsCheckRecordVO;
 import com.rongyi.easy.merchantactivity.vo.MerchantActivityListVO;
@@ -20,6 +21,18 @@ import java.util.Map;
  */
 public interface MerchantActivityService {
 
+	/**
+	 * 申请撤销 或则 取消申请
+	 * @param revokeOrCannelMerchantActivityParam
+	 * @return
+	 */
+	public boolean revocationOrCannelMerchantActivity(RevokeOrCannelMerchantActivityParam revokeOrCannelMerchantActivityParam);
+
+	/**
+	 * 查询活动列表
+	 * @param merchantActivityListParam
+	 * @return
+	 */
 	public PagingVO<MerchantActivityListVO> searchMerchantActivityList(MerchantActivityListParam merchantActivityListParam);
     /**
      * 保存商家活动规则信息
