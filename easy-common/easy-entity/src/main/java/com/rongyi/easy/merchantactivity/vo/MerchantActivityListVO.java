@@ -3,7 +3,9 @@ package com.rongyi.easy.merchantactivity.vo;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * create by com.rongyi.easy.merchantactivity.vo ideaworkspace :author lijing
@@ -65,6 +67,7 @@ public class MerchantActivityListVO implements Serializable {
      */
     private Integer isAuto = 1;
 
+    private List<MerchantRecordVo> records = new ArrayList<MerchantRecordVo>();
     /**
      * 商品数量
      */
@@ -192,6 +195,14 @@ public class MerchantActivityListVO implements Serializable {
         return revokeGoods;
     }
 
+    public List<MerchantRecordVo> getRecords() {
+        return records;
+    }
+
+    public void setRecords(List<MerchantRecordVo> records) {
+        this.records = records;
+    }
+
     public void setRevokeGoods(Integer revokeGoods) {
         this.revokeGoods = revokeGoods;
     }
@@ -282,6 +293,7 @@ public class MerchantActivityListVO implements Serializable {
                 .append("goodsTotal", goodsTotal)
                 .append("passGoods", passGoods)
                 .append("isAuto", isAuto)
+                .append("records", records)
                 .append("activityGoodsCountVO", activityGoodsCountVO)
                 .toString();
     }

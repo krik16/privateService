@@ -8,8 +8,10 @@ import com.rongyi.easy.merchantactivity.vo.MerchantActivityCountVO;
 import com.rongyi.easy.activitymanage.vo.ActivityGoodsCheckRecordVO;
 import com.rongyi.easy.merchantactivity.vo.MerchantActivityCouponRuleVO;
 import com.rongyi.easy.merchantactivity.vo.MerchantActivityListVO;
+import com.rongyi.easy.merchantactivity.vo.MerchantRecordVo;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,6 +23,14 @@ import java.util.Map;
  * ideaworkspace.
  */
 public interface MerchantActivityService {
+
+	/**
+	 * 查看撤销记录
+	 * @param id
+	 * @param status
+	 * @return
+	 */
+ public List<MerchantRecordVo> searchMerchantRevokeRecord(Integer id,Integer status);
 
 	/**
 	 * 通过活动id 查询商家活动规则详情
