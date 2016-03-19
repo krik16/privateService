@@ -22,6 +22,13 @@ import java.util.Map;
 public interface MerchantActivityService {
 
 	/**
+	 * 通过id 查询活动的详情
+	 * @param id
+	 * @return
+	 */
+	public MerchantActivityListVO selectMerchantActivityInfoById(Integer id);
+
+	/**
 	 * 申请撤销 或则 取消申请
 	 * @param revokeOrCannelMerchantActivityParam
 	 * @return
