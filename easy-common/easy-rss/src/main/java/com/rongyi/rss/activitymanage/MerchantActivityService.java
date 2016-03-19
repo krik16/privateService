@@ -6,6 +6,7 @@ import com.rongyi.easy.merchantactivity.param.MerchantActivityListParam;
 import com.rongyi.easy.merchantactivity.param.RevokeOrCannelMerchantActivityParam;
 import com.rongyi.easy.merchantactivity.vo.MerchantActivityCountVO;
 import com.rongyi.easy.activitymanage.vo.ActivityGoodsCheckRecordVO;
+import com.rongyi.easy.merchantactivity.vo.MerchantActivityCouponRuleVO;
 import com.rongyi.easy.merchantactivity.vo.MerchantActivityListVO;
 
 import java.util.Date;
@@ -20,6 +21,13 @@ import java.util.Map;
  * ideaworkspace.
  */
 public interface MerchantActivityService {
+
+	/**
+	 * 通过活动id 查询商家活动规则详情
+	 * @param id
+	 * @return
+	 */
+	public MerchantActivityCouponRuleVO selectMerchantActivityCouponRuleDetail(Integer id);
 
 	/**
 	 * 通过id 查询活动的详情
