@@ -2,13 +2,11 @@ package com.rongyi.rss.activitymanage;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.activitymanage.entity.ActivityInfo;
+import com.rongyi.easy.merchantactivity.param.MerchantActivityGoodsParam;
 import com.rongyi.easy.merchantactivity.param.MerchantActivityListParam;
 import com.rongyi.easy.merchantactivity.param.RevokeOrCannelMerchantActivityParam;
-import com.rongyi.easy.merchantactivity.vo.MerchantActivityCountVO;
+import com.rongyi.easy.merchantactivity.vo.*;
 import com.rongyi.easy.activitymanage.vo.ActivityGoodsCheckRecordVO;
-import com.rongyi.easy.merchantactivity.vo.MerchantActivityCouponRuleVO;
-import com.rongyi.easy.merchantactivity.vo.MerchantActivityListVO;
-import com.rongyi.easy.merchantactivity.vo.MerchantRecordVo;
 
 import java.util.Date;
 import java.util.List;
@@ -23,6 +21,13 @@ import java.util.Map;
  * ideaworkspace.
  */
 public interface MerchantActivityService {
+
+	/**
+	 * 查询商家活动中已经报名的商品
+	 * @param merchantActivityGoodsParam
+	 * @return
+	 */
+	public PagingVO<MerchantActivityGoodsVO> searchMerchantActivityGoodsByParam(MerchantActivityGoodsParam merchantActivityGoodsParam);
 
 	/**
 	 * 查看撤销记录
