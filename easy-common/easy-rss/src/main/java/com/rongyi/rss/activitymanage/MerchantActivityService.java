@@ -24,6 +24,13 @@ import java.util.Map;
 public interface MerchantActivityService {
 
 	/**
+	 * 通过商场 查询商场下所有审核活动和商品的数量
+	 * @param relevanId
+	 * @param relevanType
+	 * @return
+	 */
+	public CheckActivityCountVO searchCheckMerchantActivityCount(String relevanId,Integer relevanType);
+	/**
 	 * 查询审核的活动列表
 	 * @param merchantActivityCheckListParam
 	 * @return
