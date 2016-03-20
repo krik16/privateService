@@ -2,6 +2,7 @@ package com.rongyi.rss.activitymanage;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.activitymanage.entity.ActivityInfo;
+import com.rongyi.easy.merchantactivity.param.MerchantActivityCheckListParam;
 import com.rongyi.easy.merchantactivity.param.MerchantActivityGoodsParam;
 import com.rongyi.easy.merchantactivity.param.MerchantActivityListParam;
 import com.rongyi.easy.merchantactivity.param.RevokeOrCannelMerchantActivityParam;
@@ -21,6 +22,13 @@ import java.util.Map;
  * ideaworkspace.
  */
 public interface MerchantActivityService {
+
+	/**
+	 * 查询审核的活动列表
+	 * @param merchantActivityCheckListParam
+	 * @return
+	 */
+	public PagingVO<MerchantActivityListVO> searchCheckActivityList(MerchantActivityCheckListParam merchantActivityCheckListParam);
 
 	/**
 	 * 查询商家活动中已经报名的商品
