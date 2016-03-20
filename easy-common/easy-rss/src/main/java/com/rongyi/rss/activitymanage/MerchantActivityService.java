@@ -167,7 +167,7 @@ public interface MerchantActivityService {
 	 * @param userName
 	 * @return
 	 */
-	public int revokeEnroll(int activityGoodsId, String userName);
+	public int revokeEnroll(int activityGoodsId, String userId, String userName);
 	
 	/**
 	 * 取消报名
