@@ -19,7 +19,12 @@ import java.util.Map;
  * ideaworkspace.
  */
 public interface MerchantActivityService {
-
+	/**
+	 * 查询商家活动商品
+	 * @param checkGoodsParam
+	 * @return
+	 */
+	public PagingVO<MerchantActivityGoodsVO> searchMerchantCheckActivityGoodsByParam(CheckGoodsParam checkGoodsParam);
 	/**
 	 * 审核活动列表的 审核操作
 	 * @param checkMerchantActivityParam

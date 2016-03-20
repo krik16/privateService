@@ -63,7 +63,7 @@ public class MerchantActivityListParam extends PagingParam {
     /**
      * 商场id
      */
-   private String mallId;
+    private String mallId;
     public Integer getOffset() {
         offset = (super.getCurrentPage() -1) * super.getPageSize();
         return offset;
