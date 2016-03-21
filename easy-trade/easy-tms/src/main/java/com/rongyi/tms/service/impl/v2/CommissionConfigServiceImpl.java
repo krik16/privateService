@@ -61,7 +61,9 @@ public class CommissionConfigServiceImpl extends BaseServiceImpl implements Comm
                 if (ConstantEnum.COMMISSION_CONFIG_STATUS_2.getCodeByte().equals(config.getStatus()) || ConstantEnum.COMMISSION_CONFIG_STATUS_4.getCodeByte().equals(config.getStatus())){
                     searchMap.put("opId", config.getId());
                     OperationLog log = configLogService.getLogByMap(searchMap);
-                    config.setDesc(log.getDesc());
+                    if(log != null) {
+                        config.setDesc(log.getDesc());
+                    }
                 }
                 reList.add(config);
             }
