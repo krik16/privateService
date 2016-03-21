@@ -37,12 +37,12 @@
             <td width="4%">卖家姓名</td>--%>
             <td width="7%">交易金额</td>
         </tr>
-        <c:choose>
-            <c:when test="${not empty list}">
-                <c:forEach var="entity" items="${list}" varStatus="status">
-                    <tr>
-                        <td><a href="${ctx}/tradeDetail/info?id=${entity.id}&tradeNo=${entity.tradeNo}" target="_blank"
-                               style="text-decoration: underline;">${entity.tradeNo}</a></td>
+            <c:choose>
+                <c:when test="${not empty list}">
+                    <c:forEach var="entity" items="${list}" varStatus="status">
+                        <tr>
+                            <td><a href="${ctx}/tradeDetail/info?id=${entity.id}&tradeNo=${entity.tradeNo}" target="_blank"
+                                   style="text-decoration: underline;">${entity.tradeNo}</a></td>
                         <td>${entity.payNo}</td>
                         <%-- <td>
                             <c:choose>
