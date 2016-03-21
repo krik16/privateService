@@ -5,6 +5,8 @@ import com.rongyi.easy.settle.entity.OperationLog;
 import com.rongyi.tms.service.v2.CommissionConfigLogService;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 /**
  * 对账单配置日志操作
  * Created by hebo on 2016/3/21.
@@ -16,6 +18,11 @@ public class CommissionConfigLogServiceImpl extends BaseServiceImpl implements C
 
     @Override
     public void insert(OperationLog log) {
-        this.getBaseDao().insertBySql(NAMESPACE+".insert", log);
+        this.getBaseDao().insertBySql(NAMESPACE + ".insert", log);
+    }
+
+    @Override
+    public OperationLog getLogByMap(Map<String, Object> searchMap) {
+        return this.getBaseDao().selectOneBySql(NAMESPACE + ".getOpByMap", searchMap);
     }
 }

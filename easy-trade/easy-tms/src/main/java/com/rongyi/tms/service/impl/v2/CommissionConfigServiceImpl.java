@@ -3,17 +3,16 @@ package com.rongyi.tms.service.impl.v2;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.settle.entity.OperationLog;
 import com.rongyi.easy.tms.entity.v2.CommissionConfig;
+import com.rongyi.tms.constants.ConstantEnum;
 import com.rongyi.tms.service.v2.CommissionConfigLogService;
 import com.rongyi.tms.service.v2.CommissionConfigService;
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Copyright (C), 上海容易网电子商务有限公司
@@ -33,7 +32,7 @@ public class CommissionConfigServiceImpl extends BaseServiceImpl implements Comm
     @Override
     public void insert(CommissionConfig commissionConfig) {
 
-        this.getBaseDao().insertBySql(NAMESPACE+".insertSelective",commissionConfig);
+        this.getBaseDao().insertBySql(NAMESPACE + ".insertSelective", commissionConfig);
     }
 
     @Override
@@ -53,7 +52,21 @@ public class CommissionConfigServiceImpl extends BaseServiceImpl implements Comm
     public List<CommissionConfig> selectPageList(Map<String, Object> map, Integer currentPage, Integer pageSize) {
         map.put("currentPage", (currentPage - 1) * pageSize);
         map.put("pageSize", pageSize);
-        return this.getBaseDao().selectListBySql(NAMESPACE + ".selectPageList", map);
+        List<CommissionConfig> commissionConfigs = this.getBaseDao().selectListBySql(NAMESPACE + ".selectPageList", map);
+        List<CommissionConfig> reList = new ArrayList<>();
+        if (CollectionUtils.isNotEmpty(commissionConfigs)){
+            Map<String, Object> searchMap = new HashMap<>();
+            searchMap.put("opType", ConstantEnum.OP_MODEL_2);
+            for (CommissionConfig config : commissionConfigs){
+                if (ConstantEnum.COMMISSION_CONFIG_STATUS_2.getCodeByte().intValue()==config.getStatus()){
+                    searchMap.put("opId", config.getId());
+                    OperationLog log = configLogService.getLogByMap(searchMap);
+                    config.setDesc(log.getDesc());
+                }
+                reList.add(config);
+            }
+        }
+        return reList;
     }
 
     public Integer selectPageCount(Map<String, Object> map){
