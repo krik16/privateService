@@ -4,19 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.mongodb.morphia.annotations.Entity;
 
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import com.rongyi.easy.mcmc.mvc.DateJson.JsonDateSerializer;
 
-@Entity("mcmc_commodity")
 public class CommodityVO1 implements  Serializable {
-
-	 /**
-	 * 
-	 */
 	private static final long serialVersionUID = -3022699601318372490L;
 	
 	private String id;//系统编号
