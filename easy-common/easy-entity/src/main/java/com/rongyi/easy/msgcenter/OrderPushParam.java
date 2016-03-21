@@ -34,6 +34,8 @@ public class OrderPushParam implements Serializable {
 
     private String openId;//对象的微信用户id
 
+    private String couponCode;
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("OrderPushParam{");
@@ -43,6 +45,7 @@ public class OrderPushParam implements Serializable {
         sb.append(", isCartOrder=").append(isCartOrder);
         sb.append(", orderNo='").append(orderNo).append('\'');
         sb.append(", openId='").append(openId).append('\'');
+        sb.append(", couponCode='").append(couponCode).append('\'');
         sb.append('}');
         return sb.toString();
     }
@@ -89,5 +92,17 @@ public class OrderPushParam implements Serializable {
 
     public void setOpenId(String openId) {
         this.openId = openId;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public String getCouponCode() {
+        return couponCode;
+    }
+
+    public void setCouponCode(String couponCode) {
+        this.couponCode = couponCode;
     }
 }
