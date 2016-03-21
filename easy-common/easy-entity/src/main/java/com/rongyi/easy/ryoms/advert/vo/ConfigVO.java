@@ -53,6 +53,10 @@ public class ConfigVO implements Serializable {
 	private Long create_at;
 	private String update_by;
 	private Long update_at;
+	private Integer mall_ad_num;//全屏商家广告数量
+	private Integer ry_ad_num;//全屏容易网广告数量
+	private Integer mall_banner;//banner商家广告数量
+	private Integer ry_banner;//banner容易网广告数量
 	/**
 	 * @return the configId
 	 */
@@ -341,23 +345,52 @@ public class ConfigVO implements Serializable {
 	public void setUpdate_at(Long update_at) {
 		this.update_at = update_at;
 	}
-	/** 
-	* @Title: toString 
-	* @Description: toString重写
-	* @param @return    设定文件 
-	* @author shaozhou
-	* @date 2016年3月10日 下午6:40:19
-	* @throws 
-	*/
-	@Override
-	public String toString() {
-		return "ConfigVO [configId=" + configId + ", mallMId=" + mallMId + ", mallName=" + mallName + ", mall_level="
-				+ mall_level + ", positionId=" + positionId + ", positionName=" + positionName + ", cityMId=" + cityMId
-				+ ", cityName=" + cityName + ", cityLevel=" + cityLevel + ", areaId=" + areaId + ", areaName="
-				+ areaName + ", countTotal=" + countTotal + ", countRY=" + countRY + ", countMall=" + countMall
-				+ ", statusId=" + statusId + ", statusName=" + statusName + ", create_int=" + create_int
-				+ ", create_date=" + create_date + ", update_int=" + update_int + ", update_date=" + update_date
-				+ ", create_by=" + create_by + ", create_at=" + create_at + ", update_by=" + update_by + ", update_at="
-				+ update_at + "]";
+	/**
+	 * @return the mall_ad_num
+	 */
+	public Integer getMall_ad_num() {
+		return mall_ad_num;
+	}
+	/**
+	 * @param mall_ad_num the mall_ad_num to set
+	 */
+	public void setMall_ad_num(Integer mall_ad_num) {
+		this.mall_ad_num = mall_ad_num;
+	}
+	/**
+	 * @return the ry_ad_num
+	 */
+	public Integer getRy_ad_num() {
+		return ry_ad_num;
+	}
+	/**
+	 * @param ry_ad_num the ry_ad_num to set
+	 */
+	public void setRy_ad_num(Integer ry_ad_num) {
+		this.ry_ad_num = ry_ad_num;
+	}
+	/**
+	 * @return the mall_banner
+	 */
+	public Integer getMall_banner() {
+		return mall_banner;
+	}
+	/**
+	 * @param mall_banner the mall_banner to set
+	 */
+	public void setMall_banner(Integer mall_banner) {
+		this.mall_banner = mall_banner;
+	}
+	/**
+	 * @return the ry_banner
+	 */
+	public Integer getRy_banner() {
+		return ry_banner;
+	}
+	/**
+	 * @param ry_banner the ry_banner to set
+	 */
+	public void setRy_banner(Integer ry_banner) {
+		this.ry_banner = ry_banner;
 	}
 }
