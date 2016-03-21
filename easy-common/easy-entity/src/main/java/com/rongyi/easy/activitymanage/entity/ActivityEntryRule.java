@@ -106,6 +106,7 @@ public class ActivityEntryRule  implements Serializable {
         return isDeleted;
     }
 
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
