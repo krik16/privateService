@@ -1,6 +1,7 @@
 package com.rongyi.easy.msgcenter;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Description:
@@ -34,7 +35,7 @@ public class OrderPushParam implements Serializable {
 
     private String openId;//对象的微信用户id
 
-    private String couponCode;
+    private List<String> couponCodes;
 
     @Override
     public String toString() {
@@ -45,7 +46,7 @@ public class OrderPushParam implements Serializable {
         sb.append(", isCartOrder=").append(isCartOrder);
         sb.append(", orderNo='").append(orderNo).append('\'');
         sb.append(", openId='").append(openId).append('\'');
-        sb.append(", couponCode='").append(couponCode).append('\'');
+        sb.append(", couponCodes=").append(couponCodes);
         sb.append('}');
         return sb.toString();
     }
@@ -98,11 +99,11 @@ public class OrderPushParam implements Serializable {
         return openId;
     }
 
-    public String getCouponCode() {
-        return couponCode;
+    public List<String> getCouponCodes() {
+        return couponCodes;
     }
 
-    public void setCouponCode(String couponCode) {
-        this.couponCode = couponCode;
+    public void setCouponCodes(List<String> couponCodes) {
+        this.couponCodes = couponCodes;
     }
 }
