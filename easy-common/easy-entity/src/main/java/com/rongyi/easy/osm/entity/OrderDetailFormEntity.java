@@ -95,7 +95,7 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
 
     private BigDecimal scoreAmount;//rebate_amount - 积分
 
-    private CommodityVO commodity;//关联的商品
+    private Integer limitNum;//关联商品的限购数
 
 
     public String getRefundDiscountInfo() {
@@ -480,14 +480,14 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
         this.scoreAmount = scoreAmount;
     }
 
-    public CommodityVO getCommodity()
+    public Integer getLimitNum()
     {
-        return commodity;
+        return limitNum;
     }
 
-    public void setCommodity(CommodityVO commodity)
+    public void setLimitNum(Integer limitNum)
     {
-        this.commodity = commodity;
+        this.limitNum = limitNum;
     }
 
     @Override
@@ -502,6 +502,7 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
                 ", discountAmount=" + discountAmount +
                 ", rebateAmount=" + rebateAmount +
                 ", scoreAmount=" + scoreAmount +
+                ", limitNum=" + limitNum +
                 " ]";
 	}
 
