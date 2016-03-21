@@ -87,6 +87,9 @@ public class CommissionConfigControllerV2 extends BaseControllerV2{
             }
             commissionConfig.setRuleCode(ruleCode);
             commissionConfig.setCreateBy(getUserName(request));
+            //TODO 生效时间此版本前端未传默认设置当前时间
+            commissionConfig.setEffectStartTime(DateUtil.getCurrDateTime());
+            commissionConfig.setEffectEndTime(DateUtil.getCurrDateTime());
             commissionConfigService.insert(commissionConfig);
             return ResponseData.success();
         }catch (PermissionException e){
@@ -169,8 +172,8 @@ public class CommissionConfigControllerV2 extends BaseControllerV2{
             }
         }
         //TODO 此版本不考虑时间条件，置默认值
-        commissionConfig.setEffectStartTime(null);
-        commissionConfig.setEffectEndTime(null);
+        commissionConfig.setEffectStartTime(DateUtil.getCurrDateTime());
+        commissionConfig.setEffectEndTime(DateUtil.getCurrDateTime());
         commissionConfig.setUpdateAt(DateUtil.getCurrDateTime());
         commissionConfig.setUpdateBy(userName);
 
