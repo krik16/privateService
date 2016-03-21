@@ -393,4 +393,24 @@ public class ConfigVO implements Serializable {
 	public void setRy_banner(Integer ry_banner) {
 		this.ry_banner = ry_banner;
 	}
+	/** 
+	* @Title: toString 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param @return    设定文件 
+	* @author shaozhou
+	* @date 2016年3月21日 下午4:46:51
+	* @throws 
+	*/
+	@Override
+	public String toString() {
+		return "ConfigVO [configId=" + configId + ", mallMId=" + mallMId + ", mallName=" + mallName + ", mall_level="
+				+ mall_level + ", positionId=" + positionId + ", positionName=" + positionName + ", cityMId=" + cityMId
+				+ ", cityName=" + cityName + ", cityLevel=" + cityLevel + ", areaId=" + areaId + ", areaName="
+				+ areaName + ", countTotal=" + countTotal + ", countRY=" + countRY + ", countMall=" + countMall
+				+ ", statusId=" + statusId + ", statusName=" + statusName + ", create_int=" + create_int
+				+ ", create_date=" + create_date + ", update_int=" + update_int + ", update_date=" + update_date
+				+ ", create_by=" + create_by + ", create_at=" + create_at + ", update_by=" + update_by + ", update_at="
+				+ update_at + ", mall_ad_num=" + mall_ad_num + ", ry_ad_num=" + ry_ad_num + ", mall_banner="
+				+ mall_banner + ", ry_banner=" + ry_banner + "]";
+	}
 }
