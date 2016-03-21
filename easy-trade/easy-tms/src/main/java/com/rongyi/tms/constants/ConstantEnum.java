@@ -130,7 +130,7 @@ public enum ConstantEnum {
     COMMISSION_STATUS_6(6,"佣金已到账"),
 
     COMMISSION_CONFIG_STATUS_0(0,"待审核"),
-    COMMISSION_CONFIG_STATUS_1(1,"审核通过"),
+//    COMMISSION_CONFIG_STATUS_1(3,"审核通过"),//审核通过和启用逻辑上一致，故值定义为相同
     COMMISSION_CONFIG_STATUS_2(2,"审核不通过"),
     COMMISSION_CONFIG_STATUS_3(3,"启用"),
     COMMISSION_CONFIG_STATUS_4(4,"停用"),

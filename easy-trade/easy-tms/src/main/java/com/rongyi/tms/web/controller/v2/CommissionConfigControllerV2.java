@@ -164,7 +164,7 @@ public class CommissionConfigControllerV2 extends BaseControllerV2{
         CommissionConfig commissionConfig = commissionConfigService.selectById(Integer.valueOf(map.get("id").toString()));
         commissionConfig.setStatus(Byte.valueOf(map.get("status").toString()));
         //审核通过和启用是验证是否有存在冲突的佣金配置
-        if(ConstantEnum.COMMISSION_CONFIG_STATUS_1.getCodeByte().equals(commissionConfig.getStatus()) || ConstantEnum.COMMISSION_CONFIG_STATUS_3.getCodeByte().equals(commissionConfig.getStatus())) {
+        if(ConstantEnum.COMMISSION_CONFIG_STATUS_3.getCodeByte().equals(commissionConfig.getStatus())) {
             boolean result = commissionConfigService.validateIsExist(commissionConfig.getType(), commissionConfig.getInviteType(), commissionConfig.getRegisterType(), commissionConfig.getEffectStartTime(), commissionConfig.getEffectEndTime());
             if (result) {
                 LOGGER.info("此佣金规则配置已存在");
