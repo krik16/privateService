@@ -16,6 +16,11 @@ public class ActivityEntryRule  implements Serializable {
 
     private Integer relevanceType;
 
+    private String secCategoryId;
+
+    private String secCategoryName;
+
+
     private String createBy;
 
     private Date createAt;
@@ -81,6 +86,25 @@ public class ActivityEntryRule  implements Serializable {
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
     }
+    public String getSecCategoryId() {
+        return secCategoryId;
+    }
+
+    public void setSecCategoryId(String secCategoryId) {
+        this.secCategoryId = secCategoryId;
+    }
+
+    public String getSecCategoryName() {
+        return secCategoryName;
+    }
+
+    public void setSecCategoryName(String secCategoryName) {
+        this.secCategoryName = secCategoryName;
+    }
+
+    public Boolean getIsDeleted() {
+        return isDeleted;
+    }
 
     @Override
     public String toString() {
@@ -90,6 +114,8 @@ public class ActivityEntryRule  implements Serializable {
                 .append("relevanceId", relevanceId)
                 .append("relevanceName", relevanceName)
                 .append("relevanceType", relevanceType)
+                .append("secCategoryId", secCategoryId)
+                .append("secCategoryName", secCategoryName)
                 .append("createBy", createBy)
                 .append("createAt", createAt)
                 .append("isDeleted", isDeleted)
