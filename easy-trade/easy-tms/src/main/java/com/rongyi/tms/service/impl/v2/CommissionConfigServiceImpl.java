@@ -58,7 +58,7 @@ public class CommissionConfigServiceImpl extends BaseServiceImpl implements Comm
             Map<String, Object> searchMap = new HashMap<>();
             searchMap.put("opType", ConstantEnum.OP_MODEL_2);
             for (CommissionConfig config : commissionConfigs){
-                if (ConstantEnum.COMMISSION_CONFIG_STATUS_2.getCodeByte().intValue()==config.getStatus()){
+                if (ConstantEnum.COMMISSION_CONFIG_STATUS_2.getCodeByte().equals(config.getStatus()) || ConstantEnum.COMMISSION_CONFIG_STATUS_4.getCodeByte().equals(config.getStatus())){
                     searchMap.put("opId", config.getId());
                     OperationLog log = configLogService.getLogByMap(searchMap);
                     config.setDesc(log.getDesc());
