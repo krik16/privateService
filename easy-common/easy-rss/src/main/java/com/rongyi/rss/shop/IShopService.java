@@ -87,4 +87,6 @@ public interface IShopService {
 	 * @return
 	 */
 	public List<String> searchShop(String filialeId, int currpage, int pageSize);
+
+	public List<String> searchShopBymallId(String mallId);
 }

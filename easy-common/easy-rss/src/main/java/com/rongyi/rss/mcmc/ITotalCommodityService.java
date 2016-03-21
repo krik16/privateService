@@ -3,6 +3,7 @@ package com.rongyi.rss.mcmc;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.mcmc.Commodity;
 import org.bson.types.ObjectId;
 
 import com.rongyi.easy.mcmc.TotalCommodity;
@@ -38,4 +39,9 @@ public interface ITotalCommodityService {
 	public List<TotalCommodity>  findByTotalCommodityCode(List<String> codes,String brandMid);
 	
 	public Long searchCommodityByCodeAndBrand(String code,String brandMid);
+
+	public Map<String ,Object> findListForWechat(Map<String, Object> params);
+
+	public boolean updateCommodityWeAndTeStatus(String id, String type, String terminalType, String weAndTeStatus);
+
 }

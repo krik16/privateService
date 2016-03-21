@@ -80,8 +80,14 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private Integer sortPosition;
 	@Field("flashSortPosition")
 	private Integer flashSortPosition;
+	@Field("terminalType")
+	private Integer terminalType;// com.rongyi.easy.mcmc.constant.CommodityTerminalType常量定义
 	@Field("systemNumber")
 	private String systemNumber;
+	@Field("weAndTeStatus")
+	private String weAndTeStatus;
+
+
 
 
 	public Double getPrice() {
@@ -360,6 +366,14 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	public void setFlashSortPosition(Integer flashSortPosition) {
 		this.flashSortPosition = flashSortPosition;
 	}
+	
+	public Integer getTerminalType() {
+		return terminalType;
+	}
+
+	public void setTerminalType(Integer terminalType) {
+		this.terminalType = terminalType;
+	}
 
 	public String getSystemNumber() {
 		return systemNumber;
@@ -367,5 +381,13 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 	public void setSystemNumber(String systemNumber) {
 		this.systemNumber = systemNumber;
+	}
+
+	public String getWeAndTeStatus() {
+		return weAndTeStatus;
+	}
+
+	public void setWeAndTeStatus(String weAndTeStatus) {
+		this.weAndTeStatus = weAndTeStatus;
 	}
 }
