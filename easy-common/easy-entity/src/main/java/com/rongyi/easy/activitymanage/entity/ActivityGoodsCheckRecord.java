@@ -1,5 +1,7 @@
 package com.rongyi.easy.activitymanage.entity;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,7 +12,7 @@ public class ActivityGoodsCheckRecord  implements Serializable {
 
     private Integer activityGoodsId;
 
-    private Byte status;
+    private Integer status;
 
     private String record;
 
@@ -44,11 +46,11 @@ public class ActivityGoodsCheckRecord  implements Serializable {
         this.activityGoodsId = activityGoodsId;
     }
 
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -82,5 +84,19 @@ public class ActivityGoodsCheckRecord  implements Serializable {
 
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("activityId", activityId)
+                .append("activityGoodsId", activityGoodsId)
+                .append("status", status)
+                .append("record", record)
+                .append("createBy", createBy)
+                .append("createUser", createUser)
+                .append("createAt", createAt)
+                .toString();
     }
 }

@@ -19,6 +19,14 @@ import java.util.Map;
  * ideaworkspace.
  */
 public interface MerchantActivityService {
+
+	public GoodsActivtyVO selectGoodsActivityDetailByGoodsId(Integer id);
+	/**
+	 * 商品审核操作
+	 * @param merchantCheckGoodsParam
+	 * @return
+	 */
+	public Boolean checkMerchantActivityGoodsByParam(MerchantCheckGoodsParam merchantCheckGoodsParam);
 	/**
 	 * 查询商家活动商品
 	 * @param checkGoodsParam

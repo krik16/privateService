@@ -19,6 +19,33 @@ public interface ActivityConstants {
     }
 
     /**
+     * 活动审核状态
+     */
+    interface ActivityCheckGoodsStatus {
+
+        Integer CHECK_FAILURE = 1;
+        Integer CHECK_SUCCESS = 2;
+        Integer OFFLINE = 3;
+        Integer REVOKEING = 4;
+        Integer REVOKE_PASS =5;
+        Integer REVOKE_FAIL = 6;
+        Integer CANEL = 7;
+    }
+
+    /**
+     * 活动商品状态
+     */
+    interface ActivityGoodsStatus {
+        Integer NO_CHECK = 0;
+        Integer CHECK_FAILURE = 1;
+        Integer CHECK_SUCCESS = 2;
+        Integer OFFLINE = 3;
+        Integer REVOKEING = 4;
+        Integer REVOKE_PASS =5;
+        Integer REVOKE_FAIL = 6;
+    }
+
+    /**
      * 活动的机构类型
      */
     interface ActivityInfoType{
