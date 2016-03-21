@@ -38,7 +38,7 @@ public class CommissionConfigControllerV2 extends BaseControllerV2{
     CommissionConfigService commissionConfigService;
 
     @Autowired
-    ROARedisService redisService;
+    ROARedisService rOARedisService;
 
 
 
@@ -80,8 +80,8 @@ public class CommissionConfigControllerV2 extends BaseControllerV2{
             commissionConfig.setStatus(ConstantEnum.COMMISSION_CONFIG_STATUS_0.getCodeByte());
             String ruleCode = getRuleCode(commissionConfig.getType());
             if (StringUtils.isNotBlank(ruleCode) && ruleCode.length() > 10) {
-                redisService.set(ruleCode.substring(0, 8), ruleCode);
-                redisService.expire(ruleCode.substring(0, 9), 60 * 60 * 48);// 两天后失效
+                rOARedisService.set(ruleCode.substring(0, 8), ruleCode);
+                rOARedisService.expire(ruleCode.substring(0, 9), 60 * 60 * 48);// 两天后失效
             }
             commissionConfig.setRuleCode(ruleCode);
             commissionConfig.setCreateBy(getUserName(request));
@@ -104,8 +104,7 @@ public class CommissionConfigControllerV2 extends BaseControllerV2{
         LOGGER.info("佣金规则审核,map={}", map);
         try {
             permissionCheck(request, "FNC_RULELIST_VFY");
-            updateStatus(map,getUserName(request));
-            return ResponseData.success();
+          return updateStatus(map, getUserName(request));
         } catch (PermissionException e){
             LOGGER.error(e.getMessage());
             e.printStackTrace();
@@ -123,8 +122,7 @@ public class CommissionConfigControllerV2 extends BaseControllerV2{
         LOGGER.info("佣金规则启用/停用,map={}", map);
         try {
             permissionCheck(request, "FNC_RULELIST_VFY");
-            updateStatus(map,getUserName(request));
-            return ResponseData.success();
+          return  updateStatus(map, getUserName(request));
         }catch (PermissionException e){
             LOGGER.error(e.getMessage());
             e.printStackTrace();
@@ -157,15 +155,24 @@ public class CommissionConfigControllerV2 extends BaseControllerV2{
     }
 
 
-    private void updateStatus(Map<String, Object> map,String userName) {
+    private ResponseData updateStatus(Map<String, Object> map,String userName) {
         CommissionConfig commissionConfig = commissionConfigService.selectById(Integer.valueOf(map.get("id").toString()));
         commissionConfig.setStatus(Byte.valueOf(map.get("status").toString()));
+        //审核通过和启用是验证是否有存在冲突的佣金配置
+        if(ConstantEnum.COMMISSION_CONFIG_STATUS_1.getCodeByte().equals(commissionConfig.getStatus()) || ConstantEnum.COMMISSION_CONFIG_STATUS_3.getCodeByte().equals(commissionConfig.getStatus())) {
+            boolean result = commissionConfigService.validateIsExist(commissionConfig.getType(), commissionConfig.getInviteType(), commissionConfig.getRegisterType(), commissionConfig.getEffectStartTime(), commissionConfig.getEffectEndTime());
+            if (result) {
+                LOGGER.info("此佣金规则配置已存在");
+                return ResponseData.failure(ConstantEnum.COMMISSION_CONFIG_EXIST.getCodeInt(), ConstantEnum.COMMISSION_CONFIG_EXIST.getValueStr());
+            }
+        }
         //TODO 此版本不考虑时间条件，置默认值
         commissionConfig.setEffectStartTime(null);
         commissionConfig.setEffectEndTime(null);
         commissionConfig.setUpdateAt(DateUtil.getCurrDateTime());
         commissionConfig.setUpdateBy(userName);
         commissionConfigService.update(commissionConfig);
+        return ResponseData.success();
     }
 
     /**
@@ -186,7 +193,7 @@ public class CommissionConfigControllerV2 extends BaseControllerV2{
             }
             sb.append(DateUtil.getCurrentDateYYMMDD());
             String key = sb.toString();
-            String ruleCode = redisService.get(key);
+            String ruleCode = rOARedisService.get(key);
             if (StringUtils.isEmpty(ruleCode) || ruleCode.length() < 12) {
                 sb.append("0001");
             } else {
