@@ -1,10 +1,13 @@
 package com.rongyi.tms.service.impl.v2;
 
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
+import com.rongyi.easy.settle.entity.OperationLog;
 import com.rongyi.easy.tms.entity.v2.CommissionConfig;
+import com.rongyi.tms.service.v2.CommissionConfigLogService;
 import com.rongyi.tms.service.v2.CommissionConfigService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
@@ -23,6 +26,10 @@ public class CommissionConfigServiceImpl extends BaseServiceImpl implements Comm
     private static final Logger LOGGER = LoggerFactory.getLogger(CommissionConfigServiceImpl.class);
 
     private static final String NAMESPACE = "com.rongyi.tms.mapper.xml.v2.CommissionConfigMapper";
+
+    @Autowired
+    private CommissionConfigLogService configLogService;
+
     @Override
     public void insert(CommissionConfig commissionConfig) {
 
@@ -30,7 +37,8 @@ public class CommissionConfigServiceImpl extends BaseServiceImpl implements Comm
     }
 
     @Override
-    public void update(CommissionConfig commissionConfig) {
+    public void update(CommissionConfig commissionConfig, OperationLog log) {
+        configLogService.insert(log);
         this.getBaseDao().updateBySql(NAMESPACE + ".updateByPrimaryKeySelective", commissionConfig);
     }
 

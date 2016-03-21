@@ -17,6 +17,7 @@ import com.rongyi.tms.service.v2.SalesCommissionService;
 import com.rongyi.easy.tms.vo.v2.VerifyCommissionParam;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +81,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
         if (map.containsKey("status")) {
             map.put("statuses", convertToStatus(Integer.valueOf(map.get("status").toString()), Integer.valueOf(map.get("searchType").toString())));
         }
+        List<SalesCommissionVO> reList = new ArrayList<>();
         List<SalesCommissionVO> list = new ArrayList<>();
         logger.info("============= searchMap={}", map);
         if (ConstantEnum.COMMISSION_TYPE_0.getCodeInt().intValue() == Integer.valueOf(map.get("type").toString())) {
@@ -89,8 +91,18 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
             list = this.getBaseDao().selectListBySql(NAMESPACE + ".findCommissionListFirst", map);
         }
 
+        if (CollectionUtils.isNotEmpty(list)){
+            for (SalesCommissionVO vo : list){
+                if (ConstantEnum.COMMISSION_STATUS_2_UNCHECK.getCodeByte().equals(vo.getStatus()) ||
+                        ConstantEnum.COMMISSION_STATUS_1_UNCHECK.getCodeByte().equals(vo.getStatus())){
+                    SalesCommissionAuditLog log = salesCommissionAuditLogService.selectFailedLog(vo.getId());
+                    vo.setReason(log.getMemo());
+                }
+                reList.add(vo);
+            }
+        }
         logger.info("service findCommissionList start size={}", list.size());
-        return list;
+        return reList;
     }
 
     /**

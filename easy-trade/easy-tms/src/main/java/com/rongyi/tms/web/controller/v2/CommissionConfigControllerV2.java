@@ -2,6 +2,7 @@ package com.rongyi.tms.web.controller.v2;
 
 import com.rongyi.core.bean.ResponseData;
 import com.rongyi.core.common.util.DateUtil;
+import com.rongyi.easy.settle.entity.OperationLog;
 import com.rongyi.easy.tms.entity.v2.CommissionConfig;
 import com.rongyi.rss.malllife.roa.ROARedisService;
 import com.rongyi.tms.Exception.PermissionException;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -171,7 +173,15 @@ public class CommissionConfigControllerV2 extends BaseControllerV2{
         commissionConfig.setEffectEndTime(null);
         commissionConfig.setUpdateAt(DateUtil.getCurrDateTime());
         commissionConfig.setUpdateBy(userName);
-        commissionConfigService.update(commissionConfig);
+
+        OperationLog log = new OperationLog();
+        log.setOperationId(commissionConfig.getId());
+        log.setCreateAt(new Date());
+        log.setOperationType(commissionConfig.getStatus());
+        log.setDesc(map.get("desc") + "");
+        log.setCreateUserId(userName);
+        log.setOperationModel(ConstantEnum.OP_MODEL_2.getCodeByte());
+        commissionConfigService.update(commissionConfig, log);
         return ResponseData.success();
     }
 

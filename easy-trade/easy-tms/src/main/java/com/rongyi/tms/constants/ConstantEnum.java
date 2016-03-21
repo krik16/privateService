@@ -16,6 +16,10 @@ package com.rongyi.tms.constants;
  **/
 
 public enum ConstantEnum {
+    OP_MODEL_0(0, "对账单配置"),
+    OP_MODEL_1(1, "对账单"),
+    OP_MODEL_2(2, "佣金配置"),
+
     COMMISSION_VERIFY_0(0, "佣金一级审核"),
     COMMISSION_VERIFY_1(0, "佣金二级审核"),
     COMMISSION_TYPE_0(0, "推广返佣"),

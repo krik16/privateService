@@ -1,5 +1,6 @@
 package com.rongyi.tms.service.v2;
 
+import com.rongyi.easy.settle.entity.OperationLog;
 import com.rongyi.easy.tms.entity.v2.CommissionConfig;
 
 import java.util.Date;
@@ -15,7 +16,7 @@ public interface CommissionConfigService {
 
     void  insert(CommissionConfig commissionConfig);
 
-    void update(CommissionConfig commissionConfig);
+    void update(CommissionConfig commissionConfig, OperationLog log);
 
     CommissionConfig selectById(Integer id);
 
