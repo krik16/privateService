@@ -18,7 +18,7 @@ public class CommissionVO implements Serializable{
     private Integer type;
 
     /**
-     * 注册人类型(1:容易逛,2:摩店)
+     * 注册人类型(1:容易逛,2:摩店买手,3:摩店导购)
      */
     private Integer registerType;
 
