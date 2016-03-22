@@ -43,6 +43,9 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 	private String receiverAddress;//收货地址
 	private String receiverPhone;//收货人手机
 	private String receiverName;//收货人姓名
+	private Integer provinceId;//收货省市id
+	private Integer CityId;//收货城市id
+	private Integer districtId;//收货区县id
 
 	public List<ParentOrderParam> getParentOrderList() {
 		return parentOrderList;
@@ -206,6 +209,36 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 	public void setReceiverName(String receiverName)
 	{
 		this.receiverName = receiverName;
+	}
+
+	public Integer getProvinceId()
+	{
+		return provinceId;
+	}
+
+	public void setProvinceId(Integer provinceId)
+	{
+		this.provinceId = provinceId;
+	}
+
+	public Integer getCityId()
+	{
+		return CityId;
+	}
+
+	public void setCityId(Integer cityId)
+	{
+		CityId = cityId;
+	}
+
+	public Integer getDistrictId()
+	{
+		return districtId;
+	}
+
+	public void setDistrictId(Integer districtId)
+	{
+		this.districtId = districtId;
 	}
 
 	@Override
