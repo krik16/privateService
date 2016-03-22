@@ -37,6 +37,12 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 	private String phone;//用户手机号
 	private String memberId;//微信电子会员id
 
+	private String receiverProvinceName;//收货省市
+	private String receiverCityName;//收货城市
+	private String receiverDistrictName;//收货区县
+	private String receiverAddress;//收货地址
+	private String receiverPhone;//收货人手机
+	private String receiverName;//收货人姓名
 
 	public List<ParentOrderParam> getParentOrderList() {
 		return parentOrderList;
@@ -142,6 +148,66 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 		this.memberId = memberId;
 	}
 
+	public String getReceiverProvinceName()
+	{
+		return receiverProvinceName;
+	}
+
+	public void setReceiverProvinceName(String receiverProvinceName)
+	{
+		this.receiverProvinceName = receiverProvinceName;
+	}
+
+	public String getReceiverCityName()
+	{
+		return receiverCityName;
+	}
+
+	public void setReceiverCityName(String receiverCityName)
+	{
+		this.receiverCityName = receiverCityName;
+	}
+
+	public String getReceiverDistrictName()
+	{
+		return receiverDistrictName;
+	}
+
+	public void setReceiverDistrictName(String receiverDistrictName)
+	{
+		this.receiverDistrictName = receiverDistrictName;
+	}
+
+	public String getReceiverAddress()
+	{
+		return receiverAddress;
+	}
+
+	public void setReceiverAddress(String receiverAddress)
+	{
+		this.receiverAddress = receiverAddress;
+	}
+
+	public String getReceiverPhone()
+	{
+		return receiverPhone;
+	}
+
+	public void setReceiverPhone(String receiverPhone)
+	{
+		this.receiverPhone = receiverPhone;
+	}
+
+	public String getReceiverName()
+	{
+		return receiverName;
+	}
+
+	public void setReceiverName(String receiverName)
+	{
+		this.receiverName = receiverName;
+	}
+
 	@Override
 	public String toString() {
 		return "SubmitOrderParam [parentOrderList=" + parentOrderList
@@ -151,7 +217,11 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 				+ ", discountInfo=" + discountInfo + ", ifCart=" + ifCart
 				+ ", weixinAppId=" + weixinAppId + ", orderChannel="
 				+ orderChannel + ", openId=" + openId + ", phone=" + phone
-				+ ", memberId=" + memberId + "]";
+				+ ", memberId=" + memberId + ",receiverProvinceName=" +receiverProvinceName
+				+ ", receiverCityName=" + receiverCityName + ",receiverDistrictName=" +receiverDistrictName
+				+ ", receiverAddress=" + receiverAddress + ",receiverPhone=" +receiverPhone
+				+ ", receiverName=" + receiverName
+				+ "]";
 	}
 	
 }
