@@ -72,6 +72,7 @@ public enum CodeEnum {
     ERROR_INSERT_BRAND("-1130","插入品牌信息出错"),
     ERROR_INSERT_MALL("-1131","插入商场信息出错"),
     ERROR_INSERT_SHOP("-1132","插入店铺信息出错"),
+    ERROR_NO_USERINFO("-1133","该用户已不提供服务"),
     /** 密码修改 */
     ERROR_ORIGINAL_PASSOWRD("-1212", "原密码不正确"),
     ERROR_NEW_INVALID("-1213", "新密码无效"),
