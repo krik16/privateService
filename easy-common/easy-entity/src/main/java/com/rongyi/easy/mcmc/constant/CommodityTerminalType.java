@@ -65,6 +65,12 @@ public interface CommodityTerminalType {
 			return typeDic.get(index);
 		}
 	}
-	
+
+	interface weAndTeStatus{//商品在终端屏的展示状态，1为终端屏展示，2为微信端展示，3为都展示，4为都不展示。
+		String STATUS_1="1";
+		String STATUS_2="2";
+		String STATUS_3="3";
+		String STATUS_4="4";
+	}
 	
 }
