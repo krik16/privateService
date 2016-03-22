@@ -44,7 +44,7 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 	private String receiverPhone;//收货人手机
 	private String receiverName;//收货人姓名
 	private Integer provinceId;//收货省市id
-	private Integer CityId;//收货城市id
+	private Integer cityId;//收货城市id
 	private Integer districtId;//收货区县id
 
 	public List<ParentOrderParam> getParentOrderList() {
@@ -223,12 +223,12 @@ public class SubmitOrderParam extends MalllifeBaseParam implements Serializable 
 
 	public Integer getCityId()
 	{
-		return CityId;
+		return cityId;
 	}
 
 	public void setCityId(Integer cityId)
 	{
-		CityId = cityId;
+		cityId = cityId;
 	}
 
 	public Integer getDistrictId()
