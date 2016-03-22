@@ -24,6 +24,7 @@ public enum  CouponEnum {
     ERROR_DETAIL_IMG_LIST(1020130, "详情图不合法或无效"),
     ERROR_PUBLISH_START_DATE(1020131, "发布开始时间不合法或无效"),
     ERROR_PUBLISH_END_DATE(1020132, "发布结束时间不合法或无效"),
+    ERROR_NAME(1020133, "名称不合法"),
     ERROR_NAME_SENSITIVE_WORD(1020140, "卡券名称存在敏感词"),
     ERROR_USE_LIMIT_SENSITIVE_WORD(1020141, "卡券使用限制存在敏感词"),
     ERROR_USE_DES_SENSITIVE_WORD(1020142, "卡券使用说明存在敏感词");
