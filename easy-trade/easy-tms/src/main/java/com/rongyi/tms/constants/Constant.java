@@ -12,7 +12,7 @@ public interface Constant {
 	
 	interface PAGE {
 	    int CURRENTPAGE = 1;
-	    int PAGESIZE = 15;
+	    int PAGESIZE = 10;
 	}
 	interface SENDSIZE{
 	    int SIZE=50;
