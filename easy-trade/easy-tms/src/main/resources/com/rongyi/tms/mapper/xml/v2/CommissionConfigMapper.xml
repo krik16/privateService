@@ -241,8 +241,17 @@
     from commission_config
     where type = #{type,jdbcType=TINYINT}
     and (invite_type = #{inviteType,jdbcType=TINYINT} or invite_type = 0)
-    and (register_type = #{registerType,jdbcType=TINYINT} or register_type = 0)
-    and (status = 1 or status = 3)
+    <if test="register_type != null and register_type != ''">
+      and (register_type = #{registerType,jdbcType=TINYINT} or register_type = 0)
+    </if>
+    <if test="registerTypeList != null and registerTypeList != ''">
+      and register_type in
+      <foreach collection="registerTypeList" index="index" item="item"
+               open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </if>
+    and status in (1,3)
     <!-- 时间条件暂过滤-->
     <!--and effect_start_time &lt;= effectTime and effectTime &lt;= effect_end_time-->
   </select>
@@ -252,7 +261,16 @@
     from commission_config
     where type = #{type,jdbcType=TINYINT}
     and (invite_type = #{inviteType,jdbcType=TINYINT} or invite_type = 0)
-    and (register_type = #{registerType,jdbcType=TINYINT} or register_type = 0)
+    <if test="register_type != null and register_type != ''">
+      and (register_type = #{registerType,jdbcType=TINYINT} or register_type = 0)
+    </if>
+    <if test="registerTypeList != null and registerTypeList != ''">
+      and register_type in
+      <foreach collection="registerTypeList" index="index" item="item"
+               open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </if>
     and status in (1,3)
     <!-- 时间条件暂过滤-->
     <!--and effect_start_time &lt;= effectTime and effectTime &lt;= effect_end_time-->

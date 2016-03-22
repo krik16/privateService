@@ -145,6 +145,11 @@ public enum ConstantEnum {
     SERCHER_TYPE_0(0,"客服请求"),
     SERCHER_TYPE_1(1,"财务请求"),
 
+    REGISTER_TYPE_1(1,"容易逛"),
+    REGISTER_TYPE_2(2,"摩店买手"),
+    REGISTER_TYPE_3(3,"摩店导购"),
+    REGISTER_TYPE_4(4,"摩店全部"),
+
     FIAL_USER_PARAMS_PAYMENT("1019401", "没有登录或登录信息错误"),//前台约定，没有登录统一后三位为401
     FIAL_NO_AUTHORITY_PAYMENT("1019403", "没有访问该资源的权限"),//前台约定，没有权限统一后三位为403
 

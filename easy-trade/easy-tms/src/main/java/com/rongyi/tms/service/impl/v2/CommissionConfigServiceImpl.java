@@ -81,7 +81,14 @@ public class CommissionConfigServiceImpl extends BaseServiceImpl implements Comm
         Map<String,Object> map = new HashMap<>();
         map.put("type",type);
         map.put("inviteType",inviteType);
-        map.put("registerType",registerType);
+        if(ConstantEnum.REGISTER_TYPE_2.getCodeInt().equals(registerType) ||ConstantEnum.REGISTER_TYPE_3.getCodeInt().equals(registerType)){
+            List<Byte> list = new ArrayList<>();
+            list.add(registerType.byteValue());
+            list.add(ConstantEnum.REGISTER_TYPE_4.getCodeByte());
+            map.put("registerTypeList",list);
+        }else{
+            map.put("registerType", registerType);
+        }
         map.put("effectTime",effectTime);
         return this.getBaseDao().selectOneBySql(NAMESPACE+".selectByTypes",map);
     }
@@ -91,8 +98,15 @@ public class CommissionConfigServiceImpl extends BaseServiceImpl implements Comm
         Map<String,Object> map = new HashMap<>();
         map.put("type",type);
         map.put("inviteType",inviteType);
-        map.put("registerType", registerType);
         map.put("effectStartTime",effectStartTime);
+        if(ConstantEnum.REGISTER_TYPE_2.getCodeByte().equals(registerType) ||ConstantEnum.REGISTER_TYPE_3.getCodeByte().equals(registerType)){
+            List<Byte> list = new ArrayList<>();
+            list.add(registerType);
+            list.add(ConstantEnum.REGISTER_TYPE_4.getCodeByte());
+            map.put("registerTypeList",list);
+        }else{
+            map.put("registerType", registerType);
+        }
         map.put("effectEndTime",effectEndTime);
         CommissionConfig commissionConfig = this.getBaseDao().selectOneBySql(NAMESPACE + ".validateIsExist", map);
         return commissionConfig != null;
