@@ -78,6 +78,7 @@ public class CommissionConfigServiceImpl extends BaseServiceImpl implements Comm
 
     @Override
     public CommissionConfig selectByTypes(Integer type, Integer inviteType, Integer registerType, Date effectTime) {
+        LOGGER.info("selectByTypes:type={},inviteType={},registerType={},effectTime={}",type,inviteType,registerType,effectTime);
         Map<String,Object> map = new HashMap<>();
         map.put("type",type);
         map.put("inviteType",inviteType);
