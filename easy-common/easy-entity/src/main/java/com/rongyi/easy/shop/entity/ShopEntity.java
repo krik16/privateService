@@ -87,7 +87,17 @@ public class ShopEntity implements Serializable{
     
     @JsonDeserialize(using=ObjectIdJsonDeserializer.class)
     private ObjectId filiale_id;//分公司id
-    
+
+	private Integer operator_id;
+	private String mold;
+	private Integer recommend ;
+	private String average_consumption;
+	private Integer parent_status;
+	private String slug;
+	private String key_tags;
+	private List<ObjectId> production_ids;
+	private List<Double> location;
+	private Integer rank;
 	public ShopEntity() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -430,5 +440,84 @@ public class ShopEntity implements Serializable{
 	public void setPhoto_urls(List<String> photo_urls) {
 		this.photo_urls = photo_urls;
 	}
-	
+
+	public Integer getOperator_id() {
+		return operator_id;
+	}
+
+	public void setOperator_id(Integer operator_id) {
+		this.operator_id = operator_id;
+	}
+
+	public String getMold() {
+		return mold;
+	}
+
+	public void setMold(String mold) {
+		this.mold = mold;
+	}
+
+	public Integer getRecommend() {
+		return recommend;
+	}
+
+	public void setRecommend(Integer recommend) {
+		this.recommend = recommend;
+	}
+
+	public String getAverage_consumption() {
+		return average_consumption;
+	}
+
+	public void setAverage_consumption(String average_consumption) {
+		this.average_consumption = average_consumption;
+	}
+
+	public Integer getParent_status() {
+		return parent_status;
+	}
+
+	public void setParent_status(Integer parent_status) {
+		this.parent_status = parent_status;
+	}
+
+	public String getSlug() {
+		return slug;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
+	}
+
+	public String getKey_tags() {
+		return key_tags;
+	}
+
+	public void setKey_tags(String key_tags) {
+		this.key_tags = key_tags;
+	}
+
+	public List<ObjectId> getProduction_ids() {
+		return production_ids;
+	}
+
+	public void setProduction_ids(List<ObjectId> production_ids) {
+		this.production_ids = production_ids;
+	}
+
+	public List<Double> getLocation() {
+		return location;
+	}
+
+	public void setLocation(List<Double> location) {
+		this.location = location;
+	}
+
+	public Integer getRank() {
+		return rank;
+	}
+
+	public void setRank(Integer rank) {
+		this.rank = rank;
+	}
 }
