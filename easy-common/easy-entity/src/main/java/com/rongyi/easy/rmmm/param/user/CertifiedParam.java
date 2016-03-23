@@ -27,6 +27,8 @@ public class CertifiedParam extends BaseParam implements Serializable{
 	private String mallId;        //商场ID
 	
 	private String shopId;         //店铺ID
+	
+	private String brandId;       //品牌
 
 	public Integer getId() {
 		return id;
@@ -107,6 +109,13 @@ public class CertifiedParam extends BaseParam implements Serializable{
 	public void setShopId(String shopId) {
 		this.shopId = shopId;
 	}
-	
+
+	public String getBrandId() {
+		return brandId;
+	}
+
+	public void setBrandId(String brandId) {
+		this.brandId = brandId;
+	}
 	
 }
