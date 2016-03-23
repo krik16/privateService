@@ -286,11 +286,11 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
                 }
             }
 
-            if (vo.getStatus().intValue() == ConstantEnum.COMMISSION_STATUS_6.getCodeInt()) {
+            if (vo.getStatus().intValue() == ConstantEnum.COMMISSION_STATUS_3.getCodeInt()) {
                 vo.setStatus((byte) Constants.DrawApplyStatus.SEND);
-            } else if (vo.getStatus().intValue() >= ConstantEnum.COMMISSION_STATUS_1.getCodeInt() && vo.getStatus().intValue() <= ConstantEnum.COMMISSION_STATUS_3.getCodeInt()) {
+            } else if (vo.getStatus().intValue() >= ConstantEnum.COMMISSION_STATUS_1.getCodeInt() && vo.getStatus().intValue() < ConstantEnum.COMMISSION_STATUS_3.getCodeInt()) {
                 vo.setStatus((byte) Constants.DrawApplyStatus.PROCESSING);
-            } else if (vo.getStatus().intValue() < 0) {
+            } else if (vo.getStatus().intValue() < ConstantEnum.COMMISSION_STATUS_0.getCodeInt() || vo.getStatus().intValue() ==  ConstantEnum.COMMISSION_STATUS_5.getCodeInt()) {
                 vo.setStatus((byte) Constants.DrawApplyStatus.FAIL);
             }
         }
