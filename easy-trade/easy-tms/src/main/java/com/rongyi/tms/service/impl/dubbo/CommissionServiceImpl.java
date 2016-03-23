@@ -188,6 +188,10 @@ public class CommissionServiceImpl implements CommissionService {
         }
         SalesCommission salesCommission = initSalesCommission(commissionVO, commissionConfig, buyerInfoPojo);
         salesCommissionService.insert(salesCommission);
+        //财务自动审核则打款到VA
+        if(ConstantEnum.COMMISSION_STATUS_3.getCodeByte().equals(salesCommission.getStatus())){
+            salesCommissionService.sendCommissionToVa(salesCommission.getId(),salesCommission.getCommissionAmount(),salesCommission.getGuideId(),commissionConfig);
+        }
         return ResponseData.success();
     }
 

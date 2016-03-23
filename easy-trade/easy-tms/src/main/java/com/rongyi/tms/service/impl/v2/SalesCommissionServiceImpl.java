@@ -23,6 +23,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -221,23 +222,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
                     if (updateNum > 0) {
                         resultNum++;
                         if (oldStatus < salesCommission.getStatus() && ConstantEnum.COMMISSION_STATUS_3.getCodeByte().equals(salesCommission.getStatus())) {
-                            logger.info("更新成功，发送消息到 va");
-                            CommissionAmountTotalVO commissionAmountTotalVO = new CommissionAmountTotalVO();
-                            commissionAmountTotalVO.setId(commission.getId());
-                            commissionAmountTotalVO.setCommissionAmount(commission.getCommissionAmount());
-                            commissionAmountTotalVO.setGuideId(commission.getGuideId());
-                            JSONObject jsonObject = JSONObject.fromObject(commissionAmountTotalVO);
-                            Map<String, Object> bodyMap = new HashMap<>();
-                            JSONArray array = new JSONArray();
-                            array.add(jsonObject);
-                            bodyMap.put("detailList", array);
-                            logger.info(array.toString());
-                            MessageEvent event = null;
-                            if (config.getType().byteValue() == ConstantEnum.COMMISSION_TYPE_0.getCodeByte())
-                                event = MessageEvent.getMessageEvent(bodyMap, "tms", "va", VirtualAccountEventTypeEnum.COMMISSION_TYPE_EXPAND.getCode());
-                            else if (config.getType().byteValue() == ConstantEnum.COMMISSION_TYPE_1.getCodeByte())
-                                event = MessageEvent.getMessageEvent(bodyMap, "tms", "va", VirtualAccountEventTypeEnum.COMMISSION_TYPE_FIRST.getCode());
-                            sender.convertAndSend(event);
+                            sendCommissionToVa(commission.getId(),commission.getCommissionAmount(),commission.getGuideId(),config);
                         }
                     } else {
                         logger.info("佣金审核修改失败");
@@ -258,6 +243,27 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
             }
         }
         return resultNum > 0;
+    }
+
+    @Override
+    public void sendCommissionToVa(Integer id,BigDecimal amount,String guideId,CommissionConfig config){
+        logger.info("更新成功，发送消息到 va");
+        CommissionAmountTotalVO commissionAmountTotalVO = new CommissionAmountTotalVO();
+        commissionAmountTotalVO.setId(id);
+        commissionAmountTotalVO.setCommissionAmount(amount);
+        commissionAmountTotalVO.setGuideId(guideId);
+        JSONObject jsonObject = JSONObject.fromObject(commissionAmountTotalVO);
+        Map<String, Object> bodyMap = new HashMap<>();
+        JSONArray array = new JSONArray();
+        array.add(jsonObject);
+        bodyMap.put("detailList", array);
+        logger.info(array.toString());
+        MessageEvent event = null;
+        if (config.getType().byteValue() == ConstantEnum.COMMISSION_TYPE_0.getCodeByte())
+            event = MessageEvent.getMessageEvent(bodyMap, "tms", "va", VirtualAccountEventTypeEnum.COMMISSION_TYPE_EXPAND.getCode());
+        else if (config.getType().byteValue() == ConstantEnum.COMMISSION_TYPE_1.getCodeByte())
+            event = MessageEvent.getMessageEvent(bodyMap, "tms", "va", VirtualAccountEventTypeEnum.COMMISSION_TYPE_FIRST.getCode());
+        sender.convertAndSend(event);
     }
 
     @Override
