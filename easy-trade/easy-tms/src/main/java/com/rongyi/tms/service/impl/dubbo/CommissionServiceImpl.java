@@ -205,6 +205,7 @@ public class CommissionServiceImpl implements CommissionService {
         if (ConstantEnum.COMMISSION_CONFIG_CUST_VERIFY_0.getCodeByte().equals(commissionConfig.getFinaVerify())) {
             LOGGER.info("财务审核系统自动审核通过");
             Integer dailyCount = salesCommissionService.getGuideDayLimit(salesCommission.getGuideId(), salesCommission.getCreateAt(), ConstantEnum.COMMISSION_STATUS_3.getCodeByte(), commissionConfig.getType());
+           LOGGER.info("dailyCount={},limit={}",dailyCount, commissionConfig.getLimitTotal());
             if (dailyCount >= commissionConfig.getLimitTotal()) {
                 salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_5.getCodeByte());
             } else {

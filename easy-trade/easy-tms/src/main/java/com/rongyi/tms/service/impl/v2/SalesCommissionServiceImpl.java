@@ -247,7 +247,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 
     @Override
     public void sendCommissionToVa(Integer id,BigDecimal amount,String guideId,CommissionConfig config){
-        logger.info("更新成功，发送消息到 va");
+        logger.info("更新成功，发送消息到 va id={},guideId={}",id,guideId);
         CommissionAmountTotalVO commissionAmountTotalVO = new CommissionAmountTotalVO();
         commissionAmountTotalVO.setId(id);
         commissionAmountTotalVO.setCommissionAmount(amount);
