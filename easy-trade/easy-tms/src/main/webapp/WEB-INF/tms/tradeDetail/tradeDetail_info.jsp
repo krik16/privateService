@@ -68,7 +68,7 @@ body {
 						<div class="shopsData">
 							<p class="p_text">
 								<c:choose>
-									<c:when test="${trade.tradeType eq 0}">
+									<c:when test="${trade.orderType eq 0}">
 										商品订单
 									</c:when>
 									<c:otherwise>优惠券订单</c:otherwise>
@@ -131,7 +131,7 @@ body {
 					</c:choose>
 					<div class="line-heights shopsName" style="width: 20%">优惠金额:</div>
 					<div class="shopsData" style="width: 70%">
-						${trade.hbDiscount + trade.score/100 }（元）
+						${discountAmount }（元）
 					</div>
 				</div>
 					<div class="shops-main-right">
@@ -159,18 +159,9 @@ body {
 						<div class="line-heights shopsName">优惠方式:</div>
 						<div class="shopsData">
 							<p class="p_text" style="color: #ff4a8f;font-weight: bold;font-size: 14px">
-							<c:if test="${ not empty trade.score && trade.score > 0}">
-									积分 
-									(${trade.score})
-									<c:if
-									test="${trade.couponDiscountInt > 0}">
-									、
-									</c:if>
-							</c:if>
-							<c:if
-								test="${trade.couponDiscountInt > 0}">
-									红包(${trade.couponDiscountInt}元)
-							</c:if>
+							<c:if test="${ not empty trade.score && trade.score > 0}">积分 (${trade.score/100})</c:if>
+							<c:if test="${hbDiscount > 0}">&nbsp;红包 (${hbDiscount})</c:if>
+							<c:if test="${couponDiscount > 0}">&nbsp;抵扣 (${couponDiscount})</c:if>
 							</p>
 						</div>
 						<%--<div style="clear: both;"></div>
