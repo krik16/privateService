@@ -195,11 +195,13 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 
     @Override
     public boolean verifyCommission(VerifyCommissionParam param, String user) {
+        logger.info("param={},user={}",param,user);
         int resultNum = 0;
         Map<String, Object> paramsMap = new HashMap<>();
         List<String> ids = Arrays.asList(param.getIds().split(","));
         for (String idStr : ids) {
             SalesCommission commission = selectById(Integer.valueOf(idStr));
+            byte oldStatus = commission.getStatus();
             if (commission != null) {
                 SalesCommission salesCommission = new SalesCommission();
                 salesCommission.setId(Integer.valueOf(idStr));
@@ -220,25 +222,27 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
                         }
                     }
                     int updateNum = this.getBaseDao().updateBySql(NAMESPACE + ".updateByPrimaryKeySelective", salesCommission);
-                    if (updateNum > 0 && ConstantEnum.COMMISSION_STATUS_3.getCodeByte().equals(salesCommission.getStatus())) {
-                        logger.info("更新成功，发送消息到 va");
-                        CommissionAmountTotalVO commissionAmountTotalVO = new CommissionAmountTotalVO();
-                        commissionAmountTotalVO.setId(commission.getId());
-                        commissionAmountTotalVO.setCommissionAmount(commission.getCommissionAmount());
-                        commissionAmountTotalVO.setGuideId(commission.getGuideId());
-                        JSONObject jsonObject = JSONObject.fromObject(commissionAmountTotalVO);
-                        Map<String, Object> bodyMap = new HashMap<>();
-                        JSONArray array = new JSONArray();
-                        array.add(jsonObject);
-                        bodyMap.put("detailList", array);
-                        logger.info(array.toString());
-                        MessageEvent event = null;
-                        if (config.getType().byteValue() == ConstantEnum.COMMISSION_TYPE_0.getCodeByte())
-                            event = MessageEvent.getMessageEvent(bodyMap, "tms", "va", VirtualAccountEventTypeEnum.COMMISSION_TYPE_EXPAND.getCode());
-                        else if (config.getType().byteValue() == ConstantEnum.COMMISSION_TYPE_1.getCodeByte())
-                            event = MessageEvent.getMessageEvent(bodyMap, "tms", "va", VirtualAccountEventTypeEnum.COMMISSION_TYPE_FIRST.getCode());
-                        sender.convertAndSend(event);
+                    if (updateNum > 0) {
                         resultNum++;
+                        if(oldStatus < salesCommission.getStatus() && ConstantEnum.COMMISSION_STATUS_3.getCodeByte().equals(salesCommission.getStatus())) {
+                            logger.info("更新成功，发送消息到 va");
+                            CommissionAmountTotalVO commissionAmountTotalVO = new CommissionAmountTotalVO();
+                            commissionAmountTotalVO.setId(commission.getId());
+                            commissionAmountTotalVO.setCommissionAmount(commission.getCommissionAmount());
+                            commissionAmountTotalVO.setGuideId(commission.getGuideId());
+                            JSONObject jsonObject = JSONObject.fromObject(commissionAmountTotalVO);
+                            Map<String, Object> bodyMap = new HashMap<>();
+                            JSONArray array = new JSONArray();
+                            array.add(jsonObject);
+                            bodyMap.put("detailList", array);
+                            logger.info(array.toString());
+                            MessageEvent event = null;
+                            if (config.getType().byteValue() == ConstantEnum.COMMISSION_TYPE_0.getCodeByte())
+                                event = MessageEvent.getMessageEvent(bodyMap, "tms", "va", VirtualAccountEventTypeEnum.COMMISSION_TYPE_EXPAND.getCode());
+                            else if (config.getType().byteValue() == ConstantEnum.COMMISSION_TYPE_1.getCodeByte())
+                                event = MessageEvent.getMessageEvent(bodyMap, "tms", "va", VirtualAccountEventTypeEnum.COMMISSION_TYPE_FIRST.getCode());
+                            sender.convertAndSend(event);
+                        }
                     } else {
                         logger.info("佣金审核修改失败");
                     }
