@@ -91,12 +91,13 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
             list = this.getBaseDao().selectListBySql(NAMESPACE + ".findCommissionListFirst", map);
         }
 
-        if (CollectionUtils.isNotEmpty(list)){
-            for (SalesCommissionVO vo : list){
+        if (CollectionUtils.isNotEmpty(list)) {
+            for (SalesCommissionVO vo : list) {
                 if (ConstantEnum.COMMISSION_STATUS_2_UNCHECK.getCodeByte().equals(vo.getStatus()) ||
-                        ConstantEnum.COMMISSION_STATUS_1_UNCHECK.getCodeByte().equals(vo.getStatus())){
+                        ConstantEnum.COMMISSION_STATUS_1_UNCHECK.getCodeByte().equals(vo.getStatus())) {
                     SalesCommissionAuditLog log = salesCommissionAuditLogService.selectFailedLog(vo.getId());
-                    vo.setReason(log.getMemo());
+                    if (log != null)
+                        vo.setReason(log.getMemo());
                 }
                 reList.add(vo);
             }
@@ -195,7 +196,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 
     @Override
     public boolean verifyCommission(VerifyCommissionParam param, String user) {
-        logger.info("param={},user={}",param,user);
+        logger.info("param={},user={}", param, user);
         int resultNum = 0;
         Map<String, Object> paramsMap = new HashMap<>();
         List<String> ids = Arrays.asList(param.getIds().split(","));
@@ -224,7 +225,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
                     int updateNum = this.getBaseDao().updateBySql(NAMESPACE + ".updateByPrimaryKeySelective", salesCommission);
                     if (updateNum > 0) {
                         resultNum++;
-                        if(oldStatus < salesCommission.getStatus() && ConstantEnum.COMMISSION_STATUS_3.getCodeByte().equals(salesCommission.getStatus())) {
+                        if (oldStatus < salesCommission.getStatus() && ConstantEnum.COMMISSION_STATUS_3.getCodeByte().equals(salesCommission.getStatus())) {
                             logger.info("更新成功，发送消息到 va");
                             CommissionAmountTotalVO commissionAmountTotalVO = new CommissionAmountTotalVO();
                             commissionAmountTotalVO.setId(commission.getId());
@@ -294,7 +295,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
                 vo.setStatus((byte) Constants.DrawApplyStatus.SEND);
             } else if (vo.getStatus().intValue() >= ConstantEnum.COMMISSION_STATUS_1.getCodeInt() && vo.getStatus().intValue() < ConstantEnum.COMMISSION_STATUS_3.getCodeInt()) {
                 vo.setStatus((byte) Constants.DrawApplyStatus.PROCESSING);
-            } else if (vo.getStatus().intValue() < ConstantEnum.COMMISSION_STATUS_0.getCodeInt() || vo.getStatus().intValue() ==  ConstantEnum.COMMISSION_STATUS_5.getCodeInt()) {
+            } else if (vo.getStatus().intValue() < ConstantEnum.COMMISSION_STATUS_0.getCodeInt() || vo.getStatus().intValue() == ConstantEnum.COMMISSION_STATUS_5.getCodeInt()) {
                 vo.setStatus((byte) Constants.DrawApplyStatus.FAIL);
             }
         }
