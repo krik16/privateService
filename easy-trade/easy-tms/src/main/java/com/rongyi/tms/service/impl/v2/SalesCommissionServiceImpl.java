@@ -220,7 +220,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
                         }
                     }
                     int updateNum = this.getBaseDao().updateBySql(NAMESPACE + ".updateByPrimaryKeySelective", salesCommission);
-                    if (updateNum > 0) {
+                    if (updateNum > 0 && ConstantEnum.COMMISSION_STATUS_3.getCodeByte().equals(salesCommission.getStatus())) {
                         logger.info("更新成功，发送消息到 va");
                         CommissionAmountTotalVO commissionAmountTotalVO = new CommissionAmountTotalVO();
                         commissionAmountTotalVO.setId(commission.getId());
