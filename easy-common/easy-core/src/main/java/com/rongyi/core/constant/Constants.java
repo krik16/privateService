@@ -33,6 +33,15 @@ public interface Constants {
 
     String RESULT_SUCCES = "success"; //成功标志位
     String RESULT_FAIL = "fail"; //失败标志位
+    
+    /**
+     * 新版
+     * 上传云路径
+     */
+    interface UPAIYUN_URL {
+        String UPAIYUN_URL           = "http://rongyi.b0.upaiyun.com/";  //网址
+        String ADVERT_URL          = "system/advert/";//内容管理图片路径
+    }
 
     interface Version {
         String VERSION1 = "0.1.0";
