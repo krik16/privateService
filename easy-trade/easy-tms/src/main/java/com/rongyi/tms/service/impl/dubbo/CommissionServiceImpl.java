@@ -209,6 +209,14 @@ public class CommissionServiceImpl implements CommissionService {
         salesCommission.setOrderNo(commissionVO.getOrderNo());
         salesCommission.setCommissionAmount(new BigDecimal(commissionConfig.getCommAmount()));
         salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_1.getCodeByte());
+        salesCommission.setRegisterTime(commissionVO.getFinishAt());
+        salesCommission.setCreateAt(DateUtil.getCurrDateTime());
+        salesCommission.setGuideType(buyerInfoPojo.getUserType());
+        salesCommission.setCommNo(orderNoGenService.getOrderNo("5"));
+        salesCommission.setInvitePhone(buyerInfoPojo.getUserPhone());
+        salesCommission.setRegisterId(commissionVO.getRegisterId());
+        salesCommission.setRegisterPhone(commissionVO.getRegisterPhone());
+        salesCommission.setConfigId(commissionConfig.getId());
         if (ConstantEnum.COMMISSION_CONFIG_CUST_VERIFY_0.getCodeByte().equals(commissionConfig.getFinaVerify())) {
             LOGGER.info("财务审核系统自动审核通过");
             Integer dailyCount = salesCommissionService.getGuideDayLimit(salesCommission.getGuideId(), salesCommission.getCreateAt(), ConstantEnum.COMMISSION_STATUS_3.getCodeByte(), commissionConfig.getType());
@@ -227,14 +235,6 @@ public class CommissionServiceImpl implements CommissionService {
                 salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_2.getCodeByte());
             }
         }
-        salesCommission.setRegisterTime(commissionVO.getFinishAt());
-        salesCommission.setCreateAt(DateUtil.getCurrDateTime());
-        salesCommission.setGuideType(buyerInfoPojo.getUserType());
-        salesCommission.setCommNo(orderNoGenService.getOrderNo("5"));
-        salesCommission.setInvitePhone(buyerInfoPojo.getUserPhone());
-        salesCommission.setRegisterId(commissionVO.getRegisterId());
-        salesCommission.setRegisterPhone(commissionVO.getRegisterPhone());
-        salesCommission.setConfigId(commissionConfig.getId());
         return salesCommission;
     }
 }
