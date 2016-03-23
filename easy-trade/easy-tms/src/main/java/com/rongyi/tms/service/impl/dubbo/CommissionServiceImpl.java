@@ -134,7 +134,7 @@ public class CommissionServiceImpl implements CommissionService {
      */
     @Override
     public SalesCommissionVO getCommissionInfo(Integer id) throws Exception {
-        LOGGER.debug("getCommissionList 摩店佣金详情 ,param={}", id);
+        LOGGER.info("getCommissionList 摩店佣金详情 ,param={}", id);
         try {
             if (id == null) {
                 return null;
@@ -155,7 +155,7 @@ public class CommissionServiceImpl implements CommissionService {
                 }
             }
 
-            LOGGER.debug("detail end");
+            LOGGER.info("detail end salesCommissionVO={}",salesCommissionVO.toString());
             return salesCommissionVO;
         } catch (Exception e) {
             e.printStackTrace();

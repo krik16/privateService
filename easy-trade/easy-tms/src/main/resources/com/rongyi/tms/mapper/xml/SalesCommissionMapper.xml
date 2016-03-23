@@ -678,7 +678,7 @@
 		SELECT guide_id,
 		SUM(CASE WHEN (
 		(`status` &gt; 0 AND
-		`status` &lt; 5 AND type IS NULL AND config_id is null) OR (`status` = 0 AND type = 3) OR (config_id IS NOT NULL AND `status` &gt; 0 AND
+		`status` &lt; 5 AND type IS NULL AND config_id = 0) OR (`status` = 0 AND type = 3) OR (config_id > 0 AND `status` &gt; 0 AND
 		`status` &lt; 3 )
 		) THEN
 		commission_amount
