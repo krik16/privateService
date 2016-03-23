@@ -150,7 +150,8 @@ public class CommissionServiceImpl implements CommissionService {
                     salesCommissionVO.setAuditAt(auditLog.getCreateAt());
                 } else if (status < 0 || status == ConstantEnum.COMMISSION_STATUS_3.getCodeInt().intValue()) {
                     SalesCommissionAuditLog auditLog = salesCommissionAuditLogService.selectLatestLogWithCommissionId(commissionId);
-                    salesCommissionVO.setAuditAt(auditLog.getCreateAt());
+                    if (auditLog != null)
+                        salesCommissionVO.setAuditAt(auditLog.getCreateAt());
                 }
             }
 
@@ -199,18 +200,18 @@ public class CommissionServiceImpl implements CommissionService {
         salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_1.getCodeByte());
         if (ConstantEnum.COMMISSION_CONFIG_CUST_VERIFY_0.getCodeByte().equals(commissionConfig.getFinaVerify())) {
             LOGGER.info("财务审核系统自动审核通过");
-            Integer dailyCount =  salesCommissionService.getGuideDayLimit(salesCommission.getGuideId(), salesCommission.getCreateAt(), ConstantEnum.COMMISSION_STATUS_3.getCodeByte(), commissionConfig.getType());
+            Integer dailyCount = salesCommissionService.getGuideDayLimit(salesCommission.getGuideId(), salesCommission.getCreateAt(), ConstantEnum.COMMISSION_STATUS_3.getCodeByte(), commissionConfig.getType());
             if (dailyCount >= commissionConfig.getLimitTotal()) {
                 salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_5.getCodeByte());
-            }else{
+            } else {
                 salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_3.getCodeByte());
             }
         } else if (ConstantEnum.COMMISSION_CONFIG_CUST_VERIFY_0.getCodeByte().equals(commissionConfig.getCustVerify())) {//客服系统自动审核
             LOGGER.info("客服审核系统自动审核通过");
-            Integer dailyCount =  salesCommissionService.getGuideDayLimit(salesCommission.getGuideId(), salesCommission.getCreateAt(), ConstantEnum.COMMISSION_STATUS_3.getCodeByte(), commissionConfig.getType());
+            Integer dailyCount = salesCommissionService.getGuideDayLimit(salesCommission.getGuideId(), salesCommission.getCreateAt(), ConstantEnum.COMMISSION_STATUS_3.getCodeByte(), commissionConfig.getType());
             if (dailyCount >= commissionConfig.getLimitTotal()) {
                 salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_5.getCodeByte());
-            }else {
+            } else {
                 salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_2.getCodeByte());
             }
         }
