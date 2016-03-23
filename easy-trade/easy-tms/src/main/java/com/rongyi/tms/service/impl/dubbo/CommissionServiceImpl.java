@@ -144,14 +144,22 @@ public class CommissionServiceImpl implements CommissionService {
             if (salesCommissionVO != null) {
                 Integer commissionId = salesCommissionVO.getId();
                 Integer status = salesCommissionVO.getStatus().intValue();
-                if (status == ConstantEnum.COMMISSION_STATUS_6.getCodeInt().intValue()) {
+                if (status == ConstantEnum.COMMISSION_STATUS_3.getCodeInt().intValue()) {
                     SalesCommissionAuditLog auditLog = salesCommissionAuditLogService.selectLatestLogWithCommissionId(commissionId);
-                    salesCommissionVO.setPayAt(auditLog.getCreateAt());
-                    salesCommissionVO.setAuditAt(auditLog.getCreateAt());
-                } else if (status < 0 || status == ConstantEnum.COMMISSION_STATUS_3.getCodeInt().intValue()) {
-                    SalesCommissionAuditLog auditLog = salesCommissionAuditLogService.selectLatestLogWithCommissionId(commissionId);
-                    if (auditLog != null)
+                    if(auditLog != null) {
+                        salesCommissionVO.setPayAt(auditLog.getCreateAt());
                         salesCommissionVO.setAuditAt(auditLog.getCreateAt());
+                    }else {
+                        salesCommissionVO.setPayAt(salesCommissionVO.getCreateAt());
+                        salesCommissionVO.setAuditAt(salesCommissionVO.getCreateAt());
+                    }
+                } else if (status < 0 || status == ConstantEnum.COMMISSION_STATUS_2.getCodeInt().intValue() ||  status == ConstantEnum.COMMISSION_STATUS_5.getCodeInt().intValue()) {
+                    SalesCommissionAuditLog auditLog = salesCommissionAuditLogService.selectLatestLogWithCommissionId(commissionId);
+                    if (auditLog != null) {
+                        salesCommissionVO.setAuditAt(auditLog.getCreateAt());
+                    }else{
+                        salesCommissionVO.setAuditAt(salesCommissionVO.getCreateAt());
+                    }
                 }
                 if (salesCommissionVO.getStatus().intValue() == ConstantEnum.COMMISSION_STATUS_3.getCodeInt()) {
                     salesCommissionVO.setStatus((byte) Constants.DrawApplyStatus.SEND);

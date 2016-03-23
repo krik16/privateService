@@ -173,6 +173,8 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
             SalesCommissionAuditLog log = salesCommissionAuditLogService.selectFailedLog(id);
             if (log != null)
                 vo.setReason(log.getMemo());
+        }else if(vo != null && vo.getStatus().equals(ConstantEnum.COMMISSION_STATUS_5.getCodeByte())){
+            vo.setReason(ConstantEnum.COMMISSION_STATUS_5.getValueStr());
         }
         return vo;
     }
