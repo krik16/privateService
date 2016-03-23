@@ -13,6 +13,8 @@
 		<result property="bonusSum" column="bonus_total" />
 		<result property="tradeSum" column="trade_total" />
 		<result property="drawSum" column="draw_total" />
+		<result property="expandCommissionTotal" column="expand_commission_total" />
+		<result property="firstCommissionTotal" column="first_commission_total" />
 		<result property="bonusDaily" column="bonus_daily" />
 		<result property="tradeDaily" column="trade_daily" />
 	</resultMap>
@@ -42,12 +44,14 @@
 	
 	<select id="selectAccountSumByUserId" resultMap="VirtualAccountSum" parameterType="java.util.Map">
 	SELECT virtual_account.user_id AS user_id, 
-			SUM(CASE WHEN (item_type = 1 OR item_type = 2 OR item_type = 3  OR item_type = 6) THEN amount * sign ELSE 0 END) AS income_total,
+			SUM(CASE WHEN (item_type = 1 OR item_type = 2 OR item_type = 3  OR item_type = 6 OR item_type = 7 OR item_type = 8) THEN amount * sign ELSE 0 END) AS income_total,
 			SUM(CASE WHEN item_type = 1 THEN amount * sign ELSE 0 END) AS commission_total,
 			SUM(CASE WHEN item_type = 2 THEN amount * sign ELSE 0 END) AS bonus_total,
 			SUM(CASE WHEN item_type = 3 THEN amount * sign ELSE 0 END) AS trade_total,
 			SUM(CASE WHEN item_type = 5 THEN amount * sign ELSE 0 END) AS draw_total,
 			SUM(CASE WHEN item_type = 6 THEN amount * sign ELSE 0 END) AS coupon_commission_total,
+			SUM(CASE WHEN item_type = 7 THEN amount * sign ELSE 0 END) AS expand_commission_total,
+			SUM(CASE WHEN item_type = 8 THEN amount * sign ELSE 0 END) AS first_commission_total,
 			SUM(CASE WHEN (item_type = 2 AND DATEDIFF(create_at, NOW()) = 0) THEN amount * sign ELSE 0 END) AS bonus_daily,
 			SUM(CASE WHEN (item_type = 3 AND DATEDIFF(create_at, NOW()) = 0) THEN amount * sign ELSE 0 END) AS trade_daily
 		FROM virtual_account LEFT JOIN virtual_account_detail
