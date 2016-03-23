@@ -27,6 +27,7 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -189,19 +190,30 @@ public class CommissionServiceImpl implements CommissionService {
         return ResponseData.success();
     }
 
+
     private SalesCommission initSalesCommission(CommissionVO commissionVO, CommissionConfig commissionConfig, InvitationUserInfoPojo buyerInfoPojo) {
         SalesCommission salesCommission = new SalesCommission();
         salesCommission.setGuideId(buyerInfoPojo.getUserId().toString());
         salesCommission.setOrderNo(commissionVO.getOrderNo());
         salesCommission.setCommissionAmount(new BigDecimal(commissionConfig.getCommAmount()));
+        salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_1.getCodeByte());
         if (ConstantEnum.COMMISSION_CONFIG_CUST_VERIFY_0.getCodeByte().equals(commissionConfig.getFinaVerify())) {
             LOGGER.info("财务审核系统自动审核通过");
-            salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_3.getCodeByte());
+            Integer dailyCount =  salesCommissionService.getGuideDayLimit(salesCommission.getGuideId(), salesCommission.getCreateAt(), ConstantEnum.COMMISSION_STATUS_3.getCodeByte(), commissionConfig.getType());
+            if (dailyCount >= commissionConfig.getLimitTotal()) {
+                salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_5.getCodeByte());
+            }else{
+                salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_3.getCodeByte());
+            }
         } else if (ConstantEnum.COMMISSION_CONFIG_CUST_VERIFY_0.getCodeByte().equals(commissionConfig.getCustVerify())) {//客服系统自动审核
             LOGGER.info("客服审核系统自动审核通过");
-            salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_2.getCodeByte());
+            Integer dailyCount =  salesCommissionService.getGuideDayLimit(salesCommission.getGuideId(), salesCommission.getCreateAt(), ConstantEnum.COMMISSION_STATUS_3.getCodeByte(), commissionConfig.getType());
+            if (dailyCount >= commissionConfig.getLimitTotal()) {
+                salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_5.getCodeByte());
+            }else {
+                salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_2.getCodeByte());
+            }
         }
-        salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_1.getCodeByte());
         salesCommission.setRegisterTime(commissionVO.getFinishAt());
         salesCommission.setCreateAt(DateUtil.getCurrDateTime());
         salesCommission.setGuideType(buyerInfoPojo.getUserType());

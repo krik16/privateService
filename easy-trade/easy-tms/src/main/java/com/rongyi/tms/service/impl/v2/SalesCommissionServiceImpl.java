@@ -212,12 +212,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
                 if (config != null) {
                     if (param.getStatus().intValue() == ConstantEnum.COMMISSION_STATUS_3.getCodeInt()) {
                         //二级审核获取当天已通过审核数
-                        paramsMap.clear();
-                        paramsMap.put("guideId", commission.getGuideId());
-                        paramsMap.put("createAt", commission.getCreateAt());
-                        paramsMap.put("status", param.getStatus());
-                        paramsMap.put("type", config.getType());
-                        Integer dailyCount = this.getBaseDao().count(NAMESPACE + ".selectDailyCount", paramsMap);
+                        Integer dailyCount =  getGuideDayLimit(commission.getGuideId(),commission.getCreateAt(),ConstantEnum.COMMISSION_STATUS_3.getCodeByte(),config.getType());
                         if (dailyCount >= config.getLimitTotal()) {
                             salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_5.getCodeByte());
                         }
@@ -273,6 +268,16 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
         map.put("type", type);
         int count = this.getBaseDao().selectOneBySql(NAMESPACE + ".validateIsAllow", map);
         return count <= 0;
+    }
+
+    @Override
+    public Integer getGuideDayLimit(String guideId,Date createAt,Byte status,Byte type){
+        Map<String,Object> paramsMap = new HashMap<>();
+        paramsMap.put("guideId", guideId);
+        paramsMap.put("createAt", createAt);
+        paramsMap.put("status", status);
+        paramsMap.put("type", type);
+        return this.getBaseDao().count(NAMESPACE + ".selectDailyCount", paramsMap);
     }
 
     @Override

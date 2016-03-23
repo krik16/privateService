@@ -4,6 +4,7 @@ import com.rongyi.easy.tms.entity.v2.SalesCommission;
 import com.rongyi.easy.tms.vo.v2.SalesCommissionVO;
 import com.rongyi.easy.tms.vo.v2.VerifyCommissionParam;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -62,6 +63,8 @@ public interface SalesCommissionService {
      * @return
      */
     boolean validateIsAllow(Integer guideId,String registerId,Integer type);
+
+    Integer getGuideDayLimit(String guideId,Date createAt,Byte status,Byte type);
 
     /**
      * 佣金总条数(摩店)
