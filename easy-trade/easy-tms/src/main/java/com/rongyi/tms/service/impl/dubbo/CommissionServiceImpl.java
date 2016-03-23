@@ -153,6 +153,13 @@ public class CommissionServiceImpl implements CommissionService {
                     if (auditLog != null)
                         salesCommissionVO.setAuditAt(auditLog.getCreateAt());
                 }
+                if (salesCommissionVO.getStatus().intValue() == ConstantEnum.COMMISSION_STATUS_3.getCodeInt()) {
+                    salesCommissionVO.setStatus((byte) Constants.DrawApplyStatus.SEND);
+                } else if (salesCommissionVO.getStatus().intValue() >= ConstantEnum.COMMISSION_STATUS_1.getCodeInt() && salesCommissionVO.getStatus().intValue() < ConstantEnum.COMMISSION_STATUS_3.getCodeInt()) {
+                    salesCommissionVO.setStatus((byte) Constants.DrawApplyStatus.PROCESSING);
+                } else if (salesCommissionVO.getStatus().intValue() < ConstantEnum.COMMISSION_STATUS_0.getCodeInt() || salesCommissionVO.getStatus().intValue() == ConstantEnum.COMMISSION_STATUS_5.getCodeInt()) {
+                    salesCommissionVO.setStatus((byte) Constants.DrawApplyStatus.FAIL);
+                }
             }
 
             LOGGER.info("detail end salesCommissionVO={}",salesCommissionVO.toString());
