@@ -695,7 +695,7 @@
 		type IS NULL) THEN commission_amount ELSE 0 END)
 		AS commission_today
 		FROM sales_commission
-		WHERE guide_id = #{userId}  and config_id = 0;
+		WHERE guide_id = #{userId};
 	</select>
 	<select id="commissionAmountTotal" parameterType="map"
 		resultMap="CommissionAmountTotal">
@@ -727,7 +727,6 @@
 		WHERE guide_id = #{userId}
 		AND (type IS NULL or type =
 		3)
-		and config_id = 0
 	</select>
 
 
