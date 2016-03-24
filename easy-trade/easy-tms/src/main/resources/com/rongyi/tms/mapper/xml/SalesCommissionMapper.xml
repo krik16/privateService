@@ -236,6 +236,7 @@
 				#{item}
 			</foreach>
 		</if>
+		and config_id = 0
 		order by sales_commission.create_at desc
 		limit
 		#{begin,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
@@ -297,6 +298,7 @@
 		<if test="amountEnd != null and amountEnd !=0">
 			and commission_amount &lt;= #{amountEnd,jdbcType=DECIMAL}
 		</if>
+		and config_id = 0
 		<if test="vaStatus != null and vaStatus != ''">
 			and sales_commission.status in
 			<foreach collection="vaStatus" index="index" item="item"
@@ -336,6 +338,7 @@
 			separator="," close=")">
 			#{item}
 		</foreach>
+		and config_id = 0
 		order by sales_commission.create_at desc
 		limit
 		#{start,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
@@ -670,7 +673,7 @@
 	<select id="selectByOrderNo" resultMap="ResultMapWithBLOBs"
 		parameterType="java.util.Map">
 		select * from sales_commission where order_no =
-		#{orderNo};
+		#{orderNo}  and config_id = 0;
 	</select>
 
 	<select id="selectCommissionInfoByUserId" resultMap="CommissionInfo"
@@ -692,14 +695,14 @@
 		type IS NULL) THEN commission_amount ELSE 0 END)
 		AS commission_today
 		FROM sales_commission
-		WHERE guide_id = #{userId};
+		WHERE guide_id = #{userId}  and config_id = 0;
 	</select>
 	<select id="commissionAmountTotal" parameterType="map"
 		resultMap="CommissionAmountTotal">
 		select
 		guide_id,version ,SUM(commission_amount) as
 		amount_total FROM
-		sales_commission where status=3 and
+		sales_commission where status=3 and config_id = 0 and
 		guide_type=#{guideType,jdbcType=INTEGER} GROUP BY guide_id;
 	</select>
 	<select id="commissionAmountTotalByVersion" resultMap="CommissionAmountTotal"
@@ -708,7 +711,7 @@
 		guide_id,version ,SUM(commission_amount) as
 		amount_total FROM
 		sales_commission where
-		version=#{version,jdbcType=BIGINT} GROUP BY guide_id;
+		version=#{version,jdbcType=BIGINT}  and config_id = 0 GROUP BY guide_id;
 	</select>
 
 	<select id="selectFaleCommission" resultMap="FaleCommissionMonth">
@@ -724,6 +727,7 @@
 		WHERE guide_id = #{userId}
 		AND (type IS NULL or type =
 		3)
+		and config_id = 0
 	</select>
 
 
@@ -738,7 +742,7 @@
 		sales_commission.`status`in (3,6) AND
 		TO_DAYS(sales_commission.create_at)=TO_DAYS(NOW())
 		AND
-		ry_osm.order_form.buyer_id=#{buyerId,jdbcType=VARCHAR} GROUP BY
+		ry_osm.order_form.buyer_id=#{buyerId,jdbcType=VARCHAR}  and config_id = 0  GROUP BY
 		sales_commission.guide_id,sales_commission.buyer_account
 	</select>
 	<update id="updateStatus" parameterType="map">
