@@ -396,13 +396,18 @@
       </if>
       <if test="dayRange != null">
           AND TO_DAYS(sc.create_at) = TO_DAYS(now())
+        AND YEAR(sc.create_at) = YEAR(now())
       </if>
       <if test="weekRange != null">
           AND WEEK(sc.create_at) = WEEK(now())
+        AND YEAR(sc.create_at) = YEAR(now())
       </if>
       <if test="monthRange != null">
           AND MONTH(sc.create_at) = MONTH(now())
+        AND YEAR(sc.create_at) = YEAR(now())
       </if>
+
+    and sc.config_id > 0
     ORDER BY sc.create_at DESC
     LIMIT #{startRecord,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
   </select>

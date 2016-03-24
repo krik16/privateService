@@ -74,13 +74,13 @@ public class CommissionServiceImpl implements CommissionService {
             int currentPage = params.containsKey("currentPage") ? Integer.valueOf(params.get("currentPage").toString()) : 1;
             params.put("startRecord", (currentPage - 1) * Integer.valueOf(params.get("pageSize").toString()));
 
-            if (params.get("getTimeRange") != null) {
-                if (params.get("getTimeRange") == Constants.TMSTimeRangeType.DAY) {
-                    params.put("dayRange", 1);
-                } else if (params.get("getTimeRange") == Constants.TMSTimeRangeType.WEEK) {
-                    params.put("weekRange", 1);
-                } else if (params.get("getTimeRange") == Constants.TMSTimeRangeType.MONTH) {
-                    params.put("monthRange", 1);
+            if (params.get("date") != null) {
+                if (String.valueOf(Constants.TMSTimeRangeType.DAY).equals(params.get("date"))) {
+                    params.put("dayRange",  Constants.TMSTimeRangeType.DAY);
+                } else if (String.valueOf(Constants.TMSTimeRangeType.WEEK).equals(params.get("date"))) {
+                    params.put("weekRange",Constants.TMSTimeRangeType.WEEK);
+                } else if (String.valueOf(Constants.TMSTimeRangeType.MONTH).equals(params.get("date"))) {
+                    params.put("monthRange",Constants.TMSTimeRangeType.MONTH);
                 }
             }
 
