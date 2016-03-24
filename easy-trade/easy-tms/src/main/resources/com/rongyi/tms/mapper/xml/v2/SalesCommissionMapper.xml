@@ -280,8 +280,11 @@
     <if test="registerPhone!=null and registerPhone!=''">
       and sc.register_phone == #{registerPhone}
     </if>
-    <if test="registerTime!=null and registerTime!=''">
-      and sc.register_time == #{registerTime}
+    <if test="registerTimeBegin !=null and registerTimeBegin !=''">
+      and sc.register_time &gt; #{registerTimeBegin}
+    </if>
+    <if test="registerTimeEnd !=null and registerTimeEnd !=''">
+      and sc.register_time &lt; #{registerTimeEnd}
     </if>
     <if test="invitePhone!=null and invitePhone!=''">
       and sc.invite_phone == #{invitePhone}
