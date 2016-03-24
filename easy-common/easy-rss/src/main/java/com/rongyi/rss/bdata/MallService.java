@@ -106,10 +106,11 @@ public interface MallService {
 	
 	/**
 	 * 获取默认素材列表
+	 * @param ps 
 	 * 
 	 * @return
 	 */
-	ResponseVO getDefaultAds();
+	ResponseVO getDefaultAds(Integer ps);
 
 	/**
 	 * 获取默认素材详情
@@ -118,5 +119,7 @@ public interface MallService {
 	 * @return
 	 */
 	ResponseVO getDefaultAdById(String defaultId);
+
+	ResponseVO getDefaultSeq(Integer ps);
 
 }
