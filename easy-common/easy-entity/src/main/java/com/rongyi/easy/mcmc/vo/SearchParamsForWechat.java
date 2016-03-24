@@ -80,4 +80,19 @@ public class SearchParamsForWechat implements Serializable{
     public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
     }
+
+
+    @Override
+    public String toString() {
+        return "SearchParamsForWechat{" +
+                "weAndTeStatus='" + weAndTeStatus + '\'' +
+                ", terminal='" + terminal + '\'' +
+                ", shopId='" + shopId + '\'' +
+                ", registerAt='" + registerAt + '\'' +
+                ", soldOutAt='" + soldOutAt + '\'' +
+                ", id='" + id + '\'' +
+                ", currpage='" + currpage + '\'' +
+                ", pageSize=" + pageSize +
+                '}';
+    }
 }
