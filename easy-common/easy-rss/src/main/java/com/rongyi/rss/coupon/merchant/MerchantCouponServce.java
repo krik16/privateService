@@ -3,6 +3,8 @@ package com.rongyi.rss.coupon.merchant;
 
 import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.entity.CouponRejectRecord;
+import com.rongyi.easy.coupon.param.ActivityCouponParam;
+import com.rongyi.easy.coupon.param.CouponParam;
 import com.rongyi.easy.coupon.vo.merchant.MerchantPaging;
 import com.rongyi.easy.coupon.vo.merchant.StatisticsCountVO;
 import com.rongyi.easy.coupon.vo.merchant.UserInfoVo;
@@ -62,7 +64,7 @@ public interface MerchantCouponServce {
      * @return
      * @throws Exception
      */
-    public String createActivityCoupon(Coupon coupon, final UserInfoVo userInfoVo) throws Exception;
+    public String createActivityCoupon(Coupon coupon, final UserInfoVo userInfoVo,ActivityCouponParam couponParam) throws Exception;
 
     /**
      * 插入一条coupon
