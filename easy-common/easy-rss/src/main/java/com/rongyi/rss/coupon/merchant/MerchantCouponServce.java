@@ -64,7 +64,7 @@ public interface MerchantCouponServce {
      * @return
      * @throws Exception
      */
-    public String createActivityCoupon(Coupon coupon, final UserInfoVo userInfoVo,ActivityCouponParam couponParam) throws Exception;
+    public String createActivityCoupon(Coupon coupon, final UserInfoVo userInfoVo) throws Exception;
 
     /**
      * 插入一条coupon
