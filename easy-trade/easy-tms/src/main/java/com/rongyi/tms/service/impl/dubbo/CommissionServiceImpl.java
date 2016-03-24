@@ -88,11 +88,10 @@ public class CommissionServiceImpl implements CommissionService {
                 List<Integer> statusList = new ArrayList<>();
 
                 if (Integer.parseInt(params.get("status").toString()) == Constants.DrawApplyStatus.SEND) {
-                    statusList.add(ConstantEnum.COMMISSION_STATUS_6.getCodeInt());
+                    statusList.add(ConstantEnum.COMMISSION_STATUS_3.getCodeInt());
                 } else if (Integer.parseInt(params.get("status").toString()) == Constants.DrawApplyStatus.PROCESSING) {
                     statusList.add(ConstantEnum.COMMISSION_STATUS_1.getCodeInt());
                     statusList.add(ConstantEnum.COMMISSION_STATUS_2.getCodeInt());
-                    statusList.add(ConstantEnum.COMMISSION_STATUS_3.getCodeInt());
                 } else if (Integer.parseInt(params.get("status").toString()) == Constants.DrawApplyStatus.FAIL) {
                     statusList.add(ConstantEnum.COMMISSION_STATUS_1_UNCHECK.getCodeInt());
                     statusList.add(ConstantEnum.COMMISSION_STATUS_2_UNCHECK.getCodeInt());
