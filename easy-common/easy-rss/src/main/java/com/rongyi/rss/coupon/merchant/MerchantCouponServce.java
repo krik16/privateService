@@ -3,6 +3,8 @@ package com.rongyi.rss.coupon.merchant;
 
 import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.entity.CouponRejectRecord;
+import com.rongyi.easy.coupon.param.ActivityCouponParam;
+import com.rongyi.easy.coupon.param.CouponParam;
 import com.rongyi.easy.coupon.vo.merchant.MerchantPaging;
 import com.rongyi.easy.coupon.vo.merchant.StatisticsCountVO;
 import com.rongyi.easy.coupon.vo.merchant.UserInfoVo;
