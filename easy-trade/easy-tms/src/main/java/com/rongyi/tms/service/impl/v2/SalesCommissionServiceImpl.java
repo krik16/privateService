@@ -212,13 +212,13 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
                 salesCommission.setUpdateAt(new Date());
                 CommissionConfig config = commissionConfigService.selectById(commission.getConfigId());
                 if (config != null) {
-                    if (ConstantEnum.COMMISSION_STATUS_3.getCodeByte().equals(param.getStatus())) {
+                    if (ConstantEnum.COMMISSION_STATUS_3.getCodeByte().equals(param.getStatus().byteValue())) {
                         //二级审核获取当天已通过审核数
                         Integer dailyCount =  getGuideDayLimit(commission.getGuideId(),commission.getCreateAt(),ConstantEnum.COMMISSION_STATUS_3.getCodeByte(),config.getType());
                         if (dailyCount >= config.getLimitTotal()) {
                             salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_5.getCodeByte());
                         }
-                    }else if(ConstantEnum.COMMISSION_STATUS_2.getCodeByte().equals(param.getStatus()) && ConstantEnum.COMMISSION_CONFIG_CUST_VERIFY_0.getCodeByte().equals(config.getCustVerify())){
+                    }else if(ConstantEnum.COMMISSION_STATUS_2.getCodeByte().equals(param.getStatus().byteValue()) && ConstantEnum.COMMISSION_CONFIG_CUST_VERIFY_0.getCodeByte().equals(config.getFinaVerify())){
                      // 客服审核，规则配置财务审核自动审核
                         Integer dailyCount =  getGuideDayLimit(commission.getGuideId(),commission.getCreateAt(),ConstantEnum.COMMISSION_STATUS_3.getCodeByte(),config.getType());
                         if (dailyCount >= config.getLimitTotal()) {
