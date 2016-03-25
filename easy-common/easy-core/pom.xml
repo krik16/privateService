@@ -274,6 +274,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		<version>2.7.1-SNAPSHOT</version>
 =======
 
@@ -293,6 +294,9 @@
 =======
 		<version>3.2.0-SNAPSHOT</version>
 >>>>>>> 3e759be7e26d32526e67a4fc9d671e4be50670a8
+=======
+		<version>3.2.7-SNAPSHOT</version>
+>>>>>>> 8a5e5d6dd6c8020c927a03c80a1ae86806a6d923
 	</parent>
 	<artifactId>easy-core</artifactId>
 	<packaging>jar</packaging>

@@ -12,6 +12,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		<version>2.7.1-SNAPSHOT</version>
 =======
 		<version>2.7.0-SNAPSHOT</version>
@@ -239,6 +240,9 @@
 		<groupId>com.rongyi</groupId>
 		<artifactId>easy-common</artifactId>
 		<version>2.9.5-SNAPSHOT</version>	
+=======
+		<version>3.2.7-SNAPSHOT</version>
+>>>>>>> 8a5e5d6dd6c8020c927a03c80a1ae86806a6d923
 	</parent>
 	<artifactId>easy-entity</artifactId>
 	<packaging>jar</packaging>
@@ -335,6 +339,7 @@
 		</plugins>
 	</build>
 </project>
+<<<<<<< HEAD
 >>>>>>> da6c1ff366d60795715da2d15a8c64d5017b52d8
 =======
 </project>
@@ -342,3 +347,5 @@
 =======
 </project>
 >>>>>>> 3e759be7e26d32526e67a4fc9d671e4be50670a8
+=======
+>>>>>>> 8a5e5d6dd6c8020c927a03c80a1ae86806a6d923

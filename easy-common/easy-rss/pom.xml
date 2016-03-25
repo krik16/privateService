@@ -17,6 +17,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		<version>2.7.1-SNAPSHOT</version>
 =======
  
@@ -57,6 +58,9 @@
 =======
 		<version>2.9.3-SNAPSHOT</version>
 >>>>>>> f98442833dfc62b5f93c72a10bf967c5ee3abed3
+=======
+		<version>3.2.7-SNAPSHOT</version>
+>>>>>>> 8a5e5d6dd6c8020c927a03c80a1ae86806a6d923
 	</parent>
 	<artifactId>easy-rss</artifactId>
 	<packaging>jar</packaging>
