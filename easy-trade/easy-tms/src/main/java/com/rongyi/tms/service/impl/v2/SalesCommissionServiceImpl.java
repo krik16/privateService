@@ -306,9 +306,9 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
                 vo.setCommissionType(3);
             } else if (vo.getCommissionType() == ConstantEnum.COMMISSION_TYPE_0.getCodeInt()) {
                 if (vo.getRegisterType() == ConstantEnum.COMMISSION_REGISTER_RONGYI.getCodeInt()) {
-                    vo.setCommissionType(1);
-                } else if (vo.getRegisterType() == ConstantEnum.COMMISSION_REGISTER_MALLSHOP.getCodeInt()) {
-                    vo.setCommissionType(2);
+                    vo.setCommissionType(ConstantEnum.COMMISSION_REGISTER_RONGYI.getCodeInt());
+                } else if (vo.getRegisterType() >= ConstantEnum.COMMISSION_REGISTER_MALLSHOP.getCodeInt()) {
+                    vo.setCommissionType(ConstantEnum.COMMISSION_REGISTER_MALLSHOP.getCodeInt());
                 }
             }
 
