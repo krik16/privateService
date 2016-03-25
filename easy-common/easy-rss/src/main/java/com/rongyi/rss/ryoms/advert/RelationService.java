@@ -18,7 +18,7 @@ public interface RelationService {
 
 	RelationVo info(Integer id);
 
-	void updateStatus(Integer id, Integer status);
+	void updateStatus(Integer id, Integer status) throws Exception;
 
 	boolean verifyEnable(String relation_id);
 	
