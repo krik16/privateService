@@ -6,6 +6,7 @@ import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.mcmc.param.AdviseShopParam;
 import com.rongyi.easy.mcmc.param.LiveParam;
 import com.rongyi.easy.rmmm.param.BullParam;
+import com.rongyi.easy.solr.LiveSolrDocument;
 import com.rongyi.easy.solr.param.LiveSearchParam;
 
 /**
@@ -133,5 +134,27 @@ public interface LiveService {
 	 * @return
 	 */
 	ResponseVO feCommodityOffShelves(String commodityId);
+
+	/**
+	 * 直播mongo批量转solr对象
+	 * @param skip
+	 * @param pageSize
+	 * @return
+	 */
+	public List<LiveSolrDocument> getLiveSolrDocumentList(int skip,int pageSize);
+
+	/**
+	 * 直播mongo转solr对象
+	 * @param liveId
+	 * @return
+	 */
+	public LiveSolrDocument getLiveSolrDocument(String liveId);
+
+	/**
+	 * 查询直播数量
+	 * @return
+	 */
+	public long getLiveCount();
+
 }
 

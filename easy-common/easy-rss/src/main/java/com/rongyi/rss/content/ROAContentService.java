@@ -296,4 +296,11 @@ public interface ROAContentService {
 	 * @return
 	 */
 	public  List<TemplateCityVO> findTemplateCityList(Integer id);
+	/**
+	 * 通过卡券ids 或者商品ids 查询
+	 * @type 4 商品  5代金券
+	 * @param ids
+	 * @return
+	 */
+	public List<ForumContent> findDailySaleByValueIds(List<String> ids,int type);
 }

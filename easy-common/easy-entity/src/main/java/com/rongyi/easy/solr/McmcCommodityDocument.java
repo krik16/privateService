@@ -83,7 +83,6 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	@Field("systemNumber")
 	private String systemNumber;
 
-
 	public Double getPrice() {
 		return price;
 	}
