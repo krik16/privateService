@@ -72,6 +72,7 @@ public class CommodityVO  implements  Serializable {
 	private String activityType = "0";	//活动状态[闪购1、特卖2、秒杀3]
 	private Integer templateId;//邮费模版id
 	private Integer sort;
+	private String mallName;
 
 	public Integer getTemplateId() {
 		return templateId;
@@ -526,6 +527,14 @@ public class CommodityVO  implements  Serializable {
 		this.update_by = update_by;
 	}
 
+	public String getMallName() {
+		return mallName;
+	}
+
+	public void setMallName(String mallName) {
+		this.mallName = mallName;
+	}
+
 	@Override
 	public String toString() {
 		return "CommodityVO [commodityId=" + commodityId + ", commodityName=" + commodityName + ", commodityCategory="
@@ -547,7 +556,7 @@ public class CommodityVO  implements  Serializable {
 				+ ", registerAt=" + registerAt + ", soldOutAt=" + soldOutAt + ", source=" + source + ", freight="
 				+ freight + ", terminalType=" + terminalType + ", stockStatus=" + stockStatus + ", reason=" + reason
 				+ ", mallId=" + mallId + ", brandName=" + brandName + ", shopNum=" + shopNum + ", brandId=" + brandId
-				+ ", filialeMid=" + filialeMid + ", identity=" + identity + ", processIdentity=" + processIdentity
+				+ ", filialeMid=" + filialeMid + ", identity=" + identity + ", processIdentity=" + processIdentity+",mallName="+mallName
 				+ ", activityType=" + activityType + ", templateId=" + templateId + ", sort=" + sort + "]";
 	}
 	
