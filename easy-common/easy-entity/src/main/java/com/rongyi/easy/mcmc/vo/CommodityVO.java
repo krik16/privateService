@@ -77,6 +77,7 @@ public class CommodityVO  implements  Serializable {
 	private Integer sort;
 	private String mallName;
 	private String weAndTeStatus;//商品在终端机与App上的隐藏与显示  1表示APP端展示，2表示微信端展示，3表示都展示，4表示都不展示
+	private List<Integer> customCategoryIds;//自定义分类集合;
 
 	public Integer getTemplateId() {
 		return templateId;
@@ -536,6 +537,14 @@ public class CommodityVO  implements  Serializable {
 
 	public String getMallName() {
 		return mallName;
+	}
+
+	public List<Integer> getCustomCategoryIds() {
+		return customCategoryIds;
+	}
+
+	public void setCustomCategoryIds(List<Integer> customCategoryIds) {
+		this.customCategoryIds = customCategoryIds;
 	}
 
 	public void setMallName(String mallName) {
