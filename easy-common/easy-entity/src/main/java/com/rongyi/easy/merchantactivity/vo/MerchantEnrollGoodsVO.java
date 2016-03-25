@@ -30,6 +30,7 @@ public class MerchantEnrollGoodsVO implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 5445032185274728369L;
+
 	/**
 	 * 开始时间
 	 * 
@@ -200,6 +201,14 @@ public class MerchantEnrollGoodsVO implements Serializable {
 		this.activityId = activityId;
 	}
 
+	public String getCheckStatusName() {
+		return checkStatusName;
+	}
+
+	public void setCheckStatusName(String checkStatusName) {
+		this.checkStatusName = checkStatusName;
+	}
+
 	/**
 	 * ID
 	 */
@@ -209,6 +218,7 @@ public class MerchantEnrollGoodsVO implements Serializable {
 	private String title = "";
 	private String picUrl = "";
 	private int checkStatus = 0;
+	private String checkStatusName = "";
 	private String checkReason = "";
 	private int applyStatus = 0;
 	private Date activityStartAt;
