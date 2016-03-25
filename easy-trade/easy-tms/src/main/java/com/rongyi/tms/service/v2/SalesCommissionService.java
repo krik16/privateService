@@ -66,7 +66,7 @@ public interface SalesCommissionService {
      */
     boolean validateIsAllow(Integer guideId,String registerId,Integer type);
 
-    Integer getGuideDayLimit(String guideId,Date createAt,Byte status,Byte type);
+    Integer getGuideDayLimit(String guideId,Date createAt,Byte status,Byte type,Byte registerType);
 
     void sendCommissionToVa(Integer id,BigDecimal amount,String guideId,CommissionConfig config);
 

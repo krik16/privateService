@@ -231,7 +231,7 @@ public class CommissionServiceImpl implements CommissionService {
         salesCommission.setConfigId(commissionConfig.getId());
         if (ConstantEnum.COMMISSION_CONFIG_CUST_VERIFY_0.getCodeByte().equals(commissionConfig.getFinaVerify()) && ConstantEnum.COMMISSION_CONFIG_CUST_VERIFY_0.getCodeByte().equals(commissionConfig.getCustVerify())) {
             LOGGER.info("客服/财务审核系统自动审核通过");
-            Integer dailyCount = salesCommissionService.getGuideDayLimit(salesCommission.getGuideId(), salesCommission.getCreateAt(), ConstantEnum.COMMISSION_STATUS_3.getCodeByte(), commissionConfig.getType());
+            Integer dailyCount = salesCommissionService.getGuideDayLimit(salesCommission.getGuideId(), salesCommission.getCreateAt(), ConstantEnum.COMMISSION_STATUS_3.getCodeByte(), commissionConfig.getType(),commissionConfig.getRegisterType());
            LOGGER.info("dailyCount={},limit={}",dailyCount, commissionConfig.getLimitTotal());
             if (dailyCount >= commissionConfig.getLimitTotal()) {
                 salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_5.getCodeByte());
@@ -240,7 +240,7 @@ public class CommissionServiceImpl implements CommissionService {
             }
         } else if (ConstantEnum.COMMISSION_CONFIG_CUST_VERIFY_0.getCodeByte().equals(commissionConfig.getCustVerify())) {//客服系统自动审核
             LOGGER.info("客服审核系统自动审核通过");
-            Integer dailyCount = salesCommissionService.getGuideDayLimit(salesCommission.getGuideId(), salesCommission.getCreateAt(), ConstantEnum.COMMISSION_STATUS_3.getCodeByte(), commissionConfig.getType());
+            Integer dailyCount = salesCommissionService.getGuideDayLimit(salesCommission.getGuideId(), salesCommission.getCreateAt(), ConstantEnum.COMMISSION_STATUS_3.getCodeByte(), commissionConfig.getType(),commissionConfig.getRegisterType());
             if (dailyCount >= commissionConfig.getLimitTotal()) {
                 salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_5.getCodeByte());
             } else {

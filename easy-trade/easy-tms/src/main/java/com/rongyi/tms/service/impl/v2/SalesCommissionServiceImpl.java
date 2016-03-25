@@ -214,13 +214,13 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
                 if (config != null) {
                     if (ConstantEnum.COMMISSION_STATUS_3.getCodeByte().equals(param.getStatus().byteValue())) {
                         //二级审核获取当天已通过审核数
-                        Integer dailyCount =  getGuideDayLimit(commission.getGuideId(),commission.getCreateAt(),ConstantEnum.COMMISSION_STATUS_3.getCodeByte(),config.getType());
+                        Integer dailyCount =  getGuideDayLimit(commission.getGuideId(),commission.getCreateAt(),ConstantEnum.COMMISSION_STATUS_3.getCodeByte(),config.getType(),config.getRegisterType());
                         if (dailyCount >= config.getLimitTotal()) {
                             salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_5.getCodeByte());
                         }
                     }else if(ConstantEnum.COMMISSION_STATUS_2.getCodeByte().equals(param.getStatus().byteValue()) && ConstantEnum.COMMISSION_CONFIG_CUST_VERIFY_0.getCodeByte().equals(config.getFinaVerify())){
                      // 客服审核，规则配置财务审核自动审核
-                        Integer dailyCount =  getGuideDayLimit(commission.getGuideId(),commission.getCreateAt(),ConstantEnum.COMMISSION_STATUS_3.getCodeByte(),config.getType());
+                        Integer dailyCount =  getGuideDayLimit(commission.getGuideId(),commission.getCreateAt(),ConstantEnum.COMMISSION_STATUS_3.getCodeByte(),config.getType(),config.getRegisterType());
                         if (dailyCount >= config.getLimitTotal()) {
                             salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_5.getCodeByte());
                         }else{
@@ -287,12 +287,13 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
     }
 
     @Override
-    public Integer getGuideDayLimit(String guideId,Date createAt,Byte status,Byte type){
+    public Integer getGuideDayLimit(String guideId,Date createAt,Byte status,Byte type,Byte registerType){
         Map<String,Object> paramsMap = new HashMap<>();
         paramsMap.put("guideId", guideId);
         paramsMap.put("createAt", createAt);
         paramsMap.put("status", status);
         paramsMap.put("type", type);
+        paramsMap.put("registerType", registerType);
         return this.getBaseDao().count(NAMESPACE + ".selectDailyCount", paramsMap);
     }
 

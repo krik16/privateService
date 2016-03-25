@@ -453,6 +453,9 @@
           and sc.guide_id=#{guideId, jdbcType=INTEGER}
           and sc.status=3
           and cc.type=#{type, jdbcType=TINYINT}
+    <if test="registerType &lt;= 3">
+          and cc.register_type =  #{registerType, jdbcType=TINYINT}
+    </if>
   </select>
   <select id="validateIsAllow" parameterType="map" resultType="int">
     select count(1) from sales_commission sc left join commission_config cc on sc.config_id = cc.id
