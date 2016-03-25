@@ -10,7 +10,7 @@ package com.rongyi.easy.mcmc.param;
 
 /** 
  * @ClassName: CommodityCategoryParam 
- * @Description: 查询商品分类参数
+ * @Description: 查询商品自定义类目参数
  * @author wzh
  * @date 2015年9月23日 下午5:16:41
  */
