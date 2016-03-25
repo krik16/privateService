@@ -180,7 +180,12 @@ public class CommissionServiceImpl implements CommissionService {
     @Override
     public ResponseData addCommission(CommissionVO commissionVO) {
         LOGGER.info("增加佣金,commissionVO={}", commissionVO);
-        InvitationUserInfoPojo buyerInfoPojo = rOAMallLifeUserService.getUserIsByShare(commissionVO.getRegisterId(), commissionVO.getRegisterType());
+        Integer registerType = commissionVO.getRegisterType();
+        //查找邀请人信息不区分摩店买手和导购，摩店注册统一传2
+        if(registerType.equals(3)){
+            registerType = 2;
+        }
+        InvitationUserInfoPojo buyerInfoPojo = rOAMallLifeUserService.getUserIsByShare(commissionVO.getRegisterId(), registerType);
         if (buyerInfoPojo == null || StringUtils.isBlank(buyerInfoPojo.getShareCode())) {
             LOGGER.info("未找到对应的邀请人信息，不增加佣金,buyerInfoPojo={}", buyerInfoPojo);
             return ResponseData.failure(ConstantEnum.COMMISSION_ADD_INVITE_NOT_FOUND.getCodeInt(), ConstantEnum.COMMISSION_ADD_INVITE_NOT_FOUND.getValueStr());
