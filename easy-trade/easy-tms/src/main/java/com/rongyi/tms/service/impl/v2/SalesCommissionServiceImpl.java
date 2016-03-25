@@ -201,7 +201,6 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
     public boolean verifyCommission(VerifyCommissionParam param, String user) {
         logger.info("param={},user={}", param, user);
         int resultNum = 0;
-        Map<String, Object> paramsMap = new HashMap<>();
         List<String> ids = Arrays.asList(param.getIds().split(","));
         for (String idStr : ids) {
             SalesCommission commission = selectById(Integer.valueOf(idStr));
@@ -213,11 +212,20 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
                 salesCommission.setUpdateAt(new Date());
                 CommissionConfig config = commissionConfigService.selectById(commission.getConfigId());
                 if (config != null) {
-                    if (param.getStatus().intValue() == ConstantEnum.COMMISSION_STATUS_3.getCodeInt()) {
+                    if (ConstantEnum.COMMISSION_STATUS_3.getCodeByte().equals(param.getStatus())) {
                         //二级审核获取当天已通过审核数
                         Integer dailyCount =  getGuideDayLimit(commission.getGuideId(),commission.getCreateAt(),ConstantEnum.COMMISSION_STATUS_3.getCodeByte(),config.getType());
                         if (dailyCount >= config.getLimitTotal()) {
                             salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_5.getCodeByte());
+                        }
+                    }else if(ConstantEnum.COMMISSION_STATUS_2.getCodeByte().equals(param.getStatus()) && ConstantEnum.COMMISSION_CONFIG_CUST_VERIFY_0.getCodeByte().equals(config.getCustVerify())){
+                     // 客服审核，规则配置财务审核自动审核
+                        Integer dailyCount =  getGuideDayLimit(commission.getGuideId(),commission.getCreateAt(),ConstantEnum.COMMISSION_STATUS_3.getCodeByte(),config.getType());
+                        if (dailyCount >= config.getLimitTotal()) {
+                            salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_5.getCodeByte());
+                        }else{
+                            logger.info("客服审核通过，财务系统审核");
+                            salesCommission.setStatus(ConstantEnum.COMMISSION_STATUS_3.getCodeByte());
                         }
                     }
                     int updateNum = this.getBaseDao().updateBySql(NAMESPACE + ".updateByPrimaryKeySelective", salesCommission);
