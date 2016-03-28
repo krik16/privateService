@@ -40,8 +40,6 @@ public class Zones implements Serializable {
 
 	private String slug;//名称拼音
 
-	private String address;
-
 	private String appearance_pic;
 
 	private String telephone;
@@ -299,14 +297,6 @@ public class Zones implements Serializable {
 
 	public void setIcon(String icon) {
 		this.icon = icon;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
 	}
 
 	public int getMall_valid() {
