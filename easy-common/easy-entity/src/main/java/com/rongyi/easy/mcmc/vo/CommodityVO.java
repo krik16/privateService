@@ -19,6 +19,8 @@ public class CommodityVO  implements  Serializable {
 	private String commodityCategory;
 	private String commodityCategory1;	//新增 一级类目ID(当前适用于getCommodityById)
 	private String commodityCategory2;	//新增 二级类目ID(当前适用于getCommodityById)
+	private String commodityCategoryName1;
+	private String commodityCategoryName2;
 	private String commodityDescription;
 	private String commodityPostage;
 	private String commodityStock;
@@ -534,30 +536,48 @@ public class CommodityVO  implements  Serializable {
 	public void setMallName(String mallName) {
 		this.mallName = mallName;
 	}
+	
+	public String getCommodityCategoryName1() {
+		return commodityCategoryName1;
+	}
+
+	public void setCommodityCategoryName1(String commodityCategoryName1) {
+		this.commodityCategoryName1 = commodityCategoryName1;
+	}
+
+	public String getCommodityCategoryName2() {
+		return commodityCategoryName2;
+	}
+
+	public void setCommodityCategoryName2(String commodityCategoryName2) {
+		this.commodityCategoryName2 = commodityCategoryName2;
+	}
 
 	@Override
 	public String toString() {
 		return "CommodityVO [commodityId=" + commodityId + ", commodityName=" + commodityName + ", commodityCategory="
 				+ commodityCategory + ", commodityCategory1=" + commodityCategory1 + ", commodityCategory2="
-				+ commodityCategory2 + ", commodityDescription=" + commodityDescription + ", commodityPostage="
-				+ commodityPostage + ", commodityStock=" + commodityStock + ", commoditySold=" + commoditySold
-				+ ", commodityPubDate=" + commodityPubDate + ", commodityStatus=" + commodityStatus
-				+ ", commodityAppStatus=" + commodityAppStatus + ", commodityOPriceMax=" + commodityOPriceMax
-				+ ", commodityOPriceMin=" + commodityOPriceMin + ", commodityCPriceMax=" + commodityCPriceMax
-				+ ", commodityCPriceMin=" + commodityCPriceMin + ", commodityOPOfLCP=" + commodityOPOfLCP
-				+ ", commodityType=" + commodityType + ", isSpot=" + isSpot + ", liveStartTime=" + liveStartTime
-				+ ", liveEndTime=" + liveEndTime + ", create_by=" + create_by + ", update_by=" + update_by + ", liveId="
-				+ liveId + ", commodityOriginalPrice=" + commodityOriginalPrice + ", commodityCurrentPrice="
-				+ commodityCurrentPrice + ", shopId=" + shopId + ", shopMid=" + shopMid + ", commodityShopNumber="
-				+ commodityShopNumber + ", commodityPicList=" + commodityPicList + ", commoditySpecList="
-				+ commoditySpecList + ", commodityCode=" + commodityCode + ", commodityCommission="
-				+ commodityCommission + ", brandMid=" + brandMid + ", mallMid=" + mallMid + ", shopName=" + shopName
-				+ ", supportCourierDeliver=" + supportCourierDeliver + ", supportSelfPickup=" + supportSelfPickup
-				+ ", registerAt=" + registerAt + ", soldOutAt=" + soldOutAt + ", source=" + source + ", freight="
-				+ freight + ", terminalType=" + terminalType + ", stockStatus=" + stockStatus + ", reason=" + reason
-				+ ", mallId=" + mallId + ", brandName=" + brandName + ", shopNum=" + shopNum + ", brandId=" + brandId
-				+ ", filialeMid=" + filialeMid + ", identity=" + identity + ", processIdentity=" + processIdentity+",mallName="+mallName
-				+ ", activityType=" + activityType + ", templateId=" + templateId + ", sort=" + sort + "]";
+				+ commodityCategory2 + ", commodityCategoryName1=" + commodityCategoryName1
+				+ ", commodityCategoryName2=" + commodityCategoryName2 + ", commodityDescription="
+				+ commodityDescription + ", commodityPostage=" + commodityPostage + ", commodityStock=" + commodityStock
+				+ ", commoditySold=" + commoditySold + ", commodityPubDate=" + commodityPubDate + ", commodityStatus="
+				+ commodityStatus + ", commodityAppStatus=" + commodityAppStatus + ", commodityOPriceMax="
+				+ commodityOPriceMax + ", commodityOPriceMin=" + commodityOPriceMin + ", commodityCPriceMax="
+				+ commodityCPriceMax + ", commodityCPriceMin=" + commodityCPriceMin + ", commodityOPOfLCP="
+				+ commodityOPOfLCP + ", commodityType=" + commodityType + ", isSpot=" + isSpot + ", liveStartTime="
+				+ liveStartTime + ", liveEndTime=" + liveEndTime + ", create_by=" + create_by + ", update_by="
+				+ update_by + ", liveId=" + liveId + ", commodityOriginalPrice=" + commodityOriginalPrice
+				+ ", commodityCurrentPrice=" + commodityCurrentPrice + ", shopId=" + shopId + ", shopMid=" + shopMid
+				+ ", commodityShopNumber=" + commodityShopNumber + ", commodityPicList=" + commodityPicList
+				+ ", commoditySpecList=" + commoditySpecList + ", commodityCode=" + commodityCode
+				+ ", commodityCommission=" + commodityCommission + ", brandMid=" + brandMid + ", mallMid=" + mallMid
+				+ ", shopName=" + shopName + ", supportCourierDeliver=" + supportCourierDeliver + ", supportSelfPickup="
+				+ supportSelfPickup + ", registerAt=" + registerAt + ", soldOutAt=" + soldOutAt + ", source=" + source
+				+ ", freight=" + freight + ", terminalType=" + terminalType + ", stockStatus=" + stockStatus
+				+ ", reason=" + reason + ", mallId=" + mallId + ", brandName=" + brandName + ", shopNum=" + shopNum
+				+ ", brandId=" + brandId + ", filialeMid=" + filialeMid + ", identity=" + identity
+				+ ", processIdentity=" + processIdentity + ", activityType=" + activityType + ", templateId="
+				+ templateId + ", sort=" + sort + ", mallName=" + mallName + "]";
 	}
 	
 }
