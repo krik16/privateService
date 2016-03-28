@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @author user
  *
  */
-public class SubscribeResult  implements Serializable{
+public class ExpressPushResult  implements Serializable{
 	
 	/** true表示回调成功,false表示失败 **/
 	private boolean result = true;
@@ -15,11 +15,11 @@ public class SubscribeResult  implements Serializable{
 	private String returnCode;
 	/** 错误信息 **/
 	private String message;
-	public SubscribeResult() {
+	public ExpressPushResult() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public SubscribeResult(boolean result, String returnCode, String message) {
+	public ExpressPushResult(boolean result, String returnCode, String message) {
 		super();
 		this.result = result;
 		this.returnCode = returnCode;

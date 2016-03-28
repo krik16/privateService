@@ -28,9 +28,6 @@ public class ExpressPushInfoEntity implements Serializable{
     /** 快递当前状态 :0在途中、1已揽收、2疑难、3正常签收或者退回签收  */
     private Integer state;
 
-    /** 是否签收标记  */
-    private Integer isCheck;
-
     /** 创建时间  */
     private Date createAt;
 
@@ -91,14 +88,6 @@ public class ExpressPushInfoEntity implements Serializable{
         this.state = state;
     }
 
-    public Integer getIsCheck() {
-        return isCheck;
-    }
-
-    public void setIsCheck(Integer isCheck) {
-        this.isCheck = isCheck;
-    }
-
     public Date getCreateAt() {
         return createAt;
     }
@@ -135,8 +124,7 @@ public class ExpressPushInfoEntity implements Serializable{
 	public String toString() {
 		return "ExpressPushInfoEntity [id=" + id + ", expressBillId="
 				+ expressBillId + ", company=" + company + ", status=" + status
-				+ ", message=" + message + ", state=" + state + ", isCheck="
-				+ isCheck + ", createAt=" + createAt + ", updateAt=" + updateAt
+				+ ", message=" + message + ", state=" + state + ", createAt=" + createAt + ", updateAt=" + updateAt
 				+ ", isDisabled=" + isDisabled + ", data=" + data + "]";
 	}
 }

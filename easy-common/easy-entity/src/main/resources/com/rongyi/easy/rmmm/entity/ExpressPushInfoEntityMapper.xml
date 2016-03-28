@@ -8,7 +8,6 @@
     <result column="status" property="status" jdbcType="TINYINT" />
     <result column="message" property="message" jdbcType="VARCHAR" />
     <result column="state" property="state" jdbcType="TINYINT" />
-    <result column="is_check" property="isCheck" jdbcType="TINYINT" />
     <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
     <result column="update_at" property="updateAt" jdbcType="TIMESTAMP" />
     <result column="is_disabled" property="isDisabled" jdbcType="TINYINT" />
@@ -17,7 +16,7 @@
     <result column="data" property="data" typeHandler="com.rongyi.core.common.util.ConvertBlobTypeHandler" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, express_bill_id, company, status, message, state, is_check, create_at, update_at, 
+    id, express_bill_id, company, status, message, state, create_at, update_at, 
     is_disabled
   </sql>
   <sql id="Blob_Column_List" >
@@ -38,11 +37,11 @@
   <insert id="insert" parameterType="com.rongyi.easy.rmmm.entity.ExpressPushInfoEntity" >
     insert into express_push_info (id, express_bill_id, company, 
       status, message, state, 
-      is_check, create_at, update_at, 
+      create_at, update_at, 
       is_disabled, data)
     values (#{id,jdbcType=INTEGER}, #{expressBillId,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, 
       #{status,jdbcType=TINYINT}, #{message,jdbcType=VARCHAR}, #{state,jdbcType=TINYINT}, 
-      #{isCheck,jdbcType=TINYINT}, #{createAt,jdbcType=TIMESTAMP}, #{updateAt,jdbcType=TIMESTAMP}, 
+      #{createAt,jdbcType=TIMESTAMP}, #{updateAt,jdbcType=TIMESTAMP}, 
       #{isDisabled,jdbcType=TINYINT}, #{data,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.rongyi.easy.rmmm.entity.ExpressPushInfoEntity" >
@@ -65,9 +64,6 @@
       </if>
       <if test="state != null" >
         state,
-      </if>
-      <if test="isCheck != null" >
-        is_check,
       </if>
       <if test="createAt != null" >
         create_at,
@@ -101,9 +97,6 @@
       <if test="state != null" >
         #{state,jdbcType=TINYINT},
       </if>
-      <if test="isCheck != null" >
-        #{isCheck,jdbcType=TINYINT},
-      </if>
       <if test="createAt != null" >
         #{createAt,jdbcType=TIMESTAMP},
       </if>
@@ -136,9 +129,6 @@
       <if test="state != null" >
         state = #{state,jdbcType=TINYINT},
       </if>
-      <if test="isCheck != null" >
-        is_check = #{isCheck,jdbcType=TINYINT},
-      </if>
       <if test="createAt != null" >
         create_at = #{createAt,jdbcType=TIMESTAMP},
       </if>
@@ -161,7 +151,6 @@
       status = #{status,jdbcType=TINYINT},
       message = #{message,jdbcType=VARCHAR},
       state = #{state,jdbcType=TINYINT},
-      is_check = #{isCheck,jdbcType=TINYINT},
       create_at = #{createAt,jdbcType=TIMESTAMP},
       update_at = #{updateAt,jdbcType=TIMESTAMP},
       is_disabled = #{isDisabled,jdbcType=TINYINT},
@@ -175,7 +164,6 @@
       status = #{status,jdbcType=TINYINT},
       message = #{message,jdbcType=VARCHAR},
       state = #{state,jdbcType=TINYINT},
-      is_check = #{isCheck,jdbcType=TINYINT},
       create_at = #{createAt,jdbcType=TIMESTAMP},
       update_at = #{updateAt,jdbcType=TIMESTAMP},
       is_disabled = #{isDisabled,jdbcType=TINYINT}
