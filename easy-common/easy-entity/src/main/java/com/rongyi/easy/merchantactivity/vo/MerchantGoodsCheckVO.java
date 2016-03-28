@@ -1,15 +1,18 @@
-package com.rongyi.easy.activitymanage.entity;
+package com.rongyi.easy.merchantactivity.vo;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class ActivityGoodsCheckRecord  implements Serializable {
-    private Integer id;
-
-    private Integer activityId;
-
+/**
+ * create by com.rongyi.easy.merchantactivity.vo ideaworkspace :author lijing
+ * User:lijing
+ * DATE : 2016/3/19
+ * TIME : 22:28
+ * ideaworkspace.
+ */
+public class MerchantGoodsCheckVO implements Serializable {
     private Integer activityGoodsId;
 
     private Integer status;
@@ -21,22 +24,6 @@ public class ActivityGoodsCheckRecord  implements Serializable {
     private String createUser;
 
     private Date createAt;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getActivityId() {
-        return activityId;
-    }
-
-    public void setActivityId(Integer activityId) {
-        this.activityId = activityId;
-    }
 
     public Integer getActivityGoodsId() {
         return activityGoodsId;
@@ -89,8 +76,6 @@ public class ActivityGoodsCheckRecord  implements Serializable {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .append("id", id)
-                .append("activityId", activityId)
                 .append("activityGoodsId", activityGoodsId)
                 .append("status", status)
                 .append("record", record)

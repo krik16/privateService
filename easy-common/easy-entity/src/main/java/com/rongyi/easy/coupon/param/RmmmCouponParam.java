@@ -109,24 +109,46 @@ public class RmmmCouponParam implements Serializable {
      * 活动id
      */
     private Integer activityId;
-
+    
     /**
      * 创建人
      */
     private String createUser;
-    private String jsessionId;
+    private String jsessionid;
+    /**
+	 * 卡券id
+	 */
+	private String goodsId;	
+	
+	private String activityGoodsId;
     
-    
+ 
 
-   	public String getJsessionId() {
-   		return jsessionId;
-   	}
+    public String getGoodsId() {
+		return goodsId;
+	}
 
-   	public void setJsessionId(String jsessionId) {
-   		this.jsessionId = jsessionId;
-   	}
+	public void setGoodsId(String goodsId) {
+		this.goodsId = goodsId;
+	}
 
-    public String getTitle() {
+	public String getActivityGoodsId() {
+		return activityGoodsId;
+	}
+
+	public void setActivityGoodsId(String activityGoodsId) {
+		this.activityGoodsId = activityGoodsId;
+	}
+
+	public String getJsessionid() {
+		return jsessionid;
+	}
+
+	public void setJsessionid(String jsessionid) {
+		this.jsessionid = jsessionid;
+	}
+
+	public String getTitle() {
         return title;
     }
 

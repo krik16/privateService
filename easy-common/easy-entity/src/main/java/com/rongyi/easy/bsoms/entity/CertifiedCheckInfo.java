@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 摩店用户审核记得表
+ * 摩店用户审核记录表
  * @author sj
  *
  */
@@ -15,7 +15,7 @@ public class CertifiedCheckInfo implements Serializable{
 
     private Integer userId;    //用户ID
 
-    private Integer opeUserId;   //审核人ID
+    private Integer createBy;   //审核人ID
     
     private Integer checkStatus; //审核状态  0通过  1不通过
     
@@ -43,15 +43,15 @@ public class CertifiedCheckInfo implements Serializable{
         this.userId = userId;
     }
 
-    public Integer getOpeUserId() {
-        return opeUserId;
-    }
+    public Integer getCreateBy() {
+		return createBy;
+	}
 
-    public void setOpeUserId(Integer opeUserId) {
-        this.opeUserId = opeUserId;
-    }
+	public void setCreateBy(Integer createBy) {
+		this.createBy = createBy;
+	}
 
-    public String getReason() {
+	public String getReason() {
         return reason;
     }
 

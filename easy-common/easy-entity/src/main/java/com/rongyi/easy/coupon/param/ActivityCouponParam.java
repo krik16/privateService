@@ -22,6 +22,10 @@ public class ActivityCouponParam implements Serializable{
 
     private String activityJoinTime;
 
+    private Date joinStartAt;
+
+    private Date joinEndAt;
+
     private String name;
 
     private Integer totalCount;
@@ -197,14 +201,32 @@ public class ActivityCouponParam implements Serializable{
         this.remark = remark;
     }
 
+    public Date getJoinStartAt() {
+        return joinStartAt;
+    }
+
+    public void setJoinStartAt(Date joinStartAt) {
+        this.joinStartAt = joinStartAt;
+    }
+
+    public Date getJoinEndAt() {
+        return joinEndAt;
+    }
+
+    public void setJoinEndAt(Date joinEndAt) {
+        this.joinEndAt = joinEndAt;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("ActivityCouponParam{");
-        sb.append("id=").append(id);
+        sb.append("id='").append(id).append('\'');
         sb.append(", couponType=").append(couponType);
         sb.append(", activityId=").append(activityId);
         sb.append(", activityName='").append(activityName).append('\'');
         sb.append(", activityJoinTime='").append(activityJoinTime).append('\'');
+        sb.append(", joinStartAt=").append(joinStartAt);
+        sb.append(", joinEndAt=").append(joinEndAt);
         sb.append(", name='").append(name).append('\'');
         sb.append(", totalCount=").append(totalCount);
         sb.append(", joinCount=").append(joinCount);

@@ -14,15 +14,21 @@ public class CertifiedParam extends BaseParam implements Serializable{
 	
 	private String callName; //称呼
 	
-	private String city;          //所在城市
+	private Integer proId;       //省ID
+	
+	private Integer cityId;       //市ID
+	
+	private Integer areaId;       //区ID
 	
 	private String contactPhone;  //联系电话
 	
-	private String synopsis;      //自我简介
+	private String resume;      //自我简介
 	
 	private String mallId;        //商场ID
 	
 	private String shopId;         //店铺ID
+	
+	private String brandId;       //品牌
 
 	public Integer getId() {
 		return id;
@@ -48,12 +54,28 @@ public class CertifiedParam extends BaseParam implements Serializable{
 		this.callName = callName;
 	}
 
-	public String getCity() {
-		return city;
+	public Integer getProId() {
+		return proId;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
+	public void setProId(Integer proId) {
+		this.proId = proId;
+	}
+
+	public Integer getCityId() {
+		return cityId;
+	}
+
+	public void setCityId(Integer cityId) {
+		this.cityId = cityId;
+	}
+
+	public Integer getAreaId() {
+		return areaId;
+	}
+
+	public void setAreaId(Integer areaId) {
+		this.areaId = areaId;
 	}
 
 	public String getContactPhone() {
@@ -64,12 +86,12 @@ public class CertifiedParam extends BaseParam implements Serializable{
 		this.contactPhone = contactPhone;
 	}
 
-	public String getSynopsis() {
-		return synopsis;
+	public String getResume() {
+		return resume;
 	}
 
-	public void setSynopsis(String synopsis) {
-		this.synopsis = synopsis;
+	public void setResume(String resume) {
+		this.resume = resume;
 	}
 
 	public String getMallId() {
@@ -87,6 +109,13 @@ public class CertifiedParam extends BaseParam implements Serializable{
 	public void setShopId(String shopId) {
 		this.shopId = shopId;
 	}
-	
+
+	public String getBrandId() {
+		return brandId;
+	}
+
+	public void setBrandId(String brandId) {
+		this.brandId = brandId;
+	}
 	
 }

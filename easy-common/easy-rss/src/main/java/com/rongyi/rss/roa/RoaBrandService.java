@@ -30,10 +30,10 @@ public interface RoaBrandService {
     BrandVO findBrandVOById(String brandId) throws Exception;
 
     /**
-     * 查询一级分类 通过名字
+     * 查询一、二级分类 通过名字
      * @param cateName
      * @return
      * @throws Exception
      */
-    List<BrandsCategoryVO> getCategoriesName(String cateName) throws Exception;
+    List<BrandsCategoryVO> getCategoriesName(String cateId,String cateName) throws Exception;
 }

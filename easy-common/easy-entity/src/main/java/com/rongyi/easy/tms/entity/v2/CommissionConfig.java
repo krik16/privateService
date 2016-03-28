@@ -90,6 +90,8 @@ public class CommissionConfig implements Serializable {
      */
     private Byte isDelete;
 
+    private String desc;
+
     public Integer getId() {
         return id;
     }
@@ -240,5 +242,13 @@ public class CommissionConfig implements Serializable {
 
     public void setUpdateBy(String updateBy) {
         this.updateBy = updateBy;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 }

@@ -92,6 +92,15 @@ public class RmmmActiveCouponParam implements Serializable {
 	private String status;
 	private String reason;
 	private String statusDes;
+	private String activityGoodsId;
+	public String getActivityGoodsId() {
+		return activityGoodsId;
+	}
+
+	public void setActivityGoodsId(String activityGoodsId) {
+		this.activityGoodsId = activityGoodsId;
+	}
+
 	public String getStatusDes() {
 		return statusDes;
 	}
@@ -285,21 +294,25 @@ public class RmmmActiveCouponParam implements Serializable {
 	public void setGoodsId(String goodsId) {
 		this.goodsId = goodsId;
 	}
- 	@Override
+
+	@Override
 	public String toString() {
 		return "RmmmActiveCouponParam [jsessionid=" + jsessionid + ", goodsId="
-				+ goodsId + ", activityId=" + activityId + ", shopId=" + shopId
-				+ ", title=" + title + ", stockCount=" + stockCount
-				+ ", orgPrice=" + orgPrice + ", activityPrice=" + activityPrice
-				+ ", publishStartDate=" + publishStartDate
-				+ ", publishEndDate=" + publishEndDate + ", validBeginDate="
-				+ validBeginDate + ", validEndDate=" + validEndDate
-				+ ", limitRemark=" + limitRemark + ", description="
-				+ description + ", imageList=" + imageList + ", currentPage="
-				+ currentPage + ", pageSize=" + pageSize + ", createUser="
+				+ goodsId + ", activityIds=" + activityIds + ", activityId="
+				+ activityId + ", shopId=" + shopId + ", title=" + title
+				+ ", stockCount=" + stockCount + ", orgPrice=" + orgPrice
+				+ ", activityPrice=" + activityPrice + ", publishStartDate="
+				+ publishStartDate + ", publishEndDate=" + publishEndDate
+				+ ", validBeginDate=" + validBeginDate + ", validEndDate="
+				+ validEndDate + ", limitRemark=" + limitRemark
+				+ ", description=" + description + ", imageList=" + imageList
+				+ ", currentPage=" + currentPage + ", pageSize=" + pageSize
+				+ ", identity=" + identity + ", number=" + number + ", status="
+				+ status + ", reason=" + reason + ", statusDes=" + statusDes
+				+ ", activityGoodsId=" + activityGoodsId + ", createUser="
 				+ createUser + "]";
 	}
-
+ 
  
  
 }

@@ -1,18 +1,42 @@
 package com.rongyi.easy.merchantactivity.vo;
 
+import java.io.Serializable;
+import java.util.Date;
+
 /**
  * 报名卡劵实体
  * 
  * @author wangjh
  * @date 2016年3月10日
  */
-public class MerchantEnrollGoodsVO {
+public class MerchantEnrollGoodsVO implements Serializable {
+	public Date getJoinStartAt() {
+		return joinStartAt;
+	}
+
+	public void setJoinStartAt(Date joinStartAt) {
+		this.joinStartAt = joinStartAt;
+	}
+
+	public Date getJoinEndAt() {
+		return joinEndAt;
+	}
+
+	public void setJoinEndAt(Date joinEndAt) {
+		this.joinEndAt = joinEndAt;
+	}
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5445032185274728369L;
+
 	/**
 	 * 开始时间
 	 * 
 	 * @return
 	 */
-	public String getActivityStartAt() {
+	public Date getActivityStartAt() {
 		return activityStartAt;
 	}
 
@@ -21,7 +45,7 @@ public class MerchantEnrollGoodsVO {
 	 * 
 	 * @param activityStartAt
 	 */
-	public void setActivityStartAt(String activityStartAt) {
+	public void setActivityStartAt(Date activityStartAt) {
 		this.activityStartAt = activityStartAt;
 	}
 
@@ -30,7 +54,7 @@ public class MerchantEnrollGoodsVO {
 	 * 
 	 * @return
 	 */
-	public String getActivityEndAt() {
+	public Date getActivityEndAt() {
 		return activityEndAt;
 	}
 
@@ -39,7 +63,7 @@ public class MerchantEnrollGoodsVO {
 	 * 
 	 * @param activityEndAt
 	 */
-	public void setActivityEndAt(String activityEndAt) {
+	public void setActivityEndAt(Date activityEndAt) {
 		this.activityEndAt = activityEndAt;
 	}
 
@@ -116,7 +140,7 @@ public class MerchantEnrollGoodsVO {
 	/**
 	 * 审核状态
 	 * 
-	 * @return 0：待审核 1：退回修改（未通过） 2：报名成功（通过） 3：参与成功、活动结束
+	 * @return 0：待审核 1：退回修改（未通过） 2：报名成功（通过） 3：参与成功、活动结束 5：参与失败、活动结束
 	 */
 	public int getCheckStatus() {
 		return checkStatus;
@@ -126,7 +150,7 @@ public class MerchantEnrollGoodsVO {
 	 * 审核状态
 	 * 
 	 * @param checkStatus
-	 *            0：待审核 1：退回修改（未通过） 2：报名成功（通过） 3：参与成功、活动结束
+	 *            0：待审核 1：退回修改（未通过） 2：报名成功（通过） 3：参与成功、活动结束 5：参与失败、活动结束
 	 */
 	public void setCheckStatus(int checkStatus) {
 		this.checkStatus = checkStatus;
@@ -177,6 +201,14 @@ public class MerchantEnrollGoodsVO {
 		this.activityId = activityId;
 	}
 
+	public String getCheckStatusName() {
+		return checkStatusName;
+	}
+
+	public void setCheckStatusName(String checkStatusName) {
+		this.checkStatusName = checkStatusName;
+	}
+
 	/**
 	 * ID
 	 */
@@ -186,8 +218,11 @@ public class MerchantEnrollGoodsVO {
 	private String title = "";
 	private String picUrl = "";
 	private int checkStatus = 0;
+	private String checkStatusName = "";
 	private String checkReason = "";
 	private int applyStatus = 0;
-	private String activityStartAt = "";
-	private String activityEndAt = "";
+	private Date activityStartAt;
+	private Date activityEndAt;
+	private Date joinStartAt;
+	private Date joinEndAt;
 }

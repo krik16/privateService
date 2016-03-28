@@ -1,47 +1,22 @@
-package com.rongyi.easy.activitymanage.entity;
+package com.rongyi.easy.merchantactivity.vo;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
-import java.util.Date;
 
-public class ActivityEntryRule  implements Serializable {
-    private Integer id;
-
-    private Integer activityId;
-
+/**
+ * create by com.rongyi.easy.merchantactivity.vo ideaworkspace :author lijing
+ * User:lijing
+ * DATE : 2016/3/19
+ * TIME : 17:31
+ * ideaworkspace.
+ */
+public class MerchantActivityEntryVO implements Serializable {
     private String relevanceId;
-
     private String relevanceName;
-
     private Integer relevanceType;
-
     private String secCategoryId;
-
     private String secCategoryName;
-
-
-    private String createBy;
-
-    private Date createAt;
-
-    private Boolean isDeleted;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getActivityId() {
-        return activityId;
-    }
-
-    public void setActivityId(Integer activityId) {
-        this.activityId = activityId;
-    }
 
     public String getRelevanceId() {
         return relevanceId;
@@ -67,25 +42,6 @@ public class ActivityEntryRule  implements Serializable {
         this.relevanceType = relevanceType;
     }
 
-    public void setIsDeleted(Boolean isDeleted) {
-        this.isDeleted = isDeleted;
-    }
-
-    public String getCreateBy() {
-        return createBy;
-    }
-
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy;
-    }
-
-    public Date getCreateAt() {
-        return createAt;
-    }
-
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
-    }
     public String getSecCategoryId() {
         return secCategoryId;
     }
@@ -102,24 +58,14 @@ public class ActivityEntryRule  implements Serializable {
         this.secCategoryName = secCategoryName;
     }
 
-    public Boolean getIsDeleted() {
-        return isDeleted;
-    }
-
-
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .append("id", id)
-                .append("activityId", activityId)
                 .append("relevanceId", relevanceId)
                 .append("relevanceName", relevanceName)
                 .append("relevanceType", relevanceType)
                 .append("secCategoryId", secCategoryId)
                 .append("secCategoryName", secCategoryName)
-                .append("createBy", createBy)
-                .append("createAt", createAt)
-                .append("isDeleted", isDeleted)
                 .toString();
     }
 }

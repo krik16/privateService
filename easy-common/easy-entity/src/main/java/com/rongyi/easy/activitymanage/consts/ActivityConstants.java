@@ -12,8 +12,62 @@ public interface ActivityConstants {
         Integer NO_CHECK = 0;
         Integer CHECK_FAILURE = 1;
         Integer CHECK_SUCCESS = 2;
+        Integer OFFLINE = 3;
+        Integer REVOKEING = 4;
+        Integer REVOKE_PASS =5;
+        Integer REVOKE_FAIL = 6;
     }
 
+    /**
+     * 活动审核状态
+     */
+    interface ActivityCheckGoodsStatus {
+
+        Integer CHECK_FAILURE = 1;
+        Integer CHECK_SUCCESS = 2;
+        Integer OFFLINE = 3;
+        Integer REVOKEING = 4;
+        Integer REVOKE_PASS =5;
+        Integer REVOKE_FAIL = 6;
+        Integer CANEL = 7;
+    }
+
+    /**
+     * 活动商品状态
+     */
+    interface ActivityGoodsStatus {
+        Integer NO_CHECK = 0;
+        Integer CHECK_FAILURE = 1;
+        Integer CHECK_SUCCESS = 2;
+        Integer OFFLINE = 3;
+        Integer REVOKEING = 4;
+        Integer REVOKE_PASS =5;
+        Integer REVOKE_FAIL = 6;
+    }
+
+    /**
+     * 活动的机构类型
+     */
+    interface ActivityInfoType{
+        //0:表示大运营 1:商场的活动  2:表示店铺 3表示集团 4:表示品牌
+        Integer RONGYI = 0;//大运营
+        Integer SHOP =2;//店铺
+        Integer MALL = 1;//商场
+        Integer Brand = 4;//品牌
+        Integer GROUP = 3;//集团
+    }
+    /**
+     * 活动商品的机构类型
+     */
+    interface ActivityGoodIdentity{
+        Integer RONGYI = 0;//大运营
+        Integer SHOP =1;//店铺
+        Integer MALL = 2;//商场
+        Integer Brand = 3;//品牌
+    }
+   /*
+   *活动类型
+    */
     interface ActivityCouponType{
         Integer MALL =0;
         Integer SHOP =1;
@@ -80,6 +134,7 @@ public interface ActivityConstants {
         int VOUCHER = 1;//代金券
         int REBATE = 2;//抵扣券
         int COMMODITY = 3;//商品
+        int ACTIVITYCOUPON = 4;//活动券
     }
     /**
      * 活动类型
