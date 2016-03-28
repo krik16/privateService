@@ -30,6 +30,10 @@ public class MerchantEnrollDetailVO implements Serializable {
 
     private int enrollGoodsCount;
 
+    private Date startAt;//活动开始时间
+
+    private Date endAt;//活动结束时间
+
     public Integer getActivityId() {
         return activityId;
     }
@@ -94,6 +98,22 @@ public class MerchantEnrollDetailVO implements Serializable {
         this.enrollGoodsCount = enrollGoodsCount;
     }
 
+    public Date getStartAt() {
+        return startAt;
+    }
+
+    public void setStartAt(Date startAt) {
+        this.startAt = startAt;
+    }
+
+    public Date getEndAt() {
+        return endAt;
+    }
+
+    public void setEndAt(Date endAt) {
+        this.endAt = endAt;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -105,6 +125,8 @@ public class MerchantEnrollDetailVO implements Serializable {
                 .append("enrollStartAt", enrollStartAt)
                 .append("enrollEndAt", enrollEndAt)
                 .append("enrollGoodsCount", enrollGoodsCount)
+                .append("startAt", startAt)
+                .append("endAt", endAt)
                 .toString();
     }
 }
