@@ -255,21 +255,6 @@ public class StringUtil {
 	}
 
 	/**
-	 * 字符串转int
-	 * 
-	 * @param str
-	 * @return
-	 */
-	public static int tryParseInt(String str) {
-		try {
-			return Integer.parseInt(str);
-		} catch (Exception e) {
-
-		}
-		return 0;
-	}
-
-	/**
 	 * 字符串是否为空
 	 * 
 	 * @param str
