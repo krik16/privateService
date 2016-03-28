@@ -137,11 +137,12 @@ public interface CommodityService {
     public McmcCommodityDocument getMmcmcCommodityDocumentById(String commodityId) throws Exception;
 
     public long getCommodityCount();
+    
     /**
-	 * 获取有商品的分类列表
+	 * 获取有商品的分类列表 （新）
 	 * @param categoryParam	参数对象
 	 * @return
 	 */
-//	public ResponseResult getBuyerCommodityCategoryHasCommodity(BuyerCategoryParam categoryParam);
+	public ResponseResult getBuyerCommodityCategory(BuyerCategoryParam categoryParam);
 
 }
