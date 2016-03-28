@@ -35,7 +35,7 @@ public interface IExpressOrderInfoService {
 	
 	/**
 	 * 商家后台修改订单发货方式
-	 * @param param  logisticsBillId(物流单号) expressName(快递公司名称) expressId(物流公司id) userId(卖家id) expressInfoId(主键id,有修改，无添加)
+	 * @param param  logisticsBillId(物流单号) expressName(快递公司名称) expressId(物流公司id) userId(卖家id) expressInfoId(主键id,有修改，无添加)，orderNum:订单号
 	 * @return 主键id
 	 * @throws Exception
 	 */
