@@ -456,6 +456,9 @@
     <if test="registerType &lt;= 3">
           and cc.register_type =  #{registerType, jdbcType=TINYINT}
     </if>
+    <if test="registerType == 4">
+       and cc.register_type in (2,3)
+    </if>
   </select>
   <select id="validateIsAllow" parameterType="map" resultType="int">
     select count(1) from sales_commission sc left join commission_config cc on sc.config_id = cc.id
