@@ -211,6 +211,9 @@ public class CommissionServiceImpl implements CommissionService {
         if(ConstantEnum.COMMISSION_STATUS_3.getCodeByte().equals(salesCommission.getStatus())){
             salesCommissionService.sendCommissionToVa(salesCommission.getId(),salesCommission.getCommissionAmount(),salesCommission.getGuideId(),commissionConfig);
         }
+        if (salesCommission.getStatus().intValue() < 0 || ConstantEnum.COMMISSION_STATUS_3.getCodeByte().equals(salesCommission.getStatus()) ||ConstantEnum.COMMISSION_STATUS_5.getCodeByte().equals(salesCommission.getStatus())) {
+            salesCommissionService.sendVerifyMessage(salesCommission.getGuideId(), salesCommission.getCommissionAmount(), salesCommission.getStatus(), commissionConfig.getType(), commissionConfig.getRegisterType());
+        }
         return ResponseData.success();
     }
 

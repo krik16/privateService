@@ -57,6 +57,7 @@ public interface SalesCommissionService {
 
     boolean verifyCommission(VerifyCommissionParam param, String user);
 
+    public void sendVerifyMessage(String guideId,BigDecimal commission,Byte status,Byte type,Byte registerType);
     /**
      *验证是否允许返佣
      * @param guideId

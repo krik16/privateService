@@ -239,7 +239,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
                         if (oldStatus < salesCommission.getStatus() && ConstantEnum.COMMISSION_STATUS_3.getCodeByte().equals(salesCommission.getStatus())) {
                             sendCommissionToVa(commission.getId(),commission.getCommissionAmount(),commission.getGuideId(),config);
                         }
-                        if (salesCommission.getStatus().intValue() < 0 || ConstantEnum.COMMISSION_STATUS_3.getCodeByte().equals(salesCommission.getStatus())) {
+                        if (salesCommission.getStatus().intValue() < 0 || ConstantEnum.COMMISSION_STATUS_3.getCodeByte().equals(salesCommission.getStatus())||ConstantEnum.COMMISSION_STATUS_5.getCodeByte().equals(salesCommission.getStatus())) {
                             sendVerifyMessage(commission.getGuideId(), commission.getCommissionAmount(), salesCommission.getStatus(), config.getType(), config.getRegisterType());
                         }
                     } else {
@@ -263,13 +263,14 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
         return resultNum > 0;
     }
 
-    private void sendVerifyMessage(String guideId,BigDecimal commission,Byte status,Byte type,Byte registerType){
+    @Override
+    public void sendVerifyMessage(String guideId,BigDecimal commission,Byte status,Byte type,Byte registerType){
       logger.info("sendVerifyMessage:guideId={},commission={},status={},type={},registerType={}", guideId, commission, status, type, registerType);
         try {
           Map<String, String> map = new HashMap<>();
           map.put("guideId", guideId);
           map.put("commission", commission.toString());
-            if(status.intValue() < 0){
+            if(status.intValue() < 0 || status.intValue() == 5){
                 map.put("eventType", CommissionEnum.COMMISSION_PROMOTION_FAIlURE.getCode().toString());
             }else{
                 map.put("eventType", CommissionEnum.COMMISSION_PROMOTION_SUCCESS.getCode().toString());
