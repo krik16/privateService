@@ -9,14 +9,6 @@
  */
 package com.rongyi.tms.service.impl;
 
-import java.util.Arrays;
-import java.util.Date;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.enumerate.CodeEnum;
 import com.rongyi.easy.tms.entity.SalesCommission;
@@ -25,6 +17,13 @@ import com.rongyi.easy.tms.vo.DebitNoteVO;
 import com.rongyi.rss.tms.DebitNoteUploadService;
 import com.rongyi.tms.service.SalesCommissionAuditLogService;
 import com.rongyi.tms.service.SalesCommissionService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.Date;
 
 /**
  * @author ZhengYl
@@ -104,10 +103,12 @@ public class DebitNoteUploadServiceImpl implements DebitNoteUploadService {
 	*/
 	@Override
 	public ResponseResult queryDebitNote(String orderNo) {
+		logger.info("queryDebitNote:orderNo={}",orderNo);
 		ResponseResult result = new ResponseResult();
 		
 		try {
 			SalesCommission salesCommission = salesCommissionService.selectByOrderNo(orderNo);
+			logger.info("queryDebitNote:salesCommission={}",salesCommission);
 			if (salesCommission == null) {
 				// 未查到数据
 				result.setCode(CodeEnum.SUCCESS.getActionCode());
