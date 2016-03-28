@@ -96,6 +96,7 @@ public class CommissionConfigServiceImpl extends BaseServiceImpl implements Comm
 
     @Override
     public boolean validateIsExist(byte type,byte inviteType,byte registerType, Date effectStartTime,Date effectEndTime){
+        LOGGER.info("validateIsExist:type={},inviteType={},registerType={},effectStartTime={},effectEndTime={}", effectStartTime, effectEndTime);
         Map<String,Object> map = new HashMap<>();
         map.put("type",type);
         map.put("inviteType",inviteType);
@@ -111,6 +112,7 @@ public class CommissionConfigServiceImpl extends BaseServiceImpl implements Comm
             map.put("registerType", registerType);
         }
         map.put("effectEndTime",effectEndTime);
+        LOGGER.info("validateIsExist end:map={}",map);
         CommissionConfig commissionConfig = this.getBaseDao().selectOneBySql(NAMESPACE + ".validateIsExist", map);
         return commissionConfig != null;
     }
