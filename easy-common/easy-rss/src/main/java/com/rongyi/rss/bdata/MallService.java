@@ -100,7 +100,7 @@ public interface MallService {
 
 	ResponseVO getAdNumByMallId(String mallId);
 
-	ResponseVO getAdsByMallId(String mall_id);
+	ResponseVO getAdsByMallId(String mall_id, String position);
 
 	ResponseVO getAdById(String ad_id);
 	
