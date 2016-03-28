@@ -1,8 +1,12 @@
 package com.rongyi.easy.mcmc.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class CommodityCustomCategoryEntity {
+public class CommodityCustomCategoryEntity implements Serializable{
+
+    public static final Long serialVersionUID=1L;
+
     private Integer id;
 
     private String name;
