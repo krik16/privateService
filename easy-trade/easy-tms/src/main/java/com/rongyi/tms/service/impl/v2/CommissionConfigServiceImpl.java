@@ -100,10 +100,12 @@ public class CommissionConfigServiceImpl extends BaseServiceImpl implements Comm
         map.put("type",type);
         map.put("inviteType",inviteType);
         map.put("effectStartTime",effectStartTime);
-        if(ConstantEnum.REGISTER_TYPE_2.getCodeByte().equals(registerType) ||ConstantEnum.REGISTER_TYPE_3.getCodeByte().equals(registerType)){
+        if(ConstantEnum.REGISTER_TYPE_2.getCodeByte().equals(registerType) ||ConstantEnum.REGISTER_TYPE_3.getCodeByte().equals(registerType) || ConstantEnum.REGISTER_TYPE_4.getCodeByte().equals(registerType)){
             List<Byte> list = new ArrayList<>();
             list.add(registerType);
-            list.add(ConstantEnum.REGISTER_TYPE_4.getCodeByte());
+            if(!ConstantEnum.REGISTER_TYPE_4.getCodeByte().equals(registerType)) {
+                list.add(ConstantEnum.REGISTER_TYPE_4.getCodeByte());
+            }
             map.put("registerTypeList",list);
         }else{
             map.put("registerType", registerType);
