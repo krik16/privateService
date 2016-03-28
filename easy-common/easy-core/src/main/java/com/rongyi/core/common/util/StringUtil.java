@@ -23,7 +23,6 @@ public class StringUtil {
 		}
 	}
 
-
 	public static String intToString(Integer intTemp) {
 		if (intTemp == null) {
 			return "";
@@ -31,7 +30,6 @@ public class StringUtil {
 			return String.valueOf(intTemp);
 		}
 	}
-
 
 	/**
 	 * 如果是null，返回0
@@ -196,7 +194,8 @@ public class StringUtil {
 		}
 		if (randGen == null) {
 			randGen = new Random();
-			numbersAndLetters = ("0123456789abcdefghijklmnopqrstuvwxyz" + "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ").toCharArray();
+			numbersAndLetters = ("0123456789abcdefghijklmnopqrstuvwxyz" + "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+					.toCharArray();
 		}
 		char[] randBuffer = new char[length];
 		for (int i = 0; i < randBuffer.length; i++) {
@@ -253,6 +252,34 @@ public class StringUtil {
 
 		return sb.toString();
 
+	}
+
+	/**
+	 * 字符串转int
+	 * 
+	 * @param str
+	 * @return
+	 */
+	public static int tryParseInt(String str) {
+		try {
+			return Integer.parseInt(str);
+		} catch (Exception e) {
+
+		}
+		return 0;
+	}
+
+	/**
+	 * 字符串是否为空
+	 * 
+	 * @param str
+	 * @return
+	 */
+	public static boolean isEmpty(String str) {
+		if (null == str || "".equals(str) || "".equals(str.trim())) {
+			return true;
+		}
+		return false;
 	}
 
 	/**

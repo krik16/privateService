@@ -3,8 +3,16 @@ package com.rongyi.easy.solr;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import com.mongodb.BasicDBList;
+import com.mongodb.DBObject;
+import com.rongyi.core.util.Pinyin4jUtil;
+import com.rongyi.easy.shop.entity.ShopEntity;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.solr.client.solrj.beans.Field;
+import org.bson.types.ObjectId;
 
 /** 
  * 店铺SolrDoc
@@ -92,7 +100,80 @@ public class ShopDocument implements Serializable {
 	private String slug;//名称拼音
 	@Field("text")
 	private String text;
-	
+
+	public ShopDocument() {
+	}
+
+	public ShopDocument(ShopEntity shop) {
+		id=shop.getId().toString();
+		if(StringUtils.isNotBlank(shop.getName()))
+			name=shop.getName();
+		if(shop.getOperator_id()!=null)
+			operator_id=shop.getOperator_id().toString();
+		if(StringUtils.isNotBlank(shop.getMold()))
+			mold=shop.getMold();
+		if(shop.getValid()!=null)
+			valid=shop.getValid().toString();
+		if(shop.getBusiness_status()!=null)
+			business_status=shop.getBusiness_status().toString();
+		if(shop.getRecommend()!=null)
+			recommend=shop.getRecommend().toString();
+		if(StringUtils.isNotBlank(shop.getShop_number()))
+			shop_number=shop.getShop_number();
+		if(StringUtils.isNotBlank(shop.getShop_nature()))
+			shop_nature=shop.getShop_nature();
+		if(StringUtils.isNotBlank(shop.getShop_type()))
+			shop_type=shop.getShop_type();
+		if(shop.getCreated_at()!=null)
+			created_at=shop.getCreated_at();
+		if(shop.getUpdated_at()!=null)
+			updated_at=shop.getUpdated_at();
+
+
+		category_ids=new ArrayList<String>();
+		if(CollectionUtils.isNotEmpty(shop.getCategory_ids())){
+			for(ObjectId categoryId:shop.getCategory_ids()){
+				if(categoryId!=null)
+					category_ids.add(categoryId.toString());
+			}
+		}
+		if(StringUtils.isNotBlank(shop.getTags())){
+			tags=shop.getTags();
+		}
+
+		if(CollectionUtils.isNotEmpty(shop.getZone_ids())){
+			zone_ids=new ArrayList<String>();
+			for(ObjectId zoneId:shop.getZone_ids()){
+				zone_ids.add(zoneId.toString());
+			}
+		}
+
+		if(StringUtils.isNotBlank(shop.getTelephone())){
+			telephone=shop.getTelephone();
+		}
+		if(StringUtils.isNotBlank(shop.getAverage_consumption()))
+			average_consumption=shop.getAverage_consumption();
+		if(StringUtils.isNotBlank(shop.getDescription()))
+			description=shop.getDescription();
+		//新增返回数据
+		if(StringUtils.isNotBlank(shop.getBusiness_hours()))
+			business_hours=shop.getBusiness_hours();
+		if(shop.getParent_status()!=null)
+			parent_status=shop.getParent_status().toString();
+		//进行空值判断，不建索引，1表示有值
+		if(CollectionUtils.isNotEmpty(shop.getBrand_ids()))
+			brand_ids="1";
+
+		//slug
+		if(StringUtils.isNotBlank(shop.getName())){
+			List<String> pinyins= Pinyin4jUtil.converterToSpell(shop.getName());
+			if(CollectionUtils.isNotEmpty(pinyins)){
+				slug=pinyins.get(0);
+			}else
+				slug=shop.getName();
+		}
+	}
+
 	public String getId() {
 		return id;
 	}

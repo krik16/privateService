@@ -5,6 +5,7 @@ import com.rongyi.easy.malllife.domain.AppReference2DO;
 import com.rongyi.easy.malllife.domain.AppReferenceDO;
 import com.rongyi.easy.malllife.domain.ContentDDO;
 import com.rongyi.easy.malllife.domain.ContentDO;
+import com.rongyi.easy.malllife.param.ActivitiesParam;
 import com.rongyi.easy.malllife.pojo.ContentPojo;
 import com.rongyi.easy.malllife.vo.*;
 
@@ -294,4 +295,11 @@ public interface IContentService {
      * @return
      */
     public String insertShop(String userId, String shopId);
+    /**
+     * 微商城精彩活动
+     * @param param
+     * @return
+     * @throws Exception
+     */
+	PagingVO<ContentPojo> pagingActivitiesList(ActivitiesParam param) throws Exception;
 }

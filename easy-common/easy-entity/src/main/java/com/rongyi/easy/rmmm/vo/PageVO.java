@@ -8,7 +8,8 @@ import java.io.Serializable;
  *         列表VO需要继承公共分页VO
  */
 public class PageVO implements Serializable {
-    /**
+
+	/**
      *
      */
     private static final long serialVersionUID = 1L;

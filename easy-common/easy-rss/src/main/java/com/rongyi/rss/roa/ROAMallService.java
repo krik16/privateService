@@ -42,4 +42,6 @@ public interface ROAMallService {
      * @throws Exception
      */
     public MallEntity getMallEntityById(String id) throws Exception;
+    
+	public void updateMallLevel(Map<String, Object> paramsMap);
 }
