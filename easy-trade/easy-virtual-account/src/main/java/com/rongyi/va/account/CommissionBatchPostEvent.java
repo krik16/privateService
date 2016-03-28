@@ -107,7 +107,10 @@ public class CommissionBatchPostEvent extends BaseEvent {
 					map.put("commission", postedCommission.getCommissionAmount().toString());
 					map.put("eventType",eventType);
 					map.put("guideId", postedCommission.getGuideId());
-					roaCommodityCommissionService.sendBodyByOrderEventType(map);
+					if(!VirtualAccountEventTypeEnum.COMMISSION_TYPE_EXPAND.getCode().equals(this.getType()) && !VirtualAccountEventTypeEnum.COMMISSION_TYPE_FIRST.getCode().equals(this.getType())){
+						LOGGER.info("交易佣金到账发送消息提醒:map={}",map);
+						roaCommodityCommissionService.sendBodyByOrderEventType(map);
+					}
 				} catch (Exception e) {
 					failureList += "发送提醒事件失败, 用户Id: " + postedCommission.getGuideId() + "\r\n";
 					e.printStackTrace();
