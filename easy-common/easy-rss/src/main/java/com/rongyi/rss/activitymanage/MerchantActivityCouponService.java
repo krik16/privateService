@@ -1,6 +1,7 @@
 package com.rongyi.rss.activitymanage;
 
 import com.rongyi.easy.activitymanage.entity.ActivityInfo;
+import com.rongyi.easy.activitymanage.vo.ActivityInfoListVO;
 import com.rongyi.easy.merchantactivity.param.EnrollCoupon;
 
 import java.util.List;
@@ -36,4 +37,12 @@ public interface MerchantActivityCouponService {
      * @return
      */
     public Boolean saveEnrollCouponActivity(EnrollCoupon enrollCoupon);
+
+
+    /**
+     * 通过活动id 查询活动详情
+     * @param activityId
+     * @return
+     */
+    ActivityInfoListVO getActivityInfoById(Integer activityId);
 }

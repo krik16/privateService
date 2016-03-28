@@ -1,6 +1,7 @@
 package com.rongyi.easy.merchantactivity.param;
 
 import com.rongyi.easy.activitymanage.param.PagingParam;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * create by com.rongyi.easy.merchantactivity.param ideaworkspace :author lijing
@@ -73,5 +74,15 @@ public class MerchantActivityGoodsParam extends PagingParam {
             return ORDER_BY_CLAUSE_LABEL_JOIN;
         }
         return ORDER_BY_CLAUSE;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("activityId", activityId)
+                .append("label", label)
+                .append("offset", offset)
+                .append("orderByClause", orderByClause)
+                .toString();
     }
 }

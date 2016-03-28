@@ -30,6 +30,12 @@ public class MerchantEnrollDetailVO implements Serializable {
 
     private int enrollGoodsCount;
 
+    private Date startAt;//活动开始时间
+
+    private Date endAt;//活动结束时间
+
+    private Date sysTime = new Date();
+
     public Integer getActivityId() {
         return activityId;
     }
@@ -94,6 +100,30 @@ public class MerchantEnrollDetailVO implements Serializable {
         this.enrollGoodsCount = enrollGoodsCount;
     }
 
+    public Date getStartAt() {
+        return startAt;
+    }
+
+    public void setStartAt(Date startAt) {
+        this.startAt = startAt;
+    }
+
+    public Date getEndAt() {
+        return endAt;
+    }
+
+    public void setEndAt(Date endAt) {
+        this.endAt = endAt;
+    }
+
+    public Date getSysTime() {
+        return sysTime;
+    }
+
+    public void setSysTime(Date sysTime) {
+        this.sysTime = sysTime;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -105,6 +135,9 @@ public class MerchantEnrollDetailVO implements Serializable {
                 .append("enrollStartAt", enrollStartAt)
                 .append("enrollEndAt", enrollEndAt)
                 .append("enrollGoodsCount", enrollGoodsCount)
+                .append("startAt", startAt)
+                .append("endAt", endAt)
+                .append("sysTime", sysTime)
                 .toString();
     }
 }

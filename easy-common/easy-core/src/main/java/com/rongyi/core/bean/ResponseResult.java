@@ -10,8 +10,10 @@ package com.rongyi.core.bean;
 public class ResponseResult implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 
-	/** 成功消息Code=200 default=200 **/
+	/** 当前对象默认成功消息Code=200 default=200 **/
 	private static final String SUCCESS = "200";//!!!禁止本类修改当前状态code，如需新success code 外部传入!!!
+	/** 当前对象默认成功消息message **/
+	private static final String SUCCESS_MESSAGE = "成功";
 	/** 是否成功 **/
 	private boolean success = true;
 	/** 返回对象类型数据 **/
@@ -27,7 +29,7 @@ public class ResponseResult implements java.io.Serializable {
 	public ResponseResult() {
 		this.success = true;
 		this.code = SUCCESS;
-		this.message = "成功";
+		this.message = SUCCESS_MESSAGE;
 	}
 
 	/**
@@ -69,7 +71,7 @@ public class ResponseResult implements java.io.Serializable {
 	 * @return
 	 */
 	public ResponseResult Success(Object info) {
-		return Success(info, "正常");
+		return Success(info, SUCCESS_MESSAGE);
 	}
 	
 	/**

@@ -25,6 +25,10 @@ public class ActivityGoodsSpec implements Serializable {
     private Integer activityGoodsId;
 
     /**
+     * 当前价格
+     */
+    private Integer currPrice;
+    /**
      * 商品规格id
      */
     private String specId;
@@ -149,11 +153,20 @@ public class ActivityGoodsSpec implements Serializable {
         this.recStock = recStock;
     }
 
+    public Integer getCurrPrice() {
+        return currPrice;
+    }
+
+    public void setCurrPrice(Integer currPrice) {
+        this.currPrice = currPrice;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("id", id)
                 .append("activityGoodsId", activityGoodsId)
+                .append("currPrice", currPrice)
                 .append("specId", specId)
                 .append("joinCount", joinCount)
                 .append("stockCount", stockCount)

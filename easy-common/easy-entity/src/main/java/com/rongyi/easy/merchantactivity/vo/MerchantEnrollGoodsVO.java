@@ -30,6 +30,7 @@ public class MerchantEnrollGoodsVO implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 5445032185274728369L;
+
 	/**
 	 * 开始时间
 	 * 
@@ -139,7 +140,7 @@ public class MerchantEnrollGoodsVO implements Serializable {
 	/**
 	 * 审核状态
 	 * 
-	 * @return 0：待审核 1：退回修改（未通过） 2：报名成功（通过） 3：参与成功、活动结束
+	 * @return 0：待审核 1：退回修改（未通过） 2：报名成功（通过） 3：参与成功、活动结束 5：参与失败、活动结束
 	 */
 	public int getCheckStatus() {
 		return checkStatus;
@@ -149,7 +150,7 @@ public class MerchantEnrollGoodsVO implements Serializable {
 	 * 审核状态
 	 * 
 	 * @param checkStatus
-	 *            0：待审核 1：退回修改（未通过） 2：报名成功（通过） 3：参与成功、活动结束
+	 *            0：待审核 1：退回修改（未通过） 2：报名成功（通过） 3：参与成功、活动结束 5：参与失败、活动结束
 	 */
 	public void setCheckStatus(int checkStatus) {
 		this.checkStatus = checkStatus;
@@ -200,6 +201,14 @@ public class MerchantEnrollGoodsVO implements Serializable {
 		this.activityId = activityId;
 	}
 
+	public String getCheckStatusName() {
+		return checkStatusName;
+	}
+
+	public void setCheckStatusName(String checkStatusName) {
+		this.checkStatusName = checkStatusName;
+	}
+
 	/**
 	 * ID
 	 */
@@ -209,6 +218,7 @@ public class MerchantEnrollGoodsVO implements Serializable {
 	private String title = "";
 	private String picUrl = "";
 	private int checkStatus = 0;
+	private String checkStatusName = "";
 	private String checkReason = "";
 	private int applyStatus = 0;
 	private Date activityStartAt;
