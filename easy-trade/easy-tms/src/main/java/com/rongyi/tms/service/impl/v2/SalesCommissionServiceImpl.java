@@ -1,5 +1,6 @@
 package com.rongyi.tms.service.impl.v2;
 
+import com.rongyi.core.constant.CommissionEnum;
 import com.rongyi.core.constant.Constants;
 import com.rongyi.core.constant.VirtualAccountEventTypeEnum;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
@@ -8,6 +9,7 @@ import com.rongyi.easy.tms.entity.SalesCommissionAuditLog;
 import com.rongyi.easy.tms.entity.v2.CommissionConfig;
 import com.rongyi.easy.tms.entity.v2.SalesCommission;
 import com.rongyi.easy.tms.vo.v2.SalesCommissionVO;
+import com.rongyi.rss.mallshop.order.ROACommodityCommissionService;
 import com.rongyi.tms.constants.ConstantEnum;
 import com.rongyi.tms.moudle.vo.CommissionAmountTotalVO;
 import com.rongyi.tms.mq.Sender;
@@ -46,6 +48,9 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 
     @Autowired
     Sender sender;
+
+    @Autowired
+    ROACommodityCommissionService roaCommodityCommissionService;
 
     /**
      * 通过主键id查询
@@ -234,6 +239,9 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
                         if (oldStatus < salesCommission.getStatus() && ConstantEnum.COMMISSION_STATUS_3.getCodeByte().equals(salesCommission.getStatus())) {
                             sendCommissionToVa(commission.getId(),commission.getCommissionAmount(),commission.getGuideId(),config);
                         }
+                        if (salesCommission.getStatus().intValue() < 0 || ConstantEnum.COMMISSION_STATUS_3.getCodeByte().equals(salesCommission.getStatus())) {
+                            sendVerifyMessage(salesCommission.getGuideId(), salesCommission.getCommissionAmount(), salesCommission.getStatus(), config.getType(), config.getRegisterType());
+                        }
                     } else {
                         logger.info("佣金审核修改失败");
                     }
@@ -253,6 +261,37 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
             }
         }
         return resultNum > 0;
+    }
+
+    private void sendVerifyMessage(String guideId,BigDecimal commission,Byte status,Byte type,Byte registerType){
+      logger.info("sendVerifyMessage:guideId={},commission={},status={},type={},registerType={}", guideId, commission, status, type, registerType);
+        try {
+          Map<String, String> map = new HashMap<>();
+          map.put("guideId", guideId);
+          map.put("commission", commission.toString());
+            if(status.intValue() < 0){
+                map.put("eventType", CommissionEnum.COMMISSION_PROMOTION_FAIlURE.toString());
+            }else{
+                map.put("eventType", CommissionEnum.COMMISSION_PROMOTION_SUCCESS.toString());
+            }
+            if (type == ConstantEnum.COMMISSION_CONFIG_TYPE_1.getCodeByte()) {
+                //首单
+                map.put("commissionType ","3");
+            }else if(type == ConstantEnum.COMMISSION_CONFIG_TYPE_0.getCodeByte() && registerType == ConstantEnum.REGISTER_TYPE_1.getCodeByte()){
+                //容易逛
+                map.put("commissionType ","1");
+            }else if(type == ConstantEnum.COMMISSION_CONFIG_TYPE_0.getCodeByte() && registerType > ConstantEnum.REGISTER_TYPE_1.getCodeByte()){
+                //摩店
+                map.put("commissionType ","2");
+            }else{
+                map.put("commissionType","0");
+            }
+            logger.info("sendVerifyMessage end:map={}",map);
+          roaCommodityCommissionService.sendBodyByOrderEventType(map);
+      }catch (Exception e){
+          logger.error(e.getMessage());
+          e.printStackTrace();
+      }
     }
 
     @Override

@@ -576,7 +576,7 @@
 				guide_type = #{guideType,jdbcType=INTEGER},
 			</if>
 		</set>
-		where order_no = #{orderNo,jdbcType=VARCHAR}
+		where order_no = #{orderNo,jdbcType=VARCHAR} and config_id = 0
 	</update>
 	<update id="batchUpdate" parameterMap="checkMap" statementType="CALLABLE">
 		<!-- update sales_commission set status =case id <foreach collection="ids" 
