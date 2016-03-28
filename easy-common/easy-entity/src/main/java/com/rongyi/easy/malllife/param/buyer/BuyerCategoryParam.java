@@ -19,6 +19,8 @@ public class BuyerCategoryParam implements Serializable {
 	private String shopId;			// 店铺ID
 	private String saleId;			// 闪购ID
 	private String flashSaleId;		// 特卖ID
+	private String minPrice;		// 价格最小范围
+	private String maxPrice;		// 价格最大范围
 	
 	public BuyerCategoryParam() {
 //		this.filterType = 0;
@@ -28,7 +30,7 @@ public class BuyerCategoryParam implements Serializable {
 	
 	public BuyerCategoryParam(Integer filterType, String filterId, boolean showParent, String bullId, String liveId,
 			String commodityType, String keyword, String categoryId, String brandId, String cityName, String mallId,
-			String shopId, String saleId, String flashSaleId) {
+			String shopId, String saleId, String flashSaleId, String minPrice, String maxPrice) {
 		this.filterType = filterType;
 		this.filterId = filterId;
 		this.showParent = showParent;
@@ -43,6 +45,8 @@ public class BuyerCategoryParam implements Serializable {
 		this.shopId = shopId;
 		this.saleId = saleId;
 		this.flashSaleId = flashSaleId;
+		this.minPrice = minPrice;
+		this.maxPrice = maxPrice;
 	}
 	public Integer getFilterType() {
 		return filterType;
@@ -128,6 +132,23 @@ public class BuyerCategoryParam implements Serializable {
 	public void setFlashSaleId(String flashSaleId) {
 		this.flashSaleId = flashSaleId;
 	}
+	
+	public String getMinPrice() {
+		return minPrice;
+	}
+
+	public void setMinPrice(String minPrice) {
+		this.minPrice = minPrice;
+	}
+
+	public String getMaxPrice() {
+		return maxPrice;
+	}
+
+	public void setMaxPrice(String maxPrice) {
+		this.maxPrice = maxPrice;
+	}
+
 	@Override
 	public String toString() {
 		return "BuyerCategoryParam [filterType=" + filterType + ", filterId=" + filterId + ", showParent=" + showParent
