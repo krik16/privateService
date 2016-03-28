@@ -240,7 +240,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
                             sendCommissionToVa(commission.getId(),commission.getCommissionAmount(),commission.getGuideId(),config);
                         }
                         if (salesCommission.getStatus().intValue() < 0 || ConstantEnum.COMMISSION_STATUS_3.getCodeByte().equals(salesCommission.getStatus())) {
-                            sendVerifyMessage(salesCommission.getGuideId(), salesCommission.getCommissionAmount(), salesCommission.getStatus(), config.getType(), config.getRegisterType());
+                            sendVerifyMessage(commission.getGuideId(), commission.getCommissionAmount(), commission.getStatus(), config.getType(), config.getRegisterType());
                         }
                     } else {
                         logger.info("佣金审核修改失败");
