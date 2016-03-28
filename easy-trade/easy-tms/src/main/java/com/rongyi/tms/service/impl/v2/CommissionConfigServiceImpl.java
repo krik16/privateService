@@ -105,6 +105,9 @@ public class CommissionConfigServiceImpl extends BaseServiceImpl implements Comm
             list.add(registerType);
             if(!ConstantEnum.REGISTER_TYPE_4.getCodeByte().equals(registerType)) {
                 list.add(ConstantEnum.REGISTER_TYPE_4.getCodeByte());
+            }else{
+                list.add(ConstantEnum.REGISTER_TYPE_2.getCodeByte());
+                list.add(ConstantEnum.REGISTER_TYPE_3.getCodeByte());
             }
             map.put("registerTypeList",list);
         }else{
