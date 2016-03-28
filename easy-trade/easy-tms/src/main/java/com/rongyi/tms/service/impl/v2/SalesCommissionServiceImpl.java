@@ -240,7 +240,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
                             sendCommissionToVa(commission.getId(),commission.getCommissionAmount(),commission.getGuideId(),config);
                         }
                         if (salesCommission.getStatus().intValue() < 0 || ConstantEnum.COMMISSION_STATUS_3.getCodeByte().equals(salesCommission.getStatus())) {
-                            sendVerifyMessage(commission.getGuideId(), commission.getCommissionAmount(), commission.getStatus(), config.getType(), config.getRegisterType());
+                            sendVerifyMessage(commission.getGuideId(), commission.getCommissionAmount(), salesCommission.getStatus(), config.getType(), config.getRegisterType());
                         }
                     } else {
                         logger.info("佣金审核修改失败");
@@ -276,13 +276,13 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
             }
             if (type == ConstantEnum.COMMISSION_CONFIG_TYPE_1.getCodeByte()) {
                 //首单
-                map.put("commissionType ","3");
+                map.put("commissionType","3");
             }else if(type == ConstantEnum.COMMISSION_CONFIG_TYPE_0.getCodeByte() && registerType == ConstantEnum.REGISTER_TYPE_1.getCodeByte()){
                 //容易逛
-                map.put("commissionType ","1");
+                map.put("commissionType","1");
             }else if(type == ConstantEnum.COMMISSION_CONFIG_TYPE_0.getCodeByte() && registerType > ConstantEnum.REGISTER_TYPE_1.getCodeByte()){
                 //摩店
-                map.put("commissionType ","2");
+                map.put("commissionType","2");
             }else{
                 map.put("commissionType","0");
             }
