@@ -44,16 +44,6 @@ public class ExpressOrderInfoEntity implements Serializable{
 
     /** 是否禁用0正常 1禁用 */
     private Integer isDisabled;
-    
-    private String orderNum;//订单号
-
-	public String getOrderNum() {
-		return orderNum;
-	}
-
-	public void setOrderNum(String orderNum) {
-		this.orderNum = orderNum;
-	}
 
 	/**
      * 主键
