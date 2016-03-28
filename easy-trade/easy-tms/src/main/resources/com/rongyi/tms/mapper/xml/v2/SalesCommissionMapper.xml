@@ -457,7 +457,7 @@
           and cc.register_type =  #{registerType, jdbcType=TINYINT}
     </if>
     <if test="registerType == 4">
-       and cc.register_type in (2,3)
+       and cc.register_type in (2,3,4)
     </if>
   </select>
   <select id="validateIsAllow" parameterType="map" resultType="int">

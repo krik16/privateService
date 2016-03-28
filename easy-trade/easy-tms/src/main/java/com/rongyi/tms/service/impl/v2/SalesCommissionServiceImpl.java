@@ -270,9 +270,9 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
           map.put("guideId", guideId);
           map.put("commission", commission.toString());
             if(status.intValue() < 0){
-                map.put("eventType", CommissionEnum.COMMISSION_PROMOTION_FAIlURE.toString());
+                map.put("eventType", CommissionEnum.COMMISSION_PROMOTION_FAIlURE.getCode().toString());
             }else{
-                map.put("eventType", CommissionEnum.COMMISSION_PROMOTION_SUCCESS.toString());
+                map.put("eventType", CommissionEnum.COMMISSION_PROMOTION_SUCCESS.getCode().toString());
             }
             if (type == ConstantEnum.COMMISSION_CONFIG_TYPE_1.getCodeByte()) {
                 //首单
