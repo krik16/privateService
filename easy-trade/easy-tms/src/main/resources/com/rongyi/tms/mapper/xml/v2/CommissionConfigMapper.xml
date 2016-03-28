@@ -261,7 +261,7 @@
     from commission_config
     where type = #{type,jdbcType=TINYINT}
     and (invite_type = #{inviteType,jdbcType=TINYINT} or invite_type = 0)
-    <if test="register_type != null and register_type != ''">
+    <if test="registerType != null and registerType != ''">
       and (register_type = #{registerType,jdbcType=TINYINT} or register_type = 0)
     </if>
     <if test="registerTypeList != null and registerTypeList != ''">
