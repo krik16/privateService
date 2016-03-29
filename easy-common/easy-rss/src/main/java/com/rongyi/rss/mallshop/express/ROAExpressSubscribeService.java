@@ -1,5 +1,7 @@
 package com.rongyi.rss.mallshop.express;
 
+import com.rongyi.easy.rmmm.entity.ExpressSubscribeEntity;
+
 public interface ROAExpressSubscribeService {
 	
 	/**
@@ -8,6 +10,6 @@ public interface ROAExpressSubscribeService {
 	 * @return
 	 * @throws Exception
 	 */
-	public String selectSubscribeByExpressOrderInfoId(String expressOrderInfoId)throws Exception;
+	public ExpressSubscribeEntity selectSubscribeByExpressOrderInfoId(String expressOrderInfoId)throws Exception;
 
 }

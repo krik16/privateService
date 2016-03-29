@@ -1,5 +1,7 @@
 package com.rongyi.rss.msob;
 
+import com.rongyi.easy.rmmm.entity.ExpressSubscribeEntity;
+
 public interface IExpressSubscribeService {
 	
 	/**
@@ -8,6 +10,6 @@ public interface IExpressSubscribeService {
 	 * @return
 	 * @throws Exception
 	 */
-	public String selectSubscribeByExpressOrderInfoId(String expressOrderInfoId)throws Exception;
+	public ExpressSubscribeEntity selectSubscribeByExpressOrderInfoId(String expressOrderInfoId)throws Exception;
 
 }

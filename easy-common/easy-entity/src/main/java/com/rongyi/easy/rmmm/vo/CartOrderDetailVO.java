@@ -55,7 +55,7 @@ public class CartOrderDetailVO extends PageVO implements Serializable{
 	private String receiveType = "1";// 收货方式 0快递 1无需快递
 	private String commentTime;// 评价时间
 	private String expressOrderInfoId;// 物流信息主键id
-	private boolean ifSupportByKuaidi100;// true快递100支持 false不支持
+	private boolean ifSupportByKuaidi100 = false;// true快递100支持 false不支持
 	private String newContextByKuaidi100;// 当前最新推送的一条物流信息
 	private String newTimeByKuaidi100;// 当前最新推送的一条物流信息的时间
 
