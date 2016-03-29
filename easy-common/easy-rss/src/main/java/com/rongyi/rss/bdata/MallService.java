@@ -122,4 +122,6 @@ public interface MallService {
 
 	ResponseVO getDefaultSeq(Integer ps);
 
+	ResponseVO getAdsSeqByMallId(String mall_id, String position);
+
 }
