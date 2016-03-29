@@ -9,7 +9,8 @@ import java.util.List;
  * Created by xgq on 2015/7/20.
  */
 public class CustomerGroupPageVO extends PageVO implements Serializable {
-    private List<CustomerGroupVO> list;
+	private static final long serialVersionUID = 2747695612643585791L;
+	private List<CustomerGroupVO> list;
 
     public List<CustomerGroupVO> getList() {
         return list;

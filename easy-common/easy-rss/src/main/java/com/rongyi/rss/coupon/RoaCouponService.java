@@ -6,6 +6,7 @@ import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.entity.CouponActivity;
 import com.rongyi.easy.coupon.param.CouponParam;
+import com.rongyi.easy.coupon.vo.CouponPageVO;
 import com.rongyi.easy.coupon.vo.TCCouponVO;
 import com.rongyi.easy.coupon.vo.VoucherRelatedObjectVO;
 
@@ -215,4 +216,18 @@ public interface RoaCouponService {
      * @author lqy
      */
     ResponseVO checkMallShopAuthority(Integer userId, String couponId);
+
+    /**
+     * 根据分页信息返回Coupon列表
+     * @param skip		当前页
+     * @param pageSize	分页条数
+     * @return
+     */
+    CouponPageVO getCouponList(int skip, int pageSize);
+
+    /**
+     * 获取卡券总数
+     * @return
+     */
+	long getCouponCount();
 }

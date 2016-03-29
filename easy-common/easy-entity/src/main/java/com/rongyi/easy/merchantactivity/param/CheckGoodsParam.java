@@ -16,7 +16,7 @@ import java.util.Date;
 public class CheckGoodsParam extends PagingParam {
 
     private static final String ORDER_BY_CLAUSE = "create_at DESC,identity DESC";
-    private static final String ORDER_BY_CLAUSE_LABEL = "update DESC";
+    private static final String ORDER_BY_CLAUSE_LABEL = "update_at DESC";
     private static final String ORDER_BY_CLAUSE_LABEL_JOIN = "join_start_at";
 
     private Integer activityId;
