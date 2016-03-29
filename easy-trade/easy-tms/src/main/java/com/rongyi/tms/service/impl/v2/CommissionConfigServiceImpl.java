@@ -53,10 +53,9 @@ public class CommissionConfigServiceImpl extends BaseServiceImpl implements Comm
         map.put("currentPage", (currentPage - 1) * pageSize);
         map.put("pageSize", pageSize);
         List<CommissionConfig> commissionConfigs = this.getBaseDao().selectListBySql(NAMESPACE + ".selectPageList", map);
-        List<CommissionConfig> reList = new ArrayList<>();
         if (CollectionUtils.isNotEmpty(commissionConfigs)){
             Map<String, Object> searchMap = new HashMap<>();
-            searchMap.put("opType", ConstantEnum.OP_MODEL_2);
+            searchMap.put("opModel", ConstantEnum.OP_MODEL_2.getCodeInt());
             for (CommissionConfig config : commissionConfigs){
                 if (ConstantEnum.COMMISSION_CONFIG_STATUS_2.getCodeByte().equals(config.getStatus()) || ConstantEnum.COMMISSION_CONFIG_STATUS_4.getCodeByte().equals(config.getStatus())){
                     searchMap.put("opId", config.getId());
@@ -65,10 +64,9 @@ public class CommissionConfigServiceImpl extends BaseServiceImpl implements Comm
                         config.setDesc(log.getDesc());
                     }
                 }
-                reList.add(config);
             }
         }
-        return reList;
+        return commissionConfigs;
     }
 
     public Integer selectPageCount(Map<String, Object> map){
