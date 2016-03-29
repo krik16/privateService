@@ -82,7 +82,7 @@ public class MerchantActivityGoodsVO implements Serializable {
 
     private Integer isAuto;
 
-
+   private String createUser;//创建人
 
     /**
      * 商品规格
@@ -202,6 +202,13 @@ public class MerchantActivityGoodsVO implements Serializable {
         this.activityGoodsSpecsVos = activityGoodsSpecsVos;
     }
 
+    public String getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
+    }
 
     public String getShopName() {
         return shopName;
@@ -218,6 +225,7 @@ public class MerchantActivityGoodsVO implements Serializable {
     public void setShopId(String shopId) {
         this.shopId = shopId;
     }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -235,6 +243,7 @@ public class MerchantActivityGoodsVO implements Serializable {
                 .append("shopId", shopId)
                 .append("record", record)
                 .append("isAuto", isAuto)
+                .append("createUser", createUser)
                 .append("activityGoodsSpecsVos", activityGoodsSpecsVos)
                 .toString();
     }
