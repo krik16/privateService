@@ -201,4 +201,13 @@ public interface MerchantActivityService {
 	 * @return
 	 */
 	public int isSelfGoods(int activityGoodsId, String mallId);
+	
+	/**
+	 * 更新审核状态为待审核（仅仅当前退回状态）
+	 * 
+	 * @author wangjianhua
+	 * @param activityGoodsId
+	 * @return
+	 */
+	public int updateStatusToPending(int activityGoodsId, String userName);
 }
