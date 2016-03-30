@@ -105,7 +105,8 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
             }
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("插入付款单记录失败，失败原因:" + e.getMessage());
+            LOGGER.error("插入付款单记录失败，失败原因,e.getMessage={}",e.getMessage(),e);
+            throw new TradeException("插入付款单记录失败，失败原因:" + e.getMessage());
         }
     }
 
@@ -235,7 +236,8 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
             messageMap.put("body", JSONObject.fromObject(getBodyMap(paymentEntityVO, event)));
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("处理订单信息失败：" + event.getBody().toString() + ",失败原因：" + e.getMessage());
+            LOGGER.error("处理订单信息失败,e.getMessage={}", e.getMessage(), e);
+            throw new TradeException("处理订单信息失败：" + event.getBody().toString() + ",失败原因：" + e.getMessage());
         }
 
         return messageMap;
@@ -275,8 +277,8 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
             bodyMap.put("orderNum", paymentEntityVO.getOrderNum());
             bodyMap.put("orderDetailNum", paymentEntityVO.getOrderDetailNumArray());
         } catch (Exception e) {
-            LOGGER.error("处理订单信息失败：" + event.getBody().toString() + ",失败原因：" + e.getMessage());
-            LOGGER.error(e.getMessage());
+            LOGGER.error("处理订单信息失败,e.getMessage={}", e.getMessage(), e);
+            throw new TradeException("处理订单信息失败：" + event.getBody().toString() + ",失败原因：" + e.getMessage());
         }
 
         return bodyMap;
@@ -550,7 +552,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
             paymentEntity.setDrawUserId(mqDrawParam.getUserId());
             insert(paymentEntity);
         } catch (Exception e) {
-            LOGGER.error("插入提现(或异常支付)申请记录失败，失败原因：");
+            LOGGER.error("插入提现(或异常支付)申请记录失败，失败原因,e.getMessage={}", e.getMessage(), e);
             e.printStackTrace();
         }
         return paymentEntity;

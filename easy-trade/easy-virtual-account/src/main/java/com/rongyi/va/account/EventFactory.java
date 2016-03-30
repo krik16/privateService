@@ -50,7 +50,9 @@ public class EventFactory {
 			} else if (type.equals(VirtualAccountEventTypeEnum.DRAWAPPLY.getCode())) {
 				// 提现申请
 				event = new WithdrawRequestEvent();
-			} else if (type.equals(VirtualAccountEventTypeEnum.COMMISSION_BATCH_POST.getCode())) {
+			} else if (type.equals(VirtualAccountEventTypeEnum.COMMISSION_BATCH_POST.getCode())
+					||type.equals(VirtualAccountEventTypeEnum.COMMISSION_TYPE_EXPAND.getCode())
+					||type.equals(VirtualAccountEventTypeEnum.COMMISSION_TYPE_FIRST.getCode())) {
 				// 佣金批量入账
 				event = new CommissionBatchPostEvent();
 			} else if (type.equals(VirtualAccountEventTypeEnum.COUPON_COMMISSION_BATCH_POST.getCode())) {

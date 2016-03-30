@@ -125,7 +125,7 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
                     return true;
                 }
             }
-            LOGGER.error("支付单号未查询到未支付状态付款记录，忽略此笔支付通知,payNo={}", paymentLogInfo.getOutTradeNo());
+            LOGGER.warn("支付单号未查询到未支付状态付款记录，忽略此笔支付通知,payNo={}", paymentLogInfo.getOutTradeNo());
         } catch (Exception e) {
             e.printStackTrace();
         }

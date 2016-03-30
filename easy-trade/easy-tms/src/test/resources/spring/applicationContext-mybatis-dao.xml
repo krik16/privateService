@@ -30,6 +30,7 @@
 		<property name="mapperLocations">
 			<list>
             <value>classpath*:com/rongyi/tms/mapper/xml/*Mapper.xml</value>
+            <value>classpath*:com/rongyi/tms/mapper/xml/v2/*Mapper.xml</value>
 			</list>
 		</property>
 	</bean>

@@ -1,2 +1,10 @@
-/target
-/test-output
+.settings
+.classpath
+.project
+classes
+target
+*.iml*.properties
+.idea
+*.iml
+.gitignore
+!/.gitignore

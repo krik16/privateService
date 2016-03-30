@@ -9,18 +9,18 @@
  */
 package com.rongyi.va.service.impl;
 
-import java.math.BigDecimal;
-
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.rongyi.easy.va.entity.VirtualAccountEntity;
 import com.rongyi.easy.va.vo.VirtualAccountVO;
 import com.rongyi.rss.va.VirtualAccountGeneralService;
 import com.rongyi.va.service.VirtualAccountDetailService;
 import com.rongyi.va.service.VirtualAccountService;
 import com.rongyi.va.vo.VirtualAccountQuerySumVO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 
 /**
  * @author ZhengYl
@@ -28,7 +28,7 @@ import com.rongyi.va.vo.VirtualAccountQuerySumVO;
  */
 @Service
 public class VirtualAccountGeneralServiceImpl implements VirtualAccountGeneralService {
-	private Logger logger = Logger.getLogger(getClass());
+	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Autowired
 	private VirtualAccountService virtualAccountService;
@@ -64,6 +64,7 @@ public class VirtualAccountGeneralServiceImpl implements VirtualAccountGeneralSe
 
 		// 获取账号明细合计
 		VirtualAccountQuerySumVO sumVO = virtualAccountDetailService.selectAccountSumByUserId(userId);
+		logger.info("sumVO={}",sumVO);
 		if (sumVO != null) {
 			vaVO.setIncomeTotal(sumVO.getIncomeSum());
 			vaVO.setTradeTotal(sumVO.getTradeSum());
@@ -72,7 +73,7 @@ public class VirtualAccountGeneralServiceImpl implements VirtualAccountGeneralSe
 			vaVO.setCommissionTotal(sumVO.getCommissionSum());
 			vaVO.setTradeDaily(sumVO.getTradeDaily());
 			vaVO.setBonusDaily(sumVO.getBonusDaily());
-			BigDecimal commissionIncome = sumVO.getCommissionSum().add(sumVO.getCouponCommissionSum()).add(sumVO.getBonusSum());
+			BigDecimal commissionIncome = sumVO.getCommissionSum().add(sumVO.getCouponCommissionSum()).add(sumVO.getBonusSum()).add(sumVO.getExpandCommissionTotal()).add(sumVO.getFirstCommissionTotal());
 			vaVO.setCommissionIncome(commissionIncome);
 		}
 

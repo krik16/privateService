@@ -51,4 +51,11 @@ public class DrawVerifyLogServiceImpl extends BaseServiceImpl implements DrawVer
         return this.getBaseDao().selectOneBySql(INTEGRAL_COMM_NAMESPACE_DRAWVERIFYLOG + ".selectByApplyId", parameterMap);
     }
 
+    @Override
+    public DrawVerifyLog getLatestLogByApplyId(Integer applyId) {
+        Map<String, Object> parameterMap=new HashMap<String, Object>();
+        parameterMap.put("applyId", applyId);
+        return this.getBaseDao().selectOneBySql(INTEGRAL_COMM_NAMESPACE_DRAWVERIFYLOG + ".selectLatestByApplyId", parameterMap);
+    }
+
 }

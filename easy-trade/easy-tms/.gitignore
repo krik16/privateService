@@ -1,4 +1,10 @@
-/rongyi-dubbo-tms
-/target
-/rongyi-dubbo-rpb
-/test-output
+.settings
+.classpath
+.project
+classes
+target
+*.iml*.properties
+.idea
+*.iml
+.gitignore
+!/.gitignore

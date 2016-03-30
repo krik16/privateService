@@ -101,7 +101,7 @@
 		(CASE
 		WHEN
 		(SELECT -SUM(sign) FROM virtual_account_detail WHERE user_id = #{userId}
-		AND DATEDIFF(create_at, NOW()) = 0 	AND item_type = 5 AND 	sign &lt; 0) >= #{drawTimeLimit}
+		AND DATEDIFF(create_at, NOW()) = 0 	AND item_type = 5) >= #{drawTimeLimit}
 		THEN 1
 		WHEN (SELECT balance FROM virtual_account	WHERE user_id = #{userId}) &lt; #{amount}
 		THEN 2

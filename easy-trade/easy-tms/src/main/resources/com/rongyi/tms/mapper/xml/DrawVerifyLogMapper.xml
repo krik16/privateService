@@ -25,6 +25,15 @@
   	where draw_apply_id=#{applyId,jdbcType=INTEGER} and memo is not null
   	
   </select>
+
+  <select id="selectLatestByApplyId" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from draw_verify_log
+    where draw_apply_id=#{applyId,jdbcType=INTEGER}
+    order by create_at desc
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from draw_verify_log
     where id = #{id,jdbcType=INTEGER}
