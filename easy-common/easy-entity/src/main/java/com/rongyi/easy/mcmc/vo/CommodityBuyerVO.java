@@ -36,9 +36,22 @@ public class CommodityBuyerVO implements Serializable{
 	private List<Double> location; //经纬度
 	private String systemNumber; //商品SPU
 	private String activityType = "0";	//活动类型[0其他 闪购1、特卖2、秒杀3]
-
 	private String easyOrder;//容易令
-
+	private int isSpot;//是否现货	0 非现货 1现货
+	private String commodityOPriceMax;//我是最高原价”,
+	private String commodityOPriceMin;//我是最低原价”,
+	private String commodityCPriceMax;//我是最高现价”,
+	private String commodityCPriceMin;//我是最低现价”,
+	private String commodityOPOfLCP;//我是最低现价对应的原价
+	private String commodityBrandName;//商品所属的品牌名字
+	private String commodityPostage;//我是商品邮费”,
+	private String commodityDescription;//我是商品描述”,
+	private String commodityName;//我是商品名称”,
+	private String shopId;//123”,
+	private String shopMid;
+	private boolean isCollected;  //是否被收藏
+	private String mallName;//商场名称
+	private String mallMid;//商场mongoId
 	public String getActivityType() {
 		return activityType;
 	}
@@ -158,12 +171,7 @@ public class CommodityBuyerVO implements Serializable{
 	public void setCommodityCode(String commodityCode) {
 		this.commodityCode = commodityCode;
 	}
-	private String commodityOPriceMax;//我是最高原价”,
-	private String commodityOPriceMin;//我是最低原价”,
-	private String commodityCPriceMax;//我是最高现价”,
-	private String commodityCPriceMin;//我是最低现价”,
-	private String commodityOPOfLCP;//我是最低现价对应的原价
-	private String commodityBrandName;//商品所属的品牌名字
+	
 	public String getCommodityBrandName() {
 		return commodityBrandName;
 	}
@@ -179,10 +187,7 @@ public class CommodityBuyerVO implements Serializable{
 	public void setCommodityOPOfLCP(String commodityOPOfLCP) {
 		this.commodityOPOfLCP = commodityOPOfLCP;
 	}
-	private String commodityPostage;//我是商品邮费”,
-	private String commodityDescription;//我是商品描述”,
-	private String commodityName;//我是商品名称”,
-	private String shopId;//123”,
+	
 	public String getShopMid() {
 		return shopMid;
 	}
@@ -190,8 +195,6 @@ public class CommodityBuyerVO implements Serializable{
 	public void setShopMid(String shopMid) {
 		this.shopMid = shopMid;
 	}
-	private String shopMid;
-	private boolean isCollected;  //是否被收藏
 	
 	public String getCommodityId() {
 		return commodityId;
@@ -199,6 +202,158 @@ public class CommodityBuyerVO implements Serializable{
 
 	public void setCommodityId(String commodityId) {
 		this.commodityId = commodityId;
+	}
+	
+	public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+
+	public List<String> getCommodityPicList() {
+		return commodityPicList;
+	}
+
+	public void setCommodityPicList(List<String> commodityPicList) {
+		this.commodityPicList = commodityPicList;
+	}
+
+	public int getCommodityAppStatus() {
+		return commodityAppStatus;
+	}
+
+	public void setCommodityAppStatus(int commodityAppStatus) {
+		this.commodityAppStatus = commodityAppStatus;
+	}
+
+	public boolean isSupportCourierDeliver() {
+		return supportCourierDeliver;
+	}
+
+	public void setSupportCourierDeliver(boolean supportCourierDeliver) {
+		this.supportCourierDeliver = supportCourierDeliver;
+	}
+
+	public boolean isSupportSelfPickup() {
+		return supportSelfPickup;
+	}
+
+	public void setSupportSelfPickup(boolean supportSelfPickup) {
+		this.supportSelfPickup = supportSelfPickup;
+	}
+
+	public List<String> getShopIM() {
+		return shopIM;
+	}
+
+	public void setShopIM(List<String> shopIM) {
+		this.shopIM = shopIM;
+	}
+
+	public String getEasyOrder() {
+		return easyOrder;
+	}
+
+	public void setEasyOrder(String easyOrder) {
+		this.easyOrder = easyOrder;
+	}
+
+	public int getIsSpot() {
+		return isSpot;
+	}
+
+	public void setIsSpot(int isSpot) {
+		this.isSpot = isSpot;
+	}
+
+	public String getCommodityOPriceMax() {
+		return commodityOPriceMax;
+	}
+
+	public void setCommodityOPriceMax(String commodityOPriceMax) {
+		this.commodityOPriceMax = commodityOPriceMax;
+	}
+
+	public String getCommodityOPriceMin() {
+		return commodityOPriceMin;
+	}
+
+	public void setCommodityOPriceMin(String commodityOPriceMin) {
+		this.commodityOPriceMin = commodityOPriceMin;
+	}
+
+	public String getCommodityCPriceMax() {
+		return commodityCPriceMax;
+	}
+
+	public void setCommodityCPriceMax(String commodityCPriceMax) {
+		this.commodityCPriceMax = commodityCPriceMax;
+	}
+
+	public String getCommodityCPriceMin() {
+		return commodityCPriceMin;
+	}
+
+	public void setCommodityCPriceMin(String commodityCPriceMin) {
+		this.commodityCPriceMin = commodityCPriceMin;
+	}
+
+	public String getCommodityPostage() {
+		return commodityPostage;
+	}
+
+	public void setCommodityPostage(String commodityPostage) {
+		this.commodityPostage = commodityPostage;
+	}
+
+	public String getCommodityDescription() {
+		return commodityDescription;
+	}
+
+	public void setCommodityDescription(String commodityDescription) {
+		this.commodityDescription = commodityDescription;
+	}
+
+	public String getCommodityName() {
+		return commodityName;
+	}
+
+	public void setCommodityName(String commodityName) {
+		this.commodityName = commodityName;
+	}
+
+	public String getShopId() {
+		return shopId;
+	}
+
+	public void setShopId(String shopId) {
+		this.shopId = shopId;
+	}
+
+	public boolean isCollected() {
+		return isCollected;
+	}
+
+	public void setCollected(boolean isCollected) {
+		this.isCollected = isCollected;
+	}
+	
+	public String getMallName() {
+		return mallName;
+	}
+
+	public void setMallName(String mallName) {
+		this.mallName = mallName;
+	}
+	
+	public String getMallMid() {
+		return mallMid;
+	}
+
+	public void setMallMid(String mallMid) {
+		this.mallMid = mallMid;
 	}
 
 	public CommodityBuyerVO(){
@@ -222,6 +377,11 @@ public class CommodityBuyerVO implements Serializable{
 		}else{
 			this.commodityPostage = "0.0";
 		}
+		if(commodity.isSpot()){
+			this.isSpot = 1;//现货
+		}else{
+			this.isSpot = 0;//非现货
+		}
 //		this.commodityPostage = commodity.getPostage();
 		this.commodityDescription = commodity.getDescription();
 		this.commodityName = commodity.getName();
@@ -229,6 +389,10 @@ public class CommodityBuyerVO implements Serializable{
 		this.shopMid = "";
 		if(commodity.getShopMid() != null ){
 			this.shopMid = commodity.getShopMid();
+		}
+		this.mallMid = "";
+		if(StringUtils.isNotBlank(commodity.getMallMid())){
+			this.mallMid = commodity.getMallMid();
 		}
 		this.commodityOPOfLCP = commodity.getoPriceOfLowestCPrice();
 		if (StringUtils.isBlank(this.commodityOPOfLCP)) {
@@ -293,130 +457,35 @@ public class CommodityBuyerVO implements Serializable{
 			}
 		}
 	}
-	
-	public List<String> getCommodityPicList() {
-		return commodityPicList;
-	}
-	public void setCommodityPicList(List<String> commodityPicList) {
-		this.commodityPicList = commodityPicList;
-	}
-	public String getCommodityOPriceMax() {
-		return commodityOPriceMax;
-	}
-	public void setCommodityOPriceMax(String commodityOPriceMax) {
-		this.commodityOPriceMax = commodityOPriceMax;
-	}
-	public String getCommodityOPriceMin() {
-		return commodityOPriceMin;
-	}
-	public void setCommodityOPriceMin(String commodityOPriceMin) {
-		this.commodityOPriceMin = commodityOPriceMin;
-	}
-	public String getCommodityCPriceMax() {
-		return commodityCPriceMax;
-	}
-	public void setCommodityCPriceMax(String commodityCPriceMax) {
-		this.commodityCPriceMax = commodityCPriceMax;
-	}
-	public String getCommodityCPriceMin() {
-		return commodityCPriceMin;
-	}
-	public void setCommodityCPriceMin(String commodityCPriceMin) {
-		this.commodityCPriceMin = commodityCPriceMin;
-	}
-	public String getCommodityPostage() {
-		return commodityPostage;
-	}
-	public void setCommodityPostage(String commodityPostage) {
-		this.commodityPostage = commodityPostage;
-	}
-	public String getCommodityDescription() {
-		return commodityDescription;
-	}
-	public void setCommodityDescription(String commodityDescription) {
-		this.commodityDescription = commodityDescription;
-	}
-	public String getCommodityName() {
-		return commodityName;
-	}
-	public void setCommodityName(String commodityName) {
-		this.commodityName = commodityName;
-	}
-	public String getShopId() {
-		return shopId;
-	}
-	public void setShopId(String shopId) {
-		this.shopId = shopId;
-	}
-	public boolean isCollected() {
-		return isCollected;
-	}
-	public void setCollected(boolean isCollected) {
-		this.isCollected = isCollected;
-	}
-
-	public List<String> getShopIM() {
-		return shopIM;
-	}
-
-	public void setShopIM(List<String> shopIM) {
-		this.shopIM = shopIM;
-	}
-	public String getShopName() {
-		return shopName;
-	}
-	public void setShopName(String shopName) {
-		this.shopName = shopName;
-	}
-
-	public boolean isSupportCourierDeliver() {
-		return supportCourierDeliver;
-	}
-
-	public void setSupportCourierDeliver(boolean supportCourierDeliver) {
-		this.supportCourierDeliver = supportCourierDeliver;
-	}
-
-	public String getEasyOrder() {
-		return easyOrder;
-	}
-
-	public void setEasyOrder(String easyOrder) {
-		this.easyOrder = easyOrder;
-	}
-
-	public boolean isSupportSelfPickup() {
-		return supportSelfPickup;
-	}
-
-	public void setSupportSelfPickup(boolean supportSelfPickup) {
-		this.supportSelfPickup = supportSelfPickup;
-	}
-
-	public int getCommodityAppStatus() {
-		return commodityAppStatus;
-	}
-
-	public void setCommodityAppStatus(int commodityAppStatus) {
-		this.commodityAppStatus = commodityAppStatus;
-	}
 
 	@Override
 	public String toString() {
-		return "CommodityBuyerVO [shopName=" + shopName + ", commodityPicList=" + commodityPicList + ", commodityId="
-				+ commodityId + ", commodityCode=" + commodityCode + ", commodityStock=" + commodityStock
-				+ ", commodityStatus=" + commodityStatus + ", commodityAppStatus=" + commodityAppStatus
-				+ ", commodityType=" + commodityType + ", supportCourierDeliver=" + supportCourierDeliver
-				+ ", supportSelfPickup=" + supportSelfPickup + ", offlinePayment=" + offlinePayment + ", onlinePayment="
-				+ onlinePayment + ", offlineRefund=" + offlineRefund + ", onlineRefund=" + onlineRefund + ", shopIM="
-				+ shopIM + ", bullId=" + bullId + ", distance=" + distance + ", saleShopCount=" + saleShopCount
-				+ ", watching=" + watching + ", location=" + location + ", systemNumber=" + systemNumber
-				+ ", activityType=" + activityType + ", commodityOPriceMax=" + commodityOPriceMax
-				+ ", commodityOPriceMin=" + commodityOPriceMin + ", commodityCPriceMax=" + commodityCPriceMax
-				+ ", commodityCPriceMin=" + commodityCPriceMin + ", commodityOPOfLCP=" + commodityOPOfLCP
-				+ ", commodityBrandName=" + commodityBrandName + ", commodityPostage=" + commodityPostage
-				+ ", commodityDescription=" + commodityDescription + ", commodityName=" + commodityName + ", shopId="
-				+ shopId + ", shopMid=" + shopMid + ", isCollected=" + isCollected + "]";
+		return "CommodityBuyerVO [shopName=" + shopName + ", commodityPicList="
+				+ commodityPicList + ", commodityId=" + commodityId
+				+ ", commodityCode=" + commodityCode + ", commodityStock="
+				+ commodityStock + ", commodityStatus=" + commodityStatus
+				+ ", commodityAppStatus=" + commodityAppStatus
+				+ ", commodityType=" + commodityType
+				+ ", supportCourierDeliver=" + supportCourierDeliver
+				+ ", supportSelfPickup=" + supportSelfPickup
+				+ ", offlinePayment=" + offlinePayment + ", onlinePayment="
+				+ onlinePayment + ", offlineRefund=" + offlineRefund
+				+ ", onlineRefund=" + onlineRefund + ", shopIM=" + shopIM
+				+ ", bullId=" + bullId + ", distance=" + distance
+				+ ", saleShopCount=" + saleShopCount + ", watching=" + watching
+				+ ", location=" + location + ", systemNumber=" + systemNumber
+				+ ", activityType=" + activityType + ", easyOrder=" + easyOrder
+				+ ", isSpot=" + isSpot + ", commodityOPriceMax="
+				+ commodityOPriceMax + ", commodityOPriceMin="
+				+ commodityOPriceMin + ", commodityCPriceMax="
+				+ commodityCPriceMax + ", commodityCPriceMin="
+				+ commodityCPriceMin + ", commodityOPOfLCP=" + commodityOPOfLCP
+				+ ", commodityBrandName=" + commodityBrandName
+				+ ", commodityPostage=" + commodityPostage
+				+ ", commodityDescription=" + commodityDescription
+				+ ", commodityName=" + commodityName + ", shopId=" + shopId
+				+ ", shopMid=" + shopMid + ", isCollected=" + isCollected
+				+ ", mallName=" + mallName + ", mallMid=" + mallMid + "]";
 	}
 	
 }
