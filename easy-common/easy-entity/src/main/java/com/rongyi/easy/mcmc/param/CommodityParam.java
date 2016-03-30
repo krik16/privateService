@@ -8,6 +8,7 @@ import org.bson.types.ObjectId;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 
 import com.rongyi.core.common.util.JsonUtil;
+import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import com.rongyi.easy.mcmc.mvc.DateJson.DateJsonDeserializer;
 
 
@@ -198,7 +199,7 @@ public class CommodityParam {
 	}
 
 	public Integer getTerminalType() {
-		return terminalType;
+		return terminalType == null ? CommodityTerminalType.TERMINAL_TYPE_1 : terminalType;
 	}
 
 	public void setTerminalType(Integer terminalType) {
