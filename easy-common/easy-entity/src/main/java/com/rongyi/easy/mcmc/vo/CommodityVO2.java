@@ -37,7 +37,7 @@ public class CommodityVO2 implements  Serializable {
 	private Integer terminalType;//上架终端：1.表示容易逛2.表示互动屏3.表示容易逛和互动屏4.表示微商5.微商,容易逛6.微商,互动屏7.容易逛, 互动屏, 微商(转换成二进制数个位1有容易逛第二位1有 互动屏第三位1有 微商)
 	private String postage;//商品邮费
 	private Integer source;//来源
-	
+
 	@JsonSerialize(using=JsonDateSerializer.class)
 	private Date updateAt;//数据更新日期
 
@@ -50,6 +50,8 @@ public class CommodityVO2 implements  Serializable {
 	private Integer stockStatus;//0表示统一库存1表示分管库存
 
 	private boolean immediateOn = false;//true表示设置是立即上架
+	private Integer templateId;//邮费模版id
+
 	public String getId() {
 		return id;
 	}
@@ -213,5 +215,13 @@ public class CommodityVO2 implements  Serializable {
 
 	public void setImmediateOn(boolean immediateOn) {
 		this.immediateOn = immediateOn;
+	}
+
+	public Integer getTemplateId() {
+		return templateId;
+	}
+
+	public void setTemplateId(Integer templateId) {
+		this.templateId = templateId;
 	}
 }

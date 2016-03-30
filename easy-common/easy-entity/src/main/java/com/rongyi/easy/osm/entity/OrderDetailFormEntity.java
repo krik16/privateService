@@ -96,6 +96,7 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
     private BigDecimal scoreAmount;//rebate_amount - 积分
 
     private Integer limitNum;//关联商品的限购数
+    private Integer activityType;//商品活动 闪购1、特卖2、秒杀3
 
 
     public String getRefundDiscountInfo() {
@@ -490,6 +491,16 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
         this.limitNum = limitNum;
     }
 
+    public Integer getActivityType()
+    {
+        return activityType;
+    }
+
+    public void setActivityType(Integer activityType)
+    {
+        this.activityType = activityType;
+    }
+
     @Override
 	public String toString() {
 		return "OrderDetailFormEntity [id=" + id + ", orderItemNo=" + orderItemNo + ", orderNo=" + orderNo + ", commodityMid="
@@ -503,6 +514,7 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
                 ", rebateAmount=" + rebateAmount +
                 ", scoreAmount=" + scoreAmount +
                 ", limitNum=" + limitNum +
+                ", activityType=" + activityType +
                 " ]";
 	}
 

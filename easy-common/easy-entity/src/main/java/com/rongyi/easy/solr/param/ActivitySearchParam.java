@@ -1,6 +1,7 @@
 package com.rongyi.easy.solr.param;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ActivitySearchParam implements Serializable{
@@ -33,6 +34,19 @@ public class ActivitySearchParam implements Serializable{
 	private String startLetter;  // 首字母 for 终端屏
 
 	private String showChannel;//展示渠道  APP：4，互动屏：5, 微信：6    不填时默认app
+	private List<String> keywordList = new ArrayList<>();
+
+	public List<String> getKeywordList() {
+		return keywordList;
+	}
+
+	public void setKeywordList(List<String> keywordList) {
+		this.keywordList = keywordList;
+	}
+
+	public void addKeywordList(String keyword) {
+		this.keywordList.add(keyword);
+	}
 	
 	public int getRequiredCoupon() {
 		return requiredCoupon;
@@ -175,7 +189,7 @@ public class ActivitySearchParam implements Serializable{
 				+ city_name + ", sort=" + sort + ", requiredCoupon=" + requiredCoupon + ", from=" + from + ", size="
 				+ size + ", brand_id=" + brand_id + ", zone_id=" + zone_id + ", shop_id=" + shop_id + ", holder_id="
 				+ holder_id + ", couponRequired=" + couponRequired + ", shopList=" + shopList + ", mallId=" + mallId
-				+ ", startLetter=" + startLetter + ", showChannel=" + showChannel + "]";
+				+ ", startLetter=" + startLetter + ", showChannel=" + showChannel + ", keywordList=" + keywordList + "]";
 	}
 	
 }

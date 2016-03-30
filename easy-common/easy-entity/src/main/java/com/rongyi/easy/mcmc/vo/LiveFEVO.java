@@ -1,6 +1,7 @@
 package com.rongyi.easy.mcmc.vo;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * EF端直播vo
@@ -49,7 +50,17 @@ public class LiveFEVO implements Serializable {
 	 * 直播状态 [0:发布/预热中，1:上线/进行中，2:下线(已过期)]
 	 */
 	private int status;
-	
+
+	private List<String> urlList;
+
+	public List<String> getUrlList() {
+		return urlList;
+	}
+
+	public void setUrlList(List<String> urlList) {
+		this.urlList = urlList;
+	}
+
 	/**
 	 * 买手手机号
 	 */

@@ -55,6 +55,18 @@ public class OrderCartFormEntity implements Serializable {
 
     private String userPhone;//用户手机
 
+    private OrderEventEntity orderEvent;
+
+    public OrderEventEntity getOrderEvent()
+    {
+        return orderEvent;
+    }
+
+    public void setOrderEvent(OrderEventEntity orderEvent)
+    {
+        this.orderEvent = orderEvent;
+    }
+
     public Byte getIsAlert() {
         return isAlert;
     }

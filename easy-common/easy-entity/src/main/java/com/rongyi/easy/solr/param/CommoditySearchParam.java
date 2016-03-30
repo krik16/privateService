@@ -10,6 +10,8 @@
 package com.rongyi.easy.solr.param;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.rongyi.easy.malllife.param.MalllifeBaseParam;
 
@@ -73,6 +75,24 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	private Integer from = 0; // 从0开始 偏移量，商品聚合分页使用
 	
 	private String source;//  端来源    1 微信   2 终端屏 3 其他
+
+	private String zoneId;
+
+	private String commodityCode;
+
+	private List<String> keywordList = new ArrayList<>();
+
+	public List<String> getKeywordList() {
+		return keywordList;
+	}
+
+	public void setKeywordList(List<String> keywordList) {
+		this.keywordList = keywordList;
+	}
+
+	public void addKeywordList(String keyword) {
+		this.keywordList.add(keyword);
+	}
 
 	public Integer getFrom() {
 		return from;
@@ -250,6 +270,22 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 		this.source = source;
 	}
 
+	public String getZoneId() {
+		return zoneId;
+	}
+
+	public void setZoneId(String zoneId) {
+		this.zoneId = zoneId;
+	}
+
+	public String getCommodityCode() {
+		return commodityCode;
+	}
+
+	public void setCommodityCode(String commodityCode) {
+		this.commodityCode = commodityCode;
+	}
+
 	@Override
 	public String toString() {
 		return "CommoditySearchParam [keyword=" + keyword + ", shopId="
@@ -260,6 +296,12 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 				+ saleId + ", flashSaleId=" + flashSaleId + ", commodityType="
 				+ commodityType + ", systemNumber=" + systemNumber + ", from="
 				+ from + ", source=" + source + "]";
+		return "CommoditySearchParam [keyword=" + keyword + ", shopId=" + shopId + ", brandId=" + brandId + ", mallId="
+				+ mallId + ", commodityCategory=" + commodityCategory + ", sortBy=" + sortBy + ", coord_x=" + coord_x
+				+ ", coord_y=" + coord_y + ", bullId=" + bullId + ", liveId=" + liveId + ", saleId=" + saleId
+				+ ", flashSaleId=" + flashSaleId + ", commodityType=" + commodityType + ", systemNumber=" + systemNumber
+				+ ", from=" + from + ", zoneId=" + zoneId + ", commodityCode=" + commodityCode + ", keywordList="
+				+ keywordList + "]";
 	}
 	
 }

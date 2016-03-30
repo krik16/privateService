@@ -52,5 +52,10 @@ public class DrawParam implements Serializable {
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
 	}
+	@Override
+	public String toString() {
+		return "DrawParam [drawAmount=" + drawAmount + ", accountNo=" + accountNo + ", accountName=" + accountName
+				+ ", accountType=" + accountType + "]";
+	}
 	
 }

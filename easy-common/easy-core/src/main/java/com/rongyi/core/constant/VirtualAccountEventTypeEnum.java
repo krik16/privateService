@@ -17,7 +17,10 @@ public enum VirtualAccountEventTypeEnum {
 	DRAWAPPLY("0", "提现"),
 	ACCOUNT_POST("1", "金额入账"),
 	COMMISSION_BATCH_POST("2", "佣金批量入账"),
-	COUPON_COMMISSION_BATCH_POST("3","优惠券核销佣金批量入账");
+	COUPON_COMMISSION_BATCH_POST("3","优惠券核销佣金批量入账"),
+	COMMISSION_TYPE_EXPAND("4", "推广佣金财务审核"),
+	COMMISSION_TYPE_FIRST("5", "首单佣金财务审核"),
+	;
 	
 	private String code;
 	private String value;

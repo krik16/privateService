@@ -8,8 +8,9 @@ import com.rongyi.easy.coupon.param.CouponCommodityParam;
 import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.mcmc.*;
 import com.rongyi.easy.mcmc.param.SaleParam;
-
 import com.rongyi.easy.mcmc.vo.*;
+
+import com.rongyi.easy.solr.McmcCommodityDocument;
 import com.rongyi.easy.roa.param.SearchCommodityBrandParam;
 import com.rongyi.easy.roa.param.SearchCommodityCategoryParam;
 
@@ -134,11 +135,16 @@ public interface CommodityService {
 
     public List<CommodityBuyerVO> getCommodityBySPU(String commodityId, String spu);
 
-//    /**
-//	 * 获取有商品的分类列表
-//	 * @param categoryParam	参数对象
-//	 * @return
-//	 */
+    public List<McmcCommodityDocument> getMcmcCommodityDocumentList(int skip,int pageSize) throws Exception;
+
+    public McmcCommodityDocument getMmcmcCommodityDocumentById(String commodityId) throws Exception;
+
+    public long getCommodityCount();
+    /**
+	 * 获取有商品的分类列表
+	 * @param categoryParam	参数对象
+	 * @return
+	 */
 //	public ResponseResult getBuyerCommodityCategoryHasCommodity(BuyerCategoryParam categoryParam);
     
     /**
@@ -154,5 +160,36 @@ public interface CommodityService {
 	 * @return
 	 */
 	public ResponseVO getBrandsByMall(SearchCommodityBrandParam brandParam);
+
+    /**
+     * 删除商品
+     * @param commodityId	商品ID
+     * @param shopId		店铺ID
+     * @param identity		角色
+     * @return
+     */
+	public ResponseVO deleteCommodity(String commodityId, Long shopId, Integer identity);
+
+    /**
+     * 置顶，取消置顶接口，type为1，置顶，为0，取消置顶
+     * @param ids
+     * @param sort
+     * @param type
+     * @return
+     */
+    ResponseVO  topByIds(List<String> ids,Integer sort,Integer type);
+    /**
+     * 获取商品直播的地址和品牌
+     * @param commodityIds
+     * @return
+     */
+	public ResponseVO getLiveAddressAndBrandByCommodityIds(List<String> commodityIds);
+
+    /**
+     * 获取商品邮费
+     * @param userId
+     * @return
+     */
+    public String getPostageByUserId(String userId);
 
 }

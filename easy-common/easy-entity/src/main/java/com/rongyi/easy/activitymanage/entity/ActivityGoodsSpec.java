@@ -9,13 +9,25 @@ import java.util.Date;
  * 活动商品规格
  */
 public class ActivityGoodsSpec implements Serializable {
-    private Integer id;
+    public Integer getAppendCount() {
+		return appendCount;
+	}
+
+	public void setAppendCount(Integer appendCount) {
+		this.appendCount = appendCount;
+	}
+
+	private Integer id;
 
     /**
      * 活动商品关联表id
      */
     private Integer activityGoodsId;
 
+    /**
+     * 当前价格
+     */
+    private Integer currPrice;
     /**
      * 商品规格id
      */
@@ -50,6 +62,16 @@ public class ActivityGoodsSpec implements Serializable {
      * 版本号
      */
     private Integer version;
+
+    /**
+     * 追加数
+     */
+    private Integer appendCount;
+
+    /**
+     * 是否恢复库存 0 没有 1恢复
+     */
+    private Integer recStock;
 
     public Integer getId() {
         return id;
@@ -123,11 +145,28 @@ public class ActivityGoodsSpec implements Serializable {
         this.version = version;
     }
 
+    public Integer getRecStock() {
+        return recStock;
+    }
+
+    public void setRecStock(Integer recStock) {
+        this.recStock = recStock;
+    }
+
+    public Integer getCurrPrice() {
+        return currPrice;
+    }
+
+    public void setCurrPrice(Integer currPrice) {
+        this.currPrice = currPrice;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("id", id)
                 .append("activityGoodsId", activityGoodsId)
+                .append("currPrice", currPrice)
                 .append("specId", specId)
                 .append("joinCount", joinCount)
                 .append("stockCount", stockCount)
@@ -135,6 +174,8 @@ public class ActivityGoodsSpec implements Serializable {
                 .append("createAt", createAt)
                 .append("updateAt", updateAt)
                 .append("version", version)
+                .append("appendCount", appendCount)
+                .append("recStock", recStock)
                 .toString();
     }
 }

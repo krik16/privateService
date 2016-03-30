@@ -46,7 +46,7 @@ public class Coupon implements Serializable {
     private String name;
 
     /**
-     * 卡券类型:代金券[0], 抵扣券[1], 红包[2]
+     * 卡券类型:代金券[0], 抵扣券[1], 红包[2],活动券[3]
      */
     private Integer couponType;
 
@@ -865,6 +865,8 @@ public class Coupon implements Serializable {
         if (stockCount == null) {
             stockCount = totalCount;
         }
+        if(totalCount==0)
+            return 0;
         return (totalCount - stockCount < 0) ? 0 : totalCount - stockCount;
     }
 

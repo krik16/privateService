@@ -214,7 +214,9 @@ public class DateUtil {
 		SimpleDateFormat sdFormat = new SimpleDateFormat(strFormat);
 		String str = "";
 		try {
-			str = sdFormat.format(dt);
+			if(dt != null){
+				str = sdFormat.format(dt);
+			}			
 		} catch (Exception e) {
 			return "";
 		}

@@ -17,6 +17,10 @@ public class CommodityVO  implements  Serializable {
 	private String commodityId;
 	private String commodityName;
 	private String commodityCategory;
+	private String commodityCategory1;	//新增 一级类目ID(当前适用于getCommodityById)
+	private String commodityCategory2;	//新增 二级类目ID(当前适用于getCommodityById)
+	private String commodityCategoryName1;
+	private String commodityCategoryName2;
 	private String commodityDescription;
 	private String commodityPostage;
 	private String commodityStock;
@@ -36,6 +40,7 @@ public class CommodityVO  implements  Serializable {
 	private Date liveStartTime; // 直播开始时间
 	private Date liveEndTime; // 直播结束时间
 	private String create_by; // 创建人 
+	private String update_by;//修改人
 	private String liveId; // 直播Id
 	private String commodityOriginalPrice;
 	private String commodityCurrentPrice;
@@ -68,7 +73,18 @@ public class CommodityVO  implements  Serializable {
 	private Integer processIdentity;//当前登录人的身份
 	private String activityType = "0";	//活动状态[闪购1、特卖2、秒杀3]
 	private Integer purchaseCount; //商品限购数 0为不限购
+	private Integer templateId;//邮费模版id
+	private Integer sort;
+	private String mallName;
 
+
+	public Integer getTemplateId() {
+		return templateId;
+	}
+
+	public void setTemplateId(Integer templateId) {
+		this.templateId = templateId;
+	}
 
 	public String getActivityType() {
 		return activityType;
@@ -184,7 +200,6 @@ public class CommodityVO  implements  Serializable {
 		this.commodityStatus = commodityStatus;
 	}
 	
-	
 	public String getShopMid() {
 		return shopMid;
 	}
@@ -217,6 +232,22 @@ public class CommodityVO  implements  Serializable {
 
 	public void setProcessIdentity(Integer processIdentity) {
 		this.processIdentity = processIdentity;
+	}
+
+	public String getCommodityCategory1() {
+		return commodityCategory1;
+	}
+
+	public void setCommodityCategory1(String commodityCategory1) {
+		this.commodityCategory1 = commodityCategory1;
+	}
+
+	public String getCommodityCategory2() {
+		return commodityCategory2;
+	}
+
+	public void setCommodityCategory2(String commodityCategory2) {
+		this.commodityCategory2 = commodityCategory2;
 	}
 
 	public CommodityVO(){
@@ -312,6 +343,8 @@ public class CommodityVO  implements  Serializable {
 		}
 		
 		this.terminalType = commodity.getTerminalType();
+		this.sort=commodity.getSort();//排序
+		this.update_by = commodity.getUpdate_by();//修改人
 	}
 	public String getCommodityId() {
 		return commodityId;
@@ -404,29 +437,6 @@ public class CommodityVO  implements  Serializable {
 	public void setSoldOutAt(Date soldOutAt) {
 		this.soldOutAt = soldOutAt;
 	}
-	@Override
-	public String toString() {
-		return "CommodityVO [commodityId=" + commodityId + ", commodityName=" + commodityName + ", commodityCategory="
-				+ commodityCategory + ", commodityDescription=" + commodityDescription + ", commodityPostage="
-				+ commodityPostage + ", commodityStock=" + commodityStock + ", commoditySold=" + commoditySold
-				+ ", commodityPubDate=" + commodityPubDate + ", commodityStatus=" + commodityStatus
-				+ ", commodityAppStatus=" + commodityAppStatus + ", commodityOPriceMax=" + commodityOPriceMax
-				+ ", commodityOPriceMin=" + commodityOPriceMin + ", commodityCPriceMax=" + commodityCPriceMax
-				+ ", commodityCPriceMin=" + commodityCPriceMin + ", commodityOPOfLCP=" + commodityOPOfLCP
-				+ ", commodityType=" + commodityType + ", isSpot=" + isSpot + ", liveStartTime=" + liveStartTime
-				+ ", liveEndTime=" + liveEndTime + ", create_by=" + create_by + ", liveId=" + liveId
-				+ ", commodityOriginalPrice=" + commodityOriginalPrice + ", commodityCurrentPrice="
-				+ commodityCurrentPrice + ", shopId=" + shopId + ", shopMid=" + shopMid + ", commodityShopNumber="
-				+ commodityShopNumber + ", commodityPicList=" + commodityPicList + ", commoditySpecList="
-				+ commoditySpecList + ", commodityCode=" + commodityCode + ", commodityCommission="
-				+ commodityCommission + ", brandMid=" + brandMid + ", mallMid=" + mallMid + ", shopName=" + shopName
-				+ ", supportCourierDeliver=" + supportCourierDeliver + ", supportSelfPickup=" + supportSelfPickup
-				+ ", registerAt=" + registerAt + ", soldOutAt=" + soldOutAt + ", source=" + source + ", freight="
-				+ freight + ", terminalType=" + terminalType + ", stockStatus=" + stockStatus + ", reason=" + reason
-				+ ", mallId=" + mallId + ", brandName=" + brandName + ", shopNum=" + shopNum + ", brandId=" + brandId
-				+ ", filialeMid=" + filialeMid + ", identity=" + identity + ", processIdentity=" + processIdentity
-				+ ", activityType=" + activityType + ", purchaseCount=" + purchaseCount + "]";
-	}
 	public Integer getSource() {
 		return source;
 	}
@@ -507,6 +517,74 @@ public class CommodityVO  implements  Serializable {
 	public void setIdentity(int identity) {
 		this.identity = identity;
 	}
+
+	public Integer getSort() {
+		return sort;
+	}
+
+	public void setSort(Integer sort) {
+		this.sort = sort;
+	}
+
+	public String getUpdate_by() {
+		return update_by;
+	}
+
+	public void setUpdate_by(String update_by) {
+		this.update_by = update_by;
+	}
+
+	public String getMallName() {
+		return mallName;
+	}
+
+	public void setMallName(String mallName) {
+		this.mallName = mallName;
+	}
+	
+	public String getCommodityCategoryName1() {
+		return commodityCategoryName1;
+	}
+
+	public void setCommodityCategoryName1(String commodityCategoryName1) {
+		this.commodityCategoryName1 = commodityCategoryName1;
+	}
+
+	public String getCommodityCategoryName2() {
+		return commodityCategoryName2;
+	}
+
+	public void setCommodityCategoryName2(String commodityCategoryName2) {
+		this.commodityCategoryName2 = commodityCategoryName2;
+	}
+
+	@Override
+	public String toString() {
+		return "CommodityVO [commodityId=" + commodityId + ", commodityName=" + commodityName + ", commodityCategory="
+				+ commodityCategory + ", commodityCategory1=" + commodityCategory1 + ", commodityCategory2="
+				+ commodityCategory2 + ", commodityCategoryName1=" + commodityCategoryName1
+				+ ", commodityCategoryName2=" + commodityCategoryName2 + ", commodityDescription="
+				+ commodityDescription + ", commodityPostage=" + commodityPostage + ", commodityStock=" + commodityStock
+				+ ", commoditySold=" + commoditySold + ", commodityPubDate=" + commodityPubDate + ", commodityStatus="
+				+ commodityStatus + ", commodityAppStatus=" + commodityAppStatus + ", commodityOPriceMax="
+				+ commodityOPriceMax + ", commodityOPriceMin=" + commodityOPriceMin + ", commodityCPriceMax="
+				+ commodityCPriceMax + ", commodityCPriceMin=" + commodityCPriceMin + ", commodityOPOfLCP="
+				+ commodityOPOfLCP + ", commodityType=" + commodityType + ", isSpot=" + isSpot + ", liveStartTime="
+				+ liveStartTime + ", liveEndTime=" + liveEndTime + ", create_by=" + create_by + ", update_by="
+				+ update_by + ", liveId=" + liveId + ", commodityOriginalPrice=" + commodityOriginalPrice
+				+ ", commodityCurrentPrice=" + commodityCurrentPrice + ", shopId=" + shopId + ", shopMid=" + shopMid
+				+ ", commodityShopNumber=" + commodityShopNumber + ", commodityPicList=" + commodityPicList
+				+ ", commoditySpecList=" + commoditySpecList + ", commodityCode=" + commodityCode
+				+ ", commodityCommission=" + commodityCommission + ", brandMid=" + brandMid + ", mallMid=" + mallMid
+				+ ", shopName=" + shopName + ", supportCourierDeliver=" + supportCourierDeliver + ", supportSelfPickup="
+				+ supportSelfPickup + ", registerAt=" + registerAt + ", soldOutAt=" + soldOutAt + ", source=" + source
+				+ ", freight=" + freight + ", terminalType=" + terminalType + ", stockStatus=" + stockStatus
+				+ ", reason=" + reason + ", mallId=" + mallId + ", brandName=" + brandName + ", shopNum=" + shopNum
+				+ ", brandId=" + brandId + ", filialeMid=" + filialeMid + ", identity=" + identity
+				+ ", processIdentity=" + processIdentity + ", activityType=" + activityType + ", templateId="
+				+ templateId + ", sort=" + sort + ", mallName=" + mallName + "]";
+	}
+	
 
 	public Integer getPurchaseCount()
 	{
