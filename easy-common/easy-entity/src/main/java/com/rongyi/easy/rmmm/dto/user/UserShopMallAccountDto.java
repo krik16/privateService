@@ -28,6 +28,12 @@ public class UserShopMallAccountDto implements Serializable {
     private Integer mallId;//商场ID
     private String mallName;
 
+    private String shopMid;
+
+    private String mallMid;
+
+
+
     public Integer getUserId() {
         return userId;
     }
@@ -114,5 +120,21 @@ public class UserShopMallAccountDto implements Serializable {
 
     public void setMallName(String mallName) {
         this.mallName = mallName;
+    }
+
+    public String getShopMid() {
+        return shopMid;
+    }
+
+    public void setShopMid(String shopMid) {
+        this.shopMid = shopMid;
+    }
+
+    public String getMallMid() {
+        return mallMid;
+    }
+
+    public void setMallMid(String mallMid) {
+        this.mallMid = mallMid;
     }
 }

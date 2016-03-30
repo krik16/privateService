@@ -146,4 +146,11 @@ public interface RoaCouponCodeService {
     List<String> getCodeByVersion(String couponId, String version);
 
     public List<CouponCode> getCouponCodesByCouponId(String couponId);
+
+    /**
+     * 根据couponId 生成券码
+     * @param couponId
+     * @param count
+     */
+    public void generateCouponCode(String couponId, int count);
 }

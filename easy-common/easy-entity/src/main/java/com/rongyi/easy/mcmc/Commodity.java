@@ -61,6 +61,8 @@ public class Commodity implements  Serializable,Cloneable{
 
 	private int identity = -100;//-100 默认值，老数据，不处理权限 0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购6买手
 
+	private Integer templateId;//邮费模版id
+
 	public boolean isSupportCourierDeliver() {
 		return supportCourierDeliver;
 	}
@@ -167,6 +169,8 @@ public class Commodity implements  Serializable,Cloneable{
 	private String oPriceMin;//商品原最低价（用于买家版）
 	private String cPriceMax;//商品现最高价（用于买家版）
 	private String cPriceMin;//商品现最高价（用于买家版）
+	private Integer sort;//直播商品的排序
+
 	public ObjectId getId() {
 		return id;
 	}
@@ -389,6 +393,7 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setSecKillSign(secKillSign);
 //		commodity.setActivityStartTime(activityStartTime);
 //		commodity.setActivityEndTime(activityEndTime);
+		commodity.setSort(sort);
 		return commodity;
 	}
 	
@@ -507,6 +512,22 @@ public class Commodity implements  Serializable,Cloneable{
 
 	public void setSecKillSign(String secKillSign) {
 		this.secKillSign = secKillSign;
+	}
+
+	public Integer getSort() {
+		return null==sort?0:sort;
+	}
+
+	public void setSort(Integer sort) {
+		this.sort = sort;
+	}
+
+	public Integer getTemplateId() {
+		return templateId;
+	}
+
+	public void setTemplateId(Integer templateId) {
+		this.templateId = templateId;
 	}
 	
 	@Override
