@@ -30,6 +30,14 @@ public interface RoaCouponService {
     boolean create(Coupon coupon);
 
     /**
+     * 更新卡券
+     *
+     * @param coupon
+     * @return
+     */
+    boolean update(Coupon coupon);
+
+    /**
      * 追加库存量
      *
      * @param couponId

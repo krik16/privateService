@@ -30,7 +30,7 @@ public class RevenueGuideVo implements Serializable {
 	
 	private Integer drawCountMax = 0;//这个是同一天同一个卖家允许提现的次数
 	
-	/**  当日营业额 */
+	/** 当日营业额 */
 	private BigDecimal turnoverToday;
 
 	public BigDecimal getTurnoverToday() {

@@ -1503,6 +1503,7 @@
     <groupId>com.rongyi</groupId>
     <artifactId>easy-common</artifactId>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <version>2.9.5-SNAPSHOT</version>    
 	<packaging>pom</packaging>
 =======
@@ -1510,6 +1511,9 @@
 =======
     <version>3.2.7-SNAPSHOT</version>
 >>>>>>> 8a5e5d6dd6c8020c927a03c80a1ae86806a6d923
+=======
+    <version>3.0.5-SNAPSHOT</version>
+>>>>>>> ab32309d670777bbc18588a8755ab0dbcacdd634
     <packaging>pom</packaging>
 >>>>>>> 3e759be7e26d32526e67a4fc9d671e4be50670a8
     <modules>

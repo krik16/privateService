@@ -1,65 +1,13 @@
 package com.rongyi.easy.huanxin;
 
+import com.rongyi.core.bean.ResponseVO;
+
 /**
- * 统一返回对象
+ * 统一返回对象 逐渐废弃 【不建议使用当前对象 建议使用ResponseVO】
  * @author baodk
+ * @see ResponseVO
  */
-public class ResponseResult implements java.io.Serializable{
-
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	/** 是否成功 */
-    private boolean success = true;
-    
-    /** 返回对象类型数据 */
-    private Object info;
-    
-    /** 信息编码 */
-    private String code;
-    
-    /** 提升信息 */
-    private String message;
-
-    public boolean isSuccess() {
-        return success;
-    }
-    
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public Object getInfo() {
-        return info;
-    }
-    
-    public void setInfo(Object info) {
-        this.info = info;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    
-    public void setCode(String code) {
-        this.code = code;
-    }
-    
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    @Override
-    public String toString() {
-        return "ResponseResult [success=" + success + ", info=" + info + ", code=" + code + ", message=" + message
-                + "]";
-    }
-    
+@Deprecated
+public class ResponseResult extends com.rongyi.core.bean.ResponseResult{
+	private static final long serialVersionUID = 546966593126297938L;
 }

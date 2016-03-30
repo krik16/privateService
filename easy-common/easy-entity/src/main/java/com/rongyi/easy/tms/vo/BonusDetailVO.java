@@ -18,7 +18,7 @@ import java.io.Serializable;
 public class BonusDetailVO implements Serializable {
     private static final long serialVersionUID = -7647979818874548559L;
     
-	/** 时间 2015.02.08 11:14:12 */
+	/** 时间 2015-02-08 11:14 */
 	private String date;
 
 	/** 资金来源 */
@@ -29,6 +29,9 @@ public class BonusDetailVO implements Serializable {
 
 	/** 状态: 全部[0] 已发放[1] 处理中[2] 失败[3] */
 	private String status;
+
+	/** 奖励原因 */
+	private String awardReason;
 	
 	public String getDate() {
 		return date;
@@ -54,5 +57,12 @@ public class BonusDetailVO implements Serializable {
 	public void setStatus(String status) {
 		this.status = status;
 	}
- 
+
+	public String getAwardReason() {
+		return awardReason;
+	}
+
+	public void setAwardReason(String awardReason) {
+		this.awardReason = awardReason;
+	}
 }

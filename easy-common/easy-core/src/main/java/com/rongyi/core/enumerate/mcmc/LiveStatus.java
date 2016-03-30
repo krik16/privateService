@@ -20,8 +20,13 @@ public enum LiveStatus {
 	/**
 	 * 下架
 	 */
-	OFF(2);
-	 
+	OFF(2),
+
+	/**
+	 * 删除
+	 */
+	 DEL(-1);
+
 	private int value;
 
 	private LiveStatus(int value) {
@@ -42,6 +47,8 @@ public enum LiveStatus {
 			return LiveStatus.ON;
 		case 2:
 			return LiveStatus.OFF;
+		case -1:
+			return LiveStatus.DEL;
 		default:
 			return null;
 		}

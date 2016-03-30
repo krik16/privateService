@@ -156,5 +156,7 @@ public interface LiveService {
 	 */
 	public long getLiveCount();
 
+
+	ResponseVO  deleteById (String id);
 }
 

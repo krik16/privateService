@@ -3,6 +3,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 活动基础信息
@@ -83,6 +84,38 @@ public class ActivityInfo implements Serializable {
      * 卡券及商品类的活动规则
      */
     private ActivityGoodsRule activityGoodsRule;
+
+    /**
+     * 活动报名开始时间
+     */
+    private Date enrollStartAt;
+    /**
+     * 活动报名结束时间
+     */
+    private Date enrollEndAt;
+    /**
+     * 活动创建人id
+     */
+    private String createBy;
+    /**
+     * 活动关联id
+     */
+    private String relevanceId;
+    /**
+     * 活动关联类型
+     * 0:表示大运营 1:商场的活动  2:表示店铺 3表示集团 4:表示品牌
+     */
+    private Integer relevanceType;
+    /**
+     * 0:取消撤销状态  1:表示申请撤销中状态
+     */
+    private Integer applyStatus;
+    /**
+     * 卡券活动规则
+     */
+    private ActivityCouponRule activityCouponRule;
+
+    private List<ActivityEnroll> activityEnrollList;
 
     public Integer getId() {
         return id;
@@ -204,6 +237,70 @@ public class ActivityInfo implements Serializable {
         this.activityGoodsRule = activityGoodsRule;
     }
 
+    public Date getEnrollStartAt() {
+        return enrollStartAt;
+    }
+
+    public void setEnrollStartAt(Date enrollStartAt) {
+        this.enrollStartAt = enrollStartAt;
+    }
+
+    public Date getEnrollEndAt() {
+        return enrollEndAt;
+    }
+
+    public void setEnrollEndAt(Date enrollEndAt) {
+        this.enrollEndAt = enrollEndAt;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
+
+    public String getRelevanceId() {
+        return relevanceId;
+    }
+
+    public void setRelevanceId(String relevanceId) {
+        this.relevanceId = relevanceId;
+    }
+
+    public Integer getRelevanceType() {
+        return relevanceType;
+    }
+
+    public void setRelevanceType(Integer relevanceType) {
+        this.relevanceType = relevanceType;
+    }
+
+    public Integer getApplyStatus() {
+        return applyStatus;
+    }
+
+    public void setApplyStatus(Integer applyStatus) {
+        this.applyStatus = applyStatus;
+    }
+
+    public ActivityCouponRule getActivityCouponRule() {
+        return activityCouponRule;
+    }
+
+    public void setActivityCouponRule(ActivityCouponRule activityCouponRule) {
+        this.activityCouponRule = activityCouponRule;
+    }
+
+    public List<ActivityEnroll> getActivityEnrollList() {
+        return activityEnrollList;
+    }
+
+    public void setActivityEnrollList(List<ActivityEnroll> activityEnrollList) {
+        this.activityEnrollList = activityEnrollList;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -222,6 +319,14 @@ public class ActivityInfo implements Serializable {
                 .append("isDeleted", isDeleted)
                 .append("version", version)
                 .append("activityGoodsRule", activityGoodsRule)
+                .append("enrollStartAt", enrollStartAt)
+                .append("enrollEndAt", enrollEndAt)
+                .append("createBy", createBy)
+                .append("relevanceId", relevanceId)
+                .append("relevanceType", relevanceType)
+                .append("applyStatus", applyStatus)
+                .append("activityCouponRule", activityCouponRule)
+                .append("activityEnrollList", activityEnrollList)
                 .toString();
     }
 }

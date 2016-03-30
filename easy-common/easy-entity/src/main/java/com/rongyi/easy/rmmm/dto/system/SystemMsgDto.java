@@ -29,6 +29,15 @@ public class SystemMsgDto implements Serializable{
 
     private String msgStatus;
 
+    /** 推送对象 0 全部 1卖家 2买家 3指定用户 4指定商场 5指定店铺*/
+    private Integer msgType;
+
+    /*相关ID 用户ID，摩店ID，商城ID*/
+    private String objId;
+
+    /**查看类型 -1所有可看，0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购，6买手'**/
+    private Integer roleType;
+
     public Integer getId() {
         return id;
     }
@@ -75,5 +84,29 @@ public class SystemMsgDto implements Serializable{
 
     public void setMsgStatus(String msgStatus) {
         this.msgStatus = msgStatus;
+    }
+
+    public Integer getMsgType() {
+        return msgType;
+    }
+
+    public void setMsgType(Integer msgType) {
+        this.msgType = msgType;
+    }
+
+    public String getObjId() {
+        return objId;
+    }
+
+    public void setObjId(String objId) {
+        this.objId = objId;
+    }
+
+    public Integer getRoleType() {
+        return roleType;
+    }
+
+    public void setRoleType(Integer roleType) {
+        this.roleType = roleType;
     }
 }
