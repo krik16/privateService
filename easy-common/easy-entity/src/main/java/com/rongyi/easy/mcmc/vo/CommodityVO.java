@@ -310,6 +310,8 @@ public class CommodityVO  implements  Serializable {
 			//其他
 			this.activityType = "0";
 		}
+		
+		this.terminalType = commodity.getTerminalType();
 	}
 	public String getCommodityId() {
 		return commodityId;
