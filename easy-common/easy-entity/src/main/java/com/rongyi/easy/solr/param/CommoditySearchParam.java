@@ -296,12 +296,6 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 				+ saleId + ", flashSaleId=" + flashSaleId + ", commodityType="
 				+ commodityType + ", systemNumber=" + systemNumber + ", from="
 				+ from + ", source=" + source + "]";
-		return "CommoditySearchParam [keyword=" + keyword + ", shopId=" + shopId + ", brandId=" + brandId + ", mallId="
-				+ mallId + ", commodityCategory=" + commodityCategory + ", sortBy=" + sortBy + ", coord_x=" + coord_x
-				+ ", coord_y=" + coord_y + ", bullId=" + bullId + ", liveId=" + liveId + ", saleId=" + saleId
-				+ ", flashSaleId=" + flashSaleId + ", commodityType=" + commodityType + ", systemNumber=" + systemNumber
-				+ ", from=" + from + ", zoneId=" + zoneId + ", commodityCode=" + commodityCode + ", keywordList="
-				+ keywordList + "]";
 	}
 	
 }
