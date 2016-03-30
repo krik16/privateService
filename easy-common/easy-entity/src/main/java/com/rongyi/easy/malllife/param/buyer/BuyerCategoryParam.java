@@ -20,6 +20,8 @@ public class BuyerCategoryParam implements Serializable {
 	private String saleId;			// 闪购ID
 	private String flashSaleId;		// 特卖ID
 	
+	private String source;			//1微信  2终端屏
+	
 	public BuyerCategoryParam() {
 //		this.filterType = 0;
 //		this.filterId = "";
@@ -28,7 +30,7 @@ public class BuyerCategoryParam implements Serializable {
 	
 	public BuyerCategoryParam(Integer filterType, String filterId, boolean showParent, String bullId, String liveId,
 			String commodityType, String keyword, String categoryId, String brandId, String cityName, String mallId,
-			String shopId, String saleId, String flashSaleId) {
+			String shopId, String saleId, String flashSaleId, String source) {
 		this.filterType = filterType;
 		this.filterId = filterId;
 		this.showParent = showParent;
@@ -43,6 +45,7 @@ public class BuyerCategoryParam implements Serializable {
 		this.shopId = shopId;
 		this.saleId = saleId;
 		this.flashSaleId = flashSaleId;
+		this.source = source;
 	}
 	public Integer getFilterType() {
 		return filterType;
@@ -128,12 +131,19 @@ public class BuyerCategoryParam implements Serializable {
 	public void setFlashSaleId(String flashSaleId) {
 		this.flashSaleId = flashSaleId;
 	}
+	public String getSource() {
+		return source;
+	}
+	public void setSource(String source) {
+		this.source = source;
+	}
+
 	@Override
 	public String toString() {
 		return "BuyerCategoryParam [filterType=" + filterType + ", filterId=" + filterId + ", showParent=" + showParent
 				+ ", bullId=" + bullId + ", liveId=" + liveId + ", commodityType=" + commodityType + ", keyword="
 				+ keyword + ", categoryId=" + categoryId + ", brandId=" + brandId + ", cityName=" + cityName
 				+ ", mallId=" + mallId + ", shopId=" + shopId + ", saleId=" + saleId + ", flashSaleId=" + flashSaleId
-				+ "]";
+				+ ", source=" + source + "]";
 	}
 }

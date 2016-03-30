@@ -110,7 +110,7 @@ public interface McmcCommoditySolrService {
 	 */
 	public Map<String, Object> searchBrands(SearchCommodityBrandParam brandParam);
 
-	public Map<String, Object> searchCategorys(SearchCommodityCategoryParam categoryParam);
+//	public Map<String, Object> searchCategorys(SearchCommodityCategoryParam categoryParam);
 
 //	/**
 //	 * 搜索有商品的商品分类列表
@@ -121,5 +121,12 @@ public interface McmcCommoditySolrService {
 
 //	public boolean updateCommoditySale(String commodityId, Integer sortPosition);
 public boolean updateCommodityWeAndTeStatus(String commodityId, String  weAndTeStatus);
+
+	/**
+	 * 搜索有商品的商品分类列表
+	 * @param categoryParam	参数对象
+	 * @return
+	 */
+	public Map<String, Object> searchCommodityCategory(BuyerCategoryParam categoryParam);
 
 }
