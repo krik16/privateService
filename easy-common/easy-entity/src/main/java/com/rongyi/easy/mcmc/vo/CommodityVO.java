@@ -404,45 +404,26 @@ public class CommodityVO  implements  Serializable {
 	}
 	@Override
 	public String toString() {
-		return "CommodityVO{" +
-				"commodityId='" + commodityId + '\'' +
-				", commodityName='" + commodityName + '\'' +
-				", commodityCategory='" + commodityCategory + '\'' +
-				", commodityDescription='" + commodityDescription + '\'' +
-				", commodityPostage='" + commodityPostage + '\'' +
-				", commodityStock='" + commodityStock + '\'' +
-				", commoditySold='" + commoditySold + '\'' +
-				", commodityPubDate='" + commodityPubDate + '\'' +
-				", commodityStatus=" + commodityStatus +
-				", commodityOPriceMax='" + commodityOPriceMax + '\'' +
-				", commodityOPriceMin='" + commodityOPriceMin + '\'' +
-				", commodityCPriceMax='" + commodityCPriceMax + '\'' +
-				", commodityCPriceMin='" + commodityCPriceMin + '\'' +
-				", commodityOPOfLCP='" + commodityOPOfLCP + '\'' +
-				", commodityType=" + commodityType +
-				", isSpot=" + isSpot +
-				", liveStartTime=" + liveStartTime +
-				", liveEndTime=" + liveEndTime +
-				", create_by='" + create_by + '\'' +
-				", liveId='" + liveId + '\'' +
-				", commodityOriginalPrice='" + commodityOriginalPrice + '\'' +
-				", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +
-				", shopId='" + shopId + '\'' +
-				", shopMid='" + shopMid + '\'' +
-				", commodityShopNumber='" + commodityShopNumber + '\'' +
-				", commodityPicList=" + commodityPicList +
-				", commoditySpecList=" + commoditySpecList +
-				", commodityCode='" + commodityCode + '\'' +
-				", commodityCommission='" + commodityCommission + '\'' +
-				", brandMid='" + brandMid + '\'' +
-				", mallMid='" + mallMid + '\'' +
-				", shopName='" + shopName + '\'' +
-				", supportCourierDeliver=" + supportCourierDeliver +
-				", supportSelfPickup=" + supportSelfPickup +
-				", identity=" + identity +
-				", processIdentity=" + processIdentity +
-				", purchaseCount=" + purchaseCount +
-				'}';
+		return "CommodityVO [commodityId=" + commodityId + ", commodityName=" + commodityName + ", commodityCategory="
+				+ commodityCategory + ", commodityDescription=" + commodityDescription + ", commodityPostage="
+				+ commodityPostage + ", commodityStock=" + commodityStock + ", commoditySold=" + commoditySold
+				+ ", commodityPubDate=" + commodityPubDate + ", commodityStatus=" + commodityStatus
+				+ ", commodityAppStatus=" + commodityAppStatus + ", commodityOPriceMax=" + commodityOPriceMax
+				+ ", commodityOPriceMin=" + commodityOPriceMin + ", commodityCPriceMax=" + commodityCPriceMax
+				+ ", commodityCPriceMin=" + commodityCPriceMin + ", commodityOPOfLCP=" + commodityOPOfLCP
+				+ ", commodityType=" + commodityType + ", isSpot=" + isSpot + ", liveStartTime=" + liveStartTime
+				+ ", liveEndTime=" + liveEndTime + ", create_by=" + create_by + ", liveId=" + liveId
+				+ ", commodityOriginalPrice=" + commodityOriginalPrice + ", commodityCurrentPrice="
+				+ commodityCurrentPrice + ", shopId=" + shopId + ", shopMid=" + shopMid + ", commodityShopNumber="
+				+ commodityShopNumber + ", commodityPicList=" + commodityPicList + ", commoditySpecList="
+				+ commoditySpecList + ", commodityCode=" + commodityCode + ", commodityCommission="
+				+ commodityCommission + ", brandMid=" + brandMid + ", mallMid=" + mallMid + ", shopName=" + shopName
+				+ ", supportCourierDeliver=" + supportCourierDeliver + ", supportSelfPickup=" + supportSelfPickup
+				+ ", registerAt=" + registerAt + ", soldOutAt=" + soldOutAt + ", source=" + source + ", freight="
+				+ freight + ", terminalType=" + terminalType + ", stockStatus=" + stockStatus + ", reason=" + reason
+				+ ", mallId=" + mallId + ", brandName=" + brandName + ", shopNum=" + shopNum + ", brandId=" + brandId
+				+ ", filialeMid=" + filialeMid + ", identity=" + identity + ", processIdentity=" + processIdentity
+				+ ", activityType=" + activityType + ", purchaseCount=" + purchaseCount + "]";
 	}
 	public Integer getSource() {
 		return source;
