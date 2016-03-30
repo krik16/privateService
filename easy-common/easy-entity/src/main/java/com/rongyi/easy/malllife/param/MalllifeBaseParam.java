@@ -20,8 +20,8 @@ public class MalllifeBaseParam implements Serializable {
     private String  jsessionid;//用户信息jsessionid
     private String  appVersion; //APP版本号
     private String  appType; // 0 表示 ios,1表示 android
-    private Integer currentPage; //当前页数
-    private Integer pageSize;//每页显示数
+    private Integer currentPage = 1; //当前页数
+    private Integer pageSize = 300;//每页显示数
 
     public String getJsessionid() {
         return jsessionid;
