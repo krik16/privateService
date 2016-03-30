@@ -11,7 +11,7 @@ public class MyOrderParam implements Serializable{
 	
 	private String  jsessionid;//用户信息jsessionid
 
-	private String status;//1:全部 2待付款 3待收货 4待评价 5售后
+	private String status;//1:全部 2待付款 3待收货 4待评价 5售后  6已完成 7待发货
 	
 	private String currentPage;
 	
