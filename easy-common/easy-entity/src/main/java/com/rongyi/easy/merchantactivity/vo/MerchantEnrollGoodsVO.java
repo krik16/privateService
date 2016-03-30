@@ -209,6 +209,14 @@ public class MerchantEnrollGoodsVO implements Serializable {
 		this.checkStatusName = checkStatusName;
 	}
 
+	public int getActivityStatus() {
+		return activityStatus;
+	}
+
+	public void setActivityStatus(int activityStatus) {
+		this.activityStatus = activityStatus;
+	}
+
 	/**
 	 * ID
 	 */
@@ -219,8 +227,12 @@ public class MerchantEnrollGoodsVO implements Serializable {
 	private String picUrl = "";
 	private int checkStatus = 0;
 	private String checkStatusName = "";
+	// 审核状态
 	private String checkReason = "";
+	// 申请撤销状态
 	private int applyStatus = 0;
+	//活动状态
+	private int activityStatus = 0 ;
 	private Date activityStartAt;
 	private Date activityEndAt;
 	private Date joinStartAt;
