@@ -40,8 +40,6 @@ public class Zones implements Serializable {
 
 	private String slug;//名称拼音
 
-	private String address;
-
 	private String appearance_pic;
 
 	private String telephone;
@@ -109,6 +107,9 @@ public class Zones implements Serializable {
 
 	//商场logo
 	private String icon;
+
+	//商场地址
+	private  String address;
 
 	private String province;
 	private String city;

@@ -10,6 +10,8 @@
 package com.rongyi.easy.solr.param;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.rongyi.easy.malllife.param.MalllifeBaseParam;
 
@@ -71,6 +73,24 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	private String minPrice;	// 最小价格范围
 	
 	private String maxPrice;	// 最大价格范围
+
+	private String zoneId;
+
+	private String commodityCode;
+
+	private List<String> keywordList = new ArrayList<>();
+
+	public List<String> getKeywordList() {
+		return keywordList;
+	}
+
+	public void setKeywordList(List<String> keywordList) {
+		this.keywordList = keywordList;
+	}
+
+	public void addKeywordList(String keyword) {
+		this.keywordList.add(keyword);
+	}
 
 	public Integer getFrom() {
 		return from;
@@ -242,6 +262,22 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	
 	public String getMinPrice() {
 		return minPrice;
+	}
+
+	public String getZoneId() {
+		return zoneId;
+	}
+
+	public void setZoneId(String zoneId) {
+		this.zoneId = zoneId;
+	}
+
+	public String getCommodityCode() {
+		return commodityCode;
+	}
+
+	public void setCommodityCode(String commodityCode) {
+		this.commodityCode = commodityCode;
 	}
 
 	public void setMinPrice(String minPrice) {

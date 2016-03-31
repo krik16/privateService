@@ -49,6 +49,9 @@ public class BusinessAccountVO implements Serializable {
 	private Date stopAt;
 	private String virtualStopReason;   //资金账号停用理由 
 	private Date virtualStopAt;         //资金账号停用时间
+	private Integer isAcc;              //是否加速审核  0是 1否
+	private Date certTime;              //提交审核时间
+	private Integer userStatus;         //用户状态 0未提交审核 2审核中 1审核通过 3审核不通过
 	public Integer getId() {
 		return id;
 	}
@@ -283,5 +286,22 @@ public class BusinessAccountVO implements Serializable {
 	public void setUserAccount(String userAccount) {
 		this.userAccount = userAccount;
 	}
-	
+	public Integer getIsAcc() {
+		return isAcc;
+	}
+	public void setIsAcc(Integer isAcc) {
+		this.isAcc = isAcc;
+	}
+	public Date getCertTime() {
+		return certTime;
+	}
+	public void setCertTime(Date certTime) {
+		this.certTime = certTime;
+	}
+	public Integer getUserStatus() {
+		return userStatus;
+	}
+	public void setUserStatus(Integer userStatus) {
+		this.userStatus = userStatus;
+	}
 }

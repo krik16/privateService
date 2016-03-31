@@ -1,18 +1,22 @@
 package com.rongyi.rss.msob;
 
 import com.rongyi.easy.mallshop.MallShopException;
+import com.rongyi.easy.rmmm.dto.system.SystemMsgDto;
+import com.rongyi.easy.rmmm.entity.RmmmUserInfoEntity;
 import com.rongyi.easy.rmmm.param.system.SystemMsgParam;
 import com.rongyi.easy.rmmm.vo.system.SystemMsgListVo;
+
+import java.util.List;
 
 public interface ISystemMsgService {
 	
 	/**
      * 返回卖家系统消息
-     * @param userId
+     * @param user
      * @return
      * @throws Exception
      */
-    public SystemMsgListVo findsellerMsgList(SystemMsgParam param,Integer userId) throws Exception;
+    public SystemMsgListVo findsellerMsgList(SystemMsgParam param,RmmmUserInfoEntity user) throws Exception;
     
     /**
      * 返回买家系统消息
@@ -43,7 +47,7 @@ public interface ISystemMsgService {
     *
     * @return
     */
-   public Integer getsellMsgCount(Integer userId)throws Exception;
+   public Integer getsellMsgCount(RmmmUserInfoEntity entity)throws Exception;
    
    public Integer getbuyMsgCount(String mallid)throws Exception;
    
@@ -70,5 +74,13 @@ public interface ISystemMsgService {
      * @throws MallShopException
      */
     public int setBuyerRead(SystemMsgParam param) throws MallShopException;
+
+
+    /**
+     * 保存推送消息
+     * @param systemMsgDtoList 推送消息内容
+     * @throws MallShopException
+     */
+    public void savePushMsg(List<SystemMsgDto> systemMsgDtoList)throws MallShopException;
 
 }
