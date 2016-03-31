@@ -11,10 +11,11 @@
     <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
     <result column="update_at" property="updateAt" jdbcType="TIMESTAMP" />
     <result column="is_disabled" property="isDisabled" jdbcType="TINYINT" />
+    <result column="data" property="data" jdbcType="VARCHAR" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.rongyi.easy.rmmm.entity.ExpressPushInfoEntity" extends="BaseResultMap" >
+  <!-- <resultMap id="ResultMapWithBLOBs" type="com.rongyi.easy.rmmm.entity.ExpressPushInfoEntity" extends="BaseResultMap" >
     <result column="data" property="data" typeHandler="com.rongyi.core.common.util.ConvertBlobTypeHandler" />
-  </resultMap>
+  </resultMap> -->
   <sql id="Base_Column_List" >
     id, express_bill_id, company, status, message, state, create_at, update_at, 
     is_disabled
@@ -22,7 +23,7 @@
   <sql id="Blob_Column_List" >
     data
   </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     ,
