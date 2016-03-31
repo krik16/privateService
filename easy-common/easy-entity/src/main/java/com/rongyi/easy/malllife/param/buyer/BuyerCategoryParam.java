@@ -155,6 +155,6 @@ public class BuyerCategoryParam implements Serializable {
 				+ ", bullId=" + bullId + ", liveId=" + liveId + ", commodityType=" + commodityType + ", keyword="
 				+ keyword + ", categoryId=" + categoryId + ", brandId=" + brandId + ", cityName=" + cityName
 				+ ", mallId=" + mallId + ", shopId=" + shopId + ", saleId=" + saleId + ", flashSaleId=" + flashSaleId
-				+ "]";
+				+ ", minPrice=" + minPrice + ", maxPrice=" + maxPrice + "]";
 	}
 }
