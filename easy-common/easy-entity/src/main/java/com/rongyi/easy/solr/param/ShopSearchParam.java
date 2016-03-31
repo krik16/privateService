@@ -18,6 +18,7 @@ public class ShopSearchParam implements Serializable{
 	/** 自定义分类id */
 	private String custom_cat_id;
 	private String city_name; //城市名（如  上海&上海市）
+	private String city_id;
 	private String sort;      //排序规则（distance，null，couponRequired（commodityRequired），date）
 	private int from;         //页
 	private int size = 50;         //一页数量
@@ -143,6 +144,14 @@ public class ShopSearchParam implements Serializable{
 	 */
 	public void setCustom_cat_id(String custom_cat_id) {
 		this.custom_cat_id = custom_cat_id;
+	}
+
+	public String getCity_id() {
+		return city_id;
+	}
+
+	public void setCity_id(String city_id) {
+		this.city_id = city_id;
 	}
 
 	@Override
