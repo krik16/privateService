@@ -144,4 +144,6 @@ public interface IShopService {
 	 * clear cache data
 	 */
 	public void clearCache();
+
+	public String selectNameByIds(List<String> ids);
 }

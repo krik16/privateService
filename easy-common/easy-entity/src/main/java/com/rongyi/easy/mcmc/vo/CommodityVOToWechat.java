@@ -12,7 +12,7 @@ public class CommodityVOToWechat implements Serializable{
     private String img;
     private String name;
     private String currentPrice;
-    private Date registerAt;
+    private String registerAt;
     private String shopName;
     private String weAndTeStatus;
 
@@ -48,11 +48,11 @@ public class CommodityVOToWechat implements Serializable{
         this.currentPrice = currentPrice;
     }
 
-    public Date getRegisterAt() {
+    public String getRegisterAt() {
         return registerAt;
     }
 
-    public void setRegisterAt(Date registerAt) {
+    public void setRegisterAt(String registerAt) {
         this.registerAt = registerAt;
     }
 
