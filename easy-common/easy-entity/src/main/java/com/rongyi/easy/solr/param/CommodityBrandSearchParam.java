@@ -8,7 +8,8 @@ import java.io.Serializable;
  * Created by xgq on 2015/10/30.
  */
 public class CommodityBrandSearchParam extends BaseParam implements Serializable {
-     private Integer currentPage; //当前页数,从1开始
+	private static final long serialVersionUID = -4936781425999899680L;
+	private Integer currentPage; //当前页数,从1开始
     private Integer pageSize;//每页显示数
     private String keyword;
 	public String getKeyword() {
@@ -43,4 +44,11 @@ public class CommodityBrandSearchParam extends BaseParam implements Serializable
     public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
     }
+
+	@Override
+	public String toString() {
+		return "CommodityBrandSearchParam [currentPage=" + currentPage + ", pageSize=" + pageSize + ", keyword="
+				+ keyword + ", categoryId=" + categoryId + "]";
+	}
+    
 }

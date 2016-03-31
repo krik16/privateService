@@ -7,6 +7,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.rongyi.core.common.third.md5.Md5Util;
 import com.rongyi.core.constant.Const;
@@ -63,6 +65,104 @@ public class Util {
 		}
 	}
 
+	/**
+	 * 判断字符串是否为空
+	 * 
+	 * @author wangjianhua
+	 * @param str
+	 * @return true：空 false：非空
+	 */
+	public static boolean isEmpty(String str) {
+		if (null == str || "".equals(str) || "".equals(str.trim())) {
+			return true;
+		}
+		return false;
+	}
 
+	/**
+	 * 判断字符串是否不为空
+	 * 
+	 * @author wangjianhua
+	 * @param str
+	 * @return true：非空 false：空
+	 */
+	public static boolean isNotEmpty(String str) {
+		return !isEmpty(str);
+	}
 
+	/**
+	 * 判断Object对象是否为空
+	 * 
+	 * @author wangjianhua
+	 * @param obj
+	 * @return true：空 false：非空
+	 */
+	public static boolean isEmpty(Object obj) {
+		if (null == obj) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * 判断Object对象是否不为空
+	 * 
+	 * @author wangjianhua
+	 * @param obj
+	 * @return true：非空 false：空
+	 */
+	public static boolean isNotEmpty(Object obj) {
+		return !isEmpty(obj);
+	}
+
+	/**
+	 * 判断List对象是否为空
+	 * 
+	 * @author wangjianhua
+	 * @param str
+	 * @return true：空 false：非空
+	 */
+	public static boolean isEmpty(List<?> list) {
+		if (null == list || 0 == list.size()) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * 判断List对象是否不为空
+	 * 
+	 * @author wangjianhua
+	 * @param str
+	 * @return true：非空 false：空
+	 */
+	public static boolean isNotEmpty(List<?> list) {
+		return !isEmpty(list);
+	}
+
+	/**
+	 * 判断是否是（纯）数字字符串
+	 * 
+	 * @author wangjianhua
+	 * @param str
+	 * @return
+	 */
+	public static boolean isNumber(String input) {
+		return isMatcher("^[\\d]+$", input);
+	}
+
+	/**
+	 * 是否有合适的匹配
+	 * 
+	 * @author wangjianhua
+	 * @param regex
+	 * @param input
+	 * @return
+	 */
+	private static boolean isMatcher(String regex, String input) {
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(input);
+		return matcher.find();
+	}
+	
 }

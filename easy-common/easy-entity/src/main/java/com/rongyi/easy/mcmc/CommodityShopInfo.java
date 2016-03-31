@@ -4,10 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 public class CommodityShopInfo implements Serializable{
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1820458170953909645L;
 	
 	private String shopMid;
@@ -37,6 +33,11 @@ public class CommodityShopInfo implements Serializable{
 	}
 	public void setZoneIds(List<String> zoneIds) {
 		this.zoneIds = zoneIds;
+	}
+	@Override
+	public String toString() {
+		return "CommodityShopInfo [shopMid=" + shopMid + ", brandMid=" + brandMid + ", positon=" + positon
+				+ ", zoneIds=" + zoneIds + "]";
 	}
 	
 }

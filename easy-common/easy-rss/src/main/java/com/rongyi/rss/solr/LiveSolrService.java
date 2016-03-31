@@ -48,4 +48,6 @@ public interface LiveSolrService {
 	 * @return
 	 */
 	public boolean insertLiveIndex(LiveSolrDocument liveDocument);
+
+	public  boolean deleteLiveById(String id);
 }

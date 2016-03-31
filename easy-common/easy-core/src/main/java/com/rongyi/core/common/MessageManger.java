@@ -211,7 +211,7 @@ public class MessageManger {
     public static String sendJianZhouSmsMessage(String phone, String message) {
         BusinessService bs = new BusinessService();
         bs.setWebService("http://www.jianzhou.sh.cn/JianzhouSMSWSServer/services/BusinessService");
-        int temp=bs.sendBatchMessage("sdk_rongyi", "54100171", phone, message);
+        int temp=bs.sendBatchMessage("sdk_rongyi", "5410017144996", phone, message);
         return temp+"";
     }
     /**
