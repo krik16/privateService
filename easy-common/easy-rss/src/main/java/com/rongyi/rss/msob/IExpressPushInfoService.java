@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.rongyi.easy.rmmm.vo.ExpressDataVO;
 import com.rongyi.easy.rmmm.vo.ExpressPushResult;
+import com.rongyi.easy.rmmm.vo.ExpressPushVO;
 
 public interface IExpressPushInfoService {
 	
@@ -13,7 +14,7 @@ public interface IExpressPushInfoService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<ExpressDataVO> getExpressDataVO(String expressOrderId) throws Exception;
+	public ExpressPushVO getExpressPushVO( String expressOrderId) throws Exception;
 	
 	/**
 	 * 快递100推送快递数据 
