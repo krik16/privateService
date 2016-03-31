@@ -139,6 +139,14 @@ public interface McmcCommoditySolrService {
 	public boolean deleteCommodity(String commodityId);
 
 //	public boolean updateCommoditySale(String commodityId, Integer sortPosition);
-public boolean updateCommodityWeAndTeStatus(String commodityId, String  weAndTeStatus);
+	public boolean updateCommodityWeAndTeStatus(String commodityId, String  weAndTeStatus);
+
+	/**
+	 * 更新solr商品终端数据
+	 * @param commodityId	商品ID
+	 * @param terminalType	终端
+	 * @return
+	 */
+	public boolean updateCommodityTerminalType(String commodityId, Integer terminalType);
 
 }
