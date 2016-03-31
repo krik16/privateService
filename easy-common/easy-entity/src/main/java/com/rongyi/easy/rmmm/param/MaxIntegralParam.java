@@ -12,11 +12,11 @@ import java.util.List;
  */
 public class MaxIntegralParam implements Serializable {
 
-	private Double orderPrice;
+	private Double orderPrice = 0.0;
 
-	private Double expressFee;
+	private Double expressFee = 0.0;
 
-	private Double platformRebateAmount;
+	private Double platformRebateAmount = 0.0;
 
 	private List<OrderListParam> orderList;
 

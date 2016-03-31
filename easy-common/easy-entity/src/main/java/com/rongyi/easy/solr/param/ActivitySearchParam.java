@@ -1,6 +1,7 @@
 package com.rongyi.easy.solr.param;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ActivitySearchParam implements Serializable{
@@ -15,8 +16,11 @@ public class ActivitySearchParam implements Serializable{
 	private String coord_x;   //坐标x
 	private String coord_y;   //坐标y
 	private String cat_id;           //0店铺1商场2品牌3分类（类似于美食）
+	/** 自定义分类id */
+	private String custom_cat_id;
 	private String city_name; //城市名（如  上海&上海市）
 	private String sort;      //排序规则（distance，null，couponRequired（commodityRequired），date）
+	private int requiredCoupon = 0;	//需要的优惠券[0：全部、1：代金券、2优惠券]（之前的sort最后一个条件迁移到此）
 	private int from;         //页
 	private int size;         //一页数量
 	private String brand_id;  //品牌id
@@ -25,12 +29,31 @@ public class ActivitySearchParam implements Serializable{
 	private String holder_id;       //优惠券持有者id
 	private boolean couponRequired; //是否只看优惠券
 	private List<String> shopList;    //终端机参数 店铺id List
-	
+ 	
 	private String mallId; // mall Id for 终端屏
 	private String startLetter;  // 首字母 for 终端屏
 
 	private String showChannel;//展示渠道  APP：4，互动屏：5, 微信：6    不填时默认app
+	private List<String> keywordList = new ArrayList<>();
+
+	public List<String> getKeywordList() {
+		return keywordList;
+	}
+
+	public void setKeywordList(List<String> keywordList) {
+		this.keywordList = keywordList;
+	}
+
+	public void addKeywordList(String keyword) {
+		this.keywordList.add(keyword);
+	}
 	
+	public int getRequiredCoupon() {
+		return requiredCoupon;
+	}
+	public void setRequiredCoupon(int requiredCoupon) {
+		this.requiredCoupon = requiredCoupon;
+	}
 	public String getKeyword() {
 		return keyword;
 	}
@@ -146,27 +169,27 @@ public class ActivitySearchParam implements Serializable{
 		this.showChannel = showChannel;
 	}
 
+	/**
+	 * @return the custom_cat_id
+	 */
+	public String getCustom_cat_id() {
+		return custom_cat_id;
+	}
+	
+	/**
+	 * @param custom_cat_id the custom_cat_id to set
+	 */
+	public void setCustom_cat_id(String custom_cat_id) {
+		this.custom_cat_id = custom_cat_id;
+	}
 	@Override
 	public String toString() {
-		return "ActivitySearchParam{" +
-				"keyword='" + keyword + '\'' +
-				", distance=" + distance +
-				", coord_x='" + coord_x + '\'' +
-				", coord_y='" + coord_y + '\'' +
-				", cat_id='" + cat_id + '\'' +
-				", city_name='" + city_name + '\'' +
-				", sort='" + sort + '\'' +
-				", from=" + from +
-				", size=" + size +
-				", brand_id='" + brand_id + '\'' +
-				", zone_id='" + zone_id + '\'' +
-				", shop_id='" + shop_id + '\'' +
-				", holder_id='" + holder_id + '\'' +
-				", couponRequired=" + couponRequired +
-				", shopList=" + shopList +
-				", mallId='" + mallId + '\'' +
-				", startLetter='" + startLetter + '\'' +
-				", showChannel='" + showChannel + '\'' +
-				'}';
+		return "ActivitySearchParam [keyword=" + keyword + ", distance=" + distance + ", coord_x=" + coord_x
+				+ ", coord_y=" + coord_y + ", cat_id=" + cat_id + ", custom_cat_id=" + custom_cat_id + ", city_name="
+				+ city_name + ", sort=" + sort + ", requiredCoupon=" + requiredCoupon + ", from=" + from + ", size="
+				+ size + ", brand_id=" + brand_id + ", zone_id=" + zone_id + ", shop_id=" + shop_id + ", holder_id="
+				+ holder_id + ", couponRequired=" + couponRequired + ", shopList=" + shopList + ", mallId=" + mallId
+				+ ", startLetter=" + startLetter + ", showChannel=" + showChannel + ", keywordList=" + keywordList + "]";
 	}
+	
 }

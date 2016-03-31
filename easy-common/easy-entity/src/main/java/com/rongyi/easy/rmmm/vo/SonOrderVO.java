@@ -10,21 +10,28 @@ public class SonOrderVO implements Serializable{
 
 	private String num;// 下单数量
 
+	private BigDecimal integralDiscount;//积分抵扣
+	private BigDecimal commodityAmount;//子订单商品总价
+	private BigDecimal voucherDiscount;//平台促销券抵扣
+	private BigDecimal hbDiscount;//红包抵扣
+	private BigDecimal commodityDiscount;//单个订单明细折扣
+
 	private List<CommoditySpecColumnVO> specColumnValues;// 规格参数
 
 	private String commodityPic;// 商品图片
 
-	private String commodityCurrentPrice;// 商品现价
+	private String commodityCurrentPrice = "0";// 商品现价
 
-	private String commodityOriginalPrice;// 商品原价
+	private String commodityOriginalPrice = "0";// 商品原价
 	
-	private BigDecimal realAmount;// 子订单实际价格
+	private BigDecimal realAmount = BigDecimal.valueOf(0.0);// 子订单实际价格
 
 	private String sonOrderStatus;// 子订单状态（含有维权状态）
 
-	private String refundStatus;// 退款状态
+	private String refundStatus = "0";// 退款状态
 
-	private String commodityId;// 商品编号
+	private String commodityId;// 商品id
+	private String commodityNo;// 商品编号
 
 	private String commodityName;// 商品名称
 
@@ -38,7 +45,7 @@ public class SonOrderVO implements Serializable{
 
 	private String couponCode;// 卡券码
 
-	private String discount;// 抵扣金额
+	private String discount = "0";// 抵扣金额
 
 	private String description;// 全场红包/店铺红包
 	private String liveName;//直播名
@@ -90,12 +97,61 @@ public class SonOrderVO implements Serializable{
 		this.commodityCurrentPrice = commodityCurrentPrice;
 	}
 
+	public BigDecimal getCommodityDiscount() {
+		return commodityDiscount;
+	}
+
+	public void setCommodityDiscount(BigDecimal commodityDiscount) {
+		this.commodityDiscount = commodityDiscount;
+	}
+
 	public String getCommodityOriginalPrice() {
 		return commodityOriginalPrice;
 	}
 
+	public String getCommodityNo() {
+		return commodityNo;
+	}
+
+	public void setCommodityNo(String commodityNo) {
+		this.commodityNo = commodityNo;
+	}
+
 	public void setCommodityOriginalPrice(String commodityOriginalPrice) {
 		this.commodityOriginalPrice = commodityOriginalPrice;
+	}
+
+
+	public BigDecimal getVoucherDiscount() {
+		return voucherDiscount;
+	}
+
+	public BigDecimal getIntegralDiscount() {
+		return integralDiscount;
+	}
+
+	public void setIntegralDiscount(BigDecimal integralDiscount) {
+		this.integralDiscount = integralDiscount;
+	}
+
+	public BigDecimal getCommodityAmount() {
+		return commodityAmount;
+	}
+
+	public void setCommodityAmount(BigDecimal commodityAmount) {
+		this.commodityAmount = commodityAmount;
+	}
+
+	public void setVoucherDiscount(BigDecimal voucherDiscount) {
+		this.voucherDiscount = voucherDiscount;
+	}
+
+	public BigDecimal getHbDiscount() {
+		return hbDiscount;
+	}
+
+	public void setHbDiscount(BigDecimal hbDiscount) {
+		this.hbDiscount = hbDiscount;
 	}
 
 	public String getSonOrderStatus() {

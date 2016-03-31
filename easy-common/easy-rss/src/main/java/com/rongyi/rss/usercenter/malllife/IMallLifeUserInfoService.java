@@ -1,18 +1,13 @@
-package com.rongyi.rss.usercenter.malllife;/*
- * Copyright (C),上海容易网电子商务有限公司
- * Author:  俞志坚
- * Description:  
- * time:  2015/11/19
- * History: 变更记录
- * <author>           <time>             <version>        <desc>
- * 俞志坚             2015/11/19              1.0            创建文件
- *
- */
-
+package com.rongyi.rss.usercenter.malllife;
+  
+import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.malllife.param.MalllifeUser;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
+import com.rongyi.easy.msgcenter.UsersParamDto;
 import com.rongyi.easy.usercenter.dto.malllife.MalllifeUserInfoDto;
+import com.rongyi.easy.usercenter.dto.malllife.MalllifeUserListInfoDto;
 import com.rongyi.easy.usercenter.entity.MalllifeUserInfoEntity;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -26,8 +21,8 @@ public interface IMallLifeUserInfoService {
      * @param malllifeUser 用户参数信息
      * @throws Exception
      */
-    public void registUser(MalllifeUser malllifeUser) throws Exception;
-
+    public String registUser(MalllifeUser malllifeUser) throws Exception;
+ 
     /**
      * 根据用户Id查询 uuid
      * @param id
@@ -190,6 +185,19 @@ public interface IMallLifeUserInfoService {
      * @throws Exception
      */
     public MalllifeUserInfoDto getByIdorPhone(String IdorPhone,int type,int flag) throws Exception;
+
+    /**
+     * 红包推送查询用户列表
+     * @param usersParamDto
+     * @return
+     */
+    public PagingVO<MalllifeUserListInfoDto>  findUsesByPage(UsersParamDto usersParamDto) throws Exception;
+
+    /**
+     * 红包推送 查询用户的id
+     * @return
+     */
+    public List<MalllifeUserListInfoDto> findAllUserIds();
 
 
 }

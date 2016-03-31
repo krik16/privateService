@@ -1,5 +1,7 @@
 package com.rongyi.easy.rmmm.param;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 
 /**
@@ -58,5 +60,16 @@ public class StarShopListParam implements Serializable{
 	public void setLatitude(String latitude) {
 		this.latitude = latitude;
 	}
-	
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append("cityId", cityId)
+				.append("cityName", cityName)
+				.append("jsessionid", jsessionid)
+				.append("version", version)
+				.append("longitude", longitude)
+				.append("latitude", latitude)
+				.toString();
+	}
 }

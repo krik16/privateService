@@ -1,11 +1,11 @@
 package com.rongyi.easy.coupon.entity;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import java.beans.Transient;
 import java.io.Serializable;
 import java.util.Date;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * 老用户代金券
@@ -148,6 +148,15 @@ public class UserCoupon implements Serializable {
 
     private Double refundAmount;
 
+    /**
+     * 退款id
+     */
+    private String refundId;
+
+
+    private Integer couponChannel;//券码类型 5哈根达斯 6中影 7纵漫线美漫大趴 8星巴克
+
+    private Integer couponShowType;//券码展示类型 0默认 1url 2二维码
 
     public UserCoupon() {
 
@@ -449,6 +458,35 @@ public class UserCoupon implements Serializable {
         this.refundAmount = refundAmount;
     }
 
+    public String getRefundId()
+    {
+        return refundId;
+    }
+
+    public void setRefundId(String refundId)
+    {
+        this.refundId = refundId;
+    }
+
+    public Integer getCouponChannel()
+    {
+        return couponChannel;
+    }
+
+    public void setCouponChannel(Integer couponChannel)
+    {
+        this.couponChannel = couponChannel;
+    }
+
+    public Integer getCouponShowType()
+    {
+        return couponShowType;
+    }
+
+    public void setCouponShowType(Integer couponShowType)
+    {
+        this.couponShowType = couponShowType;
+    }
 
     //    使用状态: 未使用[1],已使用[2],已过期[3]
     public void setConvertStatus(Integer status, Date validEndAt) {
@@ -490,7 +528,76 @@ public class UserCoupon implements Serializable {
                 .append("endTime", endTime)
                 .append("checkUserId", checkUserId)
                 .append("refundAmount", refundAmount)
+                .append("refundId", refundId)
+                .append("couponChannel", couponChannel)
+                .append("couponShowType", couponShowType)
                 .toString();
     }
 
+    private String holderId;
+
+    private String holderType;
+    
+    private String holderName;
+
+    private Integer apply_shops_count; // 可用店铺数
+    
+	/**
+	 * @return the holderId
+	 */
+	public String getHolderId() {
+		return holderId;
+	}
+
+	/**
+	 * @param holderId the holderId to set
+	 */
+	public void setHolderId(String holderId) {
+		this.holderId = holderId;
+	}
+
+	/**
+	 * @return the holderType
+	 */
+	public String getHolderType() {
+		return holderType;
+	}
+
+	/**
+	 * @param holderType the holderType to set
+	 */
+	public void setHolderType(String holderType) {
+		this.holderType = holderType;
+	}
+
+	/**
+	 * @return the holderName
+	 */
+	public String getHolderName() {
+		return holderName;
+	}
+
+	/**
+	 * @param holderName the holderName to set
+	 */
+	public void setHolderName(String holderName) {
+		this.holderName = holderName;
+	}
+
+	/**
+	 * @return the apply_shops_count
+	 */
+	public Integer getApply_shops_count() {
+		return apply_shops_count;
+	}
+
+	/**
+	 * @param apply_shops_count the apply_shops_count to set
+	 */
+	public void setApply_shops_count(Integer apply_shops_count) {
+		this.apply_shops_count = apply_shops_count;
+	}
+    
+    
+    
 }

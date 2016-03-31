@@ -5,7 +5,7 @@ package com.rongyi.core.enumerate.mcmc;
  * @author xiaobo
  *
  */
-public enum CommodityStatus {
+public enum CommodityStatus{
 	/**
 	 * 上架
 	 */

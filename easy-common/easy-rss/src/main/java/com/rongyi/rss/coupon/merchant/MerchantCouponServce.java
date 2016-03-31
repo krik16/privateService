@@ -1,7 +1,10 @@
+
 package com.rongyi.rss.coupon.merchant;
 
 import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.entity.CouponRejectRecord;
+import com.rongyi.easy.coupon.param.ActivityCouponParam;
+import com.rongyi.easy.coupon.param.CouponParam;
 import com.rongyi.easy.coupon.vo.merchant.MerchantPaging;
 import com.rongyi.easy.coupon.vo.merchant.StatisticsCountVO;
 import com.rongyi.easy.coupon.vo.merchant.UserInfoVo;
@@ -16,11 +19,13 @@ import  java.util.List;
 public interface MerchantCouponServce {
 
     /**
-     * 商家卡券管理后台查询卡券列表
+     * 卡券查询通用接口
      * @param queryParam
      * @return
-     *//*
-    public PagingVO<Coupon> getCouponByPage(QueryParam queryParam);*/
+     */
+    public MerchantPaging<Coupon> getCouponByPageMysql(QueryParam queryParam);
+
+
 
     /**
      *商家卡券通用查询接口
@@ -38,11 +43,28 @@ public interface MerchantCouponServce {
     public MerchantPaging<Coupon> getCouponByPageMysql(QueryParam queryParam,UserInfoVo UserInfoVo,Boolean requiredCount);
 
     /**
+     * 商家卡券通用查询接口
+     * @param queryParam 查询参数
+     * @param UserInfoVo
+     * @return id列表
+     */
+    public List<String> getCouponIds(QueryParam queryParam,UserInfoVo UserInfoVo);
+
+    /**
      * 商家优惠券，新增，修改，审核，删除等操作
      * @param coupon
      * @return
      */
     public Boolean updateCoupon(Coupon coupon,UserInfoVo userInfoVo) throws  Exception;
+
+    /**
+     * 商家卡券活动券的创建
+     * @param coupon
+     * @param userInfoVo
+     * @return
+     * @throws Exception
+     */
+    public String createActivityCoupon(Coupon coupon, final UserInfoVo userInfoVo) throws Exception;
 
     /**
      * 插入一条coupon
@@ -75,3 +97,4 @@ public interface MerchantCouponServce {
     public Coupon selectByPrimaryKey(String couponId);
 
 }
+ 

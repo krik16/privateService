@@ -1,10 +1,12 @@
 package com.rongyi.rss.coupon;
 
 import com.rongyi.core.bean.ResponseResult;
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.entity.CouponActivity;
 import com.rongyi.easy.coupon.param.CouponParam;
+import com.rongyi.easy.coupon.vo.CouponPageVO;
 import com.rongyi.easy.coupon.vo.TCCouponVO;
 import com.rongyi.easy.coupon.vo.VoucherRelatedObjectVO;
 
@@ -14,6 +16,8 @@ import java.util.List;
  * 新版卡券接口
  *
  * @author Breggor
+ *
+ *
  */
 public interface RoaCouponService {
 
@@ -24,6 +28,14 @@ public interface RoaCouponService {
      * @return
      */
     boolean create(Coupon coupon);
+
+    /**
+     * 更新卡券
+     *
+     * @param coupon
+     * @return
+     */
+    boolean update(Coupon coupon);
 
     /**
      * 追加库存量
@@ -184,4 +196,38 @@ public interface RoaCouponService {
      * @return true:可退 | false：不可退
      */
     boolean isCanRefundCoupon(String couponId);
+
+    /**
+     * 获取shopId集合中关联了进行中的代金券的shopId
+     * @param shopIds 店铺id集合
+     * @param synTarget 信息同步终端: 容易逛,互动屏,微信 [1,1,1]表示三个都选中，传入通配格式'_,1,_'
+     * @return 关联代金券的店铺id集合
+     */
+    List<String> getVoucherShopIds(List<String> shopIds, String synTarget);
+
+    /**
+     * 校验摩店登录的人是否有操作这张券的权限
+     * 摩店两种角色：店长、导购，两种角色只能操作关联类型是店铺的券
+     * @param userId 用户id
+     * @param couponId 卡券id
+     * @return ResponseVO 有权限errno=0，没权限errno=1020831, msg="您无权限操作，如需修改请联系集团管理员"
+     *                                         errno=1020832, msg="您无权限操作，如需修改请联系品牌管理员"
+     *                                         errno=1020833, msg="您无权限操作，如需修改请联系商场管理员"
+     * @author lqy
+     */
+    ResponseVO checkMallShopAuthority(Integer userId, String couponId);
+
+    /**
+     * 根据分页信息返回Coupon列表
+     * @param skip		当前页
+     * @param pageSize	分页条数
+     * @return
+     */
+    CouponPageVO getCouponList(int skip, int pageSize);
+
+    /**
+     * 获取卡券总数
+     * @return
+     */
+	long getCouponCount();
 }

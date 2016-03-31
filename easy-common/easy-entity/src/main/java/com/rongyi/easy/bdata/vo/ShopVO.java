@@ -259,4 +259,17 @@ public class ShopVO implements Serializable {
 		this.qrcodePic = qrcodePic;
 	}
 	
+	@Override
+	public String toString() {
+		return "ShopVO [id=" + id + ", name=" + name + ", iconUrl=" + iconUrl + ", shopType=" + shopType
+				+ ", shopNature=" + shopNature + ", status=" + status + ", recommend=" + recommend + ", valid=" + valid
+				+ ", position=" + position + ", address=" + address + ", telephone=" + telephone
+				+ ", averageConsumption=" + averageConsumption + ", businessHours=" + businessHours + ", description="
+				+ description + ", brandId=" + brandId + ", brandName=" + brandName + ", categories=" + categories
+				+ ", terminalImgs=" + terminalImgs + ", location=" + location + ", filialeId=" + filialeId
+				+ ", customCateIds=" + customCateIds + ", coordinate=" + coordinate + ", doorCoordinate="
+				+ doorCoordinate + ", slug=" + slug + ", tags=" + tags + ", createdAt=" + createdAt + ", updateAt="
+				+ updateAt + ", qrcodePic=" + qrcodePic + "]";
+	}
+	
 }

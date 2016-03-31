@@ -13,6 +13,7 @@ public class ShopMallVO implements Serializable {
 
 	private String shopId;// 店铺mysqlid
 	private String shopName;// 店铺名字
+	private String shopLogo;//店铺logo
 	private String shopMid;// shop mongoId
 	private String mallId;// 商场mysqlid
 	private String mallName;// 商场名字
@@ -40,6 +41,14 @@ public class ShopMallVO implements Serializable {
 
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
+	}
+	
+	public String getShopLogo() {
+		return shopLogo;
+	}
+
+	public void setShopLogo(String shopLogo) {
+		this.shopLogo = shopLogo;
 	}
 
 	public String getShopMid() {

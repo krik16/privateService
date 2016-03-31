@@ -1,11 +1,12 @@
 package com.rongyi.easy.coupon.entity;
 
 
-import com.rongyi.core.util.AmountConversion;
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import java.io.Serializable;
 import java.util.Date;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.rongyi.core.util.AmountConversion;
 
 /**
  * 用户抵扣券
@@ -437,6 +438,18 @@ public class UserRedenvelope implements Serializable {
             return false;
         else if (UserRedenvelope.STATUS_UNUSE.equals(status) && new Date().after(validEndAt))
             return false;
+        return false;
+    }
+
+    /**
+     * 判断是否可使用(不校验状态)
+     * 下单后如果商品改价了，这个时候不校验状态，默认校验[抵扣券购买商品时]
+     * @return
+     */
+    public boolean isUsableNotValidStatus() {
+        if (new Date().before(validEndAt) && new Date().after(validStartAt)) {
+            return true;
+        }
         return false;
     }
 

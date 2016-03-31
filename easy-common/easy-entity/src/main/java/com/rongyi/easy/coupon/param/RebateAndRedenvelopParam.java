@@ -67,6 +67,11 @@ public class RebateAndRedenvelopParam implements Serializable {
     private Integer preferentialType;
 
     /**
+     * 是否校验抵扣券的状态，下单后如果商品改价了，这个时候不校验状态，默认校验[抵扣券购买商品时]
+     */
+    private Boolean isValidStatus = Boolean.TRUE;
+
+    /**
      * 当前页从1开始
      */
     private Integer currentPage;
@@ -219,6 +224,14 @@ public class RebateAndRedenvelopParam implements Serializable {
 
     public void setApplyObject(Integer applyObject) {
         this.applyObject = applyObject;
+    }
+
+    public Boolean getIsValidStatus() {
+        return isValidStatus;
+    }
+
+    public void setIsValidStatus(Boolean isValidStatus) {
+        this.isValidStatus = isValidStatus;
     }
 
     /**

@@ -1,5 +1,7 @@
 package com.rongyi.easy.coupon.param;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 
 /**
@@ -103,5 +105,19 @@ public class UserRebateParam implements Serializable {
 
     public void setCurrentPage(Integer currentPage) {
         this.currentPage = currentPage;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("userId", userId)
+                .append("couponId", couponId)
+                .append("couponCode", couponCode)
+                .append("channel", channel)
+                .append("activityId", activityId)
+                .append("activityName", activityName)
+                .append("pageSize", pageSize)
+                .append("currentPage", currentPage)
+                .toString();
     }
 }

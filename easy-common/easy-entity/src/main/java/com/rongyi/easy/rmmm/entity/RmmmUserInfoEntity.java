@@ -68,7 +68,7 @@ public class RmmmUserInfoEntity implements Serializable{
     private String userIMCount;
     private String devId;//登录时获取当前设备Id
     private Integer type;  // 1 导购 2买手
-    private Integer identity;
+    private Integer identity;//身份类型:0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购，6买手
     private Integer isCooperation;
     private String memo;
     private Integer createSource;
@@ -77,7 +77,12 @@ public class RmmmUserInfoEntity implements Serializable{
 
     private String userDesc;//用户简介
 
+    private String pushId;//消息推送Id
+
    // private List<Integer> identityTypeList; //用户账号身份列表
+    private String useCode; //注册使用的邀请码
+    
+    private String jsessionid; //用户摩店登录标识
 
     public Integer getId() {
 		return id;
@@ -300,4 +305,30 @@ public class RmmmUserInfoEntity implements Serializable{
 
     public void setSharCode(String sharCode) {
         this.sharCode = sharCode;
-    }}
+    }
+
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
+    }
+
+	public String getUseCode() {
+		return useCode;
+	}
+
+	public void setUseCode(String useCode) {
+		this.useCode = useCode;
+	}
+
+	public String getJsessionid() {
+		return jsessionid;
+	}
+
+	public void setJsessionid(String jsessionid) {
+		this.jsessionid = jsessionid;
+	}
+}
+

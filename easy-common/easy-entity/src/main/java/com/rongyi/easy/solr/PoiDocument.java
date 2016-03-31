@@ -10,9 +10,18 @@
 package com.rongyi.easy.solr;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
+import com.rongyi.core.util.ListUtil;
+import com.rongyi.easy.mcmc.Zones;
+import com.rongyi.easy.shop.entity.ShopEntity;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.solr.client.solrj.beans.Field;
+import org.bson.types.ObjectId;
 
 /**
  * @author ZhengYl
@@ -51,7 +60,7 @@ public class PoiDocument implements Serializable {
 	private String text;
 
 	@Field("key_tags")
-	private String key_tags;
+	private List<String> key_tags;
 
 	@Field("brand_ids")
 	private String brand_ids;
@@ -64,6 +73,9 @@ public class PoiDocument implements Serializable {
 
 	@Field("category_ids")
 	private List<String> category_ids;
+	
+	@Field("custom_category_ids")
+	private List<String> custom_category_ids;
 
 	@Field("shop_nature")
 	private Integer shop_nature;
@@ -124,6 +136,136 @@ public class PoiDocument implements Serializable {
 	
 	@Field("mall")
 	private Integer mall;
+
+	private String appearance_pic;
+
+	public PoiDocument() {
+	}
+
+	public PoiDocument(ShopEntity shop) {
+
+		id=shop.getId().toString();
+		has_activity=false;
+		if(shop.getValid()!=null)
+			valid=shop.getValid().toString();
+		if(StringUtils.isNotBlank(shop.getName())){
+			var_poi_chinese=shop.getName();
+			var_poi_chinese_str=shop.getName().toLowerCase();
+		}
+		if(StringUtils.isNotBlank(shop.getSlug()))
+			slug=shop.getSlug().replaceAll("-"," ");
+
+		if(CollectionUtils.isNotEmpty(shop.getProduction_ids())){
+			production_ids=new ArrayList<String>();
+			for(ObjectId id:shop.getProduction_ids()){
+				production_ids.add(id.toString());
+			}
+		}
+		//key_tags=shop.getKey_tags(); 该字段可以是List<String> 可以废除
+		/*if(dbObject.get("key_tags") != null)
+			shop.setKey_tags(stringToArrayList(dbObject.get("key_tags").toString()));*/
+		if(StringUtils.isNotBlank(shop.getKey_tags()))
+			key_tags=Arrays.asList(shop.getKey_tags().split("[\u3000\\s]+"));
+		if(shop.getBrand_id()!=null)
+			brand_ids=shop.getBrand_id().toString();
+		if(shop.getValid()!=null&&shop.getValid().toString().equals("0"))
+			valid="0";
+		else
+			valid="1";
+
+		if(StringUtils.isNotBlank(shop.getTelephone())){
+			if(shop.getTelephone().indexOf("(")>0){
+				telephone=shop.getTelephone().substring(0, shop.getTelephone().indexOf("(")).replaceAll(" ", "-");
+			}else if(shop.getTelephone().indexOf("（")>0){
+				telephone=shop.getTelephone().substring(0, shop.getTelephone().indexOf("（")).replaceAll(" ", "-");
+			}else if(shop.getTelephone().indexOf("/")>0){
+				telephone=shop.getTelephone().substring(0, shop.getTelephone().indexOf("/")).replaceAll(" ", "-");
+			}else{
+				telephone=shop.getTelephone().replaceAll(" ", "-");
+			}
+		}
+
+		if(CollectionUtils.isNotEmpty(shop.getLocation())){
+			position=shop.getLocation().toString().substring(1,shop.getLocation().toString().length()-1);
+		}
+		if(StringUtils.isNotBlank(shop.getDescription()))
+			description=shop.getDescription();
+		if(StringUtils.isNotBlank(shop.getShop_nature()))
+			shop_nature=Integer.valueOf(shop.getShop_nature());
+		if(StringUtils.isNotBlank(shop.getShop_type()))
+			shop_type=shop.getShop_type();
+		if(shop.getRank()!=null)
+			rank=shop.getRank();
+		if(CollectionUtils.isNotEmpty(shop.getCustom_category_ids())){
+			custom_category_ids=new ArrayList<String>();
+			for(ObjectId id:shop.getCustom_category_ids()){
+				if(id!=null)
+					custom_category_ids.add(id.toString());
+			}
+		}
+		mall=0;
+		if(CollectionUtils.isNotEmpty(shop.getZone_ids()))
+			zone_ids= ListUtil.toStringList(shop.getZone_ids());
+	}
+
+
+	/*public  PoiDocument(Zones zone){
+
+		if(zone.getMall_valid()!=0)
+			valid="1";
+		else
+			valid="0";
+		if(StringUtils.isNotBlank(zone.getName())){
+			var_poi_chinese=zone.getName();
+			var_poi_chinese_str=zone.getName().toLowerCase();
+		}
+		if(CollectionUtils.isNotEmpty(zone.getMain_categories())){
+			tags=new ArrayList<String>();
+			for(com.rongyi.easy.roa.entity.CategoriesEntity category:zone.getMain_categories()){
+				tags.add(category.getName());
+			}
+		}
+		rank=zone.getRank();
+		if(StringUtils.isNotBlank(zone.getSlug())){
+			slug=zone.getSlug();
+		}
+
+		if(CollectionUtils.isNotEmpty(zone.getLocation())){
+			position=zone.getLocation().toString().substring(1,zone.getLocation().toString().length()-1);
+		}
+		if(StringUtils.isNotBlank(zone.getIcon()))
+			icon="/system/mall/icon/"+zone.getId().toString()+"/"+zone.getIcon();
+		if(StringUtils.isNotBlank(zone.getAppearance_pic())&&zone.getCreated_at()!=null){
+
+		}
+		if(dbObject.get("appearance_pic") != null){
+			Date create=new Date(dbObject.get("created_at").toString());
+			zone.setAppearance_pic("/system/mall/appearance_pic/"+(create.getYear()+1900)+"/"+(create.getMonth()+1)+"/"+dbObject.get("_id").toString()+"/"+dbObject.get("appearance_pic").toString());
+		}
+
+		if(dbObject.get("telephone")!=null&&!dbObject.get("telephone").toString().equalsIgnoreCase("")){
+			String telephoneString=dbObject.get("telephone").toString();
+			if(telephoneString.indexOf("(")>0){
+				zone.setTelephone(telephoneString.substring(0, telephoneString.indexOf("(")).replaceAll(" ", "-"));
+			}else if(telephoneString.indexOf("（")>0){
+				zone.setTelephone(telephoneString.substring(0, telephoneString.indexOf("（")).replaceAll(" ", "-"));
+			}else if(telephoneString.indexOf("/")>0){
+				zone.setTelephone(telephoneString.substring(0, telephoneString.indexOf("/")).replaceAll(" ", "-"));
+			}else{
+				zone.setTelephone(telephoneString.replaceAll(" ", "-"));
+			}
+		}
+
+		if(dbObject.get("parent_ids") != null) {
+			if (type == 0) // 获取id
+				zone.setZoneList((ArrayList<String>)dbObject.get("parent_ids"));
+			else { // 获取mall中parent_ids对应的name值
+				zone.setZoneIds((ArrayList<String>) dbObject.get("parent_ids"));
+				zone.setZoneList(getZoneList(dbObject.get("parent_ids")));
+			}
+		}
+	}*/
+
 
 	public String getId() {
 		return id;
@@ -197,11 +339,11 @@ public class PoiDocument implements Serializable {
 		this.text = text;
 	}
 
-	public String getKey_tags() {
+	public List<String> getKey_tags() {
 		return key_tags;
 	}
 
-	public void setKey_tags(String key_tags) {
+	public void setKey_tags(List<String> key_tags) {
 		this.key_tags = key_tags;
 	}
 
@@ -397,7 +539,27 @@ public class PoiDocument implements Serializable {
 		this.mall = mall;
 	}
 
-	
-	
+	/**
+	 * @return the custom_category_ids
+	 */
+	public List<String> getCustom_category_ids() {
+		return custom_category_ids;
+	}
+
+	/**
+	 * @param custom_category_ids the custom_category_ids to set
+	 */
+	public void setCustom_category_ids(List<String> custom_category_ids) {
+		this.custom_category_ids = custom_category_ids;
+	}
+
+	public String getAppearance_pic() {
+		return appearance_pic;
+	}
+
+	public void setAppearance_pic(String appearance_pic) {
+		this.appearance_pic = appearance_pic;
+	}
+
 
 }

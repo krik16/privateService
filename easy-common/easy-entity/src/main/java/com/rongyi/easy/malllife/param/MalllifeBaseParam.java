@@ -9,9 +9,9 @@ package com.rongyi.easy.malllife.param;/*
  *
  */
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import java.io.Serializable;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class MalllifeBaseParam implements Serializable {
 
@@ -20,6 +20,7 @@ public class MalllifeBaseParam implements Serializable {
     private String  jsessionid;//用户信息jsessionid
     private String  appVersion; //APP版本号
     private String  appType; // 0 表示 ios,1表示 android
+    @Deprecated  // 当前 前端未传值 获取数据错误！！！！！！！ 直接使用from
     private Integer currentPage; //当前页数
     private Integer pageSize;//每页显示数
 

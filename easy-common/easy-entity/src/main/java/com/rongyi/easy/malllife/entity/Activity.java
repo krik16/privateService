@@ -30,7 +30,10 @@ public class Activity  extends MalllifeBaseParam  implements Serializable {
 
     private Integer totalDiscountAmount;
     
-    private Integer status;
+    private float originalPrice;
+  
+
+	private Integer status;
     private String activityId;
     private String mobile;
     private int isSelf;
@@ -146,7 +149,14 @@ public class Activity  extends MalllifeBaseParam  implements Serializable {
     public void setStatus(Integer status) {
         this.status = status;
     }
+    
+    public float getOriginalPrice() {
+		return originalPrice;
+	}
 
+	public void setOriginalPrice(float originalPrice) {
+		this.originalPrice = originalPrice;
+	}
 	@Override
 	public String toString() {
 		return "Activity [id=" + id + ", userId=" + userId + ", commodityId="

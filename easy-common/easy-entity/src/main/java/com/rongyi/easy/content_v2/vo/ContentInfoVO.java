@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.rongyi.core.common.util.DateTool;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * 返回给页面的内容详情
  * @author lijing
@@ -24,6 +26,8 @@ public class ContentInfoVO implements Serializable{
     /**存放图片的全路径*/
     
     private String picName;
+	/**banner背景图片*/
+	private String bannerBackgroundPic;
     /**内容管理的详情的标题*/
     private String title;
     /**活动的子标题*/
@@ -34,6 +38,7 @@ public class ContentInfoVO implements Serializable{
     private Integer type;
     /**id值 对应的是上面类型所对应的id      如类型为商场 则id是商场的id*/
     private String typeVal;
+	private String typeName;
     /**店铺ids*/
     private String shopIds;
     /**店铺的名字 样式为店铺名（id）;*/
@@ -51,7 +56,7 @@ public class ContentInfoVO implements Serializable{
     /**修改时间*/
     private Date updateAt;
   
-    /**记录状态 0待发布、1已发布、2已关闭*/
+    /**记录状态 0待发布、1已发布、2已关闭 4已结束*/
     private Integer status;
     
     /**
@@ -224,21 +229,23 @@ public class ContentInfoVO implements Serializable{
 		this.picName = picName;
 	}
 
-
-
-	@Override
-	public String toString() {
-		return "ContentInfoVO [id=" + id + ", provName=" + provName
-				+ ", provId=" + provId + ", cityName=" + cityName + ", cityId="
-				+ cityId + ", picName=" + picName + ", title=" + title
-				+ ", subtitle=" + subtitle + ", modelName=" + modelName
-				+ ", type=" + type + ", typeVal=" + typeVal + ", shopIds="
-				+ shopIds + ", shopNames=" + shopNames + ", publishBeginAt="
-				+ publishBeginAt + ", publishEndAt=" + publishEndAt
-				+ ", createUser=" + createUser + ", createAt=" + createAt
-				+ ", updateUser=" + updateUser + ", updateAt=" + updateAt
-				+ ", status=" + status + ", positionId=" + positionId + "]";
+	public String getBannerBackgroundPic() {
+		return bannerBackgroundPic;
 	}
+
+	public void setBannerBackgroundPic(String bannerBackgroundPic) {
+		this.bannerBackgroundPic = bannerBackgroundPic;
+	}
+
+	public String getTypeName() {
+		return typeName;
+	}
+
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
+	}
+
+
 
 	public Integer getPositionId() {
 		return positionId;
@@ -247,6 +254,33 @@ public class ContentInfoVO implements Serializable{
 	public void setPositionId(Integer positionId) {
 		this.positionId = positionId;
 	}
-    
-    
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append("id", id)
+				.append("provName", provName)
+				.append("provId", provId)
+				.append("cityName", cityName)
+				.append("cityId", cityId)
+				.append("picName", picName)
+				.append("bannerBackgroundPic", bannerBackgroundPic)
+				.append("title", title)
+				.append("subtitle", subtitle)
+				.append("modelName", modelName)
+				.append("type", type)
+				.append("typeVal", typeVal)
+				.append("typeName", typeName)
+				.append("shopIds", shopIds)
+				.append("shopNames", shopNames)
+				.append("publishBeginAt", publishBeginAt)
+				.append("publishEndAt", publishEndAt)
+				.append("createUser", createUser)
+				.append("createAt", createAt)
+				.append("updateUser", updateUser)
+				.append("updateAt", updateAt)
+				.append("status", status)
+				.append("positionId", positionId)
+				.toString();
+	}
 }

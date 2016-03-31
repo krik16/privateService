@@ -1,6 +1,7 @@
 package com.rongyi.rss.coupon.mall.shop;
 
 import com.rongyi.core.bean.ResponseResult;
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.old_vo.OldCouponVO;
 import com.rongyi.easy.coupon.param.RmmmCouponParam;
@@ -21,6 +22,13 @@ public interface MSCouponService {
      * 创建优惠券
      */
     ResponseResult createCoupon(RmmmCouponParam param);
+
+    /**
+     * 摩店创建活动卡券
+     * @param param
+     * @return
+     */
+    ResponseVO createActivityCoupon(RmmmCouponParam param);
 
     /**
      * 查询优惠券
@@ -115,5 +123,17 @@ public interface MSCouponService {
      * @author lqy
      */
     Coupon getCouponById(String couponId);
+
+    /**
+     * 校验摩店登录的人是否有操作这张券的权限
+     * 摩店两种角色：店长、导购，两种角色只能操作关联类型是店铺的券
+     * @param userId 用户id
+     * @param couponId 卡券id
+     * @return ResponseVO 有权限errno=0，没权限errno=1020831, msg="您无权限操作，如需修改请联系集团管理员"
+     *                                         errno=1020832, msg="您无权限操作，如需修改请联系品牌管理员"
+     *                                         errno=1020833, msg="您无权限操作，如需修改请联系商场管理员"
+     * @author lqy
+     */
+    ResponseVO checkMallShopAuthority(Integer userId, String couponId);
 }
 

@@ -85,4 +85,15 @@ public interface IUserFansService {
     public List<FansBuyerListPojo> selectFansBuyerByBuyerId(String buyerId,Integer currentPage,Integer pageSize)throws MallShopException;
 
 
+    /**
+     * 获取我的粉丝列表---买手
+     * @param userId 买手Id
+     * @param currentPage 当前页
+     * @param pageSize 当前页码
+     * @return
+     * @throws MallShopException
+     */
+    public List<String> selectFansByuserId(Integer userId,Integer currentPage,Integer pageSize)throws MallShopException;
+
+
 }

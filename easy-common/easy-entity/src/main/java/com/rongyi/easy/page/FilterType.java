@@ -9,105 +9,46 @@ import java.io.Serializable;
  */
 public enum FilterType implements Serializable {
 
-    LIKE,  EQUALS,  GREATETHAN,  GREATEEQUAL,  LESSTHAN,  LESSEQUAL,  NOTEQUAL,  IN,NIN,ISNULL,ISNOTNULL,REGEXP,BEQ ,EXISTS,NOTEXISTS;
+    LIKE("LIKE","LIKE"),  EQUALS("EQ","="),  GREATETHAN("GH",">"),  GREATEEQUAL("GE",">="),  LESSTHAN("LH","<"),  LESSEQUAL("LE","<="),  NOTEQUAL("NEQ","!="),
+    IN("IN","IN"),NIN("NIN","NOT IN"),ISNULL("NULL","IS NULL"),ISNOTNULL("NNULL","IS NOT NULL"),
+    REGEXP("REGEXP","REGEXP"),BEQ("BEQ","beq") ,EXISTS("EXISTS","EXISTS"),NOTEXISTS("NOTEXISTS","NOT EXISTS");
 
-    public static FilterType toType(String type)
-    {
-        if ("LIKE".equals(type)) {
-            return LIKE;
-        }
-        if ("EQ".equals(type)) {
-            return EQUALS;
-        }
-        if ("GH".equals(type)) {
-            return GREATETHAN;
-        }
-        if ("GE".equals(type)) {
-            return GREATEEQUAL;
-        }
-        if ("LH".equals(type)) {
-            return LESSTHAN;
-        }
-        if ("LE".equals(type)) {
-            return LESSEQUAL;
-        }
-        if ("NEQ".equals(type)) {
-            return NOTEQUAL;
-        }
-        if ("BEQ".equals(type)) {
-            return BEQ;
-        }
-        if ("IN".equals(type)) {
-            return IN;
-        }
-        if ("NIN".equals(type)) {
-            return NIN;
-        }
-        if ("NULL".equals(type)) {
-            return ISNULL;
-        }
-        if ("NNULL".equals(type)) {
-            return ISNOTNULL;
-        }
-        if ("REGEXP".equals(type)) {
-            return REGEXP;
-        }
-        if ("EXISTS".equals(type)) {
-            return EXISTS;
-        }
-        if ("NOTEXISTS".equals(type)) {
-            return NOTEXISTS;
+    public static FilterType toType(String type) {
+        for(FilterType filterType:FilterType.values()) {
+            if(filterType.getValue().equals(type)){
+                return filterType;
+            }
         }
         return null;
     }
 
-    public String toString()
-    {
-        if (this == LIKE) {
-            return "LIKE";
-        }
-        if (this == EQUALS) {
-            return "=";
-        }
-        if (this == GREATETHAN) {
-            return ">";
-        }
-        if (this == GREATEEQUAL) {
-            return ">=";
-        }
-        if (this == LESSTHAN) {
-            return "<";
-        }
-        if (this == LESSEQUAL) {
-            return "<=";
-        }
-        if (this == NOTEQUAL) {
-            return "!=";
-        }
-        if (this == IN) {
-            return "in";
-        }
-        if (this == NIN) {
-            return "NOT IN";
-        }
-        if (this == ISNULL) {
-            return "IS NULL";
-        }
-        if (this == ISNOTNULL) {
-            return "IS NOT NULL";
-        }
-        if (this == REGEXP) {
-            return "REGEXP";
-        }
-        if (this == BEQ) {
-            return "beq";
-        }
-        if (this == EXISTS) {
-            return "EXISTS";
-        }
-        if (this == NOTEXISTS) {
-            return "NOT EXISTS";
-        }
-        return "";
+    public String toString(){
+      return this.getSymbol();
     }
+    private String value;
+
+    private String symbol;
+
+    FilterType(String value, String symbol) {
+        this.value = value;
+        this.symbol = symbol;
+    }
+
+    public String getSymbol() {
+
+        return symbol;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
 }

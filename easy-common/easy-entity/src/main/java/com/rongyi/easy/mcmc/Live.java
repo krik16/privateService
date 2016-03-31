@@ -1,11 +1,8 @@
 package com.rongyi.easy.mcmc;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import net.sf.json.JSONObject;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
@@ -45,7 +42,7 @@ public class Live implements Serializable {
 	 */
 	private String bullId;
 	/**
-	 * 直播状态 [0:发布/预热中，1:上线/进行中，2:下线(已过期)]
+	 * 直播状态 [0:发布/预热中，1:上线/进行中，2:下线(已过期),-1代表删除]
 	 */
 	private int status;
 	/**
@@ -99,8 +96,16 @@ public class Live implements Serializable {
 	 * 排序字段
 	 */
 	private int sort;
-	
-	
+
+	private List<String> urlList;
+
+	public List<String> getUrlList() {
+		return urlList;
+	}
+
+	public void setUrlList(List<String> urlList) {
+		this.urlList = urlList;
+	}
 
 	public ObjectId getId() {
 		return id;
@@ -286,39 +291,8 @@ public class Live implements Serializable {
 		live.setZoneType(zoneType);
 		live.setBullName(bullName);
 		live.setPhone(phone);
+		live.setUrlList(urlList);
 		return live;
 	}
 
-	public static void main(String[] args) throws CloneNotSupportedException {
-		Live po = new Live();
-		Live apo = new Live();
-
-		Date date = new Date();
-		po.setBeginTime(date);
-		po.setBullId("123");
-		po.setName("abc");
-		po.setEndTime(date);
-		po.setStatus(1);
-
-		apo = (Live) po.clone();
-
-		po.setName("aaaaaaaaaaaaaaaaaaaaa");
-
-		List<Commodity> a = new ArrayList<>();
-		List<Commodity> b = new ArrayList<>();
-
-		Commodity aa = new Commodity();
-		aa.setId(new ObjectId("54d4b979e4b0a87d60ea2d23"));
-		Commodity bb = new Commodity();
-		bb.setId(new ObjectId("54d4b979e4b0a87d60ea2d23"));
-
-		a.add(aa);
-		b.add(bb);
-
-		System.out.println("========" + a.removeAll(b) + "|| a=" + a);
-		System.out.println("a toString:" + po.getName());
-		System.out.println("b toString:" + apo.getName());
-//		System.out.println("a hashcode:" + po.hashCode());
-//		System.out.println("b hashcode:" + apo.hashCode());
-	}
 }

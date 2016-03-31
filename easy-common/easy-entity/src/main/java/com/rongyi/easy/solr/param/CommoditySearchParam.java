@@ -10,6 +10,8 @@
 package com.rongyi.easy.solr.param;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.rongyi.easy.malllife.param.MalllifeBaseParam;
 
@@ -62,6 +64,39 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	
 	/** 商品类型 (买手 1， 全部商品 0, 特卖场 2, 闪购 3，导购商品 4)*/
 	private String commodityType;
+
+	/**
+	 * 商品spu
+	 */
+	private String systemNumber;
+
+	private Integer from = 0; // 从0开始 偏移量，商品聚合分页使用
+
+	private String zoneId;
+
+	private String commodityCode;
+
+	private List<String> keywordList = new ArrayList<>();
+
+	public List<String> getKeywordList() {
+		return keywordList;
+	}
+
+	public void setKeywordList(List<String> keywordList) {
+		this.keywordList = keywordList;
+	}
+
+	public void addKeywordList(String keyword) {
+		this.keywordList.add(keyword);
+	}
+
+	public Integer getFrom() {
+		return from;
+	}
+
+	public void setFrom(Integer from) {
+		this.from = from;
+	}
 
 	public String getCommodityType() {
 		return commodityType;
@@ -215,22 +250,37 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 		this.flashSaleId = flashSaleId;
 	}
 
+	public String getSystemNumber() {
+		return systemNumber;
+	}
+
+	public void setSystemNumber(String systemNumber) {
+		this.systemNumber = systemNumber;
+	}
+
+	public String getZoneId() {
+		return zoneId;
+	}
+
+	public void setZoneId(String zoneId) {
+		this.zoneId = zoneId;
+	}
+
+	public String getCommodityCode() {
+		return commodityCode;
+	}
+
+	public void setCommodityCode(String commodityCode) {
+		this.commodityCode = commodityCode;
+	}
+
 	@Override
 	public String toString() {
-		return "CommoditySearchParam{" +
-				"keyword='" + keyword + '\'' +
-				", shopId='" + shopId + '\'' +
-				", brandId='" + brandId + '\'' +
-				", mallId='" + mallId + '\'' +
-				", commodityCategory='" + commodityCategory + '\'' +
-				", sortBy='" + sortBy + '\'' +
-				", coord_x='" + coord_x + '\'' +
-				", coord_y='" + coord_y + '\'' +
-				", bullId='" + bullId + '\'' +
-				", liveId='" + liveId + '\'' +
-				", commodityType='" + commodityType + '\'' +
-				", saleId='" + saleId + '\'' +
-				", flashSaleId='" + flashSaleId + '\'' +
-				'}';
+		return "CommoditySearchParam [keyword=" + keyword + ", shopId=" + shopId + ", brandId=" + brandId + ", mallId="
+				+ mallId + ", commodityCategory=" + commodityCategory + ", sortBy=" + sortBy + ", coord_x=" + coord_x
+				+ ", coord_y=" + coord_y + ", bullId=" + bullId + ", liveId=" + liveId + ", saleId=" + saleId
+				+ ", flashSaleId=" + flashSaleId + ", commodityType=" + commodityType + ", systemNumber=" + systemNumber
+				+ ", from=" + from + ", zoneId=" + zoneId + ", commodityCode=" + commodityCode + ", keywordList="
+				+ keywordList + "]";
 	}
 }

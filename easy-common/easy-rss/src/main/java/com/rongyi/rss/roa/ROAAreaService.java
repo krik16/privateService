@@ -2,6 +2,7 @@ package com.rongyi.rss.roa;
 
 import java.util.List;
 
+import com.rongyi.easy.roa.vo.AreaCityVO;
 import org.bson.types.ObjectId;
 
 import com.rongyi.easy.roa.entity.AreaEntity;
@@ -42,4 +43,15 @@ public interface ROAAreaService {
 	public List<AreaEntity> getAreaByTypeAndName(String name,String type,String parentId);
 	
 	public List<AreaEntity> getAreaListByIds(List<ObjectId> ids);
+
+	/**
+	 * 用于内容管理模版查询关联的城市
+	 * @param provId
+	 * @param cityId
+	 * @param currentPage
+	 * @param pageSize
+	 * @return
+	 */
+	public AreaCityVO getAreaCityList(String provId,String cityId,Integer currentPage, Integer pageSize);
+
 }

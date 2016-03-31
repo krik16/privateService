@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.rongyi.easy.rmmm.vo.RefundActivityListVO;
+import com.rongyi.easy.tradecenter.vo.CouponOrderVO.CheckCouponDetail;
+
 
 /**
  * 优惠券订单详情信息 （优惠券基本信息与券码信息）
@@ -16,6 +19,12 @@ public class OldCouponDetail implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer id;
+    
+    private String orderNo;//订单编号
+    
+    private String orderTime;//下单时间
+    
+    private String payTime;//支付时间
 
     private String title;//券名称
 
@@ -71,9 +80,52 @@ public class OldCouponDetail implements Serializable {
 
 
     private List<Integer> afterSaleService;
+    
+    /**
+     * 订单已核销优惠券详情
+     */
+    private List<CheckCouponDetail> checkCoupons;
+    
+    private String workTime;//9:30~18:30（周一至周五）法定假日除外
+    
+    private List<OldUserCode> unRefundActivityList; //用户未退款券码列表
+    
+    private List<RefundActivityListVO> refundActivityList; //用户退款券码列表
 
+    
+    public String getWorkTime() {
+		return workTime;
+	}
 
-    public Double getPlatformRebateAmount() {
+	public void setWorkTime(String workTime) {
+		this.workTime = workTime;
+	}
+
+	public List<OldUserCode> getUnRefundActivityList() {
+		return unRefundActivityList;
+	}
+
+	public void setUnRefundActivityList(List<OldUserCode> unRefundActivityList) {
+		this.unRefundActivityList = unRefundActivityList;
+	}
+
+	public List<RefundActivityListVO> getRefundActivityList() {
+		return refundActivityList;
+	}
+
+	public void setRefundActivityList(List<RefundActivityListVO> refundActivityList) {
+		this.refundActivityList = refundActivityList;
+	}
+
+	public List<CheckCouponDetail> getCheckCoupons() {
+		return checkCoupons;
+	}
+
+	public void setCheckCoupons(List<CheckCouponDetail> checkCoupons) {
+		this.checkCoupons = checkCoupons;
+	}
+
+	public Double getPlatformRebateAmount() {
 		return platformRebateAmount;
 	}
 
@@ -96,8 +148,32 @@ public class OldCouponDetail implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+    
+    public String getOrderNo() {
+		return orderNo;
+	}
 
-    //新版本废弃
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
+	}
+	
+	public String getOrderTime() {
+		return orderTime;
+	}
+
+	public void setOrderTime(String orderTime) {
+		this.orderTime = orderTime;
+	}
+
+	public String getPayTime() {
+		return payTime;
+	}
+
+	public void setPayTime(String payTime) {
+		this.payTime = payTime;
+	}
+
+	//新版本废弃
     @Deprecated
     public String getActivityCode() {
         return activityCode;
@@ -287,4 +363,18 @@ public class OldCouponDetail implements Serializable {
     public void setUserCodeList(List<OldUserCode> userCodeList) {
         this.userCodeList = userCodeList;
     }
+
+	@Override
+	public String toString() {
+		return "OldCouponDetail [id=" + id + ", title=" + title + ", activityCode=" + activityCode + ", status=" + status
+				+ ", useTime=" + useTime + ", startTime=" + startTime + ", endTime=" + endTime + ", useLimit=" + useLimit
+				+ ", useWay=" + useWay + ", num=" + num + ", mallvos=" + mallvos + ", thumbnail=" + thumbnail
+				+ ", myActivityList=" + myActivityList + ", userCodeList=" + userCodeList + ", ticketTotalNumber="
+				+ ticketTotalNumber + ", grouponPrice=" + grouponPrice + ", notOutCodeFlag=" + notOutCodeFlag + ", currentPrice="
+				+ currentPrice + ", couponId=" + couponId + ", integral=" + integral + ", couponDiscount=" + couponDiscount
+				+ ", unUsered=" + unUsered + ", orderPrice=" + orderPrice + ", refundNum=" + refundNum
+				+ ", platformRebateAmount=" + platformRebateAmount + ", afterSaleService=" + afterSaleService + ", checkCoupons="
+				+ checkCoupons + ", workTime=" + workTime + ", unRefundActivityList=" + unRefundActivityList
+				+ ", refundActivityList=" + refundActivityList + "]";
+	}
 }

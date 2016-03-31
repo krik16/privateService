@@ -1,10 +1,15 @@
 package com.rongyi.rss.mallshop.order;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
+
+import com.rongyi.easy.rmmm.param.user.OrderAddressParam;
 
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.rmmm.param.MaxIntegralParam;
 import com.rongyi.easy.rmmm.param.MyOrderParam;
 import com.rongyi.easy.rmmm.param.OrderDealedParam;
@@ -13,6 +18,7 @@ import com.rongyi.easy.rmmm.param.SalerDeliveryParam;
 import com.rongyi.easy.rmmm.param.SubmitOrderParam;
 import com.rongyi.easy.rmmm.param.TransactionDetailParam;
 import com.rongyi.easy.rmmm.vo.BuyerVO;
+import com.rongyi.easy.rmmm.vo.CartOrderDetailVO;
 import com.rongyi.easy.rmmm.vo.MyOrderCountVO;
 import com.rongyi.easy.rmmm.vo.OrderVO;
 import com.rongyi.easy.rmmm.vo.ParentOrderListVO;
@@ -21,7 +27,7 @@ import com.rongyi.easy.rmmm.vo.ShopMallVO;
 import com.rongyi.easy.rmmm.vo.TransactionDetailVO;
 
 public interface ROAOrderService {
-	
+
 	/**
 	 * 生成订单
 	 * @param submitOrderParam
@@ -178,5 +184,96 @@ public interface ROAOrderService {
 	 * @return
 	 */
 	public Map<String, String> getRouteByStatusRoute(String statusRoute);
+	
+	 /**
+     * 查找含购物车订单的订单列表方法
+     * @param param 查询参数
+     * @param buyerId 买家id
+     * @return
+     */
+    ParentOrderListVO getMyOrderListForCart(MyOrderParam param,String buyerId) throws Exception;
+
+    /**
+     * 查询购物车订单详情
+     * @param orderNo 订单号
+     * @return 订单详情
+     */
+    CartOrderDetailVO getMyOrderDetailForCart(String orderNo) throws Exception;
+
+    /**
+     * 购物车最大使用积分查询接口
+     * @param paramList 查询参数
+     * @param limit 积分使用上限
+     * @param moenyExchangeScore 积分与金额兑换比例
+     * @param platformRebateAmount 抵扣券金额
+     * @return 最大可用积分
+     */
+    Map<String,Object> getMaxIntegralForCart(List<MaxIntegralParam> paramList,double limit,double moenyExchangeScore,double platformRebateAmount);
+    
+    /**
+	 * 购物车订单下单
+	 * @param param 下单参数
+	 * @param buyerId 用户id
+	 * @return ResponseVO
+	 */
+	ResponseVO commitOrderForCart(SubmitOrderParam param,String buyerId);
+
+	/**
+	 * 买家主动关闭订单
+	 * @param orderNo 订单号
+	 * @return ResponseVO
+	 */
+	ResponseVO orderColseByBuyer(String orderNo);
+
+	/**
+	 * 删除商品订单
+	 * @param orderNo 商品订单号
+	 * @return ResponseVO
+	 */
+	ResponseVO delOrderDetail(List<String> orderNo);
+
+	/**
+	 * 支付前检查购物车订单总价
+	 * @param orderNo 订单号
+	 * @return ResponseVO
+	 */
+	ResponseVO checkTotalPrice(String orderNo);
+
+	/**
+	 * 支付前检查购物车中订单状态
+	 * @param orderNo 订单号
+	 * @return ResponseVO
+	 */
+	ResponseVO checkOrderStatus(String orderNo);
+
+	/**
+	 * 修改买家收货地址
+	 * @param orderNo 订单号
+	 * @param city 城市
+	 * @param province 省市
+	 * @param district 区县
+	 * @param address 具体地址
+	 * @param name 收货人名称
+	 * @param phone 收货人手机
+	 * @return ResponseVO
+	 */
+	ResponseVO changeBuyerAddress(OrderAddressParam orderAddressParam);
+	
+	/**
+	 * 我的订单数量
+	 *
+	 * @return
+	 * @throws Exception
+	 */
+	MyOrderCountVO getMyOrderCountForCart(String buyerNum) throws Exception;
+	
+	/**
+	 * 交易详情
+	 *
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	List<TransactionDetailVO> getTransactionDetailForCart(TransactionDetailParam param, String mallUserMid) throws Exception;
 
 }

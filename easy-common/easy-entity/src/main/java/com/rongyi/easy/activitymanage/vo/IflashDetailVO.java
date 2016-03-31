@@ -24,7 +24,7 @@ public class IflashDetailVO implements Serializable {
     private String activityUrl;
     private String contentUrl;
 
-    public Integer getId() {
+	public Integer getId() {
         return id;
     }
 

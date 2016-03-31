@@ -34,7 +34,8 @@ public class EasyMd5Util {
     }
 
     // 返回形式只为数字
-    private static String byteToNum(byte bByte) {
+    @SuppressWarnings("unused")
+	private static String byteToNum(byte bByte) {
         int iRet = bByte;
         System.out.println("iRet1=" + iRet);
         if (iRet < 0) {
@@ -65,8 +66,8 @@ public class EasyMd5Util {
         return resultString;
     }
 
-    public static void main(String[] args) {
-        EasyMd5Util getMD5 = new EasyMd5Util();
-        System.out.println(getMD5.GetMD5Code("1111111"));
-    }
+//    public static void main(String[] args) {
+//        EasyMd5Util getMD5 = new EasyMd5Util();
+//        System.out.println(getMD5.GetMD5Code("1111111"));
+//    }
 }

@@ -2,6 +2,7 @@ package com.rongyi.rss.coupon.mall.life;
 
 
 import com.rongyi.core.bean.ResponseResult;
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.old_vo.OldCouponVO;
@@ -89,4 +90,5 @@ public interface MLCouponService {
      * @author lqy
      */
     Coupon getCouponById(String couponId);
+
 }

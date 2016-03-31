@@ -53,5 +53,7 @@ public interface IKanjiaService {
   * @return
   */
 	public Activity selectActivityId(Activity activity);
+	
+	public ResponseVO getRecordList(Activity activity);
 
 }

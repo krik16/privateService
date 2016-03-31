@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.solr.client.solrj.beans.Field;
 
 /**
@@ -188,5 +189,25 @@ public class LiveSolrDocument implements Serializable {
 	public void setMall(Integer mall) {
 		this.mall = mall;
 	}
-	
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append("_id", _id)
+				.append("name", name)
+				.append("beginTime", beginTime)
+				.append("endTime", endTime)
+				.append("status", status)
+				.append("detail", detail)
+				.append("locId", locId)
+				.append("locName", locName)
+				.append("createTime", createTime)
+				.append("zone_ids", zone_ids)
+				.append("category_ids", category_ids)
+				.append("position", position)
+				.append("bullId", bullId)
+				.append("bullName", bullName)
+				.append("mall", mall)
+				.toString();
+	}
 }

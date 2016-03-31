@@ -1,6 +1,8 @@
 package com.rongyi.rss.activity.push;
 
-import com.rongyi.easy.activity.entity.dto.PushMessageDTO;
+import com.rongyi.easy.msgcenter.PushMessageDTO;
+
+import java.util.Map;
 
 /**
  * Description:
@@ -10,6 +12,7 @@ import com.rongyi.easy.activity.entity.dto.PushMessageDTO;
  * Project:easy-market
  */
 public interface PushMessageService {
-    public void pushMsgToSingleDevice(PushMessageDTO pushSingleDeviceDTO);
-    public void pushMsgToAll(PushMessageDTO pushMessageDTO) ;
+    public String pushMsgToSingleDevice(PushMessageDTO pushSingleDeviceDTO);
+    public String pushMsgToAll(PushMessageDTO pushMessageDTO) ;
+    public Map<String,Object> querySuccessCount(PushMessageDTO pushSingleDeviceDTO) ;
 }

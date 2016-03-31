@@ -1,7 +1,5 @@
 package com.rongyi.easy.solr.result;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -45,6 +43,21 @@ public class ActivitySearchInfo implements Serializable {
 	private List<Integer> afterSaleService;//售后服务
 
 	private Integer payDownTime; //支付剩余时间(单位是秒)
+	private List<String	> customCategoryIds; //卡券对应店铺的自定义分类
+	private Integer apply_shops_count; // 卡券支持的店铺数量
+	
+	private int activityStatus = 0; 	//活动状态[0其他(不参与逻辑) 未开始1 正常2 结束3]
+	private String workTime = "9:30~18:30（周一至周五）\n法定假日除外";
+	
+	private String activityType = "0";	//活动类型[0其他 闪购1、特卖2、秒杀3]
+
+	public String getWorkTime() {
+		return workTime;
+	}
+
+	public void setWorkTime(String workTime) {
+		this.workTime = workTime;
+	}
 
 	/**
 	 * 使用限制
@@ -327,39 +340,65 @@ public class ActivitySearchInfo implements Serializable {
 		this.payDownTime = payDownTime;
 	}
 
+	/**
+	 * @return the customCategoryIds
+	 */
+	public List<String> getCustomCategoryIds() {
+		return customCategoryIds;
+	}
+
+	/**
+	 * @param customCategoryIds the customCategoryIds to set
+	 */
+	public void setCustomCategoryIds(List<String> customCategoryIds) {
+		this.customCategoryIds = customCategoryIds;
+	}
+
+	/**
+	 * @return the apply_shops_count
+	 */
+	public Integer getApply_shops_count() {
+		return apply_shops_count;
+	}
+
+	/**
+	 * @param apply_shops_count the apply_shops_count to set
+	 */
+	public void setApply_shops_count(Integer apply_shops_count) {
+		this.apply_shops_count = apply_shops_count;
+	}
+
+	public int getActivityStatus() {
+		return activityStatus;
+	}
+
+	public void setActivityStatus(int activityStatus) {
+		this.activityStatus = activityStatus;
+	}
+	
+	public String getActivityType() {
+		return activityType;
+	}
+
+	public void setActivityType(String activityType) {
+		this.activityType = activityType;
+	}
+
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this)
-				.append("id", id)
-				.append("name", name)
-				.append("addr", addr)
-				.append("pic_url", pic_url)
-				.append("location", location)
-				.append("description", description)
-				.append("city_name", city_name)
-				.append("shop_own", shop_own)
-				.append("title", title)
-				.append("start_time", start_time)
-				.append("end_time", end_time)
-				.append("holder_id", holder_id)
-				.append("holder_type", holder_type)
-				.append("thumbnail", thumbnail)
-				.append("carouselImg", carouselImg)
-				.append("vistedNum", vistedNum)
-				.append("userQuota", userQuota)
-				.append("grouponPrice", grouponPrice)
-				.append("grouponOriginal", grouponOriginal)
-				.append("grouponNum", grouponNum)
-				.append("buyedAmount", buyedAmount)
-				.append("restAmount", restAmount)
-				.append("useRestriction", useRestriction)
-				.append("useMode", useMode)
-				.append("grouponStyle", grouponStyle)
-				.append("limitPublishCount", limitPublishCount)
-				.append("limitUseCount", limitUseCount)
-				.append("limitCount", limitCount)
-				.append("afterSaleService", afterSaleService)
-				.append("payDownTime", payDownTime)
-				.toString();
+		return "ActivitySearchInfo [id=" + id + ", name=" + name + ", addr=" + addr + ", pic_url=" + pic_url
+				+ ", location=" + location + ", description=" + description + ", city_name=" + city_name + ", shop_own="
+				+ shop_own + ", title=" + title + ", start_time=" + start_time + ", end_time=" + end_time
+				+ ", holder_id=" + holder_id + ", holder_type=" + holder_type + ", thumbnail=" + thumbnail
+				+ ", carouselImg=" + carouselImg + ", vistedNum=" + vistedNum + ", userQuota=" + userQuota
+				+ ", grouponPrice=" + grouponPrice + ", grouponOriginal=" + grouponOriginal + ", grouponNum="
+				+ grouponNum + ", buyedAmount=" + buyedAmount + ", restAmount=" + restAmount + ", useRestriction="
+				+ useRestriction + ", useMode=" + useMode + ", grouponStyle=" + grouponStyle + ", limitPublishCount="
+				+ limitPublishCount + ", limitUseCount=" + limitUseCount + ", limitCount=" + limitCount
+				+ ", afterSaleService=" + afterSaleService + ", payDownTime=" + payDownTime + ", customCategoryIds="
+				+ customCategoryIds + ", apply_shops_count=" + apply_shops_count + ", activityStatus=" + activityStatus
+				+ ", workTime=" + workTime + ", activityType=" + activityType + ", limitDesc=" + limitDesc
+				+ ", usageDesc=" + usageDesc + ", remark=" + remark + "]";
 	}
+	
 }

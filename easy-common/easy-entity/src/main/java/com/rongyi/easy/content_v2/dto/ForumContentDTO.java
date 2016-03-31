@@ -1,5 +1,7 @@
 package com.rongyi.easy.content_v2.dto;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 
 /**
@@ -32,6 +34,11 @@ public class ForumContentDTO implements Serializable {
      * 省份的名字
      */
     private String provName;
+
+    /**
+     * banner 背景图片
+     */
+    private String bannerBackgroundPic;
 
     /**
      * 上传的图片名字
@@ -216,26 +223,34 @@ public class ForumContentDTO implements Serializable {
         this.positionId = positionId;
     }
 
+    public String getBannerBackgroundPic() {
+        return bannerBackgroundPic;
+    }
+
+    public void setBannerBackgroundPic(String bannerBackgroundPic) {
+        this.bannerBackgroundPic = bannerBackgroundPic;
+    }
+
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("ForumContentDTO{");
-        sb.append("id=").append(id);
-        sb.append(", cityId='").append(cityId).append('\'');
-        sb.append(", cityName='").append(cityName).append('\'');
-        sb.append(", provId='").append(provId).append('\'');
-        sb.append(", provName='").append(provName).append('\'');
-        sb.append(", picName='").append(picName).append('\'');
-        sb.append(", title='").append(title).append('\'');
-        sb.append(", modelId=").append(modelId);
-        sb.append(", type=").append(type);
-        sb.append(", typeVal='").append(typeVal).append('\'');
-        sb.append(", publishBeginAt='").append(publishBeginAt).append('\'');
-        sb.append(", publishEndAt='").append(publishEndAt).append('\'');
-        sb.append(", createUser='").append(createUser).append('\'');
-        sb.append(", updateUser='").append(updateUser).append('\'');
-        sb.append(", status=").append(status);
-        sb.append(", positionId=").append(positionId);
-        sb.append('}');
-        return sb.toString();
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("cityId", cityId)
+                .append("cityName", cityName)
+                .append("provId", provId)
+                .append("provName", provName)
+                .append("bannerBackgroundPic", bannerBackgroundPic)
+                .append("picName", picName)
+                .append("title", title)
+                .append("modelId", modelId)
+                .append("type", type)
+                .append("typeVal", typeVal)
+                .append("publishBeginAt", publishBeginAt)
+                .append("publishEndAt", publishEndAt)
+                .append("createUser", createUser)
+                .append("updateUser", updateUser)
+                .append("status", status)
+                .append("positionId", positionId)
+                .toString();
     }
 }

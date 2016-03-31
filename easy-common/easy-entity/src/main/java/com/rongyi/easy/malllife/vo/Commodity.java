@@ -25,7 +25,8 @@ public class Commodity implements Serializable{
     private String currentPrice;//商品现价
     private List<String> picList;//商品图片列表
     private List<ObjectId> specList;//商品规格列表
-
+    private boolean supportCourierDeliver;//支持快递发货    导购：true是   false否；买手：默认true   
+   	private boolean supportSelfPickup;//支持到店自提  true 是    false否
 
     private double price;//商品价格（现价最低价，用于排序）
     private String brandId;//商品所属品牌id
@@ -78,7 +79,19 @@ public class Commodity implements Serializable{
     public void setMallId(String mallId) {
         this.mallId = mallId;
     }
-    public List<ObjectId> getCategoryIds() {
+    public boolean isSupportCourierDeliver() {
+		return supportCourierDeliver;
+	}
+	public void setSupportCourierDeliver(boolean supportCourierDeliver) {
+		this.supportCourierDeliver = supportCourierDeliver;
+	}
+	public boolean isSupportSelfPickup() {
+		return supportSelfPickup;
+	}
+	public void setSupportSelfPickup(boolean supportSelfPickup) {
+		this.supportSelfPickup = supportSelfPickup;
+	}
+	public List<ObjectId> getCategoryIds() {
         return categoryIds;
     }
     public void setCategoryIds(List<ObjectId> categoryIds) {

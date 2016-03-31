@@ -70,6 +70,5 @@ public class BuildingEntity implements Serializable{
 	public void setValid(int valid) {
 		this.valid = valid;
 	}
-	
-	
+
 }

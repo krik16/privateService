@@ -3,17 +3,12 @@ package com.rongyi.rss.content;
 import java.util.List;
 
 import com.rongyi.easy.content.entity.param.SpecialCellParam;
-import com.rongyi.easy.content_v2.entity.ForumContent;
-import com.rongyi.easy.content_v2.entity.ForumHomepage;
-import com.rongyi.easy.content_v2.entity.ForumPosition;
-import com.rongyi.easy.content_v2.entity.ForumStick;
+import com.rongyi.easy.content_v2.entity.*;
 import com.rongyi.easy.content_v2.param.FlashSellParam;
 import com.rongyi.easy.content_v2.param.ForumContentParam;
 import com.rongyi.easy.content_v2.param.ForumContentStatusDelParam;
 import com.rongyi.easy.content_v2.param.SpecailParam;
-import com.rongyi.easy.content_v2.vo.ForumContentListVo;
-import com.rongyi.easy.content_v2.vo.ForumHomeModelVo;
-import com.rongyi.easy.content_v2.vo.ForumPostiomModelVo;
+import com.rongyi.easy.content_v2.vo.*;
 
 /**
  * 内容管理的接口
@@ -125,6 +120,15 @@ public interface ROAContentService {
 	 * @throws Exception
 	 */
 	public Boolean saveContent(ForumContent fc)throws Exception;
+
+	/**
+	 * 保存每日秒杀的内容
+	 * @param fc
+	 * @return
+	 * @throws Exception
+	 */
+	public ForumContent saveContentDailySale(ForumContent fc) throws Exception;
+
 	/**
 	 * 删除内容
 	 * @param fc
@@ -239,5 +243,64 @@ public interface ROAContentService {
 	* @throws
 	 */
 	public List<ForumContentListVo> findContentAllByParamSpecail(ForumContentParam par);
-	
+
+	/***
+	 * 查询模版列表
+	 * @return
+	 */
+	public List<ForumTemplateVO> findTemplateList();
+
+	public int hasContentNotitle(ForumContent fc);
+
+	/**
+	 * 通过模版id 查询模版详情
+	 * @param id
+	 * @return
+	 */
+	public ForumTemplate findTemplateById(Integer id);
+
+	/**
+	 * 设置模版
+	 * @param forumTemplate
+	 * @return
+	 */
+	public boolean updateTemplateByParam(ForumTemplate forumTemplate);
+
+	/**
+	 * 通过模版id查询位置信息
+	 * @param id
+	 * @return
+	 */
+	public List<ForumPosition> findPositionByTemplateId(Integer id);
+
+	/**
+	 * 通过城市id查询
+	 * @param ids
+	 * @return
+	 */
+	public List<TemplateListVO> findTemplateCityByCityId(List<String> ids);
+
+	/**
+	 * 通过模版id和城市ids查询这个些城市是否存在了
+	 * @param templateId
+	 * @param ids
+	 * @return
+	 */
+	public List<ForumTemplateCity> hasTemplateCity(Integer templateId,List<String> ids);
+
+	public boolean renvelCiyt(Integer templateId,List<ForumTemplateCity> forumTemplateCities,String userName) throws Exception;
+
+	/**
+	 * 通过模版id 查询城市列表
+	 * @param id
+	 * @return
+	 */
+	public  List<TemplateCityVO> findTemplateCityList(Integer id);
+	/**
+	 * 通过卡券ids 或者商品ids 查询
+	 * @type 4 商品  5代金券
+	 * @param ids
+	 * @return
+	 */
+	public List<ForumContent> findDailySaleByValueIds(List<String> ids,int type);
 }

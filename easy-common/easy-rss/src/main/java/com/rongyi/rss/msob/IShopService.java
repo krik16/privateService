@@ -87,7 +87,22 @@ public interface IShopService{
 	 */
 	public BrandShopDetailVO getBrandShopDetail(String shopId,UserInfoVO user) throws Exception;
 
-
+	/**
+	 * 微商城商品所在店铺信息V0116
+	 * @param shopId
+	 * @param user
+	 * @return
+	 * @throws Exception
+	 */
+	public BrandShopDetailVO getCommodityShopDetail(String shopId, UserInfoVO user) throws Exception;
+	/**
+	 * 商品所在店铺信息V0202
+	 * @param shopId
+	 * @param user
+	 * @return
+	 * @throws Exception
+	 */
+	public BrandShopDetailVO getCommodityShopInfoDetail(String shopId, UserInfoVO user) throws Exception;
 	public List<String> getSellerImIdByShopId(String shopId);
 
 	public ShopInfoEntity getShopByShopMId(String shopMId) throws RmmmException;
@@ -125,7 +140,7 @@ public interface IShopService{
 	/**
 	 * 根据店铺名模糊获取店铺所在商场下的店铺列表
 	 * 
-	 * @param mallName
+	 * @param
 	 * @return
 	 * @throws Exception
 	 */
@@ -156,8 +171,8 @@ public interface IShopService{
 	
 	/**
 	 * 验券成功后，发消息通知买家
-	 * @param IMIds
-	 * @param body
+	 * @param userId
+	 * @param shopMid
 	 * @throws Exception
 	 */
 	public void sendShopMessageToIMUser(final String userId, final String shopMid) throws Exception;
@@ -192,4 +207,13 @@ public interface IShopService{
      * @throws Exception
      */
     public List<ShopInfoEntity> getShopsByFilialyId(String filialeId)throws Exception;
+
+	/**
+	 * 商场查店铺查询店铺
+	 * @param filialeId  分公司mongoId
+	 * @return
+	 * @throws Exception
+	 */
+	List<ShopInfoEntity> getShopsByMallId(String filialeId)throws Exception;
 }
+

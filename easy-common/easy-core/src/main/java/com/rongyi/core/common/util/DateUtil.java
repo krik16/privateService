@@ -214,7 +214,9 @@ public class DateUtil {
 		SimpleDateFormat sdFormat = new SimpleDateFormat(strFormat);
 		String str = "";
 		try {
-			str = sdFormat.format(dt);
+			if(dt != null){
+				str = sdFormat.format(dt);
+			}			
 		} catch (Exception e) {
 			return "";
 		}
@@ -815,4 +817,32 @@ public class DateUtil {
 		}
 		return beapartdate;
 	}
+
+	/**
+	 * 增加天数（排除双休日）
+	 * @param date
+	 * @param num
+	 * @return
+	 */
+	public static Date addWorkDay(Date date, int num) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		int mod = num % 5;
+		int other = num / 5 * 7;
+		for (int i = 0; i < mod;) {
+			cal.add(Calendar.DATE, 1);
+			switch (cal.get(Calendar.DAY_OF_WEEK)) {
+				case Calendar.SUNDAY:
+				case Calendar.SATURDAY:
+					break;
+				default:
+					i++;
+					break;
+			}
+		}
+		if (other > 0)
+			cal.add(Calendar.DATE, other);
+		return cal.getTime();
+	}
+
 }

@@ -3,11 +3,11 @@ package com.rongyi.rss.malllife.roa.user;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.malllife.pojo.InvitationUserInfoPojo;
 import com.rongyi.easy.usercenter.dto.malllife.MalllifeUserInfoDto;
 import com.rongyi.easy.usercenter.entity.MalllifeUserInfoEntity;
-
-
 import com.rongyi.easy.malllife.param.MalllifeUser;
+import com.rongyi.easy.malllife.pojo.BuyerInfoPojo;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
 
 /*
@@ -30,7 +30,15 @@ public interface ROAMalllifeUserService {
 	 * @param malllifeUser
 	 * @throws Exception
 	 */
-	public void registUser(MalllifeUser malllifeUser) throws Exception;
+	public String registUser(MalllifeUser malllifeUser) throws Exception;
+
+	/**
+	 *
+	 * @param malllifeUser 注册信息
+	 * @return 0失败 >0成功
+	 * @throws Exception
+	 */
+	public String registMaillLifeUser(MalllifeUser malllifeUser) throws Exception;
 
 	/**
 	 * 根据用户Id查询 uuid
@@ -162,6 +170,19 @@ public interface ROAMalllifeUserService {
 	 * @return
 	 */
 	public Map<String,UserInfoVO> getUserListByIdList(List<String> idList);
+	
+	/**
+	 * 判断容易逛用户是否被邀请来的
+	 * @param userId
+	 * @return
+	 */
+
+	/**
+	 * type = 1  是容易逛， type = 2 是摩店
+	 * 判断容易逛用户是否被邀请来的
+	 * @return 如果没有 返回
+	 */
+	public InvitationUserInfoPojo getUserIsByShare(String userId,int type);
 
 
 

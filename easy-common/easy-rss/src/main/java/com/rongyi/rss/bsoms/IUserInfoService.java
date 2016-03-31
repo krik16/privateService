@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.bsoms.entity.BAuthorities;
+import com.rongyi.easy.bsoms.entity.CertifiedCheckInfo;
 import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 import com.rongyi.easy.bsoms.entity.UserInfo;
 import com.rongyi.easy.bsoms.vo.BusinessAccountVO;
@@ -165,4 +166,41 @@ public interface IUserInfoService {
 	 * @return
 	 */
 	List<UserInfo> getFullUserInfoByRelevanceId(Map<String, Object> paramsMap);
+	
+	/**
+	 * 通过service ticket获取登录top页信息
+	 * 返回Map{userInfo:com.rongyi.easy.bsoms.entity.SessionUserInfo,authorities:List<String>,logoutUrl}
+	 * @param bsst
+	 * @return
+	 * @throws Exception
+	 */
+	public Map getBsTop(String bsst)throws Exception ;
+	
+	/**
+	 * 查询各状态的用户数量
+	 * @param map
+	 * @return
+	 */
+	public Map<String, Integer> getUserStatusCount(Map map);
+	
+	/**
+	 * 查询用户审核失败理由
+	 * @param map
+	 * @return
+	 */
+	public List<CertifiedCheckInfo> getCertifiedFailList(Map map);
+	
+	/**
+	 * 审核用户信息
+	 * @param paramMap
+	 * @return
+	 */
+	public boolean checkCertifiedUser(Map paramMap);
+	
+	/**
+	 * 查询用户审核记录
+	 * @param paramMap
+	 * @return
+	 */
+	public List<CertifiedCheckInfo> getCheckListByUserId(Map paramMap);
 }

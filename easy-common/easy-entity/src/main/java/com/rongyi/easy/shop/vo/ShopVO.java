@@ -51,6 +51,7 @@ public class ShopVO implements Serializable {
 	private String updateBy;//修改人
 	private String updatedAt;//修改时间
 	private String filialeName;//分公司名字
+	private boolean changeAble;//不同的角色在店铺详情页面能否修改
 	
 	public String getId() {
 		return id;
@@ -315,6 +316,9 @@ public class ShopVO implements Serializable {
 		this.businessDistrictName = businessDistrictName;
 	}
 
+	public boolean isChangeAble() { return changeAble; }
+
+	public void setChangeAble(boolean changeAble) { this.changeAble = changeAble; }
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this)

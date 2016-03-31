@@ -93,9 +93,10 @@ public class Floor implements Serializable {
 
     public String getFullNavigation_pic() {
         if (StringUtils.isNotBlank(navigation_pic)) {
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(created_at);
-            return "http://rongyi.b0.upaiyun.com/system/mall_area/navigation_pic/" + calendar.get(Calendar.YEAR) + "/" + (calendar.get(Calendar.MONTH) + 1) + "/" + id + "/" + navigation_pic;
+            //Calendar calendar = Calendar.getInstance();
+            //calendar.setTime(created_at);
+            //return "http://rongyi.b0.upaiyun.com/system/mall_area/navigation_pic/" + calendar.get(Calendar.YEAR) + "/" + (calendar.get(Calendar.MONTH) + 1) + "/" + id + "/" + navigation_pic;
+            return "http://rongyi.b0.upaiyun.com/system/mall_area/navigation_pic/" + (new Date(created_at.toString()).getYear()+1900) + "/" + (new Date(created_at.toString()).getMonth() + 1) + "/" + id + "/" + navigation_pic;
         } else {
             return null;
         }

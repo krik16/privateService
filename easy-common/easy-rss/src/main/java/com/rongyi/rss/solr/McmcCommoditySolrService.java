@@ -2,8 +2,11 @@ package com.rongyi.rss.solr;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.mcmc.param.ActivityCommodityParam;
+import com.rongyi.easy.solr.result.CommoditySolrResult;
 import org.bson.types.ObjectId;
 
 import com.rongyi.easy.solr.McmcCommodityDocument;
@@ -66,6 +69,18 @@ public interface McmcCommoditySolrService {
 	 */
 	public List<ObjectId> commoditySearch(CommoditySearchParam param);
 
+	public CommoditySolrResult commoditySearchTotalCountAndIds(CommoditySearchParam param);
+
+	/**
+	 * 商品检索 - 容易逛商品聚合
+	 *
+	 * @author xgq
+	 * @date 2015年12月24日 下午2:36:52
+	 * @param param
+	 * @return
+	 */
+	public Map<?, ?> searchCommodityForMallLife(CommoditySearchParam param);
+
 	/**
 	 * @author ZhengYl
 	 * @date 2015年9月21日 上午10:58:58 
@@ -81,6 +96,36 @@ public interface McmcCommoditySolrService {
 	public boolean cleanCommodityFlashSale(Integer flashSaleId);
 
 	public boolean updateCommodityFlashSale(String commodityId, Integer sortPosition, Integer flashSaleId, Date activityStartTime, Date activityEndTime);
+
+	/**
+	 * 批量修改商品闪购信息
+	 * @param commodityParams
+	 * @param flashSaleId
+	 * @param activityStartTime
+	 * @param activityEndTime
+	 * @return
+	 */
+	public boolean updateCommodityFlashSale(List<ActivityCommodityParam> commodityParams,  Integer flashSaleId, Date activityStartTime, Date activityEndTime);
+
+	public boolean cleanCommoditySecKill(String secKillSign);
+
+	public boolean updateCommoditySecKill(String commodityId,String secKillSign);
+
+	public boolean updateCommoditySecKill(List<String> commodityIds, String secKillSign);
+
+//	/**
+//	 * 搜索有商品的商品分类列表
+//	 * @param categoryParam	参数对象
+//	 * @return
+//	 */
+//	public Map<String, Object> searchCommodityCategoryHasCommodity(BuyerCategoryParam categoryParam);
+
+	/**
+	 * 删除指定ID的商品
+	 * @param commodityId	商品ID
+	 * @return
+	 */
+	public boolean deleteCommodity(String commodityId);
 
 //	public boolean updateCommoditySale(String commodityId, Integer sortPosition);
 

@@ -35,7 +35,7 @@ public interface ROAUserAccountService {
 
 	/**
 	 * 修改/添加账号信息
-	 * @param accountEntity
+	 * @param accountParam
 	 * @return
 	 * @throws MallShopException
 	 */
@@ -60,5 +60,14 @@ public interface ROAUserAccountService {
 //	 * 根据导购id获取导购账号信息
 //	 */
 //	public UserAccountDto getAccountListBySaleId(Integer guideId) throws Exception;
+
+
+	/**
+	 * 返回店铺下 店长的 imId
+	 * @param shopIds 店铺ID
+	 * @return
+	 * @throws Exception
+	 */
+	public List<String> findImId(List<String> shopIds) throws Exception;
 
 }

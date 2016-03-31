@@ -11,105 +11,112 @@ import com.rongyi.core.bean.ResponseVO;
 public interface MallService {
     /**
      * 获取商场详情
-     * @param mallId
-     * @param channel
-     * @param timeStamp
-     * @param sign
+     * @param mallId	商场ID
      * @return
+     * @throws Exception 
      */
 
-    ResponseVO getMall(String mallId, String channel, long timeStamp, String sign);
+    ResponseVO getMall(String mallId);
+    
+    /**
+	 * 通过商场ID列表获取商场详情
+	 * @param ids 商场id列表
+	 * @return 带List&lt;MallVO&gt;的ResponseVO
+	 */
+	ResponseVO getMallsByIds(String ids);
 
     /**
      * 获取商场楼层
-     * @param mallId
-     * @param timeStamp
-     * @param channel
-     * @param sign
+     * @param mallId	商场ID
      * @return
      */
-    ResponseVO getFloorsByMallId(String mallId, long timeStamp, String channel, String sign);
+    ResponseVO getFloorsByMallId(String mallId);
 
     /**
-     *
-     * @param ids
-     * @param timeStamp
-     * @param channel
-     * @param sign
+     * 获取楼层详细
+     * @param ids	floorId列表（，分隔）
      * @return
      */
-    ResponseVO getFloorById(String ids, long timeStamp, String channel, String sign);
+    ResponseVO getFloorById(String ids);
 
     /**
-     *
-     * @param timeStamp
-     * @param channel
-     * @param sign
+     * 获取全部类别
      * @return
      */
-    ResponseVO getAllCategories(long timeStamp, String channel, String sign);
+    ResponseVO getAllCategories();
 
     /**
-     *
-     * @param mallId
-     * @param timeStamp
-     * @param channel
-     * @param sign
+     * 根据商场ID获取自定义类别
+     * @param mallId	商场ID
      * @return
      */
-    ResponseVO getCustomCategoriesByMallId(String mallId, long timeStamp, String channel, String sign);
+    ResponseVO getCustomCategoriesByMallId(String mallId);
 
     /**
      *
      * @param brndId
-     * @param timeStamp
-     * @param channel
-     * @param sign
      * @return
      */
-    ResponseVO getBrandById(String brndId, long timeStamp, String channel, String sign);
+    ResponseVO getBrandById(String brndId);
 
     /**
      *
      * @param mallId
-     * @param timeStamp
-     * @param channel
-     * @param sign
      * @return
      */
-    ResponseVO getAds(String mallId, long timeStamp, String channel, String sign);
+    ResponseVO getAds(String mallId);
 
 
     /**
      * get communal facility
      * @param floorId
-     * @param timeStamp
-     * @param channel
-     * @param sign
      * @return
      */
-    ResponseVO getCommunalFacility(String floorId, long timeStamp, String channel, String sign);
+    ResponseVO getCommunalFacility(String floorId);
 
     /**
-     * get area info
-     * @param type
-     * @param timeStamp
-     * @param channel
-     * @param sign
+     * 根据类型和父级ID获取区域信息
+     * @param type		类型
+     * @param parentId	父级ID
      * @return
      */
-    ResponseVO getArea(Integer type, String parentId, long timeStamp, String channel, String sign);
+    ResponseVO getArea(Integer type, String parentId);
     
     /**
      * 根据商场名称 模糊匹配查询商场列表
      * @param mallName		商场名称
      * @param page			当前页
      * @param pageSize		每页显示条数
-     * @param timeStamp		请求时间
-     * @param channel		Token值
-     * @param sign			MD5码
      * @return	ResponseVO 对象
      */
-    ResponseVO getMallList(String mallName, Integer page, Integer pageSize, Long timeStamp, String channel, String sign);
+    ResponseVO getMallList(String mallName, Integer page, Integer pageSize);
+    
+    /**
+     * 根据集团 ID查询商场 
+     * @param groupId
+     * @return
+     */
+    ResponseVO getMallListByGroupId(String groupId);
+
+	ResponseVO getAdNumByMallId(String mallId);
+
+	ResponseVO getAdsByMallId(String mall_id);
+
+	ResponseVO getAdById(String ad_id);
+	
+	/**
+	 * 获取默认素材列表
+	 * 
+	 * @return
+	 */
+	ResponseVO getDefaultAds();
+
+	/**
+	 * 获取默认素材详情
+	 * 
+	 * @param defaultId
+	 * @return
+	 */
+	ResponseVO getDefaultAdById(String defaultId);
 
 }

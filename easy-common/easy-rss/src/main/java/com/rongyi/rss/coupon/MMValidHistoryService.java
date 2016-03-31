@@ -37,5 +37,12 @@ public interface MMValidHistoryService {
      * @return
      */
     ValidCommissionVO getValidCommissionPaging(MMValidHistoryParam params);
+    
+    /**
+     * 核销佣金明细
+     * @param couponCode 券码
+     * @return
+     */
+    CouponHistoryVO getValidCommissionDetail(String couponCode);
 
 }

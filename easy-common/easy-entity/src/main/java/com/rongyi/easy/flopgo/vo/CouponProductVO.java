@@ -1,9 +1,9 @@
 package com.rongyi.easy.flopgo.vo;
 
-import com.rongyi.easy.coupon.entity.CouponCommodity;
-
 import java.io.Serializable;
 import java.util.List;
+
+import com.rongyi.easy.coupon.entity.CouponCommodity;
 
 /**
  * 做现金卷的信息封装返回
@@ -42,7 +42,7 @@ public class CouponProductVO implements Serializable{
 		this.shopName=couponProduct.getShopName();
 		this.productNum=couponProduct.getCommodityCode();
 		this.productName=couponProduct.getCommodityName();
-		this.status=couponProduct.getStatus().toString();
+		this.status=couponProduct.getStatus() == null ? "1":couponProduct.getStatus().toString();
 		this.pics=couponProduct.getPics2List();
 		
 		}

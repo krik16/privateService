@@ -1,29 +1,30 @@
 package com.rongyi.core.bean;
 
+import java.io.Serializable;
+
 import net.sf.json.JSONObject;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
-import java.io.Serializable;
-
 /*
 使用示例说明：
 {
-   		"meta": {
-       	        	 "msg": "success",                     //返回的是错误提示信息
-       		         "errno": 0                            //0代表成功  1，代表失败
-                },
-        "result": {
-                     "data":{} or []                       //多行记录返回数组
-                     "page":{                              //page 是可选项，data为数组时才会有page，也可以无page信息（不分页）。
-                            "currentPage"":1 ,             //当前页,目前系统有从0或1开始。统一1开始
-                            "pageSize":10,                 //分页的数量
-                            "totalPage":1,                 //总页数
-                            "totalCount":10                //总行数
-                        }
-                   }
+    "meta": {
+        "msg": "success",                     //返回的是错误提示信息
+        "errno": 0                            //0代表成功  1，代表失败
+    },
+    "result": {
+        "data":{} or []                       //多行记录返回数组
+        "page":{                              //page 是可选项，data为数组时才会有page，也可以无page信息（不分页）。
+            "currentPage"":1 ,                //当前页,目前系统有从0或1开始。统一1开始
+            "pageSize":10,                    //分页的数量
+            "totalPage":1,                    //总页数
+            "totalCount":10                   //总行数
+        }
+    }
 }
 */
 
@@ -33,12 +34,13 @@ import java.io.Serializable;
  * @author Breggor
  */
 public class ResponseVO implements java.io.Serializable {
-
-    public static final Meta SUCCESS = new Meta(0, "success"); //成功
+	private static final long serialVersionUID = 4807318268209609704L;
+	
+	public static final Meta SUCCESS = new Meta(0, "success"); //成功
     public static final Meta FAILURE = new Meta(1, "failure"); //失败
 
-    private Meta meta; // errno=0：成功,errno=1:失败
-    private Result result;//数据
+    private Meta meta;      	//errno=0：成功, errno=1：失败
+    private Result result;  	//数据
     
     public ResponseVO(){
     	
@@ -98,6 +100,17 @@ public class ResponseVO implements java.io.Serializable {
     public static ResponseVO failure(int errno, String msg) {
         return new ResponseVO(new Meta(errno, msg), null);
     }
+    
+    /**
+     * 失败码/失败信息回值对象
+     *
+     * @param errno
+     * @param msg
+     * @return ResponseData
+     */
+    public static <T> ResponseVO failure(int errno, String msg, T data) {
+        return new ResponseVO(new Meta(errno, msg), new Result(data, null));
+    }
 
 
     private <T> ResponseVO(Meta meta, T data, Integer currentPage, Integer pageSize, Integer totalCount) {
@@ -120,6 +133,8 @@ public class ResponseVO implements java.io.Serializable {
     public void setMeta(int errno, String msg) {
         this.meta = new Meta(errno, msg);
     }
+
+    public void setMeta(Meta meta) {this.meta=meta;}
 
     public Result getResult() {
         return result;
@@ -144,6 +159,9 @@ public class ResponseVO implements java.io.Serializable {
             return page;
         }
 
+        public void setPage(Page page) {
+            this.page = page;
+        }
 
         public T getData() {
             return data;
@@ -163,13 +181,21 @@ public class ResponseVO implements java.io.Serializable {
     }
 
     public static class Meta implements Serializable {
-        private int errno; //错误码
-        private String msg;  //提示信息
+        private int errno;      //错误码
+        private String msg;     //提示信息
 
         private Meta() {}
 
         private Meta(int errno, String msg) {
             this.errno = errno;
+            this.msg = msg;
+        }
+
+        public void setErrno(int errno) {
+            this.errno = errno;
+        }
+
+        public void setMsg(String msg) {
             this.msg = msg;
         }
 
@@ -215,10 +241,11 @@ public class ResponseVO implements java.io.Serializable {
     }
 
     public static class Page implements Serializable {
-        private Integer currentPage;//当前页：统一从1开始
-        private Integer pageSize = 10; //每页行数
-        private Integer totalCount; //总行数
-        private Integer totalPage = 0;//总页数
+		private static final long serialVersionUID = -9015310768471855060L;
+		private Integer currentPage;	//当前页：统一从1开始
+        private Integer pageSize = 10; 	//每页行数
+        private Integer totalCount; 	//总行数
+        private Integer totalPage = 0;	//总页数
 
         private Page() {}
 
@@ -226,6 +253,22 @@ public class ResponseVO implements java.io.Serializable {
             this.currentPage = currentPage;
             this.pageSize = pageSize;
             this.totalCount = totalCount;
+        }
+
+        public void setCurrentPage(Integer currentPage) {
+            this.currentPage = currentPage;
+        }
+
+        public void setPageSize(Integer pageSize) {
+            this.pageSize = pageSize;
+        }
+
+        public void setTotalCount(Integer totalCount) {
+            this.totalCount = totalCount;
+        }
+
+        public void setTotalPage(Integer totalPage) {
+            this.totalPage = totalPage;
         }
 
         public Integer getCurrentPage() {

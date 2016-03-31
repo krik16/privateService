@@ -46,7 +46,7 @@ public class Coupon implements Serializable {
     private String name;
 
     /**
-     * 卡券类型:代金券[0], 抵扣券[1], 红包[2]
+     * 卡券类型:代金券[0], 抵扣券[1], 红包[2],活动券[3]
      */
     private Integer couponType;
 
@@ -210,6 +210,11 @@ public class Coupon implements Serializable {
     private String outChannelName;
 
     /**
+     * 券码展现形式：正常显示[0] URL显示[1] 2维码形式[2]
+     */
+    private Integer codeShowType;
+
+    /**
      * 店铺对应的公司名
      */
     private String sourceName;
@@ -248,6 +253,7 @@ public class Coupon implements Serializable {
      * 是否删除：否[false], 是[true], 默认为false未删除
      */
     private Boolean isDeleted;
+
 
     /**
      * 代金券分类
@@ -568,6 +574,8 @@ public class Coupon implements Serializable {
         return detailPicUrl;
     }
 
+
+
     public List<String> getDetailPicUrls() {
         List<String> list = ListUtils.EMPTY_LIST;
         if (StringUtils.isNotBlank(detailPicUrl)) {
@@ -857,6 +865,8 @@ public class Coupon implements Serializable {
         if (stockCount == null) {
             stockCount = totalCount;
         }
+        if(totalCount==0)
+            return 0;
         return (totalCount - stockCount < 0) ? 0 : totalCount - stockCount;
     }
 
@@ -925,7 +935,13 @@ public class Coupon implements Serializable {
         this.validDays = validDays;
     }
 
-   
+    public Integer getCodeShowType() {
+        return codeShowType;
+    }
+
+    public void setCodeShowType(Integer codeShowType) {
+        this.codeShowType = codeShowType;
+    }
 
     public List<CouponCommodityCategory> getCouponCommodityCategories() {
         return couponCommodityCategories;
@@ -972,6 +988,7 @@ public class Coupon implements Serializable {
                 .append("inChannelName", inChannelName)
                 .append("outChannel", outChannel)
                 .append("outChannelName", outChannelName)
+                .append("codeShowType", codeShowType)
                 .append("sourceName", sourceName)
                 .append("createUser", createUser)
                 .append("createAt", createAt)

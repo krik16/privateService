@@ -19,7 +19,7 @@ public interface OrderNoGenService {
 	
 	/**	
 	 * @Description: 新新版本订单号生成规则(MMdd+8位随机号+HHmm) 
-	 * @param type 0:保留,1:商品订单首字符，2:优惠券订单首字符,3:结算系统对账单号首字符
+	 * @param type 0:保留,1:商品订单首字符，2:优惠券订单首字符,3:结算系统对账单号首字符,4:购物车订单首字符，5:返佣流水号首字符
 	 * @return	
 	 * @Author:  柯军
 	 * @datetime:2015年9月1日下午5:26:29

@@ -12,8 +12,12 @@ import java.util.List;
  */
 public class DetailListVO implements Serializable {
 
-	private String date;// 交易时间
-	private String amount;// 增加
+	private String date;// 交易完成时间
+	private String deliveryDate;// 发货时间
+	private String auditDate; // 审核时间
+	private String commissionPayDate; // 发放时间
+	private String amount;// 金额
+	private String realAmount; //订单总金额（买家实际支付金额）
 	private String orderId;// 大订单id
 	private String orderNum;// 大订单号
 	private String commodityPostage;// 运费
@@ -23,7 +27,69 @@ public class DetailListVO implements Serializable {
 								// 2: 一级审核通过, 3: 二级审核通过, 4: 佣金已到账
 	private List<SonDetailListVO> sonOrderList;// 子订单数据
 	private String disconnt;// 折扣
+	private String buyerName;// 买家名称
+	private String buyerIM;// 买家IM账号
+	private String traceStatus; //详情状态（轨迹图） 0 发货成功（处理中） 1 订单完成 2 订单失败 3 审核成功 4审核失败 5已发放
+	private String realCommodityCommission;// 该订单原佣金金额
+	private String failReason;// 审核失败理由
+	private List<NodeVO> nodeList;// 节点数据
 
+	public List<NodeVO> getNodeList() {
+		return nodeList;
+	}
+
+	public void setNodeList(List<NodeVO> nodeList) {
+		this.nodeList = nodeList;
+	}
+
+	public String getRealCommodityCommission() {
+		return realCommodityCommission;
+	}
+
+	public void setRealCommodityCommission(String realCommodityCommission) {
+		this.realCommodityCommission = realCommodityCommission;
+	}
+
+	public String getFailReason() {
+		return failReason;
+	}
+
+	public void setFailReason(String failReason) {
+		this.failReason = failReason;
+	}
+
+	public String getTraceStatus() {
+		return traceStatus;
+	}
+
+	public void setTraceStatus(String traceStatus) {
+		this.traceStatus = traceStatus;
+	}
+
+	
+	public String getRealAmount() {
+		return realAmount;
+	}
+
+	public void setRealAmount(String realAmount) {
+		this.realAmount = realAmount;
+	}
+
+	public String getBuyerName() {
+		return buyerName;
+	}
+
+	public void setBuyerName(String buyerName) {
+		this.buyerName = buyerName;
+	}
+
+	public String getBuyerIM() {
+		return buyerIM;
+	}
+
+	public void setBuyerIM(String buyerIM) {
+		this.buyerIM = buyerIM;
+	}
 
 	public String getDate() {
 		return date;
@@ -105,19 +171,37 @@ public class DetailListVO implements Serializable {
 		this.disconnt = disconnt;
 	}
 
+	public String getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(String deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+
+	public String getAuditDate() {
+		return auditDate;
+	}
+
+	public void setAuditDate(String auditDate) {
+		this.auditDate = auditDate;
+	}
+
+	public String getCommissionPayDate() {
+		return commissionPayDate;
+	}
+
+	public void setCommissionPayDate(String commissionPayDate) {
+		this.commissionPayDate = commissionPayDate;
+	}
+
 	@Override
 	public String toString() {
-		return "DetailListVO{" +
-				"date='" + date + '\'' +
-				", amount='" + amount + '\'' +
-				", orderId='" + orderId + '\'' +
-				", orderNum='" + orderNum + '\'' +
-				", commodityPostage='" + commodityPostage + '\'' +
-				", status='" + status + '\'' +
-				", allCommodityCommission='" + allCommodityCommission + '\'' +
-				", ticketStatus='" + ticketStatus + '\'' +
-				", sonOrderList=" + sonOrderList +
-				", disconnt='" + disconnt + '\'' +
-				'}';
+		return "DetailListVO [date=" + date + ", deliveryDate=" + deliveryDate + ", amount=" + amount + ", realAmount="
+				+ realAmount + ", orderId=" + orderId + ", orderNum=" + orderNum + ", commodityPostage=" + commodityPostage
+				+ ", status=" + status + ", allCommodityCommission=" + allCommodityCommission + ", ticketStatus=" + ticketStatus
+				+ ", sonOrderList=" + sonOrderList + ", disconnt=" + disconnt + ", buyerName=" + buyerName + ", buyerIM="
+				+ buyerIM + ", traceStatus=" + traceStatus + ", realCommodityCommission=" + realCommodityCommission
+				+ ", failReason=" + failReason + ", nodeList=" + nodeList + "]";
 	}
 }

@@ -14,6 +14,8 @@ public class CommodityBuyerVO implements Serializable{
     private String commodityPostage;//我是商品邮费”,
     private String commodityDescription;//我是商品描述”,
     private String commodityName;//我是商品名称”,
+    private boolean supportCourierDeliver;//支持快递发货    导购：true是   false否；买手：默认true   
+	private boolean supportSelfPickup;//支持到店自提  true 是    false否
     private String shopId;//123”,
     private boolean isCollected;  //是否被收藏
     private String commodityCode;//商品编码
@@ -30,6 +32,8 @@ public class CommodityBuyerVO implements Serializable{
         this.commodityCPriceMin = commodity.getcPriceMin();
         this.commodityPostage = commodity.getPostage();
         this.commodityDescription = commodity.getDescription();
+        this.supportCourierDeliver = commodity.isSupportCourierDeliver();
+		this.supportSelfPickup = commodity.isSupportSelfPickup();
         this.commodityName = commodity.getName();
         this.shopId = commodity.getShopId();
         this.commodityCode=commodity.getCode();
@@ -108,7 +112,19 @@ public class CommodityBuyerVO implements Serializable{
         this.commodityName = commodityName;
     }
     
-    public String getShopId() {
+    public boolean isSupportCourierDeliver() {
+		return supportCourierDeliver;
+	}
+	public void setSupportCourierDeliver(boolean supportCourierDeliver) {
+		this.supportCourierDeliver = supportCourierDeliver;
+	}
+	public boolean isSupportSelfPickup() {
+		return supportSelfPickup;
+	}
+	public void setSupportSelfPickup(boolean supportSelfPickup) {
+		this.supportSelfPickup = supportSelfPickup;
+	}
+	public String getShopId() {
         return shopId;
     }
     

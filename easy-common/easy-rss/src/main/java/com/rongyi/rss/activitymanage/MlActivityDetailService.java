@@ -1,6 +1,7 @@
 package com.rongyi.rss.activitymanage;
 
 import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.easy.activitymanage.param.SearchSecKillParam;
 import com.rongyi.easy.rmmm.param.FlashSaleParam;
 
 /**
@@ -22,4 +23,11 @@ public interface MlActivityDetailService  {
      * @return
      */
     public ResponseVO searchIfashBuyDetailByParam(FlashSaleParam flashSaleParam);
+
+    /**
+     * 查询秒杀的接口
+     * @param searchSecKillParam
+     * @return
+     */
+    public ResponseVO searchSeckillDetailByParam(SearchSecKillParam searchSecKillParam);
 }

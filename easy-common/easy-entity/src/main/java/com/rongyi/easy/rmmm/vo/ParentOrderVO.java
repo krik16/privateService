@@ -2,6 +2,7 @@ package com.rongyi.easy.rmmm.vo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 public class ParentOrderVO implements Serializable {
@@ -9,6 +10,10 @@ public class ParentOrderVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String orderId;// 大订单id
+	private String orderCartNo;// 购物车订单号
+	private String paymentIdList;// 支付流水号
+	private String couponCodes;// 券码（多个逗号隔开）
+	private Byte payChannel;// 券码（多个逗号隔开）
 
 	private String mallName;// 商场名称
 
@@ -18,9 +23,10 @@ public class ParentOrderVO implements Serializable {
 
 	private List<String> shopIM;// 店铺可用IM账号
 
-	private String totalPrice;// 总价
+	private String totalPrice = "0";// 总价
+	private BigDecimal payAmount = new BigDecimal(0);// 实际支付价格
 
-	private String parentOrderStatus;// 父订单状态
+	private String parentOrderStatus;// 父订单状态 1未付款 2待发货 3已发货 4确认收货 5已关闭
 
 	private String nextStatusTime;// 预计进入下一状态的时间
 
@@ -38,7 +44,7 @@ public class ParentOrderVO implements Serializable {
 
 	private String districtName;// 区名称
 
-	private String commodityPostage;// 运费
+	private String commodityPostage = "0";// 运费
 
 	private String orderNum;// 订单编号
 
@@ -56,29 +62,31 @@ public class ParentOrderVO implements Serializable {
 
 	private String shopLogo;// 店铺logo
 
-	private String isComment;// 是否评价  -1:表示不可以评价 0：表示未评价 1：表示已评价
+	private String isComment = "-1";// 是否评价  -1:表示不可以评价 0：表示未评价 1：表示已评价
 
-	private String closeType;// 父订单关闭类型 (0完成 1关闭)
+	private String closeType = "0";// 父订单关闭类型 (0完成 1关闭)
 
 	private String closeReason;// 关闭原因
 
-	private String originalTotalPrice;// 原来的总价
+	private String originalTotalPrice  = "0";// 原来的总价
 
 	private String buyerNickName;// 收货人昵称
 	private String buyerPhone;// 买家手机号（买家账号）
-	private String receiveType;// 收货方式 0快递 1无需快递
+	private String receiveType = "1";// 收货方式 0快递 1无需快递
 	private String nickName;// 导购昵称
 	private String imId;// 导购环信账号
 	private String userLogo;// 导购logo
 	private String userName;// 导购姓名
+	private String userAccount;// 导购账号
 	private String userPhone;// 导购电话
 	private String guideId;// 导购id
 	private Integer guideType;// 1是导购 2是买手
 	private String receiveTime;// 确认收货时间
 	private String cancelTime;// 卖家取消订单时间
 	private String closeTime;// 订单关闭时间
+	private String commentTime;// 评价时间
 	private String statusRoute;// 状态路径
-	private String platformRebateAmount;//用户使用抵扣券后对该订单实际抵扣的金额
+	private String platformRebateAmount = "0";//用户使用抵扣券后对该订单实际抵扣的金额
 	/*
 	 * private String expressBillId;// 物流单号ID
 	 * 
@@ -88,13 +96,123 @@ public class ParentOrderVO implements Serializable {
 	private String expressBillId;// 物流单号ID
 
 	private String expressName;// 物流名称
-	private BigDecimal discountFee;// 商品折扣价
+	private BigDecimal discountFee = BigDecimal.valueOf(0.00);// 商品折扣价
 
-	private String score;// 使用的颜值
-	private String scoreDeduction;// 颜值抵扣金额
-	private String DeductCouponAmount;// 抵扣券实际抵扣价格
+	private String score = "0";// 使用的颜值
+	private String scoreDeduction = "0";// 颜值抵扣金额
+	private String DeductCouponAmount = "0";// 抵扣券实际抵扣价格
 
 	private String liveName;//直播名
+
+	private BigDecimal orderScoreDiscount = BigDecimal.valueOf(0.00);//购物车分摊的积分优惠
+	private BigDecimal orderCouponDiscount = BigDecimal.valueOf(0.00);//购物车分摊的抵扣券优惠
+	private BigDecimal couponDiscount = BigDecimal.valueOf(0.00);//非购物车订单抵扣券抵扣金额
+
+	private BigDecimal orderRebateDiscount = BigDecimal.valueOf(0.00);//购物车分摊的抵扣券优惠
+
+	private Date createAt;//创建时间
+
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	public String getOrderCartNo() {
+		return orderCartNo;
+	}
+
+	public void setOrderCartNo(String orderCartNo) {
+		this.orderCartNo = orderCartNo;
+	}
+
+	public String getPaymentIdList() {
+		return paymentIdList;
+	}
+
+	public void setPaymentIdList(String paymentIdList) {
+		this.paymentIdList = paymentIdList;
+	}
+
+	public Byte getPayChannel() {
+		return payChannel;
+	}
+
+	public BigDecimal getOrderCouponDiscount() {
+		return orderCouponDiscount;
+	}
+
+	public void setOrderCouponDiscount(BigDecimal orderCouponDiscount) {
+		this.orderCouponDiscount = orderCouponDiscount;
+	}
+
+	public BigDecimal getCouponDiscount() {
+		return couponDiscount;
+	}
+
+	public void setCouponDiscount(BigDecimal couponDiscount) {
+		this.couponDiscount = couponDiscount;
+	}
+
+	public void setPayChannel(Byte payChannel) {
+		this.payChannel = payChannel;
+	}
+
+	public String getCouponCodes() {
+		return couponCodes;
+	}
+
+	public void setCouponCodes(String couponCodes) {
+		this.couponCodes = couponCodes;
+	}
+
+	public String getUserAccount() {
+		return userAccount;
+	}
+
+	public void setUserAccount(String userAccount) {
+		this.userAccount = userAccount;
+	}
+
+	private String changePriceFlag;//改价标志（0没改价,1改价,2改价影响抵扣券）
+
+	public BigDecimal getPayAmount() {
+		return payAmount;
+	}
+
+	public void setPayAmount(BigDecimal payAmount) {
+		this.payAmount = payAmount;
+	}
+
+	private Integer shopNum = 0;//店铺数量
+
+	private BigDecimal totalHongBaoAmount = BigDecimal.valueOf(0.0);//红包实际抵扣价格
+	/**
+	 *是否是购物车订单
+	 */
+	private boolean isCartOrder;
+	
+	private boolean ifDeleteOrder = false;//true表示可以删除订单 false
+	
+	private boolean ifOnDisplay = false;//true表示横着显示 false表示竖着显示
+
+	public boolean isIfOnDisplay() {
+		return ifOnDisplay;
+	}
+
+	public void setIfOnDisplay(boolean ifOnDisplay) {
+		this.ifOnDisplay = ifOnDisplay;
+	}
+
+	public boolean isIfDeleteOrder() {
+		return ifDeleteOrder;
+	}
+
+	public void setIfDeleteOrder(boolean ifDeleteOrder) {
+		this.ifDeleteOrder = ifDeleteOrder;
+	}
+
+	public void setCartOrder(boolean isCartOrder) {
+		this.isCartOrder = isCartOrder;
+	}
 
 	public String getLiveName() {
 		return liveName;
@@ -497,6 +615,72 @@ public class ParentOrderVO implements Serializable {
 		this.platformRebateAmount = platformRebateAmount;
 	}
 
+	public BigDecimal getOrderScoreDiscount() {
+		return orderScoreDiscount;
+	}
+
+	public void setOrderScoreDiscount(BigDecimal orderScoreDiscount) {
+		this.orderScoreDiscount = orderScoreDiscount;
+	}
+
+	public BigDecimal getOrderRebateDiscount() {
+		return orderRebateDiscount;
+	}
+
+	public void setOrderRebateDiscount(BigDecimal orderRebateDiscount) {
+		this.orderRebateDiscount = orderRebateDiscount;
+	}
+
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+
+	public String getChangePriceFlag() {
+		return changePriceFlag;
+	}
+
+	public void setChangePriceFlag(String changePriceFlag) {
+		this.changePriceFlag = changePriceFlag;
+	}
+
+	public Integer getShopNum() {
+		return shopNum;
+	}
+
+	public void setShopNum(Integer shopNum) {
+		this.shopNum = shopNum;
+	}
+
+	public BigDecimal getTotalHongBaoAmount() {
+		return totalHongBaoAmount;
+	}
+
+	public void setTotalHongBaoAmount(BigDecimal totalHongBaoAmount) {
+		this.totalHongBaoAmount = totalHongBaoAmount;
+	}
+
+	public boolean isCartOrder() {
+		return isCartOrder;
+	}
+
+	public void setIsCartOrder(boolean isCartOrder) {
+		this.isCartOrder = isCartOrder;
+	}
+
+	public String getCommentTime()
+	{
+		return commentTime;
+	}
+
+	public void setCommentTime(String commentTime)
+	{
+		this.commentTime = commentTime;
+	}
+
 	@Override
 	public String toString() {
 		return "ParentOrderVO{" +
@@ -542,6 +726,7 @@ public class ParentOrderVO implements Serializable {
 				", cancelTime='" + cancelTime + '\'' +
 				", closeTime='" + closeTime + '\'' +
 				", statusRoute='" + statusRoute + '\'' +
+				", platformRebateAmount='" + platformRebateAmount + '\'' +
 				", expressBillId='" + expressBillId + '\'' +
 				", expressName='" + expressName + '\'' +
 				", discountFee=" + discountFee +
@@ -549,7 +734,13 @@ public class ParentOrderVO implements Serializable {
 				", scoreDeduction='" + scoreDeduction + '\'' +
 				", DeductCouponAmount='" + DeductCouponAmount + '\'' +
 				", liveName='" + liveName + '\'' +
-				", platformRebateAmount='" + platformRebateAmount + '\'' +
+				", orderScoreDiscount=" + orderScoreDiscount +
+				", orderRebateDiscount=" + orderRebateDiscount +
+				", createAt=" + createAt +
+				", changePriceFlag='" + changePriceFlag + '\'' +
+				", shopNum=" + shopNum +
+				", totalHongBaoAmount=" + totalHongBaoAmount +
+				", isCartOrder=" + isCartOrder +
 				'}';
 	}
 }

@@ -5,17 +5,16 @@ import java.util.List;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.param.CouponCommodityParam;
+import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.mcmc.*;
 import com.rongyi.easy.mcmc.param.SaleParam;
+import com.rongyi.easy.mcmc.vo.*;
 
+import com.rongyi.easy.solr.McmcCommodityDocument;
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.bean.ResponseVO;
-import com.rongyi.easy.mcmc.vo.CommodityPageBuyerVO;
-import com.rongyi.easy.mcmc.vo.CommoditySpecVO;
-import com.rongyi.easy.mcmc.vo.CommodityVO;
-import com.rongyi.easy.mcmc.vo.CommodityWebVO;
 import com.rongyi.easy.solr.param.CommodityBrandSearchParam;
 import com.rongyi.easy.solr.param.CommoditySearchParam;
 
@@ -26,7 +25,7 @@ public interface CommodityService {
     public List<Commodity> getCommodityListByShopIds(List<String> shopIds);
 
     public CommodityVO getCommoditySpecInfoById(String commodityId, String specId);
-
+    
     public ResponseResult getCommodityById(String id, long shopId);
 
     public ResponseResult getCommodityListByShopId(String id, int orderBy, String keyword, int currentpage, int pagesize);
@@ -54,6 +53,8 @@ public interface CommodityService {
     public ResponseResult getCategoryById(String id);
 
     public ResponseResult searchCommodity(CommoditySearchParam param);
+
+    public ResponseResult searchCommodityForMallLife(CommoditySearchParam param);
 
     public ResponseResult getBrandCommodity(String brandId, String categoryId, int orderBy, int currentpage, int pagesize);
 
@@ -128,4 +129,50 @@ public interface CommodityService {
     public CommoditySpecColumn findCommoditySpecColumnById(ObjectId id);
 
     public List<Commodity> getCommodityByIds(List<ObjectId> ids);
+
+    public List<CommodityBuyerVO> getCommodityBySPU(String commodityId, String spu);
+
+    public List<McmcCommodityDocument> getMcmcCommodityDocumentList(int skip,int pageSize) throws Exception;
+
+    public McmcCommodityDocument getMmcmcCommodityDocumentById(String commodityId) throws Exception;
+
+    public long getCommodityCount();
+    /**
+	 * 获取有商品的分类列表
+	 * @param categoryParam	参数对象
+	 * @return
+	 */
+//	public ResponseResult getBuyerCommodityCategoryHasCommodity(BuyerCategoryParam categoryParam);
+
+    /**
+     * 删除商品
+     * @param commodityId	商品ID
+     * @param shopId		店铺ID
+     * @param identity		角色
+     * @return
+     */
+	public ResponseVO deleteCommodity(String commodityId, Long shopId, Integer identity);
+
+    /**
+     * 置顶，取消置顶接口，type为1，置顶，为0，取消置顶
+     * @param ids
+     * @param sort
+     * @param type
+     * @return
+     */
+    ResponseVO  topByIds(List<String> ids,Integer sort,Integer type);
+    /**
+     * 获取商品直播的地址和品牌
+     * @param commodityIds
+     * @return
+     */
+	public ResponseVO getLiveAddressAndBrandByCommodityIds(List<String> commodityIds);
+
+    /**
+     * 获取商品邮费
+     * @param userId
+     * @return
+     */
+    public String getPostageByUserId(String userId);
+
 }

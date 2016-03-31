@@ -2,6 +2,8 @@ package com.rongyi.rss.mallshop.search;
 
 import com.rongyi.easy.rmmm.entity.KeywordSearchHistory;
 
+import java.util.List;
+
 /*
  * Copyright (C),上海容易网电子商务有限公司
  * Author:  俞志坚
@@ -26,4 +28,10 @@ public interface IKeywordSearchHistoryService {
      * @param keywordSearchHistory
      */
     public void save(KeywordSearchHistory keywordSearchHistory);
+
+    public void update(KeywordSearchHistory keywordSearchHistory);
+
+    public void delete(String id);
+
+    public List<KeywordSearchHistory> findList(int type,String keyWord);
 }

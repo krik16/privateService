@@ -1,6 +1,9 @@
 package com.rongyi.easy.rmmm.vo.draw;
 
 import java.io.Serializable;
+import java.util.List;
+
+import com.rongyi.easy.rmmm.vo.NodeVO;
 
 /**
 * @ClassName: DrawDetailVO
@@ -29,6 +32,28 @@ public class DrawDetailVO implements Serializable {
 	 * @Fields status : TODO(状态: 全部[0] 已发放[1] 处理中[2] 失败[3])
 	 */
 	private String status;
+	
+	private Integer drawId;//提现记录id
+	
+	private List<NodeVO> nodeList;// 节点数据
+
+	
+
+	public List<NodeVO> getNodeList() {
+		return nodeList;
+	}
+
+	public void setNodeList(List<NodeVO> nodeList) {
+		this.nodeList = nodeList;
+	}
+
+	public Integer getDrawId() {
+		return drawId;
+	}
+
+	public void setDrawId(Integer drawId) {
+		this.drawId = drawId;
+	}
 
 	public String getDate() {
 		return date;
@@ -60,6 +85,12 @@ public class DrawDetailVO implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	@Override
+	public String toString() {
+		return "DrawDetailVO [date=" + date + ", accountNo=" + accountNo + ", amount=" + amount + ", status=" + status
+				+ ", drawId=" + drawId + ", nodeList=" + nodeList + "]";
 	}
 
 }

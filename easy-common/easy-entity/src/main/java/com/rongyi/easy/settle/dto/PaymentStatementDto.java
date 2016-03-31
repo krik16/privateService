@@ -9,11 +9,11 @@ import java.util.Date;
 public class PaymentStatementDto implements Serializable {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = -5216265731481877728L;
+     *
+     */
+    private static final long serialVersionUID = -5216265731481877728L;
 
-	private Integer id;
+    private Integer id;
 
     private Byte type;
 
@@ -44,46 +44,46 @@ public class PaymentStatementDto implements Serializable {
     private Date statusUpdateTime;
 
     private Byte status;
-    
+
     private Date createAt;
-    
+
     private Integer paymentId;
 
     /**  付款单号 */
     private String payNo;
-    
+
     private Date payTime;
-    
+
     private String tradeNo;
 
     /**  支付姓名 */
     private String payName;
-    
+
     /**
      * 下载人
      */
     private String downLoadUser;
-    
+
     /**
      * 下载时间
      */
     private Date downLoadTime;
-    
+
     /**
      * 预计付款时间
      */
     private Date predictPayTime;
-    
+
     /**
      * 付款模式
      */
     private Byte payMode;
-    
+
     /**
      * 滚动类型
      */
     private Byte rollType;
-    
+
     /**
      * 滚动日期
      */
@@ -219,21 +219,21 @@ public class PaymentStatementDto implements Serializable {
         this.bussinessId = bussinessId;
     }
 
-	public Date getCreateAt() {
-		return createAt;
-	}
+    public Date getCreateAt() {
+        return createAt;
+    }
 
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
-	}
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
 
-	public Integer getPaymentId() {
-		return paymentId;
-	}
+    public Integer getPaymentId() {
+        return paymentId;
+    }
 
-	public void setPaymentId(Integer paymentId) {
-		this.paymentId = paymentId;
-	}
+    public void setPaymentId(Integer paymentId) {
+        this.paymentId = paymentId;
+    }
 
     public String getPayNo() {
         return payNo;
@@ -251,21 +251,21 @@ public class PaymentStatementDto implements Serializable {
         this.payName = payName;
     }
 
-	public String getTradeNo() {
-		return tradeNo;
-	}
+    public String getTradeNo() {
+        return tradeNo;
+    }
 
-	public void setTradeNo(String tradeNo) {
-		this.tradeNo = tradeNo;
-	}
+    public void setTradeNo(String tradeNo) {
+        this.tradeNo = tradeNo;
+    }
 
-	public Date getPayTime() {
-		return payTime;
-	}
+    public Date getPayTime() {
+        return payTime;
+    }
 
-	public void setPayTime(Date payTime) {
-		this.payTime = payTime;
-	}
+    public void setPayTime(Date payTime) {
+        this.payTime = payTime;
+    }
 
     public String getDesc() {
         return desc;
@@ -275,53 +275,53 @@ public class PaymentStatementDto implements Serializable {
         this.desc = desc;
     }
 
-	public String getDownLoadUser() {
-		return downLoadUser;
-	}
+    public String getDownLoadUser() {
+        return downLoadUser;
+    }
 
-	public void setDownLoadUser(String downLoadUser) {
-		this.downLoadUser = downLoadUser;
-	}
+    public void setDownLoadUser(String downLoadUser) {
+        this.downLoadUser = downLoadUser;
+    }
 
-	public Date getDownLoadTime() {
-		return downLoadTime;
-	}
+    public Date getDownLoadTime() {
+        return downLoadTime;
+    }
 
-	public void setDownLoadTime(Date downLoadTime) {
-		this.downLoadTime = downLoadTime;
-	}
+    public void setDownLoadTime(Date downLoadTime) {
+        this.downLoadTime = downLoadTime;
+    }
 
-	public Date getPredictPayTime() {
-		return predictPayTime;
-	}
+    public Date getPredictPayTime() {
+        return predictPayTime;
+    }
 
-	public void setPredictPayTime(Date predictPayTime) {
-		this.predictPayTime = predictPayTime;
-	}
+    public void setPredictPayTime(Date predictPayTime) {
+        this.predictPayTime = predictPayTime;
+    }
 
-	public Byte getPayMode() {
-		return payMode;
-	}
+    public Byte getPayMode() {
+        return payMode;
+    }
 
-	public void setPayMode(Byte payMode) {
-		this.payMode = payMode;
-	}
+    public void setPayMode(Byte payMode) {
+        this.payMode = payMode;
+    }
 
-	public Byte getRollType() {
-		return rollType;
-	}
+    public Byte getRollType() {
+        return rollType;
+    }
 
-	public void setRollType(Byte rollType) {
-		this.rollType = rollType;
-	}
+    public void setRollType(Byte rollType) {
+        this.rollType = rollType;
+    }
 
-	public String getRollDay() {
-		return rollDay;
-	}
+    public String getRollDay() {
+        return rollDay;
+    }
 
-	public void setRollDay(String rollDay) {
-		this.rollDay = rollDay;
-	}
+    public void setRollDay(String rollDay) {
+        this.rollDay = rollDay;
+    }
 
     public Date getOpTime() {
         return opTime;

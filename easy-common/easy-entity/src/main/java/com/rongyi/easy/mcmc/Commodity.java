@@ -25,8 +25,9 @@ public class Commodity implements  Serializable,Cloneable{
 
 	private Integer saleId; //特卖mysql id
 	private Integer flashSaleId; // 闪购mysql id
-//	private Date activityStartTime; //特卖或闪购开始时间
-//	private Date activityEndTime; //特卖或闪购结束时间
+	private Date activityStartTime; //特卖、闪购、秒杀开始时间
+	private Date activityEndTime; //特卖、闪购、秒杀结束时间
+	private String secKillSign; //秒杀标记
 	
 	private String name;//商品名称
 	private String category;//商品品类id
@@ -60,61 +61,7 @@ public class Commodity implements  Serializable,Cloneable{
 
 	private int identity = -100;//-100 默认值，老数据，不处理权限 0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购6买手
 
-	@Override
-	public String toString() {
-		return "Commodity{" +
-				"id=" + id +
-				", type=" + type +
-				", liveId='" + liveId + '\'' +
-				", isSpot=" + isSpot +
-				", liveStartTime=" + liveStartTime +
-				", liveEndTime=" + liveEndTime +
-				", create_by='" + create_by + '\'' +
-				", name='" + name + '\'' +
-				", category='" + category + '\'' +
-				", shopId='" + shopId + '\'' +
-				", shopMid='" + shopMid + '\'' +
-				", status=" + status +
-				", code='" + code + '\'' +
-				", description='" + description + '\'' +
-				", postage='" + postage + '\'' +
-				", stock=" + stock +
-				", sold=" + sold +
-				", createAt=" + createAt +
-				", updateAt=" + updateAt +
-				", originalPrice='" + originalPrice + '\'' +
-				", currentPrice='" + currentPrice + '\'' +
-				", oPriceOfLowestCPrice='" + oPriceOfLowestCPrice + '\'' +
-				", brandName='" + brandName + '\'' +
-				", mallMid='" + mallMid + '\'' +
-				", shopNum='" + shopNum + '\'' +
-				", update_by='" + update_by + '\'' +
-				", brandMid='" + brandMid + '\'' +
-				", supportCourierDeliver=" + supportCourierDeliver +
-				", picList=" + picList +
-				", specList=" + specList +
-				", price=" + price +
-				", brandId='" + brandId + '\'' +
-				", mallId='" + mallId + '\'' +
-				", categoryIds=" + categoryIds +
-				", customCategory=" + customCategory +
-				//", distribution=" + distribution +
-				", freight=" + freight +
-				", terminalType=" + terminalType +
-				", registerAt=" + registerAt +
-				", soldOutAt=" + soldOutAt +
-				", source=" + source +
-				", stockStatus=" + stockStatus +
-				", oPriceMax='" + oPriceMax + '\'' +
-				", oPriceMin='" + oPriceMin + '\'' +
-				", cPriceMax='" + cPriceMax + '\'' +
-				", cPriceMin='" + cPriceMin + '\'' +
-				", saleId='" + saleId + '\'' +
-				", flashSaleId='" + flashSaleId + '\'' +
-//				", activityStartTime='" + activityStartTime + '\'' +
-//				", activityEndTime='" + activityEndTime + '\'' +
-				'}';
-	}
+	private Integer templateId;//邮费模版id
 
 	public boolean isSupportCourierDeliver() {
 		return supportCourierDeliver;
@@ -222,6 +169,8 @@ public class Commodity implements  Serializable,Cloneable{
 	private String oPriceMin;//商品原最低价（用于买家版）
 	private String cPriceMax;//商品现最高价（用于买家版）
 	private String cPriceMin;//商品现最高价（用于买家版）
+	private Integer sort;//直播商品的排序
+
 	public ObjectId getId() {
 		return id;
 	}
@@ -441,8 +390,10 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setUpdateAt(updateAt);
 		commodity.setSaleId(saleId);
 		commodity.setFlashSaleId(flashSaleId);
+		commodity.setSecKillSign(secKillSign);
 //		commodity.setActivityStartTime(activityStartTime);
 //		commodity.setActivityEndTime(activityEndTime);
+		commodity.setSort(sort);
 		return commodity;
 	}
 	
@@ -476,21 +427,21 @@ public class Commodity implements  Serializable,Cloneable{
 		this.flashSaleId = flashSaleId;
 	}
 
-//	public Date getActivityStartTime() {
-//		return activityStartTime;
-//	}
-//
-//	public void setActivityStartTime(Date activityStartTime) {
-//		this.activityStartTime = activityStartTime;
-//	}
-//
-//	public Date getActivityEndTime() {
-//		return activityEndTime;
-//	}
-//
-//	public void setActivityEndTime(Date activityEndTime) {
-//		this.activityEndTime = activityEndTime;
-//	}
+	public Date getActivityStartTime() {
+		return activityStartTime;
+	}
+
+	public void setActivityStartTime(Date activityStartTime) {
+		this.activityStartTime = activityStartTime;
+	}
+
+	public Date getActivityEndTime() {
+		return activityEndTime;
+	}
+
+	public void setActivityEndTime(Date activityEndTime) {
+		this.activityEndTime = activityEndTime;
+	}
 	public void setSystemNumber(String systemNumber) {
 		this.systemNumber = systemNumber;
 	}
@@ -553,5 +504,50 @@ public class Commodity implements  Serializable,Cloneable{
 
 	public void setIdentity(int identity) {
 		this.identity = identity;
+	}
+
+	public String getSecKillSign() {
+		return secKillSign;
+	}
+
+	public void setSecKillSign(String secKillSign) {
+		this.secKillSign = secKillSign;
+	}
+
+	public Integer getSort() {
+		return null==sort?0:sort;
+	}
+
+	public void setSort(Integer sort) {
+		this.sort = sort;
+	}
+
+	public Integer getTemplateId() {
+		return templateId;
+	}
+
+	public void setTemplateId(Integer templateId) {
+		this.templateId = templateId;
+	}
+	
+	@Override
+	public String toString() {
+		return "Commodity [id=" + id + ", type=" + type + ", liveId=" + liveId + ", isSpot=" + isSpot
+				+ ", liveStartTime=" + liveStartTime + ", liveEndTime=" + liveEndTime + ", create_by=" + create_by
+				+ ", saleId=" + saleId + ", flashSaleId=" + flashSaleId + ", activityStartTime=" + activityStartTime
+				+ ", activityEndTime=" + activityEndTime + ", secKillSign=" + secKillSign + ", name=" + name
+				+ ", category=" + category + ", shopId=" + shopId + ", shopMid=" + shopMid + ", status=" + status
+				+ ", code=" + code + ", description=" + description + ", postage=" + postage + ", stock=" + stock
+				+ ", sold=" + sold + ", lockedStock=" + lockedStock + ", createAt=" + createAt + ", updateAt="
+				+ updateAt + ", originalPrice=" + originalPrice + ", currentPrice=" + currentPrice
+				+ ", oPriceOfLowestCPrice=" + oPriceOfLowestCPrice + ", brandName=" + brandName + ", mallMid=" + mallMid
+				+ ", shopNum=" + shopNum + ", filialeMid=" + filialeMid + ", update_by=" + update_by + ", brandMid="
+				+ brandMid + ", supportCourierDeliver=" + supportCourierDeliver + ", supportSelfPickup="
+				+ supportSelfPickup + ", identity=" + identity + ", picList=" + picList + ", specList=" + specList
+				+ ", price=" + price + ", brandId=" + brandId + ", mallId=" + mallId + ", categoryIds=" + categoryIds
+				+ ", customCategory=" + customCategory + ", freight=" + freight + ", terminalType=" + terminalType
+				+ ", registerAt=" + registerAt + ", soldOutAt=" + soldOutAt + ", source=" + source + ", stockStatus="
+				+ stockStatus + ", systemNumber=" + systemNumber + ", reason=" + reason + ", oPriceMax=" + oPriceMax
+				+ ", oPriceMin=" + oPriceMin + ", cPriceMax=" + cPriceMax + ", cPriceMin=" + cPriceMin + "]";
 	}
 }

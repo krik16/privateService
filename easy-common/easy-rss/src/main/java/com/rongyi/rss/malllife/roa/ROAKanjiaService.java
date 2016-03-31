@@ -47,5 +47,11 @@ public interface ROAKanjiaService {
  
 	ResponseVO helpFriend(Activity activity);
 	public Activity selectActivityId(Activity activity);
+	/**
+	 * 砍价记录
+	 * @param activity
+	 * @return
+	 */
+	public ResponseVO getRecordList(Activity activity);
 
 }

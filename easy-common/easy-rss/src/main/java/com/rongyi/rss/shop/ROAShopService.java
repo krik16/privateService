@@ -33,11 +33,13 @@ public interface ROAShopService {
 	
 	public void insertShopList(List<ShopEntity> shops);
 	
-	/**根据系统编号查询
-	 * @param number
+	/**
+	 * 根据系统编号查询
+	 * @param number		店铺编号
+	 * @param filialeMid	分公司ID
 	 * @return
 	 */
-	public ShopEntity serachShopByNumber(String number,String brandMid);
+	public ShopEntity serachShopByNumber(String number,String filialeMid);
 	
 	/**
 	 * 根据商场和店铺性质查询店铺

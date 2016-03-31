@@ -4,8 +4,6 @@ package com.rongyi.easy.mcmc.vo;
 import java.io.Serializable;
 import java.util.List;
 
-import org.bson.types.ObjectId;
-
 public class CommoditySpecVO2 implements  Serializable {
 	
 	private static final long serialVersionUID = -3491400779856182500L;
@@ -28,6 +26,8 @@ public class CommoditySpecVO2 implements  Serializable {
 	private int remain;//剩余量
 	private int lockedStock;//锁定库存
 	private String sku;
+
+	private String commodityId;
 	
 	public String getId() {
 		return id;
@@ -173,6 +173,12 @@ public class CommoditySpecVO2 implements  Serializable {
 	public void setSku(String sku) {
 		this.sku = sku;
 	}
-	
-	
+
+	public String getCommodityId() {
+		return commodityId;
+	}
+
+	public void setCommodityId(String commodityId) {
+		this.commodityId = commodityId;
+	}
 }

@@ -7,7 +7,7 @@ import java.util.Date;
 public class PaymentEntity implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 2516018941608003955L;
 
@@ -16,7 +16,7 @@ public class PaymentEntity implements Serializable {
 	}
 
 	public PaymentEntity(String payNo, String orderNum, Integer orderType, BigDecimal orderPrice, String title, BigDecimal amountMoney, Integer status, Integer tradeType, Date createTime,
-			Date finishTime, Integer payChannel, String outAccount, String inAccount, Integer showNum, String drawUserId, String payName) {
+						 Date finishTime, Integer payChannel, String outAccount, String inAccount, Integer showNum, String drawUserId, String payName) {
 		super();
 		this.payNo = payNo;
 		this.orderNum = orderNum;
@@ -53,7 +53,7 @@ public class PaymentEntity implements Serializable {
 	private Integer orderType = 0;
 	/**
 	 * 订单金额
-	 * 
+	 *
 	 */
 	private BigDecimal orderPrice;
 
@@ -110,6 +110,11 @@ public class PaymentEntity implements Serializable {
 	 * 允许退款(0:允许，1：拒绝)
 	 */
 	private String refundRejected;
+
+	/**
+	 * 微信支付商户账号b表对应id
+	 */
+	private Integer weixinMchId;
 
 	/**
 	 * 主键id
@@ -386,5 +391,13 @@ public class PaymentEntity implements Serializable {
 
 	public void setRefundRejected(String refundRejected) {
 		this.refundRejected = refundRejected;
+	}
+
+	public Integer getWeixinMchId() {
+		return weixinMchId;
+	}
+
+	public void setWeixinMchId(Integer weixinMchId) {
+		this.weixinMchId = weixinMchId;
 	}
 }

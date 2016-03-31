@@ -29,6 +29,78 @@ public class OrderManagerVO implements Serializable {
 	/** 折扣 */
 	private BigDecimal discountFee;
 	private Integer guideType;
+	private Byte payChannel;//支付渠道
+	private String orderCartNo;//母订单号
+	private String sellerAccount;//卖家账号
+	private BigDecimal realAmount;//订单金额
+	private BigDecimal payAmount;//支付金额
+	private BigDecimal couponAmount;//平台促销抵扣
+	private BigDecimal integralAmount;//积分抵扣
+	private Integer orderSource;//订单来源
+
+	public String getOrderCartNo() {
+		return orderCartNo;
+	}
+
+	public void setOrderCartNo(String orderCartNo) {
+		this.orderCartNo = orderCartNo;
+	}
+
+	public String getSellerAccount() {
+		return sellerAccount;
+	}
+
+	public void setSellerAccount(String sellerAccount) {
+		this.sellerAccount = sellerAccount;
+	}
+
+	public BigDecimal getRealAmount() {
+		return realAmount;
+	}
+
+	public void setRealAmount(BigDecimal realAmount) {
+		this.realAmount = realAmount;
+	}
+
+	public BigDecimal getPayAmount() {
+		return payAmount;
+	}
+
+	public void setPayAmount(BigDecimal payAmount) {
+		this.payAmount = payAmount;
+	}
+
+	public BigDecimal getCouponAmount() {
+		return couponAmount;
+	}
+
+	public void setCouponAmount(BigDecimal couponAmount) {
+		this.couponAmount = couponAmount;
+	}
+
+	public BigDecimal getIntegralAmount() {
+		return integralAmount;
+	}
+
+	public void setIntegralAmount(BigDecimal integralAmount) {
+		this.integralAmount = integralAmount;
+	}
+
+	public Integer getOrderSource() {
+		return orderSource;
+	}
+
+	public void setOrderSource(Integer orderSource) {
+		this.orderSource = orderSource;
+	}
+
+	public Byte getPayChannel() {
+		return payChannel;
+	}
+
+	public void setPayChannel(Byte payChannel) {
+		this.payChannel = payChannel;
+	}
 
 	public Integer getGuideType() {
 		return guideType;

@@ -4,6 +4,7 @@
 package com.rongyi.rss.mallshop.order;
 
 import com.rongyi.easy.rmmm.entity.ExpressOrderInfoEntity;
+import com.rongyi.easy.rmmm.param.SalerDeliveryParam;
 
 /**
  * Copyright (C),上海容易网电子商务有限公司
@@ -23,5 +24,13 @@ public interface ROAExpressOrderInfoService {
 	 * @throws Exception
 	 */
 	public ExpressOrderInfoEntity selectInfoById(Integer id) throws Exception;
+	
+	/**
+	 * 商家后台修改订单发货方式
+	 * @param param  logisticsBillId(物流单号) expressName(快递公司名称) expressId(物流公司id) userId(卖家id) expressInfoId(主键id,有修改，无添加)
+	 * @return 主键id
+	 * @throws Exception
+	 */
+	public String updateExpressInfo(SalerDeliveryParam param) throws Exception;
 
 }

@@ -4,6 +4,8 @@ import com.rongyi.easy.integral.constant.SourceType;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,6 +23,18 @@ public class SystemConfig implements Serializable{
 
 
     //
+
+    public static final  String  USER_DISABLED_MSG="抱歉，卖家休息中，请您换个卖家看看吧~";
+
+
+    /**
+     *
+     */
+    public abstract class RSACODER_KEY{
+        public static final String PUBLIC_KEY_STR = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDYOECUiOrN7TaaBP/q0nu4EwisCvF1T+3ZcfYq91DgrKVfeQjLiJBOsgmNS5JIy8lv83ryFixpYZ19xE+RuvHlw4c2ztLKP3ZAb0HfkLqyJ+kAVD1CJjb+s+RoOJFruEoTdO7VXZsoLC0vQqbhTe8Peskz/RqLPyWlDoD+gxP0UQIDAQAB";
+        public static final String PRIVATE_KEY_STR = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBANg4QJSI6s3tNpoE/+rSe7gTCKwK8XVP7dlx9ir3UOCspV95CMuIkE6yCY1LkkjLyW/zevIWLGlhnX3ET5G68eXDhzbO0so/dkBvQd+QurIn6QBUPUImNv6z5Gg4kWu4ShN07tVdmygsLS9CpuFN7w96yTP9Gos/JaUOgP6DE/RRAgMBAAECgYA76QJD5dghrPu3G3GJsD6ll2iMuw+CcN43pPMPnq1jQ5Mi7Bd6xeEuXPh2lRz4XLb49R742xn9LRYFVhKyD3mcrI4+H786YAR3AHeEclSk7ze/O7CHyGP5ok507mRyxGDP5Lo+qHbgrEcuY+uLwQlbI5QC7MNhSA3UjzrLvrCeAQJBAP8DgNuiRR4+voNibtCpNqIbJj0ujSxGUhZgLKyil33erJZox1csT+u7LAoR0VUcSt/7rs8cVT5TXjP7FVwDUOECQQDZDlZ+n/XoZ8cZhyXWV2Oko+eo9TKS47ChEWAXB43a3w4zhEXl/JS8VoM9oVFghj5Eymlh1wwDoBD1EGSK+GFxAkAsAEK/ouQiL9lXeih8wHW4ys5ySBH7zbZkPfv3XaaeBUnqOfILTI4NsqIKqsBf2x3gP+ENw2nB80iR14T792aBAkEAv4poh5tPHMSfrQZXPHunob1GDBI8i+VDlA9KNWhkJRYbaRi7ugWXl0/cxsEZl80/G+Nm9YEYyAYzkJ7jqsMe8QJAVSbvDllgxsD9sG9SzfHBEG98IZiDGaQjBwS8upKz12m+L/zBpOJ7LeVButBeE4fsBnapziB1q+6gPHCghP7qGw==";
+    }
+
 
     /**  配置网盘路径  **/
     private static final  String UPAIYUN_ADDRESS="http://rongyi.b0.upaiyun.com/";  //整路径
@@ -74,6 +88,57 @@ public class SystemConfig implements Serializable{
         SystemConfig systemConfig = new SystemConfig();
         System.out.println("test=="+systemConfig.isMobileNO("19712165941"));
 
+    }
+
+
+    /**
+     * 返回具体日期
+     * @param ms
+     * @return
+     */
+    public static  String formatTime(Long ms) {
+        Integer ss = 1000;
+        Integer mi = ss * 60;
+        Integer hh = mi * 60;
+        Integer dd = hh * 24;
+
+        Long day = ms / dd;
+        Long hour = (ms - day * dd) / hh;
+        Long minute = (ms - day * dd - hour * hh) / mi;
+        Long second = (ms - day * dd - hour * hh - minute * mi) / ss;
+        Long milliSecond = ms - day * dd - hour * hh - minute * mi - second * ss;
+
+        StringBuffer sb = new StringBuffer();
+        if(day >= 0) {
+            sb.append(day+"天");
+        }
+        if(hour >= 0) {
+            sb.append(hour+"时");
+        }
+        if(minute >= 0) {
+            sb.append(minute+"分");
+        }
+        /* if(second > 0) {
+            sb.append(second+"秒");
+        }*/
+       /* if(milliSecond > 0) {
+            sb.append(milliSecond+"毫秒");
+        }*/
+        return sb.toString();
+    }
+
+
+
+    public static String convert(long mill){
+        Date date=new Date(mill);
+        String strs="";
+        try {
+            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            strs=sdf.format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return strs;
     }
 
 }

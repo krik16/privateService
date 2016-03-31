@@ -30,7 +30,28 @@ public class CouponMall implements Serializable {
      */
     private String mallAddress;
 
+    private Integer isRelateAll;
 
+    public Integer getIsRelateAll() {
+        return isRelateAll;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("CouponMall{");
+        sb.append("id=").append(id);
+        sb.append(", couponId='").append(couponId).append('\'');
+        sb.append(", mallId='").append(mallId).append('\'');
+        sb.append(", mallName='").append(mallName).append('\'');
+        sb.append(", mallAddress='").append(mallAddress).append('\'');
+        sb.append(", isRelateAll=").append(isRelateAll);
+        sb.append('}');
+        return sb.toString();
+    }
+
+    public void setIsRelateAll(Integer isRelateAll) {
+        this.isRelateAll = isRelateAll;
+    }
 
     public Integer getId() {
         return id;
@@ -70,13 +91,6 @@ public class CouponMall implements Serializable {
 
     public void setMallAddress(String mallAddress) {
         this.mallAddress = mallAddress;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("CouponMall [id=").append(id).append(", couponId=").append(couponId).append(", mallId=").append(mallId).append(", mallName=").append(mallName).append(", mallAddress=").append(mallAddress).append("]");
-        return builder.toString();
     }
 
 
