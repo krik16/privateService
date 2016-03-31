@@ -33,6 +33,7 @@ public class CommodityBuyerVO implements Serializable{
 	private String activityType = "0";	//活动类型[0其他 闪购1、特卖2、秒杀3]
 
 	private String easyOrder;//容易令
+	private Integer terminalType;//上架终端：com.rongyi.easy.mcmc.constant.CommodityTerminalType常量定义
 
 	public String getActivityType() {
 		return activityType;
@@ -243,6 +244,8 @@ public class CommodityBuyerVO implements Serializable{
 		this.commodityType = commodity.getType();
 		this.supportCourierDeliver = commodity.isSupportCourierDeliver();
 		this.supportSelfPickup = commodity.isSupportSelfPickup();
+		
+		this.terminalType = commodity.getTerminalType();// 终端
 
 		// 商品待上架且上架时间大于当前时间，app商品状态为 待上架
 		//商品上架或待上架，且上架时间小于当前时间，且下架时间大于当前时间，app商品状态为 上架
@@ -397,6 +400,14 @@ public class CommodityBuyerVO implements Serializable{
 	public void setCommodityAppStatus(int commodityAppStatus) {
 		this.commodityAppStatus = commodityAppStatus;
 	}
+	
+	public Integer getTerminalType() {
+		return terminalType;
+	}
+
+	public void setTerminalType(Integer terminalType) {
+		this.terminalType = terminalType;
+	}
 
 	@Override
 	public String toString() {
@@ -408,12 +419,13 @@ public class CommodityBuyerVO implements Serializable{
 				+ onlinePayment + ", offlineRefund=" + offlineRefund + ", onlineRefund=" + onlineRefund + ", shopIM="
 				+ shopIM + ", bullId=" + bullId + ", distance=" + distance + ", saleShopCount=" + saleShopCount
 				+ ", watching=" + watching + ", location=" + location + ", systemNumber=" + systemNumber
-				+ ", activityType=" + activityType + ", commodityOPriceMax=" + commodityOPriceMax
-				+ ", commodityOPriceMin=" + commodityOPriceMin + ", commodityCPriceMax=" + commodityCPriceMax
-				+ ", commodityCPriceMin=" + commodityCPriceMin + ", commodityOPOfLCP=" + commodityOPOfLCP
-				+ ", commodityBrandName=" + commodityBrandName + ", commodityPostage=" + commodityPostage
-				+ ", commodityDescription=" + commodityDescription + ", commodityName=" + commodityName + ", shopId="
-				+ shopId + ", shopMid=" + shopMid + ", isCollected=" + isCollected + "]";
+				+ ", activityType=" + activityType + ", easyOrder=" + easyOrder + ", terminalType=" + terminalType
+				+ ", commodityOPriceMax=" + commodityOPriceMax + ", commodityOPriceMin=" + commodityOPriceMin
+				+ ", commodityCPriceMax=" + commodityCPriceMax + ", commodityCPriceMin=" + commodityCPriceMin
+				+ ", commodityOPOfLCP=" + commodityOPOfLCP + ", commodityBrandName=" + commodityBrandName
+				+ ", commodityPostage=" + commodityPostage + ", commodityDescription=" + commodityDescription
+				+ ", commodityName=" + commodityName + ", shopId=" + shopId + ", shopMid=" + shopMid + ", isCollected="
+				+ isCollected + "]";
 	}
 	
 }
