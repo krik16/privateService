@@ -46,5 +46,10 @@ public class TicketParam implements Serializable {
 	public void setUserType(Integer userType) {
 		this.userType = userType;
 	}
+
+	@Override
+	public String toString() {
+		return "TicketParam [orderNo=" + orderNo + ", ticketPicList=" + ticketPicList + ", userType=" + userType + "]";
+	}
 	
 }

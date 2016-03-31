@@ -72,7 +72,9 @@ public class CommodityParam {
 	private Integer remain;//剩余总量
 	
 	private int hasSpec;//0表示无规格 1表示有规格
-	
+
+	private Integer templateId;//商城运费模版id
+
 	public String getId() {
 		return id;
 	}
@@ -274,6 +276,12 @@ public class CommodityParam {
 	public void setRemain(Integer remain) {
 		this.remain = remain;
 	}
-	
-	
+
+	public Integer getTemplateId() {
+		return templateId;
+	}
+
+	public void setTemplateId(Integer templateId) {
+		this.templateId = templateId;
+	}
 }

@@ -1,6 +1,8 @@
 package com.rongyi.rss.msob;
 
+import com.rongyi.easy.malllife.pojo.BuyerInfoPojo;
 import com.rongyi.easy.mallshop.MallShopException;
+import com.rongyi.easy.rmmm.dto.user.UserLoginDto;
 import com.rongyi.easy.rmmm.dto.user.UserShopMallAccountDto;
 import com.rongyi.easy.rmmm.entity.RmmmUserInfoEntity;
 import com.rongyi.easy.rmmm.param.MessageParam;
@@ -307,4 +309,36 @@ public interface IUserService {
     * @throws Exception
      */
     public boolean updatePushId(String pushId,String userPhone) throws Exception;
+    
+    /**
+     * 根据邀请码查询导购或者买手数据
+     *
+     * @param sharCode
+     * @return 
+     */
+    public BuyerInfoPojo selectUserBySharCode(String sharCode) throws Exception;
+
+    /**
+     * 销毁 用户登录信息
+     * @param keysId 多个地方登录，账号以之间以逗号隔开
+     */
+    public void cleanUserKey(String keysId);
+
+
+    /**
+     * 保存用户登录信息
+     * @param userLoginDto
+     */
+    public void saveLoginInfo(UserLoginDto userLoginDto)throws MallShopException;
+
+    /**
+     * 根据用户手机号 查询用户登录信息
+     * @param phone
+     * @return
+     * @throws MallShopException
+     */
+    public List<UserLoginDto> findUserLoginDtoByPhone(String phone)throws MallShopException;
+
+
+
 }

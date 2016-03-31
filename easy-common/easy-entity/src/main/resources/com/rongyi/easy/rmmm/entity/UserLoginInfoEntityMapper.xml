@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongyi.easy.rmmm.entity.UserLoginInfoEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.rongyi.easy.rmmm.entity.UserLoginInfoEntity" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="device_id" property="deviceId" jdbcType="VARCHAR" />
+    <result column="channel" property="channel" jdbcType="VARCHAR" />
+    <result column="jessionid" property="jessionid" jdbcType="VARCHAR" />
+    <result column="login_status" property="loginStatus" jdbcType="INTEGER" />
+    <result column="login_ip" property="loginIp" jdbcType="VARCHAR" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="update_at" property="updateAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, phone, device_id, channel, jessionid, login_status, login_ip, create_at, update_at
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_login_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user_login_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.rongyi.easy.rmmm.entity.UserLoginInfoEntity" >
+    insert into user_login_info (id, phone, device_id, 
+      channel, jessionid, login_status, 
+      login_ip, create_at, update_at
+      )
+    values (#{id,jdbcType=BIGINT}, #{phone,jdbcType=VARCHAR}, #{deviceId,jdbcType=VARCHAR}, 
+      #{channel,jdbcType=VARCHAR}, #{jessionid,jdbcType=VARCHAR}, #{loginStatus,jdbcType=INTEGER}, 
+      #{loginIp,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, #{updateAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.rongyi.easy.rmmm.entity.UserLoginInfoEntity" >
+    insert into user_login_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="deviceId != null" >
+        device_id,
+      </if>
+      <if test="channel != null" >
+        channel,
+      </if>
+      <if test="jessionid != null" >
+        jessionid,
+      </if>
+      <if test="loginStatus != null" >
+        login_status,
+      </if>
+      <if test="loginIp != null" >
+        login_ip,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+      <if test="updateAt != null" >
+        update_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="jessionid != null" >
+        #{jessionid,jdbcType=VARCHAR},
+      </if>
+      <if test="loginStatus != null" >
+        #{loginStatus,jdbcType=INTEGER},
+      </if>
+      <if test="loginIp != null" >
+        #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateAt != null" >
+        #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rongyi.easy.rmmm.entity.UserLoginInfoEntity" >
+    update user_login_info
+    <set >
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null" >
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        channel = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="jessionid != null" >
+        jessionid = #{jessionid,jdbcType=VARCHAR},
+      </if>
+      <if test="loginStatus != null" >
+        login_status = #{loginStatus,jdbcType=INTEGER},
+      </if>
+      <if test="loginIp != null" >
+        login_ip = #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateAt != null" >
+        update_at = #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rongyi.easy.rmmm.entity.UserLoginInfoEntity" >
+    update user_login_info
+    set phone = #{phone,jdbcType=VARCHAR},
+      device_id = #{deviceId,jdbcType=VARCHAR},
+      channel = #{channel,jdbcType=VARCHAR},
+      jessionid = #{jessionid,jdbcType=VARCHAR},
+      login_status = #{loginStatus,jdbcType=INTEGER},
+      login_ip = #{loginIp,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      update_at = #{updateAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

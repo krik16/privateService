@@ -1,6 +1,7 @@
 package com.rongyi.core.common.util;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -22,7 +23,6 @@ public class StringUtil {
 		}
 	}
 
-
 	public static String intToString(Integer intTemp) {
 		if (intTemp == null) {
 			return "";
@@ -30,7 +30,6 @@ public class StringUtil {
 			return String.valueOf(intTemp);
 		}
 	}
-
 
 	/**
 	 * 如果是null，返回0
@@ -195,7 +194,8 @@ public class StringUtil {
 		}
 		if (randGen == null) {
 			randGen = new Random();
-			numbersAndLetters = ("0123456789abcdefghijklmnopqrstuvwxyz" + "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ").toCharArray();
+			numbersAndLetters = ("0123456789abcdefghijklmnopqrstuvwxyz" + "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+					.toCharArray();
 		}
 		char[] randBuffer = new char[length];
 		for (int i = 0; i < randBuffer.length; i++) {
@@ -254,4 +254,46 @@ public class StringUtil {
 
 	}
 
+	/**
+	 * 字符串是否为空
+	 * 
+	 * @param str
+	 * @return
+	 */
+	public static boolean isEmpty(String str) {
+		if (null == str || "".equals(str) || "".equals(str.trim())) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * 字符串转换成Int
+	 * 
+	 * @author wangjianhua
+	 * @param str
+	 * @return 转换失败，返回：0
+	 */
+	public static int tryParseInt(String str) {
+		try {
+			return Integer.parseInt(str);
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+	
+	/**
+	 * 时间格式字符串转换成Date
+	 * 
+	 * @author wangjianhua
+	 * @param str
+	 * @return null:转换失败 
+	 */
+	public static Date tryParseDate(String str) {
+		try {
+			return new Date(Long.parseLong(str));
+		} catch (Exception e) {
+			return null;
+		}
+	}
 }

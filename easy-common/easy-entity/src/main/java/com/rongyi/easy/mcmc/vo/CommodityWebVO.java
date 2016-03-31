@@ -4,8 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.rongyi.easy.mcmc.Commodity;
+import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 
-public class CommodityWebVO implements Serializable{
+public class CommodityWebVO implements Serializable, CommodityDataStatus {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -42,7 +43,7 @@ public class CommodityWebVO implements Serializable{
 	public CommodityWebVO(Commodity commodity){
 		this.id = commodity.getId().toString();
 		this.name = commodity.getName();
-		if(commodity.getStatus() == 0){
+		if(commodity.getStatus() == STATUS_COMMODITY_UNSHELVE){
 			this.status = false;
 		}else{
 			this.status = true;

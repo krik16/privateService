@@ -4,7 +4,7 @@
 	<properties resource="${mybatis.generator.dbConfigFile}"/>
 	
 	<context id="com.rongyi" targetRuntime="MyBatis3">
-		<plugin type="com.rongyi.framework.mybatis.generator.EntityCommentPlugin"></plugin>  
+		<!--<plugin type="com.rongyi.framework.mybatis.generator.EntityCommentPlugin"></plugin>-->
 <!-- 		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"></plugin>   -->
 <!--         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin> -->
 <!-- 		<plugin type="com.rongyi.framework.mybatis.plugins.OraclePaginationPlugin"/> -->
@@ -27,7 +27,7 @@
 <!-- 			<property name="rootInterface" value="com.rongyi.merchant.biz.mapper.BaseMapper"/> -->
 		</javaClientGenerator>
 		
-		<table tableName="integral_history_add" domainObjectName="domain.member.IntegralHistoryAdd"></table>
+		<table tableName="freight_template" domainObjectName="mcmc.entity.FreightTemplateEntity"></table>
 
 	</context>
 </generatorConfiguration>

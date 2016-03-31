@@ -2,6 +2,8 @@ package com.rongyi.rss.ryoms;
 
 import java.util.Map;
 
+import com.rongyi.easy.ryoms.entity.RyUserInfo;
+
 /**
  * 
  * @author kenny
@@ -17,4 +19,6 @@ public interface IUserService {
 	 * @throws Exception
 	 */
 	public Map getSessionUserFromRedis(String ryst,boolean bConvertToObj) throws Exception;
+	
+	public RyUserInfo getUserById(Integer userId);
 }

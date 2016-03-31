@@ -165,6 +165,8 @@ public class CouponEntity implements Serializable {
     @Property("syn_flag")
     private String synFlag; //新老优惠券同步标识
 
+    private String address;
+
     public String getSynFlag() {
         return synFlag;
     }
@@ -645,5 +647,13 @@ public class CouponEntity implements Serializable {
 
     public void setWechatIcon(String wechatIcon) {
         this.wechatIcon = wechatIcon;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
