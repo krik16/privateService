@@ -112,5 +112,12 @@ public interface OrderMessage {
 	public static final String MODIFY_PRICE3 = "店铺的商品（订单号：";
 	public static final String MODIFY_PRICE4 = "），现订单价格发生改变，请注意查看。";
 	public static final String MODIFY_PRICE5 = "），现订单价格发生改变，导致使用的抵扣券未满足使用条件，已重新计算订单总价并返还选用的抵扣券，请注意查看。";
+	
+	/** 推广佣金 */
+	public static final String COMMISSION_PROMOTION1 = "官方已审核通过您的推广佣金";
+	public static final String COMMISSION_PROMOTION2 = "，推广佣金";
+	public static final String COMMISSION_PROMOTION3 = "元正常发放到您的账户，请注意查收。";
+	public static final String COMMISSION_PROMOTION4 = "很抱歉，您的推广佣金";
+	public static final String COMMISSION_PROMOTION5 = "审核失败，该佣金不能正常发放到您的账户，请注意查看。";
 
 }

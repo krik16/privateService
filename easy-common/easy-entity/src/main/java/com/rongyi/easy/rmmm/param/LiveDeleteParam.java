@@ -2,7 +2,9 @@ package com.rongyi.easy.rmmm.param;
 
 import java.io.Serializable;
 
-public class LiveDeleteParam implements Serializable{
+import com.rongyi.easy.rmmm.base.BaseParam;
+
+public class LiveDeleteParam extends BaseParam implements Serializable{
 	
 	/**
 	 * 

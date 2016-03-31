@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 public class ActivitySearchInfo implements Serializable {
 
 	/**
@@ -50,8 +48,8 @@ public class ActivitySearchInfo implements Serializable {
 	
 	private int activityStatus = 0; 	//活动状态[0其他(不参与逻辑) 未开始1 正常2 结束3]
 	private String workTime = "9:30~18:30（周一至周五）\n法定假日除外";
-
 	
+	private String activityType = "0";	//活动类型[0其他 闪购1、特卖2、秒杀3]
 
 	public String getWorkTime() {
 		return workTime;
@@ -377,6 +375,14 @@ public class ActivitySearchInfo implements Serializable {
 	public void setActivityStatus(int activityStatus) {
 		this.activityStatus = activityStatus;
 	}
+	
+	public String getActivityType() {
+		return activityType;
+	}
+
+	public void setActivityType(String activityType) {
+		this.activityType = activityType;
+	}
 
 	@Override
 	public String toString() {
@@ -390,9 +396,9 @@ public class ActivitySearchInfo implements Serializable {
 				+ useRestriction + ", useMode=" + useMode + ", grouponStyle=" + grouponStyle + ", limitPublishCount="
 				+ limitPublishCount + ", limitUseCount=" + limitUseCount + ", limitCount=" + limitCount
 				+ ", afterSaleService=" + afterSaleService + ", payDownTime=" + payDownTime + ", customCategoryIds="
-				+ customCategoryIds + ", apply_shops_count=" + apply_shops_count + ", activityStataus="
-				+ activityStatus + ", limitDesc=" + limitDesc + ", usageDesc=" + usageDesc + ", remark=" + remark
-				+ "]";
+				+ customCategoryIds + ", apply_shops_count=" + apply_shops_count + ", activityStatus=" + activityStatus
+				+ ", workTime=" + workTime + ", activityType=" + activityType + ", limitDesc=" + limitDesc
+				+ ", usageDesc=" + usageDesc + ", remark=" + remark + "]";
 	}
 	
 }

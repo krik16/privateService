@@ -10,7 +10,7 @@ public class ICouponTemplateParam implements Serializable{
 	private String currentPage;
 	private String pageSize;
 	private String isDefault;
-	private String type;
+	private String type; //限制2，方式1
 
 	public String getContent() {
 		return content;

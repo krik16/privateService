@@ -6,12 +6,7 @@ import java.util.List;
 
 import com.rongyi.easy.mcmc.Commodity;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.builder.ToStringBuilder;
 public class CommodityBuyerVO implements Serializable{
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1461107119422444629L;
 
 	private String shopName;//店铺名称
@@ -266,13 +261,15 @@ public class CommodityBuyerVO implements Serializable{
 		}
 		this.systemNumber = commodity.getSystemNumber();
 		
-		//闪购 || 特卖 || 秒杀
+		//活动类型[0其他 闪购1、特卖2、秒杀3]
 		if (StringUtils.isNotBlank(commodity.getSecKillSign())) {
 			this.activityType = "3";
 		} else if (commodity.getSaleId() != null) {
 			this.activityType = "2";
 		} else if (commodity.getFlashSaleId() != null) {
 			this.activityType = "1";
+		} else if (StringUtils.isNotBlank(commodity.getSecKillSign())) {
+			this.activityType = "3";
 		} else {
 			//其他
 			this.activityType = "0";
