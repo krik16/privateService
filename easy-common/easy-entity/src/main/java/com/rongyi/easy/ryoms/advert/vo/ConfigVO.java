@@ -57,14 +57,14 @@ public class ConfigVO implements Serializable {
 	private Integer ry_ad_num;//全屏容易网广告数量
 	private Integer mall_banner;//banner商家广告数量
 	private Integer ry_banner;//banner容易网广告数量
-	private Integer mall_banner_1040_580;//banner1040_580商家广告数量
-	private Integer ry_banner_1040_580;//banner1040_580容易网广告数量
-	private Integer mall_banner_1040_520;//banner1040_520商家广告数量
-	private Integer ry_banner_1040_520;//banner1040_520容易网广告数量
-	private Integer mall_banner_618_930;//banner618_930商家广告数量
-	private Integer ry_banner_618_930;//banner618_930容易网广告数量
-	private Integer mall_banner_1040_630;//banner1040_630商家广告数量
-	private Integer ry_banner_1040_630;//banner1040_630容易网广告数量
+	private Integer mall_banner_330_home_a;//banner1040_580商家广告数量
+	private Integer ry_banner_330_home_a;//banner1040_580容易网广告数量
+	private Integer mall_banner_330_home_d;//banner1040_520商家广告数量
+	private Integer ry_banner_330_home_d;//banner1040_520容易网广告数量
+	private Integer mall_banner_318_home_b;//banner618_930商家广告数量
+	private Integer ry_banner_318_home_b;//banner618_930容易网广告数量
+	private Integer mall_banner_318_home_d;//banner1040_630商家广告数量
+	private Integer ry_banner_318_home_d;//banner1040_630容易网广告数量
 	/**
 	 * @return the configId
 	 */
@@ -378,102 +378,6 @@ public class ConfigVO implements Serializable {
 		this.ry_ad_num = ry_ad_num;
 	}
 	/**
-	 * @return the mall_banner_1040_580
-	 */
-	public Integer getMall_banner_1040_580() {
-		return mall_banner_1040_580;
-	}
-	/**
-	 * @param mall_banner_1040_580 the mall_banner_1040_580 to set
-	 */
-	public void setMall_banner_1040_580(Integer mall_banner_1040_580) {
-		this.mall_banner_1040_580 = mall_banner_1040_580;
-	}
-	/**
-	 * @return the ry_banner_1040_580
-	 */
-	public Integer getRy_banner_1040_580() {
-		return ry_banner_1040_580;
-	}
-	/**
-	 * @param ry_banner_1040_580 the ry_banner_1040_580 to set
-	 */
-	public void setRy_banner_1040_580(Integer ry_banner_1040_580) {
-		this.ry_banner_1040_580 = ry_banner_1040_580;
-	}
-	/**
-	 * @return the mall_banner_1040_520
-	 */
-	public Integer getMall_banner_1040_520() {
-		return mall_banner_1040_520;
-	}
-	/**
-	 * @param mall_banner_1040_520 the mall_banner_1040_520 to set
-	 */
-	public void setMall_banner_1040_520(Integer mall_banner_1040_520) {
-		this.mall_banner_1040_520 = mall_banner_1040_520;
-	}
-	/**
-	 * @return the ry_banner_1040_520
-	 */
-	public Integer getRy_banner_1040_520() {
-		return ry_banner_1040_520;
-	}
-	/**
-	 * @param ry_banner_1040_520 the ry_banner_1040_520 to set
-	 */
-	public void setRy_banner_1040_520(Integer ry_banner_1040_520) {
-		this.ry_banner_1040_520 = ry_banner_1040_520;
-	}
-	/**
-	 * @return the mall_banner_618_930
-	 */
-	public Integer getMall_banner_618_930() {
-		return mall_banner_618_930;
-	}
-	/**
-	 * @param mall_banner_618_930 the mall_banner_618_930 to set
-	 */
-	public void setMall_banner_618_930(Integer mall_banner_618_930) {
-		this.mall_banner_618_930 = mall_banner_618_930;
-	}
-	/**
-	 * @return the ry_banner_618_930
-	 */
-	public Integer getRy_banner_618_930() {
-		return ry_banner_618_930;
-	}
-	/**
-	 * @param ry_banner_618_930 the ry_banner_618_930 to set
-	 */
-	public void setRy_banner_618_930(Integer ry_banner_618_930) {
-		this.ry_banner_618_930 = ry_banner_618_930;
-	}
-	/**
-	 * @return the mall_banner_1040_630
-	 */
-	public Integer getMall_banner_1040_630() {
-		return mall_banner_1040_630;
-	}
-	/**
-	 * @param mall_banner_1040_630 the mall_banner_1040_630 to set
-	 */
-	public void setMall_banner_1040_630(Integer mall_banner_1040_630) {
-		this.mall_banner_1040_630 = mall_banner_1040_630;
-	}
-	/**
-	 * @return the ry_banner_1040_630
-	 */
-	public Integer getRy_banner_1040_630() {
-		return ry_banner_1040_630;
-	}
-	/**
-	 * @param ry_banner_1040_630 the ry_banner_1040_630 to set
-	 */
-	public void setRy_banner_1040_630(Integer ry_banner_1040_630) {
-		this.ry_banner_1040_630 = ry_banner_1040_630;
-	}
-	/**
 	 * @return the mall_banner
 	 */
 	public Integer getMall_banner() {
@@ -497,12 +401,108 @@ public class ConfigVO implements Serializable {
 	public void setRy_banner(Integer ry_banner) {
 		this.ry_banner = ry_banner;
 	}
+	/**
+	 * @return the mall_banner_330_home_a
+	 */
+	public Integer getMall_banner_330_home_a() {
+		return mall_banner_330_home_a;
+	}
+	/**
+	 * @param mall_banner_330_home_a the mall_banner_330_home_a to set
+	 */
+	public void setMall_banner_330_home_a(Integer mall_banner_330_home_a) {
+		this.mall_banner_330_home_a = mall_banner_330_home_a;
+	}
+	/**
+	 * @return the ry_banner_330_home_a
+	 */
+	public Integer getRy_banner_330_home_a() {
+		return ry_banner_330_home_a;
+	}
+	/**
+	 * @param ry_banner_330_home_a the ry_banner_330_home_a to set
+	 */
+	public void setRy_banner_330_home_a(Integer ry_banner_330_home_a) {
+		this.ry_banner_330_home_a = ry_banner_330_home_a;
+	}
+	/**
+	 * @return the mall_banner_330_home_d
+	 */
+	public Integer getMall_banner_330_home_d() {
+		return mall_banner_330_home_d;
+	}
+	/**
+	 * @param mall_banner_330_home_d the mall_banner_330_home_d to set
+	 */
+	public void setMall_banner_330_home_d(Integer mall_banner_330_home_d) {
+		this.mall_banner_330_home_d = mall_banner_330_home_d;
+	}
+	/**
+	 * @return the ry_banner_330_home_d
+	 */
+	public Integer getRy_banner_330_home_d() {
+		return ry_banner_330_home_d;
+	}
+	/**
+	 * @param ry_banner_330_home_d the ry_banner_330_home_d to set
+	 */
+	public void setRy_banner_330_home_d(Integer ry_banner_330_home_d) {
+		this.ry_banner_330_home_d = ry_banner_330_home_d;
+	}
+	/**
+	 * @return the mall_banner_318_home_b
+	 */
+	public Integer getMall_banner_318_home_b() {
+		return mall_banner_318_home_b;
+	}
+	/**
+	 * @param mall_banner_318_home_b the mall_banner_318_home_b to set
+	 */
+	public void setMall_banner_318_home_b(Integer mall_banner_318_home_b) {
+		this.mall_banner_318_home_b = mall_banner_318_home_b;
+	}
+	/**
+	 * @return the ry_banner_318_home_b
+	 */
+	public Integer getRy_banner_318_home_b() {
+		return ry_banner_318_home_b;
+	}
+	/**
+	 * @param ry_banner_318_home_b the ry_banner_318_home_b to set
+	 */
+	public void setRy_banner_318_home_b(Integer ry_banner_318_home_b) {
+		this.ry_banner_318_home_b = ry_banner_318_home_b;
+	}
+	/**
+	 * @return the mall_banner_318_home_d
+	 */
+	public Integer getMall_banner_318_home_d() {
+		return mall_banner_318_home_d;
+	}
+	/**
+	 * @param mall_banner_318_home_d the mall_banner_318_home_d to set
+	 */
+	public void setMall_banner_318_home_d(Integer mall_banner_318_home_d) {
+		this.mall_banner_318_home_d = mall_banner_318_home_d;
+	}
+	/**
+	 * @return the ry_banner_318_home_d
+	 */
+	public Integer getRy_banner_318_home_d() {
+		return ry_banner_318_home_d;
+	}
+	/**
+	 * @param ry_banner_318_home_d the ry_banner_318_home_d to set
+	 */
+	public void setRy_banner_318_home_d(Integer ry_banner_318_home_d) {
+		this.ry_banner_318_home_d = ry_banner_318_home_d;
+	}
 	/** 
 	* @Title: toString 
 	* @Description: TODO(这里用一句话描述这个方法的作用) 
 	* @param @return    设定文件 
 	* @author shaozhou
-	* @date 2016年4月1日 下午2:53:19
+	* @date 2016年4月1日 下午5:34:49
 	* @throws 
 	*/
 	@Override
@@ -515,10 +515,11 @@ public class ConfigVO implements Serializable {
 				+ ", create_date=" + create_date + ", update_int=" + update_int + ", update_date=" + update_date
 				+ ", create_by=" + create_by + ", create_at=" + create_at + ", update_by=" + update_by + ", update_at="
 				+ update_at + ", mall_ad_num=" + mall_ad_num + ", ry_ad_num=" + ry_ad_num + ", mall_banner="
-				+ mall_banner + ", ry_banner=" + ry_banner + ", mall_banner_1040_580=" + mall_banner_1040_580
-				+ ", ry_banner_1040_580=" + ry_banner_1040_580 + ", mall_banner_1040_520=" + mall_banner_1040_520
-				+ ", ry_banner_1040_520=" + ry_banner_1040_520 + ", mall_banner_618_930=" + mall_banner_618_930
-				+ ", ry_banner_618_930=" + ry_banner_618_930 + ", mall_banner_1040_630=" + mall_banner_1040_630
-				+ ", ry_banner_1040_630=" + ry_banner_1040_630 + "]";
+				+ mall_banner + ", ry_banner=" + ry_banner + ", mall_banner_330_home_a=" + mall_banner_330_home_a
+				+ ", ry_banner_330_home_a=" + ry_banner_330_home_a + ", mall_banner_330_home_d="
+				+ mall_banner_330_home_d + ", ry_banner_330_home_d=" + ry_banner_330_home_d
+				+ ", mall_banner_318_home_b=" + mall_banner_318_home_b + ", ry_banner_318_home_b="
+				+ ry_banner_318_home_b + ", mall_banner_318_home_d=" + mall_banner_318_home_d
+				+ ", ry_banner_318_home_d=" + ry_banner_318_home_d + "]";
 	}
 }

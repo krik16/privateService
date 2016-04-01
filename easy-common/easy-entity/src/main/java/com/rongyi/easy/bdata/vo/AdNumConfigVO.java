@@ -10,14 +10,14 @@ public class AdNumConfigVO implements Serializable {
 	private String mall_id;
 	private Integer ryAdNum = 4;
     private Integer mallAdNum = 2;
-    private Integer ryBanner_1040_580_Num = 4;
-    private Integer mallBanner_1040_580_Num =2;
-    private Integer ryBanner_1040_520_Num = 4;
-    private Integer mallBanner_1040_520_Num =2;
-    private Integer ryBanner_618_930_Num = 4;
-    private Integer mallBanner_618_930_Num =2;
-    private Integer ryBanner_1040_630_Num = 4;
-    private Integer mallBanner_1040_630_Num =2;
+    private Integer ryBanner_330_home_a_Num = 4;
+    private Integer mallBanner_330_home_a_Num =2;
+    private Integer ryBanner_330_home_d_Num = 4;
+    private Integer mallBanner_330_home_d_Num =2;
+    private Integer ryBanner_318_home_b_Num = 4;
+    private Integer mallBanner_318_home_b_Num =2;
+    private Integer ryBanner_318_home_d_Num = 4;
+    private Integer mallBanner_318_home_d_Num =2;
     
 	/**
 	 * @return the mall_id
@@ -56,117 +56,99 @@ public class AdNumConfigVO implements Serializable {
 		this.mallAdNum = mallAdNum;
 	}
 	/**
-	 * @return the ryBanner_1040_580_Num
+	 * @return the ryBanner_330_home_a_Num
 	 */
-	public Integer getRyBanner_1040_580_Num() {
-		return ryBanner_1040_580_Num;
+	public Integer getRyBanner_330_home_a_Num() {
+		return ryBanner_330_home_a_Num;
 	}
 	/**
-	 * @param ryBanner_1040_580_Num the ryBanner_1040_580_Num to set
+	 * @param ryBanner_330_home_a_Num the ryBanner_330_home_a_Num to set
 	 */
-	public void setRyBanner_1040_580_Num(Integer ryBanner_1040_580_Num) {
-		this.ryBanner_1040_580_Num = ryBanner_1040_580_Num;
+	public void setRyBanner_330_home_a_Num(Integer ryBanner_330_home_a_Num) {
+		this.ryBanner_330_home_a_Num = ryBanner_330_home_a_Num;
 	}
 	/**
-	 * @return the mallBanner_1040_580_Num
+	 * @return the mallBanner_330_home_a_Num
 	 */
-	public Integer getMallBanner_1040_580_Num() {
-		return mallBanner_1040_580_Num;
+	public Integer getMallBanner_330_home_a_Num() {
+		return mallBanner_330_home_a_Num;
 	}
 	/**
-	 * @param mallBanner_1040_580_Num the mallBanner_1040_580_Num to set
+	 * @param mallBanner_330_home_a_Num the mallBanner_330_home_a_Num to set
 	 */
-	public void setMallBanner_1040_580_Num(Integer mallBanner_1040_580_Num) {
-		this.mallBanner_1040_580_Num = mallBanner_1040_580_Num;
+	public void setMallBanner_330_home_a_Num(Integer mallBanner_330_home_a_Num) {
+		this.mallBanner_330_home_a_Num = mallBanner_330_home_a_Num;
 	}
 	/**
-	 * @return the ryBanner_1040_520_Num
+	 * @return the ryBanner_330_home_d_Num
 	 */
-	public Integer getRyBanner_1040_520_Num() {
-		return ryBanner_1040_520_Num;
+	public Integer getRyBanner_330_home_d_Num() {
+		return ryBanner_330_home_d_Num;
 	}
 	/**
-	 * @param ryBanner_1040_520_Num the ryBanner_1040_520_Num to set
+	 * @param ryBanner_330_home_d_Num the ryBanner_330_home_d_Num to set
 	 */
-	public void setRyBanner_1040_520_Num(Integer ryBanner_1040_520_Num) {
-		this.ryBanner_1040_520_Num = ryBanner_1040_520_Num;
+	public void setRyBanner_330_home_d_Num(Integer ryBanner_330_home_d_Num) {
+		this.ryBanner_330_home_d_Num = ryBanner_330_home_d_Num;
 	}
 	/**
-	 * @return the mallBanner_1040_520_Num
+	 * @return the mallBanner_330_home_d_Num
 	 */
-	public Integer getMallBanner_1040_520_Num() {
-		return mallBanner_1040_520_Num;
+	public Integer getMallBanner_330_home_d_Num() {
+		return mallBanner_330_home_d_Num;
 	}
 	/**
-	 * @param mallBanner_1040_520_Num the mallBanner_1040_520_Num to set
+	 * @param mallBanner_330_home_d_Num the mallBanner_330_home_d_Num to set
 	 */
-	public void setMallBanner_1040_520_Num(Integer mallBanner_1040_520_Num) {
-		this.mallBanner_1040_520_Num = mallBanner_1040_520_Num;
+	public void setMallBanner_330_home_d_Num(Integer mallBanner_330_home_d_Num) {
+		this.mallBanner_330_home_d_Num = mallBanner_330_home_d_Num;
 	}
 	/**
-	 * @return the ryBanner_618_930_Num
+	 * @return the ryBanner_318_home_b_Num
 	 */
-	public Integer getRyBanner_618_930_Num() {
-		return ryBanner_618_930_Num;
+	public Integer getRyBanner_318_home_b_Num() {
+		return ryBanner_318_home_b_Num;
 	}
 	/**
-	 * @param ryBanner_618_930_Num the ryBanner_618_930_Num to set
+	 * @param ryBanner_318_home_b_Num the ryBanner_318_home_b_Num to set
 	 */
-	public void setRyBanner_618_930_Num(Integer ryBanner_618_930_Num) {
-		this.ryBanner_618_930_Num = ryBanner_618_930_Num;
+	public void setRyBanner_318_home_b_Num(Integer ryBanner_318_home_b_Num) {
+		this.ryBanner_318_home_b_Num = ryBanner_318_home_b_Num;
 	}
 	/**
-	 * @return the mallBanner_618_930_Num
+	 * @return the mallBanner_318_home_b_Num
 	 */
-	public Integer getMallBanner_618_930_Num() {
-		return mallBanner_618_930_Num;
+	public Integer getMallBanner_318_home_b_Num() {
+		return mallBanner_318_home_b_Num;
 	}
 	/**
-	 * @param mallBanner_618_930_Num the mallBanner_618_930_Num to set
+	 * @param mallBanner_318_home_b_Num the mallBanner_318_home_b_Num to set
 	 */
-	public void setMallBanner_618_930_Num(Integer mallBanner_618_930_Num) {
-		this.mallBanner_618_930_Num = mallBanner_618_930_Num;
+	public void setMallBanner_318_home_b_Num(Integer mallBanner_318_home_b_Num) {
+		this.mallBanner_318_home_b_Num = mallBanner_318_home_b_Num;
 	}
 	/**
-	 * @return the ryBanner_1040_630_Num
+	 * @return the ryBanner_318_home_d_Num
 	 */
-	public Integer getRyBanner_1040_630_Num() {
-		return ryBanner_1040_630_Num;
+	public Integer getRyBanner_318_home_d_Num() {
+		return ryBanner_318_home_d_Num;
 	}
 	/**
-	 * @param ryBanner_1040_630_Num the ryBanner_1040_630_Num to set
+	 * @param ryBanner_318_home_d_Num the ryBanner_318_home_d_Num to set
 	 */
-	public void setRyBanner_1040_630_Num(Integer ryBanner_1040_630_Num) {
-		this.ryBanner_1040_630_Num = ryBanner_1040_630_Num;
+	public void setRyBanner_318_home_d_Num(Integer ryBanner_318_home_d_Num) {
+		this.ryBanner_318_home_d_Num = ryBanner_318_home_d_Num;
 	}
 	/**
-	 * @return the mallBanner_1040_630_Num
+	 * @return the mallBanner_318_home_d_Num
 	 */
-	public Integer getMallBanner_1040_630_Num() {
-		return mallBanner_1040_630_Num;
+	public Integer getMallBanner_318_home_d_Num() {
+		return mallBanner_318_home_d_Num;
 	}
 	/**
-	 * @param mallBanner_1040_630_Num the mallBanner_1040_630_Num to set
+	 * @param mallBanner_318_home_d_Num the mallBanner_318_home_d_Num to set
 	 */
-	public void setMallBanner_1040_630_Num(Integer mallBanner_1040_630_Num) {
-		this.mallBanner_1040_630_Num = mallBanner_1040_630_Num;
-	}
-	/** 
-	* @Title: toString 
-	* @Description: TODO(这里用一句话描述这个方法的作用) 
-	* @param @return    设定文件 
-	* @author shaozhou
-	* @date 2016年4月1日 上午11:53:59
-	* @throws 
-	*/
-	@Override
-	public String toString() {
-		return "AdNumConfigVO [mall_id=" + mall_id + ", ryAdNum=" + ryAdNum + ", mallAdNum=" + mallAdNum
-				+ ", ryBanner_1040_580_Num=" + ryBanner_1040_580_Num + ", mallBanner_1040_580_Num="
-				+ mallBanner_1040_580_Num + ", ryBanner_1040_520_Num=" + ryBanner_1040_520_Num
-				+ ", mallBanner_1040_520_Num=" + mallBanner_1040_520_Num + ", ryBanner_618_930_Num="
-				+ ryBanner_618_930_Num + ", mallBanner_618_930_Num=" + mallBanner_618_930_Num
-				+ ", ryBanner_1040_630_Num=" + ryBanner_1040_630_Num + ", mallBanner_1040_630_Num="
-				+ mallBanner_1040_630_Num + "]";
+	public void setMallBanner_318_home_d_Num(Integer mallBanner_318_home_d_Num) {
+		this.mallBanner_318_home_d_Num = mallBanner_318_home_d_Num;
 	}
 }
