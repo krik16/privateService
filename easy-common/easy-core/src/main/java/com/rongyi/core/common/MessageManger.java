@@ -177,6 +177,7 @@ public class MessageManger {
             //设置发送内容的编码方式
             String send_content= URLEncoder.encode(content.replaceAll("<br/>", " "), "UTF-8");//发送内容
 
+            logger.info("SmsConfig.csSendURL={} csUserName={} csPassWord={}",SmsConfig.csSendURL,SmsConfig.csUserName,SmsConfig.csPassWord);
             url=new URL(SmsConfig.csSendURL+"&userid="+userid+"&account="+account+"&password="+password+"&mobile="+mobile+"&content="+send_content+"&sendTime="+sendTime+"");
             con = (HttpURLConnection)url.openConnection();
 
