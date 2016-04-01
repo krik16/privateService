@@ -35,8 +35,8 @@ public enum MallShopErrorCode {
 
     BUYER_ROLE_ISEXITS(1071801,"您已经拥有买手身份，无需升级!重新登录即可"),
     BUYER_DESC_ISLONGER(1071811,"简介内容过长，请重新编辑"),
-    BUYER_DESC_HAS_SENSITIVE_WORD(1071812,"您填写的买手简介不符合规范，请重新发布"),
-    BUYER_NICKNAME_HAS_SENSITIVE_WORD(1071813,"您填写的买手昵称不符合规范，请重新输入"),
+    BUYER_DESC_HAS_SENSITIVE_WORD(1071812,"您填写的买手简介不符合规范，请重新编辑"),
+    BUYER_NICKNAME_HAS_SENSITIVE_WORD(1071813,"您填写的买手昵称不符合规范，请重新编辑"),
     /** 商品相关 后4位区间  2001---3000*/
     ERROR_REPORT_SHOP(1072001,"上报未找到的店铺失败"),
 
