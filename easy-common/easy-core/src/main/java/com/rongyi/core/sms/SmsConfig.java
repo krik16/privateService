@@ -38,7 +38,7 @@ public class SmsConfig implements Serializable{
     
     public static final String WEBCHAT_MALLLIFE_BINDING="【上海摩购】谢谢您使用容易网客户端，您当前的验证码：@";
 
-    public static final String COUPON_VALID = "【上海摩购】您购买的@于@验证@份，剩@份未消费，如有任何疑问请您与商家咨询：400-040-8989";
+    public static final String COUPON_VALID = "【容易逛】您购买的@于@验证@份，剩@份未消费，如有任何疑问请您与商家咨询：400-040-8989";
 
     //返回异常
     public static final String LIMIT_EXCEPTION_MSG="亲你的手机,今天发送短信已达到上限,请明天再试!";
