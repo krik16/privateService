@@ -116,7 +116,7 @@ public class MessageManger {
 
         try {
 
-
+        logger.info("开始发送短信...");
         xml=this.SendValidMessage(phone,content,mallName,title,time,balance,checkNum).toString();
        // System.out.println(xml);
         xmlentity.setReturnstatus("returnstatus");
