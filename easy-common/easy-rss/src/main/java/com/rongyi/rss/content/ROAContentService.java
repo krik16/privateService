@@ -348,6 +348,6 @@ public interface ROAContentService {
 	 * @author wangjh7
 	 * @return
 	 */
-	public List<ActivityModuleVO> getActivityModuleInfo(int moduleId);
+	public ActivityModuleVO getActivityModuleInfo(int moduleId);
 	
 }
