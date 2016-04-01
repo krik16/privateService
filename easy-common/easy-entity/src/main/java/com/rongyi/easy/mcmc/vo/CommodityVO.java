@@ -11,7 +11,7 @@ import org.apache.commons.lang.StringUtils;
 public class CommodityVO  implements  Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 8138633144546500349L;
 	private String commodityId;
@@ -34,12 +34,12 @@ public class CommodityVO  implements  Serializable {
 	private String commodityCPriceMax;//我是最高现价”,
 	private String commodityCPriceMin;//我是最低现价”,
 	private String commodityOPOfLCP;//我是最低现价对应的原价
-	
+
 	private int commodityType;//渠道  0商家，1买手
-	private int isSpot;//是否现货	
+	private int isSpot;//是否现货
 	private Date liveStartTime; // 直播开始时间
 	private Date liveEndTime; // 直播结束时间
-	private String create_by; // 创建人 
+	private String create_by; // 创建人
 	private String update_by;//修改人
 	private String liveId; // 直播Id
 	private String commodityOriginalPrice;
@@ -76,7 +76,7 @@ public class CommodityVO  implements  Serializable {
 	private Integer templateId;//邮费模版id
 	private Integer sort;
 	private String mallName;
-
+	private String weAndTeStatus;//商品在终端机与App上的隐藏与显示  1表示APP端展示，2表示微信端展示，3表示都展示，4表示都不展示
 
 	public Integer getTemplateId() {
 		return templateId;
@@ -93,7 +93,7 @@ public class CommodityVO  implements  Serializable {
 	public void setActivityType(String activityType) {
 		this.activityType = activityType;
 	}
-	
+
 	public int getCommodityAppStatus() {
 		return commodityAppStatus;
 	}
@@ -150,7 +150,7 @@ public class CommodityVO  implements  Serializable {
 	public void setCommodityType(int commodityType) {
 		this.commodityType = commodityType;
 	}
-	
+
 	public int getIsSpot() {
 		return isSpot;
 	}
@@ -199,7 +199,7 @@ public class CommodityVO  implements  Serializable {
 	public void setCommodityStatus(int commodityStatus) {
 		this.commodityStatus = commodityStatus;
 	}
-	
+
 	public String getShopMid() {
 		return shopMid;
 	}
@@ -251,7 +251,7 @@ public class CommodityVO  implements  Serializable {
 	}
 
 	public CommodityVO(){
-		
+
 	}
 	public CommodityVO(Commodity commodity){
 		this.commodityType = commodity.getType();
@@ -273,7 +273,7 @@ public class CommodityVO  implements  Serializable {
 		}else{
 			this.isSpot = 0;//非现货
 		}
-		
+
 
 		if(commodity.getPostage() != null && !commodity.getPostage().isEmpty()){
 			try{
@@ -329,7 +329,7 @@ public class CommodityVO  implements  Serializable {
 		} else {
 			this.commodityAppStatus = this.commodityStatus;
 		}
-		
+
 		//闪购 || 特卖 || 秒杀
 		if (commodity.getSaleId() != null) {
 			this.activityType = "2";
@@ -341,7 +341,7 @@ public class CommodityVO  implements  Serializable {
 			//其他
 			this.activityType = "0";
 		}
-		
+
 		this.terminalType = commodity.getTerminalType();
 		this.sort=commodity.getSort();//排序
 		this.update_by = commodity.getUpdate_by();//修改人
@@ -541,7 +541,7 @@ public class CommodityVO  implements  Serializable {
 	public void setMallName(String mallName) {
 		this.mallName = mallName;
 	}
-	
+
 	public String getCommodityCategoryName1() {
 		return commodityCategoryName1;
 	}
@@ -584,7 +584,7 @@ public class CommodityVO  implements  Serializable {
 				+ ", processIdentity=" + processIdentity + ", activityType=" + activityType + ", templateId="
 				+ templateId + ", sort=" + sort + ", mallName=" + mallName + "]";
 	}
-	
+
 
 	public Integer getPurchaseCount()
 	{
@@ -596,4 +596,11 @@ public class CommodityVO  implements  Serializable {
 		this.purchaseCount = purchaseCount;
 	}
 
+	public String getWeAndTeStatus() {
+		return weAndTeStatus;
+	}
+
+	public void setWeAndTeStatus(String weAndTeStatus) {
+		this.weAndTeStatus = weAndTeStatus;
+	}
 }
