@@ -147,6 +147,6 @@ public interface McmcCommoditySolrService {
 	 * @param terminalType	终端
 	 * @return
 	 */
-	public boolean updateCommodityTerminalType(String commodityId, Integer terminalType);
+	public boolean updateCommodityTerminalType(String commodityId, Integer terminalType,String weAndTeStatus);
 
 }
