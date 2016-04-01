@@ -12,7 +12,23 @@ import java.util.Date;
  * @time 2015-08-28
  */
 public class ForumContent implements Serializable {
-    public Integer getAdvDuration() {
+    public Integer getCreateBy() {
+		return createBy;
+	}
+
+	public void setCreateBy(Integer createBy) {
+		this.createBy = createBy;
+	}
+
+	public Integer getUpdateBy() {
+		return updateBy;
+	}
+
+	public void setUpdateBy(Integer updateBy) {
+		this.updateBy = updateBy;
+	}
+
+	public Integer getAdvDuration() {
 		return advDuration;
 	}
 
@@ -163,6 +179,17 @@ public class ForumContent implements Serializable {
      */
     private Integer activityModuleId = 0;
     
+    /**
+     * 创建人
+     * @author wangjh7
+     */
+    private Integer createBy = 0;
+    
+    /**
+     * 更新人
+     * @author wangjh7
+     */
+    private Integer updateBy = 0;
     
     public Integer getId() {
         return id;
@@ -409,6 +436,7 @@ public class ForumContent implements Serializable {
 				+ isDeleted + ", status=" + status + ", buyerLive=" + buyerLive + ", iosVersion=" + iosVersion
 				+ ", androidVersion=" + androidVersion + ", quickType=" + quickType + ", quickTypeVal=" + quickTypeVal
 				+ ", bannerBackgroundPic=" + bannerBackgroundPic + ", quickCount=" + quickCount + ", quickRemarks="
-				+ quickRemarks + ", advDuration=" + advDuration + ", activityModuleId=" + activityModuleId + "]";
+				+ quickRemarks + ", advDuration=" + advDuration + ", activityModuleId=" + activityModuleId
+				+ ", createBy=" + createBy + ", updateBy=" + updateBy + "]";
 	}
 }
