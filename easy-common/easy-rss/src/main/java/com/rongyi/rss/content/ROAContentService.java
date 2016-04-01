@@ -303,4 +303,51 @@ public interface ROAContentService {
 	 * @return
 	 */
 	public List<ForumContent> findDailySaleByValueIds(List<String> ids,int type);
+	
+	
+	/**
+	 * 获取板块设置标签信息
+	 * @param homePageId
+	 * @author wangjh7
+	 * @return
+	 */
+	public List<ActivityModuleVO> selectActivityModule(int homePageId);
+	
+	/**
+	 * 设置板块是否显示
+	 * @param moduleId
+	 * @param isVisible 
+	 * @author wangjh7
+	 * @return
+	 */
+	public int updateActivityModuleVisible(int moduleId, boolean isVisible);
+	
+	/**
+	 * 设置板块的位置
+	 * @param moduleId
+	 * @param currentPosition
+	 * @param type
+	 * @author wangjh7
+	 * @return
+	 */
+	public int updateActivityModulePosition(int moduleId, int currentPosition,int type);
+	
+	/**
+	 * 保持板块的信息
+	 * @param moduleId
+	 * @param title
+	 * @param picUrl
+	 * @author wangjh7
+	 * @return
+	 */
+	public int saveActivityModule(int moduleId, String title, String picUrl);
+	
+	/**
+	 * 获取板块的信息
+	 * @param moduleId
+	 * @author wangjh7
+	 * @return
+	 */
+	public List<ActivityModuleVO> getActivityModuleInfo(int moduleId);
+	
 }
