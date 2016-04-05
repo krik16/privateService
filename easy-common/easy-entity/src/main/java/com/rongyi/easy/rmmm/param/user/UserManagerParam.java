@@ -44,7 +44,7 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	private Integer identity = 5;//身份类型:0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购
     private Integer isCooperation = 0;//是否合作(给店长、导购用) 0否 1是
     private String memo;//备注
-    private Integer createSource = 3;//账号创建来源：0大运营、1商家后台、3App
+    private Integer createSource = 3;//账号创建来源：0大运营、1商家后台、3App 4 导购升级
     private String stopReason;//停用原因
     private String creatingUserType;
     private Integer merUserId;//操作人id
@@ -54,7 +54,9 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	private int flag=0;//操作参数 1升级功能
 	private int isUpdate = 0;  //操作参数  （==1直接修改未合作店长为已合作店长 ）
 	private int defaultAccount ;  //资金账号默认   1默认支付宝  2默认银行卡
+	private String jsessionid ;//摩店登录标识
 
+	private String shareCode;//邀请码
 
 
     public Integer getId() {
@@ -70,6 +72,14 @@ public class UserManagerParam extends BaseParam implements Serializable{
 
 	public void setUserDesc(String userDesc) {
 		this.userDesc = userDesc;
+	}
+
+	public String getShareCode() {
+		return shareCode;
+	}
+
+	public void setShareCode(String shareCode) {
+		this.shareCode = shareCode;
 	}
 
 	public String getCreatingUserType() {
@@ -315,6 +325,12 @@ public Integer getIdentity() {
 	}
 	public void setDefaultAccount(int defaultAccount) {
 		this.defaultAccount = defaultAccount;
+	}
+	public String getJsessionid() {
+		return jsessionid;
+	}
+	public void setJsessionid(String jsessionid) {
+		this.jsessionid = jsessionid;
 	}
 	
 	}

@@ -23,16 +23,20 @@ public enum MallShopErrorCode {
     ERROR_PARAM_ISNULL(1070001, "必填参数不能为空"),
     SUCCESS_MALLSHOPEXCEPTION(1070011,"摩店异常业务异常_具体的明细具体输出"),
     ERROR_NO_AUTHORIZED(1070021,"当前功能您无权访问"),
+    ERROR_NO_REGION(1070023,"未查到相关区域信息"),
+    ERROR_VERSION_180(1070030, "当前版本不支持注册，请升级到V1.70后的版本再注册"),
      /** 用户相关 后4位区间  1001---2000*/
     ERROR_ID_INVALID(1071001,"请重新登录"),
     BUYER_PHONE_ISEXITS(1071011,"您注册的手机号已经存在，可登录后直接升级为买手"),
     ERROR_NO_EMAIL(1071002,"客服没有设置邮箱，不能发送邮件"),
-
+    ERROR_CERTIFIED_FAILURE(1071003,"提交身份验证失败"),
     ERROR_INVITE_CODE(1071012,"您输入的邀请码无效，请查证后输入!"),
 
 
     BUYER_ROLE_ISEXITS(1071801,"您已经拥有买手身份，无需升级!重新登录即可"),
     BUYER_DESC_ISLONGER(1071811,"简介内容过长，请重新编辑"),
+    BUYER_DESC_HAS_SENSITIVE_WORD(1071812,"您填写的买手简介不符合规范，请重新编辑"),
+    BUYER_NICKNAME_HAS_SENSITIVE_WORD(1071813,"您填写的买手昵称不符合规范，请重新编辑"),
     /** 商品相关 后4位区间  2001---3000*/
     ERROR_REPORT_SHOP(1072001,"上报未找到的店铺失败"),
 

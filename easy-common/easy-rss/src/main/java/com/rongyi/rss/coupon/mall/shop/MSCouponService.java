@@ -24,6 +24,13 @@ public interface MSCouponService {
     ResponseResult createCoupon(RmmmCouponParam param);
 
     /**
+     * 摩店创建活动卡券
+     * @param param
+     * @return
+     */
+    ResponseVO createActivityCoupon(RmmmCouponParam param);
+
+    /**
      * 查询优惠券
      */
     MSCouponQueryVO listCoupon(RmmmCouponQueryParam param);

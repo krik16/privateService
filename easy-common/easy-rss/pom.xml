@@ -4,8 +4,7 @@
 	<parent>
 		<groupId>com.rongyi</groupId>
 		<artifactId>easy-common</artifactId>
-		<version>3.2.9-SNAPSHOT</version>
-	</parent>
+		<version>3.2.9-SNAPSHOT</version>	</parent>
 	<artifactId>easy-rss</artifactId>
 	<packaging>jar</packaging>
  
@@ -22,6 +21,5 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 	</dependency>
-		
 	</dependencies>
 </project>

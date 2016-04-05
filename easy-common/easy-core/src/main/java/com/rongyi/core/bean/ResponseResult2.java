@@ -2,10 +2,11 @@ package com.rongyi.core.bean;
 
 
 /**
- * 统一返回对象(和前端统一)
- * 
+ * 统一返回对象 逐渐废弃 【不建议使用当前对象 建议使用ResponseVO】
  * @author 
+ * @see ResponseVO
  */
+@Deprecated
 public class ResponseResult2 implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -39,6 +40,7 @@ public class ResponseResult2 implements java.io.Serializable {
 	public Meta getMeta() {
 		return meta;
 	}
+	@Deprecated
 	class Result implements java.io.Serializable {
 
 		private static final long serialVersionUID = 1L;
@@ -46,7 +48,7 @@ public class ResponseResult2 implements java.io.Serializable {
 		private Object data;
 		
 		private Page page=new Page();
-		
+		@Deprecated
 		private class Page  implements java.io.Serializable {
 
 			private static final long serialVersionUID = 1L;
@@ -94,7 +96,7 @@ public class ResponseResult2 implements java.io.Serializable {
 		}
 		
 	}
-
+	@Deprecated
 	 class Meta implements java.io.Serializable {
 
 		private static final long serialVersionUID = 1L;

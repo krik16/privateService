@@ -116,7 +116,7 @@ public class MessageManger {
 
         try {
 
-
+        logger.info("开始发送短信...");
         xml=this.SendValidMessage(phone,content,mallName,title,time,balance,checkNum).toString();
        // System.out.println(xml);
         xmlentity.setReturnstatus("returnstatus");
@@ -177,6 +177,7 @@ public class MessageManger {
             //设置发送内容的编码方式
             String send_content= URLEncoder.encode(content.replaceAll("<br/>", " "), "UTF-8");//发送内容
 
+            logger.info("SmsConfig.csSendURL={} csUserName={} csPassWord={}",SmsConfig.csSendURL,SmsConfig.csUserName,SmsConfig.csPassWord);
             url=new URL(SmsConfig.csSendURL+"&userid="+userid+"&account="+account+"&password="+password+"&mobile="+mobile+"&content="+send_content+"&sendTime="+sendTime+"");
             con = (HttpURLConnection)url.openConnection();
 
@@ -211,7 +212,7 @@ public class MessageManger {
     public static String sendJianZhouSmsMessage(String phone, String message) {
         BusinessService bs = new BusinessService();
         bs.setWebService("http://www.jianzhou.sh.cn/JianzhouSMSWSServer/services/BusinessService");
-        int temp=bs.sendBatchMessage("sdk_rongyi", "54100171", phone, message);
+        int temp=bs.sendBatchMessage("sdk_rongyi", "5410017144996", phone, message);
         return temp+"";
     }
     /**
