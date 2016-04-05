@@ -145,4 +145,11 @@ public interface CommodityService {
 	 */
 	public ResponseResult getBuyerCommodityCategory(BuyerCategoryParam categoryParam);
 
+    /**
+     *
+     * @param type 3表示第三级分类
+     * @param isPopular true表示热门分类
+     * @return
+     */
+    public List<CommodityCategory> selectCategory(int type,boolean isPopular);
 }

@@ -25,6 +25,8 @@ public class CommodityCategory  implements java.io.Serializable{
 	private int type;
 	private List<ObjectId> columnIds;//商品分类对应的规格项id
 	private int commodityCount;
+	private boolean isPopular=false;//是否是热门分类 true表示热门分类
+	private boolean a=true;
 	public int getCommodityCount() {
 		return commodityCount;
 	}
@@ -78,6 +80,14 @@ public class CommodityCategory  implements java.io.Serializable{
 	}
 	public void setParentid(ObjectId parentid) {
 		this.parentid = parentid;
+	}
+
+	public boolean isPopular() {
+		return isPopular;
+	}
+
+	public void setIsPopular(boolean isPopular) {
+		this.isPopular = isPopular;
 	}
 
 	@Override
