@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongyi.easy.rmmm.entity.ExpressSubscribeEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.rongyi.easy.rmmm.entity.ExpressSubscribeEntity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="express_bill_id" property="expressBillId" jdbcType="VARCHAR" />
+    <result column="express_order_info_id" property="expressOrderInfoId" jdbcType="INTEGER" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="salt" property="salt" jdbcType="VARCHAR" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="update_at" property="updateAt" jdbcType="TIMESTAMP" />
+    <result column="return_code" property="returnCode" jdbcType="VARCHAR" />
+    <result column="return_message" property="returnMessage" jdbcType="VARCHAR" />
+    <result column="is_disabled" property="isDisabled" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, express_bill_id, express_order_info_id, company, salt, create_at, update_at, 
+    return_code, return_message, is_disabled
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from express_subscribe
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from express_subscribe
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rongyi.easy.rmmm.entity.ExpressSubscribeEntity" >
+    insert into express_subscribe (id, express_bill_id, express_order_info_id, 
+      company, salt, create_at, 
+      update_at, return_code, return_message, 
+      is_disabled)
+    values (#{id,jdbcType=INTEGER}, #{expressBillId,jdbcType=VARCHAR}, #{expressOrderInfoId,jdbcType=INTEGER}, 
+      #{company,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, 
+      #{updateAt,jdbcType=TIMESTAMP}, #{returnCode,jdbcType=VARCHAR}, #{returnMessage,jdbcType=VARCHAR}, 
+      #{isDisabled,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rongyi.easy.rmmm.entity.ExpressSubscribeEntity" >
+    insert into express_subscribe
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="expressBillId != null" >
+        express_bill_id,
+      </if>
+      <if test="expressOrderInfoId != null" >
+        express_order_info_id,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="salt != null" >
+        salt,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+      <if test="updateAt != null" >
+        update_at,
+      </if>
+      <if test="returnCode != null" >
+        return_code,
+      </if>
+      <if test="returnMessage != null" >
+        return_message,
+      </if>
+      <if test="isDisabled != null" >
+        is_disabled,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="expressBillId != null" >
+        #{expressBillId,jdbcType=VARCHAR},
+      </if>
+      <if test="expressOrderInfoId != null" >
+        #{expressOrderInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateAt != null" >
+        #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnCode != null" >
+        #{returnCode,jdbcType=VARCHAR},
+      </if>
+      <if test="returnMessage != null" >
+        #{returnMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="isDisabled != null" >
+        #{isDisabled,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rongyi.easy.rmmm.entity.ExpressSubscribeEntity" >
+    update express_subscribe
+    <set >
+      <if test="expressBillId != null" >
+        express_bill_id = #{expressBillId,jdbcType=VARCHAR},
+      </if>
+      <if test="expressOrderInfoId != null" >
+        express_order_info_id = #{expressOrderInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="company != null" >
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateAt != null" >
+        update_at = #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnCode != null" >
+        return_code = #{returnCode,jdbcType=VARCHAR},
+      </if>
+      <if test="returnMessage != null" >
+        return_message = #{returnMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="isDisabled != null" >
+        is_disabled = #{isDisabled,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rongyi.easy.rmmm.entity.ExpressSubscribeEntity" >
+    update express_subscribe
+    set express_bill_id = #{expressBillId,jdbcType=VARCHAR},
+      express_order_info_id = #{expressOrderInfoId,jdbcType=INTEGER},
+      company = #{company,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      update_at = #{updateAt,jdbcType=TIMESTAMP},
+      return_code = #{returnCode,jdbcType=VARCHAR},
+      return_message = #{returnMessage,jdbcType=VARCHAR},
+      is_disabled = #{isDisabled,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

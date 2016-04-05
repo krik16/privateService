@@ -45,7 +45,7 @@ public class ExpressOrderInfoEntity implements Serializable{
     /** 是否禁用0正常 1禁用 */
     private Integer isDisabled;
 
-    /**
+	/**
      * 主键
      * @return id
      */

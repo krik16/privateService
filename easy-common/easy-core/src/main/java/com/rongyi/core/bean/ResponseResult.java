@@ -1,7 +1,7 @@
 package com.rongyi.core.bean;
 
 /**
- * * 统一返回对象 逐渐废弃 【不建议使用当前对象 建议使用ResponseVO】
+ * 统一返回对象 逐渐废弃 【不建议使用当前对象 建议使用ResponseVO】
  * !!!《《《《禁止本类修改当前状态code，如需新success code 外部传入》》》!!!
  * @author baodk
  * @see ResponseVO

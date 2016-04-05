@@ -147,4 +147,10 @@ public interface ROACommodityService {
 //	 * @return
 //	 */
 //	public ResponseResult getBuyerCommodityCategoryHasCommodity(BuyerCategoryParam categoryParam);
+	/**
+	 * 获取有商品的分类列表
+	 * @param categoryParam	参数对象
+	 * @return
+	 */
+	public ResponseResult getBuyerCommodityCategory(BuyerCategoryParam categoryParam);
 }

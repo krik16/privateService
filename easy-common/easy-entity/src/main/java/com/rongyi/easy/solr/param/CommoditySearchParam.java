@@ -65,12 +65,14 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	/** 商品类型 (买手 1， 全部商品 0, 特卖场 2, 闪购 3，导购商品 4)*/
 	private String commodityType;
 
-	/**
-	 * 商品spu
-	 */
+	/** 商品spu **/
 	private String systemNumber;
 
 	private Integer from = 0; // 从0开始 偏移量，商品聚合分页使用
+	
+	private String minPrice;	// 最小价格范围
+	
+	private String maxPrice;	// 最大价格范围
 
 	private String zoneId;
 
@@ -257,6 +259,10 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	public void setSystemNumber(String systemNumber) {
 		this.systemNumber = systemNumber;
 	}
+	
+	public String getMinPrice() {
+		return minPrice;
+	}
 
 	public String getZoneId() {
 		return zoneId;
@@ -274,13 +280,24 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 		this.commodityCode = commodityCode;
 	}
 
+	public void setMinPrice(String minPrice) {
+		this.minPrice = minPrice;
+	}
+
+	public String getMaxPrice() {
+		return maxPrice;
+	}
+
+	public void setMaxPrice(String maxPrice) {
+		this.maxPrice = maxPrice;
+	}
+
 	@Override
 	public String toString() {
 		return "CommoditySearchParam [keyword=" + keyword + ", shopId=" + shopId + ", brandId=" + brandId + ", mallId="
 				+ mallId + ", commodityCategory=" + commodityCategory + ", sortBy=" + sortBy + ", coord_x=" + coord_x
 				+ ", coord_y=" + coord_y + ", bullId=" + bullId + ", liveId=" + liveId + ", saleId=" + saleId
 				+ ", flashSaleId=" + flashSaleId + ", commodityType=" + commodityType + ", systemNumber=" + systemNumber
-				+ ", from=" + from + ", zoneId=" + zoneId + ", commodityCode=" + commodityCode + ", keywordList="
-				+ keywordList + "]";
+				+ ", from=" + from + ", minPrice=" + minPrice + ", maxPrice=" + maxPrice + "]";
 	}
 }
