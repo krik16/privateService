@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.rongyi.easy.mcmc.Commodity;
+
 import org.apache.commons.lang.StringUtils;
 public class CommodityBuyerVO implements Serializable{
 	private static final long serialVersionUID = -1461107119422444629L;
@@ -179,6 +180,7 @@ public class CommodityBuyerVO implements Serializable{
 	private String commodityDescription;//我是商品描述”,
 	private String commodityName;//我是商品名称”,
 	private String shopId;//123”,
+	private Integer purchaseCount;//商品的限购数量
 	public String getShopMid() {
 		return shopMid;
 	}
@@ -246,6 +248,7 @@ public class CommodityBuyerVO implements Serializable{
 		this.supportSelfPickup = commodity.isSupportSelfPickup();
 		
 		this.terminalType = commodity.getTerminalType();// 终端
+		this.purchaseCount = commodity.getPurchaseCount();//商品限购数量
 
 		// 商品待上架且上架时间大于当前时间，app商品状态为 待上架
 		//商品上架或待上架，且上架时间小于当前时间，且下架时间大于当前时间，app商品状态为 上架
@@ -408,24 +411,43 @@ public class CommodityBuyerVO implements Serializable{
 	public void setTerminalType(Integer terminalType) {
 		this.terminalType = terminalType;
 	}
+	
+	public Integer getPurchaseCount() {
+		return purchaseCount;
+	}
+
+	public void setPurchaseCount(Integer purchaseCount) {
+		this.purchaseCount = purchaseCount;
+	}
 
 	@Override
 	public String toString() {
-		return "CommodityBuyerVO [shopName=" + shopName + ", commodityPicList=" + commodityPicList + ", commodityId="
-				+ commodityId + ", commodityCode=" + commodityCode + ", commodityStock=" + commodityStock
-				+ ", commodityStatus=" + commodityStatus + ", commodityAppStatus=" + commodityAppStatus
-				+ ", commodityType=" + commodityType + ", supportCourierDeliver=" + supportCourierDeliver
-				+ ", supportSelfPickup=" + supportSelfPickup + ", offlinePayment=" + offlinePayment + ", onlinePayment="
-				+ onlinePayment + ", offlineRefund=" + offlineRefund + ", onlineRefund=" + onlineRefund + ", shopIM="
-				+ shopIM + ", bullId=" + bullId + ", distance=" + distance + ", saleShopCount=" + saleShopCount
-				+ ", watching=" + watching + ", location=" + location + ", systemNumber=" + systemNumber
-				+ ", activityType=" + activityType + ", easyOrder=" + easyOrder + ", terminalType=" + terminalType
-				+ ", commodityOPriceMax=" + commodityOPriceMax + ", commodityOPriceMin=" + commodityOPriceMin
-				+ ", commodityCPriceMax=" + commodityCPriceMax + ", commodityCPriceMin=" + commodityCPriceMin
-				+ ", commodityOPOfLCP=" + commodityOPOfLCP + ", commodityBrandName=" + commodityBrandName
-				+ ", commodityPostage=" + commodityPostage + ", commodityDescription=" + commodityDescription
-				+ ", commodityName=" + commodityName + ", shopId=" + shopId + ", shopMid=" + shopMid + ", isCollected="
-				+ isCollected + "]";
+		return "CommodityBuyerVO [shopName=" + shopName + ", commodityPicList="
+				+ commodityPicList + ", commodityId=" + commodityId
+				+ ", commodityCode=" + commodityCode + ", commodityStock="
+				+ commodityStock + ", commodityStatus=" + commodityStatus
+				+ ", commodityAppStatus=" + commodityAppStatus
+				+ ", commodityType=" + commodityType
+				+ ", supportCourierDeliver=" + supportCourierDeliver
+				+ ", supportSelfPickup=" + supportSelfPickup
+				+ ", offlinePayment=" + offlinePayment + ", onlinePayment="
+				+ onlinePayment + ", offlineRefund=" + offlineRefund
+				+ ", onlineRefund=" + onlineRefund + ", shopIM=" + shopIM
+				+ ", bullId=" + bullId + ", distance=" + distance
+				+ ", saleShopCount=" + saleShopCount + ", watching=" + watching
+				+ ", location=" + location + ", systemNumber=" + systemNumber
+				+ ", activityType=" + activityType + ", easyOrder=" + easyOrder
+				+ ", terminalType=" + terminalType + ", commodityOPriceMax="
+				+ commodityOPriceMax + ", commodityOPriceMin="
+				+ commodityOPriceMin + ", commodityCPriceMax="
+				+ commodityCPriceMax + ", commodityCPriceMin="
+				+ commodityCPriceMin + ", commodityOPOfLCP=" + commodityOPOfLCP
+				+ ", commodityBrandName=" + commodityBrandName
+				+ ", commodityPostage=" + commodityPostage
+				+ ", commodityDescription=" + commodityDescription
+				+ ", commodityName=" + commodityName + ", shopId=" + shopId
+				+ ", purchaseCount=" + purchaseCount + ", shopMid=" + shopMid
+				+ ", isCollected=" + isCollected + "]";
 	}
 	
 }
