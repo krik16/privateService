@@ -23,6 +23,8 @@ public enum CodeEnum {
     ERROR_PARAM("-13", "必要参数为空或不合法"),
     ERROR_PARAM_1301("-1301", "必填参数不能为空"),
 
+    ERROR_VERSION_180("-3180", "当前版本不支持注册，请升级到V1.70后的版本再注册"),
+
     ERROR_PARAM_CHAR("-78","包含特殊字符"),
 
     /** 正常 但没有数据 **/
@@ -101,6 +103,13 @@ public enum CodeEnum {
     ERROR_NOMORE_COMMODITY("-7006", "没有更多的商品了"),
     ERROR_MCMC_COMMODITY_CODE_USED("-7007", "商品编号重复"),
     ERROR_MCMC_COMMODITY_DUPLICATED_SPEC("-7008", "商品规格重复"),
+    ERROR_MCMC_COMMODITY_ID_EMPTY("-7009", "商品信息错误"),
+	ERROR_MCMC_COMMODITY_DELETED("-7010", "商品不存在或已删除"),
+	ERROR_MCMC_COMMODITY_DELETED_OR_NODOWN("-7011", "商品已删除或未下架"),
+	ERROR_MCMC_COMMODITY_NAME_HAS_SENSITIVE_WORD("-7012", "您填写的商品名称不符合规范，请重新编辑"),
+	ERROR_MCMC_COMMODITY_DESCRIPTION_HAS_SENSITIVE_WORD("-7013", "您填写的商品描述不符合规范，请重新编辑"),
+	ERROR_MCMC_COMMODITY_SPEC_HAS_SENSITIVE_WORD("-7014", "您填写的商品规格不符合规范，请重新编辑"),
+	ERROR_MCMC_COMMODITY_LIVE_NAME_HAS_SENSITIVE_WORD("-7015", "您填写的直播名字不符合规范，请重新编辑"),
     /** 百联优惠券常量 */
     ERROR_BUYED_OUT("-3007","优惠券已经被领完"),
 
@@ -146,6 +155,9 @@ public enum CodeEnum {
     ERROR_COUPON_REPEAT("-6002","一张红包只能使用一次"),
     ERROR_COUPON_PUBLISH_OVER("-6003","每日限量发行数填写错误"),
     ERROR_COUPON_PUBLISH_CHANNEL("-6004","亲，活动券你不能管理哦"),
+    ERROR_COUPON_NAME_HAS_SENSITIVE_WORD("-6005","您填写的卡券名称不符合规范，请重新编辑"),
+    ERROR_COUPON_USE_LIMIT_HAS_SENSITIVE_WORD("-6006","您填写的卡券使用限制不符合规范，请重新编辑"),
+    ERROR_COUPON_USEAGE_HAS_SENSITIVE_WORD("-6007","您填写的卡券使用方式不符合规范，请重新编辑"),
 
     ERROR_ACCOUNT_INSUFFICIENT_BALANCE("-7001","账户余额不足"),
     ERROR_ACCOUNT_NO_PERMISSION("-7002","账户被冻结或未授权"),
@@ -177,62 +189,56 @@ public enum CodeEnum {
     ERROR_UPDATE_NOTICE("1073004","修改店铺公告失败"),
     ERROR_DELETE_NOTICE("1073005","删除店铺公告失败"),
     ERROR_OFFLINE_NOTICE("1073006","公告已强制下线"),
+    ERROR_NOTICE_HAS_SENSITIVE_WORD("1073007","您填写的店铺公告不符合规范，请重新编辑"),
 
     ERROR_NO_RIGHTS("1073007", "亲,您无权限操作上级/下级发布的商品喔～"),
     
     //操作权限错误(BO：分公司、SM：店长、SG：导购)
-    //分公司无权操作店长
-    ERROR_AUTH_BO_TO_SM_UP("1101000","分公司无权上架店长商品"),
-    ERROR_AUTH_BO_TO_SM_DOWN("1101001","分公司无权下架店长商品"),
-    ERROR_AUTH_BO_TO_SM_EDIT("1101002","分公司无权修改店长商品"),
+    //分公司无权操作店长(UP：上架、DOWN：下架、EDIT：编辑、DEL：删除)
+    ERROR_AUTH_BO_TO_SM_UP("1101100","分公司无权上架店长商品"),
+    ERROR_AUTH_BO_TO_SM_DOWN("1101101","分公司无权下架店长商品"),
+    ERROR_AUTH_BO_TO_SM_EDIT("1101102","分公司无权修改店长商品"),
+    ERROR_AUTH_BO_TO_SM_DEL("1101103","分公司无权删除店长商品"),
     //分公司无权操作导购
-  	ERROR_AUTH_BO_TO_SG_UP("1101003","分公司无权上架导购商品"),
-  	ERROR_AUTH_BO_TO_SG_DOWN("1101004","分公司无权下架导购商品"),
-  	ERROR_AUTH_BO_TO_SG_EDIT("1101005","分公司无权修改导购商品"),
+  	ERROR_AUTH_BO_TO_SG_UP("1101200","分公司无权上架导购商品"),
+  	ERROR_AUTH_BO_TO_SG_DOWN("1101201","分公司无权下架导购商品"),
+  	ERROR_AUTH_BO_TO_SG_EDIT("1101202","分公司无权修改导购商品"),
+  	ERROR_AUTH_BO_TO_SG_DEL("1101203","分公司无权删除导购商品"),
   	//分公司无权操作
-  	ERROR_AUTH_BO_TO_OTHER_UP("1101006","分公司无权上架商品"),
-  	ERROR_AUTH_BO_TO_OTHER_DOWN("1101007","分公司无权下架商品"),
-  	ERROR_AUTH_BO_TO_OTHER_EDIT("1101008","分公司无权编辑商品"),
+  	ERROR_AUTH_BO_TO_OTHER_UP("1101300","分公司无权上架商品"),
+  	ERROR_AUTH_BO_TO_OTHER_DOWN("1101301","分公司无权下架商品"),
+  	ERROR_AUTH_BO_TO_OTHER_EDIT("1101302","分公司无权编辑商品"),
+  	ERROR_AUTH_BO_TO_OTHER_DEL("1101303","分公司无权删除商品"),
   	//店长无权操作分公司
-  	ERROR_AUTH_SM_TO_BO_UP("1101009","店长无权上架分公司商品"),
-	ERROR_AUTH_SM_TO_BO_DOWN("1101010","店长无权下架分公司商品"),
-	ERROR_AUTH_SM_TO_BO_EDIT("1101011","店长无权修改分公司商品"),
+  	ERROR_AUTH_SM_TO_BO_UP("1101400","店长无权上架分公司商品"),
+	ERROR_AUTH_SM_TO_BO_DOWN("1101401","店长无权下架分公司商品"),
+	ERROR_AUTH_SM_TO_BO_EDIT("1101402","店长无权修改分公司商品"),
+	ERROR_AUTH_SM_TO_BO_DEL("1101403","店长无权删除分公司商品"),
 	//店长无权操作导购
-	ERROR_AUTH_SM_TO_SG_UP("1101012","店长无权上架导购商品"),
-	ERROR_AUTH_SM_TO_SG_DOWN("1101013","店长无权下架导购商品"),
-	ERROR_AUTH_SM_TO_SG_EDIT("1101014","店长无权修改导购商品"),
+	ERROR_AUTH_SM_TO_SG_UP("1101500","店长无权上架导购商品"),
+	ERROR_AUTH_SM_TO_SG_DOWN("1101501","店长无权下架导购商品"),
+	ERROR_AUTH_SM_TO_SG_EDIT("1101502","店长无权修改导购商品"),
+	ERROR_AUTH_SM_TO_SG_DEL("1101503","店长无权删除导购商品"),
 	//店长无权操作
-  	ERROR_AUTH_SM_TO_OTHER_UP("1101015","店长无权上架商品"),
-  	ERROR_AUTH_SM_TO_OTHER_DOWN("1101016","店长无权下架商品"),
-  	ERROR_AUTH_SM_TO_OTHER_EDIT("1101017","店长无权编辑商品"),
+  	ERROR_AUTH_SM_TO_OTHER_UP("1101600","店长无权上架商品"),
+  	ERROR_AUTH_SM_TO_OTHER_DOWN("1101601","店长无权下架商品"),
+  	ERROR_AUTH_SM_TO_OTHER_EDIT("1101602","店长无权编辑商品"),
+  	ERROR_AUTH_SM_TO_OTHER_DEL("1101603","店长无权删除商品"),
     //导购无权操作分公司
-    ERROR_AUTH_SG_TO_BO_UP("1101018","导购无权上架分公司商品"),
-    ERROR_AUTH_SG_TO_BO_DOWN("1101019","导购无权下架分公司商品"),
-	ERROR_AUTH_SG_TO_BO_EDIT("1101020","导购无权修改分公司商品"),
+    ERROR_AUTH_SG_TO_BO_UP("1101700","导购无权上架分公司商品"),
+    ERROR_AUTH_SG_TO_BO_DOWN("1101701","导购无权下架分公司商品"),
+	ERROR_AUTH_SG_TO_BO_EDIT("1101702","导购无权修改分公司商品"),
+	ERROR_AUTH_SG_TO_BO_DEL("1101703","导购无权删除分公司商品"),
 	//导购无权操作店长
-	ERROR_AUTH_SG_TO_SM_UP("1101021","导购无权上架店长商品"),
-	ERROR_AUTH_SG_TO_SM_DOWN("1101022","导购无权下架店长商品"),
-	ERROR_AUTH_SG_TO_SM_EDIT("1101023","导购无权修改店长商品"),
+	ERROR_AUTH_SG_TO_SM_UP("1101800","导购无权上架店长商品"),
+	ERROR_AUTH_SG_TO_SM_DOWN("1101801","导购无权下架店长商品"),
+	ERROR_AUTH_SG_TO_SM_EDIT("1101802","导购无权修改店长商品"),
+	ERROR_AUTH_SG_TO_SM_DEL("1101803","导购无权删除店长商品"),
 	//导购无权操作
-  	ERROR_AUTH_SG_TO_OTHER_UP("1101024","导购无权上架商品"),
-  	ERROR_AUTH_SG_TO_OTHER_DOWN("1101025","导购无权下架商品"),
-  	ERROR_AUTH_SG_TO_OTHER_EDIT("1101026","导购无权编辑商品"),
-  	//其他操作分公司
-  	ERROR_AUTH_OTHER_TO_BO_UP("1101027","无权上架分公司商品商品"),
-  	ERROR_AUTH_OTHER_TO_BO_DOWN("1101028","无权下架分公司商品"),
-  	ERROR_AUTH_OTHER_TO_BO_EDIT("1101029","无权编辑分公司商品"),
-  	//其他操作店长
-  	ERROR_AUTH_OTHER_TO_SM_UP("1101030","无权上架店长商品"),
-  	ERROR_AUTH_OTHER_TO_SM_DOWN("1101031","无权下架店长商品"),
-  	ERROR_AUTH_OTHER_TO_SM_EDIT("1101032","无权编辑店长商品"),
-  	//其他操作导购
-  	ERROR_AUTH_OTHER_TO_SG_UP("1101033","无权上架导购商品"),
-  	ERROR_AUTH_OTHER_TO_SG_DOWN("1101034","无权下架导购商品"),
-  	ERROR_AUTH_OTHER_TO_SG_EDIT("1101035","无权编辑导购商品"),
-  	//其他操作分其他
-  	ERROR_AUTH_OTHER_TO_OTHER_UP("1101036","无权上架商品"),
-  	ERROR_AUTH_OTHER_TO_OTHER_DOWN("1101037","无权下架商品"),
-  	ERROR_AUTH_OTHER_TO_OTHER_EDIT("1101038","无权编辑商品"),
+  	ERROR_AUTH_SG_TO_OTHER_UP("1101900","导购无权上架商品"),
+  	ERROR_AUTH_SG_TO_OTHER_DOWN("1101901","导购无权下架商品"),
+  	ERROR_AUTH_SG_TO_OTHER_EDIT("1101902","导购无权编辑商品"),
+  	ERROR_AUTH_SG_TO_OTHER_DEL("1101903","导购无权删除商品"),
 	
 	//返回前端的错误信息
 	ERROR_ROLE_BO_EDIT("1201101", "你无权限操作，如需修改请联系分公司管理员"),
@@ -251,6 +257,10 @@ public enum CodeEnum {
     public String getActionCode(){
         return code; 
     }
+
+    public Integer getActionCodeInt() {
+        return Integer.valueOf(code);
+    }
     
     public String getMessage(){
         return message;
@@ -268,7 +278,7 @@ public enum CodeEnum {
     
     /**
      * 根据Code获取CodeEnum对象
-     * @param codeCode
+     * @param code
      * @return
      */
     public static CodeEnum getCodeEnum(String code) {

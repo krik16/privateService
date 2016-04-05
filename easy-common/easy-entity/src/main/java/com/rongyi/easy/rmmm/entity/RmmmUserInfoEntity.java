@@ -80,6 +80,9 @@ public class RmmmUserInfoEntity implements Serializable{
     private String pushId;//消息推送Id
 
    // private List<Integer> identityTypeList; //用户账号身份列表
+    private String useCode; //注册使用的邀请码
+    
+    private String jsessionid; //用户摩店登录标识
 
     public Integer getId() {
 		return id;
@@ -311,5 +314,21 @@ public class RmmmUserInfoEntity implements Serializable{
     public void setPushId(String pushId) {
         this.pushId = pushId;
     }
+
+	public String getUseCode() {
+		return useCode;
+	}
+
+	public void setUseCode(String useCode) {
+		this.useCode = useCode;
+	}
+
+	public String getJsessionid() {
+		return jsessionid;
+	}
+
+	public void setJsessionid(String jsessionid) {
+		this.jsessionid = jsessionid;
+	}
 }
 

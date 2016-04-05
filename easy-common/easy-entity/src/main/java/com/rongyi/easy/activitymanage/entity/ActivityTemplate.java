@@ -27,6 +27,15 @@ public class ActivityTemplate implements Serializable{
     private Date startAt;
    /**活动结束时间*/
     private Date endAt;
+    /**
+     * 发布渠道  0 大运营 1 商家
+     */
+    private Integer publishChannel;
+    /**
+     * 商家id
+     */
+    private String publishChannelId;
+
     /***
      * 活动最后生成的URl
      */
@@ -269,6 +278,21 @@ public class ActivityTemplate implements Serializable{
         this.saleCommodityTops = saleCommodityTops;
     }
 
+    public Integer getPublishChannel() {
+        return publishChannel;
+    }
+
+    public void setPublishChannel(Integer publishChannel) {
+        this.publishChannel = publishChannel;
+    }
+
+    public String getPublishChannelId() {
+        return publishChannelId;
+    }
+
+    public void setPublishChannelId(String publishChannelId) {
+        this.publishChannelId = publishChannelId;
+    }
 
     @Override
     public String toString() {
@@ -280,6 +304,8 @@ public class ActivityTemplate implements Serializable{
                 .append("name", name)
                 .append("startAt", startAt)
                 .append("endAt", endAt)
+                .append("publishChannel", publishChannel)
+                .append("publishChannelId", publishChannelId)
                 .append("activityUrl", activityUrl)
                 .append("activityType", activityType)
                 .append("moduleType", moduleType)

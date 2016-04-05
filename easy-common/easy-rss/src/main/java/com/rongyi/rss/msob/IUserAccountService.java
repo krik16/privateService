@@ -60,4 +60,12 @@ public interface IUserAccountService {
 //	 */
 //	public UserAccountDto getAccountListBySaleId(Integer guideId) throws Exception;
 
+    /**
+     * 返回店铺下 店长的 imId
+     * @param shopIds 店铺ID
+     * @return
+     * @throws Exception
+     */
+    public List<String> findImId(List<String> shopIds) throws Exception;
+
 }

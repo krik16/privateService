@@ -53,6 +53,18 @@ public class OrderCartFormEntity implements Serializable {
 
     private Byte payChannel;//1支付宝网页  3支付宝app  5微信
 
+    private OrderEventEntity orderEvent;
+
+    public OrderEventEntity getOrderEvent()
+    {
+        return orderEvent;
+    }
+
+    public void setOrderEvent(OrderEventEntity orderEvent)
+    {
+        this.orderEvent = orderEvent;
+    }
+
     public Byte getIsAlert() {
         return isAlert;
     }

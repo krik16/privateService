@@ -77,6 +77,8 @@ public class TradeSubOrder implements Serializable {
 
     private Byte hbSource;
 
+    private Byte activityType;
+
     public Integer getId() {
         return id;
     }
@@ -367,5 +369,15 @@ public class TradeSubOrder implements Serializable {
 
     public void setHbSource(Byte hbSource) {
         this.hbSource = hbSource;
+    }
+
+    public Byte getActivityType()
+    {
+        return activityType;
+    }
+
+    public void setActivityType(Byte activityType)
+    {
+        this.activityType = activityType;
     }
 }

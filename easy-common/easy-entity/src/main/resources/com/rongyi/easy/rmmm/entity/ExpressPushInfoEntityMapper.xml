@@ -4,169 +4,17 @@
   <resultMap id="BaseResultMap" type="com.rongyi.easy.rmmm.entity.ExpressPushInfoEntity" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="express_bill_id" property="expressBillId" jdbcType="VARCHAR" />
-    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="old_company" property="oldCompany" jdbcType="VARCHAR" />
+    <result column="new_company" property="newCompany" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="TINYINT" />
     <result column="message" property="message" jdbcType="VARCHAR" />
     <result column="state" property="state" jdbcType="TINYINT" />
     <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
     <result column="update_at" property="updateAt" jdbcType="TIMESTAMP" />
     <result column="is_disabled" property="isDisabled" jdbcType="TINYINT" />
+    <result column="data" property="data" jdbcType="VARCHAR" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.rongyi.easy.rmmm.entity.ExpressPushInfoEntity" extends="BaseResultMap" >
+  <!-- <resultMap id="ResultMapWithBLOBs" type="com.rongyi.easy.rmmm.entity.ExpressPushInfoEntity" extends="BaseResultMap" >
     <result column="data" property="data" typeHandler="com.rongyi.core.common.util.ConvertBlobTypeHandler" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, express_bill_id, company, status, message, state, create_at, update_at, 
-    is_disabled
-  </sql>
-  <sql id="Blob_Column_List" >
-    data
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from express_push_info
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from express_push_info
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.rongyi.easy.rmmm.entity.ExpressPushInfoEntity" >
-    insert into express_push_info (id, express_bill_id, company, 
-      status, message, state, 
-      create_at, update_at, 
-      is_disabled, data)
-    values (#{id,jdbcType=INTEGER}, #{expressBillId,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, 
-      #{status,jdbcType=TINYINT}, #{message,jdbcType=VARCHAR}, #{state,jdbcType=TINYINT}, 
-      #{createAt,jdbcType=TIMESTAMP}, #{updateAt,jdbcType=TIMESTAMP}, 
-      #{isDisabled,jdbcType=TINYINT}, #{data,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.rongyi.easy.rmmm.entity.ExpressPushInfoEntity" >
-    insert into express_push_info
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="expressBillId != null" >
-        express_bill_id,
-      </if>
-      <if test="company != null" >
-        company,
-      </if>
-      <if test="status != null" >
-        status,
-      </if>
-      <if test="message != null" >
-        message,
-      </if>
-      <if test="state != null" >
-        state,
-      </if>
-      <if test="createAt != null" >
-        create_at,
-      </if>
-      <if test="updateAt != null" >
-        update_at,
-      </if>
-      <if test="isDisabled != null" >
-        is_disabled,
-      </if>
-      <if test="data != null" >
-        data,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="expressBillId != null" >
-        #{expressBillId,jdbcType=VARCHAR},
-      </if>
-      <if test="company != null" >
-        #{company,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=TINYINT},
-      </if>
-      <if test="message != null" >
-        #{message,jdbcType=VARCHAR},
-      </if>
-      <if test="state != null" >
-        #{state,jdbcType=TINYINT},
-      </if>
-      <if test="createAt != null" >
-        #{createAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateAt != null" >
-        #{updateAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isDisabled != null" >
-        #{isDisabled,jdbcType=TINYINT},
-      </if>
-      <if test="data != null" >
-        #{data,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.rongyi.easy.rmmm.entity.ExpressPushInfoEntity" >
-    update express_push_info
-    <set >
-      <if test="expressBillId != null" >
-        express_bill_id = #{expressBillId,jdbcType=VARCHAR},
-      </if>
-      <if test="company != null" >
-        company = #{company,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=TINYINT},
-      </if>
-      <if test="message != null" >
-        message = #{message,jdbcType=VARCHAR},
-      </if>
-      <if test="state != null" >
-        state = #{state,jdbcType=TINYINT},
-      </if>
-      <if test="createAt != null" >
-        create_at = #{createAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateAt != null" >
-        update_at = #{updateAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isDisabled != null" >
-        is_disabled = #{isDisabled,jdbcType=TINYINT},
-      </if>
-      <if test="data != null" >
-        data = #{data,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.rongyi.easy.rmmm.entity.ExpressPushInfoEntity" >
-    update express_push_info
-    set express_bill_id = #{expressBillId,jdbcType=VARCHAR},
-      company = #{company,jdbcType=VARCHAR},
-      status = #{status,jdbcType=TINYINT},
-      message = #{message,jdbcType=VARCHAR},
-      state = #{state,jdbcType=TINYINT},
-      create_at = #{createAt,jdbcType=TIMESTAMP},
-      update_at = #{updateAt,jdbcType=TIMESTAMP},
-      is_disabled = #{isDisabled,jdbcType=TINYINT},
-      data = #{data,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.rongyi.easy.rmmm.entity.ExpressPushInfoEntity" >
-    update express_push_info
-    set express_bill_id = #{expressBillId,jdbcType=VARCHAR},
-      company = #{company,jdbcType=VARCHAR},
-      status = #{status,jdbcType=TINYINT},
-      message = #{message,jdbcType=VARCHAR},
-      state = #{state,jdbcType=TINYINT},
-      create_at = #{createAt,jdbcType=TIMESTAMP},
-      update_at = #{updateAt,jdbcType=TIMESTAMP},
-      is_disabled = #{isDisabled,jdbcType=TINYINT}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+  </resultMap> -->
 </mapper>

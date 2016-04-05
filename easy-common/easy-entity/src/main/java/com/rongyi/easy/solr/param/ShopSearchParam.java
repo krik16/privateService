@@ -1,6 +1,8 @@
 package com.rongyi.easy.solr.param;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ShopSearchParam implements Serializable{
 
@@ -16,6 +18,7 @@ public class ShopSearchParam implements Serializable{
 	/** 自定义分类id */
 	private String custom_cat_id;
 	private String city_name; //城市名（如  上海&上海市）
+	private String city_id;
 	private String sort;      //排序规则（distance，null，couponRequired（commodityRequired），date）
 	private int from;         //页
 	private int size = 50;         //一页数量
@@ -25,6 +28,19 @@ public class ShopSearchParam implements Serializable{
 	private boolean commodityRequired; //是否只看有商品的店铺
 	private String mall_id;  //商场id
 	private String poi_type; //店铺：0 商场：1
+	private List<String> keywordList = new ArrayList<>();
+
+	public List<String> getKeywordList() {
+		return keywordList;
+	}
+
+	public void setKeywordList(List<String> keywordList) {
+		this.keywordList = keywordList;
+	}
+
+	public void addKeywordList(String keyword) {
+		this.keywordList.add(keyword);
+	}
 
 	public String getPoi_type() {
 		return poi_type;
@@ -129,24 +145,36 @@ public class ShopSearchParam implements Serializable{
 	public void setCustom_cat_id(String custom_cat_id) {
 		this.custom_cat_id = custom_cat_id;
 	}
+
+	public String getCity_id() {
+		return city_id;
+	}
+
+	public void setCity_id(String city_id) {
+		this.city_id = city_id;
+	}
+
 	@Override
 	public String toString() {
 		return "ShopSearchParam{" +
-				"keyword='" + keyword + '\'' +
+				"brand_id='" + brand_id + '\'' +
+				", keyword='" + keyword + '\'' +
 				", distance=" + distance +
 				", coord_x='" + coord_x + '\'' +
 				", coord_y='" + coord_y + '\'' +
 				", cat_id='" + cat_id + '\'' +
+				", custom_cat_id='" + custom_cat_id + '\'' +
 				", city_name='" + city_name + '\'' +
+				", city_id='" + city_id + '\'' +
 				", sort='" + sort + '\'' +
 				", from=" + from +
 				", size=" + size +
-				", brand_id='" + brand_id + '\'' +
 				", zone_id='" + zone_id + '\'' +
 				", shop_id='" + shop_id + '\'' +
 				", commodityRequired=" + commodityRequired +
 				", mall_id='" + mall_id + '\'' +
 				", poi_type='" + poi_type + '\'' +
+				", keywordList=" + keywordList +
 				'}';
 	}
 }

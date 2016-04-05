@@ -734,7 +734,11 @@ public interface Constants {
     interface ExportSize{
         int EXCEL_EXPORT_MAX_SIZE=50000;
     }
-
+    //容易逛[0] 互动屏[1] 微商[2]
+    interface CouponPublishChannel{
+        int DYY=0;//大运营卡券
+        int SJ=1;//商家卡券
+    }
 
     /**
      * 对账类型

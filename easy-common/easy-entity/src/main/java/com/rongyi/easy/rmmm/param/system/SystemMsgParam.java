@@ -27,6 +27,8 @@ public class SystemMsgParam implements Serializable{
 
     private String jsessionid;
 
+    private Integer identity;//身份类型:0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购，6买手
+
     public String getCurrentPage() {
         return currentPage;
     }
@@ -81,5 +83,13 @@ public class SystemMsgParam implements Serializable{
 
     public void setJsessionid(String jsessionid) {
         this.jsessionid = jsessionid;
+    }
+
+    public Integer getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(Integer identity) {
+        this.identity = identity;
     }
 }
