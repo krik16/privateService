@@ -50,5 +50,5 @@ public interface ROATotalCommodityService {
 
 	public Map<String ,Object>  findListForWechat(Map<String ,Object> params);
 
-	public boolean updateCommodityWeAndTeStatus(String id,String type,String terminalType,String weAndTeStatus);
+	public String updateCommodityWeAndTeStatus(String id,String type,String terminalType,String weAndTeStatus);
 }
