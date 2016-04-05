@@ -143,6 +143,7 @@ public enum CodeEnum {
     ERROR_COMMODITY_NOTFOUND("-1915","商品不存在"),
     ERROR_ORDER_NOTFOUND("-1916","订单不存在"),
     ERROR_ORDER_ERRORCREATE("-1917","生成订单模板失败"),
+    ERROR_ORDER_COMMODITY_LIMIT_COUNT("-1918","下单数量超过了该商品限购数量，请重新选购"),
     /** GCC错误提示*/
     ERROR_GCC("-2101", "GCC异常"),
     /** 申请支付错误提示*/
