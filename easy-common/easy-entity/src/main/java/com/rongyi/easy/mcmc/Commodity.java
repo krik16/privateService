@@ -169,6 +169,7 @@ public class Commodity implements  Serializable,Cloneable{
 	private String oPriceMin;//商品原最低价（用于买家版）
 	private String cPriceMax;//商品现最高价（用于买家版）
 	private String cPriceMin;//商品现最高价（用于买家版）
+	private Double discount ;//商品的折扣
 	private Integer sort;//直播商品的排序
 
 	public ObjectId getId() {
@@ -347,6 +348,13 @@ public class Commodity implements  Serializable,Cloneable{
 		this.stockStatus = stockStatus;
 	}
 
+	public Double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Double discount) {
+		this.discount = discount;
+	}
 
 	@Override
 	public Commodity clone() throws CloneNotSupportedException {
@@ -391,6 +399,7 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setSaleId(saleId);
 		commodity.setFlashSaleId(flashSaleId);
 		commodity.setSecKillSign(secKillSign);
+		commodity.setDiscount(discount);
 //		commodity.setActivityStartTime(activityStartTime);
 //		commodity.setActivityEndTime(activityEndTime);
 		commodity.setSort(sort);
@@ -547,7 +556,7 @@ public class Commodity implements  Serializable,Cloneable{
 				+ ", price=" + price + ", brandId=" + brandId + ", mallId=" + mallId + ", categoryIds=" + categoryIds
 				+ ", customCategory=" + customCategory + ", freight=" + freight + ", terminalType=" + terminalType
 				+ ", registerAt=" + registerAt + ", soldOutAt=" + soldOutAt + ", source=" + source + ", stockStatus="
-				+ stockStatus + ", systemNumber=" + systemNumber + ", reason=" + reason + ", oPriceMax=" + oPriceMax
+				+ stockStatus + ", systemNumber=" + systemNumber + ", reason=" + reason + ", oPriceMax=" + oPriceMax+", discount="+discount
 				+ ", oPriceMin=" + oPriceMin + ", cPriceMax=" + cPriceMax + ", cPriceMin=" + cPriceMin + "]";
 	}
 }

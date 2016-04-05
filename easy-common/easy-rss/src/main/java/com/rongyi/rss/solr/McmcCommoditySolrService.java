@@ -134,6 +134,8 @@ public interface McmcCommoditySolrService {
 	 */
 	public Map<String, Object> searchCommodityCategory(BuyerCategoryParam categoryParam);
 
+	public boolean updateCommodityDiscount(String id, Double discount);
+
 //	public boolean updateCommoditySale(String commodityId, Integer sortPosition);
 
 }

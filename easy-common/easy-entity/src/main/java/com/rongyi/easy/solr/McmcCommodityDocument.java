@@ -83,6 +83,8 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private Integer flashSortPosition;
 	@Field("systemNumber")
 	private String systemNumber;
+	@Field("discount")
+	private Double discount;
 
 	public Double getPrice() {
 		return price;
@@ -207,6 +209,14 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 	public void setCommodityShopId(String commodityShopId) {
 		this.commodityShopId = commodityShopId;
+	}
+
+	public Double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Double discount) {
+		this.discount = discount;
 	}
 
 	public McmcCommodityDocument(){
