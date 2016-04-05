@@ -11,6 +11,7 @@ package com.rongyi.rss.malllife.roa;
 
 import java.util.List;
 
+import com.rongyi.easy.mcmc.CommodityCategory;
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
@@ -153,4 +154,12 @@ public interface ROACommodityService {
 	 * @return
 	 */
 	public ResponseResult getBuyerCommodityCategory(BuyerCategoryParam categoryParam);
+
+	/**
+	 *
+	 * @param type 3表示第三级分类
+	 * @param isPopular true表示热门分类
+	 * @return
+	 */
+	public List<CommodityCategory> selectCategory(int type,boolean isPopular);
 }

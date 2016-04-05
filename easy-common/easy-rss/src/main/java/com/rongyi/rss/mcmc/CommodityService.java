@@ -9,7 +9,6 @@ import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.mcmc.*;
 import com.rongyi.easy.mcmc.param.SaleParam;
 import com.rongyi.easy.mcmc.vo.*;
-
 import com.rongyi.easy.solr.McmcCommodityDocument;
 import org.bson.types.ObjectId;
 
@@ -176,4 +175,11 @@ public interface CommodityService {
      */
     public String getPostageByUserId(String userId);
 
+    /**
+     *
+     * @param type 3表示第三级分类
+     * @param isPopular true表示热门分类
+     * @return
+     */
+    public List<CommodityCategory> selectCategory(int type,boolean isPopular);
 }
