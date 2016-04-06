@@ -173,11 +173,11 @@ public class Commodity implements  Serializable,Cloneable{
 	private Integer purchaseCount;//商品的限购数量
 	private String weAndTeStatus;//商品在终端机与App上的隐藏与显示
 	public Integer getPurchaseCount() {
-		return purchaseCount==null || purchaseCount < 0 ? 0:purchaseCount;
+		return this.purchaseCount==null || this.purchaseCount < 0 ? 0:this.purchaseCount;
 	}
 
 	public void setPurchaseCount(Integer purchaseCount) {
-		purchaseCount = purchaseCount;
+		this.purchaseCount = purchaseCount;
 	}
 
 	public String getWeAndTeStatus() {
