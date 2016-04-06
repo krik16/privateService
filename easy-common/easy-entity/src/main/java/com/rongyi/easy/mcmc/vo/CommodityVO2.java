@@ -11,7 +11,6 @@ import org.mongodb.morphia.annotations.Entity;
 
 import com.rongyi.easy.mcmc.mvc.DateJson.JsonDateSerializer;
 
-@Entity("mcmc_commodity")
 public class CommodityVO2 implements  Serializable {
 	
 	private static final long serialVersionUID = -3022699601318372490L;
@@ -53,6 +52,7 @@ public class CommodityVO2 implements  Serializable {
 	private boolean immediateOn = false;//true表示设置是立即上架
 	private Integer templateId;//邮费模版id
 	private Integer purchaseCount;
+	private List<String> mallMids;//商品对应店铺所在的商场
 
 
 	public String getId() {
@@ -237,5 +237,13 @@ public class CommodityVO2 implements  Serializable {
 
 	public void setPurchaseCount(Integer purchaseCount) {
 		this.purchaseCount = purchaseCount;
+	}
+
+	public List<String> getMallMids() {
+		return mallMids;
+	}
+
+	public void setMallMids(List<String> mallMids) {
+		this.mallMids = mallMids;
 	}
 }
