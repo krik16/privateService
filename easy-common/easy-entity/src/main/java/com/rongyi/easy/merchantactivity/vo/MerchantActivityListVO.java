@@ -39,6 +39,14 @@ public class MerchantActivityListVO implements Serializable {
      6 申请撤销中
      */
     private Integer status;
+    /**活动状态  0.待审核
+     1.不通过
+     2.未开始
+     3.进行中
+     4.已结束
+     5 强下线
+     */
+    private Integer oriStatus;
     /**创建人*/
     private String createUser;
     /**创建时间*/
@@ -177,6 +185,14 @@ public class MerchantActivityListVO implements Serializable {
         this.updateAt = updateAt;
     }
 
+    public Integer getOriStatus() {
+        return oriStatus;
+    }
+
+    public void setOriStatus(Integer oriStatus) {
+        this.oriStatus = oriStatus;
+    }
+
     public Integer getPendGoods() {
         if(activityGoodsCountVO != null){
             return activityGoodsCountVO.getAuditGoodsCount();
@@ -281,6 +297,7 @@ public class MerchantActivityListVO implements Serializable {
                 .append("enrollStartAt", enrollStartAt)
                 .append("enrollEndAt", enrollEndAt)
                 .append("status", status)
+                .append("oriStatus", oriStatus)
                 .append("createUser", createUser)
                 .append("createAt", createAt)
                 .append("updateUser", updateUser)
