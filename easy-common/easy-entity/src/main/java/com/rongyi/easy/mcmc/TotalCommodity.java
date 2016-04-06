@@ -64,7 +64,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private List<String> skus;//规格sku集合
 
 	private Integer templateId;//邮费模版id
-	private boolean goodsSec;//正品保障
+	private boolean goodsSec = true;//正品保障
 
 	public ObjectId getId() {
 		return id;
