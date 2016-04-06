@@ -27,26 +27,38 @@ public class SmsConfig implements Serializable{
 
     //短信内容
 
-    public static final String MALLSHOP_RESTPWD="【上海摩购】验证码：@，您正在找回密码，10分钟内有效，请勿泄露";
-    public static final String MALLSHOP_REGISTER="【上海摩购】验证码：@，您正在注册摩店，10分钟内有效，请勿泄露";
-    public static final String MALLSHOP_CODE="【上海摩购】验证码：@，请即时输入 。10分钟内有效，请勿泄露。";
+    public static final String MALLSHOP_RESTPWD="验证码：@，您正在找回密码，10分钟内有效，请勿泄露";
+    public static final String MALLSHOP_REGISTER="验证码：@，您正在注册摩店，10分钟内有效，请勿泄露";
+    public static final String MALLSHOP_CODE="验证码：@，请即时输入 。10分钟内有效，请勿泄露。";
 
-    public static final String MALLLIFE_RESTPWD="【容易逛】验证码：@，您正在找回密码，10分钟有效，请勿泄露";
-    public static final String MALLLIFE_REGISTER="【容易逛】验证码：@，您正在注册容易逛， 10分钟内有效，请勿泄露";
-    public static final String MALLLIFE_LOGIN="【容易逛】验证码：@，您正在手机快捷登录容易逛，10分钟有效，请勿泄露";
-    public static final String MALLLIFE_BINDING="【容易逛】验证码：@，您正在绑定手机号。10分钟有效，请勿泄露。";
+    public static final String MALLLIFE_RESTPWD="验证码：@，您正在找回密码，10分钟有效，请勿泄露";
+    public static final String MALLLIFE_REGISTER="验证码：@，您正在注册容易逛， 10分钟内有效，请勿泄露";
+    public static final String MALLLIFE_LOGIN="验证码：@，您正在手机快捷登录容易逛，10分钟有效，请勿泄露";
+    public static final String MALLLIFE_BINDING="验证码：@，您正在绑定手机号。10分钟有效，请勿泄露。";
     
-    public static final String WEBCHAT_MALLLIFE_BINDING="【容易逛】谢谢您使用容易网客户端，您当前的验证码：@";
+    public static final String WEBCHAT_MALLLIFE_BINDING="谢谢您使用容易网客户端，您当前的验证码：@";
 
-    public static final String COUPON_VALID = "【容易逛】您购买的@于@验证@份，剩@份未消费，如有任何疑问请您与商家咨询：400-040-8989";
+    public static final String COUPON_VALID = "您购买的@于@验证@份，剩@份未消费，如有任何疑问请您与商家咨询：400-040-8989";
 
     //返回异常
     public static final String LIMIT_EXCEPTION_MSG="亲你的手机,今天发送短信已达到上限,请明天再试!";
     public static final String LIMIT_MSG="Limit";
 
- 
+
+    /**
+     * 签名类型
+     */
+    public abstract class SIGNATURE_TYPE {
+        public static final String MALL_SHOP_SIGN="【上海摩购】";//摩店
+        public static final  String MALL_LIFE_SIGN="【容易逛】";//容易逛
+    }
 
 
+    public abstract class SMSCHANNEL_TYPE {
+        public static final String JIANZHOU="jianzhou";//建周
+        public static final  String CHUANGSHI="chuangshi";//创世华信
+        public static final  String WEILAI="weilai";//福建未来无线信息技术有限公司
+    }
 
 
 
@@ -64,24 +76,28 @@ public class SmsConfig implements Serializable{
 
     /**
      * 发送通道
-     * 1注册，2找回密码，3登录 4绑定手机
+     * 1注册，2找回密码，3登录 4绑定手机 5交易
      */
     public abstract class SEND_MODULE{
         public static final int REGISTER=1;
         public static final int RESET_PWD=2;
         public static final  int LOGIN=3;
         public static final  int BINDING=4;
+        public static final  int DEALMSM=5;
     }
 
     /**
      * 发送渠道
-     * 1创世华信,2建周.101云通讯
+     * 1创世华信,2建周.3,未来无线,101云通讯
      */
     public abstract class SEND_CHANNEL{
         public static final  int CHANNEL_CHUANGSHI=1;
         public static final  int CHANNEL_JIANZHOU=2;
+        public static final  int CHANNEL_WEILAI=3;
         public static final  int CHANNEL_YUNTONGXUN=101;
     }
+
+
 
 
 

@@ -141,4 +141,23 @@ public class SystemConfig implements Serializable{
         return strs;
     }
 
+
+    /**
+     * Str 转 Int
+     * @param str
+     * @return
+     */
+    public static int stringToInt(String str){
+        int temp=0;
+        try {
+            if(StringUtils.isNotBlank(str)){
+                temp=Integer.parseInt(str);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            return temp;
+        }
+
+    }
 }

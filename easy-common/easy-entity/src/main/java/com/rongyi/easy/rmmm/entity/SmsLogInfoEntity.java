@@ -33,10 +33,17 @@ public class SmsLogInfoEntity implements Serializable{
     /** 发送时间 */
     private Date updateAt;
 
-
-
     /*返回结果*/
     private String sendResult;
+
+    /**响应时间**/
+    private String receiveTime;
+
+    /**返回消息**/
+    private String reMessage;
+    /**发送批次任务ID**/
+    private String taskID;
+
 
     /**
      * 主键
@@ -172,5 +179,29 @@ public class SmsLogInfoEntity implements Serializable{
 
     public void setSendResult(String sendResult) {
         this.sendResult = sendResult;
+    }
+
+    public String getReceiveTime() {
+        return receiveTime;
+    }
+
+    public void setReceiveTime(String receiveTime) {
+        this.receiveTime = receiveTime;
+    }
+
+    public String getReMessage() {
+        return reMessage;
+    }
+
+    public void setReMessage(String reMessage) {
+        this.reMessage = reMessage;
+    }
+
+    public String getTaskID() {
+        return taskID;
+    }
+
+    public void setTaskID(String taskID) {
+        this.taskID = taskID;
     }
 }

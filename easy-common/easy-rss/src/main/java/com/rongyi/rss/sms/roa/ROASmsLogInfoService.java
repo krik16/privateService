@@ -27,8 +27,8 @@ public interface ROASmsLogInfoService {
     /**
      * 查询当前手机，当前模块 当天发送的短信记录数
      * @param phone
-     * @param prodectType
-     * @param module
+     * @param prodectType 发送产品类型
+     * @param module 发送模块
      * @return
      * @throws Exception
      */

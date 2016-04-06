@@ -256,9 +256,8 @@ public class MessageManger {
 
 
     //发送短信
-    public StringBuffer SendMessage(String mobile,String content,String code)
+    public StringBuffer SendMessage(String mobile,String msgStr,String code)
     {
-
         BufferedReader br=null;
         URL url=null;
         HttpURLConnection con;
@@ -269,9 +268,9 @@ public class MessageManger {
         String userid="";
         String sendTime="";
         try {
-            content=content.replaceAll("@",code);
+            msgStr=msgStr.replaceAll("@",code);
             //设置发送内容的编码方式
-            String send_content= URLEncoder.encode(content.replaceAll("<br/>", " "), "UTF-8");//发送内容
+            String send_content= URLEncoder.encode(msgStr.replaceAll("<br/>", " "), "UTF-8");//发送内容
             url=new URL(SmsConfig.csSendURL+"&userid="+userid+"&account="+account+"&password="+password+"&mobile="+mobile+"&content="+send_content+"&sendTime="+sendTime+"");
             con = (HttpURLConnection)url.openConnection();
             br=new BufferedReader(new InputStreamReader(con.getInputStream(),"UTF-8"));
@@ -282,7 +281,6 @@ public class MessageManger {
                 //System.out.println("提取数据 :  "+line);
             }
             br.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
