@@ -288,5 +288,14 @@ public interface IIContentService {
 	 * @return
 	 */
 	public ActivityModuleVO getActivityModuleInfo(int moduleId);
+	
+	/**
+	 * 判断是否存在同一个时间段的广告(除自己外）
+	 * 
+	 * @param content
+	 * @author wangjh7
+	 * @return
+	 */
+	public boolean existSameLaunchAdvert(ForumContent content);
 
 }
