@@ -55,6 +55,8 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private String commodityBrandId;
 	@Field("price")
 	private Double price;
+	@Field("currentPirceList")
+	private List<Double> currentPirceList;//商品价格（不同规格现价列表，用于商品价格筛选区间）
 	@Field("spot")
 	private Boolean spot;
 	@Field("type")
@@ -89,9 +91,14 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	public Double getPrice() {
 		return price;
 	}
-
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+	public List<Double> getCurrentPirceList() {
+		return currentPirceList;
+	}
+	public void setCurrentPirceList(List<Double> currentPirceList) {
+		this.currentPirceList = currentPirceList;
 	}
 	public String getCommodityMallId() {
 		return commodityMallId;
