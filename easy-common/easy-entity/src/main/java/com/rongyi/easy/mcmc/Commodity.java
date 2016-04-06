@@ -171,7 +171,7 @@ public class Commodity implements  Serializable,Cloneable{
 	private String cPriceMin;//商品现最高价（用于买家版）
 	private Double discount ;//商品的折扣
 	private Integer sort;//直播商品的排序
-	private boolean goodsSec;//正品保障
+	private boolean goodsSec = true;//正品保障
 
 	public ObjectId getId() {
 		return id;
