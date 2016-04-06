@@ -37,6 +37,13 @@ public class TemplateCouponGood implements Serializable {
     private Integer version;
    /**自定义*/
     private String customLocale;
+   /**店铺id*/
+    private String shopId;
+    /**店铺名称*/
+    private String shopName;
+    /**创建人id*/
+    private Integer createBy;
+
 
     public Integer getId() {
         return id;
@@ -134,6 +141,30 @@ public class TemplateCouponGood implements Serializable {
         this.activityRule = activityRule;
     }
 
+    public String getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
+
+    public Integer getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(Integer createBy) {
+        this.createBy = createBy;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -149,6 +180,9 @@ public class TemplateCouponGood implements Serializable {
                 .append("updateAt", updateAt)
                 .append("version", version)
                 .append("customLocale", customLocale)
+                .append("shopId", shopId)
+                .append("shopName", shopName)
+                .append("createBy", createBy)
                 .toString();
     }
 }

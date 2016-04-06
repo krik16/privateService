@@ -29,6 +29,23 @@ public class TemplateSale implements Serializable{
     private Date updateAt;
     /**版本*/
     private Integer version;
+    /**
+     * 副标题
+     */
+    private String subTitle;
+
+    /**
+     * 分享的标题
+     */
+    private String shareTitle;
+    /**
+     * 分享的描述
+     */
+    private String shareDesc;
+    /**
+     * 创建人id
+     */
+    private Integer createBy;
 
     public Integer getId() {
         return id;
@@ -102,6 +119,38 @@ public class TemplateSale implements Serializable{
         this.version = version;
     }
 
+    public String getSubTitle() {
+        return subTitle;
+    }
+
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
+    }
+
+    public String getShareTitle() {
+        return shareTitle;
+    }
+
+    public void setShareTitle(String shareTitle) {
+        this.shareTitle = shareTitle;
+    }
+
+    public String getShareDesc() {
+        return shareDesc;
+    }
+
+    public void setShareDesc(String shareDesc) {
+        this.shareDesc = shareDesc;
+    }
+
+    public Integer getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(Integer createBy) {
+        this.createBy = createBy;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -114,6 +163,10 @@ public class TemplateSale implements Serializable{
                 .append("createAt", createAt)
                 .append("updateAt", updateAt)
                 .append("version", version)
+                .append("subTitle", subTitle)
+                .append("shareTitle", shareTitle)
+                .append("shareDesc", shareDesc)
+                .append("createBy", createBy)
                 .toString();
     }
 }
