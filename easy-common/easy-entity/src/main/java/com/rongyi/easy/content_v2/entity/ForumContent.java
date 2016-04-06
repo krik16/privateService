@@ -12,7 +12,39 @@ import java.util.Date;
  * @time 2015-08-28
  */
 public class ForumContent implements Serializable {
-    /**
+    public Integer getCreateBy() {
+		return createBy;
+	}
+
+	public void setCreateBy(Integer createBy) {
+		this.createBy = createBy;
+	}
+
+	public Integer getUpdateBy() {
+		return updateBy;
+	}
+
+	public void setUpdateBy(Integer updateBy) {
+		this.updateBy = updateBy;
+	}
+
+	public Integer getAdvDuration() {
+		return advDuration;
+	}
+
+	public void setAdvDuration(Integer advDuration) {
+		this.advDuration = advDuration;
+	}
+
+	public Integer getActivityModuleId() {
+		return activityModuleId;
+	}
+
+	public void setActivityModuleId(Integer activityModuleId) {
+		this.activityModuleId = activityModuleId;
+	}
+
+	/**
      * 主键id
      */
     private Integer id;
@@ -134,6 +166,31 @@ public class ForumContent implements Serializable {
      * 快捷入口备注
      */
     private String quickRemarks;
+    
+    /**
+     * 广告播放时长
+     * @author wangjh7
+     */
+    private Integer advDuration =0;
+    
+    /**
+     * 活动板块设置ID
+     * @author wangjh7
+     */
+    private Integer activityModuleId = 0;
+    
+    /**
+     * 创建人
+     * @author wangjh7
+     */
+    private Integer createBy = 0;
+    
+    /**
+     * 更新人
+     * @author wangjh7
+     */
+    private Integer updateBy = 0;
+    
     public Integer getId() {
         return id;
     }
@@ -370,36 +427,16 @@ public class ForumContent implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", id)
-                .append("positionId", positionId)
-                .append("provId", provId)
-                .append("provName", provName)
-                .append("cityId", cityId)
-                .append("cityName", cityName)
-                .append("picUrls", picUrls)
-                .append("title", title)
-                .append("subtitle", subtitle)
-                .append("type", type)
-                .append("typeVal", typeVal)
-                .append("shopIds", shopIds)
-                .append("publishBeginAt", publishBeginAt)
-                .append("publishEndAt", publishEndAt)
-                .append("createUser", createUser)
-                .append("createAt", createAt)
-                .append("updateUser", updateUser)
-                .append("updateAt", updateAt)
-                .append("isDeleted", isDeleted)
-                .append("status", status)
-                .append("buyerLive", buyerLive)
-                .append("iosVersion", iosVersion)
-                .append("androidVersion", androidVersion)
-                .append("quickType", quickType)
-                .append("quickTypeVal", quickTypeVal)
-                .append("bannerBackgroundPic", bannerBackgroundPic)
-                .append("quickCount", quickCount)
-                .append("quickRemarks", quickRemarks)
-                .toString();
-    }
+	public String toString() {
+		return "ForumContent [id=" + id + ", positionId=" + positionId + ", provId=" + provId + ", provName=" + provName
+				+ ", cityId=" + cityId + ", cityName=" + cityName + ", picUrls=" + picUrls + ", title=" + title
+				+ ", subtitle=" + subtitle + ", type=" + type + ", typeVal=" + typeVal + ", shopIds=" + shopIds
+				+ ", publishBeginAt=" + publishBeginAt + ", publishEndAt=" + publishEndAt + ", createUser=" + createUser
+				+ ", createAt=" + createAt + ", updateUser=" + updateUser + ", updateAt=" + updateAt + ", isDeleted="
+				+ isDeleted + ", status=" + status + ", buyerLive=" + buyerLive + ", iosVersion=" + iosVersion
+				+ ", androidVersion=" + androidVersion + ", quickType=" + quickType + ", quickTypeVal=" + quickTypeVal
+				+ ", bannerBackgroundPic=" + bannerBackgroundPic + ", quickCount=" + quickCount + ", quickRemarks="
+				+ quickRemarks + ", advDuration=" + advDuration + ", activityModuleId=" + activityModuleId
+				+ ", createBy=" + createBy + ", updateBy=" + updateBy + "]";
+	}
 }

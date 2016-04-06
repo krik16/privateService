@@ -8,7 +8,6 @@ import com.rongyi.easy.coupon.param.CouponCommodityParam;
 import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.mcmc.*;
 import com.rongyi.easy.mcmc.param.SaleParam;
-
 import com.rongyi.easy.mcmc.vo.*;
 import com.rongyi.easy.solr.McmcCommodityDocument;
 import org.bson.types.ObjectId;
@@ -145,4 +144,42 @@ public interface CommodityService {
 	 */
 	public ResponseResult getBuyerCommodityCategory(BuyerCategoryParam categoryParam);
 
+    /**
+     * 删除商品
+     * @param commodityId	商品ID
+     * @param shopId		店铺ID
+     * @param identity		角色
+     * @return
+     */
+	public ResponseVO deleteCommodity(String commodityId, Long shopId, Integer identity);
+
+    /**
+     * 置顶，取消置顶接口，type为1，置顶，为0，取消置顶
+     * @param ids
+     * @param sort
+     * @param type
+     * @return
+     */
+    ResponseVO  topByIds(List<String> ids,Integer sort,Integer type);
+    /**
+     * 获取商品直播的地址和品牌
+     * @param commodityIds
+     * @return
+     */
+	public ResponseVO getLiveAddressAndBrandByCommodityIds(List<String> commodityIds);
+
+    /**
+     * 获取商品邮费
+     * @param userId
+     * @return
+     */
+    public String getPostageByUserId(String userId);
+
+    /**
+     *
+     * @param type 3表示第三级分类
+     * @param isPopular true表示热门分类
+     * @return
+     */
+    public List<CommodityCategory> selectCategory(int type,boolean isPopular);
 }

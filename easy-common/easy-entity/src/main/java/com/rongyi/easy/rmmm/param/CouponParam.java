@@ -19,6 +19,16 @@ public class CouponParam extends BaseParam{
 	private String orderId;//订单号
 	
 	private List<Double> userLocation;//用户地理位置
+	
+	private String shopId;//店铺mongoid
+
+	public String getShopId() {
+		return shopId;
+	}
+
+	public void setShopId(String shopId) {
+		this.shopId = shopId;
+	}
 
 	public List<Double> getUserLocation() {
 		return userLocation;

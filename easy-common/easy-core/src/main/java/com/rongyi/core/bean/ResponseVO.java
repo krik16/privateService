@@ -34,12 +34,13 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * @author Breggor
  */
 public class ResponseVO implements java.io.Serializable {
-
-    public static final Meta SUCCESS = new Meta(0, "success"); //成功
+	private static final long serialVersionUID = 4807318268209609704L;
+	
+	public static final Meta SUCCESS = new Meta(0, "success"); //成功
     public static final Meta FAILURE = new Meta(1, "failure"); //失败
 
-    private Meta meta;      //errno=0：成功, errno=1：失败
-    private Result result;  //数据
+    private Meta meta;      	//errno=0：成功, errno=1：失败
+    private Result result;  	//数据
     
     public ResponseVO(){
     	
@@ -180,8 +181,8 @@ public class ResponseVO implements java.io.Serializable {
     }
 
     public static class Meta implements Serializable {
-        private int errno; //错误码
-        private String msg;  //提示信息
+        private int errno;      //错误码
+        private String msg;     //提示信息
 
         private Meta() {}
 
@@ -240,10 +241,11 @@ public class ResponseVO implements java.io.Serializable {
     }
 
     public static class Page implements Serializable {
-        private Integer currentPage;//当前页：统一从1开始
-        private Integer pageSize = 10; //每页行数
-        private Integer totalCount; //总行数
-        private Integer totalPage = 0;//总页数
+		private static final long serialVersionUID = -9015310768471855060L;
+		private Integer currentPage;	//当前页：统一从1开始
+        private Integer pageSize = 10; 	//每页行数
+        private Integer totalCount; 	//总行数
+        private Integer totalPage = 0;	//总页数
 
         private Page() {}
 

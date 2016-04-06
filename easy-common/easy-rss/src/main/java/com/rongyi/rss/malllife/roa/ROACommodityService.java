@@ -11,6 +11,7 @@ package com.rongyi.rss.malllife.roa;
 
 import java.util.List;
 
+import com.rongyi.easy.mcmc.CommodityCategory;
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
@@ -116,9 +117,49 @@ public interface ROACommodityService {
 	public List<com.rongyi.easy.mcmc.vo.CommodityBuyerVO> getCommodityBySPU(String commodityId, String spu);
 
 	/**
+	 * 删除指定商品
+	 * @param commodityId	商品ID
+	 * @param shopId		店铺ID
+	 * @param identity		操作者
+	 * @return
+	 */
+	public ResponseVO deleteCommodity(String commodityId, Long shopId, Integer identity);
+
+	public ResponseVO  topByIds(List<String> ids,Integer sort,Integer type);
+
+	/**
+	 * 获取商品邮费
+	 * @param userId
+	 * @return
+	 */
+	public String getPostageByUserId(String userId);
+
+	/**
+     * 获取商品直播的地址和品牌
+     * @param commodityIds
+     * @return
+     */
+	public ResponseVO getLiveAddressAndBrandByCommodityIds(List<String> commodityIds);
+
+
+//	/**
+//	 * 获取有商品的分类列表
+//	 * @param categoryParam	参数对象
+//	 * @return
+//	 */
+//	public ResponseResult getBuyerCommodityCategoryHasCommodity(BuyerCategoryParam categoryParam);
+	/**
 	 * 获取有商品的分类列表
 	 * @param categoryParam	参数对象
 	 * @return
 	 */
 	public ResponseResult getBuyerCommodityCategory(BuyerCategoryParam categoryParam);
+
+	/**
+	 *
+	 * @param type 3表示第三级分类
+	 * @param isPopular true表示热门分类
+	 * @return
+	 */
+	public List<CommodityCategory> selectCategory(int type,boolean isPopular);
 }

@@ -3,6 +3,7 @@ package com.rongyi.easy.solr;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.solr.client.solrj.beans.Field;
 import org.apache.solr.common.SolrDocument;
 
@@ -84,6 +85,8 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private Integer flashSortPosition;
 	@Field("systemNumber")
 	private String systemNumber;
+	@Field("discount")
+	private Double discount;
 
 	public Double getPrice() {
 		return price;
@@ -128,9 +131,11 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	public void setCategory_ids(List<String> category_ids) {
 		this.category_ids = category_ids;
 		// 三级分类拆分成三个字段
-		this.setCategory1_id(category_ids.get(0));
-		this.setCategory2_id(category_ids.get(1));
-		this.setCategory3_id(category_ids.get(2));
+		if(CollectionUtils.isNotEmpty(category_ids)&&category_ids.size()>=3){
+			this.setCategory1_id(category_ids.get(0));
+			this.setCategory2_id(category_ids.get(1));
+			this.setCategory3_id(category_ids.get(2));
+		}
 	}
 	
 	public String getCategory1_id() {
@@ -211,6 +216,14 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 	public void setCommodityShopId(String commodityShopId) {
 		this.commodityShopId = commodityShopId;
+	}
+
+	public Double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Double discount) {
+		this.discount = discount;
 	}
 
 	public McmcCommodityDocument(){

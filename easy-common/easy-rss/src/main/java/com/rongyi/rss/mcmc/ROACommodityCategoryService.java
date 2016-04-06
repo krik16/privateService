@@ -33,4 +33,13 @@ public interface ROACommodityCategoryService {
 	public CommodityCategory selectCategoryByName(String name);
 	
 	public CommodityCategory selectCategoryByNameAndParent(String name, String parentId);
+
+	/**
+	 * 修改商品分类单个值
+	 * @param categoryIds 商品分类id
+	 * @param property 属性名
+	 * @param value 属性值
+	 * @return
+	 */
+	public boolean updateCategoryProperty(List<String> categoryIds,String property,Object value);
 }

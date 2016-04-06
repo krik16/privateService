@@ -61,6 +61,8 @@ public class Commodity implements  Serializable,Cloneable{
 
 	private int identity = -100;//-100 默认值，老数据，不处理权限 0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购6买手
 
+	private Integer templateId;//邮费模版id
+
 	public boolean isSupportCourierDeliver() {
 		return supportCourierDeliver;
 	}
@@ -167,6 +169,10 @@ public class Commodity implements  Serializable,Cloneable{
 	private String oPriceMin;//商品原最低价（用于买家版）
 	private String cPriceMax;//商品现最高价（用于买家版）
 	private String cPriceMin;//商品现最高价（用于买家版）
+	private Double discount ;//商品的折扣
+	private Integer sort;//直播商品的排序
+	private boolean goodsSec = true;//正品保障
+
 	public ObjectId getId() {
 		return id;
 	}
@@ -203,6 +209,7 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+	
 	public String getCode() {
 		return code;
 	}
@@ -343,6 +350,13 @@ public class Commodity implements  Serializable,Cloneable{
 		this.stockStatus = stockStatus;
 	}
 
+	public Double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Double discount) {
+		this.discount = discount;
+	}
 
 	@Override
 	public Commodity clone() throws CloneNotSupportedException {
@@ -387,8 +401,10 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setSaleId(saleId);
 		commodity.setFlashSaleId(flashSaleId);
 		commodity.setSecKillSign(secKillSign);
+		commodity.setDiscount(discount);
 //		commodity.setActivityStartTime(activityStartTime);
 //		commodity.setActivityEndTime(activityEndTime);
+		commodity.setSort(sort);
 		return commodity;
 	}
 	
@@ -508,25 +524,62 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setSecKillSign(String secKillSign) {
 		this.secKillSign = secKillSign;
 	}
+
+	public Integer getSort() {
+		return null==sort?0:sort;
+	}
+
+	public void setSort(Integer sort) {
+		this.sort = sort;
+	}
+
+	public Integer getTemplateId() {
+		return templateId;
+	}
+
+	public void setTemplateId(Integer templateId) {
+		this.templateId = templateId;
+	}
 	
+	public boolean isGoodsSec() {
+		return goodsSec;
+	}
+	public void setGoodsSec(boolean goodsSec) {
+		this.goodsSec = goodsSec;
+	}
 	@Override
 	public String toString() {
-		return "Commodity [id=" + id + ", type=" + type + ", liveId=" + liveId + ", isSpot=" + isSpot
-				+ ", liveStartTime=" + liveStartTime + ", liveEndTime=" + liveEndTime + ", create_by=" + create_by
-				+ ", saleId=" + saleId + ", flashSaleId=" + flashSaleId + ", activityStartTime=" + activityStartTime
-				+ ", activityEndTime=" + activityEndTime + ", secKillSign=" + secKillSign + ", name=" + name
-				+ ", category=" + category + ", shopId=" + shopId + ", shopMid=" + shopMid + ", status=" + status
-				+ ", code=" + code + ", description=" + description + ", postage=" + postage + ", stock=" + stock
-				+ ", sold=" + sold + ", lockedStock=" + lockedStock + ", createAt=" + createAt + ", updateAt="
-				+ updateAt + ", originalPrice=" + originalPrice + ", currentPrice=" + currentPrice
-				+ ", oPriceOfLowestCPrice=" + oPriceOfLowestCPrice + ", brandName=" + brandName + ", mallMid=" + mallMid
-				+ ", shopNum=" + shopNum + ", filialeMid=" + filialeMid + ", update_by=" + update_by + ", brandMid="
-				+ brandMid + ", supportCourierDeliver=" + supportCourierDeliver + ", supportSelfPickup="
-				+ supportSelfPickup + ", identity=" + identity + ", picList=" + picList + ", specList=" + specList
-				+ ", price=" + price + ", brandId=" + brandId + ", mallId=" + mallId + ", categoryIds=" + categoryIds
-				+ ", customCategory=" + customCategory + ", freight=" + freight + ", terminalType=" + terminalType
-				+ ", registerAt=" + registerAt + ", soldOutAt=" + soldOutAt + ", source=" + source + ", stockStatus="
-				+ stockStatus + ", systemNumber=" + systemNumber + ", reason=" + reason + ", oPriceMax=" + oPriceMax
-				+ ", oPriceMin=" + oPriceMin + ", cPriceMax=" + cPriceMax + ", cPriceMin=" + cPriceMin + "]";
+		return "Commodity [id=" + id + ", type=" + type + ", liveId=" + liveId
+				+ ", isSpot=" + isSpot + ", liveStartTime=" + liveStartTime
+				+ ", liveEndTime=" + liveEndTime + ", create_by=" + create_by
+				+ ", saleId=" + saleId + ", flashSaleId=" + flashSaleId
+				+ ", activityStartTime=" + activityStartTime
+				+ ", activityEndTime=" + activityEndTime + ", secKillSign="
+				+ secKillSign + ", name=" + name + ", category=" + category
+				+ ", shopId=" + shopId + ", shopMid=" + shopMid + ", status="
+				+ status + ", code=" + code + ", description=" + description
+				+ ", postage=" + postage + ", stock=" + stock + ", sold="
+				+ sold + ", lockedStock=" + lockedStock + ", createAt="
+				+ createAt + ", updateAt=" + updateAt + ", originalPrice="
+				+ originalPrice + ", currentPrice=" + currentPrice
+				+ ", oPriceOfLowestCPrice=" + oPriceOfLowestCPrice
+				+ ", brandName=" + brandName + ", mallMid=" + mallMid
+				+ ", shopNum=" + shopNum + ", filialeMid=" + filialeMid
+				+ ", update_by=" + update_by + ", brandMid=" + brandMid
+				+ ", supportCourierDeliver=" + supportCourierDeliver
+				+ ", supportSelfPickup=" + supportSelfPickup + ", identity="
+				+ identity + ", templateId=" + templateId + ", picList="
+				+ picList + ", specList=" + specList + ", price=" + price
+				+ ", brandId=" + brandId + ", mallId=" + mallId
+				+ ", categoryIds=" + categoryIds + ", customCategory="
+				+ customCategory + ", freight=" + freight + ", terminalType="
+				+ terminalType + ", registerAt=" + registerAt + ", soldOutAt="
+				+ soldOutAt + ", source=" + source + ", stockStatus="
+				+ stockStatus + ", systemNumber=" + systemNumber + ", reason="
+				+ reason + ", oPriceMax=" + oPriceMax + ", oPriceMin="
+				+ oPriceMin + ", cPriceMax=" + cPriceMax + ", cPriceMin="
+				+ cPriceMin + ", discount=" + discount + ", sort=" + sort
+				+ ", goodsSec=" + goodsSec + "]";
 	}
+	
 }

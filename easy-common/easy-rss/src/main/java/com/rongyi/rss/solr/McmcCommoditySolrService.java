@@ -98,10 +98,35 @@ public interface McmcCommoditySolrService {
 
 	public boolean updateCommodityFlashSale(String commodityId, Integer sortPosition, Integer flashSaleId, Date activityStartTime, Date activityEndTime);
 
+	/**
+	 * 批量修改商品闪购信息
+	 * @param commodityParams
+	 * @param flashSaleId
+	 * @param activityStartTime
+	 * @param activityEndTime
+	 * @return
+	 */
+	public boolean updateCommodityFlashSale(List<ActivityCommodityParam> commodityParams,  Integer flashSaleId, Date activityStartTime, Date activityEndTime);
+
 	public boolean cleanCommoditySecKill(String secKillSign);
 
 	public boolean updateCommoditySecKill(String commodityId,String secKillSign);
 
+	public boolean updateCommoditySecKill(List<String> commodityIds, String secKillSign);
+
+//	/**
+//	 * 搜索有商品的商品分类列表
+//	 * @param categoryParam	参数对象
+//	 * @return
+//	 */
+//	public Map<String, Object> searchCommodityCategoryHasCommodity(BuyerCategoryParam categoryParam);
+
+	/**
+	 * 删除指定ID的商品
+	 * @param commodityId	商品ID
+	 * @return
+	 */
+	public boolean deleteCommodity(String commodityId);
 
 	/**
 	 * 搜索有商品的商品分类列表
@@ -109,6 +134,8 @@ public interface McmcCommoditySolrService {
 	 * @return
 	 */
 	public Map<String, Object> searchCommodityCategory(BuyerCategoryParam categoryParam);
+
+	public boolean updateCommodityDiscount(String id, Double discount);
 
 //	public boolean updateCommoditySale(String commodityId, Integer sortPosition);
 

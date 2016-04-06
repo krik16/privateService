@@ -16,8 +16,11 @@ public class ExpressPushInfoEntity implements Serializable{
     /** 物流单号  */
     private String expressBillId;
 
-    /** 快递公司编码 */
-    private String company;
+    /** 原来的公司编码 */
+    private String oldCompany;
+    
+    /** 新的公司编码 */
+    private String newCompany;
 
     /** 监控状态 : 1 polling(监控中),2 shutdown(结束),3 abort(中止),4 updateall(重新推送) */
     private Integer status;
@@ -56,15 +59,23 @@ public class ExpressPushInfoEntity implements Serializable{
         this.expressBillId = expressBillId;
     }
 
-    public String getCompany() {
-        return company;
-    }
+    public String getOldCompany() {
+		return oldCompany;
+	}
 
-    public void setCompany(String company) {
-        this.company = company;
-    }
+	public void setOldCompany(String oldCompany) {
+		this.oldCompany = oldCompany;
+	}
 
-    public Integer getStatus() {
+	public String getNewCompany() {
+		return newCompany;
+	}
+
+	public void setNewCompany(String newCompany) {
+		this.newCompany = newCompany;
+	}
+
+	public Integer getStatus() {
         return status;
     }
 
@@ -123,8 +134,10 @@ public class ExpressPushInfoEntity implements Serializable{
 	@Override
 	public String toString() {
 		return "ExpressPushInfoEntity [id=" + id + ", expressBillId="
-				+ expressBillId + ", company=" + company + ", status=" + status
-				+ ", message=" + message + ", state=" + state + ", createAt=" + createAt + ", updateAt=" + updateAt
-				+ ", isDisabled=" + isDisabled + ", data=" + data + "]";
+				+ expressBillId + ", oldCompany=" + oldCompany
+				+ ", newCompany=" + newCompany + ", status=" + status
+				+ ", message=" + message + ", state=" + state + ", createAt="
+				+ createAt + ", updateAt=" + updateAt + ", isDisabled="
+				+ isDisabled + ", data=" + data + "]";
 	}
 }

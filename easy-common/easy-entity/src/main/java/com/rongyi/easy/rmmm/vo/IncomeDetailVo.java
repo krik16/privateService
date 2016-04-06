@@ -22,7 +22,7 @@ public class IncomeDetailVo implements Serializable {
 	 */
 	private BigDecimal commissionIncome;
 	
-	/** 累积营业额 */
+	/** 营业额（积累） */
 	private BigDecimal turnoverTotal;
 
 	public BigDecimal getTurnoverTotal() {

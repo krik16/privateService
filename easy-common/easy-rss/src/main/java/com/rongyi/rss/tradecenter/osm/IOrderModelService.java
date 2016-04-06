@@ -80,5 +80,5 @@ public interface IOrderModelService {
 	 * @param guideId 导购id
 	 * @return 是否成功
 	 */
-	boolean changeGuideId(Integer modelId,String guideId)  throws Exception;
+	boolean changeGuideId(Integer modelId,Integer guideId)  throws Exception;
 }
