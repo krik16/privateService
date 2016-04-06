@@ -44,4 +44,11 @@ public class ExpressOrderInfoVO implements Serializable{
 		this.salt = salt;
 	}
 
+	@Override
+	public String toString() {
+		return "ExpressOrderInfoVO [company=" + company + ", expressId="
+				+ expressId + ", expressBillId=" + expressBillId + ", salt="
+				+ salt + "]";
+	}
+
 }
