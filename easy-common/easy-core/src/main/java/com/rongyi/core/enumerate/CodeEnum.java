@@ -107,10 +107,10 @@ public enum CodeEnum {
     ERROR_MCMC_COMMODITY_ID_EMPTY("-7009", "商品信息错误"),
 	ERROR_MCMC_COMMODITY_DELETED("-7010", "商品不存在或已删除"),
 	ERROR_MCMC_COMMODITY_DELETED_OR_NODOWN("-7011", "商品已删除或未下架"),
-	ERROR_MCMC_COMMODITY_NAME_HAS_SENSITIVE_WORD("-7012", "您填写的商品名称不符合规范，请重新发布"),
-	ERROR_MCMC_COMMODITY_DESCRIPTION_HAS_SENSITIVE_WORD("-7013", "您填写的商品描述不符合规范，请重新发布"),
-	ERROR_MCMC_COMMODITY_SPEC_HAS_SENSITIVE_WORD("-7014", "您填写的商品规格不符合规范，请重新发布"),
-	ERROR_MCMC_COMMODITY_LIVE_NAME_HAS_SENSITIVE_WORD("-7015", "您填写的直播名字不符合规范，请重新发布"),
+	ERROR_MCMC_COMMODITY_NAME_HAS_SENSITIVE_WORD("-7012", "您填写的商品名称不符合规范，请重新编辑"),
+	ERROR_MCMC_COMMODITY_DESCRIPTION_HAS_SENSITIVE_WORD("-7013", "您填写的商品描述不符合规范，请重新编辑"),
+	ERROR_MCMC_COMMODITY_SPEC_HAS_SENSITIVE_WORD("-7014", "您填写的商品规格不符合规范，请重新编辑"),
+	ERROR_MCMC_COMMODITY_LIVE_NAME_HAS_SENSITIVE_WORD("-7015", "您填写的直播名字不符合规范，请重新编辑"),
     /** 百联优惠券常量 */
     ERROR_BUYED_OUT("-3007","优惠券已经被领完"),
 
@@ -157,9 +157,9 @@ public enum CodeEnum {
     ERROR_COUPON_REPEAT("-6002","一张红包只能使用一次"),
     ERROR_COUPON_PUBLISH_OVER("-6003","每日限量发行数填写错误"),
     ERROR_COUPON_PUBLISH_CHANNEL("-6004","亲，活动券你不能管理哦"),
-    ERROR_COUPON_NAME_HAS_SENSITIVE_WORD("-6005","卡券名称存在关键词"),
-    ERROR_COUPON_USE_LIMIT_HAS_SENSITIVE_WORD("-6006","卡券使用限制存在关键词"),
-    ERROR_COUPON_USEAGE_HAS_SENSITIVE_WORD("-6007","卡券使用方式存在关键词"),
+    ERROR_COUPON_NAME_HAS_SENSITIVE_WORD("-6005","您填写的卡券名称不符合规范，请重新编辑"),
+    ERROR_COUPON_USE_LIMIT_HAS_SENSITIVE_WORD("-6006","您填写的卡券使用限制不符合规范，请重新编辑"),
+    ERROR_COUPON_USEAGE_HAS_SENSITIVE_WORD("-6007","您填写的卡券使用方式不符合规范，请重新编辑"),
 
     ERROR_ACCOUNT_INSUFFICIENT_BALANCE("-7001","账户余额不足"),
     ERROR_ACCOUNT_NO_PERMISSION("-7002","账户被冻结或未授权"),
@@ -191,7 +191,7 @@ public enum CodeEnum {
     ERROR_UPDATE_NOTICE("1073004","修改店铺公告失败"),
     ERROR_DELETE_NOTICE("1073005","删除店铺公告失败"),
     ERROR_OFFLINE_NOTICE("1073006","公告已强制下线"),
-    ERROR_NOTICE_HAS_SENSITIVE_WORD("1073007","您填写的店铺公告不符合规范，请重新发布"),
+    ERROR_NOTICE_HAS_SENSITIVE_WORD("1073007","您填写的店铺公告不符合规范，请重新编辑"),
 
     ERROR_NO_RIGHTS("1073007", "亲,您无权限操作上级/下级发布的商品喔～"),
     
