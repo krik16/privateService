@@ -171,6 +171,7 @@ public class Commodity implements  Serializable,Cloneable{
 	private String cPriceMin;//商品现最高价（用于买家版）
 	private Double discount ;//商品的折扣
 	private Integer sort;//直播商品的排序
+	private boolean goodsSec = true;//正品保障
 
 	public ObjectId getId() {
 		return id;
@@ -208,6 +209,7 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+	
 	public String getCode() {
 		return code;
 	}
@@ -539,24 +541,45 @@ public class Commodity implements  Serializable,Cloneable{
 		this.templateId = templateId;
 	}
 	
+	public boolean isGoodsSec() {
+		return goodsSec;
+	}
+	public void setGoodsSec(boolean goodsSec) {
+		this.goodsSec = goodsSec;
+	}
 	@Override
 	public String toString() {
-		return "Commodity [id=" + id + ", type=" + type + ", liveId=" + liveId + ", isSpot=" + isSpot
-				+ ", liveStartTime=" + liveStartTime + ", liveEndTime=" + liveEndTime + ", create_by=" + create_by
-				+ ", saleId=" + saleId + ", flashSaleId=" + flashSaleId + ", activityStartTime=" + activityStartTime
-				+ ", activityEndTime=" + activityEndTime + ", secKillSign=" + secKillSign + ", name=" + name
-				+ ", category=" + category + ", shopId=" + shopId + ", shopMid=" + shopMid + ", status=" + status
-				+ ", code=" + code + ", description=" + description + ", postage=" + postage + ", stock=" + stock
-				+ ", sold=" + sold + ", lockedStock=" + lockedStock + ", createAt=" + createAt + ", updateAt="
-				+ updateAt + ", originalPrice=" + originalPrice + ", currentPrice=" + currentPrice
-				+ ", oPriceOfLowestCPrice=" + oPriceOfLowestCPrice + ", brandName=" + brandName + ", mallMid=" + mallMid
-				+ ", shopNum=" + shopNum + ", filialeMid=" + filialeMid + ", update_by=" + update_by + ", brandMid="
-				+ brandMid + ", supportCourierDeliver=" + supportCourierDeliver + ", supportSelfPickup="
-				+ supportSelfPickup + ", identity=" + identity + ", picList=" + picList + ", specList=" + specList
-				+ ", price=" + price + ", brandId=" + brandId + ", mallId=" + mallId + ", categoryIds=" + categoryIds
-				+ ", customCategory=" + customCategory + ", freight=" + freight + ", terminalType=" + terminalType
-				+ ", registerAt=" + registerAt + ", soldOutAt=" + soldOutAt + ", source=" + source + ", stockStatus="
-				+ stockStatus + ", systemNumber=" + systemNumber + ", reason=" + reason + ", oPriceMax=" + oPriceMax+", discount="+discount
-				+ ", oPriceMin=" + oPriceMin + ", cPriceMax=" + cPriceMax + ", cPriceMin=" + cPriceMin + "]";
+		return "Commodity [id=" + id + ", type=" + type + ", liveId=" + liveId
+				+ ", isSpot=" + isSpot + ", liveStartTime=" + liveStartTime
+				+ ", liveEndTime=" + liveEndTime + ", create_by=" + create_by
+				+ ", saleId=" + saleId + ", flashSaleId=" + flashSaleId
+				+ ", activityStartTime=" + activityStartTime
+				+ ", activityEndTime=" + activityEndTime + ", secKillSign="
+				+ secKillSign + ", name=" + name + ", category=" + category
+				+ ", shopId=" + shopId + ", shopMid=" + shopMid + ", status="
+				+ status + ", code=" + code + ", description=" + description
+				+ ", postage=" + postage + ", stock=" + stock + ", sold="
+				+ sold + ", lockedStock=" + lockedStock + ", createAt="
+				+ createAt + ", updateAt=" + updateAt + ", originalPrice="
+				+ originalPrice + ", currentPrice=" + currentPrice
+				+ ", oPriceOfLowestCPrice=" + oPriceOfLowestCPrice
+				+ ", brandName=" + brandName + ", mallMid=" + mallMid
+				+ ", shopNum=" + shopNum + ", filialeMid=" + filialeMid
+				+ ", update_by=" + update_by + ", brandMid=" + brandMid
+				+ ", supportCourierDeliver=" + supportCourierDeliver
+				+ ", supportSelfPickup=" + supportSelfPickup + ", identity="
+				+ identity + ", templateId=" + templateId + ", picList="
+				+ picList + ", specList=" + specList + ", price=" + price
+				+ ", brandId=" + brandId + ", mallId=" + mallId
+				+ ", categoryIds=" + categoryIds + ", customCategory="
+				+ customCategory + ", freight=" + freight + ", terminalType="
+				+ terminalType + ", registerAt=" + registerAt + ", soldOutAt="
+				+ soldOutAt + ", source=" + source + ", stockStatus="
+				+ stockStatus + ", systemNumber=" + systemNumber + ", reason="
+				+ reason + ", oPriceMax=" + oPriceMax + ", oPriceMin="
+				+ oPriceMin + ", cPriceMax=" + cPriceMax + ", cPriceMin="
+				+ cPriceMin + ", discount=" + discount + ", sort=" + sort
+				+ ", goodsSec=" + goodsSec + "]";
 	}
+	
 }

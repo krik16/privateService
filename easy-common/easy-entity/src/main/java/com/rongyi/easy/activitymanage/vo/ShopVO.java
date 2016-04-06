@@ -47,6 +47,7 @@ public class ShopVO implements Serializable {
         this.mallName = mallName;
     }
 
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)

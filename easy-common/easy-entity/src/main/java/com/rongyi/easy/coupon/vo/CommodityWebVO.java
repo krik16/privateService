@@ -1,6 +1,7 @@
 package com.rongyi.easy.coupon.vo;
 
 import com.rongyi.easy.coupon.CommoditySpecWebVO;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.util.List;
@@ -22,6 +23,7 @@ public class CommodityWebVO implements Serializable{
     List<CommoditySpecWebVO> specList;
     private String shopMid;
 
+    private String shopName;
     private String detailPic;
 
     public String getShopMid() {
@@ -96,19 +98,27 @@ public class CommodityWebVO implements Serializable{
         this.specList = specList;
     }
 
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
+
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("CommodityWebVO{");
-        sb.append("id='").append(id).append('\'');
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", categories='").append(categories).append('\'');
-        sb.append(", brandName='").append(brandName).append('\'');
-        sb.append(", count=").append(count);
-        sb.append(", price=").append(price);
-        sb.append(", specList=").append(specList);
-        sb.append(", shopMid='").append(shopMid).append('\'');
-        sb.append(", detailPic='").append(detailPic).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("name", name)
+                .append("categories", categories)
+                .append("brandName", brandName)
+                .append("count", count)
+                .append("price", price)
+                .append("specList", specList)
+                .append("shopMid", shopMid)
+                .append("shopName", shopName)
+                .append("detailPic", detailPic)
+                .toString();
     }
 }
