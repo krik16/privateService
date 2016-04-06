@@ -9,6 +9,8 @@ public class ExpressOrderInfoVO implements Serializable{
 	private Integer expressId;//相关物流公司ID，等于或者小于0时是自填
 	
 	private String expressBillId;//物流单号
+	
+	private String salt;//签名
 
 	public String getCompany() {
 		return company;
@@ -34,10 +36,12 @@ public class ExpressOrderInfoVO implements Serializable{
 		this.expressBillId = expressBillId;
 	}
 
-	@Override
-	public String toString() {
-		return "ExpressOrderInfoVO [company=" + company + ", expressId="
-				+ expressId + ", expressBillId=" + expressBillId + "]";
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 
 }
