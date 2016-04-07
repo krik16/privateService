@@ -47,6 +47,14 @@ public class FlashSaleParam extends MalllifeBaseParam implements Serializable{
 	 */
 	private String latitude;
 	/**
+	 * 最低价格
+	 */
+	private String minPrice;
+	/**
+	 * 最高价格
+	 */
+	private String maxPrice;
+	/**
 	 * 品牌id
 	 */
 	private String brandId;
@@ -135,14 +143,39 @@ public class FlashSaleParam extends MalllifeBaseParam implements Serializable{
 	public void setLatitude(String latitude) {
 		this.latitude = latitude;
 	}
+
+	public String getMinPrice() {
+		return minPrice;
+	}
+
+	public void setMinPrice(String minPrice) {
+		this.minPrice = minPrice;
+	}
+
+	public String getMaxPrice() {
+		return maxPrice;
+	}
+
+	public void setMaxPrice(String maxPrice) {
+		this.maxPrice = maxPrice;
+	}
+
 	@Override
 	public String toString() {
-		return "FlashSaleParam [id=" + id + ", keywork=" + keywork
-				+ ", cityId=" + cityId + ", cityName=" + cityName + ", sortBy="
-				+ sortBy + ", longitude=" + longitude + ", latitude="
-				+ latitude + ", brandId=" + brandId + ", commodityCategory="
-				+ commodityCategory + ", randomParam=" + randomParam
-				+ ", contentId=" + contentId + "]";
+		return "FlashSaleParam{" +
+				"id='" + id + '\'' +
+				", keywork='" + keywork + '\'' +
+				", cityId='" + cityId + '\'' +
+				", cityName='" + cityName + '\'' +
+				", sortBy='" + sortBy + '\'' +
+				", longitude='" + longitude + '\'' +
+				", latitude='" + latitude + '\'' +
+				", minPrice='" + minPrice + '\'' +
+				", maxPrice='" + maxPrice + '\'' +
+				", brandId='" + brandId + '\'' +
+				", commodityCategory='" + commodityCategory + '\'' +
+				", randomParam=" + randomParam +
+				", contentId=" + contentId +
+				"} " + super.toString();
 	}
- 
 }
