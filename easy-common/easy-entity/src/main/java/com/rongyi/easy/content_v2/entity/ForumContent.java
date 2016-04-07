@@ -180,6 +180,12 @@ public class ForumContent implements Serializable {
     private Integer activityModuleId = 0;
     
     /**
+     * 活动板块设置名称
+     * @author wangjh7
+     */
+    private String activityModuleName = "";
+    
+    /**
      * 创建人
      * @author wangjh7
      */
@@ -437,6 +443,15 @@ public class ForumContent implements Serializable {
 				+ ", androidVersion=" + androidVersion + ", quickType=" + quickType + ", quickTypeVal=" + quickTypeVal
 				+ ", bannerBackgroundPic=" + bannerBackgroundPic + ", quickCount=" + quickCount + ", quickRemarks="
 				+ quickRemarks + ", advDuration=" + advDuration + ", activityModuleId=" + activityModuleId
-				+ ", createBy=" + createBy + ", updateBy=" + updateBy + "]";
+				+ ", activityModuleName=" + activityModuleName + ", createBy=" + createBy + ", updateBy=" + updateBy
+				+ "]";
+	}
+
+	public String getActivityModuleName() {
+		return activityModuleName;
+	}
+
+	public void setActivityModuleName(String activityModuleName) {
+		this.activityModuleName = activityModuleName;
 	}
 }

@@ -14,6 +14,30 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  */
 public class ContentInfoVO implements Serializable{
 	
+	public Integer getAdvDuration() {
+		return advDuration;
+	}
+
+	public void setAdvDuration(Integer advDuration) {
+		this.advDuration = advDuration;
+	}
+
+	public Integer getActivityModuleId() {
+		return activityModuleId;
+	}
+
+	public void setActivityModuleId(Integer activityModuleId) {
+		this.activityModuleId = activityModuleId;
+	}
+
+	public String getActivityModuleName() {
+		return activityModuleName;
+	}
+
+	public void setActivityModuleName(String activityModuleName) {
+		this.activityModuleName = activityModuleName;
+	}
+
 	/** 主键id*/
     private Integer id;
 
@@ -63,6 +87,24 @@ public class ContentInfoVO implements Serializable{
      * 位置id
      */
     private Integer positionId;
+    
+    /**
+     * 广告播放时长
+     * @author wangjh7
+     */
+    private Integer advDuration =0;
+    
+    /**
+     * 活动板块设置ID
+     * @author wangjh7
+     */
+    private Integer activityModuleId = 0;
+    
+    /**
+     * 活动板块设置名称
+     * @author wangjh7
+     */
+    private String activityModuleName = "";
     
 
 	public Integer getId() {
