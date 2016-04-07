@@ -4,8 +4,10 @@ import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.content_v2.param.HomePageParam;
 import com.rongyi.easy.content_v2.vo.BuyerLiveVO;
 import com.rongyi.easy.content_v2.vo.ContentListVO;
+import com.rongyi.easy.content_v2.vo.LaunchAdvertListVO;
 import com.rongyi.easy.content_v2.vo.PositonBuyer;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -57,4 +59,14 @@ public interface ROAHomePageContentService {
      * @return
      */
     List<ContentListVO> findBuyerList(String cityId,String cityName);
+    
+    
+	/**
+	 * 获取开机广告列表
+	 * 
+	 * @author wangjh7
+	 * @param date
+	 * @return
+	 */
+	LaunchAdvertListVO findLaunchAdvertList(Date date);
 }
