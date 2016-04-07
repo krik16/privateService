@@ -47,6 +47,7 @@ public class CommodityBuyerVO implements Serializable{
 	private boolean isCollected;  //是否被收藏
 	private String mallName;//商场名称
 	private String mallMid;//商场mongoId
+	private String goodsParam;//商品参数
 	public String getActivityType() {
 		return activityType;
 	}
@@ -350,6 +351,14 @@ public class CommodityBuyerVO implements Serializable{
 	public void setMallMid(String mallMid) {
 		this.mallMid = mallMid;
 	}
+	
+	public String getGoodsParam() {
+		return goodsParam;
+	}
+
+	public void setGoodsParam(String goodsParam) {
+		this.goodsParam = goodsParam;
+	}
 
 	public CommodityBuyerVO(){
 		
@@ -482,7 +491,8 @@ public class CommodityBuyerVO implements Serializable{
 				+ ", commodityDescription=" + commodityDescription
 				+ ", commodityName=" + commodityName + ", shopId=" + shopId
 				+ ", shopMid=" + shopMid + ", isCollected=" + isCollected
-				+ ", mallName=" + mallName + ", mallMid=" + mallMid + "]";
+				+ ", mallName=" + mallName + ", mallMid=" + mallMid
+				+ ", goodsParam=" + goodsParam + "]";
 	}
 	
 }
