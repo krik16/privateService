@@ -67,7 +67,7 @@ public class ExportOsmOrderExcel {
                     sheet.getRow(i + 2).getCell(3).setCellValue(vo.getUsername());
                     sheet.getRow(i + 2).getCell(4).setCellValue(vo.getMallName());
                     sheet.getRow(i + 2).getCell(5).setCellValue(vo.getShopName());
-                    sheet.getRow(i + 2).getCell(6).setCellValue(vo.getRealAmount() == null ? "0" : vo.getRealAmount().toString());
+                    sheet.getRow(i + 2).getCell(6).setCellValue(vo.getRealAmount().subtract(vo.getDiscountFee()) == null ? "0" : vo.getRealAmount().subtract(vo.getDiscountFee()).toString());
                     sheet.getRow(i + 2).getCell(7).setCellValue(vo.getCouponAmount() == null ? "0" : vo.getCouponAmount().toString());
                     sheet.getRow(i + 2).getCell(8).setCellValue(vo.getIntegralAmount() == null ? "0" : vo.getIntegralAmount().toString());
                     sheet.getRow(i + 2).getCell(9).setCellValue(vo.getPayAmount() == null ? "0" : vo.getPayAmount().toString());
