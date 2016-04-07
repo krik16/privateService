@@ -6,6 +6,7 @@ import java.util.List;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.param.CouponCommodityParam;
 import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
+import com.rongyi.easy.malllife.param.user.SearchCommodityParms;
 import com.rongyi.easy.mcmc.*;
 import com.rongyi.easy.mcmc.param.SaleParam;
 import com.rongyi.easy.mcmc.vo.*;
@@ -182,4 +183,6 @@ public interface CommodityService {
      * @return
      */
     public List<CommodityCategory> selectCategory(int type,boolean isPopular);
+
+    public PagingVO<Commodity> findCommdityList(SearchCommodityParms searchCommodityParms);
 }
