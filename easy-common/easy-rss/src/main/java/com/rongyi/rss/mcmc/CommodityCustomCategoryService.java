@@ -37,7 +37,7 @@ public interface CommodityCustomCategoryService {
      * @return
      * @throws Exception
      */
-    public boolean insertOrUpdateOrDeleteCustomCategory(CommodityCustomCategoryParam param,Integer ownerId,
+    public int insertOrUpdateOrDeleteCustomCategory(CommodityCustomCategoryParam param,Integer ownerId,
                                                         String ownerMid,Integer userId,int identity) throws Exception;
 
     public CommodityCustomCategoryEntity selectById(int id);
