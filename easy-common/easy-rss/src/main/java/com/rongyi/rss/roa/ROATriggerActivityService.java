@@ -11,8 +11,7 @@ public interface ROATriggerActivityService {
      * @param StartAt ,
      * pushCondition:'1:注册，2交易，3邀请，4激活',
      * TradeStartAmount : 交易金额,
-     * tradeRange:交易范围：1全部，2品牌，3商城，4店铺',
-     * tradeRange为1，shopId为空，
+      * tradeRange为1，shopId为空，
      * shopId: 
      *  *'交易品类;“1,2”，1商品，2卡券',
      *  goodsId 商品或卡券id
