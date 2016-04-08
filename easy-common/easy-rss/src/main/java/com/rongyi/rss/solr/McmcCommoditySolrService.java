@@ -159,4 +159,8 @@ public interface McmcCommoditySolrService {
 	 */
 	public boolean updateCommodityTerminalType(String commodityId, Integer terminalType,String weAndTeStatus);
 
+	public boolean cleanSolrByIds(List<String> ids,Integer type);
+
+	public boolean updateCommoditySaleByIds(List<String> ids, Integer saleId, Date activityStartTime, Date activityEndTime, List<ActivityCommodityParam> commodityParams,Integer type);
+
 }
