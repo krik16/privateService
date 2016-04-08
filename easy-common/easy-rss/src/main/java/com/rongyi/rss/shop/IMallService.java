@@ -8,7 +8,11 @@
 */
 package com.rongyi.rss.shop;
 
-/** 
+import org.bson.types.ObjectId;
+
+import java.util.List;
+
+/**
  * @ClassName: IMallService 
  * @Description: 合作商场查询
  * @author wzh

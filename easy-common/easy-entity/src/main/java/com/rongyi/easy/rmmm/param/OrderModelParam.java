@@ -21,6 +21,7 @@ public class OrderModelParam implements Serializable {
 	private String guideId;// 导购id
 	private String orderPrice;// 订单价格
 	private List<OrderDetailModelParam> ordeDetailModel;
+	private String memberId;//微信用户id
 
 	public String getShopId() {
 		return shopId;
@@ -53,14 +54,20 @@ public class OrderModelParam implements Serializable {
 	public void setOrderPrice(String orderPrice) {
 		this.orderPrice = orderPrice;
 	}
+	
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
 
 	@Override
 	public String toString() {
-		return "OrderModelParam{" +
-				"shopId='" + shopId + '\'' +
-				", guideId='" + guideId + '\'' +
-				", orderPrice='" + orderPrice + '\'' +
-				", ordeDetailModel=" + ordeDetailModel +
-				'}';
+		return "OrderModelParam [shopId=" + shopId + ", guideId=" + guideId
+				+ ", orderPrice=" + orderPrice + ", ordeDetailModel="
+				+ ordeDetailModel + ", memberId=" + memberId + "]";
 	}
+	
 }

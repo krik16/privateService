@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.rongyi</groupId>
 		<artifactId>easy-common</artifactId>
-		<version>3.2.9-SNAPSHOT</version>	
+		<version>3.2.5-SNAPSHOT</version>
 	</parent>
 	<artifactId>easy-core</artifactId>
 	<packaging>jar</packaging>
@@ -218,10 +218,6 @@
 			<artifactId>morphia</artifactId>
 		</dependency>
 		<!-- mongo end -->
-			<dependency>
-			<groupId>dom4j</groupId>
-			<artifactId>dom4j</artifactId>
-		</dependency>
 
 		<!--  Redis  Start-->
 		<dependency>
