@@ -16,6 +16,7 @@ public class SearchCommodityParms implements Serializable{
     private Integer pageSize;      //分页大小
     private List<String> shopMids; //店铺id
     private Integer currentPage	;//当前页 从1开始	Integer	是
+    private String shopMid;
 
     public String getCommodityId() {
         return commodityId;
@@ -81,10 +82,18 @@ public class SearchCommodityParms implements Serializable{
         this.currentPage = currentPage;
     }
 
+    public String getShopMid() {
+        return shopMid;
+    }
+
+    public void setShopMid(String shopMid) {
+        this.shopMid = shopMid;
+    }
+
     @Override
     public String toString() {
         return "SearchCommodityParms [commodityId=" + commodityId + ", commodityName=" + commodityName + ", categoryId=" + categoryId
-                + ", brandId=" + brandId + ", commodIds=" + commodIds
+                + ", brandId=" + brandId + ", commodIds=" + commodIds + ",shopMid="+shopMid
                 + ", pageSize=" + pageSize + ", shopMids=" + shopMids
                 + ", currentPage=" + currentPage + "]";
     }
