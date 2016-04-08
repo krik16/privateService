@@ -865,7 +865,7 @@ public class Coupon implements Serializable {
         if (stockCount == null) {
             stockCount = totalCount;
         }
-        if(totalCount==0)
+        if(totalCount==null||totalCount==0)
             return 0;
         return (totalCount - stockCount < 0) ? 0 : totalCount - stockCount;
     }
