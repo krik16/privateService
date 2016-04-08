@@ -3,6 +3,8 @@ package com.rongyi.rss.mcmc;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.mcmc.vo.CommodityVOToWechat;
+import com.rongyi.easy.mcmc.vo.SearchParamsForWechat;
 import org.bson.types.ObjectId;
 
 import com.rongyi.easy.mcmc.Commodity;
@@ -47,4 +49,5 @@ public interface ROACommodityService {
 	public void updateSystemNumber(List<ObjectId> commodityIds, String systemNumber);
 	
 	public List<Commodity> findBySystemNumer(String systemNumber);
+
 }

@@ -25,6 +25,9 @@ public class PaySuccessVO implements Serializable{
 	private String payTime;// 付款时间
 	private String commitOrderTime;// 提交订单时间
 	private String integral;//交易完成后获得的积分
+	private String provinceName;// 省名称
+	private String cityName;// 市名称
+	private String districtName;// 区名称
 	public String getOrderId() {
 		return orderId;
 	}
@@ -121,6 +124,24 @@ public class PaySuccessVO implements Serializable{
 	public void setIntegral(String integral) {
 		this.integral = integral;
 	}
+	public String getProvinceName() {
+		return provinceName;
+	}
+	public void setProvinceName(String provinceName) {
+		this.provinceName = provinceName;
+	}
+	public String getCityName() {
+		return cityName;
+	}
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+	public String getDistrictName() {
+		return districtName;
+	}
+	public void setDistrictName(String districtName) {
+		this.districtName = districtName;
+	}
 	@Override
 	public String toString() {
 		return "PaySuccessVO [orderId=" + orderId + ", sonOrderId="
@@ -131,7 +152,8 @@ public class PaySuccessVO implements Serializable{
 				+ ", address=" + address + ", orderNum=" + orderNum
 				+ ", expressBillId=" + expressBillId + ", payTime=" + payTime
 				+ ", commitOrderTime=" + commitOrderTime + ", integral="
-				+ integral + "]";
+				+ integral + ", provinceName=" + provinceName + ", cityName="
+				+ cityName + ", districtName=" + districtName + "]";
 	}
 	
 }

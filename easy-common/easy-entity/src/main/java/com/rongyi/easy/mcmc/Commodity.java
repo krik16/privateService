@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
@@ -154,7 +155,7 @@ public class Commodity implements  Serializable,Cloneable{
 	
 	//private Integer distribution;//配送方式 1表示到店自提2快递3表示支持两种方式
 	private Integer freight;//1表示商家承担运费,0表示买家承担运费
-	private Integer terminalType;//上架终端：1.表示容易逛2.表示互动屏3.表示容易逛和互动屏4.表示微商5.微商,容易逛6.微商,互动屏7.容易逛, 互动屏, 微商(转换成二进制数个位1有容易逛第二位1有 互动屏第三位1有 微商)
+	private Integer terminalType;//上架终端：com.rongyi.easy.mcmc.constant.CommodityTerminalType常量定义
 	private Date registerAt;//上架时间
 	private Date soldOutAt;//下架时间
 	private Integer source;//来源0表示页面添加1表示批量导入2app创建商品
@@ -169,6 +170,23 @@ public class Commodity implements  Serializable,Cloneable{
 	private String oPriceMin;//商品原最低价（用于买家版）
 	private String cPriceMax;//商品现最高价（用于买家版）
 	private String cPriceMin;//商品现最高价（用于买家版）
+	private Integer purchaseCount;//商品的限购数量
+	private String weAndTeStatus;//商品在终端机与App上的隐藏与显示
+	public Integer getPurchaseCount() {
+		return this.purchaseCount==null || this.purchaseCount < 0 ? 0:this.purchaseCount;
+	}
+
+	public void setPurchaseCount(Integer purchaseCount) {
+		this.purchaseCount = purchaseCount;
+	}
+
+	public String getWeAndTeStatus() {
+		return StringUtils.isBlank(weAndTeStatus)?"3":weAndTeStatus;
+	}
+
+	public void setWeAndTeStatus(String weAndTeStatus) {
+		this.weAndTeStatus = weAndTeStatus;
+	}
 	private Double discount ;//商品的折扣
 	private Integer sort;//直播商品的排序
 	private boolean goodsSec = true;//正品保障
@@ -209,7 +227,6 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	
 	public String getCode() {
 		return code;
 	}
@@ -404,6 +421,8 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setDiscount(discount);
 //		commodity.setActivityStartTime(activityStartTime);
 //		commodity.setActivityEndTime(activityEndTime);
+		commodity.setPurchaseCount(purchaseCount);
+		commodity.setWeAndTeStatus(weAndTeStatus);
 		commodity.setSort(sort);
 		return commodity;
 	}
@@ -540,7 +559,6 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setTemplateId(Integer templateId) {
 		this.templateId = templateId;
 	}
-	
 	public boolean isGoodsSec() {
 		return goodsSec;
 	}
@@ -579,7 +597,6 @@ public class Commodity implements  Serializable,Cloneable{
 				+ reason + ", oPriceMax=" + oPriceMax + ", oPriceMin="
 				+ oPriceMin + ", cPriceMax=" + cPriceMax + ", cPriceMin="
 				+ cPriceMin + ", discount=" + discount + ", sort=" + sort
-				+ ", goodsSec=" + goodsSec + "]";
+				+ ", goodsSec=" + goodsSec+",purchaseCount="+purchaseCount+",weAndTeStatus="+weAndTeStatus + "]";
 	}
-	
 }
