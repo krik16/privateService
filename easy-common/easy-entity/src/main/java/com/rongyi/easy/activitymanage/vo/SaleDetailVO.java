@@ -19,8 +19,8 @@ public class SaleDetailVO implements Serializable {
     private String bannerPic;
     private String name;
     private String subTitle;
-    private Date startAt;
-    private Date endAt;
+    private Long startAt;
+    private Long endAt;
     private String shareTitle;
     private String shareDesc;
     private String activityUrl;
@@ -83,19 +83,19 @@ public class SaleDetailVO implements Serializable {
         this.subTitle = subTitle;
     }
 
-    public Date getStartAt() {
+    public Long getStartAt() {
         return startAt;
     }
 
-    public void setStartAt(Date startAt) {
+    public void setStartAt(Long startAt) {
         this.startAt = startAt;
     }
 
-    public Date getEndAt() {
+    public Long getEndAt() {
         return endAt;
     }
 
-    public void setEndAt(Date endAt) {
+    public void setEndAt(Long endAt) {
         this.endAt = endAt;
     }
 
