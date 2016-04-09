@@ -90,6 +90,8 @@ public interface IShopService {
 	 */
 	public List<String> searchShop(String filialeId, int currpage, int pageSize);
 
+	public List<String> searchShopBymallId(String mallId);
+
 	/**
 	 * 获取店铺数量
 	 * @return
@@ -142,4 +144,6 @@ public interface IShopService {
 	 * clear cache data
 	 */
 	public void clearCache();
+
+	public String selectNameByIds(List<String> ids);
 }

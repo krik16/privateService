@@ -609,6 +609,7 @@
     <build>
         <pluginManagement>
             <plugins>
+                <!-- 指定项目的JDK版本 -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
@@ -681,15 +682,6 @@
                                 </excludes>
                             </resource>
                         </webResources>
-                    </configuration>
-                </plugin>
-                <!-- 指定项目的JDK版本 -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <configuration>
-                        <source>1.7</source>
-                        <target>1.7</target>
                     </configuration>
                 </plugin>
 
