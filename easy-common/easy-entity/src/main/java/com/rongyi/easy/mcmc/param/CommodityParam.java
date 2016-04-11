@@ -301,16 +301,35 @@ public class CommodityParam {
 
 	@Override
 	public String toString() {
-		return "CommodityParam [type=" + type + ", id=" + id + ", name=" + name + ", category=" + category + ", status="
-				+ status + ", code=" + code + ", description=" + description + ", postage=" + postage
-				+ ", originalPrice=" + originalPrice + ", currentPrice=" + currentPrice + ", picList=" + picList
-				+ ", categoryIds=" + categoryIds + ", customCategory=" + customCategory + ", distribution="
-				+ distribution + ", freight=" + freight + ", terminalType=" + terminalType + ", registerAt="
-				+ registerAt + ", soldOutAt=" + soldOutAt + ", stockStatus=" + stockStatus + ", commoditySpeceParams="
-				+ commoditySpeceParams + ", stock=" + stock + ", remain=" + remain
-				+",weAndTeStatus="+weAndTeStatus+",purchaseCount="+purchaseCount+ ", hasSpec=" + hasSpec + "]";
+		return "CommodityParam{" +
+				"category='" + category + '\'' +
+				", type=" + type +
+				", id='" + id + '\'' +
+				", name='" + name + '\'' +
+				", status=" + status +
+				", code='" + code + '\'' +
+				", description='" + description + '\'' +
+				", postage='" + postage + '\'' +
+				", originalPrice='" + originalPrice + '\'' +
+				", currentPrice='" + currentPrice + '\'' +
+				", picList=" + picList +
+				", categoryIds=" + categoryIds +
+				", customCategoryIds=" + customCategoryIds +
+				", distribution=" + distribution +
+				", freight=" + freight +
+				", terminalType=" + terminalType +
+				", registerAt=" + registerAt +
+				", soldOutAt=" + soldOutAt +
+				", stockStatus=" + stockStatus +
+				", commoditySpeceParams=" + commoditySpeceParams +
+				", stock=" + stock +
+				", remain=" + remain +
+				", hasSpec=" + hasSpec +
+				", weAndTeStatus='" + weAndTeStatus + '\'' +
+				", purchaseCount=" + purchaseCount +
+				", templateId=" + templateId +
+				'}';
 	}
-	
 
 	public Integer getTemplateId() {
 		return templateId;
