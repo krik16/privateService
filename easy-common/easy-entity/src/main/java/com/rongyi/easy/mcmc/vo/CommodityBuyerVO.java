@@ -38,6 +38,7 @@ public class CommodityBuyerVO implements Serializable{
 	private String mallName;//商场名称
 	private String mallMid;//商场mongoId
 	private String goodsParam;//商品参数
+	private double discount;
 	public String getActivityType() {
 		return activityType;
 	}
@@ -238,6 +239,7 @@ public class CommodityBuyerVO implements Serializable{
 	}
 
 	public CommodityBuyerVO(Commodity commodity){
+		this.discount=commodity.getDiscount();
 		this.commodityId = commodity.getId().toString();
 		this.commodityPicList = commodity.getPicList();
 		this.commodityOPriceMax = commodity.getoPriceMax();
@@ -462,6 +464,14 @@ public class CommodityBuyerVO implements Serializable{
 		this.purchaseCount = purchaseCount;
 	}
 
+	public double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(double discount) {
+		this.discount = discount;
+	}
+
 	@Override
 	public String toString() {
 		return "CommodityBuyerVO [shopName=" + shopName + ", commodityPicList="
@@ -489,6 +499,7 @@ public class CommodityBuyerVO implements Serializable{
 				+ ", commodityDescription=" + commodityDescription
 				+ ", commodityName=" + commodityName + ", shopId=" + shopId
 				+ ", purchaseCount=" + purchaseCount + ", shopMid=" + shopMid
+				+", discount=" + discount
 				+ ", isCollected=" + isCollected + "]";
 	}
 	

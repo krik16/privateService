@@ -23,7 +23,7 @@ import com.rongyi.easy.malllife.param.MalllifeBaseParam;
  * @author ZhengYl
  *
  */
-public class CommoditySearchParam  extends MalllifeBaseParam implements Serializable {
+public class 	CommoditySearchParam  extends MalllifeBaseParam implements Serializable {
 
 	/**  */
 	private static final long serialVersionUID = -3577116644255163015L;
@@ -44,7 +44,7 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	private String commodityCategory;
 
 	/** 排序规则 
-	 * 0：按发布日期排序  1：按销量由高到低  2：按价格由低到高  3：按价格由高到低  4：按距离由近到远  5：按销量由低到高
+	 * 0：按发布日期排序  1：按销量由高到低  2：按价格由低到高  3：按价格由高到低  4：按距离由近到远  5：按销量由低到高 6:折扣由低到高  7：折扣由高到低
 	 * */
 	private String sortBy;
 	
