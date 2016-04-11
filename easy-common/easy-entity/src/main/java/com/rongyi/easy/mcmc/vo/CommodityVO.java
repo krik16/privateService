@@ -630,10 +630,9 @@ public class CommodityVO  implements  Serializable {
 				", sort=" + sort +
 				", mallName='" + mallName + '\'' +
 				", weAndTeStatus='" + weAndTeStatus + '\'' +
+				", customCategoryIds=" + customCategoryIds +
 				'}';
 	}
-
-
 
 	public Integer getPurchaseCount()
 	{
