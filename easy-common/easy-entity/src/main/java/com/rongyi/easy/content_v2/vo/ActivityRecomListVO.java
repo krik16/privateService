@@ -17,8 +17,9 @@ public class ActivityRecomListVO implements Serializable {
 
      private String name;
 
-     private String pic;
+     private String pic;/**选中钱的图片*/
 
+     private String selectedPic;/**选中后的图片*/
      private List<ActivityContentListVO> contentList = new ArrayList<ActivityContentListVO>();
 
      public String getName() {
@@ -45,11 +46,20 @@ public class ActivityRecomListVO implements Serializable {
           this.contentList = contentList;
      }
 
+     public String getSelectedPic() {
+          return selectedPic;
+     }
+
+     public void setSelectedPic(String selectedPic) {
+          this.selectedPic = selectedPic;
+     }
+
      @Override
      public String toString() {
           return new ToStringBuilder(this)
                   .append("name", name)
                   .append("pic", pic)
+                  .append("selectedPic", selectedPic)
                   .append("contentList", contentList)
                   .toString();
      }
