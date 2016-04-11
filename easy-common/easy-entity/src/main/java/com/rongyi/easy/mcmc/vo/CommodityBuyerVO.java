@@ -253,7 +253,8 @@ public class CommodityBuyerVO implements Serializable{
 	}
 
 	public CommodityBuyerVO(Commodity commodity){
-		this.discount=commodity.getDiscount();
+		if(commodity.getDiscount()!=null)
+			this.discount=commodity.getDiscount();
 		this.commodityId = commodity.getId().toString();
 		this.commodityPicList = commodity.getPicList();
 		this.commodityOPriceMax = commodity.getoPriceMax();
