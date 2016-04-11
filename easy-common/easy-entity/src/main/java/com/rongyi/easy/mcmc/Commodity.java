@@ -1,6 +1,7 @@
 package com.rongyi.easy.mcmc;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
+import org.springframework.util.Assert;
 
 @Entity(value="mcmc_commodity",noClassnameStored=true)
 public class Commodity implements  Serializable,Cloneable{
@@ -368,7 +370,19 @@ public class Commodity implements  Serializable,Cloneable{
 	}
 
 	public Double getDiscount() {
-		return discount;
+		try {
+			Assert.notNull(this.currentPrice);
+			Assert.notNull(this.originalPrice);
+
+			NumberFormat ddf1 = NumberFormat.getNumberInstance() ;
+			ddf1.setMaximumFractionDigits(2);
+			Double currentPrice = Double.valueOf(this.currentPrice);
+			Double originalPrice = Double.valueOf(this.originalPrice);
+
+			return Double.valueOf(ddf1.format(currentPrice / originalPrice)) * 10;
+		} catch(Exception e) {
+			throw new RuntimeException(e.getMessage());
+		}
 	}
 
 	public void setDiscount(Double discount) {
