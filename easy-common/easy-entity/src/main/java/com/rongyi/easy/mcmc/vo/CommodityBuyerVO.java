@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+
+import net.sf.json.JSONObject;
 import com.rongyi.easy.mcmc.Commodity;
 import org.apache.commons.lang.StringUtils;
 public class CommodityBuyerVO implements Serializable{
@@ -227,7 +229,19 @@ public class CommodityBuyerVO implements Serializable{
 	}
 
 	public String getGoodsParam() {
-		return goodsParam;
+
+		JSONObject jsonObj = new JSONObject();
+		jsonObj.put("中文品牌名","爱马仕");
+		jsonObj.put("英文品牌名","Hermes");
+		jsonObj.put("标题","Hermes店");
+		jsonObj.put("货号","DA0604");
+		jsonObj.put("原价",500);
+		jsonObj.put("售价",450);
+		jsonObj.put("尺寸","S,M,L,XL");
+		jsonObj.put("颜色","红色");
+		jsonObj.put("详情",null);
+		jsonObj.put("图片",null);
+		return jsonObj.toString();
 	}
 
 	public void setGoodsParam(String goodsParam) {
