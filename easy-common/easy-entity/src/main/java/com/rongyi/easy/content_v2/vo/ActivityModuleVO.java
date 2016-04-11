@@ -11,8 +11,15 @@ import java.io.Serializable;
 public class ActivityModuleVO implements Serializable {
 	@Override
 	public String toString() {
-		return "ActivityModuleEntity [id=" + id + ", homepageId=" + homepageId + ", title=" + title + ", picUrl="
-				+ picUrl + ", sortIdx=" + sortIdx + ", isVisible=" + isVisible + "]";
+		return "ActivityModuleVO{" +
+				"id=" + id +
+				", homepageId=" + homepageId +
+				", title='" + title + '\'' +
+				", picUrl='" + picUrl + '\'' +
+				", selectedPicUrl='" + selectedPicUrl + '\'' +
+				", sortIdx=" + sortIdx +
+				", isVisible=" + isVisible +
+				'}';
 	}
 
 	public int getId() {
@@ -63,6 +70,14 @@ public class ActivityModuleVO implements Serializable {
 		this.homepageId = homepageId;
 	}
 
+	public String getSelectedPicUrl() {
+		return selectedPicUrl;
+	}
+
+	public void setSelectedPicUrl(String selectedPicUrl) {
+		this.selectedPicUrl = selectedPicUrl;
+	}
+
 	/**
 	 * 
 	 */
@@ -71,6 +86,7 @@ public class ActivityModuleVO implements Serializable {
 	private int homepageId = 0;
 	private String title = "";
 	private String picUrl = "";
+	private String selectedPicUrl = "";
 	private int sortIdx = 0;
 	private int isVisible = 0;
 }
