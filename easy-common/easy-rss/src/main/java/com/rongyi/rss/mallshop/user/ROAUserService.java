@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.rongyi.easy.malllife.pojo.BuyerInfoPojo;
 import com.rongyi.easy.mallshop.MallShopException;
+import com.rongyi.easy.rmmm.dto.user.UserDevIdDto;
 import com.rongyi.easy.rmmm.dto.user.UserLoginDto;
 import com.rongyi.easy.rmmm.dto.user.UserShopMallAccountDto;
 import com.rongyi.easy.rmmm.entity.RmmmUserInfoEntity;
@@ -303,5 +304,13 @@ public interface ROAUserService {
      * @throws MallShopException
      */
     public List<UserLoginDto> findUserLoginDtoByPhone(String phone)throws MallShopException;
+
+    /**
+     * 返回同一设备ID的账号信息
+     * @param devId
+     * @return
+     * @throws MallShopException
+     */
+    public List<UserDevIdDto> findUserDevIdDtoByDevId(String devId)throws MallShopException;
 
 }
