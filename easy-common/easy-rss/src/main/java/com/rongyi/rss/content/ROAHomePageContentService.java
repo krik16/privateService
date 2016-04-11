@@ -2,10 +2,7 @@ package com.rongyi.rss.content;
 
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.content_v2.param.HomePageParam;
-import com.rongyi.easy.content_v2.vo.BuyerLiveVO;
-import com.rongyi.easy.content_v2.vo.ContentListVO;
-import com.rongyi.easy.content_v2.vo.LaunchAdvertListVO;
-import com.rongyi.easy.content_v2.vo.PositonBuyer;
+import com.rongyi.easy.content_v2.vo.*;
 
 import java.util.Date;
 import java.util.List;
@@ -69,4 +66,12 @@ public interface ROAHomePageContentService {
 	 * @return
 	 */
 	LaunchAdvertListVO findLaunchAdvertList(Date date);
+
+    /**
+     * 获取首页列表
+     * @param cityId
+     * @param cityName
+     * @return
+     */
+    List<ActivityRecomListVO> findActivityRecomList(String cityId,String cityName);
 }

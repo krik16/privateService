@@ -2,6 +2,7 @@ package com.rongyi.rss.content;
 
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.content_v2.param.HomePageParam;
+import com.rongyi.easy.content_v2.vo.ActivityRecomListVO;
 import com.rongyi.easy.content_v2.vo.ContentListVO;
 import com.rongyi.easy.content_v2.vo.LaunchAdvertListVO;
 
@@ -44,4 +45,13 @@ public interface MLHomePageContentNewService {
      * @return
      */
     LaunchAdvertListVO findLaunchAdvertList(Date date);
+
+    /**
+     * 新的活动列表查询
+     * @Author lijing
+     * @param cityId
+     * @param cityName
+     * @return
+     */
+    List<ActivityRecomListVO> findContentListNew(String cityId,String cityName);
 }
