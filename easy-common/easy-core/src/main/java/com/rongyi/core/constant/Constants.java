@@ -16,6 +16,9 @@ public interface Constants {
     interface OrderPaytime {
         Integer PAY_SECOND = 900; //订单支付最大时间（秒数）
     }
+    Integer RY_SESSION_TIMEOUT = 60 * 60 * 2;
+    Integer BS_SESSION_TIMEOUT = 60 * 60;
+    
     String BS_COOKIE_NAME = "BSST";
     String RY_COOKIE_NAME = "RYST";
 
@@ -30,6 +33,15 @@ public interface Constants {
 
     String RESULT_SUCCES = "success"; //成功标志位
     String RESULT_FAIL = "fail"; //失败标志位
+    
+    /**
+     * 新版
+     * 上传云路径
+     */
+    interface UPAIYUN_URL {
+        String UPAIYUN_URL           = "http://rongyi.b0.upaiyun.com/";  //网址
+        String ADVERT_URL          = "system/advert/";//内容管理图片路径
+    }
 
     interface Version {
         String VERSION1 = "0.1.0";
@@ -725,7 +737,11 @@ public interface Constants {
     interface ExportSize{
         int EXCEL_EXPORT_MAX_SIZE=50000;
     }
-
+    //容易逛[0] 互动屏[1] 微商[2]
+    interface CouponPublishChannel{
+        int DYY=0;//大运营卡券
+        int SJ=1;//商家卡券
+    }
 
     /**
      * 对账类型

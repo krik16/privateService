@@ -6,6 +6,8 @@ import java.util.Map;
 
 import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.mcmc.param.ActivityCommodityParam;
+import com.rongyi.easy.roa.param.SearchCommodityBrandParam;
+import com.rongyi.easy.roa.param.SearchCommodityCategoryParam;
 import com.rongyi.easy.solr.result.CommoditySolrResult;
 import org.bson.types.ObjectId;
 
@@ -97,9 +99,30 @@ public interface McmcCommoditySolrService {
 
 	public boolean updateCommodityFlashSale(String commodityId, Integer sortPosition, Integer flashSaleId, Date activityStartTime, Date activityEndTime);
 
+	/**
+	 * 批量修改商品闪购信息
+	 * @param commodityParams
+	 * @param flashSaleId
+	 * @param activityStartTime
+	 * @param activityEndTime
+	 * @return
+	 */
+	public boolean updateCommodityFlashSale(List<ActivityCommodityParam> commodityParams,  Integer flashSaleId, Date activityStartTime, Date activityEndTime);
+
 	public boolean cleanCommoditySecKill(String secKillSign);
 
 	public boolean updateCommoditySecKill(String commodityId,String secKillSign);
+
+	/**
+	 * 搜索品牌列表
+	 * @param brandParam	搜索参数
+	 * @return
+	 */
+	public Map<String, Object> searchBrands(SearchCommodityBrandParam brandParam);
+
+	public Map<String, Object> searchCategorys(SearchCommodityCategoryParam categoryParam);
+
+	public boolean updateCommoditySecKill(List<String> commodityIds, String secKillSign);
 
 //	/**
 //	 * 搜索有商品的商品分类列表
@@ -108,6 +131,22 @@ public interface McmcCommoditySolrService {
 //	 */
 //	public Map<String, Object> searchCommodityCategoryHasCommodity(BuyerCategoryParam categoryParam);
 
+	/**
+	 * 删除指定ID的商品
+	 * @param commodityId	商品ID
+	 * @return
+	 */
+	public boolean deleteCommodity(String commodityId);
+
 //	public boolean updateCommoditySale(String commodityId, Integer sortPosition);
+	public boolean updateCommodityWeAndTeStatus(String commodityId, String  weAndTeStatus);
+
+	/**
+	 * 更新solr商品终端数据
+	 * @param commodityId	商品ID
+	 * @param terminalType	终端
+	 * @return
+	 */
+	public boolean updateCommodityTerminalType(String commodityId, Integer terminalType,String weAndTeStatus);
 
 }

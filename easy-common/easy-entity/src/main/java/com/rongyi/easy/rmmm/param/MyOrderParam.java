@@ -11,11 +11,13 @@ public class MyOrderParam implements Serializable{
 	
 	private String  jsessionid;//用户信息jsessionid
 
-	private String status;
+	private String status;//1:全部 2待付款 3待收货 4待评价 5售后  6已完成 7待发货
 	
 	private String currentPage;
 	
 	private String pageSize;
+	
+	private String memberId;//微信用户id
 
 	public String getJsessionid() {
 		return jsessionid;
@@ -48,13 +50,20 @@ public class MyOrderParam implements Serializable{
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
 
 	@Override
 	public String toString() {
-		return "MyOrderParam{" +
-				"status='" + status + '\'' +
-				", currentPage='" + currentPage + '\'' +
-				", pageSize='" + pageSize + '\'' +
-				'}';
+		return "MyOrderParam [jsessionid=" + jsessionid + ", status=" + status
+				+ ", currentPage=" + currentPage + ", pageSize=" + pageSize
+				+ ", memberId=" + memberId + "]";
 	}
+	
 }

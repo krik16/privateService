@@ -17,7 +17,7 @@ public class MMValidHistoryParam implements Serializable {
 	private Integer pageSize = 15;//默认15
 	private Integer currentPage = 1;//当前页（后台处理）
 	private String sellerId;//核销人id
-	private Integer status;
+	private Integer status;//0全部 1已发放 2处理中 3失败
 	public Integer getDate() {
 		return date;
 	}
@@ -69,7 +69,7 @@ public class MMValidHistoryParam implements Serializable {
 	@Override
 	public String toString() {
 		return "MMValidHistoryParam [shopId=" + shopId + ", orderBy=" + orderBy
-				+ ", orderVa=" + orderVa + ", pageSize=" + pageSize
+				+ ", orderVa=" + orderVa + ", pageSize=" + pageSize + ", status=" + status
 				+ ", currentPage=" + currentPage + ", sellerId=" + sellerId
 				+ "]";
 	}

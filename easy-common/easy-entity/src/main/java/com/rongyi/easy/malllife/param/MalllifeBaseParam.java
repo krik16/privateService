@@ -20,6 +20,7 @@ public class MalllifeBaseParam implements Serializable {
     private String  jsessionid;//用户信息jsessionid
     private String  appVersion; //APP版本号
     private String  appType; // 0 表示 ios,1表示 android
+    @Deprecated  // 当前 前端未传值 获取数据错误！！！！！！！ 直接使用from
     private Integer currentPage; //当前页数
     private Integer pageSize;//每页显示数
 
@@ -64,13 +65,8 @@ public class MalllifeBaseParam implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .append("jsessionid", jsessionid)
-                .append("appVersion", appVersion)
-                .append("appType", appType)
-                .append("currentPage", currentPage)
-                .append("pageSize", pageSize)
-                .toString();
-    }
+	public String toString() {
+		return "MalllifeBaseParam [jsessionid=" + jsessionid + ", appVersion=" + appVersion + ", appType=" + appType
+				+ ", currentPage=" + currentPage + ", pageSize=" + pageSize + "]";
+	}
 }

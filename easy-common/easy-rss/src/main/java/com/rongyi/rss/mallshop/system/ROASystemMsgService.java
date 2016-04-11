@@ -1,8 +1,12 @@
 package com.rongyi.rss.mallshop.system;
 
 import com.rongyi.easy.mallshop.MallShopException;
+import com.rongyi.easy.rmmm.dto.system.SystemMsgDto;
+import com.rongyi.easy.rmmm.entity.RmmmUserInfoEntity;
 import com.rongyi.easy.rmmm.param.system.SystemMsgParam;
 import com.rongyi.easy.rmmm.vo.system.SystemMsgListVo;
+
+import java.util.List;
 
 /*
  * Copyright (C),上海容易网电子商务有限公司
@@ -18,11 +22,11 @@ public interface ROASystemMsgService {
 
     /**
      * 返回卖家系统消息
-     * @param userId
+     * @param user
      * @return
      * @throws Exception
      */
-    public SystemMsgListVo findsellerMsgList(SystemMsgParam param,Integer userId) throws Exception;
+    public SystemMsgListVo findsellerMsgList(SystemMsgParam param,RmmmUserInfoEntity user) throws Exception;
 
     /**
      * 返回买家系统消息
@@ -52,10 +56,10 @@ public interface ROASystemMsgService {
     public int delSellerMsg(SystemMsgParam param,Integer userId) throws Exception ;
 
     /**
-     *
+     * @param entity 用户信息
      * @return
      */
-    public Integer getsellMsgCount(Integer userId)throws Exception ;
+    public Integer getsellMsgCount(RmmmUserInfoEntity entity)throws Exception ;
 
     /**
      * 获取信息数量
@@ -88,6 +92,11 @@ public interface ROASystemMsgService {
      * @throws MallShopException
      */
     public int setBuyerRead(SystemMsgParam param) throws MallShopException;
-
+    /**
+     * 保存推送消息
+     * @param systemMsgDtoList 推送消息内容
+     * @throws MallShopException
+     */
+    public void savePushMsg(List<SystemMsgDto> systemMsgDtoList)throws MallShopException;
 
 }

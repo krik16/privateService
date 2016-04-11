@@ -3,6 +3,8 @@ package com.rongyi.rss.shop;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.solr.PoiDocument;
+import com.rongyi.easy.solr.ShopDocument;
 import org.bson.types.ObjectId;
 
 import com.rongyi.easy.rmmm.entity.ShopInfoEntity;
@@ -87,4 +89,61 @@ public interface IShopService {
 	 * @return
 	 */
 	public List<String> searchShop(String filialeId, int currpage, int pageSize);
+
+	public List<String> searchShopBymallId(String mallId);
+
+	/**
+	 * 获取店铺数量
+	 * @return
+	 */
+	public long getShopCount();
+
+	/**
+	 * 分页查询店铺转换成solr对象
+	 * @param skip
+	 * @param pageSize
+	 * @return
+	 */
+	public List<ShopDocument> getShopDocumentList(int skip,int pageSize);
+
+	/**
+	 * id对应的店铺转换成solr对象
+	 * @param shopMid
+	 * @return
+	 */
+	public ShopDocument getShopDocument(String shopMid);
+
+	/**
+	 * 根据店铺id集合查询店铺
+	 * @param ids
+	 * @return
+	 */
+	public List<ShopEntity> searchShopByIds(List<ObjectId> ids);
+
+	/**
+	 * 分页获取店铺solr对象（poi库）
+	 * @param skip
+	 * @param pageSize
+	 * @return
+	 */
+	public List<PoiDocument> getShopPoiDocumentList(int skip,int pageSize) throws Exception;
+
+	/**
+	 * 获取店铺solr对象（poi库）
+	 * @param shopMid
+	 * @return
+	 */
+	public PoiDocument getShopPoiDocument(String shopMid) throws Exception;
+
+	/**
+	 * cache data
+	 */
+	public void prepareForFullUpdate();
+
+	/**
+	 * clear cache data
+	 */
+	public void clearCache();
+
+	public String selectNameByIds(List<String> ids);
 }

@@ -26,11 +26,15 @@ public class ActivityInfoListVO implements Serializable {
     private Integer type;
     /**发布终端:[1,1,1,1]表示容易逛、终端屏、微信、微商端全部选中[1,0,0,0]表示第一个选中*/
     private String synTarget;
+    private Date enrollStartAt;//报名开始时间
+    private Date enrollEndAt;//报名结束时间
     /**活动状态  0.待审核
      1.不通过
      2.未开始
      3.进行中
      4.已结束
+     5 强下线
+     6 申请撤销中
      */
     private Integer status;
     /**创建人*/
@@ -160,6 +164,22 @@ public class ActivityInfoListVO implements Serializable {
         this.goodsTotal = goodsTotal;
     }
 
+    public Date getEnrollStartAt() {
+        return enrollStartAt;
+    }
+
+    public void setEnrollStartAt(Date enrollStartAt) {
+        this.enrollStartAt = enrollStartAt;
+    }
+
+    public Date getEnrollEndAt() {
+        return enrollEndAt;
+    }
+
+    public void setEnrollEndAt(Date enrollEndAt) {
+        this.enrollEndAt = enrollEndAt;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -169,6 +189,8 @@ public class ActivityInfoListVO implements Serializable {
                 .append("endAt", endAt)
                 .append("type", type)
                 .append("synTarget", synTarget)
+                .append("enrollStartAt", enrollStartAt)
+                .append("enrollEndAt", enrollEndAt)
                 .append("status", status)
                 .append("createUser", createUser)
                 .append("createAt", createAt)

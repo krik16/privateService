@@ -96,5 +96,10 @@ public interface ICooperationMallService {
 	 * @throws Exception
 	 */
 	public MallEntity getMallEntityByMongoId(String mallId) throws Exception;
+	
+	/**
+	 * 通过摩店用户id查询该用户关联商场的MongoId
+	 */
+	public String getMallMidByUserId(Integer userId) throws Exception;
 
 }

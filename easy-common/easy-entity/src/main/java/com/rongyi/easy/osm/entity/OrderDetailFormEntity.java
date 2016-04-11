@@ -1,5 +1,7 @@
 package com.rongyi.easy.osm.entity;
 
+import com.rongyi.easy.mcmc.vo.CommodityVO;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -92,6 +94,9 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
     private BigDecimal rebateAmount;//discount_amount-红包抵扣券
 
     private BigDecimal scoreAmount;//rebate_amount - 积分
+
+    private Integer limitNum;//关联商品的限购数
+    private Integer activityType;//商品活动 闪购1、特卖2、秒杀3
 
 
     public String getRefundDiscountInfo() {
@@ -476,6 +481,26 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
         this.scoreAmount = scoreAmount;
     }
 
+    public Integer getLimitNum()
+    {
+        return limitNum;
+    }
+
+    public void setLimitNum(Integer limitNum)
+    {
+        this.limitNum = limitNum;
+    }
+
+    public Integer getActivityType()
+    {
+        return activityType;
+    }
+
+    public void setActivityType(Integer activityType)
+    {
+        this.activityType = activityType;
+    }
+
     @Override
 	public String toString() {
 		return "OrderDetailFormEntity [id=" + id + ", orderItemNo=" + orderItemNo + ", orderNo=" + orderNo + ", commodityMid="
@@ -488,6 +513,8 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
                 ", discountAmount=" + discountAmount +
                 ", rebateAmount=" + rebateAmount +
                 ", scoreAmount=" + scoreAmount +
+                ", limitNum=" + limitNum +
+                ", activityType=" + activityType +
                 " ]";
 	}
 
