@@ -3,12 +3,10 @@ package com.rongyi.rss.roa;
 import java.util.List;
 import java.util.Map;
 
-import com.rongyi.easy.coupon.entity.CouponBrand;
-import com.rongyi.easy.roa.param.ShopAreaParams;
-import com.rongyi.easy.roa.vo.ShopAreaVO;
-
 import org.bson.types.ObjectId;
 
+import com.rongyi.easy.roa.param.ShopAreaParams;
+import com.rongyi.easy.roa.vo.ShopAreaVO;
 import com.rongyi.easy.roa.vo.ShopVO;
 
 /**

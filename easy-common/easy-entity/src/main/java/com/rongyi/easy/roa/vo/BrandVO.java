@@ -1,6 +1,7 @@
 package com.rongyi.easy.roa.vo;
 
 import java.io.Serializable;
+import com.rongyi.easy.roa.entity.BrandEntity;
 /**
  * 品牌VO
  * @author Ventures
@@ -56,4 +57,21 @@ public class BrandVO implements Serializable {
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}}
+	}
+	
+	/**
+	 * 转换成BrandVO对象
+	 * @param brand		BrandPO对象
+	 * @return
+	 */
+	public BrandVO toBrandVO(BrandEntity brand) {
+		this.setCname(brand.getCname());
+		this.setDescription(brand.getDescription());
+		this.setEname(brand.getEname());
+		this.setIcon(brand.getIcon());
+		this.setId(brand.getId().toString());
+		this.setMerlog_pic(brand.getMerlog_pic());
+		this.setName(brand.getName());
+		return this;
+	}
+}
