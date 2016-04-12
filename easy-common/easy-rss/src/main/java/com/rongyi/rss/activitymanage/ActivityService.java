@@ -99,7 +99,15 @@ public interface ActivityService {
     ActivityInfo getActivityInfoById(Integer activityId);
 
 
-
+    /**
+     * 通过卡券Id查询活动信息
+     * 如果卡券被移除了
+     * @Author lijing
+     * @param couponId
+     * @param type   4是活动类型
+     * @return
+     */
+    ActivityInfo getActivityInfoByCoupon(String couponId, Integer type);
 
 
 
