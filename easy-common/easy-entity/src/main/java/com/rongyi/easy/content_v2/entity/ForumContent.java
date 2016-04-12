@@ -72,6 +72,14 @@ public class ForumContent implements Serializable {
      * 存放图片的全路径
      */
     private String picUrls;
+
+    /**
+     * 选中的图片
+     * @author wangjh7
+     * @date 2016-04-11
+     */
+    private String selectedPicUrls;
+
     /**
      * 内容管理的详情的标题
      */
@@ -178,6 +186,12 @@ public class ForumContent implements Serializable {
      * @author wangjh7
      */
     private Integer activityModuleId = 0;
+    
+    /**
+     * 活动板块设置名称
+     * @author wangjh7
+     */
+    private String activityModuleName = "";
     
     /**
      * 创建人
@@ -426,17 +440,60 @@ public class ForumContent implements Serializable {
         this.quickRemarks = quickRemarks;
     }
 
+
     @Override
-	public String toString() {
-		return "ForumContent [id=" + id + ", positionId=" + positionId + ", provId=" + provId + ", provName=" + provName
-				+ ", cityId=" + cityId + ", cityName=" + cityName + ", picUrls=" + picUrls + ", title=" + title
-				+ ", subtitle=" + subtitle + ", type=" + type + ", typeVal=" + typeVal + ", shopIds=" + shopIds
-				+ ", publishBeginAt=" + publishBeginAt + ", publishEndAt=" + publishEndAt + ", createUser=" + createUser
-				+ ", createAt=" + createAt + ", updateUser=" + updateUser + ", updateAt=" + updateAt + ", isDeleted="
-				+ isDeleted + ", status=" + status + ", buyerLive=" + buyerLive + ", iosVersion=" + iosVersion
-				+ ", androidVersion=" + androidVersion + ", quickType=" + quickType + ", quickTypeVal=" + quickTypeVal
-				+ ", bannerBackgroundPic=" + bannerBackgroundPic + ", quickCount=" + quickCount + ", quickRemarks="
-				+ quickRemarks + ", advDuration=" + advDuration + ", activityModuleId=" + activityModuleId
-				+ ", createBy=" + createBy + ", updateBy=" + updateBy + "]";
+    public String toString() {
+        return "ForumContent{" +
+                "id=" + id +
+                ", positionId=" + positionId +
+                ", provId='" + provId + '\'' +
+                ", provName='" + provName + '\'' +
+                ", cityId='" + cityId + '\'' +
+                ", cityName='" + cityName + '\'' +
+                ", picUrls='" + picUrls + '\'' +
+                ", selectedPicUrls='" + selectedPicUrls + '\'' +
+                ", title='" + title + '\'' +
+                ", subtitle='" + subtitle + '\'' +
+                ", type=" + type +
+                ", typeVal='" + typeVal + '\'' +
+                ", shopIds='" + shopIds + '\'' +
+                ", publishBeginAt=" + publishBeginAt +
+                ", publishEndAt=" + publishEndAt +
+                ", createUser='" + createUser + '\'' +
+                ", createAt=" + createAt +
+                ", updateUser='" + updateUser + '\'' +
+                ", updateAt=" + updateAt +
+                ", isDeleted=" + isDeleted +
+                ", status=" + status +
+                ", buyerLive='" + buyerLive + '\'' +
+                ", iosVersion='" + iosVersion + '\'' +
+                ", androidVersion='" + androidVersion + '\'' +
+                ", quickType='" + quickType + '\'' +
+                ", quickTypeVal='" + quickTypeVal + '\'' +
+                ", bannerBackgroundPic='" + bannerBackgroundPic + '\'' +
+                ", quickCount=" + quickCount +
+                ", quickRemarks='" + quickRemarks + '\'' +
+                ", advDuration=" + advDuration +
+                ", activityModuleId=" + activityModuleId +
+                ", activityModuleName='" + activityModuleName + '\'' +
+                ", createBy=" + createBy +
+                ", updateBy=" + updateBy +
+                '}';
+    }
+
+    public String getSelectedPicUrls() {
+        return selectedPicUrls;
+    }
+
+    public void setSelectedPicUrls(String selectedPicUrls) {
+        this.selectedPicUrls = selectedPicUrls;
+    }
+
+    public String getActivityModuleName() {
+		return activityModuleName;
+	}
+
+	public void setActivityModuleName(String activityModuleName) {
+		this.activityModuleName = activityModuleName;
 	}
 }

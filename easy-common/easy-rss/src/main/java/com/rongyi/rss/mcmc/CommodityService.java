@@ -6,10 +6,14 @@ import java.util.List;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.coupon.param.CouponCommodityParam;
 import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
+import com.rongyi.easy.malllife.param.user.SearchCommodityParms;
 import com.rongyi.easy.mcmc.*;
 import com.rongyi.easy.mcmc.param.SaleParam;
 import com.rongyi.easy.mcmc.vo.*;
+
 import com.rongyi.easy.solr.McmcCommodityDocument;
+import com.rongyi.easy.roa.param.SearchCommodityBrandParam;
+import com.rongyi.easy.roa.param.SearchCommodityCategoryParam;
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
@@ -136,13 +140,26 @@ public interface CommodityService {
     public McmcCommodityDocument getMmcmcCommodityDocumentById(String commodityId) throws Exception;
 
     public long getCommodityCount();
-    
     /**
 	 * 获取有商品的分类列表 （新）
 	 * @param categoryParam	参数对象
 	 * @return
 	 */
-	public ResponseResult getBuyerCommodityCategory(BuyerCategoryParam categoryParam);
+    public ResponseResult getBuyerCommodityCategory(BuyerCategoryParam categoryParam);
+
+    /**
+     * 根据商场获取品类列表(有商品的品类列表)
+     * @param categoryParam		商场搜索品类列表参数对象
+     * @return
+     */
+    public ResponseVO getCommodityCategorysByMall(SearchCommodityCategoryParam categoryParam);
+
+    /**
+     * 根据商场获取品牌列表(有商品的品牌列表)
+     * @param brandParam	商场搜索品牌列表参数对象
+     * @return
+     */
+    public ResponseVO getBrandsByMall(SearchCommodityBrandParam brandParam);
 
     /**
      * 删除商品
@@ -182,4 +199,6 @@ public interface CommodityService {
      * @return
      */
     public List<CommodityCategory> selectCategory(int type,boolean isPopular);
+
+    public PagingVO<Commodity> findCommdityList(SearchCommodityParms searchCommodityParms);
 }

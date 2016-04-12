@@ -14,6 +14,30 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  */
 public class ContentInfoVO implements Serializable{
 	
+	public Integer getAdvDuration() {
+		return advDuration;
+	}
+
+	public void setAdvDuration(Integer advDuration) {
+		this.advDuration = advDuration;
+	}
+
+	public Integer getActivityModuleId() {
+		return activityModuleId;
+	}
+
+	public void setActivityModuleId(Integer activityModuleId) {
+		this.activityModuleId = activityModuleId;
+	}
+
+	public String getActivityModuleName() {
+		return activityModuleName;
+	}
+
+	public void setActivityModuleName(String activityModuleName) {
+		this.activityModuleName = activityModuleName;
+	}
+
 	/** 主键id*/
     private Integer id;
 
@@ -28,6 +52,13 @@ public class ContentInfoVO implements Serializable{
     private String picName;
 	/**banner背景图片*/
 	private String bannerBackgroundPic;
+
+	/**
+	 * 选中的图片
+	 * @author wangjh7
+	 * @date 2016-04-11
+	 */
+	private String selectedPicUrls;
     /**内容管理的详情的标题*/
     private String title;
     /**活动的子标题*/
@@ -63,6 +94,24 @@ public class ContentInfoVO implements Serializable{
      * 位置id
      */
     private Integer positionId;
+    
+    /**
+     * 广告播放时长
+     * @author wangjh7
+     */
+    private Integer advDuration =0;
+    
+    /**
+     * 活动板块设置ID
+     * @author wangjh7
+     */
+    private Integer activityModuleId = 0;
+    
+    /**
+     * 活动板块设置名称
+     * @author wangjh7
+     */
+    private String activityModuleName = "";
     
 
 	public Integer getId() {
@@ -255,32 +304,44 @@ public class ContentInfoVO implements Serializable{
 		this.positionId = positionId;
 	}
 
+	public String getSelectedPicUrls() {
+		return selectedPicUrls;
+	}
+
+	public void setSelectedPicUrls(String selectedPicUrls) {
+		this.selectedPicUrls = selectedPicUrls;
+	}
+
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this)
-				.append("id", id)
-				.append("provName", provName)
-				.append("provId", provId)
-				.append("cityName", cityName)
-				.append("cityId", cityId)
-				.append("picName", picName)
-				.append("bannerBackgroundPic", bannerBackgroundPic)
-				.append("title", title)
-				.append("subtitle", subtitle)
-				.append("modelName", modelName)
-				.append("type", type)
-				.append("typeVal", typeVal)
-				.append("typeName", typeName)
-				.append("shopIds", shopIds)
-				.append("shopNames", shopNames)
-				.append("publishBeginAt", publishBeginAt)
-				.append("publishEndAt", publishEndAt)
-				.append("createUser", createUser)
-				.append("createAt", createAt)
-				.append("updateUser", updateUser)
-				.append("updateAt", updateAt)
-				.append("status", status)
-				.append("positionId", positionId)
-				.toString();
+		return "ContentInfoVO{" +
+				"id=" + id +
+				", provName='" + provName + '\'' +
+				", provId='" + provId + '\'' +
+				", cityName='" + cityName + '\'' +
+				", cityId='" + cityId + '\'' +
+				", picName='" + picName + '\'' +
+				", bannerBackgroundPic='" + bannerBackgroundPic + '\'' +
+				", selectedPicUrls='" + selectedPicUrls + '\'' +
+				", title='" + title + '\'' +
+				", subtitle='" + subtitle + '\'' +
+				", modelName='" + modelName + '\'' +
+				", type=" + type +
+				", typeVal='" + typeVal + '\'' +
+				", typeName='" + typeName + '\'' +
+				", shopIds='" + shopIds + '\'' +
+				", shopNames='" + shopNames + '\'' +
+				", publishBeginAt=" + publishBeginAt +
+				", publishEndAt=" + publishEndAt +
+				", createUser='" + createUser + '\'' +
+				", createAt=" + createAt +
+				", updateUser='" + updateUser + '\'' +
+				", updateAt=" + updateAt +
+				", status=" + status +
+				", positionId=" + positionId +
+				", advDuration=" + advDuration +
+				", activityModuleId=" + activityModuleId +
+				", activityModuleName='" + activityModuleName + '\'' +
+				'}';
 	}
 }

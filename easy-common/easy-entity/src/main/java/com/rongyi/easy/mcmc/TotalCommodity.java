@@ -1,12 +1,15 @@
 package com.rongyi.easy.mcmc;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
+import org.springframework.util.Assert;
 
 @Entity(value="mcmc_total_commodity",noClassnameStored=true)
 public class TotalCommodity implements  Serializable,Cloneable{
@@ -39,7 +42,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	
 	//private Integer distribution;//配送方式 1表示到店自提2快递3表示支持两种方式
 	private Integer freight;//1表示商家承担运费,0表示买家承担运费
-	private Integer terminalType;//上架终端：1.表示容易逛2.表示互动屏3.表示容易逛和互动屏4.表示微商5.微商,容易逛6.微商,互动屏7.容易逛, 互动屏, 微商(转换成二进制数个位1有容易逛第二位1有 互动屏第三位1有 微商)
+	private Integer terminalType;//上架终端：com.rongyi.easy.mcmc.constant.CommodityTerminalType常量定义
 	private Date registerAt;//上架时间
 	private Date soldOutAt;//下架时间
 	private Integer source;//来源
@@ -63,8 +66,13 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 	private List<String> skus;//规格sku集合
 
+	private Integer purchaseCount;//商品的限购数量
+	private String weAndTeStatus;//商品在终端机与App上的隐藏与显示  1表示APP端展示，2表示微信端展示，3表示都展示，4表示都不展示
+
 	private Integer templateId;//邮费模版id
 	private boolean goodsSec = true;//正品保障
+
+	private Double discount; // 折扣
 
 	public ObjectId getId() {
 		return id;
@@ -344,6 +352,22 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.skus = skus;
 	}
 
+	public Integer getPurchaseCount() {
+		return purchaseCount==null || purchaseCount < 0 ? 0:purchaseCount;
+	}
+
+	public void setPurchaseCount(Integer purchaseCount) {
+		this.purchaseCount = purchaseCount;
+	}
+
+	public String getWeAndTeStatus() {
+		return StringUtils.isBlank(weAndTeStatus)?"3":weAndTeStatus;
+	}
+
+	public void setWeAndTeStatus(String weAndTeStatus) {
+		this.weAndTeStatus = weAndTeStatus;
+	}
+
 	public Integer getTemplateId() {
 		return templateId;
 	}
@@ -359,5 +383,25 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	public void setGoodsSec(boolean goodsSec) {
 		this.goodsSec = goodsSec;
 	}
-	
+
+	public Double getDiscount() {
+		try {
+			if(StringUtils.isNotBlank(this.currentPrice) && StringUtils.isNotBlank(this.originalPrice)) {
+				NumberFormat ddf1 = NumberFormat.getNumberInstance() ;
+				ddf1.setMaximumFractionDigits(2);
+				Double currentPrice = Double.valueOf(this.currentPrice);
+				Double originalPrice = Double.valueOf(this.originalPrice);
+
+				return (originalPrice == 0) ? 10.0 : Double.valueOf(ddf1.format(currentPrice / originalPrice)) * 10;
+			}
+			return 10.0;
+		} catch(Exception e) {
+			throw new RuntimeException(e.getMessage());
+		}
+	}
+
+	public void setDiscount(Double discount) {
+		this.discount = discount;
+	}
+
 }

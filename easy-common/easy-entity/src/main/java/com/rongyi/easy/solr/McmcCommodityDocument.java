@@ -83,14 +83,19 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private Integer sortPosition;
 	@Field("flashSortPosition")
 	private Integer flashSortPosition;
+	@Field("terminalType")
+	private Integer terminalType;// com.rongyi.easy.mcmc.constant.CommodityTerminalType常量定义
 	@Field("systemNumber")
 	private String systemNumber;
 	@Field("discount")
 	private Double discount;
+	@Field("weAndTeStatus")
+	private String weAndTeStatus;
 
 	public Double getPrice() {
 		return price;
 	}
+
 	public void setPrice(Double price) {
 		this.price = price;
 	}
@@ -240,6 +245,8 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.commodityCode = doc.getFieldValue("commodityCode").toString();
 		this.commodityShopId = doc.getFieldValue("commodityShopId").toString();
 		this.commodityNameSubdiv = doc.getFieldValue("commodityNameSubdiv").toString();
+		this.saleId=(Integer)doc.getFieldValue("saleId");
+		this.flashSaleId=(Integer)doc.getFieldValue("flashSaleId");
 	}
 	public String getId() {
 		return id;
@@ -380,11 +387,27 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.flashSortPosition = flashSortPosition;
 	}
 
+	public Integer getTerminalType() {
+		return terminalType;
+	}
+
+	public void setTerminalType(Integer terminalType) {
+		this.terminalType = terminalType;
+	}
+
 	public String getSystemNumber() {
 		return systemNumber;
 	}
 
 	public void setSystemNumber(String systemNumber) {
 		this.systemNumber = systemNumber;
+	}
+
+	public String getWeAndTeStatus() {
+		return weAndTeStatus;
+	}
+
+	public void setWeAndTeStatus(String weAndTeStatus) {
+		this.weAndTeStatus = weAndTeStatus;
 	}
 }

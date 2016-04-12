@@ -6,6 +6,8 @@ import java.util.Map;
 
 import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.mcmc.param.ActivityCommodityParam;
+import com.rongyi.easy.roa.param.SearchCommodityBrandParam;
+import com.rongyi.easy.roa.param.SearchCommodityCategoryParam;
 import com.rongyi.easy.solr.result.CommoditySolrResult;
 import org.bson.types.ObjectId;
 
@@ -112,6 +114,15 @@ public interface McmcCommoditySolrService {
 
 	public boolean updateCommoditySecKill(String commodityId,String secKillSign);
 
+	/**
+	 * 搜索品牌列表
+	 * @param brandParam	搜索参数
+	 * @return
+	 */
+	public Map<String, Object> searchBrands(SearchCommodityBrandParam brandParam);
+
+	public Map<String, Object> searchCategorys(SearchCommodityCategoryParam categoryParam);
+
 	public boolean updateCommoditySecKill(List<String> commodityIds, String secKillSign);
 
 //	/**
@@ -138,5 +149,20 @@ public interface McmcCommoditySolrService {
 	public boolean updateCommodityDiscount(String id, Double discount);
 
 //	public boolean updateCommoditySale(String commodityId, Integer sortPosition);
+	public boolean updateCommodityWeAndTeStatus(String commodityId, String  weAndTeStatus);
+
+	/**
+	 * 更新solr商品终端数据
+	 * @param commodityId	商品ID
+	 * @param terminalType	终端
+	 * @return
+	 */
+	public boolean updateCommodityTerminalType(String commodityId, Integer terminalType,String weAndTeStatus);
+
+	public boolean cleanSolrByIds(List<String> ids);
+
+	public boolean updateCommoditySaleByIds(List<String> ids, Integer saleId, Date activityStartTime, Date activityEndTime, List<ActivityCommodityParam> commodityParams,Integer type);
+
+	public boolean cleanSolrByIdsForFlashSale(List<String> ids);
 
 }
