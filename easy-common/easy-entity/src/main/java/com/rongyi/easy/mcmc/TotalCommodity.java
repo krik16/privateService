@@ -386,15 +386,15 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 	public Double getDiscount() {
 		try {
-			Assert.notNull(this.currentPrice);
-			Assert.notNull(this.originalPrice);
+			if(StringUtils.isNotBlank(this.currentPrice) && StringUtils.isNotBlank(this.originalPrice)) {
+				NumberFormat ddf1 = NumberFormat.getNumberInstance() ;
+				ddf1.setMaximumFractionDigits(2);
+				Double currentPrice = Double.valueOf(this.currentPrice);
+				Double originalPrice = Double.valueOf(this.originalPrice);
 
-			NumberFormat ddf1 = NumberFormat.getNumberInstance() ;
-			ddf1.setMaximumFractionDigits(2);
-			Double currentPrice = Double.valueOf(this.currentPrice);
-			Double originalPrice = Double.valueOf(this.originalPrice);
-
-			return Double.valueOf(ddf1.format(currentPrice / originalPrice)) * 10;
+				return (originalPrice == 0) ? 10.0 : Double.valueOf(ddf1.format(currentPrice / originalPrice)) * 10;
+			}
+			return 10.0;
 		} catch(Exception e) {
 			throw new RuntimeException(e.getMessage());
 		}
