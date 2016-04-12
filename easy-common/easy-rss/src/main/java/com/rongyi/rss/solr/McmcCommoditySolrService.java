@@ -94,9 +94,9 @@ public interface McmcCommoditySolrService {
 
 	public boolean updateCommoditySale(Integer shopId, Integer saleId, Date activityStartTime, Date activityEndTime, List<ActivityCommodityParam> commodityParams);
 
-	public boolean cleanCommoditySale(Integer saleId);
+	public boolean cleanCommoditySale(Integer saleId,List<String> ids, Date activityStartTime, Date activityEndTime, List<ActivityCommodityParam> commodityParams);
 
-	public boolean cleanCommodityFlashSale(Integer flashSaleId);
+	public boolean cleanCommodityFlashSale(Integer flashSaleId,List<String> ids, Date activityStartTime, Date activityEndTime, List<ActivityCommodityParam> commodityParams);
 
 	public boolean updateCommodityFlashSale(String commodityId, Integer sortPosition, Integer flashSaleId, Date activityStartTime, Date activityEndTime);
 
@@ -159,8 +159,10 @@ public interface McmcCommoditySolrService {
 	 */
 	public boolean updateCommodityTerminalType(String commodityId, Integer terminalType,String weAndTeStatus);
 
-	public boolean cleanSolrByIds(List<String> ids,Integer type);
+	public boolean cleanSolrByIds(List<String> ids);
 
 	public boolean updateCommoditySaleByIds(List<String> ids, Integer saleId, Date activityStartTime, Date activityEndTime, List<ActivityCommodityParam> commodityParams,Integer type);
+
+	public boolean cleanSolrByIdsForFlashSale(List<String> ids);
 
 }

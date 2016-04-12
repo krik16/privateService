@@ -245,6 +245,8 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.commodityCode = doc.getFieldValue("commodityCode").toString();
 		this.commodityShopId = doc.getFieldValue("commodityShopId").toString();
 		this.commodityNameSubdiv = doc.getFieldValue("commodityNameSubdiv").toString();
+		this.saleId=(Integer)doc.getFieldValue("saleId");
+		this.flashSaleId=(Integer)doc.getFieldValue("flashSaleId");
 	}
 	public String getId() {
 		return id;

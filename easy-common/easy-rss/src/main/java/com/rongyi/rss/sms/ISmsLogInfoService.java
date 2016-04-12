@@ -33,5 +33,16 @@ public interface ISmsLogInfoService {
      */
   public Integer getCount(String phone,int prodectType,int module)throws Exception;
 
+    /**
+     * @param smsLogInfoDto
+      *  taskID 发送任务ID
+     *  finalResult 反馈最终状态 success faild
+     *   channel  发送渠道 1创世华信,2建周 3未来
+     *   receiveTime 时间
+     *   phone 发送手机号码
+     * @throws Exception
+     */
+  public void updateFinalResult(SmsLogInfoDto smsLogInfoDto) throws Exception;
+
 
 }
