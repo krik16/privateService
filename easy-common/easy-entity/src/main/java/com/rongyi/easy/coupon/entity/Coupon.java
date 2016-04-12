@@ -363,6 +363,19 @@ public class Coupon implements Serializable {
      */
     private List<CouponCommodityCategory> couponCommodityCategories;
 
+    /**
+     * 活动券关联表中，券的状态
+     */
+    private Integer activityStatus;
+
+    public Integer getActivityStatus() {
+        return activityStatus;
+    }
+
+    public void setActivityStatus(Integer activityStatus) {
+        this.activityStatus = activityStatus;
+    }
+
     public String getId() {
         return id;
     }
@@ -1015,6 +1028,7 @@ public class Coupon implements Serializable {
                 .append("listCouponVouchers", listCouponVouchers)
                 .append("couponCommodityCategories", couponCommodityCategories)
                 .append("couponBrands", couponBrands)
+                .append("activityStatus", activityStatus)
                 .toString();
     }
 
