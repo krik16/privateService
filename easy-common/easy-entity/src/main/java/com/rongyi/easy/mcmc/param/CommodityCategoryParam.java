@@ -25,7 +25,7 @@ public class CommodityCategoryParam {
 
 	private List<String> ids;//分类id集合
 
-	private boolean isPopular=false;//是否是热门分类 true表示热门分类
+	private boolean popular=false;//是否是热门分类 true表示热门分类
 
 	public String getId() {
 		return id;
@@ -61,10 +61,10 @@ public class CommodityCategoryParam {
 	}
 
 	public boolean isPopular() {
-		return isPopular;
+		return popular;
 	}
 
-	public void setIsPopular(boolean isPopular) {
-		this.isPopular = isPopular;
+	public void setPopular(boolean popular) {
+		this.popular = popular;
 	}
 }
