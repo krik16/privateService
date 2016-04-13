@@ -11,6 +11,9 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.springframework.util.Assert;
 
+/**
+ * 商品总表 商家后台商品对象
+ */
 @Entity(value="mcmc_total_commodity",noClassnameStored=true)
 public class TotalCommodity implements  Serializable,Cloneable{
 	
