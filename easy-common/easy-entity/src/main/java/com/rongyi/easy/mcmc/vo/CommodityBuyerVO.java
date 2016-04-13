@@ -1,12 +1,14 @@
 package com.rongyi.easy.mcmc.vo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
 import net.sf.json.JSONObject;
+
 import com.rongyi.easy.mcmc.Commodity;
+
 import org.apache.commons.lang.StringUtils;
 public class CommodityBuyerVO implements Serializable{
 	private static final long serialVersionUID = -1461107119422444629L;
@@ -39,7 +41,7 @@ public class CommodityBuyerVO implements Serializable{
 	private int isSpot;//是否现货	0 非现货 1现货
 	private String mallName;//商场名称
 	private String mallMid;//商场mongoId
-	private String goodsParam;//商品参数
+	private List<String> goodsParam;//商品参数
 	private double discount;
 	public String getActivityType() {
 		return activityType;
@@ -228,23 +230,35 @@ public class CommodityBuyerVO implements Serializable{
 		this.mallMid = mallMid;
 	}
 
-	public String getGoodsParam() {
+	public List<String> getGoodsParam() {
 
-		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("中文品牌名","爱马仕");
-		jsonObj.put("英文品牌名","Hermes");
-		jsonObj.put("标题","Hermes店");
-		jsonObj.put("货号","DA0604");
-		jsonObj.put("原价",500);
-		jsonObj.put("售价",450);
-		jsonObj.put("尺寸","S,M,L,XL");
-		jsonObj.put("颜色","红色");
-		jsonObj.put("详情",null);
-		jsonObj.put("图片",null);
-		return jsonObj.toString();
+//		JSONObject jsonObj = new JSONObject();
+//		jsonObj.put("中文品牌名","爱马仕");
+//		jsonObj.put("英文品牌名","Hermes");
+//		jsonObj.put("标题","Hermes店");
+//		jsonObj.put("货号","DA0604");
+//		jsonObj.put("原价",500);
+//		jsonObj.put("售价",450);
+//		jsonObj.put("尺寸","S,M,L,XL");
+//		jsonObj.put("颜色","红色");
+//		jsonObj.put("详情",null);
+//		jsonObj.put("图片",null);
+//		return jsonObj.toString();
+		List<String> goodParams = new ArrayList<String>();
+		goodParams.add("中文品牌名:爱马仕");
+		goodParams.add("英文品牌名:Hermes");
+		goodParams.add("标题:Hermes店");
+		goodParams.add("货号:DA0604");
+		goodParams.add("原价:500");
+		goodParams.add("售价:450");
+		goodParams.add("尺寸:S,M,L,XL");
+		goodParams.add("颜色:红色");
+		goodParams.add("详情:商品参数");
+		goodParams.add("图片:");
+		return goodParams;
 	}
-
-	public void setGoodsParam(String goodsParam) {
+	
+	public void setGoodsParam(List<String> goodsParam) {
 		this.goodsParam = goodsParam;
 	}
 
