@@ -373,9 +373,6 @@ public class Commodity implements  Serializable,Cloneable{
 	public Double getDiscount() {
 		try {
 			if(StringUtils.isNotBlank(this.currentPrice) && StringUtils.isNotBlank(this.originalPrice)) {
-				NumberFormat ddf1 = NumberFormat.getNumberInstance();
-				ddf1.setMaximumFractionDigits(2);
-
 				BigDecimal currentPrice = new BigDecimal(this.currentPrice);
 				BigDecimal originalPrice = new BigDecimal(this.originalPrice);
 				if (originalPrice.compareTo(new BigDecimal(0)) != 0)
