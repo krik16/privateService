@@ -28,6 +28,8 @@ public class OrderFormVO extends OrderFormEntity implements Serializable{
      */
     private String commoditySpecMid;
 
+    private Double unitPrice;
+
     public Byte getPayChannel() {
         return payChannel;
     }
@@ -66,5 +68,13 @@ public class OrderFormVO extends OrderFormEntity implements Serializable{
 
     public void setCommoditySpecMid(String commoditySpecMid) {
         this.commoditySpecMid = commoditySpecMid;
+    }
+
+    public Double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(Double unitPrice) {
+        this.unitPrice = unitPrice;
     }
 }

@@ -1,8 +1,11 @@
 package com.rongyi.easy.rmmm.vo;
 
+import com.rongyi.easy.mcmc.vo.CommoditySpecColumnVO;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class OrderManagerVO implements Serializable {
 
@@ -56,7 +59,15 @@ public class OrderManagerVO implements Serializable {
 	 * 商品名称
 	 */
 	private String commodityName;
+	/**
+	 * 商品编码
+	 */
+	private String commodityNo;
 
+	/**
+	 * 规格
+	 */
+	private List<CommoditySpecColumnVO> CommoditySpecColumnList;
 	public String getOrderCartNo() {
 		return orderCartNo;
 	}
@@ -236,6 +247,22 @@ public class OrderManagerVO implements Serializable {
 
 	public void setCommodityName(String commodityName) {
 		this.commodityName = commodityName;
+	}
+
+	public List<CommoditySpecColumnVO> getCommoditySpecColumnList() {
+		return CommoditySpecColumnList;
+	}
+
+	public void setCommoditySpecColumnList(List<CommoditySpecColumnVO> commoditySpecColumnList) {
+		CommoditySpecColumnList = commoditySpecColumnList;
+	}
+
+	public String getCommodityNo() {
+		return commodityNo;
+	}
+
+	public void setCommodityNo(String commodityNo) {
+		this.commodityNo = commodityNo;
 	}
 
 	@Override
