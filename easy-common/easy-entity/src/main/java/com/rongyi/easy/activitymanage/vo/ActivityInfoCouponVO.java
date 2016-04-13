@@ -88,6 +88,8 @@ public class ActivityInfoCouponVO implements Serializable {
      */
     private Integer version;
 
+    private Integer activityGoodsId;
+
 
 
     /**
@@ -289,30 +291,40 @@ public class ActivityInfoCouponVO implements Serializable {
         this.joinCount = joinCount;
     }
 
+    public Integer getActivityGoodsId() {
+        return activityGoodsId;
+    }
+
+    public void setActivityGoodsId(Integer activityGoodsId) {
+        this.activityGoodsId = activityGoodsId;
+    }
+
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", id)
-                .append("name", name)
-                .append("startAt", startAt)
-                .append("endAt", endAt)
-                .append("type", type)
-                .append("synTarget", synTarget)
-                .append("status", status)
-                .append("publishChannel", publishChannel)
-                .append("createUser", createUser)
-                .append("createAt", createAt)
-                .append("updateUser", updateUser)
-                .append("updateAt", updateAt)
-                .append("isDeleted", isDeleted)
-                .append("version", version)
-                .append("enrollStartAt", enrollStartAt)
-                .append("enrollEndAt", enrollEndAt)
-                .append("createBy", createBy)
-                .append("relevanceId", relevanceId)
-                .append("relevanceType", relevanceType)
-                .append("applyStatus", applyStatus)
-                .append("joinCount", joinCount)
-                .toString();
+        final StringBuffer sb = new StringBuffer("ActivityInfoCouponVO{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", startAt=").append(startAt);
+        sb.append(", endAt=").append(endAt);
+        sb.append(", type=").append(type);
+        sb.append(", synTarget='").append(synTarget).append('\'');
+        sb.append(", status=").append(status);
+        sb.append(", publishChannel=").append(publishChannel);
+        sb.append(", createUser='").append(createUser).append('\'');
+        sb.append(", createAt=").append(createAt);
+        sb.append(", updateUser='").append(updateUser).append('\'');
+        sb.append(", updateAt=").append(updateAt);
+        sb.append(", isDeleted=").append(isDeleted);
+        sb.append(", version=").append(version);
+        sb.append(", activityGoodsId=").append(activityGoodsId);
+        sb.append(", enrollStartAt=").append(enrollStartAt);
+        sb.append(", enrollEndAt=").append(enrollEndAt);
+        sb.append(", createBy='").append(createBy).append('\'');
+        sb.append(", relevanceId='").append(relevanceId).append('\'');
+        sb.append(", relevanceType=").append(relevanceType);
+        sb.append(", applyStatus=").append(applyStatus);
+        sb.append(", joinCount=").append(joinCount);
+        sb.append('}');
+        return sb.toString();
     }
 }
