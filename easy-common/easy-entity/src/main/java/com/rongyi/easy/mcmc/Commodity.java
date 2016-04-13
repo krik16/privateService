@@ -373,27 +373,29 @@ public class Commodity implements  Serializable,Cloneable{
 	public Double getDiscount() {
 		try {
 			if(StringUtils.isNotBlank(this.currentPrice) && StringUtils.isNotBlank(this.originalPrice)) {
+				NumberFormat ddf1 = NumberFormat.getNumberInstance();
+				ddf1.setMaximumFractionDigits(2);
+
+				BigDecimal currentPrice = new BigDecimal(this.currentPrice);
+				BigDecimal originalPrice = new BigDecimal(this.originalPrice);
+				if (originalPrice.compareTo(new BigDecimal(0)) != 0)
+					return currentPrice.divide(originalPrice, 2, BigDecimal.ROUND_HALF_UP)
+							.multiply(new BigDecimal(10)).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+				return new BigDecimal(0).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+			}
+			/*if(StringUtils.isNotBlank(this.currentPrice) && StringUtils.isNotBlank(this.originalPrice)) {
 				NumberFormat ddf1 = NumberFormat.getNumberInstance() ;
 				ddf1.setMaximumFractionDigits(2);
 				Double currentPrice = Double.valueOf(this.currentPrice);
 				Double originalPrice = Double.valueOf(this.originalPrice);
 
-				BigDecimal currentPrice=new BigDecimal(this.currentPrice);
-				BigDecimal originalPrice=new BigDecimal(this.originalPrice);
-				if(originalPrice.compareTo(new BigDecimal(0))!=0)
-					return currentPrice.divide(originalPrice, 2, BigDecimal.ROUND_HALF_UP)
-							.multiply(new BigDecimal(10)).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
-				return new BigDecimal(0).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
-
-			/*NumberFormat ddf1 = NumberFormat.getNumberInstance() ;
-			ddf1.setMaximumFractionDigits(2);
-			Double currentPrice = Double.valueOf(this.currentPrice);
-			Double originalPrice = Double.valueOf(this.originalPrice);
-
-			return Double.valueOf(ddf1.format(currentPrice / originalPrice)) * 10;*/
+				return (originalPrice == 0) ? 10.0 : Double.valueOf(ddf1.format(currentPrice / originalPrice)) * 10;
+			}*/
+			return 10.0;
 		} catch(Exception e) {
 			throw new RuntimeException(e.getMessage());
 		}
+
 	}
 
 	public void setDiscount(Double discount) {
