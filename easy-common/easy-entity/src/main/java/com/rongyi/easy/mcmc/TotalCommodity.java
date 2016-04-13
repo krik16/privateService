@@ -41,6 +41,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private List<String> picList;//商品图片列表
 	
 	private List<ObjectId> categoryIds;//商品所属的品类列表
+	private List<String> customCategory;//自定义分类
 	
 	//private Integer distribution;//配送方式 1表示到店自提2快递3表示支持两种方式
 	private Integer freight;//1表示商家承担运费,0表示买家承担运费
@@ -187,7 +188,14 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	public void setCategoryIds(List<ObjectId> categoryIds) {
 		this.categoryIds = categoryIds;
 	}
-
+	
+	public List<String> getCustomCategory() {
+		return customCategory;
+	}
+	
+	public void setCustomCategory(List<String> customCategory) {
+		this.customCategory = customCategory;
+	}
 	/*public Integer getDistribution() {
 		return distribution;
 	}
