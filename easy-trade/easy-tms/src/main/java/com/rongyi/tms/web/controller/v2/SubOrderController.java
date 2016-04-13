@@ -95,7 +95,11 @@ public class SubOrderController extends BaseController {
             List<OrderManagerVO> orderForms = pagingVO.getDataList();
             for(OrderManagerVO orderManagerVO : orderForms){
                 CommodityVO commodityVO = commodityService.getCommoditySpecInfoById(orderManagerVO.getCommodityMid(), orderManagerVO.getCommoditySpecMid());
-                orderManagerVO.setCommodityName(commodityVO.getCommodityName());
+                if(commodityVO != null) {
+                    orderManagerVO.setCommodityName(commodityVO.getCommodityName());
+                    orderManagerVO.setCommoditySpecColumnList(commodityVO.getCommoditySpecList().get(0).getSpecColumnValues());
+                    orderManagerVO.setCommodityNo(commodityVO.getCommodityCode());
+                }
             }
             int totalPage = pagingVO.getTotalPage();
             int currentPage = pagingVO.getCurrentPage();
@@ -109,14 +113,12 @@ public class SubOrderController extends BaseController {
     }
 
     @RequestMapping("/detail")
-    public ResponseData detail(String orderId) {
-        LOGGER.info("子订单详情:orderId={}", orderId);
+    @ResponseBody
+    public ResponseData detail(Integer id) {
+        LOGGER.info("子订单详情:id={}", id);
         ResponseData responseData;
         try {
-            if (StringUtils.isBlank(orderId)) {
-                throw new RuntimeException("orderId is null or empty");
-            }
-            ParentOrderVO orderDetailVo = iOrderQueryService.searchRYOrderDetail(Integer.valueOf(orderId));
+            ParentOrderVO orderDetailVo = iOrderQueryService.searchRYOrderDetail(id);
             List<SonOrderVO> sonOrderList = orderDetailVo.getSonOrderList();
             BigDecimal discountTotal = new BigDecimal("0.00");//总卡券信息（包含抵扣券）
             discountTotal = discountTotal.add(orderDetailVo.getCouponDiscount()).add(orderDetailVo.getOrderCouponDiscount());//抵扣信息
@@ -216,7 +218,8 @@ public class SubOrderController extends BaseController {
      * 商品详情
      */
     @RequestMapping(value = "/commodityDetail")
-    public ResponseData commodityDetail(ModelMap model, String commodityId) {
+    @ResponseBody
+    public ResponseData commodityDetail(String commodityId) {
         LOGGER.info("商品详情:commodityId={}", commodityId);
         ResponseData responseData;
         try {
@@ -239,7 +242,6 @@ public class SubOrderController extends BaseController {
             }
 
             List<String[]> columnValues = commodityService.listSpecColumnValues(commodityId);
-            model.addAttribute("columnValues", columnValues);
             commodityDetailVO.setColumnValues(columnValues);
             responseData = ResponseData.success(commodityDetailVO);
         } catch (Exception e) {
