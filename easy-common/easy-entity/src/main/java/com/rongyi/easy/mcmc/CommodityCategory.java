@@ -5,11 +5,12 @@ import java.util.List;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.bson.types.ObjectId;
-
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
+
+import com.rongyi.easy.malllife.param.MalllifeBaseParam;
 @Entity(value="mcmc_commodity_category",noClassnameStored=true)
-public class CommodityCategory  implements java.io.Serializable{
+public class CommodityCategory extends MalllifeBaseParam  implements java.io.Serializable{
 
 	/**
 	 * 

@@ -94,9 +94,9 @@ public interface McmcCommoditySolrService {
 
 	public boolean updateCommoditySale(Integer shopId, Integer saleId, Date activityStartTime, Date activityEndTime, List<ActivityCommodityParam> commodityParams);
 
-	public boolean cleanCommoditySale(Integer saleId);
+	public boolean cleanCommoditySale(Integer saleId,List<String> ids, Date activityStartTime, Date activityEndTime, List<ActivityCommodityParam> commodityParams);
 
-	public boolean cleanCommodityFlashSale(Integer flashSaleId);
+	public boolean cleanCommodityFlashSale(Integer flashSaleId,List<String> ids, Date activityStartTime, Date activityEndTime, List<ActivityCommodityParam> commodityParams);
 
 	public boolean updateCommodityFlashSale(String commodityId, Integer sortPosition, Integer flashSaleId, Date activityStartTime, Date activityEndTime);
 
