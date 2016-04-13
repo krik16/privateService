@@ -71,6 +71,9 @@ public class SmsConfig implements Serializable{
     public abstract class PRODUCT_TYPE {
         public static final int MALL_SHOP=1;//摩店
         public static final  int MALL_LIFE=2;//容易逛
+        public static final  int TOB_NOTICE=3;//To_业务 通知类
+        public static final  int TOB_MARKETING=4;//To_业务 营销
+
     }
 
 
@@ -85,6 +88,8 @@ public class SmsConfig implements Serializable{
         public static final  int LOGIN=3;
         public static final  int BINDING=4;
         public static final  int DEALMSM=5;
+        public static final  int TONOTICE=6;//B端通知类短信
+        public static final  int TOBMARKTING=7;//B端营销短信
     }
 
     /**
@@ -100,6 +105,12 @@ public class SmsConfig implements Serializable{
 
 
 
+    //短信发送结果
+    public abstract class SEND_REPORT {
+        public static final String SUCCESS="Success";//成功
+        public static final  String FAILD="Faild";//失败
+        public static final  String LIMIT_MSG="Limit";//发送超出限制
+    }
 
 
 

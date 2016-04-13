@@ -52,6 +52,7 @@ public class SmsLogInfoDto implements Serializable{
     /**发送批次任务ID**/
     private String taskID;
 
+    private String finalResult;
 
     /**
      * 主键
@@ -83,6 +84,15 @@ public class SmsLogInfoDto implements Serializable{
      */
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+
+    public String getFinalResult() {
+        return finalResult;
+    }
+
+    public void setFinalResult(String finalResult) {
+        this.finalResult = finalResult;
     }
 
     /**

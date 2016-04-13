@@ -372,15 +372,18 @@ public class Commodity implements  Serializable,Cloneable{
 
 	public Double getDiscount() {
 		try {
-			Assert.notNull(this.currentPrice);
-			Assert.notNull(this.originalPrice);
+			if(StringUtils.isNotBlank(this.currentPrice) && StringUtils.isNotBlank(this.originalPrice)) {
+				NumberFormat ddf1 = NumberFormat.getNumberInstance() ;
+				ddf1.setMaximumFractionDigits(2);
+				Double currentPrice = Double.valueOf(this.currentPrice);
+				Double originalPrice = Double.valueOf(this.originalPrice);
 
-			BigDecimal currentPrice=new BigDecimal(this.currentPrice);
-			BigDecimal originalPrice=new BigDecimal(this.originalPrice);
-			if(originalPrice.compareTo(new BigDecimal(0))!=0)
-				return currentPrice.divide(originalPrice, 2, BigDecimal.ROUND_HALF_UP)
-						.multiply(new BigDecimal(10)).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
-			return new BigDecimal(0).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
+				BigDecimal currentPrice=new BigDecimal(this.currentPrice);
+				BigDecimal originalPrice=new BigDecimal(this.originalPrice);
+				if(originalPrice.compareTo(new BigDecimal(0))!=0)
+					return currentPrice.divide(originalPrice, 2, BigDecimal.ROUND_HALF_UP)
+							.multiply(new BigDecimal(10)).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
+				return new BigDecimal(0).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
 
 			/*NumberFormat ddf1 = NumberFormat.getNumberInstance() ;
 			ddf1.setMaximumFractionDigits(2);

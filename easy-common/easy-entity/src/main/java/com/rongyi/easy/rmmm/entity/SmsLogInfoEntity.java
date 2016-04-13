@@ -44,6 +44,9 @@ public class SmsLogInfoEntity implements Serializable{
     /**发送批次任务ID**/
     private String taskID;
 
+    /** 最终返回信息的状态 **/
+    private String finalResult;
+
 
     /**
      * 主键
@@ -203,5 +206,13 @@ public class SmsLogInfoEntity implements Serializable{
 
     public void setTaskID(String taskID) {
         this.taskID = taskID;
+    }
+
+    public String getFinalResult() {
+        return finalResult;
+    }
+
+    public void setFinalResult(String finalResult) {
+        this.finalResult = finalResult;
     }
 }
