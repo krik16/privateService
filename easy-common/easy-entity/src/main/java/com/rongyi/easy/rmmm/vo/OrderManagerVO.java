@@ -38,6 +38,25 @@ public class OrderManagerVO implements Serializable {
 	private BigDecimal integralAmount;//积分抵扣
 	private Integer orderSource;//订单来源
 
+
+	/**
+	 * 商品编码
+	 */
+	private String commodityMid;
+	/**
+	 * 购买数量
+	 */
+	private Integer quantity;
+	/**
+	 * 商品规格id
+	 */
+	private String commoditySpecMid;
+
+	/**
+	 * 商品名称
+	 */
+	private String commodityName;
+
 	public String getOrderCartNo() {
 		return orderCartNo;
 	}
@@ -186,6 +205,39 @@ public class OrderManagerVO implements Serializable {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+
+	public String getCommodityMid() {
+		return commodityMid;
+	}
+
+	public void setCommodityMid(String commodityMid) {
+		this.commodityMid = commodityMid;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+
+	public String getCommoditySpecMid() {
+		return commoditySpecMid;
+	}
+
+	public void setCommoditySpecMid(String commoditySpecMid) {
+		this.commoditySpecMid = commoditySpecMid;
+	}
+
+	public String getCommodityName() {
+		return commodityName;
+	}
+
+	public void setCommodityName(String commodityName) {
+		this.commodityName = commodityName;
+	}
+
 	@Override
 	public String toString() {
 		return "OrderManagerVO [orderNo=" + orderNo + ", orderId=" + orderId
