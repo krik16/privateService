@@ -3,6 +3,7 @@ package com.rongyi.rss.mallshop.user;
 import com.rongyi.easy.rmmm.entity.RmmmUserInfoEntity;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Description:推送摩店查询接口
@@ -15,6 +16,8 @@ public interface ROAPushShopUserService {
     public List<RmmmUserInfoEntity> findByShopMid(String shopMid, List<Integer> identities);
 
     public List<RmmmUserInfoEntity> findAllUsers(Integer type);
+    
+    public List<RmmmUserInfoEntity> selectByUserBuyerParam(Map<String, Object> param);
 
     /**
      *
