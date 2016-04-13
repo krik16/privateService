@@ -256,4 +256,12 @@ public interface IOrderQueryService {
 	 * @throws Exception
 	 */
 	public DetailListVO getMyDealCommissionDetail(String orderNo) throws Exception;
+
+	/**
+	 * 运营后台子订单列表(tms v2版本使用)
+	 * @param paramsMap
+	 * @return
+	 * @throws Exception
+	 */
+	PagingVO<OrderManagerVO> searchSubListByMap(Map<String, Object> paramsMap) throws Exception;
 }
