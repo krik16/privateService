@@ -109,7 +109,7 @@ public class MessageManger {
      * @param mallName 验证码
      * @return
      */
-    public String sendValidSmsMessage(String phone,String message,String content,String mallName,String title,String time,String balance,String checkNum) {
+    /*public String sendValidSmsMessage(String phone,String message,String content,String mallName,String title,String time,String balance,String checkNum) {
 
         SmsEntity xmlentity=new SmsEntity();
         String xml=null;
@@ -157,9 +157,9 @@ public class MessageManger {
 
 
 
-    }
+    }*/
   //发送短信
-    public StringBuffer SendValidMessage(String mobile,String content,String mallName,String title,String time,String balance,String checkNum)
+   /* public StringBuffer SendValidMessage(String mobile,String content,String mallName,String title,String time,String balance,String checkNum)
     {
 
         BufferedReader br=null;
@@ -203,24 +203,24 @@ public class MessageManger {
     }
 
 
-    /**
+    *//**
      * 发送短信
      * 建周短信通道
      * @param phone :手机号
      * @param message :短信内容
-     */
+     *//*
     public static String sendJianZhouSmsMessage(String phone, String message) {
         BusinessService bs = new BusinessService();
         bs.setWebService("http://www.jianzhou.sh.cn/JianzhouSMSWSServer/services/BusinessService");
         int temp=bs.sendBatchMessage("sdk_rongyi", "5410017144996", phone, message);
         return temp+"";
     }
-    /**
+    *//**
      * 发送短信
-     * @param phone
-     * @param message
+     * @param
+     * @param
      * @return
-     */
+     *//*
     public String sendSmsMessage(String phone, String message) {
     	logger.info("--------------------------------->");
     	logger.info("-----进入短信通道----->");
@@ -396,7 +396,7 @@ public class MessageManger {
         return xe;
     }
 
-
+*/
 
 
 
