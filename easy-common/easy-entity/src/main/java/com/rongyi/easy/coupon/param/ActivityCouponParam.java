@@ -34,12 +34,12 @@ public class ActivityCouponParam implements Serializable{
     /**
      * 原价
      */
-    private Integer origPrice;
+    private Double origPrice;
 
     /**
      * 优惠价
      */
-    private Integer currPrice;
+    private Double currPrice;
 
     private Date publishStartAt;
 
@@ -121,19 +121,19 @@ public class ActivityCouponParam implements Serializable{
         this.joinCount = joinCount;
     }
 
-    public Integer getOrigPrice() {
+    public Double getOrigPrice() {
         return origPrice;
     }
 
-    public void setOrigPrice(Integer origPrice) {
+    public void setOrigPrice(Double origPrice) {
         this.origPrice = origPrice;
     }
 
-    public Integer getCurrPrice() {
+    public Double getCurrPrice() {
         return currPrice;
     }
 
-    public void setCurrPrice(Integer currPrice) {
+    public void setCurrPrice(Double currPrice) {
         this.currPrice = currPrice;
     }
 
