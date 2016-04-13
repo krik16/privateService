@@ -28,6 +28,7 @@ import com.rongyi.rss.mallshop.shop.ROAShopService;
 import com.rongyi.rss.solr.McmcCommoditySolrService;
 import com.rongyi.rss.tradecenter.osm.IOrderCartService;
 import com.rongyi.rss.tradecenter.osm.IOrderQueryService;
+import com.rongyi.tms.Exception.PermissionException;
 import com.rongyi.tms.constants.Constant;
 import com.rongyi.tms.constants.ConstantEnum;
 import com.rongyi.tms.excel.ExportOsmOrderExcel;
@@ -63,7 +64,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/v2/cartOrder")
-public class CartOrderController extends BaseController {
+public class CartOrderController extends BaseControllerV2 {
     private static final Logger LOGGER = LoggerFactory.getLogger(CartOrderController.class);
 
     @Autowired
@@ -81,16 +82,21 @@ public class CartOrderController extends BaseController {
 
     @RequestMapping("/list")
     @ResponseBody
-    public ResponseData list(@RequestBody Map<String, Object> paramsMap) {
+    public ResponseData list(@RequestBody Map<String, Object> paramsMap,HttpServletRequest request) {
+        LOGGER.info("母订单列表:parramsMap={}",paramsMap);
         ResponseData responseData;
         try {
-            LOGGER.info("母订单列表:parramsMap={}",paramsMap);
+            permissionCheck(request,"");
             warpToParamMap(paramsMap);
             PagingVO<OrderCartFormVO> page = iOrderCartService.searchListByMap(paramsMap);
             int currPage = paramsMap.containsKey("currentPage") ? Integer.valueOf(paramsMap.get("currentPage").toString()) : 1;
             List<ParentOrderCartVO> orderCartVOs = convertToOrderCart(page.getDataList());
             responseData = ResponseData.success(orderCartVOs, currPage, Constant.PAGE.PAGESIZE, page.getTotalPage());
-        } catch (Exception e) {
+        } catch (PermissionException e){
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+            return ResponseData.failure(Integer.valueOf(e.getCode()), e.getMessage());
+        }catch (Exception e) {
             responseData = ResponseData.failure(ConstantEnum.LIST_QUERY_EXCEPTION.getCodeInt(), ConstantEnum.LIST_QUERY_EXCEPTION.getValueStr());
             e.printStackTrace();
             LOGGER.error("母订单查询失败,message={}", e);
@@ -130,13 +136,17 @@ public class CartOrderController extends BaseController {
     @RequestMapping("/exportExcel")
     @ResponseBody
     public void exportOsmOrder(@RequestBody Map<String, Object> paramsMap, HttpServletResponse response, HttpServletRequest request) {
+        LOGGER.info("报表导出:paramsMap={}", paramsMap);
         try {
-            LOGGER.info("报表导出:paramsMap={}", paramsMap);
+            permissionCheck(request,"");
            warpToParamMap(paramsMap);
             if (paramsMap != null) {
                 exportOsmOrderExcel.exportExcel(request, response, paramsMap);
             }
-        } catch (Exception e) {
+        } catch (PermissionException e){
+            LOGGER.error(e.getMessage(),e);
+            e.printStackTrace();
+        }catch (Exception e) {
             e.printStackTrace();
             LOGGER.error("报表导出失败,message={}", e);
         }
@@ -148,16 +158,21 @@ public class CartOrderController extends BaseController {
     @SuppressWarnings("unchecked")
     @RequestMapping(value = "/validateExcelCount")
     @ResponseBody
-    public ResponseData validateExcelCount(@RequestBody Map<String, Object> paramsMap) {
+    public ResponseData validateExcelCount(@RequestBody Map<String, Object> paramsMap,HttpServletRequest request) {
         LOGGER.info("validateExcelCount:paramsMap={}",paramsMap);
         ResponseData responseData = ResponseData.failure(ConstantEnum.EXCEPTION_LIMIT_COUNT.getCodeInt(),ConstantEnum.EXCEPTION_LIMIT_COUNT.getValueStr());
         try {
+            permissionCheck(request,"");
            warpToParamMap(paramsMap);
             PagingVO<OrderCartFormVO> pagingVO = iOrderCartService.searchListByMap(paramsMap);
             LOGGER.info("要导出的数据总数:totalCount={}",pagingVO.getRowCnt());
             if (pagingVO != null && pagingVO.getRowCnt() <= ConstantEnum.EXCEL_LIMIT_COUNT.getCodeInt())
                 responseData = ResponseData.success();
-        } catch (Exception e) {
+        } catch (PermissionException e){
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+            return ResponseData.failure(Integer.valueOf(e.getCode()), e.getMessage());
+        }catch (Exception e) {
             e.printStackTrace();
             LOGGER.error("报表导出上限检查失败,message={}", e);
         }

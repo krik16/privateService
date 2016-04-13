@@ -17,6 +17,7 @@ import com.rongyi.rss.coupon.RoaCouponService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.rss.tradecenter.ITradeOrderService;
 import com.rongyi.rss.tradecenter.ITradeUserCodeService;
+import com.rongyi.tms.Exception.PermissionException;
 import com.rongyi.tms.constants.Constant;
 import com.rongyi.tms.constants.ConstantEnum;
 import com.rongyi.tms.moudle.vo.CouponOrderDetailVO;
@@ -33,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +48,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/v2/couponOrder")
-public class CouponOrderControllerV2 extends BaseController {
+public class CouponOrderControllerV2 extends BaseControllerV2 {
 
 	@Autowired
 	CouponOrderService couponOrderService;
@@ -71,15 +73,20 @@ public class CouponOrderControllerV2 extends BaseController {
 	 **/
 	@RequestMapping("/list")
 	@ResponseBody
-	public ResponseData list(@RequestBody Map<String, Object> paramsMap) {
+	public ResponseData list(@RequestBody Map<String, Object> paramsMap,HttpServletRequest request) {
 		LOGGER.info("优惠券订单列表:paramsMap={}",paramsMap);
 		ResponseData responseData;
 		try {
+			permissionCheck(request,"");
 			Integer currpage = Integer.valueOf(paramsMap.get("currentPage").toString());
 			List<CouponOrderVO> list = couponOrderService.selectPageList(currpage, Constant.PAGE.PAGESIZE, paramsMap);
 			Integer pageTotle = couponOrderService.selectPageListCount(paramsMap);
 			responseData = ResponseData.success(list, currpage, Constant.PAGE.PAGESIZE, pageTotle);
-		} catch (Exception e) {
+		} catch (PermissionException e){
+			LOGGER.error(e.getMessage());
+			e.printStackTrace();
+			return ResponseData.failure(Integer.valueOf(e.getCode()), e.getMessage());
+		}catch (Exception e) {
 			responseData = ResponseData.failure(ConstantEnum.LIST_QUERY_EXCEPTION.getCodeInt(), ConstantEnum.LIST_QUERY_EXCEPTION.getValueStr());
 			e.printStackTrace();
 			LOGGER.error("优惠券订单查询失败,message={}", e);
@@ -89,10 +96,11 @@ public class CouponOrderControllerV2 extends BaseController {
 
 	@RequestMapping("/info")
 	@ResponseBody
-	public ResponseData getCouponOrderInfo(Integer id) {
+	public ResponseData getCouponOrderInfo(Integer id,HttpServletRequest request) {
 		LOGGER.info("优惠券订单详情:id={}", id);
 		ResponseData responseData;
 		try{
+			permissionCheck(request,"");
 			CouponOrderDetailVO couponOrderDetailVO = new CouponOrderDetailVO();
 			CouponOrderVO couponOrderVO = couponOrderService.selectById(id);
 			BeanUtils.copyProperties(couponOrderVO, couponOrderDetailVO);
@@ -163,6 +171,10 @@ public class CouponOrderControllerV2 extends BaseController {
 			couponOrderDetailVO.setOrigTotalPrice(new BigDecimal(origTotalPrice).divide(new BigDecimal(100),BigDecimal.ROUND_HALF_UP).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue());
 			couponOrderDetailVO.setUnitTotalPrice(new BigDecimal(unitTotalPrice).divide(new BigDecimal(100),BigDecimal.ROUND_HALF_UP).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue());
 			responseData = ResponseData.success(couponOrderDetailVO);
+		}catch (PermissionException e){
+			LOGGER.error(e.getMessage());
+			e.printStackTrace();
+			return ResponseData.failure(Integer.valueOf(e.getCode()), e.getMessage());
 		}catch (Exception e){
 			responseData = ResponseData.failure(ConstantEnum.DETAIL_QUERY_EXCEPTION.getCodeInt(), ConstantEnum.DETAIL_QUERY_EXCEPTION.getValueStr());
 			e.printStackTrace();
