@@ -1,6 +1,7 @@
 package com.rongyi.easy.mcmc;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.Date;
 import java.util.List;
@@ -374,12 +375,19 @@ public class Commodity implements  Serializable,Cloneable{
 			Assert.notNull(this.currentPrice);
 			Assert.notNull(this.originalPrice);
 
-			NumberFormat ddf1 = NumberFormat.getNumberInstance() ;
+			BigDecimal currentPrice=new BigDecimal(this.currentPrice);
+			BigDecimal originalPrice=new BigDecimal(this.originalPrice);
+			if(originalPrice.compareTo(new BigDecimal(0))!=0)
+				return currentPrice.divide(originalPrice, 2, BigDecimal.ROUND_HALF_UP)
+						.multiply(new BigDecimal(10)).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
+			return new BigDecimal(0).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
+
+			/*NumberFormat ddf1 = NumberFormat.getNumberInstance() ;
 			ddf1.setMaximumFractionDigits(2);
 			Double currentPrice = Double.valueOf(this.currentPrice);
 			Double originalPrice = Double.valueOf(this.originalPrice);
 
-			return Double.valueOf(ddf1.format(currentPrice / originalPrice)) * 10;
+			return Double.valueOf(ddf1.format(currentPrice / originalPrice)) * 10;*/
 		} catch(Exception e) {
 			throw new RuntimeException(e.getMessage());
 		}
