@@ -17,7 +17,7 @@ public interface ROAPushShopUserService {
 
     public List<RmmmUserInfoEntity> findAllUsers(Integer type);
     
-    public List<RmmmUserInfoEntity> selectByUserBuyerParam(Map<String, Object> param);
+    public List<RmmmUserInfoEntity> findByUserBuyerParam(Map<String, Object> param);
 
     /**
      *
