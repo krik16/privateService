@@ -73,5 +73,9 @@
 	<dubbo:reference interface="com.rongyi.rss.ryoms.ROARyUserService" id="ryUserServiceryUserService" version="${dubbo.version}" check="false" />
 	<!-- 商家后台用户权限查询 -->
 	<dubbo:reference interface="com.rongyi.rss.roa.ROAUserInfoService" id="userInfoService" version="${dubbo.version}" check="false" />
+	<!-- 优惠券子订单查询 -->
+	<dubbo:reference interface="com.rongyi.rss.tradecenter.ITradeOrderService" id="iTradeOrderService" version="${dubbo.version}" check="false" />
+	<!-- 优惠券userCode查询 -->
+	<dubbo:reference interface="com.rongyi.rss.tradecenter.ITradeUserCodeService" id="iTradeUserCodeService" version="${dubbo.version}" check="false" />
 
 </beans>

@@ -8,10 +8,11 @@
 
 package com.rongyi.tms.moudle.vo;
 
-import java.util.List;
-
-import com.rongyi.easy.coupon.vo.TCCouponVO;
 import com.rongyi.easy.coupon.vo.UserCouponVO;
+import com.rongyi.easy.tradecenter.TradeUserCode;
+
+import java.util.Date;
+import java.util.List;
 
 /**	
  * @Author:  柯军
@@ -38,6 +39,22 @@ public class CouponOrderDetailVO extends CouponOrderVO{
 	 */
 	private List<UserCouponVO> hbList;
 
+	/**
+	 * 券面值总价
+	 */
+	private Double origTotalPrice;
+
+	/**
+	 * 券现价
+	 */
+	private Double unitTotalPrice;
+
+
+	/*
+	 *红包抵扣金额
+	 */
+	private Double hbDiscountTotalPrice;
+
 	public List<CouponVO> getCouponList() {
 		return couponList;
 	}
@@ -53,8 +70,33 @@ public class CouponOrderDetailVO extends CouponOrderVO{
 	public void setHbList(List<UserCouponVO> hbList) {
 		this.hbList = hbList;
 	}
-	
-	public class CouponVO extends TCCouponVO{
+
+
+	public Double getOrigTotalPrice() {
+		return origTotalPrice;
+	}
+
+	public void setOrigTotalPrice(Double origTotalPrice) {
+		this.origTotalPrice = origTotalPrice;
+	}
+
+	public Double getUnitTotalPrice() {
+		return unitTotalPrice;
+	}
+
+	public void setUnitTotalPrice(Double unitTotalPrice) {
+		this.unitTotalPrice = unitTotalPrice;
+	}
+
+	public Double getHbDiscountTotalPrice() {
+		return hbDiscountTotalPrice;
+	}
+
+	public void setHbDiscountTotalPrice(Double hbDiscountTotalPrice) {
+		this.hbDiscountTotalPrice = hbDiscountTotalPrice;
+	}
+
+	public class CouponVO extends TradeUserCode{
 		/**
 		 * 
 		 */
@@ -64,12 +106,71 @@ public class CouponOrderDetailVO extends CouponOrderVO{
 		 */
 		private Integer count;
 
+		private Double hbDiscount;
+
+		private Double scoreDisCount;
+
+		/**
+		 * 每张券实收金额
+		 */
+		private Double payAmount;
+
+		/**
+		 * 有效期起始时间
+		 */
+		private Date validBeginDate;
+
+		/**
+		 * 有效期结束时间
+		 */
+		private Date validEndDate;
+
 		public Integer getCount() {
 			return count;
 		}
 
 		public void setCount(Integer count) {
 			this.count = count;
+		}
+
+		public Double getHbDiscount() {
+			return hbDiscount;
+		}
+
+		public void setHbDiscount(Double hbDiscount) {
+			this.hbDiscount = hbDiscount;
+		}
+
+		public Double getScoreDisCount() {
+			return scoreDisCount;
+		}
+
+		public void setScoreDisCount(Double scoreDisCount) {
+			this.scoreDisCount = scoreDisCount;
+		}
+
+		public Double getPayAmount() {
+			return payAmount;
+		}
+
+		public void setPayAmount(Double payAmount) {
+			this.payAmount = payAmount;
+		}
+
+		public Date getValidBeginDate() {
+			return validBeginDate;
+		}
+
+		public void setValidBeginDate(Date validBeginDate) {
+			this.validBeginDate = validBeginDate;
+		}
+
+		public Date getValidEndDate() {
+			return validEndDate;
+		}
+
+		public void setValidEndDate(Date validEndDate) {
+			this.validEndDate = validEndDate;
 		}
 	}
 	

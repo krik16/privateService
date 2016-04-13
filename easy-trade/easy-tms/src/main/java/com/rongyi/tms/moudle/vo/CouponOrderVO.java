@@ -79,6 +79,16 @@ public class CouponOrderVO implements Serializable {
     private String rebateCode;
     
     private String couponId;
+
+	private Integer payChannel;
+
+	private Integer source;
+
+	private Double payAmount;
+
+	private String payNo;
+
+	private Double scoreDiscount;
     
 	public Long getId() {
 		return id;
@@ -199,5 +209,44 @@ public class CouponOrderVO implements Serializable {
 	public void setCouponId(String couponId) {
 		this.couponId = couponId;
 	}
-	
+
+	public String getPayNo() {
+		return payNo;
+	}
+
+	public void setPayNo(String payNo) {
+		this.payNo = payNo;
+	}
+
+	public Integer getPayChannel() {
+		return payChannel;
+	}
+
+	public void setPayChannel(Integer payChannel) {
+		this.payChannel = payChannel;
+	}
+
+	public Integer getSource() {
+		return source;
+	}
+
+	public void setSource(Integer source) {
+		this.source = source;
+	}
+
+	public Double getPayAmount() {
+		return payAmount;
+	}
+
+	public void setPayAmount(Double payAmount) {
+		this.payAmount = payAmount;
+	}
+
+	public Double getScoreDiscount() {
+		return scoreDiscount;
+	}
+
+	public void setScoreDiscount(Double scoreDiscount) {
+		this.scoreDiscount = scoreDiscount;
+	}
 }
