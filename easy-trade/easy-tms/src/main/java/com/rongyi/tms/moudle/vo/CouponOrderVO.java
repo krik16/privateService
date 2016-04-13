@@ -77,6 +77,11 @@ public class CouponOrderVO implements Serializable {
      * 抵扣券
      */
     private String rebateCode;
+
+	/**
+	 * 抵扣券抵扣金额
+	 */
+	private  Integer rebateDiscount;
     
     private String couponId;
 
@@ -248,5 +253,13 @@ public class CouponOrderVO implements Serializable {
 
 	public void setScoreDiscount(Double scoreDiscount) {
 		this.scoreDiscount = scoreDiscount;
+	}
+
+	public Integer getRebateDiscount() {
+		return rebateDiscount;
+	}
+
+	public void setRebateDiscount(Integer rebateDiscount) {
+		this.rebateDiscount = rebateDiscount;
 	}
 }

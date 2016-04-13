@@ -27,18 +27,6 @@ public class CouponOrderDetailVO extends CouponOrderVO{
 	 * 
 	 */
 	private static final long serialVersionUID = 6566859312021262905L;
-	
-
-	/**
-	 * 购买的优惠券列表
-	 */
-	private List<CouponVO> couponList;
-	
-	/**
-	 * 红包使用记录
-	 */
-	private List<UserCouponVO> hbList;
-
 	/**
 	 * 券面值总价
 	 */
@@ -54,6 +42,17 @@ public class CouponOrderDetailVO extends CouponOrderVO{
 	 *红包抵扣金额
 	 */
 	private Double hbDiscountTotalPrice;
+
+	/**
+	 * 购买的优惠券列表
+	 */
+	private List<CouponVO> couponList;
+	
+	/**
+	 * 红包使用记录
+	 */
+	private List<UserCouponVO> hbList;
+
 
 	public List<CouponVO> getCouponList() {
 		return couponList;
@@ -109,6 +108,8 @@ public class CouponOrderDetailVO extends CouponOrderVO{
 		private Double hbDiscount;
 
 		private Double scoreDisCount;
+
+		private Double rebateDisCount;
 
 		/**
 		 * 每张券实收金额
@@ -171,6 +172,14 @@ public class CouponOrderDetailVO extends CouponOrderVO{
 
 		public void setValidEndDate(Date validEndDate) {
 			this.validEndDate = validEndDate;
+		}
+
+		public Double getRebateDisCount() {
+			return rebateDisCount;
+		}
+
+		public void setRebateDisCount(Double rebateDisCount) {
+			this.rebateDisCount = rebateDisCount;
 		}
 	}
 	

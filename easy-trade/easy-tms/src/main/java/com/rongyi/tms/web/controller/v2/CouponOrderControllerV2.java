@@ -12,7 +12,9 @@ import com.rongyi.core.bean.ResponseData;
 import com.rongyi.easy.coupon.vo.TCCouponVO;
 import com.rongyi.easy.tradecenter.TradeSubOrder;
 import com.rongyi.easy.tradecenter.TradeUserCode;
+import com.rongyi.easy.usercenter.entity.MalllifeUserInfoEntity;
 import com.rongyi.rss.coupon.RoaCouponService;
+import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.rss.tradecenter.ITradeOrderService;
 import com.rongyi.rss.tradecenter.ITradeUserCodeService;
 import com.rongyi.tms.constants.Constant;
@@ -58,6 +60,9 @@ public class CouponOrderControllerV2 extends BaseController {
 	@Autowired
 	ITradeUserCodeService iTradeUserCodeService;
 
+	@Autowired
+	ROAMalllifeUserService roaMalllifeUserService;
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(CouponOrderControllerV2.class);
 
 
@@ -83,6 +88,7 @@ public class CouponOrderControllerV2 extends BaseController {
 	}
 
 	@RequestMapping("/info")
+	@ResponseBody
 	public ResponseData getCouponOrderInfo(Integer id) {
 		LOGGER.info("优惠券订单详情:id={}", id);
 		ResponseData responseData;
@@ -98,22 +104,33 @@ public class CouponOrderControllerV2 extends BaseController {
 				LOGGER.info("子订单为空");
 				return ResponseData.failure();
 			}
+			MalllifeUserInfoEntity malllifeUserInfoEntity = roaMalllifeUserService.getEntityByUid(couponOrderVO.getUserId());
+			if(malllifeUserInfoEntity != null){
+				couponOrderDetailVO.setUserPhone(malllifeUserInfoEntity.getPhone());
+				couponOrderDetailVO.setUserName(malllifeUserInfoEntity.getNickName());
+			}
 			TradeSubOrder tradeSubOrder =  subOrderList.get(0);
 			//红包抵扣总金额
 			couponOrderDetailVO.setHbDiscountTotalPrice(new BigDecimal(tradeSubOrder.getHbDiscount()).divide(new BigDecimal(100),BigDecimal.ROUND_HALF_UP).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue());
 
 			List<TradeUserCode> tradeUserCodeList = iTradeUserCodeService.findTradeUserCodeList(id, tradeSubOrder.getUnitId());
 			if(tradeUserCodeList != null && !tradeUserCodeList.isEmpty()) {
-				//红包分摊抵扣
-				BigDecimal avgHbDiscount =new BigDecimal(tradeSubOrder.getHbDiscount()).divide(new BigDecimal(tradeUserCodeList.size()),BigDecimal.ROUND_HALF_UP).setScale(0,BigDecimal.ROUND_HALF_DOWN);
+				//红包分摊抵扣(分)
+				BigDecimal avgHbDiscount =new BigDecimal(tradeSubOrder.getHbDiscount()).divide(new BigDecimal(tradeSubOrder.getUnitCount()),2,BigDecimal.ROUND_HALF_DOWN).setScale(0,BigDecimal.ROUND_HALF_DOWN);
 				//红包分摊最后剩余红包金额
-				BigDecimal lastHbDiscount = new BigDecimal(tradeSubOrder.getHbDiscount()).subtract(avgHbDiscount.multiply(new BigDecimal(tradeUserCodeList.size() - 1))).setScale(0, BigDecimal.ROUND_HALF_UP);
-				//积分分摊抵扣
-				BigDecimal avgScoreDiscount = new BigDecimal(couponOrderVO.getScoreDiscount()).divide(new BigDecimal(tradeUserCodeList.size()),BigDecimal.ROUND_HALF_UP).setScale(2, BigDecimal.ROUND_HALF_DOWN);
+				BigDecimal lastHbDiscount = new BigDecimal(tradeSubOrder.getHbDiscount()).subtract(avgHbDiscount.multiply(new BigDecimal(tradeSubOrder.getUnitCount() - 1))).setScale(0, BigDecimal.ROUND_HALF_UP);
+				//积分分摊抵扣(元)
+				BigDecimal avgScoreDiscount = new BigDecimal(couponOrderVO.getScoreDiscount()).divide(new BigDecimal(tradeSubOrder.getUnitCount()), 2, BigDecimal.ROUND_HALF_DOWN).setScale(2, BigDecimal.ROUND_HALF_DOWN);
 				//积分分摊最后剩余积分
-				BigDecimal lastScoreDiscount = new BigDecimal(couponOrderVO.getScoreDiscount()).subtract(avgScoreDiscount.multiply(new BigDecimal(tradeUserCodeList.size() - 1))).setScale(2,BigDecimal.ROUND_HALF_UP);
-				//实际支付金额分摊(不存在分摊不均的情况)
-				BigDecimal avgPayAmount = new BigDecimal(couponOrderVO.getPayAmount()).divide(new BigDecimal(tradeUserCodeList.size()),BigDecimal.ROUND_HALF_UP).setScale(0,BigDecimal.ROUND_HALF_UP);
+				BigDecimal lastScoreDiscount = new BigDecimal(couponOrderVO.getScoreDiscount()).subtract(avgScoreDiscount.multiply(new BigDecimal(tradeSubOrder.getUnitCount() - 1))).setScale(2,BigDecimal.ROUND_HALF_UP);
+				//抵扣券分摊抵扣(元)
+				BigDecimal avgRebateDiscount =new BigDecimal(couponOrderVO.getRebateDiscount()).divide(new BigDecimal(tradeSubOrder.getUnitCount()), 2, BigDecimal.ROUND_HALF_DOWN).setScale(2,BigDecimal.ROUND_HALF_DOWN);
+				//抵扣券分摊最后剩余抵扣
+				BigDecimal lastRebateDiscount = new BigDecimal(couponOrderVO.getRebateDiscount()).subtract(avgRebateDiscount.multiply(new BigDecimal(tradeSubOrder.getUnitCount() - 1))).setScale(2, BigDecimal.ROUND_HALF_UP);
+
+				//实际支付金额分摊(元)
+				BigDecimal avgPayAmount = new BigDecimal(couponOrderVO.getTotalAmount()).divide(new BigDecimal(tradeSubOrder.getUnitCount()),2,BigDecimal.ROUND_HALF_UP).setScale(2,BigDecimal.ROUND_HALF_UP);
+
 
 				//有效期
 				TCCouponVO tCCouponVO = roaCouponService.findTCCouponById(tradeSubOrder.getUnitId());
@@ -124,20 +141,25 @@ public class CouponOrderControllerV2 extends BaseController {
 					CouponVO couponVO = couponOrderDetailVO.new CouponVO();
 					BeanUtils.copyProperties(tradeUserCode, couponVO);
 //					couponVO.setTitle(tradeSubOrder.getUnitName());
-					couponVO.setHbDiscount(avgHbDiscount.divide(new BigDecimal(100),BigDecimal.ROUND_HALF_UP).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue());
+					couponVO.setHbDiscount(avgHbDiscount.divide(new BigDecimal(100),2,BigDecimal.ROUND_HALF_UP).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue());
+					couponVO.setRebateDisCount(avgRebateDiscount.doubleValue());
 					couponVO.setScoreDisCount(avgScoreDiscount.doubleValue());
-					couponVO.setPayAmount(avgPayAmount.subtract(avgHbDiscount.divide(new BigDecimal(100),BigDecimal.ROUND_HALF_UP).subtract(avgScoreDiscount).setScale(2,BigDecimal.ROUND_HALF_UP)).doubleValue());
+					couponVO.setPayAmount(avgPayAmount.subtract(avgRebateDiscount).subtract(avgScoreDiscount).subtract(avgHbDiscount.divide(new BigDecimal(100),2,BigDecimal.ROUND_HALF_UP)).doubleValue());
 					couponVO.setValidBeginDate(tCCouponVO.getValidBeginDate());
 					couponVO.setValidEndDate(tCCouponVO.getValidEndDate());
 					couponVOList.add(couponVO);
 				}
+				//最后一笔券获得剩余优惠
 				if(couponVOList.size() > 1){
-					couponVOList.get(couponVOList.size()-1).setHbDiscount(lastHbDiscount.divide(new BigDecimal(100),BigDecimal.ROUND_HALF_UP).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue());
+					couponVOList.get(couponVOList.size()-1).setHbDiscount(lastHbDiscount.divide(new BigDecimal(100),2,BigDecimal.ROUND_HALF_UP).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue());
+					couponVOList.get(couponVOList.size() -1).setRebateDisCount(lastRebateDiscount.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
 					couponVOList.get(couponVOList.size()-1).setScoreDisCount(lastScoreDiscount.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue());
-					couponVOList.get(couponVOList.size()-1).setPayAmount(avgPayAmount.subtract(lastHbDiscount.divide(new BigDecimal(100),BigDecimal.ROUND_HALF_UP)).subtract(lastScoreDiscount).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue());
+					//最后一笔实际支付金额=平均支付金额-(最后一笔红包优惠)-(最后一笔抵扣券优惠)-(最后一笔积分优惠)
+					couponVOList.get(couponVOList.size() -1).setPayAmount(avgPayAmount.subtract(lastHbDiscount.divide(new BigDecimal(100),2,BigDecimal.ROUND_HALF_UP)).subtract(lastRebateDiscount).subtract(lastScoreDiscount).doubleValue());
 				}
 
 			}
+			couponOrderDetailVO.setCouponList(couponVOList);
 			couponOrderDetailVO.setOrigTotalPrice(new BigDecimal(origTotalPrice).divide(new BigDecimal(100),BigDecimal.ROUND_HALF_UP).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue());
 			couponOrderDetailVO.setUnitTotalPrice(new BigDecimal(unitTotalPrice).divide(new BigDecimal(100),BigDecimal.ROUND_HALF_UP).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue());
 			responseData = ResponseData.success(couponOrderDetailVO);

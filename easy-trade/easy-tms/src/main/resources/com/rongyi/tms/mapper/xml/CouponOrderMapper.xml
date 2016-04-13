@@ -17,6 +17,7 @@
 		<result column="hb_code" property="hbCode" jdbcType="VARCHAR" />
 		<result column="score" property="score" jdbcType="INTEGER" />
 		<result column="rebate_code" property="rebateCode" jdbcType="VARCHAR" />
+		<result column="rebate_discount" property="rebateDiscount" jdbcType="INTEGER" />
 		<result column="coupon_id" property="couponId" jdbcType="VARCHAR" />
 		<result column="pay_channel" property="payChannel" jdbcType="INTEGER" />
 		<result column="pay_amount" property="payAmount" jdbcType="DOUBLE" />
@@ -58,6 +59,7 @@
 		trade_order.hb_code,
 		trade_order.score,
 		trade_order.rebate_code,
+		ROUND(trade_order.rebate_discount/100,2) as rebate_discount,
 		trade_order.pay_channel,
 		trade_order.pay_no,
 		ROUND(trade_order.score_discount/100,2) as score_discount,
