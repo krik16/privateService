@@ -28,6 +28,7 @@ import java.util.Iterator;
  * 
  * @author jiejie 2014年6月10日 下午2:09:18
  */
+@Deprecated
 public class MessageManger {
 
 	protected Logger logger = LoggerFactory.getLogger(MessageManger.class);
