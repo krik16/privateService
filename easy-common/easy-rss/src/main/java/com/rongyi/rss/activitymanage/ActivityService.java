@@ -107,7 +107,7 @@ public interface ActivityService {
      * @param type   4是活动类型
      * @return
      */
-    ActivityInfo getActivityInfoByCoupon(String couponId, Integer type);
+    ActivityInfoCouponVO getActivityInfoByCoupon(String couponId, Integer type);
 
 
 
