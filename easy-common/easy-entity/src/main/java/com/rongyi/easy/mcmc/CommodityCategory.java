@@ -12,21 +12,20 @@ import org.mongodb.morphia.annotations.Id;
 public class CommodityCategory  implements java.io.Serializable{
 
 	/**
-	 * 
+	 * 商品分类
 	 */
 	private static final long serialVersionUID = -3491400779856182500L;
 	@Id
 	private ObjectId id;
-	private String name;
-	private String logoUrl;
-	private Date createAt;
-	private List<ObjectId> parentids;
-	private ObjectId parentid;
-	private int type;
+	private String name;//分类名
+	private String logoUrl;//图标
+	private Date createAt;//创建时间
+	private List<ObjectId> parentids;//所有父类id
+	private ObjectId parentid;//直属父类id
+	private int type;//分类级别 1 2 3
 	private List<ObjectId> columnIds;//商品分类对应的规格项id
-	private int commodityCount;
+	private int commodityCount;//该分类下属商品数量
 	private boolean isPopular=false;//是否是热门分类 true表示热门分类
-	private boolean a=true;
 	public int getCommodityCount() {
 		return commodityCount;
 	}
