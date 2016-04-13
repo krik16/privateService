@@ -33,4 +33,7 @@
 	<dubbo:reference id="rOACommodityCommissionService" interface="com.rongyi.rss.mallshop.order.ROACommodityCommissionService" version="${dubbo.version}" check="false" />
 	<!-- rpb服务接口 -->
 	<dubbo:reference interface="com.rongyi.rss.rpb.IRpbService" id="rpbService"  version="${dubbo.version}" check="false"/>
+    <!-- 短信管理 -->
+    <dubbo:reference id="iSmsSendService" interface="com.rongyi.rss.sms.ISmsSendService" version="${dubbo.version}" check="false"/>
+
 </beans>

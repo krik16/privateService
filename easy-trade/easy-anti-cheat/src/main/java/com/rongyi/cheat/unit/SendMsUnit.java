@@ -5,6 +5,7 @@ import com.rongyi.cheat.util.SmsUtil;
 import com.rongyi.easy.cheat.AccountBlacklist;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -18,6 +19,8 @@ import java.util.List;
 public class SendMsUnit {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SendMsUnit.class);
+    @Autowired
+    SmsUtil smsUtil;
 
     public void sendBlackListMs(List<AccountBlacklist> mailWranList, Date startTime, Date endTime) {
         LOGGER.info("发送黑名单通知短信,startTime={},endTime={}",startTime,endTime);
@@ -28,7 +31,7 @@ public class SendMsUnit {
             if (accountBlacklist.getCount() >= Integer.valueOf(Constant.BLACKLIST_CONFIG.FREEZE_COUNT)) {
                 otherMessage = "此账号支付购买次数超出自动冻结上限,系统自动冻结该账号。";
             }
-            SmsUtil.sendMoreMsMessage(phones.split(","), accountBlacklist.getCount(), accountBlacklist.getPayAccount(), payType, startTime, endTime, otherMessage);
+            smsUtil.sendMoreMsMessage(phones.split(","), accountBlacklist.getCount(), accountBlacklist.getPayAccount(), payType, startTime, endTime, otherMessage);
         } 
     }
 

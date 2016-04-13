@@ -1,14 +1,15 @@
 package com.rongyi.cheat.service;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.rongyi.cheat.BaseTest;
+import com.rongyi.cheat.util.SmsUtil;
+import com.rongyi.core.common.util.DateUtil;
+import com.rongyi.easy.cheat.AccountBlacklist;
+import com.rongyi.rss.cheat.IAntiCheatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
 
-import com.rongyi.cheat.BaseTest;
-import com.rongyi.easy.cheat.AccountBlacklist;
-import com.rongyi.rss.cheat.IAntiCheatService;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AccountBlackListServiceImplTest extends BaseTest {
 
@@ -17,6 +18,9 @@ public class AccountBlackListServiceImplTest extends BaseTest {
 
 	@Autowired
 	IAntiCheatService iAntiCheatService;
+
+	@Autowired
+	SmsUtil smsUtil;
 
 	 @Test
 //	@Rollback(false)
@@ -44,7 +48,12 @@ public class AccountBlackListServiceImplTest extends BaseTest {
 	
 //	@Test
 	public void testUpdateForzenAccount(){
-		Map<String,Object> map = blackRollService.updateFrozenAccount(new String[]{"41"},(byte)0);
+		Map<String,Object> map = blackRollService.updateFrozenAccount(new String[]{"41"}, (byte) 0);
 		System.err.println(map.get("success"));
+	}
+
+	@Test
+	public  void test(){
+		smsUtil.sendMsMessage("13564452580", 10, "1234567", "支付宝", DateUtil.getCurrDateTime(), DateUtil.getCurrDateTime(),"test");
 	}
 }
