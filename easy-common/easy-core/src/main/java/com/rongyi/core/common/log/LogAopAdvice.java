@@ -14,8 +14,6 @@ import java.util.UUID;
  * @author yujisun
  * @date 2015/7/30
  */
-@Component
-@Aspect
 public class LogAopAdvice
 {
     public void logIdInit() {
@@ -25,8 +23,8 @@ public class LogAopAdvice
         }
         if(StringUtils.isBlank(logId)){
             logId = UUID.randomUUID().toString().substring(1,16);
+            MDC.put("logid",logId);
         }
-        MDC.put("logid",logId);
         RpcContext.getContext().setAttachment("logid", logId);
     }
 
