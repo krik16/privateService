@@ -32,7 +32,17 @@ public class VirtualAccountQuerySumVO {
 	 * 总优惠券佣金收入
 	 */
 	private BigDecimal couponCommissionSum;
-	
+
+	/**
+	 * 推广返佣收入
+	 */
+	private BigDecimal expandCommissionTotal;
+
+	/**
+	 * 首单返佣收入
+	 */
+	private BigDecimal firstCommissionTotal;
+
 	/** 总奖金收入 */
 	private BigDecimal bonusSum;
 	
@@ -117,4 +127,19 @@ public class VirtualAccountQuerySumVO {
 		this.couponCommissionSum = couponCommissionSum;
 	}
 
+	public BigDecimal getExpandCommissionTotal() {
+		return expandCommissionTotal;
+	}
+
+	public void setExpandCommissionTotal(BigDecimal expandCommissionTotal) {
+		this.expandCommissionTotal = expandCommissionTotal;
+	}
+
+	public BigDecimal getFirstCommissionTotal() {
+		return firstCommissionTotal;
+	}
+
+	public void setFirstCommissionTotal(BigDecimal firstCommissionTotal) {
+		this.firstCommissionTotal = firstCommissionTotal;
+	}
 }

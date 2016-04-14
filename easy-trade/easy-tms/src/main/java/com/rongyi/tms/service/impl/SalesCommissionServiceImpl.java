@@ -9,20 +9,6 @@
  */
 package com.rongyi.tms.service.impl;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.core.constant.Constants;
@@ -39,15 +25,19 @@ import com.rongyi.rss.gcc.RmmmSettingsService;
 import com.rongyi.rss.malllife.roa.ROARedisService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.tms.constants.Constant;
-import com.rongyi.tms.moudle.vo.BonusPageParam;
-import com.rongyi.tms.moudle.vo.CheckParam;
-import com.rongyi.tms.moudle.vo.CommissionAmountTotalVO;
-import com.rongyi.tms.moudle.vo.CommissionInfoVO;
-import com.rongyi.tms.moudle.vo.MQCommissionParam;
+import com.rongyi.tms.moudle.vo.*;
 import com.rongyi.tms.mq.Sender;
 import com.rongyi.tms.service.SalesCommissionAuditLogService;
 import com.rongyi.tms.service.SalesCommissionService;
 import com.rongyi.tms.util.ValidateUtil;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.*;
 
 /**
  * @author ZhengYl
@@ -143,12 +133,12 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 			if (bodyMap != null) {
 				MQCommissionParam mqCommissionParam = MQCommissionParam.mapToEntity(bodyMap);
 
-				// �?查数据库中是否有此订单的记录（因小票上传而产生）
+				// 查数据库中是否有此订单的记录（因小票上传而产生）
 				SalesCommission salesCommission = selectByOrderNo(mqCommissionParam.getOrderNo());
 				if (salesCommission == null)
 					salesCommission = new SalesCommission();
 
-				// 传入的佣金数�?
+				// 传入的佣金数
 				salesCommission.setCommissionAmount(mqCommissionParam.getCommissionAmount());
 				salesCommission.setGuideId(mqCommissionParam.getGuideId());
 				salesCommission.setOrderNo(mqCommissionParam.getOrderNo());

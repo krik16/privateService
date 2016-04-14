@@ -13,10 +13,10 @@
 	
 	<bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
-		<property name="driverClass" value="${jdbc.driver}" />
-		<property name="jdbcUrl" value="${jdbc.url}" />
-		<property name="user" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" />
+		<property name="driverClass" value="${ry_rpb.jdbc.driver}" />
+		<property name="jdbcUrl" value="${ry_rpb.jdbc.url}" />
+		<property name="user" value="${ry_rpb.jdbc.username}" />
+		<property name="password" value="${ry_rpb.jdbc.password}" />
 		<property name="initialPoolSize" value="10" />
 		<property name="acquireIncrement" value="1" />
 		<property name="maxPoolSize" value="50" />

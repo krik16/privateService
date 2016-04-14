@@ -1,26 +1,11 @@
 /**
- * @Copyright (C),上海容易网电子商务有限公司	
- * @Author: 柯军 
+ * @Copyright (C), 上海容易网电子商务有限公司
+ * @Author: 柯军
  * @datetime:2015年5月11日下午3:26:58
  * @Description: TODO
- *
  **/
 
 package com.rongyi.tms.service.impl;
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.common.util.DateUtil;
@@ -48,6 +33,14 @@ import com.rongyi.tms.mq.Sender;
 import com.rongyi.tms.service.DrawApplyService;
 import com.rongyi.tms.service.DrawVerifyLogService;
 import com.rongyi.tms.util.ValidateUtil;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.util.*;
 
 /**
  * @Author: 柯军
@@ -70,7 +63,7 @@ public class DrawApplyServiceImpl extends BaseServiceImpl implements DrawApplySe
 
     @Autowired
     private DrawVerifyLogService drawVerifyLogService;
-    
+
     @Autowired
     Sender sender;
 
@@ -227,7 +220,7 @@ public class DrawApplyServiceImpl extends BaseServiceImpl implements DrawApplySe
                     VirtualAccountDetailEntity virtualAccountDetailEntity = new VirtualAccountDetailEntity();
                     virtualAccountDetailEntity.setUserId(apply.getDrawUserId());
                     virtualAccountDetailEntity.setSign(1); // 提现审核失败时，金额返还账号，故符号为正
-                    virtualAccountDetailEntity.setAmount(new BigDecimal(apply.getDrawAmount()!=null?apply.getDrawAmount().toString():null));
+                    virtualAccountDetailEntity.setAmount(new BigDecimal(apply.getDrawAmount() != null ? apply.getDrawAmount().toString() : null));
                     virtualAccountDetailEntity.setApplicationNo(apply.getDrawNo());
                     virtualAccountDetailEntity.setItemType(VirtualAccountEventType.DRAW);
                     bodyMap.put("detail", virtualAccountDetailEntity);
@@ -278,18 +271,25 @@ public class DrawApplyServiceImpl extends BaseServiceImpl implements DrawApplySe
     public DrawApplyListVO selectDrawApplyList(Map<String, Object> params) {
         int pageStart = (int) params.get("currentPage") * (int) params.get("pageSize");
         params.put("pageStart", pageStart);
-        
+
         int totalSize = this.getBaseDao().selectOneBySql(INTEGRAL_COMM_NAMESPACE_DRAWAPPLY + ".selectDrawApplyByPageCount", params);
         int totalPage = totalSize % (int) params.get("pageSize") == 0 ? totalSize / (int) params.get("pageSize") : (totalSize / (int) params.get("pageSize") + 1);
-      
+
         List<DrawApply> list = this.getBaseDao().selectListBySql(
                 INTEGRAL_COMM_NAMESPACE_DRAWAPPLY + ".selectDrawApplyByPage", params);
         List<DrawApplyDetailVO> detailList = new ArrayList<DrawApplyDetailVO>();
         for (DrawApply drawApply : list) {
             DrawApplyDetailVO vo = new DrawApplyDetailVO();
+            vo.setId(drawApply.getId());
             vo.setCreateAt(drawApply.getCreateAt());
             vo.setDrawAmount(new BigDecimal(drawApply.getDrawAmount()));
             vo.setDrawApplyAccount(drawApply.getPayAccount());
+            if (drawApply.getPayType() == 0) {
+                //TODO 因为暂时只有支付宝一种提款方式，以后增加了银行卡或者其他的途径后这里要改 by erliang mallshop v1.8.0
+                vo.setPayAccountType("支付宝");
+            } else {
+                vo.setPayAccountType("其他");
+            }
             vo.setStatus(drawApply.getStatus());
             detailList.add(vo);
         }

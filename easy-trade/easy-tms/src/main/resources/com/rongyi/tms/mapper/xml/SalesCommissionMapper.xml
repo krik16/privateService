@@ -187,7 +187,7 @@
 
 		from
 		<include refid="View_From" />
-		where commission_amount is not null and
+		where commission_amount is not null and config_id = 0 and
 		sales_commission.status in
 		<foreach collection="status" index="index" item="item" open="("
 			separator="," close=")">
@@ -236,6 +236,7 @@
 				#{item}
 			</foreach>
 		</if>
+		and config_id = 0
 		order by sales_commission.create_at desc
 		limit
 		#{begin,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
@@ -258,7 +259,7 @@
 		from
 		<include refid="View_From" />
 		where commission_amount is
-		not null and sales_commission.status in
+		not null and config_id = 0 and  sales_commission.status in
 		<foreach collection="status" index="index" item="item" open="("
 			separator="," close=")">
 			#{item}
@@ -297,6 +298,7 @@
 		<if test="amountEnd != null and amountEnd !=0">
 			and commission_amount &lt;= #{amountEnd,jdbcType=DECIMAL}
 		</if>
+		and config_id = 0
 		<if test="vaStatus != null and vaStatus != ''">
 			and sales_commission.status in
 			<foreach collection="vaStatus" index="index" item="item"
@@ -336,6 +338,7 @@
 			separator="," close=")">
 			#{item}
 		</foreach>
+		and config_id = 0
 		order by sales_commission.create_at desc
 		limit
 		#{start,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
@@ -573,7 +576,7 @@
 				guide_type = #{guideType,jdbcType=INTEGER},
 			</if>
 		</set>
-		where order_no = #{orderNo,jdbcType=VARCHAR}
+		where order_no = #{orderNo,jdbcType=VARCHAR} and config_id = 0
 	</update>
 	<update id="batchUpdate" parameterMap="checkMap" statementType="CALLABLE">
 		<!-- update sales_commission set status =case id <foreach collection="ids" 
@@ -670,7 +673,7 @@
 	<select id="selectByOrderNo" resultMap="ResultMapWithBLOBs"
 		parameterType="java.util.Map">
 		select * from sales_commission where order_no =
-		#{orderNo};
+		#{orderNo}  and config_id = 0;
 	</select>
 
 	<select id="selectCommissionInfoByUserId" resultMap="CommissionInfo"
@@ -678,7 +681,8 @@
 		SELECT guide_id,
 		SUM(CASE WHEN (
 		(`status` &gt; 0 AND
-		`status` &lt; 5 AND type IS NULL) OR (`status` = 0 AND type = 3)
+		`status` &lt; 5 AND type IS NULL AND config_id = 0) OR (`status` = 0 AND type = 3) OR (config_id > 0 AND `status` &gt; 0 AND
+		`status` &lt; 3 )
 		) THEN
 		commission_amount
 		ELSE 0 END) AS
@@ -698,7 +702,7 @@
 		select
 		guide_id,version ,SUM(commission_amount) as
 		amount_total FROM
-		sales_commission where status=3 and
+		sales_commission where status=3 and config_id = 0 and
 		guide_type=#{guideType,jdbcType=INTEGER} GROUP BY guide_id;
 	</select>
 	<select id="commissionAmountTotalByVersion" resultMap="CommissionAmountTotal"
@@ -707,7 +711,7 @@
 		guide_id,version ,SUM(commission_amount) as
 		amount_total FROM
 		sales_commission where
-		version=#{version,jdbcType=BIGINT} GROUP BY guide_id;
+		version=#{version,jdbcType=BIGINT}  and config_id = 0 GROUP BY guide_id;
 	</select>
 
 	<select id="selectFaleCommission" resultMap="FaleCommissionMonth">
@@ -737,7 +741,7 @@
 		sales_commission.`status`in (3,6) AND
 		TO_DAYS(sales_commission.create_at)=TO_DAYS(NOW())
 		AND
-		ry_osm.order_form.buyer_id=#{buyerId,jdbcType=VARCHAR} GROUP BY
+		ry_osm.order_form.buyer_id=#{buyerId,jdbcType=VARCHAR}  and config_id = 0  GROUP BY
 		sales_commission.guide_id,sales_commission.buyer_account
 	</select>
 	<update id="updateStatus" parameterType="map">

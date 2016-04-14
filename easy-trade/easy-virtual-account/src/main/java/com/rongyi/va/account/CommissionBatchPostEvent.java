@@ -9,14 +9,6 @@
  */
 package com.rongyi.va.account;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
-import net.sf.json.JSONObject;
-
-import org.springframework.context.ApplicationContext;
-
 import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.core.constant.CommissionEnum;
 import com.rongyi.core.constant.VirtualAccountEventTypeEnum;
@@ -25,12 +17,22 @@ import com.rongyi.rss.mallshop.order.ROACommodityCommissionService;
 import com.rongyi.va.constants.VirtualAccountDetailTypes;
 import com.rongyi.va.service.VirtualAccountService;
 import com.rongyi.va.vo.CommissionBatchPostVO;
+import net.sf.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * @author ZhengYl
+ * author ZhengYl
  * 
  */
 public class CommissionBatchPostEvent extends BaseEvent {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(CommissionBatchPostEvent.class);
 	/** 佣金列表 */
 	private CommissionBatchPostVO[] commissionList;
 	
@@ -38,7 +40,7 @@ public class CommissionBatchPostEvent extends BaseEvent {
 		// 调用父类分析函数
 		super.load(json);
 
-		JSONObject param = (JSONObject) getBody();
+		JSONObject param = getBody();
 
 		Object[] objList = JsonUtil.getDTOArray(param.get("detailList").toString(), CommissionBatchPostVO.class);
 
@@ -65,21 +67,31 @@ public class CommissionBatchPostEvent extends BaseEvent {
 		ROACommodityCommissionService roaCommodityCommissionService = ctx.getBean(ROACommodityCommissionService.class);
 
 		String failureList = "";
-		String eventType = null;
+		String eventType ;
+		LOGGER.info("佣金处理,commissionList={}",getCommissionList());
 		for (CommissionBatchPostVO postedCommission : this.commissionList) {
 			VirtualAccountDetailEntity detailEntity = new VirtualAccountDetailEntity();
 			detailEntity.setCreateAt(new Date());
 			detailEntity.setAmount(postedCommission.getCommissionAmount());
 			detailEntity.setUserId(postedCommission.getGuideId());
-			if(VirtualAccountEventTypeEnum.COMMISSION_BATCH_POST.getCode().equals(this.getType())){//商品佣金
+			if(VirtualAccountEventTypeEnum.COMMISSION_BATCH_POST.getCode().equals(this.getType())){
+				//商品佣金
 				detailEntity.setItemType(VirtualAccountDetailTypes.COMMISSION);
+				eventType = CommissionEnum.COMMISSION_ISSUE.getCode().toString();
+			}else if(VirtualAccountEventTypeEnum.COMMISSION_TYPE_EXPAND.getCode().equals(this.getType())){
+				//推广返佣
+				detailEntity.setItemType(VirtualAccountDetailTypes.EXTEND_COMMISSION);
+				eventType = CommissionEnum.COMMISSION_ISSUE.getCode().toString();
+			}else if(VirtualAccountEventTypeEnum.COMMISSION_TYPE_FIRST.getCode().equals(this.getType())){
+				//首单返佣
+				detailEntity.setItemType(VirtualAccountDetailTypes.FIRST_COMMISSION);
 				eventType = CommissionEnum.COMMISSION_ISSUE.getCode().toString();
 			}else{//优惠券佣金
 				detailEntity.setItemType(VirtualAccountDetailTypes.COUPON_COMMISSION);
 				eventType = CommissionEnum.COMMISSION_VALID.getCode().toString();
 			}
 			detailEntity.setSign(1);
-			int detailId = 0;
+			int detailId;
 			try {
 				detailId = virtualAccountService.updateBalance(postedCommission.getGuideId(),
 						postedCommission.getCommissionAmount(), detailEntity);
@@ -91,11 +103,14 @@ public class CommissionBatchPostEvent extends BaseEvent {
 
 			if (detailId > 0) {
 				try {
-					Map<String, String> map = new HashMap<String, String>();
+					Map<String, String> map = new HashMap<>();
 					map.put("commission", postedCommission.getCommissionAmount().toString());
 					map.put("eventType",eventType);
 					map.put("guideId", postedCommission.getGuideId());
-					roaCommodityCommissionService.sendBodyByOrderEventType(map);
+					if(!VirtualAccountEventTypeEnum.COMMISSION_TYPE_EXPAND.getCode().equals(this.getType()) && !VirtualAccountEventTypeEnum.COMMISSION_TYPE_FIRST.getCode().equals(this.getType())){
+						LOGGER.info("交易佣金到账发送消息提醒:map={}",map);
+						roaCommodityCommissionService.sendBodyByOrderEventType(map);
+					}
 				} catch (Exception e) {
 					failureList += "发送提醒事件失败, 用户Id: " + postedCommission.getGuideId() + "\r\n";
 					e.printStackTrace();

@@ -9,18 +9,6 @@
  */
 package com.rongyi.va.service.impl;
 
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
-import net.sf.json.JSONObject;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.constant.Constants;
 import com.rongyi.core.constant.VirtualAccountEventTypeEnum;
@@ -35,6 +23,16 @@ import com.rongyi.va.constants.VirtualAccountDetailTypes;
 import com.rongyi.va.mq.SpringAmqpSender;
 import com.rongyi.va.service.VirtualAccountDetailService;
 import com.rongyi.va.service.VirtualAccountService;
+import net.sf.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author ZhengYl
@@ -77,8 +75,10 @@ public class WithdrawApplyServiceImpl implements WithdrawApplyService {
 		try {
 			int permission = 0;
 			if (guideType==1) {
+				logger.info("drawApplyTimesLimit={}",drawApplyRules.getDrawApplyTimesLimit());
 				permission = virtualAccountService.validateWithdrawPermission(userId, drawAmount, drawApplyRules.getDrawApplyTimesLimit());
 			}else {
+				logger.info("maiShouDrawTimesLimit={}", drawApplyRules.getMaiShouDrawTimesLimit());
 				permission = virtualAccountService.validateWithdrawPermission(userId, drawAmount, drawApplyRules.getMaiShouDrawTimesLimit());
 			}
 			if (permission == 0) {

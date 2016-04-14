@@ -118,4 +118,5 @@ public interface DrawApplyService {
      * @return
      */
     public DrawApplyListVO selectDrawApplyList(Map<String, Object> searchValueMap);
+
 }

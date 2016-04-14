@@ -16,6 +16,18 @@ package com.rongyi.tms.constants;
  **/
 
 public enum ConstantEnum {
+    OP_MODEL_0(0, "对账单配置"),
+    OP_MODEL_1(1, "对账单"),
+    OP_MODEL_2(2, "佣金配置"),
+
+    COMMISSION_VERIFY_0(0, "佣金一级审核"),
+    COMMISSION_VERIFY_1(0, "佣金二级审核"),
+    COMMISSION_TYPE_0(0, "推广返佣"),
+    COMMISSION_TYPE_1(1, "首单返佣"),
+    COMMISSION_TYPE_2(2, "小票返佣"),
+
+    COMMISSION_REGISTER_RONGYI(1, "容易逛"),
+    COMMISSION_REGISTER_MALLSHOP(2, "摩店"),
 
     ORDER_STATUS_1("1","未付款"),
     ORDER_STATUS_2("2","待发货"),
@@ -106,6 +118,50 @@ public enum ConstantEnum {
     STATEMENT_STATUE_12(12,"已付款"),
 
     USER_TYPE_2(2,"卖家账号买手类型"),
+
+    COMMISSION_STATUS_2_UNCHECK(-2,"二审不通过"),
+    COMMISSION_STATUS_1_UNCHECK(-1,"一审不通过"),
+    COMMISSION_STATUS_0(0,"小票未上传"),
+    COMMISSION_STATUS_1(1,"待审核"),
+    COMMISSION_STATUS_2(2,"一级审核通过"),
+    COMMISSION_STATUS_3(3,"二级审核通过"),
+    COMMISSION_STATUS_4(4,"此状态未使用"),
+    COMMISSION_STATUS_5(5,"当日返佣超出限制"),
+    COMMISSION_STATUS_6(6,"佣金已到账"),
+
+    COMMISSION_CONFIG_STATUS_0(0,"待审核"),
+//    COMMISSION_CONFIG_STATUS_1(3,"审核通过"),//审核通过和启用逻辑上一致，故值定义为相同
+    COMMISSION_CONFIG_STATUS_2(2,"审核不通过"),
+    COMMISSION_CONFIG_STATUS_3(3,"启用"),
+    COMMISSION_CONFIG_STATUS_4(4,"停用"),
+
+    COMMISSION_CONFIG_TYPE_0(0,"推广返佣"),
+    COMMISSION_CONFIG_TYPE_1(1,"首单返佣"),
+    COMMISSION_CONFIG_TYPE_2(2,"小票返佣"),
+
+    COMMISSION_CONFIG_CUST_VERIFY_0(0,"系统审核"),
+    COMMISSION_CONFIG_CUST_VERIFY_1(1,"人工审核"),
+
+    SERCHER_TYPE_0(0,"客服请求"),
+    SERCHER_TYPE_1(1,"财务请求"),
+
+    REGISTER_TYPE_1(1,"容易逛"),
+    REGISTER_TYPE_2(2,"摩店买手"),
+    REGISTER_TYPE_3(3,"摩店导购"),
+    REGISTER_TYPE_4(4,"摩店全部"),
+
+    FIAL_USER_PARAMS_PAYMENT("1019401", "没有登录或登录信息错误"),//前台约定，没有登录统一后三位为401
+    FIAL_NO_AUTHORITY_PAYMENT("1019403", "没有访问该资源的权限"),//前台约定，没有权限统一后三位为403
+
+    COMMISSION_ADD_FAIL("1019201","未查找到符合的佣金规则配置，不增加佣金"),
+    COMMISSION_CONFIG_LIST_FAIL("1019202","查询佣金规则列表失败"),
+    COMMISSION_CONFIG_EXIST("1019203","此佣金规则配置已存在"),
+    COMMISSION_CONFIG_SAVE_FAIL("1019204","保存佣金规则配置失败"),
+    COMMISSION_CONFIG_VERIFY_FAIL("1019205","审核佣金规则配置失败"),
+    COMMISSION_CONFIG_FREEZE_FAIL("1019206","审核佣金规则启用/停用失败"),
+    COMMISSION_CONFIG_DETAIL_FAIL("1019207","返佣规则详情"),
+    COMMISSION_ADD_INVITE_NOT_FOUND("1019208","未找到对应的邀请人信息，不增加佣金"),
+    COMMISSION_ADD_NOT_FIRST("1019209","此笔返佣不是首笔返佣,不增加佣金"),
 
     EXCEL_LIMIT_COUNT(5000,"交易明细报表导出限制总数");
     interface ACCOUNT_STATUS{

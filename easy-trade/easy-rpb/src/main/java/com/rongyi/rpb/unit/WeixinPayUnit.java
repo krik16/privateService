@@ -38,7 +38,7 @@ public class WeixinPayUnit {
      * 2015年9月2日下午1:32:08
      **/
     public Map<String, Object> getWeXinPaySign(PaySignData paySignData) {
-        LOGGER.info("getAppWeXinSign paySignData", paySignData.toString());
+        LOGGER.info("获取微信支付签名,paySignData", paySignData.toString());
         Map<String, Object> map = new HashMap<>();
         try {
             if (Strings.isNullOrEmpty(paySignData.getPayNo()) || null == paySignData.getTotalFee() || Strings.isNullOrEmpty(paySignData.getBody()) || Strings.isNullOrEmpty(paySignData.getTimeStart())
@@ -76,6 +76,7 @@ public class WeixinPayUnit {
         } catch (WeixinException e) {
             throw e;
         } catch (Exception e) {
+            LOGGER.error("获取微信支付签名,e.getMessage={}",e.getMessage(),e);
             e.printStackTrace();
             throw new WeixinException(ConstantEnum.EXCEPTION_WEIXIN_SIGN_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_SIGN_FAIL.getValueStr());
         }
@@ -110,7 +111,8 @@ public class WeixinPayUnit {
         } catch (WeixinException e) {
             throw e;
         } catch (Exception e) {
-            LOGGER.error("weixin refund fail. exception={}", e.getMessage());
+            LOGGER.error("微信退款失败,e.getMessage={}",e.getMessage(),e);
+            e.printStackTrace();
             throw new WeixinException(ConstantEnum.EXCEPTION_WEIXIN_REFUND_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_REFUND_FAIL.getValueStr());
         }
     }
@@ -161,6 +163,7 @@ public class WeixinPayUnit {
         } catch (TradeException e) {
             throw e;
         } catch (Exception e) {
+            LOGGER.error("微信退款查询失败,e.getMessage={}",e.getMessage(),e);
             e.printStackTrace();
             throw new WeixinException(ConstantEnum.EXCEPTION_WEIXIN_REFUND_QUERY_ORDER.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_REFUND_QUERY_ORDER.getValueStr());
         }
@@ -184,6 +187,7 @@ public class WeixinPayUnit {
         } catch (WeixinException e) {
             throw e;
         } catch (Exception e) {
+            LOGGER.error("关闭订单,e.getMessage={}",e.getMessage(),e);
             e.printStackTrace();
             throw new WeixinException(ConstantEnum.EXCEPTION_WEIXIN_ORDER_CLOSE.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_ORDER_CLOSE.getValueStr());
         }
@@ -208,7 +212,7 @@ public class WeixinPayUnit {
             result = payQueryService.request(scanPayQueryReqData,configure);
             return (WeixinQueryOrderParamVO) Util.getObjectFromXML(result, WeixinQueryOrderParamVO.class);
         } catch (Exception e) {
-            LOGGER.info("微信订单查询失败，result={}", result);
+            LOGGER.error("订单查询,e.getMessage={},result={}", e.getMessage(),result,e);
             e.printStackTrace();
             throw new WeixinException(ConstantEnum.EXCEPTION_WEIXIN_QUERY_ORDER.getCodeStr(), ConstantEnum.EXCEPTION_WEIXIN_QUERY_ORDER.getValueStr());
         }

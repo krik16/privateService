@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongyi.tms.mapper.xml.v2.CommissionConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.rongyi.easy.tms.entity.v2.CommissionConfig" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="rule_code" property="ruleCode" jdbcType="VARCHAR" />
+    <result column="effect_start_time" property="effectStartTime" jdbcType="TIMESTAMP" />
+    <result column="effect_end_time" property="effectEndTime" jdbcType="TIMESTAMP" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="comm_threshold" property="commThreshold" jdbcType="INTEGER" />
+    <result column="comm_amount" property="commAmount" jdbcType="INTEGER" />
+    <result column="invite_type" property="inviteType" jdbcType="TINYINT" />
+    <result column="register_type" property="registerType" jdbcType="TINYINT" />
+    <result column="limit_type" property="limitType" jdbcType="TINYINT" />
+    <result column="limit_total" property="limitTotal" jdbcType="INTEGER" />
+    <result column="cust_verify" property="custVerify" jdbcType="TINYINT" />
+    <result column="fina_verify" property="finaVerify" jdbcType="TINYINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="upadte_at" property="updateAt" jdbcType="TIMESTAMP" />
+    <!--<result column="update_by" property="updateby" jdbcType="VARCHAR" />-->
+    <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, rule_code, effect_start_time, effect_end_time, `type`, comm_threshold, comm_amount,
+    invite_type, register_type, limit_type, limit_total, cust_verify, fina_verify, `status`,
+    create_at,create_by,update_at,update_by,is_delete
+  </sql>
+
+  <sql id="list_where_clause">
+    <if test="ruleCode != null and ruleCode != ''">
+      and rule_code = #{ruleCode}
+    </if>
+    <if test="status != null and status != ''">
+      and status = #{status,jdbcType=TINYINT}
+    </if>
+    <if test="type != null and type != ''">
+      and type = #{type,jdbcType=TINYINT}
+    </if>
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from commission_config
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from commission_config
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rongyi.easy.tms.entity.v2.CommissionConfig" useGeneratedKeys="true" keyProperty="id" >
+    insert into commission_config (rule_code, effect_start_time, effect_end_time, `
+      `type`, comm_threshold, comm_amount,
+      invite_type, register_type, limit_type,
+      limit_total, cust_verify, fina_verify,
+      `status`, create_at,create_by,update_at,update_by, is_delete
+      )
+    values (#{ruleCode,jdbcType=VARCHAR}, #{effectStartTime,jdbcType=TIMESTAMP}, #{effectEndTime,jdbcType=TIMESTAMP},
+      #{type,jdbcType=TINYINT}, #{commThreshold,jdbcType=INTEGER}, #{commAmount,jdbcType=INTEGER},
+      #{inviteType,jdbcType=TINYINT}, #{registerType,jdbcType=TINYINT}, #{limitType,jdbcType=TINYINT},
+      #{limitTotal,jdbcType=INTEGER}, #{custVerify,jdbcType=TINYINT}, #{finaVerify,jdbcType=TINYINT},
+      #{status,jdbcType=TINYINT}, #{createAt,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR},#{updateAt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR}, #{isDelete,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.rongyi.easy.tms.entity.v2.CommissionConfig" useGeneratedKeys="true" keyProperty="id" >
+    insert into commission_config
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      rule_code,
+      <if test="effectStartTime != null">
+           effect_start_time,
+      </if>
+      <if test="effectEndTime != null">
+         effect_end_time,
+      </if>
+      `type`,
+      comm_threshold,
+      comm_amount,
+      invite_type,
+      register_type,
+      limit_type,
+      limit_total,
+      cust_verify,
+      fina_verify,
+      `status`,
+      create_at,
+      create_by,
+      update_at,
+      update_by,
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{ruleCode,jdbcType=VARCHAR},
+      <if test="effectStartTime != null">
+        #{effectStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="effectEndTime != null">
+         #{effectEndTime,jdbcType=TIMESTAMP},
+      </if>
+      #{type,jdbcType=TINYINT},
+      #{commThreshold,jdbcType=INTEGER},
+      #{commAmount,jdbcType=INTEGER},
+      #{inviteType,jdbcType=TINYINT},
+      #{registerType,jdbcType=TINYINT},
+      #{limitType,jdbcType=TINYINT},
+      #{limitTotal,jdbcType=INTEGER},
+      #{custVerify,jdbcType=TINYINT},
+      #{finaVerify,jdbcType=TINYINT},
+      #{status,jdbcType=TINYINT},
+      #{createAt,jdbcType=TIMESTAMP},
+      #{createBy,jdbcType=VARCHAR},
+      #{updateAt,jdbcType=TIMESTAMP},
+      #{updateBy,jdbcType=VARCHAR},
+      <if test="isDelete != null">
+         #{isDelete,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rongyi.easy.tms.entity.v2.CommissionConfig" >
+    update commission_config
+    <set >
+      <if test="ruleCode != null" >
+        rule_code = #{ruleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="effectStartTime != null" >
+        effect_start_time = #{effectStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="effectEndTime != null" >
+        effect_end_time = #{effectEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        `type` = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="commThreshold != null" >
+        comm_threshold = #{commThreshold,jdbcType=INTEGER},
+      </if>
+      <if test="commAmount != null" >
+        comm_amount = #{commAmount,jdbcType=INTEGER},
+      </if>
+      <if test="inviteType != null" >
+        invite_type = #{inviteType,jdbcType=TINYINT},
+      </if>
+      <if test="registerType != null" >
+        register_type = #{registerType,jdbcType=TINYINT},
+      </if>
+      <if test="limitType != null" >
+        limit_type = #{limitType,jdbcType=TINYINT},
+      </if>
+      <if test="limitTotal != null" >
+        limit_total = #{limitTotal,jdbcType=INTEGER},
+      </if>
+      <if test="custVerify != null" >
+        cust_verify = #{custVerify,jdbcType=TINYINT},
+      </if>
+      <if test="finaVerify != null" >
+        fina_verify = #{finaVerify,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        `status` = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateAt != null" >
+        update_at = #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rongyi.easy.tms.entity.v2.CommissionConfig" >
+    update commission_config
+    set rule_code = #{ruleCode,jdbcType=VARCHAR},
+      effect_start_time = #{effectStartTime,jdbcType=TIMESTAMP},
+      effect_end_time = #{effectEndTime,jdbcType=TIMESTAMP},
+      `type` = #{type,jdbcType=TINYINT},
+      comm_threshold = #{commThreshold,jdbcType=INTEGER},
+      comm_amount = #{commAmount,jdbcType=INTEGER},
+      invite_type = #{inviteType,jdbcType=TINYINT},
+      register_type = #{registerType,jdbcType=TINYINT},
+      limit_type = #{limitType,jdbcType=TINYINT},
+      limit_total = #{limitTotal,jdbcType=INTEGER},
+      cust_verify = #{custVerify,jdbcType=TINYINT},
+      fina_verify = #{finaVerify,jdbcType=TINYINT},
+      `status` = #{status,jdbcType=TINYINT},
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_at = #{updateAt,jdbcType=TIMESTAMP},
+     update_by = #{updateBy,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectPageList" resultMap="BaseResultMap"
+          parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from
+    commission_config
+    <where>
+      <include refid="list_where_clause" />
+    </where>
+    <if test="orderby != null">
+      order by ${orderby} ${orderVa}
+    </if>
+
+    <if test="orderby == null">
+      order by create_at desc
+    </if>
+    <if test="currentPage != null">
+      limit
+      #{currentPage,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+    </if>
+  </select>
+
+  <select id="selectPageCount" parameterType="java.util.Map"
+          resultType="java.lang.Integer">
+    select
+      count(1)
+    from
+    commission_config
+    <where>
+      <include refid="list_where_clause" />
+    </where>
+  </select>
+
+  <select id="selectByTypes" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from commission_config
+    where type = #{type,jdbcType=TINYINT}
+    and (invite_type = #{inviteType,jdbcType=TINYINT} or invite_type = 0)
+    <if test="registerType != null and registerType != ''">
+      and (register_type = #{registerType,jdbcType=TINYINT} or register_type = 0)
+    </if>
+    <if test="registerTypeList != null and registerTypeList != ''">
+      and register_type in
+      <foreach collection="registerTypeList" index="index" item="item"
+               open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </if>
+    and status in (1,3)
+    <!-- 时间条件暂过滤-->
+    <!--and effect_start_time &lt;= effectTime and effectTime &lt;= effect_end_time-->
+  </select>
+  <select id="validateIsExist" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from commission_config
+    where type = #{type,jdbcType=TINYINT}
+    and (invite_type = #{inviteType,jdbcType=TINYINT} or invite_type = 0)
+    <if test="registerType != null and registerType != ''">
+      and (register_type = #{registerType,jdbcType=TINYINT} or register_type = 0)
+    </if>
+    <if test="registerTypeList != null and registerTypeList != ''">
+      and register_type in
+      <foreach collection="registerTypeList" index="index" item="item"
+               open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </if>
+    and status in (1,3)
+    <!-- 时间条件暂过滤-->
+    <!--and effect_start_time &lt;= effectTime and effectTime &lt;= effect_end_time-->
+  </select>
+</mapper>
