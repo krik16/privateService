@@ -28,6 +28,7 @@ import java.util.Iterator;
  * 
  * @author jiejie 2014年6月10日 下午2:09:18
  */
+@Deprecated
 public class MessageManger {
 
 	protected Logger logger = LoggerFactory.getLogger(MessageManger.class);
@@ -52,26 +53,26 @@ public class MessageManger {
      * @param phone :手机号
      * @param message :短信内容
      */
-    public String sendBaiwutongSmsMessage(String phone, String message) {
-        NameValuePair[] params = new NameValuePair[] { new NameValuePair("corp_id", "6e1r001"),
-                new NameValuePair("corp_pwd", "6e1r001"), new NameValuePair("corp_service", "106550939yd"),//106550939yd 这个换成 10690269yd
-                new NameValuePair("mobile", phone), new NameValuePair("msg_content", message),
-                new NameValuePair("corp_msg_id", ""), new NameValuePair("ext", "86") };
-        HttpClient httpclient = new HttpClient();
-        httpclient.getHttpConnectionManager().getParams().setConnectionTimeout(10000);
-        httpclient.getHttpConnectionManager().getParams().setSoTimeout(30000);
-        GetMethod getMethod = new GetMethod(SMS_URL);
-        getMethod.setQueryString(params);
-        try {
-            httpclient.executeMethod(getMethod);
-            return getMethod.getResponseBodyAsString();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return e.getMessage();
-        } finally {
-            getMethod.releaseConnection();
-        }
-    }
+//    public String sendBaiwutongSmsMessage(String phone, String message) {
+//        NameValuePair[] params = new NameValuePair[] { new NameValuePair("corp_id", "6e1r001"),
+//                new NameValuePair("corp_pwd", "6e1r001"), new NameValuePair("corp_service", "106550939yd"),//106550939yd 这个换成 10690269yd
+//                new NameValuePair("mobile", phone), new NameValuePair("msg_content", message),
+//                new NameValuePair("corp_msg_id", ""), new NameValuePair("ext", "86") };
+//        HttpClient httpclient = new HttpClient();
+//        httpclient.getHttpConnectionManager().getParams().setConnectionTimeout(10000);
+//        httpclient.getHttpConnectionManager().getParams().setSoTimeout(30000);
+//        GetMethod getMethod = new GetMethod(SMS_URL);
+//        getMethod.setQueryString(params);
+//        try {
+//            httpclient.executeMethod(getMethod);
+//            return getMethod.getResponseBodyAsString();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return e.getMessage();
+//        } finally {
+//            getMethod.releaseConnection();
+//        }
+//    }
     
     /**
      * 发送短信
@@ -79,27 +80,27 @@ public class MessageManger {
      * @param phone :手机号
      * @param message :短信内容
      */
-    public String sendYunSmsMessage(String phone, String message) {
-    	String yunsms = "http://http.yunsms.cn/tx/";
-        NameValuePair[] params = new NameValuePair[] { new NameValuePair("uid", "53787"),
-                new NameValuePair("pwd", "45bc8c89e1312f2accdf339d7cc52cf8"), new NameValuePair("corp_service", "106550939yd"),
-                new NameValuePair("mobile", phone), new NameValuePair("content", message),
-                new NameValuePair("encode", "utf8")};
-        HttpClient httpclient = new HttpClient();
-        httpclient.getHttpConnectionManager().getParams().setConnectionTimeout(10000);
-        httpclient.getHttpConnectionManager().getParams().setSoTimeout(30000);
-        GetMethod getMethod = new GetMethod(yunsms);
-        getMethod.setQueryString(params);
-        try {
-            httpclient.executeMethod(getMethod);
-            return getMethod.getResponseBodyAsString();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return e.getMessage();
-        } finally {
-            getMethod.releaseConnection();
-        }
-    }
+//    public String sendYunSmsMessage(String phone, String message) {
+//    	String yunsms = "http://http.yunsms.cn/tx/";
+//        NameValuePair[] params = new NameValuePair[] { new NameValuePair("uid", "53787"),
+//                new NameValuePair("pwd", "45bc8c89e1312f2accdf339d7cc52cf8"), new NameValuePair("corp_service", "106550939yd"),
+//                new NameValuePair("mobile", phone), new NameValuePair("content", message),
+//                new NameValuePair("encode", "utf8")};
+//        HttpClient httpclient = new HttpClient();
+//        httpclient.getHttpConnectionManager().getParams().setConnectionTimeout(10000);
+//        httpclient.getHttpConnectionManager().getParams().setSoTimeout(30000);
+//        GetMethod getMethod = new GetMethod(yunsms);
+//        getMethod.setQueryString(params);
+//        try {
+//            httpclient.executeMethod(getMethod);
+//            return getMethod.getResponseBodyAsString();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return e.getMessage();
+//        } finally {
+//            getMethod.releaseConnection();
+//        }
+//    }
     
     /**
      * 发送短信
@@ -109,7 +110,7 @@ public class MessageManger {
      * @param mallName 验证码
      * @return
      */
-    public String sendValidSmsMessage(String phone,String message,String content,String mallName,String title,String time,String balance,String checkNum) {
+    /*public String sendValidSmsMessage(String phone,String message,String content,String mallName,String title,String time,String balance,String checkNum) {
 
         SmsEntity xmlentity=new SmsEntity();
         String xml=null;
@@ -157,9 +158,9 @@ public class MessageManger {
 
 
 
-    }
+    }*/
   //发送短信
-    public StringBuffer SendValidMessage(String mobile,String content,String mallName,String title,String time,String balance,String checkNum)
+   /* public StringBuffer SendValidMessage(String mobile,String content,String mallName,String title,String time,String balance,String checkNum)
     {
 
         BufferedReader br=null;
@@ -203,24 +204,24 @@ public class MessageManger {
     }
 
 
-    /**
+    *//**
      * 发送短信
      * 建周短信通道
      * @param phone :手机号
      * @param message :短信内容
-     */
+     *//*
     public static String sendJianZhouSmsMessage(String phone, String message) {
         BusinessService bs = new BusinessService();
         bs.setWebService("http://www.jianzhou.sh.cn/JianzhouSMSWSServer/services/BusinessService");
         int temp=bs.sendBatchMessage("sdk_rongyi", "5410017144996", phone, message);
         return temp+"";
     }
-    /**
+    *//**
      * 发送短信
-     * @param phone
-     * @param message
+     * @param
+     * @param
      * @return
-     */
+     *//*
     public String sendSmsMessage(String phone, String message) {
     	logger.info("--------------------------------->");
     	logger.info("-----进入短信通道----->");
@@ -396,7 +397,7 @@ public class MessageManger {
         return xe;
     }
 
-
+*/
 
 
 

@@ -19,6 +19,8 @@ public class ActivityContentListVO implements Serializable{
     private String typeVal;
     /**活动url*/
     private String activityUrl;
+    private String shareTitle;
+    private String shareDesc;
 
     public Integer getId() {
         return id;
@@ -68,6 +70,22 @@ public class ActivityContentListVO implements Serializable{
         this.activityUrl = activityUrl;
     }
 
+    public String getShareTitle() {
+        return shareTitle;
+    }
+
+    public void setShareTitle(String shareTitle) {
+        this.shareTitle = shareTitle;
+    }
+
+    public String getShareDesc() {
+        return shareDesc;
+    }
+
+    public void setShareDesc(String shareDesc) {
+        this.shareDesc = shareDesc;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -77,6 +95,8 @@ public class ActivityContentListVO implements Serializable{
                 .append("type", type)
                 .append("typeVal", typeVal)
                 .append("activityUrl", activityUrl)
+                .append("shareTitle", shareTitle)
+                .append("shareDesc", shareDesc)
                 .toString();
     }
 }

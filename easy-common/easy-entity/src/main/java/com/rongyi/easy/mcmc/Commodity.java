@@ -1,6 +1,7 @@
 package com.rongyi.easy.mcmc;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +12,9 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.springframework.util.Assert;
 
+/**
+ * 商品表 app商品对象
+ */
 @Entity(value="mcmc_commodity",noClassnameStored=true)
 public class Commodity implements  Serializable,Cloneable{
 
@@ -48,10 +52,10 @@ public class Commodity implements  Serializable,Cloneable{
 	private Date updateAt;//数据更新日期
 	private String originalPrice;//商品原价
 	private String currentPrice;//商品现价
-	private String oPriceOfLowestCPrice;
-	private String brandName;
-	private String mallMid;
-	private String shopNum;
+	private String oPriceOfLowestCPrice;//商品现价最低值
+	private String brandName;//品牌名
+	private String mallMid;//商城mongoId
+	private String shopNum;//店铺铺位号
 	private String filialeMid;//分公司mongoId
 	private String update_by;//修改人
 
@@ -372,17 +376,26 @@ public class Commodity implements  Serializable,Cloneable{
 	public Double getDiscount() {
 		try {
 			if(StringUtils.isNotBlank(this.currentPrice) && StringUtils.isNotBlank(this.originalPrice)) {
+				BigDecimal currentPrice = new BigDecimal(this.currentPrice);
+				BigDecimal originalPrice = new BigDecimal(this.originalPrice);
+				if (originalPrice.compareTo(new BigDecimal(0)) != 0)
+					return currentPrice.divide(originalPrice, 2, BigDecimal.ROUND_HALF_UP)
+							.multiply(new BigDecimal(10)).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+				return new BigDecimal(0).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+			}
+			/*if(StringUtils.isNotBlank(this.currentPrice) && StringUtils.isNotBlank(this.originalPrice)) {
 				NumberFormat ddf1 = NumberFormat.getNumberInstance() ;
 				ddf1.setMaximumFractionDigits(2);
 				Double currentPrice = Double.valueOf(this.currentPrice);
 				Double originalPrice = Double.valueOf(this.originalPrice);
 
 				return (originalPrice == 0) ? 10.0 : Double.valueOf(ddf1.format(currentPrice / originalPrice)) * 10;
-			}
+			}*/
 			return 10.0;
 		} catch(Exception e) {
 			throw new RuntimeException(e.getMessage());
 		}
+
 	}
 
 	public void setDiscount(Double discount) {
