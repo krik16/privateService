@@ -24,7 +24,7 @@ public class SmsLogInfoDto implements Serializable{
     /** 发送内容 */
     private String content;
 
-    /** 发送渠道 1创世华信,2建周 */
+    /** 发送渠道 发送渠道 1创世华信,2建周 21 建周营销 3未来     */
     private Integer channel;
 
     /** 产品类型 1 mallShop 2,Malllife */
@@ -53,6 +53,9 @@ public class SmsLogInfoDto implements Serializable{
     private String taskID;
 
     private String finalResult;
+
+    /**请求来源IP*/
+    private String requestIp;
 
     /**
      * 主键
@@ -221,5 +224,13 @@ public class SmsLogInfoDto implements Serializable{
 
     public void setTaskID(String taskID) {
         this.taskID = taskID;
+    }
+
+    public String getRequestIp() {
+        return requestIp;
+    }
+
+    public void setRequestIp(String requestIp) {
+        this.requestIp = requestIp;
     }
 }
