@@ -16,7 +16,7 @@ import java.util.UUID;
  */
 @Component
 @Aspect
-public class LogAdvice
+public class LogAopAdvice
 {
     public void logIdInit() {
         String logId = RpcContext.getContext().getAttachment("logid");
