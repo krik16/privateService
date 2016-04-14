@@ -14,8 +14,8 @@ import java.util.UUID;
  * @date 2015/7/30
  */
 @Component
-//@Aspect
-public class LogAdvice
+ 
+public class LogAopAdvice
 {
     public void logIdInit() {
         String logId = null;//RpcContext.getContext().getAttachment("logid");
@@ -24,9 +24,10 @@ public class LogAdvice
         }
         if(StringUtils.isBlank(logId)){
             logId = UUID.randomUUID().toString().substring(1,16);
+            MDC.put("logid",logId);
         }
-        MDC.put("logid",logId);
-        //RpcContext.getContext().setAttachment("logid", logId);
+
+       // RpcContext.getContext().setAttachment("logid", logId);
     }
 
     public void clear()

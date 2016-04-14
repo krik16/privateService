@@ -19,5 +19,7 @@ public interface RelationService {
 	RelationVo info(Integer id);
 
 	void updateStatus(Integer id, Integer status);
+
+	boolean verifyEnable(String relation_id);
 	
 }

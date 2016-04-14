@@ -11,16 +11,16 @@ import org.mongodb.morphia.annotations.Id;
 public class CommoditySpecColumnClassification implements  Serializable{
 
 	/**
-	 * 
+	 * 商品规格可选属性值
 	 */
 	private static final long serialVersionUID = 9099780604289373639L;
 	@Id
 	private ObjectId id;
 	private String color;//颜色规格项对应的色系
 	private String name;//规格类名
-	private List<ObjectId> parentids;
-	private ObjectId parentid;
-	private Integer type;//
+	private List<ObjectId> parentids;//所有上级id
+	private ObjectId parentid;//直属上级
+	//private Integer type;
 	public ObjectId getId() {
 		return id;
 	}
@@ -51,10 +51,10 @@ public class CommoditySpecColumnClassification implements  Serializable{
 	public void setColor(String color) {
 		this.color = color;
 	}
-	public Integer getType() {
+	/*public Integer getType() {
 		return type;
 	}
 	public void setType(Integer type) {
 		this.type = type;
-	}
+	}*/
 }

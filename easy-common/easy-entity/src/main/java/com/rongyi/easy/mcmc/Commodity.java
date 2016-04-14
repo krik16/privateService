@@ -12,6 +12,9 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.springframework.util.Assert;
 
+/**
+ * 商品表 app商品对象
+ */
 @Entity(value="mcmc_commodity",noClassnameStored=true)
 public class Commodity implements  Serializable,Cloneable{
 
@@ -49,10 +52,10 @@ public class Commodity implements  Serializable,Cloneable{
 	private Date updateAt;//数据更新日期
 	private String originalPrice;//商品原价
 	private String currentPrice;//商品现价
-	private String oPriceOfLowestCPrice;
-	private String brandName;
-	private String mallMid;
-	private String shopNum;
+	private String oPriceOfLowestCPrice;//商品现价最低值
+	private String brandName;//品牌名
+	private String mallMid;//商城mongoId
+	private String shopNum;//店铺铺位号
 	private String filialeMid;//分公司mongoId
 	private String update_by;//修改人
 

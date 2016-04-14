@@ -27,7 +27,7 @@ public class SmsParam implements Serializable {
     /** 产品类型 1 mallShop 2,Malllife  3;//ToB_业务 通知类 4;//ToB_业务 营销类*/
     private Integer productType;
 
-    /** 发送类型 1注册，2找回密码，3登录4绑定时间 5 交易类 (不够可以加） */
+    /** 发送类型 1注册，2找回密码，3登录4绑定时间 5 交易类 (不够可以加） 6商家后台 */
     private Integer sendModule;
 
     /*请求来源IP**/
