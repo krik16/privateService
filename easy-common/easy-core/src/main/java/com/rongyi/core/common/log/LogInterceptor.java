@@ -25,20 +25,20 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         try
         {
-            logger.info("ÈÕÖ¾À¹½ØÆ÷¿ªÊ¼");
+            logger.info("æ—¥å¿—æ‹¦æˆªå™¨å¼€å§‹");
 
             String logid = UUID.randomUUID().toString().substring(1,16);
 
             MDC.put("logid", logid);
             RpcContext.getContext().setAttachment("logid", logid);
 
-            logger.info("ÈÕÖ¾À¹½ØÆ÷½áÊø logid={}",logid);
+            logger.info("æ—¥å¿—æ‹¦æˆªå™¨ç»“æŸ logid={}",logid);
 
             return true;
         }
         catch (Exception e)
         {
-            logger.error("À¹½Ø³ö´í",e.getMessage(),e);
+            logger.error("æ‹¦æˆªå‡ºé”™",e.getMessage(),e);
             e.printStackTrace();
             return false;
         }
