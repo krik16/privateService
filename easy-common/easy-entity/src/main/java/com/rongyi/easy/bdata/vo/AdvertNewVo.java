@@ -30,6 +30,7 @@ public class AdvertNewVo implements Serializable {
 	private String relation_name;
 	private String relation_code;
 	private String relation_url;
+	private Integer relation_status;
 	private List<String> mall_ids;
 	/**
 	 * @return the id
@@ -307,12 +308,24 @@ public class AdvertNewVo implements Serializable {
 	public void setMall_ids(List<String> mall_ids) {
 		this.mall_ids = mall_ids;
 	}
+	/**
+	 * @return the relation_status
+	 */
+	public Integer getRelation_status() {
+		return relation_status;
+	}
+	/**
+	 * @param relation_status the relation_status to set
+	 */
+	public void setRelation_status(Integer relation_status) {
+		this.relation_status = relation_status;
+	}
 	/** 
 	* @Title: toString 
 	* @Description: TODO(这里用一句话描述这个方法的作用) 
 	* @param @return    设定文件 
 	* @author shaozhou
-	* @date 2016年3月18日 下午2:40:03
+	* @date 2016年3月23日 下午5:17:38
 	* @throws 
 	*/
 	@Override
@@ -323,7 +336,7 @@ public class AdvertNewVo implements Serializable {
 				+ publish_end + ", group_id=" + group_id + ", create_by=" + create_by + ", create_at=" + create_at
 				+ ", update_by=" + update_by + ", update_at=" + update_at + ", adOrder=" + adOrder + ", holder="
 				+ holder + ", mall_id=" + mall_id + ", relation_id=" + relation_id + ", relation_name=" + relation_name
-				+ ", relation_code=" + relation_code + ", relation_url=" + relation_url + ", mall_ids=" + mall_ids
-				+ "]";
+				+ ", relation_code=" + relation_code + ", relation_url=" + relation_url + ", relation_status="
+				+ relation_status + ", mall_ids=" + mall_ids + "]";
 	}
 }

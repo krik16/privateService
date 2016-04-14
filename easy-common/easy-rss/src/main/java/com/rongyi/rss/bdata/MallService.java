@@ -100,16 +100,17 @@ public interface MallService {
 
 	ResponseVO getAdNumByMallId(String mallId);
 
-	ResponseVO getAdsByMallId(String mall_id);
+	ResponseVO getAdsByMallId(String mall_id, String position);
 
 	ResponseVO getAdById(String ad_id);
 	
 	/**
 	 * 获取默认素材列表
+	 * @param ps 
 	 * 
 	 * @return
 	 */
-	ResponseVO getDefaultAds();
+	ResponseVO getDefaultAds(Integer ps);
 
 	/**
 	 * 获取默认素材详情
@@ -118,5 +119,9 @@ public interface MallService {
 	 * @return
 	 */
 	ResponseVO getDefaultAdById(String defaultId);
+
+	ResponseVO getDefaultSeq(Integer ps);
+
+	ResponseVO getAdsSeqByMallId(String mall_id, String position);
 
 }

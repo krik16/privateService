@@ -10,8 +10,15 @@ public class AdNumConfigVO implements Serializable {
 	private String mall_id;
 	private Integer ryAdNum = 4;
     private Integer mallAdNum = 2;
-    private Integer ryBannerNum = 4;
-    private Integer mallBannerNum =2;
+    private Integer ryBanner_330_home_a_Num = 4;
+    private Integer mallBanner_330_home_a_Num =2;
+    private Integer ryBanner_330_home_d_Num = 4;
+    private Integer mallBanner_330_home_d_Num =2;
+    private Integer ryBanner_318_home_b_Num = 4;
+    private Integer mallBanner_318_home_b_Num =2;
+    private Integer ryBanner_318_home_d_Num = 4;
+    private Integer mallBanner_318_home_d_Num =2;
+    
 	/**
 	 * @return the mall_id
 	 */
@@ -49,27 +56,99 @@ public class AdNumConfigVO implements Serializable {
 		this.mallAdNum = mallAdNum;
 	}
 	/**
-	 * @return the ryBannerNum
+	 * @return the ryBanner_330_home_a_Num
 	 */
-	public Integer getRyBannerNum() {
-		return ryBannerNum;
+	public Integer getRyBanner_330_home_a_Num() {
+		return ryBanner_330_home_a_Num;
 	}
 	/**
-	 * @param ryBannerNum the ryBannerNum to set
+	 * @param ryBanner_330_home_a_Num the ryBanner_330_home_a_Num to set
 	 */
-	public void setRyBannerNum(Integer ryBannerNum) {
-		this.ryBannerNum = ryBannerNum;
+	public void setRyBanner_330_home_a_Num(Integer ryBanner_330_home_a_Num) {
+		this.ryBanner_330_home_a_Num = ryBanner_330_home_a_Num;
 	}
 	/**
-	 * @return the mallBannerNum
+	 * @return the mallBanner_330_home_a_Num
 	 */
-	public Integer getMallBannerNum() {
-		return mallBannerNum;
+	public Integer getMallBanner_330_home_a_Num() {
+		return mallBanner_330_home_a_Num;
 	}
 	/**
-	 * @param mallBannerNum the mallBannerNum to set
+	 * @param mallBanner_330_home_a_Num the mallBanner_330_home_a_Num to set
 	 */
-	public void setMallBannerNum(Integer mallBannerNum) {
-		this.mallBannerNum = mallBannerNum;
+	public void setMallBanner_330_home_a_Num(Integer mallBanner_330_home_a_Num) {
+		this.mallBanner_330_home_a_Num = mallBanner_330_home_a_Num;
+	}
+	/**
+	 * @return the ryBanner_330_home_d_Num
+	 */
+	public Integer getRyBanner_330_home_d_Num() {
+		return ryBanner_330_home_d_Num;
+	}
+	/**
+	 * @param ryBanner_330_home_d_Num the ryBanner_330_home_d_Num to set
+	 */
+	public void setRyBanner_330_home_d_Num(Integer ryBanner_330_home_d_Num) {
+		this.ryBanner_330_home_d_Num = ryBanner_330_home_d_Num;
+	}
+	/**
+	 * @return the mallBanner_330_home_d_Num
+	 */
+	public Integer getMallBanner_330_home_d_Num() {
+		return mallBanner_330_home_d_Num;
+	}
+	/**
+	 * @param mallBanner_330_home_d_Num the mallBanner_330_home_d_Num to set
+	 */
+	public void setMallBanner_330_home_d_Num(Integer mallBanner_330_home_d_Num) {
+		this.mallBanner_330_home_d_Num = mallBanner_330_home_d_Num;
+	}
+	/**
+	 * @return the ryBanner_318_home_b_Num
+	 */
+	public Integer getRyBanner_318_home_b_Num() {
+		return ryBanner_318_home_b_Num;
+	}
+	/**
+	 * @param ryBanner_318_home_b_Num the ryBanner_318_home_b_Num to set
+	 */
+	public void setRyBanner_318_home_b_Num(Integer ryBanner_318_home_b_Num) {
+		this.ryBanner_318_home_b_Num = ryBanner_318_home_b_Num;
+	}
+	/**
+	 * @return the mallBanner_318_home_b_Num
+	 */
+	public Integer getMallBanner_318_home_b_Num() {
+		return mallBanner_318_home_b_Num;
+	}
+	/**
+	 * @param mallBanner_318_home_b_Num the mallBanner_318_home_b_Num to set
+	 */
+	public void setMallBanner_318_home_b_Num(Integer mallBanner_318_home_b_Num) {
+		this.mallBanner_318_home_b_Num = mallBanner_318_home_b_Num;
+	}
+	/**
+	 * @return the ryBanner_318_home_d_Num
+	 */
+	public Integer getRyBanner_318_home_d_Num() {
+		return ryBanner_318_home_d_Num;
+	}
+	/**
+	 * @param ryBanner_318_home_d_Num the ryBanner_318_home_d_Num to set
+	 */
+	public void setRyBanner_318_home_d_Num(Integer ryBanner_318_home_d_Num) {
+		this.ryBanner_318_home_d_Num = ryBanner_318_home_d_Num;
+	}
+	/**
+	 * @return the mallBanner_318_home_d_Num
+	 */
+	public Integer getMallBanner_318_home_d_Num() {
+		return mallBanner_318_home_d_Num;
+	}
+	/**
+	 * @param mallBanner_318_home_d_Num the mallBanner_318_home_d_Num to set
+	 */
+	public void setMallBanner_318_home_d_Num(Integer mallBanner_318_home_d_Num) {
+		this.mallBanner_318_home_d_Num = mallBanner_318_home_d_Num;
 	}
 }
