@@ -53,26 +53,26 @@ public class MessageManger {
      * @param phone :手机号
      * @param message :短信内容
      */
-    public String sendBaiwutongSmsMessage(String phone, String message) {
-        NameValuePair[] params = new NameValuePair[] { new NameValuePair("corp_id", "6e1r001"),
-                new NameValuePair("corp_pwd", "6e1r001"), new NameValuePair("corp_service", "106550939yd"),//106550939yd 这个换成 10690269yd
-                new NameValuePair("mobile", phone), new NameValuePair("msg_content", message),
-                new NameValuePair("corp_msg_id", ""), new NameValuePair("ext", "86") };
-        HttpClient httpclient = new HttpClient();
-        httpclient.getHttpConnectionManager().getParams().setConnectionTimeout(10000);
-        httpclient.getHttpConnectionManager().getParams().setSoTimeout(30000);
-        GetMethod getMethod = new GetMethod(SMS_URL);
-        getMethod.setQueryString(params);
-        try {
-            httpclient.executeMethod(getMethod);
-            return getMethod.getResponseBodyAsString();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return e.getMessage();
-        } finally {
-            getMethod.releaseConnection();
-        }
-    }
+//    public String sendBaiwutongSmsMessage(String phone, String message) {
+//        NameValuePair[] params = new NameValuePair[] { new NameValuePair("corp_id", "6e1r001"),
+//                new NameValuePair("corp_pwd", "6e1r001"), new NameValuePair("corp_service", "106550939yd"),//106550939yd 这个换成 10690269yd
+//                new NameValuePair("mobile", phone), new NameValuePair("msg_content", message),
+//                new NameValuePair("corp_msg_id", ""), new NameValuePair("ext", "86") };
+//        HttpClient httpclient = new HttpClient();
+//        httpclient.getHttpConnectionManager().getParams().setConnectionTimeout(10000);
+//        httpclient.getHttpConnectionManager().getParams().setSoTimeout(30000);
+//        GetMethod getMethod = new GetMethod(SMS_URL);
+//        getMethod.setQueryString(params);
+//        try {
+//            httpclient.executeMethod(getMethod);
+//            return getMethod.getResponseBodyAsString();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return e.getMessage();
+//        } finally {
+//            getMethod.releaseConnection();
+//        }
+//    }
     
     /**
      * 发送短信
@@ -80,27 +80,27 @@ public class MessageManger {
      * @param phone :手机号
      * @param message :短信内容
      */
-    public String sendYunSmsMessage(String phone, String message) {
-    	String yunsms = "http://http.yunsms.cn/tx/";
-        NameValuePair[] params = new NameValuePair[] { new NameValuePair("uid", "53787"),
-                new NameValuePair("pwd", "45bc8c89e1312f2accdf339d7cc52cf8"), new NameValuePair("corp_service", "106550939yd"),
-                new NameValuePair("mobile", phone), new NameValuePair("content", message),
-                new NameValuePair("encode", "utf8")};
-        HttpClient httpclient = new HttpClient();
-        httpclient.getHttpConnectionManager().getParams().setConnectionTimeout(10000);
-        httpclient.getHttpConnectionManager().getParams().setSoTimeout(30000);
-        GetMethod getMethod = new GetMethod(yunsms);
-        getMethod.setQueryString(params);
-        try {
-            httpclient.executeMethod(getMethod);
-            return getMethod.getResponseBodyAsString();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return e.getMessage();
-        } finally {
-            getMethod.releaseConnection();
-        }
-    }
+//    public String sendYunSmsMessage(String phone, String message) {
+//    	String yunsms = "http://http.yunsms.cn/tx/";
+//        NameValuePair[] params = new NameValuePair[] { new NameValuePair("uid", "53787"),
+//                new NameValuePair("pwd", "45bc8c89e1312f2accdf339d7cc52cf8"), new NameValuePair("corp_service", "106550939yd"),
+//                new NameValuePair("mobile", phone), new NameValuePair("content", message),
+//                new NameValuePair("encode", "utf8")};
+//        HttpClient httpclient = new HttpClient();
+//        httpclient.getHttpConnectionManager().getParams().setConnectionTimeout(10000);
+//        httpclient.getHttpConnectionManager().getParams().setSoTimeout(30000);
+//        GetMethod getMethod = new GetMethod(yunsms);
+//        getMethod.setQueryString(params);
+//        try {
+//            httpclient.executeMethod(getMethod);
+//            return getMethod.getResponseBodyAsString();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return e.getMessage();
+//        } finally {
+//            getMethod.releaseConnection();
+//        }
+//    }
     
     /**
      * 发送短信
