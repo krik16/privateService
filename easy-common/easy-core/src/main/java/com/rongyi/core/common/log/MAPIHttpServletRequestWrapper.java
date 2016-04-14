@@ -1,5 +1,8 @@
 package com.rongyi.core.common.log;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
@@ -15,12 +18,17 @@ import java.io.InputStreamReader;
 public class MAPIHttpServletRequestWrapper extends HttpServletRequestWrapper
 {
 
+    private Logger logger = LoggerFactory.getLogger(MAPIHttpServletRequestWrapper.class);
+
     private final byte[] body; // 报文
 
     public MAPIHttpServletRequestWrapper(HttpServletRequest request) throws IOException
     {
         super(request);
-        BufferedReader br = new BufferedReader(new InputStreamReader((ServletInputStream) request.getInputStream()));
+
+        logger.info("包装request");
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
         String line;
         StringBuilder sb = new StringBuilder();
         while ((line = br.readLine()) != null) {
