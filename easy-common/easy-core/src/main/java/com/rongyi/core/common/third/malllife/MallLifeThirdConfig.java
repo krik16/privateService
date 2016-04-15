@@ -87,7 +87,7 @@ public class MallLifeThirdConfig {
             // String jsonStr="{'phone':'15821659415','passWd':'111111','uuid':'testId','regiTime':'"+times+"','couponId':'111'}";
             String jsonStr="";
             //jsonStr="{'openId':'15821659415'}";
-            jsonStr="{'phone':'15821659415','msgStr':'111111','sendType':2}";
+            jsonStr="{'phone':'15821659415','msgStr':'【容易网】你的验证码为778899','sendType':2}";
 
             System.out.println("PUBLICKEY===="+SmsEnum.getName(MallLifeThirdConfig.TOB_SMS_CHANNEL.MARK_CHANNEL + "_PUBLICKEY"));
 

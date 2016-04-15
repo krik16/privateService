@@ -51,7 +51,7 @@ public class MalllifeRsaUtil {
         logger.info("====解密===");
         try {
             byte[] decodedData = RSACoder.decryptByPrivateKey(new BASE64Decoder().decodeBuffer(str.trim()), privateKey);
-            str = new String(decodedData);
+            str = new String(decodedData,"utf-8");
         }catch (Exception e){
             logger.info("====解密失败===");
             throw new ThirdException("解码失败");
