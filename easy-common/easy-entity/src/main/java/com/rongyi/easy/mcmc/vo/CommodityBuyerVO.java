@@ -321,7 +321,7 @@ public class CommodityBuyerVO implements Serializable{
 		this.supportCourierDeliver = commodity.isSupportCourierDeliver();
 		this.supportSelfPickup = commodity.isSupportSelfPickup();
 		this.terminalType = commodity.getTerminalType();// 终端
-		if(commodity.getPurchaseCount() == 0){
+		if(commodity.getPurchaseCount() == null || commodity.getPurchaseCount() == 0){
 			this.purchaseCount = -1;
 		}else{
 			this.purchaseCount = commodity.getPurchaseCount();//商品限购数量
