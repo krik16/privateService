@@ -22,6 +22,8 @@ public class BannerVO implements Serializable {
     private String publishEndAt; //发布结束时间
     private String shareTitle;//分享标题
     private String shareContent;//分享内容
+    private String sharePic;//分享图片
+    private String appTitle;//页面标题
 
 
     public String getTitle() {
@@ -120,6 +122,22 @@ public class BannerVO implements Serializable {
         this.shareContent = shareContent;
     }
 
+    public String getSharePic() {
+        return sharePic;
+    }
+
+    public void setSharePic(String sharePic) {
+        this.sharePic = sharePic;
+    }
+
+    public String getAppTitle() {
+        return appTitle;
+    }
+
+    public void setAppTitle(String appTitle) {
+        this.appTitle = appTitle;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -135,6 +153,8 @@ public class BannerVO implements Serializable {
                 .append("publishEndAt", publishEndAt)
                 .append("shareTitle", shareTitle)
                 .append("shareContent", shareContent)
+                .append("sharePic", sharePic)
+                .append("appTitle", appTitle)
                 .toString();
     }
 }

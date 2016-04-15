@@ -1,5 +1,7 @@
 package com.rongyi.easy.content_v2.vo;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 
 /**
@@ -11,8 +13,16 @@ import java.io.Serializable;
 public class LaunchAdvertVO implements Serializable {
 	@Override
 	public String toString() {
-		return "LaunchAdvertVO [picUrl=" + picUrl + ", type=" + type + ", typeCode=" + typeCode + ", duration="
-				+ duration + "]";
+		return new ToStringBuilder(this)
+				.append("picUrl", picUrl)
+				.append("type", type)
+				.append("typeCode", typeCode)
+				.append("duration", duration)
+				.append("shareContent", shareContent)
+				.append("shareTitle", shareTitle)
+				.append("sharePic", sharePic)
+				.append("appTitle", appTitle)
+				.toString();
 	}
 
 	/**
@@ -52,8 +62,44 @@ public class LaunchAdvertVO implements Serializable {
 		this.duration = duration;
 	}
 
+	public String getShareContent() {
+		return shareContent;
+	}
+
+	public void setShareContent(String shareContent) {
+		this.shareContent = shareContent;
+	}
+
+	public String getShareTitle() {
+		return shareTitle;
+	}
+
+	public void setShareTitle(String shareTitle) {
+		this.shareTitle = shareTitle;
+	}
+
+	public String getSharePic() {
+		return sharePic;
+	}
+
+	public void setSharePic(String sharePic) {
+		this.sharePic = sharePic;
+	}
+
+	public String getAppTitle() {
+		return appTitle;
+	}
+
+	public void setAppTitle(String appTitle) {
+		this.appTitle = appTitle;
+	}
+
 	private String picUrl = "";
 	private int type = 0;
 	private String typeCode = "";
 	private int duration = 0;
+	private String shareContent;
+	private String shareTitle;
+	private String sharePic;
+	private String appTitle;
 }

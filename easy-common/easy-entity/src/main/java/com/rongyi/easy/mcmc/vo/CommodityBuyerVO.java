@@ -321,8 +321,11 @@ public class CommodityBuyerVO implements Serializable{
 		this.supportCourierDeliver = commodity.isSupportCourierDeliver();
 		this.supportSelfPickup = commodity.isSupportSelfPickup();
 		this.terminalType = commodity.getTerminalType();// 终端
-		this.purchaseCount = commodity.getPurchaseCount();//商品限购数量
-
+		if(commodity.getPurchaseCount() == null || commodity.getPurchaseCount() == 0){
+			this.purchaseCount = -1;
+		}else{
+			this.purchaseCount = commodity.getPurchaseCount();//商品限购数量
+		}
 		// 商品待上架且上架时间大于当前时间，app商品状态为 待上架
 		//商品上架或待上架，且上架时间小于当前时间，且下架时间大于当前时间，app商品状态为 上架
 		//其他 下架
