@@ -92,6 +92,8 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	@Field("weAndTeStatus")
 	private String weAndTeStatus;
 
+	private String secKillSign;
+
 	public Double getPrice() {
 		return price;
 	}
@@ -409,5 +411,13 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 	public void setWeAndTeStatus(String weAndTeStatus) {
 		this.weAndTeStatus = weAndTeStatus;
+	}
+
+	public String getSecKillSign() {
+		return secKillSign;
+	}
+
+	public void setSecKillSign(String secKillSign) {
+		this.secKillSign = secKillSign;
 	}
 }
