@@ -55,6 +55,8 @@ public class SmsConfig implements Serializable{
     }
 
 
+
+
     public abstract class SMSCHANNEL_TYPE {
         public static final String JIANZHOU="jianzhou";//建周
         public static final  String CHUANGSHI="chuangshi";//创世华信
@@ -70,9 +72,9 @@ public class SmsConfig implements Serializable{
     //产品名称
     public abstract class PRODUCT_TYPE {
         public static final int MALL_SHOP=1;//摩店
-        public static final  int MALL_LIFE=2;//容易逛
-        public static final  int TOB_NOTICE=3;//To_业务 通知类
-        public static final  int TOB_MARKETING=4;//To_业务 营销
+        public static final  int MALL_LIFE=2;//容易逛(目前包括微商城)
+        public static final  int TOB_NOTICE=3;//ToB_业务 通知类
+        public static final  int TOB_MARKETING=4;//ToB_业务 营销
 
     }
 
@@ -94,11 +96,12 @@ public class SmsConfig implements Serializable{
 
     /**
      * 发送渠道
-     * 1创世华信,2建周.3,未来无线,101云通讯
+     * 1创世华信,2建周 22.建周营销.3,未来无线,101云通讯
      */
     public abstract class SEND_CHANNEL{
         public static final  int CHANNEL_CHUANGSHI=1;
         public static final  int CHANNEL_JIANZHOU=2;
+        public static final  int CHANNEL_JIANZHOU_MARKET=22;
         public static final  int CHANNEL_WEILAI=3;
         public static final  int CHANNEL_YUNTONGXUN=101;
     }

@@ -48,6 +48,10 @@ public class SmsLogInfoEntity implements Serializable{
     private String finalResult;
 
 
+    /**请求来源IP*/
+    private String requestIp;
+
+
     /**
      * 主键
      * @return id
@@ -214,5 +218,13 @@ public class SmsLogInfoEntity implements Serializable{
 
     public void setFinalResult(String finalResult) {
         this.finalResult = finalResult;
+    }
+
+    public String getRequestIp() {
+        return requestIp;
+    }
+
+    public void setRequestIp(String requestIp) {
+        this.requestIp = requestIp;
     }
 }

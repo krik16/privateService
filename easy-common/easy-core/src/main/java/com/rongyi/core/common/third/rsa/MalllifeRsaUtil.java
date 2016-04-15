@@ -130,13 +130,13 @@ public class MalllifeRsaUtil {
             try {
 
                 //生成 公钥 私钥
-                /*
+
                  keyMap = initKey();
                 String publicKey =  getPublicKey(keyMap);
                 String privateKey =  getPrivateKey(keyMap);
                 System.out.println("publicKey="+publicKey);
                 System.out.println("privateKey="+privateKey);
-                */
+
 
                 //全民财富
                 /*
@@ -149,12 +149,12 @@ public class MalllifeRsaUtil {
                 */
 
                 //ToB 业务
-                String jsonStr="{'phone':'15821659415','passWd':'111111','uuid':'1111','regiTime':'1442838385146','couponId',:'couponId'}";
+                /*String jsonStr="{'phone':'15821659415','passWd':'111111','uuid':'1111','regiTime':'1442838385146','couponId',:'couponId'}";
                 System.out.println("加密前="+jsonStr);
                 String encryStr=  MalllifeRsaUtil.encryptionStr(jsonStr,MallLifeThirdConfig.TOB_RSACODER.PUBLIC_KEY_STR);
                 System.out.println("加密后="+encryStr);
                 String decryStr=MalllifeRsaUtil.decryptStr(encryStr, MallLifeThirdConfig.TOB_RSACODER.PRIVATE_KEY_STR);
-                System.out.println("解密后="+decryStr);
+                System.out.println("解密后="+decryStr);*/
 
             } catch (Exception e) {
                 e.printStackTrace();

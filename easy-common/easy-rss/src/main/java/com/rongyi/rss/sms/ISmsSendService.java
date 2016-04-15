@@ -30,5 +30,13 @@ public interface ISmsSendService {
     public  String sendSmsMessage(SmsParam smsParam) throws MallShopException;
 
 
+    /**
+     * 发送B端短信
+     * @param smsParam
+     * @return
+     * @throws MallShopException
+     */
+    public String sendToBSms(SmsParam smsParam)throws MallShopException;
+
 
 }
