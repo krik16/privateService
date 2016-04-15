@@ -112,6 +112,23 @@ public class ContentInfoVO implements Serializable{
      * @author wangjh7
      */
     private String activityModuleName = "";
+
+	/**
+	 * 分享标题
+	 */
+	private String shareTitle;
+	/**
+	 * 分享内容
+	 */
+	private String shareContent;
+	/**
+	 * 分享图片
+	 */
+	private String sharePic;
+	/**
+	 * app标题
+	 */
+	private String appTitle;
     
 
 	public Integer getId() {
@@ -312,36 +329,72 @@ public class ContentInfoVO implements Serializable{
 		this.selectedPicUrls = selectedPicUrls;
 	}
 
+	public String getShareTitle() {
+		return shareTitle;
+	}
+
+	public void setShareTitle(String shareTitle) {
+		this.shareTitle = shareTitle;
+	}
+
+	public String getShareContent() {
+		return shareContent;
+	}
+
+	public void setShareContent(String shareContent) {
+		this.shareContent = shareContent;
+	}
+
+	public String getSharePic() {
+		return sharePic;
+	}
+
+	public void setSharePic(String sharePic) {
+		this.sharePic = sharePic;
+	}
+
+	public String getAppTitle() {
+		return appTitle;
+	}
+
+	public void setAppTitle(String appTitle) {
+		this.appTitle = appTitle;
+	}
+
 	@Override
 	public String toString() {
-		return "ContentInfoVO{" +
-				"id=" + id +
-				", provName='" + provName + '\'' +
-				", provId='" + provId + '\'' +
-				", cityName='" + cityName + '\'' +
-				", cityId='" + cityId + '\'' +
-				", picName='" + picName + '\'' +
-				", bannerBackgroundPic='" + bannerBackgroundPic + '\'' +
-				", selectedPicUrls='" + selectedPicUrls + '\'' +
-				", title='" + title + '\'' +
-				", subtitle='" + subtitle + '\'' +
-				", modelName='" + modelName + '\'' +
-				", type=" + type +
-				", typeVal='" + typeVal + '\'' +
-				", typeName='" + typeName + '\'' +
-				", shopIds='" + shopIds + '\'' +
-				", shopNames='" + shopNames + '\'' +
-				", publishBeginAt=" + publishBeginAt +
-				", publishEndAt=" + publishEndAt +
-				", createUser='" + createUser + '\'' +
-				", createAt=" + createAt +
-				", updateUser='" + updateUser + '\'' +
-				", updateAt=" + updateAt +
-				", status=" + status +
-				", positionId=" + positionId +
-				", advDuration=" + advDuration +
-				", activityModuleId=" + activityModuleId +
-				", activityModuleName='" + activityModuleName + '\'' +
-				'}';
+		return new ToStringBuilder(this)
+				.append("id", id)
+				.append("provName", provName)
+				.append("provId", provId)
+				.append("cityName", cityName)
+				.append("cityId", cityId)
+				.append("picName", picName)
+				.append("bannerBackgroundPic", bannerBackgroundPic)
+				.append("selectedPicUrls", selectedPicUrls)
+				.append("title", title)
+				.append("subtitle", subtitle)
+				.append("modelName", modelName)
+				.append("type", type)
+				.append("typeVal", typeVal)
+				.append("typeName", typeName)
+				.append("shopIds", shopIds)
+				.append("shopNames", shopNames)
+				.append("publishBeginAt", publishBeginAt)
+				.append("publishEndAt", publishEndAt)
+				.append("createUser", createUser)
+				.append("createAt", createAt)
+				.append("updateUser", updateUser)
+				.append("updateAt", updateAt)
+				.append("status", status)
+				.append("positionId", positionId)
+				.append("advDuration", advDuration)
+				.append("activityModuleId", activityModuleId)
+				.append("activityModuleName", activityModuleName)
+				.append("shareTitle", shareTitle)
+				.append("shareContent", shareContent)
+				.append("sharePic", sharePic)
+				.append("appTitle", appTitle)
+				.toString();
 	}
 }

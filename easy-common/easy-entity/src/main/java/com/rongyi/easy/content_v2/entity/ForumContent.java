@@ -12,37 +12,6 @@ import java.util.Date;
  * @time 2015-08-28
  */
 public class ForumContent implements Serializable {
-    public Integer getCreateBy() {
-		return createBy;
-	}
-
-	public void setCreateBy(Integer createBy) {
-		this.createBy = createBy;
-	}
-
-	public Integer getUpdateBy() {
-		return updateBy;
-	}
-
-	public void setUpdateBy(Integer updateBy) {
-		this.updateBy = updateBy;
-	}
-
-	public Integer getAdvDuration() {
-		return advDuration;
-	}
-
-	public void setAdvDuration(Integer advDuration) {
-		this.advDuration = advDuration;
-	}
-
-	public Integer getActivityModuleId() {
-		return activityModuleId;
-	}
-
-	public void setActivityModuleId(Integer activityModuleId) {
-		this.activityModuleId = activityModuleId;
-	}
 
 	/**
      * 主键id
@@ -204,6 +173,23 @@ public class ForumContent implements Serializable {
      * @author wangjh7
      */
     private Integer updateBy = 0;
+
+    /**
+     * app标题
+     */
+    private String appTitle;
+    /**
+     * 分享标题
+     */
+    private String shareTitle;
+    /**
+     * 分享内容
+     */
+    private String shareContent;
+    /**
+     * 分享图片
+     */
+    private String sharePic;
     
     public Integer getId() {
         return id;
@@ -440,45 +426,68 @@ public class ForumContent implements Serializable {
         this.quickRemarks = quickRemarks;
     }
 
+    public Integer getCreateBy() {
+        return createBy;
+    }
 
-    @Override
-    public String toString() {
-        return "ForumContent{" +
-                "id=" + id +
-                ", positionId=" + positionId +
-                ", provId='" + provId + '\'' +
-                ", provName='" + provName + '\'' +
-                ", cityId='" + cityId + '\'' +
-                ", cityName='" + cityName + '\'' +
-                ", picUrls='" + picUrls + '\'' +
-                ", selectedPicUrls='" + selectedPicUrls + '\'' +
-                ", title='" + title + '\'' +
-                ", subtitle='" + subtitle + '\'' +
-                ", type=" + type +
-                ", typeVal='" + typeVal + '\'' +
-                ", shopIds='" + shopIds + '\'' +
-                ", publishBeginAt=" + publishBeginAt +
-                ", publishEndAt=" + publishEndAt +
-                ", createUser='" + createUser + '\'' +
-                ", createAt=" + createAt +
-                ", updateUser='" + updateUser + '\'' +
-                ", updateAt=" + updateAt +
-                ", isDeleted=" + isDeleted +
-                ", status=" + status +
-                ", buyerLive='" + buyerLive + '\'' +
-                ", iosVersion='" + iosVersion + '\'' +
-                ", androidVersion='" + androidVersion + '\'' +
-                ", quickType='" + quickType + '\'' +
-                ", quickTypeVal='" + quickTypeVal + '\'' +
-                ", bannerBackgroundPic='" + bannerBackgroundPic + '\'' +
-                ", quickCount=" + quickCount +
-                ", quickRemarks='" + quickRemarks + '\'' +
-                ", advDuration=" + advDuration +
-                ", activityModuleId=" + activityModuleId +
-                ", activityModuleName='" + activityModuleName + '\'' +
-                ", createBy=" + createBy +
-                ", updateBy=" + updateBy +
-                '}';
+    public void setCreateBy(Integer createBy) {
+        this.createBy = createBy;
+    }
+
+    public Integer getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(Integer updateBy) {
+        this.updateBy = updateBy;
+    }
+
+    public Integer getAdvDuration() {
+        return advDuration;
+    }
+
+    public void setAdvDuration(Integer advDuration) {
+        this.advDuration = advDuration;
+    }
+
+    public Integer getActivityModuleId() {
+        return activityModuleId;
+    }
+
+    public void setActivityModuleId(Integer activityModuleId) {
+        this.activityModuleId = activityModuleId;
+    }
+
+    public String getAppTitle() {
+        return appTitle;
+    }
+
+    public void setAppTitle(String appTitle) {
+        this.appTitle = appTitle;
+    }
+
+    public String getShareTitle() {
+        return shareTitle;
+    }
+
+    public void setShareTitle(String shareTitle) {
+        this.shareTitle = shareTitle;
+    }
+
+    public String getShareContent() {
+        return shareContent;
+    }
+
+    public void setShareContent(String shareContent) {
+        this.shareContent = shareContent;
+    }
+
+    public String getSharePic() {
+        return sharePic;
+    }
+
+    public void setSharePic(String sharePic) {
+        this.sharePic = sharePic;
     }
 
     public String getSelectedPicUrls() {
@@ -496,4 +505,49 @@ public class ForumContent implements Serializable {
 	public void setActivityModuleName(String activityModuleName) {
 		this.activityModuleName = activityModuleName;
 	}
+
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("positionId", positionId)
+                .append("provId", provId)
+                .append("provName", provName)
+                .append("cityId", cityId)
+                .append("cityName", cityName)
+                .append("picUrls", picUrls)
+                .append("selectedPicUrls", selectedPicUrls)
+                .append("title", title)
+                .append("subtitle", subtitle)
+                .append("type", type)
+                .append("typeVal", typeVal)
+                .append("shopIds", shopIds)
+                .append("publishBeginAt", publishBeginAt)
+                .append("publishEndAt", publishEndAt)
+                .append("createUser", createUser)
+                .append("createAt", createAt)
+                .append("updateUser", updateUser)
+                .append("updateAt", updateAt)
+                .append("isDeleted", isDeleted)
+                .append("status", status)
+                .append("buyerLive", buyerLive)
+                .append("iosVersion", iosVersion)
+                .append("androidVersion", androidVersion)
+                .append("quickType", quickType)
+                .append("quickTypeVal", quickTypeVal)
+                .append("bannerBackgroundPic", bannerBackgroundPic)
+                .append("quickCount", quickCount)
+                .append("quickRemarks", quickRemarks)
+                .append("advDuration", advDuration)
+                .append("activityModuleId", activityModuleId)
+                .append("activityModuleName", activityModuleName)
+                .append("createBy", createBy)
+                .append("updateBy", updateBy)
+                .append("appTitle", appTitle)
+                .append("shareTitle", shareTitle)
+                .append("shareContent", shareContent)
+                .append("sharePic", sharePic)
+                .toString();
+    }
 }

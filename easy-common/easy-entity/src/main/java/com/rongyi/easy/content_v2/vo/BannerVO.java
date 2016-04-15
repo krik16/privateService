@@ -16,10 +16,13 @@ public class BannerVO implements Serializable {
     private String bannerBackgroundPic;//banner 背景图片
     private String provId;  //省份Id
     private String cityId; //城市Id
-    private int type; //文章类型
+    private int type; //文章类型  21 为特卖列表需要给出shareTitle,shareContent
     private String typeVal; //文章Id
     private String publishBeginAt; //发布开始时间
     private String publishEndAt; //发布结束时间
+    private String shareTitle;//分享标题
+    private String shareContent;//分享内容
+
 
     public String getTitle() {
         return title;
@@ -101,6 +104,22 @@ public class BannerVO implements Serializable {
         this.bannerBackgroundPic = bannerBackgroundPic;
     }
 
+    public String getShareTitle() {
+        return shareTitle;
+    }
+
+    public void setShareTitle(String shareTitle) {
+        this.shareTitle = shareTitle;
+    }
+
+    public String getShareContent() {
+        return shareContent;
+    }
+
+    public void setShareContent(String shareContent) {
+        this.shareContent = shareContent;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -114,6 +133,8 @@ public class BannerVO implements Serializable {
                 .append("typeVal", typeVal)
                 .append("publishBeginAt", publishBeginAt)
                 .append("publishEndAt", publishEndAt)
+                .append("shareTitle", shareTitle)
+                .append("shareContent", shareContent)
                 .toString();
     }
 }
