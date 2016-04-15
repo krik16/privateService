@@ -57,10 +57,10 @@ public interface McmcCommoditySolrService {
 	 * @date 2015年9月10日 下午4:40:58 
 	 * @param id
 	 * @param price
-	 * @param currentPirceList 多规格当前价格列表
+	 * @param currentPriceList 多规格当前价格列表
 	 * @return
 	 */
-	public boolean updateCommodityPrice(String id, Double price, List<Double> currentPirceList);
+	public boolean updateCommodityPrice(String id, Double price, List<Double> currentPriceList);
 	
 	/**
 	 * 商品检索·改
