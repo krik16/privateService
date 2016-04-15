@@ -14,7 +14,7 @@ import java.util.UUID;
  * @date 2015/7/30
  */
 @Component
- 
+
 public class LogAopAdvice
 {
     public void logIdInit() {
