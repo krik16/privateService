@@ -19,5 +19,5 @@ public interface ActivitySolrService {
      * @param type  1 代表卡券  2代表商品
      * @return
      */
-    public List<ActivityDailySaleSolrVO> searchDailySaleIdByGoodsId(List<String> goodsId,Integer type);
+    public List<ActivityDailySaleSolrVO> searchDailySaleIdByGoodsId(List<String> goodsId,Integer type) throws Exception;
 }
