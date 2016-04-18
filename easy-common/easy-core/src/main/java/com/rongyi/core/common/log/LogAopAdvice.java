@@ -16,8 +16,6 @@ import java.util.UUID;
  * @author yujisun
  * @date 2015/7/30
  */
-@Component
-
 public class LogAopAdvice
 {
     private Logger logger = LoggerFactory.getLogger(LogAopAdvice.class);
