@@ -1,5 +1,7 @@
 package com.rongyi.easy.content_v2.vo;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,25 +12,15 @@ import java.util.List;
  * @date 2016年4月7日
  */
 public class LaunchAdvertListVO implements Serializable {
-
-	@Override
-	public String toString() {
-		return "LaunchAdvertListVO [disable=" + disable + ", continueTime=" + continueTime + ", picList=" + picList
-				+ "]";
-	}
-
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 888790447067061421L;
 
-	public int getDisable() {
-		return disable;
-	}
+	private int disabled = 0;
+	private int continueTime = 0;
+	private List<LaunchAdvertVO> picList = null;
 
-	public void setDisable(int disable) {
-		this.disable = disable;
-	}
 
 	public int getContinueTime() {
 		return continueTime;
@@ -46,7 +38,20 @@ public class LaunchAdvertListVO implements Serializable {
 		this.picList = picList;
 	}
 
-	private int disable = 0;
-	private int continueTime = 0;
-	private List<LaunchAdvertVO> picList = null;
+	public int getDisabled() {
+		return disabled;
+	}
+
+	public void setDisabled(int disabled) {
+		this.disabled = disabled;
+	}
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append("picList", picList)
+				.append("continueTime", continueTime)
+				.append("disabled", disabled)
+				.toString();
+	}
 }
