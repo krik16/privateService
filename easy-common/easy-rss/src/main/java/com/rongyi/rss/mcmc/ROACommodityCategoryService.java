@@ -41,5 +41,5 @@ public interface ROACommodityCategoryService {
 	 * @param value 属性值
 	 * @return
 	 */
-	public boolean updateCategoryProperty(List<String> categoryIds,String property,Object value);
+	//public boolean updateCategoryProperty(List<String> categoryIds,String property,Object value);
 }
