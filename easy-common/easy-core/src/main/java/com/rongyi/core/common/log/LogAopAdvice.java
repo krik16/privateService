@@ -1,6 +1,7 @@
 package com.rongyi.core.common.log;
 
 //import com.alibaba.dubbo.rpc.RpcContext;
+import com.alibaba.dubbo.rpc.RpcContext;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
@@ -18,7 +19,7 @@ import java.util.UUID;
 public class LogAopAdvice
 {
     public void logIdInit() {
-        String logId = null;//RpcContext.getContext().getAttachment("logid");
+        String logId = RpcContext.getContext().getAttachment("logid");
         if(StringUtils.isBlank(logId)){
             logId = MDC.get("logid");
         }
@@ -27,7 +28,7 @@ public class LogAopAdvice
             MDC.put("logid",logId);
         }
 
-       // RpcContext.getContext().setAttachment("logid", logId);
+        RpcContext.getContext().setAttachment("logid", logId);
     }
 
     public void clear()
