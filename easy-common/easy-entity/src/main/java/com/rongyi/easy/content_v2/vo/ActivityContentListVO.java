@@ -21,6 +21,7 @@ public class ActivityContentListVO implements Serializable{
     private String activityUrl;
     private String shareTitle;
     private String shareDesc;
+    private String appTitle;
 
     public Integer getId() {
         return id;
@@ -86,6 +87,14 @@ public class ActivityContentListVO implements Serializable{
         this.shareDesc = shareDesc;
     }
 
+    public String getAppTitle() {
+        return appTitle;
+    }
+
+    public void setAppTitle(String appTitle) {
+        this.appTitle = appTitle;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -97,6 +106,7 @@ public class ActivityContentListVO implements Serializable{
                 .append("activityUrl", activityUrl)
                 .append("shareTitle", shareTitle)
                 .append("shareDesc", shareDesc)
+                .append("appTitle", appTitle)
                 .toString();
     }
 }
