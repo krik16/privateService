@@ -37,6 +37,7 @@ public class LogAopAdvice
 
     public void clear()
     {
+        logger.info("日志aop销毁");
         MDC.clear();
     }
 

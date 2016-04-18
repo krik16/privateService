@@ -47,6 +47,7 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse response, Object o, ModelAndView modelAndView) throws Exception {
+        logger.info("日志拦截器销毁");
         MDC.clear();
     }
 }
