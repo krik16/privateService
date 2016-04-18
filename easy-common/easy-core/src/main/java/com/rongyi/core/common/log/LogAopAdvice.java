@@ -18,18 +18,18 @@ import java.util.UUID;
  */
 public class LogAopAdvice
 {
-    private Logger logger = LoggerFactory.getLogger(LogAopAdvice.class);
+    //private Logger logger = LoggerFactory.getLogger(LogAopAdvice.class);
 
     public void logIdInit() {
         String logId = RpcContext.getContext().getAttachment("logid");
-        logger.info("日志aop RpcContext logid={}",logId);
+        //logger.info("日志aop RpcContext logid={}",logId);
         if(StringUtils.isBlank(logId)){
             logId = MDC.get("logid");
-            logger.info("日志aop MDC logid={}",logId);
+            //logger.info("日志aop MDC logid={}",logId);
         }
         if(StringUtils.isBlank(logId)){
             logId = UUID.randomUUID().toString().substring(1,16);
-            logger.info("日志aop 生成logid={}",logId);
+            //logger.info("日志aop 生成logid={}",logId);
         }
         MDC.put("logid",logId);
         RpcContext.getContext().setAttachment("logid", logId);
@@ -37,7 +37,7 @@ public class LogAopAdvice
 
     public void clear()
     {
-        logger.info("日志aop销毁");
+        //logger.info("日志aop销毁");
         MDC.clear();
     }
 
