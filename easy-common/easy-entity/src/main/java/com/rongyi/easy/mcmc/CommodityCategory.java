@@ -27,6 +27,7 @@ public class CommodityCategory extends MalllifeBaseParam  implements java.io.Ser
 	private List<ObjectId> columnIds;//商品分类对应的规格项id
 	private int commodityCount;//该分类下属商品数量
 	private boolean isPopular=false;//是否是热门分类 true表示热门分类
+	private String popularImg;//热门分类图片
 	public int getCommodityCount() {
 		return commodityCount;
 	}
@@ -90,10 +91,28 @@ public class CommodityCategory extends MalllifeBaseParam  implements java.io.Ser
 		this.isPopular = isPopular;
 	}
 
+	public String getPopularImg() {
+		return popularImg;
+	}
+
+	public void setPopularImg(String popularImg) {
+		this.popularImg = popularImg;
+	}
+
 	@Override
 	public String toString() {
-		return "CommodityCategory [id=" + id + ", name=" + name + ", logoUrl=" + logoUrl + ", createAt=" + createAt
-				+ ", parentids=" + parentids + ", parentid=" + parentid + ", type=" + type + ", columnIds=" + columnIds
-				+ ", commodityCount=" + commodityCount + "]";
+		return "CommodityCategory{" +
+				"columnIds=" + columnIds +
+				", id=" + id +
+				", name='" + name + '\'' +
+				", logoUrl='" + logoUrl + '\'' +
+				", createAt=" + createAt +
+				", parentids=" + parentids +
+				", parentid=" + parentid +
+				", type=" + type +
+				", commodityCount=" + commodityCount +
+				", isPopular=" + isPopular +
+				", popularImg='" + popularImg + '\'' +
+				'}';
 	}
 }
