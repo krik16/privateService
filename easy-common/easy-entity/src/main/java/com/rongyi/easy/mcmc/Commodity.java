@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.beanutils.BeanUtils;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
@@ -19,7 +20,7 @@ import org.springframework.util.Assert;
 public class Commodity implements  Serializable,Cloneable{
 
 	private static final long serialVersionUID = -3022699601318372490L;
-	
+
 	@Id
 	private ObjectId id;
 
@@ -35,7 +36,7 @@ public class Commodity implements  Serializable,Cloneable{
 	private Date activityStartTime; //特卖、闪购、秒杀开始时间
 	private Date activityEndTime; //特卖、闪购、秒杀结束时间
 	private String secKillSign; //秒杀标记
-	
+
 	private String name;//商品名称
 	private String category;//商品品类id
 	private String shopId;//店铺id
@@ -59,11 +60,11 @@ public class Commodity implements  Serializable,Cloneable{
 	private String filialeMid;//分公司mongoId
 	private String update_by;//修改人
 
-	
+
 	private String brandMid;//品牌mongoId
-	
+
 	private boolean supportCourierDeliver=true;//支持快递发货字段  true 是    false否
-	
+
 	private boolean supportSelfPickup=true;//支持到店自提  true 是    false否
 
 	private int identity = -100;//-100 默认值，老数据，不处理权限 0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购6买手
@@ -152,13 +153,13 @@ public class Commodity implements  Serializable,Cloneable{
 	private List<String> picList;//商品图片列表
 	private List<ObjectId> specList;//商品规格列表
 
-	
+
 	private Double price;//商品价格（现价最低价，用于排序）
 	private String brandId;//商品所属品牌id
 	private String mallId;//商品所属商场id
 	private List<ObjectId> categoryIds;//商品所属的品类列表
 	private List<String> customCategory;//自定义分类
-	
+
 	//private Integer distribution;//配送方式 1表示到店自提2快递3表示支持两种方式
 	private Integer freight;//1表示商家承担运费,0表示买家承担运费
 	private Integer terminalType;//上架终端：com.rongyi.easy.mcmc.constant.CommodityTerminalType常量定义
@@ -196,6 +197,8 @@ public class Commodity implements  Serializable,Cloneable{
 	private Double discount ;//商品的折扣
 	private Integer sort;//直播商品的排序
 	private boolean goodsSec = true;//正品保障
+
+	private List<Integer> customCategoryIds;//自定义分类集合;
 
 	public ObjectId getId() {
 		return id;
@@ -287,7 +290,7 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setCurrentPrice(String currentPrice) {
 		this.currentPrice = currentPrice;
 	}
-	
+
 	public List<String> getPicList() {
 		return picList;
 	}
@@ -404,12 +407,13 @@ public class Commodity implements  Serializable,Cloneable{
 
 	@Override
 	public Commodity clone() throws CloneNotSupportedException {
+
 		Commodity commodity=new Commodity();
 		commodity.setCategory(category);
 		commodity.setCategoryIds(categoryIds);
 		commodity.setCode(code);
 		commodity.setCurrentPrice(currentPrice);
-		commodity.setCustomCategory(customCategory);
+		commodity.setCustomCategoryIds(customCategoryIds);
 		commodity.setDescription(description);
 		//commodity.setDistribution(distribution);
 		commodity.setFreight(freight);
@@ -453,7 +457,7 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setSort(sort);
 		return commodity;
 	}
-	
+
 	public String getSystemNumber() {
 		return systemNumber;
 	}
@@ -594,36 +598,75 @@ public class Commodity implements  Serializable,Cloneable{
 	}
 	@Override
 	public String toString() {
-		return "Commodity [id=" + id + ", type=" + type + ", liveId=" + liveId
-				+ ", isSpot=" + isSpot + ", liveStartTime=" + liveStartTime
-				+ ", liveEndTime=" + liveEndTime + ", create_by=" + create_by
-				+ ", saleId=" + saleId + ", flashSaleId=" + flashSaleId
-				+ ", activityStartTime=" + activityStartTime
-				+ ", activityEndTime=" + activityEndTime + ", secKillSign="
-				+ secKillSign + ", name=" + name + ", category=" + category
-				+ ", shopId=" + shopId + ", shopMid=" + shopMid + ", status="
-				+ status + ", code=" + code + ", description=" + description
-				+ ", postage=" + postage + ", stock=" + stock + ", sold="
-				+ sold + ", lockedStock=" + lockedStock + ", createAt="
-				+ createAt + ", updateAt=" + updateAt + ", originalPrice="
-				+ originalPrice + ", currentPrice=" + currentPrice
-				+ ", oPriceOfLowestCPrice=" + oPriceOfLowestCPrice
-				+ ", brandName=" + brandName + ", mallMid=" + mallMid
-				+ ", shopNum=" + shopNum + ", filialeMid=" + filialeMid
-				+ ", update_by=" + update_by + ", brandMid=" + brandMid
-				+ ", supportCourierDeliver=" + supportCourierDeliver
-				+ ", supportSelfPickup=" + supportSelfPickup + ", identity="
-				+ identity + ", templateId=" + templateId + ", picList="
-				+ picList + ", specList=" + specList + ", price=" + price
-				+ ", brandId=" + brandId + ", mallId=" + mallId
-				+ ", categoryIds=" + categoryIds + ", customCategory="
-				+ customCategory + ", freight=" + freight + ", terminalType="
-				+ terminalType + ", registerAt=" + registerAt + ", soldOutAt="
-				+ soldOutAt + ", source=" + source + ", stockStatus="
-				+ stockStatus + ", systemNumber=" + systemNumber + ", reason="
-				+ reason + ", oPriceMax=" + oPriceMax + ", oPriceMin="
-				+ oPriceMin + ", cPriceMax=" + cPriceMax + ", cPriceMin="
-				+ cPriceMin + ", discount=" + discount + ", sort=" + sort
-				+ ", goodsSec=" + goodsSec+",purchaseCount="+purchaseCount+",weAndTeStatus="+weAndTeStatus + "]";
+		return "Commodity{" +
+				"activityEndTime=" + activityEndTime +
+				", id=" + id +
+				", type=" + type +
+				", liveId='" + liveId + '\'' +
+				", isSpot=" + isSpot +
+				", liveStartTime=" + liveStartTime +
+				", liveEndTime=" + liveEndTime +
+				", create_by='" + create_by + '\'' +
+				", saleId=" + saleId +
+				", flashSaleId=" + flashSaleId +
+				", activityStartTime=" + activityStartTime +
+				", secKillSign='" + secKillSign + '\'' +
+				", name='" + name + '\'' +
+				", category='" + category + '\'' +
+				", shopId='" + shopId + '\'' +
+				", shopMid='" + shopMid + '\'' +
+				", status=" + status +
+				", code='" + code + '\'' +
+				", description='" + description + '\'' +
+				", postage='" + postage + '\'' +
+				", stock=" + stock +
+				", sold=" + sold +
+				", lockedStock=" + lockedStock +
+				", createAt=" + createAt +
+				", updateAt=" + updateAt +
+				", originalPrice='" + originalPrice + '\'' +
+				", currentPrice='" + currentPrice + '\'' +
+				", oPriceOfLowestCPrice='" + oPriceOfLowestCPrice + '\'' +
+				", brandName='" + brandName + '\'' +
+				", mallMid='" + mallMid + '\'' +
+				", shopNum='" + shopNum + '\'' +
+				", filialeMid='" + filialeMid + '\'' +
+				", update_by='" + update_by + '\'' +
+				", brandMid='" + brandMid + '\'' +
+				", supportCourierDeliver=" + supportCourierDeliver +
+				", supportSelfPickup=" + supportSelfPickup +
+				", identity=" + identity +
+				", templateId=" + templateId +
+				", picList=" + picList +
+				", specList=" + specList +
+				", price=" + price +
+				", brandId='" + brandId + '\'' +
+				", mallId='" + mallId + '\'' +
+				", categoryIds=" + categoryIds +
+				", freight=" + freight +
+				", terminalType=" + terminalType +
+				", registerAt=" + registerAt +
+				", soldOutAt=" + soldOutAt +
+				", source=" + source +
+				", stockStatus=" + stockStatus +
+				", systemNumber='" + systemNumber + '\'' +
+				", reason='" + reason + '\'' +
+				", oPriceMax='" + oPriceMax + '\'' +
+				", oPriceMin='" + oPriceMin + '\'' +
+				", cPriceMax='" + cPriceMax + '\'' +
+				", cPriceMin='" + cPriceMin + '\'' +
+				", purchaseCount=" + purchaseCount +
+				", weAndTeStatus='" + weAndTeStatus + '\'' +
+				", sort=" + sort +
+				", customCategoryIds=" + customCategoryIds +
+				'}';
+	}
+
+	public List<Integer> getCustomCategoryIds() {
+		return customCategoryIds;
+	}
+
+	public void setCustomCategoryIds(List<Integer> customCategoryIds) {
+		this.customCategoryIds = customCategoryIds;
 	}
 }
