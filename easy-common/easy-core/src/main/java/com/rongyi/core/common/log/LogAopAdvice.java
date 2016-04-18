@@ -30,9 +30,8 @@ public class LogAopAdvice
         if(StringUtils.isBlank(logId)){
             logId = UUID.randomUUID().toString().substring(1,16);
             logger.info("日志aop 生成logid={}",logId);
-            MDC.put("logid",logId);
         }
-
+        MDC.put("logid",logId);
         RpcContext.getContext().setAttachment("logid", logId);
     }
 
