@@ -149,4 +149,12 @@ public interface McmcCommoditySolrService {
 	 */
 	public boolean updateCommodityTerminalType(String commodityId, Integer terminalType,String weAndTeStatus);
 
+	/**
+	 * 索引更新商品SystemNumber
+	 *
+	 * @param commodityIds
+	 * @param systemNumber
+	 * @return
+	 */
+	public boolean updateCommoditySystemNumber(List<ObjectId> commodityIds, String systemNumber);
 }
