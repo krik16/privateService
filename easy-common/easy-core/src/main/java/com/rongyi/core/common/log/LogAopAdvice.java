@@ -24,12 +24,6 @@ public class LogAopAdvice
     public void logIdInit() {
         String logId = RpcContext.getContext().getAttachment("logid");
         if(StringUtils.isBlank(logId)){
-            logId = org.slf4j.MDC.get("logidFromController");
-        }
-        if(StringUtils.isBlank(logId)){
-            org.apache.log4j.MDC.get("logidFromController");
-        }
-        if(StringUtils.isBlank(logId)){
             logId = UUID.randomUUID().toString().substring(1,16);
         }
         org.slf4j.MDC.put("logid", logId);
