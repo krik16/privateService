@@ -1,18 +1,11 @@
 package com.rongyi.core.common.log;
 
-//import com.alibaba.dubbo.rpc.RpcContext;
 import com.alibaba.dubbo.rpc.RpcContext;
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.slf4j.MDC;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -30,7 +23,8 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 
             String logid = UUID.randomUUID().toString().substring(1,16);
 
-            MDC.put("logid", logid);
+            org.slf4j.MDC.put("logid", logid);
+            org.apache.log4j.MDC.put("logid", logid);
             RpcContext.getContext().setAttachment("logid", logid);
 
             //logger.info("日志拦截器结束 logid={}",logid);
@@ -48,6 +42,7 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse response, Object o, ModelAndView modelAndView) throws Exception {
         //logger.info("日志拦截器销毁");
-        MDC.clear();
+        org.slf4j.MDC.clear();
+        org.apache.log4j.MDC.remove("logid");
     }
 }

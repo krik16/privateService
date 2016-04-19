@@ -3,9 +3,10 @@ package com.rongyi.core.common.log;
 //import com.alibaba.dubbo.rpc.RpcContext;
 import com.alibaba.dubbo.rpc.RpcContext;
 import org.apache.commons.lang.StringUtils;
+//import org.apache.log4j.MDC;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.MDC;
+//import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -22,23 +23,18 @@ public class LogAopAdvice
 
     public void logIdInit() {
         String logId = RpcContext.getContext().getAttachment("logid");
-        //logger.info("日志aop RpcContext logid={}",logId);
-        if(StringUtils.isBlank(logId)){
-            logId = MDC.get("logid");
-            //logger.info("日志aop MDC logid={}",logId);
-        }
         if(StringUtils.isBlank(logId)){
             logId = UUID.randomUUID().toString().substring(1,16);
-            //logger.info("日志aop 生成logid={}",logId);
         }
-        MDC.put("logid",logId);
+        org.slf4j.MDC.put("logid", logId);
+        org.apache.log4j.MDC.put("logid", logId);
         RpcContext.getContext().setAttachment("logid", logId);
     }
 
     public void clear()
     {
-        //logger.info("日志aop销毁");
-        MDC.clear();
+        org.slf4j.MDC.remove("logid");
+        org.apache.log4j.MDC.remove("logid");
     }
 
 }
