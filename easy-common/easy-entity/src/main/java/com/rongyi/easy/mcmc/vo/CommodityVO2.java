@@ -1,15 +1,16 @@
 package com.rongyi.easy.mcmc.vo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.rongyi.easy.mcmc.entity.CommodityCustomCategoryEntity;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.mongodb.morphia.annotations.Entity;
 
 import com.rongyi.easy.mcmc.mvc.DateJson.JsonDateSerializer;
 
-@Entity("mcmc_commodity")
 public class CommodityVO2 implements  Serializable {
 	
 	private static final long serialVersionUID = -3022699601318372490L;
@@ -30,7 +31,7 @@ public class CommodityVO2 implements  Serializable {
 	private List<CommoditySpecVO2> specVO2List;//商品规格店铺表
 	private List<String> categoryIds;//商品所属的品类id
 	private List<String> categoryNames;//商品所属的品类列表
-	private List<String> customCategory;//自定义分类列表
+	private List<CommodityCustomCategoryEntity> customCategory=new ArrayList<CommodityCustomCategoryEntity>();//自定义分类列表
 	private String description;//商品描述
 	private Integer distribution;//配送方式 1表示到店自提2快递3表示支持两种方式
 	private Integer freight;//1表示商家承担运费,0表示买家承担运费
@@ -51,6 +52,7 @@ public class CommodityVO2 implements  Serializable {
 	private boolean immediateOn = false;//true表示设置是立即上架
 	private Integer templateId;//邮费模版id
 	private Integer purchaseCount;
+	private List<String> mallMids;//商品对应店铺所在的商场
 
 
 	public String getId() {
@@ -131,12 +133,15 @@ public class CommodityVO2 implements  Serializable {
 	public void setCategoryNames(List<String> categoryNames) {
 		this.categoryNames = categoryNames;
 	}
-	public List<String> getCustomCategory() {
+
+	public List<CommodityCustomCategoryEntity> getCustomCategory() {
 		return customCategory;
 	}
-	public void setCustomCategory(List<String> customCategory) {
+
+	public void setCustomCategory(List<CommodityCustomCategoryEntity> customCategory) {
 		this.customCategory = customCategory;
 	}
+
 	public String getDescription() {
 		return description;
 	}
@@ -232,5 +237,13 @@ public class CommodityVO2 implements  Serializable {
 
 	public void setPurchaseCount(Integer purchaseCount) {
 		this.purchaseCount = purchaseCount;
+	}
+
+	public List<String> getMallMids() {
+		return mallMids;
+	}
+
+	public void setMallMids(List<String> mallMids) {
+		this.mallMids = mallMids;
 	}
 }
