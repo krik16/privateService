@@ -32,7 +32,7 @@
 
 	<aop:config>
 		<aop:aspect id="logAop" ref="logAdvice">
-			<aop:pointcut id="target" expression="execution(* com.rongyi.settle..*.*(..))"/>
+			<aop:pointcut id="target" expression="execution(* com.rongyi.settle.service..*.*(..))"/>
 			<aop:before method="logIdInit" pointcut-ref="target"/>
 			<aop:after method="clear" pointcut-ref="target"/>
 			<aop:after-throwing method="clear" pointcut-ref="target"/>
