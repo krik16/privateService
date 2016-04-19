@@ -25,5 +25,16 @@
 	<bean id="idGenService" class="com.rongyi.rpb.service.impl.IdGenService">
 		<constructor-arg name="workerId" value="${idgenService.workerId}" type="long"/>
 	</bean>
+
+	<bean id="logAdvice" class="com.rongyi.core.common.log.LogAopAdvice"/>
+
+	<aop:config>
+		<aop:aspect id="logAop" ref="logAdvice">
+			<aop:pointcut id="target" expression="execution(* com.rongyi.rpb..*.*(..))"/>
+			<aop:before method="logIdInit" pointcut-ref="target"/>
+			<aop:after method="clear" pointcut-ref="target"/>
+		</aop:aspect>
+	</aop:config>
+
 	<aop:aspectj-autoproxy/>
 </beans>
