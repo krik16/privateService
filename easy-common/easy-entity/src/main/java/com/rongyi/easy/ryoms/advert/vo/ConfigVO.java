@@ -65,7 +65,7 @@ public class ConfigVO implements Serializable {
 	private Integer ry_banner_318_home_b;//banner618_930容易网广告数量
 	private Integer mall_banner_318_home_d;//banner1040_630商家广告数量
 	private Integer ry_banner_318_home_d;//banner1040_630容易网广告数量
-	private String adress;//详细地址
+	private String address;//详细地址
 	/**
 	 * @return the configId
 	 */
@@ -498,11 +498,11 @@ public class ConfigVO implements Serializable {
 	public void setRy_banner_318_home_d(Integer ry_banner_318_home_d) {
 		this.ry_banner_318_home_d = ry_banner_318_home_d;
 	}
-	public String getAdress() {
-		return adress;
+	public String getAddress() {
+		return address;
 	}
-	public void setAdress(String adress) {
-		this.adress = adress;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	@Override
 	public String toString() {
@@ -519,6 +519,6 @@ public class ConfigVO implements Serializable {
 				+ mall_banner_330_home_d + ", ry_banner_330_home_d=" + ry_banner_330_home_d
 				+ ", mall_banner_318_home_b=" + mall_banner_318_home_b + ", ry_banner_318_home_b="
 				+ ry_banner_318_home_b + ", mall_banner_318_home_d=" + mall_banner_318_home_d
-				+ ", ry_banner_318_home_d=" + ry_banner_318_home_d + ", adress=" + adress + "]";
+				+ ", ry_banner_318_home_d=" + ry_banner_318_home_d + ", address=" + address + "]";
 	}
 }
