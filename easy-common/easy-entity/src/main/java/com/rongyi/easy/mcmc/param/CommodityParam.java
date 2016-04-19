@@ -43,7 +43,7 @@ public class CommodityParam {
 	
 	private List<ObjectId> categoryIds;//商品所属的品类列表
 	
-	private List<String> customCategory;//自定义分类
+	private List<Integer> customCategoryIds;//自定义分类集合
 	
 	private Integer distribution;//配送方式 1表示到店自提2快递3表示支持两种方式
 	
@@ -177,12 +177,12 @@ public class CommodityParam {
 		this.categoryIds = categoryIds;
 	}
 
-	public List<String> getCustomCategory() {
-		return customCategory;
+	public List<Integer> getCustomCategoryIds() {
+		return customCategoryIds;
 	}
 
-	public void setCustomCategory(List<String> customCategory) {
-		this.customCategory = customCategory;
+	public void setCustomCategoryIds(List<Integer> customCategoryIds) {
+		this.customCategoryIds = customCategoryIds;
 	}
 
 	public Integer getDistribution() {
@@ -301,16 +301,35 @@ public class CommodityParam {
 
 	@Override
 	public String toString() {
-		return "CommodityParam [type=" + type + ", id=" + id + ", name=" + name + ", category=" + category + ", status="
-				+ status + ", code=" + code + ", description=" + description + ", postage=" + postage
-				+ ", originalPrice=" + originalPrice + ", currentPrice=" + currentPrice + ", picList=" + picList
-				+ ", categoryIds=" + categoryIds + ", customCategory=" + customCategory + ", distribution="
-				+ distribution + ", freight=" + freight + ", terminalType=" + terminalType + ", registerAt="
-				+ registerAt + ", soldOutAt=" + soldOutAt + ", stockStatus=" + stockStatus + ", commoditySpeceParams="
-				+ commoditySpeceParams + ", stock=" + stock + ", remain=" + remain
-				+",weAndTeStatus="+weAndTeStatus+",purchaseCount="+purchaseCount+ ", hasSpec=" + hasSpec + "]";
+		return "CommodityParam{" +
+				"category='" + category + '\'' +
+				", type=" + type +
+				", id='" + id + '\'' +
+				", name='" + name + '\'' +
+				", status=" + status +
+				", code='" + code + '\'' +
+				", description='" + description + '\'' +
+				", postage='" + postage + '\'' +
+				", originalPrice='" + originalPrice + '\'' +
+				", currentPrice='" + currentPrice + '\'' +
+				", picList=" + picList +
+				", categoryIds=" + categoryIds +
+				", customCategoryIds=" + customCategoryIds +
+				", distribution=" + distribution +
+				", freight=" + freight +
+				", terminalType=" + terminalType +
+				", registerAt=" + registerAt +
+				", soldOutAt=" + soldOutAt +
+				", stockStatus=" + stockStatus +
+				", commoditySpeceParams=" + commoditySpeceParams +
+				", stock=" + stock +
+				", remain=" + remain +
+				", hasSpec=" + hasSpec +
+				", weAndTeStatus='" + weAndTeStatus + '\'' +
+				", purchaseCount=" + purchaseCount +
+				", templateId=" + templateId +
+				'}';
 	}
-	
 
 	public Integer getTemplateId() {
 		return templateId;

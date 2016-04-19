@@ -124,4 +124,6 @@ public interface ConfigService {
 	* @throws
 	 */
 	public List<ConfigVO> collectAreaList(ConfigSearchParam query);
+
+	public List<String> selectAllMall();
 }
