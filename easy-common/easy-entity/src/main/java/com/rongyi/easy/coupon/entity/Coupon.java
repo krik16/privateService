@@ -308,7 +308,7 @@ public class Coupon implements Serializable {
 
 
     /**
-     * 优惠方式 0：满减 ；1：立减。
+     * 优惠方式 平台抵扣券 0：满减 ；1：立减。商家抵扣券：1 满减；2：立减
      */
     private Integer preferentialType;
 
@@ -362,6 +362,19 @@ public class Coupon implements Serializable {
      * 平台促销券商品分类
      */
     private List<CouponCommodityCategory> couponCommodityCategories;
+
+    /**
+     * 活动券关联表中，券的状态
+     */
+    private Integer activityStatus;
+
+    public Integer getActivityStatus() {
+        return activityStatus;
+    }
+
+    public void setActivityStatus(Integer activityStatus) {
+        this.activityStatus = activityStatus;
+    }
 
     public String getId() {
         return id;
@@ -1015,6 +1028,7 @@ public class Coupon implements Serializable {
                 .append("listCouponVouchers", listCouponVouchers)
                 .append("couponCommodityCategories", couponCommodityCategories)
                 .append("couponBrands", couponBrands)
+                .append("activityStatus", activityStatus)
                 .toString();
     }
 

@@ -1,7 +1,9 @@
 package com.rongyi.easy.coupon.param;
 
+import com.google.inject.internal.Join;
 import com.rongyi.core.common.util.DateTool;
 import com.rongyi.core.framework.exception.IllegalParamterException;
+import com.rongyi.easy.activitymanage.consts.ActivityConstants;
 import com.rongyi.easy.page.*;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -45,6 +47,12 @@ public class MerchantCouponQueryParamParser {
                         queryParam.setQueryOrders(queryOrderList);
                     }
                 }
+                List<JoinFilter> joinFilters = new ArrayList<>();
+                List<QueryFilter> joinQueryFilters = new ArrayList<>();
+                joinQueryFilters.add(new QueryFilter("coupon.id",FilterType.BEQ,ValueType.VARCHAR,"activity_goods.goods_id",QueryParam.RELATION_AND));
+                joinQueryFilters.add(new QueryFilter("activity_goods.type",FilterType.EQUALS,ValueType.INTEGER, ActivityConstants.GoodsLabelType.ACTIVITYCOUPON,QueryParam.RELATION_AND));
+                joinFilters.add(new JoinFilter(0,"activity_goods",joinQueryFilters));
+                queryParam.setJoinFilters(joinFilters);
                 if(jsonObject.get("pageNo")!=null){
                     Integer pageno=jsonObject.getInt("pageNo");
                     queryParam.setCurrentPage(pageno);
