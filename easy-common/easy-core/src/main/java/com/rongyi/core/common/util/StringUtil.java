@@ -150,7 +150,7 @@ public class StringUtil {
 	 *
 	 */
 	public static String convert2String(Object obj) {
-		if (obj == null) {
+		if (obj == null||obj.equals("null")) {
 			return "";
 		}
 		return obj.toString();
