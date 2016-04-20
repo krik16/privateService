@@ -74,4 +74,10 @@ public class LogAopAdvice
         }
     }
 
+    public void exceptionProcess()
+    {
+        org.slf4j.MDC.remove("logid");
+        org.apache.log4j.MDC.remove("logid");
+    }
+
 }
