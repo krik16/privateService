@@ -20,9 +20,12 @@ import java.util.UUID;
 public class LogAopAdvice
 {
 
+    private Logger logger = LoggerFactory.getLogger(LogAopAdvice.class);
     public void logIdInit() {
 
+
         String logId = RpcContext.getContext().getAttachment("logid");
+        logger.info("aop 开始 RpcContext={}",logId);
 
         if(StringUtils.isBlank(logId)){
             logId = org.slf4j.MDC.get("logidFromController");
@@ -56,12 +59,14 @@ public class LogAopAdvice
 
     public void clear()
     {
+        logger.info("aop 结束");
         org.slf4j.MDC.put("aopCount",String.valueOf(Integer.parseInt(org.slf4j.MDC.get("aopCount")) - 1));
         org.apache.log4j.MDC.put("aopCount",String.valueOf(Integer.parseInt(org.apache.log4j.MDC.get("aopCount").toString()) - 1));
 
         if(org.slf4j.MDC.get("logidFromController") == null){
             if(Integer.parseInt(org.slf4j.MDC.get("aopCount")) == 0)
             {
+                logger.info("aop 清楚logid");
                 org.slf4j.MDC.remove("logid");
             }
         }
@@ -69,6 +74,7 @@ public class LogAopAdvice
         if(org.apache.log4j.MDC.get("logidFromController") == null){
             if(Integer.parseInt(org.apache.log4j.MDC.get("aopCount").toString()) == 0)
             {
+                logger.info("aop 清楚logid");
                 org.apache.log4j.MDC.remove("logid");
             }
         }
@@ -76,6 +82,7 @@ public class LogAopAdvice
 
     public void exceptionProcess()
     {
+        logger.info("aop 出错");
         org.slf4j.MDC.remove("logid");
         org.apache.log4j.MDC.remove("logid");
     }
