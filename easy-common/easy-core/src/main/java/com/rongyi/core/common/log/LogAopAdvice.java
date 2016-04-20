@@ -37,6 +37,7 @@ public class LogAopAdvice
 
     public void clear()
     {
+        logger.info("日志aop结束");
         org.slf4j.MDC.remove("logid");
         org.apache.log4j.MDC.remove("logid");
     }
