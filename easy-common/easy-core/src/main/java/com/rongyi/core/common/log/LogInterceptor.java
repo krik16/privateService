@@ -1,6 +1,9 @@
 package com.rongyi.core.common.log;
 
 import com.alibaba.dubbo.rpc.RpcContext;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -13,13 +16,13 @@ import java.util.UUID;
  */
 public class LogInterceptor extends HandlerInterceptorAdapter {
 
-    //private Logger logger = LoggerFactory.getLogger(LogInterceptor.class);
+    private Logger logger = LoggerFactory.getLogger(LogInterceptor.class);
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         try
         {
-            //logger.info("日志拦截器开始");
+            logger.info("日志拦截器开始");
 
             String logid = UUID.randomUUID().toString().substring(1,16);
 
@@ -27,7 +30,7 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
             org.apache.log4j.MDC.put("logid", logid);
             RpcContext.getContext().setAttachment("logid", logid);
 
-            //logger.info("日志拦截器结束 logid={}",logid);
+            logger.info("日志拦截器结束 logid={}",logid);
 
             return true;
         }

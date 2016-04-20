@@ -19,11 +19,15 @@ import java.util.UUID;
  */
 public class LogAopAdvice
 {
-    //private Logger logger = LoggerFactory.getLogger(LogAopAdvice.class);
+    private Logger logger = LoggerFactory.getLogger(LogAopAdvice.class);
 
     public void logIdInit() {
+        logger.info("日志aop开始");
+
         String logId = RpcContext.getContext().getAttachment("logid");
+        logger.info("RpcContext={}",logId);
         if(StringUtils.isBlank(logId)){
+            logger.info("RpcContext logid null");
             logId = UUID.randomUUID().toString().substring(1,16);
         }
         org.slf4j.MDC.put("logid", logId);
