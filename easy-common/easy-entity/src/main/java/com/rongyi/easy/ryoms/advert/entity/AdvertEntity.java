@@ -28,6 +28,7 @@ public class AdvertEntity implements Serializable {
 	private String relation_name;
 	private String relation_code;
 	private String relation_url;
+	private Integer relation_status;//广告关联状态
 	private List<String> mall_ids;
 	/**
 	 * @return the id
@@ -268,5 +269,17 @@ public class AdvertEntity implements Serializable {
 	 */
 	public void setMall_ids(List<String> mall_ids) {
 		this.mall_ids = mall_ids;
+	}
+	/**
+	 * @return the relation_status
+	 */
+	public Integer getRelation_status() {
+		return relation_status;
+	}
+	/**
+	 * @param relation_status the relation_status to set
+	 */
+	public void setRelation_status(Integer relation_status) {
+		this.relation_status = relation_status;
 	}
 }

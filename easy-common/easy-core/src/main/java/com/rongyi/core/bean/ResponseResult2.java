@@ -74,6 +74,15 @@ public class ResponseResult2 implements java.io.Serializable {
 			public void setCurrentpage(int currentpage) {
 				this.currentpage = currentpage;
 			}
+
+			@Override
+			public String toString() {
+				return "Page{" +
+						"total_record=" + total_record +
+						", pagesize=" + pagesize +
+						", currentpage=" + currentpage +
+						'}';
+			}
 		}
 
 		public Object getData() {
@@ -94,7 +103,14 @@ public class ResponseResult2 implements java.io.Serializable {
 		public Page getPage() {
 			return page;
 		}
-		
+
+		@Override
+		public String toString() {
+			return "Result{" +
+					"data=" + data +
+					", page=" + page +
+					'}';
+		}
 	}
 	@Deprecated
 	 class Meta implements java.io.Serializable {
