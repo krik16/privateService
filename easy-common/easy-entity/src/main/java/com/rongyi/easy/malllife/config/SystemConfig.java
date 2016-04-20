@@ -5,6 +5,7 @@ import org.apache.commons.lang.StringUtils;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -48,6 +49,25 @@ public class SystemConfig implements Serializable{
     public static final String PicUrl = UPAIYUN_ADDRESS+"system/mall/appearance_pic/";
     public static final String productionIconUrl = UPAIYUN_ADDRESS+"system/production/icon/";
     public static final String shopPicUrl = UPAIYUN_ADDRESS+"system/photo/file/";
+
+    /*URL过滤地址**/
+    public static final List<String> urlList = Arrays.asList(new String[]{"1", "/flashsale/saleDetail.htm",
+            "/flashsale/saleFlashDetail.htm",
+            "/flashsale/flashDetail.htm",
+            "/live/liveSearch.htm",
+            "/live/liveDetail.htm",
+            "/bull/getBullDetail.htm",
+            "/sys/msg/getbuyMsgCount.htm", //日志
+            "/commodity/getCommodityDetail.htm",
+            "/shopCart/addShopCart.htm",
+            "/order/submitOrderModel.htm",
+            "/v5/recommend/activity.htm",
+            "/v5/home/getArticleInfo.htm",
+            "/v5/shop/getShop.htm"
+    });
+
+
+
 
 
 
