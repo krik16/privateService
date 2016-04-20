@@ -54,14 +54,18 @@ public class LogAopAdvice
             org.apache.log4j.MDC.put("aopCount","1");
         }
 
+        logger.info("aop 开始 count={}",org.apache.log4j.MDC.get("aopCount"));
+
         RpcContext.getContext().setAttachment("logid", logId);
     }
 
     public void clear()
     {
-        logger.info("aop 结束");
+
         org.slf4j.MDC.put("aopCount",String.valueOf(Integer.parseInt(org.slf4j.MDC.get("aopCount")) - 1));
         org.apache.log4j.MDC.put("aopCount",String.valueOf(Integer.parseInt(org.apache.log4j.MDC.get("aopCount").toString()) - 1));
+
+        logger.info("aop 结束 count={}",org.apache.log4j.MDC.get("aopCount"));
 
         if(org.slf4j.MDC.get("logidFromController") == null){
             if(Integer.parseInt(org.slf4j.MDC.get("aopCount")) == 0)
