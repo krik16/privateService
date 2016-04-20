@@ -144,6 +144,13 @@ public interface ROAContentService {
 	public Long findContentCountAllByParam(ForumContentParam fcp);
 
 	/**
+	 * 查询特卖列表的总数量
+	 * @param fcp
+	 * @return
+	 */
+	public Long findContentAllByParamSpecailCount(ForumContentParam fcp);
+
+	/**
 	 * 判断在同一位置、同一区域、同一发布时间段内是否有内容
 	 * @param fc
 	 * @return

@@ -130,6 +130,12 @@ public interface IIContentService {
 	 * @return
 	 */
 	public Long findContentCountAllByParam(ForumContentParam fcp);
+	/**
+	 * 查询特卖的列表数量
+	 * @param fcp
+	 * @return
+	 */
+	public Long findContentAllByParamSpecailCount(ForumContentParam fcp);
 
 	/**
 	 * 判断在同一位置、同一区域、同一发布时间段内是否有内容
