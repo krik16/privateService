@@ -32,6 +32,20 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
             org.apache.log4j.MDC.put("logidFromController", logid);
             RpcContext.getContext().setAttachment("logid", logid);
 
+            if(org.slf4j.MDC.get("logCount") != null){
+                org.slf4j.MDC.put("logCount",String.valueOf(Integer.parseInt(org.slf4j.MDC.get("logCount")) + 1));
+            }
+            else{
+                org.slf4j.MDC.put("logCount","1");
+            }
+
+            if(org.apache.log4j.MDC.get("logCount") != null){
+                org.apache.log4j.MDC.put("logCount",String.valueOf(Integer.parseInt(org.apache.log4j.MDC.get("logCount").toString()) + 1));
+            }
+            else{
+                org.apache.log4j.MDC.put("logCount","1");
+            }
+
             //logger.info("日志拦截器结束 logid={}",logid);
 
             return true;
