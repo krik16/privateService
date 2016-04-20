@@ -164,4 +164,12 @@ public interface McmcCommoditySolrService {
 	public boolean updateCommoditySaleByIds(List<String> ids, Integer saleId, Date activityStartTime, Date activityEndTime, List<ActivityCommodityParam> commodityParams,Integer type);
 
 	public boolean cleanSolrByIdsForFlashSale(List<String> ids);
+	/**
+	 * 索引更新商品SystemNumber
+	 *
+	 * @param commodityIds
+	 * @param systemNumber
+	 * @return
+	 */
+	public boolean updateCommoditySystemNumber(List<ObjectId> commodityIds, String systemNumber);
 }
