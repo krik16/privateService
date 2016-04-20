@@ -22,12 +22,12 @@ public class LogAopAdvice
     private Logger logger = LoggerFactory.getLogger(LogAopAdvice.class);
 
     public void logIdInit() {
-        logger.info("日志aop开始");
+        //logger.info("日志aop开始");
 
         String logId = RpcContext.getContext().getAttachment("logid");
-        logger.info("RpcContext={}",logId);
+        //logger.info("RpcContext={}",logId);
         if(StringUtils.isBlank(logId)){
-            logger.info("RpcContext logid null");
+            //logger.info("RpcContext logid null");
             logId = UUID.randomUUID().toString().substring(1,16);
         }
         org.slf4j.MDC.put("logid", logId);
@@ -37,7 +37,7 @@ public class LogAopAdvice
 
     public void clear()
     {
-        logger.info("日志aop结束");
+        //logger.info("日志aop结束");
         org.slf4j.MDC.remove("logid");
         org.apache.log4j.MDC.remove("logid");
     }
