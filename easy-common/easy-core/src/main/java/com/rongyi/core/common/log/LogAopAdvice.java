@@ -22,10 +22,10 @@ public class LogAopAdvice
     private Logger logger = LoggerFactory.getLogger(LogAopAdvice.class);
 
     public void logIdInit() {
-        //logger.info("日志aop开始");
+        logger.info("日志aop开始");
 
         String logId = RpcContext.getContext().getAttachment("logid");
-        //logger.info("RpcContext={}",logId);
+        logger.info("RpcContext={}",logId);
         if(StringUtils.isBlank(logId)){
             logId = org.slf4j.MDC.get("logidFromController");
         }
@@ -43,7 +43,7 @@ public class LogAopAdvice
 
     public void clear()
     {
-        //logger.info("日志aop结束");
+        logger.info("日志aop结束");
         if(org.slf4j.MDC.get("logidFromController") == null){
             org.slf4j.MDC.remove("logid");
         }
