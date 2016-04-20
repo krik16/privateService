@@ -319,6 +319,11 @@
 				<artifactId>logback-core</artifactId>
 				<version>${logback.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.logback-extensions</groupId>
+				<artifactId>logback-ext-spring</artifactId>
+				<version>0.1.2</version>
+			</dependency>
 			<!-- logback end -->
 			<dependency>
 				<groupId>c3p0</groupId>
