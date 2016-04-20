@@ -6,6 +6,7 @@ import org.apache.commons.lang.StringUtils;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -160,4 +161,22 @@ public class SystemConfig implements Serializable{
         }
 
     }
+
+    public static String listToString(List<String> stringList){
+        if (stringList==null||stringList.size()<1) {
+            return null;
+        }
+        StringBuilder result=new StringBuilder();
+        boolean flag=false;
+        for (String string : stringList) {
+            if (flag) {
+                result.append(",");
+            }else {
+                flag=true;
+            }
+            result.append(string);
+        }
+        return result.toString();
+    }
+
 }

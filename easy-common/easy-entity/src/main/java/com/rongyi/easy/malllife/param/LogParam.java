@@ -15,90 +15,43 @@ public class LogParam implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-   private  String page;//[页面]
-    private  String  forum;//[版块]
-    private  String position;//[位置]
-    private  String content;//[内容]
-    private  String clickNum;//[点击量]
-    private  String type;//[展示、点击、debug类型等]
-    private  String timeStamp;//点击时间戳
-    private  String channel;//分享渠道
+    private  String pageNum;//页面数
 
-    private String opRole;// 操作角色
+    private String proSpecId;//商品类目Id
 
-    private String opType;//操作功能类型 createShopCart 创建，操作购物车 orderShopCart 生成购物车订单
     private String userId;//操作人的Id
+    private String mallId;//
+    private String shopId;//
+    private String brandId;//
+    private String commodityId;//
+    private String commodityType;//商品发布类型 （4店长、5导购，买手6）
+    private String commodityPrice;//商品价格
+    private String spcParam;// 类目参数
+    private String skuNum;//sku商品数
+    private String orderId;// 订单ID
+    private String couponId;//
+    private String couponSpec;//
+    private String cBrandId;//品牌Id
+    private String orderPay;//
+    private String searchKey;//搜索关键字
+    private String st;//搜索类型 （searchtype）1找店，2商品，3优惠
+    private String oId;//参数Id
 
-    public String getPage() {
-        return page;
+
+    public String getPageNum() {
+        return pageNum;
     }
 
-    public void setPage(String page) {
-        this.page = page;
+    public void setPageNum(String pageNum) {
+        this.pageNum = pageNum;
     }
 
-    public String getForum() {
-        return forum;
+    public String getProSpecId() {
+        return proSpecId;
     }
 
-    public void setForum(String forum) {
-        this.forum = forum;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getClickNum() {
-        return clickNum;
-    }
-
-    public void setClickNum(String clickNum) {
-        this.clickNum = clickNum;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getTimeStamp() {
-        return timeStamp;
-    }
-
-    public void setTimeStamp(String timeStamp) {
-        this.timeStamp = timeStamp;
-    }
-
-    public String getOpRole() {
-        return opRole;
-    }
-
-    public void setOpRole(String opRole) {
-        this.opRole = opRole;
-    }
-
-    public String getOpType() {
-        return opType;
-    }
-
-    public void setOpType(String opType) {
-        this.opType = opType;
+    public void setProSpecId(String proSpecId) {
+        this.proSpecId = proSpecId;
     }
 
     public String getUserId() {
@@ -109,11 +62,132 @@ public class LogParam implements Serializable {
         this.userId = userId;
     }
 
-    public String getChannel() {
-        return channel;
+    public String getMallId() {
+        return mallId;
     }
 
-    public void setChannel(String channel) {
-        this.channel = channel;
+    public void setMallId(String mallId) {
+        this.mallId = mallId;
+    }
+
+    public String getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
+    }
+
+    public String getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(String brandId) {
+        this.brandId = brandId;
+    }
+
+    public String getCommodityId() {
+        return commodityId;
+    }
+
+    public void setCommodityId(String commodityId) {
+        this.commodityId = commodityId;
+    }
+
+    public String getCommodityType() {
+        return commodityType;
+    }
+
+    public void setCommodityType(String commodityType) {
+        this.commodityType = commodityType;
+    }
+
+    public String getCommodityPrice() {
+        return commodityPrice;
+    }
+
+    public void setCommodityPrice(String commodityPrice) {
+        this.commodityPrice = commodityPrice;
+    }
+
+    public String getSpcParam() {
+        return spcParam;
+    }
+
+    public void setSpcParam(String spcParam) {
+        this.spcParam = spcParam;
+    }
+
+    public String getSkuNum() {
+        return skuNum;
+    }
+
+    public void setSkuNum(String skuNum) {
+        this.skuNum = skuNum;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getCouponId() {
+        return couponId;
+    }
+
+    public void setCouponId(String couponId) {
+        this.couponId = couponId;
+    }
+
+    public String getCouponSpec() {
+        return couponSpec;
+    }
+
+    public void setCouponSpec(String couponSpec) {
+        this.couponSpec = couponSpec;
+    }
+
+
+    public String getOrderPay() {
+        return orderPay;
+    }
+
+    public void setOrderPay(String orderPay) {
+        this.orderPay = orderPay;
+    }
+
+    public String getSearchKey() {
+        return searchKey;
+    }
+
+    public void setSearchKey(String searchKey) {
+        this.searchKey = searchKey;
+    }
+
+    public String getSt() {
+        return st;
+    }
+
+    public void setSt(String st) {
+        this.st = st;
+    }
+
+    public String getoId() {
+        return oId;
+    }
+
+    public void setoId(String oId) {
+        this.oId = oId;
+    }
+
+    public String getcBrandId() {
+        return cBrandId;
+    }
+
+    public void setcBrandId(String cBrandId) {
+        this.cBrandId = cBrandId;
     }
 }
