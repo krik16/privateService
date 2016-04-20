@@ -172,4 +172,12 @@ public interface McmcCommoditySolrService {
 	 * @return
 	 */
 	public boolean updateCommoditySystemNumber(List<ObjectId> commodityIds, String systemNumber);
+	/**
+	 * 索引更新商品SystemNumber
+	 *
+	 * @param commodityIds
+	 * @param systemNumber
+	 * @return
+	 */
+	public boolean updateCommoditySystemNumber(List<ObjectId> commodityIds, String systemNumber);
 }
