@@ -169,22 +169,12 @@
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>c3p0</groupId>
 			<artifactId>c3p0</artifactId>
-		</dependency>
-
-		<!-- 日志记录依赖包，很多都依赖此包，像log4j,json-lib等等 -->
-		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging-api</artifactId>
 		</dependency>
 
 		<!-- 下面的三个包是在配置事务的时候用到的 spring的依赖包 -->
