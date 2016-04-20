@@ -180,23 +180,6 @@
 			<groupId>c3p0</groupId>
 			<artifactId>c3p0</artifactId>
 		</dependency>
-		<!-- logback start -->
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>${logback.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-core</artifactId>
-			<version>${logback.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.logback-extensions</groupId>
-			<artifactId>logback-ext-spring</artifactId>
-			<version>0.1.2</version>
-		</dependency>
-		<!-- logback end -->
 
 		<!-- 日志记录依赖包，很多都依赖此包，像log4j,json-lib等等 -->
 		<dependency>
