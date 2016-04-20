@@ -299,6 +299,7 @@ public class RpbServiceImpl implements IRpbService {
 
 	@Override
 	public Map<String, Object> validatePayHtml(String[] ids, Integer operateType) {
+		LOGGER.info("validatePayHtml:ids={}",ids);
 		Map<String, Object> map = new HashMap<>();
 		List<PaymentEntity> list = paymentService.valiadteStatus(ids, Constants.PAYMENT_STATUS.STAUS2);
 		if (!list.isEmpty()) {
