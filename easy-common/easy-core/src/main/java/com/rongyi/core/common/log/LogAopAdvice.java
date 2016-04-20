@@ -27,6 +27,12 @@ public class LogAopAdvice
         String logId = RpcContext.getContext().getAttachment("logid");
         //logger.info("RpcContext={}",logId);
         if(StringUtils.isBlank(logId)){
+            logId = org.slf4j.MDC.get("logidFromController");
+        }
+        if(StringUtils.isBlank(logId)){
+            logId =  org.apache.log4j.MDC.get("logidFromController") == null?null:org.apache.log4j.MDC.get("logidFromController").toString();
+        }
+        if(StringUtils.isBlank(logId)){
             //logger.info("RpcContext logid null");
             logId = UUID.randomUUID().toString().substring(1,16);
         }
@@ -38,8 +44,13 @@ public class LogAopAdvice
     public void clear()
     {
         //logger.info("日志aop结束");
-        org.slf4j.MDC.remove("logid");
-        org.apache.log4j.MDC.remove("logid");
+        if(org.slf4j.MDC.get("logidFromController") == null){
+            org.slf4j.MDC.remove("logid");
+        }
+
+        if(org.apache.log4j.MDC.get("logidFromController") == null){
+            org.apache.log4j.MDC.remove("logid");
+        }
     }
 
 }

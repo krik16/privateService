@@ -28,6 +28,8 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 
             org.slf4j.MDC.put("logid", logid);
             org.apache.log4j.MDC.put("logid", logid);
+            org.slf4j.MDC.put("logidFromController", logid);
+            org.apache.log4j.MDC.put("logidFromController", logid);
             RpcContext.getContext().setAttachment("logid", logid);
 
             //logger.info("日志拦截器结束 logid={}",logid);
@@ -47,5 +49,6 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
         //logger.info("日志拦截器销毁");
         org.slf4j.MDC.clear();
         org.apache.log4j.MDC.remove("logid");
+        org.apache.log4j.MDC.remove("logidFromController");
     }
 }
