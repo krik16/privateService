@@ -30,7 +30,9 @@
 
 	<aop:config>
 		<aop:aspect id="logAop" ref="logAdvice">
-			<aop:pointcut id="target" expression="execution(* com.rongyi.rpb.mq..*.*(..))"/>
+			<aop:pointcut id="target" expression="execution(* com.rongyi.rpb.mq.Receiver.*.*(..))
+			|| execution(* com.rongyi.rss.rpb.IRpbService.*.*(..))
+			|| execution(* com.rongyi.rss.rpb.OrderNoGenService.*.*(..))"/>
 			<aop:before method="logIdInit" pointcut-ref="target"/>
 			<aop:after method="clear" pointcut-ref="target"/>
 			<aop:after-throwing method="clear" pointcut-ref="target"/>
