@@ -35,7 +35,7 @@
 			<aop:pointcut id="target" expression="execution(* com.rongyi.tms.service..*.*(..))"/>
 			<aop:before method="logIdInit" pointcut-ref="target"/>
 			<aop:after method="clear" pointcut-ref="target"/>
-			<aop:after-throwing method="clear" pointcut-ref="target"/>
+			<aop:after-throwing method="exceptionProcess" pointcut-ref="target"/>
 		</aop:aspect>
 	</aop:config>
 </beans>
