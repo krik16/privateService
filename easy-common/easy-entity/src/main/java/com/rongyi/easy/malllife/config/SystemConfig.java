@@ -57,12 +57,13 @@ public class SystemConfig implements Serializable{
             "/live/liveSearch.htm",
             "/live/liveDetail.htm",
             "/bull/getBullDetail.htm",
-            "/sys/msg/getbuyMsgCount.htm", //日志
+            "/sys/msg/getbuyMsgCount.htm",
             "/commodity/getCommodityDetail.htm",
             "/shopCart/addShopCart.htm",
             "/order/submitOrderModel.htm",
             "/v5/recommend/activity.htm",
             "/v5/home/getArticleInfo.htm",
+            "/v5/activity/myCouponDetail.htm",
             "/v5/shop/getShop.htm"
     });
 
