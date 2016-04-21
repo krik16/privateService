@@ -1,6 +1,9 @@
 package com.rongyi.rss.rmc;
 
+import java.util.Map;
+
 import com.rongyi.core.framework.exception.RYServiceException;
+import com.rongyi.easy.domain.member.CityonActivity;
 import com.rongyi.easy.domain.member.MallMember;
 import com.rongyi.easy.rmc.exception.MallMemberNotFoundException;
 
@@ -105,5 +108,9 @@ public interface MallMemberService {
   * @throws
    */
   MallMember queryMemberByNo(MallMember mallMember);
+
+  int countCityOnActivity(Map<String, Object> paramsMap);
+
+  Integer insertActivity(CityonActivity activity);
 
 }

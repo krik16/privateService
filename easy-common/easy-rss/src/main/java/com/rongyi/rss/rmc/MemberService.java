@@ -7,6 +7,7 @@ import com.rongyi.easy.domain.member.CarInfoVo;
 import com.rongyi.easy.domain.member.MallMember;
 import com.rongyi.easy.domain.member.UserLog;
 import com.rongyi.easy.revc.param.ElectronicMemberParam;
+import com.rongyi.easy.rmc.param.ActivityLimitParam;
 import com.rongyi.easy.rmc.param.CarInfoParam;
 import com.rongyi.easy.rmc.param.LoginWithSmsParam;
 import com.rongyi.easy.rmc.param.MemberInfoParam;
@@ -74,5 +75,7 @@ public interface MemberService {
   CarInfoVo getCarInfoByCode(CarInfoParam carInfoParam);
 
   Map<String, Object> memberLoginWithSms(LoginWithSmsParam param);
+
+Map<String, Object> memberActivityLimit(ActivityLimitParam param);
 
 }
