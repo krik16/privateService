@@ -40,7 +40,7 @@ public enum AppErrorCode {
     ERROR_COMMODITY_NOT_REGISTER(1066006,"商品下架"),
     ERROR_COMMODITY_ALL_SOLDOUT(1066007,"商品均已下架"),
     ERROR_ORDERMODEL_SHIPTYPE_CONFLICT(1066008,"同店铺商品仅支持一种配送方式，系统先为您默认快递发货噢"),
-    ERROR_COMMODITY_PURCHASE_OVER(1066009,"超出购买数量~"),
+    ERROR_COMMODITY_PURCHASE_OVER(1066009,"你不能购买更多商品哦~"),
     ERROR_RECEIVED_REBATE(1065002, "您已领取过了新年礼盒"),
     
     

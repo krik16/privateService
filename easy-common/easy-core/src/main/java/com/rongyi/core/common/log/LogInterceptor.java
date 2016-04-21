@@ -1,6 +1,9 @@
 package com.rongyi.core.common.log;
 
 import com.alibaba.dubbo.rpc.RpcContext;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -25,7 +28,23 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 
             org.slf4j.MDC.put("logid", logid);
             org.apache.log4j.MDC.put("logid", logid);
+            org.slf4j.MDC.put("logidFromController", logid);
+            org.apache.log4j.MDC.put("logidFromController", logid);
             RpcContext.getContext().setAttachment("logid", logid);
+
+            if(org.slf4j.MDC.get("logCount") != null){
+                org.slf4j.MDC.put("logCount",String.valueOf(Integer.parseInt(org.slf4j.MDC.get("logCount")) + 1));
+            }
+            else{
+                org.slf4j.MDC.put("logCount","1");
+            }
+
+            if(org.apache.log4j.MDC.get("logCount") != null){
+                org.apache.log4j.MDC.put("logCount",String.valueOf(Integer.parseInt(org.apache.log4j.MDC.get("logCount").toString()) + 1));
+            }
+            else{
+                org.apache.log4j.MDC.put("logCount","1");
+            }
 
             //logger.info("日志拦截器结束 logid={}",logid);
 
@@ -44,5 +63,6 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
         //logger.info("日志拦截器销毁");
         org.slf4j.MDC.clear();
         org.apache.log4j.MDC.remove("logid");
+        org.apache.log4j.MDC.remove("logidFromController");
     }
 }
