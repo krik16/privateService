@@ -3,6 +3,7 @@ package com.rongyi.core.enumerate;
 /**
  * Description:卡券 错误码
  * 1 表示透传错误码 02 营销中心 01 消息中心  10201XX
+ *                              12 微信接口
  * Author: 袁波
  * DATE: 2016/3/10 11:23
  * Package:com.rongyi.core.enumerate
@@ -27,7 +28,17 @@ public enum  CouponEnum {
     ERROR_NAME(1020133, "名称不合法"),
     ERROR_NAME_SENSITIVE_WORD(1020140, "卡券名称存在敏感词"),
     ERROR_USE_LIMIT_SENSITIVE_WORD(1020141, "卡券使用限制存在敏感词"),
-    ERROR_USE_DES_SENSITIVE_WORD(1020142, "卡券使用说明存在敏感词");
+    ERROR_USE_DES_SENSITIVE_WORD(1020142, "卡券使用说明存在敏感词"),
+
+    ERROR_NULL_PARAM(1021200,"参数为空！"),
+    ERROR_INVALID_CURRENTPAGE(1021201,"当前页参数不正确！"),
+    ERROR_INVALID_PAGESIZE(1021202,"每一页大小参数不正确！"),
+    ERROR_INVALID_PAGE_PARAM(1021203,"页码和每一页大小必须为整数"),
+    ERROR_INVALID_USER(1021204,"用户不正确！"),
+    ERROR_INVALID_MOBILE(1021205,"buyerMobile 参数不能为空！"),
+    ERROR_INVALID_MALLID(1021206,"mallId 参数不能为空！");
+
+
 
     private int code;
     private String message;

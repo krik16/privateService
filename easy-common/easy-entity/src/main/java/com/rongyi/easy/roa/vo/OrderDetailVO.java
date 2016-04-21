@@ -1,6 +1,10 @@
 package com.rongyi.easy.roa.vo;
 
 
+import com.rongyi.easy.coupon.entity.CouponBrand;
+import com.rongyi.easy.coupon.entity.CouponMall;
+import com.rongyi.easy.coupon.entity.CouponShop;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
@@ -68,6 +72,14 @@ public class OrderDetailVO implements Serializable {
     private String usageDesc;//使用说明
 
     private List<ActivityDetailVO> codeList; // 本订单所含的优惠券信息
+
+    private List<CouponMall> couponMalls;//适用商场列表
+
+    private List<CouponShop> couponShops;//适用店铺列表
+
+    private List<CouponBrand> couponBrands;//适用品牌列表
+
+
 
     public Integer getTradeStatus() {
         return tradeStatus;
@@ -247,5 +259,29 @@ public class OrderDetailVO implements Serializable {
 
     public void setLimitCount(Integer limitCount) {
         this.limitCount = limitCount;
+    }
+
+    public List<CouponMall> getCouponMalls() {
+        return couponMalls;
+    }
+
+    public void setCouponMalls(List<CouponMall> couponMalls) {
+        this.couponMalls = couponMalls;
+    }
+
+    public List<CouponShop> getCouponShops() {
+        return couponShops;
+    }
+
+    public void setCouponShops(List<CouponShop> couponShops) {
+        this.couponShops = couponShops;
+    }
+
+    public List<CouponBrand> getCouponBrands() {
+        return couponBrands;
+    }
+
+    public void setCouponBrands(List<CouponBrand> couponBrands) {
+        this.couponBrands = couponBrands;
     }
 }
