@@ -5,7 +5,7 @@ import com.rongyi.easy.tradecenter.param.OsmOrderQueryParam;
 
 import java.util.Map;
 
-public interface IMerchantOrderService
+public interface IMerchantOsmOrderService
 {
 	
 	/**
