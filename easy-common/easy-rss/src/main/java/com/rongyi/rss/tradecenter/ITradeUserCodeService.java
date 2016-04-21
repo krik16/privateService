@@ -39,5 +39,5 @@ public interface ITradeUserCodeService {
 
     CouponRefundDetailVO getRefundDetail(Integer refundId);
 
-    List<CouponOrderVO> getCouponOrderListForWX(String buyerId,String openId,String userPhone,String type);
+    List<CouponOrderVO> getCouponOrderListForWX(String buyerId,String openId,String userPhone,int pageSize,int currentPage,String type);
 }
