@@ -35,7 +35,8 @@ public enum  CouponEnum {
     ERROR_INVALID_PAGESIZE(1021202,"每一页大小参数不正确！"),
     ERROR_INVALID_PAGE_PARAM(1021203,"页码和每一页大小必须为整数"),
     ERROR_INVALID_USER(1021204,"用户不正确！"),
-    ERROR_INVALID_MOBILE(1021205,"buyerMobile 参数不能为空！"),;
+    ERROR_INVALID_MOBILE(1021205,"buyerMobile 参数不能为空！"),
+    ERROR_INVALID_MALLID(1021206,"mallId 参数不能为空！");
 
 
 
