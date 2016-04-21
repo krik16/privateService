@@ -303,5 +303,13 @@ public interface IIContentService {
 	 * @return
 	 */
 	public boolean existSameLaunchAdvert(ForumContent content);
+	/**
+	 * 获取可见板块的信息
+	 *
+	 * @param moduleId
+	 * @author wangjh7
+	 * @return
+	 */
+	public int getVisibleActivityModuleBeyondId(int moduleId) ;
 
 }
