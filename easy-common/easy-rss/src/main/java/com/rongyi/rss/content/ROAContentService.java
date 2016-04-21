@@ -367,5 +367,16 @@ public interface ROAContentService {
 	 * @return
 	 */
 	public boolean existSameLaunchAdvert(ForumContent content);
+
+
+	/**
+	 * 获取可见板块的个数
+	 *
+	 * @param moduleId
+	 * @author wangjh7
+	 * @return
+	 */
+
+	public int getVisibleActivityModuleBeyondId(int moduleId) ;
 	
 }
