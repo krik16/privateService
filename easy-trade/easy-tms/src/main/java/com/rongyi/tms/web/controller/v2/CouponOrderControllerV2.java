@@ -77,7 +77,7 @@ public class CouponOrderControllerV2 extends BaseControllerV2 {
 		LOGGER.info("优惠券订单列表:paramsMap={}",paramsMap);
 		ResponseData responseData;
 		try {
-			permissionCheck(request,"");
+			permissionCheck(request,"ORDER_COUPON_VIEW");
 			Integer currpage = Integer.valueOf(paramsMap.get("currentPage").toString());
 			List<CouponOrderVO> list = couponOrderService.selectPageList(currpage, Constant.PAGE.PAGESIZE, paramsMap);
 			Integer pageTotle = couponOrderService.selectPageListCount(paramsMap);
@@ -100,7 +100,7 @@ public class CouponOrderControllerV2 extends BaseControllerV2 {
 		LOGGER.info("优惠券订单详情:id={}", id);
 		ResponseData responseData;
 		try{
-			permissionCheck(request,"");
+			permissionCheck(request,"ORDER_COUPON_VIEW");
 			CouponOrderDetailVO couponOrderDetailVO = new CouponOrderDetailVO();
 			CouponOrderVO couponOrderVO = couponOrderService.selectById(id);
 			BeanUtils.copyProperties(couponOrderVO, couponOrderDetailVO);

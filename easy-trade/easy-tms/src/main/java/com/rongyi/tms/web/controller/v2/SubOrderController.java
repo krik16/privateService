@@ -88,7 +88,7 @@ public class SubOrderController extends BaseControllerV2 {
         ResponseData responseData;
         try {
             LOGGER.info("子订单列表:paramsMap={}", paramsMap);
-            permissionCheck(request,"");
+            permissionCheck(request,"ORDER_GOODSON_VIEW");
             warpToParamMap(paramsMap);
             PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchSubListByMap(paramsMap);
 
@@ -124,7 +124,7 @@ public class SubOrderController extends BaseControllerV2 {
         LOGGER.info("子订单详情:id={}", id);
         ResponseData responseData;
         try {
-            permissionCheck(request,"");
+            permissionCheck(request,"ORDER_GOODSON_VIEW");
             ParentOrderVO orderDetailVo = iOrderQueryService.searchRYOrderDetail(id);
             List<SonOrderVO> sonOrderList = orderDetailVo.getSonOrderList();
             BigDecimal discountTotal = new BigDecimal("0.00");//总卡券信息（包含抵扣券）
@@ -192,7 +192,7 @@ public class SubOrderController extends BaseControllerV2 {
     public void exportExcel(@RequestBody Map<String, Object> paramsMap, HttpServletResponse response, HttpServletRequest request) {
         try {
             LOGGER.info("报表导出:paramsMap={}", paramsMap);
-            permissionCheck(request, "");
+            permissionCheck(request, "ORDER_GOODSON_EXPORT");
             warpToParamMap(paramsMap);
             exportOsmOrderExcel.exportExcel(request, response, paramsMap);
         }catch (PermissionException e){
@@ -217,7 +217,7 @@ public class SubOrderController extends BaseControllerV2 {
         LOGGER.info("validateExcelCount:paramsMap={}", paramsMap);
         ResponseData responseData = ResponseData.failure();
         try {
-            permissionCheck(request,"");
+            permissionCheck(request,"ORDER_GOODSON_EXPORT");
             warpToParamMap(paramsMap);
             PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchListByMap(paramsMap);
             if (pagingVO != null && pagingVO.getRowCnt() <= ConstantEnum.EXCEL_LIMIT_COUNT.getCodeInt())
@@ -243,7 +243,7 @@ public class SubOrderController extends BaseControllerV2 {
         LOGGER.info("商品详情:commodityId={}", commodityId);
         ResponseData responseData;
         try {
-            permissionCheck(request,"");
+            permissionCheck(request,"ORDER_GOODSON_VIEW");
             CommodityDetailVO commodityDetailVO = new CommodityDetailVO();
             List<String> picList = commodityService.getCommodityPicList(commodityId);
             List<String> picListForEight = new ArrayList<>();

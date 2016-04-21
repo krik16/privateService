@@ -86,7 +86,7 @@ public class CartOrderController extends BaseControllerV2 {
         LOGGER.info("母订单列表:parramsMap={}",paramsMap);
         ResponseData responseData;
         try {
-            permissionCheck(request,"");
+            permissionCheck(request,"ORDER_GOODS_VIEW");
             warpToParamMap(paramsMap);
             PagingVO<OrderCartFormVO> page = iOrderCartService.searchListByMap(paramsMap);
             int currPage = paramsMap.containsKey("currentPage") ? Integer.valueOf(paramsMap.get("currentPage").toString()) : 1;
@@ -138,7 +138,7 @@ public class CartOrderController extends BaseControllerV2 {
     public void exportOsmOrder(@RequestBody Map<String, Object> paramsMap, HttpServletResponse response, HttpServletRequest request) {
         LOGGER.info("报表导出:paramsMap={}", paramsMap);
         try {
-            permissionCheck(request,"");
+            permissionCheck(request,"ORDER_GOODS_EXPORT");
            warpToParamMap(paramsMap);
             if (paramsMap != null) {
                 exportOsmOrderExcel.exportExcel(request, response, paramsMap);
@@ -162,7 +162,7 @@ public class CartOrderController extends BaseControllerV2 {
         LOGGER.info("validateExcelCount:paramsMap={}",paramsMap);
         ResponseData responseData = ResponseData.failure(ConstantEnum.EXCEPTION_LIMIT_COUNT.getCodeInt(),ConstantEnum.EXCEPTION_LIMIT_COUNT.getValueStr());
         try {
-            permissionCheck(request,"");
+            permissionCheck(request,"ORDER_GOODS_EXPORT");
            warpToParamMap(paramsMap);
             PagingVO<OrderCartFormVO> pagingVO = iOrderCartService.searchListByMap(paramsMap);
             LOGGER.info("要导出的数据总数:totalCount={}",pagingVO.getRowCnt());
