@@ -51,6 +51,10 @@ public class EnrollCoupon implements Serializable {
      */
     private String createUserId;
 
+    private Integer joinCount;
+
+    private Integer stockCount;
+
     public Integer getActivityId() {
         return activityId;
     }
@@ -115,6 +119,22 @@ public class EnrollCoupon implements Serializable {
         this.createUserId = createUserId;
     }
 
+    public Integer getJoinCount() {
+        return joinCount;
+    }
+
+    public void setJoinCount(Integer joinCount) {
+        this.joinCount = joinCount;
+    }
+
+    public Integer getStockCount() {
+        return stockCount;
+    }
+
+    public void setStockCount(Integer stockCount) {
+        this.stockCount = stockCount;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -126,6 +146,8 @@ public class EnrollCoupon implements Serializable {
                 .append("relevanType", relevanType)
                 .append("createUserName", createUserName)
                 .append("createUserId", createUserId)
+                .append("joinCount", joinCount)
+                .append("stockCount", stockCount)
                 .toString();
     }
 }
