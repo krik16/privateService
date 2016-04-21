@@ -408,4 +408,48 @@ public class TotalCommodity implements  Serializable,Cloneable{
 		this.discount = discount;
 	}
 
+	@Override
+	public String toString() {
+		return "TotalCommodity{" +
+				"brandMid='" + brandMid + '\'' +
+				", id=" + id +
+				", name='" + name + '\'' +
+				", category='" + category + '\'' +
+				", status=" + status +
+				", code='" + code + '\'' +
+				", description='" + description + '\'' +
+				", postage='" + postage + '\'' +
+				", stock=" + stock +
+				", createAt=" + createAt +
+				", updateAt=" + updateAt +
+				", originalPrice='" + originalPrice + '\'' +
+				", currentPrice='" + currentPrice + '\'' +
+				", updateBy=" + updateBy +
+				", createBy=" + createBy +
+				", picList=" + picList +
+				", categoryIds=" + categoryIds +
+				", customCategoryIds=" + customCategoryIds +
+				", freight=" + freight +
+				", terminalType=" + terminalType +
+				", registerAt=" + registerAt +
+				", soldOutAt=" + soldOutAt +
+				", source=" + source +
+				", stockStatus=" + stockStatus +
+				", commodityIds=" + commodityIds +
+				", specList=" + specList +
+				", reason='" + reason + '\'' +
+				", filialeMids=" + filialeMids +
+				", shopMids=" + shopMids +
+				", supportCourierDeliver=" + supportCourierDeliver +
+				", supportSelfPickup=" + supportSelfPickup +
+				", identity=" + identity +
+				", immediateOn=" + immediateOn +
+				", skus=" + skus +
+				", purchaseCount=" + purchaseCount +
+				", weAndTeStatus='" + weAndTeStatus + '\'' +
+				", templateId=" + templateId +
+				", goodsSec=" + goodsSec +
+				", discount=" + discount +
+				'}';
+	}
 }

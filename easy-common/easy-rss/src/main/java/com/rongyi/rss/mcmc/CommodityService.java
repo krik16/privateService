@@ -28,7 +28,13 @@ public interface CommodityService {
     public List<Commodity> getCommodityListByShopIds(List<String> shopIds);
 
     public CommodityVO getCommoditySpecInfoById(String commodityId, String specId);
-    
+
+    /**
+     * 查询店铺的商品
+     * @param id
+     * @param shopId
+     * @return
+     */
     public ResponseResult getCommodityById(String id, long shopId);
 
     public ResponseResult getCommodityListByShopId(String id, int orderBy, String keyword, int currentpage, int pagesize);
@@ -57,6 +63,11 @@ public interface CommodityService {
 
     public ResponseResult searchCommodity(CommoditySearchParam param);
 
+    /**
+     * app商品列表查询
+     * @param param
+     * @return
+     */
     public ResponseResult searchCommodityForMallLife(CommoditySearchParam param);
 
     public ResponseResult getBrandCommodity(String brandId, String categoryId, int orderBy, int currentpage, int pagesize);

@@ -21,7 +21,7 @@ public interface ActivitySolrService {
 
 	/**
 	 * 活动列表检索
-	 * 
+	 * app 微商城卡劵列表查询接口
 	 * @author ZhengYl
 	 * @date 2015年8月24日 下午4:27:08 
 	 * @param input
