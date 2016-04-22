@@ -14,6 +14,7 @@ public class ShopVO implements Serializable {
     private String shopName;
     private String mallId;
     private String mallName;
+    private String address;//店铺地址
 
     public String getShopId() {
         return shopId;
@@ -47,6 +48,14 @@ public class ShopVO implements Serializable {
         this.mallName = mallName;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -54,6 +63,7 @@ public class ShopVO implements Serializable {
                 .append("shopName", shopName)
                 .append("mallId", mallId)
                 .append("mallName", mallName)
+                .append("address", address)
                 .toString();
     }
 }

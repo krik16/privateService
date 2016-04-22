@@ -111,6 +111,25 @@ public class ParentOrderVO implements Serializable {
 	private BigDecimal orderRebateDiscount = BigDecimal.valueOf(0.00);//购物车分摊的抵扣券优惠
 
 	private Date createAt;//创建时间
+	
+	private String expressOrderInfoId;//物流信息主键id
+	private boolean ifOnDisplayExpress = false;//true显示查看物流按钮 false不显示
+
+	public String getExpressOrderInfoId() {
+		return expressOrderInfoId;
+	}
+
+	public void setExpressOrderInfoId(String expressOrderInfoId) {
+		this.expressOrderInfoId = expressOrderInfoId;
+	}
+
+	public boolean isIfOnDisplayExpress() {
+		return ifOnDisplayExpress;
+	}
+
+	public void setIfOnDisplayExpress(boolean ifOnDisplayExpress) {
+		this.ifOnDisplayExpress = ifOnDisplayExpress;
+	}
 
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
@@ -741,6 +760,8 @@ public class ParentOrderVO implements Serializable {
 				", shopNum=" + shopNum +
 				", totalHongBaoAmount=" + totalHongBaoAmount +
 				", isCartOrder=" + isCartOrder +
+				", expressOrderInfoId=" + expressOrderInfoId +
+				", ifOnDisplayExpress=" + ifOnDisplayExpress +
 				'}';
 	}
 }

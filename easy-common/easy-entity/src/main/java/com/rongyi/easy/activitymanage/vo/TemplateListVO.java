@@ -1,5 +1,6 @@
 package com.rongyi.easy.activitymanage.vo;
 
+import com.rongyi.easy.activitymanage.entity.TemplateSale;
 import com.rongyi.easy.activitymanage.entity.TemplateSaleShopMall;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -30,6 +31,8 @@ public class TemplateListVO implements Serializable {
     private Byte isMallShop;
     /**店铺商场关联*/
     private TemplateSaleShopMall templateSaleShopMall;
+
+    private TemplateSale templateSale;
 
     public Integer getId() {
         return id;
@@ -87,6 +90,22 @@ public class TemplateListVO implements Serializable {
         this.templateSaleShopMall = templateSaleShopMall;
     }
 
+    public TemplateSaleShopMall getTemplateSaleShopMall() {
+        return templateSaleShopMall;
+    }
+
+    public void setTemplateSaleShopMall(TemplateSaleShopMall templateSaleShopMall) {
+        this.templateSaleShopMall = templateSaleShopMall;
+    }
+
+    public TemplateSale getTemplateSale() {
+        return templateSale;
+    }
+
+    public void setTemplateSale(TemplateSale templateSale) {
+        this.templateSale = templateSale;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -97,6 +116,7 @@ public class TemplateListVO implements Serializable {
                 .append("activityUrl", activityUrl)
                 .append("isMallShop", isMallShop)
                 .append("templateSaleShopMall", templateSaleShopMall)
+                .append("templateSale", templateSale)
                 .toString();
     }
 }

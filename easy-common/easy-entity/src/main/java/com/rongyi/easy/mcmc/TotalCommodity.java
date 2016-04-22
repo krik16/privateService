@@ -1,6 +1,7 @@
 package com.rongyi.easy.mcmc;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -8,7 +9,11 @@ import org.apache.commons.lang.StringUtils;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
+import org.springframework.util.Assert;
 
+/**
+ * 商品总表 商家后台商品对象
+ */
 @Entity(value="mcmc_total_commodity",noClassnameStored=true)
 public class TotalCommodity implements  Serializable,Cloneable{
 	
@@ -36,7 +41,7 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private List<String> picList;//商品图片列表
 	
 	private List<ObjectId> categoryIds;//商品所属的品类列表
-	private List<String> customCategory;//自定义分类
+	private List<Integer> customCategoryIds;//自定义分类集合;
 	
 	//private Integer distribution;//配送方式 1表示到店自提2快递3表示支持两种方式
 	private Integer freight;//1表示商家承担运费,0表示买家承担运费
@@ -68,6 +73,9 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	private String weAndTeStatus;//商品在终端机与App上的隐藏与显示  1表示APP端展示，2表示微信端展示，3表示都展示，4表示都不展示
 
 	private Integer templateId;//邮费模版id
+	private boolean goodsSec = true;//正品保障
+
+	private Double discount; // 折扣
 
 	public ObjectId getId() {
 		return id;
@@ -180,14 +188,15 @@ public class TotalCommodity implements  Serializable,Cloneable{
 	public void setCategoryIds(List<ObjectId> categoryIds) {
 		this.categoryIds = categoryIds;
 	}
-	
-	public List<String> getCustomCategory() {
-		return customCategory;
+
+	public List<Integer> getCustomCategoryIds() {
+		return customCategoryIds;
+	}
+
+	public void setCustomCategoryIds(List<Integer> customCategoryIds) {
+		this.customCategoryIds = customCategoryIds;
 	}
 	
-	public void setCustomCategory(List<String> customCategory) {
-		this.customCategory = customCategory;
-	}
 	/*public Integer getDistribution() {
 		return distribution;
 	}
@@ -369,5 +378,78 @@ public class TotalCommodity implements  Serializable,Cloneable{
 
 	public void setTemplateId(Integer templateId) {
 		this.templateId = templateId;
+	}
+
+	public boolean isGoodsSec() {
+		return goodsSec;
+	}
+
+	public void setGoodsSec(boolean goodsSec) {
+		this.goodsSec = goodsSec;
+	}
+
+	public Double getDiscount() {
+		try {
+			if(StringUtils.isNotBlank(this.currentPrice) && StringUtils.isNotBlank(this.originalPrice)) {
+				NumberFormat ddf1 = NumberFormat.getNumberInstance() ;
+				ddf1.setMaximumFractionDigits(2);
+				Double currentPrice = Double.valueOf(this.currentPrice);
+				Double originalPrice = Double.valueOf(this.originalPrice);
+
+				return (originalPrice == 0) ? 10.0 : Double.valueOf(ddf1.format(currentPrice / originalPrice)) * 10;
+			}
+			return 10.0;
+		} catch(Exception e) {
+			throw new RuntimeException(e.getMessage());
+		}
+	}
+
+	public void setDiscount(Double discount) {
+		this.discount = discount;
+	}
+
+	@Override
+	public String toString() {
+		return "TotalCommodity{" +
+				"brandMid='" + brandMid + '\'' +
+				", id=" + id +
+				", name='" + name + '\'' +
+				", category='" + category + '\'' +
+				", status=" + status +
+				", code='" + code + '\'' +
+				", description='" + description + '\'' +
+				", postage='" + postage + '\'' +
+				", stock=" + stock +
+				", createAt=" + createAt +
+				", updateAt=" + updateAt +
+				", originalPrice='" + originalPrice + '\'' +
+				", currentPrice='" + currentPrice + '\'' +
+				", updateBy=" + updateBy +
+				", createBy=" + createBy +
+				", picList=" + picList +
+				", categoryIds=" + categoryIds +
+				", customCategoryIds=" + customCategoryIds +
+				", freight=" + freight +
+				", terminalType=" + terminalType +
+				", registerAt=" + registerAt +
+				", soldOutAt=" + soldOutAt +
+				", source=" + source +
+				", stockStatus=" + stockStatus +
+				", commodityIds=" + commodityIds +
+				", specList=" + specList +
+				", reason='" + reason + '\'' +
+				", filialeMids=" + filialeMids +
+				", shopMids=" + shopMids +
+				", supportCourierDeliver=" + supportCourierDeliver +
+				", supportSelfPickup=" + supportSelfPickup +
+				", identity=" + identity +
+				", immediateOn=" + immediateOn +
+				", skus=" + skus +
+				", purchaseCount=" + purchaseCount +
+				", weAndTeStatus='" + weAndTeStatus + '\'' +
+				", templateId=" + templateId +
+				", goodsSec=" + goodsSec +
+				", discount=" + discount +
+				'}';
 	}
 }

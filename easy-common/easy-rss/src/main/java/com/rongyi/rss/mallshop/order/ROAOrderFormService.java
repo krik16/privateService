@@ -6,6 +6,7 @@ import java.util.Map;
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.osm.entity.OrderFormEntity;
+import com.rongyi.easy.osm.entity.OrderFormExtraEntity;
 import com.rongyi.easy.rmmm.vo.OrderManagerVO;
 
 public interface ROAOrderFormService {
@@ -45,5 +46,12 @@ public interface ROAOrderFormService {
 	 * @return 中订单号集合
 	 */
 	List<OrderFormEntity> getShopOrderNoByCartNo(String cartOrderNo);
+	
+	/**
+	 * 根据订单号查询订单收货地址
+	 * @param orderNo
+	 * @return
+	 */
+	OrderFormExtraEntity getNewAddressByOrderNo(String orderNo);
 
 }

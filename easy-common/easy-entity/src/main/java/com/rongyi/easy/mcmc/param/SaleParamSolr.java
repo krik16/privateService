@@ -6,10 +6,10 @@ import java.io.Serializable;
  * Created by xuying on 2016/1/25.
  */
 public class SaleParamSolr implements Serializable{
-    private String id;
+    private String id;//秒杀或者闪购或者特卖id
     private long startTime; //开始时间
     private long endTime; //结束时间
-    private String type;//coupon为卡卷，commodity为商品
+    private String type;//coupon为卡劵，commodity为商品
 
     public String getId() {
         return id;

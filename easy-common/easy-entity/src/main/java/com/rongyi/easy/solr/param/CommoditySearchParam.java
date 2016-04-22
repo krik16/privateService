@@ -23,7 +23,7 @@ import com.rongyi.easy.malllife.param.MalllifeBaseParam;
  * @author ZhengYl
  *
  */
-public class CommoditySearchParam  extends MalllifeBaseParam implements Serializable {
+public class 	CommoditySearchParam  extends MalllifeBaseParam implements Serializable {
 
 	/**  */
 	private static final long serialVersionUID = -3577116644255163015L;
@@ -42,9 +42,9 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	
 	/** 商品类别 */
 	private String commodityCategory;
-	
+
 	/** 排序规则 
-	 * 0：按发布日期排序  1：按销量由高到低  2：按价格由低到高  3：按价格由高到低  4：按距离由近到远  5：按销量由低到高
+	 * 0：按发布日期排序  1：按销量由高到低  2：按价格由低到高  3：按价格由高到低  4：按距离由近到远  5：按销量由低到高 6:折扣由低到高  7：折扣由高到低
 	 * */
 	private String sortBy;
 	
@@ -73,9 +73,13 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	private String systemNumber;
 
 	private Integer from = 0; // 从0开始 偏移量，商品聚合分页使用
-	
-	private String source;//  端来源    1 微信   2 终端屏 3 其他
 
+	private String source;//  端来源    1 微信   2 终端屏 3 其他
+	
+	private String minPrice;	// 最小价格范围
+
+	private String maxPrice;	// 最大价格范围
+	
 	private String zoneId;
 
 	private String commodityCode;
@@ -261,7 +265,11 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	public void setSystemNumber(String systemNumber) {
 		this.systemNumber = systemNumber;
 	}
-	
+
+	public String getMinPrice() {
+		return minPrice;
+	}
+
 	public String getSource() {
 		return source;
 	}
@@ -269,7 +277,7 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	public void setSource(String source) {
 		this.source = source;
 	}
-
+	
 	public String getZoneId() {
 		return zoneId;
 	}
@@ -286,6 +294,18 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 		this.commodityCode = commodityCode;
 	}
 
+	public void setMinPrice(String minPrice) {
+		this.minPrice = minPrice;
+	}
+
+	public String getMaxPrice() {
+		return maxPrice;
+	}
+
+	public void setMaxPrice(String maxPrice) {
+		this.maxPrice = maxPrice;
+	}
+
 	@Override
 	public String toString() {
 		return "CommoditySearchParam [keyword=" + keyword + ", shopId=" + shopId + ", brandId=" + brandId + ", mallId="
@@ -293,7 +313,6 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 				+ ", coord_y=" + coord_y + ", bullId=" + bullId + ", liveId=" + liveId + ", saleId=" + saleId
 				+ ", flashSaleId=" + flashSaleId + ", commodityType=" + commodityType + ", systemNumber=" + systemNumber
 				+ ", from=" + from + ", source=" + source + ", zoneId=" + zoneId + ", commodityCode=" + commodityCode
-				+ ", keywordList=" + keywordList + "]";
+				+ ", keywordList=" + keywordList + ", minPrice=" + minPrice + ", maxPrice=" + maxPrice + "]";
 	}
-	
 }
