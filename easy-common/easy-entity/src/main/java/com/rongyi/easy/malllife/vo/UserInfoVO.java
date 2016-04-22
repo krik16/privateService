@@ -48,6 +48,14 @@ public class UserInfoVO implements Serializable {
 	private Integer isDisable;//是否禁用  0,正常，1禁用
 
 	private String  publicNumId;//商家公众号Id
+	private int isGet;  // 0 失败， 1成功
+	public int getIsGet() {
+		return isGet;
+	}
+
+	public void setIsGet(int isGet) {
+		this.isGet = isGet;
+	}
 
 	public String getShareCode() {
 		return shareCode;

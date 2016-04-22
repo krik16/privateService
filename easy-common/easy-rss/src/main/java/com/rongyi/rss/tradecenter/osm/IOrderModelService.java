@@ -73,4 +73,12 @@ public interface IOrderModelService {
 	 * @return 是否成功
 	 */
 	boolean adjustDetailModelBuyNum(List<Integer> detailModelId)  throws Exception;
+
+	/**
+	 * 修改模板导购id
+	 * @param modelId 模板id
+	 * @param guideId 导购id
+	 * @return 是否成功
+	 */
+	boolean changeGuideId(Integer modelId,Integer guideId)  throws Exception;
 }

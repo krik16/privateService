@@ -2,6 +2,7 @@ package com.rongyi.rss.roa;
 
 import java.util.List;
 
+import com.rongyi.easy.bdata.vo.BdAreaVo;
 import com.rongyi.easy.roa.vo.AreaCityVO;
 import org.bson.types.ObjectId;
 
@@ -54,4 +55,10 @@ public interface ROAAreaService {
 	 */
 	public AreaCityVO getAreaCityList(String provId,String cityId,Integer currentPage, Integer pageSize);
 
+	/**
+	 * 根据区域ID查询区域信息VO
+	 * @param areaId
+	 * @return
+	 */
+	public BdAreaVo getAreaVoByAreaId(Integer areaId);
 }
