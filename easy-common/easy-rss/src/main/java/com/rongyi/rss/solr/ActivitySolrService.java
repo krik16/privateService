@@ -44,12 +44,13 @@ public interface ActivitySolrService {
 	/**
 	 * 卡劵置顶
 	 *
-	 * @param mallId 商城ID
-	 * @param list   需要置顶的卡劵列表
+	 * @param mallId     商城ID
+	 * @param list       需要置顶的卡劵列表
+	 * @param sourceType 来源：0000（终端机），0001（app），0002（微信），0003为 移动微商城， 0004-9999（其他，包括发码，活动等）
 	 * @return true:成功
 	 * @author wangjh7
 	 * @date 2016-04-22
 	 */
-	public boolean setActivityStick(String mallId, List<ActivityStickParam> list);
+	public boolean setActivityStick(String mallId, Integer sourceType, List<ActivityStickParam> list);
 
-}
+	}
