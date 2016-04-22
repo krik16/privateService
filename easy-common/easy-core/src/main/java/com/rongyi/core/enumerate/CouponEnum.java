@@ -38,7 +38,8 @@ public enum  CouponEnum {
     ERROR_INVALID_MOBILE(1021205,"buyerMobile 参数不能为空！"),
     ERROR_INVALID_MALLID(1021206,"mallId 参数不能为空！"),
     ERROR_INVALID_OPENID(1021207,"openId 参数不能为空！"),
-    ERROR_INVALID_PARAMS(1021208,"params 参数不能为空！")
+    ERROR_INVALID_PARAMS(1021208,"params 参数不能为空！"),
+    ERROR_INVALID_ORDERNO(1021209,"订单号传递错误！")
     ;
 
 

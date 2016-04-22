@@ -73,13 +73,15 @@ public class OrderDetailVO implements Serializable {
 
     private List<ActivityDetailVO> codeList; // 本订单所含的优惠券信息
 
-    private List<CouponMall> couponMalls;//适用商场列表
+    private String holderId;
+
+    private String holderType;
+
+    private String holderName;
+
+    private Integer shopsCount;
 
     private List<CouponShop> couponShops;//适用店铺列表
-
-    private List<CouponBrand> couponBrands;//适用品牌列表
-
-
 
     public Integer getTradeStatus() {
         return tradeStatus;
@@ -261,12 +263,28 @@ public class OrderDetailVO implements Serializable {
         this.limitCount = limitCount;
     }
 
-    public List<CouponMall> getCouponMalls() {
-        return couponMalls;
+    public String getHolderId() {
+        return holderId;
     }
 
-    public void setCouponMalls(List<CouponMall> couponMalls) {
-        this.couponMalls = couponMalls;
+    public void setHolderId(String holderId) {
+        this.holderId = holderId;
+    }
+
+    public String getHolderType() {
+        return holderType;
+    }
+
+    public void setHolderType(String holderType) {
+        this.holderType = holderType;
+    }
+
+    public String getHolderName() {
+        return holderName;
+    }
+
+    public void setHolderName(String holderName) {
+        this.holderName = holderName;
     }
 
     public List<CouponShop> getCouponShops() {
@@ -277,11 +295,44 @@ public class OrderDetailVO implements Serializable {
         this.couponShops = couponShops;
     }
 
-    public List<CouponBrand> getCouponBrands() {
-        return couponBrands;
+    public Integer getShopsCount() {
+        return shopsCount;
     }
 
-    public void setCouponBrands(List<CouponBrand> couponBrands) {
-        this.couponBrands = couponBrands;
+    public void setShopsCount(Integer shopsCount) {
+        this.shopsCount = shopsCount;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("OrderDetailVO{");
+        sb.append("orderNo='").append(orderNo).append('\'');
+        sb.append(", tradeStatus=").append(tradeStatus);
+        sb.append(", orderTime='").append(orderTime).append('\'');
+        sb.append(", payTime='").append(payTime).append('\'');
+        sb.append(", unitPrice=").append(unitPrice);
+        sb.append(", unitNum=").append(unitNum);
+        sb.append(", orderPrice=").append(orderPrice);
+        sb.append(", itemName='").append(itemName).append('\'');
+        sb.append(", couponId='").append(couponId).append('\'');
+        sb.append(", couponName='").append(couponName).append('\'');
+        sb.append(", totalCount=").append(totalCount);
+        sb.append(", limitUseCount=").append(limitUseCount);
+        sb.append(", limitPublishCount=").append(limitPublishCount);
+        sb.append(", limitCount=").append(limitCount);
+        sb.append(", origPrice=").append(origPrice);
+        sb.append(", currPrice=").append(currPrice);
+        sb.append(", afterSaleService='").append(afterSaleService).append('\'');
+        sb.append(", listPicUrl='").append(listPicUrl).append('\'');
+        sb.append(", limitDesc='").append(limitDesc).append('\'');
+        sb.append(", usageDesc='").append(usageDesc).append('\'');
+        sb.append(", codeList=").append(codeList);
+        sb.append(", holderId='").append(holderId).append('\'');
+        sb.append(", holderType='").append(holderType).append('\'');
+        sb.append(", holderName='").append(holderName).append('\'');
+        sb.append(", shopsCount=").append(shopsCount);
+        sb.append(", couponShops=").append(couponShops);
+        sb.append('}');
+        return sb.toString();
     }
 }
