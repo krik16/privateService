@@ -6,5 +6,7 @@ target
 *.iml*.properties
 .idea
 *.iml
-.gitignore
-!/.gitignore
+/.idea
+/build
+/out
+

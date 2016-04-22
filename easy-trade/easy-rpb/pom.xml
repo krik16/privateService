@@ -181,7 +181,6 @@
 			<artifactId>c3p0</artifactId>
 		</dependency>
 
-
 		<!-- 日志记录依赖包，很多都依赖此包，像log4j,json-lib等等 -->
 		<dependency>
 			<groupId>commons-logging</groupId>
@@ -265,6 +264,12 @@
 		<dependency>
 			<groupId>org.apache.solr</groupId>
 			<artifactId>solr-core</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-jdk14</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.solr</groupId>
