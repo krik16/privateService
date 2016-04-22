@@ -1,6 +1,7 @@
 package com.rongyi.easy.domain.member;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class CityonActivity implements Serializable {
 
@@ -14,6 +15,7 @@ public class CityonActivity implements Serializable {
 	private String memberNo;
 	private String mallId;
 	private String memberName;
+	private Date createAt;
 	public Integer getId() {
 		return id;
 	}
@@ -43,5 +45,11 @@ public class CityonActivity implements Serializable {
 	}
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
+	}
+	public Date getCreateAt() {
+		return createAt;
+	}
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
 	}
 }
