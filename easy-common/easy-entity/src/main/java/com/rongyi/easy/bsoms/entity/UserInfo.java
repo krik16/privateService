@@ -69,8 +69,10 @@ public class UserInfo implements Serializable{
     
     private UserShop userShop;
     
-    private Integer isEdit = 1;  //是否可编辑  0可编辑  1不可编辑
+	private String useCode; //注册使用的邀请码
     
+    private String jsessionid ;//摩店登录标识	
+	private Integer isEdit = 1;  //是否可编辑  0可编辑  1不可编辑
     public String getStopReason() {
 		return stopReason;
 	}
@@ -319,12 +321,24 @@ public class UserInfo implements Serializable{
 		this.roleName = roleName;
 	}
 
-	public Integer getIsEdit() {
+	public String getUseCode() {
+		return useCode;
+	}
+
+	public void setUseCode(String useCode) {
+		this.useCode = useCode;
+	}
+
+	public String getJsessionid() {
+		return jsessionid;
+	}
+
+	public void setJsessionid(String jsessionid) {
+		this.jsessionid = jsessionid;
+	}public Integer getIsEdit() {
 		return isEdit;
 	}
 
 	public void setIsEdit(Integer isEdit) {
 		this.isEdit = isEdit;
-	}
-
-}
+	}}

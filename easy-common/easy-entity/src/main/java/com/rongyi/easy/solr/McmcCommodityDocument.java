@@ -3,6 +3,7 @@ package com.rongyi.easy.solr;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.solr.client.solrj.beans.Field;
 import org.apache.solr.common.SolrDocument;
 
@@ -54,6 +55,8 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private String commodityBrandId;
 	@Field("price")
 	private Double price;
+	@Field("currentPriceList")
+	private List<Double> currentPriceList;//商品价格（不同规格现价列表，用于商品价格筛选区间）
 	@Field("spot")
 	private Boolean spot;
 	@Field("type")
@@ -80,9 +83,16 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private Integer sortPosition;
 	@Field("flashSortPosition")
 	private Integer flashSortPosition;
+	@Field("terminalType")
+	private Integer terminalType;// com.rongyi.easy.mcmc.constant.CommodityTerminalType常量定义
 	@Field("systemNumber")
 	private String systemNumber;
+	@Field("discount")
+	private Double discount;
+	@Field("weAndTeStatus")
+	private String weAndTeStatus;
 
+	private String secKillSign;
 
 	public Double getPrice() {
 		return price;
@@ -90,6 +100,12 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+	public List<Double> getCurrentPriceList() {
+		return currentPriceList;
+	}
+	public void setCurrentPriceList(List<Double> currentPriceList) {
+		this.currentPriceList = currentPriceList;
 	}
 	public String getCommodityMallId() {
 		return commodityMallId;
@@ -122,9 +138,11 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	public void setCategory_ids(List<String> category_ids) {
 		this.category_ids = category_ids;
 		// 三级分类拆分成三个字段
-		this.setCategory1_id(category_ids.get(0));
-		this.setCategory2_id(category_ids.get(1));
-		this.setCategory3_id(category_ids.get(2));
+		if(CollectionUtils.isNotEmpty(category_ids)&&category_ids.size()>=3){
+			this.setCategory1_id(category_ids.get(0));
+			this.setCategory2_id(category_ids.get(1));
+			this.setCategory3_id(category_ids.get(2));
+		}
 	}
 	
 	public String getCategory1_id() {
@@ -207,6 +225,14 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.commodityShopId = commodityShopId;
 	}
 
+	public Double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Double discount) {
+		this.discount = discount;
+	}
+
 	public McmcCommodityDocument(){
 		
 	}
@@ -221,6 +247,8 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.commodityCode = doc.getFieldValue("commodityCode").toString();
 		this.commodityShopId = doc.getFieldValue("commodityShopId").toString();
 		this.commodityNameSubdiv = doc.getFieldValue("commodityNameSubdiv").toString();
+		this.saleId=(Integer)doc.getFieldValue("saleId");
+		this.flashSaleId=(Integer)doc.getFieldValue("flashSaleId");
 	}
 	public String getId() {
 		return id;
@@ -361,11 +389,35 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.flashSortPosition = flashSortPosition;
 	}
 
+	public Integer getTerminalType() {
+		return terminalType;
+	}
+
+	public void setTerminalType(Integer terminalType) {
+		this.terminalType = terminalType;
+	}
+
 	public String getSystemNumber() {
 		return systemNumber;
 	}
 
 	public void setSystemNumber(String systemNumber) {
 		this.systemNumber = systemNumber;
+	}
+
+	public String getWeAndTeStatus() {
+		return weAndTeStatus;
+	}
+
+	public void setWeAndTeStatus(String weAndTeStatus) {
+		this.weAndTeStatus = weAndTeStatus;
+	}
+
+	public String getSecKillSign() {
+		return secKillSign;
+	}
+
+	public void setSecKillSign(String secKillSign) {
+		this.secKillSign = secKillSign;
 	}
 }

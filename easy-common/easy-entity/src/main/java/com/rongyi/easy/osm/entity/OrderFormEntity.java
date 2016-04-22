@@ -188,6 +188,12 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
 
     private List<OrderDetailFormEntity> detailOrderList;
     private OrderFormExtraEntity orderExtra;
+    
+    //订单对应事件
+    private OrderEventEntity orderEvent;
+
+    //对单对应退款记录
+    private String applicationType;
 
     /**
      * 微信标准版支付记录appid
@@ -204,6 +210,12 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
      */
     private String openId;
 
+    /**
+     * 用户手机号
+     */
+    private String userPhone;
+
+    
     public Byte getIsAlert() {
         return isAlert;
     }
@@ -812,6 +824,26 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
         this.scoreAmount = scoreAmount;
     }
 
+    public OrderEventEntity getOrderEvent()
+    {
+        return orderEvent;
+    }
+
+    public void setOrderEvent(OrderEventEntity orderEvent)
+    {
+        this.orderEvent = orderEvent;
+    }
+
+    public String getApplicationType()
+    {
+        return applicationType;
+    }
+
+    public void setApplicationType(String applicationType)
+    {
+        this.applicationType = applicationType;
+    }
+
     public String getWeixinAppId() {
         return weixinAppId;
     }
@@ -834,6 +866,16 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
 
     public void setOpenId(String openId) {
         this.openId = openId;
+    }
+
+    public String getUserPhone()
+    {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone)
+    {
+        this.userPhone = userPhone;
     }
 
     @Override
@@ -886,6 +928,7 @@ public class OrderFormEntity implements Serializable ,Comparable<OrderFormEntity
                 ", weixinAppId=" + weixinAppId +
                 ", orderChannel=" + orderChannel +
                 ", openId=" + openId +
+                ", userPhone=" + userPhone +
                 '}';
     }
 

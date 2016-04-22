@@ -98,4 +98,30 @@ public interface MallService {
      */
     ResponseVO getMallListByGroupId(String groupId);
 
+	ResponseVO getAdNumByMallId(String mallId);
+
+	ResponseVO getAdsByMallId(String mall_id, String position);
+
+	ResponseVO getAdById(String ad_id);
+	
+	/**
+	 * 获取默认素材列表
+	 * @param ps 
+	 * 
+	 * @return
+	 */
+	ResponseVO getDefaultAds(Integer ps);
+
+	/**
+	 * 获取默认素材详情
+	 * 
+	 * @param defaultId
+	 * @return
+	 */
+	ResponseVO getDefaultAdById(String defaultId);
+
+	ResponseVO getDefaultSeq(Integer ps);
+
+	ResponseVO getAdsSeqByMallId(String mall_id, String position);
+
 }

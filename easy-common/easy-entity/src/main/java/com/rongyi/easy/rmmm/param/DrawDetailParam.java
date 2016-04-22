@@ -65,4 +65,10 @@ public class DrawDetailParam implements Serializable {
 		this.status = status;
 	}
 
+	@Override
+	public String toString() {
+		return "DrawDetailParam [currentPage=" + currentPage + ", pageSize=" + pageSize + ", date=" + date + ", status=" + status
+				+ "]";
+	}
+
 }

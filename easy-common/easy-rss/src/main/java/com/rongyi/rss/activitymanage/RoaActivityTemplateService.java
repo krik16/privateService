@@ -19,6 +19,22 @@ import java.util.List;
  * ideaworkspace.
  */
 public interface RoaActivityTemplateService {
+
+    /**
+     * 新建特卖闪购模版
+     *
+     * @param activityTemplate
+     * @return true  or false
+     */
+    ActivityTemplate saveActivityTemplateSaleFlash(ActivityTemplate activityTemplate);
+
+    /**
+     * 修改特卖闪购模版
+     *
+     * @param activityTemplate
+     * @return true  or false
+     */
+    ActivityTemplate updateActivityTemplateSaleFlash(ActivityTemplate activityTemplate);
     /**
      * 新建活动模版
      *
@@ -114,4 +130,14 @@ public interface RoaActivityTemplateService {
      * @author Leon
      */
     boolean saveActivityTemplateByActivityId(Integer activityId);
+
+    /**
+     * 通过 闪购活动id  和商品id 查询闪购的商品 的位置信息
+     * @param activityId
+     * @param commodityId
+     * @user lijing
+     * @return
+     */
+    Integer searchPositionByIFlashAndCommodity(Integer activityId,String commodityId);
+
 }

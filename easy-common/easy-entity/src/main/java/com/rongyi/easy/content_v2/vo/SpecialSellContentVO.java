@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.rongyi.core.common.util.DateTool;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * 
 * @ClassName: SpecialSellContentVO 
@@ -45,6 +47,10 @@ public class SpecialSellContentVO  implements Serializable{
 	 * 
 	 */
 	private Integer contentId;
+
+	private String shareTitle;
+
+	private String shareDesc;
 	/**
 	 * @return the id
 	 */
@@ -129,6 +135,23 @@ public class SpecialSellContentVO  implements Serializable{
 	public void setContentId(Integer contentId) {
 		this.contentId = contentId;
 	}
+
+	public String getShareTitle() {
+		return shareTitle;
+	}
+
+	public void setShareTitle(String shareTitle) {
+		this.shareTitle = shareTitle;
+	}
+
+	public String getShareDesc() {
+		return shareDesc;
+	}
+
+	public void setShareDesc(String shareDesc) {
+		this.shareDesc = shareDesc;
+	}
+
 	/**(非 Javadoc)
 	* @Title: toString 
 	* @Description: TODO(这里用一句话描述这个方法的作用) 
@@ -137,10 +160,19 @@ public class SpecialSellContentVO  implements Serializable{
 	* @date 2015年12月1日 下午5:20:25
 	* @throws 
 	*/
+
 	@Override
 	public String toString() {
-		return "SpecialSellContentVO [id=" + id + ", picUrls=" + picUrls + ", activityUrl=" + activityUrl
-				+ ", businessDistrictName=" + businessDistrictName + ", businessDistrictId=" + businessDistrictId
-				+ ", name=" + name + ", contentId=" + contentId + "]";
+		return new ToStringBuilder(this)
+				.append("id", id)
+				.append("picUrls", picUrls)
+				.append("activityUrl", activityUrl)
+				.append("businessDistrictName", businessDistrictName)
+				.append("businessDistrictId", businessDistrictId)
+				.append("name", name)
+				.append("contentId", contentId)
+				.append("shareTitle", shareTitle)
+				.append("shareDesc", shareDesc)
+				.toString();
 	}
 }

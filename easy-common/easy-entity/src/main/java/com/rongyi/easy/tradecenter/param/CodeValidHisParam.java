@@ -11,15 +11,16 @@ import java.io.Serializable;
 public class CodeValidHisParam implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1l;
-	
+
 	private Integer date;//时间（0所有时间，1当天，2当周，3当月，4昨天）
 	private String shopId;//店铺id
 	private String orderBy;//排序：（默认 update_time降序）
 	private String orderVa;//排序方式:降序[-1]
 	private Integer pageSize = 15;//默认15
+	private Integer status;//0全部 1已发放 2处理中 3失败
 	private Integer currentPage = 1;//当前页（后台处理）
 	private String checkUserId;//核销人id
 	public Integer getDate() {
@@ -58,8 +59,15 @@ public class CodeValidHisParam implements Serializable {
 	public void setCurrentPage(Integer currentPage) {
 		this.currentPage = currentPage;
 	}
-	
-	
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
 	public String getCheckUserId() {
 		return checkUserId;
 	}
@@ -69,7 +77,7 @@ public class CodeValidHisParam implements Serializable {
 	@Override
 	public String toString() {
 		return "CodeValidHisParam [shopId=" + shopId + ", orderBy=" + orderBy
-				+ ", orderVa=" + orderVa + ", pageSize=" + pageSize
+				+ ", orderVa=" + orderVa + ", pageSize=" + pageSize+ ", status=" + status
 				+ ", currentPage=" + currentPage + ", checkUserId=" + checkUserId+",date="+date
 				+ "]";
 	}

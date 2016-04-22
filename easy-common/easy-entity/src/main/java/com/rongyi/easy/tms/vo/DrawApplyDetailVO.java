@@ -19,7 +19,9 @@ import java.util.Date;
  */
 public class DrawApplyDetailVO implements Serializable {
     private static final long serialVersionUID = -7647979818874548559L;
-    
+
+	private Integer id;
+
     /** 提现账号 */
     private String drawApplyAccount;
     
@@ -31,6 +33,23 @@ public class DrawApplyDetailVO implements Serializable {
     
     /** 提现金额 */
     private BigDecimal drawAmount;
+
+	/** 审核时间 */
+	private Date verifyAt;
+
+	/** 发放时间 */
+	private Date payAt;
+
+	/** 轨迹跟踪状态  0 提现申请 1 审核成功 2审核失败 3 已发放 */
+	private Integer traceStatus;
+
+	/** 审核失败理由 */
+	private String failReason;
+
+	/**
+	 * 卡名称（暂时只有支付宝）
+	 */
+	private String payAccountType;
 
 	public String getDrawApplyAccount() {
 		return drawApplyAccount;
@@ -63,7 +82,52 @@ public class DrawApplyDetailVO implements Serializable {
 	public void setDrawAmount(BigDecimal drawAmount) {
 		this.drawAmount = drawAmount;
 	}
-    
-    
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getPayAccountType() {
+		return payAccountType;
+	}
+
+	public void setPayAccountType(String payAccountType) {
+		this.payAccountType = payAccountType;
+	}
+
+	public Date getVerifyAt() {
+		return verifyAt;
+	}
+
+	public void setVerifyAt(Date verifyAt) {
+		this.verifyAt = verifyAt;
+	}
+
+	public Date getPayAt() {
+		return payAt;
+	}
+
+	public void setPayAt(Date payAt) {
+		this.payAt = payAt;
+	}
+
+	public Integer getTraceStatus() {
+		return traceStatus;
+	}
+
+	public void setTraceStatus(Integer traceStatus) {
+		this.traceStatus = traceStatus;
+	}
+
+	public String getFailReason() {
+		return failReason;
+	}
+
+	public void setFailReason(String failReason) {
+		this.failReason = failReason;
+	}
 }

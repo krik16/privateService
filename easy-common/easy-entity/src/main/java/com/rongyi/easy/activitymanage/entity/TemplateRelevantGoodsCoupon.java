@@ -53,6 +53,14 @@ public class TemplateRelevantGoodsCoupon implements Serializable{
      */
     private Integer isCommodityUp;
 
+
+    private String shopId;
+
+    private String shopName;
+
+    private Integer createBy;
+
+
     public Integer getId() {
         return id;
     }
@@ -197,6 +205,30 @@ public class TemplateRelevantGoodsCoupon implements Serializable{
         this.isCommodityUp = isCommodityUp;
     }
 
+    public String getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
+
+    public Integer getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(Integer createBy) {
+        this.createBy = createBy;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -218,6 +250,9 @@ public class TemplateRelevantGoodsCoupon implements Serializable{
                 .append("updateAt", updateAt)
                 .append("version", version)
                 .append("isCommodityUp", isCommodityUp)
+                .append("shopId", shopId)
+                .append("shopName", shopName)
+                .append("createBy", createBy)
                 .toString();
     }
 }
