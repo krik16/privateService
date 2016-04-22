@@ -79,9 +79,11 @@ public class OrderDetailVO implements Serializable {
 
     private String holderName;
 
-    private Integer shopsCount;
+    private Integer count;
 
     private List<CouponShop> couponShops;//适用店铺列表
+
+    private List<CouponMall> couponMalls;
 
     public Integer getTradeStatus() {
         return tradeStatus;
@@ -295,12 +297,20 @@ public class OrderDetailVO implements Serializable {
         this.couponShops = couponShops;
     }
 
-    public Integer getShopsCount() {
-        return shopsCount;
+    public Integer getCount() {
+        return count;
     }
 
-    public void setShopsCount(Integer shopsCount) {
-        this.shopsCount = shopsCount;
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public List<CouponMall> getCouponMalls() {
+        return couponMalls;
+    }
+
+    public void setCouponMalls(List<CouponMall> couponMalls) {
+        this.couponMalls = couponMalls;
     }
 
     @Override
@@ -330,8 +340,9 @@ public class OrderDetailVO implements Serializable {
         sb.append(", holderId='").append(holderId).append('\'');
         sb.append(", holderType='").append(holderType).append('\'');
         sb.append(", holderName='").append(holderName).append('\'');
-        sb.append(", shopsCount=").append(shopsCount);
+        sb.append(", count=").append(count);
         sb.append(", couponShops=").append(couponShops);
+        sb.append(", couponMalls=").append(couponMalls);
         sb.append('}');
         return sb.toString();
     }

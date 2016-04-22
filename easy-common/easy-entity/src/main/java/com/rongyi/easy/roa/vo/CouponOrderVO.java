@@ -61,6 +61,14 @@ public class CouponOrderVO implements Serializable{
      */
     private String couponId;
 
+    private String holderId;
+
+    private String holderType;
+
+    private String holderName;
+
+    private String logoUrl;
+
     public String getOrderId() {
         return orderId;
     }
@@ -157,6 +165,38 @@ public class CouponOrderVO implements Serializable{
         this.couponId = couponId;
     }
 
+    public String getHolderId() {
+        return holderId;
+    }
+
+    public void setHolderId(String holderId) {
+        this.holderId = holderId;
+    }
+
+    public String getHolderType() {
+        return holderType;
+    }
+
+    public void setHolderType(String holderType) {
+        this.holderType = holderType;
+    }
+
+    public String getHolderName() {
+        return holderName;
+    }
+
+    public void setHolderName(String holderName) {
+        this.holderName = holderName;
+    }
+
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("CouponOrderVO{");
@@ -172,6 +212,10 @@ public class CouponOrderVO implements Serializable{
         sb.append(", couponGroup=").append(couponGroup);
         sb.append(", couponShop=").append(couponShop);
         sb.append(", couponId='").append(couponId).append('\'');
+        sb.append(", holderId='").append(holderId).append('\'');
+        sb.append(", holderType='").append(holderType).append('\'');
+        sb.append(", holderName='").append(holderName).append('\'');
+        sb.append(", logoUrl='").append(logoUrl).append('\'');
         sb.append('}');
         return sb.toString();
     }
