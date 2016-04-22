@@ -28,4 +28,8 @@ public class ActivityLimitParam implements Serializable {
 	public void setMallId(String mallId) {
 		this.mallId = mallId;
 	}
+	@Override
+	public String toString() {
+		return "ActivityLimitParam [mobile=" + mobile + ", name=" + name + ", mallId=" + mallId + "]";
+	}
 }
