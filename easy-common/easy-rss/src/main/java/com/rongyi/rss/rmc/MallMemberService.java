@@ -115,4 +115,6 @@ public interface MallMemberService {
 
   MallMember queryByPhone(MallMember queryMember);
 
+  CityonActivity selectActivityById(CityonActivity activity);
+
 }
