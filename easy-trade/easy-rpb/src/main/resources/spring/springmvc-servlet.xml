@@ -37,6 +37,15 @@
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 
+	<!--配置拦截器, 多个拦截器,顺序执行 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="com.rongyi.core.common.log.LogInterceptor">
+			</bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
 	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />
 
 	<bean name="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">

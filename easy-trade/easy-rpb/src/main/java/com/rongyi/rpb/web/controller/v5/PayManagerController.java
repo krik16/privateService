@@ -5,7 +5,6 @@ import com.rongyi.easy.rpb.vo.PaymentEntityVO;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rpb.web.controller.BaseController;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,11 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,7 +28,7 @@ public class PayManagerController extends BaseController {
 	PaymentService paymentService;
 
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
-	public String index(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap modelMap, String shopId, String currpage) {
+	public String index(ModelMap modelMap, String currpage) {
 		LOGGER.info(">>>payment index");
 		modelMap.addAttribute("orderNum", "");
 		modelMap.addAttribute("currpage", currpage);
@@ -42,9 +37,9 @@ public class PayManagerController extends BaseController {
 
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap modelMap, String paramsJson) {
+	public String list(HttpServletRequest request,  ModelMap modelMap, String paramsJson) {
 		LOGGER.info(">>>payment list");
-		Map<String, Object> resultMap = new HashMap<String, Object>();
+//		Map<String, Object> resultMap = new HashMap<>();
 		try {
 			request.setCharacterEncoding("utf-8");
 		} catch (UnsupportedEncodingException e1) {
@@ -52,8 +47,8 @@ public class PayManagerController extends BaseController {
 		}
 		Map<String, Object> paramsMap;
 		if (paramsJson == null) {
-			resultMap.put("msg", "参数为NULL，请关闭再重试！");
-			resultMap.put("status", 0);
+//			resultMap.put("msg", "参数为NULL，请关闭再重试！");
+//			resultMap.put("status", 0);
 			return null;
 		}
 		paramsMap = JsonUtil.getMapFromJson(paramsJson);

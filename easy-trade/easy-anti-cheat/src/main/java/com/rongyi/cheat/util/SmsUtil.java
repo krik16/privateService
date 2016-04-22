@@ -8,15 +8,18 @@
 
 package com.rongyi.cheat.util;
 
-import java.util.Date;
-
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
-
-import com.rongyi.core.common.MessageManger;
 import com.rongyi.core.common.util.DateUtil;
+import com.rongyi.core.sms.SmsConfig;
+import com.rongyi.core.sms.param.SmsParam;
 import com.rongyi.easy.malllife.config.SystemConfig;
 import com.rongyi.easy.malllife.exception.MallLifeException;
+import com.rongyi.rss.sms.ISmsSendService;
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.Date;
 
 /**	
  * @Author:  柯军
@@ -24,12 +27,14 @@ import com.rongyi.easy.malllife.exception.MallLifeException;
  * @datetime:2015年10月23日下午4:25:25
  *
  **/
-
+@Component
 public class SmsUtil {
 
+	@Autowired
+	ISmsSendService smsSendService;
+
 	private static final Logger LOGGER = Logger.getLogger(SmsUtil.class);
-	
-	  /**	
+	  /**
      * @Description: 刷单短信发送 
      * @param sendPhoneList 发送人手机号列表
      * @param count 刷单数量
@@ -41,7 +46,7 @@ public class SmsUtil {
      * @Author:  柯军
      * @datetime:2015年10月23日下午4:43:43
      **/
-    public static void sendMoreMsMessage(String[] sendPhoneList, Integer count,String payAccount,String payType,Date startTime,Date endTime,String otherMessage){
+    public  void sendMoreMsMessage(String[] sendPhoneList, Integer count,String payAccount,String payType,Date startTime,Date endTime,String otherMessage){
     	for (String phone : sendPhoneList) {
     		sendMsMessage(phone, count, payAccount, payType, startTime, endTime,otherMessage);
 		}
@@ -59,7 +64,7 @@ public class SmsUtil {
      * @Author:  柯军
      * @datetime:2015年10月23日下午4:43:43
      **/
-    public static void sendMsMessage(String sendPhone, Integer count,String payAccount,String payType,Date startTime,Date endTime,String otherMessage) {
+    public  void sendMsMessage(String sendPhone, Integer count,String payAccount,String payType,Date startTime,Date endTime,String otherMessage) {
 		try {
 
 			//组织短信明文
@@ -87,9 +92,15 @@ public class SmsUtil {
 				throw new MallLifeException("手机号码无效");
 			}
 			else{
-				MessageManger msm = MessageManger.getInstance();
-				String returnCode = msm.sendYunSmsMessage(sendPhone, sb.toString());
-				LOGGER.info("短信通道返回：" + returnCode);
+//				MessageManger msm = MessageManger.getInstance();
+//				String returnCode = msm.sendYunSmsMessage(sendPhone, sb.toString());
+//				LOGGER.info("短信通道返回：" + returnCode);
+				SmsParam smsParam = new SmsParam();
+				smsParam.setMsgStr(sb.toString());
+				smsParam.setPhone(sendPhone);
+				smsParam.setProductType(SmsConfig.PRODUCT_TYPE.TOB_NOTICE);
+				smsParam.setSendModule(SmsConfig.SEND_MODULE.DEALMSM);
+				smsSendService.sendSmsMessage(smsParam);
 			}
 			
 		} catch (MallLifeException e) {

@@ -121,7 +121,7 @@ public class AliPayUnit {
      **/
     public QueryOrderParamVO queryOrder(String tradeNo, String payNo) {
         LOGGER.info("查询支付宝订单状态,queryOrder tradeNo={},payNo={}", tradeNo, payNo);
-        int status = 200;
+        int status;
         try {
             if (Strings.isNullOrEmpty(tradeNo) && Strings.isNullOrEmpty(payNo)) {
                 throw new AliPayException(ConstantEnum.EXCEPTION_PARAM_NULL.getCodeStr(), ConstantEnum.EXCEPTION_PARAM_NULL.getValueStr());
@@ -176,12 +176,11 @@ public class AliPayUnit {
 
 
     /**
-     * @param tradeNo
-     * @param batchNo
-     * @return
-     * @Description: 查询退款状态
-     * @Author: 柯军
-     * @datetime:2015年8月5日上午9:34:52
+     * @param tradeNo 交易单号
+     * @param batchNo 批量单号
+     * Description: 查询退款状态
+     * Author: 柯军
+     * datetime:2015年8月5日上午9:34:52
      **/
     public AliRefundResultData queryRefund(String tradeNo, String batchNo) {
         LOGGER.info("查询支付宝退款状态,queryOrder tradeNo={},batchNo={}", tradeNo, batchNo);
@@ -206,11 +205,10 @@ public class AliPayUnit {
     }
 
     /**
-     * @param xmlString
-     * @return
-     * @Description: xml 结果转换成QueryOrderParamVO对象
-     * @Author: 柯军
-     * @datetime:2015年8月7日上午11:17:59
+     * @param xmlString xmlString
+     * Description: xml 结果转换成QueryOrderParamVO对象
+     * Author: 柯军
+     * datetime:2015年8月7日上午11:17:59
      **/
     private AliRefundResultData xmlStringToAliRefundResultData(String xmlString) {
         LOGGER.info("支付宝订单查询结果数据：" + xmlString);
@@ -248,10 +246,9 @@ public class AliPayUnit {
     /**
      * @param batchNo 付款单号
      * @param tradeNo    支付宝交易流水号
-     * @return
-     * @Description: 生成订单查询URL字符串
-     * @Author: 柯军
-     * @datetime:2015年8月7日上午11:20:00
+     * Description: 生成订单查询URL字符串
+     * Author: 柯军
+     * datetime:2015年8月7日上午11:20:00
      **/
     private String CreateRefundUrl(String tradeNo, String batchNo) {
 
@@ -267,13 +264,13 @@ public class AliPayUnit {
         String parameter = "";
         parameter = parameter + ConstantUtil.PCRefundWebPage.ALIPAY_GATEWAY_NEW;
         List<String> keys = new ArrayList<>(params.keySet());
-        for (int i = 0; i < keys.size(); i++) {
-            String value = params.get(keys.get(i));
+        for (String key : keys) {
+            String value = params.get(key);
             if (value == null || value.trim().length() == 0) {
                 continue;
             }
             try {
-                parameter = parameter + keys.get(i) + "=" + URLEncoder.encode(value, ConstantUtil.PayZhiFuBao.INPUT_CHARSET) + "&";
+                parameter = parameter + key + "=" + URLEncoder.encode(value, ConstantUtil.PayZhiFuBao.INPUT_CHARSET) + "&";
             } catch (UnsupportedEncodingException e) {
 
                 e.printStackTrace();

@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author LiuChao 2014年8月26日16:17 支付宝网页支付API。 包含支付宝网页支付：
+ *         支付宝网页支付API。 包含支付宝网页支付：
  *         1.进入收银台之前页面，2.支付宝支付成功回调接口，3.支付宝支付失败接口
  */
 @Controller
@@ -55,12 +55,11 @@ public class PCWebPageAlipayController extends BaseController {
 	@Autowired
 	WebPageAlipayService webPageAlipayService;
 	/**
-	 * @Description: 支付宝页面支付，接收APP前台传来订单号进行支付宝网页支付相关操作（测试使用）
-	 * @param orderId
-	 * @param model
-	 * @return
-	 * @Author: 柯军
-	 * @datetime:2015年6月26日下午6:24:31
+	 * Description: 支付宝页面支付，接收APP前台传来订单号进行支付宝网页支付相关操作（测试使用）
+	 * @param orderId 订单号
+	 * @param model model
+	 * Author: 柯军
+	 * datetime:2015年6月26日下午6:24:31
 	 **/
 	@RequestMapping("/zhifubaoRepay.htm")
 	public String zhifubaoRepayTest(@RequestParam String orderId, Model model) {
@@ -77,8 +76,6 @@ public class PCWebPageAlipayController extends BaseController {
 		paymentEntityVO.setTimeStart("2015-02-01 13:40");
 		paymentEntityVO.setTimeExpire("2015-02-01 14:48");
 		paymentEntityVO.setPayNo("1231231231231");
-		String total_fee = "0.01";
-		String itemName = "容易2015-03-25";
 		try {
 			Map<String, Object> map = webPageAlipayService.getToken(paymentEntityVO);
 			model.addAttribute("content", map.get("sHtmlText"));
@@ -91,21 +88,14 @@ public class PCWebPageAlipayController extends BaseController {
 	/**
 	 * 支付宝打款成功通知
 	 * 
-	 * @author kejun 2015年3月25日
-	 * @param model
-	 * @param notify_id
-	 * @param sign_type
-	 * @param sign
-	 * @param batch_no
-	 * @param pay_user_id
-	 * @param pay_user_name
-	 * @param pay_account_no
-	 * @param success_details
-	 * @return
+	 * author kejun 2015年3月25日
+	 * @param notify_id 通知id
+	 * @param sign_type 签名类型
+	 * @param sign 签名
+	 * @param success_details 交易成功数据
 	 */
 	@RequestMapping("/pay_notify_url.htm")
-	public String notifyPay(Model model, String notify_time, String notify_type, String notify_id, String sign_type, String sign, String batch_no, String pay_user_id, String pay_user_name,
-			String pay_account_no, String success_details,String fail_details) {
+	public String notifyPay(String notify_time, String notify_type, String notify_id, String sign_type, String sign,String success_details,String fail_details) {
 		PaymentLogInfo result = paymentLogInfoService.selectByNotifyId(notify_id);
 		if (result != null)
 			return null;
@@ -154,11 +144,9 @@ public class PCWebPageAlipayController extends BaseController {
 	}
 
 	/**
-	 * @Description: 支付成功发送通知消息
-	 * @param
-	 * @param
-	 * @Author: 柯军
-	 * @datetime:2015年5月21日上午11:53:11
+	 * Description: 支付成功发送通知消息
+	 * Author: 柯军
+	 * datetime:2015年5月21日上午11:53:11
 	 **/
 	public void paySuccessToMessage(List<PaymentEntity> list, Integer tradeType) {
 		List<PayNotifyVO> payNotifylist = new ArrayList<>();
@@ -201,20 +189,17 @@ public class PCWebPageAlipayController extends BaseController {
 	/**
 	 * 支付宝退款成功回调
 	 * 
-	 * @author kejun 2015年3月25日
-	 * @param model
-	 * @param notify_time
-	 * @param notify_type
-	 * @param notify_id
-	 * @param sign_type
-	 * @param sign
-	 * @param batch_no
-	 * @param success_num
-	 * @param result_details
-	 * @return
+	 * author kejun 2015年3月25日
+	 * @param notify_time 通知时间
+	 * @param notify_type 通知类型
+	 * @param notify_id 通知id
+	 * @param sign_type 签名类型
+	 * @param sign 签名
+	 * @param batch_no 批量单号
+	 * @param result_details 通知结果
 	 */
 	@RequestMapping("/refund_notify_url.htm")
-	public String notifyRefund(Model model, String notify_time, String notify_type, String notify_id, String sign_type, String sign, String batch_no, String success_num, String result_details) {
+	public String notifyRefund(String notify_time, String notify_type, String notify_id, String sign_type, String sign, String batch_no, String result_details) {
 		PaymentLogInfo result = paymentLogInfoService.selectByNotifyId(notify_id);
 		if (result != null)
 			return "payManager/notify";
@@ -229,7 +214,7 @@ public class PCWebPageAlipayController extends BaseController {
 				for (int i = 0; i < batchDetail.length; i++) {
 					PaymentLogInfo paymentLogInfo = new PaymentLogInfo();
 					String[] details = batchDetail[i].split("\\^");
-					if (details != null && validateTradeStatus(details[2])) {
+					if (validateTradeStatus(details[2])) {
 						PaymentLogInfo oldPaymentLogInfo = paymentLogInfoService.selectByPayTradeNo(details[0]);
 						if (oldPaymentLogInfo != null)
 							paymentLogInfo.setBuyer_email(oldPaymentLogInfo.getBuyer_email());
@@ -274,10 +259,10 @@ public class PCWebPageAlipayController extends BaseController {
 	}
 
 	/**
-	 * @Description: 支付宝退款通知成功后发送退款成功消息到订单系统
-	 * @param refundPaymentEntity
-	 * @Author: 柯军
-	 * @datetime:2015年7月12日上午10:22:20
+	 * Description: 支付宝退款通知成功后发送退款成功消息到订单系统
+	 * @param refundPaymentEntity refundPaymentEntity
+	 * Author: 柯军
+	 * datetime:2015年7月12日上午10:22:20
 	 **/
 	private void refundNotifyMq(PaymentEntity refundPaymentEntity) {
 		Map<String, Object> bodyMap = new HashMap<>();
@@ -300,12 +285,11 @@ public class PCWebPageAlipayController extends BaseController {
 	}
 
 	/**
-	 * @Description: 
+	 * Description:
 	 *               退款成功根据交易流水号获得付款记录，根据付款记录中付款单号可获得支付订单号，支付订单号和退款订单号相同，根据订单号获得退款单号
-	 * @param tradeNo
-	 * @return
-	 * @Author: 柯军
-	 * @datetime:2015年5月26日下午5:45:59
+	 * @param tradeNo 交易流水号
+	 * Author: 柯军
+	 * datetime:2015年5月26日下午5:45:59
 	 **/
 	private PaymentEntity getPaymentByPayTradeNo(String tradeNo, String batchNo) {
 		PaymentEntity refundPaymentEntity = null;
@@ -328,11 +312,10 @@ public class PCWebPageAlipayController extends BaseController {
 	}
 
 	/**
-	 * @Description: 验证支付宝订单状态
-	 * @param tradeResult
-	 * @return
-	 * @Author: 柯军
-	 * @datetime:2015年4月24日上午10:47:02
+	 * Description: 验证支付宝订单状态
+	 * @param tradeResult 交易结果
+	 * Author: 柯军
+	 * datetime:2015年4月24日上午10:47:02
 	 **/
 	private boolean validateTradeStatus(String tradeResult) {
 		return tradeResult.contains("TRADE_SUCCESS") || tradeResult.contains("SUCCESS") || tradeResult.contains("success");
