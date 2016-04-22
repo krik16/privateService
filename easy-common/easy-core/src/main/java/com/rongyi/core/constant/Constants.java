@@ -16,6 +16,9 @@ public interface Constants {
     interface OrderPaytime {
         Integer PAY_SECOND = 900; //订单支付最大时间（秒数）
     }
+    Integer RY_SESSION_TIMEOUT = 60 * 60 * 2;
+    Integer BS_SESSION_TIMEOUT = 60 * 60;
+    
     String BS_COOKIE_NAME = "BSST";
     String RY_COOKIE_NAME = "RYST";
 

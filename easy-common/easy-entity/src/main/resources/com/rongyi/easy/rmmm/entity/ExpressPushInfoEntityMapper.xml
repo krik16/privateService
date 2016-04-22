@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongyi.easy.rmmm.entity.ExpressPushInfoEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.rongyi.easy.rmmm.entity.ExpressPushInfoEntity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="express_bill_id" property="expressBillId" jdbcType="VARCHAR" />
+    <result column="old_company" property="oldCompany" jdbcType="VARCHAR" />
+    <result column="new_company" property="newCompany" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="message" property="message" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="update_at" property="updateAt" jdbcType="TIMESTAMP" />
+    <result column="is_disabled" property="isDisabled" jdbcType="TINYINT" />
+    <result column="data" property="data" jdbcType="VARCHAR" />
+  </resultMap>
+  <!-- <resultMap id="ResultMapWithBLOBs" type="com.rongyi.easy.rmmm.entity.ExpressPushInfoEntity" extends="BaseResultMap" >
+    <result column="data" property="data" typeHandler="com.rongyi.core.common.util.ConvertBlobTypeHandler" />
+  </resultMap> -->
+</mapper>

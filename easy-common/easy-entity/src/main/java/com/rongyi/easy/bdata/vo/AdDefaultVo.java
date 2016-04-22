@@ -28,6 +28,7 @@ public class AdDefaultVo implements Serializable {
 	private String update_by;//更新人名称
 	private Long update_at;//记录更新时间long
 	private Integer status;//状态 1 有效 0 无效
+	private String sub_type;//全屏为空，330_home_a,330_home_d,318_home_b,318_home_d
 	/**
 	 * @return the defaultId
 	 */
@@ -184,12 +185,24 @@ public class AdDefaultVo implements Serializable {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+	/**
+	 * @return the sub_type
+	 */
+	public String getSub_type() {
+		return sub_type;
+	}
+	/**
+	 * @param sub_type the sub_type to set
+	 */
+	public void setSub_type(String sub_type) {
+		this.sub_type = sub_type;
+	}
 	/** 
 	* @Title: toString 
 	* @Description: TODO(这里用一句话描述这个方法的作用) 
 	* @param @return    设定文件 
 	* @author shaozhou
-	* @date 2016年3月18日 下午5:26:06
+	* @date 2016年4月1日 下午6:56:10
 	* @throws 
 	*/
 	@Override
@@ -197,6 +210,7 @@ public class AdDefaultVo implements Serializable {
 		return "AdDefaultVo [defaultId=" + defaultId + ", name=" + name + ", position_id=" + position_id
 				+ ", position_name=" + position_name + ", moduleId=" + moduleId + ", content_url=" + content_url
 				+ ", content_type=" + content_type + ", seq=" + seq + ", create_by=" + create_by + ", create_at="
-				+ create_at + ", update_by=" + update_by + ", update_at=" + update_at + ", status=" + status + "]";
+				+ create_at + ", update_by=" + update_by + ", update_at=" + update_at + ", status=" + status
+				+ ", sub_type=" + sub_type + "]";
 	}
 }

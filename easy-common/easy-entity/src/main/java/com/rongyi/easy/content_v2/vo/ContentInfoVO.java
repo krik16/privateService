@@ -14,6 +14,30 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  */
 public class ContentInfoVO implements Serializable{
 	
+	public Integer getAdvDuration() {
+		return advDuration;
+	}
+
+	public void setAdvDuration(Integer advDuration) {
+		this.advDuration = advDuration;
+	}
+
+	public Integer getActivityModuleId() {
+		return activityModuleId;
+	}
+
+	public void setActivityModuleId(Integer activityModuleId) {
+		this.activityModuleId = activityModuleId;
+	}
+
+	public String getActivityModuleName() {
+		return activityModuleName;
+	}
+
+	public void setActivityModuleName(String activityModuleName) {
+		this.activityModuleName = activityModuleName;
+	}
+
 	/** 主键id*/
     private Integer id;
 
@@ -28,6 +52,13 @@ public class ContentInfoVO implements Serializable{
     private String picName;
 	/**banner背景图片*/
 	private String bannerBackgroundPic;
+
+	/**
+	 * 选中的图片
+	 * @author wangjh7
+	 * @date 2016-04-11
+	 */
+	private String selectedPicUrls;
     /**内容管理的详情的标题*/
     private String title;
     /**活动的子标题*/
@@ -63,6 +94,41 @@ public class ContentInfoVO implements Serializable{
      * 位置id
      */
     private Integer positionId;
+    
+    /**
+     * 广告播放时长
+     * @author wangjh7
+     */
+    private Integer advDuration =0;
+    
+    /**
+     * 活动板块设置ID
+     * @author wangjh7
+     */
+    private Integer activityModuleId = 0;
+    
+    /**
+     * 活动板块设置名称
+     * @author wangjh7
+     */
+    private String activityModuleName = "";
+
+	/**
+	 * 分享标题
+	 */
+	private String shareTitle;
+	/**
+	 * 分享内容
+	 */
+	private String shareContent;
+	/**
+	 * 分享图片
+	 */
+	private String sharePic;
+	/**
+	 * app标题
+	 */
+	private String appTitle;
     
 
 	public Integer getId() {
@@ -255,6 +321,46 @@ public class ContentInfoVO implements Serializable{
 		this.positionId = positionId;
 	}
 
+	public String getSelectedPicUrls() {
+		return selectedPicUrls;
+	}
+
+	public void setSelectedPicUrls(String selectedPicUrls) {
+		this.selectedPicUrls = selectedPicUrls;
+	}
+
+	public String getShareTitle() {
+		return shareTitle;
+	}
+
+	public void setShareTitle(String shareTitle) {
+		this.shareTitle = shareTitle;
+	}
+
+	public String getShareContent() {
+		return shareContent;
+	}
+
+	public void setShareContent(String shareContent) {
+		this.shareContent = shareContent;
+	}
+
+	public String getSharePic() {
+		return sharePic;
+	}
+
+	public void setSharePic(String sharePic) {
+		this.sharePic = sharePic;
+	}
+
+	public String getAppTitle() {
+		return appTitle;
+	}
+
+	public void setAppTitle(String appTitle) {
+		this.appTitle = appTitle;
+	}
+
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this)
@@ -265,6 +371,7 @@ public class ContentInfoVO implements Serializable{
 				.append("cityId", cityId)
 				.append("picName", picName)
 				.append("bannerBackgroundPic", bannerBackgroundPic)
+				.append("selectedPicUrls", selectedPicUrls)
 				.append("title", title)
 				.append("subtitle", subtitle)
 				.append("modelName", modelName)
@@ -281,6 +388,13 @@ public class ContentInfoVO implements Serializable{
 				.append("updateAt", updateAt)
 				.append("status", status)
 				.append("positionId", positionId)
+				.append("advDuration", advDuration)
+				.append("activityModuleId", activityModuleId)
+				.append("activityModuleName", activityModuleName)
+				.append("shareTitle", shareTitle)
+				.append("shareContent", shareContent)
+				.append("sharePic", sharePic)
+				.append("appTitle", appTitle)
 				.toString();
 	}
 }

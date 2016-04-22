@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class MalllifeUserOperateEntity implements Serializable{
-    /** 主键 */
+    /** id主键不可用，205,215数据库没设置自增，虽然线上数据库、200数据库是自增的*/
     private Integer id;
 
     /** 用户ID */

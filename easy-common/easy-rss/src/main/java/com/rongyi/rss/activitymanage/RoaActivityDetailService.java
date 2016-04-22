@@ -34,4 +34,11 @@ public interface RoaActivityDetailService  {
      * @return
      */
     public ResponseVO searchSeckillDetailByParam(SearchSecKillParam searchSecKillParam);
+
+    /**
+     * 查询特卖和闪购合并的详情
+     * @param flashSaleParam
+     * @return
+     */
+    public ResponseVO searchSaleFlashBuyDetailByParam(FlashSaleParam flashSaleParam);
 }

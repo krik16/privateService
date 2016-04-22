@@ -65,13 +65,8 @@ public class MalllifeBaseParam implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .append("jsessionid", jsessionid)
-                .append("appVersion", appVersion)
-                .append("appType", appType)
-                .append("currentPage", currentPage)
-                .append("pageSize", pageSize)
-                .toString();
-    }
+	public String toString() {
+		return "MalllifeBaseParam [jsessionid=" + jsessionid + ", appVersion=" + appVersion + ", appType=" + appType
+				+ ", currentPage=" + currentPage + ", pageSize=" + pageSize + "]";
+	}
 }

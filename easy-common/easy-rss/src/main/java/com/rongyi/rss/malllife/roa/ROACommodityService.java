@@ -11,6 +11,7 @@ package com.rongyi.rss.malllife.roa;
 
 import java.util.List;
 
+import com.rongyi.easy.mcmc.CommodityCategory;
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
@@ -23,6 +24,8 @@ import com.rongyi.easy.mcmc.vo.CommodityPageBuyerVO;
 import com.rongyi.easy.mcmc.vo.CommoditySpecVO;
 import com.rongyi.easy.mcmc.vo.CommodityVO;
 import com.rongyi.easy.mcmc.vo.CommodityWebVO;
+import com.rongyi.easy.roa.param.SearchCommodityBrandParam;
+import com.rongyi.easy.roa.param.SearchCommodityCategoryParam;
 import com.rongyi.easy.solr.param.CommodityBrandSearchParam;
 import com.rongyi.easy.solr.param.CommoditySearchParam;
 
@@ -147,4 +150,39 @@ public interface ROACommodityService {
 //	 * @return
 //	 */
 //	public ResponseResult getBuyerCommodityCategoryHasCommodity(BuyerCategoryParam categoryParam);
+
+	/**
+	 * 获取有商品的分类列表
+	 * @param categoryParam	参数对象
+	 * @return
+	 */
+	public ResponseResult getBuyerCommodityCategory(BuyerCategoryParam categoryParam);
+
+	/**
+	 *
+	 * @param type 3表示第三级分类
+	 * @param isPopular true表示热门分类
+	 * @return
+	 */
+	public List<CommodityCategory> selectCategory(int type,boolean isPopular);
+
+	/**
+	 * 根据商场获取品类列表(有商品的品类列表)
+	 * @param mallId		商场ID
+	 * @param showParent	是否显示父级
+	 * @param pageSize		分页条数
+	 * @param page			当前页
+	 * @return
+	 */
+	public ResponseVO getCommodityCategorysByMall(SearchCommodityCategoryParam param);
+
+	/**
+	 * 根据商场获取品牌列表(有商品的品牌列表)
+	 * @param mallId		商场ID
+	 * @param keyword		搜索关键字（匹配品牌名称）
+	 * @param pageSize		分页条数
+	 * @param page			当前页
+	 * @return
+	 */
+	public ResponseVO getBrandsByMall(SearchCommodityBrandParam param);
 }

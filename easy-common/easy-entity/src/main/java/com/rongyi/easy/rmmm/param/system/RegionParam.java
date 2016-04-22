@@ -21,7 +21,7 @@ public class RegionParam  extends BaseParam implements Serializable {
 
 
     public Integer getParentId() {
-            return parentId;
+        return parentId;
     }
 
     public void setParentId(Integer parentId) {

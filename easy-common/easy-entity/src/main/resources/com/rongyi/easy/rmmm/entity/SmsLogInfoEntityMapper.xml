@@ -11,6 +11,11 @@
     <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
     <result column="update_at" property="updateAt" jdbcType="TIMESTAMP" />
     <result column="send_result" property="sendResult" jdbcType="VARCHAR" />
+    <result column="receive_time" property="receiveTime" jdbcType="VARCHAR" />
+    <result column="re_message" property="reMessage" jdbcType="VARCHAR" />
+    <result column="task_id" property="taskID" jdbcType="VARCHAR" />
+    <result column="final_result" property="finalResult" jdbcType="VARCHAR" />
+    <result column="request_ip" property="requestIp" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >

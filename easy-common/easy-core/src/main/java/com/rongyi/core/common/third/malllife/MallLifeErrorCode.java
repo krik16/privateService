@@ -33,8 +33,12 @@ public enum MallLifeErrorCode {
     PARAMETER_FORMAT (1068208,"参数格式不合法"),
 
     /**toB业务 */
+    SMS_SEND_TYPE(1069110,"发送类型不合法"),
+    SMS_SEND_LIMIT(1069112,"发送消息条数超出当日限制"),
+    SMS_SEND_FAILD(1069113,"发送消息失败"),
     COUPON_OPENID_ISEXIST(1069111,"用户不存在"),
     COUPON_IDS_ISEXIST(1069101,"优惠卷(红包)ID为空")
+
     ;
 
 
