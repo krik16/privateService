@@ -95,6 +95,23 @@ public class ForumContentDTO implements Serializable {
      */
     private Integer positionId;
 
+    /**
+     * app 标题
+     */
+    private String appTitle;
+    /**
+     * 分享标题
+     */
+    private String shareContent;
+    /**
+     * 分享内容
+     */
+    private String shareTitle;
+    /**
+     * 分享图片
+     */
+    private String sharePic;
+
     public Integer getId() {
         return id;
     }
@@ -231,6 +248,38 @@ public class ForumContentDTO implements Serializable {
         this.bannerBackgroundPic = bannerBackgroundPic;
     }
 
+    public String getAppTitle() {
+        return appTitle;
+    }
+
+    public void setAppTitle(String appTitle) {
+        this.appTitle = appTitle;
+    }
+
+    public String getShareContent() {
+        return shareContent;
+    }
+
+    public void setShareContent(String shareContent) {
+        this.shareContent = shareContent;
+    }
+
+    public String getShareTitle() {
+        return shareTitle;
+    }
+
+    public void setShareTitle(String shareTitle) {
+        this.shareTitle = shareTitle;
+    }
+
+    public String getSharePic() {
+        return sharePic;
+    }
+
+    public void setSharePic(String sharePic) {
+        this.sharePic = sharePic;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -251,6 +300,10 @@ public class ForumContentDTO implements Serializable {
                 .append("updateUser", updateUser)
                 .append("status", status)
                 .append("positionId", positionId)
+                .append("appTitle", appTitle)
+                .append("shareContent", shareContent)
+                .append("shareTitle", shareTitle)
+                .append("sharePic", sharePic)
                 .toString();
     }
 }

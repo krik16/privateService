@@ -12,26 +12,26 @@ import org.mongodb.morphia.annotations.Id;
 public class CommoditySpec implements  Serializable {
 
 	/**
-	 * 
+	 * 商品规格
 	 */
 	private static final long serialVersionUID = 3600412246221700037L;
 
 	@Id
 	private ObjectId id;
-	private String stock;
-	private String originalPrice;
-	private String currentPrice;
-	private List<ObjectId> columnIds;
+	private String stock;//剩余库存
+	private String originalPrice;//规格原价
+	private String currentPrice;//规格现价
+	private List<ObjectId> columnIds;//规格id
 	private List<String> columnValues;//规格属性
 	private List<String> columnNotes;//规格备注
 	private String extendColums;
-	private Date createAt;
-	private Date updateAt;
-	private String updateBy;
+	private Date createAt;//创建时间
+	private Date updateAt;//修改时间
+	private String updateBy;//修改人
 	private String pictureUrl;//规格图片
 	private String lockedStock;//锁定库存
-	private String total;//规格商品总数
-	private String sku;
+	private String total;//规格商品总数 包括卖出和未卖出的
+	private String sku;//规格sku
 	
 	public List<ObjectId> getColumnIds() {
 		return columnIds;

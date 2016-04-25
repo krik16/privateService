@@ -18,6 +18,13 @@ public class ForumContentLVO  implements Serializable{
 	private String cityName;
 	/**图片*/
 	private String picUrls;
+	/**
+	 * 选中的图片
+	 * @author wangjh7
+	 * @date 2016-04-11
+	 */
+	private String selectedPicUrls;
+
 	/**标题  或则活动主题*/
 	private String title;
 	/**发布开始时间*/
@@ -164,27 +171,34 @@ public class ForumContentLVO  implements Serializable{
 		this.typeVal = typeVal;
 	}
 
+	public String getSelectedPicUrls() {
+		return selectedPicUrls;
+	}
 
+	public void setSelectedPicUrls(String selectedPicUrls) {
+		this.selectedPicUrls = selectedPicUrls;
+	}
 
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this)
-				.append("id", id)
-				.append("positionId", positionId)
-				.append("provName", provName)
-				.append("cityName", cityName)
-				.append("picUrls", picUrls)
-				.append("title", title)
-				.append("publishBeginAt", publishBeginAt)
-				.append("publishEndAt", publishEndAt)
-				.append("createUser", createUser)
-				.append("createAt", createAt)
-				.append("status", status)
-				.append("type", type)
-				.append("iosVersion", iosVersion)
-				.append("androidVersion", androidVersion)
-				.append("stick", stick)
-				.append("typeVal", typeVal)
-				.toString();
+		return "ForumContentLVO{" +
+				"id=" + id +
+				", positionId=" + positionId +
+				", provName='" + provName + '\'' +
+				", cityName='" + cityName + '\'' +
+				", picUrls='" + picUrls + '\'' +
+				", selectedPicUrls='" + selectedPicUrls + '\'' +
+				", title='" + title + '\'' +
+				", publishBeginAt=" + publishBeginAt +
+				", publishEndAt=" + publishEndAt +
+				", createUser='" + createUser + '\'' +
+				", createAt=" + createAt +
+				", status=" + status +
+				", type=" + type +
+				", iosVersion='" + iosVersion + '\'' +
+				", androidVersion='" + androidVersion + '\'' +
+				", stick=" + stick +
+				", typeVal='" + typeVal + '\'' +
+				'}';
 	}
 }

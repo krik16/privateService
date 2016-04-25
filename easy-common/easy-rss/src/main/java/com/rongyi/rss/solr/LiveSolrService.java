@@ -49,5 +49,10 @@ public interface LiveSolrService {
 	 */
 	public boolean insertLiveIndex(LiveSolrDocument liveDocument);
 
+	/**
+	 * 根据直播id删除直播
+	 * @param id
+	 * @return
+	 */
 	public  boolean deleteLiveById(String id);
 }

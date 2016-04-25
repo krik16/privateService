@@ -30,4 +30,11 @@ public interface MlActivityDetailService  {
      * @return
      */
     public ResponseVO searchSeckillDetailByParam(SearchSecKillParam searchSecKillParam);
+
+    /**
+     * 特卖闪购 详情
+     * @param flashSaleParam
+     * @return
+     */
+    public ResponseVO searchSaleFlashDetailByParam(FlashSaleParam flashSaleParam);
 }

@@ -32,8 +32,19 @@ public class ExpressInfoEntity implements Serializable{
 
     /** 是否禁用0正常 1禁用 */
     private Integer isDisabled;
+    
+    /** 快递公司编码 */
+    private String company;
 
-    /**
+    public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	/**
      * 主键
      * @return id
      */
@@ -160,4 +171,13 @@ public class ExpressInfoEntity implements Serializable{
     public void setIsDisabled(Integer isDisabled) {
         this.isDisabled = isDisabled;
     }
+
+	@Override
+	public String toString() {
+		return "ExpressInfoEntity [id=" + id + ", expressName=" + expressName
+				+ ", createBy=" + createBy + ", createAt=" + createAt
+				+ ", updateBy=" + updateBy + ", updateAt=" + updateAt
+				+ ", version=" + version + ", isDisabled=" + isDisabled
+				+ ", company=" + company + "]";
+	}
 }

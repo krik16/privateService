@@ -24,23 +24,23 @@ public class LiveSearchParam extends BaseParam implements Serializable{
 	private static final long serialVersionUID = -8710679871751949024L;
 	
 	private String _id; // id
-	private String keyword;   //关键词，预留，暂时不用
+	private String keyword;   //关键词 直播名
 	private String coord_x;   //坐标x
 	private String coord_y;   //坐标y
-	private String cat_id;        
+	private String cat_id;        //值为1:表示查询 商场, 2:值为24位长表示直播所属店铺或者商场分类的mongoId
 	private String zone_id;   //区域id，用于筛选； 包括距离筛选，距离筛选时传入m为单位的距离 如：500，1000
 	private String city_name; //城市名（如  上海&上海市）
 	private String sort;      //排序规则（distance，null，couponRequired（commodityRequired），date）
 	private int from;         //页
 	private int size;         //一页数量
-	private String liveId;
+	private String liveId;//直播id 查询直播详情使用
 	private String locId; //直播对应的商场or店铺的Id
  	private String bullName; // 买手昵称
 
 	private String bullId; // 买手id
 	private Date start_time; // 开始时间
 	private Date end_time; // 结束时间
-	private Integer status;
+	private Integer status;//直播状态0:发布/预热中，1:上线/进行中，2:下线(已过期),-1代表删除
 	
 	public Integer getStatus() {
 		return status;

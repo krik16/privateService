@@ -27,13 +27,23 @@ public interface ROASmsLogInfoService {
     /**
      * 查询当前手机，当前模块 当天发送的短信记录数
      * @param phone
-     * @param prodectType
-     * @param module
+     * @param prodectType 发送产品类型
+     * @param module 发送模块
      * @return
      * @throws Exception
      */
     public Integer getCount(String phone,int prodectType,int module)throws Exception;
 
 
+     /** 短信最终反馈信息
+     * @param smsLogInfoDto
+     *  taskID 发送任务ID
+     *  finalResult 反馈最终状态 success faild
+     *   channel  发送渠道 1创世华信,2建周 3未来
+     *   receiveTime 时间
+     *   phone 发送手机号码
+     * @throws Exception
+     */
+    public void updateFinalResult(SmsLogInfoDto smsLogInfoDto) throws Exception;
 
 }

@@ -55,6 +55,8 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private String commodityBrandId;
 	@Field("price")
 	private Double price;
+	@Field("currentPriceList")
+	private List<Double> currentPriceList;//商品价格（不同规格现价列表，用于商品价格筛选区间）
 	@Field("spot")
 	private Boolean spot;
 	@Field("type")
@@ -85,10 +87,12 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private Integer terminalType;// com.rongyi.easy.mcmc.constant.CommodityTerminalType常量定义
 	@Field("systemNumber")
 	private String systemNumber;
+	@Field("discount")
+	private Double discount;
 	@Field("weAndTeStatus")
 	private String weAndTeStatus;
 
-
+	private String secKillSign;
 
 	public Double getPrice() {
 		return price;
@@ -96,6 +100,12 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+	public List<Double> getCurrentPriceList() {
+		return currentPriceList;
+	}
+	public void setCurrentPriceList(List<Double> currentPriceList) {
+		this.currentPriceList = currentPriceList;
 	}
 	public String getCommodityMallId() {
 		return commodityMallId;
@@ -215,6 +225,14 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.commodityShopId = commodityShopId;
 	}
 
+	public Double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Double discount) {
+		this.discount = discount;
+	}
+
 	public McmcCommodityDocument(){
 		
 	}
@@ -229,6 +247,8 @@ public class McmcCommodityDocument implements java.io.Serializable{
 		this.commodityCode = doc.getFieldValue("commodityCode").toString();
 		this.commodityShopId = doc.getFieldValue("commodityShopId").toString();
 		this.commodityNameSubdiv = doc.getFieldValue("commodityNameSubdiv").toString();
+		this.saleId=(Integer)doc.getFieldValue("saleId");
+		this.flashSaleId=(Integer)doc.getFieldValue("flashSaleId");
 	}
 	public String getId() {
 		return id;
@@ -368,7 +388,7 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	public void setFlashSortPosition(Integer flashSortPosition) {
 		this.flashSortPosition = flashSortPosition;
 	}
-	
+
 	public Integer getTerminalType() {
 		return terminalType;
 	}
@@ -391,5 +411,13 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 	public void setWeAndTeStatus(String weAndTeStatus) {
 		this.weAndTeStatus = weAndTeStatus;
+	}
+
+	public String getSecKillSign() {
+		return secKillSign;
+	}
+
+	public void setSecKillSign(String secKillSign) {
+		this.secKillSign = secKillSign;
 	}
 }

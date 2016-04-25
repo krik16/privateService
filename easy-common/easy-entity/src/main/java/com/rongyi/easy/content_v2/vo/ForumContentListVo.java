@@ -21,6 +21,12 @@ public class ForumContentListVo implements Serializable{
 	private String cityName;
 	/**图片*/
 	private String picUrls;
+	/**
+	 * 选中的图片
+	 * @author wangjh7
+	 * @date 2016-04-11
+	 */
+	private String selectedPicUrls;
 	/**标题  或则活动主题*/
 	private String title;
 	/**发布开始时间*/
@@ -237,21 +243,48 @@ public class ForumContentListVo implements Serializable{
 		this.typeVal = typeVal;
 	}
 
-	/**(非 Javadoc)
-	* @Title: toString 
-	* @Description: TODO(这里用一句话描述这个方法的作用) 
-	* @param @return    设定文件 
-	* @author shaozhou 
-	* @date 2015年11月24日 下午4:20:02
-	* @throws 
-	*/
+
+	public String getSelectedPicUrls() {
+		return selectedPicUrls;
+	}
+
+	public void setSelectedPicUrls(String selectedPicUrls) {
+		this.selectedPicUrls = selectedPicUrls;
+	}
+
+	/**
+	 * (非 Javadoc)
+	 *
+	 * @param @return 设定文件
+	 * @throws
+	 * @Title: toString
+	 * @Description: TODO(这里用一句话描述这个方法的作用)
+	 * @author shaozhou
+	 * @date 2015年11月24日 下午4:20:02
+	 */
 	@Override
 	public String toString() {
-		return "ForumContentListVo [id=" + id + ", positionId=" + positionId + ", provName=" + provName + ", cityName="
-				+ cityName + ", picUrls=" + picUrls + ", title=" + title + ", publishBeginAt=" + publishBeginAt
-				+ ", publishEndAt=" + publishEndAt + ", createUser=" + createUser + ", createAt=" + createAt
-				+ ", status=" + status + ", buyerLive=" + buyerLive + ", iosVersion=" + iosVersion + ", androidVersion="
-				+ androidVersion + ", quickType=" + quickType + ", quickTypeVal=" + quickTypeVal + ", stick=" + stick
-				+ ", type=" + type + ", typeVal=" + typeVal + "]";
+		return "ForumContentListVo{" +
+				"id=" + id +
+				", positionId=" + positionId +
+				", provName='" + provName + '\'' +
+				", cityName='" + cityName + '\'' +
+				", picUrls='" + picUrls + '\'' +
+				", selectedPicUrls='" + selectedPicUrls + '\'' +
+				", title='" + title + '\'' +
+				", publishBeginAt=" + publishBeginAt +
+				", publishEndAt=" + publishEndAt +
+				", createUser='" + createUser + '\'' +
+				", createAt=" + createAt +
+				", status=" + status +
+				", buyerLive='" + buyerLive + '\'' +
+				", iosVersion='" + iosVersion + '\'' +
+				", androidVersion='" + androidVersion + '\'' +
+				", quickType='" + quickType + '\'' +
+				", quickTypeVal='" + quickTypeVal + '\'' +
+				", stick=" + stick +
+				", type=" + type +
+				", typeVal='" + typeVal + '\'' +
+				'}';
 	}
 }
