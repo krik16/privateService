@@ -79,6 +79,8 @@ public class OrderDetailVO implements Serializable {
 
     private String holderName;
 
+    private String logoUrl;
+
     private Integer count;
 
     private List<CouponShop> couponShops;//适用店铺列表
@@ -311,6 +313,14 @@ public class OrderDetailVO implements Serializable {
 
     public void setCouponMalls(List<CouponMall> couponMalls) {
         this.couponMalls = couponMalls;
+    }
+
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
     }
 
     @Override
