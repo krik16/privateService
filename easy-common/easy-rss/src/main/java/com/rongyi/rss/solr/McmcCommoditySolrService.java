@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.mcmc.param.ActivityCommodityParam;
+import com.rongyi.easy.rmmm.param.BullParam;
 import com.rongyi.easy.roa.param.SearchCommodityBrandParam;
 import com.rongyi.easy.roa.param.SearchCommodityCategoryParam;
 import com.rongyi.easy.solr.result.CommoditySolrResult;
@@ -54,44 +55,44 @@ public interface McmcCommoditySolrService {
 	 * @return
 	 */
 	public List<ObjectId> selectCommodityIndexByNameCode(String request, String shopId);
-	
+
 	/**
 	 * 索引更新商品销量
 	 * @author ZhengYl
-	 * @date 2015年9月8日 下午3:58:26 
+	 * @date 2015年9月8日 下午3:58:26
 	 * @param id
 	 * @param sold
 	 * @return
 	 */
 	public boolean updateCommoditySold(String id, Integer sold);
-	
+
 	/**
 	 * 索引更新商品状态
 	 * @author ZhengYl
-	 * @date 2015年9月8日 下午3:58:42 
+	 * @date 2015年9月8日 下午3:58:42
 	 * @param id
 	 * @param status
 	 * @return
 	 */
 	public boolean updateCommodityStatus(String id, Integer status);
-	
+
 	/**
 	 * 索引更新商品价格
-	 * 
+	 *
 	 * @author ZhengYl
-	 * @date 2015年9月10日 下午4:40:58 
+	 * @date 2015年9月10日 下午4:40:58
 	 * @param id
 	 * @param price
 	 * @param currentPriceList 多规格当前价格列表
 	 * @return
 	 */
 	public boolean updateCommodityPrice(String id, Double price, List<Double> currentPriceList);
-	
+
 	/**
 	 * 商品检索·改
-	 * 
+	 *
 	 * @author ZhengYl
-	 * @date 2015年9月10日 下午2:36:52 
+	 * @date 2015年9月10日 下午2:36:52
 	 * @param param
 	 * @return
 	 */
@@ -117,7 +118,7 @@ public interface McmcCommoditySolrService {
 	/**
 	 * 根据商品id查询商品
 	 * @author ZhengYl
-	 * @date 2015年9月21日 上午10:58:58 
+	 * @date 2015年9月21日 上午10:58:58
 	 * @param id
 	 * @return
 	 */
@@ -285,4 +286,6 @@ public interface McmcCommoditySolrService {
 	 * @return
 	 */
 	public boolean updateCommoditySystemNumber(List<ObjectId> commodityIds, String systemNumber);
+
+	public List<Integer>  selectBrandIdsByParams(BullParam param);
 }
