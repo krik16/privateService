@@ -9,21 +9,21 @@ import java.math.BigDecimal;
 public class MerchantOrderCommodityVO
 {
 
-    private String icon;//ÉÌÆ·Í¼ url£¬¶à¸öÒÔ¡±,¡±·Ö¸ô
-    private String commodityName;//ÉÌÆ·Ãû
-    private String commodityNo;//ÉÌÆ·±àÂë
-    private String commoditySpec;//ÉÌÆ·¹æ¸ñ£¬¶à¸öÒÔ¡±,¡±·Ö¸ô
-    private String commodityNum;//ÉÌÆ·ÊıÁ¿
-    private String unitPrice;//ÉÌÆ·µ¥¼Û Ôª
-    private BigDecimal totalPrice;//ÉÌÆ·×Ü¼Û Ôª
-    private String payPrice;//Âò¼ÒÖ§¸¶ Ôª?
-    private String discountInfo;//ÓÅ»İĞÅÏ¢
-    private String discountAmount;//ÓÅ»İ½ğ¶î
-    private Integer commodityStatus; //ÉÌÆ·×´Ì¬
-    private String id;//ÉÌÆ·id
-    private String postage;//ÉÌÆ·ÓÊ·Ñ
-    private boolean supportCourierDeliver=true;//Ö§³Ö¿ìµİ·¢»õ×Ö¶Î  true ÊÇ    false·ñ
-    private boolean supportSelfPickup=true;//Ö§³Öµ½µê×ÔÌá  true ÊÇ    false·ñ
+    private String icon;//å•†å“å›¾ urlï¼Œå¤šä¸ªä»¥â€,â€åˆ†éš”
+    private String commodityName;//å•†å“å
+    private String commodityNo;//å•†å“ç¼–ç 
+    private String commoditySpec;//å•†å“è§„æ ¼ï¼Œå¤šä¸ªä»¥â€,â€åˆ†éš”
+    private String commodityNum;//å•†å“æ•°é‡
+    private String unitPrice;//å•†å“å•ä»· å…ƒ
+    private BigDecimal totalPrice;//å•†å“æ€»ä»· å…ƒ
+    private String payPrice;//ä¹°å®¶æ”¯ä»˜ å…ƒÔª
+    private String discountInfo;//ä¼˜æƒ ä¿¡æ¯
+    private String discountAmount;//ä¼˜æƒ é‡‘é¢
+    private Integer commodityStatus; //å•†å“çŠ¶æ€
+    private String id;//å•†å“id
+    private String postage;//å•†å“é‚®è´¹
+    private boolean supportCourierDeliver=true;//æ”¯æŒå¿«é€’å‘è´§å­—æ®µ  true æ˜¯    falseå¦
+    private boolean supportSelfPickup=true;//æ”¯æŒåˆ°åº—è‡ªæ  true æ˜¯    falseå¦
 
     public boolean isSupportCourierDeliver() {
         return supportCourierDeliver;

@@ -7,20 +7,20 @@ package com.rongyi.easy.tradecenter.param;
 public class OsmOrderQueryParam
 {
 
-    private String orderStatus;//¶©µ¥×´Ì¬
-    private String createOrderBegin;//¶©µ¥´´½¨¿ªÊ¼Ê±¼ä
-    private String createOrderEnd;//¶©µ¥´´½¨½áÊøÊ±¼ä
-    private String orderNo;//¶©µ¥±àÂë
-    private String commodityNo;//ÉÌÆ·±àÂë
-    private String commodityName;//ÉÌÆ·Ãû³Æ
-    private String buyerAccount;//Âò¼ÒÕËºÅ
-    private String buyerNickName;//Âò¼ÒêÇ³Æ
-    private  String weidianName;//Î¢µêid
-    private  String guideName;//µ¼¹ºÃû³Æ
-    private  String currentPage;//µ±Ç°Ò³
-    private  String sizePerPage;//Ã¿Ò³ÊıÁ¿
-    private String commodityStatus;//ÉÌÆ·×´Ì¬
-    Integer guideId;//µ¼¹ºid
+    private String orderStatus;//è®¢å•çŠ¶æ€
+    private String createOrderBegin;//è®¢å•åˆ›å»ºå¼€å§‹æ—¶é—´
+    private String createOrderEnd;//è®¢å•åˆ›å»ºç»“æŸæ—¶é—´
+    private String orderNo;//è®¢å•ç¼–ç 
+    private String commodityNo;//å•†å“ç¼–ç 
+    private String commodityName;//å•†å“åç§°
+    private String buyerAccount;//ä¹°å®¶è´¦å·
+    private String buyerNickName;//ä¹°å®¶æ˜µç§°
+    private  String weidianName;//å¾®åº—id
+    private  String guideName;//å¯¼è´­åç§°
+    private  String currentPage;//å½“å‰é¡µ
+    private  String sizePerPage;//æ¯é¡µæ•°é‡
+    private String commodityStatus;//å•†å“çŠ¶æ€
+    Integer guideId;//å¯¼è´­id
 
     public Integer getGuideId() {
         return guideId;
