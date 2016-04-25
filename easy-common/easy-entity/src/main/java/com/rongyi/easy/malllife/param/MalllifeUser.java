@@ -31,6 +31,8 @@ public class MalllifeUser implements Serializable {
 
     private String openId;
 
+
+
     private String channel;// 容易逛(MALLLIFE),其他第三方全民财富（QMCAIFU） RONGYI_HTDR(容易后台导入)  HGDSLHJ   //哈根达斯—老虎机活动
 
     private String devUuid;//设备uuid
