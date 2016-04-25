@@ -24,6 +24,9 @@ public class InvitationUserInfoPojo implements Serializable {
 
     private String  shareCode; //邀请码
 
+    /**  用户账号 */
+    private String userAccount;
+
 
     public Integer getUserId() {
         return userId;
@@ -55,5 +58,14 @@ public class InvitationUserInfoPojo implements Serializable {
 
     public void setShareCode(String shareCode) {
         this.shareCode = shareCode;
+    }
+
+
+    public String getUserAccount() {
+        return userAccount;
+    }
+
+    public void setUserAccount(String userAccount) {
+        this.userAccount = userAccount;
     }
 }
