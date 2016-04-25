@@ -40,7 +40,9 @@ public enum  CouponEnum {
     ERROR_INVALID_OPENID(1021207,"openId 参数不能为空！"),
     ERROR_INVALID_PARAMS(1021208,"params 参数不能为空！"),
     ERROR_INVALID_ORDERNO(1021209,"订单号传递错误！"),
-    ERROR_INVALID_COUPONID(1021210,"卡券id 不正确！")
+    ERROR_INVALID_COUPONID(1021210,"卡券id 不正确！"),
+    ERROR_INVALID_TOPCOUPON(1021211,"需要置顶的卡券参数不正确"),
+    ERROR_INVALID_TOP_FAILED(1021212,"置顶失败！")
     ;
 
 
