@@ -120,6 +120,7 @@ public class CommodityCategory extends MalllifeBaseParam  implements java.io.Ser
 				", parentids=" + parentids +
 				", parentid=" + parentid +
 				", type=" + type +
+				", sequence=" + sequence +
 				", commodityCount=" + commodityCount +
 				", isPopular=" + isPopular +
 				", popularImg='" + popularImg + '\'' +
