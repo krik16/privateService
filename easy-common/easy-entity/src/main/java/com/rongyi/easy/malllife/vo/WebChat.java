@@ -10,9 +10,13 @@ import java.io.Serializable;
  */
 public class WebChat implements Serializable {
 
-	private int flag;
+	private int flag=0;
 	private String redirect;
 	private  String code;
+	private String jsessionid;
+
+
+
 	public String getCode() {
 		return code;
 	}
@@ -35,6 +39,14 @@ public class WebChat implements Serializable {
 
 	public void setRedirect(String redirect) {
 		this.redirect = redirect;
+	}
+
+	public String getJsessionid() {
+		return jsessionid;
+	}
+
+	public void setJsessionid(String jsessionid) {
+		this.jsessionid = jsessionid;
 	}
 
 	@Override

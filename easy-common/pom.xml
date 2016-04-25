@@ -1505,6 +1505,7 @@
     <artifactId>easy-common</artifactId>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <version>2.9.5-SNAPSHOT</version>    
 	<packaging>pom</packaging>
 =======
@@ -1518,6 +1519,9 @@
 =======
     <version>3.3.2-SNAPSHOT</version>
 >>>>>>> 4fd05a69debdfa717cad30c130dcb280824c5f07
+=======
+    <version>3.4.1-SNAPSHOT</version>
+>>>>>>> 15ec945ebb33b02a5ae19c22c5a67f81169772d8
     <packaging>pom</packaging>
 >>>>>>> 3e759be7e26d32526e67a4fc9d671e4be50670a8
     <modules>
@@ -2123,6 +2127,7 @@
     <build>
         <pluginManagement>
             <plugins>
+                <!-- 指定项目的JDK版本 -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>

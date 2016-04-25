@@ -23,6 +23,10 @@ public class ActivityListVO implements Serializable{
     //商圈Id
     private String businessDistrictId;
 
+    private String shareTitle;
+
+    private String shareDesc;
+
     public ActivityListVO(){
 
     }
@@ -73,6 +77,22 @@ public class ActivityListVO implements Serializable{
         this.name = name;
     }
 
+    public String getShareTitle() {
+        return shareTitle;
+    }
+
+    public void setShareTitle(String shareTitle) {
+        this.shareTitle = shareTitle;
+    }
+
+    public String getShareDesc() {
+        return shareDesc;
+    }
+
+    public void setShareDesc(String shareDesc) {
+        this.shareDesc = shareDesc;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -81,6 +101,8 @@ public class ActivityListVO implements Serializable{
                 .append("businessDistrictName", businessDistrictName)
                 .append("name", name)
                 .append("businessDistrictId", businessDistrictId)
+                .append("shareTitle", shareTitle)
+                .append("shareDesc", shareDesc)
                 .toString();
     }
 }

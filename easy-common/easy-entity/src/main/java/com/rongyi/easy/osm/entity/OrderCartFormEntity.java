@@ -53,6 +53,8 @@ public class OrderCartFormEntity implements Serializable {
 
     private Byte payChannel;//1支付宝网页  3支付宝app  5微信
 
+    private String userPhone;//用户手机
+
     private OrderEventEntity orderEvent;
 
     public OrderEventEntity getOrderEvent()
@@ -265,6 +267,16 @@ public class OrderCartFormEntity implements Serializable {
         this.payChannel = payChannel;
     }
 
+    public String getUserPhone()
+    {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone)
+    {
+        this.userPhone = userPhone;
+    }
+
     @Override
     public String toString() {
         return "OrderFormEntity{" +
@@ -290,6 +302,7 @@ public class OrderCartFormEntity implements Serializable {
                 ", rebateAmount=" + rebateAmount +
                 ", scoreAmount=" + scoreAmount +
                 ", payChannel=" + payChannel +
+                ", userPhone=" + userPhone +
                 '}';
     }
 }

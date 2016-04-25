@@ -1,11 +1,14 @@
 package com.rongyi.easy.mcmc.param;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 
+import com.rongyi.core.common.util.JsonUtil;
+import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import com.rongyi.easy.mcmc.mvc.DateJson.DateJsonDeserializer;
 
 
@@ -40,13 +43,13 @@ public class CommodityParam {
 	
 	private List<ObjectId> categoryIds;//商品所属的品类列表
 	
-	private List<String> customCategory;//自定义分类
+	private List<Integer> customCategoryIds;//自定义分类集合
 	
 	private Integer distribution;//配送方式 1表示到店自提2快递3表示支持两种方式
 	
 	private Integer freight;//1表示商家承担运费,0表示买家承担运费
 	
-	private Integer terminalType;//上架终端：1.表示容易逛2.表示互动屏3.表示容易逛和互动屏4.表示微商5.微商,容易逛6.微商,互动屏7.容易逛, 互动屏, 微商(转换成二进制数个位1有容易逛第二位1有 互动屏第三位1有 微商)
+	private Integer terminalType;//上架终端：com.rongyi.easy.mcmc.constant.CommodityTerminalType常量定义说明
 	
 	
 	/*@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")*/
@@ -72,6 +75,9 @@ public class CommodityParam {
 	private Integer remain;//剩余总量
 	
 	private int hasSpec;//0表示无规格 1表示有规格
+	private String  weAndTeStatus;//1表示终端机，2表示微信，3表示都显示，4表示都不显示
+	private Integer purchaseCount;//限购数量，0表示不限购
+	
 
 	private Integer templateId;//商城运费模版id
 
@@ -171,12 +177,12 @@ public class CommodityParam {
 		this.categoryIds = categoryIds;
 	}
 
-	public List<String> getCustomCategory() {
-		return customCategory;
+	public List<Integer> getCustomCategoryIds() {
+		return customCategoryIds;
 	}
 
-	public void setCustomCategory(List<String> customCategory) {
-		this.customCategory = customCategory;
+	public void setCustomCategoryIds(List<Integer> customCategoryIds) {
+		this.customCategoryIds = customCategoryIds;
 	}
 
 	public Integer getDistribution() {
@@ -196,7 +202,7 @@ public class CommodityParam {
 	}
 
 	public Integer getTerminalType() {
-		return terminalType;
+		return terminalType == null ? CommodityTerminalType.TERMINAL_TYPE_1 : terminalType;
 	}
 
 	public void setTerminalType(Integer terminalType) {
@@ -275,6 +281,54 @@ public class CommodityParam {
 
 	public void setRemain(Integer remain) {
 		this.remain = remain;
+	}
+
+	public String getWeAndTeStatus() {
+		return weAndTeStatus;
+	}
+
+	public void setWeAndTeStatus(String weAndTeStatus) {
+		this.weAndTeStatus = weAndTeStatus;
+	}
+
+	public Integer getPurchaseCount() {
+		return purchaseCount;
+	}
+
+	public void setPurchaseCount(Integer purchaseCount) {
+		this.purchaseCount = purchaseCount;
+	}
+
+	@Override
+	public String toString() {
+		return "CommodityParam{" +
+				"category='" + category + '\'' +
+				", type=" + type +
+				", id='" + id + '\'' +
+				", name='" + name + '\'' +
+				", status=" + status +
+				", code='" + code + '\'' +
+				", description='" + description + '\'' +
+				", postage='" + postage + '\'' +
+				", originalPrice='" + originalPrice + '\'' +
+				", currentPrice='" + currentPrice + '\'' +
+				", picList=" + picList +
+				", categoryIds=" + categoryIds +
+				", customCategoryIds=" + customCategoryIds +
+				", distribution=" + distribution +
+				", freight=" + freight +
+				", terminalType=" + terminalType +
+				", registerAt=" + registerAt +
+				", soldOutAt=" + soldOutAt +
+				", stockStatus=" + stockStatus +
+				", commoditySpeceParams=" + commoditySpeceParams +
+				", stock=" + stock +
+				", remain=" + remain +
+				", hasSpec=" + hasSpec +
+				", weAndTeStatus='" + weAndTeStatus + '\'' +
+				", purchaseCount=" + purchaseCount +
+				", templateId=" + templateId +
+				'}';
 	}
 
 	public Integer getTemplateId() {

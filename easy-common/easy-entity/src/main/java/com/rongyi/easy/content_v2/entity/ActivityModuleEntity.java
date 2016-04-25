@@ -80,7 +80,13 @@ public class ActivityModuleEntity implements Serializable {
 		this.homepageId = homepageId;
 	}
 
+	public String getSelectedPicUrl() {
+		return selectedPicUrl;
+	}
 
+	public void setSelectedPicUrl(String selectedPicUrl) {
+		this.selectedPicUrl = selectedPicUrl;
+	}
 	/**
 	 * 
 	 */
@@ -89,6 +95,7 @@ public class ActivityModuleEntity implements Serializable {
 	private int id = 0;
 	private String title = "";
 	private String picUrl = "";
+	private String selectedPicUrl = "";
 	private int sortIdx = 0;
 	private int isVisible = 0;
 	private int userId = 0;

@@ -12,6 +12,7 @@ package com.rongyi.core.common.third.malllife;
 
 import com.rongyi.core.common.third.exception.ThirdException;
 import com.rongyi.core.common.third.md5.Md5Util;
+import com.rongyi.core.common.third.param.ThirdBaseParam;
 import com.rongyi.core.common.third.param.user.UserThirdParam;
 
 public class MallLifeSignUtil {
@@ -40,6 +41,27 @@ public class MallLifeSignUtil {
 
     }
 
+    /**
+     * 验证签名是否正确
+     * @param thirdBaseParam 请求参数
+     * @param token 约定token
+     * @return 错误 false; 正确 true
+     * @throws ThirdException
+     */
+    public static Boolean BaseverificationSign(ThirdBaseParam thirdBaseParam,String token)throws ThirdException{
+        Boolean istrue=false;
+        try{
+            String str="data="+thirdBaseParam.getData()+"&timeStamp="+thirdBaseParam.getTimeStamp()+"&channel="+thirdBaseParam.getChannel()+"&token="+token;
+            String md5Sign= Md5Util.GetMD5Code(str);
+            if(md5Sign.equals(thirdBaseParam.getSign())){
+                istrue=true;
+            }
+        }catch (Exception e){
+            throw new ThirdException("验证签名发生异常");
+        }
 
+        return istrue;
+
+    }
 
 }

@@ -20,6 +20,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		<version>2.7.1-SNAPSHOT</version>
 =======
  
@@ -108,10 +109,13 @@
 =======
 		<version>3.3.2-SNAPSHOT</version>
 >>>>>>> 4fd05a69debdfa717cad30c130dcb280824c5f07
+=======
+		<version>3.4.1-SNAPSHOT</version>
+>>>>>>> 15ec945ebb33b02a5ae19c22c5a67f81169772d8
 	</parent>
 	<artifactId>easy-rss</artifactId>
 	<packaging>jar</packaging>
- 
+
 	<dependencies>
 		<dependency>
 			<groupId>com.rongyi</groupId>
@@ -125,7 +129,7 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 	</dependency>
-		
+
 	</dependencies>
 <<<<<<< HEAD
 </project>
