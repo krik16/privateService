@@ -34,7 +34,8 @@ public class OrderModelVO extends OrderModelParam implements Serializable {
 	private String shopPostage;// 店铺快递邮费
 	private String supportWay;//1仅支持自提 2仅支持快递 3都支持
 	private Double couponTotalDiscount;//店铺红包抵扣金额
-
+	private String shopMid;//店铺mongoId
+	
 	public Double getCouponTotalDiscount() {
 		return couponTotalDiscount;
 	}
@@ -185,6 +186,14 @@ public class OrderModelVO extends OrderModelParam implements Serializable {
 
 	public void setCityName(String cityName) {
 		this.cityName = cityName;
+	}
+	
+	public String getShopMid() {
+		return shopMid;
+	}
+
+	public void setShopMid(String shopMid) {
+		this.shopMid = shopMid;
 	}
 
 	@Override

@@ -54,4 +54,5 @@ public interface ICommodityService {
 
 	public List<CommodityFullVO> getFullCommodityList(List<String> commodityIds);
 
+	public List<Commodity> findAllCommodity();
 }

@@ -44,12 +44,12 @@ public class CommodityVO  implements  Serializable {
 	private String liveId; // 直播Id
 	private String commodityOriginalPrice;
 	private String commodityCurrentPrice;
-	private String shopId;
+	private String shopId;//店铺mysql Id
 	private String shopMid; // shop mongo id
 	private String commodityShopNumber;
-	private List<String> commodityPicList;
-	private List<CommoditySpecVO> commoditySpecList;
-	private String commodityCode;
+	private List<String> commodityPicList;//商品图片
+	private List<CommoditySpecVO> commoditySpecList;//商品规格信息
+	private String commodityCode;//商品编码
 	private String commodityCommission;
 	private String brandMid;//品牌mongoId
 	private String mallMid;//商场mongoId
@@ -62,7 +62,7 @@ public class CommodityVO  implements  Serializable {
 	//private Integer distribution;//配送方式 1表示到店自提2快递3表示支持两种方式
 	private Integer freight;//1表示商家承担运费,0表示买家承担运费
 	private Integer terminalType;//上架终端：com.rongyi.easy.mcmc.constant.CommodityTerminalType常量定义
-	private Integer stockStatus;//0表示统一库存1表示分管库存
+	private Integer stockStatus;//0表示统一库存1表示分管库存，现在只有分管库存
 	private String reason;//下架原因
 	private String mallId;//商场mysql Id
 	private String brandName;
@@ -77,6 +77,7 @@ public class CommodityVO  implements  Serializable {
 	private Integer sort;
 	private String mallName;
 	private String weAndTeStatus;//商品在终端机与App上的隐藏与显示  1表示APP端展示，2表示微信端展示，3表示都展示，4表示都不展示
+	private List<Integer> customCategoryIds;//自定义分类集合;
 
 	public Integer getTemplateId() {
 		return templateId;
@@ -538,6 +539,14 @@ public class CommodityVO  implements  Serializable {
 		return mallName;
 	}
 
+	public List<Integer> getCustomCategoryIds() {
+		return customCategoryIds;
+	}
+
+	public void setCustomCategoryIds(List<Integer> customCategoryIds) {
+		this.customCategoryIds = customCategoryIds;
+	}
+
 	public void setMallName(String mallName) {
 		this.mallName = mallName;
 	}
@@ -621,10 +630,9 @@ public class CommodityVO  implements  Serializable {
 				", sort=" + sort +
 				", mallName='" + mallName + '\'' +
 				", weAndTeStatus='" + weAndTeStatus + '\'' +
+				", customCategoryIds=" + customCategoryIds +
 				'}';
 	}
-
-
 
 	public Integer getPurchaseCount()
 	{
