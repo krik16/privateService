@@ -30,7 +30,7 @@ public class CouponShop implements Serializable {
     private String shopAddress;
     private String shopBulding;
     private String shopFloor;
-    private String phone;
+    private String telePhone;
     private String brandId;//品牌id
     private String brandCname;//品牌中文名
     private String mallId;//商场id
@@ -160,17 +160,32 @@ public class CouponShop implements Serializable {
 
     }
 
-    public String getPhone() {
-        return phone;
+    public String getTelePhone() {
+        return telePhone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setTelePhone(String telePhone) {
+        this.telePhone = telePhone;
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("id", id).append("couponId", couponId).append("shopId", shopId).append("shopName", shopName).append("shopAddress", shopAddress).append("shopBulding", shopBulding).append("shopFloor", shopFloor).toString();
+        final StringBuffer sb = new StringBuffer("CouponShop{");
+        sb.append("id=").append(id);
+        sb.append(", couponId='").append(couponId).append('\'');
+        sb.append(", shopId='").append(shopId).append('\'');
+        sb.append(", object1=").append(object1);
+        sb.append(", object2=").append(object2);
+        sb.append(", shopName='").append(shopName).append('\'');
+        sb.append(", shopAddress='").append(shopAddress).append('\'');
+        sb.append(", shopBulding='").append(shopBulding).append('\'');
+        sb.append(", shopFloor='").append(shopFloor).append('\'');
+        sb.append(", telePhone='").append(telePhone).append('\'');
+        sb.append(", brandId='").append(brandId).append('\'');
+        sb.append(", brandCname='").append(brandCname).append('\'');
+        sb.append(", mallId='").append(mallId).append('\'');
+        sb.append(", mallName='").append(mallName).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
-
 }
