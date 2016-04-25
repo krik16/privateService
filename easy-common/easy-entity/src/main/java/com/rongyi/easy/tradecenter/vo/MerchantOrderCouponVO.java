@@ -7,19 +7,19 @@ package com.rongyi.easy.tradecenter.vo;
 public class MerchantOrderCouponVO
 {
 
-    String icon;//¿¨È¯Í¼
-    String couponName;//¿¨È¯Ãû
-    String couponId;//¿¨È¯id
-    String couponCode;//¿¨È¯id
-    String couponNum;//¿¨È¯ÊıÁ¿
-    String unitPrice;//µ¥¼Û
-    String totalPrice;//×Ü¼Û
-    String payPrice;//Êµ¼ÊÖ§¸¶¼Û
-    String discountInfo;//ÓÅ»İĞÅÏ¢
-    String discountAmount;//ÓÅ»İ¼Û
-    String validTime;//ÓĞĞ§ÆÚ
-    String status;//×´Ì¬
-    String outChannelName;//ÍÆ¹ãÇşµÀÃû
+    String icon;//å¡åˆ¸å›¾
+    String couponName;//å¡åˆ¸å
+    String couponId;//å¡åˆ¸id
+    String couponCode;//å¡åˆ¸id
+    String couponNum;//å¡åˆ¸æ•°é‡
+    String unitPrice;//å•ä»·
+    String totalPrice;//æ€»ä»·
+    String payPrice;//å®é™…æ”¯ä»˜ä»·
+    String discountInfo;//ä¼˜æƒ ä¿¡æ¯
+    String discountAmount;//ä¼˜æƒ ä»·
+    String validTime;//æœ‰æ•ˆæœŸ
+    String status;//çŠ¶æ€
+    String outChannelName;//æ¨å¹¿æ¸ é“å
 
     public String getOutChannelName() {
         return outChannelName;

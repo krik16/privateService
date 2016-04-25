@@ -7,16 +7,16 @@ package com.rongyi.easy.tradecenter.param;
 public class CouponOrderQueryParam
 {
 
-    String orderStatus;//¶©µ¥×´Ì¬
-    String createOrderBegin;//¶©µ¥´´½¨¿ªÊ¼Ê±¼ä
-    String createOrderEnd;//¶©µ¥´´½¨½áÊøÊ±¼ä
-    String orderNo;//¶©µ¥±àÂë
-    String couponId;//¿¨È¯Id
-    String couponName;//¿¨È¯Ãû³Æ
-    String buyerAccount;//ÓÃ»§ÕË»§
-    String currentPage;//µ±Ç°Ò³
-    String sizePerPage;//Ã¿Ò³ÊıÁ¿
-    String couponStatus;//¿¨È¯×´Ì¬
+    String orderStatus;//è®¢å•çŠ¶æ€
+    String createOrderBegin;//è®¢å•åˆ›å»ºå¼€å§‹æ—¶é—´
+    String createOrderEnd;//è®¢å•åˆ›å»ºç»“æŸæ—¶é—´
+    String orderNo;//è®¢å•ç¼–ç 
+    String couponId;//å¡åˆ¸Id
+    String couponName;//å¡åˆ¸åç§°
+    String buyerAccount;//ç”¨æˆ·è´¦æˆ·
+    String currentPage;//å½“å‰é¡µ
+    String sizePerPage;//æ¯é¡µæ•°é‡
+    String couponStatus;//å¡åˆ¸çŠ¶æ€
 
     public String getCouponStatus() {
         return couponStatus;
