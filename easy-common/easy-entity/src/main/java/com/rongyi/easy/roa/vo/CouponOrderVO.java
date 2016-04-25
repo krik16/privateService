@@ -67,7 +67,21 @@ public class CouponOrderVO implements Serializable{
 
     private String holderName;
 
+    /**
+     * 券所对应商家的Logo地址
+     */
     private String logoUrl;
+
+    private Date orderTime;
+
+
+    public Date getOrderTime() {
+        return orderTime;
+    }
+
+    public void setOrderTime(Date orderTime) {
+        this.orderTime = orderTime;
+    }
 
     public String getOrderId() {
         return orderId;
@@ -216,6 +230,7 @@ public class CouponOrderVO implements Serializable{
         sb.append(", holderType='").append(holderType).append('\'');
         sb.append(", holderName='").append(holderName).append('\'');
         sb.append(", logoUrl='").append(logoUrl).append('\'');
+        sb.append(", orderTime='").append(orderTime).append('\'');
         sb.append('}');
         return sb.toString();
     }
