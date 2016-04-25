@@ -9,19 +9,19 @@ import java.util.List;
 public class MerchantCouponOrderVO
 {
 
-    private String orderNo;//¶©µ¥ºÅ
-    private String checkedTime;//ºËÏúÊ±¼ä
-    private String paymentTime;//Ö§¸¶Ê±¼ä
-    private String couponSource;//¿¨È¯À´Ô´
-    private  String couponNum;//¶©µ¥¿¨È¯ÖÖÀà
-    private String buyerAccount;//Âò¼ÒÕËºÅ
-    private  Double paymentAmount;//Ö§¸¶½ğ¶î
-    private String discountAmount;//ÓÅ»İ½ğ¶î?
-    private Double integralAmount;//»ı·ÖÓÅ»İĞÅÏ¢
-    private String integralNum;//»ı·ÖÊı
-    private Double hbDiscount;//ºì°üÓÅ»İ
-    private  String orderStatus;//¶©µ¥×´Ì¬
-    List<MerchantOrderCouponVO> couponList;//¶©µ¥ÏÂµÄ¿¨È¯ÁĞ±í
+    private String orderNo;//è®¢å•å·
+    private String checkedTime;//æ ¸é”€æ—¶é—´
+    private String paymentTime;//æ”¯ä»˜æ—¶é—´
+    private String couponSource;//å¡åˆ¸æ¥æº
+    private  String couponNum;//è®¢å•å¡åˆ¸ç§ç±»
+    private String buyerAccount;//ä¹°å®¶è´¦å·
+    private  Double paymentAmount;//æ”¯ä»˜é‡‘é¢
+    private String discountAmount;//ä¼˜æƒ é‡‘é¢Ôª
+    private Double integralAmount;//ç§¯åˆ†ä¼˜æƒ ä¿¡æ¯
+    private String integralNum;//ç§¯åˆ†æ•°
+    private Double hbDiscount;//çº¢åŒ…ä¼˜æƒ 
+    private  String orderStatus;//è®¢å•çŠ¶æ€
+    List<MerchantOrderCouponVO> couponList;//è®¢å•ä¸‹çš„å¡åˆ¸åˆ—è¡¨
 
     public Double getPaymentAmount() {
         return paymentAmount;

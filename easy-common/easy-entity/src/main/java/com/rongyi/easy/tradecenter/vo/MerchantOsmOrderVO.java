@@ -11,28 +11,29 @@ import java.util.List;
 public class MerchantOsmOrderVO implements Serializable{
 
     private Integer orderId;
-    private String orderNo;//¶©µ¥±àºÅ
-    private String createTime;//ÏÂµ¥Ê±¼ä
-    private String paymentTime;//Ö§¸¶Ê±¼ä
-    private String shopName;//µêÆÌÃû³Æ
-    private String commodityNum;//ÉÌÆ·ÖÖÀàÊı
-    private  String guideName;//µ¼¹ºÃû³Æ
-    private Integer guideId;//µ¼¹ºid
-    private Integer orderSource;//µ¼¹ºid
-    private Byte payChannel;//µ¼¹ºid
-    private String buyerAccount;//Âò¼ÒÕËºÅ
-    private String buyerNickName;//Âò¼ÒÕËºÅ
-    private String paymentAmount;//¶©µ¥Êµ¼ÊÖ§¸¶½ğ¶î Ôª
-    private String discountAmount;//¶©µ¥ÓÅ»İ½ğ¶î Ôª
-    private BigDecimal expressPrice;//ÓÊ·Ñ Ôª
-    private BigDecimal integralAmount;//»ı·ÖÓÅ»İ
-    private String integralNum= "0";//»ı·ÖÊı
-    private String orderStatus;//¶©µ¥×´Ì¬ 1£º¶©µ¥Î´¸¶¿î¡¢2£º¶©µ¥´ı·¢»õ¡¢3¡¢¶©µ¥ÒÑ·¢»õ¡¢4£º¶©µ¥È·ÈÏÊÕ»õ¡¢5£º¶©µ¥¹Ø±Õ¡¢8£ºÈ¡Ïû
-    private String type;//²¹³ä¶©µ¥×´Ì¬
-    private String buyerComment;//Âò¼Ò±¸×¢
-    private String closeReason;//¹Ø±ÕÔ­Òò
-    private String cancelReason;//È¡ÏûÔ­Òò
-    private List<MerchantOrderCommodityVO> commodityList;//¶©µ¥ÏÂµÄÉÌÆ·ÁĞ±í
+    private String orderNo;//è®¢å•ç¼–å·
+    private String createTime;//ä¸‹å•æ—¶é—´
+    private String paymentTime;//æ”¯ä»˜æ—¶é—´
+    private String shopName;//åº—é“ºåç§°
+    private String commodityNum;//å•†å“ç§ç±»æ•°
+    private  String guideName;//å¯¼è´­åç§°
+    private Integer guideId;//å¯¼è´­id
+    private Integer orderSource;//å¯¼è´­id
+    private Byte payChannel;//å¯¼è´­id
+    private String buyerAccount;//ä¹°å®¶è´¦å·
+    private String buyerNickName;//ä¹°å®¶è´¦å·
+    private String paymentAmount;//è®¢å•å®é™…æ”¯ä»˜é‡‘é¢ å…ƒ
+    private String discountAmount;//è®¢å•ä¼˜æƒ é‡‘é¢ å…ƒ
+    private BigDecimal expressPrice;//é‚®è´¹ å…ƒ
+    private BigDecimal integralAmount;//ç§¯åˆ†ä¼˜æƒ 
+    private String integralNum= "0";//ç§¯åˆ†æ•°
+    private String orderStatus;//è®¢å•çŠ¶æ€ 1ï¼šè®¢å•æœªä»˜æ¬¾ã€2ï¼šè®¢å•å¾…å‘è´§ã€3ã€è®¢å•å·²å‘è´§ã€4ï¼šè®¢å•ç¡®è®¤æ”¶è´§ã€5ï¼šè®¢å•å…³é—­ã€8ï¼šå–æ¶ˆ
+    private String type;//è¡¥å……è®¢å•çŠ¶æ€
+    private String buyerComment;//ä¹°å®¶å¤‡æ³¨
+    private String closeReason;//å…³é—­åŸå› 
+    private String cancelReason;//å–æ¶ˆåŸå› 
+    private String expressInfoChangeFlg;//"ç‰©æµä¿¡æ¯æ˜¯å¦å…è®¸ä¿®æ”¹ 0ï¼šä¸å…è®¸ 1ï¼šå…è®¸ "
+    private List<MerchantOrderCommodityVO> commodityList;//è®¢å•ä¸‹çš„å•†å“åˆ—è¡¨
 
     public Integer getOrderSource() {
         return orderSource;
@@ -215,6 +216,16 @@ public class MerchantOsmOrderVO implements Serializable{
 
     public void setBuyerAccount(String buyerAccount) {
         this.buyerAccount = buyerAccount;
+    }
+
+    public String getExpressInfoChangeFlg()
+    {
+        return expressInfoChangeFlg;
+    }
+
+    public void setExpressInfoChangeFlg(String expressInfoChangeFlg)
+    {
+        this.expressInfoChangeFlg = expressInfoChangeFlg;
     }
 
     @Override
