@@ -25,6 +25,13 @@ public class ShowCartCommodityVO implements Serializable{
 	private String commodityPostage;// 邮费
 	private int commodityAppStatus;// 商品状态 0下架 1上架 3待上架
 	private String supportWay;//1仅支持自提 2仅支持快递 3都支持
+	private Integer purchaseCount;// 限购数量     小于0不限购  大于等于0 限购
+	public Integer getPurchaseCount() {
+		return purchaseCount;
+	}
+	public void setPurchaseCount(Integer purchaseCount) {
+		this.purchaseCount = purchaseCount;
+	}
 	public Integer getShopCartId() {
 		return shopCartId;
 	}
@@ -106,12 +113,21 @@ public class ShowCartCommodityVO implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "ShowCartCommodityVO [shopCartId=" + shopCartId + ", commodityId=" + commodityId + ", commodityName="
-				+ commodityName + ", specId=" + specId + ", specColumnValues=" + specColumnValues + ", commodityOriginalPrice="
-				+ commodityOriginalPrice + ", commodityCurrentPrice=" + commodityCurrentPrice + ", commodityCount="
-				+ commodityCount + ", commodityPic=" + commodityPic + ", commodityStock=" + commodityStock
-				+ ", commodityPostage=" + commodityPostage + ", commodityAppStatus=" + commodityAppStatus + ", supportWay="
-				+ supportWay + "]";
+		return "ShowCartCommodityVO [shopCartId=" + shopCartId + 
+				", commodityId=" + commodityId + 
+				", commodityName=" + commodityName + 
+				", specId=" + specId + 
+				", specColumnValues=" + specColumnValues + 
+				", commodityOriginalPrice=" + commodityOriginalPrice + 
+				", commodityCurrentPrice=" + commodityCurrentPrice + 
+				", commodityCount=" + commodityCount + 
+				", commodityPic=" + commodityPic + 
+				", commodityStock=" + commodityStock
+				+ ", commodityPostage=" + commodityPostage + 
+				", commodityAppStatus=" + commodityAppStatus + 
+				", supportWay=" + supportWay + 
+				", purchaseCount=" + purchaseCount +
+				"]";
 	}
 
 }

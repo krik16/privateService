@@ -19,6 +19,22 @@ import java.util.List;
  * ideaworkspace.
  */
 public interface RoaActivityTemplateService {
+
+    /**
+     * 新建特卖闪购模版
+     *
+     * @param activityTemplate
+     * @return true  or false
+     */
+    ActivityTemplate saveActivityTemplateSaleFlash(ActivityTemplate activityTemplate);
+
+    /**
+     * 修改特卖闪购模版
+     *
+     * @param activityTemplate
+     * @return true  or false
+     */
+    ActivityTemplate updateActivityTemplateSaleFlash(ActivityTemplate activityTemplate);
     /**
      * 新建活动模版
      *

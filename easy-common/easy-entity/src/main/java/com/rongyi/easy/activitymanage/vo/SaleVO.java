@@ -28,7 +28,9 @@ public class SaleVO implements Serializable {
     private Integer publishTerminal;
     private String createUser;
     private String updateUser;
-
+    private String shareTitle;
+    private String shareDesc;
+    private String subTitle;
     private Long createAt;
     private Long updateAt;
     private String bannerPic;
@@ -37,6 +39,7 @@ public class SaleVO implements Serializable {
     private List<ShopVO> shops;
     private List<SaleCommodityTopVO> commodities;
 
+    private List<SaleFlashCommodityVO> commodityList;
     public SaleVO(){}
 
     public SaleVO(ActivityTemplate activityTemplate){
@@ -55,6 +58,9 @@ public class SaleVO implements Serializable {
             this.updateUser=activityTemplate.getUpdateUser();
             if(activityTemplate.getTemplateSale() != null){
                 this.bannerPic= activityTemplate.getTemplateSale().getBannerPic();
+                this.subTitle = activityTemplate.getTemplateSale().getSubTitle();
+                this.shareTitle = activityTemplate.getTemplateSale().getShareTitle();
+                this.shareDesc = activityTemplate.getTemplateSale().getShareDesc();
                 this.isMallShop=(int)activityTemplate.getTemplateSale().getIsMallShop();
 
             if(!CollectionUtils.isEmpty(activityTemplate.getTemplateSaleShopMalls())){
@@ -227,6 +233,38 @@ public class SaleVO implements Serializable {
         this.commodities = commodities;
     }
 
+    public List<SaleFlashCommodityVO> getCommodityList() {
+        return commodityList;
+    }
+
+    public void setCommodityList(List<SaleFlashCommodityVO> commodityList) {
+        this.commodityList = commodityList;
+    }
+
+    public String getShareTitle() {
+        return shareTitle;
+    }
+
+    public void setShareTitle(String shareTitle) {
+        this.shareTitle = shareTitle;
+    }
+
+    public String getShareDesc() {
+        return shareDesc;
+    }
+
+    public void setShareDesc(String shareDesc) {
+        this.shareDesc = shareDesc;
+    }
+
+    public String getSubTitle() {
+        return subTitle;
+    }
+
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -240,6 +278,9 @@ public class SaleVO implements Serializable {
                 .append("publishTerminal", publishTerminal)
                 .append("createUser", createUser)
                 .append("updateUser", updateUser)
+                .append("shareTitle", shareTitle)
+                .append("shareDesc", shareDesc)
+                .append("subTitle", subTitle)
                 .append("createAt", createAt)
                 .append("updateAt", updateAt)
                 .append("bannerPic", bannerPic)
@@ -247,6 +288,7 @@ public class SaleVO implements Serializable {
                 .append("mall", mall)
                 .append("shops", shops)
                 .append("commodities", commodities)
+                .append("commodityList", commodityList)
                 .toString();
     }
 }

@@ -23,4 +23,9 @@ public class ExpressVO implements Serializable{
 		this.name = name;
 	}
 
+	@Override
+	public String toString() {
+		return "ExpressVO [id=" + id + ", name=" + name + "]";
+	}
+
 }

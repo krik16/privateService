@@ -192,4 +192,21 @@ public class MemberGiftParam extends BaseParam implements Serializable {
   public void setCurrentPage(Integer currentPage) {
     this.currentPage = currentPage;
   }
+
+/** 
+* @Title: toString 
+* @Description: TODO(这里用一句话描述这个方法的作用) 
+* @param @return    设定文件 
+* @author shaozhou
+* @date 2016年4月9日 下午2:50:51
+* @throws 
+*/
+@Override
+public String toString() {
+	return "MemberGiftParam [mallId=" + mallId + ", memberNo=" + memberNo + ", phone=" + phone + ", pageSize="
+			+ pageSize + ", currentPage=" + currentPage + ", redeemQty=" + redeemQty + ", giftId=" + giftId
+			+ ", memberName=" + memberName + ", order_by=" + order_by + ", order_va=" + order_va + ", startDate="
+			+ startDate + ", endDate=" + endDate + ", channel=" + channel + ", page=" + page + ", validity=" + validity
+			+ ", integral=" + integral + "]";
+}
 }

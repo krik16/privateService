@@ -67,6 +67,15 @@ public interface MerchantCouponServce {
     public String createActivityCoupon(Coupon coupon, final UserInfoVo userInfoVo) throws Exception;
 
     /**
+     * 商家卡券活动券的 update
+     * @param coupon
+     * @param userInfoVo
+     * @return
+     * @throws Exception
+     */
+    public boolean updateActivityCoupon(Coupon coupon, UserInfoVo userInfoVo) throws Exception;
+
+    /**
      * 插入一条coupon
      * @return coupon id
      */

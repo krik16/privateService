@@ -1,0 +1,92 @@
+package com.rongyi.easy.content_v2.vo;
+
+import java.io.Serializable;
+
+/**
+ * 板块设置标签(vo)
+ * 
+ * @author wangjh7
+ * @date 2016年4月1日
+ */
+public class ActivityModuleVO implements Serializable {
+	@Override
+	public String toString() {
+		return "ActivityModuleVO{" +
+				"id=" + id +
+				", homepageId=" + homepageId +
+				", title='" + title + '\'' +
+				", picUrl='" + picUrl + '\'' +
+				", selectedPicUrl='" + selectedPicUrl + '\'' +
+				", sortIdx=" + sortIdx +
+				", isVisible=" + isVisible +
+				'}';
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getPicUrl() {
+		return picUrl;
+	}
+
+	public void setPicUrl(String picUrl) {
+		this.picUrl = picUrl;
+	}
+
+	public int getSortIdx() {
+		return sortIdx;
+	}
+
+	public void setSortIdx(int sortIdx) {
+		this.sortIdx = sortIdx;
+	}
+
+	public int getIsVisible() {
+		return isVisible;
+	}
+
+	public void setIsVisible(int isVisible) {
+		this.isVisible = isVisible;
+	}
+
+	public int getHomepageId() {
+		return homepageId;
+	}
+
+	public void setHomepageId(int homepageId) {
+		this.homepageId = homepageId;
+	}
+
+	public String getSelectedPicUrl() {
+		return selectedPicUrl;
+	}
+
+	public void setSelectedPicUrl(String selectedPicUrl) {
+		this.selectedPicUrl = selectedPicUrl;
+	}
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7098545401577775796L;
+	private int id = 0;
+	private int homepageId = 0;
+	private String title = "";
+	private String picUrl = "";
+	private String selectedPicUrl = "";
+	private int sortIdx = 0;
+	private int isVisible = 0;
+}

@@ -130,6 +130,12 @@ public interface IIContentService {
 	 * @return
 	 */
 	public Long findContentCountAllByParam(ForumContentParam fcp);
+	/**
+	 * 查询特卖的列表数量
+	 * @param fcp
+	 * @return
+	 */
+	public Long findContentAllByParamSpecailCount(ForumContentParam fcp);
 
 	/**
 	 * 判断在同一位置、同一区域、同一发布时间段内是否有内容
@@ -240,5 +246,70 @@ public interface IIContentService {
 	 * @throws Exception
 	 */
 	public ForumContent saveContentDailySale(ForumContent fc) throws Exception;
+	
+	/**
+	 * 获取板块设置标签信息
+	 * 
+	 * @param homePageId
+	 * @author wangjh7
+	 * @return
+	 */
+	public List<ActivityModuleVO> selectActivityModule(int homePageId);
+	
+	/**
+	 * 设置板块是否显示
+	 * 
+	 * @param moduleId
+	 * @param isVisible 
+	 * @author wangjh7
+	 * @return
+	 */
+	public int updateActivityModuleVisible(int moduleId, boolean isVisible, int userId, String userName);
+	
+	/**
+	 * 设置板块的位置
+	 * 
+	 * @param moduleId
+	 * @param currentPosition
+	 * @param type
+	 * @author wangjh7
+	 * @return
+	 */
+	public int updateActivityModulePosition(int moduleId, int currentPosition,int type, int userId, String userName) throws Exception;
+	
+	/**
+	 * 保存板块的信息
+	 * 
+	 * @param list
+	 * @author wangjh7
+	 * @return
+	 */
+	public int saveActivityModule(List<ActivityModuleEntity> list) throws Exception;
+	
+	/**
+	 * 获取板块的信息
+	 * 
+	 * @param moduleId
+	 * @author wangjh7
+	 * @return
+	 */
+	public ActivityModuleVO getActivityModuleInfo(int moduleId);
+	
+	/**
+	 * 判断是否存在同一个时间段的广告(除自己外）
+	 * 
+	 * @param content
+	 * @author wangjh7
+	 * @return
+	 */
+	public boolean existSameLaunchAdvert(ForumContent content);
+	/**
+	 * 获取可见板块的信息
+	 *
+	 * @param moduleId
+	 * @author wangjh7
+	 * @return
+	 */
+	public int getVisibleActivityModuleBeyondId(int moduleId) ;
 
 }
