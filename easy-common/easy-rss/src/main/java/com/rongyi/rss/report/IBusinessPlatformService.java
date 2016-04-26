@@ -4,6 +4,8 @@ package com.rongyi.rss.report;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.easy.bsoms.entity.SessionUserInfo;
+
 
 /**
  * @Description: 商家后台接口
@@ -16,5 +18,5 @@ public interface IBusinessPlatformService {
      * 获取商家后台昨日数据
      * params｛mallId : 商场ID，userId : 用户ID，date : 时间<yyyy-MM-dd>｝
      */
-    public List<Map<String, Object>> getLastDayData(Map<String, String> params);
+    public List<Map<String, Object>> getLastDayData(SessionUserInfo user);
 }
