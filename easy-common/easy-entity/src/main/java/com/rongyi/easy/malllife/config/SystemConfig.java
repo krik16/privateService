@@ -64,7 +64,6 @@ public class SystemConfig implements Serializable{
             "/shopCart/addShopCart.htm",
             "/cartOrder/getMyOrderDetailForCart.htm",
             "/v5/mall/getMall.htm",
-            "/order/submitOrderModel.htm",
             "/v5/recommend/activity.htm",
             "/v5/home/getArticleInfo.htm",
             "/v5/activity/myCouponDetail.htm",
