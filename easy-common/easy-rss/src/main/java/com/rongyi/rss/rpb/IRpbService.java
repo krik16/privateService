@@ -14,19 +14,12 @@ import com.rongyi.core.bean.ResponseData;
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
-<<<<<<< HEAD
-<<<<<<< HEAD
-import com.rongyi.easy.rpb.vo.*;
-=======
 import com.rongyi.easy.rpb.domain.WeixinMch;
 import com.rongyi.easy.rpb.vo.PayAccountUseTotal;
 import com.rongyi.easy.rpb.vo.PaymentParamVO;
 import com.rongyi.easy.rpb.vo.QueryOrderParamVO;
->>>>>>> f1a436255413a8336e7d9ac4f1a6a28c0694370c
-=======
 import com.rongyi.easy.rpb.domain.WeixinMch;
 import com.rongyi.easy.rpb.vo.*;
->>>>>>> f98442833dfc62b5f93c72a10bf967c5ee3abed3
 
 /**
  * @Author: 柯军
