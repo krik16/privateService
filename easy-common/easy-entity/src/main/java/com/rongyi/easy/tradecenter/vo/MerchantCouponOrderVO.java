@@ -22,6 +22,7 @@ public class MerchantCouponOrderVO
     private Double hbDiscount;//红包优惠
     private  String orderStatus;//订单状态
     List<MerchantOrderCouponVO> couponList;//订单下的卡券列表
+    private String paymentTimeStr ; //格式化的支付时间 
 
     public Double getPaymentAmount() {
         return paymentAmount;
@@ -144,4 +145,12 @@ public class MerchantCouponOrderVO
                 ", orderStatus='" + orderStatus + '\'' +
                 '}';
     }
+
+	public String getPaymentTimeStr() {
+		return paymentTimeStr;
+	}
+
+	public void setPaymentTimeStr(String paymentTimeStr) {
+		this.paymentTimeStr = paymentTimeStr;
+	}
 }
