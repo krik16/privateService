@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.rongyi.easy.rmmm.param;
 
@@ -18,16 +18,20 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  * chenjun            2015年10月15日               1.0              创建文件
  */
 public class BullParam extends MalllifeBaseParam implements Serializable{
-	
+
 	private String bullId;//买手id
 	private String liveId;//直播id
 	private String flashSaleId; //commodityType为4则flashSaleId为闪购ID、commodityType为5则flashSaleId为特卖ID
 	private String commodityType;//商品类型", 1所有商品 2导购商品 3买手商品 4闪购 5卖场
 	private String keyword;
 	private String categoryId;
-
 	private String shopId;
 	private String mallId;
+	private String minPrice;		// 价格最小范围
+	private String maxPrice;		// 价格最大范围
+	private String brandId;         //品牌id
+	private String cityName;		// 城市名称
+	private String saleId;			// 闪购ID
 
 	public String getKeyword() {
 		return keyword;
@@ -92,6 +96,46 @@ public class BullParam extends MalllifeBaseParam implements Serializable{
 		this.mallId = mallId;
 	}
 
+	public String getMinPrice() {
+		return minPrice;
+	}
+
+	public void setMinPrice(String minPrice) {
+		this.minPrice = minPrice;
+	}
+
+	public String getMaxPrice() {
+		return maxPrice;
+	}
+
+	public void setMaxPrice(String maxPrice) {
+		this.maxPrice = maxPrice;
+	}
+
+	public String getBrandId() {
+		return brandId;
+	}
+
+	public void setBrandId(String brandId) {
+		this.brandId = brandId;
+	}
+
+	public String getCityName() {
+		return cityName;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+
+	public String getSaleId() {
+		return saleId;
+	}
+
+	public void setSaleId(String saleId) {
+		this.saleId = saleId;
+	}
+
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this)
@@ -103,6 +147,12 @@ public class BullParam extends MalllifeBaseParam implements Serializable{
 				.append("categoryId", categoryId)
 				.append("shopId", shopId)
 				.append("mallId", mallId)
+				.append("minPrice",minPrice)
+				.append("maxPrice", maxPrice)
+				.append("brandId",brandId)
+				.append("cityName",cityName)
+				.append("saleId",saleId)
 				.toString();
 	}
+
 }
