@@ -1,5 +1,7 @@
 package com.rongyi.core.common;
 
+import com.sun.org.apache.xml.internal.security.utils.Base64;
+
 import java.security.Key;
 import java.security.KeyFactory;
 import java.security.KeyPair;
@@ -266,5 +268,32 @@ public abstract class RSACoder extends Coder {
 		keyMap.put(PUBLIC_KEY, publicKey);
 		keyMap.put(PRIVATE_KEY, privateKey);
 		return keyMap;
+	}
+
+
+	/**
+	 * <p>
+	 * BASE64字符串解码为二进制数据
+	 * </p>
+	 *
+	 * @param base64
+	 * @return
+	 * @throws Exception
+	 */
+	public static byte[] decode(String base64) throws Exception {
+		return Base64.decode(base64.getBytes());
+	}
+
+	/**
+	 * <p>
+	 * 二进制数据编码为BASE64字符串
+	 * </p>
+	 *
+	 * @param bytes
+	 * @return
+	 * @throws Exception
+	 */
+	public static String encode(byte[] bytes) throws Exception {
+		return new String(Base64.encode(bytes));
 	}
 }
