@@ -10,7 +10,8 @@ import java.util.List;
  */
 public class MerchantOsmOrderVO implements Serializable{
 
-    private Integer orderId;
+	private static final long serialVersionUID = 1L;
+	private Integer orderId;
     private String orderNo;//订单编号
     private String createTime;//下单时间
     private String paymentTime;//支付时间
