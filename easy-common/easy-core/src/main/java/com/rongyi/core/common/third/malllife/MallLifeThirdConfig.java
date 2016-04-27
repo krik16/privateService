@@ -88,12 +88,12 @@ public class MallLifeThirdConfig {
             String jsonStr="";
             //jsonStr="{'openId':'15821659415'}";
             jsonStr="{'phone':'15821659415','msgStr':'你的验证码为778899【容易网】','sendType':2}";
-            jsonStr="{'phone':'15821659415','passWd':'111111','uuid':'尊敬的顾客，恭喜您获得XX一份，请于活动截止日前至工作人员处领取，南国西汇城市广场感谢您的积极参与！【容易网】','regiTime':'1442838385146','couponId',:'couponId'}";
+            jsonStr="{'phone':'15821659415','passWd':'111111','sendType':1,'msgStr':'【容易网】尊敬的顾客，恭喜您获得XXX一份，请于活动截止日前至工作人员处领取，南国西汇城市广场感谢您的积极参与！'}";
 
-            System.out.println("PUBLICKEY===="+SmsEnum.getName(MallLifeThirdConfig.TOB_SMS_CHANNEL.MARK_CHANNEL + "_PUBLICKEY"));
+            System.out.println("PUBLICKEY===="+SmsEnum.getName(MallLifeThirdConfig.TOB_SMS_CHANNEL.NC_CHANNEL + "_PUBLICKEY"));
 
-            String  data=  MalllifeRsaUtil.encryptionStr(jsonStr, SmsEnum.getName(MallLifeThirdConfig.TOB_SMS_CHANNEL.MARK_CHANNEL + "_PUBLICKEY"));
-            String str="data="+data+"&timeStamp="+times+"&channel="+MallLifeThirdConfig.TOB_SMS_CHANNEL.MARK_CHANNEL+"&token="+SmsEnum.getName(MallLifeThirdConfig.TOB_SMS_CHANNEL.MARK_CHANNEL + "_TOKEN");
+            String  data=  MalllifeRsaUtil.encryptionStr(jsonStr, SmsEnum.getName(MallLifeThirdConfig.TOB_SMS_CHANNEL.NC_CHANNEL + "_PUBLICKEY"));
+            String str="data="+data+"&timeStamp="+times+"&channel="+MallLifeThirdConfig.TOB_SMS_CHANNEL.NC_CHANNEL+"&token="+SmsEnum.getName(MallLifeThirdConfig.TOB_SMS_CHANNEL.NC_CHANNEL + "_TOKEN");
             String md5Sign= Md5Util.GetMD5Code(str);
             System.out.println("data=" + data);
             System.out.println("md5Sign="+md5Sign);
