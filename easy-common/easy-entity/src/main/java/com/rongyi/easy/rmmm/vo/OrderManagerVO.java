@@ -68,6 +68,11 @@ public class OrderManagerVO implements Serializable {
 	 * 规格
 	 */
 	private List<CommoditySpecColumnVO> CommoditySpecColumnList;
+
+	/**
+	 * 商品图片
+	 */
+	List<String> picList;
 	public String getOrderCartNo() {
 		return orderCartNo;
 	}
@@ -263,6 +268,14 @@ public class OrderManagerVO implements Serializable {
 
 	public void setCommodityNo(String commodityNo) {
 		this.commodityNo = commodityNo;
+	}
+
+	public List<String> getPicList() {
+		return picList;
+	}
+
+	public void setPicList(List<String> picList) {
+		this.picList = picList;
 	}
 
 	@Override
