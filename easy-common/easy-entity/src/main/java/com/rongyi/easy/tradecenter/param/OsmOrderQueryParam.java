@@ -1,13 +1,15 @@
 package com.rongyi.easy.tradecenter.param;
 
+import java.io.Serializable;
+
 /**
  * Created by jason
  * on 2015/11/5.17:33
  */
-public class OsmOrderQueryParam
+public class OsmOrderQueryParam implements Serializable
 {
-
-    private String orderStatus;//订单状态
+	private static final long serialVersionUID = 1L;
+	private String orderStatus;//订单状态
     private String createOrderBegin;//订单创建开始时间
     private String createOrderEnd;//订单创建结束时间
     private String orderNo;//订单编码
