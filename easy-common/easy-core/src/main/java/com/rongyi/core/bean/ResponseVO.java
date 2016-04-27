@@ -99,7 +99,7 @@ public class ResponseVO implements java.io.Serializable {
      * @return ResponseData
      */
     public static ResponseVO failure(int errno, String msg) {
-        return new ResponseVO(new Meta(errno, msg,Constants.JSON_RESULT.STATUS_NORMAL), null);
+        return new ResponseVO(new Meta(errno, msg,Constants.JSON_RESULT.STATUS_ABNORMAL), null);
     }
     
     /**
