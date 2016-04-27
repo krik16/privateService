@@ -1,5 +1,7 @@
 package com.rongyi.rss.bdata;
 
+import java.util.Map;
+
 import com.rongyi.core.bean.ResponseVO;
 
 /**
@@ -123,5 +125,8 @@ public interface MallService {
 	ResponseVO getDefaultSeq(Integer ps);
 
 	ResponseVO getAdsSeqByMallId(String mall_id, String position);
+	
+	ResponseVO getCommonType(Integer type);
+	ResponseVO getMallGroups(Map params);
 
 }

@@ -6,7 +6,10 @@ package com.rongyi.easy.bdata.vo;
  * Date: 2015/10/24 18:19
  */
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
+
+import org.bson.types.ObjectId;
 
 public class MallVO implements Serializable {
     public double getLogoX() {
@@ -53,8 +56,101 @@ public class MallVO implements Serializable {
     private Long shopNum;
     private double logoX;  //经度
     private double logoY;  //纬度
+    private String merlogPic;  //商家后台logo
+    private String mallGroupId;//商场所属集团id
+    private String mallLevel;//商场等级
+    private String updatedAt;//修改时间
+    private String lastUpdateId;//最后修改人
+    private String openAt;//开业时间
+    private String createdAt;//创建时间
+    private String operatorId;//创建者
+    private String operatorName;//创建者
+    private String lastUpdateName;//修改者
+    
+    public String getOperatorName() {
+		return operatorName;
+	}
 
-    public String getId() {
+	public void setOperatorName(String operatorName) {
+		this.operatorName = operatorName;
+	}
+
+	public String getLastUpdateName() {
+		return lastUpdateName;
+	}
+
+	public void setLastUpdateName(String lastUpdateName) {
+		this.lastUpdateName = lastUpdateName;
+	}
+
+	public String getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(String updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public String getLastUpdateId() {
+		return lastUpdateId;
+	}
+
+	public void setLastUpdateId(String lastUpdateId) {
+		this.lastUpdateId = lastUpdateId;
+	}
+
+	public String getOpenAt() {
+		return openAt;
+	}
+
+	public void setOpenAt(String openAt) {
+		this.openAt = openAt;
+	}
+
+	public String getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(String createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getOperatorId() {
+		return operatorId;
+	}
+
+	public void setOperatorId(String operatorId) {
+		this.operatorId = operatorId;
+	}
+
+	public String getMallGroupId() {
+		return mallGroupId;
+	}
+
+	public void setMallGroupId(String mallGroupId) {
+		this.mallGroupId = mallGroupId;
+	}
+
+	public String getMallLevel() {
+		return mallLevel;
+	}
+
+	public void setMallLevel(String mallLevel) {
+		this.mallLevel = mallLevel;
+	}
+
+	
+    
+
+    public String getMerlogPic() {
+		return merlogPic;
+	}
+
+	public void setMerlogPic(String merlogPic) {
+		this.merlogPic = merlogPic;
+	}
+
+	public String getId() {
         return id;
     }
 

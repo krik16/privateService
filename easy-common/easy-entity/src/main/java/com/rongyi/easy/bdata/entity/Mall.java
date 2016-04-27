@@ -73,9 +73,47 @@ public class Mall implements Serializable {
     private Integer mall_ad_num;
     private Integer ry_banner_num;
     private Integer mall_banner_num;
+    private String merlog_pic;//商家后台logo
+    private String mall_level;//商场等级
+    private Date open_at;//开业时间
+    private String last_update_id;//最近修改人
+    
+    
 
 
-    public ObjectId getId() {
+	public Date getOpen_at() {
+		return open_at;
+	}
+
+	public void setOpen_at(Date open_at) {
+		this.open_at = open_at;
+	}
+
+	public String getLast_update_id() {
+		return last_update_id;
+	}
+
+	public void setLast_update_id(String last_update_id) {
+		this.last_update_id = last_update_id;
+	}
+
+	public String getMall_level() {
+		return mall_level;
+	}
+
+	public void setMall_level(String mall_level) {
+		this.mall_level = mall_level;
+	}
+
+	public String getMerlog_pic() {
+		return merlog_pic;
+	}
+
+	public void setMerlog_pic(String merlog_pic) {
+		this.merlog_pic = merlog_pic;
+	}
+
+	public ObjectId getId() {
         return id;
     }
 
