@@ -51,6 +51,7 @@ public enum  CouponEnum {
     ERROR_INVALID_WX_ORDER_PHONE(1021216,"微网站下单，缺少必要电话参数 ！"),
     ERROR_INVALID_APP_ORDER_PHONE(1021217,"app渠道下单，缺少必要电话参数 ！"),
     ERROR_CREATE_ORDER_FAIL(1021218,"订单创建失败！"),
+    ERROR_NOT_EXIST_ORDER(1021219,"未找到相关订单！"),
 
     ERROR_INVALID_SHOW_CHANNEL(1021221,"show_channel 不能为空！"),
     ERROR_INVALID_GROUPON_TYPE(1021222,"参数[groupon_type]不正确！"),
@@ -60,7 +61,7 @@ public enum  CouponEnum {
     ERROR_INVALID_PUBLIC_END(1021226,"参数[public_end]不是一个合法的[yyyy-MM-dd]格式！"),
     ERROR_INVALID_ACTIVITYID(1021227,"参数[activityId]错误！"),
     ERROR_NOTEXIST_COUPON(1021228,"卡券不存在！"),
-    VALID_COUPON_CODE_FAIL(1021229,"验券失败"),
+    VALID_COUPON_CODE_FAIL(1021229,"验券失败")
 
 
 

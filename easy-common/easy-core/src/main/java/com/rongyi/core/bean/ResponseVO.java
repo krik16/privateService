@@ -35,16 +35,16 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * @author Breggor
  */
 public class ResponseVO implements java.io.Serializable {
-	private static final long serialVersionUID = 4807318268209609704L;
-	
-	public static final Meta SUCCESS = new Meta(0, "success",Constants.JSON_RESULT.STATUS_NORMAL); //成功
+    private static final long serialVersionUID = 4807318268209609704L;
+
+    public static final Meta SUCCESS = new Meta(0, "success",Constants.JSON_RESULT.STATUS_NORMAL); //成功
     public static final Meta FAILURE = new Meta(1, "failure",Constants.JSON_RESULT.STATUS_ABNORMAL); //失败
 
     private Meta meta;      	//errno=0：成功, errno=1：失败
     private Result result;  	//数据
-    
+
     public ResponseVO(){
-    	
+
     }
 
 
@@ -101,7 +101,7 @@ public class ResponseVO implements java.io.Serializable {
     public static ResponseVO failure(int errno, String msg) {
         return new ResponseVO(new Meta(errno, msg,Constants.JSON_RESULT.STATUS_ABNORMAL), null);
     }
-    
+
     /**
      * 失败码/失败信息回值对象
      *
@@ -175,9 +175,9 @@ public class ResponseVO implements java.io.Serializable {
         @Override
         public String toString() {
             return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                    .append("page", page)
-                    .append("data", data)
-                    .toString();
+                .append("page", page)
+                .append("data", data)
+                .toString();
         }
     }
 
@@ -231,33 +231,33 @@ public class ResponseVO implements java.io.Serializable {
             Meta meta = (Meta) o;
 
             return new EqualsBuilder()
-                    .append(errno, meta.errno)
-                    .append(msg, meta.msg)
-                    .isEquals();
+                .append(errno, meta.errno)
+                .append(msg, meta.msg)
+                .isEquals();
         }
 
         @Override
         public int hashCode() {
             return new HashCodeBuilder(17, 37)
-                    .append(errno)
-                    .append(msg)
-                    .append(status)
-                    .toHashCode();
+                .append(errno)
+                .append(msg)
+                .append(status)
+                .toHashCode();
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                    .append("errno", errno)
-                    .append("msg", msg)
-                    .append("status", status)
-                    .toString();
+                .append("errno", errno)
+                .append("msg", msg)
+                .append("status", status)
+                .toString();
         }
     }
 
     public static class Page implements Serializable {
-		private static final long serialVersionUID = -9015310768471855060L;
-		private Integer currentPage;	//当前页：统一从1开始
+        private static final long serialVersionUID = -9015310768471855060L;
+        private Integer currentPage;	//当前页：统一从1开始
         private Integer pageSize = 10; 	//每页行数
         private Integer totalCount; 	//总行数
         private Integer totalPage = 0;	//总页数
@@ -319,19 +319,19 @@ public class ResponseVO implements java.io.Serializable {
         @Override
         public String toString() {
             return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                    .append("currentPage", currentPage)
-                    .append("pageSize", pageSize)
-                    .append("totalCount", totalCount)
-                    .toString();
+                .append("currentPage", currentPage)
+                .append("pageSize", pageSize)
+                .append("totalCount", totalCount)
+                .toString();
         }
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("meta", meta)
-                .append("result", result)
-                .toString();
+            .append("meta", meta)
+            .append("result", result)
+            .toString();
     }
 
     public static void main(String[] args) {
