@@ -1,13 +1,15 @@
 package com.rongyi.easy.tradecenter.param;
 
+import java.io.Serializable;
+
 /**
  * Created by jason
  * on 2015/11/5.17:33
  */
-public class CouponOrderQueryParam
+public class CouponOrderQueryParam implements Serializable
 {
-
-    String orderStatus;//订单状态
+	private static final long serialVersionUID = 1L;
+	String orderStatus;//订单状态
     String createOrderBegin;//订单创建开始时间
     String createOrderEnd;//订单创建结束时间
     String orderNo;//订单编码
