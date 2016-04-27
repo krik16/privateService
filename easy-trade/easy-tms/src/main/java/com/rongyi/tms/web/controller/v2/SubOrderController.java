@@ -102,6 +102,8 @@ public class SubOrderController extends BaseControllerV2 {
                     orderManagerVO.setCommoditySpecColumnList(commodityVO.getCommoditySpecList().get(0).getSpecColumnValues());
                     orderManagerVO.setCommodityNo(commodityVO.getCommodityCode());
                 }
+                List<String> picList = commodityService.getCommodityPicList(orderManagerVO.getCommodityMid());
+                orderManagerVO.setPicList(picList);
             }
             int totalPage = pagingVO.getTotalPage();
             int currentPage = pagingVO.getCurrentPage();
