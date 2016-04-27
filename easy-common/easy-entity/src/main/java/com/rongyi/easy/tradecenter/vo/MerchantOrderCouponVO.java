@@ -1,10 +1,12 @@
 package com.rongyi.easy.tradecenter.vo;
 
+import java.io.Serializable;
+
 /**
  * Created by jason
  * on 2015/11/5.17:33
  */
-public class MerchantOrderCouponVO
+public class MerchantOrderCouponVO implements Serializable
 {
 
     String icon;//卡券图

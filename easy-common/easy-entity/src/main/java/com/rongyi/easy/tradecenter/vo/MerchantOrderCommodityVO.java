@@ -1,12 +1,13 @@
 package com.rongyi.easy.tradecenter.vo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
  * Created by jason
  * on 2015/11/5.17:33
  */
-public class MerchantOrderCommodityVO
+public class MerchantOrderCommodityVO implements Serializable
 {
 
     private String icon;//商品图 url，多个以”,”分隔
