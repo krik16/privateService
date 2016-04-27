@@ -3,7 +3,7 @@ package com.rongyi.core.enumerate;
 /**
  * Description:卡券 错误码
  * 1 表示透传错误码 02 营销中心 01 消息中心  10201XX
- *                              12 微信接口
+ *                              12 微信终端屏接口
  * Author: 袁波
  * DATE: 2016/3/10 11:23
  * Package:com.rongyi.core.enumerate
@@ -26,10 +26,12 @@ public enum  CouponEnum {
     ERROR_PUBLISH_START_DATE(1020131, "发布开始时间不合法或无效"),
     ERROR_PUBLISH_END_DATE(1020132, "发布结束时间不合法或无效"),
     ERROR_NAME(1020133, "名称不合法"),
+    //摩店创建卡券敏感期验证
     ERROR_NAME_SENSITIVE_WORD(1020140, "卡券名称存在敏感词"),
     ERROR_USE_LIMIT_SENSITIVE_WORD(1020141, "卡券使用限制存在敏感词"),
     ERROR_USE_DES_SENSITIVE_WORD(1020142, "卡券使用说明存在敏感词"),
 
+    //微信终端屏接口
     ERROR_NULL_PARAM(1021200,"参数为空！"),
     ERROR_INVALID_CURRENTPAGE(1021201,"当前页参数不正确！"),
     ERROR_INVALID_PAGESIZE(1021202,"每一页大小参数不正确！"),
@@ -43,7 +45,28 @@ public enum  CouponEnum {
     ERROR_INVALID_COUPONID(1021210,"卡券id 不正确！"),
     ERROR_INVALID_TOPCOUPON(1021211,"需要置顶的卡券参数不正确"),
     ERROR_INVALID_TOP_FAILED(1021212,"置顶失败！"),
-    ERROR_INVALID_MODULEID(1021212,"moduleId 不正确 ！")
+    ERROR_INVALID_MODULEID(1021213,"moduleId 不正确 ！"),
+    ERROR_INVALID_VERSION(1021214,"版本号不正确！"),
+    ERROR_INVALID_ZDP_ORDER_PHONE(1021215,"终端机渠道手机用户下单，缺少必要电话参数 ！"),
+    ERROR_INVALID_WX_ORDER_PHONE(1021216,"微网站下单，缺少必要电话参数 ！"),
+    ERROR_INVALID_APP_ORDER_PHONE(1021217,"app渠道下单，缺少必要电话参数 ！"),
+    ERROR_CREATE_ORDER_FAIL(1021218,"订单创建失败！"),
+
+    ERROR_INVALID_SHOW_CHANNEL(1021221,"show_channel 不能为空！"),
+    ERROR_INVALID_GROUPON_TYPE(1021222,"参数[groupon_type]不正确！"),
+    ERROR_INVALID_START_TIME(1021223,"参数[start_time]不是一个合法的[yyyy-MM-dd]格式！"),
+    ERROR_INVALID_END_TIME(1021224,"参数[end_time]不是一个合法的[yyyy-MM-dd]格式！"),
+    ERROR_INVALID_PUBLIC_START(1021225,"参数[public_start]不是一个合法的[yyyy-MM-dd]格式！"),
+    ERROR_INVALID_PUBLIC_END(1021226,"参数[public_end]不是一个合法的[yyyy-MM-dd]格式！"),
+    ERROR_INVALID_ACTIVITYID(1021227,"参数[activityId]错误！"),
+    ERROR_NOTEXIST_COUPON(1021228,"卡券不存在！"),
+    VALID_COUPON_CODE_FAIL(1021229,"验券失败"),
+
+
+
+
+
+
     ;
 
 

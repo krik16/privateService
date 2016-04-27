@@ -2,6 +2,7 @@ package com.rongyi.core.bean;
 
 import java.io.Serializable;
 
+import com.rongyi.core.constant.Constants;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -36,8 +37,8 @@ import org.apache.commons.lang.builder.ToStringStyle;
 public class ResponseVO implements java.io.Serializable {
 	private static final long serialVersionUID = 4807318268209609704L;
 	
-	public static final Meta SUCCESS = new Meta(0, "success"); //成功
-    public static final Meta FAILURE = new Meta(1, "failure"); //失败
+	public static final Meta SUCCESS = new Meta(0, "success",Constants.JSON_RESULT.STATUS_NORMAL); //成功
+    public static final Meta FAILURE = new Meta(1, "failure",Constants.JSON_RESULT.STATUS_ABNORMAL); //失败
 
     private Meta meta;      	//errno=0：成功, errno=1：失败
     private Result result;  	//数据
@@ -98,7 +99,7 @@ public class ResponseVO implements java.io.Serializable {
      * @return ResponseData
      */
     public static ResponseVO failure(int errno, String msg) {
-        return new ResponseVO(new Meta(errno, msg), null);
+        return new ResponseVO(new Meta(errno, msg,Constants.JSON_RESULT.STATUS_NORMAL), null);
     }
     
     /**
@@ -109,7 +110,7 @@ public class ResponseVO implements java.io.Serializable {
      * @return ResponseData
      */
     public static <T> ResponseVO failure(int errno, String msg, T data) {
-        return new ResponseVO(new Meta(errno, msg), new Result(data, null));
+        return new ResponseVO(new Meta(errno, msg, Constants.JSON_RESULT.STATUS_NORMAL), new Result(data, null));
     }
 
 
@@ -183,6 +184,7 @@ public class ResponseVO implements java.io.Serializable {
     public static class Meta implements Serializable {
         private int errno;      //错误码
         private String msg;     //提示信息
+        private int status;
 
         private Meta() {}
 
@@ -190,7 +192,11 @@ public class ResponseVO implements java.io.Serializable {
             this.errno = errno;
             this.msg = msg;
         }
-
+        private Meta(int errno, String msg,int status) {
+            this.errno = errno;
+            this.msg = msg;
+            this.status = status;
+        }
         public void setErrno(int errno) {
             this.errno = errno;
         }
@@ -208,6 +214,13 @@ public class ResponseVO implements java.io.Serializable {
             return errno;
         }
 
+        public int getStatus() {
+            return status;
+        }
+
+        public void setStatus(int status) {
+            this.status = status;
+        }
 
         @Override
         public boolean equals(Object o) {
@@ -228,6 +241,7 @@ public class ResponseVO implements java.io.Serializable {
             return new HashCodeBuilder(17, 37)
                     .append(errno)
                     .append(msg)
+                    .append(status)
                     .toHashCode();
         }
 
@@ -236,6 +250,7 @@ public class ResponseVO implements java.io.Serializable {
             return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                     .append("errno", errno)
                     .append("msg", msg)
+                    .append("status", status)
                     .toString();
         }
     }
