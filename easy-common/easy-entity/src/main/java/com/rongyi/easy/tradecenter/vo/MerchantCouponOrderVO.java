@@ -1,12 +1,13 @@
 package com.rongyi.easy.tradecenter.vo;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by jason
  * on 2015/11/5.17:33
  */
-public class MerchantCouponOrderVO
+public class MerchantCouponOrderVO implements Serializable
 {
 
     private String orderNo;//订单号
