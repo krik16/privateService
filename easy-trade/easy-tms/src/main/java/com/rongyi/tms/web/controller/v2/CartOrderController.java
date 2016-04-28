@@ -18,6 +18,7 @@ import com.rongyi.easy.rmmm.vo.OrderManagerVO;
 import com.rongyi.easy.rmmm.vo.ParentOrderVO;
 import com.rongyi.easy.rmmm.vo.SonOrderVO;
 import com.rongyi.easy.tms.entity.PaymentAbnormal;
+import com.rongyi.easy.tms.vo.v2.CartOrderExcelVO;
 import com.rongyi.rss.bsoms.IUserInfoService;
 import com.rongyi.rss.coupon.mall.shop.MSUserCouponService;
 import com.rongyi.rss.malllife.roa.ROACommodityService;
@@ -135,9 +136,10 @@ public class CartOrderController extends BaseControllerV2 {
      **/
     @RequestMapping("/exportExcel")
     @ResponseBody
-    public void exportOsmOrder(@RequestBody Map<String, Object> paramsMap, HttpServletResponse response, HttpServletRequest request) {
-        LOGGER.info("报表导出:paramsMap={}", paramsMap);
+    public void exportOsmOrder(CartOrderExcelVO cartOrderExcelVO, HttpServletResponse response, HttpServletRequest request) {
+        LOGGER.info("报表导出:cartOrderExcelVO={}", cartOrderExcelVO);
         try {
+            Map<String,Object> paramsMap = cartOrderExcelVO.toMap();
             permissionCheck(request,"ORDER_GOODS_EXPORT");
            warpToParamMap(paramsMap);
             if (paramsMap != null) {

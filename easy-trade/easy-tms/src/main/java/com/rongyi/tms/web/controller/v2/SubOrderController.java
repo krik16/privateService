@@ -12,6 +12,7 @@ import com.rongyi.easy.rmmm.vo.ParentOrderVO;
 import com.rongyi.easy.rmmm.vo.SonOrderVO;
 import com.rongyi.easy.tms.vo.v2.CommodityDetailVO;
 import com.rongyi.easy.tms.vo.v2.SubOrderDetailVO;
+import com.rongyi.easy.tms.vo.v2.SubOrderExcelVO;
 import com.rongyi.rss.bsoms.IUserInfoService;
 import com.rongyi.rss.coupon.mall.shop.MSUserCouponService;
 import com.rongyi.rss.malllife.roa.ROACommodityService;
@@ -193,9 +194,10 @@ public class SubOrderController extends BaseControllerV2 {
      * 导出订单
      **/
     @RequestMapping("/exportExcel")
-    public void exportExcel(@RequestBody Map<String, Object> paramsMap, HttpServletResponse response, HttpServletRequest request) {
+    public void exportExcel(SubOrderExcelVO subOrderExcelVO, HttpServletResponse response, HttpServletRequest request) {
+        LOGGER.info("报表导出:subOrderExcelVO={}", subOrderExcelVO);
         try {
-            LOGGER.info("报表导出:paramsMap={}", paramsMap);
+            Map<String,Object> paramsMap = subOrderExcelVO.toMap();
             permissionCheck(request, "ORDER_GOODSON_EXPORT");
             warpToParamMap(paramsMap);
             exportOsmOrderExcel.exportExcel(request, response, paramsMap);
