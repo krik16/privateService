@@ -132,7 +132,7 @@
             <version>${org.springframework.security.version}</version>
         </dependency>
         <!-- spring security end -->
-        
+
         <dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -198,7 +198,7 @@
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>commons-httpclient</groupId>
 			<artifactId>commons-httpclient</artifactId>
@@ -218,6 +218,10 @@
 			<artifactId>morphia</artifactId>
 		</dependency>
 		<!-- mongo end -->
+			<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+		</dependency>
 
 		<!--  Redis  Start-->
 		<dependency>
@@ -233,7 +237,6 @@
 			<artifactId>pinyin4j</artifactId>
 			<version>2.5.0</version>
 	     </dependency>
-
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
