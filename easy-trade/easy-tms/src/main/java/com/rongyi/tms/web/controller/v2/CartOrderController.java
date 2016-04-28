@@ -91,7 +91,7 @@ public class CartOrderController extends BaseControllerV2 {
             PagingVO<OrderCartFormVO> page = iOrderCartService.searchListByMap(paramsMap);
             int currPage = paramsMap.containsKey("currentPage") ? Integer.valueOf(paramsMap.get("currentPage").toString()) : 1;
             List<ParentOrderCartVO> orderCartVOs = convertToOrderCart(page.getDataList());
-            responseData = ResponseData.success(orderCartVOs, currPage, Constant.PAGE.PAGESIZE, page.getTotalPage());
+            responseData = ResponseData.success(orderCartVOs, currPage, Constant.PAGE.PAGESIZE, page.getTotalSize());
         } catch (PermissionException e){
             LOGGER.error(e.getMessage());
             e.printStackTrace();
@@ -106,7 +106,7 @@ public class CartOrderController extends BaseControllerV2 {
 
     private List<ParentOrderCartVO> convertToOrderCart(List<OrderCartFormVO> dataList) throws Exception {
         if (CollectionUtils.isEmpty(dataList)) {
-            return null;
+            return new ArrayList<>();
         }
         List<ParentOrderCartVO> orderCartVOs = new ArrayList<>();
         for (OrderCartFormVO orderCartVO : dataList) {

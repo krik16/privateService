@@ -50,7 +50,7 @@ import java.util.Map;
  * kejun
  */
 @Controller
-    @RequestMapping("/v2/subOrder")
+@RequestMapping("/v2/subOrder")
 public class SubOrderController extends BaseControllerV2 {
     private static final Logger LOGGER = LoggerFactory.getLogger(SubOrderController.class);
 
@@ -84,20 +84,22 @@ public class SubOrderController extends BaseControllerV2 {
      */
     @RequestMapping("/list")
     @ResponseBody
-    public ResponseData list(@RequestBody Map<String, Object> paramsMap,HttpServletRequest request) {
+    public ResponseData list(@RequestBody Map<String, Object> paramsMap, HttpServletRequest request) {
         ResponseData responseData;
         try {
             LOGGER.info("子订单列表:paramsMap={}", paramsMap);
-            permissionCheck(request,"ORDER_GOODSON_VIEW");
+            permissionCheck(request, "ORDER_GOODSON_VIEW");
             warpToParamMap(paramsMap);
             PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchSubListByMap(paramsMap);
 
             // 通过商品编号，商品规格id，获得商品信息
 //            CommodityVO commodityVO = commodityService.getCommoditySpecInfoById(commodityId, specId);
             List<OrderManagerVO> orderForms = pagingVO.getDataList();
-            for(OrderManagerVO orderManagerVO : orderForms){
+            if (orderForms == null)
+                orderForms = new ArrayList<>();
+            for (OrderManagerVO orderManagerVO : orderForms) {
                 CommodityVO commodityVO = commodityService.getCommoditySpecInfoById(orderManagerVO.getCommodityMid(), orderManagerVO.getCommoditySpecMid());
-                if(commodityVO != null) {
+                if (commodityVO != null) {
                     orderManagerVO.setCommodityName(commodityVO.getCommodityName());
                     orderManagerVO.setCommoditySpecColumnList(commodityVO.getCommoditySpecList().get(0).getSpecColumnValues());
                     orderManagerVO.setCommodityNo(commodityVO.getCommodityCode());
@@ -105,14 +107,14 @@ public class SubOrderController extends BaseControllerV2 {
                 List<String> picList = commodityService.getCommodityPicList(orderManagerVO.getCommodityMid());
                 orderManagerVO.setPicList(picList);
             }
-            int totalPage = pagingVO.getTotalPage();
+            int totalPage = pagingVO.getTotalSize();
             int currentPage = pagingVO.getCurrentPage();
             responseData = ResponseData.success(orderForms, currentPage, Constant.PAGE.PAGESIZE, totalPage);
-        } catch (PermissionException e){
+        } catch (PermissionException e) {
             LOGGER.error(e.getMessage());
             e.printStackTrace();
             return ResponseData.failure(Integer.valueOf(e.getCode()), e.getMessage());
-        }catch (Exception e) {
+        } catch (Exception e) {
             responseData = ResponseData.failure(ConstantEnum.LIST_QUERY_EXCEPTION.getCodeInt(), ConstantEnum.LIST_QUERY_EXCEPTION.getValueStr());
             e.printStackTrace();
             LOGGER.error("子订单查询失败,message={}", e);
@@ -122,11 +124,11 @@ public class SubOrderController extends BaseControllerV2 {
 
     @RequestMapping("/detail")
     @ResponseBody
-    public ResponseData detail(HttpServletRequest request,Integer id) {
+    public ResponseData detail(HttpServletRequest request, Integer id) {
         LOGGER.info("子订单详情:id={}", id);
         ResponseData responseData;
         try {
-            permissionCheck(request,"ORDER_GOODSON_VIEW");
+            permissionCheck(request, "ORDER_GOODSON_VIEW");
             ParentOrderVO orderDetailVo = iOrderQueryService.searchRYOrderDetail(id);
             List<SonOrderVO> sonOrderList = orderDetailVo.getSonOrderList();
             BigDecimal discountTotal = new BigDecimal("0.00");//总卡券信息（包含抵扣券）
@@ -170,11 +172,11 @@ public class SubOrderController extends BaseControllerV2 {
             //卡券合计
             if (discountTotal.subtract((commidityTotalPice.subtract(orderDetailVo.getDiscountFee()))).compareTo(BigDecimal.ZERO) > 0) {
                 subOrderDetailVO.setCouponDiscountPrice(commidityTotalPice.subtract(orderDetailVo.getDiscountFee()).setScale(2, 4));
-            }else{
+            } else {
                 subOrderDetailVO.setCouponDiscountPrice(discountTotal);
             }
             responseData = ResponseData.success(subOrderDetailVO);
-        }catch (PermissionException e){
+        } catch (PermissionException e) {
             LOGGER.error(e.getMessage());
             e.printStackTrace();
             return ResponseData.failure(Integer.valueOf(e.getCode()), e.getMessage());
@@ -197,8 +199,8 @@ public class SubOrderController extends BaseControllerV2 {
             permissionCheck(request, "ORDER_GOODSON_EXPORT");
             warpToParamMap(paramsMap);
             exportOsmOrderExcel.exportExcel(request, response, paramsMap);
-        }catch (PermissionException e){
-            LOGGER.error(e.getMessage(),e);
+        } catch (PermissionException e) {
+            LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
@@ -215,20 +217,20 @@ public class SubOrderController extends BaseControllerV2 {
     @SuppressWarnings("unchecked")
     @RequestMapping(value = "/validateExcelCount")
     @ResponseBody
-    public ResponseData validateExcelCount(@RequestBody Map<String, Object> paramsMap,HttpServletRequest request) {
+    public ResponseData validateExcelCount(@RequestBody Map<String, Object> paramsMap, HttpServletRequest request) {
         LOGGER.info("validateExcelCount:paramsMap={}", paramsMap);
         ResponseData responseData = ResponseData.failure();
         try {
-            permissionCheck(request,"ORDER_GOODSON_EXPORT");
+            permissionCheck(request, "ORDER_GOODSON_EXPORT");
             warpToParamMap(paramsMap);
             PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchListByMap(paramsMap);
             if (pagingVO != null && pagingVO.getRowCnt() <= ConstantEnum.EXCEL_LIMIT_COUNT.getCodeInt())
                 responseData = ResponseData.success();
-        } catch (PermissionException e){
-            LOGGER.error(e.getMessage(),e);
+        } catch (PermissionException e) {
+            LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
             return ResponseData.failure(Integer.valueOf(e.getCode()), e.getMessage());
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             LOGGER.error("报表导出上限检查失败,message={}", e);
         }
@@ -241,11 +243,11 @@ public class SubOrderController extends BaseControllerV2 {
      */
     @RequestMapping(value = "/commodityDetail")
     @ResponseBody
-    public ResponseData commodityDetail(String commodityId,HttpServletRequest request) {
+    public ResponseData commodityDetail(String commodityId, HttpServletRequest request) {
         LOGGER.info("商品详情:commodityId={}", commodityId);
         ResponseData responseData;
         try {
-            permissionCheck(request,"ORDER_GOODSON_VIEW");
+            permissionCheck(request, "ORDER_GOODSON_VIEW");
             CommodityDetailVO commodityDetailVO = new CommodityDetailVO();
             List<String> picList = commodityService.getCommodityPicList(commodityId);
             List<String> picListForEight = new ArrayList<>();
@@ -267,11 +269,11 @@ public class SubOrderController extends BaseControllerV2 {
             List<String[]> columnValues = commodityService.listSpecColumnValues(commodityId);
             commodityDetailVO.setColumnValues(columnValues);
             responseData = ResponseData.success(commodityDetailVO);
-        } catch (PermissionException e){
-            LOGGER.error(e.getMessage(),e);
+        } catch (PermissionException e) {
+            LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
             return ResponseData.failure(Integer.valueOf(e.getCode()), e.getMessage());
-        }catch (Exception e) {
+        } catch (Exception e) {
             responseData = ResponseData.failure(ConstantEnum.DETAIL_QUERY_EXCEPTION.getCodeInt(), ConstantEnum.DETAIL_QUERY_EXCEPTION.getValueStr());
             e.printStackTrace();
             LOGGER.error("获取商品详情失败,message={}", e);
