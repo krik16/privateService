@@ -12,7 +12,22 @@ import java.util.List;
 import org.bson.types.ObjectId;
 
 public class MallVO implements Serializable {
-    public double getLogoX() {
+    @Override
+	public String toString() {
+		return "MallVO [id=" + id + ", name=" + name + ", mold=" + mold + ", businessStatus=" + businessStatus
+				+ ", recommend=" + recommend + ", aliases=" + aliases + ", weixin=" + weixin + ", mallAddress="
+				+ mallAddress + ", businessHours=" + businessHours + ", description=" + description + ", telephone="
+				+ telephone + ", transInfor=" + transInfor + ", parking=" + parking + ", terminalMall=" + terminalMall
+				+ ", appearPic=" + appearPic + ", webAppearPic=" + webAppearPic + ", traffPic=" + traffPic
+				+ ", introPic=" + introPic + ", terminalLogo=" + terminalLogo + ", wechatPic=" + wechatPic + ", icon="
+				+ icon + ", tags=" + tags + ", rank=" + rank + ", slug=" + slug + ", shopNum=" + shopNum + ", logoX="
+				+ logoX + ", logoY=" + logoY + ", merlogPic=" + merlogPic + ", mallGroupId=" + mallGroupId
+				+ ", mallLevel=" + mallLevel + ", updatedAt=" + updatedAt + ", lastUpdateId=" + lastUpdateId
+				+ ", openAt=" + openAt + ", createdAt=" + createdAt + ", operatorId=" + operatorId + ", operatorName="
+				+ operatorName + ", lastUpdateName=" + lastUpdateName + "]";
+	}
+
+	public double getLogoX() {
 		return logoX;
 	}
 
@@ -66,8 +81,25 @@ public class MallVO implements Serializable {
     private String operatorId;//创建者
     private String operatorName;//创建者
     private String lastUpdateName;//修改者
-    
-    public String getOperatorName() {
+    private String parentId; // 上一级id
+	private List parentIds; // 上一级所有ids
+	public String getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
+	}
+
+	public List getParentIds() {
+		return parentIds;
+	}
+
+	public void setParentIds(List parentIds) {
+		this.parentIds = parentIds;
+	}
+
+	public String getOperatorName() {
 		return operatorName;
 	}
 

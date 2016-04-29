@@ -3,6 +3,7 @@ package com.rongyi.rss.bdata;
 import java.util.Map;
 
 import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.easy.bdata.vo.MallVO;
 
 /**
  * Desc: mall service
@@ -126,7 +127,25 @@ public interface MallService {
 
 	ResponseVO getAdsSeqByMallId(String mall_id, String position);
 	
+	/**
+	 * 获取公共类型
+	 * @param type
+	 * @return
+	 */
 	ResponseVO getCommonType(Integer type);
+	
+	/**
+	 * 获取集团信息
+	 * @param params
+	 * @return
+	 */
 	ResponseVO getMallGroups(Map params);
+	
+	/**
+	 * 保存商场信息
+	 * @param vo
+	 * @return
+	 */
+	ResponseVO saveMall(MallVO vo);
 
 }
