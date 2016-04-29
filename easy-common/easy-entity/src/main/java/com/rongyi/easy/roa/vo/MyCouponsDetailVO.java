@@ -3,7 +3,7 @@ package com.rongyi.easy.roa.vo;
 import com.rongyi.easy.coupon.entity.CouponMall;
 import com.rongyi.easy.coupon.entity.CouponShop;
 
-import java.math.BigDecimal;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -13,31 +13,19 @@ import java.util.List;
  * Package:com.rongyi.easy.roa.vo
  * Project:easy-market
  */
-public class MyCouponsDetailVO {
+public class MyCouponsDetailVO implements Serializable{
     private String orderNo;//订单号
 
-
-
-
-
-
+    private Integer couponType;
 
     private String itemName; // 商品名称
 
     private String couponId; //卡券Id
 
-
     /**
      * 每人每日限用张数
      */
     private Integer limitUseCount;
-
-
-
-
-
-
-
 
     private String listPicUrl;
 
@@ -179,5 +167,36 @@ public class MyCouponsDetailVO {
 
     public void setCouponMalls(List<CouponMall> couponMalls) {
         this.couponMalls = couponMalls;
+    }
+
+    public Integer getCouponType() {
+        return couponType;
+    }
+
+    public void setCouponType(Integer couponType) {
+        this.couponType = couponType;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("MyCouponsDetailVO{");
+        sb.append("orderNo='").append(orderNo).append('\'');
+        sb.append(", couponType=").append(couponType);
+        sb.append(", itemName='").append(itemName).append('\'');
+        sb.append(", couponId='").append(couponId).append('\'');
+        sb.append(", limitUseCount=").append(limitUseCount);
+        sb.append(", listPicUrl='").append(listPicUrl).append('\'');
+        sb.append(", limitDesc='").append(limitDesc).append('\'');
+        sb.append(", usageDesc='").append(usageDesc).append('\'');
+        sb.append(", codeList=").append(codeList);
+        sb.append(", holderId='").append(holderId).append('\'');
+        sb.append(", holderType='").append(holderType).append('\'');
+        sb.append(", holderName='").append(holderName).append('\'');
+        sb.append(", logoUrl='").append(logoUrl).append('\'');
+        sb.append(", count=").append(count);
+        sb.append(", couponShops=").append(couponShops);
+        sb.append(", couponMalls=").append(couponMalls);
+        sb.append('}');
+        return sb.toString();
     }
 }
