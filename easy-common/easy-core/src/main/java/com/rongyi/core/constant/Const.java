@@ -73,6 +73,8 @@ public interface Const {
 			put(2, "City");
 			put(3, "District");
 			put(4, "BusinessDistrict");
+			put(5, "Mall");
+			put(6, "MallArea");
 		}
 	};
 
