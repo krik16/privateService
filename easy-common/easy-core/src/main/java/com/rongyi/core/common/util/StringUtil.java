@@ -296,4 +296,18 @@ public class StringUtil {
 			return null;
 		}
 	}
+	
+	public static boolean isNotEmpty(Object obj){
+		if(obj==null||"".equals(obj)||"null".equals(obj)){
+			return false;
+		}
+		return true;
+	}
+	
+	public static boolean isEmpty(Object obj){
+		if(obj==null||"".equals(obj)||"null".equals(obj)){
+			return true;
+		}
+		return false;
+	}
 }
