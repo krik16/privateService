@@ -84,6 +84,8 @@ public class IntegralCommodity implements Serializable {
 
   /** 关联的店铺id如果类型为店铺 */
   private String mallName;
+  
+  private String giftCode;
   /**
    * 兑换积分类型(0:统一条件设置,1按会员等级设置)
    */
@@ -545,21 +547,39 @@ public class IntegralCommodity implements Serializable {
     this.delAt = delAt;
   }
 
-  @Override
-  public String toString() {
-    return "IntegralCommodity [id=" + id + ", title=" + title + ", integral=" + integral
-        + ", userLimit=" + userLimit + ", totalNumer=" + totalNumer + ", type=" + type
-        + ", useMode=" + useMode + ", publicStart=" + publicStart + ", publicEnd=" + publicEnd
-        + ", startTime=" + startTime + ", endTime=" + endTime + ", description=" + description
-        + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + ", operateUser="
-        + operateUser + ", icon=" + icon + ", mallId=" + mallId + ", relationShopIds="
-        + relationShopIds + ", publicStatus=" + publicStatus + ", buyedNumber=" + buyedNumber
-        + ", mallName=" + mallName + ", exchangeIntegralType=" + exchangeIntegralType
-        + ", userGradeGiftList=" + userGradeGiftList + ", checkStatus=" + checkStatus
-        + ", syncStatus=" + syncStatus + ", createName=" + createName + ", delStatus=" + delStatus
-        + ", delName=" + delName + ", delAt=" + delAt + "]";
-  }
+	/**
+	 * @return the giftCode
+	 */
+	public String getGiftCode() {
+		return giftCode;
+	}
+	
+	/**
+	 * @param giftCode the giftCode to set
+	 */
+	public void setGiftCode(String giftCode) {
+		this.giftCode = giftCode;
+	}
 
-
-
+	/** 
+	* @Title: toString 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param @return    设定文件 
+	* @author shaozhou
+	* @date 2016年4月8日 下午6:32:14
+	* @throws 
+	*/
+	@Override
+	public String toString() {
+		return "IntegralCommodity [id=" + id + ", title=" + title + ", integral=" + integral + ", userLimit="
+				+ userLimit + ", totalNumer=" + totalNumer + ", type=" + type + ", useMode=" + useMode
+				+ ", publicStart=" + publicStart + ", publicEnd=" + publicEnd + ", startTime=" + startTime
+				+ ", endTime=" + endTime + ", description=" + description + ", createdTime=" + createdTime
+				+ ", updatedTime=" + updatedTime + ", operateUser=" + operateUser + ", icon=" + icon + ", mallId="
+				+ mallId + ", relationShopIds=" + relationShopIds + ", publicStatus=" + publicStatus + ", buyedNumber="
+				+ buyedNumber + ", mallName=" + mallName + ", giftCode=" + giftCode + ", exchangeIntegralType="
+				+ exchangeIntegralType + ", userGradeGiftList=" + userGradeGiftList + ", checkStatus=" + checkStatus
+				+ ", syncStatus=" + syncStatus + ", createName=" + createName + ", delStatus=" + delStatus
+				+ ", delName=" + delName + ", delAt=" + delAt + "]";
+	}
 }
