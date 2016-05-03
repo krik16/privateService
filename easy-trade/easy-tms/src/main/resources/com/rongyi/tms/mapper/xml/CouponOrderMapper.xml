@@ -81,10 +81,10 @@
 			and trade_order.source = #{source}
 		</if>
 		<if test="payAmountBegin != null and payAmountBegin != ''">
-			and trade_order.pay_amount &gt;= #{payAmountBegin*100}
+			and trade_order.pay_amount/100 &gt;= #{payAmountBegin}
 		</if>
 		<if test="payAmountEnd != null and payAmountEnd != ''">
-			and trade_order.pay_amount &lt;= #{payAmountEnd*100}
+			and trade_order.pay_amount/100 &lt;= #{payAmountEnd}
 		</if>
 		<if test="payChannel!=null and payChannel != ''">
 			<if test="payChannel==1">
