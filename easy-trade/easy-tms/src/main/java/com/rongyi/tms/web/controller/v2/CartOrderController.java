@@ -87,10 +87,11 @@ public class CartOrderController extends BaseControllerV2 {
         LOGGER.info("母订单列表:parramsMap={}",paramsMap);
         ResponseData responseData;
         try {
-            permissionCheck(request,"ORDER_GOODS_VIEW");
+            permissionCheck(request, "ORDER_GOODS_VIEW");
             warpToParamMap(paramsMap);
-            PagingVO<OrderCartFormVO> page = iOrderCartService.searchListByMap(paramsMap);
             int currPage = paramsMap.containsKey("currentPage") ? Integer.valueOf(paramsMap.get("currentPage").toString()) : 1;
+            paramsMap.put("currPage",currPage);
+            PagingVO<OrderCartFormVO> page = iOrderCartService.searchListByMap(paramsMap);
             List<ParentOrderCartVO> orderCartVOs = convertToOrderCart(page.getDataList());
             responseData = ResponseData.success(orderCartVOs, currPage, Constant.PAGE.PAGESIZE, page.getTotalSize());
         } catch (PermissionException e){
