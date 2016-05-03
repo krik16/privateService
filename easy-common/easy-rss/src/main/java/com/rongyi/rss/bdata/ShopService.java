@@ -56,4 +56,13 @@ public interface ShopService {
 	 * @return
 	 */
 	public ResponseVO getShopListForName(String mallId, String shopName, Integer page, Integer pageSize);
+	
+	/**
+	修改店铺营业状态及系统状态
+	 * @param paramsMap
+	 *         ids： 要修改的店铺id 多个ID逗号分隔
+	 *         valid: 店铺系统状态   0正常显示 1已隐藏
+	 *         business_status:店铺营业状态
+	 */
+	public ResponseVO updateShopSimple(Map paramsMap);
 }
