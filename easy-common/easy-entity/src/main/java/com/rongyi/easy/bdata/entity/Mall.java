@@ -77,9 +77,8 @@ public class Mall implements Serializable {
     private String mall_level;//商场等级
     private Date open_at;//开业时间
     private String last_update_id;//最近修改人
-    
-    
-
+   
+   
 
 	public Date getOpen_at() {
 		return open_at;

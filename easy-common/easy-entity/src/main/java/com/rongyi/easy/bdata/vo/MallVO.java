@@ -12,7 +12,9 @@ import java.util.List;
 import org.bson.types.ObjectId;
 
 public class MallVO implements Serializable {
-    @Override
+
+
+	@Override
 	public String toString() {
 		return "MallVO [id=" + id + ", name=" + name + ", mold=" + mold + ", businessStatus=" + businessStatus
 				+ ", recommend=" + recommend + ", aliases=" + aliases + ", weixin=" + weixin + ", mallAddress="
@@ -24,7 +26,8 @@ public class MallVO implements Serializable {
 				+ logoX + ", logoY=" + logoY + ", merlogPic=" + merlogPic + ", mallGroupId=" + mallGroupId
 				+ ", mallLevel=" + mallLevel + ", updatedAt=" + updatedAt + ", lastUpdateId=" + lastUpdateId
 				+ ", openAt=" + openAt + ", createdAt=" + createdAt + ", operatorId=" + operatorId + ", operatorName="
-				+ operatorName + ", lastUpdateName=" + lastUpdateName + "]";
+				+ operatorName + ", lastUpdateName=" + lastUpdateName + ", parentId=" + parentId + ", parentIds="
+				+ parentIds + ", mobile=" + mobile + "]";
 	}
 
 	public double getLogoX() {
@@ -83,6 +86,16 @@ public class MallVO implements Serializable {
     private String lastUpdateName;//修改者
     private String parentId; // 上一级id
 	private List parentIds; // 上一级所有ids
+	private String mobile;
+	
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
 	public String getParentId() {
 		return parentId;
 	}
