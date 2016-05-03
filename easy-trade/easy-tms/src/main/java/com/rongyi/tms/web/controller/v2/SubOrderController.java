@@ -287,23 +287,16 @@ public class SubOrderController extends BaseControllerV2 {
     private Map<String, Object> warpToParamMap(Map<String, Object> paramsMap) throws Exception {
         String shopId = (String) paramsMap.get("shopId");
         String commodityNo = (String) paramsMap.get("commodityNo");
-        String nickname = (String) paramsMap.get("nickname");
-        String username = (String) paramsMap.get("username");
+        String userPhone = (String) paramsMap.get("userPhone");
         //查询用户条件
-        List<UserInfoVO> users = null;
-        if (StringUtils.isNotBlank(username)) {
-            users = roaMalllifeUserService.getUsersByNicknameUsername(nickname, username);
-            if (users == null || users.isEmpty()) {
+        UserInfoVO userInfoVO;
+        if (StringUtils.isNotBlank(userPhone)) {
+            userInfoVO = roaMalllifeUserService.getByPhone(userPhone);
+            if (userInfoVO == null) {
                 paramsMap.put("buyerId", "-1");
+            }else{
+                paramsMap.put("buyerId", userInfoVO.getUserId());
             }
-        }
-        List<String> userList = null;
-        if (!CollectionUtils.isEmpty(users)) {
-            userList = getIdFromUser(users);
-        }
-
-        if (!CollectionUtils.isEmpty(userList)) {
-            paramsMap.put("userList", userList);
         }
         if (StringUtils.isNotEmpty(shopId)) {
             List<String> shopList = new ArrayList<>();
