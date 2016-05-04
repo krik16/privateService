@@ -74,6 +74,8 @@ public class CouponOrderVO implements Serializable{
 
     private Date orderTime;
 
+    private Date payTime;
+
 
     public Date getOrderTime() {
         return orderTime;
@@ -211,6 +213,16 @@ public class CouponOrderVO implements Serializable{
         this.logoUrl = logoUrl;
     }
 
+    public Date getPayTime()
+    {
+        return payTime;
+    }
+
+    public void setPayTime(Date payTime)
+    {
+        this.payTime = payTime;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("CouponOrderVO{");
@@ -231,6 +243,7 @@ public class CouponOrderVO implements Serializable{
         sb.append(", holderName='").append(holderName).append('\'');
         sb.append(", logoUrl='").append(logoUrl).append('\'');
         sb.append(", orderTime='").append(orderTime).append('\'');
+        sb.append(", payTime='").append(payTime).append('\'');
         sb.append('}');
         return sb.toString();
     }
