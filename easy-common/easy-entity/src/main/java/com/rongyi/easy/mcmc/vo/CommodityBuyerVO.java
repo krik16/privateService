@@ -197,7 +197,17 @@ public class CommodityBuyerVO implements Serializable{
 	}
 	private String shopMid;
 	private boolean isCollected;  //是否被收藏
-	
+
+	private String mallTip; ///< 商城标签（商城名称，如果是街边店则是街边点名称）
+
+	public String getMallTip() {
+		return mallTip;
+	}
+
+	public void setMallTip(String mallTip) {
+		this.mallTip = mallTip;
+	}
+
 	public String getCommodityId() {
 		return commodityId;
 	}
