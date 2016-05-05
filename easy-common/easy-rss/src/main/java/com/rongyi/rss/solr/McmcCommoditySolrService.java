@@ -292,18 +292,6 @@ public interface McmcCommoditySolrService {
 	public List<Integer>  selectBrandIdsByParams(BullParam param);
 
 	/**
-	 * 据店铺（商城）ID判断是否含有商品
-	 *
-	 * @param poiType poi类型
-	 * @param poiId
-	 * @return
-	 * @author wangjh7
-	 * @date 2016-05-05
-	 */
-	public boolean hasCommodityByPOIId(EPOIType poiType, String poiId);
-
-
-	/**
 	 * 查询品牌列表（除用户已订阅，爱品牌品牌墙）
 	 *
 	 * @param brandParam
