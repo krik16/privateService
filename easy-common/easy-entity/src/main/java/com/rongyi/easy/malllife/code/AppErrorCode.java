@@ -45,7 +45,10 @@ public enum AppErrorCode {
     
     
     ERROR_WECHAT_APPID_OPENID(1067001,"微信appId或渠道或openId不能为空"),
-    ERROR_ORDERID_ISNULL(1067002,"订单号不能为空")
+    ERROR_ORDERID_ISNULL(1067002,"订单号不能为空"),
+    
+    /** 分享红包  7100---7200*/
+    ERROR_PHONE_HAVEBIND(1067100,"商品不存在"),
     ;
 
 
