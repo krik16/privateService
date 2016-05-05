@@ -403,7 +403,7 @@ public class SubOrderController extends BaseControllerV2 {
             }
         }
         if (null != paramsMap) {
-            if (null != paramsMap.get("orderSource") && StringUtils.isBlank(paramsMap.get("payChannel").toString())) {
+            if (null != paramsMap.get("orderSource") && StringUtils.isBlank(paramsMap.get("orderSource").toString())) {
                 paramsMap.remove("orderSource");
             }
         }
