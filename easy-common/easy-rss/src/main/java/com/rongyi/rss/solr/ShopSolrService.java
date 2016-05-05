@@ -9,11 +9,15 @@
 */
 package com.rongyi.rss.solr;
 
+import com.rongyi.easy.mcmc.constant.EPOIType;
+import com.rongyi.easy.mcmc.entity.POITipEntity;
 import com.rongyi.easy.solr.PoiDocument;
 import com.rongyi.easy.solr.ShopDocument;
 import com.rongyi.easy.solr.param.ShopSearchParam;
 import com.rongyi.easy.solr.result.ShopSearchIdsResult;
 import com.rongyi.easy.solr.result.ShopSearchResult;
+
+import java.util.List;
 
 /**
  * @author ZhengYl
@@ -76,4 +80,37 @@ public interface ShopSolrService {
 	 * @return
 	 */
 	public ShopSearchIdsResult getShopListByName(ShopSearchParam param);
+
+
+	/**
+	 * 清除标签（店铺/商场等）
+	 *
+	 * @param poiType poi类型
+	 * @return
+	 * @author wangjh7
+	 * @date 2016-05-05
+	 */
+	public boolean clearPOITip(EPOIType poiType);
+
+	/**
+	 * 获取有效的店铺（商城）列表
+	 *
+	 * @param poiType    poi类型
+	 * @param startIndex 开始位置
+	 * @param Size       数量
+	 * @return
+	 * @author wangjh7
+	 * @date 2016-05-05
+	 */
+	public List<String> getPOIList(EPOIType poiType, int startIndex, int Size);
+
+	/**
+	 * 更新标签的值
+	 *
+	 * @param poiList 需要更新的ID及对应TIP的值
+	 * @return
+	 * @author wangjh7
+	 * @date 2016-05-05
+	 */
+	public boolean updatePOITip(List<POITipEntity> poiList);
 }

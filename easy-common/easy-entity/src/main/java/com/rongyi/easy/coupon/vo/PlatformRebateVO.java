@@ -33,7 +33,7 @@ public class PlatformRebateVO implements Serializable {
     private String name;
 
     /**
-     * 抵扣金额(分)
+     * 抵扣金额(分) 红包的减的金额、或者抵扣券减的金额
      */
     private Integer discount;
 
