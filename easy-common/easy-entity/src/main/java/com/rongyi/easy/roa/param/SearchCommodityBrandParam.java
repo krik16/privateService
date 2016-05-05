@@ -1,6 +1,7 @@
 package com.rongyi.easy.roa.param;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.rongyi.easy.malllife.param.MalllifeBaseParam;
 /**
@@ -17,6 +18,8 @@ public class SearchCommodityBrandParam extends MalllifeBaseParam implements Seri
 	private String mallId;		//商场id
 	private String keyword;//品牌搜索关键字
 	private String source;//1微信  2终端屏
+	private List<String> brandIds;
+
 	public String getMallId() {
 		return mallId;
 	}
@@ -36,6 +39,15 @@ public class SearchCommodityBrandParam extends MalllifeBaseParam implements Seri
 	public void setSource(String source) {
 		this.source = source;
 	}
+
+	public List<String> getBrandIds() {
+		return brandIds;
+	}
+
+	public void setBrandIds(List<String> brandIds) {
+		this.brandIds = brandIds;
+	}
+
 	@Override
 	public String toString() {
 		return "SearchCommodityBrandParam [mallId=" + mallId + ", keyword="

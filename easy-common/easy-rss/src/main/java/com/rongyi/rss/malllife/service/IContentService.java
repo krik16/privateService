@@ -302,4 +302,7 @@ public interface IContentService {
      * @throws Exception
      */
 	PagingVO<ContentPojo> pagingActivitiesList(ActivitiesParam param) throws Exception;
+
+
+	public List<String> getMallIdsContent(String type);
 }

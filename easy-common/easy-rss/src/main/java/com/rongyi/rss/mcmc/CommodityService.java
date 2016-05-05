@@ -212,4 +212,15 @@ public interface CommodityService {
     public List<CommodityCategory> selectCategory(int type,boolean isPopular);
 
     public PagingVO<Commodity> findCommdityList(SearchCommodityParms searchCommodityParms);
+
+    /**
+     * 根据特卖ID获取前3（暂定）个商品列表
+     *
+     * @param saleId 特卖Id
+     * @return List<com.rongyi.easy.mcmc.Commodity>
+     * @author wangjh7
+     * @date 2016-05-04
+     */
+    public ResponseVO topCommodityListBySaleId(Integer saleId);
+
 }
