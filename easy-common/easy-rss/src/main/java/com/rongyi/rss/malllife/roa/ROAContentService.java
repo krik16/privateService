@@ -305,5 +305,55 @@ public interface ROAContentService {
      * @throws Exception
      */
 	public PagingVO<ContentPojo> pagingActivitiesList(ActivitiesParam param) throws Exception;
+	/**
+	 * 
+	* @Title: pagingArticleList 
+	* @Description: 容易逛 精彩活动(吃喝玩乐)接口
+	* @param @param category
+	* @param @param type
+	* @param @param lng
+	* @param @param lat
+	* @param @param cityId
+	* @param @param pageSize
+	* @param @param currentPage
+	* @param @param version
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return PagingVO<ContentPojo>    返回类型 
+	* @author shaozhou
+	* @date 2016年5月5日 下午7:16:54 
+	* @throws
+	 */
+	public PagingVO<ContentPojo> pagingArticleList(String type, double lng, double lat, String cityId, int pageSize, Integer currentPage) throws Exception ;
+	/**
+	 * 
+	* @Title: pagingArticleList 
+	* @Description: 查询优惠信息接口
+	* @param @param cityId
+	* @param @param pageSize
+	* @param @param currentPage
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return PagingVO<ContentPojo>    返回类型 
+	* @author shaozhou
+	* @date 2016年5月5日 下午7:24:22 
+	* @throws
+	 */
+	public PagingVO<ContentPojo> pagingFavorList(String cityId, int pageSize, Integer currentPage) throws Exception ;
+	/**
+	 * 
+	* @Title: pagingContentListByMallId 
+	* @Description: 根据商场获取精彩活动和优惠列表
+	* @param @param id
+	* @param @param pageSize
+	* @param @param currentPage
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return PagingVO<ContentPojo>    返回类型 
+	* @author shaozhou
+	* @date 2016年5月5日 下午7:30:00 
+	* @throws
+	 */
+	public PagingVO<ContentPojo> pagingContentListByMallId(String id,int pageSize, Integer currentPage) throws Exception ;
 	
 }
