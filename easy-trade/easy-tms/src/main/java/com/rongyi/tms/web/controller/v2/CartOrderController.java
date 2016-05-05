@@ -158,10 +158,11 @@ public class CartOrderController extends BaseControllerV2 {
         if (paramsMap.get("userAccount") != null && StringUtils.isNotEmpty(paramsMap.get("userAccount").toString())) {
             String phone = paramsMap.get("userAccount").toString();
             UserInfoVO userInfo = roaMalllifeUserService.getByPhone(phone);
-            if (userInfo == null) {//用户不存在
+            if (userInfo == null || StringUtils.isBlank(userInfo.getUserId())) {//用户不存在
                 paramsMap.put("buyerId", "-1");
+            } else {
+                paramsMap.put("buyerId", userInfo.getUserId());
             }
-            paramsMap.put("buyerId", userInfo.getUserId());
         }
         if(paramsMap.get("payChannel") != null && StringUtils.isNotEmpty(paramsMap.get("payChannel").toString())){
             String payChannel = paramsMap.get("payChannel").toString();
