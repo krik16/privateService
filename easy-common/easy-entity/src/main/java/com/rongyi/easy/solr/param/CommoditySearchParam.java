@@ -13,20 +13,25 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.rongyi.core.annotation.NeedCheck;
 import com.rongyi.easy.malllife.param.MalllifeBaseParam;
 
 /**
- * @author ZhengYl
+ * 商品查询参数类
  *
+ * @author  zhengyi, yaoyiwei
+ * @date 2016-05-05
+ * @version 1.1
  */
-/**
- * @author ZhengYl
- *
- */
-public class 	CommoditySearchParam  extends MalllifeBaseParam implements Serializable {
+public class CommoditySearchParam  extends MalllifeBaseParam implements Serializable {
 
-	/**  */
 	private static final long serialVersionUID = -3577116644255163015L;
+
+	private String id;
+
+	private boolean extraFilterFlag;
+
+	private List<String> brandIds;
 
 	/** 关键词 */
 	private String keyword;
@@ -236,6 +241,7 @@ public class 	CommoditySearchParam  extends MalllifeBaseParam implements Seriali
 		this.bullId = bullId;
 	}
 
+	@NeedCheck(getFieldName = "liveId")
 	public String getLiveId() {
 		return liveId;
 	}
@@ -244,6 +250,7 @@ public class 	CommoditySearchParam  extends MalllifeBaseParam implements Seriali
 		this.liveId = liveId;
 	}
 
+	@NeedCheck(getFieldName = "saleId")
 	public Integer getSaleId() {
 		return saleId;
 	}
@@ -252,6 +259,7 @@ public class 	CommoditySearchParam  extends MalllifeBaseParam implements Seriali
 		this.saleId = saleId;
 	}
 
+	@NeedCheck(getFieldName = "flashSaleId")
 	public Integer getFlashSaleId() {
 		return flashSaleId;
 	}
@@ -260,6 +268,7 @@ public class 	CommoditySearchParam  extends MalllifeBaseParam implements Seriali
 		this.flashSaleId = flashSaleId;
 	}
 
+	@NeedCheck(getFieldName = "systemNumber")
 	public String getSystemNumber() {
 		return systemNumber;
 	}
@@ -288,6 +297,7 @@ public class 	CommoditySearchParam  extends MalllifeBaseParam implements Seriali
 		this.zoneId = zoneId;
 	}
 
+	@NeedCheck(getFieldName = "commodityCode")
 	public String getCommodityCode() {
 		return commodityCode;
 	}
@@ -306,6 +316,30 @@ public class 	CommoditySearchParam  extends MalllifeBaseParam implements Seriali
 
 	public void setMaxPrice(String maxPrice) {
 		this.maxPrice = maxPrice;
+	}
+
+	public void setBrandIds(List<String> brandIds) {
+		this.brandIds = brandIds;
+	}
+
+	public boolean isExtraFilterFlag() {
+		return extraFilterFlag;
+	}
+
+	public void setExtraFilterFlag(boolean extraFilterFlag) {
+		this.extraFilterFlag = extraFilterFlag;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public List<String> getBrandIds() {
+		return brandIds;
 	}
 
 	@Override
