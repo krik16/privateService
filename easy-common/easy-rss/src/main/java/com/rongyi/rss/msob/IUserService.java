@@ -348,6 +348,13 @@ public interface IUserService {
      * @throws MallShopException
      */
     public List<UserDevIdDto> findUserDevIdDtoByDevId(String devId)throws MallShopException;
+    /**
+     * 获取所有买手
+     * @param type
+     * @return
+     * @throws MallShopException
+     */
+    public List<RmmmUserInfoEntity> selectAllBuyer(Integer type)throws MallShopException ;
 
 
 }

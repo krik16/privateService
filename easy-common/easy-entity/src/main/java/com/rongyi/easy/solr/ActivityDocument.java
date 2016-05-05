@@ -11,6 +11,8 @@ public class ActivityDocument implements Serializable{
     private String id;
     private String var_poi_chinese;
     private String var_title_chinese;// 活动名称
+    private String var_poi_chinese_subdiv;
+    private String var_title_chinese_subdiv;
     private String var_address_chinese;
     private String var_label_chinese;// 标记，包含店名
     private ArrayList<String> mall_ids;
@@ -453,5 +455,21 @@ public class ActivityDocument implements Serializable{
 
     public void setActivityEndTime(Date activityEndTime) {
         this.activityEndTime = activityEndTime;
+    }
+
+    public String getVar_poi_chinese_subdiv() {
+        return var_poi_chinese_subdiv;
+    }
+
+    public void setVar_poi_chinese_subdiv(String var_poi_chinese_subdiv) {
+        this.var_poi_chinese_subdiv = var_poi_chinese_subdiv;
+    }
+
+    public String getVar_title_chinese_subdiv() {
+        return var_title_chinese_subdiv;
+    }
+
+    public void setVar_title_chinese_subdiv(String var_title_chinese_subdiv) {
+        this.var_title_chinese_subdiv = var_title_chinese_subdiv;
     }
 }

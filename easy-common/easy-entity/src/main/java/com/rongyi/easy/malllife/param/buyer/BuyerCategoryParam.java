@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 public class BuyerCategoryParam implements Serializable {
 	private static final long serialVersionUID = -7251657383525434319L;
-	
+
 	private Integer filterType;		// 类型1：店铺 2：品牌
 	private String filterId;		// 店铺ID或者品牌ID
 	private boolean showParent;		// 是否显示父级
 	private String bullId;			// 买手ID
 	private String liveId;			// 直播ID
-	private String commodityType;	// 商品类型1：所有商品 2：导购商品 3：买手商品 4：闪购 5：卖场
+	private String commodityType;	// 商品类型1：所有商品 2：导购商品 3：买手商品 4：闪购 5：卖场  6,直播
 	private String keyword;			// 关键字
 	private String categoryId;		// 分类ID
 	private String brandId;			// 品牌ID
@@ -19,16 +19,18 @@ public class BuyerCategoryParam implements Serializable {
 	private String shopId;			// 店铺ID
 	private String saleId;			// 闪购ID
 	private String flashSaleId;		// 特卖ID
-	
+	private String minPrice;		// 价格最小范围
+	private String maxPrice;		// 价格最大范围
+
 	public BuyerCategoryParam() {
 //		this.filterType = 0;
 //		this.filterId = "";
 //		this.showParent = true;
 	}
-	
+
 	public BuyerCategoryParam(Integer filterType, String filterId, boolean showParent, String bullId, String liveId,
 			String commodityType, String keyword, String categoryId, String brandId, String cityName, String mallId,
-			String shopId, String saleId, String flashSaleId) {
+			String shopId, String saleId, String flashSaleId, String minPrice, String maxPrice) {
 		this.filterType = filterType;
 		this.filterId = filterId;
 		this.showParent = showParent;
@@ -43,6 +45,8 @@ public class BuyerCategoryParam implements Serializable {
 		this.shopId = shopId;
 		this.saleId = saleId;
 		this.flashSaleId = flashSaleId;
+		this.minPrice = minPrice;
+		this.maxPrice = maxPrice;
 	}
 	public Integer getFilterType() {
 		return filterType;
@@ -128,12 +132,29 @@ public class BuyerCategoryParam implements Serializable {
 	public void setFlashSaleId(String flashSaleId) {
 		this.flashSaleId = flashSaleId;
 	}
+
+	public String getMinPrice() {
+		return minPrice;
+	}
+
+	public void setMinPrice(String minPrice) {
+		this.minPrice = minPrice;
+	}
+
+	public String getMaxPrice() {
+		return maxPrice;
+	}
+
+	public void setMaxPrice(String maxPrice) {
+		this.maxPrice = maxPrice;
+	}
+
 	@Override
 	public String toString() {
 		return "BuyerCategoryParam [filterType=" + filterType + ", filterId=" + filterId + ", showParent=" + showParent
 				+ ", bullId=" + bullId + ", liveId=" + liveId + ", commodityType=" + commodityType + ", keyword="
 				+ keyword + ", categoryId=" + categoryId + ", brandId=" + brandId + ", cityName=" + cityName
 				+ ", mallId=" + mallId + ", shopId=" + shopId + ", saleId=" + saleId + ", flashSaleId=" + flashSaleId
-				+ "]";
+				+ ", minPrice=" + minPrice + ", maxPrice=" + maxPrice + "]";
 	}
 }

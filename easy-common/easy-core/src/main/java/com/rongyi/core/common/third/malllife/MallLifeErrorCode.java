@@ -27,14 +27,20 @@ public enum MallLifeErrorCode {
     TIME_STAMP_FORMAT(1068111,"请求时间戳格式不对"),
     REQUEST_EXPIRATION(1068112,"请求已过期"),
     DECRYPTION_FAILURE(1068115,"解码失败,加密格式不对"),
+
     /*  8200-8250 参数合法性验证 */
     MOBILE_NUMBER_ILLEGAL(1068201,"手机号码不合法"),
     USER_PHONE_ISEXIST(1068205,"注册手机号已经存在"),
     PARAMETER_FORMAT (1068208,"参数格式不合法"),
+    REQUEST_IPFORMAT (1068209,"请求来源不合法"),
 
     /**toB业务 */
+    SMS_SEND_TYPE(1069110,"发送类型不合法"),
+    SMS_SEND_LIMIT(1069112,"发送消息条数超出当日限制"),
+    SMS_SEND_FAILD(1069113,"发送消息失败"),
     COUPON_OPENID_ISEXIST(1069111,"用户不存在"),
     COUPON_IDS_ISEXIST(1069101,"优惠卷(红包)ID为空")
+
     ;
 
 

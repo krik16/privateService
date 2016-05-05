@@ -13,20 +13,25 @@ package com.rongyi.core.common.third.rsa;
 import com.rongyi.core.common.third.exception.ThirdException;
 import com.rongyi.core.common.third.malllife.MallLifeThirdConfig;
 import com.rongyi.core.common.RSACoder;
+import com.rongyi.core.common.third.sms.SmsEnum;
 import com.rongyi.core.common.util.Base64Helper;
 import com.rongyi.core.common.util.RsaHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sun.misc.BASE64Decoder;
-import java.security.Key;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
+
+import java.io.ByteArrayOutputStream;
+import java.security.*;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.HashMap;
 import java.util.Map;
 import sun.misc.BASE64Encoder;
-import java.security.NoSuchAlgorithmException;
+
+import javax.crypto.Cipher;
+
 /*
  * Copyright (C),上海容易网电子商务有限公司
  * Author:  俞志坚
@@ -41,6 +46,17 @@ public class MalllifeRsaUtil {
 
     protected static  Logger logger = LoggerFactory.getLogger(MalllifeRsaUtil.class);
 
+
+    /**
+     * RSA最大加密明文大小
+     */
+    private static final int MAX_ENCRYPT_BLOCK = 117;
+
+    /**
+     * RSA最大解密密文大小
+     */
+    private static final int MAX_DECRYPT_BLOCK = 128;
+
     /**
      * 解密
      * @param str 加密串
@@ -50,8 +66,8 @@ public class MalllifeRsaUtil {
     public static String decryptStr(String str, String privateKey)throws ThirdException {
         logger.info("====解密===");
         try {
-            byte[] decodedData = RSACoder.decryptByPrivateKey(new BASE64Decoder().decodeBuffer(str.trim()), privateKey);
-            str = new String(decodedData);
+            byte[] decodedData = decryptByPrivateKey(new BASE64Decoder().decodeBuffer(str.trim()), privateKey);
+            str = new String(decodedData,"utf-8");
         }catch (Exception e){
             logger.info("====解密失败===");
             throw new ThirdException("解码失败");
@@ -59,6 +75,42 @@ public class MalllifeRsaUtil {
         return str;
     }
 
+    /**
+     * 分组加密
+     * @param encryptedData
+     * @param privateKey
+     * @return
+     * @autor yuzhijian
+     * @throws Exception
+     */
+    public static byte[] decryptByPrivateKey(byte[] encryptedData, String privateKey)
+            throws Exception {
+        byte[] keyBytes = Base64Helper.decode(privateKey);
+        PKCS8EncodedKeySpec pkcs8KeySpec = new PKCS8EncodedKeySpec(keyBytes);
+        KeyFactory keyFactory = KeyFactory.getInstance(KEY_ALGORITHM);
+        Key privateK = keyFactory.generatePrivate(pkcs8KeySpec);
+        Cipher cipher = Cipher.getInstance(keyFactory.getAlgorithm());
+        cipher.init(Cipher.DECRYPT_MODE, privateK);
+        int inputLen = encryptedData.length;
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        int offSet = 0;
+        byte[] cache;
+        int i = 0;
+        // 对数据分段解密
+        while (inputLen - offSet > 0) {
+            if (inputLen - offSet > MAX_DECRYPT_BLOCK) {
+                cache = cipher.doFinal(encryptedData, offSet, MAX_DECRYPT_BLOCK);
+            } else {
+                cache = cipher.doFinal(encryptedData, offSet, inputLen - offSet);
+            }
+            out.write(cache, 0, cache.length);
+            i++;
+            offSet = i * MAX_DECRYPT_BLOCK;
+        }
+        byte[] decryptedData = out.toByteArray();
+        out.close();
+        return decryptedData;
+    }
 
     /**
      * 加密
@@ -70,8 +122,8 @@ public class MalllifeRsaUtil {
     public static String encryptionStr(String str, String publicKey)throws ThirdException{
         logger.info("====加密===");
         try {
-            byte[] encodeUserName = RsaHelper.encryptByPublicKey(str.getBytes(), publicKey);
-
+            //byte[] encodeUserName = RsaHelper.encryptByPublicKey(str.getBytes(), publicKey);
+            byte[] encodeUserName =  encryptByPublicKey(str.getBytes(), publicKey);
             str= Base64Helper.encode(encodeUserName);
         }catch (Exception e){
             e.printStackTrace();
@@ -79,6 +131,37 @@ public class MalllifeRsaUtil {
             throw new ThirdException("加密失败");
         }
         return str;
+    }
+
+
+    public static byte[] encryptByPublicKey(byte[] data, String publicKey)
+            throws Exception {
+        byte[] keyBytes = Base64Helper.decode(publicKey);
+        X509EncodedKeySpec x509KeySpec = new X509EncodedKeySpec(keyBytes);
+        KeyFactory keyFactory = KeyFactory.getInstance(KEY_ALGORITHM);
+        Key publicK = keyFactory.generatePublic(x509KeySpec);
+        // 对数据加密
+        Cipher cipher = Cipher.getInstance(keyFactory.getAlgorithm());
+        cipher.init(Cipher.ENCRYPT_MODE, publicK);
+        int inputLen = data.length;
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        int offSet = 0;
+        byte[] cache;
+        int i = 0;
+        // 对数据分段加密
+        while (inputLen - offSet > 0) {
+            if (inputLen - offSet > MAX_ENCRYPT_BLOCK) {
+                cache = cipher.doFinal(data, offSet, MAX_ENCRYPT_BLOCK);
+            } else {
+                cache = cipher.doFinal(data, offSet, inputLen - offSet);
+            }
+            out.write(cache, 0, cache.length);
+            i++;
+            offSet = i * MAX_ENCRYPT_BLOCK;
+        }
+        byte[] encryptedData = out.toByteArray();
+        out.close();
+        return encryptedData;
     }
 
 
@@ -130,13 +213,12 @@ public class MalllifeRsaUtil {
             try {
 
                 //生成 公钥 私钥
-                /*
                  keyMap = initKey();
                 String publicKey =  getPublicKey(keyMap);
                 String privateKey =  getPrivateKey(keyMap);
-                System.out.println("publicKey="+publicKey);
-                System.out.println("privateKey="+privateKey);
-                */
+               // System.out.println("publicKey="+publicKey);
+               // System.out.println("privateKey="+privateKey);
+
 
                 //全民财富
                 /*
@@ -149,12 +231,17 @@ public class MalllifeRsaUtil {
                 */
 
                 //ToB 业务
-                String jsonStr="{'phone':'15821659415','passWd':'111111','uuid':'1111','regiTime':'1442838385146','couponId',:'couponId'}";
+                String jsonStr="{'phone':'15821659415','passWd':'111111','uuid':'尊敬的顾客，恭喜您获得XX一份，请于活动截止日前至工作人员处领取，南国西汇城市广场感谢您的积极参与！【容易网】','regiTime':'1442838385146','couponId',:'couponId'}";
+                  jsonStr="{'phone':'15821659415',";
                 System.out.println("加密前="+jsonStr);
-                String encryStr=  MalllifeRsaUtil.encryptionStr(jsonStr,MallLifeThirdConfig.TOB_RSACODER.PUBLIC_KEY_STR);
+                String encryStr=  MalllifeRsaUtil.encryptionStr(jsonStr,SmsEnum.getName(MallLifeThirdConfig.TOB_SMS_CHANNEL.NC_CHANNEL + "_PUBLICKEY"));
                 System.out.println("加密后="+encryStr);
-                String decryStr=MalllifeRsaUtil.decryptStr(encryStr, MallLifeThirdConfig.TOB_RSACODER.PRIVATE_KEY_STR);
+                String decryStr=MalllifeRsaUtil.decryptStr(encryStr,SmsEnum.getName(MallLifeThirdConfig.TOB_SMS_CHANNEL.NC_CHANNEL + "_PRIVATEKEY"));
                 System.out.println("解密后="+decryStr);
+
+
+
+
 
             } catch (Exception e) {
                 e.printStackTrace();

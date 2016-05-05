@@ -54,6 +54,42 @@ public class CartOrderDetailVO extends PageVO implements Serializable{
 	private String orderId;// 订单id
 	private String receiveType = "1";// 收货方式 0快递 1无需快递
 	private String commentTime;// 评价时间
+	private String expressOrderInfoId;// 物流信息主键id
+	private boolean ifSupportByKuaidi100 = false;// true快递100支持 false不支持
+	private String newContextByKuaidi100;// 当前最新推送的一条物流信息
+	private String newTimeByKuaidi100;// 当前最新推送的一条物流信息的时间
+
+	public String getExpressOrderInfoId() {
+		return expressOrderInfoId;
+	}
+
+	public void setExpressOrderInfoId(String expressOrderInfoId) {
+		this.expressOrderInfoId = expressOrderInfoId;
+	}
+
+	public boolean isIfSupportByKuaidi100() {
+		return ifSupportByKuaidi100;
+	}
+
+	public void setIfSupportByKuaidi100(boolean ifSupportByKuaidi100) {
+		this.ifSupportByKuaidi100 = ifSupportByKuaidi100;
+	}
+
+	public String getNewContextByKuaidi100() {
+		return newContextByKuaidi100;
+	}
+
+	public void setNewContextByKuaidi100(String newContextByKuaidi100) {
+		this.newContextByKuaidi100 = newContextByKuaidi100;
+	}
+
+	public String getNewTimeByKuaidi100() {
+		return newTimeByKuaidi100;
+	}
+
+	public void setNewTimeByKuaidi100(String newTimeByKuaidi100) {
+		this.newTimeByKuaidi100 = newTimeByKuaidi100;
+	}
 
 	public String getCommentTime() {
 		return commentTime;

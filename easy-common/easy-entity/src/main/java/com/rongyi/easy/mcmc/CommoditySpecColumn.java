@@ -11,13 +11,13 @@ import org.mongodb.morphia.annotations.Id;
 public class CommoditySpecColumn implements  Serializable{
 
 	/**
-	 * 
+	 * 商品规格名
 	 */
 	private static final long serialVersionUID = 9099780604289373639L;
 	@Id
 	private ObjectId id;
-	private String name;
-	private boolean isRequired;
+	private String name;//规格名
+	private boolean isRequired;//是否必填
 	public ObjectId getId() {
 		return id;
 	}

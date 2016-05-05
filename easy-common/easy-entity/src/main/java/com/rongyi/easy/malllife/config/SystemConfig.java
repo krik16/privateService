@@ -5,7 +5,9 @@ import org.apache.commons.lang.StringUtils;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -47,6 +49,29 @@ public class SystemConfig implements Serializable{
     public static final String PicUrl = UPAIYUN_ADDRESS+"system/mall/appearance_pic/";
     public static final String productionIconUrl = UPAIYUN_ADDRESS+"system/production/icon/";
     public static final String shopPicUrl = UPAIYUN_ADDRESS+"system/photo/file/";
+
+    /*URL过滤地址**/
+    public static final List<String> urlList = Arrays.asList(new String[]{"1", "/flashsale/saleDetail.htm",
+            "/flashsale/saleFlashDetail.htm",
+            "/flashsale/flashDetail.htm",
+            "/live/liveSearch.htm",
+            "/live/liveDetail.htm",
+            "/bull/getBullDetail.htm",
+            "/sys/msg/getbuyMsgCount.htm",
+            "/commodity/getCommodityDetail.htm",
+            "/commodity/searchCommodity.htm",
+            "/commodity/searchCommodityForMallLife.htm",
+            "/shopCart/addShopCart.htm",
+            "/cartOrder/getMyOrderDetailForCart.htm",
+            "/v5/mall/getMall.htm",
+            "/v5/recommend/activity.htm",
+            "/v5/home/getArticleInfo.htm",
+            "/v5/activity/myCouponDetail.htm",
+            "/v5/shop/getShop.htm"
+    });
+
+
+
 
 
 
@@ -139,6 +164,43 @@ public class SystemConfig implements Serializable{
             e.printStackTrace();
         }
         return strs;
+    }
+
+
+    /**
+     * Str 转 Int
+     * @param str
+     * @return
+     */
+    public static int stringToInt(String str){
+        int temp=0;
+        try {
+            if(StringUtils.isNotBlank(str)){
+                temp=Integer.parseInt(str);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            return temp;
+        }
+
+    }
+
+    public static String listToString(List<String> stringList){
+        if (stringList==null||stringList.size()<1) {
+            return null;
+        }
+        StringBuilder result=new StringBuilder();
+        boolean flag=false;
+        for (String string : stringList) {
+            if (flag) {
+                result.append(",");
+            }else {
+                flag=true;
+            }
+            result.append(string);
+        }
+        return result.toString();
     }
 
 }

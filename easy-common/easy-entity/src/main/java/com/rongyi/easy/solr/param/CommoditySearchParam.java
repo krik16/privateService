@@ -1,10 +1,10 @@
-/** 
-* @Title: CommoditySearchParam.java 
-* @Package com.rongyi.easy.solr.param 
+/**
+* @Title: CommoditySearchParam.java
+* @Package com.rongyi.easy.solr.param
 * @Description: 商品检索请求参数
 * @author 郑亦梁  zhengyiliang@rongyi.com
-* @date 2015年9月10日 下午2:19:16 
-* @version V1.0   
+* @date 2015年9月10日 下午2:19:16
+* @version V1.0
 * Copyright (C),上海容易网电子商务有限公司
 */
 package com.rongyi.easy.solr.param;
@@ -23,48 +23,50 @@ import com.rongyi.easy.malllife.param.MalllifeBaseParam;
  * @author ZhengYl
  *
  */
-public class CommoditySearchParam  extends MalllifeBaseParam implements Serializable {
+public class 	CommoditySearchParam  extends MalllifeBaseParam implements Serializable {
 
 	/**  */
 	private static final long serialVersionUID = -3577116644255163015L;
-	
+
 	/** 关键词 */
 	private String keyword;
-	
+
 	/** 店铺Id ObjectId or SQLId */
 	private String shopId;
-	
+
 	/** 品牌Id ObjectId or SQLId */
 	private String brandId;
-	
+
 	/** 商场Id  ObjectId or SQLId */
 	private String mallId;
-	
+
 	/** 商品类别 */
 	private String commodityCategory;
-	
-	/** 排序规则 
-	 * 0：按发布日期排序  1：按销量由高到低  2：按价格由低到高  3：按价格由高到低  4：按距离由近到远  5：按销量由低到高
+
+	/** 排序规则
+	 * 0：按发布日期排序  1：按销量由高到低  2：按价格由低到高  3：按价格由高到低  4：按距离由近到远  5：按销量由低到高 6:折扣由低到高  7：折扣由高到低
 	 * */
 	private String sortBy;
-	
+
 	/** 坐标x */
 	private String coord_x;
-	
+
 	/** 坐标y */
 	private String coord_y;
-	
+
 	/** 买手id */
 	private String bullId;
-	
+
 	/** 直播id */
 	private String liveId;
 
 	private Integer saleId; // 特卖ID
 
 	private Integer flashSaleId; // 闪购ID
-	
-	/** 商品类型 (买手 1， 全部商品 0, 特卖场 2, 闪购 3，导购商品 4)*/
+
+	/** 商品类型 (买手 1， 全部商品 0, 特卖场 2, 闪购 3，导购商品 4)*/   //old
+	// 商品类型1：所有商品 2：导购商品 3：买手商品 4：闪购 5：卖场  6,直播     new
+
 	private String commodityType;
 
 	/**
@@ -73,8 +75,12 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	private String systemNumber;
 
 	private Integer from = 0; // 从0开始 偏移量，商品聚合分页使用
-	
+
 	private String source;//  端来源    1 微信   2 终端屏 3 其他
+
+	private String minPrice;	// 最小价格范围
+
+	private String maxPrice;	// 最大价格范围
 
 	private String zoneId;
 
@@ -261,7 +267,11 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	public void setSystemNumber(String systemNumber) {
 		this.systemNumber = systemNumber;
 	}
-	
+
+	public String getMinPrice() {
+		return minPrice;
+	}
+
 	public String getSource() {
 		return source;
 	}
@@ -286,6 +296,18 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 		this.commodityCode = commodityCode;
 	}
 
+	public void setMinPrice(String minPrice) {
+		this.minPrice = minPrice;
+	}
+
+	public String getMaxPrice() {
+		return maxPrice;
+	}
+
+	public void setMaxPrice(String maxPrice) {
+		this.maxPrice = maxPrice;
+	}
+
 	@Override
 	public String toString() {
 		return "CommoditySearchParam [keyword=" + keyword + ", shopId=" + shopId + ", brandId=" + brandId + ", mallId="
@@ -293,7 +315,6 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 				+ ", coord_y=" + coord_y + ", bullId=" + bullId + ", liveId=" + liveId + ", saleId=" + saleId
 				+ ", flashSaleId=" + flashSaleId + ", commodityType=" + commodityType + ", systemNumber=" + systemNumber
 				+ ", from=" + from + ", source=" + source + ", zoneId=" + zoneId + ", commodityCode=" + commodityCode
-				+ ", keywordList=" + keywordList + "]";
+				+ ", keywordList=" + keywordList + ", minPrice=" + minPrice + ", maxPrice=" + maxPrice + "]";
 	}
-	
 }

@@ -85,4 +85,6 @@ public interface ROAIIntegralCommodityService {
   public long searchcommityIdByMap(Map<String,Object> param) throws RYServiceException;
   
   public String getGiftCodeByGiftId(Map<String,Object> param) throws RYServiceException;
+  
+  public IntegralCommodityVO getGiftVoByGiftCode(Map<String,Object> param)throws RYServiceException;
 }
