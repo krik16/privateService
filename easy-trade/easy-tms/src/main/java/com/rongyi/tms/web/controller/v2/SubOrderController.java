@@ -17,14 +17,12 @@ import com.rongyi.rss.bsoms.IUserInfoService;
 import com.rongyi.rss.coupon.mall.shop.MSUserCouponService;
 import com.rongyi.rss.malllife.roa.ROACommodityService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
-import com.rongyi.rss.mallshop.order.ROAOrderFormService;
 import com.rongyi.rss.solr.McmcCommoditySolrService;
 import com.rongyi.rss.tradecenter.osm.IOrderQueryService;
 import com.rongyi.tms.Exception.PermissionException;
 import com.rongyi.tms.constants.Constant;
 import com.rongyi.tms.constants.ConstantEnum;
 import com.rongyi.tms.excel.ExportOsmOrderExcel;
-import com.rongyi.tms.web.controller.BaseController;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.bson.types.ObjectId;
@@ -33,7 +31,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -90,6 +87,7 @@ public class SubOrderController extends BaseControllerV2 {
         try {
             LOGGER.info("子订单列表:paramsMap={}", paramsMap);
             permissionCheck(request, "ORDER_GOODSON_VIEW");
+            this.replaceListToNull(paramsMap);// 过滤前台传入的空字符串
             warpToParamMap(paramsMap);
             PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchSubListByMap(paramsMap);
 
@@ -292,7 +290,7 @@ public class SubOrderController extends BaseControllerV2 {
         UserInfoVO userInfoVO;
         if (StringUtils.isNotBlank(userPhone)) {
             userInfoVO = roaMalllifeUserService.getByPhone(userPhone);
-            if (userInfoVO == null) {
+            if (userInfoVO == null || StringUtils.isBlank(userInfoVO.getUserId())) {
                 paramsMap.put("buyerId", "-1");
             }else{
                 paramsMap.put("buyerId", userInfoVO.getUserId());
@@ -347,6 +345,73 @@ public class SubOrderController extends BaseControllerV2 {
             }
         }
         return list;
+    }
+
+    private void replaceListToNull(Map<String, Object> paramsMap) {
+        if (null != paramsMap) {
+            if (null != paramsMap.get("cartOrderNo") && StringUtils.isBlank(paramsMap.get("cartOrderNo").toString())) {
+                paramsMap.remove("cartOrderNo");
+            }
+        }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("orderNo") && StringUtils.isBlank(paramsMap.get("orderNo").toString())) {
+                paramsMap.remove("orderNo");
+            }
+        }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("mallId") && StringUtils.isBlank(paramsMap.get("mallId").toString())) {
+                paramsMap.remove("mallId");
+            }
+        }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("shopId") && StringUtils.isBlank(paramsMap.get("shopId").toString())) {
+                paramsMap.remove("shopId");
+            }
+        }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("sellerAccount") && StringUtils.isBlank(paramsMap.get("sellerAccount").toString())) {
+                paramsMap.remove("sellerAccount");
+            }
+        }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("userPhone") && StringUtils.isBlank(paramsMap.get("userPhone").toString())) {
+                paramsMap.remove("userPhone");
+            }
+        }if (null != paramsMap) {
+            if (null != paramsMap.get("commodityNo") && StringUtils.isBlank(paramsMap.get("commodityNo").toString())) {
+                paramsMap.remove("commodityNo");
+            }
+        }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("payChannel") && StringUtils.isBlank(paramsMap.get("payChannel").toString())) {
+                paramsMap.remove("payChannel");
+            }
+        }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("payBegin") && StringUtils.isBlank(paramsMap.get("payBegin").toString())) {
+                paramsMap.remove("payBegin");
+            }
+        }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("payEnd") && StringUtils.isBlank(paramsMap.get("payEnd").toString())) {
+                paramsMap.remove("payEnd");
+            }
+        }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("guideType") && StringUtils.isBlank(paramsMap.get("guideType").toString())) {
+                paramsMap.remove("guideType");
+            }
+        }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("orderSource") && StringUtils.isBlank(paramsMap.get("payChannel").toString())) {
+                paramsMap.remove("orderSource");
+            }
+        }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("status") && StringUtils.isBlank(paramsMap.get("status").toString())) {
+                paramsMap.remove("status");
+            }
+        }
     }
 
 }

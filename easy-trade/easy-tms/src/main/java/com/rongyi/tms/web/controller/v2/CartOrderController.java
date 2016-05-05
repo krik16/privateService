@@ -59,7 +59,7 @@ public class CartOrderController extends BaseControllerV2 {
         ResponseData responseData;
         try {
             permissionCheck(request, "ORDER_GOODS_VIEW");
-            this.replaceListToNull(paramsMap);
+            this.replaceListToNull(paramsMap);// 过滤前台传入的空字符串
             warpToParamMap(paramsMap);
             int currPage = paramsMap.containsKey("currentPage") ? Integer.valueOf(paramsMap.get("currentPage").toString()) : 1;
             paramsMap.put("currPage",currPage);
