@@ -29,6 +29,14 @@ public class POITipEntity implements Serializable {
         this.tip = tip;
     }
 
+    public POITipEntity(String poiId, int tip) {
+        this.poiId = poiId;
+        this.tip = tip;
+    }
+
+    public POITipEntity() {
+    }
+
     @Override
     public String toString() {
         return "POITipEntity{" +
