@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.mcmc.param.ActivityCommodityParam;
 import com.rongyi.easy.rmmm.param.BullParam;
@@ -288,4 +289,14 @@ public interface McmcCommoditySolrService {
 	public boolean updateCommoditySystemNumber(List<ObjectId> commodityIds, String systemNumber);
 
 	public List<Integer>  selectBrandIdsByParams(BullParam param);
+
+
+	/**
+	 * 查询品牌列表（除用户已订阅，爱品牌品牌墙）
+	 *
+	 * @param brandParam
+	 *
+	 * @return
+	 */
+	public ResponseVO searchBrandsForUser(SearchCommodityBrandParam brandParam);
 }
