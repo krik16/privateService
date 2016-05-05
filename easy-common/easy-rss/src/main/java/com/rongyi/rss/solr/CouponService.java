@@ -37,7 +37,7 @@ public interface CouponService {
     public boolean updateCouponSecKill(List<SaleParamSolr> coupons, String secKillSign);
 
     /**
-     * 根据店铺（商城）ID获取优惠劵的数量
+     * 根据店铺（商城）ID获取是否存在优惠劵
      *
      * @param poiType poi类型
      * @param poiId
@@ -45,5 +45,5 @@ public interface CouponService {
      * @author wangjh7
      * @date 2016-05-05
      */
-    public int getCouponCountByPOIId(EPOIType poiType, String poiId);
+    public boolean hasCouponByPOIId(EPOIType poiType, String poiId);
 }

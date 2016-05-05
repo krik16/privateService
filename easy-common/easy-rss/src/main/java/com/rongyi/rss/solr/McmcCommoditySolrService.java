@@ -292,7 +292,7 @@ public interface McmcCommoditySolrService {
 	public List<Integer>  selectBrandIdsByParams(BullParam param);
 
 	/**
-	 * 据店铺（商城）ID获取店铺的数量
+	 * 据店铺（商城）ID判断是否含有商品
 	 *
 	 * @param poiType poi类型
 	 * @param poiId
@@ -300,7 +300,7 @@ public interface McmcCommoditySolrService {
 	 * @author wangjh7
 	 * @date 2016-05-05
 	 */
-	public int getCommodityCountByPOIId(EPOIType poiType, String poiId);
+	public boolean hasCommodityByPOIId(EPOIType poiType, String poiId);
 
 
 	/**
