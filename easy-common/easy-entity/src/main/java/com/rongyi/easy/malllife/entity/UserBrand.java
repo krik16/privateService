@@ -1,22 +1,30 @@
 package com.rongyi.easy.malllife.entity;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 
-public class UserBrand {
+public class UserBrand implements Serializable{
 
-	private String jsessioinid;
-	private int id;
+  	private int id;
 	private String brandId;
 	private String userId;
 	private Timestamp createAt;
 	private Timestamp updateAt;
-	
-	public String getJsessioinid() {
-		return jsessioinid;
+	private String brandName;
+	private String brandLogo;
+ 
+	public String getBrandName() {
+		return brandName;
 	}
-	public void setJsessioinid(String jsessioinid) {
-		this.jsessioinid = jsessioinid;
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
+	}
+	public String getBrandLogo() {
+		return brandLogo;
+	}
+	public void setBrandLogo(String brandLogo) {
+		this.brandLogo = brandLogo;
 	}
 	public int getId() {
 		return id;
