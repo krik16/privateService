@@ -22,6 +22,14 @@ public interface IShareCouponRecordService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<ShareCouponRecordEntity> selectShareCouponByShareId(String shareId) throws Exception;
+	public List<ShareCouponRecordEntity> selectShareCouponByShareId(String shareId,String orderNo) throws Exception;
+	
+	/**
+	 * 查询用户已领取的记录
+	 * @param shareId、orderNo、openId、type
+	 * @return
+	 * @throws Exception
+	 */
+	public ShareCouponRecordEntity selectShareCouponByOpenId(ShareCouponParam param)  throws Exception;
 
 }

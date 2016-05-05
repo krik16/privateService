@@ -11,7 +11,6 @@
     <result column="head_img" property="headImg" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="INTEGER" />
     <result column="coupon_code" property="couponCode" jdbcType="VARCHAR" />
-    <result column="coupon_type" property="couponType" jdbcType="TINYINT" />
     <result column="desc" property="desc" jdbcType="VARCHAR" />
     <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
     <result column="update_at" property="updateAt" jdbcType="TIMESTAMP" />
@@ -20,7 +19,7 @@
   </resultMap>
   <sql id="Base_Column_List" >
     id, share_id, order_no, order_type, user_openid_id, nick_name, head_img, price, coupon_code, 
-    coupon_type, desc, create_at, update_at, is_disabled, version
+     desc, create_at, update_at, is_disabled, version
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -32,181 +31,4 @@
     delete from share_coupon_record
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.rongyi.easy.usercenter.entity.ShareCouponRecordEntity" >
-    insert into share_coupon_record (id, share_id, order_no, 
-      order_type, user_openid_id, nick_name, 
-      head_img, price, coupon_code, 
-      coupon_type, desc, create_at, 
-      update_at, is_disabled, version
-      )
-    values (#{id,jdbcType=INTEGER}, #{shareId,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, 
-      #{orderType,jdbcType=TINYINT}, #{userOpenidId,jdbcType=INTEGER}, #{nickName,jdbcType=VARCHAR}, 
-      #{headImg,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, #{couponCode,jdbcType=VARCHAR}, 
-      #{couponType,jdbcType=TINYINT}, #{desc,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, 
-      #{updateAt,jdbcType=TIMESTAMP}, #{isDisabled,jdbcType=TINYINT}, #{version,jdbcType=TINYINT}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.rongyi.easy.usercenter.entity.ShareCouponRecordEntity" >
-    insert into share_coupon_record
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="shareId != null" >
-        share_id,
-      </if>
-      <if test="orderNo != null" >
-        order_no,
-      </if>
-      <if test="orderType != null" >
-        order_type,
-      </if>
-      <if test="userOpenidId != null" >
-        user_openid_id,
-      </if>
-      <if test="nickName != null" >
-        nick_name,
-      </if>
-      <if test="headImg != null" >
-        head_img,
-      </if>
-      <if test="price != null" >
-        price,
-      </if>
-      <if test="couponCode != null" >
-        coupon_code,
-      </if>
-      <if test="couponType != null" >
-        coupon_type,
-      </if>
-      <if test="desc != null" >
-        desc,
-      </if>
-      <if test="createAt != null" >
-        create_at,
-      </if>
-      <if test="updateAt != null" >
-        update_at,
-      </if>
-      <if test="isDisabled != null" >
-        is_disabled,
-      </if>
-      <if test="version != null" >
-        version,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="shareId != null" >
-        #{shareId,jdbcType=VARCHAR},
-      </if>
-      <if test="orderNo != null" >
-        #{orderNo,jdbcType=VARCHAR},
-      </if>
-      <if test="orderType != null" >
-        #{orderType,jdbcType=TINYINT},
-      </if>
-      <if test="userOpenidId != null" >
-        #{userOpenidId,jdbcType=INTEGER},
-      </if>
-      <if test="nickName != null" >
-        #{nickName,jdbcType=VARCHAR},
-      </if>
-      <if test="headImg != null" >
-        #{headImg,jdbcType=VARCHAR},
-      </if>
-      <if test="price != null" >
-        #{price,jdbcType=INTEGER},
-      </if>
-      <if test="couponCode != null" >
-        #{couponCode,jdbcType=VARCHAR},
-      </if>
-      <if test="couponType != null" >
-        #{couponType,jdbcType=TINYINT},
-      </if>
-      <if test="desc != null" >
-        #{desc,jdbcType=VARCHAR},
-      </if>
-      <if test="createAt != null" >
-        #{createAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateAt != null" >
-        #{updateAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isDisabled != null" >
-        #{isDisabled,jdbcType=TINYINT},
-      </if>
-      <if test="version != null" >
-        #{version,jdbcType=TINYINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.rongyi.easy.usercenter.entity.ShareCouponRecordEntity" >
-    update share_coupon_record
-    <set >
-      <if test="shareId != null" >
-        share_id = #{shareId,jdbcType=VARCHAR},
-      </if>
-      <if test="orderNo != null" >
-        order_no = #{orderNo,jdbcType=VARCHAR},
-      </if>
-      <if test="orderType != null" >
-        order_type = #{orderType,jdbcType=TINYINT},
-      </if>
-      <if test="userOpenidId != null" >
-        user_openid_id = #{userOpenidId,jdbcType=INTEGER},
-      </if>
-      <if test="nickName != null" >
-        nick_name = #{nickName,jdbcType=VARCHAR},
-      </if>
-      <if test="headImg != null" >
-        head_img = #{headImg,jdbcType=VARCHAR},
-      </if>
-      <if test="price != null" >
-        price = #{price,jdbcType=INTEGER},
-      </if>
-      <if test="couponCode != null" >
-        coupon_code = #{couponCode,jdbcType=VARCHAR},
-      </if>
-      <if test="couponType != null" >
-        coupon_type = #{couponType,jdbcType=TINYINT},
-      </if>
-      <if test="desc != null" >
-        desc = #{desc,jdbcType=VARCHAR},
-      </if>
-      <if test="createAt != null" >
-        create_at = #{createAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateAt != null" >
-        update_at = #{updateAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isDisabled != null" >
-        is_disabled = #{isDisabled,jdbcType=TINYINT},
-      </if>
-      <if test="version != null" >
-        version = #{version,jdbcType=TINYINT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.rongyi.easy.usercenter.entity.ShareCouponRecordEntity" >
-    update share_coupon_record
-    set share_id = #{shareId,jdbcType=VARCHAR},
-      order_no = #{orderNo,jdbcType=VARCHAR},
-      order_type = #{orderType,jdbcType=TINYINT},
-      user_openid_id = #{userOpenidId,jdbcType=INTEGER},
-      nick_name = #{nickName,jdbcType=VARCHAR},
-      head_img = #{headImg,jdbcType=VARCHAR},
-      price = #{price,jdbcType=INTEGER},
-      coupon_code = #{couponCode,jdbcType=VARCHAR},
-      coupon_type = #{couponType,jdbcType=TINYINT},
-      desc = #{desc,jdbcType=VARCHAR},
-      create_at = #{createAt,jdbcType=TIMESTAMP},
-      update_at = #{updateAt,jdbcType=TIMESTAMP},
-      is_disabled = #{isDisabled,jdbcType=TINYINT},
-      version = #{version,jdbcType=TINYINT}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
 </mapper>
