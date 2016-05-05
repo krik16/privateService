@@ -12,15 +12,19 @@ import com.rongyi.easy.coupon.param.UserSkypeParam;
 public interface SharePushActivityService {
     /**
      * 获取用户当日获取红包或抵扣券的个数
-     * @param param userId type(0抵扣券，1红包。两者都包含，次字段为null)
+     * @param param
+     *        userId 必传
+     *        type(0抵扣券，1红包。两者都包含，此字段为null)
+     *        reciveStartAt 领取开始时间 默认当天的0点0分0秒
+     *        reciveEndAt 领取结束时间 默认当天23点59分59秒999毫秒
      * @return
      */
     public int getOneDayUserSkype(UserSkypeParam param);
 
     /**
      * 用户当日最多获取红包或抵扣券的上限
-     * 上限=当前分享活动每天上限-当前用户已经领取该分享活动领取的数量
      * @param param
+     *  activityId 必传 当前分享活动id
      * @return
      */
     public int getUserSkypeLimit(UserSkypeParam param);
@@ -28,6 +32,7 @@ public interface SharePushActivityService {
     /**
      * 判断某个分享活动是否已经结束
      * @param param
+     *  activityId 必传
      * @return
      */
     public boolean activityIsOver(UserSkypeParam param);
