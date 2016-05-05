@@ -2,31 +2,11 @@ package com.rongyi.tms.web.controller.v2;
 
 import com.rongyi.core.bean.ResponseData;
 import com.rongyi.core.common.PagingVO;
-import com.rongyi.core.common.util.JsonUtil;
-import com.rongyi.core.common.util.StringUtil;
 import com.rongyi.core.constant.PaymentEventType;
-import com.rongyi.easy.bsoms.entity.UserInfo;
-import com.rongyi.easy.coupon.vo.MMUserCouponVO;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
-import com.rongyi.easy.mcmc.vo.CommodityWebVO;
-import com.rongyi.easy.osm.entity.OrderFormEntity;
-import com.rongyi.easy.osm.entity.PaymentEntity;
 import com.rongyi.easy.osm.vo.OrderCartFormVO;
-import com.rongyi.easy.rmmm.entity.MallCooperateEntity;
-import com.rongyi.easy.rmmm.entity.ShopInfoEntity;
-import com.rongyi.easy.rmmm.vo.OrderManagerVO;
-import com.rongyi.easy.rmmm.vo.ParentOrderVO;
-import com.rongyi.easy.rmmm.vo.SonOrderVO;
-import com.rongyi.easy.tms.entity.PaymentAbnormal;
 import com.rongyi.easy.tms.vo.v2.CartOrderExcelVO;
-import com.rongyi.rss.bsoms.IUserInfoService;
-import com.rongyi.rss.coupon.mall.shop.MSUserCouponService;
-import com.rongyi.rss.malllife.roa.ROACommodityService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
-import com.rongyi.rss.mallshop.order.ROAOrderFormService;
-import com.rongyi.rss.mallshop.shop.ROACooperationMallService;
-import com.rongyi.rss.mallshop.shop.ROAShopService;
-import com.rongyi.rss.solr.McmcCommoditySolrService;
 import com.rongyi.rss.tradecenter.osm.IOrderCartService;
 import com.rongyi.rss.tradecenter.osm.IOrderQueryService;
 import com.rongyi.tms.Exception.PermissionException;
@@ -34,28 +14,19 @@ import com.rongyi.tms.constants.Constant;
 import com.rongyi.tms.constants.ConstantEnum;
 import com.rongyi.tms.excel.ExportOsmOrderExcel;
 import com.rongyi.tms.moudle.vo.ParentOrderCartVO;
-import com.rongyi.tms.moudle.vo.ResponseResult;
-import com.rongyi.tms.web.controller.BaseController;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
-import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.UnsupportedEncodingException;
-import java.math.BigDecimal;
-import java.net.URLDecoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -88,6 +59,7 @@ public class CartOrderController extends BaseControllerV2 {
         ResponseData responseData;
         try {
             permissionCheck(request, "ORDER_GOODS_VIEW");
+            this.replaceListToNull(paramsMap);
             warpToParamMap(paramsMap);
             int currPage = paramsMap.containsKey("currentPage") ? Integer.valueOf(paramsMap.get("currentPage").toString()) : 1;
             paramsMap.put("currPage",currPage);
@@ -203,5 +175,53 @@ public class CartOrderController extends BaseControllerV2 {
             }
         }
         return paramsMap;
+    }
+
+    private void replaceListToNull(Map<String, Object> paramsMap) {
+        if (null != paramsMap) {
+            if (null != paramsMap.get("cartOrderNo") && StringUtils.isBlank(paramsMap.get("cartOrderNo").toString())) {
+                paramsMap.remove("cartOrderNo");
+            }
+        }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("userAccount") && StringUtils.isBlank(paramsMap.get("userAccount").toString())) {
+                paramsMap.remove("userAccount");
+            }
+        }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("orderSource") && StringUtils.isBlank(paramsMap.get("payChannel").toString())) {
+                paramsMap.remove("orderSource");
+            }
+        }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("payChannel") && StringUtils.isBlank(paramsMap.get("payChannel").toString())) {
+                paramsMap.remove("payChannel");
+            }
+        }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("createAtBegin") && StringUtils.isBlank(paramsMap.get("createAtBegin").toString())) {
+                paramsMap.remove("createAtBegin");
+            }
+        }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("createAtEnd") && StringUtils.isBlank(paramsMap.get("createAtEnd").toString())) {
+                paramsMap.remove("createAtEnd");
+            }
+        }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("realAmountBegin") && StringUtils.isBlank(paramsMap.get("realAmountBegin").toString())) {
+                paramsMap.remove("realAmountBegin");
+            }
+        }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("realAmountEnd") && StringUtils.isBlank(paramsMap.get("realAmountEnd").toString())) {
+                paramsMap.remove("realAmountEnd");
+            }
+        }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("status") && StringUtils.isBlank(paramsMap.get("status").toString())) {
+                paramsMap.remove("status");
+            }
+        }
     }
 }
