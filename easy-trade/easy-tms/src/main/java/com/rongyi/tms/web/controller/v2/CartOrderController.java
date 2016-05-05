@@ -180,8 +180,8 @@ public class CartOrderController extends BaseControllerV2 {
 
     private void replaceListToNull(Map<String, Object> paramsMap) {
         if (null != paramsMap) {
-            if (null != paramsMap.get("cartOrderNo") && StringUtils.isBlank(paramsMap.get("cartOrderNo").toString())) {
-                paramsMap.remove("cartOrderNo");
+            if (null != paramsMap.get("orderNo") && StringUtils.isBlank(paramsMap.get("orderNo").toString())) {
+                paramsMap.remove("orderNo");
             }
         }
         if (null != paramsMap) {
