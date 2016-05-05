@@ -305,4 +305,5 @@ public interface ROAContentService {
      * @throws Exception
      */
 	public PagingVO<ContentPojo> pagingActivitiesList(ActivitiesParam param) throws Exception;
+	
 }
