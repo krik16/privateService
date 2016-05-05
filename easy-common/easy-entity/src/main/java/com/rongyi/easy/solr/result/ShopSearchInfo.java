@@ -36,6 +36,16 @@ public class ShopSearchInfo implements Serializable,Comparable<ShopSearchInfo> {
     private String appearance_pic;
     private String telephone; //商家电话
     private Double dist;//距离
+    private List<Integer> tip; ///< 店铺标签（格式：[0，0，0] 对应：[货，惠、劵]）
+
+    public List<Integer> getTip() {
+        return tip;
+    }
+
+    public void setTip(List<Integer> tip) {
+        this.tip = tip;
+    }
+
     public String getAppearance_pic() {
         return appearance_pic;
     }
@@ -214,30 +224,32 @@ public class ShopSearchInfo implements Serializable,Comparable<ShopSearchInfo> {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", id)
-                .append("name", name)
-                .append("addr", addr)
-                .append("pic_url", pic_url)
-                .append("location", location)
-                .append("description", description)
-                .append("rank", rank)
-                .append("city_name", city_name)
-                .append("shop_own", shop_own)
-                .append("label", label)
-                .append("type", type)
-                .append("business_district", business_district)
-                .append("shop_nature", shop_nature)
-                .append("any_activity", any_activity)
-                .append("any_coupon", any_coupon)
-                .append("cooperationShopId", cooperationShopId)
-                .append("rmmmShopStatus", rmmmShopStatus)
-                .append("tags", tags)
-                .append("activityNum", activityNum)
-                .append("brandId", brandId)
-                .append("appearance_pic", appearance_pic)
-                .append("telephone", telephone)
-                .toString();
+        return "ShopSearchInfo{" +
+                "activityNum=" + activityNum +
+                ", id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", addr='" + addr + '\'' +
+                ", pic_url='" + pic_url + '\'' +
+                ", location=" + location +
+                ", description='" + description + '\'' +
+                ", rank='" + rank + '\'' +
+                ", city_name='" + city_name + '\'' +
+                ", shop_own='" + shop_own + '\'' +
+                ", label='" + label + '\'' +
+                ", type='" + type + '\'' +
+                ", business_district='" + business_district + '\'' +
+                ", shop_nature='" + shop_nature + '\'' +
+                ", any_activity=" + any_activity +
+                ", any_coupon=" + any_coupon +
+                ", cooperationShopId='" + cooperationShopId + '\'' +
+                ", rmmmShopStatus=" + rmmmShopStatus +
+                ", tags=" + tags +
+                ", brandId='" + brandId + '\'' +
+                ", appearance_pic='" + appearance_pic + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", dist=" + dist +
+                ", tip=" + tip +
+                '}';
     }
 
     public Double getDist() {
