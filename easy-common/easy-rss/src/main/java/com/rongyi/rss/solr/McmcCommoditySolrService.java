@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
+import com.rongyi.easy.mcmc.constant.EPOIType;
 import com.rongyi.easy.mcmc.param.ActivityCommodityParam;
 import com.rongyi.easy.rmmm.param.BullParam;
 import com.rongyi.easy.roa.param.SearchCommodityBrandParam;
@@ -289,6 +290,17 @@ public interface McmcCommoditySolrService {
 	public boolean updateCommoditySystemNumber(List<ObjectId> commodityIds, String systemNumber);
 
 	public List<Integer>  selectBrandIdsByParams(BullParam param);
+
+	/**
+	 * 据店铺（商城）ID获取店铺的数量
+	 *
+	 * @param poiType poi类型
+	 * @param poiId
+	 * @return
+	 * @author wangjh7
+	 * @date 2016-05-05
+	 */
+	public int getCommodityCountByPOIId(EPOIType poiType, String poiId);
 
 
 	/**

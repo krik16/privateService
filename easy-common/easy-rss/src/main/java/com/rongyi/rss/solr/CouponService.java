@@ -1,5 +1,6 @@
 package com.rongyi.rss.solr;
 
+import com.rongyi.easy.mcmc.constant.EPOIType;
 import com.rongyi.easy.mcmc.param.SaleParamSolr;
 
 import java.util.Date;
@@ -34,4 +35,15 @@ public interface CouponService {
      * @return
      */
     public boolean updateCouponSecKill(List<SaleParamSolr> coupons, String secKillSign);
+
+    /**
+     * 根据店铺（商城）ID获取优惠劵的数量
+     *
+     * @param poiType poi类型
+     * @param poiId
+     * @return
+     * @author wangjh7
+     * @date 2016-05-05
+     */
+    public int getCouponCountByPOIId(EPOIType poiType, String poiId);
 }
