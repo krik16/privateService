@@ -19,7 +19,7 @@
   </resultMap>
   <sql id="Base_Column_List" >
     id, share_id, order_no, order_type, user_openid_id, nick_name, head_img, price, coupon_code, 
-     desc, create_at, update_at, is_disabled, version
+     `desc`, create_at, update_at, is_disabled, version
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
