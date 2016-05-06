@@ -11,6 +11,7 @@ import com.rongyi.easy.rmmm.vo.OrderManagerVO;
 import com.rongyi.easy.rmmm.vo.ParentOrderVO;
 import com.rongyi.easy.rmmm.vo.SonOrderVO;
 import com.rongyi.easy.roa.vo.MallVO;
+import com.rongyi.easy.roa.vo.ShopVO;
 import com.rongyi.easy.tms.vo.v2.CommodityDetailVO;
 import com.rongyi.easy.tms.vo.v2.SubOrderDetailVO;
 import com.rongyi.easy.tms.vo.v2.SubOrderExcelVO;
@@ -82,6 +83,9 @@ public class SubOrderController extends BaseControllerV2 {
 
     @Autowired
     private ROAShopService roaShopService;
+
+    @Autowired
+    private com.rongyi.rss.roa.ROAShopService shopService;
 
     /**
      * 条件查询订单列表
@@ -293,7 +297,6 @@ public class SubOrderController extends BaseControllerV2 {
 
 
     private Map<String, Object> warpToParamMap(Map<String, Object> paramsMap) throws Exception {
-        String shopId = (String) paramsMap.get("shopId");
         String commodityNo = (String) paramsMap.get("commodityNo");
         String userPhone = (String) paramsMap.get("userPhone");
         //查询用户条件
@@ -306,11 +309,11 @@ public class SubOrderController extends BaseControllerV2 {
                 paramsMap.put("buyerId", userInfoVO.getUserId());
             }
         }
-        if (StringUtils.isNotEmpty(shopId)) {
-            List<String> shopList = new ArrayList<>();
-            shopList.add(shopId);
-            paramsMap.put("shopList", shopList);
-        }
+//        if (StringUtils.isNotEmpty(shopId)) {
+//            List<String> shopList = new ArrayList<>();
+//            shopList.add(shopId);
+//            paramsMap.put("shopList", shopList);
+//        }
         if (StringUtils.isNotEmpty(commodityNo)) {
             List<String> commodityIds = new ArrayList<>();
             List<ObjectId> ids = mcmcCommoditySolrService.selectCommodityIndexByNameCode(commodityNo, null);
@@ -342,12 +345,21 @@ public class SubOrderController extends BaseControllerV2 {
             }
         }
 
-        // 根据商场名称，查询商铺
+        // 根据商场名称，模糊查询商铺ID集合
         Object mallId = paramsMap.get("mallId");
         if (null != mallId && StringUtils.isNotBlank(mallId.toString())) {
             List<Integer> shopIdList = this.getShopIdListByMallName(mallId.toString());
             if (CollectionUtils.isNotEmpty(shopIdList)) {
                 paramsMap.put("shopList", shopIdList);
+            }
+        }
+
+        // 根据商铺名称，模糊查询商铺ID集合
+        Object shopId = paramsMap.get("shopId");
+        if (null != shopId && StringUtils.isNotBlank(shopId.toString())) {
+            List<Integer> shopIdList = this.getShopIdListByShopName(paramsMap.get("shopId").toString());
+            if (CollectionUtils.isNotEmpty(shopIdList)) {
+                paramsMap.put("shopIdFromShopList", shopIdList);
             }
         }
 
@@ -465,5 +477,21 @@ public class SubOrderController extends BaseControllerV2 {
             }
         }
         return new ArrayList<>();
+    }
+
+    /**
+     * 根据商场名称，模糊查询店铺ID集合
+     * @param shopName
+     * @return
+     * @throws Exception
+     */
+    private List<Integer> getShopIdListByShopName(String shopName) throws Exception {
+        // 根据mallIdList，查询shopIdList
+        Map<String, Object> map = new HashMap<>();
+        StringBuilder sb = new StringBuilder()；
+        sb.append("%").append(shopName).append("%");
+        map.put("vagueShopName", sb.toString());
+        // 接口的sql模糊查询没有写%，需要手动拼接到参数
+        return roaShopService.getAllShopIdBuMallId(map);
     }
 }
