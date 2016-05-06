@@ -296,7 +296,7 @@ public interface McmcCommoditySolrService {
 	 *
 	 * @param brandParam
 	 *
-	 * @return
+	 * @return brandMid(未过滤)
 	 */
 	public ResponseVO searchBrandsForUser(SearchCommodityBrandParam brandParam);
 }
