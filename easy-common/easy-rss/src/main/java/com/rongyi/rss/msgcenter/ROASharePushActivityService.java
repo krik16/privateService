@@ -53,9 +53,9 @@ public interface ROASharePushActivityService {
     /**
      * 判断是否有资格分享红包
      * @param orderNo 订单号
-     * @return
+     * @return >=0 有资格且为改分享的红包个数   <0 没有资格
      */
-    public boolean shareQualified(String orderNo);
+    public int shareQualified(String orderNo);
 
     /**
      * 锁定分享红包券码
