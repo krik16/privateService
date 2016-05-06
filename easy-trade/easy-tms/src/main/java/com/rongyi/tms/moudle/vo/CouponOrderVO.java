@@ -62,7 +62,10 @@ public class CouponOrderVO implements Serializable {
      * 优惠位图 1=使用红包  2=使用积分 4=使用抵扣券 后续继续加
      */
     private Byte discountBitmap;
-    
+
+
+	private Integer hbDiscount;
+
     /**
      * 红包券码
      */
@@ -261,5 +264,13 @@ public class CouponOrderVO implements Serializable {
 
 	public void setRebateDiscount(Integer rebateDiscount) {
 		this.rebateDiscount = rebateDiscount;
+	}
+
+	public Integer getHbDiscount() {
+		return hbDiscount;
+	}
+
+	public void setHbDiscount(Integer hbDiscount) {
+		this.hbDiscount = hbDiscount;
 	}
 }

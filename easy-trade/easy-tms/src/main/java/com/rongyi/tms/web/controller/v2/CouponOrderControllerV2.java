@@ -122,9 +122,9 @@ public class CouponOrderControllerV2 extends BaseControllerV2 {
             Integer unitTotalPrice = 0;//券现价总价
             if (tradeUserCodeList != null && !tradeUserCodeList.isEmpty()) {
                 //红包分摊抵扣(分)
-                BigDecimal avgHbDiscount = new BigDecimal(tradeSubOrder.getHbDiscount()).divide(new BigDecimal(tradeSubOrder.getUnitCount()), 2, BigDecimal.ROUND_HALF_DOWN).setScale(0, BigDecimal.ROUND_HALF_DOWN);
+                BigDecimal avgHbDiscount = new BigDecimal(couponOrderVO.getHbDiscount()).divide(new BigDecimal(tradeSubOrder.getUnitCount()), 2, BigDecimal.ROUND_HALF_DOWN).setScale(0, BigDecimal.ROUND_HALF_DOWN);
                 //红包分摊最后剩余红包金额
-                BigDecimal lastHbDiscount = new BigDecimal(tradeSubOrder.getHbDiscount()).subtract(avgHbDiscount.multiply(new BigDecimal(tradeSubOrder.getUnitCount() - 1))).setScale(0, BigDecimal.ROUND_HALF_UP);
+                BigDecimal lastHbDiscount = new BigDecimal(couponOrderVO.getHbDiscount()).subtract(avgHbDiscount.multiply(new BigDecimal(tradeSubOrder.getUnitCount() - 1))).setScale(0, BigDecimal.ROUND_HALF_UP);
                 //积分分摊抵扣(元)
                 BigDecimal avgScoreDiscount = new BigDecimal(couponOrderVO.getScoreDiscount()).divide(new BigDecimal(tradeSubOrder.getUnitCount()), 2, BigDecimal.ROUND_HALF_DOWN).setScale(2, BigDecimal.ROUND_HALF_DOWN);
                 //积分分摊最后剩余积分
