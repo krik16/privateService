@@ -97,6 +97,7 @@ public class SubOrderController extends BaseControllerV2 {
             if (orderForms == null)
                 orderForms = new ArrayList<>();
             for (OrderManagerVO orderManagerVO : orderForms) {
+                orderManagerVO.setPayAmount(orderManagerVO.getOrderTotalAmount());
                 CommodityVO commodityVO = commodityService.getCommoditySpecInfoById(orderManagerVO.getCommodityMid(), orderManagerVO.getCommoditySpecMid());
                 if (commodityVO != null) {
                     orderManagerVO.setCommodityName(commodityVO.getCommodityName());
