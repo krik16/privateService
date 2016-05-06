@@ -776,6 +776,24 @@ public interface Constants {
         int RYG=0;//容易逛
         int MD=1;//摩店
     }
-
+    /**
+     * 推荐类目 类型APP
+     * @author user
+     *
+     */
+    interface RECOMMEND_TYPE{
+    	/** 商场/店铺类型 */
+    	Integer MALL_TYPE = 1;
+    	/** 品牌类型 */
+    	Integer BRAND_TYPE = 2;
+    	/** 分类 */
+    	Integer CATEGORY_TYPE = 3;
+    	/** 推荐商场/店铺位置id */
+    	Integer MALL_POSITION_ID = 27;
+    	/** 推荐品牌位置id */
+    	Integer BRAND_POSITION_ID = 28;
+    	/** 推荐分类位置id */
+    	Integer CATEGORY_POSITION_ID = 29;
+    }
 
 }
