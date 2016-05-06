@@ -31,9 +31,6 @@ public class ShareCouponRecordEntity implements Serializable {
     /** 券码 */
     private String couponCode;
 
-    /** 1:抵扣券 2红包 */
-    private Integer couponType;
-
     /** 红包随机文案 */
     private String desc;
 
@@ -49,7 +46,51 @@ public class ShareCouponRecordEntity implements Serializable {
     /** 版本 */
     private Integer version;
 
-    /**
+    public ShareCouponRecordEntity() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public ShareCouponRecordEntity(Integer id, String shareId, String orderNo,
+			Integer orderType, Integer userOpenidId, String nickName,
+			String headImg, Integer price, String couponCode,
+			Integer couponType, String desc, Date createAt, Date updateAt,
+			Integer isDisabled, Integer version) {
+		super();
+		this.id = id;
+		this.shareId = shareId;
+		this.orderNo = orderNo;
+		this.orderType = orderType;
+		this.userOpenidId = userOpenidId;
+		this.nickName = nickName;
+		this.headImg = headImg;
+		this.price = price;
+		this.couponCode = couponCode;
+		this.desc = desc;
+		this.createAt = createAt;
+		this.updateAt = updateAt;
+		this.isDisabled = isDisabled;
+		this.version = version;
+	}
+	
+	public void shareCouponRecordEntity(ShareCouponRecordEntity entity) {
+		this.id = entity.getId();
+		this.shareId = entity.getShareId();
+		this.orderNo = entity.getOrderNo();
+		this.orderType = entity.getOrderType();
+		this.userOpenidId = entity.getUserOpenidId();
+		this.nickName = entity.getNickName();
+		this.headImg = entity.getHeadImg();
+		this.price = entity.getPrice();
+		this.couponCode = entity.getCouponCode();
+		this.desc = entity.getDesc();
+		this.createAt = entity.getCreateAt();
+		this.updateAt = entity.getUpdateAt();
+		this.isDisabled = entity.getIsDisabled();
+		this.version = entity.getVersion();
+	}
+
+	/**
      * 主键
      * @return id
      */
@@ -194,22 +235,6 @@ public class ShareCouponRecordEntity implements Serializable {
     }
 
     /**
-     * 1:抵扣券 2红包
-     * @return couponType
-     */
-    public Integer getCouponType() {
-        return couponType;
-    }
-
-    /**
-     * 1:抵扣券 2红包
-     * @param couponType
-     */
-    public void setCouponType(Integer couponType) {
-        this.couponType = couponType;
-    }
-
-    /**
      * 红包随机文案
      * @return desc
      */
@@ -295,7 +320,7 @@ public class ShareCouponRecordEntity implements Serializable {
 				+ ", orderNo=" + orderNo + ", orderType=" + orderType
 				+ ", userOpenidId=" + userOpenidId + ", nickName=" + nickName
 				+ ", headImg=" + headImg + ", price=" + price + ", couponCode="
-				+ couponCode + ", couponType=" + couponType + ", desc=" + desc
+				+ couponCode + ", desc=" + desc
 				+ ", createAt=" + createAt + ", updateAt=" + updateAt
 				+ ", isDisabled=" + isDisabled + ", version=" + version + "]";
 	}
