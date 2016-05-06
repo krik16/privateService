@@ -378,7 +378,7 @@ public interface ROAContentService {
 	* @date 2016年5月6日 上午10:30:43 
 	* @throws
 	 */
-	public List<String> allListWelfareNew(Date pullAt,List<String> brandIdList) throws Exception;
+	public List<Map<String,Object>> allListWelfareNew(Date pullAt,List<String> brandIdList) throws Exception;
 	/**
 	 * 
 	* @Title: allListWrlFaraOld 
@@ -391,7 +391,7 @@ public interface ROAContentService {
 	* @date 2016年5月6日 上午10:32:57 
 	* @throws
 	 */
-	public List<ContentPojo> allListWelFareOld(List<String> activityIdList)throws Exception;
+	public List<ContentPojo> allListWelFareOld(List<Map<String,Object>> activityMap)throws Exception;
 	/**
 	 * 
 	* @Title: pagingListWelFare 
@@ -404,4 +404,6 @@ public interface ROAContentService {
 	* @throws
 	 */
 	public PagingVO<ContentPojo> pagingListWelFare(Integer pageSize,Integer currentPage) throws Exception;
+	
+	public int countWelFareNew(Date pullAt) throws Exception;
 }
