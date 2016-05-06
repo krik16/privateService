@@ -11,7 +11,6 @@ import com.rongyi.easy.rmmm.vo.OrderManagerVO;
 import com.rongyi.easy.rmmm.vo.ParentOrderVO;
 import com.rongyi.easy.rmmm.vo.SonOrderVO;
 import com.rongyi.easy.roa.vo.MallVO;
-import com.rongyi.easy.roa.vo.ShopVO;
 import com.rongyi.easy.tms.vo.v2.CommodityDetailVO;
 import com.rongyi.easy.tms.vo.v2.SubOrderDetailVO;
 import com.rongyi.easy.tms.vo.v2.SubOrderExcelVO;
