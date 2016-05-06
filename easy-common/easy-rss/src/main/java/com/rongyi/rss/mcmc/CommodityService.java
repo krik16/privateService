@@ -120,9 +120,9 @@ public interface CommodityService {
      * @param status:商品的状态
      * @param pagesize：分页的条数
      */
-    
+
     public void updateCommodityByRegisterAtAndSoldOutAt(Date registerAt,Date soldOutAt, String status, int pagesize);
-    
+
 
     /***
      * 查询商品 一二三级分类
@@ -212,4 +212,6 @@ public interface CommodityService {
     public List<CommodityCategory> selectCategory(int type,boolean isPopular);
 
     public PagingVO<Commodity> findCommdityList(SearchCommodityParms searchCommodityParms);
+
+    public List<String>  selectCommodityByNameAndCode(String name,String code);
 }
