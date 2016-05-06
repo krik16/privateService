@@ -488,7 +488,7 @@ public class SubOrderController extends BaseControllerV2 {
     private List<Integer> getShopIdListByShopName(String shopName) throws Exception {
         // 根据mallIdList，查询shopIdList
         Map<String, Object> map = new HashMap<>();
-        StringBuilder sb = new StringBuilder()；
+        StringBuilder sb = new StringBuilder();
         sb.append("%").append(shopName).append("%");
         map.put("vagueShopName", sb.toString());
         // 接口的sql模糊查询没有写%，需要手动拼接到参数
