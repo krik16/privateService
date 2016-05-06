@@ -788,12 +788,12 @@ public interface Constants {
     	Integer BRAND_TYPE = 2;
     	/** 分类 */
     	Integer CATEGORY_TYPE = 3;
-    	/** 推荐商场/店铺位置id */
-    	Integer MALL_POSITION_ID = 27;
-    	/** 推荐品牌位置id */
-    	Integer BRAND_POSITION_ID = 28;
-    	/** 推荐分类位置id */
-    	Integer CATEGORY_POSITION_ID = 29;
+    	/** 推荐商场/店铺code */
+    	String MALL_CODE = "REC_MALL";
+    	/** 推荐品牌code */
+    	String BRAND_CODE = "REC_BRAND";
+    	/** 推荐分类code */
+    	String CATEGORY_CODE = "REC_CATEGORY";
     }
 
 }

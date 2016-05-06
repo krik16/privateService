@@ -6,6 +6,7 @@ import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.mcmc.param.AdviseShopParam;
 import com.rongyi.easy.mcmc.param.LiveParam;
 import com.rongyi.easy.rmmm.param.BullParam;
+import com.rongyi.easy.roa.param.SearchCommodityBrandParam;
 import com.rongyi.easy.solr.LiveSolrDocument;
 import com.rongyi.easy.solr.param.LiveSearchParam;
 
@@ -158,5 +159,17 @@ public interface LiveService {
 
 
 	ResponseVO  deleteById (String id);
+
+
+
+	/**
+	 * 查询品牌列表（除用户已订阅，爱品牌品牌墙）
+	 *
+	 * @param brandParam
+	 *
+	 * @return List<brandVo>
+	 */
+	ResponseVO searchBrandsForUser(SearchCommodityBrandParam brandParam);
+
 }
 
