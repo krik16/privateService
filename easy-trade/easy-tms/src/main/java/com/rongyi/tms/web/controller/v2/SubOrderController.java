@@ -10,6 +10,7 @@ import com.rongyi.easy.mcmc.vo.CommodityWebVO;
 import com.rongyi.easy.rmmm.vo.OrderManagerVO;
 import com.rongyi.easy.rmmm.vo.ParentOrderVO;
 import com.rongyi.easy.rmmm.vo.SonOrderVO;
+import com.rongyi.easy.roa.vo.MallVO;
 import com.rongyi.easy.tms.vo.v2.CommodityDetailVO;
 import com.rongyi.easy.tms.vo.v2.SubOrderDetailVO;
 import com.rongyi.easy.tms.vo.v2.SubOrderExcelVO;
@@ -17,6 +18,8 @@ import com.rongyi.rss.bsoms.IUserInfoService;
 import com.rongyi.rss.coupon.mall.shop.MSUserCouponService;
 import com.rongyi.rss.malllife.roa.ROACommodityService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
+import com.rongyi.rss.mallshop.shop.ROAShopService;
+import com.rongyi.rss.roa.ROAMallService;
 import com.rongyi.rss.solr.McmcCommoditySolrService;
 import com.rongyi.rss.tradecenter.osm.IOrderQueryService;
 import com.rongyi.tms.Exception.PermissionException;
@@ -73,6 +76,12 @@ public class SubOrderController extends BaseControllerV2 {
 
     @Autowired
     IOrderQueryService iOrderQueryService;
+
+    @Autowired
+    private ROAMallService mallService;
+
+    @Autowired
+    private ROAShopService roaShopService;
 
     /**
      * 条件查询订单列表
@@ -332,6 +341,16 @@ public class SubOrderController extends BaseControllerV2 {
                 paramsMap.put("guideIds", guideIds);
             }
         }
+
+        // 根据商场名称，查询商铺
+        Object mallId = paramsMap.get("mallId");
+        if (null != mallId && StringUtils.isNotBlank(mallId.toString())) {
+            List<Integer> shopIdList = this.getShopIdListByMallName(mallId.toString());
+            if (CollectionUtils.isNotEmpty(shopIdList)) {
+                paramsMap.put("shopList", shopIdList);
+            }
+        }
+
         LOGGER.info("warpToParamMap end paramsMap={}", paramsMap);
         return paramsMap;
     }
@@ -413,6 +432,38 @@ public class SubOrderController extends BaseControllerV2 {
                 paramsMap.remove("status");
             }
         }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("commodityId") && StringUtils.isBlank(paramsMap.get("commodityId").toString())) {
+                paramsMap.remove("commodityId");
+            }
+        }
     }
 
+    /**
+     * 根据商场名称，模糊查询店铺ID集合
+     * @param mallName
+     * @return
+     * @throws Exception
+     */
+    private List<Integer> getShopIdListByMallName(String mallName) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", mallName);
+        // 根据mallName 查询mallId集合
+        Map<String, Object> mallResult = mallService.getMalls(map, 1, Integer.MAX_VALUE);
+        if (mallResult != null && mallResult.get("list") != null) {
+            List<MallVO> mallList = (List<MallVO>) mallResult.get("list");
+            List<String> mallIdList = new ArrayList<>();
+            for (MallVO mall:mallList) {
+                if (null != mall && StringUtils.isNotBlank(mall.getId())) {
+                    mallIdList.add(mall.getId());
+                }
+            }
+            // 根据mallIdList，查询shopIdList
+            if (CollectionUtils.isNotEmpty(mallIdList)) {
+                map.put("mallIds", mallIdList);
+                return roaShopService.getAllShopIdBuMallId(map);
+            }
+        }
+        return new ArrayList<>();
+    }
 }
