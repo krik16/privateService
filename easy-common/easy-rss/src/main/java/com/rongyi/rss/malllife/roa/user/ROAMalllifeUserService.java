@@ -185,5 +185,13 @@ public interface ROAMalllifeUserService {
 	public InvitationUserInfoPojo getUserIsByShare(String userId,int type);
 
 
+	/**
+	 * 分享红包 判断返回 用户ID
+	 * @param phone 手机
+	 * @param channel  来源渠道  ShareRed 分享红包
+	 * @return  正常返回 userId  禁用返回 disable
+     */
+	public String genUserId(String phone,String channel)throws Exception ;
+
 
 }

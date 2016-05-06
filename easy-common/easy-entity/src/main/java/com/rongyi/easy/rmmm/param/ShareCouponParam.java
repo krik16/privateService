@@ -22,8 +22,6 @@ public class ShareCouponParam  extends MalllifeBaseParam implements Serializable
 	
 	private String couponCode;//券码
 	
-	private Integer couponType;//1:抵扣券 2红包
-	
 	private Integer orderType;//1商品订单 2代金券订单
 	
 	private Integer price;//红包金额 精确到分
@@ -102,14 +100,6 @@ public class ShareCouponParam  extends MalllifeBaseParam implements Serializable
 		this.couponCode = couponCode;
 	}
 
-	public Integer getCouponType() {
-		return couponType;
-	}
-
-	public void setCouponType(Integer couponType) {
-		this.couponType = couponType;
-	}
-
 	public Integer getOrderType() {
 		return orderType;
 	}
@@ -131,9 +121,9 @@ public class ShareCouponParam  extends MalllifeBaseParam implements Serializable
 		return "ShareCouponParam [shareId=" + shareId + ", orderNum="
 				+ orderNum + ", phone=" + phone + ", openId=" + openId
 				+ ", headImg=" + headImg + ", nickName=" + nickName + ", type="
-				+ type + ", couponCode=" + couponCode + ", couponType="
-				+ couponType + ", orderType=" + orderType + ", price=" + price
-				+ ", userOpenidId=" + userOpenidId + "]";
+				+ type + ", couponCode=" + couponCode + ", orderType="
+				+ orderType + ", price=" + price + ", userOpenidId="
+				+ userOpenidId + "]";
 	}
 
 }

@@ -378,5 +378,22 @@ public interface ROAContentService {
 	 */
 
 	public int getVisibleActivityModuleBeyondId(int moduleId) ;
-	
+
+	/**
+	 * 根据code获取content的信息
+	 *
+	 * @param contentParam
+	 * @author wangjh7
+	 * @return
+	 */
+	public List<ForumContent> getContentByModuleCode(ContentParam contentParam) ;
+
+    /**
+     * 根据code获取content的个数
+     *
+     * @param contentParam
+     * @author wangjh7
+     * @return
+     */
+    public int getCountContentByModuleCode(ContentParam contentParam) ;
 }

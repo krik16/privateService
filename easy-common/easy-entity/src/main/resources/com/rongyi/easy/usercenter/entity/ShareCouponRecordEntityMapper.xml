@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongyi.easy.usercenter.entity.ShareCouponRecordEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.rongyi.easy.usercenter.entity.ShareCouponRecordEntity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="share_id" property="shareId" jdbcType="VARCHAR" />
+    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <result column="order_type" property="orderType" jdbcType="TINYINT" />
+    <result column="user_openid_id" property="userOpenidId" jdbcType="INTEGER" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="head_img" property="headImg" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="INTEGER" />
+    <result column="coupon_code" property="couponCode" jdbcType="VARCHAR" />
+    <result column="desc" property="desc" jdbcType="VARCHAR" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="update_at" property="updateAt" jdbcType="TIMESTAMP" />
+    <result column="is_disabled" property="isDisabled" jdbcType="TINYINT" />
+    <result column="version" property="version" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, share_id, order_no, order_type, user_openid_id, nick_name, head_img, price, coupon_code, 
+     `desc`, create_at, update_at, is_disabled, version
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from share_coupon_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from share_coupon_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+</mapper>

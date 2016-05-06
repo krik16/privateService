@@ -45,7 +45,17 @@ public enum AppErrorCode {
     
     
     ERROR_WECHAT_APPID_OPENID(1067001,"微信appId或渠道或openId不能为空"),
-    ERROR_ORDERID_ISNULL(1067002,"订单号不能为空")
+    ERROR_ORDERID_ISNULL(1067002,"订单号不能为空"),
+    
+    /** 分享红包  7100---7200*/
+//    ERROR_PHONE_HAVEBIND(1067100,"手机号已被绑定"),
+    ERROR_PHONE_ISNOTMOBILE(1067101,"手机号格式不正确，请重新输入"),
+    ERROR_ALREADY_RECEIVE(1067102,"这个红包你已经抢过哦~"),
+    ERROR_NO_SHARE(1067103,"红包已抢完啦~"),
+    ERROR_ALREADY_END(1067104,"来晚了，活动已结束~"),
+    ERROR_ALREADY_ONLIMIT(1067105,"今天领取红包超过限制了呢，明天再来吧~"),
+    ERROR_PHONE_DISABLE(1067106,"您的账户异常，请联系容易逛客服"),
+    ERROR_SHARE_FAILE(1067107,"领取红包失败"),
     ;
 
 

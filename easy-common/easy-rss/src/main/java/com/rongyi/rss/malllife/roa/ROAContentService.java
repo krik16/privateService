@@ -1,16 +1,26 @@
 package com.rongyi.rss.malllife.roa;
 
 
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
 import com.rongyi.easy.malllife.domain.AppReference2DO;
 import com.rongyi.easy.malllife.domain.AppReferenceDO;
 import com.rongyi.easy.malllife.domain.ContentDDO;
 import com.rongyi.easy.malllife.domain.ContentDO;
 import com.rongyi.easy.malllife.param.ActivitiesParam;
 import com.rongyi.easy.malllife.pojo.ContentPojo;
-import com.rongyi.easy.malllife.vo.*;
-
-import java.util.List;
-import java.util.Map;
+import com.rongyi.easy.malllife.vo.BrandVO;
+import com.rongyi.easy.malllife.vo.CommentsVO;
+import com.rongyi.easy.malllife.vo.FavourableVO;
+import com.rongyi.easy.malllife.vo.GroupVO;
+import com.rongyi.easy.malllife.vo.MallVO;
+import com.rongyi.easy.malllife.vo.OldMallVO;
+import com.rongyi.easy.malllife.vo.PagingVO;
+import com.rongyi.easy.malllife.vo.ProductionVO;
+import com.rongyi.easy.malllife.vo.ShopVO;
+import com.rongyi.easy.malllife.vo.UserInfoVO;
 
 /*
  * Copyright (C),上海容易网电子商务有限公司
@@ -305,5 +315,93 @@ public interface ROAContentService {
      * @throws Exception
      */
 	public PagingVO<ContentPojo> pagingActivitiesList(ActivitiesParam param) throws Exception;
-	
+	/**
+	 * 
+	* @Title: pagingArticleList 
+	* @Description: 容易逛 精彩活动(吃喝玩乐)接口
+	* @param @param category
+	* @param @param type
+	* @param @param lng
+	* @param @param lat
+	* @param @param cityId
+	* @param @param pageSize
+	* @param @param currentPage
+	* @param @param version
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return PagingVO<ContentPojo>    返回类型 
+	* @author shaozhou
+	* @date 2016年5月5日 下午7:16:54 
+	* @throws
+	 */
+	public PagingVO<ContentPojo> pagingArticleList(String type, double lng, double lat, String cityId, int pageSize, Integer currentPage) throws Exception ;
+	/**
+	 * 
+	* @Title: pagingArticleList 
+	* @Description: 查询优惠信息接口
+	* @param @param cityId
+	* @param @param pageSize
+	* @param @param currentPage
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return PagingVO<ContentPojo>    返回类型 
+	* @author shaozhou
+	* @date 2016年5月5日 下午7:24:22 
+	* @throws
+	 */
+	public PagingVO<ContentPojo> pagingFavorList(String cityId, int pageSize, Integer currentPage) throws Exception ;
+	/**
+	 * 
+	* @Title: pagingContentListByMallId 
+	* @Description: 根据商场获取精彩活动和优惠列表
+	* @param @param id
+	* @param @param pageSize
+	* @param @param currentPage
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return PagingVO<ContentPojo>    返回类型 
+	* @author shaozhou
+	* @date 2016年5月5日 下午7:30:00 
+	* @throws
+	 */
+	public PagingVO<ContentPojo> pagingContentListByMallId(String id,int pageSize, Integer currentPage) throws Exception ;
+	/**
+	 * 
+	* @Title: allListWelfareNew 
+	* @Description: 爱品牌根据品牌list查询所有的新数据 String 列表
+	* @param @param pullAt
+	* @param @param brandIdList
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return List<String>    返回类型 
+	* @author shaozhou
+	* @date 2016年5月6日 上午10:30:43 
+	* @throws
+	 */
+	public List<String> allListWelfareNew(Date pullAt,List<String> brandIdList) throws Exception;
+	/**
+	 * 
+	* @Title: allListWrlFaraOld 
+	* @Description: 爱品牌根据文章列表id查询列表数据
+	* @param @param activityIdList
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return List<ContentPojo>    返回类型 
+	* @author shaozhou
+	* @date 2016年5月6日 上午10:32:57 
+	* @throws
+	 */
+	public List<ContentPojo> allListWelFareOld(List<String> activityIdList)throws Exception;
+	/**
+	 * 
+	* @Title: pagingListWelFare 
+	* @Description: 分页获取所有的爱品牌数据
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return PagingVO<ContentPojo>    返回类型 
+	* @author shaozhou
+	* @date 2016年5月6日 上午10:35:10 
+	* @throws
+	 */
+	public PagingVO<ContentPojo> pagingListWelFare(Integer pageSize,Integer currentPage) throws Exception;
 }

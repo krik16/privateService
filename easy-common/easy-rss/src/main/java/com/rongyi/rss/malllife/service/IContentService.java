@@ -9,6 +9,7 @@ import com.rongyi.easy.malllife.param.ActivitiesParam;
 import com.rongyi.easy.malllife.pojo.ContentPojo;
 import com.rongyi.easy.malllife.vo.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -305,4 +306,60 @@ public interface IContentService {
 
 
 	public List<String> getMallIdsContent(String type);
+	/**
+	 * 
+	* @Title: pagingActivityList 
+	* @Description: 查询精彩活动接口
+	* @param @param type 0全部，1附近，2吃喝，3玩乐
+	* @param @param lng
+	* @param @param lat
+	* @param @param cityId
+	* @param @param pageSize
+	* @param @param currentPage
+	* @param @param version
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return PagingVO<ContentPojo>    返回类型 
+	* @author shaozhou
+	* @date 2016年5月5日 下午6:52:00 
+	* @throws
+	 */
+	public PagingVO<ContentPojo> pagingArticleList(String type, double lng, double lat, String cityId, int pageSize, Integer currentPage) throws Exception ;
+	/**
+	 * 
+	* @Title: pagingFavorList 
+	* @Description: 查询优惠信息接口
+	* @param @param cityId
+	* @param @param pageSize
+	* @param @param currentPage
+	* @param @return    设定文件 
+	* @return PagingVO<ContentPojo>    返回类型 
+	* @author shaozhou
+	* @date 2016年5月5日 下午7:32:25 
+	* @throws
+	 */
+	public PagingVO<ContentPojo> pagingFavorList(String cityId, int pageSize, Integer currentPage);
+	/**
+	 * 
+	* @Title: pagingContentListByMallId 
+	* @Description: 根据商场获取精彩活动和优惠列表
+	* @param @param id
+	* @param @param pageSize
+	* @param @param currentPage
+	* @param @return    设定文件 
+	* @return PagingVO<ContentPojo>    返回类型 
+	* @author shaozhou
+	* @date 2016年5月5日 下午7:32:34 
+	* @throws
+	 */
+	public PagingVO<ContentPojo> pagingContentListByMallId(String id, int pageSize, Integer currentPage);
+
+
+	public List<String> allListWelfareNew(Date pullAt, List<String> brandIdList);
+
+
+	public List<ContentPojo> allListWelFareOld(List<String> activityIdList);
+
+
+	public PagingVO<ContentPojo> pagingListWelFare(Integer pageSize, Integer currentPage);
 }
