@@ -1,5 +1,6 @@
 package com.rongyi.rss.solr;
 
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.mcmc.constant.EPOIType;
 import com.rongyi.easy.mcmc.param.SaleParamSolr;
 
@@ -46,5 +47,5 @@ public interface CouponService {
      * @author wangjh7
      * @date 2016-05-05
      */
-    public List<String> findPOIIdList(EPOIType epoiType, int startIndex, int size);
+    public ResponseVO findPOIIdList(EPOIType epoiType, int startIndex, int size);
 }
