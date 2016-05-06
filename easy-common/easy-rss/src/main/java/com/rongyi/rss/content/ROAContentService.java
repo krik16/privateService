@@ -395,5 +395,5 @@ public interface ROAContentService {
      * @author wangjh7
      * @return
      */
-    public int getCountContentByModuleCode(ContentParam contentParam) ;
+    public Long getCountContentByModuleCode(ContentParam contentParam) ;
 }
