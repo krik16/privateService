@@ -379,4 +379,11 @@ public interface ROAContentService {
 
 	public int getVisibleActivityModuleBeyondId(int moduleId) ;
 	
+	/**
+	 * 根据forum_code查询首页信息
+	 * @param code
+	 * @return
+	 */
+	public ForumHomepage findHomepageByCode(String code);
+	
 }
