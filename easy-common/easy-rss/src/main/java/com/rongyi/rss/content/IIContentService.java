@@ -315,10 +315,19 @@ public interface IIContentService {
 	/**
 	 * 获取可见板块的信息
 	 *
-	 * @param moduleCode
+	 * @param contentParam
 	 * @author wangjh7
 	 * @return
 	 */
-	public List<ForumContent> getContentByModuleCode(String moduleCode) ;
+	public List<ForumContent> getContentByModuleCode(ContentParam contentParam) ;
+
+    /**
+     * 根据code获取content的个数
+     *
+     * @param contentParam
+     * @author wangjh7
+     * @return
+     */
+    public int getCountContentByModuleCode(ContentParam contentParam) ;
 
 }
