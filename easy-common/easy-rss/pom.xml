@@ -7,7 +7,7 @@
 		<version>3.3.5-SNAPSHOT</version>	</parent>
 	<artifactId>easy-rss</artifactId>
 	<packaging>jar</packaging>
- 
+
 	<dependencies>
 		<dependency>
 			<groupId>com.rongyi</groupId>
@@ -21,6 +21,6 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 	</dependency>
-		
+
 	</dependencies>
 </project>

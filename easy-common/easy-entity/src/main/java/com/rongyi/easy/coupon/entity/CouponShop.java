@@ -4,13 +4,13 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 
-public class CouponShop implements Serializable{
+public class CouponShop implements Serializable {
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	private Integer id;
+    private Integer id;
 
     /**
      * 卡券id
@@ -23,73 +23,70 @@ public class CouponShop implements Serializable{
     private String shopId;
     private Object object1;
     private Object object2;
-
-    public Object getObject1() {
-		return object1;
-	}
-
-	public void setObject1(Object object1) {
-		this.object1 = object1;
-	}
-
-	public Object getObject2() {
-		return object2;
-	}
-
-	public void setObject2(Object object2) {
-		this.object2 = object2;
-	}
-
-	/**
+    /**
      * 店铺名
      */
     private String shopName;
     private String shopAddress;
     private String shopBulding;
     private String shopFloor;
+    private String telePhone;
     private String brandId;//品牌id
     private String brandCname;//品牌中文名
-    
-    public String getBrandId() {
-		return brandId;
-	}
-
-	public void setBrandId(String brandId) {
-		this.brandId = brandId;
-	}
-
-	public String getBrandCname() {
-		return brandCname;
-	}
-
-	public void setBrandCname(String brandCname) {
-		this.brandCname = brandCname;
-	}
-
-
-	public String getMallId() {
-		return mallId;
-	}
-
-	public void setMallId(String mallId) {
-		this.mallId = mallId;
-	}
-
-	public String getMallName() {
-		return mallName;
-	}
-
-	public void setMallName(String mallName) {
-		this.mallName = mallName;
-	}
-
-	private String mallId;//商场id
+    private String mallId;//商场id
     private String mallName;//商场名称
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this).append("id", id).append("couponId", couponId).append("shopId", shopId).append("shopName", shopName).append("shopAddress", shopAddress).append("shopBulding", shopBulding).append("shopFloor", shopFloor).toString();
+    public Object getObject1() {
+        return object1;
     }
+
+    public void setObject1(Object object1) {
+        this.object1 = object1;
+    }
+
+    public Object getObject2() {
+        return object2;
+    }
+
+    public void setObject2(Object object2) {
+        this.object2 = object2;
+    }
+
+
+
+    public String getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(String brandId) {
+        this.brandId = brandId;
+    }
+
+    public String getBrandCname() {
+        return brandCname;
+    }
+
+    public void setBrandCname(String brandCname) {
+        this.brandCname = brandCname;
+    }
+
+
+    public String getMallId() {
+        return mallId;
+    }
+
+    public void setMallId(String mallId) {
+        this.mallId = mallId;
+    }
+
+    public String getMallName() {
+        return mallName;
+    }
+
+    public void setMallName(String mallName) {
+        this.mallName = mallName;
+    }
+
 
     public String getShopAddress() {
         return shopAddress;
@@ -161,5 +158,34 @@ public class CouponShop implements Serializable{
 
     public CouponShop() {
 
+    }
+
+    public String getTelePhone() {
+        return telePhone;
+    }
+
+    public void setTelePhone(String telePhone) {
+        this.telePhone = telePhone;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("CouponShop{");
+        sb.append("id=").append(id);
+        sb.append(", couponId='").append(couponId).append('\'');
+        sb.append(", shopId='").append(shopId).append('\'');
+        sb.append(", object1=").append(object1);
+        sb.append(", object2=").append(object2);
+        sb.append(", shopName='").append(shopName).append('\'');
+        sb.append(", shopAddress='").append(shopAddress).append('\'');
+        sb.append(", shopBulding='").append(shopBulding).append('\'');
+        sb.append(", shopFloor='").append(shopFloor).append('\'');
+        sb.append(", telePhone='").append(telePhone).append('\'');
+        sb.append(", brandId='").append(brandId).append('\'');
+        sb.append(", brandCname='").append(brandCname).append('\'');
+        sb.append(", mallId='").append(mallId).append('\'');
+        sb.append(", mallName='").append(mallName).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }
