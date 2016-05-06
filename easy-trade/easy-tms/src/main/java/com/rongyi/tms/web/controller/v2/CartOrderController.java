@@ -170,11 +170,13 @@ public class CartOrderController extends BaseControllerV2 {
             if(Integer.valueOf(payChannel) == 0){
                 payChannels.add(PaymentEventType.PAYMENT);
                 payChannels.add(PaymentEventType.APP);
+                paramsMap.remove("payChannel");
                 paramsMap.put("payChannels",payChannels);
             }else if(Integer.valueOf(payChannel) == 1){
                 paramsMap.put("payChannel",PaymentEventType.WEIXIN_PAY);
             }
         }
+        LOGGER.info("warpToParamMap end. paramsMap={}",paramsMap);
         return paramsMap;
     }
 
