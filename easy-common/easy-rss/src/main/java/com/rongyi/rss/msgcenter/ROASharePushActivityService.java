@@ -55,7 +55,7 @@ public interface ROASharePushActivityService {
      * @param orderNo 订单号
      * @return
      */
-    public boolean shareQualified(String orderNo);
+    public ShareQualifiedDTO shareQualified(String orderNo);
 
     /**
      * 锁定分享红包券码
