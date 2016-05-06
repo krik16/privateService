@@ -9,6 +9,7 @@ import com.rongyi.easy.malllife.param.ActivitiesParam;
 import com.rongyi.easy.malllife.pojo.ContentPojo;
 import com.rongyi.easy.malllife.vo.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -352,4 +353,13 @@ public interface IContentService {
 	* @throws
 	 */
 	public PagingVO<ContentPojo> pagingContentListByMallId(String id, int pageSize, Integer currentPage);
+
+
+	public List<String> allListWelfareNew(Date pullAt, List<String> brandIdList);
+
+
+	public List<ContentPojo> allListWelFareOld(List<String> activityIdList);
+
+
+	public PagingVO<ContentPojo> pagingListWelFare(Integer pageSize, Integer currentPage);
 }

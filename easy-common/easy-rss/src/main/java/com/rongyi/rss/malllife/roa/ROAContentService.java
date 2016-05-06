@@ -1,16 +1,26 @@
 package com.rongyi.rss.malllife.roa;
 
 
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
 import com.rongyi.easy.malllife.domain.AppReference2DO;
 import com.rongyi.easy.malllife.domain.AppReferenceDO;
 import com.rongyi.easy.malllife.domain.ContentDDO;
 import com.rongyi.easy.malllife.domain.ContentDO;
 import com.rongyi.easy.malllife.param.ActivitiesParam;
 import com.rongyi.easy.malllife.pojo.ContentPojo;
-import com.rongyi.easy.malllife.vo.*;
-
-import java.util.List;
-import java.util.Map;
+import com.rongyi.easy.malllife.vo.BrandVO;
+import com.rongyi.easy.malllife.vo.CommentsVO;
+import com.rongyi.easy.malllife.vo.FavourableVO;
+import com.rongyi.easy.malllife.vo.GroupVO;
+import com.rongyi.easy.malllife.vo.MallVO;
+import com.rongyi.easy.malllife.vo.OldMallVO;
+import com.rongyi.easy.malllife.vo.PagingVO;
+import com.rongyi.easy.malllife.vo.ProductionVO;
+import com.rongyi.easy.malllife.vo.ShopVO;
+import com.rongyi.easy.malllife.vo.UserInfoVO;
 
 /*
  * Copyright (C),上海容易网电子商务有限公司
@@ -355,5 +365,43 @@ public interface ROAContentService {
 	* @throws
 	 */
 	public PagingVO<ContentPojo> pagingContentListByMallId(String id,int pageSize, Integer currentPage) throws Exception ;
-	
+	/**
+	 * 
+	* @Title: allListWelfareNew 
+	* @Description: 爱品牌根据品牌list查询所有的新数据 String 列表
+	* @param @param pullAt
+	* @param @param brandIdList
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return List<String>    返回类型 
+	* @author shaozhou
+	* @date 2016年5月6日 上午10:30:43 
+	* @throws
+	 */
+	public List<String> allListWelfareNew(Date pullAt,List<String> brandIdList) throws Exception;
+	/**
+	 * 
+	* @Title: allListWrlFaraOld 
+	* @Description: 爱品牌根据文章列表id查询列表数据
+	* @param @param activityIdList
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return List<ContentPojo>    返回类型 
+	* @author shaozhou
+	* @date 2016年5月6日 上午10:32:57 
+	* @throws
+	 */
+	public List<ContentPojo> allListWelFareOld(List<String> activityIdList)throws Exception;
+	/**
+	 * 
+	* @Title: pagingListWelFare 
+	* @Description: 分页获取所有的爱品牌数据
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return PagingVO<ContentPojo>    返回类型 
+	* @author shaozhou
+	* @date 2016年5月6日 上午10:35:10 
+	* @throws
+	 */
+	public PagingVO<ContentPojo> pagingListWelFare(Integer pageSize,Integer currentPage) throws Exception;
 }
