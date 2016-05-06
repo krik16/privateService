@@ -82,18 +82,18 @@
 		</if>
 		<if test="amountType == 1">
 			<if test="realAmountBegin!=null and realAmountBegin!=''">
-				AND trade_order.total_amount/100 >= #{realAmountBegin}
+				AND convert(trade_order.total_amount/100,decimal) >= #{realAmountBegin}
 			</if>
 			<if test="realAmountEnd!=null and realAmountEnd!=''">
-				AND  #{realAmountEnd} >= trade_order.total_amount/100
+				AND  #{realAmountEnd} >= convert(trade_order.total_amount/100,decimal)
 			</if>
 		</if>
 		<if test="amountType == 2">
 			<if test="realAmountBegin!=null and realAmountBegin!=''">
-				AND trade_order.pay_amount/100 >= #{realAmountBegin}
+				AND convert(trade_order.pay_amount/100,decimal) >= #{realAmountBegin}
 			</if>
 			<if test="realAmountEnd!=null and realAmountEnd!=''">
-				AND  #{realAmountEnd} >= trade_order.pay_amount/100
+				AND  #{realAmountEnd} >=  convert(trade_order.pay_amount/100,decimal)
 			</if>
 		</if>
 
