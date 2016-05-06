@@ -48,7 +48,7 @@ public enum AppErrorCode {
     ERROR_ORDERID_ISNULL(1067002,"订单号不能为空"),
     
     /** 分享红包  7100---7200*/
-    ERROR_PHONE_HAVEBIND(1067100,"手机号已被绑定"),
+//    ERROR_PHONE_HAVEBIND(1067100,"手机号已被绑定"),
     ERROR_PHONE_ISNOTMOBILE(1067101,"手机号格式不正确，请重新输入"),
     ERROR_ALREADY_RECEIVE(1067102,"这个红包你已经抢过哦~"),
     ERROR_NO_SHARE(1067103,"红包已抢完啦~"),

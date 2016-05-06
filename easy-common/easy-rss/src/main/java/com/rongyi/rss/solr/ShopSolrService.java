@@ -9,6 +9,7 @@
 */
 package com.rongyi.rss.solr;
 
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.mcmc.constant.EPOITipType;
 import com.rongyi.easy.mcmc.constant.EPOIType;
 import com.rongyi.easy.solr.PoiDocument;
@@ -90,7 +91,7 @@ public interface ShopSolrService {
 	 * @author wangjh7
 	 * @date 2016-05-05
 	 */
-	public boolean clearPOITip(EPOIType poiType);
+	public ResponseVO clearPOITip(EPOIType poiType);
 
 	/**
 	 * 更新标签的值
@@ -102,5 +103,5 @@ public interface ShopSolrService {
 	 * @author wangjh7
 	 * @date 2016-05-05
 	 */
-	public boolean updatePOITip(EPOIType poiType, List<String> poiList, EPOITipType epoiTipType);
+	public ResponseVO updatePOITip(EPOIType poiType, List<String> poiList, EPOITipType epoiTipType);
 }

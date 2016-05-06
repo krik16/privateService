@@ -190,7 +190,21 @@ public class ForumContent implements Serializable {
      * 分享图片
      */
     private String sharePic;
-    
+
+    /**
+     *
+     * @return
+     */
+    private Integer stick;
+
+    public Integer getStick() {
+        return stick;
+    }
+
+    public void setStick(Integer stick) {
+        this.stick = stick;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -548,6 +562,7 @@ public class ForumContent implements Serializable {
                 .append("shareTitle", shareTitle)
                 .append("shareContent", shareContent)
                 .append("sharePic", sharePic)
+                .append("stick", stick)
                 .toString();
     }
 }
