@@ -3,6 +3,7 @@ package com.rongyi.rss.mcmc;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.mcmc.constant.EPOIType;
 import com.rongyi.easy.mcmc.vo.CommodityFullVO;
 import com.rongyi.easy.mcmc.vo.CommodityVOToWechat;
@@ -67,5 +68,5 @@ public interface ICommodityService {
 	 * @author wangjh7
 	 * @date 2016-05-05
 	 */
-	public List<String> findPOIIdList(EPOIType epoiType, int startIndex, int size);
+	public ResponseVO findPOIIdList(EPOIType epoiType, int startIndex, int size);
 }
