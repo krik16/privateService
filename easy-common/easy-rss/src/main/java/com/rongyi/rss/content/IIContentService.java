@@ -312,4 +312,13 @@ public interface IIContentService {
 	 */
 	public int getVisibleActivityModuleBeyondId(int moduleId) ;
 
+	/**
+	 * 获取可见板块的信息
+	 *
+	 * @param moduleCode
+	 * @author wangjh7
+	 * @return
+	 */
+	public List<ForumContent> getContentByModuleCode(String moduleCode) ;
+
 }
