@@ -4,13 +4,13 @@ import com.rongyi.easy.coupon.param.UserSkypeParam;
 import com.rongyi.easy.msgcenter.ShareQualifiedDTO;
 
 /**
- * Description:微信分享红包接口
+ * Description:
  * Author: 袁波
- * DATE: 2016/5/5 11:37
+ * DATE: 2016/5/6 10:35
  * Package:com.rongyi.rss.msgcenter
  * Project:easy-market
  */
-public interface SharePushActivityService {
+public interface ROASharePushActivityService {
     /**
      * 获取用户当日获取红包或抵扣券的个数
      * @param param
