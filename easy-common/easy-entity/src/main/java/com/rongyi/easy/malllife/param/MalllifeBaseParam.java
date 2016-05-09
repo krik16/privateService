@@ -22,7 +22,7 @@ public class MalllifeBaseParam implements Serializable {
     private String  appType; // 0 表示 ios,1表示 android
     @Deprecated  // 当前 前端未传值 获取数据错误！！！！！！！ 直接使用from
     private Integer currentPage; //当前页数
-    private Integer pageSize;//每页显示数
+    private Integer pageSize = 100;//每页显示数
 
     public String getJsessionid() {
         return jsessionid;

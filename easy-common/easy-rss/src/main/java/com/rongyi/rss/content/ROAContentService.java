@@ -402,12 +402,5 @@ public interface ROAContentService {
 	 * @return
 	 */
 	public ForumHomepage findHomepageByCode(String code);
-
-	/**
-	 * 根据forum_code查询首页信息
-	 * @param code
-	 * @return
-	 */
-	public ForumHomepage findHomepageByCode(String code);
 	
 }
