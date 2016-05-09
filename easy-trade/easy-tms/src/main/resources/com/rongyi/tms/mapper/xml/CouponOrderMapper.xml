@@ -83,19 +83,19 @@
 			and trade_order.source = #{source}
 		</if>
 		<if test="amountType == 1">
-			<if test="realAmountBegin!=null and realAmountBegin!=''">
-				AND convert(trade_order.total_amount/100,decimal) >= #{realAmountBegin}
+			<if test="realAmountBegin!=null and realAmountBegin >= 0">
+				AND trade_order.total_amount >= #{realAmountBegin}*100
 			</if>
-			<if test="realAmountEnd!=null and realAmountEnd!=''">
-				AND  #{realAmountEnd} >= convert(trade_order.total_amount/100,decimal)
+			<if test="realAmountEnd!=null and realAmountEnd >= 0">
+				AND  #{realAmountEnd}*100 >= trade_order.total_amount
 			</if>
 		</if>
 		<if test="amountType == 2">
-			<if test="realAmountBegin!=null and realAmountBegin!=''">
-				AND convert(trade_order.pay_amount/100,decimal) >= #{realAmountBegin}
+			<if test="realAmountBegin!=null and realAmountBegin >= 0">
+				AND trade_order.pay_amount >= #{realAmountBegin}*100
 			</if>
-			<if test="realAmountEnd!=null and realAmountEnd!=''">
-				AND  #{realAmountEnd} >=  convert(trade_order.pay_amount/100,decimal)
+			<if test="realAmountEnd!=null and realAmountEnd >= 0">
+				AND  #{realAmountEnd}*100 >=  trade_order.pay_amount
 			</if>
 		</if>
 
