@@ -89,7 +89,14 @@ public class SubOrderController extends BaseControllerV2 {
     @Autowired
     private CommodityService mcmcCommodityService;
 
-    private static final String INVALID_PARAM = "-1";
+    /**
+     * 无效入参
+     */
+    private static final String INVALID_PARAM_STRING = "-1";
+    /**
+     * 无效入参
+     */
+    private static final Integer INVALID_PARAM_INTEGER = -1;
 
     /**
      * 条件查询订单列表
@@ -309,7 +316,7 @@ public class SubOrderController extends BaseControllerV2 {
         if (StringUtils.isNotBlank(userPhone)) {
             userInfoVO = roaMalllifeUserService.getByPhone(userPhone);
             if (userInfoVO == null || StringUtils.isBlank(userInfoVO.getUserId())) {
-                paramsMap.put("buyerId", "-1");
+                paramsMap.put("buyerId", INVALID_PARAM_STRING);
             }else{
                 paramsMap.put("buyerId", userInfoVO.getUserId());
             }
@@ -330,7 +337,7 @@ public class SubOrderController extends BaseControllerV2 {
             if (CollectionUtils.isNotEmpty(guideIds))
                 paramsMap.put("guideIds", guideIds);
             else {
-                guideIds.add(-1);
+                guideIds.add(INVALID_PARAM_INTEGER);
                 paramsMap.put("guideIds", guideIds);
             }
         }
@@ -339,18 +346,19 @@ public class SubOrderController extends BaseControllerV2 {
         Object mallId = paramsMap.get("mallId");
         if (null != mallId && StringUtils.isNotBlank(mallId.toString())) {
             List<Integer> shopIdList = this.getShopIdListByMallName(mallId.toString());
-            if (CollectionUtils.isNotEmpty(shopIdList)) {
-                paramsMap.put("shopList", shopIdList);
+            if (CollectionUtils.isEmpty(shopIdList)) {
+                shopIdList.add(INVALID_PARAM_INTEGER);
             }
+            paramsMap.put("shopList", shopIdList);
         }
-
         // 根据商铺名称，模糊查询商铺ID集合
         Object shopId = paramsMap.get("shopId");
         if (null != shopId && StringUtils.isNotBlank(shopId.toString())) {
             List<Integer> shopIdList = this.getShopIdListByShopName(paramsMap.get("shopId").toString());
-            if (CollectionUtils.isNotEmpty(shopIdList)) {
-                paramsMap.put("shopIdFromShopList", shopIdList);
+            if (CollectionUtils.isEmpty(shopIdList)) {
+                shopIdList.add(INVALID_PARAM_INTEGER);
             }
+            paramsMap.put("shopIdFromShopList", shopIdList);
         }
 
         // 根据商品名称，商品编码模糊查询订单
@@ -358,7 +366,7 @@ public class SubOrderController extends BaseControllerV2 {
         if (StringUtils.isNotBlank(commodityName) || StringUtils.isNotBlank(commodityNo)) {
             List<String> commodityIdList = mcmcCommodityService.selectCommodityByNameAndCode(commodityName,commodityNo);
             if (CollectionUtils.isEmpty(commodityIdList)) {
-                commodityIdList.add(INVALID_PARAM);
+                commodityIdList.add(INVALID_PARAM_STRING);
             }
             paramsMap.put("commodityIds", commodityIdList);
         }
