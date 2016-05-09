@@ -115,7 +115,7 @@ public class CouponOrderControllerV2 extends BaseControllerV2 {
             }
             TradeSubOrder tradeSubOrder = subOrderList.get(0);
             //红包抵扣总金额
-            couponOrderDetailVO.setHbDiscountTotalPrice(new BigDecimal(tradeSubOrder.getHbDiscount()).divide(new BigDecimal(100), BigDecimal.ROUND_HALF_UP).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
+            couponOrderDetailVO.setHbDiscountTotalPrice(new BigDecimal(couponOrderVO.getHbDiscount()).divide(new BigDecimal(100), BigDecimal.ROUND_HALF_UP).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
 
             List<TradeUserCode> tradeUserCodeList = iTradeUserCodeService.findTradeUserCodeList(id, tradeSubOrder.getUnitId());
             Integer origTotalPrice = 0;//券面值总价
