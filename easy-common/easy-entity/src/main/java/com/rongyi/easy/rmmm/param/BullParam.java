@@ -4,6 +4,7 @@
 package com.rongyi.easy.rmmm.param;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.rongyi.easy.malllife.param.MalllifeBaseParam;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -32,6 +33,7 @@ public class BullParam extends MalllifeBaseParam implements Serializable{
 	private String brandId;         //品牌id
 	private String cityName;		// 城市名称
 	private String saleId;			// 闪购ID
+	private List<String> brandIds;
 
 	public String getKeyword() {
 		return keyword;
