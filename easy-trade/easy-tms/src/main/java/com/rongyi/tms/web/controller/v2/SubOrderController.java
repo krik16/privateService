@@ -19,6 +19,7 @@ import com.rongyi.rss.coupon.mall.shop.MSUserCouponService;
 import com.rongyi.rss.malllife.roa.ROACommodityService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.rss.mallshop.shop.ROAShopService;
+import com.rongyi.rss.mcmc.CommodityService;
 import com.rongyi.rss.roa.ROAMallService;
 import com.rongyi.rss.solr.McmcCommoditySolrService;
 import com.rongyi.rss.tradecenter.osm.IOrderQueryService;
@@ -28,7 +29,6 @@ import com.rongyi.tms.constants.ConstantEnum;
 import com.rongyi.tms.excel.ExportOsmOrderExcel;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
-import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -85,6 +85,11 @@ public class SubOrderController extends BaseControllerV2 {
 
     @Autowired
     private com.rongyi.rss.roa.ROAShopService shopService;
+
+    @Autowired
+    private CommodityService mcmcCommodityService;
+
+    private static final String INVALID_PARAM = "-1";
 
     /**
      * 条件查询订单列表
@@ -309,22 +314,7 @@ public class SubOrderController extends BaseControllerV2 {
                 paramsMap.put("buyerId", userInfoVO.getUserId());
             }
         }
-//        if (StringUtils.isNotEmpty(shopId)) {
-//            List<String> shopList = new ArrayList<>();
-//            shopList.add(shopId);
-//            paramsMap.put("shopList", shopList);
-//        }
-        if (StringUtils.isNotEmpty(commodityNo)) {
-            List<String> commodityIds = new ArrayList<>();
-            List<ObjectId> ids = mcmcCommoditySolrService.selectCommodityIndexByNameCode(commodityNo, null);
-            if (CollectionUtils.isEmpty(ids)) {
-                return null;
-            }
-            for (ObjectId id : ids) {
-                commodityIds.add(id.toString());
-            }
-            paramsMap.put("commodityIds", commodityIds);
-        }
+
         if (paramsMap.containsKey("sellerAccount")) {
             List<Integer> guideIds = new ArrayList<>();
             Map<String, Object> map = new HashMap<>();
@@ -361,6 +351,16 @@ public class SubOrderController extends BaseControllerV2 {
             if (CollectionUtils.isNotEmpty(shopIdList)) {
                 paramsMap.put("shopIdFromShopList", shopIdList);
             }
+        }
+
+        // 根据商品名称，商品编码模糊查询订单
+        String commodityName = (String) paramsMap.get("commodityName");
+        if (StringUtils.isNotBlank(commodityName) || StringUtils.isNotBlank(commodityNo)) {
+            List<String> commodityIdList = mcmcCommodityService.selectCommodityByNameAndCode(commodityName,commodityNo);
+            if (CollectionUtils.isEmpty(commodityIdList)) {
+                commodityIdList.add(INVALID_PARAM);
+            }
+            paramsMap.put("commodityIds", commodityIdList);
         }
 
         LOGGER.info("warpToParamMap end paramsMap={}", paramsMap);
