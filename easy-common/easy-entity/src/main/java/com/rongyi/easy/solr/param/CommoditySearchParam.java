@@ -33,7 +33,7 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 
 	private boolean extraSortFlag;
 
-	private List<String> brandIds;
+	private List<String> brandMids;
 
 	/** 关键词 */
 	private String keyword;
@@ -320,10 +320,6 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 		this.maxPrice = maxPrice;
 	}
 
-	public void setBrandIds(List<String> brandIds) {
-		this.brandIds = brandIds;
-	}
-
 	public boolean isExtraFilterFlag() {
 		return extraFilterFlag;
 	}
@@ -340,16 +336,20 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 		this.id = id;
 	}
 
-	public List<String> getBrandIds() {
-		return brandIds;
-	}
-
 	public boolean isExtraSortFlag() {
 		return extraSortFlag;
 	}
 
 	public void setExtraSortFlag(boolean extraSortFlag) {
 		this.extraSortFlag = extraSortFlag;
+	}
+
+	public List<String> getBrandMids() {
+		return brandMids;
+	}
+
+	public void setBrandMids(List<String> brandMids) {
+		this.brandMids = brandMids;
 	}
 
 	@Override

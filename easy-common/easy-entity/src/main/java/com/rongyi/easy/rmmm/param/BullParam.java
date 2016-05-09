@@ -33,7 +33,8 @@ public class BullParam extends MalllifeBaseParam implements Serializable{
 	private String brandId;         //品牌id
 	private String cityName;		// 城市名称
 	private String saleId;			// 闪购ID
-	private List<String> brandIds;
+	private List<String> brandIds;  // mysql ids
+	private List<String> brandMids; // mongo ids
 
 	public String getKeyword() {
 		return keyword;
@@ -136,6 +137,22 @@ public class BullParam extends MalllifeBaseParam implements Serializable{
 
 	public void setSaleId(String saleId) {
 		this.saleId = saleId;
+	}
+
+	public List<String> getBrandIds() {
+		return brandIds;
+	}
+
+	public void setBrandIds(List<String> brandIds) {
+		this.brandIds = brandIds;
+	}
+
+	public List<String> getBrandMids() {
+		return brandMids;
+	}
+
+	public void setBrandMids(List<String> brandMids) {
+		this.brandMids = brandMids;
 	}
 
 	@Override
