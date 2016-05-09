@@ -8,14 +8,28 @@ import com.rongyi.easy.rmmm.base.BaseParam;
 
  
 public class BrandRss extends BaseParam implements Serializable{
-
+	private String activityId;
+	private String pushAt;
 	private int currentPage;
 	private int pageSize;
-	private int type;
+	private int type; //0:旧数据，1新数据，2：最新推荐	
 	private String key;
 	private String brandName;
 	private String brandLogo;
 	private List<Map> brandIds;
+	
+	public String getActivityId() {
+		return activityId;
+	}
+	public void setActivityId(String activityId) {
+		this.activityId = activityId;
+	}
+	public String getPushAt() {
+		return pushAt;
+	}
+	public void setPushAt(String pushAt) {
+		this.pushAt = pushAt;
+	}
 	public List<Map> getBrandIds() {
 		return brandIds;
 	}
