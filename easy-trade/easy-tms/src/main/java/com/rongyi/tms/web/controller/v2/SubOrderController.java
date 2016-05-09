@@ -215,6 +215,7 @@ public class SubOrderController extends BaseControllerV2 {
         try {
             Map<String,Object> paramsMap = subOrderExcelVO.toMap();
             permissionCheck(request, "ORDER_GOODSON_EXPORT");
+            this.replaceListToNull(paramsMap);// 过滤前台传入的空字符串
             warpToParamMap(paramsMap);
             exportOsmOrderExcel.exportExcel(request, response, paramsMap);
         } catch (PermissionException e) {

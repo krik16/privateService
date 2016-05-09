@@ -114,6 +114,7 @@ public class CartOrderController extends BaseControllerV2 {
         try {
             Map<String,Object> paramsMap = cartOrderExcelVO.toMap();
             permissionCheck(request,"ORDER_GOODS_EXPORT");
+            this.replaceListToNull(paramsMap);// 过滤前台传入的空字符串
            warpToParamMap(paramsMap);
             if (paramsMap != null) {
                 exportOsmOrderExcel.exportExcel(request, response, paramsMap);
