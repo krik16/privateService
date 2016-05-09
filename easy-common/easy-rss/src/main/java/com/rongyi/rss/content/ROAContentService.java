@@ -402,5 +402,11 @@ public interface ROAContentService {
 	 * @return
 	 */
 	public ForumHomepage findHomepageByCode(String code);
+
+	/**
+	 * 获取爱品牌idlist
+	 * @return
+	 */
+	public List<String> findLoveBrandIds();
 	
 }
