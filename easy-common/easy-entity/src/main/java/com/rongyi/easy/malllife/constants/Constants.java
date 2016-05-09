@@ -274,6 +274,10 @@ public interface Constants {
      */
     String SHANGHAI_ZONES_ID = "51f9d7f231d6559b7d000002";
     /**
+     * 默认上海的百度ID
+     */
+    String SHANGHAI_BAIDU_ID = "289";
+    /**
      * 默认总分类
      */
     /**
