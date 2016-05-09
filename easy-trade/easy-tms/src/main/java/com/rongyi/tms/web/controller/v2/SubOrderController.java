@@ -310,11 +310,11 @@ public class SubOrderController extends BaseControllerV2 {
 
     private Map<String, Object> warpToParamMap(Map<String, Object> paramsMap) throws Exception {
         String commodityNo = (String) paramsMap.get("commodityNo");
-        String userPhone = (String) paramsMap.get("userPhone");
+        String userName = (String) paramsMap.get("username");
         //查询用户条件
         UserInfoVO userInfoVO;
-        if (StringUtils.isNotBlank(userPhone)) {
-            userInfoVO = roaMalllifeUserService.getByPhone(userPhone);
+        if (StringUtils.isNotBlank(userName)) {
+            userInfoVO = roaMalllifeUserService.getByPhone(userName);
             if (userInfoVO == null || StringUtils.isBlank(userInfoVO.getUserId())) {
                 paramsMap.put("buyerId", INVALID_PARAM_STRING);
             }else{
