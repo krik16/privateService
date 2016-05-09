@@ -683,6 +683,15 @@
                         </webResources>
                     </configuration>
                 </plugin>
+                <!-- 指定项目的JDK版本 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.7</source>
+                        <target>1.7</target>
+                    </configuration>
+                </plugin>
 
                 <!-- 要将源码放上去, 需要加入这个插件 -->
                 <plugin>
