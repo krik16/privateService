@@ -4,8 +4,8 @@ package com.rongyi.core.enumerate.malllife;
  * @author jiejie 2014年6月30日 上午10:37:20
  */
 public enum ContentCategoryEnum {
-    BENIFIT("benifit", "Mall·福利"), SPECIAL("special", "Mall·专题"), CHILD("child", "Mall·亲子"), ACTIVITY("activity", "Mall·活动"),
-    MODEL("model", "Mall·时尚"), EAT("eat", "Mall·吃货"), ART("art", "Mall·艺术"),STRATEGY("strategy","Mall·攻略");
+    BENIFIT("benifit", "Mall·福利"), SPECIAL("special", "Mall·专题"), CHILD("child", "亲子乐"), ACTIVITY("activity", "爱娱乐"),
+    MODEL("model", "专柜货"), EAT("eat", "吃货街"), ART("art", "Mall·艺术"),STRATEGY("strategy","Mall·攻略");
 
     private String value;
     private String category;
@@ -38,5 +38,20 @@ public enum ContentCategoryEnum {
             }
         }
         return null;
+    }
+    
+    //亲子乐
+    public static boolean isChild(String value) {
+        return CHILD.getValue().equals(value);
+    }
+    
+    //爱娱乐
+    public static boolean isActivity(String value) {
+        return ACTIVITY.getValue().equals(value);
+    }
+    
+    //吃货街
+    public static boolean isEAT(String value) {
+        return EAT.getValue().equals(value);
     }
 }

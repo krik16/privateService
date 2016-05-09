@@ -9,8 +9,8 @@ import java.io.Serializable;
  */
 public class ContentVO implements Serializable {
 
-    private Integer id;
-    private String  type;
+    private Integer id;//活动id
+    private String  type;//article/activity/sameCity: 文章/活动/同城
     private String  title;
     private String  mallName;
     private double  logoX;
@@ -26,9 +26,18 @@ public class ContentVO implements Serializable {
     private String  description;    //分享描述
 
     private Integer mallNumber; //活动被举行商场数量 
-    private String  shareUrl;
+    private String  shareUrl;//分享链接
+    private Integer style; //1:精彩活动 2优惠资讯
     
-    public String getDescription() {
+    public Integer getStyle() {
+		return style;
+	}
+
+	public void setStyle(Integer style) {
+		this.style = style;
+	}
+
+	public String getDescription() {
 		return description;
 	}
 
@@ -162,6 +171,18 @@ public class ContentVO implements Serializable {
 
 	public void setMallNumber(Integer mallNumber) {
 		this.mallNumber = mallNumber;
+	}
+
+	@Override
+	public String toString() {
+		return "ContentVO [id=" + id + ", type=" + type + ", title=" + title
+				+ ", mallName=" + mallName + ", logoX=" + logoX + ", logoY="
+				+ logoY + ", totalCount=" + totalCount + ", picUrl=" + picUrl
+				+ ", recommend=" + recommend + ", refType=" + refType
+				+ ", isFav=" + isFav + ", articleUrl=" + articleUrl
+				+ ", refId=" + refId + ", category=" + category
+				+ ", description=" + description + ", mallNumber=" + mallNumber
+				+ ", shareUrl=" + shareUrl + ", style=" + style + "]";
 	}
 
 
