@@ -2,10 +2,12 @@ package com.rongyi.easy.content_v2.entity;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import java.io.Serializable;
+
 /**
  * Created by yangyang on 2016/5/6.
  */
-public class ContentParam {
+public class ContentParam implements Serializable{
     private static final Integer CURRENTPAGE = 1;
     private static final Integer PAGESIZE = 10;
     /**for*/
