@@ -2,6 +2,7 @@ package com.rongyi.core.bean;
 
 import java.io.Serializable;
 
+import com.rongyi.core.constant.Constants;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -34,16 +35,16 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * @author Breggor
  */
 public class ResponseVO implements java.io.Serializable {
-	private static final long serialVersionUID = 4807318268209609704L;
-	
-	public static final Meta SUCCESS = new Meta(0, "success"); //成功
-    public static final Meta FAILURE = new Meta(1, "failure"); //失败
+    private static final long serialVersionUID = 4807318268209609704L;
+
+    public static final Meta SUCCESS = new Meta(0, "success",Constants.JSON_RESULT.STATUS_NORMAL); //成功
+    public static final Meta FAILURE = new Meta(1, "failure",Constants.JSON_RESULT.STATUS_ABNORMAL); //失败
 
     private Meta meta;      	//errno=0：成功, errno=1：失败
     private Result result;  	//数据
-    
+
     public ResponseVO(){
-    	
+
     }
 
 
@@ -98,9 +99,9 @@ public class ResponseVO implements java.io.Serializable {
      * @return ResponseData
      */
     public static ResponseVO failure(int errno, String msg) {
-        return new ResponseVO(new Meta(errno, msg), null);
+        return new ResponseVO(new Meta(errno, msg,Constants.JSON_RESULT.STATUS_ABNORMAL), null);
     }
-    
+
     /**
      * 失败码/失败信息回值对象
      *
@@ -109,7 +110,7 @@ public class ResponseVO implements java.io.Serializable {
      * @return ResponseData
      */
     public static <T> ResponseVO failure(int errno, String msg, T data) {
-        return new ResponseVO(new Meta(errno, msg), new Result(data, null));
+        return new ResponseVO(new Meta(errno, msg, Constants.JSON_RESULT.STATUS_NORMAL), new Result(data, null));
     }
 
 
@@ -174,15 +175,16 @@ public class ResponseVO implements java.io.Serializable {
         @Override
         public String toString() {
             return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                    .append("page", page)
-                    .append("data", data)
-                    .toString();
+                .append("page", page)
+                .append("data", data)
+                .toString();
         }
     }
 
     public static class Meta implements Serializable {
         private int errno;      //错误码
         private String msg;     //提示信息
+        private int status;
 
         private Meta() {}
 
@@ -190,7 +192,11 @@ public class ResponseVO implements java.io.Serializable {
             this.errno = errno;
             this.msg = msg;
         }
-
+        private Meta(int errno, String msg,int status) {
+            this.errno = errno;
+            this.msg = msg;
+            this.status = status;
+        }
         public void setErrno(int errno) {
             this.errno = errno;
         }
@@ -208,6 +214,13 @@ public class ResponseVO implements java.io.Serializable {
             return errno;
         }
 
+        public int getStatus() {
+            return status;
+        }
+
+        public void setStatus(int status) {
+            this.status = status;
+        }
 
         @Override
         public boolean equals(Object o) {
@@ -218,31 +231,33 @@ public class ResponseVO implements java.io.Serializable {
             Meta meta = (Meta) o;
 
             return new EqualsBuilder()
-                    .append(errno, meta.errno)
-                    .append(msg, meta.msg)
-                    .isEquals();
+                .append(errno, meta.errno)
+                .append(msg, meta.msg)
+                .isEquals();
         }
 
         @Override
         public int hashCode() {
             return new HashCodeBuilder(17, 37)
-                    .append(errno)
-                    .append(msg)
-                    .toHashCode();
+                .append(errno)
+                .append(msg)
+                .append(status)
+                .toHashCode();
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                    .append("errno", errno)
-                    .append("msg", msg)
-                    .toString();
+                .append("errno", errno)
+                .append("msg", msg)
+                .append("status", status)
+                .toString();
         }
     }
 
     public static class Page implements Serializable {
-		private static final long serialVersionUID = -9015310768471855060L;
-		private Integer currentPage;	//当前页：统一从1开始
+        private static final long serialVersionUID = -9015310768471855060L;
+        private Integer currentPage;	//当前页：统一从1开始
         private Integer pageSize = 10; 	//每页行数
         private Integer totalCount; 	//总行数
         private Integer totalPage = 0;	//总页数
@@ -304,19 +319,19 @@ public class ResponseVO implements java.io.Serializable {
         @Override
         public String toString() {
             return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                    .append("currentPage", currentPage)
-                    .append("pageSize", pageSize)
-                    .append("totalCount", totalCount)
-                    .toString();
+                .append("currentPage", currentPage)
+                .append("pageSize", pageSize)
+                .append("totalCount", totalCount)
+                .toString();
         }
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("meta", meta)
-                .append("result", result)
-                .toString();
+            .append("meta", meta)
+            .append("result", result)
+            .toString();
     }
 
     public static void main(String[] args) {
