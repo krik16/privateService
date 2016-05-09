@@ -1,5 +1,6 @@
 package com.rongyi.tms.web.controller.v2;
 
+import com.rongyi.core.bean.ResponseData;
 import com.rongyi.tms.Exception.PermissionException;
 import com.rongyi.tms.service.AccessService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +26,10 @@ public class BaseControllerV2 {
      */
     public void permissionCheck(HttpServletRequest request,String permissionName){
         try {
-            //TODO 测试阶段暂注释权限
-//            ResponseData responseData = accessService.check(request, permissionName);
-//            if (responseData.getMeta().getErrno() != 0) {
-//                throw new PermissionException(String.valueOf(responseData.getMeta().getErrno()),responseData.getMeta().getMsg());
-//            }
+            ResponseData responseData = accessService.check(request, permissionName);
+            if (responseData.getMeta().getErrno() != 0) {
+                throw new PermissionException(String.valueOf(responseData.getMeta().getErrno()),responseData.getMeta().getMsg());
+            }
         }catch (PermissionException e){
             throw e;
         }catch (Exception e){
