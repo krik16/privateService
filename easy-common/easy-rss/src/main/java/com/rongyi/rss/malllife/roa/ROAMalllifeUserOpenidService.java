@@ -25,6 +25,23 @@ public interface ROAMalllifeUserOpenidService {
 	 * @throws Exception
 	 */
 	public List<MalllifeUserOpenidEntity> selectUserOpenListByOpenId(Integer type,String openId) throws Exception;
+	
+	/**
+	 * 根据openId和type查询绑定的账号
+	 * @param type1:微信，2:新浪微博
+	 * @param openId
+	 * @return
+	 * @throws Exception
+	 */
+	public MalllifeUserOpenidEntity selectUserOpenByOpenId(Integer type,String openId) throws Exception;
+	
+	/**
+	 * 根据主键id查询
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	public MalllifeUserOpenidEntity selectById(Integer id) throws Exception;
 
 
 

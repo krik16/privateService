@@ -73,8 +73,7 @@ public class ShareCouponRecordEntity implements Serializable {
 		this.version = version;
 	}
 	
-	public ShareCouponRecordEntity(ShareCouponRecordEntity entity) {
-		super();
+	public void shareCouponRecordEntity(ShareCouponRecordEntity entity) {
 		this.id = entity.getId();
 		this.shareId = entity.getShareId();
 		this.orderNo = entity.getOrderNo();

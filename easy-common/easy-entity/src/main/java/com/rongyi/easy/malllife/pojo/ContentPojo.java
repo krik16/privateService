@@ -2,6 +2,7 @@ package com.rongyi.easy.malllife.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author jiejie 2014年6月23日 下午6:46:36
@@ -62,8 +63,28 @@ public class ContentPojo implements Serializable{
     private Integer isExpired; // 是否过期
     
     private String grouponId; // 团购券ID
+    private String brandLogo;// 文章关联品牌图片
+    private Date push_at;//推送时间即发布时间
+    private String connect_id;//关联映射表id
+    private List<String> mallIds;
     
-    public Integer getActivity_recommend_Timer() {
+	public String getBrandLogo() {
+		return brandLogo;
+	}
+
+	public void setBrandLogo(String brandLogo) {
+		this.brandLogo = brandLogo;
+	}
+
+	public Date getPush_at() {
+		return push_at;
+	}
+
+	public void setPush_at(Date push_at) {
+		this.push_at = push_at;
+	}
+
+	public Integer getActivity_recommend_Timer() {
 		return activity_recommend_Timer;
 	}
 
@@ -334,5 +355,19 @@ public class ContentPojo implements Serializable{
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public List<String> getMallIds() {
+		return mallIds;
+	}
+	public void setMallIds(List<String> mallIds) {
+		this.mallIds = mallIds;
+	}
+
+	public String getConnect_id() {
+		return connect_id;
+	}
+
+	public void setConnect_id(String connect_id) {
+		this.connect_id = connect_id;
 	}
 }

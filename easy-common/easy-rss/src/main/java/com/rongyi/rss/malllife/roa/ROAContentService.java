@@ -378,7 +378,7 @@ public interface ROAContentService {
 	* @date 2016年5月6日 上午10:30:43 
 	* @throws
 	 */
-	public List<String> allListWelfareNew(Date pullAt,List<String> brandIdList) throws Exception;
+	public List<Map<String,Object>> allListWelfareNew(Date pullAt,List<String> brandIdList) throws Exception;
 	/**
 	 * 
 	* @Title: allListWrlFaraOld 
@@ -391,7 +391,7 @@ public interface ROAContentService {
 	* @date 2016年5月6日 上午10:32:57 
 	* @throws
 	 */
-	public List<ContentPojo> allListWelFareOld(List<String> activityIdList)throws Exception;
+	public List<ContentPojo> allListWelFareOld(List<Map<String,Object>> activityMap)throws Exception;
 	/**
 	 * 
 	* @Title: pagingListWelFare 
@@ -404,4 +404,17 @@ public interface ROAContentService {
 	* @throws
 	 */
 	public PagingVO<ContentPojo> pagingListWelFare(Integer pageSize,Integer currentPage) throws Exception;
+	/**
+	 * 
+	* @Title: countWelFareNew 
+	* @Description: 查询爱品牌最新数量用于前端展示
+	* @param @param pullAt
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return int    返回类型 
+	* @author shaozhou
+	* @date 2016年5月9日 上午10:02:07 
+	* @throws
+	 */
+	public int countWelFareNew(Date pullAt) throws Exception;
 }

@@ -395,5 +395,19 @@ public interface ROAContentService {
      * @author wangjh7
      * @return
      */
-    public int getCountContentByModuleCode(ContentParam contentParam) ;
+    public Long getCountContentByModuleCode(ContentParam contentParam) ;
+	/**
+	 * 根据forum_code查询首页信息
+	 * @param code
+	 * @return
+	 */
+	public ForumHomepage findHomepageByCode(String code);
+
+	/**
+	 * 根据forum_code查询首页信息
+	 * @param code
+	 * @return
+	 */
+	public ForumHomepage findHomepageByCode(String code);
+	
 }

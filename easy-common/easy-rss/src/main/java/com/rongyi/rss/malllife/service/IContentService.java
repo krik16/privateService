@@ -355,11 +355,13 @@ public interface IContentService {
 	public PagingVO<ContentPojo> pagingContentListByMallId(String id, int pageSize, Integer currentPage);
 
 
-	public List<String> allListWelfareNew(Date pullAt, List<String> brandIdList);
+	public List<Map<String, Object>> allListWelfareNew(Date pullAt, List<String> brandIdList);
 
 
-	public List<ContentPojo> allListWelFareOld(List<String> activityIdList);
+	public List<ContentPojo> allListWelFareOld(List<Map<String, Object>> activityIdList) throws Exception;
 
 
 	public PagingVO<ContentPojo> pagingListWelFare(Integer pageSize, Integer currentPage);
+	
+	public int countWelFareNew(Date pullAt);
 }

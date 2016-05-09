@@ -208,5 +208,13 @@ public interface IMallLifeUserInfoService {
      */
     public String genUserId(String phone,String channel)throws Exception ;
 
+    /**
+     * 查询所有状态的用户信息 包含预注册
+     * @param phone
+     * @return
+     * @throws Exception
+     */
+    public UserInfoVO findAllStateUserByPhone(String phone) throws Exception;
+
 
 }

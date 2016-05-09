@@ -9,7 +9,7 @@ public interface ROAShareCouponRecordService {
 	
 	/**
 	 * 
-	 * @param couponCode、shareId、orderNum、orderType、price 
+	 * @param  、shareId、orderNum、orderType、price
 	 * @return
 	 * @throws Exception
 	 */
@@ -17,7 +17,7 @@ public interface ROAShareCouponRecordService {
 	
 	/**
 	 * 
-	 * @param userOpenidId、nickName、headImg、couponCode、orderNum、shareId
+	 * @param  、nickName、headImg、couponCode、orderNum、shareId
 	 * @return
 	 * @throws Exception
 	 */
@@ -32,7 +32,7 @@ public interface ROAShareCouponRecordService {
 	
 	/**
 	 * 查询用户已领取的记录
-	 * @param shareId、orderNo、openId、type
+	 * @param  、orderNo、openId、type
 	 * @return
 	 * @throws Exception
 	 */
