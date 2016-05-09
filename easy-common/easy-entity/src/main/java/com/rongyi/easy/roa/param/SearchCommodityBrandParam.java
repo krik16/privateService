@@ -18,7 +18,8 @@ public class SearchCommodityBrandParam extends MalllifeBaseParam implements Seri
 	private String mallId;		//商场id
 	private String keyword;//品牌搜索关键字
 	private String source;//1微信  2终端屏
-	private List<String> brandIds;
+	private List<String> brandMids;  // mongo ids
+	private List<String> brandIds;   // mysql ids
 
 	public String getMallId() {
 		return mallId;
@@ -40,10 +41,16 @@ public class SearchCommodityBrandParam extends MalllifeBaseParam implements Seri
 		this.source = source;
 	}
 
+	public List<String> getBrandMids() {
+		return brandMids;
+	}
+
+	public void setBrandMids(List<String> brandMids) {
+		this.brandMids = brandMids;
+	}
 	public List<String> getBrandIds() {
 		return brandIds;
 	}
-
 	public void setBrandIds(List<String> brandIds) {
 		this.brandIds = brandIds;
 	}
