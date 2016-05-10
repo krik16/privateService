@@ -176,6 +176,9 @@ public class CartOrderController extends BaseControllerV2 {
             }else if(Integer.valueOf(payChannel) == 1){
                 paramsMap.put("payChannel",PaymentEventType.WEIXIN_PAY);
             }
+            else if(Integer.valueOf(payChannel) == 4){
+                paramsMap.put("payChannel",PaymentEventType.ZERO_PAY);
+            }
         }
         LOGGER.info("warpToParamMap end. paramsMap={}",paramsMap);
         return paramsMap;

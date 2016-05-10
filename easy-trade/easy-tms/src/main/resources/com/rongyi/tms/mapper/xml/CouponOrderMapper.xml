@@ -107,6 +107,9 @@
 			<if test="payChannel==1">
 				AND trade_order.pay_channel=5
 			</if>
+			<if test="payChannel==4">
+				AND trade_order.pay_channel=0
+			</if>
 		</if>
 		<if test="orderNo != null and orderNo != ''">
 			and trade_order.order_no like
