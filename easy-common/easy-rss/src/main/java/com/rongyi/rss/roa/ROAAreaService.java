@@ -1,9 +1,11 @@
 package com.rongyi.rss.roa;
 
 import java.util.List;
+import java.util.Map;
 
 import com.rongyi.easy.bdata.vo.BdAreaVo;
 import com.rongyi.easy.roa.vo.AreaCityVO;
+
 import org.bson.types.ObjectId;
 
 import com.rongyi.easy.roa.entity.AreaEntity;
@@ -61,4 +63,12 @@ public interface ROAAreaService {
 	 * @return
 	 */
 	public BdAreaVo getAreaVoByAreaId(Integer areaId);
+	
+	/**
+	 * 查询区域VO列表
+	 * @param map
+	 *          areaIds  区域ID集合w
+	 * @return
+	 */
+	public List<BdAreaVo> getAreaVoByParam(Map map);
 }
