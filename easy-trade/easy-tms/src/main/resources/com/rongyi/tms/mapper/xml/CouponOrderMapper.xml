@@ -26,7 +26,7 @@
 		<result column="score_discount" property="scoreDiscount" jdbcType="DOUBLE" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		trade_order.id,
+		DISTINCT trade_order.id,
 		trade_order.order_no,
 		trade_order.user_id,
 		trade_order.user_name,
