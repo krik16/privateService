@@ -15,7 +15,7 @@ public class TemplateRound implements Serializable {
     /**活动模版id*/
     private Integer activityTemplateId;
     private String refIds;
-    private int stick;
+    private int sort;
     /**创建时间*/
     private Date createAt;
     /**
@@ -69,12 +69,12 @@ public class TemplateRound implements Serializable {
         this.refIds = refIds;
     }
 
-    public int getStick() {
-        return stick;
+    public int getSort() {
+        return sort;
     }
 
-    public void setStick(int stick) {
-        this.stick = stick;
+    public void setSort(int sort) {
+        this.sort = sort;
     }
 
     public Date getCreateAt() {
@@ -115,7 +115,7 @@ public class TemplateRound implements Serializable {
                 .append("id", id)
                 .append("bannerPic", bannerPic)
                 .append("refIds", refIds)
-                .append("stick", stick)
+                .append("sort", sort)
                 .append("createAt", createAt)
                 .append("createBy", createBy)
                 .append("createAt", createAt)
