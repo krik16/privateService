@@ -9,6 +9,9 @@ import java.io.Serializable;
  */
 public class LiveBrandVO implements Serializable {
 	private static final long serialVersionUID = 1L;
+	public LiveBrandVO(){
+		this.status = 0;
+	}
 	/**
 	 * 品牌id
 	 */
@@ -22,6 +25,14 @@ public class LiveBrandVO implements Serializable {
 	 */
 	private String brandLogo;
 	
+	private int status;
+	
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
 	public String getBrandId() {
 		return brandId;
 	}

@@ -16,6 +16,13 @@ public class BrandRss extends BaseParam implements Serializable{
 	private String key;
 	private String brandName;
 	private String brandLogo;
+	private String brandId;
+	public String getBrandId() {
+		return brandId;
+	}
+	public void setBrandId(String brandId) {
+		this.brandId = brandId;
+	}
 	private List<Map> brandIds;
 	
 	public String getActivityId() {
