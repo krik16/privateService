@@ -41,7 +41,6 @@ import java.util.Map;
 /**
  * Author: 柯军
  * Description: 优惠券订单列表
- *
  **/
 
 @Controller
@@ -98,7 +97,7 @@ public class CouponOrderControllerV2 extends BaseControllerV2 {
         LOGGER.info("优惠券订单详情:id={}", id);
         ResponseData responseData;
         try {
-            permissionCheck(request, "ORDER_COUPON_VIEW");
+//            permissionCheck(request, "ORDER_COUPON_VIEW");
             CouponOrderDetailVO couponOrderDetailVO = new CouponOrderDetailVO();
             CouponOrderVO couponOrderVO = couponOrderService.selectById(id);
             BeanUtils.copyProperties(couponOrderVO, couponOrderDetailVO);
@@ -154,7 +153,7 @@ public class CouponOrderControllerV2 extends BaseControllerV2 {
                 }
                 //最后一笔券获得剩余优惠
                 if (couponVOList.size() > 1) {
-                    couponVOList.get(couponVOList.size() - 1).setHbDiscount(lastHbDiscount.divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
+                    couponVOList.get(couponVOList.size() - 1).setHbDiscount(lastHbDiscount.divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP).doubleValue());
                     couponVOList.get(couponVOList.size() - 1).setRebateDisCount(lastRebateDiscount.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
                     couponVOList.get(couponVOList.size() - 1).setScoreDisCount(lastScoreDiscount.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
                     //最后一笔实际支付金额=平均支付金额-(最后一笔红包优惠)-(最后一笔抵扣券优惠)-(最后一笔积分优惠)
@@ -163,8 +162,8 @@ public class CouponOrderControllerV2 extends BaseControllerV2 {
 
             }
             couponOrderDetailVO.setCouponList(couponVOList);
-            couponOrderDetailVO.setOrigTotalPrice(new BigDecimal(origTotalPrice).divide(new BigDecimal(100), BigDecimal.ROUND_HALF_UP).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
-            couponOrderDetailVO.setUnitTotalPrice(new BigDecimal(unitTotalPrice).divide(new BigDecimal(100), BigDecimal.ROUND_HALF_UP).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
+            couponOrderDetailVO.setOrigTotalPrice(new BigDecimal(origTotalPrice).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP).doubleValue());
+            couponOrderDetailVO.setUnitTotalPrice(new BigDecimal(unitTotalPrice).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP).doubleValue());
             responseData = ResponseData.success(couponOrderDetailVO);
         } catch (PermissionException e) {
             LOGGER.error(e.getMessage());
