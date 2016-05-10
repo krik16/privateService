@@ -167,6 +167,9 @@ public enum ConstantEnum {
     DETAIL_QUERY_EXCEPTION("1019211","详情查询失败"),
     EXCEPTION_LIMIT_COUNT("1019212","报表导出数据超出上限,请重新过滤后再选择导出"),
 
+    RESULT_IS_EMPTY("1019213","查询结果为空"),
+    EXCEPTION_INTERFACE("1019214","接口异常"),
+
     EXCEL_LIMIT_COUNT(5000,"交易明细报表导出限制总数");
     interface ACCOUNT_STATUS{
         int ACCOUNT_STATUS0 = 0;//登陆账号和支付账号正常
