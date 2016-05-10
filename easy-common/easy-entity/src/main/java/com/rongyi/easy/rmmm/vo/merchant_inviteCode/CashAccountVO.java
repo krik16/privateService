@@ -11,7 +11,7 @@ public class CashAccountVO implements Serializable{
 	private String bankCardId;//银行卡号
 	private String bankName;//银行名称  开户银行
 	private String bankUserName;//持卡人姓名
-	private int isDefault ;// 是否为默认资金账号 0是1否
+	private int isDefault = 1 ;// 是否为默认资金账号 0是1否
 	
 	
 	public Integer getBankId() {
