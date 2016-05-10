@@ -84,6 +84,7 @@ public class SubOrderController extends BaseControllerV2 {
 
     @Autowired
     private ROACooperationMallService roaCooperationMallService;
+
     /**
      * 条件查询订单列表
      *
@@ -211,7 +212,7 @@ public class SubOrderController extends BaseControllerV2 {
     public void exportExcel(SubOrderExcelVO subOrderExcelVO, HttpServletResponse response, HttpServletRequest request) {
         LOGGER.info("报表导出:subOrderExcelVO={}", subOrderExcelVO);
         try {
-            Map<String,Object> paramsMap = subOrderExcelVO.toMap();
+            Map<String, Object> paramsMap = subOrderExcelVO.toMap();
             permissionCheck(request, "ORDER_GOODSON_EXPORT");
             this.replaceListToNull(paramsMap);// 过滤前台传入的空字符串
             warpToParamMap(paramsMap);
@@ -312,12 +313,12 @@ public class SubOrderController extends BaseControllerV2 {
         UserInfoVO userInfoVO;
         if (StringUtils.isNotBlank(userName)) {
             try {
-				userInfoVO = roaMalllifeUserService.getByPhone(userName);
-			} catch (Exception e) {
-				e.printStackTrace();
-	            LOGGER.error("获取商品详情失败,message={}", e);
-				throw new BizException(ConstantEnum.EXCEPTION_INTERFACE);
-			}
+                userInfoVO = roaMalllifeUserService.getByPhone(userName);
+            } catch (Exception e) {
+                e.printStackTrace();
+                LOGGER.error("获取商品详情失败,message={}", e);
+                throw new BizException(ConstantEnum.EXCEPTION_INTERFACE);
+            }
             if (userInfoVO == null || StringUtils.isBlank(userInfoVO.getUserId())) {
                 throw new BizException(ConstantEnum.RESULT_IS_EMPTY);
             }
@@ -336,7 +337,7 @@ public class SubOrderController extends BaseControllerV2 {
             UserInfo userInfo2 = iUserInfoService.getUserByMap(map);//买手
             if (userInfo2 != null)
                 guideIds.add(userInfo2.getId());
-            if (CollectionUtils.isEmpty(guideIds)){
+            if (CollectionUtils.isEmpty(guideIds)) {
                 throw new BizException(ConstantEnum.RESULT_IS_EMPTY);
             }
             paramsMap.put("guideIds", guideIds);
@@ -345,23 +346,23 @@ public class SubOrderController extends BaseControllerV2 {
         // 根据商场名称，模糊查询商铺ID集合
         Object mallId = paramsMap.get("mallId");
         if (null != mallId && StringUtils.isNotBlank(mallId.toString())) {
-        	List<Integer> shopIdList = this.getShopIdListByMallName(mallId.toString());
-        	if (CollectionUtils.isEmpty(shopIdList)) {
-        		throw new BizException(ConstantEnum.RESULT_IS_EMPTY);
-        	}
+            List<Integer> shopIdList = this.getShopIdListByMallName(mallId.toString());
+            if (CollectionUtils.isEmpty(shopIdList)) {
+                throw new BizException(ConstantEnum.RESULT_IS_EMPTY);
+            }
             paramsMap.put("shopList", shopIdList);
         }
         // 根据商铺名称，模糊查询商铺ID集合
         Object shopId = paramsMap.get("shopId");
         if (null != shopId && StringUtils.isNotBlank(shopId.toString())) {
             List<Integer> shopIdList;
-			try {
-				shopIdList = this.getShopIdListByShopName(paramsMap.get("shopId").toString());
-			} catch (Exception e) {
-				e.printStackTrace();
-	            LOGGER.error("获取商品详情失败,message={}", e);
-				throw new BizException(ConstantEnum.EXCEPTION_INTERFACE);
-			}
+            try {
+                shopIdList = this.getShopIdListByShopName(paramsMap.get("shopId").toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+                LOGGER.error("获取商品详情失败,message={}", e);
+                throw new BizException(ConstantEnum.EXCEPTION_INTERFACE);
+            }
             if (CollectionUtils.isEmpty(shopIdList)) {
                 throw new BizException(ConstantEnum.RESULT_IS_EMPTY);
             }
@@ -371,7 +372,7 @@ public class SubOrderController extends BaseControllerV2 {
         // 根据商品名称，商品编码模糊查询订单
         String commodityName = (String) paramsMap.get("commodityName");
         if (StringUtils.isNotBlank(commodityName) || StringUtils.isNotBlank(commodityNo)) {
-            List<String> commodityIdList = mcmcCommodityService.selectCommodityByNameAndCode(commodityName,commodityNo);
+            List<String> commodityIdList = mcmcCommodityService.selectCommodityByNameAndCode(commodityName, commodityNo);
             if (CollectionUtils.isEmpty(commodityIdList)) {
                 throw new BizException(ConstantEnum.RESULT_IS_EMPTY);
             }
@@ -412,7 +413,13 @@ public class SubOrderController extends BaseControllerV2 {
             if (null != paramsMap.get("userPhone") && StringUtils.isBlank(paramsMap.get("userPhone").toString())) {
                 paramsMap.remove("userPhone");
             }
-        }if (null != paramsMap) {
+        }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("username") && StringUtils.isBlank(paramsMap.get("username").toString())) {
+                paramsMap.remove("username");
+            }
+        }
+        if (null != paramsMap) {
             if (null != paramsMap.get("commodityNo") && StringUtils.isBlank(paramsMap.get("commodityNo").toString())) {
                 paramsMap.remove("commodityNo");
             }
@@ -456,32 +463,33 @@ public class SubOrderController extends BaseControllerV2 {
 
     /**
      * 根据商场名称，模糊查询店铺ID集合
+     *
      * @param mallName
      * @return
      * @throws Exception
      */
-	private List<Integer> getShopIdListByMallName(String mallName) throws BizException {
-		List<Integer> shopIdList = null;
+    private List<Integer> getShopIdListByMallName(String mallName) throws BizException {
+        List<Integer> shopIdList = null;
         // 根据mallName 查询mallId集合
         List<MallCooperateEntity> mallCooperateEntityList;
         try {
             mallCooperateEntityList = roaCooperationMallService.getMallListByMallName(mallName);
-		} catch (Exception e) {
-			e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
             LOGGER.error("获取商品详情失败,message={}", e);
-			throw new BizException(ConstantEnum.EXCEPTION_INTERFACE);
-		}
+            throw new BizException(ConstantEnum.EXCEPTION_INTERFACE);
+        }
         if (CollectionUtils.isNotEmpty(mallCooperateEntityList)) {
-        	// 循环商场结果集，获取商场ID集合
+            // 循环商场结果集，获取商场ID集合
             List<String> mallIdList = new ArrayList<>();
-            for (MallCooperateEntity mallCooperateEntity:mallCooperateEntityList) {
+            for (MallCooperateEntity mallCooperateEntity : mallCooperateEntityList) {
                 if (null != mallCooperateEntity && null != mallCooperateEntity.getId()) {
                     mallIdList.add(mallCooperateEntity.getId().toString());
                 }
             }
             // 根据mallIdList，查询shopIdList
             if (CollectionUtils.isNotEmpty(mallIdList)) {
-            	Map<String, Object> map = new HashMap<>();
+                Map<String, Object> map = new HashMap<>();
                 map.put("mallIds", mallIdList);
                 shopIdList = roaShopService.getAllShopIdBuMallId(map);
             }
@@ -491,6 +499,7 @@ public class SubOrderController extends BaseControllerV2 {
 
     /**
      * 根据店铺名称，模糊查询店铺ID集合
+     *
      * @param shopName
      * @return
      * @throws Exception
@@ -502,6 +511,6 @@ public class SubOrderController extends BaseControllerV2 {
         sb.append("%").append(shopName).append("%");
         map.put("vagueShopName", sb.toString());
         // 接口的sql模糊查询没有写%，需要手动拼接到参数
-		return roaShopService.getAllShopIdBuMallId(map);
-	}
+        return roaShopService.getAllShopIdBuMallId(map);
+    }
 }
