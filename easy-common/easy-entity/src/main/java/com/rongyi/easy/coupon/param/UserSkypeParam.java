@@ -45,6 +45,10 @@ public class UserSkypeParam implements Serializable {
      */
     private String activityName;
 
+    private String couponCode;
+
+    private String couponId;
+
     public String getUserId() {
         return userId;
     }
@@ -117,6 +121,22 @@ public class UserSkypeParam implements Serializable {
         this.activityName = activityName;
     }
 
+    public String getCouponCode() {
+        return couponCode;
+    }
+
+    public void setCouponCode(String couponCode) {
+        this.couponCode = couponCode;
+    }
+
+    public String getCouponId() {
+        return couponId;
+    }
+
+    public void setCouponId(String couponId) {
+        this.couponId = couponId;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("UserSkypeParam{");
@@ -127,6 +147,8 @@ public class UserSkypeParam implements Serializable {
         sb.append(", activityType=").append(activityType);
         sb.append(", activityId=").append(activityId);
         sb.append(", activityName='").append(activityName).append('\'');
+        sb.append(", couponCode='").append(couponCode).append('\'');
+        sb.append(", couponId='").append(couponId).append('\'');
         sb.append('}');
         return sb.toString();
     }

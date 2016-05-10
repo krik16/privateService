@@ -40,7 +40,7 @@ public interface SharePushActivityService {
      * 判断某个分享活动是否已经结束
      * @param param
      *  activityId 必传
-     * @return
+     * @return true 没有结束  false 结束了
      */
     public boolean activityIsOver(UserSkypeParam param);
 
