@@ -5,7 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 public class UserInfo implements Serializable{
-    private Integer id;
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
 
     private Integer type;
 
@@ -67,10 +69,10 @@ public class UserInfo implements Serializable{
     
     private UserShop userShop;
     
-    private String useCode; //注册使用的邀请码
+	private String useCode; //注册使用的邀请码
     
-    private String jsessionid ;//摩店登录标识
-    
+    private String jsessionid ;//摩店登录标识	
+	private Integer isEdit = 1;  //是否可编辑  0可编辑  1不可编辑
     public String getStopReason() {
 		return stopReason;
 	}
@@ -333,6 +335,10 @@ public class UserInfo implements Serializable{
 
 	public void setJsessionid(String jsessionid) {
 		this.jsessionid = jsessionid;
+	}public Integer getIsEdit() {
+		return isEdit;
 	}
 
-}
+	public void setIsEdit(Integer isEdit) {
+		this.isEdit = isEdit;
+	}}
