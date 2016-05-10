@@ -42,6 +42,7 @@ public class OrderManagerVO implements Serializable {
 	private Integer orderSource;//订单来源
 
 
+
 	/**
 	 * 商品编码
 	 */
@@ -78,6 +79,11 @@ public class OrderManagerVO implements Serializable {
 	 * 商品图片
 	 */
 	List<String> picList;
+
+	/*
+	 *单价
+	 */
+	private Double unitPrice;
 	public String getOrderCartNo() {
 		return orderCartNo;
 	}
@@ -289,6 +295,14 @@ public class OrderManagerVO implements Serializable {
 
 	public void setCommodityCurrentPrice(String commodityCurrentPrice) {
 		this.commodityCurrentPrice = commodityCurrentPrice;
+	}
+
+	public Double getUnitPrice() {
+		return unitPrice;
+	}
+
+	public void setUnitPrice(Double unitPrice) {
+		this.unitPrice = unitPrice;
 	}
 
 	@Override
