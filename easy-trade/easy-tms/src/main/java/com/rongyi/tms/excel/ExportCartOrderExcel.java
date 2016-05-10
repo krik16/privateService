@@ -71,11 +71,10 @@ public class ExportCartOrderExcel {
                     sheet.getRow(i + 2).getCell(2).setCellValue(vo.getRealAmount().toString());
                     sheet.getRow(i + 2).getCell(3).setCellValue(vo.getPayAmount().toString());
                     sheet.getRow(i + 2).getCell(4).setCellValue(vo.getStatus() != null ? convertStatus(vo.getStatus().toString()) : "其他");
-                    sheet.getRow(i + 2).getCell(5).setCellValue(convertOrderSource(vo.getOrderSource()));
-                    sheet.getRow(i + 2).getCell(6).setCellValue(convertPayChannel(vo.getPayChannel()));
-                    sheet.getRow(i + 2).getCell(7).setCellValue(DateTool.date2String(vo.getCreateAt(), DateTool.FORMAT_DATETIME2));
-                    sheet.getRow(i + 2).getCell(8).setCellValue(DateTool.date2String(vo.getPayAt(), DateTool.FORMAT_DATETIME2));
-                    sheet.getRow(i + 2).getCell(9).setCellValue(vo.getBuyerName() + " " + vo.getBuyerPhone());
+//                    sheet.getRow(i + 2).getCell(5).setCellValue(convertOrderSource(vo.getOrderSource()));
+                    sheet.getRow(i + 2).getCell(5).setCellValue(convertPayChannel(vo.getPayChannel()));
+                    sheet.getRow(i + 2).getCell(6).setCellValue(DateTool.date2String(vo.getCreateAt(), DateTool.FORMAT_DATETIME2));
+                    sheet.getRow(i + 2).getCell(7).setCellValue(DateTool.date2String(vo.getPayAt(), DateTool.FORMAT_DATETIME2));
                 }
             }
             String outFile = "母订单记录_" + DateUtil.getCurrentDateYYYYMMDD() + ".xlsx";
@@ -179,7 +178,7 @@ public class ExportCartOrderExcel {
             orderCart.setRealAmount(orderCartVO.getRealAmount());
             orderCart.setPayAmount(orderCartVO.getPayAmount());
             orderCart.setStatus(orderCartVO.getStatus());
-            orderCart.setOrderSource(0);
+//            orderCart.setOrderSource(0);
             orderCart.setPayChannel(orderCartVO.getPayChannel());
             orderCart.setCreateAt(orderCartVO.getCreateAt());
             orderCart.setPayAt(orderCartVO.getPayAt());
