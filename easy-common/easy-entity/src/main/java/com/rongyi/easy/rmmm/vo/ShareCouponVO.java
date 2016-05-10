@@ -14,6 +14,27 @@ public class ShareCouponVO implements Serializable{
 	private String validEndTime;// 有效期结束时间
 	private String validStartTime;// 有效期开始时间
 	private List<ShareCouponDetailVO> others;//朋友领取红包列表
+    private String  picShareUrl;//	分享图片
+    private String  shareDes;//	分享描述
+    private String  shareTitle;//	分享标题
+	public String getPicShareUrl() {
+		return picShareUrl;
+	}
+	public void setPicShareUrl(String picShareUrl) {
+		this.picShareUrl = picShareUrl;
+	}
+	public String getShareDes() {
+		return shareDes;
+	}
+	public void setShareDes(String shareDes) {
+		this.shareDes = shareDes;
+	}
+	public String getShareTitle() {
+		return shareTitle;
+	}
+	public void setShareTitle(String shareTitle) {
+		this.shareTitle = shareTitle;
+	}
 	public String getMessage() {
 		return message;
 	}
@@ -74,7 +95,9 @@ public class ShareCouponVO implements Serializable{
 				+ ", price=" + price + ", status=" + status + ", message="
 				+ message + ", useDescription=" + useDescription
 				+ ", validEndTime=" + validEndTime + ", validStartTime="
-				+ validStartTime + ", others=" + others + "]";
+				+ validStartTime + ", others=" + others + ", picShareUrl="
+				+ picShareUrl + ", shareDes=" + shareDes + ", shareTitle="
+				+ shareTitle + "]";
 	}
 
 }
