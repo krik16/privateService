@@ -47,6 +47,37 @@ public class TemplateSale implements Serializable{
      */
     private Integer createBy;
 
+    /**
+     * 新版本pic
+     */
+    private String replacePic;
+    private int roundSum;//0特卖1单场次2多场次
+    private int roundType; //0特卖1专场中特卖2专场中拼单
+
+    public String getReplacePic() {
+        return replacePic;
+    }
+
+    public void setReplacePic(String replacePic) {
+        this.replacePic = replacePic;
+    }
+
+    public int getRoundSum() {
+        return roundSum;
+    }
+
+    public void setRoundSum(int roundSum) {
+        this.roundSum = roundSum;
+    }
+
+    public int getRoundType() {
+        return roundType;
+    }
+
+    public void setRoundType(int roundType) {
+        this.roundType = roundType;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -167,6 +198,9 @@ public class TemplateSale implements Serializable{
                 .append("shareTitle", shareTitle)
                 .append("shareDesc", shareDesc)
                 .append("createBy", createBy)
+                .append("replacePic", replacePic)
+                .append("roundSum", roundSum)
+                .append("roundType", roundType)
                 .toString();
     }
 }
