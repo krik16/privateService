@@ -1,5 +1,7 @@
 package com.rongyi.easy.msgcenter;
 
+import com.rongyi.easy.coupon.entity.CouponCode;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -19,7 +21,7 @@ public class ShareQualifiedDTO implements Serializable {
     /**
      * 锁定的券码
      */
-    private List<String> couponCode;
+    private List<CouponCode> couponCode;
     /**
      * 分享活动id
      */
@@ -41,11 +43,11 @@ public class ShareQualifiedDTO implements Serializable {
         this.hasQualify = hasQualify;
     }
 
-    public List<String> getCouponCode() {
+    public List<CouponCode> getCouponCode() {
         return couponCode;
     }
 
-    public void setCouponCode(List<String> couponCode) {
+    public void setCouponCode(List<CouponCode> couponCode) {
         this.couponCode = couponCode;
     }
 
@@ -73,6 +75,9 @@ public class ShareQualifiedDTO implements Serializable {
         this.obtainTimes = obtainTimes;
     }
 
+    public ShareQualifiedDTO(){
+        this.hasQualify=Boolean.FALSE;
+    }
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("ShareQualifiedDTO{");
