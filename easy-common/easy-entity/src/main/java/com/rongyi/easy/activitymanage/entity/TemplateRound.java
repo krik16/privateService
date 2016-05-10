@@ -12,6 +12,8 @@ import java.util.Date;
 public class TemplateRound implements Serializable {
     private Integer id;
     private String bannerPic;
+    /**活动模版id*/
+    private Integer activityTemplateId;
     private String refIds;
     private int stick;
     /**创建时间*/
@@ -26,6 +28,14 @@ public class TemplateRound implements Serializable {
     private Integer updateBy;
     /**版本*/
     private Integer version;
+
+    public Integer getActivityTemplateId() {
+        return activityTemplateId;
+    }
+
+    public void setActivityTemplateId(Integer activityTemplateId) {
+        this.activityTemplateId = activityTemplateId;
+    }
 
     public Integer getVersion() {
         return version;
@@ -112,6 +122,7 @@ public class TemplateRound implements Serializable {
                 .append("updateAt", updateAt)
                 .append("updateBy", updateBy)
                 .append("version", version)
+                .append("activityTemplateId", activityTemplateId)
                 .toString();
     }
 }
