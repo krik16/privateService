@@ -20,7 +20,7 @@ import com.rongyi.easy.malllife.param.MalllifeBaseParam;
  * 商品查询参数类
  *
  * @author  zhengyi, yaoyiwei
- * @date 2016-05-05
+ * @date 2016-05-09
  * @version 1.1
  */
 public class CommoditySearchParam  extends MalllifeBaseParam implements Serializable {
@@ -28,10 +28,6 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	private static final long serialVersionUID = -3577116644255163015L;
 
 	private String id;
-
-	private boolean extraFilterFlag;
-
-	private boolean extraSortFlag;
 
 	private List<String> brandMids;
 
@@ -73,8 +69,11 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 
 	/** 商品类型 (买手 1， 全部商品 0, 特卖场 2, 闪购 3，导购商品 4)*/   //old
 	// 商品类型1：所有商品 2：导购商品 3：买手商品 4：闪购 5：卖场  6,直播     new
-
 	private String commodityType;
+
+	private String filterMethodName;
+
+	private String sortMethodName;
 
 	/**
 	 * 商品spu
@@ -320,14 +319,6 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 		this.maxPrice = maxPrice;
 	}
 
-	public boolean isExtraFilterFlag() {
-		return extraFilterFlag;
-	}
-
-	public void setExtraFilterFlag(boolean extraFilterFlag) {
-		this.extraFilterFlag = extraFilterFlag;
-	}
-
 	public String getId() {
 		return id;
 	}
@@ -336,20 +327,28 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 		this.id = id;
 	}
 
-	public boolean isExtraSortFlag() {
-		return extraSortFlag;
-	}
-
-	public void setExtraSortFlag(boolean extraSortFlag) {
-		this.extraSortFlag = extraSortFlag;
-	}
-
 	public List<String> getBrandMids() {
 		return brandMids;
 	}
 
 	public void setBrandMids(List<String> brandMids) {
 		this.brandMids = brandMids;
+	}
+
+	public String getFilterMethodName() {
+		return filterMethodName;
+	}
+
+	public void setFilterMethodName(String filterMethodName) {
+		this.filterMethodName = filterMethodName;
+	}
+
+	public String getSortMethodName() {
+		return sortMethodName;
+	}
+
+	public void setSortMethodName(String sortMethodName) {
+		this.sortMethodName = sortMethodName;
 	}
 
 	@Override
