@@ -113,6 +113,7 @@ public class SubOrderController extends BaseControllerV2 {
                     orderManagerVO.setCommodityName(commodityVO.getCommodityName());
                     orderManagerVO.setCommoditySpecColumnList(commodityVO.getCommoditySpecList().get(0).getSpecColumnValues());
                     orderManagerVO.setCommodityNo(commodityVO.getCommodityCode());
+                    orderManagerVO.setCommodityCurrentPrice(commodityVO.getCommodityCurrentPrice());
                 }
                 List<String> picList = commodityService.getCommodityPicList(orderManagerVO.getCommodityMid());
                 orderManagerVO.setPicList(picList);
