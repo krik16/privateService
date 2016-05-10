@@ -65,6 +65,11 @@ public class OrderManagerVO implements Serializable {
 	private String commodityNo;
 
 	/**
+	 * 商品现价
+	 */
+	private String commodityCurrentPrice;
+
+	/**
 	 * 规格
 	 */
 	private List<CommoditySpecColumnVO> CommoditySpecColumnList;
@@ -276,6 +281,14 @@ public class OrderManagerVO implements Serializable {
 
 	public void setPicList(List<String> picList) {
 		this.picList = picList;
+	}
+
+	public String getCommodityCurrentPrice() {
+		return commodityCurrentPrice;
+	}
+
+	public void setCommodityCurrentPrice(String commodityCurrentPrice) {
+		this.commodityCurrentPrice = commodityCurrentPrice;
 	}
 
 	@Override
