@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.rongyi.tms.excel.ExportSubOrderExcel;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -46,7 +47,6 @@ import com.rongyi.tms.Exception.BizException;
 import com.rongyi.tms.Exception.PermissionException;
 import com.rongyi.tms.constants.Constant;
 import com.rongyi.tms.constants.ConstantEnum;
-import com.rongyi.tms.excel.ExportOsmOrderExcel;
 
 /**
  * 订单管理
@@ -65,7 +65,7 @@ public class SubOrderController extends BaseControllerV2 {
     private IUserInfoService iUserInfoService;
 
     @Autowired
-    private ExportOsmOrderExcel exportOsmOrderExcel;
+    private ExportSubOrderExcel exportSubOrderExcel;
 
     @Autowired
     private MSUserCouponService msUserCouponService;
@@ -215,7 +215,7 @@ public class SubOrderController extends BaseControllerV2 {
             permissionCheck(request, "ORDER_GOODSON_EXPORT");
             this.replaceListToNull(paramsMap);// 过滤前台传入的空字符串
             warpToParamMap(paramsMap);
-            exportOsmOrderExcel.exportExcel(request, response, paramsMap);
+            exportSubOrderExcel.exportExcel(request, response, paramsMap);
         } catch (BizException e) {
             LOGGER.error(e.getMessage());
             e.printStackTrace();
