@@ -1,32 +1,14 @@
 package com.rongyi.tms.web.controller.v2;
 
-import com.rongyi.core.bean.ResponseData;
-import com.rongyi.core.common.PagingVO;
-import com.rongyi.easy.bsoms.entity.UserInfo;
-import com.rongyi.easy.coupon.vo.MMUserCouponVO;
-import com.rongyi.easy.malllife.vo.UserInfoVO;
-import com.rongyi.easy.mcmc.vo.CommodityVO;
-import com.rongyi.easy.mcmc.vo.CommodityWebVO;
-import com.rongyi.easy.rmmm.vo.OrderManagerVO;
-import com.rongyi.easy.rmmm.vo.ParentOrderVO;
-import com.rongyi.easy.rmmm.vo.SonOrderVO;
-import com.rongyi.easy.roa.vo.MallVO;
-import com.rongyi.easy.tms.vo.v2.CommodityDetailVO;
-import com.rongyi.easy.tms.vo.v2.SubOrderDetailVO;
-import com.rongyi.easy.tms.vo.v2.SubOrderExcelVO;
-import com.rongyi.rss.bsoms.IUserInfoService;
-import com.rongyi.rss.coupon.mall.shop.MSUserCouponService;
-import com.rongyi.rss.malllife.roa.ROACommodityService;
-import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
-import com.rongyi.rss.mallshop.shop.ROAShopService;
-import com.rongyi.rss.mcmc.CommodityService;
-import com.rongyi.rss.roa.ROAMallService;
-import com.rongyi.rss.solr.McmcCommoditySolrService;
-import com.rongyi.rss.tradecenter.osm.IOrderQueryService;
-import com.rongyi.tms.Exception.PermissionException;
-import com.rongyi.tms.constants.Constant;
-import com.rongyi.tms.constants.ConstantEnum;
-import com.rongyi.tms.excel.ExportOsmOrderExcel;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -38,13 +20,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.rongyi.core.bean.ResponseData;
+import com.rongyi.core.common.PagingVO;
+import com.rongyi.easy.bsoms.entity.UserInfo;
+import com.rongyi.easy.coupon.vo.MMUserCouponVO;
+import com.rongyi.easy.malllife.vo.UserInfoVO;
+import com.rongyi.easy.mcmc.vo.CommodityVO;
+import com.rongyi.easy.mcmc.vo.CommodityWebVO;
+import com.rongyi.easy.rmmm.entity.MallCooperateEntity;
+import com.rongyi.easy.rmmm.vo.OrderManagerVO;
+import com.rongyi.easy.rmmm.vo.ParentOrderVO;
+import com.rongyi.easy.rmmm.vo.SonOrderVO;
+import com.rongyi.easy.tms.vo.v2.CommodityDetailVO;
+import com.rongyi.easy.tms.vo.v2.SubOrderDetailVO;
+import com.rongyi.easy.tms.vo.v2.SubOrderExcelVO;
+import com.rongyi.rss.bsoms.IUserInfoService;
+import com.rongyi.rss.coupon.mall.shop.MSUserCouponService;
+import com.rongyi.rss.malllife.roa.ROACommodityService;
+import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
+import com.rongyi.rss.mallshop.shop.ROACooperationMallService;
+import com.rongyi.rss.mallshop.shop.ROAShopService;
+import com.rongyi.rss.mcmc.CommodityService;
+import com.rongyi.rss.tradecenter.osm.IOrderQueryService;
+import com.rongyi.tms.Exception.BizException;
+import com.rongyi.tms.Exception.PermissionException;
+import com.rongyi.tms.constants.Constant;
+import com.rongyi.tms.constants.ConstantEnum;
+import com.rongyi.tms.excel.ExportOsmOrderExcel;
 
 /**
  * 订单管理
@@ -58,9 +60,6 @@ public class SubOrderController extends BaseControllerV2 {
 
     @Autowired
     private ROAMalllifeUserService roaMalllifeUserService;
-
-    @Autowired
-    private McmcCommoditySolrService mcmcCommoditySolrService;
 
     @Autowired
     private IUserInfoService iUserInfoService;
@@ -78,26 +77,13 @@ public class SubOrderController extends BaseControllerV2 {
     IOrderQueryService iOrderQueryService;
 
     @Autowired
-    private ROAMallService mallService;
-
-    @Autowired
     private ROAShopService roaShopService;
-
-    @Autowired
-    private com.rongyi.rss.roa.ROAShopService shopService;
 
     @Autowired
     private CommodityService mcmcCommodityService;
 
-    /**
-     * 无效入参
-     */
-    private static final String INVALID_PARAM_STRING = "-1";
-    /**
-     * 无效入参
-     */
-    private static final Integer INVALID_PARAM_INTEGER = -1;
-
+    @Autowired
+    private ROACooperationMallService roaCooperationMallService;
     /**
      * 条件查询订单列表
      *
@@ -110,7 +96,7 @@ public class SubOrderController extends BaseControllerV2 {
         ResponseData responseData;
         try {
             LOGGER.info("子订单列表:paramsMap={}", paramsMap);
-            permissionCheck(request, "ORDER_GOODSON_VIEW");
+//            permissionCheck(request, "ORDER_GOODSON_VIEW");
             this.replaceListToNull(paramsMap);// 过滤前台传入的空字符串
             warpToParamMap(paramsMap);
             PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchSubListByMap(paramsMap);
@@ -134,6 +120,10 @@ public class SubOrderController extends BaseControllerV2 {
             int totalPage = pagingVO.getTotalSize();
             int currentPage = pagingVO.getCurrentPage();
             responseData = ResponseData.success(orderForms, currentPage, Constant.PAGE.PAGESIZE, totalPage);
+        } catch (BizException e) {
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+            responseData = ResponseData.success(new ArrayList<>(), 1, Constant.PAGE.PAGESIZE, 0);
         } catch (PermissionException e) {
             LOGGER.error(e.getMessage());
             e.printStackTrace();
@@ -225,6 +215,9 @@ public class SubOrderController extends BaseControllerV2 {
             this.replaceListToNull(paramsMap);// 过滤前台传入的空字符串
             warpToParamMap(paramsMap);
             exportOsmOrderExcel.exportExcel(request, response, paramsMap);
+        } catch (BizException e) {
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
         } catch (PermissionException e) {
             LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
@@ -240,7 +233,6 @@ public class SubOrderController extends BaseControllerV2 {
     /**
      * 验证导出报表总数是否超过限制
      **/
-    @SuppressWarnings("unchecked")
     @RequestMapping(value = "/validateExcelCount")
     @ResponseBody
     public ResponseData validateExcelCount(@RequestBody Map<String, Object> paramsMap, HttpServletRequest request) {
@@ -256,6 +248,10 @@ public class SubOrderController extends BaseControllerV2 {
             LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
             return ResponseData.failure(Integer.valueOf(e.getCode()), e.getMessage());
+        } catch (BizException e) {
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+            responseData = ResponseData.success();
         } catch (Exception e) {
             e.printStackTrace();
             LOGGER.error("报表导出上限检查失败,message={}", e);
@@ -308,18 +304,23 @@ public class SubOrderController extends BaseControllerV2 {
     }
 
 
-    private Map<String, Object> warpToParamMap(Map<String, Object> paramsMap) throws Exception {
+    private Map<String, Object> warpToParamMap(Map<String, Object> paramsMap) throws BizException {
         String commodityNo = (String) paramsMap.get("commodityNo");
         String userName = (String) paramsMap.get("username");
         //查询用户条件
         UserInfoVO userInfoVO;
         if (StringUtils.isNotBlank(userName)) {
-            userInfoVO = roaMalllifeUserService.getByPhone(userName);
+            try {
+				userInfoVO = roaMalllifeUserService.getByPhone(userName);
+			} catch (Exception e) {
+				e.printStackTrace();
+	            LOGGER.error("获取商品详情失败,message={}", e);
+				throw new BizException(ConstantEnum.EXCEPTION_INTERFACE);
+			}
             if (userInfoVO == null || StringUtils.isBlank(userInfoVO.getUserId())) {
-                paramsMap.put("buyerId", INVALID_PARAM_STRING);
-            }else{
-                paramsMap.put("buyerId", userInfoVO.getUserId());
+                throw new BizException(ConstantEnum.RESULT_IS_EMPTY);
             }
+            paramsMap.put("buyerId", userInfoVO.getUserId());
         }
 
         if (paramsMap.containsKey("sellerAccount")) {
@@ -334,29 +335,34 @@ public class SubOrderController extends BaseControllerV2 {
             UserInfo userInfo2 = iUserInfoService.getUserByMap(map);//买手
             if (userInfo2 != null)
                 guideIds.add(userInfo2.getId());
-            if (CollectionUtils.isNotEmpty(guideIds))
-                paramsMap.put("guideIds", guideIds);
-            else {
-                guideIds.add(INVALID_PARAM_INTEGER);
-                paramsMap.put("guideIds", guideIds);
+            if (CollectionUtils.isEmpty(guideIds)){
+                throw new BizException(ConstantEnum.RESULT_IS_EMPTY);
             }
+            paramsMap.put("guideIds", guideIds);
         }
 
         // 根据商场名称，模糊查询商铺ID集合
         Object mallId = paramsMap.get("mallId");
         if (null != mallId && StringUtils.isNotBlank(mallId.toString())) {
-            List<Integer> shopIdList = this.getShopIdListByMallName(mallId.toString());
-            if (CollectionUtils.isEmpty(shopIdList)) {
-                shopIdList.add(INVALID_PARAM_INTEGER);
-            }
+        	List<Integer> shopIdList = this.getShopIdListByMallName(mallId.toString());
+        	if (CollectionUtils.isEmpty(shopIdList)) {
+        		throw new BizException(ConstantEnum.RESULT_IS_EMPTY);
+        	}
             paramsMap.put("shopList", shopIdList);
         }
         // 根据商铺名称，模糊查询商铺ID集合
         Object shopId = paramsMap.get("shopId");
         if (null != shopId && StringUtils.isNotBlank(shopId.toString())) {
-            List<Integer> shopIdList = this.getShopIdListByShopName(paramsMap.get("shopId").toString());
+            List<Integer> shopIdList;
+			try {
+				shopIdList = this.getShopIdListByShopName(paramsMap.get("shopId").toString());
+			} catch (Exception e) {
+				e.printStackTrace();
+	            LOGGER.error("获取商品详情失败,message={}", e);
+				throw new BizException(ConstantEnum.EXCEPTION_INTERFACE);
+			}
             if (CollectionUtils.isEmpty(shopIdList)) {
-                shopIdList.add(INVALID_PARAM_INTEGER);
+                throw new BizException(ConstantEnum.RESULT_IS_EMPTY);
             }
             paramsMap.put("shopIdFromShopList", shopIdList);
         }
@@ -366,25 +372,13 @@ public class SubOrderController extends BaseControllerV2 {
         if (StringUtils.isNotBlank(commodityName) || StringUtils.isNotBlank(commodityNo)) {
             List<String> commodityIdList = mcmcCommodityService.selectCommodityByNameAndCode(commodityName,commodityNo);
             if (CollectionUtils.isEmpty(commodityIdList)) {
-                commodityIdList.add(INVALID_PARAM_STRING);
+                throw new BizException(ConstantEnum.RESULT_IS_EMPTY);
             }
             paramsMap.put("commodityIds", commodityIdList);
         }
 
         LOGGER.info("warpToParamMap end paramsMap={}", paramsMap);
         return paramsMap;
-    }
-
-    private List<String> getIdFromUser(List<UserInfoVO> users) {
-        List<String> list = new ArrayList<>();
-        for (UserInfoVO user : users) {
-            String userId;
-            if (user.getUserId() != null) {
-                userId = user.getUserId();
-                list.add(userId);
-            }
-        }
-        return list;
     }
 
     private void replaceListToNull(Map<String, Object> paramsMap) {
@@ -465,30 +459,37 @@ public class SubOrderController extends BaseControllerV2 {
      * @return
      * @throws Exception
      */
-    private List<Integer> getShopIdListByMallName(String mallName) throws Exception {
-        Map<String, Object> map = new HashMap<>();
-        map.put("name", mallName);
+	private List<Integer> getShopIdListByMallName(String mallName) throws BizException {
+		List<Integer> shopIdList = null;
         // 根据mallName 查询mallId集合
-        Map<String, Object> mallResult = mallService.getMalls(map, 1, Integer.MAX_VALUE);
-        if (mallResult != null && mallResult.get("list") != null) {
-            List<MallVO> mallList = (List<MallVO>) mallResult.get("list");
+        List<MallCooperateEntity> mallCooperateEntityList;
+        try {
+            mallCooperateEntityList = roaCooperationMallService.getMallListByMallName(mallName);
+		} catch (Exception e) {
+			e.printStackTrace();
+            LOGGER.error("获取商品详情失败,message={}", e);
+			throw new BizException(ConstantEnum.EXCEPTION_INTERFACE);
+		}
+        if (CollectionUtils.isNotEmpty(mallCooperateEntityList)) {
+        	// 循环商场结果集，获取商场ID集合
             List<String> mallIdList = new ArrayList<>();
-            for (MallVO mall:mallList) {
-                if (null != mall && StringUtils.isNotBlank(mall.getId())) {
-                    mallIdList.add(mall.getId());
+            for (MallCooperateEntity mallCooperateEntity:mallCooperateEntityList) {
+                if (null != mallCooperateEntity && null != mallCooperateEntity.getId()) {
+                    mallIdList.add(mallCooperateEntity.getId().toString());
                 }
             }
             // 根据mallIdList，查询shopIdList
             if (CollectionUtils.isNotEmpty(mallIdList)) {
+            	Map<String, Object> map = new HashMap<>();
                 map.put("mallIds", mallIdList);
-                return roaShopService.getAllShopIdBuMallId(map);
+                shopIdList = roaShopService.getAllShopIdBuMallId(map);
             }
         }
-        return new ArrayList<>();
+        return shopIdList;
     }
 
     /**
-     * 根据商场名称，模糊查询店铺ID集合
+     * 根据店铺名称，模糊查询店铺ID集合
      * @param shopName
      * @return
      * @throws Exception
@@ -500,6 +501,6 @@ public class SubOrderController extends BaseControllerV2 {
         sb.append("%").append(shopName).append("%");
         map.put("vagueShopName", sb.toString());
         // 接口的sql模糊查询没有写%，需要手动拼接到参数
-        return roaShopService.getAllShopIdBuMallId(map);
-    }
+		return roaShopService.getAllShopIdBuMallId(map);
+	}
 }
