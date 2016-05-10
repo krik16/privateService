@@ -12,6 +12,7 @@ import java.util.Date;
 public class TemplateRound implements Serializable {
     private Integer id;
     private String bannerPic;
+    private String name;
     /**活动模版id*/
     private Integer activityTemplateId;
     private String refIds;
@@ -35,6 +36,14 @@ public class TemplateRound implements Serializable {
 
     public void setActivityTemplateId(Integer activityTemplateId) {
         this.activityTemplateId = activityTemplateId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getVersion() {
@@ -123,6 +132,7 @@ public class TemplateRound implements Serializable {
                 .append("updateBy", updateBy)
                 .append("version", version)
                 .append("activityTemplateId", activityTemplateId)
+                .append("name", name)
                 .toString();
     }
 }
