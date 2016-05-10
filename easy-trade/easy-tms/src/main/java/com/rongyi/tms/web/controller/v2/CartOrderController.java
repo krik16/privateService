@@ -12,7 +12,7 @@ import com.rongyi.rss.tradecenter.osm.IOrderQueryService;
 import com.rongyi.tms.Exception.PermissionException;
 import com.rongyi.tms.constants.Constant;
 import com.rongyi.tms.constants.ConstantEnum;
-import com.rongyi.tms.excel.ExportOsmOrderExcel;
+import com.rongyi.tms.excel.ExportCartOrderExcel;
 import com.rongyi.tms.moudle.vo.ParentOrderCartVO;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -49,7 +49,7 @@ public class CartOrderController extends BaseControllerV2 {
     private IOrderCartService iOrderCartService;
 
     @Autowired
-    private ExportOsmOrderExcel exportOsmOrderExcel;
+    private ExportCartOrderExcel exportCartOrderExcel;
 
 
     @RequestMapping("/list")
@@ -117,7 +117,7 @@ public class CartOrderController extends BaseControllerV2 {
             this.replaceListToNull(paramsMap);// 过滤前台传入的空字符串
            warpToParamMap(paramsMap);
             if (paramsMap != null) {
-                exportOsmOrderExcel.exportExcel(request, response, paramsMap);
+                exportCartOrderExcel.exportExcel(request, response, paramsMap);
             }
         } catch (PermissionException e){
             LOGGER.error(e.getMessage(),e);
