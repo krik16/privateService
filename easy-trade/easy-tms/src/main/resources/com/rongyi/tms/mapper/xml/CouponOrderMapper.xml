@@ -150,7 +150,7 @@
 	<select id="selectPageListCount" parameterType="java.util.Map"
 		resultType="java.lang.Integer">
 		select count(*) from (select
-		trade_order.id
+		DISTINCT trade_order.id
 		from ry_trade.trade_order
 		as
 		trade_order
