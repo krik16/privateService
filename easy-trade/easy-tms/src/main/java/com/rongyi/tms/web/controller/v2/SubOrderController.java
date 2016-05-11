@@ -143,16 +143,23 @@ public class SubOrderController extends BaseControllerV2 {
         LOGGER.info("子订单详情:id={}", id);
         ResponseData responseData;
         try {
-            permissionCheck(request, "ORDER_GOODSON_VIEW");
+//            permissionCheck(request, "ORDER_GOODSON_VIEW");
             ParentOrderVO orderDetailVo = iOrderQueryService.searchRYOrderDetail(id);
             List<SonOrderVO> sonOrderList = orderDetailVo.getSonOrderList();
-            BigDecimal discountTotal = new BigDecimal("0.00");//总卡券信息（包含抵扣券）
+            BigDecimal discountTotal = BigDecimal.ZERO;//总卡券信息（包含抵扣券）
+            BigDecimal hbDisCountTotal = BigDecimal.ZERO;//红包抵扣总额
+            BigDecimal scoreDiscountTotal = new BigDecimal(orderDetailVo.getScoreDeduction());
             discountTotal = discountTotal.add(orderDetailVo.getCouponDiscount()).add(orderDetailVo.getOrderCouponDiscount());//抵扣信息
-            BigDecimal commidityTotalPice = new BigDecimal("0.00");//商品总价
-            if (!CollectionUtils.isEmpty(sonOrderList)) {
-                //目前一个订单只会有一种商品，直播也是一个
+            BigDecimal commidityTotalPice = BigDecimal.ZERO;//商品总价
+             if (!CollectionUtils.isEmpty(sonOrderList)) {
+                 //积分分摊抵扣(元)
+                 BigDecimal avgScoreDiscount = scoreDiscountTotal.divide(new BigDecimal(sonOrderList.size()), 2, BigDecimal.ROUND_HALF_DOWN).setScale(2, BigDecimal.ROUND_HALF_DOWN);
+                 //积分分摊最后剩余积分
+                 BigDecimal lastScoreDiscount = scoreDiscountTotal.subtract(avgScoreDiscount.multiply(new BigDecimal(sonOrderList.size() - 1))).setScale(2, BigDecimal.ROUND_HALF_UP);
+                 //目前一个订单只会有一种商品，直播也是一个
                 orderDetailVo.setLiveName(sonOrderList.get(0).getLiveName());
                 for (SonOrderVO sonOrderVo : sonOrderList) {
+                    hbDisCountTotal = hbDisCountTotal.add(sonOrderVo.getHbDiscount());
                     commidityTotalPice = commidityTotalPice.add(new BigDecimal(sonOrderVo.getNum())
                             .multiply(new BigDecimal(sonOrderVo.getCommodityCurrentPrice()))).setScale(2, BigDecimal.ROUND_HALF_UP);
                     if (StringUtils.isNotBlank(sonOrderVo.getCouponCode())) {
@@ -163,7 +170,9 @@ public class SubOrderController extends BaseControllerV2 {
                             discountTotal = discountTotal.add(sonOrderVo.getHbDiscount());
                         }
                     }
+                    sonOrderVo.setIntegralDiscount(avgScoreDiscount);
                 }
+                 sonOrderList.get(sonOrderList.size() - 1).setIntegralDiscount(lastScoreDiscount);
             }
             if (StringUtils.isNotBlank(orderDetailVo.getCommitOrderTime())) {
                 orderDetailVo.setCommitOrderTime(orderDetailVo.getCommitOrderTime().substring(0, 16));
@@ -190,6 +199,8 @@ public class SubOrderController extends BaseControllerV2 {
             } else {
                 subOrderDetailVO.setCouponDiscountPrice(discountTotal);
             }
+            //红包抵扣合计
+            subOrderDetailVO.setTotalHongBaoAmount(hbDisCountTotal);
             responseData = ResponseData.success(subOrderDetailVO);
         } catch (PermissionException e) {
             LOGGER.error(e.getMessage());
@@ -373,6 +384,13 @@ public class SubOrderController extends BaseControllerV2 {
             if (CollectionUtils.isEmpty(commodityIdList)) {
                 throw new BizException(ConstantEnum.RESULT_IS_EMPTY);
             }
+            paramsMap.put("commodityIds", commodityIdList);
+        }
+        // 根据商品名称，商品编码模糊查询订单
+        String commodityId = (String) paramsMap.get("commodityId");
+        if (StringUtils.isNotBlank(commodityId) || StringUtils.isNotBlank(commodityId)) {
+            List<String> commodityIdList = new ArrayList<>();
+            commodityIdList.add("commodityId");
             paramsMap.put("commodityIds", commodityIdList);
         }
 
