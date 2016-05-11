@@ -16,4 +16,5 @@ public interface ROAMalllifeUserBrandService {
 	public void delUserBrand(String userId);
 	public List<String> getUserBrand(String userId);
 	public List<UserBrand> getUserBrandDetailList(String userId);
+	public void updateByBrandId(String brandId);
 }

@@ -1,7 +1,9 @@
 package com.rongyi.rss.msgcenter;
 
 import com.rongyi.easy.coupon.param.UserSkypeParam;
+import com.rongyi.easy.coupon.vo.PlatformRebateVO;
 import com.rongyi.easy.msgcenter.ShareQualifiedDTO;
+import com.rongyi.easy.rmmm.vo.RebateCouponVO;
 
 /**
  * Description:微信分享红包接口
@@ -63,4 +65,11 @@ public interface SharePushActivityService {
      * @return
      */
     public ShareQualifiedDTO shareLockCode(String orderNo);
+
+    /**
+     * 根据券码查询券信息
+     * @param code
+     * @return
+     */
+    public PlatformRebateVO getRebateVOFromCode(String code);
 }
