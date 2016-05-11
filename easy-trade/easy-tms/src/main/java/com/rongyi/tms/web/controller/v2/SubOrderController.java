@@ -124,8 +124,7 @@ public class SubOrderController extends BaseControllerV2 {
             responseData = ResponseData.success(orderForms, currentPage, Constant.PAGE.PAGESIZE, totalPage);
         } catch (BizException e) {
             LOGGER.error(e.getMessage());
-            e.printStackTrace();
-            responseData = ResponseData.success(new ArrayList<>(), 1, Constant.PAGE.PAGESIZE, 0);
+            responseData = ResponseData.success();
         } catch (PermissionException e) {
             LOGGER.error(e.getMessage());
             e.printStackTrace();
@@ -219,7 +218,6 @@ public class SubOrderController extends BaseControllerV2 {
             exportSubOrderExcel.exportExcel(request, response, paramsMap);
         } catch (BizException e) {
             LOGGER.error(e.getMessage());
-            e.printStackTrace();
         } catch (PermissionException e) {
             LOGGER.error(e.getMessage(), e);
             e.printStackTrace();
@@ -252,7 +250,6 @@ public class SubOrderController extends BaseControllerV2 {
             return ResponseData.failure(Integer.valueOf(e.getCode()), e.getMessage());
         } catch (BizException e) {
             LOGGER.error(e.getMessage());
-            e.printStackTrace();
             responseData = ResponseData.success();
         } catch (Exception e) {
             e.printStackTrace();
@@ -422,6 +419,16 @@ public class SubOrderController extends BaseControllerV2 {
         if (null != paramsMap) {
             if (null != paramsMap.get("commodityNo") && StringUtils.isBlank(paramsMap.get("commodityNo").toString())) {
                 paramsMap.remove("commodityNo");
+            }
+        }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("commodityId") && StringUtils.isBlank(paramsMap.get("commodityId").toString())) {
+                paramsMap.remove("commodityId");
+            }
+        }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("commodityName") && StringUtils.isBlank(paramsMap.get("commodityName").toString())) {
+                paramsMap.remove("commodityName");
             }
         }
         if (null != paramsMap) {

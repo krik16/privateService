@@ -68,7 +68,9 @@ public class ExportSubOrderExcel {
                     sheet.getRow(i + 2).getCell(0).setCellValue(vo.getOrderNo());
                     if(vo.getCommodityMid()!= null && vo.getCommoditySpecMid() != null) {
                         CommodityVO commodityVO = commodityService.getCommoditySpecInfoById(vo.getCommodityMid(), vo.getCommoditySpecMid());
-                        sheet.getRow(i + 2).getCell(1).setCellValue(commodityVO.getCommodityName());
+                        if(commodityVO != null) {
+                            sheet.getRow(i + 2).getCell(1).setCellValue(commodityVO.getCommodityName());
+                        }
                     }
                     sheet.getRow(i + 2).getCell(2).setCellValue(vo.getUnitPrice());
                     sheet.getRow(i + 2).getCell(3).setCellValue(vo.getQuantity());
