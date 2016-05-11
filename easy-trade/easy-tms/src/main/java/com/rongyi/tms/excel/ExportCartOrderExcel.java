@@ -86,12 +86,12 @@ public class ExportCartOrderExcel {
 
     private List<ParentOrderCartVO> getPageDataList(Map<String, Object> paramsMap) throws Exception {
         List<ParentOrderCartVO> cartOrderAllList = new ArrayList<>();
-        int pageSize = 1000;
+        int pageSize = 500;
         int TOTAL_SIZE = paramsMap.containsKey("pageSize") ? Integer.valueOf(paramsMap.get("pageSize").toString()) : 5000;
         int currentPage = 1;
         for (int i = 0; i < TOTAL_SIZE / pageSize; i++) {
             paramsMap.put("pageSize", pageSize);
-            paramsMap.put("currentPage", currentPage);
+            paramsMap.put("currPage", currentPage);
             PagingVO<OrderCartFormVO> page = iOrderCartService.searchListByMap(paramsMap);
             List<ParentOrderCartVO> orderCartVOList = convertToOrderCart(page.getDataList());
             if (orderCartVOList != null) {
@@ -122,6 +122,26 @@ public class ExportCartOrderExcel {
         return result;
     }
 
+    private String convertOrderSource(Integer orderSource) {
+        String result = "--";
+        if (orderSource != null) {
+            switch (orderSource) {
+                case 0:
+                    result = "微网站";
+                    break;
+                case 1:
+                    result = "容易逛";
+                    break;
+                case 2:
+                    result = "终端机";
+                    break;
+                case 3:
+                    result = "其他";
+                    break;
+            }
+        }
+        return result;
+    }
 
     private String convertStatus(String status) {
         String result = "--";
