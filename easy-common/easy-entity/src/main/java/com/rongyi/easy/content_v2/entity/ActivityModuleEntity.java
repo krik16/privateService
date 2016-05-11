@@ -87,6 +87,23 @@ public class ActivityModuleEntity implements Serializable {
 	public void setSelectedPicUrl(String selectedPicUrl) {
 		this.selectedPicUrl = selectedPicUrl;
 	}
+	
+	public int getIsSingle() {
+		return isSingle;
+	}
+
+	public void setIsSingle(int isSingle) {
+		this.isSingle = isSingle;
+	}
+
+	public int getIsChecked() {
+		return isChecked;
+	}
+
+	public void setIsChecked(int isChecked) {
+		this.isChecked = isChecked;
+	}
+
 	/**
 	 * 
 	 */
@@ -100,4 +117,6 @@ public class ActivityModuleEntity implements Serializable {
 	private int isVisible = 0;
 	private int userId = 0;
 	private String userName = "";
+	private int isSingle ;
+	private int isChecked ;
 }
