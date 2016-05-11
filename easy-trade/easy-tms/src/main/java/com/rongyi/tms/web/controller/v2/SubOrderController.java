@@ -390,7 +390,7 @@ public class SubOrderController extends BaseControllerV2 {
         String commodityId = (String) paramsMap.get("commodityId");
         if (StringUtils.isNotBlank(commodityId) || StringUtils.isNotBlank(commodityId)) {
             List<String> commodityIdList = new ArrayList<>();
-            commodityIdList.add("commodityId");
+            commodityIdList.add(commodityId);
             paramsMap.put("commodityIds", commodityIdList);
         }
 
