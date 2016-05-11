@@ -1,5 +1,6 @@
 package com.rongyi.core.common;
 
+
 import java.security.Key;
 import java.security.KeyFactory;
 import java.security.KeyPair;
@@ -267,4 +268,9 @@ public abstract class RSACoder extends Coder {
 		keyMap.put(PRIVATE_KEY, privateKey);
 		return keyMap;
 	}
+
+
+
+
+
 }

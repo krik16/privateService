@@ -1,6 +1,10 @@
 package com.rongyi.easy.roa.vo;
 
 
+import com.rongyi.easy.coupon.entity.CouponBrand;
+import com.rongyi.easy.coupon.entity.CouponMall;
+import com.rongyi.easy.coupon.entity.CouponShop;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
@@ -68,6 +72,20 @@ public class OrderDetailVO implements Serializable {
     private String usageDesc;//使用说明
 
     private List<ActivityDetailVO> codeList; // 本订单所含的优惠券信息
+
+    private String holderId;
+
+    private String holderType;
+
+    private String holderName;
+
+    private String logoUrl;
+
+    private Integer count;
+
+    private List<CouponShop> couponShops;//适用店铺列表
+
+    private List<CouponMall> couponMalls;
 
     public Integer getTradeStatus() {
         return tradeStatus;
@@ -247,5 +265,95 @@ public class OrderDetailVO implements Serializable {
 
     public void setLimitCount(Integer limitCount) {
         this.limitCount = limitCount;
+    }
+
+    public String getHolderId() {
+        return holderId;
+    }
+
+    public void setHolderId(String holderId) {
+        this.holderId = holderId;
+    }
+
+    public String getHolderType() {
+        return holderType;
+    }
+
+    public void setHolderType(String holderType) {
+        this.holderType = holderType;
+    }
+
+    public String getHolderName() {
+        return holderName;
+    }
+
+    public void setHolderName(String holderName) {
+        this.holderName = holderName;
+    }
+
+    public List<CouponShop> getCouponShops() {
+        return couponShops;
+    }
+
+    public void setCouponShops(List<CouponShop> couponShops) {
+        this.couponShops = couponShops;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public List<CouponMall> getCouponMalls() {
+        return couponMalls;
+    }
+
+    public void setCouponMalls(List<CouponMall> couponMalls) {
+        this.couponMalls = couponMalls;
+    }
+
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("OrderDetailVO{");
+        sb.append("orderNo='").append(orderNo).append('\'');
+        sb.append(", tradeStatus=").append(tradeStatus);
+        sb.append(", orderTime='").append(orderTime).append('\'');
+        sb.append(", payTime='").append(payTime).append('\'');
+        sb.append(", unitPrice=").append(unitPrice);
+        sb.append(", unitNum=").append(unitNum);
+        sb.append(", orderPrice=").append(orderPrice);
+        sb.append(", itemName='").append(itemName).append('\'');
+        sb.append(", couponId='").append(couponId).append('\'');
+        sb.append(", couponName='").append(couponName).append('\'');
+        sb.append(", totalCount=").append(totalCount);
+        sb.append(", limitUseCount=").append(limitUseCount);
+        sb.append(", limitPublishCount=").append(limitPublishCount);
+        sb.append(", limitCount=").append(limitCount);
+        sb.append(", origPrice=").append(origPrice);
+        sb.append(", currPrice=").append(currPrice);
+        sb.append(", afterSaleService='").append(afterSaleService).append('\'');
+        sb.append(", listPicUrl='").append(listPicUrl).append('\'');
+        sb.append(", limitDesc='").append(limitDesc).append('\'');
+        sb.append(", usageDesc='").append(usageDesc).append('\'');
+        sb.append(", codeList=").append(codeList);
+        sb.append(", holderId='").append(holderId).append('\'');
+        sb.append(", holderType='").append(holderType).append('\'');
+        sb.append(", holderName='").append(holderName).append('\'');
+        sb.append(", count=").append(count);
+        sb.append(", couponShops=").append(couponShops);
+        sb.append(", couponMalls=").append(couponMalls);
+        sb.append('}');
+        return sb.toString();
     }
 }
