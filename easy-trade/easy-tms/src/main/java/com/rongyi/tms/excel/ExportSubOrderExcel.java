@@ -87,7 +87,7 @@ public class ExportSubOrderExcel {
                     sheet.getRow(i + 2).getCell(16).setCellValue(convertGuideType(vo.getGuideType()));
                 }
             }
-            String outFile = "商品字订单记录_" + DateUtil.getCurrentDateYYYYMMDD() + ".xlsx";
+            String outFile = "商品子订单记录_" + DateUtil.getCurrentDateYYYYMMDD() + ".xlsx";
             ExcelUtil.exportExcel(response, wb, outFile);
         } catch (Exception e) {
             e.printStackTrace();
