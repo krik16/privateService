@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.rongyi</groupId>
     <artifactId>easy-common</artifactId>
-    <version>3.3.7-SNAPSHOT</version>
+    <version>3.3.7-SNAPSHOT</version>    <packaging>pom</packaging>
     <modules>
         <module>easy-entity</module>
         <module>easy-core</module>
@@ -681,6 +681,15 @@
                                 </excludes>
                             </resource>
                         </webResources>
+                    </configuration>
+                </plugin>
+                <!-- 指定项目的JDK版本 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.7</source>
+                        <target>1.7</target>
                     </configuration>
                 </plugin>
 
