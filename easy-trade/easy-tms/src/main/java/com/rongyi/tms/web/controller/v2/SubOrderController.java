@@ -251,6 +251,7 @@ public class SubOrderController extends BaseControllerV2 {
         ResponseData responseData = ResponseData.failure();
         try {
             permissionCheck(request, "ORDER_GOODSON_EXPORT");
+            this.replaceListToNull(paramsMap);// 过滤前台传入的空字符串
             warpToParamMap(paramsMap);
             PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchListByMap(paramsMap);
             if (pagingVO != null && pagingVO.getRowCnt() <= ConstantEnum.EXCEL_LIMIT_COUNT.getCodeInt())

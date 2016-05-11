@@ -139,6 +139,7 @@ public class CartOrderController extends BaseControllerV2 {
         ResponseData responseData = ResponseData.failure(ConstantEnum.EXCEPTION_LIMIT_COUNT.getCodeInt(),ConstantEnum.EXCEPTION_LIMIT_COUNT.getValueStr());
         try {
             permissionCheck(request,"ORDER_GOODS_EXPORT");
+            this.replaceListToNull(paramsMap);// 过滤前台传入的空字符串
            warpToParamMap(paramsMap);
             PagingVO<OrderCartFormVO> pagingVO = iOrderCartService.searchListByMap(paramsMap);
             LOGGER.info("要导出的数据总数:totalCount={}",pagingVO.getRowCnt());
