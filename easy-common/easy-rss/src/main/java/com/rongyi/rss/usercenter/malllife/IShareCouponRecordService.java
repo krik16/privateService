@@ -40,5 +40,13 @@ public interface IShareCouponRecordService {
 	 * @throws Exception
 	 */
 	public int getRemainCouponByOrderNum(String orderNum, String shareId)  throws Exception;
+	
+	/**
+	 * 判断订单号是否已生成红包记录
+	 * @param orderNo
+	 * @return  true已生成  false未生成
+	 * @throws Exception
+	 */
+	public boolean checkShareCouponByOrderNo(String orderNo)  throws Exception;
 
 }
