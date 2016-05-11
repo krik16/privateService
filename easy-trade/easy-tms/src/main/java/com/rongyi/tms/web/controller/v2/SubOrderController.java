@@ -146,10 +146,10 @@ public class SubOrderController extends BaseControllerV2 {
 //            permissionCheck(request, "ORDER_GOODSON_VIEW");
             ParentOrderVO orderDetailVo = iOrderQueryService.searchRYOrderDetail(id);
             List<SonOrderVO> sonOrderList = orderDetailVo.getSonOrderList();
-            BigDecimal discountTotal = BigDecimal.ZERO;//总卡券信息（包含抵扣券）
+            BigDecimal rebateDiscountTotal = BigDecimal.ZERO;//抵扣券抵扣总金额
             BigDecimal hbDisCountTotal = BigDecimal.ZERO;//红包抵扣总额
             BigDecimal scoreDiscountTotal = new BigDecimal(orderDetailVo.getScoreDeduction());
-            discountTotal = discountTotal.add(orderDetailVo.getCouponDiscount()).add(orderDetailVo.getOrderCouponDiscount());//抵扣信息
+//            discountTotal = discountTotal.add(orderDetailVo.getCouponDiscount()).add(orderDetailVo.getOrderCouponDiscount());//抵扣信息
             BigDecimal commidityTotalPice = BigDecimal.ZERO;//商品总价
              if (!CollectionUtils.isEmpty(sonOrderList)) {
                  //积分分摊抵扣(元)
@@ -160,6 +160,7 @@ public class SubOrderController extends BaseControllerV2 {
                 orderDetailVo.setLiveName(sonOrderList.get(0).getLiveName());
                 for (SonOrderVO sonOrderVo : sonOrderList) {
                     hbDisCountTotal = hbDisCountTotal.add(sonOrderVo.getHbDiscount());
+                    rebateDiscountTotal = rebateDiscountTotal.add(sonOrderVo.getVoucherDiscount());
                     commidityTotalPice = commidityTotalPice.add(new BigDecimal(sonOrderVo.getNum())
                             .multiply(new BigDecimal(sonOrderVo.getCommodityCurrentPrice()))).setScale(2, BigDecimal.ROUND_HALF_UP);
                     if (StringUtils.isNotBlank(sonOrderVo.getCouponCode())) {
@@ -167,7 +168,6 @@ public class SubOrderController extends BaseControllerV2 {
                                 .getCouponCode());
                         if (userCouponVO != null) {
                             userCouponVO.setRealDiscount(sonOrderVo.getRealAmount());
-                            discountTotal = discountTotal.add(sonOrderVo.getHbDiscount());
                         }
                     }
                     sonOrderVo.setIntegralDiscount(avgScoreDiscount);
@@ -193,11 +193,11 @@ public class SubOrderController extends BaseControllerV2 {
             } else {
                 subOrderDetailVO.setOrderTotalPrice(commidityTotalPice.subtract(orderDetailVo.getDiscountFee()).add(new BigDecimal(orderDetailVo.getCommodityPostage()).setScale(2, 4)));
             }
-            //卡券合计
-            if (discountTotal.subtract((commidityTotalPice.subtract(orderDetailVo.getDiscountFee()))).compareTo(BigDecimal.ZERO) > 0) {
+            //抵扣券合计
+            if (rebateDiscountTotal.subtract((commidityTotalPice.subtract(orderDetailVo.getDiscountFee()))).compareTo(BigDecimal.ZERO) > 0) {
                 subOrderDetailVO.setCouponDiscountPrice(commidityTotalPice.subtract(orderDetailVo.getDiscountFee()).setScale(2, 4));
             } else {
-                subOrderDetailVO.setCouponDiscountPrice(discountTotal);
+                subOrderDetailVO.setCouponDiscountPrice(rebateDiscountTotal);
             }
             //红包抵扣合计
             subOrderDetailVO.setTotalHongBaoAmount(hbDisCountTotal);
