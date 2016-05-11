@@ -23,7 +23,8 @@ public class MerchantCouponOrderVO implements Serializable
     private Double hbDiscount;//红包优惠
     private  String orderStatus;//订单状态
     List<MerchantOrderCouponVO> couponList;//订单下的卡券列表
-    private String paymentTimeStr ; //格式化的支付时间 
+    private String paymentTimeStr ; //格式化的支付时间
+    private String createTime;//订单创建时间
 
     public Double getPaymentAmount() {
         return paymentAmount;
@@ -129,6 +130,16 @@ public class MerchantCouponOrderVO implements Serializable
         this.couponList = couponList;
     }
 
+    public String getCreateTime()
+    {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime)
+    {
+        this.createTime = createTime;
+    }
+
     @Override
     public String toString() {
         return "OrderVO{" +
@@ -144,6 +155,7 @@ public class MerchantCouponOrderVO implements Serializable
                 ", integralNum='" + integralNum + '\'' +
                 ", HbDiscount=" + hbDiscount +
                 ", orderStatus='" + orderStatus + '\'' +
+                ", createTime='" + createTime + '\'' +
                 '}';
     }
 
