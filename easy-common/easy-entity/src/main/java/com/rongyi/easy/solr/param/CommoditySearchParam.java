@@ -80,7 +80,7 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	 */
 	private String systemNumber;
 
-	private Integer from = 0; // 从0开始 偏移量，商品聚合分页使用
+	private Integer from; // 从0开始 偏移量，商品聚合分页使用
 
 	private String source;//  端来源    1 微信   2 终端屏 3 其他
 
