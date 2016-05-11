@@ -36,6 +36,7 @@ public class MerchantOsmOrderVO implements Serializable{
     private String expressInfoChangeFlg;//"物流信息是否允许修改 0：不允许 1：允许 "
     private List<MerchantOrderCommodityVO> commodityList;//订单下的商品列表
     private String createTimeStr;   //格式化下单时间  （今天 12:06:55）
+    private String orderChannel; //下单渠道
 
     public Integer getOrderSource() {
         return orderSource;
@@ -230,6 +231,16 @@ public class MerchantOsmOrderVO implements Serializable{
         this.expressInfoChangeFlg = expressInfoChangeFlg;
     }
 
+    public String getOrderChannel()
+    {
+        return orderChannel;
+    }
+
+    public void setOrderChannel(String orderChannel)
+    {
+        this.orderChannel = orderChannel;
+    }
+
     @Override
     public String toString() {
         return "OrderVO{" +
@@ -246,6 +257,7 @@ public class MerchantOsmOrderVO implements Serializable{
                 ", integralAmount='" + integralAmount + '\'' +
                 ", integralNum='" + integralNum + '\'' +
                 ", orderStatus='" + orderStatus + '\'' +
+                ", orderChannel='" + orderChannel + '\'' +
                 '}';
     }
 
