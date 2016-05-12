@@ -17,7 +17,7 @@ public class UserBrand implements Serializable {
 
     private String letter;
 
-    private List<BrandInfo> brands;
+    private List<BrandInfo> brandInfo;
 
     public String getLetter() {
         return letter;
@@ -27,18 +27,18 @@ public class UserBrand implements Serializable {
         this.letter = letter;
     }
 
-    public List<BrandInfo> getBrands() {
-        return brands;
+    public List<BrandInfo> getBrandInfo() {
+        return brandInfo;
     }
 
-    public void setBrands(List<BrandInfo> brands) {
-        this.brands = brands;
+    public void setBrandInfo(List<BrandInfo> brandInfo) {
+        this.brandInfo = brandInfo;
     }
 
     public static class BrandInfo implements Serializable {
         private static final long serialVersionUID = 1L;
         // mongo id
-        private ObjectId brandId;
+        private String brandId;
 
         private String brandLogo;
 
@@ -46,11 +46,11 @@ public class UserBrand implements Serializable {
 
         private String letter;
 
-        public ObjectId getBrandId() {
+        public String getBrandId() {
             return brandId;
         }
 
-        public void setBrandId(ObjectId brandId) {
+        public void setBrandId(String brandId) {
             this.brandId = brandId;
         }
 
