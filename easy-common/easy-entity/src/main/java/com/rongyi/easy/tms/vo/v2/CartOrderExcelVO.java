@@ -11,7 +11,7 @@ import java.util.Map;
  **/
 public class CartOrderExcelVO {
 
-    private Integer amountType;
+    private String amountType;
 
     private Date createAtBegin;
 
@@ -32,11 +32,11 @@ public class CartOrderExcelVO {
     private String userAccount;
 
 
-    public Integer getAmountType() {
+    public String getAmountType() {
         return amountType;
     }
 
-    public void setAmountType(Integer amountType) {
+    public void setAmountType(String amountType) {
         this.amountType = amountType;
     }
 

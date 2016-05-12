@@ -28,6 +28,8 @@ public class SubOrderExcelVO {
 
     private Integer  orderSource;
 
+    private String amountType;
+
     private Double payAmountBegin;
 
     private Double payAmountEnd;
@@ -163,6 +165,14 @@ public class SubOrderExcelVO {
 
     }
 
+    public String getAmountType() {
+        return amountType;
+    }
+
+    public void setAmountType(String amountType) {
+        this.amountType = amountType;
+    }
+
     @Override
     public String toString() {
         return "SubOrderExcelVO{" +
@@ -174,6 +184,7 @@ public class SubOrderExcelVO {
                 ", mallId='" + mallId + '\'' +
                 ", orderNo='" + orderNo + '\'' +
                 ", orderSource=" + orderSource +
+                ", amountType=" + amountType +
                 ", payAmountBegin=" + payAmountBegin +
                 ", payAmountEnd=" + payAmountEnd +
                 ", payChannel=" + payChannel +
