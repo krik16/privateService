@@ -11,6 +11,22 @@ import java.util.Map;
  **/
 public class CartOrderExcelVO {
 
+    private String cartOrderNo;
+
+    private String mallId;
+
+    private String shopId;
+
+    private String sellerAccount;
+
+    private String userPhone;
+
+    private String commodityId;
+
+    private String createAt;
+
+    private String guideType;
+
     private String amountType;
 
     private Date createAtBegin;
@@ -112,10 +128,82 @@ public class CartOrderExcelVO {
         this.userAccount = userAccount;
     }
 
+    public String getCartOrderNo() {
+        return cartOrderNo;
+    }
+
+    public void setCartOrderNo(String cartOrderNo) {
+        this.cartOrderNo = cartOrderNo;
+    }
+
+    public String getMallId() {
+        return mallId;
+    }
+
+    public void setMallId(String mallId) {
+        this.mallId = mallId;
+    }
+
+    public String getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
+    }
+
+    public String getSellerAccount() {
+        return sellerAccount;
+    }
+
+    public void setSellerAccount(String sellerAccount) {
+        this.sellerAccount = sellerAccount;
+    }
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
+    }
+
+    public String getCommodityId() {
+        return commodityId;
+    }
+
+    public void setCommodityId(String commodityId) {
+        this.commodityId = commodityId;
+    }
+
+    public String getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(String createAt) {
+        this.createAt = createAt;
+    }
+
+    public String getGuideType() {
+        return guideType;
+    }
+
+    public void setGuideType(String guideType) {
+        this.guideType = guideType;
+    }
+
     @Override
     public String toString() {
         return "CartOrderExcelVO{" +
-                "amountType=" + amountType +
+                "cartOrderNo='" + cartOrderNo + '\'' +
+                ", mallId='" + mallId + '\'' +
+                ", shopId='" + shopId + '\'' +
+                ", sellerAccount='" + sellerAccount + '\'' +
+                ", userPhone='" + userPhone + '\'' +
+                ", commodityId='" + commodityId + '\'' +
+                ", createAt='" + createAt + '\'' +
+                ", guideType='" + guideType + '\'' +
+                ", amountType='" + amountType + '\'' +
                 ", createAtBegin=" + createAtBegin +
                 ", createAtEnd=" + createAtEnd +
                 ", orderNo='" + orderNo + '\'' +

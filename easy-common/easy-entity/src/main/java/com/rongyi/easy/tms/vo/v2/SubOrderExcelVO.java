@@ -30,9 +30,9 @@ public class SubOrderExcelVO {
 
     private String amountType;
 
-    private Double payAmountBegin;
+    private Double realAmountBegin;
 
-    private Double payAmountEnd;
+    private Double realAmountEnd;
 
     private Integer payChannel;
 
@@ -43,6 +43,12 @@ public class SubOrderExcelVO {
     private String sellerAccount;
 
     private String username;
+
+    private String userPhone;
+
+    private String commodityId;
+
+    private Date createAt;
 
     public String getCartOrderNo() {
         return cartOrderNo;
@@ -108,20 +114,36 @@ public class SubOrderExcelVO {
         this.orderSource = orderSource;
     }
 
-    public Double getPayAmountBegin() {
-        return payAmountBegin;
+    public Double getRealAmountBegin() {
+        return realAmountBegin;
     }
 
-    public void setPayAmountBegin(Double payAmountBegin) {
-        this.payAmountBegin = payAmountBegin;
+    public void setRealAmountBegin(Double realAmountBegin) {
+        this.realAmountBegin = realAmountBegin;
     }
 
-    public Double getPayAmountEnd() {
-        return payAmountEnd;
+    public Double getRealAmountEnd() {
+        return realAmountEnd;
     }
 
-    public void setPayAmountEnd(Double payAmountEnd) {
-        this.payAmountEnd = payAmountEnd;
+    public void setRealAmountEnd(Double realAmountEnd) {
+        this.realAmountEnd = realAmountEnd;
+    }
+
+    public String getCommodityId() {
+        return commodityId;
+    }
+
+    public void setCommodityId(String commodityId) {
+        this.commodityId = commodityId;
+    }
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
     }
 
     public Integer getPayChannel() {
@@ -173,6 +195,14 @@ public class SubOrderExcelVO {
         this.amountType = amountType;
     }
 
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
+    }
+
     @Override
     public String toString() {
         return "SubOrderExcelVO{" +
@@ -184,14 +214,17 @@ public class SubOrderExcelVO {
                 ", mallId='" + mallId + '\'' +
                 ", orderNo='" + orderNo + '\'' +
                 ", orderSource=" + orderSource +
-                ", amountType=" + amountType +
-                ", payAmountBegin=" + payAmountBegin +
-                ", payAmountEnd=" + payAmountEnd +
+                ", amountType='" + amountType + '\'' +
+                ", realAmountBegin=" + realAmountBegin +
+                ", realAmountEnd=" + realAmountEnd +
                 ", payChannel=" + payChannel +
                 ", status=" + status +
                 ", shopId=" + shopId +
                 ", sellerAccount='" + sellerAccount + '\'' +
                 ", username='" + username + '\'' +
+                ", userPhone='" + userPhone + '\'' +
+                ", commodityId='" + commodityId + '\'' +
+                ", createAt=" + createAt +
                 '}';
     }
 
