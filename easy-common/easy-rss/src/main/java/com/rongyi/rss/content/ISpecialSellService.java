@@ -32,12 +32,18 @@ public interface ISpecialSellService {
 	
 	/**
 	 * 查询APP首页潮人攻略展示
+	 * @param paramMap 
+	 *               
 	 * @return
 	 */
 	public RaidersHomeVo getRaidersHomeVo(Map paramMap)throws Exception;
 	
 	/**
 	 * 查询APP潮人攻略列表
+	 * @param  paramMap
+	 *              currentPage  不传默认1
+	 *              pageSize  不传默认10
+	 *              version  文章版本号
 	 * @return
 	 * @throws Exception
 	 */
