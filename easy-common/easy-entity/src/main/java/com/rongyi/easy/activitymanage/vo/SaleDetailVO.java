@@ -26,6 +26,15 @@ public class SaleDetailVO implements Serializable {
     private String activityUrl;
     private String contentUrl;
     private List<CommodityBuyerVO> commodityList;
+    private Integer nextActTemplateId;//null没有下一场字段，0没有下一场，其余有下一场
+
+    public Integer getNextActTemplateId() {
+        return nextActTemplateId;
+    }
+
+    public void setNextActTemplateId(Integer nextActTemplateId) {
+        this.nextActTemplateId = nextActTemplateId;
+    }
 
     public Integer getId() {
         return id;
@@ -129,6 +138,7 @@ public class SaleDetailVO implements Serializable {
                 .append("activityUrl", activityUrl)
                 .append("contentUrl", contentUrl)
                 .append("commodityList", commodityList)
+                .append("nextActTemplateId",nextActTemplateId)
                 .toString();
     }
 }
