@@ -97,7 +97,7 @@ public class SubOrderController extends BaseControllerV2 {
         ResponseData responseData;
         try {
             LOGGER.info("子订单列表:paramsMap={}", paramsMap);
-//            permissionCheck(request, "ORDER_GOODSON_VIEW");
+            permissionCheck(request, "ORDER_GOODSON_VIEW");
             this.replaceListToNull(paramsMap);// 过滤前台传入的空字符串
             warpToParamMap(paramsMap);
             PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchSubListByMap(paramsMap);
@@ -139,41 +139,45 @@ public class SubOrderController extends BaseControllerV2 {
 
     @RequestMapping("/detail")
     @ResponseBody
-    public ResponseData detail(HttpServletRequest request, Integer id) {
+    public ResponseData detail(HttpServletRequest request, Integer id,String commodityId) {
         LOGGER.info("子订单详情:id={}", id);
         ResponseData responseData;
         try {
-//            permissionCheck(request, "ORDER_GOODSON_VIEW");
+            permissionCheck(request, "ORDER_GOODSON_VIEW");
             ParentOrderVO orderDetailVo = iOrderQueryService.searchRYOrderDetail(id);
             List<SonOrderVO> sonOrderList = orderDetailVo.getSonOrderList();
             BigDecimal rebateDiscountTotal = BigDecimal.ZERO;//抵扣券抵扣总金额
             BigDecimal hbDisCountTotal = BigDecimal.ZERO;//红包抵扣总额
             BigDecimal scoreDiscountTotal = new BigDecimal(orderDetailVo.getScoreDeduction());
-//            discountTotal = discountTotal.add(orderDetailVo.getCouponDiscount()).add(orderDetailVo.getOrderCouponDiscount());//抵扣信息
             BigDecimal commidityTotalPice = BigDecimal.ZERO;//商品总价
              if (!CollectionUtils.isEmpty(sonOrderList)) {
                  //积分分摊抵扣(元)
                  BigDecimal avgScoreDiscount = scoreDiscountTotal.divide(new BigDecimal(sonOrderList.size()), 2, BigDecimal.ROUND_HALF_DOWN).setScale(2, BigDecimal.ROUND_HALF_DOWN);
                  //积分分摊最后剩余积分
-                 BigDecimal lastScoreDiscount = scoreDiscountTotal.subtract(avgScoreDiscount.multiply(new BigDecimal(sonOrderList.size() - 1))).setScale(2, BigDecimal.ROUND_HALF_UP);
+//                 BigDecimal lastScoreDiscount = scoreDiscountTotal.subtract(avgScoreDiscount.multiply(new BigDecimal(sonOrderList.size() - 1))).setScale(2, BigDecimal.ROUND_HALF_UP);
                  //目前一个订单只会有一种商品，直播也是一个
                 orderDetailVo.setLiveName(sonOrderList.get(0).getLiveName());
+                List<SonOrderVO> detailList = new ArrayList<>();
                 for (SonOrderVO sonOrderVo : sonOrderList) {
-                    hbDisCountTotal = hbDisCountTotal.add(sonOrderVo.getHbDiscount());
-                    rebateDiscountTotal = rebateDiscountTotal.add(sonOrderVo.getVoucherDiscount());
-                    commidityTotalPice = commidityTotalPice.add(new BigDecimal(sonOrderVo.getNum())
-                            .multiply(new BigDecimal(sonOrderVo.getCommodityCurrentPrice()))).setScale(2, BigDecimal.ROUND_HALF_UP);
-                    if (StringUtils.isNotBlank(sonOrderVo.getCouponCode())) {
-                        MMUserCouponVO userCouponVO = msUserCouponService.getUserCouponByCouponCode(sonOrderVo
-                                .getCouponCode());
-                        if (userCouponVO != null) {
-                            userCouponVO.setRealDiscount(sonOrderVo.getRealAmount());
+                    if (sonOrderVo.getCommodityId().equals(commodityId)) {
+                        hbDisCountTotal = hbDisCountTotal.add(sonOrderVo.getHbDiscount());
+                        rebateDiscountTotal = rebateDiscountTotal.add(sonOrderVo.getVoucherDiscount());
+                        commidityTotalPice = commidityTotalPice.add(new BigDecimal(sonOrderVo.getNum())
+                                .multiply(new BigDecimal(sonOrderVo.getCommodityCurrentPrice()))).setScale(2, BigDecimal.ROUND_HALF_UP);
+                        if (StringUtils.isNotBlank(sonOrderVo.getCouponCode())) {
+                            MMUserCouponVO userCouponVO = msUserCouponService.getUserCouponByCouponCode(sonOrderVo
+                                    .getCouponCode());
+                            if (userCouponVO != null) {
+                                userCouponVO.setRealDiscount(sonOrderVo.getRealAmount());
+                            }
                         }
+                        sonOrderVo.setIntegralDiscount(avgScoreDiscount);
+                        detailList.add(sonOrderVo);
                     }
-                    sonOrderVo.setIntegralDiscount(avgScoreDiscount);
                 }
-                 sonOrderList.get(sonOrderList.size() - 1).setIntegralDiscount(lastScoreDiscount);
-            }
+//                 sonOrderList.get(sonOrderList.size() - 1).setIntegralDiscount(lastScoreDiscount);
+                 orderDetailVo.setSonOrderList(detailList);
+             }
             if (StringUtils.isNotBlank(orderDetailVo.getCommitOrderTime())) {
                 orderDetailVo.setCommitOrderTime(orderDetailVo.getCommitOrderTime().substring(0, 16));
             }
