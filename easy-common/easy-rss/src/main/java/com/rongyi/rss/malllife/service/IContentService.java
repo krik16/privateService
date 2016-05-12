@@ -365,5 +365,5 @@ public interface IContentService {
 	
 	public int countWelFareNew(Date pullAt);
 
-	public List<ContentPojo> allListWelFarePage(List<String> brandIdList, Integer pageSize, Integer currentPage);
+	public PagingVO<ContentPojo> allListWelFarePage(List<String> brandIdList, Integer pageSize, Integer currentPage);
 }

@@ -429,5 +429,5 @@ public interface ROAContentService {
 	* @date 2016年5月11日 下午8:26:50 
 	* @throws
 	 */
-	public List<ContentPojo> allListWelFarePage(List<String> brandIdList,Integer pageSize,Integer currentPage)throws Exception;
+	public PagingVO<ContentPojo> allListWelFarePage(List<String> brandIdList,Integer pageSize,Integer currentPage)throws Exception;
 }
