@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.malllife.domain.AppReference2DO;
 import com.rongyi.easy.malllife.domain.AppReferenceDO;
 import com.rongyi.easy.malllife.domain.ContentDDO;
@@ -403,7 +404,7 @@ public interface ROAContentService {
 	* @date 2016年5月6日 上午10:35:10 
 	* @throws
 	 */
-	public PagingVO<ContentPojo> pagingListWelFare(Integer pageSize,Integer currentPage) throws Exception;
+	public ResponseVO pagingListWelFare(Integer pageSize,Integer currentPage) throws Exception;
 	/**
 	 * 
 	* @Title: countWelFareNew 
@@ -429,5 +430,5 @@ public interface ROAContentService {
 	* @date 2016年5月11日 下午8:26:50 
 	* @throws
 	 */
-	public PagingVO<ContentPojo> allListWelFarePage(List<String> brandIdList,Integer pageSize,Integer currentPage)throws Exception;
+	public ResponseVO allListWelFarePage(List<String> brandIdList,Integer pageSize,Integer currentPage)throws Exception;
 }
