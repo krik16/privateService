@@ -417,4 +417,17 @@ public interface ROAContentService {
 	* @throws
 	 */
 	public int countWelFareNew(Date pullAt) throws Exception;
+	/**
+	 * 
+	* @Title: allListWelFarePage 
+	* @Description: 分页查询爱品牌
+	* @param @param activityMap
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return List<ContentPojo>    返回类型 
+	* @author shaozhou
+	* @date 2016年5月11日 下午8:26:50 
+	* @throws
+	 */
+	public PagingVO<ContentPojo> allListWelFarePage(List<String> brandIdList,Integer pageSize,Integer currentPage)throws Exception;
 }
