@@ -15,10 +15,10 @@ public class HipsterStrategyVO implements Serializable{
 	
 	private String id;//文章id
 	private String description;//文章描述
-	private Integer artType; //类型:0文章  1同城
+	private Integer type; //类型:0文章  1同城
 	private String title;//文章标题
 	private String picUrl;//文章封面图
-	private String detailUrl;//文章详情跳转路径
+	private String articleUrl;//文章详情跳转路径
 	public String getId() {
 		return id;
 	}
@@ -31,11 +31,11 @@ public class HipsterStrategyVO implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Integer getArtType() {
-		return artType;
+	public Integer getType() {
+		return type;
 	}
-	public void setArtType(Integer artType) {
-		this.artType = artType;
+	public void setType(Integer type) {
+		this.type = type;
 	}
 	public String getTitle() {
 		return title;
@@ -49,17 +49,17 @@ public class HipsterStrategyVO implements Serializable{
 	public void setPicUrl(String picUrl) {
 		this.picUrl = picUrl;
 	}
-	public String getDetailUrl() {
-		return detailUrl;
+	public String getArticleUrl() {
+		return articleUrl;
 	}
-	public void setDetailUrl(String detailUrl) {
-		this.detailUrl = detailUrl;
+	public void setArticleUrl(String articleUrl) {
+		this.articleUrl = articleUrl;
 	}
 	@Override
 	public String toString() {
 		return "HipsterStrategyVO [id=" + id + ", description=" + description
-				+ ", artType=" + artType + ", title=" + title + ", picUrl="
-				+ picUrl + ", detailUrl=" + detailUrl + "]";
+				+ ", type=" + type + ", title=" + title + ", picUrl="
+				+ picUrl + ", articleUrl=" + articleUrl + "]";
 	}
 	
 }
