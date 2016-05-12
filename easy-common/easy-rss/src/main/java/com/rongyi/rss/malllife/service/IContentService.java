@@ -361,7 +361,7 @@ public interface IContentService {
 	public List<ContentPojo> allListWelFareOld(List<Map<String, Object>> activityIdList) throws Exception;
 
 
-	public PagingVO<ContentPojo> pagingListWelFare(Integer pageSize, Integer currentPage);
+	public PagingVO<ContentPojo> pagingListWelFare(Integer pageSize, Integer currentPage) throws Exception;
 	
 	public int countWelFareNew(Date pullAt);
 
