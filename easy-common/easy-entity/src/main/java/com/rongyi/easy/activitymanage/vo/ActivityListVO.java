@@ -27,6 +27,25 @@ public class ActivityListVO implements Serializable{
 
     private String shareDesc;
 
+    private Integer roundSum;
+    private Integer roundType;
+
+    public Integer getRoundSum() {
+        return roundSum;
+    }
+
+    public void setRoundSum(Integer roundSum) {
+        this.roundSum = roundSum;
+    }
+
+    public Integer getRoundType() {
+        return roundType;
+    }
+
+    public void setRoundType(Integer roundType) {
+        this.roundType = roundType;
+    }
+
     public ActivityListVO(){
 
     }
@@ -103,6 +122,8 @@ public class ActivityListVO implements Serializable{
                 .append("businessDistrictId", businessDistrictId)
                 .append("shareTitle", shareTitle)
                 .append("shareDesc", shareDesc)
+                .append("roundSum", roundSum)
+                .append("roundType", roundType)
                 .toString();
     }
 }

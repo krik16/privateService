@@ -1,9 +1,12 @@
 package com.rongyi.easy.activitymanage.entity;
 
+import com.google.inject.internal.Lists;
+import com.rongyi.easy.mcmc.vo.CommodityBuyerVO;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by yangyang on 2016/5/10.
@@ -29,6 +32,16 @@ public class TemplateRound implements Serializable {
     private Integer updateBy;
     /**版本*/
     private Integer version;
+
+    private List<CommodityBuyerVO> commodityBuyerVOList = Lists.newArrayList();
+
+    public List<CommodityBuyerVO> getCommodityBuyerVOList() {
+        return commodityBuyerVOList;
+    }
+
+    public void setCommodityBuyerVOList(List<CommodityBuyerVO> commodityBuyerVOList) {
+        this.commodityBuyerVOList = commodityBuyerVOList;
+    }
 
     public Integer getActivityTemplateId() {
         return activityTemplateId;
@@ -133,6 +146,7 @@ public class TemplateRound implements Serializable {
                 .append("version", version)
                 .append("activityTemplateId", activityTemplateId)
                 .append("name", name)
+                .append("commodityBuyerVOList",commodityBuyerVOList)
                 .toString();
     }
 }

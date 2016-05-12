@@ -1,8 +1,11 @@
 package com.rongyi.easy.content_v2.vo;
 
+import com.google.inject.internal.Lists;
+import com.rongyi.easy.mcmc.vo.CommodityBuyerVO;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * create by com.rongyi.easy.content_v2.vo ideaworkspace :author lijing
@@ -22,6 +25,15 @@ public class ActivityContentListVO implements Serializable{
     private String shareTitle;
     private String shareDesc;
     private String appTitle;
+    private List<CommodityBuyerVO> commodityBuyerVOList = Lists.newArrayList();
+
+    public List<CommodityBuyerVO> getCommodityBuyerVOList() {
+        return commodityBuyerVOList;
+    }
+
+    public void setCommodityBuyerVOList(List<CommodityBuyerVO> commodityBuyerVOList) {
+        this.commodityBuyerVOList = commodityBuyerVOList;
+    }
 
     public Integer getId() {
         return id;
@@ -107,6 +119,7 @@ public class ActivityContentListVO implements Serializable{
                 .append("shareTitle", shareTitle)
                 .append("shareDesc", shareDesc)
                 .append("appTitle", appTitle)
+                .append("commodityBuyerVOList",commodityBuyerVOList)
                 .toString();
     }
 }
