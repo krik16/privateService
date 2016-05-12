@@ -66,8 +66,17 @@ public class ContentPojo implements Serializable{
     private String brandLogo;// 文章关联品牌图片
     private Date push_at;//推送时间即发布时间
     private String connect_id;//关联映射表id
+    private String brandId;
     private List<String> mallIds;
     
+	public String getBrandId() {
+		return brandId;
+	}
+
+	public void setBrandId(String brandId) {
+		this.brandId = brandId;
+	}
+
 	public String getBrandLogo() {
 		return brandLogo;
 	}

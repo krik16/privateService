@@ -1,6 +1,7 @@
 package com.rongyi.rss.malllife.service;
 
 
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.malllife.domain.AppReference2DO;
 import com.rongyi.easy.malllife.domain.AppReferenceDO;
 import com.rongyi.easy.malllife.domain.ContentDDO;
@@ -361,9 +362,9 @@ public interface IContentService {
 	public List<ContentPojo> allListWelFareOld(List<Map<String, Object>> activityIdList) throws Exception;
 
 
-	public PagingVO<ContentPojo> pagingListWelFare(Integer pageSize, Integer currentPage);
+	public ResponseVO pagingListWelFare(Integer pageSize, Integer currentPage) throws Exception;
 	
 	public int countWelFareNew(Date pullAt);
 
-	public PagingVO<ContentPojo> allListWelFarePage(List<String> brandIdList, Integer pageSize, Integer currentPage);
+	public ResponseVO allListWelFarePage(List<String> brandIdList, Integer pageSize, Integer currentPage) throws Exception;
 }
