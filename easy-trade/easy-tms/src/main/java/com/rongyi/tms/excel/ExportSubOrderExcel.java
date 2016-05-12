@@ -129,7 +129,7 @@ public class ExportSubOrderExcel {
     }
 
     private String convertPayChannel(Byte payChannel) {
-        String result = "--";
+        String result = "其他";
         if (payChannel!=null){
             switch (payChannel){
                 case 1:
