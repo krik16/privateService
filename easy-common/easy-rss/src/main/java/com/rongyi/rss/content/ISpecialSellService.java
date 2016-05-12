@@ -34,12 +34,12 @@ public interface ISpecialSellService {
 	 * 查询APP首页潮人攻略展示
 	 * @return
 	 */
-	public RaidersHomeVo getRaidersHomeVo()throws Exception;
+	public RaidersHomeVo getRaidersHomeVo(Map paramMap)throws Exception;
 	
 	/**
 	 * 查询APP潮人攻略列表
 	 * @return
 	 * @throws Exception
 	 */
-	public ResponseVO getRaidersAppList(ContentHelpParam param)throws Exception;
+	public ResponseVO getRaidersAppList(Map paramMap)throws Exception;
 }
