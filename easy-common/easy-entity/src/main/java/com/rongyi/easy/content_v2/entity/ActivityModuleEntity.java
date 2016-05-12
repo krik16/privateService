@@ -28,7 +28,7 @@ public class ActivityModuleEntity implements Serializable {
 	@Override
 	public String toString() {
 		return "ActivityModuleEntity [id=" + id + ", title=" + title + ", picUrl=" + picUrl + ", sortIdx=" + sortIdx
-				+ ", isVisible=" + isVisible + "]";
+				+ ", isVisible=" + isVisible +",isSingle="+isSingle+",isChecked="+isChecked+ "]";
 	}
 
 	public int getId() {

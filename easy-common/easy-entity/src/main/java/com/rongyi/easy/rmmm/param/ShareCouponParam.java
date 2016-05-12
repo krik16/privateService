@@ -27,6 +27,16 @@ public class ShareCouponParam  extends MalllifeBaseParam implements Serializable
 	private Integer price;//红包金额 精确到分
 	
 	private Integer userOpenidId;//
+	
+	private String way;//0：领取红包接口成功  1领取红包接口失败 2不是来源于领取红包接口
+
+	public String getWay() {
+		return way;
+	}
+
+	public void setWay(String way) {
+		this.way = way;
+	}
 
 	public Integer getUserOpenidId() {
 		return userOpenidId;
@@ -123,7 +133,7 @@ public class ShareCouponParam  extends MalllifeBaseParam implements Serializable
 				+ ", headImg=" + headImg + ", nickName=" + nickName + ", type="
 				+ type + ", couponCode=" + couponCode + ", orderType="
 				+ orderType + ", price=" + price + ", userOpenidId="
-				+ userOpenidId + "]";
+				+ userOpenidId + ", way=" + way + "]";
 	}
 
 }

@@ -63,9 +63,9 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	/** 直播id */
 	private String liveId;
 
-	private String saleId; // 特卖ID
+	private Integer saleId; // 特卖ID
 
-	private String flashSaleId; // 闪购ID
+	private Integer flashSaleId; // 闪购ID
 
 	/** 商品类型 (买手 1， 全部商品 0, 特卖场 2, 闪购 3，导购商品 4)*/   //old
 	// 商品类型1：所有商品 2：导购商品 3：买手商品 4：闪购 5：卖场  6,直播     new
@@ -252,20 +252,20 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	}
 
 	@NeedCheck(getFieldName = "saleId")
-	public String getSaleId() {
+	public Integer getSaleId() {
 		return saleId;
 	}
 
-	public void setSaleId(String saleId) {
+	public void setSaleId(Integer saleId) {
 		this.saleId = saleId;
 	}
 
 	@NeedCheck(getFieldName = "flashSaleId")
-	public String getFlashSaleId() {
+	public Integer getFlashSaleId() {
 		return flashSaleId;
 	}
 
-	public void setFlashSaleId(String flashSaleId) {
+	public void setFlashSaleId(Integer flashSaleId) {
 		this.flashSaleId = flashSaleId;
 	}
 
