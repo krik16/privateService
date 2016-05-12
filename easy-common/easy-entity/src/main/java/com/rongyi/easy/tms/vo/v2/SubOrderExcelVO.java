@@ -1,7 +1,6 @@
 package com.rongyi.easy.tms.vo.v2;
 
 import java.lang.reflect.Field;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,10 +14,10 @@ public class SubOrderExcelVO {
 
     private String commodityNo;
 
-    private Date createAtBegin;
+    private String createAtBegin;
 
 
-    private Date createAtEnd;
+    private String createAtEnd;
 
     private Integer guideType;
 
@@ -48,7 +47,7 @@ public class SubOrderExcelVO {
 
     private String commodityId;
 
-    private Date createAt;
+    private String createAt;
 
     public String getCartOrderNo() {
         return cartOrderNo;
@@ -66,19 +65,19 @@ public class SubOrderExcelVO {
         this.commodityNo = commodityNo;
     }
 
-    public Date getCreateAtBegin() {
+    public String getCreateAtBegin() {
         return createAtBegin;
     }
 
-    public void setCreateAtBegin(Date createAtBegin) {
+    public void setCreateAtBegin(String createAtBegin) {
         this.createAtBegin = createAtBegin;
     }
 
-    public Date getCreateAtEnd() {
+    public String getCreateAtEnd() {
         return createAtEnd;
     }
 
-    public void setCreateAtEnd(Date createAtEnd) {
+    public void setCreateAtEnd(String createAtEnd) {
         this.createAtEnd = createAtEnd;
     }
 
@@ -138,11 +137,11 @@ public class SubOrderExcelVO {
         this.commodityId = commodityId;
     }
 
-    public Date getCreateAt() {
+    public String getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(Date createAt) {
+    public void setCreateAt(String createAt) {
         this.createAt = createAt;
     }
 

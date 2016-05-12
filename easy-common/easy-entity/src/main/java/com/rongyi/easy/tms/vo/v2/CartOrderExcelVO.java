@@ -1,7 +1,6 @@
 package com.rongyi.easy.tms.vo.v2;
 
 import java.lang.reflect.Field;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,9 +28,9 @@ public class CartOrderExcelVO {
 
     private String amountType;
 
-    private Date createAtBegin;
+    private String createAtBegin;
 
-    private Date createAtEnd;
+    private String createAtEnd;
 
     private String orderNo;
 
@@ -56,19 +55,19 @@ public class CartOrderExcelVO {
         this.amountType = amountType;
     }
 
-    public Date getCreateAtBegin() {
+    public String getCreateAtBegin() {
         return createAtBegin;
     }
 
-    public void setCreateAtBegin(Date createAtBegin) {
+    public void setCreateAtBegin(String createAtBegin) {
         this.createAtBegin = createAtBegin;
     }
 
-    public Date getCreateAtEnd() {
+    public String getCreateAtEnd() {
         return createAtEnd;
     }
 
-    public void setCreateAtEnd(Date createAtEnd) {
+    public void setCreateAtEnd(String createAtEnd) {
         this.createAtEnd = createAtEnd;
     }
 
