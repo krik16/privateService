@@ -46,7 +46,7 @@ public enum AppErrorCode {
     
     ERROR_WECHAT_APPID_OPENID(1067001,"微信appId或渠道或openId不能为空"),
     ERROR_ORDERID_ISNULL(1067002,"订单号不能为空"),
-    
+    ERROR_SEARCH_BRANDIDS(1067003,"获取有商品的品牌id集合出错"),
     /** 分享红包  7100---7200*/
 //    ERROR_PHONE_HAVEBIND(1067100,"手机号已被绑定"),
     ERROR_PHONE_ISNOTMOBILE(1067101,"手机号格式不正确，请重新输入"),
