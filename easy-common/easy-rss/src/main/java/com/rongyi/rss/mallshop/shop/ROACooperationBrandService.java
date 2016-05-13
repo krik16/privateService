@@ -2,6 +2,8 @@ package com.rongyi.rss.mallshop.shop;
 
 import java.util.List;
 
+import org.bson.types.ObjectId;
+
 import com.rongyi.easy.entity.BrandEntity;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
 import com.rongyi.easy.rmmm.entity.BrandInfoEntity;
@@ -132,4 +134,11 @@ public interface ROACooperationBrandService {
 	 * @throws Exception
 	 */
 	public Integer getAndSaveCooperateBrandByBrandMid(String brandMid) throws Exception;
+	/**
+	 * 根据品牌id集合查询品牌墙
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public BrandWallListVO getBrandWallListByIds(List<ObjectId> listIds) throws Exception;
 }

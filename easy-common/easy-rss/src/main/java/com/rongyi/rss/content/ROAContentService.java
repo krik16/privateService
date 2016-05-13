@@ -408,5 +408,12 @@ public interface ROAContentService {
 	 * @return
 	 */
 	public List<LoveBrand> findLoveBrands();
+
+	/**
+	 * 特卖根据typeVal获取contentId
+	 * @param typeVal
+	 * @return
+	 */
+	public Integer selectSaleContentIdByType(Integer typeVal);
 	
 }

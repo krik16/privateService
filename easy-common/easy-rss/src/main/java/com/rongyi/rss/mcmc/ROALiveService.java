@@ -139,4 +139,12 @@ public interface ROALiveService {
 	 * @return List<brandVo>
 	 */
 	ResponseVO searchBrandsForUser(SearchCommodityBrandParam brandParam);
+	/**
+	 * 查询品牌列表id（mongoId）
+	 *
+	 * @param brandParam
+	 *
+	 * @return
+	 */
+	ResponseVO searchBrandIds(SearchCommodityBrandParam brandParam);
 }
