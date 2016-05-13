@@ -171,5 +171,14 @@ public interface LiveService {
 	 */
 	ResponseVO searchBrandsForUser(SearchCommodityBrandParam brandParam);
 
+	/**
+	 * 查询品牌列表id（mongoId）
+	 *
+	 * @param brandParam
+	 *
+	 * @return
+	 */
+	ResponseVO searchBrandIds(SearchCommodityBrandParam brandParam);
+
 }
 
