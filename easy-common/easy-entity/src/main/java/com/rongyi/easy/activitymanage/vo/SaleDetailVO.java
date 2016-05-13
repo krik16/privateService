@@ -26,15 +26,34 @@ public class SaleDetailVO implements Serializable {
     private String activityUrl;
     private String contentUrl;
     private List<CommodityBuyerVO> commodityList;
-    private Integer nextActTemplateId;//null没有下一场字段，0没有下一场，其余有下一场
+    private Integer nextTemplateRoundId;//null没有下一场字段，0没有下一场，其余有下一场
+    private Integer nextId;
+    private Integer nextContentId;
 
-    public Integer getNextActTemplateId() {
-        return nextActTemplateId;
+    public Integer getNextTemplateRoundId() {
+        return nextTemplateRoundId;
     }
 
-    public void setNextActTemplateId(Integer nextActTemplateId) {
-        this.nextActTemplateId = nextActTemplateId;
+    public void setNextTemplateRoundId(Integer nextTemplateRoundId) {
+        this.nextTemplateRoundId = nextTemplateRoundId;
     }
+
+    public Integer getNextId() {
+        return nextId;
+    }
+
+    public void setNextId(Integer nextId) {
+        this.nextId = nextId;
+    }
+
+    public Integer getNextContentId() {
+        return nextContentId;
+    }
+
+    public void setNextContentId(Integer nextContentId) {
+        this.nextContentId = nextContentId;
+    }
+
 
     public Integer getId() {
         return id;
@@ -124,6 +143,8 @@ public class SaleDetailVO implements Serializable {
         this.shareDesc = shareDesc;
     }
 
+
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -138,7 +159,9 @@ public class SaleDetailVO implements Serializable {
                 .append("activityUrl", activityUrl)
                 .append("contentUrl", contentUrl)
                 .append("commodityList", commodityList)
-                .append("nextActTemplateId",nextActTemplateId)
+                .append("nextActTemplateId",nextTemplateRoundId)
+                .append("nextId",nextId)
+                .append("nextContentId",nextContentId)
                 .toString();
     }
 }
