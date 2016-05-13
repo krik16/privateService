@@ -404,9 +404,9 @@ public interface ROAContentService {
 	public ForumHomepage findHomepageByCode(String code);
 
 	/**
-	 * 获取爱品牌idlist
+	 * 获取爱品牌list
 	 * @return
 	 */
-	public List<String> findLoveBrandIds();
+	public List<LoveBrand> findLoveBrands();
 	
 }
