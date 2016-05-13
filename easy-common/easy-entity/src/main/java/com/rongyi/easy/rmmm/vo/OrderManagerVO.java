@@ -1,11 +1,8 @@
 package com.rongyi.easy.rmmm.vo;
 
-import com.rongyi.easy.mcmc.vo.CommoditySpecColumnVO;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 public class OrderManagerVO implements Serializable {
 
@@ -39,51 +36,9 @@ public class OrderManagerVO implements Serializable {
 	private BigDecimal payAmount;//支付金额
 	private BigDecimal couponAmount;//平台促销抵扣
 	private BigDecimal integralAmount;//积分抵扣
+	private BigDecimal hbAmount;//红包抵扣
 	private Integer orderSource;//订单来源
 
-
-
-	/**
-	 * 商品编码
-	 */
-	private String commodityMid;
-	/**
-	 * 购买数量
-	 */
-	private Integer quantity;
-	/**
-	 * 商品规格id
-	 */
-	private String commoditySpecMid;
-
-	/**
-	 * 商品名称
-	 */
-	private String commodityName;
-	/**
-	 * 商品编码
-	 */
-	private String commodityNo;
-
-	/**
-	 * 商品现价
-	 */
-	private String commodityCurrentPrice;
-
-	/**
-	 * 规格
-	 */
-	private List<CommoditySpecColumnVO> CommoditySpecColumnList;
-
-	/**
-	 * 商品图片
-	 */
-	List<String> picList;
-
-	/*
-	 *单价
-	 */
-	private Double unitPrice;
 	public String getOrderCartNo() {
 		return orderCartNo;
 	}
@@ -233,76 +188,12 @@ public class OrderManagerVO implements Serializable {
 		this.userId = userId;
 	}
 
-	public String getCommodityMid() {
-		return commodityMid;
+	public BigDecimal getHbAmount() {
+		return hbAmount;
 	}
 
-	public void setCommodityMid(String commodityMid) {
-		this.commodityMid = commodityMid;
-	}
-
-	public Integer getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
-	}
-
-	public String getCommoditySpecMid() {
-		return commoditySpecMid;
-	}
-
-	public void setCommoditySpecMid(String commoditySpecMid) {
-		this.commoditySpecMid = commoditySpecMid;
-	}
-
-	public String getCommodityName() {
-		return commodityName;
-	}
-
-	public void setCommodityName(String commodityName) {
-		this.commodityName = commodityName;
-	}
-
-	public List<CommoditySpecColumnVO> getCommoditySpecColumnList() {
-		return CommoditySpecColumnList;
-	}
-
-	public void setCommoditySpecColumnList(List<CommoditySpecColumnVO> commoditySpecColumnList) {
-		CommoditySpecColumnList = commoditySpecColumnList;
-	}
-
-	public String getCommodityNo() {
-		return commodityNo;
-	}
-
-	public void setCommodityNo(String commodityNo) {
-		this.commodityNo = commodityNo;
-	}
-
-	public List<String> getPicList() {
-		return picList;
-	}
-
-	public void setPicList(List<String> picList) {
-		this.picList = picList;
-	}
-
-	public String getCommodityCurrentPrice() {
-		return commodityCurrentPrice;
-	}
-
-	public void setCommodityCurrentPrice(String commodityCurrentPrice) {
-		this.commodityCurrentPrice = commodityCurrentPrice;
-	}
-
-	public Double getUnitPrice() {
-		return unitPrice;
-	}
-
-	public void setUnitPrice(Double unitPrice) {
-		this.unitPrice = unitPrice;
+	public void setHbAmount(BigDecimal hbAmount) {
+		this.hbAmount = hbAmount;
 	}
 
 	@Override
@@ -315,5 +206,5 @@ public class OrderManagerVO implements Serializable {
 				+ ", orderTotalAmount=" + orderTotalAmount + ", createAt="
 				+ createAt + ", discountFee=" + discountFee + "]";
 	}
-	
+
 }
