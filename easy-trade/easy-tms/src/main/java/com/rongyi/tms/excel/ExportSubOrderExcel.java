@@ -66,14 +66,14 @@ public class ExportSubOrderExcel {
                 for (int i = 0; i < orderForms.size(); i++) {
                     OrderManagerVO vo = orderForms.get(i);
                     sheet.getRow(i + 2).getCell(0).setCellValue(vo.getOrderNo());
-                    if(vo.getCommodityMid()!= null && vo.getCommoditySpecMid() != null) {
-                        CommodityVO commodityVO = commodityService.getCommoditySpecInfoById(vo.getCommodityMid(), vo.getCommoditySpecMid());
-                        if(commodityVO != null) {
-                            sheet.getRow(i + 2).getCell(1).setCellValue(commodityVO.getCommodityName());
-                        }
-                    }
-                    sheet.getRow(i + 2).getCell(2).setCellValue(vo.getUnitPrice());
-                    sheet.getRow(i + 2).getCell(3).setCellValue(vo.getQuantity());
+//                    if(vo.getCommodityMid()!= null && vo.getCommoditySpecMid() != null) {
+//                        CommodityVO commodityVO = commodityService.getCommoditySpecInfoById(vo.getCommodityMid(), vo.getCommoditySpecMid());
+//                        if(commodityVO != null) {
+//                            sheet.getRow(i + 2).getCell(1).setCellValue(commodityVO.getCommodityName());
+//                        }
+//                    }
+//                    sheet.getRow(i + 2).getCell(2).setCellValue(vo.getUnitPrice());
+//                    sheet.getRow(i + 2).getCell(3).setCellValue(vo.getQuantity());
                     sheet.getRow(i + 2).getCell(4).setCellValue(vo.getSellerAccount());
                     sheet.getRow(i + 2).getCell(5).setCellValue(vo.getUsername());
                     sheet.getRow(i + 2).getCell(6).setCellValue(vo.getMallName());
@@ -101,19 +101,19 @@ public class ExportSubOrderExcel {
         int pageSize = 1000;
         int TOTAL_SIZE = paramsMap.containsKey("pageSize")?Integer.valueOf(paramsMap.get("pageSize").toString()):5000;
         int currentPage = 1;
-        for (int i=0; i< TOTAL_SIZE / pageSize; i++){
-            paramsMap.put("pageSize", pageSize);
-            paramsMap.put("currentPage", currentPage);
-            PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchSubListByMap(paramsMap);
-            List<OrderManagerVO> pageData = pagingVO.getDataList();
-            if (pageData!=null) {
-                orderForms.addAll(pageData);
-                if (pageData.size()< pageSize)
-                    break;
-            }else
-                break;
-            currentPage++;
-        }
+//        for (int i=0; i< TOTAL_SIZE / pageSize; i++){
+//            paramsMap.put("pageSize", pageSize);
+//            paramsMap.put("currentPage", currentPage);
+//            PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchSubListByMap(paramsMap);
+//            List<OrderManagerVO> pageData = pagingVO.getDataList();
+//            if (pageData!=null) {
+//                orderForms.addAll(pageData);
+//                if (pageData.size()< pageSize)
+//                    break;
+//            }else
+//                break;
+//            currentPage++;
+//        }
         return orderForms;
     }
 

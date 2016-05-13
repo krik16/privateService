@@ -1,32 +1,10 @@
 package com.rongyi.tms.web.controller.v2;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.rongyi.tms.excel.ExportSubOrderExcel;
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.rongyi.core.bean.ResponseData;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.bsoms.entity.UserInfo;
 import com.rongyi.easy.coupon.vo.MMUserCouponVO;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
-import com.rongyi.easy.mcmc.vo.CommodityVO;
 import com.rongyi.easy.mcmc.vo.CommodityWebVO;
 import com.rongyi.easy.rmmm.entity.MallCooperateEntity;
 import com.rongyi.easy.rmmm.vo.OrderManagerVO;
@@ -47,6 +25,25 @@ import com.rongyi.tms.Exception.BizException;
 import com.rongyi.tms.Exception.PermissionException;
 import com.rongyi.tms.constants.Constant;
 import com.rongyi.tms.constants.ConstantEnum;
+import com.rongyi.tms.excel.ExportOsmOrderExcel;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 订单管理
@@ -65,7 +62,7 @@ public class SubOrderController extends BaseControllerV2 {
     private IUserInfoService iUserInfoService;
 
     @Autowired
-    private ExportSubOrderExcel exportSubOrderExcel;
+    private ExportOsmOrderExcel exportOsmOrderExcel;
 
     @Autowired
     private MSUserCouponService msUserCouponService;
@@ -97,28 +94,14 @@ public class SubOrderController extends BaseControllerV2 {
         ResponseData responseData;
         try {
             LOGGER.info("子订单列表:paramsMap={}", paramsMap);
-            permissionCheck(request, "ORDER_GOODSON_VIEW");
+//            permissionCheck(request, "ORDER_GOODSON_VIEW");
             this.replaceListToNull(paramsMap);// 过滤前台传入的空字符串
             warpToParamMap(paramsMap);
-            PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchSubListByMap(paramsMap);
+            PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchListByMap(paramsMap);
 
-            // 通过商品编号，商品规格id，获得商品信息
-//            CommodityVO commodityVO = commodityService.getCommoditySpecInfoById(commodityId, specId);
             List<OrderManagerVO> orderForms = pagingVO.getDataList();
             if (orderForms == null)
                 orderForms = new ArrayList<>();
-            for (OrderManagerVO orderManagerVO : orderForms) {
-                orderManagerVO.setPayAmount(orderManagerVO.getOrderTotalAmount());
-                CommodityVO commodityVO = commodityService.getCommoditySpecInfoById(orderManagerVO.getCommodityMid(), orderManagerVO.getCommoditySpecMid());
-                if (commodityVO != null) {
-                    orderManagerVO.setCommodityName(commodityVO.getCommodityName());
-                    orderManagerVO.setCommoditySpecColumnList(commodityVO.getCommoditySpecList().get(0).getSpecColumnValues());
-                    orderManagerVO.setCommodityNo(commodityVO.getCommodityCode());
-                    orderManagerVO.setCommodityCurrentPrice(commodityVO.getCommodityCurrentPrice());
-                }
-                List<String> picList = commodityService.getCommodityPicList(orderManagerVO.getCommodityMid());
-                orderManagerVO.setPicList(picList);
-            }
             int totalPage = pagingVO.getTotalSize();
             int currentPage = pagingVO.getCurrentPage();
             responseData = ResponseData.success(orderForms, currentPage, Constant.PAGE.PAGESIZE, totalPage);
@@ -139,45 +122,42 @@ public class SubOrderController extends BaseControllerV2 {
 
     @RequestMapping("/detail")
     @ResponseBody
-    public ResponseData detail(HttpServletRequest request, Integer id,String commodityId) {
+    public ResponseData detail(HttpServletRequest request, Integer id) {
         LOGGER.info("子订单详情:id={}", id);
         ResponseData responseData;
         try {
-            permissionCheck(request, "ORDER_GOODSON_VIEW");
+//            permissionCheck(request, "ORDER_GOODSON_VIEW");
             ParentOrderVO orderDetailVo = iOrderQueryService.searchRYOrderDetail(id);
             List<SonOrderVO> sonOrderList = orderDetailVo.getSonOrderList();
             BigDecimal rebateDiscountTotal = BigDecimal.ZERO;//抵扣券抵扣总金额
+//            BigDecimal discountTotal =  BigDecimal.ZERO;//总卡券信息（包含抵扣券）
             BigDecimal hbDisCountTotal = BigDecimal.ZERO;//红包抵扣总额
-            BigDecimal scoreDiscountTotal = new BigDecimal(orderDetailVo.getScoreDeduction());
-            BigDecimal commidityTotalPice = BigDecimal.ZERO;//商品总价
-             if (!CollectionUtils.isEmpty(sonOrderList)) {
-                 //积分分摊抵扣(元)
-                 BigDecimal avgScoreDiscount = scoreDiscountTotal.divide(new BigDecimal(sonOrderList.size()), 2, BigDecimal.ROUND_HALF_DOWN).setScale(2, BigDecimal.ROUND_HALF_DOWN);
-                 //积分分摊最后剩余积分
-//                 BigDecimal lastScoreDiscount = scoreDiscountTotal.subtract(avgScoreDiscount.multiply(new BigDecimal(sonOrderList.size() - 1))).setScale(2, BigDecimal.ROUND_HALF_UP);
-                 //目前一个订单只会有一种商品，直播也是一个
+            rebateDiscountTotal = rebateDiscountTotal.add(orderDetailVo.getCouponDiscount()).add(orderDetailVo.getOrderCouponDiscount());//抵扣信息
+            BigDecimal commidityTotalPice = new BigDecimal("0.00");//商品总价
+            if (!CollectionUtils.isEmpty(sonOrderList)) {
+                //目前一个订单只会有一种商品，直播也是一个
                 orderDetailVo.setLiveName(sonOrderList.get(0).getLiveName());
-                List<SonOrderVO> detailList = new ArrayList<>();
                 for (SonOrderVO sonOrderVo : sonOrderList) {
-                    if (sonOrderVo.getCommodityId().equals(commodityId)) {
-                        hbDisCountTotal = hbDisCountTotal.add(sonOrderVo.getHbDiscount());
-                        rebateDiscountTotal = rebateDiscountTotal.add(sonOrderVo.getVoucherDiscount());
-                        commidityTotalPice = commidityTotalPice.add(new BigDecimal(sonOrderVo.getNum())
-                                .multiply(new BigDecimal(sonOrderVo.getCommodityCurrentPrice()))).setScale(2, BigDecimal.ROUND_HALF_UP);
-                        if (StringUtils.isNotBlank(sonOrderVo.getCouponCode())) {
-                            MMUserCouponVO userCouponVO = msUserCouponService.getUserCouponByCouponCode(sonOrderVo
-                                    .getCouponCode());
-                            if (userCouponVO != null) {
-                                userCouponVO.setRealDiscount(sonOrderVo.getRealAmount());
-                            }
+                    hbDisCountTotal = hbDisCountTotal.add(sonOrderVo.getHbDiscount());
+                    commidityTotalPice = commidityTotalPice.add(new BigDecimal(sonOrderVo.getNum())
+                            .multiply(new BigDecimal(sonOrderVo.getCommodityCurrentPrice()))).setScale(2, BigDecimal.ROUND_HALF_UP);
+                    if (StringUtils.isNotBlank(sonOrderVo.getCouponCode())) {
+                        MMUserCouponVO userCouponVO = msUserCouponService.getUserCouponByCouponCode(sonOrderVo
+                                .getCouponCode());
+                        if (userCouponVO != null) {
+                            userCouponVO.setRealDiscount(sonOrderVo.getRealAmount());
                         }
-                        sonOrderVo.setIntegralDiscount(avgScoreDiscount);
-                        detailList.add(sonOrderVo);
                     }
                 }
-//                 sonOrderList.get(sonOrderList.size() - 1).setIntegralDiscount(lastScoreDiscount);
-                 orderDetailVo.setSonOrderList(detailList);
-             }
+            }
+            //抵扣券合计
+            if (rebateDiscountTotal.subtract((commidityTotalPice.subtract(orderDetailVo.getDiscountFee()))).compareTo(BigDecimal.ZERO) > 0) {
+                orderDetailVo.setDeductCouponAmount(commidityTotalPice.subtract(orderDetailVo.getDiscountFee()).setScale(2, 4).toString());
+            } else {
+                orderDetailVo.setDeductCouponAmount(rebateDiscountTotal.toString());
+            }
+            //红包抵扣合计
+            orderDetailVo.setTotalHongBaoAmount(hbDisCountTotal);
             if (StringUtils.isNotBlank(orderDetailVo.getCommitOrderTime())) {
                 orderDetailVo.setCommitOrderTime(orderDetailVo.getCommitOrderTime().substring(0, 16));
             }
@@ -187,25 +167,7 @@ public class SubOrderController extends BaseControllerV2 {
             if (StringUtils.isNotBlank(orderDetailVo.getPayTime())) {
                 orderDetailVo.setPayTime(orderDetailVo.getPayTime().substring(0, 16));
             }
-            SubOrderDetailVO subOrderDetailVO = new SubOrderDetailVO();
-            BeanUtils.copyProperties(orderDetailVo, subOrderDetailVO);
-            //商品合计总价
-            subOrderDetailVO.setCommiditySumTotalPice(commidityTotalPice.subtract(orderDetailVo.getDiscountFee()).setScale(2, 4));
-            //订单合计
-            if (commidityTotalPice.subtract(orderDetailVo.getDiscountFee()).compareTo(BigDecimal.ZERO) < 0) {
-                subOrderDetailVO.setOrderTotalPrice(new BigDecimal(orderDetailVo.getCommodityPostage()).setScale(2, 4));
-            } else {
-                subOrderDetailVO.setOrderTotalPrice(commidityTotalPice.subtract(orderDetailVo.getDiscountFee()).add(new BigDecimal(orderDetailVo.getCommodityPostage()).setScale(2, 4)));
-            }
-            //抵扣券合计
-            if (rebateDiscountTotal.subtract((commidityTotalPice.subtract(orderDetailVo.getDiscountFee()))).compareTo(BigDecimal.ZERO) > 0) {
-                subOrderDetailVO.setCouponDiscountPrice(commidityTotalPice.subtract(orderDetailVo.getDiscountFee()).setScale(2, 4));
-            } else {
-                subOrderDetailVO.setCouponDiscountPrice(rebateDiscountTotal);
-            }
-            //红包抵扣合计
-            subOrderDetailVO.setTotalHongBaoAmount(hbDisCountTotal);
-            responseData = ResponseData.success(subOrderDetailVO);
+            responseData = ResponseData.success(orderDetailVo);
         } catch (PermissionException e) {
             LOGGER.error(e.getMessage());
             e.printStackTrace();
@@ -230,7 +192,7 @@ public class SubOrderController extends BaseControllerV2 {
             permissionCheck(request, "ORDER_GOODSON_EXPORT");
             this.replaceListToNull(paramsMap);// 过滤前台传入的空字符串
             warpToParamMap(paramsMap);
-            exportSubOrderExcel.exportExcel(request, response, paramsMap);
+            exportOsmOrderExcel.exportExcel(request, response, paramsMap);
         } catch (BizException e) {
             LOGGER.error(e.getMessage());
         } catch (PermissionException e) {
@@ -405,8 +367,8 @@ public class SubOrderController extends BaseControllerV2 {
 
     private void replaceListToNull(Map<String, Object> paramsMap) {
         if (null != paramsMap) {
-            if (null != paramsMap.get("cartOrderNo") && StringUtils.isBlank(paramsMap.get("cartOrderNo").toString())) {
-                paramsMap.remove("cartOrderNo");
+            if (null != paramsMap.get("orderCartNo") && StringUtils.isBlank(paramsMap.get("orderCartNo").toString())) {
+                paramsMap.remove("orderCartNo");
             }
         }
         if (null != paramsMap) {
@@ -460,13 +422,18 @@ public class SubOrderController extends BaseControllerV2 {
             }
         }
         if (null != paramsMap) {
-            if (null != paramsMap.get("payBegin") && StringUtils.isBlank(paramsMap.get("payBegin").toString())) {
-                paramsMap.remove("payBegin");
+            if (null != paramsMap.get("amountType") && StringUtils.isBlank(paramsMap.get("amountType").toString())) {
+                paramsMap.remove("amountType");
             }
         }
         if (null != paramsMap) {
-            if (null != paramsMap.get("payEnd") && StringUtils.isBlank(paramsMap.get("payEnd").toString())) {
-                paramsMap.remove("payEnd");
+            if (null != paramsMap.get("realAmountBegin") && StringUtils.isBlank(paramsMap.get("realAmountBegin").toString())) {
+                paramsMap.remove("realAmountBegin");
+            }
+        }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("realAmountEnd") && StringUtils.isBlank(paramsMap.get("realAmountEnd").toString())) {
+                paramsMap.remove("realAmountEnd");
             }
         }
         if (null != paramsMap) {
