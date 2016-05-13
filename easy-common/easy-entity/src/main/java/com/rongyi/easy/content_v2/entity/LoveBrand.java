@@ -13,8 +13,17 @@ public class LoveBrand implements Serializable {
     private String brandName;
     private String brandLogo;
     private String brandId;
+    private int status;
+    
+    public int getStatus() {
+		return status;
+	}
 
-    public Integer getId() {
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public Integer getId() {
         return id;
     }
 
