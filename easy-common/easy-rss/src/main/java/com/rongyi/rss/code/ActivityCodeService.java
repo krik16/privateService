@@ -26,5 +26,5 @@ public interface ActivityCodeService {
      * @param count 数量
      * @return
      */
-    public List<String> getCouponCodeFromCouponId(String couponId,Integer count);
+    public List<String> getCouponCodesFromCouponId(String couponId,Integer count);
 }
