@@ -17,4 +17,5 @@ public interface IMalllifeUserBrandService {
 	public List<String> getUserBrand(String userId);
 	public List<UserBrand> getUserBrandDetailList(String userId);
 	public void updateByBrandId(String brandId);
+	public List<String> getUserBrandAndLove(String userId);
 }
