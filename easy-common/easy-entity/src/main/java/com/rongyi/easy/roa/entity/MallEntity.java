@@ -96,6 +96,7 @@ public class MallEntity implements Serializable {
 	private String simpleFloorName;//新增的floorName
     private ObjectId building_id;//关联的楼栋幢座id
     private String mall_level;//商场级别 A、B、C、S、SS
+    private String app_picturenew;//新的商圈图片
 	public ObjectId getId() {
 		return id;
 	}
@@ -535,5 +536,11 @@ public class MallEntity implements Serializable {
 	 */
 	public void setMall_level(String mall_level) {
 		this.mall_level = mall_level;
+	}
+	public String getApp_picturenew() {
+		return app_picturenew;
+	}
+	public void setApp_picturenew(String app_picturenew) {
+		this.app_picturenew = app_picturenew;
 	}
 }
