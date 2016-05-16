@@ -14,7 +14,7 @@ public class TrendsetterVO implements Serializable {
     private String describution;
     private String picUrl;
     private String title;
-    private List<TrendActivity> trendActivityList = Lists.newArrayList();
+    private List<TrendActivity> treActivityList = Lists.newArrayList();
 
     public String getDescribution() {
         return describution;
@@ -40,12 +40,12 @@ public class TrendsetterVO implements Serializable {
         this.title = title;
     }
 
-    public List<TrendActivity> getTrendActivityList() {
-        return trendActivityList;
+    public List<TrendActivity> getTreActivityList() {
+        return treActivityList;
     }
 
-    public void setTrendActivityList(List<TrendActivity> trendActivityList) {
-        this.trendActivityList = trendActivityList;
+    public void setTreActivityList(List<TrendActivity> treActivityList) {
+        this.treActivityList = treActivityList;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class TrendsetterVO implements Serializable {
                 .append("describution", describution)
                 .append("title", title)
                 .append("picUrl", picUrl)
-                .append("trendActivityList", trendActivityList)
+                .append("trendActivityList", treActivityList)
                 .toString();
     }
 }
