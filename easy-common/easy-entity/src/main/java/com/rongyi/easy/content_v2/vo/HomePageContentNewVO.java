@@ -28,14 +28,14 @@ public class HomePageContentNewVO implements Serializable  {
     /**爆抢福利*/
     private BenefitVO benefit;
     /**潮人攻略*/
-    private TrendsetterVO trendsetterVO;
+    private TrendsetterVO trendsetter;
 
-    public TrendsetterVO getTrendsetterVO() {
-        return trendsetterVO;
+    public TrendsetterVO getTrendsetter() {
+        return trendsetter;
     }
 
-    public void setTrendsetterVO(TrendsetterVO trendsetterVO) {
-        this.trendsetterVO = trendsetterVO;
+    public void setTrendsetter(TrendsetterVO trendsetter) {
+        this.trendsetter = trendsetter;
     }
 
     public List<BannerVO> getBanner() {
@@ -104,7 +104,7 @@ public class HomePageContentNewVO implements Serializable  {
                 .append("floatAd", floatAd)
                 .append("dailySale", dailySale)
                 .append("benefit", benefit)
-                .append("trendsetterVO", trendsetterVO)
+                .append("trendsetterVO", trendsetter)
                 .toString();
     }
 }
