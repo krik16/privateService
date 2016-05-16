@@ -10,5 +10,15 @@ import com.rongyi.easy.msgcenter.OrderPushParam;
  * Project:message-center
  */
 public interface WXPushOrderMsgService {
+    /**
+     * 微商城推送用户消息
+     * @param orderPushParam
+     */
     public void pushMessage(OrderPushParam orderPushParam);
+
+    /**
+     * 标准微信推送用户消息
+     * @param orderPushParam
+     */
+    public void pushStandardMessage(OrderPushParam orderPushParam);
 }
