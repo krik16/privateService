@@ -213,4 +213,11 @@ public interface CommodityService {
 
     public PagingVO<Commodity> findCommdityList(SearchCommodityParms searchCommodityParms);
 
+    /**
+     * 根据特卖ID获取前3（暂定）个商品列表
+     *
+     * @param saleId 特卖Id
+     * @return List<com.rongyi.easy.mcmc.vo.CommodityBuyerVO>
+     */
+    public ResponseVO topCommodityListBySaleId(Integer saleId);
 }
