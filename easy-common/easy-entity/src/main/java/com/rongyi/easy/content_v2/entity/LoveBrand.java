@@ -14,7 +14,16 @@ public class LoveBrand implements Serializable {
     private String brandLogo;
     private String brandId;
     private int status;
-    
+    private int stick;
+
+    public int getStick() {
+        return stick;
+    }
+
+    public void setStick(int stick) {
+        this.stick = stick;
+    }
+
     public int getStatus() {
 		return status;
 	}
@@ -62,6 +71,7 @@ public class LoveBrand implements Serializable {
                 .append("brandName", brandName)
                 .append("brandId", brandId)
                 .append("brandLogo", brandLogo)
+                .append("stick", stick)
                 .toString();
     }
 }
