@@ -33,15 +33,7 @@ public class TemplateRound implements Serializable {
     /**版本*/
     private Integer version;
 
-    private List<CommodityBuyerVO> commodityBuyerVOList = Lists.newArrayList();
-
-    public List<CommodityBuyerVO> getCommodityBuyerVOList() {
-        return commodityBuyerVOList;
-    }
-
-    public void setCommodityBuyerVOList(List<CommodityBuyerVO> commodityBuyerVOList) {
-        this.commodityBuyerVOList = commodityBuyerVOList;
-    }
+    private List<SpeSale> speSales = Lists.newArrayList();
 
     public Integer getActivityTemplateId() {
         return activityTemplateId;
@@ -131,6 +123,14 @@ public class TemplateRound implements Serializable {
         this.updateBy = updateBy;
     }
 
+    public List<SpeSale> getSpeSales() {
+        return speSales;
+    }
+
+    public void setSpeSales(List<SpeSale> speSales) {
+        this.speSales = speSales;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -146,7 +146,7 @@ public class TemplateRound implements Serializable {
                 .append("version", version)
                 .append("activityTemplateId", activityTemplateId)
                 .append("name", name)
-                .append("commodityBuyerVOList",commodityBuyerVOList)
+                .append("speSales", speSales)
                 .toString();
     }
 }

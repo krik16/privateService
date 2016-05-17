@@ -29,6 +29,15 @@ public class ActivityListVO implements Serializable{
 
     private Integer roundSum;
     private Integer roundType;
+    private String  picUrls;
+
+    public String getPicUrls() {
+        return picUrls;
+    }
+
+    public void setPicUrls(String picUrls) {
+        this.picUrls = picUrls;
+    }
 
     public Integer getRoundSum() {
         return roundSum;
@@ -124,6 +133,7 @@ public class ActivityListVO implements Serializable{
                 .append("shareDesc", shareDesc)
                 .append("roundSum", roundSum)
                 .append("roundType", roundType)
+                .append("picUrls",picUrls)
                 .toString();
     }
 }
