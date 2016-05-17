@@ -18,7 +18,7 @@ public interface ActivityCodeService {
      * @param param
      * @return
      */
-    public List<InviteCodeVO> generateInviteCode(ImportInviteCodeParam param);
+    public List<String> generateInviteCode(ImportInviteCodeParam param);
 
     /**
      * 根据券id 返回券码
