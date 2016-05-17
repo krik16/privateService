@@ -3,6 +3,7 @@ package com.rongyi.easy.activitymanage.vo;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 这个是内容管理查询闪购和特卖的返回vo
@@ -30,6 +31,15 @@ public class ActivityListVO implements Serializable{
     private Integer roundSum;
     private Integer roundType;
     private String  picUrls;
+    private Date startAt;
+
+    public Date getStartAt() {
+        return startAt;
+    }
+
+    public void setStartAt(Date startAt) {
+        this.startAt = startAt;
+    }
 
     public String getPicUrls() {
         return picUrls;
@@ -134,6 +144,7 @@ public class ActivityListVO implements Serializable{
                 .append("roundSum", roundSum)
                 .append("roundType", roundType)
                 .append("picUrls",picUrls)
+                .append("startAt", startAt)
                 .toString();
     }
 }
