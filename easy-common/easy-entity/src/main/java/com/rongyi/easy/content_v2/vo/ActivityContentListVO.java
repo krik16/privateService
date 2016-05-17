@@ -1,7 +1,9 @@
 package com.rongyi.easy.content_v2.vo;
 
 import com.google.inject.internal.Lists;
+import com.rongyi.easy.malllife.vo.CommoditySaleVO;
 import com.rongyi.easy.mcmc.vo.CommodityBuyerVO;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
@@ -25,17 +27,17 @@ public class ActivityContentListVO implements Serializable{
     private String shareTitle;
     private String shareDesc;
     private String appTitle;
-    private List<CommodityBuyerVO> commodityBuyerVOList = Lists.newArrayList();
+    private List<CommoditySaleVO> commoditySaleVOList = Lists.newArrayList();
+    
+    public List<CommoditySaleVO> getCommoditySaleVOList() {
+		return commoditySaleVOList;
+	}
 
-    public List<CommodityBuyerVO> getCommodityBuyerVOList() {
-        return commodityBuyerVOList;
-    }
+	public void setCommoditySaleVOList(List<CommoditySaleVO> commoditySaleVOList) {
+		this.commoditySaleVOList = commoditySaleVOList;
+	}
 
-    public void setCommodityBuyerVOList(List<CommodityBuyerVO> commodityBuyerVOList) {
-        this.commodityBuyerVOList = commodityBuyerVOList;
-    }
-
-    public Integer getId() {
+	public Integer getId() {
         return id;
     }
 
@@ -119,7 +121,7 @@ public class ActivityContentListVO implements Serializable{
                 .append("shareTitle", shareTitle)
                 .append("shareDesc", shareDesc)
                 .append("appTitle", appTitle)
-                .append("commodityBuyerVOList",commodityBuyerVOList)
+                .append("commoditySaleVOList",commoditySaleVOList)
                 .toString();
     }
 }
