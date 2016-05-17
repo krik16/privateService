@@ -18,6 +18,7 @@ public class RecommendedVO implements Serializable{
 	private String name;//(商场/品牌/类目的名称)
 	private String pic;//商场/品牌/类目对应的图片
 	private String type;// 类型: Mall商场  Shop店铺  Brand品牌  Category 分类
+	private Double distance = 0.0; //距离
 	public String getId() {
 		return id;
 	}
@@ -43,10 +44,16 @@ public class RecommendedVO implements Serializable{
 	public void setType(String type) {
 		this.type = type;
 	}
+	public Double getDistance() {
+		return distance;
+	}
+	public void setDistance(Double distance) {
+		this.distance = distance;
+	}
 	@Override
 	public String toString() {
 		return "RecommendedVO [id=" + id + ", name=" + name + ", pic=" + pic
-				+ ", type=" + type + "]";
+				+ ", type=" + type + ", distance=" + distance + "]";
 	}
 		
 }
