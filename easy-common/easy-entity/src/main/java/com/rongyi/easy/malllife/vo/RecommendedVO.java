@@ -17,6 +17,7 @@ public class RecommendedVO implements Serializable{
 	private String id;//id (商场/品牌/类目对应的mongoId)
 	private String name;//(商场/品牌/类目的名称)
 	private String pic;//商场/品牌/类目对应的图片
+	private String type;// 类型: Mall商场  Shop店铺  Brand品牌  Category 分类
 	public String getId() {
 		return id;
 	}
@@ -36,10 +37,16 @@ public class RecommendedVO implements Serializable{
 	public void setPic(String pic) {
 		this.pic = pic;
 	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	@Override
 	public String toString() {
 		return "RecommendedVO [id=" + id + ", name=" + name + ", pic=" + pic
-				+ "]";
+				+ ", type=" + type + "]";
 	}
-	
+		
 }
