@@ -90,6 +90,18 @@ public interface OrderEventType {
 
     /** 买家关闭订单*/
     public static final String CANCEL_BY_BUYER = "28";
+
+    /** 买家超时未支付*/
+    public static final String PAY_TIMEOUT = "29";
+
+    /** 订单被取消*/
+    public static final String ORDER_CANCEL = "31";
+
+    /** 卡券被使用*/
+    public static final String COUPON_USED = "32";
+
+    /** 卡券被领取*/
+    public static final String COUPON_CAGHT = "33";
     
     /** 重新加载订单 */
     public static final String DEBUG_RELOAD_ORDER = "Debug.Reload";
