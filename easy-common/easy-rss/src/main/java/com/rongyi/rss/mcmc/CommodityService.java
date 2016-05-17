@@ -219,5 +219,5 @@ public interface CommodityService {
      * @param saleId 特卖Id
      * @return List<com.rongyi.easy.mcmc.vo.CommodityBuyerVO>
      */
-    public ResponseVO topCommodityListBySaleId(Integer saleId);
+    public ResponseVO topCommodityListBySaleId(Integer saleId, Integer flashSaleId);
 }
