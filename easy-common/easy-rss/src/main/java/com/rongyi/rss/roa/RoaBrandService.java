@@ -36,4 +36,6 @@ public interface RoaBrandService {
      * @throws Exception
      */
     List<BrandsCategoryVO> getCategoriesName(String cateId,String cateName) throws Exception;
+
+    BrandVO getBrandVOById(String id);
 }
