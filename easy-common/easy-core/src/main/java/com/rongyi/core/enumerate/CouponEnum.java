@@ -61,7 +61,8 @@ public enum  CouponEnum {
     ERROR_INVALID_PUBLIC_END(1021226,"参数[public_end]不是一个合法的[yyyy-MM-dd]格式！"),
     ERROR_INVALID_ACTIVITYID(1021227,"参数[activityId]错误！"),
     ERROR_NOTEXIST_COUPON(1021228,"卡券不存在！"),
-    VALID_COUPON_CODE_FAIL(1021229,"验券失败")
+    VALID_COUPON_CODE_FAIL(1021229,"验券失败"),
+    VALID_INVALID_UID(1021229,"必要参数uid 有误！")
 
 
 
