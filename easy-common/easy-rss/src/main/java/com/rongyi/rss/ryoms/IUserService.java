@@ -25,5 +25,6 @@ public interface IUserService {
 	
 	
 	public List<RyUserInfo> getUserByName(String userName,int offset, int pageSize);
+	public int getUserByNameCount(String userName);
 	
 }
