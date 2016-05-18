@@ -34,8 +34,17 @@ public class ContentVO implements Serializable {
      * 3表示已过期
      */
     private Integer isExpired; // 是否过期
+    private String  actionCost; // 活动费用
     
-    public Integer getIsExpired() {
+    public String getActionCost() {
+		return actionCost;
+	}
+
+	public void setActionCost(String actionCost) {
+		this.actionCost = actionCost;
+	}
+
+	public Integer getIsExpired() {
 		return isExpired;
 	}
 
@@ -197,7 +206,8 @@ public class ContentVO implements Serializable {
 				+ ", refId=" + refId + ", category=" + category
 				+ ", description=" + description + ", mallNumber=" + mallNumber
 				+ ", shareUrl=" + shareUrl + ", style=" + style
-				+ ", isExpired=" + isExpired + "]";
+				+ ", isExpired=" + isExpired + ", actionCost=" + actionCost
+				+ "]";
 	}
 
 
