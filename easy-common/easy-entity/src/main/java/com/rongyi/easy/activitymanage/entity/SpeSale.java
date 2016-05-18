@@ -1,6 +1,7 @@
 package com.rongyi.easy.activitymanage.entity;
 
 import com.google.inject.internal.Lists;
+import com.rongyi.easy.malllife.vo.CommoditySaleVO;
 import com.rongyi.easy.mcmc.vo.CommodityBuyerVO;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -14,17 +15,15 @@ public class SpeSale implements Serializable {
     private Integer id;
     private String name;
     private String urlPics;
+    private List<CommoditySaleVO> commoditySaleVOList = Lists.newArrayList();
 
-    private List<CommodityBuyerVO> commodityBuyerVOList = Lists.newArrayList();
-
-    public List<CommodityBuyerVO> getCommodityBuyerVOList() {
-        return commodityBuyerVOList;
+    public List<CommoditySaleVO> getCommoditySaleVOList() {
+        return commoditySaleVOList;
     }
 
-    public void setCommodityBuyerVOList(List<CommodityBuyerVO> commodityBuyerVOList) {
-        this.commodityBuyerVOList = commodityBuyerVOList;
+    public void setCommoditySaleVOList(List<CommoditySaleVO> commoditySaleVOList) {
+        this.commoditySaleVOList = commoditySaleVOList;
     }
-
     public Integer getId() {
         return id;
     }
@@ -55,7 +54,7 @@ public class SpeSale implements Serializable {
                 .append("id", id)
                 .append("name", name)
                 .append("urlPics", urlPics)
-                .append("commodityBuyerVOList", commodityBuyerVOList)
+                .append("commoditySaleVOList", commoditySaleVOList)
                 .toString();
     }
 }
