@@ -28,8 +28,22 @@ public class ContentVO implements Serializable {
     private Integer mallNumber; //活动被举行商场数量 
     private String  shareUrl;//分享链接
     private Integer style; //1:精彩活动 2优惠资讯
+    /**
+     * 1表示未开始
+     * 2表示进行中
+     * 3表示已过期
+     */
+    private Integer isExpired; // 是否过期
     
-    public Integer getStyle() {
+    public Integer getIsExpired() {
+		return isExpired;
+	}
+
+	public void setIsExpired(Integer isExpired) {
+		this.isExpired = isExpired;
+	}
+
+	public Integer getStyle() {
 		return style;
 	}
 
@@ -182,7 +196,8 @@ public class ContentVO implements Serializable {
 				+ ", isFav=" + isFav + ", articleUrl=" + articleUrl
 				+ ", refId=" + refId + ", category=" + category
 				+ ", description=" + description + ", mallNumber=" + mallNumber
-				+ ", shareUrl=" + shareUrl + ", style=" + style + "]";
+				+ ", shareUrl=" + shareUrl + ", style=" + style
+				+ ", isExpired=" + isExpired + "]";
 	}
 
 
