@@ -35,8 +35,17 @@ public class ContentVO implements Serializable {
      */
     private Integer isExpired; // 是否过期
     private String  actionCost; // 活动费用
+    private double distance;//经纬度距离
     
-    public String getActionCost() {
+    public double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+
+	public String getActionCost() {
 		return actionCost;
 	}
 
@@ -207,9 +216,7 @@ public class ContentVO implements Serializable {
 				+ ", description=" + description + ", mallNumber=" + mallNumber
 				+ ", shareUrl=" + shareUrl + ", style=" + style
 				+ ", isExpired=" + isExpired + ", actionCost=" + actionCost
-				+ "]";
+				+ ", distance=" + distance + "]";
 	}
-
-
 
 }
