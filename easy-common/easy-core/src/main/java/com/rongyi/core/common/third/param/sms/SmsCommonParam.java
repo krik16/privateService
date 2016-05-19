@@ -28,8 +28,9 @@ public class SmsCommonParam implements Serializable{
 
     private int opType;//0 查询 1抛入 2修改，3修改ip限制
 
-    //发送渠道
-    private String sendChannel;
+    private String sendChannel; //发送渠道
+
+    private String sendType;//发送类型  RYNTCSMS 通知类型 RYMARKSMS 营销类型
 
     public String getChannel() {
         return channel;
@@ -93,5 +94,13 @@ public class SmsCommonParam implements Serializable{
 
     public void setSendChannel(String sendChannel) {
         this.sendChannel = sendChannel;
+    }
+
+    public String getSendType() {
+        return sendType;
+    }
+
+    public void setSendType(String sendType) {
+        this.sendType = sendType;
     }
 }
