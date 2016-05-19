@@ -104,4 +104,12 @@ public interface ShopSolrService {
 	 * @date 2016-05-05
 	 */
 	public ResponseVO updatePOITip(EPOIType poiType, List<String> poiList, EPOITipType epoiTipType);
+
+	/**
+	 * 查询POIID对应标签的值
+	 *
+	 * @param poiIds 查询的ID及对应TIP的值
+	 * @return List<com.rongyi.easy.solr.result.ShopSearchInfo>
+	 */
+	public ResponseVO selectPOITipByPOIIds(List<String> poiIds);
 }
