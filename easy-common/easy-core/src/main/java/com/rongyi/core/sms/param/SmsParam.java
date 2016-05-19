@@ -21,8 +21,8 @@ public class SmsParam implements Serializable {
     /** 发送短信 */
     private String msgStr;
 
-    /** 发送渠道 1创世华信,2建周 */
-    //private Integer channel;
+    /** 调用渠道   活动等第三方平台调用*/
+     private String activChannel;
 
     /** 产品类型 1 mallShop 2,Malllife  3;//ToB_业务 通知类 4;//ToB_业务 营销类*/
     private Integer productType;
@@ -32,6 +32,9 @@ public class SmsParam implements Serializable {
 
     /*请求来源IP**/
     private String requestIp;
+
+    //发送渠道
+    private String sendChannel;
 
 
     public String getRequestIp() {
@@ -58,8 +61,6 @@ public class SmsParam implements Serializable {
         this.msgStr = msgStr;
     }
 
-
-
     public Integer getProductType() {
         return productType;
     }
@@ -74,5 +75,21 @@ public class SmsParam implements Serializable {
 
     public void setSendModule(Integer sendModule) {
         this.sendModule = sendModule;
+    }
+
+    public String getActivChannel() {
+        return activChannel;
+    }
+
+    public void setActivChannel(String activChannel) {
+        this.activChannel = activChannel;
+    }
+
+    public String getSendChannel() {
+        return sendChannel;
+    }
+
+    public void setSendChannel(String sendChannel) {
+        this.sendChannel = sendChannel;
     }
 }
