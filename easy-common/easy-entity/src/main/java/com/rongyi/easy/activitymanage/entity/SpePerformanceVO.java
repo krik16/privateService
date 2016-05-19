@@ -12,7 +12,17 @@ import java.util.List;
 public class SpePerformanceVO implements Serializable{
     private Integer id;
     private String actName;
+    private Integer contentId;
     private List<TemplateRound> templateRoundList = Lists.newArrayList();
+
+    public Integer getContentId() {
+        return contentId;
+    }
+
+    public void setContentId(Integer contentId) {
+        this.contentId = contentId;
+    }
+
 
     public Integer getId() {
         return id;
@@ -43,6 +53,7 @@ public class SpePerformanceVO implements Serializable{
         return new ToStringBuilder(this)
                 .append("id", id)
                 .append("actName", actName)
+                .append("contentId", contentId)
                 .append("templateRoundList", templateRoundList)
                 .toString();
     }

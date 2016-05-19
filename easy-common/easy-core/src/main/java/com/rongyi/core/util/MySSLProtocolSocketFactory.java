@@ -17,6 +17,8 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;  
 import java.security.cert.X509Certificate;  
   
+
+
 import javax.net.SocketFactory;  
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;  
@@ -24,6 +26,8 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;  
 import javax.net.ssl.X509TrustManager;  
   
+
+
 import net.sf.json.JSONObject;
 
 import org.apache.commons.httpclient.ConnectTimeoutException;  
@@ -34,10 +38,13 @@ import org.apache.commons.httpclient.params.HttpConnectionParams;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.httpclient.protocol.Protocol;
 import org.apache.commons.httpclient.protocol.ProtocolSocketFactory;   
+import org.apache.log4j.Logger;
+
+import com.alibaba.dubbo.common.utils.Log;
 public class MySSLProtocolSocketFactory implements ProtocolSocketFactory {  
   
   private SSLContext sslcontext = null;   
-   
+   static Logger log = Logger.getLogger(MySSLProtocolSocketFactory.class);
   private SSLContext createSSLContext() {   
       SSLContext sslcontext=null;   
       try {   
@@ -226,7 +233,7 @@ public class MySSLProtocolSocketFactory implements ProtocolSocketFactory {
 			while ((str = bufferedReader.readLine()) != null) {
 				buffer.append(str);
 			}
- 			System.out.println("https httpsRequest :"+buffer);
+			log.info("https httpsRequest :"+buffer);
 			jsonObject = JSONObject.fromObject(buffer.toString());
  		
 		}catch (Exception e) {
