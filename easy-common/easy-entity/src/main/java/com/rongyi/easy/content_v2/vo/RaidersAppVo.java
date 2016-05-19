@@ -12,6 +12,7 @@ public class RaidersAppVo implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String title; //文章title
+	private Integer type =7 ;  //类型 7
 	private Integer artType; //文章类型   0文章 1同城
 	private String description; //文章描述
 	private String picUrl; //图片地址
@@ -58,5 +59,11 @@ public class RaidersAppVo implements Serializable{
 	}
 	public void setTypeVal(String typeVal) {
 		this.typeVal = typeVal;
+	}
+	public Integer getType() {
+		return type;
+	}
+	public void setType(Integer type) {
+		this.type = type;
 	}
 }
