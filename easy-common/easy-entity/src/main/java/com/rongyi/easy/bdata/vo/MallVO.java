@@ -14,20 +14,13 @@ import org.bson.types.ObjectId;
 public class MallVO implements Serializable {
 
 
-	@Override
-	public String toString() {
-		return "MallVO [id=" + id + ", name=" + name + ", mold=" + mold + ", businessStatus=" + businessStatus
-				+ ", recommend=" + recommend + ", aliases=" + aliases + ", weixin=" + weixin + ", mallAddress="
-				+ mallAddress + ", businessHours=" + businessHours + ", description=" + description + ", telephone="
-				+ telephone + ", transInfor=" + transInfor + ", parking=" + parking + ", terminalMall=" + terminalMall
-				+ ", appearPic=" + appearPic + ", webAppearPic=" + webAppearPic + ", traffPic=" + traffPic
-				+ ", introPic=" + introPic + ", terminalLogo=" + terminalLogo + ", wechatPic=" + wechatPic + ", icon="
-				+ icon + ", tags=" + tags + ", rank=" + rank + ", slug=" + slug + ", shopNum=" + shopNum + ", logoX="
-				+ logoX + ", logoY=" + logoY + ", merlogPic=" + merlogPic + ", mallGroupId=" + mallGroupId
-				+ ", mallLevel=" + mallLevel + ", updatedAt=" + updatedAt + ", lastUpdateId=" + lastUpdateId
-				+ ", openAt=" + openAt + ", createdAt=" + createdAt + ", operatorId=" + operatorId + ", operatorName="
-				+ operatorName + ", lastUpdateName=" + lastUpdateName + ", parentId=" + parentId + ", parentIds="
-				+ parentIds + ", mobile=" + mobile + "]";
+
+	public String getOpenTime() {
+		return openTime;
+	}
+
+	public void setOpenTime(String openTime) {
+		this.openTime = openTime;
 	}
 
 	public double getLogoX() {
@@ -51,7 +44,8 @@ public class MallVO implements Serializable {
     private String name;//商场名称
     private String mold;//商场类型
     private Integer businessStatus;//商场营业状态, 0:正常营业1:即将开业2:暂停营业3:停止营业
-    private Integer recommend;//商场推荐：1-未推荐、2-已推荐
+    private Integer mallValid;//商场营业状态, 0:正常营业1:即将开业2:暂停营业3:停止营业
+	private Integer recommend;//商场推荐：1-未推荐、2-已推荐
     private List<String> aliases;//商场别名
     private String weixin;//微信号
     private MallAddressVO mallAddress;//商场地址
@@ -60,9 +54,9 @@ public class MallVO implements Serializable {
     private String telephone;
     private String transInfor;//交通信息
     private List<ParkingVO> parking;//停车信息
-    private Integer terminalMall;//终端机合作1-无合作、2-有合作
+    private Boolean terminalMall;//终端机合作1-无合作、2-有合作
     private String appearPic;//APP外景图片：APP外景图的url地址
-    private String webAppearPic;//WEB外景图片：WEB外景图url地址
+	private String webAppearPic;//WEB外景图片：WEB外景图url地址
     private String traffPic;//商场交通图：交通图url地址
     private String introPic;//商场介绍图：商场介绍图url地址
     private String terminalLogo;//终端机logo：终端机logourl地址
@@ -79,7 +73,7 @@ public class MallVO implements Serializable {
     private String mallLevel;//商场等级
     private String updatedAt;//修改时间
     private String lastUpdateId;//最后修改人
-    private String openAt;//开业时间
+    private String openTime;//开业时间
     private String createdAt;//创建时间
     private String operatorId;//创建者
     private String operatorName;//创建者
@@ -87,6 +81,40 @@ public class MallVO implements Serializable {
     private String parentId; // 上一级id
 	private List parentIds; // 上一级所有ids
 	private String mobile;
+	
+
+
+    public Boolean getTerminalMall() {
+		return terminalMall;
+	}
+
+	public void setTerminalMall(Boolean terminalMall) {
+		this.terminalMall = terminalMall;
+	}
+
+//	@Override
+//	public String toString() {
+//		return "MallVO [id=" + id + ", name=" + name + ", mold=" + mold + ", businessStatus=" + businessStatus
+//				+ ", mallValid=" + mallValid + ", recommend=" + recommend + ", aliases=" + aliases + ", weixin="
+//				+ weixin + ", mallAddress=" + mallAddress + ", businessHours=" + businessHours + ", description="
+//				+ description + ", telephone=" + telephone + ", transInfor=" + transInfor + ", parking=" + parking
+//				+ ", terminalMall=" + terminalMall + ", appearPic=" + appearPic + ", webAppearPic=" + webAppearPic
+//				+ ", traffPic=" + traffPic + ", introPic=" + introPic + ", terminalLogo=" + terminalLogo
+//				+ ", wechatPic=" + wechatPic + ", icon=" + icon + ", tags=" + tags + ", rank=" + rank + ", slug=" + slug
+//				+ ", shopNum=" + shopNum + ", logoX=" + logoX + ", logoY=" + logoY + ", merlogPic=" + merlogPic
+//				+ ", mallGroupId=" + mallGroupId + ", mallLevel=" + mallLevel + ", updatedAt=" + updatedAt
+//				+ ", lastUpdateId=" + lastUpdateId + ", openTime=" + openTime + ", createdAt=" + createdAt
+//				+ ", operatorId=" + operatorId + ", operatorName=" + operatorName + ", lastUpdateName=" + lastUpdateName
+//				+ ", parentId=" + parentId + ", parentIds=" + parentIds + ", mobile=" + mobile + "]";
+//	}
+
+	public Integer getMallValid() {
+		return mallValid;
+	}
+
+	public void setMallValid(Integer mallValid) {
+		this.mallValid = mallValid;
+	}
 	
 	public String getMobile() {
 		return mobile;
@@ -144,13 +172,7 @@ public class MallVO implements Serializable {
 		this.lastUpdateId = lastUpdateId;
 	}
 
-	public String getOpenAt() {
-		return openAt;
-	}
 
-	public void setOpenAt(String openAt) {
-		this.openAt = openAt;
-	}
 
 	public String getCreatedAt() {
 		return createdAt;
@@ -299,13 +321,7 @@ public class MallVO implements Serializable {
         this.parking = parking;
     }
 
-    public Integer getTerminalMall() {
-        return terminalMall;
-    }
 
-    public void setTerminalMall(Integer terminalMall) {
-        this.terminalMall = terminalMall;
-    }
 
     public String getAppearPic() {
         return appearPic;

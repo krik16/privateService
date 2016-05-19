@@ -1,12 +1,16 @@
 package com.rongyi.easy.bdata.entity;
 
+import java.io.Serializable;
+
 /**
  * Desc: CommunalFacilityType
  * User: chris
  * Date: 2015/10/31 2:59
  */
-public class CommunalFacilityType {
-    private Long      id;
+public class CommunalFacilityType implements Serializable{
+
+	private static final long serialVersionUID = 6118559857223824933L;
+	private Long      id;
     private String    title;
     private String    type;
 

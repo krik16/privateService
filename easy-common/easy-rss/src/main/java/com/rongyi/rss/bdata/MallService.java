@@ -141,11 +141,31 @@ public interface MallService {
 	 */
 	ResponseVO getMallGroups(Map params);
 	
+	int getMallGroupsCount(Map params);
+	
 	/**
 	 * 保存商场信息
 	 * @param vo
 	 * @return
 	 */
-	ResponseVO saveMall(MallVO vo);
+	ResponseVO saveMall(Map map,String json,Map picMap);
+	
+	/**
+	 * 设置商场营业状态
+	 * @param vo
+	 * @return
+	 */
+	ResponseVO setMallBusinessStatus(String mallId,int businessStatus);
+	
+	/**
+	 * 设置商场显示状态
+	 * @param vo
+	 * @return
+	 */
+	ResponseVO setMallValid(String mallId,int valid);
+	
+	Map<String, Object>getMalls(Map params, int currentpage, int pagesize);
+	
+	Map<String, Object>getMallsWithBusinessStatusCount(Map params, int currentpage, int pagesize);
 
 }

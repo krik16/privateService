@@ -75,16 +75,16 @@ public class Mall implements Serializable {
     private Integer mall_banner_num;
     private String merlog_pic;//商家后台logo
     private String mall_level;//商场等级
-    private Date open_at;//开业时间
+    private String open_at;//开业时间
     private String last_update_id;//最近修改人
    
    
 
-	public Date getOpen_at() {
+	public String getOpen_at() {
 		return open_at;
 	}
 
-	public void setOpen_at(Date open_at) {
+	public void setOpen_at(String open_at) {
 		this.open_at = open_at;
 	}
 
