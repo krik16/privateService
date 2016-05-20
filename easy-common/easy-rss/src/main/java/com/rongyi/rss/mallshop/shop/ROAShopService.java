@@ -7,6 +7,7 @@ import org.bson.types.ObjectId;
 
 import com.rongyi.easy.entity.ShopEntity;
 import com.rongyi.easy.malllife.vo.ShopRmmmVO;
+import com.rongyi.easy.malllife.vo.ShopVO;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
 import com.rongyi.easy.rmmm.entity.ShopInfoEntity;
 import com.rongyi.easy.rmmm.exception.RmmmException;
@@ -206,4 +207,11 @@ public interface ROAShopService {
 	 * @return
 	 */
     public List<ShopEntity> getShopsByBrandId(String brandId) throws Exception;
+    /**
+	 * 商场id查询店铺
+	 * @return
+	 */
+    public List<ShopEntity> getShopsbyMallId(String mallId) throws Exception;
+    
+	public List<ShopVO> getShopsbyIds(List<String> connectshopIds) throws Exception;
 }

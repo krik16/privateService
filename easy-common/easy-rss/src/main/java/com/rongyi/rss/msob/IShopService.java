@@ -7,6 +7,7 @@ import org.bson.types.ObjectId;
 
 import com.rongyi.easy.entity.ShopEntity;
 import com.rongyi.easy.malllife.vo.ShopRmmmVO;
+import com.rongyi.easy.malllife.vo.ShopVO;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
 import com.rongyi.easy.rmmm.entity.ShopInfoEntity;
 import com.rongyi.easy.rmmm.exception.RmmmException;
@@ -215,5 +216,7 @@ public interface IShopService{
 	 * @throws Exception
 	 */
 	List<ShopInfoEntity> getShopsByMallId(String filialeId)throws Exception;
+	
+	public List<ShopVO> getShopsbyIds(List<String> connectshopIds) throws Exception;
 }
 
