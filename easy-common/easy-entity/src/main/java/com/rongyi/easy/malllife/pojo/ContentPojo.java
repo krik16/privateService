@@ -69,6 +69,9 @@ public class ContentPojo implements Serializable{
     private String brandId;
     private List<String> mallIds;
     
+    private String connect_type;//多关联的类型 mall shop brand all city
+    private String action_picture2;// 新的列表图片
+    private String picture2;//新的封面图片
 	public String getBrandId() {
 		return brandId;
 	}
@@ -378,5 +381,29 @@ public class ContentPojo implements Serializable{
 
 	public void setConnect_id(String connect_id) {
 		this.connect_id = connect_id;
+	}
+
+	public String getConnect_type() {
+		return connect_type;
+	}
+
+	public void setConnect_type(String connect_type) {
+		this.connect_type = connect_type;
+	}
+
+	public String getAction_picture2() {
+		return action_picture2;
+	}
+
+	public void setAction_picture2(String action_picture2) {
+		this.action_picture2 = action_picture2;
+	}
+
+	public String getPicture2() {
+		return picture2;
+	}
+
+	public void setPicture2(String picture2) {
+		this.picture2 = picture2;
 	}
 }
