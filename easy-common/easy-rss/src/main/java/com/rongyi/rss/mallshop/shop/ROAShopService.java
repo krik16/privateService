@@ -207,10 +207,4 @@ public interface ROAShopService {
 	 * @return
 	 */
     public List<ShopEntity> getShopsByBrandId(String brandId) throws Exception;
-    /**
-	 * 商场id查询店铺
-	 * @return
-	 */
-    public List<ShopEntity> getShopsbyMallId(String mallId) throws Exception;
-    
 }
