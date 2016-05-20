@@ -16,6 +16,7 @@ import com.rongyi.easy.malllife.vo.BrandVO;
 import com.rongyi.easy.malllife.vo.CommentsVO;
 import com.rongyi.easy.malllife.vo.FavourableVO;
 import com.rongyi.easy.malllife.vo.GroupVO;
+import com.rongyi.easy.malllife.vo.MallAndShopVO;
 import com.rongyi.easy.malllife.vo.MallVO;
 import com.rongyi.easy.malllife.vo.OldMallVO;
 import com.rongyi.easy.malllife.vo.PagingVO;
@@ -431,4 +432,44 @@ public interface ROAContentService {
 	* @throws
 	 */
 	public ResponseVO allListWelFarePage(List<String> brandIdList,Integer pageSize,Integer currentPage)throws Exception;
+	/**
+	 * @throws Exception 
+	 * 
+	* @Title: getConnectListById 
+	* @Description: 根据活动id和type类型 查询 活动类型,关联商场，店铺，品牌id,商场和品牌下关联店铺的num
+	* @param @param content_id
+	* @param @return    设定文件 
+	* @return List<Map<String,Object>>    返回类型 
+	* @author shaozhou
+	* @date 2016年5月19日 下午4:21:28 
+	* @throws
+	 */
+	public List<Map<String,Object>> getConnectListById(String content_id,String connect_type,double lng, double lat) throws Exception;
+	/**
+	 * @throws Exception 
+	 * 
+	* @Title: getSubMallAndShopVo 
+	* @Description: 根据商场id，品牌id查询下面子店铺
+	* @param @param type
+	* @param @param content_id
+	* @param @param mallOrBrandId
+	* @param @return    设定文件 
+	* @return List<MallAndShopVO>    返回类型 
+	* @author shaozhou
+	* @date 2016年5月19日 下午5:46:34 
+	* @throws
+	 */
+	public List<MallAndShopVO> getSubMallAndShopVo(String type,String content_id,String mallOrBrandId) throws Exception;
+	/**
+	 * 
+	* @Title: getContentDoById 
+	* @Description: 获取活动数据
+	* @param @param content_id
+	* @param @return    设定文件 
+	* @return ContentDO    返回类型 
+	* @author shaozhou
+	* @date 2016年5月19日 下午5:48:24 
+	* @throws
+	 */
+	public ContentDO getContentDoById(String content_id);
 }

@@ -367,4 +367,10 @@ public interface IContentService {
 	public int countWelFareNew(Date pullAt);
 
 	public ResponseVO allListWelFarePage(List<String> brandIdList, Integer pageSize, Integer currentPage) throws Exception;
+
+	public List<Map<String, Object>> getConnectListById(String content_id, String connect_type, double lng, double lat) throws Exception;
+
+	public List<MallAndShopVO> getSubMallAndShopVo(String type, String content_id, String mallOrBrandId) throws Exception;
+
+	public ContentDO getContentDoById(String content_id);
 }

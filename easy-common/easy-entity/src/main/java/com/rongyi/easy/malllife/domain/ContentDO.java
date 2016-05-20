@@ -58,7 +58,23 @@ public class ContentDO implements Serializable{
     
     private String grouponId; // 团购券ID
     
-    public String getGrouponId() {
+    private String connect_type;// 多关联类型 mall shop brand city all
+    private String picture2;//新加入的封面图
+    private String action_picture2;//新加入的列表图
+    
+    public String getPicture2() {
+		return picture2;
+	}
+	public void setPicture2(String picture2) {
+		this.picture2 = picture2;
+	}
+	public String getAction_picture2() {
+		return action_picture2;
+	}
+	public void setAction_picture2(String action_picture2) {
+		this.action_picture2 = action_picture2;
+	}
+	public String getGrouponId() {
         return grouponId;
     }
 
@@ -377,6 +393,12 @@ public class ContentDO implements Serializable{
 
 	public void setUserLimit(Integer userLimit) {
 		this.userLimit = userLimit;
+	}
+	public String getConnect_type() {
+		return connect_type;
+	}
+	public void setConnect_type(String connect_type) {
+		this.connect_type = connect_type;
 	}
  
 }
