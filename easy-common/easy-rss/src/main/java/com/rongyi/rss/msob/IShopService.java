@@ -216,7 +216,5 @@ public interface IShopService{
 	 * @throws Exception
 	 */
 	List<ShopInfoEntity> getShopsByMallId(String filialeId)throws Exception;
-	
-	public List<ShopVO> getShopsbyIds(List<String> connectshopIds) throws Exception;
 }
 

@@ -213,5 +213,4 @@ public interface ROAShopService {
 	 */
     public List<ShopEntity> getShopsbyMallId(String mallId) throws Exception;
     
-	public List<ShopVO> getShopsbyIds(List<String> connectshopIds) throws Exception;
 }
