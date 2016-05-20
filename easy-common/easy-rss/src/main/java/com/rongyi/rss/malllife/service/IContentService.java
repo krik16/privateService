@@ -373,4 +373,16 @@ public interface IContentService {
 	public List<MallAndShopVO> getSubMallAndShopVo(String type, String content_id, String mallOrBrandId) throws Exception;
 
 	public ContentDO getContentDoById(String content_id);
+	
+	/**
+     * 同城详情转换
+     * @param content
+     * @param userId
+     * @param bool
+     * @return
+     * @throws Exception 
+     * @see com.rongyi.rss.malllife.service.IContentService#buildMap(com.rongyi.easy.malllife.domain.ContentDO, java.lang.String, boolean) 
+     */
+
+    public Map<String, Object> buildMapByV700(ContentDO content, String userId, boolean bool) throws Exception ;
 }
