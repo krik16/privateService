@@ -483,5 +483,5 @@ public interface ROAContentService {
      * @see com.rongyi.rss.malllife.service.IContentService#buildMap(com.rongyi.easy.malllife.domain.ContentDO, java.lang.String, boolean) 
      */
 
-    public Map<String, Object> buildMapByV700(ContentDO content, String userId, boolean bool) throws Exception ;
+    public Map<String, Object> buildMapByV700(ContentDO content, String userId, boolean bool,Integer appVersion) throws Exception ;
 }
