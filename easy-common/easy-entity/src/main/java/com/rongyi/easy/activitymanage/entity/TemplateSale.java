@@ -41,6 +41,10 @@ public class TemplateSale implements Serializable{
     /**
      * 分享的描述
      */
+    private String sharePic;
+    /**
+     * 分享的描述
+     */
     private String shareDesc;
     /**
      * 创建人id
@@ -53,6 +57,15 @@ public class TemplateSale implements Serializable{
     private String replacePic;
     private int roundSum;//0特卖1单场次2多场次
     private int roundType; //0特卖1专场中特卖2专场中拼单
+
+    public String getSharePic() {
+        return sharePic;
+    }
+
+    public void setSharePic(String sharePic) {
+        this.sharePic = sharePic;
+    }
+
 
     public String getReplacePic() {
         return replacePic;
@@ -201,6 +214,7 @@ public class TemplateSale implements Serializable{
                 .append("replacePic", replacePic)
                 .append("roundSum", roundSum)
                 .append("roundType", roundType)
+                .append("sharePic", sharePic)
                 .toString();
     }
 }
