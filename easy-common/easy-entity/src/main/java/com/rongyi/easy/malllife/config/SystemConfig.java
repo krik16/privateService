@@ -70,10 +70,7 @@ public class SystemConfig implements Serializable{
             "/v5/shop/getShop.htm"
     });
 
-
-
-
-
+    public static final List<String> uaList = Arrays.asList("Android", "IOS", "H5");
 
     public static String buildPictureUrl(String userId, String headImg) {
         String UPAIYUN_Content = "system/user/avatar/";
