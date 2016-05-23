@@ -21,7 +21,14 @@ public class ContentConnectPojo implements Serializable {
 	private Date create_at;//记录开始时间
 	private Date update_at;//记录更新时间
 	private String relation;//文章关联 直接关联和间接关联区分字段  直接关联direct, 间接关联indirect
+	private String distance;//距离
 	
+	public String getDistance() {
+		return distance;
+	}
+	public void setDistance(String distance) {
+		this.distance = distance;
+	}
 	public Integer getConnectId() {
 		return connectId;
 	}

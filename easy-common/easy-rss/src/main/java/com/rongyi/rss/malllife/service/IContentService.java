@@ -368,9 +368,21 @@ public interface IContentService {
 
 	public ResponseVO allListWelFarePage(List<String> brandIdList, Integer pageSize, Integer currentPage) throws Exception;
 
-	public List<Map<String, Object>> getConnectListById(String content_id, String connect_type, double lng, double lat);
+	public List<Map<String, Object>> getConnectListById(String content_id, String connect_type, double lng, double lat) throws Exception;
 
-	public List<MallAndShopVO> getSubMallAndShopVo(String type, String content_id, String mallOrBrandId);
+	public List<MallAndShopVO> getSubMallAndShopVo(String type, String content_id, String mallOrBrandId) throws Exception;
 
 	public ContentDO getContentDoById(String content_id);
+	
+	/**
+     * 同城详情转换
+     * @param content
+     * @param userId
+     * @param bool
+     * @return
+     * @throws Exception 
+     * @see com.rongyi.rss.malllife.service.IContentService#buildMap(com.rongyi.easy.malllife.domain.ContentDO, java.lang.String, boolean) 
+     */
+
+    public Map<String, Object> buildMapByV700(ContentDO content, String userId, boolean bool,Integer appVersion) throws Exception ;
 }
