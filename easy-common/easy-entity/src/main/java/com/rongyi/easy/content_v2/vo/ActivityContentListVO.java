@@ -27,6 +27,8 @@ public class ActivityContentListVO implements Serializable{
     private String shareTitle;
     private String shareDesc;
     private String appTitle;
+    private String sharePic;
+    private String replacePic;
     private List<CommoditySaleVO> commoditySaleVOList = Lists.newArrayList();
     
     public List<CommoditySaleVO> getCommoditySaleVOList() {
@@ -37,7 +39,23 @@ public class ActivityContentListVO implements Serializable{
 		this.commoditySaleVOList = commoditySaleVOList;
 	}
 
-	public Integer getId() {
+    public String getSharePic() {
+        return sharePic;
+    }
+
+    public void setSharePic(String sharePic) {
+        this.sharePic = sharePic;
+    }
+
+    public String getReplacePic() {
+        return replacePic;
+    }
+
+    public void setReplacePic(String replacePic) {
+        this.replacePic = replacePic;
+    }
+
+    public Integer getId() {
         return id;
     }
 
@@ -121,7 +139,9 @@ public class ActivityContentListVO implements Serializable{
                 .append("shareTitle", shareTitle)
                 .append("shareDesc", shareDesc)
                 .append("appTitle", appTitle)
-                .append("commoditySaleVOList",commoditySaleVOList)
+                .append("sharePic", sharePic)
+                .append("replacePic", replacePic)
+                .append("commoditySaleVOList", commoditySaleVOList)
                 .toString();
     }
 }
