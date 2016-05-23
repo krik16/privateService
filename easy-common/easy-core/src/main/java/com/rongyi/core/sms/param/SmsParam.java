@@ -36,6 +36,15 @@ public class SmsParam implements Serializable {
     //发送渠道
     private String sendChannel;
 
+    private String code;//验证码
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 
     public String getRequestIp() {
         return requestIp;
