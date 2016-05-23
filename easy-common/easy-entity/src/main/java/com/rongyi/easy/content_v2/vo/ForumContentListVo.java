@@ -73,6 +73,19 @@ public class ForumContentListVo implements Serializable{
 	 */
 	private String typeVal;
 
+	/**
+	 * 类型名:如品牌名称
+	 */
+	private String typeName;
+
+	public String getTypeName() {
+		return typeName;
+	}
+
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -285,6 +298,7 @@ public class ForumContentListVo implements Serializable{
 				", stick=" + stick +
 				", type=" + type +
 				", typeVal='" + typeVal + '\'' +
+				", typeName='" + typeName + '\'' +
 				'}';
 	}
 }
