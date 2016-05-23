@@ -22,6 +22,7 @@ public class SaleDetailVO implements Serializable {
     private Long startAt;
     private Long endAt;
     private String shareTitle;
+    private String sharePic;
     private String shareDesc;
     private String activityUrl;
     private String contentUrl;
@@ -135,6 +136,14 @@ public class SaleDetailVO implements Serializable {
         this.shareTitle = shareTitle;
     }
 
+    public String getSharePic() {
+        return sharePic;
+    }
+
+    public void setSharePic(String sharePic) {
+        this.sharePic = sharePic;
+    }
+
     public String getShareDesc() {
         return shareDesc;
     }
@@ -142,6 +151,7 @@ public class SaleDetailVO implements Serializable {
     public void setShareDesc(String shareDesc) {
         this.shareDesc = shareDesc;
     }
+
 
 
 
@@ -155,6 +165,7 @@ public class SaleDetailVO implements Serializable {
                 .append("startAt", startAt)
                 .append("endAt", endAt)
                 .append("shareTitle", shareTitle)
+                .append("sharePic", sharePic)
                 .append("shareDesc", shareDesc)
                 .append("activityUrl", activityUrl)
                 .append("contentUrl", contentUrl)

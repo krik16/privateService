@@ -9,7 +9,7 @@ import java.io.Serializable;
  */
 public class ContentParam implements Serializable{
     private static final Integer CURRENTPAGE = 1;
-    private static final Integer PAGESIZE = 10;
+    private static final Integer PAGESIZE = 10000;
     /**for*/
     private String forumCode;
     /**省份id 0代表查询全国的*/
