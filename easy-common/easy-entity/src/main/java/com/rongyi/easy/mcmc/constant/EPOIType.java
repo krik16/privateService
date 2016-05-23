@@ -19,4 +19,8 @@ public enum EPOIType {
      * 商城
      */
     BRAND
+    /**
+     * 所有
+     */
+    , ALL
 }
