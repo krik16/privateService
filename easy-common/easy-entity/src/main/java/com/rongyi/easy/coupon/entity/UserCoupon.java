@@ -158,6 +158,13 @@ public class UserCoupon implements Serializable {
 
     private Integer couponShowType;//券码展示类型 0默认 1url 2二维码
 
+    /**
+     * 品牌券 品牌logo
+     * 同商场的多店铺券 表示商场logo
+     * 单个店铺券 店铺Logo
+     */
+    private String couponLogo;
+
     public UserCoupon() {
 
     }
@@ -328,6 +335,13 @@ public class UserCoupon implements Serializable {
         return status;
     }
 
+    public String getCouponLogo() {
+        return couponLogo;
+    }
+
+    public void setCouponLogo(String couponLogo) {
+        this.couponLogo = couponLogo;
+    }
 
     public Integer getConvertStatus() {
         Integer val = status;

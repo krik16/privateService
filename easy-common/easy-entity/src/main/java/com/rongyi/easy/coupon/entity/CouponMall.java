@@ -30,7 +30,12 @@ public class CouponMall implements Serializable {
      */
     private String mallAddress;
 
+    /**
+     * 是否关联全部
+     */
     private Integer isRelateAll;
+
+    private String telePhone;
 
     public Integer getIsRelateAll() {
         return isRelateAll;
@@ -45,6 +50,7 @@ public class CouponMall implements Serializable {
         sb.append(", mallName='").append(mallName).append('\'');
         sb.append(", mallAddress='").append(mallAddress).append('\'');
         sb.append(", isRelateAll=").append(isRelateAll);
+        sb.append(", telePhone='").append(telePhone).append('\'');
         sb.append('}');
         return sb.toString();
     }
@@ -93,6 +99,13 @@ public class CouponMall implements Serializable {
         this.mallAddress = mallAddress;
     }
 
+    public String getTelePhone() {
+        return telePhone;
+    }
+
+    public void setTelePhone(String telePhone) {
+        this.telePhone = telePhone;
+    }
 
     public CouponMall(String couponId, String mallId, String mallName, String mallAddress) {
         this.couponId = couponId;
