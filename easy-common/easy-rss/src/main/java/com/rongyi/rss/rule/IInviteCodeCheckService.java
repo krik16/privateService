@@ -13,5 +13,5 @@ public interface IInviteCodeCheckService
      * @param terminal 活动终端 1app 2微商城 3标准微信 4互动屏
      * @return 是否成功
      */
-    boolean checkCoupon(String inviteCode, String activityId, Integer terminal);
+    boolean checkInviteCode(String inviteCode, String activityId, Integer terminal);
 }
