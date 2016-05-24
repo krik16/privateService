@@ -27,4 +27,12 @@ public interface ActivityCodeService {
      * @return
      */
     public List<String> getCouponCodesFromCouponId(String couponId,Integer count);
+
+
+    /**
+     * 生成礼品码
+     * @param param
+     * @return
+     */
+    public List<String> getGiftCodes(ImportInviteCodeParam param);
 }
