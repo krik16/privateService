@@ -484,4 +484,5 @@ public interface ROAContentService {
      */
 
     public Map<String, Object> buildMapByV700(ContentDO content, String userId, boolean bool,Integer appVersion) throws Exception ;
+    public ShopVO getShopInfoByShopId(String shopId);
 }
