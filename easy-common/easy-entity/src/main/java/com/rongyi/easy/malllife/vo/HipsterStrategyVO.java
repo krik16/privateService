@@ -19,6 +19,7 @@ public class HipsterStrategyVO implements Serializable{
 	private String title;//文章标题
 	private String picUrl;//文章封面图
 	private String articleUrl;//文章详情跳转路径
+	private String shareUrl ; //分享链接 
 	public String getId() {
 		return id;
 	}
@@ -55,11 +56,18 @@ public class HipsterStrategyVO implements Serializable{
 	public void setArticleUrl(String articleUrl) {
 		this.articleUrl = articleUrl;
 	}
+	public String getShareUrl() {
+		return shareUrl;
+	}
+	public void setShareUrl(String shareUrl) {
+		this.shareUrl = shareUrl;
+	}
 	@Override
 	public String toString() {
 		return "HipsterStrategyVO [id=" + id + ", description=" + description
-				+ ", type=" + type + ", title=" + title + ", picUrl="
-				+ picUrl + ", articleUrl=" + articleUrl + "]";
+				+ ", type=" + type + ", title=" + title + ", picUrl=" + picUrl
+				+ ", articleUrl=" + articleUrl + ", shareUrl=" + shareUrl + "]";
 	}
+	
 	
 }

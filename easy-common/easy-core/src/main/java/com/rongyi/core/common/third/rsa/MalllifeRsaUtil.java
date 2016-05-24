@@ -222,13 +222,13 @@ public class MalllifeRsaUtil {
             keyMap = initKey();
             String publicKey = getPublicKey(keyMap);
             String privateKey = getPrivateKey(keyMap);
-            System.out.println("publicKey=" + publicKey);
-            System.out.println("privateKey=" + privateKey);
+            //System.out.println("publicKey=" + publicKey);
+           // System.out.println("privateKey=" + privateKey);
             returnMap.put("publicKey",publicKey);
             returnMap.put("privateKey",privateKey);
              String uuid= UUID.randomUUID().toString();
             uuid="RONGYISMS"+uuid+System.currentTimeMillis();
-            returnMap.put("Rongyitoken",EasyMd5Util.GetMD5Code(uuid).toUpperCase());
+            returnMap.put("rongyitoken",EasyMd5Util.GetMD5Code(uuid).toUpperCase());
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -27,11 +27,29 @@ public class ActivityListVO implements Serializable{
     private String shareTitle;
 
     private String shareDesc;
+    private String sharePic;
+    private String replacePic;
 
     private Integer roundSum;
     private Integer roundType;
     private String  picUrls;
     private Date startAt;
+
+    public String getSharePic() {
+        return sharePic;
+    }
+
+    public void setSharePic(String sharePic) {
+        this.sharePic = sharePic;
+    }
+
+    public String getReplacePic() {
+        return replacePic;
+    }
+
+    public void setReplacePic(String replacePic) {
+        this.replacePic = replacePic;
+    }
 
     public Date getStartAt() {
         return startAt;
@@ -145,6 +163,8 @@ public class ActivityListVO implements Serializable{
                 .append("roundType", roundType)
                 .append("picUrls",picUrls)
                 .append("startAt", startAt)
+                .append("sharePic", sharePic)
+                .append("replacePic", replacePic)
                 .toString();
     }
 }
