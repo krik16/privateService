@@ -32,6 +32,16 @@ public class SmsCommonParam implements Serializable{
 
     private String sendType;//发送类型  RYNTCSMS 通知类型 RYMARKSMS 营销类型
 
+    private int isDisabled;//0 正常 1禁用，停止
+
+    public int getIsDisabled() {
+        return isDisabled;
+    }
+
+    public void setIsDisabled(int isDisabled) {
+        this.isDisabled = isDisabled;
+    }
+
     public String getChannel() {
         return channel;
     }
