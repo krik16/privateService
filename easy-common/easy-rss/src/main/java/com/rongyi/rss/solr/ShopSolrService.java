@@ -112,4 +112,13 @@ public interface ShopSolrService {
 	 * @return List<com.rongyi.easy.solr.result.ShopSearchInfo>
 	 */
 	public ResponseVO selectPOITipByPOIIds(List<String> poiIds);
+
+	/**
+	 * 设置标签（店铺/商场等）
+	 *
+	 * @return
+	 * @author wangjh7
+	 * @date 2016-05-05
+	 */
+	public void setPOITip();
 }
