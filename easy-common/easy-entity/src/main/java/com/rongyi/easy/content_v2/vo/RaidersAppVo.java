@@ -18,6 +18,8 @@ public class RaidersAppVo implements Serializable{
 	private String picUrl; //图片地址
 	private String url;    //跳转地址
 	private String typeVal;  //文章ID
+	private String shareUrl ; //分享链接 
+	
 	public Integer getId() {
 		return id;
 	}
@@ -65,5 +67,11 @@ public class RaidersAppVo implements Serializable{
 	}
 	public void setType(Integer type) {
 		this.type = type;
+	}
+	public String getShareUrl() {
+		return shareUrl;
+	}
+	public void setShareUrl(String shareUrl) {
+		this.shareUrl = shareUrl;
 	}
 }
