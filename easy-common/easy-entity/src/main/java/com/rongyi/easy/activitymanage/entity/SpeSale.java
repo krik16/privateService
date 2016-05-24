@@ -15,6 +15,9 @@ public class SpeSale implements Serializable {
     private Integer id;
     private String name;
     private String urlPics;
+    private String shareTitle;
+    private String sharePic;
+    private String shareDesc;
     private List<CommoditySaleVO> commoditySaleVOList = Lists.newArrayList();
 
     public List<CommoditySaleVO> getCommoditySaleVOList() {
@@ -24,6 +27,31 @@ public class SpeSale implements Serializable {
     public void setCommoditySaleVOList(List<CommoditySaleVO> commoditySaleVOList) {
         this.commoditySaleVOList = commoditySaleVOList;
     }
+
+    public String getShareTitle() {
+        return shareTitle;
+    }
+
+    public void setShareTitle(String shareTitle) {
+        this.shareTitle = shareTitle;
+    }
+
+    public String getSharePic() {
+        return sharePic;
+    }
+
+    public void setSharePic(String sharePic) {
+        this.sharePic = sharePic;
+    }
+
+    public String getShareDesc() {
+        return shareDesc;
+    }
+
+    public void setShareDesc(String shareDesc) {
+        this.shareDesc = shareDesc;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -54,6 +82,9 @@ public class SpeSale implements Serializable {
                 .append("id", id)
                 .append("name", name)
                 .append("urlPics", urlPics)
+                .append("shareDesc", shareDesc)
+                .append("shareTitle", shareTitle)
+                .append("sharePic", sharePic)
                 .append("commoditySaleVOList", commoditySaleVOList)
                 .toString();
     }
