@@ -16,6 +16,8 @@ public enum CodeCenterEnum {
     ERROR_INVALID_ACTIVITY_ID(1021303, "activityId不合法或无效"),
     ERROR_INVALID_LENGTH(1021304, "length不合法或无效"),
     ERROR_INVALID_TYPE(1021304, "type不合法或无效"),
+    ERROR_INVALID_CODES(1021305, "codes不合法或无效"),
+    ERROR_INVALID_MALLID(1021306, "mallId不合法或无效"),
 
     ERROR_SHOP_ID(1020131, "shopId不合法或无效"),
     ERROR_ACTIVITY_ID(1020122, "activityId不合法或无效"),

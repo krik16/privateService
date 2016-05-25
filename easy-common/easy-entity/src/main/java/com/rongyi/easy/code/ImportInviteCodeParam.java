@@ -29,6 +29,8 @@ public class ImportInviteCodeParam implements Serializable{
      */
     private Integer activityTpye;
 
+    private String mallId;
+
     /**
      * 页数
      */
@@ -85,6 +87,14 @@ public class ImportInviteCodeParam implements Serializable{
 
     public void setActivityTpye(Integer activityTpye) {
         this.activityTpye = activityTpye;
+    }
+
+    public String getMallId() {
+        return mallId;
+    }
+
+    public void setMallId(String mallId) {
+        this.mallId = mallId;
     }
 
     @Override
