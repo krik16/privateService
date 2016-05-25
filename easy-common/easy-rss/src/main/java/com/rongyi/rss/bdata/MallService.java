@@ -1,8 +1,11 @@
 package com.rongyi.rss.bdata;
 
+import java.util.List;
 import java.util.Map;
 
 import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.easy.bdata.vo.CommonTypeVO;
+import com.rongyi.easy.bdata.vo.MallGroupVO;
 import com.rongyi.easy.bdata.vo.MallVO;
 
 /**
@@ -132,14 +135,14 @@ public interface MallService {
 	 * @param type
 	 * @return
 	 */
-	ResponseVO getCommonType(Integer type);
+	List<CommonTypeVO> getCommonType(Integer type);
 	
 	/**
 	 * 获取集团信息
 	 * @param params
 	 * @return
 	 */
-	ResponseVO getMallGroups(Map params);
+	List<MallGroupVO> getMallGroups(Map params);
 	
 	int getMallGroupsCount(Map params);
 	
@@ -148,21 +151,21 @@ public interface MallService {
 	 * @param vo
 	 * @return
 	 */
-	ResponseVO saveMall(Map map,String json,Map picMap);
+	String saveMall(Map map,String json,Map picMap);
 	
 	/**
 	 * 设置商场营业状态
 	 * @param vo
 	 * @return
 	 */
-	ResponseVO setMallBusinessStatus(String mallId,int businessStatus);
+	boolean setMallBusinessStatus(String mallId,int businessStatus);
 	
 	/**
 	 * 设置商场显示状态
 	 * @param vo
 	 * @return
 	 */
-	ResponseVO setMallValid(String mallId,int valid);
+	boolean setMallValid(String mallId,int valid);
 	
 	Map<String, Object>getMalls(Map params, int currentpage, int pagesize);
 	
