@@ -9,14 +9,13 @@
 */
 package com.rongyi.va.service.impl;
 
-import java.math.BigDecimal;
-
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.rongyi.easy.va.entity.VirtualAccountEntity;
 import com.rongyi.rss.va.VirtualAccountAdminService;
 import com.rongyi.va.service.VirtualAccountService;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.math.BigDecimal;
 
 /**
  * @author ZhengYl
@@ -54,7 +53,7 @@ public class VirtualAccountAdminServiceImpl implements VirtualAccountAdminServic
 			e.printStackTrace();
 			logger.error(e, e);
 		}
-		logger.error(">>>>>>>>>虚拟账号创建结束");
+		logger.info(">>>>>>>>>虚拟账号创建结束");
 		return result;
 	}
 }
