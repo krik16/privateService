@@ -58,7 +58,7 @@ public class SmsLogInfoDto implements Serializable{
     private String requestIp;
 
     /** 调用渠道   活动等第三方平台调用*/
-    private String activChannel;
+    private String requestChannel;
 
     /**
      * 主键
@@ -237,11 +237,11 @@ public class SmsLogInfoDto implements Serializable{
         this.requestIp = requestIp;
     }
 
-    public String getActivChannel() {
-        return activChannel;
+    public String getRequestChannel() {
+        return requestChannel;
     }
 
-    public void setActivChannel(String activChannel) {
-        this.activChannel = activChannel;
+    public void setRequestChannel(String requestChannel) {
+        this.requestChannel = requestChannel;
     }
 }
