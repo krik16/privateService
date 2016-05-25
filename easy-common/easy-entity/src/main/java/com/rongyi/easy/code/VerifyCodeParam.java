@@ -16,7 +16,7 @@ public class VerifyCodeParam implements Serializable {
     /**
      * 码
      */
-    private List<String> codes;
+    private String code;
     /**
      * 活动id
      */
@@ -54,12 +54,12 @@ public class VerifyCodeParam implements Serializable {
      */
     private Integer terminal;
 
-    public List<String> getCodes() {
-        return codes;
+    public String getCode() {
+        return code;
     }
 
-    public void setCodes(List<String> codes) {
-        this.codes = codes;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getActivityId() {
@@ -129,7 +129,7 @@ public class VerifyCodeParam implements Serializable {
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("VerifyCodeParam{");
-        sb.append("codes=").append(codes);
+        sb.append("code=").append(code);
         sb.append(", activityId='").append(activityId).append('\'');
         sb.append(", type=").append(type);
         sb.append(", mallId='").append(mallId).append('\'');
