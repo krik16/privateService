@@ -210,12 +210,4 @@ public interface MerchantActivityService {
 	 * @return
 	 */
 	public int updateStatusToPending(int activityGoodsId, String userName);
-
-
-	/**
-	 * 更新审核状态
-	 * @param merchantActivityTemplate
-	 * @return
-	 */
-	boolean updateMerchantActivityTemplateInfoById(MerchantActivityTemplate merchantActivityTemplate);
 }
