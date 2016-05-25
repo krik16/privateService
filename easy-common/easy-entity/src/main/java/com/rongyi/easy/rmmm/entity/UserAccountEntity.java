@@ -45,7 +45,7 @@ public class UserAccountEntity implements Serializable{
     private Integer userId;
     
     /** 是否为默认资金账号  0是  1否  **/
-    private Integer isDefault ;
+    private Integer isDefault =1 ;
 
     /**
      * 主键
