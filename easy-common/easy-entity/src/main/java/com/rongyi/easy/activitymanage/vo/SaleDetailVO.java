@@ -17,6 +17,7 @@ import java.util.List;
 public class SaleDetailVO implements Serializable {
     private Integer id;
     private String bannerPic;
+    private String replacePic;
     private String name;
     private String subTitle;
     private Long startAt;
@@ -30,6 +31,14 @@ public class SaleDetailVO implements Serializable {
     private Integer nextTemplateRoundId;//null没有下一场字段，0没有下一场，其余有下一场
     private Integer nextId;
     private Integer nextContentId;
+
+    public String getReplacePic() {
+        return replacePic;
+    }
+
+    public void setReplacePic(String replacePic) {
+        this.replacePic = replacePic;
+    }
 
     public Integer getNextTemplateRoundId() {
         return nextTemplateRoundId;
@@ -167,6 +176,7 @@ public class SaleDetailVO implements Serializable {
                 .append("shareTitle", shareTitle)
                 .append("sharePic", sharePic)
                 .append("shareDesc", shareDesc)
+                .append("replacePic", replacePic)
                 .append("activityUrl", activityUrl)
                 .append("contentUrl", contentUrl)
                 .append("commodityList", commodityList)
