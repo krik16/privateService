@@ -24,7 +24,7 @@ public interface AdvertService {
 
 	public AdvertNewVo getAdById(int ad_id);
 
-	List<String> getValidAdIdsByMallId(String mall_id);
+	List<Integer> getValidAdIdsByMallId(String mall_id);
 
 	void deleteAdToPhp(Map<String, Object> param);
 }
