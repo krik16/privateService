@@ -27,7 +27,6 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -228,7 +227,7 @@ public class CommissionServiceImpl implements CommissionService {
         salesCommission.setCreateAt(DateUtil.getCurrDateTime());
         salesCommission.setGuideType(buyerInfoPojo.getUserType());
         salesCommission.setCommNo(orderNoGenService.getOrderNo("5"));
-        salesCommission.setInvitePhone(buyerInfoPojo.getUserPhone());
+        salesCommission.setInvitePhone(buyerInfoPojo.getUserAccount());
         salesCommission.setRegisterId(commissionVO.getRegisterId());
         salesCommission.setRegisterPhone(commissionVO.getRegisterPhone());
         salesCommission.setConfigId(commissionConfig.getId());
