@@ -31,6 +31,34 @@ public class SaleDetailVO implements Serializable {
     private Integer nextTemplateRoundId;//null没有下一场字段，0没有下一场，其余有下一场
     private Integer nextId;
     private Integer nextContentId;
+    private String nextShareTitle;
+    private String nextShareDesc;
+    private String nextSharePic;
+
+
+    public String getNextShareTitle() {
+        return nextShareTitle;
+    }
+
+    public void setNextShareTitle(String nextShareTitle) {
+        this.nextShareTitle = nextShareTitle;
+    }
+
+    public String getNextShareDesc() {
+        return nextShareDesc;
+    }
+
+    public void setNextShareDesc(String nextShareDesc) {
+        this.nextShareDesc = nextShareDesc;
+    }
+
+    public String getNextSharePic() {
+        return nextSharePic;
+    }
+
+    public void setNextSharePic(String nextSharePic) {
+        this.nextSharePic = nextSharePic;
+    }
 
     public String getReplacePic() {
         return replacePic;
@@ -183,6 +211,9 @@ public class SaleDetailVO implements Serializable {
                 .append("nextActTemplateId",nextTemplateRoundId)
                 .append("nextId",nextId)
                 .append("nextContentId",nextContentId)
+                .append("nextShareDesc", nextShareDesc)
+                .append("nextSharePic",nextSharePic)
+                .append("nextSharePic",nextSharePic)
                 .toString();
     }
 }
