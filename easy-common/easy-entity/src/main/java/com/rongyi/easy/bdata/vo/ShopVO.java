@@ -22,6 +22,7 @@ public class ShopVO implements Serializable {
 	private String description;
 	private String brandId;
 	private String brandName;
+	private String brandEname;
 	private List<BrandsCategoryVO> categories;
 	private List<String> terminalImgs;
 	private List<Double> location;
@@ -35,6 +36,15 @@ public class ShopVO implements Serializable {
 	private Date updateAt;
 	private String qrcodePic;
 	
+	
+	public String getBrandEname() {
+		return brandEname;
+	}
+
+	public void setBrandEname(String brandEname) {
+		this.brandEname = brandEname;
+	}
+
 	public String getId() {
 		return id;
 	}

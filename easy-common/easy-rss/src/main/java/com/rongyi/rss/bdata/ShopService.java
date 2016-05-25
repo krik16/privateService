@@ -65,4 +65,15 @@ public interface ShopService {
 	 *         business_status:店铺营业状态
 	 */
 	public ResponseVO updateShopSimple(Map paramsMap);
+	
+	
+	/**
+	 * 店铺搜索
+	 */
+	Map<String, Object>getShops(Map params, int currentpage, int pagesize);
+	
+	/*
+	 * 店铺查询结果统计
+	 */
+	Map<String, Object>getShopsWithBusinessStatusCount(Map params, int currentpage, int pagesize);
 }
