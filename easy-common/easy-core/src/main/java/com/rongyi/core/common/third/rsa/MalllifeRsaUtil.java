@@ -129,8 +129,9 @@ public class MalllifeRsaUtil {
         logger.info("====加密===");
         try {
             //byte[] encodeUserName = RsaHelper.encryptByPublicKey(str.getBytes(), publicKey);
-            byte[] encodeUserName =  encryptByPublicKey(str.getBytes(), publicKey);
+            byte[] encodeUserName =  encryptByPublicKey(str.getBytes("utf-8"), publicKey);
             str= Base64Helper.encode(encodeUserName);
+
         }catch (Exception e){
             e.printStackTrace();
             logger.info("====加密失败===");
