@@ -58,5 +58,5 @@ public interface ICommodityService {
 
 	public List<Commodity> findCommodityByshopId(String shopMid);
 
-	public List<Commodity>  findCommodityByCategoryIdAndStatus(ObjectId categoryId,String status);
+	public List<Commodity>  findCommodityByCategoryIdAndStatus(ObjectId categoryId);
 }
