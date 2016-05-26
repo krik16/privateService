@@ -76,8 +76,6 @@ public class SmsConfig implements Serializable{
         public static final  int TOB_NOTICE=3;//ToB_业务 通知类
         public static final  int TOB_MARKETING=4;//ToB_业务 营销
         public static final int ADVERT_EXPEPTION=5;//广告异常短信监控
- 
-
     }
 
 
