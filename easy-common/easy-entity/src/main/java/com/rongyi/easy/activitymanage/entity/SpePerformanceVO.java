@@ -14,6 +14,8 @@ public class SpePerformanceVO implements Serializable{
     private String actName;
     private Integer contentId;
     private String contentShareTitle;
+    private String contentSharePic;
+    private String contentShareDesc;
     private List<TemplateRound> templateRoundList = Lists.newArrayList();
 
     public Integer getContentId() {
@@ -22,6 +24,22 @@ public class SpePerformanceVO implements Serializable{
 
     public void setContentId(Integer contentId) {
         this.contentId = contentId;
+    }
+
+    public String getContentSharePic() {
+        return contentSharePic;
+    }
+
+    public void setContentSharePic(String contentSharePic) {
+        this.contentSharePic = contentSharePic;
+    }
+
+    public String getContentShareDesc() {
+        return contentShareDesc;
+    }
+
+    public void setContentShareDesc(String contentShareDesc) {
+        this.contentShareDesc = contentShareDesc;
     }
 
     public String getContentShareTitle() {
@@ -64,6 +82,8 @@ public class SpePerformanceVO implements Serializable{
                 .append("contentId", contentId)
                 .append("templateRoundList", templateRoundList)
                 .append("contentShareTitle",contentShareTitle)
+                .append("contentSharePic",contentSharePic)
+                .append("contentShareDesc", contentShareDesc)
                 .toString();
     }
 }
