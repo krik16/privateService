@@ -13,6 +13,7 @@ public class SpePerformanceVO implements Serializable{
     private Integer id;
     private String actName;
     private Integer contentId;
+    private String contentShareTitle;
     private List<TemplateRound> templateRoundList = Lists.newArrayList();
 
     public Integer getContentId() {
@@ -23,6 +24,13 @@ public class SpePerformanceVO implements Serializable{
         this.contentId = contentId;
     }
 
+    public String getContentShareTitle() {
+        return contentShareTitle;
+    }
+
+    public void setContentShareTitle(String contentShareTitle) {
+        this.contentShareTitle = contentShareTitle;
+    }
 
     public Integer getId() {
         return id;
@@ -55,6 +63,7 @@ public class SpePerformanceVO implements Serializable{
                 .append("actName", actName)
                 .append("contentId", contentId)
                 .append("templateRoundList", templateRoundList)
+                .append("contentShareTitle",contentShareTitle)
                 .toString();
     }
 }
