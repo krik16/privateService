@@ -54,7 +54,13 @@ public class SmsConfig implements Serializable{
         public static final  String MALL_LIFE_SIGN="【容易逛】";//容易逛
     }
 
-
+    /**
+     * 签名类型
+     */
+    public abstract class REQUEST_CHANNEL_TYPE {
+        public static final String MALLLIFE_CHANNEL="MALLLIFE";//容易逛
+        public static final  String MALLSHOP_CHANNEL="MALLSHOP";//摩店
+    }
 
 
     public abstract class SMSCHANNEL_TYPE {
