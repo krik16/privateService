@@ -15,6 +15,15 @@ public class TrendActivity implements Serializable {
     private int artType;
     private String typeVal;
     private String url;
+    private String shareUrl;
+
+    public String getShareUrl() {
+        return shareUrl;
+    }
+
+    public void setShareUrl(String shareUrl) {
+        this.shareUrl = shareUrl;
+    }
 
     public int getArtType() {
         return artType;
@@ -82,6 +91,7 @@ public class TrendActivity implements Serializable {
                 .append("artType", artType)
                 .append("typeVal", typeVal)
                 .append("url", url)
+                .append("shareUrl", shareUrl)
                 .toString();
     }
 }
