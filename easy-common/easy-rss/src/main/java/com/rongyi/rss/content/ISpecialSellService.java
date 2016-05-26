@@ -44,6 +44,7 @@ public interface ISpecialSellService {
 	 *              currentPage  不传默认1
 	 *              pageSize  不传默认10
 	 *              version  文章版本号
+	 *              appVersion  app版本号
 	 * @return
 	 * @throws Exception
 	 */

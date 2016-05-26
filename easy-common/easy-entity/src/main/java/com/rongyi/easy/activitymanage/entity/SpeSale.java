@@ -18,6 +18,7 @@ public class SpeSale implements Serializable {
     private String shareTitle;
     private String sharePic;
     private String shareDesc;
+    private String replacePic;
     private List<CommoditySaleVO> commoditySaleVOList = Lists.newArrayList();
 
     public List<CommoditySaleVO> getCommoditySaleVOList() {
@@ -26,6 +27,14 @@ public class SpeSale implements Serializable {
 
     public void setCommoditySaleVOList(List<CommoditySaleVO> commoditySaleVOList) {
         this.commoditySaleVOList = commoditySaleVOList;
+    }
+
+    public String getReplacePic() {
+        return replacePic;
+    }
+
+    public void setReplacePic(String replacePic) {
+        this.replacePic = replacePic;
     }
 
     public String getShareTitle() {
@@ -85,6 +94,7 @@ public class SpeSale implements Serializable {
                 .append("shareDesc", shareDesc)
                 .append("shareTitle", shareTitle)
                 .append("sharePic", sharePic)
+                .append("replacePic", replacePic)
                 .append("commoditySaleVOList", commoditySaleVOList)
                 .toString();
     }

@@ -164,4 +164,42 @@ public class AppUtil{
         Matcher m = p.matcher(mobiles);
         return m.matches();
     }
+    
+    /**
+     * 当文章关联为Mall 或者 Shop 时返回的url v5版本
+     * (从malllife  AppService中copy过来的)
+     * */
+    public static String getRefShopOrMallArticleUrlV5(Integer id, String version,String domain ,Integer appVersion) {
+
+        if(version!=null&&version.equalsIgnoreCase("v5_6")){
+            return domain + "/v5_1/share/articleRefOne.htm?id=" + id;
+        }
+        
+        if(version!=null&&version.equalsIgnoreCase("v5_1")){
+            return domain + "/v5/recommend/articleRefOne.htm?id=" + id;
+        }
+        if(version!=null&&version.equalsIgnoreCase("v5_7")){
+            return domain + "/v5_1/share/articleRefOne.htm?id=" + id+"&appVersion="+ appVersion;
+        }
+        return domain + "/v5/recommend/articleRefOne.htm?id=" + id;
+    }
+    
+    
+    /**
+     * 当文章关联为City 或者 Brand 时返回的url v5版本
+     * (从malllife  AppService中copy过来的)
+     * */
+    public static String getArticleUrlV5(Integer id, String version,String domain ,Integer appVersion) {
+        if(version!=null&&version.equalsIgnoreCase("v5_6")){
+            return domain + "/v5_1/share/article.htm?id=" + id;
+        }
+        if(version!=null&&version.equalsIgnoreCase("v5_7")){
+            return domain + "/v5_1/share/article.htm?id=" + id+"&appVersion="+ appVersion;
+        }
+        
+        if(version!=null&&version.equalsIgnoreCase("v5_1")){
+            return domain + "/v5/recommend/article.htm?id=" + id;
+        }
+        return domain + "/v5/recommend/article.htm?id=" + id;
+    }
 }

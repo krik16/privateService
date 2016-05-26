@@ -12,8 +12,17 @@ public class TrendActivity implements Serializable {
     private String picUrl;
     private String title;
     private int type;
+    private int artType;
     private String typeVal;
     private String url;
+
+    public int getArtType() {
+        return artType;
+    }
+
+    public void setArtType(int artType) {
+        this.artType = artType;
+    }
 
     public Integer getId() {
         return id;
@@ -70,6 +79,7 @@ public class TrendActivity implements Serializable {
                 .append("title", title)
                 .append("picUrl", picUrl)
                 .append("type", type)
+                .append("artType", artType)
                 .append("typeVal", typeVal)
                 .append("url", url)
                 .toString();
