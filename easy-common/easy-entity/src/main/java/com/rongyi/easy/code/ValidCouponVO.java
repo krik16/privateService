@@ -1,71 +1,71 @@
 package com.rongyi.easy.code;
 
-import java.io.Serializable;
-import java.util.Date;
 
+		import java.io.Serializable;
+		import java.util.Date;
 /**
- * È¯ÂëÑéÖ¤Ò³Ò³ÃæÏÔÊ¾
+ * åˆ¸ç éªŒè¯é¡µé¡µé¢æ˜¾ç¤º
  * @author hebo 2015/09/13
  *
  */
 public class ValidCouponVO implements Serializable {
 
-	private String name;//È¯Ãû³Æ
-	private Date validStartAt;//ÓĞĞ§ÆÚÊ¼
-	private Date validEndAt;//ÓĞĞ§ÆÚÖ¹
-	private String limitUseCount;//Ã¿ÈËÃ¿ÈÕÏŞÓÃÕÅÊı
-	private Integer useredCount;//µ±ÌìÒÑÊ¹ÓÃ´ÎÊı
-	private String limitDesc;//Ê¹ÓÃÏŞÖÆ
-	private String usageDesc;//Ê¹ÓÃËµÃ÷
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public Date getValidStartAt() {
-		return validStartAt;
-	}
-	public void setValidStartAt(Date validStartAt) {
-		this.validStartAt = validStartAt;
-	}
-	public Date getValidEndAt() {
-		return validEndAt;
-	}
-	public void setValidEndAt(Date validEndAt) {
-		this.validEndAt = validEndAt;
-	}
-	public String getLimitUseCount() {
-		return limitUseCount;
-	}
-	public void setLimitUseCount(String limitUseCount) {
-		this.limitUseCount = limitUseCount;
-	}
-	public Integer getUseredCount() {
-		return useredCount;
-	}
-	public void setUseredCount(Integer useredCount) {
-		this.useredCount = useredCount;
-	}
-	public String getLimitDesc() {
-		return limitDesc;
-	}
-	public void setLimitDesc(String limitDesc) {
-		this.limitDesc = limitDesc;
-	}
-	public String getUsageDesc() {
-		return usageDesc;
-	}
-	public void setUsageDesc(String usageDesc) {
-		this.usageDesc = usageDesc;
-	}
-	@Override
-	public String toString() {
-		return "ValidCouponVO [name=" + name + ", validStartAt=" + validStartAt
-				+ ", validEndAt=" + validEndAt + ", limitUseCount="
-				+ limitUseCount + ", useredCount=" + useredCount
-				+ ", limitDesc=" + limitDesc + ", usageDesc=" + usageDesc + "]";
-	}
-	
-	
+		private String name;//åˆ¸åç§°
+		private Date validStartAt;//æœ‰æ•ˆæœŸå§‹
+		private Date validEndAt;//æœ‰æ•ˆæœŸæ­¢
+		private String limitUseCount;//æ¯äººæ¯æ—¥é™ç”¨å¼ æ•°
+		private Integer useredCount;//å½“å¤©å·²ä½¿ç”¨æ¬¡æ•°
+		private String limitDesc;//ä½¿ç”¨é™åˆ¶
+		private String usageDesc;//ä½¿ç”¨è¯´æ˜
+		public String getName() {
+				return name;
+		}
+		public void setName(String name) {
+				this.name = name;
+		}
+		public Date getValidStartAt() {
+				return validStartAt;
+		}
+		public void setValidStartAt(Date validStartAt) {
+				this.validStartAt = validStartAt;
+		}
+		public Date getValidEndAt() {
+				return validEndAt;
+		}
+		public void setValidEndAt(Date validEndAt) {
+				this.validEndAt = validEndAt;
+		}
+		public String getLimitUseCount() {
+				return limitUseCount;
+		}
+		public void setLimitUseCount(String limitUseCount) {
+				this.limitUseCount = limitUseCount;
+		}
+		public Integer getUseredCount() {
+				return useredCount;
+		}
+		public void setUseredCount(Integer useredCount) {
+				this.useredCount = useredCount;
+		}
+		public String getLimitDesc() {
+				return limitDesc;
+		}
+		public void setLimitDesc(String limitDesc) {
+				this.limitDesc = limitDesc;
+		}
+		public String getUsageDesc() {
+				return usageDesc;
+		}
+		public void setUsageDesc(String usageDesc) {
+				this.usageDesc = usageDesc;
+		}
+		@Override
+		public String toString() {
+				return "ValidCouponVO [name=" + name + ", validStartAt=" + validStartAt
+						+ ", validEndAt=" + validEndAt + ", limitUseCount="
+						+ limitUseCount + ", useredCount=" + useredCount
+						+ ", limitDesc=" + limitDesc + ", usageDesc=" + usageDesc + "]";
+		}
+
+
 }

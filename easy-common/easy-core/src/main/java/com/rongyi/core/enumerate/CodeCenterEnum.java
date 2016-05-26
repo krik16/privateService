@@ -20,6 +20,7 @@ public enum CodeCenterEnum {
     ERROR_INVALID_MALLID(1021306, "mallId不合法或无效"),
     ERROR_INVALID_COUNT(1021307, "count不合法或无效"),
     ERROR_UNLOGIN(1021309, "请重新登录！"),
+    ERROR_INVALID_IDENTITY(1021310, "只有商场才能验证礼品码！"),
     ERROR_VALIDCODE_ERROR_MALL(1021320, "该商场下无法验证该券！"),
     ERROR_VALIDCODE_ERROR_SHOP(1021321, "该店铺下无法验证该券！"),
     ERROR_VALIDCODE_GENERAL_IDENTITY(1021322, "当前用户无法验证通用券！"),

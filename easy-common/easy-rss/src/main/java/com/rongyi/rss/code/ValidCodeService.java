@@ -1,6 +1,10 @@
 package com.rongyi.rss.code;
 
+
 import com.rongyi.easy.code.ValidCouponVO;
+import net.sf.json.JSONObject;
+
+import java.util.Map;
 
 /**
  * Description: 验码接口
@@ -20,4 +24,11 @@ public interface ValidCodeService {
      * @return
      */
     public ValidCouponVO validSearchCoupon(String couponCode, String shopId, String mallId, Integer identity);
+
+    /**
+     * 查询礼品码的信息
+     * @param giftCode
+     * @param mallId
+     */
+    public JSONObject validSearchGift(String giftCode, String mallId);
 }
