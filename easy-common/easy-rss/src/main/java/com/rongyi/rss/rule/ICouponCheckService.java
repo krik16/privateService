@@ -1,5 +1,8 @@
 package com.rongyi.rss.rule;
 
+import com.rongyi.easy.tradecenter.param.BizzValidHistoryParam;
+import com.rongyi.easy.tradecenter.vo.BizzValidHistoryVO;
+
 /**
  * Created by yujisun on 2016/5/20.
  */
@@ -17,4 +20,13 @@ public interface ICouponCheckService
      * @param sellerId 校验人id
      */
     boolean checkCoupon(String couponCode, String mallId, String shopId, Long useMode, String source, Integer sellerId);
+
+    /**
+     * 查询验券记录
+     *
+     * @param param 查询参数
+     * @return 查询结果
+     *
+     */
+    BizzValidHistoryVO couponValidHis(BizzValidHistoryParam param);
 }
