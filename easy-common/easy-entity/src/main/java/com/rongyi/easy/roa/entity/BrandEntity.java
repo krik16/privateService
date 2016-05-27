@@ -25,8 +25,26 @@ public class BrandEntity implements Serializable{
     private Integer valid;
     private String key_tags;
     private String merlog_pic; //商家后台Logo图片
+    private String categories_tags;
+    private String tags;
 
-    public String getKey_tags() {
+    public String getCategories_tags() {
+		return categories_tags;
+	}
+
+	public void setCategories_tags(String categories_tags) {
+		this.categories_tags = categories_tags;
+	}
+
+	public String getTags() {
+		return tags;
+	}
+
+	public void setTags(String tags) {
+		this.tags = tags;
+	}
+
+	public String getKey_tags() {
 		return key_tags;
 	}
 
