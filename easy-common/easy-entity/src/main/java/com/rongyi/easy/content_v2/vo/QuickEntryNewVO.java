@@ -29,6 +29,16 @@ public class QuickEntryNewVO implements Serializable {
     private String shareContent;//分享内容
     private String sharePic;//分享图片
     private String appTitle;//页面标题
+    private String picUrl2;
+
+    public String getPicUrl2() {
+        return picUrl2;
+    }
+
+    public void setPicUrl2(String picUrl2) {
+        this.picUrl2 = picUrl2;
+    }
+
     public String getQuickPics() {
         return quickPics;
     }
@@ -104,6 +114,7 @@ public class QuickEntryNewVO implements Serializable {
                 .append("shareContent", shareContent)
                 .append("sharePic", sharePic)
                 .append("appTitle", appTitle)
+                .append("picUrl2",picUrl2)
                 .toString();
     }
 }

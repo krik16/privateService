@@ -26,6 +26,15 @@ public class HomePageContentVO implements Serializable{
     private List<CouponRecommendVO> couponRecommend;
     private FloatAdVO floatAd;
     private List<AppBuyerLiveVO> buyerLives;
+    private RaidersHomeVo raidersHomeVo;
+
+    public RaidersHomeVo getRaidersHomeVo() {
+        return raidersHomeVo;
+    }
+
+    public void setRaidersHomeVo(RaidersHomeVo raidersHomeVo) {
+        this.raidersHomeVo = raidersHomeVo;
+    }
 
     public List<BannerVO> getBanner() {
         return banner;
@@ -121,6 +130,7 @@ public class HomePageContentVO implements Serializable{
                 .append("couponRecommend", couponRecommend)
                 .append("floatAd", floatAd)
                 .append("buyerLives", buyerLives)
+                .append("RaidersHomeVo",raidersHomeVo)
                 .toString();
     }
 }

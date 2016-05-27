@@ -8,6 +8,7 @@
 	</parent>
 	<artifactId>easy-rss</artifactId>
 	<packaging>jar</packaging>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.rongyi</groupId>

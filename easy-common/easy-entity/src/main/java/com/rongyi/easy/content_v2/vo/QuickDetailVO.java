@@ -45,6 +45,11 @@ public class QuickDetailVO implements Serializable {
      * 页面标题
      */
     private String appTitle;
+    
+    /**
+     * APP版本兼容增加的字段
+     */
+    private String picNameTwo;
 
     public String getPicName() {
         return picName;
@@ -110,7 +115,15 @@ public class QuickDetailVO implements Serializable {
         this.appTitle = appTitle;
     }
 
-    @Override
+    public String getPicNameTwo() {
+		return picNameTwo;
+	}
+
+	public void setPicNameTwo(String picNameTwo) {
+		this.picNameTwo = picNameTwo;
+	}
+
+	@Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("picName", picName)

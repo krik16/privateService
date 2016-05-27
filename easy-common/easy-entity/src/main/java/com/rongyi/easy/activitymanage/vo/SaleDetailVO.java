@@ -17,15 +17,81 @@ import java.util.List;
 public class SaleDetailVO implements Serializable {
     private Integer id;
     private String bannerPic;
+    private String replacePic;
     private String name;
     private String subTitle;
     private Long startAt;
     private Long endAt;
     private String shareTitle;
+    private String sharePic;
     private String shareDesc;
     private String activityUrl;
     private String contentUrl;
     private List<CommodityBuyerVO> commodityList;
+    private Integer nextTemplateRoundId;//null没有下一场字段，0没有下一场，其余有下一场
+    private Integer nextId;
+    private Integer nextContentId;
+    private String nextShareTitle;
+    private String nextShareDesc;
+    private String nextSharePic;
+
+
+    public String getNextShareTitle() {
+        return nextShareTitle;
+    }
+
+    public void setNextShareTitle(String nextShareTitle) {
+        this.nextShareTitle = nextShareTitle;
+    }
+
+    public String getNextShareDesc() {
+        return nextShareDesc;
+    }
+
+    public void setNextShareDesc(String nextShareDesc) {
+        this.nextShareDesc = nextShareDesc;
+    }
+
+    public String getNextSharePic() {
+        return nextSharePic;
+    }
+
+    public void setNextSharePic(String nextSharePic) {
+        this.nextSharePic = nextSharePic;
+    }
+
+    public String getReplacePic() {
+        return replacePic;
+    }
+
+    public void setReplacePic(String replacePic) {
+        this.replacePic = replacePic;
+    }
+
+    public Integer getNextTemplateRoundId() {
+        return nextTemplateRoundId;
+    }
+
+    public void setNextTemplateRoundId(Integer nextTemplateRoundId) {
+        this.nextTemplateRoundId = nextTemplateRoundId;
+    }
+
+    public Integer getNextId() {
+        return nextId;
+    }
+
+    public void setNextId(Integer nextId) {
+        this.nextId = nextId;
+    }
+
+    public Integer getNextContentId() {
+        return nextContentId;
+    }
+
+    public void setNextContentId(Integer nextContentId) {
+        this.nextContentId = nextContentId;
+    }
+
 
     public Integer getId() {
         return id;
@@ -107,6 +173,14 @@ public class SaleDetailVO implements Serializable {
         this.shareTitle = shareTitle;
     }
 
+    public String getSharePic() {
+        return sharePic;
+    }
+
+    public void setSharePic(String sharePic) {
+        this.sharePic = sharePic;
+    }
+
     public String getShareDesc() {
         return shareDesc;
     }
@@ -114,6 +188,9 @@ public class SaleDetailVO implements Serializable {
     public void setShareDesc(String shareDesc) {
         this.shareDesc = shareDesc;
     }
+
+
+
 
     @Override
     public String toString() {
@@ -125,10 +202,18 @@ public class SaleDetailVO implements Serializable {
                 .append("startAt", startAt)
                 .append("endAt", endAt)
                 .append("shareTitle", shareTitle)
+                .append("sharePic", sharePic)
                 .append("shareDesc", shareDesc)
+                .append("replacePic", replacePic)
                 .append("activityUrl", activityUrl)
                 .append("contentUrl", contentUrl)
                 .append("commodityList", commodityList)
+                .append("nextActTemplateId",nextTemplateRoundId)
+                .append("nextId",nextId)
+                .append("nextContentId",nextContentId)
+                .append("nextShareDesc", nextShareDesc)
+                .append("nextSharePic",nextSharePic)
+                .append("nextSharePic",nextSharePic)
                 .toString();
     }
 }

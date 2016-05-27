@@ -28,7 +28,7 @@ public class SystemConfig implements Serializable{
 
     public static final  String  USER_DISABLED_MSG="抱歉，卖家休息中，请您换个卖家看看吧~";
 
-
+    public static final  String  SMS_KEY="SMSKEY";
     /**
      *
      */
@@ -70,10 +70,7 @@ public class SystemConfig implements Serializable{
             "/v5/shop/getShop.htm"
     });
 
-
-
-
-
+    public static final List<String> uaList = Arrays.asList("Android", "IOS", "H5");
 
     public static String buildPictureUrl(String userId, String headImg) {
         String UPAIYUN_Content = "system/user/avatar/";

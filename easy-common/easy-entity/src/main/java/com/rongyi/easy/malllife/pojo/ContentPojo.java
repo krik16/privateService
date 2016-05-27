@@ -2,6 +2,7 @@ package com.rongyi.easy.malllife.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author jiejie 2014年6月23日 下午6:46:36
@@ -62,8 +63,40 @@ public class ContentPojo implements Serializable{
     private Integer isExpired; // 是否过期
     
     private String grouponId; // 团购券ID
+    private String brandLogo;// 文章关联品牌图片
+    private Date push_at;//推送时间即发布时间
+    private String connect_id;//关联映射表id
+    private String brandId;
+    private List<String> mallIds;
     
-    public Integer getActivity_recommend_Timer() {
+    private String connect_type;//多关联的类型 mall shop brand all city
+    private String action_picture2;// 新的列表图片
+    private String picture2;//新的封面图片
+	public String getBrandId() {
+		return brandId;
+	}
+
+	public void setBrandId(String brandId) {
+		this.brandId = brandId;
+	}
+
+	public String getBrandLogo() {
+		return brandLogo;
+	}
+
+	public void setBrandLogo(String brandLogo) {
+		this.brandLogo = brandLogo;
+	}
+
+	public Date getPush_at() {
+		return push_at;
+	}
+
+	public void setPush_at(Date push_at) {
+		this.push_at = push_at;
+	}
+
+	public Integer getActivity_recommend_Timer() {
 		return activity_recommend_Timer;
 	}
 
@@ -334,5 +367,43 @@ public class ContentPojo implements Serializable{
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public List<String> getMallIds() {
+		return mallIds;
+	}
+	public void setMallIds(List<String> mallIds) {
+		this.mallIds = mallIds;
+	}
+
+	public String getConnect_id() {
+		return connect_id;
+	}
+
+	public void setConnect_id(String connect_id) {
+		this.connect_id = connect_id;
+	}
+
+	public String getConnect_type() {
+		return connect_type;
+	}
+
+	public void setConnect_type(String connect_type) {
+		this.connect_type = connect_type;
+	}
+
+	public String getAction_picture2() {
+		return action_picture2;
+	}
+
+	public void setAction_picture2(String action_picture2) {
+		this.action_picture2 = action_picture2;
+	}
+
+	public String getPicture2() {
+		return picture2;
+	}
+
+	public void setPicture2(String picture2) {
+		this.picture2 = picture2;
 	}
 }
