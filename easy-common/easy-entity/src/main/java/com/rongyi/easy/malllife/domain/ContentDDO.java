@@ -59,6 +59,8 @@ public class ContentDDO implements Serializable{
     private Date publishEnd;
     
     private String grouponId; // 团购券ID
+    
+    private String connectType;  //连接类型
 
 	public Integer getId() {
 		return id;
@@ -395,6 +397,12 @@ public class ContentDDO implements Serializable{
 	public void setGrouponId(String grouponId) {
 		this.grouponId = grouponId;
 	}
-    
-    
+
+	public String getConnectType() {
+		return connectType;
+	}
+
+	public void setConnectType(String connectType) {
+		this.connectType = connectType;
+	}
 }

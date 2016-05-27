@@ -34,6 +34,7 @@ public class ShopVO implements Serializable {
     private String filialeId;
 	private String filialeName;
 	private List<ObjectId> custom_category_ids;
+	private String mall_id;//输入商场id
 
     public String getId() {
         return id;
@@ -245,6 +246,12 @@ public class ShopVO implements Serializable {
 	 */
 	public void setCustom_category_ids(List<ObjectId> custom_category_ids) {
 		this.custom_category_ids = custom_category_ids;
+	}
+	public String getMall_id() {
+		return mall_id;
+	}
+	public void setMall_id(String mall_id) {
+		this.mall_id = mall_id;
 	}
 
 	@Override

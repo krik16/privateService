@@ -29,10 +29,30 @@ public class TemplateListVO implements Serializable {
     private String activityUrl;
     /**0关联商场 1关联店铺*/
     private Byte isMallShop;
+    //专场场次
+    private Integer roundSum;
+    //专场类型
+    private Integer roundType;
     /**店铺商场关联*/
     private TemplateSaleShopMall templateSaleShopMall;
 
     private TemplateSale templateSale;
+
+    public Integer getRoundSum() {
+        return roundSum;
+    }
+
+    public void setRoundSum(Integer roundSum) {
+        this.roundSum = roundSum;
+    }
+
+    public Integer getRoundType() {
+        return roundType;
+    }
+
+    public void setRoundType(Integer roundType) {
+        this.roundType = roundType;
+    }
 
     public Integer getId() {
         return id;
@@ -117,6 +137,8 @@ public class TemplateListVO implements Serializable {
                 .append("isMallShop", isMallShop)
                 .append("templateSaleShopMall", templateSaleShopMall)
                 .append("templateSale", templateSale)
+                .append("roundSum", roundSum)
+                .append("roundType", roundType)
                 .toString();
     }
 }
