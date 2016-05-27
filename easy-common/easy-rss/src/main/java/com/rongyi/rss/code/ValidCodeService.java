@@ -31,7 +31,7 @@ public interface ValidCodeService {
      * @param giftCode
      * @param mallId
      */
-    public JSONObject validSearchGift(String giftCode, String mallId);
+    public ValidCouponVO validSearchGift(String giftCode, String mallId);
 
 
     /**
