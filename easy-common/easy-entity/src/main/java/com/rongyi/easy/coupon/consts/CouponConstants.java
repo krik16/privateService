@@ -169,4 +169,10 @@ public interface CouponConstants {
         Integer FULL_CUT = 0;
         Integer STAND_CUT = 1;
     }
+
+    interface USERREDENVELOP_ACTIVITY_TYPE{
+        int FPG=0;//翻牌购
+        int TS=1;//推送
+        int FX=2;//分享红包
+    }
 }

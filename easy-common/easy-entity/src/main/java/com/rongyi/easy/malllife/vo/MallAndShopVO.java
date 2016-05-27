@@ -1,6 +1,7 @@
 package com.rongyi.easy.malllife.vo;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class MallAndShopVO implements Serializable{
     private String id;//
@@ -18,7 +19,7 @@ public class MallAndShopVO implements Serializable{
     private String business_district;//商圈
     private Double[] location;//
     private String label; //标签 字符串
-    
+    private List<Integer> tip; ///< 店铺标签（格式：[0，0，0] 对应：[货，惠、劵]）
     
 	public String getId() {
 		return id;
@@ -92,6 +93,11 @@ public class MallAndShopVO implements Serializable{
 	public void setLabel(String label) {
 		this.label = label;
 	}
-	
+	public List<Integer> getTip() {
+		return tip;
+	}
+	public void setTip(List<Integer> tip) {
+		this.tip = tip;
+	}
 	
 }

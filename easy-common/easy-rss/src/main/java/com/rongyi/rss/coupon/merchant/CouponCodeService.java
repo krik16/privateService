@@ -12,6 +12,7 @@ import java.util.List;
 public interface CouponCodeService {
     /**
      * 批量插入第三方券码
+     *
      * @param list
      * @return
      */
@@ -19,13 +20,15 @@ public interface CouponCodeService {
 
     /**
      * 批量插入生成的券码
+     *
      * @param list
      * @return
      */
-    public int batchGenerateInsert(List<CouponCode> list) ;
+    public int batchGenerateInsert(List<CouponCode> list);
 
     /**
      * 统计某个卡券的券码
+     *
      * @param couponId
      * @return
      */
@@ -33,6 +36,7 @@ public interface CouponCodeService {
 
     /**
      * 根据券id获取券码列表
+     *
      * @param couponId
      * @return
      */
@@ -40,6 +44,7 @@ public interface CouponCodeService {
 
     /**
      * 根据code更新券码状态
+     *
      * @param couponCode
      * @param status
      * @return
@@ -48,14 +53,16 @@ public interface CouponCodeService {
 
     /**
      * 批量更新券码状态
+     *
      * @param couponCodes
      * @param status
      * @return
      */
-    public int batchUpdateStatusByCouponCode(List<String> couponCodes,Integer status);
+    public int batchUpdateStatusByCouponCode(List<String> couponCodes, Integer status);
 
     /**
      * 通过版本号获取券码数量
+     *
      * @param couponId
      * @param version
      * @return
@@ -64,6 +71,7 @@ public interface CouponCodeService {
 
     /**
      * 通过版本号获取券码列表
+     *
      * @param couponId
      * @param version
      * @return
@@ -72,9 +80,22 @@ public interface CouponCodeService {
 
     /**
      * 根据券id 查找券码列表，券码只返回code 和in_channel 字段
+     *
      * @param couponId
      * @return
      */
     public List<CouponCode> getCouponCodesByCouponId(String couponId);
+
+    /**
+     * 根据券id 查找未领取的券码，只返回couponId,code 字段
+     * 分享微信用
+     * @param couponId
+     * @return
+     */
+    public List<CouponCode> getCodesByCouponIdForShare(String couponId);
+
+
+    public int batchUpdateCouponCode(List<CouponCode> couponCodes);
+
 
 }

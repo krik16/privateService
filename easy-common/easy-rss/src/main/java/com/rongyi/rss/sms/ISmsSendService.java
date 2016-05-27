@@ -31,6 +31,18 @@ public interface ISmsSendService {
 
 
     /**
+     * 发送语音
+     * 【1】 Faild  表示 失败
+     * 【2】 Success  表示成功
+     * 【3】 Limit 表示当前手机号，当天发送超量
+     * @param smsParam
+     * @return
+     * @throws MallShopException
+     */
+    public  String sendYuYINSmsMessage(SmsParam smsParam) throws MallShopException;
+
+
+    /**
      * 发送B端短信
      * @param smsParam
      * @return

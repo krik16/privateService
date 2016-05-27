@@ -208,6 +208,16 @@ public class CommodityBuyerVO implements Serializable{
 	private String shopMid;
 	private boolean isCollected;  //是否被收藏
 
+	private String mallTip; ///< 商城标签（商城名称，如果是街边店则是街边点名称）
+
+	public String getMallTip() {
+		return mallTip;
+	}
+
+	public void setMallTip(String mallTip) {
+		this.mallTip = mallTip;
+	}
+
 	public String getCommodityId() {
 		return commodityId;
 	}
@@ -243,13 +253,13 @@ public class CommodityBuyerVO implements Serializable{
 	public List<String> getGoodsParam() {
 		return goodsParam;
 	}
-
+	
 	public void setGoodsParam(List<String> goodsParam) {
 		this.goodsParam = goodsParam;
 	}
 
 	public CommodityBuyerVO(){
-
+		
 	}
 
 	public CommodityBuyerVO(Commodity commodity){
@@ -329,7 +339,7 @@ public class CommodityBuyerVO implements Serializable{
 			this.commodityAppStatus = this.commodityStatus;
 		}
 		this.systemNumber = commodity.getSystemNumber();
-
+		
 		//活动类型[0其他 闪购1、特卖2、秒杀3]
 		if (StringUtils.isNotBlank(commodity.getSecKillSign())) {
 			this.activityType = "3";
@@ -343,7 +353,7 @@ public class CommodityBuyerVO implements Serializable{
 			//其他
 			this.activityType = "0";
 		}
-
+		
 		// 当前是秒杀商品
 		if ("3".equals(this.activityType)) {
 			long nowTime = new Date().getTime();
@@ -359,7 +369,7 @@ public class CommodityBuyerVO implements Serializable{
 			}
 		}
 	}
-
+	
 	public List<String> getCommodityPicList() {
 		return commodityPicList;
 	}
@@ -521,5 +531,5 @@ public class CommodityBuyerVO implements Serializable{
 				+", discount=" + discount
 				+ ", isCollected=" + isCollected + "]";
 	}
-
+	
 }

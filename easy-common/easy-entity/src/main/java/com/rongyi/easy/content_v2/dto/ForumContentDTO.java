@@ -111,6 +111,11 @@ public class ForumContentDTO implements Serializable {
      * 分享图片
      */
     private String sharePic;
+    
+    /**
+     * APP版本兼容加的背景图片
+     */
+    private String bannerBackgroundPicTwo;
 
     public Integer getId() {
         return id;
@@ -280,7 +285,15 @@ public class ForumContentDTO implements Serializable {
         this.sharePic = sharePic;
     }
 
-    @Override
+    public String getBannerBackgroundPicTwo() {
+		return bannerBackgroundPicTwo;
+	}
+
+	public void setBannerBackgroundPicTwo(String bannerBackgroundPicTwo) {
+		this.bannerBackgroundPicTwo = bannerBackgroundPicTwo;
+	}
+
+	@Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("id", id)
@@ -304,6 +317,7 @@ public class ForumContentDTO implements Serializable {
                 .append("shareContent", shareContent)
                 .append("shareTitle", shareTitle)
                 .append("sharePic", sharePic)
+                .append("bannerBackgroundPicTwo",bannerBackgroundPicTwo)
                 .toString();
     }
 }

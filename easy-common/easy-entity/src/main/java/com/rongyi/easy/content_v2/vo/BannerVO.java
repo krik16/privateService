@@ -24,7 +24,16 @@ public class BannerVO implements Serializable {
     private String shareContent;//分享内容
     private String sharePic;//分享图片
     private String appTitle;//页面标题
+    private String bannerBackgroundPic2;
 
+
+    public String getBannerBackgroundPic2() {
+        return bannerBackgroundPic2;
+    }
+
+    public void setBannerBackgroundPic2(String bannerBackgroundPic2) {
+        this.bannerBackgroundPic2 = bannerBackgroundPic2;
+    }
 
     public String getTitle() {
         return title;
@@ -155,6 +164,7 @@ public class BannerVO implements Serializable {
                 .append("shareContent", shareContent)
                 .append("sharePic", sharePic)
                 .append("appTitle", appTitle)
+                .append("bannerBackgroundPic2", bannerBackgroundPic2)
                 .toString();
     }
 }
