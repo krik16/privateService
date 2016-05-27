@@ -29,4 +29,22 @@ public interface ICouponCheckService
      *
      */
     BizzValidHistoryVO couponValidHis(BizzValidHistoryParam param);
+
+    /**
+     * 统计当日验券记录
+     *
+     * @param param 查询参数
+     * @return 查询结果
+     *
+     */
+    int countCouponValidDaily(BizzValidHistoryParam param);
+
+    /**
+     * 统计全部验券记录
+     *
+     * @param param 查询参数
+     * @return 查询结果
+     *
+     */
+    int countCouponValidHis(BizzValidHistoryParam param);
 }
