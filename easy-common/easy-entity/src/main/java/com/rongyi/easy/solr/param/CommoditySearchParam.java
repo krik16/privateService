@@ -13,20 +13,23 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.rongyi.core.annotation.NeedCheck;
 import com.rongyi.easy.malllife.param.MalllifeBaseParam;
 
 /**
- * @author ZhengYl
+ * 商品查询参数类
  *
+ * @author  zhengyi, yaoyiwei
+ * @date 2016-05-09
+ * @version 1.1
  */
-/**
- * @author ZhengYl
- *
- */
-public class 	CommoditySearchParam  extends MalllifeBaseParam implements Serializable {
+public class CommoditySearchParam  extends MalllifeBaseParam implements Serializable {
 
-	/**  */
 	private static final long serialVersionUID = -3577116644255163015L;
+
+	private String id;
+
+	private List<String> brandMids;
 
 	/** 关键词 */
 	private String keyword;
@@ -66,15 +69,18 @@ public class 	CommoditySearchParam  extends MalllifeBaseParam implements Seriali
 
 	/** 商品类型 (买手 1， 全部商品 0, 特卖场 2, 闪购 3，导购商品 4)*/   //old
 	// 商品类型1：所有商品 2：导购商品 3：买手商品 4：闪购 5：卖场  6,直播     new
-
 	private String commodityType;
+
+	private String filterMethodName;
+
+	private String sortMethodName;
 
 	/**
 	 * 商品spu
 	 */
 	private String systemNumber;
 
-	private Integer from = 0; // 从0开始 偏移量，商品聚合分页使用
+	private Integer from; // 从0开始 偏移量，商品聚合分页使用
 
 	private String source;//  端来源    1 微信   2 终端屏 3 其他
 
@@ -236,6 +242,7 @@ public class 	CommoditySearchParam  extends MalllifeBaseParam implements Seriali
 		this.bullId = bullId;
 	}
 
+	@NeedCheck(getFieldName = "liveId")
 	public String getLiveId() {
 		return liveId;
 	}
@@ -244,6 +251,7 @@ public class 	CommoditySearchParam  extends MalllifeBaseParam implements Seriali
 		this.liveId = liveId;
 	}
 
+	@NeedCheck(getFieldName = "saleId")
 	public Integer getSaleId() {
 		return saleId;
 	}
@@ -252,6 +260,7 @@ public class 	CommoditySearchParam  extends MalllifeBaseParam implements Seriali
 		this.saleId = saleId;
 	}
 
+	@NeedCheck(getFieldName = "flashSaleId")
 	public Integer getFlashSaleId() {
 		return flashSaleId;
 	}
@@ -260,6 +269,7 @@ public class 	CommoditySearchParam  extends MalllifeBaseParam implements Seriali
 		this.flashSaleId = flashSaleId;
 	}
 
+	@NeedCheck(getFieldName = "systemNumber")
 	public String getSystemNumber() {
 		return systemNumber;
 	}
@@ -288,6 +298,7 @@ public class 	CommoditySearchParam  extends MalllifeBaseParam implements Seriali
 		this.zoneId = zoneId;
 	}
 
+	@NeedCheck(getFieldName = "commodityCode")
 	public String getCommodityCode() {
 		return commodityCode;
 	}
@@ -306,6 +317,38 @@ public class 	CommoditySearchParam  extends MalllifeBaseParam implements Seriali
 
 	public void setMaxPrice(String maxPrice) {
 		this.maxPrice = maxPrice;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public List<String> getBrandMids() {
+		return brandMids;
+	}
+
+	public void setBrandMids(List<String> brandMids) {
+		this.brandMids = brandMids;
+	}
+
+	public String getFilterMethodName() {
+		return filterMethodName;
+	}
+
+	public void setFilterMethodName(String filterMethodName) {
+		this.filterMethodName = filterMethodName;
+	}
+
+	public String getSortMethodName() {
+		return sortMethodName;
+	}
+
+	public void setSortMethodName(String sortMethodName) {
+		this.sortMethodName = sortMethodName;
 	}
 
 	@Override

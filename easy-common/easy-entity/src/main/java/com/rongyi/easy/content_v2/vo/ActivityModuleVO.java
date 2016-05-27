@@ -78,6 +78,23 @@ public class ActivityModuleVO implements Serializable {
 		this.selectedPicUrl = selectedPicUrl;
 	}
 
+	public int getIsSingle() {
+		return isSingle;
+	}
+
+	public void setIsSingle(int isSingle) {
+		this.isSingle = isSingle;
+	}
+
+	public int getIsChecked() {
+		return isChecked;
+	}
+
+	public void setIsChecked(int isChecked) {
+		this.isChecked = isChecked;
+	}
+
+
 	/**
 	 * 
 	 */
@@ -89,4 +106,6 @@ public class ActivityModuleVO implements Serializable {
 	private String selectedPicUrl = "";
 	private int sortIdx = 0;
 	private int isVisible = 0;
+	private int isSingle ;  //1单标签  0多标签
+	private int isChecked ; //是否选中  1选中 0不选中
 }

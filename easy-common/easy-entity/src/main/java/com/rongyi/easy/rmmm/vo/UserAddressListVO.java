@@ -14,4 +14,9 @@ public class UserAddressListVO extends PageVO implements Serializable{
 	public void setList(List<UserAddressVO> list) {
 		this.list = list;
 	}
+
+	@Override
+	public String toString() {
+		return "UserAddressListVO [list=" + list + "]";
+	}
 }

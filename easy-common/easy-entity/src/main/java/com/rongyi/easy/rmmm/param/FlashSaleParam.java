@@ -72,8 +72,20 @@ public class FlashSaleParam extends MalllifeBaseParam implements Serializable{
 	 */
 	private Integer contentId;
 
-	
-	
+	/**
+	 * 场次id
+	 * @return
+	 */
+	private Integer templateRoundId;
+
+	public Integer getTemplateRoundId() {
+		return templateRoundId;
+	}
+
+	public void setTemplateRoundId(Integer templateRoundId) {
+		this.templateRoundId = templateRoundId;
+	}
+
 	public Integer getContentId() {
 		return contentId;
 	}
@@ -176,6 +188,7 @@ public class FlashSaleParam extends MalllifeBaseParam implements Serializable{
 				", commodityCategory='" + commodityCategory + '\'' +
 				", randomParam=" + randomParam +
 				", contentId=" + contentId +
+				", templateRoundId=" + templateRoundId +
 				"} " + super.toString();
 	}
 }

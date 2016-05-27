@@ -3,6 +3,7 @@ package com.rongyi.easy.activitymanage.vo;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 这个是内容管理查询闪购和特卖的返回vo
@@ -26,6 +27,61 @@ public class ActivityListVO implements Serializable{
     private String shareTitle;
 
     private String shareDesc;
+    private String sharePic;
+    private String replacePic;
+
+    private Integer roundSum;
+    private Integer roundType;
+    private String  picUrls;
+    private Date startAt;
+
+    public String getSharePic() {
+        return sharePic;
+    }
+
+    public void setSharePic(String sharePic) {
+        this.sharePic = sharePic;
+    }
+
+    public String getReplacePic() {
+        return replacePic;
+    }
+
+    public void setReplacePic(String replacePic) {
+        this.replacePic = replacePic;
+    }
+
+    public Date getStartAt() {
+        return startAt;
+    }
+
+    public void setStartAt(Date startAt) {
+        this.startAt = startAt;
+    }
+
+    public String getPicUrls() {
+        return picUrls;
+    }
+
+    public void setPicUrls(String picUrls) {
+        this.picUrls = picUrls;
+    }
+
+    public Integer getRoundSum() {
+        return roundSum;
+    }
+
+    public void setRoundSum(Integer roundSum) {
+        this.roundSum = roundSum;
+    }
+
+    public Integer getRoundType() {
+        return roundType;
+    }
+
+    public void setRoundType(Integer roundType) {
+        this.roundType = roundType;
+    }
 
     public ActivityListVO(){
 
@@ -103,6 +159,12 @@ public class ActivityListVO implements Serializable{
                 .append("businessDistrictId", businessDistrictId)
                 .append("shareTitle", shareTitle)
                 .append("shareDesc", shareDesc)
+                .append("roundSum", roundSum)
+                .append("roundType", roundType)
+                .append("picUrls",picUrls)
+                .append("startAt", startAt)
+                .append("sharePic", sharePic)
+                .append("replacePic", replacePic)
                 .toString();
     }
 }
