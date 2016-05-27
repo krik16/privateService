@@ -51,6 +51,17 @@ public class SmsLogInfoEntity implements Serializable{
     /**请求来源IP*/
     private String requestIp;
 
+    /** 调用渠道   记录活动等第三方平台调用*/
+    private String requestChannel;
+
+
+    public String getRequestChannel() {
+        return requestChannel;
+    }
+
+    public void setRequestChannel(String requestChannel) {
+        this.requestChannel = requestChannel;
+    }
 
     /**
      * 主键

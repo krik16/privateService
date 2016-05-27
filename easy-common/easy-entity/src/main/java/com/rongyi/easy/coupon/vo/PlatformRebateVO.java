@@ -33,7 +33,7 @@ public class PlatformRebateVO implements Serializable {
     private String name;
 
     /**
-     * 抵扣金额(分)
+     * 抵扣金额(分) 红包的减的金额、或者抵扣券减的金额
      */
     private Integer discount;
 
@@ -87,6 +87,11 @@ public class PlatformRebateVO implements Serializable {
      * 抵扣券关联的代金券结合
      */
     private List<VoucherVO> voucherVOs;
+
+    /**
+     * 类型；0：满减类型；1：立减类型
+     */
+    private Integer preferenceType;
 
     /**
      * 抵扣券不可用的原因(未满足使用范围条件 | 差XX.XX元可用该券)
@@ -213,6 +218,14 @@ public class PlatformRebateVO implements Serializable {
         this.unUsableReason = unUsableReason;
     }
 
+    public Integer getPreferenceType() {
+        return preferenceType;
+    }
+
+    public void setPreferenceType(Integer preferenceType) {
+        this.preferenceType = preferenceType;
+    }
+
     // 券状态 0:未使用 1:已使用 2:已过期
     public void setConvertStatus(Integer status, Date validEndAt) {
         if (UserRedenvelope.STATUS_UNUSE.equals(status) && new Date().before(validEndAt))
@@ -225,22 +238,24 @@ public class PlatformRebateVO implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("couponId", couponId)
-                .append("couponCode", couponCode)
-                .append("name", name)
-                .append("discount", discount)
-                .append("status", status)
-                .append("validStartAt", validStartAt)
-                .append("validEndAt", validEndAt)
-                .append("origPrice", origPrice)
-                .append("applyObject", applyObject)
-                .append("applyGoods", applyGoods)
-                .append("relatedType", relatedType)
-                .append("usageDesc", usageDesc)
-                .append("commodityIds", commodityIds)
-                .append("voucherVOs", voucherVOs)
-                .append("unUsableReason", unUsableReason)
-                .toString();
+        final StringBuffer sb = new StringBuffer("PlatformRebateVO{");
+        sb.append("couponId='").append(couponId).append('\'');
+        sb.append(", couponCode='").append(couponCode).append('\'');
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", discount=").append(discount);
+        sb.append(", status=").append(status);
+        sb.append(", validStartAt=").append(validStartAt);
+        sb.append(", validEndAt=").append(validEndAt);
+        sb.append(", origPrice=").append(origPrice);
+        sb.append(", applyObject=").append(applyObject);
+        sb.append(", applyGoods=").append(applyGoods);
+        sb.append(", relatedType=").append(relatedType);
+        sb.append(", usageDesc='").append(usageDesc).append('\'');
+        sb.append(", commodityIds=").append(commodityIds);
+        sb.append(", voucherVOs=").append(voucherVOs);
+        sb.append(", preferenceType=").append(preferenceType);
+        sb.append(", unUsableReason='").append(unUsableReason).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

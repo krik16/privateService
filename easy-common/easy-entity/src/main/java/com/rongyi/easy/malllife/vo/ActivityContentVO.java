@@ -35,8 +35,18 @@ public class ActivityContentVO implements Serializable{
     private String shareUrl;//分享链接地址
     private String picUrl;//分享需要的图片
     
+    private List<ActivityContentMallVO>  mallList;
     
-    public String getPicUrl() {
+    
+    public List<ActivityContentMallVO> getMallList() {
+		return mallList;
+	}
+
+	public void setMallList(List<ActivityContentMallVO> mallList) {
+		this.mallList = mallList;
+	}
+
+	public String getPicUrl() {
 		return picUrl;
 	}
 
@@ -218,6 +228,22 @@ public class ActivityContentVO implements Serializable{
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	@Override
+	public String toString() {
+		return "ActivityContentVO [id=" + id + ", title=" + title
+				+ ", mallName=" + mallName + ", logoX=" + logoX + ", logoY="
+				+ logoY + ", pictureList=" + pictureList + ", activityDateStr="
+				+ activityDateStr + ", cost=" + cost + ", content=" + content
+				+ ", recommentView=" + recommentView + ", mapPicture="
+				+ mapPicture + ", totalCount=" + totalCount + ", isFav="
+				+ isFav + ", iconUrl=" + iconUrl + ", category=" + category
+				+ ", mallNumber=" + mallNumber + ", refType=" + refType
+				+ ", refId=" + refId + ", grouponId=" + grouponId
+				+ ", description=" + description + ", address=" + address
+				+ ", shareUrl=" + shareUrl + ", picUrl=" + picUrl
+				+ ", mallList=" + mallList + "]";
 	}
 
 }

@@ -10,12 +10,16 @@ package com.rongyi.core.common.third.rsa;
  *
  */
 
+
+import com.alibaba.dubbo.common.json.JSONObject;
 import com.rongyi.core.common.third.exception.ThirdException;
 import com.rongyi.core.common.third.malllife.MallLifeThirdConfig;
 import com.rongyi.core.common.RSACoder;
 import com.rongyi.core.common.third.sms.SmsEnum;
 import com.rongyi.core.common.util.Base64Helper;
 import com.rongyi.core.common.util.RsaHelper;
+import com.rongyi.core.util.EasyMd5Util;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sun.misc.BASE64Decoder;
@@ -28,6 +32,8 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
+
 import sun.misc.BASE64Encoder;
 
 import javax.crypto.Cipher;
@@ -123,8 +129,9 @@ public class MalllifeRsaUtil {
         logger.info("====加密===");
         try {
             //byte[] encodeUserName = RsaHelper.encryptByPublicKey(str.getBytes(), publicKey);
-            byte[] encodeUserName =  encryptByPublicKey(str.getBytes(), publicKey);
+            byte[] encodeUserName =  encryptByPublicKey(str.getBytes("utf-8"), publicKey);
             str= Base64Helper.encode(encodeUserName);
+
         }catch (Exception e){
             e.printStackTrace();
             logger.info("====加密失败===");
@@ -206,6 +213,31 @@ public class MalllifeRsaUtil {
         return keyMap;
     }
 
+
+    public static Map<String, String> getString(){
+
+        Map<String, String> returnMap = new HashMap<String, String>();
+
+        try {
+            Map<String, Object> keyMap;
+            keyMap = initKey();
+            String publicKey = getPublicKey(keyMap);
+            String privateKey = getPrivateKey(keyMap);
+            //System.out.println("publicKey=" + publicKey);
+           // System.out.println("privateKey=" + privateKey);
+            returnMap.put("publicKey",publicKey);
+            returnMap.put("privateKey",privateKey);
+             String uuid= UUID.randomUUID().toString();
+            uuid="RONGYISMS"+uuid+System.currentTimeMillis();
+            returnMap.put("rongyitoken",EasyMd5Util.GetMD5Code(uuid).toUpperCase());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return returnMap;
+
+    }
+
     public static void main(String  ...args) {
 
         try {
@@ -216,8 +248,17 @@ public class MalllifeRsaUtil {
                  keyMap = initKey();
                 String publicKey =  getPublicKey(keyMap);
                 String privateKey =  getPrivateKey(keyMap);
-               // System.out.println("publicKey="+publicKey);
-               // System.out.println("privateKey="+privateKey);
+                System.out.println("publicKey="+publicKey);
+                System.out.println("privateKey="+privateKey);
+
+
+                String jsonStr="{'phone':'15821659415','passWd':'111111','uuid':'尊敬的顾客，恭喜您获得XX一份，请于活动截止日前至工作人员处领取，南国西汇城市广场感谢您的积极参与！【容易网】','regiTime':'1442838385146','couponId',:'couponId'}";
+                //jsonStr="{'phone':'15821659415',";
+                System.out.println("加密前="+jsonStr);
+                String encryStr=  MalllifeRsaUtil.encryptionStr(jsonStr,publicKey);
+                System.out.println("加密后="+encryStr);
+                String decryStr=MalllifeRsaUtil.decryptStr(encryStr,privateKey);
+                System.out.println("解密后="+decryStr);
 
 
                 //全民财富
@@ -231,14 +272,14 @@ public class MalllifeRsaUtil {
                 */
 
                 //ToB 业务
-                String jsonStr="{'phone':'15821659415','passWd':'111111','uuid':'尊敬的顾客，恭喜您获得XX一份，请于活动截止日前至工作人员处领取，南国西汇城市广场感谢您的积极参与！【容易网】','regiTime':'1442838385146','couponId',:'couponId'}";
+                /*String jsonStr="{'phone':'15821659415','passWd':'111111','uuid':'尊敬的顾客，恭喜您获得XX一份，请于活动截止日前至工作人员处领取，南国西汇城市广场感谢您的积极参与！【容易网】','regiTime':'1442838385146','couponId',:'couponId'}";
                   jsonStr="{'phone':'15821659415',";
                 System.out.println("加密前="+jsonStr);
                 String encryStr=  MalllifeRsaUtil.encryptionStr(jsonStr,SmsEnum.getName(MallLifeThirdConfig.TOB_SMS_CHANNEL.NC_CHANNEL + "_PUBLICKEY"));
                 System.out.println("加密后="+encryStr);
                 String decryStr=MalllifeRsaUtil.decryptStr(encryStr,SmsEnum.getName(MallLifeThirdConfig.TOB_SMS_CHANNEL.NC_CHANNEL + "_PRIVATEKEY"));
                 System.out.println("解密后="+decryStr);
-
+                 */
 
 
 

@@ -1,5 +1,7 @@
 package com.rongyi.rss.solr;
 
+import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.easy.mcmc.constant.EPOIType;
 import com.rongyi.easy.mcmc.param.SaleParamSolr;
 
 import java.util.Date;
@@ -34,4 +36,16 @@ public interface CouponService {
      * @return
      */
     public boolean updateCouponSecKill(List<SaleParamSolr> coupons, String secKillSign);
+
+    /**
+     * 获取含有卡劵的店铺ID列表
+     *
+     * @param epoiType
+     * @param startIndex
+     * @param size
+     * @return
+     * @author wangjh7
+     * @date 2016-05-05
+     */
+    public ResponseVO findPOIIdList(EPOIType epoiType, int startIndex, int size);
 }

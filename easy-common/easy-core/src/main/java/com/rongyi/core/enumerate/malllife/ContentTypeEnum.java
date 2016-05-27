@@ -25,5 +25,13 @@ public enum ContentTypeEnum {
     public static boolean isActivity(String value) {
         return ACTIVITY.getValue().equals(value);
     }
+    
+    public static boolean isArticle(String value) {
+        return ARTICLE.getValue().equals(value);
+    }
+    
+    public static boolean isSameCity(String value) {
+        return SAMECITY.getValue().equals(value);
+    }
 
 }

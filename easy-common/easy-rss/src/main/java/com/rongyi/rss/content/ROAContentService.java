@@ -378,5 +378,42 @@ public interface ROAContentService {
 	 */
 
 	public int getVisibleActivityModuleBeyondId(int moduleId) ;
+
+	/**
+	 * 根据code获取content的信息
+	 *
+	 * @param contentParam
+	 * @author wangjh7
+	 * @return
+	 */
+	public List<ForumContent> getContentByModuleCode(ContentParam contentParam) ;
+
+    /**
+     * 根据code获取content的个数
+     *
+     * @param contentParam
+     * @author wangjh7
+     * @return
+     */
+    public Long getCountContentByModuleCode(ContentParam contentParam) ;
+	/**
+	 * 根据forum_code查询首页信息
+	 * @param code
+	 * @return
+	 */
+	public ForumHomepage findHomepageByCode(String code);
+
+	/**
+	 * 获取爱品牌list
+	 * @return
+	 */
+	public List<LoveBrand> findLoveBrands();
+
+	/**
+	 * 特卖根据typeVal获取contentId
+	 * @param typeVal
+	 * @return
+	 */
+	public Integer selectSaleContentIdByType(Integer typeVal);
 	
 }

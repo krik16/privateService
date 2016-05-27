@@ -1,16 +1,28 @@
 package com.rongyi.rss.malllife.roa;
 
 
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.malllife.domain.AppReference2DO;
 import com.rongyi.easy.malllife.domain.AppReferenceDO;
 import com.rongyi.easy.malllife.domain.ContentDDO;
 import com.rongyi.easy.malllife.domain.ContentDO;
 import com.rongyi.easy.malllife.param.ActivitiesParam;
 import com.rongyi.easy.malllife.pojo.ContentPojo;
-import com.rongyi.easy.malllife.vo.*;
-
-import java.util.List;
-import java.util.Map;
+import com.rongyi.easy.malllife.vo.BrandVO;
+import com.rongyi.easy.malllife.vo.CommentsVO;
+import com.rongyi.easy.malllife.vo.FavourableVO;
+import com.rongyi.easy.malllife.vo.GroupVO;
+import com.rongyi.easy.malllife.vo.MallAndShopVO;
+import com.rongyi.easy.malllife.vo.MallVO;
+import com.rongyi.easy.malllife.vo.OldMallVO;
+import com.rongyi.easy.malllife.vo.PagingVO;
+import com.rongyi.easy.malllife.vo.ProductionVO;
+import com.rongyi.easy.malllife.vo.ShopVO;
+import com.rongyi.easy.malllife.vo.UserInfoVO;
 
 /*
  * Copyright (C),上海容易网电子商务有限公司
@@ -305,4 +317,172 @@ public interface ROAContentService {
      * @throws Exception
      */
 	public PagingVO<ContentPojo> pagingActivitiesList(ActivitiesParam param) throws Exception;
+	/**
+	 * 
+	* @Title: pagingArticleList 
+	* @Description: 容易逛 精彩活动(吃喝玩乐)接口
+	* @param @param category
+	* @param @param type
+	* @param @param lng
+	* @param @param lat
+	* @param @param cityId
+	* @param @param pageSize
+	* @param @param currentPage
+	* @param @param version
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return PagingVO<ContentPojo>    返回类型 
+	* @author shaozhou
+	* @date 2016年5月5日 下午7:16:54 
+	* @throws
+	 */
+	public PagingVO<ContentPojo> pagingArticleList(String type, double lng, double lat, String cityId, int pageSize, Integer currentPage) throws Exception ;
+	/**
+	 * 
+	* @Title: pagingArticleList 
+	* @Description: 查询优惠信息接口
+	* @param @param cityId
+	* @param @param pageSize
+	* @param @param currentPage
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return PagingVO<ContentPojo>    返回类型 
+	* @author shaozhou
+	* @date 2016年5月5日 下午7:24:22 
+	* @throws
+	 */
+	public PagingVO<ContentPojo> pagingFavorList(String cityId, int pageSize, Integer currentPage) throws Exception ;
+	/**
+	 * 
+	* @Title: pagingContentListByMallId 
+	* @Description: 根据商场获取精彩活动和优惠列表
+	* @param @param id
+	* @param @param pageSize
+	* @param @param currentPage
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return PagingVO<ContentPojo>    返回类型 
+	* @author shaozhou
+	* @date 2016年5月5日 下午7:30:00 
+	* @throws
+	 */
+	public PagingVO<ContentPojo> pagingContentListByMallId(String id,int pageSize, Integer currentPage) throws Exception ;
+	/**
+	 * 
+	* @Title: allListWelfareNew 
+	* @Description: 爱品牌根据品牌list查询所有的新数据 String 列表
+	* @param @param pullAt
+	* @param @param brandIdList
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return List<String>    返回类型 
+	* @author shaozhou
+	* @date 2016年5月6日 上午10:30:43 
+	* @throws
+	 */
+	public List<Map<String,Object>> allListWelfareNew(Date pullAt,List<String> brandIdList) throws Exception;
+	/**
+	 * 
+	* @Title: allListWrlFaraOld 
+	* @Description: 爱品牌根据文章列表id查询列表数据
+	* @param @param activityIdList
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return List<ContentPojo>    返回类型 
+	* @author shaozhou
+	* @date 2016年5月6日 上午10:32:57 
+	* @throws
+	 */
+	public List<ContentPojo> allListWelFareOld(List<Map<String,Object>> activityMap)throws Exception;
+	/**
+	 * 
+	* @Title: pagingListWelFare 
+	* @Description: 分页获取所有的爱品牌数据
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return PagingVO<ContentPojo>    返回类型 
+	* @author shaozhou
+	* @date 2016年5月6日 上午10:35:10 
+	* @throws
+	 */
+	public ResponseVO pagingListWelFare(Integer pageSize,Integer currentPage) throws Exception;
+	/**
+	 * 
+	* @Title: countWelFareNew 
+	* @Description: 查询爱品牌最新数量用于前端展示
+	* @param @param pullAt
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return int    返回类型 
+	* @author shaozhou
+	* @date 2016年5月9日 上午10:02:07 
+	* @throws
+	 */
+	public int countWelFareNew(Date pullAt) throws Exception;
+	/**
+	 * 
+	* @Title: allListWelFarePage 
+	* @Description: 分页查询爱品牌
+	* @param @param activityMap
+	* @param @return
+	* @param @throws Exception    设定文件 
+	* @return List<ContentPojo>    返回类型 
+	* @author shaozhou
+	* @date 2016年5月11日 下午8:26:50 
+	* @throws
+	 */
+	public ResponseVO allListWelFarePage(List<String> brandIdList,Integer pageSize,Integer currentPage)throws Exception;
+	/**
+	 * @throws Exception 
+	 * 
+	* @Title: getConnectListById 
+	* @Description: 根据活动id和type类型 查询 活动类型,关联商场，店铺，品牌id,商场和品牌下关联店铺的num
+	* @param @param content_id
+	* @param @return    设定文件 
+	* @return List<Map<String,Object>>    返回类型 
+	* @author shaozhou
+	* @date 2016年5月19日 下午4:21:28 
+	* @throws
+	 */
+	public List<Map<String,Object>> getConnectListById(String content_id,String connect_type,double lng, double lat) throws Exception;
+	/**
+	 * @throws Exception 
+	 * 
+	* @Title: getSubMallAndShopVo 
+	* @Description: 根据商场id，品牌id查询下面子店铺
+	* @param @param type
+	* @param @param content_id
+	* @param @param mallOrBrandId
+	* @param @return    设定文件 
+	* @return List<MallAndShopVO>    返回类型 
+	* @author shaozhou
+	* @date 2016年5月19日 下午5:46:34 
+	* @throws
+	 */
+	public List<MallAndShopVO> getSubMallAndShopVo(String type,String content_id,String mallOrBrandId) throws Exception;
+	/**
+	 * 
+	* @Title: getContentDoById 
+	* @Description: 获取活动数据
+	* @param @param content_id
+	* @param @return    设定文件 
+	* @return ContentDO    返回类型 
+	* @author shaozhou
+	* @date 2016年5月19日 下午5:48:24 
+	* @throws
+	 */
+	public ContentDO getContentDoById(String content_id);
+	
+	/**
+     * 同城详情转换
+     * @param content
+     * @param userId
+     * @param bool
+     * @return
+     * @throws Exception 
+     * @see com.rongyi.rss.malllife.service.IContentService#buildMap(com.rongyi.easy.malllife.domain.ContentDO, java.lang.String, boolean) 
+     */
+
+    public Map<String, Object> buildMapByV700(ContentDO content, String userId, boolean bool,Integer appVersion) throws Exception ;
+    public ShopVO getShopInfoByShopId(String shopId);
 }
