@@ -1,6 +1,7 @@
 package com.rongyi.rss.code;
 
 
+import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 import com.rongyi.easy.code.ValidCouponVO;
 import net.sf.json.JSONObject;
 
@@ -16,7 +17,7 @@ import java.util.Map;
 public interface ValidCodeService {
 
     /**
-     * 验证券码
+     * 验码之前查询码的信息
      * @param couponCode
      * @param shopId
      * @param mallId
@@ -31,4 +32,21 @@ public interface ValidCodeService {
      * @param mallId
      */
     public JSONObject validSearchGift(String giftCode, String mallId);
+
+
+    /**
+     * 验证券码
+     * @param code
+     * @param sessionUserInfo
+     * @return
+     */
+    public boolean validCouponCode(String code,SessionUserInfo sessionUserInfo);
+
+    /**
+     * 验证礼品码
+     * @param code
+     * @param sessionUserInfo
+     * @return
+     */
+    public boolean validGiftCode(String code, SessionUserInfo sessionUserInfo);
 }

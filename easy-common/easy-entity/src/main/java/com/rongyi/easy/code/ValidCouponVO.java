@@ -17,6 +17,8 @@ public class ValidCouponVO implements Serializable {
 		private Integer useredCount;//当天已使用次数
 		private String limitDesc;//使用限制
 		private String usageDesc;//使用说明
+		private String activityName;
+		private Integer couponType;
 		public String getName() {
 				return name;
 		}
@@ -59,12 +61,37 @@ public class ValidCouponVO implements Serializable {
 		public void setUsageDesc(String usageDesc) {
 				this.usageDesc = usageDesc;
 		}
+
+		public String getActivityName() {
+				return activityName;
+		}
+
+		public void setActivityName(String activityName) {
+				this.activityName = activityName;
+		}
+
+		public Integer getCouponType() {
+				return couponType;
+		}
+
+		public void setCouponType(Integer couponType) {
+				this.couponType = couponType;
+		}
+
 		@Override
 		public String toString() {
-				return "ValidCouponVO [name=" + name + ", validStartAt=" + validStartAt
-						+ ", validEndAt=" + validEndAt + ", limitUseCount="
-						+ limitUseCount + ", useredCount=" + useredCount
-						+ ", limitDesc=" + limitDesc + ", usageDesc=" + usageDesc + "]";
+				final StringBuffer sb = new StringBuffer("ValidCouponVO{");
+				sb.append("name='").append(name).append('\'');
+				sb.append(", validStartAt=").append(validStartAt);
+				sb.append(", validEndAt=").append(validEndAt);
+				sb.append(", limitUseCount='").append(limitUseCount).append('\'');
+				sb.append(", useredCount=").append(useredCount);
+				sb.append(", limitDesc='").append(limitDesc).append('\'');
+				sb.append(", usageDesc='").append(usageDesc).append('\'');
+				sb.append(", activityName='").append(activityName).append('\'');
+				sb.append(", couponType=").append(couponType);
+				sb.append('}');
+				return sb.toString();
 		}
 
 
