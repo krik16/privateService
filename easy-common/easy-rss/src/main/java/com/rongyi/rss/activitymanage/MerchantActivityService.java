@@ -210,4 +210,6 @@ public interface MerchantActivityService {
 	 * @return
 	 */
 	public int updateStatusToPending(int activityGoodsId, String userName);
+
+	boolean updateMerchantActivityInfo(ActivityInfo activityInfo);
 }

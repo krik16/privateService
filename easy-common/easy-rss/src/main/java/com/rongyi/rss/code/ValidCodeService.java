@@ -2,7 +2,11 @@ package com.rongyi.rss.code;
 
 
 import com.rongyi.easy.bsoms.entity.SessionUserInfo;
+import com.rongyi.easy.code.StatisticsValidCountVO;
 import com.rongyi.easy.code.ValidCouponVO;
+import com.rongyi.easy.coupon.vo.merchant.StatisticsCountVO;
+import com.rongyi.easy.tradecenter.param.BizzValidHistoryParam;
+import com.rongyi.easy.tradecenter.vo.BizzValidHistoryVO;
 import net.sf.json.JSONObject;
 
 import java.util.Map;
@@ -49,4 +53,20 @@ public interface ValidCodeService {
      * @return
      */
     public boolean validGiftCode(String code, SessionUserInfo sessionUserInfo);
+
+    /**
+     * 统计各个类型的总验码数量和当天验码数
+     * @param param
+     * @param sessionUserInfo
+     * @return
+     */
+    public StatisticsValidCountVO statisticsValidCount(BizzValidHistoryParam param,SessionUserInfo sessionUserInfo);
+
+    /**
+     * 获取礼品验证列表
+     * @param param
+     * @param sessionUserInfo
+     * @return
+     */
+    public BizzValidHistoryVO queryGiftValidList(BizzValidHistoryParam param, SessionUserInfo sessionUserInfo);
 }
