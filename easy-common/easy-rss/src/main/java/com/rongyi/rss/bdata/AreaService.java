@@ -1,6 +1,7 @@
 package com.rongyi.rss.bdata;
 
 import java.util.List;
+import java.util.Map;
 
 import com.rongyi.easy.bdata.dto.AreaDto;
 import com.rongyi.easy.bdata.entity.BdArea;
@@ -44,4 +45,12 @@ public interface AreaService {
 	 * @return
 	 */
 	public List<BdAreaVo> getAreaVoByParentId(Integer parentId);
+	
+	/**
+	 * 查询区域VO列表
+	 * @param map
+	 *          areaIds  区域ID集合w
+	 * @return
+	 */
+	public List<BdAreaVo> getAreaVoByParam(Map map);
 }

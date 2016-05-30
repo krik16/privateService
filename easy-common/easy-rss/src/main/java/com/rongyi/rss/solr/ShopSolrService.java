@@ -9,11 +9,16 @@
 */
 package com.rongyi.rss.solr;
 
+import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.easy.mcmc.constant.EPOITipType;
+import com.rongyi.easy.mcmc.constant.EPOIType;
 import com.rongyi.easy.solr.PoiDocument;
 import com.rongyi.easy.solr.ShopDocument;
 import com.rongyi.easy.solr.param.ShopSearchParam;
 import com.rongyi.easy.solr.result.ShopSearchIdsResult;
 import com.rongyi.easy.solr.result.ShopSearchResult;
+
+import java.util.List;
 
 /**
  * @author ZhengYl
@@ -76,4 +81,44 @@ public interface ShopSolrService {
 	 * @return
 	 */
 	public ShopSearchIdsResult getShopListByName(ShopSearchParam param);
+
+
+	/**
+	 * 清除标签（店铺/商场等）
+	 *
+	 * @param poiType     poi类型
+	 * @return
+	 * @author wangjh7
+	 * @date 2016-05-05
+	 */
+	public ResponseVO clearPOITip(EPOIType poiType);
+
+	/**
+	 * 更新标签的值
+	 *
+	 * @param poiType     POI类型
+	 * @param poiList     需要更新的ID及对应TIP的值
+	 * @param epoiTipType 更新的字段
+	 * @return
+	 * @author wangjh7
+	 * @date 2016-05-05
+	 */
+	public ResponseVO updatePOITip(EPOIType poiType, List<String> poiList, EPOITipType epoiTipType);
+
+	/**
+	 * 查询POIID对应标签的值
+	 *
+	 * @param poiIds 查询的ID及对应TIP的值
+	 * @return List<com.rongyi.easy.solr.result.ShopSearchInfo>
+	 */
+	public ResponseVO selectPOITipByPOIIds(List<String> poiIds);
+
+	/**
+	 * 设置标签（店铺/商场等）
+	 *
+	 * @return
+	 * @author wangjh7
+	 * @date 2016-05-05
+	 */
+	public void setPOITip();
 }

@@ -59,6 +59,9 @@ public class MalllifeUser implements Serializable {
 
     private String  publicNumId;//商家公众号Id
 
+    /*是否禁用 0 正常 1禁用 2 预先注册 */
+    private Integer isDisable=0;
+
     public String getIdfa() {
         return idfa;
     }
@@ -210,5 +213,13 @@ public class MalllifeUser implements Serializable {
 
     public void setPublicNumId(String publicNumId) {
         this.publicNumId = publicNumId;
+    }
+
+    public Integer getIsDisable() {
+        return isDisable;
+    }
+
+    public void setIsDisable(Integer isDisable) {
+        this.isDisable = isDisable;
     }
 }

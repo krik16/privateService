@@ -1,8 +1,13 @@
 package com.rongyi.easy.content_v2.vo;
 
+import com.google.inject.internal.Lists;
+import com.rongyi.easy.malllife.vo.CommoditySaleVO;
+import com.rongyi.easy.mcmc.vo.CommodityBuyerVO;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * create by com.rongyi.easy.content_v2.vo ideaworkspace :author lijing
@@ -22,6 +27,33 @@ public class ActivityContentListVO implements Serializable{
     private String shareTitle;
     private String shareDesc;
     private String appTitle;
+    private String sharePic;
+    private String replacePic;
+    private List<CommoditySaleVO> commoditySaleVOList = Lists.newArrayList();
+    
+    public List<CommoditySaleVO> getCommoditySaleVOList() {
+		return commoditySaleVOList;
+	}
+
+	public void setCommoditySaleVOList(List<CommoditySaleVO> commoditySaleVOList) {
+		this.commoditySaleVOList = commoditySaleVOList;
+	}
+
+    public String getSharePic() {
+        return sharePic;
+    }
+
+    public void setSharePic(String sharePic) {
+        this.sharePic = sharePic;
+    }
+
+    public String getReplacePic() {
+        return replacePic;
+    }
+
+    public void setReplacePic(String replacePic) {
+        this.replacePic = replacePic;
+    }
 
     public Integer getId() {
         return id;
@@ -107,6 +139,9 @@ public class ActivityContentListVO implements Serializable{
                 .append("shareTitle", shareTitle)
                 .append("shareDesc", shareDesc)
                 .append("appTitle", appTitle)
+                .append("sharePic", sharePic)
+                .append("replacePic", replacePic)
+                .append("commoditySaleVOList", commoditySaleVOList)
                 .toString();
     }
 }

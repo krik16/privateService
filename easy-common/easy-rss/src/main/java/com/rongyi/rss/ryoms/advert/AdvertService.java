@@ -17,7 +17,7 @@ public interface AdvertService {
 
 	public AdvertVo info(Integer id);
 	
-	public void updateAdStatus(Integer id, String string, int userId);
+	public int updateAdStatus(Integer id, String string, int userId);
 
 	public List<AdvertNewVo> getAdsByMallId(String mall_id);
 

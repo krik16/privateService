@@ -54,4 +54,12 @@ public interface MLHomePageContentNewService {
      * @return
      */
     List<ActivityRecomListVO> findContentListNew(String cityId,String cityName);
+
+    /**
+     * 5月版APP新特卖
+     * @param cityId
+     * @param cityName
+     * @return
+     */
+    public List<ActivityRecomListVO> findSpeContentNew(String cityId, String cityName);
 }

@@ -91,5 +91,14 @@ public class OperateAddressParam implements Serializable{
 	public void setDistrictName(String districtName) {
 		this.districtName = districtName;
 	}
+	@Override
+	public String toString() {
+		return "OperateAddressParam [consignee=" + consignee + ", phone="
+				+ phone + ", provinceId=" + provinceId + ", provinceName="
+				+ provinceName + ", cityId=" + cityId + ", cityName="
+				+ cityName + ", districtId=" + districtId + ", districtName="
+				+ districtName + ", address=" + address + ", status=" + status
+				+ ", id=" + id + "]";
+	}
 	
 }

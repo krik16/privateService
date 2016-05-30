@@ -312,4 +312,22 @@ public interface IIContentService {
 	 */
 	public int getVisibleActivityModuleBeyondId(int moduleId) ;
 
+	/**
+	 * 获取可见板块的信息
+	 *
+	 * @param contentParam
+	 * @author wangjh7
+	 * @return
+	 */
+	public List<ForumContent> getContentByModuleCode(ContentParam contentParam) ;
+
+    /**
+     * 根据code获取content的个数
+     *
+     * @param contentParam
+     * @author wangjh7
+     * @return
+     */
+    public Long getCountContentByModuleCode(ContentParam contentParam) ;
+
 }
