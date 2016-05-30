@@ -29,8 +29,15 @@ public class BrandEntity implements Serializable{
 
 	private String keyTags; // 关键标签，shop需要.数据库里面是key_tags
 	private String categories_tags;// 品类
+	private String merlog_pic; //商家后台Logo图片
 
+	public String getMerlog_pic() {
+		return merlog_pic;
+	}
 
+	public void setMerlog_pic(String merlog_pic) {
+		this.merlog_pic = merlog_pic;
+	}
 
 	public String getIcon() {
 		return icon;

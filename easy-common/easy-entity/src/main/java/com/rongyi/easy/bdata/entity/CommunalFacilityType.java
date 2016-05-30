@@ -7,6 +7,7 @@ import java.io.Serializable;
  * User: chris
  * Date: 2015/10/31 2:59
  */
+
 public class CommunalFacilityType implements Serializable{
 
 	private static final long serialVersionUID = 6118559857223824933L;

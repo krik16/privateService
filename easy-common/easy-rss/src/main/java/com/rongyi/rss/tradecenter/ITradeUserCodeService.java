@@ -2,6 +2,7 @@ package com.rongyi.rss.tradecenter;
 
 import com.rongyi.easy.malllife.vo.CouponRefundDetailVO;
 import com.rongyi.easy.tradecenter.TradeUserCode;
+import com.rongyi.easy.tradecenter.vo.CouponOrderVO;
 
 import java.util.List;
 import java.util.Map;
@@ -38,4 +39,5 @@ public interface ITradeUserCodeService {
 
     CouponRefundDetailVO getRefundDetail(Integer refundId);
 
+    List<CouponOrderVO> getCouponOrderListForWX(String buyerId,String openId,String userPhone,int pageSize,int currentPage,String type);
 }

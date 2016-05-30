@@ -1,7 +1,11 @@
 package com.rongyi.rss.content;
 
+import java.util.Map;
+
 import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.easy.content.entity.param.ContentHelpParam;
 import com.rongyi.easy.content.entity.param.SpecialCellParam;
+import com.rongyi.easy.content_v2.vo.RaidersHomeVo;
 
 /**
  * 
@@ -25,4 +29,24 @@ public interface ISpecialSellService {
 	* @throws
 	 */
 	public ResponseVO pagingContentForumList(SpecialCellParam param) throws Exception;
+	
+	/**
+	 * 查询APP首页潮人攻略展示
+	 * @param paramMap 
+	 *               
+	 * @return
+	 */
+	public RaidersHomeVo getRaidersHomeVo(Map paramMap)throws Exception;
+	
+	/**
+	 * 查询APP潮人攻略列表
+	 * @param  paramMap
+	 *              currentPage  不传默认1
+	 *              pageSize  不传默认10
+	 *              version  文章版本号
+	 *              appVersion  app版本号
+	 * @return
+	 * @throws Exception
+	 */
+	public ResponseVO getRaidersAppList(Map paramMap)throws Exception;
 }

@@ -110,12 +110,27 @@ public class ActivityInfo implements Serializable {
      * 0:取消撤销状态  1:表示申请撤销中状态
      */
     private Integer applyStatus;
+
+    /**
+     * '1,1' 第一个1互动屏翻牌购类模版，第二个1微信卡卷类模版
+     *  2的话代表转盘抽奖
+     */
+    private String source;
+
     /**
      * 卡券活动规则
      */
     private ActivityCouponRule activityCouponRule;
 
     private List<ActivityEnroll> activityEnrollList;
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
 
     public Integer getId() {
         return id;
@@ -327,6 +342,7 @@ public class ActivityInfo implements Serializable {
                 .append("applyStatus", applyStatus)
                 .append("activityCouponRule", activityCouponRule)
                 .append("activityEnrollList", activityEnrollList)
+                .append("source",source)
                 .toString();
     }
 }

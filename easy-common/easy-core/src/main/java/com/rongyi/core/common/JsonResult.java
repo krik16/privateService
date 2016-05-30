@@ -43,12 +43,21 @@ public class JsonResult<T> {
         result.setResult(t);
         return result;
     }
+    public static <T> JsonResult<T> failResult(T t, String msg,Integer errno, Integer total_record) {
+        MetaData meta = new MetaData(1, msg, total_record);
+        meta.setErrno(errno);
+        JsonResult<T> result = new JsonResult<T>();
+        result.setMeta(meta);
+        result.setResult(t);
+        return result;
+    }
 
     public static class MetaData {
 
-        private Integer status;
+        private Integer status=0;
         private String  msg;
         private Integer total_record;
+        private Integer errno;
 
         public MetaData(Integer status, String msg, Integer total_record) {
             this.status = status;
@@ -80,5 +89,12 @@ public class JsonResult<T> {
 			this.total_record = total_record;
 		}
 
+        public Integer getErrno() {
+            return errno;
+        }
+
+        public void setErrno(Integer errno) {
+            this.errno = errno;
+        }
     }
 }

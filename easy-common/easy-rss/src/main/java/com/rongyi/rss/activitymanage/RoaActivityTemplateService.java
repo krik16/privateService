@@ -4,6 +4,7 @@ import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.activity.entity.vo.QueryGoodCouponParam;
 import com.rongyi.easy.activitymanage.entity.ActivityGoods;
 import com.rongyi.easy.activitymanage.entity.ActivityTemplate;
+import com.rongyi.easy.activitymanage.entity.TemplateRound;
 import com.rongyi.easy.activitymanage.entity.TemplateSaleShopMall;
 import com.rongyi.easy.activitymanage.param.ActivityTemplateParam;
 import com.rongyi.easy.activitymanage.vo.ActivityListVO;
@@ -140,4 +141,33 @@ public interface RoaActivityTemplateService {
      */
     Integer searchPositionByIFlashAndCommodity(Integer activityId,String commodityId);
 
+    /**
+     * 根据tempalteTemplateId获取场次信息
+     * @param id
+     * @return
+     */
+    public List<TemplateRound> getTemplateRoundByActivityTemplateId(Integer id);
+
+
+    /**
+     * 批量保存场次信息
+     * @param
+     * @return
+     */
+    public int batchSaveTemplateRound(List<TemplateRound> templateRounds);
+
+
+    /**
+     * 保存或更新场次信息
+     * @param templateRound
+     * @return
+     */
+    public boolean saveOrUpdateTemplateRound(TemplateRound templateRound);
+
+    /**
+     * 根据activityTemplateId删除场次信息
+     * @param id
+     * @return
+     */
+    public boolean deleteTemplateRoundByActivityTemplateId(Integer id);
 }

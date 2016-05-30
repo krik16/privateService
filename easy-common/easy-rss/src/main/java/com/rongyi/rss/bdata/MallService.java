@@ -130,6 +130,7 @@ public interface MallService {
 
 	ResponseVO getAdsSeqByMallId(String mall_id, String position);
 	
+
 	/**
 	 * 获取公共类型
 	 * @param type
@@ -170,5 +171,6 @@ public interface MallService {
 	Map<String, Object>getMalls(Map params, int currentpage, int pagesize);
 	
 	Map<String, Object>getMallsWithBusinessStatusCount(Map params, int currentpage, int pagesize);
+	ResponseVO  getAllCommunalFacilityTypes();
 
 }

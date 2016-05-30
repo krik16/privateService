@@ -21,7 +21,7 @@ public class CommodityBuyerVO implements Serializable{
 	private int commodityStatus;
 	private int commodityAppStatus;// 商品APP显示状态 (0下架  1上架  3待上架 4秒杀结束)
 	private int commodityType;//渠道  1商家，2买手
-	private boolean supportCourierDeliver;//支持快递发货    导购：true是   false否；买手：默认true   
+	private boolean supportCourierDeliver;//支持快递发货    导购：true是   false否；买手：默认true
 	private boolean supportSelfPickup;//支持到店自提  true 是    false否
 	private boolean offlinePayment;// 线下支付
 	private boolean onlinePayment;// 线上支付
@@ -43,6 +43,16 @@ public class CommodityBuyerVO implements Serializable{
 	private String mallMid;//商场mongoId
 	private List<String> goodsParam;//商品参数
 	private double discount;
+	private String commodityCurrentPrice;
+
+	public String getCommodityCurrentPrice() {
+		return commodityCurrentPrice;
+	}
+
+	public void setCommodityCurrentPrice(String commodityCurrentPrice) {
+		this.commodityCurrentPrice = commodityCurrentPrice;
+	}
+
 	public String getActivityType() {
 		return activityType;
 	}
@@ -197,7 +207,17 @@ public class CommodityBuyerVO implements Serializable{
 	}
 	private String shopMid;
 	private boolean isCollected;  //是否被收藏
-	
+
+	private String mallTip; ///< 商城标签（商城名称，如果是街边店则是街边点名称）
+
+	public String getMallTip() {
+		return mallTip;
+	}
+
+	public void setMallTip(String mallTip) {
+		this.mallTip = mallTip;
+	}
+
 	public String getCommodityId() {
 		return commodityId;
 	}
@@ -251,6 +271,7 @@ public class CommodityBuyerVO implements Serializable{
 		this.commodityOPriceMin = commodity.getoPriceMin();
 		this.commodityCPriceMax = commodity.getcPriceMax();
 		this.commodityCPriceMin = commodity.getcPriceMin();
+		this.commodityCurrentPrice=commodity.getCurrentPrice();
 		if(commodity.getPostage() != null && !commodity.getPostage().isEmpty()){
 			try{
 				double postage = Double.parseDouble(commodity.getPostage());

@@ -54,7 +54,13 @@ public class SmsConfig implements Serializable{
         public static final  String MALL_LIFE_SIGN="【容易逛】";//容易逛
     }
 
-
+    /**
+     * 签名类型
+     */
+    public abstract class REQUEST_CHANNEL_TYPE {
+        public static final String MALLLIFE_CHANNEL="MALLLIFE";//容易逛
+        public static final  String MALLSHOP_CHANNEL="MALLSHOP";//摩店
+    }
 
 
     public abstract class SMSCHANNEL_TYPE {
@@ -96,10 +102,11 @@ public class SmsConfig implements Serializable{
 
     /**
      * 发送渠道
-     * 1创世华信,2建周 22.建周营销.3,未来无线,101云通讯
+     * 1创世华信,11创世华信营销, 2建周 22.建周营销.3,未来无线,101云通讯
      */
     public abstract class SEND_CHANNEL{
         public static final  int CHANNEL_CHUANGSHI=1;
+        public static final  int CHANNEL_CHUANGSHI_MARKET=11;
         public static final  int CHANNEL_JIANZHOU=2;
         public static final  int CHANNEL_JIANZHOU_MARKET=22;
         public static final  int CHANNEL_WEILAI=3;

@@ -70,7 +70,7 @@ public class ShopEntity implements Serializable{
 	}
 //	public List<String> getApplied_card_type_ids() {
 //		return applied_card_type_ids;
-//	}
+//	}   
 //	public void setApplied_card_type_ids(List<String> applied_card_type_ids) {
 //		this.applied_card_type_ids = applied_card_type_ids;
 //	}
