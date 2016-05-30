@@ -81,7 +81,7 @@ public class BizzValidHistoryParam implements Serializable{
     }
 
     public Integer getCurrentPage() {
-        return currentPage;
+        return currentPage==null?1:currentPage;
     }
 
     public List<String> getCouponIds() {
