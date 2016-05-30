@@ -44,6 +44,6 @@ public interface ITotalCommodityService {
 
 	public String updateCommodityWeAndTeStatus(String id, String type, String terminalType, String weAndTeStatus);
 
-	public List<TotalCommodity>  findCommodityByCategoryId(ObjectId categoryId);
+	public List<TotalCommodity>  findCommodityByCategoryId(Map<String,Object> paramMap);
 
 }
