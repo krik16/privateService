@@ -117,9 +117,10 @@ public interface MallService {
 	 * 获取默认素材详情
 	 * 
 	 * @param defaultId
+	 * @param mall_id 
 	 * @return
 	 */
-	ResponseVO getDefaultAdById(String defaultId);
+	ResponseVO getDefaultAdById(String defaultId, String mall_id);
 
 	ResponseVO getDefaultSeq(Integer ps, String mall_id);
 
