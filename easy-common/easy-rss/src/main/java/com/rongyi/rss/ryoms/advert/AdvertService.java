@@ -1,6 +1,7 @@
 package com.rongyi.rss.ryoms.advert;
 
 import java.util.List;
+import java.util.Map;
 
 import com.rongyi.easy.bdata.vo.AdvertNewVo;
 import com.rongyi.easy.ryoms.advert.entity.AdvertEntity;
@@ -22,4 +23,8 @@ public interface AdvertService {
 	public List<AdvertNewVo> getAdsByMallId(String mall_id);
 
 	public AdvertNewVo getAdById(int ad_id);
+
+	List<Integer> getValidAdIdsByMallId(String mall_id);
+
+	void deleteAdToPhp(Map<String, Object> param);
 }
