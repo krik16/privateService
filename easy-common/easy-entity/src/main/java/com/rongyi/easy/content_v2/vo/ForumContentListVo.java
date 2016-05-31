@@ -21,6 +21,8 @@ public class ForumContentListVo implements Serializable{
 	private String cityName;
 	/**图片*/
 	private String picUrls;
+	/**图片*/
+	private String picUrlsTwo;
 	/**
 	 * 选中的图片
 	 * @author wangjh7
@@ -77,6 +79,85 @@ public class ForumContentListVo implements Serializable{
 	 * 类型名:如品牌名称
 	 */
 	private String typeName;
+
+	private String shareTitle;
+
+	private String appTitle;
+
+	private String shareContent;
+
+	private String sharePic;
+
+	private String updateUser;
+
+	private String quickRemarks;
+
+	private Integer quickCount;
+
+	public String getUpdateUser() {
+		return updateUser;
+	}
+
+	public void setUpdateUser(String updateUser) {
+		this.updateUser = updateUser;
+	}
+
+
+	public String getQuickRemarks() {
+		return quickRemarks;
+	}
+
+	public void setQuickRemarks(String quickRemarks) {
+		this.quickRemarks = quickRemarks;
+	}
+
+	public Integer getQuickCount() {
+		return quickCount;
+	}
+
+	public void setQuickCount(Integer quickCount) {
+		this.quickCount = quickCount;
+	}
+
+	public String getSharePic() {
+		return sharePic;
+	}
+
+	public void setSharePic(String sharePic) {
+		this.sharePic = sharePic;
+	}
+
+	public String getShareTitle() {
+		return shareTitle;
+	}
+
+	public void setShareTitle(String shareTitle) {
+		this.shareTitle = shareTitle;
+	}
+
+	public String getAppTitle() {
+		return appTitle;
+	}
+
+	public void setAppTitle(String appTitle) {
+		this.appTitle = appTitle;
+	}
+
+	public String getShareContent() {
+		return shareContent;
+	}
+
+	public void setShareContent(String shareContent) {
+		this.shareContent = shareContent;
+	}
+
+	public String getPicUrlsTwo() {
+		return picUrlsTwo;
+	}
+
+	public void setPicUrlsTwo(String picUrlsTwo) {
+		this.picUrlsTwo = picUrlsTwo;
+	}
 
 	public String getTypeName() {
 		return typeName;
@@ -299,6 +380,14 @@ public class ForumContentListVo implements Serializable{
 				", type=" + type +
 				", typeVal='" + typeVal + '\'' +
 				", typeName='" + typeName + '\'' +
+				", picUrlsTwo='" + picUrlsTwo + '\'' +
+				", shareContent='" + shareContent + '\'' +
+				", shareTitle='" + shareTitle + '\'' +
+				", appTitle='" + appTitle + '\'' +
+				", sharePic='" + sharePic + '\'' +
+				", updateUser='" + updateUser + '\'' +
+				", quickCount='" + quickCount + '\'' +
+				", quickRemarks='" + quickRemarks + '\'' +
 				'}';
 	}
 }
