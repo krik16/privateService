@@ -5,7 +5,6 @@
 		<groupId>com.rongyi</groupId>
 		<artifactId>easy-common</artifactId>
 		<version>3.5.0.1-SNAPSHOT</version>
-	</parent>
 	<artifactId>easy-rss</artifactId>
 	<packaging>jar</packaging>
 
