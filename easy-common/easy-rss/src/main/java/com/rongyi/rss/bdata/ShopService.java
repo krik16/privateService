@@ -2,6 +2,8 @@ package com.rongyi.rss.bdata;
 
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.bdata.entity.Shop;
+import com.rongyi.easy.ryoms.entity.RyUserInfo;
+import com.rongyi.easy.ryoms.param.ShopParam;
 
 import java.util.List;
 import java.util.Map;
@@ -66,6 +68,13 @@ public interface ShopService {
 	 */
 	public boolean updateShopSimple(Map paramsMap);
 	
+	/**
+	 * 新建修改店铺
+	 * @param param 店铺参数 
+	 * @param user 操作人
+	 * @return
+	 */
+	public String saveShop(ShopParam param)throws RuntimeException, Exception;
 	
 	/**
 	 * 店铺搜索
