@@ -24,6 +24,7 @@ public class RedNevelopeCommodityVO implements Serializable{
 	private String commodityBrandName;
 	private int commodityType;//0 导购  1买手
 	private List<String> commodityPicList;
+	private String mallTip;//商场/街边店标签
 	public String getCommodityId() {
 		return commodityId;
 	}
@@ -84,6 +85,12 @@ public class RedNevelopeCommodityVO implements Serializable{
 	public void setCommodityOPOfLCP(String commodityOPOfLCP) {
 		this.commodityOPOfLCP = commodityOPOfLCP;
 	}
+	public String getMallTip() {
+		return mallTip;
+	}
+	public void setMallTip(String mallTip) {
+		this.mallTip = mallTip;
+	}
 	@Override
 	public String toString() {
 		return "RedNevelopeCommodityVO [commodityId=" + commodityId
@@ -94,7 +101,8 @@ public class RedNevelopeCommodityVO implements Serializable{
 				+ commodityCPriceMin + ", commodityOPOfLCP=" + commodityOPOfLCP
 				+ ", commodityBrandName=" + commodityBrandName
 				+ ", commodityType=" + commodityType + ", commodityPicList="
-				+ commodityPicList + "]";
+				+ commodityPicList + ", mallTip=" + mallTip + "]";
 	}
+	
 	
 }

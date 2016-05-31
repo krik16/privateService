@@ -93,9 +93,14 @@ public class UserRedenvelope implements Serializable {
     private String activityId;
 
     /**
-     * 活动名称：目前支持：翻牌购、推送
+     * 活动名称：目前支持：翻牌购、推送、分享红包
      */
     private String activityName;
+
+    /**
+     * 活动类型；0：翻牌购；1：推送；2：分享红包
+     */
+    private Integer activityType;
 
     /**
      * 是否删除
@@ -199,6 +204,14 @@ public class UserRedenvelope implements Serializable {
         this.validEndAt = validEndAt;
         this.activityId = activityId;
         this.activityName = activityName;
+    }
+
+    public Integer getActivityType() {
+        return activityType;
+    }
+
+    public void setActivityType(Integer activityType) {
+        this.activityType = activityType;
     }
 
     public Integer getId() {
@@ -472,6 +485,7 @@ public class UserRedenvelope implements Serializable {
                 .append("validEndAt", validEndAt)
                 .append("activityId", activityId)
                 .append("activityName", activityName)
+                .append("activityType", activityType)
                 .append("couponName", couponName)
                 .append("origPrice", origPrice)
                 .append("applyObject", applyObject)

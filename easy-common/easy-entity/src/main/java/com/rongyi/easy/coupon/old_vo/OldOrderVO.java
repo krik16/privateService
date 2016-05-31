@@ -18,6 +18,8 @@ public class OldOrderVO {
     private String displayNum; // 已退款张数
     private boolean notOutCodeFlag = true; // 外部导入券标志 true 不是外部导入券,false 是外部导入券
 
+   // private Boolean isDel=false;//不可删除
+
     List<OldItemVO> detailList;//订单项列表
 
     public String getOrderId() {

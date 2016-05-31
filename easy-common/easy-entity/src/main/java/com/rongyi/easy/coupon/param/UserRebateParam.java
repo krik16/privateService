@@ -39,6 +39,8 @@ public class UserRebateParam implements Serializable {
      */
     private String activityName;
 
+    private String activityType;
+
     private Integer pageSize;
 
     private Integer currentPage;
@@ -105,6 +107,14 @@ public class UserRebateParam implements Serializable {
 
     public void setCurrentPage(Integer currentPage) {
         this.currentPage = currentPage;
+    }
+
+    public String getActivityType() {
+        return activityType;
+    }
+
+    public void setActivityType(String activityType) {
+        this.activityType = activityType;
     }
 
     @Override

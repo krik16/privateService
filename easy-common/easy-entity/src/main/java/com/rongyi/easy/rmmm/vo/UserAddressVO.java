@@ -108,5 +108,14 @@ public class UserAddressVO implements Serializable{
 			this.districtId = entity.getDistrictId().toString();
 		}
 	}
+	@Override
+	public String toString() {
+		return "UserAddressVO [defaultStatus=" + defaultStatus + ", id=" + id
+				+ ", address=" + address + ", phone=" + phone + ", consignee="
+				+ consignee + ", provinceName=" + provinceName + ", cityName="
+				+ cityName + ", districtName=" + districtName + ", provinceId="
+				+ provinceId + ", cityId=" + cityId + ", districtId="
+				+ districtId + "]";
+	}
 
 }

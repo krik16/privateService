@@ -41,6 +41,17 @@ public class ActivityTemplateParam implements Serializable {
     private Integer pageSize = PAGESIZE;
 
     private Integer offset;
+    //0全部 1特卖 2专场
+    private Integer moduleType;
+
+
+    public Integer getModuleType() {
+        return moduleType;
+    }
+
+    public void setModuleType(Integer moduleType) {
+        this.moduleType = moduleType;
+    }
 
     /**排序的字段*/
     private String orderByString= ORDER_BY_CLAUSE;
@@ -175,6 +186,7 @@ public class ActivityTemplateParam implements Serializable {
                 .append("pageSize", pageSize)
                 .append("offset", offset)
                 .append("orderByString", orderByString)
+                .append("moduleType", moduleType)
                 .toString();
     }
 }

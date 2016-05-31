@@ -67,11 +67,13 @@ public class Coupon implements Serializable {
 
     /**
      * 原价
+     * 商家抵扣券 满减的价格
      */
     private Integer origPrice;
 
     /**
      * 现价
+     * 商家抵扣券 立减金额、满减中减的价格
      */
     private Integer currPrice;
 

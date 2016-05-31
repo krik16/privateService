@@ -1,6 +1,7 @@
 package com.rongyi.easy.msgcenter;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Description:
@@ -23,11 +24,18 @@ public class OrderPushParam implements Serializable {
      * //退款结果；暂不支持
      */
     private Integer type;
+
     private String userId;
+
     private Integer orderId;
+
     private Integer isCartOrder;//是否购物车订单     0 ：不是    1：是
+
     private String orderNo;
 
+    private String openId;//对象的微信用户id
+
+    private List<String> couponCodes;
 
     @Override
     public String toString() {
@@ -36,7 +44,9 @@ public class OrderPushParam implements Serializable {
         sb.append(", userId='").append(userId).append('\'');
         sb.append(", orderId=").append(orderId);
         sb.append(", isCartOrder=").append(isCartOrder);
-        sb.append(", orderNo=").append(orderNo);
+        sb.append(", orderNo='").append(orderNo).append('\'');
+        sb.append(", openId='").append(openId).append('\'');
+        sb.append(", couponCodes=").append(couponCodes);
         sb.append('}');
         return sb.toString();
     }
@@ -79,5 +89,21 @@ public class OrderPushParam implements Serializable {
 
     public void setOrderNo(String orderNo) {
         this.orderNo = orderNo;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public List<String> getCouponCodes() {
+        return couponCodes;
+    }
+
+    public void setCouponCodes(List<String> couponCodes) {
+        this.couponCodes = couponCodes;
     }
 }

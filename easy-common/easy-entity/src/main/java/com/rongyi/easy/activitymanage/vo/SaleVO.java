@@ -30,6 +30,8 @@ public class SaleVO implements Serializable {
     private String updateUser;
     private String shareTitle;
     private String shareDesc;
+    private String sharePic;
+    private String replacePic;
     private String subTitle;
     private Long createAt;
     private Long updateAt;
@@ -61,6 +63,8 @@ public class SaleVO implements Serializable {
                 this.subTitle = activityTemplate.getTemplateSale().getSubTitle();
                 this.shareTitle = activityTemplate.getTemplateSale().getShareTitle();
                 this.shareDesc = activityTemplate.getTemplateSale().getShareDesc();
+                this.sharePic = activityTemplate.getTemplateSale().getSharePic();
+                this.replacePic = activityTemplate.getTemplateSale().getReplacePic();
                 this.isMallShop=(int)activityTemplate.getTemplateSale().getIsMallShop();
 
             if(!CollectionUtils.isEmpty(activityTemplate.getTemplateSaleShopMalls())){
@@ -97,6 +101,23 @@ public class SaleVO implements Serializable {
             }
         }
     }
+
+    public String getSharePic() {
+        return sharePic;
+    }
+
+    public void setSharePic(String sharePic) {
+        this.sharePic = sharePic;
+    }
+
+    public String getReplacePic() {
+        return replacePic;
+    }
+
+    public void setReplacePic(String replacePic) {
+        this.replacePic = replacePic;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -280,6 +301,8 @@ public class SaleVO implements Serializable {
                 .append("updateUser", updateUser)
                 .append("shareTitle", shareTitle)
                 .append("shareDesc", shareDesc)
+                .append("sharePic", sharePic)
+                .append("replacePic", replacePic)
                 .append("subTitle", subTitle)
                 .append("createAt", createAt)
                 .append("updateAt", updateAt)

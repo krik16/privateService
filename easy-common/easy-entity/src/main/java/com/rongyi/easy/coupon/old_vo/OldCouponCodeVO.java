@@ -19,6 +19,8 @@ public class OldCouponCodeVO implements Serializable {
     private String holderType;
     
     private String holderName;
+
+		private String couponLogo;
     
     private Integer apply_shops_count;
     
@@ -168,4 +170,11 @@ public class OldCouponCodeVO implements Serializable {
 		this.apply_shops_count = apply_shops_count;
 	}
 
+		public String getCouponLogo() {
+				return couponLogo;
+		}
+
+		public void setCouponLogo(String couponLogo) {
+				this.couponLogo = couponLogo;
+		}
 }
