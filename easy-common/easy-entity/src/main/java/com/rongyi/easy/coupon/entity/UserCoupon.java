@@ -1,11 +1,11 @@
 package com.rongyi.easy.coupon.entity;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.beans.Transient;
 import java.io.Serializable;
 import java.util.Date;
-
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * 老用户代金券
@@ -157,6 +157,13 @@ public class UserCoupon implements Serializable {
     private Integer couponChannel;//券码类型 5哈根达斯 6中影 7纵漫线美漫大趴 8星巴克
 
     private Integer couponShowType;//券码展示类型 0默认 1url 2二维码
+
+    /**
+     * 品牌券 品牌logo
+     * 同商场的多店铺券 表示商场logo
+     * 单个店铺券 店铺Logo
+     */
+    private String couponLogo;
 
     public UserCoupon() {
 
@@ -328,6 +335,13 @@ public class UserCoupon implements Serializable {
         return status;
     }
 
+    public String getCouponLogo() {
+        return couponLogo;
+    }
+
+    public void setCouponLogo(String couponLogo) {
+        this.couponLogo = couponLogo;
+    }
 
     public Integer getConvertStatus() {
         Integer val = status;

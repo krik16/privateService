@@ -17,6 +17,7 @@ public class DailySaleVO implements Serializable {
     private Integer currentPosition = 1;//当前位置 从1开始
     private String dailySaleUrl;
     private List<DailySaleListVO> dailySaleList;
+    private String titlePic;//标题图片 http://rongyi.b0.upaiyun.com/system/content/20160519/201605191815031529.jpg
 
     public Long getNowDate() {
         return this.nowDate == null ? new Date().getTime() : this.nowDate ;
@@ -49,14 +50,23 @@ public class DailySaleVO implements Serializable {
     public void setDailySaleUrl(String dailySaleUrl) {
         this.dailySaleUrl = dailySaleUrl;
     }
+    
+    public String getTitlePic() {
+		return titlePic;
+	}
 
-    @Override
+	public void setTitlePic(String titlePic) {
+		this.titlePic = titlePic;
+	}
+
+	@Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("nowDate", nowDate)
                 .append("currentPosition", currentPosition)
                 .append("dailySaleUrl", dailySaleUrl)
                 .append("dailySaleList", dailySaleList)
+                .append("titlePic", titlePic)
                 .toString();
     }
 }

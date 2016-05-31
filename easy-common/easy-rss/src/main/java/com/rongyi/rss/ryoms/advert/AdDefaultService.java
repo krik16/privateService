@@ -8,6 +8,7 @@
 package com.rongyi.rss.ryoms.advert;
 
 import java.util.List;
+import java.util.Map;
 
 import com.rongyi.easy.ryoms.advert.entity.AdDefaultEntity;
 import com.rongyi.easy.ryoms.advert.param.AdDefaultSearchParam;
@@ -72,4 +73,12 @@ public interface AdDefaultService {
 	 * @return
 	 */
 	public int sort(int materialId, int seq, int type, int userId);
+
+	/**
+	 * 查询所有素材
+	 * @return
+	 */
+	List<AdDefaultVO> getAllValidAdDefaults();
+
+	void deleteAdDefaultToPhp(Map<String, Object> param);
 }

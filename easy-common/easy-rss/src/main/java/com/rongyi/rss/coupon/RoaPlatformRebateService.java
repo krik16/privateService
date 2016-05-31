@@ -97,4 +97,7 @@ public interface RoaPlatformRebateService {
      * @author lqy
      */
     boolean receiveRebates(UserRebateParam param);
+
+    boolean receiveRebatesNotReduceStock(UserRebateParam param);
+
 }

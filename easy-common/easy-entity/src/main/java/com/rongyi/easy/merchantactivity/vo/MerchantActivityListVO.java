@@ -74,12 +74,24 @@ public class MerchantActivityListVO implements Serializable {
      * 是否自营
      */
     private Integer isAuto = 1;
+    /**
+     *
+     */
+    private String source;
 
     private List<MerchantRecordVo> records = new ArrayList<MerchantRecordVo>();
     /**
      * 商品数量
      */
     private ActivityGoodsCountVO activityGoodsCountVO;
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
 
     public Integer getId() {
         return id;
@@ -311,6 +323,7 @@ public class MerchantActivityListVO implements Serializable {
                 .append("passGoods", passGoods)
                 .append("isAuto", isAuto)
                 .append("records", records)
+                .append("source", source)
                 .append("activityGoodsCountVO", activityGoodsCountVO)
                 .toString();
     }

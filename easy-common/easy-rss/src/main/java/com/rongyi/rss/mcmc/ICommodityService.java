@@ -3,6 +3,8 @@ package com.rongyi.rss.mcmc;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.easy.mcmc.constant.EPOIType;
 import com.rongyi.easy.mcmc.vo.CommodityFullVO;
 import com.rongyi.easy.mcmc.vo.CommodityVOToWechat;
 import com.rongyi.easy.mcmc.vo.SearchParamsForWechat;
@@ -59,4 +61,16 @@ public interface ICommodityService {
 	public List<Commodity> findCommodityByshopId(String shopMid);
 
 	public List<Commodity>  findCommodityByCategoryIdAndStatus(ObjectId categoryId);
+
+	/**
+	 * 获取含有商品的店铺/商城ID列表
+	 *
+	 * @param epoiType
+	 * @param startIndex
+	 * @param size
+	 * @return
+	 * @author wangjh7
+	 * @date 2016-05-05
+	 */
+	public ResponseVO findPOIIdList(EPOIType epoiType, int startIndex, int size);
 }

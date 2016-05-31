@@ -5,7 +5,7 @@ import java.io.UnsupportedEncodingException;
 /**
  * 自定义Base64转换算法
  *
- * @author pengxiangxiang
+ * @author
  */
 public class Base64Helper {
     private static char[] base64EncodeChars = new char[]{

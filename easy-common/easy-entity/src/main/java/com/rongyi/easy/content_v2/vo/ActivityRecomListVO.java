@@ -20,7 +20,25 @@ public class ActivityRecomListVO implements Serializable {
      private String pic;/**选中钱的图片*/
 
      private String selectedPic;/**选中后的图片*/
+     private Integer isSingle;
+     private Integer isChecked;
      private List<ActivityContentListVO> contentList = new ArrayList<ActivityContentListVO>();
+
+     public Integer getIsSingle() {
+          return isSingle;
+     }
+
+     public void setIsSingle(Integer isSingle) {
+          this.isSingle = isSingle;
+     }
+
+     public Integer getIsChecked() {
+          return isChecked;
+     }
+
+     public void setIsChecked(Integer isChecked) {
+          this.isChecked = isChecked;
+     }
 
      public String getName() {
           return name;
@@ -61,6 +79,8 @@ public class ActivityRecomListVO implements Serializable {
                   .append("pic", pic)
                   .append("selectedPic", selectedPic)
                   .append("contentList", contentList)
+                  .append("isSingle", isSingle)
+                  .append("isChecked", isChecked)
                   .toString();
      }
 }

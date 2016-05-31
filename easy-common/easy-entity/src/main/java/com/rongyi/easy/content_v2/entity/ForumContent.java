@@ -190,7 +190,31 @@ public class ForumContent implements Serializable {
      * 分享图片
      */
     private String sharePic;
+
+    /**
+     *
+     * @return
+     */
+    private Integer stick;
     
+    /**
+     * 做兼容新增的背景图
+     */
+    private String bannerBackgroundPicTwo;
+    
+    /**
+     * APP兼容新增的图标
+     */
+    private String picUrlsTwo;
+
+    public Integer getStick() {
+        return stick;
+    }
+
+    public void setStick(Integer stick) {
+        this.stick = stick;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -505,9 +529,25 @@ public class ForumContent implements Serializable {
 	public void setActivityModuleName(String activityModuleName) {
 		this.activityModuleName = activityModuleName;
 	}
+	
 
+    public String getBannerBackgroundPicTwo() {
+		return bannerBackgroundPicTwo;
+	}
 
-    @Override
+	public void setBannerBackgroundPicTwo(String bannerBackgroundPicTwo) {
+		this.bannerBackgroundPicTwo = bannerBackgroundPicTwo;
+	}
+
+	public String getPicUrlsTwo() {
+		return picUrlsTwo;
+	}
+
+	public void setPicUrlsTwo(String picUrlsTwo) {
+		this.picUrlsTwo = picUrlsTwo;
+	}
+
+	@Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("id", id)
@@ -548,6 +588,7 @@ public class ForumContent implements Serializable {
                 .append("shareTitle", shareTitle)
                 .append("shareContent", shareContent)
                 .append("sharePic", sharePic)
+                .append("stick", stick)
                 .toString();
     }
 }

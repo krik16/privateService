@@ -51,6 +51,16 @@ public class ActivitySearchInfo implements Serializable {
 	
 	private String activityType = "0";	//活动类型[0其他 闪购1、特卖2、秒杀3]
 
+	private List<String> shopIdList = null;
+
+	public List<String> getShopIdList() {
+		return shopIdList;
+	}
+
+	public void setShopIdList(List<String> shopIdList) {
+		this.shopIdList = shopIdList;
+	}
+
 	public String getWorkTime() {
 		return workTime;
 	}
@@ -386,19 +396,47 @@ public class ActivitySearchInfo implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ActivitySearchInfo [id=" + id + ", name=" + name + ", addr=" + addr + ", pic_url=" + pic_url
-				+ ", location=" + location + ", description=" + description + ", city_name=" + city_name + ", shop_own="
-				+ shop_own + ", title=" + title + ", start_time=" + start_time + ", end_time=" + end_time
-				+ ", holder_id=" + holder_id + ", holder_type=" + holder_type + ", thumbnail=" + thumbnail
-				+ ", carouselImg=" + carouselImg + ", vistedNum=" + vistedNum + ", userQuota=" + userQuota
-				+ ", grouponPrice=" + grouponPrice + ", grouponOriginal=" + grouponOriginal + ", grouponNum="
-				+ grouponNum + ", buyedAmount=" + buyedAmount + ", restAmount=" + restAmount + ", useRestriction="
-				+ useRestriction + ", useMode=" + useMode + ", grouponStyle=" + grouponStyle + ", limitPublishCount="
-				+ limitPublishCount + ", limitUseCount=" + limitUseCount + ", limitCount=" + limitCount
-				+ ", afterSaleService=" + afterSaleService + ", payDownTime=" + payDownTime + ", customCategoryIds="
-				+ customCategoryIds + ", apply_shops_count=" + apply_shops_count + ", activityStatus=" + activityStatus
-				+ ", workTime=" + workTime + ", activityType=" + activityType + ", limitDesc=" + limitDesc
-				+ ", usageDesc=" + usageDesc + ", remark=" + remark + "]";
+		return "ActivitySearchInfo{" +
+				"id='" + id + '\'' +
+				", name='" + name + '\'' +
+				", addr='" + addr + '\'' +
+				", pic_url='" + pic_url + '\'' +
+				", location=" + location +
+				", description='" + description + '\'' +
+				", city_name='" + city_name + '\'' +
+				", shop_own='" + shop_own + '\'' +
+				", title='" + title + '\'' +
+				", start_time=" + start_time +
+				", end_time=" + end_time +
+				", holder_id='" + holder_id + '\'' +
+				", holder_type='" + holder_type + '\'' +
+				", thumbnail='" + thumbnail + '\'' +
+				", carouselImg=" + carouselImg +
+				", vistedNum='" + vistedNum + '\'' +
+				", userQuota='" + userQuota + '\'' +
+				", grouponPrice='" + grouponPrice + '\'' +
+				", grouponOriginal='" + grouponOriginal + '\'' +
+				", grouponNum='" + grouponNum + '\'' +
+				", buyedAmount='" + buyedAmount + '\'' +
+				", restAmount='" + restAmount + '\'' +
+				", useRestriction='" + useRestriction + '\'' +
+				", useMode='" + useMode + '\'' +
+				", grouponStyle='" + grouponStyle + '\'' +
+				", limitPublishCount=" + limitPublishCount +
+				", limitUseCount=" + limitUseCount +
+				", limitCount=" + limitCount +
+				", afterSaleService=" + afterSaleService +
+				", payDownTime=" + payDownTime +
+				", customCategoryIds=" + customCategoryIds +
+				", apply_shops_count=" + apply_shops_count +
+				", activityStatus=" + activityStatus +
+				", workTime='" + workTime + '\'' +
+				", activityType='" + activityType + '\'' +
+				", shopIdList=" + shopIdList +
+				", limitDesc='" + limitDesc + '\'' +
+				", usageDesc='" + usageDesc + '\'' +
+				", remark='" + remark + '\'' +
+				'}';
 	}
-	
+
 }
