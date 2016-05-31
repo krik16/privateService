@@ -14,48 +14,48 @@ import com.rongyi.easy.mcmc.mvc.DateJson.DateJsonDeserializer;
 
 
 public class CommodityParam {
-	
+
 	private Integer type;//类型0表示只修改库存1表示修改山商品所有信息
-	
+
 	private String id;//系统编号
-	
+
 	private String name;//商品名称
-	
+
 	private String category;//商品品类id
-	
+
 	//private String shopId;//店铺id
-	
+
 	private Integer status;//状态 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理 5立即上架
-	
+
 	private String code;//商品编码
-	
+
 	private String description;//商品描述
-	
+
 	private String postage;//商品邮费
-	
+
 	private String originalPrice;//商品原价
-	
+
 	private String currentPrice;//商品现价
-	
+
 	private List<String> picList;//商品图片列表
-	
+
 	//private List<ObjectId> specList;//商品规格列表
-	
+
 	private List<ObjectId> categoryIds;//商品所属的品类列表
-	
+
 	private List<Integer> customCategoryIds;//自定义分类集合
-	
+
 	private Integer distribution;//配送方式 1表示到店自提2快递3表示支持两种方式
-	
+
 	private Integer freight;//1表示商家承担运费,0表示买家承担运费
-	
+
 	private Integer terminalType;//上架终端：com.rongyi.easy.mcmc.constant.CommodityTerminalType常量定义说明
-	
-	
+
+
 	/*@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")*/
-	//@JsonSerialize(using=JsonDateSerializer.class)	
+	//@JsonSerialize(using=JsonDateSerializer.class)
 	@JsonDeserialize(using=DateJsonDeserializer.class)
-	//@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")  
+	//@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	private Date registerAt;//上架时间
 	/*@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	 */
@@ -63,23 +63,25 @@ public class CommodityParam {
 	@JsonDeserialize(using=DateJsonDeserializer.class)
 	//@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	private Date soldOutAt;//下架时间
-	
+
 	//private Integer source;//来源
-	
+
 	private Integer stockStatus;//0表示统一库存1表示分管库存
-	
+
 	private List<CommoditySpecParam> commoditySpeceParams;
-	
+
 	private Integer stock;//总库存
-	
+
 	private Integer remain;//剩余总量
-	
+
 	private int hasSpec;//0表示无规格 1表示有规格
 	private String  weAndTeStatus;//1表示终端机，2表示微信，3表示都显示，4表示都不显示
 	private Integer purchaseCount;//限购数量，0表示不限购
-	
+
 
 	private Integer templateId;//商城运费模版id
+
+	private String reason;
 
 	public String getId() {
 		return id;
@@ -250,7 +252,7 @@ public class CommodityParam {
 		this.commoditySpeceParams = commoditySpeceParams;
 	}
 
-	
+
 	public Integer getStock() {
 		return stock;
 	}
@@ -299,6 +301,15 @@ public class CommodityParam {
 		this.purchaseCount = purchaseCount;
 	}
 
+
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+
 	@Override
 	public String toString() {
 		return "CommodityParam{" +
@@ -328,6 +339,7 @@ public class CommodityParam {
 				", weAndTeStatus='" + weAndTeStatus + '\'' +
 				", purchaseCount=" + purchaseCount +
 				", templateId=" + templateId +
+				", reason=" + reason+
 				'}';
 	}
 
