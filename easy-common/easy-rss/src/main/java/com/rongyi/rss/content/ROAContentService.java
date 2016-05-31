@@ -422,5 +422,13 @@ public interface ROAContentService {
 	 * @return
 	 */
 	public Integer deleteByPositionId(Integer id);
+
+	/**
+	 * 根据quickType，typeVal查询数据
+	 * @param type
+	 * @param typeVal
+	 * @return
+	 */
+	public ForumContent selectContentIdByQuickTypeAndTypeVal(Integer type,String typeVal);
 	
 }
