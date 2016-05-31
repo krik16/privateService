@@ -26,11 +26,15 @@ public enum MallLifeErrorCode {
     SIGNATURE_FAILURE(1068110,"签名无效"),
     TIME_STAMP_FORMAT(1068111,"请求时间戳格式不对"),
     REQUEST_EXPIRATION(1068112,"请求已过期"),
+    CHANNEL_EXPIRATION(1068113,"请求chanel无效"),
+    MESSAGES_EXPIRATION(1068114,"短信内容不合法"),
     DECRYPTION_FAILURE(1068115,"解码失败,加密格式不对"),
+
     /*  8200-8250 参数合法性验证 */
     MOBILE_NUMBER_ILLEGAL(1068201,"手机号码不合法"),
     USER_PHONE_ISEXIST(1068205,"注册手机号已经存在"),
     PARAMETER_FORMAT (1068208,"参数格式不合法"),
+    REQUEST_IPFORMAT (1068209,"请求来源不合法"),
 
     /**toB业务 */
     SMS_SEND_TYPE(1069110,"发送类型不合法"),

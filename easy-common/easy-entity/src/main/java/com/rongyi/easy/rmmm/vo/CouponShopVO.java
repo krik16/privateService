@@ -21,6 +21,7 @@ public class CouponShopVO implements Serializable {
     private String title;//商家名称
     private String telephone; //商家电话
     private Double distance = 0.0; //距离
+    private List<Integer> tip; ///< 店铺标签（格式：[0，0，0] 对应：[货，惠、劵]）
 	public String getId() {
 		return id;
 	}
@@ -69,10 +70,18 @@ public class CouponShopVO implements Serializable {
 	public void setDistance(Double distance) {
 		this.distance = distance;
 	}
+	public List<Integer> getTip() {
+		return tip;
+	}
+	public void setTip(List<Integer> tip) {
+		this.tip = tip;
+	}
 	@Override
 	public String toString() {
-		return "CouponShopVO [id=" + id + ", address=" + address + ", location=" + location + ", type=" + type + ", icon=" + icon
-				+ ", title=" + title + ", telephone=" + telephone + ", distance=" + distance + "]";
+		return "CouponShopVO [id=" + id + ", address=" + address
+				+ ", location=" + location + ", type=" + type + ", icon="
+				+ icon + ", title=" + title + ", telephone=" + telephone
+				+ ", distance=" + distance + ", tip=" + tip + "]";
 	}
     
 }

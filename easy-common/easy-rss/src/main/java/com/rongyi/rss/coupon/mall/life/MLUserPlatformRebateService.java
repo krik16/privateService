@@ -60,4 +60,12 @@ public interface MLUserPlatformRebateService {
      * @author lqy
      */
     boolean receiveRebates(UserRebateParam param);
+    
+    /**
+     * 根据券码查询抵扣券的抵扣金额（元）和满多少金额（元）
+     * @param couponCode 券码
+     * @return discount & origPrice
+     * @author lqy
+     */
+    PlatformRebateVO getPlatformRebateDiscountAndOrigPrice(String couponCode);
 }

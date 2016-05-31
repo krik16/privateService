@@ -118,6 +118,8 @@ public class CouponOrderVO implements Serializable{
      */
     private List<CheckCouponDetail> checkCoupons;
 
+    private String couponId;
+
     public CouponOrderVO() {
 
     }
@@ -324,6 +326,16 @@ public class CouponOrderVO implements Serializable{
 
     public void setCheckCoupons(List<CheckCouponDetail> checkCoupons) {
         this.checkCoupons = checkCoupons;
+    }
+
+    public String getCouponId()
+    {
+        return couponId;
+    }
+
+    public void setCouponId(String couponId)
+    {
+        this.couponId = couponId;
     }
 
     public static class CheckCouponDetail implements Serializable{

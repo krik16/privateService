@@ -65,4 +65,12 @@ public interface IBrandService {
 	public BrandDocument getBrandDocument(String brandMid) throws Exception;
 
 	public List<BrandEntity> getBrandList(int skip,int pageSize);
+
+	/**
+	 * 根据类目名称过滤品牌
+	 * @param name
+	 * @param brandEntityList
+	 * @return
+	 */
+	public List<BrandEntity> addFilterBrandByCategoryName(String name, List<BrandEntity> brandEntityList);
 }

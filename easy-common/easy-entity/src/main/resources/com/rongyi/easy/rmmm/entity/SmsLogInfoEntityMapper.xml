@@ -16,6 +16,7 @@
     <result column="task_id" property="taskID" jdbcType="VARCHAR" />
     <result column="final_result" property="finalResult" jdbcType="VARCHAR" />
     <result column="request_ip" property="requestIp" jdbcType="VARCHAR" />
+    <result column="request_channel" property="requestChannel" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
