@@ -8,6 +8,7 @@ import com.rongyi.easy.bdata.vo.CommonTypeVO;
 import com.rongyi.easy.bdata.vo.MallGroupVO;
 import com.rongyi.easy.bdata.vo.MallVO;
 
+
 /**
  * Desc: mall service
  * User: chris
@@ -113,24 +114,25 @@ public interface MallService {
 	/**
 	 * 获取默认素材列表
 	 * @param ps 
+	 * @param mall_id 
 	 * 
 	 * @return
 	 */
-	ResponseVO getDefaultAds(Integer ps);
+	ResponseVO getDefaultAds(Integer ps, String mall_id);
 
 	/**
 	 * 获取默认素材详情
 	 * 
 	 * @param defaultId
+	 * @param mall_id 
 	 * @return
 	 */
-	ResponseVO getDefaultAdById(String defaultId);
+	ResponseVO getDefaultAdById(String defaultId, String mall_id);
 
-	ResponseVO getDefaultSeq(Integer ps);
+	ResponseVO getDefaultSeq(Integer ps, String mall_id);
 
 	ResponseVO getAdsSeqByMallId(String mall_id, String position);
 	
-
 	/**
 	 * 获取公共类型
 	 * @param type
