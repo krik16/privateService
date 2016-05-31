@@ -415,5 +415,12 @@ public interface ROAContentService {
 	 * @return
 	 */
 	public Integer selectSaleContentIdByType(Integer typeVal);
+
+	/**
+	 * 根据positionId删除content
+	 * @param id
+	 * @return
+	 */
+	public Integer deleteByPositionId(Integer id);
 	
 }
