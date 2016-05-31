@@ -18,6 +18,7 @@ public class OrderVO implements Serializable{
 	private Integer unitNum;//下单数量
 	private BigDecimal orderPrice;//下单总价：单价*下单数量
 	private List<OldCouponCodeVO> orderActivities;
+	private String source;//订单来源
 	public String getOrderId() {
 		return orderId;
 	}
@@ -72,5 +73,12 @@ public class OrderVO implements Serializable{
 	public void setOrderActivities(List<OldCouponCodeVO> orderActivities) {
 		this.orderActivities = orderActivities;
 	}
-	
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
 }

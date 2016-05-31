@@ -115,6 +115,9 @@ public class CouponOrder implements Serializable {
 
     private Integer statusHold;
 
+    /** 订单来源*/
+    private String source;
+
     public CouponOrder() {
 
     }
@@ -345,6 +348,14 @@ public class CouponOrder implements Serializable {
         this.discountInfo = discountInfo;
     }
 
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -369,6 +380,7 @@ public class CouponOrder implements Serializable {
                 .append("discountInfo", discountInfo)
                 .append("nextStatusTime", nextStatusTime)
                 .append("statusHold", statusHold)
+                .append("source", source)
                 .toString();
     }
 
