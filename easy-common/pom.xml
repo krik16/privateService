@@ -6,6 +6,7 @@
     <artifactId>easy-common</artifactId>
     <version>3.4.5-SNAPSHOT</version>
     <packaging>pom</packaging>
+
     <modules>
         <module>easy-entity</module>
         <module>easy-core</module>
