@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.rongyi</groupId>
 		<artifactId>easy-common</artifactId>
-		<version>3.5.0.1-SNAPSHOT</version>	</parent>
+		<version>3.6.0-SNAPSHOT</version>	</parent>
 	<artifactId>easy-entity</artifactId>
 	<packaging>jar</packaging>
 	<properties>
