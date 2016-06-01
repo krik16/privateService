@@ -122,7 +122,7 @@ public interface CommodityService {
      */
 
     public void updateCommodityByRegisterAtAndSoldOutAt(Date registerAt,Date soldOutAt, String status, int pagesize);
-
+    
 
     /***
      * 查询商品 一二三级分类
@@ -214,4 +214,12 @@ public interface CommodityService {
     public PagingVO<Commodity> findCommdityList(SearchCommodityParms searchCommodityParms);
 
     public List<String>  selectCommodityByNameAndCode(String name,String code);
+
+    /**
+     * 根据特卖ID获取前3（暂定）个商品列表
+     *
+     * @param saleId 特卖Id
+     * @return List<com.rongyi.easy.mcmc.vo.CommodityBuyerVO>
+     */
+    public ResponseVO topCommodityListBySaleId(Integer saleId, Integer flashSaleId);
 }

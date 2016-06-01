@@ -1,6 +1,7 @@
 package com.rongyi.core.common.util.malllife;
 
 import com.rongyi.core.enumerate.malllife.AppReferenceEnum;
+
 import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,7 +19,7 @@ public class AppUtil{
 	
 	private String token = "";
 
-	public static String getShareUrl(Integer id, String type, String refType,String version,String domain) {
+	public static String getShareUrl(Integer id, String type, String refType,String version,String domain,Integer appVersion) {
 		if (type.equals("article")) {
 			if (AppReferenceEnum.isMall(refType) || AppReferenceEnum.isShop(refType)) {
 			    
@@ -27,7 +28,7 @@ public class AppUtil{
 		        }
 				//李靖修改的！
 				if(version!=null&&version.equalsIgnoreCase("v5_7")){
-                    return domain + "/v5_7/share/articleRefOne.htm?id=" + id;
+                    return domain + "/v5_7/share/articleRefOne.htm?id=" + id+"&appVersion="+ appVersion;
                 }
 				return domain + "/recommend/share-articleRefOne.htm?id=" + id;
 			} else {
@@ -36,7 +37,7 @@ public class AppUtil{
 		        }
 			  //李靖修改的！
 			    if(version!=null&&version.equalsIgnoreCase("v5_7")){
-                    return domain + "/v5_7/share/article.htm?id=" + id;
+                    return domain + "/v5_7/share/article.htm?id=" + id+"&appVersion="+ appVersion;
                 }
 				return domain + "/recommend/share-article.htm?id=" + id;
 			}
@@ -48,7 +49,7 @@ public class AppUtil{
 			    }
 			  //李靖修改的！
 			    if(version.equalsIgnoreCase("v5_7")){
-                    return domain + "/v5_7/share/share-sameCity.htm?sameCityId=" + id;
+                    return domain + "/v5_7/share/share-sameCity.htm?sameCityId=" + id+"&appVersion="+ appVersion;
                 }
 			    if(version.equalsIgnoreCase("v5_6")){
 			        return domain + "/v5_1/share/share-sameCity.htm?sameCityId=" + id;
@@ -65,7 +66,7 @@ public class AppUtil{
                 }
 			    //李靖修改的！
 			    if(version.equalsIgnoreCase("v5_7")){
-                    return domain + "/v5_7/share/shareactivity.htm?id=" + id;
+                    return domain + "/v5_7/share/shareactivity.htm?id=" + id+"&appVersion="+ appVersion;
                 }
                 if(version.equalsIgnoreCase("v5_6")){
                     return domain + "/v5_1/share/shareactivity.htm?id=" + id;
@@ -162,5 +163,43 @@ public class AppUtil{
         Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
         Matcher m = p.matcher(mobiles);
         return m.matches();
+    }
+    
+    /**
+     * 当文章关联为Mall 或者 Shop 时返回的url v5版本
+     * (从malllife  AppService中copy过来的)
+     * */
+    public static String getRefShopOrMallArticleUrlV5(Integer id, String version,String domain ,Integer appVersion) {
+
+        if(version!=null&&version.equalsIgnoreCase("v5_6")){
+            return domain + "/v5_1/share/articleRefOne.htm?id=" + id;
+        }
+        
+        if(version!=null&&version.equalsIgnoreCase("v5_1")){
+            return domain + "/v5/recommend/articleRefOne.htm?id=" + id;
+        }
+        if(version!=null&&version.equalsIgnoreCase("v5_7")){
+            return domain + "/v5_1/share/articleRefOne.htm?id=" + id+"&appVersion="+ appVersion;
+        }
+        return domain + "/v5/recommend/articleRefOne.htm?id=" + id;
+    }
+    
+    
+    /**
+     * 当文章关联为City 或者 Brand 时返回的url v5版本
+     * (从malllife  AppService中copy过来的)
+     * */
+    public static String getArticleUrlV5(Integer id, String version,String domain ,Integer appVersion) {
+        if(version!=null&&version.equalsIgnoreCase("v5_6")){
+            return domain + "/v5_1/share/article.htm?id=" + id;
+        }
+        if(version!=null&&version.equalsIgnoreCase("v5_7")){
+            return domain + "/v5_1/share/article.htm?id=" + id+"&appVersion="+ appVersion;
+        }
+        
+        if(version!=null&&version.equalsIgnoreCase("v5_1")){
+            return domain + "/v5/recommend/article.htm?id=" + id;
+        }
+        return domain + "/v5/recommend/article.htm?id=" + id;
     }
 }

@@ -23,5 +23,10 @@ public class UserAddressListParam implements Serializable{
 	public void setPageSize(String pageSize) {
 		this.pageSize = pageSize;
 	}
+	@Override
+	public String toString() {
+		return "UserAddressListParam [currentPage=" + currentPage
+				+ ", pageSize=" + pageSize + "]";
+	}
 	
 }

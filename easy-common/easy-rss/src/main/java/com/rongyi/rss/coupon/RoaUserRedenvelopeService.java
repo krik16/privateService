@@ -8,10 +8,7 @@ import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.framework.mybatis.pojo.Page;
 import com.rongyi.easy.coupon.entity.UserCoupon;
 import com.rongyi.easy.coupon.entity.UserRedenvelope;
-import com.rongyi.easy.coupon.param.CouponOrderParam;
-import com.rongyi.easy.coupon.param.RebateAndRedenvelopParam;
-import com.rongyi.easy.coupon.param.RedenvelopeUseDetailParam;
-import com.rongyi.easy.coupon.param.UserRedenvelopeParam;
+import com.rongyi.easy.coupon.param.*;
 import com.rongyi.easy.coupon.vo.RedenvelopeCodeUseDetailVO;
 import com.rongyi.easy.coupon.vo.UserCouponVO;
 import com.rongyi.easy.coupon.vo.UserRedPacketForOrderVO;
@@ -140,6 +137,12 @@ public interface RoaUserRedenvelopeService {
     public RedenvelopeCodeUseDetailVO selectCodeUseDetail(RedenvelopeUseDetailParam param);
 
 
+    /**
+     * 获取用户当日获取红包或抵扣券的个数
+     * @param param
+     * @return
+     */
+    public int getOneDayUserSkype(UserSkypeParam param);
 
 
 

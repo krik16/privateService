@@ -30,6 +30,9 @@ public class ForumContentParam implements Serializable{
 	/**状态   0待发布、1已发布、2已关闭*/
 	private Integer status;
 	
+	//查询app的发布状态与列表的发布状态不一致  1已发布
+	private Integer appStatus;
+	
 	private Integer currentPage = CURRENTPAGE;
 
 	private Integer pageSize = PAGESIZE;
@@ -159,6 +162,15 @@ public class ForumContentParam implements Serializable{
 	public void setPositionIds(List<Integer> positionIds) {
 		this.positionIds = positionIds;
 	}
+	
+	public Integer getAppStatus() {
+		return appStatus;
+	}
+
+	public void setAppStatus(Integer appStatus) {
+		this.appStatus = appStatus;
+	}
+
 	public String toString(){
 		StringBuilder sb=new StringBuilder();
 		sb.append("ForumContent {").append("provId:").append(this.provId).append(" cityId:").append(this.cityId).append(" title:").append(this.title)
