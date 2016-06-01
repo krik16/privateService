@@ -42,14 +42,14 @@ public class MerchantActivityGoodsParam extends PagingParam {
     private String name;
     private Date start;
     private Date end;
-    private String pic_url;
+    private String picUrl;
 
-    public String getPic_url() {
-        return pic_url;
+    public String getPicUrl() {
+        return picUrl;
     }
 
-    public void setPic_url(String pic_url) {
-        this.pic_url = pic_url;
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
     }
 
     public String getName() {
@@ -123,7 +123,7 @@ public class MerchantActivityGoodsParam extends PagingParam {
                 .append("name", name)
                 .append("start", start)
                 .append("end", end)
-                .append("pic_url", pic_url)
+                .append("picUrl", picUrl)
                 .toString();
     }
 }
