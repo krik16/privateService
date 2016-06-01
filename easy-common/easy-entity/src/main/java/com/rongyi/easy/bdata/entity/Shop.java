@@ -62,6 +62,11 @@ public class Shop implements Serializable {
     private List<String> photo_urls;//图片地址
     private String valid_reason ;//隐藏理由 
     private String business_reason ; 
+    private Integer update_by ;
+    private Integer create_source ; //创建来源   0大运营  1商家后台  其它crm
+    private Integer update_source ; //修改来源 
+    private Date open_at ;  //开业时间
+    private List<ObjectId> brand_ids ; //兼营品牌
     public ObjectId getId() {
         return id;
     }
@@ -412,5 +417,45 @@ public class Shop implements Serializable {
 
 	public void setBusiness_reason(String business_reason) {
 		this.business_reason = business_reason;
+	}
+
+	public Integer getUpdate_by() {
+		return update_by;
+	}
+
+	public void setUpdate_by(Integer update_by) {
+		this.update_by = update_by;
+	}
+
+	public Integer getCreate_source() {
+		return create_source;
+	}
+
+	public void setCreate_source(Integer create_source) {
+		this.create_source = create_source;
+	}
+
+	public Integer getUpdate_source() {
+		return update_source;
+	}
+
+	public void setUpdate_source(Integer update_source) {
+		this.update_source = update_source;
+	}
+
+	public Date getOpen_at() {
+		return open_at;
+	}
+
+	public void setOpen_at(Date open_at) {
+		this.open_at = open_at;
+	}
+
+	public List<ObjectId> getBrand_ids() {
+		return brand_ids;
+	}
+
+	public void setBrand_ids(List<ObjectId> brand_ids) {
+		this.brand_ids = brand_ids;
 	}
 }

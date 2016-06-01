@@ -15,7 +15,7 @@ public class ShopParam implements Serializable{
 	private Integer shopNature ;//店铺类型   0普通店   1免税店  2专柜  3折扣  4旗舰
 	private Integer shopType ;//店铺性质    0商场商铺  1商场专柜  2街边店 3特卖店
 	private String qrcodePic;  //二维码
-	private Integer recommend;  //0不置顶  1置顶
+	private Integer recommend = 1;  //0不置顶  1置顶
 	private ShopPositionParam position ;  //位置信息
 	private String shopNumber;  //铺位号
 	private String address; //详情地址
