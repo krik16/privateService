@@ -385,4 +385,12 @@ public interface IContentService {
      */
 
     public Map<String, Object> buildMapByV700(ContentDO content, String userId, boolean bool,Integer appVersion) throws Exception ;
+    
+    /**
+     * 查询潮人攻略列表数据
+     * @param pageSize
+     * @param currentPage
+     * @return
+     */
+    public PagingVO<ContentPojo> pagingRaidersList(int pageSize, Integer currentPage);
 }
