@@ -12,7 +12,7 @@ public class CertifiedParam extends BaseParam implements Serializable{
 	
 	private Integer userId;  //用户ID
 	
-	private String callName; //称呼
+	private String callName = ""; //称呼
 	
 	private Integer proId;       //省ID
 	
@@ -29,6 +29,14 @@ public class CertifiedParam extends BaseParam implements Serializable{
 	private String shopId;         //店铺ID
 	
 	private String brandId;       //品牌
+	
+	private String faceImg;    //身份证正面照 
+	
+	private String backImg;   //身份证背面照 
+	
+	private String workImg;    //工作证照
+	
+	private String otherImg;   //其它照片
 
 	public Integer getId() {
 		return id;
@@ -117,5 +125,36 @@ public class CertifiedParam extends BaseParam implements Serializable{
 	public void setBrandId(String brandId) {
 		this.brandId = brandId;
 	}
-	
+
+	public String getFaceImg() {
+		return faceImg;
+	}
+
+	public void setFaceImg(String faceImg) {
+		this.faceImg = faceImg;
+	}
+
+	public String getBackImg() {
+		return backImg;
+	}
+
+	public void setBackImg(String backImg) {
+		this.backImg = backImg;
+	}
+
+	public String getWorkImg() {
+		return workImg;
+	}
+
+	public void setWorkImg(String workImg) {
+		this.workImg = workImg;
+	}
+
+	public String getOtherImg() {
+		return otherImg;
+	}
+
+	public void setOtherImg(String otherImg) {
+		this.otherImg = otherImg;
+	}
 }
