@@ -3,8 +3,11 @@
  */
 package com.rongyi.rss.msob;
 
+import java.util.List;
+
 import com.rongyi.easy.rmmm.entity.ExpressOrderInfoEntity;
 import com.rongyi.easy.rmmm.param.SalerDeliveryParam;
+import com.rongyi.easy.rmmm.vo.ExpressVO;
 
 /**
  * Copyright (C),上海容易网电子商务有限公司
@@ -40,5 +43,13 @@ public interface IExpressOrderInfoService {
 	 * @throws Exception
 	 */
 	public String updateExpressInfo(SalerDeliveryParam param) throws Exception;
+	
+	/**
+	 * 获取用户常用快递公司列表
+	 * @param guideId
+	 * @return
+	 * @throws Exception
+	 */
+	public List<ExpressVO> selectCommonExpressByGuideId(String guideId) throws Exception;
 
 }
