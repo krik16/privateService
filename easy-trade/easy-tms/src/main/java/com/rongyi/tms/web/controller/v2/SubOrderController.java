@@ -94,7 +94,7 @@ public class SubOrderController extends BaseControllerV2 {
         ResponseData responseData;
         try {
             LOGGER.info("子订单列表:paramsMap={}", paramsMap);
-//            permissionCheck(request, "ORDER_GOODSON_VIEW");
+            permissionCheck(request, "ORDER_GOODSON_VIEW");
             this.replaceListToNull(paramsMap);// 过滤前台传入的空字符串
             warpToParamMap(paramsMap);
             PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchListByMap(paramsMap);
@@ -126,14 +126,13 @@ public class SubOrderController extends BaseControllerV2 {
         LOGGER.info("子订单详情:id={}", id);
         ResponseData responseData;
         try {
-//            permissionCheck(request, "ORDER_GOODSON_VIEW");
+            permissionCheck(request, "ORDER_GOODSON_VIEW");
             ParentOrderVO orderDetailVo = iOrderQueryService.searchRYOrderDetail(id);
             List<SonOrderVO> sonOrderList = orderDetailVo.getSonOrderList();
             BigDecimal rebateDiscountTotal = BigDecimal.ZERO;//抵扣券抵扣总金额
-//            BigDecimal discountTotal =  BigDecimal.ZERO;//总卡券信息（包含抵扣券）
             BigDecimal hbDisCountTotal = BigDecimal.ZERO;//红包抵扣总额
             rebateDiscountTotal = rebateDiscountTotal.add(orderDetailVo.getCouponDiscount()).add(orderDetailVo.getOrderCouponDiscount());//抵扣信息
-            BigDecimal commidityTotalPice = new BigDecimal("0.00");//商品总价
+            BigDecimal commidityTotalPice = BigDecimal.ZERO;//商品总价
             if (!CollectionUtils.isEmpty(sonOrderList)) {
                 //目前一个订单只会有一种商品，直播也是一个
                 orderDetailVo.setLiveName(sonOrderList.get(0).getLiveName());
@@ -156,6 +155,12 @@ public class SubOrderController extends BaseControllerV2 {
             } else {
                 orderDetailVo.setDeductCouponAmount(rebateDiscountTotal.toString());
             }
+            //商品总价
+            commidityTotalPice = commidityTotalPice.subtract(orderDetailVo.getDiscountFee()).compareTo(BigDecimal.ZERO) == -1 ? BigDecimal.ZERO : commidityTotalPice;
+            orderDetailVo.setCommidityTotalPice(commidityTotalPice);
+            //订单总价
+            BigDecimal orderTotalPrice = commidityTotalPice.add(new BigDecimal(orderDetailVo.getCommodityPostage()));
+            orderDetailVo.setOrderTotalPrice(orderTotalPrice);
             //红包抵扣合计
             orderDetailVo.setTotalHongBaoAmount(hbDisCountTotal);
             if (StringUtils.isNotBlank(orderDetailVo.getCommitOrderTime())) {
