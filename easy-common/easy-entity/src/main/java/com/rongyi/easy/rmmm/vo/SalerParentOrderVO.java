@@ -44,6 +44,7 @@ public class SalerParentOrderVO implements Serializable {
 	private String orderOriginalPrice;// 我是订单原价
 	private String allCommodityCommission;// 佣金总额
 	private String expressBillId;// 物流单号
+	private Integer expressOrderInfoId;//物流信息主键
 	private String ticketStatus;// 小票状态0: 小票未上传, 1: 待审核, 2: 一级审核通过, 3: 二级审核通过,
 								// 4: 审核不通过
 	private String refuseReason;// 审核失败理由
@@ -352,6 +353,16 @@ public class SalerParentOrderVO implements Serializable {
 		this.rebateTitle = rebateTitle;
 	}
 
+	public Integer getExpressOrderInfoId()
+	{
+		return expressOrderInfoId;
+	}
+
+	public void setExpressOrderInfoId(Integer expressOrderInfoId)
+	{
+		this.expressOrderInfoId = expressOrderInfoId;
+	}
+
 	@Override
 	public String toString() {
 		return "SalerParentOrderVO [status=" + status + ", totalPrice="
@@ -376,7 +387,7 @@ public class SalerParentOrderVO implements Serializable {
 				+ ", expressName=" + expressName + ", ticketPicList="
 				+ ticketPicList + ", receiveTime=" + receiveTime
 				+ ", buyerPhone=" + buyerPhone + ", rebateDiscount="
-				+ rebateDiscount + ", rebateTitle=" + rebateTitle + "]";
+				+ rebateDiscount + ", rebateTitle=" + rebateTitle + ",expressOrderInfoId="+expressOrderInfoId+"]";
 	}
 
 }
