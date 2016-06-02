@@ -19,6 +19,37 @@ public class SellerOrderPriceChangeVO implements Serializable {
 
 	private Date createTime;//下单时间
 	private Date expressFee;//运费
+	List<SalerSonOrderVO> sonOrderList;// 子订单列表
+
+	public Date getCreateTime()
+	{
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime)
+	{
+		this.createTime = createTime;
+	}
+
+	public Date getExpressFee()
+	{
+		return expressFee;
+	}
+
+	public void setExpressFee(Date expressFee)
+	{
+		this.expressFee = expressFee;
+	}
+
+	public List<SalerSonOrderVO> getSonOrderList()
+	{
+		return sonOrderList;
+	}
+
+	public void setSonOrderList(List<SalerSonOrderVO> sonOrderList)
+	{
+		this.sonOrderList = sonOrderList;
+	}
 
 	@Override
 	public String toString() {
