@@ -14,6 +14,16 @@ public class ExpressVO implements Serializable{
 	private int num;
 	
 	private String letter;//首字母
+	
+	private String ename;//物流公司的汉语拼音
+
+	public String getEname() {
+		return ename;
+	}
+
+	public void setEname(String ename) {
+		this.ename = ename;
+	}
 
 	public Integer getExpressId() {
 		return expressId;
@@ -67,7 +77,7 @@ public class ExpressVO implements Serializable{
 	public String toString() {
 		return "ExpressVO [id=" + id + ", name=" + name + ", expressId="
 				+ expressId + ", expressName=" + expressName + ", num=" + num
-				+ ", letter=" + letter + "]";
+				+ ", letter=" + letter + ", ename=" + ename + "]";
 	}
 
 }
