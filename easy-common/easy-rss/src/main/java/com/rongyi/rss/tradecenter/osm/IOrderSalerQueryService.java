@@ -44,4 +44,6 @@ public interface IOrderSalerQueryService {
 	 */
 	public SalerParentOrderVO getParentOrderVO(Integer orderId) throws Exception;
 
+
+
 }
