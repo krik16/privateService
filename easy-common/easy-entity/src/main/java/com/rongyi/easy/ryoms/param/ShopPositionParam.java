@@ -17,6 +17,12 @@ public class ShopPositionParam implements Serializable{
 	private String floorId;
 	private String lastFloorId;   
 	
+	@Override
+	public String toString(){
+		return "ShopPositionParam [proId="+proId+",cityId="+cityId+",businessId="+businessId+",areaId="+areaId
+				+",mallId="+mallId+",floorId="+floorId+",lastFloorId="+lastFloorId +"]";
+	}
+	
 	public String getProId() {
 		return proId;
 	}

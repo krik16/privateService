@@ -36,6 +36,16 @@ public class ShopParam implements Serializable{
 	private Integer isImport = 1 ;  // 是否是导入  （0是 1否）
 	private Integer optId ;  //操作者ID
 	private Integer createSource = 1 ; //创建来源  0大运营  1商家后台  其它crm
+	
+	@Override
+	public String toString(){
+		return "ShopParam [id="+id+",name="+name+",shopNature="+shopNature+",shopType="+shopType+",qrcodePic="+qrcodePic
+				+",recommend="+recommend+",shopNumber="+shopNumber+",address="+address+",customCategoryIds="+customCategoryIds
+				+"businessStatus="+businessStatus+",location="+location+",tags="+tags+",telephone="+telephone+",businessHours"+businessHours
+				+",openAt="+openAt+",description="+description+",brandId="+brandId+",brandIds="+brandIds+",filialeId="+filialeId
+				+",appPhotosUrl="+appPhotosUrl+",photosUrl="+photosUrl+",indoorLocation="+indoorLocation +",position="+position.toString()+"]";
+	}
+	
 	public String getId() {
 		return id;
 	}
