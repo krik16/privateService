@@ -3,8 +3,8 @@ package com.rongyi.rss.msob;
 import java.util.List;
 
 import com.rongyi.easy.rmmm.param.ExpressListParam;
+import com.rongyi.easy.rmmm.vo.Express2VO;
 import com.rongyi.easy.rmmm.vo.ExpressListVO;
-import com.rongyi.easy.rmmm.vo.ExpressVO;
 
 public interface IExpressInfoService {
 	
@@ -22,7 +22,7 @@ public interface IExpressInfoService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<ExpressVO> selectExpressListByKey(String keyWord) throws Exception;
+	public List<Express2VO> selectExpressListByKey(String keyWord) throws Exception;
 	
 	/**
 	 * 获取常用快递公司列表
@@ -30,6 +30,6 @@ public interface IExpressInfoService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<ExpressVO> selectCommonExpress() throws Exception;
+	public List<Express2VO> selectCommonExpress() throws Exception;
 
 }

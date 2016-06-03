@@ -7,7 +7,7 @@ import java.util.List;
 
 import com.rongyi.easy.rmmm.entity.ExpressOrderInfoEntity;
 import com.rongyi.easy.rmmm.param.SalerDeliveryParam;
-import com.rongyi.easy.rmmm.vo.ExpressVO;
+import com.rongyi.easy.rmmm.vo.Express2VO;
 
 /**
  * Copyright (C),上海容易网电子商务有限公司
@@ -42,6 +42,6 @@ public interface ROAExpressOrderInfoService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<ExpressVO> selectCommonExpressByGuideId(String guideId) throws Exception;
+	public List<Express2VO> selectCommonExpressByGuideId(String guideId) throws Exception;
 
 }
