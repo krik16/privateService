@@ -179,6 +179,17 @@ public class Commodity implements  Serializable,Cloneable{
 	private String cPriceMin;//商品现最高价（用于买家版）
 	private Integer purchaseCount;//商品的限购数量
 	private String weAndTeStatus;//商品在终端机与App上的隐藏与显示
+
+	private String commodityModelNo;//商品款号
+
+	public String getCommodityModelNo() {
+		return commodityModelNo;
+	}
+
+	public void setCommodityModelNo(String commodityModelNo) {
+		this.commodityModelNo = commodityModelNo;
+	}
+
 	public Integer getPurchaseCount() {
 		return this.purchaseCount==null || this.purchaseCount < 0 ? 0:this.purchaseCount;
 	}
@@ -455,6 +466,7 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setPurchaseCount(purchaseCount);
 		commodity.setWeAndTeStatus(weAndTeStatus);
 		commodity.setSort(sort);
+		commodity.setCommodityModelNo(commodityModelNo);
 		return commodity;
 	}
 
@@ -659,6 +671,7 @@ public class Commodity implements  Serializable,Cloneable{
 				", weAndTeStatus='" + weAndTeStatus + '\'' +
 				", sort=" + sort +
 				", customCategoryIds=" + customCategoryIds +
+				", commodityModelNo=" +commodityModelNo+
 				'}';
 	}
 
