@@ -347,6 +347,7 @@ public class CommodityVO  implements  Serializable {
 		this.terminalType = commodity.getTerminalType();
 		this.sort=commodity.getSort();//排序
 		this.update_by = commodity.getUpdate_by();//修改人
+		this.commodityModelNo = commodity.getCommodityModelNo();//商品款号
 	}
 	public String getCommodityId() {
 		return commodityId;
