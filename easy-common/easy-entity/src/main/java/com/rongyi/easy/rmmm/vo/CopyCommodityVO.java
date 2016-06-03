@@ -19,7 +19,8 @@ public class CopyCommodityVO implements Serializable{
 	private List<String> commodityPicList;//商品图片集合
 	private String commodityName;//商品名称
 	private String commodityCode;//商品编号
-	private String commodityBrandName;//优先显示英文名，无英文名显示中文名
+	private String brandEName;//品牌英文名
+	private String brandCName;//品牌中文名
 	private String commodityOriginalPrice;//商品原价
 	private String commodityCurrentPrice;//商品现价
 	private String commodityNo;//商品款号
@@ -49,11 +50,17 @@ public class CopyCommodityVO implements Serializable{
 	public void setCommodityCode(String commodityCode) {
 		this.commodityCode = commodityCode;
 	}
-	public String getCommodityBrandName() {
-		return commodityBrandName;
+	public String getBrandEName() {
+		return brandEName;
 	}
-	public void setCommodityBrandName(String commodityBrandName) {
-		this.commodityBrandName = commodityBrandName;
+	public void setBrandEName(String brandEName) {
+		this.brandEName = brandEName;
+	}
+	public String getBrandCName() {
+		return brandCName;
+	}
+	public void setBrandCName(String brandCName) {
+		this.brandCName = brandCName;
 	}
 	public String getCommodityOriginalPrice() {
 		return commodityOriginalPrice;
@@ -90,7 +97,7 @@ public class CopyCommodityVO implements Serializable{
 		return "CopyCommodityVO [commodityId=" + commodityId
 				+ ", commodityPicList=" + commodityPicList + ", commodityName="
 				+ commodityName + ", commodityCode=" + commodityCode
-				+ ", commodityBrandName=" + commodityBrandName
+				+ ", brandEName=" + brandEName + ", brandCName=" + brandCName
 				+ ", commodityOriginalPrice=" + commodityOriginalPrice
 				+ ", commodityCurrentPrice=" + commodityCurrentPrice
 				+ ", commodityNo=" + commodityNo + ", goodsParam=" + goodsParam
