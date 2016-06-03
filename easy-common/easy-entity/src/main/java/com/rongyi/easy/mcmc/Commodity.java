@@ -23,26 +23,22 @@ public class Commodity implements  Serializable,Cloneable{
 
 	@Id
 	private ObjectId id;
-
 	private int type; // 渠道  0商家，1买手
 	private String liveId; // 直播Id
 	private boolean isSpot; // 是否现货	0 否  1是
 	private Date liveStartTime; // 直播开始时间
 	private Date liveEndTime; // 直播结束时间
 	private String create_by; // 创建人
-
 	private Integer saleId; //特卖mysql id
 	private Integer flashSaleId; // 闪购mysql id
 	private Date activityStartTime; //特卖、闪购、秒杀开始时间
 	private Date activityEndTime; //特卖、闪购、秒杀结束时间
 	private String secKillSign; //秒杀标记
-
 	private String name;//商品名称
 	private String category;//商品品类id
 	private String shopId;//店铺id
 	private String shopMid;//店铺的mongoid
 	private int status;//状态 -1：非现货初始化(直播使用） 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理5待审核 6审核失败
-
 	private String code;//商品编码
 	private String description;//商品描述
 	private String postage;//商品邮费
@@ -59,18 +55,43 @@ public class Commodity implements  Serializable,Cloneable{
 	private String shopNum;//店铺铺位号
 	private String filialeMid;//分公司mongoId
 	private String update_by;//修改人
-
-
 	private String brandMid;//品牌mongoId
-
 	private boolean supportCourierDeliver=true;//支持快递发货字段  true 是    false否
-
 	private boolean supportSelfPickup=true;//支持到店自提  true 是    false否
-
 	private int identity = -100;//-100 默认值，老数据，不处理权限 0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购6买手
-
 	private Integer templateId;//邮费模版id
-
+	private List<String> picList;//商品图片列表
+	private List<ObjectId> specList;//商品规格列表
+	private Double price;//商品价格（现价最低价，用于排序）
+	private String brandId;//商品所属品牌id
+	private String mallId;//商品所属商场id
+	private List<ObjectId> categoryIds;//商品所属的品类列表
+	private List<String> customCategory;//自定义分类
+	private Integer freight;//1表示商家承担运费,0表示买家承担运费
+	private Integer terminalType;//上架终端：com.rongyi.easy.mcmc.constant.CommodityTerminalType常量定义
+	private Date registerAt;//上架时间
+	private Date soldOutAt;//下架时间
+	private Integer source;//来源0表示页面添加1表示批量导入2app创建商品
+	private Integer stockStatus;//0表示统一库存1表示分管库存
+	private String systemNumber;//系统编号
+	private String reason;//下架原因
+	private String oPriceMax;//商品原最高价（用于买家版）
+	private String oPriceMin;//商品原最低价（用于买家版）
+	private String cPriceMax;//商品现最高价（用于买家版）
+	private String cPriceMin;//商品现最高价（用于买家版）
+	private Integer purchaseCount;//商品的限购数量
+	private String weAndTeStatus;//商品在终端机与App上的隐藏与显示
+	private Double discount ;//商品的折扣
+	private Integer sort;//直播商品的排序
+	private boolean goodsSec = true;//正品保障
+	private List<Integer> customCategoryIds;//自定义分类集合;
+	private String commodityModelNo;//商品款号
+	private List<String> goodsParam;//商品参数
+//	private int commentCount;
+//	private int highCommentCount;
+//	private int mediumCommentCount;
+//	private int lowCommentCount;
+	
 	public boolean isSupportCourierDeliver() {
 		return supportCourierDeliver;
 	}
@@ -149,57 +170,30 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setoPriceOfLowestCPrice(String oPriceOfLowestCPrice) {
 		this.oPriceOfLowestCPrice = oPriceOfLowestCPrice;
 	}
-
-	private List<String> picList;//商品图片列表
-	private List<ObjectId> specList;//商品规格列表
-
-
-	private Double price;//商品价格（现价最低价，用于排序）
-	private String brandId;//商品所属品牌id
-	private String mallId;//商品所属商场id
-	private List<ObjectId> categoryIds;//商品所属的品类列表
-	private List<String> customCategory;//自定义分类
-
-	//private Integer distribution;//配送方式 1表示到店自提2快递3表示支持两种方式
-	private Integer freight;//1表示商家承担运费,0表示买家承担运费
-	private Integer terminalType;//上架终端：com.rongyi.easy.mcmc.constant.CommodityTerminalType常量定义
-	private Date registerAt;//上架时间
-	private Date soldOutAt;//下架时间
-	private Integer source;//来源0表示页面添加1表示批量导入2app创建商品
-	private Integer stockStatus;//0表示统一库存1表示分管库存
-	private String systemNumber;//系统编号
-	private String reason;//下架原因
-//	private int commentCount;
-//	private int highCommentCount;
-//	private int mediumCommentCount;
-//	private int lowCommentCount;
-	private String oPriceMax;//商品原最高价（用于买家版）
-	private String oPriceMin;//商品原最低价（用于买家版）
-	private String cPriceMax;//商品现最高价（用于买家版）
-	private String cPriceMin;//商品现最高价（用于买家版）
-	private Integer purchaseCount;//商品的限购数量
-	private String weAndTeStatus;//商品在终端机与App上的隐藏与显示
+	public String getCommodityModelNo() {
+		return commodityModelNo;
+	}
+	public void setCommodityModelNo(String commodityModelNo) {
+		this.commodityModelNo = commodityModelNo;
+	}
+	public List<String> getGoodsParam() {
+		return goodsParam;
+	}
+	public void setGoodsParam(List<String> goodsParam) {
+		this.goodsParam = goodsParam;
+	}
 	public Integer getPurchaseCount() {
 		return this.purchaseCount==null || this.purchaseCount < 0 ? 0:this.purchaseCount;
 	}
-
 	public void setPurchaseCount(Integer purchaseCount) {
 		this.purchaseCount = purchaseCount;
 	}
-
 	public String getWeAndTeStatus() {
 		return StringUtils.isBlank(weAndTeStatus)?"3":weAndTeStatus;
 	}
-
 	public void setWeAndTeStatus(String weAndTeStatus) {
 		this.weAndTeStatus = weAndTeStatus;
 	}
-	private Double discount ;//商品的折扣
-	private Integer sort;//直播商品的排序
-	private boolean goodsSec = true;//正品保障
-
-	private List<Integer> customCategoryIds;//自定义分类集合;
-
 	public ObjectId getId() {
 		return id;
 	}
@@ -290,7 +284,6 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setCurrentPrice(String currentPrice) {
 		this.currentPrice = currentPrice;
 	}
-
 	public List<String> getPicList() {
 		return picList;
 	}
@@ -375,7 +368,6 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setStockStatus(Integer stockStatus) {
 		this.stockStatus = stockStatus;
 	}
-
 	public Double getDiscount() {
 		try {
 			if(StringUtils.isNotBlank(this.currentPrice) && StringUtils.isNotBlank(this.originalPrice)) {
@@ -400,11 +392,131 @@ public class Commodity implements  Serializable,Cloneable{
 		}
 
 	}
-
 	public void setDiscount(Double discount) {
 		this.discount = discount;
 	}
-
+	public List<Integer> getCustomCategoryIds() {
+		return customCategoryIds;
+	}
+	public void setCustomCategoryIds(List<Integer> customCategoryIds) {
+		this.customCategoryIds = customCategoryIds;
+	}
+	public String getSystemNumber() {
+		return systemNumber;
+	}
+	@Override
+	public int hashCode() {
+		return this.toString().hashCode();
+	}
+	@Override
+	public boolean equals(Object obj) {
+		return this.toString().equals(obj.toString());
+	}
+	public Integer getSaleId() {
+		return saleId;
+	}
+	public void setSaleId(Integer saleId) {
+		this.saleId = saleId;
+	}
+	public Integer getFlashSaleId() {
+		return flashSaleId;
+	}
+	public void setFlashSaleId(Integer flashSaleId) {
+		this.flashSaleId = flashSaleId;
+	}
+	public Date getActivityStartTime() {
+		return activityStartTime;
+	}
+	public void setActivityStartTime(Date activityStartTime) {
+		this.activityStartTime = activityStartTime;
+	}
+	public Date getActivityEndTime() {
+		return activityEndTime;
+	}
+	public void setActivityEndTime(Date activityEndTime) {
+		this.activityEndTime = activityEndTime;
+	}
+	public void setSystemNumber(String systemNumber) {
+		this.systemNumber = systemNumber;
+	}
+	public String getoPriceMax() {
+		return oPriceMax;
+	}
+	public void setoPriceMax(String oPriceMax) {
+		this.oPriceMax = oPriceMax;
+	}
+	public String getoPriceMin() {
+		return oPriceMin;
+	}
+	public void setoPriceMin(String oPriceMin) {
+		this.oPriceMin = oPriceMin;
+	}
+	public String getcPriceMax() {
+		return cPriceMax;
+	}
+	public void setcPriceMax(String cPriceMax) {
+		this.cPriceMax = cPriceMax;
+	}
+	public String getcPriceMin() {
+		return cPriceMin;
+	}
+	public void setcPriceMin(String cPriceMin) {
+		this.cPriceMin = cPriceMin;
+	}
+	public String getReason() {
+		return reason;
+	}
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+	public String getFilialeMid() {
+		return filialeMid;
+	}
+	public void setFilialeMid(String filialeMid) {
+		this.filialeMid = filialeMid;
+	}
+	public Integer getLockedStock() {
+		return lockedStock;
+	}
+	public void setLockedStock(Integer lockedStock) {
+		this.lockedStock = lockedStock;
+	}
+	public boolean isSupportSelfPickup() {
+		return supportSelfPickup;
+	}
+	public void setSupportSelfPickup(boolean supportSelfPickup) {
+		this.supportSelfPickup = supportSelfPickup;
+	}
+	public int getIdentity() {
+		return identity;
+	}
+	public void setIdentity(int identity) {
+		this.identity = identity;
+	}
+	public String getSecKillSign() {
+		return secKillSign;
+	}
+	public void setSecKillSign(String secKillSign) {
+		this.secKillSign = secKillSign;
+	}
+	public Integer getSort() {
+		return null==sort?0:sort;
+	}
+	public void setSort(Integer sort) {
+		this.sort = sort;
+	}
+	public Integer getTemplateId() {
+		return templateId;
+	}
+	public void setTemplateId(Integer templateId) {
+		this.templateId = templateId;
+	}
+	public boolean isGoodsSec() {
+		return goodsSec;
+	}
+	public void setGoodsSec(boolean goodsSec) {
+		this.goodsSec = goodsSec;
+	}
 	@Override
 	public Commodity clone() throws CloneNotSupportedException {
 
@@ -455,146 +567,9 @@ public class Commodity implements  Serializable,Cloneable{
 		commodity.setPurchaseCount(purchaseCount);
 		commodity.setWeAndTeStatus(weAndTeStatus);
 		commodity.setSort(sort);
+		commodity.setCommodityModelNo(commodityModelNo);
+		commodity.setGoodsParam(goodsParam);
 		return commodity;
-	}
-
-	public String getSystemNumber() {
-		return systemNumber;
-	}
-
-	@Override
-	public int hashCode() {
-		return this.toString().hashCode();
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		return this.toString().equals(obj.toString());
-	}
-
-	public Integer getSaleId() {
-		return saleId;
-	}
-
-	public void setSaleId(Integer saleId) {
-		this.saleId = saleId;
-	}
-
-	public Integer getFlashSaleId() {
-		return flashSaleId;
-	}
-
-	public void setFlashSaleId(Integer flashSaleId) {
-		this.flashSaleId = flashSaleId;
-	}
-
-	public Date getActivityStartTime() {
-		return activityStartTime;
-	}
-
-	public void setActivityStartTime(Date activityStartTime) {
-		this.activityStartTime = activityStartTime;
-	}
-
-	public Date getActivityEndTime() {
-		return activityEndTime;
-	}
-
-	public void setActivityEndTime(Date activityEndTime) {
-		this.activityEndTime = activityEndTime;
-	}
-	public void setSystemNumber(String systemNumber) {
-		this.systemNumber = systemNumber;
-	}
-	public String getoPriceMax() {
-		return oPriceMax;
-	}
-	public void setoPriceMax(String oPriceMax) {
-		this.oPriceMax = oPriceMax;
-	}
-	public String getoPriceMin() {
-		return oPriceMin;
-	}
-	public void setoPriceMin(String oPriceMin) {
-		this.oPriceMin = oPriceMin;
-	}
-	public String getcPriceMax() {
-		return cPriceMax;
-	}
-	public void setcPriceMax(String cPriceMax) {
-		this.cPriceMax = cPriceMax;
-	}
-	public String getcPriceMin() {
-		return cPriceMin;
-	}
-	public void setcPriceMin(String cPriceMin) {
-		this.cPriceMin = cPriceMin;
-	}
-	public String getReason() {
-		return reason;
-	}
-	public void setReason(String reason) {
-		this.reason = reason;
-	}
-	public String getFilialeMid() {
-		return filialeMid;
-	}
-	public void setFilialeMid(String filialeMid) {
-		this.filialeMid = filialeMid;
-	}
-
-	public Integer getLockedStock() {
-		return lockedStock;
-	}
-
-	public void setLockedStock(Integer lockedStock) {
-		this.lockedStock = lockedStock;
-	}
-
-	public boolean isSupportSelfPickup() {
-		return supportSelfPickup;
-	}
-
-	public void setSupportSelfPickup(boolean supportSelfPickup) {
-		this.supportSelfPickup = supportSelfPickup;
-	}
-
-	public int getIdentity() {
-		return identity;
-	}
-
-	public void setIdentity(int identity) {
-		this.identity = identity;
-	}
-
-	public String getSecKillSign() {
-		return secKillSign;
-	}
-
-	public void setSecKillSign(String secKillSign) {
-		this.secKillSign = secKillSign;
-	}
-
-	public Integer getSort() {
-		return null==sort?0:sort;
-	}
-
-	public void setSort(Integer sort) {
-		this.sort = sort;
-	}
-
-	public Integer getTemplateId() {
-		return templateId;
-	}
-
-	public void setTemplateId(Integer templateId) {
-		this.templateId = templateId;
-	}
-	public boolean isGoodsSec() {
-		return goodsSec;
-	}
-	public void setGoodsSec(boolean goodsSec) {
-		this.goodsSec = goodsSec;
 	}
 	@Override
 	public String toString() {
@@ -659,14 +634,8 @@ public class Commodity implements  Serializable,Cloneable{
 				", weAndTeStatus='" + weAndTeStatus + '\'' +
 				", sort=" + sort +
 				", customCategoryIds=" + customCategoryIds +
+				", commodityModelNo=" +commodityModelNo+
+				",goodsParam=" + goodsParam +
 				'}';
-	}
-
-	public List<Integer> getCustomCategoryIds() {
-		return customCategoryIds;
-	}
-
-	public void setCustomCategoryIds(List<Integer> customCategoryIds) {
-		this.customCategoryIds = customCategoryIds;
 	}
 }

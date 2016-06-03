@@ -26,13 +26,17 @@ public class SalerOrderParam implements Serializable {
 	 */
 
 	private String guideId;// 导购id
-	private String status;// 订单状态 订单状态  1待处理，2未付款，3已完成，4已关闭"（店铺）  6待处理，7未付款，8已完成，9已关闭",（导购）
+	private String status;// 订单状态 订单状态  1待处理，2未付款，3已完成，4已关闭"（店铺）  6待处理，7未付款，8已完成，9已关闭 10买家在店铺的未付款订单",（导购）
 
 	private String currentPage;// （要请求页）
 
 	private String pageSize;// 每页数据显示数量
 
 	private Integer guideType;// 卖家类型 1是导购 2是买手
+
+	private String buyerId;//买家id
+	
+	private String buyerIM;//买家IM账号
 
 	public SalerOrderParam() {
 		super();
@@ -45,6 +49,14 @@ public class SalerOrderParam implements Serializable {
 		this.status = status;
 		this.currentPage = currentPage;
 		this.pageSize = pageSize;
+	}
+
+	public String getBuyerIM() {
+		return buyerIM;
+	}
+
+	public void setBuyerIM(String buyerIM) {
+		this.buyerIM = buyerIM;
 	}
 
 	public String getStatus() {
@@ -87,6 +99,16 @@ public class SalerOrderParam implements Serializable {
 		this.guideType = guideType;
 	}
 
+	public String getBuyerId()
+	{
+		return buyerId;
+	}
+
+	public void setBuyerId(String buyerId)
+	{
+		this.buyerId = buyerId;
+	}
+
 	@Override
 	public String toString() {
 		return "SalerOrderParam{" +
@@ -95,6 +117,8 @@ public class SalerOrderParam implements Serializable {
 				", currentPage='" + currentPage + '\'' +
 				", pageSize='" + pageSize + '\'' +
 				", guideType=" + guideType +
+				", buyerId=" + buyerId +
+				", buyerIM=" + buyerIM +
 				'}';
 	}
 }

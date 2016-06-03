@@ -1,6 +1,10 @@
 package com.rongyi.easy.rmmm.param;
 
+import com.rongyi.easy.rmmm.vo.SalerSonOrderVO;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderDealedParam implements Serializable {
 	/**
@@ -14,6 +18,7 @@ public class OrderDealedParam implements Serializable {
 	private String orderPrice;// 订单价格
 	private Integer userId;//卖家用户id
 	private Integer source = 1;//操作平台 1摩店 2商家后台
+    private List<SalerSonOrderVO> sonOrderList = new ArrayList<>(); //商品详情
 
 	public Integer getUserId() {
 		return userId;
@@ -71,6 +76,16 @@ public class OrderDealedParam implements Serializable {
 	public void setSource(Integer source)
 	{
 		this.source = source;
+	}
+
+	public List<SalerSonOrderVO> getSonOrderList()
+	{
+		return sonOrderList;
+	}
+
+	public void setSonOrderList(List<SalerSonOrderVO> sonOrderList)
+	{
+		this.sonOrderList = sonOrderList;
 	}
 
 	@Override
