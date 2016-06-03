@@ -18,7 +18,7 @@ public class SellerOrderPriceChangeVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Date createTime;//下单时间
-	private Date expressFee;//运费
+	private BigDecimal expressFee;//运费
 	List<SalerSonOrderVO> sonOrderList;// 子订单列表
 
 	public Date getCreateTime()
@@ -31,12 +31,12 @@ public class SellerOrderPriceChangeVO implements Serializable {
 		this.createTime = createTime;
 	}
 
-	public Date getExpressFee()
+	public BigDecimal getExpressFee()
 	{
 		return expressFee;
 	}
 
-	public void setExpressFee(Date expressFee)
+	public void setExpressFee(BigDecimal expressFee)
 	{
 		this.expressFee = expressFee;
 	}
