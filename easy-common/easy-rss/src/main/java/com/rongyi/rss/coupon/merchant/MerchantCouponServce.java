@@ -125,7 +125,7 @@ public interface MerchantCouponServce {
      * @param couponShops
      * @return
      */
-    public int batchInsertGeneralShops(List<CouponShop> couponShops);
+    public int batchInsertGeneralShops(List<CouponShop> couponShops,Integer type,String mallId);
 
     /**
      * 根据mallId 获取商场通用验证店铺
