@@ -34,7 +34,9 @@ public class SalerOrderParam implements Serializable {
 
 	private Integer guideType;// 卖家类型 1是导购 2是买手
 
-	private String buyerId;
+	private String buyerId;//买家id
+	
+	private String buyerIM;//买家IM账号
 
 	public SalerOrderParam() {
 		super();
@@ -47,6 +49,14 @@ public class SalerOrderParam implements Serializable {
 		this.status = status;
 		this.currentPage = currentPage;
 		this.pageSize = pageSize;
+	}
+
+	public String getBuyerIM() {
+		return buyerIM;
+	}
+
+	public void setBuyerIM(String buyerIM) {
+		this.buyerIM = buyerIM;
 	}
 
 	public String getStatus() {
@@ -108,6 +118,7 @@ public class SalerOrderParam implements Serializable {
 				", pageSize='" + pageSize + '\'' +
 				", guideType=" + guideType +
 				", buyerId=" + buyerId +
+				", buyerIM=" + buyerIM +
 				'}';
 	}
 }
