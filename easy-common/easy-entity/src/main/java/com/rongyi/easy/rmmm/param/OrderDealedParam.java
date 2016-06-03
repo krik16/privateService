@@ -18,7 +18,7 @@ public class OrderDealedParam implements Serializable {
 	private String orderPrice;// 订单价格
 	private Integer userId;//卖家用户id
 	private Integer source = 1;//操作平台 1摩店 2商家后台
-	List<SalerSonOrderVO> sonOrderList = new ArrayList<>(); //商品详情
+    private List<SalerSonOrderVO> sonOrderList = new ArrayList<>(); //商品详情
 
 	public Integer getUserId() {
 		return userId;
