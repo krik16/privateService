@@ -78,6 +78,16 @@ public class OrderDealedParam implements Serializable {
 		this.source = source;
 	}
 
+	public List<SalerSonOrderVO> getSonOrderList()
+	{
+		return sonOrderList;
+	}
+
+	public void setSonOrderList(List<SalerSonOrderVO> sonOrderList)
+	{
+		this.sonOrderList = sonOrderList;
+	}
+
 	@Override
 	public String toString() {
 		return "OrderDealedParam{" +
