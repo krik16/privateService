@@ -51,6 +51,19 @@ public class QuickDetailVO implements Serializable {
      */
     private String picNameTwo;
 
+    /**
+     * typeVal
+     */
+    private String typeVal;
+
+    public String getTypeVal() {
+        return typeVal;
+    }
+
+    public void setTypeVal(String typeVal) {
+        this.typeVal = typeVal;
+    }
+
     public String getPicName() {
         return picName;
     }
@@ -134,6 +147,7 @@ public class QuickDetailVO implements Serializable {
                 .append("shareContent", shareContent)
                 .append("sharePic", sharePic)
                 .append("appTitle", appTitle)
+                .append("typeVal", typeVal)
                 .toString();
     }
 }
