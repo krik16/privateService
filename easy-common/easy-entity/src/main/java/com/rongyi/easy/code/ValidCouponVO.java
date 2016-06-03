@@ -19,6 +19,8 @@ public class ValidCouponVO implements Serializable {
 		private String usageDesc;//使用说明
 		private String activityName;
 		private Integer couponType;
+		private String buyerPhone;
+		private String buyerName;
 		public String getName() {
 				return name;
 		}
@@ -78,6 +80,22 @@ public class ValidCouponVO implements Serializable {
 				this.couponType = couponType;
 		}
 
+		public String getBuyerPhone() {
+				return buyerPhone;
+		}
+
+		public void setBuyerPhone(String buyerPhone) {
+				this.buyerPhone = buyerPhone;
+		}
+
+		public String getBuyerName() {
+				return buyerName;
+		}
+
+		public void setBuyerName(String buyerName) {
+				this.buyerName = buyerName;
+		}
+
 		@Override
 		public String toString() {
 				final StringBuffer sb = new StringBuffer("ValidCouponVO{");
@@ -90,6 +108,8 @@ public class ValidCouponVO implements Serializable {
 				sb.append(", usageDesc='").append(usageDesc).append('\'');
 				sb.append(", activityName='").append(activityName).append('\'');
 				sb.append(", couponType=").append(couponType);
+				sb.append(", buyerName=").append(buyerName);
+				sb.append(", buyerPhone=").append(buyerPhone);
 				sb.append('}');
 				return sb.toString();
 		}

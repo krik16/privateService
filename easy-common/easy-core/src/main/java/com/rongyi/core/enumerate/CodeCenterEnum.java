@@ -36,6 +36,7 @@ public enum CodeCenterEnum {
     ERROR_VALIDCODE_INVALID_MODE(1021332, "验证方式错误！"),
     ERROR_VALIDCODE_TYPE(1021333, "type 不合法或者无效！"),
     ERROR_VALIDCODE_FALIURE(1021334, "验码失败！"),
+    ERROR_VALIDCODE_TIMEOUT(1021335, "调用PHP接口超时异常！"),
 
 
     ;

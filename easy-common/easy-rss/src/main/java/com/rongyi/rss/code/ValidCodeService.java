@@ -55,6 +55,13 @@ public interface ValidCodeService {
     public boolean validGiftCode(String code, SessionUserInfo sessionUserInfo);
 
     /**
+     * 验证礼品码
+     * @param code
+     * @return
+     */
+    public boolean validGiftCode(String code, String mallId,String shopId,String validUser,String identity);
+
+    /**
      * 统计各个类型的总验码数量和当天验码数
      * @param param
      * @param sessionUserInfo
