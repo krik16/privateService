@@ -10,7 +10,7 @@ import com.rongyi.core.constant.IErrorCode;
  * Package:com.rongyi.code.exception
  * Project:easy-market
  */
-public class CodeServiceException extends RuntimeException implements Serializable {
+public class CodeServiceException extends Exception implements Serializable {
         private IErrorCode iErrorCode;
 
         private int errorNo;
