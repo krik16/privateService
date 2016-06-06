@@ -102,6 +102,6 @@ public interface CouponCodeService {
      * @param code
      * @return
      */
-    public int getCouponTypeByCode(String code);
+    public Integer getCouponTypeByCode(String code);
 
 }
