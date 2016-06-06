@@ -11,10 +11,10 @@ public class CertifiedInfo {
 	private Integer id;
 	private Integer userId;        //关联用户ID
 	private String callName = "";      //称呼
-	private Integer proId;       //省ID
-	private Integer cityId;       //市ID
-	private Integer areaId;       //区ID
-	private String contactPhone;  //联系电话
+	private Integer proId = 0;       //省ID
+	private Integer cityId = 0;       //市ID
+	private Integer areaId = 0;       //区ID
+	private String contactPhone ="";  //联系电话
 	private String resume;      //自我简介
 	private Integer isDeleted;    //是否已删除  0正常 1已删除
 	private Date createAt;
