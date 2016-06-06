@@ -1,10 +1,10 @@
 
-/**   
- * @Title: ROACommodityService.java 
- * @Package: com.rongyi.rss.malllife.roa 
+/**
+ * @Title: ROACommodityService.java
+ * @Package: com.rongyi.rss.malllife.roa
  * @Description: TODO
- * @author 袁波 
- * @date 2015年6月5日 下午6:56:37 
+ * @author 袁波
+ * @date 2015年6月5日 下午6:56:37
  */
 
 package com.rongyi.rss.malllife.roa;
@@ -29,11 +29,11 @@ import com.rongyi.easy.roa.param.SearchCommodityCategoryParam;
 import com.rongyi.easy.solr.param.CommodityBrandSearchParam;
 import com.rongyi.easy.solr.param.CommoditySearchParam;
 
-/** 
+/**
  *
- * @Description 
+ * @Description
  * @author 袁波
- * @date 2015年6月5日 下午6:56:37 
+ * @date 2015年6月5日 下午6:56:37
  */
 
 public interface ROACommodityService {
@@ -75,7 +75,7 @@ public interface ROACommodityService {
 	public ResponseResult getCategoryById(String id);
 
 	public ResponseResult searchCommodity(CommoditySearchParam param);
-	
+
 	public ResponseResult searchCommodityForMallLife(CommoditySearchParam param);
 
 	public ResponseResult getBrandCommodity(String brandId, String categoryId, int orderBy, int currentpage,
@@ -113,9 +113,9 @@ public interface ROACommodityService {
 	public List<String[]> listSpecColumnValues(String commodityId);
 
 	public Commodity selectById(String id);
- 
+
 	public ResponseVO searchCommodityBrand(CommodityBrandSearchParam param);
-	
+
 	public List<com.rongyi.easy.mcmc.vo.CommodityBuyerVO> getCommodityBySPU(String commodityId, String spu);
 
 	/**
@@ -185,4 +185,6 @@ public interface ROACommodityService {
 	 * @return
 	 */
 	public ResponseVO getBrandsByMall(SearchCommodityBrandParam param);
+
+	public List<Commodity>  selectCommodityByNumber(String number);
 }

@@ -120,9 +120,9 @@ public interface CommodityService {
      * @param status:商品的状态
      * @param pagesize：分页的条数
      */
-    
+
     public void updateCommodityByRegisterAtAndSoldOutAt(Date registerAt,Date soldOutAt, String status, int pagesize);
-    
+
 
     /***
      * 查询商品 一二三级分类
@@ -220,4 +220,7 @@ public interface CommodityService {
      * @return List<com.rongyi.easy.mcmc.vo.CommodityBuyerVO>
      */
     public ResponseVO topCommodityListBySaleId(Integer saleId, Integer flashSaleId);
+
+
+    public List<Commodity> selectCommodityByNumber(String number);
 }
