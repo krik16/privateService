@@ -108,8 +108,7 @@ public class SubOrderController extends BaseControllerV2 {
             responseData = ResponseData.success(orderForms, currentPage, Constant.PAGE.PAGESIZE, totalPage);
         } catch (BizException e) {
             LOGGER.error(e.getMessage());
-            orderForms.clear();
-            responseData = ResponseData.success(orderForms);
+            responseData = ResponseData.success(new ArrayList<>(),1,Constant.PAGE.PAGESIZE,0);
         } catch (PermissionException e) {
             LOGGER.error(e.getMessage());
             e.printStackTrace();
