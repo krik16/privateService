@@ -19,7 +19,25 @@ public class SellerOrderPriceChangeVO implements Serializable {
 
 	private Date createTime;//下单时间
 	private BigDecimal expressFee;//运费
+	private String orderNo;//订单号
+	private String orderTime;//下单时间
 	List<SalerSonOrderVO> sonOrderList;// 子订单列表
+
+	public String getOrderNo() {
+		return orderNo;
+	}
+
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
+	}
+
+	public String getOrderTime() {
+		return orderTime;
+	}
+
+	public void setOrderTime(String orderTime) {
+		this.orderTime = orderTime;
+	}
 
 	public Date getCreateTime()
 	{
@@ -53,9 +71,9 @@ public class SellerOrderPriceChangeVO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "SellerOrderPriceChangeVO [" +
-				"createTime=" + createTime + ", " +
-				"expressFee=" + expressFee+"]";
+		return "SellerOrderPriceChangeVO [createTime=" + createTime
+				+ ", expressFee=" + expressFee + ", orderNo=" + orderNo + ", orderTime="
+				+ orderTime + ", sonOrderList=" + sonOrderList + "]";
 	}
 
 }

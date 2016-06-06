@@ -1,12 +1,13 @@
 package com.rongyi.easy.rmmm.param;
 
-import com.rongyi.easy.rmmm.vo.SalerSonOrderVO;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderDealedParam implements Serializable {
+import com.rongyi.easy.rmmm.base.BaseParam;
+import com.rongyi.easy.rmmm.vo.SalerSonOrderVO;
+
+public class OrderDealedParam extends BaseParam implements Serializable {
 	/**
 	 * 
 	 */
@@ -19,6 +20,15 @@ public class OrderDealedParam implements Serializable {
 	private Integer userId;//卖家用户id
 	private Integer source = 1;//操作平台 1摩店 2商家后台
     private List<SalerSonOrderVO> sonOrderList = new ArrayList<>(); //商品详情
+    private String orderTotalPrice;//订单总价（包括邮费），用来计算一键改价
+
+	public String getOrderTotalPrice() {
+		return orderTotalPrice;
+	}
+
+	public void setOrderTotalPrice(String orderTotalPrice) {
+		this.orderTotalPrice = orderTotalPrice;
+	}
 
 	public Integer getUserId() {
 		return userId;

@@ -57,6 +57,14 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	private String jsessionid ;//摩店登录标识
 
 	private String shareCode;//邀请码
+	
+	private String faceImg;    //身份证正面照 
+	
+	private String backImg;   //身份证背面照 
+	
+	private String workImg;    //工作证照
+	
+	private String otherImg;   //其它照片
 
 
     public Integer getId() {
@@ -331,6 +339,30 @@ public Integer getIdentity() {
 	}
 	public void setJsessionid(String jsessionid) {
 		this.jsessionid = jsessionid;
+	}
+	public String getFaceImg() {
+		return faceImg;
+	}
+	public void setFaceImg(String faceImg) {
+		this.faceImg = faceImg;
+	}
+	public String getBackImg() {
+		return backImg;
+	}
+	public void setBackImg(String backImg) {
+		this.backImg = backImg;
+	}
+	public String getWorkImg() {
+		return workImg;
+	}
+	public void setWorkImg(String workImg) {
+		this.workImg = workImg;
+	}
+	public String getOtherImg() {
+		return otherImg;
+	}
+	public void setOtherImg(String otherImg) {
+		this.otherImg = otherImg;
 	}
 	
 	}
