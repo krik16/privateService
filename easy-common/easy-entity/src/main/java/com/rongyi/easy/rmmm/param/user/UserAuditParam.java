@@ -35,6 +35,45 @@ public class UserAuditParam extends BaseParam implements Serializable {
 
     private String brandId;//品牌Id
 
+    private String  faceImg;//（身份证正面照）
+
+    private String   backImg;//（身份证背面照）
+
+    private String workImg;//（工作照）
+
+    private String otherImg;//（其它）
+
+    public String getFaceImg() {
+        return faceImg;
+    }
+
+    public void setFaceImg(String faceImg) {
+        this.faceImg = faceImg;
+    }
+
+    public String getBackImg() {
+        return backImg;
+    }
+
+    public void setBackImg(String backImg) {
+        this.backImg = backImg;
+    }
+
+    public String getWorkImg() {
+        return workImg;
+    }
+
+    public void setWorkImg(String workImg) {
+        this.workImg = workImg;
+    }
+
+    public String getOtherImg() {
+        return otherImg;
+    }
+
+    public void setOtherImg(String otherImg) {
+        this.otherImg = otherImg;
+    }
 
     public String getTelPhone() {
         return telPhone;

@@ -53,7 +53,9 @@ public interface SensitiveWordsFilterService {
     	/** 关键词过滤类型：直播名称 **/
     	LIVE_NAME(10, 				"直播名称"),
     	/** 关键词过滤类型：买手简介 **/
-    	BUYER_INTRO(11, 			"买手简介");
+    	BUYER_INTRO(11, 			"买手简介"),
+		/** 关键词过滤类型：买手简介 **/
+		SMS_INTRO(12, 			"手机短信");
     	
     	private int id;
 		private String name;
