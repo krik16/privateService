@@ -1,11 +1,11 @@
 package com.rongyi.easy.coupon.entity;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.beans.Transient;
 import java.io.Serializable;
 import java.util.Date;
-
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * 老用户代金券

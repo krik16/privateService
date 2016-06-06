@@ -19,6 +19,12 @@ public class MyOrderParam implements Serializable{
 	
 	private String memberId;//微信用户id
 
+	private String orderSource;//订单来源，查询多个来源逗号分隔
+
+	private String createAtBegin;//创建时间开始值
+
+	private String createAtEnd;//创建时间结束值
+
 	public String getJsessionid() {
 		return jsessionid;
 	}
@@ -59,11 +65,41 @@ public class MyOrderParam implements Serializable{
 		this.memberId = memberId;
 	}
 
+	public String getOrderSource() {
+		return orderSource;
+	}
+
+	public void setOrderSource(String orderSource) {
+		this.orderSource = orderSource;
+	}
+
+	public String getCreateAtBegin() {
+		return createAtBegin;
+	}
+
+	public void setCreateAtBegin(String createAtBegin) {
+		this.createAtBegin = createAtBegin;
+	}
+
+	public String getCreateAtEnd() {
+		return createAtEnd;
+	}
+
+	public void setCreateAtEnd(String createAtEnd) {
+		this.createAtEnd = createAtEnd;
+	}
+
 	@Override
 	public String toString() {
-		return "MyOrderParam [jsessionid=" + jsessionid + ", status=" + status
-				+ ", currentPage=" + currentPage + ", pageSize=" + pageSize
-				+ ", memberId=" + memberId + "]";
+		return "MyOrderParam{" +
+				"jsessionid='" + jsessionid + '\'' +
+				", status='" + status + '\'' +
+				", currentPage='" + currentPage + '\'' +
+				", pageSize='" + pageSize + '\'' +
+				", memberId='" + memberId + '\'' +
+				", orderSource='" + orderSource + '\'' +
+				", createAtBegin='" + createAtBegin + '\'' +
+				", createAtEnd='" + createAtEnd + '\'' +
+				'}';
 	}
-	
 }
