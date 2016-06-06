@@ -8,6 +8,7 @@ import com.rongyi.easy.coupon.param.CouponCommodityParam;
 import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.malllife.param.user.SearchCommodityParms;
 import com.rongyi.easy.mcmc.*;
+import com.rongyi.easy.mcmc.entity.ThirdPartMcmcCommodity;
 import com.rongyi.easy.mcmc.param.SaleParam;
 import com.rongyi.easy.mcmc.vo.*;
 
@@ -222,5 +223,11 @@ public interface CommodityService {
     public ResponseVO topCommodityListBySaleId(Integer saleId, Integer flashSaleId);
 
 
-    public List<Commodity> selectCommodityByNumber(String number);
+    public ThirdPartMcmcCommodity selectByPrimaryKey(Integer id);
+
+    public Integer selectCountByArtNo(String artNo);
+
+    public List<ThirdPartMcmcCommodity> selectCommodityByArtNo(String artNo,Integer start,Integer size);
+
+    public List<ThirdPartMcmcCommodity> findByAraNo(String artNo);
 }

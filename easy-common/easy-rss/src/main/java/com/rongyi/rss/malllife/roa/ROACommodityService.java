@@ -12,6 +12,7 @@ package com.rongyi.rss.malllife.roa;
 import java.util.List;
 
 import com.rongyi.easy.mcmc.CommodityCategory;
+import com.rongyi.easy.mcmc.entity.ThirdPartMcmcCommodity;
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
@@ -186,5 +187,11 @@ public interface ROACommodityService {
 	 */
 	public ResponseVO getBrandsByMall(SearchCommodityBrandParam param);
 
-	public List<Commodity>  selectCommodityByNumber(String number);
+	public ThirdPartMcmcCommodity selectByPrimaryKey(Integer id);
+
+	public Integer selectCountByArtNo(String artNo);
+
+	public List<ThirdPartMcmcCommodity> selectCommodityByArtNo(String artNo,Integer start,Integer size);
+
+	public List<ThirdPartMcmcCommodity> findByAraNo(String artNo);
 }

@@ -6,18 +6,26 @@ import java.io.Serializable;
  * Created by xuying on 2016/6/6.
  */
 public class ThirdPartMcmcCommodity implements Serializable{
-
+    private Integer id;//主键
     private String poiId = "";//自动生成的POIID
     private String brandChsName = "";//品牌的中文名称
     private String brandEngName = "";//品牌的英文名称
-    private String title = "";//标题
-    private String artNo = "";//
-    private String orgPrice = "";
-    private String salePrice = "";
-    private String size = "";
-    private String color = "";
-    private String image = "";
-    private String info = "";
+    private String title = "";//商品名称
+    private String artNo = "";//商品款号
+    private String orgPrice = "";//原价
+    private String salePrice = "";//现价
+    private String size = "";//尺寸
+    private String color = "";//颜色
+    private String image = "";//图片
+    private String info = "";//商品参数
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getPoiId() {
         return poiId;
@@ -109,7 +117,7 @@ public class ThirdPartMcmcCommodity implements Serializable{
 
     @Override
     public String toString() {
-        return "ThirdPartMcmcCommodity [poiId=" + poiId + ", brandChsName=" + brandChsName + ", brandEngName=" + brandEngName
+        return "ThirdPartMcmcCommodity [poiId=" + poiId +",id=" +id  + ", brandChsName=" + brandChsName + ", brandEngName=" + brandEngName
                 + ", title=" + title + ", artNo=" + artNo + ", orgPrice=" + orgPrice + ", salePrice=" + salePrice
                 + ", size=" + size + ", color=" + color + ", image=" + image + ", info=" + info + "]";
     }
