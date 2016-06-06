@@ -92,6 +92,7 @@ public class SubOrderController extends BaseControllerV2 {
     @ResponseBody
     public ResponseData list(@RequestBody Map<String, Object> paramsMap, HttpServletRequest request) {
         ResponseData responseData;
+        List<OrderManagerVO> orderForms = null;
         try {
             LOGGER.info("子订单列表:paramsMap={}", paramsMap);
             permissionCheck(request, "ORDER_GOODSON_VIEW");
@@ -99,7 +100,7 @@ public class SubOrderController extends BaseControllerV2 {
             warpToParamMap(paramsMap);
             PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchListByMap(paramsMap);
 
-            List<OrderManagerVO> orderForms = pagingVO.getDataList();
+            orderForms = pagingVO.getDataList();
             if (orderForms == null)
                 orderForms = new ArrayList<>();
             int totalPage = pagingVO.getTotalSize();
@@ -107,7 +108,8 @@ public class SubOrderController extends BaseControllerV2 {
             responseData = ResponseData.success(orderForms, currentPage, Constant.PAGE.PAGESIZE, totalPage);
         } catch (BizException e) {
             LOGGER.error(e.getMessage());
-            responseData = ResponseData.success();
+            orderForms.clear();
+            responseData = ResponseData.success(orderForms);
         } catch (PermissionException e) {
             LOGGER.error(e.getMessage());
             e.printStackTrace();
@@ -296,7 +298,7 @@ public class SubOrderController extends BaseControllerV2 {
                 userInfoVO = roaMalllifeUserService.getByPhone(userPhone);
             } catch (Exception e) {
                 e.printStackTrace();
-                LOGGER.error("获取商品详情失败,message={}", e);
+                LOGGER.error("查询用户信息失败,message={}", e);
                 throw new BizException(ConstantEnum.EXCEPTION_INTERFACE);
             }
             if (userInfoVO == null || StringUtils.isBlank(userInfoVO.getUserId())) {
