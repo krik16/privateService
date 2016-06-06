@@ -1,6 +1,7 @@
 package com.rongyi.easy.rmmm.vo;
 
 import java.io.Serializable;
+import java.util.List;
 /**
  * 抄同款商品规格返回
  * @author user
@@ -15,24 +16,20 @@ public class CopyCommoditySpecVO implements Serializable{
 
 	private String columnName;//规格名
 	
-	private String columnValue;//规格名对应的值
+	private List<String> columnValue;//规格名对应的值
 
 	public String getColumnName() {
 		return columnName;
 	}
-
 	public void setColumnName(String columnName) {
 		this.columnName = columnName;
 	}
-
-	public String getColumnValue() {
+	public List<String> getColumnValue() {
 		return columnValue;
 	}
-
-	public void setColumnValue(String columnValue) {
+	public void setColumnValue(List<String> columnValue) {
 		this.columnValue = columnValue;
 	}
-
 	@Override
 	public String toString() {
 		return "CopyCommoditySpecVO [columnName=" + columnName
