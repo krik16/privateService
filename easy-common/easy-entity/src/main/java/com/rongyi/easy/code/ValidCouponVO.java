@@ -23,6 +23,7 @@ public class ValidCouponVO implements Serializable {
 		private String buyerName;
 		private String validStartAtStr;
 		private String validEndAtStr;
+		private Integer stock;
 
 		public String getName() {
 				return name;
@@ -115,6 +116,14 @@ public class ValidCouponVO implements Serializable {
 				this.validEndAtStr = validEndAtStr;
 		}
 
+		public Integer getStock() {
+				return stock;
+		}
+
+		public void setStock(Integer stock) {
+				this.stock = stock;
+		}
+
 		@Override
 		public String toString() {
 				final StringBuffer sb = new StringBuffer("ValidCouponVO{");
@@ -127,8 +136,11 @@ public class ValidCouponVO implements Serializable {
 				sb.append(", usageDesc='").append(usageDesc).append('\'');
 				sb.append(", activityName='").append(activityName).append('\'');
 				sb.append(", couponType=").append(couponType);
-				sb.append(", buyerName=").append(buyerName);
-				sb.append(", buyerPhone=").append(buyerPhone);
+				sb.append(", buyerPhone='").append(buyerPhone).append('\'');
+				sb.append(", buyerName='").append(buyerName).append('\'');
+				sb.append(", validStartAtStr='").append(validStartAtStr).append('\'');
+				sb.append(", validEndAtStr='").append(validEndAtStr).append('\'');
+				sb.append(", stock=").append(stock);
 				sb.append('}');
 				return sb.toString();
 		}
