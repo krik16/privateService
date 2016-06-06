@@ -11,13 +11,13 @@ import com.rongyi.easy.mcmc.mvc.DateJson.JsonDateSerializer;
 
 public class CommodityVO1 implements  Serializable {
 	private static final long serialVersionUID = -3022699601318372490L;
-	
+
 	private String id;//系统编号
 	private String name;//商品名称
-	private Integer status;//状态 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理 
+	private Integer status;//状态 0下架 1上架 (当前时间在上架时间和下架时间之间)2是删除3待上架4待处理
 	private String code;//商品编码
 	private Integer remain;//商品库存
-	
+
 	private String originalPrice;//商品原价
 	private String currentPrice;//商品现价
 	private List<CommodityVOByColor> specList;//商品规格列表
@@ -31,6 +31,7 @@ public class CommodityVO1 implements  Serializable {
 	private int identity = 5;//0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购6买手
 	private Integer terminalType = 1; // com.rongyi.easy.mcmc.constant.CommodityTerminalType常量定义
 	private String terminalTypeDesc = CommodityTerminalType.CommodityTerminalCommon.getName(terminalType);
+	private Date soldOutAt;
 
 	public String getId() {
 		return id;
@@ -121,17 +122,24 @@ public class CommodityVO1 implements  Serializable {
 	public Integer getTerminalType() {
 		return terminalType;
 	}
-	
+
 	public void setTerminalType(Integer terminalType) {
 		this.terminalType = terminalType;
 	}
-	
+
 	public String getTerminalTypeDesc() {
 		return terminalTypeDesc;
 	}
-	
+
 	public void setTerminalTypeDesc(String terminalTypeDesc) {
 		this.terminalTypeDesc = terminalTypeDesc;
 	}
-	
+
+	public Date getSoldOutAt() {
+		return soldOutAt;
+	}
+
+	public void setSoldOutAt(Date soldOutAt) {
+		this.soldOutAt = soldOutAt;
+	}
 }

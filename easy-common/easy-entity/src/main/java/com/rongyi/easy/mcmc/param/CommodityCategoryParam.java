@@ -1,26 +1,26 @@
-/**   
-* @Title: CommodityCategoryParam.java 
-* @Package com.rongyi.easy.mcmc.param 
-* @Description: TODO(用一句话描述该文件做什么) 
-* @author wzh   
-* @date 2015年9月23日 下午5:16:41 
-* @version V1.0   
+/**
+* @Title: CommodityCategoryParam.java
+* @Package com.rongyi.easy.mcmc.param
+* @Description: TODO(用一句话描述该文件做什么)
+* @author wzh
+* @date 2015年9月23日 下午5:16:41
+* @version V1.0
 */
 package com.rongyi.easy.mcmc.param;
 
 import java.util.List;
 
 /**
- * @ClassName: CommodityCategoryParam 
+ * @ClassName: CommodityCategoryParam
  * @Description: 查询商品热门分类参数
  * @author wzh
- * @date 2015年9月23日 下午5:16:41 
- *  
+ * @date 2015年9月23日 下午5:16:41
+ *
  */
 public class CommodityCategoryParam {
-	
+
 	private String id;//父类id
-	
+
 	private Integer type;//分类级别
 
 	//private List<String> ids;//分类id集合
@@ -30,6 +30,8 @@ public class CommodityCategoryParam {
 	private boolean popular=false;//是否是热门分类 true表示热门分类
 
 	private List<CommodityCategoryParam> categoryParamList;
+
+	private String flag;//1表示需要过滤没有商品的分类，2不需要
 
 	public String getId() {
 		return id;
@@ -79,6 +81,14 @@ public class CommodityCategoryParam {
 		this.categoryParamList = categoryParamList;
 	}
 
+	public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+
 	@Override
 	public String toString() {
 		return "CommodityCategoryParam{" +
@@ -87,6 +97,7 @@ public class CommodityCategoryParam {
 				", type=" + type +
 				", popularImg=" + popularImg +
 				", popular=" + popular +
+				", flag="+flag+
 				'}';
 	}
 }
