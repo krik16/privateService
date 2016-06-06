@@ -1,6 +1,7 @@
 package com.rongyi.rss.code;
 
 
+import com.rongyi.core.framework.exception.CodeServiceException;
 import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 import com.rongyi.easy.code.StatisticsValidCountVO;
 import com.rongyi.easy.code.ValidCouponVO;
@@ -59,7 +60,7 @@ public interface ValidCodeService {
      * @param code
      * @return
      */
-    public boolean validGiftCode(String code, String mallId,String shopId,String validUser,String identity);
+    public boolean validGiftCode(String code, String mallId,String shopId,String validUser,String identity) throws CodeServiceException;
 
     /**
      * 统计各个类型的总验码数量和当天验码数
