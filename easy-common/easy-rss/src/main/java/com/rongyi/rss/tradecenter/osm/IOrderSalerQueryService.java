@@ -54,4 +54,13 @@ public interface IOrderSalerQueryService {
 	 */
 	SellerOrderPriceChangeVO getPriceChangeReview(String orderNo,BigDecimal newOrderPrice) throws Exception;
 
+	/**
+	 * 昨日订单数统计
+	 * @param sellerId 卖家id
+	 * @param sellerType 1是导购 2是买手
+	 * @param shopId 店铺id
+	 * @return 订单数
+	 * @throws Exception
+	 */
+	Integer countOrderByParam(String sellerId,Integer sellerType,String shopId) throws Exception;
 }

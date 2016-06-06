@@ -183,13 +183,15 @@ public class SalerSonOrderVO implements Serializable{
 	@Override
 	public String toString() {
 		return "SalerSonOrderVO{" +
+				", sonOrderId='" + sonOrderId + '\'' +
+				", newPrice='" + newPrice + '\'' +
 				"commodityId='" + commodityId + '\'' +
+				", specId='" + specId + '\'' +
 				", commodityName='" + commodityName + '\'' +
 				", address='" + address + '\'' +
 				", num='" + num + '\'' +
 				", commodityPic='" + commodityPic + '\'' +
-				", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +
-				", sonOrderId='" + sonOrderId + '\'' +
+				", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +				
 				", sonOrderStatus='" + sonOrderStatus + '\'' +
 				", successRefund='" + successRefund + '\'' +
 				", refundType='" + refundType + '\'' +
@@ -198,9 +200,7 @@ public class SalerSonOrderVO implements Serializable{
 				", specColumnValues=" + specColumnValues +
 				", applicationId='" + applicationId + '\'' +
 				", commodityCommission='" + commodityCommission + '\'' +
-				", commodityCode='" + commodityCode + '\'' +
-				", newPrice='" + newPrice + '\'' +
-				", specId='" + specId + '\'' +
+				", commodityCode='" + commodityCode + '\'' +								
 				'}';
 	}
 }
