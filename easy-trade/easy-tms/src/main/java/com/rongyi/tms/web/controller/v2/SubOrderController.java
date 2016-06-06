@@ -288,12 +288,12 @@ public class SubOrderController extends BaseControllerV2 {
 
     private Map<String, Object> warpToParamMap(Map<String, Object> paramsMap) throws BizException {
         String commodityNo = (String) paramsMap.get("commodityNo");
-        String userName = (String) paramsMap.get("username");
+        String userPhone = (String) paramsMap.get("userPhone");
         //查询用户条件
         UserInfoVO userInfoVO;
-        if (StringUtils.isNotBlank(userName)) {
+        if (StringUtils.isNotBlank(userPhone)) {
             try {
-                userInfoVO = roaMalllifeUserService.getByPhone(userName);
+                userInfoVO = roaMalllifeUserService.getByPhone(userPhone);
             } catch (Exception e) {
                 e.printStackTrace();
                 LOGGER.error("获取商品详情失败,message={}", e);
