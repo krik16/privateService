@@ -153,6 +153,9 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
         List<PaySuccessResponse> responseList = new ArrayList<>();
         if (orderNums != null) {
             String[] orderNumArray = orderNums.split(",");
+            if(Constants.ORDER_TYPE.ORDER_TYPE_2 == orderType){
+
+            }
             String target = Constants.SOURCETYPE.COUPON;// 优惠券订单
             for(String orderNum : orderNumArray){
                 if (Constants.ORDER_TYPE.ORDER_TYPE_0 == orderType)// 商品订单

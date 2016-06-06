@@ -269,11 +269,21 @@ public class RpbServiceImpl implements IRpbService {
 
 	@Override
 	public Map<String, Object> getPaySign(MessageEvent event) {
+		LOGGER.info("获取支付签名,event={}",event.toString());
 		JSONObject jsonObject = JSONObject.fromObject(event);
-		LOGGER.info("支付签名请求，签名参数-->" + jsonObject.toString());
 		MessageEvent event2 = rpbEventService.messageToMessageEvent(jsonObject.toString());
 		Map<String, Object> resultMap = paymentService.getSendMessage(event2);
-		LOGGER.info("返回签名结果-->" + resultMap.toString());
+		LOGGER.info("返回签名结果,result={}",resultMap);
+		return resultMap;
+	}
+
+	@Override
+	public Map<String, Object> refund(MessageEvent event) throws TradeException{
+		LOGGER.info("申请退款，event={}",event);
+		JSONObject jsonObject = JSONObject.fromObject(event);
+		MessageEvent event2 = rpbEventService.messageToMessageEvent(jsonObject.toString());
+		Map<String, Object> resultMap = paymentService.getSendMessage(event2);
+		LOGGER.info("返回退款信息,result={}" + resultMap);
 		return resultMap;
 	}
 
