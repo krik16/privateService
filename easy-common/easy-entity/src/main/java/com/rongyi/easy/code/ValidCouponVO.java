@@ -21,6 +21,9 @@ public class ValidCouponVO implements Serializable {
 		private Integer couponType;
 		private String buyerPhone;
 		private String buyerName;
+		private String validStartAtStr;
+		private String validEndAtStr;
+
 		public String getName() {
 				return name;
 		}
@@ -94,6 +97,22 @@ public class ValidCouponVO implements Serializable {
 
 		public void setBuyerName(String buyerName) {
 				this.buyerName = buyerName;
+		}
+
+		public String getValidStartAtStr() {
+				return validStartAtStr;
+		}
+
+		public void setValidStartAtStr(String validStartAtStr) {
+				this.validStartAtStr = validStartAtStr;
+		}
+
+		public String getValidEndAtStr() {
+				return validEndAtStr;
+		}
+
+		public void setValidEndAtStr(String validEndAtStr) {
+				this.validEndAtStr = validEndAtStr;
 		}
 
 		@Override
