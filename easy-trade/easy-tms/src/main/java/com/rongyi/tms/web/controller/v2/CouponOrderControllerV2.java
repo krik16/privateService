@@ -146,8 +146,8 @@ public class CouponOrderControllerV2 extends BaseControllerV2 {
                     couponVO.setHbDiscount(avgHbDiscount.divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
                     couponVO.setRebateDisCount(avgRebateDiscount.doubleValue());
                     couponVO.setScoreDisCount(avgScoreDiscount.doubleValue());
-                    BigDecimal payAmount =avgPayAmount.subtract(avgRebateDiscount).subtract(avgScoreDiscount).subtract(avgHbDiscount.divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP));
-                    couponVO.setPayAmount(payAmount.compareTo(BigDecimal.ZERO)<0?0:payAmount.doubleValue());
+                    avgPayAmount =avgPayAmount.subtract(avgRebateDiscount).subtract(avgScoreDiscount).subtract(avgHbDiscount.divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP));
+                    couponVO.setPayAmount(avgPayAmount.compareTo(BigDecimal.ZERO)<0?0:avgPayAmount.doubleValue());
                     couponVO.setValidBeginDate(tCCouponVO.getValidBeginDate());
                     couponVO.setValidEndDate(tCCouponVO.getValidEndDate());
                     couponVOList.add(couponVO);
@@ -158,7 +158,8 @@ public class CouponOrderControllerV2 extends BaseControllerV2 {
                     couponVOList.get(couponVOList.size() - 1).setRebateDisCount(lastRebateDiscount.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
                     couponVOList.get(couponVOList.size() - 1).setScoreDisCount(lastScoreDiscount.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
                     //最后一笔实际支付金额=平均支付金额-(最后一笔红包优惠)-(最后一笔抵扣券优惠)-(最后一笔积分优惠)
-                    couponVOList.get(couponVOList.size() - 1).setPayAmount(avgPayAmount.subtract(lastHbDiscount.divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP)).subtract(lastRebateDiscount).subtract(lastScoreDiscount).doubleValue());
+                    avgPayAmount = avgPayAmount.subtract(lastHbDiscount.divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP)).subtract(lastRebateDiscount).subtract(lastScoreDiscount);
+                    couponVOList.get(couponVOList.size() - 1).setPayAmount(avgPayAmount.compareTo(BigDecimal.ZERO)<0?0:avgPayAmount.doubleValue());
                 }
 
             }
