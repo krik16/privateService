@@ -16,7 +16,7 @@ public class PushInfoDTO implements Serializable {
     private Integer sourcePlatform;        // 上传端 1.商家后台  2.摩店APP
     private Integer updateIdentity;        // 上传人身份  1商场管理员、2品牌管理员、3分公司、4店长、5导购、6买手
     private List<Integer> pushPlatform;    // 1.商家后台 2.摩店APP 3.摩店管理平台
-    private List<String> pushTarget;       // 推送对象 对象id
+    private List<Integer> pushTargets;       // 推送对象 对象id
 
     public Integer getSourcePlatform() {
         return sourcePlatform;
@@ -42,11 +42,11 @@ public class PushInfoDTO implements Serializable {
         this.pushPlatform = pushPlatform;
     }
 
-    public List<String> getPushTarget() {
-        return pushTarget;
+    public List<Integer> getPushTargets() {
+        return pushTargets;
     }
 
-    public void setPushTarget(List<String> pushTarget) {
-        this.pushTarget = pushTarget;
+    public void setPushTargets(List<Integer> pushTargets) {
+        this.pushTargets = pushTargets;
     }
 }

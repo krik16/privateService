@@ -1,5 +1,7 @@
 package com.rongyi.easy.msgcenter;
 
+import com.rongyi.easy.mcmc.Commodity;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -17,11 +19,13 @@ public class MessageDTO implements Serializable {
     private String messageType;               // 消息分类  1.商品类
     private String receiveDate;               // 接收时间
     private String pushDate;                  // 推送时间
+    private String createDate;                // 创建时间
     private String pushType;                  // 推送类型  1.系统推送 2.人工推送
     private List<String> relevantSeller;      // 对应卖家(店铺名称or买手账号)
     private String messageLink;               // 消息外链
     private String messageContent;            // 消息内容
     private PushInfoDTO pushInfoDTO;
+    private boolean isRead = false;           // 是否已读
 
     public String getTitle() {
         return title;
@@ -93,5 +97,29 @@ public class MessageDTO implements Serializable {
 
     public void setPushInfoDTO(PushInfoDTO pushInfoDTO) {
         this.pushInfoDTO = pushInfoDTO;
+    }
+
+    public boolean isRead() {
+        return isRead;
+    }
+
+    public void setIsRead(boolean isRead) {
+        this.isRead = isRead;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
+
+    public String generateMessageTitle(Commodity commodity) {
+        return "商品" + '"' + commodity.getName()+ '"' + "下架通知!";
+    }
+
+    public String generateOffReason(Commodity commodity) {
+        return "尊敬的用户，" + commodity.getName() + "商品由于" +  commodity.getReason() + "的原因，已下架！请修改后重新上传或致电客服400-040-8989。";
     }
 }
