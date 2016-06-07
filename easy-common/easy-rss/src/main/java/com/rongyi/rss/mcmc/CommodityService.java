@@ -8,6 +8,7 @@ import com.rongyi.easy.coupon.param.CouponCommodityParam;
 import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.malllife.param.user.SearchCommodityParms;
 import com.rongyi.easy.mcmc.*;
+import com.rongyi.easy.mcmc.entity.ThirdPartMcmcCommodity;
 import com.rongyi.easy.mcmc.param.SaleParam;
 import com.rongyi.easy.mcmc.vo.*;
 
@@ -120,9 +121,9 @@ public interface CommodityService {
      * @param status:商品的状态
      * @param pagesize：分页的条数
      */
-    
+
     public void updateCommodityByRegisterAtAndSoldOutAt(Date registerAt,Date soldOutAt, String status, int pagesize);
-    
+
 
     /***
      * 查询商品 一二三级分类
@@ -220,4 +221,13 @@ public interface CommodityService {
      * @return List<com.rongyi.easy.mcmc.vo.CommodityBuyerVO>
      */
     public ResponseVO topCommodityListBySaleId(Integer saleId, Integer flashSaleId);
+
+
+    public ThirdPartMcmcCommodity selectByPrimaryKey(Integer id);
+
+    public Integer selectCountByArtNo(String artNo);
+
+    public List<ThirdPartMcmcCommodity> selectCommodityByArtNo(String artNo,Integer start,Integer size);
+
+    public List<ThirdPartMcmcCommodity> findByAraNo(String artNo);
 }
