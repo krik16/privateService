@@ -26,7 +26,7 @@ public class SalerOrderParam implements Serializable {
 	 */
 
 	private String guideId;// 导购id
-	private String status;// 订单状态 订单状态  1待处理，2未付款，3已完成，4已关闭"（店铺）  6待处理，7未付款，8已完成，9已关闭 10买家在店铺的未付款订单",（导购）
+	private String status;// 订单状态 订单状态  1待处理，2未付款，3已完成，4已关闭"（店铺）  6待处理，7未付款，8已完成，9已关闭 10买家在店铺的未付款订单 11昨日的所有订单",（导购）
 
 	private String currentPage;// （要请求页）
 
