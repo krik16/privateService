@@ -1,6 +1,7 @@
 package com.rongyi.easy.rmmm.vo;
 
 import com.rongyi.easy.mcmc.entity.ThirdPartMcmcCommodity;
+
 import org.apache.commons.lang.StringUtils;
 
 import java.io.Serializable;
@@ -101,46 +102,44 @@ public class CopyCommodityVO implements Serializable{
 				+ commoditySpecList + "]";
 	}
 
-	public CopyCommodityVO toCopyCommodityVO (ThirdPartMcmcCommodity thirdPartMcmcCommodity){
-		CopyCommodityVO copyCommodityVO = new CopyCommodityVO();
-		if(null != thirdPartMcmcCommodity){
-			copyCommodityVO.setCommodityId(String.valueOf(thirdPartMcmcCommodity.getId()));//商品id
-			copyCommodityVO.setBrandCName(thirdPartMcmcCommodity.getBrandChsName());//中文品牌名
-			copyCommodityVO.setBrandEName(thirdPartMcmcCommodity.getBrandEngName());//英文品牌名
-			copyCommodityVO.setCommodityName(thirdPartMcmcCommodity.getTitle());//商品名称
-			copyCommodityVO.setCommodityNo(thirdPartMcmcCommodity.getArtNo());//商品款号
-			copyCommodityVO.setCommodityCurrentPrice(thirdPartMcmcCommodity.getSalePrice());//现价
-			copyCommodityVO.setCommodityOriginalPrice(thirdPartMcmcCommodity.getOrgPrice());//原价
+	public CopyCommodityVO(ThirdPartMcmcCommodity thirdPartMcmcCommodity){
+		if(thirdPartMcmcCommodity != null){
+			this.commodityId = String.valueOf(thirdPartMcmcCommodity.getId());//商品id
+			this.brandCName = thirdPartMcmcCommodity.getBrandChsName();//中文品牌名
+			this.brandEName = thirdPartMcmcCommodity.getBrandEngName();//英文品牌名
+			this.commodityName = thirdPartMcmcCommodity.getTitle();//商品名称
+			this.commodityNo = thirdPartMcmcCommodity.getArtNo();//商品款号
+			this.commodityCurrentPrice = thirdPartMcmcCommodity.getSalePrice();//现价
+			this.commodityOriginalPrice = thirdPartMcmcCommodity.getOrgPrice();//原价
 			List<CopyCommoditySpecVO> copyCommoditySpecVOs = new ArrayList<>();
 			if(StringUtils.isNotBlank(thirdPartMcmcCommodity.getSize())){
 				CopyCommoditySpecVO copyCommoditySpecVO = new CopyCommoditySpecVO();
-				copyCommoditySpecVO.setColumnName("尺寸");
+				copyCommoditySpecVO.setColumnName("尺寸");//规格名
 				List<String> columnValues = new ArrayList<>();
 				columnValues.add(thirdPartMcmcCommodity.getSize());
-				copyCommoditySpecVO.setColumnValue(columnValues);
+				copyCommoditySpecVO.setColumnValue(columnValues);//规格名称对应的值
 				copyCommoditySpecVOs.add(copyCommoditySpecVO);
 			}
 			if(StringUtils.isNotBlank(thirdPartMcmcCommodity.getColor())){
 				CopyCommoditySpecVO copyCommoditySpecVO = new CopyCommoditySpecVO();
-				copyCommoditySpecVO.setColumnName("颜色");
+				copyCommoditySpecVO.setColumnName("颜色");//规格名
 				List<String> columnValues = new ArrayList<>();
 				columnValues.add(thirdPartMcmcCommodity.getColor());
-				copyCommoditySpecVO.setColumnValue(columnValues);
+				copyCommoditySpecVO.setColumnValue(columnValues);//规格名称对应的值
 				copyCommoditySpecVOs.add(copyCommoditySpecVO);
 			}
+			this.commoditySpecList = copyCommoditySpecVOs;//规格集合
+			List<String> picList = new ArrayList<>();
 			if(StringUtils.isNotBlank(thirdPartMcmcCommodity.getImage())){
-				List<String> picList = new ArrayList<>();
 				picList.add(thirdPartMcmcCommodity.getImage());
-				copyCommodityVO.setCommodityPicList(picList);//图片
 			}
+			this.commodityPicList = picList;//商品图片
+			List<String> goodsParams = new ArrayList<>();
 			if(StringUtils.isNotBlank(thirdPartMcmcCommodity.getInfo())){
-				List<String> goodsParams = new ArrayList<>();
 				goodsParams.add(thirdPartMcmcCommodity.getInfo());
-				copyCommodityVO.setCommodityPicList(goodsParams);//商品参数
 			}
-
+			this.goodsParam = goodsParams;//商品参数
 		}
-
-       return copyCommodityVO;
 	}
+	
 }
