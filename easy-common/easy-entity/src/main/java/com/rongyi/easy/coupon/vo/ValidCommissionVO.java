@@ -115,6 +115,15 @@ public class ValidCommissionVO implements Serializable {
             private String phone;
             private String time;
             private BigDecimal currentPrice;
+            private String buyerName;
+
+            public String getBuyerName() {
+                return buyerName;
+            }
+
+            public void setBuyerName(String buyerName) {
+                this.buyerName = buyerName;
+            }
 
             public String getTitle() {
                 return title;
@@ -158,8 +167,15 @@ public class ValidCommissionVO implements Serializable {
 
             @Override
             public String toString() {
-                return "ValidCoupon [title=" + title + ", couponCode=" + couponCode + ", phone="
-                    + phone + ", time=" + time + ", currentPrice=" + currentPrice + "]";
+                final StringBuffer sb = new StringBuffer("ValidCoupon{");
+                sb.append("title='").append(title).append('\'');
+                sb.append(", couponCode='").append(couponCode).append('\'');
+                sb.append(", phone='").append(phone).append('\'');
+                sb.append(", time='").append(time).append('\'');
+                sb.append(", currentPrice=").append(currentPrice);
+                sb.append(", buyerName='").append(buyerName).append('\'');
+                sb.append('}');
+                return sb.toString();
             }
 
         }
@@ -167,9 +183,15 @@ public class ValidCommissionVO implements Serializable {
 
     @Override
     public String toString() {
-        return "ValidCommissionVO [totalPage=" + totalPage + ", pageSize=" + pageSize
-            + ", currpage=" + currpage + ", number=" + number + ", totalAmount=" + totalAmount
-            + ", myValidList=" + myValidList + "]";
+        final StringBuffer sb = new StringBuffer("ValidCommissionVO{");
+        sb.append("totalPage=").append(totalPage);
+        sb.append(", pageSize=").append(pageSize);
+        sb.append(", currpage=").append(currpage);
+        sb.append(", number=").append(number);
+        sb.append(", totalAmount=").append(totalAmount);
+        sb.append(", myValidList=").append(myValidList);
+        sb.append('}');
+        return sb.toString();
     }
 
 }

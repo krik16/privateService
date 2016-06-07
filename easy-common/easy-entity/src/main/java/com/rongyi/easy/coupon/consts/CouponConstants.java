@@ -175,4 +175,10 @@ public interface CouponConstants {
         int TS=1;//推送
         int FX=2;//分享红包
     }
+
+    interface MD_VALID_RECORD_TYPE{
+        int SHOP_COUPON=0;
+        int ACTIVITY_COUPON=2;
+        int GIFT_COUPON=1;
+    }
 }
