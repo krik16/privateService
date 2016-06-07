@@ -68,14 +68,15 @@ public class ExportOsmOrderExcel {
                     sheet.getRow(i + 2).getCell(4).setCellValue(vo.getMallName());
                     sheet.getRow(i + 2).getCell(5).setCellValue(vo.getShopName());
                     sheet.getRow(i + 2).getCell(6).setCellValue(vo.getRealAmount().subtract(vo.getDiscountFee()) == null ? "0" : vo.getRealAmount().subtract(vo.getDiscountFee()).toString());
-                    sheet.getRow(i + 2).getCell(7).setCellValue(vo.getCouponAmount() == null ? "0" : vo.getCouponAmount().toString());
-                    sheet.getRow(i + 2).getCell(8).setCellValue(vo.getIntegralAmount() == null ? "0" : vo.getIntegralAmount().toString());
-                    sheet.getRow(i + 2).getCell(9).setCellValue(vo.getPayAmount() == null ? "0" : vo.getPayAmount().toString());
-                    sheet.getRow(i + 2).getCell(10).setCellValue(convertStatus(vo.getStatus()));
-                    sheet.getRow(i + 2).getCell(11).setCellValue(convertOrderSource(vo.getOrderSource()));
-                    sheet.getRow(i + 2).getCell(12).setCellValue(convertPayChannel(vo.getPayChannel()));
-                    sheet.getRow(i + 2).getCell(13).setCellValue(DateTool.date2String(vo.getCreateAt(), DateTool.FORMAT_DATETIME2));
-                    sheet.getRow(i + 2).getCell(14).setCellValue(convertGuideType(vo.getGuideType()));
+                    sheet.getRow(i + 2).getCell(7).setCellValue(vo.getHbAmount() == null ? "0" : vo.getHbAmount().toString());
+                    sheet.getRow(i + 2).getCell(8).setCellValue(vo.getCouponAmount() == null ? "0" : vo.getCouponAmount().toString());
+                    sheet.getRow(i + 2).getCell(9).setCellValue(vo.getIntegralAmount() == null ? "0" : vo.getIntegralAmount().toString());
+                    sheet.getRow(i + 2).getCell(10).setCellValue(vo.getPayAmount() == null ? "0" : vo.getPayAmount().toString());
+                    sheet.getRow(i + 2).getCell(11).setCellValue(convertStatus(vo.getStatus()));
+                    sheet.getRow(i + 2).getCell(12).setCellValue(convertOrderSource(vo.getOrderSource()));
+                    sheet.getRow(i + 2).getCell(13).setCellValue(convertPayChannel(vo.getPayChannel()));
+                    sheet.getRow(i + 2).getCell(14).setCellValue(DateTool.date2String(vo.getCreateAt(), DateTool.FORMAT_DATETIME2));
+                    sheet.getRow(i + 2).getCell(15).setCellValue(convertGuideType(vo.getGuideType()));
                 }
             }
             String outFile = "商品订单记录_" + DateUtil.getCurrentDateYYYYMMDD() + ".xlsx";
@@ -107,7 +108,7 @@ public class ExportOsmOrderExcel {
     }
 
     private String convertGuideType(Integer guideType) {
-        String result = "--";
+        String result = "其他";
         if (guideType!=null){
             switch (guideType){
                 case 1 : result = "商家"; break;
@@ -118,7 +119,7 @@ public class ExportOsmOrderExcel {
     }
 
     private String convertPayChannel(Byte payChannel) {
-        String result = "--";
+        String result = "其他";
         if (payChannel!=null){
             switch (payChannel){
                 case 1:
@@ -130,7 +131,7 @@ public class ExportOsmOrderExcel {
     }
 
     private String convertOrderSource(Integer orderSource) {
-        String result = "--";
+        String result = "其他";
         if (orderSource!=null){
             switch (orderSource){
                 case 0: result = "微网站"; break;
@@ -143,7 +144,7 @@ public class ExportOsmOrderExcel {
     }
 
     private String convertStatus(String status) {
-        String result = "--";
+        String result = "其他";
         if (StringUtils.isNotBlank(status))
             switch (status) {
                 case "1" : result="未付款";break;
