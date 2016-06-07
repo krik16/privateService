@@ -462,6 +462,16 @@ public class SubOrderController extends BaseControllerV2 {
                 paramsMap.remove("commodityId");
             }
         }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("createAtBegin") && StringUtils.isBlank(paramsMap.get("createAtBegin").toString())) {
+                paramsMap.remove("createAtBegin");
+            }
+        }
+        if (null != paramsMap) {
+            if (null != paramsMap.get("createAtEnd") && StringUtils.isBlank(paramsMap.get("createAtEnd").toString())) {
+                paramsMap.remove("createAtEnd");
+            }
+        }
     }
 
     /**
