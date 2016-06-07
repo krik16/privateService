@@ -29,14 +29,14 @@ public interface ValidCodeService {
      * @param identity
      * @return
      */
-    public ValidCouponVO validSearchCoupon(String couponCode, String shopId, String mallId, Integer identity);
+    public ValidCouponVO validSearchCoupon(String couponCode, String shopId, String mallId, Integer identity) throws CodeServiceException;
 
     /**
      * 查询礼品码的信息
      * @param giftCode
      * @param mallId
      */
-    public ValidCouponVO validSearchGift(String giftCode, String mallId);
+    public ValidCouponVO validSearchGift(String giftCode, String mallId) throws CodeServiceException;
 
 
     /**
@@ -45,7 +45,7 @@ public interface ValidCodeService {
      * @param sessionUserInfo
      * @return
      */
-    public boolean validCouponCode(String code,SessionUserInfo sessionUserInfo);
+    public boolean validCouponCode(String code,SessionUserInfo sessionUserInfo) throws CodeServiceException;
 
     /**
      * 验证礼品码
@@ -53,7 +53,7 @@ public interface ValidCodeService {
      * @param sessionUserInfo
      * @return
      */
-    public boolean validGiftCode(String code, SessionUserInfo sessionUserInfo);
+    public boolean validGiftCode(String code, SessionUserInfo sessionUserInfo) ;
 
     /**
      * 验证礼品码
