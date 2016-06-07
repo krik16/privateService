@@ -49,7 +49,7 @@ public interface CommodityService {
 
     public ResponseResult commodityToShelves(String id, long shopId, int identity);
 
-    public ResponseResult commodityOffShelves(String id, long shopId, int identity);
+    public ResponseResult commodityOffShelves(String id, long shopId, int identity,String reason);
 
     public String editCommodity(CommodityVO commodityvo, long shopId, long brandId);
 
@@ -122,7 +122,7 @@ public interface CommodityService {
      */
 
     public void updateCommodityByRegisterAtAndSoldOutAt(Date registerAt,Date soldOutAt, String status, int pagesize);
-    
+
 
     /***
      * 查询商品 一二三级分类

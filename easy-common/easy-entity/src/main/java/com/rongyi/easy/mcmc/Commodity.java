@@ -6,6 +6,7 @@ import java.text.NumberFormat;
 import java.util.Date;
 import java.util.List;
 
+import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.beanutils.BeanUtils;
 import org.bson.types.ObjectId;
@@ -346,7 +347,7 @@ public class Commodity implements  Serializable,Cloneable{
 		this.freight = freight;
 	}
 	public Integer getTerminalType() {
-		return terminalType;
+		return null ==terminalType ? CommodityTerminalType.TERMINAL_TYPE_7:terminalType;
 	}
 	public void setTerminalType(Integer terminalType) {
 		this.terminalType = terminalType;
