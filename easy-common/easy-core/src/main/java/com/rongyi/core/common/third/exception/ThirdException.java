@@ -12,7 +12,7 @@ package com.rongyi.core.common.third.exception;/*
 public class ThirdException extends Exception{
 
     public ThirdException(){
-
+        super();
     }
 
     public ThirdException(String message) {
