@@ -103,7 +103,7 @@ public class CopyCommodityVO implements Serializable{
 
 	public CopyCommodityVO toCopyCommodityVO (ThirdPartMcmcCommodity thirdPartMcmcCommodity){
 		CopyCommodityVO copyCommodityVO = new CopyCommodityVO();
-		if(null !=thirdPartMcmcCommodity){
+		if(null != thirdPartMcmcCommodity){
 			copyCommodityVO.setCommodityId(String.valueOf(thirdPartMcmcCommodity.getId()));//商品id
 			copyCommodityVO.setBrandCName(thirdPartMcmcCommodity.getBrandChsName());//中文品牌名
 			copyCommodityVO.setBrandEName(thirdPartMcmcCommodity.getBrandEngName());//英文品牌名
@@ -111,9 +111,9 @@ public class CopyCommodityVO implements Serializable{
 			copyCommodityVO.setCommodityNo(thirdPartMcmcCommodity.getArtNo());//商品款号
 			copyCommodityVO.setCommodityCurrentPrice(thirdPartMcmcCommodity.getSalePrice());//现价
 			copyCommodityVO.setCommodityOriginalPrice(thirdPartMcmcCommodity.getOrgPrice());//原价
-			List<CopyCommoditySpecVO> copyCommoditySpecVOs=new ArrayList<>();
+			List<CopyCommoditySpecVO> copyCommoditySpecVOs = new ArrayList<>();
 			if(StringUtils.isNotBlank(thirdPartMcmcCommodity.getSize())){
-				CopyCommoditySpecVO copyCommoditySpecVO=new CopyCommoditySpecVO();
+				CopyCommoditySpecVO copyCommoditySpecVO = new CopyCommoditySpecVO();
 				copyCommoditySpecVO.setColumnName("尺寸");
 				List<String> columnValues = new ArrayList<>();
 				columnValues.add(thirdPartMcmcCommodity.getSize());
@@ -121,7 +121,7 @@ public class CopyCommodityVO implements Serializable{
 				copyCommoditySpecVOs.add(copyCommoditySpecVO);
 			}
 			if(StringUtils.isNotBlank(thirdPartMcmcCommodity.getColor())){
-				CopyCommoditySpecVO copyCommoditySpecVO=new CopyCommoditySpecVO();
+				CopyCommoditySpecVO copyCommoditySpecVO = new CopyCommoditySpecVO();
 				copyCommoditySpecVO.setColumnName("颜色");
 				List<String> columnValues = new ArrayList<>();
 				columnValues.add(thirdPartMcmcCommodity.getColor());
