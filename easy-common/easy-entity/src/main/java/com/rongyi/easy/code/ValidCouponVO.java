@@ -18,7 +18,15 @@ public class ValidCouponVO implements Serializable {
 		private String limitDesc;//使用限制
 		private String usageDesc;//使用说明
 		private String activityName;
-		private Integer couponType;
+		private Integer couponType;// 0:代金券 ;1：活动券；2：礼品；3：停车券
+		private String buyerPhone;
+		private String buyerName;
+		private String validStartAtStr;
+		private String validEndAtStr;
+		private Integer stock;
+		private Double currentPrice;
+		private Double originalPrice;
+
 		public String getName() {
 				return name;
 		}
@@ -78,6 +86,62 @@ public class ValidCouponVO implements Serializable {
 				this.couponType = couponType;
 		}
 
+		public String getBuyerPhone() {
+				return buyerPhone;
+		}
+
+		public void setBuyerPhone(String buyerPhone) {
+				this.buyerPhone = buyerPhone;
+		}
+
+		public String getBuyerName() {
+				return buyerName;
+		}
+
+		public void setBuyerName(String buyerName) {
+				this.buyerName = buyerName;
+		}
+
+		public String getValidStartAtStr() {
+				return validStartAtStr;
+		}
+
+		public void setValidStartAtStr(String validStartAtStr) {
+				this.validStartAtStr = validStartAtStr;
+		}
+
+		public String getValidEndAtStr() {
+				return validEndAtStr;
+		}
+
+		public void setValidEndAtStr(String validEndAtStr) {
+				this.validEndAtStr = validEndAtStr;
+		}
+
+		public Integer getStock() {
+				return stock;
+		}
+
+		public void setStock(Integer stock) {
+				this.stock = stock;
+		}
+
+		public Double getCurrentPrice() {
+				return currentPrice;
+		}
+
+		public void setCurrentPrice(Double currentPrice) {
+				this.currentPrice = currentPrice;
+		}
+
+		public Double getOriginalPrice() {
+				return originalPrice;
+		}
+
+		public void setOriginalPrice(Double originalPrice) {
+				this.originalPrice = originalPrice;
+		}
+
 		@Override
 		public String toString() {
 				final StringBuffer sb = new StringBuffer("ValidCouponVO{");
@@ -90,6 +154,13 @@ public class ValidCouponVO implements Serializable {
 				sb.append(", usageDesc='").append(usageDesc).append('\'');
 				sb.append(", activityName='").append(activityName).append('\'');
 				sb.append(", couponType=").append(couponType);
+				sb.append(", buyerPhone='").append(buyerPhone).append('\'');
+				sb.append(", buyerName='").append(buyerName).append('\'');
+				sb.append(", validStartAtStr='").append(validStartAtStr).append('\'');
+				sb.append(", validEndAtStr='").append(validEndAtStr).append('\'');
+				sb.append(", stock=").append(stock);
+				sb.append(", currentPrice=").append(currentPrice);
+				sb.append(", originalPrice=").append(originalPrice);
 				sb.append('}');
 				return sb.toString();
 		}
