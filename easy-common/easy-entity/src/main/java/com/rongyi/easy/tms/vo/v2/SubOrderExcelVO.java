@@ -10,7 +10,7 @@ import java.util.Map;
  **/
 public class SubOrderExcelVO {
 
-    private String cartOrderNo;
+    private String orderCartNo;
 
     private String commodityNo;
 
@@ -49,12 +49,12 @@ public class SubOrderExcelVO {
 
     private String createAt;
 
-    public String getCartOrderNo() {
-        return cartOrderNo;
+    public String getOrderCartNo() {
+        return orderCartNo;
     }
 
-    public void setCartOrderNo(String cartOrderNo) {
-        this.cartOrderNo = cartOrderNo;
+    public void setOrderCartNo(String orderCartNo) {
+        this.orderCartNo = orderCartNo;
     }
 
     public String getCommodityNo() {
@@ -205,7 +205,7 @@ public class SubOrderExcelVO {
     @Override
     public String toString() {
         return "SubOrderExcelVO{" +
-                "cartOrderNo='" + cartOrderNo + '\'' +
+                "orderCartNo='" + orderCartNo + '\'' +
                 ", commodityNo='" + commodityNo + '\'' +
                 ", createAtBegin=" + createAtBegin +
                 ", createAtEnd=" + createAtEnd +
