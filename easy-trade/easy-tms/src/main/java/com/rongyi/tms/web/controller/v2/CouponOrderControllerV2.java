@@ -146,7 +146,8 @@ public class CouponOrderControllerV2 extends BaseControllerV2 {
                     couponVO.setHbDiscount(avgHbDiscount.divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
                     couponVO.setRebateDisCount(avgRebateDiscount.doubleValue());
                     couponVO.setScoreDisCount(avgScoreDiscount.doubleValue());
-                    couponVO.setPayAmount(avgPayAmount.subtract(avgRebateDiscount).subtract(avgScoreDiscount).subtract(avgHbDiscount.divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP)).doubleValue());
+                    BigDecimal payAmount =avgPayAmount.subtract(avgRebateDiscount).subtract(avgScoreDiscount).subtract(avgHbDiscount.divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP));
+                    couponVO.setPayAmount(payAmount.compareTo(BigDecimal.ZERO)<0?0:payAmount.doubleValue());
                     couponVO.setValidBeginDate(tCCouponVO.getValidBeginDate());
                     couponVO.setValidEndDate(tCCouponVO.getValidEndDate());
                     couponVOList.add(couponVO);
