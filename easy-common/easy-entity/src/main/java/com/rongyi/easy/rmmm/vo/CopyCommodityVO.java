@@ -1,6 +1,10 @@
 package com.rongyi.easy.rmmm.vo;
 
+import com.rongyi.easy.mcmc.entity.ThirdPartMcmcCommodity;
+import org.apache.commons.lang.StringUtils;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,9 +13,9 @@ import java.util.List;
  *
  */
 public class CopyCommodityVO implements Serializable{
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private String commodityId;//商品id
@@ -96,6 +100,46 @@ public class CopyCommodityVO implements Serializable{
 				+ ", goodsParam=" + goodsParam + ", commoditySpecList="
 				+ commoditySpecList + "]";
 	}
-	
-	
+
+	public CopyCommodityVO toCopyCommodityVO (ThirdPartMcmcCommodity thirdPartMcmcCommodity,CopyCommodityVO copyCommodityVO){
+		if(null !=thirdPartMcmcCommodity){
+			copyCommodityVO.setCommodityId(String.valueOf(thirdPartMcmcCommodity.getId()));
+			copyCommodityVO.setBrandCName(thirdPartMcmcCommodity.getBrandChsName());
+			copyCommodityVO.setBrandEName(thirdPartMcmcCommodity.getBrandEngName());
+			copyCommodityVO.setCommodityName(thirdPartMcmcCommodity.getTitle());
+			copyCommodityVO.setCommodityNo(thirdPartMcmcCommodity.getArtNo());
+			copyCommodityVO.setCommodityCurrentPrice(thirdPartMcmcCommodity.getSalePrice());
+			copyCommodityVO.setCommodityOriginalPrice(thirdPartMcmcCommodity.getOrgPrice());
+			List<CopyCommoditySpecVO> copyCommoditySpecVOs=new ArrayList<>();
+			if(StringUtils.isNotBlank(thirdPartMcmcCommodity.getSize())){
+				CopyCommoditySpecVO copyCommoditySpecVO=new CopyCommoditySpecVO();
+				copyCommoditySpecVO.setColumnName("尺寸");
+				List<String> columnValues=new ArrayList<>();
+				columnValues.add(thirdPartMcmcCommodity.getSize());
+				copyCommoditySpecVO.setColumnValue(columnValues);
+				copyCommoditySpecVOs.add(copyCommoditySpecVO);
+			}
+			if(StringUtils.isNotBlank(thirdPartMcmcCommodity.getColor())){
+				CopyCommoditySpecVO copyCommoditySpecVO=new CopyCommoditySpecVO();
+				copyCommoditySpecVO.setColumnName("颜色");
+				List<String> columnValues=new ArrayList<>();
+				columnValues.add(thirdPartMcmcCommodity.getColor());
+				copyCommoditySpecVO.setColumnValue(columnValues);
+				copyCommoditySpecVOs.add(copyCommoditySpecVO);
+			}
+			if(StringUtils.isNotBlank(thirdPartMcmcCommodity.getImage())){
+				List<String> picList=new ArrayList<>();
+				picList.add(thirdPartMcmcCommodity.getImage());
+				copyCommodityVO.setCommodityPicList(picList);
+			}
+			if(StringUtils.isNotBlank(thirdPartMcmcCommodity.getInfo())){
+				List<String> goodsParams=new ArrayList<>();
+				goodsParams.add(thirdPartMcmcCommodity.getInfo());
+				copyCommodityVO.setCommodityPicList(goodsParams);
+			}
+
+		}
+
+       return copyCommodityVO;
+	}
 }
