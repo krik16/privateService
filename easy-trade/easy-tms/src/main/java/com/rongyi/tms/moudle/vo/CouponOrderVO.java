@@ -62,7 +62,10 @@ public class CouponOrderVO implements Serializable {
      * 优惠位图 1=使用红包  2=使用积分 4=使用抵扣券 后续继续加
      */
     private Byte discountBitmap;
-    
+
+
+	private Integer hbDiscount;
+
     /**
      * 红包券码
      */
@@ -77,8 +80,23 @@ public class CouponOrderVO implements Serializable {
      * 抵扣券
      */
     private String rebateCode;
+
+	/**
+	 * 抵扣券抵扣金额
+	 */
+	private  Integer rebateDiscount;
     
     private String couponId;
+
+	private Integer payChannel;
+
+	private Integer source;
+
+	private Double payAmount;
+
+	private String payNo;
+
+	private Double scoreDiscount;
     
 	public Long getId() {
 		return id;
@@ -199,5 +217,60 @@ public class CouponOrderVO implements Serializable {
 	public void setCouponId(String couponId) {
 		this.couponId = couponId;
 	}
-	
+
+	public String getPayNo() {
+		return payNo;
+	}
+
+	public void setPayNo(String payNo) {
+		this.payNo = payNo;
+	}
+
+	public Integer getPayChannel() {
+		return payChannel;
+	}
+
+	public void setPayChannel(Integer payChannel) {
+		this.payChannel = payChannel;
+	}
+
+	public Integer getSource() {
+		return source;
+	}
+
+	public void setSource(Integer source) {
+		this.source = source;
+	}
+
+	public Double getPayAmount() {
+		return payAmount;
+	}
+
+	public void setPayAmount(Double payAmount) {
+		this.payAmount = payAmount;
+	}
+
+	public Double getScoreDiscount() {
+		return scoreDiscount;
+	}
+
+	public void setScoreDiscount(Double scoreDiscount) {
+		this.scoreDiscount = scoreDiscount;
+	}
+
+	public Integer getRebateDiscount() {
+		return rebateDiscount;
+	}
+
+	public void setRebateDiscount(Integer rebateDiscount) {
+		this.rebateDiscount = rebateDiscount;
+	}
+
+	public Integer getHbDiscount() {
+		return hbDiscount;
+	}
+
+	public void setHbDiscount(Integer hbDiscount) {
+		this.hbDiscount = hbDiscount;
+	}
 }

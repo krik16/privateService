@@ -4,7 +4,9 @@ import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.common.util.DateTool;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.ExcelUtil;
+import com.rongyi.easy.mcmc.vo.CommodityVO;
 import com.rongyi.easy.rmmm.vo.OrderManagerVO;
+import com.rongyi.rss.malllife.roa.ROACommodityService;
 import com.rongyi.rss.tradecenter.osm.IOrderQueryService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -24,21 +26,23 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by hebo on 2016/1/12.
+ *
  * 导出商品订单
  */
 @Component
-public class ExportOsmOrderExcel {
+public class ExportSubOrderExcel {
 
     @Autowired
     private IOrderQueryService iOrderQueryService;
 
+    @Autowired
+    ROACommodityService commodityService;
 
     public void exportExcel(HttpServletRequest request, HttpServletResponse response, Map<String, Object> paramsMap) {
         try
         {
             String path = request.getSession().getServletContext().getRealPath("/");
-            InputStream myxls = new FileInputStream(path + "excel/OsmOrderExcel.xlsx");
+            InputStream myxls = new FileInputStream(path + "excel/SubOrderExcel.xlsx");
             XSSFWorkbook wb = new XSSFWorkbook(myxls);
             XSSFSheet sheet = wb.getSheetAt(0);
             XSSFCellStyle bodyStyle = wb.createCellStyle();
@@ -54,32 +58,38 @@ public class ExportOsmOrderExcel {
             if (CollectionUtils.isNotEmpty(orderForms)) {
                 for (int i = 2; i <= orderForms.size() + 2; i++) {
                     sheet.createRow(i);
-                    for (int j = 0; j <= 15; j++) {
+                    for (int j = 0; j <= 17; j++) {
                         sheet.getRow(i).createCell(j);
                         sheet.getRow(i).getCell(j).setCellStyle(bodyStyle);
                     }
                 }
                 for (int i = 0; i < orderForms.size(); i++) {
                     OrderManagerVO vo = orderForms.get(i);
-                    sheet.getRow(i + 2).getCell(0).setCellValue(vo.getOrderCartNo());
-                    sheet.getRow(i + 2).getCell(1).setCellValue(vo.getOrderNo());
-                    sheet.getRow(i + 2).getCell(2).setCellValue(vo.getSellerAccount());
-                    sheet.getRow(i + 2).getCell(3).setCellValue(vo.getUsername());
-                    sheet.getRow(i + 2).getCell(4).setCellValue(vo.getMallName());
-                    sheet.getRow(i + 2).getCell(5).setCellValue(vo.getShopName());
-                    sheet.getRow(i + 2).getCell(6).setCellValue(vo.getRealAmount().subtract(vo.getDiscountFee()) == null ? "0" : vo.getRealAmount().subtract(vo.getDiscountFee()).toString());
-                    sheet.getRow(i + 2).getCell(7).setCellValue(vo.getHbAmount() == null ? "0" : vo.getHbAmount().toString());
-                    sheet.getRow(i + 2).getCell(8).setCellValue(vo.getCouponAmount() == null ? "0" : vo.getCouponAmount().toString());
-                    sheet.getRow(i + 2).getCell(9).setCellValue(vo.getIntegralAmount() == null ? "0" : vo.getIntegralAmount().toString());
-                    sheet.getRow(i + 2).getCell(10).setCellValue(vo.getPayAmount() == null ? "0" : vo.getPayAmount().toString());
-                    sheet.getRow(i + 2).getCell(11).setCellValue(convertStatus(vo.getStatus()));
-                    sheet.getRow(i + 2).getCell(12).setCellValue(convertOrderSource(vo.getOrderSource()));
-                    sheet.getRow(i + 2).getCell(13).setCellValue(convertPayChannel(vo.getPayChannel()));
-                    sheet.getRow(i + 2).getCell(14).setCellValue(DateTool.date2String(vo.getCreateAt(), DateTool.FORMAT_DATETIME2));
-                    sheet.getRow(i + 2).getCell(15).setCellValue(convertGuideType(vo.getGuideType()));
+                    sheet.getRow(i + 2).getCell(0).setCellValue(vo.getOrderNo());
+//                    if(vo.getCommodityMid()!= null && vo.getCommoditySpecMid() != null) {
+//                        CommodityVO commodityVO = commodityService.getCommoditySpecInfoById(vo.getCommodityMid(), vo.getCommoditySpecMid());
+//                        if(commodityVO != null) {
+//                            sheet.getRow(i + 2).getCell(1).setCellValue(commodityVO.getCommodityName());
+//                        }
+//                    }
+//                    sheet.getRow(i + 2).getCell(2).setCellValue(vo.getUnitPrice());
+//                    sheet.getRow(i + 2).getCell(3).setCellValue(vo.getQuantity());
+                    sheet.getRow(i + 2).getCell(4).setCellValue(vo.getSellerAccount());
+                    sheet.getRow(i + 2).getCell(5).setCellValue(vo.getUsername());
+                    sheet.getRow(i + 2).getCell(6).setCellValue(vo.getMallName());
+                    sheet.getRow(i + 2).getCell(7).setCellValue(vo.getShopName());
+                    sheet.getRow(i + 2).getCell(8).setCellValue(vo.getRealAmount() == null ? "0" : vo.getRealAmount().toString());
+                    sheet.getRow(i + 2).getCell(9).setCellValue(vo.getCouponAmount() == null ? "0" : vo.getCouponAmount().toString());
+                    sheet.getRow(i + 2).getCell(10).setCellValue(vo.getIntegralAmount()== null ? "0" : vo.getIntegralAmount().toString());
+                    sheet.getRow(i + 2).getCell(11).setCellValue(vo.getPayAmount()== null ? "0" : vo.getPayAmount().toString());
+                    sheet.getRow(i + 2).getCell(12).setCellValue(convertStatus(vo.getStatus()));
+                    sheet.getRow(i + 2).getCell(13).setCellValue(convertOrderSource(vo.getOrderSource()));
+                    sheet.getRow(i + 2).getCell(14).setCellValue(convertPayChannel(vo.getPayChannel()));
+                    sheet.getRow(i + 2).getCell(15).setCellValue(DateTool.date2String(vo.getCreateAt(), DateTool.FORMAT_DATETIME2));
+                    sheet.getRow(i + 2).getCell(16).setCellValue(convertGuideType(vo.getGuideType()));
                 }
             }
-            String outFile = "商品订单记录_" + DateUtil.getCurrentDateYYYYMMDD() + ".xlsx";
+            String outFile = "商品子订单记录_" + DateUtil.getCurrentDateYYYYMMDD() + ".xlsx";
             ExcelUtil.exportExcel(response, wb, outFile);
         } catch (Exception e) {
             e.printStackTrace();
@@ -91,24 +101,24 @@ public class ExportOsmOrderExcel {
         int pageSize = 1000;
         int TOTAL_SIZE = paramsMap.containsKey("pageSize")?Integer.valueOf(paramsMap.get("pageSize").toString()):5000;
         int currentPage = 1;
-        for (int i=0; i< TOTAL_SIZE / pageSize; i++){
-            paramsMap.put("pageSize", pageSize);
-            paramsMap.put("currentPage", currentPage);
-            PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchListByMap(paramsMap);
-            List<OrderManagerVO> pageData = pagingVO.getDataList();
-            if (pageData!=null) {
-                orderForms.addAll(pageData);
-                if (pageData.size()< pageSize)
-                    break;
-            }else
-                break;
-            currentPage++;
-        }
+//        for (int i=0; i< TOTAL_SIZE / pageSize; i++){
+//            paramsMap.put("pageSize", pageSize);
+//            paramsMap.put("currentPage", currentPage);
+//            PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchSubListByMap(paramsMap);
+//            List<OrderManagerVO> pageData = pagingVO.getDataList();
+//            if (pageData!=null) {
+//                orderForms.addAll(pageData);
+//                if (pageData.size()< pageSize)
+//                    break;
+//            }else
+//                break;
+//            currentPage++;
+//        }
         return orderForms;
     }
 
     private String convertGuideType(Integer guideType) {
-        String result = "其他";
+        String result = "--";
         if (guideType!=null){
             switch (guideType){
                 case 1 : result = "商家"; break;
@@ -131,7 +141,7 @@ public class ExportOsmOrderExcel {
     }
 
     private String convertOrderSource(Integer orderSource) {
-        String result = "其他";
+        String result = "--";
         if (orderSource!=null){
             switch (orderSource){
                 case 0: result = "微网站"; break;
@@ -144,7 +154,7 @@ public class ExportOsmOrderExcel {
     }
 
     private String convertStatus(String status) {
-        String result = "其他";
+        String result = "--";
         if (StringUtils.isNotBlank(status))
             switch (status) {
                 case "1" : result="未付款";break;

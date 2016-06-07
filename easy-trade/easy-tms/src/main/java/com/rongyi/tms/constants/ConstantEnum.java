@@ -163,6 +163,13 @@ public enum ConstantEnum {
     COMMISSION_ADD_INVITE_NOT_FOUND("1019208","未找到对应的邀请人信息，不增加佣金"),
     COMMISSION_ADD_NOT_FIRST("1019209","此笔返佣不是首笔返佣,不增加佣金"),
 
+    LIST_QUERY_EXCEPTION("1019210","列表查询失败"),
+    DETAIL_QUERY_EXCEPTION("1019211","详情查询失败"),
+    EXCEPTION_LIMIT_COUNT("1019212","报表导出数据超出上限,请重新过滤后再选择导出"),
+
+    RESULT_IS_EMPTY("1019213","查询结果为空"),
+    EXCEPTION_INTERFACE("1019214","接口异常"),
+
     EXCEL_LIMIT_COUNT(5000,"交易明细报表导出限制总数");
     interface ACCOUNT_STATUS{
         int ACCOUNT_STATUS0 = 0;//登陆账号和支付账号正常
