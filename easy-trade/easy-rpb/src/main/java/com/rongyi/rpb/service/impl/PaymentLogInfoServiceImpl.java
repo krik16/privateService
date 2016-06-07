@@ -8,11 +8,13 @@ import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.vo.PayAccountUseTotal;
 import com.rongyi.easy.rpb.vo.PaySuccessResponse;
+import com.rongyi.rpb.Exception.TradeException;
 import com.rongyi.rpb.constants.Constants;
 import com.rongyi.rpb.mq.Sender;
 import com.rongyi.rpb.service.PaymentLogInfoService;
 import com.rongyi.rpb.service.PaymentService;
 import com.rongyi.rpb.service.RpbEventService;
+import com.rongyi.rpb.service.WeixinPayService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,9 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
 
     @Autowired
     RpbEventService rpbEventService;
+
+    @Autowired
+    WeixinPayService weixinPayService;
 
     @Override
     public Map<String, String> insert(PaymentLogInfo logInfo) {
@@ -99,7 +104,7 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
     @Override
     public boolean insertPayNotify(PaymentLogInfo paymentLogInfo, Integer tradeType, Integer status, String payChannel) {
         Integer realPayChannel = paymentService.getRealPayChannel(Integer.valueOf(payChannel));
-        LOGGER.info("第三方支付成功通知更新付款状态并记录付款事件,insertPayNotify payNo={},tradeNo={},payChannel={},realPayChannel={}", paymentLogInfo.getOutTradeNo(), paymentLogInfo.getTrade_no(), payChannel, realPayChannel);
+        LOGGER.info("支付成功通知更新付款状态并记录付款事件,insertPayNotify payNo={},tradeNo={},payChannel={},realPayChannel={}", paymentLogInfo.getOutTradeNo(), paymentLogInfo.getTrade_no(), payChannel, realPayChannel);
         try {
             PaymentEntity paymentEntity = paymentService.selectByPayNoAndPayChannelAndTradeType(paymentLogInfo.getOutTradeNo(), realPayChannel, tradeType, null);
             if (paymentEntity != null) {
@@ -118,19 +123,28 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
                         }
                         insertGetId(paymentLogInfo);
                     }
-                    String orderNums = paymentService.getOrderNumStrsByPayNo(paymentLogInfo.getOutTradeNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
+
+//                    String orderNums = paymentService.getOrderNumStrsByPayNo(paymentLogInfo.getOutTradeNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
                     paymentService.updateListStatus(paymentLogInfo.getOutTradeNo(), tradeType, status, realPayChannel);// 修改付款单状态
-                    paySuccessToMessage(paymentLogInfo.getOutTradeNo(), paymentLogInfo.getBuyer_email(), orderNums, withLockPaymentEntity.getOrderType(), payChannel);
-                    LOGGER.info("更新付款单状态，记录付款事件成功，payNo={}", withLockPaymentEntity.getPayNo());
+                    if (Constants.ORDER_TYPE.ORDER_TYPE_2 == withLockPaymentEntity.getOrderType()) {//通知第三方业务
+                        weixinPayService.payNotifyThird(withLockPaymentEntity);
+                    } else {//通知交易中心
+                        paySuccessToMessage(paymentLogInfo.getOutTradeNo(), paymentLogInfo.getBuyer_email(), withLockPaymentEntity.getOrderNum(), withLockPaymentEntity.getOrderType(), payChannel);
+                    }
+                    LOGGER.info("更新付款单状态，记录付款事件，通知订单业务成功，payNo={}", withLockPaymentEntity.getPayNo());
                     return true;
                 }
             }
             LOGGER.warn("支付单号未查询到未支付状态付款记录，忽略此笔支付通知,payNo={}", paymentLogInfo.getOutTradeNo());
-        } catch (Exception e) {
+        } catch (TradeException e){
+            LOGGER.warn(e.getMessage());
+        }catch (Exception e) {
+            LOGGER.error("支付通知处理失败",e);
             e.printStackTrace();
         }
         return false;
     }
+
 
     private boolean validateRepeatPay(String payNo, PaymentLogInfo paymentLogInfo, Integer payChannel) {
         boolean bool = validateByTradeNoAndPayNo(paymentLogInfo.getTrade_no(), paymentLogInfo.getOutTradeNo());
@@ -153,13 +167,14 @@ public class PaymentLogInfoServiceImpl extends BaseServiceImpl implements Paymen
         List<PaySuccessResponse> responseList = new ArrayList<>();
         if (orderNums != null) {
             String[] orderNumArray = orderNums.split(",");
-            if(Constants.ORDER_TYPE.ORDER_TYPE_2 == orderType){
+            if (Constants.ORDER_TYPE.ORDER_TYPE_2 == orderType) {
 
             }
             String target = Constants.SOURCETYPE.COUPON;// 优惠券订单
-            for(String orderNum : orderNumArray){
-                if (Constants.ORDER_TYPE.ORDER_TYPE_0 == orderType)// 商品订单
+            for (String orderNum : orderNumArray) {
+                if (Constants.ORDER_TYPE.ORDER_TYPE_0 == orderType) {// 商品订单
                     target = Constants.SOURCETYPE.OSM;
+                }
                 MessageEvent event = rpbEventService.getMessageEvent(out_trade_no, orderNum, null, payChannel, buyerEmail, Constants.SOURCETYPE.RPB, target, PaymentEventType.BUYER_PAID);
                 String response = sender.convertSendAndReceive(event);
                 if (response == null)

@@ -1,7 +1,16 @@
 package com.rongyi.rpb.service.impl;
 
+import com.rongyi.core.Exception.TradeException;
+import com.rongyi.core.bean.ResponseData;
+import com.rongyi.core.common.PropertyConfigurer;
+import com.rongyi.core.common.third.exception.ThirdException;
+import com.rongyi.core.common.third.md5.Md5Util;
+import com.rongyi.core.common.third.rsa.MalllifeRsaUtil;
 import com.rongyi.core.common.util.DateUtil;
+import com.rongyi.core.common.util.HttpUtil;
+import com.rongyi.core.common.util.StringUtil;
 import com.rongyi.core.constant.PaymentEventType;
+import com.rongyi.core.constant.TradeConstantEnum;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
@@ -19,6 +28,7 @@ import com.rongyi.rpb.service.*;
 import com.rongyi.rpb.unit.TimeExpireUnit;
 import com.rongyi.rpb.unit.WeixinPayUnit;
 import com.rongyi.rss.rpb.OrderNoGenService;
+import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -64,6 +74,9 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 
     @Autowired
     WeixinPayUnit weixinPayUnit;
+
+    @Autowired
+    PropertyConfigurer propertyConfigurer;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WeixinPayServiceImpl.class);
 
@@ -174,7 +187,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
 
     @Override
     public void closeOrder(String payNo,Integer weixinMchId) {
-        weixinPayUnit.closeOrder(payNo,weixinMchId);
+        weixinPayUnit.closeOrder(payNo, weixinMchId);
         paymentService.deleteByPayNo(payNo);
     }
 
@@ -196,21 +209,8 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
                     LOGGER.info("付款记录不存在,忽略该条退款，继续后面退款,orderNo={}",paymentEntity.getOrderNum());
                     continue;
                 }
-                Map<String, Object> refundResultMap = weixinRefund(oldPaymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), oldPaymentEntity.getAmountMoney().doubleValue(), paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,oldPaymentEntity.getWeixinMchId());
-                if (Constants.RESULT.SUCCESS.equals(refundResultMap.get("result")) || ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr().equals(refundResultMap.get("result"))) {
-                    paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
-                    paymentEntity.setFinishTime(DateUtil.getCurrDateTime());
-                    paymentService.updateByPrimaryKeySelective(paymentEntity);
-                    String target = Constants.SOURCETYPE.OSM;
-                    if (Constants.ORDER_TYPE.ORDER_TYPE_1 == oldPaymentEntity.getOrderType()) {
-                        target = Constants.SOURCETYPE.COUPON;
-                    }
-                    List<PaymentItemEntity> itemList = paymentItemService.selectByPaymentId(paymentEntity.getId());
-                    String orderDetailNum = paymentItemService.getDetailNum(itemList);
-                    MessageEvent event = rpbEventService.getMessageEvent(paymentEntity.getPayNo(), paymentEntity.getOrderNum(), orderDetailNum, paymentEntity.getPayChannel().toString(), null,
-                            Constants.SOURCETYPE.RPB, target, PaymentEventType.REFUND);
-                    sender.convertAndSend(event);
-                } else {
+                boolean result = doRefundAndNotify(oldPaymentEntity,paymentEntity);
+                if(!result){
                     failList.add(paymentEntity.getPayNo());
                 }
             }
@@ -220,4 +220,109 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
         }
     }
 
+    @Override
+    public boolean doRefundAndNotify(PaymentEntity oldPaymentEntity,PaymentEntity paymentEntity){
+        boolean result = false;
+        try {
+            Map<String, Object> refundResultMap = weixinRefund(oldPaymentEntity.getPayNo(), paymentEntity.getAmountMoney().doubleValue(), oldPaymentEntity.getAmountMoney().doubleValue(), paymentEntity.getPayNo(), Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1,oldPaymentEntity.getWeixinMchId());
+            if (Constants.RESULT.SUCCESS.equals(refundResultMap.get("result")) || ConstantEnum.WEIXIN_REFUND_RESULT_PROCESSING.getCodeStr().equals(refundResultMap.get("result"))) {
+                paymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS2);
+                paymentEntity.setFinishTime(DateUtil.getCurrDateTime());
+                paymentService.updateByPrimaryKeySelective(paymentEntity);
+                if (Constants.ORDER_TYPE.ORDER_TYPE_2 == paymentEntity.getOrderType()) {//退款通知第三方系统
+                    refundNotifyThird(paymentEntity);
+                } else {//退款通知交易中心系统
+                    String target = Constants.SOURCETYPE.OSM;
+                    if (Constants.ORDER_TYPE.ORDER_TYPE_1 == oldPaymentEntity.getOrderType()) {
+                        target = Constants.SOURCETYPE.COUPON;
+                    }
+                    List<PaymentItemEntity> itemList = paymentItemService.selectByPaymentId(paymentEntity.getId());
+                    String orderDetailNum = paymentItemService.getDetailNum(itemList);
+                    MessageEvent event = rpbEventService.getMessageEvent(paymentEntity.getPayNo(), paymentEntity.getOrderNum(), orderDetailNum, paymentEntity.getPayChannel().toString(), null,
+                            Constants.SOURCETYPE.RPB, target, PaymentEventType.REFUND);
+                    sender.convertAndSend(event);
+                }
+                result = true;
+            }
+        }catch (TradeException e){
+            LOGGER.warn(e.getMessage());
+            e.printStackTrace();
+        }catch (Exception e){
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
+
+    }
+
+    /**
+     * 支付成功通知第三方
+     * @param paymentEntity
+     */
+    @Override
+    public void payNotifyThird(PaymentEntity paymentEntity){
+        try {
+            ResponseData responseData = notifyThird(paymentEntity, ConstantEnum.THIRD_NOTIFY_TYPE_0.getCodeStr());
+            if(responseData == null || responseData.getMeta() == null || 0 != responseData.getMeta().getErrno()){
+                throw new TradeException();
+            }
+        }catch (ThirdException | TradeException e){
+            LOGGER.warn("第三方支付结果处理失败，暂记录日志，不做业务处理", e);
+            e.printStackTrace();
+            throw new TradeException(TradeConstantEnum.EXCEPTION_THIRD_PAY_NOTIFY.getCodeStr(),TradeConstantEnum.EXCEPTION_THIRD_PAY_NOTIFY.getValueStr());
+        }catch (Exception e){
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 退款成功通知第三方
+     * @param paymentEntity
+     */
+    @Override
+    public void refundNotifyThird(PaymentEntity paymentEntity){
+        try {
+            ResponseData responseData = notifyThird(paymentEntity, ConstantEnum.THIRD_NOTIFY_TYPE_1.getCodeStr());
+            if(responseData == null || responseData.getMeta() == null || 0 != responseData.getMeta().getErrno()){
+                throw new TradeException();
+            }
+        }catch (ThirdException | TradeException e){
+            LOGGER.error("第三方退款结果处理失败，暂记录日志，不做业务处理", e);
+            e.printStackTrace();
+            throw new TradeException(TradeConstantEnum.EXCEPTION_THIRD_PAY_NOTIFY.getCodeStr(),TradeConstantEnum.EXCEPTION_THIRD_PAY_NOTIFY.getValueStr());
+        }catch (Exception e){
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 通知第三方支付/退款结果
+     * @param paymentEntity PaymentEntity
+     * @param type 0:支付,1:退款
+     * @throws ThirdException
+     */
+    private ResponseData notifyThird(PaymentEntity paymentEntity,String type) throws ThirdException {
+            Map<String,String> paramMap = new HashMap<>();
+            paramMap.put("channel", TradeConstantEnum.PHP_SCORE_CHANNEL_TOKEN.getValueStr());
+            paramMap.put("order_id", paymentEntity.getOrderNum());
+            paramMap.put("payment_no", paymentEntity.getPayNo());
+            paramMap.put("status", "0");//支付成功默认为0/否则给1
+            paramMap.put("type",type);
+            String timeStamp = DateUtil.getCurrDateTime().toString();
+            String preStr = StringUtil.createLinkString(paramMap);
+            String dataEncrypt = MalllifeRsaUtil.encryptionStr(preStr, TradeConstantEnum.PHP_SCORE_PUBLIC_KEY.getValueStr());
+            String str = "data=" + dataEncrypt + "&timeStamp=" + timeStamp + "&channel=" + TradeConstantEnum.PHP_SCORE_CHANNEL_TOKEN.getCodeStr() + "&token=" + TradeConstantEnum.PHP_SCORE_CHANNEL_TOKEN.getValueStr();
+            String md5Sign = Md5Util.GetMD5Code(str);
+            Map<String,String> resultMap = new HashMap<>();
+            resultMap.put("data", dataEncrypt);
+            resultMap.put("timeStamp", timeStamp);
+            resultMap.put("channel", TradeConstantEnum.SCORE_STORE_CHANNEL_TOKEN.getCodeStr());
+            resultMap.put("sign", md5Sign);
+            String url = propertyConfigurer.getProperty("PHP_SCORE_STORE_NOTYFY_URL");
+            String result = HttpUtil.httpPOST(url, resultMap);
+            JSONObject resultJson = JSONObject.fromObject(result);
+            return  (ResponseData)JSONObject.toBean(resultJson);
+    }
 }
