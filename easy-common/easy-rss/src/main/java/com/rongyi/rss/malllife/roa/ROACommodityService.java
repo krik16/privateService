@@ -13,6 +13,7 @@ import java.util.List;
 
 import com.rongyi.easy.mcmc.CommodityCategory;
 import com.rongyi.easy.mcmc.entity.ThirdPartMcmcCommodity;
+import com.rongyi.easy.rmmm.vo.CommodityByNoVO;
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
@@ -187,11 +188,33 @@ public interface ROACommodityService {
 	 */
 	public ResponseVO getBrandsByMall(SearchCommodityBrandParam param);
 
+	/**
+	 * 根据id查询第三方的商品
+	 * @param id
+	 * @return
+	 */
 	public ThirdPartMcmcCommodity selectByPrimaryKey(Integer id);
 
+	/**
+	 * 根据款号查询第三方商品的总数
+	 * @param artNo
+	 * @return
+	 */
 	public Integer selectCountByArtNo(String artNo);
 
+	/**
+	 * 根据款号分页查询商品
+	 * @param artNo
+	 * @param start
+	 * @param size
+	 * @return
+	 */
 	public List<ThirdPartMcmcCommodity> selectCommodityByArtNo(String artNo,Integer start,Integer size);
 
-	public List<ThirdPartMcmcCommodity> findByAraNo(String artNo);
+	/**
+	 * 根据款号模糊配置款号
+	 * @param artNo
+	 * @return
+	 */
+	public List<CommodityByNoVO> findByAraNo(String artNo);
 }
