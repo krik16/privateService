@@ -1,5 +1,6 @@
 package com.rongyi.rss.rule;
 
+import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.easy.tradecenter.param.BizzValidHistoryParam;
 import com.rongyi.easy.tradecenter.vo.BizzValidHistoryVO;
 
@@ -19,7 +20,7 @@ public interface ICouponCheckService
      * @param source 校验来源（PA/APP）
      * @param sellerId 校验人id
      */
-    boolean checkCoupon(String couponCode, String mallId, String shopId, Long useMode, String source, Integer sellerId);
+    ResponseResult checkCoupon(String couponCode, String mallId, String shopId, Long useMode, String source, Integer sellerId);
 
     /**
      * 查询验券记录
