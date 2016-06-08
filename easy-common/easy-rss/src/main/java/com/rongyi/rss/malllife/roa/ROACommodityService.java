@@ -63,7 +63,7 @@ public interface ROACommodityService {
 
 	public ResponseResult commodityToShelves(String id, long shopId, int identity);
 
-	public ResponseResult commodityOffShelves(String id, long shopId, int identity);
+	public ResponseResult commodityOffShelves(String id, long shopId, int identity,String reason);
 
 	public String editCommodity(CommodityVO commodityvo, long shopId, long brandId);
 
