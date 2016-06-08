@@ -49,7 +49,7 @@ public interface CommodityService {
 
     public ResponseResult commodityToShelves(String id, long shopId, int identity);
 
-    public ResponseResult commodityOffShelves(String id, long shopId, int identity);
+    public ResponseResult commodityOffShelves(String id, long shopId, int identity,String reason);
 
     public String editCommodity(CommodityVO commodityvo, long shopId, long brandId);
 
@@ -120,9 +120,9 @@ public interface CommodityService {
      * @param status:商品的状态
      * @param pagesize：分页的条数
      */
-    
+
     public void updateCommodityByRegisterAtAndSoldOutAt(Date registerAt,Date soldOutAt, String status, int pagesize);
-    
+
 
     /***
      * 查询商品 一二三级分类
@@ -212,6 +212,8 @@ public interface CommodityService {
     public List<CommodityCategory> selectCategory(int type,boolean isPopular);
 
     public PagingVO<Commodity> findCommdityList(SearchCommodityParms searchCommodityParms);
+
+    public List<String>  selectCommodityByNameAndCode(String name,String code);
 
     /**
      * 根据特卖ID获取前3（暂定）个商品列表
