@@ -13,7 +13,7 @@ public class ValidRecordVO implements Serializable{
     private String title;//券名称
     private String couponCode;//券码
     private Date useTime;//验证时间
-    private String source;//订单来源 0为容易逛，1为微网站，2为终端机，3其他
+    private String source;//订单来源 0为容易逛，1为微网站，2为终端机，3其他,4微信
     private String userPhone;//买家手机号
     private String checkerName;//验证人名字
     private Integer checkerUserId;//验证人id

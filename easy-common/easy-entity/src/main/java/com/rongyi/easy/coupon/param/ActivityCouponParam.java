@@ -1,7 +1,10 @@
 package com.rongyi.easy.coupon.param;
 
+import com.rongyi.easy.coupon.entity.CouponShop;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Description:
@@ -56,6 +59,8 @@ public class ActivityCouponParam implements Serializable{
     private String limitDesc;
 
     private String remark;
+
+    private List<CouponShop> couponShops;
 
     public String getId() {
         return id;
@@ -217,6 +222,14 @@ public class ActivityCouponParam implements Serializable{
         this.joinEndAt = joinEndAt;
     }
 
+    public List<CouponShop> getCouponShops() {
+        return couponShops;
+    }
+
+    public void setCouponShops(List<CouponShop> couponShops) {
+        this.couponShops = couponShops;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("ActivityCouponParam{");
@@ -240,6 +253,7 @@ public class ActivityCouponParam implements Serializable{
         sb.append(", usageDesc='").append(usageDesc).append('\'');
         sb.append(", limitDesc='").append(limitDesc).append('\'');
         sb.append(", remark='").append(remark).append('\'');
+        sb.append(", couponShops=").append(couponShops);
         sb.append('}');
         return sb.toString();
     }
