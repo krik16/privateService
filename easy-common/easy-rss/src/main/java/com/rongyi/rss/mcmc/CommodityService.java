@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.rongyi.core.common.PagingVO;
+import com.rongyi.core.constant.SrcType;
 import com.rongyi.easy.coupon.param.CouponCommodityParam;
 import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.malllife.param.user.SearchCommodityParms;
@@ -233,6 +234,17 @@ public interface CommodityService {
     public List<ThirdPartMcmcCommodity> selectCommodityByArtNo(String artNo,Integer start,Integer size);
 
     public List<CommodityByNoVO> findByAraNo(String artNo);
+
+    /**
+     * 获取某个时间戳之后新增的商品数量
+     *
+     * @param mallMId 商场ID
+     * @param shopMId 店铺ID
+     * @param ts      时间戳（单位：毫秒）
+     * @param srcType 来源类型
+     * @return 商品数量
+     */
+    public ResponseVO selectCommodityCountByTs(String mallMId, String shopMId, long ts, SrcType srcType);
 
     public  ResponseVO selectSpecById(String categoryId);
 }
