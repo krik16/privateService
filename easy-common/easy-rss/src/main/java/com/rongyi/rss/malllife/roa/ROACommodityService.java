@@ -14,10 +14,12 @@ import java.util.List;
 import com.rongyi.easy.mcmc.CommodityCategory;
 import com.rongyi.easy.mcmc.entity.ThirdPartMcmcCommodity;
 import com.rongyi.easy.rmmm.vo.CommodityByNoVO;
+
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.core.constant.SrcType;
 import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.malllife.vo.CommodityBuyerVO;
 import com.rongyi.easy.malllife.vo.ShopCommodityVO;
@@ -217,6 +219,15 @@ public interface ROACommodityService {
 	 * @return
 	 */
 	public List<CommodityByNoVO> findByAraNo(String artNo);
-
+    /**
+     * 获取某个时间戳之后新增的商品数量
+     *
+     * @param mallMId 商场ID
+     * @param shopMId 店铺ID
+     * @param ts      时间戳（单位：毫秒）
+     * @param srcType 来源类型
+     * @return 商品数量
+     */
+    public ResponseVO selectCommodityCountByTs(String mallMId, String shopMId, long ts, int srcType);
 	public ResponseVO  selectSpecById(String categoryId);
 }
