@@ -22,7 +22,6 @@ public class BizzValidHistoryParam implements Serializable{
     private Date useTimeBegin;//验证开始时间
     private Date useTimeEnd;//验证结束时间
     private List<String> couponIds;
-    private String checkShopId;//核销店铺id
     /**
      * 0:代金券；1：活动券；2：礼品；3：停车券类
      */
@@ -48,7 +47,6 @@ public class BizzValidHistoryParam implements Serializable{
         sb.append(", shopMids=").append(shopMids);
         sb.append(", recordStart=").append(recordStart);
         sb.append(", dateStatus=").append(dateStatus);
-        sb.append(", checkShopId=").append(checkShopId);
         sb.append('}');
         return sb.toString();
     }
@@ -193,14 +191,5 @@ public class BizzValidHistoryParam implements Serializable{
 
     public void setType(Integer type) {
         this.type = type;
-    }
-    public String getCheckShopId()
-    {
-        return checkShopId;
-    }
-
-    public void setCheckShopId(String checkShopId)
-    {
-        this.checkShopId = checkShopId;
     }
 }
