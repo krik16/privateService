@@ -233,4 +233,6 @@ public interface CommodityService {
     public List<ThirdPartMcmcCommodity> selectCommodityByArtNo(String artNo,Integer start,Integer size);
 
     public List<CommodityByNoVO> findByAraNo(String artNo);
+
+    public  ResponseVO selectSpecById(String categoryId);
 }
