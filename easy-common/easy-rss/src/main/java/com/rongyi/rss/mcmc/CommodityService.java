@@ -215,6 +215,8 @@ public interface CommodityService {
 
     public PagingVO<Commodity> findCommdityList(SearchCommodityParms searchCommodityParms);
 
+    public List<String>  selectCommodityByNameAndCode(String name,String code);
+
     /**
      * 根据特卖ID获取前3（暂定）个商品列表
      *

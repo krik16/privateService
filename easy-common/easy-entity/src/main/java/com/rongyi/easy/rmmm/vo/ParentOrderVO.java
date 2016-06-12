@@ -117,6 +117,10 @@ public class ParentOrderVO implements Serializable {
 
 	private BigDecimal newPayAmount;//支付金额新字段（payAmount字段只有在状态不等于1和5的情况下才会赋值，无法通用，新加字段）
 
+	private BigDecimal commidityTotalPice;//商品总价
+
+	private BigDecimal orderTotalPrice;//订单总价
+
 	public String getExpressOrderInfoId() {
 		return expressOrderInfoId;
 	}
@@ -708,6 +712,22 @@ public class ParentOrderVO implements Serializable {
 
 	public void setNewPayAmount(BigDecimal newPayAmount) {
 		this.newPayAmount = newPayAmount;
+	}
+
+	public BigDecimal getOrderTotalPrice() {
+		return orderTotalPrice;
+	}
+
+	public void setOrderTotalPrice(BigDecimal orderTotalPrice) {
+		this.orderTotalPrice = orderTotalPrice;
+	}
+
+	public BigDecimal getCommidityTotalPice() {
+		return commidityTotalPice;
+	}
+
+	public void setCommidityTotalPice(BigDecimal commidityTotalPice) {
+		this.commidityTotalPice = commidityTotalPice;
 	}
 
 	@Override

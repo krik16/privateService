@@ -23,6 +23,10 @@ public class BizzValidHistoryParam implements Serializable{
     private Date useTimeEnd;//验证结束时间
     private List<String> couponIds;
     private String checkShopId;//核销店铺id
+    /**
+     * 0:代金券；1：活动券；2：礼品；3：停车券类
+     */
+    private Integer type;
 
     @Override
     public String toString() {
@@ -38,9 +42,10 @@ public class BizzValidHistoryParam implements Serializable{
         sb.append(", userPhone='").append(userPhone).append('\'');
         sb.append(", useTimeBegin=").append(useTimeBegin);
         sb.append(", useTimeEnd=").append(useTimeEnd);
-        sb.append(", couponIds=").append("");
-        sb.append(", mallMids=").append("");
-        sb.append(", shopMids=").append("");
+        sb.append(", couponIds=").append(couponIds);
+        sb.append(", type=").append(type);
+        sb.append(", mallMids=").append(mallMids);
+        sb.append(", shopMids=").append(shopMids);
         sb.append(", recordStart=").append(recordStart);
         sb.append(", dateStatus=").append(dateStatus);
         sb.append(", checkShopId=").append(checkShopId);
@@ -78,7 +83,7 @@ public class BizzValidHistoryParam implements Serializable{
     }
 
     public Integer getCurrentPage() {
-        return currentPage;
+        return currentPage==null?1:currentPage;
     }
 
     public List<String> getCouponIds() {
@@ -182,6 +187,13 @@ public class BizzValidHistoryParam implements Serializable{
         this.recordStart = recordStart;
     }
 
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
     public String getCheckShopId()
     {
         return checkShopId;
