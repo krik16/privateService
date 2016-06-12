@@ -97,5 +97,11 @@ public interface CouponCodeService {
 
     public int batchUpdateCouponCode(List<CouponCode> couponCodes);
 
+    /**
+     * 根据券码获知券的类型
+     * @param code
+     * @return
+     */
+    public Integer getCouponTypeByCode(String code);
 
 }
