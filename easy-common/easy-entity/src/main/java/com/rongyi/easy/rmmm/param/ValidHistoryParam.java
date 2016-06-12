@@ -13,6 +13,16 @@ public class ValidHistoryParam implements Serializable {
     private Integer date;// 时间（0所有时间，1当天，2当周，3当月，4昨天）
     private Integer status;//1我的核销 2店铺核销
     private Integer type;//0:店铺券；2：礼品券；1：活动券
+    private String shopId;
+    private String mallId;
+
+    public String getMallId() {
+        return mallId;
+    }
+
+    public void setMallId(String mallId) {
+        this.mallId = mallId;
+    }
 
     public String getCurrentPage() {
         return currentPage;
@@ -54,6 +64,14 @@ public class ValidHistoryParam implements Serializable {
         this.type = type;
     }
 
+    public String getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("ValidHistoryParam{");
@@ -62,6 +80,8 @@ public class ValidHistoryParam implements Serializable {
         sb.append(", date=").append(date);
         sb.append(", status=").append(status);
         sb.append(", type=").append(type);
+        sb.append(", shopId='").append(shopId).append('\'');
+        sb.append(", mallId='").append(mallId).append('\'');
         sb.append('}');
         return sb.toString();
     }
