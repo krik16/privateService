@@ -422,6 +422,13 @@ public interface Constants {
         String MALLSHOP_COUPON = "MALLSHOP_COUPON";// 摩店优惠券
     }
 
+    interface CODE_LENGTH{
+        int COUPON_CODE=12;
+        int INVITE_CODE=6;
+        int GIFT_CODE=8;
+    }
+
+
     interface UdField {
         String UCONPONSIDS = "uConponsIds";// 优惠券增加和修改
         String DCONPONSIDS = "dConponsIds";// 优惠券删除

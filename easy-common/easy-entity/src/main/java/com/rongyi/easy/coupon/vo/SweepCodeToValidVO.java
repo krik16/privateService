@@ -91,5 +91,21 @@ public class SweepCodeToValidVO implements Serializable{
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
+
+		@Override
+		public String toString() {
+				final StringBuffer sb = new StringBuffer("SweepCodeToValidVO{");
+				sb.append("code='").append(code).append('\'');
+				sb.append(", unUsedNum=").append(unUsedNum);
+				sb.append(", codeType='").append(codeType).append('\'');
+				sb.append(", originalPrice=").append(originalPrice);
+				sb.append(", currentPrice=").append(currentPrice);
+				sb.append(", suggest='").append(suggest).append('\'');
+				sb.append(", codeNum=").append(codeNum);
+				sb.append(", phone='").append(phone).append('\'');
+				sb.append(", errorNo='").append(errorNo).append('\'');
+				sb.append(", title='").append(title).append('\'');
+				sb.append('}');
+				return sb.toString();
+		}
 }
