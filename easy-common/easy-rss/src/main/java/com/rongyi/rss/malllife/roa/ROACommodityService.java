@@ -217,4 +217,6 @@ public interface ROACommodityService {
 	 * @return
 	 */
 	public List<CommodityByNoVO> findByAraNo(String artNo);
+
+	public ResponseVO  selectSpecById(String categoryId);
 }
