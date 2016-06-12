@@ -120,6 +120,7 @@ public class MessageDTO implements Serializable {
     }
 
     public String generateOffReason(Commodity commodity) {
-        return "尊敬的用户，" + commodity.getName() + "商品由于" +  commodity.getReason() + "的原因，已下架！请修改后重新上传或致电客服400-040-8989。";
+        return "尊敬的用户，" + commodity.getName() + "商品由于" +  commodity.getReason() +
+                "的原因，已下架！请修改后重新上传或致电客服400-040-8989。";
     }
 }
