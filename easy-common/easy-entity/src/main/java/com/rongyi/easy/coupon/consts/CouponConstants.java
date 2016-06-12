@@ -181,4 +181,12 @@ public interface CouponConstants {
         int ACTIVITY_COUPON=2;
         int GIFT_COUPON=1;
     }
+    interface MD_VALID_DATE_TYPE{
+        //0所有时间，1当天，2当周，3当月，4昨天
+        int ALL=0;
+        int TODAY=1;
+        int WEEK=2;
+        int MONTH=3;
+        int YESTODAY=4;
+    }
 }

@@ -70,6 +70,16 @@ public interface ValidCodeService {
      */
     public StatisticsValidCountVO statisticsValidCount(BizzValidHistoryParam param,SessionUserInfo sessionUserInfo);
 
+
+    /**
+     * 摩店 统计礼品券验证记录接口
+     * @param param
+     * @param mallId
+     * @param shopId
+     * @return
+     */
+    public int giftCount(BizzValidHistoryParam param, String mallId, String shopId);
+
     /**
      * 获取礼品验证列表
      * @param param
@@ -77,4 +87,13 @@ public interface ValidCodeService {
      * @return
      */
     public BizzValidHistoryVO queryGiftValidList(BizzValidHistoryParam param, SessionUserInfo sessionUserInfo);
+
+    /**
+     * 获取礼品验证列表
+     * @param param
+     * @param mallId
+     * @param shopId
+     * @return
+     */
+    public BizzValidHistoryVO queryGiftValidList(BizzValidHistoryParam param, String mallId, String shopId);
 }
