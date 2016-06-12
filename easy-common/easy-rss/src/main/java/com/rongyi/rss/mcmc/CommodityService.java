@@ -244,7 +244,7 @@ public interface CommodityService {
      * @param srcType 来源类型
      * @return 商品数量
      */
-    public ResponseVO selectCommodityCountByTs(String mallMId, String shopMId, long ts, SrcType srcType);
+    public ResponseVO selectCommodityCountByTs(String mallMId, String shopMId, long ts, int srcType);
 
     public  ResponseVO selectSpecById(String categoryId);
 }
