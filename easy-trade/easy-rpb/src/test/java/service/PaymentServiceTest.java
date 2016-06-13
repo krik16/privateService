@@ -292,19 +292,19 @@ public class PaymentServiceTest extends BaseTest {
     }
 
     @Test
-    @Rollback(false)
+//    @Rollback(false)
     public void testPayNotify() {
 //        PaymentEntity withLockPaymentEntity = paymentService.selectByWithLock(6279);
         PaymentLogInfo paymentLogInfo = new PaymentLogInfo();
-        paymentLogInfo.setOutTradeNo("0041892623360160232");
+        paymentLogInfo.setOutTradeNo("0061300156160135508");
         paymentLogInfo.setTrade_no("4009822001201604184963066587");
         paymentLogInfo.setTradeMode("1");
         paymentLogInfo.setReplayFlag(2);
         paymentLogInfo.setRequest_time(DateUtil.getCurrDateTime());
         paymentLogInfo.setBuyer_type(0);// 买家
         paymentLogInfo.setEventType(Constants.EVENT_TYPE.EVENT_TYPE1);
-        paymentLogInfo.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0);
+        paymentLogInfo.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE2);
         paymentLogInfoService.insertPayNotify(paymentLogInfo, Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE0, Constants.PAYMENT_STATUS.STAUS2, PaymentEventType.WEIXIN_PAY);
-        //TODO 验证事务和行锁是否有效，检查状态是否正常
     }
+
 }
