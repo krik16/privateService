@@ -116,7 +116,10 @@ public class CopyCommodityVO implements Serializable{
 				CopyCommoditySpecVO copyCommoditySpecVO = new CopyCommoditySpecVO();
 				copyCommoditySpecVO.setColumnName("尺寸");//规格名
 				List<String> columnValues = new ArrayList<>();
-				columnValues.add(thirdPartMcmcCommodity.getSize());
+				String[] sizes = thirdPartMcmcCommodity.getSize().split(",");
+				for(int i=0;i<sizes.length;i++){
+					columnValues.add(sizes[i]);//尺寸处理
+				}
 				copyCommoditySpecVO.setColumnValue(columnValues);//规格名称对应的值
 				copyCommoditySpecVOs.add(copyCommoditySpecVO);
 			}
@@ -124,19 +127,33 @@ public class CopyCommodityVO implements Serializable{
 				CopyCommoditySpecVO copyCommoditySpecVO = new CopyCommoditySpecVO();
 				copyCommoditySpecVO.setColumnName("颜色");//规格名
 				List<String> columnValues = new ArrayList<>();
-				columnValues.add(thirdPartMcmcCommodity.getColor());
+				String[] colors = thirdPartMcmcCommodity.getColor().split(",");
+				for(int i=0;i<colors.length;i++){
+					columnValues.add(colors[i]);//颜色处理
+				}
 				copyCommoditySpecVO.setColumnValue(columnValues);//规格名称对应的值
 				copyCommoditySpecVOs.add(copyCommoditySpecVO);
 			}
 			this.commoditySpecList = copyCommoditySpecVOs;//规格集合
 			List<String> picList = new ArrayList<>();
 			if(StringUtils.isNotBlank(thirdPartMcmcCommodity.getImage())){
-				picList.add(thirdPartMcmcCommodity.getImage());
+				String[] pics = thirdPartMcmcCommodity.getImage().split(",");
+				for(int i=0;i<pics.length;i++){
+					picList.add(pics[i]);//图片处理
+				}
 			}
 			this.commodityPicList = picList;//商品图片
 			List<String> goodsParams = new ArrayList<>();
 			if(StringUtils.isNotBlank(thirdPartMcmcCommodity.getInfo())){
-				goodsParams.add(thirdPartMcmcCommodity.getInfo());
+				String[] goodParams = thirdPartMcmcCommodity.getInfo().split(";");
+				for(int i=0;i<goodParams.length;i++){
+					goodsParams.add(goodParams[i]);//抄过来的商品参数处理
+				}
+			}
+			for(int j=0;j<goodsParams.size();j++){
+				if(StringUtils.isBlank(goodsParams.get(j))){
+					goodsParams.remove(j);//删除空元素
+				}
 			}
 			this.goodsParam = goodsParams;//商品参数
 		}
