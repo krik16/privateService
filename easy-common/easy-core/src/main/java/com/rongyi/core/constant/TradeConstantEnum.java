@@ -11,14 +11,15 @@ public enum  TradeConstantEnum {
 
     EXCEPTION_PARAM_NULL("1020101","参数为空"),
     EXCEPTION_VALIDATE_SIGN("1020102","签名验证错误"),
-    EXCEPTION_PAY_SIGN("1020103","获取支付签名错误"),
-    EXCEPTION_WEIXIN_REFUND("1020104","退款申请错误"),
+    EXCEPTION_PAY_SIGN("1020103","获取支付签名失败"),
+    EXCEPTION_WEIXIN_REFUND("1020104","退款申请失败"),
     EXCEPTION_ORDER_VALIDATE("1020105","订单信息验证失败"),
     EXCEPTION_THIRD_PAY_NOTIFY("1020106","通知结果处理失败"),
     EXCEPTION_THIRD_REFUND_NOTIFY("1020107","退款结果处理失败"),
+    EXCEPTION_TIME_OVER("1020108","请求已失效，请重新发起请求"),
 
-    PHP_SCORE_CHANNEL_TOKEN("",""),//php积分商城端接口请求加密使用的channel和token
-    PHP_SCORE_PUBLIC_KEY("public",""),//php积分商城端接口请求加密使用的publicKey
+    PHP_SCORE_CHANNEL_TOKEN("NOTICECHANNEL","bb1b9a9d989b76b9860a1084ab6cbd3a"),//php积分商城端接口请求加密使用的channel和token
+    PHP_SCORE_PUBLIC_KEY("publicKey","MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDBD+TuKfbtDEW+Y3Tf0pjMQPTAonKTj6Hsm74TjXuWJzsIywIOLKJPSLoQ5pMhXO+RtgKYEBr1Z9z7r/VhY3LZF78w/jMpIBmIOD9+an4NUuUovCpeg4jIZY6bpgpJuxwWlaooXeG9srHOSGl6jVKnsZwD89R+BbU7WQ/gTzPTnwIDAQAB"),//php积分商城端接口请求加密使用的publicKey
 
     //交易中心提供给php积分商城端接口加密使用的channel和token
     SCORE_STORE_CHANNEL_TOKEN("STORECHANNEL","ec037d3911591c55b84b8e0918890989"),

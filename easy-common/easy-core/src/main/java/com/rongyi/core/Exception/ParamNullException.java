@@ -12,6 +12,6 @@ public class ParamNullException extends TradeException {
     }
 
     public ParamNullException(){
-       throw new TradeException("-1","参数为空");
+       throw new TradeException("-1","参数不合法");
    }
 }
