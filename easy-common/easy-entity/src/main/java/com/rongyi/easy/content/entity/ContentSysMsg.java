@@ -65,6 +65,11 @@ public class ContentSysMsg implements Serializable{
      */
     private Boolean isRead;
 
+    /**
+     * 0:系统推送；1：人工推送
+     */
+    private Integer pushType;
+
 
     public Integer getId() {
         return id;
@@ -200,6 +205,14 @@ public class ContentSysMsg implements Serializable{
 
     public void setIsRead(Boolean isRead) {
         this.isRead = isRead;
+    }
+
+    public Integer getPushType() {
+        return pushType;
+    }
+
+    public void setPushType(Integer pushType) {
+        this.pushType = pushType;
     }
 
     @Override
