@@ -1,5 +1,7 @@
 package com.rongyi.easy.msgcenter.merchant;
 
+import com.rongyi.easy.bsoms.entity.SessionUserInfo;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -18,6 +20,7 @@ public class MsgListParam implements Serializable{
     private Integer pageSize;
     private Integer currentPage;
     private Integer start;
+    private SessionUserInfo userInfo;
 
     public String getTitle() {
         return title;
@@ -75,6 +78,14 @@ public class MsgListParam implements Serializable{
         this.start = start;
     }
 
+    public SessionUserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(SessionUserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("MsgListParam{");
@@ -84,6 +95,8 @@ public class MsgListParam implements Serializable{
         sb.append(", reciveEnd=").append(reciveEnd);
         sb.append(", pageSize=").append(pageSize);
         sb.append(", currentPage=").append(currentPage);
+        sb.append(", start=").append(start);
+        sb.append(", userInfo=").append(userInfo);
         sb.append('}');
         return sb.toString();
     }

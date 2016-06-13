@@ -61,15 +61,20 @@ public class ContentSysMsg implements Serializable{
     private Integer relateType;
 
     /**
-     * false 未读  true 已读
-     */
-    private Boolean isRead;
-
-    /**
      * 0:系统推送；1：人工推送
      */
     private Integer pushType;
 
+    /**
+     * 创建来源；1：商家后台；2：摩店App
+     */
+    private Integer source;
+
+    /**
+     * 查看消息的平台；1：商家后台；2：摩店APP ; 3:摩店管理平台；（包含关系）
+     *
+     */
+    private String readPlatforms;
 
     public Integer getId() {
         return id;
@@ -199,12 +204,20 @@ public class ContentSysMsg implements Serializable{
         this.relateType = relateType;
     }
 
-    public Boolean getIsRead() {
-        return isRead;
+    public Integer getSource() {
+        return source;
     }
 
-    public void setIsRead(Boolean isRead) {
-        this.isRead = isRead;
+    public void setSource(Integer source) {
+        this.source = source;
+    }
+
+    public String getReadPlatforms() {
+        return readPlatforms;
+    }
+
+    public void setReadPlatforms(String readPlatforms) {
+        this.readPlatforms = readPlatforms;
     }
 
     public Integer getPushType() {
@@ -234,7 +247,9 @@ public class ContentSysMsg implements Serializable{
         sb.append(", objId='").append(objId).append('\'');
         sb.append(", roleType=").append(roleType);
         sb.append(", relateType=").append(relateType);
-        sb.append(", isRead=").append(isRead);
+        sb.append(", pushType=").append(pushType);
+        sb.append(", source=").append(source);
+        sb.append(", readPlatforms='").append(readPlatforms).append('\'');
         sb.append('}');
         return sb.toString();
     }
