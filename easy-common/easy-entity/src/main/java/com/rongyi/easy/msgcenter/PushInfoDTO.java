@@ -13,7 +13,7 @@ import java.util.List;
 public class PushInfoDTO implements Serializable {
     private static final long serialVersionUID = -3022699601318372670L;
 
-    private Integer sourcePlatform;        // 上传端 1.商家后台  2.摩店APP
+    private Integer sourcePlatform;        // 上传端 1.商家后台  2.摩店AP.  3大运营平台
     private Integer updateIdentity;        // 上传人身份  1商场管理员、2品牌管理员、3分公司、4店长、5导购、6买手
     private Integer updateUserId;           //下架人id
     private List<Integer> pushPlatforms;    // 1.商家后台 2.摩店APP 3.摩店管理平台
