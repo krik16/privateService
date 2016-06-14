@@ -22,15 +22,6 @@ public class OrderDealedParam extends BaseParam implements Serializable {
 	private Integer source = 1;//操作平台 1摩店 2商家后台
     private List<SalerSonOrderVO> sonOrderList = new ArrayList<>(); //商品详情
     private String orderTotalPrice;//订单总价（包括邮费），用来计算一键改价
-    private BigDecimal expressFee;//运费，用来计算一键改价
-
-	public BigDecimal getExpressFee() {
-		return expressFee;
-	}
-
-	public void setExpressFee(BigDecimal expressFee) {
-		this.expressFee = expressFee;
-	}
 
 	public String getOrderTotalPrice() {
 		return orderTotalPrice;
@@ -115,6 +106,6 @@ public class OrderDealedParam extends BaseParam implements Serializable {
 				+ ", orderNo=" + orderNo + ", orderPrice=" + orderPrice
 				+ ", userId=" + userId + ", source=" + source
 				+ ", sonOrderList=" + sonOrderList + ", orderTotalPrice="
-				+ orderTotalPrice + ", expressFee=" + expressFee + "]";
+				+ orderTotalPrice + "]";
 	}
 }
