@@ -4,6 +4,7 @@ import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Description:
@@ -21,6 +22,7 @@ public class MsgListParam implements Serializable{
     private Integer currentPage;
     private Integer start;
     private SessionUserInfo userInfo;
+    private List<Integer> ids;
 
     public String getTitle() {
         return title;
@@ -84,6 +86,14 @@ public class MsgListParam implements Serializable{
 
     public void setUserInfo(SessionUserInfo userInfo) {
         this.userInfo = userInfo;
+    }
+
+    public List<Integer> getIds() {
+        return ids;
+    }
+
+    public void setIds(List<Integer> ids) {
+        this.ids = ids;
     }
 
     @Override
