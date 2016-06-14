@@ -1,10 +1,10 @@
 
-/**   
- * @Title: ROACommodityService.java 
- * @Package: com.rongyi.rss.malllife.roa 
+/**
+ * @Title: ROACommodityService.java
+ * @Package: com.rongyi.rss.malllife.roa
  * @Description: TODO
- * @author 袁波 
- * @date 2015年6月5日 下午6:56:37 
+ * @author 袁波
+ * @date 2015年6月5日 下午6:56:37
  */
 
 package com.rongyi.rss.malllife.roa;
@@ -12,10 +12,14 @@ package com.rongyi.rss.malllife.roa;
 import java.util.List;
 
 import com.rongyi.easy.mcmc.CommodityCategory;
+import com.rongyi.easy.mcmc.entity.ThirdPartMcmcCommodity;
+import com.rongyi.easy.rmmm.vo.CommodityByNoVO;
+
 import org.bson.types.ObjectId;
 
 import com.rongyi.core.bean.ResponseResult;
 import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.core.constant.SrcType;
 import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.malllife.vo.CommodityBuyerVO;
 import com.rongyi.easy.malllife.vo.ShopCommodityVO;
@@ -29,11 +33,11 @@ import com.rongyi.easy.roa.param.SearchCommodityCategoryParam;
 import com.rongyi.easy.solr.param.CommodityBrandSearchParam;
 import com.rongyi.easy.solr.param.CommoditySearchParam;
 
-/** 
+/**
  *
- * @Description 
+ * @Description
  * @author 袁波
- * @date 2015年6月5日 下午6:56:37 
+ * @date 2015年6月5日 下午6:56:37
  */
 
 public interface ROACommodityService {
@@ -61,7 +65,7 @@ public interface ROACommodityService {
 
 	public ResponseResult commodityToShelves(String id, long shopId, int identity);
 
-	public ResponseResult commodityOffShelves(String id, long shopId, int identity);
+	public ResponseResult commodityOffShelves(String id, long shopId, int identity,String reason);
 
 	public String editCommodity(CommodityVO commodityvo, long shopId, long brandId);
 
@@ -75,7 +79,7 @@ public interface ROACommodityService {
 	public ResponseResult getCategoryById(String id);
 
 	public ResponseResult searchCommodity(CommoditySearchParam param);
-	
+
 	public ResponseResult searchCommodityForMallLife(CommoditySearchParam param);
 
 	public ResponseResult getBrandCommodity(String brandId, String categoryId, int orderBy, int currentpage,
@@ -113,9 +117,9 @@ public interface ROACommodityService {
 	public List<String[]> listSpecColumnValues(String commodityId);
 
 	public Commodity selectById(String id);
- 
+
 	public ResponseVO searchCommodityBrand(CommodityBrandSearchParam param);
-	
+
 	public List<com.rongyi.easy.mcmc.vo.CommodityBuyerVO> getCommodityBySPU(String commodityId, String spu);
 
 	/**
@@ -185,4 +189,45 @@ public interface ROACommodityService {
 	 * @return
 	 */
 	public ResponseVO getBrandsByMall(SearchCommodityBrandParam param);
+
+	/**
+	 * 根据id查询第三方的商品
+	 * @param id
+	 * @return
+	 */
+	public ThirdPartMcmcCommodity selectByPrimaryKey(Integer id);
+
+	/**
+	 * 根据款号查询第三方商品的总数
+	 * @param artNo
+	 * @return
+	 */
+	public Integer selectCountByArtNo(String artNo);
+
+	/**
+	 * 根据款号分页查询商品
+	 * @param artNo
+	 * @param start
+	 * @param size
+	 * @return
+	 */
+	public List<ThirdPartMcmcCommodity> selectCommodityByArtNo(String artNo,Integer start,Integer size);
+
+	/**
+	 * 根据款号模糊配置款号
+	 * @param artNo
+	 * @return
+	 */
+	public List<CommodityByNoVO> findByAraNo(String artNo);
+    /**
+     * 获取某个时间戳之后新增的商品数量
+     *
+     * @param mallMId 商场ID
+     * @param shopMId 店铺ID
+     * @param ts      时间戳（单位：毫秒）
+     * @param srcType 来源类型
+     * @return 商品数量
+     */
+    public ResponseVO selectCommodityCountByTs(String mallMId, String shopMId, long ts, int srcType);
+	public ResponseVO  selectSpecById(String categoryId);
 }

@@ -6,6 +6,7 @@ import java.text.NumberFormat;
 import java.util.Date;
 import java.util.List;
 
+import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.beanutils.BeanUtils;
 import org.bson.types.ObjectId;
@@ -87,6 +88,8 @@ public class Commodity implements  Serializable,Cloneable{
 	private List<Integer> customCategoryIds;//自定义分类集合;
 	private String commodityModelNo;//商品款号
 	private List<String> goodsParam;//商品参数
+	private Integer commodityOffUserId; //商品下架操作人
+
 //	private int commentCount;
 //	private int highCommentCount;
 //	private int mediumCommentCount;
@@ -339,7 +342,7 @@ public class Commodity implements  Serializable,Cloneable{
 		this.freight = freight;
 	}
 	public Integer getTerminalType() {
-		return terminalType;
+		return null ==terminalType ? CommodityTerminalType.TERMINAL_TYPE_7:terminalType;
 	}
 	public void setTerminalType(Integer terminalType) {
 		this.terminalType = terminalType;
@@ -517,6 +520,15 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setGoodsSec(boolean goodsSec) {
 		this.goodsSec = goodsSec;
 	}
+
+	public Integer getCommodityOffUserId() {
+		return commodityOffUserId;
+	}
+
+	public void setCommodityOffUserId(Integer commodityOffUserId) {
+		this.commodityOffUserId = commodityOffUserId;
+	}
+
 	@Override
 	public Commodity clone() throws CloneNotSupportedException {
 

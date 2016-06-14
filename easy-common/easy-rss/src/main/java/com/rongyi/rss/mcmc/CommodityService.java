@@ -4,13 +4,16 @@ import java.util.Date;
 import java.util.List;
 
 import com.rongyi.core.common.PagingVO;
+import com.rongyi.core.constant.SrcType;
 import com.rongyi.easy.coupon.param.CouponCommodityParam;
 import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
 import com.rongyi.easy.malllife.param.user.SearchCommodityParms;
 import com.rongyi.easy.mcmc.*;
+import com.rongyi.easy.mcmc.entity.ThirdPartMcmcCommodity;
 import com.rongyi.easy.mcmc.param.SaleParam;
 import com.rongyi.easy.mcmc.vo.*;
 
+import com.rongyi.easy.rmmm.vo.CommodityByNoVO;
 import com.rongyi.easy.solr.McmcCommodityDocument;
 import com.rongyi.easy.roa.param.SearchCommodityBrandParam;
 import com.rongyi.easy.roa.param.SearchCommodityCategoryParam;
@@ -49,7 +52,7 @@ public interface CommodityService {
 
     public ResponseResult commodityToShelves(String id, long shopId, int identity);
 
-    public ResponseResult commodityOffShelves(String id, long shopId, int identity);
+    public ResponseResult commodityOffShelves(String id, long shopId, int identity,String reason, Integer userId);
 
     public String editCommodity(CommodityVO commodityvo, long shopId, long brandId);
 
@@ -120,9 +123,9 @@ public interface CommodityService {
      * @param status:商品的状态
      * @param pagesize：分页的条数
      */
-    
+
     public void updateCommodityByRegisterAtAndSoldOutAt(Date registerAt,Date soldOutAt, String status, int pagesize);
-    
+
 
     /***
      * 查询商品 一二三级分类
@@ -213,6 +216,8 @@ public interface CommodityService {
 
     public PagingVO<Commodity> findCommdityList(SearchCommodityParms searchCommodityParms);
 
+    public List<String>  selectCommodityByNameAndCode(String name,String code);
+
     /**
      * 根据特卖ID获取前3（暂定）个商品列表
      *
@@ -220,4 +225,26 @@ public interface CommodityService {
      * @return List<com.rongyi.easy.mcmc.vo.CommodityBuyerVO>
      */
     public ResponseVO topCommodityListBySaleId(Integer saleId, Integer flashSaleId);
+
+
+    public ThirdPartMcmcCommodity selectByPrimaryKey(Integer id);
+
+    public Integer selectCountByArtNo(String artNo);
+
+    public List<ThirdPartMcmcCommodity> selectCommodityByArtNo(String artNo,Integer start,Integer size);
+
+    public List<CommodityByNoVO> findByAraNo(String artNo);
+
+    /**
+     * 获取某个时间戳之后新增的商品数量
+     *
+     * @param mallMId 商场ID
+     * @param shopMId 店铺ID
+     * @param ts      时间戳（单位：毫秒）
+     * @param srcType 来源类型
+     * @return 商品数量
+     */
+    public ResponseVO selectCommodityCountByTs(String mallMId, String shopMId, long ts, int srcType);
+
+    public  ResponseVO selectSpecById(String categoryId);
 }

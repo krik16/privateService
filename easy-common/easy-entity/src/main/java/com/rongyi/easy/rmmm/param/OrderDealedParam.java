@@ -1,6 +1,7 @@
 package com.rongyi.easy.rmmm.param;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,14 +101,11 @@ public class OrderDealedParam extends BaseParam implements Serializable {
 
 	@Override
 	public String toString() {
-		return "OrderDealedParam{" +
-				"orderId='" + orderId + '\'' +
-				", discount='" + discount + '\'' +
-				", commodityPostage='" + commodityPostage + '\'' +
-				", orderNo='" + orderNo + '\'' +
-				", orderPrice='" + orderPrice + '\'' +
-				", userId=" + userId +
-				", source=" + source +
-				'}';
+		return "OrderDealedParam [orderId=" + orderId + ", discount="
+				+ discount + ", commodityPostage=" + commodityPostage
+				+ ", orderNo=" + orderNo + ", orderPrice=" + orderPrice
+				+ ", userId=" + userId + ", source=" + source
+				+ ", sonOrderList=" + sonOrderList + ", orderTotalPrice="
+				+ orderTotalPrice + "]";
 	}
 }

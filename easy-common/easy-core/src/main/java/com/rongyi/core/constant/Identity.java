@@ -23,5 +23,5 @@ public interface Identity {
     /** 身份类型：导购 **/
     int SHOPPERS = 5;
     /** 身份类型：买手 **/
-    int BUYER = 5;
+    int BUYER = 6;
 }

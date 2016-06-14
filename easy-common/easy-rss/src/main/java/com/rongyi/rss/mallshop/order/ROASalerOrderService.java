@@ -41,6 +41,6 @@ public interface ROASalerOrderService {
 	 * @return
 	 * @throws Exception
 	 */
-	SellerOrderPriceChangeVO getPriceChangeReview(String orderNo,BigDecimal newOrderPrice) throws Exception;
+	SellerOrderPriceChangeVO getPriceChangeReview(String orderNo,BigDecimal newOrderPrice,BigDecimal expressFee) throws Exception;
 
 }
