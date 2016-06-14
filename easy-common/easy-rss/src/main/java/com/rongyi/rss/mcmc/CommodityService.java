@@ -52,7 +52,7 @@ public interface CommodityService {
 
     public ResponseResult commodityToShelves(String id, long shopId, int identity);
 
-    public ResponseResult commodityOffShelves(String id, long shopId, int identity,String reason);
+    public ResponseResult commodityOffShelves(String id, long shopId, int identity,String reason, Integer userId);
 
     public String editCommodity(CommodityVO commodityvo, long shopId, long brandId);
 
