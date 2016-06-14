@@ -17,6 +17,13 @@
     <result column="msg_type" property="msgType" jdbcType="INTEGER" />
     <result column="obj_id" property="objId" jdbcType="VARCHAR" />
     <result column="role_type" property="roleType" jdbcType="INTEGER" />
+    <result column="relate_type" property="relateType" jdbcType="INTEGER" />
+    <result column="is_read" property="isRead" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="Sta_Map" type="com.rongyi.easy.msgcenter.merchant.StatisticsVO">
+    <result column="total" property="total" jdbcType="INTEGER" />
+    <result column="un_read" property="unread" jdbcType="INTEGER" />
+    <result column="read" property="read" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -78,7 +85,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, create_by, create_at, update_by, update_at, version, is_disabled, msg_title, 
-    msg_status, msg_pushtime, msg_link, msg_content, msg_type
+    msg_status, msg_pushtime, msg_link, msg_content, msg_type,relate_type,is_read
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rongyi.easy.content.entity.ContentSysMsgExample" >
     select
@@ -164,6 +171,13 @@
       <if test="msgType != null" >
         msg_type,
       </if>
+      <if test="relateType != null" >
+        relate_type,
+      </if>
+      <if test="isRead != null" >
+        is_read,
+      </if>
+
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -204,6 +218,12 @@
       </if>
       <if test="msgType != null" >
         #{msgType,jdbcType=INTEGER},
+      </if>
+      <if test="relateType != null" >
+
+      </if>
+      <if test="isRead != null" >
+        #{isRead,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -337,4 +357,48 @@
       msg_type = #{msgType,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectListMsg" parameterType="com.rongyi.easy.msgcenter.merchant.MsgListParam" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    FROM content_sys_msg
+    WHERE
+    is_disabled=0
+    <if test="title!=null">
+      AND msg_title=#{title,jdbcType=VARCHAR}
+    </if>
+    <if test="type!=null">
+      AND relate_type=#{type,jdbcType=INTEGER}
+    </if>
+    <if test="reciveStart!=null">
+      AND msg_pushtime &gt;= #{reciveStart,jdbcType=TIMESTAMP}
+    </if>
+    <if test="reciveEnd!=null">
+      AND msg_pushtime &lt;= #{reciveEnd,jdbcType=TIMESTAMP}
+    </if>
+    limit #{start,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+  </select>
+
+  <update id="batchRead" parameterType="java.util.List">
+    update content_sys_msg
+    set is_read=TRUE
+    WHERE is_read=false AND id IN
+    <foreach collection="ids" item="item" open="(" close=")" separator=",">
+      #{item,jdbcType=INTEGER}
+    </foreach>
+  </update>
+
+  <update id="batchDelete" parameterType="java.util.List">
+    update content_sys_msg
+    set is_disabled=1
+    WHERE is_disabled=0 AND id IN
+    <foreach collection="ids" item="item" open="(" close=")" separator=",">
+      #{item,jdbcType=INTEGER}
+    </foreach>
+  </update>
+  <select id="statistics" resultMap="Sta_Map">
+    select t.total,u.un_read,r.read from
+    (select count(1) as total from content_sys_msg where is_disabled=0) t,
+    (select count(1) as un_read from content_sys_msg where is_disabled=0 and is_read=false) u ,
+    (select count(1) as `read` from content_sys_msg where is_disabled=0 and is_read=true) r
+  </select>
 </mapper>

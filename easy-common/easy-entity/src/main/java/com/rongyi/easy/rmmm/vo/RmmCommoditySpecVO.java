@@ -7,7 +7,7 @@ import java.util.List;
  * @author user
  *
  */
-public class CommoditySpecVO implements Serializable{
+public class RmmCommoditySpecVO implements Serializable{
 	
 	/**
 	 * 

@@ -52,7 +52,7 @@ public interface IOrderSalerQueryService {
 	 * @return
 	 * @throws Exception
 	 */
-	SellerOrderPriceChangeVO getPriceChangeReview(String orderNo,BigDecimal newOrderPrice) throws Exception;
+	SellerOrderPriceChangeVO getPriceChangeReview(String orderNo,BigDecimal newOrderPrice,BigDecimal expressFee) throws Exception;
 
 	/**
 	 * 昨日订单数统计

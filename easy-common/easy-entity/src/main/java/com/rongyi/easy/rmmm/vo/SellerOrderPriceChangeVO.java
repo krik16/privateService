@@ -21,7 +21,16 @@ public class SellerOrderPriceChangeVO implements Serializable {
 	private BigDecimal expressFee;//运费
 	private String orderNo;//订单号
 	private String orderTime;//下单时间
+	private boolean ifExpress;//是否是快递发货  true是  false不是
 	List<SalerSonOrderVO> sonOrderList;// 子订单列表
+
+	public boolean isIfExpress() {
+		return ifExpress;
+	}
+
+	public void setIfExpress(boolean ifExpress) {
+		this.ifExpress = ifExpress;
+	}
 
 	public String getOrderNo() {
 		return orderNo;
@@ -72,8 +81,9 @@ public class SellerOrderPriceChangeVO implements Serializable {
 	@Override
 	public String toString() {
 		return "SellerOrderPriceChangeVO [createTime=" + createTime
-				+ ", expressFee=" + expressFee + ", orderNo=" + orderNo + ", orderTime="
-				+ orderTime + ", sonOrderList=" + sonOrderList + "]";
+				+ ", expressFee=" + expressFee + ", orderNo=" + orderNo
+				+ ", orderTime=" + orderTime + ", ifExpress=" + ifExpress
+				+ ", sonOrderList=" + sonOrderList + "]";
 	}
 
 }
