@@ -28,4 +28,13 @@ public class ShopCouponsVO implements Serializable{
     public void setCount(int count) {
         this.count = count;
     }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("ShopCouponsVO{");
+        sb.append("shopId='").append(shopId).append('\'');
+        sb.append(", count=").append(count);
+        sb.append('}');
+        return sb.toString();
+    }
 }
