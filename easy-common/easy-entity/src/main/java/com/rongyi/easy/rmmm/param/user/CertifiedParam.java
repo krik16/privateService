@@ -37,6 +37,15 @@ public class CertifiedParam extends BaseParam implements Serializable{
 	private String workImg;    //工作证照
 	
 	private String otherImg;   //其它照片
+	
+	@Override
+	public String toString(){
+		return "CertifiedParam [userId=" + userId +", proId=" + proId  + ", cityId=" + cityId + ", areaId=" + areaId
+				+ ", contactPhone=" + contactPhone + ", resume="
+				+ resume + ", mallId=" + mallId + ", shopId="
+				+ shopId +",brandId="+brandId+ ", faceImg=" + faceImg + ", backImg="
+				+ backImg + ", workImg=" + workImg +", otherImg=" + otherImg + "]";
+	}
 
 	public Integer getId() {
 		return id;
