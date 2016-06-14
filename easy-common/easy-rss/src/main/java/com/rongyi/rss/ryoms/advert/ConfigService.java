@@ -9,6 +9,7 @@
 package com.rongyi.rss.ryoms.advert;
 
 import java.util.List;
+import java.util.Map;
 
 import com.rongyi.easy.ryoms.advert.entity.ConfigEntity;
 import com.rongyi.easy.ryoms.advert.param.ConfigSearchParam;
@@ -126,4 +127,8 @@ public interface ConfigService {
 	public List<ConfigVO> collectAreaList(ConfigSearchParam query);
 
 	public List<String> selectAllMall();
+
+	boolean checkExistConfig(Map<String, Object> checkConfigMap);
+
+	void addList(List<ConfigEntity> configList);
 }

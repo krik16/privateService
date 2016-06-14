@@ -65,6 +65,16 @@ public class ConfigVO implements Serializable {
 	private Integer ry_banner_318_home_b;//banner618_930容易网广告数量
 	private Integer mall_banner_318_home_d;//banner1040_630商家广告数量
 	private Integer ry_banner_318_home_d;//banner1040_630容易网广告数量
+	private Integer mall_brandguide;//品牌导购商场数量
+	private Integer ry_brandguide;//品牌导购容易网数量
+	private Integer mall_floornavigate;//楼层导航商场数量
+	private Integer ry_floornavigate;//楼层导航容易网数量
+	private Integer mall_membercenter;//会员中心商场数量
+	private Integer ry_membercenter;//会员中心容易网数量
+	private Integer mall_activity;//精彩活动商场数量
+	private Integer ry_activity;//精彩活动容易网数量
+	private Integer mall_coupon;//优惠券商场数量
+	private Integer ry_coupon;//优惠券容易网数量
 	private String address;//详细地址
 	/**
 	 * @return the configId
@@ -504,21 +514,65 @@ public class ConfigVO implements Serializable {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	@Override
-	public String toString() {
-		return "ConfigVO [configId=" + configId + ", mallMId=" + mallMId + ", mallName=" + mallName + ", mall_level="
-				+ mall_level + ", positionId=" + positionId + ", positionName=" + positionName + ", cityMId=" + cityMId
-				+ ", cityName=" + cityName + ", cityLevel=" + cityLevel + ", areaId=" + areaId + ", areaName="
-				+ areaName + ", countTotal=" + countTotal + ", countRY=" + countRY + ", countMall=" + countMall
-				+ ", statusId=" + statusId + ", statusName=" + statusName + ", create_int=" + create_int
-				+ ", create_date=" + create_date + ", update_int=" + update_int + ", update_date=" + update_date
-				+ ", create_by=" + create_by + ", create_at=" + create_at + ", update_by=" + update_by + ", update_at="
-				+ update_at + ", mall_ad_num=" + mall_ad_num + ", ry_ad_num=" + ry_ad_num + ", mall_banner="
-				+ mall_banner + ", ry_banner=" + ry_banner + ", mall_banner_330_home_a=" + mall_banner_330_home_a
-				+ ", ry_banner_330_home_a=" + ry_banner_330_home_a + ", mall_banner_330_home_d="
-				+ mall_banner_330_home_d + ", ry_banner_330_home_d=" + ry_banner_330_home_d
-				+ ", mall_banner_318_home_b=" + mall_banner_318_home_b + ", ry_banner_318_home_b="
-				+ ry_banner_318_home_b + ", mall_banner_318_home_d=" + mall_banner_318_home_d
-				+ ", ry_banner_318_home_d=" + ry_banner_318_home_d + ", address=" + address + "]";
+
+	public Integer getMall_brandguide() {
+		return mall_brandguide;
+	}
+	public void setMall_brandguide(Integer mall_brandguide) {
+		this.mall_brandguide = mall_brandguide;
+	}
+	public Integer getRy_brandguide() {
+		return ry_brandguide;
+	}
+	public void setRy_brandguide(Integer ry_brandguide) {
+		this.ry_brandguide = ry_brandguide;
+	}
+	public Integer getMall_floornavigate() {
+		return mall_floornavigate;
+	}
+	public void setMall_floornavigate(Integer mall_floornavigate) {
+		this.mall_floornavigate = mall_floornavigate;
+	}
+	public Integer getRy_floornavigate() {
+		return ry_floornavigate;
+	}
+	public void setRy_floornavigate(Integer ry_floornavigate) {
+		this.ry_floornavigate = ry_floornavigate;
+	}
+	public Integer getMall_membercenter() {
+		return mall_membercenter;
+	}
+	public void setMall_membercenter(Integer mall_membercenter) {
+		this.mall_membercenter = mall_membercenter;
+	}
+	public Integer getRy_membercenter() {
+		return ry_membercenter;
+	}
+	public void setRy_membercenter(Integer ry_membercenter) {
+		this.ry_membercenter = ry_membercenter;
+	}
+	public Integer getMall_activity() {
+		return mall_activity;
+	}
+	public void setMall_activity(Integer mall_activity) {
+		this.mall_activity = mall_activity;
+	}
+	public Integer getRy_activity() {
+		return ry_activity;
+	}
+	public void setRy_activity(Integer ry_activity) {
+		this.ry_activity = ry_activity;
+	}
+	public Integer getMall_coupon() {
+		return mall_coupon;
+	}
+	public void setMall_coupon(Integer mall_coupon) {
+		this.mall_coupon = mall_coupon;
+	}
+	public Integer getRy_coupon() {
+		return ry_coupon;
+	}
+	public void setRy_coupon(Integer ry_coupon) {
+		this.ry_coupon = ry_coupon;
 	}
 }
