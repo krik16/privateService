@@ -4,6 +4,7 @@ import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Description:
@@ -21,6 +22,8 @@ public class MsgListParam implements Serializable{
     private Integer currentPage;
     private Integer start;
     private SessionUserInfo userInfo;
+    private List<Integer> ids;
+    private String platform;
 
     public String getTitle() {
         return title;
@@ -86,6 +89,22 @@ public class MsgListParam implements Serializable{
         this.userInfo = userInfo;
     }
 
+    public List<Integer> getIds() {
+        return ids;
+    }
+
+    public void setIds(List<Integer> ids) {
+        this.ids = ids;
+    }
+
+    public String getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(String platform) {
+        this.platform = platform;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("MsgListParam{");
@@ -97,6 +116,8 @@ public class MsgListParam implements Serializable{
         sb.append(", currentPage=").append(currentPage);
         sb.append(", start=").append(start);
         sb.append(", userInfo=").append(userInfo);
+        sb.append(", ids=").append(ids);
+        sb.append(", platform='").append(platform).append('\'');
         sb.append('}');
         return sb.toString();
     }
