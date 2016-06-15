@@ -58,4 +58,16 @@ public class PushInfoDTO implements Serializable {
     public void setPushTargets(List<Integer> pushTargets) {
         this.pushTargets = pushTargets;
     }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("PushInfoDTO{");
+        sb.append("sourcePlatform=").append(sourcePlatform);
+        sb.append(", updateIdentity=").append(updateIdentity);
+        sb.append(", updateUserId=").append(updateUserId);
+        sb.append(", pushPlatforms=").append(pushPlatforms);
+        sb.append(", pushTargets=").append(pushTargets);
+        sb.append('}');
+        return sb.toString();
+    }
 }

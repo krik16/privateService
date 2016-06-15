@@ -123,4 +123,22 @@ public class MessageDTO implements Serializable {
         return "尊敬的用户，" + commodity.getName() + "商品由于" +  commodity.getReason() +
                 "的原因，已下架！请修改后重新上传或致电客服400-040-8989。";
     }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("MessageDTO{");
+        sb.append("title='").append(title).append('\'');
+        sb.append(", messageType='").append(messageType).append('\'');
+        sb.append(", receiveDate='").append(receiveDate).append('\'');
+        sb.append(", pushDate='").append(pushDate).append('\'');
+        sb.append(", createDate='").append(createDate).append('\'');
+        sb.append(", pushType='").append(pushType).append('\'');
+        sb.append(", relevantSeller=").append(relevantSeller);
+        sb.append(", messageLink='").append(messageLink).append('\'');
+        sb.append(", messageContent='").append(messageContent).append('\'');
+        sb.append(", pushInfoDTO=").append(pushInfoDTO);
+        sb.append(", isRead=").append(isRead);
+        sb.append('}');
+        return sb.toString();
+    }
 }
