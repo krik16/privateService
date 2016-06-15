@@ -88,6 +88,9 @@ public class Commodity implements  Serializable,Cloneable{
 	private List<Integer> customCategoryIds;//自定义分类集合;
 	private String commodityModelNo;//商品款号
 	private List<String> goodsParam;//商品参数
+	private Integer commodityOffUserId; //商品下架操作人
+	private String commodityOffUserName; //商品下架操作人
+
 //	private int commentCount;
 //	private int highCommentCount;
 //	private int mediumCommentCount;
@@ -518,6 +521,23 @@ public class Commodity implements  Serializable,Cloneable{
 	public void setGoodsSec(boolean goodsSec) {
 		this.goodsSec = goodsSec;
 	}
+
+	public Integer getCommodityOffUserId() {
+		return commodityOffUserId;
+	}
+
+	public void setCommodityOffUserId(Integer commodityOffUserId) {
+		this.commodityOffUserId = commodityOffUserId;
+	}
+
+	public String getCommodityOffUserName() {
+		return commodityOffUserName;
+	}
+
+	public void setCommodityOffUserName(String commodityOffUserName) {
+		this.commodityOffUserName = commodityOffUserName;
+	}
+
 	@Override
 	public Commodity clone() throws CloneNotSupportedException {
 

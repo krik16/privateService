@@ -15,7 +15,7 @@ public class RmmCommoditySpecVO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String columnId;//规格名称对应的id
 	private String columnName;//规格名称
-	private List<String> columnValues;//规格名称对应的值集合
+	private List<String> columnValue;//规格名称对应的值集合
 	public String getColumnId() {
 		return columnId;
 	}
@@ -28,16 +28,16 @@ public class RmmCommoditySpecVO implements Serializable{
 	public void setColumnName(String columnName) {
 		this.columnName = columnName;
 	}
-	public List<String> getColumnValues() {
-		return columnValues;
+	public List<String> getColumnValue() {
+		return columnValue;
 	}
-	public void setColumnValues(List<String> columnValues) {
-		this.columnValues = columnValues;
+	public void setColumnValue(List<String> columnValue) {
+		this.columnValue = columnValue;
 	}
 	@Override
 	public String toString() {
 		return "CommoditySpecVO [columnId=" + columnId + ", columnName="
-				+ columnName + ", columnValues=" + columnValues + "]";
+				+ columnName + ", columnValue=" + columnValue + "]";
 	}
 	
 }

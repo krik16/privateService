@@ -1,22 +1,26 @@
-package com.rongyi.core.constant;
+package com.rongyi.core.enumerate.mcmc;
 
 /**
- *  推送类型枚举
+ * 商品下架原因枚举
  *
- *  @author yaoyiwei
- *  @date 2016-06-06
- *  @version 1.0
+ * @author yaoyiwei
+ * @date 2016-06-13
+ * @version 1.0
  *
  */
-public enum PushTypeEnum {
+public enum CommodityOffReason {
 
-    SYSTEM(0, "系统推送"),
-    ARTIFACT(1, "人工推送");
+    OFF_DEFINED(0, "自定义"),
+    OFF_PIC(1, "照片不符合要求"),
+    OFF_DESC(2, "商品命名/文字描述不符合要求"),
+    OFF_SPEC(3, "规格参数错误"),
+    OFF_FEE(4, "运费错误"),
+    OFF_SHOP(5, "店铺关联错误");
 
     private Integer code;
     private String msg;
 
-    private PushTypeEnum(Integer code, String msg) {
+    private CommodityOffReason(Integer code, String msg) {
         this.code = code;
         this.msg = msg;
     }
@@ -38,11 +42,13 @@ public enum PushTypeEnum {
     }
 
     public static String getMsgByCode(Integer code) {
-        for (PushTypeEnum e : PushTypeEnum.values()) {
+        for (CommodityOffReason e : CommodityOffReason.values()) {
             if (e.getCode().equals(code)) {
                 return e.getMsg();
             }
         }
         return null;
     }
+
+
 }

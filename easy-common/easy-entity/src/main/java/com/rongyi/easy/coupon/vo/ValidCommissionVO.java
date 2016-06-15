@@ -117,6 +117,7 @@ public class ValidCommissionVO implements Serializable {
             private String time;
             private BigDecimal currentPrice;
             private String buyerName;
+            private Integer point;
 
             public String getBuyerName() {
                 return buyerName;
@@ -164,6 +165,14 @@ public class ValidCommissionVO implements Serializable {
 
             public void setCurrentPrice(BigDecimal currentPrice) {
                 this.currentPrice = currentPrice;
+            }
+
+            public Integer getPoint() {
+                return point;
+            }
+
+            public void setPoint(Integer point) {
+                this.point = point;
             }
 
             @Override
