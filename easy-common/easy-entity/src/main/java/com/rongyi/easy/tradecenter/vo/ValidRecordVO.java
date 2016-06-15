@@ -22,6 +22,15 @@ public class ValidRecordVO implements Serializable{
     private BigDecimal price;
     private String mallMid;
     private String shopMid;
+    private Integer point ;
+
+    public Integer getPoint() {
+        return point;
+    }
+
+    public void setPoint(Integer point) {
+        this.point = point;
+    }
 
     public Integer getId() {
         return id;
@@ -134,6 +143,7 @@ public class ValidRecordVO implements Serializable{
         sb.append(", price=").append(price);
         sb.append(", mallMid='").append(mallMid).append('\'');
         sb.append(", shopMid='").append(shopMid).append('\'');
+        sb.append(", point=").append(point);
         sb.append('}');
         return sb.toString();
     }
