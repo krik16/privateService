@@ -18,7 +18,6 @@ public class ValidCommissionVO implements Serializable {
     private Integer number;
     private BigDecimal totalAmount;
     private List<ValidDate> myValidList;
-    private List<ValidDate> myValidListMonth;
 
     public Integer getTotalPage() {
         return totalPage;
