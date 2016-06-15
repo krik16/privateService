@@ -229,5 +229,7 @@ public interface RoaCouponService {
      * 获取卡券总数
      * @return
      */
-	long getCouponCount();
+    long getCouponCount();
+
+    int getCountUnReadCount(Integer userId,String shopId);
 }

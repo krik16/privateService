@@ -135,5 +135,13 @@ public interface MSCouponService {
      * @author lqy
      */
     ResponseVO checkMallShopAuthority(Integer userId, String couponId);
+
+    /**
+     * 获取摩店用户未读卡券数量
+     * @param userId
+     * @param shopId
+     * @return
+     */
+    int getUnReadCouponsNum(Integer userId,String shopId);
 }
 
