@@ -27,6 +27,15 @@ public class RmmmValidCodeVO implements Serializable {
     private String phone;//用户名
     private String title;//券名
     private Integer type;
+    private Integer point;
+
+    public Integer getPoint() {
+        return point;
+    }
+
+    public void setPoint(Integer point) {
+        this.point = point;
+    }
 
     public Integer getTotalAmount() {
         return totalAmount;
