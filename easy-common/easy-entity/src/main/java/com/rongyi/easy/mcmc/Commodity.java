@@ -89,6 +89,7 @@ public class Commodity implements  Serializable,Cloneable{
 	private String commodityModelNo;//商品款号
 	private List<String> goodsParam;//商品参数
 	private Integer commodityOffUserId; //商品下架操作人
+	private String commodityOffUserName; //商品下架操作人
 
 //	private int commentCount;
 //	private int highCommentCount;
@@ -527,6 +528,14 @@ public class Commodity implements  Serializable,Cloneable{
 
 	public void setCommodityOffUserId(Integer commodityOffUserId) {
 		this.commodityOffUserId = commodityOffUserId;
+	}
+
+	public String getCommodityOffUserName() {
+		return commodityOffUserName;
+	}
+
+	public void setCommodityOffUserName(String commodityOffUserName) {
+		this.commodityOffUserName = commodityOffUserName;
 	}
 
 	@Override

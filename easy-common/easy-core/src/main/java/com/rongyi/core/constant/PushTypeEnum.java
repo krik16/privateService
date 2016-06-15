@@ -10,8 +10,8 @@ package com.rongyi.core.constant;
  */
 public enum PushTypeEnum {
 
-    SYSTEM(1, "系统推送"),
-    ARTIFACT(2, "人工推送");
+    SYSTEM(0, "系统推送"),
+    ARTIFACT(1, "人工推送");
 
     private Integer code;
     private String msg;
