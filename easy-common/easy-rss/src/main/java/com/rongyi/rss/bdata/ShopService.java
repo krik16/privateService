@@ -56,4 +56,6 @@ public interface ShopService {
 	 * @return
 	 */
 	public ResponseVO getShopListForName(String mallId, String shopName, Integer page, Integer pageSize);
+
+	public ResponseVO getCouponInfoByShopIds(String ids);
 }
