@@ -21,6 +21,8 @@ public enum  TradeConstantEnum {
     PHP_SCORE_CHANNEL_TOKEN("NOTICECHANNEL","bb1b9a9d989b76b9860a1084ab6cbd3a"),//php积分商城端接口请求加密使用的channel和token
     PHP_SCORE_PUBLIC_KEY("publicKey","MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDBD+TuKfbtDEW+Y3Tf0pjMQPTAonKTj6Hsm74TjXuWJzsIywIOLKJPSLoQ5pMhXO+RtgKYEBr1Z9z7r/VhY3LZF78w/jMpIBmIOD9+an4NUuUovCpeg4jIZY6bpgpJuxwWlaooXeG9srHOSGl6jVKnsZwD89R+BbU7WQ/gTzPTnwIDAQAB"),//php积分商城端接口请求加密使用的publicKey
 
+    SCORE_STORE_DES_KEY("desKey","f8ce2e51092b62b0180f8e0b8bc3fcef"),//des加密算法key
+
     //交易中心提供给php积分商城端接口加密使用的channel和token
     SCORE_STORE_CHANNEL_TOKEN("STORECHANNEL","ec037d3911591c55b84b8e0918890989"),
     //交易中心提供的第三方接口加密privateKey
