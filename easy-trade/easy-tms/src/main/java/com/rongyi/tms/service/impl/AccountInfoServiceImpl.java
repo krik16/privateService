@@ -19,8 +19,6 @@ import com.rongyi.tms.moudle.vo.DrawApplyInfoVO;
 import com.rongyi.tms.service.DrawApplyService;
 import com.rongyi.tms.service.SalesCommissionService;
 
-import java.math.BigDecimal;
-
 /**
  * @author ZhengYl
  * 
@@ -41,18 +39,18 @@ public class AccountInfoServiceImpl implements AccountInfoService {
 		// 查询提现金额（在审）合计
 		DrawApplyInfoVO drawApplyVo = drawApplyService.selectDrawApplyInfo(userId);
 		if (drawApplyVo != null) {
-			result.setDrawForAuditTotal(drawApplyVo.getDrawForAuditTotal().compareTo(BigDecimal.ZERO) == 1 ?drawApplyVo.getDrawForAuditTotal():BigDecimal.ZERO);
+			result.setDrawForAuditTotal(drawApplyVo.getDrawForAuditTotal());
 		}
 
 		// 查询审核中佣金金额（包含交易佣金和验码佣金）合计
 		CommissionInfoVO commissionVo = salesCommissionService.selectCommissionInfo(userId);
 		if (commissionVo != null) {
-			result.setCommissionForAuditTotal(commissionVo.getCommissionForAuditTotal().compareTo(BigDecimal.ZERO) == 1 ?commissionVo.getCommissionForAuditTotal():BigDecimal.ZERO);
+			result.setCommissionForAuditTotal(commissionVo.getCommissionForAuditTotal());
 		}
 		// 审核失败佣金（本月,包含交易佣金和验码佣金）合计
 		commissionVo = salesCommissionService.selectFaleCommission(userId);
 		if (commissionVo != null && commissionVo.getFaleCommissionMonth() != null)
-			result.setFaleCommissionMonth(commissionVo.getFaleCommissionMonth().compareTo(BigDecimal.ZERO) == 1 ?commissionVo.getFaleCommissionMonth():BigDecimal.ZERO);
+			result.setFaleCommissionMonth(commissionVo.getFaleCommissionMonth());
 		return result;
 	}
 }

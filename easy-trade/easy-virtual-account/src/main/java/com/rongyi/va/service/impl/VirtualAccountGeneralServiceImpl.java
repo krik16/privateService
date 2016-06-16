@@ -1,10 +1,10 @@
-/** 
- * @Title: VirtualAccountServiceImpl.java 
- * @Package com.rongyi.va.service.impl 
+/**
+ * @Title: VirtualAccountServiceImpl.java
+ * @Package com.rongyi.va.service.impl
  * @Description: 虚拟账户综合访问接口实现
  * @author 郑亦梁  zhengyiliang@rongyi.com
  * @date 2015年5月25日 下午4:48:43 
- * @version V1.0   
+ * @version V1.0
  * Copyright (C),上海容易网电子商务有限公司
  */
 package com.rongyi.va.service.impl;
@@ -24,7 +24,7 @@ import java.math.BigDecimal;
 
 /**
  * @author ZhengYl
- * 
+ *
  */
 @Service
 public class VirtualAccountGeneralServiceImpl implements VirtualAccountGeneralService {
@@ -66,15 +66,15 @@ public class VirtualAccountGeneralServiceImpl implements VirtualAccountGeneralSe
 		VirtualAccountQuerySumVO sumVO = virtualAccountDetailService.selectAccountSumByUserId(userId);
 		logger.info("sumVO={}",sumVO);
 		if (sumVO != null) {
-			vaVO.setIncomeTotal(sumVO.getIncomeSum().compareTo(BigDecimal.ZERO) == 1 ? sumVO.getIncomeSum() : BigDecimal.ZERO);
-			vaVO.setTradeTotal(sumVO.getTradeSum().compareTo(BigDecimal.ZERO) == 1 ? sumVO.getTradeSum() : BigDecimal.ZERO);
-			vaVO.setDrawnTotal(sumVO.getDrawSum().abs().compareTo(BigDecimal.ZERO) == 1 ? sumVO.getDrawSum() : BigDecimal.ZERO);
-			vaVO.setBonusTotal(sumVO.getBonusSum().compareTo(BigDecimal.ZERO) == 1 ? sumVO.getBonusSum() : BigDecimal.ZERO);
-			vaVO.setCommissionTotal(sumVO.getCommissionSum().compareTo(BigDecimal.ZERO) == 1 ? sumVO.getCommissionSum() : BigDecimal.ZERO);
-			vaVO.setTradeDaily(sumVO.getTradeDaily().compareTo(BigDecimal.ZERO) == 1 ? sumVO.getTradeDaily() : BigDecimal.ZERO);
-			vaVO.setBonusDaily(sumVO.getBonusDaily().compareTo(BigDecimal.ZERO) == 1 ? sumVO.getBonusDaily() : BigDecimal.ZERO);
+			vaVO.setIncomeTotal(sumVO.getIncomeSum());
+			vaVO.setTradeTotal(sumVO.getTradeSum());
+			vaVO.setDrawnTotal(sumVO.getDrawSum().abs());
+			vaVO.setBonusTotal(sumVO.getBonusSum());
+			vaVO.setCommissionTotal(sumVO.getCommissionSum());
+			vaVO.setTradeDaily(sumVO.getTradeDaily());
+			vaVO.setBonusDaily(sumVO.getBonusDaily());
 			BigDecimal commissionIncome = sumVO.getCommissionSum().add(sumVO.getCouponCommissionSum()).add(sumVO.getBonusSum()).add(sumVO.getExpandCommissionTotal()).add(sumVO.getFirstCommissionTotal());
-			vaVO.setCommissionIncome(commissionIncome.compareTo(BigDecimal.ZERO) == 1 ? commissionIncome : BigDecimal.ZERO);
+			vaVO.setCommissionIncome(commissionIncome);
 		}
 
 		return vaVO;
