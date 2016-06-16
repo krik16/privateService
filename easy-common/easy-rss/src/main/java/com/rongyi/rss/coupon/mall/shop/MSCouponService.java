@@ -9,6 +9,7 @@ import com.rongyi.easy.coupon.param.RmmmCouponQueryParam;
 import com.rongyi.easy.coupon.vo.MSCouponQueryVO;
 import com.rongyi.easy.solr.retrival.result.ActivityData;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -142,6 +143,6 @@ public interface MSCouponService {
      * @param shopId
      * @return
      */
-    int getUnReadCouponsNum(Integer userId,String shopId);
+    int getUnReadCouponsNum(Integer userId,String shopId,Date lastTime);
 }
 
