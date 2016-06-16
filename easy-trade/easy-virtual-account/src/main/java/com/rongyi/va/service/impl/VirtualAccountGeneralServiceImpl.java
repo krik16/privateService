@@ -66,15 +66,15 @@ public class VirtualAccountGeneralServiceImpl implements VirtualAccountGeneralSe
 		VirtualAccountQuerySumVO sumVO = virtualAccountDetailService.selectAccountSumByUserId(userId);
 		logger.info("sumVO={}",sumVO);
 		if (sumVO != null) {
-			vaVO.setIncomeTotal(sumVO.getIncomeSum());
-			vaVO.setTradeTotal(sumVO.getTradeSum());
-			vaVO.setDrawnTotal(sumVO.getDrawSum().abs());
-			vaVO.setBonusTotal(sumVO.getBonusSum());
-			vaVO.setCommissionTotal(sumVO.getCommissionSum());
-			vaVO.setTradeDaily(sumVO.getTradeDaily());
-			vaVO.setBonusDaily(sumVO.getBonusDaily());
+			vaVO.setIncomeTotal(sumVO.getIncomeSum().compareTo(BigDecimal.ZERO) == 1 ? sumVO.getIncomeSum() : BigDecimal.ZERO);
+			vaVO.setTradeTotal(sumVO.getTradeSum().compareTo(BigDecimal.ZERO) == 1 ? sumVO.getTradeSum() : BigDecimal.ZERO);
+			vaVO.setDrawnTotal(sumVO.getDrawSum().abs().compareTo(BigDecimal.ZERO) == 1 ? sumVO.getDrawSum() : BigDecimal.ZERO);
+			vaVO.setBonusTotal(sumVO.getBonusSum().compareTo(BigDecimal.ZERO) == 1 ? sumVO.getBonusSum() : BigDecimal.ZERO);
+			vaVO.setCommissionTotal(sumVO.getCommissionSum().compareTo(BigDecimal.ZERO) == 1 ? sumVO.getCommissionSum() : BigDecimal.ZERO);
+			vaVO.setTradeDaily(sumVO.getTradeDaily().compareTo(BigDecimal.ZERO) == 1 ? sumVO.getTradeDaily() : BigDecimal.ZERO);
+			vaVO.setBonusDaily(sumVO.getBonusDaily().compareTo(BigDecimal.ZERO) == 1 ? sumVO.getBonusDaily() : BigDecimal.ZERO);
 			BigDecimal commissionIncome = sumVO.getCommissionSum().add(sumVO.getCouponCommissionSum()).add(sumVO.getBonusSum()).add(sumVO.getExpandCommissionTotal()).add(sumVO.getFirstCommissionTotal());
-			vaVO.setCommissionIncome(commissionIncome);
+			vaVO.setCommissionIncome(commissionIncome.compareTo(BigDecimal.ZERO) == 1 ? commissionIncome : BigDecimal.ZERO);
 		}
 
 		return vaVO;
