@@ -43,15 +43,18 @@ public class AliPaymentServiceImpl extends BaseServiceImpl implements AliPayment
 
     @Override
     public Map<String, Object> getZhiFuBaoSign(Map<String, Object> orderMaps, PaymentEntityVO paymentEntityVO) {
+        LOGGER.info("getZhiFuBaoSign orderNo={},payNo={}",paymentEntityVO.getOrderNum(),paymentEntityVO.getPayNo());
         Map<String, Object> resultMap = new HashMap<>();
         try {
             String title = orderMaps.get("title").toString();
-            if (StringUtils.isEmpty(title))
+            if (StringUtils.isEmpty(title)) {
                 title = paymentService.getTitle(paymentEntityVO.getPayNo());
+            }
             resultMap = aliPayUnit.getPaySign(orderMaps.get("totalPrice").toString(), paymentEntityVO, title);
         } catch (AliPayException e) {
             resultMap.put("code", e.getCode());
             resultMap.put("message", e.getMessage());
+            throw e;
         } catch (Exception e) {
             resultMap.put("code", 1);// 生成失败
             LOGGER.error(e.getMessage());
