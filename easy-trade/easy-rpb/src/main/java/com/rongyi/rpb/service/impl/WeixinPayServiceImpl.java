@@ -309,14 +309,6 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
         jsonObject.put("payment_no", paymentEntity.getPayNo());
         jsonObject.put("status", "0");//支付成功默认为0/否则给1
         jsonObject.put("type", type);
-        jsonObject.put("a", paymentEntity.getOrderNum());
-        jsonObject.put("b", paymentEntity.getOrderNum());
-        jsonObject.put("c", paymentEntity.getOrderNum());
-        jsonObject.put("d", paymentEntity.getOrderNum());
-        jsonObject.put("e", paymentEntity.getOrderNum());
-        jsonObject.put("f", paymentEntity.getOrderNum());
-        jsonObject.put("g", paymentEntity.getOrderNum());
-        jsonObject.put("h", paymentEntity.getOrderNum());
         String timeStamp = String.valueOf(DateUtil.getCurrDateTime().getTime()).substring(0, 10);
         String dataEncrypt = MalllifeRsaUtil.encryptionStr(jsonObject.toString(), TradeConstantEnum.PHP_SCORE_PUBLIC_KEY.getValueStr());
         String str = "channel=" + TradeConstantEnum.PHP_SCORE_CHANNEL_TOKEN.getCodeStr() + "&data=" + dataEncrypt + "&timestamp=" + timeStamp + "&token=" + TradeConstantEnum.PHP_SCORE_CHANNEL_TOKEN.getValueStr();
