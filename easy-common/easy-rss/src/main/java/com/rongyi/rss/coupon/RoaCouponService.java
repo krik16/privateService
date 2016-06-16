@@ -10,6 +10,7 @@ import com.rongyi.easy.coupon.vo.CouponPageVO;
 import com.rongyi.easy.coupon.vo.TCCouponVO;
 import com.rongyi.easy.coupon.vo.VoucherRelatedObjectVO;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -231,5 +232,5 @@ public interface RoaCouponService {
      */
     long getCouponCount();
 
-    int getCountUnReadCount(Integer userId,String shopId);
+    int getCountUnReadCount(Integer userId,String shopId,Date lastGetTime);
 }
