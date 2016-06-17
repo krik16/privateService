@@ -102,7 +102,7 @@ public enum CodeEnum {
     ERROR_MCMC_COMMODITY_NO_COMMENT("-7004", "未找到此商品相关评论"),
     ERROR_COMMENT_SORTBY("-7005", "未知的评论排序方式"),
     ERROR_NOMORE_COMMODITY("-7006", "没有更多的商品了"),
-    ERROR_MCMC_COMMODITY_CODE_USED("-7007", "商品编号重复"),
+    ERROR_MCMC_COMMODITY_CODE_USED("-7007", "商品条码重复"),
     ERROR_MCMC_COMMODITY_DUPLICATED_SPEC("-7008", "商品规格重复"),
     ERROR_MCMC_COMMODITY_ID_EMPTY("-7009", "商品信息错误"),
 	ERROR_MCMC_COMMODITY_DELETED("-7010", "商品不存在或已删除"),
