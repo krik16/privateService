@@ -1,6 +1,7 @@
 package com.rongyi.rss.bdata;
 
 import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.easy.bdata.entity.Photo;
 import com.rongyi.easy.bdata.entity.Shop;
 import com.rongyi.easy.ryoms.entity.RyUserInfo;
 import com.rongyi.easy.ryoms.param.ShopParam;
@@ -85,4 +86,11 @@ public interface ShopService {
 	 * 店铺查询结果统计
 	 */
 	Map<String, Object>getShopsWithBusinessStatusCount(Map params, int currentpage, int pagesize);
+	
+	/**
+	 * 保存店铺图片
+	 * @param photo
+	 * @return
+	 */
+	public Photo savePhoto(Photo photo);
 }

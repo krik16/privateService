@@ -42,6 +42,7 @@ public interface Constants {
         String APP_BUSINESSDISTRICT_DIR          = "/businessdistrict/original/"; //app热门商圈
         String APP_CATEGORY_DIR          = "/category/original/"; //app分类
         String MALL_ALL_PIC_DIR ="/mall/original/";
+        String SHOP_ALL_PIC_DIR = "/shop/original/";
         String FLOOR_ALL_PIC_DIR ="/mall/floor/";
 		String BRAND_ALL_PIC_DIR ="/brand/original/";  //品牌图片存放路径
 		String SHOPQRCODE_ALL_PIC_DIR ="/shopqrcode/original/";
@@ -67,6 +68,7 @@ public interface Constants {
         
         String UPAIYUN_URL_BRAND_MERLOG_PIC ="/system/brand/merlog/";  //云盘路径-品牌存放商家后台Logo  /mallId/xxx.jpg
         String UPAIYUN_URL_SHOP_QRCODE_PIC = "/system/shop/qrcode/"; // 云盘路径-店铺二维码 /shopId/xxx.jpg		    }
+        String UPAIYUN_URL_SHOP_PIC = "/system/photo/file/";   //店铺 APP图片 与终端机图片路径 
     }
 
     interface Version {
