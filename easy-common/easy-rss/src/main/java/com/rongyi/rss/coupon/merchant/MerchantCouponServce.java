@@ -7,6 +7,7 @@ import com.rongyi.easy.coupon.entity.CouponShop;
 import com.rongyi.easy.coupon.param.ActivityCouponParam;
 import com.rongyi.easy.coupon.param.CouponParam;
 import com.rongyi.easy.coupon.vo.merchant.MerchantPaging;
+import com.rongyi.easy.coupon.vo.merchant.ShopCouponsVO;
 import com.rongyi.easy.coupon.vo.merchant.StatisticsCountVO;
 import com.rongyi.easy.coupon.vo.merchant.UserInfoVo;
 import com.rongyi.easy.page.QueryParam;
@@ -134,5 +135,12 @@ public interface MerchantCouponServce {
      * @return
      */
     public List<CouponShop> getGeneralShopsByMallId(String mallId, int status);
+
+    /**
+     *  根据根据店铺ids 列表返回 每个店铺进行中的券的数量
+     * @param shopIds
+     * @return
+     */
+    public List<ShopCouponsVO> shopsCouponsCount(List<String> shopIds);
 }
  
