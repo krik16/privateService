@@ -175,7 +175,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         String[] orderNumArray = paymentEntityVO.getOrderNum().split(",");
         PaymentEntity paymentEntity;
         String payNo = getPayNo();// 生成付款单号,多个订单号付款单号一样
-        LOGGER.info("生成付款单号,payNo={}",payNo);
+        LOGGER.info("生成付款单号,payNo={}", payNo);
         if (orderNumArray.length > 0) {
             for (String orderNum : orderNumArray) {
                 paymentEntity = new PaymentEntity();
@@ -258,7 +258,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
      *                        datetime:2015年4月24日上午11:37:09
      **/
     @SuppressWarnings("unchecked")
-    private Map<String, Object> getBodyMap(PaymentEntityVO paymentEntityVO, MessageEvent event) throws TradeException{
+    private Map<String, Object> getBodyMap(PaymentEntityVO paymentEntityVO, MessageEvent event) throws TradeException {
 
         Map<String, Object> bodyMap = new HashMap<>();
         if (PaymentEventType.APP.equals(event.getType())) {// 手机APP支付
@@ -271,8 +271,8 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
         } else if (PaymentEventType.PAY_TO_SELLER.equals(event.getType()) || PaymentEventType.REFUND.equals(event.getType())) {
             LOGGER.info("申请退款或打款给卖家");
             bodyMap.put("paymentId", paymentEntityVO.getPayNo());
-        }else{
-            LOGGER.warn("未发现匹配的业务类型,返回无效数据,event={},paymentEntityVO={}",event,paymentEntityVO);
+        } else {
+            LOGGER.warn("未发现匹配的业务类型,返回无效数据,event={},paymentEntityVO={}", event, paymentEntityVO);
         }
         bodyMap.put("totalPrice", paymentEntityVO.getAmountMoney().multiply(new BigDecimal(100)));
         bodyMap.put("orderNum", paymentEntityVO.getOrderNum());
@@ -384,25 +384,25 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                 PaymentEntity paymentEntity = list.get(0);
                 PaymentEntity newPaymentEntity = new PaymentEntity();
 //                for (PaymentEntity paymentEntity : list) {
-                    if (Constants.PAYMENT_STATUS.STAUS2 == paymentEntity.getStatus() && payChannel.equals(paymentEntity.getPayChannel())) {// 订单已完成支付后重新发起支付请求
-                        throw new TradeException("此订单已成功支付,此次请求属于订单重复支付请求,请重新下单，订单号-->" + orderNum);
-                    }
-                    BeanUtils.copyProperties(paymentEntity, newPaymentEntity);
-                    newPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
-                    if (paymentEntity.getPayChannel() != null && payChannel.equals(paymentEntity.getPayChannel())) {
-                        LOGGER.info("此订单payChannel={}支付方式未支付单已存在，直接返回此笔付款单记录,orderNum={}", paymentEntity.getPayChannel(), orderNo);
+                if (Constants.PAYMENT_STATUS.STAUS2 == paymentEntity.getStatus() && payChannel.equals(paymentEntity.getPayChannel())) {// 订单已完成支付后重新发起支付请求
+                    throw new TradeException("此订单已成功支付,此次请求属于订单重复支付请求,请重新下单，订单号-->" + orderNum);
+                }
+                BeanUtils.copyProperties(paymentEntity, newPaymentEntity);
+                newPaymentEntity.setStatus(Constants.PAYMENT_STATUS.STAUS0);
+                if (paymentEntity.getPayChannel() != null && payChannel.equals(paymentEntity.getPayChannel())) {
+                    LOGGER.info("此订单payChannel={}支付方式未支付单已存在，直接返回此笔付款单记录,orderNum={}", paymentEntity.getPayChannel(), orderNo);
 //                        break;
-                    } else {
-                        PaymentEntity oldPaymentEntity = selectByPayNoAndPayChannelAndTradeType(paymentEntity.getPayNo(), payChannel, tradeType, Constants.PAYMENT_STATUS.STAUS0);
-                        if (oldPaymentEntity == null) {
-                            LOGGER.info("此订单payChannel={}支付方式未支付单不存在，新增新付款方式同支付单号待付款记录,orderNum={}", payChannel, orderNo);
-                            newPaymentEntity.setId(null);
-                            newPaymentEntity.setCreateTime(DateUtil.getCurrDateTime());
-                            newPaymentEntity.setPayChannel(payChannel);
-                            insert(newPaymentEntity);
-                        }
-//                        break;
+                } else {
+                    PaymentEntity oldPaymentEntity = selectByPayNoAndPayChannelAndTradeType(paymentEntity.getPayNo(), payChannel, tradeType, Constants.PAYMENT_STATUS.STAUS0);
+                    if (oldPaymentEntity == null) {
+                        LOGGER.info("此订单payChannel={}支付方式未支付单不存在，新增新付款方式同支付单号待付款记录,orderNum={}", payChannel, orderNo);
+                        newPaymentEntity.setId(null);
+                        newPaymentEntity.setCreateTime(DateUtil.getCurrDateTime());
+                        newPaymentEntity.setPayChannel(payChannel);
+                        insert(newPaymentEntity);
                     }
+//                        break;
+                }
 //                }
                 return newPaymentEntity;
             }
@@ -440,22 +440,29 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
             paymentLogInfo.setTradeType(Constants.PAYMENT_TRADE_TYPE.TRADE_TYPE1);
         }
         paymentLogInfoService.insertGetId(paymentLogInfo);
-        String type = PaymentEventType.BUYER_PAID;
-        if (PaymentEventType.REFUND.equals(event.getType()))
-            type = PaymentEventType.REFUND;
-        String target = Constants.SOURCETYPE.OSM;
-        if (Constants.ORDER_TYPE.ORDER_TYPE_1 == paymentEntityVO.getOrderType())
-            target = Constants.SOURCETYPE.COUPON;
-        event = rpbEventService.getMessageEvent(paymentEntityVO.getPayNo(), paymentEntityVO.getOrderNum(), paymentEntityVO.getOrderDetailNumArray(), PaymentEventType.ZERO_PAY, null,
-                Constants.SOURCETYPE.RPB, target, type);
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("code", 0);
-        resultMap.put("totlePrice", 0);
-        resultMap.put("orderNum", paymentEntityVO.getOrderNum());
-        resultMap.put("paymentId", paymentEntityVO.getPayNo());
-        resultMap.put("orderDetailNum", paymentEntityVO.getOrderDetailNumArray());
-        messageMap.put("body", resultMap);
-        sender.convertAndSend(event);
+        if (Constants.ORDER_TYPE.ORDER_TYPE_2 == paymentEntityVO.getOrderType()) {
+            PaymentEntity paymentEntity = new PaymentEntity();
+            BeanUtils.copyProperties(paymentEntityVO, paymentEntity);
+            weixinPayService.payNotifyThird(paymentEntity);
+        } else {
+            String type = PaymentEventType.BUYER_PAID;
+            if (PaymentEventType.REFUND.equals(event.getType()))
+                type = PaymentEventType.REFUND;
+            String target = Constants.SOURCETYPE.OSM;
+            if (Constants.ORDER_TYPE.ORDER_TYPE_1 == paymentEntityVO.getOrderType())
+                target = Constants.SOURCETYPE.COUPON;
+            event = rpbEventService.getMessageEvent(paymentEntityVO.getPayNo(), paymentEntityVO.getOrderNum(), paymentEntityVO.getOrderDetailNumArray(), PaymentEventType.ZERO_PAY, null,
+                    Constants.SOURCETYPE.RPB, target, type);
+            Map<String, Object> resultMap = new HashMap<>();
+            resultMap.put("code", 0);
+            resultMap.put("totlePrice", 0);
+            resultMap.put("orderNum", paymentEntityVO.getOrderNum());
+            resultMap.put("paymentId", paymentEntityVO.getPayNo());
+            resultMap.put("orderDetailNum", paymentEntityVO.getOrderDetailNumArray());
+            messageMap.put("body", resultMap);
+            sender.convertAndSend(event);
+        }
+
         return messageMap;
     }
 
