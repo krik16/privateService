@@ -219,7 +219,9 @@ public interface ROACommodityService {
 	 * @return
 	 */
 	public List<CommodityByNoVO> findByAraNo(String artNo,Integer currentPage, Integer pageSize);
-    /**
+
+	public Integer  findTotalCountByAraNo(String artNo);
+	/**
      * 获取某个时间戳之后新增的商品数量
      *
      * @param mallMId 商场ID
@@ -230,4 +232,5 @@ public interface ROACommodityService {
      */
     public ResponseVO selectCommodityCountByTs(String mallMId, String shopMId, long ts, int srcType);
 	public ResponseVO  selectSpecById(String categoryId);
+
 }
