@@ -48,9 +48,9 @@
                                 <c:otherwise>
                                     <td><a href="${ctx}/tradeDetail/info?id=${entity.id}&tradeNo=${entity.tradeNo}" target="_blank"
                                            style="text-decoration: underline;">${entity.tradeNo}</a></td>
-                                    <td>${entity.payNo}</td>
                                 </c:otherwise>
                             </c:choose>
+                            <td>${entity.payNo}</td>
                         <%-- <td>
                             <c:choose>
                                 <c:when test="${entity.guideType eq 1}">商家</c:when>
