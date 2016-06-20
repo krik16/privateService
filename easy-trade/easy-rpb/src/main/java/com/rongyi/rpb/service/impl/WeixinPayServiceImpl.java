@@ -266,9 +266,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
         try {
             notifyThird(paymentEntity, ConstantEnum.THIRD_NOTIFY_TYPE_1.getCodeStr());
         } catch (ThirdException e) {
-            LOGGER.error("第三方支付结果处理失败，暂记录日志，不做业务处理,errmsg={}", e.getMessage());
-//            e.printStackTrace();
-//            throw new TradeException(TradeConstantEnum.EXCEPTION_THIRD_PAY_NOTIFY.getCodeStr(), TradeConstantEnum.EXCEPTION_THIRD_PAY_NOTIFY.getValueStr());
+            LOGGER.error("第三方支付结果处理失败，暂记录日志，不做业务处理，payNo={},errno={},errmsg={}",paymentEntity.getPayNo(),e.getCode(), e.getMessage());
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
             e.printStackTrace();
@@ -285,9 +283,7 @@ public class WeixinPayServiceImpl extends BaseServiceImpl implements WeixinPaySe
         try {
             notifyThird(paymentEntity, ConstantEnum.THIRD_NOTIFY_TYPE_2.getCodeStr());
         } catch (ThirdException e) {
-            LOGGER.error("第三方退款结果处理失败，暂记录日志，不做业务处理,errmsg={}", e.getMessage());
-//            e.printStackTrace();
-//            throw new TradeException(TradeConstantEnum.EXCEPTION_THIRD_PAY_NOTIFY.getCodeStr(), TradeConstantEnum.EXCEPTION_THIRD_PAY_NOTIFY.getValueStr());
+            LOGGER.error("第三方退款结果处理失败，暂记录日志，不做业务处理,payNo={},errno={},errmsg={}",paymentEntity.getPayNo(),e.getCode(), e.getMessage());
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
             e.printStackTrace();
