@@ -19,8 +19,9 @@
     <result column="role_type" property="roleType" jdbcType="INTEGER" />
     <result column="relate_type" property="relateType" jdbcType="INTEGER" />
     <result column="is_read" property="isRead" jdbcType="INTEGER" />
+    <result column="push_type" property="pushType" jdbcType="INTEGER" />
     <result column="source" property="source" jdbcType="INTEGER" />
-    <result column="read_platforms" property="readPlatforms" jdbcType="INTEGER" />
+    <result column="read_platforms" property="readPlatforms" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="Sta_Map" type="com.rongyi.easy.msgcenter.merchant.StatisticsVO">
     <result column="total" property="total" jdbcType="INTEGER" />
