@@ -67,7 +67,6 @@ public class Shop implements Serializable {
     private Integer update_source ; //修改来源 
     private Date open_at ;  //开业时间
     private List<ObjectId> brand_ids ; //兼营品牌
-    private List<Integer> indoor_location ;
     public ObjectId getId() {
         return id;
     }
@@ -458,13 +457,5 @@ public class Shop implements Serializable {
 
 	public void setBrand_ids(List<ObjectId> brand_ids) {
 		this.brand_ids = brand_ids;
-	}
-
-	public List<Integer> getIndoor_location() {
-		return indoor_location;
-	}
-
-	public void setIndoor_location(List<Integer> indoor_location) {
-		this.indoor_location = indoor_location;
 	}
 }

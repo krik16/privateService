@@ -15,7 +15,7 @@ public class ShopParam implements Serializable{
 	private Integer shopNature ;//店铺类型   0普通店   1免税店  2专柜  3折扣  4旗舰
 	private Integer shopType ;//店铺性质    0商场商铺  1商场专柜  2街边店 3特卖店
 	private String qrcodePic;  //二维码
-	private Integer recommend = 1;  //0不置顶  1置顶
+	private Integer recommend = 0;  //0不置顶  1置顶
 	private ShopPositionParam position ;  //位置信息
 	private String shopNumber;  //铺位号
 	private String address; //详情地址
@@ -32,10 +32,11 @@ public class ShopParam implements Serializable{
 	private String filialeId; //分公司ID
 	private String appPhotosUrl ;  //app店铺详情图片
 	private String photosUrl ;  //终端机店铺详情图片 
-	private List<Integer> indoorLocation ;  //室内座标
+	List<String> coordinate  ;  //室内座标
 	private Integer isImport = 1 ;  // 是否是导入  （0是 1否）
 	private Integer optId ;  //操作者ID
-	private Integer createSource = 1 ; //创建来源  0大运营  1商家后台  其它crm
+	private Integer createSource = 0 ; //创建来源  0大运营  1商家后台  其它crm
+	private String averageConsumption;  //平均消费
 	
 	@Override
 	public String toString(){
@@ -43,7 +44,7 @@ public class ShopParam implements Serializable{
 				+",recommend="+recommend+",shopNumber="+shopNumber+",address="+address+",customCategoryIds="+customCategoryIds
 				+"businessStatus="+businessStatus+",location="+location+",tags="+tags+",telephone="+telephone+",businessHours"+businessHours
 				+",openAt="+openAt+",description="+description+",brandId="+brandId+",brandIds="+brandIds+",filialeId="+filialeId
-				+",appPhotosUrl="+appPhotosUrl+",photosUrl="+photosUrl+",indoorLocation="+indoorLocation +",position="+position.toString()+"]";
+				+",appPhotosUrl="+appPhotosUrl+",photosUrl="+photosUrl+",coordinate="+coordinate +",position="+position.toString()+"]";
 	}
 	
 	public String getId() {
@@ -179,12 +180,15 @@ public class ShopParam implements Serializable{
 	public void setPhotosUrl(String photosUrl) {
 		this.photosUrl = photosUrl;
 	}
-	public List<Integer> getIndoorLocation() {
-		return indoorLocation;
+	
+	public List<String> getCoordinate() {
+		return coordinate;
 	}
-	public void setIndoorLocation(List<Integer> indoorLocation) {
-		this.indoorLocation = indoorLocation;
+
+	public void setCoordinate(List<String> coordinate) {
+		this.coordinate = coordinate;
 	}
+
 	public Integer getIsImport() {
 		return isImport;
 	}
@@ -202,5 +206,13 @@ public class ShopParam implements Serializable{
 	}
 	public void setCreateSource(Integer createSource) {
 		this.createSource = createSource;
+	}
+
+	public String getAverageConsumption() {
+		return averageConsumption;
+	}
+
+	public void setAverageConsumption(String averageConsumption) {
+		this.averageConsumption = averageConsumption;
 	}
 }
