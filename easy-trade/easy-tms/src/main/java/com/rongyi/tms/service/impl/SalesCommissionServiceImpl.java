@@ -316,9 +316,9 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 				LOGGER.info("updateResult size={}",updateResult);
 				if (updateResult > 0) {
 					try {
-						Thread.sleep(2000);//test
+						Thread.sleep(2000);//防止数据库未更新完成等待2s再去查询要打款的佣金
 					}catch (Exception e){
-						e.printStackTrace();
+						LOGGER.warn("ignore this exception ...");
 					}
 					LOGGER.info("更新成功，发送消息到 va");
 					Map<String, Object> paramMap = new HashMap<>();
@@ -328,9 +328,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 					List<CommissionAmountTotalVO> commissions = this.getBaseDao().selectListBySql(NAMESPACE_SALESCOMMISSION + ".commissionAmountTotalByVersion", paramMap);
 					LOGGER.info("commissionSize={}",commissions.size());
 					for (CommissionAmountTotalVO commission : commissions) {
-						LOGGER.info("commissionId={}",commission.getId());
 						JSONObject jsonObject = JSONObject.fromObject(commission);
-						LOGGER.info("jsonObject={}",jsonObject);
 						array.add(jsonObject);
 					}
 					bodyMap.put("detailList", array);
