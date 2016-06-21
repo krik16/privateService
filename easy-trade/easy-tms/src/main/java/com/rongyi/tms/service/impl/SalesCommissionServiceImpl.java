@@ -315,6 +315,11 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 				int updateResult = this.updateBatchHadSendedVA(newList, version);
 				LOGGER.info("updateResult size={}",updateResult);
 				if (updateResult > 0) {
+					try {
+						Thread.sleep(2000);//test
+					}catch (Exception e){
+						e.printStackTrace();
+					}
 					LOGGER.info("更新成功，发送消息到 va");
 					Map<String, Object> paramMap = new HashMap<>();
 					Map<String, Object> bodyMap = new HashMap<>();
