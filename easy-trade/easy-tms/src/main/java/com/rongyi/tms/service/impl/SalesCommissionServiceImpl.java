@@ -33,7 +33,8 @@ import com.rongyi.tms.util.ValidateUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,7 +48,7 @@ import java.util.*;
 public class SalesCommissionServiceImpl extends BaseServiceImpl implements SalesCommissionService {
 	private static final String NAMESPACE_SALESCOMMISSION = "com.rongyi.tms.mapper.xml.SalesCommissionMapper";
 
-	private static final Logger LOGGER = Logger.getLogger(SalesCommissionServiceImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(SalesCommissionServiceImpl.class);
 
 	@Autowired
 	private SalesCommissionAuditLogService logService;
@@ -312,7 +313,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 					newList = vos.subList(i * Constant.SENDSIZE.SIZE, vos.size());
 				}
 				int updateResult = this.updateBatchHadSendedVA(newList, version);
-				LOGGER.info(updateResult);
+				LOGGER.info("updateResult size={}",updateResult);
 				if (updateResult > 0) {
 					LOGGER.info("更新成功，发送消息到 va");
 					Map<String, Object> paramMap = new HashMap<>();
@@ -320,12 +321,15 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 					paramMap.put("version", version);
 					JSONArray array = new JSONArray();
 					List<CommissionAmountTotalVO> commissions = this.getBaseDao().selectListBySql(NAMESPACE_SALESCOMMISSION + ".commissionAmountTotalByVersion", paramMap);
+					LOGGER.info("commissionSize={}",commissions.size());
 					for (CommissionAmountTotalVO commission : commissions) {
+						LOGGER.info("commissionId={}",commission.getId());
 						JSONObject jsonObject = JSONObject.fromObject(commission);
+						LOGGER.info("jsonObject={}",jsonObject);
 						array.add(jsonObject);
 					}
 					bodyMap.put("detailList", array);
-					LOGGER.info(array);
+					LOGGER.info("array={}",array);
 					MessageEvent event = MessageEvent.getMessageEvent(bodyMap, "tms", "va", VirtualAccountEventTypeEnum.COMMISSION_BATCH_POST.getCode());
 					sender.convertAndSend(event);
 				} else {
