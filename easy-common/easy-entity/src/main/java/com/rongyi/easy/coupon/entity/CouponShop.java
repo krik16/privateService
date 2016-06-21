@@ -35,6 +35,10 @@ public class CouponShop implements Serializable {
     private String brandCname;//品牌中文名
     private String mallId;//商场id
     private String mallName;//商场名称
+    /**
+     * 1:通用券；2：活动券
+     */
+    private Integer status;
 
     public Object getObject1() {
         return object1;
@@ -158,6 +162,14 @@ public class CouponShop implements Serializable {
 
     public CouponShop() {
 
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public String getTelePhone() {

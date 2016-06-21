@@ -25,7 +25,7 @@ public class CouponActivity implements Serializable {
     private String activityId;
 
     /**
-     * 活动类型 翻牌购[0] 推送[1]
+     * 活动类型: 翻牌购[0] 推送[1] 大运营推送卡券[2] 终端屏活动 [3]
      */
     private Integer activityType;
 
