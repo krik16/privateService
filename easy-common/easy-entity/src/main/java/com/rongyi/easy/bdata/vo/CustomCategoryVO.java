@@ -44,6 +44,8 @@ public class CustomCategoryVO implements Serializable {
 	 * 分类id列表
 	 */
 	private List<String> categorysId;
+	private List<CategoriesVO> categorys;
+
 	/**
 	 * 创建时间
 	 */
@@ -65,6 +67,15 @@ public class CustomCategoryVO implements Serializable {
      * 自定义分类下关联的店铺数
      */
 	private Long shopNum;
+
+	
+	public List<CategoriesVO> getCategorys() {
+		return categorys;
+	}
+
+	public void setCategorys(List<CategoriesVO> categorys) {
+		this.categorys = categorys;
+	}
 
 	public String getId() {
 		return id;
