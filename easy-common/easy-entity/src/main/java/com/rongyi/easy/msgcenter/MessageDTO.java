@@ -20,7 +20,7 @@ public class MessageDTO implements Serializable {
     private String receiveDate;               // 接收时间
     private String pushDate;                  // 推送时间
     private String createDate;                // 创建时间
-    private String pushType;                  // 推送类型  1.系统推送 2.人工推送
+    private String pushType;                  // 推送类型  1.系统推送 0.人工推送
     private List<String> relevantSeller;      // 对应卖家(店铺名称or买手账号)
     private String messageLink;               // 消息外链
     private String messageContent;            // 消息内容

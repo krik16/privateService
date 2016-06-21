@@ -61,7 +61,7 @@ public class ContentSysMsg implements Serializable{
     private Integer relateType;
 
     /**
-     * 0:系统推送；1：人工推送
+     * 1:系统推送；0：人工推送
      */
     private Integer pushType;
 
