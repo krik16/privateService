@@ -35,8 +35,27 @@ public class ShopVO implements Serializable {
 	private Date createdAt;
 	private Date updateAt;
 	private String qrcodePic;
+	private String valiReason;
+	private Integer businessStatus;
+
 	
 	
+	public Integer getBusinessStatus() {
+		return businessStatus;
+	}
+
+	public void setBusinessStatus(Integer businessStatus) {
+		this.businessStatus = businessStatus;
+	}
+
+	public String getValiReason() {
+		return valiReason;
+	}
+
+	public void setValiReason(String valiReason) {
+		this.valiReason = valiReason;
+	}
+
 	public String getBrandEname() {
 		return brandEname;
 	}
