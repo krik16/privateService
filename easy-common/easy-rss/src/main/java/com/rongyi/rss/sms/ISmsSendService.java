@@ -32,11 +32,11 @@ public interface ISmsSendService {
 
     /**
      * 发送语音
+     * @param smsParam
+     * @return
      * 【1】 Faild  表示 失败
      * 【2】 Success  表示成功
      * 【3】 Limit 表示当前手机号，当天发送超量
-     * @param smsParam
-     * @return
      * @throws MallShopException
      */
     public  String sendYuYINSmsMessage(SmsParam smsParam) throws MallShopException;
@@ -46,9 +46,30 @@ public interface ISmsSendService {
      * 发送B端短信
      * @param smsParam
      * @return
+     * 【1】 Faild  表示 失败
+     * 【2】 Success  表示成功
+     * 【3】 Limit 表示当前手机号，当天发送超量
      * @throws MallShopException
      */
     public String sendToBSms(SmsParam smsParam)throws MallShopException;
+
+
+
+
+    /**
+     * 根据渠道发送短信，方便管控
+     * @param smsParam 短信信息
+     * @return
+     * 【1】 Faild  表示 失败
+     * 【2】 Success  表示成功
+     * 【3】 Limit 表示当前手机号，当天发送超量
+     * @throws MallShopException  其他业务异常
+     */
+    public String sendSmsByChannel(SmsParam smsParam)throws MallShopException;
+
+
+
+
 
 
 }
