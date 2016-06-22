@@ -67,6 +67,8 @@ public class SmsConfig implements Serializable{
         public static final String JIANZHOU="jianzhou";//建周
         public static final  String CHUANGSHI="chuangshi";//创世华信
         public static final  String WEILAI="weilai";//福建未来无线信息技术有限公司
+        public static final  String HUAYI="huayi";//宜春华宜嘉信传媒有限公司
+
     }
 
 
@@ -112,6 +114,9 @@ public class SmsConfig implements Serializable{
         public static final  int CHANNEL_JIANZHOU_MARKET=22;
         public static final  int CHANNEL_WEILAI=3;
         public static final  int CHANNEL_YUNTONGXUN=101;
+        public static final  int CHANNEL_HUAYI=4;
+        public static final  int CHANNEL_HUAYI_MARKET=44;
+
     }
 
 
