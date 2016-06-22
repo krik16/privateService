@@ -28,7 +28,7 @@ public class Floor implements Serializable {
     private String navigation_pic;
     private String pathImg;
     private String picture;
-    private String swfPic;//步步高新增楼层动态导航图片 支持swf svg格式
+    private String swfpic;//步步高新增楼层动态导航图片 支持swf svg格式
     private Date   created_at;
 
 
@@ -139,18 +139,21 @@ public class Floor implements Serializable {
         this.picture = picture;
     }
 
-    public String getSwfPic() {
-        return swfPic;
-    }
-    public void setSwfPic(String swfPic) {
-        this.swfPic = swfPic;
-    }
+
     public String getFullSwfPic() {
-        if (StringUtils.isNotBlank(swfPic)) {
-            return "http://rongyi.b0.upaiyun.com/system/mall_area/picture/" + id + "/" + swfPic;
+        if (StringUtils.isNotBlank(swfpic)) {
+            return "http://rongyi.b0.upaiyun.com/system/mall_area/picture/" + id + "/" + swfpic;
         } else {
             return null;
         }
+    }
+
+    public String getSwfpic() {
+        return swfpic;
+    }
+
+    public void setSwfpic(String swfpic) {
+        this.swfpic = swfpic;
     }
 
     @Override
@@ -165,7 +168,7 @@ public class Floor implements Serializable {
                 ", navigation_pic='" + navigation_pic + '\'' +
                 ", pathImg='" + pathImg + '\'' +
                 ", picture='" + picture + '\'' +
-                ", swfPic='" + swfPic + '\'' +
+                ", swfpic='" + swfpic + '\'' +
                 ", created_at=" + created_at +
                 '}';
     }
