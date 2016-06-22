@@ -198,11 +198,6 @@ public class ForumContent implements Serializable {
     private Integer stick;
     
     /**
-     * 做兼容新增的背景图
-     */
-    private String bannerBackgroundPicTwo;
-    
-    /**
      * APP兼容新增的图标
      */
     private String picUrlsTwo;
@@ -528,15 +523,6 @@ public class ForumContent implements Serializable {
 
 	public void setActivityModuleName(String activityModuleName) {
 		this.activityModuleName = activityModuleName;
-	}
-	
-
-    public String getBannerBackgroundPicTwo() {
-		return bannerBackgroundPicTwo;
-	}
-
-	public void setBannerBackgroundPicTwo(String bannerBackgroundPicTwo) {
-		this.bannerBackgroundPicTwo = bannerBackgroundPicTwo;
 	}
 
 	public String getPicUrlsTwo() {

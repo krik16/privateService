@@ -15,6 +15,8 @@ public class ValidHistoryParam implements Serializable {
     private Integer type;//0:店铺券；2：礼品券；1：活动券
     private String shopId;
     private String mallId;
+    private String checkAccount;
+    private Integer checkUserId;
 
     public String getMallId() {
         return mallId;
@@ -72,6 +74,22 @@ public class ValidHistoryParam implements Serializable {
         this.shopId = shopId;
     }
 
+    public String getCheckAccount() {
+        return checkAccount;
+    }
+
+    public void setCheckAccount(String checkAccount) {
+        this.checkAccount = checkAccount;
+    }
+
+    public Integer getCheckUserId() {
+        return checkUserId;
+    }
+
+    public void setCheckUserId(Integer checkUserId) {
+        this.checkUserId = checkUserId;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("ValidHistoryParam{");
@@ -82,6 +100,8 @@ public class ValidHistoryParam implements Serializable {
         sb.append(", type=").append(type);
         sb.append(", shopId='").append(shopId).append('\'');
         sb.append(", mallId='").append(mallId).append('\'');
+        sb.append(", checkAccount='").append(checkAccount).append('\'');
+        sb.append(", checkUserId=").append(checkUserId);
         sb.append('}');
         return sb.toString();
     }

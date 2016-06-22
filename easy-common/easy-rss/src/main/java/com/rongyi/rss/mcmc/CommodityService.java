@@ -233,8 +233,9 @@ public interface CommodityService {
 
     public List<ThirdPartMcmcCommodity> selectCommodityByArtNo(String artNo,Integer start,Integer size);
 
-    public List<CommodityByNoVO> findByAraNo(String artNo);
+    public List<CommodityByNoVO> findByAraNo(String artNo,Integer currentPage, Integer pageSize);
 
+    public Integer  findTotalCountByAraNo(String artNo);
     /**
      * 获取某个时间戳之后新增的商品数量
      *

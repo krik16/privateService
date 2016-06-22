@@ -114,7 +114,7 @@ public class CopyCommodityVO implements Serializable{
 			List<CopyCommoditySpecVO> copyCommoditySpecVOs = new ArrayList<>();
 			if(StringUtils.isNotBlank(thirdPartMcmcCommodity.getSize())){
 				CopyCommoditySpecVO copyCommoditySpecVO = new CopyCommoditySpecVO();
-				copyCommoditySpecVO.setColumnName("尺寸");//规格名
+				copyCommoditySpecVO.setColumnName("尺码");//规格名
 				List<String> columnValues = new ArrayList<>();
 				String[] sizes = thirdPartMcmcCommodity.getSize().split(",");
 				for(int i=0;i<sizes.length;i++){

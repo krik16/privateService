@@ -272,6 +272,7 @@ public class CommodityBuyerVO implements Serializable{
 		this.commodityCPriceMax = commodity.getcPriceMax();
 		this.commodityCPriceMin = commodity.getcPriceMin();
 		this.commodityCurrentPrice=commodity.getCurrentPrice();
+		this.goodsParam = commodity.getGoodsParam();//商品参数
 		if(commodity.getPostage() != null && !commodity.getPostage().isEmpty()){
 			try{
 				double postage = Double.parseDouble(commodity.getPostage());

@@ -4,6 +4,7 @@ import com.rongyi.easy.mcmc.Commodity;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 商品下架消息推送对象
@@ -20,8 +21,8 @@ public class MessageDTO implements Serializable {
     private String receiveDate;               // 接收时间
     private String pushDate;                  // 推送时间
     private String createDate;                // 创建时间
-    private String pushType;                  // 推送类型  1.系统推送 2.人工推送
-    private List<String> relevantSeller;      // 对应卖家(店铺名称or买手账号)
+    private String pushType;                  // 推送类型  1.系统推送 0.人工推送
+    private Map<Integer, String> relevantSellerMap;      // 对应卖家(店铺名称or买手账号)
     private String messageLink;               // 消息外链
     private String messageContent;            // 消息内容
     private PushInfoDTO pushInfoDTO;
@@ -67,12 +68,12 @@ public class MessageDTO implements Serializable {
         this.pushType = pushType;
     }
 
-    public List<String> getRelevantSeller() {
-        return relevantSeller;
+    public Map<Integer, String> getRelevantSellerMap() {
+        return relevantSellerMap;
     }
 
-    public void setRelevantSeller(List<String> relevantSeller) {
-        this.relevantSeller = relevantSeller;
+    public void setRelevantSellerMap(Map<Integer, String> relevantSellerMap) {
+        this.relevantSellerMap = relevantSellerMap;
     }
 
     public String getMessageLink() {
@@ -133,7 +134,7 @@ public class MessageDTO implements Serializable {
         sb.append(", pushDate='").append(pushDate).append('\'');
         sb.append(", createDate='").append(createDate).append('\'');
         sb.append(", pushType='").append(pushType).append('\'');
-        sb.append(", relevantSeller=").append(relevantSeller);
+        sb.append(", relevantSeller=").append(relevantSellerMap);
         sb.append(", messageLink='").append(messageLink).append('\'');
         sb.append(", messageContent='").append(messageContent).append('\'');
         sb.append(", pushInfoDTO=").append(pushInfoDTO);

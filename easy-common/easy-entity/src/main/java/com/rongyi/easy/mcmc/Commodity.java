@@ -95,7 +95,7 @@ public class Commodity implements  Serializable,Cloneable{
 //	private int highCommentCount;
 //	private int mediumCommentCount;
 //	private int lowCommentCount;
-	
+
 	public boolean isSupportCourierDeliver() {
 		return supportCourierDeliver;
 	}
