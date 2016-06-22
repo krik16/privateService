@@ -147,7 +147,7 @@ public class Floor implements Serializable {
     }
     public String getFullSwfPic() {
         if (StringUtils.isNotBlank(swfPic)) {
-            return "http://rongyi.b0.upaiyun.com/system/mall_area/swfPic/" + id + "/" + swfPic;
+            return "http://rongyi.b0.upaiyun.com/system/mall_area/picture/" + id + "/" + swfPic;
         } else {
             return null;
         }
