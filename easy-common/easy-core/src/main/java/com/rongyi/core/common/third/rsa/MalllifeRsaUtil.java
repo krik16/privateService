@@ -252,13 +252,13 @@ public class MalllifeRsaUtil {
                 System.out.println("privateKey="+privateKey);
 
 
-                String jsonStr="{'phone':'15821659415','passWd':'111111','uuid':'尊敬的顾客，恭喜您获得XX一份，请于活动截止日前至工作人员处领取，南国西汇城市广场感谢您的积极参与！【容易网】','regiTime':'1442838385146','couponId',:'couponId'}";
+               /* String jsonStr="{'phone':'15821659415','passWd':'111111','uuid':'尊敬的顾客，恭喜您获得XX一份，请于活动截止日前至工作人员处领取，南国西汇城市广场感谢您的积极参与！【容易网】','regiTime':'1442838385146','couponId',:'couponId'}";
                 //jsonStr="{'phone':'15821659415',";
                 System.out.println("加密前="+jsonStr);
                 String encryStr=  MalllifeRsaUtil.encryptionStr(jsonStr,publicKey);
                 System.out.println("加密后="+encryStr);
                 String decryStr=MalllifeRsaUtil.decryptStr(encryStr,privateKey);
-                System.out.println("解密后="+decryStr);
+                System.out.println("解密后="+decryStr);*/
 
 
                 //全民财富
