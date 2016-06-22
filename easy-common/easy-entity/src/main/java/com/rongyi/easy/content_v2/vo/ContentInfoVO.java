@@ -129,11 +129,7 @@ public class ContentInfoVO implements Serializable{
 	 * app标题
 	 */
 	private String appTitle;
-	
-	/**
-	 * APP兼容新增的背景图片
-	 */
-	private String bannerBackgroundPicTwo;
+
     
 
 	public Integer getId() {
@@ -364,14 +360,6 @@ public class ContentInfoVO implements Serializable{
 
 	public void setAppTitle(String appTitle) {
 		this.appTitle = appTitle;
-	}
-
-	public String getBannerBackgroundPicTwo() {
-		return bannerBackgroundPicTwo;
-	}
-
-	public void setBannerBackgroundPicTwo(String bannerBackgroundPicTwo) {
-		this.bannerBackgroundPicTwo = bannerBackgroundPicTwo;
 	}
 
 	@Override
