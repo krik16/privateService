@@ -187,14 +187,14 @@ public class JsonUtil {
             if(object instanceof Collection || object instanceof Object[]){   
                 jsonString = JSONArray.fromObject(object, jsonConfig).toString();   
             }else{
-                JSONObject jsonStr=  JSONObject.fromObject(object, jsonConfig);
-                if(jsonStr.containsKey("error")){
-                    jsonStr.remove("error");
-                }
-                if(jsonStr.containsKey("codeInt")){
-                    jsonStr.remove("codeInt");
-                }
-                jsonString = String.valueOf(jsonStr);
+//                JSONObject jsonStr=  JSONObject.fromObject(object, jsonConfig);
+//                if(jsonStr.containsKey("error")){
+//                    jsonStr.remove("error");
+//                }
+//                if(jsonStr.containsKey("codeInt")){
+//                    jsonStr.remove("codeInt");
+//                }
+                jsonString = JSONObject.fromObject(object, jsonConfig).toString();
             }   
         }   
         return jsonString == null ? "{}" : jsonString;   
