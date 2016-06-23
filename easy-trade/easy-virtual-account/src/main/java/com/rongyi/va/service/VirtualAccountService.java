@@ -14,6 +14,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +33,8 @@ public class VirtualAccountService extends BaseServiceImpl {
 
 	private static final String MAPPER_NAMESPACE = "com.rongyi.easy.va.entity.VirtualAccountMapper";
 
+	private static  final Logger LOGGER = LoggerFactory.getLogger(VirtualAccountService.class);
+
 	@Autowired
 	private VirtualAccountDetailService virtualAccountDetailService;
 
@@ -43,6 +47,7 @@ public class VirtualAccountService extends BaseServiceImpl {
 	public int insertAndGetId(VirtualAccountEntity virtualAccountEntity) {
 		int id = 0;
 		this.getBaseDao().insertBySql(MAPPER_NAMESPACE + ".insertAndGetId", virtualAccountEntity);
+		LOGGER.info("insertAndGetId:virtualAccountEntity={}",virtualAccountEntity);
 		if (virtualAccountEntity.getId() != null) {
 			id = virtualAccountEntity.getId();
 		}
