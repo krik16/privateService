@@ -803,4 +803,13 @@ public interface Constants {
     	String CATEGORY_CODE = "REC_CATEGORY";
     }
 
+    interface PUSH_PLATFORM {
+        /** 商家后台 */
+        Integer BUSINESS_BACKGROUND = 1;
+        /** 摩店APP */
+        Integer MD_APP = 2;
+        /** 摩店管理平台 */
+        Integer MD_MANAGEMENT = 3;
+    }
+
 }

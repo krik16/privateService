@@ -19,6 +19,8 @@ import java.util.UUID;
  */
 public class LogAopAdvice
 {
+    private Logger logger = LoggerFactory.getLogger(LogAopAdvice.class);
+
     public void logIdInit() {
 
 
@@ -46,6 +48,7 @@ public class LogAopAdvice
         }
 
         RpcContext.getContext().setAttachment("logid", logId);
+       // logger.info("aop日志id={}",logId);
     }
 
     public void clear()
@@ -56,11 +59,13 @@ public class LogAopAdvice
 
         if(Integer.parseInt(org.slf4j.MDC.get("logCount")) == 0)
         {
+           // logger.info("aop销毁日志id={}",org.slf4j.MDC.get("logid"));
             org.slf4j.MDC.remove("logid");
         }
 
         if(Integer.parseInt(org.apache.log4j.MDC.get("logCount").toString()) == 0)
         {
+           // logger.info("aop销毁log4j日志id={}", org.apache.log4j.MDC.get("logid"));
             org.apache.log4j.MDC.remove("logid");
         }
     }

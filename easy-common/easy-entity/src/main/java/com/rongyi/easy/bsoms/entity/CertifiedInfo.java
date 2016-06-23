@@ -10,15 +10,19 @@ import java.util.Date;
 public class CertifiedInfo {
 	private Integer id;
 	private Integer userId;        //关联用户ID
-	private String callName;      //称呼
-	private Integer proId;       //省ID
-	private Integer cityId;       //市ID
-	private Integer areaId;       //区ID
-	private String contactPhone;  //联系电话
+	private String callName = "";      //称呼
+	private Integer proId = 0;       //省ID
+	private Integer cityId = 0;       //市ID
+	private Integer areaId = 0;       //区ID
+	private String contactPhone ="";  //联系电话
 	private String resume;      //自我简介
 	private Integer isDeleted;    //是否已删除  0正常 1已删除
 	private Date createAt;
 	private Date updateAt;
+	private String faceImg;    //身份证正面照 
+	private String backImg;   //身份证背面照 
+	private String workImg;    //工作证照
+	private String otherImg;   //其它照片
 	public Integer getId() {
 		return id;
 	}
@@ -84,5 +88,29 @@ public class CertifiedInfo {
 	}
 	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;
+	}
+	public String getFaceImg() {
+		return faceImg;
+	}
+	public void setFaceImg(String faceImg) {
+		this.faceImg = faceImg;
+	}
+	public String getBackImg() {
+		return backImg;
+	}
+	public void setBackImg(String backImg) {
+		this.backImg = backImg;
+	}
+	public String getWorkImg() {
+		return workImg;
+	}
+	public void setWorkImg(String workImg) {
+		this.workImg = workImg;
+	}
+	public String getOtherImg() {
+		return otherImg;
+	}
+	public void setOtherImg(String otherImg) {
+		this.otherImg = otherImg;
 	}
 }
