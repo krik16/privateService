@@ -2,11 +2,13 @@ package com.rongyi.easy.rmmm.param.user;
 
 import java.io.Serializable;
 
+import com.rongyi.easy.rmmm.base.BaseParam;
+
 /**
  * Created by hebo on 2015/12/28.
  * 订单收货地址VO
  */
-public class OrderAddressParam implements Serializable{
+public class OrderAddressParam extends BaseParam implements Serializable{
 
     private String OrderNo;//订单号
     private String province;//省

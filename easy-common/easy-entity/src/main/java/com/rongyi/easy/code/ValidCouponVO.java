@@ -26,6 +26,7 @@ public class ValidCouponVO implements Serializable {
 		private Integer stock;
 		private Double currentPrice;
 		private Double originalPrice;
+		private Integer point;
 
 		public String getName() {
 				return name;
@@ -142,6 +143,14 @@ public class ValidCouponVO implements Serializable {
 				this.originalPrice = originalPrice;
 		}
 
+		public Integer getPoint() {
+				return point;
+		}
+
+		public void setPoint(Integer point) {
+				this.point = point;
+		}
+
 		@Override
 		public String toString() {
 				final StringBuffer sb = new StringBuffer("ValidCouponVO{");
@@ -161,6 +170,7 @@ public class ValidCouponVO implements Serializable {
 				sb.append(", stock=").append(stock);
 				sb.append(", currentPrice=").append(currentPrice);
 				sb.append(", originalPrice=").append(originalPrice);
+				sb.append(", point=").append(point);
 				sb.append('}');
 				return sb.toString();
 		}

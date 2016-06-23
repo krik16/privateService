@@ -1,6 +1,7 @@
 package com.rongyi.easy.tradecenter.vo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -15,11 +16,22 @@ public class ValidRecordVO implements Serializable{
     private Date useTime;//验证时间
     private String source;//订单来源 0为容易逛，1为微网站，2为终端机，3其他,4微信
     private String userPhone;//买家手机号
+    private String userName;//买家手姓名
     private String checkerName;//验证人名字
     private Integer checkerUserId;//验证人id
     private String checkerAddress;//验证人（所属店铺商场）
+    private BigDecimal price;
     private String mallMid;
     private String shopMid;
+    private Integer point ;
+
+    public Integer getPoint() {
+        return point;
+    }
+
+    public void setPoint(Integer point) {
+        this.point = point;
+    }
 
     public Integer getId() {
         return id;
@@ -107,5 +119,41 @@ public class ValidRecordVO implements Serializable{
 
     public void setMallMid(String mallMid) {
         this.mallMid = mallMid;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("ValidRecordVO{");
+        sb.append("id=").append(id);
+        sb.append(", title='").append(title).append('\'');
+        sb.append(", couponCode='").append(couponCode).append('\'');
+        sb.append(", useTime=").append(useTime);
+        sb.append(", source='").append(source).append('\'');
+        sb.append(", userPhone='").append(userPhone).append('\'');
+        sb.append(", checkerName='").append(checkerName).append('\'');
+        sb.append(", checkerUserId=").append(checkerUserId);
+        sb.append(", checkerAddress='").append(checkerAddress).append('\'');
+        sb.append(", price=").append(price);
+        sb.append(", mallMid='").append(mallMid).append('\'');
+        sb.append(", shopMid='").append(shopMid).append('\'');
+        sb.append(", point=").append(point);
+        sb.append('}');
+        return sb.toString();
     }
 }

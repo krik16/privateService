@@ -153,4 +153,11 @@ public interface RoaCouponCodeService {
      * @param count
      */
     public void generateCouponCode(String couponId, int count);
+
+    /**
+     * 根据券码获取该券的价格
+     * @param couponCode
+     * @return
+     */
+    public Integer getCurrentPriceFromCode(String couponCode);
 }
