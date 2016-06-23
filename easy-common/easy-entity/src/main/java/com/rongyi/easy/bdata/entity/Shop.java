@@ -60,6 +60,7 @@ public class Shop implements Serializable {
     private List<ObjectId> custom_category_ids;
     private String qrcode_pic;
     private List<String> photo_urls;//图片地址
+    private String icon ;  //店铺自定义Logo
     public ObjectId getId() {
         return id;
     }
@@ -395,4 +396,12 @@ public class Shop implements Serializable {
     public void setPhoto_urls(List<String> photo_urls) {
         this.photo_urls = photo_urls;
     }
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
 }
