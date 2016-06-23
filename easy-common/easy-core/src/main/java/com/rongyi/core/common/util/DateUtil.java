@@ -845,4 +845,38 @@ public class DateUtil {
 		return cal.getTime();
 	}
 
+	/**
+	 * 比较日期大小
+	 * @param date1
+	 * @param date2
+	 * @return -1 if date1 is before date2, otherwise 1
+	 */
+	public static int compareDate(Date date1, Date date2) {
+		try {
+			if (date1.getTime() > date2.getTime()) {
+				return -1;
+			} else if (date1.getTime() < date2.getTime()) {
+				return 1;
+			} else {
+				return 0;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public static void main(String[] args) {
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+		try {
+			Date dt1 = df.parse("1995-11-12 15:21");
+			Date dt2 = df.parse("1999-12-11 09:59");
+			compareDate(dt1, dt2);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+
+	}
+
 }
