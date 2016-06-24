@@ -29,6 +29,7 @@ public class Floor implements Serializable {
     private String pathImg;
     private String picture;
     private Date   created_at;
+    private Integer mall_valid ;
 
 
     public String getId() {
@@ -137,5 +138,13 @@ public class Floor implements Serializable {
     public void setPicture(String picture) {
         this.picture = picture;
     }
+
+	public Integer getMall_valid() {
+		return mall_valid;
+	}
+
+	public void setMall_valid(Integer mall_valid) {
+		this.mall_valid = mall_valid;
+	}
 
 }
