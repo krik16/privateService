@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import com.rongyi.easy.bdata.dto.CustomCategoryDto;
+
 public class ShopVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String id;
@@ -37,7 +39,7 @@ public class ShopVO implements Serializable {
 	private String qrcodePic;
 	private String valiReason;
 	private Integer businessStatus;
-
+	private List<CustomCategoryDto> customCategorys ;
 	
 	
 	public Integer getBusinessStatus() {
@@ -287,7 +289,13 @@ public class ShopVO implements Serializable {
 	public void setQrcodePic(String qrcodePic) {
 		this.qrcodePic = qrcodePic;
 	}
-	
 
+	public List<CustomCategoryDto> getCustomCategorys() {
+		return customCategorys;
+	}
+
+	public void setCustomCategorys(List<CustomCategoryDto> customCategorys) {
+		this.customCategorys = customCategorys;
+	}
 	
 }
