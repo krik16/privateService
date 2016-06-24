@@ -415,5 +415,20 @@ public interface ROAContentService {
 	 * @return
 	 */
 	public Integer selectSaleContentIdByType(Integer typeVal);
+
+	/**
+	 * 根据positionId删除content
+	 * @param id
+	 * @return
+	 */
+	public Integer deleteByPositionId(Integer id);
+
+	/**
+	 * 根据quickType，typeVal查询数据
+	 * @param type
+	 * @param typeVal
+	 * @return
+	 */
+	public ForumContent selectContentIdByQuickTypeAndTypeVal(Integer type,String typeVal);
 	
 }
