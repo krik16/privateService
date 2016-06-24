@@ -24,6 +24,9 @@ public class MalllifeBaseParam implements Serializable {
     private Integer currentPage; //当前页数
     private Integer pageSize = Integer.MAX_VALUE;//每页显示数
 
+    // 设备号
+    private String uuId;
+
     public String getJsessionid() {
         return jsessionid;
     }
@@ -62,6 +65,14 @@ public class MalllifeBaseParam implements Serializable {
 
     public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public String getUuId() {
+        return uuId;
+    }
+
+    public void setUuId(String uuId) {
+        this.uuId = uuId;
     }
 
     @Override
