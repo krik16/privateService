@@ -93,6 +93,8 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private String weAndTeStatus;
 	@Field("brandName")
 	private String brandName;
+	@Field("updateAt")
+	private Date updateAt;
 
 	private String secKillSign;
 
@@ -429,5 +431,9 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 	public void setBrandName(String brandName) {
 		this.brandName = brandName;
+	}
+
+	public void setUpdateAt(Date updateAt) {
+		this.updateAt = updateAt;
 	}
 }

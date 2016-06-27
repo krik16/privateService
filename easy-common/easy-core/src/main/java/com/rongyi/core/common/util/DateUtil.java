@@ -853,9 +853,9 @@ public class DateUtil {
 	 */
 	public static int compareDate(Date date1, Date date2) {
 		try {
-			if (date1.getTime() > date2.getTime()) {
+			if (date1.getTime() < date2.getTime()) {
 				return -1;
-			} else if (date1.getTime() < date2.getTime()) {
+			} else if (date1.getTime() > date2.getTime()) {
 				return 1;
 			} else {
 				return 0;
@@ -864,6 +864,66 @@ public class DateUtil {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+
+	public static Date formatDate(String string) {
+		SimpleDateFormat resultSdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		SimpleDateFormat resultSdfdate = new SimpleDateFormat("yyyy-MM-dd");
+		if (string != null) {
+			if (string.contains("CST")) {
+				long d2 = Date.parse(string);
+				Date datetime = new Date(d2);
+
+				return datetime;
+
+			} else if (string.contains("Z")) {
+				SimpleDateFormat sdf = new SimpleDateFormat(
+						"yyyy-MM-dd'T'hh:mm:ss'.'sss'Z'");
+				java.util.Date datetime;
+				try {
+					datetime = sdf.parse(string);
+					return (Date) datetime;
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			} else if (string.contains("-")&&string.contains(":")) {
+				Date newDate;
+				try {
+					newDate = resultSdf.parse(string);
+					return newDate;
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else if(string.contains("-")&&!string.contains(":")){
+				Date newDate;
+				try {
+					newDate = resultSdfdate.parse(string);
+					return newDate;
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}else {
+				Date longDate = new Date(Long.parseLong(string));
+
+				return longDate;
+			}
+		}
+		return null;
+	}
+
+	public static String formatSolrTime(String date) {
+		String[] dates = date.split(" ");
+		StringBuilder sb = new StringBuilder();
+		sb.append(dates[0]);
+		sb.append("T");
+		sb.append(dates[1]);
+		sb.append("Z");
+
+		return sb.toString();
 	}
 
 	public static void main(String[] args) {
@@ -875,8 +935,6 @@ public class DateUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-
 	}
 
 }
