@@ -306,6 +306,15 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                     paymentEntityVO.setPayNo(payNo);
                     paymentEntity.setAmountMoney(paymentEntityVO.getAmountMoney());
                     paymentEntity.setCreateTime(DateUtil.getCurrDateTime());
+                    //公众号支付
+                    if(StringUtils.isNotBlank(paymentEntityVO.getAppId())) {
+                        WeixinMch weixinMch = weixinMchService.selectByAppIdAndTradeType(paymentEntityVO.getAppId(), paymentEntityVO.getWeixinPayType());
+                        if (weixinMch != null) {
+                            paymentEntity.setWeixinMchId(weixinMch.getId());
+                        }
+                    }else{//app支付
+                        paymentEntity.setWeixinMchId(0);
+                    }
                     updateByPrimaryKeySelective(paymentEntity);
                     return paymentEntityVO;
                 } else if (paymentLogInfoService.selectByOutTradeNo(payNo, null) == null) {
