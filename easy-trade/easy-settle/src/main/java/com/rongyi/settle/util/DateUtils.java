@@ -1,8 +1,13 @@
 package com.rongyi.settle.util;
 
+import java.sql.Time;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import com.rongyi.settle.constants.CodeEnum;
+import com.rongyi.settle.exception.BizException;
 
 /**
  * Created by xgq on 2015/9/25.
@@ -112,5 +117,30 @@ public class DateUtils {
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat(FORMAT_DATE_SIMPLE);
         return dateFormat.format(date);
+    }
+    
+    public static Date formatDate(Date date, String format) {
+		SimpleDateFormat sf = new SimpleDateFormat(format);
+		String formatDate = sf.format(date);
+		try {
+			return sf.parse(formatDate);
+		} catch (ParseException e) {
+			throw new BizException(CodeEnum.FAIL_CHANGE_DATE);
+		}
+	}
+	
+	public static Date formatDate(Date date) {
+		return formatDate(date, FORMAT_DATE);
+	}
+	
+	public static Date formatTime(Time time, String format) {
+		return formatDate(time, format);
+	}
+	
+	public static Date getYesterdayDate() {
+        Calendar instance = Calendar.getInstance();
+        instance.add(Calendar.DATE, -1);
+        Date yesterday = instance.getTime();
+        return formatDate(yesterday);
     }
 }

@@ -22,6 +22,7 @@ public enum CodeEnum {
 	FIAL_SAVE_CONFIG(1018008,"保存对账单配置失败"),
 	FIAL_CONFIG_NOT_FOUND(1018011, "对账单配置没有找到"),
 	FIAL_STATEMENT_INVALID(1018013, "作废对账单不能重新生成"),
+	FAIL_CHANGE_DATE(101810, "日期转换异常"),
 	SUCCESS("0", "正常"),;
 
 	private Object code;
