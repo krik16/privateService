@@ -93,6 +93,43 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	private String commodityCode;
 
 	private List<String> keywordList = new ArrayList<>();
+	
+	private List<String> brandIds;//品牌id集合
+	private List<String> mallIds;//商场id集合
+	private List<String> shopIds;//店铺id集合
+	private List<String> categoryIds;//分类id集合
+
+	public List<String> getBrandIds() {
+		return brandIds;
+	}
+
+	public void setBrandIds(List<String> brandIds) {
+		this.brandIds = brandIds;
+	}
+
+	public List<String> getMallIds() {
+		return mallIds;
+	}
+
+	public void setMallIds(List<String> mallIds) {
+		this.mallIds = mallIds;
+	}
+
+	public List<String> getShopIds() {
+		return shopIds;
+	}
+
+	public void setShopIds(List<String> shopIds) {
+		this.shopIds = shopIds;
+	}
+
+	public List<String> getCategoryIds() {
+		return categoryIds;
+	}
+
+	public void setCategoryIds(List<String> categoryIds) {
+		this.categoryIds = categoryIds;
+	}
 
 	public List<String> getKeywordList() {
 		return keywordList;
@@ -353,11 +390,21 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 
 	@Override
 	public String toString() {
-		return "CommoditySearchParam [keyword=" + keyword + ", shopId=" + shopId + ", brandId=" + brandId + ", mallId="
-				+ mallId + ", commodityCategory=" + commodityCategory + ", sortBy=" + sortBy + ", coord_x=" + coord_x
-				+ ", coord_y=" + coord_y + ", bullId=" + bullId + ", liveId=" + liveId + ", saleId=" + saleId
-				+ ", flashSaleId=" + flashSaleId + ", commodityType=" + commodityType + ", systemNumber=" + systemNumber
-				+ ", from=" + from + ", source=" + source + ", zoneId=" + zoneId + ", commodityCode=" + commodityCode
-				+ ", keywordList=" + keywordList + ", minPrice=" + minPrice + ", maxPrice=" + maxPrice + "]";
+		return "CommoditySearchParam [id=" + id + ", brandMids=" + brandMids
+				+ ", keyword=" + keyword + ", shopId=" + shopId + ", brandId="
+				+ brandId + ", mallId=" + mallId + ", commodityCategory="
+				+ commodityCategory + ", sortBy=" + sortBy + ", coord_x="
+				+ coord_x + ", coord_y=" + coord_y + ", bullId=" + bullId
+				+ ", liveId=" + liveId + ", saleId=" + saleId
+				+ ", flashSaleId=" + flashSaleId + ", commodityType="
+				+ commodityType + ", filterMethodName=" + filterMethodName
+				+ ", sortMethodName=" + sortMethodName + ", systemNumber="
+				+ systemNumber + ", from=" + from + ", source=" + source
+				+ ", minPrice=" + minPrice + ", maxPrice=" + maxPrice
+				+ ", zoneId=" + zoneId + ", commodityCode=" + commodityCode
+				+ ", keywordList=" + keywordList + ", brandIds=" + brandIds
+				+ ", mallIds=" + mallIds + ", shopIds=" + shopIds
+				+ ", categoryIds=" + categoryIds + "]";
 	}
+
 }

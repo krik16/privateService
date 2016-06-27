@@ -1,6 +1,7 @@
 package com.rongyi.easy.malllife.param.buyer;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class BuyerCategoryParam implements Serializable {
 	private static final long serialVersionUID = -7251657383525434319L;
@@ -21,6 +22,10 @@ public class BuyerCategoryParam implements Serializable {
 	private String flashSaleId;		// 特卖ID
 	private String minPrice;		// 价格最小范围
 	private String maxPrice;		// 价格最大范围
+	private List<String> brandIds;  //品牌id集合
+	private List<String> mallIds;   //商场id集合
+	private List<String> shopIds;   //店铺id集合
+	private List<String> categoryIds;//分类id集合
 
 	public BuyerCategoryParam() {
 //		this.filterType = 0;
@@ -30,7 +35,8 @@ public class BuyerCategoryParam implements Serializable {
 
 	public BuyerCategoryParam(Integer filterType, String filterId, boolean showParent, String bullId, String liveId,
 			String commodityType, String keyword, String categoryId, String brandId, String cityName, String mallId,
-			String shopId, String saleId, String flashSaleId, String minPrice, String maxPrice) {
+			String shopId, String saleId, String flashSaleId, String minPrice, String maxPrice,List<String> brandIds,
+			List<String> mallIds,List<String> shopIds,List<String> categoryIds) {
 		this.filterType = filterType;
 		this.filterId = filterId;
 		this.showParent = showParent;
@@ -47,7 +53,43 @@ public class BuyerCategoryParam implements Serializable {
 		this.flashSaleId = flashSaleId;
 		this.minPrice = minPrice;
 		this.maxPrice = maxPrice;
+		this.brandIds = brandIds;
+		this.mallIds = mallIds;
+		this.shopIds = shopIds;
+		this.categoryIds = categoryIds;
 	}
+	public List<String> getBrandIds() {
+		return brandIds;
+	}
+
+	public void setBrandIds(List<String> brandIds) {
+		this.brandIds = brandIds;
+	}
+
+	public List<String> getMallIds() {
+		return mallIds;
+	}
+
+	public void setMallIds(List<String> mallIds) {
+		this.mallIds = mallIds;
+	}
+
+	public List<String> getShopIds() {
+		return shopIds;
+	}
+
+	public void setShopIds(List<String> shopIds) {
+		this.shopIds = shopIds;
+	}
+
+	public List<String> getCategoryIds() {
+		return categoryIds;
+	}
+
+	public void setCategoryIds(List<String> categoryIds) {
+		this.categoryIds = categoryIds;
+	}
+
 	public Integer getFilterType() {
 		return filterType;
 	}
@@ -151,10 +193,15 @@ public class BuyerCategoryParam implements Serializable {
 
 	@Override
 	public String toString() {
-		return "BuyerCategoryParam [filterType=" + filterType + ", filterId=" + filterId + ", showParent=" + showParent
-				+ ", bullId=" + bullId + ", liveId=" + liveId + ", commodityType=" + commodityType + ", keyword="
-				+ keyword + ", categoryId=" + categoryId + ", brandId=" + brandId + ", cityName=" + cityName
-				+ ", mallId=" + mallId + ", shopId=" + shopId + ", saleId=" + saleId + ", flashSaleId=" + flashSaleId
-				+ ", minPrice=" + minPrice + ", maxPrice=" + maxPrice + "]";
+		return "BuyerCategoryParam [filterType=" + filterType + ", filterId="
+				+ filterId + ", showParent=" + showParent + ", bullId="
+				+ bullId + ", liveId=" + liveId + ", commodityType="
+				+ commodityType + ", keyword=" + keyword + ", categoryId="
+				+ categoryId + ", brandId=" + brandId + ", cityName="
+				+ cityName + ", mallId=" + mallId + ", shopId=" + shopId
+				+ ", saleId=" + saleId + ", flashSaleId=" + flashSaleId
+				+ ", minPrice=" + minPrice + ", maxPrice=" + maxPrice
+				+ ", brandIds=" + brandIds + ", mallIds=" + mallIds
+				+ ", shopIds=" + shopIds + ", categoryIds=" + categoryIds + "]";
 	}
 }
