@@ -18,4 +18,11 @@ public interface IMalllifeUserBrandService {
 	public List<UserBrand> getUserBrandDetailList(String userId);
 	public void updateByBrandId(String brandId);
 	public List<String> getUserBrandAndLove(String userId);
+	
+	/**
+	 * 开通订阅之后，自动帮提交过对应品牌信息的用户完成订阅
+	 * @param brandIds 开通订阅品牌的id集合
+	 * @author chenjun
+	 */
+	public void toHelpUserSubscribe(List<String> brandIds)  throws Exception;
 }
