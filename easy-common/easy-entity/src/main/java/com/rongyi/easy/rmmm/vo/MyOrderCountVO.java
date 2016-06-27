@@ -9,7 +9,7 @@ public class MyOrderCountVO implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private String unPaidCount;// 待付款数量
-	private String unReceiveCount;// （包括待发货数量）
+	private String unReceiveCount;// 待收货数量（包括待发货数量）
 	private String unEvalueCount;// 待评价数量
 	private String afterSaleCount;// 售后
 	private int unDeliverCount;//待发货数量
