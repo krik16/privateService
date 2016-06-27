@@ -273,7 +273,7 @@ public interface Constants {
     /**
      * APP开放的城市id:上海（已开放）、北京、广州、深圳、重庆、沈阳
      */
-    int[] OPEN_CITY_BAIDUIDS = {289,131,257,340,132,58,44};
+    int[] OPEN_CITY_BAIDUIDS = {289,131,257,340,132,58,48};
     /**
      * 默认上海的ID
      */
