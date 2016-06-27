@@ -120,8 +120,10 @@ public class RpbServiceImpl implements IRpbService {
             boolean result = weixinPayService.doRefundAndNotify(oldPaymentEntity, paymentEntity);
             if(result){
                 refundResultMap.put("success", true);
+                refundResultMap.put("message","退款成功");
             }else{
                 refundResultMap.put("success", false);
+                refundResultMap.put("message","退款失败");
             }
         } catch (TradeException e) {
             refundResultMap.put("success", false);
