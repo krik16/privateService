@@ -1,6 +1,5 @@
-package com.rongyi.easy.rpb.entity;
+package com.rongyi.easy.settle.entity;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class SmDivideAccount {
@@ -16,13 +15,13 @@ public class SmDivideAccount {
 
     private Integer unitNum;
 
-    private Long payAmount;
+    private Integer payAmount;
 
-    private BigDecimal rebateAmount;
+    private Integer rebateAmount;
 
     private Integer mallPoint;
 
-    private BigDecimal settleAmount;
+    private Integer settleAmount;
 
     private String createBy;
 
@@ -82,36 +81,12 @@ public class SmDivideAccount {
         this.unitNum = unitNum;
     }
 
-    public Long getPayAmount() {
-        return payAmount;
-    }
-
-    public void setPayAmount(Long payAmount) {
-        this.payAmount = payAmount;
-    }
-
-    public BigDecimal getRebateAmount() {
-        return rebateAmount;
-    }
-
-    public void setRebateAmount(BigDecimal rebateAmount) {
-        this.rebateAmount = rebateAmount;
-    }
-
     public Integer getMallPoint() {
         return mallPoint;
     }
 
     public void setMallPoint(Integer mallPoint) {
         this.mallPoint = mallPoint;
-    }
-
-    public BigDecimal getSettleAmount() {
-        return settleAmount;
-    }
-
-    public void setSettleAmount(BigDecimal settleAmount) {
-        this.settleAmount = settleAmount;
     }
 
     public String getCreateBy() {
@@ -153,4 +128,29 @@ public class SmDivideAccount {
     public void setIsDelete(Byte isDelete) {
         this.isDelete = isDelete;
     }
+
+	public Integer getPayAmount() {
+		return payAmount;
+	}
+
+	public void setPayAmount(Integer payAmount) {
+		this.payAmount = payAmount;
+	}
+
+	public Integer getRebateAmount() {
+		return rebateAmount;
+	}
+
+	public void setRebateAmount(Integer rebateAmount) {
+		this.rebateAmount = rebateAmount;
+	}
+
+	public Integer getSettleAmount() {
+		return settleAmount;
+	}
+
+	public void setSettleAmount(Integer settleAmount) {
+		this.settleAmount = settleAmount;
+	}
+
 }

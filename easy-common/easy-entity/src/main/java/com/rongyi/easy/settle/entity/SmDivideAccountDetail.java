@@ -1,6 +1,5 @@
-package com.rongyi.easy.rpb.entity;
+package com.rongyi.easy.settle.entity;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class SmDivideAccountDetail {
@@ -20,13 +19,13 @@ public class SmDivideAccountDetail {
 
     private Integer unitNum;
 
-    private Long payAmount;
+    private Integer payAmount;
 
-    private BigDecimal rebateAmount;
+    private Integer rebateAmount;
 
     private Integer mallScore;
 
-    private BigDecimal settleAmount;
+    private Integer settleAmount;
 
     private String createBy;
 
@@ -102,19 +101,19 @@ public class SmDivideAccountDetail {
         this.unitNum = unitNum;
     }
 
-    public Long getPayAmount() {
+    public Integer getPayAmount() {
         return payAmount;
     }
 
-    public void setPayAmount(Long payAmount) {
+    public void setPayAmount(Integer payAmount) {
         this.payAmount = payAmount;
     }
 
-    public BigDecimal getRebateAmount() {
+    public Integer getRebateAmount() {
         return rebateAmount;
     }
 
-    public void setRebateAmount(BigDecimal rebateAmount) {
+    public void setRebateAmount(Integer rebateAmount) {
         this.rebateAmount = rebateAmount;
     }
 
@@ -126,11 +125,11 @@ public class SmDivideAccountDetail {
         this.mallScore = mallScore;
     }
 
-    public BigDecimal getSettleAmount() {
+    public Integer getSettleAmount() {
         return settleAmount;
     }
 
-    public void setSettleAmount(BigDecimal settleAmount) {
+    public void setSettleAmount(Integer settleAmount) {
         this.settleAmount = settleAmount;
     }
 
