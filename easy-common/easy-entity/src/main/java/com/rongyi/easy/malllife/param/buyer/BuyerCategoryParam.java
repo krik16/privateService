@@ -22,10 +22,8 @@ public class BuyerCategoryParam implements Serializable {
 	private String flashSaleId;		// 特卖ID
 	private String minPrice;		// 价格最小范围
 	private String maxPrice;		// 价格最大范围
-	private List<String> brandIds;  //品牌id集合
-	private List<String> mallIds;   //商场id集合
-	private List<String> shopIds;   //店铺id集合
-	private List<String> categoryIds;//分类id集合
+	private List<String> shopList;//店铺id集合
+	private List<String> categoryList;//分类id集合
 
 	public BuyerCategoryParam() {
 //		this.filterType = 0;
@@ -35,8 +33,8 @@ public class BuyerCategoryParam implements Serializable {
 
 	public BuyerCategoryParam(Integer filterType, String filterId, boolean showParent, String bullId, String liveId,
 			String commodityType, String keyword, String categoryId, String brandId, String cityName, String mallId,
-			String shopId, String saleId, String flashSaleId, String minPrice, String maxPrice,List<String> brandIds,
-			List<String> mallIds,List<String> shopIds,List<String> categoryIds) {
+			String shopId, String saleId, String flashSaleId, String minPrice, String maxPrice,List<String> shopList,
+			List<String> categoryList) {
 		this.filterType = filterType;
 		this.filterId = filterId;
 		this.showParent = showParent;
@@ -53,41 +51,25 @@ public class BuyerCategoryParam implements Serializable {
 		this.flashSaleId = flashSaleId;
 		this.minPrice = minPrice;
 		this.maxPrice = maxPrice;
-		this.brandIds = brandIds;
-		this.mallIds = mallIds;
-		this.shopIds = shopIds;
-		this.categoryIds = categoryIds;
+		this.shopList = shopList;
+		this.categoryList = categoryList;
 	}
-	public List<String> getBrandIds() {
-		return brandIds;
+	
+
+	public List<String> getShopList() {
+		return shopList;
 	}
 
-	public void setBrandIds(List<String> brandIds) {
-		this.brandIds = brandIds;
+	public void setShopList(List<String> shopList) {
+		this.shopList = shopList;
 	}
 
-	public List<String> getMallIds() {
-		return mallIds;
+	public List<String> getCategoryList() {
+		return categoryList;
 	}
 
-	public void setMallIds(List<String> mallIds) {
-		this.mallIds = mallIds;
-	}
-
-	public List<String> getShopIds() {
-		return shopIds;
-	}
-
-	public void setShopIds(List<String> shopIds) {
-		this.shopIds = shopIds;
-	}
-
-	public List<String> getCategoryIds() {
-		return categoryIds;
-	}
-
-	public void setCategoryIds(List<String> categoryIds) {
-		this.categoryIds = categoryIds;
+	public void setCategoryList(List<String> categoryList) {
+		this.categoryList = categoryList;
 	}
 
 	public Integer getFilterType() {
@@ -201,7 +183,7 @@ public class BuyerCategoryParam implements Serializable {
 				+ cityName + ", mallId=" + mallId + ", shopId=" + shopId
 				+ ", saleId=" + saleId + ", flashSaleId=" + flashSaleId
 				+ ", minPrice=" + minPrice + ", maxPrice=" + maxPrice
-				+ ", brandIds=" + brandIds + ", mallIds=" + mallIds
-				+ ", shopIds=" + shopIds + ", categoryIds=" + categoryIds + "]";
+				+ ", shopList=" + shopList + ", categoryList=" + categoryList
+				+ "]";
 	}
 }
