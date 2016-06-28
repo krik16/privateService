@@ -12,19 +12,24 @@ public class HipsterStrategyParam extends MalllifeBaseParam implements Serializa
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String shopMId;//店铺id
-	private String mallMId;//商场id
-	public String getShopMId() {
-		return shopMId;
+	private String shopId;//店铺id
+	private String mallId;//商场id
+	public String getShopId() {
+		return shopId;
 	}
-	public void setShopMId(String shopMId) {
-		this.shopMId = shopMId;
+	public void setShopId(String shopId) {
+		this.shopId = shopId;
 	}
-	public String getMallMId() {
-		return mallMId;
+	public String getMallId() {
+		return mallId;
 	}
-	public void setMallMId(String mallMId) {
-		this.mallMId = mallMId;
+	public void setMallId(String mallId) {
+		this.mallId = mallId;
+	}
+	@Override
+	public String toString() {
+		return "HipsterStrategyParam [shopId=" + shopId + ", mallId=" + mallId
+				+ "]";
 	}
 	
 }
