@@ -35,7 +35,12 @@ public class UserBrand implements Serializable {
         this.brandInfo = brandInfo;
     }
 
-    public static class BrandInfo implements Serializable {
+    @Override
+	public String toString() {
+		return "UserBrand [letter=" + letter + ", brandInfo=" + brandInfo + "]";
+	}
+
+	public static class BrandInfo implements Serializable {
         private static final long serialVersionUID = 1L;
         // mongo id
         private String brandId;
@@ -45,8 +50,18 @@ public class UserBrand implements Serializable {
         private String brandName;
 
         private String letter;
+        
+        private String ifSubmit;//0未提交 1已提交
 
-        public String getBrandId() {
+        public String getIfSubmit() {
+			return ifSubmit;
+		}
+
+		public void setIfSubmit(String ifSubmit) {
+			this.ifSubmit = ifSubmit;
+		}
+
+		public String getBrandId() {
             return brandId;
         }
 
@@ -77,6 +92,13 @@ public class UserBrand implements Serializable {
         public void setLetter(String letter) {
             this.letter = letter;
         }
+
+		@Override
+		public String toString() {
+			return "BrandInfo [brandId=" + brandId + ", brandLogo=" + brandLogo
+					+ ", brandName=" + brandName + ", letter=" + letter
+					+ ", ifSubmit=" + ifSubmit + "]";
+		}
     }
 
 

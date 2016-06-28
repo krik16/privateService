@@ -94,6 +94,25 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 
 	private List<String> keywordList = new ArrayList<>();
 
+	private List<String> shopList;//店铺id集合
+	private List<String> categoryList;//分类id集合
+
+	public List<String> getShopList() {
+		return shopList;
+	}
+
+	public void setShopList(List<String> shopList) {
+		this.shopList = shopList;
+	}
+
+	public List<String> getCategoryList() {
+		return categoryList;
+	}
+
+	public void setCategoryList(List<String> categoryList) {
+		this.categoryList = categoryList;
+	}
+
 	public List<String> getKeywordList() {
 		return keywordList;
 	}
@@ -353,11 +372,20 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 
 	@Override
 	public String toString() {
-		return "CommoditySearchParam [keyword=" + keyword + ", shopId=" + shopId + ", brandId=" + brandId + ", mallId="
-				+ mallId + ", commodityCategory=" + commodityCategory + ", sortBy=" + sortBy + ", coord_x=" + coord_x
-				+ ", coord_y=" + coord_y + ", bullId=" + bullId + ", liveId=" + liveId + ", saleId=" + saleId
-				+ ", flashSaleId=" + flashSaleId + ", commodityType=" + commodityType + ", systemNumber=" + systemNumber
-				+ ", from=" + from + ", source=" + source + ", zoneId=" + zoneId + ", commodityCode=" + commodityCode
-				+ ", keywordList=" + keywordList + ", minPrice=" + minPrice + ", maxPrice=" + maxPrice + "]";
+		return "CommoditySearchParam [id=" + id + ", brandMids=" + brandMids
+				+ ", keyword=" + keyword + ", shopId=" + shopId + ", brandId="
+				+ brandId + ", mallId=" + mallId + ", commodityCategory="
+				+ commodityCategory + ", sortBy=" + sortBy + ", coord_x="
+				+ coord_x + ", coord_y=" + coord_y + ", bullId=" + bullId
+				+ ", liveId=" + liveId + ", saleId=" + saleId
+				+ ", flashSaleId=" + flashSaleId + ", commodityType="
+				+ commodityType + ", filterMethodName=" + filterMethodName
+				+ ", sortMethodName=" + sortMethodName + ", systemNumber="
+				+ systemNumber + ", from=" + from + ", source=" + source
+				+ ", minPrice=" + minPrice + ", maxPrice=" + maxPrice
+				+ ", zoneId=" + zoneId + ", commodityCode=" + commodityCode
+				+ ", keywordList=" + keywordList + ", shopList=" + shopList
+				+ ", categoryList=" + categoryList + "]";
 	}
+
 }

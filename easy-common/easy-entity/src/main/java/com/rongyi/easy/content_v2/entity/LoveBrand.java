@@ -13,7 +13,7 @@ public class LoveBrand implements Serializable {
     private String brandName;
     private String brandLogo;
     private String brandId;
-    private int status;
+    private int status;//1：选择，0未选择
     private int stick;
 
     public int getStick() {

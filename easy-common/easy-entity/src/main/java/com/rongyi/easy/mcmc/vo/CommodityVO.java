@@ -71,7 +71,7 @@ public class CommodityVO  implements  Serializable {
 	private String filialeMid;//分公司id
 	private int identity = 5;//-1表示定时任务0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购6买手（目前没用，暂做保留）
 	private Integer processIdentity;   //当前登录人的身份，判断当前登录人的身份以次字段为主，identity不准确，暂时保留
-	private String activityType = "0";	//活动状态[闪购1、特卖2、秒杀3]
+	private String activityType = "0";	//活动状态[闪购1、特卖2、秒杀3、拼单4]
 	private Integer purchaseCount; //商品限购数 0为不限购
 	private Integer templateId;//邮费模版id
 	private Integer sort;
@@ -80,7 +80,10 @@ public class CommodityVO  implements  Serializable {
 	private List<Integer> customCategoryIds;//自定义分类集合;
 	private String commodityModelNo;//商品款号
 	private List<String> goodsParam;//商品参数
-	
+	private Integer activityId;//活动id
+	private double activityPrice;//活动价,如果商品没有参与或者,则显示现价
+
+
 	public Integer getTemplateId() {
 		return templateId;
 	}
@@ -465,7 +468,23 @@ public class CommodityVO  implements  Serializable {
 	public void setCommodityModelNo(String commodityModelNo) {
 		this.commodityModelNo = commodityModelNo;
 	}
-	
+
+	public Integer getActivityId() {
+		return activityId;
+	}
+
+	public void setActivityId(Integer activityId) {
+		this.activityId = activityId;
+	}
+
+	public double getActivityPrice() {
+		return activityPrice;
+	}
+
+	public void setActivityPrice(double activityPrice) {
+		this.activityPrice = activityPrice;
+	}
+
 	public CommodityVO(){
 
 	}
@@ -604,8 +623,11 @@ public class CommodityVO  implements  Serializable {
 				+ ", templateId=" + templateId + ", sort=" + sort
 				+ ", mallName=" + mallName + ", weAndTeStatus=" + weAndTeStatus
 				+ ", customCategoryIds=" + customCategoryIds
-				+ ", commodityModelNo=" + commodityModelNo + ", goodsParam="
-				+ goodsParam + "]";
+				+ ", commodityModelNo=" + commodityModelNo
+				+ ", activityId=" + activityId
+				+ ", activityPrice=" + activityPrice
+				+", goodsParam="+ goodsParam + "]";
+
 	}
-	
+
 }
