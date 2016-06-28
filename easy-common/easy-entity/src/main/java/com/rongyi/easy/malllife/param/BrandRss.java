@@ -12,18 +12,18 @@ public class BrandRss extends BaseParam implements Serializable{
 	private String pushAt;
 	private int currentPage;
 	private int pageSize;
-	private int type; //0:旧数据，1新数据，2：最新推荐	
+	private int type; //0:订阅列表，2：最新推荐	
 	private String key;
 	private String brandName;
 	private String brandLogo;
 	private String brandId;
+	private List<Map> brandIds;
 	public String getBrandId() {
 		return brandId;
 	}
 	public void setBrandId(String brandId) {
 		this.brandId = brandId;
-	}
-	private List<Map> brandIds;
+	}	
 	
 	public String getActivityId() {
 		return activityId;

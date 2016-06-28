@@ -21,15 +21,15 @@ public interface ROAMalllifeUserBrandService {
 	 * @param list
 	 * @param userId
 	 */
-	public void batchUserBrand( List<Map> list,String userId );
+	public void batchUserBrand( List<Map> list,String userId )  throws Exception ;
 	/**
 	 * 删除
 	 * @param userId
 	 */
-	public void delUserBrand(String userId);
+	public void delUserBrand(String userId)  throws Exception ;
 	
-	public List<String> getUserBrand(String userId);
-	public List<UserBrand> getUserBrandDetailList(String userId);
-	public void updateByBrandId(String brandId);
-	public List<String> getUserBrandAndLove(String userId);
+	public List<String> getUserBrand(String userId)  throws Exception ;
+	public List<UserBrand> getUserBrandDetailList(String userId)  throws Exception ;
+	public void updateByBrandId(String brandId)  throws Exception ;
+	public List<String> getUserBrandAndLove(String userId)  throws Exception ;
 }
