@@ -4,33 +4,31 @@ import java.io.Serializable;
 import java.util.List;
 
 public class OldMallVO implements Serializable{
-	private String id;
-	private String name;
-	private String icon;
-	private String rank_avg;
-	private String address;
+	private String id;//商场mongoId
+	private String name;//商场名称
+	private String icon;//商场icon
+	private String rank_avg;//商场评分
+	private String address;//商场地址
 	private List<MainCategoriesVO> main_categories;
-	private String telephone;
-	private List<String> mobile;
-	private String transport_information;
-	private String business_hours;
-	private Double coord_x;
-	private Double coord_y;
+	private String telephone;//电话
+	private List<String> mobile;//通信信息
+	private String transport_information;//交通信息
+	private String business_hours;//营业时间
+	private Double coord_x;//坐标
+	private Double coord_y;//坐标
 	private Integer parking_count;
 	private boolean has_building;
 	private String appearance_pic;
 	private String parent_name;
 	private String mold;
-	private String parking_info;
+	private String parking_info;//停车信息
 	private Integer production_count;
 	private Integer activity_count;
-	private String description;
-	private boolean has_watched;
+	private String description;//商场描述
+	private boolean has_watched;//
 	/** 收藏数 */
 	private Integer collectionNum;
-
 	private String title;
-
 	private List<Double> location;
 	private String type;
 
