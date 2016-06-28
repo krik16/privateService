@@ -300,4 +300,11 @@ public interface McmcCommoditySolrService {
 	 */
 	public ResponseVO searchBrandsForUser(SearchCommodityBrandParam brandParam);
 
+	/**
+	 * 批量查询商品
+	 * @param ids
+	 * @return
+	 */
+	public List<McmcCommodityDocument> selectCommodityIndexByCommodityIds(List<String> ids);
+
 }
