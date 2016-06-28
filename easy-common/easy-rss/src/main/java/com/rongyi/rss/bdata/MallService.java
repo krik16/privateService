@@ -58,6 +58,7 @@ public interface MallService {
      * @return
      */
     ResponseVO getCustomCategoriesByMallId(String mallId);
+    ResponseVO getCustomCategoriesAndChildByMallId(String mallId);
 
     /**
      *
