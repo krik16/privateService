@@ -81,6 +81,24 @@ public class MallVO implements Serializable {
     private String parentId; // 上一级id
 	private List parentIds; // 上一级所有ids
 	private String mobile;
+	private String validReason;
+	private String businessStatusReason;
+
+	public String getValidReason() {
+		return validReason;
+	}
+
+	public void setValidReason(String validReason) {
+		this.validReason = validReason;
+	}
+
+	public String getBusinessStatusReason() {
+		return businessStatusReason;
+	}
+
+	public void setBusinessStatusReason(String businessStatusReason) {
+		this.businessStatusReason = businessStatusReason;
+	}
 	
 
 

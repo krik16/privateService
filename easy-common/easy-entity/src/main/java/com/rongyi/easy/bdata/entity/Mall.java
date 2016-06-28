@@ -77,8 +77,26 @@ public class Mall implements Serializable {
     private String mall_level;//商场等级
     private String open_at;//开业时间
     private String last_update_id;//最近修改人
+    private String validReason;
+    private String businessStatusReason;
    
    
+
+	public String getValidReason() {
+		return validReason;
+	}
+
+	public void setValidReason(String validReason) {
+		this.validReason = validReason;
+	}
+
+	public String getBusinessStatusReason() {
+		return businessStatusReason;
+	}
+
+	public void setBusinessStatusReason(String businessStatusReason) {
+		this.businessStatusReason = businessStatusReason;
+	}
 
 	public String getOpen_at() {
 		return open_at;

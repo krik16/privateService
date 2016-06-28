@@ -161,14 +161,14 @@ public interface MallService {
 	 * @param vo
 	 * @return
 	 */
-	boolean setMallBusinessStatus(String mallId,int businessStatus);
+	boolean setMallBusinessStatus(String mallId,int businessStatus,String reason);
 	
 	/**
 	 * 设置商场显示状态
 	 * @param vo
 	 * @return
 	 */
-	boolean setMallValid(String mallId,int valid);
+	boolean setMallValid(String mallId,int valid,String reason);
 	
 	Map<String, Object>getMalls(Map params, int currentpage, int pagesize);
 	
