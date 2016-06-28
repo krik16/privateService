@@ -31,6 +31,7 @@ public class CommodityFullVO implements Serializable {
     private String shopName;
     private String postage;//商品邮费
     private boolean supportCourierDeliver = true;//支持快递发货字段  true 是    false否
+    private int type; // 渠道  0商家，1买手
 
     public String getId() {
         return id;
@@ -218,6 +219,7 @@ public class CommodityFullVO implements Serializable {
                 .append("shopName", shopName)
                 .append("postage", postage)
                 .append("supportCourierDeliver", supportCourierDeliver)
+                .append("type",type)
                 .toString();
     }
 
@@ -243,5 +245,13 @@ public class CommodityFullVO implements Serializable {
 
     public void setSupportCourierDeliver(boolean supportCourierDeliver) {
         this.supportCourierDeliver = supportCourierDeliver;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }
