@@ -44,7 +44,7 @@ public class CustomCategoryVO implements Serializable {
 	 * 分类id列表
 	 */
 	private List<String> categorysId;
-	private List<CategoriesVO> categorys;
+	private List<CustomCategoryVO>  childCustomCategory;
 
 	/**
 	 * 创建时间
@@ -69,12 +69,16 @@ public class CustomCategoryVO implements Serializable {
 	private Long shopNum;
 
 	
-	public List<CategoriesVO> getCategorys() {
-		return categorys;
+	
+	
+
+
+	public List<CustomCategoryVO> getChildCustomCategory() {
+		return childCustomCategory;
 	}
 
-	public void setCategorys(List<CategoriesVO> categorys) {
-		this.categorys = categorys;
+	public void setChildCustomCategory(List<CustomCategoryVO> childCustomCategory) {
+		this.childCustomCategory = childCustomCategory;
 	}
 
 	public String getId() {
@@ -180,4 +184,6 @@ public class CustomCategoryVO implements Serializable {
 	public void setShopNum(Long shopNum) {
 		this.shopNum = shopNum;
 	}
+
+
 }
