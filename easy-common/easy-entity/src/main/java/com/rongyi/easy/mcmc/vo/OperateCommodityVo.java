@@ -9,15 +9,16 @@ import java.util.Date;
 public class OperateCommodityVo implements Serializable {
 
 
-    public String  id ;//系统编号
-    public String  name;//商品名称
-    public String  picList;//商品图片
-    public String  categoryIds;//商品所属的品类列表
-    public String  mallName;//商场名称
-    public String  shopName;//店铺名称
-    public Integer source;//渠道
-    public Integer  status;//商品状态
-    public Date createAt ;//创建时间
+    private String  id ;//系统编号
+    private String  name;//商品名称
+    private String  picList;//商品图片
+    private String  categoryIds;//商品所属的品类列表
+    private String  mallName;//商场名称
+    private String  shopName;//店铺名称
+    private Integer source;//渠道
+    private Integer  status;//商品状态
+    private Date createAt ;//创建时间
+    private String reason;
 
     public String getId() {
         return id;
@@ -89,5 +90,13 @@ public class OperateCommodityVo implements Serializable {
 
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 }
