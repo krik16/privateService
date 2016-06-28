@@ -436,4 +436,8 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;
 	}
+
+	public Date getUpdateAt() {
+		return updateAt;
+	}
 }
