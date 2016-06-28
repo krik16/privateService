@@ -19,7 +19,7 @@ public class ShopVO implements Serializable {
 	private ShopPositionVO position;
 	private String address;
 	private String telephone;
-	private String averageConsumption;
+	private String averageConsumption;   //平均消费
 	private String businessHours;
 	private String description;
 	private String brandId;
@@ -40,6 +40,10 @@ public class ShopVO implements Serializable {
 	private String valiReason;
 	private Integer businessStatus;
 	private List<CustomCategoryDto> customCategorys ;
+	private String filialeName ; //分公司名称
+	private List<BrandVO> brands ; //兼营品牌
+	private Date openAt ; //开业时间
+	private List<String> appImgs ; //app店铺图片
 	
 	
 	public Integer getBusinessStatus() {
@@ -297,5 +301,36 @@ public class ShopVO implements Serializable {
 	public void setCustomCategorys(List<CustomCategoryDto> customCategorys) {
 		this.customCategorys = customCategorys;
 	}
-	
+
+	public String getFilialeName() {
+		return filialeName;
+	}
+
+	public void setFilialeName(String filialeName) {
+		this.filialeName = filialeName;
+	}
+
+	public List<BrandVO> getBrands() {
+		return brands;
+	}
+
+	public void setBrands(List<BrandVO> brands) {
+		this.brands = brands;
+	}
+
+	public Date getOpenAt() {
+		return openAt;
+	}
+
+	public void setOpenAt(Date openAt) {
+		this.openAt = openAt;
+	}
+
+	public List<String> getAppImgs() {
+		return appImgs;
+	}
+
+	public void setAppImgs(List<String> appImgs) {
+		this.appImgs = appImgs;
+	}
 }
