@@ -27,6 +27,7 @@ public class MalllifeBaseParam implements Serializable {
     // 设备号
     private String uuId;
 
+
     public String getJsessionid() {
         return jsessionid;
     }
