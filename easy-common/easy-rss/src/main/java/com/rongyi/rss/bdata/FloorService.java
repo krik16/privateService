@@ -1,6 +1,7 @@
 package com.rongyi.rss.bdata;
 
 import java.util.List;
+import java.util.Map;
 
 import com.rongyi.easy.bdata.entity.BdataFloor;
 import com.rongyi.easy.bdata.entity.CommunalFacilityType;
@@ -48,5 +49,7 @@ public interface FloorService {
 	public void setCommunalFacilityStatus(String id,int status,String updateUserId);
 	
 	public void saveCommunalFacility(CommunalFacilityVO vo);
+	
+	public List<CommunalFacilityVO> getFloorCommunalFacilitiesType(Map map);
 	
 }
