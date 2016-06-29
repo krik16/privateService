@@ -339,7 +339,7 @@ public interface IContentService {
 	* @date 2016年5月5日 下午7:32:25 
 	* @throws
 	 */
-	public PagingVO<ContentPojo> pagingFavorList(String cityId, int pageSize, Integer currentPage);
+	public PagingVO<ContentPojo> pagingFavorList(String mallId, String shopId,  String cityId, int pageSize, Integer currentPage);
 	/**
 	 * 
 	* @Title: pagingContentListByMallId 

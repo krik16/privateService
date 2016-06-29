@@ -351,7 +351,7 @@ public interface ROAContentService {
 	* @date 2016年5月5日 下午7:24:22 
 	* @throws
 	 */
-	public PagingVO<ContentPojo> pagingFavorList(String cityId, int pageSize, Integer currentPage) throws Exception ;
+    public PagingVO<ContentPojo> pagingFavorList(String mallId, String shopId, String cityId, Integer pageSize, Integer currentPage) throws Exception ;
 	/**
 	 * 
 	* @Title: pagingContentListByMallId 
