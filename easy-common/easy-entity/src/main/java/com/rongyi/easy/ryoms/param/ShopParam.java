@@ -37,6 +37,7 @@ public class ShopParam implements Serializable{
 	private Integer optId ;  //操作者ID
 	private Integer createSource = 0 ; //创建来源  0大运营  1商家后台  其它crm
 	private String averageConsumption;  //平均消费
+	private String icon ;             //店铺自定义Logo
 	
 	@Override
 	public String toString(){
@@ -44,7 +45,7 @@ public class ShopParam implements Serializable{
 				+",recommend="+recommend+",shopNumber="+shopNumber+",address="+address+",customCategoryIds="+customCategoryIds
 				+"businessStatus="+businessStatus+",location="+location+",tags="+tags+",telephone="+telephone+",businessHours"+businessHours
 				+",openAt="+openAt+",description="+description+",brandId="+brandId+",brandIds="+brandIds+",filialeId="+filialeId
-				+",appPhotosUrl="+appPhotosUrl+",photosUrl="+photosUrl+",coordinate="+coordinate +",position="+position.toString()+"]";
+				+",appPhotosUrl="+appPhotosUrl+",photosUrl="+photosUrl+",coordinate="+coordinate+",icon:"+icon +",position="+position.toString()+"]";
 	}
 	
 	public String getId() {
@@ -214,5 +215,13 @@ public class ShopParam implements Serializable{
 
 	public void setAverageConsumption(String averageConsumption) {
 		this.averageConsumption = averageConsumption;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 }

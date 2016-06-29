@@ -10,7 +10,7 @@ public class ShopVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String name;
-	private String iconUrl;
+	private String iconUrl;            //主品牌logo
 	private String shopType;
 	private String shopNature;
 	private String status;
@@ -44,6 +44,7 @@ public class ShopVO implements Serializable {
 	private List<BrandVO> brands ; //兼营品牌
 	private Date openAt ; //开业时间
 	private List<String> appImgs ; //app店铺图片
+	private String icon ;        //店铺自定义Logo
 	
 	
 	public Integer getBusinessStatus() {
@@ -332,5 +333,13 @@ public class ShopVO implements Serializable {
 
 	public void setAppImgs(List<String> appImgs) {
 		this.appImgs = appImgs;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 }
