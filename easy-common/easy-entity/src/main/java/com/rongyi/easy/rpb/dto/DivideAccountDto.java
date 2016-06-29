@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class DivideAccountDto extends BaseDto {
 
+	private static final long serialVersionUID = -475860699835932675L;
+
 	private String mallName;
 	
 	private Date billDateBegin;
@@ -13,6 +15,14 @@ public class DivideAccountDto extends BaseDto {
 	private String billBatchNo;
 	
 	private Date accountDate;
+	
+	private Integer id;
+	
+	private Integer divideAccountId;
+	
+	private Integer mallId;
+	
+	private Integer shopId;
 
 	public String getMallName() {
 		return mallName;
@@ -53,4 +63,37 @@ public class DivideAccountDto extends BaseDto {
 	public void setAccountDate(Date accountDate) {
 		this.accountDate = accountDate;
 	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Integer getDivideAccountId() {
+		return divideAccountId;
+	}
+
+	public void setDivideAccountId(Integer divideAccountId) {
+		this.divideAccountId = divideAccountId;
+	}
+
+	public Integer getMallId() {
+		return mallId;
+	}
+
+	public void setMallId(Integer mallId) {
+		this.mallId = mallId;
+	}
+
+	public Integer getShopId() {
+		return shopId;
+	}
+
+	public void setShopId(Integer shopId) {
+		this.shopId = shopId;
+	}
+	
 }

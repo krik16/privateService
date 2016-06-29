@@ -1,6 +1,13 @@
 package com.rongyi.easy.rpb.dto;
 
-public class BaseDto {
+import java.io.Serializable;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
+public class BaseDto implements Serializable{
+
+	private static final long serialVersionUID = 2332763039978356286L;
 
 	private Integer pageSize;
 	
@@ -22,4 +29,8 @@ public class BaseDto {
 		this.currentPage = currentPage;
 	}
 	
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
+	}
 }
