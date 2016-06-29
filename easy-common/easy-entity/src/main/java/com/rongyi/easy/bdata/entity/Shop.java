@@ -67,6 +67,7 @@ public class Shop implements Serializable {
     private Integer update_source ; //修改来源 
     private Date open_at ;  //开业时间
     private List<ObjectId> brand_ids ; //兼营品牌
+    private String icon ; //店铺logo
     public ObjectId getId() {
         return id;
     }
@@ -457,5 +458,13 @@ public class Shop implements Serializable {
 
 	public void setBrand_ids(List<ObjectId> brand_ids) {
 		this.brand_ids = brand_ids;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 }
