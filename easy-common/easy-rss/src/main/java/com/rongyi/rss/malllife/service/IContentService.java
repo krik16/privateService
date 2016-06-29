@@ -358,6 +358,8 @@ public interface IContentService {
 
 	public List<Map<String, Object>> allListWelfareNew(Date pullAt, List<String> brandIdList);
 
+    public int countWelfareNew(Date pullAt, List<String> brandIdList);
+
 
 	public List<ContentPojo> allListWelFareOld(List<Map<String, Object>> activityIdList) throws Exception;
 

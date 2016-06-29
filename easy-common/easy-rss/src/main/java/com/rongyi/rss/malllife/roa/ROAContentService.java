@@ -381,6 +381,16 @@ public interface ROAContentService {
 	* @throws
 	 */
 	public List<Map<String,Object>> allListWelfareNew(Date pullAt,List<String> brandIdList) throws Exception;
+
+    /**
+     * 获取新超过某个时间更新的爱品牌文章个数
+     * @param pullAt
+     * @param brandIdList
+     * @return
+     * @throws Exception
+     */
+    public int countWelfareNew(Date pullAt, List<String> brandIdList) throws Exception;
+
 	/**
 	 * 
 	* @Title: allListWrlFaraOld 
