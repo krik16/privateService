@@ -141,4 +141,12 @@ public interface ROACooperationBrandService {
 	 * @throws Exception
 	 */
 	public BrandWallListVO getBrandWallListByIds(List<ObjectId> listIds) throws Exception;
+	
+	/**
+	 * 根据品牌id集合查询品牌数据
+	 * @param brandIds
+	 * @return
+	 * @throws Exception
+	 */
+	public List<BrandEntity> getbrandList(List<String> brandIds) throws Exception ;
 }
