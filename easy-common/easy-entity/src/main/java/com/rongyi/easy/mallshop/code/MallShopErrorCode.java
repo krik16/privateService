@@ -31,6 +31,8 @@ public enum MallShopErrorCode {
     ERROR_NO_EMAIL(1071002,"客服没有设置邮箱，不能发送邮件"),
     ERROR_CERTIFIED_FAILURE(1071003,"提交身份验证失败"),
     ERROR_INVITE_CODE(1071012,"您输入的邀请码无效，请查证后输入!"),
+    ERROR_WORKIMG_CODE(1071013,"工作证正面照不能为空!"),
+    ERROR_SHOPID_CODE(1071014,"请选择店铺!"),
 
 
     BUYER_ROLE_ISEXITS(1071801,"您已经拥有买手身份，无需升级!重新登录即可"),

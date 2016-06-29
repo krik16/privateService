@@ -44,6 +44,7 @@ public class SalerParentOrderVO implements Serializable {
 	private String orderOriginalPrice;// 我是订单原价
 	private String allCommodityCommission;// 佣金总额
 	private String expressBillId;// 物流单号
+	private String expressOrderInfoId;//物流信息主键
 	private String ticketStatus;// 小票状态0: 小票未上传, 1: 待审核, 2: 一级审核通过, 3: 二级审核通过,
 								// 4: 审核不通过
 	private String refuseReason;// 审核失败理由
@@ -54,6 +55,43 @@ public class SalerParentOrderVO implements Serializable {
 
 	private BigDecimal rebateDiscount;//商家抵扣券金额
 	private String rebateTitle;//商家抵扣券名称
+	
+	private boolean ifSupportByKuaidi100 = false;// true快递100支持 false不支持
+	private boolean ifOnDisplayExpress = false;//true显示查看物流按钮 false不显示
+	private String newContextByKuaidi100;// 当前最新推送的一条物流信息
+	private String newTimeByKuaidi100;// 当前最新推送的一条物流信息的时间
+
+	public boolean isIfSupportByKuaidi100() {
+		return ifSupportByKuaidi100;
+	}
+
+	public void setIfSupportByKuaidi100(boolean ifSupportByKuaidi100) {
+		this.ifSupportByKuaidi100 = ifSupportByKuaidi100;
+	}
+
+	public boolean isIfOnDisplayExpress() {
+		return ifOnDisplayExpress;
+	}
+
+	public void setIfOnDisplayExpress(boolean ifOnDisplayExpress) {
+		this.ifOnDisplayExpress = ifOnDisplayExpress;
+	}
+
+	public String getNewContextByKuaidi100() {
+		return newContextByKuaidi100;
+	}
+
+	public void setNewContextByKuaidi100(String newContextByKuaidi100) {
+		this.newContextByKuaidi100 = newContextByKuaidi100;
+	}
+
+	public String getNewTimeByKuaidi100() {
+		return newTimeByKuaidi100;
+	}
+
+	public void setNewTimeByKuaidi100(String newTimeByKuaidi100) {
+		this.newTimeByKuaidi100 = newTimeByKuaidi100;
+	}
 
 	public String getStatus() {
 		return status;
@@ -352,6 +390,16 @@ public class SalerParentOrderVO implements Serializable {
 		this.rebateTitle = rebateTitle;
 	}
 
+	public String getExpressOrderInfoId()
+	{
+		return expressOrderInfoId;
+	}
+
+	public void setExpressOrderInfoId(String expressOrderInfoId)
+	{
+		this.expressOrderInfoId = expressOrderInfoId;
+	}
+
 	@Override
 	public String toString() {
 		return "SalerParentOrderVO [status=" + status + ", totalPrice="
@@ -376,7 +424,9 @@ public class SalerParentOrderVO implements Serializable {
 				+ ", expressName=" + expressName + ", ticketPicList="
 				+ ticketPicList + ", receiveTime=" + receiveTime
 				+ ", buyerPhone=" + buyerPhone + ", rebateDiscount="
-				+ rebateDiscount + ", rebateTitle=" + rebateTitle + "]";
+				+ rebateDiscount + ", rebateTitle=" + rebateTitle + ",expressOrderInfoId="+expressOrderInfoId
+				+ ", ifSupportByKuaidi100=" + ifSupportByKuaidi100 + ",ifOnDisplayExpress="+ifOnDisplayExpress 
+				+ ", newContextByKuaidi100=" + newContextByKuaidi100 + ",newTimeByKuaidi100="+newTimeByKuaidi100 +"]";
 	}
 
 }

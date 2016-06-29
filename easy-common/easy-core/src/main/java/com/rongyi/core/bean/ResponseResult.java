@@ -1,5 +1,7 @@
 package com.rongyi.core.bean;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * 统一返回对象 逐渐废弃 【不建议使用当前对象 建议使用ResponseVO】
  * !!!《《《《禁止本类修改当前状态code，如需新success code 外部传入》》》!!!
@@ -134,6 +136,9 @@ public class ResponseResult implements java.io.Serializable {
 	}
 
 	public Integer getCodeInt() {
+		if(StringUtils.isBlank(code)){
+			return -11;
+		}
 		return Integer.valueOf(code);
 	}
 

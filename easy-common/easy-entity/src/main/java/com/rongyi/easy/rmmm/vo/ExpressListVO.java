@@ -7,12 +7,11 @@ import java.util.List;
  * 
  * @author WZH
  * 
- *         合作商场列表VO
+ *   
  * 
  */
 public class ExpressListVO extends PageVO implements Serializable {
 
-	// 返回的合作商场列表
 	private List<ExpressVO> list;
 
 	public List<ExpressVO> getList() {

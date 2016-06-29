@@ -1,30 +1,43 @@
 package com.rongyi.easy.rmmm.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
-public class ContentUserMsg implements Serializable{
+public class ContentUserMsg implements Serializable {
+
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	/**  */
+    /**  */
     private Integer id;
 
-    /** 系统消息id */
+    /**
+     * 系统消息id
+     */
     private Integer msgId;
 
-    /** 用户id(卖家) */
+    /**
+     * 用户id(卖家)
+     */
     private Integer sellerId;
 
-    /** 用户id(买家) */
+    /**
+     * 用户id(买家)
+     */
     private String userMid;
 
-    /** 删除 -1 阅读 0 收藏 1 */
+    /**
+     * 删除 -1 阅读 0 收藏 1  2 ：未读
+     */
     private String status;
 
+    private Date createAt;
+
+    private Date updateAt;
+
     /**
-     * 
      * @return id
      */
     public Integer getId() {
@@ -32,7 +45,6 @@ public class ContentUserMsg implements Serializable{
     }
 
     /**
-     * 
      * @param id
      */
     public void setId(Integer id) {
@@ -41,6 +53,7 @@ public class ContentUserMsg implements Serializable{
 
     /**
      * 系统消息id
+     *
      * @return msgId
      */
     public Integer getMsgId() {
@@ -49,6 +62,7 @@ public class ContentUserMsg implements Serializable{
 
     /**
      * 系统消息id
+     *
      * @param msgId
      */
     public void setMsgId(Integer msgId) {
@@ -57,6 +71,7 @@ public class ContentUserMsg implements Serializable{
 
     /**
      * 用户id(卖家)
+     *
      * @return sellerId
      */
     public Integer getSellerId() {
@@ -65,6 +80,7 @@ public class ContentUserMsg implements Serializable{
 
     /**
      * 用户id(卖家)
+     *
      * @param sellerId
      */
     public void setSellerId(Integer sellerId) {
@@ -73,6 +89,7 @@ public class ContentUserMsg implements Serializable{
 
     /**
      * 用户id(买家)
+     *
      * @return userMid
      */
     public String getUserMid() {
@@ -81,6 +98,7 @@ public class ContentUserMsg implements Serializable{
 
     /**
      * 用户id(买家)
+     *
      * @param userMid
      */
     public void setUserMid(String userMid) {
@@ -89,6 +107,7 @@ public class ContentUserMsg implements Serializable{
 
     /**
      * 删除 -1 阅读 0 收藏 1
+     *
      * @return status
      */
     public String getStatus() {
@@ -97,9 +116,40 @@ public class ContentUserMsg implements Serializable{
 
     /**
      * 删除 -1 阅读 0 收藏 1
+     *
      * @param status
      */
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
+
+    public Date getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("ContentUserMsg{");
+        sb.append("id=").append(id);
+        sb.append(", msgId=").append(msgId);
+        sb.append(", sellerId=").append(sellerId);
+        sb.append(", userMid='").append(userMid).append('\'');
+        sb.append(", status='").append(status).append('\'');
+        sb.append(", createAt=").append(createAt);
+        sb.append(", updateAt=").append(updateAt);
+        sb.append('}');
+        return sb.toString();
     }
 }
