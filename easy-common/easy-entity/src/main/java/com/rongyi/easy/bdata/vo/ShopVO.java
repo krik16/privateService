@@ -45,6 +45,24 @@ public class ShopVO implements Serializable {
 	private Date openAt ; //开业时间
 	private List<String> appImgs ; //app店铺图片
 	private String icon ;        //店铺自定义Logo
+	private String validReason;
+	private String businessStatusReason;
+
+	public String getValidReason() {
+		return validReason;
+	}
+
+	public void setValidReason(String validReason) {
+		this.validReason = validReason;
+	}
+
+	public String getBusinessStatusReason() {
+		return businessStatusReason;
+	}
+
+	public void setBusinessStatusReason(String businessStatusReason) {
+		this.businessStatusReason = businessStatusReason;
+	}
 	
 	
 	public Integer getBusinessStatus() {
