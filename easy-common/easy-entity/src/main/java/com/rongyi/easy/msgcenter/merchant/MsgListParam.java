@@ -24,6 +24,7 @@ public class MsgListParam implements Serializable{
     private SessionUserInfo userInfo;
     private List<Integer> ids;
     private String platform;
+    private String userId;
 
     public String getTitle() {
         return title;
@@ -103,6 +104,17 @@ public class MsgListParam implements Serializable{
 
     public void setPlatform(String platform) {
         this.platform = platform;
+    }
+
+    public String getUserId() {
+        if (this.getUserInfo() != null) {
+            return this.getUserInfo().getId().toString();
+        }
+        return null;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     @Override

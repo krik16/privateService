@@ -16,6 +16,7 @@ public class ValidCommissionVO implements Serializable {
     private Integer pageSize;
     private Integer currpage;
     private Integer number;
+    private Integer type;
     private BigDecimal totalAmount;
     private List<ValidDate> myValidList;
 
@@ -65,6 +66,14 @@ public class ValidCommissionVO implements Serializable {
 
     public void setMyValidList(List<ValidDate> myValidList) {
         this.myValidList = myValidList;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public static class ValidDate implements Serializable {

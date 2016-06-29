@@ -2,6 +2,7 @@ package com.rongyi.easy.mcmc.vo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import com.rongyi.easy.mcmc.Commodity;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
@@ -28,6 +29,10 @@ public class CommodityWebVO implements Serializable, CommodityDataStatus {
 	private String descrite;//商品描述
 	private String typeName; //渠道  1商家，2买手
 	private String spotName;// 是否现货
+	private String commodityModelNo; //商品款号
+	private List<String> goodsParam;//商品参数
+
+
 	public CommodityWebVO(){
 		
 	}
@@ -62,6 +67,8 @@ public class CommodityWebVO implements Serializable, CommodityDataStatus {
 		} else {
 			this.spotName = "";
 		}
+		this.commodityModelNo = commodity.getCommodityModelNo();
+		this.goodsParam = commodity.getGoodsParam();
 	}
 	
 	
@@ -175,5 +182,21 @@ public class CommodityWebVO implements Serializable, CommodityDataStatus {
 
 	public void setSpotName(String spotName) {
 		this.spotName = spotName;
+	}
+
+	public String getCommodityModelNo() {
+		return commodityModelNo;
+	}
+
+	public void setCommodityModelNo(String commodityModelNo) {
+		this.commodityModelNo = commodityModelNo;
+	}
+
+	public List<String> getGoodsParam() {
+		return goodsParam;
+	}
+
+	public void setGoodsParam(List<String> goodsParam) {
+		this.goodsParam = goodsParam;
 	}
 }

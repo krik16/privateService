@@ -18,6 +18,7 @@ public class FloorVO implements Serializable {
 	private String navigationPic;
 	private String pathImg;
 	private String picture;
+    private String swfPic;
 	private List<String> parentIds;
 	private String parentId;
 
@@ -99,5 +100,13 @@ public class FloorVO implements Serializable {
 
     public void setParentId(String parentId) {
         this.parentId = parentId;
+    }
+
+    public String getSwfPic() {
+        return swfPic;
+    }
+
+    public void setSwfPic(String swfPic) {
+        this.swfPic = swfPic;
     }
 }
