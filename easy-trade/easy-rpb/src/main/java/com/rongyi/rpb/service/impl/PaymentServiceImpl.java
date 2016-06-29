@@ -362,6 +362,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                 if (historyPayment == null)
                     throw new TradeException(ConstantEnum.EXCEPTION_PAYMENT_NOT_EXIST.getCodeStr(), ConstantEnum.EXCEPTION_PAYMENT_NOT_EXIST.getValueStr());
                 paymentEntity.setPayChannel(historyPayment.getPayChannel());
+                paymentEntity.setWeixinMchId(historyPayment.getWeixinMchId());
             }
             paymentEntity.setTitle(paymentEntityVO.getTitle());
             if (paymentEntityVO.getAmountMoney() == null || isZero(paymentEntityVO.getAmountMoney())) {// 支付款是0元是直接设置支付状态为已支付

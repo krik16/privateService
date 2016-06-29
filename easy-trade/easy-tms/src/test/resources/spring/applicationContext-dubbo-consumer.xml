@@ -59,21 +59,25 @@
 	<dubbo:reference interface="com.rongyi.rss.tradecenter.ProxyUserCouponService" id="proxyUserCouponService"  version="${dubbo.version}" check="false"/>
 	<!-- 优惠券模板信息 -->
 	<dubbo:reference interface="com.rongyi.rss.coupon.RoaCouponService" id="roaCouponService"  version="${dubbo.version}" check="false"/>
-
-	<dubbo:reference interface="com.rongyi.rss.tradecenter.RoaProxyUserCouponService" id="roaProxyUserCouponService"  version="${dubbo.version}" check="false"/>
 	<!-- 购物车订单接口 -->
 	<dubbo:reference interface=" com.rongyi.rss.tradecenter.osm.IOrderCartService" id="iOrderCartService"  version="${dubbo.version}" check="false"/>
-	<!-- 普通订单接口 -->
-	<dubbo:reference interface=" com.rongyi.rss.tradecenter.osm.IOrderQueryService" id="iOrderQueryService"  version="${dubbo.version}" check="false"/>
 
+	<dubbo:reference interface="com.rongyi.rss.tradecenter.RoaProxyUserCouponService" id="roaProxyUserCouponService"  version="${dubbo.version}" check="false"/>
 	<!-- 商品信息 -->
 	<dubbo:reference interface="com.rongyi.rss.solr.McmcCommoditySolrService" id="mcmcCommoditySolrService"  version="${dubbo.version}" check="false"/>
 	<!-- 商品信息 -->
 	<dubbo:reference interface="com.rongyi.rss.bsoms.IUserInfoService" id="iUserInfoService"  version="${dubbo.version}" check="false"/>
+	<!-- 商品信息 -->
+	<dubbo:reference interface="com.rongyi.rss.tradecenter.osm.IOrderQueryService" id="iOrderQueryService" timeout="60000"  version="${dubbo.version}" check="false"/>
+	<!-- 商品信息 -->
+	<dubbo:reference interface="com.rongyi.rss.mcmc.CommodityService" id="commodityService" timeout="60000"  version="${dubbo.version}" check="false"/>
 	<!-- 大运营后台用户权限查询 -->
 	<dubbo:reference interface="com.rongyi.rss.ryoms.ROARyUserService" id="ryUserServiceryUserService" version="${dubbo.version}" check="false" />
-
 	<!-- 商家后台用户权限查询 -->
 	<dubbo:reference interface="com.rongyi.rss.roa.ROAUserInfoService" id="userInfoService" version="${dubbo.version}" check="false" />
+	<!-- 优惠券子订单查询 -->
+	<dubbo:reference interface="com.rongyi.rss.tradecenter.ITradeOrderService" id="iTradeOrderService" version="${dubbo.version}" check="false" />
+	<!-- 优惠券userCode查询 -->
+	<dubbo:reference interface="com.rongyi.rss.tradecenter.ITradeUserCodeService" id="iTradeUserCodeService" version="${dubbo.version}" check="false" />
 
-</beans>  
+</beans>
