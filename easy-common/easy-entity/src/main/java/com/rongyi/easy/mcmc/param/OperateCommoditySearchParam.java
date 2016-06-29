@@ -21,10 +21,8 @@ public class OperateCommoditySearchParam implements Serializable{
     private String category;//4级分类id
     private int status;//状态 0下架 1上架 2是删除3待上架4待处理 -1表示所有
     private String timeType;//1创建时间、2上架时间、3下架时间
-    @JsonDeserialize(using=DateJsonDeserializer.class)
-    private Date startTime;//时间段开始
-    @JsonDeserialize(using=DateJsonDeserializer.class)
-    private Date endTime;//时间段结束
+    private Long startTime;//时间段开始
+    private Long endTime;//时间段结束
     private int currpage;//当页数1表示第一页
     private int pageSize;//每页大小
 
@@ -116,19 +114,19 @@ public class OperateCommoditySearchParam implements Serializable{
         this.timeType = timeType;
     }
 
-    public Date getStartTime() {
+    public Long getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(Long startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public Long getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(Long endTime) {
         this.endTime = endTime;
     }
 
