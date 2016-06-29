@@ -12,7 +12,7 @@ public class BaseDto implements Serializable{
 	private Integer pageSize;
 	
 	private Integer currentPage;
-
+	
 	public Integer getPageSize() {
 		return pageSize;
 	}
@@ -29,6 +29,10 @@ public class BaseDto implements Serializable{
 		this.currentPage = currentPage;
 	}
 	
+	public Integer getStartRow() {
+		return (currentPage - 1) * pageSize;
+	}
+
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);

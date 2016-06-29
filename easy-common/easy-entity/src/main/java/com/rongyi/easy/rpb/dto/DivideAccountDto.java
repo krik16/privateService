@@ -2,14 +2,18 @@ package com.rongyi.easy.rpb.dto;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class DivideAccountDto extends BaseDto {
 
 	private static final long serialVersionUID = -475860699835932675L;
 
 	private String mallName;
 	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date billDateBegin;
 	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date billDateEnd;
 	
 	private String billBatchNo;

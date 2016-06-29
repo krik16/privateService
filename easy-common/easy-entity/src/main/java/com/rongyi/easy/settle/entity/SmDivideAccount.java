@@ -15,7 +15,7 @@ public class SmDivideAccount {
 
     private Integer unitNum;
 
-    private String payAmount;
+    private Integer payAmount;
 
     private Integer rebateAmount;
 
@@ -145,11 +145,11 @@ public class SmDivideAccount {
 		this.settleAmount = settleAmount;
 	}
 
-	public String getPayAmount() {
+	public Integer getPayAmount() {
 		return payAmount;
 	}
 
-	public void setPayAmount(String payAmount) {
+	public void setPayAmount(Integer payAmount) {
 		this.payAmount = payAmount;
 	}
 
