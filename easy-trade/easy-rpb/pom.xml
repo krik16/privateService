@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.rongyi</groupId>
 		<artifactId>easy-trade</artifactId>
-		<version>3.6.2-SNAPSHOT</version>
+		<version>3.7.6-SNAPSHOT</version>
 	</parent>
 	<artifactId>easy-rpb</artifactId>
 	<packaging>war</packaging>
@@ -281,7 +281,7 @@
 		</dependency>
 		<!-- Drools start -->
 
-		<dependency>
+	<!--	<dependency>
 			<groupId>org.kie</groupId>
 			<artifactId>kie-api</artifactId>
 			<version>6.1.0.Final</version>
@@ -299,7 +299,7 @@
 			<groupId>org.drools</groupId>
 			<artifactId>drools-compiler</artifactId>
 			<scope>runtime</scope>
-		</dependency>
+		</dependency>-->
 
 		<!-- Drools end -->
 		<!-- dubbo start -->
