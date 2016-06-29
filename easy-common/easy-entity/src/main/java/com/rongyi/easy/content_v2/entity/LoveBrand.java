@@ -64,14 +64,10 @@ public class LoveBrand implements Serializable {
         this.brandId = brandId;
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", id)
-                .append("brandName", brandName)
-                .append("brandId", brandId)
-                .append("brandLogo", brandLogo)
-                .append("stick", stick)
-                .toString();
-    }
+	@Override
+	public String toString() {
+		return "LoveBrand [id=" + id + ", brandName=" + brandName
+				+ ", brandLogo=" + brandLogo + ", brandId=" + brandId
+				+ ", status=" + status + ", stick=" + stick + "]";
+	}
 }
