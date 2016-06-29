@@ -330,13 +330,14 @@ public interface ROAContentService {
 	* @param @param currentPage
 	* @param @param version
 	* @param @return
-	* @param @throws Exception    设定文件 
-	* @return PagingVO<ContentPojo>    返回类型 
+	* @param @throws Exception    设定文件
+	* @param mallId
+     *@param shopId @return PagingVO<ContentPojo>    返回类型
 	* @author shaozhou
 	* @date 2016年5月5日 下午7:16:54 
 	* @throws
 	 */
-	public PagingVO<ContentPojo> pagingArticleList(String type, double lng, double lat, String cityId, int pageSize, Integer currentPage) throws Exception ;
+	public PagingVO<ContentPojo> pagingArticleList(String mallId, String shopId, String type, double lng, double lat, String cityId, int pageSize, Integer currentPage) throws Exception ;
 	/**
 	 * 
 	* @Title: pagingArticleList 
