@@ -78,6 +78,10 @@ public class Hannels {
      * 渠道id
      */
     private Integer channelId;
+    /**
+     * 渠道邀请码
+     */
+    private String channelCode;
 
     public Integer getId() {
         return id;
@@ -197,5 +201,13 @@ public class Hannels {
 
     public void setHannelsCheckLogList(List<HannelsCheckLog> hannelsCheckLogList) {
         this.hannelsCheckLogList = hannelsCheckLogList;
+    }
+
+    public String getChannelCode() {
+        return channelCode;
+    }
+
+    public void setChannelCode(String channelCode) {
+        this.channelCode = channelCode;
     }
 }
