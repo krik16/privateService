@@ -19,7 +19,7 @@ public class SmsConfig implements Serializable{
     public static final String SERVER_TELPHONE="400-040-8989";//客服电话;
 
     public static final String csUserName="xd000848";//"xd000848";
-    public static final String csPassWord="RoNgyi0317aPP";
+    public static final String csPassWord="";
     public static final String csSendURL="http://114.113.154.5/sms.aspx?action=send";
 
     public static final String csURL="http://114.113.154.13/sms.aspx?action=overage";

@@ -55,7 +55,26 @@ public class ContentSysMsg implements Serializable{
     /**查看类型 -1所有可看，0集团管理员、1商场管理员、2品牌管理员、3分公司、4店长、5导购，6买手'**/
     private Integer roleType;
 
+    /**
+     * 关联的类型。0：默认；1：商品类
+     */
+    private Integer relateType;
 
+    /**
+     * 1:系统推送；0：人工推送
+     */
+    private Integer pushType;
+
+    /**
+     * 创建来源；1：商家后台；2：摩店App
+     */
+    private Integer source;
+
+    /**
+     * 查看消息的平台；1：商家后台；2：摩店APP ; 3:摩店管理平台；（包含关系）
+     *
+     */
+    private String readPlatforms;
 
     public Integer getId() {
         return id;
@@ -175,5 +194,63 @@ public class ContentSysMsg implements Serializable{
 
     public void setRoleType(Integer roleType) {
         this.roleType = roleType;
+    }
+
+    public Integer getRelateType() {
+        return relateType;
+    }
+
+    public void setRelateType(Integer relateType) {
+        this.relateType = relateType;
+    }
+
+    public Integer getSource() {
+        return source;
+    }
+
+    public void setSource(Integer source) {
+        this.source = source;
+    }
+
+    public String getReadPlatforms() {
+        return readPlatforms;
+    }
+
+    public void setReadPlatforms(String readPlatforms) {
+        this.readPlatforms = readPlatforms;
+    }
+
+    public Integer getPushType() {
+        return pushType;
+    }
+
+    public void setPushType(Integer pushType) {
+        this.pushType = pushType;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("ContentSysMsg{");
+        sb.append("id=").append(id);
+        sb.append(", createBy=").append(createBy);
+        sb.append(", createAt=").append(createAt);
+        sb.append(", updateBy=").append(updateBy);
+        sb.append(", updateAt=").append(updateAt);
+        sb.append(", version=").append(version);
+        sb.append(", isDisabled=").append(isDisabled);
+        sb.append(", msgTitle='").append(msgTitle).append('\'');
+        sb.append(", msgStatus=").append(msgStatus);
+        sb.append(", msgPushtime=").append(msgPushtime);
+        sb.append(", msgLink='").append(msgLink).append('\'');
+        sb.append(", msgContent='").append(msgContent).append('\'');
+        sb.append(", msgType=").append(msgType);
+        sb.append(", objId='").append(objId).append('\'');
+        sb.append(", roleType=").append(roleType);
+        sb.append(", relateType=").append(relateType);
+        sb.append(", pushType=").append(pushType);
+        sb.append(", source=").append(source);
+        sb.append(", readPlatforms='").append(readPlatforms).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }
