@@ -30,7 +30,7 @@ public class JsonUtil {
     /**  
      * 从一个JSON 对象字符格式中得到一个java对象，形如：  
      * {"id" : idValue, "name" : nameValue, "aBean" : {"aBeanId" : aBeanIdValue, ...}}  
-     * @param object  
+     * @param
      * @param clazz  
      * @return  
      */  
@@ -68,7 +68,7 @@ public class JsonUtil {
     /**  
      * 从一个JSON数组得到一个java对象数组，形如：  
      * [{"id" : idValue, "name" : nameValue}, {"id" : idValue, "name" : nameValue}, ...]  
-     * @param object  
+     * @param
      * @param clazz  
      * @return  
      */  
@@ -86,7 +86,7 @@ public class JsonUtil {
     /**  
      * 从一个JSON数组得到一个java对象数组，形如：  
      * [{"id" : idValue, "name" : nameValue}, {"id" : idValue, "name" : nameValue}, ...]  
-     * @param object  
+     * @param
      * @param clazz  
      * @param map  
      * @return  
@@ -104,7 +104,7 @@ public class JsonUtil {
        
     /**  
      * 从一个JSON数组得到一个java对象集合  
-     * @param object  
+     * @param
      * @param clazz  
      * @return  
      */  
@@ -121,7 +121,7 @@ public class JsonUtil {
        
     /**  
      * 从一个JSON数组得到一个java对象集合，其中对象中包含有集合属性  
-     * @param object  
+     * @param
      * @param clazz  
      * @param map 集合属性的类型  
      * @return  
@@ -142,7 +142,7 @@ public class JsonUtil {
      * 从json HASH表达式中获取一个map，该map支持嵌套功能  
      * 形如：{"id" : "johncon", "name" : "小强"}  
      * 注意commons-collections版本，必须包含org.apache.commons.collections.map.MultiKeyMap  
-     * @param object  
+     * @param
      * @return  
      */  
     public static Map getMapFromJson(String jsonString) {   
@@ -186,8 +186,15 @@ public class JsonUtil {
         if(object != null){   
             if(object instanceof Collection || object instanceof Object[]){   
                 jsonString = JSONArray.fromObject(object, jsonConfig).toString();   
-            }else{   
-                jsonString = JSONObject.fromObject(object, jsonConfig).toString();   
+            }else{
+//                JSONObject jsonStr=  JSONObject.fromObject(object, jsonConfig);
+//                if(jsonStr.containsKey("error")){
+//                    jsonStr.remove("error");
+//                }
+//                if(jsonStr.containsKey("codeInt")){
+//                    jsonStr.remove("codeInt");
+//                }
+                jsonString = JSONObject.fromObject(object, jsonConfig).toString();
             }   
         }   
         return jsonString == null ? "{}" : jsonString;   
@@ -196,8 +203,8 @@ public class JsonUtil {
     /**
      * 组织返回json格式
      * 前端根据status值判断是否解析后面的json数据
-     * @param int
-     * @param jsonString
+     * @param
+     * @param
      * @throws Exception 
      */
     public static String getRetJsonString(int status, Object object){
@@ -210,7 +217,7 @@ public class JsonUtil {
     /**  
      * 从一个JSON 对象字符格式中得到一个JSONObject对象，形如：  
      * {"id" : idValue, "name" : nameValue, "aBean" : {"aBeanId" : aBeanIdValue, ...}}  
-     * @param object  
+     * @param
      * @return  
      */  
 	public static JSONObject getJSONObject(String jsonString){   

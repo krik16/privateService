@@ -175,4 +175,18 @@ public interface CouponConstants {
         int TS=1;//推送
         int FX=2;//分享红包
     }
+
+    interface MD_VALID_RECORD_TYPE{
+        int SHOP_COUPON=0;
+        int ACTIVITY_COUPON=2;
+        int GIFT_COUPON=1;
+    }
+    interface MD_VALID_DATE_TYPE{
+        //0所有时间，1当天，2当周，3当月，4昨天
+        int ALL=0;
+        int TODAY=1;
+        int WEEK=2;
+        int MONTH=3;
+        int YESTODAY=4;
+    }
 }

@@ -14,6 +14,8 @@ import java.util.List;
 
 public class SalerSonOrderVO implements Serializable{
 	private String commodityId;// 我是商品编号
+	private String specId;//商品规格id
+	private String newPrice;//商品修改后价格
 	private String commodityName;// 我是商品名称
 	private String address;// 邮寄地址
 	private String num;// 下单数量
@@ -158,16 +160,38 @@ public class SalerSonOrderVO implements Serializable{
 		this.commodityCode = commodityCode;
 	}
 
+	public String getSpecId()
+	{
+		return specId;
+	}
+
+	public void setSpecId(String specId)
+	{
+		this.specId = specId;
+	}
+
+	public String getNewPrice()
+	{
+		return newPrice;
+	}
+
+	public void setNewPrice(String newPrice)
+	{
+		this.newPrice = newPrice;
+	}
+
 	@Override
 	public String toString() {
 		return "SalerSonOrderVO{" +
+				", sonOrderId='" + sonOrderId + '\'' +
+				", newPrice='" + newPrice + '\'' +
 				"commodityId='" + commodityId + '\'' +
+				", specId='" + specId + '\'' +
 				", commodityName='" + commodityName + '\'' +
 				", address='" + address + '\'' +
 				", num='" + num + '\'' +
 				", commodityPic='" + commodityPic + '\'' +
-				", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +
-				", sonOrderId='" + sonOrderId + '\'' +
+				", commodityCurrentPrice='" + commodityCurrentPrice + '\'' +				
 				", sonOrderStatus='" + sonOrderStatus + '\'' +
 				", successRefund='" + successRefund + '\'' +
 				", refundType='" + refundType + '\'' +
@@ -176,7 +200,7 @@ public class SalerSonOrderVO implements Serializable{
 				", specColumnValues=" + specColumnValues +
 				", applicationId='" + applicationId + '\'' +
 				", commodityCommission='" + commodityCommission + '\'' +
-				", commodityCode='" + commodityCode + '\'' +
+				", commodityCode='" + commodityCode + '\'' +								
 				'}';
 	}
 }

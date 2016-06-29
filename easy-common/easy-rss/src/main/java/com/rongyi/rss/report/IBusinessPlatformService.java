@@ -19,4 +19,6 @@ public interface IBusinessPlatformService {
      * params｛mallId : 商场ID，userId : 用户ID，date : 时间<yyyy-MM-dd>｝
      */
     public List<Map<String, Object>> getLastDayData(SessionUserInfo user);
+    
+    public List<Map<String, Object>> getLastDayData(String shopId,String userId);
 }

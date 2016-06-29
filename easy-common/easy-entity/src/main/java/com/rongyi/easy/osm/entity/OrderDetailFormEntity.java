@@ -98,6 +98,8 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
     private Integer limitNum;//关联商品的限购数
     private Integer activityType;//商品活动 闪购1、特卖2、秒杀3
 
+    private BigDecimal disconntFee;//商品折扣
+
 
     public String getRefundDiscountInfo() {
 		return refundDiscountInfo;
@@ -387,7 +389,17 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
 		return commodityCommission;
 	}
 
-	/**
+    public BigDecimal getDisconntFee()
+    {
+        return disconntFee;
+    }
+
+    public void setDisconntFee(BigDecimal disconntFee)
+    {
+        this.disconntFee = disconntFee;
+    }
+
+    /**
 	* 返佣金额
 	* @param commodityCommission
 	*/
@@ -515,6 +527,7 @@ public class OrderDetailFormEntity implements Serializable ,Comparable<OrderDeta
                 ", scoreAmount=" + scoreAmount +
                 ", limitNum=" + limitNum +
                 ", activityType=" + activityType +
+                ", disconntFee=" + disconntFee +
                 " ]";
 	}
 

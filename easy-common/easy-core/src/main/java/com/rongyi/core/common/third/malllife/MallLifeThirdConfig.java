@@ -84,22 +84,61 @@ public class MallLifeThirdConfig {
         try {
 
             long times=System.currentTimeMillis();
+
+            String publicKey="";
+            String tokenStr="";
+            String channelStr="";
+            String sendType="";
+
+
             // String jsonStr="{'phone':'15821659415','passWd':'111111','uuid':'testId','regiTime':'"+times+"','couponId':'111'}";
             String jsonStr="";
             //jsonStr="{'openId':'15821659415'}";
-            jsonStr="{'phone':'15821659415','msgStr':'你的验证码为778899【容易网】','sendType':2}";
-            jsonStr="{'phone':'15821659415','passWd':'111111','sendType':1,'msgStr':'【容易网】尊敬的顾客，恭喜您获得XXX一份，请于活动截止日前至工作人员处领取，南国西汇城市广场感谢您的积极参与！'}";
+            //jsonStr="{'phone':'15821659415','msgStr':'你的验证码为778899【容易网】','sendType':2}";
+            jsonStr="{'phone':'15821659415','msgStr':'【梅溪新天地】您在测试商场兑换的“测试礼品”一份，兑换码：12345678，已核销成功','sendType':1}";
+            //jsonStr="{'phone':'15821659415','passWd':'111111','sendType':1,'msgStr':'【容易网】尊敬的顾客，恭喜您获得XXX一份，请于活动截止日前至工作人员处领取，南国西汇城市广场感谢您的积极参与！'}";
 
-            System.out.println("PUBLICKEY===="+SmsEnum.getName(MallLifeThirdConfig.TOB_SMS_CHANNEL.NC_CHANNEL + "_PUBLICKEY"));
 
+          /*  System.out.println("PUBLICKEY===="+SmsEnum.getName(MallLifeThirdConfig.TOB_SMS_CHANNEL.NC_CHANNEL + "_PUBLICKEY"));
             String  data=  MalllifeRsaUtil.encryptionStr(jsonStr, SmsEnum.getName(MallLifeThirdConfig.TOB_SMS_CHANNEL.NC_CHANNEL + "_PUBLICKEY"));
             String str="data="+data+"&timeStamp="+times+"&channel="+MallLifeThirdConfig.TOB_SMS_CHANNEL.NC_CHANNEL+"&token="+SmsEnum.getName(MallLifeThirdConfig.TOB_SMS_CHANNEL.NC_CHANNEL + "_TOKEN");
             String md5Sign= Md5Util.GetMD5Code(str);
             System.out.println("data=" + data);
             System.out.println("md5Sign="+md5Sign);
-            System.out.println("times=" + times);
+            System.out.println("times=" + times);*/
 
 
+            //步步高
+               publicKey="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDqjVndmCKne9qd6SxHG6muvWVi5HO/wiRmwTirQocA9qxbJuANRAP9rIN112g+20+lMti00+gMPjGqmp/iz49I8fLVV7MOxW7rG3OdlvBZGVK8PDz08dOg/qWLy2tcgT8mbzq3If0pjqLU192WZrezyaDbfzWtCuG11qfA+LjH+QIDAQAB";
+              tokenStr="E7723AE90732C4ACC914F24A82293638";
+              channelStr="BUBUGAONTC";
+              sendType="1";
+            //PHP平台
+           /* publicKey="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDqjVndmCKne9qd6SxHG6muvWVi5HO/wiRmwTirQocA9qxbJuANRAP9rIN112g+20+lMti00+gMPjGqmp/iz49I8fLVV7MOxW7rG3OdlvBZGVK8PDz08dOg/qWLy2tcgT8mbzq3If0pjqLU192WZrezyaDbfzWtCuG11qfA+LjH+QIDAQAB";
+            tokenStr="E7723AE90732C4ACC914F24A82293638";
+            channelStr="PHPPLATNTC";
+            sendType="1";*/
+
+
+
+
+
+            String  data=  MalllifeRsaUtil.encryptionStr(jsonStr,publicKey);
+            String str="data="+data+"&timeStamp="+times+"&channel="+channelStr+"&token="+tokenStr;
+
+            String md5Sign= Md5Util.GetMD5Code(str);
+           /* System.out.println("data=" + data);
+            System.out.println("md5Sign="+md5Sign);
+            System.out.println("times=" + times);*/
+
+
+            System.out.println("{\n" +
+                    "\"data\":\""+data+"\",\n" +
+                    "\"timeStamp\":\""+times+"\",\n" +
+                    "\"sign\":\""+md5Sign+"\",\n" +
+                    "\"channel\":\""+channelStr+"\",\n" +
+                    "\"sendType\":"+sendType+"\n" +
+                    "}");
 
 
         }catch (Exception e){

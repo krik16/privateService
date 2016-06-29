@@ -125,4 +125,20 @@ public class VirtualAccountEntity implements Serializable {
 		this.stopAt = stopAt;
 	}
 
+	@Override
+	public String toString() {
+		return "VirtualAccountEntity{" +
+				"id=" + id +
+				", userId='" + userId + '\'' +
+				", userName='" + userName + '\'' +
+				", shopId='" + shopId + '\'' +
+				", shopName='" + shopName + '\'' +
+				", balance=" + balance +
+				", alipayAccount='" + alipayAccount + '\'' +
+				", isAuthenticated=" + isAuthenticated +
+				", isSuspended=" + isSuspended +
+				", stopReason='" + stopReason + '\'' +
+				", stopAt=" + stopAt +
+				'}';
+	}
 }
