@@ -122,7 +122,13 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 
 			if (CollectionUtils.isNotEmpty(couponIdList)) {
 				// 调用接口判断非通用券
-				List<CouponGeneralVO> couponList = tradeCouponService.jugeGeneralByIds(couponIdList);
+				List<CouponGeneralVO> couponList;
+				try {
+					couponList = tradeCouponService.jugeGeneralByIds(couponIdList);
+				} catch (Exception e) {
+					log.error("调用卡券接口异常：tradeCouponService.jugeGeneralByIds, 入参couponIdList: " + couponIdList, e);
+					throw new BizException(CodeEnum.ERROR_SYSTEM);
+				}
 				for (CouponGeneralVO vo : couponList) {
 					if (null != vo && null != vo.getCouponId() && !vo.getIsGeneral()) {
 						resultList.add(divideAccountMap.get(vo.getCouponId()));
@@ -169,10 +175,11 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 		smDivideAccount.setOrderNum(DivideAccountConstant.ORDER_NUM);
 		smDivideAccount.setBillBatchNo(billBatchNo);
 		smDivideAccount.setBillDate(billDate);
-		if (DivideAccountConstant.ORDER_TYPE_PRODUCT.equals(divideAccountVo.getOrderType())) {// 商品订单
+		Integer orderType = divideAccountVo.getOrderType();
+		if (DivideAccountConstant.ORDER_TYPE_PRODUCT.equals(orderType)) {// 商品订单
 			smDivideAccount.setUnitNum(divideAccountVo.getTotalQuantity());// 商品数量
 			smDivideAccount.setPayAmount(AmountUtil.changYuanToFen(divideAccountVo.getTotalAmount().doubleValue()));// 支付金额
-		} else if (DivideAccountConstant.ORDER_TYPE_TRADE.equals(divideAccountVo.getOrderType())) {// 卡券订单
+		} else if (DivideAccountConstant.ORDER_TYPE_TRADE.equals(orderType)) {// 卡券订单
 			smDivideAccount.setUnitNum(DivideAccountConstant.UNIT_NUM);// 系统无法区分每次核销了几张卡券，因此默认每使用一次卡券，都单独是一次核销
 			smDivideAccount.setPayAmount(divideAccountVo.getUnitPrice());// 支付金额，每使用一次卡券都是一次核销，所以金额就是单价
 		}
@@ -193,11 +200,12 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 		smDivideAccountDetail.setOrderNum(DivideAccountConstant.ORDER_NUM);
 		smDivideAccountDetail.setBillBatchNo(billBatchNo);
 		smDivideAccountDetail.setBillDate(billDate);
-		if (DivideAccountConstant.ORDER_TYPE_PRODUCT.equals(divideAccountVo.getOrderType())) {// 商品订单
+		Integer orderType = divideAccountVo.getOrderType();
+		if (DivideAccountConstant.ORDER_TYPE_PRODUCT.equals(orderType)) {// 商品订单
 			smDivideAccountDetail.setUnitNum(divideAccountVo.getTotalQuantity());// 商品数量
 			smDivideAccountDetail
 					.setPayAmount(AmountUtil.changYuanToFen(divideAccountVo.getTotalAmount().doubleValue()));// 支付金额
-		} else if (DivideAccountConstant.ORDER_TYPE_TRADE.equals(divideAccountVo.getOrderType())) {// 卡券订单
+		} else if (DivideAccountConstant.ORDER_TYPE_TRADE.equals(orderType)) {// 卡券订单
 			smDivideAccountDetail.setUnitNum(DivideAccountConstant.UNIT_NUM);// 系统无法区分每次核销了几张卡券，因此默认每使用一次卡券，都单独是一次核销
 			smDivideAccountDetail.setPayAmount(divideAccountVo.getUnitPrice());// 支付金额，每使用一次卡券都是一次核销，所以金额就是单价
 		}
@@ -212,11 +220,12 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 	 */
 	private void replaceSmDivideAccount(DivideAccountVo divideAccountVo, SmDivideAccount smDivideAccount) {
 		smDivideAccount.setOrderNum(smDivideAccount.getOrderNum() + DivideAccountConstant.ORDER_NUM);// 订单数自增
-		if (DivideAccountConstant.ORDER_TYPE_PRODUCT.equals(divideAccountVo.getOrderType())) {// 商品订单
+		Integer orderType = divideAccountVo.getOrderType();
+		if (DivideAccountConstant.ORDER_TYPE_PRODUCT.equals(orderType)) {// 商品订单
 			smDivideAccount.setPayAmount(smDivideAccount.getPayAmount()
 					+ AmountUtil.changYuanToFen(divideAccountVo.getTotalAmount().doubleValue()));// 支付金额
 			smDivideAccount.setUnitNum(smDivideAccount.getUnitNum() + divideAccountVo.getTotalQuantity());
-		} else if (DivideAccountConstant.ORDER_TYPE_TRADE.equals(divideAccountVo.getOrderType())) {// 卡券订单
+		} else if (DivideAccountConstant.ORDER_TYPE_TRADE.equals(orderType)) {// 卡券订单
 			smDivideAccount.setPayAmount(smDivideAccount.getPayAmount() + divideAccountVo.getUnitPrice());
 			smDivideAccount.setUnitNum(smDivideAccount.getUnitNum() + DivideAccountConstant.UNIT_NUM);
 		}
@@ -237,34 +246,34 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 				detailMap.put(detail.getShopId(), detail);
 			}
 		}
-		if (!detailMap.containsKey(shopId)) {
+		Integer orderType = divideAccountVo.getOrderType();
+		if (!detailMap.containsKey(shopId)) {// 不同店铺，不同记录
 			smDivideAccountDetail = new SmDivideAccountDetail();
 			smDivideAccountDetail.setMallId(divideAccountVo.getMallId());
 			smDivideAccountDetail.setShopId(shopId);
 			smDivideAccountDetail.setOrderNum(DivideAccountConstant.ORDER_NUM);
 			smDivideAccountDetail.setBillBatchNo(billBatchNo);
 			smDivideAccountDetail.setBillDate(billDate);
-			if (DivideAccountConstant.ORDER_TYPE_PRODUCT.equals(divideAccountVo.getOrderType())) {// 商品订单
+			if (DivideAccountConstant.ORDER_TYPE_PRODUCT.equals(orderType)) {// 商品订单
 				smDivideAccountDetail
 						.setPayAmount(AmountUtil.changYuanToFen(divideAccountVo.getTotalAmount().doubleValue()));
 				smDivideAccountDetail.setUnitNum(divideAccountVo.getTotalQuantity());
-			} else if (DivideAccountConstant.ORDER_TYPE_TRADE.equals(divideAccountVo.getOrderType())) {// 卡券订单
-				smDivideAccountDetail
-						.setPayAmount(divideAccountVo.getUnitPrice());
+			} else if (DivideAccountConstant.ORDER_TYPE_TRADE.equals(orderType)) {// 卡券订单
+				smDivideAccountDetail.setPayAmount(divideAccountVo.getUnitPrice());
 				smDivideAccountDetail.setUnitNum(DivideAccountConstant.UNIT_NUM);
 			}
 			detailList.add(smDivideAccountDetail);
-		} else {
+		} else {// 同一店铺，只记录一条记录
 			smDivideAccountDetail = detailMap.get(shopId);
 			smDivideAccountDetail.setOrderNum(smDivideAccountDetail.getOrderNum() + DivideAccountConstant.ORDER_NUM);
-			if (DivideAccountConstant.ORDER_TYPE_PRODUCT.equals(divideAccountVo.getOrderType())) {// 商品订单
+			if (DivideAccountConstant.ORDER_TYPE_PRODUCT.equals(orderType)) {// 商品订单
 				smDivideAccountDetail.setPayAmount(smDivideAccountDetail.getPayAmount()
 						+ AmountUtil.changYuanToFen(divideAccountVo.getTotalAmount().doubleValue()));
 				smDivideAccountDetail
 						.setUnitNum(smDivideAccountDetail.getUnitNum() + divideAccountVo.getTotalQuantity());
-			} else if (DivideAccountConstant.ORDER_TYPE_TRADE.equals(divideAccountVo.getOrderType())) {// 卡券订单
-				smDivideAccountDetail.setPayAmount(smDivideAccountDetail.getPayAmount()
-						+ divideAccountVo.getUnitPrice());
+			} else if (DivideAccountConstant.ORDER_TYPE_TRADE.equals(orderType)) {// 卡券订单
+				smDivideAccountDetail
+						.setPayAmount(smDivideAccountDetail.getPayAmount() + divideAccountVo.getUnitPrice());
 				smDivideAccountDetail.setUnitNum(smDivideAccountDetail.getUnitNum() + DivideAccountConstant.UNIT_NUM);
 			}
 			detailMap.put(shopId, smDivideAccountDetail);

@@ -42,7 +42,8 @@ public class DivideAccountController extends BaseController {
 	@ResponseBody
 	public ResponseVO list(DivideAccountDto divideAccountDto) {
 		this.fillPaginate(divideAccountDto);
-
+		log.info("进入方法DivideAccountController.list，入参divideAccountDto："+divideAccountDto.toString());
+		
 		List<DivideAccountVo> resultList = smdivideAccountService.findPageList(divideAccountDto);
 		return ResponseVO.success(resultList, divideAccountDto.getCurrentPage(), divideAccountDto.getPageSize(),
 				resultList.size());
@@ -58,6 +59,7 @@ public class DivideAccountController extends BaseController {
 		DivideAccountVo divideAccountVo;
 		try {
 			this.validDetail(divideAccountDto);
+			log.info("进入方法DivideAccountController.detail，入参divideAccountDto："+divideAccountDto.toString());
 
 			divideAccountVo = smdivideAccountService.findDivideAccount(divideAccountDto);
 		} catch (BizException e) {
@@ -75,6 +77,7 @@ public class DivideAccountController extends BaseController {
 	public ResponseVO detailList(DivideAccountDto divideAccountDto) {
 		this.fillPaginate(divideAccountDto);
 
+		log.info("进入方法DivideAccountController.detailList，入参divideAccountDto："+divideAccountDto.toString());
 		List<DivideAccountVo> resultList = new ArrayList<>();
 		if (null != divideAccountDto.getDivideAccountId()) {
 			resultList = smdivideAccountService.findDetailPageList(divideAccountDto);
@@ -94,7 +97,7 @@ public class DivideAccountController extends BaseController {
 		try {
 			// 校验入参
 			this.validExport(id);
-			log.info("进入方法-DivideAccountController.export：" + id);
+			log.info("进入方法-DivideAccountController.export, 入参id: " + id);
 
 			// 导出邀请码
 			smdivideAccountService.export(request, response, id);
@@ -112,7 +115,7 @@ public class DivideAccountController extends BaseController {
 		try {
 			// 校验入参
 			this.validExport(divideAccountId);
-			log.info("进入方法-DivideAccountController.exportAll：" + divideAccountId);
+			log.info("进入方法-DivideAccountController.exportAll, 入参divideAccountId: " + divideAccountId);
 
 			// 导出邀请码
 			smdivideAccountService.exportAll(request, response, divideAccountId);

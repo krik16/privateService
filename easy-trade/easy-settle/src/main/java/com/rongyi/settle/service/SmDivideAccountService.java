@@ -27,8 +27,7 @@ public interface SmDivideAccountService {
 	public DivideAccountVo findDivideAccount(DivideAccountDto divideAccountDto);
 
 	/**
-	 * 每日生成分账单
-	 * @Description
+	 * @Description 每日生成分账单
 	 */
 	public void batchGenerateDivideAccount();
 
