@@ -31,6 +31,7 @@ public class OldMallVO implements Serializable{
 	private String title;
 	private List<Double> location;
 	private String type;
+	private Integer shopCount;//商场下的店铺数量
 
 	public String getId() {
 		return id;
@@ -197,4 +198,11 @@ public class OldMallVO implements Serializable{
 	public void setType(String type) {
 		this.type = type;
 	}
+	public Integer getShopCount() {
+		return shopCount;
+	}
+	public void setShopCount(Integer shopCount) {
+		this.shopCount = shopCount;
+	}
+	
 }
