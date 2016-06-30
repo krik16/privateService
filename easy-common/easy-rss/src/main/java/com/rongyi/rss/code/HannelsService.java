@@ -34,5 +34,5 @@ public interface HannelsService {
      */
     boolean validMutex(HannelsSaveParam hannelsSaveParam) throws Exception;
 
-    void save(Map<String, Object> saveMap);
+    void save(Map<String, Object> saveMap) throws Exception;
 }

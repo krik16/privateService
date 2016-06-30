@@ -11,32 +11,24 @@ public class KeywordSearchParam extends MalllifeBaseParam implements Serializabl
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String commodityName;//商品名称
-	private String mallOrShopName;//店铺或者商场名称
-	private String couponName;//代金券名称
-	public String getCommodityName() {
-		return commodityName;
+	private String name;//商品或店铺或者商场或代金券名称
+	private Integer type;//1商品 2找店 3优惠
+	public String getName() {
+		return name;
 	}
-	public void setCommodityName(String commodityName) {
-		this.commodityName = commodityName;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getMallOrShopName() {
-		return mallOrShopName;
+	public Integer getType() {
+		return type;
 	}
-	public void setMallOrShopName(String mallOrShopName) {
-		this.mallOrShopName = mallOrShopName;
-	}
-	public String getCouponName() {
-		return couponName;
-	}
-	public void setCouponName(String couponName) {
-		this.couponName = couponName;
+	public void setType(Integer type) {
+		this.type = type;
 	}
 	@Override
 	public String toString() {
-		return "KeywordSearchParam [commodityName=" + commodityName
-				+ ", mallOrShopName=" + mallOrShopName + ", couponName="
-				+ couponName + "]";
+		return "KeywordSearchParam [name=" + name + ", type=" + type + "]";
 	}
+	
 	
 }

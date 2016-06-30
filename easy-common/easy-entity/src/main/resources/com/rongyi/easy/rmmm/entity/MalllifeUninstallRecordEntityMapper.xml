@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongyi.easy.rmmm.entity.MalllifeUninstallRecordEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.rongyi.easy.rmmm.entity.MalllifeUninstallRecordEntity" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="is_again" property="isAgain" jdbcType="INTEGER" />
+    <result column="un_type" property="unType" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, is_again, un_type, content, create_at
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from malllife_uninstall_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from malllife_uninstall_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.rongyi.easy.rmmm.entity.MalllifeUninstallRecordEntity" >
+    insert into malllife_uninstall_record (id, is_again, un_type, 
+      content, create_at)
+    values (#{id,jdbcType=BIGINT}, #{isAgain,jdbcType=INTEGER}, #{unType,jdbcType=INTEGER}, 
+      #{content,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rongyi.easy.rmmm.entity.MalllifeUninstallRecordEntity" >
+    insert into malllife_uninstall_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="isAgain != null" >
+        is_again,
+      </if>
+      <if test="unType != null" >
+        un_type,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="isAgain != null" >
+        #{isAgain,jdbcType=INTEGER},
+      </if>
+      <if test="unType != null" >
+        #{unType,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rongyi.easy.rmmm.entity.MalllifeUninstallRecordEntity" >
+    update malllife_uninstall_record
+    <set >
+      <if test="isAgain != null" >
+        is_again = #{isAgain,jdbcType=INTEGER},
+      </if>
+      <if test="unType != null" >
+        un_type = #{unType,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rongyi.easy.rmmm.entity.MalllifeUninstallRecordEntity" >
+    update malllife_uninstall_record
+    set is_again = #{isAgain,jdbcType=INTEGER},
+      un_type = #{unType,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
