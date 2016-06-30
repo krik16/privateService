@@ -9,25 +9,10 @@
  */
 package com.rongyi.tms.service;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
+import com.rongyi.tms.BaseTest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.annotation.Rollback;
 import org.testng.annotations.Test;
-
-import com.rongyi.core.common.PagingVO;
-import com.rongyi.easy.tms.entity.SalesCommission;
-import com.rongyi.easy.tms.vo.SalesCommissionParam;
-import com.rongyi.easy.tms.vo.SalesCommissionVO;
-import com.rongyi.easy.va.vo.VirtualAccountVO;
-import com.rongyi.rss.tms.AccountInfoService;
-import com.rongyi.tms.BaseTest;
-import com.rongyi.tms.moudle.vo.CheckParam;
-import com.rongyi.tms.moudle.vo.CommissionInfoVO;
 
 /**
  * @author ZhengYl
@@ -35,8 +20,8 @@ import com.rongyi.tms.moudle.vo.CommissionInfoVO;
  */
 public class SalesCommissionImplTest extends BaseTest {
 
-//	@Autowired
-//	SalesCommissionService salesCommissionService;
+	@Autowired
+	SalesCommissionService salesCommissionService;
 //
 //	@Autowired
 //	@Qualifier("accountInfoServiceImpl")
@@ -126,4 +111,10 @@ public class SalesCommissionImplTest extends BaseTest {
 //		System.err.println("审核中的佣金："+vir.getCommissionForAuditTotal());
 //		System.err.println("今日交易金额："+vir.getTradeDaily());
 //	}
+
+    @Test
+    @Rollback(false)
+    public void testCalcCommissioinLimit(){
+        salesCommissionService.calcCommissioinLimit("119",1);
+    }
 }

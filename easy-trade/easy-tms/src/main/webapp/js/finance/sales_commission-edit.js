@@ -161,20 +161,33 @@ function switchCheck(check) {
 		$("#uncheck").removeClass("now");
 		$("#checked").removeClass("change-color");
 		$("#checked").addClass("now");
+		$("#overLimit").removeClass("change-color");
+		$("#overLimit").addClass("now");
 		$("#batch-check").css("display", "block");
 		$("#isChecked").val(2);
 		$("#checkLi").css("display", "none");
 		$("#vaStatusLi").css("display", "none");
 
-	} else {
+	} else if(check == 5){
+		$("#uncheck").removeClass("change-color");
+		$("#uncheck").addClass("now");
+		$("#checked").removeClass("change-color");
+		$("#checked").addClass("now");
+		$("#overLimit").addClass("change-color");
+		$("#overLimit").removeClass("now");
+		$("#batch-check").css("display", "none");
+		$("#isChecked").val("5");
+	}else {
 		$("#checkLi").css("display", "block");
 		$("#vaStatusLi").css("display", "block");
 		$("#uncheck").removeClass("change-color");
 		$("#uncheck").addClass("now");
 		$("#checked").addClass("change-color");
 		$("#checked").removeClass("now");
+		$("#overLimit").removeClass("change-color");
+		$("#overLimit").addClass("now");
 		$("#batch-check").css("display", "none");
-		$("#isChecked").val("-2,3,4,5,6");
+		$("#isChecked").val("-2,3,4,6");
 	}
 	ajaxloadApplys();
 }

@@ -59,6 +59,9 @@
 						<c:when test="${item.status eq 6}">
 							<td style="text-align: center;">已到账</td>
 						</c:when>
+						<c:when test="${item.status eq 5}">
+							<td style="text-align: center;">超出上限</td>
+						</c:when>
 						<c:otherwise>
 							<td style="text-align: center;">未到账</td>
 						</c:otherwise>
@@ -68,7 +71,7 @@
 			</c:when>
 			<c:otherwise>
 				<tr>
-					<td style="text-align: center;" colspan="13">暂无记录</td>
+					<td style="text-align: center;" colspan="14">暂无记录</td>
 				</tr>
 			</c:otherwise>
 		</c:choose>
