@@ -1,6 +1,7 @@
 package com.rongyi.easy.code;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by shaozhou on 2016/6/29
@@ -10,7 +11,7 @@ public class HannelsSaveParam implements Serializable {
     private String id;//主键
     private String type;//推广码类型 0 邀请码 1 渠道推广码
     private String name;//推广码名称
-    private String couponIds;//关联促销券ids(多个用逗号隔开)
+    private List<HannelsCoupon> hannelsCouponList;//关联促销券ids(多个用逗号隔开)
     private String validStartAt;//有效开始时间
     private String validEndAt;//有效结束时间
     private String channelId;//渠道id
@@ -40,14 +41,6 @@ public class HannelsSaveParam implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getCouponIds() {
-        return couponIds;
-    }
-
-    public void setCouponIds(String couponIds) {
-        this.couponIds = couponIds;
     }
 
     public String getValidStartAt() {
@@ -98,13 +91,21 @@ public class HannelsSaveParam implements Serializable {
         this.remark = remark;
     }
 
+    public List<HannelsCoupon> getHannelsCouponList() {
+        return hannelsCouponList;
+    }
+
+    public void setHannelsCouponList(List<HannelsCoupon> hannelsCouponList) {
+        this.hannelsCouponList = hannelsCouponList;
+    }
+
     @Override
     public String toString() {
         return "HannelsSaveParam{" +
                 "id='" + id + '\'' +
                 ", type='" + type + '\'' +
                 ", name='" + name + '\'' +
-                ", couponIds='" + couponIds + '\'' +
+                ", hannelsCouponList=" + hannelsCouponList +
                 ", validStartAt='" + validStartAt + '\'' +
                 ", validEndAt='" + validEndAt + '\'' +
                 ", channelId='" + channelId + '\'' +

@@ -12,7 +12,7 @@ public class HannelsCoupon {
     private Integer stockCount;
 
     private Date createAt;
-
+    private Integer hannelsId;//关联促销码id
     public Integer getId() {
         return id;
     }
