@@ -64,7 +64,7 @@ public class Shop implements Serializable {
     private String business_reason ; 
     private Integer update_by ;
     private Integer create_source ; //创建来源   0大运营  1商家后台  其它crm
-    private Integer update_source ; //修改来源 
+    private Integer update_source ; //修改来源  0大运营  1商家后台  其它crm
     private Date open_at ;  //开业时间
     private List<ObjectId> brand_ids ; //兼营品牌
     private String icon ; //店铺logo

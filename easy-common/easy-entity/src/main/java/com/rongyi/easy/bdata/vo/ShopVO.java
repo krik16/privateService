@@ -46,6 +46,8 @@ public class ShopVO implements Serializable {
 	private List<String> appImgs ; //app店铺图片
 	private String icon ;        //店铺自定义Logo
 	private String businessStatusReason;
+	private String operatorUser;  //创建者
+	private String updateUser ;   //最后修改者
 
 	public String getBusinessStatusReason() {
 		return businessStatusReason;
@@ -350,5 +352,21 @@ public class ShopVO implements Serializable {
 
 	public void setIcon(String icon) {
 		this.icon = icon;
+	}
+
+	public String getOperatorUser() {
+		return operatorUser;
+	}
+
+	public void setOperatorUser(String operatorUser) {
+		this.operatorUser = operatorUser;
+	}
+
+	public String getUpdateUser() {
+		return updateUser;
+	}
+
+	public void setUpdateUser(String updateUser) {
+		this.updateUser = updateUser;
 	}
 }
