@@ -20,6 +20,10 @@
 		<result column="update_at" property="updateAt" jdbcType="TIMESTAMP" />
 		<result column="is_delete" property="isDelete" jdbcType="TINYINT" />
 	</resultMap>
+	<resultMap id="VoResultMap" type="com.rongyi.settle.vo.DivideAccountVo" extends="BaseResultMap">
+		<result column="shop_name" property="shopName" jdbcType="VARCHAR" />
+		<result column="mall_name" property="mallName" jdbcType="VARCHAR" />
+	</resultMap>
 	<sql id="Base_Column_List">
 		id, mall_id, shop_id, bill_date, bill_batch_no, divide_account_id, order_num, unit_num,
 		pay_amount, rebate_amount, mall_score, settle_amount, create_by, update_by, create_at,
@@ -35,25 +39,23 @@
 		delete from sm_divide_account_detail
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
-	<sql id="insertColumn">
-		id, mall_id, shop_id,
-		bill_date, bill_batch_no, divide_account_id,
-		order_num, unit_num, pay_amount,
-		rebate_amount, mall_score, settle_amount,
-		create_by, update_by, create_at,
-		update_at, is_delete
-	</sql>
-	<sql id="insertValue">
-		#{id,jdbcType=INTEGER}, #{mallId,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER},
-		#{billDate,jdbcType=DATE}, #{billBatchNo,jdbcType=VARCHAR}, #{divideAccountId,jdbcType=INTEGER},
-		#{orderNum,jdbcType=INTEGER}, #{unitNum,jdbcType=INTEGER}, #{payAmount,jdbcType=INTEGER},
-		#{rebateAmount,jdbcType=INTEGER}, #{mallScore,jdbcType=INTEGER}, #{settleAmount,jdbcType=INTEGER},
-		#{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP},
-		#{updateAt,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=TINYINT}
-	</sql>
 	<insert id="insert" parameterType="com.rongyi.easy.settle.entity.SmDivideAccountDetail">
-		insert into sm_divide_account_detail (<include refid="insertColumn"></include>)
-		values (<include refid="insertValue"></include>)
+		insert into sm_divide_account_detail (
+			id, mall_id, shop_id,
+			bill_date, bill_batch_no, divide_account_id,
+			order_num, unit_num, pay_amount,
+			rebate_amount, mall_score, settle_amount,
+			create_by, update_by, create_at,
+			update_at, is_delete
+		)
+		values (
+			#{id,jdbcType=INTEGER}, #{mallId,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER},
+			#{billDate,jdbcType=DATE}, #{billBatchNo,jdbcType=VARCHAR}, #{divideAccountId,jdbcType=INTEGER},
+			#{orderNum,jdbcType=INTEGER}, #{unitNum,jdbcType=INTEGER}, #{payAmount,jdbcType=INTEGER},
+			#{rebateAmount,jdbcType=INTEGER}, #{mallScore,jdbcType=INTEGER}, #{settleAmount,jdbcType=INTEGER},
+			#{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP},
+			#{updateAt,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=TINYINT}
+		)
 	</insert>
 	<insert id="insertSelective" parameterType="com.rongyi.easy.settle.entity.SmDivideAccountDetail">
 		insert into sm_divide_account_detail
@@ -239,15 +241,46 @@
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 	
+	<select id="findDetailPageList" parameterType="com.rongyi.easy.rpb.dto.DivideAccountDto" resultMap="VoResultMap">
+		select
+			sdad.id,
+			sdad.bill_date,
+			sdad.bill_batch_no,
+			sdad.order_num,
+			sdad.unit_num,
+			sdad.pay_amount,
+			mc.mall_name,
+			si.shop_name
+		from
+		sm_divide_account_detail sdad
+		LEFT JOIN ry_rmmm.shop_info si on si.id = sdad.shop_id
+		LEFT JOIN ry_rmmm.mall_cooperate mc ON mc.id = sdad.mall_id
+		where sdad.is_delete = 0
+		<if test="divideAccountId != null and divideAccountId != ''">
+			and sdad.divide_account_id = #{divideAccountId}
+		</if>
+		<if test="currentPage != null">
+			limit
+			#{startRow,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+		</if>
+	</select>
+	
 	<insert id="batchInsertSelective" parameterType="com.rongyi.easy.settle.entity.SmDivideAccountDetail">
 		insert into sm_divide_account_detail
 			(
-				<include refid="insertColumn"></include>
+				mall_id, shop_id,
+				bill_date, bill_batch_no, divide_account_id,
+				order_num, unit_num, pay_amount,
+				create_by, update_by, create_at, update_at
 			)
-			
-		<foreach collection="awardRuleList" item="rule" index="index" separator=",">
+		values			
+		<foreach collection="list" item="sm" index="index" separator=",">
 			(
-				<include refid="insertValue"></include>
+				#{sm.mallId,jdbcType=INTEGER}, #{sm.shopId,jdbcType=INTEGER},
+				#{sm.billDate,jdbcType=DATE}, #{sm.billBatchNo,jdbcType=VARCHAR}, #{sm.divideAccountId,jdbcType=INTEGER},
+				#{sm.orderNum,jdbcType=INTEGER}, #{sm.unitNum,jdbcType=INTEGER}, #{sm.payAmount,jdbcType=INTEGER},
+				#{sm.createBy,jdbcType=VARCHAR}, #{sm.updateBy,jdbcType=VARCHAR}, now(),
+				now()
 			)
 		</foreach>
 	</insert>

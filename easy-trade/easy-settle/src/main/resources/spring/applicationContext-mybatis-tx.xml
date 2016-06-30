@@ -29,9 +29,9 @@
 		<tx:attributes>
 			<tx:method name="save*" propagation="REQUIRED" isolation="READ_COMMITTED" rollback-for="Throwable"/>
 			<tx:method name="add*" propagation="REQUIRED" isolation="READ_COMMITTED" rollback-for="Throwable"/>
-			<tx:method name="batch" propagation="REQUIRED" isolation="READ_COMMITTED" rollback-for="Throwable"/>
+			<tx:method name="batch*" propagation="REQUIRED" isolation="READ_COMMITTED" rollback-for="Throwable"/>
 			<tx:method name="update*" propagation="REQUIRED" isolation="READ_COMMITTED" rollback-for="Throwable"/>
-				<tx:method name="insert*" propagation="REQUIRED" isolation="READ_COMMITTED" rollback-for="Throwable"/>
+			<tx:method name="insert*" propagation="REQUIRED" isolation="READ_COMMITTED" rollback-for="Throwable"/>
 			<tx:method name="remove*" propagation="REQUIRED" isolation="READ_COMMITTED" rollback-for="Throwable"/>
 			<tx:method name="del*" propagation="REQUIRED" isolation="READ_COMMITTED" rollback-for="Throwable"/>
 			<tx:method name="delete*" propagation="REQUIRED" isolation="READ_COMMITTED" rollback-for="Throwable"/>

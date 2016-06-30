@@ -2,6 +2,9 @@ package com.rongyi.settle.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import com.rongyi.easy.rpb.dto.DivideAccountDto;
 import com.rongyi.settle.vo.DivideAccountVo;
 
@@ -13,17 +16,23 @@ public interface SmDivideAccountService {
 	 * @return
 	 */
 	public List<DivideAccountVo> findPageList(DivideAccountDto divideAccountDto);
-	
+
 	/**
 	 * 分页查询分账详情列表
 	 * @param divideAccountDto
 	 * @return
 	 */
 	public List<DivideAccountVo> findDetailPageList(DivideAccountDto divideAccountDto);
-	
+
+	public DivideAccountVo findDivideAccount(DivideAccountDto divideAccountDto);
+
 	/**
 	 * 每日生成分账单
 	 * @Description
 	 */
-	public void generateDivideAccount();
+	public void batchGenerateDivideAccount();
+
+	public void export(HttpServletRequest request, HttpServletResponse response, Integer id);
+	
+	public void exportAll(HttpServletRequest request, HttpServletResponse response, Integer divideAccountId);
 }

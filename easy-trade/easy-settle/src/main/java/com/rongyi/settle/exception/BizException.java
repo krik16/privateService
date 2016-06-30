@@ -40,4 +40,12 @@ public class BizException extends RuntimeException {
 		this.code = code;
 	}
 
+	public String getErroMsg() {
+		return erroMsg;
+	}
+
+	public void setErroMsg(String erroMsg) {
+		this.erroMsg = erroMsg;
+	}
+
 }

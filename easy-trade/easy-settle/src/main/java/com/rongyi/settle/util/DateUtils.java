@@ -119,7 +119,7 @@ public class DateUtils {
         return dateFormat.format(date);
     }
     
-    public static Date formatDate(Date date, String format) {
+    public static Date parseDate(Date date, String format) {
 		SimpleDateFormat sf = new SimpleDateFormat(format);
 		String formatDate = sf.format(date);
 		try {
@@ -129,18 +129,31 @@ public class DateUtils {
 		}
 	}
 	
-	public static Date formatDate(Date date) {
-		return formatDate(date, FORMAT_DATE);
+	public static Date parseDate(Date date) {
+		return parseDate(date, FORMAT_DATE);
 	}
 	
-	public static Date formatTime(Time time, String format) {
-		return formatDate(time, format);
+	public static Date parseTime(Time time, String format) {
+		return parseDate(time, format);
 	}
 	
 	public static Date getYesterdayDate() {
         Calendar instance = Calendar.getInstance();
         instance.add(Calendar.DATE, -1);
         Date yesterday = instance.getTime();
-        return formatDate(yesterday);
+        return parseDate(yesterday);
     }
+	
+	public static String formateDate(Date date) {
+		return formateDate(date, FORMAT_DATE);
+	}
+	
+	public static String formateDateFull(Date date) {
+		return formateDate(date, FORMAT_DATETIME);
+	}
+	
+	public static String formateDate(Date date, String format) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat(format);
+		return dateFormat.format(date);
+	}
 }

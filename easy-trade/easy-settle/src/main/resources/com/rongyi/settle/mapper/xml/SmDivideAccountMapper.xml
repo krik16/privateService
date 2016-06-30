@@ -26,13 +26,15 @@
 		<result column="unit_count" property="unitCount" jdbcType="INTEGER" />
 		<result column="total_amount" property="totalAmount" jdbcType="INTEGER" />
 		<result column="coupon_id" property="couponId" jdbcType="VARCHAR" />
-		<result column="mall_id" property="mallId" jdbcType="VARCHAR" />
 		<result column="shop_id" property="shopId" jdbcType="VARCHAR" />
 		<result column="mallMid" property="mallMid" jdbcType="VARCHAR" />
 		<result column="shopMid" property="shopMid" jdbcType="VARCHAR" />
 		<result column="orderType" property="orderType" jdbcType="VARCHAR" />
 		<result column="totalAmount" property="totalAmount" jdbcType="VARCHAR" />
-		<result column="totalQuantity" property="totalQuantity" jdbcType="Integer" />
+		<result column="totalQuantity" property="totalQuantity" jdbcType="INTEGER" />
+		<result column="shop_name" property="shopName" jdbcType="VARCHAR" />
+		<result column="mall_name" property="mallName" jdbcType="VARCHAR" />
+		<result column="finishTime" property="finishTime" jdbcType="TIMESTAMP" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
@@ -50,7 +52,7 @@
 		delete from sm_divide_account
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
-	<insert id="insert" parameterType="com.rongyi.easy.rpb.entity.SmDivideAccount">
+	<insert id="insert" parameterType="com.rongyi.easy.settle.entity.SmDivideAccount">
 		insert into sm_divide_account (id, mall_id, bill_date,
 		bill_batch_no,
 		order_num, unit_num,
@@ -66,7 +68,8 @@
 		#{createAt,jdbcType=TIMESTAMP}, #{updateAt,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=TINYINT}
 		)
 	</insert>
-	<insert id="insertSelective" parameterType="com.rongyi.easy.rpb.entity.SmDivideAccount">
+	<insert id="insertSelective" parameterType="com.rongyi.easy.settle.entity.SmDivideAccount" useGeneratedKeys="true"
+		keyProperty="id">
 		insert into sm_divide_account
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
@@ -105,12 +108,8 @@
 			<if test="updateBy != null">
 				update_by,
 			</if>
-			<if test="createAt != null">
 				create_at,
-			</if>
-			<if test="updateAt != null">
 				update_at,
-			</if>
 			<if test="isDelete != null">
 				is_delete,
 			</if>
@@ -152,18 +151,14 @@
 			<if test="updateBy != null">
 				#{updateBy,jdbcType=VARCHAR},
 			</if>
-			<if test="createAt != null">
-				#{createAt,jdbcType=TIMESTAMP},
-			</if>
-			<if test="updateAt != null">
-				#{updateAt,jdbcType=TIMESTAMP},
-			</if>
+				now(),
+				now(),
 			<if test="isDelete != null">
 				#{isDelete,jdbcType=TINYINT},
 			</if>
 		</trim>
 	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.rongyi.easy.rpb.entity.SmDivideAccount">
+	<update id="updateByPrimaryKeySelective" parameterType="com.rongyi.easy.settle.entity.SmDivideAccount">
 		update sm_divide_account
 		<set>
 			<if test="mallId != null">
@@ -211,7 +206,7 @@
 		</set>
 		where id = #{id,jdbcType=INTEGER}
 	</update>
-	<update id="updateByPrimaryKey" parameterType="com.rongyi.easy.rpb.entity.SmDivideAccount">
+	<update id="updateByPrimaryKey" parameterType="com.rongyi.easy.settle.entity.SmDivideAccount">
 		update sm_divide_account
 		set mall_id = #{mallId,jdbcType=INTEGER},
 		bill_date = #{billDate,jdbcType=DATE},
@@ -233,21 +228,54 @@
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 
-
 	<!-- 分页查询分账记录 -->
 	<select id="findPageList" parameterType="com.rongyi.easy.rpb.dto.DivideAccountDto" resultMap="VoResultMap">
 		select
-		<include refid="Base_Column_List" />
+		sda.id,
+		sda.bill_date,
+		sda.bill_batch_no,
+		sda.order_num,
+		sda.unit_num,
+		sda.pay_amount,
+		mc.mall_name
 		from
-		sm_divide_account
-		where is_delete = 0
-		<if test="orderby == null">
-			order by create_at desc
+		sm_divide_account sda
+		LEFT JOIN ry_rmmm.mall_cooperate mc ON mc.id = sda.mall_id
+		where sda.is_delete = 0
+		<if test="mallName != null and mallName != ''">
+			and mc.mall_name like concat('%',#{mallName,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="billBatchNo != null and billBatchNo != ''">
+			and sda.bill_batch_no = #{billBatchNo}
+		</if>
+		<if test="billDateBegin != null and billDateBegin != ''">
+			and sda.bill_date <![CDATA[ >= ]]>
+			#{billDateBegin}
+		</if>
+		<if test="billDateEnd != null and billDateEnd != ''">
+			and sda.bill_date <![CDATA[ < ]]>
+			DATE_ADD(#{billDateEnd},INTERVAL 1 DAY)
 		</if>
 		<if test="currentPage != null">
 			limit
-			#{currentPage,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+			#{startRow,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
 		</if>
+	</select>
+
+	<select id="findDivideAccount" parameterType="com.rongyi.easy.rpb.dto.DivideAccountDto" resultMap="VoResultMap">
+		select
+		sda.id,
+		sda.bill_date,
+		sda.bill_batch_no,
+		sda.order_num,
+		sda.unit_num,
+		sda.pay_amount,
+		mc.mall_name
+		from
+		sm_divide_account sda
+		LEFT JOIN ry_rmmm.mall_cooperate mc ON mc.id = sda.mall_id
+		where sda.is_delete = 0
+		and sda.id = #{divideAccountId}
 	</select>
 
 	<!-- 查询商品订单 -->
@@ -258,19 +286,34 @@
 		of.weidian_id shop_id,
 		of.total_amount,
 		sum(odf.quantity) totalQuantity,
+		mc.id mall_id,
+		oe.create_at finishTime,
+		mc.mall_name,
+		si.shop_name,
 		1 orderType
 		FROM
 		ry_osm.order_form of
-		INNER JOIN ry_osm.order_event oe ON of.order_no = oe.order_no
+		INNER JOIN ry_osm.order_event oe
+		ON of.order_no = oe.order_no
 		AND oe.type = 19
 		INNER JOIN ry_osm.order_detail_form
 		odf ON of.order_no = odf.order_no
+		INNER
+		JOIN ry_rmmm.shop_info si on si.id = of.weidian_id
+		LEFT JOIN ry_rmmm.mall_cooperate mc on mc.id = si.mall_id
 		WHERE
 		of.order_source IN (0, 2)
-		AND oe.create_at >= #{accountDate} - 1
+		AND oe.create_at <![CDATA[ >= ]]>
+		DATE_ADD(#{accountDate},INTERVAL -1 DAY)
 		AND oe.create_at <![CDATA[ < ]]>
 		#{accountDate}
 		And EXISTS (select 1 from weixin_mch wm where of.weixin_app_id = wm.app_id And wm.is_rongyi_pay = 0)
+		<if test="mallId != null and mallId != ''">
+			and mc.id = #{mallId}
+		</if>
+		<if test="shopId != null and shopId != ''">
+			and si.id = #{shopId}
+		</if>
 		GROUP BY
 		of.id,
 		of.order_no
@@ -289,22 +332,39 @@
 		tuo.coupon_id,
 		tuo.mall_id mallMid,
 		tuo.shop_id shopMid,
+		tuo.use_time finishTime,
+		mc.id mall_id,
+		mc.mall_name,
+		si.id shop_id,
+		si.shop_name,
 		2 orderType
 		FROM
 		ry_trade.trade_order tor
-		INNER JOIN ry_trade.trade_sub_order tso ON tor.order_no = tso.order_no
+		INNER
+		JOIN ry_trade.trade_sub_order tso ON tor.order_no = tso.order_no
 		INNER JOIN ry_trade.trade_user_code tuo ON
-		tor.id = tuo.order_id
+		tor.id =
+		tuo.order_id
 		AND tso.id = tuo.sub_order_id
+		INNER JOIN ry_rmmm.shop_info si on si.shop_mid = tuo.shop_id
+		LEFT JOIN
+		ry_rmmm.mall_cooperate mc on mc.mall_mid = si.mall_mid
 		WHERE
 		tor.source IN (1, 2)
 		AND tuo.STATUS = 2
-		AND tuo.use_time >= #{accountDate} - 1
+		AND tuo.use_time >=
+		DATE_ADD(#{accountDate},INTERVAL -1 DAY)
 		AND tuo.use_time <![CDATA[ < ]]>
 		#{accountDate}
 		AND TRIM(tuo.shop_id) != ""
 		And EXISTS (select 1 from weixin_mch wm where tor.weixin_app_id = wm.app_id
 		And wm.is_rongyi_pay = 0)
+		<if test="mallId != null and mallId != ''">
+			and mc.id = #{mallId}
+		</if>
+		<if test="shopId != null and shopId != ''">
+			and si.id = #{shopId}
+		</if>
 		ORDER BY
 		tuo.use_time DESC
 	</select>

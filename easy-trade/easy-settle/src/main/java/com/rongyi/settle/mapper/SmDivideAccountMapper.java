@@ -39,4 +39,6 @@ public interface SmDivideAccountMapper {
      * @return List<DivideAccountVo>
      */
     public List<DivideAccountVo> findTradeOrderList(DivideAccountDto divideAccountDto);
+    
+    public DivideAccountVo findDivideAccount(DivideAccountDto divideAccountDto);
 }

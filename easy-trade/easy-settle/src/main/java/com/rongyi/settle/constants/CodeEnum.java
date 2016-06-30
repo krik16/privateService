@@ -10,6 +10,8 @@ public enum CodeEnum {
 	FIAL_NO_AUTHORITY_PAYMENT(1018403, "没有访问该资源的权限"),//前台约定，没有权限统一后三位为403
 
 	ERROR_SYSTEM(1018004, "系统故障"),
+	NO_PARAM(1018105, "参数异常"),
+	
 	FIAL_CONFIG_LIST(1018001, "加载配置列表失败"),
 	FIAL_STATEMENT_LIST(1018002, "加载对账单列表失败"),
 	FIAL_PARAMS_ERROR(1018003, "参数传递错误"),
@@ -22,7 +24,10 @@ public enum CodeEnum {
 	FIAL_SAVE_CONFIG(1018008,"保存对账单配置失败"),
 	FIAL_CONFIG_NOT_FOUND(1018011, "对账单配置没有找到"),
 	FIAL_STATEMENT_INVALID(1018013, "作废对账单不能重新生成"),
-	FAIL_CHANGE_DATE(101810, "日期转换异常"),
+	FAIL_CHANGE_DATE(1018100, "日期转换异常"),
+	
+	NOT_EXIST_DIVIDE_ACCOUNT(1018101, "分账不存在"),
+	FAIL_GENERATE_XML(1018102,"生成xlsx异常"),
 	SUCCESS("0", "正常"),;
 
 	private Object code;

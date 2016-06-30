@@ -1,5 +1,8 @@
 package com.rongyi.settle.constants;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @Description 分账信息常量
  * @author wudi
@@ -27,4 +30,10 @@ public class DivideAccountConstant {
 	 * 账单批次号默认序号
 	 */
 	public static final Integer BILL_BATCH_NO_DEFAULT = 1;
+	
+	public static final Map<Integer, String> orderTypeMap = new HashMap<>();
+	static {
+		orderTypeMap.put(ORDER_TYPE_PRODUCT, "商品订单");
+		orderTypeMap.put(ORDER_TYPE_TRADE, "卡券订单");
+	}
 }

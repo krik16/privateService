@@ -1,5 +1,8 @@
 package com.rongyi.settle.vo;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 import com.rongyi.easy.settle.entity.SmDivideAccount;
 
 public class DivideAccountVo extends SmDivideAccount {
@@ -10,7 +13,7 @@ public class DivideAccountVo extends SmDivideAccount {
 
 	private Integer subOrderId;
 
-	private Long unitPrice;
+	private Integer unitPrice;
 
 	private Integer unitCount;
 
@@ -40,7 +43,13 @@ public class DivideAccountVo extends SmDivideAccount {
      */
     private Integer totalQuantity;
     
-    private Long totalAmount;
+    private Integer totalAmount;
+    
+    private String mallName;
+    
+    private String shopName;
+    
+    private Date finishTime;
 	
 	public Integer getOrderId() {
 		return orderId;
@@ -130,20 +139,65 @@ public class DivideAccountVo extends SmDivideAccount {
 		this.totalQuantity = totalQuantity;
 	}
 
-	public Long getTotalAmount() {
-		return totalAmount;
-	}
-
-	public void setTotalAmount(Long totalAmount) {
-		this.totalAmount = totalAmount;
-	}
-
-	public Long getUnitPrice() {
+	public Integer getUnitPrice() {
 		return unitPrice;
 	}
 
-	public void setUnitPrice(Long unitPrice) {
+	public void setUnitPrice(Integer unitPrice) {
 		this.unitPrice = unitPrice;
 	}
 
+	/**
+	 * @Description 支付金额，单位：元
+	 * @return
+	 */
+	public String getPayAmountY() {
+		String payAmountY = "";
+		Integer payAmount = super.getPayAmount();
+		if (null != payAmount) {
+			payAmountY = new BigDecimal(payAmount).divide(new BigDecimal(100)).toString();
+		}
+		return payAmountY;
+	}
+	
+	/**
+	 * @Description 结算金额，单位：元
+	 * @return
+	 */
+	public String getSettleAmountY() {
+		return this.getPayAmountY();
+	}
+
+	public Integer getTotalAmount() {
+		return totalAmount;
+	}
+
+	public void setTotalAmount(Integer totalAmount) {
+		this.totalAmount = totalAmount;
+	}
+
+	public String getMallName() {
+		return mallName;
+	}
+
+	public void setMallName(String mallName) {
+		this.mallName = mallName;
+	}
+
+	public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+
+	public Date getFinishTime() {
+		return finishTime;
+	}
+
+	public void setFinishTime(Date finishTime) {
+		this.finishTime = finishTime;
+	}
+	
 }

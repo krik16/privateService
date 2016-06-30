@@ -1,20 +1,35 @@
 package com.rongyi.settle.service.impl;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rongyi.core.common.util.DateUtil;
+import com.rongyi.core.common.util.ExcelUtil;
+import com.rongyi.easy.coupon.vo.CouponGeneralVO;
 import com.rongyi.easy.rpb.dto.DivideAccountDto;
 import com.rongyi.easy.settle.entity.SmDivideAccount;
 import com.rongyi.easy.settle.entity.SmDivideAccountDetail;
+import com.rongyi.rss.coupon.merchant.TradeCouponService;
+import com.rongyi.settle.constants.CodeEnum;
 import com.rongyi.settle.constants.DivideAccountConstant;
+import com.rongyi.settle.exception.BizException;
 import com.rongyi.settle.mapper.SmDivideAccountDetailMapper;
 import com.rongyi.settle.mapper.SmDivideAccountMapper;
 import com.rongyi.settle.service.SmDivideAccountService;
@@ -24,11 +39,16 @@ import com.rongyi.settle.vo.DivideAccountVo;
 @Service
 public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 
+	private static final Logger log = Logger.getLogger(SmDivideAccountServiceImpl.class);
+
 	@Autowired
 	private SmDivideAccountMapper smDivideAccountMapper;
-	
+
 	@Autowired
 	private SmDivideAccountDetailMapper smDivideAccountDetailMapper;
+
+	@Autowired
+	private TradeCouponService tradeCouponService;
 
 	/**
 	 * @see com.rongyi.settle.service.DivideAccountService#findPageList(com.rongyi.settle.dto.DivideAccountDto)
@@ -38,20 +58,38 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 	}
 
 	/**
+	 * @see com.rongyi.settle.service.SmDivideAccountService#findDivideAccount(com.rongyi.easy.rpb.dto.DivideAccountDto)
+	 */
+	public DivideAccountVo findDivideAccount(DivideAccountDto divideAccountDto) {
+		return smDivideAccountMapper.findDivideAccount(divideAccountDto);
+	}
+
+	/**
 	 * @see com.rongyi.settle.service.SmDivideAccountService#findDetailPageList(com.rongyi.easy.rpb.dto.DivideAccountDto)
 	 */
 	public List<DivideAccountVo> findDetailPageList(DivideAccountDto divideAccountDto) {
-		// TODO Auto-generated method stub
-		return null;
+		return smDivideAccountDetailMapper.findDetailPageList(divideAccountDto);
 	}
 
 	/**
 	 * @see com.rongyi.settle.service.SmDivideAccountService#generateDivideAccount()
 	 */
-	public void generateDivideAccount() {
-		Date date = DateUtils.formatDate(new Date());
+	public void batchGenerateDivideAccount() {
+		Date date = DateUtils.parseDate(new Date());
 		DivideAccountDto divideAccountDto = new DivideAccountDto();
 		divideAccountDto.setAccountDate(date);
+		// 查询前一天B端商品订单
+		List<DivideAccountVo> orderList = this.findOrderList(divideAccountDto);
+		// for循环结果集，增加分账记录、分账详情记录
+		this.addSmDivideAccount(orderList);
+	}
+
+	/**
+	 * @Description 查询商品订单、卡券订单合集
+	 * @param divideAccountDto
+	 * @return
+	 */
+	private List<DivideAccountVo> findOrderList(DivideAccountDto divideAccountDto) {
 		// 查询前一天B端商品订单
 		List<DivideAccountVo> productOrderList = this.initProductOrderList(divideAccountDto);
 		// 查询前一天B端卡券订单
@@ -60,8 +98,8 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 		tradeOrderList = this.getNoUniveralCouponList(tradeOrderList);
 		// 合并商品订单、卡券订单
 		productOrderList.addAll(tradeOrderList);
-		// for循环结果集，增加分账记录、分账详情记录
-		this.addSmDivideAccount(productOrderList);
+
+		return productOrderList;
 	}
 
 	/**
@@ -83,11 +121,11 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 			}
 
 			if (CollectionUtils.isNotEmpty(couponIdList)) {
-				// TODO 调用接口判断非通用券
-				List<String> couponList = null;
-				for (String coupon : couponList) {
-					if (divideAccountMap.containsKey(coupon)) {
-						resultList.add(divideAccountMap.get(coupon));
+				// 调用接口判断非通用券
+				List<CouponGeneralVO> couponList = tradeCouponService.jugeGeneralByIds(couponIdList);
+				for (CouponGeneralVO vo : couponList) {
+					if (null != vo && null != vo.getCouponId() && !vo.getIsGeneral()) {
+						resultList.add(divideAccountMap.get(vo.getCouponId()));
 					}
 				}
 			}
@@ -114,7 +152,7 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 			this.replaceSmDivideAccount(divideAccountVo, smDivideAccount);// 更新分账详情信息
 
 			detailList = accountDetailMap.get(mallId);
-			this.replaceSmDivideAccountDetail(divideAccountVo, detailList);// 更新分账详情信息
+			this.replaceSmDivideAccountDetail(billDate, billBatchNo, divideAccountVo, detailList);// 更新分账详情信息
 		}
 		accountMap.put(mallId, smDivideAccount);
 		accountDetailMap.put(mallId, detailList);
@@ -187,7 +225,8 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 	 * @param divideAccountVo
 	 * @param detailList
 	 */
-	private void replaceSmDivideAccountDetail(DivideAccountVo divideAccountVo, List<SmDivideAccountDetail> detailList) {
+	private void replaceSmDivideAccountDetail(Date billDate, String billBatchNo, DivideAccountVo divideAccountVo,
+			List<SmDivideAccountDetail> detailList) {
 		Integer shopId = divideAccountVo.getShopId();
 		SmDivideAccountDetail smDivideAccountDetail;
 		Map<Integer, SmDivideAccountDetail> detailMap = new HashMap<>();
@@ -201,6 +240,8 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 			smDivideAccountDetail.setMallId(divideAccountVo.getMallId());
 			smDivideAccountDetail.setShopId(shopId);
 			smDivideAccountDetail.setOrderNum(DivideAccountConstant.ORDER_NUM);
+			smDivideAccountDetail.setBillBatchNo(billBatchNo);
+			smDivideAccountDetail.setBillDate(billDate);
 			if (DivideAccountConstant.ORDER_TYPE_PRODUCT.equals(divideAccountVo.getOrderType())) {// 商品订单
 				smDivideAccountDetail.setPayAmount(divideAccountVo.getTotalAmount());
 				smDivideAccountDetail.setUnitNum(divideAccountVo.getTotalQuantity());
@@ -211,6 +252,7 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 			detailList.add(smDivideAccountDetail);
 		} else {
 			smDivideAccountDetail = detailMap.get(shopId);
+			smDivideAccountDetail.setOrderNum(smDivideAccountDetail.getOrderNum() + DivideAccountConstant.ORDER_NUM);
 			if (DivideAccountConstant.ORDER_TYPE_PRODUCT.equals(divideAccountVo.getOrderType())) {// 商品订单
 				smDivideAccountDetail
 						.setPayAmount(smDivideAccountDetail.getPayAmount() + divideAccountVo.getTotalAmount());
@@ -246,15 +288,22 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 			Integer num = DivideAccountConstant.BILL_BATCH_NO_DEFAULT;
 			for (DivideAccountVo vo : divideAccountList) {
 				if (null != vo && null != vo.getShopId() && null != vo.getMallId()) {
-					String billBatchNo = this.getBillBatchNo(dateStr, num);
+					Integer mallId = vo.getMallId();
+					String billBatchNo;
+					if (mallMap.containsKey(mallId)) {
+						billBatchNo = mallMap.get(mallId).getBillBatchNo();
+					} else {
+						billBatchNo = this.getBillBatchNo(dateStr, num);
+						num++;
+					}
 					// 填充分账信息, 分账详情信息
 					this.fillDivideAccountMap(billDate, billBatchNo, vo, mallMap, shopMap);
-					num++;
 				}
 			}
-			
+
 			List<SmDivideAccount> smDivideAccountList = new ArrayList<>(mallMap.values());
-			// TODO 新增分账记录
+			// 新增分账记录
+			this.batchAddDivideAccount(smDivideAccountList, shopMap);
 		}
 	}
 
@@ -266,16 +315,16 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 	private List<DivideAccountVo> initProductOrderList(DivideAccountDto divideAccountDto) {
 		List<DivideAccountVo> productOrderList = smDivideAccountMapper.findProductOrderList(divideAccountDto);
 		// 循环获取shopId
-		if (CollectionUtils.isNotEmpty(productOrderList)) {
-			List<Integer> shopIdList = new ArrayList<>();
-			for (DivideAccountVo vo : productOrderList) {
-				if (null != vo && null != vo.getShopId()) {
-					Integer shopId = vo.getShopId();
-					shopIdList.add(shopId);
-				}
-			}
-			// TODO 调用接口，根据店铺ID查询商场ID
-		}
+		// if (CollectionUtils.isNotEmpty(productOrderList)) {
+		// List<Integer> shopIdList = new ArrayList<>();
+		// for (DivideAccountVo vo : productOrderList) {
+		// if (null != vo && null != vo.getShopId()) {
+		// Integer shopId = vo.getShopId();
+		// shopIdList.add(shopId);
+		// }
+		// }
+		// TODO 调用接口，根据店铺ID查询商场ID
+		// }
 		return productOrderList;
 	}
 
@@ -287,27 +336,28 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 	private List<DivideAccountVo> initTradeOrderList(DivideAccountDto divideAccountDto) {
 		List<DivideAccountVo> tradeOrderList = smDivideAccountMapper.findTradeOrderList(divideAccountDto);
 		// 循环获取shopId
-		if (CollectionUtils.isNotEmpty(tradeOrderList)) {
-			List<String> shopIdList = new ArrayList<>();
-			List<String> mallIdList = new ArrayList<>();
-			for (DivideAccountVo vo : tradeOrderList) {
-				if (null != vo) {
-					String shopMid = vo.getShopMid();
-					String mallMid = vo.getMallMid();
-					if (StringUtils.isNotBlank(shopMid) && StringUtils.isNotBlank(mallMid)) {
-						shopIdList.add(shopMid);
-						mallIdList.add(mallMid);
-					}
-				}
-			}
-			// TODO 调用接口，根据店铺mongoID查询店铺ID
-			// TODO 调用接口，根据商场mongoID查询商场ID
-		}
+		// if (CollectionUtils.isNotEmpty(tradeOrderList)) {
+		// List<String> shopIdList = new ArrayList<>();
+		// List<String> mallIdList = new ArrayList<>();
+		// for (DivideAccountVo vo : tradeOrderList) {
+		// if (null != vo) {
+		// String shopMid = vo.getShopMid();
+		// String mallMid = vo.getMallMid();
+		// if (StringUtils.isNotBlank(shopMid) &&
+		// StringUtils.isNotBlank(mallMid)) {
+		// shopIdList.add(shopMid);
+		// mallIdList.add(mallMid);
+		// }
+		// }
+		// }
+		// TODO 调用接口，根据店铺mongoID查询店铺ID
+		// TODO 调用接口，根据商场mongoID查询商场ID
+		// }
 		return tradeOrderList;
 	}
 
 	/**
-	 * @Description 批量插入分账、分账详情 
+	 * @Description 批量插入分账、分账详情
 	 * @param smDivideAccountList
 	 * @param smDivideAccountMap
 	 */
@@ -315,19 +365,19 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 			Map<Integer, List<SmDivideAccountDetail>> smDivideAccountMap) {
 		Map<Integer, Integer> acountKeyMap = new HashMap<>();
 		List<SmDivideAccountDetail> resultList = new ArrayList<>();
-		for (SmDivideAccount sm:smDivideAccountList) {
+		for (SmDivideAccount sm : smDivideAccountList) {
 			smDivideAccountMapper.insertSelective(sm);
 			acountKeyMap.put(sm.getMallId(), sm.getId());
 		}
 		for (Map.Entry<Integer, List<SmDivideAccountDetail>> entry : smDivideAccountMap.entrySet()) {
 			Integer mallId = entry.getKey();
 			List<SmDivideAccountDetail> entryList = entry.getValue();
-			for (SmDivideAccountDetail sm:entryList) {
+			for (SmDivideAccountDetail sm : entryList) {
 				sm.setDivideAccountId(acountKeyMap.get(mallId));
 			}
 			resultList.addAll(entryList);
 		}
-		
+		smDivideAccountDetailMapper.batchInsertSelective(resultList);
 	}
 
 	/**
@@ -337,6 +387,100 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 	 * @return
 	 */
 	private String getBillBatchNo(String dateStr, Integer num) {
-		return dateStr + String.format("%04d", num);
+		return dateStr + String.format("%04d", num++);
+	}
+
+	/**
+	 * @see com.rongyi.settle.service.SmDivideAccountService#export(javax.servlet.http.HttpServletRequest,
+	 *      javax.servlet.http.HttpServletResponse, java.lang.Integer)
+	 */
+	public void export(HttpServletRequest request, HttpServletResponse response, Integer id) {
+		SmDivideAccountDetail smDivideAccountDetail = smDivideAccountDetailMapper.selectByPrimaryKey(id);
+		if (null == smDivideAccountDetail) {
+			throw new BizException(CodeEnum.NOT_EXIST_DIVIDE_ACCOUNT);
+		}
+
+		DivideAccountDto divideAccountDto = new DivideAccountDto();
+		divideAccountDto.setAccountDate(DateUtil.getDaysInAdd(smDivideAccountDetail.getBillDate(), 1));
+		divideAccountDto.setShopId(smDivideAccountDetail.getShopId());
+		divideAccountDto.setMallId(smDivideAccountDetail.getMallId());
+		// 查询前一天B端商品订单
+		List<DivideAccountVo> orderList = this.findOrderList(divideAccountDto);
+
+		// 导出邀请码
+		this.doExport(request, response, orderList);
+	}
+
+	/**
+	 * @see com.rongyi.settle.service.SmDivideAccountService#exportAll(javax.servlet.http.HttpServletRequest,
+	 *      javax.servlet.http.HttpServletResponse, java.lang.Integer)
+	 */
+	public void exportAll(HttpServletRequest request, HttpServletResponse response, Integer divideAccountId) {
+		SmDivideAccount smDivideAccount = smDivideAccountMapper.selectByPrimaryKey(divideAccountId);
+		if (null == smDivideAccount) {
+			throw new BizException(CodeEnum.NOT_EXIST_DIVIDE_ACCOUNT);
+		}
+
+		DivideAccountDto divideAccountDto = new DivideAccountDto();
+		divideAccountDto.setAccountDate(DateUtil.getDaysInAdd(smDivideAccount.getBillDate(), 1));
+		divideAccountDto.setMallId(smDivideAccount.getMallId());
+		// 查询前一天B端商品订单
+		List<DivideAccountVo> orderList = this.findOrderList(divideAccountDto);
+
+		// 导出邀请码
+		this.doExport(request, response, orderList);
+	}
+
+	private void doExport(HttpServletRequest request, HttpServletResponse response,
+			List<DivideAccountVo> divideAccoutList) {
+		String path = request.getSession().getServletContext().getRealPath(File.separator);
+		InputStream myxls;
+		XSSFWorkbook wb;
+		XSSFSheet sheet;
+		try {
+			myxls = new FileInputStream(path + "excel/DivideAccount.xlsx");
+			wb = new XSSFWorkbook(myxls);
+			sheet = wb.getSheetAt(0);
+		} catch (Exception e1) {
+			log.error("导出邀请码, 生成xlsx异常,doExport-DivideAccount.xlsx:" + "\n" + e1);
+			throw new BizException(CodeEnum.FAIL_GENERATE_XML);
+		}
+		try {
+			// 初始化邀请码
+			this.initDivideAccountExport(sheet, divideAccoutList);
+			// 导出名称
+			String outFile = "分账详情" + DateUtil.getCurrentDateYYYYMMDD() + ".xlsx";
+
+			ExcelUtil.exportExcel(response, wb, outFile);
+		} catch (Exception e) {
+			log.error("导出邀请码异常,doExport divideAccoutList:" + "\n" + e);
+			throw new BizException(CodeEnum.ERROR_SYSTEM);
+		}
+	}
+
+	private void initDivideAccountExport(XSSFSheet sheet, List<DivideAccountVo> divideAccoutList) {
+		int titleRow = 0;
+		for (DivideAccountVo vo : divideAccoutList) {
+			sheet.createRow(++titleRow);
+			int column = 0;
+			sheet.getRow(titleRow).createCell(column++).setCellValue(vo.getMallName());
+			sheet.getRow(titleRow).createCell(column++).setCellValue(vo.getShopName());
+			sheet.getRow(titleRow).createCell(column++).setCellValue(vo.getOrderNo());
+			sheet.getRow(titleRow).createCell(column++).setCellValue(DateUtils.formateDateFull(vo.getFinishTime()));
+			Integer unitNum = 0;
+			String settleAmount = "";
+			Integer orderType = vo.getOrderType();
+			String orderTypeName = DivideAccountConstant.orderTypeMap.get(orderType);
+			if (DivideAccountConstant.ORDER_TYPE_PRODUCT.equals(orderType)) {
+				unitNum = vo.getTotalQuantity();
+				settleAmount = new BigDecimal(vo.getTotalAmount()).divide(new BigDecimal(100)).toString();
+			} else if (DivideAccountConstant.ORDER_TYPE_TRADE.equals(vo.getOrderType())) {
+				unitNum = DivideAccountConstant.UNIT_NUM;
+				settleAmount = new BigDecimal(vo.getUnitPrice()).divide(new BigDecimal(100)).toString();
+			}
+			sheet.getRow(titleRow).createCell(column++).setCellValue(orderTypeName);
+			sheet.getRow(titleRow).createCell(column++).setCellValue(unitNum);
+			sheet.getRow(titleRow).createCell(column++).setCellValue(settleAmount);
+		}
 	}
 }
