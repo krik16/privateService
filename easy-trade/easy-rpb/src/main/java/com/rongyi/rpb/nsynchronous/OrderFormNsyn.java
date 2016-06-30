@@ -43,7 +43,7 @@ public class OrderFormNsyn {
 				try {
 					logger.info("异步插入单个订单价格，订单号：" + orderNumArray);
 					final String[] tempOrderNumArray = orderNumArray.split("\\,");
-					if (tempOrderNumArray != null && tempOrderNumArray.length > 0) {
+					if (tempOrderNumArray.length > 0) {
 						for (int i = 0; i < tempOrderNumArray.length; i++) {
 							final OrderFormEntity orderFormEntity = rOAOrderFormService.getOrderFormByOrderNum(tempOrderNumArray[i]);
 							if (orderFormEntity != null) {

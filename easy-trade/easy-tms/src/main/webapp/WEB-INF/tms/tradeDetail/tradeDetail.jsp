@@ -124,6 +124,7 @@
                     <option value="">--全部--</option>
                     <option value="0">商品订单</option>
                     <option value="1">优惠券订单</option>
+                    <option value="2">积分商城订单</option>
                 </select>
             </div>
 
