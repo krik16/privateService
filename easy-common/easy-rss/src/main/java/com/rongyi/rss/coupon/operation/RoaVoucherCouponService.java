@@ -205,4 +205,6 @@ public interface RoaVoucherCouponService {
     boolean dataMigration();
 
     CouponChannel findCouponChannelById(Integer id);
+
+    List<CouponChannel> findCouponChannelByIds(List<Integer> channelIds);
 }

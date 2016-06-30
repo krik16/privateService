@@ -15,7 +15,9 @@ public class ActivitySearchParam implements Serializable{
 	private int distance;     //距离筛选
 	private String coord_x;   //坐标x
 	private String coord_y;   //坐标y
-	private String cat_id;           //0店铺1商场2品牌3分类（类似于美食）
+
+	//0店铺1商场2品牌3分类（类似于美食）
+	private String cat_id;
 	/** 自定义分类id */
 	private String custom_cat_id;
 	private String city_name; //城市名（如  上海&上海市）
@@ -25,11 +27,12 @@ public class ActivitySearchParam implements Serializable{
 	private int size;         //一页数量
 	private String brand_id;  //品牌id
 	private String zone_id;   //区域id
-	private String shop_id;   //店铺id
+	// 店铺id（多个店铺查询用,分割如：1,2,3）
+	private String shop_id;
 	private String holder_id;       //优惠券持有者id
 	private boolean couponRequired; //是否只看优惠券
 	private List<String> shopList;    //终端机参数 店铺id List
- 	
+
 	private String mallId; // mall Id for 终端屏
 	private String startLetter;  // 首字母 for 终端屏
 
@@ -175,7 +178,7 @@ public class ActivitySearchParam implements Serializable{
 	public String getCustom_cat_id() {
 		return custom_cat_id;
 	}
-	
+
 	/**
 	 * @param custom_cat_id the custom_cat_id to set
 	 */
@@ -191,5 +194,5 @@ public class ActivitySearchParam implements Serializable{
 				+ holder_id + ", couponRequired=" + couponRequired + ", shopList=" + shopList + ", mallId=" + mallId
 				+ ", startLetter=" + startLetter + ", showChannel=" + showChannel + ", keywordList=" + keywordList + "]";
 	}
-	
+
 }
