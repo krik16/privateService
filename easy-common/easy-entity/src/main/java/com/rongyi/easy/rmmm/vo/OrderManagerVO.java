@@ -36,6 +36,7 @@ public class OrderManagerVO implements Serializable {
 	private BigDecimal payAmount;//支付金额
 	private BigDecimal couponAmount;//平台促销抵扣
 	private BigDecimal integralAmount;//积分抵扣
+	private BigDecimal hbAmount;//红包抵扣
 	private Integer orderSource;//订单来源
 
 	public String getOrderCartNo() {
@@ -186,6 +187,15 @@ public class OrderManagerVO implements Serializable {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+
+	public BigDecimal getHbAmount() {
+		return hbAmount;
+	}
+
+	public void setHbAmount(BigDecimal hbAmount) {
+		this.hbAmount = hbAmount;
+	}
+
 	@Override
 	public String toString() {
 		return "OrderManagerVO [orderNo=" + orderNo + ", orderId=" + orderId
@@ -196,5 +206,5 @@ public class OrderManagerVO implements Serializable {
 				+ ", orderTotalAmount=" + orderTotalAmount + ", createAt="
 				+ createAt + ", discountFee=" + discountFee + "]";
 	}
-	
+
 }

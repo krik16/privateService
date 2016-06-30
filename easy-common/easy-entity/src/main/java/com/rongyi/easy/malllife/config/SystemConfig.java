@@ -72,6 +72,10 @@ public class SystemConfig implements Serializable{
 
     public static final List<String> uaList = Arrays.asList("Android", "IOS", "H5");
 
+
+    public static final List<String> mdUaList = Arrays.asList("Android", "IOS");
+
+
     public static String buildPictureUrl(String userId, String headImg) {
         String UPAIYUN_Content = "system/user/avatar/";
         StringBuffer pictureUrl = new StringBuffer();

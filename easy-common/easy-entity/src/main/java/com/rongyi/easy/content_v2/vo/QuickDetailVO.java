@@ -51,6 +51,8 @@ public class QuickDetailVO implements Serializable {
      */
     private String picNameTwo;
 
+
+
     public String getPicName() {
         return picName;
     }

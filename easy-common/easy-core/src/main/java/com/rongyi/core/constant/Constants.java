@@ -450,6 +450,13 @@ public interface Constants {
         String MALLSHOP_COUPON = "MALLSHOP_COUPON";// 摩店优惠券
     }
 
+    interface CODE_LENGTH{
+        int COUPON_CODE=12;
+        int INVITE_CODE=6;
+        int GIFT_CODE=8;
+    }
+
+
     interface UdField {
         String UCONPONSIDS = "uConponsIds";// 优惠券增加和修改
         String DCONPONSIDS = "dConponsIds";// 优惠券删除
@@ -822,6 +829,15 @@ public interface Constants {
     	String BRAND_CODE = "REC_BRAND";
     	/** 推荐分类code */
     	String CATEGORY_CODE = "REC_CATEGORY";
+    }
+
+    interface PUSH_PLATFORM {
+        /** 商家后台 */
+        Integer BUSINESS_BACKGROUND = 1;
+        /** 摩店APP */
+        Integer MD_APP = 2;
+        /** 摩店管理平台 */
+        Integer MD_MANAGEMENT = 3;
     }
 
 }

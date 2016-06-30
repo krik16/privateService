@@ -60,6 +60,7 @@ public class Shop implements Serializable {
     private List<ObjectId> custom_category_ids;
     private String qrcode_pic;
     private List<String> photo_urls;//图片地址
+
     private String valid_reason ;//隐藏理由 
     private String business_reason ; 
     private Integer update_by ;
@@ -68,6 +69,8 @@ public class Shop implements Serializable {
     private Date open_at ;  //开业时间
     private List<ObjectId> brand_ids ; //兼营品牌
     private String icon ; //店铺logo
+
+
     public ObjectId getId() {
         return id;
     }
@@ -404,6 +407,7 @@ public class Shop implements Serializable {
         this.photo_urls = photo_urls;
     }
 
+
 	public String getValid_reason() {
 		return valid_reason;
 	}
@@ -459,6 +463,7 @@ public class Shop implements Serializable {
 	public void setBrand_ids(List<ObjectId> brand_ids) {
 		this.brand_ids = brand_ids;
 	}
+
 
 	public String getIcon() {
 		return icon;

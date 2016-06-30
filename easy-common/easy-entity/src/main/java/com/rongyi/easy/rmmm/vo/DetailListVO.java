@@ -13,7 +13,7 @@ import java.util.List;
 public class DetailListVO implements Serializable {
 
 	private String date;// 交易完成时间
-	private String deliveryDate;// 发货时间
+	private String deliveryDate;// 付款时间
 	private String auditDate; // 审核时间
 	private String commissionPayDate; // 发放时间
 	private String amount;// 金额

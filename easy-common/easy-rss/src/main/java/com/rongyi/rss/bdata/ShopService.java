@@ -59,6 +59,7 @@ public interface ShopService {
 	 * @return
 	 */
 	public ResponseVO getShopListForName(String mallId, String shopName, Integer page, Integer pageSize);
+
 	
 	/**
 	 * 修改店铺营业状态及系统状态
@@ -93,4 +94,8 @@ public interface ShopService {
 	 * @return
 	 */
 	public Photo savePhoto(Photo photo);
+
+
+	public ResponseVO getCouponInfoByShopIds(String ids);
+
 }

@@ -203,4 +203,14 @@ public interface IUserInfoService {
 	 * @return
 	 */
 	public List<CertifiedCheckInfo> getCheckListByUserId(Map paramMap);
+	
+	/**
+	 * 根据用户ID查询用户列表（提供给推送）
+	 * @param paramMap
+	 *              userId  用户ID
+	 *              currentPage 当前页  从1开始
+	 *              pageSize 每页显示行数 （不分页不传）
+	 * @return
+	 */
+	public List<UserInfo> getUserInfoListByUserId(Map paramMap) ;
 }
