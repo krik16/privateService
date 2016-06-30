@@ -1,9 +1,6 @@
 package com.rongyi.rss.code;
 
-import com.rongyi.easy.code.HannelResponseVO;
-import com.rongyi.easy.code.HannelsSaveParam;
-import com.rongyi.easy.code.HannelsSearchParam;
-import com.rongyi.easy.code.HannelsUpdateStatusParam;
+import com.rongyi.easy.code.*;
 
 import java.util.Map;
 
@@ -44,4 +41,11 @@ public interface HannelsService {
      * @throws Exception
      */
     void operateHannelStatus(Map<String,Object> map) throws Exception;
+
+    /**
+     * 通过id查询促销推广码详情
+     * @param i
+     * @return
+     */
+    HannelsVO info(int i);
 }

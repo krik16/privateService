@@ -6,7 +6,7 @@ public class HannelsCoupon {
     private Integer id;
 
     private String couponId;
-
+    private String couponName;
     private Byte couponType;
 
     private Integer stockCount;
@@ -51,5 +51,21 @@ public class HannelsCoupon {
 
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
+    }
+
+    public String getCouponName() {
+        return couponName;
+    }
+
+    public void setCouponName(String couponName) {
+        this.couponName = couponName;
+    }
+
+    public Integer getHannelsId() {
+        return hannelsId;
+    }
+
+    public void setHannelsId(Integer hannelsId) {
+        this.hannelsId = hannelsId;
     }
 }
