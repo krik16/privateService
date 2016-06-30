@@ -16,7 +16,7 @@ public class ActivitySearchParam implements Serializable{
 	private String coord_x;   //坐标x
 	private String coord_y;   //坐标y
 
-	//0店铺1商场2品牌3分类（类似于美食,多个分类查询用,分割如：1,2,3）
+	//0店铺1商场2品牌3分类（类似于美食,多个分类查询用“,”分割，如：1,2,3）
 	private String cat_id;
 	/** 自定义分类id */
 	private String custom_cat_id;
@@ -27,7 +27,7 @@ public class ActivitySearchParam implements Serializable{
 	private int size;         //一页数量
 	private String brand_id;  //品牌id
 	private String zone_id;   //区域id
-	// 店铺id（多个店铺查询用,分割如：1,2,3）
+	// 店铺id（多个店铺查询用“,”分割，如：1,2,3）
 	private String shop_id;
 	private String holder_id;       //优惠券持有者id
 	private boolean couponRequired; //是否只看优惠券
