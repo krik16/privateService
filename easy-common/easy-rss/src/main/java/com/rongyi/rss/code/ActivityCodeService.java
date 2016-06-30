@@ -35,4 +35,13 @@ public interface ActivityCodeService {
      * @return
      */
     public List<String> getGiftCodes(ImportInviteCodeParam param);
+
+    /**
+     *
+     * @param count 要插入数量
+     * @param hannelsId 推广码模板id
+     * @param type 2：邀请码；3：推广码
+     * @return
+     */
+    public boolean insertHannelsCodes(int count, Integer hannelsId, int type);
 }
