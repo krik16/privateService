@@ -7,7 +7,7 @@ public class TransConfigurations implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-
+	private int CommissionType;//返佣类型，0固定金额 1订单百分比
 	private int CommissionCountMax  = 0;//这个是同一卖家在同一天与同一买家交易量中，最多能获取的返佣单数
 	private int CommissionDailyMax  = 0;//这个是同一卖家在同一天中，最多能获取的返佣单数
 	private int CashCouponUseMax = 0;//这个是同一个买家同一天允许使用的现金卷的次数
@@ -199,5 +199,15 @@ public class TransConfigurations implements Serializable{
 	public void setCommissionRatioLimit(BigDecimal commissionRatioLimit)
 	{
 		CommissionRatioLimit = commissionRatioLimit;
+	}
+
+	public int getCommissionType()
+	{
+		return CommissionType;
+	}
+
+	public void setCommissionType(int commissionType)
+	{
+		CommissionType = commissionType;
 	}
 }
