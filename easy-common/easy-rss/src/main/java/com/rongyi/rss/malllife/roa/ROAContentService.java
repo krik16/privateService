@@ -330,13 +330,14 @@ public interface ROAContentService {
 	* @param @param currentPage
 	* @param @param version
 	* @param @return
-	* @param @throws Exception    设定文件 
-	* @return PagingVO<ContentPojo>    返回类型 
+	* @param @throws Exception    设定文件
+	* @param mallId
+     *@param shopId @return PagingVO<ContentPojo>    返回类型
 	* @author shaozhou
 	* @date 2016年5月5日 下午7:16:54 
 	* @throws
 	 */
-	public PagingVO<ContentPojo> pagingArticleList(String type, double lng, double lat, String cityId, int pageSize, Integer currentPage) throws Exception ;
+	public PagingVO<ContentPojo> pagingArticleList(String mallId, String shopId, String type, double lng, double lat, String cityId, int pageSize, Integer currentPage) throws Exception ;
 	/**
 	 * 
 	* @Title: pagingArticleList 
@@ -351,7 +352,7 @@ public interface ROAContentService {
 	* @date 2016年5月5日 下午7:24:22 
 	* @throws
 	 */
-	public PagingVO<ContentPojo> pagingFavorList(String cityId, int pageSize, Integer currentPage) throws Exception ;
+    public PagingVO<ContentPojo> pagingFavorList(String mallId, String shopId, String cityId, Integer pageSize, Integer currentPage) throws Exception ;
 	/**
 	 * 
 	* @Title: pagingContentListByMallId 
@@ -381,6 +382,16 @@ public interface ROAContentService {
 	* @throws
 	 */
 	public List<Map<String,Object>> allListWelfareNew(Date pullAt,List<String> brandIdList) throws Exception;
+
+    /**
+     * 获取新超过某个时间更新的爱品牌文章个数
+     * @param pullAt
+     * @param brandIdList
+     * @return
+     * @throws Exception
+     */
+    public int countWelfareNew(Date pullAt, List<String> brandIdList) throws Exception;
+
 	/**
 	 * 
 	* @Title: allListWrlFaraOld 
