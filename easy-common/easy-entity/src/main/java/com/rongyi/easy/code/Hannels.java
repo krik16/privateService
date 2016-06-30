@@ -54,14 +54,14 @@ public class Hannels {
     private String createBy;
 
     /**
-     * 更新人
+     * 更新时间
      */
     private Date updateAt;
 
     /**
-     * 更新时间
+     * 更新人
      */
-    private Date updateBy;
+    private String updateBy;
 
     /**
      * 0:待审核；1：通过；2：未通过；3：作废
@@ -163,14 +163,6 @@ public class Hannels {
         this.updateAt = updateAt;
     }
 
-    public Date getUpdateBy() {
-        return updateBy;
-    }
-
-    public void setUpdateBy(Date updateBy) {
-        this.updateBy = updateBy;
-    }
-
     public Byte getStatus() {
         return status;
     }
@@ -209,5 +201,35 @@ public class Hannels {
 
     public void setChannelCode(String channelCode) {
         this.channelCode = channelCode;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
+
+    @Override
+    public String toString() {
+        return "Hannels{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", validStartAt=" + validStartAt +
+                ", validEndAt=" + validEndAt +
+                ", count=" + count +
+                ", useLimit=" + useLimit +
+                ", remark='" + remark + '\'' +
+                ", createAt=" + createAt +
+                ", createBy='" + createBy + '\'' +
+                ", updateAt=" + updateAt +
+                ", updateBy='" + updateBy + '\'' +
+                ", status=" + status +
+                ", type=" + type +
+                ", hannelsCheckLogList=" + hannelsCheckLogList +
+                ", channelId=" + channelId +
+                ", channelCode='" + channelCode + '\'' +
+                '}';
     }
 }
