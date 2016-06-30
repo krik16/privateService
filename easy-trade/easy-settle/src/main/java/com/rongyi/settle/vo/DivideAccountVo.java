@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import com.rongyi.easy.settle.entity.SmDivideAccount;
+import com.rongyi.settle.util.AmountUtil;
 
 public class DivideAccountVo extends SmDivideAccount {
 
@@ -43,7 +44,7 @@ public class DivideAccountVo extends SmDivideAccount {
      */
     private Integer totalQuantity;
     
-    private Integer totalAmount;
+    private BigDecimal totalAmount;
     
     private String mallName;
     
@@ -155,7 +156,7 @@ public class DivideAccountVo extends SmDivideAccount {
 		String payAmountY = "";
 		Integer payAmount = super.getPayAmount();
 		if (null != payAmount) {
-			payAmountY = new BigDecimal(payAmount).divide(new BigDecimal(100)).toString();
+			payAmountY = String.valueOf(AmountUtil.changFenToYuan(payAmount));
 		}
 		return payAmountY;
 	}
@@ -166,14 +167,6 @@ public class DivideAccountVo extends SmDivideAccount {
 	 */
 	public String getSettleAmountY() {
 		return this.getPayAmountY();
-	}
-
-	public Integer getTotalAmount() {
-		return totalAmount;
-	}
-
-	public void setTotalAmount(Integer totalAmount) {
-		this.totalAmount = totalAmount;
 	}
 
 	public String getMallName() {
@@ -198,6 +191,14 @@ public class DivideAccountVo extends SmDivideAccount {
 
 	public void setFinishTime(Date finishTime) {
 		this.finishTime = finishTime;
+	}
+
+	public BigDecimal getTotalAmount() {
+		return totalAmount;
+	}
+
+	public void setTotalAmount(BigDecimal totalAmount) {
+		this.totalAmount = totalAmount;
 	}
 	
 }

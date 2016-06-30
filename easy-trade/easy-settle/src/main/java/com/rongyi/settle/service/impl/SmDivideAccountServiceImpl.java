@@ -3,7 +3,6 @@ package com.rongyi.settle.service.impl;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -33,6 +32,7 @@ import com.rongyi.settle.exception.BizException;
 import com.rongyi.settle.mapper.SmDivideAccountDetailMapper;
 import com.rongyi.settle.mapper.SmDivideAccountMapper;
 import com.rongyi.settle.service.SmDivideAccountService;
+import com.rongyi.settle.util.AmountUtil;
 import com.rongyi.settle.util.DateUtils;
 import com.rongyi.settle.vo.DivideAccountVo;
 
@@ -171,7 +171,7 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 		smDivideAccount.setBillDate(billDate);
 		if (DivideAccountConstant.ORDER_TYPE_PRODUCT.equals(divideAccountVo.getOrderType())) {// 商品订单
 			smDivideAccount.setUnitNum(divideAccountVo.getTotalQuantity());// 商品数量
-			smDivideAccount.setPayAmount(divideAccountVo.getTotalAmount());// 支付金额
+			smDivideAccount.setPayAmount(AmountUtil.changYuanToFen(divideAccountVo.getTotalAmount().doubleValue()));// 支付金额
 		} else if (DivideAccountConstant.ORDER_TYPE_TRADE.equals(divideAccountVo.getOrderType())) {// 卡券订单
 			smDivideAccount.setUnitNum(DivideAccountConstant.UNIT_NUM);// 系统无法区分每次核销了几张卡券，因此默认每使用一次卡券，都单独是一次核销
 			smDivideAccount.setPayAmount(divideAccountVo.getUnitPrice());// 支付金额，每使用一次卡券都是一次核销，所以金额就是单价
@@ -195,7 +195,8 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 		smDivideAccountDetail.setBillDate(billDate);
 		if (DivideAccountConstant.ORDER_TYPE_PRODUCT.equals(divideAccountVo.getOrderType())) {// 商品订单
 			smDivideAccountDetail.setUnitNum(divideAccountVo.getTotalQuantity());// 商品数量
-			smDivideAccountDetail.setPayAmount(divideAccountVo.getTotalAmount());// 支付金额
+			smDivideAccountDetail
+					.setPayAmount(AmountUtil.changYuanToFen(divideAccountVo.getTotalAmount().doubleValue()));// 支付金额
 		} else if (DivideAccountConstant.ORDER_TYPE_TRADE.equals(divideAccountVo.getOrderType())) {// 卡券订单
 			smDivideAccountDetail.setUnitNum(DivideAccountConstant.UNIT_NUM);// 系统无法区分每次核销了几张卡券，因此默认每使用一次卡券，都单独是一次核销
 			smDivideAccountDetail.setPayAmount(divideAccountVo.getUnitPrice());// 支付金额，每使用一次卡券都是一次核销，所以金额就是单价
@@ -212,7 +213,8 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 	private void replaceSmDivideAccount(DivideAccountVo divideAccountVo, SmDivideAccount smDivideAccount) {
 		smDivideAccount.setOrderNum(smDivideAccount.getOrderNum() + DivideAccountConstant.ORDER_NUM);// 订单数自增
 		if (DivideAccountConstant.ORDER_TYPE_PRODUCT.equals(divideAccountVo.getOrderType())) {// 商品订单
-			smDivideAccount.setPayAmount(smDivideAccount.getPayAmount() + divideAccountVo.getTotalAmount());// 支付金额
+			smDivideAccount.setPayAmount(smDivideAccount.getPayAmount()
+					+ AmountUtil.changYuanToFen(divideAccountVo.getTotalAmount().doubleValue()));// 支付金额
 			smDivideAccount.setUnitNum(smDivideAccount.getUnitNum() + divideAccountVo.getTotalQuantity());
 		} else if (DivideAccountConstant.ORDER_TYPE_TRADE.equals(divideAccountVo.getOrderType())) {// 卡券订单
 			smDivideAccount.setPayAmount(smDivideAccount.getPayAmount() + divideAccountVo.getUnitPrice());
@@ -243,10 +245,12 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 			smDivideAccountDetail.setBillBatchNo(billBatchNo);
 			smDivideAccountDetail.setBillDate(billDate);
 			if (DivideAccountConstant.ORDER_TYPE_PRODUCT.equals(divideAccountVo.getOrderType())) {// 商品订单
-				smDivideAccountDetail.setPayAmount(divideAccountVo.getTotalAmount());
+				smDivideAccountDetail
+						.setPayAmount(AmountUtil.changYuanToFen(divideAccountVo.getTotalAmount().doubleValue()));
 				smDivideAccountDetail.setUnitNum(divideAccountVo.getTotalQuantity());
 			} else if (DivideAccountConstant.ORDER_TYPE_TRADE.equals(divideAccountVo.getOrderType())) {// 卡券订单
-				smDivideAccountDetail.setPayAmount(divideAccountVo.getTotalAmount());
+				smDivideAccountDetail
+						.setPayAmount(divideAccountVo.getUnitPrice());
 				smDivideAccountDetail.setUnitNum(DivideAccountConstant.UNIT_NUM);
 			}
 			detailList.add(smDivideAccountDetail);
@@ -254,13 +258,13 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 			smDivideAccountDetail = detailMap.get(shopId);
 			smDivideAccountDetail.setOrderNum(smDivideAccountDetail.getOrderNum() + DivideAccountConstant.ORDER_NUM);
 			if (DivideAccountConstant.ORDER_TYPE_PRODUCT.equals(divideAccountVo.getOrderType())) {// 商品订单
-				smDivideAccountDetail
-						.setPayAmount(smDivideAccountDetail.getPayAmount() + divideAccountVo.getTotalAmount());
+				smDivideAccountDetail.setPayAmount(smDivideAccountDetail.getPayAmount()
+						+ AmountUtil.changYuanToFen(divideAccountVo.getTotalAmount().doubleValue()));
 				smDivideAccountDetail
 						.setUnitNum(smDivideAccountDetail.getUnitNum() + divideAccountVo.getTotalQuantity());
 			} else if (DivideAccountConstant.ORDER_TYPE_TRADE.equals(divideAccountVo.getOrderType())) {// 卡券订单
-				smDivideAccountDetail
-						.setPayAmount(smDivideAccountDetail.getPayAmount() + divideAccountVo.getTotalAmount());
+				smDivideAccountDetail.setPayAmount(smDivideAccountDetail.getPayAmount()
+						+ divideAccountVo.getUnitPrice());
 				smDivideAccountDetail.setUnitNum(smDivideAccountDetail.getUnitNum() + DivideAccountConstant.UNIT_NUM);
 			}
 			detailMap.put(shopId, smDivideAccountDetail);
@@ -473,10 +477,10 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 			String orderTypeName = DivideAccountConstant.orderTypeMap.get(orderType);
 			if (DivideAccountConstant.ORDER_TYPE_PRODUCT.equals(orderType)) {
 				unitNum = vo.getTotalQuantity();
-				settleAmount = new BigDecimal(vo.getTotalAmount()).divide(new BigDecimal(100)).toString();
+				settleAmount = vo.getTotalAmount().toString();
 			} else if (DivideAccountConstant.ORDER_TYPE_TRADE.equals(vo.getOrderType())) {
 				unitNum = DivideAccountConstant.UNIT_NUM;
-				settleAmount = new BigDecimal(vo.getUnitPrice()).divide(new BigDecimal(100)).toString();
+				settleAmount = String.valueOf(AmountUtil.changFenToYuan(vo.getUnitPrice()));
 			}
 			sheet.getRow(titleRow).createCell(column++).setCellValue(orderTypeName);
 			sheet.getRow(titleRow).createCell(column++).setCellValue(unitNum);
