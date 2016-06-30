@@ -1,6 +1,7 @@
 package com.rongyi.settle.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import com.rongyi.easy.rpb.dto.DivideAccountDto;
 import com.rongyi.easy.settle.entity.SmDivideAccount;
@@ -25,6 +26,7 @@ public interface SmDivideAccountMapper {
      * @return 分页列表
      */
     public List<DivideAccountVo> findPageList(DivideAccountDto divideAccountDto);
+    public Integer findPageListCount(DivideAccountDto divideAccountDto);
     
     /**
      * @Description 查询分账商品订单

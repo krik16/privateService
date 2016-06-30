@@ -22,4 +22,6 @@ public interface SmDivideAccountDetailMapper {
     int batchInsertSelective(List<SmDivideAccountDetail> smDivideAccountDetailList);
     
     public List<DivideAccountVo> findDetailPageList(DivideAccountDto divideAccountDto);
+    
+    public Integer findDetailPageListCount(DivideAccountDto divideAccountDto);
 }

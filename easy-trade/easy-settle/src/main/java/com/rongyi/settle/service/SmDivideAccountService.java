@@ -16,6 +16,7 @@ public interface SmDivideAccountService {
 	 * @return
 	 */
 	public List<DivideAccountVo> findPageList(DivideAccountDto divideAccountDto);
+	public Integer findPageListCount(DivideAccountDto divideAccountDto);
 
 	/**
 	 * 分页查询分账详情列表
@@ -23,6 +24,8 @@ public interface SmDivideAccountService {
 	 * @return
 	 */
 	public List<DivideAccountVo> findDetailPageList(DivideAccountDto divideAccountDto);
+	
+	public Integer findDetailPageListCount(DivideAccountDto divideAccountDto);
 
 	public DivideAccountVo findDivideAccount(DivideAccountDto divideAccountDto);
 

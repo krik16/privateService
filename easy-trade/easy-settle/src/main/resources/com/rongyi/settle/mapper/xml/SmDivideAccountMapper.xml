@@ -227,39 +227,49 @@
 		#{isDelete,jdbcType=TINYINT}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
+	
+	<sql id="selectPageList">
+		select
+			sda.id,
+			sda.bill_date,
+			sda.bill_batch_no,
+			sda.order_num,
+			sda.unit_num,
+			sda.pay_amount,
+			mc.mall_name
+			from
+			sm_divide_account sda
+		LEFT JOIN ry_rmmm.mall_cooperate mc ON mc.id = sda.mall_id
+		where sda.is_delete = 0
+			<if test="mallName != null and mallName != ''">
+				and mc.mall_name like concat('%',#{mallName,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="billBatchNo != null and billBatchNo != ''">
+				and sda.bill_batch_no = #{billBatchNo}
+			</if>
+			<if test="billDateBegin != null and billDateBegin != ''">
+				and sda.bill_date <![CDATA[ >= ]]>
+				#{billDateBegin}
+			</if>
+			<if test="billDateEnd != null and billDateEnd != ''">
+				and sda.bill_date <![CDATA[ < ]]>
+				DATE_ADD(#{billDateEnd},INTERVAL 1 DAY)
+			</if>
+	</sql>
 
 	<!-- 分页查询分账记录 -->
 	<select id="findPageList" parameterType="com.rongyi.easy.rpb.dto.DivideAccountDto" resultMap="VoResultMap">
-		select
-		sda.id,
-		sda.bill_date,
-		sda.bill_batch_no,
-		sda.order_num,
-		sda.unit_num,
-		sda.pay_amount,
-		mc.mall_name
-		from
-		sm_divide_account sda
-		LEFT JOIN ry_rmmm.mall_cooperate mc ON mc.id = sda.mall_id
-		where sda.is_delete = 0
-		<if test="mallName != null and mallName != ''">
-			and mc.mall_name like concat('%',#{mallName,jdbcType=VARCHAR},'%')
-		</if>
-		<if test="billBatchNo != null and billBatchNo != ''">
-			and sda.bill_batch_no = #{billBatchNo}
-		</if>
-		<if test="billDateBegin != null and billDateBegin != ''">
-			and sda.bill_date <![CDATA[ >= ]]>
-			#{billDateBegin}
-		</if>
-		<if test="billDateEnd != null and billDateEnd != ''">
-			and sda.bill_date <![CDATA[ < ]]>
-			DATE_ADD(#{billDateEnd},INTERVAL 1 DAY)
-		</if>
+		<include refid="selectPageList"></include>
 		<if test="currentPage != null">
 			limit
 			#{startRow,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
 		</if>
+	</select>
+	
+	<select id="findPageListCount"  parameterType="com.rongyi.easy.rpb.dto.DivideAccountDto" resultType="Integer">
+		select count(1) from (
+			<include refid="selectPageList"></include>
+		) pg
 	</select>
 
 	<select id="findDivideAccount" parameterType="com.rongyi.easy.rpb.dto.DivideAccountDto" resultMap="VoResultMap">

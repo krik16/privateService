@@ -241,7 +241,7 @@
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 	
-	<select id="findDetailPageList" parameterType="com.rongyi.easy.rpb.dto.DivideAccountDto" resultMap="VoResultMap">
+	<sql id="selectPageList">
 		select
 			sdad.id,
 			sdad.bill_date,
@@ -259,10 +259,20 @@
 		<if test="divideAccountId != null and divideAccountId != ''">
 			and sdad.divide_account_id = #{divideAccountId}
 		</if>
+	</sql>
+	
+	<select id="findDetailPageList" parameterType="com.rongyi.easy.rpb.dto.DivideAccountDto" resultMap="VoResultMap">
+		<include refid="selectPageList"></include>
 		<if test="currentPage != null">
 			limit
 			#{startRow,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
 		</if>
+	</select>
+	
+	<select id="findDetailPageListCount" parameterType="com.rongyi.easy.rpb.dto.DivideAccountDto" resultType="Integer">
+		select count(1) from (
+			<include refid="selectPageList"></include>
+		) pg
 	</select>
 	
 	<insert id="batchInsertSelective" parameterType="com.rongyi.easy.settle.entity.SmDivideAccountDetail">

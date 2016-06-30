@@ -56,6 +56,13 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 	public List<DivideAccountVo> findPageList(DivideAccountDto divideAccountDto) {
 		return smDivideAccountMapper.findPageList(divideAccountDto);
 	}
+	
+	/**
+	 * @see com.rongyi.settle.service.SmDivideAccountService#findPageListCount(com.rongyi.easy.rpb.dto.DivideAccountDto)
+	 */
+	public Integer findPageListCount(DivideAccountDto divideAccountDto) {
+		return smDivideAccountMapper.findPageListCount(divideAccountDto);
+	}
 
 	/**
 	 * @see com.rongyi.settle.service.SmDivideAccountService#findDivideAccount(com.rongyi.easy.rpb.dto.DivideAccountDto)
@@ -70,6 +77,14 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 	public List<DivideAccountVo> findDetailPageList(DivideAccountDto divideAccountDto) {
 		return smDivideAccountDetailMapper.findDetailPageList(divideAccountDto);
 	}
+	
+	/**
+	 * @see com.rongyi.settle.service.SmDivideAccountService#findDetailPageListCount(com.rongyi.easy.rpb.dto.DivideAccountDto)
+	 */
+	public Integer findDetailPageListCount(DivideAccountDto divideAccountDto) {
+		return smDivideAccountDetailMapper.findDetailPageListCount(divideAccountDto);
+	}
+
 
 	/**
 	 * @see com.rongyi.settle.service.SmDivideAccountService#generateDivideAccount()
@@ -496,4 +511,5 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 			sheet.getRow(titleRow).createCell(column++).setCellValue(settleAmount);
 		}
 	}
+
 }

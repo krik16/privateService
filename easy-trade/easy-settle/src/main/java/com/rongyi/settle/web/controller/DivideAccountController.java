@@ -42,11 +42,11 @@ public class DivideAccountController extends BaseController {
 	@ResponseBody
 	public ResponseVO list(DivideAccountDto divideAccountDto) {
 		this.fillPaginate(divideAccountDto);
-		log.info("进入方法DivideAccountController.list，入参divideAccountDto："+divideAccountDto.toString());
-		
+		log.info("进入方法DivideAccountController.list，入参divideAccountDto：" + divideAccountDto.toString());
+
 		List<DivideAccountVo> resultList = smdivideAccountService.findPageList(divideAccountDto);
-		return ResponseVO.success(resultList, divideAccountDto.getCurrentPage(), divideAccountDto.getPageSize(),
-				resultList.size());
+		Integer count = smdivideAccountService.findPageListCount(divideAccountDto);
+		return ResponseVO.success(resultList, divideAccountDto.getCurrentPage(), divideAccountDto.getPageSize(), count);
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class DivideAccountController extends BaseController {
 		DivideAccountVo divideAccountVo;
 		try {
 			this.validDetail(divideAccountDto);
-			log.info("进入方法DivideAccountController.detail，入参divideAccountDto："+divideAccountDto.toString());
+			log.info("进入方法DivideAccountController.detail，入参divideAccountDto：" + divideAccountDto.toString());
 
 			divideAccountVo = smdivideAccountService.findDivideAccount(divideAccountDto);
 		} catch (BizException e) {
@@ -77,13 +77,14 @@ public class DivideAccountController extends BaseController {
 	public ResponseVO detailList(DivideAccountDto divideAccountDto) {
 		this.fillPaginate(divideAccountDto);
 
-		log.info("进入方法DivideAccountController.detailList，入参divideAccountDto："+divideAccountDto.toString());
+		log.info("进入方法DivideAccountController.detailList，入参divideAccountDto：" + divideAccountDto.toString());
 		List<DivideAccountVo> resultList = new ArrayList<>();
+		Integer count = 0;
 		if (null != divideAccountDto.getDivideAccountId()) {
 			resultList = smdivideAccountService.findDetailPageList(divideAccountDto);
+			count = smdivideAccountService.findDetailPageListCount(divideAccountDto);
 		}
-		return ResponseVO.success(resultList, divideAccountDto.getCurrentPage(), divideAccountDto.getPageSize(),
-				resultList.size());
+		return ResponseVO.success(resultList, divideAccountDto.getCurrentPage(), divideAccountDto.getPageSize(), count);
 	}
 
 	/**
