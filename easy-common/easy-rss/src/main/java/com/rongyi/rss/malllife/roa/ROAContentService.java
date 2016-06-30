@@ -12,17 +12,7 @@ import com.rongyi.easy.malllife.domain.ContentDDO;
 import com.rongyi.easy.malllife.domain.ContentDO;
 import com.rongyi.easy.malllife.param.ActivitiesParam;
 import com.rongyi.easy.malllife.pojo.ContentPojo;
-import com.rongyi.easy.malllife.vo.BrandVO;
-import com.rongyi.easy.malllife.vo.CommentsVO;
-import com.rongyi.easy.malllife.vo.FavourableVO;
-import com.rongyi.easy.malllife.vo.GroupVO;
-import com.rongyi.easy.malllife.vo.MallAndShopVO;
-import com.rongyi.easy.malllife.vo.MallVO;
-import com.rongyi.easy.malllife.vo.OldMallVO;
-import com.rongyi.easy.malllife.vo.PagingVO;
-import com.rongyi.easy.malllife.vo.ProductionVO;
-import com.rongyi.easy.malllife.vo.ShopVO;
-import com.rongyi.easy.malllife.vo.UserInfoVO;
+import com.rongyi.easy.malllife.vo.*;
 
 /*
  * Copyright (C),上海容易网电子商务有限公司
@@ -49,6 +39,8 @@ public interface ROAContentService {
     public Integer getTotalNum();
 
     public MallVO getMallInfo(String mallId);
+
+    public List<ShopCategoryVO> getShopCats(String mallId);
 
     public OldMallVO getOldMallInfo(String mallId);
 
