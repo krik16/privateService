@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 
+
+
 import com.rongyi.easy.malllife.vo.ShopVO;
+import com.rongyi.easy.malllife.vo.h5.MayLikeShopVO;
 
 
 /**
@@ -32,4 +35,11 @@ public interface ROAShopService {
 	 * 通过shopId得到对应的shop信息
 	 */
 	public ShopVO getShopInfoByshopId(String shopId);
+	/**
+	 * 获取可能喜欢的店铺列表
+	 * @param mallId
+	 * @param categoryIds
+	 * @return
+	 */
+	public List<MayLikeShopVO> getMayLikeShops(String mallId, List<String> categoryIds);
 }

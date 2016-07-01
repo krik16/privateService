@@ -1,5 +1,6 @@
 package com.rongyi.easy.malllife.vo;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.bson.types.ObjectId;
 
 import java.io.Serializable;
@@ -13,6 +14,7 @@ public class ShopCommodityVO implements Serializable{
     private String shopCommodityName;//取得的商品名字
     private String shopCommodityDetailUrl;//取得的商品详情的链接地址
     private String shopPic;//得到第一个商品图片
+    private String mallTip;//商场/街边店标签
     public ShopCommodityVO(){
         
     }
@@ -21,13 +23,10 @@ public class ShopCommodityVO implements Serializable{
         this.shopCommodityCurrPrice=commodity.getCurrentPrice();
         this.shopCommodityOrigPrice=commodity.getOriginalPrice();
         this.shopCommodityName=commodity.getName();
-        this.shopCommodityPicList=commodity.getPicList();
-        if(commodity.getPicList()!=null){
-        this.shopPic=commodity.getPicList().get(0);
-        }else{
-           this.shopPic="";
+        if(CollectionUtils.isNotEmpty(commodity.getPicList())){
+        	this.shopCommodityPicList = commodity.getPicList();
+        	this.shopPic = commodity.getPicList().get(0);//最后一个url要自己拼接 凭借的时候问下超哥
         }
-        //最后一个url要自己拼接 凭借的时候问下超哥
     }
     
     

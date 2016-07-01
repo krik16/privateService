@@ -338,6 +338,7 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 		this.maxPrice = maxPrice;
 	}
 
+	@NeedCheck(getFieldName = "id")
 	public String getId() {
 		return id;
 	}

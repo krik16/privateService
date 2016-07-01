@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.rongyi.easy.malllife.vo.ShopVO;
+import com.rongyi.easy.malllife.vo.h5.MayLikeShopVO;
 import com.rongyi.easy.roa.entity.CategoriesEntity;
 
 
@@ -43,4 +44,11 @@ public interface ROACategoriesService {
     public List<CategoriesEntity> getSubByTypeOrParentId(Integer type,String parentId);
     
     public CategoriesEntity getCategoriesById(String id);
+    /**
+	 * 获取可能喜欢的店铺列表
+	 * @param mallId
+	 * @param categoryIds
+	 * @return
+	 */
+	public List<MayLikeShopVO> getMayLikeShops(String mallId, List<String> categoryIds);
 }

@@ -1,5 +1,8 @@
 package com.rongyi.easy.code;
 
+import com.rongyi.easy.coupon.entity.Coupon;
+import com.rongyi.easy.coupon.entity.CouponChannel;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -17,6 +20,7 @@ public class HannelsVO implements Serializable {
     private Long validStartAt;//有效开始时间
     private Long validEndAt;//有效结束时间
     private List<HannelsCheckLog> hannelCheckLogs;//审核，作废日志列表
+    private List<HannelsCoupon> hannelsCoupons;
 
     public int getId() {
         return id;
@@ -90,6 +94,14 @@ public class HannelsVO implements Serializable {
         this.hannelCheckLogs = hannelCheckLogs;
     }
 
+    public List<HannelsCoupon> getHannelsCoupons() {
+        return hannelsCoupons;
+    }
+
+    public void setHannelsCoupons(List<HannelsCoupon> hannelsCoupons) {
+        this.hannelsCoupons = hannelsCoupons;
+    }
+
     @Override
     public String toString() {
         return "HannelsVO{" +
@@ -102,6 +114,7 @@ public class HannelsVO implements Serializable {
                 ", validStartAt=" + validStartAt +
                 ", validEndAt=" + validEndAt +
                 ", hannelCheckLogs=" + hannelCheckLogs +
+                ", hannelsCoupons=" + hannelsCoupons +
                 '}';
     }
 }

@@ -7,6 +7,7 @@ import com.rongyi.easy.malllife.domain.AppReferenceDO;
 import com.rongyi.easy.malllife.domain.ContentDDO;
 import com.rongyi.easy.malllife.domain.ContentDO;
 import com.rongyi.easy.malllife.param.ActivitiesParam;
+import com.rongyi.easy.malllife.pojo.ContentConnectPojo;
 import com.rongyi.easy.malllife.pojo.ContentPojo;
 import com.rongyi.easy.malllife.vo.*;
 
@@ -396,4 +397,6 @@ public interface IContentService {
      * @return
      */
     public PagingVO<ContentPojo> pagingRaidersList(int pageSize, Integer currentPage);
+
+   public List<ContentConnectPojo> getContentConnectByContentId(String content_id);
 }

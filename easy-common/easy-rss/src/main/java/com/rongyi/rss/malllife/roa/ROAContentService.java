@@ -11,6 +11,7 @@ import com.rongyi.easy.malllife.domain.AppReferenceDO;
 import com.rongyi.easy.malllife.domain.ContentDDO;
 import com.rongyi.easy.malllife.domain.ContentDO;
 import com.rongyi.easy.malllife.param.ActivitiesParam;
+import com.rongyi.easy.malllife.pojo.ContentConnectPojo;
 import com.rongyi.easy.malllife.pojo.ContentPojo;
 import com.rongyi.easy.malllife.vo.*;
 
@@ -488,4 +489,6 @@ public interface ROAContentService {
 
     public Map<String, Object> buildMapByV700(ContentDO content, String userId, boolean bool,Integer appVersion) throws Exception ;
     public ShopVO getShopInfoByShopId(String shopId);
+
+    public List<ContentConnectPojo> getContentConnectByContentId(String content_id);
 }
