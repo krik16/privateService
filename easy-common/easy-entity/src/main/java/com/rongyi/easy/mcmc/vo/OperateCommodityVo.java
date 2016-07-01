@@ -15,7 +15,7 @@ public class OperateCommodityVo implements Serializable {
     private String  categoryIds;//商品所属的品类列表
     private String  mallName;//商场名称
     private String  shopName;//店铺名称
-    private Integer source;//渠道
+    private Integer source;// 渠道  0商家，1买手
     private Integer  status;//商品状态
     private Date createAt ;//创建时间
     private String reason;
