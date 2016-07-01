@@ -1,6 +1,7 @@
 package com.rongyi.easy.rpb.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -27,6 +28,8 @@ public class DivideAccountDto extends BaseDto {
 	private Integer mallId;
 	
 	private Integer shopId;
+	
+	private List<Integer> mallIdList;
 
 	public String getMallName() {
 		return mallName;
@@ -98,6 +101,14 @@ public class DivideAccountDto extends BaseDto {
 
 	public void setShopId(Integer shopId) {
 		this.shopId = shopId;
+	}
+
+	public List<Integer> getMallIdList() {
+		return mallIdList;
+	}
+
+	public void setMallIdList(List<Integer> mallIdList) {
+		this.mallIdList = mallIdList;
 	}
 	
 }
