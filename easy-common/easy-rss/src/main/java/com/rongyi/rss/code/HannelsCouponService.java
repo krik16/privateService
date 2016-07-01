@@ -1,5 +1,8 @@
 package com.rongyi.rss.code;
 
+import com.rongyi.easy.code.HannelsCoupon;
+
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,4 +22,11 @@ public interface HannelsCouponService {
      * @return
      */
     public int saveHannelsCoupon(Map<String,Object> paramMap);
+
+    /**
+     * 通过hannels_id 查询促销红包关联数据
+     * @param id
+     * @return
+     */
+    List<HannelsCoupon> selectByHannelIds(Integer id);
 }
