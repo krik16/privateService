@@ -30,7 +30,8 @@ public class OperateCommodityDetailVo implements Serializable{
     private List<String>picList  ;// 商品图片
     private String description  ;//商品描述
     private List<String> goodsParam ;// 商品参数
-    private boolean supportSelfPickup   ;//配送方式
+    private boolean supportSelfPickup=true;//支持到店自提  true 是    false否
+    private boolean supportCourierDeliver=true;//true是  false否
     private Date registerAt ;// 上架时间
     private Date soldOutAt ;// 下架时间
     private Date createAt ;// 创建时间
@@ -244,5 +245,13 @@ public class OperateCommodityDetailVo implements Serializable{
 
     public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    public boolean isSupportCourierDeliver() {
+        return supportCourierDeliver;
+    }
+
+    public void setSupportCourierDeliver(boolean supportCourierDeliver) {
+        this.supportCourierDeliver = supportCourierDeliver;
     }
 }
