@@ -7,7 +7,6 @@ import com.rongyi.easy.malllife.vo.CommentsVO;
 import com.rongyi.easy.malllife.vo.MainCategoriesVO;
 import com.rongyi.easy.malllife.vo.Result;
 import com.rongyi.easy.malllife.vo.ShopCategoryVO;
-import com.rongyi.easy.malllife.vo.ShopCommodityVO;
 /**
  * 商场分享详情
  * @author user
@@ -39,7 +38,7 @@ public class MallDetailVO implements Serializable{
 	private String appearancePic;//商场底图
 	private List<CommentsVO> commentList;//评论列表
 	private List<Result> coupons;//优惠信息
-	private List<ShopCommodityVO> commodityList;//商品列表
+	private List<CommodityShareVO> commodityList;//商品列表
 	private List<ShopCategoryVO> shopCategories;//入驻店铺列表
 	public String getMallId() {
 		return mallId;
@@ -155,10 +154,10 @@ public class MallDetailVO implements Serializable{
 	public void setCoupons(List<Result> coupons) {
 		this.coupons = coupons;
 	}
-	public List<ShopCommodityVO> getCommodityList() {
+	public List<CommodityShareVO> getCommodityList() {
 		return commodityList;
 	}
-	public void setCommodityList(List<ShopCommodityVO> commodityList) {
+	public void setCommodityList(List<CommodityShareVO> commodityList) {
 		this.commodityList = commodityList;
 	}
 	public List<ShopCategoryVO> getShopCategories() {
