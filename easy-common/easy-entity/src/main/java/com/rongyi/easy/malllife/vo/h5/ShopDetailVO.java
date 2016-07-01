@@ -3,10 +3,8 @@ package com.rongyi.easy.malllife.vo.h5;
 import java.io.Serializable;
 import java.util.List;
 
-import com.rongyi.easy.malllife.vo.APPShopNoticeVO;
 import com.rongyi.easy.malllife.vo.CommentsVO;
 import com.rongyi.easy.malllife.vo.Result;
-import com.rongyi.easy.malllife.vo.ShopCommodityVO;
 import com.rongyi.easy.notice.vo.MMNoticeVO;
 
 /**
@@ -45,7 +43,7 @@ public class ShopDetailVO implements Serializable{
 	private String parking;//停车场信息
 	private String telephone; //电话号码
 	private List<Result> coupons;//优惠信息
-	private List<ShopCommodityVO> commodityList;//商品列表
+	private List<CommodityShareVO> commodityList;//商品列表
 	private List<MayLikeShopVO> mayLikeShops;//可能喜欢的店铺列表
 	private MMNoticeVO noticeVo;//店铺公告
 	private List<CommentsVO> commentList;//评论列表
@@ -193,10 +191,10 @@ public class ShopDetailVO implements Serializable{
 	public void setCoupons(List<Result> coupons) {
 		this.coupons = coupons;
 	}
-	public List<ShopCommodityVO> getCommodityList() {
+	public List<CommodityShareVO> getCommodityList() {
 		return commodityList;
 	}
-	public void setCommodityList(List<ShopCommodityVO> commodityList) {
+	public void setCommodityList(List<CommodityShareVO> commodityList) {
 		this.commodityList = commodityList;
 	}
 	public List<MayLikeShopVO> getMayLikeShops() {
