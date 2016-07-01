@@ -464,6 +464,7 @@ public interface ROAContentService {
 	* @throws
 	 */
 	public List<MallAndShopVO> getSubMallAndShopVo(String type,String content_id,String mallOrBrandId) throws Exception;
+    public ResponseVO pageSubMallAndShopVo(int pageSize, int currentPage, String refType, String contentId)throws Exception;
 	/**
 	 * 
 	* @Title: getContentDoById 

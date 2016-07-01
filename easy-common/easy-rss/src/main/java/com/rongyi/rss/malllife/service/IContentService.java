@@ -399,4 +399,7 @@ public interface IContentService {
     public PagingVO<ContentPojo> pagingRaidersList(int pageSize, Integer currentPage);
 
    public List<ContentConnectPojo> getContentConnectByContentId(String content_id);
+
+    public ResponseVO pageSubMallAndShopVo(int pageSize, int currentPage, String refType, String contentId)throws Exception;
+
 }
