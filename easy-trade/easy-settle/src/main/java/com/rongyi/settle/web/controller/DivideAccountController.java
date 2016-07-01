@@ -58,7 +58,7 @@ public class DivideAccountController extends BaseController {
 			this.fillPaginate(divideAccountDto);
 			log.info("进入方法DivideAccountController.list，入参divideAccountDto：" + divideAccountDto.toString());
 
-			List<DivideAccountVo> resultList = smdivideAccountService.findPageList(divideAccountDto, null);
+			List<DivideAccountVo> resultList = smdivideAccountService.findPageList(divideAccountDto, sessionUserInfo);
 			Integer count = smdivideAccountService.findPageListCount(divideAccountDto, null);
 			return ResponseVO.success(resultList, divideAccountDto.getCurrentPage(), divideAccountDto.getPageSize(),
 					count);
