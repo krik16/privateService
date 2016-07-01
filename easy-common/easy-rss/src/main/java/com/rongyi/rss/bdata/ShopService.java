@@ -97,5 +97,12 @@ public interface ShopService {
 
 
 	public ResponseVO getCouponInfoByShopIds(String ids);
+	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public Shop getShopEntityById(String id);
 
 }

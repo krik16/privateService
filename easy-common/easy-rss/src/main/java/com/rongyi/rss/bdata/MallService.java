@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.easy.bdata.entity.Mall;
 import com.rongyi.easy.bdata.vo.CommonTypeVO;
 import com.rongyi.easy.bdata.vo.MallGroupVO;
 import com.rongyi.easy.bdata.vo.MallVO;
@@ -170,6 +171,8 @@ public interface MallService {
 	 * @return
 	 */
 	boolean setMallValid(String mallId,int valid,String reason);
+	
+	Mall getMallById(String mallId);
 	
 	Map<String, Object>getMalls(Map params, int currentpage, int pagesize);
 	
