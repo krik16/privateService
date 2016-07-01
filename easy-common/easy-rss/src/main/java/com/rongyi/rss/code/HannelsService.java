@@ -1,7 +1,10 @@
 package com.rongyi.rss.code;
 
+import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.code.*;
+import com.rongyi.easy.coupon.entity.CouponChannel;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -48,4 +51,11 @@ public interface HannelsService {
      * @return
      */
     HannelsVO info(int i);
+
+    /**
+     * 查询渠道列表数量
+     * @param param
+     * @return
+     */
+    PagingVO<CouponChannel> couponChannelPagingVO(ChannelSearchParam param);
 }

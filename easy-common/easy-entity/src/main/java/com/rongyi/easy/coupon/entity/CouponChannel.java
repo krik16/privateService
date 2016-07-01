@@ -20,6 +20,7 @@ public class CouponChannel implements Serializable {
     private Date createAt;
 
     private Integer status;
+    private String code;//渠道邀请码
 
     public Integer getId() {
         return id;
@@ -68,5 +69,12 @@ public class CouponChannel implements Serializable {
 				.append(", createAt=").append(createAt).append(", status=").append(status).append("]");
 		return builder.toString();
 	}
-	
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 }
