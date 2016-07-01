@@ -5,8 +5,8 @@ import java.util.List;
 
 public class ActivityMall2VO implements Serializable{
 	
-	private List<String>  mallNames;
-	private String refId;//
+	private List<String>  mallNames;//size大于1表示是多家
+	private String refId;//如果size大于1，用来跳转到详情页
 	private String refType;//"mall / brand /shop",
 	public List<String> getMallNames() {
 		return mallNames;
