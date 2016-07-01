@@ -383,7 +383,7 @@
 		tuo.use_time DESC
 	</select>
 	
-	<select id="findMallIdList" parameterType="Integer" resultMap="Integer">
+	<select id="findMallIdList" parameterType="Integer" resultType="Integer">
 		SELECT
 			id
 		FROM

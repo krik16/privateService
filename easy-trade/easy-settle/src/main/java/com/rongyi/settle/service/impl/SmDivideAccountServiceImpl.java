@@ -524,36 +524,34 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 	}
 
 	private List<Integer> getMallIdListByGroupId(SessionUserInfo sessionUserInfo) {
-		Integer bindingId = sessionUserInfo.getBindingId();
+		String bindingMid = sessionUserInfo.getBindingMid();
 		Integer identity = sessionUserInfo.getIdentity();
-		List<Integer> mallIdList = new ArrayList<>();
 		List<String> mallMidList = new ArrayList<>();
 		if (UserInfoConstant.IDENTITY_GROUP.equals(identity)) {
 			try {
-				List<MallEntity> mallList = roaMallService.getMallEntitysByGroupId(bindingId.toString());
+				List<MallEntity> mallList = roaMallService.getMallEntitysByGroupId(bindingMid);
 				for (MallEntity mall : mallList) {
 					if (null != mall && null != mall.getId()) {
 						mallMidList.add(mall.getId().toString());
 					}
 				}
 			} catch (Exception e) {
-				log.error("调用商场接口失败-roaMallService.getMallEntitysByGroupId，入参bindingId：" + bindingId.toString());
+				log.error("调用商场接口失败-roaMallService.getMallEntitysByGroupId，入参bindingMid：" + bindingMid, e);
 				throw new BizException(CodeEnum.ERROR_SYSTEM);
 			}
 			if (CollectionUtils.isEmpty(mallMidList)) {
-				log.error("查询商场集合为空，roaMallService.getMallEntitysByGroupId，入参bindingId：" + bindingId.toString());
+				log.error("查询商场集合为空，roaMallService.getMallEntitysByGroupId，入参bindingMid：" + bindingMid);
 				throw new BizException(CodeEnum.MALL_NOT_EXIST);
 			}
-			List<Integer> list = smDivideAccountMapper.findMallIdList(mallMidList);
-			if (CollectionUtils.isEmpty(list)) {
-				log.error("根据Mongo商场ID查询Mysql商场集合为空，入参bindingId：" + bindingId.toString() + ", mallMidList"
-						+ mallMidList.toString());
-				throw new BizException(CodeEnum.MALL_NOT_EXIST);
-			}
-			mallIdList = list;
 		} else if (UserInfoConstant.IDENTITY_MALL.equals(identity)) {
-			mallIdList.add(bindingId);
+			mallMidList.add(bindingMid);
 		}
-		return mallIdList;
+		List<Integer> list = smDivideAccountMapper.findMallIdList(mallMidList);
+		if (CollectionUtils.isEmpty(list)) {
+			log.error("根据Mongo商场ID查询Mysql商场集合为空，入参bindingId：" + bindingMid + ", mallMidList"
+					+ mallMidList.toString());
+			throw new BizException(CodeEnum.MALL_NOT_EXIST);
+		}
+		return list;
 	}
 }

@@ -176,7 +176,7 @@ public class DivideAccountController extends BaseController {
 	}
 
 	private void validSessionUserInfo(SessionUserInfo sessionUserInfo) {
-		if (null == sessionUserInfo.getBindingId()
+		if (null == sessionUserInfo.getBindingMid()
 				|| !UserInfoConstant.divideAccounUserList.contains(sessionUserInfo.getIdentity())) {
 			throw new BizException(CodeEnum.FIAL_USER_IDENTITY);
 		}
