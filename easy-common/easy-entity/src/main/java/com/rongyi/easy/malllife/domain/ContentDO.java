@@ -1,7 +1,10 @@
 package com.rongyi.easy.malllife.domain;
 
+import com.google.inject.internal.Lists;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 资讯文章
@@ -61,7 +64,34 @@ public class ContentDO implements Serializable{
     private String connect_type;// 多关联类型 mall shop brand city all
     private String picture2;//新加入的封面图
     private String action_picture2;//新加入的列表图
-    
+    private List<String> mallIds = Lists.newArrayList();
+    private List<String>  shopIds = Lists.newArrayList();
+    private List<String> brandIds =Lists.newArrayList();
+
+    public List<String> getMallIds() {
+        return mallIds;
+    }
+
+    public void setMallIds(List<String> mallIds) {
+        this.mallIds = mallIds;
+    }
+
+    public List<String> getShopIds() {
+        return shopIds;
+    }
+
+    public void setShopIds(List<String> shopIds) {
+        this.shopIds = shopIds;
+    }
+
+    public List<String> getBrandIds() {
+        return brandIds;
+    }
+
+    public void setBrandIds(List<String> brandIds) {
+        this.brandIds = brandIds;
+    }
+
     public String getPicture2() {
 		return picture2;
 	}
