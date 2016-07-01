@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 import com.rongyi.easy.rpb.dto.DivideAccountDto;
 import com.rongyi.settle.vo.DivideAccountVo;
 
@@ -15,8 +16,8 @@ public interface SmDivideAccountService {
 	 * @param divideAccountDto
 	 * @return
 	 */
-	public List<DivideAccountVo> findPageList(DivideAccountDto divideAccountDto);
-	public Integer findPageListCount(DivideAccountDto divideAccountDto);
+	public List<DivideAccountVo> findPageList(DivideAccountDto divideAccountDto, SessionUserInfo sessionUserInfo);
+	public Integer findPageListCount(DivideAccountDto divideAccountDto, SessionUserInfo sessionUserInfo);
 
 	/**
 	 * 分页查询分账详情列表

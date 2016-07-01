@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 import com.rongyi.easy.rpb.dto.DivideAccountDto;
 import com.rongyi.settle.constants.CodeEnum;
+import com.rongyi.settle.constants.UserInfoConstant;
 import com.rongyi.settle.exception.BizException;
+import com.rongyi.settle.service.AccessService;
 import com.rongyi.settle.service.SmDivideAccountService;
 import com.rongyi.settle.vo.DivideAccountVo;
 
@@ -35,19 +39,33 @@ public class DivideAccountController extends BaseController {
 	@Resource
 	private SmDivideAccountService smdivideAccountService;
 
+	@Autowired
+	private AccessService accessService;
+
 	/**
 	 * 查询分账列表
 	 * @param divideAccountDto
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseVO list(@RequestBody DivideAccountDto divideAccountDto) {
-		this.fillPaginate(divideAccountDto);
-		log.info("进入方法DivideAccountController.list，入参divideAccountDto：" + divideAccountDto.toString());
+	public ResponseVO list(@RequestBody DivideAccountDto divideAccountDto, HttpServletRequest request) {
+		SessionUserInfo sessionUserInfo;
+		try {
+			sessionUserInfo = accessService.getSessionUserInfo(request, "");// TODO
+																			// 权限
+			this.validSessionUserInfo(sessionUserInfo); // 权限验证
 
-		List<DivideAccountVo> resultList = smdivideAccountService.findPageList(divideAccountDto);
-		Integer count = smdivideAccountService.findPageListCount(divideAccountDto);
-		return ResponseVO.success(resultList, divideAccountDto.getCurrentPage(), divideAccountDto.getPageSize(), count);
+			this.fillPaginate(divideAccountDto);
+			log.info("进入方法DivideAccountController.list，入参divideAccountDto：" + divideAccountDto.toString());
+
+			List<DivideAccountVo> resultList = smdivideAccountService.findPageList(divideAccountDto, null);
+			Integer count = smdivideAccountService.findPageListCount(divideAccountDto, null);
+			return ResponseVO.success(resultList, divideAccountDto.getCurrentPage(), divideAccountDto.getPageSize(),
+					count);
+		} catch (BizException e) {
+			log.error("分页查询分账列表失败DivideAccountController.list ：" + e.getErroMsg());
+			return ResponseVO.failure();
+		}
 	}
 
 	/**
@@ -154,6 +172,13 @@ public class DivideAccountController extends BaseController {
 	private void validExport(Integer id) {
 		if (null == id) {
 			throw new BizException(CodeEnum.NO_PARAM);
+		}
+	}
+
+	private void validSessionUserInfo(SessionUserInfo sessionUserInfo) {
+		if (null == sessionUserInfo.getBindingId()
+				|| !UserInfoConstant.divideAccounUserList.contains(sessionUserInfo.getIdentity())) {
+			throw new BizException(CodeEnum.FIAL_USER_IDENTITY);
 		}
 	}
 

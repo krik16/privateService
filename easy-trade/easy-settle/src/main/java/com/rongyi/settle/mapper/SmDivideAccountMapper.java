@@ -1,7 +1,6 @@
 package com.rongyi.settle.mapper;
 
 import java.util.List;
-import java.util.Map;
 
 import com.rongyi.easy.rpb.dto.DivideAccountDto;
 import com.rongyi.easy.settle.entity.SmDivideAccount;
@@ -43,4 +42,6 @@ public interface SmDivideAccountMapper {
     public List<DivideAccountVo> findTradeOrderList(DivideAccountDto divideAccountDto);
     
     public DivideAccountVo findDivideAccount(DivideAccountDto divideAccountDto);
+    
+    public List<Integer> findMallIdList(List<String> mallMidList);
 }

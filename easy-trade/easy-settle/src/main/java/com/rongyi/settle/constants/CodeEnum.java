@@ -8,6 +8,7 @@ package com.rongyi.settle.constants;
 public enum CodeEnum {
 	FIAL_USER_PARAMS_PAYMENT(1018401, "没有登录或登录信息错误"),//前台约定，没有登录统一后三位为401
 	FIAL_NO_AUTHORITY_PAYMENT(1018403, "没有访问该资源的权限"),//前台约定，没有权限统一后三位为403
+	FIAL_USER_IDENTITY(1018404, "没有获取登录用户身份信息"),
 
 	ERROR_SYSTEM(1018004, "系统故障"),
 	NO_PARAM(1018105, "参数异常"),
@@ -28,6 +29,7 @@ public enum CodeEnum {
 	
 	NOT_EXIST_DIVIDE_ACCOUNT(1018101, "分账不存在"),
 	FAIL_GENERATE_XML(1018102,"生成xlsx异常"),
+	MALL_NOT_EXIST(1018103,"商场信息错误"),
 	SUCCESS("0", "正常"),;
 
 	private Object code;

@@ -241,6 +241,10 @@
 			sm_divide_account sda
 		LEFT JOIN ry_rmmm.mall_cooperate mc ON mc.id = sda.mall_id
 		where sda.is_delete = 0
+		  And sda.mall_id in
+			<foreach item="mallId" index="index" collection="mallIdList" open="(" separator="," close=")">
+				#{mallId}
+			</foreach>
 			<if test="mallName != null and mallName != ''">
 				and mc.mall_name like concat('%',#{mallName,jdbcType=VARCHAR},'%')
 			</if>
@@ -377,5 +381,17 @@
 		</if>
 		ORDER BY
 		tuo.use_time DESC
+	</select>
+	
+	<select id="findMallIdList" parameterType="Integer" resultMap="Integer">
+		SELECT
+			id
+		FROM
+			ry_rmmm.mall_cooperate mc
+		WHERE
+			mc.mall_mid IN 
+			<foreach item="mallMid" index="index" collection="list" open="(" separator="," close=")">
+				#{mallMid}
+			</foreach>
 	</select>
 </mapper>

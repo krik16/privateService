@@ -21,13 +21,17 @@ import org.springframework.stereotype.Service;
 
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.ExcelUtil;
+import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 import com.rongyi.easy.coupon.vo.CouponGeneralVO;
+import com.rongyi.easy.roa.entity.MallEntity;
 import com.rongyi.easy.rpb.dto.DivideAccountDto;
 import com.rongyi.easy.settle.entity.SmDivideAccount;
 import com.rongyi.easy.settle.entity.SmDivideAccountDetail;
 import com.rongyi.rss.coupon.merchant.TradeCouponService;
+import com.rongyi.rss.roa.ROAMallService;
 import com.rongyi.settle.constants.CodeEnum;
 import com.rongyi.settle.constants.DivideAccountConstant;
+import com.rongyi.settle.constants.UserInfoConstant;
 import com.rongyi.settle.exception.BizException;
 import com.rongyi.settle.mapper.SmDivideAccountDetailMapper;
 import com.rongyi.settle.mapper.SmDivideAccountMapper;
@@ -50,17 +54,24 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 	@Autowired
 	private TradeCouponService tradeCouponService;
 
+	@Autowired
+	private ROAMallService roaMallService;
+
 	/**
 	 * @see com.rongyi.settle.service.DivideAccountService#findPageList(com.rongyi.settle.dto.DivideAccountDto)
 	 */
-	public List<DivideAccountVo> findPageList(DivideAccountDto divideAccountDto) {
+	public List<DivideAccountVo> findPageList(DivideAccountDto divideAccountDto, SessionUserInfo sessionUserInfo) {
+		List<Integer> mallIdList = this.getMallIdListByGroupId(sessionUserInfo);
+		divideAccountDto.setMallIdList(mallIdList);
 		return smDivideAccountMapper.findPageList(divideAccountDto);
 	}
-	
+
 	/**
 	 * @see com.rongyi.settle.service.SmDivideAccountService#findPageListCount(com.rongyi.easy.rpb.dto.DivideAccountDto)
 	 */
-	public Integer findPageListCount(DivideAccountDto divideAccountDto) {
+	public Integer findPageListCount(DivideAccountDto divideAccountDto, SessionUserInfo sessionUserInfo) {
+		List<Integer> mallIdList = this.getMallIdListByGroupId(sessionUserInfo);
+		divideAccountDto.setMallIdList(mallIdList);
 		return smDivideAccountMapper.findPageListCount(divideAccountDto);
 	}
 
@@ -77,14 +88,13 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 	public List<DivideAccountVo> findDetailPageList(DivideAccountDto divideAccountDto) {
 		return smDivideAccountDetailMapper.findDetailPageList(divideAccountDto);
 	}
-	
+
 	/**
 	 * @see com.rongyi.settle.service.SmDivideAccountService#findDetailPageListCount(com.rongyi.easy.rpb.dto.DivideAccountDto)
 	 */
 	public Integer findDetailPageListCount(DivideAccountDto divideAccountDto) {
 		return smDivideAccountDetailMapper.findDetailPageListCount(divideAccountDto);
 	}
-
 
 	/**
 	 * @see com.rongyi.settle.service.SmDivideAccountService#generateDivideAccount()
@@ -492,6 +502,7 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 			sheet.createRow(++titleRow);
 			int column = 0;
 			sheet.getRow(titleRow).createCell(column++).setCellValue(vo.getMallName());
+			sheet.getRow(titleRow).createCell(column++).setCellValue(vo.getShopId().toString());
 			sheet.getRow(titleRow).createCell(column++).setCellValue(vo.getShopName());
 			sheet.getRow(titleRow).createCell(column++).setCellValue(vo.getOrderNo());
 			sheet.getRow(titleRow).createCell(column++).setCellValue(DateUtils.formateDateFull(vo.getFinishTime()));
@@ -512,4 +523,37 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 		}
 	}
 
+	private List<Integer> getMallIdListByGroupId(SessionUserInfo sessionUserInfo) {
+		Integer bindingId = sessionUserInfo.getBindingId();
+		Integer identity = sessionUserInfo.getIdentity();
+		List<Integer> mallIdList = new ArrayList<>();
+		List<String> mallMidList = new ArrayList<>();
+		if (UserInfoConstant.IDENTITY_GROUP.equals(identity)) {
+			try {
+				List<MallEntity> mallList = roaMallService.getMallEntitysByGroupId(bindingId.toString());
+				for (MallEntity mall : mallList) {
+					if (null != mall && null != mall.getId()) {
+						mallMidList.add(mall.getId().toString());
+					}
+				}
+			} catch (Exception e) {
+				log.error("调用商场接口失败-roaMallService.getMallEntitysByGroupId，入参bindingId：" + bindingId.toString());
+				throw new BizException(CodeEnum.ERROR_SYSTEM);
+			}
+			if (CollectionUtils.isEmpty(mallMidList)) {
+				log.error("查询商场集合为空，roaMallService.getMallEntitysByGroupId，入参bindingId：" + bindingId.toString());
+				throw new BizException(CodeEnum.MALL_NOT_EXIST);
+			}
+			List<Integer> list = smDivideAccountMapper.findMallIdList(mallMidList);
+			if (CollectionUtils.isEmpty(list)) {
+				log.error("根据Mongo商场ID查询Mysql商场集合为空，入参bindingId：" + bindingId.toString() + ", mallMidList"
+						+ mallMidList.toString());
+				throw new BizException(CodeEnum.MALL_NOT_EXIST);
+			}
+			mallIdList = list;
+		} else if (UserInfoConstant.IDENTITY_MALL.equals(identity)) {
+			mallIdList.add(bindingId);
+		}
+		return mallIdList;
+	}
 }
