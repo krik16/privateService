@@ -249,11 +249,11 @@
 			</if>
 			<if test="billDateBegin != null and billDateBegin != ''">
 				and sda.bill_date <![CDATA[ >= ]]>
-				#{billDateBegin}
+				date_format(#{billDateBegin},'%Y-%m-%d')
 			</if>
 			<if test="billDateEnd != null and billDateEnd != ''">
 				and sda.bill_date <![CDATA[ < ]]>
-				DATE_ADD(#{billDateEnd},INTERVAL 1 DAY)
+				DATE_ADD(date_format(#{billDateEnd},'%Y-%m-%d'),INTERVAL 1 DAY)
 			</if>
 	</sql>
 

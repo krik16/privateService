@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,9 +39,9 @@ public class DivideAccountController extends BaseController {
 	 * 查询分账列表
 	 * @param divideAccountDto
 	 */
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseVO list(DivideAccountDto divideAccountDto) {
+	public ResponseVO list(@RequestBody DivideAccountDto divideAccountDto) {
 		this.fillPaginate(divideAccountDto);
 		log.info("进入方法DivideAccountController.list，入参divideAccountDto：" + divideAccountDto.toString());
 
