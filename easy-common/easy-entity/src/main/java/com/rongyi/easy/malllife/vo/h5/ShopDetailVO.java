@@ -42,7 +42,7 @@ public class ShopDetailVO implements Serializable{
 	private List<String> categoryIds;//
 	private String parking;//停车场信息
 	private String telephone; //电话号码
-	private List<Result> coupons;//优惠信息
+	private List<CouponVO> coupons;//优惠信息
 	private List<CommodityShareVO> commodityList;//商品列表
 	private List<MayLikeShopVO> mayLikeShops;//可能喜欢的店铺列表
 	private MMNoticeVO noticeVo;//店铺公告
@@ -185,10 +185,10 @@ public class ShopDetailVO implements Serializable{
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
-	public List<Result> getCoupons() {
+	public List<CouponVO> getCoupons() {
 		return coupons;
 	}
-	public void setCoupons(List<Result> coupons) {
+	public void setCoupons(List<CouponVO> coupons) {
 		this.coupons = coupons;
 	}
 	public List<CommodityShareVO> getCommodityList() {
