@@ -9,6 +9,8 @@ import com.rongyi.easy.ryoms.param.ShopParam;
 import java.util.List;
 import java.util.Map;
 
+import org.bson.types.ObjectId;
+
 /**
  * 店铺服务
  * @author xiaobo
@@ -99,10 +101,17 @@ public interface ShopService {
 	public ResponseVO getCouponInfoByShopIds(String ids);
 	
 	/**
-	 * 
+	 * 通过店铺ID查询店铺实体
 	 * @param id
 	 * @return
 	 */
 	public Shop getShopEntityById(String id);
+	
+	/**
+	 * 通过ids查询店铺实体列表
+	 * @param ids
+	 * @return
+	 */
+	public List<Shop> getShopListByIds(List<ObjectId> ids);
 
 }
