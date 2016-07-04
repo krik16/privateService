@@ -56,7 +56,7 @@ public class LogAopAdvice
         }
         else{
             Integer logIdCount = Integer.parseInt(RpcContext.getContext().getAttachment("logidCount")) - 1;
-            if(logIdCount == 1){
+            if(logIdCount == 0){
                 logger.info("日志id计数器为1 清空logid");
                 RpcContext.removeContext();
             }
@@ -76,7 +76,7 @@ public class LogAopAdvice
         else
         {
             Integer logIdCount = Integer.parseInt(RpcContext.getContext().getAttachment("logidCount")) - 1;
-            if (logIdCount == 1)
+            if (logIdCount == 0)
             {
                 logger.info("日志id计数器为1 清空logid");
                 RpcContext.removeContext();
