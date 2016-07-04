@@ -47,4 +47,8 @@ public interface ActivityCodeService {
     public boolean insertHannelsCodes(int count, Integer hannelsId, int type);
 
     List<Map<String,Object>> getCouponCodesByHannelsId(Integer id);
+
+    List<String> getCouponCodesByHannelsId(Map<String, Object> param);
+
+    int updateAcvityCode(Map<String, Object> updateParam);
 }
