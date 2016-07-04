@@ -19,6 +19,7 @@ import java.util.UUID;
  */
 public class LogAopAdvice
 {
+    Logger logger = LoggerFactory.getLogger(LogAopAdvice.class);
 
     public void logIdInit() {
 
@@ -33,27 +34,34 @@ public class LogAopAdvice
 
         //aop多次切入，计数，只有最后一次会清楚mdc的logid
         if(RpcContext.getContext().getAttachment("logidCount") != null){
+
             Integer logIdCount = Integer.parseInt(RpcContext.getContext().getAttachment("logidCount")) + 1;
+            logger.info("日志id计数器不为空={}",logIdCount);
             RpcContext.getContext().setAttachment("logidCount", String.valueOf(logIdCount));
         }
         else{
+            logger.info("日志id计数器为空");
             RpcContext.getContext().setAttachment("logidCount", "1");
         }
 
         RpcContext.getContext().setAttachment("logid", logId);
+        logger.info("日志id={}",logId);
     }
 
     public void clear()
     {
         if(RpcContext.getContext().getAttachment("logidCount") == null){
+            logger.info("日志id计数器为空 清空logid");
             RpcContext.removeContext();
         }
         else{
             Integer logIdCount = Integer.parseInt(RpcContext.getContext().getAttachment("logidCount")) - 1;
             if(logIdCount == 1){
+                logger.info("日志id计数器为1 清空logid");
                 RpcContext.removeContext();
             }
             else{
+                logger.info("日志id计数器不为空");
                 RpcContext.getContext().setAttachment("logidCount", String.valueOf(logIdCount));
             }
         }
@@ -62,6 +70,7 @@ public class LogAopAdvice
     public void exceptionProcess()
     {
         if(RpcContext.getContext().getAttachment("logidCount") == null){
+            logger.info("日志id计数器为空 清空logid");
             RpcContext.removeContext();
         }
         else
@@ -69,9 +78,11 @@ public class LogAopAdvice
             Integer logIdCount = Integer.parseInt(RpcContext.getContext().getAttachment("logidCount")) - 1;
             if (logIdCount == 1)
             {
+                logger.info("日志id计数器为1 清空logid");
                 RpcContext.removeContext();
             } else
             {
+                logger.info("日志id计数器不为空");
                 RpcContext.getContext().setAttachment("logidCount", String.valueOf(logIdCount));
             }
         }
