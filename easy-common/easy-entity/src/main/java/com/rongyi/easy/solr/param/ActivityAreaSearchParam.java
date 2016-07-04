@@ -3,13 +3,15 @@ package com.rongyi.easy.solr.param;
 import java.io.Serializable;
 import java.util.List;
 
+import com.rongyi.easy.malllife.param.MalllifeBaseParam;
+
 /**
  * 获取地区参数  - 抵扣券页面
  *
  * @author wangjh7
  * @date 2016-06-30
  */
-public class ActivityAreaSearchParam implements Serializable {
+public class ActivityAreaSearchParam  extends MalllifeBaseParam implements Serializable {
 
     private static final long serialVersionUID = 578059263593575051L;
 
