@@ -527,7 +527,7 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 		String bindingMid = sessionUserInfo.getBindingMid();
 		Integer identity = sessionUserInfo.getIdentity();
 		List<String> mallMidList = new ArrayList<>();
-		log.error("账号类型identity=" + identity);
+		log.info("账号类型identity=" + identity);
 		if (UserInfoConstant.IDENTITY_GROUP.equals(identity)) {
 			try {
 				List<MallEntity> mallList = roaMallService.getMallEntitysByGroupId(bindingMid);
@@ -548,7 +548,7 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 			mallMidList.add(bindingMid);
 		}
 		List<Integer> list = smDivideAccountMapper.findMallIdList(mallMidList);
-		log.error("账号所拥有的商场：" + list);
+		log.info("账号所拥有的商场：" + list);
 		if (CollectionUtils.isEmpty(list)) {
 			log.error("根据Mongo商场ID查询Mysql商场集合为空，入参bindingId：" + bindingMid + ", mallMidList" + mallMidList.toString());
 			throw new BizException(CodeEnum.MALL_NOT_EXIST);
