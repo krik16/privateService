@@ -37,7 +37,7 @@ public class MallDetailVO implements Serializable{
 	private Integer shopCount;//商场下的店铺数量
 	private String appearancePic;//商场底图
 	private List<CommentsVO> commentList;//评论列表
-	private List<Result> coupons;//优惠信息
+	private List<CouponVO> coupons;//优惠信息
 	private List<CommodityShareVO> commodityList;//商品列表
 	private List<ShopCategoryVO> shopCategories;//入驻店铺列表
 	public String getMallId() {
@@ -148,10 +148,10 @@ public class MallDetailVO implements Serializable{
 	public void setCommentList(List<CommentsVO> commentList) {
 		this.commentList = commentList;
 	}
-	public List<Result> getCoupons() {
+	public List<CouponVO> getCoupons() {
 		return coupons;
 	}
-	public void setCoupons(List<Result> coupons) {
+	public void setCoupons(List<CouponVO> coupons) {
 		this.coupons = coupons;
 	}
 	public List<CommodityShareVO> getCommodityList() {
