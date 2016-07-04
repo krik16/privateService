@@ -1,6 +1,7 @@
 package com.rongyi.easy.malllife.vo;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
 public class MallAndShopVO implements Serializable{
@@ -98,6 +99,16 @@ public class MallAndShopVO implements Serializable{
 	}
 	public void setTip(List<Integer> tip) {
 		this.tip = tip;
+	}
+	@Override
+	public String toString() {
+		return "MallAndShopVO [id=" + id + ", name=" + name + ", type=" + type
+				+ ", pic_url=" + pic_url + ", key_tags=" + key_tags
+				+ ", shop_nature=" + shop_nature + ", any_coupon=" + any_coupon
+				+ ", mall_id=" + mall_id + ", shop_own=" + shop_own
+				+ ", business_district=" + business_district + ", location="
+				+ Arrays.toString(location) + ", label=" + label + ", tip="
+				+ tip + "]";
 	}
 	
 }

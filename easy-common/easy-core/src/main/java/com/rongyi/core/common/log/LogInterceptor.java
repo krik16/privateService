@@ -47,7 +47,6 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
         logger.info("拦截器销毁日志id={}",org.slf4j.MDC.get("logid"));
         org.slf4j.MDC.clear();
         org.apache.log4j.MDC.remove("logid");
-        org.apache.log4j.MDC.remove("logidFromController");
         RpcContext.removeContext();
     }
 }
