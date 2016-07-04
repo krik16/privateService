@@ -58,4 +58,11 @@ public interface HannelsService {
      * @return
      */
     PagingVO<CouponChannel> couponChannelPagingVO(ChannelSearchParam param);
+
+    /**
+     * 通过id获取促销码
+     * @param i
+     * @return
+     */
+    Hannels getHannelsById(int i);
 }

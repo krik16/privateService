@@ -160,4 +160,11 @@ public interface RoaCouponCodeService {
      * @return
      */
     public Integer getCurrentPriceFromCode(String couponCode);
+
+    /**
+     * 根据促销券id获取红包密码
+     * @param params
+     * @return
+     */
+    List<CouponCode> getCouponCodesByHannelsId(Map<String, Object> params);
 }
