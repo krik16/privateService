@@ -7,6 +7,7 @@ import com.rongyi.easy.malllife.domain.AppReferenceDO;
 import com.rongyi.easy.malllife.domain.ContentDDO;
 import com.rongyi.easy.malllife.domain.ContentDO;
 import com.rongyi.easy.malllife.param.ActivitiesParam;
+import com.rongyi.easy.malllife.pojo.ContentConnectPojo;
 import com.rongyi.easy.malllife.pojo.ContentPojo;
 import com.rongyi.easy.malllife.vo.*;
 
@@ -319,13 +320,14 @@ public interface IContentService {
 	* @param @param currentPage
 	* @param @param version
 	* @param @return
-	* @param @throws Exception    设定文件 
-	* @return PagingVO<ContentPojo>    返回类型 
+	* @param @throws Exception    设定文件
+	* @param mallId
+     *@param shopId @return PagingVO<ContentPojo>    返回类型
 	* @author shaozhou
 	* @date 2016年5月5日 下午6:52:00 
 	* @throws
 	 */
-	public PagingVO<ContentPojo> pagingArticleList(String type, double lng, double lat, String cityId, int pageSize, Integer currentPage) throws Exception ;
+	public PagingVO<ContentPojo> pagingArticleList(String mallId, String shopId, String type, double lng, double lat, String cityId, int pageSize, Integer currentPage) throws Exception ;
 	/**
 	 * 
 	* @Title: pagingFavorList 
@@ -339,7 +341,7 @@ public interface IContentService {
 	* @date 2016年5月5日 下午7:32:25 
 	* @throws
 	 */
-	public PagingVO<ContentPojo> pagingFavorList(String cityId, int pageSize, Integer currentPage);
+	public PagingVO<ContentPojo> pagingFavorList(String mallId, String shopId,  String cityId, int pageSize, Integer currentPage);
 	/**
 	 * 
 	* @Title: pagingContentListByMallId 
@@ -357,6 +359,8 @@ public interface IContentService {
 
 
 	public List<Map<String, Object>> allListWelfareNew(Date pullAt, List<String> brandIdList);
+
+    public int countWelfareNew(Date pullAt, List<String> brandIdList);
 
 
 	public List<ContentPojo> allListWelFareOld(List<Map<String, Object>> activityIdList) throws Exception;
@@ -393,4 +397,9 @@ public interface IContentService {
      * @return
      */
     public PagingVO<ContentPojo> pagingRaidersList(int pageSize, Integer currentPage);
+
+   public List<ContentConnectPojo> getContentConnectByContentId(String content_id);
+
+    public ResponseVO pageSubMallAndShopVo(int pageSize, int currentPage, String refType, String contentId)throws Exception;
+
 }

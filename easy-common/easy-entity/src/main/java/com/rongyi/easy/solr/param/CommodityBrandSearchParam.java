@@ -1,8 +1,9 @@
 package com.rongyi.easy.solr.param;
 
-import com.rongyi.easy.rmmm.base.BaseParam;
-
 import java.io.Serializable;
+import java.util.List;
+
+import com.rongyi.easy.rmmm.base.BaseParam;
 
 /**
  * Created by xgq on 2015/10/30.
@@ -12,6 +13,28 @@ public class CommodityBrandSearchParam extends BaseParam implements Serializable
 	private Integer currentPage; //当前页数,从1开始
     private Integer pageSize;//每页显示数
     private String keyword;
+    private String categoryId;//分类id
+    private List<String> shopList;//店铺id集合
+	private List<String> categoryList;//分类id集合
+    
+	
+
+	public List<String> getShopList() {
+		return shopList;
+	}
+
+	public void setShopList(List<String> shopList) {
+		this.shopList = shopList;
+	}
+
+	public List<String> getCategoryList() {
+		return categoryList;
+	}
+
+	public void setCategoryList(List<String> categoryList) {
+		this.categoryList = categoryList;
+	}
+
 	public String getKeyword() {
 		return keyword;
 	}
@@ -19,8 +42,7 @@ public class CommodityBrandSearchParam extends BaseParam implements Serializable
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-
-	private String categoryId;
+	
     public String getCategoryId() {
         return categoryId;
     }
@@ -47,8 +69,10 @@ public class CommodityBrandSearchParam extends BaseParam implements Serializable
 
 	@Override
 	public String toString() {
-		return "CommodityBrandSearchParam [currentPage=" + currentPage + ", pageSize=" + pageSize + ", keyword="
-				+ keyword + ", categoryId=" + categoryId + "]";
+		return "CommodityBrandSearchParam [currentPage=" + currentPage
+				+ ", pageSize=" + pageSize + ", keyword=" + keyword
+				+ ", categoryId=" + categoryId + ", shopList=" + shopList
+				+ ", categoryList=" + categoryList + "]";
 	}
     
 }

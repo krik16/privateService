@@ -23,6 +23,9 @@ public class AppVersionVO implements Serializable {
 
 	private String instruction;// 升级说明
 
+	private String updatePic; //背景图片
+
+
 	public Boolean getIfUpdate() {
 		return ifUpdate;
 	}
@@ -71,4 +74,11 @@ public class AppVersionVO implements Serializable {
 		this.instruction = instruction;
 	}
 
+	public String getUpdatePic() {
+		return updatePic;
+	}
+
+	public void setUpdatePic(String updatePic) {
+		this.updatePic = updatePic;
+	}
 }
