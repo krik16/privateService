@@ -64,4 +64,26 @@ public class MallLifeSignUtil {
 
     }
 
+    /**
+     * 验证签名是否正确(按首字符排序后再验签)
+     * @param userThirdParam 请求参数
+     * @param token 约定token
+     * @return 错误 false; 正确 true
+     * @throws ThirdException
+     */
+    public static Boolean verificationSignSort(UserThirdParam userThirdParam,String token)throws ThirdException{
+        Boolean istrue=false;
+        try{
+            String str="channel="+userThirdParam.getChannel()+"&data="+userThirdParam.getData()+"&timeStamp="+userThirdParam.getTimeStamp()+"&token="+token;
+            String md5Sign= Md5Util.GetMD5Code(str);
+            if(md5Sign.equals(userThirdParam.getSign())){
+                istrue=true;
+            }
+        }catch (Exception e){
+            throw new ThirdException("验证签名发生异常");
+        }
+
+        return istrue;
+
+    }
 }
