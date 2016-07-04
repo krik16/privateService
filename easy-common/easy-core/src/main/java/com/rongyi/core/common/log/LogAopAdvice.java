@@ -45,23 +45,35 @@ public class LogAopAdvice
 
     public void clear()
     {
-        Integer logIdCount = Integer.parseInt(RpcContext.getContext().getAttachment("logidCount")) - 1;
-        if(logIdCount == 1){
+        if(RpcContext.getContext().getAttachment("logidCount") == null){
             RpcContext.removeContext();
         }
         else{
-            RpcContext.getContext().setAttachment("logidCount", String.valueOf(logIdCount));
+            Integer logIdCount = Integer.parseInt(RpcContext.getContext().getAttachment("logidCount")) - 1;
+            if(logIdCount == 1){
+                RpcContext.removeContext();
+            }
+            else{
+                RpcContext.getContext().setAttachment("logidCount", String.valueOf(logIdCount));
+            }
         }
     }
 
     public void exceptionProcess()
     {
-        Integer logIdCount = Integer.parseInt(RpcContext.getContext().getAttachment("logidCount")) - 1;
-        if(logIdCount == 1){
+        if(RpcContext.getContext().getAttachment("logidCount") == null){
             RpcContext.removeContext();
         }
-        else{
-            RpcContext.getContext().setAttachment("logidCount", String.valueOf(logIdCount));
+        else
+        {
+            Integer logIdCount = Integer.parseInt(RpcContext.getContext().getAttachment("logidCount")) - 1;
+            if (logIdCount == 1)
+            {
+                RpcContext.removeContext();
+            } else
+            {
+                RpcContext.getContext().setAttachment("logidCount", String.valueOf(logIdCount));
+            }
         }
     }
 
