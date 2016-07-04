@@ -12,7 +12,8 @@ package com.rongyi.va.service.impl;
 import com.rongyi.easy.va.entity.VirtualAccountEntity;
 import com.rongyi.rss.va.VirtualAccountAdminService;
 import com.rongyi.va.service.VirtualAccountService;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
@@ -22,7 +23,7 @@ import java.math.BigDecimal;
  *
  */
 public class VirtualAccountAdminServiceImpl implements VirtualAccountAdminService{
-	private Logger logger = Logger.getLogger(getClass());
+	private Logger logger = LoggerFactory.getLogger(getClass());
 	
     @Autowired
     VirtualAccountService virtualAccountService;
@@ -34,7 +35,7 @@ public class VirtualAccountAdminServiceImpl implements VirtualAccountAdminServic
 	*/
 	@Override
 	public boolean virtualAccountCreate(VirtualAccountEntity account) {
-		logger.info(">>>>>>>>>虚拟账号创建开始");
+		logger.info(">>>>>>>>>虚拟账号创建开始:account={}",account);
 		boolean result = false;
 		try {
 			account.setBalance(new BigDecimal(0));
@@ -51,7 +52,7 @@ public class VirtualAccountAdminServiceImpl implements VirtualAccountAdminServic
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error(e, e);
+			logger.error(e.getMessage());
 		}
 		logger.info(">>>>>>>>>虚拟账号创建结束");
 		return result;

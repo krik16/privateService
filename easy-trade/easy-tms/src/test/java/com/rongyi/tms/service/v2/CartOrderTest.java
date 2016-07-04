@@ -1,6 +1,5 @@
 package com.rongyi.tms.service.v2;
 
-import com.rongyi.core.common.PagingVO;
 import com.rongyi.easy.rmmm.vo.OrderManagerVO;
 import com.rongyi.rss.tradecenter.osm.IOrderQueryService;
 import com.rongyi.tms.BaseTest;
@@ -38,15 +37,15 @@ public class CartOrderTest extends BaseTest {
         for (int i = 0; i < TOTAL_SIZE / pageSize; i++) {
             paramsMap.put("pageSize", pageSize);
             paramsMap.put("currentPage", currentPage);
-            PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchSubListByMap(paramsMap);
-            List<OrderManagerVO> pageData = pagingVO.getDataList();
-            if (pageData != null) {
-                orderForms.addAll(pageData);
-                if (pageData.size() < pageSize)
-                    break;
-            } else
-                break;
-            currentPage++;
+//            PagingVO<OrderManagerVO> pagingVO = iOrderQueryService.searchSubListByMap(paramsMap);
+//            List<OrderManagerVO> pageData = pagingVO.getDataList();
+//            if (pageData != null) {
+//                orderForms.addAll(pageData);
+//                if (pageData.size() < pageSize)
+//                    break;
+//            } else
+//                break;
+//            currentPage++;
         }
         return orderForms;
     }

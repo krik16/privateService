@@ -1,10 +1,10 @@
-/** 
- * @Title: VirtualAccountServiceImpl.java 
- * @Package com.rongyi.va.service.impl 
+/**
+ * @Title: VirtualAccountServiceImpl.java
+ * @Package com.rongyi.va.service.impl
  * @Description: 虚拟账户综合访问接口实现
  * @author 郑亦梁  zhengyiliang@rongyi.com
  * @date 2015年5月25日 下午4:48:43 
- * @version V1.0   
+ * @version V1.0
  * Copyright (C),上海容易网电子商务有限公司
  */
 package com.rongyi.va.service.impl;
@@ -24,7 +24,7 @@ import java.math.BigDecimal;
 
 /**
  * @author ZhengYl
- * 
+ *
  */
 @Service
 public class VirtualAccountGeneralServiceImpl implements VirtualAccountGeneralService {
