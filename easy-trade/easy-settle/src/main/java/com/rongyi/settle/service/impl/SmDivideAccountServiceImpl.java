@@ -103,10 +103,16 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 		Date date = DateUtils.parseDate(new Date());
 		DivideAccountDto divideAccountDto = new DivideAccountDto();
 		divideAccountDto.setAccountDate(date);
+		
+		List<DivideAccountVo> divideAccountList = smDivideAccountMapper.findDivideAccountList(divideAccountDto);
+		if (CollectionUtils.isNotEmpty(divideAccountList)) {
+			log.info("分账定时器于"+DateUtils.formateDate(date)+"已生成账单");
+			return;
+		}
 		// 查询前一天B端商品订单
 		List<DivideAccountVo> orderList = this.findOrderList(divideAccountDto);
 		// for循环结果集，增加分账记录、分账详情记录
-		this.addSmDivideAccount(orderList);
+		this.doBatchAddSmDivideAccount(orderList);
 	}
 
 	/**
@@ -313,7 +319,7 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 	 * @param smDivideAccountList
 	 * @param smDivideAccountDetailList
 	 */
-	private void addSmDivideAccount(List<DivideAccountVo> divideAccountList) {
+	private void doBatchAddSmDivideAccount(List<DivideAccountVo> divideAccountList) {
 		if (CollectionUtils.isNotEmpty(divideAccountList)) {// 商品、卡券订单集合
 			// 分账信息map
 			Map<Integer, SmDivideAccount> mallMap = new HashMap<>();
@@ -341,7 +347,7 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 
 			List<SmDivideAccount> smDivideAccountList = new ArrayList<>(mallMap.values());
 			// 新增分账记录
-			this.batchAddDivideAccount(smDivideAccountList, shopMap);
+			this.doBatchAddDivideAccount(smDivideAccountList, shopMap);
 		}
 	}
 
@@ -399,7 +405,7 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 	 * @param smDivideAccountList
 	 * @param smDivideAccountMap
 	 */
-	private void batchAddDivideAccount(List<SmDivideAccount> smDivideAccountList,
+	private void doBatchAddDivideAccount(List<SmDivideAccount> smDivideAccountList,
 			Map<Integer, List<SmDivideAccountDetail>> smDivideAccountMap) {
 		Map<Integer, Integer> acountKeyMap = new HashMap<>();
 		List<SmDivideAccountDetail> resultList = new ArrayList<>();

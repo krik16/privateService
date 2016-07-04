@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -176,18 +177,17 @@ public class DivideAccountController extends BaseController {
 	}
 
 	private void validSessionUserInfo(SessionUserInfo sessionUserInfo) {
-		if (null == sessionUserInfo.getBindingMid()
+		if (StringUtils.isBlank(sessionUserInfo.getBindingMid())
 				|| !UserInfoConstant.divideAccounUserList.contains(sessionUserInfo.getIdentity())) {
 			throw new BizException(CodeEnum.FIAL_USER_IDENTITY);
 		}
 	}
 
 	/**
-	 * 查询分账详情列表
-	 * @param divideAccountDto
+	 * @Description 定时器生成账单
 	 */
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public void test() {
+	@RequestMapping(value = "/generateAccount", method = RequestMethod.GET)
+	public void generateAccount() {
 		smdivideAccountService.batchGenerateDivideAccount();
 	}
 }

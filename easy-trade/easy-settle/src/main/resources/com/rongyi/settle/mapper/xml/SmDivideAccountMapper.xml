@@ -394,4 +394,14 @@
 				#{mallMid}
 			</foreach>
 	</select>
+	
+	<!-- 查询分账集合 -->
+	<select id="findDivideAccountList"  parameterType="com.rongyi.easy.rpb.dto.DivideAccountDto" resultMap="VoResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sm_divide_account
+		where 
+			is_delete = 0
+		And bill_date = DATE_ADD(#{accountDate},INTERVAL -1 DAY)
+	</select>
 </mapper>

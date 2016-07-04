@@ -41,7 +41,23 @@ public interface SmDivideAccountMapper {
      */
     public List<DivideAccountVo> findTradeOrderList(DivideAccountDto divideAccountDto);
     
+    /**
+     * @Description 查询分账信息
+     * @param divideAccountDto
+     * @return
+     */
     public DivideAccountVo findDivideAccount(DivideAccountDto divideAccountDto);
     
+    /**
+     * @Description 根据mallMid查询mallId
+     * @param mallMidList
+     * @return
+     */
     public List<Integer> findMallIdList(List<String> mallMidList);
+    
+    /**
+     * @Description 查询账单集合 
+     * @return
+     */
+    public List<DivideAccountVo> findDivideAccountList(DivideAccountDto divideAccountDto);
 }
