@@ -392,11 +392,13 @@ public interface IContentService {
 
     /**
      * 查询潮人攻略列表数据
-     * @param pageSize
-     * @param currentPage
-     * @return
+     *
+     * @param mallMId
+     * @param shopMId
+     *@param pageSize
+     * @param currentPage   @return
      */
-    public PagingVO<ContentPojo> pagingRaidersList(int pageSize, Integer currentPage);
+    public PagingVO<ContentPojo> pagingRaidersList(String mallMId, String shopMId, int pageSize, Integer currentPage);
 
    public List<ContentConnectPojo> getContentConnectByContentId(String content_id);
 
