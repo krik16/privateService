@@ -4,6 +4,7 @@ import com.rongyi.easy.code.ImportInviteCodeParam;
 import com.rongyi.easy.code.InviteCodeVO;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Description: 活动相关的码需求接口
@@ -44,4 +45,6 @@ public interface ActivityCodeService {
      * @return
      */
     public boolean insertHannelsCodes(int count, Integer hannelsId, int type);
+
+    List<Map<String,Object>> getCouponCodesByHannelsId(Integer id);
 }

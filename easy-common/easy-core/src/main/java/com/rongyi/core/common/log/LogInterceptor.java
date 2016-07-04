@@ -16,8 +16,6 @@ import java.util.UUID;
  */
 public class LogInterceptor extends HandlerInterceptorAdapter {
 
-    private Logger logger = LoggerFactory.getLogger(LogInterceptor.class);
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         try
@@ -27,24 +25,9 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 
             org.slf4j.MDC.put("logid", logid);
             org.apache.log4j.MDC.put("logid", logid);
-            org.slf4j.MDC.put("logidFromController", logid);
-            org.apache.log4j.MDC.put("logidFromController", logid);
+
             RpcContext.getContext().setAttachment("logid", logid);
-
-            if(org.slf4j.MDC.get("logCount") != null){
-                org.slf4j.MDC.put("logCount",String.valueOf(Integer.parseInt(org.slf4j.MDC.get("logCount")) + 1));
-            }
-            else{
-                org.slf4j.MDC.put("logCount","1");
-            }
-
-            if(org.apache.log4j.MDC.get("logCount") != null){
-                org.apache.log4j.MDC.put("logCount",String.valueOf(Integer.parseInt(org.apache.log4j.MDC.get("logCount").toString()) + 1));
-            }
-            else{
-                org.apache.log4j.MDC.put("logCount","1");
-            }
-            logger.info("aop日志id={}",logid);
+            RpcContext.getContext().setAttachment("logidCount","1");
             return true;
         }
         catch (Exception e)
@@ -56,10 +39,8 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse response, Object o, ModelAndView modelAndView) throws Exception {
-
-        logger.info("拦截器销毁日志id={}",org.slf4j.MDC.get("logid"));
         org.slf4j.MDC.clear();
         org.apache.log4j.MDC.remove("logid");
-        org.apache.log4j.MDC.remove("logidFromController");
+        RpcContext.removeContext();
     }
 }
