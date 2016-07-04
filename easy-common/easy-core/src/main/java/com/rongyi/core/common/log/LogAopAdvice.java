@@ -19,8 +19,6 @@ import java.util.UUID;
  */
 public class LogAopAdvice
 {
-    Logger logger = LoggerFactory.getLogger(LogAopAdvice.class);
-
     public void logIdInit() {
 
 
@@ -36,32 +34,30 @@ public class LogAopAdvice
         if(RpcContext.getContext().getAttachment("logidCount") != null){
 
             Integer logIdCount = Integer.parseInt(RpcContext.getContext().getAttachment("logidCount")) + 1;
-            logger.info("日志id计数器不为空={}",logIdCount);
             RpcContext.getContext().setAttachment("logidCount", String.valueOf(logIdCount));
         }
         else{
-            logger.info("日志id计数器为空");
             RpcContext.getContext().setAttachment("logidCount", "1");
         }
 
         RpcContext.getContext().setAttachment("logid", logId);
-        logger.info("日志id={}",logId);
     }
 
     public void clear()
     {
         if(RpcContext.getContext().getAttachment("logidCount") == null){
-            logger.info("日志id计数器为空 清空logid");
             RpcContext.removeContext();
+            org.slf4j.MDC.clear();
+            org.apache.log4j.MDC.remove("logid");
         }
         else{
             Integer logIdCount = Integer.parseInt(RpcContext.getContext().getAttachment("logidCount")) - 1;
             if(logIdCount == 0){
-                logger.info("日志id计数器为1 清空logid");
                 RpcContext.removeContext();
+                org.slf4j.MDC.clear();
+                org.apache.log4j.MDC.remove("logid");
             }
             else{
-                logger.info("日志id计数器不为空");
                 RpcContext.getContext().setAttachment("logidCount", String.valueOf(logIdCount));
             }
         }
@@ -70,19 +66,20 @@ public class LogAopAdvice
     public void exceptionProcess()
     {
         if(RpcContext.getContext().getAttachment("logidCount") == null){
-            logger.info("日志id计数器为空 清空logid");
             RpcContext.removeContext();
+            org.slf4j.MDC.clear();
+            org.apache.log4j.MDC.remove("logid");
         }
         else
         {
             Integer logIdCount = Integer.parseInt(RpcContext.getContext().getAttachment("logidCount")) - 1;
             if (logIdCount == 0)
             {
-                logger.info("日志id计数器为1 清空logid");
                 RpcContext.removeContext();
+                org.slf4j.MDC.clear();
+                org.apache.log4j.MDC.remove("logid");
             } else
             {
-                logger.info("日志id计数器不为空");
                 RpcContext.getContext().setAttachment("logidCount", String.valueOf(logIdCount));
             }
         }
