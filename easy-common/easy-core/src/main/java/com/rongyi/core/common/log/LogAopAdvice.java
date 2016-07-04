@@ -19,7 +19,6 @@ import java.util.UUID;
  */
 public class LogAopAdvice
 {
-    private Logger logger = LoggerFactory.getLogger(LogAopAdvice.class);
 
     public void logIdInit() {
 
@@ -33,56 +32,48 @@ public class LogAopAdvice
         org.apache.log4j.MDC.put("logid", logId);
 
         //aop多次切入，计数，只有最后一次会清楚mdc的logid
-        if(org.slf4j.MDC.get("logCount") != null){
-            org.slf4j.MDC.put("logCount",String.valueOf(Integer.parseInt(org.slf4j.MDC.get("logCount")) + 1));
+        if(RpcContext.getContext().getAttachment("logidCount") != null){
+            Integer logIdCount = Integer.parseInt(RpcContext.getContext().getAttachment("logidCount")) + 1;
+            RpcContext.getContext().setAttachment("logidCount", String.valueOf(logIdCount));
         }
         else{
-            org.slf4j.MDC.put("logCount","1");
-        }
-
-        if(org.apache.log4j.MDC.get("logCount") != null){
-            org.apache.log4j.MDC.put("logCount",String.valueOf(Integer.parseInt(org.apache.log4j.MDC.get("logCount").toString()) + 1));
-        }
-        else{
-            org.apache.log4j.MDC.put("logCount","1");
+            RpcContext.getContext().setAttachment("logidCount", "1");
         }
 
         RpcContext.getContext().setAttachment("logid", logId);
-       // logger.info("aop日志id={}",logId);
     }
 
     public void clear()
     {
-
-        org.slf4j.MDC.put("logCount",String.valueOf(Integer.parseInt(org.slf4j.MDC.get("logCount")) - 1));
-        org.apache.log4j.MDC.put("logCount",String.valueOf(Integer.parseInt(org.apache.log4j.MDC.get("logCount").toString()) - 1));
-
-        if(Integer.parseInt(org.slf4j.MDC.get("logCount")) == 0)
-        {
-           // logger.info("aop销毁日志id={}",org.slf4j.MDC.get("logid"));
-            org.slf4j.MDC.remove("logid");
+        if(RpcContext.getContext().getAttachment("logidCount") == null){
+            RpcContext.removeContext();
         }
-
-        if(Integer.parseInt(org.apache.log4j.MDC.get("logCount").toString()) == 0)
-        {
-           // logger.info("aop销毁log4j日志id={}", org.apache.log4j.MDC.get("logid"));
-            org.apache.log4j.MDC.remove("logid");
+        else{
+            Integer logIdCount = Integer.parseInt(RpcContext.getContext().getAttachment("logidCount")) - 1;
+            if(logIdCount == 1){
+                RpcContext.removeContext();
+            }
+            else{
+                RpcContext.getContext().setAttachment("logidCount", String.valueOf(logIdCount));
+            }
         }
     }
 
     public void exceptionProcess()
     {
-        org.slf4j.MDC.put("logCount",String.valueOf(Integer.parseInt(org.slf4j.MDC.get("logCount")) - 1));
-        org.apache.log4j.MDC.put("logCount",String.valueOf(Integer.parseInt(org.apache.log4j.MDC.get("logCount").toString()) - 1));
-
-        if(Integer.parseInt(org.slf4j.MDC.get("logCount")) == 0)
-        {
-            org.slf4j.MDC.remove("logid");
+        if(RpcContext.getContext().getAttachment("logidCount") == null){
+            RpcContext.removeContext();
         }
-
-        if(Integer.parseInt(org.apache.log4j.MDC.get("logCount").toString()) == 0)
+        else
         {
-            org.apache.log4j.MDC.remove("logid");
+            Integer logIdCount = Integer.parseInt(RpcContext.getContext().getAttachment("logidCount")) - 1;
+            if (logIdCount == 1)
+            {
+                RpcContext.removeContext();
+            } else
+            {
+                RpcContext.getContext().setAttachment("logidCount", String.valueOf(logIdCount));
+            }
         }
     }
 
