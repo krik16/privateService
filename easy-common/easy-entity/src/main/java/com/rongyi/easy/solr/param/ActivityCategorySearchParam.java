@@ -14,7 +14,7 @@ public class ActivityCategorySearchParam implements Serializable {
     private static final long serialVersionUID = 578059263593575051L;
 
     // 城市MId
-    private String cityMId;
+    private String cityId;
     // 店铺id list
     private List<String> shopList;
     // 分类id list
@@ -28,12 +28,12 @@ public class ActivityCategorySearchParam implements Serializable {
         this.shopList = shopList;
     }
 
-    public String getCityMId() {
-        return cityMId;
+    public String getCityId() {
+        return cityId;
     }
 
-    public void setCityMId(String cityMId) {
-        this.cityMId = cityMId;
+    public void setCityId(String cityId) {
+        this.cityId = cityId;
     }
 
     public List<String> getCategoryList() {
@@ -48,7 +48,7 @@ public class ActivityCategorySearchParam implements Serializable {
     public String toString() {
         return "ActivityAreaSearchParam{" +
                 "categoryList=" + categoryList +
-                ", cityMId='" + cityMId + '\'' +
+                ", cityId='" + cityId + '\'' +
                 ", shopList=" + shopList +
                 '}';
     }

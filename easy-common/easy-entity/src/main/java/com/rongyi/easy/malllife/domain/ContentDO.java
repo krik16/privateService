@@ -64,33 +64,6 @@ public class ContentDO implements Serializable{
     private String connect_type;// 多关联类型 mall shop brand city all
     private String picture2;//新加入的封面图
     private String action_picture2;//新加入的列表图
-    private List<String> mallIds = Lists.newArrayList();
-    private List<String>  shopIds = Lists.newArrayList();
-    private List<String> brandIds =Lists.newArrayList();
-
-    public List<String> getMallIds() {
-        return mallIds;
-    }
-
-    public void setMallIds(List<String> mallIds) {
-        this.mallIds = mallIds;
-    }
-
-    public List<String> getShopIds() {
-        return shopIds;
-    }
-
-    public void setShopIds(List<String> shopIds) {
-        this.shopIds = shopIds;
-    }
-
-    public List<String> getBrandIds() {
-        return brandIds;
-    }
-
-    public void setBrandIds(List<String> brandIds) {
-        this.brandIds = brandIds;
-    }
 
     public String getPicture2() {
 		return picture2;
@@ -429,6 +402,35 @@ public class ContentDO implements Serializable{
 	}
 	public void setConnect_type(String connect_type) {
 		this.connect_type = connect_type;
+	}
+	@Override
+	public String toString() {
+		return "ContentDO [id=" + id + ", title=" + title + ", contentType="
+				+ contentType + ", category=" + category + ", contentStatus="
+				+ contentStatus + ", creator=" + creator + ", createDate="
+				+ createDate + ", updateDate=" + updateDate + ", mark=" + mark
+				+ ", picture=" + picture + ", content=" + content
+				+ ", actionStartDate=" + actionStartDate + ", actionEndDate="
+				+ actionEndDate + ", actionCost=" + actionCost
+				+ ", actionPicture=" + actionPicture + ", recommentView="
+				+ recommentView + ", referenceId=" + referenceId
+				+ ", markCount=" + markCount + ", indexDisplay=" + indexDisplay
+				+ ", mapPicture=" + mapPicture + ", description=" + description
+				+ ", referenceField1=" + referenceField1
+				+ ", actionPictureName=" + actionPictureName + ", position="
+				+ position + ", gatheringTime=" + gatheringTime
+				+ ", sameCityEndTime=" + sameCityEndTime
+				+ ", mettersAttentions=" + mettersAttentions
+				+ ", signupStartTime=" + signupStartTime + ", signupEndTime="
+				+ signupEndTime + ", participantsNumber=" + participantsNumber
+				+ ", participationNumber=" + participationNumber
+				+ ", celectionAddress=" + celectionAddress + ", visitedNum="
+				+ visitedNum + ", shareNum=" + shareNum + ", ballot=" + ballot
+				+ ", ballot_title=" + ballot_title + ", sharedTitle="
+				+ sharedTitle + ", activity_recommend=" + activity_recommend
+				+ ", userLimit=" + userLimit + ", grouponId=" + grouponId
+				+ ", connect_type=" + connect_type + ", picture2=" + picture2
+				+ ", action_picture2=" + action_picture2 + "]";
 	}
  
 }

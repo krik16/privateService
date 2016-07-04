@@ -103,4 +103,12 @@ public interface ROACooperationMallService {
 	 * 通过摩店用户id查询该用户关联商场的MongoId
 	 */
 	public String getMallMidByUserId(Integer userId) throws Exception;
+	
+	/**
+	 * 通过ID list 商场列表
+	 * @param mallIdList
+	 * @return
+	 * @throws Exception
+	 */
+	public List<MallEntity> getMallListByIds(List<String> mallIds) throws Exception ;
 }
