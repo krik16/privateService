@@ -48,7 +48,7 @@ public interface ActivitySolrService {
      * 给定活动Id查询活动明细（过滤来源）
      *     *
      * @param activityId
-     * @param showChannel   展示渠道  APP：4，互动屏：5, 微信：6    不填时默认app @param showChannel   展示渠道  APP：4，互动屏：5, 微信：6    不填时默认app
+     * @param showChannel   展示渠道  APP：4，互动屏：5, 微信：6    不填时默认app app
      * @return
      * @author wangjh7
      * @date 2016-07-04
