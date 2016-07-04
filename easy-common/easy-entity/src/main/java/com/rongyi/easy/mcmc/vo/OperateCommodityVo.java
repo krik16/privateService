@@ -19,6 +19,7 @@ public class OperateCommodityVo implements Serializable {
     private Integer  status;//商品状态
     private Date createAt ;//创建时间
     private String reason;
+    private String buyerAccount;
 
     public String getId() {
         return id;
@@ -98,5 +99,13 @@ public class OperateCommodityVo implements Serializable {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public String getBuyerAccount() {
+        return buyerAccount;
+    }
+
+    public void setBuyerAccount(String buyerAccount) {
+        this.buyerAccount = buyerAccount;
     }
 }
