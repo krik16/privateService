@@ -215,5 +215,5 @@ public interface ROAShopService {
      * @return
      * @throws Exception
      */
-    public List<ShopEntity> getShopsByIds(List<String> shopIds)  throws Exception;
+    public List<ShopEntity> getShopsByShopIds(List<String> shopIds)  throws Exception;
 }
