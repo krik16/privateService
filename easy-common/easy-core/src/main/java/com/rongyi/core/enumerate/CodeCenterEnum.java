@@ -40,7 +40,7 @@ public enum CodeCenterEnum {
     ERROR_VALIDCODE_TYPE(1021333, "type 不合法或者无效！"),
     ERROR_VALIDCODE_FALIURE(1021334, "验码失败！"),
     ERROR_VALIDCODE_TIMEOUT(1021335, "调用PHP接口超时异常！"),
-    ERROR_VALIDCODE_MUTEX(1021336, "该时间段内存在不同渠道的促销推广码,不能保存"),
+    ERROR_VALIDCODE_MUTEX(1021336, "同一类型码同一渠道同一时间段不能重复"),
     ERROR_VALIDCODE_REASON(1021337, "审核失败或作废理由为必填项"),
     ;
 
