@@ -21,7 +21,14 @@ public class MallAndShopVO implements Serializable{
     private Double[] location;//
     private String label; //标签 字符串
     private List<Integer> tip; ///< 店铺标签（格式：[0，0，0] 对应：[货，惠、劵]）
+    private String address;//地址
     
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 	public String getId() {
 		return id;
 	}
@@ -108,7 +115,7 @@ public class MallAndShopVO implements Serializable{
 				+ ", mall_id=" + mall_id + ", shop_own=" + shop_own
 				+ ", business_district=" + business_district + ", location="
 				+ Arrays.toString(location) + ", label=" + label + ", tip="
-				+ tip + "]";
+				+ tip + ", address=" + address + "]";
 	}
 	
 }

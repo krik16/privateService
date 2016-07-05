@@ -225,5 +225,7 @@ public interface IShopService{
      * @throws Exception
      */
     public List<ShopEntity> getShopsByShopIds(List<String> shopIds)  throws Exception;
+    
+    public List<ShopDetailVO> getShopVOsByShopIds(List<String> shopIds)   throws Exception;
 }
 
