@@ -17,6 +17,7 @@ public enum CodeCenterEnum {
     ERROR_INVALID_LENGTH(1021304, "length不合法或无效"),
     ERROR_INVALID_TYPE(1021304, "type不合法或无效"),
     ERROR_INVALID_CODE(1021305, "抱歉，您输入的券码异常，请确认后重新输入"),
+    ERROR_INVALID_NAME(1021308, "推广码名称已存在"),
     ERROR_INVALID_MALLID(1021306, "mallId不合法或无效"),
     ERROR_INVALID_COUNT(1021307, "count不合法或无效"),
     ERROR_UNLOGIN(1021309, "请重新登录！"),
@@ -40,7 +41,7 @@ public enum CodeCenterEnum {
     ERROR_VALIDCODE_FALIURE(1021334, "验码失败！"),
     ERROR_VALIDCODE_TIMEOUT(1021335, "调用PHP接口超时异常！"),
     ERROR_VALIDCODE_MUTEX(1021336, "该时间段内存在不同渠道的促销推广码,不能保存"),
-
+    ERROR_VALIDCODE_REASON(1021337, "审核失败或作废理由为必填项"),
     ;
 
 

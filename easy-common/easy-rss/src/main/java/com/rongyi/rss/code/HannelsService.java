@@ -65,4 +65,6 @@ public interface HannelsService {
      * @return
      */
     Hannels getHannelsById(int i);
+
+    boolean validParam(HannelsSaveParam hannelsSaveParam);
 }
