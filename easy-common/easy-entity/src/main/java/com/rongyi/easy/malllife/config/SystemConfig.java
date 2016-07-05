@@ -30,7 +30,7 @@ public class SystemConfig implements Serializable{
 
     public static final  String  SMS_KEY="SMSKEY";
 
-    public static final String TOUCH_KEY="";
+    public static final String TOUCH_KEY="touchConfig";
     /**
      *
      */
