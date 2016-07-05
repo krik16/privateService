@@ -1,13 +1,7 @@
 package com.rongyi.core.common.log;
 
-//import com.alibaba.dubbo.rpc.RpcContext;
 import com.alibaba.dubbo.rpc.RpcContext;
 import org.apache.commons.lang.StringUtils;
-//import org.apache.log4j.MDC;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-//import org.slf4j.MDC;
-import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
