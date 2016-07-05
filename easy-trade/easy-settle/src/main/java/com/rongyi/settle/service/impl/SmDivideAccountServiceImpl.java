@@ -337,8 +337,7 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 					if (mallMap.containsKey(mallId)) {
 						billBatchNo = mallMap.get(mallId).getBillBatchNo();
 					} else {
-						billBatchNo = this.getBillBatchNo(dateStr, num);
-						num++;
+						billBatchNo = this.getBillBatchNo(dateStr, num++);
 					}
 					// 填充分账信息, 分账详情信息
 					this.fillDivideAccountMap(billDate, billBatchNo, vo, mallMap, shopMap);
