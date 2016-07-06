@@ -46,9 +46,24 @@ public interface ActivityCodeService {
      */
     public boolean insertHannelsCodes(int count, Integer hannelsId, int type);
 
+    /**
+     * 推广码id查询生成的码code和创建时间
+     * @param id
+     * @return
+     */
     List<Map<String,Object>> getCouponCodesByHannelsId(Integer id);
 
+    /**
+     * 推广码id查询生成的码code
+     * @param param
+     * @return
+     */
     List<String> getCouponCodesByHannelsId(Map<String, Object> param);
 
+    /**
+     * 作废推广码修改关联的码状态
+     * @param updateParam
+     * @return
+     */
     int updateAcvityCode(Map<String, Object> updateParam);
 }

@@ -66,5 +66,10 @@ public interface HannelsService {
      */
     Hannels getHannelsById(int i);
 
+    /**
+     * 校验参数
+     * @param hannelsSaveParam
+     * @return
+     */
     boolean validParam(HannelsSaveParam hannelsSaveParam);
 }
