@@ -21,9 +21,9 @@ public class KeywordSearchHistory implements Serializable{
 	private int user_type ; // 1 for phone_user
 	private String request_ip;
 	private int search_type; // 1for commodity  2for shop/mall 3for activity
-	private String keyword;
+	private String keyword; ///< 关键字
 	private Date create_at;
-	private int total_count;
+	private int total_count; ///< 对应商品总数
 	public int getSearch_type() {
 		return search_type;
 	}
