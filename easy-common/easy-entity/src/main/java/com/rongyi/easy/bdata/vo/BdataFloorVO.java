@@ -24,6 +24,7 @@ public class BdataFloorVO implements Serializable {
     private String aliasename;
     private String aliasname;
     private String buildingId;
+    private String buildingType;
     private String businesstype;
     private String createdAt;
     private String name;
@@ -37,7 +38,16 @@ public class BdataFloorVO implements Serializable {
     private String simpleFloorName;//楼层图
     private Integer systemStatus;//1 隐藏 0正常
     private String  updated_at;
-    public int getCountShop() {
+    
+    
+    
+    public String getBuildingType() {
+		return buildingType;
+	}
+	public void setBuildingType(String buildingType) {
+		this.buildingType = buildingType;
+	}
+	public int getCountShop() {
 		return countShop;
 	}
 	public void setCountShop(int countShop) {
