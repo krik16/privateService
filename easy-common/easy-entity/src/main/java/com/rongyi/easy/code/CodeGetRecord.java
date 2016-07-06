@@ -19,6 +19,13 @@ public class CodeGetRecord {
 
     private String inviterAccount;
 
+    private Integer inviterId;
+
+    /**
+     * 0:店长；1：导购；2：买手
+     */
+    private Integer inviterType;
+
     public Integer getId() {
         return id;
     }
@@ -81,5 +88,38 @@ public class CodeGetRecord {
 
     public void setInviterAccount(String inviterAccount) {
         this.inviterAccount = inviterAccount;
+    }
+
+    public Integer getInviterId() {
+        return inviterId;
+    }
+
+    public void setInviterId(Integer inviterId) {
+        this.inviterId = inviterId;
+    }
+
+    public Integer getInviterType() {
+        return inviterType;
+    }
+
+    public void setInviterType(Integer inviterType) {
+        this.inviterType = inviterType;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("CodeGetRecord{");
+        sb.append("id=").append(id);
+        sb.append(", code='").append(code).append('\'');
+        sb.append(", createAt=").append(createAt);
+        sb.append(", userId='").append(userId).append('\'');
+        sb.append(", userPhone='").append(userPhone).append('\'');
+        sb.append(", userNickName='").append(userNickName).append('\'');
+        sb.append(", status=").append(status);
+        sb.append(", inviterAccount='").append(inviterAccount).append('\'');
+        sb.append(", inviterId=").append(inviterId);
+        sb.append(", inviterType=").append(inviterType);
+        sb.append('}');
+        return sb.toString();
     }
 }

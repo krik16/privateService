@@ -1,5 +1,7 @@
 package com.rongyi.easy.code;
 
+import com.rongyi.easy.coupon.entity.CouponChannel;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -85,6 +87,16 @@ public class Hannels implements Serializable{
     private String channelCode;
 
     private List<HannelsCoupon> coupons;
+
+    private CouponChannel couponChannel;
+
+    public CouponChannel getCouponChannel() {
+        return couponChannel;
+    }
+
+    public void setCouponChannel(CouponChannel couponChannel) {
+        this.couponChannel = couponChannel;
+    }
 
     public Integer getId() {
         return id;
