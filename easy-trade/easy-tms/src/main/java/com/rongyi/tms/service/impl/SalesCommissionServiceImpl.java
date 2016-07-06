@@ -449,9 +449,9 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 		List<SalesCommissionVO> overLimitList = new ArrayList<>();//超出限制的佣金记录
 		TransConfigurations transConfigurations;
 		if(guideType == 1) {
-			transConfigurations = roaRedisService.get(Constants.ConfigType.BUYER_TRANS_CONFIGURATIONS, TransConfigurations.class);
+			transConfigurations = roaRedisService.get(Constants.ConfigType.TRANS_CONFIGURATIONS, TransConfigurations.class);
 		}else{
-			transConfigurations = roaRedisService.get(Constants.ConfigType.BUYER_CONFIGURATIONS, TransConfigurations.class);
+			transConfigurations = roaRedisService.get(Constants.ConfigType.BUYER_TRANS_CONFIGURATIONS, TransConfigurations.class);
 		}
 		LOGGER.info("countMax={},dailyMax={}",transConfigurations.getCommissionCountMax(),transConfigurations.getCommissionDailyMax());
 		//查询出该导购/买手在昨天的所有佣金记录
