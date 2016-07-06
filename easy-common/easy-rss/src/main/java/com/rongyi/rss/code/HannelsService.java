@@ -72,4 +72,18 @@ public interface HannelsService {
      * @return
      */
     boolean validParam(HannelsSaveParam hannelsSaveParam);
+
+    /**
+     * id查询hannels信息
+     * @param hannelsId
+     * @return
+     */
+    HannelsVO selectById(int hannelsId);
+
+    /**
+     * @param channelId 渠道id
+     * @param type 0：渠道邀请码；1：渠道推广码
+     * @return
+     */
+    Hannels findCurrentHannels(Integer type,Integer channelId);
 }

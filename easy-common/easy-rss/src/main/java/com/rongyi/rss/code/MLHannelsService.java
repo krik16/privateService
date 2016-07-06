@@ -1,6 +1,8 @@
 package com.rongyi.rss.code;
 
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.core.framework.exception.CodeServiceException;
+import com.rongyi.easy.code.MLHannelsVO;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
 
 /**
@@ -10,6 +12,6 @@ import com.rongyi.easy.malllife.vo.UserInfoVO;
  * Package:com.rongyi.rss.code
  * Project:easy-market
  */
-public interface MSHannelsService {
-    public void getCouponsByInviteCode(String code,UserInfoVO userInfoVO) throws CodeServiceException;
+public interface MLHannelsService {
+    public MLHannelsVO getCouponsByInviteCode(String code,UserInfoVO userInfoVO) throws CodeServiceException;
 }
