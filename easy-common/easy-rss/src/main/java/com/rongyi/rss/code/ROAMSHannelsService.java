@@ -1,5 +1,6 @@
 package com.rongyi.rss.code;
 
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.core.framework.exception.CodeServiceException;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
 
@@ -17,5 +18,5 @@ public interface ROAMSHannelsService {
      * @param userInfoVO 容易逛用户信息
      * @throws CodeServiceException
      */
-    public void getCouponsByInviteCode(String code,UserInfoVO userInfoVO) throws CodeServiceException;
+    public ResponseVO getCouponsByInviteCode(String code,UserInfoVO userInfoVO) throws CodeServiceException;
 }
