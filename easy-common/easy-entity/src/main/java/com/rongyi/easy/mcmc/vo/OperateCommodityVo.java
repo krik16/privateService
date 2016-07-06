@@ -20,6 +20,7 @@ public class OperateCommodityVo implements Serializable {
     private Date createAt ;//创建时间
     private String reason;
     private String buyerAccount;
+    private Date soldOutAt;//下架时间
 
     public String getId() {
         return id;
@@ -107,5 +108,13 @@ public class OperateCommodityVo implements Serializable {
 
     public void setBuyerAccount(String buyerAccount) {
         this.buyerAccount = buyerAccount;
+    }
+
+    public Date getSoldOutAt() {
+        return soldOutAt;
+    }
+
+    public void setSoldOutAt(Date soldOutAt) {
+        this.soldOutAt = soldOutAt;
     }
 }
