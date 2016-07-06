@@ -9,6 +9,7 @@
  */
 package com.rongyi.tms.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.core.constant.Constants;
@@ -447,12 +448,13 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 		LOGGER.info("计算需处理的超上限的返佣记录,guideId={},guideType={}",guideId,guideType);
 		List<SalesCommissionVO> resultList = new ArrayList<>();//需要显示的待审核佣金记录
 		List<SalesCommissionVO> overLimitList = new ArrayList<>();//超出限制的佣金记录
-		TransConfigurations transConfigurations;
+		String result;
 		if(guideType == 1) {
-			transConfigurations = roaRedisService.get(Constants.ConfigType.TRANS_CONFIGURATIONS, TransConfigurations.class);
+			result = roaRedisService.get(Constants.ConfigType.TRANS_CONFIGURATIONS);
 		}else{
-			transConfigurations = roaRedisService.get(Constants.ConfigType.BUYER_TRANS_CONFIGURATIONS, TransConfigurations.class);
+			result = roaRedisService.get(Constants.ConfigType.BUYER_TRANS_CONFIGURATIONS);
 		}
+		TransConfigurations transConfigurations = JSON.parseObject(result, TransConfigurations.class);
 		LOGGER.info("countMax={},dailyMax={}",transConfigurations.getCommissionCountMax(),transConfigurations.getCommissionDailyMax());
 		//查询出该导购/买手在昨天的所有佣金记录
 		List<SalesCommissionVO> list = this.selectGuideYesterdayCommission(guideId, guideType);
