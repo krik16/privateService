@@ -101,83 +101,86 @@ public class AccessServiceImpl implements AccessService {
 		}
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public RyUserInfo getRyUserInfo(HttpServletRequest request, String needAuthority) {
 		String ryst = "";
 		RyUserInfo ryUserInfo;
+		Cookie c[] = request.getCookies();
+		if (c == null || c.length == 0) {
+			throw new BizException(CodeEnum.FIAL_USER_PARAMS_PAYMENT);
+		}
+		for (int i = 0; i < c.length; i++) {
+			if ("RYST".equals(c[i].getName())) {
+				ryst = c[i].getValue();
+				break;
+			}
+		}
+		logger.info("访问地址：" + request.getServletPath() + " RYST=" + ryst + " needAuthority=" + needAuthority);
+		if (StringUtils.isEmpty(ryst)) {
+			throw new BizException(CodeEnum.FIAL_USER_PARAMS_PAYMENT);
+		}
+		Map user;
 		try {
-			Cookie c[] = request.getCookies();
-			if (c == null || c.length == 0) {
-				throw new BizException(CodeEnum.FIAL_USER_PARAMS_PAYMENT);
-			}
-			for (int i = 0; i < c.length; i++) {
-				if ("RYST".equals(c[i].getName())) {
-					ryst = c[i].getValue();
-					break;
-				}
-			}
-			logger.info("访问地址：" + request.getServletPath() + " RYST=" + ryst + " needAuthority=" + needAuthority);
-			if (StringUtils.isEmpty(ryst)) {
-				throw new BizException(CodeEnum.FIAL_USER_PARAMS_PAYMENT);
-			}
-			Map user = ryUserService.getSessionUser(ryst, true);
-			if (user == null || !user.containsKey("userInfo")) {
-				logger.error("没有找到运营后台登录用户信息。");
-				throw new BizException(CodeEnum.FIAL_USER_PARAMS_PAYMENT);
-			}
-			ryUserInfo = (RyUserInfo) user.get("userInfo");
-			if (null == ryUserInfo || null == ryUserInfo.getId()) {
-				throw new BizException(CodeEnum.FIAL_USER_IDENTITY);
-			}
-			request.getSession().setAttribute("userName", ryUserInfo.getName());
-			List<String> authorities = (List<String>) user.get("authorities");
-			if (!this.checkNeedAuthority(needAuthority, authorities)) {
-				throw new BizException(CodeEnum.FIAL_NO_AUTHORITY_PAYMENT);
-			}
+			user = ryUserService.getSessionUser(ryst, true);
 		} catch (Exception e) {
-			logger.error("校验运营后台登录用户信息异常。", e);
+			logger.error("AccessService - 接口getRyUserInfo.ryUserService获取用户信息异常", e);
 			throw new BizException(CodeEnum.ERROR_SYSTEM);
+		}
+		if (user == null || !user.containsKey("userInfo")) {
+			logger.error("没有找到运营后台登录用户信息。");
+			throw new BizException(CodeEnum.FIAL_USER_PARAMS_PAYMENT);
+		}
+		ryUserInfo = (RyUserInfo) user.get("userInfo");
+		if (null == ryUserInfo || null == ryUserInfo.getId()) {
+			throw new BizException(CodeEnum.FIAL_USER_IDENTITY);
+		}
+		request.getSession().setAttribute("userName", ryUserInfo.getName());
+		List<String> authorities = (List<String>) user.get("authorities");
+		if (!this.checkNeedAuthority(needAuthority, authorities)) {
+			throw new BizException(CodeEnum.FIAL_NO_AUTHORITY_PAYMENT);
 		}
 		return ryUserInfo;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public SessionUserInfo getSessionUserInfo(HttpServletRequest request, String needAuthority) {
 		String bsst = "";
 		SessionUserInfo sessionUserInfo;
+		Cookie c[] = request.getCookies();
+		if (c == null || c.length == 0) {
+			throw new BizException(CodeEnum.FIAL_USER_PARAMS_PAYMENT);
+		}
+		for (int i = 0; i < c.length; i++) {
+			if ("BSST".equals(c[i].getName())) {
+				bsst = c[i].getValue();
+				break;
+			}
+		}
+		logger.info("访问地址：" + request.getServletPath() + " BSST=" + bsst + " needAuthority=" + needAuthority);
+		if (StringUtils.isEmpty(bsst)) {
+			throw new BizException(CodeEnum.FIAL_USER_PARAMS_PAYMENT);
+		}
+		Map user;
 		try {
-			Cookie c[] = request.getCookies();
-			if (c == null || c.length == 0) {
-				throw new BizException(CodeEnum.FIAL_USER_PARAMS_PAYMENT);
-			}
-			for (int i = 0; i < c.length; i++) {
-				if ("BSST".equals(c[i].getName())) {
-					bsst = c[i].getValue();
-					break;
-				}
-			}
-			logger.info("访问地址：" + request.getServletPath() + " BSST=" + bsst + " needAuthority=" + needAuthority);
-			if (StringUtils.isEmpty(bsst)) {
-				throw new BizException(CodeEnum.FIAL_USER_PARAMS_PAYMENT);
-			}
-			Map user = userInfoService.getSessionUser(bsst, true);
-			if (user == null || !user.containsKey("userInfo")) {
-				logger.error("没有找到商家后台登录用户信息。");
-				throw new BizException(CodeEnum.FIAL_USER_PARAMS_PAYMENT);
-			}
-			sessionUserInfo = (SessionUserInfo) user.get("userInfo");
-			request.getSession().setAttribute("userName", sessionUserInfo.getUserAccount());
-			logger.info("当前登录账号=" + sessionUserInfo.getUserAccount());
-			
-			if (null == sessionUserInfo || null == sessionUserInfo.getId() || null == sessionUserInfo.getIdentity()) {
-				throw new BizException(CodeEnum.FIAL_USER_IDENTITY);
-			}
-			List<String> authorities = (List<String>) user.get("authorities");
-			//TODO 权限
-//			if (!this.checkNeedAuthority(needAuthority, authorities)) {
-//				throw new BizException(CodeEnum.FIAL_NO_AUTHORITY_PAYMENT);
-//			}
+			user = userInfoService.getSessionUser(bsst, true);
 		} catch (Exception e) {
-			logger.error("校验商家后台登录用户信息异常。", e);
+			logger.error("AccessService - 接口getSessionUserInfo.userInfoService获取用户信息异常", e);
 			throw new BizException(CodeEnum.ERROR_SYSTEM);
+		}
+		if (user == null || !user.containsKey("userInfo")) {
+			logger.error("没有找到商家后台登录用户信息。");
+			throw new BizException(CodeEnum.FIAL_USER_PARAMS_PAYMENT);
+		}
+		sessionUserInfo = (SessionUserInfo) user.get("userInfo");
+		request.getSession().setAttribute("userName", sessionUserInfo.getUserAccount());
+		logger.info("当前登录账号=" + sessionUserInfo.getUserAccount());
+
+		if (null == sessionUserInfo || null == sessionUserInfo.getId() || null == sessionUserInfo.getIdentity()) {
+			throw new BizException(CodeEnum.FIAL_USER_IDENTITY);
+		}
+		List<String> authorities = (List<String>) user.get("authorities");
+		if (!this.checkNeedAuthority(needAuthority, authorities)) {
+			throw new BizException(CodeEnum.FIAL_NO_AUTHORITY_PAYMENT);
 		}
 		return sessionUserInfo;
 	}

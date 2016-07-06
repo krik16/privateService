@@ -141,13 +141,11 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 		List<DivideAccountVo> resultList = new ArrayList<>();
 		// 筛选非通用券订单
 		if (CollectionUtils.isNotEmpty(divideAccountVoList)) {
-			Map<String, DivideAccountVo> divideAccountMap = new HashMap<>();
 			List<String> couponIdList = new ArrayList<>();
 			for (DivideAccountVo vo : divideAccountVoList) {
 				if (null != vo && null != vo.getCouponId()) {
 					String couponId = vo.getCouponId();
 					couponIdList.add(couponId);
-					divideAccountMap.put(couponId, vo);
 				}
 			}
 
@@ -160,9 +158,15 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 					log.error("调用卡券接口异常：tradeCouponService.jugeGeneralByIds, 入参couponIdList: " + couponIdList, e);
 					throw new BizException(CodeEnum.ERROR_SYSTEM);
 				}
+				List<String> couponEnableIdList = new ArrayList<>();// 非通用券couponId集合
 				for (CouponGeneralVO vo : couponList) {
 					if (null != vo && null != vo.getCouponId() && !vo.getIsGeneral()) {
-						resultList.add(divideAccountMap.get(vo.getCouponId()));
+						couponEnableIdList.add(vo.getCouponId());
+					}
+				}
+				for (DivideAccountVo vo : divideAccountVoList) {
+					if (null != vo && null != vo.getCouponId() && couponEnableIdList.contains(vo.getCouponId())) {
+						resultList.add(vo);
 					}
 				}
 			}
