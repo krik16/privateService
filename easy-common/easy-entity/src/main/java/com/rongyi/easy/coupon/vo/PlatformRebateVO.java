@@ -88,6 +88,11 @@ public class PlatformRebateVO implements Serializable {
      */
     private List<VoucherVO> voucherVOs;
 
+    private List<String> shopsId;
+
+    private List<String> categoriesId;
+
+
     /**
      * 类型；0：满减类型；1：立减类型
      */
@@ -224,6 +229,22 @@ public class PlatformRebateVO implements Serializable {
 
     public void setPreferenceType(Integer preferenceType) {
         this.preferenceType = preferenceType;
+    }
+
+    public List<String> getShopsId() {
+        return shopsId;
+    }
+
+    public void setShopsId(List<String> shopsId) {
+        this.shopsId = shopsId;
+    }
+
+    public List<String> getCategoriesId() {
+        return categoriesId;
+    }
+
+    public void setCategoriesId(List<String> categoriesId) {
+        this.categoriesId = categoriesId;
     }
 
     // 券状态 0:未使用 1:已使用 2:已过期

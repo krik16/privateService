@@ -20,4 +20,10 @@ public interface ROAMLHannelsService {
      * @throws CodeServiceException
      */
     public MLHannelsVO getCouponsByInviteCode(String code,UserInfoVO userInfoVO) throws CodeServiceException;
+
+    /**
+     * 判断当前是否存在新人注册红包
+     * @return
+     */
+    public Boolean jugeHasRegisteCouponNow();
 }
