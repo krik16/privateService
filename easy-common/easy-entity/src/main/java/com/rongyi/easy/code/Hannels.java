@@ -1,5 +1,6 @@
 package com.rongyi.easy.code;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * Package:com.rongyi.code.entity
  * Project:easy-market
  */
-public class Hannels {
+public class Hannels implements Serializable{
     private Integer id;
 
     /**
@@ -82,6 +83,8 @@ public class Hannels {
      * 渠道邀请码
      */
     private String channelCode;
+
+    private List<HannelsCoupon> coupons;
 
     public Integer getId() {
         return id;
@@ -211,25 +214,35 @@ public class Hannels {
         this.updateBy = updateBy;
     }
 
+    public List<HannelsCoupon> getCoupons() {
+        return coupons;
+    }
+
+    public void setCoupons(List<HannelsCoupon> coupons) {
+        this.coupons = coupons;
+    }
+
     @Override
     public String toString() {
-        return "Hannels{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", validStartAt=" + validStartAt +
-                ", validEndAt=" + validEndAt +
-                ", count=" + count +
-                ", useLimit=" + useLimit +
-                ", remark='" + remark + '\'' +
-                ", createAt=" + createAt +
-                ", createBy='" + createBy + '\'' +
-                ", updateAt=" + updateAt +
-                ", updateBy='" + updateBy + '\'' +
-                ", status=" + status +
-                ", type=" + type +
-                ", hannelsCheckLogList=" + hannelsCheckLogList +
-                ", channelId=" + channelId +
-                ", channelCode='" + channelCode + '\'' +
-                '}';
+        final StringBuffer sb = new StringBuffer("Hannels{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", validStartAt=").append(validStartAt);
+        sb.append(", validEndAt=").append(validEndAt);
+        sb.append(", count=").append(count);
+        sb.append(", useLimit=").append(useLimit);
+        sb.append(", remark='").append(remark).append('\'');
+        sb.append(", createAt=").append(createAt);
+        sb.append(", createBy='").append(createBy).append('\'');
+        sb.append(", updateAt=").append(updateAt);
+        sb.append(", updateBy='").append(updateBy).append('\'');
+        sb.append(", status=").append(status);
+        sb.append(", type=").append(type);
+        sb.append(", hannelsCheckLogList=").append(hannelsCheckLogList);
+        sb.append(", channelId=").append(channelId);
+        sb.append(", channelCode='").append(channelCode).append('\'');
+        sb.append(", coupons=").append(coupons);
+        sb.append('}');
+        return sb.toString();
     }
 }
