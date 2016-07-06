@@ -453,6 +453,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 		}else{
 			transConfigurations = roaRedisService.get(Constants.ConfigType.BUYER_CONFIGURATIONS, TransConfigurations.class);
 		}
+		LOGGER.info("countMax={},dailyMax={}",transConfigurations.getCommissionCountMax(),transConfigurations.getCommissionDailyMax());
 		//查询出该导购/买手在昨天的所有佣金记录
 		List<SalesCommissionVO> list = this.selectGuideYesterdayCommission(guideId, guideType);
 		//买手id对应返佣记录map
