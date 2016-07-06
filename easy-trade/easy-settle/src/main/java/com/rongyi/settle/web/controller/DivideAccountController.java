@@ -52,8 +52,7 @@ public class DivideAccountController extends BaseController {
 	public ResponseVO list(@RequestBody DivideAccountDto divideAccountDto, HttpServletRequest request) {
 		SessionUserInfo sessionUserInfo;
 		try {
-			sessionUserInfo = accessService.getSessionUserInfo(request, "");// TODO
-																			// 权限
+			sessionUserInfo = accessService.getSessionUserInfo(request, "FUND_SPLIT_MGR");// 权限
 			this.validSessionUserInfo(sessionUserInfo); // 权限验证
 
 			this.fillPaginate(divideAccountDto);
@@ -116,6 +115,7 @@ public class DivideAccountController extends BaseController {
 	@RequestMapping(value = "/export", method = RequestMethod.GET)
 	public void export(Integer id, HttpServletRequest request, HttpServletResponse response) {
 		try {
+			accessService.getSessionUserInfo(request, "FUND_SPLIT_EXPORT");// 权限
 			// 校验入参
 			this.validExport(id);
 			log.info("进入方法-DivideAccountController.export, 入参id: " + id);
@@ -134,6 +134,7 @@ public class DivideAccountController extends BaseController {
 	@RequestMapping(value = "/exportAll", method = RequestMethod.GET)
 	public void exportAll(Integer divideAccountId, HttpServletRequest request, HttpServletResponse response) {
 		try {
+			accessService.getSessionUserInfo(request, "FUND_SPLIT_EXPORT");// 权限
 			// 校验入参
 			this.validExport(divideAccountId);
 			log.info("进入方法-DivideAccountController.exportAll, 入参divideAccountId: " + divideAccountId);

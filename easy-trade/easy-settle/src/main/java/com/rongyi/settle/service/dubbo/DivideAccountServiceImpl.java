@@ -1,13 +1,15 @@
 package com.rongyi.settle.service.dubbo;
 
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.rongyi.rss.settle.DivideAccountService;
 import com.rongyi.settle.service.SmDivideAccountService;
 
+@Service
 public class DivideAccountServiceImpl implements DivideAccountService {
 	
-	@Resource
+	@Autowired
 	private SmDivideAccountService smDivideAccountService;
 
 	@Override
