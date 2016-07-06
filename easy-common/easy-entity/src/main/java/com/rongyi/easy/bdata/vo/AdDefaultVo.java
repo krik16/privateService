@@ -29,6 +29,7 @@ public class AdDefaultVo implements Serializable {
 	private Long update_at;//记录更新时间long
 	private Integer status;//状态 1 有效 0 无效
 	private String sub_type;//全屏为空，330_home_a,330_home_d,318_home_b,318_home_d
+	private Integer module_type;//素材模板类型 素材模板 11 全屏模板-A 21 首页Banner-A 31 内页广告模板 12 全屏模板B-浮窗
 	/**
 	 * @return the defaultId
 	 */
@@ -197,7 +198,16 @@ public class AdDefaultVo implements Serializable {
 	public void setSub_type(String sub_type) {
 		this.sub_type = sub_type;
 	}
-	/** 
+
+	public Integer getModule_type() {
+		return module_type;
+	}
+
+	public void setModule_type(Integer module_type) {
+		this.module_type = module_type;
+	}
+
+	/**
 	* @Title: toString 
 	* @Description: TODO(这里用一句话描述这个方法的作用) 
 	* @param @return    设定文件 
