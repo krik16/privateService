@@ -31,7 +31,7 @@ public interface FloorService {
 	
 
 	
-	public List<BdataFloorVO> getMallFloors(String mallId,int currentpage, int pagesize);
+	public List<BdataFloorVO> getMallFloors(String mallId,int currentpage, int pagesize,String status);
 	
 	
 	public	String updateOrInsertFloor(BdataFloorVO vo);
