@@ -404,4 +404,5 @@ public interface IContentService {
 
     public ResponseVO pageSubMallAndShopVo(int pageSize, int currentPage, String refType, String contentId)throws Exception;
 
+    public ResponseVO existArticle(String mallId, String shopId);
 }

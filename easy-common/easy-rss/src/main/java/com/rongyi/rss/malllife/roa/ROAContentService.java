@@ -492,4 +492,5 @@ public interface ROAContentService {
     public ShopVO getShopInfoByShopId(String shopId);
 
     public List<ContentConnectPojo> getContentConnectByContentId(String content_id);
+    public ResponseVO existArticle(String mallId,String shopId);
 }
