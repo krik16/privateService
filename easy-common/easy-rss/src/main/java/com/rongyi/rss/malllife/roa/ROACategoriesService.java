@@ -14,7 +14,7 @@ import com.rongyi.easy.roa.entity.CategoriesEntity;
  */
 public interface ROACategoriesService {
 	
-	
+	public String insert(CategoriesEntity entity) throws Exception;
 	/**
      * 类别列表
      * @param parentId
