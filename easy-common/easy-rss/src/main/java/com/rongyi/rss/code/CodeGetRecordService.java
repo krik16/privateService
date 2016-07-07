@@ -13,5 +13,5 @@ public interface CodeGetRecordService {
      * @param param
      * @return
      */
-    PagingVO<CodeGetRecord> codeGetRecordPagingVO(InviteSearchParam param);
+    PagingVO<CodeGetRecord> codeGetRecordPagingVO(InviteSearchParam param,int searchType);
 }
