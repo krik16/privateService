@@ -15,7 +15,7 @@ import java.util.List;
  * Date: 2015/10/25 12:52
  */
 
-@Entity("zones")
+@Entity(value="zones", noClassnameStored = true)
 public class Floor implements Serializable {
     @Id
     private String id;

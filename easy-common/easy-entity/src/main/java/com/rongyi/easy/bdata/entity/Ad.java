@@ -13,7 +13,7 @@ import java.util.List;
  * User: chris
  * Date: 2015/10/27 1:33
  */
-@Entity("terminal_ads")
+@Entity(value="terminal_ads", noClassnameStored = true)
 public class Ad implements Serializable {
     private static final long serialVersionUID = 1L;
 

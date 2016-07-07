@@ -14,7 +14,7 @@ import org.mongodb.morphia.annotations.Id;
  * @author xiaobo
  *
  */
-@Entity("shops")
+@Entity(value="shops", noClassnameStored = true)
 public class Shop implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id

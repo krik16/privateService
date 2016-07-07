@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Desc: area User: chris Date: 2015/10/31 15:17
  */
-@Entity("common_types")
+@Entity(value="common_types", noClassnameStored = true)
 public class CommonTypes implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
