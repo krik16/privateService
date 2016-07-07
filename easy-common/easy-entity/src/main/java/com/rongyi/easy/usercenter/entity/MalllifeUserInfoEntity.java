@@ -33,7 +33,7 @@ public class MalllifeUserInfoEntity  implements Serializable {
     /** 手机号 */
     private String phone;
 
-    /** 版本号 */
+    /** 版本号   可做为登录次数(2010-07-23后的数据) */
     private Integer version;
 
     /*是否禁用 0 正常*/
@@ -81,6 +81,8 @@ public class MalllifeUserInfoEntity  implements Serializable {
     /** 是否领取红包 默认值0 未领取，1已领取 */
     private Integer loginRed;
 
+    private Integer loginTimes; //登录次数 2016-07开始，之前的只算一次
+
     /** 更新时间 */
     private Date updateAt;
 
@@ -106,6 +108,9 @@ public class MalllifeUserInfoEntity  implements Serializable {
 
     /** 商家公众号Id */
     private String publicNumId;
+
+
+
 
     /**
      * 用户uuid
@@ -193,6 +198,14 @@ public class MalllifeUserInfoEntity  implements Serializable {
      */
     public Integer getVersion() {
         return version;
+    }
+
+    public Integer getLoginTimes() {
+        return loginTimes;
+    }
+
+    public void setLoginTimes(Integer loginTimes) {
+        this.loginTimes = loginTimes;
     }
 
     /**

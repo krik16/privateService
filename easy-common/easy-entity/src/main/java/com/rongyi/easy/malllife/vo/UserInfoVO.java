@@ -32,9 +32,13 @@ public class UserInfoVO implements Serializable {
 
 	private String appCode = HuanXinConfig.IMCODE_SECOND;
 
-	private Boolean ischeck = false;
+	private Boolean ischeck = false; //判断是否领取到红包
+
+	private Boolean isDeductible=false;//是否领取到抵扣券
 
 	private int isLoginRed;// 是否领过红包
+
+	private Integer loginTimes; //登录次数 2016-07开始，之前的只算一次
 
 	private String devId;// 登录时设备的ID
 
@@ -49,12 +53,30 @@ public class UserInfoVO implements Serializable {
 
 	private String  publicNumId;//商家公众号Id
 	private int isGet;  // 0 失败， 1成功
+
+	public Integer getLoginTimes() {
+		return loginTimes;
+	}
+
+	public void setLoginTimes(Integer loginTimes) {
+		this.loginTimes = loginTimes;
+	}
+
 	public int getIsGet() {
 		return isGet;
 	}
 
 	public void setIsGet(int isGet) {
 		this.isGet = isGet;
+	}
+
+
+	public Boolean getDeductible() {
+		return isDeductible;
+	}
+
+	public void setDeductible(Boolean deductible) {
+		isDeductible = deductible;
 	}
 
 	public String getShareCode() {

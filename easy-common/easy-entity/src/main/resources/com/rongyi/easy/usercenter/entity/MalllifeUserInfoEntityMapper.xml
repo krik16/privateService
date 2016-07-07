@@ -28,6 +28,7 @@
     <result column="share_code" property="shareCode" jdbcType="VARCHAR" />
     <result column="regist_ip" property="registIp" jdbcType="VARCHAR" />
     <result column="public_num_id" property="publicNumId" jdbcType="VARCHAR" />
+    <result column="login_times" property="loginTimes" jdbcType="INTEGER" />
   </resultMap>
   <insert id="insert" parameterType="com.rongyi.easy.usercenter.entity.MalllifeUserInfoEntity" >
     insert into malllife_user_info (id, user_name, password, 
