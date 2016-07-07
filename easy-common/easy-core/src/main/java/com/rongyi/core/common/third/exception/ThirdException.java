@@ -11,12 +11,19 @@ package com.rongyi.core.common.third.exception;/*
 
 public class ThirdException extends Exception{
 
-    public ThirdException(){
+    private String code;
 
+    public ThirdException(){
+        super();
     }
 
     public ThirdException(String message) {
         super(message) ;
+    }
+
+    public ThirdException(String code,String message) {
+        super(message) ;
+        this.code = code;
     }
 
     public ThirdException(String message, Throwable cause) {
@@ -30,5 +37,11 @@ public class ThirdException extends Exception{
     public ThirdException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
+    public String getCode() {
+        return code;
+    }
 
+    public void setCode(String code) {
+        this.code = code;
+    }
 }
