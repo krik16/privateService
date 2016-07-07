@@ -96,6 +96,15 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 
 	private List<String> shopList;//店铺id集合
 	private List<String> categoryList;//分类id集合
+	private String couponId;//红包券id
+
+	public String getCouponId() {
+		return couponId;
+	}
+
+	public void setCouponId(String couponId) {
+		this.couponId = couponId;
+	}
 
 	public List<String> getShopList() {
 		return shopList;
@@ -386,7 +395,8 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 				+ ", minPrice=" + minPrice + ", maxPrice=" + maxPrice
 				+ ", zoneId=" + zoneId + ", commodityCode=" + commodityCode
 				+ ", keywordList=" + keywordList + ", shopList=" + shopList
-				+ ", categoryList=" + categoryList + "]";
+				+ ", categoryList=" + categoryList + ", couponId=" + couponId
+				+ "]";
 	}
 
 }
