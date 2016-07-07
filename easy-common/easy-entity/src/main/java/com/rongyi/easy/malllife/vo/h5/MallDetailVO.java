@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.rongyi.easy.malllife.vo.CommentsVO;
 import com.rongyi.easy.malllife.vo.MainCategoriesVO;
-import com.rongyi.easy.malllife.vo.Result;
 import com.rongyi.easy.malllife.vo.ShopCategoryVO;
 /**
  * 商场分享详情
@@ -40,6 +39,9 @@ public class MallDetailVO implements Serializable{
 	private List<CouponVO> coupons;//优惠信息
 	private List<CommodityShareVO> commodityList;//商品列表
 	private List<ShopCategoryVO> shopCategories;//入驻店铺列表
+	private boolean hasWonderFulAct; //精彩活动
+    private boolean hasDiscountAct; //优惠资讯
+    private boolean hasRaiders;//潮人攻略
 	public String getMallId() {
 		return mallId;
 	}
@@ -166,6 +168,24 @@ public class MallDetailVO implements Serializable{
 	public void setShopCategories(List<ShopCategoryVO> shopCategories) {
 		this.shopCategories = shopCategories;
 	}
+	public boolean isHasWonderFulAct() {
+		return hasWonderFulAct;
+	}
+	public void setHasWonderFulAct(boolean hasWonderFulAct) {
+		this.hasWonderFulAct = hasWonderFulAct;
+	}
+	public boolean isHasDiscountAct() {
+		return hasDiscountAct;
+	}
+	public void setHasDiscountAct(boolean hasDiscountAct) {
+		this.hasDiscountAct = hasDiscountAct;
+	}
+	public boolean isHasRaiders() {
+		return hasRaiders;
+	}
+	public void setHasRaiders(boolean hasRaiders) {
+		this.hasRaiders = hasRaiders;
+	}
 	@Override
 	public String toString() {
 		return "MallDetailVO [mallId=" + mallId + ", mallName=" + mallName
@@ -179,7 +199,9 @@ public class MallDetailVO implements Serializable{
 				+ ", shopCount=" + shopCount + ", appearancePic="
 				+ appearancePic + ", commentList=" + commentList + ", coupons="
 				+ coupons + ", commodityList=" + commodityList
-				+ ", shopCategories=" + shopCategories + "]";
+				+ ", shopCategories=" + shopCategories + ", hasWonderFulAct="
+				+ hasWonderFulAct + ", hasDiscountAct=" + hasDiscountAct
+				+ ", hasRaiders=" + hasRaiders + "]";
 	}
 	
 }

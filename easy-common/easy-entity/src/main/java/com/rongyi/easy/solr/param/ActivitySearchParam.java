@@ -41,6 +41,16 @@ public class ActivitySearchParam implements Serializable{
 
 	private String showChannel;//展示渠道  APP：4，互动屏：5, 微信：6    不填时默认app
 	private List<String> keywordList = new ArrayList<>();
+	
+	private String couponId;//红包券id
+
+	public String getCouponId() {
+		return couponId;
+	}
+
+	public void setCouponId(String couponId) {
+		this.couponId = couponId;
+	}
 
 	public List<String> getKeywordList() {
 		return keywordList;
@@ -222,6 +232,7 @@ public class ActivitySearchParam implements Serializable{
 				", startLetter='" + startLetter + '\'' +
 				", showChannel='" + showChannel + '\'' +
 				", keywordList=" + keywordList +
+				", couponId=" + couponId +
 				'}';
 	}
 
