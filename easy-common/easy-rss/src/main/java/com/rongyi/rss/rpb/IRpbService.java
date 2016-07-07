@@ -7,19 +7,16 @@
  **/
 package com.rongyi.rss.rpb;
 
-import java.util.List;
-import java.util.Map;
-
+import com.rongyi.core.Exception.TradeException;
 import com.rongyi.core.bean.ResponseData;
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.domain.PaymentLogInfo;
 import com.rongyi.easy.rpb.domain.WeixinMch;
-import com.rongyi.easy.rpb.vo.PayAccountUseTotal;
-import com.rongyi.easy.rpb.vo.PaymentParamVO;
-import com.rongyi.easy.rpb.vo.QueryOrderParamVO;
-import com.rongyi.easy.rpb.domain.WeixinMch;
 import com.rongyi.easy.rpb.vo.*;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: 柯军
@@ -103,6 +100,15 @@ public interface IRpbService {
 	 * @datetime:2015年8月24日下午5:46:02
 	 **/
 	Map<String, Object> getPaySign(MessageEvent event);
+
+	/**
+	 * @Description: 申请退款
+	 * @param event
+	 * @return
+	 * @Author:  柯军
+	 * @datetime:2015年8月24日下午5:46:02
+	 **/
+	Map<String, Object> refund(MessageEvent event) throws TradeException;
 
 	/**
 	 * @Description: 查询付款记录
