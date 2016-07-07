@@ -362,7 +362,7 @@
 		AND tso.id = tuo.sub_order_id
 		INNER JOIN ry_rmmm.shop_info si on si.shop_mid = tuo.shop_id
 		LEFT JOIN
-		ry_rmmm.mall_cooperate mc on mc.mall_mid = si.mall_mid
+		ry_rmmm.mall_cooperate mc on mc.id = si.mall_id
 		WHERE
 		tor.source IN (1, 2)
 		AND tuo.STATUS = 2
