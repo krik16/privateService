@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.rongyi.easy.malllife.vo.CommentsVO;
-import com.rongyi.easy.malllife.vo.Result;
 import com.rongyi.easy.notice.vo.MMNoticeVO;
 
 /**
@@ -47,6 +46,9 @@ public class ShopDetailVO implements Serializable{
 	private List<MayLikeShopVO> mayLikeShops;//可能喜欢的店铺列表
 	private MMNoticeVO noticeVo;//店铺公告
 	private List<CommentsVO> commentList;//评论列表
+	private boolean hasWonderFulAct; //精彩活动
+    private boolean hasDiscountAct; //优惠资讯
+    private boolean hasRaiders;//潮人攻略
 	public String getShopId() {
 		return shopId;
 	}
@@ -215,6 +217,24 @@ public class ShopDetailVO implements Serializable{
 	public void setCommentList(List<CommentsVO> commentList) {
 		this.commentList = commentList;
 	}
+	public boolean isHasWonderFulAct() {
+		return hasWonderFulAct;
+	}
+	public void setHasWonderFulAct(boolean hasWonderFulAct) {
+		this.hasWonderFulAct = hasWonderFulAct;
+	}
+	public boolean isHasDiscountAct() {
+		return hasDiscountAct;
+	}
+	public void setHasDiscountAct(boolean hasDiscountAct) {
+		this.hasDiscountAct = hasDiscountAct;
+	}
+	public boolean isHasRaiders() {
+		return hasRaiders;
+	}
+	public void setHasRaiders(boolean hasRaiders) {
+		this.hasRaiders = hasRaiders;
+	}
 	@Override
 	public String toString() {
 		return "ShopDetailVO [shopId=" + shopId + ", shopName=" + shopName
@@ -231,7 +251,9 @@ public class ShopDetailVO implements Serializable{
 				+ ", parking=" + parking + ", telephone=" + telephone
 				+ ", coupons=" + coupons + ", commodityList=" + commodityList
 				+ ", mayLikeShops=" + mayLikeShops + ", noticeVo=" + noticeVo
-				+ ", commentList=" + commentList + "]";
+				+ ", commentList=" + commentList + ", hasWonderFulAct="
+				+ hasWonderFulAct + ", hasDiscountAct=" + hasDiscountAct
+				+ ", hasRaiders=" + hasRaiders + "]";
 	}
 	
 }
