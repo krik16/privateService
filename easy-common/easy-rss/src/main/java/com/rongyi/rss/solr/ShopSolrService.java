@@ -84,28 +84,6 @@ public interface ShopSolrService {
 
 
 	/**
-	 * 清除标签（店铺/商场等）
-	 *
-	 * @param poiType     poi类型
-	 * @return
-	 * @author wangjh7
-	 * @date 2016-05-05
-	 */
-	public ResponseVO clearPOITip(EPOIType poiType);
-
-	/**
-	 * 更新标签的值
-	 *
-	 * @param poiType     POI类型
-	 * @param poiList     需要更新的ID及对应TIP的值
-	 * @param epoiTipType 更新的字段
-	 * @return
-	 * @author wangjh7
-	 * @date 2016-05-05
-	 */
-	public ResponseVO updatePOITip(EPOIType poiType, List<String> poiList, EPOITipType epoiTipType);
-
-	/**
 	 * 查询POIID对应标签的值
 	 *
 	 * @param poiIds 查询的ID及对应TIP的值
