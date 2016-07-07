@@ -9,6 +9,7 @@ import com.rongyi.easy.malllife.domain.ContentDO;
 import com.rongyi.easy.malllife.param.ActivitiesParam;
 import com.rongyi.easy.malllife.pojo.ContentConnectPojo;
 import com.rongyi.easy.malllife.pojo.ContentPojo;
+import com.rongyi.easy.malllife.pojo.ExistArticlePojo;
 import com.rongyi.easy.malllife.vo.*;
 
 import java.util.Date;
@@ -404,5 +405,5 @@ public interface IContentService {
 
     public ResponseVO pageSubMallAndShopVo(int pageSize, int currentPage, String refType, String contentId)throws Exception;
 
-    public ResponseVO existArticle(String mallId, String shopId);
+    public ExistArticlePojo existArticle(String mallId, String shopId);
 }
