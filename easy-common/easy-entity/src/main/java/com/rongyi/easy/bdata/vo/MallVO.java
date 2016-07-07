@@ -71,10 +71,10 @@ public class MallVO implements Serializable {
     private String merlogPic;  //商家后台logo
     private String mallGroupId;//商场所属集团id
     private String mallLevel;//商场等级
-    private String updatedAt;//修改时间
+    private Date updatedAt;//修改时间
     private String lastUpdateId;//最后修改人
     private String openTime;//开业时间
-    private String createdAt;//创建时间
+    private Date createdAt;//创建时间
     private String operatorId;//创建者
     private String operatorName;//创建者
     private String lastUpdateName;//修改者
@@ -174,13 +174,7 @@ public class MallVO implements Serializable {
 		this.lastUpdateName = lastUpdateName;
 	}
 
-	public String getUpdatedAt() {
-		return updatedAt;
-	}
 
-	public void setUpdatedAt(String updatedAt) {
-		this.updatedAt = updatedAt;
-	}
 
 	public String getLastUpdateId() {
 		return lastUpdateId;
@@ -192,11 +186,21 @@ public class MallVO implements Serializable {
 
 
 
-	public String getCreatedAt() {
+
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public Date getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(String createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
 
