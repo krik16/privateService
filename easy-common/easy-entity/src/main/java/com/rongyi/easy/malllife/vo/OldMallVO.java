@@ -32,6 +32,9 @@ public class OldMallVO implements Serializable{
 	private List<Double> location;
 	private String type;
 	private Integer shopCount;//商场下的店铺数量
+	private boolean hasWonderFulAct; //精彩活动
+    private boolean hasDiscountAct; //优惠资讯
+    private boolean hasRaiders;//潮人攻略
 
 	public String getId() {
 		return id;
@@ -203,6 +206,44 @@ public class OldMallVO implements Serializable{
 	}
 	public void setShopCount(Integer shopCount) {
 		this.shopCount = shopCount;
+	}
+	public boolean isHasWonderFulAct() {
+		return hasWonderFulAct;
+	}
+	public void setHasWonderFulAct(boolean hasWonderFulAct) {
+		this.hasWonderFulAct = hasWonderFulAct;
+	}
+	public boolean isHasDiscountAct() {
+		return hasDiscountAct;
+	}
+	public void setHasDiscountAct(boolean hasDiscountAct) {
+		this.hasDiscountAct = hasDiscountAct;
+	}
+	public boolean isHasRaiders() {
+		return hasRaiders;
+	}
+	public void setHasRaiders(boolean hasRaiders) {
+		this.hasRaiders = hasRaiders;
+	}
+	@Override
+	public String toString() {
+		return "OldMallVO [id=" + id + ", name=" + name + ", icon=" + icon
+				+ ", rank_avg=" + rank_avg + ", address=" + address
+				+ ", main_categories=" + main_categories + ", telephone="
+				+ telephone + ", mobile=" + mobile + ", transport_information="
+				+ transport_information + ", business_hours=" + business_hours
+				+ ", coord_x=" + coord_x + ", coord_y=" + coord_y
+				+ ", parking_count=" + parking_count + ", has_building="
+				+ has_building + ", appearance_pic=" + appearance_pic
+				+ ", parent_name=" + parent_name + ", mold=" + mold
+				+ ", parking_info=" + parking_info + ", production_count="
+				+ production_count + ", activity_count=" + activity_count
+				+ ", description=" + description + ", has_watched="
+				+ has_watched + ", collectionNum=" + collectionNum + ", title="
+				+ title + ", location=" + location + ", type=" + type
+				+ ", shopCount=" + shopCount + ", hasWonderFulAct="
+				+ hasWonderFulAct + ", hasDiscountAct=" + hasDiscountAct
+				+ ", hasRaiders=" + hasRaiders + "]";
 	}
 	
 }
