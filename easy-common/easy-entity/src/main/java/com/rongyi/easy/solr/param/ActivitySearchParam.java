@@ -18,6 +18,9 @@ public class ActivitySearchParam implements Serializable{
 
 	//0店铺1商场2品牌3分类（类似于美食,多个分类查询用“,”分割，如：1,2,3）
 	private String cat_id;
+	// 卡券本身适应的分类列表（目前在查看单个券适用的范围查询用到）
+	private List<String> srcCategoryList;
+
 	/** 自定义分类id */
 	private String custom_cat_id;
 	private String city_name; //城市名（如  上海&上海市）
@@ -50,7 +53,15 @@ public class ActivitySearchParam implements Serializable{
 	public void addKeywordList(String keyword) {
 		this.keywordList.add(keyword);
 	}
-	
+
+	public List<String> getSrcCategoryList() {
+		return srcCategoryList;
+	}
+
+	public void setSrcCategoryList(List<String> srcCategoryList) {
+		this.srcCategoryList = srcCategoryList;
+	}
+
 	public int getRequiredCoupon() {
 		return requiredCoupon;
 	}
@@ -185,14 +196,33 @@ public class ActivitySearchParam implements Serializable{
 	public void setCustom_cat_id(String custom_cat_id) {
 		this.custom_cat_id = custom_cat_id;
 	}
+
 	@Override
 	public String toString() {
-		return "ActivitySearchParam [keyword=" + keyword + ", distance=" + distance + ", coord_x=" + coord_x
-				+ ", coord_y=" + coord_y + ", cat_id=" + cat_id + ", custom_cat_id=" + custom_cat_id + ", city_name="
-				+ city_name + ", sort=" + sort + ", requiredCoupon=" + requiredCoupon + ", from=" + from + ", size="
-				+ size + ", brand_id=" + brand_id + ", zone_id=" + zone_id + ", shop_id=" + shop_id + ", holder_id="
-				+ holder_id + ", couponRequired=" + couponRequired + ", shopList=" + shopList + ", mallId=" + mallId
-				+ ", startLetter=" + startLetter + ", showChannel=" + showChannel + ", keywordList=" + keywordList + "]";
+		return "ActivitySearchParam{" +
+				"brand_id='" + brand_id + '\'' +
+				", keyword='" + keyword + '\'' +
+				", distance=" + distance +
+				", coord_x='" + coord_x + '\'' +
+				", coord_y='" + coord_y + '\'' +
+				", cat_id='" + cat_id + '\'' +
+				", srcCategoryList=" + srcCategoryList +
+				", custom_cat_id='" + custom_cat_id + '\'' +
+				", city_name='" + city_name + '\'' +
+				", sort='" + sort + '\'' +
+				", requiredCoupon=" + requiredCoupon +
+				", from=" + from +
+				", size=" + size +
+				", zone_id='" + zone_id + '\'' +
+				", shop_id='" + shop_id + '\'' +
+				", holder_id='" + holder_id + '\'' +
+				", couponRequired=" + couponRequired +
+				", shopList=" + shopList +
+				", mallId='" + mallId + '\'' +
+				", startLetter='" + startLetter + '\'' +
+				", showChannel='" + showChannel + '\'' +
+				", keywordList=" + keywordList +
+				'}';
 	}
 
 }

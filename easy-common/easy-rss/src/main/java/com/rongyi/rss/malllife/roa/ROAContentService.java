@@ -13,6 +13,7 @@ import com.rongyi.easy.malllife.domain.ContentDO;
 import com.rongyi.easy.malllife.param.ActivitiesParam;
 import com.rongyi.easy.malllife.pojo.ContentConnectPojo;
 import com.rongyi.easy.malllife.pojo.ContentPojo;
+import com.rongyi.easy.malllife.pojo.ExistArticlePojo;
 import com.rongyi.easy.malllife.vo.*;
 
 /*
@@ -492,4 +493,5 @@ public interface ROAContentService {
     public ShopVO getShopInfoByShopId(String shopId);
 
     public List<ContentConnectPojo> getContentConnectByContentId(String content_id);
+    public ExistArticlePojo existArticle(String mallId, String shopId);
 }

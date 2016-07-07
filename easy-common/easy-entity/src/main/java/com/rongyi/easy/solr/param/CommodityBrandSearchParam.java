@@ -16,8 +16,17 @@ public class CommodityBrandSearchParam extends BaseParam implements Serializable
     private String categoryId;//分类id
     private List<String> shopList;//店铺id集合
 	private List<String> categoryList;//分类id集合
+	private String couponId;//红包券id
     
 	
+
+	public String getCouponId() {
+		return couponId;
+	}
+
+	public void setCouponId(String couponId) {
+		this.couponId = couponId;
+	}
 
 	public List<String> getShopList() {
 		return shopList;
@@ -72,7 +81,8 @@ public class CommodityBrandSearchParam extends BaseParam implements Serializable
 		return "CommodityBrandSearchParam [currentPage=" + currentPage
 				+ ", pageSize=" + pageSize + ", keyword=" + keyword
 				+ ", categoryId=" + categoryId + ", shopList=" + shopList
-				+ ", categoryList=" + categoryList + "]";
+				+ ", categoryList=" + categoryList + ", couponId=" + couponId
+				+ "]";
 	}
     
 }

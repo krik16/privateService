@@ -21,8 +21,17 @@ public class ActivityCategorySearchParam  extends MalllifeBaseParam implements S
     private List<String> shopList;
     // 分类id list
     private List<String> categoryList;
+    private String couponId;//红包券id
 
-    public List<String> getShopList() {
+    public String getCouponId() {
+		return couponId;
+	}
+
+	public void setCouponId(String couponId) {
+		this.couponId = couponId;
+	}
+
+	public List<String> getShopList() {
         return shopList;
     }
 
@@ -46,12 +55,10 @@ public class ActivityCategorySearchParam  extends MalllifeBaseParam implements S
         this.categoryList = categoryList;
     }
 
-    @Override
-    public String toString() {
-        return "ActivityAreaSearchParam{" +
-                "categoryList=" + categoryList +
-                ", cityId='" + cityId + '\'' +
-                ", shopList=" + shopList +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "ActivityCategorySearchParam [cityId=" + cityId + ", shopList="
+				+ shopList + ", categoryList=" + categoryList + ", couponId="
+				+ couponId + "]";
+	}
 }
