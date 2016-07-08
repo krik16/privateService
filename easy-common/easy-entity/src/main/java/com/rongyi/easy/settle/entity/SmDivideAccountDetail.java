@@ -5,9 +5,9 @@ import java.util.Date;
 public class SmDivideAccountDetail {
     private Integer id;
 
-    private Integer mallId;
+    private String mallMid;
 
-    private Integer shopId;
+    private String shopMid;
 
     private Date billDate;
 
@@ -45,23 +45,23 @@ public class SmDivideAccountDetail {
         this.id = id;
     }
 
-    public Integer getMallId() {
-        return mallId;
-    }
+    public String getMallMid() {
+		return mallMid;
+	}
 
-    public void setMallId(Integer mallId) {
-        this.mallId = mallId;
-    }
+	public void setMallMid(String mallMid) {
+		this.mallMid = mallMid;
+	}
 
-    public Integer getShopId() {
-        return shopId;
-    }
+	public String getShopMid() {
+		return shopMid;
+	}
 
-    public void setShopId(Integer shopId) {
-        this.shopId = shopId;
-    }
+	public void setShopMid(String shopMid) {
+		this.shopMid = shopMid;
+	}
 
-    public Date getBillDate() {
+	public Date getBillDate() {
         return billDate;
     }
 

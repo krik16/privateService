@@ -25,11 +25,12 @@ public class DivideAccountDto extends BaseDto {
 	
 	private Integer divideAccountId;
 	
-	private Integer mallId;
+	private String mallMid;
 	
-	private Integer shopId;
+	private String shopMid;
 	
-	private List<Integer> mallIdList;
+	private List<String> mallMidList;
+	private List<String> shopMidList;
 
 	public String getMallName() {
 		return mallName;
@@ -87,28 +88,36 @@ public class DivideAccountDto extends BaseDto {
 		this.divideAccountId = divideAccountId;
 	}
 
-	public Integer getMallId() {
-		return mallId;
+	public String getMallMid() {
+		return mallMid;
 	}
 
-	public void setMallId(Integer mallId) {
-		this.mallId = mallId;
+	public void setMallMid(String mallMid) {
+		this.mallMid = mallMid;
 	}
 
-	public Integer getShopId() {
-		return shopId;
+	public String getShopMid() {
+		return shopMid;
 	}
 
-	public void setShopId(Integer shopId) {
-		this.shopId = shopId;
+	public void setShopMid(String shopMid) {
+		this.shopMid = shopMid;
 	}
 
-	public List<Integer> getMallIdList() {
-		return mallIdList;
+	public List<String> getMallMidList() {
+		return mallMidList;
 	}
 
-	public void setMallIdList(List<Integer> mallIdList) {
-		this.mallIdList = mallIdList;
+	public void setMallMidList(List<String> mallMidList) {
+		this.mallMidList = mallMidList;
 	}
-	
+
+	public List<String> getShopMidList() {
+		return shopMidList;
+	}
+
+	public void setShopMidList(List<String> shopMidList) {
+		this.shopMidList = shopMidList;
+	}
+
 }
