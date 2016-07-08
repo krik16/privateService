@@ -63,9 +63,6 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 	@Autowired
 	private ROAMallService mallService;
 
-//	@Autowired
-//	private ROAShopService shopService;
-
 	@Autowired
 	private ShopService bdatashopService;
 
@@ -83,7 +80,7 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 			return new ArrayList<DivideAccountVo>();
 		}
 		divideAccountDto.setMallMidList(intersectMallMidList);
-		
+
 		List<DivideAccountVo> resultList = smDivideAccountMapper.findPageList(divideAccountDto);
 		// 获取shopMids集合
 		this.fillMallInfo(resultList);
@@ -464,7 +461,7 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 		List<DivideAccountVo> orderList = this.findOrderList(divideAccountDto);
 
 		// 导出邀请码
-		this.doExport(request, response, orderList);
+		this.doExport(request, response, orderList, Boolean.TRUE);
 	}
 
 	/**
@@ -480,10 +477,10 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 		DivideAccountDto divideAccountDto = new DivideAccountDto();
 		divideAccountDto.setAccountDate(DateUtil.getDaysInAdd(smDivideAccount.getBillDate(), 1));
 		divideAccountDto.setMallMid(smDivideAccount.getMallMid());
-		
+
 		List<String> shopMidList = new ArrayList<>();// 根据mallMid查询shopMidList
 		List<DivideAccountVo> divideAccountVoList = smDivideAccountDetailMapper.findDetailList(divideAccountDto);
-		for (DivideAccountVo vo:divideAccountVoList) {
+		for (DivideAccountVo vo : divideAccountVoList) {
 			if (null != vo && StringUtils.isNotBlank(vo.getShopMid())) {
 				shopMidList.add(vo.getShopMid());
 			}
@@ -497,11 +494,11 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 			orderList = this.findOrderList(divideAccountDto);
 		}
 		// 导出邀请码
-		this.doExport(request, response, orderList);
+		this.doExport(request, response, orderList, Boolean.FALSE);
 	}
 
 	private void doExport(HttpServletRequest request, HttpServletResponse response,
-			List<DivideAccountVo> divideAccoutList) {
+			List<DivideAccountVo> divideAccoutList, Boolean isSingle) {
 		String path = request.getSession().getServletContext().getRealPath(File.separator);
 		InputStream myxls;
 		XSSFWorkbook wb;
@@ -517,8 +514,14 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 		try {
 			// 初始化邀请码
 			this.initDivideAccountExport(sheet, divideAccoutList);
+			String prefix;
+			if (isSingle) {
+				prefix = divideAccoutList.get(0).getShopName() + "-";
+			} else {
+				prefix = "全部";
+			}
 			// 导出名称
-			String outFile = "分账详情" + DateUtil.getCurrentDateYYYYMMDD() + ".xlsx";
+			String outFile = prefix + "分账详情" + DateUtil.getCurrentDateYYYYMMDD() + ".xlsx";
 
 			ExcelUtil.exportExcel(response, wb, outFile);
 		} catch (Exception e) {
@@ -581,49 +584,6 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 		log.info("账号所拥有的商场：" + mallMidList);
 		return mallMidList;
 	}
-
-//	private String getMallMidByShopMid(String shopMid) {
-//		String id = "";
-//		try {
-//			ShopVO shopVo = shopService.getShopVOById(shopMid);
-//			if (null != shopVo && StringUtils.isNotBlank(shopVo.getMall_id())) {
-//				String mallMid = shopVo.getMall_id();
-//				MallVO mallVo = mallService.getMallVOById(mallMid);
-//				if (null != mallVo) {
-//					id = mallVo.getId();
-//				}
-//			}
-//		} catch (Exception e) {
-//			log.error("调用店铺接口异常, SmDivideAccountServiceImpl.getMallMidByShopMid", e);
-//		}
-//		return id;
-//	}
-
-//	private MallVO getMallByShopMid(String shopMid) {
-//		MallVO mallVo;
-//		ShopVO shopVo;
-//		try {
-//			shopVo = shopService.getShopVOById(shopMid);
-//		} catch (Exception e) {
-//			log.error("调用店铺接口异常, SmDivideAccountServiceImpl.getShopVOById", e);
-//			throw new BizException(CodeEnum.ERROR_SYSTEM);
-//		}
-//		if (null == shopVo || StringUtils.isBlank(shopVo.getMall_id())) {
-//			throw new BizException(CodeEnum.SHOP_NOT_EXIST);
-//		}
-//
-//		try {
-//			String mallMid = shopVo.getMall_id();
-//			mallVo = mallService.getMallVOById(mallMid);
-//		} catch (Exception e) {
-//			log.error("调用店铺接口异常, SmDivideAccountServiceImpl.getMallVOById", e);
-//			throw new BizException(CodeEnum.ERROR_SYSTEM);
-//		}
-//		if (null == mallVo) {
-//			throw new BizException(CodeEnum.MALL_NOT_EXIST);
-//		}
-//		return mallVo;
-//	}
 
 	private MallVO getMallByMallMid(String mallMid) {
 		MallVO mallVo;
@@ -736,9 +696,9 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 		}
 		return mallVoList;
 	}
-	
+
 	/**
-	 * @Description 获取用户能权限下的商场，和输入的商场名称集合的交集 
+	 * @Description 获取用户能权限下的商场，和输入的商场名称集合的交集
 	 * @param mallMidList
 	 * @param mallName
 	 */
@@ -749,16 +709,16 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 				return new ArrayList<>();
 			}
 			// 并集
-//			mallMidList.removeAll(mallMidNameList);
-//			mallMidList.addAll(mallMidNameList);
+			// mallMidList.removeAll(mallMidNameList);
+			// mallMidList.addAll(mallMidNameList);
 			// 交集
 			mallMidList.retainAll(mallMidNameList);
 		}
 		return mallMidList;
 	}
-	
+
 	/**
-	 * @Description 根据mallName，模糊查询mallId集合 
+	 * @Description 根据mallName，模糊查询mallId集合
 	 * @param mallName
 	 * @return
 	 */
@@ -766,7 +726,7 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 		List<String> mallMidList = new ArrayList<>();
 		List<com.rongyi.easy.bdata.vo.MallVO> mallVoList = this.getMallVoByMallName(mallName);
 		if (CollectionUtils.isNotEmpty(mallVoList)) {
-			for (com.rongyi.easy.bdata.vo.MallVO vo:mallVoList) {
+			for (com.rongyi.easy.bdata.vo.MallVO vo : mallVoList) {
 				mallMidList.add(vo.getId());
 			}
 		}
@@ -774,7 +734,7 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 	}
 
 	/**
-	 * @Description 根据mallName，模糊查询MallVo集合 
+	 * @Description 根据mallName，模糊查询MallVo集合
 	 * @param mallName
 	 * @return
 	 */
@@ -792,7 +752,7 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 		}
 		return mallVoList;
 	}
-	
+
 	private void fillMallInfo(List<DivideAccountVo> divideAccountVoList) {
 		if (CollectionUtils.isNotEmpty(divideAccountVoList)) {
 			StringBuilder mallSb = new StringBuilder();// 商场ID
@@ -822,7 +782,7 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 			}
 		}
 	}
-	
+
 	private void fillShopInfo(List<DivideAccountVo> divideAccountVoList) {
 		if (CollectionUtils.isNotEmpty(divideAccountVoList)) {
 			StringBuilder shopSb = new StringBuilder();// 商场ID
