@@ -103,6 +103,8 @@ public class PlatformRebateVO implements Serializable {
      */
     private String unUsableReason;
 
+    private String limitDesc;//使用限制
+
     public String getCouponId() {
         return couponId;
     }
@@ -247,6 +249,14 @@ public class PlatformRebateVO implements Serializable {
         this.categoriesId = categoriesId;
     }
 
+    public String getLimitDesc() {
+        return limitDesc;
+    }
+
+    public void setLimitDesc(String limitDesc) {
+        this.limitDesc = limitDesc;
+    }
+
     // 券状态 0:未使用 1:已使用 2:已过期
     public void setConvertStatus(Integer status, Date validEndAt) {
         if (UserRedenvelope.STATUS_UNUSE.equals(status) && new Date().before(validEndAt))
@@ -272,6 +282,7 @@ public class PlatformRebateVO implements Serializable {
         sb.append(", applyGoods=").append(applyGoods);
         sb.append(", relatedType=").append(relatedType);
         sb.append(", usageDesc='").append(usageDesc).append('\'');
+        sb.append(", limitDesc='").append(limitDesc).append('\'');
         sb.append(", commodityIds=").append(commodityIds);
         sb.append(", voucherVOs=").append(voucherVOs);
         sb.append(", preferenceType=").append(preferenceType);
