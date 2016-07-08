@@ -30,6 +30,7 @@ public enum CodeEnum {
 	NOT_EXIST_DIVIDE_ACCOUNT(1018101, "分账不存在"),
 	FAIL_GENERATE_XML(1018102,"生成xlsx异常"),
 	MALL_NOT_EXIST(1018103,"商场信息错误"),
+	SHOP_NOT_EXIST(1018104,"店铺信息错误"),
 	SUCCESS("0", "正常"),;
 
 	private Object code;

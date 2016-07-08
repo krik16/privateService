@@ -3,8 +3,8 @@
 <mapper namespace="com.rongyi.settle.mapper.SmDivideAccountDetailMapper">
 	<resultMap id="BaseResultMap" type="com.rongyi.easy.settle.entity.SmDivideAccountDetail">
 		<id column="id" property="id" jdbcType="INTEGER" />
-		<result column="mall_id" property="mallId" jdbcType="INTEGER" />
-		<result column="shop_id" property="shopId" jdbcType="INTEGER" />
+		<result column="mall_mid" property="mallMid" jdbcType="INTEGER" />
+		<result column="shop_mid" property="shopMid" jdbcType="INTEGER" />
 		<result column="bill_date" property="billDate" jdbcType="DATE" />
 		<result column="bill_batch_no" property="billBatchNo" jdbcType="VARCHAR" />
 		<result column="divide_account_id" property="divideAccountId" jdbcType="INTEGER" />
@@ -21,11 +21,9 @@
 		<result column="is_delete" property="isDelete" jdbcType="TINYINT" />
 	</resultMap>
 	<resultMap id="VoResultMap" type="com.rongyi.settle.vo.DivideAccountVo" extends="BaseResultMap">
-		<result column="shop_name" property="shopName" jdbcType="VARCHAR" />
-		<result column="mall_name" property="mallName" jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		id, mall_id, shop_id, bill_date, bill_batch_no, divide_account_id, order_num, unit_num,
+		id, mall_mid, shop_mid, bill_date, bill_batch_no, divide_account_id, order_num, unit_num,
 		pay_amount, rebate_amount, mall_score, settle_amount, create_by, update_by, create_at,
 		update_at, is_delete
 	</sql>
@@ -41,7 +39,7 @@
 	</delete>
 	<insert id="insert" parameterType="com.rongyi.easy.settle.entity.SmDivideAccountDetail">
 		insert into sm_divide_account_detail (
-			id, mall_id, shop_id,
+			id, mall_mid, shop_mid,
 			bill_date, bill_batch_no, divide_account_id,
 			order_num, unit_num, pay_amount,
 			rebate_amount, mall_score, settle_amount,
@@ -49,7 +47,7 @@
 			update_at, is_delete
 		)
 		values (
-			#{id,jdbcType=INTEGER}, #{mallId,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER},
+			#{id,jdbcType=INTEGER}, #{mallMid,jdbcType=INTEGER}, #{shopMid,jdbcType=INTEGER},
 			#{billDate,jdbcType=DATE}, #{billBatchNo,jdbcType=VARCHAR}, #{divideAccountId,jdbcType=INTEGER},
 			#{orderNum,jdbcType=INTEGER}, #{unitNum,jdbcType=INTEGER}, #{payAmount,jdbcType=INTEGER},
 			#{rebateAmount,jdbcType=INTEGER}, #{mallScore,jdbcType=INTEGER}, #{settleAmount,jdbcType=INTEGER},
@@ -63,11 +61,11 @@
 			<if test="id != null">
 				id,
 			</if>
-			<if test="mallId != null">
-				mall_id,
+			<if test="mallMid != null">
+				mall_mid,
 			</if>
-			<if test="shopId != null">
-				shop_id,
+			<if test="shopMid != null">
+				shop_mid,
 			</if>
 			<if test="billDate != null">
 				bill_date,
@@ -116,11 +114,11 @@
 			<if test="id != null">
 				#{id,jdbcType=INTEGER},
 			</if>
-			<if test="mallId != null">
-				#{mallId,jdbcType=INTEGER},
+			<if test="mallMid != null">
+				#{mallMid,jdbcType=INTEGER},
 			</if>
-			<if test="shopId != null">
-				#{shopId,jdbcType=INTEGER},
+			<if test="shopMid != null">
+				#{shopMid,jdbcType=INTEGER},
 			</if>
 			<if test="billDate != null">
 				#{billDate,jdbcType=DATE},
@@ -169,11 +167,11 @@
 	<update id="updateByPrimaryKeySelective" parameterType="com.rongyi.easy.settle.entity.SmDivideAccountDetail">
 		update sm_divide_account_detail
 		<set>
-			<if test="mallId != null">
-				mall_id = #{mallId,jdbcType=INTEGER},
+			<if test="mallMid != null">
+				mall_mid = #{mallMid,jdbcType=INTEGER},
 			</if>
-			<if test="shopId != null">
-				shop_id = #{shopId,jdbcType=INTEGER},
+			<if test="shopMid != null">
+				shop_mid = #{shopMid,jdbcType=INTEGER},
 			</if>
 			<if test="billDate != null">
 				bill_date = #{billDate,jdbcType=DATE},
@@ -222,8 +220,8 @@
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.rongyi.easy.settle.entity.SmDivideAccountDetail">
 		update sm_divide_account_detail
-		set mall_id = #{mallId,jdbcType=INTEGER},
-		shop_id = #{shopId,jdbcType=INTEGER},
+		set mall_mid = #{mallMid,jdbcType=INTEGER},
+		shop_mid = #{shopMid,jdbcType=INTEGER},
 		bill_date = #{billDate,jdbcType=DATE},
 		bill_batch_no = #{billBatchNo,jdbcType=VARCHAR},
 		divide_account_id = #{divideAccountId,jdbcType=INTEGER},
@@ -249,15 +247,16 @@
 			sdad.order_num,
 			sdad.unit_num,
 			sdad.pay_amount,
-			mc.mall_name,
-			si.shop_name
+			sdad.shop_mid,
+			sdad.mall_mid
 		from
 		sm_divide_account_detail sdad
-		LEFT JOIN ry_rmmm.shop_info si on si.id = sdad.shop_id
-		LEFT JOIN ry_rmmm.mall_cooperate mc ON mc.id = sdad.mall_id
 		where sdad.is_delete = 0
 		<if test="divideAccountId != null and divideAccountId != ''">
 			and sdad.divide_account_id = #{divideAccountId}
+		</if>
+		<if test="mallMid != null and mallMid != ''">
+			and mall_mid = #{mallMid}
 		</if>
 	</sql>
 	
@@ -275,10 +274,14 @@
 		) pg
 	</select>
 	
+	<select id="findDetailList" parameterType="com.rongyi.easy.rpb.dto.DivideAccountDto" resultMap="VoResultMap">
+		<include refid="selectPageList"></include>
+	</select>
+	
 	<insert id="batchInsertSelective" parameterType="com.rongyi.easy.settle.entity.SmDivideAccountDetail">
 		insert into sm_divide_account_detail
 			(
-				mall_id, shop_id,
+				mall_mid, shop_mid,
 				bill_date, bill_batch_no, divide_account_id,
 				order_num, unit_num, pay_amount,
 				create_by, update_by, create_at, update_at
@@ -286,7 +289,7 @@
 		values			
 		<foreach collection="list" item="sm" index="index" separator=",">
 			(
-				#{sm.mallId,jdbcType=INTEGER}, #{sm.shopId,jdbcType=INTEGER},
+				#{sm.mallMid,jdbcType=INTEGER}, #{sm.shopMid,jdbcType=INTEGER},
 				#{sm.billDate,jdbcType=DATE}, #{sm.billBatchNo,jdbcType=VARCHAR}, #{sm.divideAccountId,jdbcType=INTEGER},
 				#{sm.orderNum,jdbcType=INTEGER}, #{sm.unitNum,jdbcType=INTEGER}, #{sm.payAmount,jdbcType=INTEGER},
 				#{sm.createBy,jdbcType=VARCHAR}, #{sm.updateBy,jdbcType=VARCHAR}, now(),

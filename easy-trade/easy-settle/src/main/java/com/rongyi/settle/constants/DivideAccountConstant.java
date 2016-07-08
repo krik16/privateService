@@ -36,4 +36,6 @@ public class DivideAccountConstant {
 		orderTypeMap.put(ORDER_TYPE_PRODUCT, "商品订单");
 		orderTypeMap.put(ORDER_TYPE_TRADE, "卡券订单");
 	}
+	
+	public static final String SEPARATE_COMMA = ",";
 }

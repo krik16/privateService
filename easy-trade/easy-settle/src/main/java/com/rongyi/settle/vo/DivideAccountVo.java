@@ -20,15 +20,6 @@ public class DivideAccountVo extends SmDivideAccount {
 
 	private String couponId;
 	
-	private Integer shopId;
-	
-	private Integer mallId;
-	
-	/**
-	 * mongoDB商场ID
-	 */
-	private String mallMid;
-	
 	/**
 	 * mongoDB店铺ID
 	 */
@@ -92,44 +83,12 @@ public class DivideAccountVo extends SmDivideAccount {
 		this.couponId = couponId;
 	}
 
-	public String getMallMid() {
-		return mallMid;
-	}
-
-	public void setMallMid(String mallMid) {
-		this.mallMid = mallMid;
-	}
-
-	public String getShopMid() {
-		return shopMid;
-	}
-
-	public void setShopMid(String shopMid) {
-		this.shopMid = shopMid;
-	}
-
 	public Integer getOrderType() {
 		return orderType;
 	}
 
 	public void setOrderType(Integer orderType) {
 		this.orderType = orderType;
-	}
-
-	public Integer getShopId() {
-		return shopId;
-	}
-
-	public void setShopId(Integer shopId) {
-		this.shopId = shopId;
-	}
-
-	public Integer getMallId() {
-		return mallId;
-	}
-
-	public void setMallId(Integer mallId) {
-		this.mallId = mallId;
 	}
 
 	public Integer getTotalQuantity() {
@@ -199,6 +158,14 @@ public class DivideAccountVo extends SmDivideAccount {
 
 	public void setTotalAmount(BigDecimal totalAmount) {
 		this.totalAmount = totalAmount;
+	}
+
+	public String getShopMid() {
+		return shopMid;
+	}
+
+	public void setShopMid(String shopMid) {
+		this.shopMid = shopMid;
 	}
 	
 }

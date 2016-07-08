@@ -48,5 +48,8 @@
 
     <dubbo:reference interface="com.rongyi.rss.rpb.OrderNoGenService" id="orderNoGenService"  version="${dubbo.version}" check="false"/>    
     
-    <dubbo:reference interface="com.rongyi.rss.coupon.merchant.TradeCouponService" id="tradeCouponService"  version="${dubbo.version}" check="false"/>    
+    <dubbo:reference interface="com.rongyi.rss.coupon.merchant.TradeCouponService" id="tradeCouponService"  version="${dubbo.version}" check="false"/>
+       
+    <dubbo:reference interface="com.rongyi.rss.bdata.ShopService" id="bdatashopService"  version="${dubbo.version}" check="false"/>    
+    <dubbo:reference interface="com.rongyi.rss.bdata.MallService" id="bdataMallService"  version="${dubbo.version}" check="false"/>    
 </beans>

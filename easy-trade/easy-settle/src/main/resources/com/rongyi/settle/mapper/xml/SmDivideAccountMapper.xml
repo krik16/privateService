@@ -3,7 +3,7 @@
 <mapper namespace="com.rongyi.settle.mapper.SmDivideAccountMapper">
 	<resultMap id="BaseResultMap" type="com.rongyi.easy.settle.entity.SmDivideAccount">
 		<id column="id" property="id" jdbcType="INTEGER" />
-		<result column="mall_id" property="mallId" jdbcType="INTEGER" />
+		<result column="mall_mid" property="mallMid" jdbcType="INTEGER" />
 		<result column="bill_date" property="billDate" jdbcType="DATE" />
 		<result column="bill_batch_no" property="billBatchNo" jdbcType="VARCHAR" />
 		<result column="order_num" property="orderNum" jdbcType="INTEGER" />
@@ -26,9 +26,7 @@
 		<result column="unit_count" property="unitCount" jdbcType="INTEGER" />
 		<result column="total_amount" property="totalAmount" jdbcType="INTEGER" />
 		<result column="coupon_id" property="couponId" jdbcType="VARCHAR" />
-		<result column="shop_id" property="shopId" jdbcType="VARCHAR" />
-		<result column="mallMid" property="mallMid" jdbcType="VARCHAR" />
-		<result column="shopMid" property="shopMid" jdbcType="VARCHAR" />
+		<result column="shop_mid" property="shopMid" jdbcType="VARCHAR" />
 		<result column="orderType" property="orderType" jdbcType="VARCHAR" />
 		<result column="totalAmount" property="totalAmount" jdbcType="VARCHAR" />
 		<result column="totalQuantity" property="totalQuantity" jdbcType="INTEGER" />
@@ -38,7 +36,7 @@
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id, mall_id, bill_date, bill_batch_no, order_num, unit_num, pay_amount, rebate_amount,
+		id, mall_mid, bill_date, bill_batch_no, order_num, unit_num, pay_amount, rebate_amount,
 		mall_point,
 		settle_amount, create_by, update_by, create_at, update_at, is_delete
 	</sql>
@@ -53,7 +51,7 @@
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.rongyi.easy.settle.entity.SmDivideAccount">
-		insert into sm_divide_account (id, mall_id, bill_date,
+		insert into sm_divide_account (id, mall_mid, bill_date,
 		bill_batch_no,
 		order_num, unit_num,
 		pay_amount, rebate_amount, mall_point,
@@ -61,7 +59,7 @@
 		create_at, update_at,
 		is_delete
 		)
-		values (#{id,jdbcType=INTEGER}, #{mallId,jdbcType=INTEGER}, #{billDate,jdbcType=DATE},
+		values (#{id,jdbcType=INTEGER}, #{mallMid,jdbcType=INTEGER}, #{billDate,jdbcType=DATE},
 		#{billBatchNo,jdbcType=VARCHAR}, #{orderNum,jdbcType=INTEGER}, #{unitNum,jdbcType=INTEGER},
 		#{payAmount,jdbcType=INTEGER}, #{rebateAmount,jdbcType=INTEGER}, #{mallPoint,jdbcType=INTEGER},
 		#{settleAmount,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR},
@@ -75,8 +73,8 @@
 			<if test="id != null">
 				id,
 			</if>
-			<if test="mallId != null">
-				mall_id,
+			<if test="mallMid != null">
+				mall_mid,
 			</if>
 			<if test="billDate != null">
 				bill_date,
@@ -118,8 +116,8 @@
 			<if test="id != null">
 				#{id,jdbcType=INTEGER},
 			</if>
-			<if test="mallId != null">
-				#{mallId,jdbcType=INTEGER},
+			<if test="mallMid != null">
+				#{mallMid,jdbcType=INTEGER},
 			</if>
 			<if test="billDate != null">
 				#{billDate,jdbcType=DATE},
@@ -161,8 +159,8 @@
 	<update id="updateByPrimaryKeySelective" parameterType="com.rongyi.easy.settle.entity.SmDivideAccount">
 		update sm_divide_account
 		<set>
-			<if test="mallId != null">
-				mall_id = #{mallId,jdbcType=INTEGER},
+			<if test="mallMid != null">
+				mall_mid = #{mallMid,jdbcType=INTEGER},
 			</if>
 			<if test="billDate != null">
 				bill_date = #{billDate,jdbcType=DATE},
@@ -208,7 +206,7 @@
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.rongyi.easy.settle.entity.SmDivideAccount">
 		update sm_divide_account
-		set mall_id = #{mallId,jdbcType=INTEGER},
+		set mall_mid = #{mallMid,jdbcType=INTEGER},
 		bill_date = #{billDate,jdbcType=DATE},
 		bill_batch_no = #{billBatchNo,jdbcType=VARCHAR},
 		order_num =
@@ -235,19 +233,15 @@
 			sda.bill_batch_no,
 			sda.order_num,
 			sda.unit_num,
-			sda.pay_amount,
-			mc.mall_name
+			sda.mall_mid,
+			sda.pay_amount
 			from
 			sm_divide_account sda
-		LEFT JOIN ry_rmmm.mall_cooperate mc ON mc.id = sda.mall_id
 		where sda.is_delete = 0
-		  And sda.mall_id in
-			<foreach item="mallId" index="index" collection="mallIdList" open="(" separator="," close=")">
-				#{mallId}
+		  And sda.mall_mid in
+			<foreach item="mallMid" index="index" collection="mallMidList" open="(" separator="," close=")">
+				#{mallMid}
 			</foreach>
-			<if test="mallName != null and mallName != ''">
-				and mc.mall_name like concat('%',#{mallName,jdbcType=VARCHAR},'%')
-			</if>
 			<if test="billBatchNo != null and billBatchNo != ''">
 				and sda.bill_batch_no = #{billBatchNo}
 			</if>
@@ -275,7 +269,7 @@
 			<include refid="selectPageList"></include>
 		) pg
 	</select>
-
+	
 	<select id="findDivideAccount" parameterType="com.rongyi.easy.rpb.dto.DivideAccountDto" resultMap="VoResultMap">
 		select
 		sda.id,
@@ -284,10 +278,9 @@
 		sda.order_num,
 		sda.unit_num,
 		sda.pay_amount,
-		mc.mall_name
+		sda.mall_mid
 		from
 		sm_divide_account sda
-		LEFT JOIN ry_rmmm.mall_cooperate mc ON mc.id = sda.mall_id
 		where sda.is_delete = 0
 		and sda.id = #{divideAccountId}
 	</select>
@@ -297,13 +290,11 @@
 		SELECT
 		of.id,
 		of.order_no,
-		of.weidian_id shop_id,
 		of.total_amount,
 		sum(odf.quantity) totalQuantity,
-		mc.id mall_id,
 		oe.create_at finishTime,
-		mc.mall_name,
 		si.shop_name,
+		si.shop_mid,
 		1 orderType
 		FROM
 		ry_osm.order_form of
@@ -314,7 +305,6 @@
 		odf ON of.order_no = odf.order_no
 		INNER
 		JOIN ry_rmmm.shop_info si on si.id = of.weidian_id
-		LEFT JOIN ry_rmmm.mall_cooperate mc on mc.id = si.mall_id
 		WHERE
 		of.order_source IN (0, 2)
 		AND oe.create_at <![CDATA[ >= ]]>
@@ -322,11 +312,14 @@
 		AND oe.create_at <![CDATA[ < ]]>
 		#{accountDate}
 		And EXISTS (select 1 from weixin_mch wm where of.weixin_app_id = wm.app_id And wm.is_rongyi_pay = 0)
-		<if test="mallId != null and mallId != ''">
-			and mc.id = #{mallId}
+		<if test="shopMid != null and shopMid != ''">
+			and si.shop_mid = #{shopMid}
 		</if>
-		<if test="shopId != null and shopId != ''">
-			and si.id = #{shopId}
+		<if test="shopMidList != null and shopMidList != ''">
+			and si.shop_mid in  
+			<foreach item="shopMid" index="index" collection="shopMidList" open="(" separator="," close=")">
+				#{shopMid}
+			</foreach>
 		</if>
 		GROUP BY
 		of.id,
@@ -344,12 +337,9 @@
 		tso.unit_price,
 		tso.unit_count,
 		tuo.coupon_id,
-		tuo.mall_id mallMid,
-		tuo.shop_id shopMid,
+		tuo.mall_id mall_mid,
+		tuo.shop_id shop_mid,
 		tuo.use_time finishTime,
-		mc.id mall_id,
-		mc.mall_name,
-		si.id shop_id,
 		si.shop_name,
 		2 orderType
 		FROM
@@ -361,8 +351,6 @@
 		tuo.order_id
 		AND tso.id = tuo.sub_order_id
 		INNER JOIN ry_rmmm.shop_info si on si.shop_mid = tuo.shop_id
-		LEFT JOIN
-		ry_rmmm.mall_cooperate mc on mc.id = si.mall_id
 		WHERE
 		tor.source IN (1, 2)
 		AND tuo.STATUS = 2
@@ -373,11 +361,14 @@
 		AND TRIM(tuo.shop_id) != ""
 		And EXISTS (select 1 from weixin_mch wm where tor.weixin_app_id = wm.app_id
 		And wm.is_rongyi_pay = 0)
-		<if test="mallId != null and mallId != ''">
-			and mc.id = #{mallId}
+		<if test="shopMid != null and shopMid != ''">
+			and si.shop_mid = #{shopMid}
 		</if>
-		<if test="shopId != null and shopId != ''">
-			and si.id = #{shopId}
+		<if test="shopMidList != null and shopMidList != ''">
+			and si.shop_mid in  
+			<foreach item="shopMid" index="index" collection="shopMidList" open="(" separator="," close=")">
+				#{shopMid}
+			</foreach>
 		</if>
 		ORDER BY
 		tuo.use_time DESC

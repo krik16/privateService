@@ -13,20 +13,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.MapUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.common.util.ExcelUtil;
 import com.rongyi.easy.bsoms.entity.SessionUserInfo;
 import com.rongyi.easy.coupon.vo.CouponGeneralVO;
 import com.rongyi.easy.roa.entity.MallEntity;
+import com.rongyi.easy.roa.vo.MallVO;
 import com.rongyi.easy.rpb.dto.DivideAccountDto;
 import com.rongyi.easy.settle.entity.SmDivideAccount;
 import com.rongyi.easy.settle.entity.SmDivideAccountDetail;
+import com.rongyi.rss.bdata.MallService;
+import com.rongyi.rss.bdata.ShopService;
 import com.rongyi.rss.coupon.merchant.TradeCouponService;
 import com.rongyi.rss.roa.ROAMallService;
 import com.rongyi.settle.constants.CodeEnum;
@@ -55,23 +61,46 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 	private TradeCouponService tradeCouponService;
 
 	@Autowired
-	private ROAMallService roaMallService;
+	private ROAMallService mallService;
+
+//	@Autowired
+//	private ROAShopService shopService;
+
+	@Autowired
+	private ShopService bdatashopService;
+
+	@Autowired
+	private MallService bdataMallService;
 
 	/**
 	 * @see com.rongyi.settle.service.DivideAccountService#findPageList(com.rongyi.settle.dto.DivideAccountDto)
 	 */
 	public List<DivideAccountVo> findPageList(DivideAccountDto divideAccountDto, SessionUserInfo sessionUserInfo) {
-		List<Integer> mallIdList = this.getMallIdListByGroupId(sessionUserInfo);
-		divideAccountDto.setMallIdList(mallIdList);
-		return smDivideAccountMapper.findPageList(divideAccountDto);
+		List<String> mallMidList = this.getMallMidListByGroupId(sessionUserInfo);
+		// 根据mallName，模糊查询mallMidList
+		List<String> intersectMallMidList = this.intersectMallMidList(mallMidList, divideAccountDto.getMallName());
+		if (CollectionUtils.isEmpty(intersectMallMidList)) {
+			return new ArrayList<DivideAccountVo>();
+		}
+		divideAccountDto.setMallMidList(intersectMallMidList);
+		
+		List<DivideAccountVo> resultList = smDivideAccountMapper.findPageList(divideAccountDto);
+		// 获取shopMids集合
+		this.fillMallInfo(resultList);
+		return resultList;
 	}
 
 	/**
 	 * @see com.rongyi.settle.service.SmDivideAccountService#findPageListCount(com.rongyi.easy.rpb.dto.DivideAccountDto)
 	 */
 	public Integer findPageListCount(DivideAccountDto divideAccountDto, SessionUserInfo sessionUserInfo) {
-		List<Integer> mallIdList = this.getMallIdListByGroupId(sessionUserInfo);
-		divideAccountDto.setMallIdList(mallIdList);
+		List<String> mallMidList = this.getMallMidListByGroupId(sessionUserInfo);
+		// 根据mallName，模糊查询mallMidList
+		List<String> intersectMallMidList = this.intersectMallMidList(mallMidList, divideAccountDto.getMallName());
+		if (CollectionUtils.isEmpty(intersectMallMidList)) {
+			return 0;
+		}
+		divideAccountDto.setMallMidList(mallMidList);
 		return smDivideAccountMapper.findPageListCount(divideAccountDto);
 	}
 
@@ -79,14 +108,24 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 	 * @see com.rongyi.settle.service.SmDivideAccountService#findDivideAccount(com.rongyi.easy.rpb.dto.DivideAccountDto)
 	 */
 	public DivideAccountVo findDivideAccount(DivideAccountDto divideAccountDto) {
-		return smDivideAccountMapper.findDivideAccount(divideAccountDto);
+		DivideAccountVo divideAccountVo = smDivideAccountMapper.findDivideAccount(divideAccountDto);
+		if (null != divideAccountVo && null != divideAccountVo.getMallMid()) {
+			MallVO mallVo = this.getMallByMallMid(divideAccountVo.getMallMid());
+			divideAccountVo.setMallName(mallVo.getName());
+		}
+		return divideAccountVo;
 	}
 
 	/**
 	 * @see com.rongyi.settle.service.SmDivideAccountService#findDetailPageList(com.rongyi.easy.rpb.dto.DivideAccountDto)
 	 */
 	public List<DivideAccountVo> findDetailPageList(DivideAccountDto divideAccountDto) {
-		return smDivideAccountDetailMapper.findDetailPageList(divideAccountDto);
+		List<DivideAccountVo> resultList = smDivideAccountDetailMapper.findDetailPageList(divideAccountDto);
+		// 添加商场信息
+		this.fillMallInfo(resultList);
+		// 添加商铺信息
+		this.fillShopInfo(resultList);
+		return resultList;
 	}
 
 	/**
@@ -103,10 +142,10 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 		Date date = DateUtils.parseDate(new Date());
 		DivideAccountDto divideAccountDto = new DivideAccountDto();
 		divideAccountDto.setAccountDate(date);
-		
+
 		List<DivideAccountVo> divideAccountList = smDivideAccountMapper.findDivideAccountList(divideAccountDto);
 		if (CollectionUtils.isNotEmpty(divideAccountList)) {
-			log.info("分账定时器于"+DateUtils.formateDate(date)+"已生成账单");
+			log.info("分账定时器于" + DateUtils.formateDate(date) + "已生成账单");
 			return;
 		}
 		// 查询前一天B端商品订单
@@ -126,11 +165,11 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 		// 查询前一天B端卡券订单
 		List<DivideAccountVo> tradeOrderList = this.initTradeOrderList(divideAccountDto);
 		// 筛选出非通用券订单
-		tradeOrderList = this.getNoUniveralCouponList(tradeOrderList);
+		 tradeOrderList = this.getNoUniveralCouponList(tradeOrderList);
 		// 合并商品订单、卡券订单
 		productOrderList.addAll(tradeOrderList);
 
-		return productOrderList;
+		return this.initExportInfo(productOrderList);
 	}
 
 	/**
@@ -181,22 +220,22 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 	 * @param accountDetailMap
 	 */
 	private void fillDivideAccountMap(Date billDate, String billBatchNo, DivideAccountVo divideAccountVo,
-			Map<Integer, SmDivideAccount> accountMap, Map<Integer, List<SmDivideAccountDetail>> accountDetailMap) {
-		Integer mallId = divideAccountVo.getMallId();
+			Map<String, SmDivideAccount> accountMap, Map<String, List<SmDivideAccountDetail>> accountDetailMap) {
+		String mallMid = divideAccountVo.getMallMid();
 		SmDivideAccount smDivideAccount = null;
 		List<SmDivideAccountDetail> detailList = null;
-		if (!accountMap.containsKey(mallId)) {
+		if (!accountMap.containsKey(mallMid)) {
 			smDivideAccount = this.initSmDivideAccount(billDate, billBatchNo, divideAccountVo);// 初始化分账信息
 			detailList = this.initSmDivdeAccountDetail(billDate, billBatchNo, divideAccountVo);// 初始化分账详情信息
 		} else {
-			smDivideAccount = accountMap.get(mallId);
+			smDivideAccount = accountMap.get(mallMid);
 			this.replaceSmDivideAccount(divideAccountVo, smDivideAccount);// 更新分账详情信息
 
-			detailList = accountDetailMap.get(mallId);
+			detailList = accountDetailMap.get(mallMid);
 			this.replaceSmDivideAccountDetail(billDate, billBatchNo, divideAccountVo, detailList);// 更新分账详情信息
 		}
-		accountMap.put(mallId, smDivideAccount);
-		accountDetailMap.put(mallId, detailList);
+		accountMap.put(mallMid, smDivideAccount);
+		accountDetailMap.put(mallMid, detailList);
 	}
 
 	/**
@@ -206,7 +245,7 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 	 */
 	private SmDivideAccount initSmDivideAccount(Date billDate, String billBatchNo, DivideAccountVo divideAccountVo) {
 		SmDivideAccount smDivideAccount = new SmDivideAccount();
-		smDivideAccount.setMallId(divideAccountVo.getMallId());
+		smDivideAccount.setMallMid(divideAccountVo.getMallMid());
 		smDivideAccount.setOrderNum(DivideAccountConstant.ORDER_NUM);
 		smDivideAccount.setBillBatchNo(billBatchNo);
 		smDivideAccount.setBillDate(billDate);
@@ -230,8 +269,8 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 			DivideAccountVo divideAccountVo) {
 		List<SmDivideAccountDetail> smDivideAccountDetailList = new ArrayList<>();
 		SmDivideAccountDetail smDivideAccountDetail = new SmDivideAccountDetail();
-		smDivideAccountDetail.setMallId(divideAccountVo.getMallId());
-		smDivideAccountDetail.setShopId(divideAccountVo.getShopId());
+		smDivideAccountDetail.setMallMid(divideAccountVo.getMallMid());
+		smDivideAccountDetail.setShopMid(divideAccountVo.getShopMid());
 		smDivideAccountDetail.setOrderNum(DivideAccountConstant.ORDER_NUM);
 		smDivideAccountDetail.setBillBatchNo(billBatchNo);
 		smDivideAccountDetail.setBillDate(billDate);
@@ -273,19 +312,19 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 	 */
 	private void replaceSmDivideAccountDetail(Date billDate, String billBatchNo, DivideAccountVo divideAccountVo,
 			List<SmDivideAccountDetail> detailList) {
-		Integer shopId = divideAccountVo.getShopId();
+		String shopMid = divideAccountVo.getShopMid();
 		SmDivideAccountDetail smDivideAccountDetail;
-		Map<Integer, SmDivideAccountDetail> detailMap = new HashMap<>();
+		Map<String, SmDivideAccountDetail> detailMap = new HashMap<>();
 		for (SmDivideAccountDetail detail : detailList) {
-			if (null != detail && null != detail.getShopId()) {
-				detailMap.put(detail.getShopId(), detail);
+			if (null != detail && null != detail.getShopMid()) {
+				detailMap.put(detail.getShopMid(), detail);
 			}
 		}
 		Integer orderType = divideAccountVo.getOrderType();
-		if (!detailMap.containsKey(shopId)) {// 不同店铺，不同记录
+		if (!detailMap.containsKey(shopMid)) {// 不同店铺，不同记录
 			smDivideAccountDetail = new SmDivideAccountDetail();
-			smDivideAccountDetail.setMallId(divideAccountVo.getMallId());
-			smDivideAccountDetail.setShopId(shopId);
+			smDivideAccountDetail.setMallMid(divideAccountVo.getMallMid());
+			smDivideAccountDetail.setShopMid(shopMid);
 			smDivideAccountDetail.setOrderNum(DivideAccountConstant.ORDER_NUM);
 			smDivideAccountDetail.setBillBatchNo(billBatchNo);
 			smDivideAccountDetail.setBillDate(billDate);
@@ -299,7 +338,7 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 			}
 			detailList.add(smDivideAccountDetail);
 		} else {// 同一店铺，只记录一条记录
-			smDivideAccountDetail = detailMap.get(shopId);
+			smDivideAccountDetail = detailMap.get(shopMid);
 			smDivideAccountDetail.setOrderNum(smDivideAccountDetail.getOrderNum() + DivideAccountConstant.ORDER_NUM);
 			if (DivideAccountConstant.ORDER_TYPE_PRODUCT.equals(orderType)) {// 商品订单
 				smDivideAccountDetail.setPayAmount(smDivideAccountDetail.getPayAmount()
@@ -311,7 +350,7 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 						.setPayAmount(smDivideAccountDetail.getPayAmount() + divideAccountVo.getUnitPrice());
 				smDivideAccountDetail.setUnitNum(smDivideAccountDetail.getUnitNum() + DivideAccountConstant.UNIT_NUM);
 			}
-			detailMap.put(shopId, smDivideAccountDetail);
+			detailMap.put(shopMid, smDivideAccountDetail);
 
 			detailList = new ArrayList<>(detailMap.values());
 		}
@@ -326,26 +365,24 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 	private void doBatchAddSmDivideAccount(List<DivideAccountVo> divideAccountList) {
 		if (CollectionUtils.isNotEmpty(divideAccountList)) {// 商品、卡券订单集合
 			// 分账信息map
-			Map<Integer, SmDivideAccount> mallMap = new HashMap<>();
+			Map<String, SmDivideAccount> mallMap = new HashMap<>();
 			// 分账详情信息map
-			Map<Integer, List<SmDivideAccountDetail>> shopMap = new HashMap<>();
+			Map<String, List<SmDivideAccountDetail>> shopMap = new HashMap<>();
 			// 账期，前一天
 			Date billDate = DateUtils.getYesterdayDate();
 			String dateStr = DateUtils.getYesterdayDateSimpleStr();
 			// 循环订单集合，分别初始化账单信息、账单详情信息
 			Integer num = DivideAccountConstant.BILL_BATCH_NO_DEFAULT;
 			for (DivideAccountVo vo : divideAccountList) {
-				if (null != vo && null != vo.getShopId() && null != vo.getMallId()) {
-					Integer mallId = vo.getMallId();
-					String billBatchNo;
-					if (mallMap.containsKey(mallId)) {
-						billBatchNo = mallMap.get(mallId).getBillBatchNo();
-					} else {
-						billBatchNo = this.getBillBatchNo(dateStr, num++);
-					}
-					// 填充分账信息, 分账详情信息
-					this.fillDivideAccountMap(billDate, billBatchNo, vo, mallMap, shopMap);
+				String mallMid = vo.getMallMid();
+				String billBatchNo;
+				if (mallMap.containsKey(mallMid)) {
+					billBatchNo = mallMap.get(mallMid).getBillBatchNo();
+				} else {
+					billBatchNo = this.getBillBatchNo(dateStr, num++);
 				}
+				// 填充分账信息, 分账详情信息
+				this.fillDivideAccountMap(billDate, billBatchNo, vo, mallMap, shopMap);
 			}
 
 			List<SmDivideAccount> smDivideAccountList = new ArrayList<>(mallMap.values());
@@ -360,19 +397,7 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 	 * @return
 	 */
 	private List<DivideAccountVo> initProductOrderList(DivideAccountDto divideAccountDto) {
-		List<DivideAccountVo> productOrderList = smDivideAccountMapper.findProductOrderList(divideAccountDto);
-		// 循环获取shopId
-		// if (CollectionUtils.isNotEmpty(productOrderList)) {
-		// List<Integer> shopIdList = new ArrayList<>();
-		// for (DivideAccountVo vo : productOrderList) {
-		// if (null != vo && null != vo.getShopId()) {
-		// Integer shopId = vo.getShopId();
-		// shopIdList.add(shopId);
-		// }
-		// }
-		// TODO 调用接口，根据店铺ID查询商场ID
-		// }
-		return productOrderList;
+		return smDivideAccountMapper.findProductOrderList(divideAccountDto);
 	}
 
 	/**
@@ -381,26 +406,7 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 	 * @return
 	 */
 	private List<DivideAccountVo> initTradeOrderList(DivideAccountDto divideAccountDto) {
-		List<DivideAccountVo> tradeOrderList = smDivideAccountMapper.findTradeOrderList(divideAccountDto);
-		// 循环获取shopId
-		// if (CollectionUtils.isNotEmpty(tradeOrderList)) {
-		// List<String> shopIdList = new ArrayList<>();
-		// List<String> mallIdList = new ArrayList<>();
-		// for (DivideAccountVo vo : tradeOrderList) {
-		// if (null != vo) {
-		// String shopMid = vo.getShopMid();
-		// String mallMid = vo.getMallMid();
-		// if (StringUtils.isNotBlank(shopMid) &&
-		// StringUtils.isNotBlank(mallMid)) {
-		// shopIdList.add(shopMid);
-		// mallIdList.add(mallMid);
-		// }
-		// }
-		// }
-		// TODO 调用接口，根据店铺mongoID查询店铺ID
-		// TODO 调用接口，根据商场mongoID查询商场ID
-		// }
-		return tradeOrderList;
+		return smDivideAccountMapper.findTradeOrderList(divideAccountDto);
 	}
 
 	/**
@@ -409,15 +415,18 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 	 * @param smDivideAccountMap
 	 */
 	private void doBatchAddDivideAccount(List<SmDivideAccount> smDivideAccountList,
-			Map<Integer, List<SmDivideAccountDetail>> smDivideAccountMap) {
-		Map<Integer, Integer> acountKeyMap = new HashMap<>();
+			Map<String, List<SmDivideAccountDetail>> smDivideAccountMap) {
+		if (CollectionUtils.isEmpty(smDivideAccountList)) {
+			return;
+		}
+		Map<String, Integer> acountKeyMap = new HashMap<>();
 		List<SmDivideAccountDetail> resultList = new ArrayList<>();
 		for (SmDivideAccount sm : smDivideAccountList) {
 			smDivideAccountMapper.insertSelective(sm);
-			acountKeyMap.put(sm.getMallId(), sm.getId());
+			acountKeyMap.put(sm.getMallMid(), sm.getId());
 		}
-		for (Map.Entry<Integer, List<SmDivideAccountDetail>> entry : smDivideAccountMap.entrySet()) {
-			Integer mallId = entry.getKey();
+		for (Map.Entry<String, List<SmDivideAccountDetail>> entry : smDivideAccountMap.entrySet()) {
+			String mallId = entry.getKey();
 			List<SmDivideAccountDetail> entryList = entry.getValue();
 			for (SmDivideAccountDetail sm : entryList) {
 				sm.setDivideAccountId(acountKeyMap.get(mallId));
@@ -449,8 +458,8 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 
 		DivideAccountDto divideAccountDto = new DivideAccountDto();
 		divideAccountDto.setAccountDate(DateUtil.getDaysInAdd(smDivideAccountDetail.getBillDate(), 1));
-		divideAccountDto.setShopId(smDivideAccountDetail.getShopId());
-		divideAccountDto.setMallId(smDivideAccountDetail.getMallId());
+		divideAccountDto.setShopMid(smDivideAccountDetail.getShopMid());
+		divideAccountDto.setMallMid(smDivideAccountDetail.getMallMid());
 		// 查询前一天B端商品订单
 		List<DivideAccountVo> orderList = this.findOrderList(divideAccountDto);
 
@@ -470,10 +479,23 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 
 		DivideAccountDto divideAccountDto = new DivideAccountDto();
 		divideAccountDto.setAccountDate(DateUtil.getDaysInAdd(smDivideAccount.getBillDate(), 1));
-		divideAccountDto.setMallId(smDivideAccount.getMallId());
+		divideAccountDto.setMallMid(smDivideAccount.getMallMid());
+		
+		List<String> shopMidList = new ArrayList<>();// 根据mallMid查询shopMidList
+		List<DivideAccountVo> divideAccountVoList = smDivideAccountDetailMapper.findDetailList(divideAccountDto);
+		for (DivideAccountVo vo:divideAccountVoList) {
+			if (null != vo && StringUtils.isNotBlank(vo.getShopMid())) {
+				shopMidList.add(vo.getShopMid());
+			}
+		}
 		// 查询前一天B端商品订单
-		List<DivideAccountVo> orderList = this.findOrderList(divideAccountDto);
-
+		List<DivideAccountVo> orderList;
+		if (CollectionUtils.isEmpty(shopMidList)) {
+			orderList = new ArrayList<>();
+		} else {
+			divideAccountDto.setShopMidList(shopMidList);
+			orderList = this.findOrderList(divideAccountDto);
+		}
 		// 导出邀请码
 		this.doExport(request, response, orderList);
 	}
@@ -511,7 +533,7 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 			sheet.createRow(++titleRow);
 			int column = 0;
 			sheet.getRow(titleRow).createCell(column++).setCellValue(vo.getMallName());
-			sheet.getRow(titleRow).createCell(column++).setCellValue(vo.getShopId().toString());
+			sheet.getRow(titleRow).createCell(column++).setCellValue(vo.getShopMid());
 			sheet.getRow(titleRow).createCell(column++).setCellValue(vo.getShopName());
 			sheet.getRow(titleRow).createCell(column++).setCellValue(vo.getOrderNo());
 			sheet.getRow(titleRow).createCell(column++).setCellValue(DateUtils.formateDateFull(vo.getFinishTime()));
@@ -532,14 +554,14 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 		}
 	}
 
-	private List<Integer> getMallIdListByGroupId(SessionUserInfo sessionUserInfo) {
+	private List<String> getMallMidListByGroupId(SessionUserInfo sessionUserInfo) {
 		String bindingMid = sessionUserInfo.getBindingMid();
 		Integer identity = sessionUserInfo.getIdentity();
 		List<String> mallMidList = new ArrayList<>();
 		log.info("账号类型identity=" + identity);
 		if (UserInfoConstant.IDENTITY_GROUP.equals(identity)) {
 			try {
-				List<MallEntity> mallList = roaMallService.getMallEntitysByGroupId(bindingMid);
+				List<MallEntity> mallList = mallService.getMallEntitysByGroupId(bindingMid);
 				for (MallEntity mall : mallList) {
 					if (null != mall && null != mall.getId()) {
 						mallMidList.add(mall.getId().toString());
@@ -556,12 +578,278 @@ public class SmDivideAccountServiceImpl implements SmDivideAccountService {
 		} else if (UserInfoConstant.IDENTITY_MALL.equals(identity)) {
 			mallMidList.add(bindingMid);
 		}
-		List<Integer> list = smDivideAccountMapper.findMallIdList(mallMidList);
-		log.info("账号所拥有的商场：" + list);
-		if (CollectionUtils.isEmpty(list)) {
-			log.error("根据Mongo商场ID查询Mysql商场集合为空，入参bindingId：" + bindingMid + ", mallMidList" + mallMidList.toString());
+		log.info("账号所拥有的商场：" + mallMidList);
+		return mallMidList;
+	}
+
+//	private String getMallMidByShopMid(String shopMid) {
+//		String id = "";
+//		try {
+//			ShopVO shopVo = shopService.getShopVOById(shopMid);
+//			if (null != shopVo && StringUtils.isNotBlank(shopVo.getMall_id())) {
+//				String mallMid = shopVo.getMall_id();
+//				MallVO mallVo = mallService.getMallVOById(mallMid);
+//				if (null != mallVo) {
+//					id = mallVo.getId();
+//				}
+//			}
+//		} catch (Exception e) {
+//			log.error("调用店铺接口异常, SmDivideAccountServiceImpl.getMallMidByShopMid", e);
+//		}
+//		return id;
+//	}
+
+//	private MallVO getMallByShopMid(String shopMid) {
+//		MallVO mallVo;
+//		ShopVO shopVo;
+//		try {
+//			shopVo = shopService.getShopVOById(shopMid);
+//		} catch (Exception e) {
+//			log.error("调用店铺接口异常, SmDivideAccountServiceImpl.getShopVOById", e);
+//			throw new BizException(CodeEnum.ERROR_SYSTEM);
+//		}
+//		if (null == shopVo || StringUtils.isBlank(shopVo.getMall_id())) {
+//			throw new BizException(CodeEnum.SHOP_NOT_EXIST);
+//		}
+//
+//		try {
+//			String mallMid = shopVo.getMall_id();
+//			mallVo = mallService.getMallVOById(mallMid);
+//		} catch (Exception e) {
+//			log.error("调用店铺接口异常, SmDivideAccountServiceImpl.getMallVOById", e);
+//			throw new BizException(CodeEnum.ERROR_SYSTEM);
+//		}
+//		if (null == mallVo) {
+//			throw new BizException(CodeEnum.MALL_NOT_EXIST);
+//		}
+//		return mallVo;
+//	}
+
+	private MallVO getMallByMallMid(String mallMid) {
+		MallVO mallVo;
+		try {
+			mallVo = mallService.getMallVOById(mallMid);
+		} catch (Exception e) {
+			log.error("调用店铺接口异常, SmDivideAccountServiceImpl.getMallVOById", e);
+			throw new BizException(CodeEnum.ERROR_SYSTEM);
+		}
+		if (null == mallVo) {
 			throw new BizException(CodeEnum.MALL_NOT_EXIST);
 		}
-		return list;
+		return mallVo;
+	}
+
+	private List<DivideAccountVo> initExportInfo(List<DivideAccountVo> divideAccoutList) {
+		List<DivideAccountVo> resultList = new ArrayList<>();
+		StringBuilder shopSb = new StringBuilder();// 店铺ID
+		StringBuilder mallSb = new StringBuilder();// 商场ID
+		// 获取shopMids集合
+		for (DivideAccountVo vo : divideAccoutList) {
+			if (null != vo && StringUtils.isNotBlank(vo.getShopMid())) {
+				shopSb.append(DivideAccountConstant.SEPARATE_COMMA).append(vo.getShopMid());
+			}
+		}
+		// 根据shopMids，查询对应的店铺信息
+		List<com.rongyi.easy.bdata.vo.ShopVO> shopList = new ArrayList<>();
+		Map<String, com.rongyi.easy.bdata.vo.ShopVO> shopMap = new HashMap<>();
+		if (null != shopSb && StringUtils.isNotBlank(shopSb.toString())) {
+			List<com.rongyi.easy.bdata.vo.ShopVO> shopVoList = this.getShopVoList(shopSb.toString().substring(1));
+			for (com.rongyi.easy.bdata.vo.ShopVO vo : shopVoList) {
+				if (null != vo && StringUtils.isNotBlank(vo.getId()) && null != vo.getPosition()
+						&& StringUtils.isNotBlank(vo.getPosition().getMallId())) {
+					mallSb.append(DivideAccountConstant.SEPARATE_COMMA).append(vo.getPosition().getMallId());
+					shopList.add(vo);
+					shopMap.put(vo.getId(), vo);
+				}
+			}
+		}
+		// 根据shopList店铺信息，批量查询商场信息
+		Map<String, com.rongyi.easy.bdata.vo.MallVO> mallMap = new HashMap<>();
+		if (null != mallSb) {
+			List<com.rongyi.easy.bdata.vo.MallVO> mallVoList = this.getMallVoList(mallSb.substring(1).toString());
+			Map<String, com.rongyi.easy.bdata.vo.MallVO> mallVoMap = new HashMap<>();
+			for (com.rongyi.easy.bdata.vo.MallVO vo : mallVoList) {
+				if (null != vo && StringUtils.isNotBlank(vo.getId())) {
+					mallVoMap.put(vo.getId(), vo);
+				}
+			}
+			for (com.rongyi.easy.bdata.vo.ShopVO vo : shopList) {
+				String shopMid = vo.getId();
+				String mallMid = vo.getPosition().getMallId();
+				if (mallVoMap.containsKey(mallMid)) {
+					mallMap.put(shopMid, mallVoMap.get(mallMid));
+				}
+			}
+		}
+		// 循环商场map，删选匹配上的订单信息
+		if (MapUtils.isNotEmpty(mallMap)) {
+			for (DivideAccountVo vo : divideAccoutList) {
+				String shopMid = vo.getShopMid();
+				if (mallMap.containsKey(shopMid)) {
+					com.rongyi.easy.bdata.vo.MallVO mallVo = mallMap.get(shopMid);
+					vo.setMallMid(mallVo.getId());
+					vo.setMallName(mallVo.getName());
+					vo.setShopName(shopMap.get(shopMid).getName());
+					resultList.add(vo);
+				}
+			}
+		}
+		return resultList;
+	}
+
+	/**
+	 * @Description 根据shopMids，批量查询店铺信息
+	 * @param shopMids
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	private List<com.rongyi.easy.bdata.vo.ShopVO> getShopVoList(String shopMids) {
+		List<com.rongyi.easy.bdata.vo.ShopVO> shopVoList = new ArrayList<>();
+		try {
+			ResponseVO vo = bdatashopService.getShopsByIds(shopMids);
+			if (null != vo && null != vo.getResult() && null != vo.getResult().getData()) {
+				shopVoList = (List<com.rongyi.easy.bdata.vo.ShopVO>) vo.getResult().getData();
+			}
+		} catch (Exception e) {
+			log.error("调用店铺接口异常-bdatashopService.getShopsByIds，入参shopMids=" + shopMids.toString());
+			throw new BizException(CodeEnum.ERROR_SYSTEM);
+		}
+		return shopVoList;
+	}
+
+	/**
+	 * @Description 根据mallMids，批量查询商场信息
+	 * @param mallMids
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	private List<com.rongyi.easy.bdata.vo.MallVO> getMallVoList(String mallMids) {
+		List<com.rongyi.easy.bdata.vo.MallVO> mallVoList = new ArrayList<>();
+		try {
+			ResponseVO vo = bdataMallService.getMallsByIds(mallMids);
+			if (null != vo && null != vo.getResult() && null != vo.getResult().getData()) {
+				mallVoList = (List<com.rongyi.easy.bdata.vo.MallVO>) vo.getResult().getData();
+			}
+		} catch (Exception e) {
+			log.error("调用店铺接口异常-bdataMallService.getMallsByIds，入参mallMids=" + mallMids.toString());
+			throw new BizException(CodeEnum.ERROR_SYSTEM);
+		}
+		return mallVoList;
+	}
+	
+	/**
+	 * @Description 获取用户能权限下的商场，和输入的商场名称集合的交集 
+	 * @param mallMidList
+	 * @param mallName
+	 */
+	private List<String> intersectMallMidList(List<String> mallMidList, String mallName) {
+		if (StringUtils.isNotBlank(mallName)) {
+			List<String> mallMidNameList = this.getMallMidListByMallName(mallName);
+			if (CollectionUtils.isEmpty(mallMidNameList)) {// 商场不存在
+				return new ArrayList<>();
+			}
+			// 并集
+//			mallMidList.removeAll(mallMidNameList);
+//			mallMidList.addAll(mallMidNameList);
+			// 交集
+			mallMidList.retainAll(mallMidNameList);
+		}
+		return mallMidList;
+	}
+	
+	/**
+	 * @Description 根据mallName，模糊查询mallId集合 
+	 * @param mallName
+	 * @return
+	 */
+	private List<String> getMallMidListByMallName(String mallName) {
+		List<String> mallMidList = new ArrayList<>();
+		List<com.rongyi.easy.bdata.vo.MallVO> mallVoList = this.getMallVoByMallName(mallName);
+		if (CollectionUtils.isNotEmpty(mallVoList)) {
+			for (com.rongyi.easy.bdata.vo.MallVO vo:mallVoList) {
+				mallMidList.add(vo.getId());
+			}
+		}
+		return mallMidList;
+	}
+
+	/**
+	 * @Description 根据mallName，模糊查询MallVo集合 
+	 * @param mallName
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	private List<com.rongyi.easy.bdata.vo.MallVO> getMallVoByMallName(String mallName) {
+		List<com.rongyi.easy.bdata.vo.MallVO> mallVoList = new ArrayList<>();
+		try {
+			ResponseVO vo = bdataMallService.getMallList(mallName, 1, Integer.MAX_VALUE);
+			if (null != vo && null != vo.getResult() && null != vo.getResult().getData()) {
+				mallVoList = (List<com.rongyi.easy.bdata.vo.MallVO>) vo.getResult().getData();
+			}
+		} catch (Exception e) {
+			log.error("调用店铺接口异常-bdataMallService.getMallList，入参mallName=" + mallName);
+			throw new BizException(CodeEnum.ERROR_SYSTEM);
+		}
+		return mallVoList;
+	}
+	
+	private void fillMallInfo(List<DivideAccountVo> divideAccountVoList) {
+		if (CollectionUtils.isNotEmpty(divideAccountVoList)) {
+			StringBuilder mallSb = new StringBuilder();// 商场ID
+			for (DivideAccountVo vo : divideAccountVoList) {
+				if (null != vo && StringUtils.isNotBlank(vo.getMallMid())) {
+					mallSb.append(DivideAccountConstant.SEPARATE_COMMA).append(vo.getMallMid());
+				}
+			}
+			if (null != mallSb && StringUtils.isNotBlank(mallSb.toString())) {
+				List<com.rongyi.easy.bdata.vo.MallVO> mallVoList = this.getMallVoList(mallSb.substring(1).toString());
+				if (CollectionUtils.isNotEmpty(mallVoList)) {
+					Map<String, com.rongyi.easy.bdata.vo.MallVO> mallVoMap = new HashMap<>();
+					for (com.rongyi.easy.bdata.vo.MallVO vo : mallVoList) {
+						if (null != vo && StringUtils.isNotBlank(vo.getId())) {
+							mallVoMap.put(vo.getId(), vo);
+						}
+					}
+					for (DivideAccountVo vo : divideAccountVoList) {
+						if (null != vo && StringUtils.isNotBlank(vo.getMallMid())) {
+							String mallMid = vo.getMallMid();
+							if (mallVoMap.containsKey(mallMid)) {
+								vo.setMallName(mallVoMap.get(mallMid).getName());
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	private void fillShopInfo(List<DivideAccountVo> divideAccountVoList) {
+		if (CollectionUtils.isNotEmpty(divideAccountVoList)) {
+			StringBuilder shopSb = new StringBuilder();// 商场ID
+			for (DivideAccountVo vo : divideAccountVoList) {
+				if (null != vo && StringUtils.isNotBlank(vo.getShopMid())) {
+					shopSb.append(DivideAccountConstant.SEPARATE_COMMA).append(vo.getShopMid());
+				}
+			}
+			if (null != shopSb && StringUtils.isNotBlank(shopSb.toString())) {
+				List<com.rongyi.easy.bdata.vo.ShopVO> shopVoList = this.getShopVoList(shopSb.substring(1).toString());
+				if (CollectionUtils.isNotEmpty(shopVoList)) {
+					Map<String, com.rongyi.easy.bdata.vo.ShopVO> shopVoMap = new HashMap<>();
+					for (com.rongyi.easy.bdata.vo.ShopVO vo : shopVoList) {
+						if (null != vo && StringUtils.isNotBlank(vo.getId())) {
+							shopVoMap.put(vo.getId(), vo);
+						}
+					}
+					for (DivideAccountVo vo : divideAccountVoList) {
+						if (null != vo && StringUtils.isNotBlank(vo.getShopMid())) {
+							String shopMid = vo.getShopMid();
+							if (shopVoMap.containsKey(shopMid)) {
+								vo.setShopName(shopVoMap.get(shopMid).getName());
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 }

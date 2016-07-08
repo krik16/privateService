@@ -23,5 +23,7 @@ public interface SmDivideAccountDetailMapper {
     
     public List<DivideAccountVo> findDetailPageList(DivideAccountDto divideAccountDto);
     
+    public List<DivideAccountVo> findDetailList(DivideAccountDto divideAccountDto);
+    
     public Integer findDetailPageListCount(DivideAccountDto divideAccountDto);
 }
