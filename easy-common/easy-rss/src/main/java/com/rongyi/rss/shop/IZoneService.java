@@ -85,4 +85,6 @@ public interface IZoneService {
      * @return
      */
     public long getZonesCount();
+
+    public List<String> getZonesByName(String mallName);
 }
