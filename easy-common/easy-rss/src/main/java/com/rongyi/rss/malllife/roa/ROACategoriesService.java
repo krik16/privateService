@@ -13,9 +13,6 @@ import com.rongyi.easy.roa.entity.CategoriesEntity;
  * @author rongyi-13 2014年9月29日 下午3:07:59
  */
 public interface ROACategoriesService {
-	public boolean editCommodity(CategoriesEntity entity) throws Exception;
-	public List<CategoriesEntity> getCategoriesByParentIdForApp(String parentId,boolean parent)throws Exception;
-	public String insert(CategoriesEntity entity) throws Exception;
 	/**
      * 类别列表
      * @param parentId
