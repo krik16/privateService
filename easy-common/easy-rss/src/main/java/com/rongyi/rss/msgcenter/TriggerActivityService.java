@@ -35,4 +35,10 @@ public interface TriggerActivityService {
      * @return
      */
     int getRegisteCoupons(TriggerActivityParam param);
+
+    /**
+     * 判断当前是否存在新人注册红包
+     * @return
+     */
+    public boolean isExistRegisteCoupons();
 }
