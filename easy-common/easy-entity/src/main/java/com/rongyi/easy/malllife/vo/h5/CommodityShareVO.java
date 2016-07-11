@@ -23,6 +23,7 @@ public class CommodityShareVO implements Serializable{
 	private String commodityCurrentPrice;//商品现价
 	private String mallTip;///< 商城标签（商城名称，如果是街边店则是街边点名称）
 	private List<String> commodityPicList;//商品图片集合
+	private Double discount;//商品折扣
 	public String getCommodityId() {
 		return commodityId;
 	}
@@ -83,6 +84,12 @@ public class CommodityShareVO implements Serializable{
 	public void setCommodityPicList(List<String> commodityPicList) {
 		this.commodityPicList = commodityPicList;
 	}
+	public Double getDiscount() {
+		return discount;
+	}
+	public void setDiscount(Double discount) {
+		this.discount = discount;
+	}
 	@Override
 	public String toString() {
 		return "CommodityShareVO [commodityId=" + commodityId
@@ -93,7 +100,8 @@ public class CommodityShareVO implements Serializable{
 				+ commodityCPriceMin + ", commodityOPOfLCP=" + commodityOPOfLCP
 				+ ", commodityCurrentPrice=" + commodityCurrentPrice
 				+ ", mallTip=" + mallTip + ", commodityPicList="
-				+ commodityPicList + "]";
+				+ commodityPicList + ", discount=" + discount + "]";
 	}
+	
 	
 }
