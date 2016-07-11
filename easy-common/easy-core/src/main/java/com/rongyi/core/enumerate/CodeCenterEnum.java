@@ -42,7 +42,7 @@ public enum CodeCenterEnum {
     ERROR_VALIDCODE_TIMEOUT(1021335, "调用PHP接口超时异常！"),
     ERROR_VALIDCODE_MUTEX(1021336, "同一类型码同一渠道同一时间段不能重复"),
     ERROR_VALIDCODE_REASON(1021337, "审核失败或作废理由为必填项"),
-    ERROR_HANNELS_AUTHRITY(1021339,"权限审核不通过"),
+    ERROR_HANNELS_AUTHRITY(1021339,"无相应操作权限"),
     ERROR_HANNELS_NULL_CODE(1021340,"促销码为空！"),
     ERROR_HANNELS_ERROR_CODE(1021341,"促销码不合法！"),
     ERROR_HANNELS_USED_CODE(1021342,"推广码已经被使用！"),
