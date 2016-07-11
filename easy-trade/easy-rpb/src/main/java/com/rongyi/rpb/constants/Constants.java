@@ -97,6 +97,7 @@ public interface Constants {
 	interface ORDER_TYPE{
 	    int ORDER_TYPE_0 = 0;//商品订单
 	    int ORDER_TYPE_1 = 1;//优惠券订单
+	    int ORDER_TYPE_2 = 2;//礼品换购订单
 	}
 	
 	/**	

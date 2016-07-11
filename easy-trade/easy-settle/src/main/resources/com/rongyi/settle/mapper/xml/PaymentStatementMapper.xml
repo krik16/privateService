@@ -821,7 +821,7 @@
 		WHERE
 		H3.create_at BETWEEN #{startTime,jdbcType=TIMESTAMP} AND #{endTime,jdbcType=TIMESTAMP}
 		AND OF.`status` &gt; 2
-		AND OF.is_pay_va = 0
+		AND OF.is_pay_va = 2
 		<if test="brandId != null">
 			AND BI.brand_mid = #{brandId,jdbcType=VARCHAR}
 		</if>
@@ -883,7 +883,7 @@
 				LEFT JOIN ry_user.malllife_user_info MUA ON MUA.id = A.buyer_id
 		WHERE H3.create_at BETWEEN #{startTime,jdbcType=TIMESTAMP} AND #{endTime,jdbcType=TIMESTAMP}
 			AND A.`status` &gt; 2
-			AND A.is_pay_va = 0
+			AND A.is_pay_va = 2
 			<if test="brandId != null">
 				AND BI.brand_mid = #{brandId,jdbcType=VARCHAR}
 			</if>

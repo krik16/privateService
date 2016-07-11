@@ -56,7 +56,7 @@ public class AliPayUnit {
             String signContent = assembleSign(paymentEntityVO.getPayNo(), title, totalPrice, itBPay);
             String rsaSign = RSA.sign(signContent, ConstantUtil.PayZhiFuBao.PRIVATE_KEY, ConstantUtil.PayZhiFuBao.INPUT_CHARSET);
             if(rsaSign == null)
-                throw new AliPayException(ConstantEnum.EXCEPTION_PARAM_NULL.getCodeStr(), ConstantEnum.EXCEPTION_PARAM_NULL.getValueStr());
+                throw new AliPayException(ConstantEnum.EXCEPTION_ALI_PAY_SIGN_FAIL.getCodeStr(), ConstantEnum.EXCEPTION_ALI_PAY_SIGN_FAIL.getValueStr());
             String zhifubaoSign = signContent + "&sign=\"" + URLEncoder.encode(rsaSign, "utf-8") + "\"&sign_type=\"RSA\"";
             resultMap.put("code", 0);
             resultMap.put("zhifubaoSign", zhifubaoSign);

@@ -1,9 +1,8 @@
 package com.rongyi.rpb.service.impl;
 
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.rongyi.core.framework.mybatis.service.impl.BaseServiceImpl;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
+import com.rongyi.rpb.Exception.AliPayException;
 import com.rongyi.rpb.Exception.TradeException;
 import com.rongyi.rpb.common.pay.ali.sign.AlipayConfig;
 import com.rongyi.rpb.common.pay.ali.util.AlipayNotify;
@@ -12,6 +11,8 @@ import com.rongyi.rpb.common.pay.ali.util.UtilDate;
 import com.rongyi.rpb.constants.ConstantUtil;
 import com.rongyi.rpb.service.WebPageAlipayService;
 import com.rongyi.rpb.unit.TimeExpireUnit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +37,7 @@ public class WebPageAlipayServiceImpl extends BaseServiceImpl implements WebPage
 
 	@Override
 	public Map<String, Object> getToken(PaymentEntityVO paymentEntityVO) {
-		LOGGER.info("price="+paymentEntityVO.getAmountMoney());
+		LOGGER.info("支付宝网页支付签名获取,getToken payNo={},orderPrice={}",paymentEntityVO.getPayNo(),paymentEntityVO.getAmountMoney().toString());
 		Map<String, Object> map = new HashMap<>();
 		//支付失效时间
 		String itBPay= timeExpireUnit.aliPayTimeExpire(paymentEntityVO.getTimeStart(), paymentEntityVO.getTimeExpire(),paymentEntityVO.getOrderType());
@@ -65,10 +66,11 @@ public class WebPageAlipayServiceImpl extends BaseServiceImpl implements WebPage
 			map.put("request_token", requestToken);
 			map.put("sHtmlText", sHtmlText);
 			map.put("code", 0);
-		} catch (Exception e) {
-			LOGGER.error(e);
+		} catch (AliPayException e){
+			throw e;
+		}catch (Exception e) {
+			LOGGER.error(e.getMessage());
 			e.printStackTrace();
-			map.put("Exception", e.getMessage());
 		}
 		return map;
 	}
