@@ -90,7 +90,8 @@ public class PlatformRebateVO implements Serializable {
 
     private List<String> shopsId;
 
-    private List<String> categoriesId;
+    private List<String> couponCategoriesId;
+    private List<String> commodityCategoriesId;
 
 
     /**
@@ -241,12 +242,20 @@ public class PlatformRebateVO implements Serializable {
         this.shopsId = shopsId;
     }
 
-    public List<String> getCategoriesId() {
-        return categoriesId;
+    public List<String> getCouponCategoriesId() {
+        return couponCategoriesId;
     }
 
-    public void setCategoriesId(List<String> categoriesId) {
-        this.categoriesId = categoriesId;
+    public void setCouponCategoriesId(List<String> couponCategoriesId) {
+        this.couponCategoriesId = couponCategoriesId;
+    }
+
+    public List<String> getCommodityCategoriesId() {
+        return commodityCategoriesId;
+    }
+
+    public void setCommodityCategoriesId(List<String> commodityCategoriesId) {
+        this.commodityCategoriesId = commodityCategoriesId;
     }
 
     public String getLimitDesc() {
