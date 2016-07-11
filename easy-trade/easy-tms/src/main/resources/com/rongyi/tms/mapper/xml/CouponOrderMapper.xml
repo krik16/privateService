@@ -138,7 +138,7 @@
 		from ry_trade.trade_order as trade_order
 		join
 		ry_trade.trade_sub_order as trade_sub_order on trade_order.id = trade_sub_order.order_id
-	<!--	left join ry_trade.trade_user_code as trade_user_code on trade_order.id = trade_user_code.order_id-->
+		<!--left join ry_trade.trade_user_code as trade_user_code on trade_order.id = trade_user_code.order_id-->
 		<where>
 			<include refid="Base_where" />
 		</where>
