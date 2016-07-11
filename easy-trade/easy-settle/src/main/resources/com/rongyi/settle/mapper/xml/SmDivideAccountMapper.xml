@@ -253,6 +253,7 @@
 				and sda.bill_date <![CDATA[ < ]]>
 				DATE_ADD(date_format(#{billDateEnd},'%Y-%m-%d'),INTERVAL 1 DAY)
 			</if>
+			order by bill_batch_no desc
 	</sql>
 
 	<!-- 分页查询分账记录 -->
