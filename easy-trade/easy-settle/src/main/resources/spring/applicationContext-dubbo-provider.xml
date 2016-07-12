@@ -21,4 +21,8 @@
     <!--是否打款验证接口-->
     <dubbo:service interface="com.rongyi.rss.settle.GoodPayService" version="${dubbo.version}" ref="goodPayService" retries="0" />
     <bean id="goodPayService" class="com.rongyi.settle.service.dubbo.GoodPayServiceImpl"/>
+    
+    <!--生成分账账单-->
+    <dubbo:service interface="com.rongyi.rss.settle.DivideAccountService" version="${dubbo.version}" ref="divideAccountService" retries="0" />
+    <bean id="divideAccountService" class="com.rongyi.settle.service.dubbo.DivideAccountServiceImpl"/>
 </beans>  
