@@ -1,16 +1,13 @@
 package com.rongyi.rpb.service;
 
-import java.util.Map;
-
-import com.rongyi.rpb.common.pay.weixin.model.PaySignData;
-import org.json.JSONException;
-
 import com.rongyi.easy.mq.MessageEvent;
 import com.rongyi.easy.rpb.domain.PaymentEntity;
 import com.rongyi.easy.rpb.vo.PaymentEntityVO;
 import com.rongyi.easy.rpb.vo.WeixinQueryOrderParamVO;
-import com.rongyi.rpb.common.pay.weixin.model.RefundQueryResData;
+import com.rongyi.rpb.common.pay.weixin.model.PaySignData;
 import com.rongyi.rpb.common.pay.weixin.model.RefundResData;
+
+import java.util.Map;
 
 /**
  * @Author: 柯军
@@ -82,6 +79,26 @@ public interface WeixinPayService {
 	 * @datetime:2015年8月27日上午10:38:00
 	 **/
 	 void batchTriggerWeixinRefund();
-	
+
+	/**
+	 * 退款更新/通知处理
+	 * @param oldPaymentEntity
+	 * @param paymentEntity
+	 * @return
+	 */
+	boolean doRefundAndNotify(PaymentEntity oldPaymentEntity,PaymentEntity paymentEntity);
+
+	/**
+	 * 支付结果通知第三方
+	 * @param paymentEntity PaymentEntity
+	 */
+	void payNotifyThird(PaymentEntity paymentEntity);
+
+
+	/**
+	 * 退款结果通知第三方
+	 * @param paymentEntity PaymentEntity
+	 */
+	void refundNotifyThird(PaymentEntity paymentEntity);
 
 }

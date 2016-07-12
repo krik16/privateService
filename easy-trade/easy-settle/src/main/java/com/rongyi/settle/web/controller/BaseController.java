@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 
+import com.rongyi.settle.constants.ConstantEnum;
+
 /**	
  * @Author:  柯军
  * @Description: TODO 
@@ -21,6 +23,10 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class BaseController {
+	
+	public static final Integer PAGE_SIZE = ConstantEnum.PAGE_SIZE.getCodeInt();// 分页大小
+
+	public static final Integer CURRENT_PAGE = ConstantEnum.CURRENT_PAGE.getCodeInt();// 当前页数
 
 	public String getUserName(HttpServletRequest request){
 		if(request.getSession().getAttribute("userName") != null)

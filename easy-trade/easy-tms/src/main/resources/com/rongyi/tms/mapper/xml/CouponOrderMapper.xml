@@ -26,7 +26,7 @@
 		<result column="score_discount" property="scoreDiscount" jdbcType="DOUBLE" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		DISTINCT trade_order.id,
+		trade_order.id,
 		trade_order.order_no,
 		trade_order.user_id,
 		trade_order.user_name,
@@ -70,9 +70,9 @@
 	</sql>
 	<sql id="Base_where">
 		and trade_order.type = 1
-		<if test="couponCode != null and couponCode != ''">
+		<!--<if test="couponCode != null and couponCode != ''">
 			and trade_user_code.coupon_code = #{couponCode}
-		</if>
+		</if>-->
 		<if test="createAtBegin != null and createAtBegin != ''">
 			and trade_order.create_at &gt;= #{createAtBegin}
 		</if>
@@ -136,9 +136,9 @@
 		select
 		<include refid="Base_Column_List" />
 		from ry_trade.trade_order as trade_order
-		left join
+		join
 		ry_trade.trade_sub_order as trade_sub_order on trade_order.id = trade_sub_order.order_id
-		left join ry_trade.trade_user_code as trade_user_code on trade_order.id = trade_user_code.order_id
+		<!--left join ry_trade.trade_user_code as trade_user_code on trade_order.id = trade_user_code.order_id-->
 		<where>
 			<include refid="Base_where" />
 		</where>
@@ -154,10 +154,10 @@
 		from ry_trade.trade_order
 		as
 		trade_order
-		left join ry_trade.trade_sub_order as trade_sub_order
+		join ry_trade.trade_sub_order as trade_sub_order
 		on
 		trade_order.id = trade_sub_order.order_id
-		left join ry_trade.trade_user_code as trade_user_code on trade_order.id = trade_user_code.order_id
+		<!--left join ry_trade.trade_user_code as trade_user_code on trade_order.id = trade_user_code.order_id-->
 		<where>
 			<include refid="Base_where" />
 		</where>

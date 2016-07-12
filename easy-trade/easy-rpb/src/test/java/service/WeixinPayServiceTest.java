@@ -20,6 +20,7 @@ import org.springframework.context.annotation.Description;
 import org.springframework.test.annotation.Rollback;
 import org.testng.annotations.Test;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 public class WeixinPayServiceTest extends BaseTest {
@@ -207,6 +208,16 @@ public class WeixinPayServiceTest extends BaseTest {
 	public void testgetWeXinPaySign(){
 //		payNo=0011957252096104310,total_fee=0.01，timeStart=2016-01-19 10:43:05,timeExpire=2016-01-19 11:00:05,orderType=0
 //		weixinPayService.getAppWeXinSign("0011957252096104310",0.01,"2016-01-19 10:43:05","2016-01-19 11:00:05",0);
+	}
+
+
+	@Test
+	public void testRefundNotifyThird(){
+		PaymentEntity paymentEntity = new PaymentEntity();
+		paymentEntity.setOrderNum("100113");
+		paymentEntity.setAmountMoney(new BigDecimal(100000.00));
+		paymentEntity.setPayNo("0061300156160135507");
+		weixinPayService.refundNotifyThird(paymentEntity);
 	}
 
 
