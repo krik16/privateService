@@ -26,10 +26,12 @@ public class BdataFloorVO implements Serializable {
     private String buildingId;
     private String buildingType;
     private String businesstype;
-    private String createdAt;
+    private Date createdAt;
     private String name;
     private String navigationPic;//黑白图
     private String operatorId;
+    private String operatorName;
+    private String lastUpdateName;
     private String parentId;
     private List<String> parentIds;
     private String pathImg;//路径图
@@ -37,11 +39,35 @@ public class BdataFloorVO implements Serializable {
     private Integer position;//排序
     private String simpleFloorName;//楼层图
     private Integer systemStatus;//1 隐藏 0正常
-    private String  updated_at;
+    private Date  updated_at;
     
     
     
-    public String getBuildingType() {
+    public Date getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+	public Date getUpdated_at() {
+		return updated_at;
+	}
+	public void setUpdated_at(Date updated_at) {
+		this.updated_at = updated_at;
+	}
+	public String getOperatorName() {
+		return operatorName;
+	}
+	public void setOperatorName(String operatorName) {
+		this.operatorName = operatorName;
+	}
+	public String getLastUpdateName() {
+		return lastUpdateName;
+	}
+	public void setLastUpdateName(String lastUpdateName) {
+		this.lastUpdateName = lastUpdateName;
+	}
+	public String getBuildingType() {
 		return buildingType;
 	}
 	public void setBuildingType(String buildingType) {
@@ -83,12 +109,7 @@ public class BdataFloorVO implements Serializable {
 	public void setBusinesstype(String businesstype) {
 		this.businesstype = businesstype;
 	}
-	public String getCreatedAt() {
-		return createdAt;
-	}
-	public void setCreatedAt(String createdAt) {
-		this.createdAt = createdAt;
-	}
+
 	public String getName() {
 		return name;
 	}
@@ -162,12 +183,7 @@ public class BdataFloorVO implements Serializable {
 	public void setSystemStatus(Integer systemStatus) {
 		this.systemStatus = systemStatus;
 	}
-	public String getUpdated_at() {
-		return updated_at;
-	}
-	public void setUpdated_at(String updated_at) {
-		this.updated_at = updated_at;
-	}
+
 	public String getLast_updateId() {
 		return last_updateId;
 	}
