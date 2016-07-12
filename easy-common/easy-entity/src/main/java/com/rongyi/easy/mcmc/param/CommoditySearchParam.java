@@ -12,6 +12,7 @@ import com.rongyi.easy.mcmc.mvc.DateJson.DateJsonDeserializer;
 
 
 public class CommoditySearchParam {
+	
 	private String categoryId;//3级分类id
 	private String category;//4级分类id
 	private int type;//type 0表示不考虑时间1:添加时间2上架时间 3下架时间
@@ -23,8 +24,7 @@ public class CommoditySearchParam {
 	private int status;//状态 0下架 1上架 2是删除3待上架4待处理 -1表示所有
 	private int currpage;//当页数1表示第一页
 	private int pageSize;//每页大小
-
-
+	
 	public String getCategoryId() {
 		return categoryId;
 	}
@@ -80,5 +80,5 @@ public class CommoditySearchParam {
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
-
+	
 }
