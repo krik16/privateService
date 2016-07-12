@@ -98,6 +98,8 @@ public class ShopEntity implements Serializable{
 	private List<ObjectId> production_ids;
 	private List<Double> location;
 	private Integer rank;
+	private String name_en;
+	private String description_en ;
 	public ShopEntity() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -230,6 +232,8 @@ public class ShopEntity implements Serializable{
 		this.updated_by = param.getUpdated_by();
 		this.valid = param.getValid();
 		this.reason = param.getReason();
+		this.name_en = param.getName_en();
+		this.description_en = param.getDescription_en();
 		
 		//分公司id
 		if(StringUtils.isNotBlank(param.getFiliale_id())){
@@ -519,5 +523,21 @@ public class ShopEntity implements Serializable{
 
 	public void setRank(Integer rank) {
 		this.rank = rank;
+	}
+
+	public String getName_en() {
+		return name_en;
+	}
+
+	public void setName_en(String name_en) {
+		this.name_en = name_en;
+	}
+
+	public String getDescription_en() {
+		return description_en;
+	}
+
+	public void setDescription_en(String description_en) {
+		this.description_en = description_en;
 	}
 }
