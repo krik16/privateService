@@ -26,6 +26,16 @@ public class CodeGetRecord {
      */
     private Integer inviterType;
 
+    private Integer hannelsId;
+
+    public Integer getHannelsId() {
+        return hannelsId;
+    }
+
+    public void setHannelsId(Integer hannelsId) {
+        this.hannelsId = hannelsId;
+    }
+
     public Integer getId() {
         return id;
     }
