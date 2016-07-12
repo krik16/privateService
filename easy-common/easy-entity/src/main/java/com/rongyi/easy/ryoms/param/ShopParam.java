@@ -38,6 +38,7 @@ public class ShopParam implements Serializable{
 	private Integer createSource = 0 ; //创建来源  0大运营  1商家后台  其它crm
 	private String averageConsumption;  //平均消费
 	private String icon ;             //店铺自定义Logo
+	private Integer valid ;    //店铺状态
 	
 	@Override
 	public String toString(){
@@ -223,5 +224,13 @@ public class ShopParam implements Serializable{
 
 	public void setIcon(String icon) {
 		this.icon = icon;
+	}
+
+	public Integer getValid() {
+		return valid;
+	}
+
+	public void setValid(Integer valid) {
+		this.valid = valid;
 	}
 }
