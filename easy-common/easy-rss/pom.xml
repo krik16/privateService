@@ -6,6 +6,7 @@
 		<artifactId>easy-common</artifactId>
 		<version>3.7.8-SNAPSHOT</version>
 	</parent>
+
 	<artifactId>easy-rss</artifactId>
 	<packaging>jar</packaging>
 
