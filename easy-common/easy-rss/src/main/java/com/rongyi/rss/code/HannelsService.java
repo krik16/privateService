@@ -86,4 +86,10 @@ public interface HannelsService {
      * @return
      */
     Hannels findCurrentHannels(Integer type,Integer channelId);
+
+    /**
+     * 获取所有的推广码各个状态的数量
+     * @return
+     */
+    HannelResponseVO allcount();
 }
