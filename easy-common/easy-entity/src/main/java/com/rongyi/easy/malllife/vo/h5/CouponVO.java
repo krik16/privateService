@@ -30,6 +30,7 @@ public class CouponVO implements Serializable{
 	private String grouponOriginal; //原价
 	private String distance;//距离
 	private Integer limitCount; //每人限购数
+	private String buyedAmount; //已售数量
 	public String getCouponId() {
 		return couponId;
 	}
@@ -102,6 +103,12 @@ public class CouponVO implements Serializable{
 	public void setLimitCount(Integer limitCount) {
 		this.limitCount = limitCount;
 	}
+	public String getBuyedAmount() {
+		return buyedAmount;
+	}
+	public void setBuyedAmount(String buyedAmount) {
+		this.buyedAmount = buyedAmount;
+	}
 	@Override
 	public String toString() {
 		return "CouponVO [couponId=" + couponId + ", couponName=" + couponName
@@ -110,8 +117,7 @@ public class CouponVO implements Serializable{
 				+ description + ", startTime=" + startTime + ", endTime="
 				+ endTime + ", grouponPrice=" + grouponPrice
 				+ ", grouponOriginal=" + grouponOriginal + ", distance="
-				+ distance + ", limitCount=" + limitCount + "]";
+				+ distance + ", limitCount=" + limitCount + ", buyedAmount="
+				+ buyedAmount + "]";
 	}
-	
-	
 }
