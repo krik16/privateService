@@ -54,6 +54,7 @@ public class AccountBlackListServiceImplTest extends BaseTest {
 
 	@Test
 	public  void test(){
+
 		smsUtil.sendMsMessage("13564452580", 10, "1234567", "支付宝", DateUtil.getCurrDateTime(), DateUtil.getCurrDateTime(),"test");
 	}
 }
