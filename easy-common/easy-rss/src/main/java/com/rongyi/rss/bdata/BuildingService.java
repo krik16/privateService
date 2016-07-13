@@ -19,7 +19,7 @@ public interface BuildingService {
 	
 	List<BuildingVO> queryBuildList(Map<String, Object> queryMap);
 	
-	void insertbuildingBlock(String[] buildValue, String mallId, String buildType);
+	void insertbuildingBlock(String[] buildValue, String mallId, String[] buildType);
 	
 	void updateBuilding(List<Map<String, Object>> bulidMapList);
 	
