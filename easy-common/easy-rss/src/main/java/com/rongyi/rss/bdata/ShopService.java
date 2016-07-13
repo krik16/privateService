@@ -113,5 +113,9 @@ public interface ShopService {
 	 * @return
 	 */
 	public List<Shop> getShopListByIds(List<ObjectId> ids);
+	
+	public Map getZoneIdNameMap(Map<String, String> map,String type);
+	
+	
 
 }
