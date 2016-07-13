@@ -400,4 +400,30 @@ public class PaymentEntity implements Serializable {
 	public void setWeixinMchId(Integer weixinMchId) {
 		this.weixinMchId = weixinMchId;
 	}
+
+	@Override
+	public String toString() {
+		return "PaymentEntity{" +
+				"id=" + id +
+				", payNo='" + payNo + '\'' +
+				", orderNum='" + orderNum + '\'' +
+				", orderType=" + orderType +
+				", orderPrice=" + orderPrice +
+				", title='" + title + '\'' +
+				", amountMoney=" + amountMoney +
+				", status=" + status +
+				", tradeType=" + tradeType +
+				", createTime=" + createTime +
+				", finishTime=" + finishTime +
+				", payChannel=" + payChannel +
+				", outAccount='" + outAccount + '\'' +
+				", inAccount='" + inAccount + '\'' +
+				", showNum=" + showNum +
+				", drawUserId='" + drawUserId + '\'' +
+				", payName='" + payName + '\'' +
+				", batchNo='" + batchNo + '\'' +
+				", refundRejected='" + refundRejected + '\'' +
+				", weixinMchId=" + weixinMchId +
+				'}';
+	}
 }
