@@ -53,8 +53,19 @@ public class MallVO implements Serializable {
     private Long shopNum;
     private double logoX;  //经度
     private double logoY;  //纬度
+    private boolean hasCustomCategory;//是否有自定义分类
+    
+    
 
-    public String getId() {
+    public boolean isHasCustomCategory() {
+		return hasCustomCategory;
+	}
+
+	public void setHasCustomCategory(boolean hasCustomCategory) {
+		this.hasCustomCategory = hasCustomCategory;
+	}
+
+	public String getId() {
         return id;
     }
 
