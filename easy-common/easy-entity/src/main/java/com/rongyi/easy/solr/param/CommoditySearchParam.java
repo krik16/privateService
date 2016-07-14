@@ -12,6 +12,7 @@ package com.rongyi.easy.solr.param;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.rongyi.core.annotation.NeedCheck;
 import com.rongyi.easy.malllife.param.MalllifeBaseParam;
@@ -97,6 +98,8 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	private List<String> shopList;//店铺id集合
 	private List<String> categoryList;//分类id集合
 	private String couponId;//红包券id
+
+	private Map commodityMaxMinValues;  // 商品最大最小销量和更新时间
 
 	public String getCouponId() {
 		return couponId;
@@ -378,6 +381,14 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 
 	public void setSortMethodName(String sortMethodName) {
 		this.sortMethodName = sortMethodName;
+	}
+
+	public Map getCommodityMaxMinValues() {
+		return commodityMaxMinValues;
+	}
+
+	public void setCommodityMaxMinValues(Map commodityMaxMinValues) {
+		this.commodityMaxMinValues = commodityMaxMinValues;
 	}
 
 	@Override
