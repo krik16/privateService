@@ -65,7 +65,9 @@ public enum ConstantEnum {
     IS_ONESELF(1,"关联自身"),
     NOT_ONESELF(0,"非关联自身"),
 
-	PAGE_SIZE(10,"分页条数");
+	PAGE_SIZE(10,"分页条数"),
+	
+	CURRENT_PAGE(1,"默认页数");
     
     private Object code;
 
