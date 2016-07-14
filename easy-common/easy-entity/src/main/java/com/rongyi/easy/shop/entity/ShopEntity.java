@@ -181,6 +181,8 @@ public class ShopEntity implements Serializable{
 				}
 			}
 			this.custom_category_ids = custom_category_ids;
+		}else{
+			this.custom_category_ids = new ArrayList<ObjectId>();
 		}
 		
 		this.photo_urls = param.getPhoto_urls();
