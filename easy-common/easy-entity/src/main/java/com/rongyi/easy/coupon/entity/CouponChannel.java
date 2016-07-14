@@ -15,7 +15,7 @@ public class CouponChannel implements Serializable {
 
     private String name;
 
-    private Integer type;
+    private Integer type;//渠道类型：发布渠道[0],推广渠道[1]
 
     private Date createAt;
 
