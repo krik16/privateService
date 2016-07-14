@@ -116,6 +116,9 @@ public interface ShopService {
 	
 	public Map getZoneIdNameMap(Map<String, String> map,String type);
 	
-	
-
+	/**
+	 * 通知solr
+	 * @param shopIds
+	 */
+	public void updateSorl(List<String> shopIds);
 }
