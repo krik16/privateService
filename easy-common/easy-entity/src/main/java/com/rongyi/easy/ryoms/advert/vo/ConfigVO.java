@@ -65,6 +65,16 @@ public class ConfigVO implements Serializable {
 	private Integer ry_banner_318_home_b;//banner618_930容易网广告数量
 	private Integer mall_banner_318_home_d;//banner1040_630商家广告数量
 	private Integer ry_banner_318_home_d;//banner1040_630容易网广告数量
+	private Integer mall_brandguide_330;//品牌导购商场数量
+	private Integer ry_brandguide_330;//品牌导购容易网数量
+	private Integer mall_floornavigate_330;//楼层导航商场数量
+	private Integer ry_floornavigate_330;//楼层导航容易网数量
+	private Integer mall_membercenter_330;//会员中心商场数量
+	private Integer ry_membercenter_330;//会员中心容易网数量
+	private Integer mall_activity_330;//精彩活动商场数量
+	private Integer ry_activity_330;//精彩活动容易网数量
+	private Integer mall_coupon_330;//优惠券商场数量
+	private Integer ry_coupon_330;//优惠券容易网数量
 	private String address;//详细地址
 	/**
 	 * @return the configId
@@ -504,21 +514,137 @@ public class ConfigVO implements Serializable {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
+	public Integer getMall_brandguide_330() {
+		return mall_brandguide_330;
+	}
+
+	public void setMall_brandguide_330(Integer mall_brandguide_330) {
+		this.mall_brandguide_330 = mall_brandguide_330;
+	}
+
+	public Integer getRy_brandguide_330() {
+		return ry_brandguide_330;
+	}
+
+	public void setRy_brandguide_330(Integer ry_brandguide_330) {
+		this.ry_brandguide_330 = ry_brandguide_330;
+	}
+
+	public Integer getMall_floornavigate_330() {
+		return mall_floornavigate_330;
+	}
+
+	public void setMall_floornavigate_330(Integer mall_floornavigate_330) {
+		this.mall_floornavigate_330 = mall_floornavigate_330;
+	}
+
+	public Integer getRy_floornavigate_330() {
+		return ry_floornavigate_330;
+	}
+
+	public void setRy_floornavigate_330(Integer ry_floornavigate_330) {
+		this.ry_floornavigate_330 = ry_floornavigate_330;
+	}
+
+	public Integer getMall_membercenter_330() {
+		return mall_membercenter_330;
+	}
+
+	public void setMall_membercenter_330(Integer mall_membercenter_330) {
+		this.mall_membercenter_330 = mall_membercenter_330;
+	}
+
+	public Integer getRy_membercenter_330() {
+		return ry_membercenter_330;
+	}
+
+	public void setRy_membercenter_330(Integer ry_membercenter_330) {
+		this.ry_membercenter_330 = ry_membercenter_330;
+	}
+
+	public Integer getMall_activity_330() {
+		return mall_activity_330;
+	}
+
+	public void setMall_activity_330(Integer mall_activity_330) {
+		this.mall_activity_330 = mall_activity_330;
+	}
+
+	public Integer getRy_activity_330() {
+		return ry_activity_330;
+	}
+
+	public void setRy_activity_330(Integer ry_activity_330) {
+		this.ry_activity_330 = ry_activity_330;
+	}
+
+	public Integer getMall_coupon_330() {
+		return mall_coupon_330;
+	}
+
+	public void setMall_coupon_330(Integer mall_coupon_330) {
+		this.mall_coupon_330 = mall_coupon_330;
+	}
+
+	public Integer getRy_coupon_330() {
+		return ry_coupon_330;
+	}
+
+	public void setRy_coupon_330(Integer ry_coupon_330) {
+		this.ry_coupon_330 = ry_coupon_330;
+	}
+
 	@Override
 	public String toString() {
-		return "ConfigVO [configId=" + configId + ", mallMId=" + mallMId + ", mallName=" + mallName + ", mall_level="
-				+ mall_level + ", positionId=" + positionId + ", positionName=" + positionName + ", cityMId=" + cityMId
-				+ ", cityName=" + cityName + ", cityLevel=" + cityLevel + ", areaId=" + areaId + ", areaName="
-				+ areaName + ", countTotal=" + countTotal + ", countRY=" + countRY + ", countMall=" + countMall
-				+ ", statusId=" + statusId + ", statusName=" + statusName + ", create_int=" + create_int
-				+ ", create_date=" + create_date + ", update_int=" + update_int + ", update_date=" + update_date
-				+ ", create_by=" + create_by + ", create_at=" + create_at + ", update_by=" + update_by + ", update_at="
-				+ update_at + ", mall_ad_num=" + mall_ad_num + ", ry_ad_num=" + ry_ad_num + ", mall_banner="
-				+ mall_banner + ", ry_banner=" + ry_banner + ", mall_banner_330_home_a=" + mall_banner_330_home_a
-				+ ", ry_banner_330_home_a=" + ry_banner_330_home_a + ", mall_banner_330_home_d="
-				+ mall_banner_330_home_d + ", ry_banner_330_home_d=" + ry_banner_330_home_d
-				+ ", mall_banner_318_home_b=" + mall_banner_318_home_b + ", ry_banner_318_home_b="
-				+ ry_banner_318_home_b + ", mall_banner_318_home_d=" + mall_banner_318_home_d
-				+ ", ry_banner_318_home_d=" + ry_banner_318_home_d + ", address=" + address + "]";
+		return "ConfigVO{" +
+				"configId=" + configId +
+				", mallMId='" + mallMId + '\'' +
+				", mallName='" + mallName + '\'' +
+				", mall_level='" + mall_level + '\'' +
+				", positionId=" + positionId +
+				", positionName='" + positionName + '\'' +
+				", cityMId='" + cityMId + '\'' +
+				", cityName='" + cityName + '\'' +
+				", cityLevel=" + cityLevel +
+				", areaId=" + areaId +
+				", areaName='" + areaName + '\'' +
+				", countTotal=" + countTotal +
+				", countRY=" + countRY +
+				", countMall=" + countMall +
+				", statusId=" + statusId +
+				", statusName='" + statusName + '\'' +
+				", create_int=" + create_int +
+				", create_date=" + create_date +
+				", update_int=" + update_int +
+				", update_date=" + update_date +
+				", create_by='" + create_by + '\'' +
+				", create_at=" + create_at +
+				", update_by='" + update_by + '\'' +
+				", update_at=" + update_at +
+				", mall_ad_num=" + mall_ad_num +
+				", ry_ad_num=" + ry_ad_num +
+				", mall_banner=" + mall_banner +
+				", ry_banner=" + ry_banner +
+				", mall_banner_330_home_a=" + mall_banner_330_home_a +
+				", ry_banner_330_home_a=" + ry_banner_330_home_a +
+				", mall_banner_330_home_d=" + mall_banner_330_home_d +
+				", ry_banner_330_home_d=" + ry_banner_330_home_d +
+				", mall_banner_318_home_b=" + mall_banner_318_home_b +
+				", ry_banner_318_home_b=" + ry_banner_318_home_b +
+				", mall_banner_318_home_d=" + mall_banner_318_home_d +
+				", ry_banner_318_home_d=" + ry_banner_318_home_d +
+				", mall_brandguide_330=" + mall_brandguide_330 +
+				", ry_brandguide_330=" + ry_brandguide_330 +
+				", mall_floornavigate_330=" + mall_floornavigate_330 +
+				", ry_floornavigate_330=" + ry_floornavigate_330 +
+				", mall_membercenter_330=" + mall_membercenter_330 +
+				", ry_membercenter_330=" + ry_membercenter_330 +
+				", mall_activity_330=" + mall_activity_330 +
+				", ry_activity_330=" + ry_activity_330 +
+				", mall_coupon_330=" + mall_coupon_330 +
+				", ry_coupon_330=" + ry_coupon_330 +
+				", address='" + address + '\'' +
+				'}';
 	}
 }
