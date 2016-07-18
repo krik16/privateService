@@ -57,6 +57,7 @@ public enum AppErrorCode {
     ERROR_PHONE_DISABLE(1067106,"您的账户异常，请联系容易逛客服"),
     ERROR_SHARE_FAILE(1067107,"领取红包失败"),
     /** 密码获取红包8100---8200 */
+    ERROR_PWD_LENGTH(1068100,"密码长度不对"),
     ERROR_ADDED_RED(1068101,"该红包已被添加过啦"),
     ERROR_OUTDATA_RED(1068102,"抱歉，这个密码对应红包已经过期啦"),
     ERROR_ULTRALIMIT_RED(1068103,"抱歉，您领取红包超限，请明天再来试试呗"),
