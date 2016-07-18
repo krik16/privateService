@@ -26,7 +26,7 @@ public class CouponVO implements Serializable{
 	private String endTime; //结束时间
 	private String holderName;//店铺/商场/品牌名称
 	private String holder_id; //持有者id;
-	private String holder_type; //持有者类型 shop/mall/brand
+	private String holder_type; //持有者类型 Shop/Mall/Brand
 	private String grouponPrice; //现价
 	private String grouponOriginal; //原价
 	private String distance;//距离
