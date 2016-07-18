@@ -67,6 +67,13 @@ public interface MallService {
      * @return
      */
     ResponseVO getBrandById(String brndId);
+    
+    /**
+    *品牌分类接口
+    * @param CategoryId
+    * @return
+    */
+    ResponseVO getBrandCategory(String categoryId);
 
     /**
      *

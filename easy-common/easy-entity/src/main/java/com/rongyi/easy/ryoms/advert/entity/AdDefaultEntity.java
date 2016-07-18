@@ -33,6 +33,8 @@ public class AdDefaultEntity implements Serializable {
 	private Integer content_type;
 	private String content_url;
 	private Integer status;
+	private Integer module_type;//素材模板类型 素材模板 11 全屏模板-A 21 首页Banner-A 31 内页广告模板 12 全屏模板B-浮窗
+
 	/**
 	 * @return the defaultId
 	 */
@@ -188,5 +190,13 @@ public class AdDefaultEntity implements Serializable {
 	 */
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public Integer getModule_type() {
+		return module_type;
+	}
+
+	public void setModule_type(Integer module_type) {
+		this.module_type = module_type;
 	}
 }

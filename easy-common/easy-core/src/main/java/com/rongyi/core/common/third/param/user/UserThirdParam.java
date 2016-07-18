@@ -58,5 +58,13 @@ public class UserThirdParam  implements Serializable {
         this.channel = channel;
     }
 
-
+    @Override
+    public String toString() {
+        return "UserThirdParam{" +
+                "data='" + data + '\'' +
+                ", timeStamp='" + timeStamp + '\'' +
+                ", sign='" + sign + '\'' +
+                ", channel='" + channel + '\'' +
+                '}';
+    }
 }

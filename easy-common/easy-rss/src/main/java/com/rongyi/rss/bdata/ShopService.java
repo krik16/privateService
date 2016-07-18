@@ -30,7 +30,7 @@ public interface ShopService {
 	 * @return 带ShopVO 的ResponseVO
 	 * @throws Exception
 	 */
-	ResponseVO searchShops(String mallId, String keyword, String customCateId, String zoneId, int page, int pageSize) throws Exception;
+	ResponseVO searchShops(String mallId, String keyword, String customCateId, String zoneId, int page, int pageSize,String cateId) throws Exception;
 
 	/**
 	 * 获取单个店铺详情
