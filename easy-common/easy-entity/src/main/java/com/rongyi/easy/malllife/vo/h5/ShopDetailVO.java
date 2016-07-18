@@ -24,7 +24,7 @@ public class ShopDetailVO implements Serializable{
 	private Integer sameCityShopNum; //同城同类型商铺数量
 	private String transportInfo;//交通信息
 	private String shopLogo;//店铺logo
-	private String locationPic; //商铺底图
+	private List<String> locationPic; //商铺底图
 	private String businessHours; // 营业时间
 	private String mallId; // 店铺所在商场ID
 	private String floorId; // 店铺所在楼层ID
@@ -87,10 +87,10 @@ public class ShopDetailVO implements Serializable{
 	public void setShopLogo(String shopLogo) {
 		this.shopLogo = shopLogo;
 	}
-	public String getLocationPic() {
+	public List<String> getLocationPic() {
 		return locationPic;
 	}
-	public void setLocationPic(String locationPic) {
+	public void setLocationPic(List<String> locationPic) {
 		this.locationPic = locationPic;
 	}
 	public String getBusinessHours() {
