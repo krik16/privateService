@@ -68,7 +68,8 @@ public class MallVO implements Serializable {
     private Long shopNum;
     private double logoX;  //经度
     private double logoY;  //纬度
-	private boolean hasCustomCategory;//是否有自定义分类	private String merlogPic;  //商家后台logo
+	private boolean hasCustomCategory;//是否有自定义分类
+	private String merlogPic;  //商家后台logo
     private String mallGroupId;//商场所属集团id
     private String mallLevel;//商场等级
     private Date updatedAt;//修改时间
@@ -84,8 +85,6 @@ public class MallVO implements Serializable {
 	private String validReason;
 	private String businessStatusReason;
 
-      return id;
-    }
 
     public void setId(String id) {
         this.id = id;
@@ -276,4 +275,144 @@ public class MallVO implements Serializable {
     public void setShopNum(Long shopNum) {
         this.shopNum = shopNum;
     }
+
+	public Integer getMallValid() {
+		return mallValid;
+	}
+
+	public void setMallValid(Integer mallValid) {
+		this.mallValid = mallValid;
+	}
+
+	public Boolean getTerminalMall() {
+		return terminalMall;
+	}
+
+	public void setTerminalMall(Boolean terminalMall) {
+		this.terminalMall = terminalMall;
+	}
+
+	public boolean isHasCustomCategory() {
+		return hasCustomCategory;
+	}
+
+	public void setHasCustomCategory(boolean hasCustomCategory) {
+		this.hasCustomCategory = hasCustomCategory;
+	}
+
+	public String getMallGroupId() {
+		return mallGroupId;
+	}
+
+	public void setMallGroupId(String mallGroupId) {
+		this.mallGroupId = mallGroupId;
+	}
+
+	public String getMallLevel() {
+		return mallLevel;
+	}
+
+	public void setMallLevel(String mallLevel) {
+		this.mallLevel = mallLevel;
+	}
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public String getLastUpdateId() {
+		return lastUpdateId;
+	}
+
+	public void setLastUpdateId(String lastUpdateId) {
+		this.lastUpdateId = lastUpdateId;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getOperatorId() {
+		return operatorId;
+	}
+
+	public void setOperatorId(String operatorId) {
+		this.operatorId = operatorId;
+	}
+
+	public String getOperatorName() {
+		return operatorName;
+	}
+
+	public void setOperatorName(String operatorName) {
+		this.operatorName = operatorName;
+	}
+
+	public String getLastUpdateName() {
+		return lastUpdateName;
+	}
+
+	public void setLastUpdateName(String lastUpdateName) {
+		this.lastUpdateName = lastUpdateName;
+	}
+
+	public String getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
+	}
+
+	public List getParentIds() {
+		return parentIds;
+	}
+
+	public void setParentIds(List parentIds) {
+		this.parentIds = parentIds;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getValidReason() {
+		return validReason;
+	}
+
+	public void setValidReason(String validReason) {
+		this.validReason = validReason;
+	}
+
+	public String getBusinessStatusReason() {
+		return businessStatusReason;
+	}
+
+	public void setBusinessStatusReason(String businessStatusReason) {
+		this.businessStatusReason = businessStatusReason;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public String getMerlogPic() {
+		return merlogPic;
+	}
+
+	public void setMerlogPic(String merlogPic) {
+		this.merlogPic = merlogPic;
+	}
 }
