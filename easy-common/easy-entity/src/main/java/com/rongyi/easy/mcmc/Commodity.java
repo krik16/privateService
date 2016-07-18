@@ -2,23 +2,29 @@ package com.rongyi.easy.mcmc;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.text.NumberFormat;
 import java.util.Date;
 import java.util.List;
 
+import com.rongyi.core.enumerate.mcmc.CommodityStatus;
+import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
+import com.rongyi.easy.mcmc.vo.CommoditySpecVO;
+import com.rongyi.easy.mcmc.vo.CommodityVO;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang.time.DateUtils;
+import org.apache.log4j.Logger;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
-import org.springframework.util.Assert;
 
 /**
  * 商品表 app商品对象
  */
 @Entity(value="mcmc_commodity",noClassnameStored=true)
 public class Commodity implements  Serializable,Cloneable{
+
+	private Logger logger = Logger.getLogger(Commodity.class);
 
 	private static final long serialVersionUID = -3022699601318372490L;
 
@@ -382,14 +388,6 @@ public class Commodity implements  Serializable,Cloneable{
 							.multiply(new BigDecimal(10)).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 				return new BigDecimal(0).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 			}
-			/*if(StringUtils.isNotBlank(this.currentPrice) && StringUtils.isNotBlank(this.originalPrice)) {
-				NumberFormat ddf1 = NumberFormat.getNumberInstance() ;
-				ddf1.setMaximumFractionDigits(2);
-				Double currentPrice = Double.valueOf(this.currentPrice);
-				Double originalPrice = Double.valueOf(this.originalPrice);
-
-				return (originalPrice == 0) ? 10.0 : Double.valueOf(ddf1.format(currentPrice / originalPrice)) * 10;
-			}*/
 			return 10.0;
 		} catch(Exception e) {
 			throw new RuntimeException(e.getMessage());
@@ -658,5 +656,91 @@ public class Commodity implements  Serializable,Cloneable{
 				", commodityModelNo=" +commodityModelNo+
 				",goodsParam=" + goodsParam +
 				'}';
+	}
+
+	public void wrapCommodityInfo(CommodityVO vo) {
+		List<CommoditySpecVO> specVoList = vo.getCommoditySpecList();
+		if(CollectionUtils.isEmpty(specVoList)) {
+			this.setStock(Integer.valueOf(vo.getCommodityStock()));
+			logger.info("商品库存："+this.getStock());
+			this.setOriginalPrice(vo.getCommodityOriginalPrice());
+			this.setCurrentPrice((vo.getCommodityCurrentPrice() != null
+					&& !vo.getCommodityCurrentPrice().isEmpty()) ?
+					vo.getCommodityCurrentPrice() :
+					vo.getCommodityOriginalPrice());
+			this.setPrice(Double.parseDouble(this.getCurrentPrice()));
+			this.setoPriceMax(this.getOriginalPrice());
+			this.setoPriceMin(this.getOriginalPrice());
+			this.setcPriceMax(this.getCurrentPrice());
+			this.setcPriceMin(this.getCurrentPrice());
+		}
+
+		this.setCode(vo.getCommodityCode());
+		this.setName(vo.getCommodityName());
+		this.setCategory(vo.getCommodityCategory());
+		this.setDescription(vo.getCommodityDescription());
+		this.setShopId(vo.getShopId());
+		this.setSupportCourierDeliver(vo.isSupportCourierDeliver());//是否支持快递发货
+		logger.info("是否支持快递发货 => " + vo.isSupportCourierDeliver());
+		this.setPostage((vo.getCommodityPostage() == null) ? "0.0" : vo.getCommodityPostage());
+		this.setRegisterAt(vo.getRegisterAt());
+		this.setSoldOutAt(vo.getSoldOutAt());
+		this.setSource((vo.getSource() != null) ? vo.getSource() : 2); //app添加的商品
+
+		if(this.getSource() == 2) {
+			this.setRegisterAt(new Date());//设置默认上下架时间
+			this.setSoldOutAt(DateUtils.addYears(new Date(), 1));
+		}
+		this.setSold(0);
+		if(this.getStock() <= 0) {
+			this.setStatus(CommodityDataStatus.STATUS_COMMODITY_UNSHELVE);
+		} else {
+			//APP端发布商品的时候发布商品的时候把状态更改为已删除。等待图片上传成功后更新为上架
+			if(null !=vo.getSource() && vo.getSource() == 2 && CollectionUtils.isEmpty(vo.getCommodityPicList())) {
+				this.setStatus(CommodityDataStatus.STATUS_COMMODITY_DELETED);
+			} else {
+				this.setStatus(CommodityDataStatus.STATUS_COMMODITY_SHELVE);
+			}
+		}
+
+		this.setCommodityModelNo(vo.getCommodityModelNo());//商品款号
+		this.setGoodsParam(vo.getGoodsParam()); //商品参数
+		this.setIdentity(vo.getIdentity()); //增加商品身份
+		this.setSupportSelfPickup(vo.isSupportSelfPickup()); //支持到店自提
+		logger.info("easy-mcmc|ROACommodityServiceImpl|publishCommodity|SupportSelfPickup => " + vo.isSupportSelfPickup());
+
+		if(vo.getCommodityStatus() == CommodityDataStatus.STATUS_COMMODITY_SHELVE_WAITING) {//待上架
+			this.setStatus(CommodityDataStatus.STATUS_COMMODITY_SHELVE_WAITING);
+		}
+
+		if(!vo.isSupportCourierDeliver() && !vo.isSupportSelfPickup()) {
+			this.setSupportCourierDeliver(true);
+			this.setSupportSelfPickup(true);
+		}
+		//1表示商家承担运费,0表示买家承担运费
+		this.setFreight((vo.getFreight() != null) ? vo.getFreight() : 0);
+		//上架终端：
+		// 1.表示容易逛
+		// 2.表示互动屏
+		// 3.表示容易逛和互动屏
+		// 4.表示微商
+		// 5.微商,容易逛
+		// 6.微商,互动屏
+		// 7.容易逛, 互动屏, 微商(转换成二进制数个位1有容易逛第二位1有 互动屏第三位1有 微商)
+		this.setTerminalType((vo.getTerminalType() != null) ? vo.getTerminalType() : CommodityTerminalType.TERMINAL_TYPE_7);
+		this.setWeAndTeStatus(CommodityTerminalType.weAndTeStatus.STATUS_4);//默认为都不展示
+
+		//0表示统一库存1表示分管库存默认是分管库存
+		this.setStockStatus((vo.getStockStatus() != null) ? vo.getStockStatus() : 1);
+		this.setReason(vo.getReason());
+		this.setPicList(vo.getCommodityPicList());
+		this.setCreateAt(new Date());
+		this.setUpdateAt(new Date());
+		this.setCreate_by(vo.getCreate_by());
+		this.setUpdate_by(vo.getCreate_by());
+		this.setTemplateId(vo.getTemplateId());
+		//设置限购数量
+		this.setPurchaseCount((null == vo.getPurchaseCount()) ? 0 : vo.getPurchaseCount());
+		this.setDiscount(this.getDiscount());
 	}
 }
