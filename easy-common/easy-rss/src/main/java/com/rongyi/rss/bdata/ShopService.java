@@ -30,7 +30,7 @@ public interface ShopService {
 	 * @return 带ShopVO 的ResponseVO
 	 * @throws Exception
 	 */
-	ResponseVO searchShops(String mallId, String keyword, String customCateId, String zoneId, int page, int pageSize) throws Exception;
+	ResponseVO searchShops(String mallId, String keyword, String customCateId, String zoneId, int page, int pageSize,String cateId) throws Exception;
 
 	/**
 	 * 获取单个店铺详情
@@ -116,6 +116,9 @@ public interface ShopService {
 	
 	public Map getZoneIdNameMap(Map<String, String> map,String type);
 	
-	
-
+	/**
+	 * 通知solr
+	 * @param shopIds
+	 */
+	public void updateSorl(List<String> shopIds);
 }
