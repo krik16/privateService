@@ -25,6 +25,9 @@ public class MLHannelsVO implements Serializable {
      */
     private boolean receiveResult;
 
+    /**
+     * 是否获取到红包。true 获取到红包，false 没有获取到红包
+     */
     private boolean hasReceiveRedenvolop;
 
     public Integer getErrorStatus() {
@@ -57,6 +60,12 @@ public class MLHannelsVO implements Serializable {
 
     public void setReceiveResult(boolean receiveResult) {
         this.receiveResult = receiveResult;
+    }
+
+    public MLHannelsVO() {
+        hasReceiveDikou = Boolean.FALSE;
+        receiveResult = Boolean.FALSE;
+        hasReceiveRedenvolop = Boolean.FALSE;
     }
 
     @Override

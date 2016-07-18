@@ -246,5 +246,5 @@ public interface RoaCouponService {
      * @param couponIds
      * @return
      */
-    CouponStockVO getCouponsStockCount(List<String> couponIds);
+    List<CouponStockVO> getCouponsStockCount(List<String> couponIds);
 }
