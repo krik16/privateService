@@ -23,9 +23,6 @@ import org.mongodb.morphia.annotations.Id;
  */
 @Entity(value="mcmc_commodity",noClassnameStored=true)
 public class Commodity implements  Serializable,Cloneable{
-
-	private Logger logger = Logger.getLogger(Commodity.class);
-
 	private static final long serialVersionUID = -3022699601318372490L;
 
 	@Id
@@ -662,7 +659,6 @@ public class Commodity implements  Serializable,Cloneable{
 		List<CommoditySpecVO> specVoList = vo.getCommoditySpecList();
 		if(CollectionUtils.isEmpty(specVoList)) {
 			this.setStock(Integer.valueOf(vo.getCommodityStock()));
-			logger.info("商品库存："+this.getStock());
 			this.setOriginalPrice(vo.getCommodityOriginalPrice());
 			this.setCurrentPrice((vo.getCommodityCurrentPrice() != null
 					&& !vo.getCommodityCurrentPrice().isEmpty()) ?
@@ -681,7 +677,6 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setDescription(vo.getCommodityDescription());
 		this.setShopId(vo.getShopId());
 		this.setSupportCourierDeliver(vo.isSupportCourierDeliver());//是否支持快递发货
-		logger.info("是否支持快递发货 => " + vo.isSupportCourierDeliver());
 		this.setPostage((vo.getCommodityPostage() == null) ? "0.0" : vo.getCommodityPostage());
 		this.setRegisterAt(vo.getRegisterAt());
 		this.setSoldOutAt(vo.getSoldOutAt());
@@ -707,7 +702,6 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setGoodsParam(vo.getGoodsParam()); //商品参数
 		this.setIdentity(vo.getIdentity()); //增加商品身份
 		this.setSupportSelfPickup(vo.isSupportSelfPickup()); //支持到店自提
-		logger.info("easy-mcmc|ROACommodityServiceImpl|publishCommodity|SupportSelfPickup => " + vo.isSupportSelfPickup());
 
 		if(vo.getCommodityStatus() == CommodityDataStatus.STATUS_COMMODITY_SHELVE_WAITING) {//待上架
 			this.setStatus(CommodityDataStatus.STATUS_COMMODITY_SHELVE_WAITING);
