@@ -658,7 +658,8 @@ public class Commodity implements  Serializable,Cloneable{
 				'}';
 	}
 
-	public void wrapCommodityInfo(CommodityVO vo) {
+	public void wrapCommodityInfo(CommodityVO vo, long brandId, long mallId, String mallMid,
+								  String brandName, String shopNum, CommodityShopInfo shopInfo) {
 		List<CommoditySpecVO> specVoList = vo.getCommoditySpecList();
 		if(CollectionUtils.isEmpty(specVoList)) {
 			this.setStock(Integer.valueOf(vo.getCommodityStock()));
@@ -742,5 +743,14 @@ public class Commodity implements  Serializable,Cloneable{
 		//设置限购数量
 		this.setPurchaseCount((null == vo.getPurchaseCount()) ? 0 : vo.getPurchaseCount());
 		this.setDiscount(this.getDiscount());
+
+		this.setBrandName(brandName);
+		this.setBrandMid(shopInfo.getBrandMid());
+		this.setSpecList((List<ObjectId>)specMap.get("specIdList"));
+		this.setBrandId(String.valueOf(brandId));
+		this.setMallId(String.valueOf(mallId));
+		commodity.setMallMid(mallMid);
+		commodity.setShopNum(shopNum);
+
 	}
 }
