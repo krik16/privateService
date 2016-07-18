@@ -42,7 +42,7 @@ public interface ROAContentService {
 
     public MallVO getMallInfo(String mallId);
 
-    public List<ShopCategoryVO> getShopCats(String mallId);
+    public List<ShopCategoryVO> getShopCats(String mallId) throws Exception;
 
     public OldMallVO getOldMallInfo(String mallId);
 
