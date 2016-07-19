@@ -14,6 +14,7 @@ public class HannelResponseVO implements Serializable {
     private int processingCount;//进行中数量
     private int endCount;//已结束数量
     private int cancleCount;//已作废数量
+    private int totalCount;//总数量
 
     public List<HannelsVO> getHannelsVOList() {
         return hannelsVOList;
@@ -70,4 +71,13 @@ public class HannelResponseVO implements Serializable {
     public void setCancleCount(int cancleCount) {
         this.cancleCount = cancleCount;
     }
+
+    public int getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(int totalCount) {
+        this.totalCount = totalCount;
+    }
+
 }

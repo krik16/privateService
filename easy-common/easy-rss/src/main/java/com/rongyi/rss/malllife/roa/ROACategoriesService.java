@@ -13,8 +13,6 @@ import com.rongyi.easy.roa.entity.CategoriesEntity;
  * @author rongyi-13 2014年9月29日 下午3:07:59
  */
 public interface ROACategoriesService {
-	
-	
 	/**
      * 类别列表
      * @param parentId

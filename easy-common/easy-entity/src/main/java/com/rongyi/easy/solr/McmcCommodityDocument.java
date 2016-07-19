@@ -1,11 +1,21 @@
 package com.rongyi.easy.solr;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.rongyi.easy.mcmc.Commodity;
+import com.rongyi.easy.mcmc.CommodityCategory;
+import com.rongyi.easy.mcmc.CommodityShopInfo;
+import com.rongyi.easy.mcmc.CommoditySpec;
+import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
+import com.rongyi.easy.mcmc.vo.CommodityVO;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.solr.client.solrj.beans.Field;
 import org.apache.solr.common.SolrDocument;
+import org.bson.types.ObjectId;
 
 public class McmcCommodityDocument implements java.io.Serializable{
 
@@ -91,6 +101,10 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	private Double discount;
 	@Field("weAndTeStatus")
 	private String weAndTeStatus;
+	@Field("brandName")
+	private String brandName;
+	@Field("updateAt")
+	private Date updateAt;
 
 	private String secKillSign;
 
@@ -419,5 +433,66 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 	public void setSecKillSign(String secKillSign) {
 		this.secKillSign = secKillSign;
+	}
+
+	public String getBrandName() {
+		return brandName;
+	}
+
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
+	}
+
+	public void setUpdateAt(Date updateAt) {
+		this.updateAt = updateAt;
+	}
+
+	public Date getUpdateAt() {
+		return updateAt;
+	}
+
+	public void wrapDocumentInfo(Commodity commodity, CommodityVO commodityVo,
+								 long brandId, long mallId, CommodityShopInfo shopInfo) {
+		this.setId(commodity.getId().toString());
+		this.setCommodityName(commodity.getName());
+		this.setCommodityNameSubdiv(commodity.getName());
+		this.setCommodityCode(commodity.getCode());
+		this.setCommodityShopId(commodity.getShopId());
+		this.setPublic_start(new Date());
+		this.setSold(0);
+		this.setPrice(commodity.getPrice());
+		this.setStatus(commodity.getStatus());
+		this.setTerminalType(commodity.getTerminalType());
+		this.setWeAndTeStatus(commodity.getWeAndTeStatus());
+		List<String> category_ids = new ArrayList<>();
+		for (ObjectId categoryObjectId : commodity.getCategoryIds()) {
+			category_ids.add(categoryObjectId.toString());
+		}
+		this.setCategory_ids(category_ids);
+		this.setBrandName(commodity.getBrandName());
+		this.setUpdateAt(commodity.getUpdateAt());
+
+		if (commodity.getSaleId() != null && commodity.getSaleId() != 0) {
+			this.setSaleId(commodity.getSaleId());
+			this.setSortPosition(9999);
+		}
+
+		if(commodity.getSource() == 0){//商家后台发布商品，默认下架
+			this.setStatus(CommodityDataStatus.STATUS_COMMODITY_UNSHELVE);
+		}
+		this.setSystemNumber(commodity.getSystemNumber());
+		this.setDiscount(commodity.getDiscount());
+
+		this.setCommodityBrandId(String.valueOf(brandId));
+		this.setCommodityMallId(String.valueOf(mallId));
+		this.setZone_ids(shopInfo.getZoneIds());
+		this.setPosition(shopInfo.getPositon());
+		this.setBrand_id(shopInfo.getBrandMid());
+
+		if(StringUtils.isNotBlank(commodityVo.getWeAndTeStatus())){
+			this.setWeAndTeStatus(commodityVo.getWeAndTeStatus());
+		}
+
+
 	}
 }

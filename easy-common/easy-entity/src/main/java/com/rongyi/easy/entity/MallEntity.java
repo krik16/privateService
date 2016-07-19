@@ -3,7 +3,6 @@ package com.rongyi.easy.entity;
 import java.util.List;
 
 import org.bson.types.ObjectId;
-
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
@@ -284,4 +283,14 @@ public class MallEntity implements java.io.Serializable {
 	public void setTags(String tags) {
 		this.tags = tags;
 	}
+	public String getFullIcon() {
+		return "http://rongyi.b0.upaiyun.com/system/mall/icon/" + id + "/" + icon;
+	}
+	@Override
+	public String toString() {
+		return "MallEntity [id=" + id + ", address=" + address + ", icon="
+				+ icon + ", location=" + location + ", name=" + name
+				+ ", parent_ids=" + parent_ids + ", tags=" + tags + "]";
+	}
+	
 }

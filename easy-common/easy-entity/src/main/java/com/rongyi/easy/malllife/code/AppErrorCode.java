@@ -19,7 +19,7 @@ package com.rongyi.easy.malllife.code;/*
 public enum AppErrorCode {
 
     SUCCESS(0, "正常"), //原系统都定义为正常情况 编码规则不变
-    FAILURE(-1, "网络正在打瞌睡，请稍后再试"), //原系统都定义为正常情况 编码规则不变
+    FAILURE(-1, "网络呆萌中，重新提交一下试试"), //原系统都定义为正常情况 编码规则不变
     USER_ISNOT_LOGIN(21,"请重新登录"),
     PARAMETER_ISNULL(1060001,"必要参数不能为空"),
     ERROR_MALLLIFEEXCEPTION(1060011,""),
@@ -56,6 +56,13 @@ public enum AppErrorCode {
     ERROR_ALREADY_ONLIMIT(1067105,"今天领取红包超过限制了呢，明天再来吧~"),
     ERROR_PHONE_DISABLE(1067106,"您的账户异常，请联系容易逛客服"),
     ERROR_SHARE_FAILE(1067107,"领取红包失败"),
+    /** 密码获取红包8100---8200 */
+    ERROR_PWD_LENGTH(1068100,"密码长度不对，请输入十位密码"),
+    ERROR_ADDED_RED(1068101,"该红包已被添加过啦"),
+    ERROR_OUTDATA_RED(1068102,"抱歉，这个密码对应红包已经过期啦"),
+    ERROR_ULTRALIMIT_RED(1068103,"抱歉，您领取红包超限，请明天再来试试呗"),
+    ERROR_RED_PASSWORD(1068104,"红包密码错误请重新输入"),
+    ERROR_RED_PASSWORD_ULTRALIMIT(1068105,"抱歉您错误输入超限，请明天再试")
     ;
 
 

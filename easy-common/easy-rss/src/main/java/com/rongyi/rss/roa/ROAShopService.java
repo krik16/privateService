@@ -80,4 +80,6 @@ public interface ROAShopService {
      public com.rongyi.easy.entity.ShopEntity getShopById(String id);
 
     List<ShopVO> getSimpleShopsByIds(List<ObjectId> shopIds);
+
+    public List<ShopVO> getShopsByObjectIds(List<ObjectId> shopIds);
 }

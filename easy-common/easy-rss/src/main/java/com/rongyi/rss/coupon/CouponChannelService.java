@@ -11,4 +11,9 @@ import com.rongyi.easy.coupon.entity.CouponChannel;
  */
 public interface CouponChannelService {
     public CouponChannel findByCode(String code, Integer type);
+
+    public CouponChannel findById(Integer id);
+
+    public int insert(CouponChannel couponChannel);
+
 }

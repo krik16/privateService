@@ -27,6 +27,18 @@ public interface TriggerActivityService {
      */
     public int triggerMessage(TriggerActivityParam param) ;
 
-    
 
+
+    /**
+     * 判断后台是否配置了注册红包，并给相应用户发送配置的红包
+     * @param param
+     * @return
+     */
+    int getRegisteCoupons(TriggerActivityParam param);
+
+    /**
+     * 判断当前是否存在新人注册红包
+     * @return
+     */
+    public boolean isExistRegisteCoupons();
 }

@@ -54,6 +54,20 @@ public class CategoriesVO implements Serializable {
 	 * 父级id
 	 */
 	private String parentId;
+	
+	
+	private List<CategoriesVO> nextLevel;
+	
+	
+	
+
+	public List<CategoriesVO> getNextLevel() {
+		return nextLevel;
+	}
+
+	public void setNextLevel(List<CategoriesVO> nextLevel) {
+		this.nextLevel = nextLevel;
+	}
 
 	public String getId() {
 		return id;

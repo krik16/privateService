@@ -1,6 +1,7 @@
 package com.rongyi.easy.malllife.vo;
 
 import java.io.Serializable;
+import java.util.List;
 /**
  * 入驻店铺返回VO
  * @author user
@@ -16,6 +17,7 @@ public class ShopCategoryVO implements Serializable{
 	private String categoryName;//分类名称
 	private Integer shopCount;//同分类的店铺数量
 	private String categoryPic;//类型图片
+	private List<String> categoryPicList;//分类图片集合
 	public String getCategoryId() {
 		return categoryId;
 	}
@@ -40,11 +42,18 @@ public class ShopCategoryVO implements Serializable{
 	public void setCategoryPic(String categoryPic) {
 		this.categoryPic = categoryPic;
 	}
+	public List<String> getCategoryPicList() {
+		return categoryPicList;
+	}
+	public void setCategoryPicList(List<String> categoryPicList) {
+		this.categoryPicList = categoryPicList;
+	}
 	@Override
 	public String toString() {
 		return "ShopCategoryVO [categoryId=" + categoryId + ", categoryName="
 				+ categoryName + ", shopCount=" + shopCount + ", categoryPic="
-				+ categoryPic + "]";
+				+ categoryPic + ", categoryPicList=" + categoryPicList + "]";
 	}
+	
 	
 }

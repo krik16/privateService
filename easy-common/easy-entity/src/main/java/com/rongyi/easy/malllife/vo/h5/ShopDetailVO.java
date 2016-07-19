@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.rongyi.easy.malllife.vo.CommentsVO;
-import com.rongyi.easy.malllife.vo.Result;
 import com.rongyi.easy.notice.vo.MMNoticeVO;
 
 /**
@@ -25,7 +24,7 @@ public class ShopDetailVO implements Serializable{
 	private Integer sameCityShopNum; //同城同类型商铺数量
 	private String transportInfo;//交通信息
 	private String shopLogo;//店铺logo
-	private String locationPic; //商铺底图
+	private List<String> locationPic; //商铺底图
 	private String businessHours; // 营业时间
 	private String mallId; // 店铺所在商场ID
 	private String floorId; // 店铺所在楼层ID
@@ -44,9 +43,14 @@ public class ShopDetailVO implements Serializable{
 	private String telephone; //电话号码
 	private List<CouponVO> coupons;//优惠信息
 	private List<CommodityShareVO> commodityList;//商品列表
+	private Integer commodityCount;//
 	private List<MayLikeShopVO> mayLikeShops;//可能喜欢的店铺列表
 	private MMNoticeVO noticeVo;//店铺公告
 	private List<CommentsVO> commentList;//评论列表
+	private Integer commentCount;//评论数量
+	private boolean hasWonderFulAct; //精彩活动
+    private boolean hasDiscountAct; //优惠资讯
+    private boolean hasRaiders;//潮人攻略
 	public String getShopId() {
 		return shopId;
 	}
@@ -83,10 +87,10 @@ public class ShopDetailVO implements Serializable{
 	public void setShopLogo(String shopLogo) {
 		this.shopLogo = shopLogo;
 	}
-	public String getLocationPic() {
+	public List<String> getLocationPic() {
 		return locationPic;
 	}
-	public void setLocationPic(String locationPic) {
+	public void setLocationPic(List<String> locationPic) {
 		this.locationPic = locationPic;
 	}
 	public String getBusinessHours() {
@@ -215,6 +219,36 @@ public class ShopDetailVO implements Serializable{
 	public void setCommentList(List<CommentsVO> commentList) {
 		this.commentList = commentList;
 	}
+	public boolean isHasWonderFulAct() {
+		return hasWonderFulAct;
+	}
+	public void setHasWonderFulAct(boolean hasWonderFulAct) {
+		this.hasWonderFulAct = hasWonderFulAct;
+	}
+	public boolean isHasDiscountAct() {
+		return hasDiscountAct;
+	}
+	public void setHasDiscountAct(boolean hasDiscountAct) {
+		this.hasDiscountAct = hasDiscountAct;
+	}
+	public boolean isHasRaiders() {
+		return hasRaiders;
+	}
+	public void setHasRaiders(boolean hasRaiders) {
+		this.hasRaiders = hasRaiders;
+	}
+	public Integer getCommodityCount() {
+		return commodityCount;
+	}
+	public void setCommodityCount(Integer commodityCount) {
+		this.commodityCount = commodityCount;
+	}
+	public Integer getCommentCount() {
+		return commentCount;
+	}
+	public void setCommentCount(Integer commentCount) {
+		this.commentCount = commentCount;
+	}
 	@Override
 	public String toString() {
 		return "ShopDetailVO [shopId=" + shopId + ", shopName=" + shopName
@@ -230,8 +264,11 @@ public class ShopDetailVO implements Serializable{
 				+ ", cityName=" + cityName + ", categoryIds=" + categoryIds
 				+ ", parking=" + parking + ", telephone=" + telephone
 				+ ", coupons=" + coupons + ", commodityList=" + commodityList
-				+ ", mayLikeShops=" + mayLikeShops + ", noticeVo=" + noticeVo
-				+ ", commentList=" + commentList + "]";
+				+ ", commodityCount=" + commodityCount + ", mayLikeShops="
+				+ mayLikeShops + ", noticeVo=" + noticeVo + ", commentList="
+				+ commentList + ", commentCount=" + commentCount
+				+ ", hasWonderFulAct=" + hasWonderFulAct + ", hasDiscountAct="
+				+ hasDiscountAct + ", hasRaiders=" + hasRaiders + "]";
 	}
 	
 }

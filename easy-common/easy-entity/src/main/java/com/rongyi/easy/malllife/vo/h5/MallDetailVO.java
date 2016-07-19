@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.rongyi.easy.malllife.vo.CommentsVO;
 import com.rongyi.easy.malllife.vo.MainCategoriesVO;
-import com.rongyi.easy.malllife.vo.Result;
 import com.rongyi.easy.malllife.vo.ShopCategoryVO;
 /**
  * 商场分享详情
@@ -37,9 +36,14 @@ public class MallDetailVO implements Serializable{
 	private Integer shopCount;//商场下的店铺数量
 	private String appearancePic;//商场底图
 	private List<CommentsVO> commentList;//评论列表
+	private Integer commentCount;//评论数量
 	private List<CouponVO> coupons;//优惠信息
 	private List<CommodityShareVO> commodityList;//商品列表
+	private Integer commodityCount;//商品数量
 	private List<ShopCategoryVO> shopCategories;//入驻店铺列表
+	private boolean hasWonderFulAct; //精彩活动
+    private boolean hasDiscountAct; //优惠资讯
+    private boolean hasRaiders;//潮人攻略
 	public String getMallId() {
 		return mallId;
 	}
@@ -166,6 +170,36 @@ public class MallDetailVO implements Serializable{
 	public void setShopCategories(List<ShopCategoryVO> shopCategories) {
 		this.shopCategories = shopCategories;
 	}
+	public boolean isHasWonderFulAct() {
+		return hasWonderFulAct;
+	}
+	public void setHasWonderFulAct(boolean hasWonderFulAct) {
+		this.hasWonderFulAct = hasWonderFulAct;
+	}
+	public boolean isHasDiscountAct() {
+		return hasDiscountAct;
+	}
+	public void setHasDiscountAct(boolean hasDiscountAct) {
+		this.hasDiscountAct = hasDiscountAct;
+	}
+	public boolean isHasRaiders() {
+		return hasRaiders;
+	}
+	public void setHasRaiders(boolean hasRaiders) {
+		this.hasRaiders = hasRaiders;
+	}
+	public Integer getCommentCount() {
+		return commentCount;
+	}
+	public void setCommentCount(Integer commentCount) {
+		this.commentCount = commentCount;
+	}
+	public Integer getCommodityCount() {
+		return commodityCount;
+	}
+	public void setCommodityCount(Integer commodityCount) {
+		this.commodityCount = commodityCount;
+	}
 	@Override
 	public String toString() {
 		return "MallDetailVO [mallId=" + mallId + ", mallName=" + mallName
@@ -177,9 +211,12 @@ public class MallDetailVO implements Serializable{
 				+ coord_y + ", parkingInfo=" + parkingInfo + ", description="
 				+ description + ", collectionNum=" + collectionNum
 				+ ", shopCount=" + shopCount + ", appearancePic="
-				+ appearancePic + ", commentList=" + commentList + ", coupons="
-				+ coupons + ", commodityList=" + commodityList
-				+ ", shopCategories=" + shopCategories + "]";
+				+ appearancePic + ", commentList=" + commentList
+				+ ", commentCount=" + commentCount + ", coupons=" + coupons
+				+ ", commodityList=" + commodityList + ", commodityCount="
+				+ commodityCount + ", shopCategories=" + shopCategories
+				+ ", hasWonderFulAct=" + hasWonderFulAct + ", hasDiscountAct="
+				+ hasDiscountAct + ", hasRaiders=" + hasRaiders + "]";
 	}
 	
 }

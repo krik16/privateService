@@ -67,5 +67,5 @@ public interface ActivityCodeService {
      * @param updateParam
      * @return
      */
-    int updateAcvityCode(Map<String, Object> updateParam);
+    int updateAcvityCode(String hannels_id,int status);
 }

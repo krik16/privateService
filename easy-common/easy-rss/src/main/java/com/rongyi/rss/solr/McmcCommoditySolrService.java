@@ -300,4 +300,6 @@ public interface McmcCommoditySolrService {
 	 */
 	public ResponseVO searchBrandsForUser(SearchCommodityBrandParam brandParam);
 
+	ResponseVO selectCommodityList(CommoditySearchParam param);
+
 }
