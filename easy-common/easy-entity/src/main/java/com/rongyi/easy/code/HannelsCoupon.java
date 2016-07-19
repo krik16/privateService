@@ -24,6 +24,8 @@ public class HannelsCoupon implements Serializable{
      * 卡券发布结束时间
      */
     private Date publishEndAt;
+    private Date validStartAt;//卡券固定时间有效开始时间
+    private Date validEndAt;//卡券固定时间有效结束时间
 
     public Integer getId() {
         return id;
@@ -97,19 +99,36 @@ public class HannelsCoupon implements Serializable{
         this.publishEndAt = publishEndAt;
     }
 
+    public Date getValidStartAt() {
+        return validStartAt;
+    }
+
+    public void setValidStartAt(Date validStartAt) {
+        this.validStartAt = validStartAt;
+    }
+
+    public Date getValidEndAt() {
+        return validEndAt;
+    }
+
+    public void setValidEndAt(Date validEndAt) {
+        this.validEndAt = validEndAt;
+    }
+
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("HannelsCoupon{");
-        sb.append("id=").append(id);
-        sb.append(", couponId='").append(couponId).append('\'');
-        sb.append(", couponName='").append(couponName).append('\'');
-        sb.append(", couponType=").append(couponType);
-        sb.append(", stockCount=").append(stockCount);
-        sb.append(", createAt=").append(createAt);
-        sb.append(", hannelsId=").append(hannelsId);
-        sb.append(", publishStartAt=").append(publishStartAt);
-        sb.append(", publishEndAt=").append(publishEndAt);
-        sb.append('}');
-        return sb.toString();
+        return "HannelsCoupon{" +
+                "id=" + id +
+                ", couponId='" + couponId + '\'' +
+                ", couponName='" + couponName + '\'' +
+                ", couponType=" + couponType +
+                ", stockCount=" + stockCount +
+                ", createAt=" + createAt +
+                ", hannelsId=" + hannelsId +
+                ", publishStartAt=" + publishStartAt +
+                ", publishEndAt=" + publishEndAt +
+                ", validStartAt=" + validStartAt +
+                ", validEndAt=" + validEndAt +
+                '}';
     }
 }
