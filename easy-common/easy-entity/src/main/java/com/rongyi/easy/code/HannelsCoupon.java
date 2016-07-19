@@ -1,8 +1,9 @@
 package com.rongyi.easy.code;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class HannelsCoupon {
+public class HannelsCoupon implements Serializable{
     private Integer id;
 
     private String couponId;
@@ -13,6 +14,17 @@ public class HannelsCoupon {
 
     private Date createAt;
     private Integer hannelsId;//关联促销码id
+
+    /**
+     * 卡券发布开始时间
+     */
+    private Date publishStartAt;
+
+    /**
+     * 卡券发布结束时间
+     */
+    private Date publishEndAt;
+
     public Integer getId() {
         return id;
     }
@@ -67,5 +79,37 @@ public class HannelsCoupon {
 
     public void setHannelsId(Integer hannelsId) {
         this.hannelsId = hannelsId;
+    }
+
+    public Date getPublishStartAt() {
+        return publishStartAt;
+    }
+
+    public void setPublishStartAt(Date publishStartAt) {
+        this.publishStartAt = publishStartAt;
+    }
+
+    public Date getPublishEndAt() {
+        return publishEndAt;
+    }
+
+    public void setPublishEndAt(Date publishEndAt) {
+        this.publishEndAt = publishEndAt;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("HannelsCoupon{");
+        sb.append("id=").append(id);
+        sb.append(", couponId='").append(couponId).append('\'');
+        sb.append(", couponName='").append(couponName).append('\'');
+        sb.append(", couponType=").append(couponType);
+        sb.append(", stockCount=").append(stockCount);
+        sb.append(", createAt=").append(createAt);
+        sb.append(", hannelsId=").append(hannelsId);
+        sb.append(", publishStartAt=").append(publishStartAt);
+        sb.append(", publishEndAt=").append(publishEndAt);
+        sb.append('}');
+        return sb.toString();
     }
 }
