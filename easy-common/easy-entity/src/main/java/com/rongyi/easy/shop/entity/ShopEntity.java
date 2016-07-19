@@ -100,6 +100,8 @@ public class ShopEntity implements Serializable{
 	private Integer rank;
 	private String name_en;
 	private String description_en ;
+	private Integer create_source ; //创建来源   0大运营  1商家后台  其它crm
+	private Integer update_source ; //修改来源  0大运营  1商家后台  其它crm
 	public ShopEntity() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -529,6 +531,22 @@ public class ShopEntity implements Serializable{
 
 	public String getName_en() {
 		return name_en;
+	}
+
+	public Integer getCreate_source() {
+		return create_source;
+	}
+
+	public void setCreate_source(Integer create_source) {
+		this.create_source = create_source;
+	}
+
+	public Integer getUpdate_source() {
+		return update_source;
+	}
+
+	public void setUpdate_source(Integer update_source) {
+		this.update_source = update_source;
 	}
 
 	public void setName_en(String name_en) {
