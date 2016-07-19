@@ -73,7 +73,7 @@ public class WeixinPayUnit {
                 String sign = Signature.getSign(map,configure.getKey());
                 map.put("app_signature", sign);
             }
-        } catch (WeixinException e) {
+        } catch (WeixinException | ParamNullException e) {
             throw e;
         } catch (Exception e) {
             LOGGER.error("获取微信支付签名,e.getMessage={}",e.getMessage(),e);
@@ -108,7 +108,7 @@ public class WeixinPayUnit {
                 LOGGER.info("退款失败 result={}", result);
                 throw new WeixinException(ConstantEnum.EXCEPTION_WEIXIN_REFUND_FAIL.getCodeStr(), !StringUtils.isEmpty(refundResData.getErr_code_des()) ? refundResData.getErr_code_des() : ConstantEnum.EXCEPTION_WEIXIN_REFUND_FAIL.getValueStr());
             }
-        } catch (WeixinException e) {
+        } catch (WeixinException | ParamNullException e) {
             throw e;
         } catch (Exception e) {
             LOGGER.error("微信退款失败,e.getMessage={}",e.getMessage(),e);
