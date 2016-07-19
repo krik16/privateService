@@ -23,7 +23,7 @@ public class Shop implements Serializable {
 	private String address;
 	private List<String> applied_card_type_ids;
 	private String average_consumption;
-	private String brand_id;
+	private ObjectId brand_id;
 	private Integer business_status;
 	private List<ObjectId> category_ids;
 	private Integer comment_count;
@@ -50,25 +50,27 @@ public class Shop implements Serializable {
 	private String token;
 	private Date updated_at;
 	private Integer valid;
-	private String zone_id;
+	private ObjectId zone_id;
 	private List<ObjectId> zone_ids;
 	private Integer recommend;
 	private String business_hours;
 	private List<String> watcher_ids;
 	private List<ObjectId> parent_ids;
-	private String filiale_id;
+	private ObjectId filiale_id;   
     private List<ObjectId> custom_category_ids;
     private String qrcode_pic;
     private List<String> photo_urls;//图片地址
 
     private String valid_reason ;//隐藏理由 
     private String business_reason ; 
-    private Integer update_by ;
+    private Integer created_by;
+    private Integer updated_by ;
     private Integer create_source ; //创建来源   0大运营  1商家后台  其它crm
     private Integer update_source ; //修改来源  0大运营  1商家后台  其它crm
-    private Date open_at ;  //开业时间
+    private Date opened_time ;  //开业时间
     private List<ObjectId> brand_ids ; //兼营品牌
     private String icon ; //店铺logo
+    private int moreFloors = 0;//0不跨楼，1跨楼
 
 
     public ObjectId getId() {
@@ -111,14 +113,7 @@ public class Shop implements Serializable {
         this.average_consumption = average_consumption;
     }
 
-    public String getBrand_id() {
-        return brand_id;
-    }
-
-    public void setBrand_id(String brand_id) {
-        this.brand_id = brand_id;
-    }
-
+   
     public Integer getBusiness_status() {
         return business_status;
     }
@@ -327,14 +322,6 @@ public class Shop implements Serializable {
         this.valid = valid;
     }
 
-    public String getZone_id() {
-        return zone_id;
-    }
-
-    public void setZone_id(String zone_id) {
-        this.zone_id = zone_id;
-    }
-
     public List<ObjectId> getZone_ids() {
         return zone_ids;
     }
@@ -373,14 +360,6 @@ public class Shop implements Serializable {
 
     public void setParent_ids(List<ObjectId> parent_ids) {
         this.parent_ids = parent_ids;
-    }
-
-    public String getFiliale_id() {
-        return filiale_id;
-    }
-
-    public void setFiliale_id(String filiale_id) {
-        this.filiale_id = filiale_id;
     }
 
     public List<ObjectId> getCustom_category_ids() {
@@ -424,12 +403,12 @@ public class Shop implements Serializable {
 		this.business_reason = business_reason;
 	}
 
-	public Integer getUpdate_by() {
-		return update_by;
+	public Integer getUpdated_by() {
+		return updated_by;
 	}
 
-	public void setUpdate_by(Integer update_by) {
-		this.update_by = update_by;
+	public void setUpdated_by(Integer updated_by) {
+		this.updated_by = updated_by;
 	}
 
 	public Integer getCreate_source() {
@@ -448,12 +427,12 @@ public class Shop implements Serializable {
 		this.update_source = update_source;
 	}
 
-	public Date getOpen_at() {
-		return open_at;
+	public Date getOpened_time() {
+		return opened_time;
 	}
 
-	public void setOpen_at(Date open_at) {
-		this.open_at = open_at;
+	public void setOpened_time(Date opened_time) {
+		this.opened_time = opened_time;
 	}
 
 	public List<ObjectId> getBrand_ids() {
@@ -464,6 +443,13 @@ public class Shop implements Serializable {
 		this.brand_ids = brand_ids;
 	}
 
+	public Integer getCreated_by() {
+		return created_by;
+	}
+
+	public void setCreated_by(Integer created_by) {
+		this.created_by = created_by;
+	}
 
 	public String getIcon() {
 		return icon;
@@ -471,5 +457,37 @@ public class Shop implements Serializable {
 
 	public void setIcon(String icon) {
 		this.icon = icon;
+	}
+
+	public int getMoreFloors() {
+		return moreFloors;
+	}
+
+	public void setMoreFloors(int moreFloors) {
+		this.moreFloors = moreFloors;
+	}
+
+	public ObjectId getBrand_id() {
+		return brand_id;
+	}
+
+	public void setBrand_id(ObjectId brand_id) {
+		this.brand_id = brand_id;
+	}
+
+	public ObjectId getZone_id() {
+		return zone_id;
+	}
+
+	public void setZone_id(ObjectId zone_id) {
+		this.zone_id = zone_id;
+	}
+
+	public ObjectId getFiliale_id() {
+		return filiale_id;
+	}
+
+	public void setFiliale_id(ObjectId filiale_id) {
+		this.filiale_id = filiale_id;
 	}
 }
