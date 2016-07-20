@@ -15,6 +15,7 @@ public class ShopValidParam implements Serializable{
 	private String lastFloorId;  //跨楼层的第二个楼层ID
 	private String shopNumber; //铺位号
 	private String address ;   //详细地址
+	private String shopId;  //店铺ID
 	
 	@Override
 	public String toString(){
@@ -57,5 +58,13 @@ public class ShopValidParam implements Serializable{
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getShopId() {
+		return shopId;
+	}
+
+	public void setShopId(String shopId) {
+		this.shopId = shopId;
 	}
 }
