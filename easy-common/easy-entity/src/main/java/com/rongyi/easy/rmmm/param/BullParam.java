@@ -173,23 +173,28 @@ public class BullParam extends MalllifeBaseParam implements Serializable{
 		this.categoryList = categoryList;
 	}
 
-	@Override
-	public String toString() {
-		return new ToStringBuilder(this)
-				.append("bullId", bullId)
-				.append("liveId", liveId)
-				.append("flashSaleId", flashSaleId)
-				.append("commodityType", commodityType)
-				.append("keyword", keyword)
-				.append("categoryId", categoryId)
-				.append("shopId", shopId)
-				.append("mallId", mallId)
-				.append("minPrice",minPrice)
-				.append("maxPrice", maxPrice)
-				.append("brandId",brandId)
-				.append("cityName",cityName)
-				.append("saleId",saleId)
-				.toString();
-	}
+		@Override
+		public String toString() {
+				final StringBuffer sb = new StringBuffer("BullParam{");
+				sb.append("bullId='").append(bullId).append('\'');
+				sb.append(", liveId='").append(liveId).append('\'');
+				sb.append(", flashSaleId='").append(flashSaleId).append('\'');
+				sb.append(", commodityType='").append(commodityType).append('\'');
+				sb.append(", keyword='").append(keyword).append('\'');
+				sb.append(", categoryId='").append(categoryId).append('\'');
+				sb.append(", shopId='").append(shopId).append('\'');
+				sb.append(", mallId='").append(mallId).append('\'');
+				sb.append(", minPrice='").append(minPrice).append('\'');
+				sb.append(", maxPrice='").append(maxPrice).append('\'');
+				sb.append(", brandId='").append(brandId).append('\'');
+				sb.append(", cityName='").append(cityName).append('\'');
+				sb.append(", saleId='").append(saleId).append('\'');
+				sb.append(", brandIds=").append(brandIds);
+				sb.append(", brandMids=").append(brandMids);
+				sb.append(", shopList=").append(shopList);
+				sb.append(", categoryList=").append(categoryList);
+				sb.append('}');
+				return sb.toString();
+		}
 
 }
