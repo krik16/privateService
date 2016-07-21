@@ -88,6 +88,8 @@ public class Hannels implements Serializable{
 
     private List<HannelsCoupon> coupons;
 
+    private List<HannelsUser> hannelsUsers;
+
     private CouponChannel couponChannel;
 
     public CouponChannel getCouponChannel() {
@@ -232,6 +234,14 @@ public class Hannels implements Serializable{
 
     public void setCoupons(List<HannelsCoupon> coupons) {
         this.coupons = coupons;
+    }
+
+    public List<HannelsUser> getHannelsUsers() {
+        return hannelsUsers;
+    }
+
+    public void setHannelsUsers(List<HannelsUser> hannelsUsers) {
+        this.hannelsUsers = hannelsUsers;
     }
 
     @Override
