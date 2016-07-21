@@ -22,7 +22,7 @@ public class ShopParam implements Serializable{
 	private String customCategoryIds;  //商场自定义分类  （多个分类,号分隔）
 	private Integer businessStatus ;//商场营业状态  0正常营业  1即将营业  2暂停营业  3停止营业   4待处理
 	private List<Double> location ;   //经纬度  
-	private String tags = "" ;    //店铺标签  （多个标签 ,号分隔 ）
+	private List<String> tags ;    //店铺标签  （多个标签 ,号分隔 ）
 	private String telephone;  //店铺电话
 	private String businessHours ; //营业时间
 	private String openAt ;     //开业时间
@@ -122,12 +122,15 @@ public class ShopParam implements Serializable{
 	public void setLocation(List<Double> location) {
 		this.location = location;
 	}
-	public String getTags() {
+	
+	public List<String> getTags() {
 		return tags;
 	}
-	public void setTags(String tags) {
+
+	public void setTags(List<String> tags) {
 		this.tags = tags;
 	}
+
 	public String getTelephone() {
 		return telephone;
 	}
