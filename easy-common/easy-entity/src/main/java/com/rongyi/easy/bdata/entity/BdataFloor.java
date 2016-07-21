@@ -152,8 +152,15 @@ public class BdataFloor implements Serializable {
     private Integer position;//排序
     private String simpleFloorName;//楼层图
     private Integer systemStatus;//1 隐藏 0正常
+    private Integer system_status;//1 隐藏 0正常
     private Date  updated_at;
     private String last_update_id;//最近修改人
+	public Integer getSystem_status() {
+		return system_status;
+	}
+	public void setSystem_status(Integer system_status) {
+		this.system_status = system_status;
+	}
     
    
 
