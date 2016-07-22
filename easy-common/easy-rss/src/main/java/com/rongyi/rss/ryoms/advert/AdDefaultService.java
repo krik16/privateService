@@ -35,7 +35,7 @@ public interface AdDefaultService {
 	 * @param entity
 	 * @return
 	 */
-	public int add(AdDefaultEntity entity);
+	public int add(AdDefaultEntity entity,String materialType);
 
 	/**
 	 * 修改素材
@@ -43,7 +43,7 @@ public interface AdDefaultService {
 	 * @param entity
 	 * @return
 	 */
-	public int save(AdDefaultEntity entity);
+	public int save(AdDefaultEntity entity,String materialType);
 
 	/**
 	 * 素材详情
