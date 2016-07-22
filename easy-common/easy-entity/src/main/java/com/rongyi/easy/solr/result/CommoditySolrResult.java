@@ -14,6 +14,9 @@ public class CommoditySolrResult implements Serializable{
 
     private Long totalCount;
 
+    private Integer totalPage ;
+    private Integer nextFrom;
+
     public List<ObjectId> getIds() {
         return ids;
     }
@@ -28,5 +31,21 @@ public class CommoditySolrResult implements Serializable{
 
     public void setTotalCount(Long totalCount) {
         this.totalCount = totalCount;
+    }
+
+    public Integer getNextFrom() {
+        return nextFrom;
+    }
+
+    public void setNextFrom(Integer nextFrom) {
+        this.nextFrom = nextFrom;
+    }
+
+    public Integer getTotalPage() {
+        return totalPage;
+    }
+
+    public void setTotalPage(Integer totalPage) {
+        this.totalPage = totalPage;
     }
 }

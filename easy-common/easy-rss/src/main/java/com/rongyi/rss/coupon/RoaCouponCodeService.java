@@ -160,4 +160,5 @@ public interface RoaCouponCodeService {
      * @return
      */
     public Integer getCurrentPriceFromCode(String couponCode);
+
 }

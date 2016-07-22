@@ -3,6 +3,8 @@ package com.rongyi.easy.malllife.vo;
 import java.io.Serializable;
 import java.util.List;
 
+import com.google.inject.internal.Lists;
+
 /**
  * 类ActivityContentVO.java的实现描述：TODO 类实现描述
  * 
@@ -33,12 +35,21 @@ public class ActivityContentVO implements Serializable{
     
     private String address; // 地址
     private String shareUrl;//分享链接地址
-    private String picUrl;//分享需要的图片
+    private String picUrl;//分享需要的图片    
     
-    private List<ActivityContentMallVO>  mallList;
+    private List<ActivityContentMallVO>  mallList;//
     
-    
-    public List<ActivityContentMallVO> getMallList() {
+    private List<ActivityMall2VO> mallList2;//新版爱品牌的商场 店铺 品牌
+
+	public List<ActivityMall2VO> getMallList2() {
+		return mallList2;
+	}
+
+	public void setMallList2(List<ActivityMall2VO> mallList2) {
+		this.mallList2 = mallList2;
+	}
+
+	public List<ActivityContentMallVO> getMallList() {
 		return mallList;
 	}
 
@@ -243,7 +254,7 @@ public class ActivityContentVO implements Serializable{
 				+ ", refId=" + refId + ", grouponId=" + grouponId
 				+ ", description=" + description + ", address=" + address
 				+ ", shareUrl=" + shareUrl + ", picUrl=" + picUrl
-				+ ", mallList=" + mallList + "]";
+				+ ", mallList=" + mallList + ", mallList2=" + mallList2 + "]";
 	}
 
 }

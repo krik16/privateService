@@ -88,6 +88,12 @@ public class PlatformRebateVO implements Serializable {
      */
     private List<VoucherVO> voucherVOs;
 
+    private List<String> shopsId;
+
+    private List<String> couponCategoriesId;
+    private List<String> commodityCategoriesId;
+
+
     /**
      * 类型；0：满减类型；1：立减类型
      */
@@ -97,6 +103,8 @@ public class PlatformRebateVO implements Serializable {
      * 抵扣券不可用的原因(未满足使用范围条件 | 差XX.XX元可用该券)
      */
     private String unUsableReason;
+
+    private String limitDesc;//使用限制
 
     public String getCouponId() {
         return couponId;
@@ -226,6 +234,38 @@ public class PlatformRebateVO implements Serializable {
         this.preferenceType = preferenceType;
     }
 
+    public List<String> getShopsId() {
+        return shopsId;
+    }
+
+    public void setShopsId(List<String> shopsId) {
+        this.shopsId = shopsId;
+    }
+
+    public List<String> getCouponCategoriesId() {
+        return couponCategoriesId;
+    }
+
+    public void setCouponCategoriesId(List<String> couponCategoriesId) {
+        this.couponCategoriesId = couponCategoriesId;
+    }
+
+    public List<String> getCommodityCategoriesId() {
+        return commodityCategoriesId;
+    }
+
+    public void setCommodityCategoriesId(List<String> commodityCategoriesId) {
+        this.commodityCategoriesId = commodityCategoriesId;
+    }
+
+    public String getLimitDesc() {
+        return limitDesc;
+    }
+
+    public void setLimitDesc(String limitDesc) {
+        this.limitDesc = limitDesc;
+    }
+
     // 券状态 0:未使用 1:已使用 2:已过期
     public void setConvertStatus(Integer status, Date validEndAt) {
         if (UserRedenvelope.STATUS_UNUSE.equals(status) && new Date().before(validEndAt))
@@ -251,6 +291,7 @@ public class PlatformRebateVO implements Serializable {
         sb.append(", applyGoods=").append(applyGoods);
         sb.append(", relatedType=").append(relatedType);
         sb.append(", usageDesc='").append(usageDesc).append('\'');
+        sb.append(", limitDesc='").append(limitDesc).append('\'');
         sb.append(", commodityIds=").append(commodityIds);
         sb.append(", voucherVOs=").append(voucherVOs);
         sb.append(", preferenceType=").append(preferenceType);

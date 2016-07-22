@@ -41,6 +41,14 @@ public class JsonResult<T> {
         result.setResult(t);
         return result;
     }
+    
+    public static <T> JsonResult<T> failResult(T t, Integer status,String msg, Integer total_page) {
+        MetaData meta = new MetaData(status, msg, total_page);
+        JsonResult<T> result = new JsonResult<T>();
+        result.setMeta(meta);
+        result.setResult(t);
+        return result;
+    }
 
     public static class MetaData {
 

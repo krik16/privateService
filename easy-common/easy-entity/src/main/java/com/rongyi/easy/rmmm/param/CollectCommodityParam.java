@@ -39,4 +39,11 @@ public class CollectCommodityParam implements Serializable{
 		this.pageSize = pageSize;
 	}
 
+	@Override
+	public String toString() {
+		return "CollectCommodityParam [commodityId=" + commodityId
+				+ ", currentPage=" + currentPage + ", pageSize=" + pageSize
+				+ "]";
+	}
+
 }

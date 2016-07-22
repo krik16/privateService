@@ -29,6 +29,8 @@ public class SystemConfig implements Serializable{
     public static final  String  USER_DISABLED_MSG="抱歉，卖家休息中，请您换个卖家看看吧~";
 
     public static final  String  SMS_KEY="SMSKEY";
+
+    public static final String TOUCH_KEY="touchConfig";
     /**
      *
      */
@@ -202,6 +204,22 @@ public class SystemConfig implements Serializable{
             result.append(string);
         }
         return result.toString();
+    }
+
+
+    /**
+     * 判断是否全部
+     * @param str
+     * @return
+     */
+    public static boolean isNumeric(String str){
+        for (int i = 0; i < str.length(); i++){
+           // System.out.println(str.charAt(i));
+            if (!Character.isDigit(str.charAt(i))){
+                return false;
+            }
+        }
+        return true;
     }
 
 }
