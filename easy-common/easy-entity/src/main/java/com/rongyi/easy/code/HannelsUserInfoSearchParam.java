@@ -15,7 +15,7 @@ public class HannelsUserInfoSearchParam implements Serializable {
     private int currentPage;//当前页（从1开始）
     private int pageSize;//每页显示数量（默认10）
     private int startIndex = 0;
-    private Integer allSearch;// 0 不查询全部，1 查询全部
+    private int allSearch;// 0 不查询全部，1 查询全部
 
     public String getUserAccount() {
         return userAccount;
@@ -89,11 +89,11 @@ public class HannelsUserInfoSearchParam implements Serializable {
         this.startIndex = startIndex;
     }
 
-    public Integer getAllSearch() {
+    public int getAllSearch() {
         return allSearch;
     }
 
-    public void setAllSearch(Integer allSearch) {
+    public void setAllSearch(int allSearch) {
         this.allSearch = allSearch;
     }
 
