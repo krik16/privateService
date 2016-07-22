@@ -49,6 +49,17 @@ public class TemplateLabel implements Serializable {
     private Integer isUpdate;
     /**关联的卡券商品*/
     private List<TemplateRelevantGoodsCoupon> templateRelevantGoodsCouponList;
+    /**拼单商品排序*/
+    private Integer sortNum;
+
+
+    public Integer getSortNum() {
+        return sortNum;
+    }
+
+    public void setSortNum(Integer sortNum) {
+        this.sortNum = sortNum;
+    }
 
     public Integer getId() {
         return id;
@@ -197,6 +208,7 @@ public class TemplateLabel implements Serializable {
                 .append("version", version)
                 .append("isUpdate", isUpdate)
                 .append("templateRelevantGoodsCouponList", templateRelevantGoodsCouponList)
+                .append("sortNum", sortNum)
                 .toString();
     }
 }

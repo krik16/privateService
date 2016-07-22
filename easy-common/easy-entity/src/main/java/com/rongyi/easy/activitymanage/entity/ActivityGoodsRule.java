@@ -51,6 +51,32 @@ public class ActivityGoodsRule implements Serializable {
      */
     private Date updateAt;
 
+    /**
+     * 拼单折扣
+     */
+    private String discount;
+
+    /**
+     * 线下折扣
+     */
+    private String offlineDiscount;
+
+    public String getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(String discount) {
+        this.discount = discount;
+    }
+
+    public String getOfflineDiscount() {
+        return offlineDiscount;
+    }
+
+    public void setOfflineDiscount(String offlineDiscount) {
+        this.offlineDiscount = offlineDiscount;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -135,6 +161,8 @@ public class ActivityGoodsRule implements Serializable {
                 .append("cancelTime", cancelTime)
                 .append("createAt", createAt)
                 .append("updateAt", updateAt)
+                .append("discount", discount)
+                .append("offlineDiscount", offlineDiscount)
                 .toString();
     }
 }

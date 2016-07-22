@@ -23,6 +23,7 @@ public class CategoriesEntity implements Serializable{
     private boolean app_show = false;
     private String app_picture ;
     private boolean is_hot;
+    private List<String> categoryPicList;//一级分类图片集合
 	public boolean isIs_hot() {
 		return is_hot;
 	}
@@ -77,4 +78,11 @@ public class CategoriesEntity implements Serializable{
 	public void setPosition(Integer position) {
 		this.position = position;
 	}
+	public List<String> getCategoryPicList() {
+		return categoryPicList;
+	}
+	public void setCategoryPicList(List<String> categoryPicList) {
+		this.categoryPicList = categoryPicList;
+	}
+	
 }

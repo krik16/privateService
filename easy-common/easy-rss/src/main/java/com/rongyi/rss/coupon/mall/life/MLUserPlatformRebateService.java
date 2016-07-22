@@ -68,4 +68,12 @@ public interface MLUserPlatformRebateService {
      * @author lqy
      */
     PlatformRebateVO getPlatformRebateDiscountAndOrigPrice(String couponCode);
+
+
+    /**
+     * 获取平台促销券适用的店铺id列表和分类id列表
+     * @param couponId
+     * @return
+     */
+    PlatformRebateVO getShopIdsAndCategiryIds(String couponId);
 }

@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import com.rongyi.easy.mcmc.vo.CommoditySpecVO;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
@@ -193,6 +194,20 @@ public class CommoditySpec implements  Serializable {
 		this.sku = sku;
 	}
 	
-	
+	public void wrapSpecInfo(CommoditySpecVO vo) {
+		this.setCreateAt(new Date());
+		this.setUpdateAt(new Date());
+		this.setOriginalPrice(vo.getSpecOriginalPrice());
+		this.setCurrentPrice(vo.getSpecOriginalPrice());
+		this.setSku(vo.getSku());
+		this.setCurrentPrice(vo.getSpecCurrentPrice());
+		if(vo.getSpecStock() == null || vo.getSpecStock().isEmpty()) {
+			vo.setSpecStock("99");
+		}
+		this.setTotal(vo.getSpecStock());
+		this.setStock(vo.getSpecStock());
+		this.setPictureUrl(vo.getSpecPictureUrl());
+
+	}
 	
 }

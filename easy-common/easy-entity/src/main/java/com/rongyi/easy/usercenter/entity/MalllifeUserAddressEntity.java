@@ -290,4 +290,16 @@ public class MalllifeUserAddressEntity implements Serializable {
     public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
     }
+
+	@Override
+	public String toString() {
+		return "MalllifeUserAddressEntity [id=" + id + ", userId=" + userId
+				+ ", status=" + status + ", phone=" + phone + ", consignee="
+				+ consignee + ", detailAddress=" + detailAddress
+				+ ", provinceId=" + provinceId + ", cityId=" + cityId
+				+ ", districtId=" + districtId + ", provinceName="
+				+ provinceName + ", cityName=" + cityName + ", districtName="
+				+ districtName + ", isDelete=" + isDelete + ", createAt="
+				+ createAt + ", updateAt=" + updateAt + "]";
+	}
 }

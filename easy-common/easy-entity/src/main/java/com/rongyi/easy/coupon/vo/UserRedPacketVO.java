@@ -88,6 +88,11 @@ public class UserRedPacketVO implements Serializable {
      */
     private List<VoucherVO> voucherVOs;
 
+    private List<String> shopsId;
+
+    private List<String> couponCategoriesId;
+    private List<String> commodityCategoriesId;
+
     public String getCouponId() {
         return couponId;
     }
@@ -208,6 +213,55 @@ public class UserRedPacketVO implements Serializable {
         this.limitDesc = limitDesc;
     }
 
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("UserRedPacketVO{");
+        sb.append("couponId='").append(couponId).append('\'');
+        sb.append(", couponCode='").append(couponCode).append('\'');
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", discount=").append(discount);
+        sb.append(", status=").append(status);
+        sb.append(", validStartAt=").append(validStartAt);
+        sb.append(", validEndAt=").append(validEndAt);
+        sb.append(", origPrice=").append(origPrice);
+        sb.append(", applyObject=").append(applyObject);
+        sb.append(", applyGoods=").append(applyGoods);
+        sb.append(", relatedType=").append(relatedType);
+        sb.append(", usageDesc='").append(usageDesc).append('\'');
+        sb.append(", limitDesc='").append(limitDesc).append('\'');
+        sb.append(", commodityIds=").append(commodityIds);
+        sb.append(", voucherVOs=").append(voucherVOs);
+        sb.append(", shopsId=").append(shopsId);
+        sb.append(", couponCategoriesId=").append(couponCategoriesId);
+        sb.append(", commodityCategoriesId=").append(commodityCategoriesId);
+        sb.append('}');
+        return sb.toString();
+    }
+
+    public List<String> getCouponCategoriesId() {
+        return couponCategoriesId;
+    }
+
+    public void setCouponCategoriesId(List<String> couponCategoriesId) {
+        this.couponCategoriesId = couponCategoriesId;
+    }
+
+    public List<String> getCommodityCategoriesId() {
+        return commodityCategoriesId;
+    }
+
+    public void setCommodityCategoriesId(List<String> commodityCategoriesId) {
+        this.commodityCategoriesId = commodityCategoriesId;
+    }
+
+    public List<String> getShopsId() {
+        return shopsId;
+    }
+
+    public void setShopsId(List<String> shopsId) {
+        this.shopsId = shopsId;
+    }
+
     // 券状态 0:未使用 1:已使用 2:已过期
     public void setConvertStatus(Integer status, Date validEndAt) {
         if (UserRedenvelope.STATUS_UNUSE.equals(status) && new Date().before(validEndAt))
@@ -218,24 +272,4 @@ public class UserRedPacketVO implements Serializable {
             this.setStatus(2);
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .append("couponId", couponId)
-                .append("couponCode", couponCode)
-                .append("name", name)
-                .append("discount", discount)
-                .append("status", status)
-                .append("validStartAt", validStartAt)
-                .append("validEndAt", validEndAt)
-                .append("origPrice", origPrice)
-                .append("applyObject", applyObject)
-                .append("applyGoods", applyGoods)
-                .append("relatedType", relatedType)
-                .append("usageDesc", usageDesc)
-                .append("limitDesc", limitDesc)
-                .append("commodityIds", commodityIds)
-                .append("voucherVOs", voucherVOs)
-                .toString();
-    }
 }
