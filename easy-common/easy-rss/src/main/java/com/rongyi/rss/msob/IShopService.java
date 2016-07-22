@@ -216,5 +216,16 @@ public interface IShopService{
 	 * @throws Exception
 	 */
 	List<ShopInfoEntity> getShopsByMallId(String filialeId)throws Exception;
+	
+	/**
+     * 查询店铺列表
+     *
+     * @param ids
+     * @return
+     * @throws Exception
+     */
+    public List<ShopEntity> getShopsByShopIds(List<String> shopIds)  throws Exception;
+    
+    public List<ShopDetailVO> getShopVOsByShopIds(List<String> shopIds)   throws Exception;
 }
 

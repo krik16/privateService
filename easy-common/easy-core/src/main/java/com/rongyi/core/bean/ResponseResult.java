@@ -8,7 +8,6 @@ import org.apache.commons.lang.StringUtils;
  * @author baodk
  * @see ResponseVO
  */
-@Deprecated
 public class ResponseResult implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 

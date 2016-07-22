@@ -37,232 +37,159 @@ public class ShopSearchInfo implements Serializable,Comparable<ShopSearchInfo> {
     private String telephone; //商家电话
     private Double dist;//距离
     private List<Integer> tip; ///< 店铺标签（格式：[0，0，0] 对应：[货，惠、劵]）
-
+    private String shopFloor;//店铺楼层
     public List<Integer> getTip() {
         return tip;
     }
-
     public void setTip(List<Integer> tip) {
         this.tip = tip;
     }
-
     public String getAppearance_pic() {
         return appearance_pic;
     }
-
     public void setAppearance_pic(String appearance_pic) {
         this.appearance_pic = appearance_pic;
     }
-
     public String getId() {
         return id;
     }
-
     public void setId(String id) {
         this.id = id;
     }
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public String getAddr() {
         return addr;
     }
-
     public void setAddr(String addr) {
         this.addr = addr;
     }
-
     public String getPic_url() {
         return pic_url;
     }
-
     public void setPic_url(String pic_url) {
         this.pic_url = pic_url;
     }
-
     public List<Double> getLocation() {
         return location;
     }
-
     public void setLocation(List<Double> location) {
         this.location = location;
     }
-
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
-
     public String getRank() {
         return rank;
     }
-
     public void setRank(String rank) {
         this.rank = rank;
     }
-
     public String getCity_name() {
         return city_name;
     }
-
     public void setCity_name(String city_name) {
         this.city_name = city_name;
     }
-
     public String getShop_own() {
         return shop_own;
     }
-
     public void setShop_own(String shop_own) {
         this.shop_own = shop_own;
     }
-
     public String getLabel() {
         return label;
     }
-
     public void setLabel(String label) {
         this.label = label;
     }
-
     public String getType() {
         return type;
     }
-
     public void setType(String type) {
         this.type = type;
     }
-
     public String getBusiness_district() {
         return business_district;
     }
-
     public void setBusiness_district(String business_district) {
         this.business_district = business_district;
     }
-
     public String getShop_nature() {
         return shop_nature;
     }
-
     public void setShop_nature(String shop_nature) {
         this.shop_nature = shop_nature;
     }
-
     public boolean isAny_activity() {
         return any_activity;
     }
-
     public void setAny_activity(boolean any_activity) {
         this.any_activity = any_activity;
     }
-
     public boolean isAny_coupon() {
         return any_coupon;
     }
-
     public void setAny_coupon(boolean any_coupon) {
         this.any_coupon = any_coupon;
     }
-
     public String getCooperationShopId() {
         return cooperationShopId;
     }
-
     public void setCooperationShopId(String cooperationShopId) {
         this.cooperationShopId = cooperationShopId;
     }
-
     public int getRmmmShopStatus() {
         return rmmmShopStatus;
     }
-
     public void setRmmmShopStatus(int rmmmShopStatus) {
         this.rmmmShopStatus = rmmmShopStatus;
     }
-
     public List<String> getTags() {
         return tags;
     }
-
     public void setTags(List<String> tags) {
         this.tags = tags;
     }
-
     public int getActivityNum() {
         return activityNum;
     }
-
     public void setActivityNum(int activityNum) {
         this.activityNum = activityNum;
     }
-
     public String getBrandId() {
         return brandId;
     }
-
     public void setBrandId(String brandId) {
         this.brandId = brandId;
     }
-
     public String getTelephone() {
         return telephone;
     }
-
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
-
-    @Override
-    public String toString() {
-        return "ShopSearchInfo{" +
-                "activityNum=" + activityNum +
-                ", id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", addr='" + addr + '\'' +
-                ", pic_url='" + pic_url + '\'' +
-                ", location=" + location +
-                ", description='" + description + '\'' +
-                ", rank='" + rank + '\'' +
-                ", city_name='" + city_name + '\'' +
-                ", shop_own='" + shop_own + '\'' +
-                ", label='" + label + '\'' +
-                ", type='" + type + '\'' +
-                ", business_district='" + business_district + '\'' +
-                ", shop_nature='" + shop_nature + '\'' +
-                ", any_activity=" + any_activity +
-                ", any_coupon=" + any_coupon +
-                ", cooperationShopId='" + cooperationShopId + '\'' +
-                ", rmmmShopStatus=" + rmmmShopStatus +
-                ", tags=" + tags +
-                ", brandId='" + brandId + '\'' +
-                ", appearance_pic='" + appearance_pic + '\'' +
-                ", telephone='" + telephone + '\'' +
-                ", dist=" + dist +
-                ", tip=" + tip +
-                '}';
-    }
-
+    public String getShopFloor() {
+		return shopFloor;
+	}
+	public void setShopFloor(String shopFloor) {
+		this.shopFloor = shopFloor;
+	}
     public Double getDist() {
         return dist;
     }
-
     public void setDist(Double dist) {
         this.dist = dist;
     }
-
     @Override
     public int compareTo(ShopSearchInfo o) {
-       // return Math.ceil(dist-0);
         if(o==null||o.getDist()==null){
             return 1;
         }else if(this==null||this.dist==null){
@@ -272,4 +199,21 @@ public class ShopSearchInfo implements Serializable,Comparable<ShopSearchInfo> {
             return Integer.valueOf(df.format((dist - o.getDist()) * 1000));
         }
     }
+	@Override
+	public String toString() {
+		return "ShopSearchInfo [id=" + id + ", name=" + name + ", addr=" + addr
+				+ ", pic_url=" + pic_url + ", location=" + location
+				+ ", description=" + description + ", rank=" + rank
+				+ ", city_name=" + city_name + ", shop_own=" + shop_own
+				+ ", label=" + label + ", type=" + type
+				+ ", business_district=" + business_district + ", shop_nature="
+				+ shop_nature + ", any_activity=" + any_activity
+				+ ", any_coupon=" + any_coupon + ", cooperationShopId="
+				+ cooperationShopId + ", rmmmShopStatus=" + rmmmShopStatus
+				+ ", tags=" + tags + ", activityNum=" + activityNum
+				+ ", brandId=" + brandId + ", appearance_pic=" + appearance_pic
+				+ ", telephone=" + telephone + ", dist=" + dist + ", tip="
+				+ tip + ", shopFloor=" + shopFloor + "]";
+	}
+    
 }

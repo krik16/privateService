@@ -91,6 +91,9 @@ public class ActivityTemplateVO implements Serializable{
     }
 
     public Long getStartAt() {
+        if (startAt == null){
+            return -62170185600000L;
+        }
         return startAt.getTime();
     }
 
@@ -99,6 +102,9 @@ public class ActivityTemplateVO implements Serializable{
     }
 
     public Long getEndAt() {
+        if (endAt == null){
+            return -62170185600000L;
+        }
         return endAt.getTime();
     }
 

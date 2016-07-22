@@ -46,6 +46,16 @@ public class RebateVO implements Serializable{
 	private Integer preferentialType = 0;//优惠方式 0：满减 ；1：立减.
 	
 	private Integer ifPostage = 0;//0：不包含邮费 ；1：包含邮费
+	
+	private String limitDesc;//使用规则
+
+	public String getLimitDesc() {
+		return limitDesc;
+	}
+
+	public void setLimitDesc(String limitDesc) {
+		this.limitDesc = limitDesc;
+	}
 
 	public Integer getIfPostage() {
 		return ifPostage;
@@ -161,10 +171,15 @@ public class RebateVO implements Serializable{
 
 	@Override
 	public String toString() {
-		return "RebateVO [originalPrice=" + originalPrice + ", currentPrice=" + currentPrice + ", validStartTime="
-				+ validStartTime + ", validEndTime=" + validEndTime + ", title=" + title + ", platformRebateId="
-				+ platformRebateId + ", platformRebateCode=" + platformRebateCode + ", useDescription=" + useDescription
-				+ ", status=" + status + ", desc=" + desc + ", applyScope=" + applyScope + ", relatedType=" + relatedType
-				+ ", preferentialType=" + preferentialType + ", ifPostage=" + ifPostage + "]";
+		return "RebateVO [originalPrice=" + originalPrice + ", currentPrice="
+				+ currentPrice + ", validStartTime=" + validStartTime
+				+ ", validEndTime=" + validEndTime + ", title=" + title
+				+ ", platformRebateId=" + platformRebateId
+				+ ", platformRebateCode=" + platformRebateCode
+				+ ", useDescription=" + useDescription + ", status=" + status
+				+ ", desc=" + desc + ", applyScope=" + applyScope
+				+ ", relatedType=" + relatedType + ", preferentialType="
+				+ preferentialType + ", ifPostage=" + ifPostage
+				+ ", limitDesc=" + limitDesc + "]";
 	}
 }

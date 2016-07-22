@@ -14,7 +14,17 @@ public enum CommodityStatus{
 	/**
 	 * 下架
 	 */
-	OFF(0);	
+	OFF(0),
+
+	/**
+	 * 删除
+	 */
+	DELETE(2),
+
+	/**
+	 * 待上架
+	 */
+	PENDING(3);
 
 	private int value;
 	
