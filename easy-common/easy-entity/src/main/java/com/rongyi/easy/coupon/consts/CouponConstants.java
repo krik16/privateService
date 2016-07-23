@@ -190,7 +190,7 @@ public interface CouponConstants {
         int YESTODAY=4;
     }
     interface COUPON_CHANNEL_TYPE{
-        int PUSH=0;
-        int IMPORT=1;
+        int PUSH=1;
+        int IMPORT=0;
     }
 }

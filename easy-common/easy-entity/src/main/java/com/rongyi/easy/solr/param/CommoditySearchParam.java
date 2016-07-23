@@ -393,21 +393,37 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 
 	@Override
 	public String toString() {
-		return "CommoditySearchParam [id=" + id + ", brandMids=" + brandMids
-				+ ", keyword=" + keyword + ", shopId=" + shopId + ", brandId="
-				+ brandId + ", mallId=" + mallId + ", commodityCategory="
-				+ commodityCategory + ", sortBy=" + sortBy + ", coord_x="
-				+ coord_x + ", coord_y=" + coord_y + ", bullId=" + bullId
-				+ ", liveId=" + liveId + ", saleId=" + saleId
-				+ ", flashSaleId=" + flashSaleId + ", commodityType="
-				+ commodityType + ", filterMethodName=" + filterMethodName
-				+ ", sortMethodName=" + sortMethodName + ", systemNumber="
-				+ systemNumber + ", from=" + from + ", source=" + source
-				+ ", minPrice=" + minPrice + ", maxPrice=" + maxPrice
-				+ ", zoneId=" + zoneId + ", commodityCode=" + commodityCode
-				+ ", keywordList=" + keywordList + ", shopList=" + shopList
-				+ ", categoryList=" + categoryList + ", couponId=" + couponId
-				+ "]";
+		return "CommoditySearchParam{" +
+				"brandId='" + brandId + '\'' +
+				", id='" + id + '\'' +
+				", brandMids=" + brandMids +
+				", keyword='" + keyword + '\'' +
+				", shopId='" + shopId + '\'' +
+				", mallId='" + mallId + '\'' +
+				", commodityCategory='" + commodityCategory + '\'' +
+				", sortBy='" + sortBy + '\'' +
+				", coord_x='" + coord_x + '\'' +
+				", coord_y='" + coord_y + '\'' +
+				", bullId='" + bullId + '\'' +
+				", liveId='" + liveId + '\'' +
+				", saleId=" + saleId +
+				", flashSaleId=" + flashSaleId +
+				", commodityType='" + commodityType + '\'' +
+				", filterMethodName='" + filterMethodName + '\'' +
+				", sortMethodName='" + sortMethodName + '\'' +
+				", systemNumber='" + systemNumber + '\'' +
+				", from=" + from +
+				", source='" + source + '\'' +
+				", minPrice='" + minPrice + '\'' +
+				", maxPrice='" + maxPrice + '\'' +
+				", zoneId='" + zoneId + '\'' +
+				", commodityCode='" + commodityCode + '\'' +
+				", keywordList=" + keywordList +
+				", shopList=" + shopList +
+				", categoryList=" + categoryList +
+				", couponId='" + couponId + '\'' +
+				", commodityMaxMinValues=" + commodityMaxMinValues +
+				"} " + super.toString();
 	}
 
 }

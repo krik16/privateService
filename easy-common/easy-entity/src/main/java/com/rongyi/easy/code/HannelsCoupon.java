@@ -1,8 +1,9 @@
 package com.rongyi.easy.code;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class HannelsCoupon {
+public class HannelsCoupon implements Serializable{
     private Integer id;
 
     private String couponId;
@@ -13,6 +14,19 @@ public class HannelsCoupon {
 
     private Date createAt;
     private Integer hannelsId;//关联促销码id
+
+    /**
+     * 卡券发布开始时间
+     */
+    private Date publishStartAt;
+
+    /**
+     * 卡券发布结束时间
+     */
+    private Date publishEndAt;
+    private Date validStartAt;//卡券固定时间有效开始时间
+    private Date validEndAt;//卡券固定时间有效结束时间
+
     public Integer getId() {
         return id;
     }
@@ -67,5 +81,54 @@ public class HannelsCoupon {
 
     public void setHannelsId(Integer hannelsId) {
         this.hannelsId = hannelsId;
+    }
+
+    public Date getPublishStartAt() {
+        return publishStartAt;
+    }
+
+    public void setPublishStartAt(Date publishStartAt) {
+        this.publishStartAt = publishStartAt;
+    }
+
+    public Date getPublishEndAt() {
+        return publishEndAt;
+    }
+
+    public void setPublishEndAt(Date publishEndAt) {
+        this.publishEndAt = publishEndAt;
+    }
+
+    public Date getValidStartAt() {
+        return validStartAt;
+    }
+
+    public void setValidStartAt(Date validStartAt) {
+        this.validStartAt = validStartAt;
+    }
+
+    public Date getValidEndAt() {
+        return validEndAt;
+    }
+
+    public void setValidEndAt(Date validEndAt) {
+        this.validEndAt = validEndAt;
+    }
+
+    @Override
+    public String toString() {
+        return "HannelsCoupon{" +
+                "id=" + id +
+                ", couponId='" + couponId + '\'' +
+                ", couponName='" + couponName + '\'' +
+                ", couponType=" + couponType +
+                ", stockCount=" + stockCount +
+                ", createAt=" + createAt +
+                ", hannelsId=" + hannelsId +
+                ", publishStartAt=" + publishStartAt +
+                ", publishEndAt=" + publishEndAt +
+                ", validStartAt=" + validStartAt +
+                ", validEndAt=" + validEndAt +
+                '}';
     }
 }

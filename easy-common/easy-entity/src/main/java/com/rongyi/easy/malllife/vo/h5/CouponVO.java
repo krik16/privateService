@@ -24,8 +24,9 @@ public class CouponVO implements Serializable{
 //	private String shopOwn; //店铺所属名
 	private String startTime; //开始时间
 	private String endTime; //结束时间
-//	private String holder_id; //持有者id;
-//	private String holder_type; //持有者类型 shop/mall/brand
+	private String holderName;//店铺/商场/品牌名称
+	private String holder_id; //持有者id;
+	private String holder_type; //持有者类型 Shop/Mall/Brand
 	private String grouponPrice; //现价
 	private String grouponOriginal; //原价
 	private String distance;//距离
@@ -109,15 +110,35 @@ public class CouponVO implements Serializable{
 	public void setBuyedAmount(String buyedAmount) {
 		this.buyedAmount = buyedAmount;
 	}
+	public String getHolderName() {
+		return holderName;
+	}
+	public void setHolderName(String holderName) {
+		this.holderName = holderName;
+	}
+	public String getHolder_id() {
+		return holder_id;
+	}
+	public void setHolder_id(String holder_id) {
+		this.holder_id = holder_id;
+	}
+	public String getHolder_type() {
+		return holder_type;
+	}
+	public void setHolder_type(String holder_type) {
+		this.holder_type = holder_type;
+	}
 	@Override
 	public String toString() {
 		return "CouponVO [couponId=" + couponId + ", couponName=" + couponName
 				+ ", thumbnail=" + thumbnail + ", couponPicList="
 				+ couponPicList + ", location=" + location + ", description="
 				+ description + ", startTime=" + startTime + ", endTime="
-				+ endTime + ", grouponPrice=" + grouponPrice
-				+ ", grouponOriginal=" + grouponOriginal + ", distance="
-				+ distance + ", limitCount=" + limitCount + ", buyedAmount="
-				+ buyedAmount + "]";
+				+ endTime + ", holderName=" + holderName + ", holder_id="
+				+ holder_id + ", holder_type=" + holder_type
+				+ ", grouponPrice=" + grouponPrice + ", grouponOriginal="
+				+ grouponOriginal + ", distance=" + distance + ", limitCount="
+				+ limitCount + ", buyedAmount=" + buyedAmount + "]";
 	}
+	
 }
