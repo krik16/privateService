@@ -88,7 +88,7 @@ public interface McmcCommoditySolrService {
 	 * @param currentPriceList 多规格当前价格列表
 	 * @return
 	 */
-	public boolean updateCommodityPrice(String id, Double price, List<Double> currentPriceList);
+	public boolean updateCommodityPrice(String id, Double price, List<Double> currentPriceList , Integer status);
 
 	/**
 	 * 商品检索·改
