@@ -657,7 +657,7 @@ public class Commodity implements  Serializable,Cloneable{
 	}
 
 	public void wrapCommodityInfo(CommodityVO vo, long brandId, long mallId, String mallMid,
-								  String brandName, String shopNum, CommodityShopInfo shopInfo) {
+								  String brandName, String shopNum, CommodityShopInfo shopInfo, Map specMap) {
 		List<CommoditySpecVO> specVoList = vo.getCommoditySpecList();
 		if(CollectionUtils.isEmpty(specVoList)) {
 			this.setStock(Integer.valueOf(vo.getCommodityStock()));
@@ -671,6 +671,16 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setoPriceMin(this.getOriginalPrice());
 			this.setcPriceMax(this.getCurrentPrice());
 			this.setcPriceMin(this.getCurrentPrice());
+		} else {
+			this.setoPriceOfLowestCPrice(specMap.get("lowest").toString());
+			this.setStock((Integer) specMap.get("specStock"));
+			this.setOriginalPrice(specMap.get("oMin").toString());
+			this.setCurrentPrice(specMap.get("lowest").toString());
+			this.setPrice(Double.valueOf(specMap.get("lowest").toString()));
+			this.setoPriceMax(specMap.get("oMax").toString());
+			this.setoPriceMin(specMap.get("oMin").toString());
+			this.setcPriceMin(specMap.get("lowest").toString());
+			this.setcPriceMax(specMap.get("cMax").toString());
 		}
 
 		this.setCode(vo.getCommodityCode());
@@ -689,7 +699,7 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setSoldOutAt(DateUtils.addYears(new Date(), 1));
 		}
 		this.setSold(0);
-		if(this.getStock() <= 0) {
+		if(this.getStock() == null || this.getStock() <= 0) {
 			this.setStatus(CommodityDataStatus.STATUS_COMMODITY_UNSHELVE);
 		} else {
 			//APP端发布商品的时候发布商品的时候把状态更改为已删除。等待图片上传成功后更新为上架
@@ -745,6 +755,7 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setMallId(String.valueOf(mallId));
 		this.setMallMid(mallMid);
 		this.setShopNum(shopNum);
-
+		this.setShopMid(shopInfo.getShopMid());
+		this.setSpecList((List<ObjectId>) specMap.get("specIdList"));
 	}
 }
