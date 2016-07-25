@@ -88,7 +88,7 @@ public interface McmcCommoditySolrService {
 	 * @param currentPriceList 多规格当前价格列表
 	 * @return
 	 */
-	public boolean updateCommodityPrice(String id, Double price, List<Double> currentPriceList , Integer status);
+	public boolean updateCommodityPrice(String id, Double price, List<Double> currentPriceList);
 
 	/**
 	 * 商品检索·改
@@ -301,5 +301,15 @@ public interface McmcCommoditySolrService {
 	public ResponseVO searchBrandsForUser(SearchCommodityBrandParam brandParam);
 
 	ResponseVO selectCommodityList(CommoditySearchParam param);
+
+	/**
+	 * 恢复商品的库存已经修改商品的上下架状态
+	 * @param id
+	 * @param price
+	 * @param currentPriceList
+	 * @param status
+	 * @return
+	 */
+	public boolean updateCommodityPriceAndStatus(String id, Double price, List<Double> currentPriceList,Integer status);
 
 }
