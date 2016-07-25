@@ -15,7 +15,12 @@ public class ActivitySearchParam implements Serializable{
 	private int distance;     //距离筛选
 	private String coord_x;   //坐标x
 	private String coord_y;   //坐标y
-	private String cat_id;           //0店铺1商场2品牌3分类（类似于美食）
+
+	//0店铺1商场2品牌3分类（类似于美食,多个分类查询用“,”分割，如：1,2,3）
+	private String cat_id;
+	// 卡券本身适应的分类列表（目前在查看单个券适用的范围查询用到）
+	private List<String> srcCategoryList;
+
 	/** 自定义分类id */
 	private String custom_cat_id;
 	private String city_name; //城市名（如  上海&上海市）
@@ -25,16 +30,27 @@ public class ActivitySearchParam implements Serializable{
 	private int size;         //一页数量
 	private String brand_id;  //品牌id
 	private String zone_id;   //区域id
-	private String shop_id;   //店铺id
+	// 店铺id（多个店铺查询用“,”分割，如：1,2,3）
+	private String shop_id;
 	private String holder_id;       //优惠券持有者id
 	private boolean couponRequired; //是否只看优惠券
 	private List<String> shopList;    //终端机参数 店铺id List
- 	
+
 	private String mallId; // mall Id for 终端屏
 	private String startLetter;  // 首字母 for 终端屏
 
 	private String showChannel;//展示渠道  APP：4，互动屏：5, 微信：6    不填时默认app
 	private List<String> keywordList = new ArrayList<>();
+	
+	private String couponId;//红包券id
+
+	public String getCouponId() {
+		return couponId;
+	}
+
+	public void setCouponId(String couponId) {
+		this.couponId = couponId;
+	}
 
 	public List<String> getKeywordList() {
 		return keywordList;
@@ -47,7 +63,15 @@ public class ActivitySearchParam implements Serializable{
 	public void addKeywordList(String keyword) {
 		this.keywordList.add(keyword);
 	}
-	
+
+	public List<String> getSrcCategoryList() {
+		return srcCategoryList;
+	}
+
+	public void setSrcCategoryList(List<String> srcCategoryList) {
+		this.srcCategoryList = srcCategoryList;
+	}
+
 	public int getRequiredCoupon() {
 		return requiredCoupon;
 	}
@@ -175,21 +199,41 @@ public class ActivitySearchParam implements Serializable{
 	public String getCustom_cat_id() {
 		return custom_cat_id;
 	}
-	
+
 	/**
 	 * @param custom_cat_id the custom_cat_id to set
 	 */
 	public void setCustom_cat_id(String custom_cat_id) {
 		this.custom_cat_id = custom_cat_id;
 	}
+
 	@Override
 	public String toString() {
-		return "ActivitySearchParam [keyword=" + keyword + ", distance=" + distance + ", coord_x=" + coord_x
-				+ ", coord_y=" + coord_y + ", cat_id=" + cat_id + ", custom_cat_id=" + custom_cat_id + ", city_name="
-				+ city_name + ", sort=" + sort + ", requiredCoupon=" + requiredCoupon + ", from=" + from + ", size="
-				+ size + ", brand_id=" + brand_id + ", zone_id=" + zone_id + ", shop_id=" + shop_id + ", holder_id="
-				+ holder_id + ", couponRequired=" + couponRequired + ", shopList=" + shopList + ", mallId=" + mallId
-				+ ", startLetter=" + startLetter + ", showChannel=" + showChannel + ", keywordList=" + keywordList + "]";
+		return "ActivitySearchParam{" +
+				"brand_id='" + brand_id + '\'' +
+				", keyword='" + keyword + '\'' +
+				", distance=" + distance +
+				", coord_x='" + coord_x + '\'' +
+				", coord_y='" + coord_y + '\'' +
+				", cat_id='" + cat_id + '\'' +
+				", srcCategoryList=" + srcCategoryList +
+				", custom_cat_id='" + custom_cat_id + '\'' +
+				", city_name='" + city_name + '\'' +
+				", sort='" + sort + '\'' +
+				", requiredCoupon=" + requiredCoupon +
+				", from=" + from +
+				", size=" + size +
+				", zone_id='" + zone_id + '\'' +
+				", shop_id='" + shop_id + '\'' +
+				", holder_id='" + holder_id + '\'' +
+				", couponRequired=" + couponRequired +
+				", shopList=" + shopList +
+				", mallId='" + mallId + '\'' +
+				", startLetter='" + startLetter + '\'' +
+				", showChannel='" + showChannel + '\'' +
+				", keywordList=" + keywordList +
+				", couponId=" + couponId +
+				'}';
 	}
-	
+
 }

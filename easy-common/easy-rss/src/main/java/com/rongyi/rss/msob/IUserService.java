@@ -355,6 +355,13 @@ public interface IUserService {
      * @throws MallShopException
      */
     public List<RmmmUserInfoEntity> selectAllBuyer(Integer type)throws MallShopException ;
+    
+    /**
+     * 根据邀请码查询用户信息
+     * @param shareCode
+     * @return
+     */
+    public RmmmUserInfoEntity getUserInfoByShareCode(String shareCode);
 
 
 }

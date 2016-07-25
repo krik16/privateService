@@ -14,9 +14,6 @@ public class BrandShopDetailVO implements Serializable{
 	private String isCollection = "1";// 是否收藏 0是 1否
 	private long collectionCount;// 收藏数量
 	private String shopId;// 店铺id
-	// private String shopIM;// 店铺可用IM账号
-	//private List<String> shopIM;// 店铺可用IM账号
-	//private String shopMid;// shop mongoId
 	private String guideId;// 导购id
 	private String nickName;// 导购昵称
 	private String imId;// 导购环信账号
@@ -29,10 +26,10 @@ public class BrandShopDetailVO implements Serializable{
 	private Boolean express;// 快递
 	private Boolean offlineRefund;// 线下退款
 	private Boolean onlineRefund;// 线上退款
-	//private String shopIM;// 店铺可用IM账号
 	private List<String> shopIM;// 店铺可用IM账号
 	private String shopMid;// shop mongoId
 	private int guideNum;//店铺导购数量
+	private String rankAvg;//店铺评分
 
 	public String getShopLogo() {
 		return shopLogo;
@@ -208,6 +205,14 @@ public class BrandShopDetailVO implements Serializable{
 
 	public void setGuideNum(int guideNum) {
 		this.guideNum = guideNum;
+	}
+
+	public String getRankAvg() {
+		return rankAvg;
+	}
+
+	public void setRankAvg(String rankAvg) {
+		this.rankAvg = rankAvg;
 	}
 	
 }

@@ -9,6 +9,10 @@
 */
 package com.rongyi.rss.solr;
 
+import com.rongyi.core.framework.exception.RYServiceException;
+import com.rongyi.easy.malllife.param.KeywordSearchParam;
+import com.rongyi.easy.rmmm.entity.KeywordSearchHistory;
+
 import java.util.List;
 
 /**
@@ -37,4 +41,12 @@ public interface KeywordsService {
 	 * @return 联想词列表
 	 */
 	public List<String> GetSuggestKeywords(String type, String prefix);
+
+	/**
+	 * 搜索关联联想词
+	 *
+	 * @param param
+	 * @return 返回LIST(com.rongyi.easy.solr.result.KeywordHistoryEntity)
+	 */
+	public List<KeywordSearchHistory> searchKeywordHistory(KeywordSearchParam param) throws RYServiceException;
 }

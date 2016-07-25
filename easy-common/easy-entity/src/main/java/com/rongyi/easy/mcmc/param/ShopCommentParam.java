@@ -54,4 +54,11 @@ public class ShopCommentParam implements Serializable{
 	public void setMark(String mark) {
 		this.mark = mark;
 	}
+
+	@Override
+	public String toString() {
+		return "ShopCommentParam [orderId=" + orderId + ", shopId=" + shopId
+				+ ", shopLevel=" + shopLevel + ", sonOrderList=" + sonOrderList
+				+ ", mark=" + mark + "]";
+	}
 }

@@ -144,6 +144,7 @@ public interface ActivityConstants {
         Integer GOODS_AND_COUPON = 3;// 商品及卡券类型
         Integer RAFFLE = 2;//抽奖类活动
         Integer SIGN = 4;//签到送积分活动
+        Integer SPELLLIST = 6;//拼单活动
     }
 
     /**

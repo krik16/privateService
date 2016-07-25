@@ -24,6 +24,13 @@ public class RedEnvelopeCouponVO implements Serializable{
 	private String shopId;//店铺id
     private String picUrl;//代金券图片（取第一张）
     private List<Double> location;//店铺的经，纬度
+    private Double distance = 0.0;//距离
+	public Double getDistance() {
+		return distance;
+	}
+	public void setDistance(Double distance) {
+		this.distance = distance;
+	}
 	public String getShopName() {
 		return shopName;
 	}
