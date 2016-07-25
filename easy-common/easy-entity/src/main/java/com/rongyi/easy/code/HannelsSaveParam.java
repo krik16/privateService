@@ -18,7 +18,7 @@ public class HannelsSaveParam implements Serializable {
     private String count;//推广码个数
     private String useLimit;//每个用户使用个数
     private String remark;//备注
-
+    private List<HannelsUser> hannelsUserList;//关联的导购,买手数据
     public String getId() {
         return id;
     }
@@ -99,6 +99,14 @@ public class HannelsSaveParam implements Serializable {
         this.hannelsCouponList = hannelsCouponList;
     }
 
+    public List<HannelsUser> getHannelsUserList() {
+        return hannelsUserList;
+    }
+
+    public void setHannelsUserList(List<HannelsUser> hannelsUserList) {
+        this.hannelsUserList = hannelsUserList;
+    }
+
     @Override
     public String toString() {
         return "HannelsSaveParam{" +
@@ -112,6 +120,7 @@ public class HannelsSaveParam implements Serializable {
                 ", count='" + count + '\'' +
                 ", useLimit='" + useLimit + '\'' +
                 ", remark='" + remark + '\'' +
+                ", hannelsUserList=" + hannelsUserList +
                 '}';
     }
 }
