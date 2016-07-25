@@ -543,4 +543,7 @@ public class MallEntity implements Serializable {
 	public void setApp_picturenew(String app_picturenew) {
 		this.app_picturenew = app_picturenew;
 	}
+	public String getFullIcon() {
+		return "http://rongyi.b0.upaiyun.com/system/mall/icon/" + id + "/" + icon;
+	}
 }

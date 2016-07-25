@@ -13,6 +13,7 @@ import com.rongyi.easy.coupon.vo.operation.VoucherCouponVO;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Description:大运营平台代金券接口
@@ -204,4 +205,11 @@ public interface RoaVoucherCouponService {
      */
     boolean dataMigration();
 
+    CouponChannel findCouponChannelById(Integer id);
+
+    List<CouponChannel> findCouponChannelByIds(List<Integer> channelIds);
+
+    PagingVO<CouponChannel> findCouponChannelByPage(Map<String,Object> map);
+
+    List<CouponChannel> findAllCouponChannel();
 }

@@ -67,8 +67,18 @@ public class GroupVO implements Serializable{
     private String cooperater; //合作商ID， 0 属于容易，团购中没有合作商是为0
 	
     private Integer alarmNum; //库存紧张字段
+    
+    private String pic_url;//品牌或者商场logo
 
    
+	public String getPic_url() {
+		return pic_url;
+	}
+
+	public void setPic_url(String pic_url) {
+		this.pic_url = pic_url;
+	}
+
 	public Integer getCreated_user() {
 		return created_user;
 	}
@@ -407,5 +417,33 @@ public class GroupVO implements Serializable{
 
 	public void setGrouponPrice(String grouponPrice) {
 		this.grouponPrice = grouponPrice;
+	}
+
+	@Override
+	public String toString() {
+		return "GroupVO [id=" + id + ", title=" + title + ", terminel_title="
+				+ terminel_title + ", activity_type=" + activity_type
+				+ ", holder_id=" + holder_id + ", holder_type=" + holder_type
+				+ ", lable=" + lable + ", valid=" + valid + ", status="
+				+ status + ", shop_ids=" + shop_ids + ", mall_ids=" + mall_ids
+				+ ", zone_ids=" + zone_ids + ", location=" + location
+				+ ", public_start=" + public_start + ", public_end="
+				+ public_end + ", sale_start=" + sale_start + ", sale_end="
+				+ sale_end + ", sale_type=" + sale_type + ", start_time="
+				+ start_time + ", updated_at=" + updated_at + ", created_at="
+				+ created_at + ", end_time=" + end_time + ", recommend="
+				+ recommend + ", user_quota=" + user_quota
+				+ ", grouponOriginal=" + grouponOriginal + ", thumbnail="
+				+ thumbnail + ", grouponPrice=" + grouponPrice
+				+ ", groupon_num=" + groupon_num + ", buyed_amount="
+				+ buyed_amount + ", rest_amount=" + rest_amount
+				+ ", use_restriction=" + use_restriction + ", use_mode="
+				+ use_mode + ", position=" + position + ", groupon_status="
+				+ groupon_status + ", created_user=" + created_user
+				+ ", updated_user=" + updated_user + ", description="
+				+ description + ", buyed_num=" + buyed_num + ", name=" + name
+				+ ", groupon_type=" + groupon_type + ", cooperater="
+				+ cooperater + ", alarmNum=" + alarmNum + ", pic_url="
+				+ pic_url + "]";
 	}
 }

@@ -25,6 +25,13 @@ public class RedNevelopeCommodityVO implements Serializable{
 	private int commodityType;//0 导购  1买手
 	private List<String> commodityPicList;
 	private String mallTip;//商场/街边店标签
+	private Double distance = 0.0;//距离
+	public Double getDistance() {
+		return distance;
+	}
+	public void setDistance(Double distance) {
+		this.distance = distance;
+	}
 	public String getCommodityId() {
 		return commodityId;
 	}

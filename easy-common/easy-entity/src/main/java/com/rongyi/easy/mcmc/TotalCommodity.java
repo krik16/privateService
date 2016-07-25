@@ -2,9 +2,12 @@ package com.rongyi.easy.mcmc;
 
 import java.io.Serializable;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.rongyi.easy.activitymanage.vo.CommodityVO;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
@@ -473,5 +476,63 @@ public class TotalCommodity implements  Serializable,Cloneable{
 				", commodityModelNo=" + commodityModelNo +
 				", goodsParam=" + goodsParam +
 				'}';
+	}
+
+	public void wrapTotalCommodityInfo(Commodity commodity, com.rongyi.easy.mcmc.vo.CommodityVO vo) {
+		this.setName(commodity.getName());
+		this.setCategory(commodity.getCategory());
+		this.setStatus(commodity.getStatus());
+		this.setCode(commodity.getCode());
+		this.setDescription(commodity.getDescription());
+		this.setPostage(commodity.getPostage());
+		this.setStock(commodity.getStock());
+		this.setCommodityModelNo(commodity.getCommodityModelNo());
+		this.setGoodsParam(commodity.getGoodsParam());
+
+		if(CollectionUtils.isNotEmpty(vo.getCommoditySpecList())) {
+			//totalCommodity总表显示时间区域
+			this.setOriginalPrice(commodity.getoPriceMin() +
+					(commodity.getoPriceMax().equals(commodity.getoPriceMin()) ?
+							"-" + commodity.getoPriceMax() : ""));
+			this.setCurrentPrice(commodity.getcPriceMin() +
+					(commodity.getcPriceMax().equals(commodity.getcPriceMin()) ?
+							"-" + commodity.getcPriceMax() : ""));
+		} else {
+			this.setCurrentPrice(commodity.getCurrentPrice());
+			this.setOriginalPrice(commodity.getOriginalPrice());
+		}
+
+		this.setCreateAt(new Date());
+		this.setUpdateAt(new Date());
+		this.setCategoryIds(commodity.getCategoryIds());
+
+		this.setPicList(commodity.getPicList());
+		this.setFreight(0);//app默认买家承担运费
+		this.setTerminalType(commodity.getTerminalType());
+		this.setWeAndTeStatus(commodity.getWeAndTeStatus());
+		this.setRegisterAt(commodity.getRegisterAt());
+		this.setSoldOutAt(commodity.getSoldOutAt());
+		this.setSource(commodity.getSource());
+		this.setStockStatus(commodity.getStockStatus());
+		this.setCommodityIds(new ArrayList<ObjectId>());
+		this.getCommodityIds().add(commodity.getId());
+		this.setBrandMid(commodity.getBrandMid());
+		this.setFilialeMids(new ArrayList<String>());
+		this.getFilialeMids().add(commodity.getFilialeMid());
+		this.setShopMids(new ArrayList<String>());
+		this.getShopMids().add(commodity.getShopMid());
+
+		if (StringUtils.isNotBlank(vo.getCreate_by()) && vo.getCreate_by().matches("\\d+")) {
+			this.setUpdateBy(Integer.valueOf(vo.getCreate_by()));
+			this.setCreateBy(Integer.valueOf(vo.getCreate_by()));
+		}
+		this.setSupportCourierDeliver(commodity.isSupportCourierDeliver());
+		this.setSupportSelfPickup(commodity.isSupportSelfPickup());
+		this.setIdentity(commodity.getIdentity());
+		this.setTemplateId(commodity.getTemplateId());//总表写入模版id
+		if(CollectionUtils.isNotEmpty(commodity.getCustomCategoryIds())){
+			this.setCustomCategoryIds((commodity.getCustomCategoryIds()));
+		}
+		this.setReason(commodity.getReason());
 	}
 }

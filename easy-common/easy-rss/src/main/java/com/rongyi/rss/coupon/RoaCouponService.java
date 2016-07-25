@@ -7,6 +7,7 @@ import com.rongyi.easy.coupon.entity.Coupon;
 import com.rongyi.easy.coupon.entity.CouponActivity;
 import com.rongyi.easy.coupon.param.CouponParam;
 import com.rongyi.easy.coupon.vo.CouponPageVO;
+import com.rongyi.easy.coupon.vo.CouponStockVO;
 import com.rongyi.easy.coupon.vo.TCCouponVO;
 import com.rongyi.easy.coupon.vo.VoucherRelatedObjectVO;
 
@@ -232,5 +233,18 @@ public interface RoaCouponService {
      */
     long getCouponCount();
 
+    /**
+     * 获取摩店用户未读卡券数量
+     * @param userId
+     * @param shopId
+     * @return
+     */
     int getCountUnReadCount(Integer userId,String shopId,Date lastGetTime);
+
+    /**
+     *
+     * @param couponIds
+     * @return
+     */
+    List<CouponStockVO> getCouponsStockCount(List<String> couponIds);
 }

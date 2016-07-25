@@ -9,6 +9,8 @@ package com.rongyi.easy.malllife.pojo;/*
  *
  */
 
+import com.rongyi.core.constant.Identity;
+
 import java.io.Serializable;
 
 public class BuyerInfoPojo implements Serializable {
@@ -40,6 +42,15 @@ public class BuyerInfoPojo implements Serializable {
     
     private String userAccount; //买手账号
 
+    private Integer identity;
+
+    public Integer getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(Integer identity) {
+        this.identity = identity;
+    }
 
     public Integer getUserId() {
         return userId;
@@ -149,5 +160,6 @@ public class BuyerInfoPojo implements Serializable {
                 ", imUser='" + imUser + '\'' +
                 ", userFansCount=" + userFansCount +
                 ", isFans=" + isFans +
+                ", identity=" + identity +
                 '}';
     }}

@@ -1,7 +1,10 @@
 package com.rongyi.easy.malllife.domain;
 
+import com.google.inject.internal.Lists;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 资讯文章
@@ -61,7 +64,7 @@ public class ContentDO implements Serializable{
     private String connect_type;// 多关联类型 mall shop brand city all
     private String picture2;//新加入的封面图
     private String action_picture2;//新加入的列表图
-    
+
     public String getPicture2() {
 		return picture2;
 	}
@@ -399,6 +402,35 @@ public class ContentDO implements Serializable{
 	}
 	public void setConnect_type(String connect_type) {
 		this.connect_type = connect_type;
+	}
+	@Override
+	public String toString() {
+		return "ContentDO [id=" + id + ", title=" + title + ", contentType="
+				+ contentType + ", category=" + category + ", contentStatus="
+				+ contentStatus + ", creator=" + creator + ", createDate="
+				+ createDate + ", updateDate=" + updateDate + ", mark=" + mark
+				+ ", picture=" + picture + ", content=" + content
+				+ ", actionStartDate=" + actionStartDate + ", actionEndDate="
+				+ actionEndDate + ", actionCost=" + actionCost
+				+ ", actionPicture=" + actionPicture + ", recommentView="
+				+ recommentView + ", referenceId=" + referenceId
+				+ ", markCount=" + markCount + ", indexDisplay=" + indexDisplay
+				+ ", mapPicture=" + mapPicture + ", description=" + description
+				+ ", referenceField1=" + referenceField1
+				+ ", actionPictureName=" + actionPictureName + ", position="
+				+ position + ", gatheringTime=" + gatheringTime
+				+ ", sameCityEndTime=" + sameCityEndTime
+				+ ", mettersAttentions=" + mettersAttentions
+				+ ", signupStartTime=" + signupStartTime + ", signupEndTime="
+				+ signupEndTime + ", participantsNumber=" + participantsNumber
+				+ ", participationNumber=" + participationNumber
+				+ ", celectionAddress=" + celectionAddress + ", visitedNum="
+				+ visitedNum + ", shareNum=" + shareNum + ", ballot=" + ballot
+				+ ", ballot_title=" + ballot_title + ", sharedTitle="
+				+ sharedTitle + ", activity_recommend=" + activity_recommend
+				+ ", userLimit=" + userLimit + ", grouponId=" + grouponId
+				+ ", connect_type=" + connect_type + ", picture2=" + picture2
+				+ ", action_picture2=" + action_picture2 + "]";
 	}
  
 }

@@ -17,6 +17,8 @@ public class AppVersionParam implements Serializable {
 
 	private String appName;// 需要更新的App（MDC2C/RYG/MDB2C）
 
+	private String updatePic;
+
 	public String getDeviceType() {
 		return deviceType;
 	}
@@ -41,4 +43,11 @@ public class AppVersionParam implements Serializable {
 		this.appName = appName;
 	}
 
+	public String getUpdatePic() {
+		return updatePic;
+	}
+
+	public void setUpdatePic(String updatePic) {
+		this.updatePic = updatePic;
+	}
 }

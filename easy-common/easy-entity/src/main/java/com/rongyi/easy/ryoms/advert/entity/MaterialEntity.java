@@ -11,7 +11,7 @@ public class MaterialEntity implements Serializable {
 	private Integer id;//
 	private Integer module_type;//素材模板 11全屏模板-A 21首页Banner-A
 	private String content;//素材url
-	private Integer content_type;//素材类型 1 图片 2 视频
+	private Integer content_type;//素材类型 1:jpg,2:mov,3:mp4,4:f4v,5:swf 6:avi
 	private Integer create_by;
 	private Date create_at;
 	private Integer update_by;

@@ -28,6 +28,7 @@
     <result column="share_code" property="shareCode" jdbcType="VARCHAR" />
     <result column="regist_ip" property="registIp" jdbcType="VARCHAR" />
     <result column="public_num_id" property="publicNumId" jdbcType="VARCHAR" />
+    <result column="login_times" property="loginTimes" jdbcType="INTEGER" />
   </resultMap>
   <insert id="insert" parameterType="com.rongyi.easy.usercenter.entity.MalllifeUserInfoEntity" >
     insert into malllife_user_info (id, user_name, password, 
@@ -37,7 +38,7 @@
       idfa, device_type, terminal_type, 
       gender, login_red, update_at, 
       create_at, push_id, last_login_at, 
-      last_login_ip, share_code, regist_ip,public_num_id
+      last_login_ip, share_code, regist_ip,public_num_id,login_times
       )
     values (#{id,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{version,jdbcType=TINYINT}, 
@@ -47,7 +48,7 @@
       #{gender,jdbcType=CHAR}, #{loginRed,jdbcType=TINYINT}, #{updateAt,jdbcType=TIMESTAMP}, 
       #{createAt,jdbcType=TIMESTAMP}, #{pushId,jdbcType=VARCHAR}, #{lastLoginAt,jdbcType=TIMESTAMP}, 
       #{lastLoginIp,jdbcType=VARCHAR}, #{shareCode,jdbcType=VARCHAR}, #{registIp,jdbcType=VARCHAR}
-      , #{publicNumId,jdbcType=VARCHAR}
+      , #{publicNumId,jdbcType=VARCHAR}, #{loginTimes,jdbcType=INTEGER}
       )
   </insert>
 
