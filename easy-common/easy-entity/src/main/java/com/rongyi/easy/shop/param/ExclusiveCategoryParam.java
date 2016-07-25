@@ -15,7 +15,7 @@ public class ExclusiveCategoryParam implements Serializable {
 
 	private List<String> name;// 专属分类名字
 
-	private Integer type;// 0一级分类1二级分类
+	private Integer type;// 1一级分类2二级分类
 
 	private String parentid;// 父类id（插入二级分类才有）
 
