@@ -766,6 +766,7 @@
         AND sales_commission.status = 1
         AND config_id = 0
         AND sales_commission.commission_amount > 0
+        AND sa.pic_upload_at is not null
         group by guide_id;
     </select>
 
@@ -783,7 +784,7 @@
         AND CASE WHEN YEAR(sa.create_at) &lt;= YEAR(sa.pic_upload_at) AND TO_DAYS(sa.create_at) - TO_DAYS(sa.pic_upload_at) &lt; 0
         THEN TO_DAYS(NOW()) - TO_DAYS(sa.pic_upload_at) = 1
         <!-- 否则取创建时间-->
-        ELSE TO_DAYS(NOW()) - TO_DAYS(sa.create_at) = 1 END
+        ELSE TO_DAYS(NOW()) - TO_DAYS(sa.create_at) = 1 AND sa.pic_upload_at is not null END
         AND sa.status = 1
         AND config_id = 0
         AND sa.commission_amount > 0
