@@ -4,6 +4,7 @@ import com.rongyi.easy.code.ImportInviteCodeParam;
 import com.rongyi.easy.code.InviteCodeVO;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Description: 活动相关的码需求接口
@@ -35,4 +36,36 @@ public interface ActivityCodeService {
      * @return
      */
     public List<String> getGiftCodes(ImportInviteCodeParam param);
+
+    /**
+     *
+     * @param count 要插入数量
+     * @param hannelsId 推广码模板id
+     * @param type 2：邀请码；3：推广码
+     * @return
+     */
+    public boolean insertHannelsCodes(int count, Integer hannelsId, int type);
+
+    /**
+     * 推广码id查询生成的码code和创建时间
+     * @param id
+     * @return
+     */
+
+
+    List<Map<String,Object>> getCouponCodesByHannelsId(Integer id);
+
+    /**
+     * 推广码id查询生成的码code
+     * @param param
+     * @return
+     */
+    List<String> getCouponCodesByHannelsId(Map<String, Object> param);
+
+    /**
+     * 作废推广码修改关联的码状态
+     * @param updateParam
+     * @return
+     */
+    int updateAcvityCode(String hannels_id,int status);
 }

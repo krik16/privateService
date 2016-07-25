@@ -15,12 +15,13 @@ public class CouponChannel implements Serializable {
 
     private String name;
 
-    private Integer type;
+    private Integer type;//渠道类型：发布渠道[0],推广渠道[1]
 
     private Date createAt;
 
     private Integer status;
-
+    private String code;//渠道邀请码
+    private Integer thirdChanel;//0店长 1导购 2买手 3第三方渠道 渠道类型
     public Integer getId() {
         return id;
     }
@@ -68,5 +69,20 @@ public class CouponChannel implements Serializable {
 				.append(", createAt=").append(createAt).append(", status=").append(status).append("]");
 		return builder.toString();
 	}
-	
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Integer getThirdChanel() {
+        return thirdChanel;
+    }
+
+    public void setThirdChanel(Integer thirdChanel) {
+        this.thirdChanel = thirdChanel;
+    }
 }

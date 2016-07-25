@@ -17,6 +17,7 @@ public enum CodeCenterEnum {
     ERROR_INVALID_LENGTH(1021304, "length不合法或无效"),
     ERROR_INVALID_TYPE(1021304, "type不合法或无效"),
     ERROR_INVALID_CODE(1021305, "抱歉，您输入的券码异常，请确认后重新输入"),
+    ERROR_INVALID_NAME(1021308, "推广码名称已存在"),
     ERROR_INVALID_MALLID(1021306, "mallId不合法或无效"),
     ERROR_INVALID_COUNT(1021307, "count不合法或无效"),
     ERROR_UNLOGIN(1021309, "请重新登录！"),
@@ -39,8 +40,17 @@ public enum CodeCenterEnum {
     ERROR_VALIDCODE_TYPE(1021333, "type 不合法或者无效！"),
     ERROR_VALIDCODE_FALIURE(1021334, "验码失败！"),
     ERROR_VALIDCODE_TIMEOUT(1021335, "调用PHP接口超时异常！"),
-
-
+    ERROR_VALIDCODE_MUTEX(1021336, "同一类型码同一渠道同一时间段不能重复"),
+    ERROR_VALIDCODE_REASON(1021337, "审核失败或作废理由为必填项"),
+    ERROR_HANNELS_AUTHRITY(1021339,"无相应操作权限"),
+    ERROR_HANNELS_NULL_CODE(1021340,"促销码为空！"),
+    ERROR_HANNELS_ERROR_CODE(1021341,"促销码不合法！"),
+    ERROR_HANNELS_USED_CODE(1021342,"推广码已经被使用！"),
+    ERROR_HANNELS_DELETED_CODE(1021343,"推广码已经作废！"),
+    ERROR_HANNELS_USE_LIMIT(1021344,"超过领取次数！"),
+    ERROR_CHANNEL_TYPE(1021350,"type 不能为空！"),
+    ERROR_CHANNEL_THIRD(1021351,"thirdChannel 参数不能为空或有误"),
+    ERROR_NOT_EXIST_USER(1021352,"不存在该用户，请重新输入手机号和身份"),
     ;
 
 

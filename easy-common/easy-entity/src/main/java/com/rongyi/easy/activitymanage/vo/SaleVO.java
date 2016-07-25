@@ -48,8 +48,6 @@ public class SaleVO implements Serializable {
         if(activityTemplate!=null){
             this.id=activityTemplate.getId();
             this.name=activityTemplate.getName();
-            this.startAt=activityTemplate.getStartAt().getTime();
-            this.endAt=activityTemplate.getEndAt().getTime();
             this.activityUrl=activityTemplate.getActivityUrl();
             this.activityType=activityTemplate.getActivityType();
             this.moduleType=activityTemplate.getModuleType();

@@ -12,6 +12,7 @@ package com.rongyi.easy.solr.param;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.rongyi.core.annotation.NeedCheck;
 import com.rongyi.easy.malllife.param.MalllifeBaseParam;
@@ -93,6 +94,36 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 	private String commodityCode;
 
 	private List<String> keywordList = new ArrayList<>();
+
+	private List<String> shopList;//店铺id集合
+	private List<String> categoryList;//分类id集合
+	private String couponId;//红包券id
+
+	private Map commodityMaxMinValues;  // 商品最大最小销量和更新时间
+
+	public String getCouponId() {
+		return couponId;
+	}
+
+	public void setCouponId(String couponId) {
+		this.couponId = couponId;
+	}
+
+	public List<String> getShopList() {
+		return shopList;
+	}
+
+	public void setShopList(List<String> shopList) {
+		this.shopList = shopList;
+	}
+
+	public List<String> getCategoryList() {
+		return categoryList;
+	}
+
+	public void setCategoryList(List<String> categoryList) {
+		this.categoryList = categoryList;
+	}
 
 	public List<String> getKeywordList() {
 		return keywordList;
@@ -319,6 +350,7 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 		this.maxPrice = maxPrice;
 	}
 
+	@NeedCheck(getFieldName = "id")
 	public String getId() {
 		return id;
 	}
@@ -351,13 +383,47 @@ public class CommoditySearchParam  extends MalllifeBaseParam implements Serializ
 		this.sortMethodName = sortMethodName;
 	}
 
+	public Map getCommodityMaxMinValues() {
+		return commodityMaxMinValues;
+	}
+
+	public void setCommodityMaxMinValues(Map commodityMaxMinValues) {
+		this.commodityMaxMinValues = commodityMaxMinValues;
+	}
+
 	@Override
 	public String toString() {
-		return "CommoditySearchParam [keyword=" + keyword + ", shopId=" + shopId + ", brandId=" + brandId + ", mallId="
-				+ mallId + ", commodityCategory=" + commodityCategory + ", sortBy=" + sortBy + ", coord_x=" + coord_x
-				+ ", coord_y=" + coord_y + ", bullId=" + bullId + ", liveId=" + liveId + ", saleId=" + saleId
-				+ ", flashSaleId=" + flashSaleId + ", commodityType=" + commodityType + ", systemNumber=" + systemNumber
-				+ ", from=" + from + ", source=" + source + ", zoneId=" + zoneId + ", commodityCode=" + commodityCode
-				+ ", keywordList=" + keywordList + ", minPrice=" + minPrice + ", maxPrice=" + maxPrice + "]";
+		return "CommoditySearchParam{" +
+				"brandId='" + brandId + '\'' +
+				", id='" + id + '\'' +
+				", brandMids=" + brandMids +
+				", keyword='" + keyword + '\'' +
+				", shopId='" + shopId + '\'' +
+				", mallId='" + mallId + '\'' +
+				", commodityCategory='" + commodityCategory + '\'' +
+				", sortBy='" + sortBy + '\'' +
+				", coord_x='" + coord_x + '\'' +
+				", coord_y='" + coord_y + '\'' +
+				", bullId='" + bullId + '\'' +
+				", liveId='" + liveId + '\'' +
+				", saleId=" + saleId +
+				", flashSaleId=" + flashSaleId +
+				", commodityType='" + commodityType + '\'' +
+				", filterMethodName='" + filterMethodName + '\'' +
+				", sortMethodName='" + sortMethodName + '\'' +
+				", systemNumber='" + systemNumber + '\'' +
+				", from=" + from +
+				", source='" + source + '\'' +
+				", minPrice='" + minPrice + '\'' +
+				", maxPrice='" + maxPrice + '\'' +
+				", zoneId='" + zoneId + '\'' +
+				", commodityCode='" + commodityCode + '\'' +
+				", keywordList=" + keywordList +
+				", shopList=" + shopList +
+				", categoryList=" + categoryList +
+				", couponId='" + couponId + '\'' +
+				", commodityMaxMinValues=" + commodityMaxMinValues +
+				"} " + super.toString();
 	}
+
 }

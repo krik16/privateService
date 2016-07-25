@@ -8,15 +8,19 @@ package com.rongyi.easy.mcmc.constant;
  */
 public enum EPOITipType {
     /**
-     * 商品
+     * 商品（4-100）
      */
     COMMODITY,
     /**
-     * 优惠
+     * 优惠（2-010）
      */
     DISCOUNT,
     /**
-     * 卡劵
+     * 卡劵（1-001）
      */
-    COUPON
+    COUPON,
+    /**
+     * 初始化（0-000）
+     */
+    INTI
 }
