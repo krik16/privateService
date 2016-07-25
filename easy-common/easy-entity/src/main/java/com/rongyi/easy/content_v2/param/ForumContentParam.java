@@ -32,7 +32,7 @@ public class ForumContentParam implements Serializable{
 
 	private Integer iosVersion;
 
-	private Integer andoridVersion;
+	private Integer androidVersion;
 	
 	//查询app的发布状态与列表的发布状态不一致  1已发布
 	private Integer appStatus;
@@ -65,12 +65,12 @@ public class ForumContentParam implements Serializable{
 		this.iosVersion = iosVersion;
 	}
 
-	public Integer getAndoridVersion() {
-		return andoridVersion;
+	public Integer getAndroidVersion() {
+		return androidVersion;
 	}
 
-	public void setAndoridVersion(Integer andoridVersion) {
-		this.andoridVersion = andoridVersion;
+	public void setAndroidVersion(Integer androidVersion) {
+		this.androidVersion = androidVersion;
 	}
 
 	public Integer getPositionId() {
@@ -194,7 +194,7 @@ public class ForumContentParam implements Serializable{
 	public String toString(){
 		StringBuilder sb=new StringBuilder();
 		sb.append("ForumContent {").append("provId:").append(this.provId).append(" cityId:").append(this.cityId).append(" title:").append(this.title)
-		.append(" publishBeginAt:").append(this.publishBeginAt).append(" publishEndAt:").append(this.publishEndAt).append(" status:").append(this.status).append(" currentPage:").append(this.currentPage).append(" pageSize:").append(this.pageSize).append(" orderByString:").append(this.orderByString).append(" orderByDesc:").append(this.orderByDesc).append(" positionId:").append(this.positionId).append("iosVersion:").append(iosVersion).append("andoridVersion:").append(andoridVersion);
+		.append(" publishBeginAt:").append(this.publishBeginAt).append(" publishEndAt:").append(this.publishEndAt).append(" status:").append(this.status).append(" currentPage:").append(this.currentPage).append(" pageSize:").append(this.pageSize).append(" orderByString:").append(this.orderByString).append(" orderByDesc:").append(this.orderByDesc).append(" positionId:").append(this.positionId).append("iosVersion:").append(iosVersion).append("andoridVersion:").append(androidVersion);
 		return sb.toString();
 		
 	}
