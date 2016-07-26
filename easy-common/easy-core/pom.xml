@@ -5,6 +5,7 @@
 		<groupId>com.rongyi</groupId>
 		<artifactId>easy-common</artifactId>
 		<version>3.4.4-SNAPSHOT</version>
+	</parent>
 	<artifactId>easy-core</artifactId>
 	<packaging>jar</packaging>
 	<dependencies>
