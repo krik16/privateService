@@ -155,13 +155,22 @@ public class BdataFloor implements Serializable {
     private Integer system_status;//1 隐藏 0正常
     private Date  updated_at;
     private String last_update_id;//最近修改人
+    private String reason;//操作描述
 	public Integer getSystem_status() {
 		return system_status;
 	}
 	public void setSystem_status(Integer system_status) {
 		this.system_status = system_status;
 	}
+	public String getReason() {
+		return reason;
+	}
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
     
+	
+	
    
 
 }

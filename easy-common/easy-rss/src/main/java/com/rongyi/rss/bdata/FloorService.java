@@ -36,7 +36,7 @@ public interface FloorService {
 	
 	public	String updateOrInsertFloor(BdataFloorVO vo);
 	
-	public void updateSystemStatus(String floorId,String uId);
+	public void updateSystemStatus(String floorId,String uId,String reason);
 	
 	public void sortFloor(String floorId,String type,String updateUserId);
 	

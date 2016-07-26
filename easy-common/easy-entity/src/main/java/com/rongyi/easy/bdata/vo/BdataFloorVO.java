@@ -40,10 +40,17 @@ public class BdataFloorVO implements Serializable {
     private String simpleFloorName;//楼层图
     private Integer systemStatus;//1 隐藏 0正常
     private Date  updated_at;
+    private String reason;//操作描述
     
     
     
-    public Date getCreatedAt() {
+    public String getReason() {
+		return reason;
+	}
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+	public Date getCreatedAt() {
 		return createdAt;
 	}
 	public void setCreatedAt(Date createdAt) {
