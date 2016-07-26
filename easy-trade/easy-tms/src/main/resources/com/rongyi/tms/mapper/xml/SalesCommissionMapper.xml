@@ -188,7 +188,15 @@
         <include refid="View_From"/>
         where commission_amount is not null and config_id = 0
         <!--查询今天之前创建的返佣记录-->
-        and TO_DAYS(NOW()) - TO_DAYS(sales_commission.create_at) >= 1
+<!--        and TO_DAYS(NOW()) - TO_DAYS(sales_commission.create_at) >= 1-->
+
+        <!-- 创建时间小于小票上传时间则取小票上传时间-->
+        AND CASE WHEN YEAR(sales_commission.create_at) &lt;= YEAR(sales_commission.pic_upload_at) AND TO_DAYS(sales_commission.create_at) - TO_DAYS(sales_commission.pic_upload_at) &lt; 0
+        THEN TO_DAYS(NOW()) - TO_DAYS(sales_commission.pic_upload_at) >= 1
+
+        ELSE TO_DAYS(NOW()) - TO_DAYS(sales_commission.create_at) >= 1 AND sales_commission.pic_upload_at is not null END
+
+
         and sales_commission.status in
         <foreach collection="status" index="index" item="item" open="("
                  separator="," close=")">
