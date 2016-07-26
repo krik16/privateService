@@ -19,7 +19,7 @@ public class ShopParam {
 
 	private String id;
     private String name;//店铺名称
-    private Integer shop_nature;//店铺类型 0普通店 1免税店 2专柜 3折扣店 4旗舰店
+    private Integer shop_nature = 0;//店铺类型 0普通店 1免税店 2专柜 3折扣店 4旗舰店
     private String shop_type;//店铺性质 0商场店铺 1商场专柜 2街边店
     private String number;//店铺编号
     @JsonSerialize(using=JsonObjectIdSerializer.class)
@@ -56,6 +56,8 @@ public class ShopParam {
     private Integer valid;//0正常显示1已隐藏2删除3待处理   4系统下架
     private String reason;//停业原因
     private String	 filiale_id;//分公司id
+    private String name_en ;       //店铺英文名
+    private String description_en ;  //英文描述
 	public String getId() {
 		return id;
 	}
@@ -241,6 +243,18 @@ public class ShopParam {
 	}
 	public void setFiliale_id(String filiale_id) {
 		this.filiale_id = filiale_id;
+	}
+	public String getName_en() {
+		return name_en;
+	}
+	public void setName_en(String name_en) {
+		this.name_en = name_en;
+	}
+	public String getDescription_en() {
+		return description_en;
+	}
+	public void setDescription_en(String description_en) {
+		this.description_en = description_en;
 	}
     
     
