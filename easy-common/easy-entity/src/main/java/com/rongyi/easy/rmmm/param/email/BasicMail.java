@@ -2,6 +2,7 @@ package com.rongyi.easy.rmmm.param.email;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.List;
 
@@ -43,6 +44,8 @@ public class BasicMail implements Serializable {
 
     //附件
     private MultipartFile[] attachment = new MultipartFile[0];
+
+    private File[] files;
 
     public String getSubject() {
         return subject;
@@ -106,6 +109,14 @@ public class BasicMail implements Serializable {
 
     public void setAttachment(MultipartFile[] attachment) {
         this.attachment = attachment;
+    }
+
+    public File[] getFiles() {
+        return files;
+    }
+
+    public void setFiles(File[] files) {
+        this.files = files;
     }
 }
 
