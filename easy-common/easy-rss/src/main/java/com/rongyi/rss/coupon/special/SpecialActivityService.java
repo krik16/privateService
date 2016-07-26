@@ -1,5 +1,6 @@
 package com.rongyi.rss.coupon.special;
 
+import com.rongyi.easy.malllife.vo.UserInfoVO;
 import com.rongyi.easy.usercenter.entity.MalllifeUserInfoEntity;
 
 import java.util.List;
@@ -14,18 +15,18 @@ import java.util.List;
 public interface SpecialActivityService {
     /**
      * 获取当前用户还可以领取的次数。0：领取完了。
-     * @param malllifeUserInfoEntity
+     * @param userInfoVO
      * @return 次数
      */
-    public int getReceiveTimes(MalllifeUserInfoEntity malllifeUserInfoEntity);
+    public int getReceiveTimes(UserInfoVO userInfoVO);
 
     /**
      * 领取红包，并返回该用户剩余的次数
-     * @param malllifeUserInfoEntity
+     * @param userInfoVO
      * @return 剩余领取的次数
      * @throws Exception
      */
-    public int receiveCoupons(MalllifeUserInfoEntity malllifeUserInfoEntity) throws Exception;
+    public int receiveCoupons(UserInfoVO userInfoVO) throws Exception;
 
     /**
      * 更新每个用户可以领取的次数
@@ -41,6 +42,10 @@ public interface SpecialActivityService {
      */
     public void updateGetCoupons(List<String> couponIds,Integer status);
 
+    /**
+     * 获取每个用户的领取次数限制
+     * @return
+     */
     public int getReceiveLimit();
 
 }
