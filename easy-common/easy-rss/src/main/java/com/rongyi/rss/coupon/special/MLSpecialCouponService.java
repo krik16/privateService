@@ -25,4 +25,10 @@ public interface MLSpecialCouponService {
      * @throws Exception
      */
     public int receiveCoupons(MalllifeUserInfoEntity malllifeUserInfoEntity) throws Exception;
+
+    /**
+     * 每个用户可以领用的次数
+     * @return
+     */
+    public int getReceiveLimit();
 }

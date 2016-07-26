@@ -40,4 +40,7 @@ public interface SpecialActivityService {
      * @param status 0:可以用；1：不可用
      */
     public void updateGetCoupons(List<String> couponIds,Integer status);
+
+    public int getReceiveLimit();
+
 }
