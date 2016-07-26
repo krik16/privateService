@@ -774,7 +774,7 @@
         AND sales_commission.status = 1
         AND config_id = 0
         AND sales_commission.commission_amount > 0
-        AND sa.pic_upload_at is not null
+        AND sales_commission.pic_upload_at is not null
         group by guide_id;
     </select>
 
