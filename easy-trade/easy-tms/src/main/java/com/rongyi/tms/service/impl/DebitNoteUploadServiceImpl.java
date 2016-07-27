@@ -55,6 +55,7 @@ public class DebitNoteUploadServiceImpl implements DebitNoteUploadService {
 			SalesCommission salesCommission = salesCommissionService.selectByOrderNo(orderNo);
 			if (salesCommission == null) {
 				salesCommission = new SalesCommission();
+				logger.info("insert sales");
 				salesCommission.setPicUploadAt(new Date());
 			} else if (salesCommission.getStatus() == 3 || salesCommission.getStatus() == 4 || salesCommission.getStatus() == 5) {
 				//审核中的小票不能再次上传
@@ -65,7 +66,9 @@ public class DebitNoteUploadServiceImpl implements DebitNoteUploadService {
 				logger.error(">>>>>>>>>小票状态不正确，结束");
 				return result;
 			}
+			logger.info("upadteDate={}",salesCommission.getUpdateDate());
 			if(salesCommission.getUpdateDate() == null){
+				logger.info("update sales");
 				salesCommission.setPicUploadAt(new Date());
 			}
 
@@ -76,9 +79,11 @@ public class DebitNoteUploadServiceImpl implements DebitNoteUploadService {
 
 			if (salesCommission.getId() != null) {
 				// 记录存在
+				logger.info("记录存在 upadteDate={}",salesCommission.getUpdateDate());
 				salesCommissionService.updateByOrderNo(salesCommission);
 			} else {
 				// 记录不存在，佣金未生成
+				logger.info("记录不存在 upadteDate={}",salesCommission.getUpdateDate());
 				salesCommissionService.insert(salesCommission);
 			}
 			result.setCode(CodeEnum.SUCCESS.getActionCode());
