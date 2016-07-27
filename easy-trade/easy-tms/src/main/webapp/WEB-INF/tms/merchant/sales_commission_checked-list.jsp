@@ -44,7 +44,7 @@
 			 		<td style="text-align: center;">${item.shopName }</td>
 			 		<td style="text-align: center;"><fmt:formatDate value="${item.picUploadAt}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 			 		<td style="text-align: center;">
-			 			<c:if test="${item.status==5}">拒绝</c:if>
+			 			<c:if test="${item.status==5}">返佣超限</c:if>
 			 			<c:if test="${item.status>0 && item.status != 5}">已通过</c:if>
 			 			<c:if test="${item.status==-2}">已通过</c:if>
 			 			<c:if test="${item.status==-1}"><a name="remote" id="${item.id }" href="#">未通过</a> </c:if>
@@ -60,7 +60,7 @@
 							<td style="text-align: center;">已到账</td>
 						</c:when>
 						<c:when test="${item.status eq 5}">
-							<td style="text-align: center;">超出上限</td>
+							<td style="text-align: center;">拒绝</td>
 						</c:when>
 						<c:otherwise>
 							<td style="text-align: center;">未到账</td>
