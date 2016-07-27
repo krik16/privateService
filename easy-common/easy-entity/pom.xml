@@ -5,7 +5,7 @@
 		<artifactId>easy-common</artifactId>
 		<version>3.8.4-SNAPSHOT</version>
 	</parent>
-		<version>3.7.9-SNAPSHOT</version>	</parent>
+
 	<artifactId>easy-entity</artifactId>
 	<packaging>jar</packaging>
 	<properties>
