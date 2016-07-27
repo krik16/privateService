@@ -55,6 +55,7 @@ public class DebitNoteUploadServiceImpl implements DebitNoteUploadService {
 			SalesCommission salesCommission = salesCommissionService.selectByOrderNo(orderNo);
 			if (salesCommission == null) {
 				salesCommission = new SalesCommission();
+				salesCommission.setPicUploadAt(new Date());
 			} else if (salesCommission.getStatus() == 3 || salesCommission.getStatus() == 4 || salesCommission.getStatus() == 5) {
 				//审核中的小票不能再次上传
 				result.setCode(CodeEnum.ERROR_DEBIT_NOTE_STAUTS.getActionCode());
@@ -64,9 +65,10 @@ public class DebitNoteUploadServiceImpl implements DebitNoteUploadService {
 				logger.error(">>>>>>>>>小票状态不正确，结束");
 				return result;
 			}
-			if(salesCommission.getId() == null) {
+			if(salesCommission.getUpdateDate() == null){
 				salesCommission.setPicUploadAt(new Date());
 			}
+
 			salesCommission.setPicUrls(pic_urls);
 			salesCommission.setOrderNo(orderNo);
 			salesCommission.setGuideId(userId);
