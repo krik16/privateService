@@ -66,8 +66,8 @@ public class DebitNoteUploadServiceImpl implements DebitNoteUploadService {
 				logger.error(">>>>>>>>>小票状态不正确，结束");
 				return result;
 			}
-			logger.info("upadteDate={}",salesCommission.getUpdateDate());
-			if(salesCommission.getUpdateDate() == null){
+			logger.info("getPicUploadAt={}",salesCommission.getPicUploadAt());
+			if(salesCommission.getPicUploadAt() == null){
 				logger.info("update sales");
 				salesCommission.setPicUploadAt(new Date());
 			}
@@ -79,11 +79,11 @@ public class DebitNoteUploadServiceImpl implements DebitNoteUploadService {
 
 			if (salesCommission.getId() != null) {
 				// 记录存在
-				logger.info("记录存在 upadteDate={}",salesCommission.getUpdateDate());
+				logger.info("记录存在 getPicUploadAt={}",salesCommission.getPicUploadAt());
 				salesCommissionService.updateByOrderNo(salesCommission);
 			} else {
 				// 记录不存在，佣金未生成
-				logger.info("记录不存在 upadteDate={}",salesCommission.getUpdateDate());
+				logger.info("记录不存在 getPicUploadAt={}",salesCommission.getPicUploadAt());
 				salesCommissionService.insert(salesCommission);
 			}
 			result.setCode(CodeEnum.SUCCESS.getActionCode());
