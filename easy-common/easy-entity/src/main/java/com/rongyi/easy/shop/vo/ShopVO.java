@@ -52,6 +52,8 @@ public class ShopVO implements Serializable {
 	private String updatedAt;//修改时间
 	private String filialeName;//分公司名字
 	private boolean changeAble;//不同的角色在店铺详情页面能否修改
+	private String nameEn;      //店铺英文名
+	private String descriptionEn;  //英文描述
 	
 	public String getId() {
 		return id;
@@ -316,6 +318,22 @@ public class ShopVO implements Serializable {
 		this.businessDistrictName = businessDistrictName;
 	}
 
+	public String getNameEn() {
+		return nameEn;
+	}
+
+	public void setNameEn(String nameEn) {
+		this.nameEn = nameEn;
+	}
+
+	public String getDescriptionEn() {
+		return descriptionEn;
+	}
+
+	public void setDescriptionEn(String descriptionEn) {
+		this.descriptionEn = descriptionEn;
+	}
+
 	public boolean isChangeAble() { return changeAble; }
 
 	public void setChangeAble(boolean changeAble) { this.changeAble = changeAble; }
@@ -355,6 +373,8 @@ public class ShopVO implements Serializable {
 				.append("updateBy", updateBy)
 				.append("updatedAt", updatedAt)
 				.append("filialeName", filialeName)
+				.append("nameEn",nameEn)
+				.append("descriptionEn",descriptionEn)
 				.toString();
 	}
 }

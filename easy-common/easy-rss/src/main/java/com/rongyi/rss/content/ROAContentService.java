@@ -423,6 +423,8 @@ public interface ROAContentService {
 	 */
 	public Integer deleteByPositionId(Integer id);
 
+	public Integer deleteByPositionIdAndVersion(Integer id,int iosVersion, int andoridVersion);
+
 	/**
 	 * 根据quickType，typeVal查询数据
 	 * @param type
