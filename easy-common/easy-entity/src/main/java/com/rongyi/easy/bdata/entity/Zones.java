@@ -13,7 +13,7 @@ import org.mongodb.morphia.annotations.Id;
  * @author rongyi
  *
  */
-@Entity("zones")
+@Entity(value="zones", noClassnameStored = true)
 public class Zones implements Serializable {
 	private static final long serialVersionUID = 1L;
 	/**

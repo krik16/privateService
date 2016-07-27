@@ -1,10 +1,15 @@
 package com.rongyi.rss.bdata;
 
 import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.easy.bdata.entity.Photo;
 import com.rongyi.easy.bdata.entity.Shop;
+import com.rongyi.easy.ryoms.entity.RyUserInfo;
+import com.rongyi.easy.ryoms.param.ShopParam;
 
 import java.util.List;
 import java.util.Map;
+
+import org.bson.types.ObjectId;
 
 /**
  * 店铺服务
@@ -57,5 +62,63 @@ public interface ShopService {
 	 */
 	public ResponseVO getShopListForName(String mallId, String shopName, Integer page, Integer pageSize);
 
+	
+	/**
+	 * 修改店铺营业状态及系统状态
+	 * @param paramsMap
+	 *         ids： 要修改的店铺id 多个ID逗号分隔
+	 *         valid: 店铺系统状态   0正常显示 1已隐藏
+	 *         business_status:店铺营业状态
+	 */
+	public boolean updateShopSimple(Map paramsMap);
+	
+	/**
+	 * 新建修改店铺
+	 * @param param 店铺参数 
+	 * @param user 操作人
+	 * @return
+	 */
+	public String saveShop(ShopParam param)throws RuntimeException, Exception;
+	
+	/**
+	 * 店铺搜索
+	 */
+	Map<String, Object>getShops(Map params, int currentpage, int pagesize);
+	
+	/*
+	 * 店铺查询结果统计
+	 */
+	Map<String, Object>getShopsWithBusinessStatusCount(Map params, int currentpage, int pagesize);
+	
+	/**
+	 * 保存店铺图片
+	 * @param photo
+	 * @return
+	 */
+	public Photo savePhoto(Photo photo);
+
+
 	public ResponseVO getCouponInfoByShopIds(String ids);
+	
+	/**
+	 * 通过店铺ID查询店铺实体
+	 * @param id
+	 * @return
+	 */
+	public Shop getShopEntityById(String id);
+	
+	/**
+	 * 通过ids查询店铺实体列表
+	 * @param ids
+	 * @return
+	 */
+	public List<Shop> getShopListByIds(List<ObjectId> ids);
+	
+	public Map getZoneIdNameMap(Map<String, String> map,String type);
+	
+	/**
+	 * 通知solr
+	 * @param shopIds
+	 */
+	public void updateSorl(List<String> shopIds);
 }
