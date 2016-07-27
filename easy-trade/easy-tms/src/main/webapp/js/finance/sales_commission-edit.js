@@ -5,7 +5,7 @@ $.ajaxSetup({
 	cache : false
 });
 $(document).ready(function() {
-	setDefaultTime();
+	setYestdayDefaultTime();
 	ajaxloadApplys();
 	
 	bindEvent();
@@ -218,4 +218,11 @@ function payingNow(){
 			}
 		},"json")
 	});
+}
+function setYestdayDefaultTime(){
+	var curDate = new Date();
+	var startDate = curDate.getFullYear()+"/"+(curDate.getMonth()+1)+"/"+(curDate.getDate()-1);
+	var endDate = curDate.getFullYear()+"/"+(curDate.getMonth()+1)+"/"+(curDate.getDate()-1)+" 23:59:59";
+	$(".startTime").val(getFormatDate(new Date(startDate)));
+	$('.endTime').val(getFormatDate(new Date(endDate)));
 }
