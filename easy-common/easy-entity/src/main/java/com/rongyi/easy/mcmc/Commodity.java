@@ -661,7 +661,7 @@ public class Commodity implements  Serializable,Cloneable{
 	public void wrapCommodityInfo(CommodityVO vo, long brandId, long mallId, String mallMid,
 								  String brandName, String shopNum, CommodityShopInfo shopInfo, Map specMap, String brandMid) {
 		List<CommoditySpecVO> specVoList = vo.getCommoditySpecList();
-		if(CollectionUtils.isEmpty(specVoList)) {
+		if(specMap == null) {
 			this.setStock(Integer.valueOf(vo.getCommodityStock()));
 			this.setOriginalPrice(vo.getCommodityOriginalPrice());
 			this.setCurrentPrice((vo.getCommodityCurrentPrice() != null
