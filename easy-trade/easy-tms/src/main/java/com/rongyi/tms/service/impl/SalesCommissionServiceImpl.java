@@ -160,9 +160,9 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 				} else {
 					// 记录不存在，未传过小票
 					salesCommission.setStatus(0);
-					if(salesCommission.getCommissionAmount().compareTo(BigDecimal.ZERO) < 1){
-						salesCommission.setStatus(5);
-					}
+//					if(salesCommission.getCommissionAmount().compareTo(BigDecimal.ZERO) < 1){
+//						salesCommission.setStatus(5);
+//					}
 					insert(salesCommission);
 				}
 			}
