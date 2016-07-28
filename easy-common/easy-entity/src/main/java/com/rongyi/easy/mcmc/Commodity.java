@@ -6,7 +6,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.rongyi.core.constant.Identity;
 import com.rongyi.core.enumerate.mcmc.CommodityStatus;
+import com.rongyi.core.enumerate.mcmc.CommodityType;
 import com.rongyi.easy.mcmc.constant.CommodityDataStatus;
 import com.rongyi.easy.mcmc.constant.CommodityTerminalType;
 import com.rongyi.easy.mcmc.vo.CommoditySpecVO;
@@ -657,7 +659,7 @@ public class Commodity implements  Serializable,Cloneable{
 	}
 
 	public void wrapCommodityInfo(CommodityVO vo, long brandId, long mallId, String mallMid,
-								  String brandName, String shopNum, CommodityShopInfo shopInfo, Map specMap) {
+								  String brandName, String shopNum, CommodityShopInfo shopInfo, Map specMap, String brandMid) {
 		List<CommoditySpecVO> specVoList = vo.getCommoditySpecList();
 		if(CollectionUtils.isEmpty(specVoList)) {
 			this.setStock(Integer.valueOf(vo.getCommodityStock()));
@@ -757,5 +759,28 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setShopNum(shopNum);
 		this.setShopMid(shopInfo.getShopMid());
 		this.setSpecList((List<ObjectId>) specMap.get("specIdList"));
+
+		// 买手&非现货 商品 临时状态: -1
+		if(vo.getProcessIdentity() == Identity.BUYER) {
+			if(vo.getIsSpot() == 1) {
+				this.setSpot(true);
+				if(this.getStock() <= 0) {
+					this.setStatus(0);
+				} else {
+					//APP端发布商品时，把商品状态更改为已删除，等待图片上传成功后，把商品状态更改为上架
+					if((vo.getSource()==null||vo.getSource()==2) && CollectionUtils.isEmpty(vo.getCommodityPicList())){
+						this.setStatus(CommodityDataStatus.STATUS_COMMODITY_DELETED);
+					} else {
+						this.setStatus(CommodityDataStatus.STATUS_COMMODITY_SHELVE);
+					}
+				}
+			} else {
+				this.setSpot(false);
+				this.setStatus(CommodityDataStatus.STATUS_COMMODITY_NOT_SPORT_CONTRACT);
+			}
+			this.setType(CommodityType.BULL.getValue());
+			this.setBrandMid(brandMid);
+		}
+
 	}
 }

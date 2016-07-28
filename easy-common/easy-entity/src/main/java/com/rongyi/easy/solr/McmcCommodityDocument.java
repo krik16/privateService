@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.rongyi.core.constant.Identity;
+import com.rongyi.core.enumerate.mcmc.CommodityType;
 import com.rongyi.easy.mcmc.Commodity;
 import com.rongyi.easy.mcmc.CommodityCategory;
 import com.rongyi.easy.mcmc.CommodityShopInfo;
@@ -452,7 +454,8 @@ public class McmcCommodityDocument implements java.io.Serializable{
 	}
 
 	public void wrapDocumentInfo(Commodity commodity, CommodityVO commodityVo,
-								 long brandId, long mallId, CommodityShopInfo shopInfo) {
+								 long brandId, long mallId, CommodityShopInfo shopInfo,
+								 List<Double> positions, List<String> zoneIds, String brandMid) {
 		this.setId(commodity.getId().toString());
 		this.setCommodityName(commodity.getName());
 		this.setCommodityNameSubdiv(commodity.getName());
@@ -491,6 +494,28 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 		if(StringUtils.isNotBlank(commodityVo.getWeAndTeStatus())){
 			this.setWeAndTeStatus(commodityVo.getWeAndTeStatus());
+		}
+
+		if(commodityVo.getProcessIdentity() == Identity.BUYER) {
+			// 买手相关字段
+			this.setCreateBy(commodity.getCreate_by());
+			this.setSpot(commodity.isSpot());
+			this.setType(CommodityType.BULL.getValue()); // 0：商家 1：买手
+			this.setTerminalType(commodity.getTerminalType());
+			this.setWeAndTeStatus(commodity.getWeAndTeStatus());
+			if(commodity.isSpot()) {
+				this.setStatus(commodity.getStatus());
+			} else {
+				// 买手&非现货 商品 临时状态: -1
+				this.setStatus(CommodityDataStatus.STATUS_COMMODITY_NOT_SPORT_CONTRACT);
+			}
+			if (zoneIds != null && !zoneIds.isEmpty()) {
+				this.setZone_ids(zoneIds);
+			}
+			if (positions != null && positions.size() == 2) {
+				this.setPosition(positions.get(0) + "," + positions.get(1));
+			}
+			this.setBrand_id(brandMid);
 		}
 
 
