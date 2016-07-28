@@ -362,6 +362,13 @@ public interface IUserService {
      * @return
      */
     public RmmmUserInfoEntity getUserInfoByShareCode(String shareCode);
-
+    /**
+     * 用户更新是否接单状态
+     * @param isOrdering
+     * @param userId
+     * @return
+     * @throws Exception
+     */
+    public boolean updateIsOrdering(Integer isOrdering, Integer userId) throws Exception;
 
 }
