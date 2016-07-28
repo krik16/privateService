@@ -49,4 +49,5 @@ public interface SpecialActivityService {
      */
     public int getReceiveLimit();
 
+    public boolean couponHasStock();
 }

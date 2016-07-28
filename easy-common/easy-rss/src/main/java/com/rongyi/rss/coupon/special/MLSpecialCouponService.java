@@ -33,4 +33,6 @@ public interface MLSpecialCouponService {
      * @return
      */
     public int getReceiveLimit();
+
+    public boolean couponHasStock();
 }
