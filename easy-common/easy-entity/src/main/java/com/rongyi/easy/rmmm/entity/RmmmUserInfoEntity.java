@@ -83,6 +83,7 @@ public class RmmmUserInfoEntity implements Serializable{
     private String useCode; //注册使用的邀请码
     
     private String jsessionid; //用户摩店登录标识
+    private Integer isOrdering;//是否接单状态   0是  1否
 
     public Integer getId() {
 		return id;
@@ -330,5 +331,14 @@ public class RmmmUserInfoEntity implements Serializable{
 	public void setJsessionid(String jsessionid) {
 		this.jsessionid = jsessionid;
 	}
+
+	public Integer getIsOrdering() {
+		return isOrdering;
+	}
+
+	public void setIsOrdering(Integer isOrdering) {
+		this.isOrdering = isOrdering;
+	}
+	
 }
 

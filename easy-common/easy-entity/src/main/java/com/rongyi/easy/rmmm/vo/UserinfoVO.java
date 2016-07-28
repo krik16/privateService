@@ -55,15 +55,7 @@ public class UserinfoVO implements Serializable{
 	private String sharCode;//邀请码
 	private String downUrl; //容易逛下载地址
 	private String mallShopDownUrl; //摩店下载地址
-
-	public String getMallShopDownUrl() {
-		return mallShopDownUrl;
-	}
-
-	public void setMallShopDownUrl(String mallShopDownUrl) {
-		this.mallShopDownUrl = mallShopDownUrl;
-	}
-
+	private Integer isOrdering;//是否接单中  0是  1否
 	List<Integer> identityType; //角色列表
 	String currentId;//当前角色状态
 
@@ -79,7 +71,21 @@ public class UserinfoVO implements Serializable{
 
 	String userMsg;//导购 买手禁用提示信息
 
-	
+	public Integer getIsOrdering() {
+		return isOrdering;
+	}
+
+	public void setIsOrdering(Integer isOrdering) {
+		this.isOrdering = isOrdering;
+	}
+
+	public String getMallShopDownUrl() {
+		return mallShopDownUrl;
+	}
+
+	public void setMallShopDownUrl(String mallShopDownUrl) {
+		this.mallShopDownUrl = mallShopDownUrl;
+	}
 	public Integer getIfAttention() {
 		return ifAttention;
 	}

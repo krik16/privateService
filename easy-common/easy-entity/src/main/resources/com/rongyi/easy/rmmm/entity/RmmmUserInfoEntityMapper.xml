@@ -26,6 +26,7 @@
     <result column="push_id" property="pushId" jdbcType="VARCHAR" />
 	<result column="use_code" property="useCode" jdbcType="VARCHAR" />
 	<result column="jsessionid" property="jsessionid" jdbcType="VARCHAR" />
+	<result column="isOrdering" property="isOrdering" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -88,7 +89,7 @@
   <sql id="Base_Column_List" >
     id, user_logo, role_id, user_phone, user_pwd, user_name, user_nick_name, user_status, 
     account_id, create_by, create_at, update_by, update_at, version, is_disabled, device_uuid,
-    card_id,share_code,use_code,jsessionid
+    card_id,share_code,use_code,jsessionid,isOrdering
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rongyi.easy.rmmm.entity.RmmmUserInfoEntityExample" >
     select
@@ -126,14 +127,14 @@
       user_nick_name, user_status, account_id,
       create_by, create_at, update_by, 
       update_at, version, is_disabled, 
-      device_uuid, card_id,share_code,use_code,jsessionid)
+      device_uuid, card_id,share_code,use_code,jsessionid,isOrdering)
     values (#{id,jdbcType=INTEGER}, #{userLogo,jdbcType=VARCHAR}, #{roleId,jdbcType=INTEGER}, 
       #{userPhone,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
       #{userNickName,jdbcType=VARCHAR}, #{userStatus,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, 
       #{createBy,jdbcType=INTEGER}, #{createAt,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=INTEGER}, 
       #{updateAt,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER}, #{isDisabled,jdbcType=INTEGER}, 
       #{deviceUuid,jdbcType=VARCHAR}, #{cardId,jdbcType=VARCHAR},#{sharCode,jdbcType=VARCHAR}),
-      #{useCode,jdbcType=VARCHAR},#{jsessionid,jdbcType=VARCHAR})
+      #{useCode,jdbcType=VARCHAR},#{jsessionid,jdbcType=VARCHAR},#{isOrdering,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.rongyi.easy.rmmm.entity.RmmmUserInfoEntity" >
     insert into rmmm_user_info
@@ -198,6 +199,9 @@
        <if test="jsessionid != null" >
         jsessionid,
       </if>
+      <if test="isOrdering != null" >
+        isOrdering,
+      </if>
 
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -260,6 +264,9 @@
       </if>
        <if test="jsessionid != null" >
         #{jsessionid,jdbcType=VARCHAR},
+      </if>
+      <if test="isOrdering != null" >
+        #{isOrdering,jdbcType=INTEGER},
       </if>
 
     </trim>
