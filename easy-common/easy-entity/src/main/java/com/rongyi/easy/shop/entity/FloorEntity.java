@@ -45,6 +45,7 @@ public class FloorEntity implements Serializable{
 	private Integer floor_type;//楼栋类型 0楼1栋2幢3座
 	private String floor_name;//楼层
 	private ObjectId building_id;//楼栋id
+	private String simpleFloorName ;  //楼层的名称
 	
 	public ObjectId getId() {
 		return id;
@@ -261,7 +262,13 @@ public class FloorEntity implements Serializable{
 	public void setBuilding_id(ObjectId building_id) {
 		this.building_id = building_id;
 	}
-	
- 	
+
+	public String getSimpleFloorName() {
+		return simpleFloorName;
+	}
+
+	public void setSimpleFloorName(String simpleFloorName) {
+		this.simpleFloorName = simpleFloorName;
+	}
 	
 }

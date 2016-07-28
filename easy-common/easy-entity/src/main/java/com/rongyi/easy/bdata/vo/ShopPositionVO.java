@@ -18,6 +18,8 @@ public class ShopPositionVO implements Serializable {
     private String floorId;
     private String floor;
     private String shopNumber;
+    private String lastFloorId;   //跨楼层商铺的最后一个楼层
+    private String lastFloor ;
 
 
     public String getProId() {
@@ -123,4 +125,20 @@ public class ShopPositionVO implements Serializable {
     public void setShopNumber(String shopNumber) {
         this.shopNumber = shopNumber;
     }
+
+	public String getLastFloorId() {
+		return lastFloorId;
+	}
+
+	public void setLastFloorId(String lastFloorId) {
+		this.lastFloorId = lastFloorId;
+	}
+
+	public String getLastFloor() {
+		return lastFloor;
+	}
+
+	public void setLastFloor(String lastFloor) {
+		this.lastFloor = lastFloor;
+	}
 }

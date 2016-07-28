@@ -12,7 +12,7 @@ import java.util.List;
  * User: chris
  * Date: 2015/10/31 15:17
  */
-@Entity("zones")
+@Entity(value="zones", noClassnameStored = true)
 public class Area implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

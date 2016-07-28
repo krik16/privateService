@@ -15,7 +15,7 @@ import java.util.List;
  * Date: 2015/10/25 12:52
  */
 
-@Entity("zones")
+@Entity(value="zones", noClassnameStored = true)
 public class Floor implements Serializable {
     @Id
     private String id;
@@ -30,6 +30,7 @@ public class Floor implements Serializable {
     private String picture;
     private String swfpic;//步步高新增楼层动态导航图片 支持swf svg格式
     private Date   created_at;
+    private Integer mall_valid ;
 
 
     public String getId() {
@@ -140,6 +141,16 @@ public class Floor implements Serializable {
     }
 
 
+	public Integer getMall_valid() {
+		return mall_valid;
+	}
+
+	public void setMall_valid(Integer mall_valid) {
+		this.mall_valid = mall_valid;
+	}
+
+
+
     public String getFullSwfPic() {
         if (StringUtils.isNotBlank(swfpic)) {
             return "http://rongyi.b0.upaiyun.com/system/mall_area/picture/" + id + "/" + swfpic;
@@ -172,4 +183,5 @@ public class Floor implements Serializable {
                 ", created_at=" + created_at +
                 '}';
     }
+
 }

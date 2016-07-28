@@ -18,6 +18,7 @@ public class HannelsVO implements Serializable {
     private Long validEndAt;//有效结束时间
     private List<HannelsCheckLog> hannelCheckLogs;//审核，作废日志列表
     private List<HannelsCoupon> hannelsCoupons;
+    private List<HannelsUser> hannelsUsers;
     /**
      * 码的数量
      */
@@ -185,6 +186,14 @@ public class HannelsVO implements Serializable {
         this.updateBy = updateBy;
     }
 
+    public List<HannelsUser> getHannelsUsers() {
+        return hannelsUsers;
+    }
+
+    public void setHannelsUsers(List<HannelsUser> hannelsUsers) {
+        this.hannelsUsers = hannelsUsers;
+    }
+
     @Override
     public String toString() {
         return "HannelsVO{" +
@@ -198,6 +207,7 @@ public class HannelsVO implements Serializable {
                 ", validEndAt=" + validEndAt +
                 ", hannelCheckLogs=" + hannelCheckLogs +
                 ", hannelsCoupons=" + hannelsCoupons +
+                ", hannelsUsers=" + hannelsUsers +
                 ", count=" + count +
                 ", useLimit=" + useLimit +
                 ", remark='" + remark + '\'' +

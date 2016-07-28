@@ -12,7 +12,7 @@ import java.util.Date;
  * User: chris
  * Date: 2015/10/27 2:19
  */
-@Entity("material")
+@Entity(value="material", noClassnameStored = true)
 public class Material implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

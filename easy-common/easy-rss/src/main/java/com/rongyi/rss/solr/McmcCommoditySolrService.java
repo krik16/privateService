@@ -289,7 +289,7 @@ public interface McmcCommoditySolrService {
 	 */
 	public boolean updateCommoditySystemNumber(List<ObjectId> commodityIds, String systemNumber);
 
-	public List<Integer>  selectBrandIdsByParams(BullParam param);
+	public List<ObjectId> selectBrandIdsByParams(BullParam param);
 
 	/**
 	 * 查询品牌列表（除用户已订阅，爱品牌品牌墙）
