@@ -1,5 +1,6 @@
 package com.rongyi.rss.coupon.special;
 
+import com.rongyi.easy.coupon.vo.SpecialVO;
 import com.rongyi.easy.malllife.vo.UserInfoVO;
 import com.rongyi.easy.usercenter.entity.MalllifeUserInfoEntity;
 
@@ -25,7 +26,7 @@ public interface MLSpecialCouponService {
      * @return 剩余领取的次数
      * @throws Exception
      */
-    public int receiveCoupons(UserInfoVO userInfoVO) throws Exception;
+    public SpecialVO receiveCoupons(UserInfoVO userInfoVO) throws Exception;
 
     /**
      * 每个用户可以领用的次数
