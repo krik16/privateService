@@ -488,9 +488,12 @@ public class McmcCommodityDocument implements java.io.Serializable{
 
 		this.setCommodityBrandId(String.valueOf(brandId));
 		this.setCommodityMallId(String.valueOf(mallId));
-		this.setZone_ids(shopInfo.getZoneIds());
-		this.setPosition(shopInfo.getPositon());
-		this.setBrand_id(shopInfo.getBrandMid());
+
+		if(shopInfo != null) {
+			this.setZone_ids(shopInfo.getZoneIds());
+			this.setPosition(shopInfo.getPositon());
+			this.setBrand_id(shopInfo.getBrandMid());
+		}
 
 		if(StringUtils.isNotBlank(commodityVo.getWeAndTeStatus())){
 			this.setWeAndTeStatus(commodityVo.getWeAndTeStatus());

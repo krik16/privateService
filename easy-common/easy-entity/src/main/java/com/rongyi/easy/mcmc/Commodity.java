@@ -660,7 +660,6 @@ public class Commodity implements  Serializable,Cloneable{
 
 	public void wrapCommodityInfo(CommodityVO vo, long brandId, long mallId, String mallMid,
 								  String brandName, String shopNum, CommodityShopInfo shopInfo, Map specMap, String brandMid) {
-		List<CommoditySpecVO> specVoList = vo.getCommoditySpecList();
 		if(specMap == null) {
 			this.setStock(Integer.valueOf(vo.getCommodityStock()));
 			this.setOriginalPrice(vo.getCommodityOriginalPrice());
@@ -752,13 +751,16 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setDiscount(this.getDiscount());
 
 		this.setBrandName(brandName);
-		this.setBrandMid(shopInfo.getBrandMid());
+		if(shopInfo != null) {
+			this.setBrandMid(shopInfo.getBrandMid());
+			this.setShopMid(shopInfo.getShopMid());
+		}
+
 		this.setBrandId(String.valueOf(brandId));
 		this.setMallId(String.valueOf(mallId));
 		this.setMallMid(mallMid);
 		this.setShopNum(shopNum);
-		this.setShopMid(shopInfo.getShopMid());
-		this.setSpecList((List<ObjectId>) specMap.get("specIdList"));
+		this.setSpecList((List<ObjectId>)specMap.get("specIdList"));
 
 		// 买手&非现货 商品 临时状态: -1
 		if(vo.getProcessIdentity() == Identity.BUYER) {
