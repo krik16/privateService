@@ -65,7 +65,7 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	private String workImg;    //工作证照
 	
 	private String otherImg;   //其它照片
-
+	private Integer isOrdering;//是否接单状态  0:是，1:否
 
     public Integer getId() {
 		return id;
@@ -246,7 +246,7 @@ public class UserManagerParam extends BaseParam implements Serializable{
 	public void setAccountList(List<AccountParam> accountList) {
 		this.accountList = accountList;
 	}
-public Integer getIdentity() {
+    public Integer getIdentity() {
 		return identity;
 	}
 
@@ -364,5 +364,11 @@ public Integer getIdentity() {
 	public void setOtherImg(String otherImg) {
 		this.otherImg = otherImg;
 	}
-	
+	public Integer getIsOrdering() {
+		return isOrdering;
 	}
+	public void setIsOrdering(Integer isOrdering) {
+		this.isOrdering = isOrdering;
+	}
+	
+}

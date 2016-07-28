@@ -28,7 +28,7 @@ public interface IUserGuideChatService {
      * @return
      * @throws Exception
      */
-    public UserGuideChatEntity getLatestUserGuideChatInfo(String mallUserId,Integer shopId) throws Exception;
+    public UserGuideChatEntity getLatestOrdingUserGuideChatInfo(String mallUserId,Integer shopId) throws Exception;
     /**
      * 获取最新聊天导购的个人详细信息
      * @param mallUserId
