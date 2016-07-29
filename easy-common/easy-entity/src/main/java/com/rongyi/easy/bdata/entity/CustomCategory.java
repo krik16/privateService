@@ -13,7 +13,7 @@ import org.mongodb.morphia.annotations.Id;
  * @author rongyi
  *
  */
-@Entity("custom_category")
+@Entity(value="custom_category", noClassnameStored = true)
 public class CustomCategory implements Serializable {
 	private static final long serialVersionUID = 1L;
 	/**

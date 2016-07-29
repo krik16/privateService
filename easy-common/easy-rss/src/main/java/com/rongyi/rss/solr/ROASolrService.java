@@ -52,4 +52,12 @@ public interface ROASolrService {
      * @return
      */
     public boolean backup(String core) throws MalformedURLException, Exception;
+    
+    /**
+     * 增量更新索引
+     * @param core
+     * @param ids
+     * @throws Exception
+     */
+    public void updateIndex(String core,List<String> ids) throws Exception;
 }

@@ -6,10 +6,24 @@ package com.rongyi.easy.bdata.vo;
  * Date: 2015/10/24 18:19
  */
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
+import org.bson.types.ObjectId;
+
 public class MallVO implements Serializable {
-    public double getLogoX() {
+
+
+
+	public String getOpenTime() {
+		return openTime;
+	}
+
+	public void setOpenTime(String openTime) {
+		this.openTime = openTime;
+	}
+
+	public double getLogoX() {
 		return logoX;
 	}
 
@@ -30,7 +44,8 @@ public class MallVO implements Serializable {
     private String name;//商场名称
     private String mold;//商场类型
     private Integer businessStatus;//商场营业状态, 0:正常营业1:即将开业2:暂停营业3:停止营业
-    private Integer recommend;//商场推荐：1-未推荐、2-已推荐
+    private Integer mallValid;//商场营业状态, 0:正常营业1:即将开业2:暂停营业3:停止营业
+	private Integer recommend;//商场推荐：1-未推荐、2-已推荐
     private List<String> aliases;//商场别名
     private String weixin;//微信号
     private MallAddressVO mallAddress;//商场地址
@@ -39,9 +54,9 @@ public class MallVO implements Serializable {
     private String telephone;
     private String transInfor;//交通信息
     private List<ParkingVO> parking;//停车信息
-    private Integer terminalMall;//终端机合作1-无合作、2-有合作
+    private Boolean terminalMall;//终端机合作1-无合作、2-有合作
     private String appearPic;//APP外景图片：APP外景图的url地址
-    private String webAppearPic;//WEB外景图片：WEB外景图url地址
+	private String webAppearPic;//WEB外景图片：WEB外景图url地址
     private String traffPic;//商场交通图：交通图url地址
     private String introPic;//商场介绍图：商场介绍图url地址
     private String terminalLogo;//终端机logo：终端机logourl地址
@@ -53,21 +68,23 @@ public class MallVO implements Serializable {
     private Long shopNum;
     private double logoX;  //经度
     private double logoY;  //纬度
-    private boolean hasCustomCategory;//是否有自定义分类
-    
-    
+	private boolean hasCustomCategory;//是否有自定义分类
+	private String merlogPic;  //商家后台logo
+    private String mallGroupId;//商场所属集团id
+    private String mallLevel;//商场等级
+    private Date updatedAt;//修改时间
+    private String lastUpdateId;//最后修改人
+    private String openTime;//开业时间
+    private Date createdAt;//创建时间
+    private String operatorId;//创建者
+    private String operatorName;//创建者
+    private String lastUpdateName;//修改者
+    private String parentId; // 上一级id
+	private List parentIds; // 上一级所有ids
+	private String mobile;
+	private String validReason;
+	private String businessStatusReason;
 
-    public boolean isHasCustomCategory() {
-		return hasCustomCategory;
-	}
-
-	public void setHasCustomCategory(boolean hasCustomCategory) {
-		this.hasCustomCategory = hasCustomCategory;
-	}
-
-	public String getId() {
-        return id;
-    }
 
     public void setId(String id) {
         this.id = id;
@@ -169,13 +186,7 @@ public class MallVO implements Serializable {
         this.parking = parking;
     }
 
-    public Integer getTerminalMall() {
-        return terminalMall;
-    }
 
-    public void setTerminalMall(Integer terminalMall) {
-        this.terminalMall = terminalMall;
-    }
 
     public String getAppearPic() {
         return appearPic;
@@ -264,4 +275,144 @@ public class MallVO implements Serializable {
     public void setShopNum(Long shopNum) {
         this.shopNum = shopNum;
     }
+
+	public Integer getMallValid() {
+		return mallValid;
+	}
+
+	public void setMallValid(Integer mallValid) {
+		this.mallValid = mallValid;
+	}
+
+	public Boolean getTerminalMall() {
+		return terminalMall;
+	}
+
+	public void setTerminalMall(Boolean terminalMall) {
+		this.terminalMall = terminalMall;
+	}
+
+	public boolean isHasCustomCategory() {
+		return hasCustomCategory;
+	}
+
+	public void setHasCustomCategory(boolean hasCustomCategory) {
+		this.hasCustomCategory = hasCustomCategory;
+	}
+
+	public String getMallGroupId() {
+		return mallGroupId;
+	}
+
+	public void setMallGroupId(String mallGroupId) {
+		this.mallGroupId = mallGroupId;
+	}
+
+	public String getMallLevel() {
+		return mallLevel;
+	}
+
+	public void setMallLevel(String mallLevel) {
+		this.mallLevel = mallLevel;
+	}
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public String getLastUpdateId() {
+		return lastUpdateId;
+	}
+
+	public void setLastUpdateId(String lastUpdateId) {
+		this.lastUpdateId = lastUpdateId;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getOperatorId() {
+		return operatorId;
+	}
+
+	public void setOperatorId(String operatorId) {
+		this.operatorId = operatorId;
+	}
+
+	public String getOperatorName() {
+		return operatorName;
+	}
+
+	public void setOperatorName(String operatorName) {
+		this.operatorName = operatorName;
+	}
+
+	public String getLastUpdateName() {
+		return lastUpdateName;
+	}
+
+	public void setLastUpdateName(String lastUpdateName) {
+		this.lastUpdateName = lastUpdateName;
+	}
+
+	public String getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
+	}
+
+	public List getParentIds() {
+		return parentIds;
+	}
+
+	public void setParentIds(List parentIds) {
+		this.parentIds = parentIds;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getValidReason() {
+		return validReason;
+	}
+
+	public void setValidReason(String validReason) {
+		this.validReason = validReason;
+	}
+
+	public String getBusinessStatusReason() {
+		return businessStatusReason;
+	}
+
+	public void setBusinessStatusReason(String businessStatusReason) {
+		this.businessStatusReason = businessStatusReason;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public String getMerlogPic() {
+		return merlogPic;
+	}
+
+	public void setMerlogPic(String merlogPic) {
+		this.merlogPic = merlogPic;
+	}
 }

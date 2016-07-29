@@ -98,6 +98,10 @@ public class ShopEntity implements Serializable{
 	private List<ObjectId> production_ids;
 	private List<Double> location;
 	private Integer rank;
+	private String name_en;
+	private String description_en ;
+	private Integer create_source ; //创建来源   0大运营  1商家后台  其它crm
+	private Integer update_source ; //修改来源  0大运营  1商家后台  其它crm
 	public ShopEntity() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -179,6 +183,8 @@ public class ShopEntity implements Serializable{
 				}
 			}
 			this.custom_category_ids = custom_category_ids;
+		}else{
+			this.custom_category_ids = new ArrayList<ObjectId>();
 		}
 		
 		this.photo_urls = param.getPhoto_urls();
@@ -230,6 +236,8 @@ public class ShopEntity implements Serializable{
 		this.updated_by = param.getUpdated_by();
 		this.valid = param.getValid();
 		this.reason = param.getReason();
+		this.name_en = param.getName_en();
+		this.description_en = param.getDescription_en();
 		
 		//分公司id
 		if(StringUtils.isNotBlank(param.getFiliale_id())){
@@ -519,5 +527,37 @@ public class ShopEntity implements Serializable{
 
 	public void setRank(Integer rank) {
 		this.rank = rank;
+	}
+
+	public String getName_en() {
+		return name_en;
+	}
+
+	public Integer getCreate_source() {
+		return create_source;
+	}
+
+	public void setCreate_source(Integer create_source) {
+		this.create_source = create_source;
+	}
+
+	public Integer getUpdate_source() {
+		return update_source;
+	}
+
+	public void setUpdate_source(Integer update_source) {
+		this.update_source = update_source;
+	}
+
+	public void setName_en(String name_en) {
+		this.name_en = name_en;
+	}
+
+	public String getDescription_en() {
+		return description_en;
+	}
+
+	public void setDescription_en(String description_en) {
+		this.description_en = description_en;
 	}
 }
