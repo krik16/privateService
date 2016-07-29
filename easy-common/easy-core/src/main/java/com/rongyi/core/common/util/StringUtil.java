@@ -4,6 +4,7 @@ import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
 import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
+
 import org.apache.commons.lang.StringUtils;
 
 import java.util.*;
@@ -318,5 +319,19 @@ public class StringUtil {
 		}
 
 		return prestr;
+	}
+	
+	/**
+	 * 随机产生数字加字母的组合
+	 */
+	public static String getRandomString(int length) {
+		String baseStr = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		StringBuffer strbuff = new StringBuffer();
+		if(length > 0){
+			for(int i = 0; i < length ; i++){
+				strbuff.append(baseStr.charAt(new Random().nextInt(baseStr.length())));
+			}
+		}
+		return strbuff.toString();
 	}
 }
