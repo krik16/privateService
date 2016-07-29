@@ -100,4 +100,12 @@ public interface HannelsService {
      * @return
      */
     List<Hannels> getHannelsByUserId(Integer userId,Integer hannelsType);
+
+    /**
+     * 根据商场和店铺id 和 hannelsType ,查询该用户关联的且当前有效的hannels
+     * @param assignId
+     * @param hannelsType
+     * @return
+     */
+    List<Hannels> getHannelsByAssignId(String assignId,Integer hannelsType);
 }
