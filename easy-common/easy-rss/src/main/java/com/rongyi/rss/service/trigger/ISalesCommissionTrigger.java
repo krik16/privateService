@@ -30,4 +30,9 @@ public interface ISalesCommissionTrigger {
      */
     void statisticsBuyerCommissionAmountTrigger();
 
+    /**
+     *每日定时检查更新前一天生成的导购/买手的超限佣金
+     */
+    void statisticsCheckLimitTrigger();
+
 }
