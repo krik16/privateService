@@ -17,7 +17,7 @@ import java.util.Date;
  * @date 2015年5月25日 下午6:11:04
  */
 
-public class SalesCommissionVO {
+public class SalesCommissionVO implements Comparable{
     public String getMallMid() {
         return mallMid;
     }
@@ -248,4 +248,9 @@ public class SalesCommissionVO {
                 + "]";
     }
 
+    @Override
+    public int compareTo(Object o) {
+        SalesCommissionVO vo = (SalesCommissionVO)o;
+        return  (vo.getCommissionAmount().compareTo(this.getCommissionAmount()));
+    }
 }
