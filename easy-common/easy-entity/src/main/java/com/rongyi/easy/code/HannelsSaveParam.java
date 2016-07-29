@@ -19,6 +19,8 @@ public class HannelsSaveParam implements Serializable {
     private String useLimit;//每个用户使用个数
     private String remark;//备注
     private List<HannelsUser> hannelsUserList;//关联的导购,买手数据
+    private Integer userType;
+
     public String getId() {
         return id;
     }

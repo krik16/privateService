@@ -86,6 +86,16 @@ public class Hannels implements Serializable{
      */
     private String channelCode;
 
+    /**
+     * 分配类型。0：店员；1：店长；2：商场；3：第三方渠道
+     */
+    private Integer allotType;
+
+    /**
+     * false 不是全部；true 是全部
+     */
+    private Boolean isAllUser;
+
     private List<HannelsCoupon> coupons;
 
     private List<HannelsUser> hannelsUsers;
@@ -244,6 +254,22 @@ public class Hannels implements Serializable{
         this.hannelsUsers = hannelsUsers;
     }
 
+    public Integer getAllotType() {
+        return allotType;
+    }
+
+    public void setAllotType(Integer allotType) {
+        this.allotType = allotType;
+    }
+
+    public Boolean getIsAllUser() {
+        return isAllUser;
+    }
+
+    public void setIsAllUser(Boolean isAllUser) {
+        this.isAllUser = isAllUser;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Hannels{");
@@ -263,7 +289,11 @@ public class Hannels implements Serializable{
         sb.append(", hannelsCheckLogList=").append(hannelsCheckLogList);
         sb.append(", channelId=").append(channelId);
         sb.append(", channelCode='").append(channelCode).append('\'');
+        sb.append(", allotType=").append(allotType);
+        sb.append(", isAllUser=").append(isAllUser);
         sb.append(", coupons=").append(coupons);
+        sb.append(", hannelsUsers=").append(hannelsUsers);
+        sb.append(", couponChannel=").append(couponChannel);
         sb.append('}');
         return sb.toString();
     }
