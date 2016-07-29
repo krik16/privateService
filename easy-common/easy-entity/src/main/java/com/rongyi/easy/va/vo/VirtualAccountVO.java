@@ -74,6 +74,7 @@ public class VirtualAccountVO implements Serializable {
 	 * 总佣金收入（包含交易佣金，优惠券佣金，奖金佣金）
 	 */
 	private BigDecimal commissionIncome;
+	private String drawPassword;//提现密码
 	public String getUserId() {
 		return userId;
 	}
@@ -209,6 +210,36 @@ public class VirtualAccountVO implements Serializable {
 	public void setStopAt(Date stopAt) {
 		this.stopAt = stopAt;
 	}
-	
-	
+
+	public String getDrawPassword() {
+		return drawPassword;
+	}
+
+	public void setDrawPassword(String drawPassword) {
+		this.drawPassword = drawPassword;
+	}
+
+	@Override
+	public String toString() {
+		return "VirtualAccountVO{" +
+				"userId='" + userId + '\'' +
+				", userName='" + userName + '\'' +
+				", isSuspended=" + isSuspended +
+				", stopAt=" + stopAt +
+				", stopReason='" + stopReason + '\'' +
+				", balance=" + balance +
+				", tradeTotal=" + tradeTotal +
+				", tradeDaily=" + tradeDaily +
+				", bonusDaily=" + bonusDaily +
+				", incomeTotal=" + incomeTotal +
+				", drawnTotal=" + drawnTotal +
+				", bonusTotal=" + bonusTotal +
+				", commissionTotal=" + commissionTotal +
+				", drawForAuditTotal=" + drawForAuditTotal +
+				", commissionForAuditTotal=" + commissionForAuditTotal +
+				", faleCommissionMonth=" + faleCommissionMonth +
+				", commissionIncome=" + commissionIncome +
+				", drawPassword='" + drawPassword + '\'' +
+				'}';
+	}
 }
