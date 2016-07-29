@@ -18,7 +18,7 @@ public class HpIntegralParam implements Serializable{
 	
 	private String jsessionid;
 	private String cardCode;//卡公司编码
-	private String cardNum;//卡号
+	private String cardNo;//卡号
 	private String password;//卡密码
 	private String code;//验证码
 	private String cardIntegral;//兑换的第三方积分
@@ -34,11 +34,11 @@ public class HpIntegralParam implements Serializable{
 	public void setCardCode(String cardCode) {
 		this.cardCode = cardCode;
 	}
-	public String getCardNum() {
-		return cardNum;
+	public String getCardNo() {
+		return cardNo;
 	}
-	public void setCardNum(String cardNum) {
-		this.cardNum = cardNum;
+	public void setCardNo(String cardNo) {
+		this.cardNo = cardNo;
 	}
 	public String getPassword() {
 		return password;
@@ -61,7 +61,7 @@ public class HpIntegralParam implements Serializable{
 	//不要把密码打印出来
 	@Override
 	public String toString() {
-		return "HpIntegralParam [jsessionid=" + jsessionid + ", cardCode=" + cardCode + ", cardNum=" + cardNum + ", password="
+		return "HpIntegralParam [jsessionid=" + jsessionid + ", cardCode=" + cardCode + ", cardNo=" + cardNo + ", password="
 				+ "******" + ", code=" + code + ", cardIntegral=" + cardIntegral + "]";
 	}
 
