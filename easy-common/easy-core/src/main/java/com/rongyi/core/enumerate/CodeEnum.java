@@ -76,11 +76,13 @@ public enum CodeEnum {
     ERROR_INSERT_MALL("-1131","插入商场信息出错"),
     ERROR_INSERT_SHOP("-1132","插入店铺信息出错"),
     ERROR_NO_USERINFO("-1133","该用户已不提供服务"),
+    ERROR_IDENTITY_LENGTH("-1134","身份证号码有误"),
     /** 密码修改 */
     ERROR_ORIGINAL_PASSOWRD("-1212", "原密码不正确"),
     ERROR_NEW_INVALID("-1213", "新密码无效"),
     ERROR_EXCEED_RESTRICTION("-1214", "同一天找回密码次数超限制"),
-  
+    ERROR_SAME_PASSOWRD("-1215", "新密码和原密码相同,无须修改"),
+    ERROR_DRAW_PASSOWRD("-1216", "交易密码输入错误，请重试"),
     /** 版本更新 */
     SUCCESS_UNNECESSARIES_UPDATE("-1310","当前版本不需要更新"),
     
@@ -247,7 +249,8 @@ public enum CodeEnum {
 	ERROR_ROLE_BO_EDIT("1201101", "你无权限操作，如需修改请联系分公司管理员"),
 	ERROR_ROLE_SG_EDIT("1201102", "你无权限操作，如需修改请联系导购"),
 	ERROR_ROLE_SM_EDIT("1201103", "你无权限操作，如需修改请联系店长"),
-	
+
+    ERROR_EXIST_PASSWORD("1300000", "虚拟账户未设置提现密码"),
 	ERROR_GUIDE_ISDISABLED("1062002","此店铺休息中，无法为您服务");
 
     private String code; 
