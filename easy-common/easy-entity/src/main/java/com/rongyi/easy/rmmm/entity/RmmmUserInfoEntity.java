@@ -84,7 +84,7 @@ public class RmmmUserInfoEntity implements Serializable{
     
     private String jsessionid; //用户摩店登录标识
     private Integer isOrdering;//是否接单状态   0是  1否
-
+    private Date updateOrderingAt;//更新接单状态的时间
     public Integer getId() {
 		return id;
 	}
@@ -338,6 +338,14 @@ public class RmmmUserInfoEntity implements Serializable{
 
 	public void setIsOrdering(Integer isOrdering) {
 		this.isOrdering = isOrdering;
+	}
+
+	public Date getUpdateOrderingAt() {
+		return updateOrderingAt;
+	}
+
+	public void setUpdateOrderingAt(Date updateOrderingAt) {
+		this.updateOrderingAt = updateOrderingAt;
 	}
 	
 }

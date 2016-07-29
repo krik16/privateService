@@ -27,6 +27,7 @@
 	<result column="use_code" property="useCode" jdbcType="VARCHAR" />
 	<result column="jsessionid" property="jsessionid" jdbcType="VARCHAR" />
 	<result column="isOrdering" property="isOrdering" jdbcType="INTEGER" />
+	<result column="update_ordering_at" property="updateOrderingAt" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
