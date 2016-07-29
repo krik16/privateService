@@ -1,24 +1,5 @@
 package com.rongyi.tms.web.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import net.sf.json.JSONObject;
-
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.constant.CommissionEnum;
 import com.rongyi.easy.tms.entity.SalesCommissionAuditLog;
@@ -32,6 +13,22 @@ import com.rongyi.tms.moudle.vo.ResponseResult;
 import com.rongyi.tms.moudle.vo.UserInfo;
 import com.rongyi.tms.service.SalesCommissionAuditLogService;
 import com.rongyi.tms.service.SalesCommissionService;
+import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author 袁波
@@ -66,7 +63,7 @@ public class SalesCommissionController extends BaseController {
 			request.setAttribute("currpage", pagingvos.getCurrentPage());
 			request.setAttribute("rowCont", pagingvos.getTotalPage());
 			if (module.equals("merchant")) {
-				if (params.getStatus().equals("1")) {
+				if ("1".equals(params.getStatus()) && !"5".equals(params.getStatus())) {
 					return module + "/sales_commission-search-list";
 				} else {
 					return module + "/sales_commission_checked-list";

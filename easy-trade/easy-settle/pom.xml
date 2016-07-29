@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.rongyi</groupId>
 		<artifactId>easy-trade</artifactId>
-		<version>3.7.1-SNAPSHOT</version>
+		<version>3.7.6-SNAPSHOT</version>
 	</parent>
 	<artifactId>easy-settle</artifactId>
 	<packaging>war</packaging>
@@ -215,6 +215,15 @@
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.netty</groupId>
+			<artifactId>netty</artifactId>
 		</dependency>
 	</dependencies>
 
