@@ -782,6 +782,7 @@ public class Commodity implements  Serializable,Cloneable{
 			}
 			this.setType(CommodityType.BULL.getValue());
 			this.setBrandMid(brandMid);
+			this.setShopMid(vo.getShopMid());
 		}
 
 	}
