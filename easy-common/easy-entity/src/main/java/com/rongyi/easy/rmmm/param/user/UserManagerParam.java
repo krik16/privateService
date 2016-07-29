@@ -15,9 +15,8 @@ import com.rongyi.easy.rmmm.base.BaseParam;
  * 俞志坚             2015/5/20              1.0            创建文件
  *
  */
-public class UserManagerParam extends BaseParam implements Serializable{
+public class UserManagerParam extends BaseParam {
 
-    private static final long serialVersionUID = 1L;
 
     private Integer id;//账户id
     private String userAccount ;//用户账号
@@ -219,9 +218,7 @@ public class UserManagerParam extends BaseParam implements Serializable{
 		this.cardId = cardId;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+
 
 	/*public Integer getRoleType() {
 		return roleType;
