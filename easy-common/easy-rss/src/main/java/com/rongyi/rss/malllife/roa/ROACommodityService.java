@@ -233,4 +233,6 @@ public interface ROACommodityService {
     public ResponseVO selectCommodityCountByTs(String mallMId, String shopMId, long ts, int srcType);
 	public ResponseVO  selectSpecById(String categoryId);
 
+	public Long  selectOnlineCommodityCountByuser(String createId);
+
 }
