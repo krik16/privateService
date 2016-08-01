@@ -673,7 +673,7 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setcPriceMax(this.getCurrentPrice());
 			this.setcPriceMin(this.getCurrentPrice());
 		} else {
-			this.setoPriceOfLowestCPrice(specMap.get("lowest").toString());
+			this.setoPriceOfLowestCPrice(specMap.get("oPrice").toString());
 			this.setStock((Integer) specMap.get("specStock"));
 			this.setOriginalPrice(specMap.get("oMin").toString());
 			this.setCurrentPrice(specMap.get("lowest").toString());
