@@ -7,10 +7,13 @@ public class TransConfigurations implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-
+	private int CommissionType;//返佣类型，0固定金额 1订单百分比
 	private int CommissionCountMax  = 0;//这个是同一卖家在同一天与同一买家交易量中，最多能获取的返佣单数
+	private int CommissionDailyMax  = 0;//这个是同一卖家在同一天中，最多能获取的返佣单数
 	private int CashCouponUseMax = 0;//这个是同一个买家同一天允许使用的现金卷的次数
-	private BigDecimal  CommissionPrice = new BigDecimal(0); //这个是每单返回佣金的金额	
+	private BigDecimal  CommissionRatio = new BigDecimal(0); //这个是每单返回佣金的比例
+	private BigDecimal  CommissionRatioLimit = new BigDecimal(0); //这个是每单返回佣金的比例	上限金额
+	private BigDecimal  CommissionPrice = new BigDecimal(0); //这个是每单返回佣金的金额
 	private int SettleDateEarly = 0;//范围1-28   这个是月初结算日
 	private int SettleDateLate = 0;//范围1-28    这个是月末结算日
 	private int DrawCountMax = 0;//这个是同一天同一个卖家允许提现的次数
@@ -166,5 +169,45 @@ public class TransConfigurations implements Serializable{
 
 	public void setRegistMax(int registMax) {
 		this.registMax = registMax;
+	}
+
+	public int getCommissionDailyMax()
+	{
+		return CommissionDailyMax;
+	}
+
+	public void setCommissionDailyMax(int commissionDailyMax)
+	{
+		CommissionDailyMax = commissionDailyMax;
+	}
+
+	public BigDecimal getCommissionRatio()
+	{
+		return CommissionRatio;
+	}
+
+	public void setCommissionRatio(BigDecimal commissionRatio)
+	{
+		CommissionRatio = commissionRatio;
+	}
+
+	public BigDecimal getCommissionRatioLimit()
+	{
+		return CommissionRatioLimit;
+	}
+
+	public void setCommissionRatioLimit(BigDecimal commissionRatioLimit)
+	{
+		CommissionRatioLimit = commissionRatioLimit;
+	}
+
+	public int getCommissionType()
+	{
+		return CommissionType;
+	}
+
+	public void setCommissionType(int commissionType)
+	{
+		CommissionType = commissionType;
 	}
 }

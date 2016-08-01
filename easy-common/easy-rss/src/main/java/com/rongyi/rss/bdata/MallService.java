@@ -1,6 +1,14 @@
 package com.rongyi.rss.bdata;
 
+import java.util.List;
+import java.util.Map;
+
 import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.easy.bdata.entity.Mall;
+import com.rongyi.easy.bdata.vo.CommonTypeVO;
+import com.rongyi.easy.bdata.vo.MallGroupVO;
+import com.rongyi.easy.bdata.vo.MallVO;
+
 
 /**
  * Desc: mall service
@@ -51,6 +59,7 @@ public interface MallService {
      * @return
      */
     ResponseVO getCustomCategoriesByMallId(String mallId);
+    ResponseVO getCustomCategoriesAndChildByMallId(String mallId);
 
     /**
      *
@@ -133,6 +142,48 @@ public interface MallService {
 
 	ResponseVO getAdsSeqByMallId(String mall_id, String position);
 	
+	/**
+	 * 获取公共类型
+	 * @param type
+	 * @return
+	 */
+	List<CommonTypeVO> getCommonType(Integer type);
+	
+	/**
+	 * 获取集团信息
+	 * @param params
+	 * @return
+	 */
+	List<MallGroupVO> getMallGroups(Map params);
+	
+	int getMallGroupsCount(Map params);
+	
+	/**
+	 * 保存商场信息
+	 * @param vo
+	 * @return
+	 */
+	String saveMall(Map map,String json,Map picMap);
+	
+	/**
+	 * 设置商场营业状态
+	 * @param vo
+	 * @return
+	 */
+	boolean setMallBusinessStatus(String mallId,int businessStatus,String reason);
+	
+	/**
+	 * 设置商场显示状态
+	 * @param vo
+	 * @return
+	 */
+	boolean setMallValid(String mallId,int valid,String reason);
+	
+	Mall getMallById(String mallId);
+	
+	Map<String, Object>getMalls(Map params, int currentpage, int pagesize);
+	
+	Map<String, Object>getMallsWithBusinessStatusCount(Map params, int currentpage, int pagesize);
 	ResponseVO  getAllCommunalFacilityTypes();
 
 }
