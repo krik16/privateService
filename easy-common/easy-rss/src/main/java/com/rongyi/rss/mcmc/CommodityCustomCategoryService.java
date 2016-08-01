@@ -43,4 +43,6 @@ public interface CommodityCustomCategoryService {
     public CommodityCustomCategoryEntity selectById(int id);
 
     public List<CommodityCustomCategoryEntity> selectByIds(List<Integer> ids);
+
+    boolean deleteCustomCategoryListByIds(List<Integer> ids);
 }
