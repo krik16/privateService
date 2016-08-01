@@ -12,10 +12,10 @@ public class AdvertEntity implements Serializable {
 	private Integer id;
 	private Integer position;//广告位置，参考ad_option中定义 1:全屏 2:首页banner
 	private Integer adtime;//播放时长
-	private Integer material_id;//素材id
+	//private Integer material_id;//素材id
 	private Integer module_type;//素材模板 11 全屏模板-A 22 首页Banner-A
-	private String content;//素材内容
-	private Integer content_type;//素材类型 1:图片,2:视频
+	//private String content;//素材内容
+	//private Integer content_type;//素材类型 1:图片,2:视频
 	private Integer status;//广告状态 1待审核, 2审核未通过, 3(待发布,进行中,已结束),4已下线, 5已删除
 	private Date publish_start;//发布开始时间
 	private Date publish_end;//发布结束时间
@@ -30,6 +30,7 @@ public class AdvertEntity implements Serializable {
 	private String relation_url;
 	private Integer relation_status;//广告关联状态
 	private List<String> mall_ids;
+	private List<AdMaterialEntity> adMaterialList;
 	/**
 	 * @return the id
 	 */
@@ -77,30 +78,6 @@ public class AdvertEntity implements Serializable {
 	 */
 	public void setModule_type(Integer module_type) {
 		this.module_type = module_type;
-	}
-	/**
-	 * @return the content
-	 */
-	public String getContent() {
-		return content;
-	}
-	/**
-	 * @param content the content to set
-	 */
-	public void setContent(String content) {
-		this.content = content;
-	}
-	/**
-	 * @return the content_type
-	 */
-	public Integer getContent_type() {
-		return content_type;
-	}
-	/**
-	 * @param content_type the content_type to set
-	 */
-	public void setContent_type(Integer content_type) {
-		this.content_type = content_type;
 	}
 	/**
 	 * @return the status
@@ -199,18 +176,6 @@ public class AdvertEntity implements Serializable {
 		this.update_at = update_at;
 	}
 	/**
-	 * @return the material_id
-	 */
-	public Integer getMaterial_id() {
-		return material_id;
-	}
-	/**
-	 * @param material_id the material_id to set
-	 */
-	public void setMaterial_id(Integer material_id) {
-		this.material_id = material_id;
-	}
-	/**
 	 * @return the relation_id
 	 */
 	public Integer getRelation_id() {
@@ -281,5 +246,38 @@ public class AdvertEntity implements Serializable {
 	 */
 	public void setRelation_status(Integer relation_status) {
 		this.relation_status = relation_status;
+	}
+
+	public List<AdMaterialEntity> getAdMaterialList() {
+		return adMaterialList;
+	}
+
+	public void setAdMaterialList(List<AdMaterialEntity> adMaterialList) {
+		this.adMaterialList = adMaterialList;
+	}
+
+	@Override
+	public String toString() {
+		return "AdvertEntity{" +
+				"id=" + id +
+				", position=" + position +
+				", adtime=" + adtime +
+				", module_type=" + module_type +
+				", status=" + status +
+				", publish_start=" + publish_start +
+				", publish_end=" + publish_end +
+				", group_id=" + group_id +
+				", create_by=" + create_by +
+				", create_at=" + create_at +
+				", update_by=" + update_by +
+				", update_at=" + update_at +
+				", relation_id=" + relation_id +
+				", relation_name='" + relation_name + '\'' +
+				", relation_code='" + relation_code + '\'' +
+				", relation_url='" + relation_url + '\'' +
+				", relation_status=" + relation_status +
+				", mall_ids=" + mall_ids +
+				", adMaterialList=" + adMaterialList +
+				'}';
 	}
 }

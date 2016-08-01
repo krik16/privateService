@@ -12,6 +12,7 @@ import java.util.Map;
 
 import com.rongyi.easy.ryoms.advert.entity.AdDefaultEntity;
 import com.rongyi.easy.ryoms.advert.param.AdDefaultSearchParam;
+import com.rongyi.easy.ryoms.advert.param.AdMaterialParam;
 import com.rongyi.easy.ryoms.advert.vo.AdDefaultVO;
 
 /**
@@ -33,17 +34,19 @@ public interface AdDefaultService {
 	 * 新增素材
 	 * 
 	 * @param entity
+	 * @param adMaterialList
 	 * @return
 	 */
-	public int add(AdDefaultEntity entity,String materialType);
+	public int add(AdDefaultEntity entity, String materialType, List<AdMaterialParam> adMaterialList);
 
 	/**
 	 * 修改素材
 	 * 
 	 * @param entity
+	 * @param adMaterialList
 	 * @return
 	 */
-	public int save(AdDefaultEntity entity,String materialType);
+	public int save(AdDefaultEntity entity, String materialType, List<AdMaterialParam> adMaterialList);
 
 	/**
 	 * 素材详情
@@ -81,4 +84,7 @@ public interface AdDefaultService {
 	List<AdDefaultVO> getAllValidAdDefaults();
 
 	void deleteAdDefaultToPhp(Map<String, Object> param);
+
+	int totalCount();
+
 }
