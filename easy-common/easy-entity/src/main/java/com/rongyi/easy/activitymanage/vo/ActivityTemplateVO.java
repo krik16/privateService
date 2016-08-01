@@ -169,6 +169,9 @@ public class ActivityTemplateVO implements Serializable{
     }
 
     public Long getCreateAt() {
+        if (createAt == null){
+            return null;
+        }
         return createAt.getTime();
     }
 
@@ -185,6 +188,9 @@ public class ActivityTemplateVO implements Serializable{
     }
 
     public Long getUpdateAt() {
+        if (updateAt == null){
+            return  null;
+        }
         return updateAt.getTime();
     }
 
