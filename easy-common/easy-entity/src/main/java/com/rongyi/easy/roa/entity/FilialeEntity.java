@@ -9,8 +9,7 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Property;
 
-@Entity("filiale")
-public class FilialeEntity implements Serializable{
+@Entity(value="filiale",noClassnameStored=true)public class FilialeEntity implements Serializable{
 	@Id
 	private ObjectId id;     
 	

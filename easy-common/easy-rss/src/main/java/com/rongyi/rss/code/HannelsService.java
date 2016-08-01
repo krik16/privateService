@@ -92,4 +92,12 @@ public interface HannelsService {
      * @return
      */
     HannelResponseVO allcount();
+
+    /**
+     * 根据用户id 和 hannelsType ,查询该用户关联的且当前有效的hannels
+     * @param userId
+     * @param hannelsType
+     * @return
+     */
+    List<Hannels> getHannelsByUserId(Integer userId,Integer hannelsType);
 }

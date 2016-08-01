@@ -10,7 +10,11 @@ import java.io.Serializable;
 public class ParkingVO implements Serializable {
     private String name;//停车场
     private String charge;//收费(小时)
-    private String capacity;//车位容量
+    @Override
+	public String toString() {
+		return "ParkingVO [name=" + name + ", charge=" + charge + ", capacity=" + capacity + ", remark=" + remark + "]";
+	}
+	private String capacity;//车位容量
     private String remark;//备注
     public String getName() {
         return name;

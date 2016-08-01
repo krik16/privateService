@@ -1,5 +1,7 @@
 package com.rongyi.easy.bdata.entity;
 
+import java.util.Date;
+
 /**
  * Desc: communal facilities
  * User: chris
@@ -16,6 +18,45 @@ public class CommunalFacility {
     private String    tag;
     private Integer   status;
     private String    organize;
+	private String    operator;
+    private Date    create_at;
+    private Date    update_at;
+    private String    updator;
+    
+    
+    public String getOperator() {
+		return operator;
+	}
+
+	public void setOperator(String operator) {
+		this.operator = operator;
+	}
+
+	public Date getCreate_at() {
+		return create_at;
+	}
+
+	public void setCreate_at(Date create_at) {
+		this.create_at = create_at;
+	}
+
+	public Date getUpdate_at() {
+		return update_at;
+	}
+
+	public void setUpdate_at(Date update_at) {
+		this.update_at = update_at;
+	}
+
+	public String getUpdator() {
+		return updator;
+	}
+
+	public void setUpdator(String updator) {
+		this.updator = updator;
+	}
+
+    
 
     public Long getId() {
         return id;

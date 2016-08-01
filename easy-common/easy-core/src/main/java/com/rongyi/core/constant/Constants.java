@@ -36,11 +36,39 @@ public interface Constants {
     
     /**
      * 新版
+     * 本地路径
+     */
+    interface UPAIYUN_LOCAL_URL {
+        String APP_BUSINESSDISTRICT_DIR          = "/businessdistrict/original/"; //app热门商圈
+        String APP_CATEGORY_DIR          = "/category/original/"; //app分类
+        String MALL_ALL_PIC_DIR ="/mall/original/";
+        String SHOP_ALL_PIC_DIR = "/shop/original/";
+        String FLOOR_ALL_PIC_DIR ="/mall/floor/";
+		String BRAND_ALL_PIC_DIR ="/brand/original/";  //品牌图片存放路径
+		String SHOPQRCODE_ALL_PIC_DIR ="/shopqrcode/original/";
+    }
+    
+    /**
+     * 新版
      * 上传云路径
      */
     interface UPAIYUN_URL {
         String UPAIYUN_URL           = "http://rongyi.b0.upaiyun.com/";  //网址
         String ADVERT_URL          = "system/advert/";//内容管理图片路径
+        String APP_BUSINESSDISTRICT_UPAIYUN_DIR          = "/system/app_businessdistrict/"; //app热门商圈
+        String APP_CATEGORY_UPAIYUN_DIR          = "/system/app_category/"; //app分类
+        String UPAIYUN_URL_MALL_ICON               = "/system/mall/icon/";              // 云盘路径-商场icon /mallId/xxx.jpg
+        String UPAIYUN_URL_MALL_INTRODUCTION_PIC   = "/system/mall/introduction_pic/";  // 云盘路径-商场简介图+ yy/mm/mallId/xxx.png
+        String UPAIYUN_URL_MALL_TERMINAL_LOGO      = "/system/mall/terminal_logo/";     // 云盘路径-商场 终端机logo+/mallId/xxx.png
+        String UPAIYUN_URL_MALL_APPEARANCE_PIC     = "/system/mall/appearance_pic/";    // 云盘路径-商场app外景图 +yy/mm/mallId/xxx.png
+        String UPAIYUN_URL_MALL_TRAFFIC_PIC        = "/system/mall/traffic_pic/";       // 云盘路径-商场交通图 +/yy/mm/mallid/xx.png
+        String UPAIYUN_URL_MALL_WEB_APPEARANCE_PIC = "/system/mall/web_appearance_pic/"; // 云盘路径-商场商场web外景图 +/yy/mm/mallId/xx.png
+        String UPAIYUN_URL_MALL_WECHAT_PIC = "/system/mall/wechat/"; // 云盘路径-商场微信 /mallId/xxx.jpg
+		String UPAIYUN_URL_MALL_MERLOG_PIC = "/system/mall/merlog/" ;   // 云盘路径-商场存放商家后台Logo  /mallId/xxx.jpg
+        
+        String UPAIYUN_URL_BRAND_MERLOG_PIC ="/system/brand/merlog/";  //云盘路径-品牌存放商家后台Logo  /mallId/xxx.jpg
+        String UPAIYUN_URL_SHOP_QRCODE_PIC = "/system/shop/qrcode/"; // 云盘路径-店铺二维码 /shopId/xxx.jpg		    }
+        String UPAIYUN_URL_SHOP_PIC = "/system/photo/file/";   //店铺 APP图片 与终端机图片路径 
     }
 
     interface Version {

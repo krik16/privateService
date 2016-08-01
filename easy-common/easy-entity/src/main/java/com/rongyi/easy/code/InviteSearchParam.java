@@ -11,7 +11,7 @@ public class InviteSearchParam implements Serializable {
     private String userPhone;//注册账号
     private String userNickName;//用户昵称
     private String inviteAccount;//邀请人账号
-    private int status;//是否领到促销码(全部 -1 是1 否0)
+    private Integer status;//是否领到促销码(全部 -1 是1 否0)
     private String registerBeginTime;//注册开始时间
     private String registerEndTime;//注册结束时间
     private int currentPage;//当前页（从1开始）
@@ -52,14 +52,13 @@ public class InviteSearchParam implements Serializable {
         this.inviteAccount = inviteAccount;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
-
     public String getRegisterBeginTime() {
         return registerBeginTime;
     }

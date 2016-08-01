@@ -308,4 +308,14 @@ public interface McmcCommoditySolrService {
 
 	ResponseVO selectCommodityList(CommoditySearchParam param);
 
+	/**
+	 * 恢复商品的库存已经修改商品的上下架状态
+	 * @param id
+	 * @param price
+	 * @param currentPriceList
+	 * @param status
+	 * @return
+	 */
+	public boolean updateCommodityPriceAndStatus(String id, Double price, List<Double> currentPriceList,Integer status);
+
 }

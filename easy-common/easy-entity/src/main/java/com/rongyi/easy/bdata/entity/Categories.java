@@ -13,7 +13,7 @@ import org.mongodb.morphia.annotations.Id;
  * @author xiaobo
  *
  */
-@Entity("categories")
+@Entity(value="categories", noClassnameStored = true)
 public class Categories implements Serializable {
 	private static final long serialVersionUID = 1L;
 	/**
