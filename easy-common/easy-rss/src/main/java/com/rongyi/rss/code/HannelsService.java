@@ -108,4 +108,10 @@ public interface HannelsService {
      * @return
      */
     List<Hannels> getHannelsByAssignId(String assignId,Integer hannelsType);
+
+    /**
+     * 查询当前是否存在关联全部店员的促销推广
+     * @return
+     */
+    List<Hannels> findIsAllUser();
 }
