@@ -1,7 +1,9 @@
 package com.rongyi.rss.bsoms;
 
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.bsoms.entity.TaskInfo;
 import com.rongyi.easy.bsoms.entity.TaskInfoWithBLOBs;
+import com.rongyi.easy.bsoms.vo.TaskVo;
 
 import java.util.List;
 import java.util.Map;
@@ -60,4 +62,38 @@ public interface ITaskInfoService {
      * @return  !=0成功
      */
     public int checkTask(Map paramMap);
+
+    /**
+     * 查询任务列表
+     * @param paramMap
+     *              currentPage  不传默认1
+     *              pageSize  不传默认10
+     *              userId    用户ID （必传）
+     *              type      任务状态 1进行中2已结束（必传）
+     * @return
+     */
+    public ResponseVO getTaskAppList(Map paramMap);
+
+    /**
+     * 查询任务详情
+     * @param id 任务Id
+     * am userId 用户ID
+     * @return
+     */
+    public TaskVo getTaskVoById(Integer id,Integer userId);
+
+    /**
+     * 查询用户未读的任务数量
+     * @param userId
+     * @return
+     */
+    public int getUnreadTaskNum(int userId);
+
+    /**
+     * 领取任务
+     * @param userId 用户ID
+     * @param taskId 任务ID
+     * @return
+     */
+    public ResponseVO receiveTask(int userId,int taskId);
 }
