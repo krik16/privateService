@@ -673,7 +673,7 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setcPriceMax(this.getCurrentPrice());
 			this.setcPriceMin(this.getCurrentPrice());
 		} else {
-			this.setoPriceOfLowestCPrice(specMap.get("lowest").toString());
+			this.setoPriceOfLowestCPrice(specMap.get("oPrice").toString());
 			this.setStock((Integer) specMap.get("specStock"));
 			this.setOriginalPrice(specMap.get("oMin").toString());
 			this.setCurrentPrice(specMap.get("lowest").toString());
@@ -694,6 +694,7 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setRegisterAt(vo.getRegisterAt());
 		this.setSoldOutAt(vo.getSoldOutAt());
 		this.setSource((vo.getSource() != null) ? vo.getSource() : 2); //app添加的商品
+		this.setType(CommodityType.GUIDE.getValue());
 
 		if(this.getSource() == 2) {
 			this.setRegisterAt(new Date());//设置默认上下架时间
@@ -713,7 +714,7 @@ public class Commodity implements  Serializable,Cloneable{
 
 		this.setCommodityModelNo(vo.getCommodityModelNo());//商品款号
 		this.setGoodsParam(vo.getGoodsParam()); //商品参数
-		this.setIdentity(vo.getIdentity()); //增加商品身份
+		this.setIdentity(vo.getProcessIdentity()); //增加商品身份
 		this.setSupportSelfPickup(vo.isSupportSelfPickup()); //支持到店自提
 
 		if(vo.getCommodityStatus() == CommodityDataStatus.STATUS_COMMODITY_SHELVE_WAITING) {//待上架
@@ -763,7 +764,14 @@ public class Commodity implements  Serializable,Cloneable{
 		this.setSpecList((List<ObjectId>)specMap.get("specIdList"));
 
 		// 买手&非现货 商品 临时状态: -1
-		if(vo.getProcessIdentity() == Identity.BUYER) {
+		if(null != vo.getProcessIdentity() && vo.getProcessIdentity() == Identity.BUYER) {
+			//魔店买手发布的商品，上架终端默认只有容易逛
+			if(2 == this.getSource()) {
+				this.setTerminalType(CommodityTerminalType.TERMINAL_TYPE_1);
+			} else {
+				this.setTerminalType((vo.getTerminalType() != null) ? vo.getTerminalType() : CommodityTerminalType.TERMINAL_TYPE_1);
+			}
+
 			if(vo.getIsSpot() == 1) {
 				this.setSpot(true);
 				if(this.getStock() <= 0) {
@@ -784,6 +792,5 @@ public class Commodity implements  Serializable,Cloneable{
 			this.setBrandMid(brandMid);
 			this.setShopMid(vo.getShopMid());
 		}
-
 	}
 }
