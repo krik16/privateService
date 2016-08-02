@@ -35,7 +35,7 @@ public class AdDefaultEntity implements Serializable {
 	//private String content_url;
 	private Integer status;
 	private Integer module_type;//素材模板类型 素材模板 11 全屏模板-A 21 首页Banner-A 31 内页广告模板 12 全屏模板B-浮窗
-	private List<AdMaterialEntity> adMaterialList;
+	private List<MaterialEntity> materials;
 	public int getDefaultId() {
 		return defaultId;
 	}
@@ -115,19 +115,19 @@ public class AdDefaultEntity implements Serializable {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	public List<AdMaterialEntity> getAdMaterialList() {
-		return adMaterialList;
-	}
-
-	public void setAdMaterialList(List<AdMaterialEntity> adMaterialList) {
-		this.adMaterialList = adMaterialList;
-	}
-
 	public Integer getModule_type() {
 		return module_type;
 	}
 
 	public void setModule_type(Integer module_type) {
 		this.module_type = module_type;
+	}
+
+	public List<MaterialEntity> getMaterials() {
+		return materials;
+	}
+
+	public void setMaterials(List<MaterialEntity> materials) {
+		this.materials = materials;
 	}
 }
