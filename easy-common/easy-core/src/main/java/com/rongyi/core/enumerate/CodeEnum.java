@@ -43,6 +43,7 @@ public enum CodeEnum {
     ERROR_TELEPHONEEXISIT("-1109","电话号码不能为空"),
     ERROR_PHONEEXISIT("-1110","手机号码已存在"),
     ERROR_USERSTATUS("-1111", SmsConfig.SERVER_TELPHONE),
+    ERROR_USER_IN_SERVICE("-1112","摩店客服在每周一到周天9:30~18:30等待你呼叫~"),
     
     /**扫码错误信息*/
     ERROR_RECEIVECOUPONMSG("-1125","亲，手慢了，奖品被抢光了……"),
