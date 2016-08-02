@@ -19,6 +19,8 @@ public class HannelsVO implements Serializable {
     private List<HannelsCheckLog> hannelCheckLogs;//审核，作废日志列表
     private List<HannelsCoupon> hannelsCoupons;
     private List<HannelsUser> hannelsUsers;
+    private Integer isAllUser;
+    private Integer allotType;
     /**
      * 码的数量
      */
@@ -49,6 +51,22 @@ public class HannelsVO implements Serializable {
      * 更新人
      */
     private String updateBy;
+
+    public Integer getIsAllUser() {
+        return isAllUser;
+    }
+
+    public void setIsAllUser(Integer isAllUser) {
+        this.isAllUser = isAllUser;
+    }
+
+    public Integer getAllotType() {
+        return allotType;
+    }
+
+    public void setAllotType(Integer allotType) {
+        this.allotType = allotType;
+    }
 
     public int getId() {
         return id;
@@ -196,25 +214,28 @@ public class HannelsVO implements Serializable {
 
     @Override
     public String toString() {
-        return "HannelsVO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", type=" + type +
-                ", channerId='" + channerId + '\'' +
-                ", channerName='" + channerName + '\'' +
-                ", status=" + status +
-                ", validStartAt=" + validStartAt +
-                ", validEndAt=" + validEndAt +
-                ", hannelCheckLogs=" + hannelCheckLogs +
-                ", hannelsCoupons=" + hannelsCoupons +
-                ", hannelsUsers=" + hannelsUsers +
-                ", count=" + count +
-                ", useLimit=" + useLimit +
-                ", remark='" + remark + '\'' +
-                ", createAt=" + createAt +
-                ", createBy='" + createBy + '\'' +
-                ", updateAt=" + updateAt +
-                ", updateBy='" + updateBy + '\'' +
-                '}';
+        final StringBuffer sb = new StringBuffer("HannelsVO{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", type=").append(type);
+        sb.append(", channerId='").append(channerId).append('\'');
+        sb.append(", channerName='").append(channerName).append('\'');
+        sb.append(", status=").append(status);
+        sb.append(", validStartAt=").append(validStartAt);
+        sb.append(", validEndAt=").append(validEndAt);
+        sb.append(", hannelCheckLogs=").append(hannelCheckLogs);
+        sb.append(", hannelsCoupons=").append(hannelsCoupons);
+        sb.append(", hannelsUsers=").append(hannelsUsers);
+        sb.append(", isAllUser=").append(isAllUser);
+        sb.append(", allotType=").append(allotType);
+        sb.append(", count=").append(count);
+        sb.append(", useLimit=").append(useLimit);
+        sb.append(", remark='").append(remark).append('\'');
+        sb.append(", createAt=").append(createAt);
+        sb.append(", createBy='").append(createBy).append('\'');
+        sb.append(", updateAt=").append(updateAt);
+        sb.append(", updateBy='").append(updateBy).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }
