@@ -37,7 +37,7 @@ public interface IPosUserService {
      * @param pwd
      * @return
      */
-    public int updataPwdByUserId(String userAccount,String pwd);
+    public int updataPwdByUserAccount(String userAccount,String pwd);
 
 
 

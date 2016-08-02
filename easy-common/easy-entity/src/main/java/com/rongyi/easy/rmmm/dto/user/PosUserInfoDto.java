@@ -22,6 +22,7 @@ public class PosUserInfoDto implements Serializable {
 
     private int userStatus;
 
+    private int isDisabled;
 
 
     public String getUserId() {
@@ -54,5 +55,13 @@ public class PosUserInfoDto implements Serializable {
 
     public void setUserStatus(int userStatus) {
         this.userStatus = userStatus;
+    }
+
+    public int getIsDisabled() {
+        return isDisabled;
+    }
+
+    public void setIsDisabled(int isDisabled) {
+        this.isDisabled = isDisabled;
     }
 }
