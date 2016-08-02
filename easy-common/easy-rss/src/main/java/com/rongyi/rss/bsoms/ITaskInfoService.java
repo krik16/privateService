@@ -1,9 +1,11 @@
 package com.rongyi.rss.bsoms;
 
 import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.easy.bsoms.entity.TaskCheck;
 import com.rongyi.easy.bsoms.entity.TaskInfo;
 import com.rongyi.easy.bsoms.entity.TaskInfoWithBLOBs;
 import com.rongyi.easy.bsoms.vo.TaskVo;
+import com.rongyi.easy.ryoms.entity.RyUserInfo;
 
 import java.util.List;
 import java.util.Map;
@@ -30,6 +32,13 @@ public interface ITaskInfoService {
      * @return
      */
     public List<TaskInfo> getListByMap(Map paramMap);
+
+    /**
+     * 查询任务详情
+     * @param id 任务id
+     * @return
+     */
+    public TaskInfoWithBLOBs getTaskById(Integer id);
 
     /**
      * 查询列表统计数量
@@ -61,7 +70,7 @@ public interface ITaskInfoService {
      *            stopReason  不通过理由
      * @return  !=0成功
      */
-    public int checkTask(Map paramMap);
+    public int checkTask(Map paramMap,RyUserInfo user);
 
     /**
      * 查询任务列表
@@ -75,7 +84,7 @@ public interface ITaskInfoService {
     public ResponseVO getTaskAppList(Map paramMap);
 
     /**
-     * 查询任务详情
+     * 查询任务详情 (app)
      * @param id 任务Id
      * am userId 用户ID
      * @return
@@ -96,4 +105,11 @@ public interface ITaskInfoService {
      * @return
      */
     public ResponseVO receiveTask(int userId,int taskId);
+
+    /**
+     * 查询任务审核失败列表
+     * @param taskId 任务ID
+     * @return
+     */
+    public List<TaskCheck> selectFailList(Integer taskId);
 }

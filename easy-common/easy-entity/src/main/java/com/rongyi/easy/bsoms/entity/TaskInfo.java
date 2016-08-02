@@ -31,6 +31,10 @@ public class TaskInfo implements Serializable{
 
     private int signUpNum;  //报名人数
 
+    private String createUser; //创建者用户名
+
+    private String updateUser; //修改者用户名
+
     public Integer getId() {
         return id;
     }
@@ -87,7 +91,7 @@ public class TaskInfo implements Serializable{
         this.isDeleted = isDeleted;
     }
 
-    public void setIsDeleted(Byte isDeleted) {
+    public void setIsDeleted(Integer isDeleted) {
         this.isDeleted = isDeleted;
     }
 
@@ -137,5 +141,21 @@ public class TaskInfo implements Serializable{
 
     public void setSignUpNum(int signUpNum) {
         this.signUpNum = signUpNum;
+    }
+
+    public String getCreateUser() {
+        return createUser;
+    }
+
+    public String getUpdateUser() {
+        return updateUser;
+    }
+
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
+    }
+
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser;
     }
 }

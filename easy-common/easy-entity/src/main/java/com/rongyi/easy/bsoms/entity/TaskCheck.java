@@ -12,15 +12,17 @@ public class TaskCheck implements Serializable {
 
     private Integer createBy;
 
-    private Byte checkStatus;
+    private Integer checkStatus;
 
     private String reason;
 
-    private Byte isDeleted;
+    private Integer isDeleted;
 
     private Date createAt;
 
     private Date updateAt;
+
+    private String createUser ; //创建者名称
 
     public Integer getId() {
         return id;
@@ -46,11 +48,11 @@ public class TaskCheck implements Serializable {
         this.createBy = createBy;
     }
 
-    public Byte getCheckStatus() {
+    public Integer getCheckStatus() {
         return checkStatus;
     }
 
-    public void setCheckStatus(Byte checkStatus) {
+    public void setCheckStatus(Integer checkStatus) {
         this.checkStatus = checkStatus;
     }
 
@@ -62,11 +64,11 @@ public class TaskCheck implements Serializable {
         this.reason = reason;
     }
 
-    public Byte getIsDeleted() {
+    public Integer getIsDeleted() {
         return isDeleted;
     }
 
-    public void setIsDeleted(Byte isDeleted) {
+    public void setIsDeleted(Integer isDeleted) {
         this.isDeleted = isDeleted;
     }
 
@@ -84,5 +86,14 @@ public class TaskCheck implements Serializable {
 
     public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
+    }
+
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
+    }
+
+    public String getCreateUser() {
+
+        return createUser;
     }
 }
