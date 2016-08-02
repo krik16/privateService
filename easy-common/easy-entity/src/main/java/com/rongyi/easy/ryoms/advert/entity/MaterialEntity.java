@@ -16,6 +16,7 @@ public class MaterialEntity implements Serializable {
 	private Date create_at;
 	private Integer update_by;
 	private Date update_at;
+	private Integer position;
 	/**
 	 * @return the id
 	 */
@@ -111,5 +112,13 @@ public class MaterialEntity implements Serializable {
 	 */
 	public void setUpdate_at(Date update_at) {
 		this.update_at = update_at;
+	}
+
+	public Integer getPosition() {
+		return position;
+	}
+
+	public void setPosition(Integer position) {
+		this.position = position;
 	}
 }

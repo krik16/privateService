@@ -48,7 +48,7 @@ public class AdDefaultVO implements Serializable {
 	private Date create_date;//创建时间date
 	private Date update_date;//更新时间date
 	//private Integer material_id;
-	private List<AdMaterialVo> adMaterialVos;
+	private List<MaterialVo> materialVos;
 
 	public int getDefaultId() {
 		return defaultId;
@@ -154,14 +154,6 @@ public class AdDefaultVO implements Serializable {
 		this.update_date = update_date;
 	}
 
-	public List<AdMaterialVo> getAdMaterialVos() {
-		return adMaterialVos;
-	}
-
-	public void setAdMaterialVos(List<AdMaterialVo> adMaterialVos) {
-		this.adMaterialVos = adMaterialVos;
-	}
-
 	public int getModuleId() {
 		return moduleId;
 	}
@@ -176,6 +168,14 @@ public class AdDefaultVO implements Serializable {
 
 	public void setModuleName(String moduleName) {
 		this.moduleName = moduleName;
+	}
+
+	public List<MaterialVo> getMaterialVos() {
+		return materialVos;
+	}
+
+	public void setMaterialVos(List<MaterialVo> materialVos) {
+		this.materialVos = materialVos;
 	}
 
 	@Override
@@ -196,7 +196,7 @@ public class AdDefaultVO implements Serializable {
 				", update_int=" + update_int +
 				", create_date=" + create_date +
 				", update_date=" + update_date +
-				", adMaterialVos=" + adMaterialVos +
+				", materialVos=" + materialVos +
 				'}';
 	}
 }

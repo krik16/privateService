@@ -28,7 +28,7 @@ public class AdvertVo implements Serializable {
 	private String relation_name;
 	private String relation_code;
 	private String relation_url;
-	private List<AdMaterialVo> adMaterialVos;
+	private List<MaterialVo> materialVos;
 
 	public Long getId() {
 		return id;
@@ -174,12 +174,12 @@ public class AdvertVo implements Serializable {
 		this.relation_url = relation_url;
 	}
 
-	public List<AdMaterialVo> getAdMaterialVos() {
-		return adMaterialVos;
+	public List<MaterialVo> getMaterialVos() {
+		return materialVos;
 	}
 
-	public void setAdMaterialVos(List<AdMaterialVo> adMaterialVos) {
-		this.adMaterialVos = adMaterialVos;
+	public void setMaterialVos(List<MaterialVo> materialVos) {
+		this.materialVos = materialVos;
 	}
 
 	@Override
@@ -203,7 +203,7 @@ public class AdvertVo implements Serializable {
 				", relation_name='" + relation_name + '\'' +
 				", relation_code='" + relation_code + '\'' +
 				", relation_url='" + relation_url + '\'' +
-				", adMaterialVos=" + adMaterialVos +
+				", materialVos=" + materialVos +
 				'}';
 	}
 }

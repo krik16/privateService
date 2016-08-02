@@ -30,7 +30,7 @@ public class AdvertEntity implements Serializable {
 	private String relation_url;
 	private Integer relation_status;//广告关联状态
 	private List<String> mall_ids;
-	private List<AdMaterialEntity> adMaterialList;
+	private List<MaterialEntity> materials;
 	/**
 	 * @return the id
 	 */
@@ -248,12 +248,12 @@ public class AdvertEntity implements Serializable {
 		this.relation_status = relation_status;
 	}
 
-	public List<AdMaterialEntity> getAdMaterialList() {
-		return adMaterialList;
+	public List<MaterialEntity> getMaterials() {
+		return materials;
 	}
 
-	public void setAdMaterialList(List<AdMaterialEntity> adMaterialList) {
-		this.adMaterialList = adMaterialList;
+	public void setMaterials(List<MaterialEntity> materials) {
+		this.materials = materials;
 	}
 
 	@Override
@@ -277,7 +277,7 @@ public class AdvertEntity implements Serializable {
 				", relation_url='" + relation_url + '\'' +
 				", relation_status=" + relation_status +
 				", mall_ids=" + mall_ids +
-				", adMaterialList=" + adMaterialList +
+				", materials=" + materials +
 				'}';
 	}
 }
