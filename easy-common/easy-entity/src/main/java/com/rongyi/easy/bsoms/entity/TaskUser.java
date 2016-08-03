@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 用户任务实体
+ * 任务报名人信息
  */
 public class TaskUser implements Serializable{
     private static final long serialVersionUID = 1L;
@@ -14,11 +14,15 @@ public class TaskUser implements Serializable{
 
     private Integer taskId;
 
-    private Byte status;
+    private Integer status;   //0未领取  1已领取
 
-    private Date receiveAt;
+    private Date receiveAt;   //领取时间
 
-    private Byte isRead;
+    private Integer isRead;   //0未读 1已读
+
+    private String referralName; //推荐人姓名
+
+    private String referralPhone ; //推荐人联系方式
 
     private Integer createBy;
 
@@ -52,11 +56,11 @@ public class TaskUser implements Serializable{
         this.taskId = taskId;
     }
 
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -68,11 +72,11 @@ public class TaskUser implements Serializable{
         this.receiveAt = receiveAt;
     }
 
-    public Byte getIsRead() {
+    public Integer getIsRead() {
         return isRead;
     }
 
-    public void setIsRead(Byte isRead) {
+    public void setIsRead(Integer isRead) {
         this.isRead = isRead;
     }
 
@@ -106,5 +110,21 @@ public class TaskUser implements Serializable{
 
     public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
+    }
+
+    public String getReferralName() {
+        return referralName;
+    }
+
+    public String getReferralPhone() {
+        return referralPhone;
+    }
+
+    public void setReferralPhone(String referralPhone) {
+        this.referralPhone = referralPhone;
+    }
+
+    public void setReferralName(String referralName) {
+        this.referralName = referralName;
     }
 }
