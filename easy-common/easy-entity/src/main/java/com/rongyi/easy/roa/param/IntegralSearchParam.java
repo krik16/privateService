@@ -19,14 +19,14 @@ public class IntegralSearchParam implements Serializable {
     private String money;
     private String qrCordId;
     private String shopId;
-    private String jsessionid;
+    private String jsessionId;
 
-    public String getJsessionid() {
-        return jsessionid;
+    public String getJsessionId() {
+        return jsessionId;
     }
 
-    public void setJsessionid(String jsessionid) {
-        this.jsessionid = jsessionid;
+    public void setJsessionId(String jsessionId) {
+        this.jsessionId = jsessionId;
     }
 
     public String getMoney() {
@@ -122,7 +122,7 @@ public class IntegralSearchParam implements Serializable {
                 .append("money", money)
                 .append("qrCordId", qrCordId)
                 .append("shopId", shopId)
-                .append("jsessionid", jsessionid)
+                .append("jsessionId", jsessionId)
                 .toString();
     }
 

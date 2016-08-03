@@ -16,18 +16,21 @@ import java.io.Serializable;
  */
 public class HpIntegralParam implements Serializable{
 	
-	private String jsessionid;
+	private String jsessionId;
 	private String cardCode;//卡公司编码
 	private String cardNo;//卡号
 	private String password;//卡密码
 	private String code;//验证码
 	private String cardIntegral;//兑换的第三方积分
-	public String getJsessionid() {
-		return jsessionid;
+
+	public String getJsessionId() {
+		return jsessionId;
 	}
-	public void setJsessionid(String jsessionid) {
-		this.jsessionid = jsessionid;
+
+	public void setJsessionId(String jsessionId) {
+		this.jsessionId = jsessionId;
 	}
+
 	public String getCardCode() {
 		return cardCode;
 	}
@@ -61,7 +64,7 @@ public class HpIntegralParam implements Serializable{
 	//不要把密码打印出来
 	@Override
 	public String toString() {
-		return "HpIntegralParam [jsessionid=" + jsessionid + ", cardCode=" + cardCode + ", cardNo=" + cardNo + ", password="
+		return "HpIntegralParam [jsessionId=" + jsessionId + ", cardCode=" + cardCode + ", cardNo=" + cardNo + ", password="
 				+ "******" + ", code=" + code + ", cardIntegral=" + cardIntegral + "]";
 	}
 
