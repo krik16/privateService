@@ -4,6 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
 /*
@@ -127,6 +128,22 @@ public class BasicMail implements Serializable {
 
     public void setBuffer(byte[] buffer) {
         this.buffer = buffer;
+    }
+
+    @Override
+    public String toString() {
+        return "BasicMail{" +
+                "subject='" + subject + '\'' +
+                ", content='" + content + '\'' +
+                ", cc='" + cc + '\'' +
+                ", toAddress=" + toAddress +
+                ", ccAddress=" + ccAddress +
+                ", bccAddress=" + bccAddress +
+                ", validate=" + validate +
+                ", attachment=" + Arrays.toString(attachment) +
+                ", files=" + Arrays.toString(files) +
+                ", buffer=" + Arrays.toString(buffer) +
+                '}';
     }
 }
 
