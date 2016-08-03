@@ -20,6 +20,7 @@ public class UserExclusiveGuideVO implements Serializable{
 	private String shopMId;//店铺mongoId
 	private String userImId;//导购环信id
 	private Boolean online;//true 在线  false 离线
+	private Boolean isOrdering;//true 是  false 否
 	public Integer getId() {
 		return id;
 	}
@@ -85,6 +86,12 @@ public class UserExclusiveGuideVO implements Serializable{
 	}
 	public void setUserPhone(String userPhone) {
 		this.userPhone = userPhone;
+	}
+	public Boolean getIsOrdering() {
+		return isOrdering;
+	}
+	public void setIsOrdering(Boolean isOrdering) {
+		this.isOrdering = isOrdering;
 	}
 	
 }
