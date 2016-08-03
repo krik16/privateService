@@ -369,6 +369,6 @@ public interface IUserService {
      * @return
      * @throws Exception
      */
-    public boolean updateIsOrdering(Integer isOrdering, Integer userId) throws Exception;
+    public boolean updateIsOrdering(Boolean isOrdering, Integer userId) throws Exception;
 
 }

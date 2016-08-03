@@ -55,7 +55,7 @@ public class UserinfoVO implements Serializable{
 	private String sharCode;//邀请码
 	private String downUrl; //容易逛下载地址
 	private String mallShopDownUrl; //摩店下载地址
-	private Integer isOrdering;//是否接单中  0是  1否
+	private Boolean isOrdering;//是否接单中  true是  false否
 	List<Integer> identityType; //角色列表
 	String currentId;//当前角色状态
 
@@ -70,12 +70,11 @@ public class UserinfoVO implements Serializable{
 	private String telPhone;//客服电话
 
 	String userMsg;//导购 买手禁用提示信息
-
-	public Integer getIsOrdering() {
+	public Boolean getIsOrdering() {
 		return isOrdering;
 	}
 
-	public void setIsOrdering(Integer isOrdering) {
+	public void setIsOrdering(Boolean isOrdering) {
 		this.isOrdering = isOrdering;
 	}
 
