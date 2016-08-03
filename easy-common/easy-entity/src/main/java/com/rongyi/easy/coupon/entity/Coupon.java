@@ -182,7 +182,7 @@ public class Coupon implements Serializable {
     private String synTarget;
 
     /**
-     * 卡券发布渠道：大运营平台[0], 商家管理后台[1]
+     * 卡券发布渠道：大运营平台[0], 商家管理后台[1],摩店管理平台[2]
      */
     private Integer publishChannel;
 
