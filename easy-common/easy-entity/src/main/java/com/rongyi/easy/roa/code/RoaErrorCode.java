@@ -18,11 +18,9 @@ package com.rongyi.easy.roa.code;/*
 public enum RoaErrorCode {
 
     SUCCESS(0, "正常"), //原系统都定义为正常情况 编码规则不变
-    FAILURE(-1, "网络呆萌中，重新提交一下试试"), //原系统都定义为正常情况 编码规则不变
+    FAILURE(1, "网络呆萌中，重新提交一下试试"), //原系统都定义为正常情况 编码规则不变
     USER_ISNOT_LOGIN(21,"请重新登录"),
     PARAMETER_ISNULL(1050001,"必要参数不能为空"),
-    ERROR_MALLLIFEEXCEPTION(1050011,""),
-    
     /** 积分福利  */
     ERROR_CODE_ISNULL(1051001,"验证码不能为空"),
     ERROR_CODE_ISERROR(1051002,"验证码不正确"),
