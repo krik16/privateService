@@ -10,6 +10,7 @@ public class MaterialVo implements Serializable {
     private int  content_type;//素材类型
     private int position;//素材位置
     private String content;//素材内容
+    private String m_type;//素材类型  image flash video
 
     public int getMaterial_id() {
         return material_id;
@@ -43,6 +44,14 @@ public class MaterialVo implements Serializable {
         this.content = content;
     }
 
+    public String getM_type() {
+        return m_type;
+    }
+
+    public void setM_type(String m_type) {
+        this.m_type = m_type;
+    }
+
     @Override
     public String toString() {
         return "MaterialVo{" +
@@ -50,6 +59,7 @@ public class MaterialVo implements Serializable {
                 ", content_type=" + content_type +
                 ", position=" + position +
                 ", content='" + content + '\'' +
+                ", m_type='" + m_type + '\'' +
                 '}';
     }
 }
