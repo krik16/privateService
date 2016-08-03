@@ -47,6 +47,8 @@ public class BasicMail implements Serializable {
 
     private File[] files;
 
+    private byte[] buffer;
+
     public String getSubject() {
         return subject;
     }
@@ -117,6 +119,14 @@ public class BasicMail implements Serializable {
 
     public void setFiles(File[] files) {
         this.files = files;
+    }
+
+    public byte[] getBuffer() {
+        return buffer;
+    }
+
+    public void setBuffer(byte[] buffer) {
+        this.buffer = buffer;
     }
 }
 
