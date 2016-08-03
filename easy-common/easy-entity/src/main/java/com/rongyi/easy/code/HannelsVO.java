@@ -1,6 +1,7 @@
 package com.rongyi.easy.code;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -14,8 +15,8 @@ public class HannelsVO implements Serializable {
     private String channerId;//关联渠道id
     private String channerName;//关联渠道名称
     private int status;//1 待审核 2 未开始 3 进行中 4 已结束 5未通过 6 已作废
-    private Long validStartAt;//有效开始时间
-    private Long validEndAt;//有效结束时间
+    private Date validStartAt;//有效开始时间
+    private Date validEndAt;//有效结束时间
     private List<HannelsCheckLog> hannelCheckLogs;//审核，作废日志列表
     private List<HannelsCoupon> hannelsCoupons;
     private List<HannelsUser> hannelsUsers;
@@ -116,19 +117,19 @@ public class HannelsVO implements Serializable {
         this.status = status;
     }
 
-    public Long getValidStartAt() {
+    public Date getValidStartAt() {
         return validStartAt;
     }
 
-    public void setValidStartAt(Long validStartAt) {
+    public void setValidStartAt(Date validStartAt) {
         this.validStartAt = validStartAt;
     }
 
-    public Long getValidEndAt() {
+    public Date getValidEndAt() {
         return validEndAt;
     }
 
-    public void setValidEndAt(Long validEndAt) {
+    public void setValidEndAt(Date validEndAt) {
         this.validEndAt = validEndAt;
     }
 
