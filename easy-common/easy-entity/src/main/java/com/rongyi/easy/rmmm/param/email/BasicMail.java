@@ -50,6 +50,8 @@ public class BasicMail implements Serializable {
 
     private byte[] buffer;
 
+    private String bufferStr;
+
     public String getSubject() {
         return subject;
     }
@@ -130,6 +132,14 @@ public class BasicMail implements Serializable {
         this.buffer = buffer;
     }
 
+    public String getBufferStr() {
+        return bufferStr;
+    }
+
+    public void setBufferStr(String bufferStr) {
+        this.bufferStr = bufferStr;
+    }
+
     @Override
     public String toString() {
         return "BasicMail{" +
@@ -143,6 +153,7 @@ public class BasicMail implements Serializable {
                 ", attachment=" + Arrays.toString(attachment) +
                 ", files=" + Arrays.toString(files) +
                 ", buffer=" + Arrays.toString(buffer) +
+                ", bufferStr=" + bufferStr +
                 '}';
     }
 }
