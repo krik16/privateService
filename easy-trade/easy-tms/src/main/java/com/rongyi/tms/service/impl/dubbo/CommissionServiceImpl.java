@@ -1,15 +1,14 @@
 package com.rongyi.tms.service.impl.dubbo;
 
 import com.rongyi.core.bean.ResponseData;
+import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.core.common.util.DateUtil;
 import com.rongyi.core.constant.Constants;
 import com.rongyi.easy.malllife.pojo.InvitationUserInfoPojo;
 import com.rongyi.easy.tms.entity.SalesCommissionAuditLog;
 import com.rongyi.easy.tms.entity.v2.CommissionConfig;
 import com.rongyi.easy.tms.entity.v2.SalesCommission;
-import com.rongyi.easy.tms.vo.v2.CommissionVO;
-import com.rongyi.easy.tms.vo.v2.SalesCommissionListVO;
-import com.rongyi.easy.tms.vo.v2.SalesCommissionVO;
+import com.rongyi.easy.tms.vo.v2.*;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.rss.rpb.OrderNoGenService;
 import com.rongyi.rss.tms.CommissionService;
@@ -19,6 +18,7 @@ import com.rongyi.tms.constants.ConstantEnum;
 import com.rongyi.tms.service.SalesCommissionAuditLogService;
 import com.rongyi.tms.service.v2.CommissionConfigService;
 import com.rongyi.tms.service.v2.SalesCommissionService;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +27,7 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -250,5 +251,34 @@ public class CommissionServiceImpl implements CommissionService {
             }
         }
         return salesCommission;
+    }
+
+    @Override
+    public ResponseVO getCommissAppVo(Integer identity) {
+        LOGGER.info("getCommissAppVo 根据摩店用户类型查询对应的返佣详情 identity:{}",identity);
+        CommissionAppVo commissAppVo = new CommissionAppVo();
+        Map paramMap = new HashMap();
+        if(!identity.equals(4)&&!identity.equals(5)&&!identity.equals(6)){
+            return ResponseVO.failure(ConstantEnum.LIST_QUERY_PARAM.getCodeInt(),ConstantEnum.LIST_QUERY_PARAM.getValueStr());
+        }
+        //identity 为6查询买手返佣配置
+        paramMap.put("inviteType",identity.equals(6)?ConstantEnum.INVITE_TYPE_2.getCodeByte():ConstantEnum.INVITE_TYPE_1.getCodeByte());
+        //查询启用状态的
+        paramMap.put("status",ConstantEnum.COMMISSION_CONFIG_STATUS_3.getCodeByte());
+        List<CommissionConfigAppVo> configList =  commissionConfigService.selectAppList(paramMap);
+        //保存邀请类型为导购的配置
+        List<CommissionConfigAppVo> massageShopConfigList = new ArrayList<CommissionConfigAppVo>();
+        if(CollectionUtils.isNotEmpty(configList)){
+            for(CommissionConfigAppVo config : configList){
+                //容易逛配置只会有一条
+                if(config.getRegisterType().equals(ConstantEnum.REGISTER_TYPE_1.getCodeByte())){
+                    commissAppVo.setEasyConfig(config);
+                }else{
+                    massageShopConfigList.add(config);
+                }
+            }
+            commissAppVo.setMassageShopConfigList(massageShopConfigList);
+        }
+        return ResponseVO.success(commissAppVo);
     }
 }
