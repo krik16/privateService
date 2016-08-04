@@ -1,13 +1,18 @@
 package com.rongyi.easy.bsoms.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *任务详情
  * Created by user on 2016/7/28.
  */
-public class TaskVo {
-    private int id  ;
+public class TaskVo implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int id  ;
     private String name;           //任务标题
     private String rewardContent;  //奖励内容
     private Date startAt;          //任务有效期开始时间
