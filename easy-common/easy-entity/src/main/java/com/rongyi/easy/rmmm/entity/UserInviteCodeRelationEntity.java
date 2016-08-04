@@ -10,7 +10,7 @@ public class UserInviteCodeRelationEntity {
     private String phone;
 
     /** 邀请对象:1容易逛用户 2摩店导购  3摩店买手  4摩店用户 */
-    private Byte userType;
+    private Integer userType;
 
     /** 创建时间 */
     private Date createAt;
@@ -22,7 +22,7 @@ public class UserInviteCodeRelationEntity {
     private Date updateAt;
 
     /** 是否正常:0正常 1禁用 */
-    private Byte isDisabled;
+    private Integer isDisabled;
 
     /**
      *
@@ -60,7 +60,7 @@ public class UserInviteCodeRelationEntity {
      * 
      * @return userType
      */
-    public Byte getUserType() {
+    public Integer getUserType() {
         return userType;
     }
 
@@ -68,7 +68,7 @@ public class UserInviteCodeRelationEntity {
      * 
      * @param userType
      */
-    public void setUserType(Byte userType) {
+    public void setUserType(Integer userType) {
         this.userType = userType;
     }
 
@@ -124,7 +124,7 @@ public class UserInviteCodeRelationEntity {
      * 
      * @return isDisabled
      */
-    public Byte getIsDisabled() {
+    public Integer getIsDisabled() {
         return isDisabled;
     }
 
@@ -132,7 +132,7 @@ public class UserInviteCodeRelationEntity {
      * 
      * @param isDisabled
      */
-    public void setIsDisabled(Byte isDisabled) {
+    public void setIsDisabled(Integer isDisabled) {
         this.isDisabled = isDisabled;
     }
 }
