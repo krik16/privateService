@@ -16,7 +16,7 @@ public class CommissionDiscountParam extends BaseParam implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String phone;//手机号码
 	private String inviteCode;//邀请码
-	private Integer type;//1 邀请容易逛用户   2 邀请摩店用户
+	private Integer type;// 邀请对象: 1 容易逛用户   2 摩店导购  3摩店买手  4摩店用户
 	public String getPhone() {
 		return phone;
 	}
