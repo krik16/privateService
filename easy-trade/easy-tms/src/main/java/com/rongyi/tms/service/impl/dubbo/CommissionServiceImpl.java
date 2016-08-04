@@ -265,6 +265,8 @@ public class CommissionServiceImpl implements CommissionService {
         paramMap.put("inviteType",identity.equals(6)?ConstantEnum.INVITE_TYPE_2.getCodeByte():ConstantEnum.INVITE_TYPE_1.getCodeByte());
         //查询启用状态的
         paramMap.put("status",ConstantEnum.COMMISSION_CONFIG_STATUS_3.getCodeByte());
+        paramMap.put("type",ConstantEnum.COMMISSION_CONFIG_TYPE_0.getCodeStr());
+
         List<CommissionConfigAppVo> configList =  commissionConfigService.selectAppList(paramMap);
         //保存邀请类型为导购的配置
         List<CommissionConfigAppVo> massageShopConfigList = new ArrayList<CommissionConfigAppVo>();

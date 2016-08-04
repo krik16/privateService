@@ -121,6 +121,6 @@ public class CommissionConfigServiceImpl extends BaseServiceImpl implements Comm
     @Override
     public List<CommissionConfigAppVo> selectAppList(Map paramMap) {
         LOGGER.info("selectAppList 查询摩店用户推广返佣规则 Map:{}",paramMap);
-        return this.getBaseDao().selectOneBySql(NAMESPACE + ".selectAppList", paramMap);
+        return this.getBaseDao().selectListBySql(NAMESPACE + ".selectAppList", paramMap);
     }
 }
