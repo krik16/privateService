@@ -77,7 +77,7 @@ public class DebitNoteUploadServiceImpl implements DebitNoteUploadService {
 
 			if (salesCommission.getId() != null) {
 				// 记录存在
-				if(salesCommission.getCommissionAmount().compareTo(BigDecimal.ZERO) < 1){
+				if(salesCommission.getCommissionAmount() != null && salesCommission.getCommissionAmount().compareTo(BigDecimal.ZERO) < 1){
 					salesCommission.setStatus(5);
 				}
 				salesCommissionService.updateByOrderNo(salesCommission);
