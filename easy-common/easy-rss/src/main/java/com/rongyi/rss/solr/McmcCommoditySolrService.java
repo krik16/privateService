@@ -6,7 +6,6 @@ import java.util.Map;
 
 import com.rongyi.core.bean.ResponseVO;
 import com.rongyi.easy.malllife.param.buyer.BuyerCategoryParam;
-import com.rongyi.easy.mcmc.constant.EPOIType;
 import com.rongyi.easy.mcmc.param.ActivityCommodityParam;
 import com.rongyi.easy.rmmm.param.BullParam;
 import com.rongyi.easy.roa.param.SearchCommodityBrandParam;
@@ -299,6 +298,13 @@ public interface McmcCommoditySolrService {
 	 * @return brandMid(未过滤)
 	 */
 	public ResponseVO searchBrandsForUser(SearchCommodityBrandParam brandParam);
+
+	/**
+	 * 批量查询商品
+	 * @param ids
+	 * @return
+	 */
+	public List<McmcCommodityDocument> selectCommodityIndexByCommodityIds(List<String> ids);
 
 	ResponseVO selectCommodityList(CommoditySearchParam param);
 
