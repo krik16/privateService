@@ -27,4 +27,7 @@ public interface ROAMallSolrService {
 	public /*List<String>*/Map<String,Object> getMalls(Map params, int currentpage, int pagesize)
 			throws Exception;
 
+	
+	public Map<String,Object> getMallsForBdatas(Map params, int currentpage, int pagesize)
+			throws Exception;
 }

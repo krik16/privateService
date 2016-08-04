@@ -23,12 +23,21 @@ public class BrandVO implements Serializable {
     private String slug;
     private String telephone;
     private List<BrandsCategoryVO> categories;
+    private String tags;
 
     public String getBrandId() {
         return brandId;
     }
 
-    public void setBrandId(String brandId) {
+    public String getTags() {
+		return tags;
+	}
+
+	public void setTags(String tags) {
+		this.tags = tags;
+	}
+
+	public void setBrandId(String brandId) {
         this.brandId = brandId;
     }
 

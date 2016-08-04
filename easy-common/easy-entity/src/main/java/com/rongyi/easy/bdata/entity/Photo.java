@@ -13,7 +13,7 @@ import org.mongodb.morphia.annotations.Id;
  * @author xiaobo
  *
  */
-@Entity("photos")
+@Entity(value="photos", noClassnameStored = true)
 public class Photo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	/**
