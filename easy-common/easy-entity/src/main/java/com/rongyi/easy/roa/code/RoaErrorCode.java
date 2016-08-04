@@ -23,7 +23,7 @@ public enum RoaErrorCode {
     PARAMETER_ISNULL(1050001,"必要参数不能为空"),
     /** 积分福利  */
     ERROR_CODE_ISNULL(1051001,"验证码不能为空"),
-    ERROR_CODE_ISERROR(1051002,"验证码不正确"),
+    ERROR_CODE_ISERROR(1051002,"验证码错误"),
     ERROR_CARDNUM_ISNULL(1051003,"账号不能为空"),
     ERROR_PASSWORD_ISNULL(1051004,"密码不能为空"),
     ;
