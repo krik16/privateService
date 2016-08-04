@@ -1,6 +1,8 @@
 package com.rongyi.rss.tms;
 
 import com.rongyi.core.bean.ResponseData;
+import com.rongyi.core.bean.ResponseVO;
+import com.rongyi.easy.tms.vo.v2.CommissionAppVo;
 import com.rongyi.easy.tms.vo.v2.CommissionVO;
 import com.rongyi.easy.tms.vo.v2.SalesCommissionListVO;
 import com.rongyi.easy.tms.vo.v2.SalesCommissionVO;
@@ -37,4 +39,11 @@ public interface CommissionService {
      * @return ResponseData
      */
     SalesCommissionVO getCommissionInfo(Integer id) throws Exception;
+
+    /**
+     * 摩店针对登录用户类型查询返佣规则（推广）
+     * @param identity 用户登录类型 （4、5 查询导购数据  6查询买手数据）
+     * @return
+     */
+    ResponseVO getCommissAppVo(Integer identity);
 }
