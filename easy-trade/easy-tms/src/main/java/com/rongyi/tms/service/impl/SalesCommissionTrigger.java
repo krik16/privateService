@@ -11,7 +11,7 @@ public class SalesCommissionTrigger implements ISalesCommissionTrigger {
     private SalesCommissionService service;
 
     /**
-     * 商家
+     * 导购定时打佣金
      */
     @Override
     public void statisticsCommissionAmountTrigger() {
@@ -19,11 +19,17 @@ public class SalesCommissionTrigger implements ISalesCommissionTrigger {
     }
 
     /**
-     * 买手
+     * 买手定时打佣金
      */
     @Override
     public void statisticsBuyerCommissionAmountTrigger() {
         service.statisticsCommissionAmountTrigger(2);
     }
+
+    @Override
+    public void statisticsCheckLimitTrigger() {
+        service.statisticsCheckLimitTrigger();
+    }
+
 
 }

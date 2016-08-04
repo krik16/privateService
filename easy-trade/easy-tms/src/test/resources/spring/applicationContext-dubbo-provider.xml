@@ -20,6 +20,8 @@
     <bean id="tmsDrawApplySearchService" class="com.rongyi.tms.service.impl.DrawApplySearchServiceImpl" />
 
     <dubbo:service interface="com.rongyi.rss.service.trigger.ISalesCommissionTrigger"  version="${dubbo.version}" ref="salesCommissionTrigger" />  
-    <bean id="salesCommissionTrigger" class="com.rongyi.tms.service.impl.SalesCommissionTrigger" /> 
-      
+    <bean id="salesCommissionTrigger" class="com.rongyi.tms.service.impl.SalesCommissionTrigger" />
+
+    <dubbo:service interface="com.rongyi.rss.service.trigger.ICommissionOverLimitCheckTrigger"  version="${dubbo.version}" ref="commissionOverLimitCheckTrigger" />
+    <bean id="commissionOverLimitCheckTrigger" class="com.rongyi.tms.service.impl.CommissionOverLimitCheckTrigger" />
 </beans>  

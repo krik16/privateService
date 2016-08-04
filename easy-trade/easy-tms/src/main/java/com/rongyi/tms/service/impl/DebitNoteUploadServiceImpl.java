@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -55,7 +56,8 @@ public class DebitNoteUploadServiceImpl implements DebitNoteUploadService {
 			SalesCommission salesCommission = salesCommissionService.selectByOrderNo(orderNo);
 			if (salesCommission == null) {
 				salesCommission = new SalesCommission();
-			} else if (salesCommission.getStatus() == 3 || salesCommission.getStatus() == 4) {
+				salesCommission.setPicUploadAt(new Date());
+			} else if (salesCommission.getStatus() == 3 || salesCommission.getStatus() == 4 || salesCommission.getStatus() == 5) {
 				//审核中的小票不能再次上传
 				result.setCode(CodeEnum.ERROR_DEBIT_NOTE_STAUTS.getActionCode());
 				result.setMessage(CodeEnum.ERROR_DEBIT_NOTE_STAUTS.getMessage());
@@ -64,7 +66,10 @@ public class DebitNoteUploadServiceImpl implements DebitNoteUploadService {
 				logger.error(">>>>>>>>>小票状态不正确，结束");
 				return result;
 			}
-			salesCommission.setPicUploadAt(new Date());
+			if(salesCommission.getPicUploadAt() == null){
+				salesCommission.setPicUploadAt(new Date());
+			}
+
 			salesCommission.setPicUrls(pic_urls);
 			salesCommission.setOrderNo(orderNo);
 			salesCommission.setGuideId(userId);
@@ -72,6 +77,9 @@ public class DebitNoteUploadServiceImpl implements DebitNoteUploadService {
 
 			if (salesCommission.getId() != null) {
 				// 记录存在
+				if(salesCommission.getCommissionAmount().compareTo(BigDecimal.ZERO) < 1){
+					salesCommission.setStatus(5);
+				}
 				salesCommissionService.updateByOrderNo(salesCommission);
 			} else {
 				// 记录不存在，佣金未生成

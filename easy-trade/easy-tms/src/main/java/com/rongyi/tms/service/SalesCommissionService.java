@@ -162,6 +162,26 @@ public interface SalesCommissionService {
      * @param params (list 卖家id列表 ，status 状态 默认为6
      * @return
      */
-    public int updateBatchHadSendedVA(List<CommissionAmountTotalVO> ids,long version);
+    int updateBatchHadSendedVA(List<CommissionAmountTotalVO> ids,long version);
+
+    /**
+     *每日定时检查更新前一天生成的导购/买手的超限佣金
+     */
+    void statisticsCheckLimitTrigger();
+
+    /**
+     * 查询导购前一日所有的待返佣数据
+     * @param guideId 导购id
+     * @param guideType 导购类型
+     * @return list
+     */
+    List<SalesCommissionVO> selectGuideYesterdayCommission(String guideId,Integer guideType);
+
+    /**
+     * 统计更新导购超出返佣规则的佣金记录
+     * @param guideId 导购id
+     * @param guideType 导购类型 1:导购 2:买手
+     */
+    void calcCommissioinLimit(String guideId,Integer guideType);
 
 }

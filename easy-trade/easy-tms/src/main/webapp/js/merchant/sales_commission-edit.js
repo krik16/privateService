@@ -5,7 +5,7 @@ $.ajaxSetup({
 	cache : false
 });
 $(document).ready(function() {
-	setDefaultTime();
+	setYestdayDefaultTime();
 	ajaxloadApplys();
 	
 	bindEvent();
@@ -177,21 +177,36 @@ function switchCheck(check) {
 		$("#uncheck").removeClass("now");
 		$("#checked").removeClass("change-color");
 		$("#checked").addClass("now");
+		$("#overLimit").addClass("now");
+		$("#overLimit").removeClass("change-color");
 		$("#batch-check").css("display", "block");
 		$("#isChecked").val(1);
 		$("#checkLi").css("display", "none");
 		$("#vaStatusLi").css("display", "none");
 
-	} else {
+	} else if(check == 1) {
 		$("#checkLi").css("display", "block");
 		$("#vaStatusLi").css("display", "block");
 		$("#uncheck").removeClass("change-color");
 		$("#uncheck").addClass("now");
 		$("#checked").addClass("change-color");
 		$("#checked").removeClass("now");
+		$("#overLimit").addClass("now");
+		$("#overLimit").removeClass("change-color");
 		$("#batch-check").css("display", "none");
-		$("#isChecked").val("-1,2,-2,3,4,5,6");
+		$("#isChecked").val("-1,2,-2,3,4,6");
+	} else{
+		$("#vaStatusLi").css("display", "block");
+		$("#uncheck").removeClass("change-color");
+		$("#uncheck").addClass("now");
+		$("#checked").removeClass("change-color");
+		$("#checked").addClass("now");
+		$("#overLimit").addClass("change-color");
+		$("#overLimit").removeClass("now");
+		$("#batch-check").css("display", "none");
+		$("#isChecked").val("5");
 	}
+
 	setDefaultTime();
 	ajaxloadApplys();
 }
@@ -217,4 +232,12 @@ function checkUnpass(id,guideType) {
 function tankuang(url){
 	alert(1);
 	
+}
+
+function setYestdayDefaultTime(){
+	var curDate = new Date();
+	var startDate = curDate.getFullYear()+"/"+(curDate.getMonth()+1)+"/"+(curDate.getDate()-1);
+	var endDate = curDate.getFullYear()+"/"+(curDate.getMonth()+1)+"/"+(curDate.getDate()-1)+" 23:59:59";
+	$(".startTime").val(getFormatDate(new Date(startDate)));
+	$('.endTime').val(getFormatDate(new Date(endDate)));
 }
