@@ -9,6 +9,7 @@
  */
 package com.rongyi.tms.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.common.util.JsonUtil;
 import com.rongyi.core.constant.Constants;
@@ -21,7 +22,6 @@ import com.rongyi.easy.tms.entity.SalesCommission;
 import com.rongyi.easy.tms.entity.SalesCommissionAuditLog;
 import com.rongyi.easy.tms.vo.SalesCommissionParam;
 import com.rongyi.easy.tms.vo.SalesCommissionVO;
-import com.rongyi.rss.gcc.RmmmSettingsService;
 import com.rongyi.rss.malllife.roa.ROARedisService;
 import com.rongyi.rss.malllife.roa.user.ROAMalllifeUserService;
 import com.rongyi.tms.constants.Constant;
@@ -38,6 +38,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -55,9 +56,6 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 
 	@Autowired
 	private ROAMalllifeUserService roaMalllifeUserService;
-
-	@Autowired
-	private RmmmSettingsService rmmmSettingsService;
 
 	@Autowired
 	private ROARedisService roaRedisService;
@@ -154,11 +152,17 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 				}
 
 				if (salesCommission.getId() != null) {
+					if(salesCommission.getCommissionAmount().compareTo(BigDecimal.ZERO) < 1){
+						salesCommission.setStatus(5);
+					}
 					// 记录存在，在佣金生成前已上传过小票
 					updateByOrderNo(salesCommission);
 				} else {
 					// 记录不存在，未传过小票
 					salesCommission.setStatus(0);
+//					if(salesCommission.getCommissionAmount().compareTo(BigDecimal.ZERO) < 1){
+//						salesCommission.setStatus(5);
+//					}
 					insert(salesCommission);
 				}
 			}
@@ -212,20 +216,20 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 
 	@Override
 	public int updateBatch(CheckParam param, String user) {
-		TransConfigurations transConf;
-		if (param.getGuideType()!=null&&param.getGuideType()==2) {
-			//买手
-			transConf = roaRedisService.get(Constants.ConfigType.BUYER_TRANS_CONFIGURATIONS,TransConfigurations.class);
-		}else {
-			//前端传0表表示无渠道类型，默认查商家类型
-			if (param.getGuideType()!=null && param.getGuideType()==0)
-				param.setGuideType(1);
-			transConf = roaRedisService.get(Constants.ConfigType.TRANS_CONFIGURATIONS,TransConfigurations.class);
-		}
-		if (transConf==null) {
-			transConf = new TransConfigurations();
-		}
-		LOGGER.info("读取的参数为:" + transConf.getCommissionCountMax());
+//		TransConfigurations transConf;
+//		if (param.getGuideType()!=null&&param.getGuideType()==2) {
+//			//买手
+//			transConf = roaRedisService.get(Constants.ConfigType.BUYER_TRANS_CONFIGURATIONS,TransConfigurations.class);
+//		}else {
+//			//前端传0表表示无渠道类型，默认查商家类型
+//			if (param.getGuideType()!=null && param.getGuideType()==0)
+//				param.setGuideType(1);
+//			transConf = roaRedisService.get(Constants.ConfigType.TRANS_CONFIGURATIONS,TransConfigurations.class);
+//		}
+//		if (transConf==null) {
+//			transConf = new TransConfigurations();
+//		}
+//		LOGGER.info("读取的参数为:" + transConf.getCommissionCountMax());
 		Map<String, Object> searchMap = new HashMap<>();
 		String[] ids = param.getIds().trim().split(",");
 		searchMap.put("ids",ids);
@@ -236,15 +240,15 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 				Map<String, Object> paramsMap = param.paramToMap();
 				paramsMap.put("guideId",vo.getGuideId());
 				paramsMap.put("buyerId",vo.getBuyerId());
-				Integer dailyCount = this.getBaseDao().selectOneBySql(NAMESPACE_SALESCOMMISSION + ".selectDailyCount", paramsMap);
-				if (dailyCount==null)
-					dailyCount=0;
+//				Integer dailyCount = this.getBaseDao().selectOneBySql(NAMESPACE_SALESCOMMISSION + ".selectDailyCount", paramsMap);
+//				if (dailyCount==null)
+//					dailyCount=0;
 				searchMap.put("id", vo.getId());
-				if (dailyCount<=transConf.getCommissionCountMax()){
-					searchMap.put("status", param.getStatus());
-				}else {
-					searchMap.put("status", 5);
-				}
+				searchMap.put("status", param.getStatus());
+//				if (dailyCount<=transConf.getCommissionCountMax()){
+//				}else {
+//					searchMap.put("status", 5);
+//				}
 				LOGGER.info("searchMap: "+searchMap.toString());
 				int updateResult =  this.getBaseDao().updateBySql(NAMESPACE_SALESCOMMISSION + ".updateStatus", searchMap);
 				if (updateResult>0)
@@ -336,7 +340,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 					MessageEvent event = MessageEvent.getMessageEvent(bodyMap, "tms", "va", VirtualAccountEventTypeEnum.COMMISSION_BATCH_POST.getCode());
 					sender.convertAndSend(event);
 				} else {
-					LOGGER.info("更新失败�?");
+					LOGGER.info("更新失败");
 				}
 			}
 		} else {
@@ -377,11 +381,7 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 	/**
 	 * Description
 	 * 
-<<<<<<< HEAD
 	 * @param account
-=======
-	 * @param
->>>>>>> refs/remotes/origin/develop
 	 * @return
 	 * @see SalesCommissionService#getUserIdByUserAccount(String)
 	 */
@@ -430,5 +430,88 @@ public class SalesCommissionServiceImpl extends BaseServiceImpl implements Sales
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("userId", userId);
 		return this.getBaseDao().selectOneBySql(NAMESPACE_SALESCOMMISSION + ".selectFaleCommission", paramMap);
+	}
+
+	@Override
+	public void statisticsCheckLimitTrigger() {
+		LOGGER.info("定时任务自动处理昨日超上限的返佣记录开始");
+		List<SalesCommission> list = selectYesterdayGuideInfo();
+		for(SalesCommission salesCommission :list){
+			calcCommissioinLimit(salesCommission.getGuideId(),salesCommission.getGuideType());
+		}
+		LOGGER.info("定时任务自动处理昨日超上限的返佣记录结束");
+	}
+
+
+	@Override
+	public void calcCommissioinLimit(String guideId,Integer guideType){
+		LOGGER.info("计算需处理的超上限的返佣记录,guideId={},guideType={}",guideId,guideType);
+		List<SalesCommissionVO> resultList = new ArrayList<>();//需要显示的待审核佣金记录
+		List<SalesCommissionVO> overLimitList = new ArrayList<>();//超出限制的佣金记录
+		String result;
+		if(guideType == 1) {
+			result = roaRedisService.get(Constants.ConfigType.TRANS_CONFIGURATIONS);
+		}else{
+			result = roaRedisService.get(Constants.ConfigType.BUYER_TRANS_CONFIGURATIONS);
+		}
+		TransConfigurations transConfigurations = JSON.parseObject(result, TransConfigurations.class);
+		LOGGER.info("countMax={},dailyMax={}",transConfigurations.getCommissionCountMax(),transConfigurations.getCommissionDailyMax());
+		//查询出该导购/买手在昨天的所有佣金记录
+		List<SalesCommissionVO> list = this.selectGuideYesterdayCommission(guideId, guideType);
+		//买手id对应返佣记录map
+		Map<String,List<SalesCommissionVO>> map = new HashMap<>();
+		for (SalesCommissionVO salesCommissionVO : list){
+			if(map.containsKey(salesCommissionVO.getBuyerId())){//如果key存在map则加进去
+				map.get(salesCommissionVO.getBuyerId()).add(salesCommissionVO);
+			}else{//不存在，新建key
+				List<SalesCommissionVO> salesCommissionVOList = new ArrayList<>();
+				salesCommissionVOList.add(salesCommissionVO);
+				map.put(salesCommissionVO.getBuyerId(),salesCommissionVOList);
+			}
+		}
+		//导购对应的每个买家的佣金记录数
+		List<SalesCommissionVO> buyerCommissionList;
+		for(String key :map.keySet()){
+			buyerCommissionList = map.get(key);
+			//如果超出每天同一买家限制次数上限则丢弃超出部分
+			if(transConfigurations.getCommissionCountMax() < buyerCommissionList.size()){
+				overLimitList.addAll(buyerCommissionList.subList(transConfigurations.getCommissionCountMax(),buyerCommissionList.size()));
+				buyerCommissionList = buyerCommissionList.subList(0,transConfigurations.getCommissionCountMax());
+			}
+			resultList.addAll(buyerCommissionList);
+		}
+		if(transConfigurations.getCommissionDailyMax() < resultList.size()){
+//			resultList.subList(0,transConfigurations.getCommissionDailyMax());
+			Collections.sort(resultList);//按佣金金额倒叙
+			overLimitList.addAll(resultList.subList(transConfigurations.getCommissionDailyMax(), resultList.size()));
+		}
+
+		Map<String,Object> paramMap = new HashMap<>();
+		for(SalesCommissionVO salesCommissionVO :overLimitList){
+			paramMap.put("id",salesCommissionVO.getId());
+			paramMap.put("status", 5);
+			updateStatus(paramMap);
+		}
+		LOGGER.info("昨日guideId={}的用户超上限佣金记录为overLimitList={}",guideId,overLimitList);
+	}
+
+	@Override
+	public List<SalesCommissionVO> selectGuideYesterdayCommission(String guideId,Integer guideType) {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("guideId", guideId);
+		paramMap.put("guideType", guideType);
+		return this.getBaseDao().selectListBySql(NAMESPACE_SALESCOMMISSION + ".selectGuideYesterdayCommission", paramMap);
+	}
+
+	/**
+	 *按导购id分组查询昨天返佣的导购信息
+	 * @return list
+	 */
+	private List<SalesCommission> selectYesterdayGuideInfo() {
+		return this.getBaseDao().selectListBySql(NAMESPACE_SALESCOMMISSION + ".selectYesterdayGuideInfo");
+	}
+
+	private void updateStatus(Map<String,Object> paramMap){
+		this.getBaseDao().updateBySql(NAMESPACE_SALESCOMMISSION + ".updateStatus", paramMap);
 	}
 }

@@ -1,752 +1,802 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="com.rongyi.tms.mapper.xml.SalesCommissionMapper">
-	<resultMap id="BaseResultMap" type="com.rongyi.easy.tms.entity.SalesCommission">
-		<id column="id" property="id" jdbcType="INTEGER" />
-		<result column="guide_id" property="guideId" jdbcType="VARCHAR" />
-		<result column="order_no" property="orderNo" jdbcType="VARCHAR" />
-		<result column="commission_amount" property="commissionAmount"
-			jdbcType="DECIMAL" />
-		<result column="status" property="status" jdbcType="TINYINT" />
-		<result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
-		<result column="pic_upload_at" property="picUploadAt" jdbcType="TIMESTAMP" />
-		<result column="buyer_account" property="buyerAccount"
-			jdbcType="VARCHAR" />
-		<result column="guide_type" property="guideType" jdbcType="INTEGER" />
-	</resultMap>
-	<resultMap id="BonusMap" type="com.rongyi.tms.moudle.vo.BonusVO">
-		<id column="id" property="id" jdbcType="INTEGER" />
-		<result column="sd_no" property="sdNo" jdbcType="INTEGER" />
-		<result column="guide_type" property="guideType" jdbcType="INTEGER" />
-		<result column="guide_id" property="sellerId" jdbcType="VARCHAR" />
-		<result column="seller_account" property="sellerAccount"
-			jdbcType="VARCHAR" />
-		<result column="type" property="bonusType" jdbcType="TINYINT" />
-		<result column="commission_amount" property="amount" jdbcType="DECIMAL" />
-		<result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
-		<result column="create_user" property="createUser" jdbcType="VARCHAR" />
-		<result column="update_user" property="updateUser" jdbcType="VARCHAR" />
-		<result column="status" property="status" jdbcType="TINYINT" />
-		<result column="remarks" property="marks"
-			typeHandler="com.rongyi.core.common.util.ConvertBlobTypeHandler" />
-	</resultMap>
-	<resultMap id="BonusWithBlobMap" type="com.rongyi.tms.moudle.vo.BonusVO"
-		extends="BonusMap">
-		<result column="remarks" property="marks"
-			typeHandler="com.rongyi.core.common.util.ConvertBlobTypeHandler" />
-	</resultMap>
-	<resultMap id="ResultMapWithBLOBs" type="com.rongyi.easy.tms.entity.SalesCommission"
-		extends="BaseResultMap">
-		<result column="pic_urls" property="picUrls"
-			typeHandler="com.rongyi.core.common.util.ConvertBlobTypeHandler" />
-	</resultMap>
-	<resultMap id="AllInfoResultMap" type="com.rongyi.easy.tms.vo.SalesCommissionVO"
-		extends="ResultMapWithBLOBs">
-		<result column="mall_mid" property="mallMid" jdbcType="VARCHAR" />
-		<result column="mall_name" property="mallName" jdbcType="VARCHAR" />
-		<result column="shop_mid" property="shopMid" jdbcType="VARCHAR" />
-		<result column="shop_name" property="shopName" jdbcType="VARCHAR" />
-		<result column="buyer_id" property="buyerId" jdbcType="VARCHAR" />
-		<result column="guide_type" property="guideType" jdbcType="INTEGER" />
-		<result column="buyer_account" property="buyerAccount"
-			jdbcType="VARCHAR" />
-		<result column="seller_name" property="sellerName" jdbcType="VARCHAR" />
-		<result column="seller_account" property="sellerAccount"
-			jdbcType="VARCHAR" />
-		<result column="order_create_at" property="orderAt" jdbcType="TIMESTAMP" />
-	</resultMap>
-	<resultMap id="CommissionInfo" type="com.rongyi.tms.moudle.vo.CommissionInfoVO">
-		<id property="userId" column="user_id" />
-		<result property="commissionForAuditTotal" column="commission_total" />
-		<result property="commissionForAuditToday" column="commission_today" />
-	</resultMap>
-	<resultMap id="CommissionAmountTotal"
-		type="com.rongyi.tms.moudle.vo.CommissionAmountTotalVO">
-		<id property="guideId" column="guide_id" jdbcType="VARCHAR" />
-		<result property="version" column="version" jdbcType="INTEGER" />
-		<result property="commissionAmount" column="amount_total"
-			jdbcType="DECIMAL" />
-	</resultMap>
-	<resultMap id="FaleCommissionMonth" type="com.rongyi.tms.moudle.vo.CommissionInfoVO">
-		<id property="userId" column="guide_id" jdbcType="VARCHAR" />
-		<result property="faleCommissionMonth" column="fale_commission_month"
-			jdbcType="DECIMAL" />
-	</resultMap>
-	<parameterMap type="map" id="checkMap">
-		<parameter property="commission_ids" jdbcType="VARCHAR"
-			mode="IN" />
-		<parameter property="check_status" jdbcType="TINYINT" mode="IN" />
-		<parameter property="max_commission_times" jdbcType="TINYINT"
-			mode="IN" />
-		<parameter property="guideType" jdbcType="TINYINT" mode="IN" />
-	</parameterMap>
-	<sql id="Base_Column_List">
-		sales_commission.id, sales_commission.guide_id,
-		sales_commission.order_no, commission_amount,
-		sales_commission.`status`, sales_commission.create_at, pic_upload_at,
-		sales_commission.buyer_account, sales_commission.guide_type
-	</sql>
-	<sql id="Blob_Column_List">
-		pic_urls
-	</sql>
-	<sql id="All_Info_List">
-		ry_rmmm.mall_cooperate.mall_mid,ry_rmmm.mall_cooperate.mall_name,
-		ry_rmmm.shop_info.shop_mid,ry_rmmm.shop_info.shop_name,ry_osm.order_form.buyer_id,sales_commission.buyer_account,ry_rmmm.rmmm_user_info.user_name
-		AS seller_name,ry_rmmm.rmmm_user_info.user_phone AS
-		seller_account,ry_osm.order_form.create_at AS order_create_at
-	</sql>
-	<sql id="Bonus_info_list">id,id+100000000 as sd_no
-		,guide_id,seller_account,type,commission_amount,sales_commission.status,update_user,create_user,create_at,remarks,guide_type
-	</sql>
+    <resultMap id="BaseResultMap" type="com.rongyi.easy.tms.entity.SalesCommission">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="guide_id" property="guideId" jdbcType="VARCHAR"/>
+        <result column="order_no" property="orderNo" jdbcType="VARCHAR"/>
+        <result column="commission_amount" property="commissionAmount"
+                jdbcType="DECIMAL"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="create_at" property="createAt" jdbcType="TIMESTAMP"/>
+        <result column="pic_upload_at" property="picUploadAt" jdbcType="TIMESTAMP"/>
+        <result column="buyer_account" property="buyerAccount"
+                jdbcType="VARCHAR"/>
+        <result column="guide_type" property="guideType" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="BonusMap" type="com.rongyi.tms.moudle.vo.BonusVO">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="sd_no" property="sdNo" jdbcType="INTEGER"/>
+        <result column="guide_type" property="guideType" jdbcType="INTEGER"/>
+        <result column="guide_id" property="sellerId" jdbcType="VARCHAR"/>
+        <result column="seller_account" property="sellerAccount"
+                jdbcType="VARCHAR"/>
+        <result column="type" property="bonusType" jdbcType="TINYINT"/>
+        <result column="commission_amount" property="amount" jdbcType="DECIMAL"/>
+        <result column="create_at" property="createAt" jdbcType="TIMESTAMP"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="remarks" property="marks"
+                typeHandler="com.rongyi.core.common.util.ConvertBlobTypeHandler"/>
+    </resultMap>
+    <resultMap id="BonusWithBlobMap" type="com.rongyi.tms.moudle.vo.BonusVO"
+               extends="BonusMap">
+        <result column="remarks" property="marks"
+                typeHandler="com.rongyi.core.common.util.ConvertBlobTypeHandler"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.rongyi.easy.tms.entity.SalesCommission"
+               extends="BaseResultMap">
+        <result column="pic_urls" property="picUrls"
+                typeHandler="com.rongyi.core.common.util.ConvertBlobTypeHandler"/>
+    </resultMap>
+    <resultMap id="AllInfoResultMap" type="com.rongyi.easy.tms.vo.SalesCommissionVO"
+               extends="ResultMapWithBLOBs">
+        <result column="mall_mid" property="mallMid" jdbcType="VARCHAR"/>
+        <result column="mall_name" property="mallName" jdbcType="VARCHAR"/>
+        <result column="shop_mid" property="shopMid" jdbcType="VARCHAR"/>
+        <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
+        <result column="buyer_id" property="buyerId" jdbcType="VARCHAR"/>
+        <result column="guide_type" property="guideType" jdbcType="INTEGER"/>
+        <result column="buyer_account" property="buyerAccount"
+                jdbcType="VARCHAR"/>
+        <result column="seller_name" property="sellerName" jdbcType="VARCHAR"/>
+        <result column="seller_account" property="sellerAccount"
+                jdbcType="VARCHAR"/>
+        <result column="order_create_at" property="orderAt" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap id="CommissionInfo" type="com.rongyi.tms.moudle.vo.CommissionInfoVO">
+        <id property="userId" column="user_id"/>
+        <result property="commissionForAuditTotal" column="commission_total"/>
+        <result property="commissionForAuditToday" column="commission_today"/>
+    </resultMap>
+    <resultMap id="CommissionAmountTotal"
+               type="com.rongyi.tms.moudle.vo.CommissionAmountTotalVO">
+        <id property="guideId" column="guide_id" jdbcType="VARCHAR"/>
+        <result property="version" column="version" jdbcType="INTEGER"/>
+        <result property="commissionAmount" column="amount_total"
+                jdbcType="DECIMAL"/>
+    </resultMap>
+    <resultMap id="FaleCommissionMonth" type="com.rongyi.tms.moudle.vo.CommissionInfoVO">
+        <id property="userId" column="guide_id" jdbcType="VARCHAR"/>
+        <result property="faleCommissionMonth" column="fale_commission_month"
+                jdbcType="DECIMAL"/>
+    </resultMap>
+    <parameterMap type="map" id="checkMap">
+        <parameter property="commission_ids" jdbcType="VARCHAR"
+                   mode="IN"/>
+        <parameter property="check_status" jdbcType="TINYINT" mode="IN"/>
+        <parameter property="max_commission_times" jdbcType="TINYINT"
+                   mode="IN"/>
+        <parameter property="guideType" jdbcType="TINYINT" mode="IN"/>
+    </parameterMap>
+    <sql id="Base_Column_List">
+        sales_commission.id, sales_commission.guide_id,
+        sales_commission.order_no, commission_amount,
+        sales_commission.`status`, sales_commission.create_at, pic_upload_at,
+        sales_commission.buyer_account, sales_commission.guide_type
+    </sql>
+    <sql id="Blob_Column_List">
+        pic_urls
+    </sql>
+    <sql id="All_Info_List">
+        ry_rmmm.mall_cooperate.mall_mid,ry_rmmm.mall_cooperate.mall_name,
+        ry_rmmm.shop_info.shop_mid,ry_rmmm.shop_info.shop_name,ry_osm.order_form.buyer_id,sales_commission.buyer_account,ry_rmmm.rmmm_user_info.user_name
+        AS seller_name,ry_rmmm.rmmm_user_info.user_phone AS
+        seller_account,ry_osm.order_form.create_at AS order_create_at
+    </sql>
+    <sql id="Bonus_info_list">id,id+100000000 as sd_no
+        ,guide_id,seller_account,type,commission_amount,sales_commission.status,update_user,create_user,create_at,remarks,guide_type
+    </sql>
 
-	<sql id="View_From">
-		`ry_rpb`.`sales_commission`
-		left join `ry_osm`.`order_form`
-		on `ry_osm`.`order_form`.`order_no` =
-		`ry_rpb`.`sales_commission`.`order_no`
-		left join
-		`ry_rmmm`.`rmmm_user_info`
-		on`ry_rpb`.`sales_commission`.`guide_id` =
-		`ry_rmmm`.`rmmm_user_info`.`id`
-		left join `ry_rmmm`.`shop_info`
-		on`ry_osm`.`order_form`.`weidian_id` =
-		`ry_rmmm`.`shop_info`.`id` left
-		join
-		`ry_rmmm`.`mall_cooperate` on`ry_rmmm`.`shop_info`.`mall_id` =
-		`ry_rmmm`.`mall_cooperate`.`id`
-	</sql>
+    <sql id="View_From">
+        `ry_rpb`.`sales_commission`
+        left join `ry_osm`.`order_form`
+        on `ry_osm`.`order_form`.`order_no` =
+        `ry_rpb`.`sales_commission`.`order_no`
+        left join
+        `ry_rmmm`.`rmmm_user_info`
+        on`ry_rpb`.`sales_commission`.`guide_id` =
+        `ry_rmmm`.`rmmm_user_info`.`id`
+        left join `ry_rmmm`.`shop_info`
+        on`ry_osm`.`order_form`.`weidian_id` =
+        `ry_rmmm`.`shop_info`.`id` left
+        join
+        `ry_rmmm`.`mall_cooperate` on`ry_rmmm`.`shop_info`.`mall_id` =
+        `ry_rmmm`.`mall_cooperate`.`id`
+    </sql>
 
-	<sql id="View_Colum_List">
-		`ry_rpb`.`sales_commission`.`id` AS
-		`id`,`ry_rpb`.`sales_commission`.`guide_id` AS
-		`guide_id`,`ry_rpb`.`sales_commission`.`order_no` AS
-		`order_no`,`ry_rpb`.`sales_commission`.`type` AS
-		`type`,`ry_rpb`.`sales_commission`.`commission_amount` AS
-		`commission_amount`,`ry_rpb`.`sales_commission`.`status` AS
-		`status`,`ry_rpb`.`sales_commission`.`create_at` AS
-		`create_at`,`ry_rpb`.`sales_commission`.`pic_urls` AS
-		`pic_urls`,`ry_rpb`.`sales_commission`.`pic_upload_at` AS
-		`pic_upload_at`,`ry_rpb`.`sales_commission`.`buyer_account` AS
-		`buyer_account`,`ry_osm`.`order_form`.`create_at` AS
-		`order_create_at`,`ry_osm`.`order_form`.`buyer_id` AS
-		`buyer_id`,`ry_rmmm`.`rmmm_user_info`.`user_phone` AS
-		`seller_account`,`ry_rmmm`.`rmmm_user_info`.`user_name` AS
-		`seller_name`,`ry_rmmm`.`shop_info`.`shop_name` AS
-		`shop_name`,`ry_rmmm`.`shop_info`.`shop_mid` AS
-		`shop_mid`,`ry_rmmm`.`mall_cooperate`.`mall_mid` AS
-		`mall_mid`,`ry_rmmm`.`mall_cooperate`.`mall_name` AS
-		`mall_name`,`ry_rpb`.`sales_commission`.`guide_type` AS `guide_type`
-	</sql>
-
-
-
-	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
-		parameterType="java.lang.Integer">
-		select
-		<include refid="Base_Column_List" />
-		,
-		<include refid="Blob_Column_List" />
-		from sales_commission
-		where id = #{id,jdbcType=INTEGER}
-	</select>
-	<select id="selectOneById" resultMap="AllInfoResultMap"
-		parameterType="map">
-		select
-		<include refid="Base_Column_List" />
-		,
-		<include refid="Blob_Column_List" />
-		,
-		<include refid="All_Info_List" />
-		from
-		<include refid="View_From" />
-		<where>
-			<if test="id!=null">sales_commission.id = #{id,jdbcType=INTEGER}</if>
-			<if test="ids!=null">
-				sales_commission.id in
-				<foreach collection="ids" index="index" item="item" open="("
-					separator="," close=")">
-					#{item}
-				</foreach>
-			</if>
-		</where>
-	</select>
-	<select id="getOneBonus" resultMap="BonusWithBlobMap"
-		parameterType="map">
-		select
-		<include refid="Bonus_info_list" />
-		from sales_commission where id=#{id,jdbcType=INTEGER}
-	</select>
-	<select id="selectAllInfoByPage" resultMap="AllInfoResultMap"
-		parameterType="java.util.Map">
-		select
-		<include refid="Base_Column_List" />
-		,
-		<include refid="Blob_Column_List" />
-		,
-		<include refid="All_Info_List" />
-
-		from
-		<include refid="View_From" />
-		where commission_amount is not null and config_id = 0 and
-		sales_commission.status in
-		<foreach collection="status" index="index" item="item" open="("
-			separator="," close=")">
-			#{item}
-		</foreach>
-		<if test="commissionNo != null">
-			and sales_commission.id=#{commissionNo,jdbcType=INTEGER}
-		</if>
-		<if test="guideType != null">
-			and
-			sales_commission.guide_type=#{guideType,jdbcType=INTEGER}
-		</if>
-		<if test="mall != null">
-			and
-			ry_rmmm.mall_cooperate.mall_name=#{mall,jdbcType=VARCHAR}
-		</if>
-		<if test="shop != null">
-			and ry_rmmm.shop_info.shop_name=#{shop,jdbcType=VARCHAR}
-		</if>
-		<if test="sellerName != null">
-			and ry_rmmm.rmmm_user_info.user_name like
-			#{sellerName,jdbcType=VARCHAR}
-		</if>
-		<if test="sellerAccount != null">
-			and ry_rmmm.rmmm_user_info.user_phone like
-			#{sellerAccount,jdbcType=VARCHAR}
-		</if>
-		<if test="uploadStart != null">
-			and sales_commission.pic_upload_at >=
-			#{uploadStart,jdbcType=TIMESTAMP}
-		</if>
-		<if test="uploadEnd != null">
-			and sales_commission.pic_upload_at &lt;=
-			#{uploadEnd,jdbcType=TIMESTAMP}
-		</if>
-		<if test="amountStart != null">
-			and commission_amount >= #{amountStart,jdbcType=DECIMAL}
-		</if>
-		<if test="amountEnd != null and amountEnd !=0">
-			and commission_amount &lt;= #{amountEnd,jdbcType=DECIMAL}
-		</if>
-		<if test="vaStatus != null and vaStatus != ''">
-			and sales_commission.status in
-			<foreach collection="vaStatus" index="index" item="item"
-				open="(" separator="," close=")">
-				#{item}
-			</foreach>
-		</if>
-		and config_id = 0
-		order by sales_commission.create_at desc
-		limit
-		#{begin,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
-	</select>
-	<select id="selectUserPhoneByUserId" resultType="String"
-		parameterType="java.lang.Integer">
-		select `ry_rmmm`.`rmmm_user_info`.`user_phone` from
-		`ry_rmmm`.`rmmm_user_info` where
-		`ry_rmmm`.`rmmm_user_info`.`id`=#{userId,jdbcType=INTEGER}
-	</select>
-	<select id="selectUserIdByUserAccount" resultType="Integer"
-		parameterType="java.lang.String">
-		select `ry_rmmm`.`rmmm_user_info`.`id` from
-		`ry_rmmm`.`rmmm_user_info` where
-		`ry_rmmm`.`rmmm_user_info`.`user_phone`=#{userPhone,jdbcType=INTEGER}
-	</select>
-	<select id="selectAllInfoCount" resultType="int"
-		parameterType="com.rongyi.easy.tms.vo.SalesCommissionParam">
-		select count(1)
-		from
-		<include refid="View_From" />
-		where commission_amount is
-		not null and config_id = 0 and  sales_commission.status in
-		<foreach collection="status" index="index" item="item" open="("
-			separator="," close=")">
-			#{item}
-		</foreach>
-		<if test="commissionNo != null">
-			and sales_commission.id=#{commissionNo,jdbcType=INTEGER}
-		</if>
-		<if test="guideType != null">
-			and
-			sales_commission.guide_type=#{guideType,jdbcType=INTEGER}
-		</if>
-		<if test="mall != null">
-			and
-			ry_rmmm.mall_cooperate.mall_name=#{mall,jdbcType=VARCHAR}
-		</if>
-		<if test="shop != null">
-			and ry_rmmm.shop_info.shop_name=#{shop,jdbcType=VARCHAR}
-		</if>
-		<if test="sellerName != null">
-			and ry_rmmm.rmmm_user_info.user_name like
-			#{sellerName,jdbcType=VARCHAR}
-		</if>
-		<if test="sellerAccount != null">
-			and ry_rmmm.rmmm_user_info.user_phone like
-			#{sellerAccount,jdbcType=VARCHAR}
-		</if>
-		<if test="uploadStart != null">
-			and pic_upload_at >= #{uploadStart,jdbcType=TIMESTAMP}
-		</if>
-		<if test="uploadEnd != null">
-			and pic_upload_at &lt;= #{uploadEnd,jdbcType=TIMESTAMP}
-		</if>
-		<if test="amountStart != null">
-			and commission_amount >= #{amountStart,jdbcType=DECIMAL}
-		</if>
-		<if test="amountEnd != null and amountEnd !=0">
-			and commission_amount &lt;= #{amountEnd,jdbcType=DECIMAL}
-		</if>
-		and config_id = 0
-		<if test="vaStatus != null and vaStatus != ''">
-			and sales_commission.status in
-			<foreach collection="vaStatus" index="index" item="item"
-				open="(" separator="," close=")">
-				#{item}
-			</foreach>
-		</if>
-	</select>
-	<select id="selectPageBonus" resultMap="BonusMap" parameterType="map">
-		select
-		<include refid="Bonus_info_list" />
-		from sales_commission where type is not null
-		<if test="id!=null">
-			and id=#{id,jdbcType=INTEGER}
-		</if>
-		<if test="guideType!=null">
-			and guide_type=#{guideType,jdbcType=INTEGER}
-		</if>
-		<if test="sellerAccount !=null">
-			and seller_account=#{sellerAccount,jdbcType=VARCHAR}
-		</if>
-		<if test="type!=null and type != ''">
-			and type in
-			<foreach collection="type" index="index" item="item" open="("
-				separator="," close=")">
-				#{item}
-			</foreach>
-		</if>
-		<if test="createStartTime != null">
-			and create_at >= #{createStartTime,jdbcType=TIMESTAMP}
-		</if>
-		<if test="createEndTime != null">
-			and create_at &lt;= #{createEndTime,jdbcType=TIMESTAMP}
-		</if>
-		and sales_commission.status in
-		<foreach collection="status" index="index" item="item" open="("
-			separator="," close=")">
-			#{item}
-		</foreach>
-		and config_id = 0
-		order by sales_commission.create_at desc
-		limit
-		#{start,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
-	</select>
-	<select id="selectTotalBonus" resultType="int" parameterType="map">
-		select
-		count(1)
-		from sales_commission where type is not null
-		<if test="id!=null">
-			and id=#{id,jdbcType=INTEGER}
-		</if>
-		<if test="guideType!=null">
-			and guide_type=#{guideType,jdbcType=INTEGER}
-		</if>
-		<if test="sellerAccount !=null">
-			and seller_account=#{sellerAccount,jdbcType=VARCHAR}
-		</if>
-		<if test="type!=null and type != ''">
-			and type in
-			<foreach collection="type" index="index" item="item" open="("
-				separator="," close=")">
-				#{item}
-			</foreach>
-		</if>
-		<if test="createStartTime != null">
-			and create_at >= #{createStartTime,jdbcType=TIMESTAMP}
-		</if>
-		<if test="createEndTime != null">
-			and create_at &lt;= #{createEndTime,jdbcType=TIMESTAMP}
-		</if>
-		and sales_commission.status in
-		<foreach collection="status" index="index" item="item" open="("
-			separator="," close=")">
-			#{item}
-		</foreach>
-	</select>
-	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from
-		sales_commission
-		where id = #{id,jdbcType=INTEGER}
-	</delete>
-	<insert id="insert" parameterType="com.rongyi.easy.tms.entity.SalesCommission">
-		INSERT INTO sales_commission (
-		guide_id,
-		order_no,
-		commission_amount,
-		`status`,
-		create_at,
-		pic_upload_at,
-		pic_urls,
-		buyer_account,
-		guide_type,
-		version
-		)
-		VALUES (
-		#{guideId,jdbcType=VARCHAR},
-		#{orderNo,jdbcType=VARCHAR},
-		#{commissionAmount,jdbcType=DECIMAL},
-		#{status,jdbcType=TINYINT},
-		NOW(),
-		#{picUploadAt,jdbcType=TIMESTAMP},
-		#{picUrls,jdbcType=LONGVARBINARY},
-		#{buyerAccount,jdbcType=VARCHAR},
-		#{guideType,jdbcType=INTEGER},
-		1
-		)
-	</insert>
-	<insert id="insertBonus" parameterType="com.rongyi.tms.moudle.vo.BonusVO">
-		INSERT INTO
-		sales_commission (
-		guide_id,
-		seller_account,
-		type,
-		commission_amount,
-		create_at,
-		create_user,
-		remarks,
-		`status`,
-		guide_type
-		)
-		VALUES (
-		#{sellerId,jdbcType=VARCHAR},
-		#{sellerAccount,jdbcType=VARCHAR},
-		#{bonusType,jdbcType=TINYINT},
-		#{amount,jdbcType=DECIMAL},
-		NOW(),
-		#{createUser,jdbcType=VARCHAR},
-		#{marks,jdbcType=LONGVARBINARY},
-		#{status,jdbcType=TINYINT},
-		#{guideType,jdbcType=INTEGER}
-		)
-	</insert>
-	<insert id="batchInsertBonus" parameterType="java.util.List">
-		INSERT INTO
-		sales_commission (
-		guide_id,
-		seller_account,
-		type,
-		commission_amount,
-		create_at,
-		create_user,
-		remarks,
-		status,
-		guide_type
-		)
-		VALUES
-		<foreach collection="list" item="item" index="index"
-			separator=",">
-			(
-			#{item.sellerId,jdbcType=VARCHAR},
-			#{item.sellerAccount,jdbcType=VARCHAR},
-			#{item.bonusType,jdbcType=TINYINT},
-			#{item.amount,jdbcType=DECIMAL},
-			NOW(),
-			#{item.createUser,jdbcType=VARCHAR},
-			#{item.marks,jdbcType=LONGVARBINARY},
-			#{item.status,jdbcType=TINYINT},
-			#{item.guideType,jdbcType=INTEGER}
-			)
-		</foreach>
-	</insert>
-	<insert id="insertSelective" parameterType="com.rongyi.easy.tms.entity.SalesCommission">
-		insert into sales_commission
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			id,
-			guide_id,
-			order_no,
-			commission_amount,
-			`status`,
-			create_at,
-			pic_upload_at,
-			pic_urls,
-			buyer_Account,
-			version
-		</trim>
-		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			#{id,jdbcType=INTEGER},
-			#{guideId,jdbcType=VARCHAR},
-			#{orderNo,jdbcType=VARCHAR},
-			#{commissionAmount,jdbcType=DECIMAL},
-			#{status,jdbcType=TINYINT},
-			#{createAt,jdbcType=TIMESTAMP},
-			#{picUploadAt,jdbcType=TIMESTAMP},
-			#{picUrls,jdbcType=LONGVARBINARY},
-			#{buyerAccount,jdbcType=VARCHAR},
-			1
-		</trim>
-	</insert>
-
-	<update id="updateByPrimaryKeySelective" parameterType="com.rongyi.easy.tms.entity.SalesCommission">
-		update sales_commission
-		<set>
-			<if test="guideId != null">
-				guide_id = #{guideId,jdbcType=VARCHAR},
-			</if>
-			<if test="orderNo != null">
-				order_no = #{orderNo,jdbcType=VARCHAR},
-			</if>
-			<if test="commissionAmount != null">
-				commission_amount = #{commissionAmount,jdbcType=DECIMAL},
-			</if>
-			<if test="status != null">
-				`status` = #{status,jdbcType=TINYINT},
-			</if>
-			<if test="createAt != null">
-				create_at = #{createAt,jdbcType=TIMESTAMP},
-			</if>
-			<if test="picUploadAt != null">
-				pic_upload_at = #{picUploadAt,jdbcType=TIMESTAMP},
-			</if>
-			<if test="picUrls != null">
-				pic_urls = #{picUrls,jdbcType=LONGVARBINARY},
-			</if>
-			<if test="buyerAccount != null">
-				buyer_Account = #{buyerAccount,jdbcType=VARCHAR},
-			</if>
-		</set>
-		where id = #{id,jdbcType=INTEGER}
-	</update>
-	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.rongyi.easy.tms.entity.SalesCommission">
-		update
-		sales_commission
-		set guide_id = #{guideId,jdbcType=VARCHAR},
-		order_no =
-		#{orderNo,jdbcType=VARCHAR},
-		commission_amount =
-		#{commissionAmount,jdbcType=DECIMAL},
-		`status` =
-		#{status,jdbcType=TINYINT},
-		create_at = #{createAt,jdbcType=TIMESTAMP},
-		pic_upload_at = #{picUploadAt,jdbcType=TIMESTAMP},
-		pic_urls =
-		#{picUrls,jdbcType=LONGVARBINARY}
-		where id = #{id,jdbcType=INTEGER}
-	</update>
-	<update id="updateByPrimaryKey" parameterType="com.rongyi.easy.tms.entity.SalesCommission">
-		update
-		sales_commission
-		set guide_id = #{guideId,jdbcType=VARCHAR},
-		commission_amount = #{commissionAmount,jdbcType=DECIMAL},
-		`type` =
-		#{type,jdbcType=TINYINT},
-		remarks= #{remark,jdbcType=LONGVARBINARY},
-		update_user=#{updateUser,jdbcType=INTEGER},
-		update_at=NOW()
-		where id =
-		#{id,jdbcType=INTEGER}
-	</update>
-
-	<update id="updateByOrderNo" parameterType="com.rongyi.easy.tms.entity.SalesCommission">
-		update sales_commission
-		<set>
-			<if test="guideId != null">
-				guide_id = #{guideId,jdbcType=VARCHAR},
-			</if>
-			<if test="commissionAmount != null">
-				commission_amount = #{commissionAmount,jdbcType=DECIMAL},
-			</if>
-			<if test="status != null">
-				`status` = #{status,jdbcType=TINYINT},
-			</if>
-			<if test="createAt != null">
-				create_at = #{createAt,jdbcType=TIMESTAMP},
-			</if>
-			<if test="picUploadAt != null">
-				pic_upload_at = #{picUploadAt,jdbcType=TIMESTAMP},
-			</if>
-			<if test="picUrls != null">
-				pic_urls = #{picUrls,jdbcType=LONGVARBINARY},
-			</if>
-			<if test="buyerAccount != null">
-				buyer_Account = #{buyerAccount,jdbcType=VARCHAR},
-			</if>
-			<if test="guideType != null">
-				guide_type = #{guideType,jdbcType=INTEGER},
-			</if>
-		</set>
-		where order_no = #{orderNo,jdbcType=VARCHAR} and config_id = 0
-	</update>
-	<update id="batchUpdate" parameterMap="checkMap" statementType="CALLABLE">
-		<!-- update sales_commission set status =case id <foreach collection="ids" 
-			index="index" item="item"> when #{item} then #{status} </foreach> end where 
-			id in <foreach collection="ids" index="index" item="item" open="(" separator="," 
-			close=")"> #{item} </foreach> -->
-
-		{call check_commission(?, ?, ?, ?)}
-	</update>
-	<!-- <update id="updateBatchHadSendedVA" parameterType="java.util.List"> 
-		update sales_commission set status = case guide_id <foreach collection="list" 
-		item="item" index="index"> when #{item.} then 6 </foreach> end where status=3,version 
-		and guide_id in <foreach collection="list" index="index" item="item" open="(" 
-		separator="," close=")"> #{item} </foreach> </update> -->
-	<update id="updateBatchHadSendedVA" parameterType="java.util.List">
-
-		<foreach collection="list" item="item" index="index" open=""
-			close="" separator=";">
-			UPDATE sales_commission
-			set status =
-			6,version=#{version,jdbcType=BIGINT}
-			WHERE guide_id=#{item.guideId}
-			and
-			<if test="item.version == 0">
-				version is null
-			</if>
-			<if test="item.version != 0">
-				version=#{item.version}
-			</if>
-			and status=3
-		</foreach>
-	</update>
-
-	<update id="updateSendVA" parameterType="java.util.Map">
-		UPDATE sales_commission
-		set status =
-		6,version=#{version,jdbcType=BIGINT}
-		WHERE
-		guide_id=#{guideId,jdbcType=VARCHAR}
-		and status=3 and
-		<if test="oldVersion == 0">
-			version is null
-		</if>
-		<if test="oldVersion != 0">
-			version=#{oldVersion,jdbcType=BIGINT}
-		</if>
-	</update>
+    <sql id="View_Colum_List">
+        `ry_rpb`.`sales_commission`.`id` AS
+        `id`,`ry_rpb`.`sales_commission`.`guide_id` AS
+        `guide_id`,`ry_rpb`.`sales_commission`.`order_no` AS
+        `order_no`,`ry_rpb`.`sales_commission`.`type` AS
+        `type`,`ry_rpb`.`sales_commission`.`commission_amount` AS
+        `commission_amount`,`ry_rpb`.`sales_commission`.`status` AS
+        `status`,`ry_rpb`.`sales_commission`.`create_at` AS
+        `create_at`,`ry_rpb`.`sales_commission`.`pic_urls` AS
+        `pic_urls`,`ry_rpb`.`sales_commission`.`pic_upload_at` AS
+        `pic_upload_at`,`ry_rpb`.`sales_commission`.`buyer_account` AS
+        `buyer_account`,`ry_osm`.`order_form`.`create_at` AS
+        `order_create_at`,`ry_osm`.`order_form`.`buyer_id` AS
+        `buyer_id`,`ry_rmmm`.`rmmm_user_info`.`user_phone` AS
+        `seller_account`,`ry_rmmm`.`rmmm_user_info`.`user_name` AS
+        `seller_name`,`ry_rmmm`.`shop_info`.`shop_name` AS
+        `shop_name`,`ry_rmmm`.`shop_info`.`shop_mid` AS
+        `shop_mid`,`ry_rmmm`.`mall_cooperate`.`mall_mid` AS
+        `mall_mid`,`ry_rmmm`.`mall_cooperate`.`mall_name` AS
+        `mall_name`,`ry_rpb`.`sales_commission`.`guide_type` AS `guide_type`
+    </sql>
 
 
-	<update id="updateBonus" parameterType="com.rongyi.tms.moudle.vo.BonusVO">
-		update sales_commission
-		<set>
-			<if test="sellerAccount != null">
-				seller_account = #{sellerAccount,jdbcType=VARCHAR},
-			</if>
-			<if test="sellerId != null">
-				guide_id = #{sellerId,jdbcType=VARCHAR},
-			</if>
-			<if test="amount != null">
-				commission_amount = #{amount,jdbcType=DECIMAL},
-			</if>
-			<if test="status != null">
-				`status` = #{status,jdbcType=TINYINT},
-			</if>
-			<if test="bonusType !=0">
-				type = #{bonusType,jdbcType=TINYINT},
-			</if>
-			<if test="updateUser != null">
-				update_user = #{updateUser,jdbcType=VARCHAR},
-			</if>
-			<if test="marks != null">
-				remarks = #{marks,jdbcType=LONGVARBINARY},
-			</if>
-			<if test="guideType != null">
-				guide_type = #{guideType,jdbcType=INTEGER},
-			</if>
-			update_at=NOW()
-		</set>
-		where id = #{id,jdbcType=INTEGER}
-	</update>
-	<update id="batchUpdateBonus" parameterType="java.util.Map">
-		update sales_commission set status =case id
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+            parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from sales_commission
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectOneById" resultMap="AllInfoResultMap"
+            parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        ,
+        <include refid="All_Info_List"/>
+        from
+        <include refid="View_From"/>
+        <where>
+            <if test="id!=null">sales_commission.id = #{id,jdbcType=INTEGER}</if>
+            <if test="ids!=null">
+                sales_commission.id in
+                <foreach collection="ids" index="index" item="item" open="("
+                         separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </select>
+    <select id="getOneBonus" resultMap="BonusWithBlobMap"
+            parameterType="map">
+        select
+        <include refid="Bonus_info_list"/>
+        from sales_commission where id=#{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectAllInfoByPage" resultMap="AllInfoResultMap"
+            parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        ,
+        <include refid="All_Info_List"/>
 
-		<foreach collection="ids" index="index" item="item">
-			when #{item} then
-			#{status}
-		</foreach>
-		end where id in
-		<foreach collection="ids" index="index" item="item" open="("
-			separator="," close=")">
-			#{item}
-		</foreach>
-	</update>
-	<select id="selectByOrderNo" resultMap="ResultMapWithBLOBs"
-		parameterType="java.util.Map">
-		select * from sales_commission where order_no =
-		#{orderNo}  and config_id = 0;
-	</select>
+        from
+        <include refid="View_From"/>
+        where commission_amount is not null and config_id = 0
+        <!--查询今天之前创建的返佣记录-->
+<!--        and TO_DAYS(NOW()) - TO_DAYS(sales_commission.create_at) >= 1-->
 
-	<select id="selectCommissionInfoByUserId" resultMap="CommissionInfo"
-		parameterType="java.util.Map">
-		SELECT guide_id,
-		SUM(CASE WHEN (
-		(`status` &gt; 0 AND
-		`status` &lt; 5 AND type IS NULL AND config_id = 0) OR (`status` = 0 AND type = 3) OR (config_id > 0 AND `status` &gt; 0 AND
-		`status` &lt; 3 )
-		) THEN
-		commission_amount
-		ELSE 0 END) AS
-		commission_total,
-		SUM(CASE WHEN
-		(`status` &gt; 0 AND `status` &lt; 5
-		AND DATEDIFF(create_at,
-		NOW()) = 0
-		and
-		type IS NULL) THEN commission_amount ELSE 0 END)
-		AS commission_today
-		FROM sales_commission
-		WHERE guide_id = #{userId};
-	</select>
-	<select id="commissionAmountTotal" parameterType="map"
-		resultMap="CommissionAmountTotal">
-		select
-		guide_id,version ,SUM(commission_amount) as
-		amount_total FROM
-		sales_commission where status=3 and config_id = 0 and
-		guide_type=#{guideType,jdbcType=INTEGER} GROUP BY guide_id;
-	</select>
-	<select id="commissionAmountTotalByVersion" resultMap="CommissionAmountTotal"
-		parameterType="long">
-		select
-		guide_id,version ,SUM(commission_amount) as
-		amount_total FROM
-		sales_commission where
-		version=#{version,jdbcType=BIGINT}  and config_id = 0 GROUP BY guide_id;
-	</select>
+        <!-- 创建时间小于小票上传时间则取小票上传时间-->
+        AND CASE WHEN YEAR(sales_commission.create_at) &lt;= YEAR(sales_commission.pic_upload_at) AND TO_DAYS(sales_commission.create_at) - TO_DAYS(sales_commission.pic_upload_at) &lt; 0
+        THEN TO_DAYS(NOW()) - TO_DAYS(sales_commission.pic_upload_at) >= 1
 
-	<select id="selectFaleCommission" resultMap="FaleCommissionMonth">
-		SELECT guide_id,
-		SUM(CASE WHEN (`status`
-		&lt; 0 AND
-		date_format(create_at,'%Y-%m')=date_format(now(),'%Y-%m') )
-		THEN
-		commission_amount
-		ELSE 0 END) AS fale_commission_month
-		FROM
-		sales_commission
-		WHERE guide_id = #{userId}
-		AND (type IS NULL or type =
-		3)
-	</select>
+        ELSE TO_DAYS(NOW()) - TO_DAYS(sales_commission.create_at) >= 1 AND sales_commission.pic_upload_at is not null END
 
 
-	<select id="selectDailyCount" parameterType="java.util.Map" resultType="java.lang.Integer">
-		SELECT COUNT(*) FROM
-		<include refid="View_From" />
-		WHERE
-		sales_commission.guide_id=#{guideId,jdbcType=VARCHAR} AND
-		sales_commission.guide_type = #{guideType,
+        and sales_commission.status in
+        <foreach collection="status" index="index" item="item" open="("
+                 separator="," close=")">
+            #{item}
+        </foreach>
+        <if test="commissionNo != null">
+            and sales_commission.id=#{commissionNo,jdbcType=INTEGER}
+        </if>
+        <if test="guideType != null">
+            and
+            sales_commission.guide_type=#{guideType,jdbcType=INTEGER}
+        </if>
+        <if test="mall != null">
+            and
+            ry_rmmm.mall_cooperate.mall_name=#{mall,jdbcType=VARCHAR}
+        </if>
+        <if test="shop != null">
+            and ry_rmmm.shop_info.shop_name=#{shop,jdbcType=VARCHAR}
+        </if>
+        <if test="sellerName != null">
+            and ry_rmmm.rmmm_user_info.user_name like
+            #{sellerName,jdbcType=VARCHAR}
+        </if>
+        <if test="sellerAccount != null">
+            and ry_rmmm.rmmm_user_info.user_phone like
+            #{sellerAccount,jdbcType=VARCHAR}
+        </if>
+        <if test="uploadStart != null">
+            and sales_commission.pic_upload_at >=
+            #{uploadStart,jdbcType=TIMESTAMP}
+        </if>
+        <if test="uploadEnd != null">
+            and sales_commission.pic_upload_at &lt;=
+            #{uploadEnd,jdbcType=TIMESTAMP}
+        </if>
+        <if test="amountStart != null">
+            and commission_amount >= #{amountStart,jdbcType=DECIMAL}
+        </if>
+        <if test="amountEnd != null and amountEnd !=0">
+            and commission_amount &lt;= #{amountEnd,jdbcType=DECIMAL}
+        </if>
+        <if test="vaStatus != null and vaStatus != ''">
+            and sales_commission.status in
+            <foreach collection="vaStatus" index="index" item="item"
+                     open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        and config_id = 0
+        order by sales_commission.create_at desc
+        limit
+        #{begin,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
+    </select>
+    <select id="selectUserPhoneByUserId" resultType="String"
+            parameterType="java.lang.Integer">
+        select `ry_rmmm`.`rmmm_user_info`.`user_phone` from
+        `ry_rmmm`.`rmmm_user_info` where
+        `ry_rmmm`.`rmmm_user_info`.`id`=#{userId,jdbcType=INTEGER}
+    </select>
+    <select id="selectUserIdByUserAccount" resultType="Integer"
+            parameterType="java.lang.String">
+        select `ry_rmmm`.`rmmm_user_info`.`id` from
+        `ry_rmmm`.`rmmm_user_info` where
+        `ry_rmmm`.`rmmm_user_info`.`user_phone`=#{userPhone,jdbcType=INTEGER}
+    </select>
+    <select id="selectAllInfoCount" resultType="int"
+            parameterType="com.rongyi.easy.tms.vo.SalesCommissionParam">
+        select count(1)
+        from
+        <include refid="View_From"/>
+        where commission_amount is not null and config_id = 0
+        <!--查询今天之前创建的返佣记录-->
+        and TO_DAYS(NOW()) - TO_DAYS(sales_commission.create_at) >= 1
+        and sales_commission.status in
+        <foreach collection="status" index="index" item="item" open="("
+                 separator="," close=")">
+            #{item}
+        </foreach>
+        <if test="commissionNo != null">
+            and sales_commission.id=#{commissionNo,jdbcType=INTEGER}
+        </if>
+        <if test="guideType != null">
+            and
+            sales_commission.guide_type=#{guideType,jdbcType=INTEGER}
+        </if>
+        <if test="mall != null">
+            and
+            ry_rmmm.mall_cooperate.mall_name=#{mall,jdbcType=VARCHAR}
+        </if>
+        <if test="shop != null">
+            and ry_rmmm.shop_info.shop_name=#{shop,jdbcType=VARCHAR}
+        </if>
+        <if test="sellerName != null">
+            and ry_rmmm.rmmm_user_info.user_name like
+            #{sellerName,jdbcType=VARCHAR}
+        </if>
+        <if test="sellerAccount != null">
+            and ry_rmmm.rmmm_user_info.user_phone like
+            #{sellerAccount,jdbcType=VARCHAR}
+        </if>
+        <if test="uploadStart != null">
+            and pic_upload_at >= #{uploadStart,jdbcType=TIMESTAMP}
+        </if>
+        <if test="uploadEnd != null">
+            and pic_upload_at &lt;= #{uploadEnd,jdbcType=TIMESTAMP}
+        </if>
+        <if test="amountStart != null">
+            and commission_amount >= #{amountStart,jdbcType=DECIMAL}
+        </if>
+        <if test="amountEnd != null and amountEnd !=0">
+            and commission_amount &lt;= #{amountEnd,jdbcType=DECIMAL}
+        </if>
+        and config_id = 0
+        <if test="vaStatus != null and vaStatus != ''">
+            and sales_commission.status in
+            <foreach collection="vaStatus" index="index" item="item"
+                     open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </select>
+    <select id="selectPageBonus" resultMap="BonusMap" parameterType="map">
+        select
+        <include refid="Bonus_info_list"/>
+        from sales_commission where type is not null
+        <if test="id!=null">
+            and id=#{id,jdbcType=INTEGER}
+        </if>
+        <if test="guideType!=null">
+            and guide_type=#{guideType,jdbcType=INTEGER}
+        </if>
+        <if test="sellerAccount !=null">
+            and seller_account=#{sellerAccount,jdbcType=VARCHAR}
+        </if>
+        <if test="type!=null and type != ''">
+            and type in
+            <foreach collection="type" index="index" item="item" open="("
+                     separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="createStartTime != null">
+            and create_at >= #{createStartTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="createEndTime != null">
+            and create_at &lt;= #{createEndTime,jdbcType=TIMESTAMP}
+        </if>
+        and sales_commission.status in
+        <foreach collection="status" index="index" item="item" open="("
+                 separator="," close=")">
+            #{item}
+        </foreach>
+        and config_id = 0
+        order by sales_commission.create_at desc
+        limit
+        #{start,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
+    </select>
+    <select id="selectTotalBonus" resultType="int" parameterType="map">
+        select
+        count(1)
+        from sales_commission where type is not null
+        <if test="id!=null">
+            and id=#{id,jdbcType=INTEGER}
+        </if>
+        <if test="guideType!=null">
+            and guide_type=#{guideType,jdbcType=INTEGER}
+        </if>
+        <if test="sellerAccount !=null">
+            and seller_account=#{sellerAccount,jdbcType=VARCHAR}
+        </if>
+        <if test="type!=null and type != ''">
+            and type in
+            <foreach collection="type" index="index" item="item" open="("
+                     separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="createStartTime != null">
+            and create_at >= #{createStartTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="createEndTime != null">
+            and create_at &lt;= #{createEndTime,jdbcType=TIMESTAMP}
+        </if>
+        and sales_commission.status in
+        <foreach collection="status" index="index" item="item" open="("
+                 separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from
+        sales_commission
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.rongyi.easy.tms.entity.SalesCommission">
+        INSERT INTO sales_commission (
+        guide_id,
+        order_no,
+        commission_amount,
+        `status`,
+        create_at,
+        pic_upload_at,
+        pic_urls,
+        buyer_account,
+        guide_type,
+        version
+        )
+        VALUES (
+        #{guideId,jdbcType=VARCHAR},
+        #{orderNo,jdbcType=VARCHAR},
+        #{commissionAmount,jdbcType=DECIMAL},
+        #{status,jdbcType=TINYINT},
+        NOW(),
+        #{picUploadAt,jdbcType=TIMESTAMP},
+        #{picUrls,jdbcType=LONGVARBINARY},
+        #{buyerAccount,jdbcType=VARCHAR},
+        #{guideType,jdbcType=INTEGER},
+        1
+        )
+    </insert>
+    <insert id="insertBonus" parameterType="com.rongyi.tms.moudle.vo.BonusVO">
+        INSERT INTO
+        sales_commission (
+        guide_id,
+        seller_account,
+        type,
+        commission_amount,
+        create_at,
+        create_user,
+        remarks,
+        `status`,
+        guide_type
+        )
+        VALUES (
+        #{sellerId,jdbcType=VARCHAR},
+        #{sellerAccount,jdbcType=VARCHAR},
+        #{bonusType,jdbcType=TINYINT},
+        #{amount,jdbcType=DECIMAL},
+        NOW(),
+        #{createUser,jdbcType=VARCHAR},
+        #{marks,jdbcType=LONGVARBINARY},
+        #{status,jdbcType=TINYINT},
+        #{guideType,jdbcType=INTEGER}
+        )
+    </insert>
+    <insert id="batchInsertBonus" parameterType="java.util.List">
+        INSERT INTO
+        sales_commission (
+        guide_id,
+        seller_account,
+        type,
+        commission_amount,
+        create_at,
+        create_user,
+        remarks,
+        status,
+        guide_type
+        )
+        VALUES
+        <foreach collection="list" item="item" index="index"
+                 separator=",">
+            (
+            #{item.sellerId,jdbcType=VARCHAR},
+            #{item.sellerAccount,jdbcType=VARCHAR},
+            #{item.bonusType,jdbcType=TINYINT},
+            #{item.amount,jdbcType=DECIMAL},
+            NOW(),
+            #{item.createUser,jdbcType=VARCHAR},
+            #{item.marks,jdbcType=LONGVARBINARY},
+            #{item.status,jdbcType=TINYINT},
+            #{item.guideType,jdbcType=INTEGER}
+            )
+        </foreach>
+    </insert>
+    <insert id="insertSelective" parameterType="com.rongyi.easy.tms.entity.SalesCommission">
+        insert into sales_commission
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            id,
+            guide_id,
+            order_no,
+            commission_amount,
+            `status`,
+            create_at,
+            pic_upload_at,
+            pic_urls,
+            buyer_Account,
+            version
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{id,jdbcType=INTEGER},
+            #{guideId,jdbcType=VARCHAR},
+            #{orderNo,jdbcType=VARCHAR},
+            #{commissionAmount,jdbcType=DECIMAL},
+            #{status,jdbcType=TINYINT},
+            #{createAt,jdbcType=TIMESTAMP},
+            #{picUploadAt,jdbcType=TIMESTAMP},
+            #{picUrls,jdbcType=LONGVARBINARY},
+            #{buyerAccount,jdbcType=VARCHAR},
+            1
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.rongyi.easy.tms.entity.SalesCommission">
+        update sales_commission
+        <set>
+            <if test="guideId != null">
+                guide_id = #{guideId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNo != null">
+                order_no = #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="commissionAmount != null">
+                commission_amount = #{commissionAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="createAt != null">
+                create_at = #{createAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="picUploadAt != null">
+                pic_upload_at = #{picUploadAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="picUrls != null">
+                pic_urls = #{picUrls,jdbcType=LONGVARBINARY},
+            </if>
+            <if test="buyerAccount != null">
+                buyer_Account = #{buyerAccount,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.rongyi.easy.tms.entity.SalesCommission">
+        update
+        sales_commission
+        set guide_id = #{guideId,jdbcType=VARCHAR},
+        order_no =
+        #{orderNo,jdbcType=VARCHAR},
+        commission_amount =
+        #{commissionAmount,jdbcType=DECIMAL},
+        `status` =
+        #{status,jdbcType=TINYINT},
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+        pic_upload_at = #{picUploadAt,jdbcType=TIMESTAMP},
+        pic_urls =
+        #{picUrls,jdbcType=LONGVARBINARY}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.rongyi.easy.tms.entity.SalesCommission">
+        update
+        sales_commission
+        set guide_id = #{guideId,jdbcType=VARCHAR},
+        commission_amount = #{commissionAmount,jdbcType=DECIMAL},
+        `type` =
+        #{type,jdbcType=TINYINT},
+        remarks= #{remark,jdbcType=LONGVARBINARY},
+        update_user=#{updateUser,jdbcType=INTEGER},
+        update_at=NOW()
+        where id =
+        #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByOrderNo" parameterType="com.rongyi.easy.tms.entity.SalesCommission">
+        update sales_commission
+        <set>
+            <if test="guideId != null">
+                guide_id = #{guideId,jdbcType=VARCHAR},
+            </if>
+            <if test="commissionAmount != null">
+                commission_amount = #{commissionAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="createAt != null">
+                create_at = #{createAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="picUploadAt != null">
+                pic_upload_at = #{picUploadAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="picUrls != null">
+                pic_urls = #{picUrls,jdbcType=LONGVARBINARY},
+            </if>
+            <if test="buyerAccount != null">
+                buyer_Account = #{buyerAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="guideType != null">
+                guide_type = #{guideType,jdbcType=INTEGER},
+            </if>
+        </set>
+        where order_no = #{orderNo,jdbcType=VARCHAR} and config_id = 0
+    </update>
+    <update id="batchUpdate" parameterMap="checkMap" statementType="CALLABLE">
+        <!-- update sales_commission set status =case id <foreach collection="ids"
+            index="index" item="item"> when #{item} then #{status} </foreach> end where
+            id in <foreach collection="ids" index="index" item="item" open="(" separator=","
+            close=")"> #{item} </foreach> -->
+
+        {call check_commission(?, ?, ?, ?)}
+    </update>
+    <!-- <update id="updateBatchHadSendedVA" parameterType="java.util.List">
+        update sales_commission set status = case guide_id <foreach collection="list"
+        item="item" index="index"> when #{item.} then 6 </foreach> end where status=3,version
+        and guide_id in <foreach collection="list" index="index" item="item" open="("
+        separator="," close=")"> #{item} </foreach> </update> -->
+    <update id="updateBatchHadSendedVA" parameterType="java.util.List">
+
+        <foreach collection="list" item="item" index="index" open=""
+                 close="" separator=";">
+            UPDATE sales_commission
+            set status =
+            6,version=#{version,jdbcType=BIGINT}
+            WHERE guide_id=#{item.guideId}
+            and
+            <if test="item.version == 0">
+                version is null
+            </if>
+            <if test="item.version != 0">
+                version=#{item.version}
+            </if>
+            and status=3
+        </foreach>
+    </update>
+
+    <update id="updateSendVA" parameterType="java.util.Map">
+        UPDATE sales_commission
+        set status =
+        6,version=#{version,jdbcType=BIGINT}
+        WHERE
+        guide_id=#{guideId,jdbcType=VARCHAR}
+        and status=3 and
+        <if test="oldVersion == 0">
+            version is null
+        </if>
+        <if test="oldVersion != 0">
+            version=#{oldVersion,jdbcType=BIGINT}
+        </if>
+    </update>
+
+
+    <update id="updateBonus" parameterType="com.rongyi.tms.moudle.vo.BonusVO">
+        update sales_commission
+        <set>
+            <if test="sellerAccount != null">
+                seller_account = #{sellerAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="sellerId != null">
+                guide_id = #{sellerId,jdbcType=VARCHAR},
+            </if>
+            <if test="amount != null">
+                commission_amount = #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="bonusType !=0">
+                type = #{bonusType,jdbcType=TINYINT},
+            </if>
+            <if test="updateUser != null">
+                update_user = #{updateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="marks != null">
+                remarks = #{marks,jdbcType=LONGVARBINARY},
+            </if>
+            <if test="guideType != null">
+                guide_type = #{guideType,jdbcType=INTEGER},
+            </if>
+            update_at=NOW()
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="batchUpdateBonus" parameterType="java.util.Map">
+        update sales_commission set status =case id
+
+        <foreach collection="ids" index="index" item="item">
+            when #{item} then
+            #{status}
+        </foreach>
+        end where id in
+        <foreach collection="ids" index="index" item="item" open="("
+                 separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+    <select id="selectByOrderNo" resultMap="ResultMapWithBLOBs"
+            parameterType="java.util.Map">
+        select * from sales_commission where order_no =
+        #{orderNo} and config_id = 0;
+    </select>
+
+    <select id="selectCommissionInfoByUserId" resultMap="CommissionInfo"
+            parameterType="java.util.Map">
+        SELECT guide_id,
+        SUM(CASE WHEN (
+        (`status` &gt; 0 AND
+        `status` &lt; 5 AND type IS NULL AND config_id = 0) OR (`status` = 0 AND type = 3) OR (config_id > 0 AND
+        `status` &gt; 0 AND
+        `status` &lt; 3 )
+        ) THEN
+        commission_amount
+        ELSE 0 END) AS
+        commission_total,
+        SUM(CASE WHEN
+        (`status` &gt; 0 AND `status` &lt; 5
+        AND DATEDIFF(create_at,
+        NOW()) = 0
+        and
+        type IS NULL) THEN commission_amount ELSE 0 END)
+        AS commission_today
+        FROM sales_commission
+        WHERE guide_id = #{userId};
+    </select>
+    <select id="commissionAmountTotal" parameterType="map"
+            resultMap="CommissionAmountTotal">
+        select
+        guide_id,version ,SUM(commission_amount) as
+        amount_total FROM
+        sales_commission where status=3 and config_id = 0 and
+        guide_type=#{guideType,jdbcType=INTEGER} GROUP BY guide_id;
+    </select>
+    <select id="commissionAmountTotalByVersion" resultMap="CommissionAmountTotal"
+            parameterType="long">
+        select
+        guide_id,version ,SUM(commission_amount) as
+        amount_total FROM
+        sales_commission where
+        version=#{version,jdbcType=BIGINT} and config_id = 0 GROUP BY guide_id;
+    </select>
+
+    <select id="selectFaleCommission" resultMap="FaleCommissionMonth">
+        SELECT guide_id,
+        SUM(CASE WHEN (`status`
+        &lt; 0 AND
+        date_format(create_at,'%Y-%m')=date_format(now(),'%Y-%m') )
+        THEN
+        commission_amount
+        ELSE 0 END) AS fale_commission_month
+        FROM
+        sales_commission
+        WHERE guide_id = #{userId}
+        AND (type IS NULL or type =
+        3)
+    </select>
+
+
+    <select id="selectDailyCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM
+        <include refid="View_From"/>
+        WHERE
+        sales_commission.guide_id=#{guideId,jdbcType=VARCHAR} AND
+        sales_commission.guide_type = #{guideType,
 		jdbcType=INTEGER}
-		AND
-		sales_commission.`status`in (3,6) AND
-		TO_DAYS(sales_commission.create_at)=TO_DAYS(NOW())
-		AND
-		ry_osm.order_form.buyer_id=#{buyerId,jdbcType=VARCHAR}  and config_id = 0  GROUP BY
-		sales_commission.guide_id,sales_commission.buyer_account
-	</select>
-	<update id="updateStatus" parameterType="map">
-		UPDATE sales_commission
-		SET `status`=#{status, jdbcType=INTEGER} WHERE
-		id=#{id,jdbcType=INTEGER};
-	</update>
+        AND
+        sales_commission.`status`in (3,6) AND
+        TO_DAYS(sales_commission.create_at)=TO_DAYS(NOW())
+        AND
+        ry_osm.order_form.buyer_id=#{buyerId,jdbcType=VARCHAR} and config_id = 0 GROUP BY
+        sales_commission.guide_id,sales_commission.buyer_account
+    </select>
+    <update id="updateStatus" parameterType="map">
+        UPDATE sales_commission
+        SET `status`=#{status, jdbcType=INTEGER},update_at = NOW() WHERE
+        id=#{id,jdbcType=INTEGER};
+    </update>
+
+    <select id="selectYesterdayGuideInfo" resultMap="BaseResultMap"
+            parameterType="map">
+        SELECT
+        sales_commission.guide_id,sales_commission.guide_type
+        FROM
+        ry_rpb.sales_commission
+        left join ry_osm.order_form on ry_osm.order_form.order_no = ry_rpb.sales_commission.order_no
+        WHERE
+        TO_DAYS(NOW()) - TO_DAYS(sales_commission.create_at) = 1
+        AND sales_commission.status = 1
+        AND config_id = 0
+        AND sales_commission.commission_amount > 0
+        AND sales_commission.pic_upload_at is not null
+        group by guide_id;
+    </select>
+
+    <select id="selectGuideYesterdayCommission" resultMap="AllInfoResultMap"
+            parameterType="map">
+        SELECT
+        sa.*,order_form.buyer_id
+        FROM
+        ry_rpb.sales_commission sa
+        left join ry_osm.order_form on ry_osm.order_form.order_no = sa.order_no
+        WHERE
+        sa.guide_id = #{guideId,jdbcType=VARCHAR}
+        AND sa.guide_type = #{guideType,jdbcType=INTEGER}
+        <!-- 创建时间小于小票上传时间则取小票上传时间-->
+        AND CASE WHEN YEAR(sa.create_at) &lt;= YEAR(sa.pic_upload_at) AND TO_DAYS(sa.create_at) - TO_DAYS(sa.pic_upload_at) &lt; 0
+        THEN TO_DAYS(NOW()) - TO_DAYS(sa.pic_upload_at) = 1
+        <!-- 否则取创建时间-->
+        ELSE TO_DAYS(NOW()) - TO_DAYS(sa.create_at) = 1 AND sa.pic_upload_at is not null END
+        AND sa.status = 1
+        AND config_id = 0
+        AND sa.commission_amount > 0
+        order by
+        commission_amount desc
+    </select>
 </mapper>

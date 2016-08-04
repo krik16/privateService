@@ -21,4 +21,8 @@
 	<!-- 生成提现流水号 -->
 	<dubbo:reference interface="com.rongyi.rss.rpb.OrderNoGenService"
 		id="orderNoGenService" version="${dubbo.version}" check="false" />
+
+	<!-- redis -->
+	<dubbo:reference interface="com.rongyi.rss.malllife.roa.ROARedisService"
+					 id="rOARedisService" version="${dubbo.version}" check="false" />
 </beans>  

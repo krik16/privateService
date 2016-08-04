@@ -169,7 +169,7 @@ public class CommissionServiceImpl implements CommissionService {
                 }
             }
 
-            LOGGER.info("detail end salesCommissionVO={}",salesCommissionVO.toString());
+            LOGGER.info("detail end salesCommissionVO={}",salesCommissionVO);
             return salesCommissionVO;
         } catch (Exception e) {
             e.printStackTrace();

@@ -24,4 +24,7 @@
 
     <dubbo:service interface="com.rongyi.rss.tms.CommissionService"  version="${dubbo.version}" ref="commissionService" />
     <bean id="commissionService" class="com.rongyi.tms.service.impl.dubbo.CommissionServiceImpl" />
+
+    <dubbo:service interface="com.rongyi.rss.service.trigger.ICommissionOverLimitCheckTrigger"  version="${dubbo.version}" ref="commissionOverLimitCheckTrigger" />
+    <bean id="commissionOverLimitCheckTrigger" class="com.rongyi.tms.service.impl.CommissionOverLimitCheckTrigger" />
 </beans>  
