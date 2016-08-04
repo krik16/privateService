@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 
 import com.rongyi.core.common.third.md5.Md5Util;
 import com.rongyi.core.constant.Const;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * 签名公共方法
@@ -153,16 +154,35 @@ public class Util {
 
 	/**
 	 * 是否有合适的匹配
-	 * 
-	 * @author wangjianhua
+	 *
 	 * @param regex
 	 * @param input
 	 * @return
+	 * @author wangjh7
 	 */
 	private static boolean isMatcher(String regex, String input) {
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(input);
 		return matcher.find();
 	}
-	
+
+	/**
+	 * 隐藏部分字符串
+	 *
+	 * @param code
+	 * @return
+	 * @author wangjh7
+	 */
+	public static String hideString(String code) {
+		if (StringUtils.isNotBlank(code)) {
+			if (8 < code.length()) {
+				code = code.substring(0, code.length() - 4) + "****";
+			} else if (4 < code.length()) {
+				code = code.substring(0, code.length() - 2) + "**";
+			} else {
+				code = code.substring(0, code.length() - 1) + "*";
+			}
+		}
+		return code;
+	}
 }
