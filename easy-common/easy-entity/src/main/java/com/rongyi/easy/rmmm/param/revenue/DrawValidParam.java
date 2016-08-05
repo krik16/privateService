@@ -10,7 +10,7 @@ public class DrawValidParam implements Serializable {
     private String phone;//手机号码
     private String verifyCode;//验证码
     private String identity;//身份证号码
-
+    private String jsessionid;//jsessionId
     private String password;//当前密码
     private String oldPassword;//旧密码
 
@@ -54,12 +54,21 @@ public class DrawValidParam implements Serializable {
         this.oldPassword = oldPassword;
     }
 
+    public String getJsessionid() {
+        return jsessionid;
+    }
+
+    public void setJsessionid(String jsessionid) {
+        this.jsessionid = jsessionid;
+    }
+
     @Override
     public String toString() {
         return "DrawValidParam{" +
                 "phone='" + phone + '\'' +
                 ", verifyCode='" + verifyCode + '\'' +
                 ", identity='" + identity + '\'' +
+                ", jsessionid='" + jsessionid + '\'' +
                 ", password='" + password + '\'' +
                 ", oldPassword='" + oldPassword + '\'' +
                 '}';
