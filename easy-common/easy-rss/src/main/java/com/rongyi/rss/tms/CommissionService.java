@@ -50,7 +50,7 @@ public interface CommissionService {
     /**
      * 判断是否有返佣任务
      * @param identity 用户类型
-     * @return
+     * @return 1只有容易逛返佣任务 2只有摩店返佣任务 3都有  0没有返佣任务
      */
-    boolean hasCommissConfigApp(Integer identity);
+    int hasCommissConfigApp(Integer identity);
 }
