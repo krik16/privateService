@@ -13,6 +13,7 @@ public class DrawValidParam implements Serializable {
     private String jsessionid;//jsessionId
     private String password;//当前密码
     private String oldPassword;//旧密码
+    private String radomCode;//随机码
 
     public String getPhone() {
         return phone;
@@ -62,6 +63,14 @@ public class DrawValidParam implements Serializable {
         this.jsessionid = jsessionid;
     }
 
+    public String getRadomCode() {
+        return radomCode;
+    }
+
+    public void setRadomCode(String radomCode) {
+        this.radomCode = radomCode;
+    }
+
     @Override
     public String toString() {
         return "DrawValidParam{" +
@@ -71,6 +80,7 @@ public class DrawValidParam implements Serializable {
                 ", jsessionid='" + jsessionid + '\'' +
                 ", password='" + password + '\'' +
                 ", oldPassword='" + oldPassword + '\'' +
+                ", radomCode='" + radomCode + '\'' +
                 '}';
     }
 }

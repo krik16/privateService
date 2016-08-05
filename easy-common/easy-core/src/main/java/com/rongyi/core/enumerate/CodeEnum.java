@@ -84,6 +84,7 @@ public enum CodeEnum {
     ERROR_EXCEED_RESTRICTION("-1214", "同一天找回密码次数超限制"),
     ERROR_SAME_PASSOWRD("-1215", "新密码和原密码相同,无须修改"),
     ERROR_DRAW_PASSOWRD("-1216", "交易密码输入错误，请重试"),
+    ERROR_DRAW_RADOMWRD("-1217", "随机码校验失败"),
     /** 版本更新 */
     SUCCESS_UNNECESSARIES_UPDATE("-1310","当前版本不需要更新"),
     
