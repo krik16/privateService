@@ -255,19 +255,12 @@ public class CommissionServiceImpl implements CommissionService {
 
     @Override
     public ResponseVO getCommissAppVo(Integer identity) {
-        LOGGER.info("getCommissAppVo 根据摩店用户类型查询对应的返佣详情 identity:{}",identity);
+        LOGGER.info("getCommissAppVo 根据摩店用户类型查询对应的返佣详情 identity:{}", identity);
         CommissionAppVo commissAppVo = new CommissionAppVo();
-        Map paramMap = new HashMap();
         if(!identity.equals(4)&&!identity.equals(5)&&!identity.equals(6)){
             return ResponseVO.failure(ConstantEnum.LIST_QUERY_PARAM.getCodeInt(),ConstantEnum.LIST_QUERY_PARAM.getValueStr());
         }
-        //identity 为6查询买手返佣配置
-        paramMap.put("inviteType",identity.equals(6)?ConstantEnum.INVITE_TYPE_2.getCodeByte():ConstantEnum.INVITE_TYPE_1.getCodeByte());
-        //查询启用状态的
-        paramMap.put("status",ConstantEnum.COMMISSION_CONFIG_STATUS_3.getCodeByte());
-        paramMap.put("type",ConstantEnum.COMMISSION_CONFIG_TYPE_0.getCodeStr());
-
-        List<CommissionConfigAppVo> configList =  commissionConfigService.selectAppList(paramMap);
+        List<CommissionConfigAppVo> configList = getConfigList(identity);
         //保存邀请类型为导购的配置
         List<CommissionConfigAppVo> massageShopConfigList = new ArrayList<CommissionConfigAppVo>();
         if(CollectionUtils.isNotEmpty(configList)){
@@ -282,5 +275,28 @@ public class CommissionServiceImpl implements CommissionService {
             commissAppVo.setMassageShopConfigList(massageShopConfigList);
         }
         return ResponseVO.success(commissAppVo);
+    }
+
+    @Override
+    public boolean hasCommissConfigApp(Integer identity) {
+        LOGGER.info("查询是否有推广返佣配置identity:{}",identity);
+        if(!identity.equals(4)&&!identity.equals(5)&&!identity.equals(6)){
+            LOGGER.info("参数错误哟");
+            return false;
+        }
+        List<CommissionConfigAppVo> configList = getConfigList(identity);
+        return configList!=null&&configList.size()>0?true:false;
+    }
+
+    private List<CommissionConfigAppVo> getConfigList(Integer identity){
+        Map paramMap = new HashMap();
+        //identity 为6查询买手返佣配置
+        paramMap.put("inviteType",identity.equals(6)?ConstantEnum.INVITE_TYPE_2.getCodeByte():ConstantEnum.INVITE_TYPE_1.getCodeByte());
+        //查询启用状态的
+        paramMap.put("status",ConstantEnum.COMMISSION_CONFIG_STATUS_3.getCodeByte());
+        paramMap.put("type",ConstantEnum.COMMISSION_CONFIG_TYPE_0.getCodeStr());
+
+        List<CommissionConfigAppVo> configList =  commissionConfigService.selectAppList(paramMap);
+        return configList;
     }
 }
