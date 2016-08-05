@@ -5,6 +5,7 @@ package com.rongyi.rss.bsoms;
  */
 
 import com.rongyi.easy.bsoms.entity.TaskUser;
+import com.rongyi.easy.bsoms.vo.TaskUserVo;
 
 import java.util.List;
 import java.util.Map;
@@ -29,4 +30,27 @@ public interface ITaskUserService {
      * @return
      */
     public List<TaskUser> getTaskUserList(Map paramMap);
+
+    /**
+     * 查询报名人详细信息列表
+     * @param paramMap
+     *           userPhone  联系电话
+     *           mallName   商场名称
+     *           shopName   店铺名称
+     *           status     领取状态
+     *           receiveStartAt
+     *           receiveStartEnd
+     *           userType   用户类型
+     *           currpage
+     *           pageSize
+     * @return
+     */
+    public List<TaskUserVo> getTaskUserVoList(Map paramMap);
+
+    /**
+     * 查询列表数量统计
+     * @param paramMap
+     * @return
+     */
+    public int getTaskUserCount(Map paramMap);
 }
