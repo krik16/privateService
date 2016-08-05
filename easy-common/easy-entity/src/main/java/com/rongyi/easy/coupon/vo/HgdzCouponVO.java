@@ -1,7 +1,6 @@
 package com.rongyi.easy.coupon.vo;
 
-import com.rongyi.core.util.Util;
-import com.rongyi.easy.coupon.entity.HgdzCouponEntity;
+import com.rongyi.easy.coupon.entity.SimpleCouponEntity;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
@@ -30,15 +29,15 @@ public class HgdzCouponVO implements Serializable {
     /**
      * 实体
      */
-    List<HgdzCouponEntity> listCoupon;
+    List<SimpleCouponEntity> listCoupon;
 
     @XmlElementWrapper(name = "listCoupon")
     @XmlElement(name = "Coupon")
-    public List<HgdzCouponEntity> getListCoupon() {
+    public List<SimpleCouponEntity> getListCoupon() {
         return listCoupon;
     }
 
-    public void setListCoupon(List<HgdzCouponEntity> listCoupon) {
+    public void setListCoupon(List<SimpleCouponEntity> listCoupon) {
         this.listCoupon = listCoupon;
     }
 

@@ -5,14 +5,14 @@ import com.rongyi.core.util.Util;
 import java.io.Serializable;
 
 /**
- * 哈根达斯中秋券-生成券实体
+ * 简单券实体
  *
  * @author wangjh7
  * @date 2016-08-04
  */
-public class HgdzCouponEntity implements Serializable {
+public class SimpleCouponEntity implements Serializable {
 
-    public HgdzCouponEntity() {
+    public SimpleCouponEntity() {
         super();
     }
 
@@ -67,7 +67,7 @@ public class HgdzCouponEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "HgdzCouponEntity{" +
+        return "SimpleCouponEntity{" +
                 "codeSn='" + Util.hideString(codeSn) + '\'' +
                 ", shortCode='" + shortCode + '\'' +
                 ", password='" + Util.hideString(password) + '\'' +

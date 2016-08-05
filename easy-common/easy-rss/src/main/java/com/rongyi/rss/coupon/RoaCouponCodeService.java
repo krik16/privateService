@@ -3,11 +3,9 @@ package com.rongyi.rss.coupon;
 import com.rongyi.core.common.PagingVO;
 import com.rongyi.core.framework.exception.RYServiceException;
 import com.rongyi.easy.coupon.entity.CouponCode;
-import com.rongyi.easy.coupon.entity.HgdzCouponEntity;
+import com.rongyi.easy.coupon.entity.SimpleCouponEntity;
 import com.rongyi.easy.coupon.entity.HgdzCouponQueryEntity;
 import com.rongyi.easy.coupon.vo.CouponHistoryVO;
-import com.rongyi.easy.coupon.vo.HgdzCouponQueryVO;
-import com.rongyi.easy.coupon.vo.HgdzCouponVO;
 
 import java.util.List;
 import java.util.Map;
@@ -176,7 +174,7 @@ public interface RoaCouponCodeService {
      * @param count
      * @return
      */
-    public List<HgdzCouponEntity> getHgdzCodeSn(String orderId, String couponId, int count) throws RYServiceException;
+    public List<SimpleCouponEntity> getHgdzCodeSn(String orderId, String couponId, int count) throws RYServiceException;
 
     /**
      * 查询卡券状态

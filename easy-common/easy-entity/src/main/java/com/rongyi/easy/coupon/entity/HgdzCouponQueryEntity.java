@@ -6,7 +6,7 @@ package com.rongyi.easy.coupon.entity;
  * @author wangjh7
  * @date 2016-08-04
  */
-public class HgdzCouponQueryEntity extends HgdzCouponEntity {
+public class HgdzCouponQueryEntity extends SimpleCouponEntity {
     /**
      * 券码状态变更时间(比如已核销，就是核销时间)
      */
