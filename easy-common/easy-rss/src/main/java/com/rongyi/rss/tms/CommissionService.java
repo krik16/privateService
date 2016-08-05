@@ -46,4 +46,11 @@ public interface CommissionService {
      * @return
      */
     ResponseVO getCommissAppVo(Integer identity);
+
+    /**
+     * 判断是否有返佣任务
+     * @param identity 用户类型
+     * @return
+     */
+    boolean hasCommissConfigApp(Integer identity);
 }
