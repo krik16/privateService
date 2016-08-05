@@ -70,7 +70,7 @@ public class UserinfoVO implements Serializable{
 	private String telPhone;//客服电话
 
 	String userMsg;//导购 买手禁用提示信息
-	private int inviteObject;//是否有返佣活动 true是 false否
+	private int inviteObject;//1只有容易逛返佣任务 2只有摩店返佣任务 3都有  0没有返佣任务
 	
 	
 
