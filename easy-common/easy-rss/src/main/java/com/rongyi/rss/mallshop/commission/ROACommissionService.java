@@ -53,6 +53,6 @@ public interface ROACommissionService {
      * @param identity 用户类型
      * @return
      */
-    boolean hasCommissConfigApp(Integer identity);
+    int hasCommissConfigApp(Integer identity);
 
 }

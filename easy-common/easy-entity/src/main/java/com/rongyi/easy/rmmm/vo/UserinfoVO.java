@@ -70,14 +70,16 @@ public class UserinfoVO implements Serializable{
 	private String telPhone;//客服电话
 
 	String userMsg;//导购 买手禁用提示信息
-	private boolean hasCommissionAct;//是否有返佣活动 true是 false否
+	private int inviteObject;//1只有容易逛返佣任务 2只有摩店返佣任务 3都有  0没有返佣任务
 	
-	public boolean isHasCommissionAct() {
-		return hasCommissionAct;
+	
+
+	public int getInviteObject() {
+		return inviteObject;
 	}
 
-	public void setHasCommissionAct(boolean hasCommissionAct) {
-		this.hasCommissionAct = hasCommissionAct;
+	public void setInviteObject(int inviteObject) {
+		this.inviteObject = inviteObject;
 	}
 
 	public Boolean getIsOrdering() {

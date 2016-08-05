@@ -27,5 +27,10 @@ public interface ROAUserInviteCodeRelationService {
 	 * @return
 	 * @throws Exception
 	 */
-	public int updateUserInviteCodeRelation(String inviteCode) throws Exception;
+	public int updateUserInviteCodeRelation(String inviteCode,Integer id) throws Exception;
+	/**
+     * 将用户关联的邀请码设置为禁用状态
+     * @param phone
+     */
+	public void updateUserInviteCodeRelation(String phone) throws Exception;
 }
