@@ -2,11 +2,9 @@ package com.rongyi.rss.tms;
 
 import com.rongyi.core.bean.ResponseData;
 import com.rongyi.core.bean.ResponseVO;
-import com.rongyi.easy.tms.vo.v2.CommissionAppVo;
-import com.rongyi.easy.tms.vo.v2.CommissionVO;
-import com.rongyi.easy.tms.vo.v2.SalesCommissionListVO;
-import com.rongyi.easy.tms.vo.v2.SalesCommissionVO;
+import com.rongyi.easy.tms.vo.v2.*;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -53,4 +51,12 @@ public interface CommissionService {
      * @return 1只有容易逛返佣任务 2只有摩店返佣任务 3都有  0没有返佣任务
      */
     int hasCommissConfigApp(Integer identity);
+
+    /**
+     * 根据身份和被邀请人对象 查询返佣结果
+     * @param inviteType  邀请人类型 1导购;2买手
+     * @param registerType 被邀请人类型 1:容易逛,2:摩店买手,3:摩店导购,4:摩店全部
+     * @return
+     */
+    List<CommissionConfigAppVo> getCommissConfigList(Integer inviteType ,Integer registerType);
 }
