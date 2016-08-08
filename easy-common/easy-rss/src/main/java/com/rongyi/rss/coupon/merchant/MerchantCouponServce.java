@@ -75,6 +75,14 @@ public interface MerchantCouponServce {
     public Boolean updateCoupon(Coupon coupon, UserInfoVo userInfoVo) throws Exception;
 
     /**
+     * 卡券普通修改字段
+     *
+     * @param coupon
+     * @return
+     */
+    public Boolean update(Coupon coupon) throws Exception;
+
+    /**
      * 商家卡券活动券的创建
      *
      * @param coupon
@@ -127,6 +135,8 @@ public interface MerchantCouponServce {
     public StatisticsCountVO statisticsPublishCount(UserInfoVo userInfoVo);
 
     public Coupon selectByPrimaryKey(String couponId);
+
+    public Coupon getCouponById(String couponId);
 
 
     /**

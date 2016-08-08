@@ -1,8 +1,9 @@
 package com.rongyi.easy.coupon.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class CouponOpRecord {
+public class CouponOpRecord implements Serializable{
     private Integer id;
 
     private String couponId;
