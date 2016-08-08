@@ -308,13 +308,11 @@ public class PaymentServiceImpl extends BaseServiceImpl implements PaymentServic
                     paymentEntity.setCreateTime(DateUtil.getCurrDateTime());
                     //公众号支付
                     if(StringUtils.isNotBlank(paymentEntityVO.getAppId()) && !"null".equals(paymentEntityVO.getAppId())) {
-                        LOGGER.info("jsapi支付更新mchId");
                         WeixinMch weixinMch = weixinMchService.selectByAppIdAndTradeType(paymentEntityVO.getAppId(), paymentEntityVO.getWeixinPayType());
                         if (weixinMch != null) {
                             paymentEntity.setWeixinMchId(weixinMch.getId());
                         }
                     }else{//app支付
-                        LOGGER.info("app支付重置mchId");
                         paymentEntity.setWeixinMchId(0);
                     }
                     updateByPrimaryKeySelective(paymentEntity);
