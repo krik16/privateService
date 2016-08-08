@@ -2,6 +2,8 @@ package com.rongyi.easy.coupon.vo;
 
 import com.rongyi.easy.coupon.entity.HgdzCouponQueryEntity;
 
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.List;
 
@@ -11,6 +13,7 @@ import java.util.List;
  * @author wangjh7
  * @date 2016-08-04
  */
+@XmlRootElement(name = "CouponResult")
 public class HgdzCouponQueryVO implements Serializable {
     /**
      * 请求状态码
@@ -18,10 +21,16 @@ public class HgdzCouponQueryVO implements Serializable {
     private String rtnCode;
 
     /**
+     * 订单id
+     */
+    private String dealId;
+
+    /**
      * 实体
      */
     HgdzCouponQueryEntity coupon;
 
+    @XmlElementWrapper(name = "coupon")
     public HgdzCouponQueryEntity getCoupon() {
         return coupon;
     }
@@ -43,6 +52,15 @@ public class HgdzCouponQueryVO implements Serializable {
         return "HgdzCouponQueryVO{" +
                 "coupon=" + coupon +
                 ", rtnCode='" + rtnCode + '\'' +
+                ", dealId='" + dealId + '\'' +
                 '}';
+    }
+
+    public String getDealId() {
+        return dealId;
+    }
+
+    public void setDealId(String dealId) {
+        this.dealId = dealId;
     }
 }
