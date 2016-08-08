@@ -41,6 +41,13 @@
     <if test="inviteType != null and inviteType!=''">
       and invite_type =  #{inviteType,jdbcType=TINYINT}
     </if>
+    <if test="registerTypeList != null and registerTypeList!=''">
+      and register_type in
+      <foreach collection="registerTypeList" index="index" item="item"
+               open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </if>
   </sql>
 
   <!-- 查询返佣列表 （摩店）  -->

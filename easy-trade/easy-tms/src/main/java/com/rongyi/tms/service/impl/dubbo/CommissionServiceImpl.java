@@ -308,4 +308,24 @@ public class CommissionServiceImpl implements CommissionService {
         }
         return null;
     }
+
+    @Override
+    public List<CommissionConfigAppVo> getCommissConfigList(Integer inviteType, Integer registerType) {
+        LOGGER.info("=====根据邀请人和被邀请人类型查询推广返佣记录=====");
+        LOGGER.info("inviteType:{},registerType{}");
+        Map paramMap = new HashMap();
+        paramMap.put("status",ConstantEnum.COMMISSION_CONFIG_STATUS_3.getCodeByte());
+        paramMap.put("type",ConstantEnum.COMMISSION_CONFIG_TYPE_0.getCodeStr());
+        paramMap.put("inviteType",inviteType.equals(6)?ConstantEnum.INVITE_TYPE_2.getCodeByte():ConstantEnum.INVITE_TYPE_1.getCodeByte());
+        List<Integer> registerTypeList = new ArrayList<Integer>();
+        registerTypeList.add(registerType);
+        if(registerType.equals(ConstantEnum.REGISTER_TYPE_2.getCode())||registerType.equals(ConstantEnum.REGISTER_TYPE_3.getCode())){
+            registerTypeList.add(ConstantEnum.REGISTER_TYPE_4.getCodeInt());
+        }else if(registerType.equals(ConstantEnum.REGISTER_TYPE_4.getCode())){
+            registerTypeList.add(ConstantEnum.REGISTER_TYPE_2.getCodeInt());
+            registerTypeList.add(ConstantEnum.REGISTER_TYPE_3.getCodeInt());
+        }
+        paramMap.put("registerTypeList",registerTypeList);
+        return commissionConfigService.selectAppList(paramMap);
+    }
 }
