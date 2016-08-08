@@ -18,7 +18,7 @@ import java.util.List;
  * Created at 2015/8/20 14:14.
  */
 public class MerchantCouponQueryParamParser {
-    public static QueryParam parserParms(String params) {
+    public static QueryParam parserParms(String params,boolean activityStatus) {
         try {
             QueryParam queryParam=new QueryParam();
             if(StringUtils.isNotBlank(params)) {
@@ -47,12 +47,14 @@ public class MerchantCouponQueryParamParser {
                         queryParam.setQueryOrders(queryOrderList);
                     }
                 }
-                List<JoinFilter> joinFilters = new ArrayList<>();
-                List<QueryFilter> joinQueryFilters = new ArrayList<>();
-                joinQueryFilters.add(new QueryFilter("coupon.id",FilterType.BEQ,ValueType.VARCHAR,"activity_goods.goods_id",QueryParam.RELATION_AND));
-                joinQueryFilters.add(new QueryFilter("activity_goods.type",FilterType.EQUALS,ValueType.INTEGER, ActivityConstants.GoodsLabelType.ACTIVITYCOUPON,QueryParam.RELATION_AND));
-                joinFilters.add(new JoinFilter(0,"activity_goods",joinQueryFilters));
-                queryParam.setJoinFilters(joinFilters);
+                if(activityStatus) {
+                    List<JoinFilter> joinFilters = new ArrayList<>();
+                    List<QueryFilter> joinQueryFilters = new ArrayList<>();
+                    joinQueryFilters.add(new QueryFilter("coupon.id", FilterType.BEQ, ValueType.VARCHAR, "activity_goods.goods_id", QueryParam.RELATION_AND));
+                    joinQueryFilters.add(new QueryFilter("activity_goods.type", FilterType.EQUALS, ValueType.INTEGER, ActivityConstants.GoodsLabelType.ACTIVITYCOUPON, QueryParam.RELATION_AND));
+                    joinFilters.add(new JoinFilter(0, "activity_goods", joinQueryFilters));
+                    queryParam.setJoinFilters(joinFilters);
+                }
                 if(jsonObject.get("pageNo")!=null){
                     Integer pageno=jsonObject.getInt("pageNo");
                     queryParam.setCurrentPage(pageno);

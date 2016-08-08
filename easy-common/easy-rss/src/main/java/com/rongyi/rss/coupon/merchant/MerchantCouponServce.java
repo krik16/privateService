@@ -49,6 +49,15 @@ public interface MerchantCouponServce {
     public MerchantPaging<Coupon> getCouponByPageMysql(QueryParam queryParam, UserInfoVo UserInfoVo, Boolean requiredCount);
 
     /**
+     * 商家卡券统计接口
+     *
+     * @param queryParam    查询参数
+     * @param UserInfoVo
+     * @return
+     */
+    public int getCountByParam(QueryParam queryParam, UserInfoVo userInfoVo);
+
+    /**
      * 商家卡券通用查询接口
      *
      * @param queryParam 查询参数
